@@ -1,7 +1,7 @@
 
 	local require = GLOBAL.require
 	
---	[ 	Import Prefabs, Assets, Widgets	]	--
+--	[ 	Import Prefabs, Assets, Widgets	]	-
 	modimport("init/init_assets")
 	modimport("init/init_prefabs")
 	modimport("init/init_widgets")
