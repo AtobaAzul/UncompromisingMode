@@ -27,7 +27,7 @@ local GIANTS =
 }
 
 for k, v in pairs(GIANTS) do
-	AddPrefabPostInit(v, function(inst)
+	AddPrefabPostInit(k, function(inst)
 		local function OnHitOther(inst, other)
 			if other ~= nil then
 				other:PushEvent("knockback", {knocker = inst, radius = v.radius})
