@@ -25,10 +25,11 @@
 	modimport("init/init_descriptions/wormwood")
 	modimport("init/init_descriptions/warly")
 	
---	[ 		Crafting and Tuning			]	--
+--	[ 		Crafting and Tuning	and PostInits		]	--
 	modimport("init/init_recipes")
 	modimport("init/init_crockpot")
 	modimport("init/init_tuning")
+	modimport("init/init_prefabpostinit")
 	
 --	[ 	Console Commands for tests !	]	--
 	

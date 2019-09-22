@@ -1,4 +1,4 @@
-name = "Uncompromising Mode"
+name = "    Uncompromising Mode"
 description = 
 [[
 󰀔 [ Version 1.0 : "Uncompromising Start" ]
