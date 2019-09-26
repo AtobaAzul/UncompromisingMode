@@ -66,7 +66,84 @@ configuration_options =
 	{
 		name = "enable_knockback",
 		label = "Knockback",
-		hover = "Some creatures and bosses can now kick you out.",
+		hover = "Some creatures and bosses now kick you around.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
+	},
+	{
+		name = "harder_recipes",
+		label = "Harder Recipes",
+		hover = "Some recipes become modified to be harder to craft.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
+	},
+	{
+		name = "harder_monsters",
+		label = "Harder Monsters",
+		hover = "Monsters become stronger.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
+	},
+	{
+		name = "harder_bosses",
+		label = "Harder Bosses",
+		hover = "Bosses become stronger.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
+	},
+	{
+		name = "harder_shadows",
+		label = "Harder Nightmare Creatures",
+		hover = "New troubles rest withinin your mind.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
+	},
+	{
+		name = "harder_weather",
+		label = "Harder Weather",
+		hover = "Nature becomes unforgiving.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
+	},
+	{
+		name = "rare_food",
+		label = "Rare Food",
+		hover = "Food is harder to find now.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
+	},
+	{
+		name = "hardcore_mode",
+		label = "Hardcore Mode",
+		hover = "Life is precious now.",
 		options =
 		{
 			{description = "Disabled", data = false},
