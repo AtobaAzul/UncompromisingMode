@@ -4,6 +4,8 @@
 
 [Klei Forum Link](https://forums.kleientertainment.com/forums/topic/111892-announcement-uncompromising-mode/)
 
+[Mod Wiki](https://gitlab.com/uncompromising-survival/uncompromising-survival/wikis/home)
+
 ## Description
 
 This is the mod repository for the Uncompromising Mode Community Collab.
@@ -16,4 +18,6 @@ All suggestions must go through a community voting process.
 
 More details on the process in the Welcome section of discord.
 
-Join the discord server if you wish to collaborate as a dev.
+Join the discord server if you wish to collaborate as a dev, artist or tester.
+
+You can also join simply to discuss and suggest ideas.
