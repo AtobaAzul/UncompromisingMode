@@ -2,6 +2,12 @@
 -- Add deciduous poison birchnut root attack to Totally Normal Trees when chopped
 -- Prefabs: deciduous_root, livingtree
 ------------------------------------------------------------------------------------------
+
+-- Changed color from white to dark brown
+Assets = {
+    Asset("ANIM", "anim/tree_leaf_spike_lt.zip")
+}
+
 AddPrefabPostInit("livingtree", function (inst)
 
     local function distsq(v1, v2, v3, v4)
@@ -28,6 +34,8 @@ AddPrefabPostInit("livingtree", function (inst)
                 rootpos.z = z - GLOBAL.math.sin(angle) * targdist
             end
 
+            root.AnimState:SetBuild("tree_leaf_spike_lt")
+            root.AnimState:SetBank("tree_leaf_spike_lt")
             root.Transform:SetPosition(x + 1.75 * math.cos(angle), 0, z - 1.75 * math.sin(angle))
             root:PushEvent("givetarget", { target = chopper, targetpos = rootpos, targetangle = angle, owner = inst })                      
         end
