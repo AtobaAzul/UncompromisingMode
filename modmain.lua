@@ -46,3 +46,7 @@
 	if GetModConfigData("enable_knockback") then
 		modimport("init/init_knockback")
 	end
+
+	if GetModConfigData("harder_monsters") then
+		modimport("init/init_treebuffs")
+	end
