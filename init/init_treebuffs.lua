@@ -8,26 +8,17 @@ Assets = {
     Asset("ANIM", "anim/tree_leaf_spike_lt.zip")
 }
 
-local GLOBAL.TUNING.LIVINGTREE_ROOT_ATTACK_POSITION_VARIANCE = 30;
-local GLOBAL.TUNING.LIVINGTREE_ROOT_TARGET_DIST = GLOBAL.TUNING.DECID_MONSTER_TARGET_DIST;
-
 --Copied from DeciduousTreeUpdater:OnUpdate in deciduoustreeupdater.lua
 local function spawn_root_attack(inst,chopper)
     if chopper ~= nil then
         local root = GLOBAL.SpawnPrefab("deciduous_root")
-        local targdist = GLOBAL.TUNING.LIVINGTREE_ROOT_TARGET_DIST
         local x, y, z = chopper.Transform:GetWorldPosition()
         local mx, my, mz = inst.Transform:GetWorldPosition()
         local mdistsq = inst:GetDistanceSqToInst(chopper)
-        local targdistsq = targdist * targdist
-        local possition_variance_x = (GLOBAL.math.random() - 0.5) * TUNING.LIVINGTREE_ROOT_ATTACK_POSITION_VARIANCE;
-        local possition_variance_z = (GLOBAL.math.random() - 0.5) * TUNING.LIVINGTREE_ROOT_ATTACK_POSITION_VARIANCE;
+        local possition_variance_x = (GLOBAL.math.random() - 0.5) * TUNING.DECID_MONSTER_ROOT_ATTACK_RADIUS
+        local possition_variance_z = (GLOBAL.math.random() - 0.5) * TUNING.DECID_MONSTER_ROOT_ATTACK_RADIUS
         local rootpos = GLOBAL.Vector3(mx + possition_variance_x, 0, mz + possition_variance_z)
         local angle = inst:GetAngleToPoint(rootpos) * GLOBAL.DEGREES
-        if mdistsq > targdistsq then
-            rootpos.x = x + GLOBAL.math.cos(angle) * targdist
-            rootpos.z = z - GLOBAL.math.sin(angle) * targdist
-        end
 
         root.AnimState:SetBuild("tree_leaf_spike_lt")
         root.AnimState:SetBank("tree_leaf_spike_lt")
