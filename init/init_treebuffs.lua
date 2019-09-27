@@ -22,6 +22,7 @@ AddPrefabPostInit("livingtree", function (inst)
     --Copied from DeciduousTreeUpdater:OnUpdate in deciduoustreeupdater.lua
     local function spawn_root_attack(inst,chopper)
         if chopper ~= nil then
+            local root = GLOBAL.SpawnPrefab("deciduous_root")
             local targdist = GLOBAL.TUNING.DECID_MONSTER_TARGET_DIST
             local x, y, z = chopper.Transform:GetWorldPosition()
             local mx, my, mz = inst.Transform:GetWorldPosition()
