@@ -3,9 +3,19 @@
 -- Prefabs: deciduous_root, livingtree
 ------------------------------------------------------------------------------------------
 
--- Changed color from white to dark brown
+-- Changed color from white to dark brown (choose only one, or else it crashes)
 Assets = {
-    Asset("ANIM", "anim/tree_leaf_spike_lt.zip")
+    --Alternative art, darkened birchnut root, by @Norfeder (renamed zip)
+    --Asset("ANIM", "anim/tree_leaf_spike_birchnut_dark.zip"),
+
+    --Livingree custom art, by @Advent (renamed zip)
+    --Asset("ANIM", "anim/tree_leaf_spike_livingtree.zip"),
+
+    --Livingree custom art, by @Advent
+    --Asset("ANIM", "anim/livingtreeattack.zip"),
+
+    --Livingree custom art, by @Advent, edited by Norfeder
+    Asset("ANIM", "anim/tree_leaf_spike_lt.zip"),
 }
 
 --Copied from DeciduousTreeUpdater:OnUpdate in deciduoustreeupdater.lua
@@ -20,6 +30,7 @@ local function spawn_root_attack(inst,chopper)
         local rootpos = GLOBAL.Vector3(mx + possition_variance_x, 0, mz + possition_variance_z)
         local angle = inst:GetAngleToPoint(rootpos) * GLOBAL.DEGREES
 
+        --TODO Currently custom art is invisible
         root.AnimState:SetBuild("tree_leaf_spike_lt")
         root.AnimState:SetBank("tree_leaf_spike_lt")
         root.Transform:SetPosition(x + 1.75 * math.cos(angle), 0, z - 1.75 * math.sin(angle))
