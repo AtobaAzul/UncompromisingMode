@@ -14,6 +14,14 @@ This is the mod repository for the Uncompromising Mode Community Collab.
 
 The aim of this is to make the game harder for veteran players, while also benefiting from the wisdom of the community.
 
+## How to Install
+
+Download the .zip from this folder, and unzip it in your mod folders, for eg.
+
+C:\Program Files (x86)\Steam2\steamapps\common\Don't Starve Together\mods\
+
+Host a server and enable the mod in your world
+
 ## Mod Collab Change Guidelines
 
 ```
