@@ -8,11 +8,15 @@
 
 [Steam Group](https://steamcommunity.com/groups/UncompromisingDST)
 
+
+
 ## Description
 
 This is the mod repository for the Uncompromising Mode Community Collab.
 
 The aim of this is to make the game harder for veteran players, while also benefiting from the wisdom of the community.
+
+
 
 ## How to Install
 
@@ -21,6 +25,14 @@ Download the .zip from this folder, and unzip it in your mod folders, for eg.
 C:\Program Files (x86)\Steam2\steamapps\common\Don't Starve Together\mods\
 
 Host a server and enable the mod in your world
+
+
+
+## Current Features & Planned Changes
+
+Check [CHANGELOG.md](https://gitlab.com/uncompromising-survival/uncompromising-survival/blob/master/CHANGELOG.md)
+
+
 
 ## Mod Collab Change Guidelines
 
@@ -42,8 +54,14 @@ Host a server and enable the mod in your world
 
 All suggestions must go through a community voting process.
 
-More details on the process in the Welcome section of discord.
+More details on the process in the Welcome section of [discord](https://discord.gg/UF7FKpn).
 
 Join the discord server if you wish to collaborate as a dev, artist or tester.
 
 You can also join simply to discuss and suggest ideas.
+
+
+
+## Credits
+
+Check [CONTRIBUTING.md](https://gitlab.com/uncompromising-survival/uncompromising-survival/blob/master/CONTRIBUTING.md)

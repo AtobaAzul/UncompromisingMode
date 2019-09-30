@@ -1,5 +1,11 @@
 # Uncompromising Team
 
+## Head Developers & Founders
+
+- @ ADM
+
+- @ Canis
+
 ## Code contributors
 
 - @ADM
