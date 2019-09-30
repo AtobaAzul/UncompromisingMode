@@ -46,7 +46,9 @@ end
 
 local function livingtree_postinit(inst)
     -- Change the onworked callback to the above
-    inst.components.workable:SetOnWorkCallback(onworked)
+    if inst~=nil and inst.components~=nil and inst.components.workable~=nil then
+        inst.components.workable:SetOnWorkCallback(onworked)
+    end
 end
 
 AddPrefabPostInit("livingtree", livingtree_postinit)
