@@ -1,3 +1,1 @@
-tree_leaf_spike_livingtree by @Advent (spiky livingtree root attack)
-
-tree_leaf_spike_birchnut_dark by @Norfeder and Klei (poison birchnut reskin)
+tree_leaf_spike_lt by @Advent and Klei (livingtree root attack custom art)
