@@ -14,6 +14,20 @@ local night_time = seg_time * night_segs
 
 TUNING = GLOBAL.TUNING
 
+
+-- [              DSTU Related Overrides                  ]
+-- Enable those that you wish (untested)
+
+-- Tripover while wet
+-- TUNING.DSTU.TRIPOVER_HEALTH_PENALTY = 15;
+-- TUNING.DSTU.TRIPOVER_ONMAXWET_CHANCE = 0.10;
+-- TUNING.DSTU.TRIPOVER_KNOCKABCK_RADIUS = 20;
+
+-- Weapon slip increase
+-- TUNING.DSTU.SLIPCHANCE_INCREASE_X
+
+-- [                      Food Growth                     ]
+
 -- Stone fruit nerf x3 duration
 if GetModConfigData("rare_food")
     TUNING.ROCK_FRUIT_REGROW =

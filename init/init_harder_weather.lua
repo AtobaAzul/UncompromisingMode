@@ -1,39 +1,56 @@
+----------------------------------------------------------------------------------------------------------
+-- Nerf therml stone stacking
+-- Relevant: heatrock.lua
+----------------------------------------------------------------------------------------------------------
+--TODO
+
+----------------------------------------------------------------------------------------------------------
+-- Make thermal stone very ineffective if no winter clothing found
+-- Relevant: heatrock.lua
+----------------------------------------------------------------------------------------------------------
+--TODO
+
+----------------------------------------------------------------------------------------------------------
 -- Make you take damage randomly when at Max Moisture wetness, by falling and knockbacking
 -- Relevant: moisture.lua, onmaxmoisture
-local TUNING.TRIPOVER_HEALTH_PENALTY = 15;
-local TUNING.TRIPOVER_ONMAXWET_CHANCE = 0.10;
-local TUNING.TRIPOVER_KNOCKABCK_RADIUS = 20;
-AddComponentPostInit("moisture", function(self)
-    function trip_over(player)
-        print("tripped over")
-        --trip over you scrubby eel
-        player:PushEvent("knockback", {knocker = player, radius = TUNING.TRIPOVER_KNOCKABCK_RADIUS})
-        player.components.health:DeltaPenalty(TUNING.TRIPOVER_HEALTH_PENALTY)
-    end
-    
-    function trip_over_chance_on_maxwet(player)
-        print("fall when wet?")
-        if(player.GetMoisture == self.GetMaxMoisture) then
-            print("totally wet")
-            if (GLOBAL.math.random() > TUNING.TRIPOVER_ONMAXWET_CHANCE and
-                ~player.walking) then
-                -- or try self.components.playercontroller.directwalking
-                -- or try self.status == RUNNING
-                trip_over(player)
-            end
+----------------------------------------------------------------------------------------------------------
+local TUNING.DSTU.TRIPOVER_HEALTH_PENALTY = 15;
+local TUNING.DSTU.TRIPOVER_ONMAXWET_CHANCE = 0.10;
+local TUNING.DSTU.TRIPOVER_KNOCKABCK_RADIUS = 20;
+
+function trip_over(player)
+    print("tripped over")
+    --trip over you scrubby eel
+    player:PushEvent("knockback", {knocker = player, radius = TUNING.DSTU.TRIPOVER_KNOCKABCK_RADIUS})
+    player.components.health:DeltaPenalty(TUNING.DSTU.TRIPOVER_HEALTH_PENALTY)
+end
+
+local function trip_over_chance_on_maxwet(player)
+    print("fall when wet?")
+    if(player~=nil and player.GetMoisture == self.GetMaxMoisture) then
+        print("totally wet")
+        if (GLOBAL.math.random() > TUNING.DSTU.TRIPOVER_ONMAXWET_CHANCE)-- and
+            --~player.walking) then
+            -- or try self.components.playercontroller.directwalking
+            -- or try self.status == RUNNING
+            trip_over(player)
         end
     end
-    
-    function Moisture:LongUpdate(dt)
-        self:OnUpdate(dt)
-        print("moisture long update")
-        trip_over_chance_on_maxwet(self.inst)
+end
+
+AddComponentPostInit("moisture", function(self)
+    function self:LongUpdate(dt)
+            self:OnUpdate(dt)
+            print("moisture long update")
+            trip_over_chance_on_maxwet(self.inst.player_classified)
     end
 end)
 
+----------------------------------------------------------------------------------------------------------
 -- Increase the chance of dropping wet tool on hit
 -- Relevant: inventoryitemmoisture.lua, moisture.lua, player_common.lua (DropWetTool)
-local TUNING.SLIPCHANCE_INCREASE_X = 3;
+----------------------------------------------------------------------------------------------------------
+local TUNING.DSTU.SLIPCHANCE_INCREASE_X = 3;
 AddPrefabPostInit("player_common", function(inst)
 
 	local function DropWetTool(inst, data)
@@ -43,7 +60,7 @@ AddPrefabPostInit("player_common", function(inst)
         end
     
         local tool = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-        if tool ~= nil and tool:GetIsWet() and math.random() < easing.inSine(TheWorld.state.wetness, 0, .15*TUNING.SLIPCHANCE_INCREASE_X, inst.components.moisture:GetMaxMoisture()) then
+        if tool ~= nil and tool:GetIsWet() and math.random() < easing.inSine(TheWorld.state.wetness, 0, .15*TUNING.DSTU.SLIPCHANCE_INCREASE_X, inst.components.moisture:GetMaxMoisture()) then
             local projectile =                                                              -- Change here ^
                 data.weapon ~= nil and
                 data.projectile == nil and
@@ -93,7 +110,7 @@ AddPrefabPostInit("player_common", function(inst)
 end)
 
 
-
+-- Add depending on mod settings
 
 
 
