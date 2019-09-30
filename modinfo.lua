@@ -141,6 +141,17 @@ configuration_options =
 		default = true,
 	},
 	{
+		name = "character_nerfs",
+		label = "Character Nerfs",
+		hover = "The survivors' powers are dwindling.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
+	},
+	{
 		name = "hardcore_mode",
 		label = "Hardcore Mode",
 		hover = "Life is precious now.",

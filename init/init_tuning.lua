@@ -15,10 +15,12 @@ local night_time = seg_time * night_segs
 TUNING = GLOBAL.TUNING
 
 -- Stone fruit nerf x3 duration
-TUNING.ROCK_FRUIT_REGROW =
-{
-    EMPTY = { BASE = 6*day_time, VAR = 2*seg_time },
-    PREPICK = { BASE = 3*seg_time, VAR = 0 },
-    PICK = { BASE = 9*day_time, VAR = 2*seg_time },
-    CRUMBLE = { BASE = 3*day_time, VAR = 2*seg_time },
-},
+if GetModConfigData("rare_food")
+    TUNING.ROCK_FRUIT_REGROW =
+    {
+        EMPTY = { BASE = 6*day_time, VAR = 2*seg_time },
+        PREPICK = { BASE = 3*seg_time, VAR = 0 },
+        PICK = { BASE = 9*day_time, VAR = 2*seg_time },
+        CRUMBLE = { BASE = 3*day_time, VAR = 2*seg_time },
+    },
+end
