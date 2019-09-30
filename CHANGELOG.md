@@ -8,11 +8,11 @@
 
 * [x]  Knockback mechanic on some bosses
 
-* [x]  Tentacle book nerfed (50% chance to spawn small tentacles)
-
 * [x]  Hardcore mode - disable rollback
 
 * [x]  Hardcore mode - disable movement on death
+
+* [ ]  Hardcore mode - disable ghost on death, body lays on ground and accepts revives (similar to the forge)
 
 * [ ]  Hardcore mode - Auto amulet revive (like in normal Don't Starve)
 
@@ -22,9 +22,9 @@
 
 * [ ]  Blizard mechanic in winter (reduces vision at peak snow)
 
-* [ ]  Big bee wave mechanic in spring
+* [ ]  Big red bramble bee wave mechanic in spring
 
-* [ ]  Treeguard cage mechanic
+* [ ]  Treeguard cage root attack mechanic
 
 * [X]  [Settings menu](https://i.imgur.com/N3rLMpH.png)
 
@@ -59,3 +59,5 @@
 * [ ]  Thermal Stone Nerf - Thermals are less effective for winter, and insulation is required. No more stacking 2-3 Thermals also.
 
 * [ ]  Add a mod setting that enables the mod only after Fuelweaver is defeated, for those that want to play normally and only enable this "Expert" mode for lategame
+ 
+* [ ]  Tentacle nerf v2 - Make it so that tentacles don't stack on top of one another (so that Wicker must spread them out)
