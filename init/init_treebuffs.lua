@@ -3,11 +3,6 @@
 -- Prefabs: deciduous_root, livingtree
 ------------------------------------------------------------------------------------------
 
--- Changed color from white to dark brown
-Assets = {
-    Asset("ANIM", "anim/tree_leaf_spike_lt.zip")
-}
-
 --Copied from DeciduousTreeUpdater:OnUpdate in deciduoustreeupdater.lua
 local function spawn_root_attack(inst,chopper)
     if chopper ~= nil then

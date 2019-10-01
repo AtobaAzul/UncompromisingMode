@@ -1,6 +1,9 @@
-
+------------------------------------------------------------------------------------------
+-- Hardcore mode 
+------------------------------------------------------------------------------------------
 local UserCommands = GLOBAL.require("usercommands")
 
+-- No more rollbacks
 AddPrefabPostInit("world", function (inst)
 	if GLOBAL.TheNet and GLOBAL.TheNet:GetIsServer() then
 		local rollback = UserCommands.GetCommandFromName("rollback")
@@ -14,10 +17,7 @@ AddPrefabPostInit("world", function (inst)
 	end
 end)
 
-AddPrefabPostInit("amulet", function (inst)
-	inst.components.inventoryitem.keepondeath = true
-end)
-
+-- Players cannot move on death, and revive is done now on bodies
 AddPrefabPostInit("skeleton_player", function (inst)
 	local function OnInit(inst)
 		local character = inst.playername
@@ -60,6 +60,11 @@ AddPrefabPostInit("skeleton_player", function (inst)
 	inst:AddComponent("trader")
 	inst.components.trader:SetAcceptTest(ShouldAcceptItem)
 	inst.components.trader.onaccept = OnGetItem
+end)
+
+--Amulet auto-respawn if worn, like in DS
+AddPrefabPostInit("amulet", function (inst)
+	inst.components.inventoryitem.keepondeath = true
 end)
 
 AddPlayerPostInit(function (inst)

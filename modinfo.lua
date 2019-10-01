@@ -64,6 +64,18 @@ game_modes =
 configuration_options =
 {
 	{
+		name = "gamemode",
+		label = "Mode",
+		hover = "Choose gamemode. 1) Original Uncompromising version (default settings). 2) Mod is enabled after first Fuelweaver is defeated. 3) Choose custom settings.",
+		options =
+		{
+			{description = "1. Uncompromising", data = 0}, -- TODO: When this is selected, disable the below ones (gray them out)
+			{description = "2. Post Fuelweaver", data = 1},
+			{description = "3. Custom", data = 2}, --TODO: On custom, enable editing the below settings
+		},
+		default = 0,
+	},
+	{
 		name = "enable_knockback",
 		label = "Knockback",
 		hover = "Some creatures and bosses now kick you around.",

@@ -36,43 +36,52 @@
 	
 --	[ 				Gamemodes			]	--
 	
+	local GAMEMODE_UNCOMPROMISING = 0;
+	local GAMEMODE_POST_FUELWEAVER = 1;
+	local GAMEMODE_CUSTOM_SETTINGS = 2;
+
 	if GLOBAL.GetGameModeProperty("hardcore") then
-		modimport("init/init_hardcore")
+		modimport("init/init_gamemodes/init_hardcore")
+	end
+
+	if GetModConfigData("gamemode") == GAMEMODE_POST_FUELWEAVER then
+		modimport("init/init_gamemodes/init_post_fuelweaver")
 	end
 	
 --	[ 				Features			]	--
 	
-	if GetModConfigData("enable_knockback") then
+	if GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("enable_knockback") then
 		modimport("init/init_knockback")
 	end
 
-	if GetModConfigData("harder_monsters") then
+	if GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_monsters") then
 		modimport("init/init_treebuffs")
 	end
 
-	if GetModConfigData("rare_food") then
+	if GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("rare_food") then
 		modimport("init/init_food_changes")
 		modimport("init/init_crockpot")
 		--modimport("init/init_rare_foods")
 	end
 
-	if GetModConfigData("harder_recipes") then
+	if GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_recipes") then
 		modimport("init/init_recipes")
 	end
 
-	if GetModConfigData("harder_monsters") then
+	if GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_monsters") then
 		--modimport("init/init_harder_monsters")
 	end
 
-	if GetModConfigData("harder_bosses") then
+	if GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_bosses") then
 		--modimport("init/init_harder_bosses")
 	end
 
-	if GetModConfigData("harder_shadows") then
+	if GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_shadows") then
 		--modimport("init/init_harder_shadows")
 	end
 
-	if GetModConfigData("character_changes") then
+	--TODO: Add settings for each individual character after we add many changes
+	if GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("character_changes") then
 		modimport("init/init_character_changes/generic")
 		modimport("init/init_character_changes/willow")
 		modimport("init/init_character_changes/wolfgang")
