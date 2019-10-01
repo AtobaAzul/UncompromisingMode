@@ -73,5 +73,19 @@
 	end
 
 	if GetModConfigData("character_changes") then
-		modimport("init/characters/wicker")
+		modimport("init/init_character_changes/generic")
+		modimport("init/init_character_changes/willow")
+		modimport("init/init_character_changes/wolfgang")
+		modimport("init/init_character_changes/wendy")
+		modimport("init/init_character_changes/wx78")
+		modimport("init/init_character_changes/wickerbottom")
+		modimport("init/init_character_changes/woodie")
+		modimport("init/init_character_changes/wes")
+		modimport("init/init_character_changes/waxwell")
+		modimport("init/init_character_changes/wathgrithr")
+		modimport("init/init_character_changes/webber")
+		modimport("init/init_character_changes/winona")
+		modimport("init/init_character_changes/wortox")
+		modimport("init/init_character_changes/wormwood")
+		modimport("init/init_character_changes/warly")
 	end
