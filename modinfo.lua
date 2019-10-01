@@ -141,6 +141,17 @@ configuration_options =
 		default = true,
 	},
 	{
+		name = "character_changes",
+		label = "Changed Characters",
+		hover = "Survivals' power is not what it used to be.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
+	},
+	{
 		name = "hardcore_mode",
 		label = "Hardcore Mode",
 		hover = "Life is precious now.",

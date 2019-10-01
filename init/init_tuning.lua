@@ -13,3 +13,21 @@ local dusk_time = seg_time * dusk_segs
 local night_time = seg_time * night_segs
 
 TUNING = GLOBAL.TUNING
+
+-- [              DSTU Related Overrides                  ]
+
+TUNING.DSTU = 
+{
+    --Tripover while wet
+    TRIPOVER_HEALTH_PENALTY = 15,
+    TRIPOVER_ONMAXWET_CHANCE = 0.10,
+    TRIPOVER_KNOCKABCK_RADIUS = 20,
+
+    --Weapon slip increase
+    SLIPCHANCE_INCREASE_X = 3,
+
+    --Growth time increase for stone fruits
+    STONE_FRUIT_GROWTH_INCREASE = 3,
+}
+
+-- [              DST Related Overrides                  ]

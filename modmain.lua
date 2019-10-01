@@ -71,3 +71,7 @@
 	if GetModConfigData("harder_shadows") then
 		--modimport("init/init_harder_shadows")
 	end
+
+	if GetModConfigData("character_changes") then
+		modimport("init/characters/wicker")
+	end
