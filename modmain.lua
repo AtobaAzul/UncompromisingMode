@@ -25,9 +25,8 @@
 	modimport("init/init_descriptions/wormwood")
 	modimport("init/init_descriptions/warly")
 	
---	[ 		Crafting and Tuning	and PostInits		]	--
-	modimport("init/init_recipes")
-	modimport("init/init_crockpot")
+--	[ 		Number Tuning and PostInits		]	--
+
 	modimport("init/init_tuning")
 	modimport("init/init_prefabpostinit")
 	
@@ -49,4 +48,26 @@
 
 	if GetModConfigData("harder_monsters") then
 		modimport("init/init_treebuffs")
+	end
+
+	if GetModConfigData("rare_food") then
+		modimport("init/init_food_changes")
+		modimport("init/init_crockpot")
+		--modimport("init/init_rare_foods")
+	end
+
+	if GetModConfigData("harder_recipes") then
+		modimport("init/init_recipes")
+	end
+
+	if GetModConfigData("harder_monsters") then
+		--modimport("init/init_harder_monsters")
+	end
+
+	if GetModConfigData("harder_bosses") then
+		--modimport("init/init_harder_bosses")
+	end
+
+	if GetModConfigData("harder_shadows") then
+		--modimport("init/init_harder_shadows")
 	end
