@@ -64,6 +64,18 @@ game_modes =
 configuration_options =
 {
 	{
+		name = "gamemode",
+		label = "Mode",
+		hover = "Choose gamemode. 1) Original Uncompromising version (default settings). 2) Mod is enabled after first Fuelweaver is defeated. 3) Choose custom settings.",
+		options =
+		{
+			{description = "Uncompromising", data = 0}, -- TODO: When this is selected, disable the below ones (gray them out)
+			{description = "Post Fuelweaver", data = 1},
+			{description = "Custom", data = 2}, --TODO: On custom, enable editing the below settings
+		},
+		default = 0,
+	},
+	{
 		name = "enable_knockback",
 		label = "Knockback",
 		hover = "Some creatures and bosses now kick you around.",
@@ -133,6 +145,17 @@ configuration_options =
 		name = "rare_food",
 		label = "Rare Food",
 		hover = "Food is harder to find now.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
+	},
+	{
+		name = "character_changes",
+		label = "Changed Characters",
+		hover = "Survivals' power is not what it used to be.",
 		options =
 		{
 			{description = "Disabled", data = false},

@@ -1,4 +1,4 @@
---	[ 			Requised stuff			]	--
+--	[ 			Required stuff			]	--
 -- The global objects needed for recipe changes
 -- Find the default recipes in recipes.lua
 	TECH = GLOBAL.TECH
@@ -37,6 +37,7 @@
 --	Celestial
 
 -- Wicker Books
+
 -- Leafy meat cost for applied horticulture
 if GetModConfigData("harder_recipes") then
 	-- Also use fertilizer instead of poop
@@ -45,7 +46,3 @@ else
 	-- Use poop as normal
 	Recipe("book_gardening", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("poop", 1)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
 end
-
-
-	
---	Configuration Recipes

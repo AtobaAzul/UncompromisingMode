@@ -4,15 +4,6 @@
 -- Art: tree_leaf_spike, tree_leaf_spike_lt
 -------------------------------------------------------------------------------------------------------------------------------------
 
--- Added custom art
-Assets = {
-    --Alternative art, darkened birchnut root, by @Norfeder (renamed zip)
-    --Asset("ANIM", "anim/archive_unused/tree_leaf_spike_birchnut_dark.zip"),
-
-    --Livingree custom art, by @Advent, edited by Norfeder
-    Asset("ANIM", "anim/tree_leaf_spike_lt.zip"),
-}
-
 --Copied from DeciduousTreeUpdater:OnUpdate in deciduoustreeupdater.lua
 local function spawn_root_attack(inst,chopper)
     if chopper ~= nil then
