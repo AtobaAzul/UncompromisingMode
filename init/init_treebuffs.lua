@@ -1,7 +1,8 @@
-------------------------------------------------------------------------------------------
--- Add deciduous poison birchnut root attack to Totally Normal Trees when chopped
+-------------------------------------------------------------------------------------------------------------------------------------
+-- Add root attack to Totally Normal Trees when chopped (similar to deciduous poison birchnut root)
 -- Prefabs: deciduous_root, livingtree
-------------------------------------------------------------------------------------------
+-- Art: tree_leaf_spike, tree_leaf_spike_lt
+-------------------------------------------------------------------------------------------------------------------------------------
 
 --Copied from DeciduousTreeUpdater:OnUpdate in deciduoustreeupdater.lua
 local function spawn_root_attack(inst,chopper)
@@ -16,7 +17,6 @@ local function spawn_root_attack(inst,chopper)
         local angle = inst:GetAngleToPoint(rootpos) * GLOBAL.DEGREES
 
         root.AnimState:SetBuild("tree_leaf_spike_lt")
-        root.AnimState:SetBank("tree_leaf_spike_lt")
         root.Transform:SetPosition(x + 1.75 * math.cos(angle), 0, z - 1.75 * math.sin(angle))
         root:PushEvent("givetarget", { target = chopper, targetpos = rootpos, targetangle = angle, owner = inst })                      
     end
