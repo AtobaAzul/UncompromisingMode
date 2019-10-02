@@ -69,9 +69,9 @@ configuration_options =
 		hover = "Choose gamemode. 1) Original Uncompromising version (default settings). 2) Mod is enabled after first Fuelweaver is defeated. 3) Choose custom settings.",
 		options =
 		{
-			{description = "1. Uncompromising", data = 0}, -- TODO: When this is selected, disable the below ones (gray them out)
-			{description = "2. Post Fuelweaver", data = 1},
-			{description = "3. Custom", data = 2}, --TODO: On custom, enable editing the below settings
+			{description = "Uncompromising", data = 0}, -- TODO: When this is selected, disable the below ones (gray them out)
+			{description = "Post Fuelweaver", data = 1},
+			{description = "Custom", data = 2}, --TODO: On custom, enable editing the below settings
 		},
 		default = 0,
 	},
