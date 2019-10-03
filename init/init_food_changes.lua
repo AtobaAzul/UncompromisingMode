@@ -20,16 +20,31 @@ recipes.meatballs.hunger = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_MEATBALL_HUNGER -- C
 
 
 -- prevent cooked eggs birdcage infinite loop
+local invalid_foods =
+{
+    "bird_egg",
+    "bird_egg_cooked",
+    "rottenegg",
+    "monstermeat"
+}
+
+local function ShouldAcceptItem(inst, item)
+    local seed_name = string.lower(item.prefab .. "_seeds")
+
+    local can_accept = item.components.edible
+        and (Prefabs[seed_name] 
+        or item.prefab == "seeds"
+        or item.components.edible.foodtype == GLOBAL.FOODTYPE.MEAT)
+
+    if table.contains(invalid_foods, item.prefab) then
+        can_accept = false
+    end
+
+    return can_accept
+end
+
 AddPrefabPostInit("birdcage", function (inst)
-    local invalid_foods =
-    {
-        "bird_egg",
-        "bird_egg_cooked",
-        "rottenegg",
-        "monstermeat",
-        -- "cookedmonstermeat",
-        -- "monstermeat_dried",
-    }
+    inst.components.trader:SetAcceptTest(ShouldAcceptItem)
 end)
 
 -- butterfly health reduced (5)
