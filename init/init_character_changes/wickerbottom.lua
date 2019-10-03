@@ -1,3 +1,23 @@
+-- Wicker Books
+
+TECH = GLOBAL.TECH
+Recipe = GLOBAL.Recipe
+RECIPETABS = GLOBAL.RECIPETABS
+Ingredient = GLOBAL.Ingredient
+AllRecipes = GLOBAL.AllRecipes
+STRINGS = GLOBAL.STRINGS
+TECH = GLOBAL.TECH
+CUSTOM_RECIPETABS = GLOBAL.CUSTOM_RECIPETABS
+
+-- Leafy meat cost for applied horticulture
+if GetModConfigData("harder_recipes") then
+	-- Also use fertilizer instead of poop
+	Recipe("book_gardening", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("fertilizer", 1)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
+else
+	-- Use poop as normal
+	Recipe("book_gardening", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("poop", 1)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
+end
+
 -- Nerf on tentacles to spawn 50% a small tentacle
 AddPrefabPostInit("tentacle", function(inst)
 	local function retargetfn(inst)
