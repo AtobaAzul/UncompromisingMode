@@ -84,13 +84,17 @@
 
 * [x]  Mod settings for disabling/enabling features
 
+* [x]  Pigs and bunnies defend their houses when hammered
+
 * [x]  Meaty stew is 120s cooktime
 
 * [x]  Pierogi spoils in 10 days instead of 20
 
 * [x]  Cooked Bird egg loop removed
 
-* [x]  Portal upgrade requires extra 20moonglass
+* [x]  Woodies Kitschy idols require presthatilator to prototype
+
+* [ ]  Portal upgrade requires extra 20moonglass
 
 * [x]  Moonrock idol requires 5 moonstone
 
