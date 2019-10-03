@@ -29,7 +29,6 @@
 
 	modimport("init/init_tuning")
 	modimport("init/init_prefabpostinit")
-	modimport("init/init_bishoprun")
 	
 --	[ 	Console Commands for tests !	]	--
 	
@@ -60,6 +59,7 @@
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_monsters")) then
 		modimport("init/init_treebuffs")
+		modimport("init/init_harder_monsters")
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
