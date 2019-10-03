@@ -82,6 +82,8 @@
 
 * [ ]  Sinking on a boat is instant death
 
+* [ ]  Bishops now flee inbetween attacks
+
 * [x]  Mod settings for disabling/enabling features
 
 * [x]  Pigs and bunnies defend their houses when hammered
