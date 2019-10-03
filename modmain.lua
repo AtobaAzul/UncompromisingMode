@@ -75,7 +75,7 @@
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_monsters")) then
-		--modimport("init/init_harder_monsters")
+		modimport("init/init_harder_monsters")
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
