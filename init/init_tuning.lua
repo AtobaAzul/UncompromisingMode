@@ -44,6 +44,9 @@ TUNING.DSTU =
     --Weapon slip increase
     SLIPCHANCE_INCREASE_X = 3,
 
+    --Character changes
+    GOOSE_WATER_WETNESS_RATE = 2,
+
     --Growth time increase for stone fruits
     STONE_FRUIT_GROWTH_INCREASE = 3,
 }

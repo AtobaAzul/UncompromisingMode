@@ -96,6 +96,7 @@
 
 * [x]  Cave entrances and batcaves spawn 3x the bats
  
+* [x]  Goose gets wet when running on water
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
