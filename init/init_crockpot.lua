@@ -10,7 +10,7 @@ local recipes = cooking.recipes.cookpot
 -----------------------------------------------------------------
 -- Recipe cooktime changes
 -----------------------------------------------------------------
---recipes.bonestew.cooktime = 60 -- Up from 15s (TODO: PENDING VOTES)
+recipes.bonestew.cooktime = 120 -- Up from 15s
 
 
 -----------------------------------------------------------------
