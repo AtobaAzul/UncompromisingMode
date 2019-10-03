@@ -18,25 +18,69 @@ AddPrefabPostInit("batcave", function (inst)
 end)
 
 
---Pigs defend their turf if their home is destroyed
+--Pigs and bunnies defend their turf if their home is destroyed
 local pigtaunts = 
 {
     "GET OFF LAWN",
     "LEAVE HOUSE ALONE",
-    "PIG HOUSE ATTACK",
+    "NO SMASH HOUSE",
     "DO NOT HIT",
     "NO KILL HOUSE",
+    "BAD MONKEY MAN",
+    "NO BREAK THINGS",
+    "YOU STOP THAT",
     "STOP RIGHT THERE"
 }
 
-local function onworked(inst, worker)
+local bunnytaunts = 
+{
+    "INVADER!",
+    "CRIMINAL!",
+    "SCUM!",
+    "AGGRESSOR!",
+    "NO!",
+    "MINE!",
+    "HOUSE!"
+}
+
+local function TalkShit(inst, taunts) 
+    if taunts ~= nil then 
+        local tauntnr = GLOBAL.math.floor(GLOBAL.GetRandomMinMax(1,GLOBAL.GetTableSize(taunts)))
+        if inst ~= nil and inst.components.talker ~= nil then
+            inst.components.talker:Say(taunts[tauntnr])
+        end
+    end
+end
+
+local function RetaliateAttacker(inst,attacker,taunts) 
+    if inst ~= nil and inst.components.combat ~= nil then
+        inst.components.combat:SetTarget(attacker) 
+    end
+    if taunts ~= nil then TalkShit(inst,taunts) end
+end
+
+--Get the pig to attack the perpetrator of the crime against pig-kind
+local function onworked_pighouse(inst, worker)
     if inst.components.spawner ~= nil and inst.components.spawner.child then
-        inst.components.spawner.child.components.combat:SetTarget(worker) --<< Get the pig to attack the perpetrator of the crime against pig-kind
+        RetaliateAttacker(inst.components.spawner.child, worker, pigtaunts)
     end
 end
 
 AddPrefabPostInit("pighouse", function (inst)
     if inst ~= nil and inst.components ~= nil and inst.components.workable ~= nil then
-        inst.components.workable:SetOnWorkCallback(onworked)
+        inst.components.workable:SetOnWorkCallback(onworked_pighouse)
+    end
+end)
+
+--Get the bunnyman to attack the perpetrator of the crime against bunny-kind
+local function onworked_rabbithouse(inst, worker)
+    if inst.components.spawner ~= nil and inst.components.spawner.child then
+        RetaliateAttacker(inst.components.spawner.child, worker, bunnytaunts)
+    end
+end
+
+AddPrefabPostInit("rabbithouse", function (inst)
+    if inst ~= nil and inst.components ~= nil and inst.components.workable ~= nil then
+        inst.components.workable:SetOnWorkCallback(onworked_rabbithouse)
     end
 end)
