@@ -1,3 +1,5 @@
+![Uncompromising Logo](images/logo.png)
+
 # Don't Starve Together - Uncompromising Mode Collab
 
 [Discord Server Link](https://discord.gg/UF7FKpn)
