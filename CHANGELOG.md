@@ -82,8 +82,29 @@
 
 * [ ]  Sinking on a boat is instant death
 
+* [ ]  Bishops now flee inbetween attacks
+
 * [x]  Mod settings for disabling/enabling features
+
+* [x]  Pigs and bunnies defend their houses when hammered
+
+* [x]  Meaty stew is 120s cooktime
+
+* [x]  Pierogi spoils in 10 days instead of 20
+
+* [x]  Cooked Bird egg loop removed
+
+* [x]  Woodies Kitschy idols require presthatilator to prototype
+
+* [ ]  Portal upgrade requires extra 20moonglass
+
+* [x]  Moonrock idol requires 5 moonstone
+
+* [x]  Cave entrances and batcaves spawn 3x the bats
  
+* [x]  Goose gets wet when running on water
+
+* [x] [Project logo](images/logo.png) added, by @ Ismael Daniel
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 

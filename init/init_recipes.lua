@@ -1,6 +1,7 @@
 --	[ 			Required stuff			]	--
 -- The global objects needed for recipe changes
 -- Find the default recipes in recipes.lua
+	GLOBAL.require("recipe")
 	TECH = GLOBAL.TECH
 	Recipe = GLOBAL.Recipe
 	RECIPETABS = GLOBAL.RECIPETABS
@@ -34,15 +35,19 @@
 	
 --	Ancient
 	
---	Celestial
+-- Celestial
 
--- Wicker Books
+-- Celestial portal upgrade change
+CONSTRUCTION_PLANS =
+{
+	["multiplayer_portal_moonrock_constr"] = { Ingredient("purplemooneye", 1), Ingredient("moonrocknugget", 20), Ingredient("moonglass", GLOBAL.TUNING.DSTU.RECIPE_MOONROCK_IDOL_STONE_COST) },
+}
 
--- Leafy meat cost for applied horticulture
-if GetModConfigData("harder_recipes") then
-	-- Also use fertilizer instead of poop
-	Recipe("book_gardening", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("fertilizer", 1)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
-else
-	-- Use poop as normal
-	Recipe("book_gardening", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("poop", 1)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
-end
+AddComponentPostInit("ConstructionSite", function (self)
+	function self:GetIngredients()
+		return CONSTRUCTION_PLANS[self.inst.prefab] or {}
+	end
+end)
+
+-- Moonrock idol change
+Recipe("moonrockidol", {Ingredient("moonrocknugget", GLOBAL.TUNING.DSTU.RECIPE_MOONROCK_IDOL_MOONSTONE_COST), Ingredient("purplegem", 1)}, RECIPETABS.CELESTIAL, TECH.CELESTIAL_ONE, nil, nil, true)
