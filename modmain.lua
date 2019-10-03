@@ -41,21 +41,16 @@
 	local GAMEMODE_CUSTOM_SETTINGS = 2;
 
 	if GLOBAL.GetGameModeProperty("hardcore") then
-		modimport("init/init_gamemodes/init_hardcore")
+		modimport("init/init_gamemodes/init_hardcore") --TODO: Fix hardcore game mode. For now, it is a mod config below.
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_POST_FUELWEAVER then
-		print("mode_fuelweaver")
+		print("Uncompromising mode loaded - Will activate after the one that delves below is slain")
 		modimport("init/init_gamemodes/init_post_fuelweaver")
 	end
 	
 --	[ 				Features			]	--
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("enable_knockback")) then
-		modimport("init/init_knockback")
-	end
-
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_monsters")) then
 		modimport("init/init_treebuffs")
@@ -65,23 +60,19 @@
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("rare_food")) then
 		modimport("init/init_food_changes")
-		modimport("init/init_crockpot")
-		--modimport("init/init_rare_foods")
+		modimport("init/init_rare_foods")
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_recipes")) then
 		modimport("init/init_recipes")
-	end
-
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_monsters")) then
-		--modimport("init/init_harder_monsters")
+		modimport("init/init_crockpot")
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_bosses")) then
 		--modimport("init/init_harder_bosses")
+		modimport("init/init_knockback")
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
@@ -107,4 +98,9 @@
 		modimport("init/init_character_changes/wortox")
 		modimport("init/init_character_changes/wormwood")
 		modimport("init/init_character_changes/warly")
+	end
+
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("hardcore")) then
+		modimport("init/init_gamemodes/init_hardcore")
 	end

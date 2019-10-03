@@ -76,17 +76,6 @@ configuration_options =
 		default = 0,
 	},
 	{
-		name = "enable_knockback",
-		label = "Knockback",
-		hover = "Some creatures and bosses now kick you around.",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = true,
-	},
-	{
 		name = "harder_recipes",
 		label = "Harder Recipes",
 		hover = "Some recipes become modified to be harder to craft.",

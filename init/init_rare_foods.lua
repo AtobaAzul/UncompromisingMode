@@ -1,6 +1,18 @@
 ------------------------------------------------------------------------------------
 -- Rarer foods - Decreases in frequency and yield of various food sources
 ------------------------------------------------------------------------------------
+local seg_time = 30
+
+local day_segs = 10
+local dusk_segs = 4
+local night_segs = 2
+
+local day_time = seg_time * day_segs
+local total_day_time = seg_time * 16
+
+local day_time = seg_time * day_segs
+local dusk_time = seg_time * dusk_segs
+local night_time = seg_time * night_segs
 
 -- stone fruits increased duration
 GLOBAL.TUNING.ROCK_FRUIT_REGROW =
@@ -10,11 +22,6 @@ GLOBAL.TUNING.ROCK_FRUIT_REGROW =
     PICK = { BASE = 3*day_time*GLOBAL.TUNING.DSTU.STONE_FRUIT_GROWTH_INCREASE, VAR = 2*seg_time },
     CRUMBLE = { BASE = day_time*GLOBAL.TUNING.DSTU.STONE_FRUIT_GROWTH_INCREASE, VAR = 2*seg_time }
 }
-
-AddPrefabPostInit("rock_avocado_bush", function (inst)
-    inst.components.growable.stages = growth_stages
-end)
-
 
 -- carrots are rare
 --TODO: Change regrowthmanager.lua as well
