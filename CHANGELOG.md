@@ -98,6 +98,8 @@
  
 * [x]  Goose gets wet when running on water
 
+* [x] [Project logo](images/logo.png) added, by @ Ismael Daniel
+
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
 ### To vote on features: Visit [#mod_polls](https://discordapp.com/channels/623649948130344960/623661746216763393) on Discord

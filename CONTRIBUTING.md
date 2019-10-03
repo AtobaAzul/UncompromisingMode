@@ -8,19 +8,21 @@
 
 ## Code contributors
 
-- @ADM
+- @ ADM
 
-- @Hornet
+- @ Hornet
 
-- @Norfeder
+- @ Norfeder
 
-- @loopuleasa
+- @ loopuleasa
 
 ## Art contributors
 
-- @Advent - Living tree root attack custom animation
+- @ Advent - Living tree root attack custom animation
 
-- @-Variant- 
+- @-Variant- - Rat artwork
+
+- @ Ismael Daniel - Uncompromising logo
 
 &nbsp;
 
