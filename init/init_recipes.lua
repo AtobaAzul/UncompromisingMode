@@ -1,7 +1,7 @@
 --	[ 			Required stuff			]	--
 -- The global objects needed for recipe changes
 -- Find the default recipes in recipes.lua
-	require("recipe")
+	GLOBAL.require("recipe")
 	TECH = GLOBAL.TECH
 	Recipe = GLOBAL.Recipe
 	RECIPETABS = GLOBAL.RECIPETABS

@@ -13,7 +13,7 @@ local recipes = cooking.recipes.cookpot
 --       TUNING.BASE_COOK_TIME = 1/3rd * nighttime (20 seconds)
 --       and night time is seg_time * night_segs = 30 * 2 = 60s
 -----------------------------------------------------------------
-recipes.bonestew.cooktime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_STEW_COOKTIME / GLOBAL*TUNING.BASE_COOK_TIME 
+recipes.bonestew.cooktime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_STEW_COOKTIME / GLOBAL.TUNING.BASE_COOK_TIME 
 recipes.perogies.perishtime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_PEROGI_PERISH -- Changed to 10 days, down from 20
 
 -----------------------------------------------------------------
