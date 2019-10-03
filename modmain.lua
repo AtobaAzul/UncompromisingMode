@@ -29,6 +29,7 @@
 
 	modimport("init/init_tuning")
 	modimport("init/init_prefabpostinit")
+	modimport("init/init_bishoprun")
 	
 --	[ 	Console Commands for tests !	]	--
 	
