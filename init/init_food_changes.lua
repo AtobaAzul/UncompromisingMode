@@ -8,14 +8,12 @@
 -- Note: For crocpot food changes, use the require "cooking" module and change cooking.recipes.cookpot
 ------------------------------------------------------------------------------------
 
-local ONE_DAY = 480
-
--- butterfly is 5 health
+-- butterfly health reduced (5)
 AddPrefabPostInit("butterflywings", function (inst)
-    inst.components.edible.healthvalue = GLOBAL.TUNING.HEALING_MEDSMALL - GLOBAL.TUNING.HEALING_SMALL -- (8-3)=5
+    inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERFLY_WING_HEALTH
 end)
 
--- meatballs is 50 hunger
+-- meatballs health reduced (50)
 local require = GLOBAL.require
 local cooking = require "cooking"
-cooking.recipes.cookpot.meatballs.hunger = TUNING.CALORIES_SMALL*4 -- 12.5 * 4 = 50
+cooking.recipes.cookpot.meatballs.hunger = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_MEATBALL_HUNGER
