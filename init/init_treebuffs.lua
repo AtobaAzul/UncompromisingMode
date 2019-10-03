@@ -1,12 +1,8 @@
-------------------------------------------------------------------------------------------
--- Add deciduous poison birchnut root attack to Totally Normal Trees when chopped
+-------------------------------------------------------------------------------------------------------------------------------------
+-- Add root attack to Totally Normal Trees when chopped (similar to deciduous poison birchnut root)
 -- Prefabs: deciduous_root, livingtree
-------------------------------------------------------------------------------------------
-
--- Changed color from white to dark brown
-Assets = {
-    Asset("ANIM", "anim/tree_leaf_spike_lt.zip")
-}
+-- Art: tree_leaf_spike, tree_leaf_spike_lt
+-------------------------------------------------------------------------------------------------------------------------------------
 
 --Copied from DeciduousTreeUpdater:OnUpdate in deciduoustreeupdater.lua
 local function spawn_root_attack(inst,chopper)
@@ -21,7 +17,6 @@ local function spawn_root_attack(inst,chopper)
         local angle = inst:GetAngleToPoint(rootpos) * GLOBAL.DEGREES
 
         root.AnimState:SetBuild("tree_leaf_spike_lt")
-        root.AnimState:SetBank("tree_leaf_spike_lt")
         root.Transform:SetPosition(x + 1.75 * math.cos(angle), 0, z - 1.75 * math.sin(angle))
         root:PushEvent("givetarget", { target = chopper, targetpos = rootpos, targetangle = angle, owner = inst })                      
     end
@@ -46,7 +41,9 @@ end
 
 local function livingtree_postinit(inst)
     -- Change the onworked callback to the above
-    inst.components.workable:SetOnWorkCallback(onworked)
+    if inst~=nil and inst.components~=nil and inst.components.workable~=nil then
+        inst.components.workable:SetOnWorkCallback(onworked)
+    end
 end
 
 AddPrefabPostInit("livingtree", livingtree_postinit)
