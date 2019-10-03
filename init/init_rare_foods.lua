@@ -11,11 +11,6 @@ GLOBAL.TUNING.ROCK_FRUIT_REGROW =
     CRUMBLE = { BASE = day_time*GLOBAL.TUNING.DSTU.STONE_FRUIT_GROWTH_INCREASE, VAR = 2*seg_time }
 }
 
-AddPrefabPostInit("rock_avocado_bush", function (inst)
-    inst.components.growable.stages = growth_stages
-end)
-
-
 -- carrots are rare
 --TODO: Change regrowthmanager.lua as well
 

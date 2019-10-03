@@ -8,6 +8,17 @@
 -- Note: For crocpot food changes, use the require "cooking" module and change cooking.recipes.cookpot
 ------------------------------------------------------------------------------------
 
+-----------------------------------------------------------------
+-- Food attribute changes
+-----------------------------------------------------------------
+local require = GLOBAL.require
+local cooking = require "cooking"
+local recipes = cooking.recipes.cookpot
+
+recipes.perogies.perishtime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_PEROGI_PERISH -- Changed to 10 days, down from 20
+recipes.meatballs.hunger = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_MEATBALL_HUNGER -- Changed to 50, down from 62.5
+
+
 -- prevent cooked eggs birdcage infinite loop
 AddPrefabPostInit("birdcage", function (inst)
     local invalid_foods =
@@ -25,8 +36,3 @@ end)
 AddPrefabPostInit("butterflywings", function (inst)
     inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERFLY_WING_HEALTH
 end)
-
--- meatballs health reduced (50)
-local require = GLOBAL.require
-local cooking = require "cooking"
-cooking.recipes.cookpot.meatballs.hunger = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_MEATBALL_HUNGER
