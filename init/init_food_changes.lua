@@ -8,6 +8,19 @@
 -- Note: For crocpot food changes, use the require "cooking" module and change cooking.recipes.cookpot
 ------------------------------------------------------------------------------------
 
+-- prevent cooked eggs birdcage infinite loop
+AddPrefabPostInit("birdcage", function (inst)
+    local invalid_foods =
+    {
+        "bird_egg",
+        "bird_egg_cooked",
+        "rottenegg",
+        "monstermeat",
+        -- "cookedmonstermeat",
+        -- "monstermeat_dried",
+    }
+end)
+
 -- butterfly health reduced (5)
 AddPrefabPostInit("butterflywings", function (inst)
     inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERFLY_WING_HEALTH
