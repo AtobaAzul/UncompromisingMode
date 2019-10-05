@@ -57,9 +57,13 @@ AddPrefabPostInit("skeleton_player", function (inst)
 	
 	inst:DoTaskInTime(0, OnInit)
 	
-	inst:AddComponent("trader")
-	inst.components.trader:SetAcceptTest(ShouldAcceptItem)
-	inst.components.trader.onaccept = OnGetItem
+	if inst ~= nil then 
+			if inst.components.trade == nil then 
+				inst:AddComponent("trader")
+			end
+		inst.components.trader:SetAcceptTest(ShouldAcceptItem)
+		inst.components.trader.onaccept = OnGetItem
+	end
 end)
 
 --Amulet auto-respawn if worn, like in DS

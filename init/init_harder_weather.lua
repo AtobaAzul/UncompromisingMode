@@ -105,8 +105,10 @@ AddPrefabPostInit("player_common", function(inst)
             --V2C: no need, the stategraph goes into busy state
         end
     end
-	
-	inst.components.combat:SetRetargetFunction(GLOBAL.GetRandomWithVariance(1, .5), retargetfn)
+    
+    if inst ~= nil and inst.components.combat ~= nil then 
+        inst.components.combat:SetRetargetFunction(GLOBAL.GetRandomWithVariance(1, .5), retargetfn)
+    end
 end)
 
 
