@@ -38,7 +38,9 @@ AddPrefabPostInit("tentacle", function(inst)
 			{ "prey" })
 	end
 	
-	inst.components.combat:SetRetargetFunction(GLOBAL.GetRandomWithVariance(2, 0.5), retargetfn)
+	if inst ~= nil and inst.components.combat ~= nil then 
+		inst.components.combat:SetRetargetFunction(GLOBAL.GetRandomWithVariance(2, 0.5), retargetfn)
+	end
 end)
 
 AddPrefabPostInit("tentacle_pillar_arm", function(inst)
@@ -55,7 +57,9 @@ AddPrefabPostInit("tentacle_pillar_arm", function(inst)
 			)
 	end
 	
-	inst.components.combat:SetRetargetFunction(GLOBAL.GetRandomWithVariance(1, .5), retargetfn)
+	if inst ~= nil and inst.components.combat ~= nil then 
+		inst.components.combat:SetRetargetFunction(GLOBAL.GetRandomWithVariance(1, .5), retargetfn)
+	end
 end)
 
 AddPrefabPostInit("book_tentacles", function(inst)
@@ -63,7 +67,9 @@ AddPrefabPostInit("book_tentacles", function(inst)
 		local pt = reader:GetPosition()
 		local numtentacles = 3
 
-		reader.components.sanity:DoDelta(-TUNING.SANITY_HUGE)
+		if inst ~= nil and inst.components.sanity ~= nil then 
+			reader.components.sanity:DoDelta(-TUNING.SANITY_HUGE)
+		end
 
 		reader:StartThread(function()
 			for k = 1, numtentacles do
@@ -97,5 +103,7 @@ AddPrefabPostInit("book_tentacles", function(inst)
         return true
     end
 
-	inst.components.book.onread = TentacleSpawn
+	if inst ~= nil and inst.components.book ~= nil then 
+		inst.components.book.onread = TentacleSpawn
+	end
 end)
