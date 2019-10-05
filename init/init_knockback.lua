@@ -45,6 +45,8 @@ for k, v in pairs(GIANTS) do
 			end
 		end
 	
-		inst.components.combat.onhitotherfn = OnHitOther
+		if inst ~= nil and inst.components.combat ~= nil then
+			inst.components.combat.onhitotherfn = OnHitOther
+		end
 	end)
 end
