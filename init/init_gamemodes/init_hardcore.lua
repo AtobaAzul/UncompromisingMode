@@ -64,7 +64,9 @@ end)
 
 --Amulet auto-respawn if worn, like in DS
 AddPrefabPostInit("amulet", function (inst)
-	inst.components.inventoryitem.keepondeath = true
+	if inst ~= nil and inst.components.inventoryitem ~= nil then
+		inst.components.inventoryitem.keepondeath = true
+	end
 end)
 
 AddPlayerPostInit(function (inst)
