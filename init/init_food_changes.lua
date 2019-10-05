@@ -44,10 +44,14 @@ local function ShouldAcceptItem(inst, item)
 end
 
 AddPrefabPostInit("birdcage", function (inst)
-    inst.components.trader:SetAcceptTest(ShouldAcceptItem)
+    if inst ~= nil and inst.components ~= nil then
+        inst.components.trader:SetAcceptTest(ShouldAcceptItem)
+    end
 end)
 
 -- butterfly health reduced (5)
 AddPrefabPostInit("butterflywings", function (inst)
-    inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERFLY_WING_HEALTH
+    if inst ~= nil and inst.components.edible ~= nil then
+        inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERFLY_WING_HEALTH
+    end
 end)
