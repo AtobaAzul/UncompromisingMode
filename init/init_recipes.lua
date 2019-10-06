@@ -38,6 +38,7 @@
 -- Celestial
 
 -- Celestial portal upgrade change
+-- TODO: Fix it, not working
 CONSTRUCTION_PLANS =
 {
 	["multiplayer_portal_moonrock_constr"] = { Ingredient("purplemooneye", 1), Ingredient("moonrocknugget", 20), Ingredient("moonglass", GLOBAL.TUNING.DSTU.RECIPE_MOONROCK_IDOL_STONE_COST) },

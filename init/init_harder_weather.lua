@@ -14,6 +14,7 @@
 -- Make you take damage randomly when at Max Moisture wetness, by falling and knockbacking
 -- Relevant: moisture.lua, onmaxmoisture
 ----------------------------------------------------------------------------------------------------------
+--TODO: get this working
 local TUNING.DSTU.TRIPOVER_HEALTH_PENALTY = 15;
 local TUNING.DSTU.TRIPOVER_ONMAXWET_CHANCE = 0.10;
 local TUNING.DSTU.TRIPOVER_KNOCKABCK_RADIUS = 20;
@@ -50,6 +51,7 @@ end)
 -- Increase the chance of dropping wet tool on hit
 -- Relevant: inventoryitemmoisture.lua, moisture.lua, player_common.lua (DropWetTool)
 ----------------------------------------------------------------------------------------------------------
+--TODO: Get this working
 local TUNING.DSTU.SLIPCHANCE_INCREASE_X = 3;
 AddPrefabPostInit("player_common", function(inst)
 
@@ -110,12 +112,6 @@ AddPrefabPostInit("player_common", function(inst)
         inst.components.combat:SetRetargetFunction(GLOBAL.GetRandomWithVariance(1, .5), retargetfn)
     end
 end)
-
-
--- Add depending on mod settings
-
-
-
 
 -- Anyone know how to change a Class's function post init, similar to AddPrefabPostInit? I want to change Moisture:LongUpdate inside this https://pastebin.com/q23J9kpt
 

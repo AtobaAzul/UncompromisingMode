@@ -1,3 +1,9 @@
+-----------------------------------------------------------------
+-- Knockback mechanic for most bosses
+-----------------------------------------------------------------
+--TODO: Add antlion upward attack to deerclops shards
+--TODO: Make bosses also yeet mobs, not just players
+
 local GIANTS = 
 {
 	["bearger"] =

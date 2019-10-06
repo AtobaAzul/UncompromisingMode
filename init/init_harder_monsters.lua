@@ -1,4 +1,7 @@
+-----------------------------------------------------------------
 --Bats come in higher numbers
+-----------------------------------------------------------------
+--TODO: Test behavior with multiple bats
 AddPrefabPostInit("cave_entrance", function (inst)
     if inst ~= nil and inst.components ~= nil and inst.components.childspawner ~= nil then
         --inst.components.childspawner:SetRegenPeriod(60)
@@ -17,8 +20,9 @@ AddPrefabPostInit("batcave", function (inst)
     end
 end)
 
-
+-----------------------------------------------------------------
 --Pigs and bunnies defend their turf if their home is destroyed
+-----------------------------------------------------------------
 local pigtaunts = 
 {
     "GET OFF LAWN",
@@ -60,6 +64,7 @@ local function RetaliateAttacker(inst,attacker,taunts)
 end
 
 --Get the pig to attack the perpetrator of the crime against pig-kind
+--TODO: Make pigs trashtalk in house too, now only bunnymen do that
 local function onworked_pighouse(inst, worker)
     if inst.components.spawner ~= nil and inst.components.spawner.child then
         RetaliateAttacker(inst.components.spawner.child, worker, pigtaunts)
@@ -85,7 +90,10 @@ AddPrefabPostInit("rabbithouse", function (inst)
     end
 end)
 
+-----------------------------------------------------------------
 --Bishop will now run away from player between attacks -Axe
+-----------------------------------------------------------------
+--TODO: Change stun threshold to be tighter
 local function Bishrun(brain)
     kite =     GLOBAL.WhileNode( function() return brain.inst.components.combat.target and brain.inst.components.combat:InCooldown() end, "Dodge",
                     GLOBAL.RunAway(brain.inst, function() return brain.inst.components.combat.target end, 5, 8) )

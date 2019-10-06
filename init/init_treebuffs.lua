@@ -16,6 +16,8 @@ local function spawn_root_attack(inst,chopper)
         local rootpos = GLOBAL.Vector3(mx + possition_variance_x, 0, mz + possition_variance_z)
         local angle = inst:GetAngleToPoint(rootpos) * GLOBAL.DEGREES
 
+        --TODO: Make spawn faster, to make the attack harder
+
         root.AnimState:SetBuild("tree_leaf_spike_lt")
         root.Transform:SetPosition(x + 1.75 * math.cos(angle), 0, z - 1.75 * math.sin(angle))
         root:PushEvent("givetarget", { target = chopper, targetpos = rootpos, targetangle = angle, owner = inst })                      
