@@ -1,4 +1,6 @@
+-----------------------------------------------------------------
 -- Change woodie idol recipe to require presthatilator
+-----------------------------------------------------------------
 TECH = GLOBAL.TECH
 Recipe = GLOBAL.Recipe
 RECIPETABS = GLOBAL.RECIPETABS
@@ -12,7 +14,10 @@ Recipe("wereitem_goose", {Ingredient("monstermeat", 3), Ingredient("seeds", 3)},
 Recipe("wereitem_beaver", {Ingredient("monstermeat", 3), Ingredient("log", 2)}, RECIPETABS.MAGIC, TECH.MAGIC_TWO, nil, nil, nil, nil, "werehuman")
 Recipe("wereitem_moose", {Ingredient("monstermeat", 3), Ingredient("cutgrass", 2)}, RECIPETABS.MAGIC, TECH.MAGIC_TWO, nil, nil, nil, nil, "werehuman")
 
+-----------------------------------------------------------------
 -- If goose is over water, increase wetness
+-----------------------------------------------------------------
+--TODO: increase wetness properly, and make sure he gets freezing damage
 local function OnGooseOverWater(inst)
     if inst.weremode:value() == 3 then
         if inst~=nil and inst.components.drownable ~= nil and inst.components.drownable:IsOverWater() then

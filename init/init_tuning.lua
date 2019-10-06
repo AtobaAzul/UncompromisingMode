@@ -35,17 +35,22 @@ TUNING.DSTU =
 
     --Mob changes
     MONSTER_BAT_CAVE_NR_INCREASE = 3,
+    MONSTER_CATCOON_HEALTH_CHANGE = TUNING.CATCOON_LIFE * 2,
 
     --Tripover while wet
-    TRIPOVER_HEALTH_PENALTY = 15,
-    TRIPOVER_ONMAXWET_CHANCE = 0.10,
-    TRIPOVER_KNOCKABCK_RADIUS = 20,
+    TRIPOVER_HEALTH_DAMAGE = 5,
+    TRIPOVER_ONMAXWET_CHANCE_PER_SEC = 0.05,
+    TRIPOVER_KNOCKABCK_RADIUS = 2,
+    TRIPOVER_ONMAXWET_COOLDOWN = 5,
 
     --Weapon slip increase
     SLIPCHANCE_INCREASE_X = 3,
 
     --Character changes
+    --  Woodie
     GOOSE_WATER_WETNESS_RATE = 2,
+    --  Wolfgang
+    WOLFGANG_SANITY_MULTIPLIER = 1.5, --prev was 1.1
 
     --Growth time increase for stone fruits
     STONE_FRUIT_GROWTH_INCREASE = 3,
