@@ -13,6 +13,9 @@ gravestone
 sculpture_???
 ]]--
 
+--TODO: Make lava give more damage when on top
+--TODO: Make ponds passable as well, and they make you wet really fast
+
 AddPrefabPostInit("fossil_stalker", function(inst)
     if inst~= nil and inst.Physics ~= nil then
         GLOBAL.RemovePhysicsColliders(inst)
@@ -44,6 +47,12 @@ AddPrefabPostInit("statue_marble", function(inst)
 end)
 
 AddPrefabPostInit("gravestone", function(inst)
+    if inst~= nil and inst.Physics ~= nil then
+        GLOBAL.RemovePhysicsColliders(inst)
+    end
+end)
+
+AddPrefabPostInit("arrowsign_post", function(inst)
     if inst~= nil and inst.Physics ~= nil then
         GLOBAL.RemovePhysicsColliders(inst)
     end

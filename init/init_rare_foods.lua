@@ -26,12 +26,40 @@ GLOBAL.TUNING.ROCK_FRUIT_REGROW =
 }
 
 -----------------------------------------------------------------
---TODO No grow in winter
+-- No grow in winter
 -----------------------------------------------------------------
--- Check: MakeNoGrowInWinter in standardcomponents.lua
+-- Relevant: MakeNoGrowInWinter in standardcomponents.lua
+
+-- Stone fruits bushs
+AddPrefabPostInit("rock_avocado_bush", function(inst)
+    if inst~= nil and inst.components.pickable ~= nil then
+        GLOBAL.MakeNoGrowInWinter(inst)
+    end
+end)
+
+-- Cactus
+AddPrefabPostInit("cactus", function(inst)
+    if inst~= nil and inst.components.pickable ~= nil then
+        GLOBAL.MakeNoGrowInWinter(inst)
+    end
+end)
+
+-- Oasis Cactus
+AddPrefabPostInit("oasis_cactus", function(inst)
+    if inst~= nil and inst.components.pickable ~= nil then
+        GLOBAL.MakeNoGrowInWinter(inst)
+    end
+end)
+
+-- Spiky twigs
+AddPrefabPostInit("marsh_bush", function(inst)
+    if inst~= nil and inst.components.pickable ~= nil then
+        GLOBAL.MakeNoGrowInWinter(inst)
+    end
+end)
 
 -----------------------------------------------------------------
--- carrots are rare
+-- Carrots are rare
 -----------------------------------------------------------------
 --TODO: Change regrowthmanager.lua as well
 
