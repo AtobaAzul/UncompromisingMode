@@ -1,4 +1,14 @@
 -----------------------------------------------------------------
+--Generic mob stat changes
+-----------------------------------------------------------------
+--Catcoon extra health
+AddPrefabPostInit("catcoon", function (inst)
+    if inst ~= nil and inst.components ~= nil and inst.components.health ~= nil then
+        inst.components.health:SetMaxHealth(GLOBAL.TUNING.DSTU.MONSTER_CATCOON_HEALTH_CHANGE)
+    end
+end)
+
+-----------------------------------------------------------------
 --Bats come in higher numbers
 -----------------------------------------------------------------
 --TODO: Test behavior with multiple bats
@@ -100,3 +110,4 @@ local function Bishrun(brain)
     table.insert(brain.bt.root.children, 1, kite)
 end
 AddBrainPostInit("bishopbrain", Bishrun)
+
