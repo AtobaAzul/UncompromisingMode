@@ -58,3 +58,12 @@ AddPrefabPostInit("arrowsign_post", function(inst)
     end
 end)
 
+-----------------------------------------------------------------
+-- Tooth traps burn (they are literally logs with teeth)
+-----------------------------------------------------------------
+AddPrefabPostInit("trap_teeth", function(inst)
+    if inst~=nil then
+        GLOBAL.MakeSmallBurnable(inst)
+        GLOBAL.MakeSmallPropagator(inst)
+    end
+end)
