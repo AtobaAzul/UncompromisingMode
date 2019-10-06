@@ -46,7 +46,10 @@ TUNING.DSTU =
     SLIPCHANCE_INCREASE_X = 3,
 
     --Character changes
+    --  Woodie
     GOOSE_WATER_WETNESS_RATE = 2,
+    --  Wolfgang
+    WOLFGANG_SANITY_MULTIPLIER = 1.5, --prev was 1.1
 
     --Growth time increase for stone fruits
     STONE_FRUIT_GROWTH_INCREASE = 3,
