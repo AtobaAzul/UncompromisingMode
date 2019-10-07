@@ -104,7 +104,9 @@
 
 * [x]  [Project logo](images/logo.png) added, by @ Ismael Daniel
 
-* [x]  Monster meat must be dilluted with normal meat in crocpot
+* [x]  Monster meat must be dilluted with normal meat in crocpot to not make lasagna, with the exception of monster jerky
+
+* [x]  Monster meat has a default monster value of 2.5 now. Cooked is 2.0 monster value. Monster Jerky is 1.0 monster value.
 
 * [x]  Wolfgang sanity drain to 1.5x (prev was 1.1x)
 
@@ -113,6 +115,10 @@
 * [x]  Tooth traps burn
 
 * [x]  Cactus, stone fruits and spiky bushs don't grow in winter
+
+* [x]  Pig king has guards protecting him
+
+* [x]  Moosegoose's nest has had its carrots eaten, and some berry bushes disappeared too. Moosling's might've been hungry.
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 

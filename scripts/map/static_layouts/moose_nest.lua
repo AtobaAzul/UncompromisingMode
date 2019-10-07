@@ -81,7 +81,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        }
+        },
         {
           name = "",
           type = "berrybush",
@@ -114,7 +114,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        }
+        },
         {
           name = "",
           type = "berrybush_juicy",
@@ -136,7 +136,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        }
+        },
         {
           name = "",
           type = "randomtree",
@@ -180,7 +180,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        }
+        },
         {
           name = "",
           type = "randomtree",
