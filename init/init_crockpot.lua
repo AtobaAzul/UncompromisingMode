@@ -16,6 +16,7 @@ local warly_recipes = cooking.recipes.portablecookpot
 -----------------------------------------------------------------
 recipes.bonestew.cooktime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_STEW_COOKTIME / GLOBAL.TUNING.BASE_COOK_TIME 
 recipes.perogies.perishtime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_PEROGI_PERISH -- Changed to 10 days, down from 20
+recipes.baconeggs.priority = 9 --No more casino 50/50 baconeggs / monsterlasagna
 
 -----------------------------------------------------------------
 -- Filler changes - Limit twigs and/or Ice to all recipes
