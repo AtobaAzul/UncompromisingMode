@@ -60,8 +60,10 @@ end)
 
 -----------------------------------------------------------------
 -- Carrots are rare
+-- Relevant: regrowthmanager.lua, RabbitArea, RabbitTown,
+-- RabbitCity, MooseGooseBreedingGrounds, moose_nest.lua
 -----------------------------------------------------------------
---TODO: Change regrowthmanager.lua as well
+--TODO
 
 -----------------------------------------------------------------
 -- TODO: berry bushs are rare

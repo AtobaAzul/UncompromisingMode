@@ -32,7 +32,7 @@
 
 * [x]  [Custom art for livingtree by @ Advent](https://cdn.discordapp.com/attachments/626788873942335517/628233540169105408/up.gif)
 
-* [ ]  Bishop flees from attacks after shooting
+* [x]  Bishop flees from attacks after shooting
 
 * [ ]  New shadow creatures (Dread Eye & Creeping Fear)
 
@@ -40,13 +40,13 @@
 
 * [ ]  Bearger tree throw attack when running from him
 
-* [ ]  Statue wall hitbox pathing nerf
+* [x]  Statue walls, signs, lava ponds, bone fragments hitbox pathing is ignored (now they have no collision)
 
 * [ ]  Fix shadow creatures not attacking when insane (wormhole exploit)
 
 * [ ]  Wetness buff - 3x the chance to slip weapon when it's wet
 
-* [ ]  Wetness buff - Chance to trip and fall for -15 damage at 100 wetness
+* [x]  Wetness buff - Chance to trip and fall for -15 damage at 100 wetness
 
 * [x]  Butterfly wing nerf - Health restored to 5 (down from 8)
 
@@ -82,8 +82,6 @@
 
 * [ ]  Sinking on a boat is instant death
 
-* [ ]  Bishops now flee inbetween attacks
-
 * [x]  Mod settings for disabling/enabling features
 
 * [x]  Pigs and bunnies defend their houses when hammered
@@ -102,9 +100,27 @@
 
 * [x]  Cave entrances and batcaves spawn 3x the bats
  
-* [x]  Goose gets wet when running on water
+* [x]  Woodie were-Goose gets wet when running on water
 
-* [x] [Project logo](images/logo.png) added, by @ Ismael Daniel
+* [x]  [Project logo](images/logo.png) added, by @ Ismael Daniel
+
+* [x]  Monster meat must be dilluted with normal meat in crocpot to not make lasagna, with the exception of monster jerky
+
+* [x]  Monster meat has a default monster value of 2.5 now. Cooked is 2.0 monster value. Monster Jerky is 1.0 monster value.
+
+* [x]  Wolfgang sanity drain to 1.5x (prev was 1.1x)
+
+* [x]  Catcoon have triple the health
+
+* [x]  Tooth traps burn
+
+* [x]  Cactus, stone fruits and spiky bushs don't grow in winter
+
+* [x]  Pig king has guards protecting him
+
+* [x]  Moosegoose's nest has had its carrots eaten, and some berry bushes disappeared too. Moosling's might've been hungry.
+
+* [x]  Bacon and eggs has a lower cooking priority than monster lasagna
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
