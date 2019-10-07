@@ -18,9 +18,6 @@ local recipes = cooking.recipes.cookpot
 recipes.perogies.perishtime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_PEROGI_PERISH -- Changed to 10 days, down from 20
 recipes.meatballs.hunger = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_MEATBALL_HUNGER -- Changed to 50, down from 62.5
 
---TODO: Add monster meat supporting food
---Relevant: AddIngredientValues({"petals", "petals_evil"}, {flower=1})
-
 -----------------------------------------------------------------
 -- prevent cooked eggs birdcage infinite loop
 -----------------------------------------------------------------

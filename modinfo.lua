@@ -40,6 +40,14 @@ icon = "modicon.tex"
 
 server_filter_tags = {
 	"uncompromising",
+	"DSTU",
+	"collab",
+	"overhaul",
+	"hard",
+	"difficult",
+	"madness",
+	"challenge",
+	"hardcore"
 }
 
 priority = 10
