@@ -19,6 +19,20 @@ recipes.perogies.perishtime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_PEROGI_PERISH -- 
 recipes.meatballs.hunger = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_MEATBALL_HUNGER -- Changed to 50, down from 62.5
 
 -----------------------------------------------------------------
+-- Bee box levels are 0,1,2,4 (from 0,1,3,6)
+-----------------------------------------------------------------
+AddPrefabPostInit("beebox", function (inst)
+    levels =
+    {
+        { amount=3, idle="honey3", hit="hit_honey3" },
+        { amount=2, idle="honey2", hit="hit_honey2" },
+        { amount=1, idle="honey1", hit="hit_honey1" },
+        { amount=0, idle="bees_loop", hit="hit_idle" },
+    }
+end)
+
+
+-----------------------------------------------------------------
 -- Prevent cooked eggs birdcage infinite loop
 -----------------------------------------------------------------
 local invalid_foods =
