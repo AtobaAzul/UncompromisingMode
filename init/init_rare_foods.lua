@@ -73,42 +73,20 @@ AddRoomPreInit("BGGrass", function(room)
 end)
 
 -----------------------------------------------------------------
--- TODO: berry bushs are rare
+-- Haunting pig torches only creates the pig with 10% chance
 -----------------------------------------------------------------
+local function CustomTorchHaunt(inst)
+    if math.random() <= TUNING.HAUNT_CHANCE_RARE then
+        inst.components.fueled:TakeFuelItem(SpawnPrefab("pigtorch_fuel"))
+        inst.components.spawner:ReleaseChild()
+    end
+end
 
------------------------------------------------------------------
--- TODO: goose setpieces fewer foods WIP
------------------------------------------------------------------
--- Relevant: AddRoomPreInit, MooseBreedingTask, MooseGooseBreedingGrounds, moose_nesting_ground, carrot_planted, berrybush, berrybush_juicy
--- Command: c_gonext("moose_nesting_ground")
---[[ require ("map/room_functions")
-
-AddRoom("MooseGooseBreedingGrounds", {
-	colour={r=0.2,g=0.0,b=0.2,a=0.3},
-	value = GROUND.GRASS,
-	tags = {"ForceConnected", "RoadPoison"},
-	contents =  
-	{
-        countprefabs= 
-        {
-			moose_nesting_ground = 4,
-        },
-        distributepercent = 0.275,
-        distributeprefabs =
-        {
-        	berrybush = 0.1,
-        	berrybush_juicy = 0.1,
-        	carrot_planted = 0.1,
-			flower = 0.333,
-			grass = 0.8,
-			flint = 0.1,
-			sapling = 0.8,
-			twiggytree = .32,
-            evergreen = 1,
-			pond = 0.01,
-        },
-    }
-}) ]]--
+AddPrefabPostInit("pigtorch", function(inst)
+    if inst~= nil and inst.components.hauntable ~= nil then
+        AddHauntableCustomReaction(inst, CustomTorchHaunt, true, nil, true)
+    end
+end)
 
 -----------------------------------------------------------------
 -- TODO:carrots sometimes are other veggies

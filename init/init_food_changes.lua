@@ -19,7 +19,7 @@ recipes.perogies.perishtime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_PEROGI_PERISH -- 
 recipes.meatballs.hunger = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_MEATBALL_HUNGER -- Changed to 50, down from 62.5
 
 -----------------------------------------------------------------
--- prevent cooked eggs birdcage infinite loop
+-- Prevent cooked eggs birdcage infinite loop
 -----------------------------------------------------------------
 local invalid_foods =
 {
@@ -49,6 +49,8 @@ AddPrefabPostInit("birdcage", function (inst)
         inst.components.trader:SetAcceptTest(ShouldAcceptItem)
     end
 end)
+
+
 
 -----------------------------------------------------------------
 -- butterfly health reduced (5)
