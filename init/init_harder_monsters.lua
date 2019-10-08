@@ -111,10 +111,13 @@ local function Bishrun(brain)
 end
 AddBrainPostInit("bishopbrain", Bishrun)
 --BeeQueen now has AOE -Axe
---TODO: Prevent bee queen from hitting bees
 AddPrefabPostInit("beequeen", function (inst)
     if inst ~= nil and inst.components ~= nil and inst.components.combat ~= nil then
-        inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE, TUNING.DEERCLOPS_AOE_SCALE)
-		inst.components.combat.AREA_EXCLUDE_TAGS = { "INLIMBO", "notarget", "noattack", "flight", "invisible", "playerghost", "beeguard", "flying"}
-    end
+		local function isnotbee(ent)
+			if ent ~= nil and not ent:HasTag("bee") and not ent:HasTag("hive") then -- fix to friendly AOE: refer for later AOE mobs -Axe
+				return true
+			end
+		end
+        inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE/2, TUNING.DEERCLOPS_AOE_SCALE, isnotbee) -- you can edit these values to your liking -Axe
+    end                                     
 end)

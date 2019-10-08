@@ -82,7 +82,7 @@
 
 * [ ]  Sinking on a boat is instant death
 
-* [ ]  Bishops now flee inbetween attacks
+* [x]  Bishops now flee inbetween attacks
 
 * [x]  Mod settings for disabling/enabling features
 
@@ -123,6 +123,8 @@
 * [x]  Moosegoose's nest has had its carrots eaten, and some berry bushes disappeared too. Moosling's might've been hungry.
 
 * [x]  Bacon and eggs has a lower cooking priority than monster lasagna
+
+* [x]  Bee Queen now has an AOE that ignores hives and bees
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
