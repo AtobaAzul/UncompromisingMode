@@ -50,7 +50,82 @@ AddPrefabPostInit("birdcage", function (inst)
     end
 end)
 
+-----------------------------------------------------------------
+-- Bird dies if fed too much monster meat
+-----------------------------------------------------------------
+--TODO: Shorten functions here, and overwrite only
 
+local function DigestFood(inst, food)
+    if food.components.edible.foodtype == FOODTYPE.MEAT then
+        --If the food is meat:
+            --Spawn an egg.
+        inst.components.lootdropper:SpawnLootPrefab("bird_egg")
+    else
+        local seed_name = string.lower(food.prefab .. "_seeds")
+        if Prefabs[seed_name] ~= nil then
+            --If the food has a relavent seed type:
+                --Spawn 1 or 2 of those seeds.
+            local num_seeds = math.random(2)
+            for k = 1, num_seeds do
+                inst.components.lootdropper:SpawnLootPrefab(seed_name)
+            end
+                --Spawn regular seeds on a 50% chance.
+            if math.random() < 0.5 then
+                inst.components.lootdropper:SpawnLootPrefab("seeds")
+            end
+        else
+            --Otherwise...
+                --Spawn a poop 1/3 times.
+            if math.random() < 0.33 then
+                local loot = inst.components.lootdropper:SpawnLootPrefab("guano")
+                loot.Transform:SetScale(.33, .33, .33)
+            end
+        end
+    end
+
+    --Refill bird stomach.
+    local bird = GetBird(inst)
+    if bird and bird:IsValid() and bird.components.perishable then
+        bird.components.perishable:SetPercent(1)
+    end
+
+    --TODO:Bird dies if too much meat is given
+    if food.components.edible.foodtype == FOODTYPE.MEAT and 
+       food.components.edible:GetHealth(inst) < 0 then --monster meat is currently the only negative health meat item
+        OnBirdStarve()
+    end    
+end
+
+local function OnGetItem(inst, giver, item)
+    --If you're sleeping, wake up.
+    if inst.components.sleeper and inst.components.sleeper:IsAsleep() then
+        inst.components.sleeper:WakeUp()
+    end
+
+    if item.components.edible ~= nil and
+        (   item.components.edible.foodtype == FOODTYPE.MEAT
+            or item.prefab == "seeds"
+            or Prefabs[string.lower(item.prefab .. "_seeds")] ~= nil
+        ) then
+        --If the item is edible...
+        --Play some animations (peck, peck, peck, hop, idle)
+        inst.AnimState:PlayAnimation("peck")
+        inst.AnimState:PushAnimation("peck")
+        inst.AnimState:PushAnimation("peck")
+        inst.AnimState:PushAnimation("hop")
+        PushStateAnim(inst, "idle", true)
+        --Digest Food in 60 frames.
+        inst:DoTaskInTime(60 * FRAMES, DigestFood, item)
+    end
+end
+
+AddPrefabPostInit("birdcage", DigestFood)
+AddPrefabPostInit("birdcage", OnGetItem)
+AddPrefabPostInit("birdcage", function (inst)
+    if inst ~= nil and inst.components.trader ~= nil then
+        inst.components.trader.onaccept = OnGetItem
+    end
+end)
 
 -----------------------------------------------------------------
 -- butterfly health reduced (5)
