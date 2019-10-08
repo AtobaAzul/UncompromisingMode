@@ -31,6 +31,30 @@ AddPrefabPostInit("batcave", function (inst)
 end)
 
 -----------------------------------------------------------------
+--McTusk Changes
+--Relevant: walrus.lua prefab, walrusbrain, leash.lua
+-----------------------------------------------------------------
+AddPrefabPostInit("walrus", function (inst)
+    if inst ~= nil and inst.components ~= nil and inst.components.health ~= nil then
+        inst.components.health:SetMaxHealth(TUNING.WALRUS_HEALTH*GLOBAL.TUNING.DSTU.MONSTER_MCTUSK_HEALTH_INCREASE)
+    end
+
+    NUM_HOUNDS = GLOBAL.TUNING.DSTU.MONSTER_MCTUSK_HOUND_NUMBER
+end)
+
+--Remove running away useless behavior by reversing Home Leash priority and chase priority
+local function WalrusLeashFix(brain)
+    if brain ~= nil and brain.bt.root.children ~= nil then
+        run = brain.bt.root.children[3]
+        leash = brain.bt.root.children[2]
+        brain.bt.root.children[2] = run
+        brain.bt.root.children[3] = leash
+    end
+end
+AddBrainPostInit("walrusbrain", WalrusLeashFix)
+
+
+-----------------------------------------------------------------
 --Pigs and bunnies defend their turf if their home is destroyed
 -----------------------------------------------------------------
 local pigtaunts = 
@@ -54,7 +78,8 @@ local bunnytaunts =
     "AGGRESSOR!",
     "NO!",
     "MINE!",
-    "HOUSE!"
+    "HOUSE!",
+    "BEGONE!",
 }
 
 local function TalkShit(inst, taunts) 
