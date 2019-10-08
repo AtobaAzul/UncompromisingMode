@@ -1,8 +1,19 @@
 ----------------------------------------------------------------------------------------------------------
--- Nerf therml stone stacking
+-- Remove thermal stone sewing
 -- Relevant: heatrock.lua
 ----------------------------------------------------------------------------------------------------------
---TODO
+local function DoSewing(self, target, doer)
+    if self ~= nil and self.inst ~= nil then
+        local _OldDoSewing = self.DoSewing
+        
+        self.DoSewing = function(self, target, doer)
+            if target ~= nil and not target:HasTag("heatrock") then --<< Check for thermal
+                _OldDoSewing(self, target, doer)
+            end
+        end
+    end
+end
+AddComponentPostInit("sewing", DoSewing)
 
 ----------------------------------------------------------------------------------------------------------
 -- Make thermal stone very ineffective if no winter clothing found
