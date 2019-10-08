@@ -59,11 +59,18 @@ AddPrefabPostInit("marsh_bush", function(inst)
 end)
 
 -----------------------------------------------------------------
--- Carrots are rare
+-- Carrots and berry bushs are rare now
 -- Relevant: regrowthmanager.lua, RabbitArea, RabbitTown,
--- RabbitCity, MooseGooseBreedingGrounds, moose_nest.lua
+-- RabbitCity, MooseGooseBreedingGrounds, moose_nest.lua, 
+-- carrot_planted
 -----------------------------------------------------------------
---TODO
+AddRoomPreInit("BGGrass", function(room) 
+    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
+        room.contents.dsitributeprefabs.carrot_planted = 0.05 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+        room.contents.dsitributeprefabs.berrybush = 0.05 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+        room.contents.dsitributeprefabs.berrybush_juicy = 0.025 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.025
+    end
+end)
 
 -----------------------------------------------------------------
 -- TODO: berry bushs are rare

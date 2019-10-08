@@ -18,26 +18,54 @@ TUNING = GLOBAL.TUNING
 
 TUNING.DSTU = 
 {
+    ----------------------------------------------------------------------------
+    --Food changes
+    ----------------------------------------------------------------------------
+    --Global appearance rate of carrots and bushs
+    FOOD_CARROT_PLANTED_APPEARANCE_PERCENT = 0.2, --20% the carrots
+    FOOD_BERRY_NORMAL_APPEARANCE_PERCENT = 0.33, --33% the bushs
+    FOOD_BERRY_JUICY_APPEARANCE_PERCENT = 0.33, --33 the juicy bushs
+    
+    --Growth time increase for stone fruits
+    STONE_FRUIT_GROWTH_INCREASE = 3,
+
+    ----------------------------------------------------------------------------
+    --Cooking recipe changes
+    ----------------------------------------------------------------------------
+    --Recipe stat changes
+    RECIPE_CHANGE_STEW_COOKTIME = 120, --in seconds
+    RECIPE_CHANGE_PEROGI_PERISH = TUNING.PERISH_MED, --in days (from 20 to 10)
+    RECIPE_CHANGE_MEATBALL_HUNGER = TUNING.CALORIES_SMALL*4, -- (12.5 * 4) = 50, from 62.5
+    RECIPE_CHANGE_BUTTERFLY_WING_HEALTH = TUNING.HEALING_MEDSMALL - TUNING.HEALING_SMALL, -- (8 - 3) = 5;
+    
     --Limits to fillers
     CROCKPOT_RECIPE_TWIG_LIMIT = 2,
     CROCKPOT_RECIPE_ICE_LIMIT = 2,
     CROCKPOT_RECIPE_ICE_PLUS_TWIG_LIMIT = 2,
 
-    --Cooking recipe changes
-    RECIPE_CHANGE_STEW_COOKTIME = 120, --in seconds
-    RECIPE_CHANGE_PEROGI_PERISH = TUNING.PERISH_MED, --in days (from 20 to 10)
-    RECIPE_CHANGE_MEATBALL_HUNGER = TUNING.CALORIES_SMALL*4, -- (12.5 * 4) = 50, from 62.5
-    RECIPE_CHANGE_BUTTERFLY_WING_HEALTH = TUNING.HEALING_MEDSMALL - TUNING.HEALING_SMALL, -- (8 - 3) = 5;
+    --Monster meat meat dilution
+    MONSTER_MEAT_RAW_MONSTER_VALUE = 2.5,
+    MONSTER_MEAT_COOKED_MONSTER_VALUE = 2.0,
+    MONSTER_MEAT_DRIED_MONSTER_VALUE = 1.0,
+    MONSTER_MEAT_MEAT_REDUCTION_PER_MEAT = 1.0,
 
+    ----------------------------------------------------------------------------
     --Recipe changes
+    ----------------------------------------------------------------------------
+    --Celestial portal costs
     RECIPE_MOONROCK_IDOL_MOONSTONE_COST = 5,
     RECIPE_CELESTIAL_UPGRADE_GLASS_COST = 20,
 
+    ----------------------------------------------------------------------------
     --Mob changes
+    ----------------------------------------------------------------------------
     MONSTER_BAT_CAVE_NR_INCREASE = 3,
     MONSTER_CATCOON_HEALTH_CHANGE = TUNING.CATCOON_LIFE * 2,
 
-    --Tripover while wet
+    ----------------------------------------------------------------------------
+    --Player changes
+    ----------------------------------------------------------------------------
+    --Tripover chance on walking with 100 wetness
     TRIPOVER_HEALTH_DAMAGE = 5,
     TRIPOVER_ONMAXWET_CHANCE_PER_SEC = 0.05,
     TRIPOVER_KNOCKABCK_RADIUS = 2,
@@ -46,14 +74,14 @@ TUNING.DSTU =
     --Weapon slip increase
     SLIPCHANCE_INCREASE_X = 3,
 
+    ----------------------------------------------------------------------------
     --Character changes
-    --  Woodie
+    ----------------------------------------------------------------------------
+    --Woodie
     GOOSE_WATER_WETNESS_RATE = 2,
-    --  Wolfgang
-    WOLFGANG_SANITY_MULTIPLIER = 1.5, --prev was 1.1
 
-    --Growth time increase for stone fruits
-    STONE_FRUIT_GROWTH_INCREASE = 3,
+    --Wolfgang
+    WOLFGANG_SANITY_MULTIPLIER = 1.5, --prev was 1.1
 }
 
 -- [              DST Related Overrides                  ]

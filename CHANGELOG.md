@@ -70,11 +70,11 @@
  
 * [ ]  Twiggy trees worlds are disabled
  
-* [ ]  Carrots are rarer in world generation
+* [x]  Carrots are rarer in world generation
 
-* [ ]  Berry bushes are rarer in world generation
+* [x]  Berry bushes are rarer in world generation
 
-* [ ]  Goose nest setpiece has lower food counts
+* [x]  Goose nest setpiece has lower food counts
  
 * [ ]  During Worldgen, carrots can sometimes be replaced with different vegetables. (Asparagus, Potato, Toma Root, etc etc) 
  
@@ -93,6 +93,8 @@
 * [x]  Cooked Bird egg loop removed
 
 * [x]  Woodies Kitschy idols require presthatilator to prototype
+
+* [ ]  Portal upgrade requires cratered iridescent opal gem moonlens, instead of purple one
 
 * [ ]  Portal upgrade requires extra 20moonglass
 
