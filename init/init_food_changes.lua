@@ -45,7 +45,7 @@ local function ShouldAcceptItem(inst, item)
 end
 
 AddPrefabPostInit("birdcage", function (inst)
-    if inst ~= nil and inst.components ~= nil then
+    if inst ~= nil and inst.components.trader ~= nil then
         inst.components.trader:SetAcceptTest(ShouldAcceptItem)
     end
 end)
