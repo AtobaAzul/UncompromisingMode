@@ -18,8 +18,9 @@ local recipes = cooking.recipes.cookpot
 recipes.perogies.perishtime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_PEROGI_PERISH -- Changed to 10 days, down from 20
 recipes.meatballs.hunger = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_MEATBALL_HUNGER -- Changed to 50, down from 62.5
 
-
+-----------------------------------------------------------------
 -- prevent cooked eggs birdcage infinite loop
+-----------------------------------------------------------------
 local invalid_foods =
 {
     "bird_egg",
@@ -44,10 +45,16 @@ local function ShouldAcceptItem(inst, item)
 end
 
 AddPrefabPostInit("birdcage", function (inst)
-    inst.components.trader:SetAcceptTest(ShouldAcceptItem)
+    if inst ~= nil and inst.components.trader ~= nil then
+        inst.components.trader:SetAcceptTest(ShouldAcceptItem)
+    end
 end)
 
+-----------------------------------------------------------------
 -- butterfly health reduced (5)
+-----------------------------------------------------------------
 AddPrefabPostInit("butterflywings", function (inst)
-    inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERFLY_WING_HEALTH
+    if inst ~= nil and inst.components.edible ~= nil then
+        inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERFLY_WING_HEALTH
+    end
 end)

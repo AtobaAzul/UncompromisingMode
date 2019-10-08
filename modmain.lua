@@ -80,6 +80,11 @@
 		--modimport("init/init_harder_shadows")
 	end
 
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_weather")) then
+		modimport("init/init_harder_weather")
+	end
+
 	--TODO: Add settings for each individual character after we add many changes
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("character_changes")) then

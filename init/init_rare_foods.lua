@@ -14,7 +14,9 @@ local day_time = seg_time * day_segs
 local dusk_time = seg_time * dusk_segs
 local night_time = seg_time * night_segs
 
+-----------------------------------------------------------------
 -- stone fruits increased duration
+-----------------------------------------------------------------
 GLOBAL.TUNING.ROCK_FRUIT_REGROW =
 {
     EMPTY = { BASE = 2*day_time*GLOBAL.TUNING.DSTU.STONE_FRUIT_GROWTH_INCREASE, VAR = 2*seg_time },
@@ -23,12 +25,53 @@ GLOBAL.TUNING.ROCK_FRUIT_REGROW =
     CRUMBLE = { BASE = day_time*GLOBAL.TUNING.DSTU.STONE_FRUIT_GROWTH_INCREASE, VAR = 2*seg_time }
 }
 
--- carrots are rare
---TODO: Change regrowthmanager.lua as well
+-----------------------------------------------------------------
+-- No grow in winter
+-----------------------------------------------------------------
+-- Relevant: MakeNoGrowInWinter in standardcomponents.lua
 
--- berry bushs are rare
+-- Stone fruits bushs
+AddPrefabPostInit("rock_avocado_bush", function(inst)
+    if inst~= nil and inst.components.pickable ~= nil then
+        GLOBAL.MakeNoGrowInWinter(inst)
+    end
+end)
 
--- goose setpieces fewer foods WIP
+-- Cactus
+AddPrefabPostInit("cactus", function(inst)
+    if inst~= nil and inst.components.pickable ~= nil then
+        GLOBAL.MakeNoGrowInWinter(inst)
+    end
+end)
+
+-- Oasis Cactus
+AddPrefabPostInit("oasis_cactus", function(inst)
+    if inst~= nil and inst.components.pickable ~= nil then
+        GLOBAL.MakeNoGrowInWinter(inst)
+    end
+end)
+
+-- Spiky twigs
+AddPrefabPostInit("marsh_bush", function(inst)
+    if inst~= nil and inst.components.pickable ~= nil then
+        GLOBAL.MakeNoGrowInWinter(inst)
+    end
+end)
+
+-----------------------------------------------------------------
+-- Carrots are rare
+-- Relevant: regrowthmanager.lua, RabbitArea, RabbitTown,
+-- RabbitCity, MooseGooseBreedingGrounds, moose_nest.lua
+-----------------------------------------------------------------
+--TODO
+
+-----------------------------------------------------------------
+-- TODO: berry bushs are rare
+-----------------------------------------------------------------
+
+-----------------------------------------------------------------
+-- TODO: goose setpieces fewer foods WIP
+-----------------------------------------------------------------
 -- Relevant: AddRoomPreInit, MooseBreedingTask, MooseGooseBreedingGrounds, moose_nesting_ground, carrot_planted, berrybush, berrybush_juicy
 -- Command: c_gonext("moose_nesting_ground")
 --[[ require ("map/room_functions")
@@ -60,4 +103,6 @@ AddRoom("MooseGooseBreedingGrounds", {
     }
 }) ]]--
 
--- carrots sometimes are other veggies
+-----------------------------------------------------------------
+-- TODO:carrots sometimes are other veggies
+-----------------------------------------------------------------

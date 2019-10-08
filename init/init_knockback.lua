@@ -1,3 +1,9 @@
+-----------------------------------------------------------------
+-- Knockback mechanic for most bosses
+-----------------------------------------------------------------
+--TODO: Add antlion upward attack to deerclops shards
+--TODO: Make bosses also yeet mobs, not just players
+
 local GIANTS = 
 {
 	["bearger"] =
@@ -45,6 +51,8 @@ for k, v in pairs(GIANTS) do
 			end
 		end
 	
-		inst.components.combat.onhitotherfn = OnHitOther
+		if inst ~= nil and inst.components.combat ~= nil then
+			inst.components.combat.onhitotherfn = OnHitOther
+		end
 	end)
 end

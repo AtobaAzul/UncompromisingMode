@@ -63,6 +63,38 @@ Join the discord server if you wish to collaborate as a dev, artist or tester.
 You can also join simply to discuss and suggest ideas.
 
 
+## How to contribute code
+
+Recommended Git Client: [GitHub Desktop](https://desktop.github.com/) (Works with Gitlab)
+
+Recommended Code Editor: [Visual Studio Code](https://code.visualstudio.com/)
+
+Basic dev process is:
+```
+1. Create a Gitlab account
+2. Contact one of the maintainers of this project, to add you as dev
+3. Download Github Desktop (or any git client you prefer)
+4. Clone the repository so you have it locally
+   - I recommend cloning it in your <DST>/mods folder, for fast prototyping
+5. In Github desktop clieant login to gitlab (this downloads the code locally)
+6. To make changes, create a new branch (this will be where you will work)
+7. Publish your branch (this makes it available publicly here on gitlab)
+8. Do changes on your branch, or copy files inside the local repository location
+9. Github desktop will see your changes, and you have to commit them
+   - Add descriptive messages for your commits
+   - Best practice is to keep one functionality for one commit 
+10.Push your changes (this makes them appear on your branch, publicly)
+11.On gitlab.com go to our Project > Merge Requests (here you can create requests to merge your code into our master)
+12.Submit a merge request from your own branch, to merge into the master branch
+13.Make sure you fulfil the checklists that appear when you do so
+14.After that, code maintainers will check your merge request
+   - If any issues are in the code, we will request a change, and you can create it and push it on your branc
+15.If all is good, code maintainers will approve and merge your changes.
+
+Note: If you want to work on other changes while waiting for approval, create a different branch, and work on that one.
+
+Congratulations, you just helped the Uncompromising Mode Collab!
+```
 
 ## Credits
 
