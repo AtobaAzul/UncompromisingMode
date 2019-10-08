@@ -110,4 +110,11 @@ local function Bishrun(brain)
     table.insert(brain.bt.root.children, 1, kite)
 end
 AddBrainPostInit("bishopbrain", Bishrun)
-
+--BeeQueen now has AOE -Axe
+--TODO: Prevent bee queen from hitting bees
+AddPrefabPostInit("beequeen", function (inst)
+    if inst ~= nil and inst.components ~= nil and inst.components.combat ~= nil then
+        inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE, TUNING.DEERCLOPS_AOE_SCALE)
+		inst.components.combat.AREA_EXCLUDE_TAGS = { "INLIMBO", "notarget", "noattack", "flight", "invisible", "playerghost", "beeguard", "flying"}
+    end
+end)
