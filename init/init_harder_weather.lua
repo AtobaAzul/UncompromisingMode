@@ -6,7 +6,7 @@
 
 ----------------------------------------------------------------------------------------------------------
 -- Make thermal stone very ineffective if no winter clothing found
--- Relevant: heatrock.lua
+-- Relevant: heatrock.lua, HeatFn, heater:SetThermics
 ----------------------------------------------------------------------------------------------------------
 --TODO
 
@@ -142,18 +142,10 @@ local function OnAttackOther(inst, data)
 end
 
 
-AddPrefabPostInit("player_common", function(inst)
+AddPlayerPostInit(function(inst)
     if inst ~= nil then 
         print("ListenForEvent")
         inst:ListenForEvent("onattackother", OnAttackOther)
     end
 end)
 
--- Anyone know how to change a Class's function post init, similar to AddPrefabPostInit? I want to change Moisture:LongUpdate inside this https://pastebin.com/q23J9kpt
-
--- Other code snippets:
--- local waterproofness = (v.components.inventory and math.min(v.components.inventory:GetWaterproofness(),1)) or 0
--- moisture:DoDelta(wetamount * (1 - waterproofness))
--- self.inst.components.moisture:GetMoisture()
--- self.inst.components.moisture:GetMaxMoisture()
--- owner.components.moisture:GetMoisture())
