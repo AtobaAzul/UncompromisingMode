@@ -1,0 +1,6 @@
+-----------------------------------------------------------------
+-- WX damage changes during wet
+-----------------------------------------------------------------
+GLOBAL.TUNING.WX78_MIN_MOISTURE_DAMAGE= -.1 * GLOBAL.TUNING.DSTU.WX78_MOISTURE_DAMAGE_INCRESE,
+GLOBAL.TUNING.WX78_MAX_MOISTURE_DAMAGE = -.5 * GLOBAL.TUNING.DSTU.WX78_MOISTURE_DAMAGE_INCRESE,
+GLOBAL.TUNING.WX78_MOISTURE_DRYING_DAMAGE = -.3 * GLOBAL.TUNING.DSTU.WX78_MOISTURE_DAMAGE_INCRESE,

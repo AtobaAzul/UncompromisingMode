@@ -87,6 +87,9 @@ TUNING.DSTU =
 
     --Wolfgang
     WOLFGANG_SANITY_MULTIPLIER = 1.5, --prev was 1.1
+
+    --WX78
+    WX78_MOISTURE_DAMAGE_INCRESE = 3,
 }
 
 -- [              DST Related Overrides                  ]
