@@ -84,7 +84,7 @@ end
 
 AddPrefabPostInit("pigtorch", function(inst)
     if inst~= nil and inst.components.hauntable ~= nil then
-        AddHauntableCustomReaction(inst, CustomTorchHaunt, true, nil, true)
+        --TODO fix AddHauntableCustomReaction(inst, CustomTorchHaunt, true, nil, true)
     end
 end)
 

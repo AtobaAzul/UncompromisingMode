@@ -59,7 +59,7 @@ local function ShouldAcceptItem(inst, item)
 end
 
 AddPrefabPostInit("birdcage", function (inst)
-    if inst ~= nil and inst.components ~= nil then
+    if inst ~= nil and inst.components.trader ~= nil then
         inst.components.trader:SetAcceptTest(ShouldAcceptItem)
     end
 end)
@@ -70,6 +70,7 @@ end)
 --TODO: Shorten functions here, and overwrite only
 
 local function DigestFood(inst, food)
+    if food == nil then return false end
     if food.components.edible.foodtype == FOODTYPE.MEAT then
         --If the food is meat:
             --Spawn an egg.
@@ -101,13 +102,23 @@ local function DigestFood(inst, food)
     local bird = GetBird(inst)
     if bird and bird:IsValid() and bird.components.perishable then
         bird.components.perishable:SetPercent(1)
-    end
 
-    --TODO:Bird dies if too much meat is given
-    if food.components.edible.foodtype == FOODTYPE.MEAT and 
-       food.components.edible:GetHealth(inst) < 0 then --monster meat is currently the only negative health meat item
-        OnBirdStarve()
-    end    
+        --TODO:Bird dies if too much meat is given
+        if food.components.edible.foodtype == FOODTYPE.MEAT and 
+            food.components.edible:GetHealth(inst) < 0 then --monster meat is currently the only negative health meat item
+            if bird.monsterbelly ~= nil and bird.monsterbelly ~= 0 then 
+                bird.monsterbelly = bird.monsterbelly+1
+            else
+                bird.monsterbelly = 1
+            end
+
+            print(bird.monsterbelly )
+
+            if bird.monsterbelly >= 4 then
+                OnBirdStarve(inst, bird)
+            end
+        end 
+    end
 end
 
 local function OnGetItem(inst, giver, item)
@@ -116,7 +127,7 @@ local function OnGetItem(inst, giver, item)
         inst.components.sleeper:WakeUp()
     end
 
-    if item.components.edible ~= nil and
+    if item~=nil and item.components.edible ~= nil and
         (   item.components.edible.foodtype == FOODTYPE.MEAT
             or item.prefab == "seeds"
             or Prefabs[string.lower(item.prefab .. "_seeds")] ~= nil
