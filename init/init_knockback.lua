@@ -3,6 +3,7 @@
 -----------------------------------------------------------------
 --TODO: Add antlion upward attack to deerclops shards
 --TODO: Make bosses also yeet mobs, not just players
+--TODO: Add AoE to most mobs that require it
 
 local GIANTS = 
 {

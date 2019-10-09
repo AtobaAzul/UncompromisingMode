@@ -14,7 +14,6 @@ sculpture_???
 ]]--
 
 --TODO: Make lava give more damage when on top
---TODO: Make ponds passable as well, and they make you wet really fast
 
 AddPrefabPostInit("endtable", function(inst)
     if inst~= nil and inst.Physics ~= nil then

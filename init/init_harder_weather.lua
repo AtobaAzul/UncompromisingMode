@@ -14,12 +14,13 @@ local function DoSewing(self, target, doer)
     end
 end
 AddComponentPostInit("sewing", DoSewing)
+--TODO thermal stone stacking
 
 ----------------------------------------------------------------------------------------------------------
 -- Make thermal stone very ineffective if no winter clothing found
 -- Relevant: heatrock.lua, HeatFn, heater:SetThermics
 ----------------------------------------------------------------------------------------------------------
---TODO
+--TODO thermal stone ineffetive without clothes
 
 ----------------------------------------------------------------------------------------------------------
 -- Make you take damage randomly when at Max Moisture wetness, by falling and knockbacking
@@ -85,7 +86,7 @@ AddComponentPostInit("moisture", OnUpdate)
 -- Increase the chance of dropping wet tool on hit
 -- Relevant: inventoryitemmoisture.lua, moisture.lua, player_common.lua (DropWetTool)
 ----------------------------------------------------------------------------------------------------------
---TODO: Get this working
+--TODO: Get tool slip working
 
 local function DropWetTool(inst, data)
     --Tool slip.

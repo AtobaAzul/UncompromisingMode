@@ -11,7 +11,6 @@ end)
 -----------------------------------------------------------------
 --Bats come in higher numbers
 -----------------------------------------------------------------
---TODO: Test behavior with multiple bats
 AddPrefabPostInit("cave_entrance", function (inst)
     if inst ~= nil and inst.components ~= nil and inst.components.childspawner ~= nil then
         --inst.components.childspawner:SetRegenPeriod(60)
