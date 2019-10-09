@@ -110,4 +110,3 @@ local function Bishrun(brain)
     table.insert(brain.bt.root.children, 1, kite)
 end
 AddBrainPostInit("bishopbrain", Bishrun)
-
