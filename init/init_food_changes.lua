@@ -67,11 +67,32 @@ end)
 -----------------------------------------------------------------
 -- Bird dies if fed too much monster meat
 -----------------------------------------------------------------
---TODO: Shorten functions here, and overwrite only
+--TODO: Shorten functions here, and overwrite only (maybe use upvalue hacker)
+
+local function OnBirdStarve(inst, bird)
+    if inst.AnimationTask then
+        inst.AnimationTask:Cancel()
+        inst.AnimationTask = nil
+    end
+    inst.CAGE_STATE = "_death"
+
+    inst.AnimState:PlayAnimation("death")
+    inst.AnimState:PushAnimation("idle"..inst.CAGE_STATE, false)
+    --PushStateAnim(inst, "idle", false)
+
+    --Put loot on "shelf"
+    local loot = GLOBAL.SpawnPrefab("smallmeat")
+    inst.components.inventory:GiveItem(loot)
+    inst.components.shelf:PutItemOnShelf(loot)
+
+    --remove sleep tests, it's already dead
+    inst.components.sleeper:SetSleepTest(nil)
+    inst.components.sleeper:SetWakeTest(nil)
+end
 
 local function DigestFood(inst, food)
     if food == nil then return false end
-    if food.components.edible.foodtype == FOODTYPE.MEAT then
+    if food.components.edible.foodtype == GLOBAL.FOODTYPE.MEAT then
         --If the food is meat:
             --Spawn an egg.
         inst.components.lootdropper:SpawnLootPrefab("bird_egg")
@@ -99,53 +120,52 @@ local function DigestFood(inst, food)
     end
 
     --Refill bird stomach.
-    local bird = GetBird(inst)
+    local bird = (inst.components.occupiable and inst.components.occupiable:GetOccupant()) or nil
     if bird and bird:IsValid() and bird.components.perishable then
         bird.components.perishable:SetPercent(1)
 
-        --TODO:Bird dies if too much meat is given
-        if food.components.edible.foodtype == FOODTYPE.MEAT and 
-            food.components.edible:GetHealth(inst) < 0 then --monster meat is currently the only negative health meat item
-            if bird.monsterbelly ~= nil and bird.monsterbelly ~= 0 then 
-                bird.monsterbelly = bird.monsterbelly+1
+        if food.components.edible.foodtype == GLOBAL.FOODTYPE.MEAT then
+            if  food.components.edible:GetHealth(inst) < 0 then --monster meat is currently the only negative health meat item
+                if bird.monsterbelly ~= nil and bird.monsterbelly ~= 0 then 
+                    bird.monsterbelly = bird.monsterbelly + 1
+                else
+                    bird.monsterbelly = 1
+                end
             else
-                bird.monsterbelly = 1
+                if bird.monsterbelly ~= nil and bird.monsterbelly > 0 then
+                    --If bird is fed meat, she reduces her monsterbelly
+                    bird.monsterbelly = bird.monsterbelly - 1
+                end
             end
 
-            print(bird.monsterbelly )
-
-            if bird.monsterbelly >= 4 then
-                OnBirdStarve(inst, bird)
+            if bird.monsterbelly ~= nil and bird.monsterbelly >= 4 then
+                -- After 4 monster meat, bird dies
+                OnBirdStarve(inst, bird) 
             end
         end 
     end
 end
 
 local function OnGetItem(inst, giver, item)
-    --If you're sleeping, wake up.
     if inst.components.sleeper and inst.components.sleeper:IsAsleep() then
         inst.components.sleeper:WakeUp()
     end
 
-    if item~=nil and item.components.edible ~= nil and
-        (   item.components.edible.foodtype == FOODTYPE.MEAT
+    if item~=nil and item.components.edible ~= nil and item.components.edible.foodtype ~= nil and
+        (   item.components.edible.foodtype == GLOBAL.FOODTYPE.MEAT
             or item.prefab == "seeds"
             or Prefabs[string.lower(item.prefab .. "_seeds")] ~= nil
         ) then
-        --If the item is edible...
-        --Play some animations (peck, peck, peck, hop, idle)
         inst.AnimState:PlayAnimation("peck")
         inst.AnimState:PushAnimation("peck")
         inst.AnimState:PushAnimation("peck")
         inst.AnimState:PushAnimation("hop")
-        PushStateAnim(inst, "idle", true)
-        --Digest Food in 60 frames.
-        inst:DoTaskInTime(60 * FRAMES, DigestFood, item)
+        inst.AnimState:PushAnimation("idle"..inst.CAGE_STATE, true)
+        inst:DoTaskInTime(60 * GLOBAL.FRAMES, DigestFood, item)
     end
 end
 
-AddPrefabPostInit("birdcage", DigestFood)
-AddPrefabPostInit("birdcage", OnGetItem)
+AddPrefabPostInit("birdcage", DigestFood, OnGetItem, OnBirdStarve)
 AddPrefabPostInit("birdcage", function (inst)
     if inst ~= nil and inst.components.trader ~= nil then
         inst.components.trader.onaccept = OnGetItem
