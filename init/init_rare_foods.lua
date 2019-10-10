@@ -73,6 +73,19 @@ AddRoomPreInit("BGGrass", function(room)
 end)
 
 -----------------------------------------------------------------
+-- Bee box levels are 0,1,2,4 honey (from 0,1,3,6)
+-----------------------------------------------------------------
+AddPrefabPostInit("beebox", function (inst)
+    levels =
+    {
+        { amount=3, idle="honey3", hit="hit_honey3" },
+        { amount=2, idle="honey2", hit="hit_honey2" },
+        { amount=1, idle="honey1", hit="hit_honey1" },
+        { amount=0, idle="bees_loop", hit="hit_idle" },
+    }
+end)
+
+-----------------------------------------------------------------
 -- Haunting pig torches only creates the pig with 10% chance
 -----------------------------------------------------------------
 local function CustomTorchHaunt(inst)
