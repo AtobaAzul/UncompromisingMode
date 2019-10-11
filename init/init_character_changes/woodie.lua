@@ -22,13 +22,11 @@ local function OnGooseOverWater(inst)
     if inst.weremode:value() == 3 then
         if inst~=nil and inst.components.drownable ~= nil and inst.components.drownable:IsOverWater() then
             inst.components.moisture:DoDelta(GLOBAL.TUNING.DSTU.GOOSE_WATER_WETNESS_RATE, true)
-            print()
         end
     end
     inst:DoTaskInTime(GLOBAL.TUNING.WEREGOOSE_RUN_DRAIN_TIME_DURATION, OnGooseOverWater)
 end
 
 AddPrefabPostInit("woodie", function (inst)
-    print("AddPrefabPostInit woodie")
     inst:DoTaskInTime(GLOBAL.TUNING.WEREGOOSE_RUN_DRAIN_TIME_DURATION, OnGooseOverWater)
 end)

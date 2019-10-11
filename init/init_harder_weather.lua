@@ -144,7 +144,6 @@ local function DropWetTool(inst, data)
 end
 
 local function OnAttackOther(inst, data)
-    print("OnAttackOther")
     if data ~= nil and data.target ~= nil and data.target:HasTag("player") then
         inst.hasAttackedPlayer = true
     end
@@ -156,7 +155,6 @@ end
 
 AddPlayerPostInit(function(inst)
     if inst ~= nil then 
-        print("ListenForEvent")
         inst:ListenForEvent("onattackother", OnAttackOther)
     end
 end)

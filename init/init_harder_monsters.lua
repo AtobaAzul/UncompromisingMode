@@ -32,8 +32,6 @@ end)
 -----------------------------------------------------------------
 --Fire/Ice Hounds have fire/ice damage
 -----------------------------------------------------------------
---TODO: test hound bites
-
 local function OnHitOtherFreeze(inst, data)
     local other = data.target
     --Ice hounds
@@ -192,7 +190,7 @@ AddBrainPostInit("bishopbrain", Bishrun)
 --Relevant: pigman.lua, GuardRetargetFn, GuardKeepTargetFn
 -----------------------------------------------------------------
 --TODO: implement
---[[
+
 local function GuardRetargetFn(inst)
     --defend the king, then the torch, then myself
     local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
@@ -207,7 +205,7 @@ local function GuardRetargetFn(inst)
         if invader ~= nil and
             not (defenseTarget.components.trader ~= nil and defenseTarget.components.trader:IsTryingToTradeWithMe(invader)) and
             not (inst.components.trader ~= nil and inst.components.trader:IsTryingToTradeWithMe(invader)) then
-            return invader
+                return invader
         end
 
         if not GLOBAL.TheWorld.state.isday and home ~= nil and home.components.burnable ~= nil and home.components.burnable:IsBurning() then
@@ -226,9 +224,12 @@ local function GuardRetargetFn(inst)
             end
         end
     end
-    return GLOBAL.FindEntity(defenseTarget, defendDist, nil, { "monster" }, { "INLIMBO" })
+    
+    return GLOBAL.FindEntity(defenseTarget, defendDist, nil, { "monster" }, { "INLIMBO" }) or
+           GLOBAL.FindEntity(defenseTarget, defendDist*5, nil, { "wall" }, { "INLIMBO" }) --Pigs attack walls too
 end
 
+--[[
 local function GuardKeepTargetFn(inst, target)
     
     if not inst.components.combat:CanTarget(target) or
@@ -249,14 +250,16 @@ local function GuardKeepTargetFn(inst, target)
                     or GLOBAL.SpringCombatMod(TUNING.PIG_GUARD_DEFEND_DIST)
     return target:IsNear(home, defendDist) and inst:IsNear(home, defendDist)
 end
+]]
 
-AddPrefabPostInit("pigman", function (inst)
+AddPrefabPostInit("pigguard", GuardRetargetFn)
+AddPrefabPostInit("pigguard", function (inst)
     if inst ~= nil and inst.components.combat ~= nil then 
-        inst.components.combat:SetKeepTargetFunction(GuardKeepTargetFn)
+        --inst.components.combat:SetKeepTargetFunction(GuardKeepTargetFn)
         inst.components.combat:SetRetargetFunction(1, GuardRetargetFn)
     end
 end)
-]]
+
 
 -----------------------------------------------------------------
 --Pig guards don't hit players if pig king is happy
