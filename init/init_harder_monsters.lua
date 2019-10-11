@@ -177,9 +177,32 @@ end)
 -----------------------------------------------------------------
 --Pengulls are now aggressive
 -----------------------------------------------------------------
+local function PenguinRetarget(inst)
+
+    local ta = inst.components.teamattacker
+
+    local newtarget = FindEntity(inst, 3, function(guy)
+            return inst.components.combat:CanTarget(guy)
+            end,
+            nil,
+            {"penguin"},
+            {"character","monster","wall"}
+            )
+
+    if newtarget and ta and not ta.inteam and not ta:SearchForTeam() then
+        MakeTeam(inst, newtarget)
+    end
+
+    if ta.inteam and not ta.teamleader:CanAttack() then
+        return newtarget
+    end
+
+end
+
+AddPrefabPostInit("penguin", PenguinRetarget)
 AddPrefabPostInit("penguin", function (inst)
     if inst ~= nil and inst.components ~= nil and inst.components.combat ~= nil then
-        inst.components.combat:SetRetargetFunction(2, MutatedRetarget) --penguins are as aggressive as mutated ones
+        inst.components.combat:SetRetargetFunction(2, PenguinRetarget) --penguins are aggressive
     end
 end)
 
@@ -199,7 +222,12 @@ AddBrainPostInit("bishopbrain", Bishrun)
 --Pig guards now target walls
 --Relevant: pigman.lua, GuardRetargetFn, GuardKeepTargetFn
 -----------------------------------------------------------------
---TODO: implement
+local function AliveWall(wall, targetter)
+    if wall ~= nil and wall.components.health ~= nil then
+        return not wall.components.health:IsDead()
+    end 
+    return nil
+end
 
 local function GuardRetargetFn(inst)
     --defend the king, then the torch, then myself
@@ -210,33 +238,46 @@ local function GuardRetargetFn(inst)
         (home ~= nil and inst:IsNear(home, defendDist) and home) or
         inst
 
+    local wall =  GLOBAL.FindEntity(defenseTarget, defendDist, AliveWall, {"wall"}, { "INLIMBO" })
+    local monster = GLOBAL.FindEntity(defenseTarget, defendDist, nil, {"monster"}, { "INLIMBO" })
+    if monster ~= nil then 
+        target = monster 
+    else 
+        if wall ~= nil then 
+            target = wall
+        end 
+    end
+
     if not defenseTarget.happy then
-        local invader = GLOBAL.FindEntity(defenseTarget, GLOBAL.SpringCombatMod(TUNING.PIG_GUARD_TARGET_DIST), nil, { "character" }, { "guard", "INLIMBO" })
+        local invader = GLOBAL.FindEntity(defenseTarget, defendDist, nil, { "character" }, { "guard", "INLIMBO" })
         if invader ~= nil and
             not (defenseTarget.components.trader ~= nil and defenseTarget.components.trader:IsTryingToTradeWithMe(invader)) and
             not (inst.components.trader ~= nil and inst.components.trader:IsTryingToTradeWithMe(invader)) then
-                return invader
-        end
+                target = invader
+        else
+            if not GLOBAL.TheWorld.state.isday and home ~= nil and home.components.burnable ~= nil and home.components.burnable:IsBurning() then
+                local lightThief = GLOBAL.FindEntity(
+                    home,
+                    home.components.burnable:GetLargestLightRadius(),
+                    function(guy)
+                        return guy.LightWatcher:IsInLight()
+                            and not (defenseTarget.components.trader ~= nil and defenseTarget.components.trader:IsTryingToTradeWithMe(guy))
+                            and not (inst.components.trader ~= nil and inst.components.trader:IsTryingToTradeWithMe(guy))
+                    end,
+                    { "player" }
+                )
+                if lightThief ~= nil then
 
-        if not GLOBAL.TheWorld.state.isday and home ~= nil and home.components.burnable ~= nil and home.components.burnable:IsBurning() then
-            local lightThief = GLOBAL.FindEntity(
-                home,
-                home.components.burnable:GetLargestLightRadius(),
-                function(guy)
-                    return guy.LightWatcher:IsInLight()
-                        and not (defenseTarget.components.trader ~= nil and defenseTarget.components.trader:IsTryingToTradeWithMe(guy))
-                        and not (inst.components.trader ~= nil and inst.components.trader:IsTryingToTradeWithMe(guy))
-                end,
-                { "player" }
-            )
-            if lightThief ~= nil then
-                return lightThief
+                    print("largest radius is "..home.components.burnable:GetLargestLightRadius())
+                    target = lightThief
+                end
             end
         end
     end
     
-    return GLOBAL.FindEntity(defenseTarget, defendDist, nil, { "monster" }, { "INLIMBO" }) or
-           GLOBAL.FindEntity(defenseTarget, defendDist*5, nil, { "wall" }, { "INLIMBO" }) --Pigs attack walls too
+    print(target)
+    print(AliveWall(target))
+    return target
 end
 
 --[[
@@ -266,7 +307,7 @@ AddPrefabPostInit("pigguard", GuardRetargetFn)
 AddPrefabPostInit("pigguard", function (inst)
     if inst ~= nil and inst.components.combat ~= nil then 
         --inst.components.combat:SetKeepTargetFunction(GuardKeepTargetFn)
-        inst.components.combat:SetRetargetFunction(1, GuardRetargetFn)
+        inst.components.combat:SetRetargetFunction(1, GuardRetargetFn, DeadWall)
     end
 end)
 
