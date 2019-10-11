@@ -175,6 +175,16 @@ AddPrefabPostInit("rabbithouse", function (inst)
 end)
 
 -----------------------------------------------------------------
+--Pengulls are now aggressive
+-----------------------------------------------------------------
+AddPrefabPostInit("penguin", function (inst)
+    if inst ~= nil and inst.components ~= nil and inst.components.combat ~= nil then
+        inst.components.combat:SetRetargetFunction(2, MutatedRetarget) --penguins are as aggressive as mutated ones
+    end
+end)
+
+
+-----------------------------------------------------------------
 --Bishop will now run away from player between attacks -Axe
 -----------------------------------------------------------------
 --TODO: Change stun threshold to be tighter
