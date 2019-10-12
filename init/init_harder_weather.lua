@@ -43,7 +43,7 @@ local function trip_chance_check()
 end
 
 local function trip_over_chance_on_maxwet(player)
-    if player~=nil and (player:GetMoisture() == player:GetMaxMoisture()) and player.sg ~= nil and player.sg:HasStateTag("moving") then
+    if player~=nil and player:HasTag("character") and (player:GetMoisture() == player:GetMaxMoisture()) and player.sg ~= nil and player.sg:HasStateTag("moving") then
         local time = GLOBAL.GetTime()
         if player.components.moisture.lastslip_check < time - 1 then
             if player.components.moisture.lastslip_time < time - GLOBAL.TUNING.DSTU.TRIPOVER_ONMAXWET_COOLDOWN  then
