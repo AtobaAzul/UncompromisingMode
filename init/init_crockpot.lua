@@ -60,19 +60,19 @@ end
 -- Monster meat is a supporting meat and must be paired with normal meat
 -- Relevant: AddIngredientValues
 -------------------------------------------------------------------------------
---TODO: Add monster meat supporting food
-
-AddIngredientValues({"monstermeat"}, {meat=1, monster=3.5}, true, true) --2.5 monster total, Will be calculated with -1 meat
-AddIngredientValues({"monstermeat_cooked"}, {meat=1, monster=3.0}, true, true) --2 monster total, Will be calculated with -1 meat
-AddIngredientValues({"monstermeat_dried"}, {meat=1, monster=2.0}, true, true) --1 monster total, Will be calculated with -1 meat
+--TODO: Fix smart crocpot mods from this, if possible (currently not showing predicted recipes correctly)
+local meat_reduction_factor = GLOBAL.TUNING.DSTU.MONSTER_MEAT_MEAT_REDUCTION_PER_MEAT;
+AddIngredientValues({"monstermeat"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_RAW_MONSTER_VALUE + meat_reduction_factor}, true, true) --2.5 monster total, Will be calculated with -1 meat
+AddIngredientValues({"monstermeat_cooked"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE + meat_reduction_factor}, true, true) --2 monster total, Will be calculated with -1 meat
+AddIngredientValues({"monstermeat_dried"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_DRIED_MONSTER_VALUE + meat_reduction_factor}, true, true) --1 monster total, Will be calculated with -1 meat
 
 --Substract the meat value from the monster value, since it dillutes it
 local function MonsterMeatSupport(tags)
-    return tags~=nil and not tags.monster or tags.monster < 2 or (tags.meat and (tags.monster - tags.meat) < 2)
+    return tags~=nil and not tags.monster or tags.monster < 2 or (tags.meat and (tags.monster - tags.meat*meat_reduction_factor) < 2)
 end
 
 local function MonsterMeat(tags)
-    return tags~=nil and tags.monster and tags.monster >=2 and (tags.meat and (tags.monster - tags.meat) >= 2)
+    return tags~=nil and tags.monster and tags.monster >=2 and (tags.meat and (tags.monster - tags.meat*meat_reduction_factor) >= 2)
 end
 
 -----------------------------------------------------------------

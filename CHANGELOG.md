@@ -58,7 +58,9 @@
 
 * [ ]  Insanity buff - When at 0 sanity, your screen becomes obstructed with the fuelweaver shadow watcher effect
 
-* [ ]  Thermal Stone Nerf - Thermals are less effective for winter, and insulation is required. No more stacking 2-3 Thermals also.
+* [ ]  Thermals are less effective for winter, and insulation is required. No more stacking 2-3 Thermals also.
+
+* [x]  You cannot sew thermals anymore
 
 * [ ]  Add a mod setting that enables the mod only after Fuelweaver is defeated, for those that want to play normally and only enable this "Expert" mode for lategame
  
@@ -70,11 +72,11 @@
  
 * [ ]  Twiggy trees worlds are disabled
  
-* [ ]  Carrots are rarer in world generation
+* [x]  Carrots are rarer in world generation
 
-* [ ]  Berry bushes are rarer in world generation
+* [x]  Berry bushes are rarer in world generation
 
-* [ ]  Goose nest setpiece has lower food counts
+* [x]  Goose nest setpiece has lower food counts
  
 * [ ]  During Worldgen, carrots can sometimes be replaced with different vegetables. (Asparagus, Potato, Toma Root, etc etc) 
  
@@ -94,7 +96,13 @@
 
 * [x]  Cooked Bird egg loop removed
 
+* [x]  Bird's stomach can only withstand 4 monster meat before dying out (vary her diet with normal meat to cure it)
+
 * [x]  Woodies Kitschy idols require presthatilator to prototype
+
+* [x]  WX will take more damage from rain (3x)
+
+* [ ]  Portal upgrade requires cratered iridescent opal gem moonlens, instead of purple one
 
 * [ ]  Portal upgrade requires extra 20moonglass
 
@@ -112,7 +120,7 @@
 
 * [x]  Wolfgang sanity drain to 1.5x (prev was 1.1x)
 
-* [x]  Catcoon have triple the health
+* [x]  Catcoon have 5x the health
 
 * [x]  Tooth traps burn
 
@@ -120,9 +128,21 @@
 
 * [x]  Pig king has guards protecting him
 
+* [x]  Pig guards now break free by attacking walls that entrap them
+
+* [x]  Bee box honey yield is 1,2,4 instead of 1,3,6
+
 * [x]  Moosegoose's nest has had its carrots eaten, and some berry bushes disappeared too. Moosling's might've been hungry.
 
 * [x]  Bacon and eggs has a lower cooking priority than monster lasagna
+
+* [x]  Fire and ice hounds have fire and ice attacks on their bite
+
+* [x]  Walrus has more health and ice doggos
+
+* [ ]  Haunting pig torches has a low chance of spawning a pig guard now
+
+* [x]  Only winona can power her generators
 
 * [x]  Bee Queen now has an AOE that ignores hives and bees
 

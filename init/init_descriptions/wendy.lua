@@ -4,6 +4,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 
 --	[ 		Wendy Descriptions		]	--
 
+GLOBAL.STRINGS.CHARACTERS.WENDY.ANNOUNCE_WINONAGEN = "What's the point? It's of no use to me."
+
 	ANNOUNCE.ANNOUNCE_WIRLYSHARE_YUCK = 
 	{
 		"Don't you see it's bad for you?",

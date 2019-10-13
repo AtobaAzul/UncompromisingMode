@@ -59,49 +59,47 @@ AddPrefabPostInit("marsh_bush", function(inst)
 end)
 
 -----------------------------------------------------------------
--- Carrots are rare
+-- Carrots and berry bushs are rare now
 -- Relevant: regrowthmanager.lua, RabbitArea, RabbitTown,
--- RabbitCity, MooseGooseBreedingGrounds, moose_nest.lua
+-- RabbitCity, MooseGooseBreedingGrounds, moose_nest.lua, 
+-- carrot_planted
 -----------------------------------------------------------------
---TODO
+AddRoomPreInit("BGGrass", function(room) 
+    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
+        room.contents.dsitributeprefabs.carrot_planted = 0.05 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+        room.contents.dsitributeprefabs.berrybush = 0.05 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+        room.contents.dsitributeprefabs.berrybush_juicy = 0.025 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.025
+    end
+end)
 
 -----------------------------------------------------------------
--- TODO: berry bushs are rare
+-- Bee box levels are 0,1,2,4 honey (from 0,1,3,6)
 -----------------------------------------------------------------
-
------------------------------------------------------------------
--- TODO: goose setpieces fewer foods WIP
------------------------------------------------------------------
--- Relevant: AddRoomPreInit, MooseBreedingTask, MooseGooseBreedingGrounds, moose_nesting_ground, carrot_planted, berrybush, berrybush_juicy
--- Command: c_gonext("moose_nesting_ground")
---[[ require ("map/room_functions")
-
-AddRoom("MooseGooseBreedingGrounds", {
-	colour={r=0.2,g=0.0,b=0.2,a=0.3},
-	value = GROUND.GRASS,
-	tags = {"ForceConnected", "RoadPoison"},
-	contents =  
-	{
-        countprefabs= 
-        {
-			moose_nesting_ground = 4,
-        },
-        distributepercent = 0.275,
-        distributeprefabs =
-        {
-        	berrybush = 0.1,
-        	berrybush_juicy = 0.1,
-        	carrot_planted = 0.1,
-			flower = 0.333,
-			grass = 0.8,
-			flint = 0.1,
-			sapling = 0.8,
-			twiggytree = .32,
-            evergreen = 1,
-			pond = 0.01,
-        },
+AddPrefabPostInit("beebox", function (inst)
+    levels =
+    {
+        { amount=3, idle="honey3", hit="hit_honey3" },
+        { amount=2, idle="honey2", hit="hit_honey2" },
+        { amount=1, idle="honey1", hit="hit_honey1" },
+        { amount=0, idle="bees_loop", hit="hit_idle" },
     }
-}) ]]--
+end)
+
+-----------------------------------------------------------------
+-- Haunting pig torches only creates the pig with 10% chance
+-----------------------------------------------------------------
+local function CustomTorchHaunt(inst)
+    if math.random() <= TUNING.HAUNT_CHANCE_RARE then
+        inst.components.fueled:TakeFuelItem(SpawnPrefab("pigtorch_fuel"))
+        inst.components.spawner:ReleaseChild()
+    end
+end
+
+AddPrefabPostInit("pigtorch", function(inst)
+    if inst~= nil and inst.components.hauntable ~= nil then
+        --TODO fix AddHauntableCustomReaction(inst, CustomTorchHaunt, true, nil, true)
+    end
+end)
 
 -----------------------------------------------------------------
 -- TODO:carrots sometimes are other veggies

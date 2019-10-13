@@ -1,14 +1,26 @@
 ----------------------------------------------------------------------------------------------------------
--- Nerf therml stone stacking
+-- Remove thermal stone sewing
 -- Relevant: heatrock.lua
 ----------------------------------------------------------------------------------------------------------
---TODO
+local function DoSewing(self, target, doer)
+    if self ~= nil and self.inst ~= nil then
+        local _OldDoSewing = self.DoSewing
+        
+        self.DoSewing = function(self, target, doer)
+            if target ~= nil and not target:HasTag("heatrock") then --<< Check for thermal
+                _OldDoSewing(self, target, doer)
+            end
+        end
+    end
+end
+AddComponentPostInit("sewing", DoSewing)
+--TODO thermal stone stacking
 
 ----------------------------------------------------------------------------------------------------------
 -- Make thermal stone very ineffective if no winter clothing found
--- Relevant: heatrock.lua
+-- Relevant: heatrock.lua, HeatFn, heater:SetThermics
 ----------------------------------------------------------------------------------------------------------
---TODO
+--TODO thermal stone ineffetive without clothes
 
 ----------------------------------------------------------------------------------------------------------
 -- Make you take damage randomly when at Max Moisture wetness, by falling and knockbacking
@@ -31,7 +43,7 @@ local function trip_chance_check()
 end
 
 local function trip_over_chance_on_maxwet(player)
-    if player~=nil and (player:GetMoisture() == player:GetMaxMoisture()) and player.sg ~= nil and player.sg:HasStateTag("moving") then
+    if player~=nil and player:HasTag("character") and (player:GetMoisture() == player:GetMaxMoisture()) and player.sg ~= nil and player.sg:HasStateTag("moving") then
         local time = GLOBAL.GetTime()
         if player.components.moisture.lastslip_check < time - 1 then
             if player.components.moisture.lastslip_time < time - GLOBAL.TUNING.DSTU.TRIPOVER_ONMAXWET_COOLDOWN  then
@@ -74,9 +86,9 @@ AddComponentPostInit("moisture", OnUpdate)
 -- Increase the chance of dropping wet tool on hit
 -- Relevant: inventoryitemmoisture.lua, moisture.lua, player_common.lua (DropWetTool)
 ----------------------------------------------------------------------------------------------------------
---TODO: Get this working
+--Note: Not working, removed plans of adding this
 
-local function DropWetTool(inst, data)
+--[[local function DropWetTool(inst, data)
     --Tool slip.
     if inst.components.moisture:GetSegs() < 4 then
         return
@@ -132,7 +144,6 @@ local function DropWetTool(inst, data)
 end
 
 local function OnAttackOther(inst, data)
-    print("OnAttackOther")
     if data ~= nil and data.target ~= nil and data.target:HasTag("player") then
         inst.hasAttackedPlayer = true
     end
@@ -142,18 +153,9 @@ local function OnAttackOther(inst, data)
 end
 
 
-AddPrefabPostInit("player_common", function(inst)
+AddPlayerPostInit(function(inst)
     if inst ~= nil then 
-        print("ListenForEvent")
         inst:ListenForEvent("onattackother", OnAttackOther)
     end
 end)
-
--- Anyone know how to change a Class's function post init, similar to AddPrefabPostInit? I want to change Moisture:LongUpdate inside this https://pastebin.com/q23J9kpt
-
--- Other code snippets:
--- local waterproofness = (v.components.inventory and math.min(v.components.inventory:GetWaterproofness(),1)) or 0
--- moisture:DoDelta(wetamount * (1 - waterproofness))
--- self.inst.components.moisture:GetMoisture()
--- self.inst.components.moisture:GetMaxMoisture()
--- owner.components.moisture:GetMoisture())
+]]
