@@ -22,9 +22,9 @@ TUNING.DSTU =
     --Food changes
     ----------------------------------------------------------------------------
     --Global appearance rate of carrots and bushs
-    FOOD_CARROT_PLANTED_APPEARANCE_PERCENT = 0.2, --20% the carrots
-    FOOD_BERRY_NORMAL_APPEARANCE_PERCENT = 0.33, --33% the bushs
-    FOOD_BERRY_JUICY_APPEARANCE_PERCENT = 0.33, --33 the juicy bushs
+    FOOD_CARROT_PLANTED_APPEARANCE_PERCENT = 0.1, 
+    FOOD_BERRY_NORMAL_APPEARANCE_PERCENT = 0.20, 
+    FOOD_BERRY_JUICY_APPEARANCE_PERCENT = 0.20, 
     
     --Growth time increase for stone fruits
     STONE_FRUIT_GROWTH_INCREASE = 3,
@@ -61,7 +61,7 @@ TUNING.DSTU =
     ----------------------------------------------------------------------------
     --Generics
     MONSTER_BAT_CAVE_NR_INCREASE = 3,
-    MONSTER_CATCOON_HEALTH_CHANGE = TUNING.CATCOON_LIFE * 2,
+    MONSTER_CATCOON_HEALTH_CHANGE = TUNING.CATCOON_LIFE * 5,
     
     --Mctusk
     MONSTER_MCTUSK_HEALTH_INCREASE = 3,
@@ -83,7 +83,7 @@ TUNING.DSTU =
     --Character changes
     ----------------------------------------------------------------------------
     --Woodie
-    GOOSE_WATER_WETNESS_RATE = 2,
+    GOOSE_WATER_WETNESS_RATE = 3,
 
     --Wolfgang
     WOLFGANG_SANITY_MULTIPLIER = 1.5, --prev was 1.1

@@ -118,7 +118,7 @@
 
 * [x]  Wolfgang sanity drain to 1.5x (prev was 1.1x)
 
-* [x]  Catcoon have triple the health
+* [x]  Catcoon have 5x the health
 
 * [x]  Tooth traps burn
 
@@ -138,7 +138,9 @@
 
 * [x]  Walrus has more health and ice doggos
 
-* [x]  Haunting pig torches has a low chance of spawning a pig guard now
+* [ ]  Haunting pig torches has a low chance of spawning a pig guard now
+
+* [x]  Only winona can power her generators
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 

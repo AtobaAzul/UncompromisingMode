@@ -7,3 +7,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 --	[ 		Recipe Descriptions		]	-- Text for every recipes
 
 RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
+
+GLOBAL.STRINGS.CHARACTERS.GENERIC.ANNOUNCE_WINONAGEN = "I don't think I'm qualified to use that"

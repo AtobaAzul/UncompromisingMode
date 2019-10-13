@@ -4,6 +4,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 
 --	[ 		Webber Descriptions		]	--
 
+GLOBAL.STRINGS.CHARACTERS.WEBBER.ANNOUNCE_WINONAGEN = "We don't know, we haven't listened enough in school"
+
 	ANNOUNCE.ANNOUNCE_WIRLYSHARE_YUCK = 
 	{
 		"Don't you have something better, Wirly?",

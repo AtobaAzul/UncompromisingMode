@@ -86,9 +86,9 @@ AddComponentPostInit("moisture", OnUpdate)
 -- Increase the chance of dropping wet tool on hit
 -- Relevant: inventoryitemmoisture.lua, moisture.lua, player_common.lua (DropWetTool)
 ----------------------------------------------------------------------------------------------------------
---TODO: Get tool slip working
+--Note: Not working, removed plans of adding this
 
-local function DropWetTool(inst, data)
+--[[local function DropWetTool(inst, data)
     --Tool slip.
     if inst.components.moisture:GetSegs() < 4 then
         return
@@ -158,4 +158,4 @@ AddPlayerPostInit(function(inst)
         inst:ListenForEvent("onattackother", OnAttackOther)
     end
 end)
-
+]]
