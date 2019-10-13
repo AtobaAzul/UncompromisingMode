@@ -84,6 +84,8 @@
 
 * [ ]  Sinking on a boat is instant death
 
+* [x]  Bishops now flee inbetween attacks
+
 * [x]  Mod settings for disabling/enabling features
 
 * [x]  Pigs and bunnies defend their houses when hammered
@@ -141,6 +143,8 @@
 * [ ]  Haunting pig torches has a low chance of spawning a pig guard now
 
 * [x]  Only winona can power her generators
+
+* [x]  Bee Queen now has an AOE that ignores hives and bees
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
