@@ -102,5 +102,36 @@ AddPrefabPostInit("pigtorch", function(inst)
 end)
 
 -----------------------------------------------------------------
+-- Tree growth is slower
+-----------------------------------------------------------------
+local xc = GLOBAL.TUNING.DSTU.TREE_GROWTH_TIME_INCREASE
+
+GLOBAL.TUNING.EVERGREEN_GROW_TIME =
+{
+    {base=1.5*day_time*xc, random=0.5*day_time},   --short
+    {base=5*day_time*xc, random=2*day_time},   --normal
+    {base=5*day_time*xc, random=2*day_time},   --tall
+    {base=1*day_time*xc, random=0.5*day_time}   --old
+}
+
+GLOBAL.TUNING.TWIGGY_TREE_GROW_TIME =
+{
+    {base=1.5*day_time*xc, random=0.5*day_time},   --short
+    {base=3*day_time*xc, random=1*day_time},   --normal
+    {base=3*day_time*xc, random=1*day_time},   --tall
+    {base=5*day_time*xc, random=0.5*day_time}   --old
+}
+
+GLOBAL.TUNING.PINECONE_GROWTIME = {base=0.75*day_time*xc, random=0.25*day_time}
+
+GLOBAL.TUNING.DECIDUOUS_GROW_TIME =
+{
+    {base=1.5*day_time*xc, random=0.5*day_time},   --short
+    {base=5*day_time*xc, random=2*day_time},   --normal
+    {base=5*day_time*xc, random=2*day_time},   --tall
+    {base=1*day_time*xc, random=0.5*day_time}   --old
+}
+
+-----------------------------------------------------------------
 -- TODO:carrots sometimes are other veggies
 -----------------------------------------------------------------
