@@ -313,6 +313,39 @@ end)
 
 
 -----------------------------------------------------------------
+-- Bunnies don't drop carrots anymore
+-----------------------------------------------------------------
+local beardlordloot = { "beardhair", "beardhair", "monstermeat" }
+local regularloot = { }
+
+local function LootSetupFunction(lootdropper)
+    local guy = lootdropper.inst.causeofdeath
+    if IsCrazyGuy(guy ~= nil and guy.components.follower ~= nil and guy.components.follower.leader or guy) then
+        -- beard lord
+        lootdropper:SetLoot(beardlordloot)
+    else
+        -- regular loot
+        lootdropper:SetLoot(regularloot)
+        lootdropper:AddRandomLoot("meat", 3)
+        lootdropper:AddRandomLoot("manrabbit_tail", 1)
+        lootdropper.numrandomloot = 1
+    end
+end
+AddPrefabPostInit("bunnyman", function (inst)
+    if inst ~= nil and inst.components.lootdropper ~= nil then 
+        inst.components.lootdropper:SetLootSetupFn(LootSetupFunction)
+        LootSetupFunction(inst.components.lootdropper)
+    end
+end)
+
+
+-----------------------------------------------------------------
+-- Eyeplant buff
+-----------------------------------------------------------------
+GLOBAL.TUNING.EYEPLANT_HEALTH = 100,
+GLOBAL.TUNING.EYEPLANT_ATTACK_PERIOD = 0.7,
+
+-----------------------------------------------------------------
 --Pig guards don't hit players if pig king is happy
 --Relevant: pigman.lua, GuardRetargetFn, GuardKeepTargetFn
 -----------------------------------------------------------------
