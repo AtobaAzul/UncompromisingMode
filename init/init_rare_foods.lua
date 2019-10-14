@@ -59,6 +59,41 @@ AddPrefabPostInit("marsh_bush", function(inst)
 end)
 
 -----------------------------------------------------------------
+-- Bunnies don't drop carrots anymore
+-----------------------------------------------------------------
+local beardlordloot = { "beardhair", "beardhair", "monstermeat" }
+local regularloot = { }
+
+local function LootSetupFunction(lootdropper)
+    local guy = lootdropper.inst.causeofdeath
+    if IsCrazyGuy(guy ~= nil and guy.components.follower ~= nil and guy.components.follower.leader or guy) then
+        -- beard lord
+        lootdropper:SetLoot(beardlordloot)
+    else
+        -- regular loot
+        lootdropper:SetLoot(regularloot)
+        lootdropper:AddRandomLoot("meat", 3)
+        lootdropper:AddRandomLoot("manrabbit_tail", 1)
+        lootdropper.numrandomloot = 1
+    end
+end
+AddPrefabPostInit("bunnyman", function (inst)
+    if inst ~= nil and inst.components.lootdropper ~= nil then 
+        inst.components.lootdropper:SetLootSetupFn(LootSetupFunction)
+        LootSetupFunction(inst.components.lootdropper)
+    end
+end)
+
+-----------------------------------------------------------------
+-- Bunny huts respawn bunnies as often as pigs now
+-----------------------------------------------------------------
+AddPrefabPostInit("rabbithouse", function (inst)
+    if inst ~= nil and inst.components.spawner ~= nil then 
+        inst.components.spawner:Configure("bunnyman", GLOBAL.TUNING.TOTAL_DAY_TIME*4)
+    end
+end)
+
+-----------------------------------------------------------------
 -- Carrots and berry bushs are rare now
 -- Relevant: regrowthmanager.lua, RabbitArea, RabbitTown,
 -- RabbitCity, MooseGooseBreedingGrounds, moose_nest.lua, 
