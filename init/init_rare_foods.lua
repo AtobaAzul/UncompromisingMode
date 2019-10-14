@@ -107,6 +107,30 @@ AddRoomPreInit("BGGrass", function(room)
     end
 end)
 
+AddRoomPreInit("RabbitArea", function(room) 
+    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
+        room.contents.dsitributeprefabs.carrot_planted = 0.15 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+    end
+end)
+
+AddRoomPreInit("RabbitTown", function(room) 
+    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
+        room.contents.dsitributeprefabs.carrot_planted = 0.15 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+    end
+end)
+
+AddRoomPreInit("RabbitSinkhole", function(room) 
+    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
+        room.contents.dsitributeprefabs.carrot_planted = 0.1 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+    end
+end)
+
+AddRoomPreInit("MooseGooseBreedingGrounds", function(room) 
+    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
+        room.contents.dsitributeprefabs.carrot_planted = 0.1 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+    end
+end)
+
 -----------------------------------------------------------------
 -- Bee box levels are 0,1,2,4 honey (from 0,1,3,6)
 -----------------------------------------------------------------
