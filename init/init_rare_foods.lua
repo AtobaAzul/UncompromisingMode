@@ -132,6 +132,74 @@ AddRoomPreInit("MooseGooseBreedingGrounds", function(room)
 end)
 
 -----------------------------------------------------------------
+-- Mushrooms are rarer now, with exception of red ones
+-----------------------------------------------------------------
+--blue mushrooms
+AddRoomPreInit("BlueMushForest", function(room) 
+    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
+        room.contents.dsitributeprefabs.blue_mushroom = 0.2 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+    end
+end)
+
+AddRoomPreInit("BlueMushMeadow", function(room) 
+    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
+        room.contents.dsitributeprefabs.blue_mushroom = 0.5 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+    end
+end)
+
+AddRoomPreInit("BlueSpiderForest", function(room) 
+    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
+        room.contents.dsitributeprefabs.blue_mushroom = 0.5 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+    end
+end)
+
+AddRoomPreInit("DropperDesolation", function(room) 
+    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
+        room.contents.dsitributeprefabs.blue_mushroom = 0.35 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+    end
+end)
+
+AddRoomPreInit("FungusNoiseForest", function(room) 
+    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
+        room.contents.dsitributeprefabs.blue_mushroom = 0.2 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+    end
+end)
+
+
+AddRoomPreInit("FungusNoiseMeadow", function(room) 
+    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
+        room.contents.dsitributeprefabs.blue_mushroom = 0.5 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+    end
+end)
+
+
+AddRoomPreInit("MagicalDeciduous", function(room) 
+    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
+        room.contents.dsitributeprefabs.blue_mushroom = 0.5 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+    end
+end)
+
+--green mushrooms
+AddRoomPreInit("GreenMushMeadow", function(room) 
+    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
+        room.contents.dsitributeprefabs.green_mushroom = 1 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+    end
+end)
+
+AddRoomPreInit("GreenMushNoise", function(room) 
+    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
+        room.contents.dsitributeprefabs.green_mushroom = 1 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+    end
+end)
+
+AddRoomPreInit("MagicalDeciduous", function(room) 
+    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
+        room.contents.dsitributeprefabs.green_mushroom = 1 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+    end
+end)
+
+
+-----------------------------------------------------------------
 -- Bee box levels are 0,1,2,4 honey (from 0,1,3,6)
 -----------------------------------------------------------------
 AddPrefabPostInit("beebox", function (inst)
