@@ -24,6 +24,8 @@
 
 - @ Ismael Daniel - Uncompromising logo
 
+- @ Maradyne - Logo editing with white outlines, character specific text descriptions
+
 &nbsp;
 
 Many thanks to the people on discord with the design, votes and discussions on what should make it in the mod collab.
