@@ -24,7 +24,9 @@
 
 - @ Ismael Daniel - Uncompromising logo
 
-- @ Maradyne - Logo editing with white outlines, character specific text descriptions
+## Misc contributors
+
+- @ Maradyne - Quote quality assurance
 
 &nbsp;
 

@@ -417,3 +417,12 @@ AddPrefabPostInit("pigking", function (inst)
     end
 end)
 ]]
+-----------------------------------------------------------------
+--Werepigs prefer feasting on live meat (Werepigs prefer to attack over eating) -Axe
+--Relevant: werepigbrain.lua
+-----------------------------------------------------------------
+local function WerepigIgnoreFood(brain)
+    attack_instead_eat = GLOBAL.ChaseAndAttack(brain.inst, GLOBAL.SpringCombatMod(MAX_CHASE_TIME), GLOBAL.SpringCombatMod(MAX_CHASE_DIST))
+    table.insert(brain.bt.root.children, 3, attack_instead_eat)
+end
+AddBrainPostInit("werepigbrain", WerepigIgnoreFood)
