@@ -24,6 +24,10 @@
 
 - @ Ismael Daniel - Uncompromising logo
 
+## Misc contributors
+
+- @ Maradyne - Quote quality assurance
+
 &nbsp;
 
 Many thanks to the people on discord with the design, votes and discussions on what should make it in the mod collab.
