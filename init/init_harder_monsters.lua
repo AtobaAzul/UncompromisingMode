@@ -313,6 +313,12 @@ end)
 
 
 -----------------------------------------------------------------
+-- Eyeplant buff
+-----------------------------------------------------------------
+GLOBAL.TUNING.EYEPLANT_HEALTH = 100
+GLOBAL.TUNING.EYEPLANT_ATTACK_PERIOD = 0.7
+
+-----------------------------------------------------------------
 --Pig guards don't hit players if pig king is happy
 --Relevant: pigman.lua, GuardRetargetFn, GuardKeepTargetFn
 -----------------------------------------------------------------
