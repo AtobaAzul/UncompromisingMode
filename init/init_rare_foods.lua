@@ -64,19 +64,37 @@ end)
 local beardlordloot = { "beardhair", "beardhair", "monstermeat" }
 local regularloot = { }
 
+local function SetBeardLord(inst)
+    inst.beardlord = true
+    if inst.clearbeardlordtask ~= nil then
+        inst.clearbeardlordtask:Cancel()
+    end
+    inst.clearbeardlordtask = inst:DoTaskInTime(5, ClearBeardlord)
+end
+
+local function IsCrazyGuy(guy)
+    local sanity = guy ~= nil and guy.replica.sanity or nil
+    return sanity ~= nil and sanity:IsInsanityMode() and sanity:GetPercentNetworked() <= (guy:HasTag("dappereffects") and TUNING.DAPPER_BEARDLING_SANITY or TUNING.BEARDLING_SANITY)
+end
+
 local function LootSetupFunction(lootdropper)
-    local guy = lootdropper.inst.causeofdeath
-    if IsCrazyGuy(guy ~= nil and guy.components.follower ~= nil and guy.components.follower.leader or guy) then
-        -- beard lord
-        lootdropper:SetLoot(beardlordloot)
-    else
-        -- regular loot
-        lootdropper:SetLoot(regularloot)
-        lootdropper:AddRandomLoot("meat", 3)
-        lootdropper:AddRandomLoot("manrabbit_tail", 1)
-        lootdropper.numrandomloot = 1
+    if lootdropper.inst ~= nil then 
+        local guy = lootdropper.inst.causeofdeath
+    
+        if IsCrazyGuy(guy ~= nil and guy.components.follower ~= nil and guy.components.follower.leader or guy) then
+            -- beard lord
+            lootdropper:SetLoot(beardlordloot)
+        else
+            -- regular loot
+            lootdropper:SetLoot(regularloot)
+            lootdropper:AddRandomLoot("meat", 3)
+            lootdropper:AddRandomLoot("manrabbit_tail", 1)
+            lootdropper.numrandomloot = 1
+        end
     end
 end
+
+AddPrefabPostInit("bunnyman", LootSetupFunction, IsCrazyGuy, SetBeardLord)
 AddPrefabPostInit("bunnyman", function (inst)
     if inst ~= nil and inst.components.lootdropper ~= nil then 
         inst.components.lootdropper:SetLootSetupFn(LootSetupFunction)
