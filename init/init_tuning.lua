@@ -21,13 +21,17 @@ TUNING.DSTU =
     ----------------------------------------------------------------------------
     --Food changes
     ----------------------------------------------------------------------------
-    --Global appearance rate of carrots and bushs
+    --Global appearance rate of foods
     FOOD_CARROT_PLANTED_APPEARANCE_PERCENT = 0.1, 
     FOOD_BERRY_NORMAL_APPEARANCE_PERCENT = 0.20, 
     FOOD_BERRY_JUICY_APPEARANCE_PERCENT = 0.20, 
+    FOOD_MUSHROOM_GREEN_APPEARANCE_PERCENT = 0.40, 
+    FOOD_MUSHROOM_BLUE_APPEARANCE_PERCENT = 0.20, 
+    FOOD_MUSHROOM_RED_APPEARANCE_PERCENT = 1, 
     
-    --Growth time increase for stone fruits
+    --Growth time increases
     STONE_FRUIT_GROWTH_INCREASE = 3,
+    TREE_GROWTH_TIME_INCREASE = 5,
 
     ----------------------------------------------------------------------------
     --Cooking recipe changes
@@ -55,11 +59,6 @@ TUNING.DSTU =
     --Celestial portal costs
     RECIPE_MOONROCK_IDOL_MOONSTONE_COST = 5,
     RECIPE_CELESTIAL_UPGRADE_GLASS_COST = 20,
-
-    ----------------------------------------------------------------------------
-    --Resource changes
-    ----------------------------------------------------------------------------
-    TREE_GROWTH_TIME_INCREASE = 5,
 
     ----------------------------------------------------------------------------
     --Mob changes
