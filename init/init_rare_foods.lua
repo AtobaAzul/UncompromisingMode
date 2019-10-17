@@ -257,9 +257,35 @@ local function CustomTorchHaunt(inst)
     end
 end
 
+function AddHauntableCustomReaction(inst, fn, secondrxn, ignoreinitialresult, ignoresecondaryresult)
+    if not inst.components.hauntable then inst:AddComponent("hauntable") end
+    local onhaunt = inst.components.hauntable.onhaunt
+    inst.components.hauntable:SetOnHauntFn(function(inst, haunter)
+        local result = false
+        if secondrxn then -- Custom reaction to come after any existing reactions (i.e. additional effects that are conditional on existing reactions)
+            if onhaunt then
+                result = onhaunt(inst, haunter)
+            end
+            if not onhaunt or result or ignoreinitialresult then -- Can use ignore flags if we don't care about the return value of a given part
+                local prevresult = result
+                result = fn(inst, haunter)
+                if ignoresecondaryresult then result = prevresult end
+            end
+        else -- Custom reaction to come before any existing reactions (i.e. conditions required for existing reaction to trigger)
+            result = fn(inst, haunter)
+            if (result or ignoreinitialresult) and onhaunt then -- Can use ignore flags if we don't care about the return value of a given part
+                local prevresult = result
+                result = onhaunt(inst, haunter)
+                if ignoresecondaryresult then result = prevresult end
+            end
+        end
+        return result
+    end)
+end
+
 AddPrefabPostInit("pigtorch", function(inst)
     if inst~= nil and inst.components.hauntable ~= nil then
-        --TODO fix AddHauntableCustomReaction(inst, CustomTorchHaunt, true, nil, true)
+        AddHauntableCustomReaction(inst, CustomTorchHaunt, true, nil, true)
     end
 end)
 
