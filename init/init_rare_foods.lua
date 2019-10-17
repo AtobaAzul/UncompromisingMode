@@ -112,6 +112,32 @@ AddPrefabPostInit("rabbithouse", function (inst)
 end)
 
 -----------------------------------------------------------------
+-- Butterflies appearance rate depends on nr of players
+-----------------------------------------------------------------
+--TODO: nerf
+local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
+
+AddPrefabPostInit("world", function(inst)
+    --Get the old functions using upvalue hacker
+    local _scheduledtasks = UpvalueHacker.GetUpvalue(GLOBAL.Prefabs.winona_battery_high.fn, "ScheduleSpawn", "_scheduledtasks")
+    local SpawnButterflyForPlayer = UpvalueHacker.GetUpvalue(GLOBAL.Prefabs.winona_battery_high.fn, "ScheduleSpawn", "SpawnButterflyForPlayer")
+    local ScheduleSpawn = UpvalueHacker.GetUpvalue(GLOBAL.Prefabs.winona_battery_high.fn, "ScheduleSpawn", "ScheduleSpawn")
+    local _activeplayers = UpvalueHacker.GetUpvalue(GLOBAL.Prefabs.winona_battery_high.fn, "ScheduleSpawn", "_activeplayers")
+
+    local function ScheduleSpawn(player, initialspawn)
+        if _scheduledtasks[player] == nil then
+            local basedelay = initialspawn and 0.3 or 10
+            _scheduledtasks[player] = player:DoTaskInTime(basedelay + math.random() * 10 * #_activeplayers, SpawnButterflyForPlayer, ScheduleSpawn)
+                                                                                    --^ Here we lower chance based on player nr
+        end
+    end
+    --Now replace the function with our modified one
+    UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.winona_battery_high.fn, ScheduleSpawn, "ScheduleSpawn")
+ 
+end)
+
+
+-----------------------------------------------------------------
 -- Carrots, mushroos and berry bushs are rare now
 -- Relevant: regrowthmanager.lua, map\rooms
 -- red_mushroom 
