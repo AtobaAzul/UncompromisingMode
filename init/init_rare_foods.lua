@@ -114,7 +114,6 @@ end)
 -----------------------------------------------------------------
 -- Butterflies appearance rate depends on nr of players
 -----------------------------------------------------------------
---TODO: nerf
 local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
 
 AddPrefabPostInit("world", function(inst)
@@ -134,6 +133,22 @@ AddPrefabPostInit("world", function(inst)
     --Now replace the function with our modified one
     UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.winona_battery_high.fn, ScheduleSpawn, "ScheduleSpawn")
  
+end)
+
+-----------------------------------------------------------------
+-- Bees don't drop honey no more
+-----------------------------------------------------------------
+local stinger_only = { "stinger" }
+AddPrefabPostInit("bee", function(inst)
+    if inst ~= nil and inst.components.lootdropper ~= nil then
+        lootdropper:SetLoot(stinger_only)
+    end
+end)
+
+AddPrefabPostInit("killerbee", function(inst)
+    if inst ~= nil and inst.components.lootdropper ~= nil then
+        lootdropper:SetLoot(stinger_only)
+    end
 end)
 
 
