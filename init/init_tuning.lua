@@ -71,6 +71,9 @@ TUNING.DSTU =
     MONSTER_MCTUSK_HEALTH_INCREASE = 3,
     MONSTER_MCTUSK_HOUND_NUMBER = 5,
 
+    --Hounds
+    MONSTER_HOUNDS_PER_WAVE_INCREASE = 1.5, --Controlled by player settings
+
     ----------------------------------------------------------------------------
     --Player changes
     ----------------------------------------------------------------------------

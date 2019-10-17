@@ -104,6 +104,52 @@ end
 AddBrainPostInit("walrusbrain", WalrusLeashFix)
 
 -----------------------------------------------------------------
+--More hounds in hound waves config
+--Relevant hounded.lua
+-----------------------------------------------------------------
+local HOUND_INCREASE = GLOBAL.TUNING.DSTU.MONSTER_HOUNDS_PER_WAVE_INCREASE
+
+local houndspawn =
+{
+    base_prefab = "hound",
+    winter_prefab = "icehound",
+    summer_prefab = "firehound",
+
+    local attack_levels =
+    {
+        intro	=	{ warnduration = function() return 120 end, numspawns = function() return GLOBAL.math.floor(2 * HOUND_INCREASE) end },
+        light	=	{ warnduration = function() return 60 end, numspawns = function() return GLOBAL.math.floor(2 + GLOBAL.math.random(2)) * HOUND_INCREASE end },
+        med		=	{ warnduration = function() return 45 end, numspawns = function() return GLOBAL.math.floor(3 + GLOBAL.math.random(3) * HOUND_INCREASE end },
+        heavy	=	{ warnduration = function() return 30 end, numspawns = function() return GLOBAL.math.floor(4 + GLOBAL.math.random(3)* HOUND_INCREASE end },
+        crazy	=	{ warnduration = function() return 30 end, numspawns = function() return GLOBAL.math.floor(6 + GLOBAL.math.random(4))* HOUND_INCREASE end },
+    },
+
+    attack_delays =
+    {
+        rare        = function() return TUNING.TOTAL_DAY_TIME * 6, math.random() * TUNING.TOTAL_DAY_TIME * 7 end,
+        occasional  = function() return TUNING.TOTAL_DAY_TIME * 4, math.random() * TUNING.TOTAL_DAY_TIME * 7 end,
+        frequent    = function() return TUNING.TOTAL_DAY_TIME * 3, math.random() * TUNING.TOTAL_DAY_TIME * 5 end,
+    },
+
+    warning_speech = "ANNOUNCE_HOUNDS",
+
+    --Key = time, Value = sound prefab
+    warning_sound_thresholds =
+    {
+        { time = 30, sound =  "LVL4" },
+        { time = 60, sound =  "LVL3" },
+        { time = 90, sound =  "LVL2" },
+        { time = 500, sound = "LVL1" },
+    },
+}
+
+AddPrefabPostInit("forest", function(inst)
+    if inst~= nil and inst.hounded ~= nil then
+        inst.hounded:SetSpawnData(houndspawn)
+    end
+end)
+
+-----------------------------------------------------------------
 --Pigs and bunnies defend their turf if their home is destroyed
 -----------------------------------------------------------------
 local pigtaunts = 

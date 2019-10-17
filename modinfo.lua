@@ -171,4 +171,19 @@ configuration_options =
 		},
 		default = true,
 	},
+	{
+		name = "hound_increase",
+		label = "Hound Number Increase",
+		hover = "The hounds grow hungry.",
+		options =
+		{
+			{description = "1.0x", data = 1},
+			{description = "1.5x", data = 1.5},
+			{description = "2.0x", data = 2},
+			{description = "2.5x", data = 2.5},
+			{description = "3.0x", data = 3},
+			{description = "5.0x", data = 5},
+		},
+		default = 1.5,
+	},
 }
