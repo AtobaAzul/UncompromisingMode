@@ -298,5 +298,15 @@ GLOBAL.TUNING.DECIDUOUS_GROW_TIME =
 }
 
 -----------------------------------------------------------------
--- TODO:carrots sometimes are other veggies
+-- Gobblers drop only 1 leg
 -----------------------------------------------------------------
+local single_drumstick =
+{
+    "drumstick",
+}
+AddPrefabPostInit("killerbee", function(inst)
+    if inst ~= nil and inst.components.lootdropper ~= nil then
+        inst.components.lootdropper:SetLoot(single_drumstick)
+    end
+end)
+
