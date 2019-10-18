@@ -114,14 +114,15 @@ end)
 -----------------------------------------------------------------
 -- Butterflies appearance rate depends on nr of players
 -----------------------------------------------------------------
-local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
-
-AddPrefabPostInit("world", function(inst)
+--TODO complicated but doable
+--[[local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
+AddClassPostConstruct("components/butterflyspawner", function(self)
+    local _activeplayers = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "_activeplayers")
+    local _scheduledtasks = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "_scheduledtasks")
     --Get the old functions using upvalue hacker
-    local _scheduledtasks = UpvalueHacker.GetUpvalue(GLOBAL.Prefabs.winona_battery_high.fn, "ScheduleSpawn", "_scheduledtasks")
-    local SpawnButterflyForPlayer = UpvalueHacker.GetUpvalue(GLOBAL.Prefabs.winona_battery_high.fn, "ScheduleSpawn", "SpawnButterflyForPlayer")
-    local ScheduleSpawn = UpvalueHacker.GetUpvalue(GLOBAL.Prefabs.winona_battery_high.fn, "ScheduleSpawn", "ScheduleSpawn")
-    local _activeplayers = UpvalueHacker.GetUpvalue(GLOBAL.Prefabs.winona_battery_high.fn, "ScheduleSpawn", "_activeplayers")
+    local SpawnButterflyForPlayer = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "SpawnButterflyForPlayer")
+    local ScheduleSpawn = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "ScheduleSpawn")
+    
 
     local function ScheduleSpawn(player, initialspawn)
         if _scheduledtasks[player] == nil then
@@ -131,9 +132,11 @@ AddPrefabPostInit("world", function(inst)
         end
     end
     --Now replace the function with our modified one
-    UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.winona_battery_high.fn, ScheduleSpawn, "ScheduleSpawn")
- 
-end)
+    UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.butterflyspawner.fn, ScheduleSpawn, "ScheduleSpawn")
+end
+AddPrefabPostInit("world", function(inst)
+    
+end)]]
 
 -----------------------------------------------------------------
 -- Bees don't drop honey no more
@@ -141,13 +144,13 @@ end)
 local stinger_only = { "stinger" }
 AddPrefabPostInit("bee", function(inst)
     if inst ~= nil and inst.components.lootdropper ~= nil then
-        lootdropper:SetLoot(stinger_only)
+        inst.components.lootdropper:SetLoot(stinger_only)
     end
 end)
 
 AddPrefabPostInit("killerbee", function(inst)
     if inst ~= nil and inst.components.lootdropper ~= nil then
-        lootdropper:SetLoot(stinger_only)
+        inst.components.lootdropper:SetLoot(stinger_only)
     end
 end)
 
@@ -204,7 +207,7 @@ local CHANGED_ROOMS =
 }
 
 local function ChangeSpawnRates(room)
-    if room ~= nil and and room.changed == nil and room.contents.dsitributeprefabs ~= nil then
+    if room ~= nil and room.changed == nil and room.contents.dsitributeprefabs ~= nil then
         if room.contents.dsitributeprefabs.carrot_planted ~= nil then 
             room.contents.dsitributeprefabs.carrot_planted = room.contents.dsitributeprefabs.carrot_planted * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  
         end
@@ -227,9 +230,9 @@ local function ChangeSpawnRates(room)
     end
 end
 
-for k in CHANGED_ROOMS do
-	AddRoomPreInit(k, function(inst)
-		ChangeSpawnRates(k)
+for k, v in pairs(CHANGED_ROOMS) do
+	AddRoomPreInit(v, function(inst)
+		ChangeSpawnRates(inst)
 	end)
 end
 
@@ -252,40 +255,14 @@ end)
 -----------------------------------------------------------------
 local function CustomTorchHaunt(inst)
     if math.random() <= TUNING.HAUNT_CHANCE_RARE then
-        inst.components.fueled:TakeFuelItem(SpawnPrefab("pigtorch_fuel"))
+        inst.components.fueled:TakeFuelItem(GLOBAL.SpawnPrefab("pigtorch_fuel"))
         inst.components.spawner:ReleaseChild()
     end
 end
 
-function AddHauntableCustomReaction(inst, fn, secondrxn, ignoreinitialresult, ignoresecondaryresult)
-    if not inst.components.hauntable then inst:AddComponent("hauntable") end
-    local onhaunt = inst.components.hauntable.onhaunt
-    inst.components.hauntable:SetOnHauntFn(function(inst, haunter)
-        local result = false
-        if secondrxn then -- Custom reaction to come after any existing reactions (i.e. additional effects that are conditional on existing reactions)
-            if onhaunt then
-                result = onhaunt(inst, haunter)
-            end
-            if not onhaunt or result or ignoreinitialresult then -- Can use ignore flags if we don't care about the return value of a given part
-                local prevresult = result
-                result = fn(inst, haunter)
-                if ignoresecondaryresult then result = prevresult end
-            end
-        else -- Custom reaction to come before any existing reactions (i.e. conditions required for existing reaction to trigger)
-            result = fn(inst, haunter)
-            if (result or ignoreinitialresult) and onhaunt then -- Can use ignore flags if we don't care about the return value of a given part
-                local prevresult = result
-                result = onhaunt(inst, haunter)
-                if ignoresecondaryresult then result = prevresult end
-            end
-        end
-        return result
-    end)
-end
-
 AddPrefabPostInit("pigtorch", function(inst)
     if inst~= nil and inst.components.hauntable ~= nil then
-        AddHauntableCustomReaction(inst, CustomTorchHaunt, true, nil, true)
+        inst.components.hauntable:SetOnHauntFn(CustomTorchHaunt)
     end
 end)
 
