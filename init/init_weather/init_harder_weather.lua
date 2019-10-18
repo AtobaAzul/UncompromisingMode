@@ -56,7 +56,6 @@ local function trip_over_chance_on_maxwet(player)
                     player.components.moisture.lastslip_time = time
                 end
             end
-            print("check")
             player.components.moisture.lastslip_check = time
         end
     end

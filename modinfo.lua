@@ -1,7 +1,7 @@
 name = "    Uncompromising Mode"
 description = 
 [[
-󰀔 [ Version 1.0 : "Uncompromising Start" ]
+󰀔 [ Version 1.1.0 : "Pests & Pestilence Update" ]
 
 
 
@@ -20,7 +20,7 @@ description =
 							   ⬇Config⬇		 ⬇Infos⬇]]
 
 author = "Uncompromising Team"
-version = "1.0.0"
+version = "1.1.0"
 
 forumthread = ""
 

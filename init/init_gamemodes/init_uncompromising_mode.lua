@@ -86,7 +86,10 @@ local require = GLOBAL.require
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_weather")) then
-		modimport("init/init_harder_weather")
+		modimport("init/init_weather/init_acid_rain_effects")
+		modimport("init/init_weather/init_acid_rain_disease")
+		modimport("init/init_weather/init_overworld_toadstool")
+		modimport("init/init_weather/init_harder_weather")
 	end
 
 	--TODO: Add settings for each individual character after we add many changes
