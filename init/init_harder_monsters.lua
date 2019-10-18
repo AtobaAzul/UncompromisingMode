@@ -397,6 +397,10 @@ GLOBAL.TUNING.EYEPLANT_HEALTH = 100
 GLOBAL.TUNING.EYEPLANT_ATTACK_PERIOD = 0.7
 
 -----------------------------------------------------------------
+-- Beefalo herding buff - TODO: Increase range of aggro
+-----------------------------------------------------------------
+
+-----------------------------------------------------------------
 --Pig guards don't hit players if pig king is happy
 --Relevant: pigman.lua, GuardRetargetFn, GuardKeepTargetFn
 -----------------------------------------------------------------

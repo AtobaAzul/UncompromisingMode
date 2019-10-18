@@ -2,66 +2,42 @@
 -----------------------------------------------------------------
 -- Remove pathing collision exploit by making objects noclip
 -----------------------------------------------------------------
---[[
-fossil_stalker
-lava_pond
-homesign
-arrowsign_post
-statueharp
-statue_marble
-gravestone
-sculpture_???
-]]--
+--TODO: Remove lava and make larvae destroy walls
 
---TODO: Make lava give more damage when on top
+local IMPASSABLES = 
+{
+    "chesspiece_pawn",         
+    "chesspiece_rook",         
+    "chesspiece_knight",       
+    "chesspiece_bishop",       
+    "chesspiece_muse",         
+    "chesspiece_formal",       
+    "chesspiece_deerclops",    
+    "chesspiece_bearger",      
+    "chesspiece_moosegoose",   
+    "chesspiece_dragonfly",    
+    "chesspiece_clayhound",    
+    "chesspiece_claywarg",     
+    "chesspiece_butterfly",    
+    "chesspiece_anchor",       
+    "chesspiece_moon",
+    "endtable",
+    "fossil_stalker",
+    "lava_pond",
+    "homesign",
+    "statueharp",
+    "statue_marble",
+    "gravestone",
+    "arrowsign_post",
+}
 
-AddPrefabPostInit("endtable", function(inst)
-    if inst~= nil and inst.Physics ~= nil then
-        GLOBAL.RemovePhysicsColliders(inst)
-    end
-end)
-
-AddPrefabPostInit("fossil_stalker", function(inst)
-    if inst~= nil and inst.Physics ~= nil then
-        GLOBAL.RemovePhysicsColliders(inst)
-    end
-end)
-
-AddPrefabPostInit("lava_pond", function(inst)
-    if inst~= nil and inst.Physics ~= nil then
-        GLOBAL.RemovePhysicsColliders(inst)
-    end
-end)
-
-AddPrefabPostInit("homesign", function(inst)
-    if inst~= nil and inst.Physics ~= nil then
-        GLOBAL.RemovePhysicsColliders(inst)
-    end
-end)
-
-AddPrefabPostInit("statueharp", function(inst)
-    if inst~= nil and inst.Physics ~= nil then
-        GLOBAL.RemovePhysicsColliders(inst)
-    end
-end)
-
-AddPrefabPostInit("statue_marble", function(inst)
-    if inst~= nil and inst.Physics ~= nil then
-        GLOBAL.RemovePhysicsColliders(inst)
-    end
-end)
-
-AddPrefabPostInit("gravestone", function(inst)
-    if inst~= nil and inst.Physics ~= nil then
-        GLOBAL.RemovePhysicsColliders(inst)
-    end
-end)
-
-AddPrefabPostInit("arrowsign_post", function(inst)
-    if inst~= nil and inst.Physics ~= nil then
-        GLOBAL.RemovePhysicsColliders(inst)
-    end
-end)
+for k, v in pairs(IMPASSABLES) do
+	AddPrefabPostInit(v, function(inst)
+        if inst~= nil and inst.Physics ~= nil then
+            GLOBAL.RemovePhysicsColliders(inst)
+        end
+    end)
+end
 
 -----------------------------------------------------------------
 -- Tooth traps burn (they are literally logs with teeth)

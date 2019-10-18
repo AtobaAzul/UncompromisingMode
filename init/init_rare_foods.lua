@@ -304,9 +304,35 @@ local single_drumstick =
 {
     "drumstick",
 }
-AddPrefabPostInit("killerbee", function(inst)
+AddPrefabPostInit("perd", function(inst)
     if inst ~= nil and inst.components.lootdropper ~= nil then
         inst.components.lootdropper:SetLoot(single_drumstick)
     end
 end)
 
+-----------------------------------------------------------------
+-- Koela drop only 4 meat (like beefalos)
+-----------------------------------------------------------------
+local loot_summer = {"meat","meat","meat","meat","trunk_summer"}
+local loot_winter = {"meat","meat","meat","meat","trunk_winter"}
+local loot_fire = {"meat","meat","meat","meat","trunk"}
+
+local function lootsetfn(lootdropper)
+    if lootdropper.inst.components.burnable ~= nil and lootdropper.inst.components.burnable:IsBurning() or lootdropper.inst:HasTag("burnt") then
+        lootdropper:SetLoot(loot_fire)
+    end
+end
+
+AddPrefabPostInit("koalefant_summer", function(inst)
+    if inst ~= nil and inst.components.lootdropper ~= nil then
+        inst.components.lootdropper:SetLootSetupFn(lootsetfn)
+        inst.components.lootdropper:SetLoot(loot_summer)
+    end
+end)
+
+AddPrefabPostInit("koalefant_winter", function(inst)
+    if inst ~= nil and inst.components.lootdropper ~= nil then
+        inst.components.lootdropper:SetLootSetupFn(lootsetfn)
+        inst.components.lootdropper:SetLoot(loot_winter)
+    end
+end)
