@@ -23,6 +23,8 @@ end
 -----------------------------------------------------------------
 -- Nerf on tentacles to spawn 50% a small tentacle
 -----------------------------------------------------------------
+--Disable tentacle book nerf for now, since we have boss AoE
+--[[
 AddPrefabPostInit("tentacle", function(inst)
 	local function retargetfn(inst)
 		return GLOBAL.FindEntity(
@@ -65,6 +67,7 @@ AddPrefabPostInit("tentacle_pillar_arm", function(inst)
 		inst.components.combat:SetRetargetFunction(GLOBAL.GetRandomWithVariance(1, .5), retargetfn)
 	end
 end)
+
 
 AddPrefabPostInit("book_tentacles", function(inst)
 	local function TentacleSpawn(inst, reader)
@@ -111,3 +114,4 @@ AddPrefabPostInit("book_tentacles", function(inst)
 		inst.components.book.onread = TentacleSpawn
 	end
 end)
+]]
