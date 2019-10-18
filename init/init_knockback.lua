@@ -64,7 +64,6 @@ for k, v in pairs(GIANTS) do
 			if other ~= nil and other.components.inventory ~= nil and 
 			--Don't knockback if you wear marble
 			(other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ==nil or not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble")) then
-				print(other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY))
 				other:PushEvent("knockback", {knocker = inst, radius = v.radius, strengthmult = v.power})
 			end
 		end

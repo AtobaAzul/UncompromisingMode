@@ -34,6 +34,15 @@ TUNING.DSTU =
     TREE_GROWTH_TIME_INCREASE = 5,
 
     ----------------------------------------------------------------------------
+    --Acid rain event tuning
+    ----------------------------------------------------------------------------
+    ACID_RAIN_DAMAGE_TICK = 2,
+    ACID_RAIN_START_AFTER_DAY = 70,
+    ACID_RAIN_DISEASE_CHANCE = 0.1, --each 5-10 seconds
+    ACID_RAIN_WAVE_MAX_ATTACKS = 5,
+    ACID_RAIN_WAVE_MIN_ATTACKS = 2,
+
+    ----------------------------------------------------------------------------
     --Cooking recipe changes
     ----------------------------------------------------------------------------
     --Recipe stat changes
