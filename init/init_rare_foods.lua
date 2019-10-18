@@ -112,109 +112,129 @@ AddPrefabPostInit("rabbithouse", function (inst)
 end)
 
 -----------------------------------------------------------------
--- Carrots and berry bushs are rare now
--- Relevant: regrowthmanager.lua, RabbitArea, RabbitTown,
--- RabbitCity, MooseGooseBreedingGrounds, moose_nest.lua, 
--- carrot_planted
+-- Butterflies appearance rate depends on nr of players
 -----------------------------------------------------------------
-AddRoomPreInit("BGGrass", function(room) 
-    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
-        room.contents.dsitributeprefabs.carrot_planted = 0.05 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
-        room.contents.dsitributeprefabs.berrybush = 0.05 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
-        room.contents.dsitributeprefabs.berrybush_juicy = 0.025 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.025
-    end
-end)
+--TODO complicated but doable
+--[[local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
+AddClassPostConstruct("components/butterflyspawner", function(self)
+    local _activeplayers = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "_activeplayers")
+    local _scheduledtasks = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "_scheduledtasks")
+    --Get the old functions using upvalue hacker
+    local SpawnButterflyForPlayer = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "SpawnButterflyForPlayer")
+    local ScheduleSpawn = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "ScheduleSpawn")
+    
 
-AddRoomPreInit("RabbitArea", function(room) 
-    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
-        room.contents.dsitributeprefabs.carrot_planted = 0.15 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+    local function ScheduleSpawn(player, initialspawn)
+        if _scheduledtasks[player] == nil then
+            local basedelay = initialspawn and 0.3 or 10
+            _scheduledtasks[player] = player:DoTaskInTime(basedelay + math.random() * 10 * #_activeplayers, SpawnButterflyForPlayer, ScheduleSpawn)
+                                                                                    --^ Here we lower chance based on player nr
+        end
     end
-end)
-
-AddRoomPreInit("RabbitTown", function(room) 
-    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
-        room.contents.dsitributeprefabs.carrot_planted = 0.15 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
-    end
-end)
-
-AddRoomPreInit("RabbitSinkhole", function(room) 
-    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
-        room.contents.dsitributeprefabs.carrot_planted = 0.1 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
-    end
-end)
-
-AddRoomPreInit("MooseGooseBreedingGrounds", function(room) 
-    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
-        room.contents.dsitributeprefabs.carrot_planted = 0.1 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
-    end
-end)
+    --Now replace the function with our modified one
+    UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.butterflyspawner.fn, ScheduleSpawn, "ScheduleSpawn")
+end
+AddPrefabPostInit("world", function(inst)
+    
+end)]]
 
 -----------------------------------------------------------------
--- Mushrooms are rarer now, with exception of red ones
+-- Bees don't drop honey no more
 -----------------------------------------------------------------
---blue mushrooms
-AddRoomPreInit("BlueMushForest", function(room) 
-    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
-        room.contents.dsitributeprefabs.blue_mushroom = 0.2 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+local stinger_only = { "stinger" }
+AddPrefabPostInit("bee", function(inst)
+    if inst ~= nil and inst.components.lootdropper ~= nil then
+        inst.components.lootdropper:SetLoot(stinger_only)
     end
 end)
 
-AddRoomPreInit("BlueMushMeadow", function(room) 
-    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
-        room.contents.dsitributeprefabs.blue_mushroom = 0.5 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
-    end
-end)
-
-AddRoomPreInit("BlueSpiderForest", function(room) 
-    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
-        room.contents.dsitributeprefabs.blue_mushroom = 0.5 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
-    end
-end)
-
-AddRoomPreInit("DropperDesolation", function(room) 
-    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
-        room.contents.dsitributeprefabs.blue_mushroom = 0.35 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
-    end
-end)
-
-AddRoomPreInit("FungusNoiseForest", function(room) 
-    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
-        room.contents.dsitributeprefabs.blue_mushroom = 0.2 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+AddPrefabPostInit("killerbee", function(inst)
+    if inst ~= nil and inst.components.lootdropper ~= nil then
+        inst.components.lootdropper:SetLoot(stinger_only)
     end
 end)
 
 
-AddRoomPreInit("FungusNoiseMeadow", function(room) 
-    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
-        room.contents.dsitributeprefabs.blue_mushroom = 0.5 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
-    end
-end)
+-----------------------------------------------------------------
+-- Carrots, mushroos and berry bushs are rare now
+-- Relevant: regrowthmanager.lua, map\rooms
+-- red_mushroom 
+-- blue_mushroom
+-- green_mushroom 
+-- berrybush
+-- berrybush_juicy 
+-- carrot_planted 
+-----------------------------------------------------------------
+local CHANGED_ROOMS = 
+{
+    "BGGrass",
+    --mostly carrots
+    "RabbitArea",
+    "RabbitTown",
+    "RabbitSinkhole",
+    --generic
+    "MooseGooseBreedingGrounds",
+    "MagicalDeciduous",
+    "DeciduousClearing",
+    "BGDeciduous",
+    "SpiderIncursion",
+    "DropperDesolation",
+    "RuinedCityEntrance",
+    --blue mush
+    "BlueMushForest",
+    "BlueMushMeadow",
+    "BlueSpiderForest",
+    "BGBlueMush",
+    "BGBlueMushRoom",
+    --fungus noise
+    "FungusNoiseForest",
+    "FungusNoiseMeadow",
+    --green mush
+    "GreenMushMeadow",
+    "GreenMushNoise",
+    "GreenMushForest",
+    "GreenMushPonds",
+    "GreenMushSinkhole",
+    "GreenMushRabbits",
+    "BGGreenMush",
+    "BGGreenMushRoom",
+    --red mush
+    "RedMushForest",
+    "RedSpiderForest",
+    "RedMushPillars",
+    "BGRedMush",
+    "BGRedMushRoom",
+}
 
-
-AddRoomPreInit("MagicalDeciduous", function(room) 
-    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
-        room.contents.dsitributeprefabs.blue_mushroom = 0.5 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
+local function ChangeSpawnRates(room)
+    if room ~= nil and room.changed == nil and room.contents.dsitributeprefabs ~= nil then
+        if room.contents.dsitributeprefabs.carrot_planted ~= nil then 
+            room.contents.dsitributeprefabs.carrot_planted = room.contents.dsitributeprefabs.carrot_planted * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  
+        end
+        if room.contents.dsitributeprefabs.berrybush ~= nil then 
+            room.contents.dsitributeprefabs.berrybush = room.contents.dsitributeprefabs.berrybush * GLOBAL.TUNING.DSTU.FOOD_BERRY_NORMAL_APPEARANCE_PERCENT  
+        end
+        if room.contents.dsitributeprefabs.berrybush_juicy ~= nil then 
+            room.contents.dsitributeprefabs.berrybush_juicy = room.contents.dsitributeprefabs.berrybush_juicy * GLOBAL.TUNING.DSTU.FOOD_BERRY_JUICY_APPEARANCE_PERCENT  
+        end
+        if room.contents.dsitributeprefabs.green_mushroom ~= nil then 
+            room.contents.dsitributeprefabs.green_mushroom = room.contents.dsitributeprefabs.green_mushroom * GLOBAL.TUNING.DSTU.FOOD_MUSHROOM_GREEN_APPEARANCE_PERCENT  
+        end
+        if room.contents.dsitributeprefabs.blue_mushroom ~= nil then 
+            room.contents.dsitributeprefabs.blue_mushroom = room.contents.dsitributeprefabs.blue_mushroom * GLOBAL.TUNING.DSTU.FOOD_MUSHROOM_BLUE_APPEARANCE_PERCENT  
+        end
+        if room.contents.dsitributeprefabs.red_mushroom ~= nil then 
+            room.contents.dsitributeprefabs.red_mushroom = room.contents.dsitributeprefabs.red_mushroom * GLOBAL.TUNING.DSTU.FOOD_MUSHROOM_RED_APPEARANCE_PERCENT  
+        end
+        room.changed = true
     end
-end)
+end
 
---green mushrooms
-AddRoomPreInit("GreenMushMeadow", function(room) 
-    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
-        room.contents.dsitributeprefabs.green_mushroom = 1 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
-    end
-end)
-
-AddRoomPreInit("GreenMushNoise", function(room) 
-    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
-        room.contents.dsitributeprefabs.green_mushroom = 1 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
-    end
-end)
-
-AddRoomPreInit("MagicalDeciduous", function(room) 
-    if room ~= nil and room.contents.dsitributeprefabs ~= nil then
-        room.contents.dsitributeprefabs.green_mushroom = 1 * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  -- Original rate is 0.05
-    end
-end)
+for k, v in pairs(CHANGED_ROOMS) do
+	AddRoomPreInit(v, function(inst)
+		ChangeSpawnRates(inst)
+	end)
+end
 
 
 -----------------------------------------------------------------
@@ -235,14 +255,14 @@ end)
 -----------------------------------------------------------------
 local function CustomTorchHaunt(inst)
     if math.random() <= TUNING.HAUNT_CHANCE_RARE then
-        inst.components.fueled:TakeFuelItem(SpawnPrefab("pigtorch_fuel"))
+        inst.components.fueled:TakeFuelItem(GLOBAL.SpawnPrefab("pigtorch_fuel"))
         inst.components.spawner:ReleaseChild()
     end
 end
 
 AddPrefabPostInit("pigtorch", function(inst)
     if inst~= nil and inst.components.hauntable ~= nil then
-        --TODO fix AddHauntableCustomReaction(inst, CustomTorchHaunt, true, nil, true)
+        inst.components.hauntable:SetOnHauntFn(CustomTorchHaunt)
     end
 end)
 
@@ -278,5 +298,41 @@ GLOBAL.TUNING.DECIDUOUS_GROW_TIME =
 }
 
 -----------------------------------------------------------------
--- TODO:carrots sometimes are other veggies
+-- Gobblers drop only 1 leg
 -----------------------------------------------------------------
+local single_drumstick =
+{
+    "drumstick",
+}
+AddPrefabPostInit("perd", function(inst)
+    if inst ~= nil and inst.components.lootdropper ~= nil then
+        inst.components.lootdropper:SetLoot(single_drumstick)
+    end
+end)
+
+-----------------------------------------------------------------
+-- Koela drop only 4 meat (like beefalos)
+-----------------------------------------------------------------
+local loot_summer = {"meat","meat","meat","meat","trunk_summer"}
+local loot_winter = {"meat","meat","meat","meat","trunk_winter"}
+local loot_fire = {"meat","meat","meat","meat","trunk"}
+
+local function lootsetfn(lootdropper)
+    if lootdropper.inst.components.burnable ~= nil and lootdropper.inst.components.burnable:IsBurning() or lootdropper.inst:HasTag("burnt") then
+        lootdropper:SetLoot(loot_fire)
+    end
+end
+
+AddPrefabPostInit("koalefant_summer", function(inst)
+    if inst ~= nil and inst.components.lootdropper ~= nil then
+        inst.components.lootdropper:SetLootSetupFn(lootsetfn)
+        inst.components.lootdropper:SetLoot(loot_summer)
+    end
+end)
+
+AddPrefabPostInit("koalefant_winter", function(inst)
+    if inst ~= nil and inst.components.lootdropper ~= nil then
+        inst.components.lootdropper:SetLootSetupFn(lootsetfn)
+        inst.components.lootdropper:SetLoot(loot_winter)
+    end
+end)

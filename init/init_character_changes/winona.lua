@@ -74,8 +74,6 @@ AddPrefabPostInit("world", function(inst)
 
     local function OnAddFuel(inst)
         local guy = GLOBAL.FindEntity(inst, 40, nil, { "character" })
-        print(guy)
-        print(guy:HasTag("handyperson"))
         if guy ~= nil and guy:HasTag("handyperson") then 
             if inst.components.fueled.accepting and not inst.components.fueled:IsEmpty() then
                 if not inst.components.fueled.consuming then
@@ -101,7 +99,7 @@ AddPrefabPostInit("world", function(inst)
     end
 
     --Now replace the function with our modified one
-    --UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.winona_battery_low.fn, OnAddFuel, "OnAddFuel")
+    UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.winona_battery_low.fn, OnAddFuel, "OnAddFuel")
 end)
 
 --TODO: add some fail effects

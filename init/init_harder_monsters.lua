@@ -88,20 +88,84 @@ AddPrefabPostInit("walrus", function (inst)
     if inst ~= nil and inst.components ~= nil and inst.components.health ~= nil then
         inst.components.health:SetMaxHealth(TUNING.WALRUS_HEALTH*GLOBAL.TUNING.DSTU.MONSTER_MCTUSK_HEALTH_INCREASE)
     end
+end)
+
+--TODO implement extra hounds
+--[[
+local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
+AddPrefabPostInit("world", function(inst)
+    local NUM_HOUNDS = UpvalueHacker.GetUpvalue(GLOBAL.Prefabs.walrus_camp.create, "OnStartDay", "CheckSpawnHuntingParty","SpawnHuntingParty", "NUM_HOUNDS")
 
     NUM_HOUNDS = GLOBAL.TUNING.DSTU.MONSTER_MCTUSK_HOUND_NUMBER
+    
+    UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.walrus_camp.create, NUM_HOUNDS, "NUM_HOUNDS")
 end)
+]]
 
 --Remove running away useless behavior by reversing Home Leash priority and chase priority
 local function WalrusLeashFix(brain)
     if brain ~= nil and brain.bt.root.children ~= nil then
+        --TODO: fix this
         run = brain.bt.root.children[3]
         leash = brain.bt.root.children[2]
-        brain.bt.root.children[2] = run
-        brain.bt.root.children[3] = leash
+        table.insert(brain.bt.root.children, 2, run)
+        table.insert(brain.bt.root.children, 3, leash)
     end
+    
 end
 AddBrainPostInit("walrusbrain", WalrusLeashFix)
+
+local function WerepigIgnoreFood(brain)
+    attack_instead_eat = GLOBAL.ChaseAndAttack(brain.inst, GLOBAL.SpringCombatMod(MAX_CHASE_TIME), GLOBAL.SpringCombatMod(MAX_CHASE_DIST))
+    table.insert(brain.bt.root.children, 3, attack_instead_eat)
+end
+AddBrainPostInit("werepigbrain", WerepigIgnoreFood)
+
+-----------------------------------------------------------------
+--More hounds in hound waves config
+--Relevant hounded.lua
+-----------------------------------------------------------------
+local HOUND_INCREASE = GLOBAL.TUNING.DSTU.MONSTER_HOUNDS_PER_WAVE_INCREASE
+
+local houndspawn =
+{
+    base_prefab = "hound",
+    winter_prefab = "icehound",
+    summer_prefab = "firehound",
+
+    attack_levels =
+    {
+        intro	=	{ warnduration = function() return 120 end, numspawns = function() return GLOBAL.math.floor(2 * HOUND_INCREASE) end },
+        light	=	{ warnduration = function() return 60 end, numspawns = function() return GLOBAL.math.floor(2 + GLOBAL.math.random(2)) * HOUND_INCREASE end },
+        med		=	{ warnduration = function() return 45 end, numspawns = function() return GLOBAL.math.floor(3 + GLOBAL.math.random(3)) * HOUND_INCREASE end },
+        heavy	=	{ warnduration = function() return 30 end, numspawns = function() return GLOBAL.math.floor(4 + GLOBAL.math.random(3))* HOUND_INCREASE end },
+        crazy	=	{ warnduration = function() return 30 end, numspawns = function() return GLOBAL.math.floor(6 + GLOBAL.math.random(4))* HOUND_INCREASE end },
+    },
+
+    attack_delays =
+    {
+        rare        = function() return TUNING.TOTAL_DAY_TIME * 6, math.random() * TUNING.TOTAL_DAY_TIME * 7 end,
+        occasional  = function() return TUNING.TOTAL_DAY_TIME * 4, math.random() * TUNING.TOTAL_DAY_TIME * 7 end,
+        frequent    = function() return TUNING.TOTAL_DAY_TIME * 3, math.random() * TUNING.TOTAL_DAY_TIME * 5 end,
+    },
+
+    warning_speech = "ANNOUNCE_HOUNDS",
+
+    --Key = time, Value = sound prefab
+    warning_sound_thresholds =
+    {
+        { time = 30, sound =  "LVL4" },
+        { time = 60, sound =  "LVL3" },
+        { time = 90, sound =  "LVL2" },
+        { time = 500, sound = "LVL1" },
+    },
+}
+
+AddPrefabPostInit("forest", function(inst)
+    if inst~= nil and inst.hounded ~= nil then
+        inst.hounded:SetSpawnData(houndspawn)
+    end
+end)
 
 -----------------------------------------------------------------
 --Pigs and bunnies defend their turf if their home is destroyed
@@ -177,11 +241,29 @@ end)
 -----------------------------------------------------------------
 --Pengulls are now aggressive
 -----------------------------------------------------------------
-local function PenguinRetarget(inst)
+local function MakeTeam(inst, attacker)
+    local leader = GLOBAL.SpawnPrefab("teamleader")
+--print("<<<<<<<<================>>>>> Making TEAM:",attacker)
+    leader:AddTag("penguin")
+    leader.components.teamleader.threat = attacker
+    leader.components.teamleader.radius = 10
+    leader.components.teamleader:SetAttackGrpSize(5+math.random(1,3))
+    leader.components.teamleader.timebetweenattacks = 0  -- first attack happens immediately
+    leader.components.teamleader.attackinterval = 2  -- first attack happens immediately
+    leader.components.teamleader.maxchasetime = 10
+    leader.components.teamleader.min_team_size = 0
+    leader.components.teamleader.max_team_size = 8
+    leader.components.teamleader.team_type = inst.components.teamattacker.team_type
+    leader.components.teamleader:NewTeammate(inst)
+    leader.components.teamleader:BroadcastDistress(inst)
+--print("<<<<<<<>>>>>")
+end
 
+--TODO add penguin attack on ice picked
+local function PenguinRetarget(inst)
     local ta = inst.components.teamattacker
 
-    local newtarget = FindEntity(inst, 3, function(guy)
+    local newtarget = GLOBAL.FindEntity(inst, 3, function(guy)
             return inst.components.combat:CanTarget(guy)
             end,
             nil,
@@ -189,17 +271,17 @@ local function PenguinRetarget(inst)
             {"character","monster","wall"}
             )
 
-    if newtarget and ta and not ta.inteam and not ta:SearchForTeam() then
+    if ta~=nil and newtarget and ta and not ta.inteam and not ta:SearchForTeam() then
         MakeTeam(inst, newtarget)
     end
 
-    if ta.inteam and not ta.teamleader:CanAttack() then
+    if ta~=nil and ta.inteam and not ta.teamleader:CanAttack() then
         return newtarget
     end
 
 end
 
-AddPrefabPostInit("penguin", PenguinRetarget)
+AddPrefabPostInit("penguin", PenguinRetarget, MakeTeam)
 AddPrefabPostInit("penguin", function (inst)
     if inst ~= nil and inst.components ~= nil and inst.components.combat ~= nil then
         inst.components.combat:SetRetargetFunction(2, PenguinRetarget) --penguins are aggressive
@@ -267,16 +349,12 @@ local function GuardRetargetFn(inst)
                     { "player" }
                 )
                 if lightThief ~= nil then
-
-                    print("largest radius is "..home.components.burnable:GetLargestLightRadius())
                     target = lightThief
                 end
             end
         end
     end
-    
-    print(target)
-    print(AliveWall(target))
+
     return target
 end
 
@@ -317,6 +395,10 @@ end)
 -----------------------------------------------------------------
 GLOBAL.TUNING.EYEPLANT_HEALTH = 100
 GLOBAL.TUNING.EYEPLANT_ATTACK_PERIOD = 0.7
+
+-----------------------------------------------------------------
+-- Beefalo herding buff - TODO: Increase range of aggro
+-----------------------------------------------------------------
 
 -----------------------------------------------------------------
 --Pig guards don't hit players if pig king is happy
