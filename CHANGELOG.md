@@ -1,3 +1,5 @@
+![Uncompromising Logo](images/logo.png)
+
 # Currently Confirmed Change-list:
 
 * [x] *(checked means tested, working and delivered)*
@@ -18,14 +20,6 @@
 
 * [x]  Applied horticulture recipe nerf (uses 1 leafy meat + 1 bucket o poop instead of 1 seeds + 1 poop)
 
-* [x]  On Tentacles book nerf - 50% chance to create small tentacles instead of big ones
-
-* [ ]  Blizard mechanic in winter (reduces vision at peak snow)
-
-* [ ]  Big red bramble bee wave mechanic in spring
-
-* [ ]  Treeguard cage root attack mechanic
-
 * [X]  [Settings menu](https://i.imgur.com/N3rLMpH.png)
 
 * [x]  [Totally Normal Livingtree root attack](https://imgur.com/8gC0cdv.gif)
@@ -38,13 +32,7 @@
 
 * [ ]  Tweaked sanity ranges for shadow creature appearance
 
-* [ ]  Bearger tree throw attack when running from him
-
 * [x]  Statue walls, signs, lava ponds, bone fragments hitbox pathing is ignored (now they have no collision)
-
-* [ ]  Fix shadow creatures not attacking when insane (wormhole exploit)
-
-* [ ]  Wetness buff - 3x the chance to slip weapon when it's wet
 
 * [x]  Wetness buff - Chance to trip and fall for -15 damage at 100 wetness
 
@@ -56,21 +44,9 @@
  
 * [x]  Ice and twigs cannot be more than 2 inside crockpot recipes
 
-* [ ]  Insanity buff - When at 0 sanity, your screen becomes obstructed with the fuelweaver shadow watcher effect
-
-* [ ]  Thermals are less effective for winter, and insulation is required. No more stacking 2-3 Thermals also.
-
 * [x]  You cannot sew thermals anymore
-
-* [ ]  Add a mod setting that enables the mod only after Fuelweaver is defeated, for those that want to play normally and only enable this "Expert" mode for lategame
  
 * [ ]  [Rat waves](https://cdn.discordapp.com/attachments/623666104937480192/629152866426290197/damnrat.gif), that will come with number of days, mess around your items, eat your food, and bite you for max health penalties 
-
-* [ ]  Applied Horticulture makes wormwood bloom for 2 days
- 
-* [ ]  Wormwood is flamable again like in single player
- 
-* [ ]  Twiggy trees worlds are disabled
  
 * [x]  Carrots are rarer in world generation
 
@@ -79,10 +55,6 @@
 * [x]  Goose nest setpiece has lower food counts
  
 * [ ]  During Worldgen, carrots can sometimes be replaced with different vegetables. (Asparagus, Potato, Toma Root, etc etc) 
- 
-* [ ]  Each crops only grows in their specific seasons
-
-* [ ]  Sinking on a boat is instant death
 
 * [x]  Bishops now flee inbetween attacks
 
@@ -140,7 +112,7 @@
 
 * [x]  Walrus has more health and ice doggos
 
-* [ ]  Haunting pig torches has a low chance of spawning a pig guard now
+* [x]  Haunting pig torches has a low chance of spawning a pig guard now
 
 * [x]  Only winona can power her generators
 
@@ -148,8 +120,36 @@
 
 * [x]  Werepigs prefer attacking over eating
 
+* [x]  Koelefants drop 4 meat now, instead of 8
+
+* [x]  Gobblers now drop only 1 drumstick
+
+* [x]  Marble armor ignores our knockback mechanic
+
+* [x]  Bees don't drop honey, only stingers
+
+* [x]  Bacon and eggs spoil time is halved, to 10 days
+
+* [x]  Added setting to increase nr of hounds per wave (default: 1.5x)
+
+* [x]  Food appearance rates reduced significantly (berries, carrots, mushrooms)
+
+* [x]  Eye plant has more health
+
+* [x]  Bunnymen no longer drop carrots
+
+* [x]  Time for trees to grow increased significantly
+
+* [x]  Only winona can use her generators
+
+* [x]  Pengulls are territorial and attack now if you get too close
+
+* [x]  Wormwood takes more fire damage, for more time
+
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
 ### To vote on features: Visit [#mod_polls](https://discordapp.com/channels/623649948130344960/623661746216763393) on Discord
 
 ### To submit your own features: Visit [#mod_submissions](https://discordapp.com/channels/623649948130344960/623661395539656704) on Discord
+
+### Our internal spreadsheet with development and testing status can be found [here](https://docs.google.com/spreadsheets/d/1UEPA2O0gz0agyrjvCe9k1K-_gipPyTz3B2mHsEYCUhM/edit?usp=sharing)
