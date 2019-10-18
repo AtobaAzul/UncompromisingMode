@@ -79,8 +79,8 @@ TUNING.DSTU =
     --Player changes
     ----------------------------------------------------------------------------
     --Tripover chance on walking with 100 wetness
-    TRIPOVER_HEALTH_DAMAGE = 5,
-    TRIPOVER_ONMAXWET_CHANCE_PER_SEC = 0.05,
+    TRIPOVER_HEALTH_DAMAGE = 10,
+    TRIPOVER_ONMAXWET_CHANCE_PER_SEC = 0.10,
     TRIPOVER_KNOCKABCK_RADIUS = 2,
     TRIPOVER_ONMAXWET_COOLDOWN = 5,
 
