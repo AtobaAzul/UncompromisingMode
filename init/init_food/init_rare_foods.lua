@@ -15,6 +15,37 @@ local dusk_time = seg_time * dusk_segs
 local night_time = seg_time * night_segs
 
 -----------------------------------------------------------------
+-- Reduce seed spawn chance
+-----------------------------------------------------------------
+--TODO: this is not working
+local RAND_TIME_MIN = FOOD_BIRD_SEED_SPAWN_MIN_RANDOM_TIME
+local RAND_TIME_MAX = FOOD_BIRD_SEED_SPAWN_MAX_RANDOM_TIME
+AddPrefabPostInit("crow", function(inst)
+    if inst~= nil and inst.components.periodicspawner ~= nil then
+        inst.components.periodicspawner:SetRandomTimes(RAND_TIME_MIN,RAND_TIME_MAX)
+    end
+end)
+
+AddPrefabPostInit("robin_winter", function(inst)
+    if inst~= nil and inst.components.periodicspawner ~= nil then
+        inst.components.periodicspawner:SetRandomTimes(RAND_TIME_MIN,RAND_TIME_MAX)
+    end
+end)
+
+AddPrefabPostInit("robin", function(inst)
+    if inst~= nil and inst.components.periodicspawner ~= nil then
+        inst.components.periodicspawner:SetRandomTimes(RAND_TIME_MIN,RAND_TIME_MAX)
+    end
+end)
+
+
+-----------------------------------------------------------------
+-- Reduce butterfly spawn chance
+-----------------------------------------------------------------
+GLOBAL.TUNING.BUTTERFLY_SPAWN_TIME = GLOBAL.TUNING.DSTU.FOOD_BUTTERFLY_SPAWN_TIME_INCREASE
+--TODO: Fix, this doesn't work
+
+-----------------------------------------------------------------
 -- stone fruits increased duration
 -----------------------------------------------------------------
 GLOBAL.TUNING.ROCK_FRUIT_REGROW =
@@ -154,87 +185,6 @@ AddPrefabPostInit("killerbee", function(inst)
     end
 end)
 
-
------------------------------------------------------------------
--- Carrots, mushroos and berry bushs are rare now
--- Relevant: regrowthmanager.lua, map\rooms
--- red_mushroom 
--- blue_mushroom
--- green_mushroom 
--- berrybush
--- berrybush_juicy 
--- carrot_planted 
------------------------------------------------------------------
-local CHANGED_ROOMS = 
-{
-    "BGGrass",
-    --mostly carrots
-    "RabbitArea",
-    "RabbitTown",
-    "RabbitSinkhole",
-    --generic
-    "MooseGooseBreedingGrounds",
-    "MagicalDeciduous",
-    "DeciduousClearing",
-    "BGDeciduous",
-    "SpiderIncursion",
-    "DropperDesolation",
-    "RuinedCityEntrance",
-    --blue mush
-    "BlueMushForest",
-    "BlueMushMeadow",
-    "BlueSpiderForest",
-    "BGBlueMush",
-    "BGBlueMushRoom",
-    --fungus noise
-    "FungusNoiseForest",
-    "FungusNoiseMeadow",
-    --green mush
-    "GreenMushMeadow",
-    "GreenMushNoise",
-    "GreenMushForest",
-    "GreenMushPonds",
-    "GreenMushSinkhole",
-    "GreenMushRabbits",
-    "BGGreenMush",
-    "BGGreenMushRoom",
-    --red mush
-    "RedMushForest",
-    "RedSpiderForest",
-    "RedMushPillars",
-    "BGRedMush",
-    "BGRedMushRoom",
-}
-
-local function ChangeSpawnRates(room)
-    if room ~= nil and room.changed == nil and room.contents.dsitributeprefabs ~= nil then
-        if room.contents.dsitributeprefabs.carrot_planted ~= nil then 
-            room.contents.dsitributeprefabs.carrot_planted = room.contents.dsitributeprefabs.carrot_planted * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  
-        end
-        if room.contents.dsitributeprefabs.berrybush ~= nil then 
-            room.contents.dsitributeprefabs.berrybush = room.contents.dsitributeprefabs.berrybush * GLOBAL.TUNING.DSTU.FOOD_BERRY_NORMAL_APPEARANCE_PERCENT  
-        end
-        if room.contents.dsitributeprefabs.berrybush_juicy ~= nil then 
-            room.contents.dsitributeprefabs.berrybush_juicy = room.contents.dsitributeprefabs.berrybush_juicy * GLOBAL.TUNING.DSTU.FOOD_BERRY_JUICY_APPEARANCE_PERCENT  
-        end
-        if room.contents.dsitributeprefabs.green_mushroom ~= nil then 
-            room.contents.dsitributeprefabs.green_mushroom = room.contents.dsitributeprefabs.green_mushroom * GLOBAL.TUNING.DSTU.FOOD_MUSHROOM_GREEN_APPEARANCE_PERCENT  
-        end
-        if room.contents.dsitributeprefabs.blue_mushroom ~= nil then 
-            room.contents.dsitributeprefabs.blue_mushroom = room.contents.dsitributeprefabs.blue_mushroom * GLOBAL.TUNING.DSTU.FOOD_MUSHROOM_BLUE_APPEARANCE_PERCENT  
-        end
-        if room.contents.dsitributeprefabs.red_mushroom ~= nil then 
-            room.contents.dsitributeprefabs.red_mushroom = room.contents.dsitributeprefabs.red_mushroom * GLOBAL.TUNING.DSTU.FOOD_MUSHROOM_RED_APPEARANCE_PERCENT  
-        end
-        room.changed = true
-    end
-end
-
-for k, v in pairs(CHANGED_ROOMS) do
-	AddRoomPreInit(v, function(inst)
-		ChangeSpawnRates(inst)
-	end)
-end
 
 
 -----------------------------------------------------------------
