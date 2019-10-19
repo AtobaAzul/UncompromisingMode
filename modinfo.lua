@@ -1,7 +1,7 @@
 name = "    Uncompromising Mode"
 description = 
 [[
-󰀔 [ Version 1.1.0 : "Pests & Pestilence Update" ]
+󰀔 [ Version 1.1.1 : "Pests & Pestilence Update" ]
 
 
 
@@ -20,7 +20,7 @@ description =
 							   ⬇Config⬇		 ⬇Infos⬇]]
 
 author = "Uncompromising Team"
-version = "1.1.0"
+version = "1.1.1"
 
 forumthread = ""
 
@@ -169,7 +169,7 @@ configuration_options =
 			{description = "Disabled", data = false},
 			{description = "Enabled", data = true},
 		},
-		default = true,
+		default = false,
 	},
 	{
 		name = "hound_increase",
