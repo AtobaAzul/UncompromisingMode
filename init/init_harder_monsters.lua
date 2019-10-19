@@ -508,3 +508,8 @@ local function WerepigIgnoreFood(brain)
     table.insert(brain.bt.root.children, 3, attack_instead_eat)
 end
 AddBrainPostInit("werepigbrain", WerepigIgnoreFood)
+local function PerdIgnoreFood(brain)
+	run_instead_eat = GLOBAL.RunAway(brain.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST)
+    table.insert(brain.bt.root.children, 1, run_instead_eat)
+end
+AddBrainPostInit("perdbrain", PerdIgnoreFood)
