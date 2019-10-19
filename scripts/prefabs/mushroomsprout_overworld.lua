@@ -1,7 +1,7 @@
 local assets =
-    {
-        Asset("ANIM", "anim/mushroomsprout.zip"),
-    }
+{
+	Asset("ANIM", "anim/mushroomsprout.zip"),
+}
 
 local prefabs =
 {
@@ -114,8 +114,6 @@ local function OnBurnt(inst)
     FadeOut(inst)
     inst:AddTag("NOCLICK")
     inst.persists = false
-
-    
 end
 
 local function stop_burning(inst)
@@ -125,12 +123,9 @@ local function stop_burning(inst)
 end
 
 local function chop_down_tree(inst, worker)
-
-
 	if inst.components.childspawner ~= nil then
         inst.components.childspawner:ReleaseAllChildren(worker, "toad")
     end
-
 
     if inst._destroy then
         inst._destroy = nil
@@ -162,26 +157,13 @@ local function chop_down_tree(inst, worker)
     inst.persists = false
 
 	SpawnPrefab("sporecloud_toad").Transform:SetPosition(inst.Transform:GetWorldPosition())
-	
-
-
-
-    
 end
-
-
 
 local function WakeUpLeif(ent)
     ent.components.sleeper:WakeUp()
 end
 
-
-
 local function chop_tree(inst, chopper)
-
-	
-
-
     if chopper == nil or not chopper:HasTag("playerghost") then
         inst.SoundEmitter:PlaySound("dontstarve/wilson/use_axe_tree")
     end
@@ -201,8 +183,6 @@ local function chop_tree(inst, chopper)
             end
             v.components.combat:SuggestTarget(chopper)
         end
-
-
 end
 
 local function inspect_tree(inst)
@@ -232,11 +212,9 @@ local function OnLoad(inst, data)
     end
 end
 
-
 local function OnLoadPostPass(inst)
     
 end
-
 
 local function OnInit(inst)
     inst._inittask = nil
@@ -245,7 +223,6 @@ local function OnInit(inst)
 
 	inst.components.childspawner:StartSpawning()
 end
-
 
 local function SpawnDiseasePuff(inst)
     SpawnPrefab("disease_puff").Transform:SetPosition(inst.Transform:GetWorldPosition())
@@ -261,37 +238,64 @@ local function ontimerdone(inst, data)
     end
 end
 
+local function fn(inst)
+	local inst = CreateEntity()
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddLight()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddNetwork()
+	inst.entity:AddMiniMapEntity()
+	inst.entity:AddPhysics()
+	
+	inst.MiniMapEntity:SetIcon("toadstool_cap.png")
+	
+	inst.Light:SetFalloff(FADE_FALLOFF)
+    inst.Light:SetIntensity(FADE_INTENSITY)
+    inst.Light:SetRadius(FADE_RADIUS)
+    inst.Light:SetColour(180 / 255, 60 / 255, 255 / 255)
+    inst.Light:Enable(false)
+    inst.Light:EnableClientModulation(true)
+	
+	inst.Physics:SetMass(0) 
+	inst.Physics:SetCollisionGroup(COLLISION.OBSTACLES)
+	inst.Physics:ClearCollisionMask()
+	inst.Physics:CollidesWith(COLLISION.ITEMS)
+	inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+	inst.Physics:SetCapsule(.25, 2)
 
-    local function fn(inst)
-        local inst = CreateEntity()
+	inst:AddTag("blocker")
+	inst:AddTag("diseased")
+	inst:AddTag("tree")
+    inst:AddTag("mushroomsprout")
+    inst:AddTag("cavedweller")
+	inst:AddTag("antlion_sinkhole")
+	inst:AddTag("antlion_sinkhole_blocker")
 
-        inst.entity:AddTransform()
-        inst.entity:AddAnimState()
-        inst.entity:AddLight()
-        inst.entity:AddSoundEmitter()
-        inst.entity:AddNetwork()
+    inst.AnimState:SetBuild("mushroomsprout_dark_upg_build")
+    inst.AnimState:SetBank("mushroomsprout")
+    inst.AnimState:PlayAnimation("shroom_pre")
+    inst.AnimState:SetLightOverride(.3)
+
+    inst._fade = net_smallbyte(inst.GUID, "mushroomsprout._fade", "fadedirty")
+
+    inst._fadetask = inst:DoPeriodicTask(FRAMES, OnUpdateFade)
+
+	inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        inst:ListenForEvent("fadedirty", OnFadeDirty)
+        return inst
+    end
+	
+	inst:AddComponent("inspectable")
+    inst.components.inspectable.getstatus = inspect_tree
 		
-
-        --DO THE PHYSICS STUFF MANUALLY SO THAT WE CAN SHUT OFF THE BOSS COLLISION.
-        --don't yell at me plz...
-        --MakeObstaclePhysics(inst, .25, 2)
-        ----------------------------------------------------
-        inst:AddTag("blocker")
-        inst.entity:AddPhysics()
-        inst.Physics:SetMass(0) 
-        inst.Physics:SetCollisionGroup(COLLISION.OBSTACLES)
-        inst.Physics:ClearCollisionMask()
-        inst.Physics:CollidesWith(COLLISION.ITEMS)
-        inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-        --inst.Physics:CollidesWith(COLLISION.GIANTS)
-        inst.Physics:SetCapsule(.25, 2)
-        ----------------------------------------------------
-		inst:AddComponent("diseaseable")
-		inst:AddTag("diseased") 
-		inst.components.diseaseable:RestartNearbySpread()
-		inst:DoTaskInTime(23 * FRAMES, SpawnDiseasePuff)
+	inst:AddComponent("diseaseable")
+	inst.components.diseaseable:RestartNearbySpread()
+	inst:DoTaskInTime(23 * FRAMES, SpawnDiseasePuff)
 		
-		inst:AddComponent("childspawner")
+	inst:AddComponent("childspawner")
     inst.components.childspawner.childname = "toad"
     inst.components.childspawner:SetRegenPeriod(30)
     inst.components.childspawner:SetSpawnPeriod(30)
@@ -302,77 +306,34 @@ end
     inst.components.childspawner.emergencychildrenperplayer = 1
     inst.components.childspawner:SetMaxEmergencyChildren(1)
 
-	local minimap = inst.entity:AddMiniMapEntity()
-	inst.MiniMapEntity:SetIcon("toadstool_cap.png")
-
-
-        inst.Light:SetFalloff(FADE_FALLOFF)
-        inst.Light:SetIntensity(FADE_INTENSITY)
-        inst.Light:SetRadius(FADE_RADIUS)
-        inst.Light:SetColour(180 / 255, 60 / 255, 255 / 255)
-        inst.Light:Enable(false)
-        inst.Light:EnableClientModulation(true)
-
-        --inst:AddTag("shelter")
-        inst:AddTag("tree")
-        inst:AddTag("mushroomsprout")
-        inst:AddTag("cavedweller")
-	inst:AddTag("antlion_sinkhole")
-    	inst:AddTag("antlion_sinkhole_blocker")
-
-        inst.AnimState:SetBuild("mushroomsprout_dark_upg_build")
-        inst.AnimState:SetBank("mushroomsprout")
-        inst.AnimState:PlayAnimation("shroom_pre")
-        inst.AnimState:SetLightOverride(.3)
-
-        inst._fade = net_smallbyte(inst.GUID, "mushroomsprout._fade", "fadedirty")
-
-        inst._fadetask = inst:DoPeriodicTask(FRAMES, OnUpdateFade)
-
-        inst.entity:SetPristine()
-
-        if not TheWorld.ismastersim then
-            inst:ListenForEvent("fadedirty", OnFadeDirty)
-
-            return inst
-        end
-
 	inst:AddComponent("timer")
 	inst:ListenForEvent("timerdone", ontimerdone)
 
-        inst._level = 0
-        inst._targetlevel = 0
+    inst._level = 0
+    inst._targetlevel = 0
 
-        MakeSmallPropagator(inst)
-        MakeMediumBurnable(inst, TUNING.TREE_BURN_TIME)
-        inst.components.burnable:SetOnBurntFn(OnBurnt)
+    inst:AddComponent("workable")
+    inst.components.workable:SetWorkAction(ACTIONS.CHOP)
+    inst.components.workable:SetOnWorkCallback(chop_tree)
+    inst.components.workable:SetOnFinishCallback(chop_down_tree)
+	inst.components.workable:SetWorkLeft(TUNING.TOADSTOOL_DARK_MUSHROOMSPROUT_CHOPS)
 
-        inst:AddComponent("workable")
-        inst.components.workable:SetWorkAction(ACTIONS.CHOP)
-        inst.components.workable:SetOnWorkCallback(chop_tree)
-        inst.components.workable:SetOnFinishCallback(chop_down_tree)
+    inst:ListenForEvent("animover", Sway)
+    inst._inittask = inst:DoTaskInTime(0, OnInit)
 
-        inst:ListenForEvent("animover", Sway)
-        inst._inittask = inst:DoTaskInTime(0, OnInit)
+    inst:AddComponent("entitytracker")
 
-        inst:AddComponent("inspectable")
-        inst.components.inspectable.getstatus = inspect_tree
+    MakeHauntableWorkAndIgnite(inst)
+	
+	MakeSmallPropagator(inst)
+    MakeMediumBurnable(inst, TUNING.TREE_BURN_TIME)
+    inst.components.burnable:SetOnBurntFn(OnBurnt)
 
-            inst.components.workable:SetWorkLeft(TUNING.TOADSTOOL_DARK_MUSHROOMSPROUT_CHOPS)
-        
+    inst.OnSave = OnSave
+    inst.OnLoad = OnLoad
+    inst.OnLoadPostPass = OnLoadPostPass
 
-        inst:AddComponent("entitytracker")
-
-        MakeHauntableWorkAndIgnite(inst)
-
-        inst.OnSave = OnSave
-        inst.OnLoad = OnLoad
-        inst.OnLoadPostPass = OnLoadPostPass
-
-
-        return inst
-    
-
+	return inst
 end
 
 return Prefab("mushroomsprout_overworld", fn, assets, prefabs)
