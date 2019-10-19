@@ -23,7 +23,6 @@ local IMPASSABLES =
     "chesspiece_moon",
     "endtable",
     "fossil_stalker",
-    "lava_pond",
     "homesign",
     "statueharp",
     "statue_marble",
@@ -43,8 +42,19 @@ end
 -- Tooth traps burn (they are literally logs with teeth)
 -----------------------------------------------------------------
 AddPrefabPostInit("trap_teeth", function(inst)
-    if inst~=nil then
-        GLOBAL.MakeSmallBurnable(inst)
-        GLOBAL.MakeSmallPropagator(inst)
-    end
+	if not GLOBAL.TheWorld.ismastersim then
+		return
+	end
+
+    GLOBAL.MakeSmallBurnable(inst)
+    GLOBAL.MakeSmallPropagator(inst)
+end)
+
+
+AddPrefabPostInit("cave", function(inst)
+	if not GLOBAL.TheWorld.ismastersim then
+		return
+	end
+	
+	inst:AddComponent("cavedeerclopsspawner")
 end)
