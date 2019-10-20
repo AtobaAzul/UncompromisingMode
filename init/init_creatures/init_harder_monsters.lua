@@ -11,8 +11,10 @@ end)
 -----------------------------------------------------------------
 --Bats come in higher numbers
 -----------------------------------------------------------------
+--TODO:cave entrance spawner not working
 AddPrefabPostInit("cave_entrance", function (inst)
     if inst ~= nil and inst.components ~= nil and inst.components.childspawner ~= nil then
+        print("DSTU: Bats changed")
         --inst.components.childspawner:SetRegenPeriod(60)
         inst.components.childspawner:SetSpawnPeriod(.1/GLOBAL.TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
         inst.components.childspawner:SetMaxChildren(6*GLOBAL.TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
