@@ -112,8 +112,7 @@ local require = GLOBAL.require
 		modimport("init/init_character_changes/warly")
 	end
 
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("hardcore")) then
+	if GetModConfigData("hardcore") then
 		modimport("init/init_gamemodes/init_hardcore")
 	end
 
