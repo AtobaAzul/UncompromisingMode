@@ -88,7 +88,7 @@ TUNING.DSTU =
     ----------------------------------------------------------------------------
     --Generics
     MONSTER_BAT_CAVE_NR_INCREASE = 3,
-    MONSTER_CATCOON_HEALTH_CHANGE = TUNING.CATCOON_LIFE * 2,
+    MONSTER_CATCOON_HEALTH_CHANGE = TUNING.CATCOON_LIFE * 2.5,
     
     --Mctusk
     MONSTER_MCTUSK_HEALTH_INCREASE = 3,
