@@ -84,7 +84,7 @@ AddPrefabPostInit("cave_entrance_open", function(inst)
 	SnowedIn(inst, GLOBAL.TheWorld.state.season)
 	
 	inst.components.inspectable.getstatus = GetStatus
-end)]]]
+end)]]
 
 
 

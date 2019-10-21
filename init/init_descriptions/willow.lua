@@ -13,3 +13,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
     DESCRIBE.MONSTERSCRAP = "It's from gross little hair monsters..."
     DESCRIBE.COOKEDMONSTERSCRAP = "I don't think I can burn all the hairs out..."
     DESCRIBE.MONSTERSCRAP_DRIED = "Now it's just gross AND old."
+	

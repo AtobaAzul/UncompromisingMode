@@ -189,9 +189,9 @@ local function ReleaseHassler(targetPlayer)
             end
 			
 			TheWorld:PushEvent("ms_miniquake", {
-				rad = 4,
-				minrad = 1.5,
-				num = 10,
+				rad = 8,
+				minrad = 2,
+				num = 12,
 				duration = 1,
 				pos = spawn_pt,
 				target = targetPlayer,

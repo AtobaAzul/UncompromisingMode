@@ -16,7 +16,7 @@ AddPrefabPostInit("world", function(inst)
 
     --Using gemerator is hard unless you are a handyman/woman
     local function OnGemGiven(inst, giver, item)
-        if giver:HasTag("handyperson") then 
+        if giver:HasTag("handyperson") or giver:HasTag("tinkerer") then  --Hornet: Just casually putting support for wagstaff in ham characters, dont mind me
 
             if #inst._gems < GEMSLOTS then
                 table.insert(inst._gems, item.prefab)
@@ -56,11 +56,9 @@ AddPrefabPostInit("world", function(inst)
             PlayHitAnim(inst)
             inst.SoundEmitter:PlaySound("dontstarve/common/together/battery/up")
         else
-            if giver.components.talker == nil then
-                giver:AddComponent("talker")
-            end
-            
-            giver.components.talker:Say(GLOBAL.GetString(giver, "ANNOUNCE_WINONAGEN"))
+            if giver.components.talker then
+				giver.components.talker:Say(GLOBAL.GetString(giver, "ANNOUNCE_WINONAGEN"))
+			end
         end
     end
     --Now replace the function with our modified one

@@ -174,13 +174,13 @@ end)]]
 -----------------------------------------------------------------
 local stinger_only = { "stinger" }
 AddPrefabPostInit("bee", function(inst)
-    if inst ~= nil and inst.components.lootdropper ~= nil then
+    if inst.components.lootdropper ~= nil then
         inst.components.lootdropper:SetLoot(stinger_only)
     end
 end)
 
 AddPrefabPostInit("killerbee", function(inst)
-    if inst ~= nil and inst.components.lootdropper ~= nil then
+    if inst.components.lootdropper ~= nil then
         inst.components.lootdropper:SetLoot(stinger_only)
     end
 end)

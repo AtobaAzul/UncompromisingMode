@@ -2,5 +2,6 @@ PrefabFiles =
 {
 	"toad",
 	"mushroomsprout_overworld",
-	"sporecloud_toad"
+	"sporecloud_toad",
+	"deerclops_ground_fx",
 }
