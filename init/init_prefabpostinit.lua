@@ -1,62 +1,4 @@
------------------------------------------------------------------
--- Remove pathing collision exploit by making objects noclip
------------------------------------------------------------------
-
-local IMPASSABLES = 
-{
-    "chesspiece_pawn",
-    "chesspiece_rook",
-    "chesspiece_knight",
-    "chesspiece_bishop",
-    "chesspiece_muse",
-    "chesspiece_formal",
-    "chesspiece_deerclops",
-    "chesspiece_bearger",
-    "chesspiece_moosegoose",
-    "chesspiece_dragonfly",
-    "chesspiece_clayhound",
-    "chesspiece_claywarg",
-    "chesspiece_butterfly",
-    "chesspiece_anchor",
-    "chesspiece_moon",
-    "endtable",
-    "fossil_stalker",
-    "homesign",
-    "statueharp",
-    "statue_marble",
-    "gravestone",
-    "arrowsign_post",
-}
-
-for k, v in pairs(IMPASSABLES) do
-	AddPrefabPostInit(v, function(inst)
-        if inst.Physics ~= nil then
-            GLOBAL.RemovePhysicsColliders(inst)
-        end
-    end)
-end
-
------------------------------------------------------------------
--- Tooth traps burn (they are literally logs with teeth)
------------------------------------------------------------------
-AddPrefabPostInit("trap_teeth", function(inst)
-	if not GLOBAL.TheWorld.ismastersim then
-		return
-	end
-
-    GLOBAL.MakeSmallBurnable(inst)
-    GLOBAL.MakeSmallPropagator(inst)
-end)
-
-
-AddPrefabPostInit("cave", function(inst)
-	if not GLOBAL.TheWorld.ismastersim then
-		return
-	end
-	
-	inst:AddComponent("cavedeerclopsspawner")
-end)
-
+--Zarklord: HORNET move your changes somewhere better, I want to delete these.
 ----------------------Cave exit and entrance locked in winter---------------------
 --[[local function SnowedIn(inst, season) Hornet: if we wanna do this for some dumb reason
 	if season == "winter" then
@@ -86,10 +28,46 @@ AddPrefabPostInit("cave_entrance_open", function(inst)
 	inst.components.inspectable.getstatus = GetStatus
 end)]]
 
+--Update this list when adding files
+local component_post = {
+    --example:
+    --"container",
+}
 
+local prefab_post = {
+    "yellowamulet",
+    "trap_teeth",
+    "cave",
+}
 
+local stategraph_post = {
+    --example:
+    --"wilson",
+}
 
+local class_post = {
+    --example:
+    --"components/inventoryitem_replica",
+    --"screens/playerhud",
+}
 
+modimport("postinit/sim")
+modimport("postinit/any")
+modimport("postinit/player")
 
+for _,v in pairs(component_post) do
+    modimport("postinit/components/"..v)
+end
 
+for _,v in pairs(prefab_post) do
+    modimport("postinit/prefabs/"..v)
+end
 
+for _,v in pairs(stategraph_post) do
+    modimport("postinit/stategraphs/SG"..v)
+end
+
+for _,v in pairs(class_post) do
+    --These contain a path already, e.g. v= "widgets/inventorybar"
+    modimport("postinit/".. v)
+end
