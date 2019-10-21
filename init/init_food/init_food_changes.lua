@@ -17,6 +17,7 @@ local recipes = cooking.recipes.cookpot
 
 recipes.perogies.perishtime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_PEROGI_PERISH -- Changed to 10 days, down from 20
 recipes.meatballs.hunger = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_MEATBALL_HUNGER -- Changed to 50, down from 62.5
+recipes.butterflymuffin.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERMUFFIN_HEALTH -- Changed to 50, down from 62.5
 
 
 -----------------------------------------------------------------
@@ -160,10 +161,26 @@ AddPrefabPostInit("birdcage", function (inst)
 end)
 
 -----------------------------------------------------------------
--- butterfly health reduced (5)
+-- butterfly health reduced
 -----------------------------------------------------------------
 AddPrefabPostInit("butterflywings", function (inst)
     if inst ~= nil and inst.components.edible ~= nil then
-        inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERFLY_WING_HEALTH
+        inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.FOOD_BUTTERFLY_WING_HEALTH
+        inst.components.edible.hungervalue = GLOBAL.TUNING.DSTU.FOOD_BUTTERFLY_WING_HUNGER
+        inst.components.edible.perishtime = GLOBAL.TUNING.DSTU.FOOD_BUTTERFLY_WING_HUNGER
+    end
+end)
+
+-----------------------------------------------------------------
+-- Reduce seeds hunger
+-----------------------------------------------------------------
+AddPrefabPostInit("seeds", function (inst)
+    if inst ~= nil and inst.components.edible ~= nil then
+        inst.components.edible.hungervalue = GLOBAL.TUNING.DSTU.FOOD_SEEDS_HUNGER
+    end
+end)
+AddPrefabPostInit("seeds_cooked", function (inst)
+    if inst ~= nil and inst.components.edible ~= nil then
+        inst.components.edible.hungervalue = GLOBAL.TUNING.DSTU.FOOD_SEEDS_HUNGER
     end
 end)
