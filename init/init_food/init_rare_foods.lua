@@ -40,8 +40,31 @@ end)
 
 
 -----------------------------------------------------------------
--- Reduce butterfly spawn chance
+-- Butterflies appearance rate depends on nr of players
 -----------------------------------------------------------------
+--TODO complicated 
+--[[local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
+AddClassPostConstruct("components/butterflyspawner", function(self)
+    local _activeplayers = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "_activeplayers")
+    local _scheduledtasks = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "_scheduledtasks")
+    --Get the old functions using upvalue hacker
+    local SpawnButterflyForPlayer = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "SpawnButterflyForPlayer")
+    local ScheduleSpawn = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "ScheduleSpawn")
+    
+
+    local function ScheduleSpawn(player, initialspawn)
+        if _scheduledtasks[player] == nil then
+            local basedelay = initialspawn and 0.3 or 10
+            _scheduledtasks[player] = player:DoTaskInTime(basedelay + math.random() * 10 * #_activeplayers, SpawnButterflyForPlayer, ScheduleSpawn)
+                                                                                    --^ Here we lower chance based on player nr
+        end
+    end
+    --Now replace the function with our modified one
+    UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.butterflyspawner.fn, ScheduleSpawn, "ScheduleSpawn")
+end
+AddPrefabPostInit("world", function(inst)
+    
+end)]]
 GLOBAL.TUNING.BUTTERFLY_SPAWN_TIME = GLOBAL.TUNING.DSTU.FOOD_BUTTERFLY_SPAWN_TIME_INCREASE
 --TODO: Fix, this doesn't work
 
@@ -134,40 +157,13 @@ AddPrefabPostInit("bunnyman", function (inst)
 end)
 
 -----------------------------------------------------------------
--- Bunny huts respawn bunnies as often as pigs now
+-- Bunny huts respawn bunnies not as often
 -----------------------------------------------------------------
 AddPrefabPostInit("rabbithouse", function (inst)
     if inst ~= nil and inst.components.spawner ~= nil then 
-        inst.components.spawner:Configure("bunnyman", GLOBAL.TUNING.TOTAL_DAY_TIME*4)
+        inst.components.spawner:Configure("bunnyman", GLOBAL.TUNING.TOTAL_DAY_TIME*GLOBAL.TUNING.DSTU.BUNNYMAN_RESPAWN_TIME_DAYS)
     end
 end)
-
------------------------------------------------------------------
--- Butterflies appearance rate depends on nr of players
------------------------------------------------------------------
---TODO complicated but doable
---[[local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
-AddClassPostConstruct("components/butterflyspawner", function(self)
-    local _activeplayers = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "_activeplayers")
-    local _scheduledtasks = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "_scheduledtasks")
-    --Get the old functions using upvalue hacker
-    local SpawnButterflyForPlayer = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "SpawnButterflyForPlayer")
-    local ScheduleSpawn = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "ScheduleSpawn")
-    
-
-    local function ScheduleSpawn(player, initialspawn)
-        if _scheduledtasks[player] == nil then
-            local basedelay = initialspawn and 0.3 or 10
-            _scheduledtasks[player] = player:DoTaskInTime(basedelay + math.random() * 10 * #_activeplayers, SpawnButterflyForPlayer, ScheduleSpawn)
-                                                                                    --^ Here we lower chance based on player nr
-        end
-    end
-    --Now replace the function with our modified one
-    UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.butterflyspawner.fn, ScheduleSpawn, "ScheduleSpawn")
-end
-AddPrefabPostInit("world", function(inst)
-    
-end)]]
 
 -----------------------------------------------------------------
 -- Bees don't drop honey no more
@@ -186,18 +182,59 @@ AddPrefabPostInit("killerbee", function(inst)
 end)
 
 
-
 -----------------------------------------------------------------
 -- Bee box levels are 0,1,2,4 honey (from 0,1,3,6)
 -----------------------------------------------------------------
+local HONEY_PER_STAGE = GLOBAL.TUNING.DSTU.FOOD_HONEY_PRODUCTION_PER_STAGE
+
+levels =
+{
+    { amount=HONEY_PER_STAGE[4], idle="honey3", hit="hit_honey3" },
+    { amount=HONEY_PER_STAGE[3], idle="honey2", hit="hit_honey2" },
+    { amount=HONEY_PER_STAGE[2], idle="honey1", hit="hit_honey1" },
+    { amount=HONEY_PER_STAGE[1], idle="bees_loop", hit="hit_idle" },
+}
+
+local function setlevel(inst, level)
+    print("DSTU setlevel")
+    if not inst:HasTag("burnt") then
+        if inst.anims == nil then
+            inst.anims = { idle = level.idle, hit = level.hit }
+        else
+            inst.anims.idle = level.idle
+            inst.anims.hit = level.hit
+        end
+        inst.AnimState:PlayAnimation(inst.anims.idle)
+    end
+end
+
+local function updatelevel(inst)
+    print("DSTU updatelevel")
+    if not inst:HasTag("burnt") then
+        for k, v in pairs(levels) do
+            if inst.components.harvestable.produce >= v.amount then
+                setlevel(inst, v)
+                break
+            end
+        end
+    end
+end
+
+local function onharvest(inst, picker, produce)
+    print("DSTU onharvest")
+    if not inst:HasTag("burnt") then
+        updatelevel(inst)
+        if inst.components.childspawner ~= nil and not GLOBAL.TheWorld.state.iswinter then
+            inst.components.childspawner:ReleaseAllChildren(picker)
+        end
+    end
+end
+
 AddPrefabPostInit("beebox", function (inst)
-    levels =
-    {
-        { amount=3, idle="honey3", hit="hit_honey3" },
-        { amount=2, idle="honey2", hit="hit_honey2" },
-        { amount=1, idle="honey1", hit="hit_honey1" },
-        { amount=0, idle="bees_loop", hit="hit_idle" },
-    }
+    --TODO, test this
+    if inst.components.harvestable ~= nil then 
+        inst.components.harvestable:SetUp("honey", HONEY_PER_STAGE[4], nil, onharvest, updatelevel)
+    end
 end)
 
 -----------------------------------------------------------------

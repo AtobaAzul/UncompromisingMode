@@ -33,12 +33,17 @@ TUNING.DSTU =
     STONE_FRUIT_GROWTH_INCREASE = 3,
     TREE_GROWTH_TIME_INCREASE = 5,
 
+    --Food stats
+    FOOD_BUTTERFLY_WING_HEALTH = 5, -- 3
+    FOOD_BUTTERFLY_WING_HUNGER = 2.5,
+    FOOD_BUTTERFLY_WING_PERISHTIME = total_day_time / 2,
+    FOOD_SEEDS_HUNGER = 1.5,
+    
+    --Food production
+    FOOD_HONEY_PRODUCTION_PER_STAGE = {0,1,2,4},
+
     --Respawn time increases
-    --[[TODO: Fix these
-    FOOD_BUTTERFLY_SPAWN_TIME_INCREASE = 50, 
-    FOOD_BIRD_SEED_SPAWN_MIN_RANDOM_TIME = 400,
-    FOOD_BIRD_SEED_SPAWN_MAX_RANDOM_TIME = 600,
-    ]]
+    BUNNYMAN_RESPAWN_TIME_DAYS = 3,
 	
 	----------------------------------------------------------------------------
     --Winter Fire spreading
@@ -54,15 +59,6 @@ TUNING.DSTU =
     ACID_RAIN_WAVE_MIN_ATTACKS = 5,
 
     ----------------------------------------------------------------------------
-    --Acid rain event tuning
-    ----------------------------------------------------------------------------
-    ACID_RAIN_DAMAGE_TICK = 2,
-    ACID_RAIN_START_AFTER_DAY = 70,
-    ACID_RAIN_DISEASE_CHANCE = 0.1, --each 5-10 seconds
-    ACID_RAIN_WAVE_MAX_ATTACKS = 5,
-    ACID_RAIN_WAVE_MIN_ATTACKS = 2,
-
-    ----------------------------------------------------------------------------
     --Cooking recipe changes
     ----------------------------------------------------------------------------
     --Recipe stat changes
@@ -70,7 +66,7 @@ TUNING.DSTU =
     RECIPE_CHANGE_PEROGI_PERISH = TUNING.PERISH_MED, --in days (from 20 to 10)
     RECIPE_CHANGE_BACONEGG_PERISH = TUNING.PERISH_MED,
     RECIPE_CHANGE_MEATBALL_HUNGER = TUNING.CALORIES_SMALL*4, -- (12.5 * 4) = 50, from 62.5
-    RECIPE_CHANGE_BUTTERFLY_WING_HEALTH = TUNING.HEALING_MEDSMALL - TUNING.HEALING_SMALL, -- (8 - 3) = 5;
+    RECIPE_CHANGE_BUTTERMUFFIN_HEALTH = TUNING.HEALING_MED/2,
     
     --Limits to fillers
     CROCKPOT_RECIPE_TWIG_LIMIT = 2,
@@ -95,7 +91,7 @@ TUNING.DSTU =
     ----------------------------------------------------------------------------
     --Generics
     MONSTER_BAT_CAVE_NR_INCREASE = 3,
-    MONSTER_CATCOON_HEALTH_CHANGE = TUNING.CATCOON_LIFE * 3,
+    MONSTER_CATCOON_HEALTH_CHANGE = TUNING.CATCOON_LIFE * 2.5,
     
     --Mctusk
     MONSTER_MCTUSK_HEALTH_INCREASE = 3,
