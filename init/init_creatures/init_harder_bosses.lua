@@ -14,11 +14,19 @@ AddPrefabPostInit("beequeen", function(inst)
 end)
 
 AddPrefabPostInit("deerclops", function(inst)
+	local function GetHeatFn(inst)
+		return -40
+	end
+
 	if not GLOBAL.TheWorld.ismastersim then
 		return
 	end
 	
 	inst:RemoveComponent("freezable")
+	
+	inst:AddComponent("heater")
+    inst.components.heater.heatfn = GetHeatFn
+    inst.components.heater:SetThermics(false, true)
 	
 	inst:AddComponent("groundpounder")
 	inst.components.groundpounder.destroyer = true
@@ -26,23 +34,35 @@ AddPrefabPostInit("deerclops", function(inst)
     inst.components.groundpounder.destructionRings = 2
     inst.components.groundpounder.platformPushingRings = 2
     inst.components.groundpounder.numRings = 3
+	inst.components.groundpounder.groundpoundfx = "deerclops_ground_fx"
 end)
 
---[[AddPrefabPostInit("bearger", function(inst) --Hornet: I could of sworn people wanted bearger to spawn sinkholes, Oh well I'll note it out for now,
-	if not GLOBAL.TheWorld.ismastersim then          incase we wanna use it again
+AddPrefabPostInit("bearger", function(inst)
+	if not GLOBAL.TheWorld.ismastersim then
 		return
 	end
 	
 	if inst.components.groundpounder then
 		inst.components.groundpounder.sinkhole = true
 	end
-end)]]
+end)
+
+AddPrefabPostInit("spiderqueen", function(inst)
+	inst.entity:AddGroundCreepEntity()
+	
+	if not GLOBAL.TheWorld.ismastersim then
+		return
+	end
+	
+	inst.GroundCreepEntity:SetRadius(2)
+end)
+------------
 
 AddStategraphState("deerclops",
 	GLOBAL.State{
         name = "fall",
         tags = {"busy"},
-        onenter = function(inst)
+        onenter = function(inst, data)
 			inst.Physics:SetDamping(0)
             inst.Physics:SetMotorVel(0,-20+math.random()*10,0)
             inst.AnimState:PlayAnimation("idle_loop", true)
@@ -54,6 +74,12 @@ AddStategraphState("deerclops",
 				inst.Physics:SetMotorVel(0,0,0)
 				
 				inst.components.groundpounder:GroundPound()
+				
+				local sinkhole = GLOBAL.SpawnPrefab("antlion_sinkhole")
+				sinkhole.Transform:SetScale(1.2, 1.2, 1.2)
+				sinkhole.Transform:SetPosition(pt.x, 0, pt.z)
+				
+
 
                 pt.y = 0
 
@@ -67,7 +93,7 @@ AddStategraphState("deerclops",
     }
 )
 
---[[AddComponentPostInit("groundpounder", function(self)
+AddComponentPostInit("groundpounder", function(self)
 	self.sinkhole = false
 	_OldDestroyPoints = self.DestroyPoints
 	
@@ -86,5 +112,5 @@ AddStategraphState("deerclops",
 		
 		return _OldDestroyPoints(self, points, breakobjects, dodamage, pushplatforms)
 	end
-end)]]
+end)
 
