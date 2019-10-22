@@ -1,10 +1,13 @@
 local require = GLOBAL.require
 
---	[ 	Import Prefabs, Assets, Widgets	]	-
+--	[ 	Import Prefabs, Assets, Widgets	]	--
 	modimport("init/init_assets")
 	modimport("init/init_prefabs")
 	modimport("init/init_widgets")
 	modimport("init/minimap_icons")
+
+--  [   Import customized shard RPC module ]    --
+    modimport("init/init_uncompromisingshardrpc")
 	
 --	[ 	Import Names and Descriptions	]	--
 	modimport("init/init_names")
