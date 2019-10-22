@@ -5,11 +5,17 @@
 ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.GENERIC
 DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 
---	[ 		Wilson Descriptions		]	-- also for modded characters
+--	[ 		Wilson Descriptions		]	--
 
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Hearts aren't part of ghost anatomy!"
     ANNOUNCE.ANNOUNCE_WINONAGEN = "That's not really my thing."
     ANNOUNCE.ANNOUNCE_RATS = "Squeak squeak?"
+    ANNOUNCE.ANNOUNCE_ACIDRAIN = {
+        "The rain, it burns!",
+        "Ack, acid rain!",
+        "I need shelter!",
+    }
+    ANNOUNCE.ANNOUNCE_TOADSTOOLED = "There's fungus among us!"
 
     DESCRIBE.RAT = "They're rataliating!"
     DESCRIBE.RAT_BURROW = "It must lead to their labo-rat-ory."
@@ -17,8 +23,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
     DESCRIBE.MONSTERSCRAP = "Small, angry meat."
     DESCRIBE.COOKEDMONSTERSCRAP = "...it's still purple meat."
     DESCRIBE.MONSTERSCRAP_DRIED = "What a little jerk."
+    
+    DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "There's the source of the pestilence!"
+    DESCRIBE.TOADLING = "It sure likes those weird trees."
 
---	[ 		Recipe Descriptions		]	-- Text for every recipes
+--	[ 		Recipe Descriptions		]	--
 
 RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 
