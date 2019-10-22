@@ -7,10 +7,10 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 
 env.AddPrefabPostInit("trap_teeth", function(inst)
-    if not GLOBAL.TheWorld.ismastersim then
+    if not TheWorld.ismastersim then
         return
     end
 
-    GLOBAL.MakeSmallBurnable(inst)
-    GLOBAL.MakeSmallPropagator(inst)
+    MakeSmallBurnable(inst)
+    MakeSmallPropagator(inst)
 end)

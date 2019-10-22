@@ -56,7 +56,7 @@ local function SpawnToad(spawn_point)
     end
     toad.sg:GoToState("fall")
     toad.Physics:Teleport(spawn_point.x, 35, spawn_point.z)
-    return frog
+    return toad
 end
 
 local function SpawnFrogForPlayer(player, reschedule)
@@ -90,9 +90,10 @@ local function CancelSpawn(player)
 end
 
 local function ToggleUpdate(force)
-    if _worldstate.israining and
-        _worldstate.precipitationrate > TUNING.FROG_RAIN_PRECIPITATION and
-        _worldstate.moistureceil > TUNING.FROG_RAIN_MOISTURE then
+	if _worldstate.isautumn and
+		_worldstate.israining and
+        c_countprefabs("mushroomsprout_overworld") > 0 and
+		TheWorld.state.cycles > TUNING.DSTU.ACID_RAIN_START_AFTER_DAY then
         if not _updating then
             _updating = true
             for i, v in ipairs(_activeplayers) do
@@ -118,10 +119,8 @@ end
 --------------------------------------------------------------------------
 
 local function OnIsRaining(inst, israining)
-    if israining and (math.random() < _chance) then -- only add fromgs to some rains
+    if israining then
         _frogcap = math.random(_localfrogs.min, _localfrogs.max)
-    else
-        _frogcap = 0
     end
     ToggleUpdate()
 end

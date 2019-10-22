@@ -27,7 +27,7 @@ local require = GLOBAL.require
 --	[ 		Number Tuning and PostInits		]	--
 
 	modimport("init/init_tuning")
-	modimport("init/init_prefabpostinit")
+	modimport("init/init_postinit")
 	
 --	[ 	Console Commands for tests !	]	--
 	
@@ -75,7 +75,6 @@ local require = GLOBAL.require
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_bosses")) then
-		modimport("init/init_creatures/init_harder_bosses")
 		modimport("init/init_creatures/init_knockback")
 	end
 
