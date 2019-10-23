@@ -137,4 +137,6 @@ TUNING.DSTU =
     WORMWOOD_FIRE_DAMAGE = 1.50, -- orig 1.25
 }
 
+TUNING.WET_FUEL_PENALTY = 0.20 
+
 -- [              DST Related Overrides                  ]

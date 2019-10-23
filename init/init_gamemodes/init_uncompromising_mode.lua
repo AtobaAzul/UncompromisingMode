@@ -28,6 +28,7 @@ local require = GLOBAL.require
 
 	modimport("init/init_tuning")
 	modimport("init/init_postinit")
+	modimport("init/init_strings")
 	
 --	[ 	Console Commands for tests !	]	--
 	
@@ -36,16 +37,10 @@ local require = GLOBAL.require
 --	[ 				Gamemodes			]	--
 	
 	local GAMEMODE_UNCOMPROMISING = 0;
-	local GAMEMODE_POST_FUELWEAVER = 1;
 	local GAMEMODE_CUSTOM_SETTINGS = 2;
 
 	if GLOBAL.GetGameModeProperty("hardcore") then
 		--modimport("init/init_gamemodes/init_hardcore") --TODO: Fix hardcore game mode. For now, it is a mod config below.
-	end
-
-	if GetModConfigData("gamemode") == GAMEMODE_POST_FUELWEAVER then
-		print("Uncompromising mode loaded - Will activate after the one that delves below is slain")
-		modimport("init/init_gamemodes/init_post_fuelweaver")
 	end
 	
 --	[ 				Features			]	--

@@ -78,7 +78,6 @@ configuration_options =
 		options =
 		{
 			{description = "Uncompromising", data = 0}, -- TODO: When this is selected, disable the below ones (gray them out)
-			{description = "Post Fuelweaver", data = 1},
 			{description = "Custom", data = 2}, --TODO: On custom, enable editing the below settings
 		},
 		default = 0,
