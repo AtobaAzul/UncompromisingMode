@@ -146,7 +146,6 @@ local function onworkfinished(inst)
 end
 
 local function ongrown(inst)
-    print("DSTU: Toad grown")
 	inst.components.timer:StartTimer("growsprouts", 1440)
     inst:RemoveEventCallback("animover", ongrown)
     inst.MiniMapEntity:SetIcon(inst._dark:value() and "toadstool_cap_dark.png" or "toadstool_cap.png")
@@ -158,7 +157,6 @@ local function ongrown(inst)
 end
 
 local function ongrowing(inst)
-    print("DSTU: Toad growing")
     inst:RemoveEventCallback("animqueueover", ongrowing)
     inst.SoundEmitter:PlaySound("dontstarve/common/mushroom_up")
     inst.AnimState:PlayAnimation("spawn_appear_mushroom")

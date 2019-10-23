@@ -12,3 +12,5 @@ tasksetdata.set_pieces["ToadstoolArena"] = { 1, tasks={"Guarded Squeltch","Merms
 end)
 
 end
+
+modimport("init/init_food/init_food_worldgen")

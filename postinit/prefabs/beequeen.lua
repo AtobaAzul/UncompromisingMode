@@ -1,6 +1,11 @@
---BeeQueen now has AOE -Axe
-AddPrefabPostInit("beequeen", function (inst)
-    if inst ~= nil and inst.components ~= nil and inst.components.combat ~= nil then
+local env = env
+GLOBAL.setfenv(1, GLOBAL)
+-----------------------------------------------------------------
+env.AddPrefabPostInit("beequeen", function(inst)
+	if not TheWorld.ismastersim then
+		return
+	end
+    if inst.components.combat ~= nil then
 		local function isnotbee(ent)
 			if ent ~= nil and not ent:HasTag("bee") and not ent:HasTag("hive") then -- fix to friendly AOE: refer for later AOE mobs -Axe
 				return true

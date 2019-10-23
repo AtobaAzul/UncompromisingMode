@@ -1,3 +1,7 @@
+local function RGB(r, g, b)
+    return { r / 255, g / 255, b / 255, 1 }
+end
+
 
 local seg_time = 30
 
@@ -18,29 +22,49 @@ TUNING = GLOBAL.TUNING
 
 TUNING.DSTU = 
 {
+	----------------------------------------------------------------------------
+    --Acid colour
+    ----------------------------------------------------------------------------
+	ACID_TEXT_COLOUR = RGB(180, 200, 0),
     ----------------------------------------------------------------------------
     --Food changes
     ----------------------------------------------------------------------------
     --Global appearance rate of foods
-    FOOD_CARROT_PLANTED_APPEARANCE_PERCENT = 0.1, 
-    FOOD_BERRY_NORMAL_APPEARANCE_PERCENT = 0.20, 
-    FOOD_BERRY_JUICY_APPEARANCE_PERCENT = 0.20, 
-    FOOD_MUSHROOM_GREEN_APPEARANCE_PERCENT = 0.40, 
-    FOOD_MUSHROOM_BLUE_APPEARANCE_PERCENT = 0.20, 
-    FOOD_MUSHROOM_RED_APPEARANCE_PERCENT = 1, 
+    FOOD_CARROT_PLANTED_APPEARANCE_PERCENT = 0.2, 
+    FOOD_BERRY_NORMAL_APPEARANCE_PERCENT = 0.2, 
+    FOOD_BERRY_JUICY_APPEARANCE_PERCENT = 0.2, 
+    FOOD_MUSHROOM_GREEN_APPEARANCE_PERCENT = 0.3, 
+    FOOD_MUSHROOM_BLUE_APPEARANCE_PERCENT = 0.15, 
+    FOOD_MUSHROOM_RED_APPEARANCE_PERCENT = 0.7, 
     
     --Growth time increases
     STONE_FRUIT_GROWTH_INCREASE = 3,
     TREE_GROWTH_TIME_INCREASE = 5,
 
+    --Food stats
+    FOOD_BUTTERFLY_WING_HEALTH = 5, -- 3
+    FOOD_BUTTERFLY_WING_HUNGER = 2.5,
+    FOOD_BUTTERFLY_WING_PERISHTIME = total_day_time / 2,
+    FOOD_SEEDS_HUNGER = 1.5,
+    
+    --Food production
+    FOOD_HONEY_PRODUCTION_PER_STAGE = {0,1,2,4},
+
+    --Respawn time increases
+    BUNNYMAN_RESPAWN_TIME_DAYS = 3,
+	
+	----------------------------------------------------------------------------
+    --Winter Fire spreading
+    ----------------------------------------------------------------------------
+	WINTER_FIRE_MOD = 0.34,
     ----------------------------------------------------------------------------
     --Acid rain event tuning
     ----------------------------------------------------------------------------
     ACID_RAIN_DAMAGE_TICK = 2,
     ACID_RAIN_START_AFTER_DAY = 70,
     ACID_RAIN_DISEASE_CHANCE = 0.1, --each 5-10 seconds
-    ACID_RAIN_WAVE_MAX_ATTACKS = 5,
-    ACID_RAIN_WAVE_MIN_ATTACKS = 2,
+    ACID_RAIN_WAVE_MAX_ATTACKS = 7,
+    ACID_RAIN_WAVE_MIN_ATTACKS = 5,
 
     ----------------------------------------------------------------------------
     --Cooking recipe changes
@@ -50,7 +74,7 @@ TUNING.DSTU =
     RECIPE_CHANGE_PEROGI_PERISH = TUNING.PERISH_MED, --in days (from 20 to 10)
     RECIPE_CHANGE_BACONEGG_PERISH = TUNING.PERISH_MED,
     RECIPE_CHANGE_MEATBALL_HUNGER = TUNING.CALORIES_SMALL*4, -- (12.5 * 4) = 50, from 62.5
-    RECIPE_CHANGE_BUTTERFLY_WING_HEALTH = TUNING.HEALING_MEDSMALL - TUNING.HEALING_SMALL, -- (8 - 3) = 5;
+    RECIPE_CHANGE_BUTTERMUFFIN_HEALTH = TUNING.HEALING_MED/2,
     
     --Limits to fillers
     CROCKPOT_RECIPE_TWIG_LIMIT = 2,
@@ -75,7 +99,7 @@ TUNING.DSTU =
     ----------------------------------------------------------------------------
     --Generics
     MONSTER_BAT_CAVE_NR_INCREASE = 3,
-    MONSTER_CATCOON_HEALTH_CHANGE = TUNING.CATCOON_LIFE * 5,
+    MONSTER_CATCOON_HEALTH_CHANGE = TUNING.CATCOON_LIFE * 2.5,
     
     --Mctusk
     MONSTER_MCTUSK_HEALTH_INCREASE = 3,

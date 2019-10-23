@@ -23,37 +23,37 @@ local GIANTS =
 	["bearger"] =
     {
         radius = 125,
-		power = 1.50
+		power = 1,
     },
 	["dragonfly"] =
     {
         radius = 75,
-		power = 1.25
+		power = 1.25,
     },
 	["leif"] =
     {
         radius = 75,
-		power = 1.25
+		power = 1,
     },
-	["minotaur"] =
+	--[[["minotaur"] =
     {
         radius = 200,
-		power = 1.75
+		power = 1,
     },
 	["rook"] =
     {
         radius = 150,
-		power = 1.5
-    },
+		power = 0.75,
+    },]]
 	["krampus"] =
     {
         radius = 150,
-		power = 1.50
+		power = 0.75,
     },
 	["moose"] =
     {
         radius = 200,
-		power = 2
+		power = 2,
 	},
 	--No klaus, since he does double attacks and has deer 
 }
@@ -68,7 +68,7 @@ for k, v in pairs(GIANTS) do
 			end
 		end
 	
-		if inst ~= nil and inst.components.combat ~= nil then
+		if inst.components.combat ~= nil then
 			inst.components.combat.onhitotherfn = OnHitOther
 		end
 	end)

@@ -15,6 +15,60 @@ local dusk_time = seg_time * dusk_segs
 local night_time = seg_time * night_segs
 
 -----------------------------------------------------------------
+-- Reduce seed spawn chance
+-----------------------------------------------------------------
+--TODO: this is not working
+local RAND_TIME_MIN = FOOD_BIRD_SEED_SPAWN_MIN_RANDOM_TIME
+local RAND_TIME_MAX = FOOD_BIRD_SEED_SPAWN_MAX_RANDOM_TIME
+AddPrefabPostInit("crow", function(inst)
+    if inst~= nil and inst.components.periodicspawner ~= nil then
+        inst.components.periodicspawner:SetRandomTimes(RAND_TIME_MIN,RAND_TIME_MAX)
+    end
+end)
+
+AddPrefabPostInit("robin_winter", function(inst)
+    if inst~= nil and inst.components.periodicspawner ~= nil then
+        inst.components.periodicspawner:SetRandomTimes(RAND_TIME_MIN,RAND_TIME_MAX)
+    end
+end)
+
+AddPrefabPostInit("robin", function(inst)
+    if inst~= nil and inst.components.periodicspawner ~= nil then
+        inst.components.periodicspawner:SetRandomTimes(RAND_TIME_MIN,RAND_TIME_MAX)
+    end
+end)
+
+
+-----------------------------------------------------------------
+-- Butterflies appearance rate depends on nr of players
+-----------------------------------------------------------------
+--TODO complicated 
+--[[local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
+AddClassPostConstruct("components/butterflyspawner", function(self)
+    local _activeplayers = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "_activeplayers")
+    local _scheduledtasks = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "_scheduledtasks")
+    --Get the old functions using upvalue hacker
+    local SpawnButterflyForPlayer = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "SpawnButterflyForPlayer")
+    local ScheduleSpawn = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "ScheduleSpawn")
+    
+
+    local function ScheduleSpawn(player, initialspawn)
+        if _scheduledtasks[player] == nil then
+            local basedelay = initialspawn and 0.3 or 10
+            _scheduledtasks[player] = player:DoTaskInTime(basedelay + math.random() * 10 * #_activeplayers, SpawnButterflyForPlayer, ScheduleSpawn)
+                                                                                    --^ Here we lower chance based on player nr
+        end
+    end
+    --Now replace the function with our modified one
+    UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.butterflyspawner.fn, ScheduleSpawn, "ScheduleSpawn")
+end
+AddPrefabPostInit("world", function(inst)
+    
+end)]]
+GLOBAL.TUNING.BUTTERFLY_SPAWN_TIME = GLOBAL.TUNING.DSTU.FOOD_BUTTERFLY_SPAWN_TIME_INCREASE
+--TODO: Fix, this doesn't work
+
+-----------------------------------------------------------------
 -- stone fruits increased duration
 -----------------------------------------------------------------
 GLOBAL.TUNING.ROCK_FRUIT_REGROW =
@@ -103,151 +157,84 @@ AddPrefabPostInit("bunnyman", function (inst)
 end)
 
 -----------------------------------------------------------------
--- Bunny huts respawn bunnies as often as pigs now
+-- Bunny huts respawn bunnies not as often
 -----------------------------------------------------------------
 AddPrefabPostInit("rabbithouse", function (inst)
     if inst ~= nil and inst.components.spawner ~= nil then 
-        inst.components.spawner:Configure("bunnyman", GLOBAL.TUNING.TOTAL_DAY_TIME*4)
+        inst.components.spawner:Configure("bunnyman", GLOBAL.TUNING.TOTAL_DAY_TIME*GLOBAL.TUNING.DSTU.BUNNYMAN_RESPAWN_TIME_DAYS)
     end
 end)
-
------------------------------------------------------------------
--- Butterflies appearance rate depends on nr of players
------------------------------------------------------------------
---TODO complicated but doable
---[[local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
-AddClassPostConstruct("components/butterflyspawner", function(self)
-    local _activeplayers = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "_activeplayers")
-    local _scheduledtasks = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "_scheduledtasks")
-    --Get the old functions using upvalue hacker
-    local SpawnButterflyForPlayer = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "SpawnButterflyForPlayer")
-    local ScheduleSpawn = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "ScheduleSpawn")
-    
-
-    local function ScheduleSpawn(player, initialspawn)
-        if _scheduledtasks[player] == nil then
-            local basedelay = initialspawn and 0.3 or 10
-            _scheduledtasks[player] = player:DoTaskInTime(basedelay + math.random() * 10 * #_activeplayers, SpawnButterflyForPlayer, ScheduleSpawn)
-                                                                                    --^ Here we lower chance based on player nr
-        end
-    end
-    --Now replace the function with our modified one
-    UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.butterflyspawner.fn, ScheduleSpawn, "ScheduleSpawn")
-end
-AddPrefabPostInit("world", function(inst)
-    
-end)]]
 
 -----------------------------------------------------------------
 -- Bees don't drop honey no more
 -----------------------------------------------------------------
 local stinger_only = { "stinger" }
 AddPrefabPostInit("bee", function(inst)
-    if inst ~= nil and inst.components.lootdropper ~= nil then
+    if inst.components.lootdropper ~= nil then
         inst.components.lootdropper:SetLoot(stinger_only)
     end
 end)
 
 AddPrefabPostInit("killerbee", function(inst)
-    if inst ~= nil and inst.components.lootdropper ~= nil then
+    if inst.components.lootdropper ~= nil then
         inst.components.lootdropper:SetLoot(stinger_only)
     end
 end)
 
 
 -----------------------------------------------------------------
--- Carrots, mushroos and berry bushs are rare now
--- Relevant: regrowthmanager.lua, map\rooms
--- red_mushroom 
--- blue_mushroom
--- green_mushroom 
--- berrybush
--- berrybush_juicy 
--- carrot_planted 
+-- Bee box levels are 0,1,2,4 honey (from 0,1,3,6)
 -----------------------------------------------------------------
-local CHANGED_ROOMS = 
+local HONEY_PER_STAGE = GLOBAL.TUNING.DSTU.FOOD_HONEY_PRODUCTION_PER_STAGE
+
+levels =
 {
-    "BGGrass",
-    --mostly carrots
-    "RabbitArea",
-    "RabbitTown",
-    "RabbitSinkhole",
-    --generic
-    "MooseGooseBreedingGrounds",
-    "MagicalDeciduous",
-    "DeciduousClearing",
-    "BGDeciduous",
-    "SpiderIncursion",
-    "DropperDesolation",
-    "RuinedCityEntrance",
-    --blue mush
-    "BlueMushForest",
-    "BlueMushMeadow",
-    "BlueSpiderForest",
-    "BGBlueMush",
-    "BGBlueMushRoom",
-    --fungus noise
-    "FungusNoiseForest",
-    "FungusNoiseMeadow",
-    --green mush
-    "GreenMushMeadow",
-    "GreenMushNoise",
-    "GreenMushForest",
-    "GreenMushPonds",
-    "GreenMushSinkhole",
-    "GreenMushRabbits",
-    "BGGreenMush",
-    "BGGreenMushRoom",
-    --red mush
-    "RedMushForest",
-    "RedSpiderForest",
-    "RedMushPillars",
-    "BGRedMush",
-    "BGRedMushRoom",
+    { amount=HONEY_PER_STAGE[4], idle="honey3", hit="hit_honey3" },
+    { amount=HONEY_PER_STAGE[3], idle="honey2", hit="hit_honey2" },
+    { amount=HONEY_PER_STAGE[2], idle="honey1", hit="hit_honey1" },
+    { amount=HONEY_PER_STAGE[1], idle="bees_loop", hit="hit_idle" },
 }
 
-local function ChangeSpawnRates(room)
-    if room ~= nil and room.changed == nil and room.contents.dsitributeprefabs ~= nil then
-        if room.contents.dsitributeprefabs.carrot_planted ~= nil then 
-            room.contents.dsitributeprefabs.carrot_planted = room.contents.dsitributeprefabs.carrot_planted * GLOBAL.TUNING.DSTU.FOOD_CARROT_PLANTED_APPEARANCE_PERCENT  
+local function setlevel(inst, level)
+    print("DSTU setlevel")
+    if not inst:HasTag("burnt") then
+        if inst.anims == nil then
+            inst.anims = { idle = level.idle, hit = level.hit }
+        else
+            inst.anims.idle = level.idle
+            inst.anims.hit = level.hit
         end
-        if room.contents.dsitributeprefabs.berrybush ~= nil then 
-            room.contents.dsitributeprefabs.berrybush = room.contents.dsitributeprefabs.berrybush * GLOBAL.TUNING.DSTU.FOOD_BERRY_NORMAL_APPEARANCE_PERCENT  
-        end
-        if room.contents.dsitributeprefabs.berrybush_juicy ~= nil then 
-            room.contents.dsitributeprefabs.berrybush_juicy = room.contents.dsitributeprefabs.berrybush_juicy * GLOBAL.TUNING.DSTU.FOOD_BERRY_JUICY_APPEARANCE_PERCENT  
-        end
-        if room.contents.dsitributeprefabs.green_mushroom ~= nil then 
-            room.contents.dsitributeprefabs.green_mushroom = room.contents.dsitributeprefabs.green_mushroom * GLOBAL.TUNING.DSTU.FOOD_MUSHROOM_GREEN_APPEARANCE_PERCENT  
-        end
-        if room.contents.dsitributeprefabs.blue_mushroom ~= nil then 
-            room.contents.dsitributeprefabs.blue_mushroom = room.contents.dsitributeprefabs.blue_mushroom * GLOBAL.TUNING.DSTU.FOOD_MUSHROOM_BLUE_APPEARANCE_PERCENT  
-        end
-        if room.contents.dsitributeprefabs.red_mushroom ~= nil then 
-            room.contents.dsitributeprefabs.red_mushroom = room.contents.dsitributeprefabs.red_mushroom * GLOBAL.TUNING.DSTU.FOOD_MUSHROOM_RED_APPEARANCE_PERCENT  
-        end
-        room.changed = true
+        inst.AnimState:PlayAnimation(inst.anims.idle)
     end
 end
 
-for k, v in pairs(CHANGED_ROOMS) do
-	AddRoomPreInit(v, function(inst)
-		ChangeSpawnRates(inst)
-	end)
+local function updatelevel(inst)
+    print("DSTU updatelevel")
+    if not inst:HasTag("burnt") then
+        for k, v in pairs(levels) do
+            if inst.components.harvestable.produce >= v.amount then
+                setlevel(inst, v)
+                break
+            end
+        end
+    end
 end
 
+local function onharvest(inst, picker, produce)
+    print("DSTU onharvest")
+    if not inst:HasTag("burnt") then
+        updatelevel(inst)
+        if inst.components.childspawner ~= nil and not GLOBAL.TheWorld.state.iswinter then
+            inst.components.childspawner:ReleaseAllChildren(picker)
+        end
+    end
+end
 
------------------------------------------------------------------
--- Bee box levels are 0,1,2,4 honey (from 0,1,3,6)
------------------------------------------------------------------
 AddPrefabPostInit("beebox", function (inst)
-    levels =
-    {
-        { amount=3, idle="honey3", hit="hit_honey3" },
-        { amount=2, idle="honey2", hit="hit_honey2" },
-        { amount=1, idle="honey1", hit="hit_honey1" },
-        { amount=0, idle="bees_loop", hit="hit_idle" },
-    }
+    --TODO, test this
+    if inst.components.harvestable ~= nil then 
+        inst.components.harvestable:SetUp("honey", HONEY_PER_STAGE[4], nil, onharvest, updatelevel)
+    end
 end)
 
 -----------------------------------------------------------------
