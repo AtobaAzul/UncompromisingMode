@@ -12,6 +12,17 @@ env.AddClassPostConstruct("widgets/itemtile", function(self, invitem)
     self.acid:GetAnimState():PlayAnimation("idle")
     self.acid:Hide()
     self.acid:SetClickable(false)
+	
+	self.inst:ListenForEvent("wetnesschange",
+        function(invitem, wet)
+            if not self.isactivetile then
+				if wet and c_countprefabs("mushroomsprout_overworld") > 0 then
+					self.acid:Show()
+				else
+					self.acid:Hide()
+				end
+            end
+        end, invitem)
 
 	function self:UpdateTooltip()
 		local str = self:GetDescriptionString()

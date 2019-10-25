@@ -35,6 +35,7 @@ local class_post = {
     --"screens/playerhud",
 	"widgets/itemtile",
 	"widgets/hoverer",
+	"widgets/moisturemeter",
 }
 
 local brain_post = {
