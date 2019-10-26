@@ -3,3 +3,12 @@ ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.WORMWOOD
 DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 
 --	[ 		Wormwood Descriptions		]	--
+<<<<<<< Updated upstream
+=======
+
+	ANNOUNCE.ANNOUNCE_RATRAID = "Hmm?"
+	ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Ratty!"
+	ANNOUNCE.ANNOUNCE_RATRAID_OVER = "Ratty is leaving"
+
+	DESCRIBE.UNCOMPROMISING_RAT = "Stealthy Ratty"
+>>>>>>> Stashed changes

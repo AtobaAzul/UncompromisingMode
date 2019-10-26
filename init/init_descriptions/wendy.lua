@@ -3,6 +3,7 @@ ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.WENDY
 DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 
 --	[ 		Wendy Descriptions		]	--
+<<<<<<< Updated upstream
 
 	ANNOUNCE.ANNOUNCE_WIRLYSHARE_YUCK = 
 	{
@@ -73,3 +74,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.CHERRY_BONSAI = "They live a long time. Too long."
 	DESCRIBE.CHERRY_POT = "They are not thirsty."
 	DESCRIBE.CHERRY_STONELAMP_LONG = "Traditional fire jail."
+=======
+	
+	DESCRIBE.UNCOMPROMISING_RAT = "The pestilence arrives."
+>>>>>>> Stashed changes

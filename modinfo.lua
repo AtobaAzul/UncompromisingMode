@@ -142,6 +142,17 @@ configuration_options =
 		default = true,
 	},
 	{
+		name = "rat_raids",
+		label = "Rat Raids",
+		hover = "Your base will be raided by rats.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
+	},
+	{
 		name = "rare_food",
 		label = "Rare Food",
 		hover = "Food is harder to find now.",

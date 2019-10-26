@@ -3,6 +3,7 @@ ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.WEBBER
 DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 
 --	[ 		Webber Descriptions		]	--
+<<<<<<< Updated upstream
 
 	ANNOUNCE.ANNOUNCE_WIRLYSHARE_YUCK = 
 	{
@@ -73,3 +74,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.CHERRY_BONSAI = "It can't grow?"
 	DESCRIBE.CHERRY_POT = "It attracts bees!"
 	DESCRIBE.CHERRY_STONELAMP_LONG = "Fire is safe in."
+=======
+	
+	ANNOUNCE.ANNOUNCE_RATRAID = "Uh-oh. They're back."
+	ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Look at there!"
+	ANNOUNCE.ANNOUNCE_RATRAID_OVER = "They stole our stuff!"
+	
+	DESCRIBE.UNCOMPROMISING_RAT = "Don't you want to play with us?"
+>>>>>>> Stashed changes

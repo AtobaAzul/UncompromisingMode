@@ -33,6 +33,19 @@ TUNING.DSTU =
 
     --Growth time increase for stone fruits
     STONE_FRUIT_GROWTH_INCREASE = 3,
+<<<<<<< Updated upstream
+=======
+	
+	--Mobs
+	RAIDRAT_HEALTH = 100,
+	RAIDRAT_DAMAGE = 20,
+	RAIDRAT_ATTACK_PERIOD = 2,
+	RAIDRAT_ATTACK_RANGE = 1,
+	RAIDRAT_RUNSPEED = 8,
+	RAIDRAT_WALKSPEED = 4,
+	RAIDRAT_SPAWNRATE = seg_time / 5,
+	RAIDRAT_SPAWNRATE_VARIANCE = (seg_time / 5) * 0.5,
+>>>>>>> Stashed changes
 }
 
 -- [              DST Related Overrides                  ]
