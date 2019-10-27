@@ -22,3 +22,6 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
     
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "A parasitic existence feeding upon the very earth."
     DESCRIBE.TOADLING = "They're very loyal to their kind..."
+
+	
+	DESCRIBE.UNCOMPROMISING_RAT = "The pestilence arrives."

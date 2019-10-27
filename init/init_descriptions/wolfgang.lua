@@ -22,3 +22,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
     
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Smelly mushroom make water bad!"
     DESCRIBE.TOADLING = "Little frog not look right."
+	
+	ANNOUNCE.ANNOUNCE_RATRAID = "Tiny noises are scary."
+	ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Oh no, it's the rats!"
+	ANNOUNCE.ANNOUNCE_RATRAID_OVER = "Rats are leaving with Wolfgang's things!"
+	
+	DESCRIBE.UNCOMPROMISING_RAT = "Is many tiny rats."

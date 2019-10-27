@@ -22,3 +22,10 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
     
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Let us rip out this affliction by the root!"
     DESCRIBE.TOADLING = "Fell guardians of the corruption!"
+	
+	ANNOUNCE.ANNOUNCE_RATRAID = "A war is preparing."
+	ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Protect the village!"
+	ANNOUNCE.ANNOUNCE_RATRAID_OVER = "They're fleeing with the loots!"
+	
+	DESCRIBE.UNCOMPROMISING_RAT = "They're raiding our base!"
+

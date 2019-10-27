@@ -69,6 +69,11 @@ local require = GLOBAL.require
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("rat_raids")) then
+		modimport("init/init_ratraid")
+	end
+
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_bosses")) then
 		modimport("init/init_creatures/init_knockback")
 	end
