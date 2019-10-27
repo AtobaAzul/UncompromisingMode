@@ -348,6 +348,12 @@ local function fn_herd()
 	inst:AddTag("NOBLOCK")
 	inst:AddTag("NOCLICK")
 	
+	inst.entity:SetPristine()
+	
+	if not TheWorld.ismastersim then
+		return inst
+	end
+	
 	inst:AddComponent("herd")
 	inst.components.herd:SetGatherRange(40)
 	inst.components.herd:SetUpdateRange(nil)
