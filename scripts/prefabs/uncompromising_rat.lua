@@ -102,7 +102,7 @@ local function onsave_rat(inst, data)
 end
 
 local function onload_rat(inst, data)
-	local is_ = data.carrying or inst:HasTag("carrying")
+	local is_carrying = data.carrying or inst:HasTag("carrying")
 	if is_carrying then
 		inst.components.inventory:DropEverything()
 	end
