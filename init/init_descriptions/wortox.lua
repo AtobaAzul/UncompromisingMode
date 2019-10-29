@@ -2,7 +2,6 @@ ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.WORTOX
 DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 
 --	[ 		Wortox Descriptions		]	--
-
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Just kidding! Hyuyu."
     ANNOUNCE.ANNOUNCE_WINONAGEN = "Let the mortal have her fun. I've elsewhere to run!"
     ANNOUNCE.ANNOUNCE_RATS = "The piper calls! Best hide it all!"
@@ -22,3 +21,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
     
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "It seems the source of that malicious mycelium!"
     DESCRIBE.TOADLING = "Come to hop away...or perhaps to play?"
+	
+	ANNOUNCE.ANNOUNCE_RATRAID = "This sounds like a cheesy embush."
+	ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "I'll do by best facing the pests!"
+	ANNOUNCE.ANNOUNCE_RATRAID_OVER = "What a lame prank."
+	
+	DESCRIBE.UNCOMPROMISING_RAT = "It likes what shines."

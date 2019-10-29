@@ -4,8 +4,7 @@
 
 ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.GENERIC
 DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
-
---	[ 		Wilson Descriptions		]	--
+--	[ 		Wilson Descriptions		]	-- also for modded characters
 
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Hearts aren't part of ghost anatomy!"
     ANNOUNCE.ANNOUNCE_WINONAGEN = "That's not really my thing."
@@ -29,6 +28,17 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 
 --	[ 		Recipe Descriptions		]	--
 
-RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
+	RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 
     RECIPE_DESC.RAT_BURROW = "A den of annoying little hairballs."
+	
+	ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Science requires a solid body!"
+	ANNOUNCE.ANNOUNCE_RATRAID = "What's this pesky sound?"
+	ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Is that a rat?"
+	ANNOUNCE.ANNOUNCE_RATRAID_OVER = "Hey! This is mine!"
+	
+	DESCRIBE.UNCOMPROMISING_RAT = "Ew, get out of here!"
+
+--	[ 		Recipe Descriptions		]	-- Text for every recipes
+	
+	RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC

@@ -2,7 +2,6 @@ ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.WOODIE
 DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 
 --	[ 			Woodie Descriptions			]	--
-
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Wouldn't do much good without a body, eh?"
     ANNOUNCE.ANNOUNCE_WINONAGEN = "I'm not too keen on maintaining an electrical engine."
     ANNOUNCE.ANNOUNCE_RATS = "That's the sound of somethin' devious."
@@ -22,3 +21,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
     
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "That cap is killing our trees!"
     DESCRIBE.TOADLING = "Hop off, ya hoser."
+
+	ANNOUNCE.ANNOUNCE_RATRAID = "Eh, what's that sound?"
+	ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Not the logs!"
+	ANNOUNCE.ANNOUNCE_RATRAID_OVER = "Where's my... eh!"
+	
+	DESCRIBE.UNCOMPROMISING_RAT = "Try stealing my axe, eh!"

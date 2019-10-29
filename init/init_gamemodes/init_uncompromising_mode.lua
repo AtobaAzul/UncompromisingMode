@@ -2,7 +2,6 @@ local require = GLOBAL.require
 
 --	[ 	Import Prefabs, Assets, Widgets	]	-
 	modimport("init/init_assets")
-	modimport("init/init_prefabs")
 	modimport("init/init_widgets")
 	modimport("init/minimap_icons")
 	
@@ -66,6 +65,11 @@ local require = GLOBAL.require
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_recipes")) then
 		modimport("init/init_recipes")
 		modimport("init/init_food/init_crockpot")
+	end
+
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("rat_raids")) then
+		modimport("init/init_ratraid")
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or

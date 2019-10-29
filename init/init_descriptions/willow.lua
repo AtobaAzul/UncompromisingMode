@@ -22,3 +22,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
     
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Ew! Burn it!"
     DESCRIBE.TOADLING = "Gross! It's all sticky-looking."
+	
+	ANNOUNCE.ANNOUNCE_RATRAID = "There's something digging right under me!"
+	ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Those boring rats!"
+	ANNOUNCE.ANNOUNCE_RATRAID_OVER = "Where are you going at?"
+	
+	DESCRIBE.UNCOMPROMISING_RAT = "Pfft, how can you steal my fire?"
