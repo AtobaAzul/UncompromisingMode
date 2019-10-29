@@ -8,13 +8,14 @@ env.AddStategraphState("deerclops",
         onenter = function(inst, data)
 			inst.Physics:SetDamping(0)
             inst.Physics:SetMotorVel(0,-20+math.random()*10,0)
-            inst.AnimState:PlayAnimation("idle_loop", true)
+            inst.AnimState:PlayAnimation("falling_loop", true)
         end,
         
         onupdate = function(inst)
             local pt = Point(inst.Transform:GetWorldPosition())
             if pt.y < 2 then
 				inst.Physics:SetMotorVel(0,0,0)
+				inst.AnimState:PlayAnimation("fallattack", true)
 
 				inst.components.groundpounder:GroundPound()
 
@@ -26,8 +27,12 @@ env.AddStategraphState("deerclops",
 				inst.Physics:SetDamping(5)
                 inst.Physics:Teleport(pt.x,pt.y,pt.z)
 	            inst.DynamicShadow:Enable(true)
-                inst.sg:GoToState("idle")
             end
         end,
+		timeline =
+        {
+            TimeEvent(60*FRAMES, function(inst) inst.sg:GoToState("idle") end),
+           
+        },
     }
 )
