@@ -22,6 +22,7 @@ env.AddStategraphState("deerclops",
 				SpawnPrefab("antlion_sinkhole").Transform:SetPosition(pt.x, 0, pt.z)
 
                 pt.y = 0
+				
                 inst.Physics:Stop()
 				inst.Physics:SetDamping(5)
                 inst.Physics:Teleport(pt.x,pt.y,pt.z)
@@ -31,7 +32,6 @@ env.AddStategraphState("deerclops",
 		timeline =
         {
             TimeEvent(60*FRAMES, function(inst) inst.sg:GoToState("idle") end),
-			
            
         },
     }
