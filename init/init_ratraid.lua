@@ -72,6 +72,10 @@ local function ActiveRaid(inst, doer)
 end
 
 AddPrefabPostInit("treasurechest", function(inst)
+	if not GLOBAL.TheWorld.ismastersim then
+		return
+	end
+	
 	local function onclose_raid(inst, doer)
 		if not inst:HasTag("burnt") then
 			inst.AnimState:PlayAnimation("close")
@@ -87,6 +91,10 @@ AddPrefabPostInit("treasurechest", function(inst)
 end)
 
 AddPrefabPostInit("icebox", function(inst)
+	if not GLOBAL.TheWorld.ismastersim then
+		return
+	end
+	
 	local function onclose_raid(inst, doer)
 		inst.AnimState:PlayAnimation("close")
 		inst.SoundEmitter:PlaySound("dontstarve/common/icebox_close")
@@ -99,6 +107,10 @@ AddPrefabPostInit("icebox", function(inst)
 end)
 
 AddPrefabPostInit("dragonflychest", function(inst)
+	if not GLOBAL.TheWorld.ismastersim then
+		return
+	end
+	
 	local function onclose_raid(inst, doer)
 		if not inst:HasTag("burnt") then
 			inst.AnimState:PlayAnimation("close")
@@ -113,6 +125,10 @@ AddPrefabPostInit("dragonflychest", function(inst)
 end)
 
 AddPrefabPostInit("saltbox", function(inst)
+	if not GLOBAL.TheWorld.ismastersim then
+		return
+	end
+	
 	local function onclose_raid(inst, doer)
 		if not inst:HasTag("burnt") then
 			inst.AnimState:PlayAnimation("close")

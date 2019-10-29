@@ -16,10 +16,6 @@ local itemprefabs=
 local function oneaten(inst, eater)
 	if eater and eater:HasTag("raidrat") then
 		eater.components.health:Kill()
-	else
-		if eater.components.health ~= nil then
-			eater.components.health:DoDelta(50)
-		end
 	end
 end
 
@@ -49,7 +45,10 @@ local function fn()
 	
 	inst:AddComponent("edible")
     inst.components.edible.foodtype = FOODTYPE.VEGGIE --Defined as veggie for now...
+	inst.components.edible.healthvalue = -50
 	inst.components.edible:SetOnEatenFn(oneaten)
+	
+	inst:AddComponent("bait")
 
     return inst
 end

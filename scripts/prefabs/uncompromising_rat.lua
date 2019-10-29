@@ -285,12 +285,17 @@ local function EndRaid(inst)
 	inst:RemoveTag("NOCLICK")
 	inst:RemoveTag("raiding")
 	
-	inst:AddComponent("workable")
-	inst.components.workable:SetOnFinishCallback(onfinishcallback)
-	inst.components.workable:SetOnWorkCallback(onworked)
-	inst.components.workable:SetWorkAction(ACTIONS.DIG)
-	inst.components.workable:SetWorkLeft(math.random(2, 5))
-	
+	if inst.components.workable == nil then
+		inst:AddComponent("workable")
+	end
+		
+	if inst.components.workable ~= nil then
+		inst.components.workable:SetOnFinishCallback(onfinishcallback)
+		inst.components.workable:SetOnWorkCallback(onworked)
+		inst.components.workable:SetWorkAction(ACTIONS.DIG)
+		inst.components.workable:SetWorkLeft(math.random(2, 5))
+	end
+		
 	inst.components.herd:SetOnEmptyFn(BurrowKilled)
 	inst.components.herd.updatepos = false
     inst.components.herd.updateposincombat = false
