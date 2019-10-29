@@ -5,4 +5,5 @@ Assets = {
 	Asset("ANIM", "anim/acid_meter.zip"),
 	Asset("ANIM", "anim/deerclops_ground_fx.zip"),
 	Asset("ANIM", "anim/deerclopsfalling.zip"),
+	
 }
