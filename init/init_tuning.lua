@@ -1,3 +1,7 @@
+local function RGB(r, g, b)
+    return { r / 255, g / 255, b / 255, 1 }
+end
+
 
 local seg_time = 30
 
@@ -18,6 +22,10 @@ TUNING = GLOBAL.TUNING
 
 TUNING.DSTU = 
 {
+	----------------------------------------------------------------------------
+    --Acid colour
+    ----------------------------------------------------------------------------
+	ACID_TEXT_COLOUR = RGB(180, 200, 0),
     ----------------------------------------------------------------------------
     --Food changes
     ----------------------------------------------------------------------------
@@ -127,6 +135,20 @@ TUNING.DSTU =
     --Wormwood
     WORMWOOD_BURN_TIME = 6.66, --orig 4.3
     WORMWOOD_FIRE_DAMAGE = 1.50, -- orig 1.25
+    --Growth time increase for stone fruits
+    STONE_FRUIT_GROWTH_INCREASE = 3,
+	
+	--Mobs
+	RAIDRAT_HEALTH = 100,
+	RAIDRAT_DAMAGE = 20,
+	RAIDRAT_ATTACK_PERIOD = 2,
+	RAIDRAT_ATTACK_RANGE = 1,
+	RAIDRAT_RUNSPEED = 8,
+	RAIDRAT_WALKSPEED = 4,
+	RAIDRAT_SPAWNRATE = seg_time / 5,
+	RAIDRAT_SPAWNRATE_VARIANCE = (seg_time / 5) * 0.5,
 }
+
+TUNING.WET_FUEL_PENALTY = 0.20 
 
 -- [              DST Related Overrides                  ]

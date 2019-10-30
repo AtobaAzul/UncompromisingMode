@@ -22,3 +22,10 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
     
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Is that where the yucky rain came from?"
     DESCRIBE.TOADLING = "That's one weird frog."
+
+	ANNOUNCE.ANNOUNCE_RATRAID = "Uh-oh. They're back."
+	ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Look at there!"
+	ANNOUNCE.ANNOUNCE_RATRAID_OVER = "They stole our stuff!"
+	
+	DESCRIBE.UNCOMPROMISING_RAT = "Don't you want to play with us?"
+

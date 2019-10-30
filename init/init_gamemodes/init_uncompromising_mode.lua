@@ -2,7 +2,6 @@ local require = GLOBAL.require
 
 --	[ 	Import Prefabs, Assets, Widgets	]	--
 	modimport("init/init_assets")
-	modimport("init/init_prefabs")
 	modimport("init/init_widgets")
 	modimport("init/minimap_icons")
 
@@ -30,7 +29,8 @@ local require = GLOBAL.require
 --	[ 		Number Tuning and PostInits		]	--
 
 	modimport("init/init_tuning")
-	modimport("init/init_prefabpostinit")
+	modimport("init/init_postinit")
+	modimport("init/init_strings")
 	
 --	[ 	Console Commands for tests !	]	--
 	
@@ -39,16 +39,10 @@ local require = GLOBAL.require
 --	[ 				Gamemodes			]	--
 	
 	local GAMEMODE_UNCOMPROMISING = 0;
-	local GAMEMODE_POST_FUELWEAVER = 1;
 	local GAMEMODE_CUSTOM_SETTINGS = 2;
 
 	if GLOBAL.GetGameModeProperty("hardcore") then
 		--modimport("init/init_gamemodes/init_hardcore") --TODO: Fix hardcore game mode. For now, it is a mod config below.
-	end
-
-	if GetModConfigData("gamemode") == GAMEMODE_POST_FUELWEAVER then
-		print("Uncompromising mode loaded - Will activate after the one that delves below is slain")
-		modimport("init/init_gamemodes/init_post_fuelweaver")
 	end
 	
 --	[ 				Features			]	--
@@ -77,8 +71,12 @@ local require = GLOBAL.require
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("rat_raids")) then
+		modimport("init/init_ratraid")
+	end
+
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_bosses")) then
-		modimport("init/init_creatures/init_harder_bosses")
 		modimport("init/init_creatures/init_knockback")
 	end
 

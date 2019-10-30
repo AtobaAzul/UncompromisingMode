@@ -22,3 +22,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
     
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Might that strange vegitation be the cause of the polluted rain?"
     DESCRIBE.TOADLING = "They appear subservient to the nearby fungi."
+
+	DESCRIBE.UNCOMPROMISING_RAT = "The Rattus can be source of many diseases."

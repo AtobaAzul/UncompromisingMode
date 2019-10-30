@@ -78,7 +78,6 @@ configuration_options =
 		options =
 		{
 			{description = "Uncompromising", data = 0}, -- TODO: When this is selected, disable the below ones (gray them out)
-			{description = "Post Fuelweaver", data = 1},
 			{description = "Custom", data = 2}, --TODO: On custom, enable editing the below settings
 		},
 		default = 0,
@@ -131,6 +130,17 @@ configuration_options =
 		name = "harder_weather",
 		label = "Harder Weather",
 		hover = "Nature becomes unforgiving.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
+	},
+	{
+		name = "rat_raids",
+		label = "Rat Raids",
+		hover = "Your base will be raided by rats.",
 		options =
 		{
 			{description = "Disabled", data = false},

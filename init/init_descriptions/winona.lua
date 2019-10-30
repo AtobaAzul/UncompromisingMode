@@ -2,7 +2,6 @@ ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.WINONA
 DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 
 --	[ 		Winona Descriptions		]	--
-
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Without the body? That wouldn't be too constructive."
     ANNOUNCE.ANNOUNCE_WINONAGEN = "Even if it's small, please...p-put your bug report in my Discord server, Player-san!"
     ANNOUNCE.ANNOUNCE_RATS = "Aw, rats."
@@ -22,3 +21,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
     
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "That can't be good. We need to cut it off at the source!"
     DESCRIBE.TOADLING = "Well that one's got an an attitude."
+	
+	ANNOUNCE.ANNOUNCE_RATRAID = "I don't like how that sounds."
+	ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Let's slap the rats!"
+	ANNOUNCE.ANNOUNCE_RATRAID_OVER = "They're leaving, shoot them!"
+	
+	DESCRIBE.UNCOMPROMISING_RAT = "Ya better not touch my gears."
