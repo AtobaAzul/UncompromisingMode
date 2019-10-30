@@ -2,32 +2,50 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 env.AddStategraphState("deerclops",
-	State{
+    State{
         name = "fall",
         tags = {"busy"},
         onenter = function(inst, data)
-			inst.Physics:SetDamping(0)
+            inst.Physics:SetDamping(0)
             inst.Physics:SetMotorVel(0,-20+math.random()*10,0)
-            inst.AnimState:PlayAnimation("idle_loop", true)
+            inst.AnimState:PlayAnimation("falling_loop", true)
         end,
         
         onupdate = function(inst)
             local pt = Point(inst.Transform:GetWorldPosition())
             if pt.y < 2 then
-				inst.Physics:SetMotorVel(0,0,0)
+                inst.Physics:SetMotorVel(0,0,0)
 
-				inst.components.groundpounder:GroundPound()
+                inst.components.groundpounder:GroundPound()
 
-				SpawnPrefab("antlion_sinkhole").Transform:SetPosition(pt.x, 0, pt.z)
+                SpawnPrefab("antlion_sinkhole").Transform:SetPosition(pt.x, 0, pt.z)
 
                 pt.y = 0
-
+                
                 inst.Physics:Stop()
-				inst.Physics:SetDamping(5)
+                inst.Physics:SetDamping(5)
                 inst.Physics:Teleport(pt.x,pt.y,pt.z)
-	            inst.DynamicShadow:Enable(true)
-                inst.sg:GoToState("idle")
+                inst.DynamicShadow:Enable(true)
+
+            inst.sg:GoToState("groundpound")
             end
         end,
+
+    }
+)
+env.AddStategraphState("deerclops",
+    State{
+        name = "groundpound",
+        tags = {"busy"},
+        onenter = function(inst, data)
+            inst.AnimState:PlayAnimation("fallattack", true)
+        end,
+        
+		 events =
+        {
+            EventHandler("animover", function(inst)
+                inst.sg:GoToState("idle")
+            end),
+        },
     }
 )
