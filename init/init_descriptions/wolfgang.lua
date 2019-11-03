@@ -5,7 +5,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Heart not stay in spooky ghost. Where body?"
     ANNOUNCE.ANNOUNCE_WINONAGEN = "How do Wolfgang make box work?"
-    ANNOUNCE.ANNOUNCE_RATS = "Wolfgang hear tiny things?"
+    ANNOUNCE.ANNOUNCE_RATRAID = "Wolfgang hear tiny squeak squeaks?"
+    ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Is big rats!"
+    ANNOUNCE.ANNOUNCE_RATRAID_OVER = "No! Come back! Bad rat! Bad rat!"
     ANNOUNCE.ANNOUNCE_ACIDRAIN = {
         "Rain is burning Wolfgang's muscles!",
         "Rain is biting Wolfgang!",
@@ -13,18 +15,14 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
     }
     ANNOUNCE.ANNOUNCE_TOADSTOOLED = "Ahh! Mushroomy trees?"
 
-    DESCRIBE.RAT = "Is greedy little hair puff!"
-    DESCRIBE.RAT_BURROW = "Beady eye hole make Wolfgang uncomfortable."
-    
+    DESCRIBE.UNCOMPROMISING_RAT = "Is greedy little hair puff!"
+    DESCRIBE.UNCOMPROMISING_RATHOLD = "Beady eye hole make Wolfgang uncomfortable."
+    DESCRIBE.RATPOISONBOTTLE = "Icky death soup."
+    DESCRIBE.RATPOISON = "Wolfgang not have to catch rat if rat dead! Hah hah!"
+
     DESCRIBE.MONSTERSCRAP = "Look bad. Smell bad. Is bad?"
     DESCRIBE.COOKEDMONSTERSCRAP = "Still look not good. Wolfgang go find better meat?"
     DESCRIBE.MONSTERSCRAP_DRIED = "Small bad meat is rock now."
-    
+
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Smelly mushroom make water bad!"
     DESCRIBE.TOADLING = "Little frog not look right."
-	
-	ANNOUNCE.ANNOUNCE_RATRAID = "Tiny noises are scary."
-	ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Oh no, it's the rats!"
-	ANNOUNCE.ANNOUNCE_RATRAID_OVER = "Rats are leaving with Wolfgang's things!"
-	
-	DESCRIBE.UNCOMPROMISING_RAT = "Is many tiny rats."
