@@ -22,7 +22,7 @@ description =
 author = "Uncompromising Team"
 version = "1.1.3"
 
-forumthread = ""
+forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
 api_version = 10
 

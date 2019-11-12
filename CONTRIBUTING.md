@@ -24,9 +24,13 @@
 
 - @ Ismael Daniel - Uncompromising logo
 
-## Misc contributors
+- @ Maradyne - Logo animation, Rat Den art
+
+## Quote contributors
 
 - @ Maradyne - Quote quality assurance
+
+- @ Canis
 
 &nbsp;
 
