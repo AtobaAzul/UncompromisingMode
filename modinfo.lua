@@ -196,4 +196,15 @@ configuration_options =
 		},
 		default = 1.5,
 	},
+	{
+		name = "durability",
+		label = "Clothing Degradation",
+		hover = "Certain clothing items are less effective the lower their durability.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = false,
+	},
 }
