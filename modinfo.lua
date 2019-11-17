@@ -22,7 +22,7 @@ description =
 author = "Uncompromising Team"
 version = "1.1.3"
 
-forumthread = ""
+forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
 api_version = 10
 
@@ -195,5 +195,16 @@ configuration_options =
 			{description = "5.0x", data = 5},
 		},
 		default = 1.5,
+	},
+	{
+		name = "durability",
+		label = "Clothing Degradation",
+		hover = "Certain clothing items are less effective the lower their durability.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = false,
 	},
 }

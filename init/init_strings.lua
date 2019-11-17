@@ -6,13 +6,13 @@ STRINGS.DSTU = {
 	ACID_PREFIX =
     {
         NONE = "",
-        GENERIC = "Corroded",
+        GENERIC = "Corroding",
         RABBITHOLE = "",
-        CLOTHING = "Burning",
-        FUEL = "Erosive",
-        TOOL = "Melting",
-        FOOD = "Acidic",
-        POUCH = "Acidic",
+        CLOTHING = "Eroding",
+        FUEL = "Caustic",
+        TOOL = "Rusting",
+        FOOD = "Sour",
+        POUCH = "Deteriorating",
         WETGOOP = "Toxic",
     },
 }
