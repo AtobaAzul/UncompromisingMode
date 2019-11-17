@@ -1,13 +1,12 @@
 --Update this list when adding files
 local component_post = {
-    --example:
-    --"container",
 	"groundpounder",
 	"propagator",
 	"burnable",
 }
 
 local prefab_post = {
+    "toadstool_cap",
     "yellowamulet",
     "trap_teeth",
     "cave",
@@ -25,8 +24,6 @@ local prefab_post = {
 }
 
 local stategraph_post = {
-    --example:
-    --"wilson",
 	"deerclops",
 }
 
@@ -40,8 +37,6 @@ local class_post = {
 }
 
 local brain_post = {
-    --example:
-    --"hound",
 	"werepig",
 	"walrus",
 }
