@@ -34,4 +34,7 @@ env.AddPrefabPostInitAny(function(inst)
     if IMPASSABLES[inst.prefab] and inst.Physics ~= nil then
         RemovePhysicsColliders(inst)
     end
+    if TheWorld and TheWorld.shard == inst then
+        inst:AddComponent("shard_acidmushrooms")
+    end
 end)

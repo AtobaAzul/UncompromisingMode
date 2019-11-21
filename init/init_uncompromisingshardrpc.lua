@@ -1,7 +1,7 @@
 --[[
 Copyright (C) 2019 Zarklord
 
-This file is part of Uncomprimising Survival.
+This file is part of Uncompromising Survival.
 
 The source code of this file is shared under the RECEX
 SHARED SOURCE LICENSE (version 1.0).
@@ -19,7 +19,7 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
 if rawget(_G, "AddShardRPCHandler") then
-    --Uncomprimising Survival Shard RPC or USSR
+    --Uncompromising Survival Shard RPC or USSR
     USSR = {
         AddShardRPCHandler = AddShardRPCHandler,
         SendShardRPC = SendShardRPC,
@@ -33,7 +33,7 @@ end
 
 env.AddPrefabPostInitAny(function(inst)
     if TheWorld and TheWorld.shard == inst then
-        inst:AddComponent("uncomprimising_shard_report")
+        inst:AddComponent("uncompromising_shard_report")
     end
 end)
 
@@ -105,7 +105,7 @@ local function ShardReportInfo(shard_id, fromShardID, shardData)
         TheWorld:PushEvent("new_shard_report", {fromShard = fromShardID, data = DataDumper(shardData, nil, false)})
     end
 end
-AddShardRPCHandler("UncomprimisingSurvival", "ShardReportInfo", ShardReportInfo)
+AddShardRPCHandler("UncompromisingSurvival", "ShardReportInfo", ShardReportInfo)
 
 local function dump(val)
     return DataDumper(val, '', true)

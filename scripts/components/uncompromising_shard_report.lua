@@ -1,7 +1,7 @@
 --[[
 Copyright (C) 2019 Zarklord
 
-This file is part of Uncomprimising Survival.
+This file is part of Uncompromising Survival.
 
 The source code of this file is shared under the RECEX
 SHARED SOURCE LICENSE (version 1.0).
@@ -17,12 +17,12 @@ To view a copy of the RECEX SHARED SOURCE LICENSE please refer to
 ]]
 
 --------------------------------------------------------------------------
---[[ Uncomprimising_Shard_Report ]]
+--[[ Uncompromising_Shard_Report ]]
 --------------------------------------------------------------------------
 
 return Class(function(self, inst)
 
-assert(TheWorld.ismastersim, "Uncomprimising_Shard_Report should not exist on client")
+assert(TheWorld.ismastersim, "Uncompromising_Shard_Report should not exist on client")
 
 --------------------------------------------------------------------------
 --[[ Constants ]]
@@ -42,8 +42,8 @@ local _world = TheWorld
 local _ismastershard = _world.ismastershard
 
 --Network
-local mastershardID = net_tinybyte(inst.GUID, "uncomprimising_shard_report._mastershardid") --this can be a tinybyte since its value is ALWAYS 1
-local mastershardData = net_string(inst.GUID, "uncomprimising_shard_report._mastersharddata", "mastersharddirty")
+local mastershardID = net_tinybyte(inst.GUID, "uncompromising_shard_report._mastershardid") --this can be a tinybyte since its value is ALWAYS 1
+local mastershardData = net_string(inst.GUID, "uncompromising_shard_report._mastersharddata", "mastersharddirty")
 local slaveshardID = {}
 local slaveshardData = {}
 local emptyShardList = {}
@@ -65,7 +65,7 @@ local function UpdateShardRPCSenders(shardNumber)
 end
 
 for i = 1, MAX_TARGETS do
-    local prefix = "uncomprimising_shard_report._slaveshard["..tostring(i).."]"
+    local prefix = "uncompromising_shard_report._slaveshard["..tostring(i).."]"
     table.insert(slaveshardID, net_uint(inst.GUID, prefix.."id"))
     table.insert(slaveshardData, net_string(inst.GUID, prefix.."data", "slaveshard["..i.."]dirty"))
     table.insert(emptyShardList, i)
@@ -88,7 +88,7 @@ end or nil
 
 local ReportShardData = not _ismastershard and function(inst)
     USSR.SHARD_LIST[mastershardID:value()] = loadstring(mastershardData:value())()
-    USSR.SendShardRPCToServer(USSR.SHARD_RPC.UncomprimisingSurvival.ShardReportInfo, TheShard:GetShardId(), GetShardReportDataFromWorld())
+    USSR.SendShardRPCToServer(USSR.SHARD_RPC.UncompromisingSurvival.ShardReportInfo, TheShard:GetShardId(), GetShardReportDataFromWorld())
 end or nil
 
 local once = 0

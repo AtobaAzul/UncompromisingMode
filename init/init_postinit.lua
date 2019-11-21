@@ -21,6 +21,7 @@ local prefab_post = {
 	"walrus",
 	"forest",
 	"leif",
+    "world",
 }
 
 local stategraph_post = {
