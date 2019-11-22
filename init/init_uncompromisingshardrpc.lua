@@ -23,7 +23,7 @@ if rawget(_G, "AddShardRPCHandler") then
     USSR = {
         AddShardRPCHandler = AddShardRPCHandler,
         SendShardRPC = SendShardRPC,
-        AddShardRPCHandler = SendShardRPCToServer,
+        SendShardRPCToServer = SendShardRPCToServer,
         SHARD_LIST = SHARD_LIST,
         SHARD_RPC_HANDLERS = SHARD_RPC_HANDLERS,
         SHARD_RPC = SHARD_RPC,
@@ -146,7 +146,7 @@ end
 USSR = {
     AddShardRPCHandler = AddShardRPCHandler,
     SendShardRPC = SendShardRPC,
-    AddShardRPCHandler = SendShardRPCToServer,
+    SendShardRPCToServer = SendShardRPCToServer,
     SHARD_LIST = SHARD_LIST,
     SHARD_RPC_HANDLERS = SHARD_RPC_HANDLERS,
     SHARD_RPC = SHARD_RPC,

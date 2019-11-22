@@ -5,7 +5,7 @@ local UpvalueHacker = require("tools/upvaluehacker")
 
 local function ongrowsproutsdone(inst, data)
     if data.name == "growsprouts" and TheWorld.state.isautumn and TheWorld.state.cycles > 70 then
-        inst.components.acidmushroomspawner:StartSinkholes()
+        inst.components.acidmushroomspawner:StartAcidMushrooms()
         inst.components.timer:StartTimer("growsprouts", 1440)
     else
         inst.components.timer:StartTimer("growsprouts", 1440)

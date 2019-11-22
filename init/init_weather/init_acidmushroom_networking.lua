@@ -9,9 +9,9 @@ USSR.AddShardRPCHandler("UncompromisingSurvival", "TestAcidMushroomPlayerValidit
 end)
 
 USSR.AddShardRPCHandler("UncompromisingSurvival", "ReportAcidMushroomPlayerValidity", function(shard_id, data)
-    GLOBAL.TheWorld:PushEvent("master_acidmushrooms_reportplayervalidity", {shard_id = shard_id, players = data})
+    GLOBAL.TheWorld:PushEvent("master_acidmushrooms_reportplayervalidity", {shard_id = GLOBAL.tonumber(shard_id), players = data})
 end)
 
 USSR.AddShardRPCHandler("UncompromisingSurvival", "AcidMushroomsTargetFinished", function(shard_id, data)
-    GLOBAL.TheWorld:PushEvent("master_acidmushrooms_reportplayervalidity", data)
+    GLOBAL.TheWorld:PushEvent("master_acidmushroomsfinished", data)
 end)

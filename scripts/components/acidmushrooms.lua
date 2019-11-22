@@ -15,6 +15,7 @@ self.inst = inst
 
 --Private
 local _ismastershard = TheWorld.ismastershard
+local _world = TheWorld
 
 local _targets = {}
 
@@ -30,7 +31,7 @@ local function GetPlayerFromUserHash(c)
     end
 end
 
-function SpawnAcidMushrooms(spawnpt)
+local function SpawnAcidMushrooms(spawnpt)
     local x = GetRandomWithVariance(spawnpt.x, TUNING.DSTU.TOADSTOOL_ACIDMUSHROOM.RADIUS)
     local z = GetRandomWithVariance(spawnpt.z, TUNING.DSTU.TOADSTOOL_ACIDMUSHROOM.RADIUS)
 
@@ -41,7 +42,7 @@ function SpawnAcidMushrooms(spawnpt)
         end
         for dx = -1, 1 do
             for dz = -1, 1 do
-                if not TheWorld.Map:IsPassableAtPoint(x1 + dx * TUNING.DSTU.TOADSTOOL_ACIDMUSHROOM.RADIUS, 0, z1 + dz * TUNING.DSTU.TOADSTOOL_ACIDMUSHROOM.RADIUS) then
+                if not _world.Map:IsPassableAtPoint(x1 + dx * TUNING.DSTU.TOADSTOOL_ACIDMUSHROOM.RADIUS, 0, z1 + dz * TUNING.DSTU.TOADSTOOL_ACIDMUSHROOM.RADIUS) then
                     return false
                 end
             end
@@ -49,7 +50,8 @@ function SpawnAcidMushrooms(spawnpt)
         return true
     end
 
-    local offset = IsValidAcidMushroomPosition(offset) and offset or
+    local offset = Vector3(0, 0, 0)
+    offset = IsValidAcidMushroomPosition(offset) and offset or
     FindValidPositionByFan(math.random() * 2 * PI, TUNING.DSTU.TOADSTOOL_ACIDMUSHROOM.RADIUS * 1.8 + math.random(), 9, IsValidAcidMushroomPosition) or
     FindValidPositionByFan(math.random() * 2 * PI, TUNING.DSTU.TOADSTOOL_ACIDMUSHROOM.RADIUS * 2.9 + math.random(), 17, IsValidAcidMushroomPosition) or
     FindValidPositionByFan(math.random() * 2 * PI, TUNING.DSTU.TOADSTOOL_ACIDMUSHROOM.RADIUS * 3.9 + math.random(), 17, IsValidAcidMushroomPosition) or
@@ -75,7 +77,7 @@ local function DoTargetWarning(targetinfo)
             local rocks = SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(fxpt:Get())
         end
 
-        if TheWorld.state.isautumn and ((targetinfo.warnings or 0) % 4 == 0) and targetinfo.player ~= nil and targetinfo.player:IsValid() then
+        if ((targetinfo.warnings or 0) % 4 == 0) and targetinfo.player ~= nil and targetinfo.player:IsValid() then
             targetinfo.player.components.talker:Say(GetString(targetinfo.player, "ANNOUNCE_TOADSTOOLED"))
         end
 
@@ -124,7 +126,7 @@ local function OnAcidmushroomsUpdate(inst, data)
     local targets = _targets[data.shard_id][data.uuid]
 
     local year_length = TUNING.AUTUMN_LENGTH + TUNING.WINTER_LENGTH + TUNING.SPRING_LENGTH + TUNING.SUMMER_LENGTH
-    local base_num_attacks = TheWorld.state.remainingdaysinseason <= 2 and 1 or 0
+    local base_num_attacks = _world.state.remainingdaysinseason <= 2 and 1 or 0
     for k, v in pairs(data.targets) do
         if v then
             targets[k] = nil
@@ -178,7 +180,7 @@ function self:OnUpdate(dt)
             for k, v in pairs(targets) do
                 if v.client ~= nil then
                     if v.player ~= nil and v.player:IsValid() then
-                        if TheWorld.Map:IsVisualGroundAtPoint(v.player.Transform:GetWorldPosition()) then
+                        if _world.Map:IsVisualGroundAtPoint(v.player.Transform:GetWorldPosition()) then
                             v.pos.x, v.pos.y, v.pos.z = v.player.Transform:GetWorldPosition()
                         end
                     else
@@ -213,7 +215,7 @@ function self:OnUpdate(dt)
             elseif v[1].shard_id ~= TheShard:GetShardId() then
                 USSR.SendShardRPC(USSR.SHARD_RPC.UncompromisingSurvival.AcidMushroomsTargetFinished, v[1].shard_id, {uuid = v[1].uuid, userhash = v[2].userhash})
             else
-                _world:PushEvent("master_acidmushrooms_reportplayervalidity", {uuid = v[1].uuid, userhash = v[2].userhash})
+                _world:PushEvent("master_acidmushroomsfinished", {uuid = v[1].uuid, userhash = v[2].userhash})
             end
         end
     end
@@ -256,6 +258,7 @@ function self:OnLoad(data)
                     next_attack = v.next_attack,
                     warnings = 0,
                     next_warning = v.next_warning,
+                    userhash = v.userhash,
                 }
                 _targets[v.shard_id] = _targets[v.shard_id] or {}
                 _targets[v.shard_id][v.uuid] = _targets[v.shard_id][v.uuid] or {}

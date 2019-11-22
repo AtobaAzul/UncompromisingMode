@@ -32,7 +32,7 @@ local _players = {}
 --------------------------------------------------------------------------
 
 local function AllShardsPlayerValidity()
-    for k, v in pairs(SHARD_LIST) do
+    for k, v in pairs(USSR.SHARD_LIST) do
         if not _playervaliditylist[k] then
             return false
         end
@@ -42,15 +42,16 @@ end
 
 local function OnAcidMushroomsUpdate(src, data)
     local targets = {}
-    for k, v in pairs(_targets) do
-        _targets[v.userhash] = not v or nil
+    _targets[data.uuid] = _targets[data.uuid] or {}
+    for k, v in pairs(_targets[data.uuid]) do
+        _targets[data.uuid][k] = not v or nil
     end
     for i, v in ipairs(data.targets) do
-        _targets[v.userhash] = false
+        _targets[data.uuid][v.userhash] = false
     end
 
-    USSR.SendShardRPC(USSR.SHARD_RPC.UncompromisingSurvival.AcidMushroomsUpdate, nil, {uuid = data.uuid, targets = _targets})
-    TheWorld:PushEvent("acidmushroomsdirty", {shard_id = TheShard:GetShardId(), uuid = data.uuid, targets = _targets})
+    USSR.SendShardRPC(USSR.SHARD_RPC.UncompromisingSurvival.AcidMushroomsUpdate, nil, {uuid = data.uuid, targets = _targets[data.uuid]})
+    TheWorld:PushEvent("acidmushroomsdirty", {shard_id = TheShard:GetShardId(), uuid = data.uuid, targets = _targets[data.uuid]})
 end
 
 local function OnAcidMushroomsDirty(src, data)
@@ -80,22 +81,22 @@ end
 local function TestAllPlayersValidity()
     _playervaliditylist = {}
     _players = {}
-    USSR.SendShardRPC(USSR.SHARD_RPC.UncompromisingSurvival.TestAcidMushroomPlayerValidity, nil, players)
+    USSR.SendShardRPC(USSR.SHARD_RPC.UncompromisingSurvival.TestAcidMushroomPlayerValidity, nil)
     _world:PushEvent("slave_acidmushrooms_testplayervalidity", TheShard:GetShardId())
 end
 
 local function TestPlayerValidity(src, shard_id)
     local players = {}
     for i, v in ipairs(AllPlayers) do
-        if _world.components.acidmushrooms and _world.Map:IsVisualGroundAtPoint(player.Transform:GetWorldPosition()) then
+        if _world.components.acidmushrooms and _world.Map:IsVisualGroundAtPoint(v.Transform:GetWorldPosition()) then
             --todo, make some system that allows multiple different components to handle this spot.
-            players[smallhash(v.userid)] = {componenthandler = "acidmushrooms", player = tostring(player)}
+            players[smallhash(v.userid)] = {componenthandler = "acidmushrooms", player = tostring(v)}
         end
     end
     if shard_id ~= TheShard:GetShardId() then
         USSR.SendShardRPC(USSR.SHARD_RPC.UncompromisingSurvival.ReportAcidMushroomPlayerValidity, shard_id, players)
     else
-        _world:PushEvent("master_acidmushrooms_reportplayervalidity", {shard_id = shard_id, players = players})
+        _world:PushEvent("master_acidmushrooms_reportplayervalidity", {shard_id = tonumber(shard_id), players = players})
     end
 end
 
@@ -104,7 +105,7 @@ end
 --------------------------------------------------------------------------
 
 --Zarklord: keeping the master/slave naming system despite not actually using _ismastershard checks,
---since any server can "be the master thats sending the update" and any server can be the slave thats receiving the update"
+--since any server can "be the master thats sending the update" and any server can "be the slave thats receiving the update"
 --Register master shard events
 inst:ListenForEvent("master_acidmushroomsupdate", OnAcidMushroomsUpdate, _world)
 --Register network variable sync events
