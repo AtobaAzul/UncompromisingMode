@@ -1,9 +1,17 @@
+local function onnextsneeze(self, sneezetime)
+    self.inst.replica.hayfever:SetNextSneezeTime(sneezetime)
+end
+
 local Hayfever = Class(function(self, inst)
     self.inst = inst
     self.enabled = false
     self.sneezed = false
     self.nextsneeze  = self:GetNextSneezTime()    
-end)
+end,
+nil,
+{
+    self.nextsneeze = onnextsneeze,
+})
 
 function Hayfever:GetNextSneezTime()
     return math.random(20,40)
