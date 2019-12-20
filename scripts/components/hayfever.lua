@@ -10,7 +10,7 @@ local Hayfever = Class(function(self, inst)
 end,
 nil,
 {
-    self.nextsneeze = onnextsneeze,
+    sneezetime = onnextsneeze,
 })
 
 function Hayfever:GetNextSneezTime()
