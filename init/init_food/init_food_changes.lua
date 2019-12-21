@@ -188,8 +188,9 @@ end
 
 local function AddAntihistamine(prefab)
     AddPrefabPostInit(prefab, function (inst)
-	
-	inst.components.edible:SetOnEatenFn(item_oneatenlow)
+	if inst.components.edible ~= nil then
+		inst.components.edible:SetOnEatenFn(item_oneatenlow)
+	end
     end)
 end
 
@@ -245,8 +246,9 @@ end
 
 local function AddAntihistamineHigh(prefab)
     AddPrefabPostInit(prefab, function (inst)
-	
-	inst.components.edible:SetOnEatenFn(item_oneatenhigh)
+	if inst.components.edible ~= nil then
+		inst.components.edible:SetOnEatenFn(item_oneatenhigh)
+	end
     end)
 end
 
@@ -269,8 +271,9 @@ end
 
 local function AddAntihistamineSuper(prefab)
     AddPrefabPostInit(prefab, function (inst)
-	
-	inst.components.edible:SetOnEatenFn(item_oneatensuper)
+	if inst.components.edible ~= nil then
+		inst.components.edible:SetOnEatenFn(item_oneatensuper)
+	end
     end)
 end
 

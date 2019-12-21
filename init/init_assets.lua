@@ -12,4 +12,5 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/gasmask.xml"),
 	Asset("IMAGE", "images/inventoryimages/gasmask.tex"),
 	Asset("ANIM", "anim/geyser.zip"),
+	Asset("ANIM", "anim/lava_vomit.zip"),
 }
