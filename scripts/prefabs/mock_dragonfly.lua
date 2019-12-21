@@ -413,8 +413,20 @@ local function OnHealthTrigger(inst)
 end
 --]]
 
-local loot = {"meat", "meat", "meat", "meat", "meat", "meat", "meat", "meat", "dragon_scales", "dragonflyfurnace_blueprint"}
+--local loot = {"meat", "meat", "meat", "meat", "meat", "meat", "meat", "meat", "dragon_scales", "dragonflyfurnace_blueprint"}
+SetSharedLootTable('mock_dragonfly',
+{
+    {'dragon_scales',             1.00},
+    {'dragonflyfurnace_blueprint',1.00},
+    {'chesspiece_dragonfly_sketch', 1.00},
 
+    {'meat',             1.00},
+    {'meat',             1.00},
+    {'meat',             1.00},
+    {'meat',             1.00},
+    {'meat',             1.00},
+    {'meat',             1.00},
+})
 
 local function fn(Sim)
     local inst = CreateEntity()
@@ -467,7 +479,7 @@ local function fn(Sim)
     inst.components.sanityaura.aurafn = CalcSanityAura
     
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(TUNING.DRAGONFLY_HEALTH)
+    inst.components.health:SetMaxHealth(5000)
     inst.components.health.destroytime = 5
     inst.components.health.fire_damage_scale = 0
 
@@ -523,7 +535,7 @@ local function fn(Sim)
     inst.shouldGoAway = false
 
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetChanceLootTable("dragonfly")
+    inst.components.lootdropper:SetChanceLootTable("mock_dragonfly")
     
     inst:AddComponent("inspectable")
     inst.components.inspectable:RecordViews()
