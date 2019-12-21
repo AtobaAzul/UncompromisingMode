@@ -26,3 +26,15 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "A parasitic existence feeding upon the very earth."
     DESCRIBE.TOADLING = "They're very loyal to their kind..."
+	
+	DESCRIBE.GASMASK = "It filters air but not despair."
+	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
+	STRINGS.SPIDERQUEENCOPRSE = "An inevitable end."
+	ANNOUNCE.ANNOUNCE_SNEEZE = "achoo! achoo! sniff."
+	ANNOUNCE.ANNOUNCE_HAYFEVER = "Ugh. Even my sinuses are suffering."
+	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "My sinuses are clear, but suffering continues."
+	ANNOUNCE.ANNOUNCE_FIREFALL = {
+		"Those cries are familiar.",
+		"I hope it will be a swift end.",
+		"Some just want to watch the world burn.",
+	}

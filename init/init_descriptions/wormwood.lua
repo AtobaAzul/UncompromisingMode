@@ -26,3 +26,15 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Friend, please stop"
     DESCRIBE.TOADLING = "Friend ribbit?"
+	
+    DESCRIBE.GASMASK = "Breather with Tweeter clothes"
+	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
+	STRINGS.SPIDERQUEENCOPRSE = "Sleeping?"
+	ANNOUNCE.ANNOUNCE_SNEEZE = "Hiccup!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER = "Happy time is coming!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Oh. Happy time gone"
+	ANNOUNCE.ANNOUNCE_FIREFALL = {
+		"Scary!",
+		"Fire! Hurt friends!",
+		"Not friend! Not friend!!!",
+	}

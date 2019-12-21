@@ -26,3 +26,15 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "It seems the source of that malicious mycelium!"
     DESCRIBE.TOADLING = "Come to hop away...or perhaps to play?"
+	
+    DESCRIBE.GASMASK = "Freezes sneezes!"
+	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
+	STRINGS.SPIDERQUEENCOPRSE = "There is no bliss for this carcass!"
+	ANNOUNCE.ANNOUNCE_SNEEZE = "Achooo! Hyuyu!",
+	ANNOUNCE.ANNOUNCE_HAYFEVER = "Dust itself is pranking my snout!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "It is relieving, for there is no more sneezing!"
+	ANNOUNCE.ANNOUNCE_FIREFALL = {
+		"Frightening!",
+		"Fiery!",
+		"Fury!",
+	}

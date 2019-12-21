@@ -26,3 +26,15 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "That can't be good. We need to cut it off at the source!"
     DESCRIBE.TOADLING = "Well THAT one's got an an attitude."
+	
+    DESCRIBE.GASMASK = "Proper equipment for a mining job."
+	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
+	STRINGS.SPIDERQUEENCOPRSE = "Do we really need to keep that around?"	
+	ANNOUNCE.ANNOUNCE_SNEEZE = "ACHOO! Whoops!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER = "Something is dancin' in my nose!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "My nose is finally getting a break!"
+	ANNOUNCE.ANNOUNCE_FIREFALL = {
+		"That guys working up a sweat with all that yelling.",
+		"Jeez! Cool it!",
+		"Get your hard hats on!",
+	}
