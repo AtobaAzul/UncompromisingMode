@@ -1633,7 +1633,7 @@ local function MakePlayerCharacter(name, customprefabs, customassets, common_pos
 		end
 
         -------
-	inst:AddComponent("hayfever")
+		inst:AddComponent("hayfever")
 
         inst:AddComponent("health")
         inst.components.health:SetMaxHealth(TUNING.WILSON_HEALTH)

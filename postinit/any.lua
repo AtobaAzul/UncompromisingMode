@@ -35,3 +35,13 @@ env.AddPrefabPostInitAny(function(inst)
         RemovePhysicsColliders(inst)
     end
 end)
+
+--hornet; i dont care enough to know where to put this
+env.AddReplicableComponent("hayfever")
+
+
+
+
+
+
+
