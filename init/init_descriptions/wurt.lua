@@ -13,6 +13,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
         "Hurting! Rain hurting!",
         "Ow! This rain bad!",
     }
+    ANNOUNCE.ANNOUNCE_FIREFALL = {
+        "Ow! Burny rain!",
+        "Hurting! Rain hurting!",
+        "Ow! This rain bad!",
+    }
     ANNOUNCE.ANNOUNCE_TOADSTOOLED = "Aah! Mushies! Big mushies!"
 
     DESCRIBE.UNCOMPROMISING_RAT = "Spiderfolk family? Have hair."
@@ -26,3 +31,15 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Mushroom? Mad mushroom!"
     DESCRIBE.TOADLING = "Veggie...froggie? Not sure if ok to eat."
+	
+    DESCRIBE.GASMASK = "Smell bad, smells bad."
+	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
+	STRINGS.SPIDERQUEENCOPRSE = "Like the smell!"
+	ANNOUNCE.ANNOUNCE_SNEEZE = "Choo! Egh."
+	ANNOUNCE.ANNOUNCE_HAYFEVER = "Nose feel funny!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Nose feels good again!"
+	ANNOUNCE.ANNOUNCE_FIREFALL = {
+		"Sky is scary!",
+		"Anty angry!",
+		"Fire! Florp!",
+	}

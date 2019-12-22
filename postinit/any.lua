@@ -38,3 +38,13 @@ env.AddPrefabPostInitAny(function(inst)
         inst:AddComponent("shard_acidmushrooms")
     end
 end)
+
+--hornet; i dont care enough to know where to put this
+env.AddReplicableComponent("hayfever")
+
+
+
+
+
+
+

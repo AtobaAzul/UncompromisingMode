@@ -108,6 +108,12 @@ local function onload_rat(inst, data)
 	end
 end
 
+local function DoRipple(inst)
+    if inst.components.drownable ~= nil and inst.components.drownable:IsOverWater() then
+        SpawnPrefab("weregoose_ripple"..tostring(math.random(2))).entity:SetParent(inst.entity)
+    end
+end
+
 local function fn()
 	local inst = CreateEntity()
 	
@@ -142,6 +148,21 @@ local function fn()
 	if not TheWorld.ismastersim then
 		return inst
 	end
+	
+	inst:AddComponent("drownable")
+	inst.components.drownable.enabled = false
+	
+	if inst.gooserippletask == nil then
+            inst.gooserippletask = inst:DoPeriodicTask(.25, DoRipple, FRAMES)
+        end
+	
+	inst.Physics:ClearCollisionMask()
+    inst.Physics:CollidesWith(COLLISION.GROUND)
+    inst.Physics:CollidesWith(COLLISION.OBSTACLES)
+    inst.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
+    inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+    inst.Physics:CollidesWith(COLLISION.GIANTS)
+    inst.Physics:Teleport(inst.Transform:GetWorldPosition())
 	
 	inst.sounds = carratsounds
 	

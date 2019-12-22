@@ -4,9 +4,10 @@ local require = GLOBAL.require
 	modimport("init/init_assets")
 	modimport("init/init_widgets")
 	modimport("init/minimap_icons")
-
---  [   Import customized shard RPC module ]    --
+	
+	--  [   Import customized shard RPC module ]    --
     modimport("init/init_uncompromisingshardrpc")
+
 	
 --	[ 	Import Names and Descriptions	]	--
 	modimport("init/init_names")
@@ -31,6 +32,7 @@ local require = GLOBAL.require
 	modimport("init/init_tuning")
 	modimport("init/init_postinit")
 	modimport("init/init_strings")
+	modimport("init/init_actions")
 	
 --	[ 	Console Commands for tests !	]	--
 	
@@ -61,6 +63,7 @@ local require = GLOBAL.require
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("rare_food")) then
 		modimport("init/init_food/init_food_changes")
+		--modimport("init/init_food/init_bird_changes")
 		modimport("init/init_food/init_rare_foods")
 	end
 
@@ -87,7 +90,6 @@ local require = GLOBAL.require
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_weather")) then
-        modimport("init/init_weather/init_acidmushroom_networking")
 		modimport("init/init_weather/init_acid_rain_effects")
 		modimport("init/init_weather/init_acid_rain_disease")
 		modimport("init/init_weather/init_overworld_toadstool")

@@ -6,4 +6,13 @@ return {
 
 	"uncompromising_rat",
 	"ratpoison",
+	"firemeteorwarning",
+	"antlionwarning",
+	"gasmask",
+	"spiderqueencorpse",
+	"flamegeyser",
+	"lavae2",
+	"mock_monsterwarningsounds",
+	"mock_dragonfly",
+	"lavaspit",
 }

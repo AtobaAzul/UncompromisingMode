@@ -31,6 +31,18 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "There's the source of the pestilence!"
     DESCRIBE.TOADLING = "It sure likes those weird trees."
+	
+    DESCRIBE.GASMASK = "Now I can breath anywhere."
+	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
+	STRINGS.SPIDERQUEENCOPRSE = "That's really gross."
+	ANNOUNCE.ANNOUNCE_SNEEZE = "AHHH CHOOOO!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER = "My nose feels.. itchy."
+	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "I don't want to claw my eyes out anymore."
+	ANNOUNCE.ANNOUNCE_FIREFALL = {
+		"It sure is heating up around here.",
+		"Geez, that guys getting loud!",
+		"I've got a bad feeling about this.",
+	}
 
 --	[ 		Recipe Descriptions		]   --
 
@@ -38,3 +50,4 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 
     RECIPE_DESC.RAT_BURROW = "A den of annoying little hairballs."
     RECIPE_DESC.RATPOISON = "A most deadly feast."
+    RECIPE_DESC.GASMASK = "Makes everything smell like bird."

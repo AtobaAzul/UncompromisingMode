@@ -52,3 +52,5 @@ end)
 
 -- Moonrock idol change
 Recipe("moonrockidol", {Ingredient("moonrocknugget", GLOBAL.TUNING.DSTU.RECIPE_MOONROCK_IDOL_MOONSTONE_COST), Ingredient("purplegem", 1)}, RECIPETABS.CELESTIAL, TECH.CELESTIAL_ONE, nil, nil, true)
+
+AddRecipe("gasmask", {Ingredient("goose_feather", 10),Ingredient("green_cap", 4),Ingredient("pigskin",2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_ONE, nil, nil, nil, nil, nil, "images/inventoryimages/gasmask.xml", "gasmask.tex" )

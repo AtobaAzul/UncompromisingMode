@@ -7,4 +7,5 @@ env.AddPrefabPostInit("cave", function(inst)
     end
     
     inst:AddComponent("cavedeerclopsspawner")
+	inst:AddComponent("hayfever_tracker")
 end)

@@ -7,4 +7,8 @@ env.AddPrefabPostInit("forest", function(inst)
     end
     
     inst:AddComponent("toadrain")
+	inst:AddComponent("hayfever_tracker")
+	inst:AddComponent("firefallwarning")
+	inst:AddComponent("gmoosespawner")
+	inst:AddComponent("mock_dragonflyspawner")
 end)

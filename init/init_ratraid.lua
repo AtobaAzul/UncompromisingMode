@@ -12,7 +12,7 @@ local function SpawnRaid(inst)
 		local raid = GLOBAL.SpawnPrefab("uncompromising_ratherd")
 		if GLOBAL.TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
 			raid.Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
-			GLOBAL.TheWorld:DoTaskInTime(10, CooldownRaid)
+			GLOBAL.TheWorld:DoTaskInTime(10 + math.random(10), CooldownRaid)
 		else
 			inst:DoTaskInTime(0, SpawnRaid)
 		end

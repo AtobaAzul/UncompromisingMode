@@ -63,7 +63,7 @@ TUNING.DSTU =
     ACID_RAIN_DAMAGE_TICK = 2,
     ACID_RAIN_START_AFTER_DAY = 70,
     ACID_RAIN_DISEASE_CHANCE = 0.1, --each 5-10 seconds
-    TOADSTOOL_ACIDMUSHROOM = {
+        TOADSTOOL_ACIDMUSHROOM = {
         RADIUS = 2.5,
 
         WAVE_MAX_ATTACKS = 7,
@@ -76,6 +76,8 @@ TUNING.DSTU =
         WARNING_DELAY = 1,
         WARNING_DELAY_VARIANCE = .3,
     },
+    ACID_RAIN_WAVE_MAX_ATTACKS = 7,
+    ACID_RAIN_WAVE_MIN_ATTACKS = 5,
 
     ----------------------------------------------------------------------------
     --Cooking recipe changes
