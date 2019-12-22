@@ -28,6 +28,7 @@ local require = GLOBAL.require
 	modimport("init/init_tuning")
 	modimport("init/init_postinit")
 	modimport("init/init_strings")
+	modimport("init/init_actions")
 	
 --	[ 	Console Commands for tests !	]	--
 	

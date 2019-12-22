@@ -12,4 +12,7 @@ return {
 	"spiderqueencorpse",
 	"flamegeyser",
 	"lavae2",
+	"mock_monsterwarningsounds",
+	"mock_dragonfly",
+	"lavaspit",
 }

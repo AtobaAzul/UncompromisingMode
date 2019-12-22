@@ -71,11 +71,11 @@ AddPlayerPostInit(function(inst)
 	inst.acid_task = nil
    	inst.acid_time = 0
    	inst.acid_time_offset = 3
---[[
-	if not TheWorld.ismastersim then
+
+	if not GLOBAL.TheWorld.ismastersim then
             return inst
         end
---]]
+
 	if not inst.watchingrain then
         inst.watchingrain = true
         inst:WatchWorldState("israining", onisraining)

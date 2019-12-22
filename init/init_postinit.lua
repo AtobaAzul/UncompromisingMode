@@ -29,7 +29,7 @@ local prefab_post = {
 	"spiderqueen",
 	"hound",
 	"penguin",
-	
+	"ash",
 }
 
 local stategraph_post = {

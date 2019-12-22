@@ -27,3 +27,15 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "It seems to be polluting the air with spores."
     DESCRIBE.TOADLING = "They've been overtaken by some sort of fungal hive-mind."
+	
+	DESCRIBE.GASMASK = "This clears the vapors."
+	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
+	STRINGS.SPIDERQUEENCOPRSE = "Is it waiting for something?"
+	ANNOUNCE.ANNOUNCE_SNEEZE = "ah...CHOOOO!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER = "Ugh. Allergies."
+	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Ah... I can breathe again."
+	ANNOUNCE.ANNOUNCE_FIREFALL = {
+		"Never a moment of peace.",
+		"That mangy thing is getting worked up.",
+		"That's probably not good.",
+	}
