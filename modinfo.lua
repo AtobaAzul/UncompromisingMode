@@ -1,4 +1,4 @@
-name = "    sneeze22Uncompromising Mode"
+name = "    Uncompromising Mode-FINALE"
 description = 
 [[
 󰀔 [ Version 1.1.3 : "Pests & Pestilence Update" ]
