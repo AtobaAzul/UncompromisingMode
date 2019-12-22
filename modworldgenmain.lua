@@ -1,5 +1,4 @@
-GLOBAL.require("map/terrain")
---[[
+GLOBAL.require("map/terrain")--[[
 if GetModConfigData("harder_shadows") == true then
 
     AddTaskSetPreInitAny(function(tasksetdata)
@@ -11,7 +10,7 @@ tasksetdata.set_pieces["ToadstoolArena"] = { 1, tasks={"Guarded Squeltch","Merms
 
 end)
 
-end
---]]
+end--]]
+
 
 modimport("init/init_food/init_food_worldgen")
