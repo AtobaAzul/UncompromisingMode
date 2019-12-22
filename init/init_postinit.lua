@@ -24,6 +24,7 @@ local prefab_post = {
 	"walrus",
 	"forest",
 	"leif",
+	"world",
 	"antlion",
 	"minifan",
 	"spider",
