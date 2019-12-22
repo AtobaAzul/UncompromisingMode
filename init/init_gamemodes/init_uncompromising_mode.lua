@@ -5,6 +5,10 @@ local require = GLOBAL.require
 	modimport("init/init_widgets")
 	modimport("init/minimap_icons")
 	
+	--  [   Import customized shard RPC module ]    --
+    modimport("init/init_uncompromisingshardrpc")
+
+	
 --	[ 	Import Names and Descriptions	]	--
 	modimport("init/init_names")
 	modimport("init/init_descriptions/generic")
