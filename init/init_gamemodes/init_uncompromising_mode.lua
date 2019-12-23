@@ -90,6 +90,7 @@ local require = GLOBAL.require
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_weather")) then
+		modimport("init/init_weather/init_acidmushroom_networking")
 		modimport("init/init_weather/init_acid_rain_effects")
 		modimport("init/init_weather/init_acid_rain_disease")
 		modimport("init/init_weather/init_overworld_toadstool")
