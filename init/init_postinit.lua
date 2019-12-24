@@ -39,6 +39,7 @@ local stategraph_post = {
     --"wilson",
 	"deerclops",
 	"wilson",
+	"Leif",
 }
 
 local class_post = {
