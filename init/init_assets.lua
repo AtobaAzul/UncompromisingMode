@@ -13,4 +13,7 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/gasmask.tex"),
 	Asset("ANIM", "anim/geyser.zip"),
 	Asset("ANIM", "anim/lava_vomit.zip"),
+	Asset("ANIM", "anim/leif_root.zip"),
+	Asset("ANIM", "anim/root_spike.zip"),
+	Asset("ANIM", "anim/chop_root_spike.zip"),
 }
