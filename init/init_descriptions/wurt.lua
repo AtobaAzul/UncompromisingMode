@@ -13,11 +13,6 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
         "Hurting! Rain hurting!",
         "Ow! This rain bad!",
     }
-    ANNOUNCE.ANNOUNCE_FIREFALL = {
-        "Ow! Burny rain!",
-        "Hurting! Rain hurting!",
-        "Ow! This rain bad!",
-    }
     ANNOUNCE.ANNOUNCE_TOADSTOOLED = "Aah! Mushies! Big mushies!"
 
     DESCRIBE.UNCOMPROMISING_RAT = "Spiderfolk family? Have hair."
