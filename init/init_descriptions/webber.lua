@@ -38,3 +38,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 		"The sky is falling! The sky is falling!",
 		"Watch out!",
 	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "We're stuck! Help!"
