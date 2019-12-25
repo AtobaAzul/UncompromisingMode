@@ -38,3 +38,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 		"Scary monster angry!",
 		"Fire! Fire!",
 	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "Too tough, Wolfgang cannot break!"
