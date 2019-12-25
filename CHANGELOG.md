@@ -150,6 +150,8 @@
 
 * [x]  Clothing Degradation Option
 
+* [x]  Sewing Kits repair 50% less, but have double the uses. (Makes it easier to keep clothing in acceptable durability levels)
+
 * [x] Hayfever
 
 * [x] Added Gasmask, Antihistamine foods, and Mini Fan changes to combat hayfever
