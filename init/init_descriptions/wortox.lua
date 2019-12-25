@@ -38,3 +38,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 		"Fiery!",
 		"Fury!",
 	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "You can't hold me down!"
