@@ -28,7 +28,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
     DESCRIBE.TOADLING = "Veggie...froggie? Not sure if ok to eat."
 	
     DESCRIBE.GASMASK = "Smell bad, smells bad."
-	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
+	DESCRIBE.MOCK_DRAGONFLY = "Scaled-folk shouldn't fight, florp!"
 	STRINGS.SPIDERQUEENCOPRSE = "Like the smell!"
 	ANNOUNCE.ANNOUNCE_SNEEZE = "Choo! Egh."
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Nose feel funny!"
