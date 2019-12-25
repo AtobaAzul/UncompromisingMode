@@ -38,3 +38,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 		"Fire! Hurt friends!",
 		"Not friend! Not friend!!!",
 	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "Bad hug!"
