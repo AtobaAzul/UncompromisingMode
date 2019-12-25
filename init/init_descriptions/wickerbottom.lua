@@ -38,3 +38,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 		"This heat is getting MORE unusual.",
 		"Watch your heads!",
 	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "I should chop myself free!"
