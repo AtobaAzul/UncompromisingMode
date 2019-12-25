@@ -401,7 +401,7 @@ local function OnKill(inst, data)
 
     if data and data.victim == ThePlayer then
 	--if data and data.victim == GetPlayer() then
-        inst.KilledPlayer = true
+        --inst.KilledPlayer = true
     end
 end
 
@@ -414,6 +414,10 @@ end
 --]]
 
 local loot = {"meat", "meat", "meat", "meat", "meat", "meat", "meat", "meat", "dragon_scales", "dragonflyfurnace_blueprint"}
+
+local function OnDead(inst)
+    TheWorld:PushEvent("hasslerkilled", inst)
+end
 
 
 local function fn(Sim)
@@ -557,6 +561,9 @@ local function fn(Sim)
     inst:SetStateGraph("SGmock_dragonfly")
     --local brain = require("brains/dragonflybrain")
     inst:SetBrain(brain)
+    
+    
+    inst:ListenForEvent("death", OnDead)
 
     return inst
 end
