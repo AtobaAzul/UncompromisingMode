@@ -43,6 +43,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 		"Geez, that guys getting loud!",
 		"I've got a bad feeling about this.",
 	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "I'm stuck!"
 
 --	[ 		Recipe Descriptions		]   --
 
