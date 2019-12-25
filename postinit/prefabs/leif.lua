@@ -35,6 +35,23 @@ env.AddPrefabPostInit("leif", function (inst)
 	--inst.scaleleif = scale
 --end
 
+local env = env
+GLOBAL.setfenv(1, GLOBAL)
+-----------------------------------------------------------------
+env.AddComponentPostInit("wisecracker", function(self, inst)
+
+self.inst = inst
+
+	inst:ListenForEvent("rooting", function(inst, data)
+        inst.components.talker:Say(GetString(inst, "ANNOUNCE_ROOTING"))
+    end)
+
+	
+end)
+
+
+
+
 inst.rootready = true
 if inst.components.combat ~= nil then
 	inst.components.combat:SetRange(3*inst.components.combat.attackrange)
@@ -125,8 +142,8 @@ local function SpawnSnare(inst, target)
     if count <= 0 then
         return false
     elseif target:IsValid() then
-        if target.components.talker then 
-			target.components.talker:Say(GetString(inst, "ANNOUNCE_ROOTING"))
+        if target.components.talker then
+            target:PushEvent("rooting", { attacker = inst })
 		end
     end
     return true
