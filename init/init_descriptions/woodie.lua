@@ -38,3 +38,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 		"It's raining fire! Save the trees!",
 		"This is nothing like Canadian weather!",
 	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "You're up, Lucy!"
