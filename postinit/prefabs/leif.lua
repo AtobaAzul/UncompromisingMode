@@ -35,9 +35,6 @@ env.AddPrefabPostInit("leif", function (inst)
 	--inst.scaleleif = scale
 --end
 
-local env = env
-GLOBAL.setfenv(1, GLOBAL)
------------------------------------------------------------------
 env.AddComponentPostInit("wisecracker", function(self, inst)
 
 self.inst = inst
