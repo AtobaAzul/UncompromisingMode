@@ -44,9 +44,9 @@
  
 * [x]  Ice and twigs cannot be more than 2 inside crockpot recipes
 
-* [x]  You cannot sew thermals anymore
+* [ ]  You cannot sew thermals anymore
  
-* [ ]  [Rat waves](https://cdn.discordapp.com/attachments/623666104937480192/629152866426290197/damnrat.gif), that will come with number of days, mess around your items, eat your food, and bite you for max health penalties 
+* [x]  [Rat waves](https://cdn.discordapp.com/attachments/623666104937480192/629152866426290197/damnrat.gif), that will come with number of days, mess around your items, eat your food, and bite you for max health penalties 
  
 * [x]  Carrots are rarer in world generation
 
@@ -58,7 +58,7 @@
 
 * [x]  Bishops now flee inbetween attacks
 
-* [x]  Mod settings for disabling/enabling features
+* [ ]  Mod settings for disabling/enabling features
 
 * [x]  Pigs and bunnies defend their houses when hammered
 
@@ -66,7 +66,7 @@
 
 * [x]  Pierogi spoils in 10 days instead of 20
 
-* [x]  Cooked Bird egg loop removed
+* [ ]  Cooked Bird egg loop removed
 
 * [x]  Bird's stomach can only withstand 4 monster meat before dying out (vary her diet with normal meat to cure it)
 
@@ -152,11 +152,19 @@
 
 * [x] Hayfever
 
-* [x] Fire Meteor's from Antlion
+* [x] Added Gasmask, Antihistamine foods, and Mini Fan changes to combat hayfever
+
+* [x] Increased Mini Fan cost to compensate for new function
+
+* [x] Fire Meteor's from Antlion rage
 
 * [x] Dragonfly and Gmoose seasonal spawning
 
 * [x] Treeguard Root Attack
+
+* [x] Hounds, Spiders, and Pengulls will mutate on full moons
+
+* [x] Spiderqueen leaves a corpse on death, on a full moon it will turn into a shattered spider nest
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
