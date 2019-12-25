@@ -39,3 +39,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 		"That mangy thing is getting worked up.",
 		"That's probably not good.",
 	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "It's roots have taken hold!"
