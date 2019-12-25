@@ -38,3 +38,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 		"Ragnarok has come!",
 		"The beasts roars loud!",
 	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "A cheap trick! Fight with honor!"
