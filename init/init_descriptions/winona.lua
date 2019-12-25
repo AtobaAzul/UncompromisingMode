@@ -38,3 +38,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 		"Jeez! Cool it!",
 		"Get your hard hats on!",
 	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "I'm caught!"
