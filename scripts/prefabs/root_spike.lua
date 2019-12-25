@@ -232,11 +232,6 @@ local function fn()
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
     inst.Physics:CollidesWith(COLLISION.WORLD)
     inst.Physics:SetCapsule(PHYSICS_RADIUS, 2)
-
-	inst:AddComponent("workable")
-	inst.components.workable:SetWorkLeft(TUNING.EVERGREEN_CHOPS_NORMAL)
-	inst.components.workable:SetOnWorkCallback(chop_root)
-    inst.components.workable:SetOnFinishCallback(chop_down_root)
 	
     inst:AddTag("groundspike")
     inst:AddTag("fossilspike")
@@ -246,6 +241,11 @@ local function fn()
     if not TheWorld.ismastersim then
         return inst
     end
+	
+	inst:AddComponent("workable")
+	inst.components.workable:SetWorkLeft(TUNING.EVERGREEN_CHOPS_NORMAL)
+	inst.components.workable:SetOnWorkCallback(chop_root)
+    inst.components.workable:SetOnFinishCallback(chop_down_root)
 
     inst:AddComponent("combat")
     inst.components.combat:SetDefaultDamage(10)
