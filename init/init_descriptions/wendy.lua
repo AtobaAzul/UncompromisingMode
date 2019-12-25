@@ -38,3 +38,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 		"I hope it will be a swift end.",
 		"Some just want to watch the world burn.",
 	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "You cannot hold me forever."
