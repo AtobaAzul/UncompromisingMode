@@ -38,3 +38,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 		"The sky is falling!",
 		"Cats and dogs! Great flaming cats and dogs!",
 	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "Definetly not a spice root!"
