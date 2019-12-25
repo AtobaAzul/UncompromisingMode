@@ -1,4 +1,4 @@
-name = "    123Uncompromising Mode"
+name = " Uncompromising Mode"
 description = 
 [[
 󰀔 [ Version 1.1.3 : "Pests & Pestilence Update" ]
