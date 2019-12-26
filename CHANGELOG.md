@@ -10,9 +10,9 @@
 
 * [x]  Knockback mechanic on some bosses
 
-* [x]  Hardcore mode - disable rollback
+* [ ]  Hardcore mode - disable rollback
 
-* [x]  Hardcore mode - disable movement on death
+* [ ]  Hardcore mode - disable movement on death
 
 * [ ]  Hardcore mode - disable ghost on death, body lays on ground and accepts revives (similar to the forge)
 
@@ -20,7 +20,7 @@
 
 * [x]  Applied horticulture recipe nerf (uses 1 leafy meat + 1 bucket o poop instead of 1 seeds + 1 poop)
 
-* [X]  [Settings menu](https://i.imgur.com/N3rLMpH.png)
+* [ ]  [Settings menu](https://i.imgur.com/N3rLMpH.png)
 
 * [x]  [Totally Normal Livingtree root attack](https://imgur.com/8gC0cdv.gif)
 
@@ -51,8 +51,6 @@
 * [x]  Carrots are rarer in world generation
 
 * [x]  Berry bushes are rarer in world generation
-
-* [x]  Goose nest setpiece has lower food counts
  
 * [ ]  During Worldgen, carrots can sometimes be replaced with different vegetables. (Asparagus, Potato, Toma Root, etc etc) 
 
