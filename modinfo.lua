@@ -1,7 +1,7 @@
 name = " Uncompromising Mode"
 description = 
 [[
-󰀔 [ Version 1.1.3 : "Pests & Pestilence Update" ]
+󰀔 [ Version 1.1.4 : "Pests & Pestilence Update" ]
 
 
 
@@ -20,7 +20,7 @@ description =
 							   ⬇Config⬇		 ⬇Infos⬇]]
 
 author = "Uncompromising Team"
-version = "1.1.3"
+version = "1.1.4"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
