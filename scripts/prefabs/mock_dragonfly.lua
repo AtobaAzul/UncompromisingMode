@@ -133,7 +133,7 @@ local function OnEntitySleep(inst)
         LeaveWorld(inst)
 		
     elseif (not inst:NearPlayerBase() and not inst.SeenBase) and ThePlayer ~= nil 
-        or (inst.components.combat:TargetIs(GetPlayer()) and not inst.KilledPlayer) then
+        or (inst.components.combat:TargetIs(ThePlayer) and not inst.KilledPlayer) then
         --Get back in there Dragonfly! You still have work to do.
         print("Porting Dragonfly to Player!")
         local init_pos = inst:GetPosition()
@@ -144,7 +144,7 @@ local function OnEntitySleep(inst)
         
         if pos and distsq(player_pos, init_pos) > 1600 then
             --There's a crash if you teleport without the delay
-            if not inst.components.combat:TargetIs(GetPlayer()) then
+            if not inst.components.combat:TargetIs(ThePlayer) then
                 inst.components.combat:SetTarget(nil)
             end
             inst:DoTaskInTime(.1, function() 
