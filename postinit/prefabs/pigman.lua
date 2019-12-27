@@ -7,6 +7,6 @@ env.AddPrefabPostInit("pigman", function(inst)
 		return
 	end
 	
-	inst:AddTag("guard")
+	--inst:AddTag("guard")
 
 end)
