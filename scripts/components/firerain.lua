@@ -228,7 +228,7 @@ function FireRain:StopShower()
     self.large_remaining = nil
     self.retries_remaining = nil
 end
-
+--[[
 local function OnCooldown(inst, self)
     if inst:IsNearPlayer(TUNING.METEOR_SHOWER_SPAWN_RADIUS + 60) then
         self:StartShower()
@@ -241,7 +241,7 @@ local function OnCooldown(inst, self)
         self:StartShower()
     end
 end
-
+--]]
 function FireRain:StartCooldown()
     self:StopShower()
 
@@ -250,7 +250,7 @@ function FireRain:StartCooldown()
 
     if cooldown > 0 then
         self.retries_remaining = NUM_RETRIES
-        self.task = self.inst:DoPeriodicTask(RETRY_INTERVAL, OnCooldown, cooldown, self)
+        --self.task = self.inst:DoPeriodicTask(RETRY_INTERVAL, OnCooldown, cooldown, self)
         self.tasktotime = GetTime() + cooldown
     end
 end
@@ -280,7 +280,7 @@ function FireRain:OnLoad(data)
                 self.task = self.inst:DoPeriodicTask(self.dt, OnUpdate, nil, self)
             else
                 self.retries_remaining = math.max(0, data.retriesleft or NUM_RETRIES)
-                self.task = self.inst:DoPeriodicTask(RETRY_INTERVAL, OnCooldown, remaining_time, self)
+                --self.task = self.inst:DoPeriodicTask(RETRY_INTERVAL, OnCooldown, remaining_time, self)
             end
             self.tasktotime = GetTime() + remaining_time
         end
