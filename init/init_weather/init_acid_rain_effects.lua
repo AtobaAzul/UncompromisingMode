@@ -83,4 +83,5 @@ AddPlayerPostInit(function(inst)
     end
 
 	inst:AddComponent("firerain")
+	inst:AddComponent("hayfever")
 end)
