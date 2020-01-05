@@ -1,6 +1,12 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
+
+local function DisableThatStuff(inst)
+		inst:PushEvent("addqueenbeekilledtag")
+		
+end
+
 env.AddPrefabPostInit("beequeen", function(inst)
 	if not TheWorld.ismastersim then
 		return
@@ -12,5 +18,7 @@ env.AddPrefabPostInit("beequeen", function(inst)
 			end
 		end
         inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE/2, TUNING.DEERCLOPS_AOE_SCALE, isnotbee) -- you can edit these values to your liking -Axe
-    end                                     
+	end         
+	inst:ListenForEvent("death", DisableThatStuff)
+	
 end)

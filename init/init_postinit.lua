@@ -1,12 +1,15 @@
 --Update this list when adding files
 local component_post = {
+    --example:
+    --"container",
 	"groundpounder",
 	"propagator",
 	"burnable",
+	--"quaker",
 }
 
 local prefab_post = {
-    "toadstool_cap",
+    --"toadstool_cap",
     "yellowamulet",
     "trap_teeth",
     "cave",
@@ -21,11 +24,24 @@ local prefab_post = {
 	"walrus",
 	"forest",
 	"leif",
-    "world",
+	"world",
+	"antlion",
+	"minifan",
+	"spider",
+	"spiderqueen",
+	"hound",
+	"penguin",
+	"ash",
+	"pigman",
+	"moose",
 }
 
 local stategraph_post = {
+    --example:
+    --"wilson",
 	"deerclops",
+	"wilson",
+	"Leif",
 }
 
 local class_post = {
@@ -35,9 +51,12 @@ local class_post = {
 	"widgets/itemtile",
 	"widgets/hoverer",
 	"widgets/moisturemeter",
+	"widgets/controls",
 }
 
 local brain_post = {
+    --example:
+    --"hound",
 	"werepig",
 	"walrus",
 }

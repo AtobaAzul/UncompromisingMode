@@ -26,3 +26,16 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "That cap is killing my trees!"
     DESCRIBE.TOADLING = "Hop off, ya hoser."
+	
+    DESCRIBE.GASMASK = "Keeps my lungs clear."
+	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
+	STRINGS.SPIDERQUEENCOPRSE = "That's a sight for sore eyes, eh?"
+	ANNOUNCE.ANNOUNCE_SNEEZE = "Achoo! Excuse me. Sorry."
+	ANNOUNCE.ANNOUNCE_HAYFEVER = "You have allergies like me, Lucy?"
+	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Ah! Clean air again."
+	ANNOUNCE.ANNOUNCE_FIREFALL = {
+		"Cool it, hozer!",
+		"It's raining fire! Save the trees!",
+		"This is nothing like Canadian weather!",
+	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "You're up, Lucy!"

@@ -26,3 +26,16 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "What an unsavory sprout."
     DESCRIBE.TOADLING = "Seems they don't stray far from that fungi's strange aroma."
+	
+    DESCRIBE.GASMASK = "I could use this in the smoke house."
+	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
+	STRINGS.SPIDERQUEENCOPRSE = "Mon dieu! That must get rid of!"
+	ANNOUNCE.ANNOUNCE_SNEEZE = "Atchoum!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER = "Ugh! My allergies!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "I think... my nose has cleared!"
+	ANNOUNCE.ANNOUNCE_FIREFALL = {
+		"It's raining fiery meatballs!",
+		"The sky is falling!",
+		"Cats and dogs! Great flaming cats and dogs!",
+	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "Definetly not a spice root!"

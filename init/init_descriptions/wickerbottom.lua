@@ -26,3 +26,16 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Might that strange vegitation be the cause of the polluted rain?"
     DESCRIBE.TOADLING = "They appear subservient to the nearby fungi."
+	
+    DESCRIBE.GASMASK = "For investigating dangerous areas."
+	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
+	STRINGS.SPIDERQUEENCOPRSE = "A Royal Arachnic, posthumous."
+	ANNOUNCE.ANNOUNCE_SNEEZE = "Ahh... CHOOOOOOOOO!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER = "Sniff sniff. Must be hayfever season."
+	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Ahh... Finally I can breathe."
+	ANNOUNCE.ANNOUNCE_FIREFALL = {
+		"It's never quiet around this place!",
+		"This heat is getting MORE unusual.",
+		"Watch your heads!",
+	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "I should chop myself free!"

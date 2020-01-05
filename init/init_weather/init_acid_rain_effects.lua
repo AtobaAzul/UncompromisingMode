@@ -21,26 +21,28 @@ local function doacidrain(inst, dt)
 		inst.components.talker:Say(GLOBAL.GetString(inst, "ANNOUNCE_ACIDRAIN"))
                 inst.acid_time_offset = 3 + math.random() * 2
                 inst.acid_time = t
-		--elseif waterproofmult < 1 and t > inst.acid_time + inst.acid_time_offset + waterproofmult * 7 and c_countprefabs("mushroomsprout_overworld") >= 2 and c_countprefabs("mushroomsprout_overworld") < 4 then
-                --inst.components.health:DoDelta(-1, false, "rain")
-		--inst.components.talker:Say(GLOBAL.GetString(inst, "ANNOUNCE_ACIDRAIN"))
-                --inst.acid_time_offset = 3 + math.random() * 2
-                --inst.acid_time = t
-				--elseif waterproofmult < 1 and t > inst.acid_time + inst.acid_time_offset + waterproofmult * 7 and c_countprefabs("mushroomsprout_overworld") >= 4 and c_countprefabs("mushroomsprout_overworld") < 6  then
-                --inst.components.health:DoDelta(-1.5, false, "rain")
-		--inst.components.talker:Say(GLOBAL.GetString(inst, "ANNOUNCE_ACIDRAIN"))
-                --inst.acid_time_offset = 3 + math.random() * 2
-                --inst.acid_time = t
-				--elseif waterproofmult < 1 and t > inst.acid_time + inst.acid_time_offset + waterproofmult * 7 and c_countprefabs("mushroomsprout_overworld") >= 6 and c_countprefabs("mushroomsprout_overworld") < 8  then
-                --inst.components.health:DoDelta(-2, false, "rain")
-		--inst.components.talker:Say(GLOBAL.GetString(inst, "ANNOUNCE_ACIDRAIN"))
-                --inst.acid_time_offset = 3 + math.random() * 2
-                --inst.acid_time = t
-				--elseif waterproofmult < 1 and t > inst.acid_time + inst.acid_time_offset + waterproofmult * 7 and c_countprefabs("mushroomsprout_overworld") >= 8 then
-                --inst.components.health:DoDelta(-2.5, false, "rain")
-		--inst.components.talker:Say(GLOBAL.GetString(inst, "ANNOUNCE_ACIDRAIN"))
-                --inst.acid_time_offset = 3 + math.random() * 2
-                --inst.acid_time = t		
+		--[[elseif waterproofmult < 1 and t > inst.acid_time + inst.acid_time_offset + waterproofmult * 7 and c_countprefabs("mushroomsprout_overworld") >= 2 and c_countprefabs("mushroomsprout_overworld") < 4 then
+                inst.components.health:DoDelta(-1, false, "rain")
+		inst.components.talker:Say(GLOBAL.GetString(inst, "ANNOUNCE_ACIDRAIN"))
+                inst.acid_time_offset = 3 + math.random() * 2
+                inst.acid_time = t
+				elseif waterproofmult < 1 and t > inst.acid_time + inst.acid_time_offset + waterproofmult * 7 and c_countprefabs("mushroomsprout_overworld") >= 4 and c_countprefabs("mushroomsprout_overworld") < 6  then
+                inst.components.health:DoDelta(-1.5, false, "rain")
+		inst.components.talker:Say(GLOBAL.GetString(inst, "ANNOUNCE_ACIDRAIN"))
+                inst.acid_time_offset = 3 + math.random() * 2
+                inst.acid_time = t
+				elseif waterproofmult < 1 and t > inst.acid_time + inst.acid_time_offset + waterproofmult * 7 and c_countprefabs("mushroomsprout_overworld") >= 6 and c_countprefabs("mushroomsprout_overworld") < 8  then
+                inst.components.health:DoDelta(-2, false, "rain")
+		inst.components.talker:Say(GLOBAL.GetString(inst, "ANNOUNCE_ACIDRAIN"))
+                inst.acid_time_offset = 3 + math.random() * 2
+                inst.acid_time = t
+				elseif waterproofmult < 1 and t > inst.acid_time + inst.acid_time_offset + waterproofmult * 7 and c_countprefabs("mushroomsprout_overworld") >= 8 then
+                inst.components.health:DoDelta(-2.5, false, "rain")
+		inst.components.talker:Say(GLOBAL.GetString(inst, "ANNOUNCE_ACIDRAIN"))
+                inst.acid_time_offset = 3 + math.random() * 2
+                inst.acid_time = t
+
+				]]
             end
         elseif t > inst.acid_time + inst.acid_time_offset and GLOBAL.c_countprefabs("mushroomsprout_overworld") >= 1 then -- We have moisture-giving equipment on our head or it is not raining and we are just passively wet (but drying off). Do full damage.
             inst.components.health:DoDelta(
@@ -70,9 +72,16 @@ AddPlayerPostInit(function(inst)
    	inst.acid_time = 0
    	inst.acid_time_offset = 3
 
+	if not GLOBAL.TheWorld.ismastersim then
+            return inst
+        end
+
 	if not inst.watchingrain then
         inst.watchingrain = true
         inst:WatchWorldState("israining", onisraining)
         onisraining(inst, GLOBAL.TheWorld.state.israining)
     end
+
+	inst:AddComponent("firerain")
+	inst:AddComponent("hayfever")
 end)

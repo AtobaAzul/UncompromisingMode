@@ -1,4 +1,3 @@
-
 -----------------------------------------------------------------
 --Pigs and bunnies defend their turf if their home is destroyed
 -----------------------------------------------------------------
@@ -9,7 +8,7 @@ local pigtaunts =
     "NO SMASH HOUSE",
     "DO NOT HIT",
     "NO KILL HOUSE",
-    "BAD MONKEY MAN",
+    --"BAD MONKEY MAN",
     "NO BREAK THINGS",
     "YOU STOP THAT",
     "STOP RIGHT THERE"

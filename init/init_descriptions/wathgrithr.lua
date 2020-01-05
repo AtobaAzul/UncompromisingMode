@@ -26,3 +26,16 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Let us rip out this affliction by the root!"
     DESCRIBE.TOADLING = "Fel guardians of corruption!"
+	
+	DESCRIBE.GASMASK = "Poisonous air will not consume me!!"
+	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
+	STRINGS.SPIDERQUEENCOPRSE = "Another victory!"
+	ANNOUNCE.ANNOUNCE_SNEEZE = "aaAAAH...cho!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER = "Mine nostrils chafe with itchiness!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "The smoke has cleared!"
+	ANNOUNCE.ANNOUNCE_FIREFALL = {
+		"Hel's fury is upon us!",
+		"Ragnarok has come!",
+		"The beasts roars loud!",
+	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "A cheap trick! Fight with honor!"

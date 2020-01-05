@@ -26,3 +26,16 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Smelly mushroom make water bad!"
     DESCRIBE.TOADLING = "Little frog not look right."
+	
+    DESCRIBE.GASMASK = "Is good for Wolfgang lungs."
+	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
+	STRINGS.SPIDERQUEENCOPRSE = "Big scary spider is dead!"
+	ANNOUNCE.ANNOUNCE_SNEEZE = "Achoo! Excuse Wolfgang."
+	ANNOUNCE.ANNOUNCE_HAYFEVER = "Allergies strong like Wolfgang!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Ha! Wolfgang beat allergies!"
+	ANNOUNCE.ANNOUNCE_FIREFALL = {
+		"Wolfgang not like scary screeches!",
+		"Scary monster angry!",
+		"Fire! Fire!",
+	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "Too tough, Wolfgang cannot break!"

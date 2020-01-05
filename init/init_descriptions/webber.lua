@@ -26,3 +26,16 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Is that where the yucky rain came from?"
     DESCRIBE.TOADLING = "That's one weird frog."
+	
+	DESCRIBE.GASMASK = "Now we won't cough so much."
+	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
+	STRINGS.SPIDERQUEENCOPRSE = "Oh no! Are you okay?"
+	ANNOUNCE.ANNOUNCE_SNEEZE = "a...choooOOOOOOO!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER = "Sniff. Sniff. We must have allergies."
+	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Wow! I think our allergies are gone!"
+	ANNOUNCE.ANNOUNCE_FIREFALL = {
+		"W... We don't like the sound of that!",
+		"The sky is falling! The sky is falling!",
+		"Watch out!",
+	}
+	ANNOUNCE.ANNOUNCE_ROOTING = "We're stuck! Help!"
