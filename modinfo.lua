@@ -1,4 +1,4 @@
-name = " snowtestUncompromising Mode"
+name = " Uncompromising Mode"
 description = 
 [[
 󰀔 [ Version 1.1.4 : "Pests & Pestilence Update" ]
