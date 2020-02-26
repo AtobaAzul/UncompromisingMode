@@ -38,7 +38,7 @@ local PollenOver =  Class(Widget, function(self, owner)
     self.level2= 0
 	
 	--self.owner:ListenForEvent("updatepollen", function(data) return self:UpdateState(sneezetime) end)
-	
+	self.owner:ListenForEvent("seasontick", function() return self:SeasonHide() end)
 end)
 
 function PollenOver:UpdateState(sneezetime)
@@ -50,6 +50,9 @@ function PollenOver:UpdateState(sneezetime)
 end
 
 function PollenOver:OnUpdate(dt)
+if not TheWorld.state.isspring then
+	self:Hide()
+else
     local leveltarget = self.level
 
     -- PLAYER IS CLOSE TO SNEEZING
@@ -102,6 +105,13 @@ function PollenOver:OnUpdate(dt)
     else
         self:Hide()
     end
+end
+end
+
+function PollenOver:SeasonHide()
+	if not TheWorld.state.isspring then
+		self:Hide()
+	end
 end
 
 return PollenOver

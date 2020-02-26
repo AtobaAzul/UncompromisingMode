@@ -188,7 +188,7 @@ local function OnLoad(inst, data)
 end
 
 local function OnSeasonChange(inst, data)
-    inst.shouldGoAway = (GetSeasonManager():GetSeason() ~= SEASONS.SUMMER or GetSeasonManager().incaves)
+    inst.shouldGoAway = (TheWorld.state.isspring or TheWorld.state.isautumn or TheWorld.state.iswinter)
     if inst:IsAsleep() then
         OnEntitySleep(inst)
     end
@@ -402,6 +402,8 @@ local function OnKill(inst, data)
     if data and data.victim == ThePlayer then
 	--if data and data.victim == GetPlayer() then
         --inst.KilledPlayer = true
+		SetFlameOn(inst, false)
+
     end
 end
 
@@ -451,6 +453,8 @@ local function fn(Sim)
     anim:SetBank("dragonfly")
     anim:SetBuild("dragonfly_build")
     anim:PlayAnimation("idle", true)
+	
+	inst.AnimState:SetMultColour(0.6, 0.6, 0.3, 1)
 	
 	inst.entity:SetPristine()
 
@@ -535,7 +539,7 @@ local function fn(Sim)
     inst:AddComponent("knownlocations")
     inst:AddComponent("inventory")
 
-    inst:ListenForEvent("seasonChange", function() OnSeasonChange(inst) end, GetWorld() )
+    inst:ListenForEvent("seasontick", function() OnSeasonChange(inst) end, TheWorld )
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("entitysleep", OnEntitySleep)
 

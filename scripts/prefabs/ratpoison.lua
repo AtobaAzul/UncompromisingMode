@@ -24,6 +24,7 @@ local function fn()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
 	
     MakeInventoryPhysics(inst)
 
@@ -55,7 +56,8 @@ end
 
 local function OnDeploy(inst, pt)
 	SpawnPrefab("ratpoison").Transform:SetPosition(pt.x, 0, pt.z)
-	
+	SpawnPrefab("ratpoison").Transform:SetPosition(pt.x, 0, pt.z)
+	SpawnPrefab("ratpoison").Transform:SetPosition(pt.x, 0, pt.z)
     inst:Remove()
 end
 
@@ -63,6 +65,7 @@ local function itemfn()
 	local inst = CreateEntity()
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
 	
     MakeInventoryPhysics(inst)
 
@@ -80,6 +83,7 @@ local function itemfn()
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/sand.xml"
     inst:AddComponent("stackable")
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 	

@@ -13,4 +13,24 @@ end)
 end--]]
 
 
+	if GLOBAL.terrain.rooms.LightningBluffAntlion then
+		GLOBAL.terrain.rooms.LightningBluffAntlion.contents.distributeprefabs.sandhill = 0.2
+	end
+	
+	if GLOBAL.terrain.rooms.LightningBluffOasis then
+	GLOBAL.terrain.rooms.LightningBluffOasis.contents.distributeprefabs.sandhill = 0.03
+	end
+
+	if GLOBAL.terrain.rooms.LightningBluffLightning then
+		GLOBAL.terrain.rooms.LightningBluffLightning.contents.distributeprefabs.sandhill = 0.02
+	end
+	
+	if GLOBAL.terrain.rooms.BGLightningBluff then
+		GLOBAL.terrain.rooms.BGLightningBluff.contents.distributeprefabs.sandhill = 0.02
+	end
+
+
+	GLOBAL.terrain.filter.sandhill = {GLOBAL.GROUND.WOODFLOOR, GLOBAL.GROUND.CARPET, GLOBAL.GROUND.CHECKER, GLOBAL.GROUND.ROAD}
+
+
 modimport("init/init_food/init_food_worldgen")

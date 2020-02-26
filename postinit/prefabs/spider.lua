@@ -49,7 +49,7 @@ env.AddPrefabPostInit("spider", function(inst)
 		return
 	end
 	
-	inst:AddComponent("halloweenmoonmutable")
+	--inst:AddComponent("halloweenmoonmutable")
 	inst.components.halloweenmoonmutable:SetPrefabMutated("spider_moon")
 	inst.components.halloweenmoonmutable:SetOnMutateFn(HalloweenMoonMutate)
 

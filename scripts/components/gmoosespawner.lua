@@ -161,7 +161,7 @@ end
 local function ReleaseHassler(targetPlayer)
     assert(targetPlayer)
 
-    local hassler = TheSim:FindFirstEntityWithTag("moose")
+    local hassler = TheSim:FindFirstEntityWithTag("hahagottem")
     if hassler ~= nil then
         return hassler -- There's already a hassler in the world, we're done here.
     end
@@ -276,7 +276,7 @@ end
 function self:DoWarningSound(_targetplayer)
     --Players near _targetplayer will hear the warning sound from the
     --same direction and volume offset from their own local positions
-    SpawnPrefab("dragonflywarning_lvl"..
+    SpawnPrefab("moosewarning_lvl"..
         (((_timetoattack == nil or
         _timetoattack < 30) and "4") or
         (_timetoattack < 60 and "3") or

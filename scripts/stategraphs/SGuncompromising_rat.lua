@@ -278,7 +278,7 @@ local states =
 			inst.AnimState:PlayAnimation("stunned_loop", true)
 			inst.sg:SetTimeout(GetRandomWithVariance(6, 2))
 			if inst.components.inventoryitem then
-				inst.components.inventoryitem.canbepickedup = true
+				inst.components.inventoryitem.canbepickedup = false
 			end
 		end,
 

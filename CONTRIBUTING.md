@@ -6,6 +6,8 @@
 
 - @ Canis
 
+- @ Sho / Scrimbles
+
 ## Code contributors
 
 - @ ADM
@@ -15,6 +17,9 @@
 - @ Norfeder
 
 - @ loopuleasa
+
+
+- @ Sho / Scrimbles
 
 ## Art contributors
 

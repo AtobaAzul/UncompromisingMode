@@ -34,6 +34,7 @@ local prefab_post = {
 	"ash",
 	"pigman",
 	"moose",
+	"walls",
 }
 
 local stategraph_post = {

@@ -7,6 +7,7 @@ return {
 
 	"uncompromising_rat",
 	"ratpoison",
+	--"ratpoisonbottle",
 	"firemeteorwarning",
 	"antlionwarning",
 	"gasmask",
@@ -16,4 +17,7 @@ return {
 	"mock_monsterwarningsounds",
 	"mock_dragonfly",
 	"lavaspit",
+	"sandhill",
+	"snowpile",
+	"sand",
 }

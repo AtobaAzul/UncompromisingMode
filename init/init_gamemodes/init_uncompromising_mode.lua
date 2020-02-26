@@ -63,7 +63,7 @@ local require = GLOBAL.require
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("rare_food")) then
 		modimport("init/init_food/init_food_changes")
-		--modimport("init/init_food/init_bird_changes")
+		modimport("init/init_food/init_bird_changes")
 		modimport("init/init_food/init_rare_foods")
 	end
 
@@ -95,6 +95,8 @@ local require = GLOBAL.require
 		modimport("init/init_weather/init_acid_rain_disease")
 		modimport("init/init_weather/init_overworld_toadstool")
 		modimport("init/init_weather/init_harder_weather")
+		modimport("init/init_weather/init_snowstorm")
+		modimport("init/init_weather/init_snowstorm_structures")
 	end
 	
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or

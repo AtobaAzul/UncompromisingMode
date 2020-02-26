@@ -7,4 +7,36 @@ AddClassPostConstruct( "widgets/controls", function(self, inst)
 	self.pollenover = self:AddChild( PollenOver(ownr) )
 	self.pollenover:MoveToBack()
 	self.inst:ListenForEvent("updatepollen", function(inst, data) return self.pollenover:UpdateState(data.sneezetime) end, self.owner)
+	self.owner:ListenForEvent("seasontick", function() return self:SeasonHide() end, self.owner)
+end)
+
+AddClassPostConstruct("screens/playerhud",function(inst)
+	local SnowOver = require("widgets/snowover")
+	local fn =inst.CreateOverlays
+	function inst:CreateOverlays(owner)
+		fn(self, owner)
+		self.snowover = self.overlayroot:AddChild(SnowOver(owner))
+	end
+	
+end)
+
+local function OnSpy(inst)
+print("on")
+        inst._parent.HUD.snowover:SnowOn()
+		inst._parent:PushEvent("snowon")
+		
+end
+
+local function OffSpy(inst)
+print("off")
+	if inst._parent ~= nil then
+		ThePlayer.HUD.snowover:Show()
+        inst._parent.HUD.snowover:SnowOn()
+    end
+end
+
+AddPrefabPostInit("player_classified", function(inst)
+	
+	inst.snowoveron = GLOBAL.net_bool(inst.GUID, "snow.snowover", "snowdirty")
+	inst:ListenForEvent("snowdirty", OnSpy)
 end)

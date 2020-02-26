@@ -20,7 +20,7 @@ env.AddPrefabPostInit("hound", function(inst)
 		return
 	end
 	
-	inst:AddComponent("halloweenmoonmutable")
+	--inst:AddComponent("halloweenmoonmutable")
 	inst.components.halloweenmoonmutable:SetPrefabMutated("mutatedhound")
 
 	inst:WatchWorldState("isfullmoon", OnFullMoon)
