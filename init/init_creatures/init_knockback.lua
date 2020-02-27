@@ -35,6 +35,11 @@ local GIANTS =
         radius = 75,
 		power = 1,
     },
+	["leif_sparse"] =
+    {
+        radius = 75,
+		power = 1,
+    },
 	--[[["minotaur"] =
     {
         radius = 200,

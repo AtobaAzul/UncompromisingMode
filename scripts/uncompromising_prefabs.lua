@@ -21,4 +21,9 @@ return {
 	"snowpile",
 	"sand",
 	"snowgoggles",
+	--"leechswarm", buggy atm
+	"laitleech",
+	"shockworm",
+	"zaspberry",
+	"snowmong",
 }

@@ -24,6 +24,7 @@ local prefab_post = {
 	"walrus",
 	--"forest",
 	"leif",
+	"leif_sparse",
 	"world",
 	"antlion",
 	"minifan",
@@ -35,6 +36,8 @@ local prefab_post = {
 	"pigman",
 	"moose",
 	"walls",
+	"infestables",
+	"foodbuffs",
 }
 
 local stategraph_post = {
