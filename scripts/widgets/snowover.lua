@@ -99,7 +99,7 @@ else
 	end
 end
 
-if TheWorld.state.issnowing then
+if TheWorld.state.issnowing and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
 		if self.changed == nil then
 			self.changed = 0.01
 		elseif self.changed <= 1 then
@@ -163,7 +163,7 @@ if TheWorld.state.issnowing then
 end
 
 function SnowOver:SnowOn()
-if TheWorld.state.iswinter then
+if TheWorld.state.iswinter and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
 	self:StartUpdating()
 	else
 	self:Hide() 
@@ -173,7 +173,7 @@ end
 end
 
 function SnowOver:ToggleUpdating()
-	if TheWorld.state.iswinter then
+	if TheWorld.state.iswinter and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
 	self:StartUpdating()
 	else
 	self:Hide() 

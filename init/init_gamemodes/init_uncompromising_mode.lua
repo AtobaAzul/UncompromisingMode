@@ -52,6 +52,7 @@ local require = GLOBAL.require
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS) then
 		GLOBAL.TUNING.DSTU.MONSTER_HOUNDS_PER_WAVE_INCREASE = GetModConfigData("hound_increase")
+		GLOBAL.TUNING.DSTU.WEATHERHAZARD_START_DATE = GetModConfigData("weather start date")
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or

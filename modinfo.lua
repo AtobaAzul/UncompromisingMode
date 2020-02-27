@@ -218,4 +218,15 @@ configuration_options =
 		},
 		default = true,
 	},
+	{
+		name = "weather start date",
+		label = "Starting date of new weather hazards.",
+		hover = "Snowstorms, Hayfever, Fire, and Acid Rain.",
+		options =
+		{
+			{description = "First Year", data = 20},
+			{description = "Second Year", data = 55},
+		},
+		default = 20,
+	},
 }

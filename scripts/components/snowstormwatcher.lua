@@ -51,7 +51,7 @@ function SnowStormWatcher:ToggleSnowstorms(active, src, data)
 		self:UpdateSnowstormWalkSpeed()
 		self.inst:PushEvent("snowoff")
         self.inst:StopUpdatingComponent(self)
-    else
+    elseif TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
         self.inst:StartUpdatingComponent(self)
                 AddSnowstormWalkSpeedListeners(self.inst)
             self:UpdateSnowstormLevel()
