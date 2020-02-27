@@ -531,7 +531,7 @@ local function fn(Sim)
     inst.shouldGoAway = false
 
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetChanceLootTable("dragonfly")
+    inst.components.lootdropper:SetLoot(loot)
     
     inst:AddComponent("inspectable")
     inst.components.inspectable:RecordViews()
