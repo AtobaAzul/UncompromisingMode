@@ -6,10 +6,11 @@ Assets = {
 	Asset("ANIM", "anim/deerclops_ground_fx.zip"),
 	Asset("ANIM", "anim/deerclopsfalling.zip"),
 	Asset("ANIM", "anim/player_sneeze.zip"),
-	Asset("ATLAS", "images/fx4.xml"),
-	Asset("IMAGE", "images/fx4.tex"),
 	Asset("ANIM", "anim/hat_gasmask.zip"),
 	Asset("ANIM", "anim/hat_snowgoggles.zip"),
+	
+	Asset("ATLAS", "images/fx4.xml"),
+	Asset("IMAGE", "images/fx4.tex"),
 	Asset("ATLAS", "images/inventoryimages/gasmask.xml"),
 	Asset("IMAGE", "images/inventoryimages/gasmask.tex"),
 	Asset("ATLAS", "images/inventoryimages/sand.xml"),
@@ -18,6 +19,7 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/snowgoggles.tex"),
 	Asset("ATLAS", "images/inventoryimages/ratpoisonbottle.xml"),
 	Asset("IMAGE", "images/inventoryimages/ratpoisonbottle.tex"),
+	
 	Asset("ANIM", "anim/geyser.zip"),
 	Asset("ANIM", "anim/lava_vomit.zip"),
 	Asset("ANIM", "anim/leif_root.zip"),
@@ -29,4 +31,7 @@ Assets = {
 	Asset("ANIM", "anim/snowpile.zip"),
 	Asset("ANIM", "anim/tar.zip"),
 	Asset("ANIM", "anim/tar_trap.zip"),
+	
+	Asset("SOUNDPACKAGE", "sound/dontstarve_DLC003.fev"), 
+	Asset( "SOUND", "sound/DLC003_sfx.fsb"), 
 }
