@@ -29,7 +29,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	
 	DESCRIBE.GASMASK = "Poisonous air will not consume me!!"
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	STRINGS.SPIDERQUEENCOPRSE = "Another victory!"
+	DESCRIBE.SPIDERQUEENCOPRSE = "Another victory!"
 	ANNOUNCE.ANNOUNCE_SNEEZE = "aaAAAH...cho!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Mine nostrils chafe with itchiness!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "The smoke has cleared!"
@@ -39,3 +39,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 		"The beasts roars loud!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "A cheap trick! Fight with honor!"
+	DESCRIBE.SAND = "You are a very clean dirt."
+	DESCRIBE.SANDHILL = "I will not make a mountain out of a sandhill."
+	DESCRIBE.SNOWPILE = "I shall destroy it in Skaði's name!"
+	DESCRIBE.SNOWGOGGLES = "We shall fight the storm itself!"

@@ -29,7 +29,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 	
     DESCRIBE.GASMASK = "For investigating dangerous areas."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	STRINGS.SPIDERQUEENCOPRSE = "A Royal Arachnic, posthumous."
+	DESCRIBE.SPIDERQUEENCOPRSE = "A Royal Arachnic, posthumous."
 	ANNOUNCE.ANNOUNCE_SNEEZE = "Ahh... CHOOOOOOOOO!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Sniff sniff. Must be hayfever season."
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Ahh... Finally I can breathe."
@@ -39,3 +39,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 		"Watch your heads!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "I should chop myself free!"
+	DESCRIBE.SAND = "Sand always seems to find its way into my books."
+	DESCRIBE.SANDHILL = "The dune's iconic shape is formed by the winds."
+	DESCRIBE.SNOWPILE = "Ah, reminds me of winter days spent reading by the fire."
+	DESCRIBE.SNOWGOGGLES = "For winter reading? ...Perhaps not."

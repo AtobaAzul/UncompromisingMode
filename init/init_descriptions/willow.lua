@@ -29,7 +29,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	
     DESCRIBE.GASMASK = "Cuts down on the coughing."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	STRINGS.SPIDERQUEENCOPRSE = "Burn it, burn it! Ew ew ew!"
+	DESCRIBE.SPIDERQUEENCOPRSE = "Burn it, burn it! Ew ew ew!"
 	ANNOUNCE.ANNOUNCE_SNEEZE = "Achoo!!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "My sinuses are burning."
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Sniff! I feel better now!"
@@ -39,3 +39,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 		"FIRE IN THE SKY! YES!!!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Oh, you're really asking to be burned!"
+	DESCRIBE.SAND = "Big deal, it's sand."
+	DESCRIBE.SANDHILL = "Oh, look! It's some sand."
+	DESCRIBE.SNOWPILE = "Fire seems oddly ineffective."
+	DESCRIBE.SNOWGOGGLES = "Now I can see the opposite of the world burning."

@@ -29,7 +29,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	
     DESCRIBE.GASMASK = "I could use this in the smoke house."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	STRINGS.SPIDERQUEENCOPRSE = "Mon dieu! That must get rid of!"
+	DESCRIBE.SPIDERQUEENCOPRSE = "Mon dieu! That must get rid of!"
 	ANNOUNCE.ANNOUNCE_SNEEZE = "Atchoum!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Ugh! My allergies!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "I think... my nose has cleared!"
@@ -39,3 +39,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 		"Cats and dogs! Great flaming cats and dogs!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Definetly not a spice root!"
+	DESCRIBE.SAND = "Lots of tiny, tiny stones."
+	DESCRIBE.SANDHILL = "The sand has formed a small pile."
+	DESCRIBE.SNOWPILE = "Snow is a new thing for me, seems like a problem."
+	DESCRIBE.SNOWGOGGLES = "Still not my style, but I can see better atleast."

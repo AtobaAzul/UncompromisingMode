@@ -29,7 +29,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	
 	DESCRIBE.GASMASK = "It filters air but not despair."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	STRINGS.SPIDERQUEENCOPRSE = "An inevitable end."
+	DESCRIBE.SPIDERQUEENCOPRSE = "An inevitable end."
 	ANNOUNCE.ANNOUNCE_SNEEZE = "achoo! achoo! sniff."
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Ugh. Even my sinuses are suffering."
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "My sinuses are clear, but suffering continues."
@@ -39,3 +39,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 		"Some just want to watch the world burn.",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "You cannot hold me forever."
+	DESCRIBE.SAND = "I wonder if the sand knows of its own insignificance?"
+	DESCRIBE.SANDHILL = "This looks impermanent."
+	DESCRIBE.SNOWPILE = "Cold death awaits us."
+	DESCRIBE.SNOWGOGGLES = "Like tears, in the snow."

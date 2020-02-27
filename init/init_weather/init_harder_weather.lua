@@ -32,3 +32,27 @@ GLOBAL.ACTIONS.LIGHT.fn = function(act)
 		end
 	end
 end
+
+local env = env
+GLOBAL.setfenv(1, GLOBAL)
+-----------------------------------------------------------------
+env.AddPrefabPostInit("cave", function(inst)
+    if not TheWorld.ismastersim then
+        return
+    end
+    
+    inst:AddComponent("cavedeerclopsspawner")
+	inst:AddComponent("hayfever_tracker")
+end)
+
+env.AddPrefabPostInit("forest", function(inst)
+    if not TheWorld.ismastersim then
+        return
+    end
+	inst:AddComponent("toadrain")
+	inst:AddComponent("hayfever_tracker")
+	inst:AddComponent("firefallwarning")
+	
+	inst:AddComponent("gmoosespawner")
+	inst:AddComponent("mock_dragonflyspawner")
+end)

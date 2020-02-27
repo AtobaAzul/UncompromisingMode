@@ -29,7 +29,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	
 	DESCRIBE.GASMASK = "Now we won't cough so much."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	STRINGS.SPIDERQUEENCOPRSE = "Oh no! Are you okay?"
+	DESCRIBE.SPIDERQUEENCOPRSE = "Oh no! Are you okay?"
 	ANNOUNCE.ANNOUNCE_SNEEZE = "a...choooOOOOOOO!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Sniff. Sniff. We must have allergies."
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Wow! I think our allergies are gone!"
@@ -39,3 +39,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 		"Watch out!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "We're stuck! Help!"
+	DESCRIBE.SAND = "It's nice to feel it beneath our many feet."
+	DESCRIBE.SANDHILL = "Wish we had a bucket and a shovel."
+	DESCRIBE.SNOWPILE = "I wish it was a good time to play..."
+	DESCRIBE.SNOWGOGGLES = "We are neither cat eyed or bug eyed."

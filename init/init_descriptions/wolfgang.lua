@@ -24,12 +24,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
     DESCRIBE.COOKEDMONSTERSCRAP = "Still look not good. Wolfgang go find better meat?"
     DESCRIBE.MONSTERSCRAP_DRIED = "Small bad meat is rock now."
 
-    DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Smelly mushroom make water bad!"
+    DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Smelly mushroom make rain hurt!"
     DESCRIBE.TOADLING = "Little frog not look right."
 	
     DESCRIBE.GASMASK = "Is good for Wolfgang lungs."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	STRINGS.SPIDERQUEENCOPRSE = "Big scary spider is dead!"
+	DESCRIBE.SPIDERQUEENCOPRSE = "Big scary spider is dead!"
 	ANNOUNCE.ANNOUNCE_SNEEZE = "Achoo! Excuse Wolfgang."
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Allergies strong like Wolfgang!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Ha! Wolfgang beat allergies!"
@@ -39,3 +39,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 		"Fire! Fire!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Too tough, Wolfgang cannot break!"
+	DESCRIBE.SAND = "When Wolfgang holds it it slips through his large, strong hands."
+	DESCRIBE.SANDHILL = "Tiny, crushable hill."
+	DESCRIBE.SNOWPILE = "Cold is no good for the muscles!."
+	DESCRIBE.SNOWGOGGLES = "Is... little tight... for head."

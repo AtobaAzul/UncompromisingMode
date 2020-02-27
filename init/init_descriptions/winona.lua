@@ -29,7 +29,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	
     DESCRIBE.GASMASK = "Proper equipment for a mining job."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	STRINGS.SPIDERQUEENCOPRSE = "Do we really need to keep that around?"	
+	DESCRIBE.SPIDERQUEENCOPRSE = "Do we really need to keep that around?"	
 	ANNOUNCE.ANNOUNCE_SNEEZE = "ACHOO! Whoops!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Something is dancin' in my nose!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "My nose is finally getting a break!"
@@ -39,3 +39,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 		"Get your hard hats on!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "I'm caught!"
+	DESCRIBE.SAND = "I can only break it down so much."
+	DESCRIBE.SANDHILL = "I usually leave the cleanup to the janitors."
+	DESCRIBE.SNOWPILE = "Save your back, shovel early."
+	DESCRIBE.SNOWGOGGLES = "Winter workin."

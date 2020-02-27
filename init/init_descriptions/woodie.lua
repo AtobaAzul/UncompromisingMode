@@ -29,7 +29,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	
     DESCRIBE.GASMASK = "Keeps my lungs clear."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	STRINGS.SPIDERQUEENCOPRSE = "That's a sight for sore eyes, eh?"
+	DESCRIBE.SPIDERQUEENCOPRSE = "That's a sight for sore eyes, eh?"
 	ANNOUNCE.ANNOUNCE_SNEEZE = "Achoo! Excuse me. Sorry."
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "You have allergies like me, Lucy?"
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Ah! Clean air again."
@@ -39,3 +39,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 		"This is nothing like Canadian weather!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "You're up, Lucy!"
+	DESCRIBE.SAND = "Sandy."
+	DESCRIBE.SANDHILL = "It's a big pile of sand."
+	DESCRIBE.SNOWPILE = "You call that being snowed in?"
+	DESCRIBE.SNOWGOGGLES = "Now I feel at home."

@@ -34,7 +34,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	
     DESCRIBE.GASMASK = "Now I can breath anywhere."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	STRINGS.SPIDERQUEENCOPRSE = "That's really gross."
+	DESCRIBE.SPIDERQUEENCORPSE = "That's really gross."
 	ANNOUNCE.ANNOUNCE_SNEEZE = "AHHH CHOOOO!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "My nose feels.. itchy."
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "I don't want to claw my eyes out anymore."
@@ -44,6 +44,10 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 		"I've got a bad feeling about this.",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "I'm stuck!"
+	DESCRIBE.SAND = "A handy pile of pocket sand."
+	DESCRIBE.SANDHILL = "You better stay out of my shoes."
+	DESCRIBE.SNOWPILE = "That'll be a problem if it builds up."
+	DESCRIBE.SNOWGOGGLES = "Icy clearly now!"
 
 --	[ 		Recipe Descriptions		]   --
 

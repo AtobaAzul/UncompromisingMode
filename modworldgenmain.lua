@@ -1,5 +1,7 @@
-GLOBAL.require("map/terrain")--[[
-if GetModConfigData("harder_shadows") == true then
+GLOBAL.require("map/terrain")
+
+if (GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("caveless") == false) or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("caveless") == false) then
 
     AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "forest" then
@@ -10,7 +12,7 @@ tasksetdata.set_pieces["ToadstoolArena"] = { 1, tasks={"Guarded Squeltch","Merms
 
 end)
 
-end--]]
+end
 
 
 	if GLOBAL.terrain.rooms.LightningBluffAntlion then

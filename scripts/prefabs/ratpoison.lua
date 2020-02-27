@@ -49,6 +49,9 @@ local function fn()
 	inst.components.edible.healthvalue = -50
 	inst.components.edible:SetOnEatenFn(oneaten)
 	
+	inst:AddComponent("perishable")
+	inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)
+	
 	inst:AddComponent("bait")
 
     return inst
@@ -71,7 +74,6 @@ local function itemfn()
 
     inst.AnimState:SetBank("tar")
     inst.AnimState:SetBuild("tar")
-
     inst.AnimState:PlayAnimation("idle")
 	
 	inst.entity:SetPristine()
@@ -83,7 +85,7 @@ local function itemfn()
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/sand.xml"
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/ratpoisonbottle.xml"
     inst:AddComponent("stackable")
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 	

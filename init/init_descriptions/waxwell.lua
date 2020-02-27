@@ -30,7 +30,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	
 	DESCRIBE.GASMASK = "This clears the vapors."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	STRINGS.SPIDERQUEENCOPRSE = "Is it waiting for something?"
+	DESCRIBE.SPIDERQUEENCOPRSE = "Is it waiting for something?"
 	ANNOUNCE.ANNOUNCE_SNEEZE = "ah...CHOOOO!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Ugh. Allergies."
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Ah... I can breathe again."
@@ -40,3 +40,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 		"That's probably not good.",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "It's roots have taken hold!"
+	DESCRIBE.SAND = "Rocks so thoroughly beaten down they are no longer recognizable."
+	DESCRIBE.SANDHILL = "A little mound of yellow sand."
+	DESCRIBE.SNOWPILE = "Remove it, before it gets in my boots."
+	DESCRIBE.SNOWGOGGLES = "..."

@@ -29,7 +29,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	
     DESCRIBE.GASMASK = "Freezes sneezes!"
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	STRINGS.SPIDERQUEENCOPRSE = "There is no bliss for this carcass!"
+	DESCRIBE.SPIDERQUEENCOPRSE = "There is no bliss for this carcass!"
 	ANNOUNCE.ANNOUNCE_SNEEZE = "Achooo! Hyuyu!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Dust itself is pranking my snout!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "It is relieving, for there is no more sneezing!"
@@ -39,3 +39,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 		"Fury!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "You can't hold me down!"
+	DESCRIBE.SAND = "Itchy and scratchy!"
+	DESCRIBE.SANDHILL = "Great grains of gravel!"
+	DESCRIBE.SNOWPILE = "Ooh what mischief we could cause with this! Hyuyu!"
+	DESCRIBE.SNOWGOGGLES = "Cats Eyes!"

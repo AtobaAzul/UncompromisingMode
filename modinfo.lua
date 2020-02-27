@@ -1,4 +1,4 @@
-name = " Uncompromising Mode"
+name = " sUncompromising Mode"
 description = 
 [[
 󰀔 [ Version 1.1.4 : "Pests & Pestilence Update" ]
@@ -205,6 +205,17 @@ configuration_options =
 			{description = "Disabled", data = false},
 			{description = "Enabled", data = true},
 		},
-		default = false,
+		default = true,
+	},
+	{
+		name = "caveless",
+		label = "[IMPORTANT] CAVES",
+		hover = "ENABLE IF YOU HAVE CAVES ENABLED, VISE VERSA. >VERY< IMPORTANT.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
 	},
 }

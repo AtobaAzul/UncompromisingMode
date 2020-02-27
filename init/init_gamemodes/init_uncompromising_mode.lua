@@ -55,41 +55,41 @@ local require = GLOBAL.require
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_monsters")) then
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_monsters") == true) then
 		modimport("init/init_creatures/init_treebuffs")
 		modimport("init/init_creatures/init_harder_monsters")
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("rare_food")) then
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("rare_food") == true) then
 		modimport("init/init_food/init_food_changes")
 		modimport("init/init_food/init_bird_changes")
 		modimport("init/init_food/init_rare_foods")
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_recipes")) then
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_recipes") == true) then
 		modimport("init/init_recipes")
 		modimport("init/init_food/init_crockpot")
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("rat_raids")) then
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("rat_raids") == true) then
 		modimport("init/init_ratraid")
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_bosses")) then
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_bosses") == true) then
 		modimport("init/init_creatures/init_knockback")
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_shadows")) then
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_shadows") == true) then
 		modimport("init/init_creatures/init_harder_shadows")
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_weather")) then
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_weather") == true) then
 		modimport("init/init_weather/init_acidmushroom_networking")
 		modimport("init/init_weather/init_acid_rain_effects")
 		modimport("init/init_weather/init_acid_rain_disease")
@@ -100,7 +100,7 @@ local require = GLOBAL.require
 	end
 	
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("durability")) then
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("durability") == true) then
 		modimport("init/init_durability")
 	end
 

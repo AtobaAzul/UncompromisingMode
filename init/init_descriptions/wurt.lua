@@ -28,8 +28,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
     DESCRIBE.TOADLING = "Veggie...froggie? Not sure if ok to eat."
 	
     DESCRIBE.GASMASK = "Smell bad, smells bad."
-	DESCRIBE.MOCK_DRAGONFLY = "Scaled-folk shouldn't fight, florp!"
-	STRINGS.SPIDERQUEENCOPRSE = "Like the smell!"
+	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
+	DESCRIBE.SPIDERQUEENCOPRSE = "Like the smell!"
 	ANNOUNCE.ANNOUNCE_SNEEZE = "Choo! Egh."
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Nose feel funny!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Nose feels good again!"
@@ -39,3 +39,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 		"Fire! Florp!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Stuck!"
+	DESCRIBE.SAND = "Grainy stuffs."
+	DESCRIBE.SANDHILL = "Itch on scales..."
+	DESCRIBE.SNOWPILE = "Fun! Brr..."
+	DESCRIBE.SNOWGOGGLES = "Silly eyes on silly hat!"
