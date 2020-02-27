@@ -20,4 +20,5 @@ return {
 	"sandhill",
 	"snowpile",
 	"sand",
+	"snowgoggles",
 }

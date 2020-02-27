@@ -71,6 +71,8 @@ local function fn()
     inst.AnimState:PlayAnimation("anim")  
 
 	inst:AddTag("hats")
+		
+    inst:AddTag("goggles")
 	
     inst.entity:SetPristine()
 	
