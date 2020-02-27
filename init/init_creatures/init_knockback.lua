@@ -53,7 +53,7 @@ local GIANTS =
 	["moose"] =
     {
         radius = 200,
-		power = 2,
+		power = 1,
 	},
 	--No klaus, since he does double attacks and has deer 
 }
