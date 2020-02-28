@@ -105,7 +105,13 @@ local function ToggleUpdate(force)
                 ScheduleSpawn(v, true)
             end
         end
-	end
+	elseif _updating then
+        _updating = false
+        for i, v in ipairs(_activeplayers) do
+            CancelSpawn(v)
+        end
+    end
+	
 end
 
 local function AutoRemoveTarget(inst, target)
