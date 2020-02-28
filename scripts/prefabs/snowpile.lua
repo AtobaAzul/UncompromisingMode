@@ -313,7 +313,7 @@ local function onpickedfn(inst, picker)
             ThePlayer.components.talker:Say(GetString(ThePlayer.prefab, "ANNOUNCE_COLD"))
         end
         
-		picker.components.moisture:DoDelta(5)
+		picker.components.moisture:DoDelta(10)
         
     end
 	
