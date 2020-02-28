@@ -1,6 +1,49 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
+local function EnterPhase2Trigger(inst)
+    if not inst.components.health:IsDead() then
+	
+		inst.sg:GoToState("taunt")
+
+			if not IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then
+				inst.AnimState:SetBuild("deerclops_yule")
+
+				inst.entity:AddLight()
+				inst.Light:SetIntensity(.6)
+				inst.Light:SetRadius(8)
+				inst.Light:SetFalloff(3)
+				inst.Light:SetColour(1, 0, 0)
+				
+				inst:AddComponent("timer")
+			end
+		
+		local upgradeburst = SpawnPrefab("maxwell_smoke")
+		upgradeburst.Transform:SetPosition(inst.Transform:GetWorldPosition())
+		upgradeburst.Transform:SetScale(3, 3, 3)
+		
+		inst.Transform:SetScale(1.8, 1.8, 1.8)
+		inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE * 1.1)
+		inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE * 1.1, TUNING.DEERCLOPS_AOE_SCALE * 1.1)
+		inst.components.combat:SetAttackPeriod(TUNING.DEERCLOPS_ATTACK_PERIOD * 1.1)
+	
+		inst.enraged = true
+	
+	end
+end
+
+local function OnSave(inst, data)
+    data.enraged = inst.enraged or nil
+end
+
+local function OnPreLoad(inst, data)
+    if data ~= nil then
+        if data.enraged then
+            EnterPhase2Trigger(inst)
+        end
+    end
+end
+
 env.AddPrefabPostInit("deerclops", function(inst)
 	local function GetHeatFn(inst)
 		return -40
@@ -10,11 +53,19 @@ env.AddPrefabPostInit("deerclops", function(inst)
 		return
 	end
 	
+	local PHASE2_HEALTH = .5
+	
+	inst.OnSave = OnSave
+    inst.OnPreLoad = OnPreLoad
+	
 	inst:RemoveComponent("freezable")
 	
 	inst:AddComponent("heater")
     inst.components.heater.heatfn = GetHeatFn
     inst.components.heater:SetThermics(false, true)
+	
+	inst:AddComponent("healthtrigger")
+    inst.components.healthtrigger:AddTrigger(PHASE2_HEALTH, EnterPhase2Trigger)
 	
 	inst:AddComponent("groundpounder")
 	inst.components.groundpounder.destroyer = true
