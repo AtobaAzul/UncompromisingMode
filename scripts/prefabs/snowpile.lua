@@ -92,7 +92,7 @@ end
 		if TheWorld.state.issnowing then
 			regentime = regentime / 2
 		elseif TheWorld.state.iswinter and not TheWorld.state.issnowing then
-			regentime = regentime * 2
+			regentime = regentime
 		else
 			regentime = regentime / 2
 		end

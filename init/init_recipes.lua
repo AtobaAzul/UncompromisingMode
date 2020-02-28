@@ -57,7 +57,9 @@ Recipe("goggleshat", {Ingredient("goldnugget", 4), Ingredient("pigskin",1), Ingr
 Recipe("deserthat", {Ingredient("goggleshat", 1), Ingredient("pigskin",2)}, RECIPETABS.DRESS, TECH.SCIENCE_TWO)
 Recipe("snowgoggles", {Ingredient("catcoonhat", 1), Ingredient("goggleshat",1), Ingredient("beefalowool",2)}, RECIPETABS.DRESS, TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/snowgoggles.xml", "snowgoggles.tex" )
 Recipe("ratpoisonbottle", {Ingredient("red_cap", 2), Ingredient("berries",2), Ingredient("rocks",1)}, RECIPETABS.SURVIVAL, TECH.SCIENCE_ONE, nil, nil, nil, nil, nil, "images/inventoryimages/ratpoisonbottle.xml", "ratpoisonbottle.tex" )
+Recipe("sand", {Ingredient("townportaltalisman", 1)}, RECIPETABS.SURVIVAL, TECH.SCIENCE_ONE, nil, nil, nil, 4, nil, "images/inventoryimages/sand.xml", "sand.tex" )
 
+STRINGS.RECIPE_DESC.SAND = "Turn a big rock into smaller rocks."
 STRINGS.RECIPE_DESC.SNOWGOGGLES = "Keep your eyes clear and ears extra warm."
 STRINGS.RECIPE_DESC.RATPOISONBOTTLE = "High addictive to pestilence pests."
 
