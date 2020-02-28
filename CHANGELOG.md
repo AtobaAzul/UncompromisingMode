@@ -170,7 +170,13 @@
 
 * [x] Sand now spawns in the desert, used for goggle recipe
 
-* [x] New Catcoon Cap x Desert Hat craftable
+* [x] New Catcoon Cap x Desert Hat mixture craftable
+
+* [x] Deerclops evolution at half health
+
+* [x] Craftable sand using Desert Stones
+
+* [x] New mob: Abominamole, spawns out of snow piles
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
