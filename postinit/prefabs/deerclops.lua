@@ -41,7 +41,7 @@ local function EnterPhase2Trigger(inst)
 			end
 		
 		
-		inst.sg:GoToState("taunt")
+		inst.AnimState:PlayAnimation("taunt")
 		inst.enraged = true
 	
 	end
