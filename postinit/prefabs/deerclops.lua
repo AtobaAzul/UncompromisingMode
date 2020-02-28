@@ -5,7 +5,7 @@ GLOBAL.setfenv(1, GLOBAL)
 local PHASE2_HEALTH = .5
 
 local function OnNewState(inst, data)
-    if not (inst.sg:HasStateTag("sleeping") or inst.sg:HasStateTag("waking")) then
+    if not (inst.sg:HasStateTag("sleeping") or inst.sg:HasStateTag("waking")) and not inst.Light == nil then
         inst.Light:SetIntensity(.6)
         inst.Light:SetRadius(8)
         inst.Light:SetFalloff(3)
@@ -19,7 +19,7 @@ local function EnterPhase2Trigger(inst)
 		upgradeburst.Transform:SetPosition(inst.Transform:GetWorldPosition())
 		upgradeburst.Transform:SetScale(3, 3, 3)
 		
-		inst.Transform:SetScale(1.8, 1.8, 1.8)
+		inst.Transform:SetScale(1.85, 1.85, 1.85)
 		inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE * 1.1)
 		inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE * 1.1, TUNING.DEERCLOPS_AOE_SCALE * 1.1)
 		inst.components.combat:SetAttackPeriod(TUNING.DEERCLOPS_ATTACK_PERIOD * 0.9)
@@ -28,20 +28,19 @@ local function EnterPhase2Trigger(inst)
 
 			if not IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then
 				inst.AnimState:SetBuild("deerclops_yule")
---[[
-				inst.entity:AddLight()
+
+				--inst.entity:AddLight()
 				inst.Light:SetIntensity(.6)
 				inst.Light:SetRadius(8)
 				inst.Light:SetFalloff(3)
 				inst.Light:SetColour(1, 0, 0)
---]]
-				inst:AddComponent("timer")
-				--inst:ListenForEvent("newstate", OnNewState)
+
+				inst:DoTaskInTime(0.1, inst:AddComponent("timer"))
+				inst:ListenForEvent("newstate", OnNewState)
 				
 			end
 		
-		
-		inst.AnimState:PlayAnimation("taunt")
+		inst.sg:GoToState("taunt")
 		inst.enraged = true
 	
 	end
@@ -63,6 +62,15 @@ env.AddPrefabPostInit("deerclops", function(inst)
 	local function GetHeatFn(inst)
 		return -40
 	end
+	
+	if not IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then
+		inst.entity:AddLight()
+		inst.Light:SetIntensity(0)
+		inst.Light:SetRadius(0)
+		inst.Light:SetFalloff(0)
+		inst.Light:SetColour(0, 0, 1)
+	end
+	
 
 	if not TheWorld.ismastersim then
 		return
