@@ -73,14 +73,14 @@ local function Retarget(inst)
         function(guy) 
             if inst.components.combat:CanTarget(guy)
                and not (inst.components.follower and inst.components.follower.leader == guy and target.components.health:IsDead())
-               and not (inst.components.follower and inst.components.follower.leader == GetPlayer() and guy:HasTag("companion")) then
+               and not (inst.components.follower and guy:HasTag("companion")) then
                 return not (guy:HasTag("snowish"))
             end
     end, nil, notags)
 end
 
 local function KeepTarget(inst, target)
-    return inst.components.combat:CanTarget(target) and (target == GetPlayer())
+    return inst.components.combat:CanTarget(target)
 end
 
 local function OnSleep(inst)

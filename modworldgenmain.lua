@@ -1,7 +1,6 @@
 GLOBAL.require("map/terrain")
 
-if (GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("caveless") == false) or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("caveless") == false) then
+if GetModConfigData("caveless") == false then
 
     AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "forest" then

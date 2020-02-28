@@ -10,7 +10,7 @@ local prefabs =
 
 TUNING.SNOW_X_SCALE = 0 + math.random(0.3,0.5)
 TUNING.SNOW_Y_SCALE = 0 + math.random(0.1,0.3)
-TUNING.SAND_REGROW_TIME = 60
+TUNING.SAND_REGROW_TIME = 45
 TUNING.SAND_REGROW_VARIANCE = 10
 TUNING.SAND_DEPLETE_CHANCE = 0.25
 
@@ -22,14 +22,14 @@ local startregen
 local anims = {"low", "med", "full"}
 
 local function onregen(inst)
-
+print("anothertry")
 --[[
 	if inst.Transform:GetWorldPosition() ~= nil then
 		local x1, y1, z1 = inst.Transform:GetWorldPosition()
 		local ents2 = TheSim:FindEntities(x1, y1, z1, 8, { "fire" })
 	end--]]
 
-	if inst ~= nil then
+	--if inst ~= nil then
 			if TheWorld.state.iswinter then--or ents2 ~= nil and #ents2 < 0 then
 			--inst.components.activatable.inactive = false
 			if inst.components.workable.workleft < 3 then
@@ -40,7 +40,17 @@ local function onregen(inst)
 				inst.components.pickable.cycles_left = inst.components.pickable.cycles_left + 1
 				startregen(inst)
 			else
+				
 				startregen(inst)
+				if math.random() < 0.1 then
+					print("Snowball Fight!")
+					local snowattack = SpawnPrefab("snowmong")
+					local spawnpoint = inst.Transform:GetWorldPosition()
+					snowattack.Transform:SetPosition(inst.Transform:GetWorldPosition())
+					snowattack.sg:GoToState("enter")
+					inst:DoTaskInTime(0.1, SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition()))
+					inst:DoTaskInTime(0.2, inst:Remove())
+				end
 			end
 		else
 			--inst.components.activatable.inactive = false
@@ -62,10 +72,8 @@ local function onregen(inst)
 				--inst:DoTaskInTime(10, function() inst:Remove() end)
 			end
 		end
-			
-		startregen(inst)
 
-	end
+	--end
 end
 
 startregen = function(inst, regentime)
@@ -74,16 +82,16 @@ if TheWorld.state.issummer then
 	onregen(inst)
 end
 --]]
-	if inst.components.workable.workleft < #anims-1 then
+	if inst.components.workable.workleft < #anims + 1 then
 		-- more to grow
 		--regentime = regentime or (TUNING.SAND_REGROW_TIME + math.random()*TUNING.SAND_REGROW_VARIANCE)
 		
 		regentime = regentime or (TUNING.SAND_REGROW_TIME + math.random()*TUNING.SAND_REGROW_VARIANCE)
 
 
-		if TheWorld.state.snowing then
+		if TheWorld.state.issnowing then
 			regentime = regentime / 2
-		elseif TheWorld.state.iswinter and not TheWorld.state.snowing then
+		elseif TheWorld.state.iswinter and not TheWorld.state.issnowing then
 			regentime = regentime * 2
 		else
 			regentime = regentime / 2
