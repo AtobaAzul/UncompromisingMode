@@ -5,11 +5,14 @@ GLOBAL.setfenv(1, GLOBAL)
 local PHASE2_HEALTH = .5
 
 local function OnNewState(inst, data)
-    if not (inst.sg:HasStateTag("sleeping") or inst.sg:HasStateTag("waking")) and not inst.Light == nil then
+    if not (inst.sg:HasStateTag("sleeping") or inst.sg:HasStateTag("waking")) then
         inst.Light:SetIntensity(.6)
         inst.Light:SetRadius(8)
         inst.Light:SetFalloff(3)
         inst.Light:SetColour(1, 0, 0)
+		inst.Light:Enable(true)
+	else
+		inst:DoTaskInTime(2, inst.Light:Enable(false))
     end
 end
 
@@ -29,14 +32,11 @@ local function EnterPhase2Trigger(inst)
 			if not IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then
 				inst.AnimState:SetBuild("deerclops_yule")
 
-				--[[inst.entity:AddLight()
-				inst.Light:SetIntensity(.6)
-				inst.Light:SetRadius(8)
-				inst.Light:SetFalloff(3)
-				inst.Light:SetColour(1, 0, 0)--]]
+				--inst.entity:AddLight()
+				inst.Light:Enable(true)
 
 				inst:DoTaskInTime(0.1, inst:AddComponent("timer"))
-				--inst:ListenForEvent("newstate", OnNewState)
+				inst:ListenForEvent("newstate", OnNewState)
 				
 			end
 		
@@ -62,6 +62,17 @@ env.AddPrefabPostInit("deerclops", function(inst)
 	local function GetHeatFn(inst)
 		return -40
 	end
+	
+	if not IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then
+		inst.entity:AddLight()
+		inst.Light:SetIntensity(.6)
+		inst.Light:SetRadius(8)
+		inst.Light:SetFalloff(3)
+		inst.Light:SetColour(1, 0, 0)
+		
+		inst.Light:Enable(false)
+	end
+	
 
 	if not TheWorld.ismastersim then
 		return
