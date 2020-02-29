@@ -79,6 +79,10 @@ env.AddPrefabPostInit("cave", function(inst)
 inst.components.hounded:SetSpawnData(newwormspawn)
 end)
 
+local function changeprecipchance()
+    --TheWorld:PushEvent("ms_setmoisturescale", 2)
+end
+
 env.AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then
         return
@@ -89,4 +93,6 @@ env.AddPrefabPostInit("forest", function(inst)
 	
 	inst:AddComponent("gmoosespawner")
 	inst:AddComponent("mock_dragonflyspawner")
+	
+	inst:ListenForEvent("seasontick", changeprecipchance)
 end)

@@ -32,5 +32,5 @@ AddPlayerPostInit(function(inst)
 	
 	SetInstanceFunctions(inst)
 	
-	inst:AddComponent("firerain")
+	--inst:AddComponent("firerain")
 end)
