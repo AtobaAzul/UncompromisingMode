@@ -11,7 +11,7 @@ local function OnNewState(inst, data)
         inst.Light:SetFalloff(3)
         inst.Light:SetColour(1, 0, 0)
 		--inst.Light:Enable(true)
-	else
+	--else
 		--inst:DoTaskInTime(2, inst.Light:Enable(false))
     end
 end
