@@ -10,9 +10,9 @@ local function OnNewState(inst, data)
         inst.Light:SetRadius(8)
         inst.Light:SetFalloff(3)
         inst.Light:SetColour(1, 0, 0)
-		inst.Light:Enable(true)
+		--inst.Light:Enable(true)
 	else
-		inst:DoTaskInTime(2, inst.Light:Enable(false))
+		--inst:DoTaskInTime(2, inst.Light:Enable(false))
     end
 end
 
@@ -33,6 +33,10 @@ local function EnterPhase2Trigger(inst)
 				inst.AnimState:SetBuild("deerclops_yule")
 
 				--inst.entity:AddLight()
+				inst.Light:SetIntensity(.6)
+				inst.Light:SetRadius(8)
+				inst.Light:SetFalloff(3)
+				inst.Light:SetColour(1, 0, 0)
 				inst.Light:Enable(true)
 
 				inst:DoTaskInTime(0.1, inst:AddComponent("timer"))
@@ -66,9 +70,9 @@ env.AddPrefabPostInit("deerclops", function(inst)
 	if not IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then
 		inst.entity:AddLight()
 		inst.Light:SetIntensity(.6)
-		inst.Light:SetRadius(8)
-		inst.Light:SetFalloff(3)
-		inst.Light:SetColour(1, 0, 0)
+        inst.Light:SetRadius(8)
+        inst.Light:SetFalloff(3)
+        inst.Light:SetColour(1, 0, 0)
 		
 		inst.Light:Enable(false)
 	end
