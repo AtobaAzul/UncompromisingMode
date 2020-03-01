@@ -49,7 +49,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	DESCRIBE.SNOWPILE = "That'll be a problem if it builds up."
 	DESCRIBE.SNOWGOGGLES = "Icy clearly now!"
 	
-	DESCRIBE.SNOWMONG = "Abominamole!"
+	DESCRIBE.SNOWMONG = "Shiverbug!"
 	DESCRIBE.SHOCKWORM = "Quite the conductive worm!"
 	DESCRIBE.ZASPBERRY = "I can feel the electricity flowing through it."
 
