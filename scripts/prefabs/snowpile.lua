@@ -22,7 +22,7 @@ local startregen
 local anims = {"low", "med", "full"}
 
 local function onregen(inst)
-print("anothertry")
+--print("anothertry")
 --[[
 	if inst.Transform:GetWorldPosition() ~= nil then
 		local x1, y1, z1 = inst.Transform:GetWorldPosition()

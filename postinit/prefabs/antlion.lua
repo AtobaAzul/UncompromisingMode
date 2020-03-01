@@ -4,7 +4,7 @@ GLOBAL.setfenv(1, GLOBAL)
 
 local function onothertimerdone(inst, data)
 			inst:DoTaskInTime(17, function(inst)
-			print("bingo")
+			--print("bingo")
 			inst:PushEvent("firefall")
 			end)
 			inst:DoTaskInTime(21, function(inst)

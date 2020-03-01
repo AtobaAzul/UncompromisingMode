@@ -20,7 +20,7 @@
 
 * [x]  Applied horticulture recipe nerf (uses 1 leafy meat + 1 bucket o poop instead of 1 seeds + 1 poop)
 
-* [ ]  [Settings menu](https://i.imgur.com/N3rLMpH.png)
+* [x]  [Settings menu](https://i.imgur.com/N3rLMpH.png)
 
 * [x]  [Totally Normal Livingtree root attack](https://imgur.com/8gC0cdv.gif)
 
@@ -56,7 +56,7 @@
 
 * [x]  Bishops now flee inbetween attacks
 
-* [ ]  Mod settings for disabling/enabling features
+* [x]  Mod settings for disabling/enabling features
 
 * [x]  Pigs and bunnies defend their houses when hammered
 
@@ -64,7 +64,7 @@
 
 * [x]  Pierogi spoils in 10 days instead of 20
 
-* [ ]  Cooked Bird egg loop removed
+* [x]  Cooked Bird egg loop removed
 
 * [x]  Bird's stomach can only withstand 4 monster meat before dying out (vary her diet with normal meat to cure it)
 
@@ -177,6 +177,8 @@
 * [x] Craftable sand using Desert Stones
 
 * [x] New mob: Abominamole, spawns out of snow piles
+
+* [x] New mob: Depths Eel, added to Depth Worm attacks.
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 

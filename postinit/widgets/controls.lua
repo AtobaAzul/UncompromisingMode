@@ -21,14 +21,14 @@ AddClassPostConstruct("screens/playerhud",function(inst)
 end)
 
 local function OnSpy(inst)
-print("on")
+--print("on")
         inst._parent.HUD.snowover:SnowOn()
 		inst._parent:PushEvent("snowon")
 		
 end
 
 local function OffSpy(inst)
-print("off")
+--print("off")
 	if inst._parent ~= nil then
 		ThePlayer.HUD.snowover:Show()
         inst._parent.HUD.snowover:SnowOn()

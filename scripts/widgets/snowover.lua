@@ -104,7 +104,7 @@ if TheWorld.state.issnowing and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZAR
 			self.changed = 0.01
 		elseif self.changed <= 1 then
 			self.changed = self.changed + 0.001 
-			print("plus 0.1")
+			--print("plus 0.1")
 			self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed)
 		
 			if self.owner.components.playervision ~= nil and self.owner.components.playervision:HasGoggleVision() then
@@ -125,7 +125,7 @@ if TheWorld.state.issnowing and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZAR
 			self.changed = 0
 		elseif self.changed >= 0 then
 			self.changed = self.changed - 0.001
-			print("plus 0.1")
+			--print("plus 0.1")
 			self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed)
 			if self.owner.components.playervision ~= nil and self.owner.components.playervision:HasGoggleVision() then
 				self.bg:GetAnimState():SetMultColour(1, 1, 1, 0)
