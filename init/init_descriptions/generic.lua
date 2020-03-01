@@ -48,6 +48,10 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	DESCRIBE.SANDHILL = "You better stay out of my shoes."
 	DESCRIBE.SNOWPILE = "That'll be a problem if it builds up."
 	DESCRIBE.SNOWGOGGLES = "Icy clearly now!"
+	
+	DESCRIBE.SNOWMONG = "Abominamole!"
+	DESCRIBE.SHOCKWORM = "Quite the conductive worm!"
+	DESCRIBE.ZASPBERRY = "I can feel the electricity flowing through it."
 
 --	[ 		Recipe Descriptions		]   --
 

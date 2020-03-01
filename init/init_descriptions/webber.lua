@@ -43,3 +43,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.SANDHILL = "Wish we had a bucket and a shovel."
 	DESCRIBE.SNOWPILE = "I wish it was a good time to play..."
 	DESCRIBE.SNOWGOGGLES = "We are neither cat eyed or bug eyed."
+	
+	DESCRIBE.SNOWMONG = "4 eyes?! Definitely not our friend!"
+	DESCRIBE.SHOCKWORM = "Freaky frilly!"
+	DESCRIBE.ZASPBERRY = "Zappy!"

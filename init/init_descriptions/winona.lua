@@ -43,3 +43,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.SANDHILL = "I usually leave the cleanup to the janitors."
 	DESCRIBE.SNOWPILE = "Save your back, shovel early."
 	DESCRIBE.SNOWGOGGLES = "Winter workin."
+	
+	DESCRIBE.SNOWMONG = "Is that one of those snow-mole-bile things I've heard about?"
+	DESCRIBE.SHOCKWORM = "That's a saftey hazard if I've ever seen one!"
+	DESCRIBE.ZASPBERRY = "May as well taste it."

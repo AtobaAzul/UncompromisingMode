@@ -43,3 +43,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.SANDHILL = "This looks impermanent."
 	DESCRIBE.SNOWPILE = "Cold death awaits us."
 	DESCRIBE.SNOWGOGGLES = "Like tears, in the snow."
+	
+	DESCRIBE.SNOWMONG = "Just another cruel joke."
+	DESCRIBE.SHOCKWORM = "A light in the darkness."
+	DESCRIBE.ZASPBERRY = "Perhaps it will bring some light to my life. Probably not."

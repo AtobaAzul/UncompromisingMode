@@ -43,3 +43,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.SANDHILL = "Tiny, crushable hill."
 	DESCRIBE.SNOWPILE = "Cold is no good for the muscles!."
 	DESCRIBE.SNOWGOGGLES = "Is... little tight... for head."
+	
+	DESCRIBE.SNOWMONG = "Snow is fighting back!"
+	DESCRIBE.SHOCKWORM = "Wolfgang shocked!"
+	DESCRIBE.ZASPBERRY = "Sparky berry!"

@@ -43,3 +43,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.SANDHILL = "Great grains of gravel!"
 	DESCRIBE.SNOWPILE = "Ooh what mischief we could cause with this! Hyuyu!"
 	DESCRIBE.SNOWGOGGLES = "Cats Eyes!"
+	
+	DESCRIBE.SNOWMONG = "What large teeth you have!"
+	DESCRIBE.SHOCKWORM = "This one is sparking!"
+	DESCRIBE.ZASPBERRY = "This will give someone quite a shock!"

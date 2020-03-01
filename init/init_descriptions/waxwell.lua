@@ -44,3 +44,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.SANDHILL = "A little mound of yellow sand."
 	DESCRIBE.SNOWPILE = "Remove it, before it gets in my boots."
 	DESCRIBE.SNOWGOGGLES = "..."
+	
+	DESCRIBE.SNOWMONG = "It's about as smart as it looks."
+	DESCRIBE.SHOCKWORM = "I definitely did not make that one!"
+	DESCRIBE.ZASPBERRY = "I'm not one for wild berries, magical or not."

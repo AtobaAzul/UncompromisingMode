@@ -43,3 +43,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.SANDHILL = "It's a big pile of sand."
 	DESCRIBE.SNOWPILE = "You call that being snowed in?"
 	DESCRIBE.SNOWGOGGLES = "Now I feel at home."
+	
+	DESCRIBE.SNOWMONG = "The bumble sinks!"
+	DESCRIBE.SHOCKWORM = "That worm's lit up like the Northern lights!"
+	DESCRIBE.ZASPBERRY = "Blue raspberry is not a real berry."

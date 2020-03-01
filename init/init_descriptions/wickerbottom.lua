@@ -41,5 +41,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 	ANNOUNCE.ANNOUNCE_ROOTING = "I should chop myself free!"
 	DESCRIBE.SAND = "Sand always seems to find its way into my books."
 	DESCRIBE.SANDHILL = "The dune's iconic shape is formed by the winds."
-	DESCRIBE.SNOWPILE = "Ah, reminds me of winter days spent reading by the fire."
+	DESCRIBE.SNOWPILE = "Makes one think of stories by the fire during a stormy night."
 	DESCRIBE.SNOWGOGGLES = "For winter reading? ...Perhaps not."
+	
+	DESCRIBE.SNOWMONG = "I have no idea."
+	DESCRIBE.SHOCKWORM = "A highly conductive Annelida!"
+	DESCRIBE.ZASPBERRY = "Nonsense, there's no such thing as a blue Rubus."

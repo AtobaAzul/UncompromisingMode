@@ -43,3 +43,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.SANDHILL = "Oh, look! It's some sand."
 	DESCRIBE.SNOWPILE = "Fire seems oddly ineffective."
 	DESCRIBE.SNOWGOGGLES = "Now I can see the opposite of the world burning."
+	
+	DESCRIBE.SNOWMONG = "Melt that sucker!"
+	DESCRIBE.SHOCKWORM = "It's so frilly!"
+	DESCRIBE.ZASPBERRY = "I'm not blowing any raspberries."

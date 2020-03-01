@@ -43,3 +43,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.SANDHILL = "The sand has formed a small pile."
 	DESCRIBE.SNOWPILE = "Snow is a new thing for me, seems like a problem."
 	DESCRIBE.SNOWGOGGLES = "Still not my style, but I can see better atleast."
+	
+	DESCRIBE.SNOWMONG = "This is no frozen treat!"
+	DESCRIBE.SHOCKWORM = "Touching it could cook me to perfection!"
+	DESCRIBE.ZASPBERRY = "Perhaps a nice raspberry parfait?"

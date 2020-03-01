@@ -36,10 +36,14 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	ANNOUNCE.ANNOUNCE_FIREFALL = {
 		"Hel's fury is upon us!",
 		"Ragnarok has come!",
-		"The beasts roars loud!",
+		"The beast roars loud!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "A cheap trick! Fight with honor!"
 	DESCRIBE.SAND = "You are a very clean dirt."
 	DESCRIBE.SANDHILL = "I will not make a mountain out of a sandhill."
-	DESCRIBE.SNOWPILE = "I shall destroy it in Skaði's name!"
+	DESCRIBE.SNOWPILE = "Skaði would not be impressed."
 	DESCRIBE.SNOWGOGGLES = "We shall fight the storm itself!"
+	
+	DESCRIBE.SNOWMONG = "Begone, vile snowmonger!"
+	DESCRIBE.SHOCKWORM = "A vicious counter attack!"
+	DESCRIBE.ZASPBERRY = "Could Thor's power truly be contained in a wild fruit?"
