@@ -14,8 +14,9 @@ env.AddClassPostConstruct("widgets/itemtile", function(self, invitem)
 
 	function self:UpdateTooltip()
 		local str = self:GetDescriptionString()
+		local mushroomcheck = TheSim:FindFirstEntityWithTag("acidrain_mushroom")
 		self:SetTooltip(str)
-		if self.item:GetIsWet() and c_countprefabs("mushroomsprout_overworld") > 0 then
+		if self.item:GetIsWet() and mushroomcheck ~= nil then
 			self:SetTooltipColour(unpack(TUNING.DSTU.ACID_TEXT_COLOUR))
 		else
 			return _OldUpdateToolTip(self)

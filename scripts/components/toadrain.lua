@@ -90,9 +90,12 @@ local function CancelSpawn(player)
 end
 
 local function ToggleUpdate(force)
+
+	local mushroomcheck = TheSim:FindFirstEntityWithTag("acidrain_mushroom")
+
 	if _worldstate.isautumn and
 		_worldstate.israining and
-        c_countprefabs("mushroomsprout_overworld") > 0 and
+        mushroomcheck ~= nil and
 		TheWorld.state.cycles > TUNING.DSTU.ACID_RAIN_START_AFTER_DAY then
         if not _updating then
             _updating = true

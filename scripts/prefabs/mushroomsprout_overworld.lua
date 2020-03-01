@@ -271,6 +271,7 @@ local function fn(inst)
     inst:AddTag("cavedweller")
 	inst:AddTag("antlion_sinkhole")
 	inst:AddTag("antlion_sinkhole_blocker")
+	inst:AddTag("acidrain_mushroom")
 
     inst.AnimState:SetBuild("mushroomsprout_dark_upg_build")
     inst.AnimState:SetBank("mushroomsprout")

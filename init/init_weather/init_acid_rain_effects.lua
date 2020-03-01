@@ -5,9 +5,9 @@ local function doacidrain(inst, dt)
     if inst.components.moisture ~= nil and inst.components.moisture:GetMoisture() > 0 and GLOBAL.TheWorld.state.isautumn and GLOBAL.TheWorld.state.cycles > GLOBAL.TUNING.DSTU.ACID_RAIN_START_AFTER_DAY then
 
         local t = GLOBAL.GetTime()
-
+		local mushroomcheck = TheSim:FindFirstEntityWithTag("acidrain_mushroom")
         -- Raining, no moisture-giving equipment on head, and moisture is increasing. Pro-rate damage based on waterproofness.
-        if inst.components.inventory:GetEquippedMoistureRate(GLOBAL.EQUIPSLOTS.HEAD) <= 0 and inst.components.moisture:GetRate() > 0 and GLOBAL.c_countprefabs("mushroomsprout_overworld") > 0 then
+        if inst.components.inventory:GetEquippedMoistureRate(GLOBAL.EQUIPSLOTS.HEAD) <= 0 and inst.components.moisture:GetRate() > 0 and mushroomcheck ~= nil then
             local waterproofmult =
                 (   inst.components.sheltered ~= nil and
                     inst.components.sheltered.sheltered and
@@ -16,7 +16,7 @@ local function doacidrain(inst, dt)
                 (   inst.components.inventory ~= nil and
                     inst.components.inventory:GetWaterproofness() or 0
                 )
-            if waterproofmult < 1 and t > inst.acid_time + inst.acid_time_offset + waterproofmult * 7 and GLOBAL.c_countprefabs("mushroomsprout_overworld") >= 1 then
+            if waterproofmult < 1 and t > inst.acid_time + inst.acid_time_offset + waterproofmult * 7 and mushroomcheck ~= nil then
                 inst.components.health:DoDelta(-GLOBAL.TUNING.DSTU.ACID_RAIN_DAMAGE_TICK, false, "rain")
 		inst.components.talker:Say(GLOBAL.GetString(inst, "ANNOUNCE_ACIDRAIN"))
                 inst.acid_time_offset = 3 + math.random() * 2
@@ -44,7 +44,7 @@ local function doacidrain(inst, dt)
 
 				]]
             end
-        elseif t > inst.acid_time + inst.acid_time_offset and GLOBAL.c_countprefabs("mushroomsprout_overworld") >= 1 then -- We have moisture-giving equipment on our head or it is not raining and we are just passively wet (but drying off). Do full damage.
+        elseif t > inst.acid_time + inst.acid_time_offset and mushroomcheck ~= nil then -- We have moisture-giving equipment on our head or it is not raining and we are just passively wet (but drying off). Do full damage.
             inst.components.health:DoDelta(
                 inst.components.moisture:GetRate() >= 0 and
                 -.2 or

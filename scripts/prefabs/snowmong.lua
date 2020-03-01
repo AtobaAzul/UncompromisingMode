@@ -111,8 +111,8 @@ local function fn(Sim)
 	MakeCharacterPhysics(inst, 99999, 0.5)
 	--MakePoisonableCharacter(inst)
 
-	MakeSmallBurnableCharacter(inst, "chest")
-	MakeTinyFreezableCharacter(inst, "chest")
+	--MakeSmallBurnableCharacter(inst, "chest")
+	--MakeTinyFreezableCharacter(inst, "chest")
 	inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
