@@ -3,8 +3,8 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 
 local function DisableThatStuff(inst)
-		inst:PushEvent("addqueenbeekilledtag")
-		
+		--inst:PushEvent("addqueenbeekilledtag")
+		TheWorld:AddTag("queenbeekilled")
 end
 
 env.AddPrefabPostInit("beequeen", function(inst)

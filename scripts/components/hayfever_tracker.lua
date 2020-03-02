@@ -32,12 +32,15 @@ local function OnPlayerLeft(src,player)
 end
 
 local function AddQueenBeeKilledTag(src, data)
+	TheWorld:AddTag("queenbeekilled")
+	--[[
 		for i, v in ipairs(AllPlayers) do
 			v:AddTag("queenbeekilled")
 			if v.components.hayfever and v.components.hayfever.enabled then
 				v.components.talker:Say(GetString(v, "ANNOUNCE_HAYFEVER_OFF"))   
 			end
 		end
+		--]]
 end
 		
 local function OnSeasonTick(src, data)
@@ -47,10 +50,7 @@ local function OnSeasonTick(src, data)
 				v.components.hayfever:Enable()
 				elseif not TheWorld.state.isspring then
 					v.components.hayfever:Disable()
-					v:RemoveTag("queenbeekilled")
-			end
-			if v:HasTag("queenbeekilled") then
-					v:AddTag("queenbeekilled")
+					TheWorld:RemoveTag("queenbeekilled")
 			end
     end
 	
@@ -64,7 +64,7 @@ end
 self.inst:ListenForEvent("ms_playerjoined", OnPlayerJoined, TheWorld)
 self.inst:ListenForEvent("ms_playerleft", OnPlayerLeft, TheWorld)
 
-inst:ListenForEvent("addqueenbeekilledtag", AddQueenBeeKilledTag)
+--inst:ListenForEvent("addqueenbeekilledtag", AddQueenBeeKilledTag)
 inst:ListenForEvent("seasontick", OnSeasonTick)
 
 end)
