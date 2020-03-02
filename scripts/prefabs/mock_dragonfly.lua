@@ -444,7 +444,12 @@ local function fn(Sim)
     inst.Transform:SetScale(1.3,1.3,1.3)
     
     --MakePoisonableCharacter(inst)
-	MakeCharacterPhysics(inst, 500, 1.4)
+	--MakeCharacterPhysics(inst, 500, 1.4)
+	
+    MakeFlyingGiantCharacterPhysics(inst, 500, 1.4)
+	
+    phys:SetCollisionGroup(COLLISION.FLYERS)
+	
     inst.Physics:SetCollisionCallback(OnCollide)
 
     inst.OnEntitySleep = OnSleep 

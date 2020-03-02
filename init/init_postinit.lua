@@ -14,6 +14,7 @@ local prefab_post = {
     "trap_teeth",
     --"cave",
 	"beequeen",
+	"dragonfly",
 	"deerclops",
 	"spiderqueen",
 	"bearger",

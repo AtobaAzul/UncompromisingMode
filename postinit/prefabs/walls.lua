@@ -10,6 +10,18 @@ local anims =
     { threshold = 1, anim = { "fullA", "fullB", "fullC" } },
 }
 
+local function makeobstacle(inst)
+    inst.Physics:SetActive(true)
+    inst._ispathfinding:set(true)
+	inst:AddTag("wall")
+end
+
+local function clearobstacle(inst)
+    inst.Physics:SetActive(false)
+    inst._ispathfinding:set(false)
+	inst:RemoveTag("wall")
+end
+
 local function resolveanimtoplay(inst, percent)
     for i, v in ipairs(anims) do
         if percent <= v.threshold then
@@ -34,14 +46,12 @@ local function onhealthchange(inst, old_percent, new_percent)
     if new_percent > 0 then
         if old_percent <= 0 then
             makeobstacle(inst)
-			inst:AddTag("wall")
         end
         inst.AnimState:PlayAnimation(anim_to_play.."_hit")
         inst.AnimState:PushAnimation(anim_to_play, false)
     else
         if old_percent > 0 then
             clearobstacle(inst)
-			inst:RemoveTag("wall")
         end
         inst.AnimState:PlayAnimation(anim_to_play)
     end
@@ -51,7 +61,7 @@ env.AddPrefabPostInit("wall_stone", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	inst:AddComponent("health")
+	
 	inst.components.health.ondelta = onhealthchange
 	inst.components.health.nofadeout = true
 

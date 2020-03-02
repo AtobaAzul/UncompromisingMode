@@ -11,6 +11,11 @@ env.AddPrefabPostInit("beequeen", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
+	
+	
+    inst.Physics:CollidesWith(COLLISION.FLYERS)
+	
+	
     if inst.components.combat ~= nil then
 		local function isnotbee(ent)
 			if ent ~= nil and not ent:HasTag("bee") and not ent:HasTag("hive") then -- fix to friendly AOE: refer for later AOE mobs -Axe
