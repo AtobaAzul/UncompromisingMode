@@ -448,7 +448,7 @@ local function fn(Sim)
 	
     MakeFlyingGiantCharacterPhysics(inst, 500, 1.4)
 	
-    phys:SetCollisionGroup(COLLISION.FLYERS)
+    inst.Physics:SetCollisionGroup(COLLISION.FLYERS)
 	
     inst.Physics:SetCollisionCallback(OnCollide)
 
