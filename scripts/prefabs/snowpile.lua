@@ -30,58 +30,41 @@ local function onregen(inst)
 	end--]]
 
 	--if inst ~= nil then
-			if TheWorld.state.iswinter then--or ents2 ~= nil and #ents2 < 0 then
-			--inst.components.activatable.inactive = false
+		if TheWorld.state.iswinter then--or ents2 ~= nil and #ents2 < 0 then
 			if inst.components.workable.workleft < 3 then
-				if inst.Transform:GetWorldPosition() ~= nil then
-					SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
-				end
+				SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
 				inst.components.workable:SetWorkLeft(inst.components.workable.workleft+1)
 				inst.components.pickable.cycles_left = inst.components.pickable.cycles_left + 1
 				startregen(inst)
-			else
-				
-				startregen(inst)
-				if math.random() < 0.1 then
-					print("Snowball Fight!")
-					local snowattack = SpawnPrefab("snowmong")
-					local spawnpoint = inst.Transform:GetWorldPosition()
-					snowattack.Transform:SetPosition(inst.Transform:GetWorldPosition())
-					snowattack.sg:GoToState("enter")
-					inst:DoTaskInTime(0.1, SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition()))
-					inst:DoTaskInTime(0.2, inst:Remove())
+			elseif inst.components.workable.workleft == 3 and math.random() < 0.03 then
+				local x1, y1, z1 = inst.Transform:GetWorldPosition()
+				local ents2 = TheSim:FindEntities(x1, y1, z1, 40, { "player" })
+				if #ents2 > 0 then
+						print("Snowball Fight!")
+						local snowattack = SpawnPrefab("snowmong")
+						local spawnpoint = inst.Transform:GetWorldPosition()
+						snowattack.Transform:SetPosition(inst.Transform:GetWorldPosition())
+						snowattack.sg:GoToState("enter")
+						inst:DoTaskInTime(0.1, SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition()))
+						inst:DoTaskInTime(0.2, inst:Remove())
 				end
+			else
+				startregen(inst)
 			end
 		else
-			--inst.components.activatable.inactive = false
 			if inst.components.workable.workleft > 1 then
-				if inst.Transform:GetWorldPosition() ~= nil then
-					SpawnPrefab("washashore_puddle_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
-				end
+				SpawnPrefab("washashore_puddle_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
 				inst.components.workable:SetWorkLeft(inst.components.workable.workleft-1)
 				inst.components.pickable.cycles_left = inst.components.pickable.cycles_left - 1
 				startregen(inst)
 			else
-				--inst.components.activatable.inactive = true
-				if inst.Transform:GetWorldPosition() ~= nil then
-					SpawnPrefab("washashore_puddle_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
-				end
+				SpawnPrefab("washashore_puddle_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
 				inst:Remove()
-				
-				--inst.AnimState:PlayAnimation(anims[1])
-				--inst:DoTaskInTime(10, function() inst:Remove() end)
 			end
 		end
-
-	--end
 end
 
 startregen = function(inst, regentime)
---[[
-if TheWorld.state.issummer then
-	onregen(inst)
-end
---]]
 	if inst.components.workable.workleft < #anims + 1 then
 		-- more to grow
 		--regentime = regentime or (TUNING.SAND_REGROW_TIME + math.random()*TUNING.SAND_REGROW_VARIANCE)
