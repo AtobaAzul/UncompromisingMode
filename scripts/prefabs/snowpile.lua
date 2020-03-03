@@ -10,8 +10,8 @@ local prefabs =
 
 TUNING.SNOW_X_SCALE = 0 + math.random(0.3,0.5)
 TUNING.SNOW_Y_SCALE = 0 + math.random(0.1,0.3)
-TUNING.SNOW_REGROW_TIME = 460
-TUNING.SNOW_REGROW_VARIANCE = 180
+TUNING.SNOW_REGROW_TIME = 200
+TUNING.SNOW_REGROW_VARIANCE = 80
 TUNING.SNOW_DEPLETE_CHANCE = 0.25
 
 local AURA_EXCLUDE_TAGS = { "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "invisible" }
@@ -36,7 +36,7 @@ local function onregen(inst)
 				inst.components.workable:SetWorkLeft(inst.components.workable.workleft+1)
 				inst.components.pickable.cycles_left = inst.components.pickable.cycles_left + 1
 				startregen(inst)
-			elseif inst.components.workable.workleft == 3 and math.random() < 0.03 then
+			elseif inst.components.workable.workleft == 3 and math.random() <= 0.25 then
 				local x1, y1, z1 = inst.Transform:GetWorldPosition()
 				local ents2 = TheSim:FindEntities(x1, y1, z1, 40, { "player" })
 				if #ents2 > 0 then
@@ -404,6 +404,8 @@ local function snowpilefn(Sim)
     inst.components.pickable.cycles_left = 1
     inst.components.pickable:SetUp("ice",0)
     inst.components.pickable.transplanted = true
+	
+	SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	
 	startregen(inst)
 	

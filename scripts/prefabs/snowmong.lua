@@ -152,9 +152,9 @@ local function fn(Sim)
 
     inst:AddComponent("groundpounder")
   	inst.components.groundpounder.destroyer = true
-	inst.components.groundpounder.damageRings = 2
+	inst.components.groundpounder.damageRings = 1
 	inst.components.groundpounder.destructionRings = 0
-	inst.components.groundpounder.numRings = 2
+	inst.components.groundpounder.numRings = 1
 
 	inst.CanGroundPound = true
 

@@ -65,4 +65,4 @@ STRINGS.RECIPE_DESC.RATPOISONBOTTLE = "High addictive to pestilence pests."
 
 
 
-AddRecipe("gasmask", {Ingredient("goose_feather", 10),Ingredient("green_cap", 4),Ingredient("pigskin",2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_ONE, nil, nil, nil, nil, nil, "images/inventoryimages/gasmask.xml", "gasmask.tex" )
+AddRecipe("gasmask", {Ingredient("goose_feather", 10),Ingredient("green_cap", 4),Ingredient("pigskin",2)}, GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/gasmask.xml", "gasmask.tex" )

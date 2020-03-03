@@ -6,8 +6,9 @@ local SnowStormWatcher = Class(function(self, inst)
     self.inst = inst
 
     --self.snowstormlevel = 0
-    self.snowstormspeedmult = .8
+    self.snowstormspeedmult = .75
     self.delay = nil
+	self.task = nil
 	inst:ListenForEvent("weathertick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
 	
 	inst:ListenForEvent("seasontick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
@@ -51,6 +52,7 @@ function SnowStormWatcher:ToggleSnowstorms(active, src, data)
 		self:UpdateSnowstormWalkSpeed()
 		self.inst:PushEvent("snowoff")
         self.inst:StopUpdatingComponent(self)
+		self.task = nil
     elseif TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
         self.inst:StartUpdatingComponent(self)
                 AddSnowstormWalkSpeedListeners(self.inst)
@@ -96,7 +98,8 @@ end
 
 function TrySpawning(v)	
 
-	if math.random(1, 3000) == 1 then
+	--if math.random(1, 3000) == 1 then
+	if math.random() <= 0.25 then
 			--local spawn_pt = GetSpawnPoint(origin_pt, PLAYER_CHECK_DISTANCE + 5)
 		local x1, y1, z1 = v.Transform:GetWorldPosition()
 			
@@ -113,7 +116,8 @@ end
 
 local NOTAGS = { "playerghost", "HASHEATER" }
 
-function SnowStormWatcher:SnowpileChance()
+local function SnowpileChance(inst, self)
+print("chance")
 
 	local x, y, z = self.inst.Transform:GetWorldPosition()
     local ents4 = TheSim:FindEntities(x, y, z, 50, nil, NOTAGS, { "structure" })
@@ -122,11 +126,11 @@ function SnowStormWatcher:SnowpileChance()
     end
 
 	if ents4 == nil or 0 then
-		if math.random(1, 2500) == 1 then
-		local xrandom = math.random(-20, 20)
-		local zrandom = math.random(-20, 20)
+		--if math.random(1, 2500) == 1 then
+		local xrandom = math.random(-25, 25)
+		local zrandom = math.random(-25, 25)
 
-		local ents7 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 8, nil, nil, { "snowpileradius"})
+		local ents7 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 6, nil, nil, { "snowpileradius"})
 		local ents8 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 8, nil, nil, { "fire" })
 
 				--local ents = TheSim:FindEntities(x, y, z, 40, {"wall" "player" "campfire"})
@@ -136,9 +140,28 @@ function SnowStormWatcher:SnowpileChance()
 		
 			snowpilespawnplayer.Transform:SetPosition(x + xrandom, 0, z + zrandom)
 		end
+	--end
 	end
+	
+	if self.task ~= nil then
+		self.task:Cancel()
+		self.task = nil
 	end
 		
+end
+
+TUNING.SNOW_CHANCE_TIME = 120
+TUNING.SNOW_CHANCE_VARIANCE = 60
+
+
+function SnowStormWatcher:StartSnowPileTask(chancetime)
+
+print("task")
+		chancetime = chancetime or (TUNING.SNOW_CHANCE_TIME + math.random()*TUNING.SNOW_CHANCE_VARIANCE)
+
+		if self.task == nil then
+			self.task = self.inst:DoTaskInTime(chancetime, SnowpileChance, self)--, self)
+		end
 end
 
 function SnowStormWatcher:OnUpdate(dt)
@@ -147,7 +170,9 @@ function SnowStormWatcher:OnUpdate(dt)
 		
 		self:ToggleSnowstorms()
 		
-		self:SnowpileChance()
+		self:StartSnowPileTask()
+		
+		--self:SnowpileChance()
 		
 		if TheWorld.state.issnowing then
 			self.inst:PushEvent("snowon")
