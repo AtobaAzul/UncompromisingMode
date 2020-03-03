@@ -15,19 +15,19 @@ end
 
 
 	if GLOBAL.terrain.rooms.LightningBluffAntlion then
-		GLOBAL.terrain.rooms.LightningBluffAntlion.contents.distributeprefabs.sandhill = 0.2
+		GLOBAL.terrain.rooms.LightningBluffAntlion.contents.distributeprefabs.sandhill = 0.4
 	end
 	
 	if GLOBAL.terrain.rooms.LightningBluffOasis then
-	GLOBAL.terrain.rooms.LightningBluffOasis.contents.distributeprefabs.sandhill = 0.03
+	GLOBAL.terrain.rooms.LightningBluffOasis.contents.distributeprefabs.sandhill = 0.6
 	end
 
 	if GLOBAL.terrain.rooms.LightningBluffLightning then
-		GLOBAL.terrain.rooms.LightningBluffLightning.contents.distributeprefabs.sandhill = 0.02
+		GLOBAL.terrain.rooms.LightningBluffLightning.contents.distributeprefabs.sandhill = 0.04
 	end
 	
 	if GLOBAL.terrain.rooms.BGLightningBluff then
-		GLOBAL.terrain.rooms.BGLightningBluff.contents.distributeprefabs.sandhill = 0.02
+		GLOBAL.terrain.rooms.BGLightningBluff.contents.distributeprefabs.sandhill = 0.04
 	end
 
 
