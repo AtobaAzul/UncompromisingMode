@@ -96,7 +96,7 @@ end
 
 function TrySpawning(v)	
 
-	if math.random(1, 500) == 1 then
+	if math.random(1, 1000) == 1 then
 			--local spawn_pt = GetSpawnPoint(origin_pt, PLAYER_CHECK_DISTANCE + 5)
 		local x1, y1, z1 = v.Transform:GetWorldPosition()
 			
@@ -122,7 +122,7 @@ function SnowStormWatcher:SnowpileChance()
     end
 
 	if ents4 == nil or 0 then
-		if math.random(1, 800) == 1 then
+		if math.random(1, 1600) == 1 then
 		local xrandom = math.random(-20, 20)
 		local zrandom = math.random(-20, 20)
 

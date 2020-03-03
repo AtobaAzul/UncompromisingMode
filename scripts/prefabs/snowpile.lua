@@ -10,8 +10,8 @@ local prefabs =
 
 TUNING.SNOW_X_SCALE = 0 + math.random(0.3,0.5)
 TUNING.SNOW_Y_SCALE = 0 + math.random(0.1,0.3)
-TUNING.SAND_REGROW_TIME = 45
-TUNING.SAND_REGROW_VARIANCE = 10
+TUNING.SAND_REGROW_TIME = 120
+TUNING.SAND_REGROW_VARIANCE = 20
 TUNING.SAND_DEPLETE_CHANCE = 0.25
 
 local AURA_EXCLUDE_TAGS = { "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "invisible" }
@@ -80,9 +80,9 @@ startregen = function(inst, regentime)
 			regentime = regentime / 2
 		end
 
-		--if inst.task then
-			--inst.task:Cancel()
-		--end
+		if inst.task then
+			inst.task:Cancel()
+		end
 		inst.task = inst:DoTaskInTime(regentime, onregen, "regen")
 		inst.targettime = GetTime() + regentime
 	--[[else
