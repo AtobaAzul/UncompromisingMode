@@ -10,9 +10,9 @@ local prefabs =
 
 TUNING.SNOW_X_SCALE = 0 + math.random(0.3,0.5)
 TUNING.SNOW_Y_SCALE = 0 + math.random(0.1,0.3)
-TUNING.SAND_REGROW_TIME = 120
-TUNING.SAND_REGROW_VARIANCE = 20
-TUNING.SAND_DEPLETE_CHANCE = 0.25
+TUNING.SNOW_REGROW_TIME = 240
+TUNING.SNOW_REGROW_VARIANCE = 20
+TUNING.SNOW_DEPLETE_CHANCE = 0.25
 
 local AURA_EXCLUDE_TAGS = { "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "invisible" }
 
@@ -67,9 +67,9 @@ end
 startregen = function(inst, regentime)
 	if inst.components.workable.workleft < #anims + 1 then
 		-- more to grow
-		--regentime = regentime or (TUNING.SAND_REGROW_TIME + math.random()*TUNING.SAND_REGROW_VARIANCE)
+		--regentime = regentime or (TUNING.SNOW_REGROW_TIME + math.random()*TUNING.SNOW_REGROW_VARIANCE)
 		
-		regentime = regentime or (TUNING.SAND_REGROW_TIME + math.random()*TUNING.SAND_REGROW_VARIANCE)
+		regentime = regentime or (TUNING.SNOW_REGROW_TIME + math.random()*TUNING.SNOW_REGROW_VARIANCE)
 
 
 		if TheWorld.state.issnowing then
@@ -104,7 +104,7 @@ startregen = function(inst, regentime)
 end
 
 local function workcallback(inst, worker, workleft)
-	-- print('trying to spawn sand', inst, worker, workleft)
+	-- print('trying to spawn SNOW', inst, worker, workleft)
 
 	if workleft < 0 then
 		-- the devtool probably did this, spit out 2
@@ -248,7 +248,7 @@ end
 
 local function onwake(inst)
 	if TheWorld.state.isspring and TheWorld.state.israining then
-		if math.random() < TUNING.SAND_DEPLETE_CHANCE and inst.components.workable.workleft > 0 then
+		if math.random() < TUNING.SNOW_DEPLETE_CHANCE and inst.components.workable.workleft > 0 then
 			-- the rain made this sandhill shrink
 			inst.components.workable.workleft = inst.components.workable.workleft - math.random(0, inst.components.workable.workleft)
 			startregen(inst)
