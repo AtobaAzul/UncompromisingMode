@@ -23,11 +23,11 @@ end
 	end
 
 	if GLOBAL.terrain.rooms.LightningBluffLightning then
-		GLOBAL.terrain.rooms.LightningBluffLightning.contents.distributeprefabs.sandhill = 0.04
+		GLOBAL.terrain.rooms.LightningBluffLightning.contents.distributeprefabs.sandhill = 0.4
 	end
 	
 	if GLOBAL.terrain.rooms.BGLightningBluff then
-		GLOBAL.terrain.rooms.BGLightningBluff.contents.distributeprefabs.sandhill = 0.04
+		GLOBAL.terrain.rooms.BGLightningBluff.contents.distributeprefabs.sandhill = 0.4
 	end
 
 
