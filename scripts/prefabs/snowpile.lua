@@ -10,8 +10,8 @@ local prefabs =
 
 TUNING.SNOW_X_SCALE = 0 + math.random(0.3,0.5)
 TUNING.SNOW_Y_SCALE = 0 + math.random(0.1,0.3)
-TUNING.SNOW_REGROW_TIME = 240
-TUNING.SNOW_REGROW_VARIANCE = 20
+TUNING.SNOW_REGROW_TIME = 460
+TUNING.SNOW_REGROW_VARIANCE = 180
 TUNING.SNOW_DEPLETE_CHANCE = 0.25
 
 local AURA_EXCLUDE_TAGS = { "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "invisible" }

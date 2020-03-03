@@ -161,7 +161,7 @@ local function fn(Sim)
 	inst:AddComponent("combat")
 	inst.components.combat:SetDefaultDamage(44)
 	inst.components.combat:SetAttackPeriod(3)
-	inst.components.combat:SetRange(5, 5)
+	inst.components.combat:SetRange(3, 3)
 	inst.components.combat:SetRetargetFunction(3, Retarget)
 	inst.components.combat:SetKeepTargetFunction(KeepTarget)
 	inst.components.combat.canbeattackedfn = CanBeAttacked

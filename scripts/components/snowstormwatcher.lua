@@ -6,7 +6,7 @@ local SnowStormWatcher = Class(function(self, inst)
     self.inst = inst
 
     --self.snowstormlevel = 0
-    self.snowstormspeedmult = .55
+    self.snowstormspeedmult = .8
     self.delay = nil
 	inst:ListenForEvent("weathertick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
 	
@@ -96,7 +96,7 @@ end
 
 function TrySpawning(v)	
 
-	if math.random(1, 2000) == 1 then
+	if math.random(1, 3000) == 1 then
 			--local spawn_pt = GetSpawnPoint(origin_pt, PLAYER_CHECK_DISTANCE + 5)
 		local x1, y1, z1 = v.Transform:GetWorldPosition()
 			
@@ -122,7 +122,7 @@ function SnowStormWatcher:SnowpileChance()
     end
 
 	if ents4 == nil or 0 then
-		if math.random(1, 3200) == 1 then
+		if math.random(1, 2500) == 1 then
 		local xrandom = math.random(-20, 20)
 		local zrandom = math.random(-20, 20)
 
