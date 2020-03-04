@@ -31,13 +31,17 @@ local function OnFullMoon(self, inst, isfullmoon, new_inst)
 end
 
 local function OnNonFullMoon(self, inst, isfullmoon, new_inst)
-local node = TheWorld.Map:FindNodeAtPoint(self.Transform:GetWorldPosition())
-	if node ~= nil and node.tags ~= nil and not table.contains(node.tags, "lunacyarea") and not TheWorld.state.isfullmoon then
-	self:DoTaskInTime(math.random(2,5), function(inst)
-		local mspuff = SpawnPrefab("halloween_moonpuff")
-		mspuff.Transform:SetPosition(self.Transform:GetWorldPosition())
-			self.components.halloweenmoonmutable:Mutate()
-			end)
+	if not TheWorld.state.isfullmoon then
+		self:DoTaskInTime(math.random(2,5), function(inst)
+			local x, y, z = inst.Transform:GetWorldPosition()
+			local ents = TheSim:FindEntities(x, y, z, 40, { "moonspiderden" })
+			
+			if not inst.components.areaaware:CurrentlyInTag("lunacyarea") and #ents < 1 then
+				local mspuff = SpawnPrefab("halloween_moonpuff")
+				mspuff.Transform:SetPosition(self.Transform:GetWorldPosition())
+				self.components.halloweenmoonmutable:Mutate()
+			end
+		end)
 	else
 	
 	end
@@ -62,6 +66,9 @@ env.AddPrefabPostInit("spider_moon", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
+	
+	inst:AddComponent("areaaware")
+    inst.components.areaaware:SetUpdateDist(2)
 	
 	inst:AddComponent("halloweenmoonmutable")
 	inst.components.halloweenmoonmutable:SetPrefabMutated("spider")

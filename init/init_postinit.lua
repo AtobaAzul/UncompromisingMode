@@ -39,6 +39,7 @@ local prefab_post = {
 	"walls",
 	"infestables",
 	"foodbuffs",
+	"moonspiderden",
 }
 
 local stategraph_post = {
