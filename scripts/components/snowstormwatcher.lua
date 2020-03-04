@@ -150,8 +150,8 @@ print("chance")
 		
 end
 
-TUNING.SNOW_CHANCE_TIME = 120
-TUNING.SNOW_CHANCE_VARIANCE = 60
+TUNING.SNOW_CHANCE_TIME = 60
+TUNING.SNOW_CHANCE_VARIANCE = 30
 
 
 function SnowStormWatcher:StartSnowPileTask(chancetime)
