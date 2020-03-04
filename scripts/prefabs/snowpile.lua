@@ -247,13 +247,13 @@ local function LongUpdate(inst, dt)
 end
 
 local function onwake(inst)
-	if TheWorld.state.isspring and TheWorld.state.israining then
+	--[[if TheWorld.state.isspring and TheWorld.state.israining then
 		if math.random() < TUNING.SNOW_DEPLETE_CHANCE and inst.components.workable.workleft > 0 then
 			-- the rain made this sandhill shrink
 			inst.components.workable.workleft = inst.components.workable.workleft - math.random(0, inst.components.workable.workleft)
 			startregen(inst)
 		end
-	end
+	end--]]
 end
 
 local function TryColdness(v)
