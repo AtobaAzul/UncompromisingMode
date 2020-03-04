@@ -124,7 +124,7 @@ end
 
 local function chop_down_tree(inst, worker)
 	if inst.components.childspawner ~= nil then
-        inst.components.childspawner:ReleaseAllChildren(worker, "toad")
+        --inst.components.childspawner:ReleaseAllChildren(worker, "toad")
     end
 
     if inst._destroy then
