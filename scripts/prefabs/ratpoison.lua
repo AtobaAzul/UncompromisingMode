@@ -61,6 +61,7 @@ local function OnDeploy(inst, pt)
 	SpawnPrefab("ratpoison").Transform:SetPosition(pt.x, 0, pt.z)
 	SpawnPrefab("ratpoison").Transform:SetPosition(pt.x, 0, pt.z)
 	SpawnPrefab("ratpoison").Transform:SetPosition(pt.x, 0, pt.z)
+	SpawnPrefab("ratpoison").Transform:SetPosition(pt.x, 0, pt.z)
     inst:Remove()
 end
 
