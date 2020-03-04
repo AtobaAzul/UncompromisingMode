@@ -146,7 +146,7 @@
 
 * [x]  Add Treeguard AOE
 
-* [x]  Clothing Degradation Option
+* [x]  Weather protective clothing will become less effective at lower percents (75%-50%-25%)
 
 * [x]  Sewing Kits repair 50% less, but have double the uses. (Makes it easier to keep clothing in acceptable durability levels)
 
@@ -166,19 +166,29 @@
 
 * [x] Spiderqueen leaves a corpse on death, on a full moon it will turn into a shattered spider nest
 
-* [x] Snowstorms, snowstorm overlay, snowpiles.
+* [x] Snowstorms, snowstorm overlay, snowpiles
+
+* [x] Snowpiles form around players during snowstorms, can be destroyed by hand or with a shovel
 
 * [x] Sand now spawns in the desert, used for goggle recipe
 
-* [x] New Catcoon Cap x Desert Hat mixture craftable
+* [x] New Catcoon Cap Goggles hat, same effect as Desert Goggles, increased insulation over the Cat Cap
 
-* [x] Deerclops evolution at half health
+* [x] Standing near a fire, walls, many trees, using a torch, or either variation of goggles will protect against snowstorms
+
+* [x] Deerclops "enrages" at half health
 
 * [x] Craftable sand using Desert Stones
 
 * [x] New mob: Abominamole, spawns out of snow piles
 
 * [x] New mob: Depths Eel, added to Depth Worm attacks.
+
+* [x] Mini-fan cost increased, now protects against hayfever
+
+* [x] Honey foods, most soups, and onions delay hayfever
+
+* [x] Moose range increased, now does aoe damage to non-mossling units
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
