@@ -2,13 +2,15 @@
 
 # Don't Starve Together - Uncompromising Mode Collab
 
+[Steam Workshop Mod Page Link]([Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2013783736) - )
+
 [Discord Server Link](https://discord.gg/UF7FKpn)
+
+[Steam Group](https://steamcommunity.com/groups/UncompromisingDST)
 
 [Klei Forum Link](https://forums.kleientertainment.com/forums/topic/111892-announcement-uncompromising-mode/)
 
 [Mod Wiki](https://gitlab.com/uncompromising-survival/uncompromising-survival/wikis/home)
-
-[Steam Group](https://steamcommunity.com/groups/UncompromisingDST)
 
 
 
@@ -16,7 +18,7 @@
 
 This is the mod repository for the Uncompromising Mode Community Collab.
 
-The aim of this is to make the game harder for veteran players, while also benefiting from the wisdom of the community.
+The aim of this is to make the game harder for veteran players, while also channeling the wisdom and modding talent of the DST community.
 
 
 
@@ -41,14 +43,14 @@ Check [CHANGELOG.md](https://gitlab.com/uncompromising-survival/uncompromising-s
 ```
 1  - Preserve as much as possible the core DST mechanics (the game should still feel like vanilla DST).
 2  - Avoid introducing new characters or biomes.
-3  - Increase the overall difficulty of the game, while being fair.
+3  - Increase the overall difficulty of the game, while being fair and avoiding tedium or repetitive actions.
 4  - Emphasize skill in the design.
 5  - Tune and tweak all mechanics that do not fit the Uncompromising theme.
 6  - Changes should be visible from in-game and clear, without needing to consult a changelist.
 7  - Tailor changes for Veteran players.
 8  - Focus on replicating a similar Don't Starve experience as the first time we played this game and everything was new, but for veterans.
 9  - Changes must be community driven and voted by the community and approved by the Uncompromising team contributors collectively.
-10 - Keep things lore friendly. All changes must fit in the Klei universe.
+10 - Keep things lore friendly. All changes must fit in the Klei Don't Starve universe.
 ```
 
 
@@ -60,7 +62,7 @@ More details on the process in the Welcome section of [discord](https://discord.
 
 Join the discord server if you wish to collaborate as a dev, artist or tester.
 
-You can also join simply to discuss and suggest ideas.
+You can also join simply to discuss, suggest and vote on ideas.
 
 
 ## How to contribute code
