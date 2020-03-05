@@ -2,7 +2,7 @@
 
 # Don't Starve Together - Uncompromising Mode Collab
 
-[Steam Workshop Mod Page Link]([Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2013783736) - )
+[Steam Workshop Mod Page Link](https://steamcommunity.com/sharedfiles/filedetails/?id=2013783736)
 
 [Discord Server Link](https://discord.gg/UF7FKpn)
 
