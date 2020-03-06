@@ -45,8 +45,8 @@ local function fn()
 	inst:AddComponent("inspectable")
 	
 	inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.VEGGIE --Defined as veggie for now...
-	inst.components.edible.healthvalue = -50
+    inst.components.edible.foodtype = FOODTYPE.HORRIBLE --Horrible is generally unedible
+	inst.components.edible.healthvalue = -20
 	inst.components.edible:SetOnEatenFn(oneaten)
 	
 	inst:AddComponent("perishable")

@@ -176,7 +176,7 @@ local function fn()
 	inst:SetBrain(brain)
 	
 	inst:AddComponent("eater")
-	inst.components.eater:SetDiet({ FOODTYPE.VEGGIE }, { FOODTYPE.VEGGIE })
+	inst.components.eater:SetDiet({ FOODTYPE.HORRIBLE }, { FOODTYPE.HORRIBLE })
 	inst.components.eater.strongstomach = true
 	inst.components.eater:SetCanEatRaw()
 	

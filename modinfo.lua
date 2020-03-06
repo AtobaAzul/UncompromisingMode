@@ -181,7 +181,7 @@ configuration_options =
 		},
 		default = false,
 	},
-	{
+	--[[{
 		name = "hound_increase",
 		label = "Hound Number Increase",
 		hover = "The hounds grow hungry.",
@@ -195,7 +195,7 @@ configuration_options =
 			{description = "5.0x", data = 5},
 		},
 		default = 1.5,
-	},
+	},--]]
 	{
 		name = "durability",
 		label = "Clothing Degradation",
