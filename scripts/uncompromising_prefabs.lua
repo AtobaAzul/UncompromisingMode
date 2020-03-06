@@ -27,4 +27,5 @@ return {
 	"zaspberry",
 	"snowmong",
 	"firedrop",
+	"bearger_sinkhole",
 }
