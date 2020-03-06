@@ -128,7 +128,7 @@
 
 * [x]  Bacon and eggs spoil time is halved, to 10 days
 
-* [x]  Added setting to increase nr of hounds per wave (default: 1.5x)
+* [ ]  Added setting to increase nr of hounds per wave (default: 1.5x)
 
 * [x]  Food appearance rates reduced significantly (berries, carrots, mushrooms)
 
