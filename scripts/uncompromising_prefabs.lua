@@ -26,4 +26,5 @@ return {
 	"shockworm",
 	"zaspberry",
 	"snowmong",
+	"firedrop",
 }

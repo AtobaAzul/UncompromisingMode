@@ -107,12 +107,14 @@ local function RetargetFn(inst)
             return inst.components.combat:CanTarget(guy)
                and not guy:HasTag("prey")
                and not guy:HasTag("smallcreature")
+               and not guy:HasTag("antlion")
         end)
     else
         return FindEntity(inst, TARGET_DIST, function(guy) 
             return inst.components.combat:CanTarget(guy)
                and not guy:HasTag("prey")
                and not guy:HasTag("smallcreature")
+               and not guy:HasTag("antlion")
         end)
     end
 end

@@ -3,6 +3,7 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 
 local function onothertimerdone(inst, data)
+	if data.name == "rage" then
 			inst:DoTaskInTime(17, function(inst)
 			--print("bingo")
 			inst:PushEvent("firefall")
@@ -19,6 +20,7 @@ local function onothertimerdone(inst, data)
 			inst:DoTaskInTime(30, function(inst)
 			inst:PushEvent("firefallstart")
 			end)
+	end
 end
 
 env.AddPrefabPostInit("antlion", function(inst)

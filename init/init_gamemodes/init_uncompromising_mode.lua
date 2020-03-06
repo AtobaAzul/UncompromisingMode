@@ -7,7 +7,11 @@ local require = GLOBAL.require
 	
 	--  [   Import customized shard RPC module ]    --
     modimport("init/init_uncompromisingshardrpc")
-
+	
+	
+	--  [   Mock Dragonfly Spit Bait ]    --
+	modimport("init/init_weather/init_dragonfly_bait")
+	
 	
 --	[ 	Import Names and Descriptions	]	--
 	modimport("init/init_names")

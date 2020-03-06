@@ -89,7 +89,7 @@ local function FindLavaSpitTargetAction(inst)
         ents = TheSim:FindEntities(pt.x, pt.y, pt.z, SEE_BAIT_DIST, currtag, {"fire"})
     
         for k,v in pairs(ents) do
-            if v and v.components.burnable and (not v.components.inventoryitem or not v.components.inventoryitem:IsHeld()) then
+            if v and v.components.burnable and not v:HasTag("_combat") and (not v.components.inventoryitem or not v.components.inventoryitem:IsHeld()) then
                 if not target or (distsq(pt, Vector3(v.Transform:GetWorldPosition())) < distsq(pt, Vector3(target.Transform:GetWorldPosition()))) then
                     if inst.last_target ~= v then
                         target = v

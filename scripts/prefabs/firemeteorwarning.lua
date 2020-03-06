@@ -160,7 +160,7 @@ local function firemeteorfn()
     inst:ListenForEvent("animover", function(inst)
 		inst:DoTaskInTime(FRAMES*3, function(inst)
 			SpawnPrefab("firemeteor_splash").Transform:SetPosition(inst:GetPosition():Get())
-			SpawnPrefab("houndfire").Transform:SetPosition(inst:GetPosition():Get())
+			SpawnPrefab("firedrop").Transform:SetPosition(inst:GetPosition():Get())
 			ShakeAllCameras(CAMERASHAKE.FULL, .7, .02, .5, inst, 40)
 			
 			
