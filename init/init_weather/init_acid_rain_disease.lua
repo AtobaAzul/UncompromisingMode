@@ -1,10 +1,10 @@
 local function RandomDiseaseChance(inst)
 	local mushroomcheck = TheSim:FindFirstEntityWithTag("acidrain_mushroom")
-	print("disease chance")
+	--print("disease chance")
 	if inst.components.diseaseable ~= nil and inst.components.pickable ~= nil then
 		if mushroomcheck ~= nil and math.random(1,15) == 1 and 
 		GLOBAL.TheWorld.state.israining then
-			print("disease DO")
+			--print("disease DO")
 			inst:AddComponent("diseaseable")
 			inst.components.diseaseable:Disease()
 			inst.components.pickable:ChangeProduct("spoiled_food")

@@ -20,9 +20,9 @@ local function trip_over_chance_on_maxwet(player)
         local time = GetTime()
         if player.components.moisture.lastslip_check < time - 1 then
             if player.components.moisture.lastslip_time < time - TUNING.DSTU.TRIPOVER_ONMAXWET_COOLDOWN  then
-                print("chance")
+                --print("chance")
                 if trip_chance_check() then
-                    print("hit")
+                    --print("hit")
                     trip_over(player)
                     --play sound too
                     player.SoundEmitter:PlaySound("dontstarve/common/dropGeneric")

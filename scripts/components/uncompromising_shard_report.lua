@@ -82,7 +82,7 @@ local NewShardReport = _ismastershard and function(inst, data)
         slaveshardData[emptyShardList[1]]:set(data.data)
         table.remove(emptyShardList, 1)
     else
-        print("To many Slave Shards connected to Master Shard")
+        --print("To many Slave Shards connected to Master Shard")
     end
 end or nil
 

@@ -117,7 +117,7 @@ end
 local NOTAGS = { "playerghost", "HASHEATER" }
 
 local function SnowpileChance(inst, self)
-print("chance")
+--print("chance")
 
 	local x, y, z = self.inst.Transform:GetWorldPosition()
     local ents4 = TheSim:FindEntities(x, y, z, 50, nil, NOTAGS, { "structure" })
@@ -156,7 +156,7 @@ TUNING.SNOW_CHANCE_VARIANCE = 30
 
 function SnowStormWatcher:StartSnowPileTask(chancetime)
 
-print("task")
+--print("task")
 		chancetime = chancetime or (TUNING.SNOW_CHANCE_TIME + math.random()*TUNING.SNOW_CHANCE_VARIANCE)
 
 		if self.task == nil then
