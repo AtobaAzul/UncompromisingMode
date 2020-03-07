@@ -28,4 +28,5 @@ return {
 	"snowmong",
 	"firedrop",
 	"bearger_sinkhole",
+	"minimoonspider_spike",
 }

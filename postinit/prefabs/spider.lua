@@ -2,19 +2,34 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 
-local function HalloweenMoonMutate(inst, new_inst)
-	local leader = inst ~= nil and inst.components.follower ~= nil
-		and new_inst ~= nil and new_inst.components.follower ~= nil
-		and inst.components.follower:GetLeader()
-		or nil
+local variations = {1, 2, 3, 4, 5}
 
-	if leader ~= nil then
-		new_inst.components.follower:SetLeader(leader)
-		new_inst.components.follower:AddLoyaltyTime(
-			inst.components.follower:GetLoyaltyPercent()
-			* (new_inst.components.follower.maxfollowtime or inst.components.follower.maxfollowtime)
-		)
-	end
+local function DoSpikeAttack(inst, pt)
+	local x, y, z = pt:Get()
+	local inital_r = 1
+	x = GetRandomWithVariance(x, inital_r)
+	z = GetRandomWithVariance(z, inital_r)
+
+	shuffleArray(variations)
+
+	local num = math.random(2, 4)
+    local dtheta = PI * 2 / num
+    local thetaoffset = math.random() * PI * 2
+    local delaytoggle = 0
+	for i = 1, num do
+		local r = 1.1 + math.random() * 1.75
+		local theta = i * dtheta + math.random() * dtheta * 0.8 + dtheta * 0.2
+        local x1 = x + r * math.cos(theta)
+        local z1 = z + r * math.sin(theta)
+        if TheWorld.Map:IsVisualGroundAtPoint(x1, 0, z1) and not TheWorld.Map:IsPointNearHole(Vector3(x1, 0, z1)) then
+            local spike = SpawnPrefab("minimoonspider_spike")
+            spike.Transform:SetPosition(x1, 0, z1)
+			spike:SetOwner(inst)
+			if variations[i + 1] ~= 1 then
+				spike.AnimState:OverrideSymbol("spike01", "spider_spike", "spike0"..tostring(variations[i + 1]))
+			end
+        end
+    end
 end
 
 local function OnFullMoon(self, inst, isfullmoon, new_inst)
@@ -22,28 +37,22 @@ local function OnFullMoon(self, inst, isfullmoon, new_inst)
 		self:DoTaskInTime(math.random(2,5), function(inst)
 		local mspuff = SpawnPrefab("halloween_moonpuff")
 		mspuff.Transform:SetPosition(self.Transform:GetWorldPosition())
-			self.components.halloweenmoonmutable:Mutate()
+			--self.components.halloweenmoonmutable:Mutate()
+			inst:AddTag("spider_moon")
+			inst.AnimState:SetBank("spider_moon")
+			inst.AnimState:SetBuild("DS_spider_moon")
 			end)
 	else
-	--
-	end
-
-end
-
-local function OnNonFullMoon(self, inst, isfullmoon, new_inst)
-	if not TheWorld.state.isfullmoon then
+		
 		self:DoTaskInTime(math.random(2,5), function(inst)
-			local x, y, z = inst.Transform:GetWorldPosition()
-			local ents = TheSim:FindEntities(x, y, z, 40, { "moonspiderden" })
-			
-			if not inst.components.areaaware:CurrentlyInTag("lunacyarea") and #ents < 1 then
+			if inst:HasTag("spider_moon") then
 				local mspuff = SpawnPrefab("halloween_moonpuff")
 				mspuff.Transform:SetPosition(self.Transform:GetWorldPosition())
-				self.components.halloweenmoonmutable:Mutate()
+				inst:RemoveTag("spider_moon")
+				inst.AnimState:SetBank("spider")
+				inst.AnimState:SetBuild("spider_build")
 			end
 		end)
-	else
-	
 	end
 
 end
@@ -53,28 +62,8 @@ env.AddPrefabPostInit("spider", function(inst)
 		return
 	end
 	
-	--inst:AddComponent("halloweenmoonmutable")
-	inst.components.halloweenmoonmutable:SetPrefabMutated("spider_moon")
-	inst.components.halloweenmoonmutable:SetOnMutateFn(HalloweenMoonMutate)
-
 	inst:WatchWorldState("isfullmoon", OnFullMoon)
 	OnFullMoon(inst, TheWorld.state.isfullmoon)
 
-end)
-
-env.AddPrefabPostInit("spider_moon", function(inst)
-	if not TheWorld.ismastersim then
-		return
-	end
-	
-	inst:AddComponent("areaaware")
-    inst.components.areaaware:SetUpdateDist(2)
-	
-	inst:AddComponent("halloweenmoonmutable")
-	inst.components.halloweenmoonmutable:SetPrefabMutated("spider")
-	inst.components.halloweenmoonmutable:SetOnMutateFn(HalloweenMoonMutate)
-
-	inst:WatchWorldState("isfullmoon", OnNonFullMoon)
-	OnNonFullMoon(inst, TheWorld.state.isfullmoon)
-
+	inst.DoSpikeAttack = DoSpikeAttack
 end)
