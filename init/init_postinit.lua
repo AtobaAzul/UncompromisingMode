@@ -40,6 +40,7 @@ local prefab_post = {
 	"infestables",
 	"foodbuffs",
 	"mutatedhound",
+	"pillar_ruins",
 	--"papyrus",
 }
 
