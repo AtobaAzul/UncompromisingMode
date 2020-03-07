@@ -29,7 +29,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	
 	DESCRIBE.GASMASK = "It filters air but not despair."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	DESCRIBE.SPIDERQUEENCOPRSE = "An inevitable end."
+	DESCRIBE.SPIDERQUEENCORPSE = "An inevitable end."
 	ANNOUNCE.ANNOUNCE_SNEEZE = "achoo! achoo! sniff."
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Ugh. Even my sinuses are suffering."
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "My sinuses are clear, but suffering continues."

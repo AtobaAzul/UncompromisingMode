@@ -29,7 +29,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	
     DESCRIBE.GASMASK = "Keeps my lungs clear."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	DESCRIBE.SPIDERQUEENCOPRSE = "That's a sight for sore eyes, eh?"
+	DESCRIBE.SPIDERQUEENCORPSE = "That's a sight for sore eyes, eh?"
 	ANNOUNCE.ANNOUNCE_SNEEZE = "Achoo! Excuse me. Sorry."
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "You have allergies like me, Lucy?"
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Ah! Clean air again."

@@ -29,7 +29,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	
     DESCRIBE.GASMASK = "I could use this in the smoke house."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	DESCRIBE.SPIDERQUEENCOPRSE = "Mon dieu! That must get rid of!"
+	DESCRIBE.SPIDERQUEENCORPSE = "Mon dieu! That must get rid of!"
 	ANNOUNCE.ANNOUNCE_SNEEZE = "Atchoum!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Ugh! My allergies!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "I think... my nose has cleared!"

@@ -137,21 +137,14 @@ AddPrefabPostInit("winterhat", function (inst)
     end
 end)
 
+AddPrefabPostInit("wintergoggles", function (inst)
+    if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
+		inst.components.fueled:SetSections(4)
+    		inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedhigh)
+    end
+end)
+
 AddPrefabPostInit("trunkvest_summer", function (inst)
-    if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
-		inst.components.fueled:SetSections(4)
-    		inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedium)
-    end
-end)
-
-AddPrefabPostInit("catcoonhat", function (inst)
-    if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
-		inst.components.fueled:SetSections(4)
-    		inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedium)
-    end
-end)
-
-AddPrefabPostInit("earmuffshat", function (inst)
     if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
 		inst.components.fueled:SetSections(4)
     		inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedium)

@@ -41,6 +41,8 @@ local function OnFullMoon(self, inst, isfullmoon, new_inst)
 			inst:AddTag("spider_moon")
 			inst.AnimState:SetBank("spider_moon")
 			inst.AnimState:SetBuild("DS_spider_moon")
+			
+			inst.sg:GoToState("taunt")
 			end)
 	else
 		
@@ -51,6 +53,8 @@ local function OnFullMoon(self, inst, isfullmoon, new_inst)
 				inst:RemoveTag("spider_moon")
 				inst.AnimState:SetBank("spider")
 				inst.AnimState:SetBuild("spider_build")
+				
+				inst.sg:GoToState("taunt")
 			end
 		end)
 	end

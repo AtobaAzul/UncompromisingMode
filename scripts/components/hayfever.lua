@@ -14,7 +14,7 @@ nil,
 })
 
 function Hayfever:GetNextSneezTime()
-    return math.random(20,40)
+    return math.random(40,80)
 end
 
 function Hayfever:SetNextSneezeTime(newtime)

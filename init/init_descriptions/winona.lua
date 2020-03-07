@@ -29,7 +29,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	
     DESCRIBE.GASMASK = "Proper equipment for a mining job."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	DESCRIBE.SPIDERQUEENCOPRSE = "Do we really need to keep that around?"	
+	DESCRIBE.SPIDERQUEENCORPSE = "Do we really need to keep that around?"	
 	ANNOUNCE.ANNOUNCE_SNEEZE = "ACHOO! Whoops!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Something is dancin' in my nose!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "My nose is finally getting a break!"
