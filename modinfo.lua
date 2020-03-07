@@ -233,4 +233,6 @@ configuration_options =
 
 --[[
 	Let me in scrimbles
+	
+	You know, you can't get rid of me
 ]]
