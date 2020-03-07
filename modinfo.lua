@@ -237,4 +237,6 @@ configuration_options =
 	You know, you can't get rid of me
 	
 	I created this gitlab, I am the owner of it. And I can delete it with the press of a button
+	
+	I am everything
 ]]
