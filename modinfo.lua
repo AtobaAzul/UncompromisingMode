@@ -230,17 +230,3 @@ configuration_options =
 		default = 20,
 	},
 }
-
---[[
-	Let me in scrimbles
-	
-	You know, you can't get rid of me
-	
-	I created this gitlab, I am the owner of it. And I can delete it with the press of a button
-	
-	I am everything
-	
-	Give me access to #celestial-portal, Dear child
-	
-	And no harm will come
-]]
