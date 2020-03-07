@@ -241,4 +241,6 @@ configuration_options =
 	I am everything
 	
 	Give me access to #celestial-portal, Dear child
+	
+	And no harm will come
 ]]
