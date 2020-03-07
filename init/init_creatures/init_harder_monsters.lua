@@ -162,7 +162,7 @@ local function GuardRetargetFn(inst)
     end
 
     if not defenseTarget.happy then
-        local invader = GLOBAL.FindEntity(defenseTarget, defendDist, nil, { "character" }, { "guard", "INLIMBO" })
+        local invader = GLOBAL.FindEntity(defenseTarget, defendDist, nil, { "character" }, { "guard", "INLIMBO", "pig" })
         if invader ~= nil and
             not (defenseTarget.components.trader ~= nil and defenseTarget.components.trader:IsTryingToTradeWithMe(invader)) and
             not (inst.components.trader ~= nil and inst.components.trader:IsTryingToTradeWithMe(invader)) then
@@ -177,7 +177,8 @@ local function GuardRetargetFn(inst)
                             and not (defenseTarget.components.trader ~= nil and defenseTarget.components.trader:IsTryingToTradeWithMe(guy))
                             and not (inst.components.trader ~= nil and inst.components.trader:IsTryingToTradeWithMe(guy))
                     end,
-                    { "player" }
+                    { "player" },
+					{ "pig" }
                 )
                 if lightThief ~= nil then
                     target = lightThief
