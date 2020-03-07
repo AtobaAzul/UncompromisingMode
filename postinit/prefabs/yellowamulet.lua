@@ -112,20 +112,21 @@ env.AddPrefabPostInit("yellowamulet", function(inst)
         return
     end
 
-    if  inst.components.fueled then
+    if inst.components.fueled then
         inst.components.fueled:SetDepletedFn(nofuel)
         inst.components.fueled:SetTakeFuelFn(ontakefuel)
     end
 
-    if  inst.components.equippable then
+    if inst.components.equippable then
         inst.components.equippable:SetOnEquip(onequip)
         inst.components.equippable:SetOnUnequip(onunequip)
     end
 
-
-    inst.components.equippable.walkspeedmult = 1
-    inst.components.equippable.dapperness = 0
-
+	if inst.components.equippable then
+		inst.components.equippable.walkspeedmult = 1
+		inst.components.equippable.dapperness = 0
+	end
+	
     inst.GetShowItemInfo = GetShowItemInfo
 
     inst._onownerequip = _onownerequip

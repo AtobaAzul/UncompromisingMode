@@ -22,10 +22,10 @@ env.AddPrefabPostInit("cave_entrance_open", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	
-	inst.components.childspawner:SetSpawnPeriod(.1/TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
-    inst.components.childspawner:SetMaxChildren(6*TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
-	
+	if inst.components.childspawner ~= nil then
+		inst.components.childspawner:SetSpawnPeriod(.1/TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
+		inst.components.childspawner:SetMaxChildren(6*TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
+	end
 	--[[inst:WatchWorldState("season", SnowedIn)
 	SnowedIn(inst, TheWorld.state.season)
 	

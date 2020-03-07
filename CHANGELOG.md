@@ -190,6 +190,10 @@
 
 * [x] Moose range increased, now does aoe damage to non-mossling units
 
+* [x] Mutated Hounds attack faster and move faster
+
+* [x] Increased Catcoon Tail drop rate
+
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
 ### To vote on features: Visit [#mod_polls](https://discordapp.com/channels/623649948130344960/623661746216763393) on Discord

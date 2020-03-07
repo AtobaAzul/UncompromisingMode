@@ -16,6 +16,7 @@ env.AddPrefabPostInit("moose", function(inst)
         inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE/2, TUNING.DEERCLOPS_AOE_SCALE, isnotmossling) -- you can edit these values to your liking -Axe
 	end       
 
-	inst.components.combat:SetRange(TUNING.MOOSE_ATTACK_RANGE * 1.1)
-
+	if inst.components.combat ~= nil then
+		inst.components.combat:SetRange(TUNING.MOOSE_ATTACK_RANGE * 1.1)
+	end
 end)

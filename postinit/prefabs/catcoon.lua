@@ -16,6 +16,7 @@ env.AddPrefabPostInit("catcoon", function(inst)
         inst.components.health:SetMaxHealth(TUNING.DSTU.MONSTER_CATCOON_HEALTH_CHANGE)
     end
 	
-	inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetChanceLootTable('catcoon') 
+	if inst.components.lootdropper ~= nil then
+		inst.components.lootdropper:SetChanceLootTable('catcoon')
+	end
 end)

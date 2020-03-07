@@ -10,7 +10,7 @@ local prefabs =
 }
 
 local function SpawnMutatedHound(inst)
-	inst:DoTaskInTime(0, function(inst)
+	inst:DoTaskInTime(0.3, function(inst)
 	local hound = SpawnPrefab("moonspiderden")
 	hound.Transform:SetPosition(inst.Transform:GetWorldPosition())
 	end)
@@ -18,7 +18,7 @@ local function SpawnMutatedHound(inst)
 	inst:RemoveComponent("burnable")
 	inst:RemoveComponent("propagator")
 	inst.persists = false
-	inst:DoTaskInTime(0, inst.Remove)
+	inst:DoTaskInTime(0.4, inst.Remove)
 end
 
 local function play_punch( inst)
@@ -36,7 +36,7 @@ local function StartReviving(inst)
 	local mete = SpawnPrefab("shadowmeteor")
 	mete.Transform:SetPosition(inst.Transform:GetWorldPosition())
 
-	inst.spawn_task = inst:DoTaskInTime(2, SpawnMutatedHound)
+	inst.spawn_task = inst:DoTaskInTime(1.1, SpawnMutatedHound)
 end
 
 local function ontimerdone(inst, data)

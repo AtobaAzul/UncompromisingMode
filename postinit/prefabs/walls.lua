@@ -62,7 +62,8 @@ env.AddPrefabPostInit("wall_stone", function(inst)
 		return
 	end
 	
-	inst.components.health.ondelta = onhealthchange
-	inst.components.health.nofadeout = true
-
+	if inst.components.health ~= nil then
+		inst.components.health.ondelta = onhealthchange
+		inst.components.health.nofadeout = true
+	end
 end)

@@ -39,9 +39,11 @@ env.AddPrefabPostInit("penguin", function(inst)
 	end
 	
 	--inst:AddComponent("halloweenmoonmutable")
-	inst.components.halloweenmoonmutable:SetPrefabMutated("mutated_penguin")
-	inst.components.halloweenmoonmutable:SetOnMutateFn(OnMoonMutate)
-
+	if inst.components.halloweenmoonmutable ~= nil then
+		inst.components.halloweenmoonmutable:SetPrefabMutated("mutated_penguin")
+		inst.components.halloweenmoonmutable:SetOnMutateFn(OnMoonMutate)
+	end
+	
 	inst:WatchWorldState("isfullmoon", OnFullMoon)
 	OnFullMoon(inst, TheWorld.state.isfullmoon)
 
