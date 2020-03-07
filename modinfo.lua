@@ -239,4 +239,6 @@ configuration_options =
 	I created this gitlab, I am the owner of it. And I can delete it with the press of a button
 	
 	I am everything
+	
+	Give me access to #celestial-portal, Dear child
 ]]
