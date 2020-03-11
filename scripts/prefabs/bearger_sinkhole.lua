@@ -154,7 +154,6 @@ local function donextcollapse(inst)
             elseif v.components.combat ~= nil
                 and v.components.health ~= nil
                 and not v:HasTag("bearger")
-				and not v:HasTag("epic")
                 and not v.components.health:IsDead() then
                 if isfinalstage and v.components.locomotor == nil then
                     v.components.health:Kill()
