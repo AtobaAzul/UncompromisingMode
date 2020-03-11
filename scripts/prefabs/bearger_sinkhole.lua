@@ -58,7 +58,7 @@ local function OnTimerDone(inst, data)
             ErodeAway(inst)
         else
             UpdateOverrideSymbols(inst, inst.remainingrepairs)
-            inst.components.timer:StartTimer("nextrepair", TUNING.ANTLION_SINKHOLE.REPAIR_TIME[inst.remainingrepairs] + (math.random() * TUNING.ANTLION_SINKHOLE.REPAIR_TIME_VARIANCE) / 10)
+            inst.components.timer:StartTimer("nextrepair", TUNING.ANTLION_SINKHOLE.REPAIR_TIME[inst.remainingrepairs] + (math.random() * TUNING.ANTLION_SINKHOLE.REPAIR_TIME_VARIANCE) / 2000)
         end
 
         if not inst:IsAsleep() then
@@ -103,7 +103,7 @@ local function donextcollapse(inst)
         inst:RemoveTag("scarytoprey")
         ShakeAllCameras(CAMERASHAKE.FULL, COLLAPSE_STAGE_DURATION, .03, .15, inst, TUNING.ANTLION_SINKHOLE.RADIUS*6)
         inst.remainingrepairs = NUM_CRACKING_STAGES
-        inst.components.timer:StartTimer("nextrepair", TUNING.ANTLION_SINKHOLE.REPAIR_TIME[NUM_CRACKING_STAGES] + (math.random() * TUNING.ANTLION_SINKHOLE.REPAIR_TIME_VARIANCE) / 10)
+        inst.components.timer:StartTimer("nextrepair", TUNING.ANTLION_SINKHOLE.REPAIR_TIME[NUM_CRACKING_STAGES] + (math.random() * TUNING.ANTLION_SINKHOLE.REPAIR_TIME_VARIANCE) / 2000)
     else
         ShakeAllCameras(CAMERASHAKE.FULL, COLLAPSE_STAGE_DURATION, .015, .15, inst, TUNING.ANTLION_SINKHOLE.RADIUS*4)
     end
@@ -154,6 +154,7 @@ local function donextcollapse(inst)
             elseif v.components.combat ~= nil
                 and v.components.health ~= nil
                 and not v:HasTag("bearger")
+				and not v:HasTag("epic")
                 and not v.components.health:IsDead() then
                 if isfinalstage and v.components.locomotor == nil then
                     v.components.health:Kill()
@@ -179,7 +180,7 @@ local function onstartcollapse(inst)
 
     inst:AddTag("scarytoprey")
 
-    inst.collapsetask = inst:DoPeriodicTask(COLLAPSE_STAGE_DURATION, donextcollapse)
+    inst.collapsetask = inst:DoPeriodicTask(COLLAPSE_STAGE_DURATION / 2, donextcollapse)
     donextcollapse(inst)
 end
 

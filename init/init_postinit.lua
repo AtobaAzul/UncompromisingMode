@@ -51,6 +51,8 @@ local stategraph_post = {
 	"deerclops",
 	"wilson",
 	"Leif",
+	"minotaur",
+	"spider",
 }
 
 local class_post = {

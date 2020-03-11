@@ -29,4 +29,6 @@ return {
 	"firedrop",
 	"bearger_sinkhole",
 	"minimoonspider_spike",
+	"minotaur_boulder",
+	"minotaur_boulder_big",
 }

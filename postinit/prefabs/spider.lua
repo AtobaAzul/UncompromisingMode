@@ -39,6 +39,7 @@ local function OnFullMoon(self, inst, isfullmoon, new_inst)
 		mspuff.Transform:SetPosition(self.Transform:GetWorldPosition())
 			--self.components.halloweenmoonmutable:Mutate()
 			inst:AddTag("spider_moon")
+			inst:RemoveTag("spider_regular")	
 			inst.AnimState:SetBank("spider_moon")
 			inst.AnimState:SetBuild("DS_spider_moon")
 			
@@ -51,6 +52,7 @@ local function OnFullMoon(self, inst, isfullmoon, new_inst)
 				local mspuff = SpawnPrefab("halloween_moonpuff")
 				mspuff.Transform:SetPosition(self.Transform:GetWorldPosition())
 				inst:RemoveTag("spider_moon")
+				inst:AddTag("spider_regular")
 				inst.AnimState:SetBank("spider")
 				inst.AnimState:SetBuild("spider_build")
 				
@@ -61,9 +63,39 @@ local function OnFullMoon(self, inst, isfullmoon, new_inst)
 
 end
 
+local function FindTarget(inst, radius)
+    return FindEntity(
+        inst,
+        SpringCombatMod(radius),
+        function(guy)
+            return (not guy:HasTag("monster") or guy:HasTag("player"))
+                and inst.components.combat:CanTarget(guy)
+                and not (inst.components.follower ~= nil and inst.components.follower.leader == guy)
+        end,
+        { "_combat", "character" },
+        { "spiderwhisperer", "spiderdisguise", "INLIMBO" }
+    )
+end
+
+local function WarriorRetarget(inst)
+    return FindTarget(inst, TUNING.SPIDER_WARRIOR_TARGET_DIST)
+end
+
 env.AddPrefabPostInit("spider", function(inst)
 	if not TheWorld.ismastersim then
 		return
+	end
+	
+	inst:AddTag("spider_regular")
+	
+	if inst.components.combat ~= nil then
+    inst.components.combat:SetRange(TUNING.SPIDER_WARRIOR_ATTACK_RANGE, TUNING.SPIDER_WARRIOR_HIT_RANGE)
+		inst.components.combat:SetRetargetFunction(2, WarriorRetarget)
+	end
+	
+	if inst.components.locomotor ~= nil then
+		inst.components.locomotor.walkspeed = TUNING.SPIDER_WARRIOR_WALK_SPEED
+		inst.components.locomotor.runspeed = TUNING.SPIDER_WARRIOR_RUN_SPEED
 	end
 	
 	inst:WatchWorldState("isfullmoon", OnFullMoon)

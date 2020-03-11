@@ -2,7 +2,9 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local function Bonk(inst)
-	inst.sg:GoToState("wake")
+	if not inst.components.health:IsDead() then
+		inst.sg:GoToState("wake")
+	end
 end
 
 local function ClearRecentlyCharged(inst, other)
@@ -25,9 +27,9 @@ local function onothercollide(inst, other)
             inst:DoTaskInTime(3, ClearRecentlyCharged, other)
         end
 		
-		if other:HasTag("guardianbonk") then
+		if other:HasTag("guardianbonk") or other:HasTag("megaboulder") then
 			inst.sg:GoToState("sleep")
-			inst:DoTaskInTime(10, Bonk, inst)
+			inst:DoTaskInTime(6, Bonk, inst)
 		end
 		
     elseif other.components.health ~= nil and not other.components.health:IsDead() then
@@ -54,6 +56,17 @@ env.AddPrefabPostInit("minotaur", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
+	
+	
+	inst.jumpready = true
+	
+	inst:AddComponent("timer")
+	
+	inst:AddComponent("groundpounder")
+    inst.components.groundpounder.destroyer = true
+    inst.components.groundpounder.damageRings = 3
+    inst.components.groundpounder.destructionRings = 1
+    inst.components.groundpounder.numRings = 3
 	
     inst.Physics:SetCollisionCallback(oncollide)
 
