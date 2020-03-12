@@ -12,7 +12,10 @@ local function VacuumUp(inst)
 end
 
 env.AddPrefabPostInit("ash", function(inst)
-
+	if not TheWorld.ismastersim then
+		return
+	end
+	
 inst.VacuumUp = VacuumUp
 
 --return inst

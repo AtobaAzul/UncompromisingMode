@@ -40,7 +40,7 @@ end
 local function OnExtinguish(inst, setTimer)
     if setTimer == nil then 
         setTimer = true
-    end 
+    end
     inst.AnimState:ClearBloomEffectHandle()
     inst.components.fueled:StopConsuming()
     inst.components.propagator:StopSpreading()
@@ -52,11 +52,19 @@ local function OnExtinguish(inst, setTimer)
         SetIgniteTimer(inst)
     end
 	inst.components.childspawner:StopSpawning()
+	
+	if not TheWorld.state.issummer then
+		inst:DoTaskInTime(10, function(inst) SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition()) inst:Remove() end)
+	end
+	
+	--inst:RemoveTag("fire")
 end
 
 local function OnIdle(inst)
     inst.AnimState:PlayAnimation("idle_dormant", true)
     inst.Light:Enable(false)
+	--inst:StopUpdatingComponent(inst.components.geyserfx)
+	
 end
 
 local function OnLoad(inst, data)
@@ -82,6 +90,7 @@ local function onFloodedEnd(inst)
     SetIgniteTimer(inst)
 end 
 --]]
+
 local function fn(Sim)
 	local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
@@ -92,6 +101,7 @@ local function fn(Sim)
 	
 	inst.entity:AddNetwork()
 	inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
 	inst.entity:AddLight()
 
     MakeObstaclePhysics(inst, 2.05)
@@ -135,6 +145,8 @@ local function fn(Sim)
     inst.components.childspawner:SetMaxChildren(1)
     inst.components.childspawner:StartRegen()
 	inst.components.childspawner.childname = "lavae2"
+	
+    inst:AddComponent("fader")
 
     inst.components.fueled:SetUpdateFn( function()
         if not inst.components.fueled:IsEmpty() then
@@ -164,16 +176,16 @@ local function fn(Sim)
     inst.components.geyserfx.pre =
     {
         {percent=1.0, anim="active_pre", radius=0, intensity=.8, falloff=.33, colour = {255/255,187/255,187/255}, soundintensity=.1},
-        {percent=1.0-(24/42), sound="dontstarve/creatures/together/deer/fx/fire_circle_LP", radius=1, intensity=.8, falloff=.33, colour = {255/255,187/255,187/255}, soundintensity=1},
-        {percent=0.0, sound="dontstarve/creatures/together/deer/fx/fire_circle_LP", radius=3.5, intensity=.8, falloff=.33, colour = {255/255,187/255,187/255}, soundintensity=1},
+        {percent=1.0-(24/42), sound="dontstarve/common/campfire", radius=1, intensity=.8, falloff=.33, colour = {255/255,187/255,187/255}, soundintensity=1},
+        {percent=0.0, sound="dontstarve/common/campfire", radius=3.5, intensity=.8, falloff=.33, colour = {255/255,187/255,187/255}, soundintensity=1},
     }
     inst.components.geyserfx.levels =
     {
-        {percent=1.0, anim="active_loop", sound="dontstarve/creatures/together/deer/fx/fire_circle_LP", radius=3.5, intensity=.8, falloff=.33, colour = {255/255,187/255,187/255}, soundintensity=1},
+        {percent=1.0, anim="active_loop", sound="dontstarve/common/campfire", radius=3.5, intensity=.8, falloff=.33, colour = {255/255,187/255,187/255}, soundintensity=1},
     }
     inst.components.geyserfx.pst =
     {
-        {percent=1.0, anim="active_pst", sound="dontstarve/creatures/together/deer/fx/fire_circle_LP", radius=3.5, intensity=.8, falloff=.33, colour = {255/255,187/255,187/255}, soundintensity=1},
+        {percent=1.0, anim="active_pst", sound="dontstarve/common/campfire", radius=3.5, intensity=.8, falloff=.33, colour = {255/255,187/255,187/255}, soundintensity=1},
         {percent=1.0-(61/96), sound="dontstarve/common/fireOut", radius=0, intensity=.8, falloff=.33, colour = {255/255,187/255,187/255}, soundintensity=.1},
     }
 
@@ -181,6 +193,7 @@ local function fn(Sim)
     if not inst.components.fueled:IsEmpty() then
         OnIgnite(inst)
     end
+	
     --[[
     inst:DoTaskInTime(1, function()
         if inst:GetIsFlooded() then 

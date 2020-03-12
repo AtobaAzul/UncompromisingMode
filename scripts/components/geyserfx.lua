@@ -33,7 +33,7 @@ end
 
 local sin = math.sin
 local gettime = GetTime
---local clock = phase
+--local clock = TheWorld
 
 function GeyserFX:SetPercentInternal(levels, p, loop)
 	local percent = math.clamp(p, 0.0, 1.0)
@@ -80,8 +80,8 @@ function GeyserFX:SetPercentInternal(levels, p, loop)
 
     if self.playingsound ~= levela.sound then
         if self.playingsound then
-            self.inst.SoundEmitter:KillSound(self.playingsound)
-            self.playingsound = nil
+            --self.inst.SoundEmitter:KillSound(self.playingsound)
+            --self.playingsound = nil
         end
         if levela.sound then
 	        self.playingsound = levela.sound
@@ -109,30 +109,8 @@ function GeyserFX:SetPstPercent(percent)
 	self.state = STATE_EXTINGUISH
 	self:SetPercentInternal(self.pst, percent, false)
 end
---[[
-local function PercentUp(self, inst, flamepercent)
-	if flamepercent ~= nil then
-		self.inst:DoTaskInTime(0.01, function(inst)
-		flamepercent = flamepercent - 0.01
-		self.inst:DoTaskInTime(0, PercentUp)
-	end)
-	end
-	
-	return flamepercent
-end
 
-local function PercentDown(self, inst, flamepercent)
-	if flamepercent ~= nil then
-		self.inst:DoTaskInTime(0.01, function(inst)
-		flamepercent = flamepercent + 0.01
-		self.inst:DoTaskInTime(0, PercentDown)
-	end)
-	end
-	
-	return flamepercent
-end
---]]
-function GeyserFX:OnUpdate(dt)--, flamepercent)
+function GeyserFX:OnUpdate(dt)
 	if self.state == STATE_IGNITE then
 		local percent = 1.0 - (self.inst.AnimState:GetCurrentAnimationTime()/self.inst.AnimState:GetCurrentAnimationLength()) --self.inst.AnimState:GetPercent()
 		self:SetPrePercent(percent)
@@ -143,7 +121,7 @@ function GeyserFX:OnUpdate(dt)--, flamepercent)
 			self.state = STATE_BURN
 		end
 	elseif self.state == STATE_EXTINGUISH then
-		local percent = 1.0 - (self.inst.AnimState:GetCurrentAnimationTime()/self.inst.AnimState:GetCurrentAnimationLength()) --self.inst.AnimState:GetPercent() -- - percentage -- 
+		local percent = 1.0 - (self.inst.AnimState:GetCurrentAnimationTime()/self.inst.AnimState:GetCurrentAnimationLength()) --self.inst.AnimState:GetPercent()
 		self:SetPstPercent(percent)
 		if self.inst.AnimState:AnimDone() then
 			if self.inst.OnIdle then
@@ -158,6 +136,7 @@ function GeyserFX:OnUpdate(dt)--, flamepercent)
 	flicker = ( 1.0 + flicker ) / 2.0 -- range = 0:1
     local rad = self.current_radius + flicker*.05
     self.inst.Light:SetRadius( rad )
+
     if self.usedayparamforsound then
 		local isday = TheWorld.state.isday
 		if isday ~= self.isday then
@@ -173,19 +152,15 @@ function GeyserFX:Ignite()
     	self.inst.SoundEmitter:PlaySound(self.lightsound)
     end
 	self:SetPrePercent(1.0)
-	--[[local flamepercent = 1
-	self.inst:DoTaskInTime(0, PercentUp)--]]
 end
 
 --- Kill the fx.
 function GeyserFX:Extinguish()
-    self.inst.SoundEmitter:KillSound("fire")
+    --self.inst.SoundEmitter:KillSound("fire")
     if self.extinguishsound then
     	self.inst.SoundEmitter:PlaySound(self.extinguishsound)
     end
     self:SetPstPercent(1.0)
-	--[[local flamepercent = 0
-	self.inst:DoTaskInTime(0, PercentDown)--]]
 end
 
 return GeyserFX

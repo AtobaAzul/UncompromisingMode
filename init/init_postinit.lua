@@ -42,6 +42,7 @@ local prefab_post = {
 	"mutatedhound",
 	"pillar_ruins",
 	"minotaur",
+	"ground_chunks_breaking",
 	--"papyrus",
 }
 
