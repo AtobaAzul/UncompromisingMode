@@ -20,9 +20,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
     DESCRIBE.RATPOISONBOTTLE = "Icky death soup."
     DESCRIBE.RATPOISON = "Wolfgang not have to catch rat if rat dead! Hah hah!"
 
-    DESCRIBE.MONSTERSCRAP = "Look bad. Smell bad. Is bad?"
-    DESCRIBE.COOKEDMONSTERSCRAP = "Still look not good. Wolfgang go find better meat?"
-    DESCRIBE.MONSTERSCRAP_DRIED = "Small bad meat is rock now."
+    DESCRIBE.MONSTERMORSEL = "Look bad. Smell bad. Is bad?"
+    DESCRIBE.COOKEDMONSTERMORSEL = "Still look not good. Wolfgang go find better meat?"
+    DESCRIBE.MONSTERMORSEL_DRIED = "Small bad meat is rock now."
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Smelly mushroom make rain hurt!"
     DESCRIBE.TOADLING = "Little frog not look right."

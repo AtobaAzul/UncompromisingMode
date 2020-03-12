@@ -25,9 +25,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
     DESCRIBE.RATPOISONBOTTLE = "It's labeled \"Do not drink. That means you Webber.\""
     DESCRIBE.RATPOISON = "It's all murdery."
 
-    DESCRIBE.MONSTERSCRAP = "Small, angry meat."
-    DESCRIBE.COOKEDMONSTERSCRAP = "...it's still purple meat."
-    DESCRIBE.MONSTERSCRAP_DRIED = "What a little jerk."
+    DESCRIBE.MONSTERMORSEL = "Small, angry meat."
+    DESCRIBE.COOKEDMONSTERMORSEL = "...it's still purple meat."
+    DESCRIBE.MONSTERMORSEL_DRIED = "What a little jerk."
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "There's the source of the pestilence!"
     DESCRIBE.TOADLING = "It sure likes those weird trees."

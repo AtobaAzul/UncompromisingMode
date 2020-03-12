@@ -20,9 +20,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
     DESCRIBE.RATPOISONBOTTLE = "Wendy really likes this stuff! Wonder what it tastes like..."
     DESCRIBE.RATPOISON = "Whoops! It's all spilled!"
 
-    DESCRIBE.MONSTERSCRAP = "We'd rather not think about that too much."
-    DESCRIBE.COOKEDMONSTERSCRAP = "It'll tide us over."
-    DESCRIBE.MONSTERSCRAP_DRIED = "It's really chewy."
+    DESCRIBE.MONSTERMORSEL = "We'd rather not think about that too much."
+    DESCRIBE.COOKEDMONSTERMORSEL = "It'll tide us over."
+    DESCRIBE.MONSTERMORSEL_DRIED = "It's really chewy."
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Is that where the yucky rain came from?"
     DESCRIBE.TOADLING = "That's one weird frog."

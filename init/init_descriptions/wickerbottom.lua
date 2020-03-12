@@ -20,9 +20,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
     DESCRIBE.RATPOISONBOTTLE = "The toxic elemnts of the fungus have been fully activated."
     DESCRIBE.RATPOISON = "A minor chemical odor emanating from the mixture attracts rodents."
 
-    DESCRIBE.MONSTERSCRAP = "A small quantity of dubiously sourced meat."
-    DESCRIBE.COOKEDMONSTERSCRAP = "Somewhat prepared, but still not entirely safe for consumption."
-    DESCRIBE.MONSTERSCRAP_DRIED = "Salty and strange."
+    DESCRIBE.MONSTERMORSEL = "A small quantity of dubiously sourced meat."
+    DESCRIBE.COOKEDMONSTERMORSEL = "Somewhat prepared, but still not entirely safe for consumption."
+    DESCRIBE.MONSTERMORSEL_DRIED = "Salty and strange."
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Might that strange vegitation be the cause of the polluted rain?"
     DESCRIBE.TOADLING = "They appear subservient to the nearby fungi."

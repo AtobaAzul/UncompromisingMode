@@ -20,9 +20,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
     DESCRIBE.RATPOISONBOTTLE = "Feast your eyes on the deep woods gut bomb!"
     DESCRIBE.RATPOISON = "A little somethin' for the moochers' next visit..."
 
-    DESCRIBE.MONSTERSCRAP = "Might be useful if it was bigger..."
-    DESCRIBE.COOKEDMONSTERSCRAP = "That's no Canadian Kosher."
-    DESCRIBE.MONSTERSCRAP_DRIED = "That's no Canadian Kosher."
+    DESCRIBE.MONSTERMORSEL = "Might be useful if it was bigger..."
+    DESCRIBE.COOKEDMONSTERMORSEL = "That's no Canadian Kosher."
+    DESCRIBE.MONSTERMORSEL_DRIED = "That's no Canadian Kosher."
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "That cap is killing my trees!"
     DESCRIBE.TOADLING = "Hop off, ya hoser."

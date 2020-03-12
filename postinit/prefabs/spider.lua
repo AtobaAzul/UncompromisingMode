@@ -86,6 +86,15 @@ env.AddPrefabPostInit("spider", function(inst)
 		return
 	end
 	
+	inst:RemoveComponent("lootdropper")
+	
+	inst:AddComponent("lootdropper")
+    inst.components.lootdropper:AddRandomLoot("monstermorsel", 1)
+    inst.components.lootdropper:AddRandomLoot("silk", .5)
+    inst.components.lootdropper:AddRandomLoot("spidergland", .5)
+    inst.components.lootdropper:AddRandomHauntedLoot("spidergland", 1)
+    inst.components.lootdropper.numrandomloot = 1
+	
 	inst:AddTag("spider_regular")
 	
 	if inst.components.combat ~= nil then

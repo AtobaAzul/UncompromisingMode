@@ -21,9 +21,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
     DESCRIBE.RATPOISONBOTTLE = "Hmhm...I remember what the red ones were for now."
     DESCRIBE.RATPOISON = "A little something to keep the vermin at bay."
 
-    DESCRIBE.MONSTERSCRAP = "Fare from the lowest of vermin."
-    DESCRIBE.COOKEDMONSTERSCRAP = "What an unpleasant prospect..."
-    DESCRIBE.MONSTERSCRAP_DRIED = "My teeth are getting too old for this."
+    DESCRIBE.MONSTERMORSEL = "Fare from the lowest of vermin."
+    DESCRIBE.COOKEDMONSTERMORSEL = "What an unpleasant prospect..."
+    DESCRIBE.MONSTERMORSEL_DRIED = "My teeth are getting too old for this."
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "It seems to be polluting the air with spores."
     DESCRIBE.TOADLING = "They've been overtaken by some sort of fungal hive-mind."

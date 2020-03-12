@@ -19,6 +19,10 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/snowgoggles.tex"),
 	Asset("ATLAS", "images/inventoryimages/ratpoisonbottle.xml"),
 	Asset("IMAGE", "images/inventoryimages/ratpoisonbottle.tex"),
+	Asset("ATLAS", "images/inventoryimages/cookedmonstermorsel.xml"),
+	Asset("IMAGE", "images/inventoryimages/cookedmonstermorsel.tex"),
+	Asset("ATLAS", "images/inventoryimages/monstermorsel.xml"),
+	Asset("IMAGE", "images/inventoryimages/monstermorsel.tex"),
 	
 	Asset("ANIM", "anim/geyser.zip"),
 	Asset("ANIM", "anim/lava_vomit.zip"),
@@ -33,6 +37,7 @@ Assets = {
 	Asset("ANIM", "anim/tar_trap.zip"),
 	Asset("ANIM", "anim/swap_minotaur_boulder.zip"),
 	Asset("ANIM", "anim/pillar_ruins_damaged.zip"),
+	Asset("ANIM", "anim/monstermorsel.zip"),
 	
 	Asset("SOUNDPACKAGE", "sound/dontstarve_DLC003.fev"), 
 	Asset( "SOUND", "sound/DLC003_sfx.fsb"), 

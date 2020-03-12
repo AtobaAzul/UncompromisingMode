@@ -196,6 +196,10 @@
 
 * [x] Ruins Pillars can now be destroyed by the Ancient Guardian
 
+* [x] The Ancient Guardian fight has been improved, now has a stomp attack that shakes stone slabs from the ceiling, ramming into large ones will stun him
+
+* [x] Spiders now have a leap attack and drop monster morsels
+
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
 ### To vote on features: Visit [#mod_polls](https://discordapp.com/channels/623649948130344960/623661746216763393) on Discord
