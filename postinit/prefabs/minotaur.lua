@@ -65,7 +65,7 @@ env.AddPrefabPostInit("minotaur", function(inst)
 	inst:AddComponent("groundpounder")
     inst.components.groundpounder.destroyer = true
     inst.components.groundpounder.damageRings = 3
-    inst.components.groundpounder.destructionRings = 1
+    inst.components.groundpounder.destructionRings = 3
     inst.components.groundpounder.numRings = 3
 	
     inst.Physics:SetCollisionCallback(oncollide)

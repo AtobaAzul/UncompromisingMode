@@ -32,6 +32,7 @@ Assets = {
 	Asset("ANIM", "anim/tar.zip"),
 	Asset("ANIM", "anim/tar_trap.zip"),
 	Asset("ANIM", "anim/swap_minotaur_boulder.zip"),
+	Asset("ANIM", "anim/pillar_ruins_damaged.zip"),
 	
 	Asset("SOUNDPACKAGE", "sound/dontstarve_DLC003.fev"), 
 	Asset( "SOUND", "sound/DLC003_sfx.fsb"), 

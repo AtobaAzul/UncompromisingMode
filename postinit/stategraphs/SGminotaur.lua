@@ -271,23 +271,14 @@ local states = {
     State{
 
         name = "leap_attack_pre",
-        tags = {"busy"},
+        tags = {"busy", "moving", "canrotate", "hopping"},
         
         onenter = function(inst, target)
 		print("post")
-            --if not inst:GetIsOnWater(Vector3(inst.Transform:GetWorldPosition()) ) then
-                 --inst.components.groundpounder:GroundPound()
-                 --inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
-            --end
-			--inst.jumpready = false
-
-            --SpawnWaves(inst, 12, 360, 4)
-			
             inst.SoundEmitter:PlaySound("dontstarve/creatures/rook_minotaur/voice")
             inst.SoundEmitter:PlaySound("dontstarve/common/horn_beefalo")
-            --inst.components.locomotor:Stop()
-			
             
+			inst.components.combat:SetRange(9, 12)
 			inst.AnimState:PlayAnimation("taunt")
 
         end,
@@ -298,10 +289,8 @@ local states = {
             TimeEvent(35 * FRAMES, function(inst)
 						inst:DoTaskInTime(20, function(inst) 
 						inst.jumpready = true
-						inst.components.combat:SetRange(9, 12)
 						end)
-                --inst.sg:RemoveStateTag("busy")
-				
+                
 			inst.components.locomotor:WalkForward()
 			inst.AnimState:PlayAnimation("walk_loop")
             end),
@@ -317,7 +306,7 @@ local states = {
 	State{
 
         name = "leap_attack",
-        tags = {"busy"},
+        tags = {"busy", "moving", "canrotate", "hopping"},
         
         onenter = function(inst, target)
 		print("post")
@@ -332,18 +321,7 @@ local states = {
 		local ents = TheSim:FindEntities(x, y, z, 50, { "player" })
 		
 		if ents ~= nil then
-			local target2 = GetClosestInstWithTag("player", inst, 50)
-			--if target ~= nil then
 			fallingpianogag(inst)
-			--[[TheWorld:PushEvent("ms_miniquake", {
-			rad = 5,
-			minrad = 1.5,
-			num = 2,
-			duration = 1,
-			pos = target2:GetPosition(),
-			target = target2,
-			debrisfn = GetDebrisFn,
-			})--]]
 		end
 		
         end,
@@ -357,19 +335,13 @@ local states = {
 	State{
 
         name = "leap_attack2",
-        tags = {"busy"},
+        tags = {"busy", "moving", "canrotate", "hopping"},
         
         onenter = function(inst, target)
 		print("post")
-            --if not inst:GetIsOnWater(Vector3(inst.Transform:GetWorldPosition()) ) then
-                inst.components.groundpounder:GroundPound()
-                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
-            --end
-			--inst.jumpready = false
-
-            --SpawnWaves(inst, 12, 360, 4)
-
-            --inst.components.locomotor:Stop()
+            inst.components.groundpounder:GroundPound()
+            inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
+				
 			inst.components.locomotor:WalkForward()
 			inst.AnimState:PlayAnimation("walk_loop")
 			
@@ -377,18 +349,7 @@ local states = {
 		local ents = TheSim:FindEntities(x, y, z, 50, { "player" })
 		
 		if ents ~= nil then
-			local target2 = GetClosestInstWithTag("player", inst, 50)
-			--if target ~= nil then
 			fallingpianogag(inst)
-			--[[TheWorld:PushEvent("ms_miniquake", {
-			rad = 5,
-			minrad = 1.5,
-			num = 2,
-			duration = 1,
-			pos = target2:GetPosition(),
-			target = target2,
-			debrisfn = GetDebrisFn,
-			})--]]
 		end
 			
         end,
@@ -402,20 +363,15 @@ local states = {
 	State{
 
         name = "leap_attack_pst",
-        tags = {"busy"},
+        tags = {"busy", "moving", "canrotate", "hopping"},
         
         onenter = function(inst, target)
 		print("post")
-            --if not inst:GetIsOnWater(Vector3(inst.Transform:GetWorldPosition()) ) then
-                inst.components.groundpounder:GroundPound()
-                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
-				ShakeAllCameras(CAMERASHAKE.FULL, .35, .02, 1, inst, 40)
-            --end
+            inst.components.groundpounder:GroundPound()
+            inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
+			ShakeAllCameras(CAMERASHAKE.FULL, .35, .02, 1, inst, 40)
 			inst.jumpready = false
-
-            --SpawnWaves(inst, 12, 360, 4)
-
-            --inst.components.locomotor:Stop()
+			
 			inst.components.locomotor:WalkForward()
 			inst.AnimState:PlayAnimation("walk_loop")
 		
