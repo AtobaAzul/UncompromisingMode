@@ -14,12 +14,12 @@ local HEAVY_WORK_ACTIONS =
     HAMMER = true,
     MINE = true,
 }
-
+--[[
 local function BreakDebris(debris)
     local x, y, z = debris.Transform:GetWorldPosition()
     SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(x, 0, z)
     debris:PushEvent("stopfalling")
-end
+end--]]
 
 local function UpdateShadowSize(shadow, height)
     local scaleFactor = Lerp(.5, 1.5, height / 25)

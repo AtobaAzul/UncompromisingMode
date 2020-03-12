@@ -114,6 +114,8 @@ local function fn(Sim)
     anim:SetBloomEffectHandle( "shaders/anim.ksh" )
 	
 	inst.entity:SetPristine()
+	
+	inst:AddTag("flamegeyser")
 
 	if not TheWorld.ismastersim then
 		return inst
