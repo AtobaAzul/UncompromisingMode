@@ -44,6 +44,7 @@ local prefab_post = {
 	"minotaur",
 	"ground_chunks_breaking",
 	"skeleton",
+	"shadowcreature",
 	--"papyrus",
 }
 

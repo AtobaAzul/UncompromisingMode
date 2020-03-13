@@ -1,11 +1,6 @@
---local function onsnowstormlevel(self, snowstormlevel)
-    --self.inst.replica.hayfever:SetNextSneezeTime(sneezetime)
---end
-
 local SnowStormWatcher = Class(function(self, inst)
     self.inst = inst
 
-    --self.snowstormlevel = 0
     self.snowstormspeedmult = .75
     self.delay = nil
 	self.task = nil
