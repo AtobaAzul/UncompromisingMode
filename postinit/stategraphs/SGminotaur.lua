@@ -274,7 +274,7 @@ local states = {
         tags = {"busy", "moving", "canrotate", "hopping"},
         
         onenter = function(inst, target)
-		print("post")
+		
             inst.SoundEmitter:PlaySound("dontstarve/creatures/rook_minotaur/voice")
             inst.SoundEmitter:PlaySound("dontstarve/common/horn_beefalo")
             
@@ -309,7 +309,7 @@ local states = {
         tags = {"busy", "moving", "canrotate", "hopping"},
         
         onenter = function(inst, target)
-		print("post")
+		
 
 		inst.components.groundpounder:GroundPound()
         inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
@@ -338,7 +338,7 @@ local states = {
         tags = {"busy", "moving", "canrotate", "hopping"},
         
         onenter = function(inst, target)
-		print("post")
+		
             inst.components.groundpounder:GroundPound()
             inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
 				
@@ -366,7 +366,7 @@ local states = {
         tags = {"busy", "moving", "canrotate", "hopping"},
         
         onenter = function(inst, target)
-		print("post")
+		
             inst.components.groundpounder:GroundPound()
             inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
 			ShakeAllCameras(CAMERASHAKE.FULL, .35, .02, 1, inst, 40)
@@ -412,7 +412,52 @@ local states = {
 			
 			end),
         },
-    }
+    },
+	
+	State{
+        name = "AGStun",
+        tags = { "busy", "sleeping", "nowake" },
+
+        onenter = function(inst)
+            if inst.components.locomotor ~= nil then
+                inst.components.locomotor:StopMoving()
+            end
+            inst.AnimState:PlayAnimation("rhinostun_pre")
+        end,
+
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("AGStunned") end),
+        },
+    },
+
+    State{
+        name = "AGStunned",
+        tags = { "busy", "sleeping" },
+
+        onenter = function(inst)
+            inst.AnimState:PlayAnimation("rhinostun_loop")
+        end,
+
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("AGStunned") end),
+        },
+    },
+
+    State{
+        name = "AGStunwake",
+        tags = { "busy", "waking", "nosleep" },
+
+        onenter = function(inst)
+            inst.AnimState:PlayAnimation("rhinostun_post")
+        end,
+
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
+	}
 }
 
 for k, v in pairs(events) do

@@ -21,8 +21,10 @@ end
 function MoreShadows:ToggleMoreShadowsOff(active, src, data)
 print("OFF")
         self.inst:StopUpdatingComponent(self)
-		self.task:Cancel()
-		self.task = nil
+		if self.task ~= nil then
+			self.task:Cancel()
+			self.task = nil
+		end
 
 end
 
@@ -39,11 +41,11 @@ local function ShadowSpawnChance(inst, self)
 		local zrandom = math.random(-15, 15)
 		
 		if math.random() <= 0.5 then
-			print("crawlinghorror")
+			print("CRAWLING HORRORS")
 			local shadowcreaturespawn = SpawnPrefab("crawlinghorror")
 			shadowcreaturespawn.Transform:SetPosition(x + xrandom, 0, z + zrandom)
 		else
-			print("terrorbeak")
+			print("TERRIFYING BEAKS")
 			local shadowcreaturespawn = SpawnPrefab("terrorbeak")
 			shadowcreaturespawn.Transform:SetPosition(x + xrandom, 0, z + zrandom)
 		end

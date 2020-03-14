@@ -94,7 +94,7 @@ end
 local function OnWorked(inst, worker)
     local pt = inst:GetPosition()
     SpawnPrefab("rock_break_fx").Transform:SetPosition(pt:Get())
-    --SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(pt:Get())
+    SpawnPrefab("collapse_small").Transform:SetPosition(pt:Get())
     if inst.raised then
         pt.y = 2
         inst.components.lootdropper:DropLoot(pt)

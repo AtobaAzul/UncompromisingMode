@@ -3,7 +3,7 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local function Bonk(inst)
 	if not inst.components.health:IsDead() then
-		inst.sg:GoToState("wake")
+		inst.sg:GoToState("AGStunwake")
 	end
 end
 
@@ -28,7 +28,7 @@ local function onothercollide(inst, other)
         end
 		
 		if other:HasTag("guardianbonk") or other:HasTag("megaboulder") then
-			inst.sg:GoToState("sleep")
+			inst.sg:GoToState("AGStun")
 			inst:DoTaskInTime(6, Bonk, inst)
 		end
 		
