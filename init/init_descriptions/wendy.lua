@@ -48,5 +48,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.SHOCKWORM = "A light in the darkness."
 	DESCRIBE.ZASPBERRY = "Perhaps it will bring some light to my life. Probably not."
 
-	DESCRIBE.BUSH_CRAB = "Another cruel joke from mother nature."
+	DESCRIBE.BUSHCRAB = "Another cruel joke from mother nature."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

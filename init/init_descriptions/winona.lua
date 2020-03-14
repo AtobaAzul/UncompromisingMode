@@ -48,5 +48,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.SHOCKWORM = "That's a saftey hazard if I've ever seen one!"
 	DESCRIBE.ZASPBERRY = "May as well taste it."
 
-	DESCRIBE.BUSH_CRAB = "Thats some dangerous weeding!"
+	DESCRIBE.BUSHCRAB = "Thats some dangerous weeding!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

@@ -55,7 +55,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	
 	DESCRIBE.MINOTAUR_BOULDER = "Thats a nice boulder."
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "Thats a nice BIG boulder."
-	DESCRIBE.BUSH_CRAB = "AH! How long was he down there?!"
+	DESCRIBE.BUSHCRAB = "AH! How long was he down there?!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	
 

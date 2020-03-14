@@ -48,5 +48,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.SHOCKWORM = "A vicious counter attack!"
 	DESCRIBE.ZASPBERRY = "Could Thor's power truly be contained in a wild fruit?"
 
-	DESCRIBE.BUSH_CRAB = "A wild encounter!"
+	DESCRIBE.BUSHCRAB = "A wild encounter!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

@@ -48,5 +48,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.SHOCKWORM = "This one is sparking!"
 	DESCRIBE.ZASPBERRY = "This will give someone quite a shock!"
 
-	DESCRIBE.BUSH_CRAB = "Ohoho, what a trickster!"
+	DESCRIBE.BUSHCRAB = "Ohoho, what a trickster!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

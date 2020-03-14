@@ -48,5 +48,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.SHOCKWORM = "Touching it could cook me to perfection!"
 	DESCRIBE.ZASPBERRY = "Perhaps a nice raspberry parfait?"
 
-	DESCRIBE.BUSH_CRAB = "Berries and crab cake, anyone? No?"
+	DESCRIBE.BUSHCRAB = "Berries and crab cake, anyone? No?"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

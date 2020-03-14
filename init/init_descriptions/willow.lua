@@ -48,5 +48,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.SHOCKWORM = "It's so frilly!"
 	DESCRIBE.ZASPBERRY = "I'm not blowing any raspberries."
 
-	DESCRIBE.BUSH_CRAB = "Should have burned it down... always should have burned it down!"
+	DESCRIBE.BUSHCRAB = "Should have burned it down... always should have burned it down!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

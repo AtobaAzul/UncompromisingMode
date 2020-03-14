@@ -48,5 +48,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.SHOCKWORM = "That worm's lit up like the Northern lights!"
 	DESCRIBE.ZASPBERRY = "Blue raspberry is not a real berry."
 
-	DESCRIBE.BUSH_CRAB = "Farm from a freshwater."
+	DESCRIBE.BUSHCRAB = "Farm from a freshwater."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

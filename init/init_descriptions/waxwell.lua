@@ -50,5 +50,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	 -- ...
 	DESCRIBE.ZASPBERRY = "I'm not one for wild berries, magical or not."
 
-	DESCRIBE.BUSH_CRAB = "I guess they've finally hatched."
+	DESCRIBE.BUSHCRAB = "I guess they've finally hatched."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

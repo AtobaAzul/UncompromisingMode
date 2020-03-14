@@ -58,3 +58,55 @@ env.AddPrefabPostInit("berrybush", function(inst)
     end
 
 end)
+--[[
+local function OnWinter(inst)
+    if TheWorld.state.iswinter then
+		inst.components.childspawner:StopSpawning()
+    else
+		inst.components.childspawner:StartSpawning()
+    end
+end
+
+local function ReturnChildren(inst)
+    for k, child in pairs(inst.components.childspawner.childrenoutside) do
+        if child.components.homeseeker ~= nil then
+            child.components.homeseeker:GoHome()
+        end
+        child:PushEvent("gohome")
+    end
+end
+
+local function OnIsDay(inst, isday)
+    if isday ~= inst.dayspawn then
+        inst.components.childspawner:StopSpawning()
+        ReturnChildren(inst)
+    elseif not TheWorld.state.iswinter then
+        inst.components.childspawner:StartSpawning()
+    end
+end
+
+local function OnInit(inst)
+    inst.task = nil
+    inst:WatchWorldState("isday", OnIsDay)
+    inst:WatchWorldState("seasontick", OnWinter)
+    OnIsDay(inst, TheWorld.state.isday)
+    OnWinter(inst)
+end
+
+env.AddPrefabPostInit("berrybush_juicy", function(inst)
+
+	if not TheWorld.ismastersim then
+		return
+	end
+
+	inst:AddComponent("childspawner")
+    inst.components.childspawner.childname = "mosquito"
+    inst.components.childspawner:SetRegenPeriod(TUNING.POND_REGEN_TIME)
+    inst.components.childspawner:SetSpawnPeriod(TUNING.POND_SPAWN_TIME)
+    inst.components.childspawner:SetMaxChildren(math.random(0,1))
+    inst.components.childspawner:StartRegen()
+    inst.dayspawn = false
+	
+    inst.task = inst:DoTaskInTime(0, OnInit)
+
+end)--]]
