@@ -33,4 +33,5 @@ return {
 	"minotaur_boulder_big",
 	"monstermorsel",
 	"charlie_fountain",
+	"bushcrab",
 }

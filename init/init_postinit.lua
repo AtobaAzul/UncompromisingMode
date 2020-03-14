@@ -5,7 +5,7 @@ local component_post = {
 	"groundpounder",
 	"propagator",
 	"burnable",
-	--"quaker",
+	--"hunter",
 }
 
 local prefab_post = {
@@ -45,6 +45,7 @@ local prefab_post = {
 	"ground_chunks_breaking",
 	"skeleton",
 	"shadowcreature",
+	"berrybush",
 	--"papyrus",
 }
 

@@ -47,3 +47,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.SNOWMONG = "This is no frozen treat!"
 	DESCRIBE.SHOCKWORM = "Touching it could cook me to perfection!"
 	DESCRIBE.ZASPBERRY = "Perhaps a nice raspberry parfait?"
+
+	DESCRIBE.BUSH_CRAB = "Berries and crab cake, anyone? No?"

@@ -47,3 +47,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.SNOWMONG = "What large teeth you have!"
 	DESCRIBE.SHOCKWORM = "This one is sparking!"
 	DESCRIBE.ZASPBERRY = "This will give someone quite a shock!"
+
+	DESCRIBE.BUSH_CRAB = "Ohoho, what a trickster!"

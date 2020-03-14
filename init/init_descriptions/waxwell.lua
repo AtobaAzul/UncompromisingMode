@@ -7,7 +7,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
     ANNOUNCE.ANNOUNCE_WINONAGEN = "I'm more of a magic and dark arts kind of guy."
     ANNOUNCE.ANNOUNCE_RATRAID = "Oh heavens no."
     ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "...come now Charlie, is this really nessecary?"
-    -- Yes. Enjoy~
+    -- Yes. Enjoy.
     ANNOUNCE.ANNOUNCE_RATRAID_OVER = "How dare you? Get back here!"
     ANNOUNCE.ANNOUNCE_ACIDRAIN = {
         "Ow! The rain is burning me!",
@@ -47,4 +47,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	
 	DESCRIBE.SNOWMONG = "It's about as smart as it looks."
 	DESCRIBE.SHOCKWORM = "I definitely did not make that one!"
+	 -- ...
 	DESCRIBE.ZASPBERRY = "I'm not one for wild berries, magical or not."
+
+	DESCRIBE.BUSH_CRAB = "I guess they've finally hatched."

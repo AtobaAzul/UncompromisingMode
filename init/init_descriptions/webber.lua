@@ -47,3 +47,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.SNOWMONG = "4 eyes?! Definitely not our friend!"
 	DESCRIBE.SHOCKWORM = "Freaky frilly!"
 	DESCRIBE.ZASPBERRY = "Zappy!"
+
+	DESCRIBE.BUSH_CRAB = "Not one of our friends!"
