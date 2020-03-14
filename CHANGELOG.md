@@ -200,6 +200,14 @@
 
 * [x] Spiders now have a leap attack and drop monster morsels
 
+* [x] Added Bush Crabs
+
+* [x] More shadows spawns on insane players
+
+* [x] Killing shadows regains 10 sanity instead of 15
+
+* [x] Earthquake debris during summer has a chance to split the earth, creating a flame geyser. Lavae will spawn from the geysers.
+
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
 ### To vote on features: Visit [#mod_polls](https://discordapp.com/channels/623649948130344960/623661746216763393) on Discord

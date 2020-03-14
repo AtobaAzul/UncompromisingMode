@@ -49,3 +49,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.ZASPBERRY = "I'm not blowing any raspberries."
 
 	DESCRIBE.BUSH_CRAB = "Should have burned it down... always should have burned it down!"
+	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

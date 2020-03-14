@@ -49,3 +49,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.ZASPBERRY = "Perhaps a nice raspberry parfait?"
 
 	DESCRIBE.BUSH_CRAB = "Berries and crab cake, anyone? No?"
+	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
