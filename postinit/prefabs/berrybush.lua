@@ -58,7 +58,7 @@ env.AddPrefabPostInit("berrybush", function(inst)
     end
 
 end)
---[[
+
 local function OnWinter(inst)
     if TheWorld.state.iswinter then
 		inst.components.childspawner:StopSpawning()
@@ -109,4 +109,4 @@ env.AddPrefabPostInit("berrybush_juicy", function(inst)
 	
     inst.task = inst:DoTaskInTime(0, OnInit)
 
-end)--]]
+end)
