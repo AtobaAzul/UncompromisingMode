@@ -34,4 +34,7 @@ return {
 	"monstermorsel",
 	"charlie_fountain",
 	"bushcrab",
+	"dreadeye",
+	"creepingfear",
+	"uncompromising_shadow_projectile_fx",
 }

@@ -41,6 +41,10 @@ Assets = {
 	Asset("ANIM", "anim/rhino_stun.zip"),
 	Asset("ANIM", "anim/charlie_fountain.zip"),
 	Asset("ANIM", "anim/bush_crab.zip"),
+	Asset("ANIM", "anim/creepingfear.zip"),
+	Asset("ANIM", "anim/dreadeye.zip"),
+	Asset("ANIM", "anim/uncompromising_shadow_projectile1_fx.zip"),
+	Asset("ANIM", "anim/uncompromising_shadow_projectile2_fx.zip"),
 	
 	Asset("SOUNDPACKAGE", "sound/dontstarve_DLC003.fev"), 
 	Asset( "SOUND", "sound/DLC003_sfx.fsb"), 

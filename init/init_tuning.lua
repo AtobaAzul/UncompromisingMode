@@ -161,8 +161,57 @@ TUNING.DSTU =
 	
 	--Weather Start Date
     WEATHERHAZARD_START_DATE = 22,
+	
+	
+	
+	
+	
+	HARDER_SHADOWS = GetModConfigData("harder_shadows"),
+    MAX_DISTANCE_TO_SHADOWS = 1225, -- 35^2
+
+    CREEPINGFEAR_SPEED = 4.8,
+    CREEPINGFEAR_HEALTH = 1600,
+    CREEPINGFEAR_DAMAGE = 60,
+    CREEPINGFEAR_ATTACK_PERIOD = 2.3,
+    CREEPINGFEAR_RANGE_1 = 3.0,
+    CREEPINGFEAR_RANGE_2 = 4.2,
+    CREEPINGFEAR_SPAWN_THRESH = 0, -- 10%
+
+    DREADEYE_SPEED = 7,
+    DREADEYE_HEALTH = 350,
+    DREADEYE_DAMAGE = 35,
+    DREADEYE_ATTACK_PERIOD = 2,
+    DREADEYE_RANGE_1 = 1.8,
+    DREADEYE_RANGE_2 = 1.8,
+    DREADEYE_SPAWN_THRESH = 0.20,
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
+TUNING.SANITY_BECOME_INSANE_THRESH = 40/200 -- 20%
+TUNING.SANITY_BECOME_SANE_THRESH  = 45/200 -- 22.5%
 TUNING.WET_FUEL_PENALTY = 0.20 
 
 -- [              DST Related Overrides                  ]

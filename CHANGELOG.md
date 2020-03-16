@@ -28,9 +28,9 @@
 
 * [x]  Bishop flees from attacks after shooting
 
-* [ ]  New shadow creatures (Dread Eye & Creeping Fear)
+* [x]  New shadow creatures (Dread Eye & Creeping Fear)
 
-* [ ]  Tweaked sanity ranges for shadow creature appearance
+* [x]  Tweaked sanity ranges for shadow creature appearance
 
 * [x]  Statue walls, signs, lava ponds, bone fragments hitbox pathing is ignored (now they have no collision)
 
