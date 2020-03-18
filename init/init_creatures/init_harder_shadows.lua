@@ -28,13 +28,13 @@ AddPlayerPostInit(function(inst)
 end)--]]
 
 -------------------------------------------------- Prefabs
-
+--[[
 PrefabFiles = { 
     "creepingfear",
     "dreadeye",
     "uncompromising_shadow_projectile_fx",
 }
-
+--]]
 -------------------------------------------------- Strings
 
 STRINGS = GLOBAL.STRINGS

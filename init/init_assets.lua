@@ -45,6 +45,12 @@ Assets = {
 	Asset("ANIM", "anim/dreadeye.zip"),
 	Asset("ANIM", "anim/uncompromising_shadow_projectile1_fx.zip"),
 	Asset("ANIM", "anim/uncompromising_shadow_projectile2_fx.zip"),
+	Asset("ANIM", "anim/hippo_attacks.zip"),
+	Asset("ANIM", "anim/hippo_basic.zip"),
+	Asset("ANIM", "anim/toadling.zip"),
+	
+	Asset("ANIM", "anim/hippo_water_attacks.zip"),
+	Asset("ANIM", "anim/hippo_water.zip"),
 	
 	Asset("SOUNDPACKAGE", "sound/dontstarve_DLC003.fev"), 
 	Asset( "SOUND", "sound/DLC003_sfx.fsb"), 
