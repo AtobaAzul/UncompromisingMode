@@ -98,6 +98,26 @@ local function RetargetFn(inst)
 		end
 end
 --]]
+
+local function SetFlameOn(inst, flameon, newtarget, freeze)
+    if flameon and not inst.flame_on then
+        inst.flame_on = true
+        if newtarget then
+            inst.sg:GoToState("taunt_pre")
+        end
+    elseif not flameon and inst.flame_on then
+        if freeze then
+            inst.flame_on = false
+            inst.Light:Enable(false)
+            inst.components.propagator:StopSpreading()
+            inst.AnimState:SetBuild("dragonfly_build")
+            inst.fire_build = false
+        elseif inst.components.combat and not inst.components.combat.target then
+            inst.sg:GoToState("flameoff")
+        end
+    end
+end
+
 local function RetargetFn(inst)
     if inst:GetTimeAlive() < 5 then return end
     if inst.components.sleeper and inst.components.sleeper:IsAsleep() then return end
@@ -124,7 +144,7 @@ local function KeepTargetFn(inst, target)
 end
 
 local function OnEntitySleep(inst)
-    if ((not inst:NearPlayerBase() and inst.SeenBase and not inst.components.combat:TargetIs(ThePlayer))
+    --[[if ((not inst:NearPlayerBase() and inst.SeenBase and not inst.components.combat:TargetIs(ThePlayer))
 	--if ((not inst:NearPlayerBase() and inst.SeenBase and not inst.components.combat:TargetIs(GetPlayer()))
         or inst.components.sleeper:IsAsleep() 
         or inst.KilledPlayer)
@@ -132,30 +152,36 @@ local function OnEntitySleep(inst)
         --Dragonfly has seen your base and been lured off! Despawn.
         --Or the dragonfly has killed you, you've been punished enough.
         --Only applies if not currently at a base
-        LeaveWorld(inst)
+        LeaveWorld(inst)--]]
+		local PlayerPosition = inst:GetNearestPlayer(true)
 		
-    elseif (not inst:NearPlayerBase() and not inst.SeenBase) and ThePlayer ~= nil 
+		if inst.shouldGoAway then
+        LeaveWorld(inst)
+		else
+   --[[ elseif (not inst:NearPlayerBase() and not inst.SeenBase) and ThePlayer ~= nil 
         or (inst.components.combat:TargetIs(ThePlayer) and not inst.KilledPlayer) then
-        --Get back in there Dragonfly! You still have work to do.
-        print("Porting Dragonfly to Player!")
-        local init_pos = inst:GetPosition()
-        local player_pos = ThePlayer:GetPosition()
-        local angle = ThePlayer:GetAngleToPoint(init_pos)
-        local offset = FindWalkableOffset(player_pos, angle*DEGREES, 30, 10)
-        local pos = player_pos + offset
-        
-        if pos and distsq(player_pos, init_pos) > 1600 then
-            --There's a crash if you teleport without the delay
-            if not inst.components.combat:TargetIs(ThePlayer) then
-                inst.components.combat:SetTarget(nil)
-            end
-            inst:DoTaskInTime(.1, function() 
-                inst.Transform:SetPosition(pos:Get())
-            end)
-        end
+        --Get back in there Dragonfly! You still have work to do.--]]
 		
-    elseif inst.shouldGoAway then
-        LeaveWorld(inst)
+		if PlayerPosition ~= nil then
+			print("Porting Dragonfly to Player!")
+			local init_pos = inst:GetPosition()
+			local player_pos = PlayerPosition:GetPosition()
+			local angle = PlayerPosition:GetAngleToPoint(init_pos)
+			local offset = FindWalkableOffset(player_pos, angle*DEGREES, 30, 10)
+			local pos = player_pos + offset
+			
+			if pos and distsq(player_pos, init_pos) > 1600 then
+				--There's a crash if you teleport without the delay
+				if not inst.components.combat:TargetIs(PlayerPosition) then
+					inst.components.combat:SetTarget(nil)
+				end
+				inst:DoTaskInTime(.1, function() 
+					inst.Transform:SetPosition(pos:Get())
+				end)
+				
+				SetFlameOn(inst, false)
+			end
+		end
     end
 end
 
@@ -299,26 +325,6 @@ local function OnNewState(inst, data)
 end
 --]]
 
-
-local function SetFlameOn(inst, flameon, newtarget, freeze)
-    if flameon and not inst.flame_on then
-        inst.flame_on = true
-        if newtarget then
-            inst.sg:GoToState("taunt_pre")
-        end
-    elseif not flameon and inst.flame_on then
-        if freeze then
-            inst.flame_on = false
-            inst.Light:Enable(false)
-            inst.components.propagator:StopSpreading()
-            inst.AnimState:SetBuild("dragonfly_build")
-            inst.fire_build = false
-        elseif inst.components.combat and not inst.components.combat.target then
-            inst.sg:GoToState("flameoff")
-        end
-    end
-end
-
 local function OnAttacked(inst, data)
     inst:ClearBufferedAction()
     inst.components.combat:SetTarget(data.attacker)
@@ -400,13 +406,16 @@ local function OnKill(inst, data)
         inst.components.combat.target = nil
         inst.last_kill_time = GetTime()
     end 
-
-    if data and data.victim == ThePlayer then
+	
+	local PlayerPosition = inst:GetNearestPlayer(true)
+	
+    if data and PlayerPosition ~= nil then 
+		if data.victim == PlayerPosition then
 	--if data and data.victim == GetPlayer() then
         --inst.KilledPlayer = true
-		SetFlameOn(inst, false)
-
-    end
+			SetFlameOn(inst, false)
+		end
+    end--]]
 end
 
 --[[

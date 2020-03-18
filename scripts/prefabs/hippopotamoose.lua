@@ -217,7 +217,7 @@ local function OnWaterChange(inst, onwater)
     end
 end
 
-
+--[[
 local function OnEntityWake(inst)
     inst.components.tiletracker:Start()
 end
@@ -225,7 +225,7 @@ end
 local function OnEntitySleep(inst)
     inst.components.tiletracker:Stop()
 end
-
+--]]
 
 local function MakeMoose(nightmare)
 	local inst = CreateEntity()
@@ -245,7 +245,7 @@ local function MakeMoose(nightmare)
     inst.Physics:SetCollisionCallback(oncollide)
 
     anim:SetBank("hippo")
-    anim:SetBuild("hippo_build")
+    anim:SetBuild("toadling")
     
     inst:AddTag("animal")
     --inst:AddTag("hostile")
@@ -291,9 +291,9 @@ local function MakeMoose(nightmare)
  
 
     inst:AddComponent("lootdropper")
-    inst:AddComponent("tiletracker")
+    --[[inst:AddComponent("tiletracker")
     inst.components.tiletracker:SetOnWaterChangeFn(OnWaterChange)
-    inst.components.lootdropper:SetChanceLootTable('hippopotamoose')
+    inst.components.lootdropper:SetChanceLootTable('hippopotamoose')--]]
  
     inst:AddComponent("inspectable")
     inst:AddComponent("knownlocations")
