@@ -27,3 +27,18 @@ env.AddPrefabPostInit("beequeen", function(inst)
 	inst:ListenForEvent("death", DisableThatStuff)
 	
 end)
+
+local function OnTagTimer(inst, data)
+	if data.name == "hivegrowth" then
+		TheWorld:RemoveTag("queenbeekilled")
+		print("fuck")
+	end
+end
+
+env.AddPrefabPostInit("beequeenhive", function(inst)
+	if not TheWorld.ismastersim then
+		return
+	end
+
+    inst:ListenForEvent("timerdone", OnTagTimer)
+end)

@@ -12,7 +12,7 @@ local assets=
 }
 
 local HIPPO_DAMAGE = 50
-local HIPPO_HEALTH = 500
+local HIPPO_HEALTH = 1000
 local HIPPO_ATTACK_PERIOD = 2
 local HIPPO_WALK_SPEED = 5
 local HIPPO_RUN_SPEED = 6
@@ -21,24 +21,20 @@ local HIPPO_TARGET_DIST = 12
 local prefabs =
 {
     "meat",
-    "hippoherd",
-    "hippo_antler",
+    --"hippoherd",
+    --"hippo_antler",
 }
 
 SetSharedLootTable( 'hippopotamoose',
 {
     {'meat',            1.00},
-    {'meat',            1.00},
-    {'meat',            1.00},
-    {'meat',            1.00},
---    {'hippo_antler',    1.00},	
+    {'meat',            0.50},
+    {'froglegs',            1.00},
+    {'froglegs',            0.50},
+    {'blue_cap',            0.50},
+    {'red_cap',            0.50},
+    {'green_cap',            0.50},
 })
-
-local sounds = 
-{
-    emerge = "Hamlet/creatures/seacreature_movement/water_emerge_med",
-    submerge = "Hamlet/creatures/seacreature_movement/water_submerge_med",
-}
 
 local SLEEP_DIST_FROMHOME = 1
 local SLEEP_DIST_FROMTHREAT = 20
@@ -73,20 +69,20 @@ local function ShouldWake(inst)
 end
 
 local function Retarget(inst)
-    if inst.components.herdmember
+   --[[ if inst.components.herdmember
        and inst.components.herdmember:GetHerd()
        and inst.components.herdmember:GetHerd().components.mood
-       and inst.components.herdmember:GetHerd().components.mood:IsInMood() then
+       and inst.components.herdmember:GetHerd().components.mood:IsInMood() then--]]
         return FindEntity(inst, TUNING.BEEFALO_TARGET_DIST, function(guy)
             return not guy:HasTag("hippopotamoose") and 
                     inst.components.combat:CanTarget(guy) and 
                     not guy:HasTag("wall")
         end)
-    end
+    --end
 end
 
 local function KeepTarget(inst, target)
-    if inst.components.herdmember
+    --[[if inst.components.herdmember
        and inst.components.herdmember:GetHerd()
        and inst.components.herdmember:GetHerd().components.mood
        and inst.components.herdmember:GetHerd().components.mood:IsInMood() then
@@ -94,7 +90,7 @@ local function KeepTarget(inst, target)
         if herd and herd.components.mood and herd.components.mood:IsInMood() then
             return distsq(Vector3(herd.Transform:GetWorldPosition() ), Vector3(inst.Transform:GetWorldPosition() ) ) < TUNING.BEEFALO_CHASE_DIST*TUNING.BEEFALO_CHASE_DIST
         end
-    end
+    end--]]
     return true
 end
 --[[
@@ -202,21 +198,6 @@ local function CreateWeapon(inst)
     inst.weapon = weapon
 end
 
-
-local function OnWaterChange(inst, onwater)
-    if onwater then
-        inst.onwater = true
-        inst.sg:GoToState("submerge")
-        inst.DynamicShadow:Enable(false)
-    --        inst.components.locomotor.walkspeed = 3
-    else
-        inst.onwater = false        
-        inst.sg:GoToState("emerge")
-        inst.DynamicShadow:Enable(true)
-    --        inst.components.locomotor.walkspeed = 4
-    end
-end
-
 --[[
 local function OnEntityWake(inst)
     inst.components.tiletracker:Start()
@@ -234,8 +215,6 @@ local function MakeMoose(nightmare)
 	local sound = inst.entity:AddSoundEmitter()
 	local shadow = inst.entity:AddDynamicShadow()
     inst.entity:AddNetwork()
-
-    inst.sounds = sounds
 
 	shadow:SetSize( 3, 1.25 )
     inst.Transform:SetFourFaced()
@@ -299,8 +278,8 @@ local function MakeMoose(nightmare)
     inst:AddComponent("knownlocations")
 
     inst:AddComponent("knownlocations")
-    inst:AddComponent("herdmember")
-    inst.components.herdmember:SetHerdPrefab("hippoherd")
+    --inst:AddComponent("herdmember")
+    --inst.components.herdmember:SetHerdPrefab("hippoherd")
  
     local brain = require "brains/hippopotamoosebrain"
     inst:SetBrain(brain)

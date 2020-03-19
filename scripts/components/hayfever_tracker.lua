@@ -50,7 +50,7 @@ local function OnSeasonTick(src, data)
 				v.components.hayfever:Enable()
 				elseif not TheWorld.state.isspring then
 					v.components.hayfever:Disable()
-					TheWorld:RemoveTag("queenbeekilled")
+					--TheWorld:RemoveTag("queenbeekilled")
 			end
     end
 	

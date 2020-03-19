@@ -1,55 +1,5 @@
 require("stategraphs/commonstates")
 
-function SpawnWaves(inst, numWaves, totalAngle, waveSpeed, wavePrefab, initialOffset, idleTime, instantActive, random_angle)
-	wavePrefab = wavePrefab or "rogue_wave"
-	totalAngle = math.clamp(totalAngle, 1, 360)
-
-    local pos = inst:GetPosition()
-    local startAngle = (random_angle and math.random(-180, 180)) or inst.Transform:GetRotation()
-    local anglePerWave = totalAngle/(numWaves - 1)
-
-	if totalAngle == 360 then
-		anglePerWave = totalAngle/numWaves
-	end
-
-    --[[
-    local debug_offset = Vector3(2 * math.cos(startAngle*DEGREES), 0, -2 * math.sin(startAngle*DEGREES)):Normalize()
-    inst.components.debugger:SetOrigin("debugy", pos.x, pos.z)
-    local debugpos = pos + (debug_offset * 2)
-    inst.components.debugger:SetTarget("debugy", debugpos.x, debugpos.z)
-    inst.components.debugger:SetColour("debugy", 1, 0, 0, 1)
-	--]]
-
-    for i = 0, numWaves - 1 do
-        local wave = SpawnPrefab(wavePrefab)
-
-        local angle = (startAngle - (totalAngle/2)) + (i * anglePerWave)
-        local rad = initialOffset or (inst.Physics and inst.Physics:GetRadius()) or 0.0
-        local total_rad = rad + wave.Physics:GetRadius() + 0.1
-        local offset = Vector3(math.cos(angle*DEGREES),0, -math.sin(angle*DEGREES)):Normalize()
-        local wavepos = pos + (offset * total_rad)
-
---        if inst:GetIsOnWater(wavepos:Get()) then
-	        wave.Transform:SetPosition(wavepos:Get())
-
-	        local speed = waveSpeed or 6
-	        wave.Transform:SetRotation(angle)
-	        wave.Physics:SetMotorVel(speed, 0, 0)
-	        wave.idle_time = idleTime or 5
-
-	        if instantActive then
-	        	wave.sg:GoToState("idle")
-	        end
-
-	        if wave.soundtidal then
---	        	wave.SoundEmitter:PlaySound("volcano/common/rogue_waves/"..wave.soundtidal)
-	        end
---        else
---        	wave:Remove()
---        end
-    end
-end
-
 local actionhandlers = 
 {
 }
@@ -95,10 +45,10 @@ local states=
         
        timeline = 
         {
-            TimeEvent(11*FRAMES, function(inst) inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/out") end ),
-            TimeEvent(26*FRAMES, function(inst) inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/in") end ),
-            TimeEvent(46*FRAMES, function(inst) inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/out") end ),
-            TimeEvent(57*FRAMES, function(inst) inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/in") end ),
+            TimeEvent(11*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/out") end ),
+            TimeEvent(26*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/in") end ),
+            TimeEvent(46*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/out") end ),
+            TimeEvent(57*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/in") end ),
 
 
         },
@@ -131,7 +81,7 @@ local states=
         timeline = 
         {
            TimeEvent(16*FRAMES, function(inst) inst.components.combat:DoAttack() end),
-           TimeEvent(13*FRAMES, function(inst) inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/leap_attack") end ),
+           TimeEvent(13*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/leap_attack") end ),
 
         },        
 
@@ -197,8 +147,8 @@ local states=
         
        timeline = 
         {
-            TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/leap_attack") end ),
-            ---TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/huff_out") end ),
+            TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/leap_attack") end ),
+            ---TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/huff_out") end ),
         },
         
         events=
@@ -228,7 +178,6 @@ local states=
                  inst.components.groundpounder:GroundPound()
                  inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
     else
-    SpawnWaves(inst, 12, 360, 4)
 	end
             inst.components.locomotor:Stop()
             inst.AnimState:PlayAnimation("jump_atk_pst")
@@ -253,8 +202,9 @@ local states=
 
          timeline = 
         {
-            TimeEvent(7*FRAMES, function(inst) inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/huff_in") end ),
-            TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/huff_out") end ),
+            TimeEvent(7*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/huff_in") end ),
+            TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/frog/grunt") end ),
+			--TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/huff_out") end ),
         },
         
         events=
@@ -276,14 +226,14 @@ local states=
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("taunt")
-            ---inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/taunt")
+            ---inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/taunt")
         end,
         
         timeline = 
         {   
 
-            TimeEvent(11*FRAMES, function(inst) inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/taunt") end ),
-            TimeEvent(29*FRAMES, function(inst) inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/attack") end ),
+            TimeEvent(11*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/toad_stool/roar") end ),
+            TimeEvent(29*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/attack") end ),
         --    TimeEvent(15*FRAMES,  function(inst) inst.SoundEmitter:PlaySound(inst.effortsound) end ),
         --    TimeEvent(27*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.soundpath .. "voice") end ),
         },
@@ -328,7 +278,7 @@ local states=
         },
 
         onexit = function(inst)
-            inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/walk")
+            inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/step_soft")
         end,
     },
 
@@ -353,7 +303,6 @@ local states=
         {
             TimeEvent(10*FRAMES, function(inst) 
                     inst.SoundEmitter:PlaySound(inst.sounds.submerge) 
-                    SpawnWaves(inst, 6, 360, 2, "wave_ripple")
                  end),
         },
        
@@ -383,36 +332,20 @@ CommonStates.AddWalkStates(states,
                 inst.components.locomotor:WalkForward()
             end ),              
              TimeEvent(10*FRAMES, function(inst) 
-                inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/in") 
-                if not inst.onwater then
-                    -- do land stuff    
-                else
-                    -- do water stuff                    
-                end                
+                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/in") 
+                      
             end ),
             TimeEvent(19*FRAMES, function(inst)
                 
-                if not inst.onwater then
-                inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/walk")
-                    -- do land stuff    
-                else
-                    -- do water stuff  
-                end  
+                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/step_soft")
+                
             end ),
             TimeEvent(20*FRAMES, function(inst)
 		    --    inst.SoundEmitter:PlaySound(inst.effortsound)
            --     inst.SoundEmitter:PlaySound(inst.soundpath .. "land")
                 --       :Shake(shakeType, duration, speed, scale)
-                if not inst.onwater then
                     if inst:HasTag("lightshake") then
-                        TheCamera:Shake("VERTICAL", 0.3, 0.05, 0.05)                        
-                    else
-                        TheCamera:Shake("VERTICAL", 0.5, 0.05, 0.1)
-                    end
-                else
-                    if inst:HasTag("wavemaker") then
-                        SpawnWaves(inst, 6, 360, 2, "wave_ripple") -- initialOffset, idleTime, instantActive, random_angle)
-                    end
+                        TheCamera:Shake("VERTICAL", 0.3, 0.05, 0.05)
                 end
                 inst.Physics:Stop()
             end ),
@@ -432,38 +365,21 @@ CommonStates.AddRunStates(states,{
                 inst.components.locomotor:WalkForward()
             end ),     
             TimeEvent(10*FRAMES, function(inst) 
-                inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/in") 
-                if not inst.onwater then
-                    -- do land stuff    
-                else
-                    -- do water stuff                    
-                end                
+                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/in")           
             end ),
             TimeEvent(19*FRAMES, function(inst)
-                
-                if not inst.onwater then
-                inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/walk")
-                    -- do land stuff    
-                else
-                    -- do water stuff  
-                end  
+                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/step_soft")
             end ),
 
             TimeEvent(20*FRAMES, function(inst)
           --      inst.SoundEmitter:PlaySound(inst.effortsound)
            --     inst.SoundEmitter:PlaySound(inst.soundpath .. "land")
                 --       :Shake(shakeType, duration, speed, scale)
-                if not inst.onwater then
                     if inst:HasTag("lightshake") then
                         TheCamera:Shake("VERTICAL", 0.3, 0.05, 0.05)                        
                     else
                         TheCamera:Shake("VERTICAL", 0.5, 0.05, 0.1)
                     end
-                else
-                    if inst:HasTag("wavemaker") then
-                        SpawnWaves(inst, 6, 360, 2, "wave_ripple") -- initialOffset, idleTime, instantActive, random_angle)
-                    end
-                end
                 inst.Physics:Stop()
             end ),
     },
@@ -477,7 +393,7 @@ CommonStates.AddSleepStates(states,
     },
     
 	sleeptimeline = {
-        TimeEvent(33*FRAMES, function(inst) inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/huff_in") end),
+        TimeEvent(33*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/huff_in") end),
 	},
 })
 
@@ -485,18 +401,18 @@ CommonStates.AddCombatStates(states,
 {
     attacktimeline = 
     {
-        TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/attack") end),
+        TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/attack") end),
         TimeEvent(17*FRAMES, function(inst)
                                 inst.components.combat:DoAttack()
                              end),
     },
     hittimeline = 
     {
-        TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/hit") end),
+        TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/toad_stool/hit") end),
     },
     deathtimeline = 
     {
-        TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("Hamlet/creatures/enemy/hippo/death") end),
+        TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/death") end),
     },
 })
 
