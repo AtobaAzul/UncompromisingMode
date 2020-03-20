@@ -133,11 +133,13 @@ local states =
 
     State{
         name = "disguise",
-        tags = { "disguise" }, -- , "busy" 
+        tags = { "disguise", "busy" }, -- , "busy" 
 
         onenter = function(inst)
-            inst.AnimState:PlayAnimation("disguise")
+            --inst.AnimState:PlayAnimation("disappear")
+            inst.components.locomotor:StopMoving()
             inst.Physics:Stop()
+			inst:Disguise()
         end,
 
         events =
@@ -151,7 +153,6 @@ local states =
         tags = { "busy" },
 
         onenter = function(inst)
-            inst.AnimState:PlayAnimation("appear")
             inst.Physics:Stop()
             PlayExtendedSound(inst, "appear")
         end,
@@ -163,17 +164,31 @@ local states =
     },
 
     State{
-        name = "disguise_atatck",
-        tags = { "disguise" }, -- , "busy" 
+        name = "disguise_attack",
+        tags = { "attack", "disguise", "busy" }, -- , "busy" 
 
         onenter = function(inst)
-            inst.AnimState:PlayAnimation("disguise")
             inst.Physics:Stop()
+            inst.components.combat:StartAttack()
+            inst.AnimState:PlayAnimation("atk_pre")
+            inst.AnimState:PushAnimation("atk", false)
+            inst.sg:GoToState("taunt")
+			fading(inst, 0.40)
+            inst:DoTaskInTime(0.25, function() SpikeAoE(inst) end)
+            inst.atkcount = 3
+            PlayExtendedSound(inst, "attack_grunt")
         end,
-
+		
         events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("disguise") end)
+            EventHandler("animqueueover", function(inst)
+                if math.random() < 0.333 then
+                    inst.components.combat:SetTarget(nil)
+                    inst.sg:GoToState("taunt")
+                else
+                    inst.sg:GoToState("idle")
+                end
+            end),
         },
     },
 
@@ -190,7 +205,7 @@ local states =
             inst.atkcount = inst.atkcount - 1
             if inst.atkcount <= 0 then
                 inst.sg:GoToState("taunt")
-                inst:DoTaskInTime(0.5, function() SpikeAoE(inst) end)
+                inst:DoTaskInTime(0.25, function() SpikeAoE(inst) end)
                 inst.atkcount = 3
             end 
             PlayExtendedSound(inst, "attack_grunt")
@@ -246,7 +261,7 @@ local states =
                 local max_tries = 4
                 for k = 1, max_tries do
                     local x, y, z = inst.Transform:GetWorldPosition()
-                    local offset = 10
+                    local offset = 15
                     x = x + math.random(2 * offset) - offset
                     z = z + math.random(2 * offset) - offset
                     if TheWorld.Map:IsPassableAtPoint(x, y, z) then
@@ -255,7 +270,11 @@ local states =
                     end
                 end
 
-                inst.sg:GoToState("appear")
+				if math.random() <= 0.33 then
+					inst.sg:GoToState("disguise")
+				else
+					inst.sg:GoToState("appear")
+				end
             end),
         },
     },

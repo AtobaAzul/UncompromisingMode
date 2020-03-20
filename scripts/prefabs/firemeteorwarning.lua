@@ -166,7 +166,7 @@ local function firemeteorfn()
 			
 			local x, y, z = inst:GetPosition():Get()
 			
-			local ents = TheSim:FindEntities(x, y, z, TUNING.METEOR_RADIUS, nil, {"dragonfly", "mock_dragonfly"}) --, NON_SMASHABLE_TAGS, SMASHABLE_TAGS
+			local ents = TheSim:FindEntities(x, y, z, TUNING.METEOR_RADIUS, nil, {"dragonfly", "mock_dragonfly", "shadow"}) --, NON_SMASHABLE_TAGS, SMASHABLE_TAGS
 			for i, v in ipairs(ents) do
 					SpawnPrefab("firemeteor_splashhit")
 					if v.components.combat ~= nil then

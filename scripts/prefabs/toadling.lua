@@ -366,9 +366,8 @@ local function MakeMoose(nightmare)
  
 
     inst:AddComponent("lootdropper")
-    --[[inst:AddComponent("tiletracker")
-    inst.components.tiletracker:SetOnWaterChangeFn(OnWaterChange)
-    inst.components.lootdropper:SetChanceLootTable('hippopotamoose')--]]
+	
+    inst.components.lootdropper:SetChanceLootTable('toadling')
  
     inst:AddComponent("inspectable")
 

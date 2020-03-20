@@ -8,6 +8,41 @@ local assets =
     Asset("ANIM", "anim/dreadeye.zip"), -----------------------------------------
 }
 
+local shadowrock_assets =
+{
+    Asset("ANIM", "anim/rock.zip"),
+    Asset("MINIMAP_IMAGE", "rock"),
+}
+
+local shadowtree_assets =
+{
+    Asset("ANIM", "anim/evergreen_new.zip"), --build
+    Asset("ANIM", "anim/evergreen_new_2.zip"), --build
+    Asset("ANIM", "anim/evergreen_tall_old.zip"),
+    Asset("ANIM", "anim/evergreen_short_normal.zip"),
+
+    Asset("SOUND", "sound/forest.fsb"),
+    Asset("MINIMAP_IMAGE", "evergreen_lumpy"),
+
+    Asset("MINIMAP_IMAGE", "evergreen_burnt"),
+    Asset("MINIMAP_IMAGE", "evergreen_stump"),
+}
+
+local shadowgrass_assets =
+{
+    Asset("ANIM", "anim/grass.zip"),
+    Asset("ANIM", "anim/grass1.zip"),
+    Asset("ANIM", "anim/grass_diseased_build.zip"),
+    Asset("SOUND", "sound/common.fsb"),
+}
+
+local shadowsapling_assets =
+{
+    Asset("ANIM", "anim/sapling.zip"),
+    Asset("ANIM", "anim/sapling_diseased_build.zip"),
+    Asset("SOUND", "sound/common.fsb"),
+}
+
 local sounds =
 {
     attack = "dontstarve/sanity/creature1/attack",
@@ -97,6 +132,60 @@ local function OnDeath(inst, data)
     end
 end
 
+local function ShadowSuprise(inst)
+	if inst.isdisguised and not inst.components.health:IsDead() then 
+		inst.sg:GoToState("disguise_attack")
+		
+		if inst.suprise_task ~= nil then
+			inst.suprise_task:Cancel()
+			inst.suprise_task = nil
+		end
+		
+		inst.isdisguised = false
+		inst.components.health:DoDelta(100)
+	end
+end
+
+local function Disguise(inst)
+	if not inst.components.health:IsDead() then
+		local morphchance = math.random(1, 4)
+		if morphchance == 1 then
+			SpawnPrefab("shadow_rock").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		elseif morphchance == 2 then
+			SpawnPrefab("shadow_tree").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		elseif morphchance == 3 then
+			SpawnPrefab("shadow_grass").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		else
+			SpawnPrefab("shadow_sapling").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		end
+		
+		inst.isdisguised = true
+		
+		if inst.suprise_task ~= nil then
+			inst.suprise_task:Cancel()
+			inst.suprise_task = nil
+		end
+		
+		inst.suprise_task = inst:DoPeriodicTask(20, ShadowSuprise)
+	end
+end
+
+local function onnear(inst, target)
+    if inst.isdisguised and not inst.components.health:IsDead() then
+		inst.sg:GoToState("disguise_attack")
+		inst.isdisguised = false
+		
+		if inst.suprise_task ~= nil then
+			inst.suprise_task:Cancel()
+			inst.suprise_task = nil
+		end
+	end
+end
+
+local function OnEntitySleep(inst)
+	inst.sg:GoToState("disguise_attack")
+end
+
 local function OnSave(inst, data)
     data.atkcount = inst.atkcount or nil
 end
@@ -131,6 +220,8 @@ local function fn()
     inst:AddTag("hostile")
     inst:AddTag("shadow")
     inst:AddTag("notraptrigger")
+	
+	inst.suprise_task = nil
 
     inst.AnimState:SetBank("dreadeye")
     inst.AnimState:SetBuild("dreadeye")
@@ -142,6 +233,8 @@ local function fn()
     inst:AddComponent("transparentonsanity_dreadeye")
 
     inst.entity:SetPristine()
+	
+	inst.isdisguised = false
 
     if not TheWorld.ismastersim then
         return inst
@@ -166,7 +259,12 @@ local function fn()
 
     inst:AddComponent("health")
     inst.components.health.nofadeout = true
-
+	
+	inst:AddComponent("playerprox")
+    inst.components.playerprox:SetDist(4, 5) --set specific values
+    inst.components.playerprox:SetOnPlayerNear(onnear)
+    inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
+	
     inst:AddComponent("combat")
     inst.components.combat:SetAttackPeriod(TUNING.DSTU.DREADEYE_ATTACK_PERIOD)
     inst.components.combat:SetRange(TUNING.DSTU.DREADEYE_RANGE_1, TUNING.DSTU.DREADEYE_RANGE_2)
@@ -185,6 +283,11 @@ local function fn()
     inst:ListenForEvent("newcombattarget", OnNewCombatTarget)
     inst:ListenForEvent("death", OnDeath)
 
+	
+	inst.Disguise = Disguise
+	
+    inst.OnEntitySleep = OnEntitySleep
+
     --inst.OnSave = OnSave
     --inst.OnPreLoad = OnPreLoad
 
@@ -195,5 +298,115 @@ local function fn()
     return inst
 end
 
+local function onnear(inst, target)
+    SpawnPrefab("shadow_puff").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	inst.SoundEmitter:PlaySound("dontstarve/maxwell/disappear")
+	SpawnPrefab("shadow_puff_large_back").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	SpawnPrefab("shadow_puff_large_front").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	inst:DoTaskInTime(0, function() inst:Remove() end)
+end
 
-return Prefab("dreadeye", fn, assets)
+local function shadowdisguise_fn(bank, build, anim, icon, tag, multcolour)
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddMiniMapEntity()
+    inst.entity:AddNetwork()
+
+    if icon ~= nil then
+        inst.MiniMapEntity:SetIcon(icon)
+    end
+
+    inst.AnimState:SetBank(bank)
+    inst.AnimState:SetBuild(build)
+
+    if type(anim) == "table" then
+        for i, v in ipairs(anim) do
+            if i == 1 then
+                inst.AnimState:PlayAnimation(v)
+            else
+                inst.AnimState:PushAnimation(v, false)
+            end
+        end
+    else
+        inst.AnimState:PlayAnimation(anim)
+    end
+
+    MakeSnowCoveredPristine(inst)
+
+    inst:AddComponent("transparentonsanity_dreadeye_objects")
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst:AddComponent("playerprox")
+    inst.components.playerprox:SetDist(4, 5) --set specific values
+    inst.components.playerprox:SetOnPlayerNear(onnear)
+    inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
+--[[
+    inst:AddComponent("inspectable")
+    inst.components.inspectable.nameoverride = "ROCK"--]]
+    MakeSnowCovered(inst)
+	
+	inst:DoTaskInTime(20, function() 
+	SpawnPrefab("shadow_puff").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	inst.SoundEmitter:PlaySound("dontstarve/maxwell/disappear")
+	SpawnPrefab("shadow_puff_large_back").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	SpawnPrefab("shadow_puff_large_front").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	inst:DoTaskInTime(0, function() inst:Remove() end) 
+	end)
+
+    return inst
+end
+
+
+local function shadowrockfn()
+    local inst = shadowdisguise_fn("rock", "rock", "full", "rock.png")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    return inst
+end
+
+local function shadowtreefn()
+    local inst = shadowdisguise_fn("evergreen_short", "evergreen_new", "idle_normal", "evergreen.png")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    return inst
+end
+
+local function shadowgrassfn()
+    local inst = shadowdisguise_fn("grass", "grass1", "idle", "grass.png")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    return inst
+end
+
+local function shadowsaplingfn()
+    local inst = shadowdisguise_fn("sapling", "sapling", "sway", "sapling.png")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    return inst
+end
+
+return Prefab("dreadeye", fn, assets),
+		Prefab("shadow_rock", shadowrockfn, shadowrock_assets),
+		Prefab("shadow_tree", shadowtreefn, shadowtree_assets),
+		Prefab("shadow_grass", shadowgrassfn, shadowgrass_assets),
+		Prefab("shadow_sapling", shadowsaplingfn, shadowsapling_assets)
