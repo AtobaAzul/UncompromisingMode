@@ -74,11 +74,11 @@ configuration_options =
 	{
 		name = "gamemode",
 		label = "Mode",
-		hover = "Choose gamemode. 1) Original Uncompromising version (default settings). 2) Mod is enabled after first Fuelweaver is defeated. 3) Choose custom settings.",
+		hover = "No Other Gamemodes Available as of yet. Sorry!", --"Choose gamemode. 1) Original Uncompromising version (default settings). 2) Mod is enabled after first Fuelweaver is defeated. 3) Choose custom settings.",
 		options =
 		{
 			{description = "Uncompromising", data = 0}, -- TODO: When this is selected, disable the below ones (gray them out)
-			{description = "Custom", data = 2}, --TODO: On custom, enable editing the below settings
+			--{description = "Custom", data = 2}, --TODO: On custom, enable editing the below settings
 		},
 		default = 0,
 	},
@@ -220,8 +220,8 @@ configuration_options =
 	},
 	{
 		name = "weather start date",
-		label = "Starting date of new weather hazards.",
-		hover = "Snowstorms, Hayfever, Fire, and Acid Rain.",
+		label = "Start Date for New Weather.",
+		hover = "Snowstorms, Hayfever, and Acid Rain.",
 		options =
 		{
 			{description = "First Year", data = 20},

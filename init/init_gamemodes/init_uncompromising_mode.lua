@@ -79,7 +79,7 @@ local require = GLOBAL.require
 		modimport("init/init_food/init_crockpot")
 	end
 
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("rat_raids") == true or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("rat_raids") == true) then
 		modimport("init/init_ratraid")
 	end
