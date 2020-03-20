@@ -60,7 +60,7 @@
 
 * [x]  Pigs and bunnies defend their houses when hammered
 
-* [x]  Meaty stew is 120s cooktime
+* [ ]  Meaty stew is 120s cooktime
 
 * [x]  Pierogi spoils in 10 days instead of 20
 
