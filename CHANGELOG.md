@@ -216,6 +216,12 @@
 
 * [x] Small chance to spawn mosquito's when picking juicy berry bushes
 
+* [x] The Toadstool will now occasionally spawn mushroom sprouts on the overworld, these sprouts will cause constant, acid rain, which will burn the player and turn plants diseased
+
+* [x] NEW MOB: Toadlings, large Toad creatures who will spawn with and defend the mushroom sprouts from being chopped down
+
+* [x] Sickly Toads will fall from the sky if the sprouts are left alone for long enough
+
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
 ### To vote on features: Visit [#mod_polls](https://discordapp.com/channels/623649948130344960/623661746216763393) on Discord
