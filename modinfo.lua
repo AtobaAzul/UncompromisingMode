@@ -114,11 +114,11 @@ configuration_options =
 			{description = "Enabled", data = true},
 		},
 		default = true,
-	},
+	},--]]
 	{
 		name = "harder_shadows",
 		label = "Harder Nightmare Creatures",
-		hover = "New troubles rest withinin your mind.",
+		hover = "New troubles rest within your mind.",
 		options =
 		{
 			{description = "Disabled", data = false},
@@ -126,7 +126,7 @@ configuration_options =
 		},
 		default = true,
 	},
-	{
+	--[[{
 		name = "harder_weather",
 		label = "Harder Weather",
 		hover = "Nature becomes unforgiving.",
