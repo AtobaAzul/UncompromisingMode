@@ -206,7 +206,15 @@
 
 * [x] Killing shadows regains 10 sanity instead of 15
 
-* [x] Earthquake debris during summer has a chance to split the earth, creating a flame geyser. Lavae will spawn from the geysers.
+* [x] Earthquake debris during summer has a chance to split the earth, creating a flame geyser. Lavae will spawn from the geysers
+
+* [x] Killing the Bee Queen will stop hayfever until the Queen Hive respawns
+
+* [x] Telltale Hearts now cost human meat, which is found inside skeletons
+
+* [x] Wendy's healing tonic recipe changed to use 50 health instead of a telltale heart
+
+* [x] Small chance to spawn mosquito's when picking juicy berry bushes
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 

@@ -59,38 +59,111 @@ env.AddPrefabPostInit("berrybush", function(inst)
 
 end)
 
-local function OnWinter(inst)
-    if TheWorld.state.iswinter then
-		inst.components.childspawner:StopSpawning()
-    else
-		inst.components.childspawner:StartSpawning()
+local function setberries(inst, pct)
+    if inst._setberriesonanimover then
+        inst._setberriesonanimover = nil
+        inst:RemoveEventCallback("animover", setberries)
     end
-end
 
-local function ReturnChildren(inst)
-    for k, child in pairs(inst.components.childspawner.childrenoutside) do
-        if child.components.homeseeker ~= nil then
-            child.components.homeseeker:GoHome()
+    local berries =
+        (pct == nil and "") or
+        (pct >= .9 and "berriesmost") or
+        (pct >= .33 and "berriesmore") or
+        "berries"
+
+    for i, v in ipairs({ "berries", "berriesmore", "berriesmost" }) do
+        if v == berries then
+            inst.AnimState:Show(v)
+        else
+            inst.AnimState:Hide(v)
         end
-        child:PushEvent("gohome")
     end
 end
 
-local function OnIsDay(inst, isday)
-    if isday ~= inst.dayspawn then
-        inst.components.childspawner:StopSpawning()
-        ReturnChildren(inst)
-    elseif not TheWorld.state.iswinter then
-        inst.components.childspawner:StartSpawning()
+local function setberriesonanimover(inst)
+    if inst._setberriesonanimover then
+        setberries(inst, nil)
+    else
+        inst._setberriesonanimover = true
+        inst:ListenForEvent("animover", setberries)
     end
 end
 
-local function OnInit(inst)
-    inst.task = nil
-    inst:WatchWorldState("isday", OnIsDay)
-    inst:WatchWorldState("seasontick", OnWinter)
-    OnIsDay(inst, TheWorld.state.isday)
-    OnWinter(inst)
+local function cancelsetberriesonanimover(inst)
+    if inst._setberriesonanimover then
+        setberries(inst, nil)
+    end
+end
+
+local function shake(inst)
+    if inst.components.pickable ~= nil and
+        not inst.components.pickable:CanBePicked() and
+        inst.components.pickable:IsBarren() then
+        inst.AnimState:PlayAnimation("shake_dead")
+        inst.AnimState:PushAnimation("dead", false)
+    else
+        inst.AnimState:PlayAnimation("shake")
+        inst.AnimState:PushAnimation("idle")
+    end
+    cancelsetberriesonanimover(inst)
+end
+
+local function spawnperd(inst)
+    if inst:IsValid() then
+        local perd = SpawnPrefab("perd")
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local angle = math.random() * 2 * PI
+        perd.Transform:SetPosition(x + math.cos(angle), 0, z + math.sin(angle))
+        perd.sg:GoToState("appear")
+        perd.components.homeseeker:SetHome(inst)
+        shake(inst)
+    end
+end
+
+local function onpicked2fn(inst, picker)
+    if inst.components.pickable ~= nil then
+        --V2C: nil cycles_left means unlimited picks, so use max value for math
+        --local old_percent = inst.components.pickable.cycles_left ~= nil and (inst.components.pickable.cycles_left + 1) / inst.components.pickable.max_cycles or 1
+        --setberries(inst, old_percent)
+        if inst.components.pickable:IsBarren() then
+            inst.AnimState:PlayAnimation("idle_to_dead")
+            inst.AnimState:PushAnimation("dead", false)
+            setberries(inst, nil)
+        else
+            inst.AnimState:PlayAnimation("picked")
+            inst.AnimState:PushAnimation("idle")
+            setberriesonanimover(inst)
+        end
+
+        if inst.components.diseaseable ~= nil then
+            if inst.components.diseaseable:IsDiseased() then
+                SpawnDiseasePuff(inst)
+            elseif inst.components.diseaseable:IsBecomingDiseased() then
+                SpawnDiseasePuff(inst)
+                if picker ~= nil then
+                    picker:PushEvent("pickdiseasing")
+                end
+            end
+        end
+    end
+
+    if not (picker:HasTag("berrythief") or inst._noperd) and math.random() < (IsSpecialEventActive(SPECIAL_EVENTS.YOTG) and TUNING.YOTG_PERD_SPAWNCHANCE or TUNING.PERD_SPAWNCHANCE) then
+        inst:DoTaskInTime(3 + math.random() * 3, spawnperd)
+    end
+	
+	if inst.components.pickable ~= nil then
+		if math.random() <= 0.1 then
+			local x, y, z = inst.Transform:GetWorldPosition()
+			SpawnPrefab("mosquito").Transform:SetPosition(x, y, z)
+			if math.random() <= 0.75 then
+				SpawnPrefab("mosquito").Transform:SetPosition(x, y, z)
+			end
+			if math.random() <= 0.75 then
+				SpawnPrefab("mosquito").Transform:SetPosition(x, y, z)
+			end
+		end
+		
+	end
 end
 
 env.AddPrefabPostInit("berrybush_juicy", function(inst)
@@ -98,7 +171,11 @@ env.AddPrefabPostInit("berrybush_juicy", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-
+	
+	if inst.components.pickable ~= nil then
+		inst.components.pickable.onpickedfn = onpicked2fn
+	end
+--[[
 	inst:AddComponent("childspawner")
     inst.components.childspawner.childname = "mosquito"
     inst.components.childspawner:SetRegenPeriod(TUNING.POND_REGEN_TIME)
@@ -107,6 +184,6 @@ env.AddPrefabPostInit("berrybush_juicy", function(inst)
     inst.components.childspawner:StartRegen()
     inst.dayspawn = false
 	
-    inst.task = inst:DoTaskInTime(0, OnInit)
+    inst.task = inst:DoTaskInTime(0, OnInit)--]]
 
 end)
