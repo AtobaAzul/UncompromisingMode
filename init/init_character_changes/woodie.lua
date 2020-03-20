@@ -9,11 +9,11 @@ AllRecipes = GLOBAL.AllRecipes
 STRINGS = GLOBAL.STRINGS
 TECH = GLOBAL.TECH
 CUSTOM_RECIPETABS = GLOBAL.CUSTOM_RECIPETABS
-
+--[[
 Recipe("wereitem_goose", {Ingredient("monstermeat", 3), Ingredient("seeds", 3)}, RECIPETABS.MAGIC, TECH.MAGIC_TWO, nil, nil, nil, nil, "werehuman")
 Recipe("wereitem_beaver", {Ingredient("monstermeat", 3), Ingredient("log", 2)}, RECIPETABS.MAGIC, TECH.MAGIC_TWO, nil, nil, nil, nil, "werehuman")
 Recipe("wereitem_moose", {Ingredient("monstermeat", 3), Ingredient("cutgrass", 2)}, RECIPETABS.MAGIC, TECH.MAGIC_TWO, nil, nil, nil, nil, "werehuman")
-
+--]]
 -----------------------------------------------------------------
 -- If goose is over water, increase wetness
 -----------------------------------------------------------------

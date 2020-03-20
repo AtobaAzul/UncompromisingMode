@@ -82,7 +82,7 @@ configuration_options =
 		},
 		default = 0,
 	},
-	{
+	--[[{
 		name = "harder_recipes",
 		label = "Harder Recipes",
 		hover = "Some recipes become modified to be harder to craft.",
@@ -136,7 +136,7 @@ configuration_options =
 			{description = "Enabled", data = true},
 		},
 		default = true,
-	},
+	},--]]
 	{
 		name = "rat_raids",
 		label = "Rat Raids",
@@ -148,7 +148,7 @@ configuration_options =
 		},
 		default = true,
 	},
-	{
+	--[[{
 		name = "rare_food",
 		label = "Rare Food",
 		hover = "Food is harder to find now.",
@@ -181,7 +181,7 @@ configuration_options =
 		},
 		default = false,
 	},
-	--[[{
+	{
 		name = "hound_increase",
 		label = "Hound Number Increase",
 		hover = "The hounds grow hungry.",

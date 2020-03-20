@@ -30,6 +30,11 @@ local GIANTS =
         radius = 75,
 		power = 1.25,
     },
+	["mock_dragonfly"] =
+    {
+        radius = 75,
+		power = 1.25,
+    },
 	["leif"] =
     {
         radius = 75,

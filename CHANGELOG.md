@@ -68,7 +68,7 @@
 
 * [x]  Bird's stomach can only withstand 4 monster meat before dying out (vary her diet with normal meat to cure it)
 
-* [x]  Woodies Kitschy idols require presthatilator to prototype
+* [ ]  Woodies Kitschy idols require presthatilator to prototype
 
 * [x]  WX will take more damage from rain (3x)
 
@@ -96,7 +96,7 @@
 
 * [x]  Cactus, stone fruits and spiky bushs don't grow in winter
 
-* [x]  Pig king has guards protecting him
+* [ ]  Pig king has guards protecting him
 
 * [x]  Pig guards now break free by attacking walls that entrap them
 
@@ -111,8 +111,6 @@
 * [x]  Walrus has more health and ice doggos
 
 * [x]  Haunting pig torches has a low chance of spawning a pig guard now
-
-* [x]  Only winona can power her generators
 
 * [x]  Bee Queen now has an AOE that ignores hives and bees
 
