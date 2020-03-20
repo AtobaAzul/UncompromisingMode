@@ -1,5 +1,7 @@
-require "brains/hippopotamoosebrain"
-require "stategraphs/SGhippopotamoose"
+require "brains/toadlingbrain"
+require "stategraphs/SGtoadling"
+
+local easing = require("easing")
 
 local assets=
 {
@@ -25,7 +27,7 @@ local prefabs =
     --"hippo_antler",
 }
 
-SetSharedLootTable( 'hippopotamoose',
+SetSharedLootTable( 'toadling',
 {
     {'meat',            1.00},
     {'meat',            0.50},
@@ -41,6 +43,104 @@ local SLEEP_DIST_FROMTHREAT = 20
 local MAX_CHASEAWAY_DIST = 40
 local MAX_TARGET_SHARES = 5
 local SHARE_TARGET_DIST = 40
+
+
+
+local function NoHoles(pt)
+    return not TheWorld.Map:IsPointNearHole(pt)
+end
+
+local function FindMushroomBombTargets(inst)
+    --ring with a random gap
+    local maxbombs = inst.mushroombomb_variance > 0 and inst.mushroombomb_count + math.random(inst.mushroombomb_variance) or inst.mushroombomb_count
+    local delta = (1 + math.random()) * PI / maxbombs
+    local offset = 2 * PI * math.random()
+    local angles = {}
+    for i = 1, maxbombs do
+        table.insert(angles, i * delta + offset)
+    end
+
+    --shorten range when mobbed by NPC
+    local pt = inst:GetPosition()
+    local maxrange = TUNING.TOADSTOOL_MUSHROOMBOMB_MAX_RANGE
+    for i = 1, 2 do
+        local closerange = (TUNING.TOADSTOOL_MUSHROOMBOMB_MIN_RANGE + maxrange) * .5
+        local targets = TheSim:FindEntities(pt.x, 0, pt.z, closerange, { "_combat", "_health" }, { "player", "INLIMBO" })
+        if #targets < inst.components.grouptargeter.num_targets then
+            break
+        end
+        maxrange = closerange
+    end
+
+    local range = GetRandomMinMax(TUNING.TOADSTOOL_MUSHROOMBOMB_MIN_RANGE, maxrange)
+    local targets = {}
+    while #angles > 0 do
+        local theta = table.remove(angles, math.random(#angles))
+        local offset = FindWalkableOffset(pt, theta, range, 12, true, true, NoHoles)
+        if offset ~= nil then
+            offset.x = offset.x + pt.x
+            offset.y = 0
+            offset.z = offset.z + pt.z
+            table.insert(targets, offset)
+        end
+    end
+
+    return targets
+end
+
+local function SpawnMushroomBombProjectile(inst, targets)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local projectile = SpawnPrefab("mushroombomb_projectile")
+    projectile.Transform:SetPosition(x, y, z)
+    projectile.components.entitytracker:TrackEntity("toadstool", inst)
+
+    --V2C: scale the launch speed based on distance
+    --     because 15 does not reach our max range.
+    local targetpos = table.remove(targets, 1)
+    local dx = targetpos.x - x
+    local dz = targetpos.z - z
+    local rangesq = dx * dx + dz * dz
+    local maxrange = 15
+    local bigNum = 10 -- 13 + (math.random()*4)
+    local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
+    projectile.components.complexprojectile:SetHorizontalSpeed(speed)
+    projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+
+    if #targets > 0 then
+        inst:DoTaskInTime(FRAMES, SpawnMushroomBombProjectile, targets)
+    end
+end
+
+local function DoMushroomBomb(inst)
+    local targets = FindMushroomBombTargets(inst)
+    if #targets > 0 then
+        inst:DoTaskInTime(FRAMES, SpawnMushroomBombProjectile, targets)
+    end
+end
+
+local function UpdatePlayerTargets(inst)
+    local toadd = {}
+    local toremove = {}
+    local pos = inst.components.knownlocations:GetLocation("home")
+
+    for k, v in pairs(inst.components.grouptargeter:GetTargets()) do
+        toremove[k] = true
+    end
+    for i, v in ipairs(FindPlayersInRange(pos.x, pos.y, pos.z, TUNING.TOADSTOOL_DEAGGRO_DIST, true)) do
+        if toremove[v] then
+            toremove[v] = nil
+        else
+            table.insert(toadd, v)
+        end
+    end
+
+    for k, v in pairs(toremove) do
+        inst.components.grouptargeter:RemoveTarget(k)
+    end
+    for i, v in ipairs(toadd) do
+        inst.components.grouptargeter:AddTarget(v)
+    end
+end
 
 local function ShouldSleep(inst)
     local homePos = inst.components.knownlocations:GetLocation("home")
@@ -69,12 +169,14 @@ local function ShouldWake(inst)
 end
 
 local function Retarget(inst)
+
+    UpdatePlayerTargets(inst)
    --[[ if inst.components.herdmember
        and inst.components.herdmember:GetHerd()
        and inst.components.herdmember:GetHerd().components.mood
        and inst.components.herdmember:GetHerd().components.mood:IsInMood() then--]]
         return FindEntity(inst, TUNING.BEEFALO_TARGET_DIST, function(guy)
-            return not guy:HasTag("hippopotamoose") and 
+            return not guy:HasTag("toadstool") and not guy:HasTag("frog") and
                     inst.components.combat:CanTarget(guy) and 
                     not guy:HasTag("wall")
         end)
@@ -135,7 +237,7 @@ local function OnAttacked(inst, data)
     inst:AddTag("enraged")
     local attacker = data and data.attacker
     inst.components.combat:SetTarget(attacker)
-    inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("hippopotamoose") end, MAX_TARGET_SHARES)
+    inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("toadstool") end, MAX_TARGET_SHARES)
 end
 
 local function HitShake()
@@ -227,7 +329,8 @@ local function MakeMoose(nightmare)
     anim:SetBuild("toadling")
     
     inst:AddTag("animal")
-    --inst:AddTag("hostile")
+    inst:AddTag("hostile")
+    inst:AddTag("toadstool")
     inst:AddTag("hippopotamoose")
     inst:AddTag("huff_idle")    
     inst:AddTag("wavemaker")        
@@ -260,6 +363,8 @@ local function MakeMoose(nightmare)
     inst.components.combat:SetAttackPeriod(HIPPO_ATTACK_PERIOD)
     --inst.components.combat.playerdamagepercent = 2
 
+    inst:AddComponent("grouptargeter")
+
     inst:AddComponent("groundpounder")
     inst.components.groundpounder.destroyer = true
     inst.components.groundpounder.damageRings = 2
@@ -281,19 +386,36 @@ local function MakeMoose(nightmare)
     --inst:AddComponent("herdmember")
     --inst.components.herdmember:SetHerdPrefab("hippoherd")
  
-    local brain = require "brains/hippopotamoosebrain"
+    local brain = require "brains/toadlingbrain"
     inst:SetBrain(brain)
-    inst:SetStateGraph("SGhippopotamoose") 
+    inst:SetStateGraph("SGtoadling") 
+	
+    inst.DoMushroomBomb = DoMushroomBomb
+	
+    inst.mushroombomb_count = 6
+    inst.mushroombomb_variance = 0
+    inst.mushroombomb_maxchain = 1
+    inst.mushroombomb_cd = TUNING.TOADSTOOL_MUSHROOMBOMB_CD
  
     inst:DoTaskInTime(2*FRAMES, function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()), true) end)
 
+	inst:DoTaskInTime(0, function() 
+		inst.sg:GoToState("enter_attack")
+		local x, y, z = inst.Transform:GetWorldPosition()
+		SpawnPrefab("sleepbomb_burst").Transform:SetPosition(x, y, z)
+		
+		inst:DoTaskInTime(0.1, function() 
+			inst.sg:GoToState("enter_attack")
+		end)
+	end)
+	
     MakeLargeBurnableCharacter(inst, "swap_fire")
     MakeMediumFreezableCharacter(inst, "spring")
     
     inst:ListenForEvent("attacked", OnAttacked)
 
     inst.OnEntityWake = OnEntityWake
-    inst.OnEntitySleep = OnEntitySleep    
+    inst.OnEntitySleep = OnEntitySleep
 
     CreateWeapon(inst)
 
@@ -302,4 +424,4 @@ local function MakeMoose(nightmare)
     return inst
 end
 
-return Prefab("chessboard/hippopotamoose", function() return MakeMoose() end , assets, prefabs)
+return Prefab("chessboard/toadling", function() return MakeMoose() end , assets, prefabs)

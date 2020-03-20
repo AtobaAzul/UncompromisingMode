@@ -164,21 +164,105 @@ local states=
         tags = {"busy"},
         
         onenter = function(inst, target)
-	local map = TheWorld.Map
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local ground = map:GetTile(map:GetTileCoordsAtPoint(x, y, z))
-	if ground ~= GROUND.OCEAN_COASTAL and
-	ground ~= GROUND.OCEAN_COASTAL_SHORE and
-	ground ~= GROUND.OCEAN_SWELL and
-	ground ~= GROUND.OCEAN_ROUGH and
-	ground ~= GROUND.OCEAN_BRINEPOOL and
-	ground ~= GROUND.OCEAN_BRINEPOOL_SHORE and
-	ground ~= GROUND.OCEAN_HAZARDOUS then	
+                --inst.components.groundpounder:GroundPound()
+				local x, y, z = inst:GetPosition():Get()
+			
+				local ents = TheSim:FindEntities(x, y, z, TUNING.METEOR_RADIUS, nil, {"frog", "toadstool"})
+				for i, v in ipairs(ents) do
+						SpawnPrefab("firemeteor_splashhit")
+						if v.components.combat ~= nil then
+						v.components.combat:GetAttacked(inst, TUNING.METEOR_DAMAGE * 2, nil)
+						end
+				end
+			
+                inst:DoMushroomBomb()
+                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
+            inst.components.locomotor:Stop()
+            inst.AnimState:PlayAnimation("jump_atk_pst")
+        end,
+
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("taunt") end),
+        },
+    },
 	
-                 inst.components.groundpounder:GroundPound()
-                 inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
-    else
-	end
+	State{
+            
+        name = "enter_pre",
+        tags = {"attack", "canrotate", "busy","leapattack"},
+        
+        onenter = function(inst, target)
+            inst.components.locomotor:Stop()                    
+            inst.AnimState:PlayAnimation("jump_atk_pre")
+        end,
+            
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("enter_attack") end),
+        },
+    },
+
+
+    State{
+
+        name = "enter_attack",
+        tags = {"attack", "canrotate", "busy", "leapattack"},
+        
+        onenter = function(inst, data)
+            inst.components.locomotor:Stop()
+            inst.Physics:SetActive(false)
+            inst.components.locomotor:EnableGroundSpeedMultiplier(false)
+
+            inst.components.combat:StartAttack()
+            inst.AnimState:PlayAnimation("jump_atk_loop")            
+        end,
+
+        onupdate = function(inst)
+            
+        end,
+
+        onexit = function(inst)
+            inst.Physics:SetActive(true)
+            --inst.Physics:ClearMotorVelOverride()
+            inst.components.locomotor:Stop()
+            inst.components.locomotor:EnableGroundSpeedMultiplier(true)
+            inst.sg.statemem.startpos = nil
+            inst.sg.statemem.targetpos = nil
+        end,
+        
+       timeline = 
+        {
+            TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/leap_attack") end ),
+            ---TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/huff_out") end ),
+        },
+        
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("enter_attack_pst") end),
+        },
+    },
+
+
+    State{
+
+        name = "enter_attack_pst",
+        tags = {"busy"},
+        
+        onenter = function(inst, target)
+                --inst.components.groundpounder:GroundPound()
+				local x, y, z = inst:GetPosition():Get()
+			
+				local ents = TheSim:FindEntities(x, y, z, TUNING.METEOR_RADIUS, nil, {"frog", "toadstool"})
+				for i, v in ipairs(ents) do
+						SpawnPrefab("firemeteor_splashhit")
+						if v.components.combat ~= nil then
+						v.components.combat:GetAttacked(inst, TUNING.METEOR_DAMAGE * 2, nil)
+						end
+				end
+			
+                inst:DoMushroomBomb()
+                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
             inst.components.locomotor:Stop()
             inst.AnimState:PlayAnimation("jump_atk_pst")
         end,
@@ -419,4 +503,4 @@ CommonStates.AddCombatStates(states,
 CommonStates.AddFrozenStates(states)
 
     
-return StateGraph("hippopotamoose", states, events, "idle", actionhandlers)
+return StateGraph("toadling", states, events, "idle", actionhandlers)

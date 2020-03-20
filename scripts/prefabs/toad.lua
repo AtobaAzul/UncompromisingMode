@@ -16,8 +16,8 @@ SetSharedLootTable('toad',
     {'sporecloud_toad', 1.000},
 })
 
-STRINGS.TOAD = "Toadling"
-STRINGS.NAMES.TOAD  = "Toadling"
+STRINGS.TOAD = "Sickly Toad"
+STRINGS.NAMES.TOAD  = "Sickly Toad"
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.TOAD = "That toads looking rather sick."
 
 local brain = require "brains/toadbrain"
@@ -29,7 +29,8 @@ local function retargetfn(inst)
                 return guy.components.inventory ~= nil
             end
         end,
-        {"_combat","_health"} -- see entityreplica.lua
+        {"_combat","_health"}, -- see entityreplica.lua
+        {"frog","toadstool"} -- see entityreplica.lua
         )
     end
 end
@@ -98,8 +99,8 @@ local function fn()
     inst.components.health:SetMaxHealth(TUNING.FROG_HEALTH + 20)
 
     inst:AddComponent("combat")
-    inst.components.combat:SetDefaultDamage(TUNING.FROG_DAMAGE + 5)
-    inst.components.combat:SetAttackPeriod(TUNING.FROG_ATTACK_PERIOD)
+    inst.components.combat:SetDefaultDamage(TUNING.FROG_DAMAGE)
+    inst.components.combat:SetAttackPeriod(TUNING.FROG_ATTACK_PERIOD * 0.9)
     inst.components.combat:SetRetargetFunction(3, retargetfn)
 
     inst.components.combat.onhitotherfn = OnHitOther

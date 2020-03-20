@@ -18,7 +18,7 @@ local STOP_RUN_AWAY_DIST = 8
 local WANDER_DIST = 20
 local MAX_JUMP_ATTACK_RANGE = 9
 
-local HippopotamooseBrain = Class(Brain, function(self, inst)
+local ToadlingBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
 
@@ -102,7 +102,7 @@ local function dojumpAttack(inst)
     end
 end
 
-function HippopotamooseBrain:OnStart()
+function ToadlingBrain:OnStart()
     local root = PriorityNode(
     {
 
@@ -130,4 +130,4 @@ function HippopotamooseBrain:OnStart()
     self.bt = BT(self.inst, root)
 end
 
-return HippopotamooseBrain
+return ToadlingBrain

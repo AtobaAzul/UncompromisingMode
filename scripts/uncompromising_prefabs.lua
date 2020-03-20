@@ -37,6 +37,6 @@ return {
 	"dreadeye",
 	"creepingfear",
 	"uncompromising_shadow_projectile_fx",
-	"hippopotamoose",
+	"toadling",
 	"hippoherd",
 }
