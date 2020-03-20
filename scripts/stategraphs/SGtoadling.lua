@@ -56,7 +56,7 @@ local states=
         events=
         {
             EventHandler("animover", function(inst) 
-                if math.random()<0.05 and inst:HasTag("huff_idle") then
+                if math.random() < 0.5 and inst:HasTag("huff_idle") then
                     inst.sg:GoToState("huff")                 
                 else
                     inst.sg:GoToState("idle")                 
@@ -169,7 +169,6 @@ local states=
 			
 				local ents = TheSim:FindEntities(x, y, z, TUNING.METEOR_RADIUS, nil, {"frog", "toadstool"})
 				for i, v in ipairs(ents) do
-						SpawnPrefab("firemeteor_splashhit")
 						if v.components.combat ~= nil then
 						v.components.combat:GetAttacked(inst, TUNING.METEOR_DAMAGE * 2, nil)
 						end
@@ -253,13 +252,12 @@ local states=
                 --inst.components.groundpounder:GroundPound()
 				local x, y, z = inst:GetPosition():Get()
 			
-				local ents = TheSim:FindEntities(x, y, z, TUNING.METEOR_RADIUS, nil, {"frog", "toadstool"})
+				--[[local ents = TheSim:FindEntities(x, y, z, TUNING.METEOR_RADIUS, nil, {"frog", "toadstool"})
 				for i, v in ipairs(ents) do
-						SpawnPrefab("firemeteor_splashhit")
 						if v.components.combat ~= nil then
 						v.components.combat:GetAttacked(inst, TUNING.METEOR_DAMAGE * 2, nil)
 						end
-				end
+				end--]]
 			
                 inst:DoMushroomBomb()
                 inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
@@ -280,14 +278,17 @@ local states=
         onenter = function(inst)
             inst.Physics:Stop()
             inst.SoundEmitter:KillSound("charge")
-           
+
             inst.AnimState:PlayAnimation("idle_huff")
         end,
 
          timeline = 
         {
             TimeEvent(7*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/huff_in") end ),
-            TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/frog/grunt") end ),
+            TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/frog/grunt") 
+			local x, y, z = inst.Transform:GetWorldPosition()
+			SpawnPrefab("disease_puff").Transform:SetPosition(x, y, z)
+			end ),
 			--TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/huff_out") end ),
         },
         

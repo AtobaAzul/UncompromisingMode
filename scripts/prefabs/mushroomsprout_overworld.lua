@@ -123,9 +123,9 @@ local function stop_burning(inst)
 end
 
 local function chop_down_tree(inst, worker)
-	if inst.components.childspawner ~= nil then
+	--[[if inst.components.childspawner ~= nil then
         --inst.components.childspawner:ReleaseAllChildren(worker, "toad")
-    end
+    end--]]
 
     if inst._destroy then
         inst._destroy = nil
@@ -176,7 +176,7 @@ local function chop_tree(inst, chopper)
 
 
 	local x, y, z = inst.Transform:GetWorldPosition()
-	local ents = TheSim:FindEntities(x, y, z, TUNING.LEIF_REAWAKEN_RADIUS, { "toad" })
+	local ents = TheSim:FindEntities(x, y, z, TUNING.LEIF_REAWAKEN_RADIUS, { "toadling" })
         for i, v in ipairs(ents) do
             if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
                 v:DoTaskInTime(math.random(), WakeUpLeif)
@@ -221,7 +221,7 @@ local function OnInit(inst)
     inst.SoundEmitter:PlaySound("dontstarve/creatures/together/toad_stool/mushtree_grow")
 	inst.components.timer:StartTimer("acidrainer", 10)
 
-	inst.components.childspawner:StartSpawning()
+	--inst.components.childspawner:StartSpawning()
 end
 
 local function SpawnDiseasePuff(inst)
@@ -296,7 +296,7 @@ local function fn(inst)
 	inst.components.diseaseable:RestartNearbySpread()
 	inst:DoTaskInTime(23 * FRAMES, SpawnDiseasePuff)
 		
-	inst:AddComponent("childspawner")
+--[[inst:AddComponent("childspawner")
     inst.components.childspawner.childname = "toad"
     inst.components.childspawner:SetRegenPeriod(30)
     inst.components.childspawner:SetSpawnPeriod(30)
@@ -306,7 +306,7 @@ local function fn(inst)
     inst.components.childspawner.emergencychildname = "toad"
     inst.components.childspawner.emergencychildrenperplayer = 1
     inst.components.childspawner:SetMaxEmergencyChildren(1)
-
+--]]
 	inst:AddComponent("timer")
 	inst:ListenForEvent("timerdone", ontimerdone)
 
@@ -327,8 +327,8 @@ local function fn(inst)
     MakeHauntableWorkAndIgnite(inst)
 	
 	MakeSmallPropagator(inst)
-    MakeMediumBurnable(inst, TUNING.TREE_BURN_TIME)
-    inst.components.burnable:SetOnBurntFn(OnBurnt)
+    --[[MakeMediumBurnable(inst, TUNING.TREE_BURN_TIME)
+    inst.components.burnable:SetOnBurntFn(OnBurnt)--]]
 
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad

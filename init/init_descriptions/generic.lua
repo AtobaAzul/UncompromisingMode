@@ -31,6 +31,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "There's the source of the pestilence!"
     DESCRIBE.TOADLING = "It sure likes those weird trees."
+	DESCRIBE.TOAD = "That toads looking rather sick."
 	
     DESCRIBE.GASMASK = "Now I can breath anywhere."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY

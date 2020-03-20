@@ -58,7 +58,11 @@ local function SpawnAcidMushrooms(spawnpt)
     nil
 
     if offset ~= nil then
-        SpawnAt("mushroomsprout_overworld", spawnpt, nil, offset)
+		if #TheSim:FindEntities(x, 0, z, 50, { "toadling" --[[TODO?]]}) < 2 then
+			SpawnAt("toadling", spawnpt, nil, offset)
+		else
+			SpawnAt("mushroomsprout_overworld", spawnpt, nil, offset)
+		end
     end
 end
 

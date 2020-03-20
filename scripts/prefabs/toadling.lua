@@ -13,18 +13,9 @@ local assets=
 	Asset("SOUND", "sound/chess.fsb"),
 }
 
-local HIPPO_DAMAGE = 50
-local HIPPO_HEALTH = 1000
-local HIPPO_ATTACK_PERIOD = 2
-local HIPPO_WALK_SPEED = 5
-local HIPPO_RUN_SPEED = 6
-local HIPPO_TARGET_DIST = 12
-
 local prefabs =
 {
     "meat",
-    --"hippoherd",
-    --"hippo_antler",
 }
 
 SetSharedLootTable( 'toadling',
@@ -306,7 +297,6 @@ local function OnEntityWake(inst)
 end
 
 local function OnEntitySleep(inst)
-    inst.components.tiletracker:Stop()
 end
 --]]
 
@@ -331,11 +321,12 @@ local function MakeMoose(nightmare)
     inst:AddTag("animal")
     inst:AddTag("hostile")
     inst:AddTag("toadstool")
+    inst:AddTag("toadling")
     inst:AddTag("hippopotamoose")
     inst:AddTag("huff_idle")    
     inst:AddTag("wavemaker")        
     inst:AddTag("lightshake")
-    inst:AddTag("groundpoundimmune")
+    inst:AddTag("antlion_sinkhole_blocker")
 
      inst.entity:SetPristine()
 
@@ -344,8 +335,8 @@ local function MakeMoose(nightmare)
 	end
  
     inst:AddComponent("locomotor")
-    inst.components.locomotor.walkspeed = HIPPO_WALK_SPEED
-    inst.components.locomotor.runspeed =  HIPPO_RUN_SPEED 
+    inst.components.locomotor.walkspeed = TUNING.DSTU.TOADLING_WALK_SPEED
+    inst.components.locomotor.runspeed =  TUNING.DSTU.TOADLING_RUN_SPEED 
  
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetWakeTest(ShouldWake)
@@ -358,9 +349,9 @@ local function MakeMoose(nightmare)
     inst.components.combat:SetRetargetFunction(3, Retarget)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(HIPPO_HEALTH)
-    inst.components.combat:SetDefaultDamage(HIPPO_DAMAGE)
-    inst.components.combat:SetAttackPeriod(HIPPO_ATTACK_PERIOD)
+    inst.components.health:SetMaxHealth(TUNING.DSTU.TOADLING_HEALTH)
+    inst.components.combat:SetDefaultDamage(TUNING.DSTU.TOADLING_DAMAGE)
+    inst.components.combat:SetAttackPeriod(TUNING.DSTU.TOADLING_ATTACK_PERIOD)
     --inst.components.combat.playerdamagepercent = 2
 
     inst:AddComponent("grouptargeter")
@@ -380,7 +371,6 @@ local function MakeMoose(nightmare)
     inst.components.lootdropper:SetChanceLootTable('hippopotamoose')--]]
  
     inst:AddComponent("inspectable")
-    inst:AddComponent("knownlocations")
 
     inst:AddComponent("knownlocations")
     --inst:AddComponent("herdmember")

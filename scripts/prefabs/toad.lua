@@ -16,10 +16,6 @@ SetSharedLootTable('toad',
     {'sporecloud_toad', 1.000},
 })
 
-STRINGS.TOAD = "Sickly Toad"
-STRINGS.NAMES.TOAD  = "Sickly Toad"
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.TOAD = "That toads looking rather sick."
-
 local brain = require "brains/toadbrain"
 
 local function retargetfn(inst)

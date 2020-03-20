@@ -161,11 +161,7 @@ TUNING.DSTU =
 	
 	--Weather Start Date
     WEATHERHAZARD_START_DATE = 22,
-	
-	
-	
-	
-	
+
 	HARDER_SHADOWS = GetModConfigData("harder_shadows"),
     MAX_DISTANCE_TO_SHADOWS = 1225, -- 35^2
 
@@ -185,29 +181,13 @@ TUNING.DSTU =
     DREADEYE_RANGE_2 = 1.8,
     DREADEYE_SPAWN_THRESH = 0.20,
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	TOADLING_DAMAGE = 50,
+	TOADLING_HEALTH = 1000,
+	TOADLING_ATTACK_PERIOD = 2,
+	TOADLING_WALK_SPEED = 5,
+	TOADLING_RUN_SPEED = 6,
+	TOADLING_TARGET_DIST = 12,
+
 }
 
 TUNING.SANITY_BECOME_INSANE_THRESH = 40/200 -- 20%
