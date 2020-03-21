@@ -99,7 +99,7 @@ local function crawlinghorror_postinit(inst)
     end
     inst.components.lootdropper:SetLoot({ "nightmarefuel" })
     inst.components.lootdropper:SetChanceLootTable(nil)
-    inst.sanityreward = TUNING.SANITY_MED * 0.8
+    inst.sanityreward = TUNING.SANITY_SMALL
 end
 
 local function terrorbeak_postinit(inst)

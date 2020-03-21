@@ -35,6 +35,24 @@ AddPrefabPostInit("butterflywings", function (inst)
     end
 end)
 
+AddPrefabPostInit("cactus_meat", function (inst)
+    if inst ~= nil and inst.components.edible ~= nil then
+        inst.components.edible.healthvalue = -8
+    end
+end)
+
+AddPrefabPostInit("cactus_meat_cooked", function (inst)
+    if inst ~= nil and inst.components.edible ~= nil then
+        inst.components.edible.healthvalue = -5
+    end
+end)
+
+AddPrefabPostInit("green_cap_cooked", function (inst)
+    if inst ~= nil and inst.components.edible ~= nil then
+        inst.components.edible.healthvalue = -5
+    end
+end)
+
 local ANTIHISTAMINES = 
 {
     "honey",
