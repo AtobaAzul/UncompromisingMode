@@ -432,6 +432,13 @@ local function OnDead(inst)
     TheWorld:PushEvent("hasslerkilled", inst)
 end
 
+local function CheckTarget(inst)
+	if not inst.components.combat:HasTarget() and not inst.components.health:IsDead() then
+		SetFlameOn(inst, false)
+	end
+	
+	inst:DoTaskInTime(10, CheckTarget)
+end
 
 local function fn(Sim)
     local inst = CreateEntity()
@@ -563,6 +570,8 @@ local function fn(Sim)
     inst.components.freezable.wearofftime = 1.5
     inst:ListenForEvent("freeze", OnFreeze)
     inst:ListenForEvent("unfreeze", OnUnfreeze)
+	
+	inst:DoTaskInTime(10, CheckTarget)
 
     inst.SeenBase = false
     inst.NearPlayerBase = NearPlayerBase

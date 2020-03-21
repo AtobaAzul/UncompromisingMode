@@ -12,8 +12,8 @@ local prefabs =
 
 SetSharedLootTable('toad',
 {
-    {'froglegs', 1.000},
-    {'sporecloud_toad', 1.000},
+    {'froglegs', 1.0},
+    {'sporecloud_toad', .5},
 })
 
 local brain = require "brains/toadbrain"
