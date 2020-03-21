@@ -176,7 +176,7 @@ local function chop_tree(inst, chopper)
 
 
 	local x, y, z = inst.Transform:GetWorldPosition()
-	local ents = TheSim:FindEntities(x, y, z, TUNING.LEIF_REAWAKEN_RADIUS, { "toadling" })
+	local ents = TheSim:FindEntities(x, y, z, TUNING.LEIF_REAWAKEN_RADIUS * 1.5, { "toadling" })
         for i, v in ipairs(ents) do
             if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
                 v:DoTaskInTime(math.random(), WakeUpLeif)
