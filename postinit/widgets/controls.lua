@@ -9,7 +9,7 @@ AddClassPostConstruct( "widgets/controls", function(self, inst)
 	self.inst:ListenForEvent("updatepollen", function(inst, data) return self.pollenover:UpdateState(data.sneezetime) end, self.owner)
 	self.owner:ListenForEvent("seasontick", function() return self:SeasonHide() end, self.owner)
 end)
-
+--[[
 AddClassPostConstruct("screens/playerhud",function(inst)
 	local SnowOver = require("widgets/snowover")
 	local fn =inst.CreateOverlays
@@ -39,4 +39,4 @@ AddPrefabPostInit("player_classified", function(inst)
 	
 	inst.snowoveron = GLOBAL.net_bool(inst.GUID, "snow.snowover", "snowdirty")
 	inst:ListenForEvent("snowdirty", OnSpy)
-end)
+end)--]]

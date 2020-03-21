@@ -101,8 +101,18 @@ local require = GLOBAL.require
 		modimport("init/init_weather/init_acid_rain_disease")
 		modimport("init/init_weather/init_overworld_toadstool")
 		modimport("init/init_weather/init_harder_weather")
-		modimport("init/init_weather/init_snowstorm")
+		--modimport("init/init_weather/init_snowstorm")
 		modimport("init/init_weather/init_snowstorm_structures")
+	end
+	
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("snowstorms") == true or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("snowstorms") == true) then
+		modimport("init/init_weather/init_snowstorm")
+	end
+	
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("hayfever") == true or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("hayfever") == true) then
+		modimport("init/init_weather/init_hayfever")
 	end
 	
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or

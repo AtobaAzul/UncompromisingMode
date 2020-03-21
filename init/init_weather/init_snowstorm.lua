@@ -1,3 +1,5 @@
+local require = GLOBAL.require
+
 local function GetSandstormLevel(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, 4, {"wall"})
@@ -33,4 +35,35 @@ AddPlayerPostInit(function(inst)
 	SetInstanceFunctions(inst)
 	
 	--inst:AddComponent("firerain")
+end)
+
+AddClassPostConstruct("screens/playerhud",function(inst)
+	local SnowOver = require("widgets/snowover")
+	local fn =inst.CreateOverlays
+	function inst:CreateOverlays(owner)
+		fn(self, owner)
+		self.snowover = self.overlayroot:AddChild(SnowOver(owner))
+	end
+	
+end)
+
+local function OnSpy(inst)
+--print("on")
+        inst._parent.HUD.snowover:SnowOn()
+		inst._parent:PushEvent("snowon")
+		
+end
+
+local function OffSpy(inst)
+--print("off")
+	if inst._parent ~= nil then
+		ThePlayer.HUD.snowover:Show()
+        inst._parent.HUD.snowover:SnowOn()
+    end
+end
+
+AddPrefabPostInit("player_classified", function(inst)
+	
+	inst.snowoveron = GLOBAL.net_bool(inst.GUID, "snow.snowover", "snowdirty")
+	inst:ListenForEvent("snowdirty", OnSpy)
 end)

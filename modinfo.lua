@@ -208,9 +208,20 @@ configuration_options =
 		default = true,
 	},
 	{
-		name = "caveless",
-		label = "[IMPORTANT] CAVES",
-		hover = "ENABLE IF YOU HAVE CAVES ENABLED, VISE VERSA. >VERY< IMPORTANT.",
+		name = "snowstorms",
+		label = "Snowstorms",
+		hover = "Snow Overlay, Snow Piles, begone!",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
+	},
+	{
+		name = "hayfever",
+		label = "Hayfever",
+		hover = "I promise it was reworked to be better!",
 		options =
 		{
 			{description = "Disabled", data = false},
@@ -228,5 +239,16 @@ configuration_options =
 			{description = "Second Year", data = 55},
 		},
 		default = 20,
+	},
+	{
+		name = "caveless",
+		label = "[IMPORTANT] CAVES",
+		hover = "ENABLE IF YOU HAVE CAVES ENABLED, VISE VERSA. >VERY< IMPORTANT.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
 	},
 }
