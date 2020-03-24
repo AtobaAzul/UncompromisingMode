@@ -104,7 +104,15 @@ local states =
         {
             
             TimeEvent(1* FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/jump") end),
-            TimeEvent(22*FRAMES, function(inst) inst.components.groundpounder:GroundPound() end),
+            TimeEvent(22*FRAMES, function(inst) 
+				local x, y, z = inst:GetPosition():Get()
+				local ents = TheSim:FindEntities(x, y, z, TUNING.METEOR_RADIUS, nil, {"snowish", "shadow"})
+				for i, v in ipairs(ents) do
+					if v.components.combat ~= nil then
+					v.components.combat:GetAttacked(inst, TUNING.METEOR_DAMAGE * 2, nil)
+					end
+				end 
+			end),
             
             TimeEvent(20* FRAMES, function(inst) 
                 if inst.components.burnable:IsBurning() then

@@ -94,16 +94,18 @@ end
 function TrySpawning(v)	
 
 	--if math.random(1, 3000) == 1 then
-	if math.random() <= 0.25 then
-			--local spawn_pt = GetSpawnPoint(origin_pt, PLAYER_CHECK_DISTANCE + 5)
-		local x1, y1, z1 = v.Transform:GetWorldPosition()
-			
-		local ents5 = TheSim:FindEntities(x1, y1, z1, 3, nil, nil, { "snowpileradius"})
-		local ents6 = TheSim:FindEntities(x1, y1, z1, 8, nil, nil, { "fire" })
-			--local ents = TheSim:FindEntities(x, y, z, 40, {"wall" "player" "campfire"})
-		if TheWorld.Map:IsAboveGroundAtPoint(x1, y1, z1) and #ents5 < 1 and #ents6 < 1 then
-			local snowpilespawn = SpawnPrefab("snowpile")
-			snowpilespawn.Transform:SetPosition(x1, 0.05, z1)
+	if TheWorld.state.iswinter then
+		if math.random() <= 0.25 then
+				--local spawn_pt = GetSpawnPoint(origin_pt, PLAYER_CHECK_DISTANCE + 5)
+			local x1, y1, z1 = v.Transform:GetWorldPosition()
+				
+			local ents5 = TheSim:FindEntities(x1, y1, z1, 3, nil, nil, { "snowpileradius"})
+			local ents6 = TheSim:FindEntities(x1, y1, z1, 8, nil, nil, { "fire" })
+				--local ents = TheSim:FindEntities(x, y, z, 40, {"wall" "player" "campfire"})
+			if TheWorld.Map:IsAboveGroundAtPoint(x1, y1, z1) and #ents5 < 1 and #ents6 < 1 then
+				local snowpilespawn = SpawnPrefab("snowpile")
+				snowpilespawn.Transform:SetPosition(x1, 0.05, z1)
+			end
 		end
 	end
 		
@@ -119,23 +121,24 @@ local function SnowpileChance(inst, self)
     for i, v in ipairs(ents4) do
         TrySpawning(v)
     end
+	if TheWorld.state.iswinter then
+		if ents4 == nil or 0 then
+			--if math.random(1, 2500) == 1 then
+			local xrandom = math.random(-25, 25)
+			local zrandom = math.random(-25, 25)
 
-	if ents4 == nil or 0 then
-		--if math.random(1, 2500) == 1 then
-		local xrandom = math.random(-25, 25)
-		local zrandom = math.random(-25, 25)
+			local ents7 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 6, nil, nil, { "snowpileradius"})
+			local ents8 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 8, nil, nil, { "fire" })
 
-		local ents7 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 6, nil, nil, { "snowpileradius"})
-		local ents8 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 8, nil, nil, { "fire" })
-
-				--local ents = TheSim:FindEntities(x, y, z, 40, {"wall" "player" "campfire"})
-		if TheWorld.Map:IsAboveGroundAtPoint(x + xrandom, y, z + zrandom) and #ents7 < 1 and #ents8 < 1 then
-			local snowpilespawnplayer = SpawnPrefab("snowpile")
-			--snowpilespawnplayer.Transform:SetPosition(x + math.random(-20, 20), 0, z + math.random(-20, 20))
-		
-			snowpilespawnplayer.Transform:SetPosition(x + xrandom, 0, z + zrandom)
+					--local ents = TheSim:FindEntities(x, y, z, 40, {"wall" "player" "campfire"})
+			if TheWorld.Map:IsAboveGroundAtPoint(x + xrandom, y, z + zrandom) and #ents7 < 1 and #ents8 < 1 then
+				local snowpilespawnplayer = SpawnPrefab("snowpile")
+				--snowpilespawnplayer.Transform:SetPosition(x + math.random(-20, 20), 0, z + math.random(-20, 20))
+			
+				snowpilespawnplayer.Transform:SetPosition(x + xrandom, 0, z + zrandom)
+			end
+		--end
 		end
-	--end
 	end
 	
 	if self.task ~= nil then
