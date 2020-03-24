@@ -109,7 +109,7 @@ local states =
 				local ents = TheSim:FindEntities(x, y, z, TUNING.METEOR_RADIUS, nil, {"snowish", "shadow"})
 				for i, v in ipairs(ents) do
 					if v.components.combat ~= nil then
-					v.components.combat:GetAttacked(inst, TUNING.METEOR_DAMAGE * 2, nil)
+					v.components.combat:GetAttacked(inst, TUNING.METEOR_DAMAGE * 1.25, nil)
 					end
 				end 
 			end),
