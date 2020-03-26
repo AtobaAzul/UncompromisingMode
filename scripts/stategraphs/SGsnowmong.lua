@@ -58,7 +58,7 @@ local states =
             inst.AnimState:PlayAnimation("enter")
             ---inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/emerge")
             inst:SetState("above")
-            inst.SoundEmitter:KillSound("move")
+            inst.SoundEmitter:KillSound("walkloop")
         end,
 
         events =
@@ -76,7 +76,7 @@ local states =
         
         timeline =
         {
-            TimeEvent(16* FRAMES,function (inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/emerge") end),
+            TimeEvent(16* FRAMES,function (inst) inst.SoundEmitter:PlaySound("UCSounds/Grub/emerge") end),
         },
 
     },
@@ -103,7 +103,7 @@ local states =
         timeline = 
         {
             
-            TimeEvent(1* FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/jump") end),
+            TimeEvent(1* FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Grub/jump") end),
             TimeEvent(22*FRAMES, function(inst) 
 				local x, y, z = inst:GetPosition():Get()
 				local ents = TheSim:FindEntities(x, y, z, TUNING.METEOR_RADIUS, nil, {"snowish", "shadow"})
@@ -118,13 +118,13 @@ local states =
                 if inst.components.burnable:IsBurning() then
                     inst.components.burnable:Extinguish()
                 end
-                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/submerge") 
+                inst.SoundEmitter:PlaySound("UCSounds/Grub/submerge") 
             end),
 
-            TimeEvent(33* FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/dig") end),
-            TimeEvent(39* FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/dig") end),
-            TimeEvent(49* FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/dig") end),
-            TimeEvent(54* FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/dig") end),
+            TimeEvent(33* FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Grub/dig") end),
+            TimeEvent(39* FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Grub/dig") end),
+            TimeEvent(49* FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Grub/dig") end),
+            TimeEvent(54* FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Grub/dig") end),
         },
     },
 
@@ -135,7 +135,7 @@ local states =
 
         onenter = function(inst, playanim)
             inst.Physics:Stop()
-            inst.SoundEmitter:KillSound("move")
+            inst.SoundEmitter:KillSound("walkloop")
 
             if playanim then
                 inst.AnimState:PlayAnimation(playanim)
@@ -162,8 +162,8 @@ local states =
 
         onenter = function(inst)
             inst.AnimState:PlayAnimation("walk_pre")
-            if not inst.SoundEmitter:PlayingSound("move") then
-                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/walk_LP", "move")
+            if not inst.SoundEmitter:PlayingSound("walkloop") then
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/worm/move", "walkloop")
             end
             inst.components.locomotor:WalkForward()
         end,
@@ -200,7 +200,7 @@ local states =
                 inst.AnimState:PlayAnimation("walk_pst")
             end
 
-            inst.SoundEmitter:KillSound("move")
+            inst.SoundEmitter:KillSound("walkloop")
         end,
 
         events =
@@ -224,7 +224,7 @@ local states =
 		{
 			TimeEvent(4 * FRAMES, function(inst) inst.components.combat:DoAttack() end),
 			-- TODO: Put in a custom sound for the GIANT GRUB attack later.
-			TimeEvent(2 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/attack") end),
+			TimeEvent(2 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Grub/attack") end),
 		},
 
 		events =
@@ -240,7 +240,7 @@ local states =
 
 		onenter = function(inst)
 			inst.AnimState:PlayAnimation("hit")
-            inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/hit")
+            inst.SoundEmitter:PlaySound("UCSounds/Grub/hit")
 			inst.Physics:Stop()
 		end,
 
@@ -259,7 +259,7 @@ local states =
             inst.components.locomotor:StopMoving()
             if inst.State == "under" then
                 inst.AnimState:PlayAnimation("enter")
-                inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/emerge")
+                inst.SoundEmitter:PlaySound("UCSounds/Grub/emerge")
                 inst.AnimState:PushAnimation("sleep_pre", false)
             else
                 inst.AnimState:PlayAnimation("sleep_pre")
@@ -300,8 +300,8 @@ local states =
        timeline =
         {
 
-            TimeEvent(11 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/sleep_in") end),
-            TimeEvent(37 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/sleep_in") end),
+            TimeEvent(11 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Grub/sleepin") end),
+            TimeEvent(37 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Grub/sleepout") end),
 
             --TimeEvent(27*FRAMES, function(inst)
                -- if not inst.SoundEmitter:PlayingSound("sleep") then
@@ -354,7 +354,7 @@ local states =
 
         timeline=
         {
-            TimeEvent(3 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/death") end),
+            TimeEvent(3 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Grub/death") end),
         }
 
 	},

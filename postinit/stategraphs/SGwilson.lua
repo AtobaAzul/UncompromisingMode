@@ -35,7 +35,7 @@ State{
             inst.SoundEmitter:PlaySound("dontstarve/wilson/hit",nil,.02)
             inst.AnimState:PlayAnimation("sneeze")
 			
-            inst.SoundEmitter:PlaySound("dontstarve_DLC003/characters/sneeze")
+            inst.SoundEmitter:PlaySound("UCSounds/Sneeze/sneeze")
             inst:ClearBufferedAction()
             
             if inst.prefab ~= "wes" then

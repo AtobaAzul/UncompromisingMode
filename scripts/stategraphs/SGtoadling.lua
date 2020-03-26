@@ -43,15 +43,15 @@ local states=
             end
         end,
         
-       timeline = 
+       --[[timeline = 
         {
-            TimeEvent(11*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/out") end ),
-            TimeEvent(26*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/in") end ),
-            TimeEvent(46*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/out") end ),
-            TimeEvent(57*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/in") end ),
+            TimeEvent(11*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Hippo/breathout") end ),
+            TimeEvent(26*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Hippo/breathin") end ),
+            TimeEvent(46*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Hippo/breathout") end ),
+            TimeEvent(57*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Hippo/breathin") end ),
 
 
-        },
+        },--]]
         
         events=
         {
@@ -81,7 +81,7 @@ local states=
         timeline = 
         {
            TimeEvent(16*FRAMES, function(inst) inst.components.combat:DoAttack() end),
-           TimeEvent(13*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/leap_attack") end ),
+           TimeEvent(13*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Hippo/attack") end ),
 
         },        
 
@@ -147,7 +147,7 @@ local states=
         
        timeline = 
         {
-            TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/leap_attack") end ),
+            TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Hippo/attack") end ),
             ---TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/huff_out") end ),
         },
         
@@ -232,7 +232,7 @@ local states=
         
        timeline = 
         {
-            TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/leap_attack") end ),
+            TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Hippo/attack") end ),
             ---TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/huff_out") end ),
         },
         
@@ -284,7 +284,7 @@ local states=
 
          timeline = 
         {
-            TimeEvent(7*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/huff_in") end ),
+            TimeEvent(7*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/frog/grunt") end ),
             TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/frog/grunt") 
 			local x, y, z = inst.Transform:GetWorldPosition()
 			SpawnPrefab("disease_puff").Transform:SetPosition(x, y, z)
@@ -318,7 +318,7 @@ local states=
         {   
 
             TimeEvent(11*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/toad_stool/roar") end ),
-            TimeEvent(29*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/attack") end ),
+            TimeEvent(29*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Hippo/attack") end ),
         --    TimeEvent(15*FRAMES,  function(inst) inst.SoundEmitter:PlaySound(inst.effortsound) end ),
         --    TimeEvent(27*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.soundpath .. "voice") end ),
         },
@@ -478,7 +478,7 @@ CommonStates.AddSleepStates(states,
     },
     
 	sleeptimeline = {
-        TimeEvent(33*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/huff_in") end),
+        TimeEvent(33*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Hippo/breathin") end),
 	},
 })
 
@@ -486,7 +486,7 @@ CommonStates.AddCombatStates(states,
 {
     attacktimeline = 
     {
-        TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/attack") end),
+        TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Hippo/attack") end),
         TimeEvent(17*FRAMES, function(inst)
                                 inst.components.combat:DoAttack()
                              end),
@@ -497,7 +497,7 @@ CommonStates.AddCombatStates(states,
     },
     deathtimeline = 
     {
-        TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/hippo/death") end),
+        TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Hippo/death") end),
     },
 })
 

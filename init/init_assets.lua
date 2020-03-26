@@ -52,6 +52,6 @@ Assets = {
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),
 	
-	Asset("SOUNDPACKAGE", "sound/dontstarve_DLC003.fev"), 
-	Asset( "SOUND", "sound/DLC003_sfx.fsb"), 
+	Asset("SOUNDPACKAGE", "sound/UCSounds.fev"), 
+	Asset( "SOUND", "sound/UCSounds_bank00.fsb"), 
 }
