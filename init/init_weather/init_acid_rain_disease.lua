@@ -5,6 +5,11 @@ local function RandomDiseaseChance(inst)
 		if mushroomcheck ~= nil and math.random() < 0.15 and 
 		GLOBAL.TheWorld.state.israining then
 			--print("disease DO")
+			
+			if inst.components.diseaseable == nil then
+				inst:AddComponent("diseaseable")
+			end
+			
 			inst.components.diseaseable:Disease()
 			inst.components.pickable:ChangeProduct("spoiled_food")
 			inst.components.diseaseable:RestartNearbySpread()
@@ -42,10 +47,6 @@ local function AddAcidDisease(prefab)
         if inst.components.playerprox == nil then
             inst:AddComponent("playerprox")
         end
-		
-		if inst.components.diseaseable == nil then
-			inst:AddComponent("diseaseable")
-		end
 		
         inst.components.playerprox:SetDist(40, 43) --set specific values
         inst.components.playerprox:SetOnPlayerNear(onnear)
