@@ -48,6 +48,7 @@ local prefab_post = {
 	"berrybush",
 	--"papyrus",
 	"humanmeat",
+	"sporecloud",
 }
 
 local stategraph_post = {

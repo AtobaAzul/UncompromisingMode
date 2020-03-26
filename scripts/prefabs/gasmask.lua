@@ -16,7 +16,7 @@ local function onequip(inst, owner)
 		owner.AnimState:Show("HAIR")
 		owner.AnimState:Show("HAIRFRONT")
 	owner:AddTag("goggles")
-	owner:AddTag("toadstool")
+	--owner:AddTag("toadstool")
 	owner:AddTag("has_gasmask")
 	
 	inst.components.fueled:StartConsuming()
@@ -30,7 +30,7 @@ local function onunequip(inst, owner)
     owner.AnimState:Hide("HAT")
 	
 	owner:RemoveTag("goggles")
-	owner:RemoveTag("toadstool")
+	--owner:RemoveTag("toadstool")
 	owner:RemoveTag("has_gasmask")
 	
 	
