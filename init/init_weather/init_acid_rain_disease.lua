@@ -2,7 +2,7 @@ local function RandomDiseaseChance(inst)
 	local mushroomcheck = TheSim:FindFirstEntityWithTag("acidrain_mushroom")
 	--print("disease chance")
 	if inst.components.pickable ~= nil then
-		if mushroomcheck ~= nil and math.random() < 0.15 and 
+		if mushroomcheck ~= nil and math.random() < 0.05 and 
 		GLOBAL.TheWorld.state.israining then
 			--print("disease DO")
 			
