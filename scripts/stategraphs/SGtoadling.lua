@@ -478,7 +478,7 @@ CommonStates.AddSleepStates(states,
     },
     
 	sleeptimeline = {
-        TimeEvent(33*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Hippo/breathin") end),
+        TimeEvent(33*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Hippo/in") end),
 	},
 })
 
