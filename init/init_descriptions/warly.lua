@@ -50,3 +50,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 
 	DESCRIBE.BUSHCRAB = "Berries and crab cake, anyone? No?"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
+	DESCRIBE.DISEASECUREBOMB = "I doubt this would make for a good cooking oil."

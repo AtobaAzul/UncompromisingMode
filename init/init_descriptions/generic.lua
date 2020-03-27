@@ -58,6 +58,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "Thats a nice BIG boulder."
 	DESCRIBE.BUSHCRAB = "AH! How long was he down there?!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
+	DESCRIBE.DISEASECUREBOMB = "I squeezed every last drop of oil from that rock."
 	
 
 --	[ 		Recipe Descriptions		]   --

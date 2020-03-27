@@ -50,3 +50,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 
 	DESCRIBE.BUSHCRAB = "Thats some dangerous weeding!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
+	DESCRIBE.DISEASECUREBOMB = "We'll get those plants workin' like a well oiled machine!"

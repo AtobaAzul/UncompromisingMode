@@ -50,3 +50,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 
 	DESCRIBE.BUSHCRAB = "Should have burned it down... always should have burned it down!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
+	DESCRIBE.DISEASECUREBOMB = "I would have settled for burning the diseased plants down."

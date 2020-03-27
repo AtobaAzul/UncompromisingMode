@@ -52,3 +52,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 
 	DESCRIBE.BUSHCRAB = "I guess they've finally hatched."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
+	DESCRIBE.DISEASECUREBOMB = "I squeezed every last drop of oil from that rock."

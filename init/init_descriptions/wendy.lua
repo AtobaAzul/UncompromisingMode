@@ -50,3 +50,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 
 	DESCRIBE.BUSHCRAB = "Another cruel joke from mother nature."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
+	DESCRIBE.DISEASECUREBOMB = "I wish I could bring Abigail back from death."
