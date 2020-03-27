@@ -39,4 +39,5 @@ return {
 	"uncompromising_shadow_projectile_fx",
 	"toadling",
 	"hippoherd",
+	"diseasecure",
 }

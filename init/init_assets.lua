@@ -23,6 +23,8 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/cookedmonstermorsel.tex"),
 	Asset("ATLAS", "images/inventoryimages/monstermorsel.xml"),
 	Asset("IMAGE", "images/inventoryimages/monstermorsel.tex"),
+	Asset("ATLAS", "images/inventoryimages/diseasecurebomb.xml"),
+	Asset("IMAGE", "images/inventoryimages/diseasecurebomb.tex"),
 	
 	Asset("ANIM", "anim/geyser.zip"),
 	Asset("ANIM", "anim/lava_vomit.zip"),
@@ -48,10 +50,12 @@ Assets = {
 	Asset("ANIM", "anim/hippo_attacks.zip"),
 	Asset("ANIM", "anim/hippo_basic.zip"),
 	Asset("ANIM", "anim/toadling.zip"),
+	Asset("ANIM", "anim/diseasecurebomb.zip"),
+	Asset("ANIM", "anim/swap_diseasecurebomb.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),
-	
+
 	Asset("SOUNDPACKAGE", "sound/UCSounds.fev"), 
 	Asset( "SOUND", "sound/UCSounds_bank00.fsb"), 
 }

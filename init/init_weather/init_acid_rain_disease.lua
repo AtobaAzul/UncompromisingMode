@@ -13,7 +13,12 @@ local function RandomDiseaseChance(inst)
 			inst.components.diseaseable:Disease()
 			inst.components.pickable:ChangeProduct("spoiled_food")
 			inst.components.diseaseable:RestartNearbySpread()
-			inst.AnimState:SetBuild(inst.prefab.."_diseased_build")
+			
+			if inst.prefab == "rock_avocado_bush" then
+				inst.AnimState:SetBuild("rock_avocado_diseased_build")
+			else
+				inst.AnimState:SetBuild(inst.prefab.."_diseased_build")
+			end
 		else
 			inst.randomdisease_task = inst:DoTaskInTime(math.random(5,10), RandomDiseaseChance)
 		end
@@ -38,10 +43,16 @@ local DISEASABLES =
     "berrybush_juicy",
     "grass", --is it really grass? or grass tuft?
     "sapling",
+	"rock_avocado_bush",
 }
 
 local function AddAcidDisease(prefab)
     AddPrefabPostInit(prefab, function (inst)
+	
+		if not GLOBAL.TheWorld.ismastersim then
+			return
+		end
+	
         inst.randomdisease_task = nil
 		
         if inst.components.playerprox == nil then
