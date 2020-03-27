@@ -246,7 +246,7 @@ local function TryPerish(item)
 	
 	if item.components.health ~= nil then
 		if not item.components.health:IsDead() then
-			item.components.health:DoDelta(0.1)
+			item.components.health:DoDelta(0.5)
 		end
 	end
 end
@@ -359,7 +359,7 @@ local function OnHit(inst, attacker, target)
 end
 
 local function onequip(inst, owner)
-    owner.AnimState:OverrideSymbol("swap_object", "swap_diseasecurebomb", "swap_sleepbomb")
+    owner.AnimState:OverrideSymbol("swap_object", "swap_diseasecurebomb", "swap_waterballoon")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 end
