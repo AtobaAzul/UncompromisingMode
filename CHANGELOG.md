@@ -220,7 +220,11 @@
 
 * [x] Sickly Toads will fall from the sky if the sprouts are left alone for long enough
 
-* [x] Cactus Flesh, Cooked Cactus Flesh, and Cooked Green Caps now deal slightly more damage when eaten.
+* [x] Cactus Flesh, Cooked Cactus Flesh, and Cooked Green Caps now deal slightly more damage when eaten
+
+* [x] Decreased time between disease chance checks
+
+* [x] Added Moon Oil, a cure for diseased plants
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
