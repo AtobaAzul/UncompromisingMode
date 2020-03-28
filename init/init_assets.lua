@@ -25,6 +25,8 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/monstermorsel.tex"),
 	Asset("ATLAS", "images/inventoryimages/diseasecurebomb.xml"),
 	Asset("IMAGE", "images/inventoryimages/diseasecurebomb.tex"),
+	Asset("ATLAS", "images/inventoryimages/snowball_throwable.xml"),
+	Asset("IMAGE", "images/inventoryimages/snowball_throwable.tex"),
 	
 	Asset("ANIM", "anim/geyser.zip"),
 	Asset("ANIM", "anim/lava_vomit.zip"),
@@ -52,6 +54,8 @@ Assets = {
 	Asset("ANIM", "anim/toadling.zip"),
 	Asset("ANIM", "anim/diseasecurebomb.zip"),
 	Asset("ANIM", "anim/swap_diseasecurebomb.zip"),
+	Asset("ANIM", "anim/snowball.zip"),
+	Asset("ANIM", "anim/swap_snowball.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),

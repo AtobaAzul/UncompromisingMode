@@ -266,7 +266,6 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-    inst.entity:AddSoundEmitter()
 
     inst.AnimState:SetBank("sleepcloud")
     inst.AnimState:SetBuild("sleepcloud")

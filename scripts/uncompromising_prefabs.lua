@@ -41,4 +41,5 @@ return {
 	"hippoherd",
 	"diseasecure",
 	"toadlingspawner",
+	"snowball_throwable",
 }

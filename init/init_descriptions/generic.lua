@@ -60,6 +60,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "Finally, a practical use for the moons transformative properties."
 	DESCRIBE.TOADLINGSPAWNER = "Uh oh."
+	DESCRIBE.SNOWBALL_THROWABLE = "Snowball fight!"
 	
 
 --	[ 		Recipe Descriptions		]   --

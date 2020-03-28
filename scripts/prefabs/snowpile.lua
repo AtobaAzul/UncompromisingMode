@@ -108,9 +108,9 @@ local function workcallback(inst, worker, workleft)
 
 	if workleft < 0 then
 		-- the devtool probably did this, spit out 2
-		--inst.components.lootdropper:SetLoot({"ice", "ice"})
+		inst.components.lootdropper:SetLoot({"snowball_throwable"})
 	else
-		--inst.components.lootdropper:SetLoot({"ice"})
+		inst.components.lootdropper:SetLoot({"snowball_throwable"})
 	end
 --[[
 	if workleft <= 1 then
@@ -121,9 +121,7 @@ local function workcallback(inst, worker, workleft)
 	inst.components.lootdropper.chancerandomloot = 0.01  -- drop some random item 1% of the time
 
 	inst.components.lootdropper:AddRandomLoot("rock", 0.01)
-	inst.components.lootdropper:AddRandomLoot("feather_crow", 0.01)
-	inst.components.lootdropper:AddRandomLoot("feather_robin", 0.01)
-	inst.components.lootdropper:AddRandomLoot("feather_robin_winter", 0.01)
+	inst.components.lootdropper:AddRandomLoot("ice", 0.01)
 
 	-- figure out which side to drop the loot
 	local pt = Vector3(inst.Transform:GetWorldPosition())
@@ -402,7 +400,7 @@ local function snowpilefn(Sim)
     inst.components.pickable.makefullfn = makefullfn
     inst.components.pickable.max_cycles = 3
     inst.components.pickable.cycles_left = 1
-    inst.components.pickable:SetUp("ice",0)
+    inst.components.pickable:SetUp("snowball_throwable",0)
     inst.components.pickable.transplanted = true
 	
 	SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
