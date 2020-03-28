@@ -37,7 +37,7 @@ local function SpawnAcidMushrooms(spawnpt)
 
     local function IsValidAcidMushroomPosition(offset)
         local x1, z1 = x + offset.x, z + offset.z
-        if #TheSim:FindEntities(x1, 0, z1, TUNING.DSTU.TOADSTOOL_ACIDMUSHROOM.RADIUS * 1.9, { "antlion_sinkhole_blocker" --[[TODO?]]}) > 0 then
+        if #TheSim:FindEntities(x1, 0, z1, TUNING.DSTU.TOADSTOOL_ACIDMUSHROOM.RADIUS * 1.9, { "antlion_sinkhole_blocker" } --[[TODO?]]) > 0 then
             return false
         end
         for dx = -1, 1 do
@@ -58,8 +58,8 @@ local function SpawnAcidMushrooms(spawnpt)
     nil
 
     if offset ~= nil then
-		if #TheSim:FindEntities(x, 0, z, 50, { "toadling" --[[TODO?]]}) < 2 then
-			SpawnAt("toadling", spawnpt, nil, offset)
+		if #TheSim:FindEntities(x, 0, z, 50, { "toadling" }) < 2 then
+			SpawnAt("toadlingspawner", spawnpt, nil, offset)
 		else
 			SpawnAt("mushroomsprout_overworld", spawnpt, nil, offset)
 		end

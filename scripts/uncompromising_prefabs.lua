@@ -40,4 +40,5 @@ return {
 	"toadling",
 	"hippoherd",
 	"diseasecure",
+	"toadlingspawner",
 }

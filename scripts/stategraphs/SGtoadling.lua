@@ -259,7 +259,7 @@ local states=
 						end
 				end--]]
 			
-                inst:DoMushroomBomb()
+                --inst:DoMushroomBomb()
                 inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
             inst.components.locomotor:Stop()
             inst.AnimState:PlayAnimation("jump_atk_pst")

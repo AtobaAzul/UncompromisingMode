@@ -49,6 +49,7 @@ local prefab_post = {
 	--"papyrus",
 	"humanmeat",
 	"sporecloud",
+	--"malbatross",
 }
 
 local stategraph_post = {

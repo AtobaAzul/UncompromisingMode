@@ -6,9 +6,9 @@ local UpvalueHacker = require("tools/upvaluehacker")
 local function ongrowsproutsdone(inst, data)
     if data.name == "growsprouts" and inst.components.workable and TheWorld.state.isautumn and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
         inst.components.acidmushroomspawner:StartAcidMushrooms()
-        inst.components.timer:StartTimer("growsprouts", 1440)
+        inst.components.timer:StartTimer("growsprouts", 1920)
     elseif data.name == "growsprouts" then
-        inst.components.timer:StartTimer("growsprouts", 1440)
+        inst.components.timer:StartTimer("growsprouts", 1920)
     end
 end
 
@@ -27,7 +27,7 @@ env.AddPrefabPostInit("toadstool_cap", function(inst)
     end)
     _ongrown, _fn_i, scope_fn = UpvalueHacker.GetUpvalue(inst.OnLoad, "setstate", "ongrown")
     debug.setupvalue(scope_fn, _fn_i, function(...)
-        inst.components.timer:StartTimer("growsprouts", 1440)
+        inst.components.timer:StartTimer("growsprouts", 1920)
         return _ongrown(...)
     end)
     

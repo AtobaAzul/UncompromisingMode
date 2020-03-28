@@ -59,6 +59,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	DESCRIBE.BUSHCRAB = "AH! How long was he down there?!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "Finally, a practical use for the moons transformative properties."
+	DESCRIBE.TOADLINGSPAWNER = "Uh oh."
 	
 
 --	[ 		Recipe Descriptions		]   --
