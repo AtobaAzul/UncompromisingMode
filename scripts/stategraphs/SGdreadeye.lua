@@ -243,16 +243,16 @@ local states =
 
         timeline =
         {
-            TimeEvent(1*FRAMES, function(inst) fading(inst, 0.40) end),
-            TimeEvent(3*FRAMES, function(inst) fading(inst, 0.36) end),
-            TimeEvent(5*FRAMES, function(inst) fading(inst, 0.32) end),
-            TimeEvent(7*FRAMES, function(inst) fading(inst, 0.28) end),
-            TimeEvent(9*FRAMES, function(inst) fading(inst, 0.24) end),
-            TimeEvent(11*FRAMES, function(inst) fading(inst, 0.20) end),
-            TimeEvent(13*FRAMES, function(inst) fading(inst, 0.16) end),
-            TimeEvent(15*FRAMES, function(inst) fading(inst, 0.12) end),
-            TimeEvent(17*FRAMES, function(inst) fading(inst, 0.08) end),
-            TimeEvent(19*FRAMES, function(inst) fading(inst, 0.04) end),
+            TimeEvent(1*FRAMES, function(inst) fading(inst, 0.36) end),
+            TimeEvent(3*FRAMES, function(inst) fading(inst, 0.32) end),
+            TimeEvent(5*FRAMES, function(inst) fading(inst, 0.28) end),
+            TimeEvent(7*FRAMES, function(inst) fading(inst, 0.24) end),
+            TimeEvent(9*FRAMES, function(inst) fading(inst, 0.20) end),
+            TimeEvent(11*FRAMES, function(inst) fading(inst, 0.16) end),
+            TimeEvent(13*FRAMES, function(inst) fading(inst, 0.12) end),
+            TimeEvent(15*FRAMES, function(inst) fading(inst, 0.08) end),
+            TimeEvent(17*FRAMES, function(inst) fading(inst, 0.04) end),
+            TimeEvent(19*FRAMES, function(inst) fading(inst, 0.00) end),
         },
 
         events =
@@ -307,16 +307,16 @@ local states =
 
         timeline =
         {
-            TimeEvent(1*FRAMES, function(inst) fading(inst, 0.04) end),
-            TimeEvent(3*FRAMES, function(inst) fading(inst, 0.08) end),
-            TimeEvent(5*FRAMES, function(inst) fading(inst, 0.12) end),
-            TimeEvent(7*FRAMES, function(inst) fading(inst, 0.16) end),
-            TimeEvent(9*FRAMES, function(inst) fading(inst, 0.20) end),
-            TimeEvent(11*FRAMES, function(inst) fading(inst, 0.24) end),
-            TimeEvent(13*FRAMES, function(inst) fading(inst, 0.28) end),
-            TimeEvent(15*FRAMES, function(inst) fading(inst, 0.32) end),
-            TimeEvent(17*FRAMES, function(inst) fading(inst, 0.36) end),
-            TimeEvent(19*FRAMES, function(inst) fading(inst, 0.40) end),
+            TimeEvent(1*FRAMES, function(inst) fading(inst, 0.00) end),
+            TimeEvent(3*FRAMES, function(inst) fading(inst, 0.04) end),
+            TimeEvent(5*FRAMES, function(inst) fading(inst, 0.08) end),
+            TimeEvent(7*FRAMES, function(inst) fading(inst, 0.12) end),
+            TimeEvent(9*FRAMES, function(inst) fading(inst, 0.16) end),
+            TimeEvent(11*FRAMES, function(inst) fading(inst, 0.20) end),
+            TimeEvent(13*FRAMES, function(inst) fading(inst, 0.24) end),
+            TimeEvent(15*FRAMES, function(inst) fading(inst, 0.28) end),
+            TimeEvent(17*FRAMES, function(inst) fading(inst, 0.32) end),
+            TimeEvent(19*FRAMES, function(inst) fading(inst, 0.36) end),
         },
 
         events =
@@ -341,16 +341,16 @@ local states =
 
         timeline =
         {
-            TimeEvent(1*FRAMES, function(inst) fading(inst, 0.40) end),
-            TimeEvent(3*FRAMES, function(inst) fading(inst, 0.36) end),
-            TimeEvent(5*FRAMES, function(inst) fading(inst, 0.32) end),
-            TimeEvent(7*FRAMES, function(inst) fading(inst, 0.28) end),
-            TimeEvent(9*FRAMES, function(inst) fading(inst, 0.24) end),
-            TimeEvent(11*FRAMES, function(inst) fading(inst, 0.20) end),
-            TimeEvent(13*FRAMES, function(inst) fading(inst, 0.16) end),
-            TimeEvent(15*FRAMES, function(inst) fading(inst, 0.12) end),
-            TimeEvent(17*FRAMES, function(inst) fading(inst, 0.08) end),
-            TimeEvent(19*FRAMES, function(inst) fading(inst, 0.04) end),
+            TimeEvent(1*FRAMES, function(inst) fading(inst, 0.36) end),
+            TimeEvent(3*FRAMES, function(inst) fading(inst, 0.32) end),
+            TimeEvent(5*FRAMES, function(inst) fading(inst, 0.28) end),
+            TimeEvent(7*FRAMES, function(inst) fading(inst, 0.24) end),
+            TimeEvent(9*FRAMES, function(inst) fading(inst, 0.20) end),
+            TimeEvent(11*FRAMES, function(inst) fading(inst, 0.16) end),
+            TimeEvent(13*FRAMES, function(inst) fading(inst, 0.12) end),
+            TimeEvent(15*FRAMES, function(inst) fading(inst, 0.08) end),
+            TimeEvent(17*FRAMES, function(inst) fading(inst, 0.04) end),
+            TimeEvent(19*FRAMES, function(inst) fading(inst, 0.00) end),
         },
 
         events =
@@ -377,16 +377,16 @@ local states =
 
         timeline =
         {
-            TimeEvent(1*FRAMES, function(inst) fading(inst, 0.40) end),
-            TimeEvent(3*FRAMES, function(inst) fading(inst, 0.36) end),
-            TimeEvent(5*FRAMES, function(inst) fading(inst, 0.32) end),
-            TimeEvent(7*FRAMES, function(inst) fading(inst, 0.28) end),
-            TimeEvent(9*FRAMES, function(inst) fading(inst, 0.24) end),
-            TimeEvent(11*FRAMES, function(inst) fading(inst, 0.20) end),
-            TimeEvent(13*FRAMES, function(inst) fading(inst, 0.16) end),
-            TimeEvent(15*FRAMES, function(inst) fading(inst, 0.12) end),
-            TimeEvent(17*FRAMES, function(inst) fading(inst, 0.08) end),
-            TimeEvent(19*FRAMES, function(inst) fading(inst, 0.04) end),
+            TimeEvent(1*FRAMES, function(inst) fading(inst, 0.36) end),
+            TimeEvent(3*FRAMES, function(inst) fading(inst, 0.32) end),
+            TimeEvent(5*FRAMES, function(inst) fading(inst, 0.28) end),
+            TimeEvent(7*FRAMES, function(inst) fading(inst, 0.24) end),
+            TimeEvent(9*FRAMES, function(inst) fading(inst, 0.20) end),
+            TimeEvent(11*FRAMES, function(inst) fading(inst, 0.16) end),
+            TimeEvent(13*FRAMES, function(inst) fading(inst, 0.12) end),
+            TimeEvent(15*FRAMES, function(inst) fading(inst, 0.08) end),
+            TimeEvent(17*FRAMES, function(inst) fading(inst, 0.04) end),
+            TimeEvent(19*FRAMES, function(inst) fading(inst, 0.00) end),
         },
 
         events =
@@ -410,16 +410,16 @@ local states =
 
         timeline =
         {
-            TimeEvent(1*FRAMES, function(inst) fading(inst, 0.40) end),
-            TimeEvent(3*FRAMES, function(inst) fading(inst, 0.36) end),
-            TimeEvent(5*FRAMES, function(inst) fading(inst, 0.32) end),
-            TimeEvent(7*FRAMES, function(inst) fading(inst, 0.28) end),
-            TimeEvent(9*FRAMES, function(inst) fading(inst, 0.24) end),
-            TimeEvent(11*FRAMES, function(inst) fading(inst, 0.20) end),
-            TimeEvent(13*FRAMES, function(inst) fading(inst, 0.16) end),
-            TimeEvent(15*FRAMES, function(inst) fading(inst, 0.12) end),
-            TimeEvent(17*FRAMES, function(inst) fading(inst, 0.08) end),
-            TimeEvent(19*FRAMES, function(inst) fading(inst, 0.04) end),
+            TimeEvent(1*FRAMES, function(inst) fading(inst, 0.36) end),
+            TimeEvent(3*FRAMES, function(inst) fading(inst, 0.32) end),
+            TimeEvent(5*FRAMES, function(inst) fading(inst, 0.28) end),
+            TimeEvent(7*FRAMES, function(inst) fading(inst, 0.24) end),
+            TimeEvent(9*FRAMES, function(inst) fading(inst, 0.20) end),
+            TimeEvent(11*FRAMES, function(inst) fading(inst, 0.16) end),
+            TimeEvent(13*FRAMES, function(inst) fading(inst, 0.12) end),
+            TimeEvent(15*FRAMES, function(inst) fading(inst, 0.08) end),
+            TimeEvent(17*FRAMES, function(inst) fading(inst, 0.04) end),
+            TimeEvent(19*FRAMES, function(inst) fading(inst, 0.00) end),
         },
     
         events =

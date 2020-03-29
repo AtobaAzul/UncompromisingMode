@@ -40,7 +40,7 @@ PrefabFiles = {
 STRINGS = GLOBAL.STRINGS
 
 STRINGS.NAMES.CREEPINGFEAR  = "Creeping Fear"
-STRINGS.NAMES.DREADEYE  = "Dread eye"
+STRINGS.NAMES.DREADEYE  = "Dread Eye"
 
 -------------------------------------------------- Turnings
 --[[
