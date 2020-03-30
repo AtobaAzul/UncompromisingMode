@@ -17,9 +17,9 @@ return {
 	"mock_monsterwarningsounds",
 	"mock_dragonfly",
 	"lavaspit",
-	"sandhill",
+	--"sandhill",
 	"snowpile",
-	"sand",
+	--"sand",
 	"snowgoggles",
 	--"leechswarm", buggy atm
 	"laitleech",

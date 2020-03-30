@@ -13,7 +13,7 @@ end)
 
 end
 
-
+--[[
 	if GLOBAL.terrain.rooms.LightningBluffAntlion then
 		GLOBAL.terrain.rooms.LightningBluffAntlion.contents.distributeprefabs.sandhill = 0.4
 	end
@@ -32,6 +32,6 @@ end
 
 
 	GLOBAL.terrain.filter.sandhill = {GLOBAL.GROUND.WOODFLOOR, GLOBAL.GROUND.CARPET, GLOBAL.GROUND.CHECKER, GLOBAL.GROUND.ROAD}
-
+--]]
 
 modimport("init/init_food/init_food_worldgen")
