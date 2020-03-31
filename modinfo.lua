@@ -1,4 +1,4 @@
-name = " [ALPHA]aUncompromising Mode"
+name = " [TESTING] Uncompromising Mode"
 description = 
 [[
 󰀔 [ Version 1.1.4 : "Pests & Pestilence Update" ]
@@ -20,7 +20,7 @@ description =
 							   ⬇Config⬇		 ⬇Infos⬇]]
 
 author = "Uncompromising Team"
-version = "1.1.4"
+version = "1.1.5"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 

@@ -22,7 +22,7 @@ return {
 	--"sand",
 	"snowgoggles",
 	--"leechswarm", buggy atm
-	"laitleech",
+	--"laitleech",
 	"shockworm",
 	"zaspberry",
 	"snowmong",
