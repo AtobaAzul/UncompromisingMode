@@ -1,7 +1,7 @@
 name = " [TESTING] Uncompromising Mode"
 description = 
 [[
-󰀔 [ Version 1.1.4 : "Pests & Pestilence Update" ]
+󰀔 [ Version 1.1.5 : "Pests & Pestilence Update" ]
 
 
 
