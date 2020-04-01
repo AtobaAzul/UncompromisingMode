@@ -43,8 +43,6 @@
 * [x]  Stone fruit growth nerf - Stone fruit bush base growth duration tripled
  
 * [x]  Ice and twigs cannot be more than 2 inside crockpot recipes
-
-* [ ]  You cannot sew thermals anymore
  
 * [x]  [Rat waves](https://cdn.discordapp.com/attachments/623666104937480192/629152866426290197/damnrat.gif), that will come with number of days, mess around your items, eat your food, and bite you for max health penalties 
  
@@ -60,21 +58,13 @@
 
 * [x]  Pigs and bunnies defend their houses when hammered
 
-* [ ]  Meaty stew is 120s cooktime
-
 * [x]  Pierogi spoils in 10 days instead of 20
 
 * [x]  Cooked Bird egg loop removed
 
 * [x]  Bird's stomach can only withstand 4 monster meat before dying out (vary her diet with normal meat to cure it)
 
-* [ ]  Woodies Kitschy idols require presthatilator to prototype
-
 * [x]  WX will take more damage from rain (3x)
-
-* [ ]  Portal upgrade requires cratered iridescent opal gem moonlens, instead of purple one
-
-* [ ]  Portal upgrade requires extra 20moonglass
 
 * [x]  Moonrock idol requires 5 moonstone
 
