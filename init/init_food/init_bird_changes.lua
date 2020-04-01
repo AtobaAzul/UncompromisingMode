@@ -104,25 +104,28 @@ local function DigestFood(inst, food)
     if bird and bird:IsValid() and bird.components.perishable then
         bird.components.perishable:SetPercent(1)
     end
-	if food.components.edible.foodtype == FOODTYPE.MEAT then
-            if  food.components.edible:GetHealth(inst) < 0 then --monster meat is currently the only negative health meat item
-                if bird.monsterbelly ~= nil and bird.monsterbelly ~= 0 then 
-                    bird.monsterbelly = bird.monsterbelly + 1
-                else
-                    bird.monsterbelly = 1
-                end
-            else
-                if bird.monsterbelly ~= nil and bird.monsterbelly > 0 then
-                    --If bird is fed meat, she reduces her monsterbelly
-                    bird.monsterbelly = bird.monsterbelly - 1
-                end
-            end
+	
+	if bird then
+		if food.components.edible.foodtype == FOODTYPE.MEAT then
+				if  food.components.edible:GetHealth(inst) < 0 then --monster meat is currently the only negative health meat item
+					if bird.monsterbelly ~= nil and bird.monsterbelly ~= 0 then 
+						bird.monsterbelly = bird.monsterbelly + 1
+					else
+						bird.monsterbelly = 1
+					end
+				else
+					if bird.monsterbelly ~= nil and bird.monsterbelly > 0 then
+						--If bird is fed meat, she reduces her monsterbelly
+						bird.monsterbelly = bird.monsterbelly - 1
+					end
+				end
 
-            if bird.monsterbelly ~= nil and bird.monsterbelly >= 4 then
-                -- After 4 monster meat, bird dies
-                OnBirdStarve(inst, bird) 
-            end
-        end 
+				if bird.monsterbelly ~= nil and bird.monsterbelly >= 4 then
+					-- After 4 monster meat, bird dies
+					OnBirdStarve(inst, bird) 
+				end
+			end 
+	end
 end
 
 local function OnGetItem(inst, giver, item)
