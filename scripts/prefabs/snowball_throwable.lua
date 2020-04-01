@@ -101,8 +101,9 @@ local function onperish(inst)
         inst:Remove()
     else
         inst.components.inventoryitem.canbepickedup = false
-        inst.Remove()
+        --inst:DoTaskInTime(1, inst.Remove())
     end
+		inst:Remove()
 end
 
 local function onfiremelt(inst)

@@ -145,7 +145,7 @@ local function fn(Sim)
 	inst:AddComponent("sleeper")
 
 	inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({"charcoal", "charcoal", "charcoal", "charcoal", "ice", "ice", "ice", "ice", "ice",})
+    inst.components.lootdropper:SetLoot({"charcoal", "charcoal", "charcoal", "charcoal", "snowball_throwable", "snowball_throwable", "snowball_throwable", "ice", "ice",})
 
 	inst:AddComponent("knownlocations")
 	inst:DoTaskInTime(0, function() inst.components.knownlocations:RememberLocation("home", Point(inst.Transform:GetWorldPosition()), true) end)

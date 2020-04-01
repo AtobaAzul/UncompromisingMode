@@ -4,7 +4,7 @@ GLOBAL.setfenv(1, GLOBAL)
 local UpvalueHacker = require("tools/upvaluehacker")
 
 local function ongrowsproutsdone(inst, data)
-    if data.name == "growsprouts" and inst.components.workable and TheWorld.state.isautumn and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
+    if data.name == "growsprouts" and inst.components.workable and TheWorld.state.isautumn and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE and TheWorld.state.cycles > TUNING.AUTUMN_LENGTH then
         inst.components.acidmushroomspawner:StartAcidMushrooms()
         inst.components.timer:StartTimer("growsprouts", 1920)
     elseif data.name == "growsprouts" then
