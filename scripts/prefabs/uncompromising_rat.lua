@@ -193,7 +193,8 @@ local function fn()
 	inst.components.health:SetMaxHealth(TUNING.DSTU.RAIDRAT_HEALTH)
 	
 	inst:AddComponent("lootdropper")
-	inst.components.lootdropper:AddRandomLoot("monstermeat", 1)
+	inst.components.lootdropper:AddRandomLoot("monstermorsel", 0.5)
+	inst.components.lootdropper:AddRandomLoot("disease_puff", 0.5)
 	inst.components.lootdropper.numrandomloot = 1
 	
 	inst:AddComponent("sleeper")
@@ -210,7 +211,7 @@ local function fn()
 	inst:AddComponent("knownlocations")
 	
 	inst:AddComponent("cookable")
-	inst.components.cookable.product = "monstermeat_cooked"
+	inst.components.cookable.product = "cookedmonstermorsel"
 	inst.components.cookable:SetOnCookedFn(on_cooked_fn)
 	
 	inst:AddComponent("inventory")
