@@ -112,11 +112,29 @@ local function PenguinRetarget(inst)
 
 end
 
+local function PenguinKeepTarget(inst, target)
+    if not inst.components.teamattacker then
+        return false
+    end
+
+    if (inst.components.teamattacker.teamleader and not inst.components.teamattacker.teamleader:CanAttack())
+        or inst.components.teamattacker.orders == "ATTACK" then
+        return true
+    else
+        --print(inst,"Loses TARGET")
+        return true
+    end 
+end
+
 AddPrefabPostInit("penguin", PenguinRetarget, MakeTeam)
 AddPrefabPostInit("penguin", function (inst)
     if inst ~= nil and inst.components ~= nil and inst.components.combat ~= nil then
         inst.components.combat:SetRetargetFunction(2, PenguinRetarget) --penguins are aggressive
     end
+	
+	if inst ~= nil and inst.components ~= nil and inst.components.combat ~= nil then
+		inst.components.combat:SetKeepTargetFunction(PenguinPenguinKeepTarget)
+	end
 end)
 
 
