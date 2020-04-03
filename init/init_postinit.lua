@@ -67,7 +67,7 @@ local class_post = {
     --"components/inventoryitem_replica",
     --"screens/playerhud",
 	"widgets/itemtile",
-	"widgets/hoverer",
+	--"widgets/hoverer",
 	"widgets/moisturemeter",
 	"widgets/controls",
 }
