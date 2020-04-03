@@ -174,10 +174,10 @@ function SnowStormWatcher:OnUpdate(dt)
 		
 		if TheWorld.state.issnowing then
 			self.inst:PushEvent("snowon")
-			self.inst:PushEvent("snowondirty")
+			--self.inst:PushEvent("snowondirty")
 		else
 			self.inst:PushEvent("snowoff")
-			self.inst:PushEvent("snowoffdirty")
+			--self.inst:PushEvent("snowoffdirty")
 		end
 end
 

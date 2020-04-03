@@ -46,7 +46,7 @@ AddClassPostConstruct("screens/playerhud",function(inst)
 	end
 	
 end)
-
+--[[
 local function OnSpy(inst)
 --print("on")
         inst._parent.HUD.snowover:SnowOn()
@@ -66,4 +66,4 @@ AddPrefabPostInit("player_classified", function(inst)
 	
 	inst.snowoveron = GLOBAL.net_bool(inst.GUID, "snow.snowover", "snowdirty")
 	inst:ListenForEvent("snowdirty", OnSpy)
-end)
+end)--]]
