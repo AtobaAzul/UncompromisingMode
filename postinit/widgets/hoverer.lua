@@ -24,7 +24,7 @@ env.AddClassPostConstruct("widgets/hoverer", function(self)
 	
 		local lmb = nil
 	
-		if str == nil and not self.isFE and self.owner and self.owner.components then
+		if str == nil and not self.isFE and self.owner and self.owner:IsActionsVisible() and self.owner.components then
 				lmb = self.owner.components.playercontroller:GetLeftMouseAction()
 		end
 		if lmb ~= nil and lmb.target ~= nil and not lmb.target:HasTag("player") and lmb.target:GetIsWet() and mushroomcheck ~= nil then
