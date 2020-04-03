@@ -47,6 +47,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 	DESCRIBE.SNOWMONG = "I have no idea."
 	DESCRIBE.SHOCKWORM = "A highly conductive Annelida!"
 	DESCRIBE.ZASPBERRY = "Nonsense, there's no such thing as a blue Rubus."
+	DESCRIBE.ICEBOOMERANG = "Perhaps those strange blue rocks could be behind this?"
 
 	DESCRIBE.BUSHCRAB = "Ardisia brachyura!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

@@ -39,6 +39,7 @@ return {
 	"uncompromising_shadow_projectile_fx",
 	"toadling",
 	"hippoherd",
+	"iceboomerang",
 	"diseasecure",
 	"toadlingspawner",
 	"snowball_throwable",

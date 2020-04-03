@@ -47,6 +47,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.SNOWMONG = "Begone, vile snowmonger!"
 	DESCRIBE.SHOCKWORM = "A vicious counter attack!"
 	DESCRIBE.ZASPBERRY = "Could Thor's power truly be contained in a wild fruit?"
+	DESCRIBE.ICEBOOMERANG = "Beware! My frozen fury!"
 
 	DESCRIBE.BUSHCRAB = "A wild encounter!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

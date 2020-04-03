@@ -53,6 +53,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	DESCRIBE.SNOWMONG = "Shiverbug!"
 	DESCRIBE.SHOCKWORM = "Quite the conductive worm!"
 	DESCRIBE.ZASPBERRY = "I can feel the electricity flowing through it."
+	DESCRIBE.ICEBOOMERANG = "So cold that it's hard to hold"
 	
 	DESCRIBE.MINOTAUR_BOULDER = "Thats a nice boulder."
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "Thats a nice BIG boulder."

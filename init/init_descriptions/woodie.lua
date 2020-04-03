@@ -47,6 +47,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.SNOWMONG = "The bumble sinks!"
 	DESCRIBE.SHOCKWORM = "That worm's lit up like the Northern lights!"
 	DESCRIBE.ZASPBERRY = "Blue raspberry is not a real berry."
+	DESCRIBE.ICEBOOMERANG = "It's pretty cold to the touch"
 
 	DESCRIBE.BUSHCRAB = "Farm from a freshwater."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

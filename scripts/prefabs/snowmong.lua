@@ -9,6 +9,8 @@ local prefabs =
 {
 "ice",
 "charcoal",
+"iceboomerang",
+"snowball_throwable",
 }
 
 local giantgrubsounds =
@@ -16,7 +18,20 @@ local giantgrubsounds =
 	-- TODO: Put related audio here.
 }
 
-
+SetSharedLootTable( 'snowmong',
+{
+    {'charcoal',            1.00},
+	{'charcoal',            1.00},
+	{'charcoal',            1.00},
+	{'charcoal',            1.00},
+    {'ice',  			 1.00},
+	{'ice',  			 1.00},
+	{'ice',  			 1.00},
+    {'iceboomerang',       0.25},
+	{'snowball_throwable',  			 1.00},
+	{'snowball_throwable',  			 2.00},
+	
+})
 local SEE_VICTIM_DIST = 25
 
 --local function IsCompleteDisguise(target)
@@ -145,7 +160,7 @@ local function fn(Sim)
 	inst:AddComponent("sleeper")
 
 	inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({"charcoal", "charcoal", "charcoal", "charcoal", "snowball_throwable", "snowball_throwable", "snowball_throwable", "ice", "ice",})
+	inst.components.lootdropper:SetChanceLootTable('snowmong')
 
 	inst:AddComponent("knownlocations")
 	inst:DoTaskInTime(0, function() inst.components.knownlocations:RememberLocation("home", Point(inst.Transform:GetWorldPosition()), true) end)
