@@ -44,7 +44,7 @@ local function OnHitSnow(inst, attacker, target)
 end
 
 local function onequip(inst, owner)
-    owner.AnimState:OverrideSymbol("swap_object", "swap_snowball", "swap_snowball")
+    owner.AnimState:OverrideSymbol("swap_object", "swap_snowball_throwable", "swap_snowball_throwable")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 end

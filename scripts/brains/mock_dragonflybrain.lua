@@ -39,6 +39,7 @@ local function EatAshAction(inst)
     if target then
         inst.ashes = target
         return BufferedAction(inst, inst.ashes, ACTIONS.PICKUP)
+            or nil
     end
 end
 

@@ -59,7 +59,7 @@ Assets = {
 	Asset("ANIM", "anim/diseasecurebomb.zip"),
 	Asset("ANIM", "anim/swap_diseasecurebomb.zip"),
 	Asset("ANIM", "anim/snowball.zip"),
-	Asset("ANIM", "anim/swap_snowball.zip"),
+	Asset("ANIM", "anim/swap_snowball_throwable.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),
