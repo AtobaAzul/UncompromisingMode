@@ -164,7 +164,10 @@ local function fn()
     inst.components.perishable:StartPerishing()
     inst.components.perishable:SetOnPerishFn(onperish)
 
-
+    inst:AddComponent("repairer")
+    inst.components.repairer.repairmaterial = MATERIALS.ICE
+    inst.components.repairer.perishrepairpercent = .05
+	
     inst:AddComponent("inspectable")
 
     inst:AddComponent("projectile")
