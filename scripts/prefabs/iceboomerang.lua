@@ -89,6 +89,30 @@ local function OnMiss(inst, owner, target)
     end
 end
 
+local function onperish(inst)
+    local owner = inst.components.inventoryitem.owner
+    if owner ~= nil then
+        if owner.components.moisture ~= nil then
+            owner.components.moisture:DoDelta(5)
+        elseif owner.components.inventoryitem ~= nil then
+            owner.components.inventoryitem:AddMoisture(5)
+        end
+        inst:Remove()
+    else
+        inst.components.inventoryitem.canbepickedup = false
+        --inst:DoTaskInTime(1, inst.Remove())
+    end
+		inst:Remove()
+end
+
+local function onfiremelt(inst)
+    inst.components.perishable.frozenfiremult = true
+end
+
+local function onstopfiremelt(inst)
+    inst.components.perishable.frozenfiremult = false
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -133,8 +157,9 @@ local function fn()
     --inst.components.finiteuses:SetMaxUses(TUNING.BOOMERANG_USES)
     --inst.components.finiteuses:SetUses(TUNING.BOOMERANG_USES)
 	inst:AddComponent("perishable")
-    inst.components.perishable:SetPerishTime(TUNING.PERISH_MED)
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_MED / 2)
     inst.components.perishable:StartPerishing()
+    inst.components.perishable:SetOnPerishFn(onperish)
 
 
     inst:AddComponent("inspectable")

@@ -422,6 +422,11 @@ local states = {
             if inst.components.locomotor ~= nil then
                 inst.components.locomotor:StopMoving()
             end
+			
+			if inst.components.freezable then
+				inst.components.freezable:Unfreeze()
+			end
+			
             inst.AnimState:PlayAnimation("rhinostun_pre")
         end,
 
@@ -437,6 +442,11 @@ local states = {
 
         onenter = function(inst)
             inst.AnimState:PlayAnimation("rhinostun_loop")
+			
+			if inst.components.freezable then
+				inst.components.freezable:Unfreeze()
+			end
+			
         end,
 
         events=
@@ -451,6 +461,11 @@ local states = {
 
         onenter = function(inst)
             inst.AnimState:PlayAnimation("rhinostun_post")
+			
+			if inst.components.freezable then
+				inst.components.freezable:Unfreeze()
+			end
+			
         end,
 
         events=
