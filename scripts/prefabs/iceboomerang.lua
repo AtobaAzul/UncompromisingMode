@@ -138,7 +138,7 @@ local function fn()
     --weapon (from weapon component) added to pristine state for optimization
     inst:AddTag("weapon")
 	
-	inst:AddTag("scarytoprey")  --birds will fly away from this rang
+	--inst:AddTag("scarytoprey")  --birds will fly away from this rang
 
     --projectile (from projectile component) added to pristine state for optimization
     inst:AddTag("projectile")
