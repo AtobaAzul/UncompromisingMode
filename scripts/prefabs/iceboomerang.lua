@@ -131,6 +131,8 @@ local function fn()
     inst.AnimState:PlayAnimation("idle")
     inst.AnimState:SetRayTestOnBB(true)
 
+    inst:AddTag("frozen")
+
     inst:AddTag("thrown")
 
     --weapon (from weapon component) added to pristine state for optimization
