@@ -26,20 +26,6 @@ local function UpdateSnowstormWalkSpeed(inst)
     inst.components.snowstormwatcher:UpdateSnowstormWalkSpeed()
 end
 
-local function AddSnowstormWalkSpeedListeners(inst)
-    inst:ListenForEvent("gogglevision", UpdateSnowstormWalkSpeed)
-    inst:ListenForEvent("ghostvision", UpdateSnowstormWalkSpeed)
-    inst:ListenForEvent("mounted", UpdateSnowstormWalkSpeed)
-    inst:ListenForEvent("dismounted", UpdateSnowstormWalkSpeed)
-end
-
-local function RemoveSnowstormWalkSpeedListeners(inst)
-    inst:RemoveEventCallback("gogglevision", UpdateSnowstormWalkSpeed)
-    inst:RemoveEventCallback("ghostvision", UpdateSnowstormWalkSpeed)
-    inst:RemoveEventCallback("mounted", UpdateSnowstormWalkSpeed)
-    inst:RemoveEventCallback("dismounted", UpdateSnowstormWalkSpeed)
-    inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "snowstorm")
-end
 
 function SnowStormWatcher:ToggleSnowstorms(active, src, data)
 	
@@ -50,10 +36,6 @@ function SnowStormWatcher:ToggleSnowstorms(active, src, data)
 		self.task = nil
     elseif TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
         self.inst:StartUpdatingComponent(self)
-                AddSnowstormWalkSpeedListeners(self.inst)
-            self:UpdateSnowstormLevel()
-			self:UpdateSnowstormWalkSpeed()
-			self.inst:PushEvent("snowon")
     end
 end
 
@@ -170,6 +152,49 @@ function SnowStormWatcher:OnUpdate(dt)
 		
 		self:StartSnowPileTask()
 		
+end
+
+
+return SnowStormWatcher
+
+--[[
+
+@@ -26,20 +26,6 @@ local function UpdateSnowstormWalkSpeed(inst)
+    inst.components.snowstormwatcher:UpdateSnowstormWalkSpeed()
+end
+
+local function AddSnowstormWalkSpeedListeners(inst)
+    inst:ListenForEvent("gogglevision", UpdateSnowstormWalkSpeed)
+    inst:ListenForEvent("ghostvision", UpdateSnowstormWalkSpeed)
+    inst:ListenForEvent("mounted", UpdateSnowstormWalkSpeed)
+    inst:ListenForEvent("dismounted", UpdateSnowstormWalkSpeed)
+end
+
+local function RemoveSnowstormWalkSpeedListeners(inst)
+    inst:RemoveEventCallback("gogglevision", UpdateSnowstormWalkSpeed)
+    inst:RemoveEventCallback("ghostvision", UpdateSnowstormWalkSpeed)
+    inst:RemoveEventCallback("mounted", UpdateSnowstormWalkSpeed)
+    inst:RemoveEventCallback("dismounted", UpdateSnowstormWalkSpeed)
+    inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "snowstorm")
+end
+
+function SnowStormWatcher:ToggleSnowstorms(active, src, data)
+	
+@ -50,10 +36,6 @@ function SnowStormWatcher:ToggleSnowstorms(active, src, data)
+		self.task = nil
+    elseif TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
+        self.inst:StartUpdatingComponent(self)
+                AddSnowstormWalkSpeedListeners(self.inst)
+            self:UpdateSnowstormLevel()
+			self:UpdateSnowstormWalkSpeed()
+			self.inst:PushEvent("snowon")
+    end
+end
+
+@ -170,15 +152,6 @@ function SnowStormWatcher:OnUpdate(dt)
+		
+		self:StartSnowPileTask()
+		
 		--self:SnowpileChance()
 		
 		if TheWorld.state.issnowing then
@@ -181,5 +206,4 @@ function SnowStormWatcher:OnUpdate(dt)
 		end
 end
 
-
-return SnowStormWatcher
+--]]
