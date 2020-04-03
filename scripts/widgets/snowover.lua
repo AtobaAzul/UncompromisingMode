@@ -73,7 +73,7 @@ function SnowOver:VisionCheck()
 end
 --]]
 function SnowOver:OnUpdate(dt)
-local x, y, z = ThePlayer.Transform:GetWorldPosition()
+local x, y, z = self.owner.Transform:GetWorldPosition()
 local ents = TheSim:FindEntities(x, y, z, 4, {"wall"})
 local suppressorNearby1 = 0.2 * #ents
 local ents2 = TheSim:FindEntities(x, y, z, 6, {"fire"})
