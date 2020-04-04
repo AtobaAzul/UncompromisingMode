@@ -235,10 +235,10 @@ configuration_options =
 		hover = "Snowstorms, Hayfever, and Acid Rain.",
 		options =
 		{
-			{description = "First Year", data = 20},
+			{description = "First Year", data = 22},
 			{description = "Second Year", data = 55},
 		},
-		default = 20,
+		default = 22,
 	},
 	{
 		name = "caveless",
