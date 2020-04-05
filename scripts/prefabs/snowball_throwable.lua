@@ -161,7 +161,7 @@ local function fn()
     inst.components.edible.foodtype = "HORRIBLE"
 	
     inst:AddComponent("perishable")
-    inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERFAST)
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_ONE_DAY)
     inst.components.perishable:StartPerishing()
     inst.components.perishable:SetOnPerishFn(onperish)
 	

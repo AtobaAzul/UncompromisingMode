@@ -77,7 +77,7 @@ function TrySpawning(v)
 
 	--if math.random(1, 3000) == 1 then
 	if TheWorld.state.iswinter then
-		if math.random() <= 0.25 then
+		if math.random() <= 0.15 then
 				--local spawn_pt = GetSpawnPoint(origin_pt, PLAYER_CHECK_DISTANCE + 5)
 			local x1, y1, z1 = v.Transform:GetWorldPosition()
 				
@@ -99,27 +99,27 @@ local function SnowpileChance(inst, self)
 --print("chance")
 
 	local x, y, z = self.inst.Transform:GetWorldPosition()
-    local ents4 = TheSim:FindEntities(x, y, z, 50, nil, NOTAGS, { "structure" })
+    local ents4 = TheSim:FindEntities(x, y, z, 50, nil, { "snowedin" }, { "structure" })
     for i, v in ipairs(ents4) do
         TrySpawning(v)
     end
 	if TheWorld.state.iswinter then
-		if ents4 == nil or 0 then
-			--if math.random(1, 2500) == 1 then
-			local xrandom = math.random(-25, 25)
-			local zrandom = math.random(-25, 25)
+		if ents4 == nil or 0 or math.random() <= 0.15 then
+			if math.random() <= 0.25 then
+				local xrandom = math.random(-25, 25)
+				local zrandom = math.random(-25, 25)
 
-			local ents7 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 6, nil, nil, { "snowpileradius"})
-			local ents8 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 8, nil, nil, { "fire" })
+				local ents7 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 6, nil, nil, { "snowpileradius"})
+				local ents8 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 8, nil, nil, { "fire" })
 
-					--local ents = TheSim:FindEntities(x, y, z, 40, {"wall" "player" "campfire"})
-			if TheWorld.Map:IsAboveGroundAtPoint(x + xrandom, y, z + zrandom) and #ents7 < 1 and #ents8 < 1 then
-				local snowpilespawnplayer = SpawnPrefab("snowpile")
-				--snowpilespawnplayer.Transform:SetPosition(x + math.random(-20, 20), 0, z + math.random(-20, 20))
-			
-				snowpilespawnplayer.Transform:SetPosition(x + xrandom, 0, z + zrandom)
+						--local ents = TheSim:FindEntities(x, y, z, 40, {"wall" "player" "campfire"})
+				if TheWorld.Map:IsAboveGroundAtPoint(x + xrandom, y, z + zrandom) and #ents7 < 1 and #ents8 < 1 then
+					local snowpilespawnplayer = SpawnPrefab("snowpile")
+					--snowpilespawnplayer.Transform:SetPosition(x + math.random(-20, 20), 0, z + math.random(-20, 20))
+				
+					snowpilespawnplayer.Transform:SetPosition(x + xrandom, 0, z + zrandom)
+				end
 			end
-		--end
 		end
 	end
 	

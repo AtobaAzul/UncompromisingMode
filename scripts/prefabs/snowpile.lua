@@ -36,7 +36,7 @@ local function onregen(inst)
 				inst.components.workable:SetWorkLeft(inst.components.workable.workleft+1)
 				inst.components.pickable.cycles_left = inst.components.pickable.cycles_left + 1
 				startregen(inst)
-			elseif inst.components.workable.workleft == 3 and math.random() <= 0.25 then
+			elseif inst.components.workable.workleft == 3 and math.random() <= 0.2 then
 				local x1, y1, z1 = inst.Transform:GetWorldPosition()
 				local ents2 = TheSim:FindEntities(x1, y1, z1, 40, { "player" })
 				if #ents2 > 0 then
@@ -108,9 +108,10 @@ local function workcallback(inst, worker, workleft)
 
 	if workleft < 0 then
 		-- the devtool probably did this, spit out 2
-		inst.components.lootdropper:SetLoot({"snowball_throwable"})
+
+		--inst.components.lootdropper:SetLoot({"snowball_throwable", 0.5})
 	else
-		inst.components.lootdropper:SetLoot({"snowball_throwable"})
+		--inst.components.lootdropper:SetLoot({"snowball_throwable", 0.5})
 	end
 --[[
 	if workleft <= 1 then
@@ -118,8 +119,9 @@ local function workcallback(inst, worker, workleft)
 	end
 --]]
 	inst.components.lootdropper.numrandomloot = 1
-	inst.components.lootdropper.chancerandomloot = 0.01  -- drop some random item 1% of the time
+	inst.components.lootdropper.chancerandomloot = 0.5  -- drop some random item 1% of the time
 
+	inst.components.lootdropper:AddRandomLoot("snowball_throwable", 1.00)
 	inst.components.lootdropper:AddRandomLoot("rock", 0.01)
 	inst.components.lootdropper:AddRandomLoot("ice", 0.01)
 
@@ -149,43 +151,6 @@ local function workcallback(inst, worker, workleft)
 	--inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/sandpile")
 
 	startregen(inst)
-end
-
-local function workcallback2(inst)
-	-- print('trying to spawn sand', inst, worker, workleft)
-
-	
-	if inst.components.workable.workleft > 0 then
-		inst.components.workable:SetWorkLeft(inst.components.workable.workleft - 1)
-	end
-	--if workleft < 0 then
-		-- the devtool probably did this, spit out 2
-		--inst.components.lootdropper:SetLoot({"ice", "ice"})
-	--else
-		inst.components.lootdropper:SetLoot({"ice"})
-	--end
-
-	inst.components.lootdropper.numrandomloot = 1
-	inst.components.lootdropper.chancerandomloot = 0.01  -- drop some random item 1% of the time
-
-	inst.components.lootdropper:AddRandomLoot("rock", 0.01)
-	inst.components.lootdropper:AddRandomLoot("ice", 0.05)
-	inst.components.lootdropper:AddRandomLoot("feather_crow", 0.01)
-	inst.components.lootdropper:AddRandomLoot("feather_robin", 0.01)
-	inst.components.lootdropper:AddRandomLoot("feather_robin_winter", 0.01)
-
-	
-		local pt = Vector3(inst.Transform:GetWorldPosition())
-		inst.components.lootdropper:DropLoot(pt + (TheCamera:GetRightVec()*(.5+math.random())))
-
-	--inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/sandpile")
-
-	if inst.components.workable.workleft >= 0 then
-		inst:Remove()
-	else
-		startregen(inst)
-	end
-	
 end
 
 local function onsave(inst, data)
@@ -359,6 +324,7 @@ local function snowpilefn(Sim)
 	inst.Transform:SetScale(1.5, 1.5, 1.5)
 	
 	inst:AddTag("snowpileradius")
+	inst:AddTag("snowpile_basic")
 	
 	if not TheWorld.ismastersim then
         return inst
