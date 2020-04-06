@@ -138,7 +138,7 @@ local function fn(Sim)
 	MakeSmallBurnableCharacter(inst, "chest")
 	MakeTinyFreezableCharacter(inst, "chest")
 	
-	inst.components.freezable:SetResistance(5)
+	inst.components.freezable:SetResistance(999)
 
 	inst.AnimState:SetBank("giant_grub")
 	inst.AnimState:SetBuild("giant_grub")
@@ -155,6 +155,7 @@ local function fn(Sim)
 	inst:AddComponent("health")
 	inst.components.health:SetMaxHealth(600)
 	inst.components.health.murdersound = "dontstarve/rabbit/scream_short"
+	inst.components.health.fire_damage_scale = 0
 
 	inst:AddComponent("inspectable")
 	inst:AddComponent("sleeper")
