@@ -85,7 +85,7 @@ env.AddPrefabPostInit("spider", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	
+	--[[
 	inst:RemoveComponent("lootdropper")
 	
 	inst:AddComponent("lootdropper")
@@ -94,7 +94,7 @@ env.AddPrefabPostInit("spider", function(inst)
     inst.components.lootdropper:AddRandomLoot("spidergland", .5)
     inst.components.lootdropper:AddRandomHauntedLoot("spidergland", 1)
     inst.components.lootdropper.numrandomloot = 1
-	
+	--]]
 	inst:AddTag("spider_regular")
 	
 	if inst.components.combat ~= nil then

@@ -18,7 +18,7 @@ SetSharedLootTable('bushcrab',
     {'berries', 1.0},
     {'berries', 0.5},
     {'twigs', 0.5},
-    {'monstermorsel', 0.5},
+    {'monstermeat', 0.5},
 })
 
 local brain = require "brains/spiderbrain"
