@@ -20,9 +20,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
     DESCRIBE.RATPOISONBOTTLE = "My oh my, what a way to die!"
     DESCRIBE.RATPOISON = "A deadly slick! That should do the trick!"
 
-    DESCRIBE.MONSTERMORSEL = "What a monstrous little fiend you were!"
-    DESCRIBE.COOKEDMONSTERMORSEL = "No matter how prepared, it's just not my fare."
-    DESCRIBE.MONSTERMORSEL_DRIED = "Ho, most grim."
+    DESCRIBE.MONSTERSMALLMEAT = "What a monstrous little fiend you were!"
+    DESCRIBE.COOKEDMONSTERSMALLMEAT = "No matter how prepared, it's just not my fare."
+    DESCRIBE.MONSTERSMALLMEAT_DRIED = "Ho, most grim."
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "It seems the source of that malicious mycelium!"
     DESCRIBE.TOADLING = "Come to hop away...or perhaps to play?"

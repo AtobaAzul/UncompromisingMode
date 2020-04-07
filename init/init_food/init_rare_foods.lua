@@ -284,18 +284,6 @@ GLOBAL.TUNING.DECIDUOUS_GROW_TIME =
     {base=1*day_time*xc, random=0.5*day_time}   --old
 }
 
------------------------------------------------------------------
--- Gobblers drop only 1 leg
------------------------------------------------------------------
-local single_drumstick =
-{
-    "drumstick",
-}
-AddPrefabPostInit("perd", function(inst)
-    if inst ~= nil and inst.components.lootdropper ~= nil then
-        inst.components.lootdropper:SetLoot(single_drumstick)
-    end
-end)
 
 -----------------------------------------------------------------
 -- Koela drop only 4 meat (like beefalos)

@@ -20,9 +20,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
     DESCRIBE.RATPOISONBOTTLE = "My treasures, the bait. Mine fury, the trap."
     DESCRIBE.RATPOISON = "Emerge little plunderers, and face the end of days!"
 
-    DESCRIBE.MONSTERMORSEL = "Meat of tiny evil."
-    DESCRIBE.COOKEDMONSTERMORSEL = "Might I partake of such dark omens?"
-    DESCRIBE.MONSTERMORSEL_DRIED = "Mine grim provisions."
+    DESCRIBE.MONSTERSMALLMEAT = "Meat of tiny evil."
+    DESCRIBE.COOKEDMONSTERSMALLMEAT = "Might I partake of such dark omens?"
+    DESCRIBE.MONSTERSMALLMEAT_DRIED = "Mine grim provisions."
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Let us rip out this affliction by the root!"
     DESCRIBE.TOADLING = "Fel guardians of corruption!"

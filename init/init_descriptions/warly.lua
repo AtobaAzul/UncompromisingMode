@@ -20,9 +20,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
     DESCRIBE.RATPOISONBOTTLE = "Peace of mind in a bottle."
     DESCRIBE.RATPOISON = "Dinner is served..."
 
-    DESCRIBE.MONSTERMORSEL = "A delicacy in the works?"
-    DESCRIBE.COOKEDMONSTERMORSEL = "Mm, how to save this dish...?"
-    DESCRIBE.MONSTERMORSEL_DRIED = "I hate to throw away good food, but...this isn't."
+    DESCRIBE.MONSTERSMALLMEAT = "A delicacy in the works?"
+    DESCRIBE.COOKEDMONSTERSMALLMEAT = "Mm, how to save this dish...?"
+    DESCRIBE.MONSTERSMALLMEAT_DRIED = "I hate to throw away good food, but...this isn't."
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "What an unsavory sprout."
     DESCRIBE.TOADLING = "Seems they don't stray far from that fungi's strange aroma."

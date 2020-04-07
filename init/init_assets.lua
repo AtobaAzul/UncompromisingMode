@@ -19,10 +19,6 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/snowgoggles.tex"),
 	Asset("ATLAS", "images/inventoryimages/ratpoisonbottle.xml"),
 	Asset("IMAGE", "images/inventoryimages/ratpoisonbottle.tex"),
-	Asset("ATLAS", "images/inventoryimages/cookedmonstermorsel.xml"),
-	Asset("IMAGE", "images/inventoryimages/cookedmonstermorsel.tex"),
-	Asset("ATLAS", "images/inventoryimages/monstermorsel.xml"),
-	Asset("IMAGE", "images/inventoryimages/monstermorsel.tex"),
 	Asset("ATLAS", "images/inventoryimages/iceboomerang.xml"),
 	Asset("IMAGE", "images/inventoryimages/iceboomerang.tex"),
 	Asset("ATLAS", "images/inventoryimages/diseasecurebomb.xml"),
@@ -43,7 +39,6 @@ Assets = {
 	Asset("ANIM", "anim/tar_trap.zip"),
 	Asset("ANIM", "anim/swap_minotaur_boulder.zip"),
 	Asset("ANIM", "anim/pillar_ruins_damaged.zip"),
-	Asset("ANIM", "anim/monstermorsel.zip"),
 	Asset("ANIM", "anim/rhino_stun.zip"),
 	Asset("ANIM", "anim/charlie_fountain.zip"),
 	Asset("ANIM", "anim/bush_crab.zip"),
@@ -65,5 +60,15 @@ Assets = {
 	Asset("ANIM", "anim/hippo_water.zip"),
 
 	Asset("SOUNDPACKAGE", "sound/UCSounds.fev"), 
-	Asset( "SOUND", "sound/UCSounds_bank00.fsb"), 
+	Asset( "SOUND", "sound/UCSounds_bank00.fsb"),
+	
+	--monster morsels from waffles, thanks
+	Asset("ANIM", "anim/extra_monsterfoods.zip"),
+    Asset("ANIM", "anim/extra_monsterfoods_dried.zip"),
+   	Asset("IMAGE", "images/inventoryimages/cookedmonstersmallmeat.tex"),
+	Asset("ATLAS", "images/inventoryimages/cookedmonstersmallmeat.xml"),
+   	Asset("IMAGE", "images/inventoryimages/monstersmallmeat.tex"),
+	Asset("ATLAS", "images/inventoryimages/monstersmallmeat.xml"),
+   	Asset("IMAGE", "images/inventoryimages/monstersmallmeat_dried.tex"),
+	Asset("ATLAS", "images/inventoryimages/monstersmallmeat_dried.xml"),
 }

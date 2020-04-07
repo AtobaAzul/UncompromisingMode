@@ -20,9 +20,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
     DESCRIBE.RATPOISONBOTTLE = "There's a thought..."
     DESCRIBE.RATPOISON = "Even if I were to partake, this world would drag me back..."
 
-    DESCRIBE.MONSTERMORSEL = "A small, dark well of condensed agony..."
-    DESCRIBE.COOKEDMONSTERMORSEL = "Small, filled with pain, and ready to be consumed by this world..."
-    DESCRIBE.MONSTERMORSEL_DRIED = "Some weight has lifted from it, but it will never truly escape its nature..."
+    DESCRIBE.MONSTERSMALLMEAT = "A small, dark well of condensed agony..."
+    DESCRIBE.COOKEDMONSTERSMALLMEAT = "Small, filled with pain, and ready to be consumed by this world..."
+    DESCRIBE.MONSTERSMALLMEAT_DRIED = "Some weight has lifted from it, but it will never truly escape its nature..."
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "A parasitic existence feeding upon the very earth."
     DESCRIBE.TOADLING = "They're very loyal to their kind..."

@@ -240,11 +240,6 @@ AddPrefabPostInit("pigguard", function (inst)
 end)
 
 
------------------------------------------------------------------
--- Eyeplant buff
------------------------------------------------------------------
-GLOBAL.TUNING.EYEPLANT_HEALTH = 100
-GLOBAL.TUNING.EYEPLANT_ATTACK_PERIOD = 0.7
 
 -----------------------------------------------------------------
 -- Beefalo herding buff - TODO: Increase range of aggro

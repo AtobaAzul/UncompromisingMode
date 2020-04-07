@@ -20,9 +20,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
     DESCRIBE.RATPOISONBOTTLE = "Darn, this stuff woulda put Red Squill to shame."
     DESCRIBE.RATPOISON = "Nice not having to worry about rat presents all over our stuff."
 
-    DESCRIBE.MONSTERMORSEL = "Not too sure why I wanted this..."
-    DESCRIBE.COOKEDMONSTERMORSEL = "Does cooking something like this make it food?"
-    DESCRIBE.MONSTERMORSEL_DRIED = "Old, sad anger meat."
+    DESCRIBE.MONSTERSMALLMEAT = "Not too sure why I wanted this..."
+    DESCRIBE.COOKEDMONSTERSMALLMEAT = "Does cooking something like this make it food?"
+    DESCRIBE.MONSTERSMALLMEAT_DRIED = "Old, sad anger meat."
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "That can't be good. We need to cut it off at the source!"
     DESCRIBE.TOADLING = "Well THAT one's got an an attitude."

@@ -20,9 +20,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
     DESCRIBE.RATPOISONBOTTLE = "Veggies but taste really bad."
     DESCRIBE.RATPOISON = "Spill! Wasn't good anyway."
 
-    DESCRIBE.MONSTERMORSEL = "No, not good. Leave for Spiderfolk?"
-    DESCRIBE.COOKEDMONSTERMORSEL = "Glurgh! Smell so bad."
-    DESCRIBE.MONSTERMORSEL_DRIED = "Even bader now, florpt!"
+    DESCRIBE.MONSTERSMALLMEAT = "No, not good. Leave for Spiderfolk?"
+    DESCRIBE.COOKEDMONSTERSMALLMEAT = "Glurgh! Smell so bad."
+    DESCRIBE.MONSTERSMALLMEAT_DRIED = "Even bader now, florpt!"
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Mushroom? Mad mushroom!"
     DESCRIBE.TOADLING = "Veggie...froggie? Not sure if ok to eat."

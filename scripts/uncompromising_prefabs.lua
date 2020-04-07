@@ -31,7 +31,7 @@ return {
 	"minimoonspider_spike",
 	"minotaur_boulder",
 	"minotaur_boulder_big",
-	"monstermorsel",
+	--"monstermorsel",
 	"charlie_fountain",
 	"bushcrab",
 	"dreadeye",
@@ -43,4 +43,5 @@ return {
 	"diseasecure",
 	"toadlingspawner",
 	"snowball_throwable",
+	"extra_monsterfoods"
 }

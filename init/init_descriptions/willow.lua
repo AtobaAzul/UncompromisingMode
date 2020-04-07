@@ -20,9 +20,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
     DESCRIBE.RATPOISONBOTTLE = "Yea, this'll take care of those gross little jerks!"
     DESCRIBE.RATPOISON = "Cooome and get iiiiit..."
 
-    DESCRIBE.MONSTERMORSEL = "It's from gross little hair monsters..."
-    DESCRIBE.COOKEDMONSTERMORSEL = "I don't think I can burn all the hairs out..."
-    DESCRIBE.MONSTERMORSEL_DRIED = "Now it's just gross AND old."
+    DESCRIBE.MONSTERSMALLMEAT = "It's from gross little hair monsters..."
+    DESCRIBE.COOKEDMONSTERSMALLMEAT = "I don't think I can burn all the hairs out..."
+    DESCRIBE.MONSTERSMALLMEAT_DRIED = "Now it's just gross AND old."
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Ew! Burn it!"
     DESCRIBE.TOADLING = "Gross! It's all sticky-looking."
