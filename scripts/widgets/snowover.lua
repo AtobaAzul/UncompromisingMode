@@ -36,19 +36,17 @@ local SnowOver =  Class(Widget, function(self, owner, storm_overlays)
     self.bg2:GetAnimState():PlayAnimation("dust_loop", true)
 	--self.bg2:SetTint(1,1,1,.8)
 	
-	
     self:Hide()
 	self:OnUpdate(0)
 	self:StartUpdating()
-	
 
 if owner ~= nil then
-    self.owner:ListenForEvent("snowon", function(owner) return self:SnowOn() end, owner)
+    --self.owner:ListenForEvent("snowon", function(owner) return self:SnowOn() end, owner)
     self.owner:ListenForEvent("snowoff", function(owner) return self:SnowOn() end, owner)
 	--self.owner:ListenForEvent("checksnowvision", function(owner) return self:VisionCheck() end, owner)
 	--self.owner:DoTaskInTime(0.1, function() return self:SnowOn() end)
 	--self.owner:DoTaskInTime(0.1, function() return self:VisionCheck() end)
-	self.inst:ListenForEvent("weathertick", function(owner) return self:SnowOn() end, owner)
+	--self.inst:ListenForEvent("weathertick", function(owner) return self:SnowOn() end, owner)
 	
 	self.inst:ListenForEvent("seasontick", function(owner) return self:ToggleUpdating() end, owner)
 	--self.owner:ListenForEvent("weathertick", function(owner) return self:SnowOn() end, owner)
@@ -73,54 +71,53 @@ function SnowOver:VisionCheck()
 end
 --]]
 function SnowOver:OnUpdate(dt)
-local x, y, z = self.owner.Transform:GetWorldPosition()
-local ents = TheSim:FindEntities(x, y, z, 4, {"wall"})
-local suppressorNearby1 = 0.2 * #ents
-local ents2 = TheSim:FindEntities(x, y, z, 6, {"fire"})
-local suppressorNearby2 = 0.5 * #ents2
-local ents3 = TheSim:FindEntities(x, y, z, 5.5, {"shelter"})
-local suppressorNearby3 = 0.1 * #ents3
-
-local equationdingus = suppressorNearby1 + suppressorNearby2 + suppressorNearby3
-
-if TheWorld.state.issnowing then
-	if self.alphaquation == nil then
-	self.alphaquation = 0
-	elseif self.alphaquation <= equationdingus then
-	self.alphaquation = self.alphaquation + 0.01
-	elseif self.alphaquation >= equationdingus then
-	self.alphaquation = self.alphaquation - 0.01
-	end
-else
-	if self.alphaquation == nil then
-	self.alphaquation = 0
-	elseif self.alphaquation > 0 then
-	self.alphaquation = self.alphaquation - 0.001
-	end
-end
-
-if TheWorld.state.issnowing and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
-		if self.changed == nil then
-			self.changed = 0.01
-		elseif self.changed <= 0.8 then
-			self.changed = self.changed + 0.001 
-			--print("plus 0.1")
-			self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed)
-		
-			if self.owner.components.playervision ~= nil and self.owner.components.playervision:HasGoggleVision() then
-				
-				self.bg:GetAnimState():SetMultColour(1, 1, 1, 0)
-			else
-				self.bg:GetAnimState():SetMultColour(1, 1, 1, self.changed)
-			end
-			
-				TheFocalPoint.SoundEmitter:PlaySound("dontstarve/common/together/sandstorm", "snowstorm")
-				TheFocalPoint.SoundEmitter:SetParameter("snowstorm", "intensity", self.changed)
-				
-		end
-		self:Show()
-	else
+	local x, y, z = self.owner.Transform:GetWorldPosition()
+	local ents = TheSim:FindEntities(x, y, z, 4, {"wall"})
+	local suppressorNearby1 = 0.2 * #ents
+	local ents2 = TheSim:FindEntities(x, y, z, 6, {"fire"})
+	local suppressorNearby2 = 0.5 * #ents2
+	local ents3 = TheSim:FindEntities(x, y, z, 5.5, {"shelter"})
+	local suppressorNearby3 = 0.1 * #ents3
 	
+	local equationdingus = suppressorNearby1 + suppressorNearby2 + suppressorNearby3
+
+	if TheWorld.state.issnowing then
+		if self.alphaquation == nil then
+		self.alphaquation = 0
+		elseif self.alphaquation <= equationdingus then
+		self.alphaquation = self.alphaquation + 0.01
+		elseif self.alphaquation >= equationdingus then
+		self.alphaquation = self.alphaquation - 0.01
+		end
+	else
+		if self.alphaquation == nil then
+		self.alphaquation = 0
+		elseif self.alphaquation > 0 then
+		self.alphaquation = self.alphaquation - 0.001
+		end
+	end
+
+	if TheWorld.state.issnowing and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE and TheWorld.net:HasTag("snowstormstartnet") then
+			if self.changed == nil then
+				self.changed = 0.01
+			elseif self.changed <= 0.8 then
+				self.changed = self.changed + 0.001 
+				--print("plus 0.1")
+				self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed)
+			
+				if self.owner.components.playervision ~= nil and self.owner.components.playervision:HasGoggleVision() then
+					
+					self.bg:GetAnimState():SetMultColour(1, 1, 1, 0)
+				else
+					self.bg:GetAnimState():SetMultColour(1, 1, 1, self.changed)
+				end
+				
+					TheFocalPoint.SoundEmitter:PlaySound("dontstarve/common/together/sandstorm", "snowstorm")
+					TheFocalPoint.SoundEmitter:SetParameter("snowstorm", "intensity", self.changed)
+					
+			end
+			self:Show()
+	else
 		if self.changed == nil then
 			self.changed = 0
 		elseif self.changed >= 0 then
@@ -160,26 +157,27 @@ if TheWorld.state.issnowing and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZAR
 			
 		end
 	end
+
 end
 
 function SnowOver:SnowOn()
-if TheWorld.state.iswinter and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
-	self:StartUpdating()
+	if TheWorld.state.iswinter and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
+		self:StartUpdating()
 	else
-	self:Hide() 
-	TheFocalPoint.SoundEmitter:KillSound("snowstorm")
-	self:StopUpdating()
-end
+		self:Hide() 
+		TheFocalPoint.SoundEmitter:KillSound("snowstorm")
+		self:StopUpdating()
+	end
 end
 
 function SnowOver:ToggleUpdating()
 	if TheWorld.state.iswinter and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
-	self:StartUpdating()
+		self:StartUpdating()
 	else
-	self:Hide() 
-	TheFocalPoint.SoundEmitter:KillSound("snowstorm")
-	self:StopUpdating()
-end
+		self:Hide() 
+		TheFocalPoint.SoundEmitter:KillSound("snowstorm")
+		self:StopUpdating()
+	end
 end
 
 return SnowOver

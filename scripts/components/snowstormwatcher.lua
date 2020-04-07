@@ -16,16 +16,22 @@ nil,
     --snowstormlevel = onsnowstormlevel,
 })
 
-
-local function OnChangeArea(inst)
-    local self = inst.components.stormwatcher
-    self:UpdateSnowstormLevel()
-end
-
 local function UpdateSnowstormWalkSpeed(inst)
     inst.components.snowstormwatcher:UpdateSnowstormWalkSpeed()
 end
 
+local function StormStart(self)
+	self.stormtask = nil
+
+	TheWorld:AddTag("snowstormstart")
+	TheWorld.net:AddTag("snowstormstartnet")
+end
+
+local function StormStop(self)
+	self.stopstormtask = nil
+	TheWorld:RemoveTag("snowstormstart")
+	TheWorld.net:RemoveTag("snowstormstartnet")
+end
 
 function SnowStormWatcher:ToggleSnowstorms(active, src, data)
 	
@@ -34,8 +40,19 @@ function SnowStormWatcher:ToggleSnowstorms(active, src, data)
 		self.inst:PushEvent("snowoff")
         self.inst:StopUpdatingComponent(self)
 		self.task = nil
+		self.stormtask = nil
+		self.stopstormtask = nil
+		TheWorld:RemoveTag("snowstormstart")
     elseif TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
         self.inst:StartUpdatingComponent(self)
+		if self.stormtask == nil then
+			self.stormtask = self.inst:DoTaskInTime(120 + math.random(10,40), StormStart, self)--, self)
+		end
+		
+		if self.stopstormtask == nil then
+			self.stopstormtask = self.inst:DoTaskInTime(580 + math.random(20,40), StormStop, self)--, self)
+		end
+		
     end
 end
 
@@ -43,6 +60,10 @@ function SnowStormWatcher:UpdateSnowstormLevel()
 
         self:UpdateSnowstormWalkSpeed()
     --end
+end
+
+function SnowStormWatcher:SnowstormLevel()
+	return TheWorld:HasTag("snowstormstart")
 end
 
 function SnowStormWatcher:UpdateSnowstormWalkSpeed(src, data)
@@ -56,7 +77,7 @@ function SnowStormWatcher:UpdateSnowstormWalkSpeed(src, data)
 		local ents3 = TheSim:FindEntities(x, y, z, 5.5, {"shelter"})
 		local suppressorNearby3 = (#ents3 > 2)
 		
-    if TheWorld.state.issnowing then
+    if TheWorld.state.issnowing and TheWorld:HasTag("snowstormstart") then
         if self.inst.components.playervision:HasGoggleVision() or
             self.inst.components.playervision:HasGhostVision() or
             self.inst.components.rider:IsRiding() or
@@ -76,7 +97,7 @@ end
 function TrySpawning(v)	
 
 	--if math.random(1, 3000) == 1 then
-	if TheWorld.state.iswinter then
+	if TheWorld.state.iswinter and TheWorld:HasTag("snowstormstart") then
 		if math.random() <= 0.15 then
 				--local spawn_pt = GetSpawnPoint(origin_pt, PLAYER_CHECK_DISTANCE + 5)
 			local x1, y1, z1 = v.Transform:GetWorldPosition()
@@ -103,7 +124,7 @@ local function SnowpileChance(inst, self)
     for i, v in ipairs(ents4) do
         TrySpawning(v)
     end
-	if TheWorld.state.iswinter then
+	if TheWorld.state.iswinter and TheWorld:HasTag("snowstormstart") then
 		if ents4 == nil or 0 or math.random() <= 0.15 then
 			if math.random() <= 0.25 then
 				local xrandom = math.random(-25, 25)

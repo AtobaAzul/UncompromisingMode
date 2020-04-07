@@ -11,6 +11,6 @@ env.AddPrefabPostInit("trap_teeth", function(inst)
         return
     end
 
-    MakeSmallBurnable(inst)
-    MakeSmallPropagator(inst)
+   --[[ MakeSmallBurnable(inst)
+    MakeSmallPropagator(inst)--]]
 end)

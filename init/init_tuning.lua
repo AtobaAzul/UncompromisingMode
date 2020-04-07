@@ -39,7 +39,7 @@ TUNING.DSTU =
     
     --Growth time increases
     STONE_FRUIT_GROWTH_INCREASE = 3,
-    TREE_GROWTH_TIME_INCREASE = 5,
+    TREE_GROWTH_TIME_INCREASE = 1.05,
 
     --Food stats
     FOOD_BUTTERFLY_WING_HEALTH = 5, -- 3

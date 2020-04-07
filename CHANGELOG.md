@@ -44,7 +44,7 @@
  
 * [x]  Ice and twigs cannot be more than 2 inside crockpot recipes
  
-* [x]  [Rat waves](https://cdn.discordapp.com/attachments/623666104937480192/629152866426290197/damnrat.gif), that will come with number of days, mess around your items, eat your food, and bite you for max health penalties 
+* [x]  [Rat waves](https://cdn.discordapp.com/attachments/623666104937480192/629152866426290197/damnrat.gif), that will periodically come after day 50, they mess around your items, eat your food, and bite you for max health penalties 
  
 * [x]  Carrots are rarer in world generation
 
@@ -82,7 +82,7 @@
 
 * [x]  Catcoon have 5x the health
 
-* [x]  Tooth traps burn
+* [ ]  Tooth traps burn
 
 * [x]  Cactus, stone fruits and spiky bushs don't grow in winter
 
@@ -144,7 +144,7 @@
 
 * [x] Increased Mini Fan cost to compensate for new function
 
-* [x] Fire Meteor's from Antlion rage
+* [x] Fire Meteor's will rain from the sun after the Antlion summons sinkholes. She now has the power of the sun. Have fun.
 
 * [x] Dragonfly and Gmoose seasonal spawning
 
@@ -158,7 +158,9 @@
 
 * [x] Snowpiles form around players during snowstorms, can be destroyed by hand or with a shovel
 
-* [x] Sand now spawns in the desert, used for goggle recipe
+* [ ] Sand now spawns in the desert, used for goggle recipe
+
+* [x] Fashion and Desert Goggles are now a UNIVERSAL CRAFTING RECIPE! No more rng oasis fishing.
 
 * [x] New Catcoon Cap Goggles hat, same effect as Desert Goggles, increased insulation over the Cat Cap
 
