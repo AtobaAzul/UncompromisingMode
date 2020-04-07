@@ -52,8 +52,6 @@
  
 * [ ]  During Worldgen, carrots can sometimes be replaced with different vegetables. (Asparagus, Potato, Toma Root, etc etc) 
 
-* [x]  Bishops now flee inbetween attacks
-
 * [x]  Mod settings for disabling/enabling features
 
 * [x]  Pigs and bunnies defend their houses when hammered
@@ -76,17 +74,13 @@
 
 * [x]  Monster meat must be dilluted with normal meat in crocpot to not make lasagna, with the exception of monster jerky
 
-* [x]  Monster meat has a default monster value of 2.5 now. Cooked is 2.0 monster value. Monster Jerky is 1.0 monster value.
+* [x]  Monster meat has a default monster value of 2.5 now. Cooked is 2.0 monster value. Monster Jerky is 1.0 monster value. This means Monster jerky can still make meatballs.
 
 * [x]  Wolfgang sanity drain to 1.5x (prev was 1.1x)
 
 * [x]  Catcoon have increased health
 
-* [ ]  Tooth traps burn
-
 * [x]  Cactus, stone fruits and spiky bushs don't grow in winter
-
-* [ ]  Pig king has guards protecting him
 
 * [x]  Pig guards now break free by attacking walls that entrap them
 
@@ -108,8 +102,6 @@
 
 * [x]  Koelefants drop 4 meat now, instead of 8
 
-* [x]  Gobblers now drop only 1 drumstick
-
 * [x]  Marble armor ignores our knockback mechanic
 
 * [x]  Bees don't drop honey, only stingers
@@ -120,11 +112,7 @@
 
 * [x]  Food appearance rates reduced significantly (berries, carrots, mushrooms)
 
-* [x]  Eye plant has more health
-
 * [x]  Bunnymen no longer drop carrots
-
-* [x]  Time for trees to grow increased significantly
 
 * [x]  Only winona can use her generators
 
@@ -158,8 +146,6 @@
 
 * [x] Snowpiles form around players during snowstorms, can be destroyed by hand or with a shovel
 
-* [ ] Sand now spawns in the desert, used for goggle recipe
-
 * [x] Fashion and Desert Goggles are now a UNIVERSAL CRAFTING RECIPE! No more rng oasis fishing.
 
 * [x] New Catcoon Cap Goggles hat, same effect as Desert Goggles, increased insulation over the Cat Cap
@@ -168,11 +154,11 @@
 
 * [x] Deerclops "enrages" at half health
 
-* [x] Craftable sand using Desert Stones
-
 * [x] New mob: Abominamole, spawns out of snow piles
 
 * [x] New mob: Depths Eel, added to Depth Worm attacks.
+
+* [x] Zaspberries: berry drops from depth eels that give the player the chaud-froid effect for less time and make the player glow
 
 * [x] Mini-fan cost increased, now protects against hayfever
 
@@ -218,9 +204,9 @@
 
 * [x] Added Moon Oil, a cure for diseased plants
 
-* [x] Added Frozen Pincer and Redid Snowmong Texture
+* [x] Added Frozen Pincer an ice boomerang that rarely drops from abominamoles (stats pending)
 
-* [x] Snowballs
+* [x] Snowballs added: makes targets cold when thrown, can be used to freeze targets
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
