@@ -80,7 +80,7 @@
 
 * [x]  Wolfgang sanity drain to 1.5x (prev was 1.1x)
 
-* [x]  Catcoon have 5x the health
+* [x]  Catcoon have increased health
 
 * [ ]  Tooth traps burn
 
@@ -140,7 +140,7 @@
 
 * [x] Hayfever added to spring
 
-* [x] Added Gasmask, Antihistamine foods, and Mini Fan changes to combat hayfever
+* [x] Added Gasmask, Antihistamine foods, and Mini Fan changes to combat hayfever [Wormwood is immune to Hayfever!]
 
 * [x] Increased Mini Fan cost to compensate for new function
 
