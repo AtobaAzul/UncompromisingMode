@@ -47,7 +47,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 	DESCRIBE.SNOWMONG = "I have no idea."
 	DESCRIBE.SHOCKWORM = "A highly conductive Annelida!"
 	DESCRIBE.ZASPBERRY = "Nonsense, there's no such thing as a blue Rubus."
-	DESCRIBE.ICEBOOMERANG = "Perhaps those strange blue rocks could be behind this?"
+	DESCRIBE.ICEBOOMERANG = "A severed appendage that dramatically lowers body temperature on contact."
+	DESCRIBE.SNOWBALL_THROWABLE = "A handful of snow, mashed together so it can be thrown."
+	DESCRIBE.VETERANSHRINE = "That's certainly not the best idea."
 
 	DESCRIBE.BUSHCRAB = "Ardisia brachyura!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

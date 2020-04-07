@@ -47,7 +47,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.SNOWMONG = "Is that one of those snow-mole-bile things I've heard about?"
 	DESCRIBE.SHOCKWORM = "That's a saftey hazard if I've ever seen one!"
 	DESCRIBE.ZASPBERRY = "May as well taste it."
-	DESCRIBE.ICEBOOMERANG = "Let's see how far I can launch it"
+	DESCRIBE.ICEBOOMERANG = "Quite a handy tool, ain't it?"
+	DESCRIBE.VETERANSHRINE = "This doesn't look like Charlie's doing."
+	DESCRIBE.SNOWBALL_THROWABLE = "Maybe I could load it in a catapult? Hmm, nah."
 
 	DESCRIBE.BUSHCRAB = "Thats some dangerous weeding!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

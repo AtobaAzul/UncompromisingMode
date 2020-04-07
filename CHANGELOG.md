@@ -34,8 +34,6 @@
 
 * [x]  Statue walls, signs, lava ponds, bone fragments hitbox pathing is ignored (now they have no collision)
 
-* [x]  Wetness buff - Chance to trip and fall for -15 damage at 100 wetness
-
 * [x]  Butterfly wing nerf - Health restored to 5 (down from 8)
 
 * [x]  Meatballs nerf - Hunger restored to 50 (down from 62.5)

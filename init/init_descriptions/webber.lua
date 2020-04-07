@@ -47,7 +47,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.SNOWMONG = "4 eyes?! Definitely not our friend!"
 	DESCRIBE.SHOCKWORM = "Freaky frilly!"
 	DESCRIBE.ZASPBERRY = "Zappy!"
-	DESCRIBE.ICEBOOMERANG = "Someone wanna play catch?"
+	DESCRIBE.ICEBOOMERANG = "Brrrr, it's chilly just to have near us!"
+	DESCRIBE.SNOWBALL_THROWABLE = "Ooh! Ooh! Who wants to snowball fight?"
+	DESCRIBE.VETERANSHRINE = "It's looking at us!!"
 
 	DESCRIBE.BUSHCRAB = "Not one of our friends!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

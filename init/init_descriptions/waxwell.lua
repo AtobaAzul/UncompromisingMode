@@ -49,7 +49,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.SHOCKWORM = "I definitely did not make that one!"
 	 -- ...
 	DESCRIBE.ZASPBERRY = "I'm not one for wild berries, magical or not."
-	DESCRIBE.ICEBOOMERANG = "A mundane icy tool"
+	DESCRIBE.ICEBOOMERANG = "Magic is great, isn't it?"
+	DESCRIBE.SNOWBALL_THROWABLE = "Not. The. Suit. What do you not get about this?"
+	DESCRIBE.VETERANSHRINE = "I already have fuel-related problems, what's another?"
 
 	DESCRIBE.BUSHCRAB = "I guess they've finally hatched."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

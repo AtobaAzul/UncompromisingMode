@@ -47,7 +47,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.SNOWMONG = "This is no frozen treat!"
 	DESCRIBE.SHOCKWORM = "Touching it could cook me to perfection!"
 	DESCRIBE.ZASPBERRY = "Perhaps a nice raspberry parfait?"
-	DESCRIBE.ICEBOOMERANG = "Perhaps this could be repurposed?"
+	DESCRIBE.ICEBOOMERANG = "Maybe if I dip it in flavor, and save it for Summer?"
+	DESCRIBE.SNOWBALL_THROWABLE = "I wasn't ever able to play with snow; I never saw any where I'm from."
+	DESCRIBE.VETERANSHRINE = "The lengths I go for ingredients..."
 
 	DESCRIBE.BUSHCRAB = "Berries and crab cake, anyone? No?"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

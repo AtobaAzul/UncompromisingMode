@@ -47,7 +47,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.SNOWMONG = "Snow is fighting back!"
 	DESCRIBE.SHOCKWORM = "Wolfgang shocked!"
 	DESCRIBE.ZASPBERRY = "Sparky berry!"
-	DESCRIBE.ICEBOOMERANG = "Wolfgang break like toothpick!"
+	WOLFGANG.DESCRIBE.ICEBOOMERANG = "Little ice stick too cold to hold!"
+	DESCRIBE.SNOWBALL_THROWABLE = "Is fun game!"
+	DESCRIBE.VETERANSHRINE = "Wolfgang don't like looking at head."
 
 	DESCRIBE.BUSHCRAB = "Just wanted food!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

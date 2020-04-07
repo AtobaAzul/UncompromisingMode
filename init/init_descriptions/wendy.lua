@@ -47,7 +47,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.SNOWMONG = "Just another cruel joke."
 	DESCRIBE.SHOCKWORM = "A light in the darkness."
 	DESCRIBE.ZASPBERRY = "Perhaps it will bring some light to my life. Probably not."
-	DESCRIBE.ICEBOOMERANG = "This won't last forever"
+	DESCRIBE.ICEBOOMERANG = "Ripped off the tail of a maggot."
+	DESCRIBE.SNOWBALL_THROWABLE = "I remember playing in the snow with Abigail."
+	DESCRIBE.VETERANSHRINE = "I am used to pain."
 
 	DESCRIBE.BUSHCRAB = "Another cruel joke from mother nature."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

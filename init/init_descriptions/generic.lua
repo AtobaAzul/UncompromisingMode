@@ -53,7 +53,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	DESCRIBE.SNOWMONG = "Shiverbug!"
 	DESCRIBE.SHOCKWORM = "Quite the conductive worm!"
 	DESCRIBE.ZASPBERRY = "I can feel the electricity flowing through it."
-	DESCRIBE.ICEBOOMERANG = "So cold that it's hard to hold"
+	DESCRIBE.ICEBOOMERANG = "It has a chilling bite to it."
 	
 	DESCRIBE.MINOTAUR_BOULDER = "Thats a nice boulder."
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "Thats a nice BIG boulder."
@@ -61,7 +61,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "Finally, a practical use for the moons transformative properties."
 	DESCRIBE.TOADLINGSPAWNER = "Uh oh."
-	DESCRIBE.SNOWBALL_THROWABLE = "Snowball fight!"
+	DESCRIBE.SNOWBALL_THROWABLE = "Not the face!"
+	DESCRIBE.VETERANSHRINE = "I know what I'm doing... right?"
 	
 
 --	[ 		Recipe Descriptions		]   --
@@ -71,3 +72,4 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
     RECIPE_DESC.RAT_BURROW = "A den of annoying little hairballs."
     RECIPE_DESC.RATPOISON = "A most deadly feast."
     RECIPE_DESC.GASMASK = "Makes everything smell like bird."
+	

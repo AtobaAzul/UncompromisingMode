@@ -47,7 +47,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.SNOWMONG = "Melt that sucker!"
 	DESCRIBE.SHOCKWORM = "It's so frilly!"
 	DESCRIBE.ZASPBERRY = "I'm not blowing any raspberries."
-	DESCRIBE.ICEBOOMERANG = "Thanks! I hate it!"
+	DESCRIBE.ICEBOOMERANG = "I mean, I guess I can use it."
+	DESCRIBE.SNOWBALL_THROWABLE = "Ugh, snow is boring! Let's throw fireballs instead!"
+	DESCRIBE.VETERANSHRINE = "Ew, it's covered in that gunk."
 
 	DESCRIBE.BUSHCRAB = "Should have burned it down... always should have burned it down!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

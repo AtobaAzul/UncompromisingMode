@@ -7,3 +7,4 @@
 *  tree_leaf_spike_lt by @Advent and Klei (livingtree root attack custom art)
 *  uncompromising_rat by ???
 *  uncompromising_rat_burrow by @Maradyne
+*  monster morsels by KoreanWaffles
