@@ -70,4 +70,4 @@ STRINGS.RECIPE_DESC.DISEASECUREBOMB = "Effective disease prevention."
 
 
 
-AddRecipe("gasmask", {Ingredient("malbatross_feather", 12),Ingredient("green_cap", 2),Ingredient("pigskin",2)}, GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/gasmask.xml", "gasmask.tex" )
+AddRecipe("gasmask", {Ingredient("goose_feather", 10),Ingredient("green_cap", 2),Ingredient("pigskin",2)}, GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/gasmask.xml", "gasmask.tex" )

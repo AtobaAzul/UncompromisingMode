@@ -43,5 +43,6 @@ return {
 	"diseasecure",
 	"toadlingspawner",
 	"snowball_throwable",
-	"extra_monsterfoods"
+	"extra_monsterfoods",
+	"sporepack",
 }
