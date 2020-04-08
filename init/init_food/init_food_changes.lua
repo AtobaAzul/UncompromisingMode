@@ -58,6 +58,8 @@ local ANTIHISTAMINES =
     "honey",
     "onion",
 	"acorn_cooked",
+	"green_cap",
+	"green_cap_cooked",
 }
 
 local function item_oneatenlow(inst, eater)
