@@ -120,7 +120,7 @@ local function SnowpileChance(inst, self)
 --print("chance")
 
 	local x, y, z = self.inst.Transform:GetWorldPosition()
-    local ents4 = TheSim:FindEntities(x, y, z, 50, nil, { "snowedin" }, { "structure" })
+    local ents4 = TheSim:FindEntities(x, y, z, 50, nil, { "snowedin", "hive" }, { "structure" })
     for i, v in ipairs(ents4) do
         TrySpawning(v)
     end
