@@ -157,16 +157,39 @@ function FireRain:SpawnMeteor(mod)
         function(offset)
             return map:IsPassableAtPoint(x + offset.x, y + offset.y, z + offset.z)
         end)
+		
+	local function IsValidSinkholePosition(offset2)
+        local x1, z1 = x + offset2.x, z + offset2.z
+        if #TheSim:FindEntities(x1, 0, z1, TUNING.ANTLION_SINKHOLE.RADIUS * 3, { "antlion_sinkhole_blocker" }) > 0 then
+            return false
+        end
+        for dx = -1, 1 do
+            for dz = -1, 1 do
+                if not TheWorld.Map:IsPassableAtPoint(x1 + dx * TUNING.ANTLION_SINKHOLE.RADIUS, 0, z1 + dz * TUNING.ANTLION_SINKHOLE.RADIUS) then
+                    return false
+                end
+            end
+        end
+        return true
+    end
 
-    if fan_offset ~= nil then
-        local met = SpawnPrefab("firemeteorwarning")
+    local offset2 = Vector3(0, 0, 0)
+    offset2 =
+        IsValidSinkholePosition(offset2) and offset2 or
+        FindValidPositionByFan(math.random() * 2 * PI, TUNING.ANTLION_SINKHOLE.RADIUS * 1.8 + math.random(), 9, IsValidSinkholePosition) or
+        FindValidPositionByFan(math.random() * 2 * PI, TUNING.ANTLION_SINKHOLE.RADIUS * 2.9 + math.random(), 17, IsValidSinkholePosition) or
+        FindValidPositionByFan(math.random() * 2 * PI, TUNING.ANTLION_SINKHOLE.RADIUS * 3.9 + math.random(), 17, IsValidSinkholePosition) or
+        nil
+
+    if fan_offset ~= nil and offset2 ~= nil then
+        local met = SpawnPrefab("antlion_sinkhole")
 	--if math.random(1,10) <= 1 then
 		--met = SpawnPrefab("klaus_fire_meteorp")
 	--else
 		--met = SpawnPrefab("firemeteor")
 	--end
         met.Transform:SetPosition(x + fan_offset.x, y + fan_offset.y, z + fan_offset.z)
-
+		met:PushEvent("startcollapse")
         if mod == nil then
             mod = 1
         end
@@ -178,6 +201,40 @@ function FireRain:SpawnMeteor(mod)
         
         return met
     end
+	--[[
+	local x = GetRandomWithVariance(spawnpt.x, TUNING.ANTLION_SINKHOLE.RADIUS)
+    local z = GetRandomWithVariance(spawnpt.z, TUNING.ANTLION_SINKHOLE.RADIUS)
+
+    local function IsValidSinkholePosition(offset)
+        local x1, z1 = x + offset.x, z + offset.z
+        if #TheSim:FindEntities(x1, 0, z1, TUNING.ANTLION_SINKHOLE.RADIUS * 1.9, { "antlion_sinkhole_blocker" }) > 0 then
+            return false
+        end
+        for dx = -1, 1 do
+            for dz = -1, 1 do
+                if not TheWorld.Map:IsPassableAtPoint(x1 + dx * TUNING.ANTLION_SINKHOLE.RADIUS, 0, z1 + dz * TUNING.ANTLION_SINKHOLE.RADIUS) then
+                    return false
+                end
+            end
+        end
+        return true
+    end
+
+    local offset = Vector3(0, 0, 0)
+    offset =
+        IsValidSinkholePosition(offset) and offset or
+        FindValidPositionByFan(math.random() * 2 * PI, TUNING.ANTLION_SINKHOLE.RADIUS * 1.8 + math.random(), 9, IsValidSinkholePosition) or
+        FindValidPositionByFan(math.random() * 2 * PI, TUNING.ANTLION_SINKHOLE.RADIUS * 2.9 + math.random(), 17, IsValidSinkholePosition) or
+        FindValidPositionByFan(math.random() * 2 * PI, TUNING.ANTLION_SINKHOLE.RADIUS * 3.9 + math.random(), 17, IsValidSinkholePosition) or
+        nil
+
+    if offset ~= nil then
+        local sinkhole = SpawnPrefab("antlion_sinkhole")
+        sinkhole.Transform:SetPosition(x + offset.x, 0, z + offset.z)
+        sinkhole:PushEvent("startcollapse")
+    end
+	
+	return sinkhole--]]
 end
 
 local function OnUpdate(inst, self)

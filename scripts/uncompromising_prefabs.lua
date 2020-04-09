@@ -45,4 +45,5 @@ return {
 	"snowball_throwable",
 	"extra_monsterfoods",
 	"sporepack",
+	"antlion_sinkhole_lava",
 }
