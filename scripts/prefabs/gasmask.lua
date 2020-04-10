@@ -93,7 +93,7 @@ local function fn()
 
     inst:AddComponent("fueled")
     inst.components.fueled.fueltype = FUELTYPE.USAGE
-    inst.components.fueled:InitializeFuelLevel(TUNING.BERRY_REGROW_TIME)
+    inst.components.fueled:InitializeFuelLevel(TUNING.UMBRELLA_PERISHTIME)
     inst.components.fueled:SetDepletedFn(inst.Remove)
 	inst.opentop = true
      
