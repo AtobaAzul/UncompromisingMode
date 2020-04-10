@@ -76,7 +76,7 @@ local brain_post = {
     --example:
     --"hound",
 	"werepig",
-	--"walrus",
+	"walrus",
 }
 
 modimport("postinit/sim")
