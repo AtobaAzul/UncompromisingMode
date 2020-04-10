@@ -182,7 +182,7 @@ function FireRain:SpawnMeteor(mod)
         nil
 
     if fan_offset ~= nil and offset2 ~= nil then
-        local met = SpawnPrefab("antlion_sinkhole")
+        local met = SpawnPrefab("antlion_sinkhole_lava")
 	--if math.random(1,10) <= 1 then
 		--met = SpawnPrefab("klaus_fire_meteorp")
 	--else
