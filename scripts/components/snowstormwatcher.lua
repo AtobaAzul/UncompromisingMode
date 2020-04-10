@@ -106,7 +106,7 @@ function TrySpawning(v)
 			local ents6 = TheSim:FindEntities(x1, y1, z1, 8, nil, nil, { "fire" })
 			local ents7 = TheSim:FindEntities(x1, y1, z1, 2, nil, nil, { "snowedin"})
 				--local ents = TheSim:FindEntities(x, y, z, 40, {"wall" "player" "campfire"})
-			if TheWorld.Map:IsAboveGroundAtPoint(x1, y1, z1) and #ents5 < 1 and #ents6 < 1 and #ents7 < 1then
+			if TheWorld.Map:IsAboveGroundAtPoint(x1, y1, z1) and #ents5 < 1 and #ents6 < 1 and #ents7 < 1 then
 				local snowpilespawn = SpawnPrefab("snowpile")
 				snowpilespawn.Transform:SetPosition(x1, 0.05, z1)
 			end
