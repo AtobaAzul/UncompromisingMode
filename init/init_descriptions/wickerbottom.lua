@@ -50,6 +50,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 	DESCRIBE.ICEBOOMERANG = "A severed appendage that dramatically lowers body temperature on contact."
 	DESCRIBE.SNOWBALL_THROWABLE = "A handful of snow, mashed together so it can be thrown."
 	DESCRIBE.VETERANSHRINE = "That's certainly not the best idea."
+	DESCRIBE.RATSKIN = "Goodness, I believe it's infected with the bubonic plague."
+	DESCRIBE.PLAGUEDOCTOR_MASK = "A mask, popularized by plague doctors during the bubonic plague."
 
 	DESCRIBE.BUSHCRAB = "Ardisia brachyura!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

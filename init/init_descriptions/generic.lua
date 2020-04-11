@@ -63,6 +63,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	DESCRIBE.TOADLINGSPAWNER = "Uh oh."
 	DESCRIBE.SNOWBALL_THROWABLE = "Not the face!"
 	DESCRIBE.VETERANSHRINE = "I know what I'm doing... right?"
+	DESCRIBE.RATSKIN = "It reeks of a pestilence."
+	DESCRIBE.PLAGUEDOCTOR_MASK = "The feathers stuffed in the beak smell nice."
 	
 
 --	[ 		Recipe Descriptions		]   --

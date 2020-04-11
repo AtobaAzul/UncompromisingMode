@@ -50,7 +50,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.ICEBOOMERANG = "Maybe if I dip it in flavor, and save it for Summer?"
 	DESCRIBE.SNOWBALL_THROWABLE = "I wasn't ever able to play with snow; I never saw any where I'm from."
 	DESCRIBE.VETERANSHRINE = "The lengths I go for ingredients..."
-
+	DESCRIBE.RATSKIN = "I don't want that near my hands! Or my food! Or anywhere!"
+	DESCRIBE.PLAGUEDOCTOR_MASK = "Maybe I should count my blessings."
+	
 	DESCRIBE.BUSHCRAB = "Berries and crab cake, anyone? No?"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "I doubt this would make for a good cooking oil."

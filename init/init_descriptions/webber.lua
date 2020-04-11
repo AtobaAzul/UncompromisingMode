@@ -50,6 +50,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.ICEBOOMERANG = "Brrrr, it's chilly just to have near us!"
 	DESCRIBE.SNOWBALL_THROWABLE = "Ooh! Ooh! Who wants to snowball fight?"
 	DESCRIBE.VETERANSHRINE = "It's looking at us!!"
+	DESCRIBE.RATSKIN = "It looks like our fur! But more smelly."
+	DESCRIBE.PLAGUEDOCTOR_MASK = "It looks like a chicken!"
 
 	DESCRIBE.BUSHCRAB = "Not one of our friends!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

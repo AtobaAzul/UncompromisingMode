@@ -50,6 +50,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.ICEBOOMERANG = "I mean, I guess I can use it."
 	DESCRIBE.SNOWBALL_THROWABLE = "Ugh, snow is boring! Let's throw fireballs instead!"
 	DESCRIBE.VETERANSHRINE = "Ew, it's covered in that gunk."
+	DESCRIBE.RATSKIN = "Gross..."
+	DESCRIBE.PLAGUEDOCTOR_MASK = "I'm like a phoenix!"
 
 	DESCRIBE.BUSHCRAB = "Should have burned it down... always should have burned it down!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

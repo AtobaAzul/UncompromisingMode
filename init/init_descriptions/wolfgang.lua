@@ -50,6 +50,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.ICEBOOMERANG = "Little ice stick too cold to hold!"
 	DESCRIBE.SNOWBALL_THROWABLE = "Is fun game!"
 	DESCRIBE.VETERANSHRINE = "Wolfgang don't like looking at head."
+	DESCRIBE.RATSKIN = "Is smelly leather?"
+	DESCRIBE.PLAGUEDOCTOR_MASK = "Is bird mask."
 
 	DESCRIBE.BUSHCRAB = "Just wanted food!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

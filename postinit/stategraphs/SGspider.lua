@@ -62,6 +62,7 @@ local states = {
         tags = {"attack", "canrotate", "busy", "jumping"},
 
         onenter = function(inst, target)
+			inst:AddTag("attacking")
             inst.components.locomotor:Stop()
             inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 
@@ -74,6 +75,7 @@ local states = {
             inst.components.locomotor:Stop()
             inst.components.locomotor:EnableGroundSpeedMultiplier(true)
             inst.Physics:ClearMotorVelOverride()
+			inst:RemoveTag("attacking")
         end,
 
         timeline =
@@ -82,9 +84,10 @@ local states = {
             TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound(SoundPath(inst, "Jump")) end),
             TimeEvent(8*FRAMES, function(inst) inst.Physics:SetMotorVelOverride(20,0,0) end),
             TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound(SoundPath(inst, "Attack")) end),
-            TimeEvent(19*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+            --TimeEvent(19*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
             TimeEvent(20*FRAMES,
                 function(inst)
+					inst.components.combat:DoAttack(inst.sg.statemem.target)
                     inst.Physics:ClearMotorVelOverride()
                     inst.components.locomotor:Stop()
                 end),
@@ -92,9 +95,58 @@ local states = {
 
         events=
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("taunt") end),
+            EventHandler("animover", 
+			function(inst) 
+			inst.sg:GoToState("taunt")
+			end),
         },
-    }
+    },
+	State{
+        name = "taunt",
+        tags = {"busy"},
+
+        onenter = function(inst)
+		if inst:HasTag("tauntless") then
+			inst.sg:GoToState("idle")
+		end
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("taunt")
+            inst.SoundEmitter:PlaySound(SoundPath(inst, "scream"))
+        end,
+
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
+    },
+	    State{
+        name = "idle",
+        tags = {"idle", "canrotate"},
+
+        ontimeout = function(inst)
+            inst.sg:GoToState("taunt")
+        end,
+
+        onenter = function(inst, start_anim)
+            inst.Physics:Stop()
+            local animname = "idle"
+            if math.random() < .3 then
+                inst.sg:SetTimeout(math.random()*2 + 2)
+            end
+
+            if inst.LightWatcher:GetLightValue() > 1 then
+				if not inst:HasTag("tauntless") then
+                inst.AnimState:PlayAnimation("cower" )
+                inst.AnimState:PushAnimation("cower_loop", true)
+				end
+            elseif start_anim then
+                inst.AnimState:PlayAnimation(start_anim)
+                inst.AnimState:PushAnimation("idle", true)
+            else
+                inst.AnimState:PlayAnimation("idle", true)
+            end
+        end,
+    },
 }
 
 for k, v in pairs(events) do

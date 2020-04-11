@@ -45,4 +45,10 @@ return {
 	"snowball_throwable",
 	"extra_monsterfoods",
 	"sporepack",
+	"saltpack",
+	"veteranshrine",
+	"ratskin",
+	"plaguemask",
+	"trapdoor",
+	"spider_trapdoor",
 }

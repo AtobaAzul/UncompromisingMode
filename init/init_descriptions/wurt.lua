@@ -50,6 +50,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 	DESCRIBE.ICEBOOMERANG = "This is fun, florp!"
 	SNOWBALL_THROWABLE = "Why you throw at us!?"
 	DESCRIBE.VETERANSHRINE = "I hate it, florp!"
+	DESCRIBE.RATSKIN = "It feels good to rub on face, florp!"
+	DESCRIBE.PLAGUEDOCTOR_MASK = "I don't like it! It's scary, florp!"
 
 	DESCRIBE.BUSHCRAB = "Crabby!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

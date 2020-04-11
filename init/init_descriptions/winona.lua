@@ -50,6 +50,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.ICEBOOMERANG = "Quite a handy tool, ain't it?"
 	DESCRIBE.VETERANSHRINE = "This doesn't look like Charlie's doing."
 	DESCRIBE.SNOWBALL_THROWABLE = "Maybe I could load it in a catapult? Hmm, nah."
+	DESCRIBE.RATSKIN = "Yeesh, I don't want to carry that around."
+	DESCRIBE.PLAGUEDOCTOR_MASK = "You gotta be careful not to bump the beak on anything."
+	
 
 	DESCRIBE.BUSHCRAB = "Thats some dangerous weeding!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

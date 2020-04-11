@@ -50,7 +50,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.ICEBOOMERANG = "No one can run from my spear!"
 	DESCRIBE.VETERANSHRINE = "No challenge is above me!"
 	DESCRIBE.SNOWBALL_THROWABLE = "Aim betwixt the eyes!"
-
+	DESCRIBE.PLAGUEDOCTOR_MASK = "I am a warrior against Pestilence!"
+	
 	DESCRIBE.BUSHCRAB = "A wild encounter!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "A weapon for fighting back the plagues!"
+	DESCRIBE.RATSKIN = "Theft has no honor!"

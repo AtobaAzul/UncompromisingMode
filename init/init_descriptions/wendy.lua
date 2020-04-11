@@ -50,6 +50,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.ICEBOOMERANG = "Ripped off the tail of a maggot."
 	DESCRIBE.SNOWBALL_THROWABLE = "I remember playing in the snow with Abigail."
 	DESCRIBE.VETERANSHRINE = "I am used to pain."
+	DESCRIBE.RATSKIN = "It contains an acolyte of death."
+	DESCRIBE.PLAGUEDOCTOR_MASK = "Like a crow, a plague doctor is attracted to death."
 
 	DESCRIBE.BUSHCRAB = "Another cruel joke from mother nature."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

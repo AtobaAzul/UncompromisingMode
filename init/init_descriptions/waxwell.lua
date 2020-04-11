@@ -52,6 +52,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.ICEBOOMERANG = "Magic is great, isn't it?"
 	DESCRIBE.SNOWBALL_THROWABLE = "Not. The. Suit. What do you not get about this?"
 	DESCRIBE.VETERANSHRINE = "I already have fuel-related problems, what's another?"
+	DESCRIBE.RATSKIN = "Eugh, disgusting!"
+	DESCRIBE.PLAGUEDOCTOR_MASK = "The beak looks ridiculous."
 
 	DESCRIBE.BUSHCRAB = "I guess they've finally hatched."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

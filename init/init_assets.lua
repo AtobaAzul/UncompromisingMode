@@ -56,6 +56,9 @@ Assets = {
 	Asset("ANIM", "anim/snowball.zip"),
 	Asset("ANIM", "anim/swap_snowball_throwable.zip"),
 	Asset("ANIM", "anim/swap_sporepack.zip"),
+	Asset("ANIM", "anim/swap_saltpack.zip"),
+	Asset("ANIM", "anim/veteranshrine.zip"),
+	Asset("ANIM", "anim/ratskin.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),
@@ -63,6 +66,8 @@ Assets = {
 	Asset("SOUNDPACKAGE", "sound/UCSounds.fev"), 
 	Asset( "SOUND", "sound/UCSounds_bank00.fsb"),
 	
+	Asset("IMAGE", "images/inventoryimages/ratskin.tex"),
+	Asset("ATLAS", "images/inventoryimages/ratskin.xml"),
 	--monster morsels from waffles, thanks
 	Asset("ANIM", "anim/extra_monsterfoods.zip"),
     Asset("ANIM", "anim/extra_monsterfoods_dried.zip"),
