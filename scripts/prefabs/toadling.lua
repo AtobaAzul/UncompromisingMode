@@ -399,7 +399,7 @@ local function MakeMoose(nightmare)
 		end)
 	end)
 	
-    MakeLargeBurnableCharacter(inst, "swap_fire")
+    --MakeLargeBurnableCharacter(inst, "swap_fire")
     --MakeMediumFreezableCharacter(inst, "spring")
     
     inst:ListenForEvent("attacked", OnAttacked)
