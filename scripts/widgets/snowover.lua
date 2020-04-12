@@ -73,11 +73,11 @@ end
 function SnowOver:OnUpdate(dt)
 	local x, y, z = self.owner.Transform:GetWorldPosition()
 	local ents = TheSim:FindEntities(x, y, z, 4, {"wall"})
-	local suppressorNearby1 = 0.2 * #ents
+	local suppressorNearby1 = 0.3 * #ents
 	local ents2 = TheSim:FindEntities(x, y, z, 6, {"fire"})
-	local suppressorNearby2 = 0.5 * #ents2
+	local suppressorNearby2 = 0.6 * #ents2
 	local ents3 = TheSim:FindEntities(x, y, z, 5.5, {"shelter"})
-	local suppressorNearby3 = 0.1 * #ents3
+	local suppressorNearby3 = 0.2 * #ents3
 	
 	local equationdingus = suppressorNearby1 + suppressorNearby2 + suppressorNearby3
 
@@ -147,8 +147,8 @@ function SnowOver:OnUpdate(dt)
 	if self.owner.components.playervision ~= nil then
 		if self.bg.shown and
 			self.owner.components.playervision:HasGoggleVision() then
-			if self.changed > 0.4 then
-				self.bg:GetAnimState():SetMultColour(1, 1, 1, 0.4 - self.alphaquation)
+			if self.changed > 0.2 then
+				self.bg:GetAnimState():SetMultColour(1, 1, 1, 0.2 - self.alphaquation)
 			else
 				self.bg:GetAnimState():SetMultColour(1, 1, 1, self.changed - self.alphaquation)
 			end
