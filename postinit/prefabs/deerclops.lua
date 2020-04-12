@@ -50,6 +50,13 @@ local function EnterPhase2Trigger(inst)
 	end
 end
 
+
+local function OnEntitySleep2(inst)
+	if TheWorld:HasTag("cave") then
+        inst:Remove()
+    end
+end
+
 local function OnSave(inst, data)
     data.enraged = inst.enraged or nil
 end
@@ -81,6 +88,9 @@ env.AddPrefabPostInit("deerclops", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
+	
+	
+    inst:ListenForEvent("entitysleep", OnEntitySleep2)
 	
 	inst.OnSave = OnSave
     inst.OnPreLoad = OnPreLoad
