@@ -58,7 +58,7 @@ local GIANTS =
 	["krampus"] =
     {
         radius = 150,
-		power = 0.75,
+		power = 1.5,
     },
 	["moose"] =
     {

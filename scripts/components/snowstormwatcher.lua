@@ -98,14 +98,15 @@ function TrySpawning(v)
 
 	--if math.random(1, 3000) == 1 then
 	if TheWorld.state.iswinter and TheWorld:HasTag("snowstormstart") then
-		if math.random() <= 0.15 then
+		if math.random() <= 0.05 then
 				--local spawn_pt = GetSpawnPoint(origin_pt, PLAYER_CHECK_DISTANCE + 5)
 			local x1, y1, z1 = v.Transform:GetWorldPosition()
 				
 			local ents5 = TheSim:FindEntities(x1, y1, z1, 3, nil, nil, { "snowpileradius"})
 			local ents6 = TheSim:FindEntities(x1, y1, z1, 8, nil, nil, { "fire" })
+			local ents7 = TheSim:FindEntities(x1, y1, z1, 2, nil, nil, { "snowedin"})
 				--local ents = TheSim:FindEntities(x, y, z, 40, {"wall" "player" "campfire"})
-			if TheWorld.Map:IsAboveGroundAtPoint(x1, y1, z1) and #ents5 < 1 and #ents6 < 1 then
+			if TheWorld.Map:IsAboveGroundAtPoint(x1, y1, z1) and #ents5 < 1 and #ents6 < 1 and #ents7 < 1 then
 				local snowpilespawn = SpawnPrefab("snowpile")
 				snowpilespawn.Transform:SetPosition(x1, 0.05, z1)
 			end
@@ -120,13 +121,13 @@ local function SnowpileChance(inst, self)
 --print("chance")
 
 	local x, y, z = self.inst.Transform:GetWorldPosition()
-    local ents4 = TheSim:FindEntities(x, y, z, 50, nil, { "snowedin" }, { "structure" })
+    local ents4 = TheSim:FindEntities(x, y, z, 50, nil, { "snowedin", "hive" }, { "structure" })
     for i, v in ipairs(ents4) do
         TrySpawning(v)
     end
 	if TheWorld.state.iswinter and TheWorld:HasTag("snowstormstart") then
-		if ents4 == nil or 0 or math.random() <= 0.15 then
-			if math.random() <= 0.25 then
+		if ents4 == nil or 0 or math.random() <= 0.10 then
+			if math.random() <= 0.05 then
 				local xrandom = math.random(-25, 25)
 				local zrandom = math.random(-25, 25)
 

@@ -89,11 +89,11 @@ local function fn()
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
-	inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL
+	inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL / 1.5
 
     inst:AddComponent("fueled")
     inst.components.fueled.fueltype = FUELTYPE.USAGE
-    inst.components.fueled:InitializeFuelLevel(TUNING.BERRY_REGROW_TIME)
+    inst.components.fueled:InitializeFuelLevel(TUNING.UMBRELLA_PERISHTIME)
     inst.components.fueled:SetDepletedFn(inst.Remove)
 	inst.opentop = true
      

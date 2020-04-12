@@ -166,20 +166,22 @@ local function OnEntitySleep(inst)
 			print("Porting Dragonfly to Player!")
 			local init_pos = inst:GetPosition()
 			local player_pos = PlayerPosition:GetPosition()
-			local angle = PlayerPosition:GetAngleToPoint(init_pos)
-			local offset = FindWalkableOffset(player_pos, angle*DEGREES, 30, 10)
-			local pos = player_pos + offset
-			
-			if pos and distsq(player_pos, init_pos) > 1600 then
-				--There's a crash if you teleport without the delay
-				if not inst.components.combat:TargetIs(PlayerPosition) then
-					inst.components.combat:SetTarget(nil)
+				if player_pos then
+					local angle = PlayerPosition:GetAngleToPoint(init_pos)
+					local offset = FindWalkableOffset(player_pos, angle*DEGREES, 30, 10)
+					local pos = player_pos + offset
+					
+					if pos and distsq(player_pos, init_pos) > 1600 then
+						--There's a crash if you teleport without the delay
+						if not inst.components.combat:TargetIs(PlayerPosition) then
+							inst.components.combat:SetTarget(nil)
+						end
+						inst:DoTaskInTime(.1, function() 
+							inst.Transform:SetPosition(pos:Get())
+						end)
+						
+						SetFlameOn(inst, false)
 				end
-				inst:DoTaskInTime(.1, function() 
-					inst.Transform:SetPosition(pos:Get())
-				end)
-				
-				SetFlameOn(inst, false)
 			end
 		end
     end
@@ -212,6 +214,8 @@ local function OnLoad(inst, data)
         inst.num_targets_vomited = data.vomits
         inst.KilledPlayer = data.KilledPlayer or false
         inst.shouldGoAway = data.shouldGoAway or false
+		
+		inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/fly", "flying")
     end
 end
 

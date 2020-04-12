@@ -51,4 +51,5 @@ return {
 	"plaguemask",
 	"trapdoor",
 	"spider_trapdoor",
+	"antlion_sinkhole_lava",
 }

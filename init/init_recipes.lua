@@ -65,7 +65,7 @@ GLOBAL.AllRecipes["reviver"].sortkey = GLOBAL.AllRecipes["healingsalve"].sortkey
 
 STRINGS.RECIPE_DESC.SAND = "Turn a big rock into smaller rocks."
 STRINGS.RECIPE_DESC.SNOWGOGGLES = "Keep your eyes clear and ears extra warm."
-STRINGS.RECIPE_DESC.RATPOISONBOTTLE = "High addictive to pestilence pests."
+STRINGS.RECIPE_DESC.RATPOISONBOTTLE = "Highly addictive to pestilence pests."
 STRINGS.RECIPE_DESC.DISEASECUREBOMB = "Effective disease prevention."
 
 

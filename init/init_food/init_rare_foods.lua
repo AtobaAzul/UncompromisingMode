@@ -290,7 +290,7 @@ GLOBAL.TUNING.DECIDUOUS_GROW_TIME =
 -----------------------------------------------------------------
 local loot_summer = {"meat","meat","meat","meat","trunk_summer"}
 local loot_winter = {"meat","meat","meat","meat","trunk_winter"}
-local loot_fire = {"meat","meat","meat","meat","trunk"}
+local loot_fire = {"meat","meat","meat","meat","trunk_cooked"}
 
 local function lootsetfn(lootdropper)
     if lootdropper.inst.components.burnable ~= nil and lootdropper.inst.components.burnable:IsBurning() or lootdropper.inst:HasTag("burnt") then

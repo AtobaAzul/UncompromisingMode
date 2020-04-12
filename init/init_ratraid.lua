@@ -57,6 +57,10 @@ local function StartRaid(inst)
 end
 
 local function ActiveRaid(inst, doer)
+	if not doer or not doer:IsValid() or not doer.Transform then
+        return
+    end
+
 	local x, y, z = doer.Transform:GetWorldPosition()
 	local playerage = doer.components.age:GetAgeInDays()
 	local ents = TheSim:FindEntities(x, y, z, 20, nil, nil, {"_inventoryitem"})

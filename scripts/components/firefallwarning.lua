@@ -56,7 +56,7 @@ end
 
 local function DoTargetFireFall(_activeplayers, player)
 	for i, v in ipairs(AllPlayers) do
-			v.components.firerain:StartShower(2)
+			v.components.firerain:StartShower(1)
 			SpawnPrefab("antlionwarning").Transform:SetPosition(v.Transform:GetWorldPosition())
     end
 end

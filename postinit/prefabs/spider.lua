@@ -76,10 +76,10 @@ local function FindTarget(inst, radius)
         { "spiderwhisperer", "spiderdisguise", "INLIMBO" }
     )
 end
-
+--[[
 local function WarriorRetarget(inst)
     return FindTarget(inst, TUNING.SPIDER_WARRIOR_TARGET_DIST)
-end
+end--]]
 
 env.AddPrefabPostInit("spider", function(inst)
 	if not TheWorld.ismastersim then
@@ -99,7 +99,7 @@ env.AddPrefabPostInit("spider", function(inst)
 	
 	if inst.components.combat ~= nil then
     inst.components.combat:SetRange(TUNING.SPIDER_WARRIOR_ATTACK_RANGE, TUNING.SPIDER_WARRIOR_HIT_RANGE)
-		inst.components.combat:SetRetargetFunction(2, WarriorRetarget)
+		--inst.components.combat:SetRetargetFunction(2, WarriorRetarget)
 	end
 	
 	if inst.components.locomotor ~= nil then
