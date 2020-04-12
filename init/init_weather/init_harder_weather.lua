@@ -2,6 +2,7 @@
 -- Remove thermal stone sewing
 -- Relevant: heatrock.lua
 ----------------------------------------------------------------------------------------------------------
+--[[
 local function DoSewing(self, target, doer)
     if self ~= nil and self.inst ~= nil then
         local _OldDoSewing = self.DoSewing
@@ -15,7 +16,7 @@ local function DoSewing(self, target, doer)
 end
 AddComponentPostInit("sewing", DoSewing)
 --TODO thermal stone stacking
-
+--]]
 -------------Torches only smolder objects now---------------
 local _OldLightAction = GLOBAL.ACTIONS.LIGHT.fn
 
