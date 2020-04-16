@@ -122,6 +122,9 @@ TUNING.DSTU =
     ----------------------------------------------------------------------------
     --Player changes
     ----------------------------------------------------------------------------
+	
+    WORTOX_HEALTH = 120,
+	
     --Tripover chance on walking with 100 wetness
     TRIPOVER_HEALTH_DAMAGE = 10,
     TRIPOVER_ONMAXWET_CHANCE_PER_SEC = 0.10,

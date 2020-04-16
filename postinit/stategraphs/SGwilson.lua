@@ -33,7 +33,11 @@ State{
         onenter = function(inst)
             inst.wantstosneeze = false
             inst.SoundEmitter:PlaySound("dontstarve/wilson/hit",nil,.02)
-            inst.AnimState:PlayAnimation("sneeze")
+			
+			
+			if inst.components.rider ~= nil and not inst.components.rider:IsRiding() then
+				inst.AnimState:PlayAnimation("sneeze")
+			end
 			
             inst.SoundEmitter:PlaySound("UCSounds/Sneeze/sneeze")
             inst:ClearBufferedAction()

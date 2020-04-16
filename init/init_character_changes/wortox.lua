@@ -29,3 +29,9 @@ local REMOVE_SOULS =
 for k, v in pairs(REMOVE_SOULS) do
 	MakeSoulless(v)
 end
+
+AddPrefabPostInit("wortox", function(inst)
+    if inst ~= nil and inst.components.health ~= nil then
+		inst.components.health:SetMaxHealth(TUNING.DSTU.WORTOX_HEALTH)
+	end
+end)
