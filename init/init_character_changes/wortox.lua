@@ -22,6 +22,8 @@ local REMOVE_SOULS =
     "killerbee",
     "butterfly",
     "birchnutdrake",
+    "mole",
+    "bat",
 }
 
 for k, v in pairs(REMOVE_SOULS) do

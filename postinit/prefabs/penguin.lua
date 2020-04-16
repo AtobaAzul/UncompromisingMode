@@ -7,7 +7,7 @@ local function OnMoonMutate(inst, new_inst)
 end
 
 local function OnFullMoon(self, inst, isfullmoon, new_inst)
-	if TheWorld.state.isfullmoon then
+	if TheWorld.state.isfullmoon and not self.components.health:IsDead() then
 		self:DoTaskInTime(math.random(2,5), function(inst)
 		local mspuff = SpawnPrefab("halloween_moonpuff")
 		mspuff.Transform:SetPosition(self.Transform:GetWorldPosition())
@@ -21,7 +21,7 @@ end
 
 local function OnNonFullMoon(self, inst, isfullmoon, new_inst)
 local node = TheWorld.Map:FindNodeAtPoint(self.Transform:GetWorldPosition())
-	if node ~= nil and node.tags ~= nil and not table.contains(node.tags, "lunacyarea") and not TheWorld.state.isfullmoon then
+	if node ~= nil and node.tags ~= nil and not table.contains(node.tags, "lunacyarea") and not TheWorld.state.isfullmoon and not self.components.health:IsDead() then
 	self:DoTaskInTime(math.random(2,5), function(inst)
 		local mspuff = SpawnPrefab("halloween_moonpuff")
 		mspuff.Transform:SetPosition(self.Transform:GetWorldPosition())

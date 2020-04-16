@@ -32,8 +32,11 @@ local function DoSpikeAttack(inst, pt)
     end
 end
 
-local function OnFullMoon(self, inst, isfullmoon, new_inst)
-	if TheWorld.state.isfullmoon and not inst.sg:HasStateTag("jumping") and not inst.components.health:IsDead() then
+local function OnFullMoon(self, inst, isfullmoon)
+
+local node = TheWorld.Map:FindNodeAtPoint(self.Transform:GetWorldPosition())
+
+	if TheWorld.state.isfullmoon and not self.sg:HasStateTag("jumping") and not self.components.health:IsDead() then
 		self:DoTaskInTime(math.random(2,5), function(inst)
 		local mspuff = SpawnPrefab("halloween_moonpuff")
 		mspuff.Transform:SetPosition(self.Transform:GetWorldPosition())
@@ -45,7 +48,7 @@ local function OnFullMoon(self, inst, isfullmoon, new_inst)
 			
 			inst.sg:GoToState("taunt")
 			end)
-	else
+	elseif node ~= nil and node.tags ~= nil and not table.contains(node.tags, "lunacyarea") and not self.sg:HasStateTag("jumping") and not self.components.health:IsDead() then
 		
 		self:DoTaskInTime(math.random(2,5), function(inst)
 			if inst:HasTag("spider_moon") then

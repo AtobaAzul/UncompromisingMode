@@ -14,4 +14,8 @@ env.AddPrefabPostInit("mutatedhound", function(inst)
 	if inst.components.locomotor ~= nil then
 		inst.components.locomotor.runspeed = TUNING.MOONHOUND_SPEED * 1.2
 	end
+	
+	if inst.components.health ~= nil then
+		inst.components.health:SetMaxHealth(TUNING.HOUND_HEALTH)
+	end
 end)
