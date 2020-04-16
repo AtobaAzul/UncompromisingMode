@@ -6,7 +6,9 @@ local function SpawnDiseasePuff(inst)
 end
 
 local function dig_up_common(inst, worker, numberries)
-    if inst.components.pickable ~= nil and inst.components.lootdropper ~= nil then
+	local x, y, z = inst.Transform:GetWorldPosition()
+	
+	if inst.components.pickable ~= nil and inst.components.lootdropper ~= nil then
         local withered = inst.components.witherable ~= nil and inst.components.witherable:IsWithered()
         local diseased = inst.components.diseaseable ~= nil and inst.components.diseaseable:IsDiseased()
 
@@ -31,11 +33,33 @@ local function dig_up_common(inst, worker, numberries)
                 end
             end
             if diseased then
+				inst:RemoveTag("bushcrab_attack")
                 inst.components.lootdropper:SpawnLootPrefab("twigs")
                 inst.components.lootdropper:SpawnLootPrefab("twigs")
-            elseif math.random() <= 0.1 then
+            elseif math.random() <= 0.1 or inst:HasTag("bushcrab_attack") then
+			
+				local ents2 = TheSim:FindEntities(x, y, z, 12, { "bushcrab_ambush" })
+					for i, v in ipairs(ents2) do
+						if v.components.workable ~= nil and
+							v.components.workable:CanBeWorked() and
+							v.components.workable.action ~= ACTIONS.NET then
+									v:DoTaskInTime(math.random(), function(inst) 
+									
+									local ents = TheSim:FindEntities(x, y, z, 20, { "bushcrab" })
+									local ambush = (#ents < 3)
+										if math.random() >= 0.3 and ambush then
+											v:AddTag("bushcrab_attack")
+											v.components.workable:Destroy(inst) 
+										else
+											v:RemoveTag("bushcrab_attack")
+										end
+									end)
+							--end)
+						end
+					end
                 inst.components.lootdropper:SpawnLootPrefab("bushcrab")
 			else
+				inst:RemoveTag("bushcrab_attack")
                 inst.components.lootdropper:SpawnLootPrefab("dug_"..inst.prefab)
             end
         end
@@ -52,6 +76,8 @@ env.AddPrefabPostInit("berrybush", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
+	
+	inst:AddTag("bushcrab_ambush")
 
 	if inst.components.workable ~= nil then
         inst.components.workable:SetOnFinishCallback(dig_up_normal)
