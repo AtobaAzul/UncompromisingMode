@@ -4,7 +4,7 @@ GLOBAL.setfenv(1, GLOBAL)
 SetSharedLootTable( 'catty',
 {
     {'meat',             1.00},
-    {'coontail',		 0.80},
+    {'coontail',		 0.66},
 })
 
 env.AddPrefabPostInit("catcoon", function(inst)
