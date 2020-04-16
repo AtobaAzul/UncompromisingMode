@@ -33,7 +33,7 @@ local function DoSpikeAttack(inst, pt)
 end
 
 local function OnFullMoon(self, inst, isfullmoon, new_inst)
-	if TheWorld.state.isfullmoon then
+	if TheWorld.state.isfullmoon and not inst.sg:HasStateTag("jumping") and not inst.components.health:IsDead() then
 		self:DoTaskInTime(math.random(2,5), function(inst)
 		local mspuff = SpawnPrefab("halloween_moonpuff")
 		mspuff.Transform:SetPosition(self.Transform:GetWorldPosition())
