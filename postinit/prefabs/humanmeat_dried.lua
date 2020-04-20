@@ -1,7 +1,7 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
-env.AddPrefabPostInit("humanmeat", function (inst)
+env.AddPrefabPostInit("humanmeat_dried", function (inst)
 	if not TheWorld.ismastersim then
 		return
 	end

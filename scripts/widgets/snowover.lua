@@ -78,8 +78,10 @@ function SnowOver:OnUpdate(dt)
 	local suppressorNearby2 = 0.6 * #ents2
 	local ents3 = TheSim:FindEntities(x, y, z, 5.5, {"shelter"})
 	local suppressorNearby3 = 0.2 * #ents3
+	local ents4 = TheSim:FindEntities(x, y, z, 6, {"saltpack_protection"})
+	local suppressorNearby4 = 0.8 * #ents4
 	
-	local equationdingus = suppressorNearby1 + suppressorNearby2 + suppressorNearby3
+	local equationdingus = suppressorNearby1 + suppressorNearby2 + suppressorNearby3 + suppressorNearby4
 
 	if TheWorld.state.issnowing then
 		if self.alphaquation == nil then

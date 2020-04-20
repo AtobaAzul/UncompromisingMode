@@ -77,11 +77,14 @@ function SnowStormWatcher:UpdateSnowstormWalkSpeed(src, data)
 		local ents3 = TheSim:FindEntities(x, y, z, 5.5, {"shelter"})
 		local suppressorNearby3 = (#ents3 > 2)
 		
+		local ents4 = TheSim:FindEntities(x, y, z, 6, {"saltpack_protection"})
+		local suppressorNearby4 = (#ents4 > 0)
+		
     if TheWorld.state.issnowing and TheWorld:HasTag("snowstormstart") then
         if self.inst.components.playervision:HasGoggleVision() or
             self.inst.components.playervision:HasGhostVision() or
             self.inst.components.rider:IsRiding() or
-			suppressorNearby1 or suppressorNearby2 or suppressorNearby3 then
+			suppressorNearby1 or suppressorNearby2 or suppressorNearby3 or suppressorNearby4 then
             self.inst.components.locomotor:RemoveExternalSpeedMultiplier(self.inst, "snowstorm")
 			self.inst:PushEvent("checksnowvision")
         else
