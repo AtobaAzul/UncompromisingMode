@@ -50,6 +50,7 @@ local prefab_post = {
 	"humanmeat_dried",
 	"sporecloud",
 	"bat",
+	"featherhat",
 	--"malbatross",
 }
 

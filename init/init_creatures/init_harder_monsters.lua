@@ -98,7 +98,7 @@ local function PenguinRetarget(inst)
             return inst.components.combat:CanTarget(guy)
             end,
             nil,
-            {"penguin"},
+            {"penguin","penguin_protection"},
             {"character","monster","wall"}
             )
 
