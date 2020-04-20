@@ -29,8 +29,10 @@ local function OnHitSnow(inst, attacker, target)
 					v.components.sleeper:WakeUp()
 				end
 
-				if v.sg ~= nil and not v.sg:HasStateTag("frozen") and not v.sg:HasStateTag("ghost") then
-					v:PushEvent("attacked", { attacker = attacker, damage = 1} )
+				if v.sg ~= nil and not v.sg:HasStateTag("frozen") and not v:HasTag("abigail") and not v:HasTag("companion") and not v:HasTag("player") then
+					v:PushEvent("attacked", { attacker = attacker, damage = 0} )
+				elseif v.sg ~= nil then
+					v:PushEvent("attacked", { attacker = nil, damage = 0} )
 				end
 				
 				if v.components.freezable ~= nil then
