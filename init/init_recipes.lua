@@ -64,12 +64,17 @@ Recipe("diseasecurebomb", {Ingredient("cactus_flower", 2), Ingredient("moonrockn
 Recipe("ice", {Ingredient("snowball_throwable", 4, "images/inventoryimages/snowball_throwable.xml", nil, "snowball_throwable.tex")}, RECIPETABS.FARM, TECH.SCIENCE_ONE)
 GLOBAL.AllRecipes["reviver"].sortkey = GLOBAL.AllRecipes["healingsalve"].sortkey - .1
 
+AddRecipe("gasmask", {Ingredient("goose_feather", 10),Ingredient("red_cap", 2),Ingredient("pigskin",2)}, GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/gasmask.xml", "gasmask.tex" )
+AddRecipe("plaguemask", {Ingredient("malbatross_beak", 1),Ingredient("red_cap", 2),Ingredient("ratskin",4, "images/inventoryimages/ratskin.xml")}, GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/plaguemask.xml", "plaguemask.tex" )
+AddRecipe("saltpack", {Ingredient("gears", 1),Ingredient("boards", 2),Ingredient("saltrock",8)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil)--, "images/inventoryimages/plaguemask.xml", "plaguemask.tex" )
+
+
 STRINGS.RECIPE_DESC.SAND = "Turn a big rock into smaller rocks."
 STRINGS.RECIPE_DESC.SNOWGOGGLES = "Keep your eyes clear and ears extra warm."
 STRINGS.RECIPE_DESC.RATPOISONBOTTLE = "Highly addictive to pestilence pests."
 STRINGS.RECIPE_DESC.DISEASECUREBOMB = "Effective disease prevention."
 STRINGS.RECIPE_DESC.ICE = "Water of the solid kind."
-
-
-
-AddRecipe("gasmask", {Ingredient("goose_feather", 10),Ingredient("green_cap", 2),Ingredient("pigskin",2)}, GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/gasmask.xml", "gasmask.tex" )
+STRINGS.RECIPE_DESC.GASMASK = "Makes everything smell like bird."
+STRINGS.RECIPE_DESC.PLAGUEMASK = "CANIS SMELLS."
+STRINGS.RECIPE_DESC.SALTPACK = "Spice up the world."
+STRINGS.RECIPE_DESC.RATPOISON = "A most deadly feast."

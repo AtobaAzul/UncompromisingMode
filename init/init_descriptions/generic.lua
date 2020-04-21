@@ -63,15 +63,16 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	DESCRIBE.TOADLINGSPAWNER = "Uh oh."
 	DESCRIBE.SNOWBALL_THROWABLE = "Not the face!"
 	DESCRIBE.VETERANSHRINE = "I know what I'm doing... right?"
-	DESCRIBE.RATSKIN = "It reeks of a pestilence."
-	DESCRIBE.PLAGUEDOCTOR_MASK = "The feathers stuffed in the beak smell nice."
 	
+	DESCRIBE.RATSKIN = "It reeks of a pestilence."
+	DESCRIBE.PLAGUEMASK = "The mushrooms stuffed in the beak smell nice."
+	DESCRIBE.SALTPACK = "It breaks down the snow around me!"
+	DESCRIBE.SPOREPACK = "It's huge, and smelly."
+	DESCRIBE.SNOWBALL_THROWABLE = "Not the face!"
 
 --	[ 		Recipe Descriptions		]   --
 
 RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 
     RECIPE_DESC.RAT_BURROW = "A den of annoying little hairballs."
-    RECIPE_DESC.RATPOISON = "A most deadly feast."
-    RECIPE_DESC.GASMASK = "Makes everything smell like bird."
 	

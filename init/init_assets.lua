@@ -59,6 +59,7 @@ Assets = {
 	Asset("ANIM", "anim/swap_saltpack.zip"),
 	Asset("ANIM", "anim/veteranshrine.zip"),
 	Asset("ANIM", "anim/ratskin.zip"),
+	Asset("ANIM", "anim/plaguemask.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),
@@ -68,6 +69,8 @@ Assets = {
 	
 	Asset("IMAGE", "images/inventoryimages/ratskin.tex"),
 	Asset("ATLAS", "images/inventoryimages/ratskin.xml"),
+	Asset("IMAGE", "images/inventoryimages/rat_tail.tex"),
+	Asset("ATLAS", "images/inventoryimages/rat_tail.xml"),
 	--monster morsels from waffles, thanks
 	Asset("ANIM", "anim/extra_monsterfoods.zip"),
     Asset("ANIM", "anim/extra_monsterfoods_dried.zip"),
@@ -77,4 +80,8 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/monstersmallmeat.xml"),
    	Asset("IMAGE", "images/inventoryimages/monstersmallmeat_dried.tex"),
 	Asset("ATLAS", "images/inventoryimages/monstersmallmeat_dried.xml"),
+   	Asset("IMAGE", "images/inventoryimages/plaguemask.tex"),
+	Asset("ATLAS", "images/inventoryimages/plaguemask.xml"),
+   	Asset("IMAGE", "images/inventoryimages/shroom_skin_fragment.tex"),
+	Asset("ATLAS", "images/inventoryimages/shroom_skin_fragment.xml"),
 }

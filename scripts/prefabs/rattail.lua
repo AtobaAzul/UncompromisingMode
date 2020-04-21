@@ -1,6 +1,6 @@
 local assets =
 {
-    Asset("ANIM", "anim/ratskin.zip"),
+    Asset("ANIM", "anim/rattail.zip"),
 }
 
 local function fn()
@@ -19,8 +19,6 @@ local function fn()
     MakeInventoryFloatable(inst)
 
     inst.entity:SetPristine()
-	
-    inst:AddTag("show_spoilage")
 
     if not TheWorld.ismastersim then
         return inst
@@ -32,16 +30,11 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/ratskin.xml"
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/rattail.xml"
 
-    inst:AddComponent("perishable")
-    inst.components.perishable:StartPerishing()
-    inst.components.perishable.onperishreplacement = "spoiled_food"
-    inst.components.perishable:SetPerishTime(TUNING.PERISH_PRESERVED)
-	
     MakeHauntableLaunchAndPerish(inst)
 
     return inst
 end
 
-return Prefab("ratskin", fn, assets)
+return Prefab("rattail", fn, assets)

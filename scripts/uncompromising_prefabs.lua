@@ -48,8 +48,10 @@ return {
 	"saltpack",
 	"veteranshrine",
 	"ratskin",
+	--"rattail",
 	"plaguemask",
 	"trapdoor",
 	"spider_trapdoor",
 	"antlion_sinkhole_lava",
+	"lavaeslime",
 }

@@ -51,6 +51,7 @@ local prefab_post = {
 	"sporecloud",
 	"bat",
 	"featherhat",
+	"lavae",
 	--"malbatross",
 }
 

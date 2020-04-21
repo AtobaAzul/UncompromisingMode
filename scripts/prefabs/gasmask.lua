@@ -71,7 +71,7 @@ local function fn()
     inst.AnimState:PlayAnimation("anim")  
 
 	inst:AddTag("hats")
-		
+	inst:AddTag("has_gasmask")
     inst:AddTag("goggles")
 	
     inst.entity:SetPristine()
@@ -79,8 +79,6 @@ local function fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
-	inst:AddTag("has_gasmask")
 
 	inst:AddComponent("inspectable")
 	
@@ -89,7 +87,7 @@ local function fn()
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
-	inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL / 1.5
+	inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL / 2
 
     inst:AddComponent("fueled")
     inst.components.fueled.fueltype = FUELTYPE.USAGE
@@ -98,7 +96,7 @@ local function fn()
 	inst.opentop = true
      
 	inst:AddComponent("waterproofer")
-    inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_SMALL)
+    inst.components.waterproofer:SetEffectiveness(TUNING.WATERPROOFNESS_SMALL / 2)
 	
     inst.components.equippable:SetOnEquip( onequip )
     inst.components.equippable:SetOnUnequip( onunequip )

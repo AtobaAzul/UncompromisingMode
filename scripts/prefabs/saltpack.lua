@@ -26,7 +26,7 @@ end
 local function Salted(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
     local saltedfx = SpawnPrefab("collapse_small")
-    saltedfx.Transform:SetPosition(x, 2.5, z)
+    saltedfx.Transform:SetPosition(x, 2, z)
     saltedfx.Transform:SetScale(0.2, 0.2, 0.2)
 	inst.SoundEmitter:PlaySound("dontstarve/creatures/together/antlion/sfx/ground_break")
 	
@@ -57,6 +57,10 @@ local function Salted(inst)
 					end
 				end
 			end
+			
+		if not TheWorld.state.iswinter then
+			inst.components.equippable.walkspeedmult = 1
+		end
 end
 
 local function turnon(inst)
@@ -74,6 +78,13 @@ local function turnon(inst)
 	end
 	
         inst.components.fueled:StartConsuming()
+		
+		if TheWorld.state.iswinter then
+			inst.components.equippable.walkspeedmult = 1.1
+		else
+			inst.components.equippable.walkspeedmult = 1
+		end
+		
 		inst:AddTag("saltpack_protection")
         local owner = inst.components.inventoryitem.owner
 
@@ -102,6 +113,7 @@ local function turnoff(inst)
 	inst.SoundEmitter:KillSound("idlesound")
 
     inst.components.fueled:StopConsuming()
+	inst.components.equippable.walkspeedmult = 1
 
     DoTurnOffSound(inst)
 
@@ -131,11 +143,11 @@ local function onequip(inst, owner)
     local skin_build = inst:GetSkinBuild()
     if skin_build ~= nil then
         owner:PushEvent("equipskinneditem", inst:GetSkinName())
-        owner.AnimState:OverrideItemSkinSymbol("backpack", skin_build, "backpack", inst.GUID, "swap_backpack" )
-        owner.AnimState:OverrideItemSkinSymbol("swap_body", skin_build, "swap_body", inst.GUID, "swap_backpack" )
+        owner.AnimState:OverrideItemSkinSymbol("backpack", skin_build, "backpack", inst.GUID, "swap_saltpack" )
+        owner.AnimState:OverrideItemSkinSymbol("swap_body", skin_build, "swap_body", inst.GUID, "swap_saltpack" )
     else
-        owner.AnimState:OverrideSymbol("backpack", "swap_backpack", "backpack")
-        owner.AnimState:OverrideSymbol("swap_body", "swap_backpack", "swap_body")
+        owner.AnimState:OverrideSymbol("backpack", "swap_saltpack", "backpack")
+        owner.AnimState:OverrideSymbol("swap_body", "swap_saltpack", "swap_body")
     end
 
     if inst.components.fueled:IsEmpty() then
@@ -195,10 +207,10 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("lantern")
-    inst.AnimState:SetBuild("lantern")
-    inst.AnimState:PlayAnimation("idle_off")
-
+    inst.AnimState:SetBank("backpack1")
+    inst.AnimState:SetBuild("swap_saltpack")
+    inst.AnimState:PlayAnimation("anim")
+	
 	inst.salttask = nil
 
     MakeInventoryFloatable(inst, "med", 0.2, 0.65)
@@ -245,6 +257,8 @@ local function fn()
 
     inst.OnRemoveEntity = OnRemove
 
+	return inst
+	
 end
 
 return Prefab("saltpack", fn, assets, prefabs)
