@@ -1,14 +1,14 @@
 local assets=
 {
-    Asset("ANIM", "anim/hat_gasmask.zip"),
-	Asset("ATLAS", "images/inventoryimages/gasmask.xml"),
-	Asset("IMAGE", "images/inventoryimages/gasmask.tex"),
+    Asset("ANIM", "anim/plaguemask.zip"),
+	Asset("ATLAS", "images/inventoryimages/plaguemask.xml"),
+	Asset("IMAGE", "images/inventoryimages/plaguemask.tex"),
 }
 
 
 
 local function onequip(inst, owner)
-    owner.AnimState:OverrideSymbol("swap_hat", "hat_gasmask", "swap_hat")	
+    owner.AnimState:OverrideSymbol("swap_hat", "hat_plaguemask", "swap_hat")	
 	
 		owner.AnimState:Show("HAT")
 		owner.AnimState:Hide("HAIR_HAT")
@@ -16,8 +16,8 @@ local function onequip(inst, owner)
 		owner.AnimState:Show("HAIR")
 		owner.AnimState:Show("HAIRFRONT")
 	owner:AddTag("goggles")
-	--owner:AddTag("toadstool")
 	owner:AddTag("has_gasmask")
+	owner:AddTag("hasplaguemask")
 	
 	inst.components.fueled:StartConsuming()
 	
@@ -30,33 +30,12 @@ local function onunequip(inst, owner)
     owner.AnimState:Hide("HAT")
 	
 	owner:RemoveTag("goggles")
-	--owner:RemoveTag("toadstool")
 	owner:RemoveTag("has_gasmask")
+	owner:RemoveTag("hasplaguemask")
 	
 	
 	inst.components.fueled:StopConsuming()
 end
-
-
-
---[[
-local function gasmask()
-		local inst = simple()
-		inst:AddTag("gasmask")
-		inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL
-		inst.components.equippable.poisongasblocker = true
-
-		inst.components.equippable:SetOnEquip( opentop_onequip )
-
-		inst:AddComponent("fueled")
-		inst.components.fueled.fueltype = "USAGE"
-		inst.components.fueled:InitializeFuelLevel(TUNING.GASMASK_PERISHTIME)
-		inst.components.fueled:SetDepletedFn(generic_perish)
-		inst.opentop = true
-		return inst
-	end
-	--]]
-
 
 local function fn()
     local inst = CreateEntity()
@@ -67,25 +46,24 @@ local function fn()
     MakeInventoryPhysics(inst)
 	
     inst.AnimState:SetBank("gasmaskhat")
-    inst.AnimState:SetBuild("hat_gasmask")
+    inst.AnimState:SetBuild("hat_plaguemask")
     inst.AnimState:PlayAnimation("anim")  
 
 	inst:AddTag("hats")
-		
+	inst:AddTag("has_gasmask")
+	inst:AddTag("hasplaguemask")
     inst:AddTag("goggles")
-	
+		
     inst.entity:SetPristine()
 	
     if not TheWorld.ismastersim then
         return inst
     end
-	
-	inst:AddTag("has_gasmask")
 
 	inst:AddComponent("inspectable")
 	
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/gasmask.xml"
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/plaguemask.xml"
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
@@ -93,7 +71,7 @@ local function fn()
 
     inst:AddComponent("fueled")
     inst.components.fueled.fueltype = FUELTYPE.USAGE
-    inst.components.fueled:InitializeFuelLevel(TUNING.BERRY_REGROW_TIME)
+    inst.components.fueled:InitializeFuelLevel(TUNING.UMBRELLA_PERISHTIME)
     inst.components.fueled:SetDepletedFn(inst.Remove)
 	inst.opentop = true
      

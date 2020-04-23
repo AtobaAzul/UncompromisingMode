@@ -11,6 +11,9 @@ local function GetSandstormLevel(inst)
 		
 		local ents3 = TheSim:FindEntities(x, y, z, 5.5, {"shelter"})
 		local suppressorNearby3 = (#ents3 > 2)
+		
+		local ents4 = TheSim:FindEntities(x, y, z, 6, {"saltpack_protection"})
+		local suppressorNearby4 = (#ents4 > 0)
 	--[[else
 	
 		local ents = TheSim:FindEntities(x, y, z, 4, {"wall"})
@@ -25,7 +28,7 @@ local function GetSandstormLevel(inst)
 	
 	end
 
-	if GLOBAL.TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE and GLOBAL.TheWorld.state.issnowing and not suppressorNearby1 and not suppressorNearby2 and not suppressorNearby3 and GLOBAL.TheWorld:HasTag("snowstormstart") then
+	if GLOBAL.TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE and GLOBAL.TheWorld.state.issnowing and not suppressorNearby1 and not suppressorNearby2 and not suppressorNearby3 and not suppressorNearby4 and GLOBAL.TheWorld:HasTag("snowstormstart") then
 		return 1
 	else
 		return inst.player_classified ~= nil and inst.player_classified.sandstormlevel:value() / 7 or 0
@@ -34,6 +37,10 @@ end
 
 local function SetInstanceFunctions(inst)
         inst.GetSandstormLevel = GetSandstormLevel
+end
+
+local function checkrevive(inst)
+	inst:PushEvent("usedtouchstone", inst)
 end
 
 AddPlayerPostInit(function(inst)
@@ -48,7 +55,7 @@ AddPlayerPostInit(function(inst)
 	
 	SetInstanceFunctions(inst)
 	
-	--inst:AddComponent("firerain")
+	--inst:ListenForEvent("death", checkrevive)
 end)
 
 AddClassPostConstruct("screens/playerhud",function(inst)

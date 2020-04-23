@@ -23,6 +23,7 @@ local REMOVE_SOULS =
     "butterfly",
     "birchnutdrake",
     "mole",
+    "beeguard",
     "bat",
 }
 

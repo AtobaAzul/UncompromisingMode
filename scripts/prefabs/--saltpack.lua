@@ -6,8 +6,8 @@ local assets =
 }
 
 local function onequip(inst, owner)
-    owner.AnimState:OverrideSymbol("swap_body", "swap_sporepack", "backpack")
-    owner.AnimState:OverrideSymbol("swap_body", "swap_sporepack", "swap_body")
+    owner.AnimState:OverrideSymbol("swap_body", "swap_saltpack", "backpack")
+    owner.AnimState:OverrideSymbol("swap_body", "swap_saltpack", "swap_body")
     inst.components.container:Open(owner)
 end
 
@@ -30,7 +30,7 @@ local function fn()
     inst.MiniMapEntity:SetIcon("krampus_sack.png")
 
     inst.AnimState:SetBank("backpack1")
-    inst.AnimState:SetBuild("sporepack")
+    inst.AnimState:SetBuild("swap_sporepack")
     inst.AnimState:PlayAnimation("anim")
 
     inst.foleysound = "dontstarve/movement/foley/krampuspack"
@@ -52,7 +52,6 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.cangoincontainer = false
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/sporepack.xml"
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BODY
@@ -63,11 +62,11 @@ local function fn()
     inst.components.waterproofer:SetEffectiveness(0)
 
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup("sporepack")
+    inst.components.container:WidgetSetup("krampus_sack")
 
     MakeHauntableLaunchAndDropFirstItem(inst)
 
     return inst
 end
 
-return Prefab("sporepack", fn, assets)
+return Prefab("saltpack", fn, assets)

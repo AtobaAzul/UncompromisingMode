@@ -100,6 +100,14 @@ local function OnTimerDone(inst, data)
     end
 end
 
+local function ondeath(inst)
+	local slime = SpawnPrefab("lavaeslime")
+	if slime ~= nil then
+		local x, y, z = inst.Transform:GetWorldPosition()
+		slime.Transform:SetPosition(x, y, z)
+	end
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -181,6 +189,9 @@ local function fn()
 
     inst:ListenForEvent("newcombattarget", OnNewTarget)
     inst:ListenForEvent("entitysleep", OnEntitySleep)
+	
+	
+    inst:ListenForEvent("death", ondeath)
 
     MakeHauntablePanic(inst)
 

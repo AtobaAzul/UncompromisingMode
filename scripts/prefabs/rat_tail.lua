@@ -1,6 +1,6 @@
 local assets =
 {
-    Asset("ANIM", "anim/ratskin.zip"),
+    Asset("ANIM", "anim/rat_tail.zip"),
 }
 
 local function fn()
@@ -12,8 +12,8 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("ratskin")
-    inst.AnimState:SetBuild("ratskin")
+    inst.AnimState:SetBank("rat_tail")
+    inst.AnimState:SetBuild("rat_tail")
     inst.AnimState:PlayAnimation("idle")
 
     MakeInventoryFloatable(inst)
@@ -32,7 +32,7 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/ratskin.xml"
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/rat_tail.xml"
 
     inst:AddComponent("perishable")
     inst.components.perishable:StartPerishing()
@@ -44,4 +44,4 @@ local function fn()
     return inst
 end
 
-return Prefab("ratskin", fn, assets)
+return Prefab("rat_tail", fn, assets)

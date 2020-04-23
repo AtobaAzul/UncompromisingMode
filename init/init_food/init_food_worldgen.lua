@@ -66,7 +66,7 @@ if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
             if room.contents.distributeprefabs.berrybush_juicy ~= nil then 
                 room.contents.distributeprefabs.berrybush_juicy = room.contents.distributeprefabs.berrybush_juicy * GLOBAL.TUNING.DSTU.FOOD_BERRY_JUICY_APPEARANCE_PERCENT  
             end
-            if room.contents.distributeprefabs.green_mushroom ~= nil then 
+            --[[if room.contents.distributeprefabs.green_mushroom ~= nil then 
                 room.contents.distributeprefabs.green_mushroom = room.contents.distributeprefabs.green_mushroom * GLOBAL.TUNING.DSTU.FOOD_MUSHROOM_GREEN_APPEARANCE_PERCENT  
             end
             if room.contents.distributeprefabs.blue_mushroom ~= nil then 
@@ -74,7 +74,7 @@ if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
             end
             if room.contents.distributeprefabs.red_mushroom ~= nil then 
                 room.contents.distributeprefabs.red_mushroom = room.contents.distributeprefabs.red_mushroom * GLOBAL.TUNING.DSTU.FOOD_MUSHROOM_RED_APPEARANCE_PERCENT  
-            end 
+            end --]]
             room.uncompromisingly_changed = true
         end
     end

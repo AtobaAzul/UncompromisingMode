@@ -1,10 +1,10 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
-SetSharedLootTable( 'catcoon',
+SetSharedLootTable( 'catty',
 {
     {'meat',             1.00},
-    {'coontail',		 0.80},
+    {'coontail',		 0.66},
 })
 
 env.AddPrefabPostInit("catcoon", function(inst)
@@ -17,6 +17,6 @@ env.AddPrefabPostInit("catcoon", function(inst)
     end
 	
 	if inst.components.lootdropper ~= nil then
-		inst.components.lootdropper:SetChanceLootTable('catcoon')
+		inst.components.lootdropper:SetChanceLootTable('catty')
 	end
 end)

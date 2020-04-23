@@ -53,13 +53,19 @@ AddPrefabPostInit("green_cap_cooked", function (inst)
     end
 end)
 
+AddPrefabPostInit("cookedmonstermeat", function (inst)
+    if inst ~= nil and inst.components.edible ~= nil then
+        inst.components.edible.healthvalue = -5
+    end
+end)
+
 local ANTIHISTAMINES = 
 {
     "honey",
     "onion",
 	"acorn_cooked",
-	"green_cap",
-	"green_cap_cooked",
+	"red_cap",
+	"red_cap_cooked",
 }
 
 local function item_oneatenlow(inst, eater)
@@ -116,6 +122,7 @@ local ANTIHISTAMINES_HIGH =
 	"dragonchilisalad",
 	"moqueca",
 	"seafoodgumbo",
+	"lobsterbisque",
 	
 	--"tea",
 }
