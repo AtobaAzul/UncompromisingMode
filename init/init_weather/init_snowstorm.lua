@@ -39,6 +39,10 @@ local function SetInstanceFunctions(inst)
         inst.GetSandstormLevel = GetSandstormLevel
 end
 
+local function checkrevive(inst)
+	inst:PushEvent("usedtouchstone", inst)
+end
+
 AddPlayerPostInit(function(inst)
 
 	if not GLOBAL.TheWorld.ismastersim then
@@ -51,7 +55,7 @@ AddPlayerPostInit(function(inst)
 	
 	SetInstanceFunctions(inst)
 	
-	--inst:AddComponent("firerain")
+	--inst:ListenForEvent("death", checkrevive)
 end)
 
 AddClassPostConstruct("screens/playerhud",function(inst)

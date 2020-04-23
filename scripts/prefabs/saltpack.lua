@@ -1,14 +1,14 @@
 local assets =
 {
-    Asset("ANIM", "anim/lantern.zip"),
-    Asset("ANIM", "anim/swap_lantern.zip"),
+    Asset("ANIM", "anim/saltpack.zip"),
+    Asset("ANIM", "anim/swap_saltpack.zip"),
     Asset("SOUND", "sound/wilson.fsb"),
-    Asset("INV_IMAGE", "lantern_lit"),
+    Asset("INV_IMAGE", "saltpack"),
 }
 
 local prefabs =
 {
-    "lanternlight",
+    "saltpack",
 }
 
 local function DoTurnOffSound(inst, owner)
@@ -23,11 +23,33 @@ local function PlayTurnOnSound(inst)
 	end
 end
 
+local TALLER_FROSTYBREATHER_OFFSET = Vector3(.3, 3.75, 0)
+local DEFAULT_FROSTYBREATHER_OFFSET = Vector3(.3, 1.15, 0)
+
+local function GetOffset()
+    local offset = Vector3(.3, 1.15, 0)
+    return offset:Get()
+end
+
 local function Salted(inst)
+	local offset = Vector3(.3, 1.15, 0)
+    local owner = inst.components.inventoryitem.owner
 	local x, y, z = inst.Transform:GetWorldPosition()
-    local saltedfx = SpawnPrefab("collapse_small")
-    saltedfx.Transform:SetPosition(x, 2, z)
-    saltedfx.Transform:SetScale(0.2, 0.2, 0.2)
+	local saltedfx = SpawnPrefab("mining_fx")
+	if owner ~= nil then
+	print(x)
+	print(y)
+	print(z)
+		if owner.components.rider ~= nil and owner.components.rider:IsRiding() then
+			saltedfx.Transform:SetPosition(x, 4, z)
+		else
+			saltedfx.Transform:SetPosition(x, 2, z)
+		end
+	else
+		saltedfx.Transform:SetPosition(x, 2, z)
+	end
+    
+    
 	inst.SoundEmitter:PlaySound("dontstarve/creatures/together/antlion/sfx/ground_break")
 	
 		local ents = TheSim:FindEntities(x, y, z, 5, {"snowpile_basic"})
@@ -40,7 +62,7 @@ local function Salted(inst)
 						if v.components.workable ~= nil and
 							v.components.workable:CanBeWorked() and
 							v.components.workable.action ~= ACTIONS.NET then
-							v.components.workable:Destroy(inst)
+							v.components.workable:WorkedBy(inst, 1)
 						end
 					end
 				end
@@ -63,7 +85,7 @@ local function Salted(inst)
 		end
 end
 
-local function turnon(inst)
+local function turnon(inst, owner)
     if not inst.components.fueled:IsEmpty() then
 	
 	if inst.salttask == nil then
@@ -88,15 +110,7 @@ local function turnon(inst)
 		inst:AddTag("saltpack_protection")
         local owner = inst.components.inventoryitem.owner
 
-        inst.AnimState:PlayAnimation("idle_on")
-
-        if owner ~= nil and inst.components.equippable:IsEquipped() then
-            owner.AnimState:Show("LANTERN_OVERLAY")
-        end
-
         inst.components.machine.ison = true
-        inst.components.inventoryitem:ChangeImageName((inst:GetSkinName() or "lantern").."_lit")
-        inst:PushEvent("lantern_on")
     end
 end
 
@@ -117,15 +131,7 @@ local function turnoff(inst)
 
     DoTurnOffSound(inst)
 
-    inst.AnimState:PlayAnimation("idle_off")
-
-    if inst.components.equippable:IsEquipped() then
-        inst.components.inventoryitem.owner.AnimState:Hide("LANTERN_OVERLAY")
-    end
-
     inst.components.machine.ison = false
-    inst.components.inventoryitem:ChangeImageName(inst:GetSkinName()) --nil if no skin
-    inst:PushEvent("lantern_off")
 end
 
 local function OnRemove(inst)
@@ -140,34 +146,19 @@ local function ondropped(inst)
 end
 
 local function onequip(inst, owner)
-    local skin_build = inst:GetSkinBuild()
-    if skin_build ~= nil then
-        owner:PushEvent("equipskinneditem", inst:GetSkinName())
-        owner.AnimState:OverrideItemSkinSymbol("backpack", skin_build, "backpack", inst.GUID, "swap_saltpack" )
-        owner.AnimState:OverrideItemSkinSymbol("swap_body", skin_build, "swap_body", inst.GUID, "swap_saltpack" )
-    else
+    
         owner.AnimState:OverrideSymbol("backpack", "swap_saltpack", "backpack")
         owner.AnimState:OverrideSymbol("swap_body", "swap_saltpack", "swap_body")
-    end
+    
 
-    if inst.components.fueled:IsEmpty() then
-        owner.AnimState:Hide("LANTERN_OVERLAY")
-    else
-        owner.AnimState:Show("LANTERN_OVERLAY")
-        turnon(inst)
+    if not inst.components.fueled:IsEmpty() then
+		turnon(inst)
     end
 end
 
 local function onunequip(inst, owner)
-    local skin_build = inst:GetSkinBuild()
-    if skin_build ~= nil then
-        owner:PushEvent("unequipskinneditem", inst:GetSkinName())
-    end
     owner.AnimState:ClearOverrideSymbol("swap_body")
     owner.AnimState:ClearOverrideSymbol("backpack")
-	
-    owner.AnimState:ClearOverrideSymbol("lantern_overlay")
-    owner.AnimState:Hide("LANTERN_OVERLAY")
 end
 
 local function nofuel(inst)
@@ -207,9 +198,10 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("backpack1")
-    inst.AnimState:SetBuild("swap_saltpack")
-    inst.AnimState:PlayAnimation("anim")
+    
+    inst.AnimState:SetBank("umbrella")
+    inst.AnimState:SetBuild("saltpack")
+    inst.AnimState:PlayAnimation("idle")  
 	
 	inst.salttask = nil
 
@@ -224,6 +216,7 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/saltpack.xml"
 
     inst.components.inventoryitem:SetOnDroppedFn(ondropped)
     inst.components.inventoryitem:SetOnPutInInventoryFn(turnoff)

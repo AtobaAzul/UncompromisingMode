@@ -30,7 +30,7 @@ local function fn()
     inst.MiniMapEntity:SetIcon("krampus_sack.png")
 
     inst.AnimState:SetBank("backpack1")
-    inst.AnimState:SetBuild("swap_sporepack")
+    inst.AnimState:SetBuild("sporepack")
     inst.AnimState:PlayAnimation("anim")
 
     inst.foleysound = "dontstarve/movement/foley/krampuspack"
@@ -52,6 +52,7 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.cangoincontainer = false
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/sporepack.xml"
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BODY
@@ -62,7 +63,7 @@ local function fn()
     inst.components.waterproofer:SetEffectiveness(0)
 
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup("krampus_sack")
+    inst.components.container:WidgetSetup("sporepack")
 
     MakeHauntableLaunchAndDropFirstItem(inst)
 

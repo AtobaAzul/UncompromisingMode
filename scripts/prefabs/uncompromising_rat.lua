@@ -195,7 +195,7 @@ local function fn()
 	inst:AddComponent("lootdropper")
 	inst.components.lootdropper:AddRandomLoot("monstersmallmeat", 0.34)
 	inst.components.lootdropper:AddRandomLoot("disease_puff", 0.34)
-	inst.components.lootdropper:AddRandomLoot("ratskin", 0.34)
+	inst.components.lootdropper:AddRandomLoot("rat_tail", 0.34)
 	inst.components.lootdropper.numrandomloot = 1
 	
 	inst:AddComponent("sleeper")

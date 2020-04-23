@@ -1,6 +1,6 @@
 local assets =
 {
-    Asset("ANIM", "anim/rattail.zip"),
+    Asset("ANIM", "anim/shroom_skin_fragment.zip"),
 }
 
 local function fn()
@@ -12,8 +12,8 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("ratskin")
-    inst.AnimState:SetBuild("ratskin")
+    inst.AnimState:SetBank("shroom_skin_fragment")
+    inst.AnimState:SetBuild("shroom_skin_fragment")
     inst.AnimState:PlayAnimation("idle")
 
     MakeInventoryFloatable(inst)
@@ -30,11 +30,11 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/rattail.xml"
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/shroom_skin_fragment.xml"
 
     MakeHauntableLaunchAndPerish(inst)
 
     return inst
 end
 
-return Prefab("rattail", fn, assets)
+return Prefab("shroom_skin_fragment", fn, assets)

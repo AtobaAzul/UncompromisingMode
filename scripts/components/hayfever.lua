@@ -56,7 +56,7 @@ function Hayfever:OnUpdate(dt)
         else
             self.nextsneeze = self.nextsneeze -dt
         end        
-    elseif TheWorld.net:HasTag("queenbeekilled") then
+    elseif self.inst:HasTag("playerghost") or TheWorld.net:HasTag("queenbeekilled") then
         if self.nextsneeze < 120 then
             self.nextsneeze = self.nextsneeze + (dt*0.9)
         end

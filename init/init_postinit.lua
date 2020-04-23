@@ -52,6 +52,7 @@ local prefab_post = {
 	"bat",
 	"featherhat",
 	"lavae",
+	--"amulet",
 	--"malbatross",
 }
 

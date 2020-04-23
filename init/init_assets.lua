@@ -56,17 +56,22 @@ Assets = {
 	Asset("ANIM", "anim/snowball.zip"),
 	Asset("ANIM", "anim/swap_snowball_throwable.zip"),
 	Asset("ANIM", "anim/swap_sporepack.zip"),
+	Asset("ANIM", "anim/sporepack.zip"),
 	Asset("ANIM", "anim/swap_saltpack.zip"),
 	Asset("ANIM", "anim/veteranshrine.zip"),
 	Asset("ANIM", "anim/ratskin.zip"),
 	Asset("ANIM", "anim/plaguemask.zip"),
+	Asset("ANIM", "anim/rat_tail.zip"),
+	Asset("ANIM", "anim/rat_fur.zip"),
+	Asset("ANIM", "anim/shroom_skin_fragment.zip"),
+	Asset("ANIM", "anim/saltpack.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),
 
 	Asset("SOUNDPACKAGE", "sound/UCSounds.fev"), 
 	Asset( "SOUND", "sound/UCSounds_bank00.fsb"),
-	
+
 	Asset("IMAGE", "images/inventoryimages/ratskin.tex"),
 	Asset("ATLAS", "images/inventoryimages/ratskin.xml"),
 	Asset("IMAGE", "images/inventoryimages/rat_tail.tex"),
@@ -84,4 +89,8 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/plaguemask.xml"),
    	Asset("IMAGE", "images/inventoryimages/shroom_skin_fragment.tex"),
 	Asset("ATLAS", "images/inventoryimages/shroom_skin_fragment.xml"),
+	Asset("IMAGE", "images/inventoryimages/sporepack.tex"),
+	Asset("ATLAS", "images/inventoryimages/sporepack.xml"),
+	Asset("IMAGE", "images/inventoryimages/saltpack.tex"),
+	Asset("ATLAS", "images/inventoryimages/saltpack.xml"),
 }

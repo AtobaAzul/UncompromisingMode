@@ -134,7 +134,7 @@ local function fn()
 	
     inst:AddTag("projectile")
 	inst:AddTag("weapon")
-    inst:AddTag("frozen")
+    --inst:AddTag("frozen")
 	
     MakeInventoryFloatable(inst, "med", 0.05, 0.65)
 
@@ -163,7 +163,7 @@ local function fn()
     inst.components.edible.foodtype = "HORRIBLE"
 	
     inst:AddComponent("perishable")
-    inst.components.perishable:SetPerishTime(TUNING.PERISH_ONE_DAY)
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_TWO_DAY)
     inst.components.perishable:StartPerishing()
     inst.components.perishable:SetOnPerishFn(onperish)
 	

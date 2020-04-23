@@ -20,13 +20,14 @@ local prefabs =
 
 SetSharedLootTable( 'toadling',
 {
+    {'shroom_skin_fragment',	1.00},
     {'meat',            1.00},
     {'meat',            0.50},
     {'froglegs',            1.00},
     {'froglegs',            0.50},
-    {'blue_cap',            0.50},
-    {'red_cap',            0.50},
-    {'green_cap',            0.50},
+    {'blue_cap',            0.25},
+    {'red_cap',            0.25},
+    {'green_cap',            0.25},
 })
 
 local SLEEP_DIST_FROMHOME = 1
