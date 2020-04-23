@@ -28,6 +28,7 @@ local IMPASSABLES = {
     ["statue_marble"] = true,
     ["gravestone"] = true,
     ["arrowsign_post"] = true,
+	["lureplant"] = true,
 }
 
 env.AddPrefabPostInitAny(function(inst)
