@@ -102,6 +102,7 @@ function SpiderBrain_TrapDoor:OnStart()
 			WhileNode(function() return CanAttackNow(self.inst) end, "AttackMomentarily", ChaseAndAttack(self.inst, MAX_CHASE_TIME)),
 			WhileNode(function() return not Attacking(self.inst) end, "AmIBusyAttacking", RunAway(self.inst, "scarytoprey", 7, 8)),
 			
+			ChaseAndAttack(self.inst, MAX_CHASE_TIME),
             DoAction(self.inst, function() return EatFoodAction(self.inst) end ),
             Follow(self.inst, function() return self.inst.components.follower.leader end, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST),
             IfNode(function() return self.inst.components.follower.leader ~= nil end, "HasLeader",

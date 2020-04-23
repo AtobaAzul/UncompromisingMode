@@ -1,9 +1,9 @@
 
-local warrior_assets =
+local trapdoor_assets =
 {
     Asset("ANIM", "anim/ds_spider_basic.zip"),
     Asset("ANIM", "anim/ds_spider_warrior.zip"),
-    Asset("ANIM", "anim/spider_warrior_build.zip"),
+    Asset("ANIM", "anim/spider_trapdoor.zip"),
     Asset("SOUND", "sound/spider.fsb"),
 }
 
@@ -221,7 +221,7 @@ local function create_common(build, tag)
     inst:AddTag("trader")
 
     inst.AnimState:SetBank("spider")
-    inst.AnimState:SetBuild(build)
+    inst.AnimState:SetBuild("spider_trapdoor")
     inst.AnimState:PlayAnimation("idle")
 
     inst.entity:SetPristine()
@@ -315,7 +315,7 @@ local function create_common(build, tag)
 end
 
 local function create_trapdoor()
-    local inst = create_common("spider_warrior_build", "spider_warrior")
+    local inst = create_common("spider_trapdoor", "spider_warrior")
 
     if not TheWorld.ismastersim then
         return inst
@@ -336,4 +336,4 @@ local function create_trapdoor()
     return inst
 end
 
-return Prefab("spider_trapdoor", create_trapdoor, warrior_assets)
+return Prefab("spider_trapdoor", create_trapdoor, trapdoor_assets)

@@ -147,6 +147,26 @@ local states = {
             end
         end,
     },
+    State{
+        name = "shield",
+        tags = {"busy", "shield"},
+
+        onenter = function(inst)
+            --If taking fire damage, spawn fire effect. 
+            inst.components.health:SetAbsorptionAmount(TUNING.SPIDER_HIDER_SHELL_ABSORB)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("hide")
+            inst.AnimState:PushAnimation("hide_loop")
+			inst.components.workable:SetWorkLeft(1)
+			inst:AddTag("hiding")
+        end,
+
+        onexit = function(inst)
+            inst.components.health:SetAbsorptionAmount(0)
+			inst.components.workable:SetWorkLeft(0)
+			inst:RemoveTag("hiding")
+        end,
+    },
 }
 
 for k, v in pairs(events) do

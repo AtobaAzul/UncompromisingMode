@@ -92,6 +92,11 @@ local function WakeTest(inst)
     return homePos ~= nil and inst:GetDistanceSqToPoint(homePos) >= 25--5 * 5
 end
 
+local function OnWorked(inst) 
+	if inst:HasTag("hiding") and not inst.components.health:IsDead() then 
+		inst:PushEvent("exitshield")
+	end
+end
 local function fn()
     local inst = CreateEntity()
 
@@ -201,7 +206,10 @@ local function fn()
 
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("entitysleep", OnEntitySleep)
-	
+	   inst:AddComponent("workable")
+    inst.components.workable:SetWorkAction(ACTIONS.DIG)
+    inst.components.workable:SetOnFinishCallback(OnWorked)
+    inst.components.workable:SetWorkLeft(0)
 	inst.sg:GoToState("taunt")
 
     return inst

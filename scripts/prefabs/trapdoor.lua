@@ -80,6 +80,32 @@ local function OnHaunt(inst)
     return false
 end
 
+local function OpenMound(inst)
+inst.AnimState:PlayAnimation("idle_flipped")
+inst.AnimState:PushAnimation("flip_close")
+inst.AnimState:PushAnimation("idle")
+end
+
+local function CloseMound(inst)
+inst.AnimState:PlayAnimation("idle_flipped")
+inst.AnimState:PushAnimation("flip_close")
+inst.AnimState:PushAnimation("idle")
+end
+
+local function _OnUpdate(inst)
+local x, y, z = inst.Transform:GetWorldPosition()
+            local range = 30
+            local ents = TheSim:FindEntities(x, y, z, range, nil, { "trapdoor" })
+            if #ents > 0 then
+                for i, v in ipairs(ents) do
+                    if v.components.childspawner ~= nil and (v.components.childspawner.childreninside > 0 or v.components.childspawner.numchildrenoutside >0) then
+						inst.components.childspawner:StopRegen()
+						return
+					end
+                end
+            end
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -92,13 +118,14 @@ local function fn()
 
     inst.MiniMapEntity:SetIcon("wasphive.png") --replace with wasp version if there is one.
 
-    inst.AnimState:SetBank("wasphive")
-    inst.AnimState:SetBuild("wasphive")
-    inst.AnimState:PlayAnimation("cocoon_small", true)
+    inst.AnimState:SetBank("trapdoor")
+    inst.AnimState:SetBuild("trapdoor")
+    inst.AnimState:PlayAnimation("idle", true)
 
     inst:AddTag("structure")
     inst:AddTag("hive")
     inst:AddTag("WORM_DANGER")
+	inst:AddTag("trapdoor")
 
     MakeSnowCoveredPristine(inst)
 
@@ -120,7 +147,12 @@ local function fn()
     inst.components.childspawner.emergencychildrenperplayer = 1
     inst.components.childspawner:SetMaxEmergencyChildren(TUNING.WASPHIVE_EMERGENCY_WASPS)
     inst.components.childspawner:SetEmergencyRadius(TUNING.WASPHIVE_EMERGENCY_RADIUS/2)
-
+	inst.components.childspawner:SetSpawnedFn(OpenMound)
+	inst.components.childspawner:SetGoHomeFn(CloseMound)
+	inst.components.childspawner:SetRegenPeriod(100,50)
+	inst.components.childspawner:NumChildren(0)
+	inst:DoPeriodicTask(10, _OnUpdate, nil)
+	
     -------------------------
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetLoot({ nil})
