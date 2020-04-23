@@ -165,7 +165,7 @@ local function StartSpike(inst, duration, variation)
 
     inst.SoundEmitter:PlaySound("dontstarve/creatures/together/stalker/fossil_spike")
 
-    DoDamage(inst)
+    --DoDamage(inst)
 end
 
 local function RestartSpike(inst, delay, duration, variation)
@@ -247,10 +247,10 @@ local function fn()
 	inst.components.workable:SetOnWorkCallback(chop_root)
     inst.components.workable:SetOnFinishCallback(chop_down_root)
 
-    inst:AddComponent("combat")
-    inst.components.combat:SetDefaultDamage(10)
+    --[[inst:AddComponent("combat")
+    inst.components.combat:SetDefaultDamage(0)
     inst.components.combat.playerdamagepercent = .5
-    inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
+    inst.components.combat:SetKeepTargetFunction(KeepTargetFn)--]]
 
     inst.persists = false
 

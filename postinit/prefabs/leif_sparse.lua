@@ -3,7 +3,7 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 --Treeguard now has AOE - Axe
 env.AddPrefabPostInit("leif_sparse", function (inst)
-    if inst ~= nil and inst.components ~= nil and inst.components.combat ~= nil then
+    if inst.components.combat ~= nil then
 		local function isnottree(ent)
 			if ent ~= nil and not ent:HasTag("leif") then -- fix to friendly AOE: refer for later AOE mobs -Axe
 				return true
