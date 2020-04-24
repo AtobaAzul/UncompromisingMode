@@ -23,10 +23,7 @@ local prefabs =
 
 SetSharedLootTable("cavein_boulder",
 {
-	{ "rocks",  1 },
-	{ "rocks",  1 },
-	{ "rocks",  .2 },
-    { "rocks",  .2 },
+	{ "rocks",  .1 },
     { "flint",  .1 },
 })
 
