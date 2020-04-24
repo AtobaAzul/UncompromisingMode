@@ -35,7 +35,7 @@ local _warnduration = 60
 local _timetonextwarningsound = 0
 local _announcewarningsoundinterval = 4
 	
-local _attacksperspring = 4
+local _attacksperspring = 2
 local _attackduringoffseason = false
 local _targetplayer = nil
 local _activehassler = nil

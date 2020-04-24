@@ -50,8 +50,8 @@ local CONTAINERS =
 }
 
 local function RemoveSnowedTag(inst)
-	if inst:HasTag("snowedin") then
-		inst:RemoveTag("snowedin")
+	if inst:HasTag("snowpiledin") then
+		inst:RemoveTag("snowpiledin")
 	end
 end
 
@@ -71,7 +71,7 @@ local function CheckForSnow(inst)
 				inst:AddTag("INLIMBO")
 			end
 			
-			inst:AddTag("snowedin")
+			inst:AddTag("snowpiledin")
 		--end
 	else
 		--if inst.components.container == nil then

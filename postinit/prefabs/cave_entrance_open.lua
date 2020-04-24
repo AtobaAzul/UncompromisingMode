@@ -18,14 +18,52 @@ local function GetStatus(inst)
         or nil
 end
 
+local function ReturnChildren(inst)
+    for k, child in pairs(inst.components.childspawner.childrenoutside) do
+        if child.components.homeseeker ~= nil then
+            child.components.homeseeker:GoHome()
+        end
+        child:PushEvent("gohome")
+    end
+end
+
+local function OnIsDay(inst, isday)
+    if isday then
+        inst.components.childspawner:StartRegen()
+        inst.components.childspawner:StopSpawning()
+        ReturnChildren(inst)
+    else
+        inst.components.childspawner:StartRegen()
+        inst.components.childspawner:StartSpawning()
+    end
+end
+
+local function onnear(inst, target)
+    --hive pop open? Maybe rustle to indicate danger?
+    --more and more come out the closer you get to the nest?
+    if inst.components.childspawner ~= nil then
+        inst.components.childspawner:ReleaseAllChildren(target, "bat")
+    end
+end
+
 env.AddPrefabPostInit("cave_entrance_open", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
 	if inst.components.childspawner ~= nil then
+		inst.components.childspawner:SetRegenPeriod(60/TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
 		inst.components.childspawner:SetSpawnPeriod(.1/TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
-		inst.components.childspawner:SetMaxChildren(6*TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
+		--inst.components.childspawner:SetMaxChildren(6*TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
+		
+		inst:AddComponent("playerprox")
+		inst.components.playerprox:SetDist(11, 14) --set specific values
+		inst.components.playerprox:SetOnPlayerNear(onnear)
+		inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
 	end
+	
+	
+    OnIsDay(inst, TheWorld.state.isday)
+    inst:WatchWorldState("isday", OnIsDay)
 	--[[inst:WatchWorldState("season", SnowedIn)
 	SnowedIn(inst, TheWorld.state.season)
 	
