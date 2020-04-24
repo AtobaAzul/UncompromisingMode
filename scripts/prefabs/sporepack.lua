@@ -17,6 +17,43 @@ local function onunequip(inst, owner)
     inst.components.container:Close(owner)
 end
 
+local function TryPerish(item)
+    if item:IsInLimbo() then
+        local owner = item.components.inventoryitem ~= nil and item.components.inventoryitem.owner or nil
+        if owner == nil or
+            (   owner.components.container ~= nil and
+                owner:HasTag("sporepack")   ) then
+            --in limbo but not inventory or container?
+            --or in a closed chest
+				item.components.perishable:ReducePercent(TUNING.TOADSTOOL_SPORECLOUD_ROT / 2)
+            return
+        end
+    end
+end
+
+local function DoSpoil(inst)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x, y, z, 1, nil, { "small_livestock" }, { "fresh" })
+    for i, v in ipairs(ents) do
+        TryPerish(v)
+    end
+end
+
+local function CheckForItems(inst)
+    local perishables = #inst.components.container:FindItems( function(item) return item:HasTag("fresh") end )
+
+	if perishables > 0 then
+		if inst.rottask == nil then
+			inst.rottask = inst:DoPeriodicTask(2, DoSpoil)
+		end
+	else
+		if inst.rottask ~= nil then
+			inst.rottask:Cancel()
+		end
+		inst.rottask = nil
+	end
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -29,22 +66,26 @@ local function fn()
 
     inst.MiniMapEntity:SetIcon("krampus_sack.png")
 
-    inst.AnimState:SetBank("backpack1")
+    inst.AnimState:SetBank("sporepack")
     inst.AnimState:SetBuild("sporepack")
-    inst.AnimState:PlayAnimation("anim")
+    inst.AnimState:PlayAnimation("idle")
+	
+	inst.rottask = nil
 
-    inst.foleysound = "dontstarve/movement/foley/krampuspack"
+    inst.foleysound = "dontstarve/movement/foley/backpack"
 
     inst:AddTag("backpack")
-
-    --waterproofer (from waterproofer component) added to pristine state for optimization
-    inst:AddTag("waterproofer")
+    inst:AddTag("sporepack")
+    inst:AddTag("spoiler")
 
     MakeInventoryFloatable(inst, "med", 0.1, 0.65)
 
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
+		inst.OnEntityReplicated = function(inst) 
+			inst.replica.container:WidgetSetup("krampus_sack") 
+		end
         return inst
     end
 
@@ -63,7 +104,10 @@ local function fn()
     inst.components.waterproofer:SetEffectiveness(0)
 
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup("sporepack")
+    inst.components.container:WidgetSetup("krampus_sack")
+	
+	inst:ListenForEvent("itemget", CheckForItems)
+	inst:ListenForEvent("itemlose", CheckForItems)
 
     MakeHauntableLaunchAndDropFirstItem(inst)
 

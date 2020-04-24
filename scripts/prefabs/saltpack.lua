@@ -46,7 +46,7 @@ local function Salted(inst)
 			saltedfx.Transform:SetPosition(x, 2, z)
 		end
 	else
-		saltedfx.Transform:SetPosition(x, 2, z)
+		saltedfx.Transform:SetPosition(x, 1.6, z)
 	end
     
     
@@ -80,7 +80,7 @@ local function Salted(inst)
 				end
 			end
 			
-		if not TheWorld.state.iswinter then
+		if not TheWorld.state.iswinter and TheWorld:HasTag("forest") then
 			inst.components.equippable.walkspeedmult = 1
 		end
 end
@@ -101,7 +101,7 @@ local function turnon(inst, owner)
 	
         inst.components.fueled:StartConsuming()
 		
-		if TheWorld.state.iswinter then
+		if TheWorld.state.iswinter and TheWorld:HasTag("forest") then
 			inst.components.equippable.walkspeedmult = 1.1
 		else
 			inst.components.equippable.walkspeedmult = 1
@@ -201,7 +201,9 @@ local function fn()
     
     inst.AnimState:SetBank("umbrella")
     inst.AnimState:SetBuild("saltpack")
-    inst.AnimState:PlayAnimation("idle")  
+    inst.AnimState:PlayAnimation("idle")
+	
+    inst.foleysound = "dontstarve/movement/foley/backpack"
 	
 	inst.salttask = nil
 
