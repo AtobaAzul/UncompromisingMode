@@ -110,6 +110,8 @@ local function fn()
 	inst:ListenForEvent("itemlose", CheckForItems)
 
     MakeHauntableLaunchAndDropFirstItem(inst)
+	
+    inst.OnLoad = CheckForItems
 
     return inst
 end
