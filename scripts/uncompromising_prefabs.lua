@@ -55,4 +55,5 @@ return {
 	"spider_trapdoor",
 	"antlion_sinkhole_lava",
 	"lavaeslime",
+	"air_conditioner",
 }

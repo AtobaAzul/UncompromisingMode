@@ -69,6 +69,7 @@ AddRecipe("plaguemask", {Ingredient("malbatross_beak", 1),Ingredient("red_cap", 
 AddRecipe("saltpack", {Ingredient("gears", 1),Ingredient("boards", 2),Ingredient("saltrock",8)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/saltpack.xml", "saltpack.tex" )
 AddRecipe("shroom_skin", {Ingredient("shroom_skin_fragment",4, "images/inventoryimages/shroom_skin_fragment.xml"),Ingredient("froglegs",2)}, GLOBAL.RECIPETABS.REFINE, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil)--, "images/inventoryimages/plaguemask.xml", "plaguemask.tex" )
 AddRecipe("sporepack", {Ingredient("shroom_skin",1),Ingredient("rope", 2),Ingredient("spoiled_food",2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/sporepack.xml", "sporepack.tex" )
+AddRecipe("air_conditioner", {Ingredient("shroom_skin",2),Ingredient("gears", 2),Ingredient("cutstone",4)}, GLOBAL.RECIPETABS.SCIENCE, GLOBAL.TECH.SCIENCE_TWO, "air_conditioner_placer", nil, nil, nil, nil, "images/inventoryimages/air_conditioner.xml", "air_conditioner.tex" )
 
 STRINGS.RECIPE_DESC.SAND = "Turn a big rock into smaller rocks."
 STRINGS.RECIPE_DESC.SNOWGOGGLES = "Keep your eyes clear and ears extra warm."
@@ -79,5 +80,6 @@ STRINGS.RECIPE_DESC.GASMASK = "Makes everything smell like bird."
 STRINGS.RECIPE_DESC.PLAGUEMASK = "CANIS SMELLS."
 STRINGS.RECIPE_DESC.SALTPACK = "Spice up the world."
 STRINGS.RECIPE_DESC.RATPOISON = "A most deadly feast."
-STRINGS.RECIPE_DESC.SHROOM_SKIN = "Stiched Skins."
-STRINGS.RECIPE_DESC.SPOREPACK = "Unhygenic Storage."
+STRINGS.RECIPE_DESC.SHROOM_SKIN = "Stiched skins."
+STRINGS.RECIPE_DESC.SPOREPACK = "Unhygenic storage."
+STRINGS.RECIPE_DESC.AIR_CONDITIONER = "Condition the air."

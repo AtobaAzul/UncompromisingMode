@@ -67,6 +67,7 @@ Assets = {
 	Asset("ANIM", "anim/rat_fur.zip"),
 	Asset("ANIM", "anim/shroom_skin_fragment.zip"),
 	Asset("ANIM", "anim/saltpack.zip"),
+	Asset("ANIM", "anim/airconditioner.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),
@@ -95,4 +96,6 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/sporepack.xml"),
 	Asset("IMAGE", "images/inventoryimages/saltpack.tex"),
 	Asset("ATLAS", "images/inventoryimages/saltpack.xml"),
+	Asset("IMAGE", "images/inventoryimages/air_conditioner.tex"),
+	Asset("ATLAS", "images/inventoryimages/air_conditioner.xml"),
 }
