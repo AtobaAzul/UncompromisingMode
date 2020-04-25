@@ -25,7 +25,7 @@ end
 local function onnear(inst, target)
     --hive pop open? Maybe rustle to indicate danger?
     --more and more come out the closer you get to the nest?
-    if inst.components.childspawner ~= nil then
+    if inst.components.childspawner ~= nil and not target:HasTag("monster") then
         inst.components.childspawner:ReleaseAllChildren(target, "spider_trapdoor")
     end
 end
