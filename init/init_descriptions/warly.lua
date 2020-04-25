@@ -52,6 +52,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.VETERANSHRINE = "The lengths I go for ingredients..."
 	DESCRIBE.RATSKIN = "I don't want that near my hands! Or my food! Or anywhere!"
 	DESCRIBE.PLAGUEDOCTOR_MASK = "Maybe I should count my blessings."
+	DESCRIBE.SPIDER_TRAPDOOR = "Another jumping spider? Mon dieu..."
+	DESCRIBE.TRAPDOOR = "I wouldn't want to trip and spill something."
 	
 	DESCRIBE.BUSHCRAB = "Berries and crab cake, anyone? No?"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

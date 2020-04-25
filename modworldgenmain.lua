@@ -12,7 +12,9 @@ tasksetdata.set_pieces["ToadstoolArena"] = { 1, tasks={"Guarded Squeltch","Merms
 end)
 
 end
-
+AddRoomPreInit("BGSavanna", function(room)
+room.contents.distributeprefabs.trapdoor = 1
+end)
 --[[
 	if GLOBAL.terrain.rooms.LightningBluffAntlion then
 		GLOBAL.terrain.rooms.LightningBluffAntlion.contents.distributeprefabs.sandhill = 0.4

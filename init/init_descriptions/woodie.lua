@@ -52,6 +52,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.VETERANSHRINE = "It makes my skin crawl. eh?"
 	DESCRIBE.RATSKIN = "I don't want to breathe that smell in, eh?"
 	DESCRIBE.PLAGUEDOCTOR_MASK = "Keeps the bad air out and the good air in, eh?"
+	DESCRIBE.SPIDER_TRAPDOOR = "They look nastier without hair."
+	DESCRIBE.TRAPDOOR = "Is something in the grass?"
 
 	DESCRIBE.BUSHCRAB = "Farm from a freshwater."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

@@ -51,6 +51,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.VETERANSHRINE = "No challenge is above me!"
 	DESCRIBE.SNOWBALL_THROWABLE = "Aim betwixt the eyes!"
 	DESCRIBE.PLAGUEDOCTOR_MASK = "I am a warrior against Pestilence!"
+	DESCRIBE.SPIDER_TRAPDOOR = "My own battle tactics, used against me!"
+	DESCRIBE.TRAPDOOR = "Nothing here."
 	
 	DESCRIBE.BUSHCRAB = "A wild encounter!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

@@ -52,6 +52,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.SNOWBALL_THROWABLE = "Maybe I could load it in a catapult? Hmm, nah."
 	DESCRIBE.RATSKIN = "Yeesh, I don't want to carry that around."
 	DESCRIBE.PLAGUEDOCTOR_MASK = "You gotta be careful not to bump the beak on anything."
+	DESCRIBE.SPIDER_TRAPDOOR = "I might have to steal that \"trapdoor\" idea."
+	DESCRIBE.TRAPDOOR = "I don't see anything."
 	
 
 	DESCRIBE.BUSHCRAB = "Thats some dangerous weeding!"

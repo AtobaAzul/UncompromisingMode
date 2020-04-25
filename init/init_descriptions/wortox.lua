@@ -52,6 +52,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.SNOWBALL_THROWABLE = "Hyuyu! I like this game!"
 	DESCRIBE.RATSKIN = "People are scared of it, hyuyu!"
 	DESCRIBE.PLAGUEDOCTOR_MASK = "It forbids bad scent, and lets good ones ferment!"
+	DESCRIBE.SPIDER_TRAPDOOR = "Hyuyu! What a surprise!"
+	DESCRIBE.TRAPDOOR = "Hyuyu! I see you!"
 
 	DESCRIBE.BUSHCRAB = "Ohoho, what a trickster!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

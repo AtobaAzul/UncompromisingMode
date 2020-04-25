@@ -329,7 +329,7 @@ local function create_trapdoor()
     inst.components.combat:SetRetargetFunction(2, WarriorRetarget)
 	--inst:AddTag("attacking")
     inst.components.locomotor.walkspeed = TUNING.SPIDER_WARRIOR_WALK_SPEED
-    inst.components.locomotor.runspeed = TUNING.SPIDER_WARRIOR_RUN_SPEED*1.3
+    inst.components.locomotor.runspeed = TUNING.SPIDER_WARRIOR_RUN_SPEED*1.1
 
     inst.components.sanityaura.aura = -TUNING.SANITYAURA_MED
 

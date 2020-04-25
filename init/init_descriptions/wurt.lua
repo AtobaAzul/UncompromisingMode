@@ -52,6 +52,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 	DESCRIBE.VETERANSHRINE = "I hate it, florp!"
 	DESCRIBE.RATSKIN = "It feels good to rub on face, florp!"
 	DESCRIBE.PLAGUEDOCTOR_MASK = "I don't like it! It's scary, florp!"
+	DESCRIBE.SPIDER_TRAPDOOR = "Is it naked?"
+	DESCRIBE.TRAPDOOR = "I see nothing!"
 
 	DESCRIBE.BUSHCRAB = "Crabby!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

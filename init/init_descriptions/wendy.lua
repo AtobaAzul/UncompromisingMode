@@ -52,6 +52,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.VETERANSHRINE = "I am used to pain."
 	DESCRIBE.RATSKIN = "It contains an acolyte of death."
 	DESCRIBE.PLAGUEDOCTOR_MASK = "Like a crow, a plague doctor is attracted to death."
+	DESCRIBE.SPIDER_TRAPDOOR = "Is it the prey, or am I?"
+	DESCRIBE.TRAPDOOR = "A hill to trip over."
 
 	DESCRIBE.BUSHCRAB = "Another cruel joke from mother nature."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

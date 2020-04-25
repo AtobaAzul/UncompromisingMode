@@ -69,6 +69,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	DESCRIBE.SALTPACK = "It breaks down the snow around me!"
 	DESCRIBE.SPOREPACK = "It's huge, and smelly."
 	DESCRIBE.SNOWBALL_THROWABLE = "Not the face!"
+	DESCRIBE.SPIDER_TRAPDOOR = "Agh! An ambush!"
+	DESCRIBE.TRAPDOOR = "Nothing out of the ordinary here."
 
 --	[ 		Recipe Descriptions		]   --
 

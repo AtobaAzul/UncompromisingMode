@@ -52,6 +52,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 	DESCRIBE.VETERANSHRINE = "That's certainly not the best idea."
 	DESCRIBE.RATSKIN = "Goodness, I believe it's infected with the bubonic plague."
 	DESCRIBE.PLAGUEDOCTOR_MASK = "A mask, popularized by plague doctors during the bubonic plague."
+	DESCRIBE.SPIDER_TRAPDOOR = "A Ctenizidae Arachnid, from the looks of it."
+	DESCRIBE.TRAPDOOR = "An unremarkable mound in the terrain."
 
 	DESCRIBE.BUSHCRAB = "Ardisia brachyura!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

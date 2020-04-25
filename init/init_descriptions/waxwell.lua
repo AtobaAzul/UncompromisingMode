@@ -54,6 +54,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.VETERANSHRINE = "I already have fuel-related problems, what's another?"
 	DESCRIBE.RATSKIN = "Eugh, disgusting!"
 	DESCRIBE.PLAGUEDOCTOR_MASK = "The beak looks ridiculous."
+	DESCRIBE.SPIDER_TRAPDOOR = "Oh great, they're getting smarter."
+	DESCRIBE.TRAPDOOR = "Something's off here, I can feel it."
 
 	DESCRIBE.BUSHCRAB = "I guess they've finally hatched."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

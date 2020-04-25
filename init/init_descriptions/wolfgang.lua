@@ -52,6 +52,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.VETERANSHRINE = "Wolfgang don't like looking at head."
 	DESCRIBE.RATSKIN = "Is smelly leather?"
 	DESCRIBE.PLAGUEDOCTOR_MASK = "Is bird mask."
+	DESCRIBE.SPIDER_TRAPDOOR = "Don't scare Wolfgang!"
+	DESCRIBE.TRAPDOOR = "Little hill in grass."
 
 	DESCRIBE.BUSHCRAB = "Just wanted food!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

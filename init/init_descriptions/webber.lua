@@ -52,6 +52,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.VETERANSHRINE = "It's looking at us!!"
 	DESCRIBE.RATSKIN = "It looks like our fur! But more smelly."
 	DESCRIBE.PLAGUEDOCTOR_MASK = "It looks like a chicken!"
+	DESCRIBE.SPIDER_TRAPDOOR = "We don't care that you don't have hair, you're still our friend!"
+	DESCRIBE.TRAPDOOR = "Our smart friends made those!"
 
 	DESCRIBE.BUSHCRAB = "Not one of our friends!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
