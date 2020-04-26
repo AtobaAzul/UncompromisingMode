@@ -162,10 +162,10 @@ local function fn()
     inst.components.playerprox:SetOnPlayerNear(onnear)
     inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
     -------------------------
-    inst:AddComponent("combat")
+    --inst:AddComponent("combat")
     --wasp hive should trigger on proximity, release wasps.
-    inst.components.combat:SetOnHit(onhitbyplayer)
-    inst:ListenForEvent("death", OnKilled)
+    --inst.components.combat:SetOnHit(onhitbyplayer)
+    --inst:ListenForEvent("death", OnKilled)
     -------------------------
     MakeMediumPropagator(inst)
     MakeSnowCovered(inst)
