@@ -71,7 +71,7 @@ local function onsave(inst, data)
     end
 end
 
-local function TryPerish(player, inst)
+local function TryPuff(player, inst)
 
 	local redcaps = #inst.components.container:FindItems( function(item) return item:HasTag("red_mushroom_fuel") end )
 	local greencaps = #inst.components.container:FindItems( function(item) return item:HasTag("green_mushroom_fuel") end )
@@ -95,11 +95,11 @@ local function TryPerish(player, inst)
 		
 end
 
-local function DoSpoil(inst)
+local function DoPuff(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, 10, nil, nil, { "player" })
     for i, v in ipairs(ents) do
-        TryPerish(v, inst)
+        TryPuff(v, inst)
     end
 end
 
@@ -122,7 +122,7 @@ local function CheckForItems(inst)
 			end
 
 			if inst.rottask == nil then
-				inst.rottask = inst:DoPeriodicTask(2, DoSpoil)
+				inst.rottask = inst:DoPeriodicTask(3, DoPuff)
 			end
 		else
 			if not inst:HasTag("airconditioneropen") then

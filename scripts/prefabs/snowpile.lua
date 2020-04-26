@@ -294,6 +294,7 @@ local function snowpilefn(Sim)
 	
 	inst:AddTag("snowpileradius")
 	inst:AddTag("snowpile_basic")
+	inst:AddTag("salt_workable")
 	
 	if not TheWorld.ismastersim then
         return inst

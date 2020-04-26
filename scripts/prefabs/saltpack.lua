@@ -52,7 +52,7 @@ local function Salted(inst)
     
 	inst.SoundEmitter:PlaySound("dontstarve/creatures/together/antlion/sfx/ground_break")
 	
-		local ents = TheSim:FindEntities(x, y, z, 5, {"snowpile_basic"})
+		local ents = TheSim:FindEntities(x, y, z, 5, {"salt_workable"})
 			if #ents > 0 then
 				for i, v in ipairs(ents) do
 					if v:IsValid() then
@@ -89,7 +89,7 @@ local function turnon(inst, owner)
     if not inst.components.fueled:IsEmpty() then
 	
 	if inst.salttask == nil then
-		inst.salttask = inst:DoPeriodicTask(2, Salted)
+		inst.salttask = inst:DoPeriodicTask(3, Salted)
 	end
 	
     inst.components.insulator:SetInsulation(TUNING.INSULATION_SMALL)

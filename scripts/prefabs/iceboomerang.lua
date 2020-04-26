@@ -80,7 +80,7 @@ local function OnHit(inst, owner, target)
         end
     end
 	if inst.components.perishable then
-		inst.components.perishable:ReducePercent(0.15)
+		inst.components.perishable:ReducePercent(0.10)
 	end
 end
 

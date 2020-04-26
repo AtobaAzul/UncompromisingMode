@@ -73,11 +73,11 @@ end
 function SnowOver:OnUpdate(dt)
 	local x, y, z = self.owner.Transform:GetWorldPosition()
 	local ents = TheSim:FindEntities(x, y, z, 4, {"wall"})
-	local suppressorNearby1 = 0.3 * #ents
+	local suppressorNearby1 = 0.25 * #ents
 	local ents2 = TheSim:FindEntities(x, y, z, 6, {"fire"})
 	local suppressorNearby2 = 0.6 * #ents2
 	local ents3 = TheSim:FindEntities(x, y, z, 5.5, {"shelter"})
-	local suppressorNearby3 = 0.2 * #ents3
+	local suppressorNearby3 = 0.15 * #ents3
 	local ents4 = TheSim:FindEntities(x, y, z, 6, {"saltpack_protection"})
 	local suppressorNearby4 = 0.8 * #ents4
 	

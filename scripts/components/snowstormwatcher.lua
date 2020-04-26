@@ -51,7 +51,7 @@ function SnowStormWatcher:ToggleSnowstorms(active, src, data)
     elseif TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
         self.inst:StartUpdatingComponent(self)
 		if self.stormtask == nil then
-			self.stormtask = self.inst:DoTaskInTime(120 + math.random(10,40), StormStart, self)--, self)
+			self.stormtask = self.inst:DoTaskInTime(100 + math.random(10,40), StormStart, self)--, self)
 		end
 		
 		if self.stopstormtask == nil then
@@ -114,7 +114,7 @@ function TrySpawning(v)
 			local ents6 = TheSim:FindEntities(x1, y1, z1, 8, nil, nil, { "fire" })
 			local ents7 = TheSim:FindEntities(x1, y1, z1, 2, nil, nil, { "snowpiledin"})
 				--local ents = TheSim:FindEntities(x, y, z, 40, {"wall" "player" "campfire"})
-			if TheWorld.Map:IsAboveGroundAtPoint(x1, y1, z1) and #ents5 < 1 and #ents6 < 1 and #ents7 < 1 and not INVALID_TILES[TheWorld.Map:GetTileAtPoint(x1, 0, z1)] then
+			if #ents5 < 1 and #ents6 < 1 and #ents7 < 1 and not INVALID_TILES[TheWorld.Map:GetTileAtPoint(x1, 0, z1)] then
 				local snowpilespawn = SpawnPrefab("snowpile")
 				snowpilespawn.Transform:SetPosition(x1, 0.05, z1)
 			end
@@ -130,25 +130,24 @@ local function SnowpileChance(inst, self)
 
 	local x, y, z = self.inst.Transform:GetWorldPosition()
     local ents4 = TheSim:FindEntities(x, y, z, 50, nil, { "snowpiledin", "hive" }, { "structure" })
-    for i, v in ipairs(ents4) do
-        TrySpawning(v)
-    end
 	if TheWorld.state.iswinter and TheWorld:HasTag("snowstormstart") then
-		if ents4 == nil or 0 or math.random() <= 0.15 then
-			if math.random() <= 0.10 then
-				local xrandom = math.random(-25, 25)
-				local zrandom = math.random(-25, 25)
+		if math.random() <= 0.10 then
+				local xrandom = math.random(-20, 20)
+				local zrandom = math.random(-20, 20)
 
 				local ents7 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 6, nil, nil, { "snowpileradius"})
 				local ents8 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 8, nil, nil, { "fire" })
 
 						--local ents = TheSim:FindEntities(x, y, z, 40, {"wall" "player" "campfire"})
-				if TheWorld.Map:IsAboveGroundAtPoint(x + xrandom, y, z + zrandom) and #ents7 < 1 and #ents8 < 1 and not INVALID_TILES[TheWorld.Map:GetTileAtPoint(x + xrandom, 0, z + zrandom)] then
+				if TheWorld.Map:IsPassableAtPoint(x + xrandom, 0, z + zrandom) and #ents7 < 1 and #ents8 < 1 and not INVALID_TILES[TheWorld.Map:GetTileAtPoint(x + xrandom, 0, z + zrandom)] then
 					local snowpilespawnplayer = SpawnPrefab("snowpile")
 					--snowpilespawnplayer.Transform:SetPosition(x + math.random(-20, 20), 0, z + math.random(-20, 20))
 				
-					snowpilespawnplayer.Transform:SetPosition(x + xrandom, 0, z + zrandom)
+					snowpilespawnplayer.Transform:SetPosition(x + xrandom, 0.05, z + zrandom)
 				end
+		else
+			for i, v in ipairs(ents4) do
+				TrySpawning(v)
 			end
 		end
 	end

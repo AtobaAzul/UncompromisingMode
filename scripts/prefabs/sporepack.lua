@@ -62,15 +62,12 @@ local function fn()
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 
-    inst:AddComponent("waterproofer")
-    inst.components.waterproofer:SetEffectiveness(0)
-
     inst:AddComponent("container")
     inst.components.container:WidgetSetup("krampus_sack")
 	
 	
 	inst:AddComponent("preserver")
-	inst.components.preserver:SetPerishRateMultiplier(20)
+	inst.components.preserver:SetPerishRateMultiplier(100)
 
     MakeHauntableLaunchAndDropFirstItem(inst)
 

@@ -130,7 +130,7 @@ local function cookedmonstersmallmeat_fn()
 
     inst.components.edible.ismeat = true
     inst.components.edible.foodtype = FOODTYPE.MEAT
-    inst.components.edible.healthvalue = -5 -- -5 health
+    inst.components.edible.healthvalue = -10 -- -10 health
     inst.components.edible.hungervalue = TUNING.CALORIES_TINY -- 9.375 hunger
     inst.components.edible.sanityvalue = -TUNING.SANITY_SMALL -- -10 sanity
     
@@ -154,7 +154,7 @@ local function monstersmallmeat_dried_fn()
 
     inst.components.edible.ismeat = true
     inst.components.edible.foodtype = FOODTYPE.MEAT
-    inst.components.edible.healthvalue = -TUNING.HEALING_SMALL -- -3 health
+    inst.components.edible.healthvalue = -5 -- -5 health
     inst.components.edible.hungervalue = TUNING.CALORIES_TINY -- 9.375 hunger
     inst.components.edible.sanityvalue = -TUNING.SANITY_TINY -- -5 sanity
 

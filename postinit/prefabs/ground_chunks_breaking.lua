@@ -24,10 +24,10 @@ local VALID_TILES = table.invert(
 local function spawngeyser(inst)
 
 	local x, y, z = inst.Transform:GetWorldPosition()
-	local ents = TheSim:FindEntities(x, y, z, 8, { "flamegeyser" })
+	local ents = TheSim:FindEntities(x, y, z, 8, nil, nil, { "flamegeyser", "rook" })
 
 	if ents == nil or #ents == 0 then
-		if TheWorld.state.issummer and math.random() < 0.02 and VALID_TILES[TheWorld.Map:GetTileAtPoint(x, y, z)] then
+		if TheWorld:HasTag("cave") and TheWorld.state.issummer and math.random() < 0.02 and VALID_TILES[TheWorld.Map:GetTileAtPoint(x, y, z)] then
 			SpawnPrefab("flamegeyser").Transform:SetPosition(inst.Transform:GetWorldPosition())
 		end
 	end

@@ -55,6 +55,7 @@ local prefab_post = {
 	--"amulet",
 	--"malbatross",
 	"mushrooms",
+	"rock_ice",
 }
 
 local stategraph_post = {

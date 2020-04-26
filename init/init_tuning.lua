@@ -163,7 +163,7 @@ TUNING.DSTU =
 	RAIDRAT_SPAWNRATE_VARIANCE = (seg_time / 5) * 0.5,
 	
 	--Weather Start Date
-    WEATHERHAZARD_START_DATE = 23,
+    WEATHERHAZARD_START_DATE = 22,
 
 	HARDER_SHADOWS = GetModConfigData("harder_shadows"),
     MAX_DISTANCE_TO_SHADOWS = 1225, -- 35^2
