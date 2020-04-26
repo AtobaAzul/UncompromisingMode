@@ -11,16 +11,16 @@ local assets =
 
 
 
-local function OnKilled(inst)
-    inst:RemoveComponent("childspawner")
-    inst.AnimState:PlayAnimation("cocoon_dead", true)
-    RemovePhysicsColliders(inst)
-
-    inst.SoundEmitter:KillSound("loop")
-
-    inst.SoundEmitter:PlaySound("dontstarve/bee/beehive_destroy") --replace with wasp
-    inst.components.lootdropper:DropLoot(inst:GetPosition()) --any loot drops?
-end
+--local function OnKilled(inst)
+--    inst:RemoveComponent("childspawner")
+--    inst.AnimState:PlayAnimation("cocoon_dead", true)
+--    RemovePhysicsColliders(inst)
+--
+--    inst.SoundEmitter:KillSound("loop")
+--
+--    inst.SoundEmitter:PlaySound("dontstarve/bee/beehive_destroy") --replace with wasp
+--    inst.components.lootdropper:DropLoot(inst:GetPosition()) --any loot drops?
+--end
 
 local function onnear(inst, target)
     --hive pop open? Maybe rustle to indicate danger?
@@ -30,16 +30,16 @@ local function onnear(inst, target)
     end
 end
 
-local function onhitbyplayer(inst, attacker, damage)
-    if inst.components.childspawner ~= nil then
-        inst.components.childspawner:ReleaseAllChildren(attacker, "spider_trapdoor")
-    end
-    if not inst.components.health:IsDead() then
-        inst.SoundEmitter:PlaySound("dontstarve/bee/beehive_hit")
-        inst.AnimState:PlayAnimation("cocoon_small_hit")
-        inst.AnimState:PushAnimation("cocoon_small", true)
-    end
-end
+--local function onhitbyplayer(inst, attacker, damage)
+--    if inst.components.childspawner ~= nil then
+--        inst.components.childspawner:ReleaseAllChildren(attacker, "spider_trapdoor")
+--    end
+--    if not inst.components.health:IsDead() and then
+--        inst.SoundEmitter:PlaySound("dontstarve/bee/beehive_hit")
+--        inst.AnimState:PlayAnimation("cocoon_small_hit")
+--        inst.AnimState:PushAnimation("cocoon_small", true)
+--    end
+--end
 
 local function OnEntityWake(inst)
     inst.SoundEmitter:PlaySound("dontstarve/bee/killerbee_hive_LP", "loop")
@@ -68,7 +68,7 @@ local function OnHaunt(inst)
     )
 
     if target ~= nil then
-        onhitbyplayer(inst, target)
+        --onhitbyplayer(inst, target)
         return true
     end
     return false
