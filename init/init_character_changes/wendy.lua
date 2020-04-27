@@ -1,11 +1,12 @@
--- Abigal's Flower Mark Debuff brings Wendy's damage up to be HIGHER than every other basic strength character, now thats gone.
+-- Wendy now only gets the 10% bonus from Abigail, not 40%
 
 local function CustomCombatDamage(inst, target)
-	return 1
+	return (target == inst.components.ghostlybond.ghost and target:HasTag("abigail")) and 0
+		or nil
 end
 
 AddPrefabPostInit("wendy", function (inst)
 	if inst.components.combat ~= nil then
-		inst.components.combat.customdamagemultfn = nil
+		inst.components.combat.customdamagemultfn = CustomCombatDamage
 	end
 end)
