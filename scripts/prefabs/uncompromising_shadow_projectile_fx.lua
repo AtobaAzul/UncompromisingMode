@@ -23,7 +23,8 @@ local function fn1()
     inst:AddTag("FX")
     inst:AddTag("NOCLICK")
 
-    inst:AddComponent("transparentonsanity")
+    --inst:AddComponent("transparentonsanity")
+	inst.AnimState:SetMultColour(1, 1, 1, 0.2)
 
     inst.entity:SetPristine()
 
@@ -56,7 +57,8 @@ local function fn2()
     inst:AddTag("FX")
     inst:AddTag("NOCLICK")
 
-    inst:AddComponent("transparentonsanity")
+    --inst:AddComponent("transparentonsanity")
+	inst.AnimState:SetMultColour(1, 1, 1, 0.2)
 
     inst.entity:SetPristine()
 
