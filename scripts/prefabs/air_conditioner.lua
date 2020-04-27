@@ -72,23 +72,39 @@ local function onsave(inst, data)
 end
 
 local function TryPuff(player, inst)
-
+	local bluecaps = #inst.components.container:FindItems( function(item) return item:HasTag("blue_mushroom_fuel") end )
 	local redcaps = #inst.components.container:FindItems( function(item) return item:HasTag("red_mushroom_fuel") end )
 	local greencaps = #inst.components.container:FindItems( function(item) return item:HasTag("green_mushroom_fuel") end )
-	local bluecaps = #inst.components.container:FindItems( function(item) return item:HasTag("blue_mushroom_fuel") end )
-
+	
+	local bluespores = #inst.components.container:FindItems( function(item) return item:HasTag("blue_spore_fuel") end )
+	local redspores = #inst.components.container:FindItems( function(item) return item:HasTag("red_spore_fuel") end )
+	local greenspores = #inst.components.container:FindItems( function(item) return item:HasTag("green_spore_fuel") end )
+	
 	if not player:IsInLimbo() then
 		if bluecaps > 0 then
-			player.components.health:DoDelta(bluecaps * 0.1)
+			player.components.health:DoDelta(bluecaps * 0.18)
 		end
 		
 		if greencaps > 0 then
-			player.components.sanity:DoDelta(greencaps * 0.1)
+			player.components.sanity:DoDelta(greencaps * 0.18)
 		end
 		
 		if redcaps > 0 and player.components.hayfever.nextsneeze < 120 then
-			player.components.hayfever:SetNextSneezeTime(player.components.hayfever.nextsneeze + redcaps * 1)
+			player.components.hayfever:SetNextSneezeTime(player.components.hayfever.nextsneeze + redcaps * 2)
 		end
+		
+		if bluespores > 0 then
+			player.components.health:DoDelta(bluespores * 0.18)
+		end
+		
+		if greenspores > 0 then
+			player.components.sanity:DoDelta(greenspores * 0.18)
+		end
+		
+		if redspores > 0 and player.components.hayfever.nextsneeze < 120 then
+			player.components.hayfever:SetNextSneezeTime(player.components.hayfever.nextsneeze + redspores * 2)
+		end
+		
 		return
     end
 	
@@ -122,7 +138,7 @@ local function CheckForItems(inst)
 			end
 
 			if inst.rottask == nil then
-				inst.rottask = inst:DoPeriodicTask(3, DoPuff)
+				inst.rottask = inst:DoPeriodicTask(2, DoPuff)
 			end
 		else
 			if not inst:HasTag("airconditioneropen") then
@@ -190,7 +206,7 @@ local function fn()
     inst.components.container.onclosefn = onclose
 
 	inst:AddComponent("preserver")
-	inst.components.preserver:SetPerishRateMultiplier(5)
+	inst.components.preserver:SetPerishRateMultiplier(10)
 		
     inst:ListenForEvent("onbuilt", onbuilt)
     inst:ListenForEvent("animover", CheckForItems)
