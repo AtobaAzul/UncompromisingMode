@@ -38,6 +38,7 @@ function Hayfever:CanSneeze()
 end
 
 function Hayfever:OnUpdate(dt)
+	print(self.nextsneeze)
     if self:CanSneeze() then
         if self.nextsneeze <= 0 then
             if not self.inst.wantstosneeze then

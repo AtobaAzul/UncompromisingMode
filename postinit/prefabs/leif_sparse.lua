@@ -10,7 +10,12 @@ env.AddPrefabPostInit("leif_sparse", function (inst)
 			end
 		end
         inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE/2, TUNING.DEERCLOPS_AOE_SCALE, isnottree) -- you can edit these values to your liking -Axe
-    end                                     
+    end         
+
+	if inst.components.lootdropper ~= nil then
+		inst.components.lootdropper:SetLoot({"livinglog", "livinglog", "livinglog", "livinglog", "livinglog", "livinglog", "plantmeat"})
+	end
+                            
 end)
 --Treeguard now has single target root attack -Axe
 env.AddPrefabPostInit("leif_sparse", function (inst)

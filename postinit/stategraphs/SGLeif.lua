@@ -13,7 +13,7 @@ local events=
       inst.sg:HasStateTag("waking") and not
        inst.sg:HasStateTag("sleeping") and 
         (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("frozen")) then
-            inst.sg:GoToState("hit") 
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/hurt_VO")
       end
     end),
 
@@ -36,7 +36,7 @@ local events=
 
 local states = {
 
-  State{
+	State{
         name = "snare",
         tags = { "attack", "busy", "snare" },
 

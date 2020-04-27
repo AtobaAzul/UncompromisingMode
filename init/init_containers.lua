@@ -6,6 +6,8 @@ local EQUIPSLOTS = GLOBAL.EQUIPSLOTS
 local modparams = {}
 local SpawnPrefab = GLOBAL.SpawnPrefab
 
+local containers = require("containers")
+
 AddComponentPostInit("container", function(self)
 	function self:RemoveSingleItemBySlot(slot)
 		if slot and self.slots[slot] then
@@ -30,6 +32,13 @@ modparams.air_conditioner =
             Vector3(-37.5, -(32 + 4), 0), 
             Vector3(37.5, -(32 + 4), 0),
         },
+        slotbg =
+        {
+			{ image = "air_conditioner.tex", atlas = "images/inventoryimages/air_conditioner.xml" },
+			{ image = "air_conditioner.tex", atlas = "images/inventoryimages/air_conditioner.xml" },
+			{ image = "air_conditioner.tex", atlas = "images/inventoryimages/air_conditioner.xml" },
+			{ image = "air_conditioner.tex", atlas = "images/inventoryimages/air_conditioner.xml" },
+        },
         animbank = "ui_chest_2x2",
         animbuild = "ui_chest_2x2",
         pos = Vector3(200, 0, 0),
@@ -39,8 +48,6 @@ modparams.air_conditioner =
     acceptsstacks = false,
     type = "cooker",
 }
-
-local containers = require("containers")
 
 for k, v in pairs(modparams) do
 	containers.MAXITEMSLOTS = math.max(containers.MAXITEMSLOTS, v.widget.slotpos ~= nil and #v.widget.slotpos or 0)
