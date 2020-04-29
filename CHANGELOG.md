@@ -64,7 +64,7 @@
 
 * [x]  Moonrock idol requires 5 moonstone
 
-* [x]  Cave entrances and batcaves spawn 3x the bats
+* [x]  Cave entrances spawn multiple bats when approached, increased regen and reduced spawn time
  
 * [x]  Woodie were-Goose gets wet when running on water
 
@@ -211,6 +211,20 @@
 * [x] Air Conditioner added: New structure that over time will increase health, sanity, or prevent hayfever if slotted with blue, green, and red mushrooms respectively.
 
 * [x] Plague Mask added: New improved variation of the Gas Mask, doesn't reduce sanity when worn, has a small wetness protection, and prevents the max health loss effects of rat attacks
+
+* [x] The Feather Hat will prevent Penguins from attacking you
+
+* [x] Terror Beaks will not slightly lunge at the player when attacking
+
+* [x] Krampus health raised to 600 from 300
+
+* [x] Wendy no longer gets a 40% damage increase from Abigail, only the normal 10%
+
+* [x] Added Shroom Skin Scraps, dropped by Toadlings, used to craft Shroom Skin
+
+* [x] Lavae will now drop explosive slime on death, destroying structures and settings things on fire
+
+* [x] Wortox health changed to 120 from 200
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
