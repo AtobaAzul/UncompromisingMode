@@ -198,13 +198,19 @@
 
 * [x] Cactus Flesh, Cooked Cactus Flesh, and Cooked Green Caps now deal slightly more damage when eaten
 
-* [x] Decreased time between disease chance checks
-
 * [x] Added Moon Oil, a cure for diseased plants
 
 * [x] Added Frozen Pincer an ice boomerang that rarely drops from abominamoles (stats pending)
 
 * [x] Snowballs added: makes targets cold when thrown, can be used to freeze targets
+
+* [x] Spore Pack added: New backpack with 14 slots, no water protection, and rots foods incredibly fast
+
+* [x] Salt Shaker 3000 added: Salt spitting backpack that prevents snowstorm effects, destroys snow and snow based enemies, and increases speed in winter, as long as it is fueled
+
+* [x] Air Conditioner added: New structure that over time will increase health, sanity, or prevent hayfever if slotted with blue, green, and red mushrooms respectively.
+
+* [x] Plague Mask added: New improved variation of the Gas Mask, doesn't reduce sanity when worn, has a small wetness protection, and prevents the max health loss effects of rat attacks
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
