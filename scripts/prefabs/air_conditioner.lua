@@ -76,39 +76,41 @@ local function TryPuff(player, inst)
 	local redcaps = #inst.components.container:FindItems( function(item) return item:HasTag("red_mushroom_fuel") end )
 	local greencaps = #inst.components.container:FindItems( function(item) return item:HasTag("green_mushroom_fuel") end )
 	
-	local bluespores = #inst.components.container:FindItems( function(item) return item:HasTag("blue_spore_fuel") end )
-	local redspores = #inst.components.container:FindItems( function(item) return item:HasTag("red_spore_fuel") end )
-	local greenspores = #inst.components.container:FindItems( function(item) return item:HasTag("green_spore_fuel") end )
-	
 	if not player:IsInLimbo() then
 		if bluecaps > 0 then
-			player.components.health:DoDelta(bluecaps * 0.18)
+			player.components.health:DoDelta(bluecaps * 0.2)
 		end
 		
 		if greencaps > 0 then
-			player.components.sanity:DoDelta(greencaps * 0.18)
+			player.components.sanity:DoDelta(greencaps * 0.2)
 		end
 		
 		if redcaps > 0 and player.components.hayfever.nextsneeze < 120 then
 			player.components.hayfever:SetNextSneezeTime(player.components.hayfever.nextsneeze + redcaps * 2)
 		end
 		
-		if bluespores > 0 then
-			player.components.health:DoDelta(bluespores * 0.18)
-		end
-		
-		if greenspores > 0 then
-			player.components.sanity:DoDelta(greenspores * 0.18)
-		end
-		
-		if redspores > 0 and player.components.hayfever.nextsneeze < 120 then
-			player.components.hayfever:SetNextSneezeTime(player.components.hayfever.nextsneeze + redspores * 2)
-		end
-		
 		return
     end
 	
-		
+end
+
+local function SmokePuff(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local bluecaps = #inst.components.container:FindItems( function(item) return item:HasTag("blue_mushroom_fuel") end )
+	local redcaps = #inst.components.container:FindItems( function(item) return item:HasTag("red_mushroom_fuel") end )
+	local greencaps = #inst.components.container:FindItems( function(item) return item:HasTag("green_mushroom_fuel") end )
+	
+	
+	
+	if inst.AnimState:IsCurrentAnimation("idle_fueled") then
+		inst:DoTaskInTime(FRAMES, function(inst)
+		local sporepuff = SpawnPrefab("air_conditioner_smoke")
+			sporepuff.Transform:SetPosition(x, 4, z)
+			if bluecaps ~= nil or redcaps ~= nil or greencaps ~= nil then
+				sporepuff.AnimState:SetMultColour(redcaps * 0.3 or 0.15, greencaps * 0.3 or 0.15, bluecaps * 0.3 or 0.15, 0.8)
+			end
+		end)
+	end
 end
 
 local function DoPuff(inst)
@@ -131,8 +133,19 @@ local function CheckForItems(inst)
 						inst.AnimState:IsCurrentAnimation("place") then
 						--NOTE: push again even if already playing, in case an idle was also pushed
 						inst:_PushAnimation("idle_fueled", true)
+						
+						if not inst.SoundEmitter:PlayingSound("loop") then
+							inst.SoundEmitter:KillSound("idlesound")
+							inst.SoundEmitter:PlaySound("dontstarve/common/research_machine_gift_active_LP", "loop")
+						end
+						
 					else
 						inst:_PlayAnimation("idle_fueled", true)
+						
+						if not inst.SoundEmitter:PlayingSound("loop") then
+							inst.SoundEmitter:KillSound("idlesound")
+							inst.SoundEmitter:PlaySound("dontstarve/common/research_machine_gift_active_LP", "loop")
+						end
 					end
 				end
 			end
@@ -148,6 +161,8 @@ local function CheckForItems(inst)
 				inst.rottask:Cancel()
 			end
 			inst.rottask = nil
+			
+			inst.SoundEmitter:KillSound("loop")
 		end
 	end
 end
@@ -221,6 +236,8 @@ local function fn()
 	inst:ListenForEvent("itemlose", CheckForItems)
 	
     MakeHauntableWork(inst)
+	
+	inst:ListenForEvent("animover", SmokePuff)
 
 	inst._PlayAnimation = Default_PlayAnimation
 	inst._PushAnimation = Default_PushAnimation

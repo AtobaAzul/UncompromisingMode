@@ -56,4 +56,5 @@ return {
 	"antlion_sinkhole_lava",
 	"lavaeslime",
 	"air_conditioner",
+	"air_conditioner_smoke",
 }

@@ -38,7 +38,7 @@ end)
 env.AddPrefabPostInit("spore_small", function(inst)
 
 	inst:AddTag("mushroom_fuel")
-	inst:AddTag("green_spore_fuel")
+	inst:AddTag("green_mushroom_fuel")
 	
 	if not TheWorld.ismastersim then
 		return
@@ -49,7 +49,7 @@ end)
 env.AddPrefabPostInit("spore_medium", function(inst)
 
 	inst:AddTag("mushroom_fuel")
-	inst:AddTag("red_spore_fuel")
+	inst:AddTag("red_mushroom_fuel")
 	
 	if not TheWorld.ismastersim then
 		return
@@ -60,7 +60,7 @@ end)
 env.AddPrefabPostInit("spore_tall", function(inst)
 
 	inst:AddTag("mushroom_fuel")
-	inst:AddTag("blue_spore_fuel")
+	inst:AddTag("blue_mushroom_fuel")
 	
 	if not TheWorld.ismastersim then
 		return
