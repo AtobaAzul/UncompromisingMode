@@ -282,6 +282,7 @@ local function OnSleep(inst)
 end
 
 local function OnRemove(inst)
+    TheWorld:PushEvent("mockflyremoved", inst)
     inst.SoundEmitter:KillSound("flying")
     inst.SoundEmitter:KillSound("vomitrumble")
     inst.SoundEmitter:KillSound("sleep")
@@ -308,7 +309,7 @@ end
 local loot = {"meat", "meat", "meat", "meat", "meat", "meat", "meat", "meat", "dragon_scales"}
 
 local function OnDead(inst)
-    TheWorld:PushEvent("hasslerkilled", inst)
+    TheWorld:PushEvent("mockflykilled", inst)
 end
 
 local function CheckTarget(inst)
@@ -317,6 +318,11 @@ local function CheckTarget(inst)
 	end
 	
 	inst:DoTaskInTime(10, CheckTarget)
+end
+
+
+local function OnRemove(inst)
+    TheWorld:PushEvent("mockflyremoved", inst)
 end
 
 local function fn(Sim)
@@ -470,7 +476,7 @@ local function fn(Sim)
     --local brain = require("brains/dragonflybrain")
     inst:SetBrain(brain)
     
-    
+    inst:ListenForEvent("onremove", OnRemove)
     inst:ListenForEvent("death", OnDead)
 
     return inst

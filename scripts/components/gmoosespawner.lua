@@ -161,7 +161,7 @@ end
 local function ReleaseHassler(targetPlayer)
     assert(targetPlayer)
 
-    local hassler = TheSim:FindFirstEntityWithTag("hahagottem")
+    local hassler = TheSim:FindFirstEntityWithTag("mothergoose")
     if hassler ~= nil then
         return hassler -- There's already a hassler in the world, we're done here.
     end
@@ -172,7 +172,7 @@ local function ReleaseHassler(targetPlayer)
             hassler = SpawnSaveRecord(_storedhassler, {})
             _storedhassler = nil
         else
-            hassler = SpawnPrefab("moose")
+            hassler = SpawnPrefab("mothergoose")
 			hassler.sg:GoToState("glide")
 			hassler.components.timer:StartTimer("WantsToLayEgg", TUNING.SEG_TIME * math.random(4, 8))
 
@@ -413,9 +413,8 @@ end
 self.inst:ListenForEvent("ms_playerjoined", OnPlayerJoined, TheWorld)
 self.inst:ListenForEvent("ms_playerleft", OnPlayerLeft, TheWorld)
 self:WatchWorldState("season", OnSeasonChange)
-self.inst:ListenForEvent("hasslerremoved", OnHasslerRemoved, TheWorld)
-self.inst:ListenForEvent("hasslerkilled", OnHasslerKilled, TheWorld)
-self.inst:ListenForEvent("storehassler", OnStoreHassler, TheWorld)
+self.inst:ListenForEvent("mothergooseremoved", OnHasslerRemoved, TheWorld)
+self.inst:ListenForEvent("mothergoosekilled", OnHasslerKilled, TheWorld)
 
 function self:OnPostInit()
     TryStartAttacks()

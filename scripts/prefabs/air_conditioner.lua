@@ -72,44 +72,49 @@ local function onsave(inst, data)
 end
 
 local function TryPuff(player, inst)
-	local bluecaps = #inst.components.container:FindItems( function(item) return item:HasTag("blue_mushroom_fuel") end )
-	local redcaps = #inst.components.container:FindItems( function(item) return item:HasTag("red_mushroom_fuel") end )
-	local greencaps = #inst.components.container:FindItems( function(item) return item:HasTag("green_mushroom_fuel") end )
-	
-	if not player:IsInLimbo() then
-		if bluecaps > 0 then
-			player.components.health:DoDelta(bluecaps * 0.2)
-		end
+	if inst.components.container ~= nil then
+		local bluecaps = #inst.components.container:FindItems( function(item) return item:HasTag("blue_mushroom_fuel") end )
+		local redcaps = #inst.components.container:FindItems( function(item) return item:HasTag("red_mushroom_fuel") end )
+		local greencaps = #inst.components.container:FindItems( function(item) return item:HasTag("green_mushroom_fuel") end )
 		
-		if greencaps > 0 then
-			player.components.sanity:DoDelta(greencaps * 0.2)
+		if not player:IsInLimbo() then
+			if bluecaps > 0 then
+				player.components.health:DoDelta(bluecaps * 0.2)
+			end
+			
+			if greencaps > 0 then
+				player.components.sanity:DoDelta(greencaps * 0.2)
+			end
+			
+			if redcaps > 0 and player.components.hayfever.nextsneeze < 120 then
+				player.components.hayfever:SetNextSneezeTime(player.components.hayfever.nextsneeze + redcaps * 2)
+			end
+			
+			return
 		end
-		
-		if redcaps > 0 and player.components.hayfever.nextsneeze < 120 then
-			player.components.hayfever:SetNextSneezeTime(player.components.hayfever.nextsneeze + redcaps * 2)
-		end
-		
-		return
-    end
-	
+	end
 end
 
 local function SmokePuff(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
-	local bluecaps = #inst.components.container:FindItems( function(item) return item:HasTag("blue_mushroom_fuel") end )
-	local redcaps = #inst.components.container:FindItems( function(item) return item:HasTag("red_mushroom_fuel") end )
-	local greencaps = #inst.components.container:FindItems( function(item) return item:HasTag("green_mushroom_fuel") end )
-	
-	
-	
-	if inst.AnimState:IsCurrentAnimation("idle_fueled") then
-		inst:DoTaskInTime(FRAMES, function(inst)
-		local sporepuff = SpawnPrefab("air_conditioner_smoke")
-			sporepuff.Transform:SetPosition(x, 4, z)
-			if bluecaps ~= nil or redcaps ~= nil or greencaps ~= nil then
-				sporepuff.AnimState:SetMultColour(redcaps * 0.3 or 0.15, greencaps * 0.3 or 0.15, bluecaps * 0.3 or 0.15, 0.8)
-			end
-		end)
+	if inst.components.container ~= nil then
+		local bluecaps = #inst.components.container:FindItems( function(item) return item:HasTag("blue_mushroom_fuel") end )
+		local redcaps = #inst.components.container:FindItems( function(item) return item:HasTag("red_mushroom_fuel") end )
+		local greencaps = #inst.components.container:FindItems( function(item) return item:HasTag("green_mushroom_fuel") end )
+		
+		
+		
+		if inst.AnimState:IsCurrentAnimation("idle_fueled") then
+			inst:DoTaskInTime(FRAMES, function(inst)
+			local sporepuff = SpawnPrefab("air_conditioner_smoke")
+				sporepuff.Transform:SetPosition(x, 4, z)
+				if bluecaps ~= nil or redcaps ~= nil or greencaps ~= nil then
+					sporepuff.AnimState:SetMultColour(redcaps * 0.3 or 0.15, greencaps * 0.3 or 0.15, bluecaps * 0.3 or 0.15, 0.8)
+				elseif bluecaps == 0 and redcaps == 0 and greencaps == 0 then
+					sporepuff.AnimState:SetMultColour(0, 0, 0, 0)
+				end
+			end)
+		end
 	end
 end
 
@@ -200,7 +205,9 @@ local function fn()
 
     if not TheWorld.ismastersim then
 		inst.OnEntityReplicated = function(inst) 
-			inst.replica.container:WidgetSetup("air_conditioner") 
+			if inst.replica.container ~= nil then
+				inst.replica.container:WidgetSetup("air_conditioner") 
+			end
 		end
         return inst
     end

@@ -410,9 +410,8 @@ end
 self.inst:ListenForEvent("ms_playerjoined", OnPlayerJoined, TheWorld)
 self.inst:ListenForEvent("ms_playerleft", OnPlayerLeft, TheWorld)
 self:WatchWorldState("season", OnSeasonChange)
-self.inst:ListenForEvent("hasslerremoved", OnHasslerRemoved, TheWorld)
-self.inst:ListenForEvent("hasslerkilled", OnHasslerKilled, TheWorld)
-self.inst:ListenForEvent("storehassler", OnStoreHassler, TheWorld)
+self.inst:ListenForEvent("mockflyremoved", OnHasslerRemoved, TheWorld)
+self.inst:ListenForEvent("mockflykilled", OnHasslerKilled, TheWorld)
 
 function self:OnPostInit()
     TryStartAttacks()

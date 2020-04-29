@@ -57,4 +57,5 @@ return {
 	"lavaeslime",
 	"air_conditioner",
 	"air_conditioner_smoke",
+	"mothergoose",
 }
