@@ -72,6 +72,7 @@ end)
 -----------------------------------------------------------------
 --Pengulls are now aggressive
 -----------------------------------------------------------------
+--[[
 local function MakeTeam(inst, attacker)
     local leader = GLOBAL.SpawnPrefab("teamleader")
 --print("<<<<<<<<================>>>>> Making TEAM:",attacker)
@@ -137,7 +138,7 @@ AddPrefabPostInit("penguin", function (inst)
 	end
 end)
 
-
+--]]
 -----------------------------------------------------------------
 --Bishop will now run away from player between attacks -Axe
 -----------------------------------------------------------------

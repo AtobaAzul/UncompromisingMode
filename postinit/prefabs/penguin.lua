@@ -33,6 +33,45 @@ local node = TheWorld.Map:FindNodeAtPoint(self.Transform:GetWorldPosition())
 
 end
 
+local function MakeTeam(inst, attacker)
+        local leader = SpawnPrefab("teamleader")
+--print("<<<<<<<<================>>>>> Making TEAM:",attacker)
+        leader:AddTag("penguin")
+        leader.components.teamleader.threat = attacker
+        leader.components.teamleader.radius = 10
+        leader.components.teamleader:SetAttackGrpSize(5+math.random(1,3))
+        leader.components.teamleader.timebetweenattacks = 0  -- first attack happens immediately
+        leader.components.teamleader.attackinterval = 2  -- first attack happens immediately
+        leader.components.teamleader.maxchasetime = 10
+        leader.components.teamleader.min_team_size = 0
+        leader.components.teamleader.max_team_size = 8
+        leader.components.teamleader.team_type = inst.components.teamattacker.team_type
+        leader.components.teamleader:NewTeammate(inst)
+        leader.components.teamleader:BroadcastDistress(inst)
+--print("<<<<<<<>>>>>")
+end
+
+local function MutatedRetarget(inst)
+    local newtarget = FindEntity(inst, 4, function(guy)
+            return inst.components.combat:CanTarget(guy)
+            end,
+            nil,
+            {"penguin","penguin_protection"},
+            {"character","monster","wall"}
+            )
+
+    local ta = inst.components.teamattacker
+    if newtarget and ta and not ta.inteam and not ta:SearchForTeam() then
+        --print("===============================MakeTeam on Retarget")
+        MakeTeam(inst, newtarget)
+    end
+
+    if ta.inteam and not ta.teamleader:CanAttack() then
+        return newtarget
+    end
+
+end
+
 env.AddPrefabPostInit("penguin", function(inst)
 	if not TheWorld.ismastersim then
 		return
@@ -43,6 +82,8 @@ env.AddPrefabPostInit("penguin", function(inst)
 		inst.components.halloweenmoonmutable:SetPrefabMutated("mutated_penguin")
 		inst.components.halloweenmoonmutable:SetOnMutateFn(OnMoonMutate)
 	end
+	
+    inst.components.combat:SetRetargetFunction(2, MutatedRetarget)
 	
 	inst:WatchWorldState("isfullmoon", OnFullMoon)
 	OnFullMoon(inst, TheWorld.state.isfullmoon)
