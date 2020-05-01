@@ -216,6 +216,10 @@
 
 * [x] Terror Beaks will not slightly lunge at the player when attacking
 
+* [x] Crawling Horror's now drop shadow bombs around itself when hit, inking the player and dealing damage
+
+* [x] When disguised, Dread Eye's will now spawn mini shadow eyes near the player, which sap sanity when sane, and health when insane. They despawn after a set time.
+
 * [x] Krampus health raised to 600 from 300
 
 * [x] Wendy no longer gets a 40% damage increase from Abigail, only the normal 10%
