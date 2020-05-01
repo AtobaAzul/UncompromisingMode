@@ -37,7 +37,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 	ANNOUNCE.ANNOUNCE_FIREFALL = {
 		"It's never quiet around this place!",
 		"This heat is getting MORE unusual.",
-		"Watch your heads!",
+		"Watch the ground!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "I should chop myself free!"
 	DESCRIBE.SAND = "Sand always seems to find its way into my books."

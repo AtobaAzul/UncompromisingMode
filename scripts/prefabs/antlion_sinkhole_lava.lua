@@ -78,8 +78,8 @@ local COLLAPSIBLE_TAGS = { "_combat", "pickable", "NPC_workable" }
 for k, v in pairs(COLLAPSIBLE_WORK_ACTIONS) do
     table.insert(COLLAPSIBLE_TAGS, k.."_workable")
 end
-local NON_COLLAPSIBLE_TAGS = { "flying", "bird", "ghost", "playerghost", "FX", "NOCLICK", "DECOR", "INLIMBO" }
-local NON_COLLAPSIBLE_TAGS_FIRST = { "flying", "bird", "ghost", "locomotor", "FX", "NOCLICK", "DECOR", "INLIMBO" }
+local NON_COLLAPSIBLE_TAGS = { "shadow", "flying", "bird", "ghost", "playerghost", "FX", "NOCLICK", "DECOR", "INLIMBO" }
+local NON_COLLAPSIBLE_TAGS_FIRST = { "shadow", "flying", "bird", "ghost", "locomotor", "FX", "NOCLICK", "DECOR", "INLIMBO" }
 
 local function SmallLaunch(inst, launcher, basespeed)
     local hp = inst:GetPosition()
@@ -171,6 +171,11 @@ local function donextcollapse(inst)
             SmallLaunch(v, inst, 1.5)
         end
     end
+	
+	if isfinalstage then
+		SpawnPrefab("lavaspit").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		inst:DoTaskInTime(1.5, inst:Remove())
+	end
 end
 
 local function onstartcollapse(inst)

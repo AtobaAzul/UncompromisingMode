@@ -36,7 +36,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Wow! I think our allergies are gone!"
 	ANNOUNCE.ANNOUNCE_FIREFALL = {
 		"W... We don't like the sound of that!",
-		"The sky is falling! The sky is falling!",
+		"The ground is getting extra tingly!",
 		"Watch out!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "We're stuck! Help!"

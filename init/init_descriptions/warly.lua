@@ -35,9 +35,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Ugh! My allergies!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "I think... my nose has cleared!"
 	ANNOUNCE.ANNOUNCE_FIREFALL = {
-		"It's raining fiery meatballs!",
-		"The sky is falling!",
-		"Cats and dogs! Great flaming cats and dogs!",
+		"What? More?!",
+		"Careful not to get charbroiled!",
+		"The grounds getting broiled!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Definetly not a spice root!"
 	DESCRIBE.SAND = "Lots of tiny, tiny stones."

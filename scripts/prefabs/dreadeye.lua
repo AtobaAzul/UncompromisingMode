@@ -61,6 +61,8 @@ local brain = require("brains/shadowcreaturebrain") ----------------------------
 --inst.disguise_cd = inst.disguise_cd - 1
 --end
 
+local NOTAGS = { "playerghost", "INLIMBO" }
+
 local function retargetfn(inst)
     local maxrangesq = TUNING.SHADOWCREATURE_TARGET_DIST * TUNING.SHADOWCREATURE_TARGET_DIST
     local rangesq, rangesq1, rangesq2 = maxrangesq, math.huge, math.huge
@@ -141,9 +143,34 @@ local function ShadowSuprise(inst)
 			inst.suprise_task = nil
 		end
 		
+		if inst.shadoweye_task ~= nil then
+			inst.shadoweye_task:Cancel()
+			inst.shadoweye_task = nil
+		end
+		
 		inst.isdisguised = false
 		inst.components.health:DoDelta(100)
 	end
+end
+
+local function TryEyeSpawn(v)
+
+	local x1, y1, z1 = v.Transform:GetWorldPosition()
+	if x1 ~= nil and z1 ~= nil and v.components.sanity and v.components.sanity:IsInsane() then
+		SpawnPrefab("mini_dreadeye").Transform:SetPosition(v.Transform:GetWorldPosition())
+		--SpawnPrefab("mini_dreadeye").Transform:SetPosition(x1 + math.random(-5,5), 0, z1 + math.random(-5,5))
+	end
+	
+end
+
+local function ShadowEyeSpawn(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local x, y, z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x, y, z, 50, nil, NOTAGS, { "player" })
+	
+	for i, v in ipairs(ents) do
+        TryEyeSpawn(v)
+    end
 end
 
 local function Disguise(inst)
@@ -166,7 +193,14 @@ local function Disguise(inst)
 			inst.suprise_task = nil
 		end
 		
-		inst.suprise_task = inst:DoPeriodicTask(20, ShadowSuprise)
+		inst.suprise_task = inst:DoPeriodicTask(15, ShadowSuprise)
+		
+		if inst.shadoweye_task ~= nil then
+			inst.shadoweye_task:Cancel()
+			inst.shadoweye_task = nil
+		end
+		
+		inst.shadoweye_task = inst:DoPeriodicTask(4, ShadowEyeSpawn)
 	end
 end
 
@@ -178,6 +212,11 @@ local function onnear(inst, target)
 		if inst.suprise_task ~= nil then
 			inst.suprise_task:Cancel()
 			inst.suprise_task = nil
+		end
+		
+		if inst.shadoweye_task ~= nil then
+			inst.shadoweye_task:Cancel()
+			inst.shadoweye_task = nil
 		end
 	end
 end
@@ -227,7 +266,7 @@ local function fn()
     inst.AnimState:SetBuild("dreadeye")
     inst.AnimState:PlayAnimation("idle_loop", true)
     inst.AnimState:SetMultColour(1, 1, 1, .5)
-    --inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+    inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
 
     inst:AddComponent("transparentonsanity_dreadeye")

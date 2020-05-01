@@ -58,4 +58,6 @@ return {
 	"air_conditioner",
 	"air_conditioner_smoke",
 	"mothergoose",
+	"shadow_goo",
+	"mini_dreadeye",
 }

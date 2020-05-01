@@ -37,7 +37,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	ANNOUNCE.ANNOUNCE_FIREFALL = {
 		"That guys working up a sweat with all that yelling.",
 		"Jeez! Cool it!",
-		"Get your hard hats on!",
+		"Get your fire retardant boots on!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "I'm caught!"
 	DESCRIBE.SAND = "I can only break it down so much."

@@ -5,6 +5,12 @@ env.AddStategraphPostInit("shadowcreature", function(inst)
 
 local events=
 {
+	EventHandler("attacked", function(inst)
+        if not (inst.sg:HasStateTag("attack") or inst.sg:HasStateTag("hit") or inst.sg:HasStateTag("noattack") or inst.components.health:IsDead()) then
+            inst.sg:GoToState("hit")
+        end
+    end),
+
     EventHandler("doattack", function(inst, data)
         if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) then
             inst.sg:GoToState("attack", data.target)
@@ -36,14 +42,71 @@ end
 local states = {
 
 	State{
+        name = "hit",
+        tags = { "busy", "hit" },
+
+        onenter = function(inst)
+			
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("disappear")
+        end,
+		
+		timeline =
+        {   
+            TimeEvent(FRAMES, function(inst)
+                if inst:HasTag("crawlinghorror") then
+                    inst:LaunchProjectile()
+				end
+            end),
+            TimeEvent(2*FRAMES, function(inst)
+                if inst:HasTag("crawlinghorror") then
+                    inst:LaunchProjectile()
+				end
+            end),
+            TimeEvent(4*FRAMES, function(inst)
+                if inst:HasTag("crawlinghorror") then
+                    inst:LaunchProjectile()
+				end
+            end),
+			TimeEvent(6*FRAMES, function(inst)
+                if inst:HasTag("crawlinghorror") then
+                    inst:LaunchProjectile()
+				end
+            end),
+			TimeEvent(8*FRAMES, function(inst)
+                if inst:HasTag("crawlinghorror") then
+                    inst:LaunchProjectile()
+				end
+            end),
+        },
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+                local max_tries = 4
+                for k = 1, max_tries do
+                    local x, y, z = inst.Transform:GetWorldPosition()
+                    local offset = 10
+                    x = x + math.random(2 * offset) - offset
+                    z = z + math.random(2 * offset) - offset
+                    if TheWorld.Map:IsPassableAtPoint(x, y, z) then
+                        inst.Physics:Teleport(x, y, z)
+                        break
+                    end
+                end
+
+                inst.sg:GoToState("appear")
+            end),
+        },
+    },
+
+	State{
         name = "attack",
         tags = { "attack", "busy" },
 
         onenter = function(inst, target)
             inst.sg.statemem.target = target
-			--if not inst:HasTag("terrorbeak") then
-				inst.Physics:Stop()
-			--end
+			inst.Physics:Stop()
 			if inst:HasTag("terrorbeak") then 
 				inst:DoTaskInTime(6*FRAMES, function(inst) 
 					inst.components.locomotor:WalkForward()

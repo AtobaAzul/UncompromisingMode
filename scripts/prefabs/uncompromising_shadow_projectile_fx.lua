@@ -24,8 +24,8 @@ local function fn1()
     inst:AddTag("NOCLICK")
 
     --inst:AddComponent("transparentonsanity_dreadeye")
-    inst:AddComponent("transparentonsanity")
-	--inst.AnimState:SetMultColour(1, 1, 1, 0.2)
+    --inst:AddComponent("transparentonsanity")
+	inst.AnimState:SetMultColour(1, 1, 1, 0.4)
 
     inst.entity:SetPristine()
 
@@ -59,8 +59,8 @@ local function fn2()
     inst:AddTag("NOCLICK")
 
     --inst:AddComponent("transparentonsanity_dreadeye")
-    inst:AddComponent("transparentonsanity")
-	--inst.AnimState:SetMultColour(1, 1, 1, 0.2)
+	inst.AnimState:SetMultColour(1, 1, 1, 0.4)
+    --inst:AddComponent("transparentonsanity")
 
     inst.entity:SetPristine()
 

@@ -36,7 +36,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Ah! Clean air again."
 	ANNOUNCE.ANNOUNCE_FIREFALL = {
 		"Cool it, hozer!",
-		"It's raining fire! Save the trees!",
+		"Fires A comin', Save the trees!",
 		"This is nothing like Canadian weather!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "You're up, Lucy!"

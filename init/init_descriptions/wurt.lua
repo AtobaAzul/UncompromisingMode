@@ -35,9 +35,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Nose feel funny!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Nose feels good again!"
 	ANNOUNCE.ANNOUNCE_FIREFALL = {
-		"Sky is scary!",
+		"Bllrgh, is scary!",
 		"Anty angry!",
-		"Fire! Florp!",
+		"Groundy fire! Florp!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Stuck!"
 	DESCRIBE.SAND = "Grainy stuffs."
