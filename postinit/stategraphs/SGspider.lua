@@ -62,7 +62,6 @@ local states = {
         tags = {"attack", "canrotate", "busy", "jumping"},
 
         onenter = function(inst, target)
-			inst:AddTag("attacking")
             inst.components.locomotor:Stop()
             inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 
@@ -75,7 +74,6 @@ local states = {
             inst.components.locomotor:Stop()
             inst.components.locomotor:EnableGroundSpeedMultiplier(true)
             inst.Physics:ClearMotorVelOverride()
-			inst:RemoveTag("attacking")
         end,
 
         timeline =

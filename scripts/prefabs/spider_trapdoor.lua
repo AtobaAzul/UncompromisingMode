@@ -327,7 +327,6 @@ local function create_trapdoor()
     inst.components.combat:SetAttackPeriod(TUNING.SPIDER_WARRIOR_ATTACK_PERIOD + math.random() * 2)
     inst.components.combat:SetRange(1.1*TUNING.SPIDER_WARRIOR_ATTACK_RANGE, 1.1*TUNING.SPIDER_WARRIOR_HIT_RANGE)
     inst.components.combat:SetRetargetFunction(2, WarriorRetarget)
-	--inst:AddTag("attacking")
     inst.components.locomotor.walkspeed = TUNING.SPIDER_WARRIOR_WALK_SPEED
     inst.components.locomotor.runspeed = TUNING.SPIDER_WARRIOR_RUN_SPEED*1.1
 

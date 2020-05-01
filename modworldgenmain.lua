@@ -13,7 +13,8 @@ end)
 
 end
 AddRoomPreInit("BGSavanna", function(room)
-room.contents.distributeprefabs.trapdoor = 1
+room.contents.distributepercent = .15
+room.contents.distributeprefabs.trapdoor = 0.045
 end)
 --[[
 	if GLOBAL.terrain.rooms.LightningBluffAntlion then

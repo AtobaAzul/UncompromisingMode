@@ -84,11 +84,12 @@ local function KeepFaceTargetFn(inst, target)
 end
 
 local function CanAttackNow(inst)
-    return inst.components.combat.target == nil or not inst.components.combat:InCooldown()
+    return (inst.components.combat.target == nil or not inst.components.combat:InCooldown()) and not inst.sg:HasStateTag("busy")
 end
 local function Attacking(inst)
-	return inst:HasTag("attacking")
+	return inst.sg:HasStateTag("attack") or inst.sg:HasStateTag("busy")
 end
+
 function SpiderBrain_TrapDoor:OnStart()
     local root =
         PriorityNode(
@@ -100,7 +101,7 @@ function SpiderBrain_TrapDoor:OnStart()
                 UseShield(self.inst, DAMAGE_UNTIL_SHIELD, SHIELD_TIME, AVOID_PROJECTILE_ATTACKS, HIDE_WHEN_SCARED)),
             AttackWall(self.inst),
 			WhileNode(function() return CanAttackNow(self.inst) end, "AttackMomentarily", ChaseAndAttack(self.inst, MAX_CHASE_TIME)),
-			WhileNode(function() return not Attacking(self.inst) end, "AmIBusyAttacking", RunAway(self.inst, "scarytoprey", 7, 8)),
+			WhileNode(function() return not Attacking(self.inst) end, "AmIBusyAttacking", RunAway(self.inst, "scarytoprey", 4, 8)),
 			
 			ChaseAndAttack(self.inst, MAX_CHASE_TIME),
             DoAction(self.inst, function() return EatFoodAction(self.inst) end ),

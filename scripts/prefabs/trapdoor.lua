@@ -86,8 +86,11 @@ inst.AnimState:PushAnimation("flip_close")
 inst.AnimState:PushAnimation("idle")
 end
 
+local function amempty(inst)
+return inst.components.childspawner ~= nil and inst.components.childspawner.maxchildren == 0 and not inst:HasTag("obvious")
+end
 
-local function FindNewHole(inst)
+local function OldFindNewHole(inst)
 local x, y, z = inst.Transform:GetWorldPosition()
             local range = 30
             local ents = TheSim:FindEntities(x, y, z, range, nil, { "trapdoor" })
@@ -106,6 +109,28 @@ local x, y, z = inst.Transform:GetWorldPosition()
                 end
             end
 end
+
+local function unempty(inst)
+	if inst.components.childspawner ~= nil then
+		inst.components.childspawner:SetMaxChildren(1)
+	end
+end
+
+local function FindNewHole(inst)
+local target = FindEntity(inst, 3*TUNING.LEIF_MAXSPAWNDIST, amempty, { "trapdoor" })
+	if target ~= nil then
+		if inst.components.childspawner ~= nil then
+				target:DoTaskInTime(480 + math.random() * 3, unempty)      --<-- This is where the regen time is actually located, since it swaps nests
+				inst.components.childspawner:StopRegen()
+				inst.components.childspawner:SetMaxChildren(0)
+				inst:AddTag("obvious")
+				inst:DoTaskInTime(90000, inst:RemoveTag("obvious"))
+		end
+	end
+end
+
+
+
 local function fn()
     local inst = CreateEntity()
 
@@ -145,7 +170,7 @@ local function fn()
     inst.components.childspawner:SetEmergencyRadius(TUNING.WASPHIVE_EMERGENCY_RADIUS/2)
 	inst.components.childspawner:SetSpawnedFn(OpenMound)
 	inst.components.childspawner:SetGoHomeFn(CloseMound)
-	inst.components.childspawner:SetRegenPeriod(100,2)
+	inst.components.childspawner:SetRegenPeriod(20,2)
 	inst.components.childspawner:SetOnChildKilledFn(FindNewHole)
 	local startrandomtest = math.random()
 	inst.components.childspawner:StopRegen()
