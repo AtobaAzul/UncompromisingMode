@@ -125,7 +125,7 @@ local function snowpilefn(Sim)
     inst.components.aura.tickperiod = TUNING.TOADSTOOL_SPORECLOUD_TICK * 2
     inst.components.aura.auraexcludetags = AURA_EXCLUDE_TAGS
     inst.components.aura:Enable(true)
-    inst._coldtask = inst:DoPeriodicTask(inst.components.aura.tickperiod / 2, DoAreaFear, inst.components.aura.tickperiod / 2)
+    inst._coldtask = inst:DoPeriodicTask(inst.components.aura.tickperiod, DoAreaFear, inst.components.aura.tickperiod)
 
     inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(10, 11) --set specific values
