@@ -25,6 +25,8 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/diseasecurebomb.tex"),
 	Asset("ATLAS", "images/inventoryimages/snowball_throwable.xml"),
 	Asset("IMAGE", "images/inventoryimages/snowball_throwable.tex"),
+	Asset("ATLAS", "images/mushroom_slot.xml"),
+	Asset("IMAGE", "images/mushroom_slot.tex"),
 	
 	Asset("ANIM", "anim/geyser.zip"),
 	Asset("ANIM", "anim/lava_vomit.zip"),

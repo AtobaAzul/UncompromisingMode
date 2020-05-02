@@ -34,10 +34,10 @@ modparams.air_conditioner =
         },
         slotbg =
         {
-			{ image = "air_conditioner.tex", atlas = "images/inventoryimages/air_conditioner.xml" },
-			{ image = "air_conditioner.tex", atlas = "images/inventoryimages/air_conditioner.xml" },
-			{ image = "air_conditioner.tex", atlas = "images/inventoryimages/air_conditioner.xml" },
-			{ image = "air_conditioner.tex", atlas = "images/inventoryimages/air_conditioner.xml" },
+			{ image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
+			{ image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
+			{ image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
+			{ image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
         },
         animbank = "ui_chest_2x2",
         animbuild = "ui_chest_2x2",

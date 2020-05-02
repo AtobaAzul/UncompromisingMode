@@ -56,7 +56,7 @@ local prefab_post = {
 	--"malbatross",
 	"mushrooms",
 	"rock_ice",
-	"shadowcreature",
+	--"shadowcreature",
 }
 
 local stategraph_post = {
@@ -67,7 +67,7 @@ local stategraph_post = {
 	"Leif",
 	"minotaur",
 	"spider",
-	"shadowcreature",
+	--"shadowcreature",
 }
 
 local class_post = {

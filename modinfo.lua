@@ -75,12 +75,12 @@ configuration_options =
 		name = "gamemode",
 		label = "Mode",
 		hover = "No Other Gamemodes Available as of yet. Sorry!", --"Choose gamemode. 1) Original Uncompromising version (default settings). 2) Mod is enabled after first Fuelweaver is defeated. 3) Choose custom settings.",
-		options =
+		--[[options =
 		{
 			{description = "Uncompromising", data = 0}, -- TODO: When this is selected, disable the below ones (gray them out)
 			--{description = "Custom", data = 2}, --TODO: On custom, enable editing the below settings
 		},
-		default = 0,
+		default = 0,--]]
 	},
 	--[[{
 		name = "harder_recipes",
