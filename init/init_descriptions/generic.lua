@@ -65,7 +65,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	DESCRIBE.SNOWBALL_THROWABLE = "Not the face!"
 	DESCRIBE.VETERANSHRINE = "I know what I'm doing... right?"
 	
-	DESCRIBE.RATSKIN = "It reeks of a pestilence."
+	DESCRIBE.RAT_TAIL = "It reeks of a pestilence."
 	DESCRIBE.PLAGUEMASK = "The mushrooms stuffed in the beak smell nice."
 	DESCRIBE.SALTPACK = "It breaks down the snow around me!"
 	DESCRIBE.SPOREPACK = "It's huge, and smelly."

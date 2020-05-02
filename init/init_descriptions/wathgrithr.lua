@@ -58,4 +58,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.BUSHCRAB = "A wild encounter!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "A weapon for fighting back the plagues!"
-	DESCRIBE.RATSKIN = "Theft has no honor!"
+	DESCRIBE.RAT_TAIL = "Theft has no honor!"
