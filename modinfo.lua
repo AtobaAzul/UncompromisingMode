@@ -74,7 +74,7 @@ configuration_options =
 	{
 		name = "gamemode",
 		label = "Mode",
-		hover = "No Other Gamemodes Available as of yet. Sorry!", --"Choose gamemode. 1) Original Uncompromising version (default settings). 2) Mod is enabled after first Fuelweaver is defeated. 3) Choose custom settings.",
+		hover = "Change this if you want to crash the game. DONT", --"Choose gamemode. 1) Original Uncompromising version (default settings). 2) Mod is enabled after first Fuelweaver is defeated. 3) Choose custom settings.",
 		options =
 		{
 			{description = "Uncompromising", data = 0}, -- TODO: When this is selected, disable the below ones (gray them out)
@@ -260,7 +260,7 @@ configuration_options =
 			{description = "Default[52500]", data = 52500},
 			{description = "Lowered[25000]", data = 25000},
 		},
-		default = 52500,
+		default = 25000,
 	},
 	{
 		name = "bee queen health",
@@ -271,6 +271,6 @@ configuration_options =
 			{description = "Default[22500]", data = 22500},
 			{description = "Lowered[15000]", data = 15000},
 		},
-		default = 22500,
+		default = 15000,
 	},
 }
