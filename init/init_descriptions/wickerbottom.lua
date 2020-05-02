@@ -52,10 +52,14 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.DESCRIBE
 	DESCRIBE.SNOWBALL_THROWABLE = "A handful of snow, mashed together so it can be thrown."
 	DESCRIBE.VETERANSHRINE = "That's certainly not the best idea."
 	DESCRIBE.RAT_TAIL = "Goodness, I believe it's infected with the bubonic plague."
-	DESCRIBE.PLAGUEDOCTOR_MASK = "A mask, popularized by plague doctors during the bubonic plague."
+	DESCRIBE.PLAGUEMASK = "A mask, popularized by plague doctors during the bubonic plague."
 	DESCRIBE.SPIDER_TRAPDOOR = "A Ctenizidae Arachnid, from the looks of it."
 	DESCRIBE.TRAPDOOR = "An unremarkable mound in the terrain."
 
 	DESCRIBE.BUSHCRAB = "Ardisia brachyura!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "I shall put its mutative properties to good use."
+	DESCRIBE.SHROOM_SKIN_FRAGMENT = "I'm afraid it's uses are limited at this size."
+	DESCRIBE.AIR_CONDITIONER = "It filters out the nearby air's pollutants."
+	DESCRIBE.SPOREPACK = "A large sack made from toad skin. It's scent is far from lovely."
+	DESCRIBE.SALTPACK = "The device releases sodium chloride into the atmosphere."

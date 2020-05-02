@@ -72,6 +72,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	DESCRIBE.SNOWBALL_THROWABLE = "Not the face!"
 	DESCRIBE.SPIDER_TRAPDOOR = "Agh! An ambush!"
 	DESCRIBE.TRAPDOOR = "Nothing out of the ordinary here."
+	DESCRIBE.SHROOM_SKIN_FRAGMENT = "It's small, but the stench is still a punch in the face."
+	DESCRIBE.AIR_CONDITIONER = "Smells great!"
 
 --	[ 		Recipe Descriptions		]   --
 

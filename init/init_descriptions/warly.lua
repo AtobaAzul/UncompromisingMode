@@ -52,10 +52,14 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.SNOWBALL_THROWABLE = "I wasn't ever able to play with snow; I never saw any where I'm from."
 	DESCRIBE.VETERANSHRINE = "The lengths I go for ingredients..."
 	DESCRIBE.RAT_TAIL = "I don't want that near my hands! Or my food! Or anywhere!"
-	DESCRIBE.PLAGUEDOCTOR_MASK = "Maybe I should count my blessings."
+	DESCRIBE.PLAGUEMASK = "Maybe I should count my blessings."
 	DESCRIBE.SPIDER_TRAPDOOR = "Another jumping spider? Mon dieu..."
 	DESCRIBE.TRAPDOOR = "I wouldn't want to trip and spill something."
 	
 	DESCRIBE.BUSHCRAB = "Berries and crab cake, anyone? No?"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "I doubt this would make for a good cooking oil."
+	DESCRIBE.SHROOM_SKIN_FRAGMENT = "I'm... not cooking that."
+	DESCRIBE.AIR_CONDITIONER = "Aah, my lungs are clear!"
+	DESCRIBE.SPOREPACK = "Absolutely not."
+	DESCRIBE.SALTPACK = "Would anyone mind if I use this salt?"

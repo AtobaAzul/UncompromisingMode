@@ -51,7 +51,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.ICEBOOMERANG = "No one can run from my spear!"
 	DESCRIBE.VETERANSHRINE = "No challenge is above me!"
 	DESCRIBE.SNOWBALL_THROWABLE = "Aim betwixt the eyes!"
-	DESCRIBE.PLAGUEDOCTOR_MASK = "I am a warrior against Pestilence!"
+	DESCRIBE.PLAGUEMASK = "I am a warrior against Pestilence!"
 	DESCRIBE.SPIDER_TRAPDOOR = "My own battle tactics, used against me!"
 	DESCRIBE.TRAPDOOR = "Nothing here."
 	
@@ -59,3 +59,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "A weapon for fighting back the plagues!"
 	DESCRIBE.RAT_TAIL = "Theft has no honor!"
+	DESCRIBE.SHROOM_SKIN_FRAGMENT = "A small trophy of victory!"
+	DESCRIBE.AIR_CONDITIONER = "It fends off the airborne threats!"
+	DESCRIBE.SPOREPACK = "It masks my scent!"
+	DESCRIBE.SALTPACK = "It clears the battlefield!"

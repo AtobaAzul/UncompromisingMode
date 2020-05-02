@@ -54,10 +54,14 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.SNOWBALL_THROWABLE = "Not. The. Suit. What do you not get about this?"
 	DESCRIBE.VETERANSHRINE = "I already have fuel-related problems, what's another?"
 	DESCRIBE.RAT_TAIL = "Eugh, disgusting!"
-	DESCRIBE.PLAGUEDOCTOR_MASK = "The beak looks ridiculous."
+	DESCRIBE.PLAGUEMASK = "The beak looks ridiculous."
 	DESCRIBE.SPIDER_TRAPDOOR = "Oh great, they're getting smarter."
 	DESCRIBE.TRAPDOOR = "Something's off here, I can feel it."
 
 	DESCRIBE.BUSHCRAB = "I guess they've finally hatched."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "I squeezed every last drop of oil from that rock."
+	DESCRIBE.SHROOM_SKIN_FRAGMENT = "It's messy, but it's mine now."
+	DESCRIBE.AIR_CONDITIONER = "Now THIS is a machine I can get used to!"
+	DESCRIBE.SPOREPACK = "That's revolting! I don't care how big it is!"
+	DESCRIBE.SALTPACK = "I'm not one for chores."

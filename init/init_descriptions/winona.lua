@@ -52,7 +52,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.VETERANSHRINE = "This doesn't look like Charlie's doing."
 	DESCRIBE.SNOWBALL_THROWABLE = "Maybe I could load it in a catapult? Hmm, nah."
 	DESCRIBE.RAT_TAIL = "Yeesh, I don't want to carry that around."
-	DESCRIBE.PLAGUEDOCTOR_MASK = "You gotta be careful not to bump the beak on anything."
+	DESCRIBE.PLAGUEMASK = "You gotta be careful not to bump the beak on anything."
 	DESCRIBE.SPIDER_TRAPDOOR = "I might have to steal that \"trapdoor\" idea."
 	DESCRIBE.TRAPDOOR = "I don't see anything."
 	
@@ -60,3 +60,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.BUSHCRAB = "Thats some dangerous weeding!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "We'll get those plants workin' like a well oiled machine!"
+	DESCRIBE.SHROOM_SKIN_FRAGMENT = "Why do all toads have a bad stench?"
+	DESCRIBE.AIR_CONDITIONER = "I could nab that design for something..."
+	DESCRIBE.SPOREPACK = "Wow, that smell is a punch in the face."
+	DESCRIBE.SALTPACK = "I should've thought of this sooner!"

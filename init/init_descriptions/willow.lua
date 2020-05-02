@@ -52,10 +52,14 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.SNOWBALL_THROWABLE = "Ugh, snow is boring! Let's throw fireballs instead!"
 	DESCRIBE.VETERANSHRINE = "Ew, it's covered in that gunk."
 	DESCRIBE.RAT_TAIL = "Gross..."
-	DESCRIBE.PLAGUEDOCTOR_MASK = "I'm like a phoenix!"
+	DESCRIBE.PLAGUEMASK = "I'm like a phoenix!"
 	DESCRIBE.SPIDER_TRAPDOOR = "I like you better underneath a rock."
 	DESCRIBE.TRAPDOOR = "It's just a rock."
 
 	DESCRIBE.BUSHCRAB = "Should have burned it down... always should have burned it down!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "I would have settled for burning the diseased plants down."
+	DESCRIBE.SHROOM_SKIN_FRAGMENT = "I either want it burnt, or not have it at all."
+	DESCRIBE.AIR_CONDITIONER = "Can it spit out fire?"
+	DESCRIBE.SPOREPACK = "The smell is nothing fire can't handle!"
+	DESCRIBE.SALTPACK = "I still hate Winter."

@@ -52,10 +52,14 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.SNOWBALL_THROWABLE = "I remember playing in the snow with Abigail."
 	DESCRIBE.VETERANSHRINE = "I am used to pain."
 	DESCRIBE.RAT_TAIL = "It contains an acolyte of death."
-	DESCRIBE.PLAGUEDOCTOR_MASK = "Like a crow, a plague doctor is attracted to death."
+	DESCRIBE.PLAGUEMASK = "Like a crow, a plague doctor is attracted to death."
 	DESCRIBE.SPIDER_TRAPDOOR = "Is it the prey, or am I?"
 	DESCRIBE.TRAPDOOR = "A hill to trip over."
 
 	DESCRIBE.BUSHCRAB = "Another cruel joke from mother nature."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "I wish I could bring Abigail back from death."
+	DESCRIBE.SHROOM_SKIN_FRAGMENT = "A handful of flesh, ripped from the bone."
+	DESCRIBE.AIR_CONDITIONER = "The pleasant scent gives false hope."
+	DESCRIBE.SPOREPACK = "It reeks, just like everything else."
+	DESCRIBE.SALTPACK = "It deals with menial chores. My other problems remain unsolved."

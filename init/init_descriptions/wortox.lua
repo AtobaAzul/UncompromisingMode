@@ -52,10 +52,14 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.VETERANSHRINE = "It's not a prank if it's on yourself!"
 	DESCRIBE.SNOWBALL_THROWABLE = "Hyuyu! I like this game!"
 	DESCRIBE.RAT_TAIL = "People are scared of it, hyuyu!"
-	DESCRIBE.PLAGUEDOCTOR_MASK = "It forbids bad scent, and lets good ones ferment!"
+	DESCRIBE.PLAGUEMASK = "It forbids bad scent, and lets good ones ferment!"
 	DESCRIBE.SPIDER_TRAPDOOR = "Hyuyu! What a surprise!"
 	DESCRIBE.TRAPDOOR = "Hyuyu! I see you!"
 
 	DESCRIBE.BUSHCRAB = "Ohoho, what a trickster!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "Stink-b-gone!"
+	DESCRIBE.SHROOM_SKIN_FRAGMENT = "Bite-sized!"
+	DESCRIBE.AIR_CONDITIONER = "I could fill it with pepper! Hyuyu!"
+	DESCRIBE.SPOREPACK = "It is very rude, and rots your food!"
+	DESCRIBE.SALTPACK = "I can now frolic through the snow in peace!"

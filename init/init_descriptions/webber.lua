@@ -52,10 +52,14 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.SNOWBALL_THROWABLE = "Ooh! Ooh! Who wants to snowball fight?"
 	DESCRIBE.VETERANSHRINE = "It's looking at us!!"
 	DESCRIBE.RAT_TAIL = "It looks like our fur! But more smelly."
-	DESCRIBE.PLAGUEDOCTOR_MASK = "It looks like a chicken!"
+	DESCRIBE.PLAGUEMASK = "It looks like a chicken!"
 	DESCRIBE.SPIDER_TRAPDOOR = "We don't care that you don't have hair, you're still our friend!"
 	DESCRIBE.TRAPDOOR = "Our smart friends made those!"
 
 	DESCRIBE.BUSHCRAB = "Not one of our friends!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "It sticks and stains our fur."
+	DESCRIBE.SHROOM_SKIN_FRAGMENT = "An inky dinky piece. Reminds us of... us!"
+	DESCRIBE.AIR_CONDITIONER = "It makes both of our lungs feel good!"
+	DESCRIBE.SPOREPACK = "We need a bubble bath after wearing it!"
+	DESCRIBE.SALTPACK = "We kinda want to play in the snow, though."

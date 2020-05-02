@@ -52,10 +52,14 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.SNOWBALL_THROWABLE = "I'm an expert on snowball fights!"
 	DESCRIBE.VETERANSHRINE = "It makes my skin crawl. eh?"
 	DESCRIBE.RAT_TAIL = "I don't want to breathe that smell in, eh?"
-	DESCRIBE.PLAGUEDOCTOR_MASK = "Keeps the bad air out and the good air in, eh?"
+	DESCRIBE.PLAGUEMASK = "Keeps the bad air out and the good air in, eh?"
 	DESCRIBE.SPIDER_TRAPDOOR = "They look nastier without hair."
 	DESCRIBE.TRAPDOOR = "Is something in the grass?"
 
 	DESCRIBE.BUSHCRAB = "Farm from a freshwater."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "Aboot time the moon started doing me some favors."
+	DESCRIBE.SHROOM_SKIN_FRAGMENT = "Like some smelly jerky... No, I take that back."
+	DESCRIBE.AIR_CONDITIONER = "This is a nice change of scent, eh?"
+	DESCRIBE.SPOREPACK = "That offends the nostrils."
+	DESCRIBE.SALTPACK = "This pack would've been useful back in Canada, eh?"

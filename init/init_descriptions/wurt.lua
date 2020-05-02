@@ -52,10 +52,14 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 	SNOWBALL_THROWABLE = "Why you throw at us!?"
 	DESCRIBE.VETERANSHRINE = "I hate it, florp!"
 	DESCRIBE.RAT_TAIL = "It feels good to rub on face, florp!"
-	DESCRIBE.PLAGUEDOCTOR_MASK = "I don't like it! It's scary, florp!"
+	DESCRIBE.PLAGUEMASK = "I don't like it! It's scary, florp!"
 	DESCRIBE.SPIDER_TRAPDOOR = "Is it naked?"
 	DESCRIBE.TRAPDOOR = "I see nothing!"
 
 	DESCRIBE.BUSHCRAB = "Crabby!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "Plant make snacks in no time!"
+	DESCRIBE.SHROOM_SKIN_FRAGMENT = "Smell like me!"
+	DESCRIBE.AIR_CONDITIONER = "Smells weird, florp."
+	DESCRIBE.SPOREPACK = "Smells like home!"
+	DESCRIBE.SALTPACK = "Eyes hurt!"
