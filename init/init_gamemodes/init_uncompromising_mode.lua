@@ -49,16 +49,16 @@ local require = GLOBAL.require
 	local GAMEMODE_UNCOMPROMISING = 0;
 	local GAMEMODE_CUSTOM_SETTINGS = 2;
 
-	if GLOBAL.GetGameModeProperty("hardcore") then
+	--if GLOBAL.GetGameModeProperty("hardcore") then
 		--modimport("init/init_gamemodes/init_hardcore") --TODO: Fix hardcore game mode. For now, it is a mod config below.
-	end
+	--end
 	
 --	[ 				Features			]	--
 	
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS) then
 		GLOBAL.TUNING.DSTU.MONSTER_HOUNDS_PER_WAVE_INCREASE = GetModConfigData("hound_increase")
-		GLOBAL.TUNING.DSTU.WEATHERHAZARD_START_DATE = GetModConfigData("weather start date")
+		--GLOBAL.TUNING.DSTU.WEATHERHAZARD_START_DATE = GetModConfigData("weather start date")
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or

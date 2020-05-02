@@ -15,6 +15,9 @@ env.AddPrefabPostInit("beequeen", function(inst)
 	
     inst.Physics:CollidesWith(COLLISION.FLYERS)
 	
+	if inst.components.health ~= nil then
+		inst.components.health:SetMaxHealth(TUNING.DSTU.BEEQUEEN_HEALTH)
+	end
 	
     if inst.components.combat ~= nil then
 		local function isnotbee(ent)

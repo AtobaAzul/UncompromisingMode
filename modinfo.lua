@@ -75,12 +75,12 @@ configuration_options =
 		name = "gamemode",
 		label = "Mode",
 		hover = "No Other Gamemodes Available as of yet. Sorry!", --"Choose gamemode. 1) Original Uncompromising version (default settings). 2) Mod is enabled after first Fuelweaver is defeated. 3) Choose custom settings.",
-		--[[options =
+		options =
 		{
 			{description = "Uncompromising", data = 0}, -- TODO: When this is selected, disable the below ones (gray them out)
 			--{description = "Custom", data = 2}, --TODO: On custom, enable editing the below settings
 		},
-		default = 0,--]]
+		default = 0,
 	},
 	--[[{
 		name = "harder_recipes",
@@ -250,5 +250,27 @@ configuration_options =
 			{description = "Enabled", data = true},
 		},
 		default = true,
+	},
+	{
+		name = "toadstool health",
+		label = "Toadstool Health",
+		hover = "The Toadstool now affects survival, this is mostly for solo play.",
+		options =
+		{
+			{description = "Default[52500]", data = 52500},
+			{description = "Lowered[25000]", data = 25000},
+		},
+		default = 52500,
+	},
+	{
+		name = "bee queen health",
+		label = "Bee Queen Health",
+		hover = "The Bee Queen now affects survival, this is mostly for solo play.",
+		options =
+		{
+			{description = "Default[22500]", data = 22500},
+			{description = "Lowered[15000]", data = 15000},
+		},
+		default = 22500,
 	},
 }

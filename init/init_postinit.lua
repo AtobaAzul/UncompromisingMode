@@ -56,6 +56,7 @@ local prefab_post = {
 	--"malbatross",
 	"mushrooms",
 	"rock_ice",
+	"toadstool",
 	--"shadowcreature",
 }
 

@@ -118,6 +118,12 @@ TUNING.DSTU =
 
     --Hounds
     MONSTER_HOUNDS_PER_WAVE_INCREASE = 1.5, --Controlled by player settings
+	
+	--Toadstool
+	TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),
+	
+	--Bee Queen
+	BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
 
     ----------------------------------------------------------------------------
     --Player changes
@@ -163,7 +169,7 @@ TUNING.DSTU =
 	RAIDRAT_SPAWNRATE_VARIANCE = (seg_time / 5) * 0.5,
 	
 	--Weather Start Date
-    WEATHERHAZARD_START_DATE = 22,
+    WEATHERHAZARD_START_DATE = GetModConfigData("weather start date"),
 
 	HARDER_SHADOWS = GetModConfigData("harder_shadows"),
     MAX_DISTANCE_TO_SHADOWS = 1225, -- 35^2
