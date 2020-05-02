@@ -12,9 +12,14 @@ tasksetdata.set_pieces["ToadstoolArena"] = { 1, tasks={"Guarded Squeltch","Merms
 end)
 
 end
-AddRoomPreInit("BGSavanna", function(room)
+AddRoomPreInit("BGSavanna", function(room)					--This effects the outer areas of the Triple Mac and The Major Beefalo Plains
 room.contents.distributepercent = .15
 room.contents.distributeprefabs.trapdoor = 0.045
+end)
+AddRoomPreInit("Plain", function(room)						--This effects areas in the Major Beefalo Plains and the Grasslands next to the portal
+room.contents.countprefabs=
+									{
+										trapdoor = function() return math.random(2,4) end,} --returned number for whole area should be multiplied between 2-4 due to multiple rooms
 end)
 --[[
 	if GLOBAL.terrain.rooms.LightningBluffAntlion then
