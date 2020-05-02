@@ -61,7 +61,6 @@ Assets = {
 	Asset("ANIM", "anim/sporepack.zip"),
 	Asset("ANIM", "anim/swap_saltpack.zip"),
 	Asset("ANIM", "anim/veteranshrine.zip"),
-	Asset("ANIM", "anim/ratskin.zip"),
 	Asset("ANIM", "anim/spider_trapdoor.zip"),
 	Asset("ANIM", "anim/trapdoor.zip"),
 	Asset("ANIM", "anim/plaguemask.zip"),
@@ -78,8 +77,6 @@ Assets = {
 	Asset("SOUNDPACKAGE", "sound/UCSounds.fev"), 
 	Asset( "SOUND", "sound/UCSounds_bank00.fsb"),
 
-	Asset("IMAGE", "images/inventoryimages/ratskin.tex"),
-	Asset("ATLAS", "images/inventoryimages/ratskin.xml"),
 	Asset("IMAGE", "images/inventoryimages/rat_tail.tex"),
 	Asset("ATLAS", "images/inventoryimages/rat_tail.xml"),
 	--monster morsels from waffles, thanks

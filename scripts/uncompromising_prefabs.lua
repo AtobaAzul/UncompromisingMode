@@ -47,7 +47,6 @@ return {
 	"sporepack",
 	"saltpack",
 	"veteranshrine",
-	"ratskin",
 	"rat_tail",
 	"shroom_skin_fragment",
 	"plaguemask",
