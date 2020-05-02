@@ -101,12 +101,9 @@ local states = {
     },
 	State{
         name = "taunt",
-        tags = {"busy"},
+        tags = {"busy","taunting"},
 
         onenter = function(inst)
-		if inst:HasTag("tauntless") then
-			inst.sg:GoToState("idle")
-		end
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("taunt")
             inst.SoundEmitter:PlaySound(SoundPath(inst, "scream"))

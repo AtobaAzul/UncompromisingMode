@@ -87,7 +87,11 @@ local function CanAttackNow(inst)
     return (inst.components.combat.target == nil or not inst.components.combat:InCooldown()) and not inst.sg:HasStateTag("busy")
 end
 local function Attacking(inst)
-	return inst.sg:HasStateTag("attack") or inst.sg:HasStateTag("busy")
+	return inst.sg:HasStateTag("attack")
+end
+
+local function Taunting(inst)
+	return inst.sg:HasStateTag("taunting")
 end
 
 function SpiderBrain_TrapDoor:OnStart()
@@ -101,7 +105,7 @@ function SpiderBrain_TrapDoor:OnStart()
                 UseShield(self.inst, DAMAGE_UNTIL_SHIELD, SHIELD_TIME, AVOID_PROJECTILE_ATTACKS, HIDE_WHEN_SCARED)),
             AttackWall(self.inst),
 			WhileNode(function() return CanAttackNow(self.inst) end, "AttackMomentarily", ChaseAndAttack(self.inst, MAX_CHASE_TIME)),
-			WhileNode(function() return not Attacking(self.inst) end, "AmIBusyAttacking", RunAway(self.inst, "scarytoprey", 4, 8)),
+			WhileNode(function() return not Attacking(self.inst) and not Taunting(self.inst) end, "AmIBusyAttacking", RunAway(self.inst, "scarytoprey", 4, 8)),
 			
 			ChaseAndAttack(self.inst, MAX_CHASE_TIME),
             DoAction(self.inst, function() return EatFoodAction(self.inst) end ),
