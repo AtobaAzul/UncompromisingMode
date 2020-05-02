@@ -11,11 +11,9 @@ local function fn()
     inst.entity:AddNetwork()
     inst.entity:AddSoundEmitter()
 
-    MakeInventoryPhysics(inst)
-
-    inst.AnimState:SetBank("small_puff")
-    inst.AnimState:SetBuild("smoke_puff_small")
-    inst.AnimState:PlayAnimation("puff")
+    inst.AnimState:SetBank("deer_ice_burst")
+    inst.AnimState:SetBuild("deer_ice_burst")
+    inst.AnimState:PlayAnimation("loop")
 
     inst.entity:SetPristine()
 

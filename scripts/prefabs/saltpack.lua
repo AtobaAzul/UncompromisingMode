@@ -37,9 +37,6 @@ local function Salted(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local saltedfx = SpawnPrefab("mining_fx")
 	if owner ~= nil then
-	print(x)
-	print(y)
-	print(z)
 		if owner.components.rider ~= nil and owner.components.rider:IsRiding() then
 			saltedfx.Transform:SetPosition(x, 4, z)
 		else

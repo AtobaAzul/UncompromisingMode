@@ -253,7 +253,7 @@ end
 
 local function DoAreaDrowsy(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 9)
+    local ents = TheSim:FindEntities(x, y, z, 9, { "player" })
     for i, v in ipairs(ents) do
         TryPerish(v)
     end

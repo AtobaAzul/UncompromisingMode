@@ -42,7 +42,7 @@ env.AddPrefabPostInit("cave", function(inst)
         return
     end
     
-    inst:AddComponent("cavedeerclopsspawner")
+    --inst:AddComponent("cavedeerclopsspawner")
 	inst:AddComponent("hayfever_tracker")
 	local newwormspawn =
 {

@@ -6,7 +6,7 @@ env.AddPrefabPostInit("cave", function(inst)
         return
     end
     
-    inst:AddComponent("cavedeerclopsspawner")
+    --inst:AddComponent("cavedeerclopsspawner")
 	--[[
     if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_weather") == true) then
