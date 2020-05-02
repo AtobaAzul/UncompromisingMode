@@ -168,6 +168,8 @@ local states =
         tags = { "attack", "disguise", "busy" }, -- , "busy" 
 
         onenter = function(inst)
+			
+			inst:RemoveTag("NOCLICK")
             inst.Physics:Stop()
             inst.components.combat:StartAttack()
             inst.AnimState:PlayAnimation("atk_pre")

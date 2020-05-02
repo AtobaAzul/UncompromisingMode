@@ -137,6 +137,7 @@ end
 local function ShadowSuprise(inst)
 	if inst.isdisguised and not inst.components.health:IsDead() then 
 		inst.sg:GoToState("disguise_attack")
+		inst:RemoveTag("NOCLICK")
 		
 		if inst.suprise_task ~= nil then
 			inst.suprise_task:Cancel()
@@ -175,6 +176,7 @@ end
 
 local function Disguise(inst)
 	if not inst.components.health:IsDead() then
+		inst:AddTag("NOCLICK")
 		local morphchance = math.random(1, 4)
 		if morphchance == 1 then
 			SpawnPrefab("shadow_rock").Transform:SetPosition(inst.Transform:GetWorldPosition())
