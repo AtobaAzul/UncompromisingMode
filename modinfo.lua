@@ -260,7 +260,7 @@ configuration_options =
 			{description = "Default[52500]", data = 52500},
 			{description = "Lowered[25000]", data = 25000},
 		},
-		default = 25000,
+		default = 52500,
 	},
 	{
 		name = "bee queen health",
@@ -271,6 +271,6 @@ configuration_options =
 			{description = "Default[22500]", data = 22500},
 			{description = "Lowered[15000]", data = 15000},
 		},
-		default = 15000,
+		default = 22500,
 	},
 }
