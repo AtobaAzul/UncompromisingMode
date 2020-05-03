@@ -109,7 +109,7 @@ local function SmokePuff(inst)
 			local sporepuff = SpawnPrefab("air_conditioner_smoke")
 				sporepuff.Transform:SetPosition(x, 4, z)
 				if bluecaps ~= nil or redcaps ~= nil or greencaps ~= nil then
-					sporepuff.AnimState:SetMultColour(redcaps * 0.3 or 0.15, greencaps * 0.3 or 0.15, bluecaps * 0.3 or 0.15, 0.8)
+					sporepuff.AnimState:SetMultColour(redcaps * 0.10 or 0.05, greencaps * 0.10 or 0.05, bluecaps * 0.10 or 0.05, 0.5)
 				elseif bluecaps == 0 and redcaps == 0 and greencaps == 0 then
 					sporepuff.AnimState:SetMultColour(0, 0, 0, 0)
 				end

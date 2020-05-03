@@ -42,7 +42,7 @@ env.AddPrefabPostInit("cave", function(inst)
         return
     end
     
-    --inst:AddComponent("cavedeerclopsspawner")
+    inst:AddComponent("cavedeerclopsspawner")
 	inst:AddComponent("hayfever_tracker")
 	local newwormspawn =
 {
@@ -80,8 +80,10 @@ env.AddPrefabPostInit("cave", function(inst)
 inst.components.hounded:SetSpawnData(newwormspawn)
 end)
 
-local function changeprecipchance()
-    --TheWorld:PushEvent("ms_setmoisturescale", 2)
+local function OnSeasonTick(inst)
+	if TheWorld.state.isspring then
+		inst:AddComponent("mock_dragonflyspawner")
+	end
 end
 
 env.AddPrefabPostInit("forest", function(inst)
@@ -93,7 +95,7 @@ env.AddPrefabPostInit("forest", function(inst)
 	inst:AddComponent("firefallwarning")
 	
 	inst:AddComponent("gmoosespawner")
-	inst:AddComponent("mock_dragonflyspawner")
 	
-	inst:ListenForEvent("seasontick", changeprecipchance)
+	inst:ListenForEvent("seasontick", OnSeasonTick)
+	
 end)
