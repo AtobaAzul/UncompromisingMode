@@ -59,4 +59,6 @@ return {
 	"mothergoose",
 	"shadow_goo",
 	"mini_dreadeye",
+	"scorpion",
+	"vampirebat",
 }
