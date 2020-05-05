@@ -152,7 +152,7 @@ local states = {
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("hide")
             inst.AnimState:PushAnimation("hide_loop")
-			if inst.components workable ~= nil then
+			if inst.components.workable ~= nil then
 				inst.components.workable:SetWorkLeft(1)
 			end
 			inst:AddTag("hiding")
@@ -160,7 +160,7 @@ local states = {
 
         onexit = function(inst)
             inst.components.health:SetAbsorptionAmount(0)
-			if inst.components workable ~= nil then
+			if inst.components.workable ~= nil then
 				inst.components.workable:SetWorkLeft(0)
 			end
 			inst:RemoveTag("hiding")
