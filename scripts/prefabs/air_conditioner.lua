@@ -24,28 +24,6 @@ local function onclose(inst)
     end
 end
 
-local function onhammered(inst, worker)
-    if inst.components.burnable ~= nil and inst.components.burnable:IsBurning() then 
-        inst.components.burnable:Extinguish()
-    end
-    inst.components.lootdropper:DropLoot()
-    local fx = SpawnPrefab("collapse_small")
-    fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    fx:SetMaterial("wood")
-    inst:Remove()
-end
-
-local function onhit(inst)
-	if not inst.AnimState:IsCurrentAnimation("idle_fueled") then
-		inst.AnimState:PlayAnimation("hit")
-	end
-	
-	if inst.components.container ~= nil then
-		inst.components.container:DropEverything()
-		inst.components.container:Close()
-	end
-end
-
 local assets =
 {
     Asset("ANIM", "anim/rain_meter.zip"),
@@ -170,6 +148,30 @@ local function CheckForItems(inst)
 			inst.SoundEmitter:KillSound("loop")
 		end
 	end
+end
+
+local function onhammered(inst, worker)
+    if inst.components.burnable ~= nil and inst.components.burnable:IsBurning() then 
+        inst.components.burnable:Extinguish()
+    end
+    inst.components.lootdropper:DropLoot()
+    local fx = SpawnPrefab("collapse_small")
+    fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+    fx:SetMaterial("wood")
+    inst:Remove()
+end
+
+local function onhit(inst)
+	if not inst.AnimState:IsCurrentAnimation("idle_fueled") then
+		inst.AnimState:PlayAnimation("hit")
+	end
+	
+	if inst.components.container ~= nil then
+		inst.components.container:DropEverything()
+		inst.components.container:Close()
+	end
+	
+	CheckForItems
 end
 
 local function onload(inst, data)

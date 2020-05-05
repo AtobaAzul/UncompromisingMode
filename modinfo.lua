@@ -51,7 +51,7 @@ server_filter_tags = {
 }
 
 priority = 10
-
+--[[
 game_modes =
 {
 	{
@@ -68,7 +68,7 @@ game_modes =
 		},
 	}
 }
-
+--]]
 configuration_options =
 {
 	{
