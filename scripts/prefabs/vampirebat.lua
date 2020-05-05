@@ -33,7 +33,7 @@ local SHARE_TARGET_DIST = 100
 
 local function MakeTeam(inst, attacker)
     local leader = SpawnPrefab("teamleader")
-    leader:AddTag("vampirebat")
+    leader:AddTag("bat")
     leader.components.teamleader.threat = attacker
     leader.components.teamleader.team_type = inst.components.teamattacker.team_type
     leader.components.teamleader:NewTeammate(inst)
@@ -112,7 +112,7 @@ local function retargetfn(inst)
 
     local newtarget = FindEntity(inst, TUNING.BISHOP_TARGET_DIST, function(guy)
             return (guy:HasTag("character") or guy:HasTag("monster") )
-                   and not guy:HasTag("vampirebat")
+                   and not guy:HasTag("bat")
                    and inst.components.combat:CanTarget(guy)
     end)
 
@@ -135,7 +135,7 @@ local function OnAttacked(inst, data)
     if inst.components.teamattacker.inteam and not inst.components.teamattacker.teamleader:CanAttack() then
         local attacker = data and data.attacker
         inst.components.combat:SetTarget(attacker)
-        inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("vampirebat") end, MAX_TARGET_SHARES)
+        inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("bat") end, MAX_TARGET_SHARES)
     end
 end
 
@@ -165,7 +165,7 @@ local function OnAttacked(inst, data)
 end
 ]]
 local function OnAttackOther(inst, data)
-    inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST, function(dude) return dude:HasTag("vampirebat") and not dude.components.health:IsDead() end, 5)
+    inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST, function(dude) return dude:HasTag("bat") and not dude.components.health:IsDead() end, 5)
 end
 
 local function OnWaterChange(inst, onwater)
@@ -229,7 +229,7 @@ local function fn()
     --inst.Physics:CollidesWith(COLLISION.FLYERS) 
     --inst.Physics:CollidesWith(COLLISION.CHARACTERS)
 
-    inst:AddTag("vampirebat")
+    inst:AddTag("bat")
     inst:AddTag("scarytoprey")
     inst:AddTag("monster")
     inst:AddTag("hostile")
@@ -360,7 +360,7 @@ local function circlingbatfn()
 
     inst:AddComponent("locomotor")
     inst.components.locomotor:SetTriggersCreep(false)
-    inst.components.locomotor.walkspeed = TUNING.VAMPIREBAT_WALK_SPEED
+    inst.components.locomotor.walkspeed = 10
 
     inst:AddComponent("circler")
     inst.components.circler.track = 8
