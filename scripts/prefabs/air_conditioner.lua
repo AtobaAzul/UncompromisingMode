@@ -171,7 +171,7 @@ local function onhit(inst)
 		inst.components.container:Close()
 	end
 	
-	CheckForItems
+	CheckForItems(inst)
 end
 
 local function onload(inst, data)
