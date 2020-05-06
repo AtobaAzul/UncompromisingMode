@@ -121,7 +121,7 @@ local function fn()
     inst:AddTag("hive")
     inst:AddTag("WORM_DANGER")
 	inst:AddTag("trapdoor")
-	
+	inst:AddTag("CLASSIFIED")
     MakeSnowCoveredPristine(inst)
 
     inst.entity:SetPristine()
