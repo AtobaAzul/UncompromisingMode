@@ -59,6 +59,8 @@ local prefab_post = {
 	"toadstool",
 	"oasislake",
 	--"shadowcreature",
+	"lureplant",
+	"spiderden",
 }
 
 local stategraph_post = {
