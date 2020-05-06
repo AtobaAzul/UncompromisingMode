@@ -121,7 +121,7 @@ local function fn()
     inst:AddTag("hive")
     inst:AddTag("WORM_DANGER")
 	inst:AddTag("trapdoor")
-	
+	inst:AddTag("CLASSIFIED")
     MakeSnowCoveredPristine(inst)
 
     inst.entity:SetPristine()
@@ -145,7 +145,7 @@ local function fn()
 	inst.components.childspawner:SetOnChildKilledFn(FindNewHole)
 	local startrandomtest = math.random()
 	inst.components.childspawner:StopRegen()
-	if startrandomtest >= 0.9 then
+	if startrandomtest >= 0.85 then
 	inst.components.childspawner:SetMaxChildren(1)
 	inst.components.childspawner:StartRegen()
 	end

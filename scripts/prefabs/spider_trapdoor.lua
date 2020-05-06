@@ -11,11 +11,15 @@ local prefabs =
 {
     "spidergland",
     "monstermeat",
-    --"silk",
+    "silk",
 }
 
 local brain = require "brains/spiderbrain_trapdoor"
 
+SetSharedLootTable( 'spider_trapdoor',
+{
+    {'monstermeat',  1.00},
+})
 local function ShouldAcceptItem(inst, item, giver)
     return giver:HasTag("spiderwhisperer") and inst.components.eater:CanEat(item)
 end
@@ -247,6 +251,7 @@ local function create_common(build, tag)
     inst.components.lootdropper:AddRandomLoot("spidergland", 1)
     inst.components.lootdropper:AddRandomHauntedLoot("spidergland", 1)
     inst.components.lootdropper.numrandomloot = 1
+	inst.components.lootdropper:SetChanceLootTable('spider_trapdoor')
 
     ---------------------        
     MakeMediumBurnableCharacter(inst, "body")
