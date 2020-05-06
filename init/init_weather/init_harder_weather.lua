@@ -82,7 +82,9 @@ end)
 
 local function OnSeasonTick(inst)
 	if TheWorld.state.isspring then
-		inst:AddComponent("mock_dragonflyspawner")
+		if not TheWorld.components.mock_dragonflyspawner then
+			inst:AddComponent("mock_dragonflyspawner")
+		end
 	end
 end
 

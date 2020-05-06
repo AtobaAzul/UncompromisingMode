@@ -61,6 +61,7 @@ local prefab_post = {
 	--"shadowcreature",
 	"lureplant",
 	"spiderden",
+	--"rock_avocado_fruit_sprout_sapling",
 }
 
 local stategraph_post = {
