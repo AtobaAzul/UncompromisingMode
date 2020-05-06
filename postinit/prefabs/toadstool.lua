@@ -61,7 +61,7 @@ env.AddPrefabPostInit("toadstool", function(inst)
 	end
 	
 	if inst.components.health ~= nil then
-		inst.components.health:SetMaxHealth(1)
+		inst.components.health:SetMaxHealth(TUNING.DSTU.TOADSTOOL_HEALTH)
 	end
 	
 	if inst.components.lootdropper ~= nil then
@@ -75,9 +75,7 @@ env.AddPrefabPostInit("toadstool_dark", function(inst)
 		return
 	end
 	
-	if inst.components.health ~= nil then
-		inst.components.health:SetMaxHealth(TUNING.DSTU.TOADSTOOL_HEALTH)
-	end
+	
 	
 	if inst.components.lootdropper ~= nil then
 		inst.components.lootdropper:SetChanceLootTable("toadystool_dark")
