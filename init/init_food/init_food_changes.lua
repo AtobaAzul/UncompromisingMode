@@ -123,7 +123,9 @@ local ANTIHISTAMINES_HIGH =
 	"moqueca",
 	"seafoodgumbo",
 	"lobsterbisque",
-	
+	"hotchili",
+	"vegstinger",
+	"pepperpopper",
 	--"tea",
 }
 
