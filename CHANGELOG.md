@@ -204,6 +204,36 @@
 
 * [x] Snowballs added: makes targets cold when thrown, can be used to freeze targets
 
+* [x] Spore Pack added: New backpack with 12 slots, and rots foods incredibly fast
+
+* [x] Salt Shaker 3000 added: Salt spitting backpack that prevents snowstorm effects, destroys snow and snow based enemies, and increases speed in winter, as long as it is fueled
+
+* [x] Air Conditioner added: New structure that over time will increase health, sanity, or prevent hayfever if slotted with blue, green, and red mushrooms respectively
+
+* [x] Toadstool now drops the blueprint for the Air Conditioner
+
+* [x] Plague Mask added: New improved variation of the Gas Mask, doesn't reduce sanity when worn, has a small wetness protection, and prevents the max health loss effects of rat attacks
+
+* [x] The Feather Hat will prevent Penguins from attacking you
+
+* [x] Terror Beaks will not slightly lunge at the player when attacking
+
+* [x] Crawling Horror's now drop shadow bombs around itself when hit, inking the player and dealing damage
+
+* [x] When disguised, Dread Eye's will now spawn mini shadow eyes near the player, which sap sanity when sane, and health when insane. They despawn after a set time
+
+* [x] Krampus health raised to 600 from 300
+
+* [x] Wendy no longer gets a 40% damage increase from Abigail, only the normal 10%
+
+* [x] Added Shroom Skin Scraps, dropped by Toadlings, used to craft Shroom Skin
+
+* [x] Lavae will now drop explosive slime on death, destroying structures and settings things on fire
+
+* [x] Wortox health changed to 120 from 200
+
+* [x] Added options to reduce the Bee Queen and Toadstool's health, due to their raised importance.
+
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
 ### To vote on features: Visit [#mod_polls](https://discordapp.com/channels/623649948130344960/623661746216763393) on Discord
