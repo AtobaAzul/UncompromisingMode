@@ -34,6 +34,7 @@ end
 
 local function StormStop(self)
 	self.stopstormtask = nil
+
 	TheWorld:RemoveTag("snowstormstart")
 	TheWorld.net:RemoveTag("snowstormstartnet")
 end
@@ -51,7 +52,7 @@ function SnowStormWatcher:ToggleSnowstorms(active, src, data)
     elseif TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
         self.inst:StartUpdatingComponent(self)
 		if self.stormtask == nil then
-			self.stormtask = self.inst:DoTaskInTime(100 + math.random(10,40), StormStart, self)--, self)
+			self.stormtask = self.inst:DoTaskInTime(80 + math.random(10,40), StormStart, self)--, self)
 		end
 		
 		if self.stopstormtask == nil then
@@ -68,7 +69,7 @@ function SnowStormWatcher:UpdateSnowstormLevel()
 end
 
 function SnowStormWatcher:SnowstormLevel()
-	return TheWorld:HasTag("snowstormstart")
+	return self.snowstormstart
 end
 
 function SnowStormWatcher:UpdateSnowstormWalkSpeed(src, data)
@@ -85,7 +86,7 @@ function SnowStormWatcher:UpdateSnowstormWalkSpeed(src, data)
 		local ents4 = TheSim:FindEntities(x, y, z, 6, {"snowstorm_protection_high"})
 		local suppressorNearby4 = (#ents4 > 0)
 		
-    if TheWorld.state.issnowing and TheWorld:HasTag("snowstormstart") then
+    if TheWorld.state.issnowing then
         if self.inst.components.playervision:HasGoggleVision() or
             self.inst.components.playervision:HasGhostVision() or
             self.inst.components.rider:IsRiding() or
@@ -109,7 +110,7 @@ function TrySpawning(v)
 	
 	local playervalue2 = #nearbyplayers2 * 0.1
 	
-	if TheWorld.state.iswinter and TheWorld:HasTag("snowstormstart") then
+	if TheWorld.state.iswinter and ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") )  then--and self.snowstormstart then
 		if math.random() <= 0.15 - playervalue2 then
 				--local spawn_pt = GetSpawnPoint(origin_pt, PLAYER_CHECK_DISTANCE + 5)
 				
@@ -129,26 +130,27 @@ end
 local NOTAGS = { "playerghost", "HASHEATER" }
 
 local function SnowpileChance(inst, self)
---print("chance")
-
+print("chance")
 	local x, y, z = self.inst.Transform:GetWorldPosition()
     local nearbyplayers1 = TheSim:FindEntities(x, y, z, 50, nil, nil, { "player" })
     local ents4 = TheSim:FindEntities(x, y, z, 50, nil, { "snowpiledin", "hive" }, { "structure" })
+	local chancer = math.random()
 	
-	if TheWorld.state.iswinter and TheWorld:HasTag("snowstormstart") then
-		if math.random() <= 0.30 - #nearbyplayers1 then
+	
+	if TheWorld.state.iswinter and ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") ) then--and self.snowstormstart then
+	print("chance2")
+	print(chancer)
+		if chancer < 0.30 - nearbyplayers1 * 0.25 then
 				local xrandom = math.random(-20, 20)
 				local zrandom = math.random(-20, 20)
-
+				print("chance3")
 				local ents7 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 6, nil, nil, { "snowpileradius"})
 				local ents8 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 8, nil, nil, { "fire" })
 
-						--local ents = TheSim:FindEntities(x, y, z, 40, {"wall" "player" "campfire"})
-				if TheWorld.Map:IsPassableAtPoint(x + xrandom, 0, z + zrandom) and #ents7 < 1 and #ents8 < 1 and not INVALID_TILES[TheWorld.Map:GetTileAtPoint(x + xrandom, 0, z + zrandom)] then
-					local snowpilespawnplayer = SpawnPrefab("snowpile")
-					--snowpilespawnplayer.Transform:SetPosition(x + math.random(-20, 20), 0, z + math.random(-20, 20))
-				
-					snowpilespawnplayer.Transform:SetPosition(x + xrandom, 0.05, z + zrandom)
+				if #ents7 < 1 and #ents8 < 1 and not INVALID_TILES[TheWorld.Map:GetTileAtPoint(x + xrandom, 0, z + zrandom)] then
+					local snowpilespawn = SpawnPrefab("snowpile")
+
+					snowpilespawn.Transform:SetPosition(x + xrandom, 0.05, z + zrandom)
 				end
 		else
 			for i, v in ipairs(ents4) do
@@ -168,13 +170,10 @@ TUNING.SNOW_CHANCE_TIME = 60
 TUNING.SNOW_CHANCE_VARIANCE = 30
 
 
-function SnowStormWatcher:StartSnowPileTask(chancetime)
-
---print("task")
-		chancetime = chancetime or (TUNING.SNOW_CHANCE_TIME + math.random()*TUNING.SNOW_CHANCE_VARIANCE)
+function SnowStormWatcher:StartSnowPileTask()
 
 		if self.task == nil then
-			self.task = self.inst:DoTaskInTime(chancetime, SnowpileChance, self)--, self)
+			self.task = self.inst:DoTaskInTime(60 + math.random()*30, SnowpileChance, self)--, self)
 		end
 end
 
