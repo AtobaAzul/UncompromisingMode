@@ -235,6 +235,14 @@ local function InitFX(inst)
 end
 
 local function TryPerish(item)
+	if item.components.health ~= nil then
+		if not item.components.health:IsDead() then
+			item.components.health:DoDelta(0.5)
+		end
+	end
+end
+
+local function TryCure(item)
 	if item:HasTag("diseased") and item.components.pickable then
 		local x, y, z = item.Transform:GetWorldPosition()
 		item:Remove()
@@ -243,12 +251,6 @@ local function TryPerish(item)
 		cured.components.pickable:OnTransplant()
 		SpawnPrefab("halloween_moonpuff").Transform:SetPosition(x, y, z)
 	end
-	
-	if item.components.health ~= nil then
-		if not item.components.health:IsDead() then
-			item.components.health:DoDelta(0.5)
-		end
-	end
 end
 
 local function DoAreaDrowsy(inst)
@@ -256,6 +258,11 @@ local function DoAreaDrowsy(inst)
     local ents = TheSim:FindEntities(x, y, z, 9, { "player" })
     for i, v in ipairs(ents) do
         TryPerish(v)
+    end
+	
+    local ents2 = TheSim:FindEntities(x, y, z, 9, { "diseased" })
+    for i, k in ipairs(ents2) do
+        TryCure(k)
     end
 end
 
