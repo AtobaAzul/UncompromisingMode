@@ -49,6 +49,26 @@ local function onsave(inst, data)
     end
 end
 
+local function TryPerish(item)
+    if item:IsInLimbo() then
+        local owner = item.components.inventoryitem ~= nil and item.components.inventoryitem.owner or nil
+        if owner == nil or
+            (   owner.components.container ~= nil and
+                owner:HasTag("air_conditioner")   ) then
+            --in limbo but not inventory or container?
+            --or in a closed chest
+            if item.components.perishable:GetPercent() >= 0.5 then
+				item.components.perishable:ReducePercent(TUNING.TOADSTOOL_SPORECLOUD_ROT)
+			end
+        end
+    end
+	--[[
+	if item.components.perishable:GetPercent() >= 0.5 then
+		item.components.perishable:ReducePercent(TUNING.TOADSTOOL_SPORECLOUD_ROT)
+	end
+	--]]
+end
+
 local function TryPuff(player, inst)
 	if inst.components.container ~= nil then
 		local bluecaps = #inst.components.container:FindItems( function(item) return item:HasTag("blue_mushroom_fuel") end )
@@ -57,20 +77,21 @@ local function TryPuff(player, inst)
 		
 		if not player:IsInLimbo() then
 			if bluecaps > 0 then
-				player.components.health:DoDelta(bluecaps * 0.2)
+				player.components.health:DoDelta(bluecaps * 0.4)
 			end
 			
 			if greencaps > 0 then
-				player.components.sanity:DoDelta(greencaps * 0.2)
+				player.components.sanity:DoDelta(greencaps * 0.4)
 			end
 			
-			if redcaps > 0 and player.components.hayfever.nextsneeze < 120 then
-				player.components.hayfever:SetNextSneezeTime(player.components.hayfever.nextsneeze + redcaps * 2)
+			if redcaps > 0 and player.components.hayfever.nextsneeze < 240 then
+				player.components.hayfever:SetNextSneezeTime(player.components.hayfever.nextsneeze + redcaps * 3)
 			end
 			
 			return
 		end
 	end
+    
 end
 
 local function SmokePuff(inst)
@@ -101,6 +122,11 @@ local function DoPuff(inst)
     local ents = TheSim:FindEntities(x, y, z, 10, nil, nil, { "player" })
     for i, v in ipairs(ents) do
         TryPuff(v, inst)
+    end
+	
+	local ents2 = TheSim:FindEntities(x, y, z, 1, nil, nil, { "mushroom_fuel" })
+    for i, k in ipairs(ents2) do
+        TryPerish(k)
     end
 end
 
@@ -198,6 +224,7 @@ local function fn()
     inst.AnimState:SetBuild("airconditioner")
     inst.AnimState:PlayAnimation("idle")
 
+    inst:AddTag("air_conditioner")
     inst:AddTag("structure")
     inst:AddTag("chest")
 	
