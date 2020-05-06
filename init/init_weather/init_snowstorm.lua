@@ -12,7 +12,7 @@ local function GetSandstormLevel(inst)
 		local ents3 = TheSim:FindEntities(x, y, z, 5.5, {"shelter"})
 		local suppressorNearby3 = (#ents3 > 2)
 		
-		local ents4 = TheSim:FindEntities(x, y, z, 6, {"saltpack_protection"})
+		local ents4 = TheSim:FindEntities(x, y, z, 6, {"snowstorm_protection_high"})
 		local suppressorNearby4 = (#ents4 > 0)
 	--[[else
 	

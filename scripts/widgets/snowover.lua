@@ -34,7 +34,7 @@ local SnowOver =  Class(Widget, function(self, owner, storm_overlays)
     self.bg2:GetAnimState():SetBank("sand_over")
     self.bg2:GetAnimState():SetBuild("snow_over")
     self.bg2:GetAnimState():PlayAnimation("dust_loop", true)
-	--self.bg2:SetTint(1,1,1,.8)
+	self.bg2:GetAnimState():SetMultColour(1, 1, 1, .8)
 	
     self:Hide()
 	self:OnUpdate(0)
@@ -78,7 +78,7 @@ function SnowOver:OnUpdate(dt)
 	local suppressorNearby2 = 0.6 * #ents2
 	local ents3 = TheSim:FindEntities(x, y, z, 5.5, {"shelter"})
 	local suppressorNearby3 = 0.15 * #ents3
-	local ents4 = TheSim:FindEntities(x, y, z, 6, {"saltpack_protection"})
+	local ents4 = TheSim:FindEntities(x, y, z, 6, {"snowstorm_protection_high"})
 	local suppressorNearby4 = 0.8 * #ents4
 	
 	local equationdingus = suppressorNearby1 + suppressorNearby2 + suppressorNearby3 + suppressorNearby4
@@ -149,8 +149,8 @@ function SnowOver:OnUpdate(dt)
 	if self.owner.components.playervision ~= nil then
 		if self.bg.shown and
 			self.owner.components.playervision:HasGoggleVision() then
-			if self.changed > 0.2 then
-				self.bg:GetAnimState():SetMultColour(1, 1, 1, 0.2 - self.alphaquation)
+			if self.changed > 0.15 then
+				self.bg:GetAnimState():SetMultColour(1, 1, 1, 0.15 - self.alphaquation)
 			else
 				self.bg:GetAnimState():SetMultColour(1, 1, 1, self.changed - self.alphaquation)
 			end

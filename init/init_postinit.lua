@@ -61,6 +61,7 @@ local prefab_post = {
 	--"shadowcreature",
 	"lureplant",
 	"spiderden",
+	"stafflights",
 	--"rock_avocado_fruit_sprout_sapling",
 }
 

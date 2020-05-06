@@ -104,7 +104,7 @@ local function turnon(inst, owner)
 			inst.components.equippable.walkspeedmult = 1
 		end
 		
-		inst:AddTag("saltpack_protection")
+		inst:AddTag("snowstorm_protection_high")
         local owner = inst.components.inventoryitem.owner
 
         inst.components.machine.ison = true
@@ -117,7 +117,7 @@ local function turnoff(inst)
 	end
 	inst.salttask = nil
 	
-	inst:RemoveTag("saltpack_protection")
+	inst:RemoveTag("snowstorm_protection_high")
 	
     inst.components.insulator:SetInsulation(0)
 	

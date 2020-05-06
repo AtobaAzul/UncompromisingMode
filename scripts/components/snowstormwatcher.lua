@@ -82,7 +82,7 @@ function SnowStormWatcher:UpdateSnowstormWalkSpeed(src, data)
 		local ents3 = TheSim:FindEntities(x, y, z, 5.5, {"shelter"})
 		local suppressorNearby3 = (#ents3 > 2)
 		
-		local ents4 = TheSim:FindEntities(x, y, z, 6, {"saltpack_protection"})
+		local ents4 = TheSim:FindEntities(x, y, z, 6, {"snowstorm_protection_high"})
 		local suppressorNearby4 = (#ents4 > 0)
 		
     if TheWorld.state.issnowing and TheWorld:HasTag("snowstormstart") then
@@ -104,11 +104,14 @@ end
 
 function TrySpawning(v)	
 
-	--if math.random(1, 3000) == 1 then
+	local x1, y1, z1 = v.Transform:GetWorldPosition()
+	local nearbyplayers2 = TheSim:FindEntities(x1, y1, z1, 50, nil, nil, { "player"})
+	
+	local playervalue2 = #nearbyplayers2 * 0.1
+	
 	if TheWorld.state.iswinter and TheWorld:HasTag("snowstormstart") then
-		if math.random() <= 0.10 then
+		if math.random() <= 0.15 - playervalue2 then
 				--local spawn_pt = GetSpawnPoint(origin_pt, PLAYER_CHECK_DISTANCE + 5)
-			local x1, y1, z1 = v.Transform:GetWorldPosition()
 				
 			local ents5 = TheSim:FindEntities(x1, y1, z1, 3, nil, nil, { "snowpileradius"})
 			local ents6 = TheSim:FindEntities(x1, y1, z1, 8, nil, nil, { "fire" })
@@ -129,9 +132,11 @@ local function SnowpileChance(inst, self)
 --print("chance")
 
 	local x, y, z = self.inst.Transform:GetWorldPosition()
+    local nearbyplayers1 = TheSim:FindEntities(x, y, z, 50, nil, nil, { "player" })
     local ents4 = TheSim:FindEntities(x, y, z, 50, nil, { "snowpiledin", "hive" }, { "structure" })
+	
 	if TheWorld.state.iswinter and TheWorld:HasTag("snowstormstart") then
-		if math.random() <= 0.10 then
+		if math.random() <= 0.30 - #nearbyplayers1 then
 				local xrandom = math.random(-20, 20)
 				local zrandom = math.random(-20, 20)
 
