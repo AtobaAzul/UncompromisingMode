@@ -119,7 +119,7 @@ end
 
 local function DoPuff(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 10, nil, nil, { "player" })
+    local ents = TheSim:FindEntities(x, y, z, 15, nil, nil, { "player" })
     for i, v in ipairs(ents) do
         TryPuff(v, inst)
     end

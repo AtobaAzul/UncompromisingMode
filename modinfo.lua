@@ -50,7 +50,7 @@ server_filter_tags = {
 	"hardcore"
 }
 
-priority = 10
+priority = -10
 --[[
 game_modes =
 {
