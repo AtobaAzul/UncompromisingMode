@@ -56,7 +56,7 @@ local function MutatedRetarget(inst)
             return inst.components.combat:CanTarget(guy)
             end,
             nil,
-            {"penguin","penguin_protection"},
+            {"penguin","penguin_protection","the_mime"},
             {"character","monster","wall"}
             )
 
