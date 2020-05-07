@@ -61,4 +61,5 @@ return {
 	"mini_dreadeye",
 	"scorpion",
 	"vampirebat",
+	"icecreamsanityregenbuff",
 }

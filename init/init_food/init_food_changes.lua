@@ -16,9 +16,18 @@ local cooking = require "cooking"
 local recipes = cooking.recipes.cookpot
 --recipes.meatballs.test = function(cooker, names, tags) return tags.antihistamine and tags.antihistamine >= 3  end,
 
+local ApplyIcecreamBuff = function(inst, eater)
+            if eater.components.debuffable ~= nil and eater.components.debuffable:IsEnabled() and
+                not (eater.components.health ~= nil and eater.components.health:IsDead()) and
+                not eater:HasTag("playerghost") then
+                eater.components.debuffable:AddDebuff("icecreamsanityregenbuff", "icecreamsanityregenbuff")
+            end
+        end
 recipes.perogies.perishtime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_PEROGI_PERISH -- Changed to 10 days, down from 20
 recipes.meatballs.hunger = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_MEATBALL_HUNGER -- Changed to 50, down from 62.5
 recipes.butterflymuffin.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERMUFFIN_HEALTH -- Changed to 50, down from 62.5
+recipes.icecream.sanity = 0
+recipes.icecream.oneatenfn = ApplyIcecreamBuff
 -----------------------------------------------------------------
 -- Prevent cooked eggs birdcage infinite loop
 -----------------------------------------------------------------
@@ -127,6 +136,7 @@ local ANTIHISTAMINES_HIGH =
 	"vegstinger",
 	"pepperpopper",
 	--"tea",
+	"bonestew",
 }
 
 local function item_oneatenhigh(inst, eater)
