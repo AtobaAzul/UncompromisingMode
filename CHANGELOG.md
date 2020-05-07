@@ -148,7 +148,7 @@
 
 * [x] New Catcoon Cap Goggles hat, same effect as Desert Goggles, increased insulation over the Cat Cap
 
-* [x] Standing near a fire, walls, many trees, using a torch, or either variation of goggles will protect against snowstorms
+* [x] Standing near a fire, walls, many trees, using a torch, staff lights, or either variation of goggles will protect against snowstorms
 
 * [x] Deerclops "enrages" at half health
 
@@ -232,7 +232,11 @@
 
 * [x] Wortox health changed to 120 from 200
 
-* [x] Added options to reduce the Bee Queen and Toadstool's health, due to their raised importance.
+* [x] Added options to reduce the Bee Queen and Toadstool's health, due to their raised importance
+
+* [x] Wolfgang's speed is reduced when Mighty (to balance out his up to 25% bonus movement speed when mighty)
+
+* [x] Willow and Wormwood are now able to smolder
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 

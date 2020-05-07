@@ -140,14 +140,14 @@ print("chance")
 	if TheWorld.state.iswinter and ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") ) then--and self.snowstormstart then
 	print("chance2")
 	print(chancer)
-		if chancer < 0.30 - nearbyplayers1 * 0.25 then
+		if chancer < 0.30 - #nearbyplayers1 * 0.025 then
 				local xrandom = math.random(-20, 20)
 				local zrandom = math.random(-20, 20)
 				print("chance3")
 				local ents7 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 6, nil, nil, { "snowpileradius"})
 				local ents8 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 8, nil, nil, { "fire" })
 
-				if #ents7 < 1 and #ents8 < 1 and not INVALID_TILES[TheWorld.Map:GetTileAtPoint(x + xrandom, 0, z + zrandom)] then
+				if TheWorld.Map:IsPassableAtPoint(x + xrandom, 0, z + zrandom) and #ents7 < 1 and #ents8 < 1 and not INVALID_TILES[TheWorld.Map:GetTileAtPoint(x + xrandom, 0, z + zrandom)] then
 					local snowpilespawn = SpawnPrefab("snowpile")
 
 					snowpilespawn.Transform:SetPosition(x + xrandom, 0.05, z + zrandom)
