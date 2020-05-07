@@ -130,7 +130,6 @@ end
 local NOTAGS = { "playerghost", "HASHEATER" }
 
 local function SnowpileChance(inst, self)
-print("chance")
 	local x, y, z = self.inst.Transform:GetWorldPosition()
     local nearbyplayers1 = TheSim:FindEntities(x, y, z, 50, nil, nil, { "player" })
     local ents4 = TheSim:FindEntities(x, y, z, 50, nil, { "snowpiledin", "hive" }, { "structure" })
@@ -138,12 +137,9 @@ print("chance")
 	
 	
 	if TheWorld.state.iswinter and ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") ) then--and self.snowstormstart then
-	print("chance2")
-	print(chancer)
 		if chancer < 0.30 - #nearbyplayers1 * 0.025 then
 				local xrandom = math.random(-20, 20)
 				local zrandom = math.random(-20, 20)
-				print("chance3")
 				local ents7 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 6, nil, nil, { "snowpileradius"})
 				local ents8 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 8, nil, nil, { "fire" })
 

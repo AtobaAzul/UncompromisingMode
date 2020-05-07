@@ -3,15 +3,15 @@
 -----------------------------------------------------------------
 local function speedcheck(inst)
 	if inst.strength == "mighty" then
-		inst.components.locomotor.walkspeed = TUNING.WILSON_WALK_SPEED / 1.2
-		inst.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED / 1.2
-		print(inst.components.locomotor.walkspeed)
-		print(inst.components.locomotor.runspeed)
+		if inst.components.locomotor ~= nil then
+			inst.components.locomotor.walkspeed = TUNING.WILSON_WALK_SPEED / 1.2
+			inst.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED / 1.2
+		end
 	else
-		inst.components.locomotor.walkspeed = TUNING.WILSON_WALK_SPEED
-		inst.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED
-		print(inst.components.locomotor.walkspeed)
-		print(inst.components.locomotor.runspeed)
+		if inst.components.locomotor ~= nil then
+			inst.components.locomotor.walkspeed = TUNING.WILSON_WALK_SPEED
+			inst.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED
+		end
 	end
 end
 
