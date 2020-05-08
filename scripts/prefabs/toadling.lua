@@ -359,10 +359,10 @@ local function MakeMoose(nightmare)
     inst:AddComponent("grouptargeter")
 
     inst:AddComponent("groundpounder")
-    inst.components.groundpounder.destroyer = true
-    inst.components.groundpounder.damageRings = 2
+    inst.components.groundpounder.destroyer = false
+    inst.components.groundpounder.damageRings = 0
     inst.components.groundpounder.destructionRings = 1
-    inst.components.groundpounder.numRings = 2
+    inst.components.groundpounder.numRings = 1
 
     inst:AddComponent("inventory")
  
