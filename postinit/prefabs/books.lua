@@ -3,7 +3,7 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local function newtentacles(inst, reader)
 	local pt = reader:GetPosition()
-	local numtentacles = 3
+	local numtentacles = 4
 
 	reader.components.sanity:DoDelta(-TUNING.SANITY_HUGE)
 

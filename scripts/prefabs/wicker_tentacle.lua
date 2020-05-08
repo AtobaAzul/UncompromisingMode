@@ -27,7 +27,7 @@ local function retargetfn(inst)
                     guy:HasTag("animal"))
         end,
         { "_combat", "_health" },
-        { "prey","player","companion" })
+        { "prey","player","companion","abigail" })
 end
 
 local function shouldKeepTarget(inst, target)
