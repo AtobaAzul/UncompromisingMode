@@ -127,6 +127,8 @@ local function fn()
     inst:ListenForEvent("attacked", OnAttacked)
 	
 	inst.task = inst:DoTaskInTime(1, degenerate)
+	
+    inst.persists = false
 
     return inst
 end
