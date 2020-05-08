@@ -57,13 +57,9 @@ function Hayfever:OnUpdate(dt)
         else
             self.nextsneeze = self.nextsneeze -dt
         end        
-    elseif TheWorld.net:HasTag("queenbeekilled") then
-        if self.nextsneeze < 120 then
+    else
+        if self.nextsneeze < 10 then
             self.nextsneeze = self.nextsneeze + (dt*0.9)
-        end
-	else
-        if self.nextsneeze < 120 then
-            self.nextsneeze = self.nextsneeze-- + (dt*0.9)
         end
     end
     self.inst:PushEvent("updatepollen", {sneezetime = self.nextsneeze})  
