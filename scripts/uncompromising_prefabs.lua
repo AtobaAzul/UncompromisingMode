@@ -62,4 +62,5 @@ return {
 	"scorpion",
 	"vampirebat",
 	"icecreamsanityregenbuff",
+	"wicker_tentacle",
 }

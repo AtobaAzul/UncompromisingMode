@@ -62,6 +62,7 @@ local prefab_post = {
 	"lureplant",
 	"spiderden",
 	"stafflights",
+	"books",
 	--"rock_avocado_fruit_sprout_sapling",
 }
 
