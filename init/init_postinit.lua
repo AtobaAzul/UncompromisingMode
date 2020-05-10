@@ -64,6 +64,7 @@ local prefab_post = {
 	"stafflights",
 	"books",
 	"armor_ruins",
+	"penguin_ice",
 	--"rock_avocado_fruit_sprout_sapling",
 }
 
