@@ -21,10 +21,12 @@ local function speedcheck(inst)
 		if inst.components.locomotor ~= nil then
 			inst.components.locomotor:SetExternalSpeedMultiplier(inst, "ToroicIsMegaCool", 1 / inst._mightiness_scale)
 		end
+		inst:AddTag("fat_gang")
     else
 		if inst.components.locomotor ~= nil then
 			inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "ToroicIsMegaCool")
 		end
+		inst:RemoveTag("fat_gang")
     end
 end
 

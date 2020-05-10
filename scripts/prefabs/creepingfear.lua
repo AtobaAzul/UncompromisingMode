@@ -40,7 +40,9 @@ local function SpawnTentacles(inst, target)
             fx2.Transform:SetPosition(pt.x + offset.x, 0, pt.z + offset.z)
             --fx2.Transform:SetScale(1, 1, 1)
             tentacle.Transform:SetPosition(pt.x + offset.x, 0, pt.z + offset.z)
-            tentacle.components.combat:SetTarget(target)
+			if not target.components.inventory:EquipHasTag("shadowdominance") then
+				tentacle.components.combat:SetTarget(target)
+			end
             tentacle.components.combat:SetDefaultDamage(TUNING.DSTU.CREEPINGFEAR_DAMAGE * 0.50)
             tentacle.Transform:SetScale(1.2, 1.2, 1.2)
         end
@@ -66,7 +68,7 @@ local function SpikeWaves(inst, target)
                 inst.SoundEmitter:PlaySound("dontstarve/sanity/creature2/attack")
                 local ents = TheSim:FindEntities(dx, dy, dz, 1.2, nil, { "FX", "NOCLICK", "INLIMBO" })
                 for k,v in ipairs(ents) do
-                    if not target_index[v] and v ~= inst and inst.components.combat:IsValidTarget(v) and v.components.combat and ((v.components.sanity and v.components.sanity:IsInsane()) or v == target) then
+                    if not target_index[v] and v ~= inst and inst.components.combat:IsValidTarget(v) and v.components.combat and ((v.components.sanity and v.components.sanity:IsInsane()) or v == target) and not v.components.inventory:EquipHasTag("shadowdominance") then
                         target_index[v] = true
                         v.components.combat:GetAttacked(inst, TUNING.DSTU.CREEPINGFEAR_DAMAGE)
                     end
@@ -86,7 +88,7 @@ end
 local function CreepinFearTimer(inst)
     local target = inst.components.combat.target
     if inst.sp_atk_cd <= 0 and inst.components.combat:HasTarget() and not inst.sg:HasStateTag("busy") then
-        if target:IsValid() then
+        if target:IsValid() and not target.components.inventory:EquipHasTag("shadowdominance") then
             inst.sg:GoToState("taunt")
             local init_pos = inst:GetPosition()
             local target_pos = target:GetPosition()
@@ -100,6 +102,8 @@ local function CreepinFearTimer(inst)
                 inst:DoTaskInTime(1, function() SpawnTentacles(inst, target) end)
                 inst:DoTaskInTime(2, function() SpawnTentacles(inst, target) end)
             end
+            inst.sp_atk_cd = 20
+		else
             inst.sp_atk_cd = 20
         end
     end

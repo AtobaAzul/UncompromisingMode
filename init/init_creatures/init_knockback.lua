@@ -45,16 +45,16 @@ local GIANTS =
         radius = 75,
 		power = 1,
     },
-	--[[["minotaur"] =
+	["minotaur"] =
     {
         radius = 200,
-		power = 1,
+		power = 1.5,
     },
 	["rook"] =
     {
         radius = 150,
-		power = 0.75,
-    },]]
+		power = 1,
+    },
 	["krampus"] =
     {
         radius = 150,
@@ -71,9 +71,9 @@ local GIANTS =
 for k, v in pairs(GIANTS) do
 	AddPrefabPostInit(k, function(inst)
 		local function OnHitOther(inst, other)
-			if other ~= nil and other.components.inventory ~= nil and 
+			if other ~= nil and other.components.inventory ~= nil and not other:HasTag("fat_gang") and 
 			--Don't knockback if you wear marble
-			(other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ==nil or not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble")) then
+			(other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ==nil or not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
 				other:PushEvent("knockback", {knocker = inst, radius = v.radius, strengthmult = v.power})
 			end
 		end
