@@ -50,13 +50,6 @@ local function EnterPhase2Trigger(inst)
 	end
 end
 
-
-local function OnEntitySleep2(inst)
-	if TheWorld:HasTag("cave") then
-        inst:Remove()
-    end
-end
-
 local function OnSave(inst, data)
     data.enraged = inst.enraged or nil
 end
@@ -70,9 +63,6 @@ local function OnPreLoad(inst, data)
 end
 
 env.AddPrefabPostInit("deerclops", function(inst)
-	local function GetHeatFn(inst)
-		return -40
-	end
 	
 	if not IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then
 		inst.entity:AddLight()
@@ -89,17 +79,10 @@ env.AddPrefabPostInit("deerclops", function(inst)
 		return
 	end
 	
-	
-    inst:ListenForEvent("entitysleep", OnEntitySleep2)
-	
 	inst.OnSave = OnSave
     inst.OnPreLoad = OnPreLoad
 	
 	inst:RemoveComponent("freezable")
-	
-	inst:AddComponent("heater")
-    inst.components.heater.heatfn = GetHeatFn
-    inst.components.heater:SetThermics(false, true)
 	
 	inst:AddComponent("healthtrigger")
     inst.components.healthtrigger:AddTrigger(PHASE2_HEALTH, EnterPhase2Trigger)
