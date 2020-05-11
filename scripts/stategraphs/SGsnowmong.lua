@@ -1,5 +1,9 @@
 require("stategraphs/commonstates")
 
+local actionhandlers =
+{
+}
+
 local events =
 {
     CommonHandlers.OnSleep(),

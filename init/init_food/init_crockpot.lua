@@ -153,7 +153,7 @@ recipes.waffles.test = function(cooker, names, tags) return names.butter and (na
 recipes.powcake.test = function(cooker, names, tags) return names.twigs and names.honey and (names.corn or names.corn_cooked) and UncompromisingFillers(tags) and MonsterMeatSupport(tags) end 
 -- Original:    test = function(cooker, names, tags) return names.twigs and names.honey and (names.corn or names.corn_cooked) end,
 
-recipes.unagi.test = function(cooker, names, tags) return names.cutlichen and (names.eel or names.eel_cooked) and UncompromisingFillers(tags and MonsterMeatSupport(tags)) end 
+--recipes.unagi.test = function(cooker, names, tags) return names.cutlichen and (names.eel or names.eel_cooked) and UncompromisingFillers(tags and MonsterMeatSupport(tags)) end 
 -- Original:  test = function(cooker, names, tags) return names.cutlichen and (names.eel or names.eel_cooked) end,
 
 --recipes.wetgoop.test = function(cooker, names, tags) return true end 
