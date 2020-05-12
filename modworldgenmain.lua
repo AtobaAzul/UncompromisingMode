@@ -21,6 +21,14 @@ room.contents.countprefabs=
 									{
 										trapdoor = function() return math.random(2,4) end,} --returned number for whole area should be multiplied between 2-4 due to multiple rooms
 end)
+
+--[[
+("BarePlain", function(room)						If you want it to effect the desert area, uncomment this
+room.contents.countprefabs=
+									{
+										trapdoor = function() return math.random(2,4) end,} --returned number for whole area should be multiplied between 2-4 due to multiple rooms
+end)
+--]]
 --[[
 	if GLOBAL.terrain.rooms.LightningBluffAntlion then
 		GLOBAL.terrain.rooms.LightningBluffAntlion.contents.distributeprefabs.sandhill = 0.4
