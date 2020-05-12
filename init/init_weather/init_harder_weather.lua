@@ -97,6 +97,7 @@ env.AddPrefabPostInit("forest", function(inst)
 	
 	inst:AddComponent("gmoosespawner")
 	
+			--inst:AddComponent("mock_dragonflyspawner")
 	inst:ListenForEvent("seasontick", OnSeasonTick)
 	
 	inst:AddComponent("scorpionspawner")
