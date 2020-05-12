@@ -37,6 +37,9 @@ local function OnIgniteFn(inst)
         end
     end
 	
+	
+	MakeSmallPropagator(inst)
+	
 end
 
 env.AddPrefabPostInit("willow", function(inst)
