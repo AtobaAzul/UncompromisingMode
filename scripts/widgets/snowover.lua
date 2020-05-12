@@ -55,7 +55,7 @@ if owner ~= nil then
 	
 	--self:SnowOn()
 end
-print("SNOW OVER CREATE")
+--print("SNOW OVER CREATE")
 end)
 
 --[[

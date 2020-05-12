@@ -5,6 +5,7 @@ local function DefaultIgniteFn(inst)
     if inst.components.burnable ~= nil then
         inst.components.burnable:StartWildfire()
     end
+	MakeSmallPropagator(inst)
 end
 
 env.AddPrefabPostInit("wormwood", function(inst)
