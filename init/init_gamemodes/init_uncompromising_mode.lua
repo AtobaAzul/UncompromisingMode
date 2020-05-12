@@ -72,6 +72,7 @@ local require = GLOBAL.require
 		modimport("init/init_food/init_food_changes")
 		modimport("init/init_food/init_bird_changes")
 		modimport("init/init_food/init_rare_foods")
+		modimport("init/init_food/init_disableregrowth")
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
@@ -94,6 +95,7 @@ local require = GLOBAL.require
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_shadows") == true) then
 		modimport("init/init_creatures/init_harder_shadows")
+		--modimport("init/init_creatures/init_shadowspawner")
 		modimport("postinit/prefabs/shadowcreature")
 		modimport("postinit/stategraphs/SGshadowcreature")
 	end

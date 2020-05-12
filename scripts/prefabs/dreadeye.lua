@@ -166,7 +166,6 @@ end
 
 local function ShadowEyeSpawn(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
-	local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, 50, nil, NOTAGS, { "player" })
 	
 	for i, v in ipairs(ents) do
@@ -394,7 +393,7 @@ local function shadowdisguise_fn(bank, build, anim, icon, tag, multcolour)
     inst.components.inspectable.nameoverride = "ROCK"--]]
     MakeSnowCovered(inst)
 	
-	inst:DoTaskInTime(20, function() 
+	inst:DoTaskInTime(15, function() 
 	SpawnPrefab("shadow_puff").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	inst.SoundEmitter:PlaySound("dontstarve/maxwell/disappear")
 	SpawnPrefab("shadow_puff_large_back").Transform:SetPosition(inst.Transform:GetWorldPosition())

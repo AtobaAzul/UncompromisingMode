@@ -55,6 +55,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.PLAGUEMASK = "I'm like a phoenix!"
 	DESCRIBE.SPIDER_TRAPDOOR = "I like you better underneath a rock."
 	DESCRIBE.TRAPDOOR = "It's just a rock."
+	DESCRIBE.WICKER_TENTACLE = "Now they look extra gross!"
 
 	DESCRIBE.BUSHCRAB = "Should have burned it down... always should have burned it down!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

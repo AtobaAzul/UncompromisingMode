@@ -359,6 +359,5 @@ local states =
 
 	},
 }
-CommonStates.AddFrozenStates(states)
 
 return StateGraph("snowmong", states, events, "idle", actionhandlers)

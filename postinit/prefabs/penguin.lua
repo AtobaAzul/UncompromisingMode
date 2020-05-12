@@ -51,24 +51,56 @@ local function MakeTeam(inst, attacker)
 --print("<<<<<<<>>>>>")
 end
 
-local function MutatedRetarget(inst)
-    local newtarget = FindEntity(inst, 4, function(guy)
-            return inst.components.combat:CanTarget(guy)
-            end,
-            nil,
-            {"penguin","penguin_protection","the_mime"},
-            {"character","monster","wall"}
-            )
+local function NewRetarget(inst)
 
-    local ta = inst.components.teamattacker
-    if newtarget and ta and not ta.inteam and not ta:SearchForTeam() then
-        --print("===============================MakeTeam on Retarget")
-        MakeTeam(inst, newtarget)
-    end
+local icepuddle = FindEntity(inst, 15, nil, { "penguin_ice_puddle" })
 
-    if ta.inteam and not ta.teamleader:CanAttack() then
-        return newtarget
-    end
+	if icepuddle ~= nil then
+	
+		local newtarget = FindEntity(inst, 4, function(guy)
+				return inst.components.combat:CanTarget(guy)
+				end,
+				nil,
+				{"penguin","penguin_protection","the_mime"},
+				{"character","monster","wall"}
+				)
+
+		local ta = inst.components.teamattacker
+		if newtarget and ta and not ta.inteam and not ta:SearchForTeam() then
+			--print("===============================MakeTeam on Retarget")
+			MakeTeam(inst, newtarget)
+		end
+
+		if ta.inteam and not ta.teamleader:CanAttack() then
+			return newtarget
+		end
+		
+	else
+	
+		local ta = inst.components.teamattacker
+
+		if inst.components.hunger and not inst.components.hunger:IsStarving() then
+			return nil
+		end
+
+		local newtarget = FindEntity(inst, 3, function(guy)
+				return inst.components.combat:CanTarget(guy)
+				end,
+				nil,
+				{"penguin"},
+				{"character","monster","wall"}
+				)
+
+		if newtarget and ta and not ta.inteam and not ta:SearchForTeam() then
+			--print("===============================MakeTeam on Retarget")
+			MakeTeam(inst, newtarget)
+		end
+
+		if ta.inteam and not ta.teamleader:CanAttack() then
+			return newtarget
+		end
+		
+	end
 
 end
 
@@ -83,7 +115,7 @@ env.AddPrefabPostInit("penguin", function(inst)
 		inst.components.halloweenmoonmutable:SetOnMutateFn(OnMoonMutate)
 	end
 	
-    inst.components.combat:SetRetargetFunction(2, MutatedRetarget)
+    inst.components.combat:SetRetargetFunction(2, NewRetarget)
 	
 	inst:WatchWorldState("isfullmoon", OnFullMoon)
 	OnFullMoon(inst, TheWorld.state.isfullmoon)

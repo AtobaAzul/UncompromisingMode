@@ -30,7 +30,7 @@ function Hayfever:CanSneeze()
     local ents = TheSim:FindEntities(x, y, z, 30, {"prevents_hayfever"})
     local suppressorNearby = (#ents > 0)
 --]]
-    if self.inst:HasTag("playerghost") or self.inst:HasTag("has_gasmask") or self.inst:HasTag("has_hayfeverhat") or self.inst:HasTag("minifansuppressor") or self.inst:HasTag("wereplayer") or TheWorld.net:HasTag("queenbeekilled") or self.inst:HasTag("plantkin") then -- or suppressorNearby
+    if self.inst:HasTag("playerghost") or self.inst:HasTag("has_gasmask") or self.inst:HasTag("has_hayfeverhat") or self.inst:HasTag("minifansuppressor") or self.inst:HasTag("wereplayer") or TheWorld.net:HasTag("queenbeekilled") or self.inst:HasTag("plantkin") or self.inst.sg:HasStateTag("sleeping") then -- or suppressorNearby
         can = false
     end
 
@@ -57,13 +57,9 @@ function Hayfever:OnUpdate(dt)
         else
             self.nextsneeze = self.nextsneeze -dt
         end        
-    elseif TheWorld.net:HasTag("queenbeekilled") then
-        if self.nextsneeze < 120 then
+    else
+        if self.nextsneeze < 10 then
             self.nextsneeze = self.nextsneeze + (dt*0.9)
-        end
-	else
-        if self.nextsneeze < 120 then
-            self.nextsneeze = self.nextsneeze-- + (dt*0.9)
         end
     end
     self.inst:PushEvent("updatepollen", {sneezetime = self.nextsneeze})  

@@ -1,7 +1,7 @@
 -----------------------------------------------------------------
 -- Wolfgang scaredy cat bonus is increased significantly
 -----------------------------------------------------------------
-local function speedcheck(inst)
+--[[local function speedcheck(inst)
 	if inst.strength == "mighty" then
 		if inst.components.locomotor ~= nil then
 			inst.components.locomotor.walkspeed = TUNING.WILSON_WALK_SPEED / 1.2
@@ -13,6 +13,21 @@ local function speedcheck(inst)
 			inst.components.locomotor.runspeed = TUNING.WILSON_RUN_SPEED
 		end
 	end
+end
+--]]
+
+local function speedcheck(inst)
+    if inst.strength == "mighty" then
+		if inst.components.locomotor ~= nil then
+			inst.components.locomotor:SetExternalSpeedMultiplier(inst, "ToroicIsMegaCool", 1 / inst._mightiness_scale)
+		end
+		inst:AddTag("fat_gang")
+    else
+		if inst.components.locomotor ~= nil then
+			inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "ToroicIsMegaCool")
+		end
+		inst:RemoveTag("fat_gang")
+    end
 end
 
 AddPrefabPostInit("wolfgang", function(inst)

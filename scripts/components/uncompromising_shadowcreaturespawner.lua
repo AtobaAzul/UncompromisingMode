@@ -88,6 +88,10 @@ UpdateSpawn = function(player, params)
                 spawndrifter = false
             end
         end
+		
+		if player.components.inventory:EquipHasTag("shadowdominance") then
+			spawndrifter = false
+		end
 
         local angle = math.random() * 2 * PI
         x = x + (15 + math.random() *5) * math.cos(angle)

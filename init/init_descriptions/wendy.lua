@@ -54,7 +54,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.RAT_TAIL = "It contains an acolyte of death."
 	DESCRIBE.PLAGUEMASK = "Like a crow, a plague doctor is attracted to death."
 	DESCRIBE.SPIDER_TRAPDOOR = "Is it the prey, or am I?"
-	DESCRIBE.TRAPDOOR = "A hill to trip over."
+	DESCRIBE.TRAPDOOR = "A hill to die on."
+	DESCRIBE.WICKER_TENTACLE = "This one is near the end of its life."
 
 	DESCRIBE.BUSHCRAB = "Another cruel joke from mother nature."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

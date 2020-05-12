@@ -56,7 +56,7 @@ TUNING.DSTU =
 	----------------------------------------------------------------------------
     --Winter Fire spreading
     ----------------------------------------------------------------------------
-	WINTER_FIRE_MOD = 0.34,
+	WINTER_FIRE_MOD = 0.7,
     ----------------------------------------------------------------------------
     --Acid rain event tuning
     ----------------------------------------------------------------------------
@@ -179,7 +179,7 @@ TUNING.DSTU =
     CREEPINGFEAR_DAMAGE = 60,
     CREEPINGFEAR_ATTACK_PERIOD = 2.3,
     CREEPINGFEAR_RANGE_1 = 3.0,
-    CREEPINGFEAR_RANGE_2 = 4.2,
+    CREEPINGFEAR_RANGE_2 = 4.0, --4.2,
     CREEPINGFEAR_SPAWN_THRESH = 0, -- 10%
 
     DREADEYE_SPEED = 7,
