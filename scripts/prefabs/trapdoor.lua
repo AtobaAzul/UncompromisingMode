@@ -7,7 +7,12 @@ local assets =
 {
 }
 
-
+SetSharedLootTable( 'trapdoor',
+{
+    {'rocks',       1.00},
+    {'rocks',       1.00},
+    {'rocks',       1.00},
+})
 
 
 
@@ -100,14 +105,21 @@ local target = FindEntity(inst, 3*TUNING.LEIF_MAXSPAWNDIST, amempty, { "trapdoor
 	end
 end
 
-
+local function workcallback(inst, worker, workleft)
+    if workleft <= 0 then
+        local pos = inst:GetPosition()
+        SpawnPrefab("rock_break_fx").Transform:SetPosition(pos:Get())
+        inst.components.lootdropper:DropLoot(pos)
+        inst:Remove()
+    end
+end
 
 local function fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
+    --inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
 
@@ -121,7 +133,7 @@ local function fn()
     inst:AddTag("hive")
     inst:AddTag("WORM_DANGER")
 	inst:AddTag("trapdoor")
-	inst:AddTag("CLASSIFIED")
+	--inst:AddTag("CLASSIFIED")
     MakeSnowCoveredPristine(inst)
 
     inst.entity:SetPristine()
@@ -171,7 +183,13 @@ local function fn()
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_MEDIUM)
     inst.components.hauntable:SetOnHauntFn(OnHaunt)
-	
+	inst:AddComponent("lootdropper")
+	inst.components.lootdropper:SetChanceLootTable('trapdoor')
+	inst:AddComponent("workable")
+    inst.components.workable:SetWorkAction(ACTIONS.MINE)
+    inst.components.workable:SetWorkLeft(TUNING.ROCKS_MINE)
+
+    inst.components.workable:SetOnWorkCallback(workcallback)
 	
     return inst
 end
