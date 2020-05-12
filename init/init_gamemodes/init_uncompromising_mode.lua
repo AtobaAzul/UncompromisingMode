@@ -72,6 +72,7 @@ local require = GLOBAL.require
 		modimport("init/init_food/init_food_changes")
 		modimport("init/init_food/init_bird_changes")
 		modimport("init/init_food/init_rare_foods")
+		modimport("init/init_food/init_disableregrowth")
 	end
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or

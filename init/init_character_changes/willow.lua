@@ -8,7 +8,7 @@ local function OnIgniteFn(inst)
     inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
 	
 	local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 4, nil, { "INLIMBO" })
+    local ents = TheSim:FindEntities(x, y, z, 4, nil, { "INLIMBO", "player", "abigail" })
 
     for i, v in ipairs(ents) do
         if v ~= inst and v:IsValid() and not v:IsInLimbo() then
