@@ -216,7 +216,7 @@ recipes.surfnturf.test = function(cooker, names, tags) return tags.meat and tags
 recipes.lobsterbisque.test = function(cooker, names, tags) return names.wobster_sheller_land and tags.frozen and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) and MonsterMeatSupport(tags) end
 -- Original:         test = function(cooker, names, tags) return tags.meat and tags.meat >= 2.5 and tags.fish and tags.fish >= 1.5 and not tags.frozen end
 
-recipes.lobsterdinner.test = function(cooker, names, tags) return names.wobster_sheller_land and names.wobster_sheller_land > 1 and names.butter and (tags.meat == 1.0) and (tags.fish == 1.0) and not tags.frozen and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) and MonsterMeatSupport(tags) end
+recipes.lobsterdinner.test = function(cooker, names, tags) return names.wobster_sheller_land and names.wobster_sheller_land > 1 and names.butter and (tags.meat == 2.0) and (tags.fish == 2.0) and not tags.frozen and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) and MonsterMeatSupport(tags) end
 -- Original:         test =  function(cooker, names, tags) return names.wobster_sheller_land and names.butter and (tags.meat == 1.0) and (tags.fish == 1.0) and not tags.frozen end
 
 -- WARLY recipes
