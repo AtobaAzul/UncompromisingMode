@@ -5,6 +5,7 @@
 
 ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.GENERIC
 DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
+ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 
 --	[ 		Wilson Descriptions		]   --
 
@@ -75,8 +76,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE
 	DESCRIBE.TRAPDOOR = "Nothing out of the ordinary here."
 	DESCRIBE.SHROOM_SKIN_FRAGMENT = "It's small, but the stench is still a punch in the face."
 	DESCRIBE.AIR_CONDITIONER = "Smells great!"
-
---	[ 		Recipe Descriptions		]   --
+	
+	ACTIONFAIL.READ =
+        {
+            GENERIC = "It seems the magic is inert in this state.",
+        }
 
 RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 
