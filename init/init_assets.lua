@@ -100,6 +100,9 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/air_conditioner.xml"),
 	Asset("ANIM", "anim/scorpion_basic.zip"),
 	Asset("ANIM", "anim/scorpion_build.zip"),
+	Asset("ANIM", "anim/scorpion_new.zip"),
+	
 	Asset("ANIM", "anim/bat_vamp_build.zip"),
 	Asset("ANIM", "anim/bat_vamp_shadow.zip"),
+	
 }

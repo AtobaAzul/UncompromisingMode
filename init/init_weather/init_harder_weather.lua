@@ -100,4 +100,5 @@ env.AddPrefabPostInit("forest", function(inst)
 	
 	inst:ListenForEvent("seasontick", OnSeasonTick)
 	
+	inst:AddComponent("scorpionspawner")
 end)

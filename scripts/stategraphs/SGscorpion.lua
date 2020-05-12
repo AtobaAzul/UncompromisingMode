@@ -570,7 +570,33 @@ local states=
 
 
     },
-    
+    State{
+        name = "enterdig",
+        tags = {"busy"},
+        
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("appear")
+            --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/taunt")
+			--local x, y, z = inst.Transform:GetWorldPosition()
+			--SpawnPrefab("sand_puff").Transform:SetPosition(x,y,z)
+        end,
+        timeline =
+        {
+            TimeEvent(3*FRAMES, function(inst) 
+            	local x, y, z = inst.Transform:GetWorldPosition()
+				SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)end),
+
+            TimeEvent(6*FRAMES, function(inst) 
+			local x, y, z = inst.Transform:GetWorldPosition()
+				SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)end),
+          
+        },
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("taunt") end),
+        },
+    },  
 }
 
 CommonStates.AddSleepStates(states,

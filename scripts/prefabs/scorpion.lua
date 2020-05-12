@@ -15,6 +15,7 @@ local prefabs =
     "monstersmallmeat",
     --"venomgland",
     "stinger",
+	"sand_puff",
 }
 
 SetSharedLootTable( 'scorpion',
