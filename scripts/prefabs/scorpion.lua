@@ -138,7 +138,12 @@ local function OnHitOther(inst, data)
         end
     end
 end
-
+local function WhenDusk(inst)
+inst:AddTag("notactuallydead")
+if inst.components.health ~= nil then
+inst.components.health:Kill()
+end
+end
 local function fn(Sim)
 	local inst = CreateEntity()
 
@@ -238,7 +243,7 @@ local shadow = inst.entity:AddDynamicShadow()
     inst:SetBrain(brain)  
     inst:ListenForEvent("attacked", OnAttacked)
 	inst:ListenForEvent("onhitother", OnHitOther)
-
+	inst:WatchWorldState("isdusk", WhenDusk)
 
     return inst
 end

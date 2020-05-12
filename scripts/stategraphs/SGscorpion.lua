@@ -68,10 +68,17 @@ local states=
         
         onenter = function(inst)
             --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/death")
+			inst.Physics:Stop()
+			RemovePhysicsColliders(inst) 
+			if inst:HasTag("notactuallydead") then
+			inst.AnimState:PlayAnimation("idle")
+			local x, y, z = inst.Transform:GetWorldPosition()
+			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
+			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
+			else
             inst.AnimState:PlayAnimation("death")
-            inst.Physics:Stop()
-            RemovePhysicsColliders(inst)            
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))            
+            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition())) 
+			end
         end,
 
     },    

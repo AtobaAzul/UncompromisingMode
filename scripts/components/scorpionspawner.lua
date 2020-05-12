@@ -22,7 +22,7 @@ local _frogs = {}
 local _frogcap = 10
 local _spawntime = TUNING.FROG_RAIN_DELAY
 local _updating = false
-local _checktime = 5
+local _checktime = 40
 local _chance = TUNING.FROG_RAIN_CHANCE
 local _localfrogs = {
     min = TUNING.FROG_RAIN_LOCAL_MIN,
@@ -45,7 +45,7 @@ local function GetSpawnPoint(pt)
     end
 
     local theta = math.random() * 2 * PI
-    local radius = math.random() * TUNING.FROG_RAIN_SPAWN_RADIUS
+    local radius = math.random() * TUNING.FROG_RAIN_SPAWN_RADIUS/3
     local resultoffset = FindValidPositionByFan(theta, radius, 12, TestSpawnPoint)
 
     if resultoffset ~= nil then
@@ -65,6 +65,7 @@ local function SpawnFrog(spawn_point)
 end
 
 local function SpawnFrogForPlayer(player, reschedule)
+	if (not TheWorld.state.iswinter) and TheWorld.state.isday then
     local pt = player:GetPosition()
 	local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, TUNING.FROG_RAIN_MAX_RADIUS, { "frog" })
 	if GetTableSize(_frogs) < TUNING.FROG_RAIN_MAX and #ents < _frogcap then
@@ -76,13 +77,14 @@ local function SpawnFrogForPlayer(player, reschedule)
 	end
     _scheduledtasks[player] = nil
     reschedule(player)
+	end
 end
 
 local function ScheduleSpawn(player, initialspawn)
     if _scheduledtasks[player] == nil and _spawntime ~= nil then
         local lowerbound = _spawntime.min
         local upperbound = _spawntime.max
-        _scheduledtasks[player] = player:DoTaskInTime(GetRandomMinMax(lowerbound, upperbound), SpawnFrogForPlayer, ScheduleSpawn)
+        _scheduledtasks[player] = player:DoTaskInTime(20+math.random()*10, SpawnFrogForPlayer, ScheduleSpawn)
     end
 end
 
@@ -94,7 +96,7 @@ local function CancelSpawn(player)
 end
 
 local function ToggleUpdate(force)
-    if not _worldstate.iswinter then
+    --if (not _worldstate.iswinter) and TheWorld.state.isday then
         if not _updating then
             _updating = true
             for i, v in ipairs(_activeplayers) do
@@ -106,12 +108,6 @@ local function ToggleUpdate(force)
                 ScheduleSpawn(v, true)
             end
         end
-    elseif _updating then
-        _updating = false
-        for i, v in ipairs(_activeplayers) do
-            CancelSpawn(v)
-        end
-    end
 end
 
 local function AutoRemoveTarget(inst, target)
@@ -140,9 +136,9 @@ local function OnPlayerJoined(src, player)
         end
     end
     table.insert(_activeplayers, player)
-    if _updating then
+    --if _updating then
         ScheduleSpawn(player, true)
-    end
+    --end
 end
 
 local function OnPlayerLeft(src, player)
@@ -155,17 +151,6 @@ local function OnPlayerLeft(src, player)
     end
 end
 
-local function OnSetChance(src, chance)
-    _chance = chance
-end
-
-local function OnSetLocalMax(src, maxtable)
-    _localfrogs = maxtable
-end
-
-local function OnTargetSleep(target)
-    inst:DoTaskInTime(0, AutoRemoveTarget, target)
-end
 
 --------------------------------------------------------------------------
 --[[ Initialization ]]
@@ -182,10 +167,7 @@ inst:WatchWorldState("israining", OnIsRaining)
 inst:ListenForEvent("ms_playerjoined", OnPlayerJoined, TheWorld)
 inst:ListenForEvent("ms_playerleft", OnPlayerLeft, TheWorld)
 
-inst:ListenForEvent("ms_setfrograinchance", OnSetChance, TheWorld)
-inst:ListenForEvent("ms_setfrograinlocalfrogs", OnSetLocalMax, TheWorld)
-self.inst:DoTaskInTime(_checktime / math.max(#_activeplayers,1), function() ToggleUpdate() end)
-
+ToggleUpdate()
 
 
 --------------------------------------------------------------------------
