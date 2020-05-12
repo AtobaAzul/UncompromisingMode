@@ -140,16 +140,26 @@ end)
 
 --]]
 -----------------------------------------------------------------
---Bishop will now run away from player between attacks -Axe
+--Clockworks will no longer panic while on fire or take damage -Axe
 -----------------------------------------------------------------
---TODO: Change stun threshold to be tighter
-local function Bishrun(brain)
-    kite =     GLOBAL.WhileNode( function() return brain.inst.components.combat.target and brain.inst.components.combat:InCooldown() end, "Dodge",
-                    GLOBAL.RunAway(brain.inst, function() return brain.inst.components.combat.target end, 5, 8) )
-    table.insert(brain.bt.root.children, 1, kite)
-end
-AddBrainPostInit("bishopbrain", Bishrun)
-
+AddPrefabPostInit("bishop", function(inst)
+inst:RemoveComponent("burnable")
+end)
+AddPrefabPostInit("knight", function(inst)
+inst:RemoveComponent("burnable")
+end)
+AddPrefabPostInit("rook", function(inst)
+inst:RemoveComponent("burnable")
+end)
+AddPrefabPostInit("bishop_nightmare", function(inst)
+inst:RemoveComponent("burnable")
+end)
+AddPrefabPostInit("knight_nightmare", function(inst)
+inst:RemoveComponent("burnable")
+end)
+AddPrefabPostInit("rook_nightmare", function(inst)
+inst:RemoveComponent("burnable")
+end)
 -----------------------------------------------------------------
 --Pig guards now target walls
 --Relevant: pigman.lua, GuardRetargetFn, GuardKeepTargetFn
