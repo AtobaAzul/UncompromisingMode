@@ -112,7 +112,7 @@ local function snowpilefn(Sim)
     end
 	
     inst.SoundEmitter:PlaySound("dontstarve/sanity/shadowhand_creep", "creeping")
-	inst:DoTaskInTime(2.1, CancelCreepingSound)
+	inst:DoTaskInTime(1.5, CancelCreepingSound)
 	--[[
 	local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, 15, nil, nil, { "shadow_eye" })
