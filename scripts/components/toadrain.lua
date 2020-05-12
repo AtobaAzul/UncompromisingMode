@@ -20,7 +20,7 @@ local _worldstate = TheWorld.state
 local _map = TheWorld.Map
 local _frogs = {}
 local _frogcap = 0
-local _spawntime = TUNING.FROG_RAIN_DELAY
+local _spawntime = TUNING.DSTU.TOAD_RAIN_DELAY
 local _updating = false
 
 local _chance = TUNING.FROG_RAIN_CHANCE
@@ -246,7 +246,7 @@ end
 
 function self:OnLoad(data)
     _frogcap = data.frogcap or 0
-    _spawntime = data.spawntime or TUNING.FROG_RAIN_DELAY
+    _spawntime = data.spawntime or TUNING.DSTU.TOAD_RAIN_DELAY
     _chance = data.chance or TUNING.FROG_RAIN_CHANCE
     _localfrogs = data.localfrogs or {min=TUNING.FROG_RAIN_LOCAL_MIN, max=TUNING.FROG_RAIN_LOCAL_MAX}
 
