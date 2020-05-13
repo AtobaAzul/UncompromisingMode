@@ -65,4 +65,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.SPOREPACK = "It masks my scent!"
 	DESCRIBE.SALTPACK = "It clears the battlefield!"
 	DESCRIBE.SCORPION = "Your pointy tail is no match for me!"
-	DESCRIBE.HUMANMEAT_DRIED = "A... spoil of... war..."
+	DESCRIBE.SKELETONMEAT = "A... spoil of... war..."

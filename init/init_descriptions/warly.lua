@@ -65,4 +65,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.SPOREPACK = "Absolutely not."
 	DESCRIBE.SALTPACK = "Would anyone mind if I use this salt?"
 	DESCRIBE.SCORPION = "Fried scorpion? Too dangerous."
-	DESCRIBE.HUMANMEAT_DRIED = "Some dishes probably shouldn't be made."
+	DESCRIBE.SKELETONMEAT = "Some dishes probably shouldn't be made."

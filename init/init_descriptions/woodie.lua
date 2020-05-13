@@ -65,4 +65,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.SPOREPACK = "That offends the nostrils."
 	DESCRIBE.SALTPACK = "This pack would've been useful back in Canada, eh?"
 	DESCRIBE.SCORPION = "Keep out of my boots."
-	DESCRIBE.HUMANMEAT_DRIED = "Don't hurl, don't hurl, don't hurl..."
+	DESCRIBE.SKELETONMEAT = "Don't hurl, don't hurl, don't hurl..."

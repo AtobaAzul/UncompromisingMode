@@ -65,4 +65,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.SPOREPACK = "The smell is nothing fire can't handle!"
 	DESCRIBE.SALTPACK = "I still hate Winter."
 	DESCRIBE.SCORPION = "Ugh, gross!"
-	DESCRIBE.HUMANMEAT_DRIED = "I'm gonna vomit..."
+	DESCRIBE.SKELETONMEAT = "I'm gonna vomit..."

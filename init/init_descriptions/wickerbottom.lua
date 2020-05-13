@@ -66,7 +66,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.SPOREPACK = "A large sack made from toad skin. It's scent is far from lovely."
 	DESCRIBE.SALTPACK = "The device releases sodium chloride into the atmosphere."
 	DESCRIBE.SCORPION = "Scorpiones. It's a desert species of some sort."
-	DESCRIBE.HUMANMEAT_DRIED = "Oh my goodness!"
+	DESCRIBE.SKELETONMEAT = "Oh my goodness!"
 	ACTIONFAIL.READ =
         {
             GENERIC = "I cannot concentrate under these conditions!",
