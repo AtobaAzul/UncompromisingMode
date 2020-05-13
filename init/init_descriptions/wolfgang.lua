@@ -65,4 +65,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.SPOREPACK = "Did Wolfgang fart?"
 	DESCRIBE.SALTPACK = "Wolfgang is stronger than snow!"
 	DESCRIBE.SCORPION = "Stay away from Wolfgang!"
-	DESCRIBE.HUMANMEAT_DRIED = "Is... Person...?"
+	DESCRIBE.SKELETONMEAT = "Is... Person...?"

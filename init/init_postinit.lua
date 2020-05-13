@@ -47,7 +47,6 @@ local prefab_post = {
 	--"shadowcreature",
 	"berrybush",
 	--"papyrus",
-	"humanmeat_dried",
 	"sporecloud",
 	"bat",
 	"featherhat",

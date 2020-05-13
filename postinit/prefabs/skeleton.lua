@@ -7,7 +7,7 @@ env.AddPrefabPostInit("skeleton", function(inst)
 		return
 	end
 	
-    inst.components.lootdropper:AddRandomLoot("humanmeat_dried", 1)
+    inst.components.lootdropper:AddRandomLoot("skeletonmeat", 1)
     inst.components.lootdropper.numrandomloot = 1
 end)
 
@@ -16,6 +16,6 @@ env.AddPrefabPostInit("skeleton_player", function(inst)
 		return
 	end
 	
-    inst.components.lootdropper:AddRandomLoot("humanmeat_dried", 1)
+    inst.components.lootdropper:AddRandomLoot("skeletonmeat", 1)
     inst.components.lootdropper.numrandomloot = 1
 end)

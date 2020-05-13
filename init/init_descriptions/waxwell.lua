@@ -67,4 +67,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.SPOREPACK = "That's revolting! I don't care how big it is!"
 	DESCRIBE.SALTPACK = "I'm not one for chores."
 	DESCRIBE.SCORPION = "You'll not be stinging me."
-	DESCRIBE.HUMANMEAT_DRIED = "I would rather die!"
+	DESCRIBE.SKELETONMEAT = "I would rather die!"

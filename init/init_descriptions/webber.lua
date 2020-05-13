@@ -65,4 +65,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.SPOREPACK = "We need a bubble bath after wearing it!"
 	DESCRIBE.SALTPACK = "We kinda want to play in the snow, though."
 	DESCRIBE.SCORPION = "Hello, fellow arachnid."
-	DESCRIBE.HUMANMEAT_DRIED = "I haven't seen my own skin in... forever!"
+	DESCRIBE.SKELETONMEAT = "I haven't seen my own skin in... forever!"

@@ -77,7 +77,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.SHROOM_SKIN_FRAGMENT = "It's small, but the stench is still a punch in the face."
 	DESCRIBE.AIR_CONDITIONER = "Smells great!"
 	DESCRIBE.SCORPION = "That better not be venomous."
-	DESCRIBE.HUMANMEAT_DRIED = "Flesh is flesh. Where do I draw the line?"
+	DESCRIBE.SKELETONMEAT = "Flesh is flesh. Where do I draw the line?"
 	ACTIONFAIL.READ =
         {
             GENERIC = "It seems the magic is inert in this state.",

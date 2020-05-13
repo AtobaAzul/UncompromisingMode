@@ -65,4 +65,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.SPOREPACK = "It is very rude, and rots your food!"
 	DESCRIBE.SALTPACK = "I can now frolic through the snow in peace!"
 	DESCRIBE.SCORPION = "It crawls, creeps, and makes you sleep!"
-	DESCRIBE.HUMANMEAT_DRIED = "I don't care how sweet the meat tastes, I don't like mortal food!"
+	DESCRIBE.SKELETONMEAT = "I don't care how sweet the meat tastes, I don't like mortal food!"
