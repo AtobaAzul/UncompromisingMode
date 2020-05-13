@@ -64,3 +64,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.AIR_CONDITIONER = "It makes both of our lungs feel good!"
 	DESCRIBE.SPOREPACK = "We need a bubble bath after wearing it!"
 	DESCRIBE.SALTPACK = "We kinda want to play in the snow, though."
+	DESCRIBE.SCORPION = "Hello, fellow arachnid."
+	DESCRIBE.HUMANMEAT_DRIED = "I haven't seen my own skin in... forever!"

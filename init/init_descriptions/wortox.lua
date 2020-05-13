@@ -64,3 +64,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.AIR_CONDITIONER = "I could fill it with pepper! Hyuyu!"
 	DESCRIBE.SPOREPACK = "It is very rude, and rots your food!"
 	DESCRIBE.SALTPACK = "I can now frolic through the snow in peace!"
+	DESCRIBE.SCORPION = "It crawls, creeps, and makes you sleep!"
+	DESCRIBE.HUMANMEAT_DRIED = "I don't care how sweet the meat tastes, I don't like mortal food!"

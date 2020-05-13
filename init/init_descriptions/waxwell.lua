@@ -66,3 +66,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.AIR_CONDITIONER = "Now THIS is a machine I can get used to!"
 	DESCRIBE.SPOREPACK = "That's revolting! I don't care how big it is!"
 	DESCRIBE.SALTPACK = "I'm not one for chores."
+	DESCRIBE.SCORPION = "You'll not be stinging me."
+	DESCRIBE.HUMANMEAT_DRIED = "I would rather die!"
