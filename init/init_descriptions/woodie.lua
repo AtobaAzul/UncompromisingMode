@@ -64,3 +64,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.AIR_CONDITIONER = "This is a nice change of scent, eh?"
 	DESCRIBE.SPOREPACK = "That offends the nostrils."
 	DESCRIBE.SALTPACK = "This pack would've been useful back in Canada, eh?"
+	DESCRIBE.HUMANMEAT_DRIED = "That just ain't right!"

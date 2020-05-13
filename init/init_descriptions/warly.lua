@@ -64,3 +64,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.AIR_CONDITIONER = "Aah, my lungs are clear!"
 	DESCRIBE.SPOREPACK = "Absolutely not."
 	DESCRIBE.SALTPACK = "Would anyone mind if I use this salt?"
+	DESCRIBE.HUMANMEAT_DRIED = "Some dishes probably shouldn't be made."

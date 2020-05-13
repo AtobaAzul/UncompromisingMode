@@ -65,6 +65,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.AIR_CONDITIONER = "It filters out the nearby air's pollutants."
 	DESCRIBE.SPOREPACK = "A large sack made from toad skin. It's scent is far from lovely."
 	DESCRIBE.SALTPACK = "The device releases sodium chloride into the atmosphere."
+	DESCRIBE.HUMANMEAT_DRIED = "Oh my goodness!"
 	
 	ACTIONFAIL.READ =
         {

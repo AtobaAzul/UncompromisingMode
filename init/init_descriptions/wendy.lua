@@ -64,3 +64,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.AIR_CONDITIONER = "The pleasant scent gives false hope."
 	DESCRIBE.SPOREPACK = "It reeks, just like everything else."
 	DESCRIBE.SALTPACK = "It deals with menial chores. My other problems remain unsolved."
+	DESCRIBE.HUMANMEAT_DRIED = "Flesh for flesh..."

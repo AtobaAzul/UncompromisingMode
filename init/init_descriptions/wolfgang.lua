@@ -64,3 +64,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.AIR_CONDITIONER = "Keeps Wolfgang's lungs mighty!"
 	DESCRIBE.SPOREPACK = "Did Wolfgang fart?"
 	DESCRIBE.SALTPACK = "Wolfgang is stronger than snow!"
+	DESCRIBE.HUMANMEAT_DRIED = "Is... Person...?"

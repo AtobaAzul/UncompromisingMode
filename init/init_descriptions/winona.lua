@@ -64,3 +64,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.AIR_CONDITIONER = "I could nab that design for something..."
 	DESCRIBE.SPOREPACK = "Wow, that smell is a punch in the face."
 	DESCRIBE.SALTPACK = "I should've thought of this sooner!"
+	DESCRIBE.HUMANMEAT_DRIED = "This is a terrible idea."

@@ -64,3 +64,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.AIR_CONDITIONER = "Can it spit out fire?"
 	DESCRIBE.SPOREPACK = "The smell is nothing fire can't handle!"
 	DESCRIBE.SALTPACK = "I still hate Winter."
+	DESCRIBE.HUMANMEAT_DRIED = "I'm gonna vomit..."

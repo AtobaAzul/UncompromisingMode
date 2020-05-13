@@ -64,3 +64,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.AIR_CONDITIONER = "It fends off the airborne threats!"
 	DESCRIBE.SPOREPACK = "It masks my scent!"
 	DESCRIBE.SALTPACK = "It clears the battlefield!"
+	DESCRIBE.HUMANMEAT_DRIED = "A... spoil of... war..."
