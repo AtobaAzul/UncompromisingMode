@@ -89,7 +89,7 @@ UpdateSpawn = function(player, params)
             end
         end
 		
-		if player.components.inventory:EquipHasTag("shadowdominance") then
+		if player:HasTag("shadowdominant") then
 			spawndrifter = false
 		end
 
