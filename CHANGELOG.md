@@ -234,9 +234,35 @@
 
 * [x] Added options to reduce the Bee Queen and Toadstool's health, due to their raised importance
 
-* [x] Wolfgang's speed is reduced when Mighty (to balance out his up to 25% bonus movement speed when mighty)
+* [x] Wolfgang no longer gains speed from being mighty
+
+* [x] Wolfgang gains knockback immunity when mighty
 
 * [x] Willow and Wormwood are now able to smolder
+
+* [x] Willow will do a fire explosion when she catches fire, damaging and igniting nearby mobs
+
+* [x] The Luxury and Gobbler Fan's will reduce hayfever when used
+
+* [x] Sleeping grants Hayfever immunity
+
+* [x] On Tentacles will now summon sickly tentacles, which die over time, but do not target players
+
+* [x] Wickerbottom and Maxwell cannot read books while insane
+
+* [x] WX-78 no longer heals from being struck by lightning
+
+* [x] Wigfrid's life and sanity leech is reduced by 1/3, but she gains her singleplayer health and sanity on kill perk (which is also reduced)
+
+* [x] Gave Wes a useless new secret upside
+
+* [x] Ice Cream now regens sanity, similar to how Jelly Beans work
+
+* [x] Thulecite Armor has knockback resistance
+
+* [x] Disabled automatic duplication of carrots, tree saplings, stone fruit bushes, lightbulbs, etc. Take care of your resources.
+
+* [x] Lobster Dinner requires 2 Wobsters
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
