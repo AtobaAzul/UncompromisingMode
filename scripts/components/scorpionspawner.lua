@@ -75,9 +75,10 @@ local function SpawnFrogForPlayer(player, reschedule)
 			local frog = SpawnFrog(spawn_point)
 		end
 	end
+	end
     _scheduledtasks[player] = nil
     reschedule(player)
-	end
+	
 end
 
 local function ScheduleSpawn(player, initialspawn)
@@ -97,17 +98,17 @@ end
 
 local function ToggleUpdate(force)
     --if (not _worldstate.iswinter) and TheWorld.state.isday then
-        if not _updating then
-            _updating = true
+        --if not _updating then
+        --    _updating = true
             for i, v in ipairs(_activeplayers) do
                 ScheduleSpawn(v, true)
             end
-        elseif force then
+        --elseif force then
             for i, v in ipairs(_activeplayers) do
                 CancelSpawn(v)
                 ScheduleSpawn(v, true)
             end
-        end
+        --end
 end
 
 local function AutoRemoveTarget(inst, target)
