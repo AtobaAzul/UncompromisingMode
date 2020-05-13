@@ -501,7 +501,7 @@ local states=
                     local JUMP_DISTANCE = 3 
 
                     local distance = inst:GetDistanceSqToInst(inst.components.combat.target )
-                    print(distance)
+                    --print(distance)
                     if distance > JUMP_DISTANCE*JUMP_DISTANCE then
                         inst.sg:GoToState("leap_attack",inst.components.combat.target) 
                     else

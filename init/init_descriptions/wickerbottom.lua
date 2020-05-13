@@ -28,7 +28,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Might that strange vegitation be the cause of the polluted rain?"
     DESCRIBE.TOADLING = "They appear subservient to the nearby fungi."
 	
-    DESCRIBE.GASMASK = "For investigating dangerous areas."
+    DESCRIBE.GASMASK = "I can alleviate these dreadful allergies now."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
 	DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
 	DESCRIBE.SPIDERQUEENCORPSE = "A Royal Arachnic, posthumous."

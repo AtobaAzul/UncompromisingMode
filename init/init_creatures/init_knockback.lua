@@ -50,11 +50,11 @@ local GIANTS =
         radius = 200,
 		power = 1.5,
     },
-	["rook"] =
+	--[[["rook"] =
     {
         radius = 150,
 		power = 1,
-    },
+    },]]
 	["krampus"] =
     {
         radius = 150,
