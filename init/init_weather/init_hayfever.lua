@@ -18,3 +18,10 @@ env.AddPrefabPostInit("cave", function(inst)
 	inst:AddComponent("hayfever_tracker")
 	
 end)
+
+env.AddPlayerPostInit(function(inst)
+if inst:HasTag("scp049") then
+inst:AddTag("hasplaguemask")
+inst:AddTag("has_gasmask")
+end
+end)
