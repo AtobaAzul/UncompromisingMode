@@ -41,8 +41,9 @@ end
 local function onnear(inst, target)
     --hive pop open? Maybe rustle to indicate danger?
     --more and more come out the closer you get to the nest?
-    if inst.components.childspawner ~= nil then
+    if inst.components.childspawner ~= nil and not TheWorld.state.isday then
         inst.components.childspawner:ReleaseAllChildren(target, "bat")
+		--inst.components.childspawner:ReleaseAllChildren(target, "vampirebat")
     end
 end
 
@@ -54,6 +55,8 @@ env.AddPrefabPostInit("cave_entrance_open", function(inst)
 		inst.components.childspawner:SetRegenPeriod(60/TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
 		inst.components.childspawner:SetSpawnPeriod(.1/TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
 		--inst.components.childspawner:SetMaxChildren(6*TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
+		inst.components.childspawner.rarechild = "vampirebat"
+		
 		
 		inst:AddComponent("playerprox")
 		inst.components.playerprox:SetDist(11, 14) --set specific values
