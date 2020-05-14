@@ -8,7 +8,7 @@ local prefabs =
 {
 }
 
-SetSharedLootTable( 'tentacle',
+SetSharedLootTable( 'wicker_tentacle',
 {
     --{'shadow_puff', 0.01},
 })
@@ -125,7 +125,7 @@ local function fn()
 	
     inst:AddComponent("inspectable")
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetChanceLootTable('tentacle')
+    inst.components.lootdropper:SetChanceLootTable('wicker_tentacle')
 
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aura = -TUNING.SANITYAURA_SMALL

@@ -68,6 +68,7 @@ local prefab_post = {
 	"skeletonhat",
 	--"rock_avocado_fruit_sprout_sapling",
 	"icepack",
+	"heatrock",
 }
 
 local stategraph_post = {
