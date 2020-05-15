@@ -14,11 +14,19 @@ local _targetplayer = nil
 local _activeplayers = {}
 local STRUCTURE_DIST = 20
 
-local function TryRandomNightEvent()      --Canis said 20% chance each night to have a RNE, could possibly include a scaling effect later
-	--if math.random >= 0.8 then		--enable after testing
-	CheckPlayers()
-	print("trying RNE")
-	--end								--enable after testing
+local function DoBaseRNE(player)
+	if TheWorld.state.isnight then
+		if player.components.health ~= nil then
+			player.components.health:DoDelta(-10)	--Test Effects to see if base detecting is working
+		end
+	end
+end
+local function DoWildRNE(player)
+	if TheWorld.state.isnight then
+		if player.components.sanity ~= nil then
+			player.components.sanity:DoDelta(-10)   --Test Effects to see if base detecting is working
+		end
+	end
 end
 
 local function IsEligible(player)
@@ -61,17 +69,13 @@ local function CheckPlayers()
 		end
 end
 
-local function DoBaseRNE(player)
-	if player.components.health ~= nil
-		player.components.health:DoDelta(-10)	--Test Effects to see if base detecting is working
-	end
-end
-local function DoWildRNE(player)
-	if player.components.sanity ~= nil
-		player.components.sanity:DoDelta(-10)   --Test Effects to see if base detecting is working
-	end
-end
 
+local function TryRandomNightEvent()      --Canis said 20% chance each night to have a RNE, could possibly include a scaling effect later
+	--if math.random >= 0.8 then		--enable after testing
+	CheckPlayers()
+	print("trying RNE")
+	--end								--enable after testing
+end
 
 
 
