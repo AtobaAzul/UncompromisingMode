@@ -59,14 +59,14 @@ local states = {
                 inst.components.combat:DoAreaAttack(inst, 3.5, nil, nil, nil, { "INLIMBO", "epic", "notarget", "invisible", "noattack", "flight", "playerghost", "shadow", "shadowchesspiece", "shadowcreature" })
                 if inst.sg.statemem.target ~= nil then
                     inst:SpawnSnare(inst.sg.statemem.target)
-					inst.components.combat:SetRange(inst.components.combat.attackrange/3)
+					inst.components.combat:SetRange(inst.oldrange)
                 end
             end),
 			
             TimeEvent(39 * FRAMES, function(inst)
 						inst:DoTaskInTime(800*FRAMES, function(inst) 
 						inst.rootready = true
-						inst.components.combat:SetRange(3*inst.components.combat.attackrange)
+						inst.components.combat:SetRange(3*inst.oldrange)
 						end)
                 inst.sg:RemoveStateTag("busy")
             end),
