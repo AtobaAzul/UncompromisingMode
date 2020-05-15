@@ -314,19 +314,21 @@ local states=
         tags = {"attack", "canrotate", "busy", "jumping"},
 
 		
-		onenter = function(inst)   
+		onenter = function(inst)
+		inst.components.combat:SetRange(TUNING.SPIDER_WARRIOR_ATTACK_RANGE, TUNING.SPIDER_WARRIOR_HIT_RANGE)
             inst.sg:SetTimeout(21*FRAMES)                  
             if inst.components.combat.target and inst.components.combat.target:IsValid() then
                 inst:ForceFacePoint(inst.components.combat.target:GetPosition() )
             end   
             inst.components.locomotor:Stop()           
             inst.AnimState:PlayAnimation("atk")
-            inst.Physics:SetMotorVelOverride(20,0,0)
+            --inst.Physics:SetMotorVelOverride(20,0,0)
             inst.components.locomotor:EnableGroundSpeedMultiplier(false)
         end,
 		
 		ontimeout = function(inst)
             inst.sg:GoToState("taunt")
+			inst.components.combat:SetRange(3, 3)
         end,
 
 
@@ -340,7 +342,7 @@ local states=
         {
             TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound(SoundPath(inst, "attack_grunt")) end),
             TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound(SoundPath(inst, "Jump")) end),
-            --TimeEvent(2*FRAMES, function(inst) inst.Physics:SetMotorVelOverride(30,0,0) end),
+            TimeEvent(8	*FRAMES, function(inst) inst.Physics:SetMotorVelOverride(20,0,0) end),
             TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound(SoundPath(inst, "Attack")) end),
             TimeEvent(19*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
             TimeEvent(20*FRAMES,
@@ -437,6 +439,7 @@ local states=
             inst.components.locomotor:Stop()           
             inst.AnimState:PlayAnimation("evade")
             --inst.components.locomotor:EnableGroundSpeedMultiplier(false)
+			--inst.Physics:SetMotorVelOverride(-20,0,0)
         end,
 
         events=
@@ -452,14 +455,16 @@ local states=
         tags = {"busy", "evade","no_stun"},
 
 
-        onenter = function(inst)   
+        onenter = function(inst)
+		inst.components.combat:SetRange(TUNING.SPIDER_WARRIOR_ATTACK_RANGE, TUNING.SPIDER_WARRIOR_HIT_RANGE)
             inst.sg:SetTimeout(0.1)                  
             if inst.components.combat.target and inst.components.combat.target:IsValid() then
                 inst:ForceFacePoint(inst.components.combat.target:GetPosition() )
             end   
             inst.components.locomotor:Stop()           
             inst.AnimState:PlayAnimation("evade_loop",true)
-            inst.Physics:SetMotorVelOverride(-40,0,0)
+            inst.Physics:SetMotorVelOverride(-30,0,0)
+			inst.components.combat:SetRange(3, 3)
             inst.components.locomotor:EnableGroundSpeedMultiplier(false)
         end,
 --[[
@@ -470,6 +475,11 @@ local states=
             end ),
         },  
 ]]
+        timeline =
+        {
+            TimeEvent(3*FRAMES, function(inst) inst.Physics:SetMotorVel(-20,0,0) end),
+          
+        },
         ontimeout = function(inst)
             inst.sg:GoToState("evade_pst")
         end,
