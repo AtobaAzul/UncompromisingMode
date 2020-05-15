@@ -22,7 +22,7 @@ local function LaunchProjectile2(inst, targetpos)
     projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 	
 	if inst.components.fueled ~= nil then
-		inst.components.fueled:DoDelta(-35)
+		inst.components.fueled:DoDelta(-25)
 	end
 end
 
@@ -31,7 +31,7 @@ env.AddPrefabPostInit("firesuppressor", function (inst)
 		return
 	end
 	
-    inst.components.fueled:InitializeFuelLevel(TUNING.FIRESUPPRESSOR_MAX_FUEL_TIME * 1.2)
+    inst.components.fueled:InitializeFuelLevel(TUNING.FIRESUPPRESSOR_MAX_FUEL_TIME * 1.25)
 
 	inst.LaunchProjectile = LaunchProjectile2
 
