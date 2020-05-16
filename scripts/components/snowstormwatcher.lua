@@ -86,7 +86,7 @@ function SnowStormWatcher:UpdateSnowstormWalkSpeed(src, data)
 		local ents4 = TheSim:FindEntities(x, y, z, 6, {"snowstorm_protection_high"})
 		local suppressorNearby4 = (#ents4 > 0)
 		
-    if TheWorld.state.issnowing then
+    if TheWorld.state.issnowing and ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") ) then
         if self.inst.components.playervision:HasGoggleVision() or
             self.inst.components.playervision:HasGhostVision() or
             self.inst.components.rider:IsRiding() or
