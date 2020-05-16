@@ -125,7 +125,7 @@ local function TryStartAttacks(killed)
         self.inst:StartUpdatingComponent(self)
         self:StopWatchingWorldState("cycles", TryStartAttacks)
         self.inst.watchingcycles = nil
-    else
+    else--if TheWorld.state.issummer  then
         PauseAttacks()
         if not self.inst.watchingcycles then
             self:WatchWorldState("cycles", TryStartAttacks)  -- keep checking every day until NO_BOSS_TIME is up
@@ -162,7 +162,7 @@ local function ReleaseHassler(targetPlayer)
     assert(targetPlayer)
 
     local hassler = TheSim:FindFirstEntityWithTag("mock_dragonfly")
-    if hassler ~= nil then
+    if hassler ~= nil or not AllowedToAttack() then
         return hassler -- There's already a hassler in the world, we're done here.
     end
 
