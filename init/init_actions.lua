@@ -20,3 +20,16 @@ AddAction(
     end
 end
 )
+
+AddAction(
+	"INFEST",
+	"INFEST",
+	function(act)
+
+		if not act.doer.infesting then
+			act.doer.components.infester:Infest(act.target)
+		end
+
+		return true
+	end
+)
