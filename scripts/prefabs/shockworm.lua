@@ -293,7 +293,7 @@ local function fn()
     inst:AddTag("wet")
     inst:AddTag("worm")
     inst:AddTag("cavedweller")
-
+	inst:AddTag("electricdamageimmune")
     inst.Light:SetRadius(0)
     inst.Light:SetIntensity(.8)
     inst.Light:SetFalloff(.5)

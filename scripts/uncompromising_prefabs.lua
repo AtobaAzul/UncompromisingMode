@@ -62,6 +62,9 @@ return {
 	"scorpion",
 	"vampirebat",
 	"icecreamsanityregenbuff",
-	"wicker_tentacle",
-	"skeletonmeat",
+	"zaspberryparfait",
+	"uncompromising_foodbuffs",
+	"shockfx",
+	"shockstundebuff",
+	"carapacecooler",
 }

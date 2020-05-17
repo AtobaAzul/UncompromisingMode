@@ -24,7 +24,7 @@ end
 
 local function OnExtended(inst, target)
     inst.components.timer:StopTimer("regenover")
-    inst.components.timer:StartTimer("regenover", TUNING.JELLYBEAN_DURATION)
+    inst.components.timer:StartTimer("regenover", 100)
     inst.task:Cancel()
     inst.task = inst:DoPeriodicTask(TUNING.JELLYBEAN_TICK_RATE, OnTick, nil, target)
 end

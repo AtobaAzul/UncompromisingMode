@@ -253,3 +253,4 @@ warly_recipes.bonesoup.test = function(cooker, names, tags) return names.bonesha
 
 warly_recipes.moqueca.test = function(cooker, names, tags) return tags.fish and (names.onion or names.onion_cooked) and (names.tomato or names.tomato_cooked) and not tags.inedible and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) and MonsterMeatSupport(tags)end
 -- Original:    test = function(cooker, names, tags) return tags.fish and (names.onion or names.onion_cooked) and (names.tomato or names.tomato_cooked) and not tags.inedible end,
+--warly_recipes.zaspberryparfait.test = function(cooker, names, tags) return not tags.monster and not tags.inedible and UncompromisingFillers(tags) and names.zaspberry and tags.dairy and tags.sweetener end
