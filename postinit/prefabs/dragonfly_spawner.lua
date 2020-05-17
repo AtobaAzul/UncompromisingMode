@@ -1,31 +1,19 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
-local function ResetLavae(inst)
-    --Despawn all lavae
-    local lavae = inst.components.rampingspawner.spawns
-    for k, v in pairs(lavae) do
-        k.components.combat:SetTarget(nil)
-        k.components.locomotor:Clear()
-        k.reset = true
-    end
-end
-
-local function Reset(inst)
-    ResetLavae(inst)
-    --Fly off
-    inst.reset = true
-
-    --No longer start the respawn task here - was possible to duplicate this if the exiting failed.
-end
-
 
 local function BossCheck(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, 50, { "epic" }, { "dragonfly" } )
 	
 	if #ents > 0 or TheWorld.state.issummer then
-		Reset(inst)
+		if inst.components.childspawner ~= nil then
+			inst.components.childspawner:StopSpawning()
+		end
+	else
+		if inst.components.childspawner ~= nil then
+			inst.components.childspawner:StartSpawning()
+		end
 	end
 
 end
@@ -40,7 +28,7 @@ local function onfar(inst)
 	inst.task = nil
 end
 
-env.AddPrefabPostInit("dragonfly", function (inst)
+env.AddPrefabPostInit("dragonfly_spawner", function (inst)
     if not TheWorld.ismastersim then
 		return
 	end
@@ -51,4 +39,12 @@ env.AddPrefabPostInit("dragonfly", function (inst)
     inst.components.playerprox:SetDist(50, 51) --set specific values
     inst.components.playerprox:SetOnPlayerNear(onnear)
     inst.components.playerprox:SetOnPlayerFar(onfar)
+	
+	inst:ListenForEvent("seasontick", function() 
+		if TheWorld.state.issummer then
+			inst.components.childspawner:StopSpawning()
+		else
+			inst.components.childspawner:StartSpawning()
+		end 
+	end)
 end)

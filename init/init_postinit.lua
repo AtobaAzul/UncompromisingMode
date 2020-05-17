@@ -70,6 +70,7 @@ local prefab_post = {
 	"icepack",
 	"heatrock",
 	"firesuppressor",
+	"dragonfly_spawner",
 }
 
 local stategraph_post = {
