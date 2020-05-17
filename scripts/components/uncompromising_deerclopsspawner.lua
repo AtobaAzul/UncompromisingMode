@@ -8,7 +8,7 @@ local easing = require("easing")
 --------------------------------------------------------------------------
 return Class(function(self, inst)
 
-assert(TheWorld.ismastersim, "Gmoosespawner should not exist on client")
+assert(TheWorld.ismastersim, "Uncompromising_Deerclopsspawner should not exist on client")
 
 --------------------------------------------------------------------------
 --[[ Private constants ]]
@@ -35,7 +35,7 @@ local _warnduration = 60
 local _timetonextwarningsound = 0
 local _announcewarningsoundinterval = 4
 	
-local _attacksperspring = 2
+local _attacksperwinter = 4
 local _attackduringoffseason = false
 local _targetplayer = nil
 local _activehassler = nil
@@ -52,7 +52,7 @@ local function AllowedToAttack()
     return  #_activeplayers > 0 and
             TheWorld.state.cycles > TUNING.NO_BOSS_TIME and  
                 (_attackduringoffseason or
-                TheWorld.state.season == "spring")
+                TheWorld.state.season == "winter")
 end
 
 local function IsEligible(player)
@@ -109,10 +109,10 @@ end
 
 local function TryStartAttacks(killed)
     if AllowedToAttack() then
-        if _activehassler == nil and _attacksperspring > 0 and _timetoattack == nil then
+        if _activehassler == nil and _attacksperwinter > 0 and _timetoattack == nil then
             -- Shorten the time used for winter to account for the time deerclops spends stomping around
             -- Then add one to _attacksperwinter to shift the attacks so the last attack isn't right when the season changes to spring
-            local attackdelay = (TheWorld.state.springlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperspring + 1) 
+            local attackdelay = (TheWorld.state.winterlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperwinter + 1) 
             if killed == true then
                 attackdelay = attackdelay * HASSLER_KILLED_DELAY_MULT
             end
@@ -125,7 +125,7 @@ local function TryStartAttacks(killed)
         self.inst:StartUpdatingComponent(self)
         self:StopWatchingWorldState("cycles", TryStartAttacks)
         self.inst.watchingcycles = nil
-    else--if TheWorld.state.isspring then
+    else
         PauseAttacks()
         if not self.inst.watchingcycles then
             self:WatchWorldState("cycles", TryStartAttacks)  -- keep checking every day until NO_BOSS_TIME is up
@@ -150,7 +150,7 @@ local function GetSpawnPoint(pt)
     if not TheWorld.Map:IsAboveGroundAtPoint(pt:Get()) then
         pt = FindNearbyLand(pt, 1) or pt
     end
-    local offset = FindWalkableOffset(pt, math.random() * 2 * PI, HASSLER_SPAWN_DIST / 2, 12, true)
+    local offset = FindWalkableOffset(pt, math.random() * 2 * PI, HASSLER_SPAWN_DIST, 12, true)
     if offset ~= nil then
         offset.x = offset.x + pt.x
         offset.z = offset.z + pt.z
@@ -161,7 +161,7 @@ end
 local function ReleaseHassler(targetPlayer)
     assert(targetPlayer)
 
-    local hassler = TheSim:FindFirstEntityWithTag("mothergoose")
+    local hassler = TheSim:FindFirstEntityWithTag("deerclops")
     if hassler ~= nil or not AllowedToAttack() then
         return hassler -- There's already a hassler in the world, we're done here.
     end
@@ -172,10 +172,7 @@ local function ReleaseHassler(targetPlayer)
             hassler = SpawnSaveRecord(_storedhassler, {})
             _storedhassler = nil
         else
-            hassler = SpawnPrefab("mothergoose")
-			hassler.sg:GoToState("glide")
-			hassler.components.timer:StartTimer("WantsToLayEgg", TUNING.SEG_TIME * math.random(4, 8))
-
+            hassler = SpawnPrefab("deerclops")
         end
 
         if hassler ~= nil then
@@ -245,18 +242,18 @@ end
 --[[ Public member functions ]]
 --------------------------------------------------------------------------
 
-function self:SetAttacksPerspring(attacks)
-    _attacksperspring = attacks
+function self:SetAttacksPerWinter(attacks)
+    _attacksperwinter = attacks
 end
 
 function self:OverrideAttacksPerSeason(name, num)
-	if name == "MOOSE" then
-		_attacksperspring = num
+	if name == "DEERCLOPS" then
+		_attacksperwinter = num
 	end
 end
 
 function self:OverrideAttackDuringOffSeason(name, bool)
-	if name == "MOOSE" then
+	if name == "DEERCLOPS" then
 		_attackduringoffseason = bool
 	end
 end
@@ -276,7 +273,7 @@ end
 function self:DoWarningSound(_targetplayer)
     --Players near _targetplayer will hear the warning sound from the
     --same direction and volume offset from their own local positions
-    SpawnPrefab("moosewarning_lvl"..
+    SpawnPrefab("deerclopswarning_lvl"..
         (((_timetoattack == nil or
         _timetoattack < 30) and "4") or
         (_timetoattack < 60 and "3") or
@@ -389,7 +386,7 @@ function self:GetDebugString()
 	elseif self.inst.updatecomponents[self] == nil then
 		s = s .. "DORMANT ".._timetoattack
 	elseif _timetoattack > 0 then
-		s = s .. string.format("%s Dragonfly is coming for %s in %2.2f", _warning and "WARNING" or "WAITING", tostring(_targetplayer) or "<nil>", _timetoattack)
+		s = s .. string.format("%s Deerclops is coming for %s in %2.2f", _warning and "WARNING" or "WAITING", tostring(_targetplayer) or "<nil>", _timetoattack)
 	else
 		s = s .. string.format("ATTACKING!!!")
 	end
@@ -413,12 +410,12 @@ end
 self.inst:ListenForEvent("ms_playerjoined", OnPlayerJoined, TheWorld)
 self.inst:ListenForEvent("ms_playerleft", OnPlayerLeft, TheWorld)
 self:WatchWorldState("season", OnSeasonChange)
-self.inst:ListenForEvent("mothergooseremoved", OnHasslerRemoved, TheWorld)
-self.inst:ListenForEvent("mothergoosekilled", OnHasslerKilled, TheWorld)
+self.inst:ListenForEvent("hasslerremoved", OnHasslerRemoved, TheWorld)
+self.inst:ListenForEvent("hasslerkilled", OnHasslerKilled, TheWorld)
+self.inst:ListenForEvent("storehassler", OnStoreHassler, TheWorld)
 
 function self:OnPostInit()
     TryStartAttacks()
 end
 
 end)
-

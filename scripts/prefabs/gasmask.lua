@@ -89,7 +89,7 @@ local function fn()
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
-	inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL / 2
+	inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL / 4
 
     inst:AddComponent("fueled")
     inst.components.fueled.fueltype = FUELTYPE.USAGE

@@ -2,7 +2,7 @@ ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.WURT
 DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 
 --	[ 		Wurt Descriptions		]	--
-
+	DESCRIBE.DEERCLOPS = "He not look happy, florp."
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Not go in there, florp."
     ANNOUNCE.ANNOUNCE_WINONAGEN = "Weeno-lady need to do it!"
     ANNOUNCE.ANNOUNCE_RATRAID = "What that squeak?"

@@ -72,14 +72,6 @@ local function fn()
 	--inst.AnimState:SetRayTestOnBB(true);
 
 	------------
-	
-	inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-	inst.components.locomotor:EnableGroundSpeedMultiplier(false)
-	inst.components.locomotor:SetTriggersCreep(false)
-	inst.components.locomotor.walkspeed = 4
-    inst.components.locomotor.runspeed = 12
-
-	inst:SetStateGraph("SGleechswarm")
 	---------------------------------
 	inst.entity:SetPristine()
 
@@ -100,6 +92,12 @@ local function fn()
     inst:AddTag("burnable") -- needs this to be frozen by flingomatic
 
     inst:AddTag("lastresort") -- for auto attacking
+	
+	inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
+	inst.components.locomotor:EnableGroundSpeedMultiplier(false)
+	inst.components.locomotor:SetTriggersCreep(false)
+	inst.components.locomotor.walkspeed = 4
+    inst.components.locomotor.runspeed = 12
 
 	--MakePoisonableCharacter(inst)
 	inst:AddComponent("health")
@@ -159,6 +157,8 @@ local function fn()
 	end)
 	--inst:ListenForEvent("killed", function() inst.components.infester.Uninfest() end)
 	--inst.special_action = makehome
+
+	inst:SetStateGraph("SGleechswarm")
 	inst:SetBrain(brain)
 
 	--inst.findlight = findlight

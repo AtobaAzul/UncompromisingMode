@@ -395,7 +395,7 @@ local function fn(Sim)
     inst.components.groundpounder.groundpoundringfx = "firering_fx"
     
     inst:AddComponent("combat")
-    inst.components.combat:SetDefaultDamage(TUNING.DRAGONFLY_DAMAGE)
+    inst.components.combat:SetDefaultDamage(TUNING.DSTU.MOCK_DRAGONFLY_DAMAGE)
     inst.components.combat.playerdamagepercent = .5
     inst.components.combat:SetRange(4)
     inst.components.combat:SetAreaDamage(6, 0.8)
