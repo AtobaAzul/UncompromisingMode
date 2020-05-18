@@ -60,6 +60,7 @@ local function fn()
 
     MakeHauntableLaunchAndPerish(inst)
 	inst.components.edible:SetOnEatenFn(oneatenfn)
+	inst:AddTag("preparedfood")
     return inst
 end
 
