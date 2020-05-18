@@ -36,7 +36,7 @@ local function OnUpdateThorns(inst)
                 if inst.owner ~= nil then
                     if inst.owner.components.combat ~= nil and inst.owner.components.combat:CanTarget(v) then
                         inst.ignore[v] = true
-						if not v.components.debuffable ~= nil then
+						if not v.components.debuffable then
 						v:AddComponent("debuffable")
 						end
 						v.components.debuffable:AddDebuff("shockstundebuff", "shockstundebuff")
@@ -46,7 +46,7 @@ local function OnUpdateThorns(inst)
                     end
                 elseif v.components.combat:CanBeAttacked() then
                     inst.ignore[v] = true
-						if not v.components.debuffable ~= nil then
+						if not v.components.debuffable then
 						v:AddComponent("debuffable")
 						end		
 						v.components.debuffable:AddDebuff("shockstundebuff", "shockstundebuff")						
