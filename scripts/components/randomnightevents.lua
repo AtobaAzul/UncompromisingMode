@@ -20,27 +20,60 @@ self.totalrandomwildweight = nil
 self.totalrandombaseweight = nil
 self.totalrandomcaveweight = nil
 
-local function HealthCurse1(player) 
+local function HealthCurse1(player)
+print("healthcurse1")
 if player.components.health ~= nil then
 	player.components.health:DoDelta(-10)	--Test Effects to see if randomization is working
 end
 end
 
-local function HealthCurse2(player) 
+local function HealthCurse2(player)
+print("healthcurse2")
 if player.components.health ~= nil then
 	player.components.health:DoDelta(-20)	--Test Effects to see if randomization is working
 end
 end
 
-local function SanCurse1(player) 
+local function SanCurse1(player)
+print("sancurse1")
 		if player.components.sanity ~= nil then
 			player.components.sanity:DoDelta(-10)   --Test Effects to see if randomization is working
 		end
 end
-local function SanCurse2(player) 
+local function SanCurse2(player)
+print("sancurse2")
 		if player.components.sanity ~= nil then
 			player.components.sanity:DoDelta(-20)   --Test Effects to see if randomization is working
 		end
+end
+
+local function SpawnBats(player)
+	print("SpawnBats")
+	player:DoTaskInTime(5, function()
+		if TheWorld.state.cycles <= 10 then
+			local x, y, z = player.Transform:GetWorldPosition()
+			local day = TheWorld.state.cycles
+			local num_bats = 3
+			for i = 1, num_bats do
+				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
+					local bat = SpawnPrefab("bat")
+					bat.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
+					bat:PushEvent("fly_back")
+				end)
+			end
+		else
+			local x, y, z = player.Transform:GetWorldPosition()
+			local day = TheWorld.state.cycles
+			local num_bats = math.min(2 + math.floor(day/35), 6)
+			for i = 1, num_bats do
+				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
+					local bat = SpawnPrefab("vampirebat")
+					bat.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
+					bat:PushEvent("fly_back")
+				end)
+			end
+		end
+	end)
 end
 
 local function AddWildEvent(name, weight)
@@ -73,10 +106,13 @@ local function AddCaveEvent(name, weight)
     self.totalrandomcaveweight = self.totalrandomcaveweight + weight
 end
 
-AddWildEvent(HealthCurse1,1)
-AddWildEvent(HealthCurse2,1)
-AddBaseEvent(SanCurse1,1)
-AddBaseEvent(SanCurse2,1)
+AddWildEvent(HealthCurse1,0.1)
+AddWildEvent(HealthCurse2,0.1)
+AddWildEvent(SpawnBats,1)
+AddBaseEvent(SpawnBats,1)
+AddBaseEvent(SanCurse1,0.1)
+AddBaseEvent(SanCurse2,0.1)
+AddCaveEvent(SpawnBats,1)
 
 
 

@@ -9,6 +9,9 @@ local actionhandlers =
 
 local events=
 {
+    EventHandler("fly_back", function(inst, data)
+        inst.sg:GoToState("flyback")
+    end),
     CommonHandlers.OnLocomote(false, true),
     CommonHandlers.OnFreeze(),
     CommonHandlers.OnAttack(),
@@ -61,6 +64,46 @@ local states =
             end),
         }
     }, 
+
+    State{
+        name = "flyback",
+        tags = {"flight", "busy"},
+        onenter = function(inst)
+            inst.Physics:Stop()
+
+            inst.DynamicShadow:Enable(false)
+            inst.components.health:SetInvincible(true)
+
+            inst.AnimState:PlayAnimation("fly_back_loop",true)
+
+            local x,y,z = inst.Transform:GetWorldPosition()
+            inst.Transform:SetPosition(x,15,z)
+            inst.Physics:SetMotorVel(0,-10+math.random()*2,0)
+        end,
+
+        onupdate= function(inst)
+            inst.Physics:SetMotorVel(0,-10+math.random()*2,0)
+            local pt = Point(inst.Transform:GetWorldPosition())
+
+            if pt.y <= .1 or inst:IsAsleep() then
+                pt.y = 0
+                inst.Physics:Stop()
+                inst.Physics:Teleport(pt.x,pt.y,pt.z)
+                inst.DynamicShadow:Enable(true)
+                inst.components.health:SetInvincible(false)
+                inst.sg:GoToState("idle", "fly_back_pst")
+            end
+        end,
+
+        timeline = {
+            TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/flap") end ),
+            TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/flap") end ),
+            TimeEvent(24*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/flap") end ),
+            TimeEvent(34*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/flap") end ),
+            TimeEvent(41*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/flap") end ),
+        },
+
+    },
 
     State{
         name = "taunt",
