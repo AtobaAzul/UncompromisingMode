@@ -88,6 +88,7 @@ local function DoBaseRNE(player)
             rnd = rnd - v.weight
             if rnd <= 0 then
 			v.name(player)
+			return
             end
         end
 		end
@@ -100,7 +101,8 @@ local function DoWildRNE(player)
         for k,v in pairs(self.wildevents) do
             rnd = rnd - v.weight
             if rnd <= 0 then
-            v.name(player) 
+            v.name(player)
+			return
             end
         end
 		end
