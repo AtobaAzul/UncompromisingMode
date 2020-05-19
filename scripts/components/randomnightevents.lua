@@ -13,18 +13,96 @@ self.inst = inst
 local _targetplayer = nil
 local _activeplayers = {}
 local STRUCTURE_DIST = 20
+self.wildevents = nil
+self.baseevents = nil
+self.caveevents = nil
+self.totalrandomwildweight = nil
+self.totalrandombaseweight = nil
+self.totalrandomcaveweight = nil
+
+local function HealthCurse1(player) 
+if player.components.health ~= nil then
+	player.components.health:DoDelta(-10)	--Test Effects to see if randomization is working
+end
+end
+
+local function HealthCurse2(player) 
+if player.components.health ~= nil then
+	player.components.health:DoDelta(-20)	--Test Effects to see if randomization is working
+end
+end
+
+local function SanCurse1(player) 
+		if player.components.sanity ~= nil then
+			player.components.sanity:DoDelta(-10)   --Test Effects to see if randomization is working
+		end
+end
+local function SanCurse2(player) 
+		if player.components.sanity ~= nil then
+			player.components.sanity:DoDelta(-20)   --Test Effects to see if randomization is working
+		end
+end
+
+local function AddWildEvent(name, weight)
+    if not self.wildevents then
+        self.wildevents = {}
+        self.totalrandomwildweight = 0
+    end
+
+    table.insert(self.wildevents, { name = name, weight = weight })
+    self.totalrandomwildweight = self.totalrandomwildweight + weight
+end
+
+local function AddBaseEvent(name, weight)
+    if not self.baseevents then
+        self.baseevents = {}
+        self.totalrandombaseweight = 0
+    end
+
+    table.insert(self.baseevents, { name = name, weight = weight })
+    self.totalrandombaseweight = self.totalrandombaseweight + weight
+end
+
+local function AddCaveEvent(name, weight)
+    if not self.caveevents then
+        self.caveevents = {}
+        self.totalrandomcaveweight = 0
+    end
+
+    table.insert(self.caveevents, { name = name, weight = weight })
+    self.totalrandomcaveweight = self.totalrandomcaveweight + weight
+end
+
+AddWildEvent(HealthCurse1,1)
+AddWildEvent(HealthCurse2,1)
+AddBaseEvent(SanCurse1,1)
+AddBaseEvent(SanCurse2,1)
+
+
 
 local function DoBaseRNE(player)
 	if TheWorld.state.isnight then
-		if player.components.health ~= nil then
-			player.components.health:DoDelta(-10)	--Test Effects to see if base detecting is working
+		if self.totalrandombaseweight and self.totalrandombaseweight > 0 and self.baseevents then
+        local rnd = math.random()*self.totalrandombaseweight
+        for k,v in pairs(self.baseevents) do
+            rnd = rnd - v.weight
+            if rnd <= 0 then
+			v.name(player)
+            end
+        end
 		end
 	end
 end
 local function DoWildRNE(player)
 	if TheWorld.state.isnight then
-		if player.components.sanity ~= nil then
-			player.components.sanity:DoDelta(-10)   --Test Effects to see if base detecting is working
+		if self.totalrandomwildweight and self.totalrandomwildweight > 0 and self.wildevents then
+        local rnd = math.random()*self.totalrandomwildweight
+        for k,v in pairs(self.wildevents) do
+            rnd = rnd - v.weight
+            if rnd <= 0 then
+            v.name(player) 
+            end
+        end
 		end
 	end
 end

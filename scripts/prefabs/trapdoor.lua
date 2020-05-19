@@ -162,8 +162,6 @@ local function fn()
 	inst.components.childspawner:StartRegen()
 	end
     -------------------------
-    inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({ nil})
     -------------------------
     inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(10, 13) --set specific values
