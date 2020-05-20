@@ -33,7 +33,7 @@ function Hayfever:CanSneeze()
     local ents = TheSim:FindEntities(x, y, z, 30, {"prevents_hayfever"})
     local suppressorNearby = (#ents > 0)
 --]]
-    if self.inst:HasTag("playerghost") or self.inst:HasTag("has_gasmask") or self.inst:HasTag("has_hayfeverhat") or self.inst:HasTag("minifansuppressor") or self.inst:HasTag("wereplayer") or TheWorld.net:HasTag("queenbeekilled") or self.inst.sg:HasStateTag("sleeping") then -- or suppressorNearby or self.inst:HasTag("plantkin")
+    if self.inst:HasTag("playerghost") or self.inst:HasTag("has_gasmask") or self.inst:HasTag("has_hayfeverhat") or self.inst:HasTag("minifansuppressor") or self.inst:HasTag("wereplayer") or TheWorld.net:HasTag("queenbeekilled") or self.inst.sg:HasStateTag("sleeping") or self.inst:HasTag("plantkin") then -- or suppressorNearby
         can = false
     end
 
