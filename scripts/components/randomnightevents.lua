@@ -22,33 +22,6 @@ self.totalrandomcaveweight = nil
 ----------------------------------------------------
 --RNE list below
 ----------------------------------------------------
-local function HealthCurse1(player)
-print("healthcurse1")
-if player.components.health ~= nil then
-	player.components.health:DoDelta(-10)	--Test Effects to see if randomization is working
-end
-end
-
-local function HealthCurse2(player)
-print("healthcurse2")
-if player.components.health ~= nil then
-	player.components.health:DoDelta(-20)	--Test Effects to see if randomization is working
-end
-end
-
-local function SanCurse1(player)
-print("sancurse1")
-		if player.components.sanity ~= nil then
-			player.components.sanity:DoDelta(-10)   --Test Effects to see if randomization is working
-		end
-end
-local function SanCurse2(player)
-print("sancurse2")
-		if player.components.sanity ~= nil then
-			player.components.sanity:DoDelta(-20)   --Test Effects to see if randomization is working
-		end
-end
-
 local function SpawnBats(player)
 	print("SpawnBats")
 	player:DoTaskInTime(5, function()
@@ -126,13 +99,12 @@ end
 ------------------------
 --Inclusion and Tuning
 ------------------------
-AddWildEvent(HealthCurse1,0.1)
-AddWildEvent(HealthCurse2,0.1)
+--Wild
 AddWildEvent(SpawnBats,1)
+--Base
 AddBaseEvent(SpawnBats,1)
 AddBaseEvent(SpawnFissures,1)
-AddBaseEvent(SanCurse1,0.1)
-AddBaseEvent(SanCurse2,0.1)
+--Cave
 AddCaveEvent(SpawnBats,1)
 
 ------------------------
