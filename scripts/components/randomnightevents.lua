@@ -19,7 +19,9 @@ self.caveevents = nil
 self.totalrandomwildweight = nil
 self.totalrandombaseweight = nil
 self.totalrandomcaveweight = nil
-
+----------------------------------------------------
+--RNE list below
+----------------------------------------------------
 local function HealthCurse1(player)
 print("healthcurse1")
 if player.components.health ~= nil then
@@ -76,6 +78,22 @@ local function SpawnBats(player)
 	end)
 end
 
+local function SpawnFissures(player)
+	print("SpawnFissures")
+	player:DoTaskInTime(5, function()
+			local x, y, z = player.Transform:GetWorldPosition()
+			local fissures = 3+math.floor(math.random()*3)
+			for i = 1, fissures do
+				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
+					local fissure = SpawnPrefab("rnefissure")
+					fissure.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
+				end)
+			end
+	end)
+end
+---------------------------------------------------
+---RNE list above
+---------------------------------------------------
 local function AddWildEvent(name, weight)
     if not self.wildevents then
         self.wildevents = {}
@@ -105,16 +123,21 @@ local function AddCaveEvent(name, weight)
     table.insert(self.caveevents, { name = name, weight = weight })
     self.totalrandomcaveweight = self.totalrandomcaveweight + weight
 end
-
+------------------------
+--Inclusion and Tuning
+------------------------
 AddWildEvent(HealthCurse1,0.1)
 AddWildEvent(HealthCurse2,0.1)
 AddWildEvent(SpawnBats,1)
 AddBaseEvent(SpawnBats,1)
+AddBaseEvent(SpawnFissures,1)
 AddBaseEvent(SanCurse1,0.1)
 AddBaseEvent(SanCurse2,0.1)
 AddCaveEvent(SpawnBats,1)
 
-
+------------------------
+--Inclusion and Tuning
+------------------------
 
 local function DoBaseRNE(player)
 	if TheWorld.state.isnight then

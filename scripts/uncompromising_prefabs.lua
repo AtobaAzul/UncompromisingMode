@@ -67,4 +67,5 @@ return {
 	"shockfx",
 	"shockstundebuff",
 	"carapacecooler",
+	"rnefissure",
 }
