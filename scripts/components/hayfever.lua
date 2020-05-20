@@ -14,6 +14,9 @@ nil,
 })
 
 function Hayfever:GetNextSneezTime()
+	if self.inst:HasTag("plantkin") then
+		return math.random(80,120)
+	end
     return math.random(40,80)
 end
 
@@ -30,7 +33,7 @@ function Hayfever:CanSneeze()
     local ents = TheSim:FindEntities(x, y, z, 30, {"prevents_hayfever"})
     local suppressorNearby = (#ents > 0)
 --]]
-    if self.inst:HasTag("playerghost") or self.inst:HasTag("has_gasmask") or self.inst:HasTag("has_hayfeverhat") or self.inst:HasTag("minifansuppressor") or self.inst:HasTag("wereplayer") or TheWorld.net:HasTag("queenbeekilled") or self.inst:HasTag("plantkin") or self.inst.sg:HasStateTag("sleeping") then -- or suppressorNearby
+    if self.inst:HasTag("playerghost") or self.inst:HasTag("has_gasmask") or self.inst:HasTag("has_hayfeverhat") or self.inst:HasTag("minifansuppressor") or self.inst:HasTag("wereplayer") or TheWorld.net:HasTag("queenbeekilled") or self.inst.sg:HasStateTag("sleeping") then -- or suppressorNearby or self.inst:HasTag("plantkin")
         can = false
     end
 

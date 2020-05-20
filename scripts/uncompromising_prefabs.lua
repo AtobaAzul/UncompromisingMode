@@ -68,4 +68,5 @@ return {
 	"shockstundebuff",
 	"carapacecooler",
 	"rnefissure",
+	"honey_log",
 }

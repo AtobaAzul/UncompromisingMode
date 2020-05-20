@@ -140,7 +140,7 @@ local ANTIHISTAMINES_HIGH =
 
 local function item_oneatenhigh(inst, eater)
 	if eater.components.hayfever and eater.components.hayfever.enabled then
-		eater.components.hayfever:SetNextSneezeTime(400)			
+		eater.components.hayfever:SetNextSneezeTime(300)			
 	end	
 end
 
