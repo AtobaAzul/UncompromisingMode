@@ -56,6 +56,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.SPIDER_TRAPDOOR = "Hyuyu! What a surprise!"
 	DESCRIBE.TRAPDOOR = "Hyuyu! I see you!"
 	DESCRIBE.WICKER_TENTACLE = "It won't live long outside of the book plane."
+	DESCRIBE.HONEY_LOG = "What a sickly sweet treat!"
 
 	DESCRIBE.BUSHCRAB = "Ohoho, what a trickster!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

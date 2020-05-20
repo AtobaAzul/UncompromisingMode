@@ -72,6 +72,7 @@ Assets = {
 	Asset("ANIM", "anim/saltpack.zip"),
 	Asset("ANIM", "anim/airconditioner.zip"),
 	Asset("ANIM", "anim/shadow_eye.zip"),
+	Asset("ANIM", "anim/honey_log.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),
@@ -100,6 +101,8 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/saltpack.xml"),
 	Asset("IMAGE", "images/inventoryimages/air_conditioner.tex"),
 	Asset("ATLAS", "images/inventoryimages/air_conditioner.xml"),
+	Asset("IMAGE", "images/inventoryimages/honey_log.tex"),
+	Asset("ATLAS", "images/inventoryimages/honey_log.xml"),
 	Asset("ANIM", "anim/scorpion_basic.zip"),
 	Asset("ANIM", "anim/scorpion_build.zip"),
 	Asset("ANIM", "anim/scorpion_new.zip"),

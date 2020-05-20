@@ -58,6 +58,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.SPIDER_TRAPDOOR = "Oh great, they're getting smarter."
 	DESCRIBE.TRAPDOOR = "Something's off here, I can feel it."
 	DESCRIBE.WICKER_TENTACLE = "They have been ripped from their plane of existence."
+	DESCRIBE.HONEY_LOG = "...I've got nothing."
 
 	DESCRIBE.BUSHCRAB = "I guess they've finally hatched."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

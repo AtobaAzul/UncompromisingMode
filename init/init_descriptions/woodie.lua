@@ -56,6 +56,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.SPIDER_TRAPDOOR = "They look nastier without hair."
 	DESCRIBE.TRAPDOOR = "Is something in the grass?"
 	DESCRIBE.WICKER_TENTACLE = "Lookin' a bit green, eh?"
+	DESCRIBE.HONEY_LOG = "It's... been awhile since I've had a taste."
 
 	DESCRIBE.BUSHCRAB = "Farm from a freshwater."
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

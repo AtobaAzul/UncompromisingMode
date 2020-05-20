@@ -56,6 +56,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.SPIDER_TRAPDOOR = "Another jumping spider? Mon dieu..."
 	DESCRIBE.TRAPDOOR = "I wouldn't want to trip and spill something."
 	DESCRIBE.WICKER_TENTACLE = "Were it not on land I would say it looks sea sick."
+	DESCRIBE.HONEY_LOG = "Not quite an Ube Roll, but good effort."
 	
 	DESCRIBE.BUSHCRAB = "Berries and crab cake, anyone? No?"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE

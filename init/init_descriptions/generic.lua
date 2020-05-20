@@ -66,6 +66,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.SNOWBALL_THROWABLE = "Not the face!"
 	DESCRIBE.VETERANSHRINE = "I know what I'm doing... right?"
 	DESCRIBE.WICKER_TENTACLE = "Doubly sickening."
+	DESCRIBE.HONEY_LOG = "I have a strange desire to eat it."
 	
 	DESCRIBE.RAT_TAIL = "It reeks of a pestilence."
 	DESCRIBE.PLAGUEMASK = "The mushrooms stuffed in the beak smell nice."

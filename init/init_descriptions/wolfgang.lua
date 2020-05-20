@@ -56,6 +56,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.SPIDER_TRAPDOOR = "Don't scare Wolfgang!"
 	DESCRIBE.TRAPDOOR = "Little hill in grass."
 	DESCRIBE.WICKER_TENTACLE = "Skinny monster is sick."
+	DESCRIBE.HONEY_LOG = "Creepy face log is now creepy snack log."
 
 	DESCRIBE.BUSHCRAB = "Just wanted food!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
