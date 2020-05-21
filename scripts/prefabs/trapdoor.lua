@@ -17,8 +17,12 @@ SetSharedLootTable( 'trapdoor',
 
 
 local function onnear(inst, target)
-    if inst.components.childspawner ~= nil and not target:HasTag("monster") then
+    if inst.components.childspawner ~= nil  then
+		if target:HasTag("spiderwhisperer") or target:HasTag("spiderdisguise") then
+		inst.components.childspawner:ReleaseAllChildren(nil, "spider_trapdoor")
+		else
         inst.components.childspawner:ReleaseAllChildren(target, "spider_trapdoor")
+		end
     end
 end
 
