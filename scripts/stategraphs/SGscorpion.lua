@@ -71,15 +71,34 @@ local states=
 			inst.Physics:Stop()
 			RemovePhysicsColliders(inst) 
 			if inst:HasTag("notactuallydead") then
-			inst.AnimState:PlayAnimation("idle")
-			local x, y, z = inst.Transform:GetWorldPosition()
-			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
-			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
+			inst.AnimState:PlayAnimation("disappear")
+			inst.sg:SetTimeout(0.6)
 			else
             inst.AnimState:PlayAnimation("death")
             inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition())) 
 			end
         end,
+		ontimeout = function(inst)
+			local x, y, z = inst.Transform:GetWorldPosition()
+			SpawnPrefab("sand_puff").Transform:SetPosition(x, y, z)
+			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
+			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
+			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
+			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
+        end,
+		        events=
+        {
+            EventHandler("animover", function(inst) 
+			if inst:HasTag("notactuallydead") then
+			local x, y, z = inst.Transform:GetWorldPosition()
+			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
+			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
+			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
+			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
+			end
+
+			end),
+        },
 
     },    
     

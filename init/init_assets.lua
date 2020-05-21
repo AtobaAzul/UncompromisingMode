@@ -106,7 +106,7 @@ Assets = {
 	Asset("ANIM", "anim/scorpion_basic.zip"),
 	Asset("ANIM", "anim/scorpion_build.zip"),
 	Asset("ANIM", "anim/scorpion_new.zip"),
-	
+	Asset("ANIM", "anim/scorpion_leave.zip"),
 	Asset("ANIM", "anim/bat_vamp_build.zip"),
 	Asset("ANIM", "anim/bat_vamp_shadow.zip"),
 	Asset("IMAGE", "images/inventoryimages/zaspberryparfait.tex"),
