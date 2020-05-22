@@ -71,6 +71,7 @@ local prefab_post = {
 	"heatrock",
 	"firesuppressor",
 	"dragonfly_spawner",
+	"mist",
 }
 
 local stategraph_post = {

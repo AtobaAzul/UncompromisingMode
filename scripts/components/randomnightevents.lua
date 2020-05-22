@@ -19,6 +19,25 @@ self.caveevents = nil
 self.totalrandomwildweight = nil
 self.totalrandombaseweight = nil
 self.totalrandomcaveweight = nil
+--------------------------------
+local function DoMist(player)
+	for i= 1, 5 do
+		local mist = SpawnPrefab("mist")
+		local x, y, z = player.Transform:GetWorldPosition()
+		local special = { {8, 8},
+				  {8 + 192, 8},
+				  {8 + 192, 8 + 192},
+				  {8, 8 + 192}
+				}
+		local special2 = {9,9}
+		mist.Transform:SetPosition(x + math.random(-12,12), y, z + math.random(-12,12))
+		mist.components.emitter.area_emitter = CreateAreaEmitter(special, special2)
+		mist.entity:SetAABB(1000000, 2)
+        mist.components.emitter.density_factor = math.ceil(1 / 4) / 31
+        mist.components.emitter:Emit()
+		mist:AddTag("rne")
+	end
+end
 ----------------------------------------------------
 --RNE list below
 ----------------------------------------------------
@@ -53,6 +72,7 @@ end
 
 local function SpawnFissures(player)
 	print("SpawnFissures")
+	DoMist(player)
 	player:DoTaskInTime(5, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local fissures = 3+math.floor(math.random()*3)
@@ -102,7 +122,7 @@ end
 --Wild
 AddWildEvent(SpawnBats,1)
 --Base
-AddBaseEvent(SpawnBats,1)
+AddBaseEvent(SpawnBats,.1)
 AddBaseEvent(SpawnFissures,1)
 --Cave
 AddCaveEvent(SpawnBats,1)
