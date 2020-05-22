@@ -139,7 +139,7 @@ local function OnEntitySleep(inst)
         --Or the dragonfly has killed you, you've been punished enough.
         --Only applies if not currently at a base
         LeaveWorld(inst)--]]
-		local PlayerPosition = inst:GetNearestPlayer(true)
+		local PlayerPosition = inst:GetNearestPlayer()
 		
 		if inst.shouldGoAway then
         LeaveWorld(inst)
@@ -295,7 +295,7 @@ local function OnKill(inst, data)
         inst.last_kill_time = GetTime()
     end 
 	
-	local PlayerPosition = inst:GetNearestPlayer(true)
+	local PlayerPosition = inst:GetNearestPlayer()
 	
     if data and PlayerPosition ~= nil then 
 		if data.victim == PlayerPosition then
