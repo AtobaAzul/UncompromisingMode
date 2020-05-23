@@ -43,7 +43,7 @@ end
 ----------------------------------------------------
 local function SpawnBats(player)
 	print("SpawnBats")
-	player:DoTaskInTime(5, function()
+	player:DoTaskInTime(10 * math.random() * 2, function()
 		if TheWorld.state.cycles <= 10 then
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
@@ -72,7 +72,7 @@ end
 
 local function SpawnSkitts(player)
 	print("SpawnSkitts")
-	player:DoTaskInTime(5, function()
+	player:DoTaskInTime(10 * math.random() * 2, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local num_skitts = 300
 			for i = 1, num_skitts do
@@ -87,7 +87,7 @@ end
 local function SpawnFissures(player)
 	print("SpawnFissures")
 	DoMist(player)
-	player:DoTaskInTime(5, function()
+	player:DoTaskInTime(10 * math.random() * 2, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local fissures = 3+math.floor(math.random()*3, 4)
 			for i = 1, fissures do

@@ -114,12 +114,24 @@ local function terrorbeak_postinit(inst)
     inst.sanityreward = TUNING.SANITY_LARGE * 0.8
 end
 
+local function daytime(inst)
+    if GLOBAL.TheWorld:HasTag("forest") then
+		inst:DoTaskInTime(math.random(), function()
+			inst.components.lootdropper:SetLoot({})
+			inst.components.lootdropper:SetChanceLootTable(nil)
+			inst.components.health:Kill()
+		end)
+    end
+end
+
 local function crawlingnightmare_postinit(inst)
     if not GLOBAL.TheWorld.ismastersim then
         return
     end
     inst.components.lootdropper:SetLoot({ "nightmarefuel" })
     inst.components.lootdropper:SetChanceLootTable(nil)
+	
+	inst:WatchWorldState("isday", daytime)
 end
 
 local function nightmarebeak_postinit(inst)
@@ -128,6 +140,8 @@ local function nightmarebeak_postinit(inst)
     end
     inst.components.lootdropper:SetLoot({ "nightmarefuel" })
     inst.components.lootdropper:SetChanceLootTable(nil)
+	
+	inst:WatchWorldState("isday", daytime)
 end
 AddPrefabPostInit("crawlinghorror", crawlinghorror_postinit)
 AddPrefabPostInit("terrorbeak", terrorbeak_postinit)
