@@ -31,6 +31,10 @@ local function speedcheck(inst)
 end
 
 AddPrefabPostInit("wolfgang", function(inst)
+	if not GLOBAL.TheWorld.ismastersim then
+		return
+	end
+	
     if inst ~= nil and inst.components.sanity ~= nil then    
         inst.components.sanity.night_drain_mult = GLOBAL.TUNING.DSTU.WOLFGANG_SANITY_MULTIPLIER
         inst.components.sanity.neg_aura_mult = GLOBAL.TUNING.DSTU.WOLFGANG_SANITY_MULTIPLIER

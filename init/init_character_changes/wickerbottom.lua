@@ -20,6 +20,17 @@ else
 	Recipe("book_gardening", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("poop", 1)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
 end
 
+AddPrefabPostInit("wickerbottom", function(inst)
+	if not GLOBAL.TheWorld.ismastersim then
+		return
+	end
+	
+    if inst ~= nil and inst.components.sanity ~= nil then    
+        inst.components.sanity.night_drain_mult = GLOBAL.TUNING.DSTU.WOLFGANG_SANITY_MULTIPLIER
+    end
+	
+end)
+
 -----------------------------------------------------------------
 -- Nerf on tentacles to spawn 50% a small tentacle
 -----------------------------------------------------------------

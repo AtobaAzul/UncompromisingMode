@@ -16,4 +16,9 @@ env.AddPrefabPostInit("bat", function(inst)
 	if inst.components.lootdropper ~= nil then
 		inst.components.lootdropper:SetChanceLootTable('batty')
 	end
+	
+	if inst.components.health ~= nil then
+		inst.components.health:SetMaxHealth(TUNING.DSTU.BAT_HEALTH)
+	end
+	
 end)
