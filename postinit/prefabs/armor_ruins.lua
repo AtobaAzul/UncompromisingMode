@@ -20,7 +20,7 @@ local function onequip(inst, owner)
 		owner.components.sanity.neg_aura_mult = TUNING.WORTOX_SANITY_AURA_MULT - 0.25
 		owner:AddTag("armorruinssanityaura")
 	elseif owner.prefab == "wolfgang" then
-        owner.components.sanity.neg_aura_mult = GLOBAL.TUNING.DSTU.WOLFGANG_SANITY_MULTIPLIER - 0.25
+        owner.components.sanity.neg_aura_mult = TUNING.DSTU.WOLFGANG_SANITY_MULTIPLIER - 0.25
 		owner:AddTag("armorruinssanityaura")
 	elseif owner.prefab == "wendy" then
 		owner.components.sanity.neg_aura_mult = TUNING.WENDY_SANITY_MULT - 0.25
@@ -44,7 +44,7 @@ local function onunequip(inst, owner)
 		owner.components.sanity.neg_aura_mult = TUNING.WORTOX_SANITY_AURA_MULT
 		owner:RemoveTag("armorruinssanityaura")
 	elseif owner.prefab == "wolfgang" then
-        owner.components.sanity.neg_aura_mult = GLOBAL.TUNING.DSTU.WOLFGANG_SANITY_MULTIPLIER
+        owner.components.sanity.neg_aura_mult = TUNING.DSTU.WOLFGANG_SANITY_MULTIPLIER
 		owner:RemoveTag("armorruinssanityaura")
 	elseif owner.prefab == "wendy" then
 		owner.components.sanity.neg_aura_mult = TUNING.WENDY_SANITY_MULT

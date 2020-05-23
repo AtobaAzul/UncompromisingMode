@@ -33,7 +33,7 @@ local function onunequip(inst, owner)
 		owner.components.sanity.neg_aura_mult = TUNING.WORTOX_SANITY_AURA_MULT
 		owner:RemoveTag("sweatervestsanityaura")
 	elseif owner ~= nil and owner.components.sanity ~= nil and owner.prefab == "wolfgang" then
-        owner.components.sanity.neg_aura_mult = GLOBAL.TUNING.DSTU.WOLFGANG_SANITY_MULTIPLIER
+        owner.components.sanity.neg_aura_mult = TUNING.DSTU.WOLFGANG_SANITY_MULTIPLIER
 		owner:RemoveTag("sweatervestsanityaura")
 	elseif owner ~= nil and owner.components.sanity ~= nil and owner.prefab == "wendy" then
 		owner.components.sanity.neg_aura_mult = TUNING.WENDY_SANITY_MULT
