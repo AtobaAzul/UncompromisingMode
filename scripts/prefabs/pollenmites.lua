@@ -1,5 +1,5 @@
 require "stategraphs/SGleechswarm"
-local brain = require "brains/leechswarmbrain"
+local brain = require "brains/pollenmitesbrain"
 local assets=
 {
 	Asset("ANIM", "anim/gnat.zip"),
@@ -9,6 +9,11 @@ local prefabs =
 {
 
 }
+
+SetSharedLootTable( 'pollenmites',
+{
+    --{'shadow_puff', 0.01},
+})
 
 local AURA_EXCLUDE_TAGS = { "companion", "abigail", "ghost", "epic", "playerghost", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "invisible" }
 
@@ -34,12 +39,35 @@ local function NormalRetarget(inst)
     end, nil, notags)
 end
 
+local function findlight(inst)
+    local targetDist = 15
+    local notags = {"FX", "NOCLICK","INLIMBO"}
+	local light = FindEntity(inst, targetDist, 
+        function(guy) 
+            if guy.Light and guy.Light:IsEnabled() and guy:HasTag("bugzapper") then
+                return true
+            end
+    end, nil, notags)
+
+    return light
+end
+
+local function stopinfesttest(inst)
+	if  TheWorld.state.isdusk or TheWorld.state.isnight then
+		local target = findlight(inst)
+		if target and inst:GetDistanceSqToInst(target) > 5*5 then
+			return target
+		end
+	end
+end
+
 local function bite(inst)
 	if inst.components.infester.target:HasTag("player") then
 		inst.bufferedaction = BufferedAction(inst, inst.components.infester.target, ACTIONS.ATTACK)
 		inst:PushEvent("doattack")
 		if inst.components.infester.target.components.hayfever ~= nil and inst.components.infester.target.components.hayfever.enabled then
-			inst.components.infester.target.components.hayfever:SetNextSneezeTime(GetNextSneezTime() - 10)
+			local hayfeverdelta = inst.components.infester.target.components.hayfever:GetNextSneezTime()
+			inst.components.infester.target.components.hayfever:DoDelta(-10)
 		end
 	elseif inst.components.infester.target then
 		inst.bufferedaction = BufferedAction(inst, inst.components.infester.target, ACTIONS.ATTACK)
@@ -49,10 +77,8 @@ local function bite(inst)
 			inst.components.infester.target:DoTaskInTime(2,function()  inst.components.infester.target:PushEvent("attacked", {attacker = player, damage = 0, weapon = nil}) end)
 		end
 	end
-end
-
-local function stopinfesttest(inst)
-
+	
+	findlight(inst)
 end
 
 local function fn()
@@ -114,8 +140,8 @@ local function fn()
 
 	--MakePoisonableCharacter(inst)
 	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(300)
-	inst.components.health.invincible = true
+	inst.components.health:SetMaxHealth(1000)
+	inst.components.health.invincible = false
 
 	------------------
 	inst:AddComponent("combat")
@@ -123,7 +149,7 @@ local function fn()
     inst.components.combat:SetKeepTargetFunction(keeptargetfn)
 
     inst.components.combat:SetDefaultDamage(0)
-    ---inst.components.combat:SetAttackPeriod(3)
+    --inst.components.combat:SetAttackPeriod(3)
     inst.components.combat:SetRetargetFunction(1, NormalRetarget)    
 
 	------------------
@@ -138,8 +164,9 @@ local function fn()
 	------------------
 	
 	inst:AddComponent("inspectable")
+	
 	inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({"laitleech"})
+    inst.components.lootdropper:SetLoot({'pollenmites'})
 	-----------------
 
 	inst:AddComponent("infester")
@@ -150,28 +177,33 @@ local function fn()
 
 	------------------
 
-
+	inst:DoTaskInTime(60, function() inst.components.health:Kill() end)
 
 	------------------
-
+	--[[
 	inst:ListenForEvent("freeze", function()
 		if inst.components.freezable then
-			inst.components.health.invincible =false
+			inst.components.health.invincible = false
 		end
 	end)    
 
 	inst:ListenForEvent("unfreeze", function() 
 		if inst.components.freezable then
-			inst.components.health.invincible =true
+			inst.components.health.invincible = false
 		end
 	end)
-	--inst:ListenForEvent("killed", function() inst.components.infester.Uninfest() end)
+	]]
+	inst:ListenForEvent("killed", function() inst.components.infester.Uninfest() end)
 	--inst.special_action = makehome
 
+    --inst:ListenForEvent("losttarget", function() inst.components.infester.Uninfest() end)
+	
 	inst:SetStateGraph("SGleechswarm")
 	inst:SetBrain(brain)
 
-	--inst.findlight = findlight
+	inst.findlight = findlight
+	
+	inst:DoTaskInTime(30, function() inst.components.health:Kill() end)
 
 	return inst
 end

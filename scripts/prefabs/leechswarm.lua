@@ -129,7 +129,7 @@ local function fn()
 	
 	inst:AddComponent("inspectable")
 	inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetLoot({"laitleech"})
+    inst.components.lootdropper:SetLoot({})
 	-----------------
 
 	inst:AddComponent("infester")

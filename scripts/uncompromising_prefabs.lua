@@ -70,4 +70,5 @@ return {
 	"rnefissure",
 	"honey_log",
 	"pollenmites",
+	"bugzapper",
 }
