@@ -70,16 +70,30 @@ local function SpawnBats(player)
 	end)
 end
 
+local function SpawnSkitts(player)
+	print("SpawnSkitts")
+	player:DoTaskInTime(5, function()
+			local x, y, z = player.Transform:GetWorldPosition()
+			local num_skitts = 300
+			for i = 1, num_skitts do
+				player:DoTaskInTime(0.2 * i + math.random() * 0.3, function()
+					local skitts = SpawnPrefab("shadowskittish")
+					skitts.Transform:SetPosition(x + math.random(-12,12), y, z + math.random(-12,12))
+				end)
+			end
+	end)
+end
+
 local function SpawnFissures(player)
 	print("SpawnFissures")
 	DoMist(player)
 	player:DoTaskInTime(5, function()
 			local x, y, z = player.Transform:GetWorldPosition()
-			local fissures = 3+math.floor(math.random()*3)
+			local fissures = 3+math.floor(math.random()*3, 4)
 			for i = 1, fissures do
 				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
 					local fissure = SpawnPrefab("rnefissure")
-					fissure.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
+					fissure.Transform:SetPosition(x + math.random(-10,10), y, z + math.random(-10,10))
 				end)
 			end
 	end)
@@ -121,9 +135,11 @@ end
 ------------------------
 --Wild
 AddWildEvent(SpawnBats,1)
+AddBaseEvent(SpawnSkitts,1)
 --Base
 AddBaseEvent(SpawnBats,.1)
 AddBaseEvent(SpawnFissures,1)
+AddBaseEvent(SpawnSkitts,.1)
 --Cave
 AddCaveEvent(SpawnBats,1)
 

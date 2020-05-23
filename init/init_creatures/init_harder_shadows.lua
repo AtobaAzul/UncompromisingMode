@@ -114,8 +114,27 @@ local function terrorbeak_postinit(inst)
     inst.sanityreward = TUNING.SANITY_LARGE * 0.8
 end
 
+local function crawlingnightmare_postinit(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+    inst.components.lootdropper:SetLoot({ "nightmarefuel" })
+    inst.components.lootdropper:SetChanceLootTable(nil)
+end
+
+local function nightmarebeak_postinit(inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+    inst.components.lootdropper:SetLoot({ "nightmarefuel" })
+    inst.components.lootdropper:SetChanceLootTable(nil)
+end
 AddPrefabPostInit("crawlinghorror", crawlinghorror_postinit)
 AddPrefabPostInit("terrorbeak", terrorbeak_postinit)
+AddPrefabPostInit("crawlingnightmare", crawlingnightmare_postinit)
+AddPrefabPostInit("nightmarebeak", nightmarebeak_postinit)
+
+
 
 -------------------------------------------------- StategraphState
 
