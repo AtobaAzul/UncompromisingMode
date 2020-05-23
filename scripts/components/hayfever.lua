@@ -14,7 +14,7 @@ nil,
 })
 
 function Hayfever:DoDelta(amount)
-    if self.nextsneeze > 15 then         
+    if self.nextsneeze >= amount then         
         self.nextsneeze = self.nextsneeze + amount
     else       
         self.nextsneeze = self.nextsneeze - 1
