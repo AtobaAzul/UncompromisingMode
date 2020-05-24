@@ -25,9 +25,9 @@ AddPrefabPostInit("wickerbottom", function(inst)
 		return
 	end
 	
-    if inst ~= nil and inst.components.sanity ~= nil then    
+    --[[if inst ~= nil and inst.components.sanity ~= nil then    
         inst.components.sanity.night_drain_mult = GLOBAL.TUNING.DSTU.WOLFGANG_SANITY_MULTIPLIER
-    end
+    end]]
 	
 end)
 
