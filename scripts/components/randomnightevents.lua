@@ -198,11 +198,11 @@ end
 ------------------------
 --Wild
 AddWildEvent(SpawnBats,1)
-AddWildEvent(SpawnSkitts,1)
+AddWildEvent(SpawnSkitts,.5)
 --Base
-AddBaseEvent(SpawnBats,.1)
+AddBaseEvent(SpawnBats,.3)
 AddBaseEvent(SpawnFissures,1)
-AddBaseEvent(SpawnSkitts,.1)
+AddBaseEvent(SpawnSkitts,.5)
 --Cave
 AddCaveEvent(SpawnBats,1)
 AddCaveEvent(SpawnFissures,1)
