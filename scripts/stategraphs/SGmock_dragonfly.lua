@@ -88,7 +88,7 @@ local states=
         tags = {"busy"},
         
         onenter = function(inst)
-            if ((inst.target ~= inst and not inst.target:HasTag("fire")) or inst.target == inst) and not (inst.recently_frozen or inst.flame_on) then
+            if inst.target ~= nil and ((inst.target ~= inst and not inst.target:HasTag("fire")) or inst.target == inst) and not (inst.recently_frozen or inst.flame_on) then
                 inst.Transform:SetTwoFaced()
                 if inst.components.locomotor then
                     inst.components.locomotor:StopMoving()

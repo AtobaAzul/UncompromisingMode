@@ -74,7 +74,7 @@ local function SpawnSkitts(player)
 	print("SpawnSkitts")
 	player:DoTaskInTime(10 * math.random() * 2, function()
 			local x, y, z = player.Transform:GetWorldPosition()
-			local num_skitts = 300
+			local num_skitts = 150
 			for i = 1, num_skitts do
 				player:DoTaskInTime(0.2 * i + math.random() * 0.3, function()
 					local skitts = SpawnPrefab("shadowskittish")
@@ -98,6 +98,58 @@ local function SpawnFissures(player)
 			end
 	end)
 end
+
+local function SpawnLightning(player)
+	print("THUNDERRRRRR")
+	player:DoTaskInTime(10 * math.random() * 2, function()
+			local x, y, z = player.Transform:GetWorldPosition()
+			local lightnings = 1
+			for i = 1, lightnings do
+				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
+				local pos = Vector3(x + math.random(-10,10), y, z + math.random(-10,10))
+				TheWorld:PushEvent("ms_sendlightningstrike", pos)
+				end)
+			end
+	end)
+end
+
+local function SpawnThunderClose(player)
+	print("THUNDER")
+	player:DoTaskInTime(10 * math.random() * 2, function()
+			local x, y, z = player.Transform:GetWorldPosition()
+			local thunders = 1
+			for i = 1, thunders do
+				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
+					--local thunder = SpawnPrefab("thunder_close")
+					--thunder.Transform:SetPosition(x + math.random(-10,10), y, z + math.random(-10,10))
+					SpawnPrefab("thunder_close")
+					player:DoTaskInTime(10 * math.random(), SpawnLightning)
+				end)
+			end
+	end)
+end
+
+local function SpawnThunderFar(player)
+	print("Thundering")
+	
+	if not TheWorld.state.israining then
+		TheWorld:PushEvent("ms_forceprecipitation")
+	end
+	
+	player:DoTaskInTime(20 * math.random() * 2, function()
+			local x, y, z = player.Transform:GetWorldPosition()
+			local thunders = math.random(18,25)
+			for i = 1, thunders do
+				player:DoTaskInTime(0.6 * i + math.random(4) * 0.3, function()
+					--local thunder = SpawnPrefab("thunder_far")
+					--thunder.Transform:SetPosition(x + math.random(-10,10), y, z + math.random(-10,10))
+					SpawnPrefab("thunder_far")
+					player:DoTaskInTime(10 * math.random(), SpawnThunderClose)
+				end)
+			end
+	end)
+end
+
 ---------------------------------------------------
 ---RNE list above
 ---------------------------------------------------
@@ -130,48 +182,85 @@ local function AddCaveEvent(name, weight)
     table.insert(self.caveevents, { name = name, weight = weight })
     self.totalrandomcaveweight = self.totalrandomcaveweight + weight
 end
+
+local function AddSpringEvent(name, weight)
+    if not self.springevents then
+        self.springevents = {}
+        self.totalrandomspringweight = 0
+    end
+
+    table.insert(self.springevents, { name = name, weight = weight })
+    self.totalrandomspringweight = self.totalrandomspringweight + weight
+end
+
 ------------------------
 --Inclusion and Tuning
 ------------------------
 --Wild
 AddWildEvent(SpawnBats,1)
-AddBaseEvent(SpawnSkitts,1)
+AddWildEvent(SpawnSkitts,1)
 --Base
 AddBaseEvent(SpawnBats,.1)
 AddBaseEvent(SpawnFissures,1)
 AddBaseEvent(SpawnSkitts,.1)
 --Cave
 AddCaveEvent(SpawnBats,1)
+AddCaveEvent(SpawnFissures,1)
+--Spring
+AddSpringEvent(SpawnThunderFar,1)
 
 ------------------------
 --Inclusion and Tuning
 ------------------------
 
 local function DoBaseRNE(player)
-	if TheWorld.state.isnight then
+	if math.random() >= .5 and TheWorld.state.isspring and TheWorld.state.isnight then
+		if self.totalrandomspringweight and self.totalrandomspringweight > 0 and self.springevents then
+			local rnd = math.random()*self.totalrandomspringweight
+			for k,v in pairs(self.springevents) do
+				rnd = rnd - v.weight
+				if rnd <= 0 then
+				v.name(player)
+				return
+				end
+			end
+		end
+	elseif TheWorld.state.isnight then
 		if self.totalrandombaseweight and self.totalrandombaseweight > 0 and self.baseevents then
-        local rnd = math.random()*self.totalrandombaseweight
-        for k,v in pairs(self.baseevents) do
-            rnd = rnd - v.weight
-            if rnd <= 0 then
-			v.name(player)
-			return
-            end
-        end
+			local rnd = math.random()*self.totalrandombaseweight
+			for k,v in pairs(self.baseevents) do
+				rnd = rnd - v.weight
+				if rnd <= 0 then
+				v.name(player)
+				return
+				end
+			end
 		end
 	end
 end
+
 local function DoWildRNE(player)
-	if TheWorld.state.isnight then
+	if math.random() >= .5 and TheWorld.state.isspring and TheWorld.state.isnight then
+		if self.totalrandomspringweight and self.totalrandomspringweight > 0 and self.springevents then
+			local rnd = math.random()*self.totalrandomspringweight
+			for k,v in pairs(self.springevents) do
+				rnd = rnd - v.weight
+				if rnd <= 0 then
+				v.name(player)
+				return
+				end
+			end
+		end
+	elseif TheWorld.state.isnight then
 		if self.totalrandomwildweight and self.totalrandomwildweight > 0 and self.wildevents then
-        local rnd = math.random()*self.totalrandomwildweight
-        for k,v in pairs(self.wildevents) do
-            rnd = rnd - v.weight
-            if rnd <= 0 then
-            v.name(player)
-			return
-            end
-        end
+			local rnd = math.random()*self.totalrandomwildweight
+			for k,v in pairs(self.wildevents) do
+				rnd = rnd - v.weight
+				if rnd <= 0 then
+				v.name(player)
+				return
+				end
+			end
 		end
 	end
 end
