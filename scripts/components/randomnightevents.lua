@@ -20,24 +20,34 @@ self.totalrandomwildweight = nil
 self.totalrandombaseweight = nil
 self.totalrandomcaveweight = nil
 --------------------------------
-local function DoMist(player)
-	for i= 1, 5 do
-		local mist = SpawnPrefab("mist")
-		local x, y, z = player.Transform:GetWorldPosition()
-		local special = { {8, 8},
-				  {8 + 192, 8},
-				  {8 + 192, 8 + 192},
-				  {8, 8 + 192}
-				}
-		local special2 = {9,9}
-		mist.Transform:SetPosition(x + math.random(-12,12), y, z + math.random(-12,12))
-		mist.components.emitter.area_emitter = CreateAreaEmitter(special, special2)
-		mist.entity:SetAABB(1000000, 2)
-        mist.components.emitter.density_factor = math.ceil(1 / 4) / 31
-        mist.components.emitter:Emit()
-		mist:AddTag("rne")
+--RNE Fog Controller Functions Below
+--------------------------------
+local function StopFog(player)
+	if player:HasTag("infog") then
+		player:RemoveTag("infog")
+--print("stopfog") 
 	end
 end
+
+local function StartFog(player)
+	if not player:HasTag("infog") then
+		player:AddTag("infog")
+	--print("startfog") 
+	end
+end
+
+local function StartFogAuto(player,x) --This will deactivate fog after 15 seconds or x time if you don't want to include StopFog()
+	if not player:HasTag("infog") then
+		player:AddTag("infog")
+--print("startfog") 
+	end
+	if x then
+		player:DoTaskInTime(x,StopFog)
+	else
+		player:DoTaskInTime(15,StopFog)
+	end
+end
+
 ----------------------------------------------------
 --RNE list below
 ----------------------------------------------------
@@ -72,14 +82,38 @@ end
 
 local function SpawnFissures(player)
 	print("SpawnFissures")
-	DoMist(player)
-	player:DoTaskInTime(5, function()
+	StartFog(player)
+	player:DoTaskInTime(15+math.random(5,15), function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local fissures = 3+math.floor(math.random()*3)
 			for i = 1, fissures do
 				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
 					local fissure = SpawnPrefab("rnefissure")
 					fissure.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
+				end)
+			end
+			StopFog(player)
+	end)
+end
+
+local function SpawnLightFlowersNFerns(player)
+	player:DoTaskInTime(5+math.random(5,10), function()
+			local x, y, z = player.Transform:GetWorldPosition()
+			local ents = 7+math.floor(math.random()*3)
+			for i = 1, ents do
+				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
+				if math.random() > 0.7 then
+					local flowerdbl = SpawnPrefab("stalker_bulb_double")
+					flowerdbl.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
+				else
+					if math.random() > 0.7 then
+						local flowersng = SpawnPrefab("stalker_bulb")
+						flowersng.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))				
+					else
+						local fern = SpawnPrefab("stalker_fern")
+						fern.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
+					end
+				end
 				end)
 			end
 	end)
@@ -121,8 +155,9 @@ end
 ------------------------
 --Wild
 AddWildEvent(SpawnBats,1)
+AddWildEvent(SpawnLightFlowersNFerns,1)
 --Base
-AddBaseEvent(SpawnBats,.1)
+AddBaseEvent(SpawnBats,1)
 AddBaseEvent(SpawnFissures,1)
 --Cave
 AddCaveEvent(SpawnBats,1)

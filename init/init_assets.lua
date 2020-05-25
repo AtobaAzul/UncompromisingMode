@@ -11,6 +11,8 @@ Assets = {
 	
 	Asset("ATLAS", "images/fx4.xml"),
 	Asset("IMAGE", "images/fx4.tex"),
+	Asset("ATLAS", "images/fx5.xml"),
+	Asset("IMAGE", "images/fx5.tex"),
 	Asset("ATLAS", "images/inventoryimages/gasmask.xml"),
 	Asset("IMAGE", "images/inventoryimages/gasmask.tex"),
 	Asset("ATLAS", "images/inventoryimages/sand.xml"),

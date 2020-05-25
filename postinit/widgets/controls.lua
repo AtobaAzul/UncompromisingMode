@@ -8,6 +8,11 @@ AddClassPostConstruct( "widgets/controls", function(self, inst)
 	self.pollenover:MoveToBack()
 	self.inst:ListenForEvent("updatepollen", function(inst, data) return self.pollenover:UpdateState(data.sneezetime) end, self.owner)
 	self.owner:ListenForEvent("seasontick", function() return self:SeasonHide() end, self.owner)
+	local FogOver = require "widgets/fogover"
+	self.fogover = self:AddChild( FogOver(ownr) )
+	self.fogover:MoveToBack()
+	self.inst:ListenForEvent("startfog", function() return self:StartFog() end, self.owner)
+	self.inst:ListenForEvent("stopfog", function() return self:StopFog() end, self.owner)
 end)
 --[[
 AddClassPostConstruct("screens/playerhud",function(inst)
