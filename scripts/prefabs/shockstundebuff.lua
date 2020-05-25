@@ -2,7 +2,7 @@ local function OhCrap(inst, target)
     if target.components.health ~= nil and not target.components.health:IsDead() and
         not target:HasTag("playerghost") then
 		SpawnPrefab("electricchargedfx"):SetTarget(target)
-        target.components.health:DoDelta(-5, nil, "Electricity")
+        target.components.health:DoDelta(-2, nil, "Electricity")
 		if target.brain ~= nil then
             target.brain:Stop()
         end
