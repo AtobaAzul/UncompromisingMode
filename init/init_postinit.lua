@@ -63,6 +63,7 @@ local prefab_post = {
 	"stafflights",
 	"books",
 	"armor_ruins",
+	"sweatervest",
 	"penguin_ice",
 	"fans",
 	"skeletonhat",
