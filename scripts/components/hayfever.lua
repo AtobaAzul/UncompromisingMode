@@ -13,6 +13,14 @@ nil,
     nextsneeze = onnextsneeze,
 })
 
+function Hayfever:DoDelta(amount)
+    if self.nextsneeze >= amount then         
+        self.nextsneeze = self.nextsneeze + amount
+    else       
+        self.nextsneeze = self.nextsneeze - 1
+    end
+end
+
 function Hayfever:GetNextSneezTime()
 	if self.inst:HasTag("plantkin") then
 		return math.random(80,120)
@@ -41,7 +49,7 @@ function Hayfever:CanSneeze()
 end
 
 function Hayfever:OnUpdate(dt)
-	--print(self.nextsneeze)
+	print(self.nextsneeze)
     if self:CanSneeze() then
         if self.nextsneeze <= 0 then
             if not self.inst.wantstosneeze then

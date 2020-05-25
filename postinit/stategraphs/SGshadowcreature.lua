@@ -108,7 +108,7 @@ local states = {
             inst.sg.statemem.target = target
 			inst.Physics:Stop()
 			if inst:HasTag("terrorbeak") then 
-				inst:DoTaskInTime(8*FRAMES, function(inst) 
+				inst:DoTaskInTime(10*FRAMES, function(inst) 
 					inst.components.locomotor:WalkForward()
 				end)
 			end

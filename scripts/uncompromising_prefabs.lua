@@ -69,4 +69,6 @@ return {
 	"carapacecooler",
 	"rnefissure",
 	"honey_log",
+	"pollenmites",
+	"bugzapper",
 }
