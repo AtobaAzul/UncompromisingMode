@@ -75,6 +75,62 @@ end
 ----------------------------------------------------
 --RNE list below
 ----------------------------------------------------
+local function find_leif_spawn_target(item)
+    return not item.noleif
+        and item.components.growable ~= nil
+        and item.components.growable.stage <= 3
+end
+local function spawn_leif(target)
+    --assert(GetBuild(target).leif ~= nil)
+    local leif = SpawnPrefab("leif")--only normal working
+    leif.AnimState:SetMultColour(target.AnimState:GetMultColour())
+    leif:SetLeifScale(target.leifscale)
+
+    if target.chopper ~= nil then
+        leif.components.combat:SuggestTarget(target.chopper)
+    end
+
+    local x, y, z = target.Transform:GetWorldPosition()
+    target:Remove()
+
+    leif.Transform:SetPosition(x, y, z)
+    leif.sg:GoToState("spawn")
+end
+local function LeifAttack(player)
+print("leifattack")
+local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
+for k = 1, (days_survived <= 30 and 1) or math.random(days_survived <= 80 and 2 or 3) do
+                    local target = FindEntity(player, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, { "evergreens", "tree" }, { "leif", "stump", "burnt" })
+                    if target ~= nil then
+					print("targetfound")
+                        target.noleif = true
+						target.chopper = player
+                        target.leifscale = 1 --GetGrowthStages(target)[target.components.growable.stage].leifscale or 1 Getting size is muck
+                            --assert(GetBuild(target).leif ~= nil)
+						target:DoTaskInTime(6 + math.random() * 3, spawn_leif)
+					end
+	end
+end
+
+local function SpawnMonkeys(player)
+	print("SpawnMonkeys")
+	player:DoTaskInTime(5 + math.random(0,5), function()
+			local x, y, z = player.Transform:GetWorldPosition()
+			local day = TheWorld.state.cycles
+			local num_monkey = 3+math.floor(math.random()*4, 6)
+			for i = 1, num_monkey do
+				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
+					local monkey = SpawnPrefab("monkey")
+					if math.random()>0.5 then
+					monkey.Transform:SetPosition(x + math.random(12,16), y, z + math.random(12,16))
+					else
+					monkey.Transform:SetPosition(x - math.random(12,16), y, z - math.random(12,16))
+					end
+				end)
+			end
+	end)
+end
+
 local function SpawnBats(player)
 	print("SpawnBats")
 	player:DoTaskInTime(5, MoonTear)
@@ -263,10 +319,12 @@ end
 AddWildEvent(SpawnBats,1)
 AddWildEvent(SpawnLightFlowersNFerns,0.3)
 AddWildEvent(SpawnSkitts,.5)
+AddWildEvent(SpawnMonkeys,0.2)
 --Base
 AddBaseEvent(SpawnBats,.3)
 AddBaseEvent(SpawnFissures,.3)
 AddBaseEvent(SpawnSkitts,.5)
+AddBaseEvent(LeifAttack,10)
 --Cave
 AddCaveEvent(SpawnBats,1)
 AddCaveEvent(SpawnFissures,1)
