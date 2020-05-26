@@ -1,6 +1,6 @@
 local assets =
 {
-    --Asset("ANIM", "anim/rat_tail.zip"),
+    Asset("ANIM", "anim/meat_rack_food.zip"),
 }
 
 local function fn()

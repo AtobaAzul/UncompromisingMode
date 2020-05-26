@@ -57,11 +57,27 @@ local fogtargets = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"player"})
 	end
 end
 
+--------------------------------
+--RNE Moon Tear function
+--------------------------------
+
+local function MoonTear(player)
+	if TheWorld.state.isfullmoon then
+		print("The Moon is Crying")
+		local x, y, z = player.Transform:GetWorldPosition()
+		player:DoTaskInTime(0.6 + math.random(4), function()
+			local tear = SpawnPrefab("moon_tear_meteor")
+			tear.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
+		end)
+	end
+end
+
 ----------------------------------------------------
 --RNE list below
 ----------------------------------------------------
 local function SpawnBats(player)
 	print("SpawnBats")
+	player:DoTaskInTime(5, MoonTear)
 	player:DoTaskInTime(10 * math.random() * 2, function()
 		if TheWorld.state.cycles <= 10 then
 			local x, y, z = player.Transform:GetWorldPosition()
@@ -91,6 +107,7 @@ end
 
 local function SpawnSkitts(player)
 	print("SpawnSkitts")
+	player:DoTaskInTime(5, MoonTear)
 	player:DoTaskInTime(10 * math.random() * 2, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local num_skitts = 150
@@ -105,6 +122,7 @@ end
 
 local function SpawnFissures(player)
 	print("SpawnFissures")
+	player:DoTaskInTime(5, MoonTear)
 	local tillrne = 10 + math.random(10,15)
 	MultiFogAuto(player,tillrne)
 	player:DoTaskInTime(tillrne, function()
@@ -156,7 +174,7 @@ local function SpawnThunderFar(player)
 		TheWorld:PushEvent("ms_forceprecipitation")
 	end
 	
-	player:DoTaskInTime(20 * math.random() * 2, function()
+	player:DoTaskInTime(10 * math.random() * 2, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local thunders = math.random(18,25)
 			for i = 1, thunders do
@@ -172,6 +190,7 @@ local function SpawnThunderFar(player)
 end
 
 local function SpawnLightFlowersNFerns(player)
+	player:DoTaskInTime(5, MoonTear)
 	player:DoTaskInTime(5+math.random(5,10), function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local ents = 7+math.floor(math.random()*3)

@@ -181,7 +181,9 @@ local function chop_tree(inst, chopper)
             if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
                 v:DoTaskInTime(math.random(), WakeUpLeif)
             end
-            v.components.combat:SuggestTarget(chopper)
+			if v.components.combat ~= nil then
+				v.components.combat:SuggestTarget(chopper)
+			end
         end
 end
 

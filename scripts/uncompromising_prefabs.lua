@@ -71,4 +71,5 @@ return {
 	"honey_log",
 	"pollenmites",
 	"bugzapper",
+	"moon_tear",
 }
