@@ -5,13 +5,38 @@ local assets =
 	Asset("IMAGE", "images/inventoryimages/zaspberry.tex"),
 }
 
+local function create_light(eater, lightprefab)
+    if eater.wormlight ~= nil then
+        if eater.wormlight.prefab == lightprefab then
+            eater.wormlight.components.spell.lifetime = 0
+            eater.wormlight.components.spell:ResumeSpell()
+            return
+        else
+            eater.wormlight.components.spell:OnFinish()
+        end
+    end
+
+    local light = SpawnPrefab(lightprefab)
+    light.components.spell:SetTarget(eater)
+    if light:IsValid() then
+        if light.components.spell.target == nil then
+            light:Remove()
+        else
+            light.components.spell:StartSpell()
+        end
+    end
+end
+
+
 local function oneatenfn(inst, eater)
 	if eater.components.debuffable ~= nil and eater.components.debuffable:IsEnabled() and
                 not (eater.components.health ~= nil and eater.components.health:IsDead()) and
                 not eater:HasTag("playerghost") then
-                eater.components.debuffable:AddDebuff("buff_lesserelectricattack", "buff_electricattack")
+                eater.components.debuffable:AddDebuff("buff_lesserelectricattack", "buff_lesserelectricattack")
+				create_light(eater, "wormlight_light")
 	end
 end
+
 local function fn()
     local inst = CreateEntity()
 
