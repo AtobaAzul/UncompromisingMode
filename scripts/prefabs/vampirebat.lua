@@ -26,7 +26,7 @@ SetSharedLootTable( 'vampirebat',
 })
 
 local SLEEP_DIST_FROMHOME = 1
-local SLEEP_DIST_FROMTHREAT = 12
+local SLEEP_DIST_FROMTHREAT = 20
 local MAX_CHASEAWAY_DIST = 80
 local MAX_TARGET_SHARES = 100
 local SHARE_TARGET_DIST = 100
@@ -47,53 +47,53 @@ end
 local function OnWingDownShadow(inst)
     inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/distant_flap")
 end
-
-local function ShouldSleep(inst)
-    if    (inst.components.combat and inst.components.combat.target)
-       or (inst.components.burnable and inst.components.burnable:IsBurning() )
-       or (inst.components.freezable and inst.components.freezable:IsFrozen() ) then
-        return false
+local function OnSleepGoHome(inst)
+    inst._hometask = nil
+    local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
+    if home ~= nil and home:IsValid() and home.components.childspawner ~= nil then
+        home.components.childspawner:GoHome(inst)
     end
-    local nearestEnt = GetClosestInstWithTag("character", inst, SLEEP_DIST_FROMTHREAT)
-    return nearestEnt == nil
 end
 
-local function ShouldWake(inst)    
-    if    (inst.components.combat and inst.components.combat.target)
-       or (inst.components.burnable and inst.components.burnable:IsBurning() )
-       or (inst.components.freezable and inst.components.freezable:IsFrozen() ) then
-        return true
+local function OnIsDay(inst, isday)
+    if isday then
+        if inst._hometask == nil then
+            inst._hometask = inst:DoTaskInTime(10 + math.random(), OnSleepGoHome)
+        end
+    elseif inst._hometask ~= nil then
+        inst._hometask:Cancel()
+        inst._hometask = nil
     end
-    local nearestEnt = GetClosestInstWithTag("character", inst, SLEEP_DIST_FROMTHREAT)
-    return nearestEnt
 end
 
-local function ShouldWakeUp(inst)
-    if     (inst.components.combat and inst.components.combat.target)
-        or (inst.components.burnable and inst.components.burnable:IsBurning() )
-        or (inst.components.freezable and inst.components.freezable:IsFrozen() )
-        or (inst.components.teamattacker and inst.components.teamattacker.inteam)
-        or (inst.components.health and inst.components.health.takingfiredamage)
-        or inst:HasTag("batfrenzy") then
-        return true 
+local function StopWatchingDay(inst)
+    inst:StopWatchingWorldState("isday", OnIsDay)
+    if inst._hometask ~= nil then
+        inst._hometask:Cancel()
+        inst._hometask = nil
     end
+end
 
-    local nearestEnt = GetClosestInstWithTag("character", inst, SLEEP_DIST_FROMTHREAT)
-    return nearestEnt == nil
-end 
+local function StartWatchingDay(inst)
+    inst:WatchWorldState("isday", OnIsDay)
+    OnIsDay(inst, TheWorld.state.isday)
+end
 
-local function ShouldSleep(inst)
-    if     (inst.components.combat and inst.components.combat.target)
-        or (inst.components.burnable and inst.components.burnable:IsBurning() )
-        or (inst.components.freezable and inst.components.freezable:IsFrozen() )
-        or (inst.components.teamattacker and inst.components.teamattacker.inteam)
-        or (inst.components.health and inst.components.health.takingfiredamage)
-        or inst:HasTag("batfrenzy") then
-        return false
+local function OnEntitySleep(inst)
+    inst:ListenForEvent("enterlimbo", StopWatchingDay)
+    inst:ListenForEvent("exitlimbo", StartWatchingDay)
+    if not inst:IsInLimbo() then
+        StartWatchingDay(inst)
     end
-    local nearestEnt = GetClosestInstWithTag("character", inst, SLEEP_DIST_FROMTHREAT)
-    return nearestEnt
-end 
+end
+
+local function OnEntityWake(inst)
+    inst:RemoveEventCallback("enterlimbo", StopWatchingDay)
+    inst:RemoveEventCallback("exitlimbo", StartWatchingDay)
+    if not inst:IsInLimbo() then
+        StopWatchingDay(inst)
+    end
+end
 
 -- TEAM ATTACKER STUFF
 
@@ -197,6 +197,12 @@ local function onload(inst, data)
     end    
   end
 end
+local function OnPreLoad(inst, data)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	if y > 0 then
+		inst.Transform:SetPosition(x, 0, z)
+	end
+end
 
 local function fn()
 	local inst = CreateEntity()
@@ -264,8 +270,8 @@ local function fn()
 
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetResistance(3)
-    inst.components.sleeper:SetSleepTest(ShouldSleep)
-    inst.components.sleeper:SetWakeTest(ShouldWakeUp)
+	    inst.components.sleeper.sleeptestfn = NocturnalSleepTest
+    inst.components.sleeper.waketestfn = NocturnalWakeTest
     
     inst:SetStateGraph("SGvampirebat")
  
@@ -293,10 +299,14 @@ local function fn()
     inst:AddComponent("teamattacker")
     inst.components.teamattacker.team_type = "vampirebat"
     inst.MakeTeam = MakeTeam
-
+	MakeHauntablePanic(inst)
     MakeMediumBurnableCharacter(inst, "bat_body")
     MakeMediumFreezableCharacter(inst, "bat_body")
-
+	
+	inst.OnEntitySleep = OnEntitySleep
+    inst.OnEntityWake = OnEntityWake
+    inst.OnPreLoad = OnPreLoad
+	
     inst.OnSave = onsave 
     inst.OnLoad = onload 
 
