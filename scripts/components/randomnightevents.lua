@@ -48,11 +48,20 @@ local function StartFogAuto(player,x) --This should deactivate fog after 15 seco
 	end
 end
 
+local function MultiFogAuto(player,x)
+StartFogAuto(player,x)
+local m,n,o = player.Transform:GetWorldPosition()
+local fogtargets = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"player"})
+	for k,v in pairs(fogtargets) do
+	StartFogAuto(v,x)
+	end
+end
+
 ----------------------------------------------------
 --RNE list below
 ----------------------------------------------------
 local function SpawnBats(player)
-	--print("SpawnBats")
+	print("SpawnBats")
 	player:DoTaskInTime(10 * math.random() * 2, function()
 		if TheWorld.state.cycles <= 10 then
 			local x, y, z = player.Transform:GetWorldPosition()
@@ -81,7 +90,7 @@ local function SpawnBats(player)
 end
 
 local function SpawnSkitts(player)
-	--print("SpawnSkitts")
+	print("SpawnSkitts")
 	player:DoTaskInTime(10 * math.random() * 2, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local num_skitts = 150
@@ -95,9 +104,10 @@ local function SpawnSkitts(player)
 end
 
 local function SpawnFissures(player)
-	--print("SpawnFissures")
-	StartFog(player)
-	player:DoTaskInTime(10 + math.random(10,15), function()
+	print("SpawnFissures")
+	local tillrne = 10 + math.random(10,15)
+	MultiFogAuto(player,tillrne)
+	player:DoTaskInTime(tillrne, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local fissures = 3+math.floor(math.random()*3, 4)
 			for i = 1, fissures do
@@ -106,7 +116,6 @@ local function SpawnFissures(player)
 					fissure.Transform:SetPosition(x + math.random(-10,10), y, z + math.random(-10,10))
 				end)
 			end
-	StopFog(player)
 	end)
 end
 
@@ -250,6 +259,7 @@ AddSpringEvent(SpawnThunderFar,1)
 ------------------------
 
 local function DoBaseRNE(player)
+print("done")
 	if math.random() >= .5 and TheWorld.state.isspring and TheWorld.state.isnight then
 		if self.totalrandomspringweight and self.totalrandomspringweight > 0 and self.springevents then
 			local rnd = math.random()*self.totalrandomspringweight
@@ -326,21 +336,36 @@ local function CheckPlayers()
 	end
 	local numStructures = 0
 		for i, v in ipairs(playerlist) do  --try a base RNE
+		local rnepl = 0
 		local x,y,z = v.Transform:GetWorldPosition()
 		local ents = TheSim:FindEntities(x,y,z, STRUCTURE_DIST, {"structure"})
 		numStructures = #ents
 			if numStructures >= 4 then
-			DoBaseRNE(v)
-			--print("found base")
-			return
+				local m,n,o = v.Transform:GetWorldPosition()
+				local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
+				rnepl = #rnep
+						if rnepl < 2 then
+							DoBaseRNE(v)
+				print("found base")
+							v:AddTag("rnetarget")
+							v:DoTaskInTime(60,inst:RemoveTag("rnetarget"))
+						end
+		else
+		for i, v in ipairs(playerlist) do --noone was home, so we'll do RNEs at every player instead
+				local rnepl = 0
+				local m,n,o = v.Transform:GetWorldPosition()
+				local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
+				rnepl = #rnep
+					if rnepl < 2 then
+						DoWildRNE(v)
+						v:AddTag("rnetarget")
+						v:DoTaskInTime(60,v:RemoveTag("rnetarget"))
+					end
+			print("no find base")
 			end
 		end
-		for i, v in ipairs(playerlist) do --noone was home, so we'll do RNEs at every player instead
-		DoWildRNE(v)
-		--print("no find base")
-		end
+	end
 end
-
 
 local function TryRandomNightEvent()      --Canis said 20% chance each night to have a RNE, could possibly include a scaling effect later
 	--if math.random >= 0.8 then		--enable after testing
