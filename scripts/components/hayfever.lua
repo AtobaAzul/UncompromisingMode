@@ -41,15 +41,15 @@ function Hayfever:CanSneeze()
     local ents = TheSim:FindEntities(x, y, z, 30, {"prevents_hayfever"})
     local suppressorNearby = (#ents > 0)
 --]]
-    if self.inst:HasTag("playerghost") or self.inst:HasTag("has_gasmask") or self.inst:HasTag("has_hayfeverhat") or self.inst:HasTag("minifansuppressor") or self.inst:HasTag("wereplayer") or TheWorld.net:HasTag("queenbeekilled") or self.inst.sg:HasStateTag("sleeping") or self.inst:HasTag("plantkin") then -- or suppressorNearby
+    if self.inst:HasTag("playerghost") or self.inst:HasTag("has_gasmask") or self.inst:HasTag("has_hayfeverhat") or self.inst:HasTag("minifansuppressor") or self.inst:HasTag("wereplayer") or TheWorld.net:HasTag("queenbeekilled") or self.inst.sg:HasStateTag("sleeping") or self.inst:HasTag("plantkin") or not TheWorld:HasTag("hayfever") or not TheWorld.net:HasTag("hayfever") then -- or suppressorNearby
         can = false
     end
-
+	
     return can
 end
 
 function Hayfever:OnUpdate(dt)
-	print(self.nextsneeze)
+	--print(self.nextsneeze)
     if self:CanSneeze() then
         if self.nextsneeze <= 0 then
             if not self.inst.wantstosneeze then
@@ -111,7 +111,7 @@ function Hayfever:Enable()
 			--return
         --end
 
-        if not self.enabled then
+        if not self.enabled and (TheWorld:HasTag("hayfever") or TheWorld.net:HasTag("hayfever"))then
             print("HAYVEVER STARTED")    
             self.inst.components.talker:Say(GetString(self.inst.prefab, "ANNOUNCE_HAYFEVER"))
         end
@@ -123,8 +123,8 @@ function Hayfever:Enable()
 end
 
 function Hayfever:Disable()
-    if self.enabled then	
-        self.inst:PushEvent("updatepollen", {sneezetime = nil})  
+    if self.enabled  and (TheWorld:HasTag("hayfever") or TheWorld.net:HasTag("hayfever"))then	
+        self.inst:PushEvent("updatepollen", {sneezetime = nil}) 
         self.inst.components.talker:Say(GetString(self.inst.prefab, "ANNOUNCE_HAYFEVER_OFF"))    
     end
     self.enabled = false
@@ -164,7 +164,7 @@ function Hayfever:DoSneezeEffects()
 
                     if item then
                         local direction = Vector3(math.random(1)-2,0,math.random(1)-2)        
-                        print("DROPPING",item.prefab)                
+                        --print("DROPPING",item.prefab)                
                         self.inst.components.inventory:DropItem(item, false, direction:GetNormalized())
                     end                   
 

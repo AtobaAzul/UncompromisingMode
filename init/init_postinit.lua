@@ -5,6 +5,7 @@ local component_post = {
 	"groundpounder",
 	"propagator",
 	"burnable",
+	"moisture",
 	--"hunter",
 }
 
