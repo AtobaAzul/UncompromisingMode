@@ -22,7 +22,7 @@ local events =
 {	
     EventHandler("attacked", function(inst)
         if not inst.components.health:IsDead() then
-		if inst:HasTag("spider_warrior") then
+		if inst:HasTag("spider_warrior") and not inst:HasTag("trapdoorspider") then
 		inst.sg:GoToState("evade")
 		end
             if inst:HasTag("spider_spitter") or inst:HasTag("spider_moon") then

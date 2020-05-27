@@ -336,7 +336,7 @@ local function create_trapdoor()
     inst.components.locomotor.runspeed = TUNING.SPIDER_WARRIOR_RUN_SPEED*1.1
 
     inst.components.sanityaura.aura = -TUNING.SANITYAURA_MED
-
+	inst:AddTag("trapdoorspider")
     return inst
 end
 
