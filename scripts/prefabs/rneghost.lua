@@ -57,9 +57,9 @@ inst.sg:GoToState("dissipate")
 end
 
 local function TakeAllFire(inst)
+local m,n,o = inst.Transform:GetWorldPosition()
 DismissOtherGhosts(inst)
 if not TheWorld.state.isday then
-local m,n,o = inst.Transform:GetWorldPosition()
 local firestuffs = TheSim:FindEntities(m,n,o, 100, {"campfire"})
 	for i, v in ipairs(firestuffs) do
 	if v.components.fueled ~= nil then
@@ -80,8 +80,51 @@ local lightstuffs = TheSim:FindEntities(m,n,o, 100, {"lighttarget1"})
 	end
 local stafflights = TheSim:FindEntities(m,n,o, 100, {"lightarget2"}) --Ghosts seem to refuse to take this
 	for i, v in ipairs(stafflights) do
-    v:Remove()
-								
+    v:Remove()					
+	end
+local plights = TheSim:FindEntities(m,n,o, 100, {"plight"})
+	for i, v in ipairs(plights) do 
+    v.AnimState:PlayAnimation("rotten")
+    v.components.health:Kill()
+	end
+local mlight1 = TheSim:FindEntities(m,n,o, 100, {"mlight1"})
+	for i, v in ipairs(mlight1) do 
+        if v.components.container ~= nil then
+            v.components.container:DropEverything()
+            v.components.container:Close()
+			v:RemoveComponent("container")
+			v:DoTaskInTime("120",function(v) 
+			v:AddComponent("container")	
+			v.components.container:WidgetSetup("mushroom_light")
+			end)
+        end
+	end
+local mlight2 = TheSim:FindEntities(m,n,o, 100, {"mlight2"})
+	for i, v in ipairs(mlight2) do 
+        if v.components.container ~= nil then
+            v.components.container:DropEverything()
+            v.components.container:Close()
+			v:RemoveComponent("container")
+			v:DoTaskInTime("120",function(v) 
+			v:AddComponent("container")	
+			v.components.container:WidgetSetup("mushroom_light2")
+			end)
+        end
+	end
+local scalelight = TheSim:FindEntities(m,n,o, 100, {"dlight"})
+	for i, v in ipairs(scalelight) do
+	print("foundscaled")
+		v.Light:Enable(false)
+		v:DoTaskInTime("120",function(v)
+		v.Light:Enable(true)
+		end)
+		if v.components.heater ~= nil then
+			v:RemoveComponent("heater")
+			v:DoTaskInTime("120",function(v)
+			v:AddComponent("heater")
+			v.components.heater.heat = 115
+			end)
+		end
 	end
 end
 end
