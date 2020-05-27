@@ -17,3 +17,12 @@ local function FrogFindFood(self)
 end
 
 env.AddBrainPostInit("frogbrain", FrogFindFood)
+
+local function ToadFindFood(self)
+
+    local findfood = DoAction(self.inst, EatFoodAction, "eat food", true)
+	
+    table.insert(self.bt.root.children, 3, findfood)
+end
+
+env.AddBrainPostInit("toadbrain", ToadFindFood)
