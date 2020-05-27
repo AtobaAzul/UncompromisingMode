@@ -26,7 +26,7 @@ local function retargetfn(inst)
             end
         end,
         {"_combat","_health"}, -- see entityreplica.lua
-        {"frog","toadstool"} -- see entityreplica.lua
+        {"frog","toadstool","toad"} -- see entityreplica.lua
         )
     end
 end
