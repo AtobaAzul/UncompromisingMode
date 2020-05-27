@@ -86,6 +86,7 @@ local stategraph_post = {
 	"Leif",
 	"minotaur",
 	"spider",
+	"frog",
 	--"shadowcreature",
 }
 
@@ -104,6 +105,7 @@ local brain_post = {
     --"hound",
 	"werepig",
 	"walrus",
+	"frog",
 }
 
 modimport("postinit/sim")
