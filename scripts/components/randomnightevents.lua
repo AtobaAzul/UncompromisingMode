@@ -133,6 +133,21 @@ local function SpawnMonkeys(player)
 	end)
 end
 
+local function FireHungryGhostAttack(player)
+	print("ooooOOOOoooo")
+	player:DoTaskInTime(5 + math.random(0,5), function()
+			local x, y, z = player.Transform:GetWorldPosition()
+			local day = TheWorld.state.cycles
+			local num_ghost = 3+math.floor(math.random()*4, 6)
+			for i = 1, num_ghost do
+				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
+					local ghost = SpawnPrefab("rneghost")
+					ghost.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
+				end)
+			end
+	end)
+end
+
 local function SpawnBats(player)
 	print("SpawnBats")
 	player:DoTaskInTime(5, MoonTear)
@@ -318,15 +333,16 @@ end
 --Inclusion and Tuning
 ------------------------
 --Wild
-AddWildEvent(SpawnBats,1)
+AddWildEvent(SpawnBats,0.5)
 AddWildEvent(SpawnLightFlowersNFerns,0.3)
 AddWildEvent(SpawnSkitts,.5)
 AddWildEvent(SpawnMonkeys,0.2)
+AddWildEvent(LeifAttack,.3)
 --Base
 AddBaseEvent(SpawnBats,.3)
 AddBaseEvent(SpawnFissures,.3)
 AddBaseEvent(SpawnSkitts,.5)
-AddBaseEvent(LeifAttack,0.3)
+AddBaseEvent(FireHungryGhostAttack,.5)
 --Cave
 AddCaveEvent(SpawnBats,1)
 AddCaveEvent(SpawnFissures,1)

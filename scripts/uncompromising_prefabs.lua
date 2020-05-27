@@ -72,4 +72,5 @@ return {
 	"pollenmites",
 	"bugzapper",
 	"moon_tear",
+	"rneghost",
 }
