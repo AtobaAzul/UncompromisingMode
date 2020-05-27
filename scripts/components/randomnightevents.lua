@@ -59,21 +59,6 @@ local fogtargets = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"player"})
 	end
 end
 
---------------------------------
---RNE Moon Tear function
---------------------------------
-
-local function MoonTear(player)
-	if TheWorld.state.isfullmoon then
-		print("The Moon is Crying")
-		local x, y, z = player.Transform:GetWorldPosition()
-		player:DoTaskInTime(0.6 + math.random(4), function()
-			local tear = SpawnPrefab("moon_tear_meteor")
-			tear.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
-		end)
-	end
-end
-
 ----------------------------------------------------
 --RNE list below
 ----------------------------------------------------
@@ -82,6 +67,7 @@ local function find_leif_spawn_target(item)
         and item.components.growable ~= nil
         and item.components.growable.stage <= 3
 end
+
 local function spawn_leif(target)
     --assert(GetBuild(target).leif ~= nil)
     local leif = SpawnPrefab("leif")--only normal working
@@ -98,6 +84,7 @@ local function spawn_leif(target)
     leif.Transform:SetPosition(x, y, z)
     leif.sg:GoToState("spawn")
 end
+
 local function LeifAttack(player)
 print("leifattack")
 local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
@@ -150,7 +137,6 @@ end
 
 local function SpawnBats(player)
 	print("SpawnBats")
-	player:DoTaskInTime(5, MoonTear)
 	player:DoTaskInTime(10 * math.random() * 2, function()
 		if TheWorld.state.cycles <= 10 then
 			local x, y, z = player.Transform:GetWorldPosition()
@@ -180,14 +166,15 @@ end
 
 local function SpawnSkitts(player)
 	print("SpawnSkitts")
-	player:DoTaskInTime(5, MoonTear)
 	player:DoTaskInTime(10 * math.random() * 2, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local num_skitts = 150
 			for i = 1, num_skitts do
 				player:DoTaskInTime(0.2 * i + math.random() * 0.3, function()
 					local skitts = SpawnPrefab("shadowskittish")
-					skitts.Transform:SetPosition(x + math.random(-12,12), y, z + math.random(-12,12))
+					if TheWorld.state.isnight then
+						skitts.Transform:SetPosition(x + math.random(-12,12), y, z + math.random(-12,12))
+					end
 				end)
 			end
 	end)
@@ -195,7 +182,6 @@ end
 
 local function SpawnFissures(player)
 	print("SpawnFissures")
-	player:DoTaskInTime(5, MoonTear)
 	local tillrne = 10 + math.random(10,15)
 	MultiFogAuto(player,tillrne)
 	player:DoTaskInTime(tillrne, function()
@@ -263,7 +249,6 @@ local function SpawnThunderFar(player)
 end
 
 local function SpawnLightFlowersNFerns(player)
-	player:DoTaskInTime(5, MoonTear)
 	player:DoTaskInTime(5+math.random(5,10), function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local ents = 7+math.floor(math.random()*3)
@@ -284,6 +269,17 @@ local function SpawnLightFlowersNFerns(player)
 				end)
 			end
 	end)
+end
+
+local function MoonTear(player)
+	if TheWorld.state.isfullmoon then
+		print("The Moon is Crying")
+		local x, y, z = player.Transform:GetWorldPosition()
+		player:DoTaskInTime(0.6 + math.random(4), function()
+			local tear = SpawnPrefab("moon_tear_meteor")
+			tear.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
+		end)
+	end
 end
 
 ---------------------------------------------------
@@ -329,6 +325,16 @@ local function AddSpringEvent(name, weight)
     self.totalrandomspringweight = self.totalrandomspringweight + weight
 end
 
+local function AddFullMoonEvent(name, weight)
+    if not self.fullmoonevents then
+        self.fullmoonevents = {}
+        self.totalrandomfullmoonweight = 0
+    end
+
+    table.insert(self.fullmoonevents, { name = name, weight = weight })
+    self.totalrandomfullmoonweight = self.totalrandomfullmoonweight + weight
+end
+
 ------------------------
 --Inclusion and Tuning
 ------------------------
@@ -348,6 +354,8 @@ AddCaveEvent(SpawnBats,1)
 AddCaveEvent(SpawnFissures,1)
 --Spring
 AddSpringEvent(SpawnThunderFar,1)
+--Cave
+AddFullMoonEvent(MoonTear,1)
 
 ------------------------
 --Inclusion and Tuning
@@ -406,6 +414,22 @@ local function DoWildRNE(player)
 	end
 end
 
+
+local function DoFullMoonRNE(player)
+	if TheWorld.state.isnight then
+		if self.totalrandomfullmoonweight and self.totalrandomfullmoonweight > 0 and self.fullmoonevents then
+			local rnd = math.random()*self.totalrandomfullmoonweight
+			for k,v in pairs(self.fullmoonevents) do
+				rnd = rnd - v.weight
+				if rnd <= 0 then
+				v.name(player)
+				return
+				end
+			end
+		end
+	end
+end
+
 local function IsEligible(player)
 	local area = player.components.areaaware
 	return TheWorld.Map:IsVisualGroundAtPoint(player.Transform:GetWorldPosition())
@@ -440,8 +464,13 @@ local function CheckPlayers()
 				local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
 				rnepl = #rnep
 						if rnepl < 2 then
-							DoBaseRNE(v)
-				print("found base")
+							if TheWorld.state.isfullmoon then
+								print("fullmoon")
+								DoFullMoonRNE(v)
+							else
+								DoBaseRNE(v)
+							end
+							print("found base")
 							v:AddTag("rnetarget")
 							v:DoTaskInTime(60,inst:RemoveTag("rnetarget"))
 						end
@@ -452,7 +481,12 @@ local function CheckPlayers()
 				local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
 				rnepl = #rnep
 					if rnepl < 2 then
-						DoWildRNE(v)
+						if TheWorld.state.isfullmoon then
+							print("fullmoon")
+							DoFullMoonRNE(v)
+						else
+							DoWildRNE(v)
+						end
 						v:AddTag("rnetarget")
 						v:DoTaskInTime(60,v:RemoveTag("rnetarget"))
 					end
@@ -462,7 +496,7 @@ local function CheckPlayers()
 	end
 end
 
-local function TryRandomNightEvent()      --Canis said 20% chance each night to have a RNE, could possibly include a scaling effect later
+local function TryRandomNightEvent(self)      --Canis said 20% chance each night to have a RNE, could possibly include a scaling effect later
 	--if math.random >= 0.8 then		--enable after testing
 	CheckPlayers()
 	--print("trying RNE")
@@ -499,5 +533,6 @@ local function OnPlayerLeft(src,player)
 end
 inst:ListenForEvent("ms_playerjoined", OnPlayerJoined)
 inst:ListenForEvent("ms_playerleft", OnPlayerLeft)
-self:WatchWorldState("isnight", TryRandomNightEvent) --RNE could happen any night
+self:WatchWorldState("isnight", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end) --RNE could happen any night
+--self:WatchWorldState("isnight", TryRandomNightEvent) --RNE could happen any night
 end)

@@ -74,7 +74,8 @@ local prefab_post = {
 	"firesuppressor",
 	"dragonfly_spawner",
 	"mist",
-	"rneghostfire"
+	"rneghostfire",
+	"frog",
 }
 
 local stategraph_post = {
