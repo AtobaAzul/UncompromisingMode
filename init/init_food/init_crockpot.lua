@@ -341,4 +341,4 @@ local carapacecooler =
     perishtime = nil,
     cooktime = 0.5,
 }
-AddCookerRecipe("portablecookpot", carapacecooler)
+--AddCookerRecipe("portablecookpot", carapacecooler)

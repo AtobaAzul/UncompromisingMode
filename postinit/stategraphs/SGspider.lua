@@ -19,7 +19,21 @@ local function SoundPath(inst, event)
 end
 
 local events =
-{
+{	
+    EventHandler("attacked", function(inst)
+        if not inst.components.health:IsDead() then
+		if inst:HasTag("spider_warrior") then
+		inst.sg:GoToState("evade")
+		end
+            if inst:HasTag("spider_spitter") or inst:HasTag("spider_moon") then
+                if not inst.sg:HasStateTag("attack") then -- don't interrupt attack or exit shield
+                    inst.sg:GoToState("hit") -- can still attack
+                end
+            elseif not inst.sg:HasStateTag("shield") and not ("spider_warrior") then
+                inst.sg:GoToState("hit_stunlock")  -- can't attack during hit reaction
+            end
+        end
+    end),
     EventHandler("doattack", function(inst, data) 
         if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) then
             --target CAN go invalid because SG events are buffered
@@ -165,6 +179,103 @@ local states = {
 			end
 			inst:RemoveTag("hiding")
         end,
+    },
+	 State{
+        name = "evade",
+        tags = {"busy", "evade","no_stun"},
+
+        onenter = function(inst) 
+            inst.components.locomotor:Stop()           
+            --inst.AnimState:PlayAnimation("evade")
+            --inst.components.locomotor:EnableGroundSpeedMultiplier(false)
+			--inst.Physics:SetMotorVelOverride(-20,0,0)
+        end,
+
+        events=
+        {
+            EventHandler("animover", function(inst) 
+                inst.sg:GoToState("evade_loop") 
+            end ),
+        },               
+    },
+
+    State{
+        name = "evade_loop",
+        tags = {"busy", "evade","no_stun"},
+
+
+        onenter = function(inst)
+            inst.sg:SetTimeout(0.1)                  
+            if inst.components.combat.target and inst.components.combat.target:IsValid() then
+                inst:ForceFacePoint(inst.components.combat.target:GetPosition() )
+            end   
+            inst.components.locomotor:Stop()           
+            inst.AnimState:PlayAnimation("evade",true)
+            inst.Physics:SetMotorVelOverride(-30,0,0)
+            inst.components.locomotor:EnableGroundSpeedMultiplier(false)
+        end,
+--[[
+        events=
+        {
+            EventHandler("animover", function(inst) 
+                inst.sg:GoToState("evade_pst") 
+            end ),
+        },  
+]]
+        timeline =
+        {
+            TimeEvent(3*FRAMES, function(inst) inst.Physics:SetMotorVel(-20,0,0) end),
+          
+        },
+        ontimeout = function(inst)
+            inst.sg:GoToState("evade_pst")
+        end,
+
+        onexit = function(inst)
+            inst.components.locomotor:EnableGroundSpeedMultiplier(true)
+            inst.Physics:ClearMotorVelOverride()
+            inst.components.locomotor:Stop()
+        end,        
+    },
+
+    State{
+        name = "evade_pst",
+        tags = {"busy", "evade","no_stun"},
+
+        onenter = function(inst)                     
+            if inst.components.combat.target and inst.components.combat.target:IsValid() then
+                inst:ForceFacePoint(inst.components.combat.target:GetPosition() )
+            end   
+            inst.components.locomotor:Stop()           
+            --inst.AnimState:PlayAnimation("evade_pst")                    
+        end,
+
+        events=
+        {
+            EventHandler("animover", function(inst) 
+                if inst.components.combat.target and inst.components.combat.target:IsValid() then
+
+                    local JUMP_DISTANCE = 3 
+
+                    local distance = inst:GetDistanceSqToInst(inst.components.combat.target )
+                    --print(distance)
+                    if distance > JUMP_DISTANCE*JUMP_DISTANCE then
+                        inst.sg:GoToState("warrior_attack",inst.components.combat.target) 
+                    else
+                        inst.sg:GoToState("warrior_attack",inst.components.combat.target) 
+                    end
+                else
+                    inst.sg:GoToState("idle") 
+                end
+
+            end ),
+        },  
+
+        onexit = function(inst)
+            inst.components.locomotor:EnableGroundSpeedMultiplier(true)
+            inst.Physics:ClearMotorVelOverride()
+            inst.components.locomotor:Stop()
+        end,        
     },
 }
 
