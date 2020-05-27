@@ -1,8 +1,8 @@
 local assets =
 {
-    Asset("ANIM", "anim/zaspberry.zip"),
-	Asset("ATLAS", "images/inventoryimages/zaspberry.xml"),
-	Asset("IMAGE", "images/inventoryimages/zaspberry.tex"),
+    Asset("ANIM", "anim/zaspberryparfait.zip"),
+	Asset("ATLAS", "images/inventoryimages/zaspberryparfait.xml"),
+	--Asset("IMAGE", "images/inventoryimages/zaspberryparfait.tex"),
 }
 
 local function oneatenfn(inst, eater)
@@ -22,8 +22,8 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("zaspberry")
-    inst.AnimState:SetBuild("zaspberry")
+    inst.AnimState:SetBank("zaspberryparfait")
+    inst.AnimState:SetBuild("zaspberryparfait")
     inst.AnimState:PlayAnimation("idle")
 
     MakeInventoryFloatable(inst)
