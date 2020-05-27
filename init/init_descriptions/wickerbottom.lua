@@ -23,6 +23,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICRETALIATION = ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now"
 	--FoodBuffs
+	ANNOUNCE.ANNOUNCE_RNEFOG = "This fog makes it hard to view my surroundings."
     DESCRIBE.UNCOMPROMISING_RAT = "Rodentia kleptomanis, and quite the large specimen!"
     DESCRIBE.UNCOMPROMISING_RATHOLD = "One entrance to a no doubt vast tunnel system!"
     DESCRIBE.RATPOISONBOTTLE = "The toxic elemnts of the fungus have been fully activated."

@@ -23,6 +23,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICRETALIATION = ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now"
 	--FoodBuffs
+	ANNOUNCE.ANNOUNCE_RNEFOG = "It's not just Charlie watching me, is there?"
     DESCRIBE.UNCOMPROMISING_RAT = "Filthy vermin!"
     DESCRIBE.UNCOMPROMISING_RATHOLD = "I don't recall granting you vermin permission to settle in my world."
     DESCRIBE.RATPOISONBOTTLE = "Hmhm...I remember what the red ones were for now."

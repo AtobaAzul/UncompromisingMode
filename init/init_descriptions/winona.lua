@@ -22,6 +22,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICRETALIATION = ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now"
 	--FoodBuffs
+	ANNOUNCE.ANNOUNCE_RNEFOG = "The fog's rollin' in. What are you up to, Charlie?"
     DESCRIBE.UNCOMPROMISING_RAT = "That's one part of home I was hoping NOT to see again."
     DESCRIBE.UNCOMPROMISING_RATHOLD = "Seems you've been ratted out!"
     DESCRIBE.RATPOISONBOTTLE = "Darn, this stuff woulda put Red Squill to shame."

@@ -30,6 +30,7 @@ local function StopFog(player)
 end
 
 local function StartFog(player)
+player.components.talker:Say(GetString(player, "ANNOUNCE_RNEFOG"))
 	if not player:HasTag("infog") then
 		player:AddTag("infog")
 	--print("startfog") 
@@ -37,6 +38,7 @@ local function StartFog(player)
 end
 
 local function StartFogAuto(player,x) --This should deactivate fog after 15 seconds or x time if you don't want to include StopFog(player)
+player.components.talker:Say(GetString(player, "ANNOUNCE_RNEFOG"))
 	if not player:HasTag("infog") then
 		player:AddTag("infog")
 --print("startfog") 
@@ -324,7 +326,7 @@ AddWildEvent(SpawnMonkeys,0.2)
 AddBaseEvent(SpawnBats,.3)
 AddBaseEvent(SpawnFissures,.3)
 AddBaseEvent(SpawnSkitts,.5)
-AddBaseEvent(LeifAttack,10)
+AddBaseEvent(LeifAttack,0.3)
 --Cave
 AddCaveEvent(SpawnBats,1)
 AddCaveEvent(SpawnFissures,1)
