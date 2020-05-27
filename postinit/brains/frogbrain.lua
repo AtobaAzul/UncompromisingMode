@@ -4,6 +4,9 @@ GLOBAL.setfenv(1, GLOBAL)
 local SEE_DIST = 20
 
 local function EatFoodAction(inst)
+	if inst.sg.currentstate.name == "fall" then
+		return nil
+	end
     local target = FindEntity(inst, SEE_DIST, function(item) return inst.components.eater:CanEat(item) and item:IsOnPassablePoint(true) end)
     return target ~= nil and BufferedAction(inst, target, ACTIONS.EAT) or nil
 end

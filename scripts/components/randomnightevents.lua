@@ -290,6 +290,26 @@ local function MoonTear(player)
 	end
 end
 
+local function ChessPiece(player)
+	if TheWorld.state.isnewmoon and TheWorld.state.cycles > 10 then
+		print("Shadows...")
+		local x, y, z = player.Transform:GetWorldPosition()
+		local chesscheck = math.random()
+		player:DoTaskInTime(0.6 + math.random(4), function()
+			if chesscheck >= 0.66 then
+				local piece = SpawnPrefab("shadow_bishop")
+				piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
+			elseif chesscheck >= 0.33 and chesscheck < 0.66 then
+				local piece = SpawnPrefab("shadow_rook")
+				piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
+			else
+				local piece = SpawnPrefab("shadow_knight")
+				piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
+			end
+		end)
+	end
+end
+
 ---------------------------------------------------
 ---RNE list above
 ---------------------------------------------------
@@ -343,6 +363,16 @@ local function AddFullMoonEvent(name, weight)
     self.totalrandomfullmoonweight = self.totalrandomfullmoonweight + weight
 end
 
+local function AddNewMoonEvent(name, weight)
+    if not self.newmoonevents then
+        self.newmoonevents = {}
+        self.totalrandomnewmoonweight = 0
+    end
+
+    table.insert(self.newmoonevents, { name = name, weight = weight })
+    self.totalrandomnewmoonweight = self.totalrandomnewmoonweight + weight
+end
+
 ------------------------
 --Inclusion and Tuning
 ------------------------
@@ -362,8 +392,10 @@ AddCaveEvent(SpawnBats,1)
 AddCaveEvent(SpawnFissures,1)
 --Spring
 AddSpringEvent(SpawnThunderFar,1)
---Cave
+--Full Moon
 AddFullMoonEvent(MoonTear,1)
+--New Moon
+AddNewMoonEvent(ChessPiece,1)
 
 ------------------------
 --Inclusion and Tuning
@@ -438,6 +470,21 @@ local function DoFullMoonRNE(player)
 	end
 end
 
+local function DoNewMoonRNE(player)
+	if TheWorld.state.isnewmoon then
+		if self.totalrandomnewmoonweight and self.totalrandomnewmoonweight > 0 and self.newmoonevents then
+			local rnd = math.random()*self.totalrandomnewmoonweight
+			for k,v in pairs(self.newmoonevents) do
+				rnd = rnd - v.weight
+				if rnd <= 0 then
+				v.name(player)
+				return
+				end
+			end
+		end
+	end
+end
+
 local function IsEligible(player)
 	local area = player.components.areaaware
 	return TheWorld.Map:IsVisualGroundAtPoint(player.Transform:GetWorldPosition())
@@ -462,53 +509,61 @@ local function CheckPlayers()
 		return
 	end
 	local numStructures = 0
+	
+	if math.random() >= 0.8 or TheWorld.state.isfullmoon and math.random() >= 0.5 or TheWorld.state.isnewmoon and math.random() >= 0.75 then
+		
 		for i, v in ipairs(playerlist) do  --try a base RNE
-		local rnepl = 0
-		local x,y,z = v.Transform:GetWorldPosition()
-		local ents = TheSim:FindEntities(x,y,z, STRUCTURE_DIST, {"structure"})
-		numStructures = #ents
-			if numStructures >= 4 then
-				local m,n,o = v.Transform:GetWorldPosition()
-				local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
-				rnepl = #rnep
+			local rnepl = 0
+			local x,y,z = v.Transform:GetWorldPosition()
+			local ents = TheSim:FindEntities(x,y,z, STRUCTURE_DIST, {"structure"})
+			numStructures = #ents
+				if numStructures >= 4 then
+					local m,n,o = v.Transform:GetWorldPosition()
+					local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
+					rnepl = #rnep
+							if rnepl < 2 then
+								if TheWorld.state.isfullmoon then
+									print("fullmoon")
+									DoFullMoonRNE(v)
+								elseif TheWorld.state.isnewmoon then
+									print("newmoon")
+									DoNewMoonRNE(v)
+								else
+									DoBaseRNE(v)
+								end
+								print("found base")
+								v:AddTag("rnetarget")
+								v:DoTaskInTime(60,inst:RemoveTag("rnetarget"))
+							end
+			else
+			for i, v in ipairs(playerlist) do --noone was home, so we'll do RNEs at every player instead
+					local rnepl = 0
+					local m,n,o = v.Transform:GetWorldPosition()
+					local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
+					rnepl = #rnep
 						if rnepl < 2 then
 							if TheWorld.state.isfullmoon then
 								print("fullmoon")
 								DoFullMoonRNE(v)
+							elseif TheWorld.state.isnewmoon then
+								print("newmoon")
+								DoNewMoonRNE(v)
 							else
-								DoBaseRNE(v)
+								DoWildRNE(v)
 							end
-							print("found base")
 							v:AddTag("rnetarget")
-							v:DoTaskInTime(60,inst:RemoveTag("rnetarget"))
+							v:DoTaskInTime(60,v:RemoveTag("rnetarget"))
 						end
-		else
-		for i, v in ipairs(playerlist) do --noone was home, so we'll do RNEs at every player instead
-				local rnepl = 0
-				local m,n,o = v.Transform:GetWorldPosition()
-				local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
-				rnepl = #rnep
-					if rnepl < 2 then
-						if TheWorld.state.isfullmoon then
-							print("fullmoon")
-							DoFullMoonRNE(v)
-						else
-							DoWildRNE(v)
-						end
-						v:AddTag("rnetarget")
-						v:DoTaskInTime(60,v:RemoveTag("rnetarget"))
-					end
-			print("no find base")
+				print("no find base")
+				end
 			end
 		end
+	
 	end
 end
 
 local function TryRandomNightEvent(self)      --Canis said 20% chance each night to have a RNE, could possibly include a scaling effect later
-	--if math.random >= 0.8 then		--enable after testing
 	CheckPlayers()
-	--print("trying RNE")
-	--end								--enable after testing
 end
 
 

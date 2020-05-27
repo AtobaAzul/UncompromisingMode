@@ -65,6 +65,11 @@ local GIANTS =
         radius = 200,
 		power = 1,
 	},
+	["mothergoose"] =
+    {
+        radius = 200,
+		power = 1,
+	},
 	--No klaus, since he does double attacks and has deer 
 }
 

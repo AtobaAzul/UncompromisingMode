@@ -75,7 +75,8 @@ local prefab_post = {
 	"dragonfly_spawner",
 	"mist",
 	"rneghostfire",
-	"frog",
+	"frog", -- also toad
+	"monkey",
 }
 
 local stategraph_post = {

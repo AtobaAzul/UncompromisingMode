@@ -116,7 +116,7 @@ local states =
 
         timeline = 
         {
-            TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/taunt") end ),
+            TimeEvent(5*FRAMES, function(inst) end ),--inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/taunt") end ),
             TimeEvent(3*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
             TimeEvent(6*FRAMES, function(inst) end ),--inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/breathe_out")  end ),
             TimeEvent(14*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
@@ -298,7 +298,7 @@ CommonStates.AddCombatStates(states,
         
         -- TimeEvent(7* FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/bite") end),
         TimeEvent(7*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
-        TimeEvent(8* FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/bite") end),
+        TimeEvent(7* FRAMES, function(inst) end ),--inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/bite") end),
         TimeEvent(14*FRAMES, function(inst) 
         inst.components.combat:DoAttack()
         inst:PushEvent("wingdown")
@@ -307,13 +307,17 @@ CommonStates.AddCombatStates(states,
 
     hittimeline =
     {
-        TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/hurt") end),
+        TimeEvent(1*FRAMES, function(inst)  
+        --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/hit")
+        end),
         TimeEvent(3*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
     },
 
     deathtimeline =
     {
-        TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/death") end),
+        TimeEvent(1*FRAMES, function(inst)  
+        --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/death")
+        end),
         TimeEvent(4*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
     },
 })

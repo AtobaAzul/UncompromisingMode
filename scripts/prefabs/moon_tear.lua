@@ -84,10 +84,21 @@ local function onexplode(inst)
             scorch.Transform:SetScale(scale, scale, scale)
         end
 		
-		local moontear = SpawnPrefab("bluegem")
-        if moontear ~= nil then
+		local gemcheck = math.random()
+		
+		if gemcheck >= 0.5 then
+			print("The Moon Is Crying")
+			local moontear = SpawnPrefab("bluegem")
             moontear.Transform:SetPosition(x, y, z)
-        end
+		elseif gemcheck >= 0.1 and gemcheck < 0.5 then
+			print("The Moon Is Furious")
+			local moontear = SpawnPrefab("redgem")
+            moontear.Transform:SetPosition(x, y, z)
+		else
+			print("The Moon Is Hurting")
+			local moontear = SpawnPrefab("purplegem")
+            moontear.Transform:SetPosition(x, y, z)
+		end
 		
         local launched = {}
         local ents = TheSim:FindEntities(x, y, z, inst.size * TUNING.METEOR_RADIUS, nil, NON_SMASHABLE_TAGS, SMASHABLE_TAGS)
@@ -100,7 +111,7 @@ local function onexplode(inst)
             --     also, don't dig up spawners
             if v:IsValid() and not v:IsInLimbo() then
                 if v.components.combat ~= nil then
-                    v.components.combat:GetAttacked(inst, inst.size * TUNING.METEOR_DAMAGE, nil)
+                    v.components.combat:GetAttacked(inst, inst.size * TUNING.METEOR_DAMAGE / 2, nil)
                 end
             end
         end

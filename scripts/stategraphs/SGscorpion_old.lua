@@ -68,7 +68,6 @@ local states=
         
         onenter = function(inst)
             --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/death")
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/die")
 			inst.Physics:Stop()
 			RemovePhysicsColliders(inst) 
 			if inst:HasTag("notactuallydead") then
