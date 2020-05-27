@@ -87,6 +87,8 @@ end
 
 local function LeifAttack(player)
 print("leifattack")
+local leiftime = 8 + math.random() * 3
+MultiFogAuto(player,leiftime)
 local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
 for k = 1, (days_survived <= 30 and 1) or math.random(days_survived <= 80 and 2 or 3) do
                     local target = FindEntity(player, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, { "evergreens", "tree" }, { "leif", "stump", "burnt" })
@@ -96,7 +98,7 @@ for k = 1, (days_survived <= 30 and 1) or math.random(days_survived <= 80 and 2 
 						target.chopper = player
                         target.leifscale = 1 --GetGrowthStages(target)[target.components.growable.stage].leifscale or 1 Getting size is muck
                             --assert(GetBuild(target).leif ~= nil)
-						target:DoTaskInTime(6 + math.random() * 3, spawn_leif)
+						target:DoTaskInTime(leiftime, spawn_leif)
 					end
 	end
 end
@@ -122,7 +124,9 @@ end
 
 local function FireHungryGhostAttack(player)
 	print("ooooOOOOoooo")
-	player:DoTaskInTime(5 + math.random(0,5), function()
+	local ghosttime = 5 + math.random(0,5)
+	MultiFogAuto(player,ghosttime)
+	player:DoTaskInTime(ghosttime, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
 			local num_ghost = 3+math.floor(math.random()*4, 6)
@@ -137,7 +141,9 @@ end
 
 local function SpawnBats(player)
 	print("SpawnBats")
-	player:DoTaskInTime(10 * math.random() * 2, function()
+	local battime = 10 * math.random() * 2
+	MultiFogAuto(player,battime)
+	player:DoTaskInTime(battime, function()
 		if TheWorld.state.cycles <= 10 then
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
@@ -166,7 +172,9 @@ end
 
 local function SpawnSkitts(player)
 	print("SpawnSkitts")
-	player:DoTaskInTime(10 * math.random() * 2, function()
+	local skitttime = 10 * math.random() * 2
+	MultiFogAuto(player,skitttime)
+	player:DoTaskInTime(skitttime, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local num_skitts = 150
 			for i = 1, num_skitts do
