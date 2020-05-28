@@ -3,8 +3,8 @@ GLOBAL.setfenv(1, GLOBAL)
 
 local function RandomThreatSpring(inst)
 if math.random() > 0 then  --This'll ensure that only hayfevers occur in any updates until monsoons are finished, to test monsoons, simply change to math.random() > 2
-TheWorld:AddTag("hayfever")
-TheWorld.net:AddTag("hayfever")
+--TheWorld:AddTag("hayfever")
+--TheWorld.net:AddTag("hayfever")
 else
 print("goingwithmonsoons")
 TheWorld:AddTag("monsoons")

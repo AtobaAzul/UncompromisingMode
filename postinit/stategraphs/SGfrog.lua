@@ -15,14 +15,9 @@ local states = {
         onenter = function(inst, forced)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("eat_pre")
+			inst.SoundEmitter:PlaySound("dontstarve/frog/attack_voice")
             inst.sg.statemem.forced = forced
         end,
-
-        timeline =
-        {
-            TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/frog/attack_voice") end),
-
-        },
 
         events =
         {
@@ -39,6 +34,7 @@ local states = {
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("eat_loop", true)
+			inst.SoundEmitter:PlaySound("dontstarve/frog/grunt")
             inst.sg:SetTimeout(1+math.random()*1)
         end,
 
@@ -55,12 +51,6 @@ local states = {
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("eat_pst")
         end,
-
-        timeline =
-        {
-            TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/frog/grunt") end),
-
-        },
 
         events =
         {
