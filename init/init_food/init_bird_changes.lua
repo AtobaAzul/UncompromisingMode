@@ -99,15 +99,18 @@ local function DigestFood(inst, food)
             end
         end
     end
-
-    local bird = GetBird(inst)
+	local bird = GetBird(inst)
     if bird and bird:IsValid() and bird.components.perishable then
         bird.components.perishable:SetPercent(1)
     end
-	
+end
+
+local function OnGetItem(inst, giver, item)
+	local dead = false
+	local bird = GetBird(inst)
 	if bird then
-		if food.components.edible.foodtype == FOODTYPE.MEAT then
-				if  food.components.edible:GetHealth(inst) < 0 then --monster meat is currently the only negative health meat item
+		if item.components.edible.foodtype == FOODTYPE.MEAT then
+				if  item.components.edible:GetHealth(inst) < 0 then --monster meat is currently the only negative health meat item
 					if bird.monsterbelly ~= nil and bird.monsterbelly ~= 0 then 
 						bird.monsterbelly = bird.monsterbelly + 1
 					else
@@ -122,18 +125,17 @@ local function DigestFood(inst, food)
 
 				if bird.monsterbelly ~= nil and bird.monsterbelly >= 4 then
 					-- After 4 monster meat, bird dies
-					OnBirdStarve(inst, bird) 
+					inst.components.lootdropper:SpawnLootPrefab("bird_egg")
+					OnBirdStarve(inst, bird)
+					dead = true
 				end
 			end 
 	end
-end
-
-local function OnGetItem(inst, giver, item)
     if inst.components.sleeper and inst.components.sleeper:IsAsleep() then
         inst.components.sleeper:WakeUp()
     end
 
-    if item.components.edible ~= nil and
+    if item.components.edible ~= nil and dead == false and
         (   item.components.edible.foodtype == FOODTYPE.MEAT
             or item.prefab == "seeds"
             or Prefabs[string.lower(item.prefab .. "_seeds")] ~= nil
@@ -168,6 +170,31 @@ local function GetStatus(inst)
     elseif inst.CAGE_STATE == CAGE_STATES.SKELETON then
         return "SKELETON"
     end
+end
+
+local function OnOccupied(inst, bird)
+    SetCageState(inst, CAGE_STATES.FULL)
+	
+    --Add the sleeper component & initialize
+    inst:AddComponent("sleeper")
+    inst.components.sleeper:SetSleepTest(ShouldSleep)
+    inst.components.sleeper:SetWakeTest(ShouldWake)
+
+    --Enable the trader component
+    inst.components.trader:Enable()
+
+    --Set up the bird symbol, play an animation.
+    SetBirdType(inst, bird.prefab)
+
+    inst.chirpsound = bird.sounds and bird.sounds.chirp
+    inst.AnimState:PlayAnimation("flap")
+    inst.SoundEmitter:PlaySound("dontstarve/birds/wingflap_cage")
+    PushStateAnim(inst, "idle", true)
+	if bird.monsterbelly ~= nil and bird.monsterbelly >= 4 then
+	OnBirdStarve(inst, bird)
+	end
+    --Start the idling task
+    StartAnimationTask(inst)
 end
 
 function ThankYouToshInit(inst)
