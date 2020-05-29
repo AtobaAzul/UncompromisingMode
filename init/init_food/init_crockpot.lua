@@ -68,7 +68,7 @@ AddIngredientValues({"monstermeat_cooked"}, {meat=1, monster=GLOBAL.TUNING.DSTU.
 AddIngredientValues({"monstermeat_dried"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_DRIED_MONSTER_VALUE + meat_reduction_factor}, true, true) --1 monster total, Will be calculated with -1 meat
 AddIngredientValues({"monstersmallmeat"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_RAW_MONSTER_VALUE + meat_reduction_factor}, true, true) --2 monster total, Will be calculated with -1 meat
 AddIngredientValues({"cookedmonstersmallmeat"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE + meat_reduction_factor}, true, true) --2.5 monster total, Will be calculated with -1 meat
-AddIngredientValues({"monstersmallmeat_dried"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_DRIED_MONSTER_VALUE + meat_reduction_factor - 0.5}, true, true) --2 monster total, Will be calculated with -1 meat
+AddIngredientValues({"monstersmallmeat_dried"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_DRIED_MONSTER_VALUE + meat_reduction_factor}, true, true) --2 monster total, Will be calculated with -1 meat
 
 --Substract the meat value from the monster value, since it dillutes it
 local function MonsterMeatSupport(tags)
@@ -210,7 +210,7 @@ recipes.californiaroll.test = function(cooker, names, tags) return ((names.kelp 
 recipes.seafoodgumbo.test = function(cooker, names, tags) return tags.fish and tags.fish > 2 and UncompromisingFillers(tags) and MonsterMeatSupport(tags) end
 -- Original:         test = function(cooker, names, tags) return tags.fish and tags.fish > 2 end
 
-recipes.surfnturf.test = function(cooker, names, tags) return tags.meat and tags.meat >= 2.5 and tags.fish and tags.fish >= 1.5 and not tags.frozen and MonsterMeatSupport(tags) end
+recipes.surfnturf.test = function(cooker, names, tags) return tags.meat and tags.meat >= 2.5 and tags.fish and tags.fish >= 1.5 and not (tags.monster >= 3) and not tags.frozen end--and MonsterMeatSupport(tags) end
 -- Original:         test = function(cooker, names, tags) return tags.meat and tags.meat >= 2.5 and tags.fish and tags.fish >= 1.5 and not tags.frozen end
 
 recipes.lobsterbisque.test = function(cooker, names, tags) return names.wobster_sheller_land and tags.frozen and UncompromisingFillers(tags) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) and MonsterMeatSupport(tags) end

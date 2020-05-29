@@ -93,9 +93,9 @@ TUNING.DSTU =
     CROCKPOT_RECIPE_ICE_PLUS_TWIG_LIMIT = 2,
 
     --Monster meat meat dilution
-    MONSTER_MEAT_RAW_MONSTER_VALUE = 2.5,
-    MONSTER_MEAT_COOKED_MONSTER_VALUE = 2.0,
-    MONSTER_MEAT_DRIED_MONSTER_VALUE = 1.5,
+    MONSTER_MEAT_RAW_MONSTER_VALUE = 2.5, --3
+    MONSTER_MEAT_COOKED_MONSTER_VALUE = 2.0, --2.5
+    MONSTER_MEAT_DRIED_MONSTER_VALUE = 1.5, --2
     MONSTER_MEAT_MEAT_REDUCTION_PER_MEAT = 1.0,
 
     ----------------------------------------------------------------------------
