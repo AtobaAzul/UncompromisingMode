@@ -7,7 +7,7 @@ local events =
 {
 EventHandler("sneeze", function(inst, data)
         if not inst.components.health:IsDead() and not inst.components.health.invincible then
-            if inst.sg:HasStateTag("busy") then
+            if inst.sg:HasStateTag("busy") and inst.sg.currentstate.name ~= "emote" then
                 inst.wantstosneeze = true
             else
                 inst.sg:GoToState("sneeze")
