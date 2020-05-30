@@ -75,3 +75,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.SALTPACK = "Would anyone mind if I use this salt?"
 	DESCRIBE.SCORPION = "Fried scorpion? Too dangerous."
 	DESCRIBE.SKELETONMEAT = "Some dishes probably shouldn't be made."
+	DESCRIBE.CHIMP = DESCRIBE.MONKEY

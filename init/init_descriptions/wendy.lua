@@ -75,3 +75,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.SALTPACK = "It deals with menial chores. My other problems remain unsolved."
 	DESCRIBE.SCORPION = "One sting and it could be over."
 	DESCRIBE.SKELETONMEAT = "Flesh for flesh..."
+	DESCRIBE.CHIMP = DESCRIBE.MONKEY

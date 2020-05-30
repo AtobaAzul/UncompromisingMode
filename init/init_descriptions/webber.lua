@@ -75,3 +75,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.SALTPACK = "We kinda want to play in the snow, though."
 	DESCRIBE.SCORPION = "Hello, fellow arachnid."
 	DESCRIBE.SKELETONMEAT = "I haven't seen my own skin in... forever!"
+	DESCRIBE.CHIMP = DESCRIBE.MONKEY

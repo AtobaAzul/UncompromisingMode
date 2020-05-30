@@ -86,7 +86,7 @@ local function spawn_leif(target)
 end
 
 local function LeifAttack(player)
-print("leifattack")
+--print("leifattack")
 local leiftime = 8 + math.random() * 3
 MultiFogAuto(player,leiftime)
 local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
@@ -104,14 +104,14 @@ for k = 1, (days_survived <= 30 and 1) or math.random(days_survived <= 80 and 2 
 end
 
 local function SpawnMonkeys(player)
-	print("SpawnMonkeys")
+	--print("SpawnMonkeys")
 	player:DoTaskInTime(5 + math.random(0,5), function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
 			local num_monkey = 3+math.floor(math.random()*4, 6)
 			for i = 1, num_monkey do
 				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
-					local monkey = SpawnPrefab("monkey")
+					local monkey = SpawnPrefab("chimp")
 					if math.random()>0.5 then
 					monkey.Transform:SetPosition(x + math.random(12,16), y, z + math.random(12,16))
 					else
@@ -123,7 +123,7 @@ local function SpawnMonkeys(player)
 end
 
 local function FireHungryGhostAttack(player)
-	print("ooooOOOOoooo")
+	--print("ooooOOOOoooo")
 	local ghosttime = 5 + math.random(0,5)
 	MultiFogAuto(player,ghosttime)
 	player:DoTaskInTime(ghosttime, function()
@@ -140,7 +140,7 @@ local function FireHungryGhostAttack(player)
 end
 
 local function SpawnBats(player)
-	print("SpawnBats")
+	--print("SpawnBats")
 	local battime = 10 * math.random() * 2
 	MultiFogAuto(player,battime)
 	player:DoTaskInTime(battime, function()
@@ -171,7 +171,7 @@ local function SpawnBats(player)
 end
 
 local function SpawnSkitts(player)
-	print("SpawnSkitts")
+	--print("SpawnSkitts")
 	local skitttime = 10 * math.random() * 2
 	MultiFogAuto(player,skitttime)
 	player:DoTaskInTime(skitttime, function()
@@ -189,7 +189,7 @@ local function SpawnSkitts(player)
 end
 
 local function SpawnFissures(player)
-	print("SpawnFissures")
+	--print("SpawnFissures")
 	local tillrne = 10 + math.random(10,15)
 	MultiFogAuto(player,tillrne)
 	player:DoTaskInTime(tillrne, function()
@@ -281,7 +281,7 @@ end
 
 local function MoonTear(player)
 	if TheWorld.state.isfullmoon then
-		print("The Moon is Crying")
+		--print("The Moon is Crying")
 		local x, y, z = player.Transform:GetWorldPosition()
 		player:DoTaskInTime(0.6 + math.random(4), function()
 			local tear = SpawnPrefab("moon_tear_meteor")
@@ -292,7 +292,7 @@ end
 
 local function ChessPiece(player)
 	if TheWorld.state.isnewmoon and TheWorld.state.cycles > 10 then
-		print("Shadows...")
+		--print("Shadows...")
 		local x, y, z = player.Transform:GetWorldPosition()
 		local chesscheck = math.random()
 		player:DoTaskInTime(0.6 + math.random(4), function()
@@ -380,7 +380,7 @@ end
 AddWildEvent(SpawnBats,0.5)
 AddWildEvent(SpawnLightFlowersNFerns,0.3)
 AddWildEvent(SpawnSkitts,.5)
-AddWildEvent(SpawnMonkeys,0.2)
+AddWildEvent(SpawnMonkeys,.2)
 AddWildEvent(LeifAttack,.3)
 --Base
 AddBaseEvent(SpawnBats,.3)

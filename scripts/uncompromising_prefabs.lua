@@ -73,4 +73,5 @@ return {
 	"bugzapper",
 	"moon_tear",
 	"rneghost",
+	"chimp",
 }

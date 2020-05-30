@@ -88,6 +88,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.AIR_CONDITIONER = "Smells great!"
 	DESCRIBE.SCORPION = "That better not be venomous."
 	DESCRIBE.SKELETONMEAT = "Flesh is flesh. Where do I draw the line?"
+	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	ACTIONFAIL.READ =
         {
             GENERIC = "It seems the magic is inert in this state.",

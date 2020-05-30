@@ -75,3 +75,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.SALTPACK = "I should've thought of this sooner!"
 	DESCRIBE.SCORPION = "I don't want to see the business end of that stinger!"
 	DESCRIBE.SKELETONMEAT = "This is a terrible idea."
+	DESCRIBE.CHIMP = DESCRIBE.MONKEY

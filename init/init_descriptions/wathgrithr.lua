@@ -75,3 +75,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.SALTPACK = "It clears the battlefield!"
 	DESCRIBE.SCORPION = "Your pointy tail is no match for me!"
 	DESCRIBE.SKELETONMEAT = "A... spoil of... war..."
+	DESCRIBE.CHIMP = DESCRIBE.MONKEY

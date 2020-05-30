@@ -76,6 +76,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.SALTPACK = "The device releases sodium chloride into the atmosphere."
 	DESCRIBE.SCORPION = "Scorpiones. It's a desert species of some sort."
 	DESCRIBE.SKELETONMEAT = "Oh my goodness!"
+	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	ACTIONFAIL.READ =
         {
             GENERIC = "I cannot concentrate under these conditions!",
