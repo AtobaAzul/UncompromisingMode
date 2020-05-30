@@ -130,4 +130,6 @@ env.AddPrefabPostInit("spider_warrior", function(inst)
     inst.components.lootdropper.numrandomloot = 1
 	--]]
     inst.components.health:SetMaxHealth(300)
+	inst:AddTag("spider_warrior")
+	inst.sg:GoToState("taunt")
 end)
