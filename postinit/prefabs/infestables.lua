@@ -30,4 +30,8 @@ end
 env.AddPlayerPostInit( function(inst)
 inst:AddComponent("infestable")
 inst:AddTag("infestable")
+inst:ListenForEvent("respawnfromghost", function(inst) inst:AddComponent("infestable")
+inst:AddTag("infestable") end)
+inst:ListenForEvent("respawnfromcorpse",function(inst) inst:AddComponent("infestable")
+inst:AddTag("infestable") end)
 end)
