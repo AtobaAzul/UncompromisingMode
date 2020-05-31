@@ -38,9 +38,9 @@ local states =
         
         timeline = 
         {         
-            TimeEvent(3*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
-            TimeEvent(5*FRAMES, function(inst) end ),-- inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/breathe_out")  end ),
-            TimeEvent(13*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
+			TimeEvent(3*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
+            --TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/breath")  end ),
+			TimeEvent(13*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
         },
         
         events=
@@ -96,11 +96,11 @@ local states =
         end,
 
         timeline = {
-            TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/flap") end ),
-            TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/flap") end ),
-            TimeEvent(24*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/flap") end ),
-            TimeEvent(34*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/flap") end ),
-            TimeEvent(41*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/flap") end ),
+            TimeEvent(3*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
+            TimeEvent(14*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
+            TimeEvent(24*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
+            TimeEvent(34*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
+            TimeEvent(41*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
         },
 
     },
@@ -116,12 +116,12 @@ local states =
 
         timeline = 
         {
-            TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/taunt") end ),
-            TimeEvent(3*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
-            TimeEvent(6*FRAMES, function(inst) end ),--inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/breathe_out")  end ),
-            TimeEvent(14*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
-            TimeEvent(24*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
-            TimeEvent(41*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
+            TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/taunt") end ),
+			TimeEvent(3*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
+            TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/breath")  end ),
+			TimeEvent(14*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
+			TimeEvent(24*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
+			TimeEvent(41*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
         },
         
         events=
@@ -145,10 +145,10 @@ local states =
 
         timeline = 
         {
-            TimeEvent(3*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
+			TimeEvent(3*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
             TimeEvent(8*FRAMES, function(inst) inst:PerformBufferedAction()
-            end ),--inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/bite") end ), --take food
-            TimeEvent(14*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
+            inst.SoundEmitter:PlaySound("UCSounds/vampirebat/bite") end ),
+			TimeEvent(14*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
         },
 
         events = 
@@ -174,10 +174,8 @@ local states =
 
         timeline = 
         {
-            TimeEvent(3*FRAMES, function(inst) inst:PushEvent("wingdown")
-            end ),--inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/chew")  end ),
-            TimeEvent(13*FRAMES, function(inst) inst:PushEvent("wingdown")
-            end ),--inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/chew")  end ),
+			TimeEvent(7*FRAMES, function(inst) inst:PushEvent("wingdown") inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/chew") end ),
+			TimeEvent(17*FRAMES, function(inst) inst:PushEvent("wingdown") inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/chew") end ),
         },
 
         events = 
@@ -249,23 +247,23 @@ CommonStates.AddWalkStates(states,
 {
     starttimeline =
     {
-        TimeEvent(7*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
-        TimeEvent(5*FRAMES, function(inst) end ),--inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/breathe_out")  end ),
-        TimeEvent(17*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
+        TimeEvent(7*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
+        --TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/breath")  end ),
+        TimeEvent(17*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
     },
 
     walktimeline = 
     {
-        TimeEvent(7*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
-        TimeEvent(5*FRAMES, function(inst) end ),--inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/breathe_out")  end ),
-        TimeEvent(17*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
+        TimeEvent(7*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
+        --TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/breath")  end ),
+        TimeEvent(17*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
     },
 
     endtimeline =
     {
-        TimeEvent(7*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
-        TimeEvent(5*FRAMES, function(inst) end ),--inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/breathe_out")  end ),
-        TimeEvent(17*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
+        TimeEvent(7*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
+        --TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/breath")  end ),
+        TimeEvent(17*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
     },
 
 },  walkanims, true)
@@ -275,19 +273,19 @@ CommonStates.AddSleepStates(states,
 {
     starttimeline = 
     {
-        TimeEvent(7*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
-        TimeEvent(5*FRAMES, function(inst) end ),--inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/breathe_out")  end ),
-        TimeEvent(17*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),       
+        TimeEvent(7*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
+        --TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/breath")  end ),
+        TimeEvent(17*FRAMES, function(inst) inst:PushEvent("wingdown") end ),    
     },
 
     sleeptimeline = 
     {
-        TimeEvent(23*FRAMES, function(inst) end ),--inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/sleep") end),
+        TimeEvent(23*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/breath") end),
     },
 
     endtimeline =
     {
-        TimeEvent(13*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
+        TimeEvent(13*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
     },
 })
 
@@ -297,8 +295,8 @@ CommonStates.AddCombatStates(states,
     {
         
         -- TimeEvent(7* FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/bite") end),
-        TimeEvent(7*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
-        TimeEvent(8* FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/bite") end),
+        TimeEvent(7*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
+        TimeEvent(8* FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/bite") end),
         TimeEvent(14*FRAMES, function(inst) 
         inst.components.combat:DoAttack()
         inst:PushEvent("wingdown")
@@ -307,13 +305,13 @@ CommonStates.AddCombatStates(states,
 
     hittimeline =
     {
-        TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/hurt") end),
-        TimeEvent(3*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
+        TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/hurt") end),
+        TimeEvent(3*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
     },
 
     deathtimeline =
     {
-        TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/death") end),
+        TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/death") end),
         TimeEvent(4*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
     },
 })

@@ -16,6 +16,7 @@ local infestables =
 "spider_spitter",
 "spider_hider",
 "spider_moon",
+"beefalo",
 }
 local function Infestablize(prefab)
 	env.AddPrefabPostInit(prefab, function(inst)

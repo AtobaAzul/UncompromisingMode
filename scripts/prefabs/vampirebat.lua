@@ -41,7 +41,7 @@ local function MakeTeam(inst, attacker)
 end
 
 local function OnWingDown(inst)
-    inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/flap")
+    inst.SoundEmitter:PlaySound("UCSounds/vampirebat/flap")
 end
 
 local function OnWingDownShadow(inst)

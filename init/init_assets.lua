@@ -76,6 +76,7 @@ Assets = {
 	Asset("ANIM", "anim/shadow_eye.zip"),
 	Asset("ANIM", "anim/honey_log.zip"),
 	Asset("ANIM", "anim/bugzapper.zip"),
+	Asset("ANIM", "anim/swap_bugzapper.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),

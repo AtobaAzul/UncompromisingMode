@@ -67,8 +67,7 @@ local states=
         tags = {"busy"},
         
         onenter = function(inst)
-            --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/death")
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/die")
+            inst.SoundEmitter:PlaySound("UCSounds/Scorpion/death")
 			inst.Physics:Stop()
 			RemovePhysicsColliders(inst) 
 			if inst:HasTag("notactuallydead") then
@@ -114,8 +113,8 @@ local states=
         
         timeline=
         {
-            --TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
-            --TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/mumble") end),
+            TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
+            TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/mumble") end),
         },
         
         events=
@@ -136,16 +135,16 @@ local states=
         timeline=
         {
         
-            --TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
+            TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
             ----TimeEvent(2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
-            --TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
+            TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
             ----TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
-            --TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/mumble") end),
-            --TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
+            TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/mumble") end),
+            TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
             ----TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
-            --TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
+            TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
             ----TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
-            --TimeEvent(16*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
+            TimeEvent(16*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
         },
         
         events=
@@ -239,7 +238,7 @@ local states=
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("taunt")
-            --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/taunt")
+            inst.SoundEmitter:PlaySound("UCSounds/Scorpion/taunt")
         end,
         
         events=
@@ -255,7 +254,7 @@ local states=
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("taunt")
-            --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/taunt")
+            inst.SoundEmitter:PlaySound("UCSounds/Scorpion/taunt")
         end,
         
         events=
@@ -280,12 +279,12 @@ local states=
         
         timeline=
         {
-            --TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/claw") end),
-            --TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/claw") end),
-           -- TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/claw") end),
-           -- TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/claw") end),
-            --TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/claw") end),
-            --TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/attack_grunt") end),
+            TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
+            TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
+            TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
+            TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
+            TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
+            TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/attack") end),
             TimeEvent(25*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
         
@@ -310,8 +309,8 @@ local states=
         
         timeline=
         {
-            --TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/tail_attack") end),
-            --TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/attack_grunt") end),
+            TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
+            TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/attack") end),
             TimeEvent(20*FRAMES, function(inst) 
                 inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
@@ -327,7 +326,6 @@ local states=
         end,
        
     },
-
 
     State{
         name = "leap_attack",
@@ -358,12 +356,13 @@ local states=
             inst.Physics:ClearMotorVelOverride()
         end,
 		
-        timeline =
+		timeline =
         {
-            TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound(SoundPath(inst, "attack_grunt")) end),
+			TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/attack") end),
             TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound(SoundPath(inst, "Jump")) end),
             TimeEvent(8	*FRAMES, function(inst) inst.Physics:SetMotorVelOverride(20,0,0) end),
-            TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound(SoundPath(inst, "Attack")) end),
+            TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap_pre") end),
+            TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
             TimeEvent(19*FRAMES, function(inst) inst.components.combat:SetRange(3, 3)
 			inst.components.combat:DoAttack(inst.sg.statemem.target) end),
             TimeEvent(20*FRAMES,
@@ -378,7 +377,6 @@ local states=
             --EventHandler("animover", function(inst) inst.sg:GoToState("taunt") end),
         },
     },
-
 
     State{
         name = "spitter_attack",
@@ -621,7 +619,7 @@ local states=
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("appear")
-            --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/taunt")
+            inst.SoundEmitter:PlaySound("UCSounds/Scorpion/taunt")
 			--local x, y, z = inst.Transform:GetWorldPosition()
 			--SpawnPrefab("sand_puff").Transform:SetPosition(x,y,z)
         end,

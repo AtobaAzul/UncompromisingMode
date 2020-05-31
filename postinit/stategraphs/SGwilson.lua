@@ -39,7 +39,7 @@ State{
 				inst.AnimState:PlayAnimation("sneeze")
 			end
 			
-            inst.SoundEmitter:PlaySound("UCSounds/Sneeze/sneeze", nil, .3)
+            inst.SoundEmitter:PlaySound("UCSounds/Sneeze/sneeze")
             inst:ClearBufferedAction()
             
             if inst.prefab ~= "wes" then

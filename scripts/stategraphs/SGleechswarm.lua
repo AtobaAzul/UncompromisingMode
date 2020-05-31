@@ -47,8 +47,6 @@ local states=
             else
 			    inst.components.locomotor:WalkForward()
                 inst.AnimState:PlayAnimation("idle_loop")
-                --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/gnat/LP","move")
-
             end  
         end,
         
@@ -89,12 +87,12 @@ local states=
         tags = {"busy"},
 
         onenter = function(inst)
+            inst.SoundEmitter:KillSound("move")
+            inst.SoundEmitter:PlaySound("UCSounds/pollenmite/die")           
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)            
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
-            inst.SoundEmitter:KillSound("move")
-            --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/gnat/death")            
+            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition())) 
         end,
     },    
 
@@ -105,6 +103,7 @@ local states=
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("idle_loop",true)
+            inst.SoundEmitter:PlaySound("UCSounds/pollenmite/loop","move")
         end,
         
         events=
@@ -139,7 +138,7 @@ local states=
 
         onenter = function(inst)
             inst.AnimState:PlayAnimation("hit")
-            --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/gnat/hit")            
+            inst.SoundEmitter:PlaySound("UCSounds/pollenmite/hit")            
         end,
         
         events =
@@ -182,7 +181,7 @@ local states=
         timeline=
         {
 
-            --TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/gnat/attack") end),
+            TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/pollenmite/hit") end),
         },
  
         events=
@@ -215,7 +214,7 @@ local states=
                 inst.components.combat:DoAttack(inst.sg.statemem.target)               
             end ),
 
-            TimeEvent(18*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/gnat/attack") end),                   
+            TimeEvent(18*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/pollenmite/hit") end),                   
             
         },
  
