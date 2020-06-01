@@ -4,6 +4,7 @@ local Infester = Class(function(self, inst)
     self.inst:ListenForEvent("death", function() self:Uninfest() end)
     self.inst:ListenForEvent("freeze", function() self:Uninfest() end)
 	self.inst:ListenForEvent("killed", function() self:Uninfest() end)
+	self.inst:ListenForEvent("losttarget", function() self:Uninfest() end)
     self.basetime = 1
     self.randtime = .5
     self.inst:AddTag("infester")
