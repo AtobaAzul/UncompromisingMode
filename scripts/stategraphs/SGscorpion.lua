@@ -333,7 +333,7 @@ local states=
 
 		
 		onenter = function(inst)
-		inst.components.combat:SetRange(TUNING.SPIDER_WARRIOR_ATTACK_RANGE, TUNING.SPIDER_WARRIOR_HIT_RANGE)
+		inst.components.combat:SetRange(2*TUNING.SPIDER_WARRIOR_ATTACK_RANGE, 2*TUNING.SPIDER_WARRIOR_HIT_RANGE)
             inst.sg:SetTimeout(21*FRAMES)                  
             --if inst.components.combat.target and inst.components.combat.target:IsValid() then
                 inst:ForceFacePoint(inst.components.combat.target:GetPosition() )
@@ -460,15 +460,15 @@ local states=
             inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 			inst.components.combat:SetRange(TUNING.SPIDER_WARRIOR_ATTACK_RANGE, TUNING.SPIDER_WARRIOR_HIT_RANGE)
 			--if inst.components.combat.target and inst.components.combat.target:IsValid() then
-                inst:ForceFacePoint(inst.components.combat.target:GetPosition() )
+                --inst:ForceFacePoint(inst.components.combat.target:GetPosition() )
             --end  
-			inst.Physics:SetMotorVelOverride(-20,0,0)
+			--inst.Physics:SetMotorVelOverride(-20,0,0)
         end,
 
         events=
         {
             EventHandler("animover", function(inst)
-				inst.Physics:SetMotorVelOverride(-20,0,0)			
+				--inst.Physics:SetMotorVelOverride(-20,0,0)			
                 inst.sg:GoToState("evade_loop") 
             end ),
         },               
@@ -485,10 +485,21 @@ local states=
             --if inst.components.combat.target and inst.components.combat.target:IsValid() then
             --    inst:ForceFacePoint(inst.components.combat.target:GetPosition() )
             --end   
-            --inst.components.locomotor:Stop()           
+            inst.components.locomotor:Stop()           
             inst.AnimState:PlayAnimation("evade_loop",true)
            --inst.Physics:SetMotorVelOverride(-20,0,0)
             inst.components.locomotor:EnableGroundSpeedMultiplier(false)
+			inst.sg.statemem.startpos = Vector3(inst.Transform:GetWorldPosition())
+            inst.sg.statemem.targetpos = Vector3(inst.components.combat.target.Transform:GetWorldPosition())
+        end,
+		onupdate = function(inst)
+            local percent = inst.AnimState:GetCurrentAnimationTime () / inst.AnimState:GetCurrentAnimationLength()
+            local xdiff = 2--inst.sg.statemem.targetpos.x - inst.sg.statemem.startpos.x
+            local zdiff = 2--inst.sg.statemem.targetpos.z - inst.sg.statemem.startpos.z
+
+            --print(inst.sg.statemem.targetpos.x,inst.sg.statemem.targetpos.z, inst.sg.statemem.startpos.x,inst.sg.statemem.startpos.z)
+
+            inst.Transform:SetPosition(inst.sg.statemem.startpos.x-(xdiff*percent),0,inst.sg.statemem.startpos.z-(zdiff*percent))
         end,
 --[[
         events=
@@ -500,7 +511,7 @@ local states=
 ]]
         timeline =
         {
-            TimeEvent(0*FRAMES, function(inst) inst.Physics:SetMotorVel(-20,0,0) end),
+            --TimeEvent(0*FRAMES, function(inst) inst.Physics:SetMotorVel(-20,0,0) end),
           
         },
         ontimeout = function(inst)
