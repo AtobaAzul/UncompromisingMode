@@ -94,10 +94,10 @@ function PollenmitesBrain:OnStart()
         {
             WhileNode( function() return not self.inst.components.infester.infesting end, "not infesting",
             PriorityNode{            
-                --WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", 
-                    --Panic(self.inst) ),
-                WhileNode( function() return  TheWorld.state.isdusk or TheWorld.state.isnight end, "chase light",  
-                    Follow(self.inst, function() return findlighttarget(self.inst) end, 0, 1, 1)),
+                WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", 
+                    Panic(self.inst) ),
+                --WhileNode( function() return  TheWorld.state.isdusk or TheWorld.state.isnight end, "chase light",  
+                    --Follow(self.inst, function() return findlighttarget(self.inst) end, 0, 1, 1)),
                 DoAction(self.inst, function() return findinfesttarget(self.inst,self) end, "infest", true),
                 --DoAction(self.inst, function() return makenest(self.inst) end, "make nest", true),
                 Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST)
