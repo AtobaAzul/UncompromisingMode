@@ -494,8 +494,8 @@ local states=
         end,
 		onupdate = function(inst)
             local percent = inst.AnimState:GetCurrentAnimationTime () / inst.AnimState:GetCurrentAnimationLength()
-            local xdiff = 2--inst.sg.statemem.targetpos.x - inst.sg.statemem.startpos.x
-            local zdiff = 2--inst.sg.statemem.targetpos.z - inst.sg.statemem.startpos.z
+            local xdiff = inst.sg.statemem.targetpos.x - inst.sg.statemem.startpos.x
+            local zdiff = inst.sg.statemem.targetpos.z - inst.sg.statemem.startpos.z
 
             --print(inst.sg.statemem.targetpos.x,inst.sg.statemem.targetpos.z, inst.sg.statemem.startpos.x,inst.sg.statemem.startpos.z)
 
