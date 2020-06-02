@@ -22,14 +22,14 @@ end
 
 local function NormalRetarget(inst)
     local targetDist = 5
-    local notags = {"FX", "NOCLICK","INLIMBO", "playerghost", "shadowcreature"}
+    local notags = {"FX", "NOCLICK","INLIMBO", "playerghost", "shadowcreature", "pollenmites", "pollenmiteden"}
     --local notags = {"FX", "NOCLICK", "companion", "abigail", "ghost", "epic", "playerghost", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "invisible"}
     return FindEntity(inst, targetDist, 
         function(guy) 
             if inst.components.combat:CanTarget(guy)
                and not (inst.components.follower and inst.components.follower.leader == guy and target.components.health:IsDead())
                and not (inst.components.follower and inst.components.follower.leader == GetPlayer() and guy:HasTag("companion")) and (guy:HasTag("infestable")) then
-                return not (guy:HasTag("pollenmites"))
+                return (guy:HasTag("_combat") and not guy:HasTag("pollenmites"))
             end
     end, nil, notags)
 end
@@ -92,29 +92,31 @@ local function OnAttacked(inst, data)
 end
 
 local function OnIgniteFn(inst)
-	if not inst.components.health:IsDead() then
-		inst.SoundEmitter:KillSound("hiss")
-		SpawnPrefab("firesplash_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
-		--inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
-		inst.components.health:Kill()
-		
-		local x, y, z = inst.Transform:GetWorldPosition()
-		local ents = TheSim:FindEntities(x, y, z, 4, nil, { "INLIMBO" })
+	--inst:DoTaskInTime(1, function()
+		if not inst.components.health:IsDead() then
+			inst.SoundEmitter:KillSound("hiss")
+			SpawnPrefab("firesplash_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+			--inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
+			inst.components.health:Kill()
+			
+			local x, y, z = inst.Transform:GetWorldPosition()
+			local ents = TheSim:FindEntities(x, y, z, 4, nil, { "INLIMBO" })
 
-		for i, v in ipairs(ents) do
-			if v ~= inst and v:IsValid() and not v:IsInLimbo() then
-				if v:IsValid() and not v:IsInLimbo() then
-					if v.components.fueled == nil and
-						v.components.burnable ~= nil and
-						not v.components.burnable:IsBurning() and
-						not v:HasTag("burnt") then
-						v.components.burnable:Ignite()
+			for i, v in ipairs(ents) do
+				if v ~= inst and v:IsValid() and not v:IsInLimbo() then
+					if v:IsValid() and not v:IsInLimbo() then
+						if v.components.fueled == nil and
+							v.components.burnable ~= nil and
+							not v.components.burnable:IsBurning() and
+							not v:HasTag("burnt") then
+							v.components.burnable:Ignite()
+						end
 					end
 				end
 			end
+			
 		end
-		
-	end
+	--end)
 end
 
 local function fn()

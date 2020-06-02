@@ -74,4 +74,5 @@ return {
 	"moon_tear",
 	"rneghost",
 	"chimp",
+	"pollenmiteden",
 }
