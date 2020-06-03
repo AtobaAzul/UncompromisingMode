@@ -78,6 +78,7 @@ local prefab_post = {
 	"rneghostfire",
 	"frog", -- also toad
 	"monkey",
+	"batcave",
 }
 
 local stategraph_post = {

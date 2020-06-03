@@ -3,6 +3,7 @@ GLOBAL.setfenv(1, GLOBAL)
 local infestables =
 {
 "bat",
+"vampirebat",
 "bunnyman",
 "pigman",
 "slurtle",
@@ -17,6 +18,9 @@ local infestables =
 "spider_hider",
 "spider_moon",
 "beefalo",
+"bee",
+"killerbee",
+"mosquito",
 }
 local function Infestablize(prefab)
 	env.AddPrefabPostInit(prefab, function(inst)
