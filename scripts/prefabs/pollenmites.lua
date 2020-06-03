@@ -54,7 +54,7 @@ local function bite(inst)
 		
 		local player = inst:GetNearestPlayer()
 		if player ~= nil and not inst.components.infester.target.components.combat:HasTarget() then
-			inst.components.infester.target:DoTaskInTime(2,function()  inst.components.infester.target:PushEvent("attacked", {attacker = player, damage = 0, weapon = nil}) end)
+			inst.components.infester.target:PushEvent("attacked", {attacker = player, damage = 0, weapon = nil})
 		end
 	end
 end
@@ -235,7 +235,6 @@ local function fn()
 		end
 	end)
 	]]
-	--inst:ListenForEvent("killed", function() inst.components.infester.Uninfest() end)
 	--inst.special_action = makehome
 
 	--inst:ListenForEvent("losttarget", function() inst.components.infester.Uninfest() end)
