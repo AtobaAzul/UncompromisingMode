@@ -167,7 +167,7 @@ local function fn()
     inst.components.burnable.fxprefab = nil]]
 	
 	inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(TUNING.NIGHTSTICK_DAMAGE / 1.5)
+    inst.components.weapon:SetDamage(22)
     inst.components.weapon:SetOnAttack(onattack)
 	
     inst:AddComponent("inventoryitem")
