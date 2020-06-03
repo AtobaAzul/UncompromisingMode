@@ -131,7 +131,7 @@ local function onattack(inst, attacker, target)
     if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and inst.components.weapon.stimuli == "electric" then
         SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
 		if target:HasTag("insect") and not target.components.health:IsDead() then
-			target.components.health:DoDelta(-15)
+			target.components.health:DoDelta(-30)
 		end
     end
 end
@@ -167,7 +167,7 @@ local function fn()
     inst.components.burnable.fxprefab = nil]]
 	
 	inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(TUNING.NIGHTSTICK_DAMAGE / 2)
+    inst.components.weapon:SetDamage(TUNING.NIGHTSTICK_DAMAGE / 1.5)
     inst.components.weapon:SetOnAttack(onattack)
 	
     inst:AddComponent("inventoryitem")

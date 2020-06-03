@@ -177,7 +177,7 @@ local function fn()
 
 	--MakePoisonableCharacter(inst)
 	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(1000)
+	inst.components.health:SetMaxHealth(500)
     inst.components.health.fire_damage_scale = 100
 	--inst.components.health.invincible = false
 
