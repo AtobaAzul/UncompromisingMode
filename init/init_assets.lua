@@ -115,5 +115,7 @@ Assets = {
 	Asset("ANIM", "anim/bat_vamp_shadow.zip"),
 	Asset("IMAGE", "images/inventoryimages/zaspberryparfait.tex"),
 	Asset("ATLAS", "images/inventoryimages/zaspberryparfait.xml"),
+	Asset("IMAGE", "images/inventoryimages/bugzapper.tex"),
+	Asset("ATLAS", "images/inventoryimages/bugzapper.xml"),
 	
 }

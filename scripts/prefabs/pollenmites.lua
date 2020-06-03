@@ -85,8 +85,8 @@ end
 local function OnAttacked(inst, data)
     if data ~= nil and data.attacker ~= nil then
         if data.stimuli == "electric" or (data.weapon ~= nil and data.weapon.components.weapon ~= nil and data.weapon.components.weapon.stimuli == "electric") and not inst.components.health:IsDead() then
-            SpawnPrefab("lightning_rod_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
-			inst.components.health:Kill()
+            SpawnPrefab("electrichitsparks").Transform:SetPosition(inst.Transform:GetWorldPosition())
+			inst.components.health:DoDelta(-50)
 		end
     end
 end

@@ -6,6 +6,7 @@ local component_post = {
 	"propagator",
 	"burnable",
 	"moisture",
+	"weapon",
 	--"hunter",
 }
 

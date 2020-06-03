@@ -6,107 +6,59 @@ local assets =
     Asset("INV_IMAGE", "lantern_lit"),
 }
 
-local prefabs =
-{
-    "bugzapperlight",
-}
-
-local function DoTurnOffSound(inst, owner)
-    inst._soundtask = nil
-    (owner ~= nil and owner:IsValid() and owner.SoundEmitter or inst.SoundEmitter):PlaySound("dontstarve/wilson/lantern_off")
-end
-
-local function PlayTurnOffSound(inst)
-    if inst._soundtask == nil and inst:GetTimeAlive() > 0 then
-        inst._soundtask = inst:DoTaskInTime(0, DoTurnOffSound, inst.components.inventoryitem.owner)
-    end
-end
-
-local function PlayTurnOnSound(inst)
-    if inst._soundtask ~= nil then
-        inst._soundtask:Cancel()
-        inst._soundtask = nil
-    elseif not POPULATING then
-        inst._light.SoundEmitter:PlaySound("dontstarve/wilson/lantern_on")
-    end
-end
-
-local function fuelupdate(inst)
-    if inst._light ~= nil then
-        local fuelpercent = inst.components.fueled:GetPercent()
-        inst._light.Light:SetIntensity(Lerp(.4, .6, fuelpercent))
-        inst._light.Light:SetRadius(Lerp(3, 5, fuelpercent))
-        inst._light.Light:SetFalloff(.9)
-    end
-end
-
-local function onremovelight(light)
-    light._bugzapper._light = nil
-end
-
-local function stoptrackingowner(inst)
-    if inst._owner ~= nil then
-        inst:RemoveEventCallback("equip", inst._onownerequip, inst._owner)
-        inst._owner = nil
-    end
-end
-
-local function starttrackingowner(inst, owner)
-    if owner ~= inst._owner then
-        stoptrackingowner(inst)
-        if owner ~= nil and owner.components.inventory ~= nil then
-            inst._owner = owner
-            inst:ListenForEvent("equip", inst._onownerequip, owner)
-        end
-    end
+local function spark(inst)
+	local fx = SpawnPrefab("electrichitsparks")
+	
+	local owner = inst.components.inventoryitem.owner
+	
+	if inst.components.equippable:IsEquipped() and owner ~= nil then
+		fx.entity:SetParent(owner.entity)
+		fx.entity:AddFollower()
+		fx.Follower:FollowSymbol(owner.GUID, "swap_object", 0, -145, 0)
+		fx.Transform:SetScale(.66, .66, .66)
+		if math.random() >= 0.15 then
+			inst.sparktask = inst:DoTaskInTime(math.random() * 0.5, spark)
+		else
+			inst.sparktask = inst:DoTaskInTime(1 * math.random() + 5, spark)
+		end
+	else
+		fx.entity:SetParent(inst.entity)
+		--fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        fx.Transform:SetPosition(0, 1, 0)
+		fx.Transform:SetScale(.66, .66, .66)
+		--fx.Follower:FollowSymbol(inst.GUID, inst, 0, -150, 0)
+		if math.random() <= 0.15 then
+			inst.sparktask = inst:DoTaskInTime(math.random() * 0.5, spark)
+		else
+			inst.sparktask = inst:DoTaskInTime(1 * math.random() + 5, spark)
+		end
+	end
 end
 
 local function turnon(inst)
     if not inst.components.fueled:IsEmpty() then
         inst.components.fueled:StartConsuming()
 
-        local owner = inst.components.inventoryitem.owner
-
-        if inst._light == nil then
-            inst._light = SpawnPrefab("bugzapperlight")
-            inst._light._bugzapper = inst
-            inst:ListenForEvent("onremove", onremovelight, inst._light)
-            fuelupdate(inst)
-            PlayTurnOnSound(inst)
-        end
-        inst._light.entity:SetParent((owner or inst).entity)
-
-        inst.AnimState:PlayAnimation("idle_on")
-
-        if owner ~= nil and inst.components.equippable:IsEquipped() then
-            owner.AnimState:Show("LANTERN_OVERLAY")
-        end
-
-        inst.components.machine.ison = true
-        inst.components.inventoryitem:ChangeImageName((inst:GetSkinName() or "lantern").."_lit")
-        inst:PushEvent("lantern_on")
+		inst.components.weapon:SetElectric()
+		inst.SoundEmitter:PlaySound("dontstarve/wilson/lantern_on")
+		
+        if inst.sparktask == nil then
+			inst.sparktask = inst:DoTaskInTime(math.random() + 3, spark)
+		end
+	
     end
 end
 
 local function turnoff(inst)
-    stoptrackingowner(inst)
 
+    inst.components.weapon:RemoveElectric()
     inst.components.fueled:StopConsuming()
-
-    if inst._light ~= nil then
-        inst._light:Remove()
-        PlayTurnOffSound(inst)
-    end
-
-    inst.AnimState:PlayAnimation("idle_off")
-
-    if inst.components.equippable:IsEquipped() then
-        inst.components.inventoryitem.owner.AnimState:Hide("LANTERN_OVERLAY")
-    end
-
-    inst.components.machine.ison = false
-    inst.components.inventoryitem:ChangeImageName(inst:GetSkinName()) --nil if no skin
-    inst:PushEvent("lantern_off")
+	inst.SoundEmitter:PlaySound("dontstarve/wilson/lantern_off")
+	
+	if inst.sparktask ~= nil then
+		inst.sparktask:Cancel()
+	end
+	inst.sparktask = nil
 end
 
 local function OnRemove(inst)
@@ -119,46 +71,39 @@ local function OnRemove(inst)
 end
 
 local function ondropped(inst)
+	if inst.sparktask ~= nil then
+		inst.sparktask:Cancel()
+	end
+
     turnoff(inst)
-    turnon(inst)
+end
+
+local function onremovefire(fire)
+    fire.nightstick.fire = nil
 end
 
 local function onequip(inst, owner)
-    local skin_build = inst:GetSkinBuild()
-    if skin_build ~= nil then
-        owner:PushEvent("equipskinneditem", inst:GetSkinName())
-        owner.AnimState:OverrideItemSkinSymbol("swap_object", skin_build, "swap_bugzapper", inst.GUID, "swap_bugzapper")
-        owner.AnimState:OverrideItemSkinSymbol("lantern_overlay", skin_build, "lantern_overlay", inst.GUID, "swap_bugzapper")
-    else
-        owner.AnimState:OverrideSymbol("swap_object", "swap_bugzapper", "swap_bugzapper")
-        owner.AnimState:OverrideSymbol("lantern_overlay", "swap_bugzapper", "lantern_overlay")
-    end
-
+    
+    owner.AnimState:OverrideSymbol("swap_object", "swap_bugzapper", "swap_bugzapper")
+	
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 
-    if inst.components.fueled:IsEmpty() then
-        owner.AnimState:Hide("LANTERN_OVERLAY")
-    else
-        owner.AnimState:Show("LANTERN_OVERLAY")
+    if not inst.components.fueled:IsEmpty() then
         turnon(inst)
     end
+	
 end
 
 local function onunequip(inst, owner)
-    local skin_build = inst:GetSkinBuild()
-    if skin_build ~= nil then
-        owner:PushEvent("unequipskinneditem", inst:GetSkinName())
-    end
 
     owner.AnimState:Hide("ARM_carry")
     owner.AnimState:Show("ARM_normal")
-    owner.AnimState:ClearOverrideSymbol("lantern_overlay")
-    owner.AnimState:Hide("LANTERN_OVERLAY")
-
-    if inst.components.machine.ison then
-        starttrackingowner(inst, owner)
-    end
+	
+	if inst.sparktask ~= nil then
+		inst.sparktask:Cancel()
+	end
+	inst.sparktask = nil
 end
 
 local function nofuel(inst)
@@ -169,56 +114,26 @@ local function nofuel(inst)
             equipslot = inst.components.equippable.equipslot,
         }
         turnoff(inst)
-        inst.components.inventoryitem.owner:PushEvent("torchranout", data)
     else
         turnoff(inst)
     end
 end
 
-local function ontakefuel(inst)
+local function ontakefuel(inst, owner)
     if inst.components.equippable:IsEquipped() then
-        turnon(inst)
+		turnon(inst)
     end
 end
 
 --------------------------------------------------------------------------
 
-local function OnLightWake(inst)
-    if not inst.SoundEmitter:PlayingSound("loop") then
-        inst.SoundEmitter:PlaySound("dontstarve/wilson/lantern_LP", "loop")
+local function onattack(inst, attacker, target)
+    if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and inst.components.weapon.stimuli == "electric" then
+        SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
+		if target:HasTag("insect") and not target.components.health:IsDead() then
+			target.components.health:DoDelta(-15)
+		end
     end
-end
-
-local function OnLightSleep(inst)
-    inst.SoundEmitter:KillSound("loop")
-end
-
---------------------------------------------------------------------------
-
-local function bugzapperlightfn()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddLight()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    inst:AddTag("FX")
-
-    inst.Light:SetColour(180 / 255, 195 / 255, 150 / 255)
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst.persists = false
-
-    inst.OnEntityWake = OnLightWake
-    inst.OnEntitySleep = OnLightSleep
-
-    return inst
 end
 
 local function fn()
@@ -233,7 +148,7 @@ local function fn()
 
     inst.AnimState:SetBank("bugzapper")
     inst.AnimState:SetBuild("bugzapper")
-    inst.AnimState:PlayAnimation("idle_on")
+    inst.AnimState:PlayAnimation("idle_off")
 
     inst:AddTag("light")
 
@@ -246,8 +161,17 @@ local function fn()
     end
 
     inst:AddComponent("inspectable")
-
+	--[[
+	inst:AddComponent("burnable")
+    inst.components.burnable.canlight = false
+    inst.components.burnable.fxprefab = nil]]
+	
+	inst:AddComponent("weapon")
+    inst.components.weapon:SetDamage(TUNING.NIGHTSTICK_DAMAGE / 2)
+    inst.components.weapon:SetOnAttack(onattack)
+	
     inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/bugzapper.xml"
 
     inst.components.inventoryitem:SetOnDroppedFn(ondropped)
     inst.components.inventoryitem:SetOnPutInInventoryFn(turnoff)
@@ -256,15 +180,9 @@ local function fn()
 
     inst:AddComponent("fueled")
 
-    inst:AddComponent("machine")
-    inst.components.machine.turnonfn = turnon
-    inst.components.machine.turnofffn = turnoff
-    inst.components.machine.cooldowntime = 0
-
     inst.components.fueled.fueltype = FUELTYPE.CAVE
-    inst.components.fueled:InitializeFuelLevel(TUNING.LANTERN_LIGHTTIME)
+    inst.components.fueled:InitializeFuelLevel(TUNING.LANTERN_LIGHTTIME * 0.75)
     inst.components.fueled:SetDepletedFn(nofuel)
-    inst.components.fueled:SetUpdateFn(fuelupdate)
     inst.components.fueled:SetTakeFuelFn(ontakefuel)
     inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION, TUNING.TURNON_FULL_FUELED_CONSUMPTION)
     inst.components.fueled.accepting = true
@@ -290,5 +208,4 @@ local function fn()
     return inst
 end
 
-return Prefab("bugzapper", fn, assets, prefabs),
-    Prefab("bugzapperlight", bugzapperlightfn)
+return Prefab("bugzapper", fn, assets)
