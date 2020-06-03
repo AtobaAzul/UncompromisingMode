@@ -42,6 +42,9 @@ local function bite(inst)
 	if inst.components.infester.target:HasTag("player") and not inst.components.infester.target:HasTag("playerghost") then
 		inst.bufferedaction = BufferedAction(inst, inst.components.infester.target, ACTIONS.ATTACK)
 		inst:PushEvent("doattack")
+		if not inst.components.infester.target.components.health:IsDead() then
+			inst.components.infester.target.components.health:DoDelta(-1)
+		end
 		if inst.components.infester.target.components.hayfever ~= nil and inst.components.infester.target.components.hayfever.enabled then
 			local hayfeverdelta = inst.components.infester.target.components.hayfever:GetNextSneezTime()
 			inst.components.infester.target.components.hayfever:DoDelta(-10)
@@ -186,7 +189,7 @@ local function fn()
 	inst.components.combat.hiteffectsymbol = "fx_puff"
     inst.components.combat:SetKeepTargetFunction(keeptargetfn)
 
-    inst.components.combat:SetDefaultDamage(1)
+    --inst.components.combat:SetDefaultDamage(1)
     inst.components.combat:SetAttackPeriod(6)
     inst.components.combat:SetRetargetFunction(1, NormalRetarget)    
 
