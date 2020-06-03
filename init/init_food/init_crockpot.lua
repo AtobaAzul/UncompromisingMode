@@ -320,6 +320,8 @@ end
 
 InsertIngredientValues({"zaspberry"},{fruit=1},true,false,false)
 InsertIngredientValues({"iceboomerang"},{ice=1},true,false,false)
+InsertIngredientValues({"rice"},{veggie=1},true,false,false)
+InsertIngredientValues({"rice_cooked"},{veggie=1},true,false,false)
 local zaspberryparfait =
 {
     name = "zaspberryparfait",

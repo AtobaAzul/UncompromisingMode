@@ -75,4 +75,5 @@ return {
 	"rneghost",
 	"chimp",
 	"pollenmiteden",
+	"rice",
 }
