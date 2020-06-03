@@ -40,9 +40,12 @@ local VALID_TILES = table.invert(
 local function GetSpawnPoint(pt)
     local function TestSpawnPoint(offset)
         local spawnpoint = pt + offset
+		local spawnpoint_x, spawnpoint_y, spawnpoint_z = (pt + offset):Get()
         return _map:IsAboveGroundAtPoint(spawnpoint:Get())
 		and VALID_TILES[_map:GetTileAtPoint(spawnpoint:Get())] ~= nil
-    end
+		and
+        #(TheSim:FindEntities(spawnpoint_x, 0, spawnpoint_z, 4, { "player" })) == 0
+		end
 
     local theta = math.random() * 2 * PI
     local radius = math.random() * TUNING.FROG_RAIN_SPAWN_RADIUS/3
@@ -67,7 +70,7 @@ end
 local function SpawnFrogForPlayer(player, reschedule)
 	if (not TheWorld.state.iswinter) and TheWorld.state.isday then
     local pt = player:GetPosition()
-	local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, TUNING.FROG_RAIN_MAX_RADIUS, { "frog" })
+	local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, TUNING.FROG_RAIN_MAX_RADIUS, { "scorpion" })
 	if GetTableSize(_frogs) < TUNING.FROG_RAIN_MAX and #ents < _frogcap then
 		local spawn_point = GetSpawnPoint(pt)
 		if spawn_point ~= nil then
