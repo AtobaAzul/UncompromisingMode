@@ -26,7 +26,7 @@ local PollenOver =  Class(Widget, function(self, owner)
 
     self.level = 0   
 
-    self.sneezethreshhold = 3
+    self.sneezethreshhold = 5
 
     self.mainline = 1
     self.startline = 60

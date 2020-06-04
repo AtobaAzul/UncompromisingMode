@@ -50,7 +50,7 @@ local _activeplayers = {}
 local function AllowedToAttack()
 	--print("Deerclopsspawner allowed to attack?", TheWorld.state.cycles, _attackduringoffseason, TheWorld.state.season)
     return  #_activeplayers > 0 and
-            TheWorld.state.cycles > TUNING.NO_BOSS_TIME and  
+            TheWorld.state.cycles > TUNING.NO_BOSS_TIME + 1 and  
                 (_attackduringoffseason or
                 TheWorld.state.season == "winter")
 end
