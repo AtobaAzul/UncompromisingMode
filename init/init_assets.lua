@@ -117,5 +117,6 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/zaspberryparfait.xml"),
 	Asset("IMAGE", "images/inventoryimages/bugzapper.tex"),
 	Asset("ATLAS", "images/inventoryimages/bugzapper.xml"),
+	Asset("ANIM", "anim/gatorsnake.zip"),
 	
 }

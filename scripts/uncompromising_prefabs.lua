@@ -76,4 +76,5 @@ return {
 	"chimp",
 	"pollenmiteden",
 	"rice",
+	"gatorsnake",
 }
