@@ -138,7 +138,7 @@ end
 function Hayfever:DoSneezeEffects()
     
     self.inst.components.sanity:DoDelta(-TUNING.SANITY_SUPERTINY*3)
-
+--[[
     -- cause player to drop stuff here.
     local itemstodrop = 0 
     if math.random() < 0.6 then
@@ -171,7 +171,7 @@ function Hayfever:DoSneezeEffects()
                 end                      
             end
         end
-    end
+    end]]
 end 
 
 return Hayfever
