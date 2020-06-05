@@ -77,4 +77,5 @@ return {
 	"pollenmiteden",
 	"rice",
 	"gatorsnake",
+	"riceplant",
 }
