@@ -4,8 +4,8 @@ require "tuning"
 
     local assets =
     {
-        Asset("ANIM", "anim/berries.zip"),
-		--Asset("ATLAS", "images/inventoryimages/berries.xml"),
+        Asset("ANIM", "anim/rice.zip"),
+		Asset("ATLAS", "images/inventoryimages/rice.xml"),
     }
 
     local assets_cooked =
@@ -30,8 +30,8 @@ local function fn()
 
         MakeInventoryPhysics(inst)
 
-        inst.AnimState:SetBank("berries")
-        inst.AnimState:SetBuild("berries")
+        inst.AnimState:SetBank("rice")
+        inst.AnimState:SetBuild("rice")
         inst.AnimState:PlayAnimation("idle")
 		MakeInventoryFloatable(inst, "med", 0.05, 0.68)
         --cookable (from cookable component) added to pristine state for optimization
@@ -59,7 +59,7 @@ local function fn()
 
         inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = nil--"images/inventoryimages/berries.xml"
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/rice.xml"
     MakeSmallBurnable(inst)
     MakeSmallPropagator(inst)
     ---------------------        
