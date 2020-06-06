@@ -33,7 +33,7 @@ local function fn()
         inst.AnimState:SetBank("berries")
         inst.AnimState:SetBuild("berries")
         inst.AnimState:PlayAnimation("idle")
-
+		MakeInventoryFloatable(inst, "med", 0.05, 0.68)
         --cookable (from cookable component) added to pristine state for optimization
 		inst:AddTag("cookable")
 
