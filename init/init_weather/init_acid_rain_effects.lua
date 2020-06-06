@@ -18,7 +18,7 @@ local function doacidrain(inst, dt)
                 )
             if waterproofmult < 1 and t > inst.acid_time + inst.acid_time_offset + waterproofmult * 7 and mushroomcheck ~= nil then
                 inst.components.health:DoDelta(-GLOBAL.TUNING.DSTU.ACID_RAIN_DAMAGE_TICK, false, "rain")
-				if math.random() =< 0.3 then 
+				if math.random() <= 0.3 then 
 					inst.components.talker:Say(GLOBAL.GetString(inst, "ANNOUNCE_ACIDRAIN"))
 				end
                 inst.acid_time_offset = 3 + math.random() * 2
