@@ -47,7 +47,7 @@ local function fnhiss()
 	inst.AnimState:PlayAnimation("flies_puff")
 
 	inst.AnimState:SetMultColour(0.5, 1, 0, 1)
-	inst.Transform:SetScale(0.6,0.6,0.6)
+	inst.Transform:SetScale(0.4,0.4,0.4)
 
     inst.entity:SetPristine()
 	

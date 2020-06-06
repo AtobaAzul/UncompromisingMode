@@ -167,7 +167,7 @@ local states=
                 --inst.components.groundpounder:GroundPound()
 				local x, y, z = inst:GetPosition():Get()
 			
-				local ents = TheSim:FindEntities(x, y, z, TUNING.METEOR_RADIUS * 1.3, nil, {"frog", "toadstool", "shadow"})
+				local ents = TheSim:FindEntities(x, y, z, TUNING.METEOR_RADIUS * 1.3, nil, {"frog", "toadstool", "shadow", "toad"})
 				for i, v in ipairs(ents) do
 						if v.components.combat ~= nil then
 						v.components.combat:GetAttacked(inst, TUNING.METEOR_DAMAGE * 1.25, nil)

@@ -204,6 +204,29 @@ local function SpawnFissures(player)
 	end)
 end
 
+local function SpawnKrampus(player)
+	--print("Thundering")
+	
+	if not TheWorld.state.israining then
+		TheWorld:PushEvent("ms_forceprecipitation")
+	end
+	
+	player:DoTaskInTime(10 * math.random() * 2, function()
+			local x, y, z = player.Transform:GetWorldPosition()
+			SpawnPrefab("krampuswarning_lvl3").Transform:SetPosition(player.Transform:GetWorldPosition())
+			player:DoTaskInTime(0.6 * math.random(4) * 0.3, function()
+				--local thunder = SpawnPrefab("thunder_far")
+				--thunder.Transform:SetPosition(x + math.random(-10,10), y, z + math.random(-10,10))
+				TheWorld:PushEvent("ms_forcenaughtiness", { player = player, numspawns = 2 })
+			end)
+			StopFog(player)
+	end)
+end
+
+---------------------------------------------------------------
+----------------------------THUNDER----------------------------
+---------------------------------------------------------------
+
 local function SpawnLightning(player)
 	--print("THUNDERRRRRR")
 	player:DoTaskInTime(10 * math.random() * 2, function()
@@ -255,6 +278,10 @@ local function SpawnThunderFar(player)
 			StopFog(player)
 	end)
 end
+
+---------------------------------------------------------------
+----------------------------THUNDER----------------------------
+---------------------------------------------------------------
 
 local function SpawnLightFlowersNFerns(player)
 	player:DoTaskInTime(5+math.random(5,10), function()
@@ -343,6 +370,16 @@ local function AddCaveEvent(name, weight)
     self.totalrandomcaveweight = self.totalrandomcaveweight + weight
 end
 
+local function AddWinterEvent(name, weight)
+    if not self.winterevents then
+        self.winterevents = {}
+        self.totalrandomwinterweight = 0
+    end
+
+    table.insert(self.winterevents, { name = name, weight = weight })
+    self.totalrandomwinterweight = self.totalrandomwinterweight + weight
+end
+
 local function AddSpringEvent(name, weight)
     if not self.springevents then
         self.springevents = {}
@@ -390,6 +427,8 @@ AddBaseEvent(FireHungryGhostAttack,.5)
 --Cave
 AddCaveEvent(SpawnBats,1)
 AddCaveEvent(SpawnFissures,1)
+--Winter
+AddWinterEvent(SpawnKrampus,1)
 --Spring
 AddSpringEvent(SpawnThunderFar,1)
 --Full Moon
@@ -429,7 +468,18 @@ print("done")
 end
 
 local function DoWildRNE(player)
-	if math.random() >= .5 and TheWorld.state.isspring and TheWorld.state.isnight then
+	if math.random() >= .5 and TheWorld.state.iswinter and TheWorld.state.isnight then
+		if self.totalrandomwinterweight and self.totalrandomwinterweight > 0 and self.winterevents then
+			local rnd = math.random()*self.totalrandomwinterweight
+			for k,v in pairs(self.winterevents) do
+				rnd = rnd - v.weight
+				if rnd <= 0 then
+				v.name(player)
+				return
+				end
+			end
+		end
+	elseif math.random() >= .5 and TheWorld.state.isspring and TheWorld.state.isnight then
 		if self.totalrandomspringweight and self.totalrandomspringweight > 0 and self.springevents then
 			local rnd = math.random()*self.totalrandomspringweight
 			for k,v in pairs(self.springevents) do

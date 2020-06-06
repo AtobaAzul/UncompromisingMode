@@ -322,6 +322,7 @@ local function MakeMoose(nightmare)
     
     inst:AddTag("animal")
     inst:AddTag("frog")
+    inst:AddTag("toad")
     inst:AddTag("hostile")
     inst:AddTag("toadstool")
     inst:AddTag("toadling")

@@ -16,7 +16,7 @@ end
 	
 
 
-env.AddPrefabPostInit("mutatedhound", function(inst)
+env.AddPrefabPostInit("oasislake", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end

@@ -490,7 +490,12 @@ local states=
            --inst.Physics:SetMotorVelOverride(-20,0,0)
             inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 			inst.sg.statemem.startpos = Vector3(inst.Transform:GetWorldPosition())
-            inst.sg.statemem.targetpos = Vector3(inst.components.combat.target.Transform:GetWorldPosition())
+			
+            if inst.components.combat.target and inst.components.combat.target:IsValid() then
+				inst.sg.statemem.targetpos = Vector3(inst.components.combat.target.Transform:GetWorldPosition())
+			else
+				inst.sg.statemem.targetpos = Vector3(inst.Transform:GetWorldPosition())
+            end
         end,
 		onupdate = function(inst)
             local percent = inst.AnimState:GetCurrentAnimationTime () / inst.AnimState:GetCurrentAnimationLength()

@@ -228,12 +228,12 @@ local function onpickedfn(inst, picker)
             ThePlayer.components.talker:Say(GetString(ThePlayer.prefab, "ANNOUNCE_COLD"))
         end
         
-		picker.components.moisture:DoDelta(10)
+		picker.components.moisture:DoDelta(15)
         
     end
 	
 	if picker.components.temperature ~= nil then
-		picker.components.temperature:DoDelta(-5)
+		picker.components.temperature:DoDelta(-25)
 	end
 	
 	if inst.components.workable.workleft > 0 then

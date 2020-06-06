@@ -115,7 +115,9 @@ env.AddPrefabPostInit("penguin", function(inst)
 		inst.components.halloweenmoonmutable:SetOnMutateFn(OnMoonMutate)
 	end
 	
-    inst.components.combat:SetRetargetFunction(2, NewRetarget)
+	if inst.components.combat ~= nil then
+		inst.components.combat:SetRetargetFunction(2, NewRetarget)
+	end
 	
 	inst:WatchWorldState("isfullmoon", OnFullMoon)
 	OnFullMoon(inst, TheWorld.state.isfullmoon)

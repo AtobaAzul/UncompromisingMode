@@ -127,10 +127,10 @@ local function dostrike(inst)
     inst:DoTaskInTime(3, inst.Remove)
 end
 
-local warntime = 5
+local warntime = 2
 local sizes = 
 { 
-    small = .7,
+    large = .7,
 }
 
 local function SetPeripheral(inst, peripheral)
@@ -146,7 +146,7 @@ local function SetSize(inst, sz, mod)
         return
     end
 
-    inst.size = sizes["small"]
+    inst.size = sizes["large"]
     inst.warnshadow = SpawnPrefab("meteorwarning")
 
     if mod == nil then
@@ -154,7 +154,7 @@ local function SetSize(inst, sz, mod)
     end
 
     inst.Transform:SetScale(inst.size, inst.size, inst.size)
-    inst.warnshadow.Transform:SetScale(inst.size, inst.size, inst.size)
+    inst.warnshadow.Transform:SetScale(inst.size * 1.2, inst.size * 1.2, inst.size * 1.2)
 
     -- Now that we've been set to the appropriate size, go for the gusto
     inst.striketask = inst:DoTaskInTime(warntime, dostrike)

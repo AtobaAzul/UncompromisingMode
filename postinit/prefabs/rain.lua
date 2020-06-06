@@ -15,7 +15,7 @@ env.AddPrefabPostInit("raindrop", function(inst)
 	if mushroomcheck ~= nil and TheWorld.state.isautumn then
 		--inst.AnimState:SetMultColour(0.5, 1, 0, 1)
 		inst:ListenForEvent("onremove", function(inst) 
-			if math.random() >= 0.8 then 
+			if math.random() >= 0.9 then 
 				SpawnPrefab("acid_rain_splash").Transform:SetPosition(inst.Transform:GetWorldPosition()) 
 			end 
 		end)
