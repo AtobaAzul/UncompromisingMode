@@ -127,7 +127,7 @@ local function dostrike(inst)
     inst:DoTaskInTime(3, inst.Remove)
 end
 
-local warntime = 1
+local warntime = 5
 local sizes = 
 { 
     small = .7,

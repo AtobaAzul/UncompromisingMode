@@ -78,4 +78,5 @@ return {
 	"rice",
 	"gatorsnake",
 	"riceplant",
+	"acid_rain_splash",
 }

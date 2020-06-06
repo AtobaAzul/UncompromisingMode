@@ -3,8 +3,10 @@ local function RandomDiseaseChance(inst)
 	--print("disease chance")
 	if inst.components.pickable ~= nil then
 		if mushroomcheck ~= nil and math.random() < 0.05 and 
-		GLOBAL.TheWorld.state.israining then
+		GLOBAL.TheWorld.state.israining and GLOBAL.TheWorld.state.isautumn then
 			--print("disease DO")
+			local fx = GLOBAL.SpawnPrefab("disease_puff")
+			fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
 			
 			if inst.components.diseaseable == nil then
 				inst:AddComponent("diseaseable")
