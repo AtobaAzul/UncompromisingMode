@@ -42,7 +42,7 @@ local function bite(inst)
 	if inst.components.infester.target:HasTag("player") and not inst.components.infester.target:HasTag("playerghost") then
 		inst.bufferedaction = BufferedAction(inst, inst.components.infester.target, ACTIONS.ATTACK)
 		inst:PushEvent("doattack")
-		if inst.components.infester.target.components.hayfever ~= nil and inst.components.infester.target.components.hayfever.enabled then
+		if inst.components.infester.target.components.hayfever ~= nil and inst.components.infester.target.components.hayfever.enabled and inst.components.infester.target.components.hayfever:CanSneeze() then
 			local hayfeverdelta = inst.components.infester.target.components.hayfever:GetNextSneezTime()
 			inst.components.infester.target.components.hayfever:DoDelta(-10)
 		end

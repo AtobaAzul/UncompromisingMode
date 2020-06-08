@@ -19,7 +19,7 @@ local function spark(inst)
 		if math.random() >= 0.15 then
 			inst.sparktask = inst:DoTaskInTime(math.random() * 0.5, spark)
 		else
-			inst.sparktask = inst:DoTaskInTime(1 * math.random() + 5, spark)
+			inst.sparktask = inst:DoTaskInTime(math.random() + 5, spark)
 		end
 	else
 		fx.entity:SetParent(inst.entity)
@@ -30,7 +30,7 @@ local function spark(inst)
 		if math.random() <= 0.15 then
 			inst.sparktask = inst:DoTaskInTime(math.random() * 0.5, spark)
 		else
-			inst.sparktask = inst:DoTaskInTime(1 * math.random() + 5, spark)
+			inst.sparktask = inst:DoTaskInTime(math.random() + 5, spark)
 		end
 	end
 end

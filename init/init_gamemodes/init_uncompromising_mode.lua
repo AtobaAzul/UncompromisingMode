@@ -119,6 +119,7 @@ local require = GLOBAL.require
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("hayfever") == true or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("hayfever") == true) then
 		modimport("init/init_weather/init_hayfever")
+		modimport("init/init_creatures/init_sneeze_hitters")
 	end
 	
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or

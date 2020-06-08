@@ -82,6 +82,7 @@ local prefab_post = {
 	"rain",
 	"molehat",
 	"klaus",
+	"mosquito",
 }
 
 local stategraph_post = {
