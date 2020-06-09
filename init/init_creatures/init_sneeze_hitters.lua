@@ -34,7 +34,7 @@ local HITTERS =
     {
 		power = -10,
 	},
-	["scorpions"] =
+	["scorpion"] =
     {
 		power = -10,
 	},
