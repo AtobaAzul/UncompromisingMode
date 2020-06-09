@@ -34,10 +34,10 @@ local HITTERS =
     {
 		power = -10,
 	},
-	--[[["frog"] =
+	["scorpions"] =
     {
 		power = -10,
-	},]]
+	},
 	--No klaus, since he does double attacks and has deer 
 }
 
