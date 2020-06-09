@@ -34,10 +34,10 @@ local HITTERS =
     {
 		power = -10,
 	},
-	["frog"] =
+	--[[["frog"] =
     {
 		power = -10,
-	},
+	},]]
 	--No klaus, since he does double attacks and has deer 
 }
 
@@ -45,7 +45,7 @@ for k, v in pairs(HITTERS) do
 	AddPrefabPostInit(k, function(inst)
 		local function OnHitOther(inst, other)
 			if other ~= nil and other.components.hayfever and other.components.hayfever.enabled and other.components.hayfever:CanSneeze() then
-			--Don't knockback if you wear marble
+			--Don't knockback ifws you wear marble
 				other.components.hayfever:DoDelta(v.power)
 			end
 		end
