@@ -571,7 +571,7 @@ local function CheckPlayers()
 					local m,n,o = v.Transform:GetWorldPosition()
 					local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
 					rnepl = #rnep
-							if rnepl < 2 then
+							if rnepl < 1 then
 								if TheWorld.state.isfullmoon then
 									print("fullmoon")
 									DoFullMoonRNE(v)
@@ -591,7 +591,7 @@ local function CheckPlayers()
 					local m,n,o = v.Transform:GetWorldPosition()
 					local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
 					rnepl = #rnep
-						if rnepl < 2 then
+						if rnepl < 1 then
 							if TheWorld.state.isfullmoon then
 								print("fullmoon")
 								DoFullMoonRNE(v)
