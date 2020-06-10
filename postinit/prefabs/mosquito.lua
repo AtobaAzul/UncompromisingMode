@@ -3,7 +3,7 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------\
 
 local function OnIsSpring(inst, isspring)
-    if isspring and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
+    if isspring then
         inst.AnimState:SetBuild("mosquito_yellow_build")
     else
         inst.AnimState:SetBuild("mosquito")

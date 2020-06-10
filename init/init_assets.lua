@@ -78,6 +78,10 @@ Assets = {
 	Asset("ANIM", "anim/bugzapper.zip"),
 	Asset("ANIM", "anim/swap_bugzapper.zip"),
 	Asset("ANIM", "anim/mosquito_yellow_build.zip"),
+	Asset("ANIM", "anim/walrus_build_summer.zip"),
+	Asset("ANIM", "anim/walrus_baby_build_summer.zip"),
+	Asset("ANIM", "anim/hat_sunglasses.zip"),
+	Asset("ANIM", "anim/walrus_house_summer.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),
@@ -118,6 +122,8 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/zaspberryparfait.xml"),
 	Asset("IMAGE", "images/inventoryimages/bugzapper.tex"),
 	Asset("ATLAS", "images/inventoryimages/bugzapper.xml"),
+	Asset("IMAGE", "images/inventoryimages/sunglasses.tex"),
+	Asset("ATLAS", "images/inventoryimages/sunglasses.xml"),
 	Asset("ANIM", "anim/gatorsnake.zip"),
 	
 }
