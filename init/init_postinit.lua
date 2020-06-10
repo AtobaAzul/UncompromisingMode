@@ -83,7 +83,7 @@ local prefab_post = {
 	"molehat",
 	"klaus",
 	"mosquito",
-	"walrus_camp",
+	--"walrus_camp",
 }
 
 local stategraph_post = {
