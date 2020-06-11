@@ -95,6 +95,7 @@ local stategraph_post = {
 	"minotaur",
 	"spider",
 	"frog",
+	"walrus",
 	--"shadowcreature",
 }
 
