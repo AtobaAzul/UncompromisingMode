@@ -81,4 +81,5 @@ return {
 	"acid_rain_splash",
 	"walrus_camp_summer",
 	"sunglasses",
+	"cookiespikes",
 }
