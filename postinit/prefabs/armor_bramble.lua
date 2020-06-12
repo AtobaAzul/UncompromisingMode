@@ -1,9 +1,21 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
+local function OnCooldown(inst)
+    inst._cdtask = nil
+end
 
 local function OnBlocked(owner, data, inst)
-    --sorry, nothing
+    if inst._cdtask == nil and data ~= nil and not data.redirected then
+        --V2C: tiny CD to limit chain reactions
+        inst._cdtask = inst:DoTaskInTime(.3, OnCooldown)
+
+        SpawnPrefab("bramblefx_armor"):SetFXOwner(owner)
+
+        if owner.SoundEmitter ~= nil then
+            owner.SoundEmitter:PlaySound("dontstarve/common/together/armor/cactus")
+        end
+    end
 end
 
 local function SpikeAttack(owner, inst)
