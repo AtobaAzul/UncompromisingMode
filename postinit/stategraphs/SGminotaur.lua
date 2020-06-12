@@ -169,61 +169,73 @@ local function GroundDetectionUpdate(debris)
 end
 
 local function fallingpianogag(inst)
-	local target2 = GetClosestInstWithTag("player", inst, 50)
+	local x, y, z = inst.Transform:GetWorldPosition()
+    local target1 = TheSim:FindEntities(x, y, z, 50, nil, { "playerghost" }, { "player" })
+	
 			--if target ~= nil then
-	if target2 ~= nil then
+	if #target1 > 0 then
+	local target2 = inst:GetNearestPlayer(true)
+		if target2 ~= nil then
 		local x, y, z = target2.Transform:GetWorldPosition()
 
 		local debris = SpawnPrefab("minotaur_boulder")
 		
-		if debris ~= nil then
-		debris.entity:SetCanSleep(false)
-		debris.persists = false
-		
-		local xrandom = x + math.random(-5, 5)
-		local zrandom = z + math.random(-5, 5)
+			if debris ~= nil then
+				debris.entity:SetCanSleep(false)
+				debris.persists = false
 				
-		SpawnPrefab("cavein_debris").Transform:SetPosition(xrandom, 0, zrandom)
-				
-		debris.shadow = SpawnPrefab("warningshadow")
-		debris.shadow:ListenForEvent("onremove", OnRemoveDebris, debris)
-		debris.shadow.Transform:SetPosition(xrandom, 0, zrandom)
-		debris.shadow.Transform:SetScale(2.75, 2.75, 2.75)
-		UpdateShadowSize(debris.shadow, 25)
-				
-		debris.Physics:Teleport(xrandom, 25, zrandom)
-		debris.updatetask = debris:DoPeriodicTask(FRAMES, GroundDetectionUpdate, nil, 1)
-		debris:PushEvent("startfalling")
+				local xrandom = x + math.random(-5, 5)
+				local zrandom = z + math.random(-5, 5)
+						
+				SpawnPrefab("cavein_debris").Transform:SetPosition(xrandom, 0, zrandom)
+						
+				debris.shadow = SpawnPrefab("warningshadow")
+				debris.shadow:ListenForEvent("onremove", OnRemoveDebris, debris)
+				debris.shadow.Transform:SetPosition(xrandom, 0, zrandom)
+				debris.shadow.Transform:SetScale(2.75, 2.75, 2.75)
+				UpdateShadowSize(debris.shadow, 25)
+						
+				debris.Physics:Teleport(xrandom, 25, zrandom)
+				debris.updatetask = debris:DoPeriodicTask(FRAMES, GroundDetectionUpdate, nil, 1)
+				debris:PushEvent("startfalling")
+			end
 		end
 	end
 end
 
 local function giantfallingpianogag(inst)
-	local target2 = GetClosestInstWithTag("player", inst, 50)
+	local x, y, z = inst.Transform:GetWorldPosition()
+    local target1 = TheSim:FindEntities(x, y, z, 50, nil, { "playerghost" }, { "player" })
+	
 			--if target ~= nil then
-	if target2 ~= nil then
-		local x, y, z = target2.Transform:GetWorldPosition()
+	if #target1 > 0 then
+	
+		local target2 = inst:GetNearestPlayer(true)
+	
+		if target2 ~= nil then
+			local x, y, z = target2.Transform:GetWorldPosition()
 
-		local debris = SpawnPrefab("minotaur_boulder_big")
-		
-		if debris ~= nil then
-		debris.entity:SetCanSleep(false)
-		debris.persists = false
-		
-		local xrandom = x + math.random(-5, 5)
-		local zrandom = z + math.random(-5, 5)
-		
-		SpawnPrefab("cavein_debris").Transform:SetPosition(xrandom, 0, zrandom)
+			local debris = SpawnPrefab("minotaur_boulder_big")
+			
+			if debris ~= nil then
+				debris.entity:SetCanSleep(false)
+				debris.persists = false
 				
-		debris.shadow = SpawnPrefab("warningshadow")
-		debris.shadow:ListenForEvent("onremove", OnRemoveDebris, debris)
-		debris.shadow.Transform:SetPosition(xrandom, 0, zrandom)
-		debris.shadow.Transform:SetScale(3.5, 3.5, 3.5)
-		UpdateShadowSize(debris.shadow, 35)
+				local xrandom = x + math.random(-5, 5)
+				local zrandom = z + math.random(-5, 5)
 				
-		debris.Physics:Teleport(xrandom, 35, zrandom)
-		debris.updatetask = debris:DoPeriodicTask(FRAMES, GroundDetectionUpdate, nil, 1)
-		debris:PushEvent("startfalling")
+				SpawnPrefab("cavein_debris").Transform:SetPosition(xrandom, 0, zrandom)
+						
+				debris.shadow = SpawnPrefab("warningshadow")
+				debris.shadow:ListenForEvent("onremove", OnRemoveDebris, debris)
+				debris.shadow.Transform:SetPosition(xrandom, 0, zrandom)
+				debris.shadow.Transform:SetScale(3.5, 3.5, 3.5)
+				UpdateShadowSize(debris.shadow, 35)
+						
+				debris.Physics:Teleport(xrandom, 35, zrandom)
+				debris.updatetask = debris:DoPeriodicTask(FRAMES, GroundDetectionUpdate, nil, 1)
+				debris:PushEvent("startfalling")
+			end
 		end
 	end
 end
@@ -379,7 +391,6 @@ local states = {
 		local ents = TheSim:FindEntities(x, y, z, 50, { "player" })
 		
 		if ents ~= nil then
-			local target2 = GetClosestInstWithTag("player", inst, 50)
 			fallingpianogag(inst)
 		end
 		
@@ -398,7 +409,6 @@ local states = {
 		local ents2 = TheSim:FindEntities(x, y, z, 50, { "megaboulder" })
 		
 		if ents ~= nil then
-			local target2 = GetClosestInstWithTag("player", inst, 50)
 			if ents2 ~= nil then
 				if #ents2 == 0 and math.random() < 0.5 then
 					giantfallingpianogag(inst)

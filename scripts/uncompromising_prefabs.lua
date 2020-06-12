@@ -82,4 +82,5 @@ return {
 	"walrus_camp_summer",
 	"sunglasses",
 	"cookiespikes",
+	"skeletonmeat",
 }
