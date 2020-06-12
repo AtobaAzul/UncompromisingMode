@@ -29,7 +29,7 @@ local events =
                 if not inst.sg:HasStateTag("attack") then -- don't interrupt attack or exit shield
                     inst.sg:GoToState("hit") -- can still attack
                 end
-            elseif not inst.sg:HasStateTag("shield") and not ("spider_warrior") then
+            elseif not inst.sg:HasStateTag("shield") and not inst:HasTag("spider_warrior") then
                 inst.sg:GoToState("hit_stunlock")  -- can't attack during hit reaction
             end
         end
