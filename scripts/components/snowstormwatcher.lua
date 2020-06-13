@@ -37,11 +37,13 @@ local function StormStop(self)
 
 	TheWorld:RemoveTag("snowstormstart")
 	TheWorld.net:RemoveTag("snowstormstartnet")
+	
+	self:ToggleSnowstorms()
 end
 
 function SnowStormWatcher:ToggleSnowstorms(active, src, data)
 	
-	if not TheWorld.state.issnowing then
+	if not TheWorld.state.issnowing or not ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") ) then
 		self:UpdateSnowstormWalkSpeed()
 		self.inst:PushEvent("snowoff")
         self.inst:StopUpdatingComponent(self)
