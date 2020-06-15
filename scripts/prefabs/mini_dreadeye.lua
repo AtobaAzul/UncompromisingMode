@@ -105,6 +105,8 @@ local function snowpilefn(Sim)
 	
 	inst:AddTag("shadow_eye")
 	
+    inst:AddComponent("transparentonsanity_dreadeye_objects")
+	
 	inst.entity:SetPristine()
 	
 	if not TheWorld.ismastersim then
