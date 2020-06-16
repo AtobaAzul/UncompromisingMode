@@ -3,7 +3,7 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 
 local function DisableThatStuff(inst)
-		--inst:PushEvent("addqueenbeekilledtag")
+		TheWorld:PushEvent("beequeenkilled")
 		TheWorld.net:AddTag("queenbeekilled")
 end
 
@@ -33,6 +33,7 @@ end)
 
 local function OnTagTimer(inst, data)
 	if data.name == "hivegrowth" then
+		TheWorld:PushEvent("beequeenrespawned")
 		TheWorld.net:RemoveTag("queenbeekilled")
 	end
 end
