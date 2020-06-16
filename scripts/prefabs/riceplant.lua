@@ -1,7 +1,8 @@
 local assets =
 {
-    Asset("ANIM", "anim/grass.zip"),
-    Asset("ANIM", "anim/reeds.zip"),
+    --Asset("ANIM", "anim/grass.zip"),
+    --Asset("ANIM", "anim/reeds.zip"),
+    Asset("ANIM", "anim/riceplant.zip"),
     Asset("SOUND", "sound/common.fsb"),
 }
 
@@ -17,7 +18,7 @@ local function onpickedfn(inst)
 	RemovePhysicsColliders(inst)
 	inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
 	inst.AnimState:SetLayer(LAYER_BELOW_GROUND)
-	inst.components.floater:SetVerticalOffset(100)
+	--inst.components.floater:SetVerticalOffset(100)
 end
 
 local function onregenfn(inst)
@@ -27,10 +28,10 @@ local function onregenfn(inst)
 	inst:Remove()
 	return
 	end
-	MakeWaterObstaclePhysics(inst, 0.80, 2, 1.25)
+	MakeWaterObstaclePhysics(inst, 0.30, 2, 1.25)
 	inst.AnimState:SetSortOrder(0)
     inst.AnimState:SetLayer(LAYER_WORLD)
-	inst.components.floater:SetVerticalOffset(0.9)
+	--inst.components.floater:SetVerticalOffset(0.9)
     inst.AnimState:PlayAnimation("grow")
     inst.AnimState:PushAnimation("idle", true)
 end
@@ -40,7 +41,7 @@ local function makeemptyfn(inst)
 	RemovePhysicsColliders(inst)
 	inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
 	inst.AnimState:SetLayer(LAYER_BELOW_GROUND)
-	inst.components.floater:SetVerticalOffset(100)
+	--inst.components.floater:SetVerticalOffset(100)
 end
 
 local function OnCollide(inst)
@@ -61,20 +62,20 @@ local function fn()
 
     inst:AddTag("plant")
 	inst:AddTag("ignorewalkableplatforms")
-    inst.AnimState:SetBank("grass")
-    inst.AnimState:SetBuild("reeds")
+    inst.AnimState:SetBank("riceplant")
+    inst.AnimState:SetBuild("riceplant")
     inst.AnimState:PlayAnimation("idle", true)
-	MakeInventoryFloatable(inst, "med", 0.1, {1.1, 0.9, 1.1})
-    inst.components.floater.bob_percent = 0
+	--MakeInventoryFloatable(inst, "small", 0.1, {1.1, 0.9, 1.1})
+    --inst.components.floater.bob_percent = 0
 	inst:DoTaskInTime(0, function(inst)
-        inst.components.floater:OnLandedServer()
+    --inst.components.floater:OnLandedServer()
     end)
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-	MakeWaterObstaclePhysics(inst, 0.80, 2, 1.25)
+	MakeWaterObstaclePhysics(inst, 0.30, 2, 1.25)
     inst.AnimState:SetTime(math.random() * 2)
     local color = 0.75 + math.random() * 0.25
     inst.AnimState:SetMultColour(color, color, color, 1)
