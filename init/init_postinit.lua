@@ -11,6 +11,7 @@ local component_post = {
 }
 
 local prefab_post = {
+	"butterfly",
     "toadstool_cap",
     "yellowamulet",
     "trap_teeth",
