@@ -40,7 +40,7 @@ local states = {
             inst.components.container:Close()
             inst.components.container:DropEverything()
             inst.components.container.canbeopened = false
-            inst.SoundEmitter:PlaySound("dontstarve/creatures/together/pupington/growl")
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/together/pupington/death")
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)          
@@ -98,7 +98,7 @@ local states = {
             inst.components.container:Close()
             inst.components.container:DropEverything()
             inst.components.container.canbeopened = false
-            inst.SoundEmitter:PlaySound("dontstarve/creatures/together/pupington/growl")
+            inst.SoundEmitter:PlaySound("dontstarve/characters/walter/woby/big/bark")
             inst.sg:GoToState("actual_death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)          
