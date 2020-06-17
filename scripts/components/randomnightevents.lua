@@ -562,7 +562,7 @@ local function CheckPlayers()
 	
 	--if TheWorld.state.cycles > 7 and math.random() >= 0.8 or TheWorld.state.isfullmoon and math.random() >= 0.5 or TheWorld.state.isnewmoon and math.random() >= 0.75 then
 		
-		for i, v in ipairs(playerlist) do  --try a base RNE
+		for i, 1 in ipairs(playerlist) do  --try a base RNE
 			local rnepl = 0
 			local x,y,z = v.Transform:GetWorldPosition()
 			local ents = TheSim:FindEntities(x,y,z, STRUCTURE_DIST, {"structure"})
@@ -586,7 +586,7 @@ local function CheckPlayers()
 								v:DoTaskInTime(60,inst:RemoveTag("rnetarget"))
 							end
 			else
-			for i, v in ipairs(playerlist) do --noone was home, so we'll do RNEs at every player instead
+			for i, 1 in ipairs(playerlist) do --noone was home, so we'll do RNEs at every player instead
 					local rnepl = 0
 					local m,n,o = v.Transform:GetWorldPosition()
 					local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
