@@ -159,7 +159,7 @@ env.AddPrefabPostInit("walter", function(inst)
 	inst.OnPreLoad = OnPreLoad
 	inst.OnLoad = OnLoad
 	
-	inst._woby_onremove = function(woby) OnWobyRemoved(inst, 30) end
+	inst._woby_onremove = function(woby) OnWobyRemoved(inst, 480) end
 	
 	--print(inst.respawntime)
 	--local spawntime = inst.respawntime
