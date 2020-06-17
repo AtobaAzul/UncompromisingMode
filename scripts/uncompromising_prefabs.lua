@@ -83,4 +83,5 @@ return {
 	"sunglasses",
 	"cookiespikes",
 	"skeletonmeat",
+	"swilson"
 }
