@@ -554,7 +554,9 @@ local function CheckPlayers()
 			table.insert(playerlist, v)
 		end
 	end
-	shuffleArray(playerlist)
+	
+	local player = playerlist[math.random(#playerlist)]
+	--shuffleArray(playerlist)
 	if #playerlist == 0 then
 		return
 	end
@@ -562,50 +564,51 @@ local function CheckPlayers()
 	
 	--if TheWorld.state.cycles > 7 and math.random() >= 0.8 or TheWorld.state.isfullmoon and math.random() >= 0.5 or TheWorld.state.isnewmoon and math.random() >= 0.75 then
 		
-		for i, 1 in ipairs(playerlist) do  --try a base RNE
-			local rnepl = 0
-			local x,y,z = v.Transform:GetWorldPosition()
+		--for i, 1 in ipairs(playerlist) do  --try a base RNE
+		if player ~= nil then
+			--local rnepl = 0
+			local x,y,z = player.Transform:GetWorldPosition()--local x,y,z = v.Transform:GetWorldPosition()
 			local ents = TheSim:FindEntities(x,y,z, STRUCTURE_DIST, {"structure"})
 			numStructures = #ents
-				if numStructures >= 4 then
-					local m,n,o = v.Transform:GetWorldPosition()
-					local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
-					rnepl = #rnep
-							if rnepl < 1 then
+			if numStructures >= 4 then
+					--local m,n,o = player.Transform:GetWorldPosition()--local m,n,o = v.Transform:GetWorldPosition()
+					--local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
+					--rnepl = #rnep
+							--if rnepl < 1 then
 								if TheWorld.state.isfullmoon then
 									print("fullmoon")
-									DoFullMoonRNE(v)
+									DoFullMoonRNE(player)--DoFullMoonRNE(v)
 								elseif TheWorld.state.isnewmoon then
 									print("newmoon")
-									DoNewMoonRNE(v)
+									DoNewMoonRNE(player)--DoNewMoonRNE(v)
 								else
-									DoBaseRNE(v)
+									DoBaseRNE(player)--DoBaseRNE(v)
 								end
 								print("found base")
-								v:AddTag("rnetarget")
-								v:DoTaskInTime(60,inst:RemoveTag("rnetarget"))
-							end
+								--player:AddTag("rnetarget")--v:AddTag("rnetarget")
+								--player:DoTaskInTime(60,player:RemoveTag("rnetarget"))--v:DoTaskInTime(60,inst:RemoveTag("rnetarget"))
+							--end
 			else
-			for i, 1 in ipairs(playerlist) do --noone was home, so we'll do RNEs at every player instead
-					local rnepl = 0
-					local m,n,o = v.Transform:GetWorldPosition()
-					local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
-					rnepl = #rnep
-						if rnepl < 1 then
+				--for i, 1 in ipairs(playerlist) do --noone was home, so we'll do RNEs at every player instead
+					--local rnepl = 0
+					--local m,n,o = player.Transform:GetWorldPosition()--local m,n,o = v.Transform:GetWorldPosition()
+					--local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
+					--rnepl = #rnep
+						--if rnepl < 1 then
 							if TheWorld.state.isfullmoon then
 								print("fullmoon")
-								DoFullMoonRNE(v)
+								DoFullMoonRNE(player)--DoFullMoonRNE(v)
 							elseif TheWorld.state.isnewmoon then
 								print("newmoon")
-								DoNewMoonRNE(v)
+								DoNewMoonRNE(player)--DoNewMoonRNE(v)
 							else
-								DoWildRNE(v)
+								DoWildRNE(player)--DoWildRNE(v)
 							end
-							v:AddTag("rnetarget")
-							v:DoTaskInTime(60,v:RemoveTag("rnetarget"))
-						end
-				print("no find base")
-				end
+							--player:AddTag("rnetarget")--v:AddTag("rnetarget")
+							--player:DoTaskInTime(60,player:RemoveTag("rnetarget"))--v:DoTaskInTime(60,v:RemoveTag("rnetarget"))
+						--end
+					print("no find base")
+				--end
 			end
 		end
 	
