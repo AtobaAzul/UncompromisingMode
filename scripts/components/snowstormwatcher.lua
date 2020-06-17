@@ -4,6 +4,7 @@ local SnowStormWatcher = Class(function(self, inst)
     self.snowstormspeedmult = .75
     self.delay = nil
 	self.task = nil
+	self.storming = false
 	inst:ListenForEvent("weathertick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
 	
 	inst:ListenForEvent("seasontick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
@@ -27,6 +28,7 @@ end
 
 local function StormStart(self)
 	self.stormtask = nil
+	self.storming = true
 
 	TheWorld:AddTag("snowstormstart")
 	TheWorld.net:AddTag("snowstormstartnet")
@@ -34,23 +36,30 @@ end
 
 local function StormStop(self)
 	self.stopstormtask = nil
-
+	self.storming = false
 	TheWorld:RemoveTag("snowstormstart")
 	TheWorld.net:RemoveTag("snowstormstartnet")
 	
-	self:ToggleSnowstorms()
+	self:UpdateSnowstormWalkSpeed()
+	self.inst:PushEvent("snowoff")
+    self.inst:StopUpdatingComponent(self)
+	self.task = nil
+	self.stormtask = nil
+	self.stopstormtask = nil
+	self.storming = false
 end
 
 function SnowStormWatcher:ToggleSnowstorms(active, src, data)
 	
-	if not TheWorld.state.issnowing or not ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") ) then
+	if not TheWorld.state.issnowing then--or not self.storming then-- or not TheWorld.net:HasTag("snowstormstartnet") or not TheWorld:HasTag("snowstormstart") then
 		self:UpdateSnowstormWalkSpeed()
 		self.inst:PushEvent("snowoff")
         self.inst:StopUpdatingComponent(self)
 		self.task = nil
 		self.stormtask = nil
 		self.stopstormtask = nil
-		TheWorld:RemoveTag("snowstormstart")
+		self.storming = false
+		-->>>>>TheWorld:RemoveTag("snowstormstart")
     elseif TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
         self.inst:StartUpdatingComponent(self)
 		if self.stormtask == nil then
@@ -88,7 +97,7 @@ function SnowStormWatcher:UpdateSnowstormWalkSpeed(src, data)
 		local ents4 = TheSim:FindEntities(x, y, z, 6, {"snowstorm_protection_high"})
 		local suppressorNearby4 = (#ents4 > 0)
 		
-    if TheWorld.state.issnowing and ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") ) then
+    if TheWorld.state.issnowing and self.storming then-->>>>>( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") )  then
         if self.inst.components.playervision:HasGoggleVision() or
             self.inst.components.playervision:HasGhostVision() or
             self.inst.components.rider:IsRiding() or
@@ -112,7 +121,7 @@ function TrySpawning(v)
 	
 	local playervalue2 = #nearbyplayers2 * 0.1
 	
-	if TheWorld.state.iswinter and ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") )  then--and self.snowstormstart then
+	if TheWorld.state.iswinter and self.storming then-->>>>>( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") )  then--and self.snowstormstart then
 		if math.random() <= 0.15 - playervalue2 then
 				--local spawn_pt = GetSpawnPoint(origin_pt, PLAYER_CHECK_DISTANCE + 5)
 				
@@ -138,7 +147,7 @@ local function SnowpileChance(inst, self)
 	local chancer = math.random()
 	
 	
-	if TheWorld.state.iswinter and ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") ) then--and self.snowstormstart then
+	if TheWorld.state.iswinter and self.storming then-->>>>>( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") ) then--and self.snowstormstart then
 		if chancer < 0.30 - #nearbyplayers1 * 0.025 then
 				local xrandom = math.random(-20, 20)
 				local zrandom = math.random(-20, 20)

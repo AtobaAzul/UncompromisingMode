@@ -87,6 +87,26 @@ local function OnSeasonTick(inst)
 	end
 end
 
+local function OnLoad(inst, data)
+	if inst.components.deerclopsspawner ~= nil then
+		print("removedeer")
+		inst:RemoveComponent("deerclopsspawner")
+	end
+	
+	if inst.components.forestresourcespawner ~= nil then
+		print("removegrow")
+		inst:RemoveComponent("forestresourcespawner")
+	end
+	
+	if inst.components.regrowthmanager ~= nil then
+		inst:RemoveComponent("regrowthmanager")
+	end
+	
+	if inst.components.desolationspawner ~= nil then
+		inst:RemoveComponent("desolationspawner")
+	end
+end
+
 env.AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then
         return
@@ -103,4 +123,14 @@ env.AddPrefabPostInit("forest", function(inst)
 	
 	inst:AddComponent("scorpionspawner")
 	inst:AddComponent("randomnightevents")
+	
+	inst.OnLoad = OnLoad
+end)
+
+env.AddPrefabPostInit("cave", function(inst)
+    if not TheWorld.ismastersim then
+        return
+    end
+	
+	inst.OnLoad = OnLoad
 end)
