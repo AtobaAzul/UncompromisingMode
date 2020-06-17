@@ -85,6 +85,7 @@ local prefab_post = {
 	"mosquito",
 	"armor_bramble",
 	"cookiecutterhat",
+	"woby",
 	--"walrus_camp",
 }
 
@@ -98,6 +99,7 @@ local stategraph_post = {
 	"spider",
 	"frog",
 	"walrus",
+	"wobysmall",
 	--"shadowcreature",
 }
 
