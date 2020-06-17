@@ -35,8 +35,6 @@ local function StormStart(self)
 end
 
 local function StormStop(self)
-	self.stopstormtask = nil
-	self.storming = false
 	TheWorld:RemoveTag("snowstormstart")
 	TheWorld.net:RemoveTag("snowstormstartnet")
 	
