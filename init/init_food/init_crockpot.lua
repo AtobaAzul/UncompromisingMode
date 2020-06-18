@@ -344,3 +344,14 @@ local carapacecooler =
     cooktime = 0.5,
 }
 --AddCookerRecipe("portablecookpot", carapacecooler)
+local seafoodpaella =
+{
+    name = "seafoodpaella",
+    test = function(cooker, names, tags) return not tags.monster and not tags.inedible and UncompromisingFillers(tags) and (names.rice or names.rice_cooked) and (names.kelp or names.kelp_cooked or names.kelp_dried) and tags.veggie >= 2 and tags.fish >= 0.5 end,
+
+    priority = 30,
+    weight = 1,
+    perishtime = nil,
+    cooktime = 0.5,
+}
+AddCookerRecipe("cookpot", seafoodpaella)

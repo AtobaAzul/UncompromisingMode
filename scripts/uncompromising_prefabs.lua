@@ -83,5 +83,6 @@ return {
 	"sunglasses",
 	"cookiespikes",
 	"skeletonmeat",
-	"swilson"
+	"swilson",
+	"seafoodpaella",
 }
