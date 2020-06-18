@@ -215,7 +215,7 @@ local function UpdatePopulation(player, params)
                 dec_chance = 0.22
             end
         elseif sanity == 0 then -- 0
-            maxpop = 3
+            maxpop = 2
             if targetpop >= maxpop then
                 dec_chance = 0.22
             elseif targetpop <= 1 then
