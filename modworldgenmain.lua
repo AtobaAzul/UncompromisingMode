@@ -13,8 +13,9 @@ end)
 
 end
 AddRoomPreInit("BGSavanna", function(room)					--This effects the outer areas of the Triple Mac and The Major Beefalo Plains
-room.contents.distributepercent = .15
-room.contents.distributeprefabs.trapdoor = 0.045
+room.contents.countprefabs=
+									{
+										trapdoor = function() return math.random(4,7) end,}
 end)
 AddRoomPreInit("Plain", function(room)						--This effects areas in the Major Beefalo Plains and the Grasslands next to the portal
 room.contents.countprefabs=

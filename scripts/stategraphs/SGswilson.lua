@@ -40,19 +40,6 @@ local events=
     end),    
 }
 
-local function SoundPath(inst, event)
-    local creature = "spider"
-
-    if inst:HasTag("spider_warrior") then
-        creature = "spiderwarrior"
-    elseif inst:HasTag("spider_hider") or inst:HasTag("spider_spitter") then
-        creature = "cavespider"
-    else
-        creature = "spider"
-    end
-    return "dontstarve/creatures/" .. creature .. "/" .. event
-end
-
 local states=
 {
     
@@ -62,12 +49,17 @@ local states=
         tags = {"busy"},
         
         onenter = function(inst)
-            inst.SoundEmitter:PlaySound("UCSounds/Scorpion/death")
 			inst.Physics:Stop()
 			RemovePhysicsColliders(inst) 
             inst.AnimState:PlayAnimation("death")
             --inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition())) 
         end,
+		timeline=
+        {
+            TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
+			TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
+			TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
+        },
 
     },    
     
@@ -82,8 +74,7 @@ local states=
         
         timeline=
         {
-            TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
-            TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/mumble") end),
+            TimeEvent(3*FRAMES, PlayFootstep),
         },
         
         events=
@@ -103,17 +94,8 @@ local states=
         
         timeline=
         {
-        
-            TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
-            ----TimeEvent(2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
-            TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
-            ----TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
-            TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/mumble") end),
-            TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
-            ----TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
-            TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
-            ----TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
-            TimeEvent(16*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
+            TimeEvent(4*FRAMES, PlayFootstep),
+            TimeEvent(8*FRAMES, PlayFootstep),
         },
         
         events=
@@ -158,7 +140,6 @@ local states=
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("idle")
-            --inst.SoundEmitter:PlaySound("UCSounds/Scorpion/taunt")
         end,
         
         events=
@@ -174,7 +155,6 @@ local states=
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("idle")
-            --inst.SoundEmitter:PlaySound("UCSounds/Scorpion/taunt")
         end,
         
         events=
@@ -199,12 +179,7 @@ local states=
         
         timeline=
         {
-            TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
-            TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
-            TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
-            TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
-            TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
-            TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/attack") end),
+            TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
             TimeEvent(13*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
         
@@ -246,11 +221,7 @@ local states=
 		
 		timeline =
         {
-			TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/attack") end),
-            TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound(SoundPath(inst, "Jump")) end),
             TimeEvent(8	*FRAMES, function(inst) inst.Physics:SetMotorVelOverride(20,0,0) end),
-            TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap_pre") end),
-            TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
             TimeEvent(19*FRAMES, function(inst) inst.components.combat:SetRange(4, 4)
 			inst.components.combat:DoAttack(inst.sg.statemem.target) end),
             TimeEvent(20*FRAMES,
@@ -285,7 +256,6 @@ local states=
         tags = {"busy"},
         
         onenter = function(inst)
-            inst.SoundEmitter:PlaySound(SoundPath(inst, "hit_response"))
             inst.AnimState:PlayAnimation("hit")
             inst.Physics:Stop()            
         end,
@@ -299,19 +269,6 @@ local states=
     },  
 }
 
-CommonStates.AddSleepStates(states,
-{
-	starttimeline = {
-		TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound(SoundPath(inst, "fallAsleep")) end ),
-	},
-	sleeptimeline = 
-	{
-		TimeEvent(35*FRAMES, function(inst) inst.SoundEmitter:PlaySound(SoundPath(inst, "sleeping")) end ),
-	},
-	waketimeline = {
-		TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound(SoundPath(inst, "wakeUp")) end ),
-	},
-})
 CommonStates.AddFrozenStates(states)
 
 return StateGraph("swilson", states, events, "idle", actionhandlers)
