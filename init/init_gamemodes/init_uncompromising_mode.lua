@@ -82,7 +82,7 @@ local require = GLOBAL.require
 		modimport("init/init_food/monsterfoods")
 	end
 
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("rat_raids") == true or
+	if (GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("rat_raids") == true) or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("rat_raids") == true) then
 		modimport("init/init_ratraid")
 	end
@@ -92,7 +92,7 @@ local require = GLOBAL.require
 		modimport("init/init_creatures/init_knockback")
 	end
 
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
+	if (GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("harder_shadows") == true) or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_shadows") == true) then
 		modimport("init/init_creatures/init_harder_shadows")
 		--modimport("init/init_creatures/init_shadowspawner")
@@ -100,7 +100,7 @@ local require = GLOBAL.require
 		modimport("postinit/stategraphs/SGshadowcreature")
 	end
 
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
+	if (GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("harder_weather") == true) or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_weather") == true) then
 		modimport("init/init_weather/init_acidmushroom_networking")
 		modimport("init/init_weather/init_acid_rain_effects")
@@ -111,18 +111,18 @@ local require = GLOBAL.require
 		modimport("init/init_weather/init_snowstorm_structures")
 	end
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("snowstorms") == true or
+	if (GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("snowstorms") == true) or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("snowstorms") == true) then
 		modimport("init/init_weather/init_snowstorm")
 	end
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("hayfever") == true or
+	if (GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("hayfever") == true) or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("hayfever") == true) then
 		modimport("init/init_weather/init_hayfever")
 		modimport("init/init_creatures/init_sneeze_hitters")
 	end
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
+	if (GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("durability") == true) or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("durability") == true) then
 		modimport("init/init_durability")
 	end
