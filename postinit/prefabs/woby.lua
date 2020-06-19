@@ -5,10 +5,16 @@ local function ShouldKeepTarget()
     return false -- chester can't attack, and won't sleep if he has a target
 end
 
+local brain = require("brains/smallwobybrain")
+
 env.AddPrefabPostInit("wobysmall", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
+	
+	inst:SetBrain(brain)
+	
+	inst:AddTag("character")
 
     if inst.components.eater ~= nil then
         inst.components.eater.strongstomach = true
@@ -28,6 +34,8 @@ env.AddPrefabPostInit("wobybig", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
+	
+	inst:AddTag("character")
 
     if inst.components.eater ~= nil then
         inst.components.eater.strongstomach = true
