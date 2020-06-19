@@ -55,6 +55,12 @@ local function StartRaid(inst)
 	
 	print("Rat Raid Warning :", ratwarning)
 end
+local function IsEligible(doer)
+	local area = doer.components.areaaware
+	return GLOBAL.TheWorld.Map:IsVisualGroundAtPoint(doer.Transform:GetWorldPosition())
+			and area:GetCurrentArea() ~= nil 
+			and not area:CurrentlyInTag("nohasslers")
+end
 
 local function ActiveRaid(inst, doer)
 	if not doer or not doer:IsValid() or not doer.Transform then
@@ -64,7 +70,7 @@ local function ActiveRaid(inst, doer)
 	local x, y, z = doer.Transform:GetWorldPosition()
 	local playerage = doer.components.age:GetAgeInDays()
 	local ents = TheSim:FindEntities(x, y, z, 20, nil, nil, {"_inventoryitem"})
-	if playerage >= 50 and math.random() > 0.05 and
+	if playerage >= 50 and math.random() > 0.05 and IsEligible(doer) and
 		not GLOBAL.TheWorld:HasTag("cave") and
 		not GLOBAL.TheWorld.net:HasTag("raided") and
 		not inst.components.container:IsEmpty() and

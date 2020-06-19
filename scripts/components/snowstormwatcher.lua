@@ -38,13 +38,13 @@ local function StormStop(self)
 	TheWorld:RemoveTag("snowstormstart")
 	TheWorld.net:RemoveTag("snowstormstartnet")
 	
-	self:UpdateSnowstormWalkSpeed()
-	self.inst:PushEvent("snowoff")
-    self.inst:StopUpdatingComponent(self)
+	--self:UpdateSnowstormWalkSpeed()
+	self:PushEvent("snowoff")
+	self.storming = false
+    self:StopUpdatingComponent(self)
 	self.task = nil
 	self.stormtask = nil
 	self.stopstormtask = nil
-	self.storming = false
 end
 
 function SnowStormWatcher:ToggleSnowstorms(active, src, data)
