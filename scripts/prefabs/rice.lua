@@ -20,6 +20,9 @@ require "tuning"
         "spoiled_food",
     }
     
+local function rename(inst)
+    inst.components.named:PickNewName()
+end
 
 local function fn()
         local inst = CreateEntity()
@@ -36,12 +39,16 @@ local function fn()
 		MakeInventoryFloatable(inst, "med", 0.05, 0.68)
         --cookable (from cookable component) added to pristine state for optimization
 		inst:AddTag("cookable")
+		
+		inst:AddTag("_named")
 
         inst.entity:SetPristine()
 
         if not TheWorld.ismastersim then
             return inst
         end
+		
+		inst:RemoveTag("_named")
 
         inst:AddComponent("edible")
         inst.components.edible.healthvalue = 0
@@ -58,6 +65,12 @@ local function fn()
         inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
         inst:AddComponent("inspectable")
+		
+		inst:AddComponent("named")
+		inst.components.named.possiblenames = {STRINGS.NAMES["RICE1"], STRINGS.NAMES["RICE2"]}
+		inst.components.named:PickNewName()
+		inst:DoPeriodicTask(5, rename)
+		
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/rice.xml"
     MakeSmallBurnable(inst)
@@ -93,12 +106,16 @@ end
         inst.AnimState:SetBank("berries")
         inst.AnimState:SetBuild("berries")
         inst.AnimState:PlayAnimation("cooked")
+		
+		inst:AddTag("_named")
 
         inst.entity:SetPristine()
 
         if not TheWorld.ismastersim then
             return inst
         end
+		
+		inst:RemoveTag("_named")
 
         inst:AddComponent("perishable")
         inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERFAST)
@@ -115,6 +132,12 @@ end
         inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
         inst:AddComponent("inspectable")
+		
+		inst:AddComponent("named")
+		inst.components.named.possiblenames = {STRINGS.NAMES["RICE_COOKED1"], STRINGS.NAMES["RICE_COOKED2"]}
+		inst.components.named:PickNewName()
+		inst:DoPeriodicTask(5, rename)
+		
         inst:AddComponent("inventoryitem")
 		inst.components.inventoryitem.atlasname = nil--"images/inventoryimages/berries_cooked.xml"
         MakeSmallBurnable(inst)

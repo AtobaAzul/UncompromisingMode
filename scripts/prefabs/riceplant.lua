@@ -49,6 +49,11 @@ if inst.components.pickable ~= nil then
 
 end
 end
+
+local function rename(inst)
+    inst.components.named:PickNewName()
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -70,11 +75,17 @@ local function fn()
 	inst:DoTaskInTime(0, function(inst)
     --inst.components.floater:OnLandedServer()
     end)
+		
+	inst:AddTag("_named")
+		
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
+		
+	inst:RemoveTag("_named")
+		
 	MakeWaterObstaclePhysics(inst, 0.30, 2, 1.25)
     inst.AnimState:SetTime(math.random() * 2)
     local color = 0.75 + math.random() * 0.25
@@ -94,6 +105,11 @@ local function fn()
 	inst.components.pickable.dropheight = 1.5
 
     inst:AddComponent("inspectable")
+		
+		inst:AddComponent("named")
+		inst.components.named.possiblenames = {STRINGS.NAMES["RICEPLANT1"], STRINGS.NAMES["RICEPLANT2"]}
+		inst.components.named:PickNewName()
+		inst:DoPeriodicTask(5, rename)
 
     ---------------------        
     inst:AddComponent("fuel")

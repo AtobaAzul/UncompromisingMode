@@ -5,7 +5,7 @@ local function onequip(inst, owner)
         local skin_build = inst:GetSkinBuild()
         if skin_build ~= nil then
             owner:PushEvent("equipskinneditem", inst:GetSkinName())
-            owner.AnimState:OverrideItemSkinSymbol("swap_hat", skin_build, "swap_hat", inst.GUID, fname)
+            owner.AnimState:OverrideItemSkinSymbol("swap_hat", skin_build, "swap_hat", inst.GUID, "hat_feather")
         else
             owner.AnimState:OverrideSymbol("swap_hat", "hat_feather", "swap_hat")
         end

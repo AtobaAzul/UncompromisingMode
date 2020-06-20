@@ -14,7 +14,7 @@ env.AddPrefabPostInit("wobysmall", function(inst)
 	
 	inst:SetBrain(brain)
 	
-	inst:AddTag("character")
+	--inst:AddTag("character")
 
     if inst.components.eater ~= nil then
         inst.components.eater.strongstomach = true
@@ -35,7 +35,7 @@ env.AddPrefabPostInit("wobybig", function(inst)
 		return
 	end
 	
-	inst:AddTag("character")
+	--inst:AddTag("character")
 
     if inst.components.eater ~= nil then
         inst.components.eater.strongstomach = true

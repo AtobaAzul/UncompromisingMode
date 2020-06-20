@@ -10,18 +10,20 @@ local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_body", "armor_sweatervest", "swap_body")
     inst.components.fueled:StartConsuming()
 	
-	if owner ~= nil and owner.components.sanity ~= nil and owner.prefab == "wortox" then
-		owner.components.sanity.neg_aura_mult = TUNING.WORTOX_SANITY_AURA_MULT - 0.4
-		owner:AddTag("sweatervestsanityaura")
-	elseif owner ~= nil and owner.components.sanity ~= nil and owner.prefab == "wolfgang" then
-		owner.components.sanity.neg_aura_mult = TUNING.DSTU.WOLFGANG_SANITY_MULTIPLIER - 0.4
-		owner:AddTag("sweatervestsanityaura")
-	elseif owner ~= nil and owner.components.sanity ~= nil and owner.prefab == "wendy" then
-		owner.components.sanity.neg_aura_mult = TUNING.WENDY_SANITY_MULT - 0.4
-		owner:AddTag("sweatervestsanityaura")
-	elseif owner ~= nil and owner.components.sanity ~= nil then
-		owner.components.sanity.neg_aura_mult = 1 - 0.4
-		owner:AddTag("sweatervestsanityaura")
+	if owner ~= nil and not owner.prefab == "walter" then
+		if owner ~= nil and owner.components.sanity ~= nil and owner.prefab == "wortox" then
+			owner.components.sanity.neg_aura_mult = TUNING.WORTOX_SANITY_AURA_MULT - 0.4
+			owner:AddTag("sweatervestsanityaura")
+		elseif owner ~= nil and owner.components.sanity ~= nil and owner.prefab == "wolfgang" then
+			owner.components.sanity.neg_aura_mult = TUNING.DSTU.WOLFGANG_SANITY_MULTIPLIER - 0.4
+			owner:AddTag("sweatervestsanityaura")
+		elseif owner ~= nil and owner.components.sanity ~= nil and owner.prefab == "wendy" then
+			owner.components.sanity.neg_aura_mult = TUNING.WENDY_SANITY_MULT - 0.4
+			owner:AddTag("sweatervestsanityaura")
+		elseif owner ~= nil and owner.components.sanity ~= nil then
+			owner.components.sanity.neg_aura_mult = 1 - 0.4
+			owner:AddTag("sweatervestsanityaura")
+		end
 	end
 end
 
@@ -29,18 +31,20 @@ local function onunequip(inst, owner)
     owner.AnimState:ClearOverrideSymbol("swap_body")
     inst.components.fueled:StopConsuming()
 	
-	if owner ~= nil and owner.components.sanity ~= nil and owner.prefab == "wortox" then
-		owner.components.sanity.neg_aura_mult = TUNING.WORTOX_SANITY_AURA_MULT
-		owner:RemoveTag("sweatervestsanityaura")
-	elseif owner ~= nil and owner.components.sanity ~= nil and owner.prefab == "wolfgang" then
-        owner.components.sanity.neg_aura_mult = TUNING.DSTU.WOLFGANG_SANITY_MULTIPLIER
-		owner:RemoveTag("sweatervestsanityaura")
-	elseif owner ~= nil and owner.components.sanity ~= nil and owner.prefab == "wendy" then
-		owner.components.sanity.neg_aura_mult = TUNING.WENDY_SANITY_MULT
-		owner:RemoveTag("sweatervestsanityaura")
-	elseif owner ~= nil and owner.components.sanity ~= nil then 
-		owner.components.sanity.neg_aura_mult = 1
-		owner:RemoveTag("sweatervestsanityaura")
+	if owner ~= nil and not owner.prefab == "walter" then
+		if owner ~= nil and owner.components.sanity ~= nil and owner.prefab == "wortox" then
+			owner.components.sanity.neg_aura_mult = TUNING.WORTOX_SANITY_AURA_MULT
+			owner:RemoveTag("sweatervestsanityaura")
+		elseif owner ~= nil and owner.components.sanity ~= nil and owner.prefab == "wolfgang" then
+			owner.components.sanity.neg_aura_mult = TUNING.DSTU.WOLFGANG_SANITY_MULTIPLIER
+			owner:RemoveTag("sweatervestsanityaura")
+		elseif owner ~= nil and owner.components.sanity ~= nil and owner.prefab == "wendy" then
+			owner.components.sanity.neg_aura_mult = TUNING.WENDY_SANITY_MULT
+			owner:RemoveTag("sweatervestsanityaura")
+		elseif owner ~= nil and owner.components.sanity ~= nil then 
+			owner.components.sanity.neg_aura_mult = 1
+			owner:RemoveTag("sweatervestsanityaura")
+		end
 	end
 end
 
