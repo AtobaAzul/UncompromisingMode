@@ -233,7 +233,7 @@ local function fn()
     inst.components.inspectable:RecordViews()
 
     inst:AddComponent("named")
-    inst.components.named.possiblenames = {STRINGS.NAMES["MOOSE1"], STRINGS.NAMES["MOOSE2"]}
+    inst.components.named.possiblenames = {STRINGS.NAMES["MOTHERGOOSE1"], STRINGS.NAMES["MOTHERGOOSE2"]}
     inst.components.named:PickNewName()
     inst:DoPeriodicTask(5, rename)
 
