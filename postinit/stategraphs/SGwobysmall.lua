@@ -110,11 +110,9 @@ local states = {
         tags = {"busy", "canrotate"},
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
-			
-           if not inst.AnimState:IsCurrentAnimation("cower_woby_loop") then
-                inst.AnimState:PlayAnimation("cower_woby_pre", false)
-                inst.AnimState:PushAnimation("cower_woby_loop")
-            end
+			inst.AnimState:SetBank("beefalo")
+			inst.AnimState:PlayAnimation("death")
+         
         end,
         
         timeline=
