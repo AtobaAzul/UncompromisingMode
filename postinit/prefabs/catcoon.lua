@@ -5,7 +5,14 @@ SetSharedLootTable( 'catty',
 {
     {'meat',             1.00},
     {'coontail',		 0.66},
+    {'monstermeat',		 0.66},
 })
+
+local function OnAttackOther(inst, data)
+    if data.target:HasTag("raidrat") and not data.target.components.health:IsDead() then
+		data.target.components.health:Kill()
+	end
+end
 
 env.AddPrefabPostInit("catcoon", function(inst)
 	if not TheWorld.ismastersim then
@@ -19,4 +26,7 @@ env.AddPrefabPostInit("catcoon", function(inst)
 	if inst.components.lootdropper ~= nil then
 		inst.components.lootdropper:SetChanceLootTable('catty')
 	end
+	
+    inst:ListenForEvent("onattackother", OnAttackOther)
+	
 end)

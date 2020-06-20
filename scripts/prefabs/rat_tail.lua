@@ -39,6 +39,9 @@ local function fn()
     inst.components.perishable.onperishreplacement = "spoiled_food"
     inst.components.perishable:SetPerishTime(TUNING.PERISH_PRESERVED)
 	
+    inst:AddComponent("edible")
+    inst.components.edible.foodtype = FOODTYPE.HORRIBLE
+	
     MakeHauntableLaunchAndPerish(inst)
 
     return inst

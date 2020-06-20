@@ -289,8 +289,11 @@ local function EndRaid(inst)
         for i, v in ipairs(players) do
 			v.components.talker:Say(GetString(v, "ANNOUNCE_RATRAID_OVER"))
 		end
-	x = x + math.random(-200, 200)
-	z = z + math.random(-200, 200)
+		
+	if inst.raiding	then
+		x = x + math.random(-200, 200)
+		z = z + math.random(-200, 200)
+	end
 	if TheWorld.Map:IsPassableAtPoint(x, 0, z) then
 		inst.Transform:SetPosition(x, 0, z)
 	else
@@ -322,42 +325,50 @@ local function EndRaid(inst)
 	inst.components.herd:SetOnEmptyFn(BurrowKilled)
 	inst.components.herd.updatepos = false
     inst.components.herd.updateposincombat = false
+	
+	inst.raiding = false
 end
 
 local function OnInitHerd(inst)
-	local steps = math.random(3, 5)
-	for i = 1, steps do
-		local x, y, z = inst.Transform:GetWorldPosition()
-		local angle = math.random() * 8 * PI
-		local rat = SpawnPrefab("uncompromising_rat")
-		rat.Transform:SetPosition(x + math.cos(angle), 0, z + math.sin(angle))
-		inst.components.herd:AddMember(rat)
+	if inst.raiding == nil then
+		inst.raiding = true
 	end
-	inst.components.herd:SetUpdateRange(20)
-	inst:DoTaskInTime(math.random(30, 60), EndRaid)
-	inst:AddTag("raiding")
+
+	if inst.raiding then
+		local steps = math.random(3, 5)
+		for i = 1, steps do
+			local x, y, z = inst.Transform:GetWorldPosition()
+			local angle = math.random() * 8 * PI
+			local rat = SpawnPrefab("uncompromising_rat")
+			rat.Transform:SetPosition(x + math.cos(angle), 0, z + math.sin(angle))
+			inst.components.herd:AddMember(rat)
+		end
+		inst.components.herd:SetUpdateRange(20)
+		inst:DoTaskInTime(math.random(30, 60), EndRaid)
+		inst:AddTag("raiding")
+	end
 end
 
 local function onsave_burrow(inst, data)
-	if inst:HasTag("raiding") then
-		data.raiding = true
-	end
+
+	data.raiding = inst.raiding
+end
+
+local function onpreload_burrow(inst, data)
+	inst.raiding = data.raiding
 end
 
 local function onload_burrow(inst, data)
-	local is_raiding = data.raiding or inst:HasTag("raiding")
-	if not is_raiding then
+	inst.raiding = data.raiding
+	
+	if not inst.raiding then
 		inst.AnimState:PushAnimation("idle", true)
-		
-		inst:AddComponent("workable")
-		inst.components.workable:SetOnFinishCallback(onfinishcallback)
-		inst.components.workable:SetOnWorkCallback(onworked)
-		inst.components.workable:SetWorkAction(ACTIONS.DIG)
-		inst.components.workable:SetWorkLeft(math.random(2, 5))
 		
 		inst.components.herd:SetOnEmptyFn(BurrowKilled)
 		inst.components.herd.updatepos = false
 		inst.components.herd.updateposincombat = false
+		
+		inst:DoTaskInTime(0, EndRaid)
 	end
 end
 
@@ -403,12 +414,13 @@ local function fn_herd()
 	
 	inst:AddComponent("lootdropper")
 	
-	inst:DoTaskInTime(0, OnInitHerd)
-	
-	inst:DoTaskInTime(1, BurrowAnim)
-	
 	inst.OnSave = onsave_burrow
+	inst.OnPreLoad = onpreload_burrow
 	inst.OnLoad = onload_burrow
+	
+	inst:DoTaskInTime(0, OnInitHerd)
+
+	inst:DoTaskInTime(1, BurrowAnim)
 	
 	return inst
 end
