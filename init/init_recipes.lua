@@ -51,6 +51,7 @@ AddComponentPostInit("ConstructionSite", function (self)
 end)
 
 -- Moonrock idol change
+Recipe("catcoonhat", {Ingredient("coontail", 5), Ingredient("silk", 4)}, RECIPETABS.DRESS, TECH.SCIENCE_TWO)
 Recipe("moonrockidol", {Ingredient("moonrocknugget", GLOBAL.TUNING.DSTU.RECIPE_MOONROCK_IDOL_MOONSTONE_COST), Ingredient("purplegem", 1)}, RECIPETABS.CELESTIAL, TECH.CELESTIAL_ONE, nil, nil, true)
 Recipe("minifan", {Ingredient("twigs", 3), Ingredient("petals",4)}, RECIPETABS.SURVIVAL, TECH.NONE)
 Recipe("goggleshat", {Ingredient("goldnugget", 4), Ingredient("pigskin",1), Ingredient("houndstooth", 2)}, RECIPETABS.DRESS, TECH.SCIENCE_ONE)
