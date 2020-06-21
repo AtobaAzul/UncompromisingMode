@@ -105,6 +105,41 @@ for k = 1, (days_survived <= 30 and 1) or math.random(days_survived <= 80 and 2 
 	end
 end
 
+local function SpawnShadowCharsFunction(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	local x1 = x + math.random(12, 16)
+	local z1 = z + math.random(12, 16)
+	local x2 = x - math.random(12, 16)
+	local z2 = z - math.random(12, 16)
+	
+	local shadow = SpawnPrefab("swilson")
+	if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+			shadow.Transform:SetPosition(x1, y, z1)
+	end
+
+end
+
+local function SpawnShadowChars(player)
+	--print("SpawnShadowChars")
+	player:DoTaskInTime(5 + math.random(0,5), function()
+			local x, y, z = player.Transform:GetWorldPosition()
+			local day = TheWorld.state.cycles
+			local extras = 0
+			if day > 30 then
+			extras=extras+1
+			end
+			if day > 60 then
+			extras =extras+2
+			end
+			local numshad = 1+extras
+			for i = 1, numshad do
+				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
+					SpawnShadowCharsFunction(player)
+				end)
+			end
+	end)
+end
+
 local function SpawnMonkeysFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local x1 = x + math.random(12, 16)
@@ -468,6 +503,7 @@ AddBaseEvent(SpawnBats,.3)
 AddBaseEvent(SpawnFissures,.3)
 AddBaseEvent(SpawnSkitts,.5)
 AddBaseEvent(FireHungryGhostAttack,.5)
+AddBaseEvent(SpawnShadowChars,11111)
 --Cave
 AddCaveEvent(SpawnBats,1)
 AddCaveEvent(SpawnFissures,1)

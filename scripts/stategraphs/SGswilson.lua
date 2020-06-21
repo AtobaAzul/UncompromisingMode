@@ -51,8 +51,11 @@ local states=
         onenter = function(inst)
 			inst.Physics:Stop()
 			RemovePhysicsColliders(inst) 
-            inst.AnimState:PlayAnimation("death")
-            --inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition())) 
+            --inst.AnimState:PlayAnimation("death")
+			local leave = SpawnPrefab("maxwell_smoke")
+			leave.Transform:SetPosition(inst.Transform:GetWorldPosition())
+            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+			inst:Remove()
         end,
 		timeline=
         {
@@ -89,7 +92,13 @@ local states=
         
         onenter = function(inst)
             inst.components.locomotor:RunForward()
+			if inst.rush == false then
+			inst.components.locomotor.runspeed = 2
             inst.AnimState:PushAnimation("walk_loop")
+			else
+			inst.components.locomotor.runspeed = 6
+			inst.AnimState:PushAnimation("rush_loop")
+			end
         end,
         
         timeline=
@@ -185,7 +194,7 @@ local states=
         
         events=
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst) inst.sg:GoToState("moving") end),
         },
     },
 
