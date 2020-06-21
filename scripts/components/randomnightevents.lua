@@ -99,6 +99,8 @@ for k = 1, (days_survived <= 30 and 1) or math.random(days_survived <= 80 and 2 
                         target.leifscale = 1 --GetGrowthStages(target)[target.components.growable.stage].leifscale or 1 Getting size is muck
                             --assert(GetBuild(target).leif ~= nil)
 						target:DoTaskInTime(leiftime, spawn_leif)
+					else
+					DoWildRNE(player)
 					end
 	end
 end
