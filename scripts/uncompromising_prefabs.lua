@@ -85,4 +85,5 @@ return {
 	"skeletonmeat",
 	"swilson",
 	"seafoodpaella",
+	"veteranscurse",
 }

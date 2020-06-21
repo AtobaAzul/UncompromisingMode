@@ -5,8 +5,6 @@ local assets =
 
 local prefabs =
 {
-    --[["waterdrop",
-    "lifeplant",--]]
 }
 
 
@@ -20,6 +18,19 @@ local function makeused(inst)
     inst.AnimState:PlayAnimation("flow_loop", true)
 end
 ]]
+
+local function GetVerb()
+    return "TOUCH"
+end
+
+local function ToggleCurse(inst, doer)
+	if doer.components.debuffable ~= nil then
+		if not doer.vetcurse == true then
+		doer.components.debuffable:AddDebuff("buff_vetcurse", "buff_vetcurse")
+		end
+	end
+	inst.components.activatable.inactive = true
+end
 
 local function fn(Sim)
     local inst = CreateEntity()
@@ -35,12 +46,16 @@ local function fn(Sim)
     anim:SetBuild("veteranshrine")    
     anim:SetBank("veteranshrine")
     anim:PlayAnimation("idle", true)
-    
+    inst.GetActivateVerb = GetVerb
     MakeObstaclePhysics(inst, 2)
+	inst.entity:SetPristine()
 
-    --[[inst:AddComponent("activatable")
-    inst.components.activatable.OnActivate = OnActivate
-    inst.components.activatable.inactive = true--]]
+    if not TheWorld.ismastersim then
+        return inst
+    end
+    inst:AddComponent("activatable")
+    inst.components.activatable.OnActivate = ToggleCurse
+    inst.components.activatable.inactive = true
     inst:AddComponent("inspectable")
     inst.components.inspectable:RecordViews()
 
