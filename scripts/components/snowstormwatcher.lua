@@ -95,7 +95,7 @@ function SnowStormWatcher:UpdateSnowstormWalkSpeed(src, data)
 		local ents4 = TheSim:FindEntities(x, y, z, 6, {"snowstorm_protection_high"})
 		local suppressorNearby4 = (#ents4 > 0)
 		
-    if TheWorld.state.issnowing and self.storming then-->>>>>( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") )  then
+    if TheWorld.state.issnowing and ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") ) then
         if self.inst.components.playervision:HasGoggleVision() or
             self.inst.components.playervision:HasGhostVision() or
             self.inst.components.rider:IsRiding() or
@@ -119,7 +119,7 @@ function TrySpawning(v)
 	
 	local playervalue2 = #nearbyplayers2 * 0.1
 	
-	if TheWorld.state.iswinter and self.storming then-->>>>>( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") )  then--and self.snowstormstart then
+	if TheWorld.state.iswinter and ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") )  then--and self.snowstormstart then
 		if math.random() <= 0.15 - playervalue2 then
 				--local spawn_pt = GetSpawnPoint(origin_pt, PLAYER_CHECK_DISTANCE + 5)
 				
@@ -144,9 +144,10 @@ local function SnowpileChance(inst, self)
     local ents4 = TheSim:FindEntities(x, y, z, 50, nil, { "snowpiledin", "hive" }, { "structure" })
 	local chancer = math.random()
 	
+	local playervalue1 = #nearbyplayers1 * 0.025
 	
-	if TheWorld.state.iswinter and self.storming then-->>>>>( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") ) then--and self.snowstormstart then
-		if chancer < 0.30 - #nearbyplayers1 * 0.025 then
+	if TheWorld.state.iswinter and ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") ) then--and self.snowstormstart then
+		if chancer < 0.30 - playervalue1 then
 				local xrandom = math.random(-20, 20)
 				local zrandom = math.random(-20, 20)
 				local ents7 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 6, nil, nil, { "snowpileradius"})
@@ -171,14 +172,14 @@ local function SnowpileChance(inst, self)
 		
 end
 
-TUNING.SNOW_CHANCE_TIME = 60
-TUNING.SNOW_CHANCE_VARIANCE = 30
+TUNING.SNOW_CHANCE_TIME = 30
+TUNING.SNOW_CHANCE_VARIANCE = 15
 
 
 function SnowStormWatcher:StartSnowPileTask()
 
 		if self.task == nil then
-			self.task = self.inst:DoTaskInTime(60 + math.random()*30, SnowpileChance, self)--, self)
+			self.task = self.inst:DoTaskInTime(TUNING.SNOW_CHANCE_TIME + math.random()*TUNING.SNOW_CHANCE_VARIANCE, SnowpileChance, self)--, self)
 		end
 end
 
