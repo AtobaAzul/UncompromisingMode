@@ -95,7 +95,7 @@ function FogOver:OnUpdate(dt)
 	if self.owner:HasTag("infog") then
 	self:Show()
         self.time = self.transitiontime
-        self.alphagoal = 0.5
+        self.alphagoal = 0.4
 	else
         self.time = self.transitiontime
         self.alphagoal = 0
