@@ -105,6 +105,31 @@ for k = 1, (days_survived <= 30 and 1) or math.random(days_survived <= 80 and 2 
 	end
 end
 
+local function SpawnMonkeysFunction(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	local x1 = x + math.random(12, 16)
+	local z1 = z + math.random(12, 16)
+	local x2 = x - math.random(12, 16)
+	local z2 = z - math.random(12, 16)
+	
+	local monkey = SpawnPrefab("chimp")
+	
+	if math.random()>0.5 then
+		if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+			monkey.Transform:SetPosition(x1, y, z1)
+		else
+			SpawnMonkeysFunction(player)
+		end
+	else
+		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+			monkey.Transform:SetPosition(x2, y, z2)
+		else
+			SpawnMonkeysFunction(player)
+		end
+	end
+
+end
+
 local function SpawnMonkeys(player)
 	--print("SpawnMonkeys")
 	player:DoTaskInTime(5 + math.random(0,5), function()
@@ -113,12 +138,7 @@ local function SpawnMonkeys(player)
 			local num_monkey = 3+math.floor(math.random()*4, 6)
 			for i = 1, num_monkey do
 				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
-					local monkey = SpawnPrefab("chimp")
-					if math.random()>0.5 then
-					monkey.Transform:SetPosition(x + math.random(12,16), y, z + math.random(12,16))
-					else
-					monkey.Transform:SetPosition(x - math.random(12,16), y, z - math.random(12,16))
-					end
+					SpawnMonkeysFunction(player)
 				end)
 			end
 	end)
