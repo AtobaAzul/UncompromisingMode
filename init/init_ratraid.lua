@@ -5,11 +5,11 @@ end
 
 local function SpawnRaid(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
-	local x2 = x + math.random(-10, 10)
-	local z2 = z + math.random(-10, 10)
 	local players = GLOBAL.FindPlayersInRange(x, y, z, 50)
 	for i, v in ipairs(players) do
 		local raid = GLOBAL.SpawnPrefab("uncompromising_ratherd")
+		local x2 = x + math.random(-10, 10)
+		local z2 = z + math.random(-10, 10)
 		if GLOBAL.TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
 			raid.Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
 			GLOBAL.TheWorld:DoTaskInTime(9600 + math.random(4800), CooldownRaid)

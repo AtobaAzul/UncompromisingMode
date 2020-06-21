@@ -188,20 +188,30 @@ local function SpawnSkitts(player)
 	end)
 end
 
+local function SpawnFissuresFunction(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	local x2 = x + math.random(-10, 10)
+	local z2 = z + math.random(-10, 10)
+	if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+		SpawnPrefab("rnefissure").Transform:SetPosition(x2, 0, z2)
+	else
+		SpawnFissuresFunction(player)
+	end
+end
+
 local function SpawnFissures(player)
 	--print("SpawnFissures")
 	local tillrne = 10 + math.random(10,15)
 	MultiFogAuto(player,tillrne)
-	player:DoTaskInTime(tillrne, function()
-			local x, y, z = player.Transform:GetWorldPosition()
+		player:DoTaskInTime(tillrne, function()
 			local fissures = 3+math.floor(math.random()*3, 4)
-			for i = 1, fissures do
+			local changes = 1
+			for i = changes, fissures do
 				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
-					local fissure = SpawnPrefab("rnefissure")
-					fissure.Transform:SetPosition(x + math.random(-10,10), y, z + math.random(-10,10))
+					SpawnFissuresFunction(player)
 				end)
 			end
-	end)
+		end)
 end
 
 local function SpawnKrampus(player)
@@ -283,26 +293,38 @@ end
 ----------------------------THUNDER----------------------------
 ---------------------------------------------------------------
 
+local function SpawnLightFlowersNFernsFunction(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	local x2 = x + math.random(-8, 8)
+	local z2 = z + math.random(-8, 8)
+	
+	if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+		if math.random() > 0.7 then
+			local flowerdbl = SpawnPrefab("stalker_bulb_double")
+			flowerdbl.Transform:SetPosition(x2, y, z2)
+		else
+			if math.random() > 0.7 then
+				local flowersng = SpawnPrefab("stalker_bulb")
+				flowersng.Transform:SetPosition(x2, y, z2)				
+			else
+				local fern = SpawnPrefab("stalker_fern")
+				fern.Transform:SetPosition(x2, y, z2)
+			end
+		end
+	else
+		SpawnLightFlowersNFernsFunction(player)
+	end
+end	
+											
 local function SpawnLightFlowersNFerns(player)
 	player:DoTaskInTime(5+math.random(5,10), function()
-			local x, y, z = player.Transform:GetWorldPosition()
-			local ents = 7+math.floor(math.random()*3)
-			for i = 1, ents do
-				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
-				if math.random() > 0.7 then
-					local flowerdbl = SpawnPrefab("stalker_bulb_double")
-					flowerdbl.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
-				else
-					if math.random() > 0.7 then
-						local flowersng = SpawnPrefab("stalker_bulb")
-						flowersng.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))				
-					else
-						local fern = SpawnPrefab("stalker_fern")
-						fern.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
-					end
-				end
-				end)
-			end
+		local ents = 7+math.floor(math.random()*3)
+		local chances = 1
+		for i = chances, ents do
+			player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
+				SpawnLightFlowersNFernsFunction(player)
+			end)
+		end
 	end)
 end
 
