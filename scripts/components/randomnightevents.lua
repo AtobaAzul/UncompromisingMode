@@ -503,7 +503,7 @@ AddBaseEvent(SpawnBats,.3)
 AddBaseEvent(SpawnFissures,.3)
 AddBaseEvent(SpawnSkitts,.5)
 AddBaseEvent(FireHungryGhostAttack,.5)
-AddBaseEvent(SpawnShadowChars,11111)
+AddBaseEvent(SpawnShadowChars,0.2)
 --Cave
 AddCaveEvent(SpawnBats,1)
 AddCaveEvent(SpawnFissures,1)

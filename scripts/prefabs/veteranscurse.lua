@@ -46,7 +46,7 @@ local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration
             inst.components.debuff:Stop()
         end, target)
 
-        target:PushEvent("foodbuffattached", { buff = "ANNOUNCE_ATTACH_BUFF_"..string.upper(name), priority = priority })
+        --target:PushEvent("foodbuffattached", { buff = "ANNOUNCE_ATTACH_BUFF_"..string.upper(name), priority = priority })
         if onattachedfn ~= nil then
             onattachedfn(inst, target)
         end
@@ -58,7 +58,7 @@ local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration
             ondetachedfn(inst, target)
         end
 
-        target:PushEvent("foodbuffdetached", { buff = "ANNOUNCE_DETACH_BUFF_"..string.upper(name), priority = priority })
+        --target:PushEvent("foodbuffdetached", { buff = "ANNOUNCE_DETACH_BUFF_"..string.upper(name), priority = priority })
         inst:Remove()
     end
 

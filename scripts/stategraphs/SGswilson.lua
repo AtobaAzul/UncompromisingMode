@@ -52,8 +52,17 @@ local states=
 			inst.Physics:Stop()
 			RemovePhysicsColliders(inst) 
             --inst.AnimState:PlayAnimation("death")
-			local leave = SpawnPrefab("maxwell_smoke")
-			leave.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			local x, y, z = inst.Transform:GetWorldPosition()
+		local fx = SpawnPrefab("statue_transition_2")
+		if fx ~= nil then
+			fx.Transform:SetPosition(x, y, z)
+			fx.Transform:SetScale(1.2,1.2,1.2)
+		end
+		fx = SpawnPrefab("statue_transition")
+		if fx ~= nil then
+			fx.Transform:SetPosition(x, y, z)
+			fx.Transform:SetScale(1.2,1.2,1.2)
+		end
             inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
 			inst:Remove()
         end,
