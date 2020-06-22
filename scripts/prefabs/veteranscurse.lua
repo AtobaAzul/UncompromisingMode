@@ -1,13 +1,33 @@
 -------------------------------------------------------------------------
 ---------------------- Attach and dettach functions ---------------------
 -------------------------------------------------------------------------
+local function ForceToTakeMoreDamage(inst)
+	local self = inst.components.combat
+	local _GetAttacked = self.GetAttacked
+	self.GetAttacked = function(self, attacker, damage, weapon, stimuli)
+		if attacker and damage then
+			-- Take extra damage
+			damage = damage * 1.2
+		end
+		return _GetAttacked(self, attacker, damage, weapon, stimuli)
+	end
+end
+local function ForceToTakeUsualDamage(inst)
+	local self = inst.components.combat
+	local _GetAttacked = self.GetAttacked
+	self.GetAttacked = function(self, attacker, damage, weapon, stimuli)
+	if attacker and damage then
+			-- Take extra damage
+			damage = damage / 1.2
+		end
+		return _GetAttacked(self, attacker, damage, weapon, stimuli)
+	end
+end
 local function AttachCurse(inst, target)
     if target.components.combat ~= nil then
         target.components.combat.externaldamagemultipliers:SetModifier(inst, .75)    --Reduce Damage Done
 		target.vetcurse = true
-    end
-	if target.components.health ~= nil then
-        --target.components.health.externalabsorbmodifiers:SetModifier(inst, -0.2)  --Should Increase Damage Taken, But Doesn't Work Because Of a math.clamp in Health:DoDelta()
+		ForceToTakeMoreDamage(target)
     end
 end
 
@@ -15,9 +35,7 @@ local function DetachCurse(inst, target)
     if target.components.combat ~= nil then
         target.components.combat.externaldamagemultipliers:RemoveModifier(inst)
 		target.vetcurse = false
-    end
-	if target.components.health ~= nil then
-        --target.components.health.externalabsorbmodifiers:RemoveModifier(inst)
+		ForceToTakeUsualDamage(target)
     end
 end
 local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration, priority, prefabs)
