@@ -130,11 +130,4 @@ env.AddPrefabPostInit("spider_warrior", function(inst)
     inst.components.lootdropper.numrandomloot = 1
 	--]]
     inst.components.health:SetMaxHealth(300)
-	inst.sg:GoToState("taunt")
-end)
-env.AddPrefabPostInit("spider_dropper", function(inst)
-	if not TheWorld.ismastersim then
-		return
-	end
-	inst.sg:GoToState("taunt")
 end)
