@@ -77,3 +77,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.SKELETONMEAT = "Flesh for flesh..."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "An angered spirit, from long ago."
+	DESCRIBE.VAMPIREBAT = "It has managed to scaped death for longer than its peers"

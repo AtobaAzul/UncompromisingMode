@@ -92,6 +92,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.SKELETONMEAT = "Flesh is flesh. Where do I draw the line?"
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "This doppleganger is a bit madder than usual!"
+	DESCRIBE.VAMPIREBAT = "This one is uglier!"
 	
 	
 	ACTIONFAIL.READ =

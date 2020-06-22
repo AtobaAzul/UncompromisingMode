@@ -77,3 +77,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.SKELETONMEAT = "Don't hurl, don't hurl, don't hurl..."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "I'm sick of these shenanigans!"
+	DESCRIBE.VAMPIREBAT = "You're a bit batty, eh?"

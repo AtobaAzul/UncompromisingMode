@@ -77,3 +77,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.SKELETONMEAT = "Some dishes probably shouldn't be made."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "He's going to make chopped liver out of me!"
+	DESCRIBE.VAMPIREBAT = "I assure you, I taste horrible!"
