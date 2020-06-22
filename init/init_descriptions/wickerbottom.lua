@@ -77,6 +77,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.SCORPION = "Scorpiones. It's a desert species of some sort."
 	DESCRIBE.SKELETONMEAT = "Oh my goodness!"
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
+	DESCRIBE.SWILSON = "He is beyond reasoning with!"
 	ACTIONFAIL.READ =
         {
             GENERIC = "I cannot concentrate under these conditions!",

@@ -76,3 +76,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.SCORPION = "It crawls, creeps, and makes you sleep!"
 	DESCRIBE.SKELETONMEAT = "I don't care how sweet the meat tastes, I don't like mortal food!"
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
+	DESCRIBE.SWILSON = "Don't be a sore loser! You had your chance!"

@@ -91,6 +91,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.SCORPION = "That better not be venomous."
 	DESCRIBE.SKELETONMEAT = "Flesh is flesh. Where do I draw the line?"
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
+	DESCRIBE.SWILSON = "This doppleganger is a bit madder than usual!"
+	
+	
 	ACTIONFAIL.READ =
         {
             GENERIC = "It seems the magic is inert in this state.",

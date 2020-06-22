@@ -76,3 +76,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.SCORPION = "I don't want to see the business end of that stinger!"
 	DESCRIBE.SKELETONMEAT = "This is a terrible idea."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
+	DESCRIBE.SWILSON = "Has He seen charlie?"

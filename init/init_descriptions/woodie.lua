@@ -76,3 +76,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.SCORPION = "Keep out of my boots."
 	DESCRIBE.SKELETONMEAT = "Don't hurl, don't hurl, don't hurl..."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
+	DESCRIBE.SWILSON = "I'm sick of these shenanigans!"

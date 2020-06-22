@@ -76,3 +76,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.SCORPION = "One sting and it could be over."
 	DESCRIBE.SKELETONMEAT = "Flesh for flesh..."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
+	DESCRIBE.SWILSON = "An angered spirit, from long ago."

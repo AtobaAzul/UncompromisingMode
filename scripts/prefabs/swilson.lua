@@ -41,58 +41,6 @@ local function keeptargetfn(inst, target)
           and not target.components.health:IsDead()
 end
 
-local function ShouldSleep(inst)
-    return false
---[[    
-    return GetClock():IsDay()
-           and not (inst.components.combat and inst.components.combat.target)
-           and not (inst.components.homeseeker and inst.components.homeseeker:HasHome() )
-           and not (inst.components.burnable and inst.components.burnable:IsBurning() )
-           and not (inst.components.follower and inst.components.follower.leader)
-           ]]
-end
-
-local function ShouldWake(inst)
-    return true
-    --[[
-    return GetClock():IsNight()
-           or (inst.components.combat and inst.components.combat.target)
-           or (inst.components.homeseeker and inst.components.homeseeker:HasHome() )
-           or (inst.components.burnable and inst.components.burnable:IsBurning() )
-           or (inst.components.follower and inst.components.follower.leader)
-           or (inst:HasTag("spider_warrior") and FindEntity(inst, TUNING.SPIDER_WARRIOR_WAKE_RADIUS, function(...) return FindWarriorTargets(inst, ...) end ))
-           ]]
-end
-
---[[
-local function DoReturn(inst)
-	if inst.components.homeseeker and inst.components.homeseeker.home and inst.components.homeseeker.home.components.childspawner then
-		inst.components.homeseeker.home.components.childspawner:GoHome(inst)
-	end
-end
-
-local function StartDay(inst)
-	if inst:IsAsleep() then
-		DoReturn(inst)	
-	end
-end
-
-
-local function OnEntitySleep(inst)
-	if GetClock():IsDay() then
-		DoReturn(inst)
-	end
-end
-]]
---[[
-local function SummonFriends(inst, attacker)
-	local den = GetClosestInstWithTag("spiderden",inst, TUNING.SPIDER_SUMMON_WARRIORS_RADIUS)
-	if den and den.components.combat and den.components.combat.onhitfn then
-		den.components.combat.onhitfn(den, attacker)
-	end
-end
-]]
-
 local function OnAttacked(inst, data)
     inst.components.combat:SetTarget(data.attacker)
     inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST, function(dude) return dude:HasTag("swilson") and not dude.components.health:IsDead() end, 5)
@@ -140,6 +88,7 @@ local shadow = inst.entity:AddDynamicShadow()
     inst.AnimState:SetBank("swilson")
     inst.AnimState:SetBuild("swilson")
     inst.AnimState:PlayAnimation("idle",true)
+	inst.AnimState:SetMultColour(0, 0, 0, 0.6)
     
     -- locomotor must be constructed before the stategraph!
     inst:AddComponent("locomotor")
@@ -151,9 +100,9 @@ local shadow = inst.entity:AddDynamicShadow()
     inst.components.lootdropper:SetChanceLootTable('swilson')
     
     ---------------------            
-    MakeMediumBurnableCharacter(inst, "torso")
-    MakeMediumFreezableCharacter(inst, "torso")    
-    inst.components.burnable.flammability = 0.33
+    --MakeMediumBurnableCharacter(inst, "torso")
+    --MakeMediumFreezableCharacter(inst, "torso")    
+    --inst.components.burnable.flammability = 0.33
     ---------------------       
     
 	
