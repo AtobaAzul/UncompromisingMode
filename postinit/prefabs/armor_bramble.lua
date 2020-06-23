@@ -21,7 +21,7 @@ end
 local function SpikeAttack(owner, inst)
 
 	local x, y, z = owner.Transform:GetWorldPosition()
-    local nearbymonster = TheSim:FindEntities(x, y, z, 4.5, nil, { "player", "flying", "companion", "abigail" }, { "_combat" })
+    local nearbymonster = TheSim:FindEntities(x, y, z, 4.5, { "_combat" }, { "player", "companion", "abigail", "shadow" }, { "largecreature", "monster", "hostile", "scarytoprey", "epic" })
 	
     if #nearbymonster > 0 then
         --V2C: tiny CD to limit chain reactions
