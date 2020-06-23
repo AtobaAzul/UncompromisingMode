@@ -1,5 +1,7 @@
 local assets =
 {
+    Asset("ANIM", "anim/seafoodpaella.zip"),
+    Asset("ATLAS", "images/inventoryimages/zaspberryparfait.xml"),
 }
 local function oneatenfn(inst, eater)
 	if eater.components.hayfever and eater.components.hayfever.enabled then
@@ -15,12 +17,12 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    --inst.AnimState:SetBank("zaspberryparfait")
-    --inst.AnimState:SetBuild("zaspberryparfait")
+    inst.AnimState:SetBank("seafoodpaella")
+    inst.AnimState:SetBuild("seafoodpaella")
     inst.AnimState:PlayAnimation("idle")
 
     MakeInventoryFloatable(inst)
-	inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+	--inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
 	
     inst.entity:SetPristine()
 
@@ -34,10 +36,10 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/zaspberryparfait.xml"
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/seafoodpaella.xml"
     inst:AddComponent("edible")
     inst.components.edible.healthvalue = 12
-    inst.components.edible.hungervalue = 62.5
+    inst.components.edible.hungervalue = 75
     inst.components.edible.sanityvalue = 5
     inst.components.edible.foodtype = FOODTYPE.MEAT
 
