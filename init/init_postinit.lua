@@ -87,6 +87,7 @@ local prefab_post = {
 	"armor_bramble",
 	"cookiecutterhat",
 	"woby",
+	"cave_network",
 	--"walrus_camp",
 }
 

@@ -100,7 +100,7 @@ for k = 1, (days_survived <= 30 and 1) or math.random(days_survived <= 80 and 2 
                             --assert(GetBuild(target).leif ~= nil)
 						target:DoTaskInTime(leiftime, spawn_leif)
 					else
-					DoWildRNE(player)
+					--DoWildRNE(player)
 					end
 	end
 end
