@@ -200,6 +200,26 @@ function FireRain:SpawnMeteor(mod)
         local cost = math.floor(1 / mod + .5)
         
         return met
+	else
+		local xrandom = x + math.random(-5, 5)
+		local zrandom = z + math.random(-5, 5)
+		
+		local met = SpawnPrefab("antlion_sinkhole_boat")
+		
+		if math.random() >= 0.33 then
+			met.Transform:SetPosition(xrandom, y, zrandom)
+		end
+		
+        if mod == nil then
+            mod = 1
+        end
+
+        --Randomize size, but only spawn small meteors on the periphery
+        local peripheral = radius > TUNING.METEOR_SHOWER_SPAWN_RADIUS - TUNING.METEOR_SHOWER_CLEANUP_BUFFER
+        local rand = not peripheral and math.random() or 1
+        local cost = math.floor(1 / mod + .5)
+        
+        return met
     end
 	--[[
 	local x = GetRandomWithVariance(spawnpt.x, TUNING.ANTLION_SINKHOLE.RADIUS)
