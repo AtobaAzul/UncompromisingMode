@@ -42,6 +42,10 @@ local function OnIgniteFn(inst)
 	
 end
 
+local function OnRespawnedFromGhost2(inst)
+    MakeSmallPropagator(inst)
+end
+
 env.AddPrefabPostInit("willow", function(inst)
 	if not TheWorld.ismastersim then
 		return
@@ -52,4 +56,7 @@ env.AddPrefabPostInit("willow", function(inst)
 		MakeSmallPropagator(inst)
 		inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
 	end
+	
+    inst:ListenForEvent("ms_respawnedfromghost", OnRespawnedFromGhost2)
+	
 end)
