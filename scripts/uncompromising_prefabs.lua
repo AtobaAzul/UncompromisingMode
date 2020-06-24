@@ -86,4 +86,5 @@ return {
 	"swilson",
 	"seafoodpaella",
 	"veteranscurse",
+	"antlion_sinkhole_boat",
 }
