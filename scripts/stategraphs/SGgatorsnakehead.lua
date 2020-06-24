@@ -335,17 +335,38 @@ local states =
 
         onenter = function(inst)
             --inst.components.locomotor:WalkForward()
+			if inst.components.combat.target ~= nil then
             inst.AnimState:PlayAnimation("head_idle_pre")
             if not inst.SoundEmitter:PlayingSound("walkloop") then
                 inst.SoundEmitter:PlaySound("dontstarve/creatures/worm/move", "walkloop")
             end
+			else
+			inst.sg:GoToState("idle")
+			end
         end,
 
         events =
         {
             EventHandler("animover", function(inst)
                 inst.sg.statemem.walking = true
-                inst.sg:GoToState("walk")
+				if nst.sg.statemem.targetpos ~= nil then
+						local xdiff = inst.sg.statemem.targetpos.x - inst.sg.statemem.startpos.x
+						local zdiff = inst.sg.statemem.targetpos.z - inst.sg.statemem.startpos.z
+						local oldr = math.sqrt(xdiff*xdiff+zdiff*zdiff)
+						local mod = 0.5
+						if oldr < 7 then
+						mod = 1
+						elseif oldr > 15 then
+						mod = 0.3
+						end
+						if not TheWorld.Map:IsPassableAtPoint(inst.sg.statemem.startpos.x+(xdiff*mod), 0, inst.sg.statemem.startpos.z+(zdiff*mod)) then
+							inst.sg:GoToState("walk")
+						else
+							inst.sg:GoToState("idle")
+						end
+					else
+						inst.sg:GoToState("idle")
+					end
             end),
         },
 
