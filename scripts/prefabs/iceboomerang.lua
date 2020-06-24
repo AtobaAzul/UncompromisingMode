@@ -70,7 +70,7 @@ local function OnHit(inst, owner, target)
             impactfx:FacePoint(inst.Transform:GetWorldPosition())
 			if target.components.freezable ~= nil then
 				if target.components.freezable ~= nil and not target:HasTag("player") then
-					target.components.freezable:AddColdness(2.5)
+					target.components.freezable:AddColdness(2)
 					target.components.freezable:SpawnShatterFX()
 				elseif target.components.freezable ~= nil and target:HasTag("player") then
 					target.components.freezable:AddColdness(4)
@@ -83,6 +83,12 @@ local function OnHit(inst, owner, target)
 		inst.components.perishable:ReducePercent(0.10)
 	end
 end
+
+local function OnRepaired(inst)
+	local icerepair = inst.components.perishable:GetPercent() + 0.20
+	inst.components.perishable:SetPercent(icerepair)
+end
+
 
 local function OnMiss(inst, owner, target)
     if owner == target then
@@ -162,13 +168,14 @@ local function fn()
     --inst.components.finiteuses:SetMaxUses(TUNING.BOOMERANG_USES)
     --inst.components.finiteuses:SetUses(TUNING.BOOMERANG_USES)
 	inst:AddComponent("perishable")
-    inst.components.perishable:SetPerishTime(TUNING.PERISH_MED / 2)
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)
     inst.components.perishable:StartPerishing()
     inst.components.perishable:SetOnPerishFn(onperish)
 
     inst:AddComponent("repairable")
     inst.components.repairable.repairmaterial = MATERIALS.ICE
     inst.components.repairable.announcecanfix = false
+	inst.components.repairable.onrepaired = OnRepaired
 	
     inst:AddComponent("inspectable")
 

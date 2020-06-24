@@ -24,7 +24,7 @@ local HITTERS =
 	},
 	["killerbee"] =
     {
-		power = -10,
+		power = -20,
 	},
 	["beeguard"] =
     {
@@ -32,7 +32,7 @@ local HITTERS =
     },
 	["beequeen"] =
     {
-		power = -10,
+		power = -20,
 	},
 	["scorpion"] =
     {
@@ -46,7 +46,11 @@ for k, v in pairs(HITTERS) do
 		local function OnHitOther(inst, other)
 			if other ~= nil and other.components.hayfever and other.components.hayfever.enabled and other.components.hayfever:CanSneeze() then
 			--Don't knockback ifws you wear marble
-				other.components.hayfever:DoDelta(v.power)
+				if other.prefab == "walter" then
+					other.components.hayfever:DoDelta(v.power * 1.5)
+				else
+					other.components.hayfever:DoDelta(v.power)
+				end
 			end
 		end
 	
