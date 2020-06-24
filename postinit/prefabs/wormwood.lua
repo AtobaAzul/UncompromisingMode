@@ -30,10 +30,27 @@ local function WatchWorldPlants2(inst)
     end
 end
 
+local function OnRespawnedFromGhost2(inst)
+    WatchWorldPlants2(inst)
+end
+
+local function StopWatchingWorldPlants2(inst)
+    if inst._onplantkilled2 ~= nil then
+        inst:RemoveEventCallback("plantkilled", inst._onplantkilled2, TheWorld)
+        inst._onplantkilled2 = nil
+    end
+end
+
+local function OnBecameGhost2(inst)
+    StopWatchingWorldPlants2(inst)
+end
+
 env.AddPrefabPostInit("wormwood", function(inst)
     if not TheWorld.ismastersim then
 		return
 	end
 
     WatchWorldPlants2(inst)
+    inst:ListenForEvent("ms_becameghost", OnBecameGhost2)
+    inst:ListenForEvent("ms_respawnedfromghost", OnRespawnedFromGhost2)
 end)
