@@ -39,6 +39,7 @@ local require = GLOBAL.require
 	modimport("init/init_strings")
 	modimport("init/init_actions")
 	modimport("init/init_containers")
+	modimport("init/init_batterypower")
 	
 --	[ 	Console Commands for tests !	]	--
 	

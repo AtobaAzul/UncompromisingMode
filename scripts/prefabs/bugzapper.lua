@@ -121,6 +121,7 @@ end
 
 local function ontakefuel(inst, owner)
     if inst.components.equippable:IsEquipped() then
+		inst.SoundEmitter:PlaySound("dontstarve/common/lightningrod")
 		turnon(inst)
     end
 end
@@ -180,7 +181,8 @@ local function fn()
 
     inst:AddComponent("fueled")
 
-    inst.components.fueled.fueltype = FUELTYPE.CAVE
+	inst.components.fueled.fueltype = FUELTYPE.BATTERYPOWER
+	inst.components.fueled.secondaryfueltype = FUELTYPE.CHEMICAL
     inst.components.fueled:InitializeFuelLevel(TUNING.LANTERN_LIGHTTIME * 0.75)
     inst.components.fueled:SetDepletedFn(nofuel)
     inst.components.fueled:SetTakeFuelFn(ontakefuel)

@@ -88,8 +88,9 @@ local prefab_post = {
 	"cookiecutterhat",
 	"woby",
 	"cave_network",
-	--"glasscutter",
+	"glasscutter",
 	--"walrus_camp",
+	"nightstick",
 }
 
 local stategraph_post = {
