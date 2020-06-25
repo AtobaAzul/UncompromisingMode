@@ -1,5 +1,4 @@
 GLOBAL.require("map/terrain")
-
 if GetModConfigData("caveless") == false then
 
     AddTaskSetPreInitAny(function(tasksetdata)
@@ -28,6 +27,25 @@ AddTaskPreInit("Make a pick",function(task)
 task.room_choices["veteranshrine"] = 1
 
 end)
+GLOBAL.require("map/rooms/forest/extraswamp")
+AddTaskPreInit("Squeltch",function(task)
+
+--task.room_choices["sparsericepatch"] = 3
+task.room_choices["ricepatch"] = 2
+--task.room_choices["densericepatch"] = 1
+
+end)
+--GLOBAL.require("map/static_layouts/licepatch")
+--[[local Layouts = GLOBAL.require("map/layouts").Layouts
+local StaticLayout = GLOBAL.require("map/static_layout")
+
+Layouts["licepatch"] = StaticLayout.Get("map/static_layouts/licepatch")
+AddTaskSetPreInitAny(function(tasksetdata)
+    if tasksetdata.location ~= "forest" then
+        return
+    end
+tasksetdata.set_pieces["licepatch"] = {count = 1, tasks = {"Squeltch"}}
+end)]]
 --[[
 ("BarePlain", function(room)						If you want it to effect the desert area, uncomment this
 room.contents.countprefabs=

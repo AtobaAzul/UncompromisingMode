@@ -87,4 +87,5 @@ return {
 	"seafoodpaella",
 	"veteranscurse",
 	"antlion_sinkhole_boat",
+	"riceplantspawner",
 }
