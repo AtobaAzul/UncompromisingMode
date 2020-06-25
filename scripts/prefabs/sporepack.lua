@@ -27,7 +27,7 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.MiniMapEntity:SetIcon("krampus_sack.png")
+    inst.MiniMapEntity:SetIcon("sporepack_map.tex")
 
     inst.AnimState:SetBank("sporepack")
     inst.AnimState:SetBuild("sporepack")

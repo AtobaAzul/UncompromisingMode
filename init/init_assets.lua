@@ -129,6 +129,8 @@ Assets = {
 	Asset("ANIM", "anim/swilson.zip"),
 	Asset("IMAGE", "images/inventoryimages/seafoodpaella.tex"),
 	Asset("ATLAS", "images/inventoryimages/seafoodpaella.xml"),
-	Asset( "IMAGE", "minimap/riceplant.tex" ),
-	Asset( "ATLAS", "minimap/riceplant.xml" ),
+	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),
+	Asset( "ATLAS", "images/map_icons/riceplant.xml" ),
+	Asset( "IMAGE", "images/map_icons/sporepack_map.tex" ),
+	Asset( "ATLAS", "images/map_icons/sporepack_map.xml" ),
 }
