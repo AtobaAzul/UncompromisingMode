@@ -1,0 +1,1 @@
+AddMinimapAtlas("minimap/riceplant.xml")

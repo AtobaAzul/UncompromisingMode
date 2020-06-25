@@ -63,7 +63,7 @@ local function fn()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    inst.MiniMapEntity:SetIcon("reeds.png")
+    inst.MiniMapEntity:SetIcon("riceplant.tex")
 
     inst:AddTag("plant")
 	inst:AddTag("ignorewalkableplatforms")
