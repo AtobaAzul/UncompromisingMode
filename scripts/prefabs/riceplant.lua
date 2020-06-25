@@ -23,7 +23,7 @@ end
 
 local function onregenfn(inst)
 	local m,n,o = inst.Transform:GetWorldPosition()
-	local boats = TheSim:FindEntities(m,n,o, 3, {"boat"})
+	local boats = TheSim:FindEntities(m,n,o, 1.5, {"boat"})
 	if #boats > 0 then
 	inst:Remove()
 	return

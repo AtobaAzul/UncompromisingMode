@@ -1,7 +1,7 @@
 AddRoom("ricepatch", 
 {
-	colour = {r=1,g=1,b=1,a=.50}, 
-	value = GROUND.OCEAN_COASTAL_SHORE,
+	colour={r=.6,g=.2,b=.8,a=.50},
+	value = GROUND.OCEAN_ROUGH,
 	tags = {"RoadPoison"}, --"ForceDisconnected"
 	type = NODE_TYPE.SeparatedRoom,
 	contents =  
