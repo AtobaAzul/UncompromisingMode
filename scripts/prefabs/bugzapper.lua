@@ -168,7 +168,7 @@ local function fn()
     inst.components.burnable.fxprefab = nil]]
 	
 	inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(3322)
+    inst.components.weapon:SetDamage(22)
     inst.components.weapon:SetOnAttack(onattack)
 	
     inst:AddComponent("inventoryitem")
