@@ -218,7 +218,7 @@ local function fn()
 
     MakeObstaclePhysics(inst, .4)
 	local minimap = inst.entity:AddMiniMapEntity()
-    inst.MiniMapEntity:SetIcon("air_conditioner.tex")
+    inst.MiniMapEntity:SetIcon("air_conditioner_map.tex")
 
     inst.AnimState:SetBank("airconditioner")
     inst.AnimState:SetBuild("airconditioner")
