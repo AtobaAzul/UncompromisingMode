@@ -16,11 +16,11 @@ local HITTERS =
 {
 	["mosquito"] =
     {
-		power = -10,
+		power = -12,
     },
 	["bee"] =
     {
-		power = -10,
+		power = -12,
 	},
 	["killerbee"] =
     {
@@ -28,7 +28,7 @@ local HITTERS =
 	},
 	["beeguard"] =
     {
-		power = -10,
+		power = -12,
     },
 	["beequeen"] =
     {
@@ -36,7 +36,7 @@ local HITTERS =
 	},
 	["scorpion"] =
     {
-		power = -10,
+		power = -12,
 	},
 	--No klaus, since he does double attacks and has deer 
 }

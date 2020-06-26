@@ -24,8 +24,10 @@ end
 function Hayfever:GetNextSneezTime()
 	if self.inst:HasTag("plantkin") then
 		return math.random(80,120)
+	elseif self.inst:AddTag("allergictobees")
+		return math.random(45,65)
 	end
-    return math.random(40,80)
+    return math.random(60,80)
 end
 
 function Hayfever:SetNextSneezeTime(newtime)
@@ -41,16 +43,29 @@ function Hayfever:CanSneeze()
     local ents = TheSim:FindEntities(x, y, z, 30, {"prevents_hayfever"})
     local suppressorNearby = (#ents > 0)
 --]]
-    if self.inst:HasTag("playerghost") or self.inst:HasTag("has_gasmask") or self.inst:HasTag("has_hayfeverhat") or self.inst:HasTag("minifansuppressor") or self.inst:HasTag("wereplayer") or TheWorld.net:HasTag("queenbeekilled1") or self.inst.sg:HasStateTag("sleeping") or self.inst:HasTag("plantkin") or self.inst:HasTag("hayfever_immune") then --or not TheWorld:HasTag("hayfever") or not TheWorld.net:HasTag("hayfever") then -- or suppressorNearby
+    if self.inst:HasTag("playerghost") or self.inst:HasTag("has_gasmask") or self.inst:HasTag("has_hayfeverhat") or self.inst:HasTag("minifansuppressor") or self.inst:HasTag("wereplayer") or self.inst.sg:HasStateTag("sleeping") then --or not TheWorld:HasTag("hayfever") or not TheWorld.net:HasTag("hayfever") then -- or suppressorNearby
         can = false
     end
 	
     return can
 end
 
+function Hayfever:CanSneezeQueen()
+    local cancan = true
+	
+	local queenkilled = TheWorld.components.hayfever_tracker:CheckQueen() or nil
+	if queenkilled or self.inst:HasTag("plantkin") or self.inst:HasTag("hayfever_immune") then
+		cancan = false
+	end
+	
+	print(queenkilled)
+	
+    return cancan
+end
+
 function Hayfever:OnUpdate(dt)
-	--print(self.nextsneeze)
-    if self:CanSneeze() then
+	print(self.nextsneeze)
+    if self:CanSneeze() and self:CanSneezeQueen() then
         if self.nextsneeze <= 0 then
             if not self.inst.wantstosneeze then
                 -- large chance to sneeze twice in a row
@@ -59,7 +74,7 @@ function Hayfever:OnUpdate(dt)
                     self.nextsneeze = self:GetNextSneezTime()
                 else
                     self.sneezed = true
-                    self.nextsneeze = 1                
+                    self.nextsneeze = 1
                 end
 
                 self.inst.wantstosneeze = true
@@ -68,9 +83,31 @@ function Hayfever:OnUpdate(dt)
         else
             self.nextsneeze = self.nextsneeze -dt
         end        
-    else
+    elseif self:CanSneeze() and not self:CanSneezeQueen() then
+        if self.nextsneeze <= 0 then
+			if not self.inst.wantstosneeze then
+				-- large chance to sneeze twice in a row
+				if self.sneezed or math.random() > 0.7 then
+					 self.sneezed = false
+					self.nextsneeze = self:GetNextSneezTime()
+				else
+					self.sneezed = true
+					self.nextsneeze = 1
+				end
+
+				self.inst.wantstosneeze = true
+                self.inst:PushEvent("sneeze")
+			end
+		elseif self.nextsneeze < 10 then
+            self.nextsneeze = self.nextsneeze + (dt*0.9)
+		elseif self.nextsneeze > 11 then
+            self.nextsneeze = self.nextsneeze -dt
+        end
+	else
         if self.nextsneeze < 10 then
             self.nextsneeze = self.nextsneeze + (dt*0.9)
+		elseif self.nextsneeze > 11 then
+            self.nextsneeze = self.nextsneeze -dt
         end
     end
     self.inst:PushEvent("updatepollen", {sneezetime = self.nextsneeze})  
