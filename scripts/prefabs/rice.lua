@@ -11,7 +11,7 @@ require "tuning"
     local assets_cooked =
     {
         Asset("ANIM", "anim/berries.zip"),
-		--Asset("ATLAS", "images/inventoryimages/berries_cooked.xml"),
+		Asset("ATLAS", "images/inventoryimages/rice_cooked.xml"),
     }
     
     local prefabs =
@@ -103,8 +103,8 @@ end
 
         MakeInventoryPhysics(inst)
 
-        inst.AnimState:SetBank("berries")
-        inst.AnimState:SetBuild("berries")
+        inst.AnimState:SetBank("rice")
+        inst.AnimState:SetBuild("rice")
         inst.AnimState:PlayAnimation("cooked")
 		
 		inst:AddTag("_named")
@@ -139,7 +139,7 @@ end
 		inst:DoPeriodicTask(5, rename)
 		
         inst:AddComponent("inventoryitem")
-		inst.components.inventoryitem.atlasname = nil--"images/inventoryimages/berries_cooked.xml"
+		inst.components.inventoryitem.atlasname = "images/inventoryimages/rice_cooked.xml"
         MakeSmallBurnable(inst)
         MakeSmallPropagator(inst)
         ---------------------        
