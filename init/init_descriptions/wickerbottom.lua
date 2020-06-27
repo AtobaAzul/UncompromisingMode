@@ -80,6 +80,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "He is beyond reasoning with!"
 	DESCRIBE.VAMPIREBAT = "This one has managed to reach adulthood."
+	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	ACTIONFAIL.READ =
         {
             GENERIC = "I cannot concentrate under these conditions!",

@@ -24,7 +24,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICRETALIATION = ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now"
 	--FoodBuffs
-	ANNOUNCE.ANNOUNCE_RNEFOG = "It's not just Charlie watching me, is there?"
+	ANNOUNCE.ANNOUNCE_RNEFOG = "It's not just Charlie out there, is it?"
     DESCRIBE.UNCOMPROMISING_RAT = "Filthy vermin!"
     DESCRIBE.UNCOMPROMISING_RATHOLD = "I don't recall granting you vermin permission to settle in my world."
     DESCRIBE.RATPOISONBOTTLE = "Hmhm...I remember what the red ones were for now."
@@ -80,4 +80,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.SKELETONMEAT = "I would rather die!"
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "I... I thought I killed you!"
-	DESCRIBE.VAMPIREBAT = "I remember you... different."
+	DESCRIBE.VAMPIREBAT = "I remember you being... different."
+	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB

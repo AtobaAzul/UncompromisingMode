@@ -185,8 +185,13 @@ local function fn()
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_MEDIUM)
     inst.components.hauntable:SetOnHauntFn(OnHaunt)
-	inst:AddComponent("lootdropper")
+	
+	if not inst.components.trapdoor ~= nil then
+		inst:AddComponent("lootdropper")
+	end
+	
 	inst.components.lootdropper:SetChanceLootTable('trapdoor')
+	
 	inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.MINE)
     inst.components.workable:SetWorkLeft(TUNING.ROCKS_MINE)

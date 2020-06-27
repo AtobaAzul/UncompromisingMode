@@ -87,7 +87,7 @@ local states=
         tags = {"busy"},
 
         onenter = function(inst)
-            inst.SoundEmitter:KillSound("move")
+            --inst.SoundEmitter:KillSound("move")
             inst.SoundEmitter:PlaySound("UCSounds/pollenmite/die")           
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
@@ -103,7 +103,7 @@ local states=
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("idle_loop",true)
-            inst.SoundEmitter:PlaySound("UCSounds/pollenmite/loop","move")
+            --inst.SoundEmitter:PlaySound("UCSounds/pollenmite/loop","move")
         end,
         
         events=

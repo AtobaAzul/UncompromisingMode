@@ -31,6 +31,8 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/skeletonmeat.tex"),
 	Asset("ATLAS", "images/mushroom_slot.xml"),
 	Asset("IMAGE", "images/mushroom_slot.tex"),
+	Asset("ATLAS", "images/inventoryimages/critterlab_real.xml"),
+	Asset("IMAGE", "images/inventoryimages/critterlab_real.tex"),
 	
 	Asset("ANIM", "anim/geyser.zip"),
 	Asset("ANIM", "anim/lava_vomit.zip"),
