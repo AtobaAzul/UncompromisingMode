@@ -132,7 +132,7 @@ end
 local function SpawnQueen(inst, should_duplicate)
     local map = TheWorld.Map
     local x, y, z = inst.Transform:GetWorldPosition()
-    local offs = FindValidPositionByFan(math.random() * 2 * PI, 1.25, 5, function(offset)
+    local offs = FindValidPositionByFan(math.random(-7, 7) * 2 * PI, 1.25, 5, function(offset)
         local x1 = x + offset.x
         local z1 = z + offset.z
         return map:IsPassableAtPoint(x1, 0, z1)
@@ -144,9 +144,8 @@ local function SpawnQueen(inst, should_duplicate)
         z = z + offs.z
     end
 
-    local queen = SpawnPrefab("spiderqueen")
+    local queen = SpawnPrefab("pollenmiteden")
     queen.Transform:SetPosition(x, 0, z)
-    queen.sg:GoToState("birth")
 
     if not should_duplicate then
         inst:Remove()
@@ -164,15 +163,15 @@ local function AttemptMakeQueen(inst)
         SetLarge(inst)
     end
 
-    if not inst:IsNearPlayer(30) then
+    --[[if not inst:IsNearPlayer(30) then
         inst.components.growable:StartGrowing(60 + math.random(60))
         return
-    end
+    end]]
 
     local check_range = 60
-    local cap = 4
+    local cap = 15
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, check_range, nil, nil, { "pollenmiteden", "spiderqueen" })
+    local ents = TheSim:FindEntities(x, y, z, check_range, nil, nil, { "pollenmiteden" })
     local num_dens = #ents
 
     inst.components.growable:SetStage(1)
@@ -301,15 +300,15 @@ local function OnUnFreeze(inst)
 end
 
 local function GetSmallGrowTime(inst)
-    return TUNING.SPIDERDEN_GROW_TIME[1] * (1 + math.random())
+    return 120
 end
 
 local function GetMedGrowTime(inst)
-    return TUNING.SPIDERDEN_GROW_TIME[2] * (1 + math.random())
+    return 240
 end
 
 local function GetLargeGrowTime(inst)
-    return TUNING.SPIDERDEN_GROW_TIME[3] * (1 + math.random())
+    return 360
 end
 
 local function OnEntityWake(inst)
