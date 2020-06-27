@@ -38,6 +38,9 @@ local function bite(inst)
 	--[[if inst.components.infester.target:HasTag("playerghost") then
 		inst.components.infester.Uninfest()
 	else]]
+	if inst.components.infester.target:HasTag("playerghost") then
+		inst.components.health:Kill()
+	end
 	
 	if inst.components.infester.target:HasTag("player") and not inst.components.infester.target:HasTag("playerghost") then
 		inst.bufferedaction = BufferedAction(inst, inst.components.infester.target, ACTIONS.ATTACK)
@@ -50,7 +53,7 @@ local function bite(inst)
 		inst.bufferedaction = BufferedAction(inst, inst.components.infester.target, ACTIONS.ATTACK)
 		
 		local player = inst:GetNearestPlayer()
-		if player ~= nil and not inst.components.infester.target.components.combat:HasTarget() then
+		if player ~= nil and player.components.infestable and not inst.components.infester.target.components.combat:HasTarget() then
 			inst.components.infester.target:PushEvent("attacked", {attacker = player, damage = 0, weapon = nil})
 		end
 	end
@@ -92,7 +95,7 @@ local function OnAttacked(inst, data)
 end
 
 local function OnIgniteFn(inst)
-	--inst:DoTaskInTime(1, function()
+	inst:DoTaskInTime(0.1, function()
 		if not inst.components.health:IsDead() then
 			inst.SoundEmitter:KillSound("hiss")
 			SpawnPrefab("firesplash_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
@@ -116,7 +119,7 @@ local function OnIgniteFn(inst)
 			end
 			
 		end
-	--end)
+	end)
 end
 
 local function fn()
@@ -233,9 +236,6 @@ local function fn()
 	end)
 	]]
 	--inst.special_action = makehome
-
-	--inst:ListenForEvent("losttarget", function() inst.components.infester.Uninfest() end)
-	
 	inst:SetStateGraph("SGleechswarm")
 	inst:SetBrain(brain)
 

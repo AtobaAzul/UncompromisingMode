@@ -44,15 +44,16 @@ function Infester:bite()
 end
 
 function Infester:Infest(target)	
+	if target.components.infestable then
 		self.infesting = true
 		self.target = target
 		self.inst.bitetask = self.inst:DoTaskInTime(self.basetime+(math.random()*self.randtime),function() self:bite() end)
 		self.inst.AnimState:SetFinalOffset(-1)
 		self.inst.Physics:Teleport(0,0,0)	
 		target:AddChild(self.inst)
-
+		
 		target.components.infestable:infest(self.inst)
 		target:AddTag("infested")
-	--end
+	end
 end
 return Infester

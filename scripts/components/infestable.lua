@@ -5,6 +5,7 @@ local Infestable = Class(function(self, inst)
 	self:DropNothing()
 	self:uninfest() end)
 end)
+
 function Infestable:DropNothing(inst)
 
 	if self.inst:HasTag("infested") and not self.inst:HasTag("player") then
@@ -20,6 +21,7 @@ function Infestable:DropNothing(inst)
 	end
 	self.inst:RemoveTag("infestable")
 end
+
 function Infestable:infest(inst)   
 	local found = false
 	for i,v in ipairs(self.infesters)do
@@ -42,7 +44,11 @@ function Infestable:uninfest(inst)
 	end
 end
 
-function Infestable:OnSave()    
+-- // All of the data here seems to be referencing their home position
+-- // Since leeches dont have a home, and pollen mites kinda just die out,
+-- // I think it's okay to just leave this stuff commented out.
+
+--[[function Infestable:OnSave()    
     local data = {infesters= {}}
     local references = {}    
     local refs = {}
@@ -59,15 +65,15 @@ function Infestable:OnSave()
 			table.insert(references, data.infesters[k].GUID)
 
             if v.components.homeseeker then
-				data.infesters[k].home =  v.components.homeseeker:GetHome().GUID
+				data.infesters[k].home =  v.components.homeseeker:GetHomePos().GUID
 				table.insert(references, data.infesters[k].home)							
             end         
         end
     end
 
     return data, references
-end  
-   
+end
+
 function Infestable:OnLoad(data, newents)
 	self.home_hookup = {}
     if data.infesters then
@@ -101,6 +107,6 @@ function Infestable:LoadPostPass(ents, data)
 			end
         end
     end
-end
+end]]
 
 return Infestable
