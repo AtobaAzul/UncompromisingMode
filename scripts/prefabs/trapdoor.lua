@@ -186,7 +186,7 @@ local function fn()
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_MEDIUM)
     inst.components.hauntable:SetOnHauntFn(OnHaunt)
 	
-	if not inst.components.trapdoor ~= nil then
+	if inst.components.trapdoor == nil then
 		inst:AddComponent("lootdropper")
 	end
 	
