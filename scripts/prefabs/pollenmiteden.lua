@@ -139,14 +139,14 @@ local function SpawnQueen(inst, should_duplicate)
 	local land = TheWorld.Map:IsPassableAtPoint(x1, 0, z1)
 	local holes = TheWorld.Map:IsPointNearHole(Vector3(x1, 0, z1))
 	
-	if land and #TheSim:FindEntities(x1, y, z1, 5, nil, nil, { "pollenmiteden" }) < 1 and should_duplicate then
+	if not inst.components.burnable:IsBurning() and land and #TheSim:FindEntities(x1, y, z1, 5, nil, nil, { "pollenmiteden" }) < 1 and should_duplicate then
 
     inst.components.growable:SetStage(1)
 
 		inst.AnimState:PushAnimation("cocoon_large_burst_pst")
 		inst.AnimState:PushAnimation("cocoon_small", true)
 
-		inst.components.growable:StartGrowing(30)
+		inst.components.growable:StartGrowing(60)
 	
 		local queen = SpawnPrefab("pollenmiteden")
 		queen.Transform:SetPosition(x1, 0, z1)
@@ -294,11 +294,11 @@ local function GetSmallGrowTime(inst)
 end
 
 local function GetMedGrowTime(inst)
-    return 10
+    return 20
 end
 
 local function GetLargeGrowTime(inst)
-    return 10
+    return 30
 end
 
 local function OnEntityWake(inst)
@@ -359,6 +359,19 @@ local function OnLoadPostPass(inst)
     end
 end
 
+local function OnSeasonTick(inst)
+	if TheWorld.state.isspring then
+        inst.components.growable:StartGrowing()
+	else
+		if inst.components.growable:GetStage() == 3 then
+			inst.components.growable:SetStage(2)
+		elseif inst.components.growable:GetStage() == 2 then
+			inst.components.growable:SetStage(1)
+		end
+        inst.components.growable:StopGrowing()
+	end
+end
+
 local function MakePollenmiteDenFn(den_level)
     return function()
         local inst = CreateEntity()
@@ -407,7 +420,7 @@ local function MakePollenmiteDenFn(den_level)
         -------------------
         inst:AddComponent("childspawner")
         inst.components.childspawner.childname = "pollenmites"
-        inst.components.childspawner:SetRegenPeriod(TUNING.SPIDERDEN_REGEN_TIME)
+        inst.components.childspawner:SetRegenPeriod(TUNING.SPIDERDEN_REGEN_TIME / 3)
         inst.components.childspawner:SetSpawnPeriod(TUNING.SPIDERDEN_RELEASE_TIME)
         inst.components.childspawner.allowboats = true
 		inst.components.childspawner:StartSpawning()
@@ -463,6 +476,8 @@ local function MakePollenmiteDenFn(den_level)
         inst.OnEntitySleep = OnEntitySleep
         inst.OnEntityWake = OnEntityWake
 		inst.OnLoadPostPass = OnLoadPostPass
+		
+		inst:ListenForEvent("seasontick", OnSeasonTick)
 
 		if not POPULATING then
 			inst:DoTaskInTime(0, OnLoadPostPass)

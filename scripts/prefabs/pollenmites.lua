@@ -42,19 +42,23 @@ local function bite(inst)
 		inst.components.health:Kill()
 	end
 	
-	if inst.components.infester.target:HasTag("player") and not inst.components.infester.target:HasTag("playerghost") then
-		inst.bufferedaction = BufferedAction(inst, inst.components.infester.target, ACTIONS.ATTACK)
-		inst:PushEvent("doattack")
-		if inst.components.infester.target.components.hayfever ~= nil and inst.components.infester.target.components.hayfever.enabled and inst.components.infester.target.components.hayfever:CanSneeze() then
-			local hayfeverdelta = inst.components.infester.target.components.hayfever:GetNextSneezTime()
-			inst.components.infester.target.components.hayfever:DoDelta(-10)
-		end
-	elseif inst.components.infester.target then
-		inst.bufferedaction = BufferedAction(inst, inst.components.infester.target, ACTIONS.ATTACK)
-		
-		local player = inst:GetNearestPlayer()
-		if player ~= nil and player.components.infestable and not inst.components.infester.target.components.combat:HasTarget() then
-			inst.components.infester.target:PushEvent("attacked", {attacker = player, damage = 0, weapon = nil})
+	if inst.components.infester.target then
+		if inst.components.infester.target:HasTag("player") and not inst.components.infester.target:HasTag("playerghost") then
+			inst.bufferedaction = BufferedAction(inst, inst.components.infester.target, ACTIONS.ATTACK)
+			inst:PushEvent("doattack")
+			--inst.components.infester.target:PushEvent("attacked", {attacker = inst, damage = 1, weapon = nil})
+			inst.components.infester.target.components.health:DoDelta(-1)
+			if inst.components.infester.target.components.hayfever ~= nil and inst.components.infester.target.components.hayfever.enabled and inst.components.infester.target.components.hayfever:CanSneeze() then
+				inst.components.infester.target.components.hayfever:DoDelta(-10)
+			end
+		elseif inst.components.infester.target then
+			
+			local player = inst:GetNearestPlayer()
+			if player ~= nil and player.components.infestable and not inst.components.infester.target.components.combat:HasTarget() then
+				inst.bufferedaction = BufferedAction(inst, inst.components.infester.target, ACTIONS.ATTACK)
+				inst:PushEvent("doattack")
+				inst.components.infester.target:PushEvent("attacked", {attacker = player, damage = 1, weapon = nil})
+			end
 		end
 	end
 end
@@ -221,7 +225,9 @@ local function fn()
 	inst.components.infester.bitefn = bite
 	inst.components.infester.stopinfesttestfn = stopinfesttest
 	------------------
-
+	
+    MakeMediumPropagator(inst)
+	
 	--[[
 	inst:ListenForEvent("freeze", function()
 		if inst.components.freezable then
