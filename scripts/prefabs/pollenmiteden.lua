@@ -139,7 +139,7 @@ local function SpawnQueen(inst, should_duplicate)
 	local land = TheWorld.Map:IsPassableAtPoint(x1, 0, z1)
 	local holes = TheWorld.Map:IsPointNearHole(Vector3(x1, 0, z1))
 	
-	if not inst.components.burnable:IsBurning() and land and #TheSim:FindEntities(x1, y, z1, 5, nil, nil, { "pollenmiteden" }) < 1 and should_duplicate then
+	if land and #TheSim:FindEntities(x1, y, z1, 5, nil, nil, { "pollenmiteden", "lureplant", "structure" }) < 1 and should_duplicate then
 
     inst.components.growable:SetStage(1)
 
@@ -290,15 +290,15 @@ local function OnUnFreeze(inst)
 end
 
 local function GetSmallGrowTime(inst)
-    return 10
+    return 10 + math.random()
 end
 
 local function GetMedGrowTime(inst)
-    return 20
+    return 20 + math.random()
 end
 
 local function GetLargeGrowTime(inst)
-    return 30
+    return 30 + math.random()
 end
 
 local function OnEntityWake(inst)
