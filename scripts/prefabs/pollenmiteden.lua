@@ -130,26 +130,27 @@ local function PlayLegBurstSound(inst)
 end
 
 local function SpawnQueen(inst, should_duplicate)
-    local map = TheWorld.Map
+	
     local x, y, z = inst.Transform:GetWorldPosition()
-    local offs = FindValidPositionByFan(math.random(-7, 7) * 2 * PI, 1.25, 5, function(offset)
-        local x1 = x + offset.x
-        local z1 = z + offset.z
-        return map:IsPassableAtPoint(x1, 0, z1)
-            and not map:IsPointNearHole(Vector3(x1, 0, z1))
-    end)
 
-    if offs ~= nil then
-        x = x + offs.x
-        z = z + offs.z
-    end
+	local x1 = x + math.random(-10, 10)
+	local z1 = z + math.random(-10, 10)
 
-    local queen = SpawnPrefab("pollenmiteden")
-    queen.Transform:SetPosition(x, 0, z)
+	local land = TheWorld.Map:IsPassableAtPoint(x1, 0, z1)
+	local holes = TheWorld.Map:IsPointNearHole(Vector3(x1, 0, z1))
+	
+	if land and #TheSim:FindEntities(x1, y, z1, 5, nil, nil, { "pollenmiteden" }) < 1 and should_duplicate then
 
-    if not should_duplicate then
-        inst:Remove()
-    end
+    inst.components.growable:SetStage(1)
+
+		inst.AnimState:PushAnimation("cocoon_large_burst_pst")
+		inst.AnimState:PushAnimation("cocoon_small", true)
+
+		inst.components.growable:StartGrowing(30)
+	
+		local queen = SpawnPrefab("pollenmiteden")
+		queen.Transform:SetPosition(x1, 0, z1)
+	end
 end
 
 local function AttemptMakeQueen(inst)
@@ -169,23 +170,12 @@ local function AttemptMakeQueen(inst)
     end]]
 
     local check_range = 60
-    local cap = 15
+    local cap = 10
     local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, check_range, nil, nil, { "pollenmiteden" })
     local num_dens = #ents
 
-    inst.components.growable:SetStage(1)
-
-    inst.AnimState:PlayAnimation("cocoon_large_burst")
-    inst.AnimState:PushAnimation("cocoon_large_burst_pst")
-    inst.AnimState:PushAnimation("cocoon_small", true)
-
-    PlayLegBurstSound(inst)
-    inst:DoTaskInTime(5 * FRAMES, PlayLegBurstSound)
-    inst:DoTaskInTime(15 * FRAMES, PlayLegBurstSound)
     inst:DoTaskInTime(35 * FRAMES, SpawnQueen, num_dens < cap)
-
-    inst.components.growable:StartGrowing(60)
     return true
 end
 
@@ -212,7 +202,7 @@ local function SpawnDefenders(inst, attacker)
         inst.AnimState:PlayAnimation(inst.anims.hit)
         inst.AnimState:PushAnimation(inst.anims.idle)
         if inst.components.childspawner ~= nil then
-            local max_release_per_stage = { 2, 4, 6 }
+            local max_release_per_stage = { 1, 1, 2 }
             local num_to_release = math.min(max_release_per_stage[inst.data.stage] or 1, inst.components.childspawner.childreninside)
             local num_warriors = math.min(num_to_release, TUNING.SPIDERDEN_WARRIORS[inst.data.stage])
             num_to_release = math.floor(SpringCombatMod(num_to_release))
@@ -246,7 +236,7 @@ local function SpawnInvestigators(inst, data)
         inst.AnimState:PlayAnimation(inst.anims.hit)
         inst.AnimState:PushAnimation(inst.anims.idle)
         if inst.components.childspawner ~= nil then
-            local max_release_per_stage = { 1, 2, 3 }
+            local max_release_per_stage = { 1, 1, 1 }
             local num_to_release = math.min(max_release_per_stage[inst.data.stage] or 1, inst.components.childspawner.childreninside)
             num_to_release = math.floor(SpringCombatMod(num_to_release))
             local num_investigators = inst.components.childspawner:CountChildrenOutside(IsInvestigator)
@@ -300,15 +290,15 @@ local function OnUnFreeze(inst)
 end
 
 local function GetSmallGrowTime(inst)
-    return 120
+    return 10
 end
 
 local function GetMedGrowTime(inst)
-    return 240
+    return 10
 end
 
 local function GetLargeGrowTime(inst)
-    return 360
+    return 10
 end
 
 local function OnEntityWake(inst)
@@ -412,7 +402,7 @@ local function MakePollenmiteDenFn(den_level)
         -------------------
         inst:AddComponent("health")
         inst.components.health:SetMaxHealth(200)
-		inst.components.health.invincible = true
+		inst.components.health.invincible = false
 
         -------------------
         inst:AddComponent("childspawner")
@@ -420,10 +410,7 @@ local function MakePollenmiteDenFn(den_level)
         inst.components.childspawner:SetRegenPeriod(TUNING.SPIDERDEN_REGEN_TIME)
         inst.components.childspawner:SetSpawnPeriod(TUNING.SPIDERDEN_RELEASE_TIME)
         inst.components.childspawner.allowboats = true
-
-        inst.components.childspawner.emergencychildname = "killerbee"
-        inst.components.childspawner.emergencychildrenperplayer = 1
-
+		inst.components.childspawner:StartSpawning()
         --inst.components.childspawner:SetMaxChildren(TUNING.SPIDERDEN_SPIDERS[stage])
         --inst.components.childspawner:ScheduleNextSpawn(0)
         inst:ListenForEvent("creepactivate", SpawnInvestigators)
