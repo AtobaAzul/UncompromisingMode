@@ -333,9 +333,9 @@ local function SpawnThunderFar(player)
 	
 	player:DoTaskInTime(10 * math.random() * 2, function()
 			local x, y, z = player.Transform:GetWorldPosition()
-			local thunders = math.random(18,25)
+			local thunders = math.random(15,20)
 			for i = 1, thunders do
-				player:DoTaskInTime(0.6 * i + math.random(4) * 0.3, function()
+				player:DoTaskInTime(0.6 * i + math.random(6) * 0.3, function()
 					--local thunder = SpawnPrefab("thunder_far")
 					--thunder.Transform:SetPosition(x + math.random(-10,10), y, z + math.random(-10,10))
 					SpawnPrefab("thunder_far")

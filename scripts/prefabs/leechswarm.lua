@@ -69,7 +69,7 @@ local function fn()
 	
 	inst.AnimState:SetBank("gnat")
 	inst.AnimState:PlayAnimation("idle_loop")
-	--inst.AnimState:SetRayTestOnBB(true);
+	inst.AnimState:SetRayTestOnBB(true);
 
 	------------
 	---------------------------------

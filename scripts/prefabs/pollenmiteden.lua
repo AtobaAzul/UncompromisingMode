@@ -5,7 +5,7 @@ local prefabs =
 
 local assets =
 {
-    Asset("ANIM", "anim/spider_cocoon.zip"),
+    Asset("ANIM", "anim/gnat_cocoon.zip"),
     Asset("SOUND", "sound/spider.fsb"),
 	Asset("MINIMAP_IMAGE", "spiderden"), --shared with spiderden2 and 3
 }
@@ -141,11 +141,11 @@ local function SpawnQueen(inst, should_duplicate)
 	
 	if land and #TheSim:FindEntities(x1, y, z1, 5, nil, nil, { "pollenmiteden", "lureplant", "structure" }) < 1 and should_duplicate then
 
-    inst.components.growable:SetStage(1)
 
 		inst.AnimState:PushAnimation("cocoon_large_burst_pst")
 		inst.AnimState:PushAnimation("cocoon_small", true)
 
+		inst.components.growable:SetStage(1)
 		inst.components.growable:StartGrowing(60)
 	
 		local queen = SpawnPrefab("pollenmiteden")
@@ -388,7 +388,7 @@ local function MakePollenmiteDenFn(den_level)
         inst.MiniMapEntity:SetIcon("spiderden.png")
 
         inst.AnimState:SetBank("spider_cocoon")
-        inst.AnimState:SetBuild("spider_cocoon")
+        inst.AnimState:SetBuild("gnat_cocoon")
         inst.AnimState:PlayAnimation("cocoon_small", true)
 
         inst:AddTag("cavedweller")
@@ -402,7 +402,8 @@ local function MakePollenmiteDenFn(den_level)
 
         inst:SetPrefabName("pollenmiteden")
 		
-		inst.AnimState:SetMultColour(0.1, 0.1, 0.1, 1)
+		inst.Transform:SetScale(0.95,0.95,0.95)
+		--inst.AnimState:SetMultColour(0.1, 0.1, 0.1, 1)
 
         inst.entity:SetPristine()
 
@@ -420,7 +421,7 @@ local function MakePollenmiteDenFn(den_level)
         -------------------
         inst:AddComponent("childspawner")
         inst.components.childspawner.childname = "pollenmites"
-        inst.components.childspawner:SetRegenPeriod(TUNING.SPIDERDEN_REGEN_TIME / 3)
+        inst.components.childspawner:SetRegenPeriod(TUNING.SPIDERDEN_REGEN_TIME)
         inst.components.childspawner:SetSpawnPeriod(TUNING.SPIDERDEN_RELEASE_TIME)
         inst.components.childspawner.allowboats = true
 		inst.components.childspawner:StartSpawning()
