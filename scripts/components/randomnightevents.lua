@@ -179,6 +179,79 @@ local function SpawnMonkeys(player)
 	end)
 end
 
+local function SpawnWerePigsFunction(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	local x1 = x + math.random(12, 16)
+	local z1 = z + math.random(12, 16)
+	local x2 = x - math.random(12, 16)
+	local z2 = z - math.random(12, 16)
+	
+	local pig = SpawnPrefab("pigman")
+	
+	if math.random()>0.5 then
+		if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+			local fx = SpawnPrefab("statue_transition_2")
+			if fx ~= nil then
+			fx.Transform:SetPosition(x1, 0, z1)
+			fx.Transform:SetScale(.8, .8, .8)
+			end
+			fx = SpawnPrefab("statue_transition")
+			if fx ~= nil then
+				fx.Transform:SetPosition(x1, 0, z1)
+				fx.Transform:SetScale(.8, .8, .8)
+			end
+			pig.Transform:SetPosition(x1, y, z1)
+			if pig.components.werebeast ~= nil then
+			pig.components.werebeast:SetWere(math.max(TUNING.SEG_TIME, TUNING.TOTAL_DAY_TIME * (1 - TheWorld.state.time)) + math.random() * TUNING.SEG_TIME)
+			end
+			if pig.components.combat ~= nil then
+			pig.components.combat:SuggestTarget(player)
+			end
+			pig:ListenForEvent("isday",function(pig) pig:Remove() end) --Should Disappear during day, doesn't seem to work though...
+		else
+			SpawnWerePigsFunction(player)
+		end
+	else
+		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+		local fx = SpawnPrefab("statue_transition_2")
+			if fx ~= nil then
+			fx.Transform:SetPosition(x2, 0, z2)
+			fx.Transform:SetScale(.8, .8, .8)
+			end
+			fx = SpawnPrefab("statue_transition")
+			if fx ~= nil then
+				fx.Transform:SetPosition(x2, 0, z2)
+				fx.Transform:SetScale(.8, .8, .8)
+			end
+			pig.Transform:SetPosition(x2, y, z2)
+			if pig.components.werebeast ~= nil then
+			pig.components.werebeast:SetWere(math.max(TUNING.SEG_TIME, TUNING.TOTAL_DAY_TIME * (1 - TheWorld.state.time)) + math.random() * TUNING.SEG_TIME)
+			end
+			if pig.components.combat ~= nil then
+			pig.components.combat:SuggestTarget(player)
+			end
+			pig:ListenForEvent("isday",function(pig) pig:Remove() end)
+		else
+			SpawnWerePigsFunction(player)
+		end
+	end
+
+end
+
+local function SpawnWerePigs(player)
+		print("SpawnWerePigs")
+	player:DoTaskInTime(5 + math.random(0,5), function()
+			local x, y, z = player.Transform:GetWorldPosition()
+			local day = TheWorld.state.cycles
+			local num_pig = 3+math.floor(math.random()*4, 6)
+			for i = 1, num_pig do
+				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
+					SpawnWerePigsFunction(player)
+				end)
+			end
+	end)
+end
+
 local function FireHungryGhostAttack(player)
 	--print("ooooOOOOoooo")
 	local ghosttime = 5 + math.random(0,5)
@@ -513,6 +586,7 @@ AddWinterEvent(SpawnKrampus,1)
 AddSpringEvent(SpawnThunderFar,1)
 --Full Moon
 AddFullMoonEvent(MoonTear,1)
+AddFullMoonEvent(SpawnWerePigs,1)
 --New Moon
 AddNewMoonEvent(ChessPiece,1)
 
