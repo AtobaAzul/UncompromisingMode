@@ -202,14 +202,14 @@ local function SpawnDefenders(inst, attacker)
         inst.AnimState:PlayAnimation(inst.anims.hit)
         inst.AnimState:PushAnimation(inst.anims.idle)
         if inst.components.childspawner ~= nil then
-            local max_release_per_stage = { 1, 1, 2 }
-            local num_to_release = math.min(max_release_per_stage[inst.data.stage] or 1, inst.components.childspawner.childreninside)
+            local max_release_per_stage = { 1, 1, 1 }
+            local num_to_release = 1
             local num_warriors = math.min(num_to_release, TUNING.SPIDERDEN_WARRIORS[inst.data.stage])
             num_to_release = math.floor(SpringCombatMod(num_to_release))
             num_warriors = math.floor(SpringCombatMod(num_warriors))
             num_warriors = num_warriors - inst.components.childspawner:CountChildrenOutside(IsDefender)
             for k = 1, num_to_release do
-                inst.components.childspawner.childname = k <= num_warriors and "pollenmites"
+                inst.components.childspawner.childname = k <= num_warriors and "pollenmites" or "pollenmites"
                 local pollenmite = inst.components.childspawner:SpawnChild()
                 if pollenmite ~= nil and attacker ~= nil and pollenmite.components.combat ~= nil then
                     pollenmite.components.combat:SetTarget(attacker)
@@ -302,7 +302,8 @@ local function GetLargeGrowTime(inst)
 end
 
 local function OnEntityWake(inst)
-    inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spidernest_LP", "loop")
+    inst.SoundEmitter:PlaySound("UCSounds/pollenmite/loop","loop", 0.5)
+    --inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spidernest_LP", "loop")
 end
 
 local function OnEntitySleep(inst)
@@ -421,7 +422,7 @@ local function MakePollenmiteDenFn(den_level)
         -------------------
         inst:AddComponent("childspawner")
         inst.components.childspawner.childname = "pollenmites"
-        inst.components.childspawner:SetRegenPeriod(TUNING.SPIDERDEN_REGEN_TIME / 3)
+        inst.components.childspawner:SetRegenPeriod(TUNING.SPIDERDEN_REGEN_TIME / 1.5)
         inst.components.childspawner:SetSpawnPeriod(TUNING.SPIDERDEN_RELEASE_TIME * 1.5)
         inst.components.childspawner.allowboats = true
 		inst.components.childspawner:StartSpawning()

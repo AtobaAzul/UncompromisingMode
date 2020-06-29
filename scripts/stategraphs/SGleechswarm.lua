@@ -103,7 +103,7 @@ local states=
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("idle_loop",true)
-            --inst.SoundEmitter:PlaySound("UCSounds/pollenmite/loop","move")
+            --inst.SoundEmitter:PlaySound("UCSounds/pollenmite/loop","move", 0.5)
         end,
         
         events=

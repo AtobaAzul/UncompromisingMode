@@ -1,6 +1,6 @@
-local function SpawnDen(inst)
+local SpawnDen(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
-	SpawnPrefab("pollenmiteden").Transform:SetPosition(x, y, z)
+	SpawnPrefab("pollenmiteden").Transform:SetPosition(x, 0, z)
 	
 	inst:DoTaskInTime(0, function() inst:Remove() end)
 end
@@ -11,6 +11,7 @@ local function fn()
     inst.entity:AddTransform()
     inst.entity:AddNetwork()
 
+    MakeObstaclePhysics(inst, .5)
 
     inst.entity:SetPristine()
 
