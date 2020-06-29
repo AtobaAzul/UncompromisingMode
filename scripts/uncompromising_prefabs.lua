@@ -75,6 +75,7 @@ return {
 	"rneghost",
 	"chimp",
 	"pollenmiteden",
+	"pollenmitedenprefabspawner",
 	"rice",
 	"gatorsnake",
 	"riceplant",

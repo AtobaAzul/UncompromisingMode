@@ -139,7 +139,7 @@ local function SpawnQueen(inst, should_duplicate)
 	local land = TheWorld.Map:IsPassableAtPoint(x1, 0, z1)
 	local holes = TheWorld.Map:IsPointNearHole(Vector3(x1, 0, z1))
 	
-	if land and #TheSim:FindEntities(x1, y, z1, 5, nil, nil, { "pollenmiteden", "lureplant", "structure" }) < 1 and should_duplicate then
+	if land and #TheSim:FindEntities(x1, y, z1, 5, nil, nil, { "pollenmiteden" }) < 1 and should_duplicate then
 
 
 		inst.AnimState:PushAnimation("cocoon_large_burst_pst")
@@ -193,7 +193,7 @@ local function OnKilled(inst)
 end
 
 local function IsDefender(child)
-    return child.prefab == "killerbee"
+    return child.prefab == "pollenmites"
 end
 
 local function SpawnDefenders(inst, attacker)
@@ -209,7 +209,7 @@ local function SpawnDefenders(inst, attacker)
             num_warriors = math.floor(SpringCombatMod(num_warriors))
             num_warriors = num_warriors - inst.components.childspawner:CountChildrenOutside(IsDefender)
             for k = 1, num_to_release do
-                inst.components.childspawner.childname = k <= num_warriors and "killerbee" or "pollenmites"
+                inst.components.childspawner.childname = k <= num_warriors and "pollenmites"
                 local pollenmite = inst.components.childspawner:SpawnChild()
                 if pollenmite ~= nil and attacker ~= nil and pollenmite.components.combat ~= nil then
                     pollenmite.components.combat:SetTarget(attacker)
@@ -421,8 +421,8 @@ local function MakePollenmiteDenFn(den_level)
         -------------------
         inst:AddComponent("childspawner")
         inst.components.childspawner.childname = "pollenmites"
-        inst.components.childspawner:SetRegenPeriod(TUNING.SPIDERDEN_REGEN_TIME)
-        inst.components.childspawner:SetSpawnPeriod(TUNING.SPIDERDEN_RELEASE_TIME)
+        inst.components.childspawner:SetRegenPeriod(TUNING.SPIDERDEN_REGEN_TIME / 3)
+        inst.components.childspawner:SetSpawnPeriod(TUNING.SPIDERDEN_RELEASE_TIME * 1.5)
         inst.components.childspawner.allowboats = true
 		inst.components.childspawner:StartSpawning()
         --inst.components.childspawner:SetMaxChildren(TUNING.SPIDERDEN_SPIDERS[stage])

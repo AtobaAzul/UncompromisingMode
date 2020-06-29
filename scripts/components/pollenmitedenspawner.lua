@@ -130,7 +130,7 @@ local function SpawnPollenmiteDenForPlayer(playerinst, playerdata, reschedule)
         local should_spawn = math.random() < chance
         local loc = FindSpawnLocationInTrail(playerdata.trail) or FindSpawnLocation(playerinst.Transform:GetWorldPosition())
         if loc ~= nil and should_spawn then
-            local plant = SpawnPrefab("pollenmiteden")
+            local plant = SpawnPrefab("pollenmitedenprefabspawner")
             plant.Physics:Teleport(loc:Get())
             --plant.sg:GoToState("spawn")
         end
