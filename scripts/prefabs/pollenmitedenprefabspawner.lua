@@ -1,4 +1,4 @@
-local SpawnDen(inst)
+local function SpawnDen(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	SpawnPrefab("pollenmiteden").Transform:SetPosition(x, 0, z)
 	
