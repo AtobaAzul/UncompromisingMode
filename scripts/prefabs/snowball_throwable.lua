@@ -28,10 +28,10 @@ local function OnHitSnow(inst, attacker, target)
 				if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
 					v.components.sleeper:WakeUp()
 				end
-
-				if v.sg ~= nil and not v.sg:HasStateTag("frozen") and not v:HasTag("abigail") and not v:HasTag("companion") and not v:HasTag("player") then
+										-- For SnowMong Vomit
+				if v.sg ~= nil and not inst:HasTag("canthit") and not v.sg:HasStateTag("frozen") and not v:HasTag("abigail") and not v:HasTag("companion") and not v:HasTag("player") then
 					v:PushEvent("attacked", { attacker = attacker, damage = 0} )
-				elseif v.sg ~= nil then
+				elseif v.sg ~= nil and not inst:HasTag("canthit") then
 					v:PushEvent("attacked", { attacker = nil, damage = 0} )
 				end
 				

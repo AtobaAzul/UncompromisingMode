@@ -218,11 +218,20 @@ local states =
 			inst.Physics:Stop()
 			inst.components.combat:StartAttack()
 			inst.AnimState:PlayAnimation("action")
+			--inst:DoSnowballBelch(inst)   --Add to special state later
+
 		end,
 
 		timeline =
 		{
-			TimeEvent(4 * FRAMES, function(inst) inst.components.combat:DoAttack() end),
+			TimeEvent(4 * FRAMES, function(inst) 
+			if math.random() > 0.3 then
+			inst.components.combat:DoAttack()
+			else
+			inst.AnimState:PlayAnimation("hit")
+			inst:DoSnowballBelch(inst)
+			end
+			end),
 			-- TODO: Put in a custom sound for the GIANT GRUB attack later.
 			TimeEvent(2 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Grub/attack") end),
 		},
@@ -239,14 +248,14 @@ local states =
 		tags = {"busy", "hit"},
 
 		onenter = function(inst)
-			inst.AnimState:PlayAnimation("hit")
+			--inst.AnimState:PlayAnimation("hit")
             inst.SoundEmitter:PlaySound("UCSounds/Grub/hit")
-			inst.Physics:Stop()
+			--inst.Physics:Stop()
 		end,
 
 		events =
 		{
-			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+			--EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
 		},
 	},
 
