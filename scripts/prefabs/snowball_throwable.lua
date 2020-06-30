@@ -36,7 +36,7 @@ local function OnHitSnow(inst, attacker, target)
 				end
 				
 				if v.components.freezable ~= nil then
-					v.components.freezable:AddColdness(0.34)
+					v.components.freezable:AddColdness(0.68)
 				end
 			end
 		end
