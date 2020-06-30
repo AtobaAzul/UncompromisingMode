@@ -170,6 +170,8 @@ TUNING.DSTU =
 	
 	--Weather Start Date
     WEATHERHAZARD_START_DATE = GetModConfigData("weather start date"),
+	
+    RNE_CHANCE = GetModConfigData("rne chance"),
 
 	HARDER_SHADOWS = GetModConfigData("harder_shadows"),
     MAX_DISTANCE_TO_SHADOWS = 1225, -- 35^2

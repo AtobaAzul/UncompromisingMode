@@ -717,7 +717,7 @@ local function CheckPlayers()
 	local player = playerlist[math.random(#playerlist)]
 	local numStructures = 0
 	
-	--if TheWorld.state.cycles > 7 and math.random() >= 0.8 or TheWorld.state.isfullmoon and math.random() >= 0.5 or TheWorld.state.isnewmoon and math.random() >= 0.75 then
+	if TheWorld.state.cycles > 7 and math.random() >= TUNING.DSTU.RNE_CHANCE or TheWorld.state.isfullmoon and math.random() >= 0.5 or TheWorld.state.isnewmoon and math.random() >= 0.75 then
 		
 		--for i, 1 in ipairs(playerlist) do  --try a base RNE
 		if player ~= nil then
@@ -767,7 +767,7 @@ local function CheckPlayers()
 			end
 		end
 	
-	--end
+	end
 end
 
 local function TryRandomNightEvent(self)      --Canis said 20% chance each night to have a RNE, could possibly include a scaling effect later
