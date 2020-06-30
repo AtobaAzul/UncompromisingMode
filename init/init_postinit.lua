@@ -89,7 +89,7 @@ local prefab_post = {
 	"woby",
 	"cave_network",
 	"glasscutter",
-	--"walrus_camp",
+	"walrus_camp",
 	"nightstick",
 	"critterlab",
 }

@@ -67,6 +67,7 @@ local function SetOccupied(inst, occupied)
         anim:SetOrientation(ANIM_ORIENTATION.Default)
         anim:SetLayer(LAYER_WORLD)
         anim:SetSortOrder(0)
+		anim:SetMultColour(1, 1, 1, 1)
 
         MakeObstaclePhysics(inst, 3)
     else
@@ -74,11 +75,18 @@ local function SetOccupied(inst, occupied)
 
         anim:SetBank("igloo_track")
         anim:SetBuild("igloo_track")
-        anim:PlayAnimation("idle")
+		
+		if TheWorld.state.iswinter then
+			anim:PlayAnimation("idleno")
+		else
+			anim:PlayAnimation("idle")
+		end
+		
         anim:SetOrientation(ANIM_ORIENTATION.OnGround)
         anim:SetLayer(LAYER_BACKGROUND)
-        anim:SetSortOrder(3)
-
+        anim:SetSortOrder(4)
+		anim:SetMultColour(1, 1, 1, 0)
+ 
         inst.Physics:ClearCollisionMask()
         inst.Physics:CollidesWith(COLLISION.WORLD)
     end
@@ -307,15 +315,6 @@ local function OnIsSummer(inst)
     end
 end
 
-local function OnIsWinter(inst, iswinter)
-    if iswinter and not inst.data.occupied then
-	inst:DoTaskInTime(5, function(inst)
-			SpawnPrefab("walrus_camp").Transform:SetPosition(inst.Transform:GetWorldPosition())
-			inst:Remove()
-		end)
-    end
-end
-
 local function OnSave(inst, data)
 
     --print("OnSave", inst, GetTime())
@@ -413,6 +412,7 @@ local function create()
 
     --inst:AddTag("tent")
     inst:AddTag("antlion_sinkhole_blocker")
+    inst:AddTag("summercamp")
 
     inst.entity:SetPristine()
 
@@ -443,11 +443,6 @@ local function create()
 
     inst:WatchWorldState("issummer", OnIsSummer)
 	
-	inst:WatchWorldState("iswinter", OnIsWinter)
-    if TheWorld.state.iswinter then
-        OnIsWinter(inst, true)
-    end
-
     return inst
 end
 
