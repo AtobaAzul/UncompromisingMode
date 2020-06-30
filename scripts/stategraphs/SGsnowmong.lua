@@ -230,6 +230,7 @@ local states =
 			else
 			inst.AnimState:PlayAnimation("hit")
 			inst:DoSnowballBelch(inst)
+			inst.SoundEmitter:PlaySound("UCSounds/Grub/emerge")
 			end
 			end),
 			-- TODO: Put in a custom sound for the GIANT GRUB attack later.

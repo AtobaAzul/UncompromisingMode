@@ -111,24 +111,23 @@ local function SnowballBelch(inst, target)
     local x, y, z = inst.Transform:GetWorldPosition()
     local projectile = SpawnPrefab("snowball_throwable")
     projectile.Transform:SetPosition(x, y, z)
-
-    --V2C: scale the launch speed based on distance
-    --     because 15 does not reach our max range.
     local a, b, c = target.Transform:GetWorldPosition()
-	--local targetpos = target.Transform:GetWorldPosition()
+	local targetpos = target:GetPosition()
+	targetpos.x = targetpos.x + math.random(-3,3)
+	targetpos.z = targetpos.z + math.random(-3,3)
     local dx = a - x
     local dz = c - z
     local rangesq = dx * dx + dz * dz
     local maxrange = 15
-    local bigNum = 10 -- 13 + (math.random()*4)
+    local bigNum = 10
     local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
 	projectile:AddTag("canthit")
 	--projectile.components.wateryprotection.addwetness = TUNING.WATERBALLOON_ADD_WETNESS/2
     projectile.components.complexprojectile:SetHorizontalSpeed(speed+math.random(4,9))
-    projectile.components.complexprojectile:Launch(target:GetPosition(), inst, inst)
+    projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 end
 local function DoSnowballBelch(inst)
-local maxsnow =  math.floor(10+math.random(3,4))
+local maxsnow =  math.floor(math.random(8,12))
 for k = 1, maxsnow do
    if inst.components.combat.target ~= nil then
    local target = inst.components.combat.target
