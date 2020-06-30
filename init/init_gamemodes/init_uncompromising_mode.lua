@@ -31,6 +31,7 @@ local require = GLOBAL.require
 	modimport("init/init_descriptions/wormwood")
 	modimport("init/init_descriptions/warly")
 	modimport("init/init_descriptions/wurt")
+	modimport("init/init_descriptions/walter")
 	
 --	[ 		Number Tuning and PostInits		]	--
 

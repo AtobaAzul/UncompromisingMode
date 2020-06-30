@@ -86,6 +86,7 @@ Assets = {
 	Asset("ANIM", "anim/walrus_house_summer.zip"),
 	Asset("ANIM", "anim/cookiespikes.zip"),
 	Asset("ANIM", "anim/gnat_cocoon.zip"),
+	Asset("ANIM", "anim/slingshotammo_firecracker.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),
@@ -128,6 +129,9 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/bugzapper.xml"),
 	Asset("IMAGE", "images/inventoryimages/sunglasses.tex"),
 	Asset("ATLAS", "images/inventoryimages/sunglasses.xml"),
+	Asset("IMAGE", "images/inventoryimages/slingshotammo_firecrackers.tex"),
+	Asset("ATLAS", "images/inventoryimages/slingshotammo_firecrackers.xml"),
+	
 	Asset("ANIM", "anim/gatorsnake.zip"),
 	Asset("ANIM", "anim/swilson.zip"),
 

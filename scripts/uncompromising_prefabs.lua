@@ -90,4 +90,5 @@ return {
 	"antlion_sinkhole_boat",
 	"riceplantspawner",
 	"critterlab_real",
+	"slingshotammo_firecrackers",
 }
