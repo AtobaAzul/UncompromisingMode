@@ -115,7 +115,9 @@ end
 
 local function OnPreLoad(inst, data)
 	if data.respawntimeremaining ~= nil then
-        inst.respawntime = data.respawntimeremaining
+		inst._woby_spawntask:Cancel()
+		inst._woby_spawntask = nil
+        inst.respawntime = data.respawntimeremaining + GetTime()
 		inst._woby_spawntask = inst:DoTaskInTime(inst.respawntime, function(i) i._woby_spawntask = nil SpawnWoby(i) end)
     else
 		inst._woby_spawntask = inst:DoTaskInTime(0, function(i) i._woby_spawntask = nil SpawnWoby(i) end)
@@ -145,15 +147,6 @@ local function OnLoad(inst, data)
 	end
 end
 
-local function OnPreLoad(inst, data)
-	if data.respawntimeremaining ~= nil then
-		inst._woby_spawntask:Cancel()
-		inst._woby_spawntask = nil
-        inst.respawntime = data.respawntimeremaining + GetTime()
-		inst._woby_spawntask = inst:DoTaskInTime(inst.respawntime, function(i) i._woby_spawntask = nil SpawnWoby(i) end)
-    end
-end
-
 local function printout(inst)
 	print(inst.respawntime)
 	inst:DoTaskInTime(5, printout)
@@ -165,11 +158,11 @@ env.AddPrefabPostInit("walter", function(inst)
 	end
 
 
-	inst.OnSave = OnSave
-	inst.OnPreLoad = OnPreLoad
-	inst.OnLoad = OnLoad
+	--inst.OnSave = OnSave
+	--inst.OnPreLoad = OnPreLoad
+	--inst.OnLoad = OnLoad
 	
-	inst._woby_onremove = function(woby) OnWobyRemoved(inst, 480) end
+	inst._woby_onremove = function(woby) OnWobyRemoved(inst, 240) end
 	
 	--print(inst.respawntime)
 	--local spawntime = inst.respawntime
