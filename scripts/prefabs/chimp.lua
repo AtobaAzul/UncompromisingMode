@@ -411,7 +411,7 @@ local function fn()
 
     --inst:WatchWorldState("nightmarephase", TestNightmarePhase)
     --inst:ListenForEvent("changearea", TestNightmareArea)
-	inst:WatchWorldState("isday", function(inst)
+	--[[inst:WatchWorldState("isday", function(inst)
 	inst.components.inventory:DropEverything(true)
 	local x, y, z = inst.Transform:GetWorldPosition()
     local fx = SpawnPrefab("statue_transition_2")
@@ -425,7 +425,7 @@ local function fn()
         fx.Transform:SetScale(1.2,1.2,1.2)
     end
 	inst:Remove()
-	end)
+	end)]]
     MakeHauntablePanic(inst)
     AddHauntableCustomReaction(inst, OnCustomHaunt, true, false, true)
 
@@ -434,7 +434,9 @@ local function fn()
 
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
-
+	
+	inst.persists = false
+	
     return inst
 end
 

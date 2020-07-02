@@ -60,6 +60,21 @@ local fogtargets = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"player"})
 end
 
 ----------------------------------------------------
+--RNE despawning during day time effect
+----------------------------------------------------
+
+local function DayBreak(mob)
+	local x, y, z = mob.Transform:GetWorldPosition()
+	local despawnfx = SpawnPrefab("shadow_despawn")
+	despawnfx.Transform:SetPosition(x, y, z)
+	if mob.components.inventory ~= nil then
+		mob.components.inventory:DropEverything(true)
+	end
+	mob:Remove()
+	
+end
+
+----------------------------------------------------
 --RNE list below
 ----------------------------------------------------
 local function find_leif_spawn_target(item)
@@ -152,12 +167,16 @@ local function SpawnMonkeysFunction(player)
 	if math.random()>0.5 then
 		if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 			monkey.Transform:SetPosition(x1, y, z1)
+			monkey:WatchWorldState("isday", DayBreak)
+			monkey.persists = false
 		else
 			SpawnMonkeysFunction(player)
 		end
 	else
 		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
 			monkey.Transform:SetPosition(x2, y, z2)
+			monkey:WatchWorldState("isday", DayBreak)
+			monkey.persists = false
 		else
 			SpawnMonkeysFunction(player)
 		end
@@ -207,7 +226,8 @@ local function SpawnWerePigsFunction(player)
 			if pig.components.combat ~= nil then
 			pig.components.combat:SuggestTarget(player)
 			end
-			pig:ListenForEvent("isday",function(pig) pig:Remove() end) --Should Disappear during day, doesn't seem to work though...
+			pig:WatchWorldState("isday", DayBreak)
+			pig.persists = false
 		else
 			SpawnWerePigsFunction(player)
 		end
@@ -230,7 +250,8 @@ local function SpawnWerePigsFunction(player)
 			if pig.components.combat ~= nil then
 			pig.components.combat:SuggestTarget(player)
 			end
-			pig:ListenForEvent("isday",function(pig) pig:Remove() end)
+			pig:WatchWorldState("isday", DayBreak)
+			pig.persists = false
 		else
 			SpawnWerePigsFunction(player)
 		end
@@ -264,6 +285,8 @@ local function FireHungryGhostAttack(player)
 				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
 					local ghost = SpawnPrefab("rneghost")
 					ghost.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
+					ghost:WatchWorldState("isday", DayBreak)
+					ghost.persists = false
 				end)
 			end
 	end)
@@ -478,12 +501,18 @@ local function ChessPiece(player)
 			if chesscheck >= 0.66 then
 				local piece = SpawnPrefab("shadow_bishop")
 				piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
+				piece:WatchWorldState("isday", DayBreak)
+				piece.persists = false
 			elseif chesscheck >= 0.33 and chesscheck < 0.66 then
 				local piece = SpawnPrefab("shadow_rook")
 				piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
+				piece:WatchWorldState("isday", DayBreak)
+				piece.persists = false
 			else
 				local piece = SpawnPrefab("shadow_knight")
 				piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
+				piece:WatchWorldState("isday", DayBreak)
+				piece.persists = false
 			end
 		end)
 	end
