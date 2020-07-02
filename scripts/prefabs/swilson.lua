@@ -158,9 +158,9 @@ local shadow = inst.entity:AddDynamicShadow()
     if fx ~= nil then
         fx.Transform:SetPosition(x, y, z)
         fx.Transform:SetScale(1.2,1.2,1.2)
-    end]]
+    end
 	inst:Remove()
-	end)
+	end)]]
     return inst
 end
 
