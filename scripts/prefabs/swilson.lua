@@ -147,7 +147,7 @@ local shadow = inst.entity:AddDynamicShadow()
     inst:SetBrain(brain) 
 	inst.rush = false
 	inst:DoTaskInTime(7,Rush)
-	inst:WatchWorldState("isday", function(inst)
+	--[[inst:WatchWorldState("isday", function(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
     local fx = SpawnPrefab("statue_transition_2")
     if fx ~= nil then
@@ -158,7 +158,7 @@ local shadow = inst.entity:AddDynamicShadow()
     if fx ~= nil then
         fx.Transform:SetPosition(x, y, z)
         fx.Transform:SetScale(1.2,1.2,1.2)
-    end
+    end]]
 	inst:Remove()
 	end)
     return inst

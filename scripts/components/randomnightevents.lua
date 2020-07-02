@@ -129,7 +129,9 @@ local function SpawnShadowCharsFunction(player)
 	
 	local shadow = SpawnPrefab("swilson")
 	if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
-			shadow.Transform:SetPosition(x1, y, z1)
+		shadow.Transform:SetPosition(x1, y, z1)
+		shadow:WatchWorldState("isday", DayBreak)
+		shadow.persists = false
 	end
 
 end
