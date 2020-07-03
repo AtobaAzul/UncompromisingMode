@@ -105,6 +105,7 @@ local stategraph_post = {
 	"frog",
 	"walrus",
 	"wobysmall",
+	"pigbunny",
 	--"shadowcreature",
 }
 
