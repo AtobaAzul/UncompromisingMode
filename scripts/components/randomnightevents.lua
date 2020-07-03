@@ -126,6 +126,7 @@ for k = 1, (days_survived <= 30 and 1) or math.random(days_survived <= 80 and 2 
                             --assert(GetBuild(target).leif ~= nil)
 						target:DoTaskInTime(leiftime, spawn_leif)
 					else
+					self:TryRandomNightEvent()
 					--DoWildRNE(player)
 					end
 	end
@@ -450,8 +451,81 @@ local function SpawnThunderFar(player)
 end
 
 ---------------------------------------------------------------
-----------------------------THUNDER----------------------------
+-----------------------------OCEAN-----------------------------
 ---------------------------------------------------------------
+local SQUID_MAX_NUMBERS = {
+    ["new"] = 4,
+    ["quarter"] = 3,
+    ["half"] = 3,
+    ["threequarter"] = 2,
+    ["full"] = 1,
+}
+
+local function SpawnSquidFunction(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	local xoff = x + math.random(-12, 12)
+	local zoff = z + math.random(-12, 12)
+	
+	local squid = SpawnPrefab("squid")
+	local splash = SpawnPrefab("splash_green")
+	
+	if not TheWorld.Map:IsPassableAtPoint(xoff, 0, zoff) then
+		squid.Transform:SetPosition(xoff, y, zoff)
+		splash.Transform:SetPosition(xoff, y, zoff)
+		squid:PushEvent("spawn")
+		squid.components.combat:SetTarget(player)
+		--squid:PushEvent("attacked", {attacker = player, damage = 0, weapon = nil})
+	else
+		SpawnSquidFunction(player)
+	end
+end
+
+local function SpawnSquids(player)
+	--print("Spawnsquids")
+	local squidtime = 10 * math.random() * 2
+	MultiFogAuto(player,squidtime)
+	player:DoTaskInTime(squidtime, function()
+		local x, y, z = player.Transform:GetWorldPosition()
+		local day = TheWorld.state.cycles
+		local num_squids = math.random(2,3)
+		for i = 1, num_squids do
+			player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
+				SpawnSquidFunction(player)
+			end)
+		end
+	end)
+end
+
+local function SpawnGnarwailFunction(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	local xoff = x + math.random(-12, 12)
+	local zoff = z + math.random(-12, 12)
+	
+	local gnarwail = SpawnPrefab("gnarwail")
+	local splash = SpawnPrefab("splash_green")
+	
+	if not TheWorld.Map:IsPassableAtPoint(xoff, 0, zoff) then
+		gnarwail.Transform:SetPosition(xoff, y, zoff)
+		splash.Transform:SetPosition(xoff, y, zoff)
+		gnarwail.sg:GoToState("emerge")
+		gnarwail.components.combat:SetTarget(player)
+		gnarwail:DoTaskInTime(0, function(gnarwail) DayBreak(gnarwail) end)
+		gnarwail:PushEvent("attacked", {attacker = player, damage = 0, weapon = nil})
+		
+		--shark.sg:GoToState("eat_pre")
+	else
+		SpawnGnarwailFunction(player)
+	end
+end
+
+local function SpawnGnarwail(player)
+	--print("Spawnsquids")
+	local sharktime = 10 * math.random() * 2
+	MultiFogAuto(player,sharktime)
+	player:DoTaskInTime(sharktime, function()
+		SpawnGnarwailFunction(player)
+	end)
+end
 
 local function SpawnLightFlowersNFernsFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
@@ -575,6 +649,16 @@ local function AddSpringEvent(name, weight)
     self.totalrandomspringweight = self.totalrandomspringweight + weight
 end
 
+local function AddOceanEvent(name, weight)
+    if not self.oceanevents then
+        self.oceanevents = {}
+        self.totalrandomoceanweight = 0
+    end
+
+    table.insert(self.oceanevents, { name = name, weight = weight })
+    self.totalrandomoceanweight = self.totalrandomoceanweight + weight
+end
+
 local function AddFullMoonEvent(name, weight)
     if not self.fullmoonevents then
         self.fullmoonevents = {}
@@ -623,6 +707,9 @@ AddFullMoonEvent(MoonTear,1)
 AddFullMoonEvent(SpawnWerePigs,1)
 --New Moon
 AddNewMoonEvent(ChessPiece,1)
+--Ocean
+AddOceanEvent(SpawnSquids,1)
+--AddOceanEvent(SpawnGnarwail,0.5)
 
 ------------------------
 --Inclusion and Tuning
@@ -703,6 +790,20 @@ local function DoWildRNE(player)
 	end
 end
 
+local function DoOceanRNE(player)
+	if TheWorld.state.isnight then
+		if self.totalrandomoceanweight and self.totalrandomoceanweight > 0 and self.oceanevents then
+			local rnd = math.random()*self.totalrandomoceanweight
+			for k,v in pairs(self.oceanevents) do
+				rnd = rnd - v.weight
+				if rnd <= 0 then
+				v.name(player)
+				return
+				end
+			end
+		end
+	end
+end
 
 local function DoFullMoonRNE(player)
 	if TheWorld.state.isnight then
@@ -749,9 +850,9 @@ local function CheckPlayers()
 
 	local playerlist = {}
 	for _, v in ipairs(_activeplayers) do
-		if IsEligible(v) then
+		--if IsEligible(v) then
 			table.insert(playerlist, v)
-		end
+		--end
 	end
 	
 		
@@ -770,10 +871,34 @@ local function CheckPlayers()
 			local x,y,z = player.Transform:GetWorldPosition()--local x,y,z = v.Transform:GetWorldPosition()
 			local ents = TheSim:FindEntities(x,y,z, STRUCTURE_DIST, {"structure"})
 			numStructures = #ents
-			if numStructures >= 4 then
-					--local m,n,o = player.Transform:GetWorldPosition()--local m,n,o = v.Transform:GetWorldPosition()
-					--local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
-					--rnepl = #rnep
+			
+			if not IsEligible(player) then
+				DoOceanRNE(player)
+			elseif IsEligible(player) then
+				if numStructures >= 4 then
+						--local m,n,o = player.Transform:GetWorldPosition()--local m,n,o = v.Transform:GetWorldPosition()
+						--local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
+						--rnepl = #rnep
+								--if rnepl < 1 then
+									if TheWorld.state.isfullmoon then
+										print("fullmoon")
+										DoFullMoonRNE(player)--DoFullMoonRNE(v)
+									elseif TheWorld.state.isnewmoon then
+										print("newmoon")
+										DoNewMoonRNE(player)--DoNewMoonRNE(v)
+									else
+										DoBaseRNE(player)--DoBaseRNE(v)
+									end
+									print("found base")
+									--player:AddTag("rnetarget")--v:AddTag("rnetarget")
+									--player:DoTaskInTime(60,player:RemoveTag("rnetarget"))--v:DoTaskInTime(60,inst:RemoveTag("rnetarget"))
+								--end
+				else
+					--for i, 1 in ipairs(playerlist) do --noone was home, so we'll do RNEs at every player instead
+						--local rnepl = 0
+						--local m,n,o = player.Transform:GetWorldPosition()--local m,n,o = v.Transform:GetWorldPosition()
+						--local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
+						--rnepl = #rnep
 							--if rnepl < 1 then
 								if TheWorld.state.isfullmoon then
 									print("fullmoon")
@@ -782,33 +907,16 @@ local function CheckPlayers()
 									print("newmoon")
 									DoNewMoonRNE(player)--DoNewMoonRNE(v)
 								else
-									DoBaseRNE(player)--DoBaseRNE(v)
+									DoWildRNE(player)--DoWildRNE(v)
 								end
-								print("found base")
 								--player:AddTag("rnetarget")--v:AddTag("rnetarget")
-								--player:DoTaskInTime(60,player:RemoveTag("rnetarget"))--v:DoTaskInTime(60,inst:RemoveTag("rnetarget"))
+								--player:DoTaskInTime(60,player:RemoveTag("rnetarget"))--v:DoTaskInTime(60,v:RemoveTag("rnetarget"))
 							--end
+						print("no find base")
+					--end
+				end
 			else
-				--for i, 1 in ipairs(playerlist) do --noone was home, so we'll do RNEs at every player instead
-					--local rnepl = 0
-					--local m,n,o = player.Transform:GetWorldPosition()--local m,n,o = v.Transform:GetWorldPosition()
-					--local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
-					--rnepl = #rnep
-						--if rnepl < 1 then
-							if TheWorld.state.isfullmoon then
-								print("fullmoon")
-								DoFullMoonRNE(player)--DoFullMoonRNE(v)
-							elseif TheWorld.state.isnewmoon then
-								print("newmoon")
-								DoNewMoonRNE(player)--DoNewMoonRNE(v)
-							else
-								DoWildRNE(player)--DoWildRNE(v)
-							end
-							--player:AddTag("rnetarget")--v:AddTag("rnetarget")
-							--player:DoTaskInTime(60,player:RemoveTag("rnetarget"))--v:DoTaskInTime(60,v:RemoveTag("rnetarget"))
-						--end
-					print("no find base")
-				--end
+				return
 			end
 		end
 	
