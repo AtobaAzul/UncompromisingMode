@@ -710,7 +710,7 @@ AddNewMoonEvent(ChessPiece,1)
 --Ocean
 AddOceanEvent(SpawnSquids,1)
 AddOceanEvent(SpawnBats,.5)
-AddOceanEvent(FireHungryGhostAttack,.2)
+--AddOceanEvent(FireHungryGhostAttack,.2)
 AddOceanEvent(SpawnSkitts,.3)
 --AddOceanEvent(SpawnGnarwail,0.5)
 
