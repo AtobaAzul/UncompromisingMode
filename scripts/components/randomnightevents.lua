@@ -709,6 +709,9 @@ AddFullMoonEvent(SpawnWerePigs,1)
 AddNewMoonEvent(ChessPiece,1)
 --Ocean
 AddOceanEvent(SpawnSquids,1)
+AddOceanEvent(SpawnBats,.5)
+AddOceanEvent(FireHungryGhostAttack,.2)
+AddOceanEvent(SpawnSkitts,.3)
 --AddOceanEvent(SpawnGnarwail,0.5)
 
 ------------------------
@@ -791,7 +794,18 @@ local function DoWildRNE(player)
 end
 
 local function DoOceanRNE(player)
-	if TheWorld.state.isnight then
+	if math.random() >= .5 and TheWorld.state.isspring and TheWorld.state.isnight then
+		if self.totalrandomspringweight and self.totalrandomspringweight > 0 and self.springevents then
+			local rnd = math.random()*self.totalrandomspringweight
+			for k,v in pairs(self.springevents) do
+				rnd = rnd - v.weight
+				if rnd <= 0 then
+				v.name(player)
+				return
+				end
+			end
+		end
+	elseif TheWorld.state.isnight then
 		if self.totalrandomoceanweight and self.totalrandomoceanweight > 0 and self.oceanevents then
 			local rnd = math.random()*self.totalrandomoceanweight
 			for k,v in pairs(self.oceanevents) do
