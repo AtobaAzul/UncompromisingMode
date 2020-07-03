@@ -64,14 +64,25 @@ end
 ----------------------------------------------------
 
 local function DayBreak(mob)
+	
+	local smoke = SpawnPrefab("thurible_smoke")
+	if smoke ~= nil then
+		smoke.entity:SetParent(mob.entity)
+	end
+	
+	mob.persists = false
+	
+	mob:WatchWorldState("isday", function() 
 	local x, y, z = mob.Transform:GetWorldPosition()
 	local despawnfx = SpawnPrefab("shadow_despawn")
 	despawnfx.Transform:SetPosition(x, y, z)
+	
 	if mob.components.inventory ~= nil then
 		mob.components.inventory:DropEverything(true)
 	end
-	mob:Remove()
 	
+	mob:Remove()
+	end)
 end
 
 ----------------------------------------------------
@@ -130,8 +141,7 @@ local function SpawnShadowCharsFunction(player)
 	local shadow = SpawnPrefab("swilson")
 	if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 		shadow.Transform:SetPosition(x1, y, z1)
-		shadow:WatchWorldState("isday", DayBreak)
-		shadow.persists = false
+		shadow:DoTaskInTime(0, function(shadow) DayBreak(shadow) end)
 	end
 
 end
@@ -169,16 +179,14 @@ local function SpawnMonkeysFunction(player)
 	if math.random()>0.5 then
 		if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 			monkey.Transform:SetPosition(x1, y, z1)
-			monkey:WatchWorldState("isday", DayBreak)
-			monkey.persists = false
+			monkey:DoTaskInTime(0, function(monkey) DayBreak(monkey) end)
 		else
 			SpawnMonkeysFunction(player)
 		end
 	else
 		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
 			monkey.Transform:SetPosition(x2, y, z2)
-			monkey:WatchWorldState("isday", DayBreak)
-			monkey.persists = false
+			monkey:DoTaskInTime(0, function(monkey) DayBreak(monkey) end)
 		else
 			SpawnMonkeysFunction(player)
 		end
@@ -228,8 +236,7 @@ local function SpawnWerePigsFunction(player)
 			if pig.components.combat ~= nil then
 			pig.components.combat:SuggestTarget(player)
 			end
-			pig:WatchWorldState("isday", DayBreak)
-			pig.persists = false
+			pig:DoTaskInTime(0, function(pig) DayBreak(pig) end)
 		else
 			SpawnWerePigsFunction(player)
 		end
@@ -252,8 +259,7 @@ local function SpawnWerePigsFunction(player)
 			if pig.components.combat ~= nil then
 			pig.components.combat:SuggestTarget(player)
 			end
-			pig:WatchWorldState("isday", DayBreak)
-			pig.persists = false
+			pig:DoTaskInTime(0, function(pig) DayBreak(pig) end)
 		else
 			SpawnWerePigsFunction(player)
 		end
@@ -287,8 +293,7 @@ local function FireHungryGhostAttack(player)
 				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
 					local ghost = SpawnPrefab("rneghost")
 					ghost.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
-					ghost:WatchWorldState("isday", DayBreak)
-					ghost.persists = false
+					ghost:DoTaskInTime(0, function(ghost) DayBreak(ghost) end)
 				end)
 			end
 	end)
@@ -503,18 +508,15 @@ local function ChessPiece(player)
 			if chesscheck >= 0.66 then
 				local piece = SpawnPrefab("shadow_bishop")
 				piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
-				piece:WatchWorldState("isday", DayBreak)
-				piece.persists = false
+				piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
 			elseif chesscheck >= 0.33 and chesscheck < 0.66 then
 				local piece = SpawnPrefab("shadow_rook")
 				piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
-				piece:WatchWorldState("isday", DayBreak)
-				piece.persists = false
+				piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
 			else
 				local piece = SpawnPrefab("shadow_knight")
 				piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
-				piece:WatchWorldState("isday", DayBreak)
-				piece.persists = false
+				piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
 			end
 		end)
 	end
@@ -600,7 +602,7 @@ end
 AddWildEvent(SpawnBats,0.5)
 AddWildEvent(SpawnLightFlowersNFerns,0.3)
 AddWildEvent(SpawnSkitts,.5)
-AddWildEvent(SpawnMonkeys,.2)
+AddWildEvent(SpawnMonkeys,0.2)
 AddWildEvent(LeifAttack,.3)
 --Base
 AddBaseEvent(SpawnBats,.3)
@@ -608,6 +610,7 @@ AddBaseEvent(SpawnFissures,.3)
 AddBaseEvent(SpawnSkitts,.5)
 AddBaseEvent(FireHungryGhostAttack,.5)
 AddBaseEvent(SpawnShadowChars,0.2)
+AddBaseEvent(SpawnMonkeys,0.2)
 --Cave
 AddCaveEvent(SpawnBats,1)
 AddCaveEvent(SpawnFissures,1)
@@ -627,7 +630,18 @@ AddNewMoonEvent(ChessPiece,1)
 
 local function DoBaseRNE(player)
 print("done")
-	if math.random() >= .5 and TheWorld.state.isspring and TheWorld.state.isnight then
+	if math.random() >= .5 and TheWorld.state.iswinter and TheWorld.state.isnight then
+		if self.totalrandomwinterweight and self.totalrandomwinterweight > 0 and self.winterevents then
+			local rnd = math.random()*self.totalrandomwinterweight
+			for k,v in pairs(self.winterevents) do
+				rnd = rnd - v.weight
+				if rnd <= 0 then
+				v.name(player)
+				return
+				end
+			end
+		end
+	elseif math.random() >= .5 and TheWorld.state.isspring and TheWorld.state.isnight then
 		if self.totalrandomspringweight and self.totalrandomspringweight > 0 and self.springevents then
 			local rnd = math.random()*self.totalrandomspringweight
 			for k,v in pairs(self.springevents) do
