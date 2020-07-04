@@ -65,7 +65,7 @@ end
 
 local function DayBreak(mob)
 	
-	if not mob:HasTag("shadow") and not mob:HasTag("charliephonograph") and not mob:HasTag("shadowchesspiece") then
+	if not mob:HasTag("shadow") and not mob:HasTag("shadowchesspiece") then
 		local smoke = SpawnPrefab("thurible_smoke")
 		if smoke ~= nil then
 			smoke.entity:SetParent(mob.entity)
@@ -635,7 +635,7 @@ local function SpawnPhonographFunction(player)
 end	
 											
 local function SpawnPhonograph(player)
-	player:DoTaskInTime(5+math.random(5,10), function()
+	player:DoTaskInTime(10, function()
 		SpawnPhonographFunction(player)
 	end)
 end

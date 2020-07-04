@@ -176,6 +176,8 @@ local function MakePhonographFn(track)
 			
 			inst.track = track + 20
 			
+			inst:DoTaskInTime(0, function(inst) SpawnPrefab("shadow_despawn").Transform:SetPosition(inst.Transform:GetWorldPosition()) end)
+				
 			inst:AddComponent("playerprox")
 			inst.components.playerprox:SetDist(600, 615)
 			inst.components.playerprox:SetOnPlayerNear(function() inst.components.machine:TurnOn() end)
