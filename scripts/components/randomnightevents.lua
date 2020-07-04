@@ -627,7 +627,7 @@ local function SpawnPhonographFunction(player)
 	local z2 = z + math.random(-15, 15)
 	
 	if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
-		local phonograph = SpawnPrefab("charliephonograph_0")
+		local phonograph = SpawnPrefab("charliephonograph")
 		phonograph.Transform:SetPosition(x2, y, z2)
 	else
 		SpawnPhonographFunction(player)
@@ -637,6 +637,53 @@ end
 local function SpawnPhonograph(player)
 	player:DoTaskInTime(10, function()
 		SpawnPhonographFunction(player)
+	end)
+end
+
+local function SpawnWalrusHuntFunction(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	local x2 = x + math.random(-40, 40)
+	local z2 = z + math.random(-40, 40)
+	if not TheWorld.state.isnight then
+		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) and #TheSim:FindEntities(x2, y, z2, 20, {"player"}) > 0 then
+			local leader = SpawnPrefab("walrus")
+			leader.Transform:SetPosition(x2, y, z2)
+			leader:DoTaskInTime(0, function(leader) DayBreak(leader) end)
+			if leader.components.sleeper ~= nil then
+				leader:RemoveComponent("sleeper")
+			end
+			leader.components.combat:SetTarget(leader)
+			
+			for i = 1, 2 do
+				if TheWorld.state.issummer then
+					local companion = SpawnPrefab("firehound")
+					companion.Transform:SetPosition(x2 + math.random(-1,1), y, z2 + math.random(-1,1))
+					if not companion.components.follower then
+						companion:AddComponent("follower")
+					end
+					companion.components.follower:SetLeader(leader)
+					companion:DoTaskInTime(0, function(companion) DayBreak(companion) end)
+				elseif TheWorld.state.iswinter then
+					local companion = SpawnPrefab("icehound")
+					companion.Transform:SetPosition(x2 + math.random(-1,1), y, z2 + math.random(-1,1))
+					if not companion.components.follower then
+						companion:AddComponent("follower")
+					end
+					companion.components.follower:SetLeader(leader)
+					companion:DoTaskInTime(0, function(companion) DayBreak(companion) end)
+				end
+			end
+		else
+			player:DoTaskInTime(1, function(player) SpawnWalrusHuntFunction(player) end)
+		end
+	end
+end	
+											
+local function SpawnWalrusHunt(player)
+	player:DoTaskInTime(5+math.random(5,10), function()
+		player:DoTaskInTime(0.2 * math.random(4) * 0.3, function()
+			SpawnWalrusHuntFunction(player)
+		end)
 	end)
 end
 
@@ -693,6 +740,16 @@ local function AddSpringEvent(name, weight)
     self.totalrandomspringweight = self.totalrandomspringweight + weight
 end
 
+local function AddSummerEvent(name, weight)
+    if not self.summerevents then
+        self.summerevents = {}
+        self.totalrandomsummerweight = 0
+    end
+
+    table.insert(self.summerevents, { name = name, weight = weight })
+    self.totalrandomsummerweight = self.totalrandomsummerweight + weight
+end
+
 local function AddOceanEvent(name, weight)
     if not self.oceanevents then
         self.oceanevents = {}
@@ -727,8 +784,8 @@ end
 --Inclusion and Tuning
 ------------------------
 --Wild
-AddWildEvent(SpawnBats,0.5)
-AddWildEvent(SpawnLightFlowersNFerns,0.3)
+AddWildEvent(SpawnBats,.5)
+AddWildEvent(SpawnLightFlowersNFerns,.3)
 AddWildEvent(SpawnSkitts,.5)
 AddWildEvent(SpawnMonkeys,.2)
 AddWildEvent(LeifAttack,.3)
@@ -738,28 +795,31 @@ AddBaseEvent(SpawnBats,.3)
 AddBaseEvent(SpawnFissures,.3)
 AddBaseEvent(SpawnSkitts,.5)
 AddBaseEvent(FireHungryGhostAttack,.5)
-AddBaseEvent(SpawnShadowChars,0.2)
-AddBaseEvent(SpawnMonkeys,0.1)
+AddBaseEvent(SpawnShadowChars,.2)
+AddBaseEvent(SpawnMonkeys,.1)
 AddBaseEvent(SpawnPhonograph,.1)
---Cave
+--
 AddCaveEvent(SpawnBats,1)
 AddCaveEvent(SpawnFissures,1)
 --Winter
-AddWinterEvent(SpawnKrampus,1)
+AddWinterEvent(SpawnKrampus,.5)
+AddWinterEvent(SpawnWalrusHunt,.5)
 --Spring
 AddSpringEvent(SpawnThunderFar,1)
+--Spring
+AddSummerEvent(SpawnWalrusHunt,1)
 --Full Moon
-AddFullMoonEvent(MoonTear,1)
-AddFullMoonEvent(SpawnWerePigs,1)
+AddFullMoonEvent(MoonTear,.5)
+AddFullMoonEvent(SpawnWerePigs,.5)
 --New Moon
-AddNewMoonEvent(ChessPiece,0.5)
-AddNewMoonEvent(SpawnPhonograph,0.2)
+AddNewMoonEvent(ChessPiece,.5)
+AddNewMoonEvent(SpawnPhonograph,.2)
 --Ocean
-AddOceanEvent(SpawnSquids,1)
+AddOceanEvent(SpawnSquids,.8)
 AddOceanEvent(SpawnBats,.5)
 --AddOceanEvent(FireHungryGhostAttack,.2)
 AddOceanEvent(SpawnSkitts,.3)
---AddOceanEvent(SpawnGnarwail,0.5)
+--AddOceanEvent(SpawnGnarwail,.5)
 
 ------------------------
 --Inclusion and Tuning
@@ -767,7 +827,7 @@ AddOceanEvent(SpawnSkitts,.3)
 
 local function DoBaseRNE(player)
 print("done")
-	if math.random() >= .5 and TheWorld.state.iswinter and TheWorld.state.isnight then
+	if math.random() >= .6 and TheWorld.state.iswinter and TheWorld.state.isnight then
 		if self.totalrandomwinterweight and self.totalrandomwinterweight > 0 and self.winterevents then
 			local rnd = math.random()*self.totalrandomwinterweight
 			for k,v in pairs(self.winterevents) do
@@ -778,10 +838,21 @@ print("done")
 				end
 			end
 		end
-	elseif math.random() >= .5 and TheWorld.state.isspring and TheWorld.state.isnight then
+	elseif math.random() >= .6 and TheWorld.state.isspring and TheWorld.state.isnight then
 		if self.totalrandomspringweight and self.totalrandomspringweight > 0 and self.springevents then
 			local rnd = math.random()*self.totalrandomspringweight
 			for k,v in pairs(self.springevents) do
+				rnd = rnd - v.weight
+				if rnd <= 0 then
+				v.name(player)
+				return
+				end
+			end
+		end
+	elseif math.random() >= .6 and TheWorld.state.issummer and TheWorld.state.isnight then
+		if self.totalrandomsummerweight and self.totalrandomsummerweight > 0 and self.summerevents then
+			local rnd = math.random()*self.totalrandomsummerweight
+			for k,v in pairs(self.summerevents) do
 				rnd = rnd - v.weight
 				if rnd <= 0 then
 				v.name(player)
@@ -804,7 +875,7 @@ print("done")
 end
 
 local function DoWildRNE(player)
-	if math.random() >= .5 and TheWorld.state.iswinter and TheWorld.state.isnight then
+	if math.random() >= .6 and TheWorld.state.iswinter and TheWorld.state.isnight then
 		if self.totalrandomwinterweight and self.totalrandomwinterweight > 0 and self.winterevents then
 			local rnd = math.random()*self.totalrandomwinterweight
 			for k,v in pairs(self.winterevents) do
@@ -815,10 +886,21 @@ local function DoWildRNE(player)
 				end
 			end
 		end
-	elseif math.random() >= .5 and TheWorld.state.isspring and TheWorld.state.isnight then
+	elseif math.random() >= .6 and TheWorld.state.isspring and TheWorld.state.isnight then
 		if self.totalrandomspringweight and self.totalrandomspringweight > 0 and self.springevents then
 			local rnd = math.random()*self.totalrandomspringweight
 			for k,v in pairs(self.springevents) do
+				rnd = rnd - v.weight
+				if rnd <= 0 then
+				v.name(player)
+				return
+				end
+			end
+		end
+	elseif math.random() >= .6 and TheWorld.state.issummer and TheWorld.state.isnight then
+		if self.totalrandomsummerweight and self.totalrandomsummerweight > 0 and self.summerevents then
+			local rnd = math.random()*self.totalrandomsummerweight
+			for k,v in pairs(self.summerevents) do
 				rnd = rnd - v.weight
 				if rnd <= 0 then
 				v.name(player)
@@ -841,7 +923,7 @@ local function DoWildRNE(player)
 end
 
 local function DoOceanRNE(player)
-	if math.random() >= .5 and TheWorld.state.isspring and TheWorld.state.isnight then
+	if math.random() >= .6 and TheWorld.state.isspring and TheWorld.state.isnight then
 		if self.totalrandomspringweight and self.totalrandomspringweight > 0 and self.springevents then
 			local rnd = math.random()*self.totalrandomspringweight
 			for k,v in pairs(self.springevents) do

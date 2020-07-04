@@ -38,6 +38,7 @@ local prefab_post = {
 	"penguin",
 	"ash",
 	"pigman",
+	"bunnyman",
 	"moose",
 	"walls",
 	"infestables",

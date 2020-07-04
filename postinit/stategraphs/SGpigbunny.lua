@@ -6,7 +6,10 @@ env.AddStategraphPostInit("pig", function(inst)
 local events =
 {	
     EventHandler("doattack", function(inst, data) 
-        if data.target:HasTag("pig") and not data.target:HasTag("werepig") then
+        if inst:HasTag("pigattacker") and data.target:HasTag("pig") and not data.target:HasTag("werepig") then
+            inst.sg:GoToState("refuse", data.target)
+            inst.components.combat:SetTarget(nil)
+		elseif inst:HasTag("bunnyattacker") and data.target:HasTag("manrabbit") then
             inst.sg:GoToState("refuse", data.target)
             inst.components.combat:SetTarget(nil)
 		else
@@ -15,11 +18,6 @@ local events =
     end),
     
 }
---[[
-local states = {
-
-    
-}]]
 
 for k, v in pairs(events) do
     assert(v:is_a(EventHandler), "Non-event added in mod events table!")
@@ -27,7 +25,7 @@ for k, v in pairs(events) do
 end
 
 end)
-
+--[[
 env.AddStategraphPostInit("bunnyman", function(inst)
 
 local events =
@@ -42,15 +40,10 @@ local events =
     end),
     
 }
---[[
-local states = {
-
-    
-}]]
 
 for k, v in pairs(events) do
     assert(v:is_a(EventHandler), "Non-event added in mod events table!")
     inst.events[v.name] = v
 end
 
-end)
+end)]]
