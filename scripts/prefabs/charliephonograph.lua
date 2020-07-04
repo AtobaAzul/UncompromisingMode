@@ -16,10 +16,22 @@ local function GetSpawnPoint(pt, radius, hunt)
     end
 end
 
+local function GetSpawnPointSuprise(pt, radius, hunt)
+    --print("Hunter:GetSpawnPoint", tostring(pt), radius)
+
+    local angle = hunt.direction
+    if angle then
+        local offset = Vector3(radius * math.cos( angle ) + math.random(1, 3), 0, -radius * math.sin( angle ) - math.random(1, 3))
+        local spawn_point = pt + offset
+        --print(string.format("Hunter:GetSpawnPoint RESULT %s, %2.2f", tostring(spawn_point), angle/DEGREES))
+        return spawn_point
+    end
+end
+
 local function SpawnDirt(pt,hunt)
 
     local spawn_pt = GetSpawnPoint(pt, TUNING.HUNT_SPAWN_DIST * 2, hunt)
-    local spawn_pt_suprise = GetSpawnPoint(pt, TUNING.HUNT_SPAWN_DIST / 5, hunt)
+    local spawn_pt_suprise = GetSpawnPointSuprise(pt, TUNING.HUNT_SPAWN_DIST / 5, hunt)
     if spawn_pt ~= nil then
         local spawned = SpawnPrefab("charliephonograph_"..hunt.track)
         if spawned ~= nil then
@@ -27,12 +39,13 @@ local function SpawnDirt(pt,hunt)
 		else
 			hunt.components.lootdropper:DropLoot()
 			
-			for i = 1, math.random(2,4) do
-				if math.random() >= 0.66 then
-					if math.random() >= 0.5 then
-						SpawnPrefab("crawlingnightmare").Transform:SetPosition(spawn_pt_suprise:Get())
+			for i = 1, math.random(2,3) do
+				if math.random() >= 0.5 then
+					local x, y, z = hunt.Transform:GetWorldPosition()
+					if math.random() >= 0.33 then
+						SpawnPrefab("crawlingnightmare").Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
 					else
-						SpawnPrefab("nightmarebeak").Transform:SetPosition(spawn_pt_suprise:Get())
+						SpawnPrefab("nightmarebeak").Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
 					end
 				else
 					--lucky break
@@ -135,6 +148,7 @@ local function MakePhonographFn(track)
 			
 			if track == 100 then
 				inst.AnimState:SetMultColour(1, 1, 1, 1)
+				inst:AddComponent("inspectable")
 			else
 				inst.AnimState:SetMultColour(0, 0, 0, 0.4)
 			end
