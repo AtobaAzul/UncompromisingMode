@@ -91,4 +91,5 @@ return {
 	"riceplantspawner",
 	"critterlab_real",
 	"slingshotammo_firecrackers",
+	"charliephonograph",
 }

@@ -65,9 +65,11 @@ end
 
 local function DayBreak(mob)
 	
-	local smoke = SpawnPrefab("thurible_smoke")
-	if smoke ~= nil then
-		smoke.entity:SetParent(mob.entity)
+	if not mob:HasTag("shadow") and not mob:HasTag("charliephonograph") and not mob:HasTag("shadowchesspiece") then
+		local smoke = SpawnPrefab("thurible_smoke")
+		if smoke ~= nil then
+			smoke.entity:SetParent(mob.entity)
+		end
 	end
 	
 	mob.persists = false
@@ -619,6 +621,25 @@ local function ChessPiece(player)
 	end
 end
 
+local function SpawnPhonographFunction(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	local x2 = x + math.random(-15, 15)
+	local z2 = z + math.random(-15, 15)
+	
+	if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+		local phonograph = SpawnPrefab("charliephonograph_0")
+		phonograph.Transform:SetPosition(x2, y, z2)
+	else
+		SpawnPhonographFunction(player)
+	end
+end	
+											
+local function SpawnPhonograph(player)
+	player:DoTaskInTime(5+math.random(5,10), function()
+		SpawnPhonographFunction(player)
+	end)
+end
+
 ---------------------------------------------------
 ---RNE list above
 ---------------------------------------------------
@@ -711,6 +732,7 @@ AddWildEvent(SpawnLightFlowersNFerns,0.3)
 AddWildEvent(SpawnSkitts,.5)
 AddWildEvent(SpawnMonkeys,.2)
 AddWildEvent(LeifAttack,.3)
+AddWildEvent(SpawnPhonograph,.2)
 --Base
 AddBaseEvent(SpawnBats,.3)
 AddBaseEvent(SpawnFissures,.3)
@@ -718,6 +740,7 @@ AddBaseEvent(SpawnSkitts,.5)
 AddBaseEvent(FireHungryGhostAttack,.5)
 AddBaseEvent(SpawnShadowChars,0.2)
 AddBaseEvent(SpawnMonkeys,0.2)
+AddBaseEvent(SpawnPhonograph,.2)
 --Cave
 AddCaveEvent(SpawnBats,1)
 AddCaveEvent(SpawnFissures,1)
@@ -729,7 +752,8 @@ AddSpringEvent(SpawnThunderFar,1)
 AddFullMoonEvent(MoonTear,1)
 AddFullMoonEvent(SpawnWerePigs,1)
 --New Moon
-AddNewMoonEvent(ChessPiece,1)
+AddNewMoonEvent(ChessPiece,0.5)
+AddNewMoonEvent(SpawnPhonograph,0.2)
 --Ocean
 AddOceanEvent(SpawnSquids,1)
 AddOceanEvent(SpawnBats,.5)
