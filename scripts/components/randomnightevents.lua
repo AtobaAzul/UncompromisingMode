@@ -111,24 +111,47 @@ local function spawn_leif(target)
     leif.sg:GoToState("spawn")
 end
 
+local function SpawnBirchNutters(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	player:DoTaskInTime(2 * math.random() * 0.3, function()
+				
+		local x1 = x + math.random(-10, 10)
+		local z1 = z + math.random(-10, 10)
+		local nutters = SpawnPrefab("birchnutdrake")
+		if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+			nutters.Transform:SetPosition(x1, y, z1)
+			nutters:DoTaskInTime(0, function(nutters) DayBreak(nutters) end)
+			nutters.components.combat:SetTarget(player)
+		else
+			SpawnBirchNutters(player)
+		end
+	end)
+end
+
 local function LeifAttack(player)
 --print("leifattack")
 local leiftime = 8 + math.random() * 3
 MultiFogAuto(player,leiftime)
+
 local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
-for k = 1, (days_survived <= 30 and 1) or math.random(days_survived <= 80 and 2 or 3) do
-                    local target = FindEntity(player, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, { "evergreens", "tree" }, { "leif", "stump", "burnt" })
-                    if target ~= nil then
-					print("targetfound")
-                        target.noleif = true
-						target.chopper = player
-                        target.leifscale = 1 --GetGrowthStages(target)[target.components.growable.stage].leifscale or 1 Getting size is muck
-                            --assert(GetBuild(target).leif ~= nil)
-						target:DoTaskInTime(leiftime, spawn_leif)
-					else
-					self:TryRandomNightEvent()
-					--DoWildRNE(player)
-					end
+    local target = FindEntity(player, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, { "evergreens", "tree" }, { "leif", "stump", "burnt" })
+    if target ~= nil then
+		for k = 1, (days_survived <= 30 and 1) or math.random(days_survived <= 80 and 2 or 3) do
+			print("targetfound")
+			target.noleif = true
+			target.chopper = player
+			target.leifscale = 1 --GetGrowthStages(target)[target.components.growable.stage].leifscale or 1 Getting size is muck
+				--assert(GetBuild(target).leif ~= nil)
+			target:DoTaskInTime(leiftime, spawn_leif)
+		end
+	else
+		player:DoTaskInTime(10 * math.random() + 3, function()
+			local num_nutters = math.random(3,5)
+			for i = 1, num_nutters do
+				SpawnBirchNutters(player)
+			end
+			print("leifattackfailed")
+		end)
 	end
 end
 
@@ -687,7 +710,7 @@ AddWildEvent(SpawnBats,0.5)
 AddWildEvent(SpawnLightFlowersNFerns,0.3)
 AddWildEvent(SpawnSkitts,.5)
 AddWildEvent(SpawnMonkeys,0.2)
-AddWildEvent(LeifAttack,.3)
+AddWildEvent(LeifAttack,11111.3)
 --Base
 AddBaseEvent(SpawnBats,.3)
 AddBaseEvent(SpawnFissures,.3)
@@ -940,10 +963,6 @@ end
 local function TryRandomNightEvent(self)      --Canis said 20% chance each night to have a RNE, could possibly include a scaling effect later
 	CheckPlayers()
 end
-
-
-
-
 --Keep these incase we need them later (probably)
 local function OnPlayerJoined(src,player)
     for i, v in ipairs(_activeplayers) do
@@ -971,6 +990,9 @@ local function OnPlayerLeft(src,player)
 end
 inst:ListenForEvent("ms_playerjoined", OnPlayerJoined)
 inst:ListenForEvent("ms_playerleft", OnPlayerLeft)
+
+inst:ListenForEvent("leiffailed", TryRandomNightEvent)
+
 self:WatchWorldState("isnight", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end) --RNE could happen any night
 --self:WatchWorldState("isnight", TryRandomNightEvent) --RNE could happen any night
 end)
