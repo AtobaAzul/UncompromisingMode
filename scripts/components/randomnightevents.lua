@@ -991,8 +991,6 @@ end
 inst:ListenForEvent("ms_playerjoined", OnPlayerJoined)
 inst:ListenForEvent("ms_playerleft", OnPlayerLeft)
 
-inst:ListenForEvent("leiffailed", TryRandomNightEvent)
-
 self:WatchWorldState("isnight", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end) --RNE could happen any night
 --self:WatchWorldState("isnight", TryRandomNightEvent) --RNE could happen any night
 end)
