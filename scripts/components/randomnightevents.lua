@@ -709,8 +709,8 @@ end
 AddWildEvent(SpawnBats,0.5)
 AddWildEvent(SpawnLightFlowersNFerns,0.3)
 AddWildEvent(SpawnSkitts,.5)
-AddWildEvent(SpawnMonkeys,0.2)
-AddWildEvent(LeifAttack,11111.3)
+AddWildEvent(SpawnMonkeys,.2)
+AddWildEvent(LeifAttack,.3)
 --Base
 AddBaseEvent(SpawnBats,.3)
 AddBaseEvent(SpawnFissures,.3)
