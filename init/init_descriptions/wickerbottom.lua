@@ -84,6 +84,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
+			
+	--Swampyness
+	DESCRIBE.RICEPLANT = "Is that oryza sativa?"
+	DESCRIBE.RICE = "It's a bit too tough without cooking."
+	DESCRIBE.RICE_COOKED = "I could eat it, but it would be better with something else."
+	DESCRIBE.SEAFOODPAELLA = "This should clear my nasal cavity so I can get back to reading."
 	ACTIONFAIL.READ =
         {
             GENERIC = "I cannot concentrate under these conditions!",

@@ -806,7 +806,7 @@ AddWinterEvent(SpawnKrampus,.5)
 AddWinterEvent(SpawnWalrusHunt,.5)
 --Spring
 AddSpringEvent(SpawnThunderFar,1)
---Spring
+--Summer
 AddSummerEvent(SpawnWalrusHunt,1)
 --Full Moon
 AddFullMoonEvent(MoonTear,.5)

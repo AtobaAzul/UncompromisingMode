@@ -79,6 +79,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "Don't be a sore loser! You had your chance!"
 	DESCRIBE.VAMPIREBAT = "Huh, you lived longer than expected."
+								
+	--Swampyness
+	DESCRIBE.RICEPLANT = "It's just a plant, no strings attached!"
+	DESCRIBE.RICE = "Unappetizing mortal food."
+	DESCRIBE.RICE_COOKED = "Still not the best."
+	DESCRIBE.SEAFOODPAELLA = "It may not sate my hunger, but it does sooth my nose."
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
