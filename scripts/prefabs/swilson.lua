@@ -121,7 +121,7 @@ local shadow = inst.entity:AddDynamicShadow()
     inst:AddComponent("combat")
     inst.components.combat.hiteffectsymbol = "torso"
     inst.components.combat:SetKeepTargetFunction(keeptargetfn)    
-    inst.components.combat:SetDefaultDamage(27.3)
+    inst.components.combat:SetDefaultDamage(37)
     inst.components.combat:SetAttackPeriod(1)
     inst.components.combat:SetRetargetFunction(1, NormalRetarget)
     inst.components.combat:SetHurtSound("dontstarve/sanity/creature1/death")
