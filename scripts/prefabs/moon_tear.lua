@@ -1,230 +1,284 @@
-require "regrowthutil"
+local easing = require("easing")
 
 local assets =
 {
-    Asset("ANIM", "anim/meteor.zip"),
-    Asset("ANIM", "anim/warning_shadow.zip"),
-    Asset("ANIM", "anim/meteor_shadow.zip"),
+    Asset("ANIM", "anim/moonrock_seed.zip"),
 }
 
-local prefabs =
-{
-    "meteorwarning",
-    "burntground",
-    "splash_ocean",
-    "ground_chunks_breaking",
-    "rock_moon",
-	"rock_moon_shell",
-    "rocks",
-    "flint",
-    "moonrocknugget",
-    "rock_flintless",
-    "rock_flintless_med",
-    "rock_flintless_low",
-    "rock1",
-}
-
-local assets =
-{
-    Asset("ANIM", "anim/meteor.zip"),
-    Asset("ANIM", "anim/warning_shadow.zip"),
-    Asset("ANIM", "anim/meteor_shadow.zip"),
-}
-
-local prefabs =
-{
-    "meteorwarning",
-    "burntground",
-    "splash_ocean",
-    "ground_chunks_breaking",
-    "rock_moon",
-	"rock_moon_shell",
-    "rocks",
-    "flint",
-    "moonrocknugget",
-    "rock_flintless",
-    "rock_flintless_med",
-    "rock_flintless_low",
-    "rock1",
-}
-
-local SMASHABLE_TAGS = { "_combat", "_inventoryitem", "NPC_workable" }
-local NON_SMASHABLE_TAGS = { "INLIMBO", "playerghost", "meteor_protection" }
-
-local DENSITY = 0.1 -- the approximate density of rock prefabs in the rocky biomes
-local FIVERADIUS = CalculateFiveRadius(DENSITY)
-local EXCLUDE_RADIUS = 3
-
-local function onexplode(inst)
-    inst.SoundEmitter:PlaySound("dontstarve/common/meteor_impact")
-
-    if inst.warnshadow ~= nil then
-        inst.warnshadow:Remove()
-        inst.warnshadow = nil
+local function updatelight(inst)
+    inst._light = inst._light < inst._targetlight and math.min(inst._targetlight, inst._light + .04) or math.max(inst._targetlight, inst._light - .02)
+    inst.AnimState:SetLightOverride(inst._light)
+    if inst._light == inst._targetlight then
+        inst._task:Cancel()
+        inst._task = nil
     end
+end
 
-    local shakeduration = .7 * inst.size
-    local shakespeed = .02 * inst.size
-    local shakescale = .5 * inst.size
-    local shakemaxdist = 40 * inst.size
-    ShakeAllCameras(CAMERASHAKE.FULL, shakeduration, shakespeed, shakescale, inst, shakemaxdist)
-
-    local x, y, z = inst.Transform:GetWorldPosition()
-
-    if not inst:IsOnValidGround() then
-        local splash = SpawnPrefab("splash_ocean")
-        if splash ~= nil then
-            splash.Transform:SetPosition(x, y, z)
-        end
-    else
-        local scorch = SpawnPrefab("burntground")
-        if scorch ~= nil then
-            scorch.Transform:SetPosition(x, y, z)
-            local scale = inst.size * 1.3
-            scorch.Transform:SetScale(scale, scale, scale)
-        end
-		
-		local gemcheck = math.random()
-		
-		if gemcheck >= 0.5 then
-			print("The Moon Is Crying")
-			local moontear = SpawnPrefab("bluegem")
-            moontear.Transform:SetPosition(x, y, z)
-		elseif gemcheck >= 0.1 and gemcheck < 0.5 then
-			print("The Moon Is Furious")
-			local moontear = SpawnPrefab("redgem")
-            moontear.Transform:SetPosition(x, y, z)
-		else
-			print("The Moon Is Hurting")
-			local moontear = SpawnPrefab("purplegem")
-            moontear.Transform:SetPosition(x, y, z)
-		end
-		
-        local launched = {}
-        local ents = TheSim:FindEntities(x, y, z, inst.size * TUNING.METEOR_RADIUS, nil, NON_SMASHABLE_TAGS, SMASHABLE_TAGS)
-        for i, v in ipairs(ents) do
-            --V2C: things "could" go invalid if something earlier in the list
-            --     removes something later in the list.
-            --     another problem is containers, occupiables, traps, etc.
-            --     inconsistent behaviour with what happens to their contents
-            --     also, make sure stuff in backpacks won't just get removed
-            --     also, don't dig up spawners
-            if v:IsValid() and not v:IsInLimbo() then
-                if v.components.combat ~= nil then
-                    v.components.combat:GetAttacked(inst, inst.size * TUNING.METEOR_DAMAGE / 2, nil)
-                end
+local function fadelight(inst, target, instant)
+    inst._targetlight = target
+    if inst._light ~= target then
+        if instant then
+            if inst._task ~= nil then
+                inst._task:Cancel()
+                inst._task = nil
             end
+            inst._light = target
+            inst.AnimState:SetLightOverride(target)
+        elseif inst._task == nil then
+            inst._task = inst:DoPeriodicTask(FRAMES, updatelight)
         end
+    elseif inst._task ~= nil then
+        inst._task:Cancel()
+        inst._task = nil
     end
 end
 
-local function dostrike(inst)
-    inst.striketask = nil
-    inst.AnimState:PlayAnimation("crash")
-    inst:DoTaskInTime(0.33, onexplode)
-    inst:ListenForEvent("animover", inst.Remove)
-    -- animover isn't triggered when the entity is asleep, so just in case
-    inst:DoTaskInTime(3, inst.Remove)
-end
-
-local warntime = 2
-local sizes = 
-{ 
-    large = .7,
-}
-
-local function SetPeripheral(inst, peripheral)
-    inst.peripheral = peripheral
-end
-
-local function SetSize(inst, sz, mod)
-    if inst.autosizetask ~= nil then
-        inst.autosizetask:Cancel()
-        inst.autosizetask = nil
+local function cancelblink(inst)
+    if inst._blinktask ~= nil then
+        inst._blinktask:Cancel()
+        inst._blinktask = nil
     end
-    if inst.striketask ~= nil then
-        return
-    end
-
-    inst.size = sizes["large"]
-    inst.warnshadow = SpawnPrefab("meteorwarning")
-
-    if mod == nil then
-        mod = 1
-    end
-
-    inst.Transform:SetScale(inst.size, inst.size, inst.size)
-    inst.warnshadow.Transform:SetScale(inst.size * 1.2, inst.size * 1.2, inst.size * 1.2)
-
-    -- Now that we've been set to the appropriate size, go for the gusto
-    inst.striketask = inst:DoTaskInTime(warntime, dostrike)
-
-    inst.warnshadow.entity:SetParent(inst.entity)
-    inst.warnshadow.startfn(inst.warnshadow, warntime, .33, 1)
 end
 
-local function AutoSize(inst)
-    inst.autosizetask = nil
-    local rand = math.random()
-    inst:SetSize(rand <= .33 and "large" or (rand <= .67 and "medium" or "small"))
+local function updateblink(inst, data)
+    local c = easing.outQuad(data.blink, 0, 1, 1)
+    inst.AnimState:SetAddColour(c, c, c, 0)
+    if data.blink > 0 then
+        data.blink = math.max(0, data.blink - .05)
+    else
+        inst._blinktask:Cancel()
+        inst._blinktask = nil
+    end
 end
 
-local function fn() 
+local function blink(inst)
+    if inst._blinktask ~= nil then
+        inst._blinktask:Cancel()
+    end
+    local data = { blink = 1 }
+    inst._blinktask = inst:DoPeriodicTask(FRAMES, updateblink, nil, data)
+    updateblink(inst, data)
+end
+
+local function dodropsound(inst, taskid, volume)
+    inst.SoundEmitter:PlaySound("dontstarve/movement/bodyfall_dirt", nil, volume)
+    inst._tasks[taskid] = nil
+end
+
+local function canceldropsounds(inst)
+    local k, v = next(inst._tasks)
+    while k ~= nil do
+        v:Cancel()
+        inst._tasks[k] = nil
+        k, v = next(inst._tasks)
+    end
+end
+
+local function scheduledropsounds(inst)
+    inst._tasks[1] = inst:DoTaskInTime(6.5 * FRAMES, dodropsound, 1)
+    inst._tasks[2] = inst:DoTaskInTime(13.5 * FRAMES, dodropsound, 2, .5)
+    inst._tasks[3] = inst:DoTaskInTime(18.5 * FRAMES, dodropsound, 2, .15)
+end
+
+local function onturnon(inst)
+    canceldropsounds(inst)
+    inst.AnimState:PlayAnimation("proximity_pre")
+    inst.AnimState:PushAnimation("proximity_loop", true)
+    fadelight(inst, .15, false)
+    if not inst.SoundEmitter:PlayingSound("idlesound") then
+        inst.SoundEmitter:PlaySound("dontstarve/common/together/celestial_orb/idle_LP", "idlesound")
+    end
+end
+
+local function onturnoff(inst)
+    canceldropsounds(inst)
+    inst.SoundEmitter:KillSound("idlesound")
+    if not inst.components.inventoryitem:IsHeld() then
+        inst.AnimState:PlayAnimation("proximity_pst")
+        inst.AnimState:PushAnimation("idle", false)
+        fadelight(inst, 0, false)
+        scheduledropsounds(inst)
+    else
+        inst.AnimState:PlayAnimation("idle")
+        fadelight(inst, 0, true)
+    end
+end
+
+local function onactivate(inst)
+    blink(inst)
+    inst.SoundEmitter:PlaySound("dontstarve/common/together/celestial_orb/active")
+    inst._fx:push()
+end
+
+local function storeincontainer(inst, container)
+    if container ~= nil and container.components.container ~= nil then
+        inst:ListenForEvent("onputininventory", inst._oncontainerownerchanged, container)
+        inst:ListenForEvent("ondropped", inst._oncontainerownerchanged, container)
+        inst:ListenForEvent("onremove", inst._oncontainerremoved, container)
+        inst._container = container
+    end
+end
+
+local function unstore(inst)
+    if inst._container ~= nil then
+        inst:RemoveEventCallback("onputininventory", inst._oncontainerownerchanged, inst._container)
+        inst:RemoveEventCallback("ondropped", inst._oncontainerownerchanged, inst._container)
+        inst:RemoveEventCallback("onremove", inst._oncontainerremoved, inst._container)
+        inst._container = nil
+    end
+end
+
+local function tostore(inst, owner)
+    if inst._container ~= owner then
+        unstore(inst)
+        storeincontainer(inst, owner)
+    end
+    owner = owner.components.inventoryitem ~= nil and owner.components.inventoryitem:GetGrandOwner() or owner
+    if inst._owner ~= owner then
+        inst._owner = owner
+    end
+end
+
+local function topocket(inst, owner)
+    cancelblink(inst)
+    onturnoff(inst)
+    tostore(inst, owner)
+end
+
+local function startcrying(inst)
+    local owner = inst.components.inventoryitem.owner
+	
+    if owner ~= nil then
+		if owner.components.moisture ~= nil then
+			owner.components.moisture:DoDelta(1)
+		end
+	else
+		inst.task:Cancel()
+		inst.task = nil
+	end
+end
+
+local function topockettear(inst, owner)
+    --cancelblink(inst)
+	if inst.task == nil then
+		inst.task = inst:DoPeriodicTask(1, startcrying)
+	end
+    --tostore(inst, owner)
+end
+
+local function togroundtear(inst)
+	if inst.task ~= nil then
+		inst.task:Cancel()
+		inst.task = nil
+	end
+end
+
+local function toground(inst)
+    if inst.components.prototyper.on then
+        onturnon(inst)
+    end
+    unstore(inst)
+    inst._owner = nil
+end
+
+local function OnFX(inst)
+    if not inst:HasTag("INLIMBO") then
+        local fx = CreateEntity()
+
+        fx:AddTag("FX")
+        --[[Non-networked entity]]
+        fx.entity:SetCanSleep(false)
+        fx.persists = false
+
+        fx.entity:AddTransform()
+        fx.entity:AddAnimState()
+
+        fx.Transform:SetFromProxy(inst.GUID)
+
+        fx.AnimState:SetBank("moonrock_seed")
+        fx.AnimState:SetBuild("moonrock_seed")
+        fx.AnimState:PlayAnimation("use")
+        fx.AnimState:SetFinalOffset(-1)
+
+        fx:ListenForEvent("animover", fx.Remove)
+    end
+end
+
+local function OnSpawned(inst)
+    if not (inst.components.prototyper.on or inst.components.inventoryitem:IsHeld()) then
+        canceldropsounds(inst)
+        scheduledropsounds(inst)
+        inst.AnimState:PlayAnimation("proximity_pst")
+        inst.AnimState:PushAnimation("idle", false)
+    end
+end
+
+local function fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-    
-    inst.Transform:SetTwoFaced()
 
-    inst.AnimState:SetBank("meteor")
-    inst.AnimState:SetBuild("meteor")
+    MakeInventoryPhysics(inst)
 
-    inst:AddTag("NOCLICK")
+    inst.AnimState:SetBank("moonrock_seed")
+    inst.AnimState:SetBuild("moontear")
+    inst.AnimState:PlayAnimation("idle")
+--[[
+    inst:AddTag("irreplaceable")
+    inst:AddTag("nonpotatable")
 
+    inst._fx = net_event(inst.GUID, "moonrockseed._fx")
+
+    if not TheNet:IsDedicated() then
+        inst:ListenForEvent("moonrockseed._fx", OnFX)
+    end
+]]
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
+--[[
+    inst._tasks = {}
+    inst._light = 0
+    inst._targetlight = 0
+    inst._owner = nil
+    inst._container = nil
 
-    inst.Transform:SetRotation(math.random(360))
-    inst.SetSize = SetSize
-    inst.SetPeripheral = SetPeripheral
-    inst.striketask = nil
-
-    -- For spawning these things in ways other than from meteor showers (failsafe set a size after delay)
-    inst.autosizetask = inst:DoTaskInTime(0, AutoSize)
-
-    inst.persists = false
-
-    return inst
-end
-
-local function moontearfn() 
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-    
-    inst.Transform:SetTwoFaced()
-
-    inst.AnimState:SetBank("meteor")
-    inst.AnimState:SetBuild("meteor")
-
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
+    inst._oncontainerownerchanged = function(container)
+        tostore(inst, container)
     end
 
+    inst._oncontainerremoved = function()
+        unstore(inst)
+    end
+]]
+    inst:AddComponent("inspectable")
+
+    inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/moon_tear.xml"
+    inst.components.inventoryitem.nobounce = true
+    inst.components.inventoryitem:SetSinks(true)
+
+    --[[inst:AddComponent("prototyper")
+    inst.components.prototyper.onturnon = onturnon
+    inst.components.prototyper.onturnoff = onturnoff
+    inst.components.prototyper.onactivate = onactivate
+    inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.MOONORB_LOW]]
+
+    MakeHauntableLaunch(inst)
+
+    inst:ListenForEvent("onputininventory", topockettear)
+    --inst:ListenForEvent("onputininventory", topocket)
+    inst:ListenForEvent("ondropped", togroundtear)
+    --inst:ListenForEvent("ondropped", toground)
+
+    --inst.OnSpawned = OnSpawned
 
     return inst
 end
 
-return Prefab("moon_tear_meteor", fn, assets, prefabs)--,
-		--Prefab("moon_tear", moontearfn, moon_tear_assets, moon_tear_prefabs),
+return Prefab("moon_tear", fn, assets, prefabs)

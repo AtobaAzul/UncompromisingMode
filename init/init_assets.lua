@@ -88,6 +88,7 @@ Assets = {
 	Asset("ANIM", "anim/gnat_cocoon.zip"),
 	Asset("ANIM", "anim/slingshotammo_firecracker.zip"),
 	Asset("ANIM", "anim/phonograph.zip"),
+	Asset("ANIM", "anim/moontear.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),
@@ -132,6 +133,8 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/sunglasses.xml"),
 	Asset("IMAGE", "images/inventoryimages/slingshotammo_firecrackers.tex"),
 	Asset("ATLAS", "images/inventoryimages/slingshotammo_firecrackers.xml"),
+	Asset("IMAGE", "images/inventoryimages/moon_tear.tex"),
+	Asset("ATLAS", "images/inventoryimages/moon_tear.xml"),
 	
 	Asset("ANIM", "anim/gatorsnake.zip"),
 	Asset("ANIM", "anim/swilson.zip"),

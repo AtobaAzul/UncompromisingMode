@@ -72,6 +72,7 @@ return {
 	"pollenmites",
 	"bugzapper",
 	"moon_tear",
+	"moon_tear_meteor",
 	"rneghost",
 	"chimp",
 	"pollenmiteden",
