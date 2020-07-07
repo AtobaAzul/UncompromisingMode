@@ -93,4 +93,5 @@ return {
 	"critterlab_real",
 	"slingshotammo_firecrackers",
 	"charliephonograph",
+	"stumpling",
 }

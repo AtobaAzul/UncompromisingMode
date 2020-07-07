@@ -138,6 +138,7 @@ Assets = {
 	
 	Asset("ANIM", "anim/gatorsnake.zip"),
 	Asset("ANIM", "anim/swilson.zip"),
+	Asset("ANIM", "anim/stumpling.zip"),
 
 
 	--Map Icons Start--
