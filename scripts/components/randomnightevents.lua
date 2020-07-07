@@ -180,7 +180,7 @@ MultiFogAuto(player,leiftime)
 
 local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
 	for k = 1, (days_survived <= 30 and 4) or math.random(days_survived <= 80 and 8 or 12) do
-    local target = FindEntity(player, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, {"stump"}, { "leif","burnt" })
+    local target = FindEntity(player, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, {"stump","evergreen"}, { "leif","burnt","deciduoustree" })
 		if target ~= nil then
 			print("targetfound")
 			target.noleif = true
@@ -853,7 +853,7 @@ AddWildEvent(SpawnMonkeys,.2)
 AddWildEvent(LeifAttack,.3)
 AddWildEvent(SpawnPhonograph,.1)
 AddWildEvent(SpawnShadowTeleporter,.2)
-AddWildEvent(StumpsAttack,15)
+AddWildEvent(StumpsAttack,0.5)
 --Base
 AddBaseEvent(SpawnBats,.3)
 AddBaseEvent(SpawnFissures,.3)

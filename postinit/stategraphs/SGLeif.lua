@@ -20,7 +20,7 @@ local events=
     EventHandler("doattack", function(inst, data) 
             if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
                     if inst.rootready == true then
-							local stump = FindEntity(inst, TUNING.LEIF_MAXSPAWNDIST, nil, {"stump"}, { "leif","burnt" })
+							local stump = FindEntity(inst, TUNING.LEIF_MAXSPAWNDIST, nil, {"stump","evergreen"}, { "leif","burnt","deciduoustree" })
 							if stump ~= nil then
 							inst.sg:GoToState("summon", data.target)
 							else

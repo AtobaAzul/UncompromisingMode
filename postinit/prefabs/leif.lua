@@ -172,7 +172,7 @@ local function spawn_stumpling(target)
 end
 local function SummonStumplings(target)
 	for k = 1, 3 do 
-    local stump = FindEntity(target, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, {"stump"}, { "leif","burnt" })
+    local stump = FindEntity(target, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, {"stump","evergreen"}, { "leif","burnt","deciduoustree" })
 		if stump ~= nil then
 			--print("targetfound")
 			stump.noleif = true
