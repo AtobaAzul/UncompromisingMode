@@ -28,6 +28,20 @@ recipes.meatballs.hunger = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_MEATBALL_HUNGER -- C
 recipes.butterflymuffin.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERMUFFIN_HEALTH -- Changed to 50, down from 62.5
 recipes.icecream.sanity = 0
 recipes.icecream.oneatenfn = ApplyIcecreamBuff
+
+
+
+
+
+------Rare Farmplot Crockpot Foods Change
+recipes.mashedpotatoes.hunger = 100
+
+recipes.salsa.hunger = 25
+recipes.salsa.sanity = 50
+
+recipes.pepperpopper.health = 60
+recipes.pepperpopper.hunger = 50
+------
 -----------------------------------------------------------------
 -- Prevent cooked eggs birdcage infinite loop
 -----------------------------------------------------------------
