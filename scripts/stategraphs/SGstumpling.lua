@@ -252,7 +252,6 @@ local states =
         {
             EventHandler("animover", function(inst)
                 if math.random() < 0.2 then
-                    inst.components.combat:SetTarget(nil)
                     inst.sg:GoToState("taunt")
                 else
                     inst.sg:GoToState("idle")
@@ -548,21 +547,10 @@ local states =
 
             inst.sg:SetTimeout(0.35) 
 
-            inst.Physics:SetCollisionMask(COLLISION.GROUND)
+            --inst.Physics:SetCollisionMask(COLLISION.GROUND)
         end,
 
-        onupdate = function(inst)
-            if inst:IsOnOcean() then
-                if inst.fling_land then
-                    inst.components.amphibiouscreature:OnEnterOcean()
-                    inst.fling_land = false
-                end
-            else
-                if not inst.fling_land then
-                    inst.components.amphibiouscreature:OnExitOcean()
-                    inst.fling_land = true
-                end
-            end        
+        onupdate = function(inst)     
         end,
 
         onexit = function(inst)
@@ -601,21 +589,10 @@ local states =
             inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 
             inst.Physics:SetMotorVelOverride(10,0,0) 
-            inst.Physics:SetCollisionMask(COLLISION.GROUND)
+            --inst.Physics:SetCollisionMask(COLLISION.GROUND)
         end, 
 
         onupdate = function(inst)
-            if inst:IsOnOcean() then
-                if inst.fling_land then
-                    inst.components.amphibiouscreature:OnEnterOcean()
-                    inst.fling_land = false
-                end
-            else
-                if not inst.fling_land then
-                    inst.components.amphibiouscreature:OnExitOcean()
-                    inst.fling_land = true
-                end
-            end
         end,
 
         timeline =
@@ -653,10 +630,7 @@ local states =
             if reanimating then
                 inst.AnimState:Pause()
             else
-                inst.AnimState:PlayAnimation("dead")
-                if inst.components.amphibiouscreature ~= nil and inst.components.amphibiouscreature.in_water then
-                    inst.AnimState:PushAnimation("dead_loop", true)
-                end         
+                inst.AnimState:PlayAnimation("dead")   
             end
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
@@ -935,7 +909,7 @@ local states =
             end),
             TimeEvent(2*FRAMES, function(inst) 
                 if not inst:HasTag("swimming") then
-                    inst.SoundEmitter:PlaySound("hookline/creatures/squid/run") 
+                    inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/deciduous/drake_run_rustle")
                 end 
             end),
 
@@ -948,7 +922,7 @@ local states =
             end),
             TimeEvent(6*FRAMES, function(inst) 
                 if not inst:HasTag("swimming") then
-                    inst.SoundEmitter:PlaySound("hookline/creatures/squid/run") 
+                    inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/deciduous/drake_run_rustle") 
                 end 
             end),
             TimeEvent(7 * FRAMES, function(inst) 
@@ -958,12 +932,12 @@ local states =
             end),
             TimeEvent(8*FRAMES, function(inst) 
                 if not inst:HasTag("swimming") then
-                    inst.SoundEmitter:PlaySound("hookline/creatures/squid/run") 
+                    inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/deciduous/drake_run_rustle")
                 end 
             end),
             TimeEvent(10*FRAMES, function(inst) 
                 if not inst:HasTag("swimming") then
-                    inst.SoundEmitter:PlaySound("hookline/creatures/squid/run") 
+                    inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/deciduous/drake_run_rustle") 
                 end 
             end),
         },
@@ -1024,41 +998,7 @@ local states =
     },   
 }
 
-CommonStates.AddAmphibiousCreatureHopStates(states, 
-{ -- config
-    swimming_clear_collision_frame = 9 * FRAMES,
-},
-nil, -- anims
-{ -- timeline
-    hop_pre =
-    {
-        TimeEvent(0, function(inst) 
-            if inst:HasTag("swimming") then 
-                SpawnPrefab("splash_green").Transform:SetPosition(inst.Transform:GetWorldPosition()) 
-            end
-        end),
-    },
-    hop_pst = {
-        TimeEvent(4 * FRAMES, function(inst) 
-            if inst:HasTag("swimming") then 
-                inst.components.locomotor:Stop()
-                SpawnPrefab("splash_green").Transform:SetPosition(inst.Transform:GetWorldPosition()) 
-                testExtinguish(inst)
-            end
-        end),
-        TimeEvent(6 * FRAMES, function(inst) 
-            if not inst:HasTag("swimming") then 
-                inst.components.locomotor:StopMoving()
-            end
-        end),
-        TimeEvent(9 * FRAMES, function(inst) 
-            setdivelayering(inst,true)
-        end),
-        TimeEvent(17 * FRAMES, function(inst)
-            setdivelayering(inst)
-        end),
-    }
-})
+
 
 CommonStates.AddSleepStates(states,
 {

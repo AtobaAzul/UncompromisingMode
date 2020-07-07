@@ -88,3 +88,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.RICE = "I'll save this for later"
 	DESCRIBE.RICE_COOKED = "I could have done better"
 	DESCRIBE.SEAFOODPAELLA = "Now we're talking." 
+	
+	DESCRIBE.STUMPLING = "I wish I were back at my kitchen!"

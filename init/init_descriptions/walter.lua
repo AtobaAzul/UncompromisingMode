@@ -88,4 +88,6 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.RICEPLANT = "Another swamp monster, for sure!"
 	DESCRIBE.RICE = "Found this in the swamp monster's hair!"
 	DESCRIBE.RICE_COOKED = "Seems to cook up nice."
-	DESCRIBE.SEAFOODPAELLA = "I made it with all sorts of swampy stuff!" 
+	DESCRIBE.SEAFOODPAELLA = "I made it with all sorts of swampy stuff!"
+	
+	DESCRIBE.STUMPLING = "The woods is rising up!"

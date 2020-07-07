@@ -91,3 +91,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.RICE = "I'd break my teeth on these!"
 	DESCRIBE.RICE_COOKED = "It's better, I suppose."
 	DESCRIBE.SEAFOODPAELLA = "A fine meal!" 
+	
+	DESCRIBE.STUMPLING = "They are revolting!"

@@ -151,9 +151,40 @@ local function SpawnSnare(inst, target)
     end
     return true
 end
+local function find_leif_spawn_target(item)
+    return not item.noleif
+        and item.components.growable ~= nil
+        and item.components.growable.stage <= 3
+end
+local function spawn_stumpling(target)
+    local stumpling = SpawnPrefab("stumpling")
 
+    if target.chopper ~= nil then
+        stumpling.components.combat:SuggestTarget(target.chopper)
+    end
 
+    local x, y, z = target.Transform:GetWorldPosition()
+    target:Remove()
+	local effect = SpawnPrefab("round_puff_fx_hi")
+	effect.Transform:SetPosition(x, y, z)
+    stumpling.Transform:SetPosition(x, y, z)
+    stumpling.sg:GoToState("hit")
+end
+local function SummonStumplings(target)
+	for k = 1, 3 do 
+    local stump = FindEntity(target, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, {"stump"}, { "leif","burnt" })
+		if stump ~= nil then
+			--print("targetfound")
+			stump.noleif = true
+			if inst.components.combat.target ~= nil then
+			stump.chopper = inst.components.combat.target
+			end
+			stump:DoTaskInTime(0, spawn_stumpling)
+		end
+	end
+end
 
+		inst.SummonStumplings = SummonStumplings
         inst.FindSnareTargets = FindSnareTargets
         inst.SpawnSnare = SpawnSnare
 end)

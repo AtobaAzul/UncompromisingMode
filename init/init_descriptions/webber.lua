@@ -88,4 +88,6 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.RICEPLANT = "We should paddle out and get it!"
 	DESCRIBE.RICE = "It's a bit too dry to eat now!"
 	DESCRIBE.RICE_COOKED = "We would like to eat it with something else!"
-	DESCRIBE.SEAFOODPAELLA = "It helps drain our nostrils." 
+	DESCRIBE.SEAFOODPAELLA = "It helps drain our nostrils."
+
+	DESCRIBE.STUMPLING = "What is this thing?"	

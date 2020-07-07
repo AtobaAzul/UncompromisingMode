@@ -101,8 +101,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.RICEPLANT = "Rice is nice."
 	DESCRIBE.RICE = "It's too tough to eat."
 	DESCRIBE.RICE_COOKED = "Tastes soggy."
-	DESCRIBE.SEAFOODPAELLA = "Clears the sinuses." 
+	DESCRIBE.SEAFOODPAELLA = "Clears the sinuses."
 	
+	DESCRIBE.STUMPLING = "He's small, but he's angry!"
 	
 	ACTIONFAIL.READ =
         {

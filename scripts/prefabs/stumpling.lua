@@ -1,13 +1,9 @@
 local assets =
 {
-    Asset("ANIM", "anim/squid.zip"),
-    Asset("ANIM", "anim/squid_water.zip"),
-    Asset("ANIM", "anim/squid_build.zip"),
 }
 
 local inkassets = 
 {
-    Asset("ANIM","anim/squid_inked.zip"),
 }
 
 local prefabs =
@@ -41,7 +37,12 @@ local SHARE_TARGET_DIST = 30
 local HOME_TELEPORT_DIST = 30
 
 local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
-
+local function IsEligible(player)
+	--local area = player.components.areaaware
+	return TheWorld.Map:IsVisualGroundAtPoint(player.Transform:GetWorldPosition())
+			--and area:GetCurrentArea() ~= nil 
+			--and not area:CurrentlyInTag("nohasslers")
+end
 --Called from stategraph
 local function LaunchProjectile(inst, targetpos)
    -- local x, y, z = inst.Transform:GetWorldPosition()
@@ -94,8 +95,8 @@ local function OnAttacked(inst, data)
     inst.components.combat:ShareTarget(data.attacker, SHARE_TARGET_DIST,
         function(dude)
             return not (dude.components.health ~= nil and dude.components.health:IsDead())
-                and (dude:HasTag("squid"))
-                and data.attacker ~= (dude.components.follower ~= nil and dude.components.follower.leader or nil)
+                and (dude:HasTag("stumpling"))
+                and data.attacker ~= (dude.components.follower ~= nil and dude.components.follower.leader or nil) and IsEligible(data.attacker)
         end, 5)
 end
 
@@ -103,7 +104,7 @@ local function OnAttackOther(inst, data)
     inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST,
         function(dude)
             return not (dude.components.health ~= nil and dude.components.health:IsDead())
-                and (dude:HasTag("squid"))
+                and (dude:HasTag("stumpling"))
                 and data.target ~= (dude.components.follower ~= nil and dude.components.follower.leader or nil)
         end, 5)
 end
@@ -138,7 +139,7 @@ local function fncommon()
 
     inst:AddTag("scarytooceanprey")
     inst:AddTag("monster")
-    inst:AddTag("squid")
+    inst:AddTag("stumpling")
     inst:AddTag("likewateroffducksback")
 
     inst.AnimState:SetBank("stumpling")--"stumpling")--"squiderp")
@@ -189,7 +190,7 @@ local function fncommon()
     inst.components.combat:SetRange(TUNING.SQUID_TARGET_RANGE, TUNING.SQUID_ATTACK_RANGE)
     inst.components.combat:EnableAreaDamage(true)
     inst.components.combat:SetAreaDamage(TUNING.SQUID_ATTACK_RANGE, 1, function(ent, inst) 
-        if not ent:HasTag("squid") then
+        if not (ent:HasTag("stumpling") or ent:HasTag("leif")) then
             return true
         else  
             if ent:IsValid() then   

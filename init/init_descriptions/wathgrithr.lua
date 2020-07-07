@@ -88,4 +88,6 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.RICEPLANT = "A simple plant, but in water."
 	DESCRIBE.RICE = "I wouldn't eat it, even if I could!"
 	DESCRIBE.RICE_COOKED = "I refuse!"
-	DESCRIBE.SEAFOODPAELLA = "A mire-warrior's reward!" 
+	DESCRIBE.SEAFOODPAELLA = "A mire-warrior's reward!"
+	
+	DESCRIBE.STUMPLING = "A small, angry woodland sprite!"

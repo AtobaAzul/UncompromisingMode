@@ -84,7 +84,7 @@ function StumplingBrain:OnStart()
 
                     WhileNode( function() return self.inst.components.combat.target end, "combat actions",
                         PriorityNode({
-                            ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST),
+                            ChaseAndAttack(self.inst),
                         })
                     ),
                  

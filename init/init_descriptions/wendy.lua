@@ -89,3 +89,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.RICE = "It needs to be cooked."
 	DESCRIBE.RICE_COOKED = "This should do... for now."
 	DESCRIBE.SEAFOODPAELLA = "It clears my nose, just for it to get clogged again."
+	
+	DESCRIBE.STUMPLING = "A wooden gremlin."

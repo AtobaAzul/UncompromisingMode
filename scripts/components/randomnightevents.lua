@@ -157,6 +157,49 @@ local days_survived = player.components.age ~= nil and player.components.age:Get
 	end
 end
 
+local function spawn_stumpling(target)
+    local stumpling = SpawnPrefab("stumpling")
+
+    if target.chopper ~= nil then
+        stumpling.components.combat:SuggestTarget(target.chopper)
+    end
+
+    local x, y, z = target.Transform:GetWorldPosition()
+    target:Remove()
+	local effect = SpawnPrefab("round_puff_fx_hi")
+	effect.Transform:SetPosition(x, y, z)
+	stumpling:DoTaskInTime(0, function(nutters) DayBreak(nutters) end)
+    stumpling.Transform:SetPosition(x, y, z)
+    stumpling.sg:GoToState("hit")
+end
+
+local function StumpsAttack(player)
+--print("myshins!")
+local leiftime = 8 + math.random() * 3
+MultiFogAuto(player,leiftime)
+
+local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
+	for k = 1, (days_survived <= 30 and 4) or math.random(days_survived <= 80 and 8 or 12) do
+    local target = FindEntity(player, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, {"stump"}, { "leif","burnt" })
+		if target ~= nil then
+			print("targetfound")
+			target.noleif = true
+			target.chopper = player--GetGrowthStages(target)[target.components.growable.stage].leifscale or 1 Getting size is muck
+				--assert(GetBuild(target).leif ~= nil)
+			target:DoTaskInTime(leiftime, spawn_stumpling)
+		else
+	
+		player:DoTaskInTime(10 * math.random() + 3, function()
+			local num_nutters = math.random(3,5)
+			for i = 1, num_nutters do
+				SpawnBirchNutters(player)
+			end
+			print("leifattackfailed")
+		end)
+		end
+	end
+end
+
 local function SpawnShadowCharsFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local x1 = x + math.random(12, 16)
@@ -810,6 +853,7 @@ AddWildEvent(SpawnMonkeys,.2)
 AddWildEvent(LeifAttack,.3)
 AddWildEvent(SpawnPhonograph,.1)
 AddWildEvent(SpawnShadowTeleporter,.2)
+AddWildEvent(StumpsAttack,15)
 --Base
 AddBaseEvent(SpawnBats,.3)
 AddBaseEvent(SpawnFissures,.3)
@@ -818,7 +862,8 @@ AddBaseEvent(FireHungryGhostAttack,.5)
 AddBaseEvent(SpawnShadowChars,.2)
 AddBaseEvent(SpawnMonkeys,.1)
 AddBaseEvent(SpawnPhonograph,.1)
-AddWildEvent(SpawnShadowTeleporter,.2)
+AddBaseEvent(SpawnShadowTeleporter,.2)
+AddBaseEvent(StumpsAttack,0.3)
 --
 AddCaveEvent(SpawnBats,1)
 AddCaveEvent(SpawnFissures,1)
