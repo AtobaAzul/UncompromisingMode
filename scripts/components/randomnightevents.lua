@@ -65,7 +65,7 @@ end
 
 local function DayBreak(mob)
 	
-	if not mob:HasTag("shadow") and not mob:HasTag("shadowchesspiece") then
+	if not mob:HasTag("shadow") and not mob:HasTag("shadowchesspiece") and not mob:HasTag("shadowteleporter") then
 		local smoke = SpawnPrefab("thurible_smoke")
 		if smoke ~= nil then
 			smoke.entity:SetParent(mob.entity)
@@ -75,15 +75,15 @@ local function DayBreak(mob)
 	mob.persists = false
 	
 	mob:WatchWorldState("isday", function() 
-	local x, y, z = mob.Transform:GetWorldPosition()
-	local despawnfx = SpawnPrefab("shadow_despawn")
-	despawnfx.Transform:SetPosition(x, y, z)
-	
-	if mob.components.inventory ~= nil then
-		mob.components.inventory:DropEverything(true)
-	end
-	
-	mob:Remove()
+		local x, y, z = mob.Transform:GetWorldPosition()
+		local despawnfx = SpawnPrefab("shadow_despawn")
+		despawnfx.Transform:SetPosition(x, y, z)
+		
+		if mob.components.inventory ~= nil then
+			mob.components.inventory:DropEverything(true)
+		end
+		
+		mob:Remove()
 	end)
 end
 
@@ -640,6 +640,25 @@ local function SpawnPhonograph(player)
 	end)
 end
 
+local function SpawnShadowTeleporterFunction(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	local x2 = x + math.random(-10, 10)
+	local z2 = z + math.random(-10, 10)
+	
+	if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+		local teleporter = SpawnPrefab("shadow_teleporter")
+		teleporter.Transform:SetPosition(x2, y, z2)
+	else
+		SpawnShadowTeleporterFunction(player)
+	end
+end	
+											
+local function SpawnShadowTeleporter(player)
+	player:DoTaskInTime(10, function()
+		SpawnShadowTeleporterFunction(player)
+	end)
+end
+
 local function SpawnWalrusHuntFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local x2 = x + math.random(-40, 40)
@@ -790,6 +809,7 @@ AddWildEvent(SpawnSkitts,.5)
 AddWildEvent(SpawnMonkeys,.2)
 AddWildEvent(LeifAttack,.3)
 AddWildEvent(SpawnPhonograph,.1)
+AddWildEvent(SpawnShadowTeleporter,.2)
 --Base
 AddBaseEvent(SpawnBats,.3)
 AddBaseEvent(SpawnFissures,.3)
@@ -798,6 +818,7 @@ AddBaseEvent(FireHungryGhostAttack,.5)
 AddBaseEvent(SpawnShadowChars,.2)
 AddBaseEvent(SpawnMonkeys,.1)
 AddBaseEvent(SpawnPhonograph,.1)
+AddWildEvent(SpawnShadowTeleporter,.2)
 --
 AddCaveEvent(SpawnBats,1)
 AddCaveEvent(SpawnFissures,1)

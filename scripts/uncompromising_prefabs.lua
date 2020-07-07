@@ -94,4 +94,5 @@ return {
 	"slingshotammo_firecrackers",
 	"charliephonograph",
 	"stumpling",
+	"shadow_teleporter",
 }

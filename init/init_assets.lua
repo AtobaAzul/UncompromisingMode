@@ -89,6 +89,7 @@ Assets = {
 	Asset("ANIM", "anim/slingshotammo_firecracker.zip"),
 	Asset("ANIM", "anim/phonograph.zip"),
 	Asset("ANIM", "anim/moontear.zip"),
+	Asset("ANIM", "anim/shadow_teleporter.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),
