@@ -64,11 +64,10 @@ recipes.asparagussoup.sanity = 20
 recipes.fishtacos.hunger = 62.5
 recipes.fishtacos.health = 15
 recipes.fishtacos.sanity = 5
-
-recipes.potatotornado.hunger = 40
-recipes.potatotornado.health = 3
-recipes.potatotornado.sanity = 5
 ------
+
+recipes.vegstinger.hunger = 30
+recipes.vegstinger.health = 10
 -----------------------------------------------------------------
 -- Prevent cooked eggs birdcage infinite loop
 -----------------------------------------------------------------
