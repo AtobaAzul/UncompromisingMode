@@ -1,7 +1,7 @@
 local assets =
 {
-    Asset("ANIM", "anim/seafoodpaella.zip"),
-    Asset("ATLAS", "images/inventoryimages/zaspberryparfait.xml"),
+    Asset("ANIM", "anim/liceloaf.zip"),
+    Asset("ATLAS", "images/inventoryimages/liceloaf.xml"),
 }
 local function oneatenfn(inst, eater)
 	--if eater.components.hayfever and eater.components.hayfever.enabled then
@@ -22,8 +22,8 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("seafoodpaella")
-    inst.AnimState:SetBuild("seafoodpaella")
+    inst.AnimState:SetBank("liceloaf")
+    inst.AnimState:SetBuild("liceloaf")
     inst.AnimState:PlayAnimation("idle")
 
     MakeInventoryFloatable(inst)
@@ -46,7 +46,7 @@ local function fn()
 	inst:DoPeriodicTask(5, rename)
 		
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/seafoodpaella.xml"
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/liceloaf.xml"
     inst:AddComponent("edible")
     inst.components.edible.healthvalue = 0
     inst.components.edible.hungervalue = 62.5
