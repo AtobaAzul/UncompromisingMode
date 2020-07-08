@@ -320,8 +320,8 @@ end
 
 InsertIngredientValues({"zaspberry"},{fruit=1},true,false,false)
 InsertIngredientValues({"iceboomerang"},{ice=1},true,false,false)
-InsertIngredientValues({"rice"},{veggie=1},true,false,false)
-InsertIngredientValues({"rice_cooked"},{veggie=1},true,false,false)
+InsertIngredientValues({"rice"},{veggie=1,rice=1},true,false,false)
+InsertIngredientValues({"rice_cooked"},{veggie=1,rice=1},true,false,false)
 local zaspberryparfait =
 {
     name = "zaspberryparfait",
@@ -347,7 +347,7 @@ local carapacecooler =
 local seafoodpaella =
 {
     name = "seafoodpaella",
-    test = function(cooker, names, tags) return not tags.monster and not tags.inedible and UncompromisingFillers(tags) and (names.rice or names.rice_cooked) and (names.kelp or names.kelp_cooked or names.kelp_dried) and tags.veggie >= 2 and names.wobster_sheller_land end,
+    test = function(cooker, names, tags) return not tags.monster and not tags.inedible and UncompromisingFillers(tags) and tags.rice and (names.kelp or names.kelp_cooked or names.kelp_dried) and tags.veggie >= 2 and names.wobster_sheller_land end,
 
     priority = 30,
     weight = 1,
@@ -359,7 +359,7 @@ AddCookerRecipe("portablecookpot", seafoodpaella)
 local liceloaf =
 {
     name = "liceloaf",
-    test = function(cooker, names, tags) return (names.rice or names.rice_cooked) == 4 end,
+    test = function(cooker, names, tags) return (tags.rice) == 4 end,
 
     priority = 30,
     weight = 1,
