@@ -49,6 +49,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 		"Not friend! Not friend!!!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Bad hug!"
+	ANNOUNCE.SHADOWTALKER = {
+        "ALONE",
+        "NOT LIKE THEM",
+        "SAD",
+    }
 	DESCRIBE.SAND = "Dirt"
 	DESCRIBE.SANDHILL = "Pile of dirt"
 	DESCRIBE.SNOWPILE = "Friend killer!"

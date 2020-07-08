@@ -49,6 +49,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 		"Some just want to watch the world burn.",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "You cannot hold me forever."
+	ANNOUNCE.SHADOWTALKER = {
+        "SHES NEVER COMING BACK",
+        "I CAN'T HELP HER",
+        "IT WAS MY FAULT",
+    }
 	DESCRIBE.SAND = "I wonder if the sand knows of its own insignificance?"
 	DESCRIBE.SANDHILL = "This looks impermanent."
 	DESCRIBE.SNOWPILE = "Cold death awaits us."

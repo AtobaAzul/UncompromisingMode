@@ -246,7 +246,7 @@ local function fn()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
-    MakeCharacterPhysics(inst, 6, 1)
+    MakeCharacterPhysics(inst, 3, 0.5)
     RemovePhysicsColliders(inst)
     inst.Physics:ClearCollisionMask()
     inst.Physics:CollidesWith(COLLISION.GROUND)

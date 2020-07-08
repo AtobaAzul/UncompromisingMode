@@ -49,6 +49,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 		"Fire! Fire!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Too tough, Wolfgang cannot break!"
+	ANNOUNCE.SHADOWTALKER = {
+        "I AM WEAK",
+        "I AM AFRAID",
+        "NOT STRONG ENOUGH",
+    }
 	DESCRIBE.SAND = "When Wolfgang holds it it slips through his large, strong hands."
 	DESCRIBE.SANDHILL = "Tiny, crushable hill."
 	DESCRIBE.SNOWPILE = "Cold is no good for the muscles!."

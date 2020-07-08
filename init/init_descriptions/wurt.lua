@@ -49,6 +49,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 		"Groundy fire! Florp!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Stuck!"
+	ANNOUNCE.SHADOWTALKER = {
+        "DO SCALELESS TRUST ME?",
+        "WHERE... FROM...",
+        "CAN'T REMEMBER",
+    }
 	DESCRIBE.SAND = "Grainy stuffs."
 	DESCRIBE.SANDHILL = "Itch on scales..."
 	DESCRIBE.SNOWPILE = "Fun! Brr..."

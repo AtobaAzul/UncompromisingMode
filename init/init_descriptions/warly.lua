@@ -49,6 +49,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 		"The grounds getting broiled!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Definetly not a spice root!"
+	ANNOUNCE.SHADOWTALKER = {
+        "SHE IS ALL ALONE",
+        "SHE DOESN'T REMEMBER ME",
+        "I'M NOT THERE FOR HER",
+    }
 	DESCRIBE.SAND = "Lots of tiny, tiny stones."
 	DESCRIBE.SANDHILL = "The sand has formed a small pile."
 	DESCRIBE.SNOWPILE = "Snow is a new thing for me, seems like a problem."

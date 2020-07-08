@@ -49,6 +49,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 		"Watch out!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "We're stuck! Help!"
+	ANNOUNCE.SHADOWTALKER = {
+        "I AM A MONSTER",
+        "I CAN NEVER GO HOME",
+        "I WANT TO GO HOME",
+    }
 	DESCRIBE.SAND = "It's nice to feel it beneath our many feet."
 	DESCRIBE.SANDHILL = "Wish we had a bucket and a shovel."
 	DESCRIBE.SNOWPILE = "I wish it was a good time to play..."

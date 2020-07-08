@@ -50,6 +50,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 		"Watch the ground!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "I should chop myself free!"
+	ANNOUNCE.SHADOWTALKER = {
+        "SLEEP... SLEEP...",
+        "JUST REST...",
+        "I KNOW TOO MUCH",
+    }
 	DESCRIBE.SAND = "Sand always seems to find its way into my books."
 	DESCRIBE.SANDHILL = "The dune's iconic shape is formed by the winds."
 	DESCRIBE.SNOWPILE = "Makes one think of stories by the fire during a stormy night."

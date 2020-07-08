@@ -740,13 +740,34 @@ local function SpawnWalrusHuntFunction(player)
 		end
 	end
 end	
-											
+
 local function SpawnWalrusHunt(player)
 	player:DoTaskInTime(5+math.random(5,10), function()
 		player:DoTaskInTime(0.2 * math.random(4) * 0.3, function()
 			SpawnWalrusHuntFunction(player)
 		end)
 	end)
+end
+
+local function SpawnShadowTalker(player)
+	if TheWorld.state.isnight then
+		player:DoTaskInTime(5+math.random(5,10), function()
+			local radius = 5 + math.random() * 10
+			local theta = math.random() * 2 * PI
+			local x, y, z = player.Transform:GetWorldPosition()
+			local x1 = x + radius * math.cos(theta)
+			local z1 = z - radius * math.sin(theta)
+			local light = TheSim:GetLightAtPoint(x1, 0, z1)
+			if light <= .05 then
+				local ent = SpawnPrefab("shadowtalker")
+				ent.Transform:SetPosition(x1, 0, z1)
+				ent.speech = player
+			else
+				SpawnShadowTalker(player)
+			end
+				
+		end)
+	end
 end
 
 ---------------------------------------------------
@@ -854,6 +875,7 @@ AddWildEvent(LeifAttack,.3)
 AddWildEvent(SpawnPhonograph,.1)
 AddWildEvent(SpawnShadowTeleporter,.2)
 AddWildEvent(StumpsAttack,0.5)
+AddWildEvent(SpawnShadowTalker,.5)
 --Base
 AddBaseEvent(SpawnBats,.3)
 AddBaseEvent(SpawnFissures,.3)
@@ -864,6 +886,7 @@ AddBaseEvent(SpawnMonkeys,.1)
 AddBaseEvent(SpawnPhonograph,.1)
 AddBaseEvent(SpawnShadowTeleporter,.2)
 AddBaseEvent(StumpsAttack,0.3)
+AddBaseEvent(SpawnShadowTalker,.5)
 --
 AddCaveEvent(SpawnBats,1)
 AddCaveEvent(SpawnFissures,1)

@@ -49,6 +49,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 		"The beast roars loud!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "A cheap trick! Fight with honor!"
+	ANNOUNCE.SHADOWTALKER = {
+        "SHE IS NO MORE",
+        "THIS IS WHERE I BELONG",
+        "I DON'T WANT TO GO BACK",
+    }
 	DESCRIBE.SAND = "You are a very clean dirt."
 	DESCRIBE.SANDHILL = "I will not make a mountain out of a sandhill."
 	DESCRIBE.SNOWPILE = "Skaði would not be impressed."

@@ -58,6 +58,16 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 		"I've got a bad feeling about this.",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "I'm stuck!"
+	
+	ANNOUNCE.SHADOWTALKER = {
+        "THERES NO ESCAPE",
+        "THEY ARE OUT THERE, WATCHING, ALWAYS",
+        "IT'S ONLY A MATTER OF TIME",
+        "WHAT YEAR IS IT OUT THERE?",
+        "NOTHING BUT DARKNESS",
+        "IT'S A NEVER ENDING CYCLE",
+        "HOW MANY TIMES HAVE I DIED HERE?",
+    }
 	DESCRIBE.SAND = "A handy pile of pocket sand."
 	DESCRIBE.SANDHILL = "You better stay out of my shoes."
 	DESCRIBE.SNOWPILE = "That'll be a problem if it builds up."

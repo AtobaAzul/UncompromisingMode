@@ -49,6 +49,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 		"This is nothing like Canadian weather!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "You're up, Lucy!"
+	ANNOUNCE.SHADOWTALKER = {
+        "THEY DON'T TRUST ME",
+        "THEY THINK IM CRAZY",
+        "SHES ALL I HAVE LEFT",
+    }
 	DESCRIBE.SAND = "Sandy."
 	DESCRIBE.SANDHILL = "It's a big pile of sand."
 	DESCRIBE.SNOWPILE = "You call that being snowed in?"

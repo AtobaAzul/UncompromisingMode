@@ -50,6 +50,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 		"That's probably not good.",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "It's roots have taken hold!"
+	ANNOUNCE.SHADOWTALKER = {
+        "IM SO SORRY CHARLIE",
+        "THEY WONT LET US GO",
+        "I CANNOT BE FORGIVEN",
+    }
 	DESCRIBE.SAND = "Rocks so thoroughly beaten down they are no longer recognizable."
 	DESCRIBE.SANDHILL = "A little mound of yellow sand."
 	DESCRIBE.SNOWPILE = "Remove it, before it gets in my boots."

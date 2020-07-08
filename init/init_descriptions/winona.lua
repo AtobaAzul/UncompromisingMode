@@ -49,6 +49,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 		"Get your fire retardant boots on!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "I'm caught!"
+	ANNOUNCE.SHADOWTALKER = {
+        "DOES SHE REMEMBER ME?",
+        "SHE'S GONE",
+        "I MISS HER",
+    }
 	DESCRIBE.SAND = "I can only break it down so much."
 	DESCRIBE.SANDHILL = "I usually leave the cleanup to the janitors."
 	DESCRIBE.SNOWPILE = "Save your back, shovel early."

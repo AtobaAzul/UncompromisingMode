@@ -49,6 +49,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 		"Fury!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "You can't hold me down!"
+	ANNOUNCE.SHADOWTALKER = {
+        "I CAN CHANGE. I HAVE CHANGED.",
+        "I STILL FEEL THE HUNGER",
+        "JUST LAUGH IT OFF",
+    }
 	DESCRIBE.SAND = "Itchy and scratchy!"
 	DESCRIBE.SANDHILL = "Great grains of gravel!"
 	DESCRIBE.SNOWPILE = "Ooh what mischief we could cause with this! Hyuyu!"

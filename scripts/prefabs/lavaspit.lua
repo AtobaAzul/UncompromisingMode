@@ -48,7 +48,13 @@ local function fn(Sim)
     light:Enable(false)
     light:SetColour(200/255, 100/255, 170/255)
     fade_in(inst)
+	--[[
+    inst.entity:SetPristine()
 
+    if not TheWorld.ismastersim then
+        return inst
+    end
+]]
     inst.AnimState:PlayAnimation("dump")
     inst.AnimState:PushAnimation("idle_loop")
     inst.AnimState:SetBloomEffectHandle( "shaders/anim.ksh" )

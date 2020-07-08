@@ -49,6 +49,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 		"YES! FIRE FROM THE EARTH!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Oh, you're really asking to be burned!"
+	ANNOUNCE.SHADOWTALKER = {
+        "FLAMES ARE MY ONLY COMFORT",
+        "I BURNED IT ALL DOWN",
+        "ASHES, ASHES...",
+    }
 	DESCRIBE.SAND = "Big deal, it's sand."
 	DESCRIBE.SANDHILL = "Oh, look! It's some sand."
 	DESCRIBE.SNOWPILE = "Fire seems oddly ineffective."

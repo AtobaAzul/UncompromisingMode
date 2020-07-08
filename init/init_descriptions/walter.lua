@@ -49,6 +49,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 		"Just keep calm!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Creeping vines! I can chop them!"
+	ANNOUNCE.SHADOWTALKER = {
+        "I MUST PROTECT HER",
+        "I SHOULDN'T HAVE DONE IT",
+        "I CAN'T GIVE UP",
+    }
 	DESCRIBE.SAND = "make fun of me if I forget to change this if sand is reimplemented."
 	DESCRIBE.SANDHILL = "I will not make a mountain out of a sandhill."
 	DESCRIBE.SNOWPILE = "A shovel would help against frostbite when clearing these!"

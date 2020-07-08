@@ -34,7 +34,7 @@ local SnowOver =  Class(Widget, function(self, owner, storm_overlays)
     self.bg2:GetAnimState():SetBank("sand_over")
     self.bg2:GetAnimState():SetBuild("snow_over")
     self.bg2:GetAnimState():PlayAnimation("dust_loop", true)
-	self.bg2:GetAnimState():SetMultColour(1, 1, 1, .6)
+	self.bg2:GetAnimState():SetMultColour(1, 1, 1, .7)
 	
     self:Hide()
 	self:OnUpdate(0)
@@ -102,7 +102,7 @@ function SnowOver:OnUpdate(dt)
 	if TheWorld.state.issnowing and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE and TheWorld.net:HasTag("snowstormstartnet") then
 			if self.changed == nil then
 				self.changed = 0.01
-			elseif self.changed <= 0.6 then
+			elseif self.changed <= 0.7 then
 				self.changed = self.changed + 0.001 
 				--print("plus 0.1")
 				self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed)
