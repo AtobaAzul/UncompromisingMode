@@ -42,6 +42,33 @@ recipes.salsa.sanity = 50
 recipes.pepperpopper.health = 60
 recipes.pepperpopper.hunger = 50
 ------
+
+------Uncommon Farmplot Crockpot Foods Change
+recipes.pumpkincookie.hunger = 40
+recipes.pumpkincookie.sanity = 33
+recipes.pumpkincookie.health = 15
+
+recipes.stuffedeggplant.hunger = 40
+recipes.stuffedeggplant.health = 15
+
+recipes.asparagussoup.hunger = 25
+recipes.asparagussoup.health = 30
+recipes.asparagussoup.sanity = 20
+
+--recipes.watermelonicle.health = number
+--recipes.watermelonicle.sanity = number
+--recipes.watermelonicle.hunger = number
+------
+
+------Common Farmplot Crockpot Foods Change
+recipes.fishtacos.hunger = 62.5
+recipes.fishtacos.health = 15
+recipes.fishtacos.sanity = 5
+
+recipes.potatotornado.hunger = 40
+recipes.potatotornado.health = 3
+recipes.potatotornado.sanity = 5
+------
 -----------------------------------------------------------------
 -- Prevent cooked eggs birdcage infinite loop
 -----------------------------------------------------------------
