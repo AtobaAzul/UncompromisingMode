@@ -95,4 +95,5 @@ return {
 	"charliephonograph",
 	"stumpling",
 	"shadow_teleporter",
+	"liceloaf",
 }

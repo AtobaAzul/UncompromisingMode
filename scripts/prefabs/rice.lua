@@ -51,15 +51,15 @@ local function fn()
 		inst:RemoveTag("_named")
 
         inst:AddComponent("edible")
-        inst.components.edible.healthvalue = 0
-        inst.components.edible.hungervalue = 9.8
-        inst.components.edible.sanityvalue = 0      
-        inst.components.edible.foodtype = FOODTYPE.VEGGIE
+        --inst.components.edible.healthvalue = 0
+        --inst.components.edible.hungervalue = 9.8
+        --inst.components.edible.sanityvalue = 0      
+        inst.components.edible.foodtype = FOODTYPE.HORRIBLE
 
-        inst:AddComponent("perishable")
-        inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)
-        inst.components.perishable:StartPerishing()
-        inst.components.perishable.onperishreplacement = "spoiled_food"
+        --inst:AddComponent("perishable")
+        --inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)
+        --inst.components.perishable:StartPerishing()
+        --inst.components.perishable.onperishreplacement = "spoiled_food"
 
         inst:AddComponent("stackable")
         inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM

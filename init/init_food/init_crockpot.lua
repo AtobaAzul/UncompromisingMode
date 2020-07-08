@@ -355,3 +355,16 @@ local seafoodpaella =
     cooktime = 0.5,
 }
 AddCookerRecipe("cookpot", seafoodpaella)
+AddCookerRecipe("portablecookpot", seafoodpaella)
+local liceloaf =
+{
+    name = "liceloaf",
+    test = function(cooker, names, tags) return (names.rice or names.rice_cooked) == 4 end,
+
+    priority = 30,
+    weight = 1,
+    perishtime = nil,
+    cooktime = 0.5,
+}
+AddCookerRecipe("cookpot", liceloaf)
+AddCookerRecipe("portablecookpot", liceloaf)

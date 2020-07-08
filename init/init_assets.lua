@@ -140,7 +140,9 @@ Assets = {
 	Asset("ANIM", "anim/gatorsnake.zip"),
 	Asset("ANIM", "anim/swilson.zip"),
 	Asset("ANIM", "anim/stumpling.zip"),
-
+	--Asset("IMAGE", "images/inventoryimages/liceloaf.tex"),
+	--Asset("ATLAS", "images/inventoryimages/liceloaf.xml"),
+	--Asset("ANIM", "anim/liceloaf.zip"),
 
 	--Map Icons Start--
 	Asset("IMAGE", "images/inventoryimages/seafoodpaella.tex"),
