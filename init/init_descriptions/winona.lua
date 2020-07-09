@@ -97,3 +97,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.BUGZAPPER = "Best patent this model."
 	DESCRIBE.STUMPLING = "The stumps also have eyes!"
+	DESCRIBE.MOON_TEAR = "I think it's sprung a leak. Maybe I can fix it up later."
+	DESCRIBE.SHADOW_TELEPORTER = "I'm tempted to smack the darn thing for taunting me."

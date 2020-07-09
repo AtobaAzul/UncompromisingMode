@@ -97,6 +97,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.SEAFOODPAELLA = "This should clear my nasal cavity so I can get back to reading."
 	
 	DESCRIBE.STUMPLING = "I must observe these creatures."
+	DESCRIBE.MOON_TEAR = "Could hold some arcane purpose, in the future."
+	DESCRIBE.SHADOW_TELEPORTER = "It seems interested in that gem, perhaps this warrants a closer look."
+	
 	ACTIONFAIL.READ =
         {
             GENERIC = "I cannot concentrate under these conditions!",

@@ -96,3 +96,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.BUGZAPPER = "Small stick to hit small bug"
 	DESCRIBE.STUMPLING = "Is tiny wood child."
+	DESCRIBE.MOON_TEAR = "It is strong like Wolfgang, but sad like child."
+	DESCRIBE.SHADOW_TELEPORTER = "Test my might! I pry that gem out of tiny hand!"

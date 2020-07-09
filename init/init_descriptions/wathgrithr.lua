@@ -96,3 +96,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.SEAFOODPAELLA = "A mire-warrior's reward!"
 	
 	DESCRIBE.STUMPLING = "A small, angry woodland sprite!"
+	DESCRIBE.MOON_TEAR = "Theres great power here! Of a mysterious kind..."
+	DESCRIBE.SHADOW_TELEPORTER = "Let us strike it down, and take it's treasure!"

@@ -97,3 +97,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.BUGZAPPER = "I prefer fire over electricity, unless it's an electrical fire!"
 	DESCRIBE.STUMPLING = "You're definately flammable!"
+	DESCRIBE.MOON_TEAR = "Just put it away! It's just crying over everything!"
+	DESCRIBE.SHADOW_TELEPORTER = "Ooh! Gimme!"

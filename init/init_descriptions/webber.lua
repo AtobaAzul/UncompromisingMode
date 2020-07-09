@@ -95,4 +95,6 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.RICE_COOKED = "We would like to eat it with something else!"
 	DESCRIBE.SEAFOODPAELLA = "It helps drain our nostrils."
 
-	DESCRIBE.STUMPLING = "What is this thing?"	
+	DESCRIBE.STUMPLING = "What is this thing?"
+	DESCRIBE.MOON_TEAR = "It makes our fur wet, lets keep it stored somewhere safe."
+	DESCRIBE.SHADOW_TELEPORTER = "A gift? It doesn't seem like it wants to let go."

@@ -96,3 +96,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.BUGZAPPER = "Cmon, it's just a little sting!"
 	DESCRIBE.STUMPLING = "Cmon! Chopping all those trees was just a joke!"
+	DESCRIBE.MOON_TEAR = "No use crying over missing chunks!"
+	DESCRIBE.SHADOW_TELEPORTER = "I think it's playing a trick, let's pretend to fall for it!"

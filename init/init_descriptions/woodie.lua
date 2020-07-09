@@ -96,3 +96,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.BUGZAPPER = "I once met a bugzapper named Darrel. Or was that the brand?"
 	DESCRIBE.STUMPLING = "The woods cry out!"
+	DESCRIBE.MOON_TEAR = "Cheer up, eh? Let's keep it company."
+	DESCRIBE.SHADOW_TELEPORTER = "That creepy thing's got a gem in it's hand, should we take it?"

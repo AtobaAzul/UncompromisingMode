@@ -96,3 +96,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.SEAFOODPAELLA = "It clears my nose, just for it to get clogged again."
 	
 	DESCRIBE.STUMPLING = "A wooden gremlin."
+	DESCRIBE.MOON_TEAR = "It seems the moon too knows sorrow."
+	DESCRIBE.SHADOW_TELEPORTER = "You can't hold onto that thing forever."
