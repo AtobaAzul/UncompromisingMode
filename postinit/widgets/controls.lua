@@ -11,8 +11,11 @@ AddClassPostConstruct( "widgets/controls", function(self, inst)
 	local FogOver = require "widgets/fogover"
 	self.fogover = self:AddChild( FogOver(ownr) )
 	self.fogover:MoveToBack()
-	self.inst:ListenForEvent("startfog", function() return self:StartFog() end, self.owner)
-	self.inst:ListenForEvent("stopfog", function() return self:StopFog() end, self.owner)
+	self.inst:ListenForEvent("vetcursed", function() return self:Show() end, self.owner)
+	self.inst:ListenForEvent("unvetcursed", function() return self:Hide() end, self.owner)
+	local Vetcursewidget = require "widgets/vetcursewidget"
+	self.vetcursewidget = self:AddChild( Vetcursewidget(ownr) )
+	self.vetcursewidget:MoveToBack()
 end)
 --[[
 AddClassPostConstruct("screens/playerhud",function(inst)

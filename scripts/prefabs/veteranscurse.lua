@@ -28,6 +28,7 @@ local function AttachCurse(inst, target)
         target.components.combat.externaldamagemultipliers:SetModifier(inst, .75)    --Reduce Damage Done
 		target.vetcurse = true
 		ForceToTakeMoreDamage(target)
+		target:AddTag("vetcurse")
     end
 end
 
@@ -36,6 +37,7 @@ local function DetachCurse(inst, target)
         target.components.combat.externaldamagemultipliers:RemoveModifier(inst)
 		target.vetcurse = false
 		ForceToTakeUsualDamage(target)
+		target:RemoveTag("vetcurse")
     end
 end
 local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration, priority, prefabs)
