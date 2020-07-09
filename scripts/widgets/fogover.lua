@@ -88,7 +88,7 @@ function FogOver:OnUpdate(dt)
     --else
     --    self:Show()
     --end
-	self.bg2:SetTint(1, 1, 1, self.alpha)
+	self.bg2:SetTint(0.5, 0.5, 0.5, self.alpha)
 	if self.alpha == 0 then
 	self:Hide()
 	end

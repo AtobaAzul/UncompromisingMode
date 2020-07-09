@@ -114,6 +114,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.SEAFOODPAELLA = "Clears the sinuses."
 	
 	DESCRIBE.STUMPLING = "He's small, but he's angry!"
+	DESCRIBE.BUGZAPPER = "Now I'll show those pesky bugs."
 	
 	ACTIONFAIL.READ =
         {
