@@ -678,15 +678,15 @@ local function SpawnPhonographFunction(player)
 end	
 											
 local function SpawnPhonograph(player)
-	player:DoTaskInTime(10, function()
+	player:DoTaskInTime(8, function()
 		SpawnPhonographFunction(player)
 	end)
 end
 
 local function SpawnShadowTeleporterFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
-	local x2 = x + math.random(-10, 10)
-	local z2 = z + math.random(-10, 10)
+	local x2 = x + math.random(-8, 8)
+	local z2 = z + math.random(-8, 8)
 	
 	if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
 		local teleporter = SpawnPrefab("shadow_teleporter")
@@ -749,23 +749,25 @@ local function SpawnWalrusHunt(player)
 	end)
 end
 
-local function SpawnShadowTalker(player)
+local function SpawnShadowTalker(player, mathmin, mathmax)
 	if TheWorld.state.isnight then
-		player:DoTaskInTime(5+math.random(5,10), function()
+		local randommin = mathmin or 5
+		local randommax = mathmax or 10
+		player:DoTaskInTime(1+math.random(randommin, randommax), function()
 			local radius = 5 + math.random() * 10
 			local theta = math.random() * 2 * PI
 			local x, y, z = player.Transform:GetWorldPosition()
 			local x1 = x + radius * math.cos(theta)
 			local z1 = z - radius * math.sin(theta)
 			local light = TheSim:GetLightAtPoint(x1, 0, z1)
-			if light <= .05 then
+			
+			if light <= .1 and #TheSim:FindEntities(x1, 0, z1, 50, "shadowtalker") > 1 then
 				local ent = SpawnPrefab("shadowtalker")
 				ent.Transform:SetPosition(x1, 0, z1)
 				ent.speech = player
-			else
-				SpawnShadowTalker(player)
 			end
-				
+			
+			SpawnShadowTalker(player, 1, 1)
 		end)
 	end
 end

@@ -68,6 +68,7 @@ local function fn()
 
     inst:AddTag("NOCLICK")
     inst:AddTag("FX")
+    inst:AddTag("shadowtalker")
     --[[Non-networked entity]]
     inst.entity:SetCanSleep(false)
 	
