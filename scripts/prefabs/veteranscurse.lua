@@ -25,7 +25,7 @@ local function ForceToTakeUsualDamage(inst)
 end
 local function AttachCurse(inst, target)
     if target.components.combat ~= nil then
-        target.components.combat.externaldamagemultipliers:SetModifier(inst, .75)    --Reduce Damage Done
+        --target.components.combat.externaldamagemultipliers:SetModifier(inst, .75)    Effect Removed
 		target.vetcurse = true
 		ForceToTakeMoreDamage(target)
 		target:AddTag("vetcurse")
@@ -34,7 +34,7 @@ end
 
 local function DetachCurse(inst, target)
     if target.components.combat ~= nil then
-        target.components.combat.externaldamagemultipliers:RemoveModifier(inst)
+        --target.components.combat.externaldamagemultipliers:RemoveModifier(inst)
 		target.vetcurse = false
 		ForceToTakeUsualDamage(target)
 		target:RemoveTag("vetcurse")
