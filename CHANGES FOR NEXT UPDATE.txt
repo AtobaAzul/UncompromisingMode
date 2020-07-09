@@ -102,6 +102,40 @@ WOLFGANG:
 
 Wolfgang now gets knockback resistance when mighty
 
+CROCKPOT FOOD BUFFS:
+
+Creamy Potato Puree
+HUNGER - 37.5 > 100
+
+Salsa Fresca
+SANITY - 33 > 50
+
+Stuffed Pepper Poppers
+HEALTH - 30 > 60
+HUNGER - 25 > 50
+
+Pumpkin Cookies
+HEALTH - 0 >  15
+HUNGER- 37.5 > 40
+SANITY- 15 > 33
+
+Stuffed Eggplant
+3 HP > 15 HP
+37.5 HUNGER > 50 HUNGER
+
+Asperagus Soup
+HEALTH- 20 > 30
+HUNGER- 18.75 > 25
+SANITY- 5 > 20
+
+Fish Tacos
+HEALTH- 20 > 15
+HUNGER- 37.5 > 62.5
+
+Vegetable Stinger
+HUNGER- 25 > 30 
+Health - 3 > 10
+
 
 TUNING:
 
