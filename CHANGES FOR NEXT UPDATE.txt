@@ -121,3 +121,25 @@ Reduced Air Conditioner recipe from 3 > 2 Shroom Skin
 Increased warning time when players are close to sneezing
 Snowstorms moving overlay is 10% more transparent now
 Catcoons do much more damage to rats
+
+BUGS/CRASHING/FIXES
+Fixed some Action related crashes with mod compatibility
+Cooking Unagi no longer crashes the game
+Hayfever should now properly turn off if disabled in the configuration menu
+Updated new recipes to fit in with our other crockpot changes
+Multiple Deerclops should no longer spawn on the surface
+Fixed Trapdoor's readding duplicate components
+Fixed crash related to the Wilting Dragonfly losing its burning spit target
+Toadlings, Toads, and Frogs should now all get along
+Fixed many of the new sounds from being too loud, and heard too far away
+Birds now must digest food before being taken out of the cage or being fed more
+Surf N Turf now has a maximum limit of 1 Monster Meat
+Using looping emotes should no longer skip the sneeze animation
+Wortox now correctly shows his health nerf on the character selection screen
+The Ancient Guardian's boulder attack will now only target living players
+The Dread Eye's mini Shadow Eyes will now be more transparent based on sanity
+Reloading a world after killing the Bee Queen will no longer reset hayfever - Keep in mind you can still sneeze when getting hit by Bees, Mosquitos, Etc.
+Wormwood and Willow should no properly become flammable when reviving
+Added new map icons for various new items
+Monster Morsels no longer defy gravity when on a drying rack
+Fixed issue where rat burrows would duplicate when a world is loaded, and would disappear after duplicating if loaded again. Caused infinite rats.
