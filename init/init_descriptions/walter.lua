@@ -99,3 +99,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.STUMPLING = "The woods is rising up!"
 	DESCRIBE.MOON_TEAR = "Far away from home huh? Me too... Woby and I will keep you company!"
 	DESCRIBE.SHADOW_TELEPORTER = "I could loosen it's grip, if I'm feeling risky."
+	DESCRIBE.POLLENMITEDEN = "These little guys are spreading fast!"
+    DESCRIBE.POLLENMITES = "My eyes are watering just looking at them."

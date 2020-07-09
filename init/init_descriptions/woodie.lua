@@ -98,3 +98,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.STUMPLING = "The woods cry out!"
 	DESCRIBE.MOON_TEAR = "Cheer up, eh? Let's keep it company."
 	DESCRIBE.SHADOW_TELEPORTER = "That creepy thing's got a gem in it's hand, should we take it?"
+	DESCRIBE.POLLENMITEDEN = "Industrious little guys, eh Lucy?"
+    DESCRIBE.POLLENMITES = "Lotta those guys in the lumber camps."

@@ -99,3 +99,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.STUMPLING = "The stumps also have eyes!"
 	DESCRIBE.MOON_TEAR = "I think it's sprung a leak. Maybe I can fix it up later."
 	DESCRIBE.SHADOW_TELEPORTER = "I'm tempted to smack the darn thing for taunting me."
+	DESCRIBE.POLLENMITEDEN = "We should dismantle that before it spreads further."
+    DESCRIBE.POLLENMITES = "A nasty hazard of yard work."

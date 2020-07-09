@@ -98,3 +98,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.STUMPLING = "I wish I were back at my kitchen!"
 	DESCRIBE.MOON_TEAR = "I doubt its sanitary, but I should keep it around."
 	DESCRIBE.SHADOW_TELEPORTER = "Call me superstitious, but something dangerous is at play here..."
+	DESCRIBE.POLLENMITEDEN = "I'd rather have a mound of chocolate."
+    DESCRIBE.POLLENMITES = "The bugs are really bad around here."

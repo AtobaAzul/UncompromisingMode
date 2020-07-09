@@ -118,6 +118,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.BUGZAPPER = "Now I'll show those pesky bugs."
 	DESCRIBE.MOON_TEAR = "I think the moon is upset at its missing piece. Let's keep this safe."
 	DESCRIBE.SHADOW_TELEPORTER = "Hey! Let go of that gem!"
+	DESCRIBE.POLLENMITEDEN = "Science says it mite be dangerous."
+    DESCRIBE.POLLENMITES = "I mite want to keep my distance."
 	
 	ACTIONFAIL.READ =
         {

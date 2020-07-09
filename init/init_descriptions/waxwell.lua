@@ -100,3 +100,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.STUMPLING = "They are revolting!"
 	DESCRIBE.MOON_TEAR = "Another one of the moons... gifts. Lets hold onto it for now."
 	DESCRIBE.SHADOW_TELEPORTER = "A trick, for sure. But the rewards could be great."
+	DESCRIBE.POLLENMITEDEN = "Ugh. The horde home."
+    DESCRIBE.POLLENMITES = "Horde horrible."

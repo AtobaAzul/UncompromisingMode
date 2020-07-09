@@ -98,3 +98,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.STUMPLING = "Is tiny wood child."
 	DESCRIBE.MOON_TEAR = "It is strong like Wolfgang, but sad like child."
 	DESCRIBE.SHADOW_TELEPORTER = "Test my might! I pry that gem out of tiny hand!"
+	DESCRIBE.POLLENMITEDEN = "Wolfgang smash bug home!"
+    DESCRIBE.POLLENMITES = "Tiny bugs! Wolfgang kill hundreds in ONE swing!"

@@ -98,3 +98,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.STUMPLING = "A wooden gremlin."
 	DESCRIBE.MOON_TEAR = "It seems the moon too knows sorrow."
 	DESCRIBE.SHADOW_TELEPORTER = "You can't hold onto that thing forever."
+	DESCRIBE.POLLENMITEDEN = "They're building their own doom."
+    DESCRIBE.POLLENMITES = "Like life, they wear you down little by little."

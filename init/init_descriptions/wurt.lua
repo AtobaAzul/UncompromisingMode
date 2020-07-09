@@ -98,3 +98,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 	DESCRIBE.STUMPLING = "Never seen this before."
 	DESCRIBE.MOON_TEAR = "Not happy wet, but sad wet..."
 	DESCRIBE.SHADOW_TELEPORTER = "Treasure in it's claws!"
+	DESCRIBE.POLLENMITEDEN = "Glrp... scary."
+    DESCRIBE.POLLENMITES = "FLURP! Flyers itch..."

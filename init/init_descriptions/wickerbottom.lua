@@ -99,6 +99,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.STUMPLING = "I must observe these creatures."
 	DESCRIBE.MOON_TEAR = "Could hold some arcane purpose, in the future."
 	DESCRIBE.SHADOW_TELEPORTER = "It seems interested in that gem, perhaps this warrants a closer look."
+	DESCRIBE.POLLENMITEDEN = "Obviously the work of a eusocial insect."
+    DESCRIBE.POLLENMITES = "A swarm of Melittiphis Alvearlus. Strange behavior for a parasite."
 	
 	ACTIONFAIL.READ =
         {

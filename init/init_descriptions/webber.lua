@@ -98,3 +98,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.STUMPLING = "What is this thing?"
 	DESCRIBE.MOON_TEAR = "It makes our fur wet, lets keep it stored somewhere safe."
 	DESCRIBE.SHADOW_TELEPORTER = "A gift? It doesn't seem like it wants to let go."
+	DESCRIBE.POLLENMITEDEN = "It's where all those little bugs live."
+    DESCRIBE.POLLENMITES = "Don't bite us, little guys."
