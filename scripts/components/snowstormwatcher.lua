@@ -120,7 +120,7 @@ function TrySpawning(v)
 	local playervalue2 = #nearbyplayers2 * 0.1
 	
 	if TheWorld.state.iswinter and ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") )  then--and self.snowstormstart then
-		if math.random() <= 0.15 - playervalue2 then
+		if math.random() <= 0.25 - playervalue2 then
 				--local spawn_pt = GetSpawnPoint(origin_pt, PLAYER_CHECK_DISTANCE + 5)
 				
 			local ents5 = TheSim:FindEntities(x1, y1, z1, 3, nil, nil, { "snowpileradius"})
@@ -147,7 +147,7 @@ local function SnowpileChance(inst, self)
 	local playervalue1 = #nearbyplayers1 * 0.025
 	
 	if TheWorld.state.iswinter and ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") ) then--and self.snowstormstart then
-		if chancer < 0.30 - playervalue1 then
+		if chancer < 0.40 - playervalue1 then
 				local xrandom = math.random(-20, 20)
 				local zrandom = math.random(-20, 20)
 				local ents7 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 6, nil, nil, { "snowpileradius"})

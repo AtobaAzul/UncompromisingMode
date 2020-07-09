@@ -4,7 +4,7 @@ GLOBAL.setfenv(1, GLOBAL)
 SetSharedLootTable( 'catty',
 {
     {'meat',             1.00},
-    {'coontail',		 1.00},
+    {'coontail',		 0.80},
     {'monstermeat',		 0.66},
 })
 

@@ -1,0 +1,123 @@
+New Core Feature: 
+
+Random Night Events. Sometimes, when night comes, random events can occur, sometimes dangerous, sometimes helpful, and sometimes... strange. No spoilers, but there are plenty of them!
+
+
+New Mobs:
+
+Adult Batalisks will now spawn from Bat Caves, and sometimes from open cave entrances
+Scorpions now spawn in the desert during the daytime, burrow back into the ground at dusk
+Pollen Mites. These aggressive bug clouds will latch onto a variety of mobs, causing them to enrage and target nearby players. If they latch onto a player, they will deal periodic damage and reduce the time until sneezing
+Pollen Mite dens will appear during spring, and will grow, and spread, creating more dens. Fire can be helpful for dealing with the dens, but be careful when using fire around Pollen Mites themselves! I recommend the new Bug Zapper weapon against them both.
+Pineling - Axe do an entry or leave it a suprise?
+
+New Food Resource: 
+
+Rice Plants! Rice plants will grow in patches of water inside the swamp. Rice is helpful against hayfever, and can be used to cook new foods.
+
+
+New Weapons: 
+
+Bug Zapper. Does extra damage to insects, lightning damage when fueled.
+The Morning Star and Bug Zapper can now be refueled using new fuel type: Battery.
+This includes Electrical Doodads, Canary Feathers, Frazzled Wires, Electric Milk, and Potatoes
+Updated Trapdoor Spider sprites
+The Morning Star now protects the player from lightning strikes
+
+
+New Feature: 
+
+Added challenge altar near the Florid Postern. Activating it will... what again? (Also I want to add a 20% faster starvation to it)
+New: Mactusks camps will now appear during the summer, wearing stylish sunglasses, a summer shirt, and bringing fire hounds instead of ice hounds
+
+
+ITEMS:
+
+Thulecite Armor now gives knockback protection, and 40% sanity aura reduction
+Dapper Vest now gives 40% sanity aura reduction
+The Insulated Pack is no longer burnable
+The Cookie Cutter Cap now reflects 75% of damage taken back at the attacker, and releases 5 damage spikes in an aoe
+The Glass Cutter now does 12 more damage to shadows (80)
+The Ice Boonerang now heals over 20% of its durability when repaired with ice
+Doubled Ice Boomerang freeze on hit amount
+Players wearing the bone helmet will no longer spawn the Creeping Fear, and are no longer able to be hit by shadow projectiles.
+Ice-Flingomatics now hold 20% more fuel, but lose a small amount of fuel every time they fling ice - Cheese prevention
+Moggles now act as sandstorm/snowstorm goggles
+
+
+THE WORLD:
+
+Rare crop Crockpot Foods have increased stats (AXE PLS)
+Players can once again overheat in caves, with a 40% slower temperature rate, and only the minimum level of overheating damage
+Antlion sinkholes will now cause ruptures in boats
+Raindrops will now splash into green puddles, and will play a sizzle sound effect, indicating when Acid Rain is active
+
+
+MOBS CHANGES / FEATURES:
+
+Spider Warriors, and Depth Dwellers will now counter attack when attacked
+The Toadstool now only drops Shroom Skins on death (Raised amount dropped to match health based drops)
+Bees, Mosquito's, and the new Scorpions will now reduce a players time until sneezing when attacking
+Mosquito's now take on a new look during spring
+Pigmen and Bunnymen refuse to murder their own races, but will still watch companions do so.
+Abominamoles now have a snowball belch attack
+The Ancient Guardian now knocks players back when attacking (helps prevent chain stomps/falling rocks)
+Pengull's will now only aggressively target players when they are in their ice puddle
+Clockworks are now immune to fire
+Clockwork Bishop no longer flees between attacks
+Luxury / Gobbler Fans will now reduce hayfever by a large amount
+The Raid Boss Dragonfly will now fly away during summer, or if there are bosses nearby - Cheese prevention
+Frogs will now eat food on the ground
+
+A little mean spirited surprise for players, be careful around suspicious rocks...
+
+
+CHARACTER CHANGES:
+
+WALTER & WOBY: 
+
+Walter can now craft Firecracker Rounds out of nitre. Firecracker rounds will deal 17 damage on hit, and will explode 8 times, dealing 5 damage per explosion.
+Woby can now be killed, and targeted by a select few hyper aggressive mobs. She will respawn after half a day.
+Woby can now eat Monster Morsels
+Woby will run slightly further away from threats
+Walter takes 50% more hayfever damage from hayfever damaging mobs
+Walter has a lower minimum and maximum time till next sneeze after sneezing
+
+WORMWOOD:
+
+Wormwood now takes an additional -5 sanity from digging up plants, no more infinite sanity gain from sapling digging/planting, its not equal loss and gain
+New Wormwood edible craftable: Honey Log Roll. Reduces hayfever for all characters, increases hunger, better stats for Wormwood and Woodie
+Wormwood's Bramble Husk armor will now periodically shoot out spikes when potentially dangerous mobs are nearby, lowered their damage to compensate
+Wormwood can be effected by Hayfever damagers, such as Pollen Mites, and Bees
+
+WARLY:
+
+Added new Warly specific crockpot dishes: Carapace Cooler and Zaspberry Parfait (GET DETAILS FROM AXE/ANOMEN)
+
+WILLOW:
+Willow will now instantly light things on fire during winter
+Willow's immolation explosion will no longer hit players and basic companions
+
+WOLFGANG:
+
+Wolfgang now gets knockback resistance when mighty
+
+
+TUNING:
+
+The Creeping Fear will now try to get closer to the player before attacking.
+Sleeping now halts hayfever
+Increased minimum and maximum next sneeze time after sneezing
+Wobster Dinner now requires 2 Wobster
+Lowered maximum ice/twig filler from 2 to 1 (Banana Pops or Melonsicles withstanding)
+Removed Toad Rain during Acid Rain event
+Tree Guards no longer recoil from attacks
+Reduced the Wilting Dragonfly's damage by 15%
+Increase Batalisk health to 75 from 50
+Tuned Terror/Nightmare Beak lunge, feels much more fair and balanced
+Hayfever overlay is a bit more green now
+Reduced Spore Pack recipe from 2 > 1 Shroom Skin
+Reduced Air Conditioner recipe from 3 > 2 Shroom Skin
+Increased warning time when players are close to sneezing
+Snowstorms moving overlay is 10% more transparent now
+Catcoons do much more damage to rats
