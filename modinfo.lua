@@ -286,6 +286,6 @@ configuration_options =
 			{description = "80%", data = 0.2},
 			{description = "INSANITY", data = 0},
 		},
-		default = 0.8,
+		default = 0.6,
 	},
 }
