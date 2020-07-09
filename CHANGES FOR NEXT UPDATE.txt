@@ -102,39 +102,31 @@ WOLFGANG:
 
 Wolfgang now gets knockback resistance when mighty
 
+
 CROCKPOT FOOD BUFFS:
 
-Creamy Potato Puree
-HUNGER - 37.5 > 100
+All changes to dishes took into account these different qualities priorities ranging from top to bottom:
+-[1] Amount of farmplot foods used in a single dish.
+-[2] Rarity of farmplot foods used in a dish.
+-[3] The stats restored by optimally eating their raw ingredients in Uncompromising Mode.
+-[4] The overall diversity of ingredients used in a dish.
+-[5] The similarity of a dish's ingredients to another may change the focus of a particular dish (For instance, salsa fresca focuses on Sanity to differentiate from Creamy Potato Puree which focuses on Hunger).
 
-Salsa Fresca
-SANITY - 33 > 50
+----Rare
+Creamy Potato Puree hunger buffed from 37.5 Hunger to 100 Hunger. [1] [2] [3] [5]
+Salsa fresca Hunger reduced to 25 and Sanity increased to 50. [1] [2] [5]
+Stuffed Pepper Poppers Hunger increased to 50. [2] [3] [5]
 
-Stuffed Pepper Poppers
-HEALTH - 30 > 60
-HUNGER - 25 > 50
+----Uncommon
+Pumpkin Cookies now restore 40 Hunger 33 Sanity and 15 Health. [3] [4]
+Stuffed Eggplant now restores 40 Hunger and 15 Health. [3]
+Asparagus Soup now restores 25 Hunger 30 Health and 20 Sanity. [3]
 
-Pumpkin Cookies
-HEALTH - 0 >  15
-HUNGER- 37.5 > 40
-SANITY- 15 > 33
+----Common
+Fish Tacos now restore 62.5 Hunger 15 Health and 5 Sanity [4]
+Vegetable Stinger now restores 30 Hunger and 10 Health [4]
 
-Stuffed Eggplant
-3 HP > 15 HP
-37.5 HUNGER > 50 HUNGER
-
-Asperagus Soup
-HEALTH- 20 > 30
-HUNGER- 18.75 > 25
-SANITY- 5 > 20
-
-Fish Tacos
-HEALTH- 20 > 15
-HUNGER- 37.5 > 62.5
-
-Vegetable Stinger
-HUNGER- 25 > 30 
-Health - 3 > 10
+A reminder is that you are now limited to one ice and one stick for making crockpot dishes that do not already require more than one of either of them.
 
 
 TUNING:
