@@ -19,9 +19,34 @@ self.caveevents = nil
 self.totalrandomwildweight = nil
 self.totalrandombaseweight = nil
 self.totalrandomcaveweight = nil
+
+
+--------------------------------
+--RNE Player Scaling function
+--------------------------------
+
+local function PlayerScaling(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	--local ents = TheSim:FindEntities(x, 0, z, 50, "player", "playerghost")
+	local ents = TheSim:FindEntities(x, 0, z, 50, "pig")
+	
+	if #ents >= 0 and #ents < 3 then
+		return 1
+	elseif #ents >= 2 and #ents < 5 then
+		return 2
+	elseif #ents >= 5 and #ents < 7 then
+		return 3
+	elseif #ents > 6 then
+		return 4
+	end
+	
+	return 1
+end
+	
 --------------------------------
 --RNE Fog Controller Functions Below
 --------------------------------
+
 local function StopFog(player)
 	if player:HasTag("infog") then
 		player:RemoveTag("infog")
@@ -148,8 +173,8 @@ local days_survived = player.components.age ~= nil and player.components.age:Get
 		end
 	else
 		player:DoTaskInTime(10 * math.random() + 3, function()
-			local num_nutters = math.random(3,5)
-			for i = 1, num_nutters do
+			local level = PlayerScaling(player)
+			for i = 1, level + 3 do
 				SpawnBirchNutters(player)
 			end
 			print("leifattackfailed")
@@ -190,8 +215,8 @@ local days_survived = player.components.age ~= nil and player.components.age:Get
 		else
 	
 		player:DoTaskInTime(10 * math.random() + 3, function()
-			local num_nutters = math.random(3,5)
-			for i = 1, num_nutters do
+			local level = PlayerScaling(player)
+			for i = 1, level + 3 do
 				SpawnBirchNutters(player)
 			end
 			print("leifattackfailed")
@@ -221,11 +246,12 @@ local function SpawnShadowChars(player)
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
 			local extras = 0
+			local level = PlayerScaling(player)
 			if day > 30 then
-			extras=extras+1
+			extras = extras + level
 			end
 			if day > 60 then
-			extras =extras+2
+			extras = extras + 1 + level
 			end
 			local numshad = 1+extras
 			for i = 1, numshad do
@@ -341,7 +367,8 @@ local function SpawnWerePigs(player)
 	player:DoTaskInTime(5 + math.random(0,5), function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
-			local num_pig = 3+math.floor(math.random()*4, 6)
+			local level = PlayerScaling(player)
+			local num_pig = 3+level
 			for i = 1, num_pig do
 				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
 					SpawnWerePigsFunction(player)
@@ -376,7 +403,9 @@ local function SpawnBats(player)
 		if TheWorld.state.cycles <= 10 then
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
-			local num_bats = 3
+			
+			local level = PlayerScaling(player)
+			local num_bats = 3 + level
 			for i = 1, num_bats do
 				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
 					local bat = SpawnPrefab("bat")
@@ -387,7 +416,9 @@ local function SpawnBats(player)
 		else
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
-			local num_bats = math.min(2 + math.floor(day/35), 6)
+			
+			local level = PlayerScaling(player)
+			local num_bats = math.min(2 + math.floor(day/35), 6) + level
 			for i = 1, num_bats do
 				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
 					local bat = SpawnPrefab("vampirebat")
@@ -456,7 +487,8 @@ local function SpawnKrampus(player)
 			player:DoTaskInTime(0.6 * math.random(4) * 0.3, function()
 				--local thunder = SpawnPrefab("thunder_far")
 				--thunder.Transform:SetPosition(x + math.random(-10,10), y, z + math.random(-10,10))
-				TheWorld:PushEvent("ms_forcenaughtiness", { player = player, numspawns = 2 })
+				local level = 1 + PlayerScaling(player)
+				TheWorld:PushEvent("ms_forcenaughtiness", { player = player, numspawns = level })
 			end)
 			StopFog(player)
 	end)
@@ -555,8 +587,9 @@ local function SpawnSquids(player)
 	player:DoTaskInTime(squidtime, function()
 		local x, y, z = player.Transform:GetWorldPosition()
 		local day = TheWorld.state.cycles
-		local num_squids = math.random(2,3)
-		for i = 1, num_squids do
+		
+		local level = PlayerScaling(player)
+		for i = 1, 1 + level do
 			player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
 				SpawnSquidFunction(player)
 			end)
@@ -646,21 +679,25 @@ local function ChessPiece(player)
 		--print("Shadows...")
 		local x, y, z = player.Transform:GetWorldPosition()
 		local chesscheck = math.random()
-		player:DoTaskInTime(0.6 + math.random(4), function()
-			if chesscheck >= 0.66 then
-				local piece = SpawnPrefab("shadow_bishop")
-				piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
-				piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
-			elseif chesscheck >= 0.33 and chesscheck < 0.66 then
-				local piece = SpawnPrefab("shadow_rook")
-				piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
-				piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
-			else
-				local piece = SpawnPrefab("shadow_knight")
-				piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
-				piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
-			end
-		end)
+		
+		local level = PlayerScaling(player)
+		for i = 1, level do
+			player:DoTaskInTime(0.6 + math.random(4), function()
+				if chesscheck >= 0.66 then
+					local piece = SpawnPrefab("shadow_bishop")
+					piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
+					piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
+				elseif chesscheck >= 0.33 and chesscheck < 0.66 then
+					local piece = SpawnPrefab("shadow_rook")
+					piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
+					piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
+				else
+					local piece = SpawnPrefab("shadow_knight")
+					piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
+					piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
+				end
+			end)
+		end
 	end
 end
 
@@ -706,17 +743,18 @@ local function SpawnWalrusHuntFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local x2 = x + math.random(-40, 40)
 	local z2 = z + math.random(-40, 40)
-	if not TheWorld.state.isnight then
-		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) and #TheSim:FindEntities(x2, y, z2, 20, {"player"}) > 0 then
+	if TheWorld.state.isnight then
+		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) and #TheSim:FindEntities(x2, y, z2, 20, {"player"}) < 1 then
 			local leader = SpawnPrefab("walrus")
+			
 			leader.Transform:SetPosition(x2, y, z2)
 			leader:DoTaskInTime(0, function(leader) DayBreak(leader) end)
 			if leader.components.sleeper ~= nil then
 				leader:RemoveComponent("sleeper")
 			end
-			leader.components.combat:SetTarget(leader)
-			
-			for i = 1, 2 do
+
+			local level = PlayerScaling(player)
+			for i = 1, level do
 				if TheWorld.state.issummer then
 					local companion = SpawnPrefab("firehound")
 					companion.Transform:SetPosition(x2 + math.random(-1,1), y, z2 + math.random(-1,1))
