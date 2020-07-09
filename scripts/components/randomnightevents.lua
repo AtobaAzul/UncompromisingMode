@@ -907,9 +907,10 @@ AddNewMoonEvent(ChessPiece,.5)
 AddNewMoonEvent(SpawnPhonograph,.2)
 --Ocean
 AddOceanEvent(SpawnSquids,.8)
-AddOceanEvent(SpawnBats,.5)
+AddOceanEvent(SpawnBats,.4)
 --AddOceanEvent(FireHungryGhostAttack,.2)
 AddOceanEvent(SpawnSkitts,.3)
+AddOceanEvent(SpawnShadowTalker,.4)
 --AddOceanEvent(SpawnGnarwail,.5)
 
 ------------------------
