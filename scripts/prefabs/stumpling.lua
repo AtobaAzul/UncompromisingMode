@@ -26,7 +26,7 @@ local sounds =
     swim = "turnoftides/common/together/water/swim/medium",
 }
 
-SetSharedLootTable('squid',
+SetSharedLootTable('stumpling',
 {
     {'twigs', 2.000},
 })
@@ -206,7 +206,7 @@ local function fncommon()
     inst.components.combat.battlecryenabled = false
 
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetChanceLootTable('squid')
+    inst.components.lootdropper:SetChanceLootTable('stumpling')
 
     inst:AddComponent("inspectable")
 
