@@ -129,7 +129,6 @@ TUNING.DSTU =
     --Player changes
     ----------------------------------------------------------------------------
 	
-    WORTOX_HEALTH = 120,
 	
     --Tripover chance on walking with 100 wetness
     TRIPOVER_HEALTH_DAMAGE = 10,
@@ -155,6 +154,14 @@ TUNING.DSTU =
     --Wormwood
     WORMWOOD_BURN_TIME = 6.66, --orig 4.3
     WORMWOOD_FIRE_DAMAGE = 1.50, -- orig 1.25
+	
+	--Wortox
+    WORTOX_HEALTH = 120,
+	
+	--Warly
+    WARLY_SAME_OLD_COOLDOWN = total_day_time * 3,
+	WARLY_SAME_OLD_MULTIPLIERS = { .6, .5, .35, .2, .1 },
+	
     --Growth time increase for stone fruits
     STONE_FRUIT_GROWTH_INCREASE = 3,
 	
