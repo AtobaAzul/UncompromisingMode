@@ -50,7 +50,9 @@ env.AddPrefabPostInit("wobybig", function(inst)
     inst.components.health:SetMaxHealth(TUNING.CHESTER_HEALTH * 2)
     inst.components.health:StartRegen(TUNING.CHESTER_HEALTH_REGEN_AMOUNT, TUNING.CHESTER_HEALTH_REGEN_PERIOD)
 
-	
+	if inst.components.follower ~= nil then
+		inst.components.follower:KeepLeaderOnAttacked()
+	end
 end)
 
 local function SpawnWoby(inst)

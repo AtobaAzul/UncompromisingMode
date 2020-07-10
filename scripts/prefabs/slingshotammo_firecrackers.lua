@@ -183,10 +183,24 @@ local function DoPop(inst, remaining, total, level, hissvol)
     local x, y, z = inst.Transform:GetWorldPosition()
     SpawnPrefab("explode_firecrackers").Transform:SetPosition(x, y, z)
 	
-	for i, v in ipairs(TheSim:FindEntities(x, y, z, 2.2, "_combat", { "shadow", "INLIMBO"})) do
-		if v.components.combat ~= nil and v.components.combat ~= nil then
+	for i, v in ipairs(TheSim:FindEntities(x, y, z, 2.2, "_combat", { "shadow", "INLIMBO" })) do
+		if v.components.combat ~= nil and v.components.combat ~= nil and v.components.health ~= nil then
 			if not v.components.health:IsDead() then
-				v.components.combat:GetAttacked(inst.attacker or nil, 5, inst)
+				--
+				--v:PushEvent("attacked", {attacker = inst.attacker or nil, damage = 5, weapon = nil})
+				if v:HasTag("epic") then
+					v.components.health:DoDelta(-5)
+					
+					if inst.components.rideable ~= nil and inst.components.rideable:IsBeingRidden() then
+						inst.components.rideable:Buck(true)
+					end
+					
+					if v.components.combat:GetImpactSound(v) ~= nil then
+						v.SoundEmitter:PlaySound(v.components.combat:GetImpactSound(v))
+					end
+				else
+					v.components.combat:GetAttacked(inst.attacker or nil, 5, nil)
+				end
 			end
 		end
     end

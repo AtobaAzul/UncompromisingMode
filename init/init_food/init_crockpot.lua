@@ -210,7 +210,7 @@ recipes.californiaroll.test = function(cooker, names, tags) return ((names.kelp 
 recipes.seafoodgumbo.test = function(cooker, names, tags) return tags.fish and tags.fish > 2 and UncompromisingFillers(tags) and MonsterMeatSupport(tags) end
 -- Original:         test = function(cooker, names, tags) return tags.fish and tags.fish > 2 end
 
-recipes.surfnturf.test = function(cooker, names, tags) return tags.meat and tags.meat >= 2.5 and tags.fish and tags.fish >= 1.5 and not (tags.monster >= 3) and not tags.frozen end--and MonsterMeatSupport(tags) end
+recipes.surfnturf.test = function(cooker, names, tags) return tags.meat and tags.meat >= 2.5 and tags.fish and tags.fish >= 2 and not tags.frozen and MonsterMeatSupport(tags) end--and MonsterMeatSupport(tags) end
 -- Original:         test = function(cooker, names, tags) return tags.meat and tags.meat >= 2.5 and tags.fish and tags.fish >= 1.5 and not tags.frozen end
 
 recipes.lobsterbisque.test = function(cooker, names, tags) return names.wobster_sheller_land and tags.frozen and UncompromisingFillers(tags) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) and MonsterMeatSupport(tags) end
