@@ -93,6 +93,7 @@ local prefab_post = {
 	"walrus_camp",
 	"nightstick",
 	"critterlab",
+	"wobster",
 }
 
 local stategraph_post = {
