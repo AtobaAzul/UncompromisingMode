@@ -191,10 +191,6 @@ local function DoPop(inst, remaining, total, level, hissvol)
 				if v:HasTag("epic") then
 					v.components.health:DoDelta(-5)
 					
-					if inst.components.rideable ~= nil and inst.components.rideable:IsBeingRidden() then
-						inst.components.rideable:Buck(true)
-					end
-					
 					if v.components.combat:GetImpactSound(v) ~= nil then
 						v.SoundEmitter:PlaySound(v.components.combat:GetImpactSound(v))
 					end
