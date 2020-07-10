@@ -28,7 +28,7 @@ self.totalrandomcaveweight = nil
 local function PlayerScaling(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local ents = TheSim:FindEntities(x, 0, z, 50, {"player"}, {"playerghost"})
-	print(#ents)
+
 	if #ents >= 0 and #ents < 3 then
 		--print("1")
 		return 1
@@ -803,7 +803,7 @@ local function SpawnShadowTalker(player, mathmin, mathmax)
 			local z1 = z - radius * math.sin(theta)
 			local light = TheSim:GetLightAtPoint(x1, 0, z1)
 			
-			if light <= .1 and #TheSim:FindEntities(x1, 0, z1, 50, {"shadowtalker"}) > 1 then
+			if light <= .1 and #TheSim:FindEntities(x1, 0, z1, 50, {"shadowtalker"}) < 1 then
 				local ent = SpawnPrefab("shadowtalker")
 				ent.Transform:SetPosition(x1, 0, z1)
 				ent.speech = player
