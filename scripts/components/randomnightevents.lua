@@ -467,7 +467,6 @@ end
 local function SpawnSkitts(player)
 	--print("SpawnSkitts")
 	local skitttime = 10 * math.random() * 2
-	MultiFogAuto(player,skitttime)
 	player:DoTaskInTime(skitttime, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local num_skitts = 150
@@ -524,7 +523,6 @@ local function SpawnKrampus(player)
 				local level = 1 + PlayerScaling(player)
 				TheWorld:PushEvent("ms_forcenaughtiness", { player = player, numspawns = level })
 			end)
-			StopFog(player)
 	end)
 end
 
@@ -580,7 +578,6 @@ local function SpawnThunderFar(player)
 					player:DoTaskInTime(10 * math.random(), SpawnThunderClose)
 				end)
 			end
-			StopFog(player)
 	end)
 end
 
@@ -709,6 +706,7 @@ local function MoonTear(player)
 end
 
 local function ChessPiece(player)
+	MultiFogAuto(player,10)
 	if TheWorld.state.isnewmoon and TheWorld.state.cycles > 10 then
 		--print("Shadows...")
 		local x, y, z = player.Transform:GetWorldPosition()
@@ -716,7 +714,7 @@ local function ChessPiece(player)
 		
 		local level = PlayerScaling(player)
 		for i = 1, level do
-			player:DoTaskInTime(0.6 + math.random(4), function()
+			player:DoTaskInTime(10 + math.random(4), function()
 				if chesscheck >= 0.66 then
 					local piece = SpawnPrefab("shadow_bishop")
 					piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
