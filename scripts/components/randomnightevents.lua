@@ -434,6 +434,36 @@ local function SpawnBats(player)
 	end)
 end
 
+local function SpawnDroppersFunction(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	local x2 = x + math.random(-8, 8)
+	local z2 = z + math.random(-8, 8)
+	if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+		local dropper = SpawnPrefab("spider_dropper")
+		dropper.Transform:SetPosition(x2, 0, z2)
+		dropper.sg:GoToState("dropper_enter")
+		dropper.persists = false
+	else
+		SpawnDroppersFunction(player)
+	end
+end
+
+local function SpawnDroppers(player)
+	--print("SpawnDropper")
+	player:DoTaskInTime(10 * math.random() * 2, function()
+			local x, y, z = player.Transform:GetWorldPosition()
+			local day = TheWorld.state.cycles
+			
+			local level = PlayerScaling(player)
+			local num_droppers = 2 + level
+			for i = 1, num_droppers do
+				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
+					SpawnDroppersFunction(player)
+				end)
+			end
+	end)
+end
+
 local function SpawnSkitts(player)
 	--print("SpawnSkitts")
 	local skitttime = 10 * math.random() * 2
@@ -792,7 +822,7 @@ local function SpawnWalrusHunt(player)
 end
 
 local function SpawnShadowTalker(player, mathmin, mathmax)
-	if TheWorld.state.isnight then
+	if TheWorld.state.isnight or TheWorld.state.iscavenight then
 		local randommin = mathmin or 5
 		local randommax = mathmax or 10
 		player:DoTaskInTime(1+math.random(randommin, randommax), function()
@@ -931,9 +961,13 @@ AddBaseEvent(SpawnPhonograph,.1)
 AddBaseEvent(SpawnShadowTeleporter,.2)
 AddBaseEvent(StumpsAttack,.3)
 AddBaseEvent(SpawnShadowTalker,.5)
---
-AddCaveEvent(SpawnBats,1)
-AddCaveEvent(SpawnFissures,1)
+--Cave
+AddCaveEvent(SpawnBats,.5)
+AddCaveEvent(SpawnFissures,.2)
+AddCaveEvent(SpawnDroppers,.6)
+AddCaveEvent(SpawnShadowTalker,.4)
+AddCaveEvent(SpawnPhonograph,.1)
+AddCaveEvent(SpawnLightFlowersNFerns,.3)
 --Winter
 AddWinterEvent(SpawnKrampus,.5)
 AddWinterEvent(SpawnWalrusHunt,.5)
@@ -1112,6 +1146,21 @@ local function DoNewMoonRNE(player)
 	end
 end
 
+local function DoCaveRNE(player)
+	if TheWorld.state.iscavenight then
+		if self.totalrandomcaveweight and self.totalrandomcaveweight > 0 and self.caveevents then
+			local rnd = math.random()*self.totalrandomcaveweight
+			for k,v in pairs(self.caveevents) do
+				rnd = rnd - v.weight
+				if rnd <= 0 then
+				v.name(player)
+				return
+				end
+			end
+		end
+	end
+end
+
 local function IsEligible(player)
 	local area = player.components.areaaware
 	return TheWorld.Map:IsVisualGroundAtPoint(player.Transform:GetWorldPosition())
@@ -1157,6 +1206,9 @@ local function CheckPlayers()
 						--local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
 						--rnepl = #rnep
 								--if rnepl < 1 then
+								if TheWorld:HasTag("cave") then
+									DoCaveRNE(player)
+								else
 									if TheWorld.state.isfullmoon then
 										print("fullmoon")
 										DoFullMoonRNE(player)--DoFullMoonRNE(v)
@@ -1166,6 +1218,7 @@ local function CheckPlayers()
 									else
 										DoBaseRNE(player)--DoBaseRNE(v)
 									end
+								end
 									print("found base")
 									--player:AddTag("rnetarget")--v:AddTag("rnetarget")
 									--player:DoTaskInTime(60,player:RemoveTag("rnetarget"))--v:DoTaskInTime(60,inst:RemoveTag("rnetarget"))
@@ -1177,14 +1230,18 @@ local function CheckPlayers()
 						--local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
 						--rnepl = #rnep
 							--if rnepl < 1 then
-								if TheWorld.state.isfullmoon then
-									print("fullmoon")
-									DoFullMoonRNE(player)--DoFullMoonRNE(v)
-								elseif TheWorld.state.isnewmoon then
-									print("newmoon")
-									DoNewMoonRNE(player)--DoNewMoonRNE(v)
+								if TheWorld:HasTag("cave") then
+									DoCaveRNE(player)
 								else
-									DoWildRNE(player)--DoWildRNE(v)
+									if TheWorld.state.isfullmoon then
+										print("fullmoon")
+										DoFullMoonRNE(player)--DoFullMoonRNE(v)
+									elseif TheWorld.state.isnewmoon then
+										print("newmoon")
+										DoNewMoonRNE(player)--DoNewMoonRNE(v)
+									else
+										DoWildRNE(player)--DoWildRNE(v)
+									end
 								end
 								--player:AddTag("rnetarget")--v:AddTag("rnetarget")
 								--player:DoTaskInTime(60,player:RemoveTag("rnetarget"))--v:DoTaskInTime(60,v:RemoveTag("rnetarget"))
@@ -1232,5 +1289,6 @@ inst:ListenForEvent("ms_playerjoined", OnPlayerJoined)
 inst:ListenForEvent("ms_playerleft", OnPlayerLeft)
 
 self:WatchWorldState("isnight", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end) --RNE could happen any night
+self:WatchWorldState("iscavenight", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end)
 --self:WatchWorldState("isnight", TryRandomNightEvent) --RNE could happen any night
 end)

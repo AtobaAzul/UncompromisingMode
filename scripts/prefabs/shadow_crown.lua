@@ -95,7 +95,7 @@ end
         inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
         inst.components.equippable:SetOnEquip(onequip)
         inst.components.equippable:SetOnUnequip(onunequip)
-		inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL * 2
+		inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL
 		inst.components.equippable.is_magic_dapperness = true
 		inst.components.equippable.walkspeedmult = 1.2
 
