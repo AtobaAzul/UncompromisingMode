@@ -43,10 +43,6 @@ local function onequip(inst, owner, symbol_override)
         owner.AnimState:Show("HEAD_HAT")
     end
 
-    if inst.components.fueled ~= nil then
-        inst.components.fueled:StartConsuming()
-    end
-		
     inst:ListenForEvent("blocked", inst._onblocked, owner)
     inst:ListenForEvent("attacked", inst._onblocked, owner)
 		
@@ -62,10 +58,6 @@ local function onunequip(inst, owner)
     if owner:HasTag("player") then
         owner.AnimState:Show("HEAD")
         owner.AnimState:Hide("HEAD_HAT")
-    end
-
-    if inst.components.fueled ~= nil then
-        inst.components.fueled:StopConsuming()
     end
 
     inst:RemoveEventCallback("blocked", inst._onblocked, owner)

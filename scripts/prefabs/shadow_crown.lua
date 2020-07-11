@@ -5,24 +5,22 @@ local assets =
 	Asset("IMAGE", "images/inventoryimages/gasmask.tex"),
 }
 
+local function OnBlocked(owner) 
+    owner.SoundEmitter:PlaySound("dontstarve/wilson/hit_nightarmour") 
+end
+
 	local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_hat", "hat_shadowcrown", "swap_hat")
 
         owner.AnimState:Show("HAT")
-        owner.AnimState:Show("HAIR_HAT")
-        owner.AnimState:Hide("HAIR_NOHAT")
-        owner.AnimState:Hide("HAIR")
-			owner.AnimState:Hide("HEAD")
-		
-		if owner:HasTag("player") then
-			owner.AnimState:Hide("HEAD")
-			owner.AnimState:Show("HEAD_HAT")
-		end
-		
+        owner.AnimState:Hide("HAIR_HAT")
+        owner.AnimState:Show("HAIR_NOHAT")
+        owner.AnimState:Show("HAIR")
 
-        if inst.components.fueled ~= nil then
-            inst.components.fueled:StartConsuming()
-        end
+        owner.AnimState:Show("HEAD")
+        owner.AnimState:Hide("HEAD_HAT")
+		
+		inst:ListenForEvent("blocked", OnBlocked, owner)
     end
 
 	local function onunequip(inst, owner)
@@ -37,11 +35,27 @@ local assets =
             owner.AnimState:Show("HEAD")
             owner.AnimState:Hide("HEAD_HAT")
         end
+		
+		inst:RemoveEventCallback("blocked", OnBlocked, owner)
+    end
+	
+	
+	local function OnTakeDamage(inst, damage_amount)
+    local owner = inst.components.inventoryitem.owner
+    if owner then
+        local health = owner.components.health
+        if health and not owner.components.health:IsDead() then
+            local unsaneness = damage_amount * 1.2
 
-        if inst.components.fueled ~= nil then
-            inst.components.fueled:StopConsuming()
+			if owner.components.combat ~= nil then
+				local x, y, z = owner.Transform:GetWorldPosition()
+				local despawnfx = SpawnPrefab("shadow_despawn")
+				despawnfx.Transform:SetPosition(x, y, z)
+			end
+            health:DoDelta(-unsaneness, false, "darkness")
         end
     end
+end
 
 	local function fn()
 		local inst = CreateEntity()
@@ -57,16 +71,13 @@ local assets =
 
         inst:AddTag("hat")
 		
-        inst:AddTag("goggles")
+		inst:AddTag("sanity")
+		inst:AddTag("shadow")
 
-        MakeInventoryFloatable(inst)
+		MakeInventoryFloatable(inst, "small", 0.2, 0.80)
 
         inst.entity:SetPristine()
 		
-        inst.components.floater:SetSize("med")
-        inst.components.floater:SetVerticalOffset(0.1)
-        inst.components.floater:SetScale(0.63)
-
         if not TheWorld.ismastersim then
             return inst
         end
@@ -76,23 +87,20 @@ local assets =
 
         inst:AddComponent("inspectable")
 
-        inst:AddComponent("tradable")
-
+		inst:AddComponent("armor")
+		inst.components.armor:InitCondition(TUNING.ARMOR_SANITY, 1)
+		inst.components.armor.ontakedamage = OnTakeDamage
+		
         inst:AddComponent("equippable")
         inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
         inst.components.equippable:SetOnEquip(onequip)
         inst.components.equippable:SetOnUnequip(onunequip)
-        inst.components.equippable.dapperness = TUNING.DAPPERNESS_MED
+		inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL * 2
+		inst.components.equippable.is_magic_dapperness = true
+		inst.components.equippable.walkspeedmult = 1.2
 
         MakeHauntableLaunch(inst)
 		--------------------------------------------------------------
-        inst:AddComponent("fueled")
-        inst.components.fueled.fueltype = FUELTYPE.USAGE
-        inst.components.fueled:InitializeFuelLevel(TUNING.CATCOONHAT_PERISHTIME)
-        inst.components.fueled:SetDepletedFn(--[[generic_perish]]inst.Remove)
-
-        inst:AddComponent("insulator")
-        inst.components.insulator:SetInsulation(TUNING.INSULATION_MED)
 
         return inst
     end
