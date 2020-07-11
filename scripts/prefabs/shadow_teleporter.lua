@@ -60,6 +60,19 @@ local function getrandomposition(caster)
 		end
 end
 
+local function DayBreak(mob)
+	
+	mob.persists = false
+	
+	mob:WatchWorldState("isday", function() 
+		local x, y, z = mob.Transform:GetWorldPosition()
+		local despawnfx = SpawnPrefab("shadow_despawn")
+		despawnfx.Transform:SetPosition(x, y, z)
+		
+		mob:Remove()
+	end)
+end
+
 local function teleport_end(teleportee, locpos)
 
     if teleportee.components.inventory ~= nil and teleportee.components.inventory:IsHeavyLifting() then
@@ -102,6 +115,71 @@ local function teleport_end(teleportee, locpos)
 	nightylight.AnimState:SetMultColour(0, 0, 0, 0.6)
 	nightylight:RemoveComponent("inspectable")
 	nightylight:RemoveComponent("workable")
+	
+	
+				local chesscheck = math.random()
+				local chesscheck2 = math.random()
+	
+				if chesscheck >= 0.66 then
+				
+					local piece = SpawnPrefab("shadow_bishop")
+					piece.Transform:SetPosition(x + 3, y, z + 3)
+					
+					if chesscheck2 >= 0.5 then
+						local piece2 = SpawnPrefab("shadow_rook")
+						piece2.Transform:SetPosition(x + 3, y, z + 3)
+					else
+						local piece2 = SpawnPrefab("shadow_knight")
+						piece2.Transform:SetPosition(x + 3, y, z + 3)
+					end
+					
+					piece.components.health:Kill()
+					
+				elseif chesscheck >= 0.33 and chesscheck < 0.66 then
+				
+					local piece = SpawnPrefab("shadow_rook")
+					piece.Transform:SetPosition(x + 3, y, z + 3)
+					
+					if chesscheck2 >= 0.5 then
+						local piece2 = SpawnPrefab("shadow_bishop")
+						piece2.Transform:SetPosition(x + 3, y, z + 3)
+						piece2:DoTaskInTime(0, function(piece) DayBreak(piece) end)
+					else
+						local piece2 = SpawnPrefab("shadow_knight")
+						piece2.Transform:SetPosition(x + 3, y, z + 3)
+						piece2:DoTaskInTime(0, function(piece) DayBreak(piece) end)
+					end
+					
+					piece.components.health:Kill()
+					
+				else
+				
+					local piece = SpawnPrefab("shadow_knight")
+					piece.Transform:SetPosition(x + 3, y, z + 3)
+					
+					if chesscheck2 >= 0.5 then
+						local piece2 = SpawnPrefab("shadow_rook")
+						piece2.Transform:SetPosition(x + 3, y, z + 3)
+						piece2:DoTaskInTime(0, function(piece) DayBreak(piece) end)
+					else
+						local piece2 = SpawnPrefab("shadow_bishop")
+						piece2.Transform:SetPosition(x + 3, y, z + 3)
+						piece2:DoTaskInTime(0, function(piece) DayBreak(piece) end)
+					end
+					
+					piece.components.health:Kill()
+					
+				end
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	nightylight:WatchWorldState("isday", function() 
 		local x, y, z = nightylight.Transform:GetWorldPosition()
 		local despawnfx = SpawnPrefab("shadow_despawn")

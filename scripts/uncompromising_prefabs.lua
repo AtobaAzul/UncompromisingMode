@@ -97,4 +97,5 @@ return {
 	"shadow_teleporter",
 	"shadowtalker",
 	"liceloaf",
+	"shadow_crown",
 }
