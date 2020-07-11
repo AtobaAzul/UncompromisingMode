@@ -100,3 +100,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 	DESCRIBE.SHADOW_TELEPORTER = "Treasure in it's claws!"
 	DESCRIBE.POLLENMITEDEN = "Glrp... scary."
     DESCRIBE.POLLENMITES = "FLURP! Flyers itch..."
+    DESCRIBE.SHADOW_CROWN = "Make body and head hurt more..."

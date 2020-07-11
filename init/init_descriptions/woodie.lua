@@ -100,3 +100,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.SHADOW_TELEPORTER = "That creepy thing's got a gem in it's hand, should we take it?"
 	DESCRIBE.POLLENMITEDEN = "Industrious little guys, eh Lucy?"
     DESCRIBE.POLLENMITES = "Lotta those guys in the lumber camps."
+    DESCRIBE.SHADOW_CROWN = "I ain't a king of nothing, least of which fools."

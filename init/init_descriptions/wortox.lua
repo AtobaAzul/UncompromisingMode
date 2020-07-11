@@ -100,3 +100,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.SHADOW_TELEPORTER = "I think it's playing a trick, let's pretend to fall for it!"
 	DESCRIBE.POLLENMITEDEN = "Anybody home?"
     DESCRIBE.POLLENMITES = "Pesky things!"
+    DESCRIBE.SHADOW_CROWN = "Let's get risky!"

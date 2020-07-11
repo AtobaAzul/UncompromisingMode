@@ -101,3 +101,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.SHADOW_TELEPORTER = "I'm tempted to smack the darn thing for taunting me."
 	DESCRIBE.POLLENMITEDEN = "We should dismantle that before it spreads further."
     DESCRIBE.POLLENMITES = "A nasty hazard of yard work."
+    DESCRIBE.SHADOW_CROWN = "Makes my skin crawl, but atleast I'm moving faster."

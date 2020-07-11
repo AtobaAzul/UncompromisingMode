@@ -100,3 +100,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.SHADOW_TELEPORTER = "A gift? It doesn't seem like it wants to let go."
 	DESCRIBE.POLLENMITEDEN = "It's where all those little bugs live."
     DESCRIBE.POLLENMITES = "Don't bite us, little guys."
+    DESCRIBE.SHADOW_CROWN = "Blah blah tortoise, blah blah hare..."

@@ -100,3 +100,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.SHADOW_TELEPORTER = "Let us strike it down, and take it's treasure!"
 	DESCRIBE.POLLENMITEDEN = "The Valhalla of bugs."
     DESCRIBE.POLLENMITES = "Infest not me, bugs!"
+    DESCRIBE.SHADOW_CROWN = "I shall dodge with great switfness, or perish quickly while trying!"

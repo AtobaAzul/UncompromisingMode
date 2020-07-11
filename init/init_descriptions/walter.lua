@@ -101,3 +101,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.SHADOW_TELEPORTER = "I could loosen it's grip, if I'm feeling risky."
 	DESCRIBE.POLLENMITEDEN = "These little guys are spreading fast!"
     DESCRIBE.POLLENMITES = "My eyes are watering just looking at them."
+    DESCRIBE.SHADOW_CROWN = "Wearing this gives me a strange feeling of dread."

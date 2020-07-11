@@ -101,3 +101,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.SHADOW_TELEPORTER = "Ooh! Gimme!"
 	DESCRIBE.POLLENMITEDEN = "Looks flammable. VERY flammable."
     DESCRIBE.POLLENMITES = "YES! They should burn easily!"
+    DESCRIBE.SHADOW_CROWN = "I feel really uncomfortable wearing it."

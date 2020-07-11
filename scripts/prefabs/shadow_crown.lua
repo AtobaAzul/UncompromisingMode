@@ -83,7 +83,7 @@ end
         end
 
         inst:AddComponent("inventoryitem")
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/snowgoggles.xml"
+		inst.components.inventoryitem.atlasname = "images/inventoryimages/shadow_crown.xml"
 
         inst:AddComponent("inspectable")
 
