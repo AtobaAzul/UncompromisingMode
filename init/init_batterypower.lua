@@ -16,11 +16,11 @@ local BATTERY =
 {
 	["potato"] =
     {
-		power = TUNING.MED_FUEL * 3,
+		power = TUNING.MED_FUEL * 2,
     },
 	["transistor"] =
     {
-		power = TUNING.MED_LARGE_FUEL * 3,
+		power = TUNING.MED_LARGE_FUEL * 2,
     },
 	["feather_canary"] =
     {
@@ -37,6 +37,10 @@ local BATTERY =
 	["trinket_6"] =
     {
 		power = TUNING.LARGE_FUEL * 3,
+    },
+	["zaspberry"] =
+    {
+		power = TUNING.LARGE_FUEL * 5,
     },
 	--No klaus, since he does double attacks and has deer 
 }
