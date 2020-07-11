@@ -150,7 +150,7 @@ local function startcrying(inst)
 	
     if owner ~= nil then
 		if owner.components.moisture ~= nil then
-			owner.components.moisture:DoDelta(1)
+			owner.components.moisture:DoDelta(3)
 		end
 	else
 		inst.task:Cancel()

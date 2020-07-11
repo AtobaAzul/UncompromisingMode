@@ -178,7 +178,7 @@ local days_survived = player.components.age ~= nil and player.components.age:Get
 	else
 		player:DoTaskInTime(10 * math.random() + 3, function()
 			local level = PlayerScaling(player)
-			for i = 1, level + 3 do
+			for i = 1, level + 2 do
 				SpawnBirchNutters(player)
 			end
 			print("leifattackfailed")
@@ -220,7 +220,7 @@ local days_survived = player.components.age ~= nil and player.components.age:Get
 	
 		player:DoTaskInTime(10 * math.random() + 3, function()
 			local level = PlayerScaling(player)
-			for i = 1, level + 3 do
+			for i = 1, level do
 				SpawnBirchNutters(player)
 			end
 			print("leifattackfailed")
