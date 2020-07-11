@@ -25,7 +25,6 @@ SetSharedLootTable('toadystool',
     {"green_cap",     1.00},
     {"green_cap",     0.33},
     {"green_cap",     0.33},
-	{"air_conditioner_blueprint", 1.00},
 })
 
 SetSharedLootTable('toadystool_dark',
@@ -57,7 +56,6 @@ SetSharedLootTable('toadystool_dark',
 
     {"mushroom_light2_blueprint", 1.00},
     {"sleepbomb_blueprint", 1.00},
-	{"air_conditioner_blueprint", 1.00},
 })
 
 local PHASE2_HEALTH = .7
