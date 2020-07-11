@@ -112,7 +112,7 @@ env.AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then
         return
     end
-	--inst:AddComponent("toadrain")
+	inst:AddComponent("toadrain")
 	--inst:AddComponent("hayfever_tracker")
 	inst:AddComponent("firefallwarning")
 	

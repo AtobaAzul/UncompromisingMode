@@ -210,7 +210,7 @@ TUNING.DSTU =
 	
 	BAT_HEALTH = 75,
 	
-	TOAD_RAIN_DELAY = {min=1, max=6},
+	TOAD_RAIN_DELAY = {min=5, max=10},
 	
 	CAVES_TEMP_MULT = 0.6,
 	CAVES_TEMP_LOCUS = 72
