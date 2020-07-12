@@ -14,7 +14,7 @@ local function fn()
 
     inst.AnimState:SetBank("hardshelltacos")
     inst.AnimState:SetBuild("hardshelltacos")
-    inst.AnimState:PlayAnimation("hardshelltacos")
+    inst.AnimState:PlayAnimation("idle")
 
     MakeInventoryFloatable(inst)
 	
