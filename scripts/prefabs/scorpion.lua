@@ -12,7 +12,7 @@ local assets =
 local prefabs =
 {
 	--"chitin",
-    "monstersmallmeat",
+    "scorpioncarapace",
     --"venomgland",
     "stinger",
 	"sand_puff",
@@ -20,7 +20,7 @@ local prefabs =
 
 SetSharedLootTable( 'scorpion',
 {
-    {'monstersmallmeat',  1.00},
+    {'scorpioncarapace',  1.00},
     --{'chitin',  0.3},
     --{'venomgland',  0.3},
     {'stinger',  0.3},

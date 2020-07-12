@@ -146,7 +146,15 @@ Assets = {
 	--Asset("IMAGE", "images/inventoryimages/liceloaf.tex"),
 	--Asset("ATLAS", "images/inventoryimages/liceloaf.xml"),
 	--Asset("ANIM", "anim/liceloaf.zip"),
-
+	Asset("IMAGE", "images/inventoryimages/scorpioncarapace.tex"),
+	Asset("ATLAS", "images/inventoryimages/scorpioncarapace.xml"),
+	Asset("IMAGE", "images/inventoryimages/scorpioncarapacecooked.tex"),
+	Asset("ATLAS", "images/inventoryimages/scorpioncarapacecooked.xml"),
+	Asset("ANIM", "anim/scorpioncarapace.zip"),
+	Asset("ANIM", "anim/scorpioncarapace_dried.zip"),
+	Asset("IMAGE", "images/inventoryimages/hardshelltacos.tex"),
+	Asset("ATLAS", "images/inventoryimages/hardshelltacos.xml"),
+	Asset("ANIM", "anim/hardshelltacos.zip"),
 	--Map Icons Start--
 	Asset("IMAGE", "images/inventoryimages/seafoodpaella.tex"),
 	Asset("ATLAS", "images/inventoryimages/seafoodpaella.xml"),

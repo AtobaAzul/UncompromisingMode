@@ -98,4 +98,6 @@ return {
 	"shadowtalker",
 	"liceloaf",
 	"shadow_crown",
+	"scorpioncarapace",
+	"hardshelltacos",
 }

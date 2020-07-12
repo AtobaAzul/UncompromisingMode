@@ -79,7 +79,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.AIR_CONDITIONER = "Can it spit out fire?"
 	DESCRIBE.SPOREPACK = "The smell is nothing fire can't handle!"
 	DESCRIBE.SALTPACK = "I still hate Winter."
+	
 	DESCRIBE.SCORPION = "Ugh, gross!"
+	DESCRIBE.SCORPIONCARAPACE = "It's gonna need a lot of fire to fix this."
+	DESCRIBE.SCORPIONCARAPACECOOKED = "I can't believe it, fire wasn't enough..."
+	DESCRIBE.HARDSHELLTACOS = "That went well."
+	
 	DESCRIBE.SKELETONMEAT = "I'm gonna vomit..."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "Why won't you go up in flames!?"

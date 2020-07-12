@@ -79,7 +79,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.AIR_CONDITIONER = "Are we sure inhaling mushrooms is a good idea?"
 	DESCRIBE.SPOREPACK = "Anything can be useful if you have the know how!"
 	DESCRIBE.SALTPACK = "These will take care of the snow piles, though I prefer to do things myself!"
+	
 	DESCRIBE.SCORPION = "Fun fact: You can suck the venom out of a bite wound! Not sure about scorpion stings though..."
+	DESCRIBE.SCORPIONCARAPACE = "Uhh, Woby, you can have this one."
+	DESCRIBE.SCORPIONCARAPACECOOKED = "It's slightly better, but I would rather Woby have it."
+	DESCRIBE.HARDSHELLTACOS = "Huh, isn't half bad."
+	
 	DESCRIBE.SKELETONMEAT = "I... I don't like stories about people at their most desperate..."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "A Doppelganger? Maybe a cloning experiment gone wrong!"

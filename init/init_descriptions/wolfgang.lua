@@ -79,7 +79,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.AIR_CONDITIONER = "Keeps Wolfgang's lungs mighty!"
 	DESCRIBE.SPOREPACK = "Did Wolfgang fart?"
 	DESCRIBE.SALTPACK = "Wolfgang is stronger than snow!"
+	
 	DESCRIBE.SCORPION = "Stay away from Wolfgang!"
+	DESCRIBE.SCORPIONCARAPACE = "Is not fit for mighty belly!"
+	DESCRIBE.SCORPIONCARAPACECOOKED = "Still is not fit for mighty belly!"
+	DESCRIBE.HARDSHELLTACOS = "Is fit for mighty belly!"
+	
 	DESCRIBE.SKELETONMEAT = "Is... Person...?"
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "Scary shadow smart man!"

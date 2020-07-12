@@ -21,48 +21,9 @@ local FogOver = Class(Widget, function(self, owner)
     self.time = self.transitiontime
 	self:StartUpdating()
     self:Hide()
+	--self:Show()
+	--self.bg2:SetTint(1, 1, 1, 0.5)
 end)
-
-function FogOver:StartFog()
-print("fogstarted")
-    if not self.foggy then
-        self.time = self.transitiontime
-        self.alphagoal = 1
-        self.foggy = true
-
-        self:StartUpdating()
-        self:Show()
-    end
-end
-
-
-function FogOver:SetFog(off)
-    if off and self.foggy then
-            self.time = 0
-            self.alphagoal = 0
-            self.foggy = false
-            self.alpha = 0
-            self:StopUpdating()
-            self:Hide()
-    else
-        if not self.foggy then
-            self.time = 0
-            self.alphagoal = 1
-            self.foggy = true
-            self.alpha = 1
-            self:StartUpdating()
-            self:Show()
-        end
-    end
-end
-
-function FogOver:StopFog()
-    if self.foggy then
-        self.time = self.transitiontime
-        self.alphagoal = 0
-        self.foggy = false
-    end
-end
 
 function FogOver:UpdateAlpha(dt)
     if self.alphagoal ~= self.alpha then
@@ -78,24 +39,14 @@ function FogOver:UpdateAlpha(dt)
 end
 
 function FogOver:OnUpdate(dt)
-    --local equippeditem = GetPlayer().components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-    --local wearingbathat = equippeditem and equippeditem:HasTag("clearfog") -- equippeditem.prefab == "bathat" or 
-
-    --self:UpdateAlpha(dt)
-
-    --if TheCamera.interior or wearingbathat then
-    --    self:Hide()
-    --else
-    --    self:Show()
-    --end
-	self.bg2:SetTint(0.5, 0.5, 0.5, self.alpha)
+	self.bg2:SetTint(1, 1, 1, self.alpha)
 	if self.alpha == 0 then
 	self:Hide()
 	end
 	if self.owner:HasTag("infog") then
 	self:Show()
         self.time = self.transitiontime
-        self.alphagoal = 0.4
+        self.alphagoal = 0.5
 	else
         self.time = self.transitiontime
         self.alphagoal = 0
@@ -107,21 +58,6 @@ function FogOver:OnUpdate(dt)
 	if self.alphagoal < self.alpha then
 	self.alpha = self.alpha - 0.005
 	end
-	
-	
-    --local color = GetClock().currentColour find another way to do GetClock()
-    --local x = math.min(color.x * 1.5, 1)
-    --local y = math.min(color.y * 1.5, 1)
-    --local z = math.min(color.z * 1.5, 1)
-
-
-    --if (self.alpha == 0 and self.alphagoal == 0) or not self.owner:HasTag("infog") then
-    --    self:Hide()
-        --self:StopUpdating()
-	--	self.foggy = false
-	--	else
-	--	self:Show()
-	
 end
 
 return FogOver

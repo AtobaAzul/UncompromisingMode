@@ -79,7 +79,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.AIR_CONDITIONER = "This is a nice change of scent, eh?"
 	DESCRIBE.SPOREPACK = "That offends the nostrils."
 	DESCRIBE.SALTPACK = "This pack would've been useful back in Canada, eh?"
+	
 	DESCRIBE.SCORPION = "Keep out of my boots."
+	DESCRIBE.SCORPIONCARAPACE = "Never tried this one before..."
+	DESCRIBE.SCORPIONCARAPACECOOKED = "Well, if there's nothing else."
+	DESCRIBE.HARDSHELLTACOS = "That'll do nicely."
+	
 	DESCRIBE.SKELETONMEAT = "Don't hurl, don't hurl, don't hurl..."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "I'm sick of these shenanigans!"

@@ -98,7 +98,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.TRAPDOOR = "Nothing out of the ordinary here."
 	DESCRIBE.SHROOM_SKIN_FRAGMENT = "It's small, but the stench is still a punch in the face."
 	DESCRIBE.AIR_CONDITIONER = "Smells great!"
+	
 	DESCRIBE.SCORPION = "That better not be venomous."
+	DESCRIBE.SCORPIONCARAPACE = "I do not want to eat this."
+	DESCRIBE.SCORPIONCARAPACECOOKED = "Its shell is still hard."
+	DESCRIBE.HARDSHELLTACOS = "Must be Tuesday."
+	
 	DESCRIBE.SKELETONMEAT = "Flesh is flesh. Where do I draw the line?"
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "This doppleganger is a bit madder than usual!"
