@@ -497,7 +497,7 @@ local function SpawnFissures(player)
 	local tillrne = 10 + math.random(10,15)
 	MultiFogAuto(player,tillrne)
 		player:DoTaskInTime(tillrne, function()
-			local fissures = 3+math.floor(math.random()*3, 4)
+			local fissures = 2+math.floor(math.random()*3, 3)
 			local chances = 1
 			for i = chances, fissures do
 				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
