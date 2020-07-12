@@ -6,8 +6,8 @@ local SnowStormWatcher = Class(function(self, inst)
 	self.task = nil
 	self.storming = false
 	inst:ListenForEvent("weathertick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
-	
-	inst:ListenForEvent("seasontick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
+	inst:ListenForEvent("forcestopsnowstorm", function(src, data) self:ToggleSnowstorms() end, TheWorld)
+	--inst:ListenForEvent("seasontick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
 	
 	
 	
@@ -28,7 +28,7 @@ end
 
 local function StormStart(self)
 	self.stormtask = nil
-	self.storming = true
+	self.storming = false
 
 	TheWorld:AddTag("snowstormstart")
 	TheWorld.net:AddTag("snowstormstartnet")
@@ -40,7 +40,8 @@ local function StormStop(self)
 	
 	--self:UpdateSnowstormWalkSpeed()
 	self:PushEvent("snowoff")
-	self.storming = false
+	self:PushEvent("forcestopsnowstorm")
+	self.storming = true
     self:StopUpdatingComponent(self)
 	self.task = nil
 	self.stormtask = nil
@@ -49,15 +50,17 @@ end
 
 function SnowStormWatcher:ToggleSnowstorms(active, src, data)
 	
-	if not TheWorld.state.issnowing then--or not self.storming then-- or not TheWorld.net:HasTag("snowstormstartnet") or not TheWorld:HasTag("snowstormstart") then
+	if not TheWorld.state.issnowing or self.storming then-- or not TheWorld.net:HasTag("snowstormstartnet") or not TheWorld:HasTag("snowstormstart") then
 		self:UpdateSnowstormWalkSpeed()
 		self.inst:PushEvent("snowoff")
         self.inst:StopUpdatingComponent(self)
 		self.task = nil
 		self.stormtask = nil
 		self.stopstormtask = nil
-		self.storming = false
-		-->>>>>TheWorld:RemoveTag("snowstormstart")
+		self.stormresettask = nil
+		if self.stormresettask == nil then
+			self.stormresettask = self.inst:DoTaskInTime(480, function(self) self.storming = false end)
+		end
     elseif TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
         self.inst:StartUpdatingComponent(self)
 		if self.stormtask == nil then
@@ -65,7 +68,7 @@ function SnowStormWatcher:ToggleSnowstorms(active, src, data)
 		end
 		
 		if self.stopstormtask == nil then
-			self.stopstormtask = self.inst:DoTaskInTime(580 + math.random(20,40), StormStop, self)--, self)
+			self.stopstormtask = self.inst:DoTaskInTime(320 + math.random(20,50), StormStop, self)--, self)
 		end
 		
     end
@@ -187,7 +190,7 @@ function SnowStormWatcher:OnUpdate(dt)
    
         self:UpdateSnowstormLevel()
 		
-		self:ToggleSnowstorms()
+		--self:ToggleSnowstorms()
 		
 		self:StartSnowPileTask()
 		
