@@ -102,3 +102,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.POLLENMITEDEN = "These little guys are spreading fast!"
     DESCRIBE.POLLENMITES = "My eyes are watering just looking at them."
     DESCRIBE.SHADOW_CROWN = "Wearing this gives me a strange feeling of dread."
+    DESCRIBE.RNEGHOST = DESCRIBE.GHOST

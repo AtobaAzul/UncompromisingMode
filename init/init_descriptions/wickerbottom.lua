@@ -102,6 +102,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.POLLENMITEDEN = "Obviously the work of a eusocial insect."
     DESCRIBE.POLLENMITES = "A swarm of Melittiphis Alvearlus. Strange behavior for a parasite."
     DESCRIBE.SHADOW_CROWN = "It permeates a dark aura over it's wearer."
+    DESCRIBE.RNEGHOST = DESCRIBE.GHOST
 	
 	ACTIONFAIL.READ =
         {

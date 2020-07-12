@@ -101,3 +101,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.POLLENMITEDEN = "It's where all those little bugs live."
     DESCRIBE.POLLENMITES = "Don't bite us, little guys."
     DESCRIBE.SHADOW_CROWN = "Blah blah tortoise, blah blah hare..."
+    DESCRIBE.RNEGHOST = DESCRIBE.GHOST

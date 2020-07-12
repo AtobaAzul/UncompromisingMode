@@ -101,3 +101,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.POLLENMITEDEN = "Wolfgang smash bug home!"
     DESCRIBE.POLLENMITES = "Tiny bugs! Wolfgang kill hundreds in ONE swing!"
     DESCRIBE.SHADOW_CROWN = "Make Wolfgang fast! But skin feel weak..."
+    DESCRIBE.RNEGHOST = DESCRIBE.GHOST
