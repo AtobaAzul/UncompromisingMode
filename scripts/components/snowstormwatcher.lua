@@ -175,7 +175,7 @@ local function SnowpileChance(inst, self)
 		
 end
 
-TUNING.SNOW_CHANCE_TIME = 30
+TUNING.SNOW_CHANCE_TIME = 15
 TUNING.SNOW_CHANCE_VARIANCE = 15
 
 
