@@ -137,6 +137,8 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/slingshotammo_firecrackers.xml"),
 	Asset("IMAGE", "images/inventoryimages/moon_tear.tex"),
 	Asset("ATLAS", "images/inventoryimages/moon_tear.xml"),
+	Asset("IMAGE", "images/inventoryimages/shadow_crown.tex"),
+	Asset("ATLAS", "images/inventoryimages/shadow_crown.xml"),
 	
 	Asset("ANIM", "anim/gatorsnake.zip"),
 	Asset("ANIM", "anim/swilson.zip"),

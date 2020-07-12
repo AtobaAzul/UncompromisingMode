@@ -152,7 +152,7 @@ local function fn()
     inst.AnimState:SetBank("ghost")
     inst.AnimState:SetBuild("ghost_build")
     inst.AnimState:PlayAnimation("idle", true)
-    --inst.AnimState:SetMultColour(1,1,1,.6)
+    inst.AnimState:SetMultColour(0.5,0.5,1,1)
 
     inst:AddTag("monster")
     inst:AddTag("hostile")

@@ -105,3 +105,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.SHADOW_TELEPORTER = "Call me superstitious, but something dangerous is at play here..."
 	DESCRIBE.POLLENMITEDEN = "I'd rather have a mound of chocolate."
     DESCRIBE.POLLENMITES = "The bugs are really bad around here."
+    DESCRIBE.SHADOW_CROWN = "This thing is all kinds of hexed, I just know it."
+    DESCRIBE.RNEGHOST = DESCRIBE.GHOST

@@ -107,3 +107,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.SHADOW_TELEPORTER = "A trick, for sure. But the rewards could be great."
 	DESCRIBE.POLLENMITEDEN = "Ugh. The horde home."
     DESCRIBE.POLLENMITES = "Horde horrible."
+    DESCRIBE.SHADOW_CROWN = "Darkness brings great power, but leaves your body fragile. I should know."
+    DESCRIBE.RNEGHOST = DESCRIBE.GHOST

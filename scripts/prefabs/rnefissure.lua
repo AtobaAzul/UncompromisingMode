@@ -190,6 +190,7 @@ local function Make(name, build, lightcolour, fxname)
 		inst:AddComponent("sanityaura")
 		inst.components.sanityaura.aurafn = CalcSanityAura
         inst:WatchWorldState("isday", closefissure)
+        inst:WatchWorldState("iscaveday", closefissure)
 		preopenfissure(inst)
 	
         return inst

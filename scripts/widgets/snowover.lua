@@ -102,7 +102,7 @@ function SnowOver:OnUpdate(dt)
 	if TheWorld.state.issnowing and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE and TheWorld.net:HasTag("snowstormstartnet") then
 			if self.changed == nil then
 				self.changed = 0.01
-			elseif self.changed <= 0.7 then
+			elseif self.changed <= 0.8 then
 				self.changed = self.changed + 0.001 
 				--print("plus 0.1")
 				self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed)

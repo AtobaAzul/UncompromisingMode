@@ -43,6 +43,8 @@ env.AddPrefabPostInit("cave", function(inst)
     end
     
     inst:AddComponent("cavedeerclopsspawner")
+    inst:AddComponent("randomnighteventscaves")
+	
 	local newwormspawn =
 {
     base_prefab = "worm",

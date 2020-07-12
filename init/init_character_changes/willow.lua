@@ -12,10 +12,7 @@ local function OnIgniteFn(inst)
 
     for i, v in ipairs(ents) do
         if v ~= inst and v:IsValid() and not v:IsInLimbo() then
-            if v.components.workable ~= nil and v.components.workable:CanBeWorked() then
-                v.components.workable:WorkedBy(inst, 10)
-            end
-
+           
             --Recheck valid after work
             if v:IsValid() and not v:IsInLimbo() then
                 if v.components.fueled == nil and
