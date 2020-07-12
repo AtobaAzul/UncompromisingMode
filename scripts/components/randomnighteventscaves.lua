@@ -4,10 +4,10 @@
 local easing = require("easing")
 
 --------------------------------------------------------------------------
---[[ RandomNightEvents class definition ]]
+--[[ RandomNightEventsCaves class definition ]]
 --------------------------------------------------------------------------
 return Class(function(self, inst)
-assert(TheWorld.ismastersim, "RandomNightEvents should not exist on client")
+assert(TheWorld.ismastersim, "RandomNightEventsCaves should not exist on client")
 
 self.inst = inst
 local _targetplayer = nil
@@ -1286,7 +1286,7 @@ end
 inst:ListenForEvent("ms_playerjoined", OnPlayerJoined)
 inst:ListenForEvent("ms_playerleft", OnPlayerLeft)
 
-self:WatchWorldState("isnight", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end) --RNE could happen any night
---self:WatchWorldState("iscavenight", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end)
+--self:WatchWorldState("isnight", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end) --RNE could happen any night
+self:WatchWorldState("iscavenight", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end)
 --self:WatchWorldState("isnight", TryRandomNightEvent) --RNE could happen any night
 end)
