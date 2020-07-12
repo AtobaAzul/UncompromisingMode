@@ -99,7 +99,7 @@ function SnowOver:OnUpdate(dt)
 		end
 	end
 
-	if TheWorld.state.issnowing and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE and TheWorld.net:HasTag("snowstormstartnet") then
+	if TheWorld.state.issnowing and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE and TheWorld.net:HasTag("snowstormstartnet") then
 			if self.changed == nil then
 				self.changed = 0.01
 			elseif self.changed <= 0.8 then
@@ -163,7 +163,7 @@ function SnowOver:OnUpdate(dt)
 end
 
 function SnowOver:SnowOn()
-	if TheWorld.state.iswinter and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
+	if TheWorld.state.iswinter and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
 		self:StartUpdating()
 	else
 		self:Hide() 
@@ -173,7 +173,7 @@ function SnowOver:SnowOn()
 end
 
 function SnowOver:ToggleUpdating()
-	if TheWorld.state.iswinter and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
+	if TheWorld.state.iswinter and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
 		self:StartUpdating()
 	else
 		self:Hide() 

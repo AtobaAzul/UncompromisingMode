@@ -61,14 +61,16 @@ function SnowStormWatcher:ToggleSnowstorms(active, src, data)
 		if self.stormresettask == nil then
 			self.stormresettask = self.inst:DoTaskInTime(480, function(self) self.storming = false end)
 		end
-    elseif TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
+    elseif TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
         self.inst:StartUpdatingComponent(self)
 		if self.stormtask == nil then
 			self.stormtask = self.inst:DoTaskInTime(80 + math.random(10,40), StormStart, self)--, self)
+			--self.stormtask = self.inst:DoTaskInTime(10, StormStart, self) -- FOR TESTING
 		end
 		
 		if self.stopstormtask == nil then
-			self.stopstormtask = self.inst:DoTaskInTime(320 + math.random(20,50), StormStop, self)--, self)
+			self.stopstormtask = self.inst:DoTaskInTime(320 + math.random(80,120), StormStop, self)--, self)
+			--self.stopstormtask = self.inst:DoTaskInTime(60, StormStop, self) -- FOR TESTING
 		end
 		
     end

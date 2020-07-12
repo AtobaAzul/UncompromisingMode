@@ -11,7 +11,7 @@ SetSharedLootTable('frog',
 })
 
 local function OnIsAutumn(inst, isautumn)
-    if isautumn and TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
+    if isautumn and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
 		inst.components.lootdropper:SetChanceLootTable('toad')
         inst.AnimState:SetBuild("frog_yellow_build")
 		inst:SetPrefabNameOverride("toad")
