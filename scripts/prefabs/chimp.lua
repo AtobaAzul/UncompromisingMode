@@ -321,6 +321,7 @@ local function fn()
     inst.entity:AddSoundEmitter()   
     inst.entity:AddDynamicShadow()
     inst.entity:AddNetwork()
+    inst.entity:SetCanSleep(false)
 
     inst.DynamicShadow:SetSize(2, 1.25)
 
