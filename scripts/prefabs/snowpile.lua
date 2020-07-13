@@ -93,7 +93,7 @@ startregen = function(inst, regentime)
 		inst.targettime = nil]]
 	end
 
-	if inst.components.workable.workleft == 0 then
+	if inst.components.workable.workleft <= 0 then
 		inst:Remove()
 	else
 		inst.AnimState:PlayAnimation(anims[inst.components.workable.workleft])
@@ -118,8 +118,11 @@ local function workcallback(inst, worker, workleft)
 		inst:Remove()
 	end
 	--inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/sandpile")
-
-	startregen(inst)
+	if inst.components.workable.workleft <= 0 then
+		inst:Remove()
+	else
+		startregen(inst)
+	end
 end
 
 local function onsave(inst, data)
