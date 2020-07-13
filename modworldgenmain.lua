@@ -22,18 +22,45 @@ room.contents.countprefabs=
 										trapdoor = function() return math.random(2,4) end,} --returned number for whole area should be multiplied between 2-4 due to multiple rooms
 end)
 GLOBAL.require("map/rooms/forest/challengespawner")
+GLOBAL.require("map/rooms/forest/extraswamp")
 AddTaskPreInit("Make a pick",function(task)
 
 task.room_choices["veteranshrine"] = 1
 
 end)
-GLOBAL.require("map/rooms/forest/extraswamp")
+---- KoreanWaffle's LOCK/KEY initialization code
+local LOCKS = GLOBAL.LOCKS
+local KEYS = GLOBAL.KEYS
+local LOCKS_KEYS = GLOBAL.LOCKS_KEYS
+--keys
+local keycount = 0
+for k, v in pairs(KEYS) do
+    keycount = keycount + 1
+end
+KEYS["RICE"] = keycount + 1
+
+--locks
+local lockcount = 0
+for k, v in pairs(LOCKS) do
+    lockcount = lockcount + 1
+end
+LOCKS["RICE"] = lockcount + 1
+
+--link keys to locks
+LOCKS_KEYS[LOCKS.RICE] = {KEYS.RICE}
+
 AddTaskPreInit("Squeltch",function(task)
+task.room_choices["ricepatch"] = 1      --Comment to test task based rice worldgen
 
---task.room_choices["sparsericepatch"] = 3
-task.room_choices["ricepatch"] = 1
---task.room_choices["densericepatch"] = 1
+--table.insert(task.keys_given,KEYS.RICE)   Uncomment to test task based rice worldgen
+end)
+GLOBAL.require("map/tasks/newswamp")
+AddTaskSetPreInitAny(function(tasksetdata)
+    if tasksetdata.location ~= "forest" then
+        return
+    end
 
+--table.insert(tasksetdata.tasks,"RiceSqueltch")   Uncomment to test task based rice worldgen
 end)
 --GLOBAL.require("map/static_layouts/licepatch")
 --[[local Layouts = GLOBAL.require("map/layouts").Layouts
