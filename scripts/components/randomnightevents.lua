@@ -1187,7 +1187,10 @@ local function CheckPlayers()
 	local player = playerlist[math.random(#playerlist)]
 	local numStructures = 0
 	
-	if TheWorld.state.cycles > 7 and math.random() >= TUNING.DSTU.RNE_CHANCE or TheWorld.state.isfullmoon and math.random() >= 0.5 or TheWorld.state.isnewmoon and math.random() >= 0.75 then
+	local playerchancescaling = TUNING.DSTU.RNE_CHANCE - (#playerlist * 0.1)
+	print(playerchancescaling)
+	
+	if TheWorld.state.cycles > 7 and math.random() >= playerchancescaling or TheWorld.state.isfullmoon and math.random() >= 0.5 or TheWorld.state.isnewmoon and math.random() >= 0.75 then
 		
 		--for i, 1 in ipairs(playerlist) do  --try a base RNE
 		if player ~= nil then

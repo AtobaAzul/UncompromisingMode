@@ -279,13 +279,13 @@ configuration_options =
 		hover = "Remember: Too much of a good thing is a bad thing!",
 		options =
 		{
-			{description = "None", data = 1},
-			{description = "20%", data = 0.8},
-			{description = "40%", data = 0.6},
+			{description = "None", data = 100},
+			{description = "20%", data = 0.7},
+			{description = "40%", data = 0.5},
 			{description = "60%", data = 0.4},
-			{description = "80%", data = 0.2},
+			{description = "80%", data = 0.3},
 			{description = "INSANITY", data = 0},
 		},
-		default = 0.6,
+		default = 0.4,
 	},
 }
