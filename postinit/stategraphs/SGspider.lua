@@ -269,7 +269,7 @@ local states = {
                     if distance > JUMP_DISTANCE*JUMP_DISTANCE then
                         inst.sg:GoToState("warrior_attack",inst.components.combat.target) 
                     else
-                        inst.sg:GoToState("warrior_attack",inst.components.combat.target) 
+                        inst.sg:GoToState("attack",inst.components.combat.target) 
                     end
                 else
                     inst.sg:GoToState("idle") 

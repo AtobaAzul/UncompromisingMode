@@ -14,7 +14,7 @@ end
 AddRoomPreInit("BGSavanna", function(room)					--This effects the outer areas of the Triple Mac and The Major Beefalo Plains
 room.contents.countprefabs=
 									{
-										trapdoor = function() return math.random(4,7) end,}
+										trapdoor = function() return math.random(4,5) end,}
 end)
 AddRoomPreInit("Plain", function(room)						--This effects areas in the Major Beefalo Plains and the Grasslands next to the portal
 room.contents.countprefabs=
@@ -31,7 +31,7 @@ GLOBAL.require("map/rooms/forest/extraswamp")
 AddTaskPreInit("Squeltch",function(task)
 
 --task.room_choices["sparsericepatch"] = 3
-task.room_choices["ricepatch"] = 2
+task.room_choices["ricepatch"] = 1
 --task.room_choices["densericepatch"] = 1
 
 end)

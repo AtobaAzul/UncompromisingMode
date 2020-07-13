@@ -58,6 +58,10 @@ inst:DoTaskInTime(3, Normalize)
 inst:DoTaskInTime(7,Rush)
 end
 
+local function OnAttacked(inst, data)
+    inst.components.combat:SetTarget(data.attacker)
+end
+
 local function fn(Sim)
 	local inst = CreateEntity()
 
@@ -137,7 +141,8 @@ local shadow = inst.entity:AddDynamicShadow()
     ------------------
     
     inst:AddComponent("inspectable")
-    
+    inst:ListenForEvent("attacked", OnAttacked)
+
     ------------------
 	SpawnPrefab("maxwell_smoke")
     inst:AddComponent("sanityaura")
@@ -147,20 +152,6 @@ local shadow = inst.entity:AddDynamicShadow()
     inst:SetBrain(brain) 
 	inst.rush = false
 	inst:DoTaskInTime(7,Rush)
-	--[[inst:WatchWorldState("isday", function(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
-    local fx = SpawnPrefab("statue_transition_2")
-    if fx ~= nil then
-        fx.Transform:SetPosition(x, y, z)
-        fx.Transform:SetScale(1.2,1.2,1.2)
-    end
-	fx = SpawnPrefab("statue_transition")
-    if fx ~= nil then
-        fx.Transform:SetPosition(x, y, z)
-        fx.Transform:SetScale(1.2,1.2,1.2)
-    end
-	inst:Remove()
-	end)]]
     return inst
 end
 

@@ -2,7 +2,7 @@ AddRoom("ricepatch",
 {
 	colour={r=.6,g=.2,b=.8,a=.50},
 	value = GROUND.OCEAN_ROUGH,
-	tags = {"RoadPoison"}, --"ForceDisconnected"
+	tags = {"RoadPoison","ForceConnected"}, --"ForceDisconnected"
 	type = NODE_TYPE.SeparatedRoom,
 	contents =  
 	{	
@@ -13,7 +13,7 @@ AddRoom("ricepatch",
 			--seastack = 1,
 			
 		}]]
-			distributepercent = 0.4,
+			distributepercent = 0.5,
 			distributeprefabs =
 			{
 				riceplantspawner = 1,
