@@ -224,6 +224,16 @@ recipes.lobsterbisque.test = function(cooker, names, tags) return names.wobster_
 recipes.lobsterdinner.test = function(cooker, names, tags) return names.wobster_sheller_land and names.butter and (tags.meat == 1.0) and (tags.fish == 1.0) and not tags.frozen and UncompromisingFillers(tags) and MonsterMeatSupport(tags) end
 -- Original:         test =  function(cooker, names, tags) return names.wobster_sheller_land and names.butter and (tags.meat == 1.0) and (tags.fish == 1.0) and not tags.frozen end
 
+recipes.leafloaf.test = function(cooker, names, tags) return ((names.plantmeat or 0) + (names.plantmeat_cooked or 0) >= 2 ) and UncompromisingFillers(tags) end
+-- Original:     test = function(cooker, names, tags) return ((names.plantmeat or 0) + (names.plantmeat_cooked or 0) >= 2 ) end
+
+recipes.barnaclestuffedfishhead.test = function(cooker, names, tags) return (names.barnacle or names.barnacle_cooked) and tags.fish and tags.fish >= 1.25 and UncompromisingFillers(tags) end
+-- Original:					test = function(cooker, names, tags) return (names.barnacle or names.barnacle_cooked) and tags.fish and tags.fish >= 1.25 end
+
+recipes.barnaclepita.test = function(cooker, names, tags) return (names.barnacle or names.barnacle_cooked) and tags.veggie and tags.veggie >= 0.5 and UncompromisingFillers(tags) end
+-- Original: 		 test = function(cooker, names, tags) return (names.barnacle or names.barnacle_cooked) and tags.veggie and tags.veggie >= 0.5 end
+
+
 -- WARLY recipes
 
 warly_recipes.monstertartare.test = function(cooker, names, tags) return tags.monster and tags.monster >= 4 and not tags.inedible and not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) end
