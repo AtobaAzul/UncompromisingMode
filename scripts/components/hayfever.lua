@@ -24,7 +24,7 @@ end
 function Hayfever:GetNextSneezTime()
 	if self.inst:HasTag("plantkin") then
 		return math.random(80,120)
-	elseif self.inst:AddTag("allergictobees") then
+	elseif self.inst:HasTag("allergictobees") then
 		return math.random(45,65)
 	end
     return math.random(60,80)
