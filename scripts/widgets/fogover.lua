@@ -19,10 +19,10 @@ local FogOver = Class(Widget, function(self, owner)
     self.alphagoal = 0
     self.transitiontime = 2.0
     self.time = self.transitiontime
-	self:StartUpdating()
-    self:Hide()
-	--self:Show()
-	--self.bg2:SetTint(1, 1, 1, 0.5)
+	--self:StartUpdating()
+    --self:Hide()
+	self:Show()
+	self.bg2:SetTint(1, 1, 1, 0.6)
 end)
 
 function FogOver:UpdateAlpha(dt)
@@ -46,7 +46,7 @@ function FogOver:OnUpdate(dt)
 	if self.owner:HasTag("infog") then
 	self:Show()
         self.time = self.transitiontime
-        self.alphagoal = 0.5
+        self.alphagoal = 0.6
 	else
         self.time = self.transitiontime
         self.alphagoal = 0
