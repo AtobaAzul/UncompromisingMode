@@ -43,6 +43,10 @@ local function OnRespawnedFromGhost2(inst)
     MakeSmallPropagator(inst)
 end
 
+local function OnBurnt()
+	--will this stop her from losing her burning effect?
+end
+
 env.AddPrefabPostInit("willow", function(inst)
 	if not TheWorld.ismastersim then
 		return
@@ -52,6 +56,7 @@ env.AddPrefabPostInit("willow", function(inst)
 		inst.components.burnable:SetBurnTime(TUNING.WORMWOOD_BURN_TIME * 2)
 		MakeSmallPropagator(inst)
 		inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
+		inst.components.burnable:SetOnBurntFn(OnBurnt)
 	end
 	
     inst:ListenForEvent("ms_respawnedfromghost", OnRespawnedFromGhost2)

@@ -53,6 +53,10 @@ local function OnBecameGhost2(inst)
     StopWatchingWorldPlants2(inst)
 end
 
+local function OnBurnt()
+	--Overriding the OnBurnt function to prevent propegator from sometimes removing, hopefully.
+end
+
 env.AddPrefabPostInit("wormwood", function(inst)
 	if not TheWorld.ismastersim then
 		return
@@ -60,6 +64,7 @@ env.AddPrefabPostInit("wormwood", function(inst)
 
 	if inst.components.burnable ~= nil then
 		MakeSmallPropagator(inst)
+		inst.components.burnable:SetOnBurntFn(OnBurnt)
 	end
 	
     WatchWorldPlants2(inst)
