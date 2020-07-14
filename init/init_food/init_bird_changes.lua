@@ -205,7 +205,7 @@ end
 local function TryToRepairBelly(inst)
 local bird = GetBird(inst)
 if bird ~= nil and bird.monsterbelly ~= nil and bird.monsterbelly > 0 then
-bird.monsterbelly = bird.monsterbelly-0.5
+bird.monsterbelly = bird.monsterbelly-0.51
 end
 end
 
