@@ -1,6 +1,8 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
+
+
 local CAGE_STATES =
 {
     DEAD = "_death",
@@ -113,6 +115,9 @@ local function OnGetItem(inst, giver, item)
 				if  item.components.edible:GetHealth(inst) < 0 then --monster meat is currently the only negative health meat item
 					if bird.monsterbelly ~= nil and bird.monsterbelly ~= 0 then 
 						bird.monsterbelly = bird.monsterbelly + 1
+						if item.components.edible:GetSanity(inst) > -7 then --test to see if an item is actually monsterjerky
+						bird.monsterbelly = bird.monsterbelly - 0.51 --
+						end
 					else
 						bird.monsterbelly = 1
 					end
@@ -197,11 +202,20 @@ local function OnOccupied(inst, bird)
     StartAnimationTask(inst)
 end
 
+local function TryToRepairBelly(inst)
+local bird = GetBird(inst)
+if bird ~= nil and bird.monsterbelly ~= nil and bird.monsterbelly > 0 then
+bird.monsterbelly = bird.monsterbelly-0.5
+end
+end
+
 function ThankYouToshInit(inst)
 	if inst and inst.components.trader then
 	inst.components.trader.onaccept = OnGetItem
 	end
-	
+	if inst then
+	inst:WatchWorldState("isday", function() inst:DoTaskInTime(5, TryToRepairBelly) end)
+	end
 	if inst and inst.components.inspectable then
     inst.components.inspectable.getstatus = GetStatus
 	end
