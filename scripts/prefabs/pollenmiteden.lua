@@ -422,8 +422,8 @@ local function MakePollenmiteDenFn(den_level)
         -------------------
         inst:AddComponent("childspawner")
         inst.components.childspawner.childname = "pollenmites"
-        inst.components.childspawner:SetRegenPeriod(TUNING.SPIDERDEN_REGEN_TIME / 1.5)
-        inst.components.childspawner:SetSpawnPeriod(TUNING.SPIDERDEN_RELEASE_TIME * 1.5)
+        inst.components.childspawner:SetRegenPeriod(TUNING.SPIDERDEN_REGEN_TIME / 3)
+        inst.components.childspawner:SetSpawnPeriod(TUNING.SPIDERDEN_RELEASE_TIME * 2)
         inst.components.childspawner.allowboats = true
 		inst.components.childspawner:StartSpawning()
         --inst.components.childspawner:SetMaxChildren(TUNING.SPIDERDEN_SPIDERS[stage])
