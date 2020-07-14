@@ -172,23 +172,20 @@ local states=
                 inst.chasingtargettask:Cancel()
                 inst.chasingtargettask = nil
             end
-            inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("attack_pre")
-            inst.AnimState:PushAnimation("attack_pst",false)
+            --inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("spawn")
+            --inst.AnimState:PushAnimation("attack_pst",false)
             inst:PerformBufferedAction()
         end,
         
         timeline=
         {
-			TimeEvent(20*FRAMES, function(inst) 
-                inst.components.combat:DoAttack(inst.sg.statemem.target)               
-            end ),
-            TimeEvent(18*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/pollenmite/hit") end),
+            --TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/pollenmite/hit") end),
         },
  
         events=
         {
-            EventHandler("animqueueover", function(inst)
+            EventHandler("animover", function(inst)
                 inst.sg:GoToState("idle")
             end),
         },
