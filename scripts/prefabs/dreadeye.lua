@@ -270,7 +270,8 @@ local function fn()
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
 
-    inst:AddComponent("transparentonsanity_dreadeye")
+    --inst:AddComponent("transparentonsanity_dreadeye")
+    inst:AddComponent("transparentonsanity")
 
     inst.entity:SetPristine()
 	

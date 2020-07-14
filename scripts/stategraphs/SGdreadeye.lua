@@ -100,7 +100,7 @@ local function SpikeAoE(inst)
 end
 
 local function fading(inst, alpha)
-    inst.AnimState:SetMultColour(alpha, alpha, alpha, alpha)
+    inst.AnimState:OverrideMultColour(alpha, alpha, alpha, alpha)
 end
 
 local states =
