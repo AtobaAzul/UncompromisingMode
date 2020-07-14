@@ -5,7 +5,6 @@ SetSharedLootTable( 'catty',
 {
     {'meat',             1.00},
     {'coontail',		 0.80},
-    {'monstermeat',		 0.66},
 })
 
 local function OnAttackOther(inst, data)
