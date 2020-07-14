@@ -53,7 +53,7 @@ local function SetStage(inst, stage)
         inst.components.childspawner:SetMaxChildren(math.floor(SpringCombatMod(TUNING.SPIDERDEN_SPIDERS[stage])))
         inst.components.childspawner:SetMaxEmergencyChildren(TUNING.SPIDERDEN_EMERGENCY_WARRIORS[stage])
         inst.components.childspawner:SetEmergencyRadius(TUNING.SPIDERDEN_EMERGENCY_RADIUS[stage])
-        inst.components.health:SetMaxHealth(TUNING.SPIDERDEN_HEALTH[stage])
+        --inst.components.health:SetMaxHealth(TUNING.SPIDERDEN_HEALTH[stage])
 
         inst.AnimState:PlayAnimation(inst.anims.init)
         inst.AnimState:PushAnimation(inst.anims.idle, true)
@@ -254,7 +254,7 @@ end
 
 local function OnIgnite(inst)
     if inst.components.childspawner ~= nil then
-        SpawnDefenders(inst)
+        --SpawnDefenders(inst)
     end
     inst.SoundEmitter:KillSound("loop")
     DefaultBurnFn(inst)
@@ -448,7 +448,7 @@ local function MakePollenmiteDenFn(den_level)
         -------------------
 
         inst:AddComponent("combat")
-        inst.components.combat:SetOnHit(SpawnDefenders)
+        --inst.components.combat:SetOnHit(SpawnDefenders)
         inst:ListenForEvent("death", OnKilled)
 
         ---------------------

@@ -47,8 +47,13 @@ local BATTERY =
 
 for k, v in pairs(BATTERY) do
 	AddPrefabPostInit(k, function(inst)
-		inst:AddComponent("fuel")
-		inst.components.fuel.fuelvalue = v.power
-		inst.components.fuel.fueltype = GLOBAL.FUELTYPE.BATTERYPOWER
+		if inst.components.fuel == nil then
+			inst:AddComponent("fuel")
+		end
+		
+		if inst.components.fuel ~= nil then
+			inst.components.fuel.fuelvalue = v.power
+			inst.components.fuel.fueltype = GLOBAL.FUELTYPE.BATTERYPOWER
+		end
 	end)
 end

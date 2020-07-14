@@ -134,6 +134,10 @@ local function onattack(inst, attacker, target)
 		if target:HasTag("insect") and not target.components.health:IsDead() then
 			target.components.health:DoDelta(-30)
 		end
+		
+		if target:HasTag("spider") and not target.components.health:IsDead() then
+			target.components.health:DoDelta(-15)
+		end
     end
 end
 

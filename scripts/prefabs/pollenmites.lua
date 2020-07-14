@@ -35,29 +35,16 @@ local function NormalRetarget(inst)
 end
 
 local function bite(inst)
-	--[[if inst.components.infester.target:HasTag("playerghost") then
-		inst.components.infester.Uninfest()
-	else]]
 	if inst.components.infester.target:HasTag("playerghost") then
 		inst.components.health:Kill()
 	end
 	
 	if inst.components.infester.target then
-		if inst.components.infester.target:HasTag("player") and not inst.components.infester.target:HasTag("playerghost") then
+		if not inst.components.infester.target:HasTag("playerghost") then
 			inst.bufferedaction = BufferedAction(inst, inst.components.infester.target, ACTIONS.ATTACK)
 			inst:PushEvent("doattack")
-			--inst.components.infester.target:PushEvent("attacked", {attacker = inst, damage = 1, weapon = nil})
-			inst.components.infester.target.components.health:DoDelta(-0.5)
 			if inst.components.infester.target.components.hayfever ~= nil and inst.components.infester.target.components.hayfever.enabled and inst.components.infester.target.components.hayfever:CanSneeze() then
-				inst.components.infester.target.components.hayfever:DoDelta(-10)
-			end
-		elseif inst.components.infester.target then
-			
-			local player = inst:GetNearestPlayer()
-			if player ~= nil and player.components.infestable and not inst.components.infester.target.components.combat:HasTarget() then
-				inst.bufferedaction = BufferedAction(inst, inst.components.infester.target, ACTIONS.ATTACK)
-				inst:PushEvent("doattack")
-				inst.components.infester.target:PushEvent("attacked", {attacker = player, damage = 1, weapon = nil})
+				inst.components.infester.target.components.hayfever:DoDelta(-5)
 			end
 		end
 	end
@@ -193,8 +180,8 @@ local function fn()
 	inst.components.combat.hiteffectsymbol = "fx_puff"
     inst.components.combat:SetKeepTargetFunction(keeptargetfn)
 
-    --inst.components.combat:SetDefaultDamage(1)
-    inst.components.combat:SetAttackPeriod(10)
+    inst.components.combat:SetDefaultDamage(1)
+    inst.components.combat:SetAttackPeriod(5)
     inst.components.combat:SetRetargetFunction(1, NormalRetarget)    
 
 	inst:AddComponent("burnable")
@@ -250,6 +237,7 @@ local function fn()
 	inst:DoTaskInTime(60, function() inst.components.health:Kill() end)
 	
     inst:ListenForEvent("attacked", OnAttacked)
+	
     inst.OnLoad = deathtimer
 
 	return inst

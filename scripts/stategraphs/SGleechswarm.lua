@@ -180,8 +180,10 @@ local states=
         
         timeline=
         {
-
-            TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/pollenmite/hit") end),
+			TimeEvent(20*FRAMES, function(inst) 
+                inst.components.combat:DoAttack(inst.sg.statemem.target)               
+            end ),
+            TimeEvent(18*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/pollenmite/hit") end),
         },
  
         events=

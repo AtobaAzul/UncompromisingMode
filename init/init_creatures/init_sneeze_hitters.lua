@@ -46,11 +46,7 @@ for k, v in pairs(HITTERS) do
 		local function OnHitOther(inst, other)
 			if other ~= nil and other.components.hayfever and other.components.hayfever.enabled and other.components.hayfever:CanSneeze() then
 			--Don't knockback ifws you wear marble
-				if other.prefab == "walter" then
-					other.components.hayfever:DoDelta(v.power * 1.5)
-				else
-					other.components.hayfever:DoDelta(v.power)
-				end
+				other.components.hayfever:DoDelta(v.power)
 			end
 		end
 	
