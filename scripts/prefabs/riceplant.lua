@@ -45,9 +45,10 @@ local function makeemptyfn(inst)
 end
 
 local function OnCollide(inst)
-if inst.components.pickable ~= nil then
-
-end
+	if inst.components.pickable ~= nil then
+        inst.components.lootdropper:SpawnLootPrefab("rice")
+		inst.components.pickable:Pick()
+	end
 end
 
 local function rename(inst)

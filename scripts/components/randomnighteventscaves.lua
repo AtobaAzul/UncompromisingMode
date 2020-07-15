@@ -4,10 +4,10 @@
 local easing = require("easing")
 
 --------------------------------------------------------------------------
---[[ RandomNightEventsCaves class definition ]]
+--[[ RandomNightEvents class definition ]]
 --------------------------------------------------------------------------
 return Class(function(self, inst)
-assert(TheWorld.ismastersim, "RandomNightEventsCaves should not exist on client")
+assert(TheWorld.ismastersim, "RandomNightEvents should not exist on client")
 
 self.inst = inst
 local _targetplayer = nil
@@ -401,6 +401,7 @@ end
 
 local function SpawnBats(player)
 	--print("SpawnBats")
+	
 	local battime = 10 * math.random() * 2
 	MultiFogAuto(player,battime)
 	player:DoTaskInTime(battime, function()
@@ -427,6 +428,42 @@ local function SpawnBats(player)
 				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
 					local bat = SpawnPrefab("vampirebat")
 					bat.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
+					bat:PushEvent("fly_back")
+				end)
+			end
+		end
+	end)
+end
+
+local function SpawnBaseBats(player)
+	print("SpawnBaseBats")
+	
+	local battime = 10 * math.random() * 2
+	MultiFogAuto(player,battime)
+	player:DoTaskInTime(battime, function()
+		if TheWorld.state.cycles <= 10 then
+			local x, y, z = player.Transform:GetWorldPosition()
+			local day = TheWorld.state.cycles
+			
+			local level = PlayerScaling(player)
+			local num_bats = 3
+			for i = 1 * level, num_bats do
+				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
+					local bat = SpawnPrefab("bat")
+					bat.Transform:SetPosition(x + math.random(-10,12), y, z + math.random(-10,12))
+					bat:PushEvent("fly_back")
+				end)
+			end
+		else
+			local x, y, z = player.Transform:GetWorldPosition()
+			local day = TheWorld.state.cycles
+			
+			local level = PlayerScaling(player)
+			local num_bats = math.min(3 + math.floor(day/35), 6)
+			for i = 1 * level, num_bats do
+				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
+					local bat = SpawnPrefab("vampirebat")
+					bat.Transform:SetPosition(x + math.random(-12,12), y, z + math.random(-12,12))
 					bat:PushEvent("fly_back")
 				end)
 			end
@@ -855,6 +892,16 @@ local function AddWildEvent(name, weight)
     self.totalrandomwildweight = self.totalrandomwildweight + weight
 end
 
+local function AddSecondaryWildEvent(name, weight)
+    if not self.secondarywildevents then
+        self.secondarywildevents = {}
+        self.totalrandomsecondarywildweight = 0
+    end
+
+    table.insert(self.secondarywildevents, { name = name, weight = weight })
+    self.totalrandomsecondarywildweight = self.totalrandomsecondarywildweight + weight
+end
+
 local function AddBaseEvent(name, weight)
     if not self.baseevents then
         self.baseevents = {}
@@ -873,6 +920,16 @@ local function AddCaveEvent(name, weight)
 
     table.insert(self.caveevents, { name = name, weight = weight })
     self.totalrandomcaveweight = self.totalrandomcaveweight + weight
+end
+
+local function AddSecondaryCaveEvent(name, weight)
+    if not self.secondarycaveevents then
+        self.secondarycaveevents = {}
+        self.totalrandomsecondarycaveweight = 0
+    end
+
+    table.insert(self.secondarycaveevents, { name = name, weight = weight })
+    self.totalrandomsecondarycaveweight = self.totalrandomsecondarycaveweight + weight
 end
 
 local function AddWinterEvent(name, weight)
@@ -943,18 +1000,25 @@ AddWildEvent(SpawnBats,.5)
 AddWildEvent(SpawnLightFlowersNFerns,.3)
 AddWildEvent(SpawnSkitts,.5)
 AddWildEvent(SpawnMonkeys,.2)
-AddWildEvent(LeifAttack,.3)
+AddWildEvent(LeifAttack,.2)
 AddWildEvent(SpawnPhonograph,.1)
 AddWildEvent(SpawnShadowTeleporter,.2)
 AddWildEvent(StumpsAttack,.3)
 AddWildEvent(SpawnShadowTalker,.5)
+--Secondary Wild
+AddSecondaryWildEvent(SpawnBats,.5)
+AddSecondaryWildEvent(SpawnLightFlowersNFerns,.3)
+AddSecondaryWildEvent(SpawnSkitts,.5)
+AddSecondaryWildEvent(StumpsAttack,.2)
+AddSecondaryWildEvent(SpawnShadowTalker,.5)
 --Base
-AddBaseEvent(SpawnBats,.4)
+AddBaseEvent(SpawnBaseBats,.4)
 AddBaseEvent(SpawnFissures,.3)
 AddBaseEvent(SpawnSkitts,.5)
 AddBaseEvent(FireHungryGhostAttack,.4)
 AddBaseEvent(SpawnShadowChars,.2)
 AddBaseEvent(SpawnMonkeys,.1)
+AddBaseEvent(LeifAttack,.1)
 AddBaseEvent(SpawnPhonograph,.1)
 AddBaseEvent(SpawnShadowTeleporter,.2)
 AddBaseEvent(StumpsAttack,.3)
@@ -966,6 +1030,11 @@ AddCaveEvent(SpawnDroppers,.6)
 AddCaveEvent(SpawnShadowTalker,.4)
 AddCaveEvent(SpawnPhonograph,.1)
 AddCaveEvent(SpawnLightFlowersNFerns,.3)
+--Secondary Cave
+AddSecondaryCaveEvent(SpawnBats,.5)
+AddSecondaryCaveEvent(SpawnDroppers,.6)
+AddSecondaryCaveEvent(SpawnShadowTalker,.4)
+AddSecondaryCaveEvent(SpawnLightFlowersNFerns,.3)
 --Winter
 AddWinterEvent(SpawnKrampus,.5)
 AddWinterEvent(SpawnWalrusHunt,.5)
@@ -1088,6 +1157,21 @@ local function DoWildRNE(player)
 	end
 end
 
+local function DoSecondaryWildRNE(player)
+	if TheWorld.state.isnight then
+		if self.totalrandomsecondarywildweight and self.totalrandomsecondarywildweight > 0 and self.secondarywildevents then
+			local rnd = math.random()*self.totalrandomsecondarywildweight
+			for k,v in pairs(self.secondarywildevents) do
+				rnd = rnd - v.weight
+				if rnd <= 0 then
+				v.name(player)
+				return
+				end
+			end
+		end
+	end
+end
+
 local function DoOceanRNE(player)
 	if math.random() >= .6 and TheWorld.state.isspring and TheWorld.state.isnight then
 		if self.totalrandomspringweight and self.totalrandomspringweight > 0 and self.springevents then
@@ -1159,6 +1243,21 @@ local function DoCaveRNE(player)
 	end
 end
 
+local function DoSecondaryCaveRNE(player)
+	if TheWorld.state.issecondarycavenight then
+		if self.totalrandomsecondarycaveweight and self.totalrandomsecondarycaveweight > 0 and self.secondarycaveevents then
+			local rnd = math.random()*self.totalrandomsecondarycaveweight
+			for k,v in pairs(self.secondarycaveevents) do
+				rnd = rnd - v.weight
+				if rnd <= 0 then
+				v.name(player)
+				return
+				end
+			end
+		end
+	end
+end
+
 local function IsEligible(player)
 	local area = player.components.areaaware
 	return TheWorld.Map:IsVisualGroundAtPoint(player.Transform:GetWorldPosition())
@@ -1187,11 +1286,13 @@ local function CheckPlayers()
 	local player = playerlist[math.random(#playerlist)]
 	local numStructures = 0
 	
-	if TheWorld.state.cycles > 7 and math.random() >= TUNING.DSTU.RNE_CHANCE or TheWorld.state.isfullmoon and math.random() >= 0.5 or TheWorld.state.isnewmoon and math.random() >= 0.75 then
+	local playerchancescaling = TUNING.DSTU.RNE_CHANCE - (#playerlist * 0.1)
+	print(playerchancescaling)
+	
+	if TheWorld.state.cycles >= 5 and math.random() >= playerchancescaling or (TheWorld.state.isfullmoon and math.random() >= 0.5) or (TheWorld.state.isnewmoon and math.random() >= 0.75) then
 		
 		--for i, 1 in ipairs(playerlist) do  --try a base RNE
 		if player ~= nil then
-			--local rnepl = 0
 			local x,y,z = player.Transform:GetWorldPosition()--local x,y,z = v.Transform:GetWorldPosition()
 			local ents = TheSim:FindEntities(x,y,z, STRUCTURE_DIST, {"structure"})
 			numStructures = #ents
@@ -1200,58 +1301,69 @@ local function CheckPlayers()
 				DoOceanRNE(player)
 			elseif IsEligible(player) then
 				if numStructures >= 4 then
-						--local m,n,o = player.Transform:GetWorldPosition()--local m,n,o = v.Transform:GetWorldPosition()
-						--local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
-						--rnepl = #rnep
-								--if rnepl < 1 then
-								if TheWorld:HasTag("cave") then
-									DoCaveRNE(player)
-								else
-									if TheWorld.state.isfullmoon then
-										print("fullmoon")
-										DoFullMoonRNE(player)--DoFullMoonRNE(v)
-									elseif TheWorld.state.isnewmoon then
-										print("newmoon")
-										DoNewMoonRNE(player)--DoNewMoonRNE(v)
-									else
-										DoBaseRNE(player)--DoBaseRNE(v)
-									end
-								end
-									print("found base")
-									--player:AddTag("rnetarget")--v:AddTag("rnetarget")
-									--player:DoTaskInTime(60,player:RemoveTag("rnetarget"))--v:DoTaskInTime(60,inst:RemoveTag("rnetarget"))
-								--end
+					if TheWorld:HasTag("cave") then
+						DoCaveRNE(player)
+					else
+						if TheWorld.state.isfullmoon then
+							print("fullmoon")
+							DoFullMoonRNE(player)--DoFullMoonRNE(v)
+						elseif TheWorld.state.isnewmoon then
+							print("newmoon")
+							DoNewMoonRNE(player)--DoNewMoonRNE(v)
+						else
+							DoBaseRNE(player)--DoBaseRNE(v)
+						end
+					end
+					print("found base")
 				else
-					--for i, 1 in ipairs(playerlist) do --noone was home, so we'll do RNEs at every player instead
-						--local rnepl = 0
-						--local m,n,o = player.Transform:GetWorldPosition()--local m,n,o = v.Transform:GetWorldPosition()
-						--local rnep = TheSim:FindEntities(m,n,o, STRUCTURE_DIST, {"rnetarget"})
-						--rnepl = #rnep
-							--if rnepl < 1 then
-								if TheWorld:HasTag("cave") then
-									DoCaveRNE(player)
-								else
-									if TheWorld.state.isfullmoon then
-										print("fullmoon")
-										DoFullMoonRNE(player)--DoFullMoonRNE(v)
-									elseif TheWorld.state.isnewmoon then
-										print("newmoon")
-										DoNewMoonRNE(player)--DoNewMoonRNE(v)
-									else
-										DoWildRNE(player)--DoWildRNE(v)
-									end
-								end
-								--player:AddTag("rnetarget")--v:AddTag("rnetarget")
-								--player:DoTaskInTime(60,player:RemoveTag("rnetarget"))--v:DoTaskInTime(60,v:RemoveTag("rnetarget"))
-							--end
-						print("no find base")
-					--end
+					if TheWorld:HasTag("cave") then
+						DoCaveRNE(player)
+					else
+						if TheWorld.state.isfullmoon then
+							print("fullmoon")
+							DoFullMoonRNE(player)--DoFullMoonRNE(v)
+						elseif TheWorld.state.isnewmoon then
+							print("newmoon")
+							DoNewMoonRNE(player)--DoNewMoonRNE(v)
+						else
+							DoWildRNE(player)--DoWildRNE(v)
+						end
+					end
+					print("no find base")
 				end
 			else
 				return
 			end
 		end
-	
+		
+		local k = #playerlist
+		
+		for _, i in ipairs(playerlist) do
+		
+			if i ~= player and math.random() >= 0.5 then
+				local x,y,z = i.Transform:GetWorldPosition()--local x,y,z = v.Transform:GetWorldPosition()
+				local ents2 = TheSim:FindEntities(x,y,z, STRUCTURE_DIST, {"structure"})
+				numStructures2 = #ents2
+		
+				if IsEligible(i) then
+					if numStructures2 >= 4 then
+						--nothing, not really accounting for other players in other bases but meh
+					elseif TheWorld:HasTag("cave") then
+						DoSecondaryCaveRNE(i)--DoWildRNE(v)
+						print("no find base")
+					end
+				else
+					return
+				end
+			end
+		end
+		
+		
+		
+		
+		
+		
+		
 	end
 end
 

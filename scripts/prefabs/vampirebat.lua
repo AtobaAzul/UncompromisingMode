@@ -20,8 +20,8 @@ local prefabs =
 
 SetSharedLootTable( 'vampirebat',
 {
-    {'monstersmallmeat',0.50},
-    {'pigskin',0.10},
+    {'monstersmallmeat',0.25},
+    {'pigskin',0.05},
     {'batwing',1},
 })
 
