@@ -34,7 +34,7 @@ end
 
 local function OnFullMoon(self, inst, isfullmoon)
 
-local node = TheWorld.Map:FindNodeAtPoint(self.Transform:GetWorldPosition())
+	local node = TheWorld.Map:FindNodeAtPoint(self.Transform:GetWorldPosition())
 
 	if TheWorld.state.isfullmoon and not self.sg:HasStateTag("jumping") and not self.components.health:IsDead() then
 		self:DoTaskInTime(math.random(2,5), function(inst)
