@@ -59,7 +59,7 @@ local function fn()
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
-	inst.components.equippable.dapperness = TUNING.WALRUSHAT_PERISHTIME * 0.8
+	inst.components.equippable.dapperness = TUNING.DAPPERNESS_MED
 
     inst:AddComponent("insulator")
     inst.components.insulator:SetSummer()
