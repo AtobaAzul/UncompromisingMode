@@ -243,7 +243,7 @@ local function onpickedfn(inst, picker)
 	end
 	
 	if picker.components.health ~= nil and not picker.components.health:IsDead() then
-		picker.components.health:DoDelta(-3)
+		picker.components.health:DoDelta(-2)
 	end
 	
 	if inst.components.workable.workleft > 0 then
