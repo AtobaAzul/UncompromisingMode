@@ -47,14 +47,14 @@ local function bite(inst)
 			inst.bufferedaction = BufferedAction(inst, inst.components.infester.target, ACTIONS.ATTACK)
 			inst:PushEvent("doattack")
 			--inst.components.infester.target:PushEvent("attacked", {attacker = inst, damage = 1, weapon = nil})
-			inst:DoTaskInTime(0.6, function(inst) inst.components.infester.target.components.health:DoDelta(-1) end)
+			inst:DoTaskInTime(0.6, function(inst) if inst.components.infester.target then inst.components.infester.target.components.health:DoDelta(-1) end end)
 			if inst.components.infester.target.components.hayfever ~= nil and inst.components.infester.target.components.hayfever.enabled and inst.components.infester.target.components.hayfever:CanSneeze() then
-				inst:DoTaskInTime(0.6, function(inst) inst.components.infester.target.components.hayfever:DoDelta(-5) end)
+				inst:DoTaskInTime(0.6, function(inst) if inst.components.infester.target then inst.components.infester.target.components.hayfever:DoDelta(-5) end end)
 			end
 		elseif inst.components.infester.target then
 			inst.bufferedaction = BufferedAction(inst, inst.components.infester.target, ACTIONS.ATTACK)
 			inst:PushEvent("doattack")
-			inst:DoTaskInTime(0.6, function(inst) inst.components.infester.target:PushEvent("attacked", {attacker = nil, damage = 1, weapon = nil}) end)
+			inst:DoTaskInTime(0.6, function(inst) if inst.components.infester.target then inst.components.infester.target:PushEvent("attacked", {attacker = nil, damage = 1, weapon = nil}) end end)
 		end
 	end
 end

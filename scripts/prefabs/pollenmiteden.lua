@@ -294,11 +294,11 @@ local function GetSmallGrowTime(inst)
 end
 
 local function GetMedGrowTime(inst)
-    return 20 + math.random()
+    return 15 + math.random()
 end
 
 local function GetLargeGrowTime(inst)
-    return 30 + math.random()
+    return 15 + math.random()
 end
 
 local function OnEntityWake(inst)
