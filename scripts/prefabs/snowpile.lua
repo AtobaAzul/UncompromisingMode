@@ -105,6 +105,9 @@ end
 
 local function workcallback(inst, worker, workleft)
 	-- print('trying to spawn SNOW', inst, worker, workleft)
+	if math.random() >= 0.5 then
+		inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
+	end
 
 	if inst.components.pickable.cycles_left > 0 then
 		if inst.Transform:GetWorldPosition() ~= nil then
@@ -328,6 +331,7 @@ local function snowpilefn(Sim)
 	----------------------
 
 	--full, med, low
+	inst:AddComponent("lootdropper")
 	inst:AddComponent("workable")
 	inst.components.workable:SetWorkAction(ACTIONS.DIG)
 	inst.components.workable:SetWorkLeft(1)
