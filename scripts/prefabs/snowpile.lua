@@ -239,6 +239,10 @@ local function onpickedfn(inst, picker)
 		picker.components.temperature:DoDelta(-25)
 	end
 	
+	if picker.components.health ~= nil and not picker.components.health:IsDead() then
+		picker.components.health:DoDelta(-3)
+	end
+	
 	if inst.components.workable.workleft > 0 then
 		if inst.Transform:GetWorldPosition() ~= nil then
 			SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
