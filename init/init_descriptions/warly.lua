@@ -98,7 +98,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.RICEPLANT = "Fresh swampy ingredients!"
 	DESCRIBE.RICE = "I'll save this for later"
 	DESCRIBE.RICE_COOKED = "I could have done better"
-	DESCRIBE.SEAFOODPAELLA = "Now we're talking." 
+	DESCRIBE.SEAFOODPAELLA = "The way the seafood blends with the rice...."
+	DESCRIBE.LICELOAF = "I could have done betteer..."
 	
 	DESCRIBE.STUMPLING = "I wish I were back at my kitchen!"
 	DESCRIBE.MOON_TEAR = "I doubt its sanitary, but I should keep it around."

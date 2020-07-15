@@ -107,3 +107,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
     DESCRIBE.POLLENMITES = "Infest not me, bugs!"
     DESCRIBE.SHADOW_CROWN = "I shall dodge with great switfness, or perish quickly while trying!"
     DESCRIBE.RNEGHOST = DESCRIBE.GHOST
+	DESCRIBE.LICELOAF = "Toss it out!"

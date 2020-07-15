@@ -100,6 +100,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.RICE = "Found this in the swamp monster's hair!"
 	DESCRIBE.RICE_COOKED = "Seems to cook up nice."
 	DESCRIBE.SEAFOODPAELLA = "I made it with all sorts of swampy stuff!"
+	DESCRIBE.LICELOAF = "Looks like rations to me!"
 	
 	DESCRIBE.STUMPLING = "The woods is rising up!"
 	DESCRIBE.MOON_TEAR = "Far away from home huh? Me too... Woby and I will keep you company!"

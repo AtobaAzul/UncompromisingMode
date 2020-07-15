@@ -371,7 +371,7 @@ AddCookerRecipe("portablecookpot", seafoodpaella)
 local liceloaf =
 {
     name = "liceloaf",
-    test = function(cooker, names, tags) return (tags.rice) == 4 end,
+    test = function(cooker, names, tags) return (tags.rice) >= 2 and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1) and not tags.inedible end,
 
     priority = 30,
     weight = 1,

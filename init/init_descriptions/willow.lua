@@ -95,6 +95,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.RICE = "It needs to be burned first."
 	DESCRIBE.RICE_COOKED = "It's better this way."
 	DESCRIBE.SEAFOODPAELLA = "I might stop sneezing for a moment after eating this."
+	DESCRIBE.LICELOAF = "Should have left it in longer, it would taste better."
 	
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS

@@ -109,3 +109,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
     DESCRIBE.POLLENMITES = "Horde horrible."
     DESCRIBE.SHADOW_CROWN = "Darkness brings great power, but leaves your body fragile. I should know."
     DESCRIBE.RNEGHOST = DESCRIBE.GHOST
+	DESCRIBE.LICELOAF = "Upsettingly plain."

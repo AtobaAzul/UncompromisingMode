@@ -100,6 +100,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.RICE = "It's a bit too tough without cooking."
 	DESCRIBE.RICE_COOKED = "I could eat it, but it would be better with something else."
 	DESCRIBE.SEAFOODPAELLA = "This should clear my nasal cavity so I can get back to reading."
+	DESCRIBE.LICELOAF = "Simple, but effective rations."
 	
 	DESCRIBE.STUMPLING = "I must observe these creatures."
 	DESCRIBE.MOON_TEAR = "Could hold some arcane purpose, in the future."

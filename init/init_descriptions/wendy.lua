@@ -99,6 +99,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.RICE = "It needs to be cooked."
 	DESCRIBE.RICE_COOKED = "This should do... for now."
 	DESCRIBE.SEAFOODPAELLA = "It clears my nose, just for it to get clogged again."
+	DESCRIBE.LICELOAF = "It has a lack of taste."
 	
 	DESCRIBE.STUMPLING = "A wooden gremlin."
 	DESCRIBE.MOON_TEAR = "It seems the moon too knows sorrow."
