@@ -46,7 +46,7 @@ local prefab_post = {
 	"mutatedhound",
 	"pillar_ruins",
 	"minotaur",
-	"ground_chunks_breaking",
+	--"ground_chunks_breaking",
 	"skeleton",
 	--"shadowcreature",
 	"berrybush",
