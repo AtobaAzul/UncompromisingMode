@@ -197,7 +197,7 @@ end
 local function TryColdness(v)
 
 	if v.components.moisture ~= nil then
-		v.components.moisture:DoDelta(1)
+		v.components.moisture:DoDelta(3)
 	end
 	--[[
 	if v.components.temperature ~= nil then

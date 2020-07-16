@@ -109,6 +109,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
     DESCRIBE.POLLENMITES = "A swarm of Melittiphis Alvearlus. Strange behavior for a parasite."
     DESCRIBE.SHADOW_CROWN = "It permeates a dark aura over it's wearer."
     DESCRIBE.RNEGHOST = DESCRIBE.GHOST
+	DESCRIBE.SUNGLASSES = "Time for some daylight reading."
 	
 	ACTIONFAIL.READ =
         {

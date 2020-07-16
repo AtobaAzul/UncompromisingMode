@@ -129,7 +129,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
     DESCRIBE.POLLENMITES = "I mite want to keep my distance."
     DESCRIBE.SHADOW_CROWN = "I feel un-safer already."
     DESCRIBE.RNEGHOST = DESCRIBE.GHOST
-	DESCRIBE.LICELOAF = "How bland"
+	DESCRIBE.LICELOAF = "How bland."
+	DESCRIBE.SUNGLASSES = "Stylish, and slightly over sized."
 	
 	ACTIONFAIL.READ =
         {

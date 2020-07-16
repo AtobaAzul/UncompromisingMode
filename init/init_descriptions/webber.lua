@@ -108,3 +108,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
     DESCRIBE.SHADOW_CROWN = "Blah blah tortoise, blah blah hare..."
     DESCRIBE.RNEGHOST = DESCRIBE.GHOST
 	DESCRIBE.LICELOAF = "It doesn't taste like anything."
+	DESCRIBE.SUNGLASSES = "It kinda works if we shut most of our eyes."
