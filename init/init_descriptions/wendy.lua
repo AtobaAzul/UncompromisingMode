@@ -115,3 +115,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
     DESCRIBE.POLLENMITES = "Like life, they wear you down little by little."
     DESCRIBE.SHADOW_CROWN = "Is this what youth feels like for older people? Energetic, yet fragile?"
     DESCRIBE.RNEGHOST = DESCRIBE.GHOST
+	DESCRIBE.SUNGLASSES = "Wonderful, now the world is another shade darker."

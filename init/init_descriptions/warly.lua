@@ -107,6 +107,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.RICE_COOKED = "I could have done better"
 	DESCRIBE.SEAFOODPAELLA = "The way the seafood blends with the rice...."
 	DESCRIBE.LICELOAF = "I could have done betteer..."
+	DESCRIBE.SUNGLASSES = "No more fried eyeballs."
 	
 	DESCRIBE.STUMPLING = "I wish I were back at my kitchen!"
 	DESCRIBE.MOON_TEAR = "I doubt its sanitary, but I should keep it around."

@@ -117,3 +117,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
     DESCRIBE.SHADOW_CROWN = "Darkness brings great power, but leaves your body fragile. I should know."
     DESCRIBE.RNEGHOST = DESCRIBE.GHOST
 	DESCRIBE.LICELOAF = "Upsettingly plain."
+	DESCRIBE.SUNGLASSES = "It's not quite my style."
