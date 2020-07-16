@@ -53,11 +53,11 @@ local function SetPlayer(inst)
 		--inst.components.npc_talker:Say(GetString(inst, "TAUNT_PLAYER_GENERIC"))
 		--inst.components.talker:Say(GetString(TheWorld, "TAUNT_PLAYER_GENERIC"))
 		--inst.components.talker:Say(STRINGS.TAUNT_PLAYER_GENERIC[math.random(3)])
-		if math.random() <= 0.01 then
-			inst.components.talker:Say("zarklord is epic")
-		else
+		--if math.random() <= 0.01 then
+			--inst.components.talker:Say("zarklord is epic")
+		--else
 			inst.components.talker:Say(GetString(inst, "SHADOWTALKER"))
-		end
+		--end
 		inst:DoTaskInTime(8, SetPlayer)
 		--print(STRINGS.SHADOWTALKER_TAUNT_PLAYER_GENERIC)
 	end
