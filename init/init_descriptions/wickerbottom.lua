@@ -60,7 +60,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	ANNOUNCE.SHADOWTALKER = {
         "SLEEP... SLEEP...",
         "JUST REST...",
-        "I KNOW TOO MUCH",
+        "SHE KNOWS TOO MUCH",
     }
 	DESCRIBE.SAND = "Sand always seems to find its way into my books."
 	DESCRIBE.SANDHILL = "The dune's iconic shape is formed by the winds."
