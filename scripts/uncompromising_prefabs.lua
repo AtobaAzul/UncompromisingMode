@@ -101,4 +101,5 @@ return {
 	"scorpioncarapace",
 	"hardshelltacos",
 	"californiaking",
+	"trapdoorgrass",
 }

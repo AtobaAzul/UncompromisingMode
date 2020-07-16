@@ -162,6 +162,7 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/californiaking.tex"),
 	Asset("ATLAS", "images/inventoryimages/californiaking.xml"),
 	Asset("ANIM", "anim/californiaking.zip"),
+	Asset("ANIM", "anim/trapdoorgrass.zip"),
 	--Map Icons Start--
 	Asset("IMAGE", "images/inventoryimages/seafoodpaella.tex"),
 	Asset("ATLAS", "images/inventoryimages/seafoodpaella.xml"),

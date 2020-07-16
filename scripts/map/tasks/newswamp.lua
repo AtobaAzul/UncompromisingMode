@@ -2,6 +2,8 @@ require ("map/rooms/forest/extraswamp")
 AddTask("RiceSqueltch", {
 		locks={LOCKS.RICE},
 		keys_given={},
+		--region_id = "ricearea",
+		level_set_piece_blocker = true,
 		room_choices={
 			--["Marsh"] = function() return 5+math.random(SIZE_VARIATION) end, 
 			--["Forest"] = function() return math.random(SIZE_VARIATION) end, 

@@ -116,3 +116,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
     DESCRIBE.SHADOW_CROWN = "Is this what youth feels like for older people? Energetic, yet fragile?"
     DESCRIBE.RNEGHOST = DESCRIBE.GHOST
 	DESCRIBE.SUNGLASSES = "Wonderful, now the world is another shade darker."
+	DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
