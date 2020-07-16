@@ -13,6 +13,8 @@ Assets = {
 	Asset("IMAGE", "images/fx4.tex"),
 	Asset("ATLAS", "images/fx5.xml"),
 	Asset("IMAGE", "images/fx5.tex"),
+	Asset("ATLAS", "images/californiakingoverlay.xml"),
+	Asset("IMAGE", "images/californiakingoverlay.tex"),
 	Asset("ATLAS", "images/inventoryimages/gasmask.xml"),
 	Asset("IMAGE", "images/inventoryimages/gasmask.tex"),
 	Asset("ATLAS", "images/inventoryimages/sand.xml"),
@@ -157,6 +159,9 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/hardshelltacos.tex"),
 	Asset("ATLAS", "images/inventoryimages/hardshelltacos.xml"),
 	Asset("ANIM", "anim/hardshelltacos.zip"),
+	Asset("IMAGE", "images/inventoryimages/californiaking.tex"),
+	Asset("ATLAS", "images/inventoryimages/californiaking.xml"),
+	Asset("ANIM", "anim/californiaking.zip"),
 	--Map Icons Start--
 	Asset("IMAGE", "images/inventoryimages/seafoodpaella.tex"),
 	Asset("ATLAS", "images/inventoryimages/seafoodpaella.xml"),

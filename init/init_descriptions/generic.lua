@@ -32,6 +32,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_RNEFOG = "I feel like I'm being watched."
 	--FoodBuffs
 	
+	--CaliforniaKing
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING = "Huh, it wasn't that bad."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "Who am I again?"
+	DESCRIBE.CALIFORNIAKING = "This dish is grusome."
+	--CaliforniaKing
+	
     DESCRIBE.UNCOMPROMISING_RAT = "They're rataliating!"
     DESCRIBE.UNCOMPROMISING_RATHOLD = "It must lead to their labo-rat-ory."
     DESCRIBE.RATPOISONBOTTLE = "It's labeled \"Do not drink. That means you Webber.\""

@@ -24,6 +24,13 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICRETALIATION = ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now"
 	--FoodBuffs
+	
+	--CaliforniaKing
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING = "That was probably a bad Idea."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "I think I prefered the throne over that..."
+	DESCRIBE.CALIFORNIAKING = "What foul amalgam is this?"
+	--CaliforniaKing
+	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "It's not just Charlie out there, is it?"
     DESCRIBE.UNCOMPROMISING_RAT = "Filthy vermin!"
     DESCRIBE.UNCOMPROMISING_RATHOLD = "I don't recall granting you vermin permission to settle in my world."

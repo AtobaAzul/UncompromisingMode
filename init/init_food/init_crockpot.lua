@@ -371,7 +371,7 @@ AddCookerRecipe("portablecookpot", seafoodpaella)
 local liceloaf =
 {
     name = "liceloaf",
-    test = function(cooker, names, tags) return (tags.rice) >= 2 and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1) and not tags.inedible end,
+    test = function(cooker, names, tags) return (tags.rice and tags.rice >= 2) and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1) and not tags.inedible end,
 
     priority = 30,
     weight = 1,
@@ -392,3 +392,15 @@ local hardshelltacos =
 }
 AddCookerRecipe("cookpot", hardshelltacos)
 AddCookerRecipe("portablecookpot", hardshelltacos)
+local californiaking =
+{
+    name = "californiaking",
+    test = function(cooker, names, tags) return (names.barnacle or names.barnacle_cooked) and (names.wobster_sheller_land) and (names.pepper or names.pepper_cooked) and tags.frozen end,
+
+    priority = 30,
+    weight = 30,
+    perishtime = nil,
+    cooktime = 0.5,
+}
+AddCookerRecipe("cookpot", californiaking)
+AddCookerRecipe("portablecookpot", californiaking)

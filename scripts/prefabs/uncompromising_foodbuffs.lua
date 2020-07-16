@@ -91,6 +91,24 @@ end
 local function removefrozenness(inst, target)
 target:RemoveEventCallback("onhitother", OnHitOtherFreeze, target)
 end
+
+local function californiaking_attach(inst, target)
+target:DoTaskInTime(4, function(target)
+if not target:HasTag("californiaking") then
+target:AddTag("californiaking")
+end
+end)
+end
+
+local function californiaking_extend(inst, target)
+    --SpawnPrefab("electricchargedfx"):SetTarget(target)
+end
+
+local function californiaking_detach(inst, target)
+if target:HasTag("californiaking") then
+target:RemoveTag("californiaking")
+end
+end
 -------------------------------------------------------------------------
 ----------------------- Prefab building functions -----------------------
 -------------------------------------------------------------------------
@@ -170,4 +188,5 @@ end
 
 return MakeBuff("electricretaliation", attachretaliationdamage, electric_extend, removeretaliationdamageretaliationdamage, TUNING.BUFF_ELECTRICATTACK_DURATION, 2, { "electrichitsparks", "electricchargedfx" }),
 MakeBuff("frozenfury", attachfrozenness, nil, removefrozenness, TUNING.BUFF_ELECTRICATTACK_DURATION, 2),
-MakeBuff("lesserelectricattack", electric_attach, electric_extend, electric_detach, 30, 2, { "electrichitsparks", "electricchargedfx" })
+MakeBuff("lesserelectricattack", electric_attach, electric_extend, electric_detach, 30, 2, { "electrichitsparks", "electricchargedfx" }),
+MakeBuff("californiaking", californiaking_attach, californiaking_extend, californiaking_detach, TUNING.BUFF_ATTACK_DURATION*8, 2)

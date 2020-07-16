@@ -23,6 +23,13 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICRETALIATION = ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now"
 	--FoodBuffs
+	
+	--CaliforniaKing
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING = "I have a feeling I will regret that."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "That honestly wasn't that bad."
+	DESCRIBE.CALIFORNIAKING = "What do I have left to lose?"
+	--CaliforniaKing
+	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "Death peers at me from the darkness."
     DESCRIBE.UNCOMPROMISING_RAT = "Wreched daemons wrought to topple the pillars of vanity."
     DESCRIBE.UNCOMPROMISING_RATHOLD = "But one mouth of a den of thieves."

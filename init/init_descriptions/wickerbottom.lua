@@ -24,6 +24,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICRETALIATION = ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now"
 	--FoodBuffs
+	
+	--CaliforniaKing
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING = "It's getting hard to concentrate."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "Were the benefits worth the visual impairment?"
+	DESCRIBE.CALIFORNIAKING = "Would be useful if I were suffering from allergies."
+	--CaliforniaKing
+	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "This fog makes it hard to view my surroundings."
     DESCRIBE.UNCOMPROMISING_RAT = "Rodentia kleptomanis, and quite the large specimen!"
     DESCRIBE.UNCOMPROMISING_RATHOLD = "One entrance to a no doubt vast tunnel system!"

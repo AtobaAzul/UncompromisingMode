@@ -100,4 +100,5 @@ return {
 	"shadow_crown",
 	"scorpioncarapace",
 	"hardshelltacos",
+	"californiaking",
 }

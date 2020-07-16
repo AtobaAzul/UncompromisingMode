@@ -24,6 +24,13 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now"
 	ANNOUNCE.ANNOUNCE_RNEFOG = "Is someone there?"
 	--FoodBuffs
+
+	--CaliforniaKing
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING = "Oh no! Here it comes!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "I would rather not do that again."
+	DESCRIBE.CALIFORNIAKING = "I don't want to touch this thing again...."
+	--CaliforniaKing
+	
     DESCRIBE.UNCOMPROMISING_RAT = "Don't let the filthy little pestes near my kitchen!"
     DESCRIBE.UNCOMPROMISING_RATHOLD = "A trouble trou!"
     DESCRIBE.RATPOISONBOTTLE = "Peace of mind in a bottle."

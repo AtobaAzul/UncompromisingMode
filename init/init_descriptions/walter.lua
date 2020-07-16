@@ -23,6 +23,13 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICRETALIATION = "(Sigh). Guess I'm just Walter-Boy now..."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "I prefer my regular temperature anyway."
 	--FoodBuffs
+
+	--CaliforniaKing
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING = "I can handle this."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "Wo.. Woby? Is that you?"
+	DESCRIBE.CALIFORNIAKING = "I'd dare Wortox to finish the whole thing!"
+	--CaliforniaKing
+	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "ooOOOOoo, it's getting VERY spooky now!"
     DESCRIBE.UNCOMPROMISING_RAT = "I'd share, but they seem more interested in just TAKING our stuff."
     DESCRIBE.UNCOMPROMISING_RATHOLD = "A Pine Tree Pioneer never enters a rat den head first!"
