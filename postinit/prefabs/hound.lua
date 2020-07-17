@@ -35,7 +35,7 @@ local function OnFullMoon(self, inst, isfullmoon, new_inst)
 		self:DoTaskInTime(math.random(2,5), function(inst)
 		local mspuff = SpawnPrefab("halloween_moonpuff")
 		mspuff.Transform:SetPosition(self.Transform:GetWorldPosition())
-		
+			inst:AddTag("horrorhound")
 			inst.AnimState:SetBank("hound")
 			inst.AnimState:SetBuild("hound_mutated")
 			inst.sounds = sounds_mutated
@@ -46,8 +46,12 @@ local function OnFullMoon(self, inst, isfullmoon, new_inst)
 		end)
 	elseif node ~= nil and node.tags ~= nil and not table.contains(node.tags, "lunacyarea") and not self.components.health:IsDead() then
 		self:DoTaskInTime(math.random(2,5), function(inst)
-			local mspuff = SpawnPrefab("halloween_moonpuff")
-			mspuff.Transform:SetPosition(self.Transform:GetWorldPosition())
+		
+			if inst:HasTag("horrorhound") then
+				local mspuff = SpawnPrefab("halloween_moonpuff")
+				mspuff.Transform:SetPosition(self.Transform:GetWorldPosition())
+				inst:RemoveTag("horrorhound")
+			end
 				
 			inst.AnimState:SetBank("hound")
 			inst.AnimState:SetBuild("hound_ocean")
