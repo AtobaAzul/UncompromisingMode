@@ -1,7 +1,7 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
-env.AddPrefabPostInit("eyebrella", function(inst)
+env.AddPrefabPostInit("eyebrellahat", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
