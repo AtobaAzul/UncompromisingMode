@@ -43,7 +43,7 @@ local function OnRespawnedFromGhost2(inst)
     MakeSmallPropagator(inst)
 end
 
-local function OnBurnt()
+local function OnBurnt(inst)
 	--will this stop her from losing her burning effect?
 	MakeSmallPropagator(inst)
 end
