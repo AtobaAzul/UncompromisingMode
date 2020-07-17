@@ -5,8 +5,8 @@ local SnowStormWatcher = Class(function(self, inst)
     self.delay = nil
 	self.task = nil
 	self.storming = false
-	inst:ListenForEvent("weathertick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
-	inst:ListenForEvent("forcestopsnowstorm", function(src, data) self:ToggleSnowstorms() end, TheWorld)
+	--inst:ListenForEvent("weathertick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
+	--inst:ListenForEvent("forcestopsnowstorm", function(src, data) self:ToggleSnowstorms() end, TheWorld)
 	--inst:ListenForEvent("seasontick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
 	
 	
@@ -47,7 +47,7 @@ local function StormStop(self)
 	self.stormtask = nil
 	self.stopstormtask = nil
 end
-
+--[[
 function SnowStormWatcher:ToggleSnowstorms(active, src, data)
 	
 	if not TheWorld.state.issnowing or self.storming then-- or not TheWorld.net:HasTag("snowstormstartnet") or not TheWorld:HasTag("snowstormstart") then
@@ -74,7 +74,7 @@ function SnowStormWatcher:ToggleSnowstorms(active, src, data)
 		end
 		
     end
-end
+end]]
 
 function SnowStormWatcher:UpdateSnowstormLevel()
 
