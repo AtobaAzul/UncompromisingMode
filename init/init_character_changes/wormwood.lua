@@ -53,7 +53,7 @@ local function OnBecameGhost2(inst)
     StopWatchingWorldPlants2(inst)
 end
 
-local function OnBurnt()
+local function OnBurnt(inst)
 	--Overriding the OnBurnt function to prevent propegator from sometimes removing, hopefully.
 	MakeSmallPropagator(inst)
 end

@@ -184,7 +184,7 @@ local function DoPop(inst, remaining, total, level, hissvol)
     SpawnPrefab("explode_firecrackers").Transform:SetPosition(x, y, z)
 	
 	for i, v in ipairs(TheSim:FindEntities(x, y, z, 2.2, "_combat", { "shadow", "INLIMBO" })) do
-		if v.components.combat ~= nil and v.components.combat ~= nil and v.components.health ~= nil then
+		if v:IsValid() and v.components.combat ~= nil and v.components.combat ~= nil and v.components.health ~= nil then
 			if not v.components.health:IsDead() then
 				--
 				--v:PushEvent("attacked", {attacker = inst.attacker or nil, damage = 5, weapon = nil})
@@ -195,7 +195,9 @@ local function DoPop(inst, remaining, total, level, hissvol)
 						v.SoundEmitter:PlaySound(v.components.combat:GetImpactSound(v))
 					end
 				else
-					v.components.combat:GetAttacked(inst.attacker or nil, 5, nil)
+					--v:PushEvent("attacked", { attacker = inst.attacker or nil, damage = 5} )
+					v.components.combat:GetAttacked(nil, 5)
+					v.components.combat:SetTarget(inst.attacker or nil)
 				end
 			end
 		end
