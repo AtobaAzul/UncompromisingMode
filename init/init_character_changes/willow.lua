@@ -45,6 +45,7 @@ end
 
 local function OnBurnt()
 	--will this stop her from losing her burning effect?
+	MakeSmallPropagator(inst)
 end
 
 env.AddPrefabPostInit("willow", function(inst)

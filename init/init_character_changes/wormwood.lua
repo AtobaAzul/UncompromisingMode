@@ -55,6 +55,7 @@ end
 
 local function OnBurnt()
 	--Overriding the OnBurnt function to prevent propegator from sometimes removing, hopefully.
+	MakeSmallPropagator(inst)
 end
 
 env.AddPrefabPostInit("wormwood", function(inst)
