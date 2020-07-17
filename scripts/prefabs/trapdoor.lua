@@ -197,12 +197,15 @@ local function fn()
     inst.components.workable:SetWorkLeft(TUNING.ROCKS_MINE)
 
     inst.components.workable:SetOnWorkCallback(workcallback)
-	local x, y, z = inst.Transform:GetWorldPosition()
-	
+
 	-- Spawn Trapdoor Grass
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local grasschance = math.random()
+	if grasschance > 0.25 then
 	local grassycover = SpawnPrefab("trapdoorgrass")
 	grassycover.Transform:SetPosition(x, y, z)
 	inst:AddChild(grassycover)
+	end
 	
 	
 	
