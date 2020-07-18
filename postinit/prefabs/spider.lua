@@ -115,6 +115,7 @@ env.AddPrefabPostInit("spider", function(inst)
 
 	inst.DoSpikeAttack = DoSpikeAttack
 end)
+
 env.AddPrefabPostInit("spider_warrior", function(inst)
 	if not TheWorld.ismastersim then
 		return
@@ -129,5 +130,22 @@ env.AddPrefabPostInit("spider_warrior", function(inst)
     inst.components.lootdropper:AddRandomHauntedLoot("spidergland", 1)
     inst.components.lootdropper.numrandomloot = 1
 	--]]
-    inst.components.health:SetMaxHealth(300)
+	if inst.components.combat ~= nil then
+		inst.components.combat:SetRange(TUNING.SPIDER_WARRIOR_ATTACK_RANGE, TUNING.SPIDER_WARRIOR_HIT_RANGE * 1.05)
+	end
+	
+	if inst.components.health ~= nil then
+		inst.components.health:SetMaxHealth(300)
+	end
+	
+end)
+
+env.AddPrefabPostInit("spider_dropper", function(inst)
+	if not TheWorld.ismastersim then
+		return
+	end
+	if inst.components.combat ~= nil then
+		inst.components.combat:SetRange(TUNING.SPIDER_WARRIOR_ATTACK_RANGE, TUNING.SPIDER_WARRIOR_HIT_RANGE * 1.05)
+	end
+	
 end)
