@@ -78,7 +78,7 @@ return {
 	"pollenmiteden",
 	"pollenmitedenprefabspawner",
 	"rice",
-	"gatorsnake",
+	--"gatorsnake",
 	"riceplant",
 	"acid_rain_splash",
 	"walrus_camp_summer",
