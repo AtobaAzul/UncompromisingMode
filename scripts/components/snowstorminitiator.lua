@@ -30,10 +30,10 @@ local _RandomTimeData = nil
 local function RandomizeSpawnTime()
 	if _storming then
 		--return 10 --+ math.random(-_spawnintervalvariance, _spawnintervalvariance)
-		return _despawninterval --+ math.random(-_spawnintervalvariance, _spawnintervalvariance)
+		return _despawninterval + math.random(0,120)
 	else
 		--return 1 --+ math.random(-_spawnintervalvariance, _spawnintervalvariance)
-		return _spawninterval --+ math.random(-_spawnintervalvariance, _spawnintervalvariance)
+		return _spawninterval + math.random(0,120)
 	end
 end
 
@@ -131,41 +131,23 @@ inst:ListenForEvent("seasontick", OnSeasonTick, TheWorld)
 StartUpdating(true)
 
 --------------------------------------------------------------------------
---[[ Public member functions ]]
---------------------------------------------------------------------------
-
-function self:SpawnModeNever()
-    _spawninterval = 0
-    _spawnintervalvariance = 0
-    StartUpdating(true)
-end
-
-function self:SpawnModeHeavy()
-    _spawninterval = TUNING.TOTAL_DAY_TIME-- * 2
-    _spawnintervalvariance = TUNING.TOTAL_DAY_TIME + math.random(TUNING.TOTAL_DAY_TIME)-- * 1
-    StartUpdating(true)
-end
-
-function self:SpawnModeMed()
-    _spawninterval = TUNING.TOTAL_DAY_TIME-- * 4
-    _spawnintervalvariance = TUNING.TOTAL_DAY_TIME + math.random(TUNING.TOTAL_DAY_TIME)-- * 1
-    StartUpdating(true)
-end
-
-function self:SpawnModeLight()
-    _spawninterval = TUNING.TOTAL_DAY_TIME-- * 10
-    _spawnintervalvariance = TUNING.TOTAL_DAY_TIME + math.random(TUNING.TOTAL_DAY_TIME)-- * 2
-    StartUpdating(true)
-end
-
---------------------------------------------------------------------------
 --[[ Save/Load ]]
 --------------------------------------------------------------------------
 
 function self:OnSave()
+	
+	if _RandomTime ~= nil then
+		local time = GetTime()
+		if _RandomTime > time then
+			_RandomTimeData = _RandomTime - time
+			print(_RandomTimeData)
+			print("saved")
+		end
+	end
+	
     local data =
     {
-		--RandomTime = _RandomTimeData,
+		randomtime = _RandomTimeData,
 		storming = _storming,
         spawninterval = _spawninterval,
         despawninterval = _despawninterval,
@@ -186,13 +168,18 @@ function self:OnLoad(data)
 		end
 	end)
 	
-	--[[
-	if data.RandomTime ~= nil then
-		_RandomTimeData = data.RandomTime
-        _scheduledspawntasks = TheWorld:DoTaskInTime(_RandomTimeData, SpawnPollenmiteDenForPlayer)
-	end	]]
-		
 	
+	if data.randomtime ~= nil then
+		_RandomTime = data.randomtime + GetTime()
+        _scheduledspawntasks = TheWorld:DoTaskInTime(_RandomTime, SpawnPollenmiteDenForPlayer)
+	end	
+		
+	self.inst:DoTaskInTime(1, function(self)
+		if _RandomTime ~= nil then
+		print(_RandomTime)
+		print("loaded")
+		end
+	end)
     --_scheduledspawntasks = TheWorld:DoTaskInTime(RandomizeSpawnTime(), SpawnPollenmiteDenForPlayer)
 
     StartUpdating(true)
