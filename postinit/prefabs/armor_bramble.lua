@@ -80,6 +80,10 @@ env.AddPrefabPostInit("armor_bramble", function(inst)
 		inst.components.equippable:SetOnUnequip(onunequip)
 	end
 	
+	if inst.components.armor ~= nil then
+		inst.components.armor:InitCondition(TUNING.ARMORBRAMBLE * 2, TUNING.ARMORBRAMBLE_ABSORPTION)
+	end
+	
 	inst._onblocked = function(owner, data) OnBlocked(owner, data, inst) end
 	
 end)
