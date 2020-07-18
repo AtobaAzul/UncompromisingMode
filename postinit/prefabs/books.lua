@@ -110,7 +110,7 @@ local function trygrowth(inst)
     end
 
     if inst.components.crop ~= nil and (inst.components.crop.rate or 0) > 0 then
-        inst.components.crop:DoGrow(1 / inst.components.crop.rate, true)
+        inst.components.crop:DoGrow(0.5 / inst.components.crop.rate, true)
     end
 
     if inst.components.growable ~= nil then
