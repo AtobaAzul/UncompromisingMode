@@ -46,8 +46,10 @@ local function SpawnPollenmiteDenForPlayer(reschedule)
 		print("remove")
 	else
 		_storming = true
-		TheWorld:AddTag("snowstormstart")
-		TheWorld.net:AddTag("snowstormstartnet")
+		if TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
+			TheWorld:AddTag("snowstormstart")
+			TheWorld.net:AddTag("snowstormstartnet")
+		end
 		print("add")
 	end
 	
@@ -163,8 +165,10 @@ function self:OnLoad(data)
 	
 	self.inst:DoTaskInTime(1, function(self) 
 		if _storming then
-			TheWorld:AddTag("snowstormstart")
-			TheWorld.net:AddTag("snowstormstartnet")
+			if TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
+				TheWorld:AddTag("snowstormstart")
+				TheWorld.net:AddTag("snowstormstartnet")
+			end
 		end
 	end)
 	
