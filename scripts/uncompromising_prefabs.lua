@@ -32,7 +32,6 @@ return {
 	"minotaur_boulder",
 	"minotaur_boulder_big",
 	--"monstermorsel",
-	--"charlie_fountain",
 	"bushcrab",
 	"dreadeye",
 	"creepingfear",

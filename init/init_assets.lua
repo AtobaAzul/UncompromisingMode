@@ -50,7 +50,6 @@ Assets = {
 	Asset("ANIM", "anim/swap_minotaur_boulder.zip"),
 	Asset("ANIM", "anim/pillar_ruins_damaged.zip"),
 	Asset("ANIM", "anim/rhino_stun.zip"),
-	--Asset("ANIM", "anim/charlie_fountain.zip"),
 	Asset("ANIM", "anim/bush_crab.zip"),
 	Asset("ANIM", "anim/creepingfear.zip"),
 	Asset("ANIM", "anim/dreadeye.zip"),
