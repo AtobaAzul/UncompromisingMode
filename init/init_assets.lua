@@ -142,7 +142,7 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/shadow_crown.tex"),
 	Asset("ATLAS", "images/inventoryimages/shadow_crown.xml"),
 	
-	Asset("ANIM", "anim/gatorsnake.zip"),
+	--Asset("ANIM", "anim/gatorsnake.zip"),
 	Asset("ANIM", "anim/swilson.zip"),
 	Asset("ANIM", "anim/stumpling.zip"),
 	Asset("IMAGE", "images/vetskull.tex"),
