@@ -50,7 +50,9 @@ local function SpawnPollenmiteDenForPlayer(reschedule)
 		_storming = true
 		
 		for i, v in ipairs(AllPlayers) do
-			v.components.talker:Say(GetString(v, "ANNOUNCE_DEERCLOPS"))
+			if v.components ~= nil and v.components.talker ~= nil then
+				v.components.talker:Say(GetString(v, "ANNOUNCE_SNOWSTORM"))
+			end
 		end
 		
 		TheWorld:PushEvent("ms_forceprecipitation", true)

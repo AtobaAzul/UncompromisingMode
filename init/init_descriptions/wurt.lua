@@ -56,6 +56,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 		"Groundy fire! Florp!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Stuck!"
+	ANNOUNCE.ANNOUNCE_SNOWSTORM = "Brr... chilly wind. I think storm happens soon."
 	ANNOUNCE.SHADOWTALKER = {
         "DO SCALELESS TRUST ME?",
         "WHERE... FROM...",

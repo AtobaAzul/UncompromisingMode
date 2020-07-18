@@ -57,6 +57,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 		"Watch the ground!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "I should chop myself free!"
+	ANNOUNCE.ANNOUNCE_SNOWSTORM = "The wind is starting to pick up, I'm afraid we may have a storm on our hands."
 	ANNOUNCE.SHADOWTALKER = {
         "SLEEP... SLEEP...",
         "JUST REST...",

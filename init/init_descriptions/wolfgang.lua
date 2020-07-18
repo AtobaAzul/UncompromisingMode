@@ -56,6 +56,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 		"Fire! Fire!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Too tough, Wolfgang cannot break!"
+	ANNOUNCE.ANNOUNCE_SNOWSTORM = "Wolfgang fight the wind, and storm too!"
 	ANNOUNCE.SHADOWTALKER = {
         "I AM WEAK",
         "I AM AFRAID",
