@@ -28,7 +28,7 @@ local function GetSandstormLevel(inst)
 	
 	end
 
-	if not suppressorNearby1 and not suppressorNearby2 and not suppressorNearby3 and not suppressorNearby4 and (GLOBAL.TheWorld:HasTag("snowstormstart") or GLOBAL.TheWorld.net:HasTag("snowstormstartnet")) then
+	if TheWorld.state.iswinter and not suppressorNearby1 and not suppressorNearby2 and not suppressorNearby3 and not suppressorNearby4 and (GLOBAL.TheWorld:HasTag("snowstormstart") or GLOBAL.TheWorld.net:HasTag("snowstormstartnet")) then
 		return 1
 	else
 		return inst.player_classified ~= nil and inst.player_classified.sandstormlevel:value() / 7 or 0

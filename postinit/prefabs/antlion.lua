@@ -28,6 +28,8 @@ env.AddPrefabPostInit("antlion", function(inst)
 		return
 	end
 	
+	inst:AddComponent("explosiveresist")
+	
 	inst:ListenForEvent("timerdone", onothertimerdone)
 	inst:AddComponent("firefallwarning")
 	inst:AddComponent("explosiveresist")
