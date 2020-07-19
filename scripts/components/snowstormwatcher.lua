@@ -7,9 +7,8 @@ local SnowStormWatcher = Class(function(self, inst)
 	self.storming = false
 	--inst:ListenForEvent("weathertick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
 	--inst:ListenForEvent("forcestopsnowstorm", function(src, data) self:ToggleSnowstorms() end, TheWorld)
-	--inst:ListenForEvent("seasontick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
-	
-	
+	inst:ListenForEvent("seasontick", function(src, data) self:ToggleSnowstorms() end, TheWorld)
+    self.inst:StartUpdatingComponent(self)
 	
 end,
 nil,
@@ -47,34 +46,15 @@ local function StormStop(self)
 	self.stormtask = nil
 	self.stopstormtask = nil
 end
---[[
+
+
 function SnowStormWatcher:ToggleSnowstorms(active, src, data)
-	
-	if not TheWorld.state.issnowing or self.storming then-- or not TheWorld.net:HasTag("snowstormstartnet") or not TheWorld:HasTag("snowstormstart") then
-		self:UpdateSnowstormWalkSpeed()
-		self.inst:PushEvent("snowoff")
-        self.inst:StopUpdatingComponent(self)
-		self.task = nil
-		self.stormtask = nil
-		self.stopstormtask = nil
-		self.stormresettask = nil
-		if self.stormresettask == nil then
-			self.stormresettask = self.inst:DoTaskInTime(480, function(self) self.storming = false end)
-		end
-    elseif TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
+	if TheWorld.state.iswinter then
         self.inst:StartUpdatingComponent(self)
-		if self.stormtask == nil then
-			self.stormtask = self.inst:DoTaskInTime(80 + math.random(10,40), StormStart, self)--, self)
-			--self.stormtask = self.inst:DoTaskInTime(10, StormStart, self) -- FOR TESTING
-		end
-		
-		if self.stopstormtask == nil then
-			self.stopstormtask = self.inst:DoTaskInTime(320 + math.random(80,120), StormStop, self)--, self)
-			--self.stopstormtask = self.inst:DoTaskInTime(60, StormStop, self) -- FOR TESTING
-		end
-		
+    else
+        self.inst:StopUpdatingComponent(self)
     end
-end]]
+end
 
 function SnowStormWatcher:UpdateSnowstormLevel()
 
@@ -100,7 +80,7 @@ function SnowStormWatcher:UpdateSnowstormWalkSpeed(src, data)
 		local ents4 = TheSim:FindEntities(x, y, z, 6, {"snowstorm_protection_high"})
 		local suppressorNearby4 = (#ents4 > 0)
 		
-    if TheWorld.state.issnowing and ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") ) then
+    if TheWorld.state.iswinter and (TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart")) then
         if self.inst.components.playervision:HasGoggleVision() or
             self.inst.components.playervision:HasGhostVision() or
             self.inst.components.rider:IsRiding() or
@@ -192,7 +172,7 @@ function SnowStormWatcher:OnUpdate(dt)
    
         self:UpdateSnowstormLevel()
 		
-		--self:ToggleSnowstorms()
+		self:UpdateSnowstormWalkSpeed()
 		
 		self:StartSnowPileTask()
 		
@@ -200,54 +180,3 @@ end
 
 
 return SnowStormWatcher
-
---[[
-
-@@ -26,20 +26,6 @@ local function UpdateSnowstormWalkSpeed(inst)
-    inst.components.snowstormwatcher:UpdateSnowstormWalkSpeed()
-end
-
-local function AddSnowstormWalkSpeedListeners(inst)
-    inst:ListenForEvent("gogglevision", UpdateSnowstormWalkSpeed)
-    inst:ListenForEvent("ghostvision", UpdateSnowstormWalkSpeed)
-    inst:ListenForEvent("mounted", UpdateSnowstormWalkSpeed)
-    inst:ListenForEvent("dismounted", UpdateSnowstormWalkSpeed)
-end
-
-local function RemoveSnowstormWalkSpeedListeners(inst)
-    inst:RemoveEventCallback("gogglevision", UpdateSnowstormWalkSpeed)
-    inst:RemoveEventCallback("ghostvision", UpdateSnowstormWalkSpeed)
-    inst:RemoveEventCallback("mounted", UpdateSnowstormWalkSpeed)
-    inst:RemoveEventCallback("dismounted", UpdateSnowstormWalkSpeed)
-    inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "snowstorm")
-end
-
-function SnowStormWatcher:ToggleSnowstorms(active, src, data)
-	
-@ -50,10 +36,6 @@ function SnowStormWatcher:ToggleSnowstorms(active, src, data)
-		self.task = nil
-    elseif TheWorld.state.cycles > TUNING.DSTU.WEATHERHAZARD_START_DATE then
-        self.inst:StartUpdatingComponent(self)
-                AddSnowstormWalkSpeedListeners(self.inst)
-            self:UpdateSnowstormLevel()
-			self:UpdateSnowstormWalkSpeed()
-			self.inst:PushEvent("snowon")
-    end
-end
-
-@ -170,15 +152,6 @@ function SnowStormWatcher:OnUpdate(dt)
-		
-		self:StartSnowPileTask()
-		
-		--self:SnowpileChance()
-		
-		if TheWorld.state.issnowing then
-			self.inst:PushEvent("snowon")
-			--self.inst:PushEvent("snowondirty")
-		else
-			self.inst:PushEvent("snowoff")
-			--self.inst:PushEvent("snowoffdirty")
-		end
-end
-
---]]

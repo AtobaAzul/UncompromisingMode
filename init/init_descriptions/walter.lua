@@ -56,6 +56,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 		"Just keep calm!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Creeping vines! I can chop them!"
+	ANNOUNCE.ANNOUNCE_SNOWSTORM = "My instincts tell me theres a storm coming!"
 	ANNOUNCE.SHADOWTALKER = {
         "I MUST PROTECT HER",
         "I SHOULDN'T HAVE DONE IT",

@@ -1,4 +1,4 @@
-
+SKINS = GLOBAL.STRINGS.SKIN_NAMES
 STRINGS = GLOBAL.STRINGS.NAMES
 	
 	STRINGS.UNCOMPROMISING_RAT = "Rat" -- Maybe change the name with a pun with Robber or Raider, any idea ?
@@ -88,3 +88,4 @@ STRINGS = GLOBAL.STRINGS.NAMES
 	STRINGS.SHADOW_CROWN = "Shadow Crown"
 	STRINGS.CALIFORNIAKING = "California King"
 	STRINGS.TRAPDOORGRASS = "Wide Grass"
+	SKINS.wormwood_shadow = "The Corrupted"

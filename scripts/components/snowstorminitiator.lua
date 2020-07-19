@@ -20,6 +20,8 @@ local _updating = false
 local _storming = false
 local _spawninterval = TUNING.TOTAL_DAY_TIME * 3
 local _despawninterval = TUNING.TOTAL_DAY_TIME / 2
+--local _spawninterval = 30
+--local _despawninterval = 100
 local _RandomTime = nil
 local _RandomTimeData = nil
 
@@ -29,10 +31,10 @@ local _RandomTimeData = nil
 
 local function RandomizeSpawnTime()
 	if _storming then
-		--return 10 --+ math.random(-_spawnintervalvariance, _spawnintervalvariance)
-		return _despawninterval + math.random(0,120)
+		--return _despawninterval
+		return _despawninterval + math.random(80,120)
 	else
-		--return 1 --+ math.random(-_spawnintervalvariance, _spawnintervalvariance)
+		--return _spawninterval
 		return _spawninterval + math.random(0,120)
 	end
 end
@@ -43,12 +45,25 @@ local function SpawnPollenmiteDenForPlayer(reschedule)
 		_storming = false
 		TheWorld:RemoveTag("snowstormstart")
 		TheWorld.net:RemoveTag("snowstormstartnet")
-		print("remove")
+		--print("remove")
 	else
 		_storming = true
-		TheWorld:AddTag("snowstormstart")
-		TheWorld.net:AddTag("snowstormstartnet")
-		print("add")
+		
+		for i, v in ipairs(AllPlayers) do
+			if v.components ~= nil and v.components.talker ~= nil then
+				v.components.talker:Say(GetString(v, "ANNOUNCE_SNOWSTORM"))
+			end
+		end
+		
+		TheWorld:PushEvent("ms_forceprecipitation", true)
+		
+		TheWorld:DoTaskInTime(60, function()
+			if TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
+				TheWorld:AddTag("snowstormstart")
+				TheWorld.net:AddTag("snowstormstartnet")
+			end
+		end)
+		--print("add")
 	end
 	
     _scheduledspawntasks = nil
@@ -140,8 +155,8 @@ function self:OnSave()
 		local time = GetTime()
 		if _RandomTime > time then
 			_RandomTimeData = _RandomTime - time
-			print(_RandomTimeData)
-			print("saved")
+			--print(_RandomTimeData)
+			--print("saved")
 		end
 	end
 	
@@ -160,11 +175,15 @@ function self:OnLoad(data)
 	_storming = data.storming or false
     _spawninterval = data.spawninterval or TUNING.TOTAL_DAY_TIME * 3
     _despawninterval = data._despawninterval or TUNING.TOTAL_DAY_TIME / 2
+    --_spawninterval = data.spawninterval or 30
+    --_despawninterval = data._despawninterval or 100
 	
 	self.inst:DoTaskInTime(1, function(self) 
 		if _storming then
-			TheWorld:AddTag("snowstormstart")
-			TheWorld.net:AddTag("snowstormstartnet")
+			if TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
+				TheWorld:AddTag("snowstormstart")
+				TheWorld.net:AddTag("snowstormstartnet")
+			end
 		end
 	end)
 	
@@ -176,8 +195,8 @@ function self:OnLoad(data)
 		
 	self.inst:DoTaskInTime(1, function(self)
 		if _RandomTime ~= nil then
-		print(_RandomTime)
-		print("loaded")
+		--print(_RandomTime)
+		--print("loaded")
 		end
 	end)
     --_scheduledspawntasks = TheWorld:DoTaskInTime(RandomizeSpawnTime(), SpawnPollenmiteDenForPlayer)

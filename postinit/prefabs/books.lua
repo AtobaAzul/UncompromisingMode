@@ -110,7 +110,11 @@ local function trygrowth(inst)
     end
 
     if inst.components.crop ~= nil and (inst.components.crop.rate or 0) > 0 then
-        inst.components.crop:DoGrow(1 / inst.components.crop.rate, true)
+		if inst:HasTag("wormwood_plant_ground") then
+			inst.components.crop:DoGrow(0.44 / inst.components.crop.rate, true)
+		else
+			inst.components.crop:DoGrow(0.66 / inst.components.crop.rate, true)
+		end
     end
 
     if inst.components.growable ~= nil then
@@ -240,4 +244,13 @@ env.AddPrefabPostInit("book_birds", function(inst)
 	if inst.components.book ~= nil then
         inst.components.book.onread = newbirds
 	end
+end)
+
+env.AddPrefabPostInit("plant_normal_ground", function(inst)
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+	inst:AddTag("wormwood_plant_ground")
+	
 end)

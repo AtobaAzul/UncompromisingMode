@@ -24,13 +24,13 @@ springdaycounter = 0
 end
 
 local function DoMonsoon()
-print("didmonsoon")
+--print("didmonsoon")
 TheWorld:AddTag("monsooning")
 TheWorld.net:AddTag("monsooning")
 end
 local function SpringDaycount()
 springdaycounter = springdaycounter+1
-print(springdaycounter)
+--print(springdaycounter)
 	if TheWorld.state.israining and springdaycounter > 2 and springdaycounter < 18 then
 	DoMonsoon()
 	end
@@ -43,8 +43,8 @@ local function NotMonsoon()
 end
 
 local function TryMonsoon()
-print("triedmonsoon")
-print(springdaycounter)
+--print("triedmonsoon")
+--print(springdaycounter)
 if TheWorld:HasTag("monsoons") or TheWorld.net:HasTag("monsoons") then
 	if springdaycounter > 2 and springdaycounter < 18 then
 		DoMonsoon()

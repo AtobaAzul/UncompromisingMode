@@ -50,6 +50,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	ANNOUNCE.ANNOUNCE_SNEEZE = "ACHOO! Whoops!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Something is dancin' in my nose!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "My nose is finally getting a break!"
+	ANNOUNCE.ANNOUNCE_SNOWSTORM = "Storms a comin', better hunker down."
 	ANNOUNCE.ANNOUNCE_FIREFALL = {
 		"That guys working up a sweat with all that yelling.",
 		"Jeez! Cool it!",

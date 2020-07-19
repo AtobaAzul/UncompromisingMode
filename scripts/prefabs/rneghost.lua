@@ -113,7 +113,7 @@ local mlight2 = TheSim:FindEntities(m,n,o, 100, {"mlight2"})
 	end
 local scalelight = TheSim:FindEntities(m,n,o, 100, {"dlight"})
 	for i, v in ipairs(scalelight) do
-	print("foundscaled")
+	--print("foundscaled")
 		v.Light:Enable(false)
 		v:DoTaskInTime("120",function(v)
 		v.Light:Enable(true)

@@ -203,6 +203,8 @@ local function fn(Sim)
 
 	inst.CanGroundPound = true
 
+    inst:AddComponent("hauntable")
+		
 	inst:AddComponent("combat")
 	inst.components.combat:SetDefaultDamage(44)
 	inst.components.combat:SetAttackPeriod(3)

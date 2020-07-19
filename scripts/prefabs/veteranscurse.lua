@@ -12,22 +12,51 @@ local function ForceToTakeMoreDamage(inst)
 		return _GetAttacked(self, attacker, damage, weapon, stimuli)
 	end
 end
+
+local function ForceToTakeMoreHunger(inst)
+	local self = inst.components.hunger
+	local _DoDelta = self.DoDelta
+	self.DoDelta = function(self, delta, overtime, ignore_invincible)
+	if delta then
+		-- Take extra hunger
+		delta = delta * 1.2
+		--print(delta)
+		end
+		return _DoDelta(self, delta, overtime, ignore_invincible)
+	end
+end
+
 local function ForceToTakeUsualDamage(inst)
 	local self = inst.components.combat
 	local _GetAttacked = self.GetAttacked
 	self.GetAttacked = function(self, attacker, damage, weapon, stimuli)
 	if attacker and damage then
-			-- Take extra damage
+			-- Take normal damage
 			damage = damage / 1.2
 		end
 		return _GetAttacked(self, attacker, damage, weapon, stimuli)
 	end
 end
+
+local function ForceToTakeUsualHunger(inst)
+	local self = inst.components.hunger
+	local _DoDelta = self.DoDelta
+	self.DoDelta = function(self, delta, overtime, ignore_invincible)
+	if delta then
+		-- Take normal hunger
+		delta = delta / 1.2
+		--print(delta)
+		end
+		return _DoDelta(self, delta, overtime, ignore_invincible)
+	end
+end
+
 local function AttachCurse(inst, target)
     if target.components.combat ~= nil then
         --target.components.combat.externaldamagemultipliers:SetModifier(inst, .75)    Effect Removed
 		target.vetcurse = true
 		ForceToTakeMoreDamage(target)
+		ForceToTakeMoreHunger(target)
 		target:AddTag("vetcurse")
     end
 end
@@ -37,6 +66,7 @@ local function DetachCurse(inst, target)
         --target.components.combat.externaldamagemultipliers:RemoveModifier(inst)
 		target.vetcurse = false
 		ForceToTakeUsualDamage(target)
+		ForceToTakeUsualHunger(target)
 		target:RemoveTag("vetcurse")
     end
 end

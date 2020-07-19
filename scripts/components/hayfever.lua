@@ -58,13 +58,13 @@ function Hayfever:CanSneezeQueen()
 		cancan = false
 	end
 	
-	print(queenkilled)
+	--print(queenkilled)
 	
     return cancan
 end
 
 function Hayfever:OnUpdate(dt)
-	print(self.nextsneeze)
+	--print(self.nextsneeze)
     if self:CanSneeze() and self:CanSneezeQueen() then
         if self.nextsneeze <= 0 then
             if not self.inst.wantstosneeze then
@@ -149,7 +149,7 @@ function Hayfever:Enable()
         --end
 
         if not self.enabled then --and (TheWorld:HasTag("hayfever") or TheWorld.net:HasTag("hayfever"))then
-            print("HAYVEVER STARTED")    
+            --print("HAYVEVER STARTED")    
             self.inst.components.talker:Say(GetString(self.inst.prefab, "ANNOUNCE_HAYFEVER"))
         end
         self.enabled = true

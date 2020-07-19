@@ -56,6 +56,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 		"Watch out!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "We're stuck! Help!"
+	ANNOUNCE.ANNOUNCE_SNOWSTORM = "Sounds like a storm! Lets get ready for a snow day."
 	ANNOUNCE.SHADOWTALKER = {
         "I AM A MONSTER",
         "I CAN NEVER GO HOME",

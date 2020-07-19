@@ -56,6 +56,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 		"The grounds getting broiled!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Definetly not a spice root!"
+	ANNOUNCE.ANNOUNCE_SNOWSTORM = "Feels like a storms brewing!"
 	ANNOUNCE.SHADOWTALKER = {
         "SHE IS ALL ALONE",
         "SHE DOESN'T REMEMBER ME",

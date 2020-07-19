@@ -56,6 +56,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 		"The beast roars loud!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "A cheap trick! Fight with honor!"
+	ANNOUNCE.ANNOUNCE_SNOWSTORM = "The winds grow fierce!"
 	ANNOUNCE.SHADOWTALKER = {
         "SHE IS NO MORE",
         "THIS IS WHERE I BELONG",

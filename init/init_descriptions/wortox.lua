@@ -56,6 +56,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 		"Fury!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "You can't hold me down!"
+	ANNOUNCE.ANNOUNCE_SNOWSTORM = "This bitter wind feels terrible against my fur!"
 	ANNOUNCE.SHADOWTALKER = {
         "I CAN CHANGE. I HAVE CHANGED.",
         "I STILL FEEL THE HUNGER",

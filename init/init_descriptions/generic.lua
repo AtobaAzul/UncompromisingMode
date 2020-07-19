@@ -64,6 +64,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 		"I've got a bad feeling about this.",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "I'm stuck!"
+	ANNOUNCE.ANNOUNCE_SNOWSTORM = "The winds picking up..."
 	
 	ANNOUNCE.SHADOWTALKER = {
         "THERES NO ESCAPE",

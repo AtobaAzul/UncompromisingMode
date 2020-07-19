@@ -56,6 +56,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 		"Some just want to watch the world burn.",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "You cannot hold me forever."
+	ANNOUNCE.ANNOUNCE_SNOWSTORM = "Cold death awaits us once the storm hits."
 	ANNOUNCE.SHADOWTALKER = {
         "SHES NEVER COMING BACK",
         "I CAN'T HELP HER",

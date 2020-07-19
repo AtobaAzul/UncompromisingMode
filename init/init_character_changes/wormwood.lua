@@ -24,7 +24,6 @@ local function DoKillPlantPenalty(inst, penalty, overtime)
 end
 
 local function WatchWorldPlants2(inst)
-	print("dingus")
     if inst._onplantkilled2 == nil then
         inst._onplantkilled2 = function(src, data)
             if data == nil then
