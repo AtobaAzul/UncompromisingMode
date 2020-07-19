@@ -45,7 +45,7 @@ local function SpawnPollenmiteDenForPlayer(reschedule)
 		_storming = false
 		TheWorld:RemoveTag("snowstormstart")
 		TheWorld.net:RemoveTag("snowstormstartnet")
-		print("remove")
+		--print("remove")
 	else
 		_storming = true
 		
@@ -63,7 +63,7 @@ local function SpawnPollenmiteDenForPlayer(reschedule)
 				TheWorld.net:AddTag("snowstormstartnet")
 			end
 		end)
-		print("add")
+		--print("add")
 	end
 	
     _scheduledspawntasks = nil
@@ -155,8 +155,8 @@ function self:OnSave()
 		local time = GetTime()
 		if _RandomTime > time then
 			_RandomTimeData = _RandomTime - time
-			print(_RandomTimeData)
-			print("saved")
+			--print(_RandomTimeData)
+			--print("saved")
 		end
 	end
 	
@@ -195,8 +195,8 @@ function self:OnLoad(data)
 		
 	self.inst:DoTaskInTime(1, function(self)
 		if _RandomTime ~= nil then
-		print(_RandomTime)
-		print("loaded")
+		--print(_RandomTime)
+		--print("loaded")
 		end
 	end)
     --_scheduledspawntasks = TheWorld:DoTaskInTime(RandomizeSpawnTime(), SpawnPollenmiteDenForPlayer)

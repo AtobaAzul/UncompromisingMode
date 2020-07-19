@@ -6,7 +6,7 @@ if math.random() > 0 then  --This'll ensure that only hayfevers occur in any upd
 --TheWorld:AddTag("hayfever")
 --TheWorld.net:AddTag("hayfever")
 else
-print("goingwithmonsoons")
+--print("goingwithmonsoons")
 TheWorld:AddTag("monsoons")
 TheWorld.net:AddTag("monsoons")
 end
