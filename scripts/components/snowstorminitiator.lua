@@ -32,7 +32,7 @@ local _RandomTimeData = nil
 local function RandomizeSpawnTime()
 	if _storming then
 		--return _despawninterval
-		return _despawninterval + math.random(0,120)
+		return _despawninterval + math.random(80,120)
 	else
 		--return _spawninterval
 		return _spawninterval + math.random(0,120)

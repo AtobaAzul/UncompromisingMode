@@ -243,7 +243,7 @@ configuration_options =
 	{
 		name = "caveless",
 		label = "[IMPORTANT] CAVES",
-		hover = "ENABLE IF YOU HAVE CAVES ENABLED, VISE VERSA. >VERY< IMPORTANT.",
+		hover = "ENABLE IF YOU HAVE CAVES ENABLED, VISE VERSA. \n>VERY< IMPORTANT.",
 		options =
 		{
 			{description = "Disabled", data = false},
@@ -276,16 +276,16 @@ configuration_options =
 	{
 		name = "rne chance",
 		label = "Random Night Even Chance.",
-		hover = "Remember: Too much of a good thing is a bad thing!",
+		hover = "Remember: Too much of a good thing is a bad thing! \n(Increases by 10% per extra player)",
 		options =
 		{
 			{description = "None", data = 100},
-			{description = "20%", data = 0.7},
-			{description = "40%", data = 0.5},
-			{description = "60%", data = 0.3},
-			{description = "80%", data = 0.1},
+			{description = "20%", data = 0.9},
+			{description = "40%", data = 0.7},
+			{description = "60%", data = 0.5},
+			{description = "80%", data = 0.3},
 			{description = "INSANITY", data = 0},
 		},
-		default = 0.4,
+		default = 0.7,
 	},
 }
