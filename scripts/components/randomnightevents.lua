@@ -1235,6 +1235,11 @@ local function IsEligible(player)
 			--and not area:CurrentlyInTag("nohasslers")
 end
 
+local function IsLiving(player)
+	return not player:HasTag("playerghost")
+end
+
+
 local function CheckPlayers()
     _targetplayer = nil
     if #_activeplayers == 0 then
@@ -1243,9 +1248,9 @@ local function CheckPlayers()
 
 	local playerlist = {}
 	for _, v in ipairs(_activeplayers) do
-		--if IsEligible(v) then
+		if IsLiving(v) then
 			table.insert(playerlist, v)
-		--end
+		end
 	end
 	
 		
