@@ -284,7 +284,14 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-
+	inst.entity:AddLight()
+	inst.Light:SetIntensity(.6)
+    inst.Light:SetRadius(3)
+    inst.Light:SetFalloff(1)
+    inst.Light:SetColour(1, 0, 0.8)
+	
+	inst.Light:Enable(true)
+	
     MakeObstaclePhysics(inst, .2)
     RemovePhysicsColliders(inst)
     inst.Physics:SetCollisionGroup(COLLISION.SANITY)

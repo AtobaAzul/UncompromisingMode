@@ -776,7 +776,7 @@ local function SpawnPhonographFunction(player)
 	local z2 = z + math.random(-15, 15)
 	
 	if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
-		local phonograph = SpawnPrefab("charliephonograph")
+		local phonograph = SpawnPrefab("charliephonograph_20")
 		phonograph.Transform:SetPosition(x2, y, z2)
 	else
 		SpawnPhonographFunction(player)
