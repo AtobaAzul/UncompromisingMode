@@ -21,7 +21,7 @@ local brain = require("brains/moosebrain")
 
 local MOOSE_SCALE = 1.55
 
-SetSharedLootTable( 'moose',
+SetSharedLootTable( 'mothergoose',
 {
     {'meat',             1.00},
     {'meat',             1.00},
@@ -29,8 +29,8 @@ SetSharedLootTable( 'moose',
     {'meat',             1.00},
     {'meat',             1.00},
     {'meat',             1.00},
-    {'drumstick',        1.00},
-    {'drumstick',        1.00},
+    --{'drumstick',        1.00},
+    --{'drumstick',        1.00},
     {'goose_feather',    1.00},
     {'goose_feather',    1.00},
     {'goose_feather',    1.00},
@@ -140,6 +140,16 @@ end
 local function OnDead(inst)
     TheWorld:PushEvent("mothergoosekilled", inst)
     AwardRadialAchievement("moosegoose_killed", inst:GetPosition(), TUNING.ACHIEVEMENT_RADIUS_FOR_GIANT_KILL)
+
+	local loot = SpawnPrefab("bigbird_meat")
+	if loot ~= nil then
+	inst.components.lootdropper:SpawnLootPrefab("bigbird_meat")
+	inst.components.lootdropper:SpawnLootPrefab("bigbird_meat")
+	else
+	inst.components.lootdropper:SpawnLootPrefab("drumstick")
+	inst.components.lootdropper:SpawnLootPrefab("drumstick")
+	end
+
 end
 
 local function OnRemove(inst)
@@ -225,7 +235,8 @@ local function fn()
     ------------------------------------------
 
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetChanceLootTable('moose')
+	
+	inst.components.lootdropper:SetChanceLootTable('mothergoose')
 
     ------------------------------------------
 
