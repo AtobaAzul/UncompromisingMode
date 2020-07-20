@@ -36,7 +36,7 @@ local function onregen(inst)
 				inst.components.workable:SetWorkLeft(inst.components.workable.workleft+1)
 				inst.components.pickable.cycles_left = inst.components.pickable.cycles_left + 1
 				startregen(inst)
-			elseif inst.components.workable.workleft == 3 and math.random() <= 0.15 then
+			elseif inst.components.workable.workleft == 3 and math.random() <= 0.25 then
 				local x1, y1, z1 = inst.Transform:GetWorldPosition()
 				local ents2 = TheSim:FindEntities(x1, y1, z1, 40, { "player" })
 				if #ents2 > 0 then
