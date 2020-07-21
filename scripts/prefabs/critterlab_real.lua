@@ -117,20 +117,20 @@ local function brokenfn()
     end
 
     inst:AddComponent("inspectable")
-	--[[
+	
     inst:AddComponent("workable")
 	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
 	inst.components.workable:SetWorkLeft(TUNING.STAGEHAND_HITS_TO_GIVEUP -1)
 	inst.components.workable:SetMaxWork(TUNING.STAGEHAND_HITS_TO_GIVEUP)
     inst.components.workable:SetOnWorkCallback(onworked)
-	]]
+	--[[
 	inst:AddComponent("workable")
 	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
 	inst.components.workable:SetMaxWork(8)
 	inst.components.workable:SetWorkLeft(1)
 	inst.components.workable:SetOnWorkCallback(onworked)
 	inst.components.workable.savestate = true
-		
+	]]
     inst:AddComponent("repairable")
     inst.components.repairable.repairmaterial = MATERIALS.MOONROCK
     inst.components.repairable.onrepaired = broken_onrepaired

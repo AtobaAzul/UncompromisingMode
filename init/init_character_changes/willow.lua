@@ -40,7 +40,7 @@ local function OnIgniteFn(inst)
 end
 
 local function OnRespawnedFromGhost2(inst)
-    MakeSmallPropagator(inst)
+	inst:DoTaskInTime(5, function(inst) MakeSmallPropagator(inst) end)
 end
 
 local function OnBurnt(inst)

@@ -36,7 +36,7 @@ STRINGS.CHARACTERS.SHADOWTALKER.SHADOWTALKER = {
 ]]
 local function SetPlayer(inst)
 	if inst.speech ~= nil and math.random() >= 0.5 then
-		if inst.speech:HasTag("bearded") and not inst.speech:HasTag("spider") and not inst.speech:HasTag("polite") then
+		if inst.speech:HasTag("bearded") and not inst.speech:HasTag("spiderwhisperer") and not inst.speech:HasTag("polite") then
 			local speechchance = math.random()
 			if speechchance >= 0.66 then
 				inst.components.talker:Say("MY EXPERIMENTS ARE ALL FAILURES")
