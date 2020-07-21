@@ -66,7 +66,7 @@ Recipe("ice", {Ingredient("snowball_throwable", 4, "images/inventoryimages/snowb
 GLOBAL.AllRecipes["reviver"].sortkey = GLOBAL.AllRecipes["healingsalve"].sortkey - .1
 
 
-AddRecipe("critterlab_real", {Ingredient("moonrocknugget",2),Ingredient("cutgrass", 4),Ingredient("beefalowool",2)}, GLOBAL.RECIPETABS.TOWN, GLOBAL.TECH.LOST, "critterlab_real_placer", nil, nil, nil, nil, "images/inventoryimages/critterlab_real.xml", "critterlab_real.tex" )
+--AddRecipe("critterlab_real", {Ingredient("moonrocknugget",2),Ingredient("cutgrass", 4),Ingredient("beefalowool",2)}, GLOBAL.RECIPETABS.TOWN, GLOBAL.TECH.LOST, "critterlab_real_placer", nil, nil, nil, nil, "images/inventoryimages/critterlab_real.xml", "critterlab_real.tex" )
 AddRecipe("gasmask", {Ingredient("goose_feather", 10),Ingredient("red_cap", 2),Ingredient("pigskin",2)}, GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/gasmask.xml", "gasmask.tex" )
 AddRecipe("plaguemask", {Ingredient("malbatross_beak", 1),Ingredient("red_cap", 2),Ingredient("rat_tail",4, "images/inventoryimages/rat_tail.xml")}, GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/plaguemask.xml", "plaguemask.tex" )
 AddRecipe("saltpack", {Ingredient("gears", 1),Ingredient("boards", 2),Ingredient("saltrock",8)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/saltpack.xml", "saltpack.tex" )

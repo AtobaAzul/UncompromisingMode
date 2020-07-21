@@ -67,5 +67,76 @@ local function fn()
     return inst
 end
 
+local function broken_onrepaired(inst, doer, repair_item)
+    --if inst.components.workable.workleft < inst.components.workable.maxwork then
+        --inst.AnimState:PlayAnimation("hit_broken")
+        --inst.SoundEmitter:PlaySound("dontstarve/common/ancienttable_repair")
+    --else
+        local pos = inst:GetPosition()
+        local altar = SpawnPrefab("critterlab_real")
+        altar.Transform:SetPosition(pos:Get())
+        --altar.SoundEmitter:PlaySound("dontstarve/common/ancienttable_activate")
+        SpawnPrefab("collapse_small").Transform:SetPosition(pos:Get())
+        --inst:PushEvent("onprefabswaped", {newobj = altar})
+        inst:Remove()
+    --end
+end
+
+local function onworked(inst, worker)
+    -- make sure it never runs out of work to do
+    inst.components.workable:SetWorkLeft(TUNING.STAGEHAND_HITS_TO_GIVEUP -1)
+end
+
+local function brokenfn()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddMiniMapEntity()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+
+    MakeObstaclePhysics(inst, .4)
+
+    inst.MiniMapEntity:SetPriority(5)
+    inst.MiniMapEntity:SetIcon("critterlab.png")
+
+    inst.AnimState:SetBank("critterlab")
+    inst.AnimState:SetBuild("critterlab_broken")
+    inst.AnimState:PlayAnimation("idle")
+
+    inst:AddTag("critterlab")
+    inst:AddTag("antlion_sinkhole_blocker")
+    inst:AddTag("structure")
+    inst:AddTag("stone")
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst:AddComponent("inspectable")
+	--[[
+    inst:AddComponent("workable")
+	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
+	inst.components.workable:SetWorkLeft(TUNING.STAGEHAND_HITS_TO_GIVEUP -1)
+	inst.components.workable:SetMaxWork(TUNING.STAGEHAND_HITS_TO_GIVEUP)
+    inst.components.workable:SetOnWorkCallback(onworked)
+	]]
+	inst:AddComponent("workable")
+	inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
+	inst.components.workable:SetMaxWork(8)
+	inst.components.workable:SetWorkLeft(1)
+	inst.components.workable:SetOnWorkCallback(onworked)
+	inst.components.workable.savestate = true
+		
+    inst:AddComponent("repairable")
+    inst.components.repairable.repairmaterial = MATERIALS.MOONROCK
+    inst.components.repairable.onrepaired = broken_onrepaired
+
+    return inst
+end
+
 return Prefab("critterlab_real", fn, assets, prefabs),
-    MakePlacer("critterlab_real_placer", "critterlab", "critterlab", "idle")
+		Prefab("critterlab_real_broken", brokenfn, assets, prefabs)
