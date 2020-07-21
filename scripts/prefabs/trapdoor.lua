@@ -114,6 +114,10 @@ local function workcallback(inst, worker, workleft)
         local pos = inst:GetPosition()
         SpawnPrefab("rock_break_fx").Transform:SetPosition(pos:Get())
         inst.components.lootdropper:DropLoot(pos)
+		local grass = FindEntity(inst, 0.5, nil, "trapdoorgrass")
+		if grass ~= nil then
+		grass:Remove()
+		end
         inst:Remove()
     end
 end
@@ -161,7 +165,7 @@ local function fn()
 	inst.components.childspawner:SetOnChildKilledFn(FindNewHole)
 	local startrandomtest = math.random()
 	inst.components.childspawner:StopRegen()
-	if startrandomtest >= 0.70 then
+	if startrandomtest >= 0.75 then
 	inst.components.childspawner:SetMaxChildren(1)
 	inst.components.childspawner:StartRegen()
 	end
@@ -177,7 +181,7 @@ local function fn()
     --inst.components.combat:SetOnHit(onhitbyplayer)
     --inst:ListenForEvent("death", OnKilled)
     -------------------------
-    MakeMediumPropagator(inst)
+
     MakeSnowCovered(inst)
     -------------------------
     inst:AddComponent("inspectable")
@@ -197,19 +201,23 @@ local function fn()
     inst.components.workable:SetWorkLeft(TUNING.ROCKS_MINE)
 
     inst.components.workable:SetOnWorkCallback(workcallback)
-
-	-- Spawn Trapdoor Grass
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local grasschance = math.random()
-	if grasschance > 0.25 then
-	local grassycover = SpawnPrefab("trapdoorgrass")
-	grassycover.Transform:SetPosition(x, y, z)
-	inst:AddChild(grassycover)
-	end
+	--[[if not inst:HasTag("finishedgrass") then
+		inst:DoTaskInTime(0, function(inst)
+		-- Spawn Trapdoor Grass
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local grasschance = math.random()
+			if grasschance > 0.25 then
+			local grassycover = SpawnPrefab("trapdoorgrass")
+			grassycover.Transform:SetPosition(x, y, z)
+			--inst:AddChild(grassycover)
+			end
+			inst:AddTag("finishedgrass")
+		end)	
+	end]]
+    inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+	--inst.AnimState:SetSortOrder(1)
 	
-	
-	
-	
+	MakeMediumPropagator(inst)
     return inst
 end
 
