@@ -98,6 +98,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.SWILSON = "He's going to make chopped liver out of me!"
 	DESCRIBE.VAMPIREBAT = "I assure you, I taste horrible!"
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
+	DESCRIBE.CRITTERLAB_REAL_BROKEN = "Some moon rocks would be the perfect ingredient for a new little home."
 	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = "I wonder what is in her record collection?"
 	DESCRIBE.BUGZAPPER = "I had to use one of these often back at..."

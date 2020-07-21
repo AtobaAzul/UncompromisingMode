@@ -92,8 +92,8 @@ end
 local function OnLoad(inst, data)
 	if inst.components.deerclopsspawner ~= nil then
 		print("removedeer")
-		inst:RemoveComponent("deerclopsspawner")
 		TheWorld.components.deerclopsspawner:OverrideAttacksPerSeason("DEERCLOPS", 0)
+		inst:RemoveComponent("deerclopsspawner")
 	end
 	
 	if inst.components.forestresourcespawner ~= nil then
@@ -108,6 +108,23 @@ local function OnLoad(inst, data)
 	if inst.components.desolationspawner ~= nil then
 		inst:RemoveComponent("desolationspawner")
 	end
+end
+
+local function OnSave()
+	--Now, if you're seeing this, you might be asking yourself, "Why is the default deerclops spawner
+	--being overwriten to 0? Cant you just outright disable the whole thing? Why don't you just edit
+	--the original component?" The answer, is that modding is fickle, and for some reason I cannot
+	--figure out, having the default spawner enabled completely glitches up the mock dragonfly and
+	--mother goose spawners, funny thing is, this uncomp deerclops spawner is a nearly IDENTICAL version,
+	--yet it doesnt have any effect, despite (ill say it again), being an IDENTICAL component.
+	--Removing the component from the world doesnt do anything, the only easy method is to keep on
+	--overriding the attacks per season to 0 on the classic version
+	if TheWorld.components.deerclopsspawner ~= nil then
+		TheWorld.components.deerclopsspawner:OverrideAttacksPerSeason("DEERCLOPS", 0)
+		inst:RemoveComponent("deerclopsspawner")
+	end
+	print("override")
+	--/////////--
 end
 
 env.AddPrefabPostInit("forest", function(inst)
@@ -127,6 +144,8 @@ env.AddPrefabPostInit("forest", function(inst)
 	inst:AddComponent("snowstorminitiator")
 	inst:AddComponent("scorpionspawner")
 	inst:AddComponent("randomnightevents")
+	
+	inst.OnSave = OnSave
 	
 	inst.OnLoad = OnLoad
 end)

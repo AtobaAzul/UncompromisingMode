@@ -41,7 +41,7 @@ end
 
 local function SpawnPollenmiteDenForPlayer(reschedule)
 
-	if _storming or not TheWorld.state.iswinter then
+	if _storming or not TheWorld.state.iswinter or TheWorld.state.remainingdaysinseason >= TUNING.WINTER_LENGTH - 2 then
 		_storming = false
 		TheWorld:RemoveTag("snowstormstart")
 		TheWorld.net:RemoveTag("snowstormstartnet")

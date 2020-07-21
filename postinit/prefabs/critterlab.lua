@@ -9,7 +9,7 @@ local function onnear(inst, target)
         inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
         SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
         inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
-        SpawnPrefab("critterlab_real_blueprint").Transform:SetPosition(inst.Transform:GetWorldPosition())
+        SpawnPrefab("critterlab_real_broken").Transform:SetPosition(inst.Transform:GetWorldPosition())
         inst.components.childspawner:ReleaseAllChildren(target, "mutatedhound")
 		inst:DoTaskInTime(0, function() inst:Remove() end)
     end
@@ -23,7 +23,7 @@ env.AddPrefabPostInit("critterlab", function (inst)
 	inst:AddComponent("childspawner")
 	inst.components.childspawner.childname = "mutatedhound"
 	inst.components.childspawner:SetRegenPeriod(TUNING.HOUNDMOUND_REGEN_TIME)
-	inst.components.childspawner:SetMaxChildren(3)
+	inst.components.childspawner:SetMaxChildren(2)
 	
     inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(4, 6) --set specific values

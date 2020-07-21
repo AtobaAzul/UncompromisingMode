@@ -45,7 +45,7 @@ end
 
 local function OnRespawnedFromGhost2(inst)
     WatchWorldPlants2(inst)
-	MakeSmallPropagator(inst)
+	inst:DoTaskInTime(5, function(inst) MakeSmallPropagator(inst) end)
 end
 
 local function OnBecameGhost2(inst)
