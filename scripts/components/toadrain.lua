@@ -101,6 +101,9 @@ local function ToggleUpdate(force)
 		_worldstate.israining and
         mushroomcheck ~= nil and
 		TheWorld.state.cycles > TUNING.DSTU.ACID_RAIN_START_AFTER_DAY then
+		
+		TUNING.PERISH_WET_MULT = 1.6
+		
         if not _updating then
             _updating = true
             for i, v in ipairs(_activeplayers) do
@@ -113,6 +116,9 @@ local function ToggleUpdate(force)
             end
         end
 	elseif _updating then
+	
+		TUNING.PERISH_WET_MULT = 1.3
+	
         _updating = false
         for i, v in ipairs(_activeplayers) do
             CancelSpawn(v)
