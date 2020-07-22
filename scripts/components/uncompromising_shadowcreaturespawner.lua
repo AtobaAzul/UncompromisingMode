@@ -85,7 +85,11 @@ UpdateSpawn = function(player, params)
 
 		local function IsTargetingPlayer(boss)
             local target = boss.replica.combat and boss.replica.combat:GetTarget()
-            return target ~= nil and target:HasTag("player") or target:HasTag("companion") or target:HasTag("abigail")
+			if target ~= nil then
+				return target ~= nil and target:HasTag("player") or target:HasTag("companion") or target:HasTag("abigail")
+			else
+				return false
+			end
         end
         for i, v in pairs(bosses) do
             if IsTargetingPlayer(v) then
