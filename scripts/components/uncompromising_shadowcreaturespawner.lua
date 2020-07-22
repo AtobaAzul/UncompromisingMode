@@ -77,16 +77,25 @@ UpdateSpawn = function(player, params)
                 spawndrifter = false
             end
         end
+		
+		local bosses = TheSim:FindEntities(x, y, z, 35, { "_combat" }, { "FX", "NOCLICK", "INLIMBO", "player" }, {"epic", "shadowchesspiece" })
+		local bossesnearby = TheSim:FindEntities(x, y, z, 30, { "_combat" }, { "FX", "NOCLICK", "INLIMBO", "player" }, {"deerclops", "shadowchesspiece", "mock_dragonfly", "minotaur", "stalker", "bearger" })
 
-        local bosses = TheSim:FindEntities(x, y, z, 35, { "_combat" }, { "FX", "NOCLICK", "INLIMBO", "player" }, {"epic", "shadowchesspiece" }) -- a boss is fighting the player
-        local function IsTargetingPlayer(boss)
+
+
+		local function IsTargetingPlayer(boss)
             local target = boss.replica.combat and boss.replica.combat:GetTarget()
-            return target ~= nil and target:HasTag("player")
+            return target ~= nil and target:HasTag("player") or target:HasTag("companion") or target:HasTag("abigail")
         end
         for i, v in pairs(bosses) do
             if IsTargetingPlayer(v) then
                 spawndrifter = false
             end
+        end
+		for i, v in pairs(bossesnearby) do
+            --if IsTargetingPlayer(v) then
+                spawndrifter = false
+            --end
         end
 		
 		if player:HasTag("shadowdominant") then
