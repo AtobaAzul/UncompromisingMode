@@ -93,7 +93,11 @@
 
 * [x] Killing shadows regains 10 sanity instead of 15, but depending on the creature may restore more.
 
+--Clockworks
 
+* [x] Clockworks are immune to fire! They cannot be stunlocked with a torch anymore!
+
+* [x] NOTE! Bishop fleeing was Removed!
 
 --[ Vanilla Boss changes]--
 
@@ -121,6 +125,8 @@
 
 * [x] [Fear the Dark!] Antlion's craters can cause some fires to erupt from the earth.
 
+* [x] [Fear the Dark!] Antlion sinkholes will now cause ruptures in boats
+
 --Deerclops
 
 * [x]  Deerclops "enrages" at half health.
@@ -133,6 +139,7 @@
 
 * [x]  [FEAR THE DARK!] Raidfly leaves her area if a boss is nearby, and will also leave in summer to fly overhead, searching for bases to burn as the "Wilting Dragonfly".
 
+* [x] Dragonfly gets 15% reduced damage when in wilting form!
 --G/Moose
 
 * [x] Moose range increased, now does aoe damage to non-mossling units.
@@ -192,7 +199,9 @@
 
 * [x] Telltale Hearts now cost human meat, which is found inside skeletons.
 
+* [x] Ice-Flingomatics now hold 20% more fuel, but lose a small amount of fuel every time they fling ice - Cheese prevention.
 
+* [x] Moggles now act as sandstorm/snowstorm goggles.
 
 --[ Character changes]--
 
@@ -278,6 +287,7 @@
 
 * [x] [FEAR THE DARK!] The Bramble Husk now has double durability.
 
+* [x] [FEAR THE DARK!] Wormwood now takes an additional -5 sanity from digging up plants, no more infinite sanity gain from sapling digging/planting, its not equal loss and gain
 
 --Warly
 
@@ -290,7 +300,9 @@
 
 * [x] [FEAR THE DARK!] Walter now has firecracker rounds made out of nitre, they can do heavy damage if the target is sitting still, they also hitstun some.
 
+* [x] [FEAR THE DARK!] Walter takes 50% more hayfever damage from hayfever damaging mobs (This means bugs during spring will make him sneeze faster than other players)
 
+* [x] [FEAR THE DARK!] Walter has a lower minimum and maximum time till next sneeze after sneezing. (Though he still gets the same benefits from antihistamine food!)
 
 
 --[ Vanilla Food Source changes]--
@@ -416,7 +428,7 @@
 
 * [x] [FEAR THE DARK!] Something horrible has taken up residence in the rock den, you can repair it with moon rock.
 
-
+* [x] [FEAR THE DARK!] Players can once again overheat in caves, with a 40% slower temperature rate, and only the minimum level of overheating damage
 
 --[Modding Misc]--
 
@@ -584,6 +596,9 @@
 * [x] Mushroom Sprouts, if you see them, make sure to chop them down to stop the acid rain!
 
 * [x] Any wet foods will spoil an additonal 30% faster (30% from wetness + 30% from acid rain!)
+
+* [x] Raindrops will now splash into green puddles, and will play a sizzle sound effect, indicating when Acid Rain is active.
+
 
 --Toadlings
 

@@ -92,7 +92,7 @@ Wormwood can be effected by Hayfever damagers, such as Pollen Mites, and Bees
 
 WARLY:
 
-Added new Warly specific crockpot dishes: Carapace Cooler and Zaspberry Parfait (GET DETAILS FROM AXE/ANOMEN)
+Added new Warly specific crockpot dish: Zaspberry Parfait (GET DETAILS FROM AXE/ANOMEN)
 
 WILLOW:
 Willow will now instantly light things on fire during winter
@@ -134,7 +134,6 @@ TUNING:
 The Creeping Fear will now try to get closer to the player before attacking.
 Sleeping now halts hayfever
 Increased minimum and maximum next sneeze time after sneezing
-Wobster Dinner now requires 2 Wobster
 Lowered maximum ice/twig filler from 2 to 1 (Banana Pops or Melonsicles withstanding)
 Removed Toad Rain during Acid Rain event
 Tree Guards no longer recoil from attacks
