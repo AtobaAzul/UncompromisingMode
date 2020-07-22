@@ -330,13 +330,31 @@
 
 * [x] New wild structure: Pollen mite dens, these dens will appear near players and produce pollen mites on occasion during spring, will level up, and try and spread, if you see any, kill them ASAP!
 
+* [x] Mosquitos gain a new look in spring
+
+* [x] Moquitos, bees, and any other bugs can cause players to sneeze faster on hit.
+
 * [x] New item: Bug Zapper, this handy weapon does 33 damage if fueled, but double that if the target is wet, BUT also 15 more damage if the target is a spider, 20 more if they are a different type of insect, and 50 more if the target is a pollen mite swarm! (Added damage cannot be scaled by chracter effects)
+
+* [x] The morning star drains fuel 50% faster, but doesn't get destroyed when it's out of fuel. It does less damage when out of fuel and no light.
 
 * [x] The Bug Zapper and Morning Star can be refueled by electrical doodads, zaspberries, canary feathers, lightning goat horns and milk, frazzled wires, and potatos.
 
 * [x] Bird takes less damage from monster jerky than cooked monster meat, and will also regenerate a whole cooked monstermeat every day.
 
 * [x] Wobsters will no longer bite lines with no bait.
+
+* [x] Theulicite suit and dapper vest reduces insanity auras from monsters.
+
+* [x] Frogs eat food nearby. Better not drop any berries!
+
+* [x] Hayfever overlay made more green to match DST.
+
+* [x] Wormwood can now craft a "honey log roll" out of living logs and honey, it is a decent antihistamine.
+
+* [x] Raidfly leaves her area if a boss is nearby, and will also leave in summer to fly overhead, searching for bases to burn.
+
+* [x] Pigs and Bunnymen refuse to in-fight.
 
 
 
