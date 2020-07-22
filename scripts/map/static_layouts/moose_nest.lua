@@ -82,7 +82,7 @@ return {
           visible = true,
           properties = {}
         },
-        {
+        --[[{
           name = "",
           type = "berrybush",
           shape = "rectangle",
@@ -136,7 +136,7 @@ return {
           height = 0,
           visible = true,
           properties = {}
-        },
+        },]]
         {
           name = "",
           type = "randomtree",

@@ -152,7 +152,7 @@
 
 * [x] [FEAR THE DARK!] Electric Weapons such as the morning star can be refueled by electrical doodads, zaspberries, canary feathers, lightning goat horns and milk, frazzled wires, and potatos.
 
-* [x] [FEAR THE DARK!] Hambat spoils two days quicker (it used to spoil in 10), and does less damage when it's spoiled
+* [x] [FEAR THE DARK!] Hambat spoils two days quicker (it used to spoil in 10), and does less damage when it's spoiled. It can also be fed to various mobs, like Pigs and Spiders!
 
 --Armor
 
@@ -160,7 +160,7 @@
 
 * [x]  Thulecite Armor has knockback resistance
 
-* [x]  [Fear the Dark!] Theulicite suit and dapper vest reduces insanity auras from monsters
+* [x]  [Fear the Dark!] Theulicite suit and dapper vest reduces insanity auras from monsters by 40%
 
 --Clothing
 
@@ -170,11 +170,11 @@
 
 * [x] Fashion and Desert Goggles are now a UNIVERSAL CRAFTING RECIPE! No more rng oasis fishing. (You can craft at alch instead)
 
-* [x] The Feather Hat will prevent Penguins from attacking you
+* [x] The Feather Hat will prevent territorial Pengulls from targeting you unprovoked.
 
 * [x] [FEAR THE DARK!] Eyebrella has less summer insulation to promote use of other summer insulation items.
 
-* [x] [FEAR THE DARK!] Cookie cutter cap has bramble husk effect.
+* [x] [FEAR THE DARK!] Cookie cutter cap now reflects 75% of the attackers base attack back at them, along with 5 damage spikes, similar to the Bramble Husk.
 
 --Misc
 
@@ -221,11 +221,11 @@
 
 * [x] Applied horticulture recipe nerf (uses 1 leafy meat + 1 bucket o poop instead of 1 seeds + 1 poop)
 
-* [x] [FEAR THE DARK!] On Tentacles will now summon sickly tentacles, which die over time, but do not target players and do not drop any more tentacle spots, you can still harvest them from giant tentacles underground
+* [x] [FEAR THE DARK!] On Tentacles will now summon sickly tentacles, which die over time, but do not target players and do not drop any more tentacle spots, you can still harvest them from giant tentacles underground.
 
-* [x] [FEAR THE DARK!] Applied horticulture boosts farmplot crop growth by 66% instead of 100%, and 44% for wild crops.
+* [x] [FEAR THE DARK!] Applied horticulture boosts farmplot crop growth by 66% instead of 100%, and 44% for Wormwood's crops.
 
-* [x] Wickerbottom cannot read books while insane
+* [x] Wickerbottom cannot read books while insane.
 
 
 --Woodie
@@ -252,13 +252,13 @@
 
 --Wortox
 
-* [x] [GOODIES GALORE!]Most smaller creatures like spiders and butterflies no longer carry souls
+* [x] [GOODIES GALORE!] Most smaller creatures like spiders and butterflies no longer carry souls
 
 * [x] [GOODIES GALORE!] Wortox health changed to 120 from 200 (Poor wortox, let's hope we can get soul fragments in soon)
 
 --Wormwood
 
-* [x]  Wormwood takes more fire damage, for more time
+* [x] Wormwood takes more fire damage, for more time.
 
 * [x] [FEAR THE DARK!] Wormwood can now catch on fire! You can hover your mouse over him to put him out if he's smoldering (he does take damage from the fire)
 
@@ -267,6 +267,8 @@
 * [x] [FEAR THE DARK!] Wormwood can now craft a "honey log roll" out of living logs and honey, it is a decent antihistamine.
 
 * [x] [FEAR THE DARK!] Bramble husk now shoots out spikes on occasion when nearby hostile targets, however, this does consume some durability.
+
+* [x] [FEAR THE DARK!] The Bramble Husk now has double durability.
 
 
 --Warly
@@ -349,9 +351,9 @@
 
 * [x]  Pumpkin Cookies 37.5 Hunger -> 40 Hunger and 15 Sanity -> 33 Sanity and 0 Health -> 15 Health!
 
-* [x]  Stuffed Eggplant 37.5 Hunger -> 40 Hunger and 3 Health -> 15 Health!
+* [x]  Stuffed Eggplant 37.5 Hunger -> 45 Hunger and 3 Health -> 15 Health!
 
-* [x]  Asparagus Soup now restores 18.8 Hunger -> 25 Hunger 20 Health -> 30 Health and 5 Sanity -> 20 Sanity!
+* [x]  Asparagus Soup 18.8 Hunger -> 25 Hunger 20 Health -> 30 Health and 5 Sanity -> 20 Sanity!
 
 --Common
 
@@ -363,7 +365,7 @@
 
 --Crockpot General Rules--
 
-* [x]  Ice and twigs cannot be more than 1 inside crockpot recipes
+* [x]  Ice and twigs cannot be more than 1 inside crockpot recipes (With the exception of foods that REQUIRE ice AND twigs)
 
 * [x]  Bacon and eggs has a lower cooking priority than monster lasagna
 
@@ -400,7 +402,7 @@
 
 --[ Vanilla Misc changes]--
 
-* [x]  Statue walls, signs, lava ponds, bone fragments hitbox pathing is ignored (now they have no collision)
+* [x]  Statue walls, signs, lava ponds, and fossils hitbox pathing is ignored (now they have no collision)
 
 * [x]  Haunting pig torches has a lower chance of spawning a pig guard now
 
@@ -497,7 +499,7 @@
 
 * [x] Standing near a fire, walls, many trees, using a torch, staff lights, or either variation of goggles will protect against snowstorms
 
-* [x] [GOODIES GALORE!] New Item: Salt Shaker 3000, Salt spitting backpack that prevents snowstorm effects, destroys snow and snow based enemies, and increases speed in winter, as long as it is fueled
+* [x] [GOODIES GALORE!] New Item: Salt Shaker 3000, Salt spitting backpack that prevents snowstorm effects, destroys snow and snow based enemies, provides a small amount of insulation, and increases speed in winter, as long as it is fueled
 
 --Snowpiles and Abominamoles
 
@@ -518,7 +520,7 @@
 
 --[Depths Eels and Zaspberries]--
 
-* [x] New mob: Depths Eel, added to Depth Worm attacks.
+* [x] New mob: The shocking Depths Eel, added to Depth Worm attacks.
 
 * [x] Zaspberries: berry drops from depth eels that give the player the chaud-froid effect for about 30 seconds and make the player glow
 
@@ -570,6 +572,8 @@
 * [x] Acid rain causes damage to players who get wet, and diseases most plants!
 
 * [x] Mushroom Sprouts, If you see them, make sure to chop them down to stop the acid rain!
+
+* [x] Any wet foods will spoil an additonal 30% faster (30% from wetness + 30% from acid rain!)
 
 --Toadlings
 
