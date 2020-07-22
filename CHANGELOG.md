@@ -10,14 +10,6 @@
 
 * [x]  Knockback mechanic on some bosses
 
-* [ ]  Hardcore mode - disable rollback
-
-* [ ]  Hardcore mode - disable movement on death
-
-* [ ]  Hardcore mode - disable ghost on death, body lays on ground and accepts revives (similar to the forge)
-
-* [ ]  Hardcore mode - Auto amulet revive (like in normal Don't Starve)
-
 * [x]  Applied horticulture recipe nerf (uses 1 leafy meat + 1 bucket o poop instead of 1 seeds + 1 poop)
 
 * [x]  [Settings menu](https://i.imgur.com/N3rLMpH.png)
@@ -25,8 +17,6 @@
 * [x]  [Totally Normal Livingtree root attack](https://imgur.com/8gC0cdv.gif)
 
 * [x]  [Custom art for livingtree by @ Advent](https://cdn.discordapp.com/attachments/626788873942335517/628233540169105408/up.gif)
-
-* [x]  Bishop flees from attacks after shooting
 
 * [x]  New shadow creatures (Dread Eye & Creeping Fear)
 
@@ -38,9 +28,7 @@
 
 * [x]  Meatballs nerf - Hunger restored to 50 (down from 62.5)
 
-* [x]  Stone fruit growth nerf - Stone fruit bush base growth duration tripled
- 
-* [x]  Ice and twigs cannot be more than 2 inside crockpot recipes
+* [x]  Ice and twigs cannot be more than 1 inside crockpot recipes
  
 * [x]  [Rat waves](https://cdn.discordapp.com/attachments/623666104937480192/629152866426290197/damnrat.gif), that will periodically come after day 50, they mess around your items, eat your food, and bite you for max health penalties 
  
@@ -48,8 +36,6 @@
 
 * [x]  Berry bushes are rarer in world generation
  
-* [ ]  During Worldgen, carrots can sometimes be replaced with different vegetables. (Asparagus, Potato, Toma Root, etc etc) 
-
 * [x]  Mod settings for disabling/enabling features
 
 * [x]  Pigs and bunnies defend their houses when hammered
@@ -106,8 +92,6 @@
 
 * [x]  Bacon and eggs spoil time is halved, to 10 days
 
-* [ ]  Added setting to increase nr of hounds per wave (default: 1.5x)
-
 * [x]  Food appearance rates reduced significantly (berries, carrots, mushrooms)
 
 * [x]  Bunnymen no longer drop carrots
@@ -156,7 +140,7 @@
 
 * [x] New mob: Depths Eel, added to Depth Worm attacks.
 
-* [x] Zaspberries: berry drops from depth eels that give the player the chaud-froid effect for less time and make the player glow
+* [x] Zaspberries: berry drops from depth eels that give the player the chaud-froid effect for about 30 seconds and make the player glow
 
 * [x] Mini-fan cost increased, now protects against hayfever
 
@@ -180,8 +164,6 @@
 
 * [x] Killing shadows regains 10 sanity instead of 15
 
-* [x] Earthquake debris during summer has a chance to split the earth, creating a flame geyser. Lavae will spawn from the geysers
-
 * [x] Killing the Bee Queen will stop hayfever until the Queen Hive respawns
 
 * [x] Telltale Hearts now cost human meat, which is found inside skeletons
@@ -199,8 +181,6 @@
 * [x] Cactus Flesh, Cooked Cactus Flesh, and Cooked Green Caps now deal slightly more damage when eaten
 
 * [x] Added Moon Oil, a cure for diseased plants
-
-* [x] Added Frozen Pincer an ice boomerang that rarely drops from abominamoles (stats pending)
 
 * [x] Snowballs added: makes targets cold when thrown, can be used to freeze targets
 
@@ -228,7 +208,7 @@
 
 * [x] Lavae will now drop explosive slime on death, destroying structures and settings things on fire
 
-* [x] Wortox health changed to 120 from 200
+* [x] Wortox health changed to 120 from 200 (Poor wortox, let's hope we can get soul fragments in soon)
 
 * [x] Added options to reduce the Bee Queen and Toadstool's health, due to their raised importance
 
@@ -254,13 +234,112 @@
 
 * [x] Gave Wes a useless new secret upside
 
-* [x] Ice Cream now regens sanity, similar to how Jelly Beans work
+* [x] Ice Cream now regens 1 sanity per second for 100 seconds, similar to jellybeans
 
 * [x] Thulecite Armor has knockback resistance
 
 * [x] Disabled automatic duplication of carrots, tree saplings, stone fruit bushes, lightbulbs, etc. Take care of your resources.
 
-* [x] Lobster Dinner requires 2 Wobsters
+* [x] New mechanic: Random Night Events, every night there is a chance for a random event to occur based on the season and moon cycle. Worse RNEs are accompanied by fog.
+
+* [x] New mob: Adult Batilisk, sometimes appears from RNEs and open sinkholes, appearing more often as the world grows old. This bat always drops a batilisk wing. Is very remeniscent of Vampire Bats.
+
+* [x] New mob: Trapdoor spiders, found inside "inconspicuous mounds" on occasion in savanna type biomes. Does not drop silk, but does drop two non-morsel spider-loot.
+
+* [x] New plant: Wide grass (trapdoor grass), most inconspicuous mounds have these in front of them, they give 3 grass per pick, digging will give reqular grass tufts. They cannot become diseased.
+
+* [x] New mob: Scoprion, digs its way up through the desert turf during the day, nonpoisonous, but can make you drowsy. Will burrow back in during the afternoon. Does not appear in winter.
+
+* [x] New food: Scorpion carapace, counts as a whole monster meat, can be used in hard shell tacos, counts as a bug based ingredient.
+
+* [x] New dish: Hard shell tacos, using vegetable and scorpion carapaces, this hamlet dish can be recreated.
+
+* [x] There can be no more than 1 bug based ingredient in any crockpot dish aside from hard shell tacos (butterfly wings for example)
+
+* [x] New warly exclusive dish: Zaspberry Parfait, electricutes entities nearby when attacked, delaying their next attack. Crafted with a zaspberry, dairy, and sweetener.
+
+* [x] New plant: Rice plants, found floating in the swamp, can be harvested by punching or ramming with a boat.
+
+* [x] New food: Rice, cannot be eaten without cooking, used for 2 dishes. Cannot spoil.
+
+* [x] New dish: R(L)iceloaf, hunger restoring dish that uses 2 rice. Takes a long time to spoil.
+
+* [x] New dish: Seafood paella, dish restores hunger and provides 1.5 days of hayfever protection. Uses a Wobster, rice, and vegetables.
+
+* [x] New dish: California King, dish that provides 4 whole days of hayfever protection. Requires barnacle, wobster, ice, and pepper. Causes screen to turn red as a reference.
+
+* [x] Dishes such as most soups, honeyed foods, vegetable stinger, and spicey chili prevent hayfever for a short time.
+
+* [x] Mandrake soup prevents hayfever for a whole season.
+
+* [x] Farmplot based crockpot dishes have mostly been buffed across the board to incentivize non-warly/wormwood/wicker players to use farms with the heaviest being creamy potato puree 37.5 hunger -> 100 hunger.
+
+* [x] New mob: Stumplings, small piney stumps that have been awakened by a treeguard or an RNE.
+
+* [x] Treeguards will now prefer awakening up to 3 nearby stumps instead of root attacking when stomping.
+
+* [x] Abominamoles will now belch a bunch of snowballs at the player on occasion, dodge enough that you aren't frozen!
+
+* [x] Snow piles will damage players who clean them with their bare hands, better not get frostbite!
+
+* [x] Characters warn you if a snowstorm is approaching.
+
+* [x] Willow bypasses the winter smoldering effect we added.
+
+* [x] New item: Frozen pincer, rarely dropped by abominamoles, functions as an ice boomerang, can be repaired with ice. Can melt.
+
+* [x] New mob: Wilson? (swilson), appears because of RNEs, this shadowy doppleganger of wilson wants nothing more than your head, he'll disappear during day.
+
+* [x] New item: Shadow Crown, headslot item that gives you 20% additional movement speed, you take more damage while wearing it, only obtainable from a specific RNE, also drains sanity when worn.
+
+* [x] New mob: Stumplings, small piney stumps that have been awakened by a treeguard or an RNE.
+
+* [x] Something horrible has taken up residence in the rock den, you can repair it with moon rock.
+
+* [x] Mactusk appear in summer, wearing different atire, accompanied by fire hounds.
+
+* [x] New item: Sunglasses: function as a summer tam, has goggle effects.
+
+* [x] YOU WILL NO LONGER DROP ITEMS WHEN SNEEZING
+
+* [x] Add veteran shrine, a horrible altar with which to obtain "veterans curse"
+
+* [x] [[INCOMPLETE MECHANIC]] Veteran's Curse, players under this effect take more damage and have a faster hunger drain. In the future, bosses will have special drops for players who are under the effects of the curse.
+
+* [x] Bramble husk now shoots out spikes on occasion when nearby hostile targets, however, this does consume some durability.
+
+* [x] Cookie cutter cap has bramble husk effect.
+
+* [x] Applied horticulture boosts crop growth by 66% instead of 100%, and 44% for wild crops.
+
+* [x] Spider warrior type spiders will counterattack when attacked. Try dodging towards them or strafing hard!
+
+* [x] Wormwood and willow can now catch on fire! This is a good thing for willow, not so good for wormwood, however both can hover their mice over themselves to put themselves out.
+
+* [x] When willow catches on fire, she will do an AOE explosion before she bursts into flames.
+
+* [x] Eyebrella has less summer insulation to promote use of other summer insulation items.
+
+* [x] Woby can now die, though he regenerates health like chester and can respawn like chester. He also can hold aggro of targets like chester.
+
+* [x] Walter now has firecracker rounds made out of nitre, they can do heavy damage if the target is sitting still, they also hitstun some.
+
+* [x] Warly now gains +15% hunger and +20% Health/Sanity from eating dishes, however his penalties for repeat dishes are more severe, and his food memory is increased to 3 days. This more closely mirrors his unique singleplayer perk.
+
+* [x] New mob: Pollen mites, nasty buggers that appear during spring, they are very similar to gnats in that they will infest different targets. If they infest a mob, it will become super hostile to players. If they infest a player, it will make the player sneeze faster and take health. They can be killed through melee combat, but a Bug Zapper is the recommended method.
+
+* [x] New wild structure: Pollen mite dens, these dens will appear near players and produce pollen mites on occasion during spring, will level up, and try and spread, if you see any, kill them ASAP!
+
+* [x] New item: Bug Zapper, this handy weapon does 33 damage if fueled, but double that if the target is wet, BUT also 15 more damage if the target is a spider, 20 more if they are a different type of insect, and 50 more if the target is a pollen mite swarm! (Added damage cannot be scaled by chracter effects)
+
+* [x] The Bug Zapper and Morning Star can be refueled by electrical doodads, zaspberries, canary feathers, lightning goat horns and milk, frazzled wires, and potatos.
+
+* [x] Bird takes less damage from monster jerky than cooked monster meat, and will also regenerate a whole cooked monstermeat every day.
+
+* [x] Wobsters will no longer bite lines with no bait.
+
+
+
 
 ### To check current things worked on: Visit [#mod_roadmap](https://discordapp.com/channels/623649948130344960/624590758959382539) on Discord
 
