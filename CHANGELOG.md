@@ -320,7 +320,7 @@
 
 * [x] Eyebrella has less summer insulation to promote use of other summer insulation items.
 
-* [x] Woby can now die, though he regenerates health like chester and can respawn like chester. He also can hold aggro of targets like chester.
+* [x] Woby can now die, though she regenerates health like chester and can respawn like chester. Shee also can hold aggro of targets like chester.
 
 * [x] Walter now has firecracker rounds made out of nitre, they can do heavy damage if the target is sitting still, they also hitstun some.
 
