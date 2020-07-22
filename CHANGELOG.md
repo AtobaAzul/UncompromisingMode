@@ -8,353 +8,624 @@
 
 ### DST Uncompromising Mod Collab - Alpha version 1.0.0 - Uncompromising Start
 
-* [x]  Knockback mechanic on some bosses
+--[ Vanilla Creature changes]--
 
-* [x]  Applied horticulture recipe nerf (uses 1 leafy meat + 1 bucket o poop instead of 1 seeds + 1 poop)
+--General
 
-* [x]  [Settings menu](https://i.imgur.com/N3rLMpH.png)
+* [x]  Hounds, Spiders, and Pengulls will mutate on full moons
 
+* [x]  Most small monsters drop monster morsels instead of monster meat
+
+--Misc
 * [x]  [Totally Normal Livingtree root attack](https://imgur.com/8gC0cdv.gif)
 
 * [x]  [Custom art for livingtree by @ Advent](https://cdn.discordapp.com/attachments/626788873942335517/628233540169105408/up.gif)
 
-* [x]  New shadow creatures (Dread Eye & Creeping Fear)
-
-* [x]  Tweaked sanity ranges for shadow creature appearance
-
-* [x]  Statue walls, signs, lava ponds, bone fragments hitbox pathing is ignored (now they have no collision)
-
-* [x]  Butterfly wing nerf - Health restored to 5 (down from 8)
-
-* [x]  Meatballs nerf - Hunger restored to 50 (down from 62.5)
-
-* [x]  Ice and twigs cannot be more than 1 inside crockpot recipes
- 
-* [x]  [Rat waves](https://cdn.discordapp.com/attachments/623666104937480192/629152866426290197/damnrat.gif), that will periodically come after day 50, they mess around your items, eat your food, and bite you for max health penalties 
- 
-* [x]  Carrots are rarer in world generation
-
-* [x]  Berry bushes are rarer in world generation
- 
-* [x]  Mod settings for disabling/enabling features
+--Pigmen/Bunnymen
 
 * [x]  Pigs and bunnies defend their houses when hammered
 
-* [x]  Pierogi spoils in 10 days instead of 20
-
-* [x]  Cooked Bird egg loop removed
-
-* [x]  Bird's stomach can only withstand 4 monster meat before dying out (vary her diet with normal meat to cure it)
-
-* [x]  WX will take more damage from rain (3x)
-
-* [x]  Moonrock idol requires 5 moonstone
-
-* [x]  Cave entrances spawn multiple bats when approached, increased regen and reduced spawn time
- 
-* [x]  Woodie were-Goose gets wet when running on water
-
-* [x]  [Project logo](images/logo.png) added, by @ Ismael Daniel
-
-* [x]  Monster meat must be dilluted with normal meat in crocpot to not make lasagna, with the exception of monster jerky
-
-* [x]  Monster meat has a default monster value of 2.5 now. Cooked is 2.0 monster value. Monster Jerky is 1.0 monster value. This means Monster jerky can still make meatballs.
-
-* [x]  Wolfgang sanity drain to 1.5x (prev was 1.1x)
-
-* [x]  Catcoon have increased health
-
-* [x]  Cactus, stone fruits and spiky bushs don't grow in winter
-
-* [x]  Pig guards now break free by attacking walls that entrap them
-
-* [x]  Bee box honey yield is 1,2,4 instead of 1,3,6
-
-* [x]  Moosegoose's nest has had its carrots eaten, and some berry bushes disappeared too. Moosling's might've been hungry.
-
-* [x]  Bacon and eggs has a lower cooking priority than monster lasagna
-
-* [x]  Fire and ice hounds have fire and ice attacks on their bite
-
-* [x]  Walrus has more health and ice doggos
-
-* [x]  Haunting pig torches has a low chance of spawning a pig guard now
-
-* [x]  Bee Queen now has an AOE that ignores hives and bees
-
-* [x]  Werepigs prefer attacking over eating
-
-* [x]  Koelefants drop 4 meat now, instead of 8
-
-* [x]  Marble armor ignores our knockback mechanic
-
-* [x]  Bees don't drop honey, only stingers
-
-* [x]  Bacon and eggs spoil time is halved, to 10 days
-
-* [x]  Food appearance rates reduced significantly (berries, carrots, mushrooms)
+* [x]  [Fear the Dark!] Pigs and Bunnymen refuse to in-fight
 
 * [x]  Bunnymen no longer drop carrots
 
-* [x]  Only winona can use her generators
+* [x]  Pig guards now break free by attacking walls that entrap them
+
+* [x]  Werepigs prefer attacking over eating
+
+--Spiders
+
+* [x]  Regular spiders now have a leap attack, but can be interrupted if you strike them mid-air (try it it's surprisingly fun)
+
+* [x]  [Fear the Dark!] Spider Warriors and Dangling Depth Dwellers will counterattack when attacked. Try dodging towards them or strafing hard!
+
+--Frogs
+
+* [x]  [Fear the Dark!] Frogs eat food nearby. Better not drop any berries!
+
+--Catcoons
+
+* [x]  Catcoons have increased health
+
+* [x]  Increased Catcoon Tail drop rate
+
+--Koalefant
+
+* [x]  Koalefants drop 4 meat now, instead of 8
+
+--Hounds
+
+* [x]  Fire and ice hounds have fire and ice attacks on their bite
+
+* [x]  Mutated Hounds attack faster and move faster
+
+--Bats
+
+* [x]  Cave entrances spawn multiple bats when approached, increased regen and reduced spawn time
+
+* [x]  [Fear the Dark!] Health increased to 75
+
+--Mactusk
+
+* [x]  Walrus has more health and ice doggos
+
+--Bees and other bugs
+
+* [x]  Bees don't drop honey, only stingers (this is because of that one biome filled entirely with killer bee nests)
+
+* [x]  [Fear the Dark!] Mosquitos gain a new look in spring
+
+* [x]  [Fear the Dark!] Bugs such as bees and mosquitos can provoke the player into sneezing if they hit them during spring
+
+
+--Pengulls
 
 * [x]  Pengulls are territorial and attack now if you get too close
 
-* [x]  Wormwood takes more fire damage, for more time
+--Shadows
+
+* [x] [GOODIES GALORE!] Terror Beaks will now slightly lunge at the player when attacking
+
+* [x] [GOODIES GALORE!] Crawling Horror's now drop shadow bombs around itself when hit, inking the player and dealing damage
+
+* [x] Killing shadows regains 10 sanity instead of 15, but depending on the creature may restore more
+
+
+
+--[ Vanilla Boss changes]--
+
+--General
+
+* [x]  Knockback mechanic on some bosses
+
+* [x] "Wilting Dragonfly" and "Mother Goose" will search out your base during spring and summer similar to ROG
+
+* [x] Added options to reduce the Bee Queen and Toadstool's health, due to their raised importance
+
+--Treeguards (Leif)
 
 * [x]  Add Treeguard AOE
 
-* [x]  Weather protective clothing will become less effective at lower percents (75%-50%-25%)
+* [x]  Treeguard Stomp Attack, does melee damage and may trap the player in a root cage or summon [Fear the Dark!] Stumplings from stumps nearby
 
-* [x]  Sewing Kits repair 50% less, but have double the uses. (Makes it easier to keep clothing in acceptable durability levels)
+--Bee Queen
 
-* [x] Hayfever added to spring
+* [x]  Bee Queen now has an AOE that ignores hives and bees
 
-* [x] Added Gasmask, Antihistamine foods, and Mini Fan changes to combat hayfever [Wormwood is immune to Hayfever!]
+* [x]  Killing the Bee Queen will stop hayfever until the Queen Hive respawns
 
-* [x] Increased Mini Fan cost to compensate for new function
+--Antlion
 
-* [x] Fire Meteor's will rain from the sun after the Antlion summons sinkholes. She now has the power of the sun. Have fun.
+* [x] [Fear the Dark!] Antlion's craters can cause some fires to erupt from the earth.
 
-* [x] Dragonfly and Gmoose seasonal spawning
+--Deerclops
 
-* [x] Treeguard Root Attack
+* [x]  Deerclops "enrages" at half health
 
-* [x] Hounds, Spiders, and Pengulls will mutate on full moons
+--Dragonfly
+
+* [x]  Raidfly's Lavae will now drop explosive slime on death, destroying structures and settings things on fire
+
+* [x]  [FEAR THE DARK!] Raidfly leaves her area if a boss is nearby, and will also leave in summer to fly overhead, searching for bases to burn as the "Wilting Dragonfly".
+
+--G/Moose
+
+* [x] Moose range increased, now does aoe damage to non-mossling units
+
+--Spiderqueen
 
 * [x] Spiderqueen leaves a corpse on death, on a full moon it will turn into a shattered spider nest
 
-* [x] Snowstorms, snowstorm overlay, snowpiles
+--Ancient Guardian
 
-* [x] Snowpiles form around players during snowstorms, can be destroyed by hand or with a shovel
+* [x] Full rework with stunning mechanics and new attacks.
 
-* [x] Fashion and Desert Goggles are now a UNIVERSAL CRAFTING RECIPE! No more rng oasis fishing.
+* [x] Ruins Pillars can now be destroyed by the Ancient Guardian, though they do stun him.
 
-* [x] New Catcoon Cap Goggles hat, same effect as Desert Goggles, increased insulation over the Cat Cap
+
+
+--[ Vanilla Item changes]--
+
+--Weapons
+
+* [x] [FEAR THE DARK!] The morning star drains fuel 50% faster, but doesn't get destroyed when it's out of fuel. It does less damage when out of fuel and no light.
+
+* [x] [FEAR THE DARK!] Electric Weapons such as the morning star can be refueled by electrical doodads, zaspberries, canary feathers, lightning goat horns and milk, frazzled wires, and potatos.
+
+* [x] [FEAR THE DARK!] Hambat spoils two days quicker (it used to spoil in 10), and does less damage when it's spoiled
+
+--Armor
+
+* [x]  Marble armor ignores our knockback mechanic
+
+* [x]  Thulecite Armor has knockback resistance
+
+* [x]  [Fear the Dark!] Theulicite suit and dapper vest reduces insanity auras from monsters
+
+--Clothing
+
+* [x]  Weather protective clothing will become less effective at lower percents (75%-50%-25%) (can be toggled in options)
+
+* [x]  Sewing Kits repair 50% less, but have DOUBLE THE USES. (Makes it easier to keep clothing in acceptable durability levels)
+
+* [x] Fashion and Desert Goggles are now a UNIVERSAL CRAFTING RECIPE! No more rng oasis fishing. (You can craft at alch instead)
+
+* [x] The Feather Hat will prevent Penguins from attacking you
+
+* [x] [FEAR THE DARK!] Eyebrella has less summer insulation to promote use of other summer insulation items.
+
+* [x] [FEAR THE DARK!] Cookie cutter cap has bramble husk effect.
+
+--Misc
+
+* [x]  Moonrock idol requires 5 moonstone
+
+* [x] Mini-fan cost increased, now protects against hayfever while in use
+
+* [x] Telltale Hearts now cost human meat, which is found inside skeletons
+
+
+
+--[ Character changes]--
+
+--Willow
+
+* [x] [FEAR THE DARK!] Willow can now catch on fire! You can put her out by hovering your mouse over her if she's smoldering. (She does not take damage from being on fire)
+
+* [x] [FEAR THE DARK!] When willow catches on fire, she will do an AOE explosion before she bursts into flames.
+
+* [x] [FEAR THE DARK!] Willow bypasses the winter smoldering effect we added.
+
+
+--Wolfgang
+
+* [x]  Wolfgang sanity drain to 1.5x (prev was 1.1x)
+
+* [x] [GOODIES GALORE!] Wolfgang no longer gains speed from being mighty
+
+* [x] [GOODIES GALORE!] Wolfgang gains knockback immunity when mighty
+
+--Wendy
+
+* [x] Wendy's healing tonic recipe changed to use 50 health instead of a telltale heart, since telltale hearts are rare now because of human meat
+
+* [x] Wendy gains the same amount of extra damage from attacking the same creature as Abigail as all other characters, not more like in vanilla  (very minor, very hard to tell it's even there)
+
+--WX-78
+
+* [x]  WX-78 no longer heals from being struck by lightning
+
+* [x]  WX will take more damage from rain (3x)
+
+--Wickerbottom
+
+* [x] Applied horticulture recipe nerf (uses 1 leafy meat + 1 bucket o poop instead of 1 seeds + 1 poop)
+
+* [x] [FEAR THE DARK!] On Tentacles will now summon sickly tentacles, which die over time, but do not target players and do not drop any more tentacle spots, you can still harvest them from giant tentacles underground
+
+* [x] [FEAR THE DARK!] Applied horticulture boosts farmplot crop growth by 66% instead of 100%, and 44% for wild crops.
+
+* [x] Wickerbottom cannot read books while insane
+
+
+--Woodie
+
+* [x]  Were-Goose gets wet when running on water
+
+* [x]  Wereforms have knockback immunity
+
+--Wes
+
+* [x] [FEAR THE DARK!] Gave Wes a useless new secret upside
+
+--Maxwell
+
+* [x] Maxwell cannot read books while insane
+
+--Wigfrid
+
+* [x] [FEAR THE DARK!] Wigfrid's life and sanity leech is reduced by 1/3, but she gains her singleplayer health and sanity on kill perk (which is also reduced) This means she usually gets more restored from small mobs, but less during large boss fights
+
+--Winona
+
+* [x]  Only winona can use her generators
+
+--Wortox
+
+* [x] [GOODIES GALORE!]Most smaller creatures like spiders and butterflies no longer carry souls
+
+* [x] [GOODIES GALORE!] Wortox health changed to 120 from 200 (Poor wortox, let's hope we can get soul fragments in soon)
+
+--Wormwood
+
+* [x]  Wormwood takes more fire damage, for more time
+
+* [x] [FEAR THE DARK!] Wormwood can now catch on fire! You can hover your mouse over him to put him out if he's smoldering (he does take damage from the fire)
+
+* [x] Wormwood is immune to passive hayfever, [FEAR THE DARK!] but not hayfever induced by smaller creatures
+
+* [x] [FEAR THE DARK!] Wormwood can now craft a "honey log roll" out of living logs and honey, it is a decent antihistamine.
+
+* [x] [FEAR THE DARK!] Bramble husk now shoots out spikes on occasion when nearby hostile targets, however, this does consume some durability.
+
+
+--Warly
+
+* [x] [FEAR THE DARK!] Warly now gains +15% hunger and +20% Health/Sanity from eating dishes, however his penalties for repeat dishes are more severe, and his food memory is increased to 3 days. This more closely mirrors his unique singleplayer perk.
+
+
+--Walter and Woby
+
+* [x] [FEAR THE DARK!] Woby can now die, though she regenerates health like chester and can respawn like chester. She also can hold aggro of targets like chester.
+
+* [x] [FEAR THE DARK!] Walter now has firecracker rounds made out of nitre, they can do heavy damage if the target is sitting still, they also hitstun some.
+
+
+
+
+--[ Vanilla Food Source changes]--
+
+--Plants
+
+* [x]  Cactus, stone fruits and spiky bushs don't grow in winter
+
+* [x]  Small chance to spawn mosquitos when picking juicy berry bushes
+
+--Bird Cage
+
+* [x]  Bird's stomach can only withstand 4 monster meat before dying out (vary her diet with normal meat to cure it)
+
+* [x]  [FEAR THE DARK!] Bird takes less damage from monster jerky than cooked monster meat.
+
+* [x]  [FEAR THE DARK!] Bird will regenerate a whole cooked monstermeat or two monster jerky every day.
+
+* [x]  Cooked Bird egg loop removed, this means you can no longer refresh eggs by feeding the bird cooked eggs to get fresh ones
+
+--Fishing
+
+* [x] [FEAR THE DARK!] Wobsters will no longer bite lines with no bait.
+
+--Bee Box
+
+* [x]  Bee box honey yield is 1,2,4 instead of 1,3,6 (barely noticable)
+
+
+
+--[ Vanilla Food changes]--
+
+--Non-Crockpot
+
+* [x]  Butterfly wing nerf - Health restored to 5 (down from 8)
+
+* [x] Cactus Flesh, Cooked Cactus Flesh, and Cooked Green Caps now deal slightly more damage when eaten (A lot of other sanity foods like pumpkin cookies have been buffed! Seek them out!)
+
+--Crockpot
+
+* [x]  Meatballs nerf - Hunger restored to 50 (down from 62.5)
+
+* [x]  Pierogi spoils in 10 days instead of 20
+
+* [x]  Bacon and eggs spoil time is halved, to 10 days
+
+* [x]  Ice Cream now regens 1 sanity per second for 100 seconds, similar to jellybeans (This means icecream restores 100 sanity!) (It does not have the initial 50 sanity)
+
+* [x] Mandrake soup prevents hayfever for a whole season.
+
+--Farmplot-Based Crockpot Dish Buff section--
+
+* [x]  Farmplot based crockpot dishes have mostly been buffed across the board to incentivize non-warly/wormwood/wicker players to use farms!
+
+* [x]  They have been buffed on account of the rarity of their ingredients, the amount of farmplot foods used, the value of their ingredients raw, and the general complexity of the dish
+
+--Rare
+
+* [x]  Creamy Potato Puree 37.5 Hunger -> 100 Hunger! (Seems extreme, but dish requires garlic, which is a rare product, and two potatos)
+
+* [x]  Salsa fresca 37.5 Hunger -> 25 Hunger and 33 Sanity -> 50 Sanity!
+
+* [x]  Stuffed Pepper Poppers 37.5 Hunger -> 50 Hunger and 30 Health -> 60 Health!
+
+--Uncommon
+
+* [x]  Pumpkin Cookies 37.5 Hunger -> 40 Hunger and 15 Sanity -> 33 Sanity and 0 Health -> 15 Health!
+
+* [x]  Stuffed Eggplant 37.5 Hunger -> 40 Hunger and 3 Health -> 15 Health!
+
+* [x]  Asparagus Soup now restores 18.8 Hunger -> 25 Hunger 20 Health -> 30 Health and 5 Sanity -> 20 Sanity!
+
+--Common
+
+* [x] Fish Tacos now restores 37.5 Hunger -> 62.5 Hunger 20 Health -> 15 Health!
+
+* [x] Vegetable Stinger now restores 3 Health -> 10 Health! (Not buffed as heavily because of hayfever usage)
+
+
+
+--Crockpot General Rules--
+
+* [x]  Ice and twigs cannot be more than 1 inside crockpot recipes
+
+* [x]  Bacon and eggs has a lower cooking priority than monster lasagna
+
+* [x]  New Monstermeat system! Monstermeat has a value of 2.5 when raw, cooked reduces this and drying reduces the most.
+
+* [x]  Cooked Monstermeat has a value of 2
+
+* [x]  Monster Jerky has a value of 1, this means it can be used alone to make meatballs! This does not go for monster morsel jerky though...
+
+* [x]  Bug based ingredients have an "insectiod" value! Aside from specialty dishes, using two insectiod ingredients can make wet goop! Currently the only two insectiod ingredients are butterfly wings and scorpion carapaces.
+
+
+
+--[ Vanilla Worldgen changes]--
+
+* [x]  Carrots are SLIGHTLY rarer in world generation
+
+* [x]  Berry bushes are SLIGHTLY rarer in world generation
+
+* [x]  Moosegoose's nest has had its carrots eaten, and some berry bushes disappeared too. Moosling's might've been hungry.
+
+
+
+
+--[ Vanilla Mechanics changes]--
+
+--Insanity
+
+* [x]  Tweaked sanity ranges for shadow creature appearance
+
+* [x]  More shadows spawns on insane players
+
+
+
+--[ Vanilla Misc changes]--
+
+* [x]  Statue walls, signs, lava ponds, bone fragments hitbox pathing is ignored (now they have no collision)
+
+* [x]  Haunting pig torches has a lower chance of spawning a pig guard now
+
+* [x] [FEAR THE DARK!] Something horrible has taken up residence in the rock den, you can repair it with moon rock.
+
+
+
+--[Modding Misc]--
+
+* [x]  [Settings menu](https://i.imgur.com/N3rLMpH.png)
+
+* [x]  Mod settings for disabling/enabling features
+
+* [x]  [Project logo](images/logo.png) added, by @ Ismael Daniel
+
+
+
+---===[New Content]===---
+
+--[Insanity]--
+
+* [x]  New shadow creatures (Dread Eye & Creeping Fear)
+
+* [x] [GOODIES GALORE!] When disguised, Dread Eye's will now spawn mini shadow eyes near the player, which sap sanity when sane, and health when insane. They despawn after a set time
+
+* [x] Creeping Fear will not spawn if you or a companion is engaged with a boss
+
+--[We are the Rats!]--
+ 
+* [x]  [Rat waves](https://cdn.discordapp.com/attachments/623666104937480192/629152866426290197/damnrat.gif), that will periodically come after day 50, they mess around your items, eat your food, and bite you for max health penalties 
+
+* [x] New Item: Poison Jam, a deadly poison that kills almost everything that eats it, especially effective against rats!
+
+
+
+--[Hayfever]--
+
+* [x] Hayfever added to spring
+
+* [x] [FEAR THE DARK!] Hayfever overlay made more green to match DST.
+
+* [x] [FEAR THE DARK!] Bugs certain countdown the hayfever timer when they sting you during spring, this counts for time built up by antihistamines.
+
+* [x] [FEAR THE DARK!] YOU WILL NO LONGER DROP ANY ITEMS WHEN YOU SNEEZE, you will only lose a small amount of sanity and be hitstun for a moment
+
+--Combatting Hayfever
+
+* [x] Added Gasmask to combat hayfever, made with down feathers. Has "Goggle" effect.
+
+* [x] Dishes such as most soups, honeyed foods, vegetable stinger, and spicey chili prevent hayfever for a short time.
+
+* [x] Honey foods, most soups, and onions delay hayfever
+
+* [x] [GOODIES GALORE!] Plague Mask added: New improved variation of the Gas Mask, doesn't reduce sanity when worn, has a small wetness protection, and prevents the max health loss effects of rat attacks
+
+* [x] The Luxury and Gobbler Fans will reduce hayfever when used
+
+* [x] Mini-fan cost increased, now protects against hayfever while in use
+
+* [x] Wormwood is immune to hayfever and can craft honeyed logs to help alleviate it from [FEAR THE DARK!]
+
+* [x] Sleeping grants Hayfever immunity
+
+* [x] Certain new dishes provide long periods of hayfever immunity
+
+* [x] Mandrake soup prevents hayfever for a whole season
+
+--Pollen Mites
+
+* [x] [FEAR THE DARK!] New mob: Pollen mites, nasty buggers that appear during spring, they are very similar to gnats in that they will infest different targets. If they infest a mob, it will become super hostile to players. If they infest a player, it will make the player sneeze faster and take health. They can be killed through melee combat, but a Bug Zapper is the recommended method.
+
+* [x] [FEAR THE DARK!] New wild structure: Pollen mite dens, these dens will appear near players and produce pollen mites on occasion during spring, will level up, and try and spread, if you see any, kill them ASAP!
+
+--Bug Zapper
+
+* [x] [FEAR THE DARK!] New item: Bug Zapper, this handy weapon does 33 damage if fueled, but double that if the target is wet, BUT also 15 more damage if the target is a spider, 20 more if they are a different type of insect, and 50 more if the target is a pollen mite swarm! (Added damage cannot be scaled by chracter effects)
+
+
+
+--[California King]--
+
+* [x] [FEAR THE DARK!] New dish: California King, dish that provides 4 whole days of hayfever protection. Requires barnacle, wobster, ice, and pepper. Causes screen to turn red as a reference.
+
+
+--[Snowstorms]--
+
+* [x] Snowstorms now occur on occasion in winter, function similarly to sandstorms. Any item with "Goggle" effect is immune to snow/sandstorms
+
+* [x] [FEAR THE DARK!] Characters warn you if a snowstorm is approaching.
+
+--Fighting the blizzard!
+
+* [x] New Catcoon Cap "Goggle" hat, same effect as Desert Goggles, increased insulation over the Cat Cap
 
 * [x] Standing near a fire, walls, many trees, using a torch, staff lights, or either variation of goggles will protect against snowstorms
 
-* [x] Deerclops "enrages" at half health
+* [x] [GOODIES GALORE!] New Item: Salt Shaker 3000, Salt spitting backpack that prevents snowstorm effects, destroys snow and snow based enemies, and increases speed in winter, as long as it is fueled
+
+--Snowpiles and Abominamoles
+
+* [x] Snowpiles form around players during snowstorms, can be destroyed by hand or with a shovel
+
+* [x] Snowballs added: makes targets cold when thrown, can be used to freeze targets
+
+* [x] [FEAR THE DARK!] Snow piles will damage players who clean them with their bare hands, better not get frostbite! Try using a shovel!
 
 * [x] New mob: Abominamole, spawns out of snow piles
+
+* [x] [FEAR THE DARK!] Abominamoles will now belch a bunch of snowballs at the player on occasion, dodge enough that you aren't frozen!
+
+* [x] [GOODIES GALORE!] New item: Frozen pincer, rarely dropped by abominamoles, functions as an ice boomerang, can be repaired with ice. Can melt.
+
+
+
+
+--[Depths Eels and Zaspberries]--
 
 * [x] New mob: Depths Eel, added to Depth Worm attacks.
 
 * [x] Zaspberries: berry drops from depth eels that give the player the chaud-froid effect for about 30 seconds and make the player glow
 
-* [x] Mini-fan cost increased, now protects against hayfever
+* [x] [FEAR THE DARK!] New Warly exclusive dish: Zaspberry Parfait, electricutes entities nearby when attacked, delaying their next attack. Crafted with a zaspberry, dairy, and sweetener.
 
-* [x] Honey foods, most soups, and onions delay hayfever
 
-* [x] Moose range increased, now does aoe damage to non-mossling units
 
-* [x] Mutated Hounds attack faster and move faster
 
-* [x] Increased Catcoon Tail drop rate
 
-* [x] Ruins Pillars can now be destroyed by the Ancient Guardian
+--[Bush Crabs]--
 
-* [x] The Ancient Guardian fight has been improved, now has a stomp attack that shakes stone slabs from the ceiling, ramming into large ones will stun him
+* [x] New mob: Bush Crabs, sometimes digging up a bush will result in it trying to bite your face off! Kill it to get the bush off of its back!
 
-* [x] Spiders now have a leap attack and drop monster morsels
 
-* [x] Added Bush Crabs
+--[Trapdoor Spiders, Inconspicuous mounds, and Wide Grass]--
 
-* [x] More shadows spawns on insane players
+* [x] [FEAR THE DARK] New mob: Trapdoor spiders, found inside "inconspicuous mounds" on occasion in savanna type biomes, has unique kiting pattern, consider using traps. Does not drop silk, but does drop two non-morsel spider-loot.
 
-* [x] Killing shadows regains 10 sanity instead of 15
+* [x] [FEAR THE DARK] New plant: Wide grass (trapdoor grass), most inconspicuous mounds have these in front of them, they give 3 grass per pick, digging will give reqular grass tufts. They cannot become diseased.
 
-* [x] Killing the Bee Queen will stop hayfever until the Queen Hive respawns
 
-* [x] Telltale Hearts now cost human meat, which is found inside skeletons
+--[Scorpions]--
 
-* [x] Wendy's healing tonic recipe changed to use 50 health instead of a telltale heart
+* [x] [FEAR THE DARK] New mob: Scoprion, digs its way up through the desert turf during the day, nonpoisonous, but can make you drowsy. Will burrow back in during the afternoon. Does not appear in winter.
 
-* [x] Small chance to spawn mosquito's when picking juicy berry bushes
+* [x] [FEAR THE DARK] New food: Scorpion carapace, counts as a whole monster meat, can be used in hard shell tacos, counts as a bug based ingredient.
 
-* [x] The Toadstool will now occasionally spawn mushroom sprouts on the overworld, these sprouts will cause constant, acid rain, which will burn the player and turn plants diseased
+* [x] [FEAR THE DARK] New dish: Hard shell tacos, using vegetable and scorpion carapaces, this hamlet dish can be recreated.
 
-* [x] NEW MOB: Toadlings, large Toad creatures who will spawn with and defend the mushroom sprouts from being chopped down
+--[Flooded Swamp and Rice]--
 
-* [x] Sickly Toads will fall from the sky if the sprouts are left alone for long enough
+* [x] [FEAR THE DARK] New area: Flooded Swamp, some of the swamp has been flooded by water!
 
-* [x] Cactus Flesh, Cooked Cactus Flesh, and Cooked Green Caps now deal slightly more damage when eaten
+* [x] [FEAR THE DARK] New plant: Rice plants, found floating in the flooded swamp, can be harvested by punching or ramming with a boat.
 
-* [x] Added Moon Oil, a cure for diseased plants
+* [x] [FEAR THE DARK] New food: Rice, cannot be eaten without cooking, used for 2 dishes. Cannot spoil.
 
-* [x] Snowballs added: makes targets cold when thrown, can be used to freeze targets
+* [x] [FEAR THE DARK] New dish: R(L)iceloaf, hunger restoring dish that uses 2 rice. Takes a long time to spoil.
 
-* [x] Spore Pack added: New backpack with 12 slots, and rots foods incredibly fast
+* [x] [FEAR THE DARK] New dish: Seafood paella, dish restores hunger and provides 1.5 days of hayfever protection. Uses a Wobster, rice, and vegetables.
 
-* [x] Salt Shaker 3000 added: Salt spitting backpack that prevents snowstorm effects, destroys snow and snow based enemies, and increases speed in winter, as long as it is fueled
 
-* [x] Air Conditioner added: New structure that over time will increase health, sanity, or prevent hayfever if slotted with blue, green, and red mushrooms respectively
+--[Acid Rain and Toadstool]--
 
-* [x] Toadstool now drops the blueprint for the Air Conditioner
+--Acid Rain
 
-* [x] Plague Mask added: New improved variation of the Gas Mask, doesn't reduce sanity when worn, has a small wetness protection, and prevents the max health loss effects of rat attacks
+* [x] New Mechanic: Acid Rain, during the second autumn, if the toadstool is alive, giant mushroom sprouts will sprout near players to plague the skies with acid rain!
 
-* [x] The Feather Hat will prevent Penguins from attacking you
+* [x] Acid rain causes damage to players who get wet, and diseases most plants!
 
-* [x] Terror Beaks will not slightly lunge at the player when attacking
+* [x] Mushroom Sprouts, If you see them, make sure to chop them down to stop the acid rain!
 
-* [x] Crawling Horror's now drop shadow bombs around itself when hit, inking the player and dealing damage
+--Toadlings
 
-* [x] When disguised, Dread Eye's will now spawn mini shadow eyes near the player, which sap sanity when sane, and health when insane. They despawn after a set time
+* [x] NEW MOB: Toadlings, large Toad creatures who will spawn with and defend the mushroom sprouts from being chopped down, they must be killed to stop acid rain!
 
-* [x] Wendy no longer gets a 40% damage increase from Abigail, only the normal 10%
+* [x] [GOODIES GALORE!] Added Shroom Skin Scraps, dropped by Toadlings, used to craft Shroom Skin
 
-* [x] Added Shroom Skin Scraps, dropped by Toadlings, used to craft Shroom Skin
+--Sickly Toads
 
-* [x] Lavae will now drop explosive slime on death, destroying structures and settings things on fire
+* [x] If acid rain continues for too long sickly toads will fall from the sky and plague the lands! (These will also eat food left on the ground, like regular frogs do now)
 
-* [x] Wortox health changed to 120 from 200 (Poor wortox, let's hope we can get soul fragments in soon)
+--Moon Oil
 
-* [x] Added options to reduce the Bee Queen and Toadstool's health, due to their raised importance
+* [x] Added Moon Oil, a cure for diseased plants, stock up on it during summer to help plants diseased by acid rain!
 
-* [x] Wolfgang no longer gains speed from being mighty
+--New Shroom Skin Uses
 
-* [x] Wolfgang gains knockback immunity when mighty
+* [x] [GOODIES GALORE!] Air Conditioner added: New structure that over time will increase health, sanity, or prevent hayfever if slotted with blue, green, and red mushrooms respectively
 
-* [x] Willow and Wormwood are now able to smolder
+*[x]  [GOODIES GALORE!] New Item, Spore Pack, New backpack with 12 slots without slowness, but rots foods incredibly fast if it's inside
 
-* [x] Willow will do a fire explosion when she catches fire, damaging and igniting nearby mobs
 
-* [x] The Luxury and Gobbler Fan's will reduce hayfever when used
 
-* [x] Sleeping grants Hayfever immunity
 
-* [x] On Tentacles will now summon sickly tentacles, which die over time, but do not target players
+--[Random Night Events]--
 
-* [x] Wickerbottom and Maxwell cannot read books while insane
+* [x] [FEAR THE DARK!] New mechanic: Random Night Events, every night there is a chance for a random event to occur based on the season and moon cycle. Worse RNEs are accompanied by fog.
 
-* [x] WX-78 no longer heals from being struck by lightning
+--Common RNE creatures
 
-* [x] Wigfrid's life and sanity leech is reduced by 1/3, but she gains her singleplayer health and sanity on kill perk (which is also reduced)
+* [x] [FEAR THE DARK!] New mob: Adult Batilisk (Cough Cough Vampire Bats), sometimes appears from RNEs and open sinkholes, appearing more often as the world grows old. This bat always drops a batilisk wing. Is very remeniscent of Vampire Bats.
 
-* [x] Gave Wes a useless new secret upside
+* [x] [FEAR THE DARK!] New mob: Stumplings, small piney stumps that have been awakened by a treeguard or an RNE.
 
-* [x] Ice Cream now regens 1 sanity per second for 100 seconds, similar to jellybeans
+* [x] [FEAR THE DARK!] New mob: Wilson? (swilson), appears because of RNEs, this shadowy doppleganger of wilson wants nothing more than your head, he'll disappear during day.
 
-* [x] Thulecite Armor has knockback resistance
+--Rewards for particular RNEs
 
-* [x] Disabled automatic duplication of carrots, tree saplings, stone fruit bushes, lightbulbs, etc. Take care of your resources.
+* [x] [FEAR THE DARK!] New item: Shadow Crown, headslot item that gives you 20% additional movement speed, you take more damage while wearing it, only obtainable from a specific RNE, also drains sanity when worn.
 
-* [x] New mechanic: Random Night Events, every night there is a chance for a random event to occur based on the season and moon cycle. Worse RNEs are accompanied by fog.
 
-* [x] New mob: Adult Batilisk, sometimes appears from RNEs and open sinkholes, appearing more often as the world grows old. This bat always drops a batilisk wing. Is very remeniscent of Vampire Bats.
+--[Summer Mactusk]--
 
-* [x] New mob: Trapdoor spiders, found inside "inconspicuous mounds" on occasion in savanna type biomes. Does not drop silk, but does drop two non-morsel spider-loot.
+* [x] [FEAR THE DARK!] Mactusk appear in summer, wearing different atire, accompanied by fire hounds.
 
-* [x] New plant: Wide grass (trapdoor grass), most inconspicuous mounds have these in front of them, they give 3 grass per pick, digging will give reqular grass tufts. They cannot become diseased.
+* [x] [FEAR THE DARK!] New item: Sunglasses, function as a summer tam, has goggle effects.
 
-* [x] New mob: Scoprion, digs its way up through the desert turf during the day, nonpoisonous, but can make you drowsy. Will burrow back in during the afternoon. Does not appear in winter.
 
-* [x] New food: Scorpion carapace, counts as a whole monster meat, can be used in hard shell tacos, counts as a bug based ingredient.
+--[Veteran Shrine and Veteran's Curse]--
 
-* [x] New dish: Hard shell tacos, using vegetable and scorpion carapaces, this hamlet dish can be recreated.
+* [x] [FEAR THE DARK!] Add veteran shrine, a horrible altar with which to obtain "veterans curse"
 
-* [x] There can be no more than 1 bug based ingredient in any crockpot dish aside from hard shell tacos (butterfly wings for example)
+* [x] [FEAR THE DARK!] [[INCOMPLETE MECHANIC]] Veteran's Curse, players under this effect take more damage and have a faster hunger drain. In the future, bosses will have special drops for players who are under the effects of the curse.
 
-* [x] New warly exclusive dish: Zaspberry Parfait, electricutes entities nearby when attacked, delaying their next attack. Crafted with a zaspberry, dairy, and sweetener.
 
-* [x] New plant: Rice plants, found floating in the swamp, can be harvested by punching or ramming with a boat.
-
-* [x] New food: Rice, cannot be eaten without cooking, used for 2 dishes. Cannot spoil.
-
-* [x] New dish: R(L)iceloaf, hunger restoring dish that uses 2 rice. Takes a long time to spoil.
-
-* [x] New dish: Seafood paella, dish restores hunger and provides 1.5 days of hayfever protection. Uses a Wobster, rice, and vegetables.
-
-* [x] New dish: California King, dish that provides 4 whole days of hayfever protection. Requires barnacle, wobster, ice, and pepper. Causes screen to turn red as a reference.
-
-* [x] Dishes such as most soups, honeyed foods, vegetable stinger, and spicey chili prevent hayfever for a short time.
-
-* [x] Mandrake soup prevents hayfever for a whole season.
-
-* [x] Farmplot based crockpot dishes have mostly been buffed across the board to incentivize non-warly/wormwood/wicker players to use farms with the heaviest being creamy potato puree 37.5 hunger -> 100 hunger.
-
-* [x] New mob: Stumplings, small piney stumps that have been awakened by a treeguard or an RNE.
-
-* [x] Treeguards will now prefer awakening up to 3 nearby stumps instead of root attacking when stomping.
-
-* [x] Abominamoles will now belch a bunch of snowballs at the player on occasion, dodge enough that you aren't frozen!
-
-* [x] Snow piles will damage players who clean them with their bare hands, better not get frostbite!
-
-* [x] Characters warn you if a snowstorm is approaching.
-
-* [x] Willow bypasses the winter smoldering effect we added.
-
-* [x] New item: Frozen pincer, rarely dropped by abominamoles, functions as an ice boomerang, can be repaired with ice. Can melt.
-
-* [x] New mob: Wilson? (swilson), appears because of RNEs, this shadowy doppleganger of wilson wants nothing more than your head, he'll disappear during day.
-
-* [x] New item: Shadow Crown, headslot item that gives you 20% additional movement speed, you take more damage while wearing it, only obtainable from a specific RNE, also drains sanity when worn.
-
-* [x] New mob: Stumplings, small piney stumps that have been awakened by a treeguard or an RNE.
-
-* [x] Something horrible has taken up residence in the rock den, you can repair it with moon rock.
-
-* [x] Mactusk appear in summer, wearing different atire, accompanied by fire hounds.
-
-* [x] New item: Sunglasses: function as a summer tam, has goggle effects.
-
-* [x] YOU WILL NO LONGER DROP ITEMS WHEN SNEEZING
-
-* [x] Add veteran shrine, a horrible altar with which to obtain "veterans curse"
-
-* [x] [[INCOMPLETE MECHANIC]] Veteran's Curse, players under this effect take more damage and have a faster hunger drain. In the future, bosses will have special drops for players who are under the effects of the curse.
-
-* [x] Bramble husk now shoots out spikes on occasion when nearby hostile targets, however, this does consume some durability.
-
-* [x] Cookie cutter cap has bramble husk effect.
-
-* [x] Applied horticulture boosts crop growth by 66% instead of 100%, and 44% for wild crops.
-
-* [x] Spider warrior type spiders will counterattack when attacked. Try dodging towards them or strafing hard!
-
-* [x] Wormwood and willow can now catch on fire! This is a good thing for willow, not so good for wormwood, however both can hover their mice over themselves to put themselves out.
-
-* [x] When willow catches on fire, she will do an AOE explosion before she bursts into flames.
-
-* [x] Eyebrella has less summer insulation to promote use of other summer insulation items.
-
-* [x] Woby can now die, though she regenerates health like chester and can respawn like chester. Shee also can hold aggro of targets like chester.
-
-* [x] Walter now has firecracker rounds made out of nitre, they can do heavy damage if the target is sitting still, they also hitstun some.
-
-* [x] Warly now gains +15% hunger and +20% Health/Sanity from eating dishes, however his penalties for repeat dishes are more severe, and his food memory is increased to 3 days. This more closely mirrors his unique singleplayer perk.
-
-* [x] New mob: Pollen mites, nasty buggers that appear during spring, they are very similar to gnats in that they will infest different targets. If they infest a mob, it will become super hostile to players. If they infest a player, it will make the player sneeze faster and take health. They can be killed through melee combat, but a Bug Zapper is the recommended method.
-
-* [x] New wild structure: Pollen mite dens, these dens will appear near players and produce pollen mites on occasion during spring, will level up, and try and spread, if you see any, kill them ASAP!
-
-* [x] Mosquitos gain a new look in spring
-
-* [x] Moquitos, bees, and any other bugs can cause players to sneeze faster on hit.
-
-* [x] New item: Bug Zapper, this handy weapon does 33 damage if fueled, but double that if the target is wet, BUT also 15 more damage if the target is a spider, 20 more if they are a different type of insect, and 50 more if the target is a pollen mite swarm! (Added damage cannot be scaled by chracter effects)
-
-* [x] The morning star drains fuel 50% faster, but doesn't get destroyed when it's out of fuel. It does less damage when out of fuel and no light.
-
-* [x] The Bug Zapper and Morning Star can be refueled by electrical doodads, zaspberries, canary feathers, lightning goat horns and milk, frazzled wires, and potatos.
-
-* [x] Bird takes less damage from monster jerky than cooked monster meat, and will also regenerate a whole cooked monstermeat every day.
-
-* [x] Wobsters will no longer bite lines with no bait.
-
-* [x] Theulicite suit and dapper vest reduces insanity auras from monsters.
-
-* [x] Frogs eat food nearby. Better not drop any berries!
-
-* [x] Hayfever overlay made more green to match DST.
-
-* [x] Wormwood can now craft a "honey log roll" out of living logs and honey, it is a decent antihistamine.
-
-* [x] Raidfly leaves her area if a boss is nearby, and will also leave in summer to fly overhead, searching for bases to burn.
-
-* [x] Pigs and Bunnymen refuse to in-fight.
+--[Add any future changes past this line, I'll sort them when we're about to ship an update. -Axe]--
 
 
 
