@@ -187,7 +187,7 @@ local function fn()
 
 	inst.components.fueled.fueltype = FUELTYPE.BATTERYPOWER
 	inst.components.fueled.secondaryfueltype = FUELTYPE.CHEMICAL
-    inst.components.fueled:InitializeFuelLevel(TUNING.LANTERN_LIGHTTIME * 0.75)
+    inst.components.fueled:InitializeFuelLevel(TUNING.LANTERN_LIGHTTIME / 1.75)
     inst.components.fueled:SetDepletedFn(nofuel)
     inst.components.fueled:SetTakeFuelFn(ontakefuel)
     inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION, TUNING.TURNON_FULL_FUELED_CONSUMPTION)

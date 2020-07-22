@@ -13,8 +13,75 @@ local fx = SpawnPrefab("electrichitsparks")
 end
 
 local function onremovefire(fire)
-    fire.nightstick.fire = nil
+    fire.nightstick._fire = nil
 end
+
+local function turnon(inst)
+    if not inst.components.fueled:IsEmpty() then
+		inst.components.weapon:SetElectric()
+		inst.SoundEmitter:PlaySound("dontstarve/wilson/lantern_on")
+        inst.components.fueled:StartConsuming()
+
+        local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner or nil
+		
+		if owner ~= nil then
+			if inst.components.equippable:IsEquipped() and inst.components.inventoryitem.owner ~= nil then
+			owner.AnimState:OverrideSymbol("swap_object", "swap_nightstick", "swap_nightstick")
+			end
+		end
+		
+        if inst._fire == nil and not inst.components.fueled:IsEmpty() then
+			inst._fire = SpawnPrefab("nightstickfire")
+			inst._fire.nightstick = inst
+			inst:ListenForEvent("onremove", onremovefire, inst._fire)
+		end
+		inst._fire.entity:SetParent(owner.entity)
+    end
+end
+
+local function turnoff(inst)
+
+    inst.components.weapon:RemoveElectric()
+	
+	local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner or nil
+	if owner ~= nil then
+		if inst.components.equippable:IsEquipped() and inst.components.inventoryitem.owner ~= nil then
+			owner.AnimState:OverrideSymbol("swap_object", "swap_nightstick_off", "swap_nightstick_off")
+		end
+	end
+	
+	inst.SoundEmitter:PlaySound("dontstarve/wilson/lantern_on")
+    if inst.components.fueled ~= nil then
+        inst.components.fueled:StopConsuming()
+    end
+	
+    if inst._fire ~= nil then
+        if inst._fire:IsValid() then
+			inst._fire:Remove()
+        end
+    end
+end
+
+local function ontakefuel(inst, owner)
+    if inst.components.equippable:IsEquipped() then
+		inst.SoundEmitter:PlaySound("dontstarve/common/lightningrod")
+        turnon(inst)
+    end
+end
+
+local function nofuel(inst)
+	 if inst.components.equippable:IsEquipped() and inst.components.inventoryitem.owner ~= nil then
+        local data =
+        {
+            prefab = inst.prefab,
+            equipslot = inst.components.equippable.equipslot,
+        }
+        turnoff(inst)
+        inst.components.inventoryitem.owner:PushEvent("torchranout", data)
+    else
+        turnoff(inst)
+    end
+end 
 
 local function onequip(inst, owner)
     inst.components.burnable:Ignite()
@@ -25,12 +92,12 @@ local function onequip(inst, owner)
     inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/morningstar", "torch")
     --inst.SoundEmitter:SetParameter("torch", "intensity", 1)
 
-    if inst.fire == nil then
-        inst.fire = SpawnPrefab("nightstickfire")
-        inst.fire.nightstick = inst
-        inst:ListenForEvent("onremove", onremovefire, inst.fire)
+	if inst.components.fueled:IsEmpty() then
+		owner.AnimState:OverrideSymbol("swap_object", "swap_nightstick_off", "swap_nightstick_off")
+    else
+		owner.AnimState:OverrideSymbol("swap_object", "swap_nightstick", "swap_nightstick")
+        turnon(inst)
     end
-    inst.fire.entity:SetParent(owner.entity)
 	
 	owner:AddTag("lightningrod")
 	owner.lightningpriority = 0
@@ -38,26 +105,49 @@ local function onequip(inst, owner)
 end
 
 local function onunequip(inst, owner)
-    if inst.fire ~= nil then
-        inst.fire:Remove()
-    end
-
     inst.components.burnable:Extinguish()
     owner.AnimState:Hide("ARM_carry")
     owner.AnimState:Show("ARM_normal")
     inst.SoundEmitter:KillSound("torch")
+
+    turnoff(inst)
 	
 	owner:RemoveTag("lightningrod")
 	owner.lightningpriority = nil
 	owner:ListenForEvent("lightningstrike", nil)
+	
 end
 
-local function ontakefuel(inst)
-    if not inst.SoundEmitter:PlayingSound("loop") then
-		inst.SoundEmitter:PlaySound("dontstarve/common/lightningrod")
+local function onfuelchange(newsection, oldsection, inst)
+    if newsection <= 0 then
+        --when we burn out
+        if inst.components.burnable ~= nil then
+            inst.components.burnable:Extinguish()
+        end
+        local equippable = inst.components.equippable
+        if equippable ~= nil and equippable:IsEquipped() then
+            local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner or nil
+            if owner ~= nil then
+                local data =
+                {
+                    prefab = inst.prefab,
+                    equipslot = equippable.equipslot,
+                    announce = "ANNOUNCE_TORCH_OUT",
+                }
+                turnoff(inst)
+                owner:PushEvent("itemranout", data)
+                return
+            end
+        end
+        turnoff(inst)
     end
 end
-    
+
+local function onattack(inst, attacker, target)
+    if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and inst.components.weapon.stimuli == "electric" then
+        SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
+    end
+end
 
 env.AddPrefabPostInit("nightstick", function(inst)
 	
@@ -66,7 +156,10 @@ env.AddPrefabPostInit("nightstick", function(inst)
 	end
 	
 	if inst.components.fueled ~= nil then
-    inst.components.fueled:SetTakeFuelFn(ontakefuel)
+		inst.components.fueled:SetSectionCallback(onfuelchange)
+		inst.components.fueled:InitializeFuelLevel(TUNING.NIGHTSTICK_FUEL / 1.5)
+		inst.components.fueled:SetDepletedFn(nofuel)
+		inst.components.fueled:SetTakeFuelFn(ontakefuel)
 		inst.components.fueled.fueltype = FUELTYPE.BATTERYPOWER
 		inst.components.fueled.secondaryfueltype = FUELTYPE.CHEMICAL
 		inst.components.fueled.accepting = true
@@ -75,6 +168,11 @@ env.AddPrefabPostInit("nightstick", function(inst)
 	if inst.components.equippable ~= nil then
 		inst.components.equippable:SetOnEquip(onequip)
 		inst.components.equippable:SetOnUnequip(onunequip)
+	end
+	
+	if inst.components.weapon ~= nil then
+		inst.components.weapon:RemoveElectric()
+		inst.components.weapon:SetOnAttack(onattack)
 	end
 
 end)
