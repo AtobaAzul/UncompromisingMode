@@ -38,9 +38,9 @@
 
 --Spiders
 
-* [x]  Regular spiders now have a leap attack, but can be interrupted if you strike them mid-air (try it it's surprisingly fun).
+* [x]  Regular spiders now have a leap attack, but can be interrupted if you strike them mid-air. (Try it it's surprisingly fun.)
 
-* [x]  [Fear the Dark!] Spider Warriors and Dangling Depth Dwellers will counterattack when attacked. Try dodging towards them or strafing hard!
+* [x]  [Fear the Dark!] Spider Warriors and Dangling Depth Dwellers will counterattack when attacked. (Try dodging towards them or strafing hard!)
 
 --Frogs
 
@@ -74,11 +74,11 @@
 
 --Bees and other bugs
 
-* [x]  Bees don't drop honey, only stingers (this is because of that one biome filled entirely with killer bee nests).
+* [x]  Bees don't drop honey, only stingers. (This is because of that one biome filled entirely with killer bee nests.)
 
 * [x]  [Fear the Dark!] Mosquitos gain a new look in spring.
 
-* [x]  [Fear the Dark!] Bugs such as bees and mosquitos can provoke the player into sneezing if they hit them during spring.
+* [x]  [Fear the Dark!] Bugs such as bees and mosquitos can provoke the player into sneezing if they hit players during spring.
 
 
 --Pengulls
@@ -107,17 +107,17 @@
 
 * [x] "Wilting Dragonfly" and "Mother Goose" will search out your base during spring and summer similar to ROG.
 
-* [x] Added options to reduce the Bee Queen and Toadstool's health, due to their raised importance.
+* [x] Added options to reduce the Bee Queen and Toadstool's health, due to their raised importance. (Decent for solo play.)
 
 --Treeguards (Leif)
 
-* [x]  Add Treeguard AOE.
+* [x]  Treeguard's regular attacks have AOE tied to them that ignore other treeguards or [Fear the Dark!] Stumplings.
 
-* [x]  Treeguard Stomp Attack, does melee damage and may trap the player in a root cage or summon [Fear the Dark!] Stumplings from stumps nearby.
+* [x]  Treeguard Stomp Attack, does melee damage and may trap the player in a root cage or since [Fear the Dark!] will summon Stumplings from stumps nearby.
 
 --Bee Queen
 
-* [x]  Bee Queen now has an AOE that ignores hives and bees.
+* [x]  Bee Queen's regular attacks have AOE tied to them that ignore hives and bees.
 
 * [x]  Killing the Bee Queen will stop hayfever until the Queen Hive respawns.
 
@@ -125,7 +125,7 @@
 
 * [x] [Fear the Dark!] Antlion's craters can cause some fires to erupt from the earth.
 
-* [x] [Fear the Dark!] Antlion sinkholes will now cause ruptures in boats
+* [x] [Fear the Dark!] Antlion sinkholes will now cause ruptures in boats.
 
 --Deerclops
 
@@ -140,6 +140,7 @@
 * [x]  [FEAR THE DARK!] Raidfly leaves her area if a boss is nearby, and will also leave in summer to fly overhead, searching for bases to burn as the "Wilting Dragonfly".
 
 * [x] Dragonfly gets 15% reduced damage when in wilting form!
+
 --G/Moose
 
 * [x] Moose range increased, now does aoe damage to non-mossling units.
@@ -300,7 +301,7 @@
 
 * [x] [FEAR THE DARK!] Walter now has firecracker rounds made out of nitre, they can do heavy damage if the target is sitting still, they also hitstun some.
 
-* [x] [FEAR THE DARK!] Walter takes 50% more hayfever damage from hayfever damaging mobs (This means bugs during spring will make him sneeze faster than other players)
+* [x] [FEAR THE DARK!] Walter takes 50% more hayfever damage from hayfever damaging mobs. (This means bugs during spring will make him sneeze faster than other players. He does not take any more physical damage.)
 
 * [x] [FEAR THE DARK!] Walter has a lower minimum and maximum time till next sneeze after sneezing. (Though he still gets the same benefits from antihistamine food!)
 
@@ -315,7 +316,7 @@
 
 --Bird Cage
 
-* [x]  Bird's stomach can only withstand 4 monster meat before dying out (vary her diet with normal meat to cure it).
+* [x]  Bird's stomach can only withstand 4 monster meat before dying out. (Vary her diet with normal meat to cure it).
 
 * [x]  [FEAR THE DARK!] Bird takes less damage from monster jerky than cooked monster meat.
 
@@ -329,7 +330,7 @@
 
 --Bee Box
 
-* [x]  Bee box honey yield is 1,2,4 instead of 1,3,6 (barely noticable).
+* [x]  Bee box honey yield is 1,2,4 instead of 1,3,6. (Barely noticable in actual play).
 
 
 
@@ -339,7 +340,7 @@
 
 * [x]  Butterfly wing nerf - Health restored to 5 (down from 8).
 
-* [x] Cactus Flesh, Cooked Cactus Flesh, and Cooked Green Caps now deal slightly more damage when eaten (A lot of other sanity foods like pumpkin cookies have been buffed! Seek them out!).
+* [x] Cactus Flesh, Cooked Cactus Flesh, and Cooked Green Caps now deal slightly more damage when eaten. (A lot of other sanity foods like pumpkin cookies have been buffed! Seek them out!).
 
 --Crockpot
 
@@ -361,7 +362,7 @@
 
 --Rare
 
-* [x]  Creamy Potato Puree 37.5 Hunger -> 100 Hunger! (Seems extreme, but dish requires garlic, which is a rare product, and two potatos).
+* [x]  Creamy Potato Puree 37.5 Hunger -> 100 Hunger! (Seems extreme, but dish requires garlic, which is a rare product, and two potatos.)
 
 * [x]  Salsa fresca 37.5 Hunger -> 25 Hunger and 33 Sanity -> 50 Sanity!
 
@@ -379,7 +380,7 @@
 
 * [x] Fish Tacos now restores 37.5 Hunger -> 62.5 Hunger 20 Health -> 15 Health!
 
-* [x] Vegetable Stinger now restores 3 Health -> 10 Health! (Not buffed as heavily because of hayfever usage)
+* [x] Vegetable Stinger now restores 3 Health -> 10 Health! (Not buffed as heavily because of hayfever usage.)
 
 
 
@@ -422,7 +423,7 @@
 
 --[ Vanilla Misc changes]--
 
-* [x]  Statue walls, signs, lava ponds, and fossils hitbox pathing is ignored (now they have no collision).
+* [x]  Statue walls, signs, lava ponds, and fossils hitbox pathing is ignored. (Now they have no collision)
 
 * [x]  Haunting pig torches has a lower chance of spawning a pig guard now.
 
@@ -464,7 +465,7 @@
 
 * [x] [FEAR THE DARK!] Hayfever overlay made more green to match DST.
 
-* [x] [FEAR THE DARK!] Bugs certain countdown the hayfever timer when they sting you during spring, this counts for time built up by antihistamines.
+* [x] [FEAR THE DARK!] Certain bugs countdown the hayfever timer when they sting you during spring, this counts for time built up by antihistamines.
 
 * [x] [FEAR THE DARK!] YOU WILL NO LONGER DROP ANY ITEMS WHEN YOU SNEEZE, you will only lose a small amount of sanity and be hitstun for a moment
 
@@ -498,7 +499,7 @@
 
 --Bug Zapper
 
-* [x] [FEAR THE DARK!] New item: Bug Zapper, this handy weapon does 33 damage if fueled, but double that if the target is wet, BUT also 15 more damage if the target is a spider, 20 more if they are a different type of insect (very good vs Bee Queen when she's wet), and 50 more if the target is a pollen mite swarm! (Added damage cannot be scaled by chracter effects).
+* [x] [FEAR THE DARK!] New item: Bug Zapper, this handy weapon does 33 damage if fueled, but double that if the target is wet, BUT also 15 more damage if the target is a spider, 20 more if they are a different type of insect (very good vs Bee Queen when she's wet), and 50 more if the target is a pollen mite swarm! (Added damage cannot be scaled by character effects).
 
 
 
