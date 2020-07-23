@@ -986,7 +986,7 @@ end
 --Inclusion and Tuning
 ------------------------
 --Wild
-AddWildEvent(SpawnBats,.5)
+AddWildEvent(SpawnBats,.4)
 AddWildEvent(SpawnLightFlowersNFerns,.3)
 AddWildEvent(SpawnSkitts,.5)
 AddWildEvent(SpawnMonkeys,.2)
@@ -996,7 +996,7 @@ AddWildEvent(SpawnShadowTeleporter,.3)
 AddWildEvent(StumpsAttack,.3)
 AddWildEvent(SpawnShadowTalker,.6)
 --Secondary Wild
-AddSecondaryWildEvent(SpawnBats,.5)
+AddSecondaryWildEvent(SpawnBats,.4)
 AddSecondaryWildEvent(SpawnLightFlowersNFerns,.3)
 AddSecondaryWildEvent(SpawnSkitts,.5)
 AddSecondaryWildEvent(StumpsAttack,.2)
