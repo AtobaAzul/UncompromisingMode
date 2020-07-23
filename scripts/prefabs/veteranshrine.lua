@@ -55,12 +55,16 @@ end
 local function OnTalk(inst)
     OnDoneTalking(inst)
     inst.SoundEmitter:PlaySound("dontstarve/creatures/together/stalker/talk_LP", "talk")
-    inst.talktask = inst:DoTaskInTime(1.5 + math.random() * .5, OnDoneTalking)
+    inst.talktask = inst:DoTaskInTime(2 + math.random() * .5, OnDoneTalking)
 end
 
 local function onnear(inst, target)
 	if target ~= nil then
-		inst.components.talker:Say(GetString(inst.target, "VETERANCURSETAUNT"))
+		if target:HasTag("vetcurse") then
+			inst.components.talker:Say(GetString(inst.target, "VETERANCURSED"))
+		else
+			inst.components.talker:Say(GetString(inst.target, "VETERANCURSETAUNT"))
+		end
 	end
 end
 
