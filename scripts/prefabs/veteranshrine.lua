@@ -44,6 +44,26 @@ local function ToggleCurse(inst, doer)
 	inst.components.activatable.inactive = true
 end
 
+local function OnDoneTalking(inst)
+    if inst.talktask ~= nil then
+        inst.talktask:Cancel()
+        inst.talktask = nil
+    end
+    inst.SoundEmitter:KillSound("talk")
+end
+
+local function OnTalk(inst)
+    OnDoneTalking(inst)
+    inst.SoundEmitter:PlaySound("dontstarve/creatures/together/stalker/talk_LP", "talk")
+    inst.talktask = inst:DoTaskInTime(1.5 + math.random() * .5, OnDoneTalking)
+end
+
+local function onnear(inst, target)
+	if target ~= nil then
+		inst.components.talker:Say(GetString(inst.target, "VETERANCURSETAUNT"))
+	end
+end
+
 local function fn(Sim)
     local inst = CreateEntity()
     local trans = inst.entity:AddTransform()
@@ -61,20 +81,41 @@ local function fn(Sim)
     inst.GetActivateVerb = GetVerb
     MakeObstaclePhysics(inst, 2)
 	inst.entity:SetPristine()
+	
+	inst:AddComponent("talker")        
+    inst.components.talker.colour = Vector3(252/255, 226/255, 219/255)
+    inst.components.talker.offset = Vector3(0, -500, 0)
+    inst.components.talker:MakeChatter()
+    inst.components.talker.lineduration = TUNING.HERMITCRAB.SPEAKTIME * 2 -0.5
+    if LOC.GetTextScale() == 1 then
+		inst.components.talker.fontsize = 30
+    end
+    inst.components.talker.font = TALKINGFONT_HERMIT
+    inst:AddComponent("npc_talker")
 
     if not TheWorld.ismastersim then
         return inst
     end
+	
+	
     inst:AddComponent("activatable")
     inst.components.activatable.OnActivate = ToggleCurse
     inst.components.activatable.inactive = true
     inst:AddComponent("inspectable")
     inst.components.inspectable:RecordViews()
+	
+	
+    inst:AddComponent("playerprox")
+    inst.components.playerprox:SetOnPlayerNear(onnear)
+    inst.components.playerprox:SetDist(6, 40)
 
     --inst.deactivate = deactivate
 
     --inst.OnSave = onsave 
     --inst.OnLoad = onload
+	
+    inst:ListenForEvent("ontalk", OnTalk)
+    inst:ListenForEvent("donetalking", OnDoneTalking)
 
     return inst
 end

@@ -57,7 +57,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 		"That's probably not good.",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "It's roots have taken hold!"
-	ANNOUNCE.ANNOUNCE_SNOWSTORM = "The air is dense, and the wind is picking up. Something is wrong here."
+	ANNOUNCE.ANNOUNCE_SNOWSTORM = "The wind is picking up. Something is wrong here."
 	ANNOUNCE.SHADOWTALKER = {
         "IM SO SORRY CHARLIE",
         "THEY WONT LET US GO",
