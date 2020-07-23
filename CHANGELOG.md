@@ -646,12 +646,6 @@
 
 * [x] [FEAR THE DARK!] New item: Moon Tear, a rock found in a specific RNE that makes the player wet when it is held, can be useful during summer, but will probably have more uses in a later update.
 
---[Summer Mactusk]--
-
-* [x] [FEAR THE DARK!] Mactusk appear in summer, wearing different atire, accompanied by fire hounds.
-
-* [x] [FEAR THE DARK!] New item: Sunglasses, function as a summer tam, has goggle effects.
-
 
 --[Veteran Shrine and Veteran's Curse]--
 

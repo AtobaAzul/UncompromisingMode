@@ -95,7 +95,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	
 	DESCRIBE.SKELETONMEAT = "Some dishes probably shouldn't be made."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
-	DESCRIBE.SWILSON = "He's going to make chopped liver out of me!"
+	DESCRIBE.SWILSON = "He's looking to make chopped liver!"
 	DESCRIBE.VAMPIREBAT = "I assure you, I taste horrible!"
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "Some moon rocks would be the perfect ingredient for a new little home."
@@ -108,7 +108,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.RICE = "I'll save this for later"
 	DESCRIBE.RICE_COOKED = "I could have done better"
 	DESCRIBE.SEAFOODPAELLA = "The way the seafood blends with the rice...."
-	DESCRIBE.LICELOAF = "I could have done betteer..."
+	DESCRIBE.LICELOAF = "A small step up, but barely passable."
 	DESCRIBE.SUNGLASSES = "No more fried eyeballs."
 	
 	DESCRIBE.STUMPLING = "I wish I were back at my kitchen!"
