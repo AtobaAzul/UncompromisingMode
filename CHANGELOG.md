@@ -68,10 +68,6 @@
 
 * [x]  [Fear the Dark!] Health increased to 75.
 
---Mactusk
-
-* [x]  Walrus has more health and ice doggos.
-
 --Bees and other bugs
 
 * [x]  Bees don't drop honey, only stingers. (This is because of that one biome filled entirely with killer bee nests.)

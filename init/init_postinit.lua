@@ -126,7 +126,6 @@ local brain_post = {
     --example:
     --"hound",
 	"werepig",
-	"walrus",
 	"frog",
 }
 

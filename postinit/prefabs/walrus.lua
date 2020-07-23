@@ -33,9 +33,7 @@ env.AddPrefabPostInit("walrus", function (inst)
         OnIsSummer(inst, true)
     end
 	
-    if inst.components.health ~= nil then
-        inst.components.health:SetMaxHealth(TUNING.WALRUS_HEALTH*TUNING.DSTU.MONSTER_MCTUSK_HEALTH_INCREASE)
-    end
+
 end)
 
 local function OnIsSummerBaby(inst, issummer)
