@@ -108,11 +108,11 @@ local function fn(Sim)
     inst:AddComponent("inspectable")
     inst.components.inspectable:RecordViews()
 	
-	
+	--[[
     inst:AddComponent("playerprox")
     inst.components.playerprox:SetOnPlayerNear(onnear)
     inst.components.playerprox:SetDist(6, 40)
-
+]]
     --inst.deactivate = deactivate
 
     --inst.OnSave = onsave 
