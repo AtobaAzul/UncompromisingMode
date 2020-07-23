@@ -29,13 +29,24 @@ end
 
 local function StealAction(inst)
 	if not inst.components.inventory:IsFull() then
-		local target = FindEntity(inst, SEE_DIST,
-			CanSteal,
-			{ "_inventoryitem" },
-			{ "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
-		return target ~= nil
-			and BufferedAction(inst, target, ACTIONS.PICKUP)
-			or nil
+		local targetpriority = FindEntity(inst, SEE_DIST,
+		CanSteal,
+		{ "_inventoryitem", "_equippable" },
+		{ "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
+		if targetpriority ~= nil then
+			return targetpriority ~= nil
+				and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
+				or nil
+		else
+			local target = FindEntity(inst, SEE_DIST,
+				CanSteal,
+				{ "_inventoryitem" },
+				{ "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
+			return target ~= nil
+				and BufferedAction(inst, target, ACTIONS.PICKUP)
+				or nil
+		end
+	
 	end
 end
 
