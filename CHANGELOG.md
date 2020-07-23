@@ -117,6 +117,11 @@
 
 * [x]  Killing the Bee Queen will stop hayfever until the Queen Hive respawns.
 
+
+--Toadstool
+
+* [x]  Toadstool only drops shroom skin when he dies, though he drops all that the player would get throughout each phase. This is because of the new shroom skin items we added.
+
 --Antlion
 
 * [x] [Fear the Dark!] Antlion's craters can cause some fires to erupt from the earth.
