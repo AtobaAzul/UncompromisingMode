@@ -365,7 +365,7 @@
 
 * [x]  Creamy Potato Puree 37.5 Hunger -> 100 Hunger! (Seems extreme, but dish requires garlic, which is a rare product, and two potatos.)
 
-* [x]  Salsa fresca 37.5 Hunger -> 25 Hunger and 33 Sanity -> 50 Sanity!
+* [x]  Salsa fresca 33 Sanity -> 50 Sanity!
 
 * [x]  Stuffed Pepper Poppers 37.5 Hunger -> 50 Hunger and 30 Health -> 60 Health!
 
