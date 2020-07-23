@@ -124,7 +124,7 @@ local function FindSpawnLocation(x, y, z)
 end
 
 local function SpawnPollenmiteDenForPlayer(playerinst, playerdata, reschedule)
-    if not _worldstate.iswinter then
+    if not _worldstate.iswinter and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
 
         local chance = 1/#_activeplayers
         local should_spawn = math.random() < chance
