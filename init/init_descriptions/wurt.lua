@@ -95,7 +95,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 	
 	DESCRIBE.SKELETONMEAT = "Whats problem?"
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
-	DESCRIBE.SWILSON = "Scary Shadow, Florp."
+	DESCRIBE.SWILSON = "Florrrp! Scaleless betray?!"
 	DESCRIBE.VAMPIREBAT = "Bigger! Grrr!"
 									
 	--Swampyness

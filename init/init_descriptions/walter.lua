@@ -95,7 +95,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	
 	DESCRIBE.SKELETONMEAT = "I... I don't like stories about people at their most desperate..."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
-	DESCRIBE.SWILSON = "A Doppelganger? Maybe a cloning experiment gone wrong!"
+	DESCRIBE.SWILSON = "Woah! Wilson, what happened to you?!"
 	DESCRIBE.VAMPIREBAT = "You don't look like a vampire at all!"
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "We can make a mini animal shelter with some moon rocks!"
@@ -112,9 +112,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.LICELOAF = "Looks like rations to me!"
 	DESCRIBE.SUNGLASSES = "Nice!"
 	
-	DESCRIBE.STUMPLING = "The woods is rising up!"
-	DESCRIBE.MOON_TEAR = "Far away from home huh? Me too... Woby and I will keep you company!"
-	DESCRIBE.SHADOW_TELEPORTER = "I could loosen it's grip, if I'm feeling risky."
+	DESCRIBE.STUMPLING = "Woah! Do you see that, Woby?"
+	DESCRIBE.MOON_TEAR = "Far away from home, huh? Woby and I will keep you company!"
+	DESCRIBE.SHADOW_CROWN = "A crown? A Pinetree Pioneer must stay humble!"
 	DESCRIBE.POLLENMITEDEN = "These little guys are spreading fast!"
     DESCRIBE.POLLENMITES = "My eyes are watering just looking at them."
     DESCRIBE.SHADOW_CROWN = "Wearing this gives me a strange feeling of dread."

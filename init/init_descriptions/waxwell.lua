@@ -112,8 +112,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.SEAFOODPAELLA = "A fine meal!" 
 	
 	DESCRIBE.STUMPLING = "They are revolting!"
-	DESCRIBE.MOON_TEAR = "Another one of the moons... gifts. Lets hold onto it for now."
-	DESCRIBE.SHADOW_TELEPORTER = "A trick, for sure. But the rewards could be great."
+	DESCRIBE.MOON_TEAR = "Another one of the \"Moon's\" gifts."
+	DESCRIBE.SHADOW_TELEPORTER = "Oh, please. I know a trick when I see one."
 	DESCRIBE.POLLENMITEDEN = "Ugh. The horde home."
     DESCRIBE.POLLENMITES = "Horde horrible."
     DESCRIBE.SHADOW_CROWN = "Darkness brings great power, but leaves your body fragile. I should know."
