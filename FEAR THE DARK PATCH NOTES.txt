@@ -1,0 +1,186 @@
+[ BRAND NEW MOBS, ITEMS, AND FEATURES ]
+[Core Feature]: Random Night Events. RNE chance is configurable, increases by 10% per extra living player on the server. There are some new items, creatures, and features involved with RNE, but those will remain a surprise!
+[Feature]: Veterans Shrine. Optional curse that will inflict negative effects on the player. WIP, rewards for taking on the challenge will be added in the future.
+
+[New Mob]: Adult Batalisks, which will spawn from bat caves and open sinkholes.
+[New Mob]: Scorpions, which will spawn from the desert.
+[New Mob]: Pollen Mites. Pollen Mite Dens will appear and spread randomly during summer. These bugs will damage you and reduce the time until you sneeze. Vulnerable to fire.
+[New Mob]: Pinelings. It's a semi secret.
+
+[New World Gen] Ponds will generate in the swamp
+[New World Gen] Rice Plants will spawn in the swamp ponds
+[New World Gen] "Wide Grass" may now spawn on Inconspicuous Mounds. They yield 3 grass per harvest.
+
+[New Food] Seafood Paella. Requires Rice and 1 Wobster.
+[New Food] Rice Loaf. Requires 2 Rice and 2 Filler.
+[New Food] Warly exclusive Zaspberry Parfait. Requires 1 Zaspberry and 1 Dairy. Gives off a retaliation buff that will shock and stun            nearby enemies when you are attacked.
+[New Food] California King. Requires a Barnacle, Wobster, Pepper, and Ice.
+[New Food] Hardshell Taco's. Scorpions will drop carapaces, which can be made into Tacos.
+
+[New Weapon] The Bug Zapper. Deals electric damage, and bonus damage to various insects. Can be refueled with new battery powered fuel, which includes Electrical Doodads, Potatoes, Volt Goat Horns, Electric Milk, Canary Feathers, and Frazzled Wires.
+
+
+[ ITEM CHANGES ]
+
+Thulecite Armor now gives knockback protection, and a 40% sanity aura reduction.
+Dapper Vest now gives a 40% sanity aura reduction
+The Insulated Pack is no longer burnable
+The Cookie Cutter Cap now reflects 75% of damage taken back at the attacker, and releases 5 damage spikes in an aoe
+The Glass Cutter now does 12 more damage to shadows (80)
+The Ice Boomerang now heals over 20% of its durability when repaired with ice
+Doubled the Ice Boomerang freeze on hit effect
+Players wearing the bone helmet will no longer spawn the Creeping Fear, and are no longer able to be hit by shadow projectiles.
+Ice-Flingomatics now hold 20% more fuel, but lose a small amount of fuel every time they fling ice - Cheese prevention
+Moggles now act as sandstorm/snowstorm goggles
+The Morning Star will no longer break when out of fuel, and can be refueled with the new battery powered fuels. Loses its electricity when out of power.
+The Morning Star now drains power 50% faster
+The Morning Star now protects its user from lightning strikes
+Luxury / Gobbler Fans will now reduce Hayfever by a large amount
+The Air Conditioner is now a globally unlocked high tier science recipe
+Reduced Air Conditioner recipe from 3 > 2 Shroom Skin
+Reduced Spore Pack recipe from 2 > 1 Shroom Skin
+Reduced Hambat perish time from 10 days to 8 days, reduced minimum damage from 29.75 (50%) to 14.85 (25%), Hambat can now be eaten by certain mobs, like pigs, hounds, frogs, and spiders
+Increased the freeze amount from thrown Snowballs
+The Eyebrella now has reduced summer insulation
+
+[ CREATURE CHANGES ]
+
+Trapdoor Spiders have a brand new design!
+Spider Warriors, and Depth Dwellers will now counter attack when attacked
+The Toadstool now only drops Shroom Skins on death (Raised amount dropped to match health based drops)
+Bees, Mosquito's, and the new Scorpions will now reduce a players time until sneezing when attacking
+Mosquito's now take on a new look during spring
+Pigmen and Bunnymen refuse to murder their own races, but will still watch companions do so.
+Abominamoles now have a snowball belch attack
+The Ancient Guardian now knocks players back when attacking (helps prevent chain stomps/falling rocks)
+Pengull's will now only aggressively target players when they are in their ice puddle
+Clockworks are now immune to fire
+Clockwork Bishop no longer flees between attacks
+The Raid Boss Dragonfly will now fly away during summer, or if there are bosses nearby - Cheese prevention
+Frogs will now eat food on the ground
+Mactusks no longer have increased health
+Rats will now prioritize stealing equippable items.
+The Creeping Fear will now try to get closer to the player before attacking.
+The Creeping Fear will no longer spawn if bosses like the Deerclops are nearby.
+Catcoons do much more damage to rats
+Tuned Terror/Nightmare Beak lunge, feels much more fair and balanced
+Increase Batalisk health from 50 to 75
+Reduced the Wilting Dragonfly's damage by 15%
+The Wilting Dragonfly no longer knocks players back when attacking
+Tree Guards no longer recoil from attacks
+Krampi no longer have increased health
+Wobsters will no longer be baited by an empty line
+Birds now take half damage from Monster Morsels, and will heal 1 monster food damage very day
+
+[ FOOD CHANGES ]
+
+All changes to dishes took into account these different qualities priorities ranging from top to bottom:
+-[1] Amount of farmplot foods used in a single dish.
+-[2] Rarity of farmplot foods used in a dish.
+-[3] The stats restored by optimally eating their raw ingredients in Uncompromising Mode.
+-[4] The overall diversity of ingredients used in a dish.
+-[5] The similarity of a dish's ingredients to another may change the focus of a particular dish (For instance, salsa fresca focuses on Sanity to differentiate from Creamy Potato Puree which focuses on Hunger).
+
+----Rare
+Creamy Potato Puree hunger buffed from 37.5 Hunger to 100 Hunger. [1] [2] [3] [5]
+Salsa fresca Hunger reduced to 25 and Sanity increased to 50. [1] [2] [5]
+Stuffed Pepper Poppers Hunger increased to 50. [2] [3] [5]
+
+----Uncommon
+Pumpkin Cookies now restore 40 Hunger 33 Sanity and 15 Health. [3] [4]
+Stuffed Eggplant now restores 45 Hunger and 15 Health. [3]
+Asparagus Soup now restores 25 Hunger 30 Health and 20 Sanity. [3]
+
+----Common
+Fish Tacos now restore 62.5 Hunger 15 Health and 5 Sanity [4]
+Vegetable Stinger now restores 30 Hunger and 10 Health [4]
+
+You can no longer cook foods with more than 1 ice/twig, unless its recipe specifically requires you to do so
+Updated new Trouble Waters foods to match our previous crockpot recipe changes
+Butterfly Wings and Scorpion Carapaces now have an "insectoid" food value, which has a hard limit of 1 per crockpot dish
+
+[ CHARACTER CHANGES ]
+
+WALTER & WOBY: 
+
+Walter can now craft Firecracker Rounds out of nitre. Firecracker rounds will deal 17 damage on hit, and will explode 8 times, dealing 5 damage per explosion.
+Woby can now be killed, and targeted by a select few hyper aggressive mobs. She will respawn after half a day.
+Woby can now eat Monster Morsels
+Woby will run slightly further away from threats
+Walter has a lower minimum and maximum time till next sneeze after sneezing
+
+WORMWOOD:
+
+Wormwood now takes an additional -5 sanity from digging up plants, no more infinite sanity gain from sapling digging/planting, its now equal loss and gain
+New Wormwood craftable food: Honey Log Roll. Reduces hayfever for all characters, increases hunger, better stats for Wormwood and Woodie
+Wormwood's Bramble Husk armor will now periodically shoot out spikes when potentially dangerous mobs are nearby, lowered the spikes damage to compensate. The periodic spike shooting will reduce the items durability.
+Bramble Husk now has double its durability.
+Wormwood can be effected by Hayfever damagers, such as Pollen Mites, and Bees
+
+WARLY:
+
+Warly now gets bonus stats from eating unique foods. However, his reduced stats per repeat has been increased, and his food memory has gone up from 2 days to 3 days.
+
+Added new Warly specific crockpot dish: Zaspberry Parfait. Requires a Zaspberry (found off the new Shock Worm mob), and dairy. Gives a buff to the player that when they are attacked, nearby enemies will be shocked and stunned
+
+WILLOW:
+
+Willow will now instantly light things on fire during winter, ignoring the new winter smoldering system
+Willow's immolation explosion will no longer hit players and basic companions
+Willow's immolation explosion will no longer destroy structures
+
+WOLFGANG:
+
+Wolfgang now gets knockback resistance when mighty
+
+WICKERBOTTOM:
+
+Applied horticulture grows wormwood crops by 44%, and regular crops by 66%
+
+[ MISC TUNING / CHANGES ]
+
+Sleeping now halts hayfever
+Increased minimum and maximum next sneeze time after sneezing
+Hayfever overlay is a bit more green now
+Increased warning time when players are close to sneezing
+Snowstorms moving overlay is 10% more transparent now
+Acid Rain will increase the spoilage rate of wet items by an additional 30%
+Snowstorms will now start every 3~ days, and end after about half~ a day. Snowstorms cannot start 2 days before winter ends.
+Characters will now announce when a snowstorm is close to starting
+Increased snowpile spawn chance
+Picking snowpiles without a tool will now damage the player slightly
+Digging snowpiles with a shovel will sometimes yield snowballs
+Increased the minimum and maximum time between Toad Rain spawns (TOAD Rain, not Frog Rain)
+The Antlion will now cause ripples underneath a players boat when trying to spawn sinkholes
+Reintroduced Cave Overheating. 40% slower overheat time, only goes to the first tier of overheating damage
+Removed Larvae fissures from summer
+
+[ BUG / CRASH FIXES ]
+Added Map icons for certain new items
+Fixed some Action related crashes with mod compatibility
+Cooking Unagi no longer crashes the game
+Hayfever should now properly turn off if disabled in the configuration menu
+Updated new recipes to fit in with our other crockpot changes
+Multiple Deerclops should no longer spawn on the surface
+Fixed Trapdoor's readding duplicate components
+Fixed crash related to the Wilting Dragonfly losing its burning spit target
+Toadlings, Toads, and Frogs should now all get along
+Fixed many of the new sounds from being too loud, and heard too far away
+Birds now must digest food before being taken out of the cage or being fed more
+Surf N Turf now has a maximum limit of 1 Monster Meat
+Using looping emotes should no longer skip the sneeze animation
+Wortox now correctly shows his health nerf on the character selection screen
+The Ancient Guardian's boulder attack will now only target living players
+The Dread Eye's mini Shadow Eyes will now be more transparent based on sanity
+Reloading a world after killing the Bee Queen will no longer reset hayfever - Keep in mind you can still sneeze when getting hit by Bees, Mosquitos, Etc.
+Wormwood and Willow should no properly become flammable when reviving
+Added new map icons for various new items
+Monster Morsels no longer defy gravity when on a drying rack
+Fixed issue where rat burrows would duplicate when a world is loaded, and would disappear after duplicating if loaded again. Caused infinite rats.
+Snowstorms will now properly save and restart when restarting a server
+The Mother Goose will now drop jumbo drumsticks if Feast and Famine is enabled
+Hounds will no longer aggressively leave their mounds if they transform under a full moon
+Fixed issue when restarting a server at 0 sanity
+Removed monster meat drop from catcoons
+Dread Eye's now properly fade with sanity
+Monster Morsels will no longer defy gravity when being dried
