@@ -95,7 +95,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	
 	DESCRIBE.SKELETONMEAT = "This is a terrible idea."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
-	DESCRIBE.SWILSON = "Has He seen charlie?"
+	DESCRIBE.SWILSON = "Woah! That axe is real!"
 	DESCRIBE.VAMPIREBAT = "It might be older, but it looks as angry as the others!"
 					
 	--Swampyness

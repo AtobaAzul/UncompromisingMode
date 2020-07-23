@@ -58,9 +58,9 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	ANNOUNCE.ANNOUNCE_ROOTING = "Too tough, Wolfgang cannot break!"
 	ANNOUNCE.ANNOUNCE_SNOWSTORM = "Wolfgang fight wind, and storm too!"
 	ANNOUNCE.SHADOWTALKER = {
-        "I AM WEAK",
-        "I AM AFRAID",
-        "NOT STRONG ENOUGH",
+        "I AM WEAK.",
+        "I AM AFRAID.",
+        "NOT STRONG ENOUGH.",
     }
 	DESCRIBE.SAND = "When Wolfgang holds it it slips through his large, strong hands."
 	DESCRIBE.SANDHILL = "Tiny, crushable hill."
@@ -95,7 +95,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	
 	DESCRIBE.SKELETONMEAT = "Is... Person...?"
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
-	DESCRIBE.SWILSON = "Scary shadow smart man!"
+	DESCRIBE.SWILSON = "Friend, no! Is Wolfgang!"
 	DESCRIBE.VAMPIREBAT = "Is bigger flappy bad guy!"
 						
 	--Swampyness
@@ -111,7 +111,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
-	DESCRIBE.BUGZAPPER = "Small stick to hit small bug"
+	DESCRIBE.BUGZAPPER = "Small stick to hit small bug."
 	DESCRIBE.STUMPLING = "Is tiny wood child."
 	DESCRIBE.MOON_TEAR = "It is strong like Wolfgang, but sad like child."
 	DESCRIBE.SHADOW_TELEPORTER = "Test my might! I pry that gem out of tiny hand!"

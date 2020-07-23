@@ -71,7 +71,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.SHOCKWORM = "Don't touch it! It's a living electrical hazard!"
 	DESCRIBE.ZASPBERRY = "A whats berry?"
 	DESCRIBE.ICEBOOMERANG = "No Woby, don't fetch this one!"
-	DESCRIBE.VETERANSHRINE = "I know its a bad idea, but I want to investigate further!"
+	DESCRIBE.VETERANSHRINE = "I know it's a bad idea, but I want to investigate further!"
 	DESCRIBE.SNOWBALL_THROWABLE = "I think it would just crumble away if I tried to use my slingshot."
 	DESCRIBE.PLAGUEMASK = "Now I can be one with the birds!"
 	DESCRIBE.SPIDER_TRAPDOOR = "I told you!"
@@ -86,7 +86,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.SHROOM_SKIN_FRAGMENT = "I should stitch these together!"
 	DESCRIBE.AIR_CONDITIONER = "Are we sure inhaling mushrooms is a good idea?"
 	DESCRIBE.SPOREPACK = "Anything can be useful if you have the know how!"
-	DESCRIBE.SALTPACK = "These will take care of the snow piles, though I prefer to do things myself!"
+	DESCRIBE.SALTPACK = "This will take care of the snow piles, though I prefer to do things myself!"
 	
 	DESCRIBE.SCORPION = "Fun fact: You can suck the venom out of a bite wound! Not sure about scorpion stings though..."
 	DESCRIBE.SCORPIONCARAPACE = "Uhh, Woby, you can have this one."

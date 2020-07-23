@@ -95,7 +95,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	
 	DESCRIBE.SKELETONMEAT = "I'm gonna vomit..."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
-	DESCRIBE.SWILSON = "Why won't you go up in flames!?"
+	DESCRIBE.SWILSON = "W-Wilson?"
 	DESCRIBE.VAMPIREBAT = "Oh, you're creepy."
 				
 	--Swampyness

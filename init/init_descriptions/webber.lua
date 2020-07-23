@@ -95,7 +95,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	
 	DESCRIBE.SKELETONMEAT = "I haven't seen my own skin in... forever!"
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
-	DESCRIBE.SWILSON = "Mad scientist on the loose!"
+	DESCRIBE.SWILSON = "No, stop! It's us, Wilson!"
 	DESCRIBE.VAMPIREBAT = "Nice monster!"
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "Moon rocks would make a great new home for some little critters!"
