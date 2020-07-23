@@ -10,6 +10,30 @@ local function UpdateDamage(inst)
     end
 end
 
+local function onequip(inst, owner)
+    UpdateDamage(inst)
+    local skin_build = inst:GetSkinBuild()
+    if skin_build ~= nil then
+        owner:PushEvent("equipskinneditem", inst:GetSkinName())
+        owner.AnimState:OverrideItemSkinSymbol("swap_object", skin_build, "swap_ham_bat", inst.GUID, "swap_ham_bat")
+    else
+        owner.AnimState:OverrideSymbol("swap_object", "swap_ham_bat", "swap_ham_bat")
+    end
+    
+    owner.AnimState:Show("ARM_carry")
+    owner.AnimState:Hide("ARM_normal")
+end
+
+local function onunequip(inst, owner)
+    UpdateDamage(inst)
+    owner.AnimState:Hide("ARM_carry")
+    owner.AnimState:Show("ARM_normal")
+    local skin_build = inst:GetSkinBuild()
+    if skin_build ~= nil then
+        owner:PushEvent("unequipskinneditem", inst:GetSkinName())
+    end
+end
+
 env.AddPrefabPostInit("hambat", function(inst)
 	if not TheWorld.ismastersim then
 		return
@@ -27,4 +51,8 @@ env.AddPrefabPostInit("hambat", function(inst)
 		inst.components.weapon:SetOnAttack(UpdateDamage)
 	end
 	
+	if inst.components.equippable ~= nil then
+		inst.components.equippable:SetOnEquip(onequip)
+		inst.components.equippable:SetOnUnequip(onunequip)
+	end
 end)
