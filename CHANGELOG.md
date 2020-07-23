@@ -352,7 +352,7 @@
 
 * [x]  Ice Cream now regens 1 sanity per second for 100 seconds, similar to jellybeans (This means icecream restores 100 sanity!) (It does not have the initial 50 sanity).
 
-* [x] Mandrake soup prevents hayfever for a whole season.
+* [x]  Mandrake soup prevents hayfever for a whole season.
 
 --Farmplot-Based Crockpot Dish Buff section--
 
@@ -398,7 +398,11 @@
 
 * [x]  Bug based ingredients have an "insectiod" value! Aside from specialty dishes, using two insectiod ingredients can make wet goop! Currently the only two insectiod ingredients are butterfly wings and scorpion carapaces.
 
+* [x]  Monster morsels are added, they are typically not a good idea to use in the crockpot, but they do have some uses. Each form has a monster value 0.5 greater than monster meat.
 
+* [x]  As one final note, most typical crockpot recipes are actually hardly changed by the monster meat changes, but recipes like meatballs and pierogi that use only one meat are the most effected.
+
+* [x]  If you are confused by any recipes, Anomen put together some example recipes with monster meat here https://uncompromising-mode.fandom.com/wiki/Crock_Pot (Not that not every page on the wiki is up to date, the CHANGELOG.md is the most up to date compendium of info).
 
 --[ Vanilla Worldgen changes]--
 
