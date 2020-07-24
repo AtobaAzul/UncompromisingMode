@@ -184,3 +184,21 @@ Fixed issue when restarting a server at 0 sanity
 Removed monster meat drop from catcoons
 Dread Eye's now properly fade with sanity
 Monster Morsels will no longer defy gravity when being dried
+
+1.9.1
+
+[NEW]
+Added additional inspection quotes for the Ancient Guardian's boulders.
+Added new RNE.
+The Creeping Fear and Dread Eye no longer trigger spider webbing.
+Small Woby no longer triggers spider webbing.
+
+[TUNING]
+Changed seasonal RNE chance from 40% to 30% (Doesn't effect over all RNE chances).
+Increased minimum spawn time variance for Pollen Mite Dens by 1 day.
+Wormwood now heals 80% less health from the Air Conditioner (when fueled with Blue Mushrooms). This is a targeted change to prevent an abuse case with his living logs production, mushroom planters, and the Air Conditioner. (Thank you @Kakarlos for your report.)
+
+[FIXES]
+Fixed issue where the Hambat would only update its damage numbers after attacking. (Thank you @KoreanWaffles)
+Fixed issue where Pollen Mite Dens could be rescheduled to spawn outside of spring. (Thank you @Esai)
+Fixed (Attempted) issue where the Wilting Dragonfly would crash the game if it tries to teleport onto the ocean.  (Thank you @Kaze)
