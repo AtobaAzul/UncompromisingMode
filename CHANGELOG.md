@@ -624,7 +624,9 @@
 
 * [x] [GOODIES GALORE!] Air Conditioner added: New structure that over time will increase health, sanity, or prevent hayfever if slotted with blue, green, and red mushrooms respectively
 
-*[x]  [GOODIES GALORE!] New Item, Spore Pack, New backpack with 12 slots without slowness, but rots foods incredibly fast if it's inside
+* [x] [FEAR THE DARK] Wormwood gains 80% less healing from the Air Conditioners Blue Caps and Spores.
+
+* [x]  [GOODIES GALORE!] New Item, Spore Pack, New backpack with 12 slots without slowness, but rots foods incredibly fast if it's inside
 
 
 
