@@ -154,7 +154,7 @@ local function OnEntitySleep(inst)
 			local player_pos = PlayerPosition:GetPosition()
 				if player_pos then
 					local angle = PlayerPosition:GetAngleToPoint(init_pos)
-					local offset = FindWalkableOffset(player_pos, angle*DEGREES, 30, 10)'
+					local offset = FindWalkableOffset(player_pos, angle*DEGREES, 30, 10)
 					if offset ~= nil then
 						local pos = player_pos + offset
 						
