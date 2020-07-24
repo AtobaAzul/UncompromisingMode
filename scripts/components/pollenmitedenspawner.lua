@@ -254,19 +254,19 @@ function self:SpawnModeNever()
 end
 
 function self:SpawnModeHeavy()
-    _spawninterval = TUNING.TOTAL_DAY_TIME * 2
+    _spawninterval = TUNING.TOTAL_DAY_TIME-- * 2
     _spawnintervalvariance = TUNING.TOTAL_DAY_TIME + math.random(TUNING.TOTAL_DAY_TIME)-- * 1
     StartUpdating(true)
 end
 
 function self:SpawnModeMed()
-    _spawninterval = TUNING.TOTAL_DAY_TIME * 2
+    _spawninterval = TUNING.TOTAL_DAY_TIME-- * 4
     _spawnintervalvariance = TUNING.TOTAL_DAY_TIME + math.random(TUNING.TOTAL_DAY_TIME)-- * 1
     StartUpdating(true)
 end
 
 function self:SpawnModeLight()
-    _spawninterval = TUNING.TOTAL_DAY_TIME * 2
+    _spawninterval = TUNING.TOTAL_DAY_TIME-- * 10
     _spawnintervalvariance = TUNING.TOTAL_DAY_TIME + math.random(TUNING.TOTAL_DAY_TIME)-- * 2
     StartUpdating(true)
 end
