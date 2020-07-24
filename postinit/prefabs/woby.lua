@@ -21,6 +21,10 @@ env.AddPrefabPostInit("wobysmall", function(inst)
         inst.components.eater.strongstomach = true
     end
 	
+	if inst.components.locomotor ~= nil then
+		inst.components.locomotor:SetTriggersCreep(false)
+	end
+	
     inst:AddComponent("combat")
     inst.components.combat:SetKeepTargetFunction(ShouldKeepTarget)
 	
