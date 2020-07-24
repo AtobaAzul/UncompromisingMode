@@ -155,35 +155,37 @@ local function OnEntitySleep(inst)
 				if player_pos then
 					local angle = PlayerPosition:GetAngleToPoint(init_pos)
 					local offset = FindWalkableOffset(player_pos, angle*DEGREES, 30, 10)
-					if offset ~= nil then
-						local pos = player_pos + offset
-						
-						if pos and distsq(player_pos, init_pos) > 1600 then
-							--There's a crash if you teleport without the delay
-							if not inst.components.combat:TargetIs(PlayerPosition) then
-								inst.components.combat:SetTarget(nil)
-							end
-							inst:DoTaskInTime(.1, function() 
-								inst.Transform:SetPosition(pos:Get())
-							end)
-							
-							SetFlameOn(inst, false)
+				if offset ~= nil then
+					
+					local pos = player_pos + offset
+					
+					if pos and distsq(player_pos, init_pos) > 1600 then
+						--There's a crash if you teleport without the delay
+						if not inst.components.combat:TargetIs(PlayerPosition) then
+							inst.components.combat:SetTarget(nil)
 						end
-					else
-						local pos = player_pos
+						inst:DoTaskInTime(.1, function() 
+							inst.Transform:SetPosition(pos:Get())
+						end)
 						
-						if pos and distsq(player_pos, init_pos) > 1600 then
-							--There's a crash if you teleport without the delay
-							if not inst.components.combat:TargetIs(PlayerPosition) then
-								inst.components.combat:SetTarget(nil)
-							end
-							inst:DoTaskInTime(.1, function() 
-								inst.Transform:SetPosition(pos:Get())
-							end)
-							
-							SetFlameOn(inst, false)
-						end
+						SetFlameOn(inst, false)
 					end
+					
+				else
+					local offset = FindSwimmableOffset(player_pos, angle*DEGREES, 30, 10)
+					local pos = player_pos + offset
+						
+						if pos and distsq(player_pos, init_pos) > 1600 then
+							--There's a crash if you teleport without the delay
+							if not inst.components.combat:TargetIs(PlayerPosition) then
+								inst.components.combat:SetTarget(nil)
+							end
+							inst:DoTaskInTime(.1, function() 
+								inst.Transform:SetPosition(pos:Get())
+							end)
+							
+							SetFlameOn(inst, false)
+						end
 				end
 			end
 		end
