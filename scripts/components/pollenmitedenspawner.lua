@@ -42,7 +42,7 @@ local _scheduledtrailtasks = {}
 local _worldstate = TheWorld.state
 local _map = TheWorld.Map
 local _updating = false
-local _spawninterval = TUNING.TOTAL_DAY_TIME * 4
+local _spawninterval = TUNING.TOTAL_DAY_TIME * 2
 local _spawnintervalvariance = TUNING.TOTAL_DAY_TIME * 1
 
 --------------------------------------------------------------------------
@@ -254,19 +254,19 @@ function self:SpawnModeNever()
 end
 
 function self:SpawnModeHeavy()
-    _spawninterval = TUNING.TOTAL_DAY_TIME-- * 2
+    _spawninterval = TUNING.TOTAL_DAY_TIME * 2
     _spawnintervalvariance = TUNING.TOTAL_DAY_TIME + math.random(TUNING.TOTAL_DAY_TIME)-- * 1
     StartUpdating(true)
 end
 
 function self:SpawnModeMed()
-    _spawninterval = TUNING.TOTAL_DAY_TIME-- * 4
+    _spawninterval = TUNING.TOTAL_DAY_TIME * 2
     _spawnintervalvariance = TUNING.TOTAL_DAY_TIME + math.random(TUNING.TOTAL_DAY_TIME)-- * 1
     StartUpdating(true)
 end
 
 function self:SpawnModeLight()
-    _spawninterval = TUNING.TOTAL_DAY_TIME-- * 10
+    _spawninterval = TUNING.TOTAL_DAY_TIME * 2
     _spawnintervalvariance = TUNING.TOTAL_DAY_TIME + math.random(TUNING.TOTAL_DAY_TIME)-- * 2
     StartUpdating(true)
 end
