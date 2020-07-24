@@ -99,7 +99,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.ICEBOOMERANG = "It has a chilling bite to it."
 	
 	DESCRIBE.MINOTAUR_BOULDER = "Thats a nice boulder."
-	DESCRIBE.MINOTAUR_BOULDER_BIG = "Thats a nice BIG boulder."
+	DESCRIBE.MINOTAUR_BOULDER_BIG = "Science says it would hurt if you ran into it. Probably."
 	DESCRIBE.BUSHCRAB = "AH! How long was he down there?!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "Finally, a practical use for the moons transformative properties."

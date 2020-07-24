@@ -73,6 +73,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	 -- ...
 	DESCRIBE.ZASPBERRY = "I'm not one for wild berries, magical or not."
 	DESCRIBE.ICEBOOMERANG = "Magic is great, isn't it?"
+	DESCRIBE.MINOTAUR_BOULDER = "This place is in much worse shape than I thought."
+	DESCRIBE.MINOTAUR_BOULDER_BIG = "Maybe we can use this to our advantage?"
 	DESCRIBE.SNOWBALL_THROWABLE = "Not. The. Suit. What do you not get about this?"
 	DESCRIBE.VETERANSHRINE = "I already have fuel-related problems, what's another?"
 	DESCRIBE.RAT_TAIL = "Eugh, disgusting!"
