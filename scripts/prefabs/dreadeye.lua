@@ -290,6 +290,7 @@ local function fn()
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
     inst.components.locomotor.walkspeed = TUNING.DSTU.DREADEYE_SPEED
     --inst.components.locomotor.pathcaps = { allowocean = true }
+	inst.components.locomotor:SetTriggersCreep(false)
     inst.sounds = sounds
     inst:SetStateGraph("SGdreadeye")
 
