@@ -77,7 +77,11 @@ local function TryPuff(player, inst)
 		
 		if not player:IsInLimbo() then
 			if bluecaps > 0 then
-				player.components.health:DoDelta(bluecaps * 0.4)
+				if player:HasTag("plantkin") then
+					player.components.health:DoDelta(bluecaps * 0.4 * 0.8)
+				else
+					player.components.health:DoDelta(bluecaps * 0.4)
+				end
 			end
 			
 			if greencaps > 0 then
