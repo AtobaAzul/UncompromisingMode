@@ -120,3 +120,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
     DESCRIBE.SHADOW_CROWN = "Wearing this gives me a strange feeling of dread."
     DESCRIBE.RNEGHOST = DESCRIBE.GHOST
 	DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
+	DESCRIBE.LUREPLAGUE_RAT = "They're kinda cute when you get over the extra eyes."

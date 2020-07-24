@@ -121,3 +121,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.LICELOAF = "Upsettingly plain."
 	DESCRIBE.SUNGLASSES = "It's not quite my style."
 	DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
+	DESCRIBE.LUREPLAGUE_RAT = "This isn't right, eyeplants, on rats? Is this your doing Charlie?"

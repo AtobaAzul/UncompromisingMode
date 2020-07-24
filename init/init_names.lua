@@ -90,3 +90,4 @@ STRINGS = GLOBAL.STRINGS.NAMES
 	STRINGS.CALIFORNIAKING = "California King"
 	STRINGS.TRAPDOORGRASS = "Wide Grass"
 	SKINS.wormwood_shadow = "The Corrupted"
+	STRINGS.LUREPLAGUE_RAT = "Lureplague Rat"

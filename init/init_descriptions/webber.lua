@@ -119,3 +119,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.LICELOAF = "It doesn't taste like anything."
 	DESCRIBE.SUNGLASSES = "It kinda works if we shut most of our eyes."
 	DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
+	DESCRIBE.LUREPLAGUE_RAT = "Hey there buddy, nice eyes!"

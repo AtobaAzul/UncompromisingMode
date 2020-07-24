@@ -102,4 +102,5 @@ return {
 	"californiaking",
 	"trapdoorgrass",
 	"trapdoorspawner",
+	"lureplague_rat",
 }

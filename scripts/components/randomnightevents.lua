@@ -563,6 +563,24 @@ local function SpawnKrampus(player)
 	end)
 end
 
+
+local function SpawnLureplagueRat(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	player:DoTaskInTime(2 * math.random() * 0.3, function()
+		
+		local x1 = x + math.random(6, 10)
+		local z1 = z + math.random(6, 10)
+
+		local rat = SpawnPrefab("lureplague_rat")
+		if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+			rat.Transform:SetPosition(x1, y, z1)
+			rat.components.combat:SetTarget(player)
+		else
+			SpawnLureplagueRat(player)
+		end
+	end)
+end
+
 ---------------------------------------------------------------
 ----------------------------THUNDER----------------------------
 ---------------------------------------------------------------
@@ -1025,6 +1043,7 @@ AddWinterEvent(SpawnKrampus,.5)
 AddWinterEvent(SpawnWalrusHunt,.5)
 --Spring
 AddSpringEvent(SpawnThunderFar,1)
+AddSpringEvent(SpawnLureplagueRat,0.1)
 --Summer
 AddSummerEvent(SpawnWalrusHunt,1)
 --Full Moon
