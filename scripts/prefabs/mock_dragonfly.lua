@@ -154,19 +154,34 @@ local function OnEntitySleep(inst)
 			local player_pos = PlayerPosition:GetPosition()
 				if player_pos then
 					local angle = PlayerPosition:GetAngleToPoint(init_pos)
-					local offset = FindWalkableOffset(player_pos, angle*DEGREES, 30, 10)
-					local pos = player_pos + offset
-					
-					if pos and distsq(player_pos, init_pos) > 1600 then
-						--There's a crash if you teleport without the delay
-						if not inst.components.combat:TargetIs(PlayerPosition) then
-							inst.components.combat:SetTarget(nil)
-						end
-						inst:DoTaskInTime(.1, function() 
-							inst.Transform:SetPosition(pos:Get())
-						end)
+					local offset = FindWalkableOffset(player_pos, angle*DEGREES, 30, 10)'
+					if offset ~= nil then
+						local pos = player_pos + offset
 						
-						SetFlameOn(inst, false)
+						if pos and distsq(player_pos, init_pos) > 1600 then
+							--There's a crash if you teleport without the delay
+							if not inst.components.combat:TargetIs(PlayerPosition) then
+								inst.components.combat:SetTarget(nil)
+							end
+							inst:DoTaskInTime(.1, function() 
+								inst.Transform:SetPosition(pos:Get())
+							end)
+							
+							SetFlameOn(inst, false)
+					else
+						local pos = player_pos
+						
+						if pos and distsq(player_pos, init_pos) > 1600 then
+							--There's a crash if you teleport without the delay
+							if not inst.components.combat:TargetIs(PlayerPosition) then
+								inst.components.combat:SetTarget(nil)
+							end
+							inst:DoTaskInTime(.1, function() 
+								inst.Transform:SetPosition(pos:Get())
+							end)
+							
+							SetFlameOn(inst, false)
+					end
 				end
 			end
 		end
