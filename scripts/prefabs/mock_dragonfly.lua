@@ -168,6 +168,7 @@ local function OnEntitySleep(inst)
 							end)
 							
 							SetFlameOn(inst, false)
+						end
 					else
 						local pos = player_pos
 						
@@ -181,6 +182,7 @@ local function OnEntitySleep(inst)
 							end)
 							
 							SetFlameOn(inst, false)
+						end
 					end
 				end
 			end
