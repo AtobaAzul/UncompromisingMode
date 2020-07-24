@@ -185,7 +185,7 @@ Removed monster meat drop from catcoons
 Dread Eye's now properly fade with sanity
 Monster Morsels will no longer defy gravity when being dried
 
-1.9.1
+FEAR THE DARK! Ver 1.9.2 (24/07/2020)
 
 [NEW]
 Added additional inspection quotes for the Ancient Guardian's boulders.
@@ -201,4 +201,6 @@ Wormwood now heals 80% less health from the Air Conditioner (when fueled with Bl
 [FIXES]
 Fixed issue where the Hambat would only update its damage numbers after attacking. (Thank you @KoreanWaffles)
 Fixed issue where Pollen Mite Dens could be rescheduled to spawn outside of spring. (Thank you @Esai)
-Fixed (Attempted) issue where the Wilting Dragonfly would crash the game if it tries to teleport onto the ocean.  (Thank you @Kaze)
+Fixed (Attempted) issue where the Wilting Dragonfly would crash the game if it tries to teleport onto the ocean. (Thank you @Kaze)
+The Wilting Dragonfly will now spit on boats.
+Unlike 1.9.1 it doesn't insta crash the game. Hopefully.
