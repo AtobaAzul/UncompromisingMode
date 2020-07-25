@@ -12,7 +12,7 @@ env.AddComponentPostInit("propagator", function(self)
 				local pos = self.inst:GetPosition()
 				local prop_range = self.propagaterange * TUNING.DSTU.WINTER_FIRE_MOD
 				local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, prop_range, nil, { "INLIMBO" })
-				if #ents > 0 then
+				if ents ~= nil and #ents > 0 then
 					local dmg_range = self.damagerange * TUNING.DSTU.WINTER_FIRE_MOD
 					local dmg_range_sq = dmg_range * dmg_range
 					local prop_range_sq = prop_range * prop_range

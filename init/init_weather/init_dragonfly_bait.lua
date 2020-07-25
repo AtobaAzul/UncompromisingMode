@@ -35,6 +35,8 @@ local DRAGONFLYBAIT =
 	"siestahut",
 	"air_conditioner",
 	"boat",
+	"mast",
+	"mast_malbatross",
 }
 
 local function AddDragonflyBait(inst)
