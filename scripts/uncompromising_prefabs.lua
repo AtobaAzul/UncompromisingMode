@@ -104,4 +104,5 @@ return {
 	"trapdoorspawner",
 	"lureplague_rat",
 	"wicker_tentacle",
+	"snapperturtle",
 }
