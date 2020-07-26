@@ -22,7 +22,7 @@ return {
 	--"sand",
 	"snowgoggles",
 	"leechswarm", --buggy atm
-	"laitleech",
+	--"laitleech", Causes bug if not commmented out
 	"shockworm",
 	"zaspberry",
 	"snowmong",
