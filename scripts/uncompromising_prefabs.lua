@@ -103,4 +103,5 @@ return {
 	"trapdoorgrass",
 	"trapdoorspawner",
 	"lureplague_rat",
+	"wicker_tentacle",
 }

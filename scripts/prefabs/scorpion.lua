@@ -110,7 +110,7 @@ end
 
 local function OnAttacked(inst, data)
     inst.components.combat:SetTarget(data.attacker)
-    inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST, function(dude) return dude:HasTag("scorpion") and not dude.components.health:IsDead() end, 5)
+    --inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST, function(dude) return dude:HasTag("scorpion") and not dude.components.health:IsDead() end, 5)
 end
 
 local function StartNight(inst)
