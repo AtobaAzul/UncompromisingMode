@@ -1284,7 +1284,7 @@ local function CheckPlayers()
 	local playerchancescaling = TUNING.DSTU.RNE_CHANCE - (#playerlist * 0.1)
 	print(playerchancescaling)
 	
-	if TheWorld.state.cycles >= 5 and math.random() >= playerchancescaling or (TheWorld.state.isfullmoon and math.random() >= 0.5) or (TheWorld.state.isnewmoon and math.random() >= 0.75) then
+	if TheWorld.state.cycles >= 5 and math.random() >= playerchancescaling or (TheWorld.state.cycles >= 5 and TheWorld.state.isfullmoon and math.random() >= 0.5) or (TheWorld.state.cycles >= 5 and TheWorld.state.isnewmoon and math.random() >= 0.75) then
 		
 		--for i, 1 in ipairs(playerlist) do  --try a base RNE
 		if player ~= nil then
