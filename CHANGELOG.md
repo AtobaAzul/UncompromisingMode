@@ -572,7 +572,7 @@
 
 --[Scorpions]--
 
-* [x] [FEAR THE DARK] New mob: Scoprion, digs its way up through the desert turf during the day, nonpoisonous, but can make you drowsy. Will burrow back in during the afternoon. Does not appear in winter.
+* [x] [FEAR THE DARK] New mob: Scoprion, digs its way up through the desert turf during the day (if you remove the turf they stop spawning), nonpoisonous, but can make you drowsy. Will burrow back in during the afternoon. Does not appear in winter.
 
 * [x] [FEAR THE DARK] New food: Scorpion carapace, counts as a whole monster meat, can be used in hard shell tacos, counts as a bug based ingredient.
 
