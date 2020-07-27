@@ -62,7 +62,12 @@ local THREAT_ONEOF_TAGS = {'character', 'animal'}
 local function GetNearbyThreatFn(inst)
     return FindEntity(inst, START_FACE_DIST, nil, nil, THREAT_CANT_TAGS, THREAT_ONEOF_TAGS)
 end
-
+local function GoHomeAction(inst)
+    if inst.components.homeseeker and 
+       inst.components.homeseeker:HasHome() then 
+        return BufferedAction(inst, inst.components.homeseeker.home, ACTIONS.GOHOME, nil, nil, nil, 0.2)
+    end
+end
 
 local function DefendHomeAction(inst)
     if inst.components.homeseeker and 
@@ -81,7 +86,7 @@ function SnapperturtleBrain:OnStart()
                     WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
                     WhileNode(function() return GetLeader(self.inst) == nil end, "NoLeader", AttackWall(self.inst)),
 
-					ChaseAndAttack(self.inst, 100),
+					ChaseAndAttack(self.inst, 10),
 
                     --Leash(self.inst, GetNoLeaderLeashPos, HOUSE_MAX_DIST, HOUSE_RETURN_DIST),
 
