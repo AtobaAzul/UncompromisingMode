@@ -25,20 +25,21 @@ local function onregen(inst)
 --print("anothertry")
 --[[
 	if inst.Transform:GetWorldPosition() ~= nil then
-		local x1, y1, z1 = inst.Transform:GetWorldPosition()
 		local ents2 = TheSim:FindEntities(x1, y1, z1, 8, { "fire" })
 	end--]]
 
 	--if inst ~= nil then
+		local my_x, my_y, my_z = inst.Transform:GetWorldPosition()
+		
 		if TheWorld.state.iswinter then--or ents2 ~= nil and #ents2 < 0 then
 			if inst.components.workable.workleft < 3 then
 				SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
 				inst.components.workable:SetWorkLeft(inst.components.workable.workleft+1)
 				inst.components.pickable.cycles_left = inst.components.pickable.cycles_left + 1
 				startregen(inst)
-			elseif inst.components.workable.workleft == 3 and math.random() <= 0.25 then
+			elseif inst.components.workable.workleft == 3 and math.random() <= 0.25 and not TheWorld.Map:GetPlatformAtPoint(my_x, my_z) then
 				local x1, y1, z1 = inst.Transform:GetWorldPosition()
-				local ents2 = TheSim:FindEntities(x1, y1, z1, 40, { "player" })
+				local ents2 = TheSim:FindEntities(x1, y1, z1, 45, { "player" })
 				if #ents2 > 0 then
 					print("Snowball Fight!")
 					local snowattack = SpawnPrefab("snowmong")
@@ -47,6 +48,8 @@ local function onregen(inst)
 					snowattack.sg:GoToState("enter")
 					inst:DoTaskInTime(0.1, SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition()))
 					inst:DoTaskInTime(0.2, inst:Remove())
+				else
+					startregen(inst)
 				end
 			else
 				startregen(inst)
