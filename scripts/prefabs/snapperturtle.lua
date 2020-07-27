@@ -105,14 +105,15 @@ end
 local function RetargetFn(inst)
 
     local defend_dist = TUNING.MERM_DEFEND_DIST
-    local defenseTarget = inst
+	local defenseTarget = false
     local home = inst.components.homeseeker and inst.components.homeseeker.home
 
     if home and inst:GetDistanceSqToInst(home) < defend_dist * defend_dist then
-        defenseTarget = home
+    defenseTarget = home
     end
-
-    return FindEntity(defenseTarget or inst, SpringCombatMod(TUNING.MERM_TARGET_DIST), FindInvaderFn)
+	if not defenseTarget == false then
+	return FindEntity(defenseTarget, SpringCombatMod(TUNING.MERM_TARGET_DIST), FindInvaderFn)
+	end
 end
 
 
