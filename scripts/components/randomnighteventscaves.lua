@@ -1285,6 +1285,7 @@ local function CheckPlayers()
 	end
 	local player = playerlist[math.random(#playerlist)]
 	local numStructures = 0
+	local numStructures2 = 0
 	
 	local playerchancescaling = TUNING.DSTU.RNE_CHANCE - (#playerlist * 0.1)
 	print(playerchancescaling)
