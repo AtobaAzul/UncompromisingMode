@@ -51,7 +51,7 @@ end
 
 local function onpicked(inst, picker)
     inst.thief = picker
-    inst.AnimState:PlayAnimation("nest")
+    inst.AnimState:PlayAnimation("dug")
     inst.components.childspawner.noregen = true
     if inst.components.childspawner and picker then
         for k,v in pairs(inst.components.childspawner.childrenoutside) do
@@ -64,12 +64,12 @@ local function onpicked(inst, picker)
 end
 
 local function onmakeempty(inst)
-    inst.AnimState:PlayAnimation("nest")
+    inst.AnimState:PlayAnimation("dug")
     inst.components.childspawner.noregen = true
 end
 
 local function onregrow(inst)
-    inst.AnimState:PlayAnimation("eggnest")
+    inst.AnimState:PlayAnimation("gravedirt")
     inst.components.childspawner.noregen = false
     StopNesting(inst)
     inst.thief = nil
@@ -147,10 +147,10 @@ local function fn()
 
     inst.MiniMapEntity:SetIcon("tallbirdnest.png")
 
-    inst.AnimState:SetBuild("tallbird_egg")
-    inst.AnimState:SetBank("egg")
-    inst.AnimState:PlayAnimation("eggnest", false)
-
+    inst.AnimState:SetBank("gravestone")
+    inst.AnimState:SetBuild("gravestones")
+    inst.AnimState:PlayAnimation("gravedirt", false)
+	
     inst:AddTag("antlion_sinkhole_blocker")
 
     inst.entity:SetPristine()
