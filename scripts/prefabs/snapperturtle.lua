@@ -72,7 +72,8 @@ local function OnAttacked(inst, data)
     inst.components.combat:SetTarget(data.attacker)
     inst.components.combat:ShareTarget(data.attacker, SHARE_TARGET_DIST,
         function(dude)
-            return not (dude.components.health ~= nil and dude.components.health:IsDead() and dude:HasTag("snappingturtle"))
+            return not (dude.components.health ~= nil and dude.components.health:IsDead())
+				and dude:HasTag("snappingturtle")
                 and data.attacker ~= (dude.components.follower ~= nil and dude.components.follower.leader or nil)
         end, 5)
 end
@@ -96,8 +97,23 @@ local function OnSpawnedFromHaunt(inst)
     end
 end
 
+local function FindInvaderFn(guy, inst)
+    return (guy:HasTag("character") and not (guy:HasTag("merm")))
+end
 
 
+local function RetargetFn(inst)
+
+    local defend_dist = TUNING.MERM_DEFEND_DIST
+    local defenseTarget = inst
+    local home = inst.components.homeseeker and inst.components.homeseeker.home
+
+    if home and inst:GetDistanceSqToInst(home) < defend_dist * defend_dist then
+        defenseTarget = home
+    end
+
+    return FindEntity(defenseTarget or inst, SpringCombatMod(TUNING.MERM_TARGET_DIST), FindInvaderFn)
+end
 
 
 
@@ -143,7 +159,8 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
     inst.sounds = sounds
 
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-    inst.components.locomotor.runspeed = TUNING.HOUND_SPEED/2
+    inst.components.locomotor.runspeed = TUNING.HOUND_SPEED/3
+	inst.components.locomotor.walkspeed = TUNING.HOUND_SPEED/6
 
     inst:SetStateGraph("SGsnapperturtle")
 
@@ -182,13 +199,14 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
     inst:AddComponent("entitytracker")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(TUNING.HOUND_HEALTH)
+    inst.components.health:SetMaxHealth(400)
 
     inst:AddComponent("combat")
-    inst.components.combat:SetDefaultDamage(TUNING.HOUND_DAMAGE)
+    inst.components.combat:SetDefaultDamage(40)
     inst.components.combat:SetAttackPeriod(TUNING.HOUND_ATTACK_PERIOD)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
     inst.components.combat:SetHurtSound(inst.sounds.hurt)
+	inst.components.combat:SetRetargetFunction(1, RetargetFn)
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetChanceLootTable("snapperturtle")
@@ -206,7 +224,8 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
     inst.components.sleeper:SetWakeTest(ShouldWakeUp)
     inst:ListenForEvent("newcombattarget", OnNewTarget)
 
-
+	inst:AddComponent("knownlocations")
+	
     MakeHauntablePanic(inst)
 
     inst:ListenForEvent("attacked", OnAttacked)

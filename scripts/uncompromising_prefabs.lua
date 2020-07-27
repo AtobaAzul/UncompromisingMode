@@ -105,4 +105,5 @@ return {
 	"lureplague_rat",
 	"wicker_tentacle",
 	"snapperturtle",
+	"snapperturtlenest",
 }

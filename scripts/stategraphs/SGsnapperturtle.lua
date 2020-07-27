@@ -12,7 +12,7 @@ local events =
     EventHandler("doattack", function(inst, data) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then inst.sg:GoToState("attack", data.target) end end),
     CommonHandlers.OnSleep(),
     CommonHandlers.OnHop(),
-    CommonHandlers.OnLocomote(true, false),
+    CommonHandlers.OnLocomote(true, true),
     CommonHandlers.OnFreeze(),
 }
 
@@ -220,5 +220,7 @@ CommonStates.AddRunStates(states,
     },
 })
 CommonStates.AddFrozenStates(states)
+
+CommonStates.AddWalkStates(states, nil, nil, nil, true)
 
 return StateGraph("hound", states, events, "taunt", actionhandlers)

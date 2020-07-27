@@ -24,8 +24,7 @@ local LEASH_MAX_DIST = 40
 
 local HOUSE_MAX_DIST = 40
 local HOUSE_RETURN_DIST = 50
-
-local SIT_BOY_DIST = 10
+local MAX_WANDER_DIST = 100
 
 local function EatFoodAction(inst)
     local target = FindEntity(inst, SEE_DIST, function(item) return inst.components.eater:CanEat(item) and item:IsOnPassablePoint(true) end)
@@ -57,11 +56,20 @@ end
 local function ShouldStandStill(inst)
     return inst:HasTag("pet_hound") and not TheWorld.state.isday and not GetLeader(inst) and not inst.components.combat:HasTarget() and inst:IsNear(GetHome(inst), SIT_BOY_DIST)
 end
+local START_FACE_DIST = 6
+local THREAT_CANT_TAGS = {'tallbird', 'notarget'}
+local THREAT_ONEOF_TAGS = {'character', 'animal'}
+local function GetNearbyThreatFn(inst)
+    return FindEntity(inst, START_FACE_DIST, nil, nil, THREAT_CANT_TAGS, THREAT_ONEOF_TAGS)
+end
 
 
-
-
-
+local function DefendHomeAction(inst)
+    if inst.components.homeseeker and 
+       inst.components.homeseeker:HasHome() then 
+        return BufferedAction(inst, inst.components.homeseeker.home, ACTIONS.WALKTO, nil, nil, nil, 0.2)
+    end
+end
 
 
 function SnapperturtleBrain:OnStart()
@@ -79,11 +87,18 @@ function SnapperturtleBrain:OnStart()
 
                     DoAction(self.inst, EatFoodAction, "eat food", true),
                     FaceEntity(self.inst, GetLeader, GetLeader),
-
-                    StandStill(self.inst, ShouldStandStill),
-
+					
+					WhileNode(function() return self.inst.components.homeseeker and self.inst.components.homeseeker:HasHome() and GetNearbyThreatFn(self.inst.components.homeseeker.home) end, "ThreatNearNest",
+					DoAction(self.inst, function() return DefendHomeAction(self.inst) end, "GoHome", true)
+					),
+					
+					WhileNode(function() return not TheWorld.state.isday end, "IsNight",
+					
+					DoAction(self.inst, function() return GoHomeAction(self.inst) end, "GoHome", true)
+					),
+                  
                     --WhileNode(function() return GetHome(self.inst) end, "HasHome", Wander(self.inst, GetHomePos, 8)),
-                    Wander(self.inst, GetWanderPoint, 20),
+                    Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST),
                 }, .25)
             ),
         }, .25 )
