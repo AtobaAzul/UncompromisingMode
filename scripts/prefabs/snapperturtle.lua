@@ -120,7 +120,7 @@ end
 
 
 
-local function fncommon(bank, build, morphlist, custombrain, tag, data)
+local function fncommon(n, build, morphlist, custombrain, tag, data)
 	data = data or {}
 
     local inst = CreateEntity()
@@ -214,7 +214,7 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
 
     inst:AddComponent("inspectable")
     inst:AddComponent("eater")
-    inst.components.eater:SetDiet({ FOODTYPE.MEAT }, { FOODTYPE.MEAT })
+    inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
     inst.components.eater:SetCanEatHorrible()
     inst.components.eater.strongstomach = true -- can eat monster meat!
 
@@ -236,7 +236,7 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
 end
 
 local function fndefault()
-    local inst = fncommon("hound", "hound_ocean", nil, nil, nil, {amphibious = true, nil})
+    local inst = fncommon(nil, nil, nil, nil, nil, {amphibious = true, nil})
 
     if not TheWorld.ismastersim then
         return inst
