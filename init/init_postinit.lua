@@ -110,6 +110,7 @@ local stategraph_post = {
 	"wobysmall",
 	"pigbunny",
 	--"shadowcreature",
+	"Beefalo",
 }
 
 local class_post = {
