@@ -34,18 +34,30 @@ local function OnIgniteFn(inst)
         end
     end
 	
+
+	inst.proptask = nil
 	
-	MakeSmallPropagator(inst)
-	
+	if inst.proptask == nil then
+		inst.proptask = inst:DoTaskInTime(30, function(inst) if not inst.components.burnable:IsBurning() then MakeSmallPropagator(inst) end end)
+	end
+
 end
 
 local function OnRespawnedFromGhost2(inst)
-	inst:DoTaskInTime(5, function(inst) MakeSmallPropagator(inst) end)
+	inst.proptask = nil
+	
+	if inst.proptask == nil then
+		inst.proptask = inst:DoTaskInTime(30, function(inst) if not inst.components.burnable:IsBurning() then MakeSmallPropagator(inst) end end)
+	end
 end
 
 local function OnBurnt(inst)
 	--will this stop her from losing her burning effect?
-	inst:DoTaskInTime(5, function(inst) MakeSmallPropagator(inst) end)
+	inst.proptask = nil
+	
+	if inst.proptask == nil then
+		inst.proptask = inst:DoTaskInTime(30, function(inst) if not inst.components.burnable:IsBurning() then MakeSmallPropagator(inst) end end)
+	end
 end
 
 env.AddPrefabPostInit("willow", function(inst)
@@ -53,6 +65,8 @@ env.AddPrefabPostInit("willow", function(inst)
 		return
 	end
 
+	inst.proptask = nil
+	
 	if inst.components.burnable ~= nil then
 		inst.components.burnable:SetBurnTime(TUNING.WORMWOOD_BURN_TIME * 2)
 		MakeSmallPropagator(inst)

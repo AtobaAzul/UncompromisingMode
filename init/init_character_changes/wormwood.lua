@@ -5,7 +5,13 @@ local function DefaultIgniteFn(inst)
     if inst.components.burnable ~= nil then
         inst.components.burnable:StartWildfire()
     end
-	MakeSmallPropagator(inst)
+	
+	inst.proptask = nil
+	
+	if inst.proptask == nil then
+		inst.proptask = inst:DoTaskInTime(30, function(inst) if not inst.components.burnable:IsBurning() then MakeSmallPropagator(inst) end end)
+	end
+	
 end
 
 local WATCH_WORLD_PLANTS_DIST_SQ = 20 * 20
@@ -45,7 +51,11 @@ end
 
 local function OnRespawnedFromGhost2(inst)
     WatchWorldPlants2(inst)
-	inst:DoTaskInTime(5, function(inst) MakeSmallPropagator(inst) end)
+	inst.proptask = nil
+	
+	if inst.proptask == nil then
+		inst.proptask = inst:DoTaskInTime(30, function(inst) if not inst.components.burnable:IsBurning() then MakeSmallPropagator(inst) end end)
+	end
 end
 
 local function OnBecameGhost2(inst)
@@ -54,7 +64,11 @@ end
 
 local function OnBurnt(inst)
 	--Overriding the OnBurnt function to prevent propegator from sometimes removing, hopefully.
-	inst:DoTaskInTime(5, function(inst) MakeSmallPropagator(inst) end)
+	inst.proptask = nil
+	
+	if inst.proptask == nil then
+		inst.proptask = inst:DoTaskInTime(30, function(inst) if not inst.components.burnable:IsBurning() then MakeSmallPropagator(inst) end end)
+	end
 end
 
 env.AddPrefabPostInit("wormwood", function(inst)
@@ -62,6 +76,8 @@ env.AddPrefabPostInit("wormwood", function(inst)
 		return
 	end
 
+	inst.proptask = nil
+	
 	if inst.components.burnable ~= nil then
 		MakeSmallPropagator(inst)
 		inst.components.burnable:SetOnBurntFn(OnBurnt)
