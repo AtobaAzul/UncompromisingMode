@@ -106,4 +106,5 @@ return {
 	"wicker_tentacle",
 	"snapperturtle",
 	"snapperturtlenest",
+	"cursed_antler",
 }
