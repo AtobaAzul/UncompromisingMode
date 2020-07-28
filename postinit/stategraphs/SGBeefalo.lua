@@ -3,7 +3,18 @@ GLOBAL.setfenv(1, GLOBAL)
 
 env.AddStategraphPostInit("beefalo", function(inst)
 local events={
-	
+EventHandler("doattack", function(inst)
+                                local nstate = "attack"
+                                if inst.sg:HasStateTag("charging") then
+                                    nstate = "chargeattack"
+                                end
+                                if inst.components.health and not inst.components.health:IsDead()
+                                   and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
+                                    inst.sg:GoToState(nstate)
+                                end
+                            end),
+							    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("charging") then inst.sg:GoToState("hit") end end),
+
 	}
 
 
@@ -19,6 +30,11 @@ local states = {
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("atk_pre")
             inst.AnimState:PushAnimation("atk", false)
+			if inst:HasTag("chargespeed") then
+			inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT
+			inst:RemoveTag("chargespeed")
+			end
+			
         end,
 
         timeline=
@@ -29,7 +45,7 @@ local states = {
         events=
         {
             EventHandler("animqueueover", function(inst) 
-			if math.random() < 0.66 then
+			if math.random() < 0.33 then
 				inst.sg:GoToState("charge_start")
 				else
 				inst.sg:GoToState("idle")
@@ -39,7 +55,7 @@ local states = {
     },
 	
     State{  name = "charge_start",
-            tags = {"moving", "running", "busy", "atk_pre", "canrotate"},
+            tags = {"moving", "running", "charging", "busy", "atk_pre", "canrotate"},
             
             onenter = function(inst)
                 -- inst.components.locomotor:RunForward()
@@ -47,11 +63,16 @@ local states = {
                 --inst.SoundEmitter:PlaySound(inst.soundpath .. "pawground")
                 --inst.AnimState:PlayAnimation("atk_pre")
                 inst.AnimState:PlayAnimation("mating_taunt1")
-				inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT--*4
-                inst.sg:SetTimeout(1)
+				inst.SoundEmitter:PlaySound(inst.sounds.yell)
+				inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT*1.75
+				inst:AddTag("chargespeed")
+                inst.sg:SetTimeout(inst.AnimState:GetCurrentAnimationLength())
             end,
             
             ontimeout= function(inst)
+				if inst.components.combat ~= nil then
+				inst.components.combat:ResetCooldown()
+				end
                 inst.sg:GoToState("charge")
                 inst:PushEvent("attackstart" )
             end,
@@ -78,11 +99,13 @@ local states = {
         },
 
     State{  name = "charge",
-            tags = {"moving", "running"},
+            tags = {"moving", "charging", "running"},
             
             onenter = function(inst) 
                 inst.components.locomotor:RunForward()
-                
+                if inst.components.combat.target and inst.components.combat.target:IsValid() then
+                inst:ForceFacePoint(inst.components.combat.target:GetPosition() )
+				end
                 if not inst.AnimState:IsCurrentAnimation("run_loop") then
                     inst.AnimState:PlayAnimation("run_loop", true)
                 end
@@ -95,10 +118,24 @@ local states = {
                 TimeEvent(5*FRAMES, function(inst)
                                         SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
                                     end ),
+				TimeEvent(30*FRAMES, function(inst)
+                    local MAXDIST = 5 
+
+                    local distance = inst:GetDistanceSqToInst(inst.components.combat.target )
+                    --print(distance)
+                    if distance > MAXDIST then
+                        inst.sg:GoToState("idle") 
+						if inst:HasTag("chargespeed") then
+						inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT
+						inst:RemoveTag("chargespeed")
+						end
+                    end
+									end ),
             },
             
             {   
-                EventHandler("animover", function(inst) inst.sg:GoToState("charge") end ),        
+                EventHandler("animover", function(inst) 
+				inst.sg:GoToState("charge") end ),        
             },
         },
     
@@ -108,14 +145,19 @@ local states = {
             onenter = function(inst) 
                 --inst.SoundEmitter:KillSound("charge")
                 inst.components.locomotor:Stop()
-                inst.AnimState:PlayAnimation("run_pst")
+                --inst.AnimState:PlayAnimation("run_pst")
 		        --inst.SoundEmitter:PlaySound(inst.effortsound)
-				inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT
+				if inst:HasTag("chargespeed") then
+					inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT
+					inst:RemoveTag("chargespeed")
+				end
+				
+				inst.sg:GoToState("attack")
             end,
             
             events=
             {   
-                EventHandler("animover", function(inst) inst.sg:GoToState("attack") end ),        
+                --EventHandler("animover", function(inst) inst.sg:GoToState("attack") end ),        
             },
         },    
 
@@ -127,8 +169,11 @@ local states = {
                 inst.components.combat:StartAttack()
                 inst.components.locomotor:StopMoving()
 		        --inst.SoundEmitter:PlaySound(inst.effortsound)
-                --inst.AnimState:PlayAnimation("run_pst")
-				inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT
+                inst.AnimState:PlayAnimation("atk")
+				if inst:HasTag("chargespeed") then
+					inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT
+					inst:RemoveTag("chargespeed")
+				end
             end,
             
             timeline =
@@ -140,7 +185,7 @@ local states = {
             
             events =
             {
-                EventHandler("animqueueover", function(inst) inst.sg:GoToState("attack") end),
+                EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
             },
         },
 }
