@@ -138,6 +138,8 @@ TUNING.DSTU =
 
     --Weapon slip increase
     SLIPCHANCE_INCREASE_X = 3,
+	
+	NIGHTSTICK_FUEL = 240,
 
     ----------------------------------------------------------------------------
     --Character changes

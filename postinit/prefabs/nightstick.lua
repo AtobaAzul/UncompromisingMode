@@ -157,7 +157,10 @@ env.AddPrefabPostInit("nightstick", function(inst)
 	
 	if inst.components.fueled ~= nil then
 		inst.components.fueled:SetSectionCallback(onfuelchange)
-		inst.components.fueled:InitializeFuelLevel(TUNING.NIGHTSTICK_FUEL / 1.5)
+		--inst.components.fueled:InitializeFuelLevel(TUNING.NIGHTSTICK_FUEL / 1.5)
+		inst.components.fueled:InitializeFuelLevel(TUNING.LANTERN_LIGHTTIME / 1.25)
+		--inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION / 1.5, TUNING.TURNON_FULL_FUELED_CONSUMPTION / 1.5)
+
 		inst.components.fueled:SetDepletedFn(nofuel)
 		inst.components.fueled:SetTakeFuelFn(ontakefuel)
 		inst.components.fueled.fueltype = FUELTYPE.BATTERYPOWER

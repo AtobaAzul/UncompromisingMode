@@ -8,6 +8,7 @@ local component_post = {
 	--"moisture",
 	"weapon",
 	--"hunter",
+	"kramped",
 }
 
 local prefab_post = {
