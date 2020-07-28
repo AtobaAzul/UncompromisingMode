@@ -1028,7 +1028,7 @@ AddCaveEvent(SpawnBats,.5)
 AddCaveEvent(SpawnFissures,.2)
 AddCaveEvent(SpawnDroppers,.6)
 AddCaveEvent(SpawnShadowTalker,.4)
-AddCaveEvent(SpawnPhonograph,.1)
+--AddCaveEvent(SpawnPhonograph,.1)
 AddCaveEvent(SpawnLightFlowersNFerns,.3)
 --Secondary Cave
 AddSecondaryCaveEvent(SpawnBats,.5)
