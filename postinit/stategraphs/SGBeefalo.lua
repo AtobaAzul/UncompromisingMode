@@ -4,6 +4,7 @@ GLOBAL.setfenv(1, GLOBAL)
 env.AddStategraphPostInit("beefalo", function(inst)
 local events={
 EventHandler("doattack", function(inst)
+								if not inst.sg:HasStateTag("precharging") then
                                 local nstate = "attack"
                                 if inst.sg:HasStateTag("charging") then
                                     nstate = "chargeattack"
@@ -12,6 +13,7 @@ EventHandler("doattack", function(inst)
                                    and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
                                     inst.sg:GoToState(nstate)
                                 end
+								end
                             end),
 							    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("charging") then inst.sg:GoToState("hit") end end),
 
@@ -28,6 +30,7 @@ local states = {
             inst.SoundEmitter:PlaySound(inst.sounds.angry)
             inst.components.combat:StartAttack()
             inst.components.locomotor:StopMoving()
+			print("code")
             inst.AnimState:PlayAnimation("atk_pre")
             inst.AnimState:PushAnimation("atk", false)
 			if inst:HasTag("chargespeed") then
@@ -44,8 +47,9 @@ local states = {
 
         events=
         {
-            EventHandler("animqueueover", function(inst) 
-			if math.random() < 0.33 and not inst.components.domesticatable:IsDomesticated() then
+            EventHandler("animqueueover", function(inst)
+			local distance = inst:GetDistanceSqToInst(inst.components.combat.target)
+			if math.random() < 1 and not inst.components.domesticatable:IsDomesticated() and distance > 10 then
 				inst.sg:GoToState("charge_start")
 				else
 				inst.sg:GoToState("idle")
@@ -55,13 +59,11 @@ local states = {
     },
 	
     State{  name = "charge_start",
-            tags = {"moving", "running", "charging", "busy", "atk_pre", "canrotate"},
+            tags = {"moving", "running", "charging", "precharging", "busy", "atk_pre", "canrotate"},
             
             onenter = function(inst)
-                -- inst.components.locomotor:RunForward()
                 inst.Physics:Stop()
-                --inst.SoundEmitter:PlaySound(inst.soundpath .. "pawground")
-                --inst.AnimState:PlayAnimation("atk_pre")
+				inst.components.locomotor:StopMoving()
 				inst.AnimState:SetBank("beefalo_paw")
 				inst.AnimState:SetBuild("beefalo_paw")
 				local herd = inst.components.herdmember and inst.components.herdmember:GetHerd()
@@ -74,47 +76,35 @@ local states = {
 				inst.SoundEmitter:PlaySound(inst.sounds.angry)
 				inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT*2.29  --should be equal to rook
 				inst:AddTag("chargespeed")
-                inst.sg:SetTimeout(inst.AnimState:GetCurrentAnimationLength())
             end,
             
-            ontimeout= function(inst)
-				if inst.components.combat ~= nil then
-				inst.components.combat:ResetCooldown()
-				end
+
+            
+            timeline=
+            {
+			TimeEvent(5*FRAMES, PlayFootstep),
+			TimeEvent(10*FRAMES, PlayFootstep),
+            },        
+
+			events =
+            {
+                EventHandler("animover", function(inst) 				
 				inst.AnimState:SetBank("beefalo")
 				inst.AnimState:SetBuild("beefalo_build")
 				if inst.components.rideable and inst.components.rideable:GetRider() ~= nil then
 				inst:ApplyBuildOverrides(inst.components.rideable:GetRider().AnimState)
 				end
                 inst.sg:GoToState("charge")
-                inst:PushEvent("attackstart" )
-            end,
-            
-            timeline=
-            {
-			TimeEvent(5*FRAMES, PlayFootstep),
-			TimeEvent(10*FRAMES, PlayFootstep),
-		    --TimeEvent(1*FRAMES,  function(inst) inst.SoundEmitter:PlaySound(inst.effortsound) end ),
-		    --TimeEvent(12*FRAMES, function(inst)
-            --                        inst.SoundEmitter:PlaySound(inst.soundpath .. "pawground")
-            --                        --SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
-            --                    end ),
-            --TimeEvent(15*FRAMES,  function(inst) inst.sg:RemoveStateTag("canrotate") end ),
-		    --TimeEvent(20*FRAMES,  function(inst) inst.SoundEmitter:PlaySound(inst.effortsound) end ),
-		    --TimeEvent(30*FRAMES, function(inst)
-                                    --inst.SoundEmitter:PlaySound(inst.soundpath .. "pawground")
-                                    --SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
-            --                    end ),
-		    --TimeEvent(35*FRAMES,  function(inst) inst.SoundEmitter:PlaySound(inst.effortsound) end ),
-            },        
-
-            onexit = function(inst)
-                --inst.SoundEmitter:PlaySound(inst.soundpath .. "charge_LP","charge")
-            end,
+                inst:PushEvent("attackstart")
+				if inst.components.combat ~= nil then
+				inst.components.combat:ResetCooldown()
+				end 
+				end),
+            },
         },
 
     State{  name = "charge",
-            tags = {"moving", "charging", "running"},
+            tags = {"moving", "charging", "busy", "running"},
             
             onenter = function(inst) 
                 inst.components.locomotor:RunForward()
@@ -174,7 +164,7 @@ local states = {
         },
     
     State{  name = "charge_stop",
-            tags = {"canrotate", "idle"},
+            tags = {"canrotate", "busy", "idle"},
             
             onenter = function(inst) 
                 --inst.SoundEmitter:KillSound("charge")
@@ -196,7 +186,7 @@ local states = {
         },    
 
     State{  name = "chargeattack",
-            tags = {"runningattack"},
+            tags = {"busy", "runningattack"},
             
             onenter = function(inst)
                 --inst.SoundEmitter:KillSound("charge")
