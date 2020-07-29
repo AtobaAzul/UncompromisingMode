@@ -9,6 +9,7 @@ local component_post = {
 	"weapon",
 	--"hunter",
 	"kramped",
+	"explosiveresist",
 }
 
 local prefab_post = {

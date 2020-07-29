@@ -23,6 +23,14 @@ local function onothertimerdone(inst, data)
 	end
 end
 
+local function OnAttackedExplo(inst, data)
+	inst.components.explosiveresist:SetResistance(100)
+	--print(inst.components.explosiveresist:GetResistance())
+	if data.attacker:HasTag("explosive") then
+		inst.AnimState:PlayAnimation("block_loop", true)
+	end
+end
+
 env.AddPrefabPostInit("antlion", function(inst)
 	if not TheWorld.ismastersim then
 		return
@@ -32,5 +40,11 @@ env.AddPrefabPostInit("antlion", function(inst)
 	
 	inst:ListenForEvent("timerdone", onothertimerdone)
 	inst:AddComponent("firefallwarning")
+	
 	inst:AddComponent("explosiveresist")
+	inst.components.explosiveresist:SetResistance(1)
+	inst.components.explosiveresist.decay = true
+	
+    inst:ListenForEvent("attacked", OnAttackedExplo)
+	
 end)
