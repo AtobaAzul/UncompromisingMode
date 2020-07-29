@@ -514,7 +514,7 @@ local states =
         timeline =
         {
             TimeEvent(8 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound(inst.sounds.taunt)
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/hurt_VO")
             end),
         },
 
@@ -568,7 +568,7 @@ local states =
                 if inst:HasTag("swimming") then 
                     SpawnPrefab("splash_green").Transform:SetPosition(inst.Transform:GetWorldPosition())
                 else 
-                    inst.SoundEmitter:PlaySound("hookline/creatures/squid/land")
+                    PlayFootstep(inst,0.2)
                 end 
             end),
         },
