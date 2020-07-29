@@ -24,7 +24,7 @@ local function onothertimerdone(inst, data)
 end
 
 local function OnAttackedExplo(inst, data)
-	inst.components.explosiveresist:SetResistance(1)
+	inst.components.explosiveresist:SetResistance(0.9)
 	--print(inst.components.explosiveresist:GetResistance())
 	if data.attacker:HasTag("explosive") then
 		inst.AnimState:PlayAnimation("block_loop", true)
@@ -40,8 +40,7 @@ env.AddPrefabPostInit("antlion", function(inst)
 	inst:AddComponent("firefallwarning")
 	
 	inst:AddComponent("explosiveresist")
-	inst.components.explosiveresist:SetResistance(1)
-	inst.components.explosiveresist.maxresistdamage = 100
+	inst.components.explosiveresist:SetResistance(0.9)
 	inst.components.explosiveresist.decay = true
 	
     inst:ListenForEvent("attacked", OnAttackedExplo)
