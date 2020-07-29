@@ -49,7 +49,7 @@ end
 
 local function DoTargetWarning(_activeplayers, player)
 	for i, v in ipairs(AllPlayers) do
-            v.components.talker:Say(GetString(TheWorld, "ANNOUNCE_FIREFALL"))
+            v.components.talker:Say(GetString(v, "ANNOUNCE_FIREFALL"))
 			SpawnPrefab("antlionwarning").Transform:SetPosition(v.Transform:GetWorldPosition())
     end
 end
