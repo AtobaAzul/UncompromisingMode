@@ -3,20 +3,22 @@ local assets =
     Asset("ANIM", "anim/spear.zip"),
     Asset("ANIM", "anim/swap_spear.zip"),
 }
-
+local function onunequip(inst, owner)
+    owner.AnimState:Hide("ARM_carry")
+    owner.AnimState:Show("ARM_normal")
+	inst.components.weapon:SetDamage(40)
+end
 local function onequip(inst, owner)
 
     owner.AnimState:OverrideSymbol("swap_object", "swap_spear", "swap_spear")
 
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
+	
+	if not owner:HasTag("vetcurse") then
+	inst.components.weapon:SetDamage(0)
+    end
 end
-
-local function onunequip(inst, owner)
-    owner.AnimState:Hide("ARM_carry")
-    owner.AnimState:Show("ARM_normal")
-end
-
 local function fn()
     local inst = CreateEntity()
 
@@ -46,7 +48,7 @@ local function fn()
     inst.components.burnable.fxprefab = nil]]
 	
 	inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(34)
+    inst.components.weapon:SetDamage(40)
 	
     inst:AddComponent("inventoryitem")
 
@@ -65,9 +67,9 @@ local function fn()
 
 
     inst._onownerequip = function(owner, data)
-        if not owner:HasTag("vetcursed") then
-		--De-equip function
-        end
+	if not owner:HasTag("vetcursed") then
+	owner.components.inventory:DropItem(inst)
+    end
     end
 
     return inst
