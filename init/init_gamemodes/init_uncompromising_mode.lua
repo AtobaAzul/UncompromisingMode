@@ -104,12 +104,17 @@ local require = GLOBAL.require
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_weather") == true) then
-		modimport("init/init_weather/init_acidmushroom_networking")
+		--modimport("init/init_weather/init_acidmushroom_networking")
 		modimport("init/init_weather/init_acid_rain_effects")
 		modimport("init/init_weather/init_acid_rain_disease")
 		modimport("init/init_weather/init_harder_weather")
 		--modimport("init/init_weather/init_snowstorm")
 		modimport("init/init_weather/init_snowstorm_structures")
+	end
+	
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("acidrain") == true or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("acidrain") == true) then
+		modimport("init/init_weather/init_acidmushroom_networking")
 	end
 	
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("snowstorms") == true or
@@ -128,8 +133,8 @@ local require = GLOBAL.require
 		modimport("init/init_durability")
 	end
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("caveless") == false or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("caveless") == false) then
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("caveless") == false and GetModConfigData("acidrain") == true or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("caveless") == false and GetModConfigData("acidrain") == true) then
 		modimport("init/init_weather/init_overworld_toadstool")
 	end
 

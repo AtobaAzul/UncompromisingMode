@@ -230,6 +230,17 @@ configuration_options =
 		default = true,
 	},
 	{
+		name = "acidrain",
+		label = "Acid Rain.",
+		hover = "During later game Autumn, the Toadstool will spawn \npoisonous Mushtrees and Toadling Guards on the surface.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
+	},
+	{
 		name = "weather start date",
 		label = "Start Date for New Weather.",
 		hover = "Snowstorms, Hayfever, and Acid Rain.",
