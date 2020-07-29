@@ -54,7 +54,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	ANNOUNCE.ANNOUNCE_FIREFALL = {
 		"That guys working up a sweat with all that yelling.",
 		"Jeez! Cool it!",
-		"Get your fire retardant boots on!",
+		"Get your fire fire safe boots on!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "I'm caught!"
 	ANNOUNCE.SHADOWTALKER = {
