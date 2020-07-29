@@ -49,7 +49,7 @@ local states = {
         {
             EventHandler("animqueueover", function(inst)
 			local distance = inst:GetDistanceSqToInst(inst.components.combat.target)
-			if math.random() < 1 and not inst.components.domesticatable:IsDomesticated() and distance > 10 then
+			if math.random() < 0.33 and not inst.components.domesticatable:IsDomesticated() and distance > 10 then
 				inst.sg:GoToState("charge_start")
 				else
 				inst.sg:GoToState("idle")
