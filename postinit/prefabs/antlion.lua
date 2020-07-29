@@ -41,6 +41,7 @@ env.AddPrefabPostInit("antlion", function(inst)
 	
 	inst:AddComponent("explosiveresist")
 	inst.components.explosiveresist:SetResistance(1)
+	inst.components.explosiveresist.maxresistdamage = 100
 	inst.components.explosiveresist.decay = true
 	
     inst:ListenForEvent("attacked", OnAttackedExplo)
