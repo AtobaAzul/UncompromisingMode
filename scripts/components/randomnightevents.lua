@@ -372,7 +372,7 @@ local function SpawnWerePigs(player)
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
 			local level = PlayerScaling(player)
-			local num_pig = 3+level
+			local num_pig = 1+level
 			for i = 1, num_pig do
 				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
 					SpawnWerePigsFunction(player)

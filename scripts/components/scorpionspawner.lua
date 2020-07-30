@@ -37,12 +37,12 @@ local VALID_TILES = table.invert(
 --[[ Private member functions ]]
 --------------------------------------------------------------------------
 
-local function GetSpawnPoint(pt)
+local function GetSpawnPoint(pt, player)
     local function TestSpawnPoint(offset)
         local spawnpoint = pt + offset
 		local spawnpoint_x, spawnpoint_y, spawnpoint_z = (pt + offset):Get()
         return _map:IsAboveGroundAtPoint(spawnpoint:Get())
-		and VALID_TILES[_map:GetTileAtPoint(spawnpoint:Get())] ~= nil
+		and VALID_TILES[_map:GetTileAtPoint(spawnpoint:Get())] ~= nil --and player.components.areaaware:CurrentlyInTag("scorpions")
 		and
         #(TheSim:FindEntities(spawnpoint_x, 0, spawnpoint_z, 4, { "player" })) == 0
 		end
@@ -72,7 +72,7 @@ local function SpawnFrogForPlayer(player, reschedule)
     local pt = player:GetPosition()
 	local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, TUNING.FROG_RAIN_MAX_RADIUS, { "scorpion" })
 	if GetTableSize(_frogs) < TUNING.FROG_RAIN_MAX and #ents < _frogcap then
-		local spawn_point = GetSpawnPoint(pt)
+		local spawn_point = GetSpawnPoint(pt, player)
 		if spawn_point ~= nil then
             -- print("Spawning a frog for player ",player)
 			local frog = SpawnFrog(spawn_point)

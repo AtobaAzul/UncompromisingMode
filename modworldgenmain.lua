@@ -21,6 +21,29 @@ room.contents.countprefabs=
 									{
 										trapdoorspawner = function() return math.random(2,4) end,} --returned number for whole area should be multiplied between 2-4 due to multiple rooms
 end)
+
+-----KoreanWaffle's Spawner Limiter Tag Adding Code
+--Add "scorpions" tag to global maptags table
+local MapTags = GLOBAL.require("map/maptags")
+local map_tags = MapTags()
+map_tags.Tag["scorpions"] = function(tagdata) return "TAG", "scorpions" end
+--[[
+--All the desert rooms. I excluded "DragonflyArena", "LightningBluffAntlion", and "LightningBluffOasis"
+local deserts = { "BGBadlands", "Badlands", "HoundyBadlands", "BuzzardyBadlands", 
+    "BGLightningBluff", "LightningBluffLightning" }
+
+--Add "scorpions" room tag to all desert rooms
+for k, v in pairs(deserts) do
+    AddRoomPreInit(v, function(room)
+        if not room.tags then
+            room.tags = {"scorpions"}
+        elseif room.tags then
+            table.insert(room.tags, "scorpions")
+        end
+    end)
+end
+-----KoreanWaffle's Spawner Limiter Tag Adding Code 
+]]
 GLOBAL.require("map/rooms/forest/challengespawner")
 GLOBAL.require("map/rooms/forest/extraswamp")
 AddTaskPreInit("Make a pick",function(task)
@@ -28,7 +51,7 @@ AddTaskPreInit("Make a pick",function(task)
 task.room_choices["veteranshrine"] = 1
 
 end)
----- KoreanWaffle's LOCK/KEY initialization code
+---- KoreanWaffle's LOCK/KEY initialization code  --Inactive atm 
 local LOCKS = GLOBAL.LOCKS
 local KEYS = GLOBAL.KEYS
 local LOCKS_KEYS = GLOBAL.LOCKS_KEYS
