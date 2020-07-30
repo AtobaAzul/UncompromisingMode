@@ -1,9 +1,16 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
+local function propegation(inst)
+	if inst.components.burnable and not inst.components.burnable:IsBurning() then
+		MakeSmallPropagator(inst)
+	else
+		inst:DoTaskInTime(5, propegation)
+	end 
+end
 
 local function OnIgniteFn(inst)
-    inst.SoundEmitter:KillSound("hiss")
+   inst.SoundEmitter:KillSound("hiss")
     SpawnPrefab("firesplash_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
     inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
 	
@@ -34,30 +41,31 @@ local function OnIgniteFn(inst)
         end
     end
 	
+	--propegation(inst)
 
-	inst.proptask = nil
-	
-	if inst.proptask == nil then
-		inst.proptask = inst:DoTaskInTime(30, function(inst) if not inst.components.burnable:IsBurning() then MakeSmallPropagator(inst) end end)
-	end
-
-end
-
-local function OnRespawnedFromGhost2(inst)
-	inst.proptask = nil
-	
-	if inst.proptask == nil then
-		inst.proptask = inst:DoTaskInTime(30, function(inst) if not inst.components.burnable:IsBurning() then MakeSmallPropagator(inst) end end)
-	end
 end
 
 local function OnBurnt(inst)
 	--will this stop her from losing her burning effect?
-	inst.proptask = nil
-	
-	if inst.proptask == nil then
-		inst.proptask = inst:DoTaskInTime(30, function(inst) if not inst.components.burnable:IsBurning() then MakeSmallPropagator(inst) end end)
-	end
+	inst:DoTaskInTime(0, function(inst) 
+		if inst.components.health and not inst.components.health:IsDead() then 
+			MakeSmallPropagator(inst)
+			inst.components.burnable:SetBurnTime(TUNING.WORMWOOD_BURN_TIME * 2)
+			inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
+			inst.components.burnable:SetOnBurntFn(OnBurnt)
+		end 
+	end)
+end
+
+local function OnRespawnedFromGhost2(inst)
+	inst:DoTaskInTime(0, function(inst) 
+		if inst.components.health and not inst.components.health:IsDead() then 
+			MakeSmallPropagator(inst) 
+			inst.components.burnable:SetBurnTime(TUNING.WORMWOOD_BURN_TIME * 2)
+			inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
+			inst.components.burnable:SetOnBurntFn(OnBurnt)
+		end 
+	end)
 end
 
 env.AddPrefabPostInit("willow", function(inst)
@@ -67,12 +75,14 @@ env.AddPrefabPostInit("willow", function(inst)
 
 	inst.proptask = nil
 	
-	if inst.components.burnable ~= nil then
-		inst.components.burnable:SetBurnTime(TUNING.WORMWOOD_BURN_TIME * 2)
+	--if inst.components.burnable ~= nil then
+		--propegation(inst)
 		MakeSmallPropagator(inst)
+		inst.components.burnable:SetBurnTime(TUNING.WORMWOOD_BURN_TIME * 2)
 		inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
 		inst.components.burnable:SetOnBurntFn(OnBurnt)
-	end
+	--end
+	
 	
     inst:ListenForEvent("ms_respawnedfromghost", OnRespawnedFromGhost2)
 	

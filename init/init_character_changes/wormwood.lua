@@ -1,17 +1,20 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
+local function propegation(inst)
+	if inst.components.burnable and not inst.components.burnable:IsBurning() then
+		MakeSmallPropagator(inst)
+	else
+		inst:DoTaskInTime(5, propegation)
+	end 
+end
+
 local function DefaultIgniteFn(inst)
     if inst.components.burnable ~= nil then
         inst.components.burnable:StartWildfire()
     end
-	
-	inst.proptask = nil
-	
-	if inst.proptask == nil then
-		inst.proptask = inst:DoTaskInTime(30, function(inst) if not inst.components.burnable:IsBurning() then MakeSmallPropagator(inst) end end)
-	end
-	
+
+	--propegation(inst)
 end
 
 local WATCH_WORLD_PLANTS_DIST_SQ = 20 * 20
@@ -51,11 +54,14 @@ end
 
 local function OnRespawnedFromGhost2(inst)
     WatchWorldPlants2(inst)
-	inst.proptask = nil
 	
-	if inst.proptask == nil then
-		inst.proptask = inst:DoTaskInTime(30, function(inst) if not inst.components.burnable:IsBurning() then MakeSmallPropagator(inst) end end)
-	end
+	--MakeMediumBurnableCharacter(inst, "torso")
+	inst:DoTaskInTime(0, function(inst) 
+		if inst.components.health and not inst.components.health:IsDead() then 
+			MakeSmallPropagator(inst) 
+		end 
+	end)
+	
 end
 
 local function OnBecameGhost2(inst)
@@ -64,24 +70,24 @@ end
 
 local function OnBurnt(inst)
 	--Overriding the OnBurnt function to prevent propegator from sometimes removing, hopefully.
-	inst.proptask = nil
-	
-	if inst.proptask == nil then
-		inst.proptask = inst:DoTaskInTime(30, function(inst) if not inst.components.burnable:IsBurning() then MakeSmallPropagator(inst) end end)
-	end
+	inst:DoTaskInTime(0, function(inst) 
+		if inst.components.health and not inst.components.health:IsDead() then 
+			MakeSmallPropagator(inst) 
+		end 
+	end)
 end
 
 env.AddPrefabPostInit("wormwood", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-
-	inst.proptask = nil
 	
-	if inst.components.burnable ~= nil then
-		MakeSmallPropagator(inst)
-		inst.components.burnable:SetOnBurntFn(OnBurnt)
-	end
+	--if inst.components.burnable ~= nil then
+		--propegation(inst)
+	--end
+	--MakeMediumBurnableCharacter(inst, "torso")
+    MakeSmallPropagator(inst)
+	inst.components.burnable:SetOnBurntFn(OnBurnt)
 	
     WatchWorldPlants2(inst)
     inst:ListenForEvent("ms_becameghost", OnBecameGhost2)
