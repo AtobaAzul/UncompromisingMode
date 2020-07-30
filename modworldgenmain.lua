@@ -23,11 +23,15 @@ room.contents.countprefabs=
 end)
 
 -----KoreanWaffle's Spawner Limiter Tag Adding Code
---Add "scorpions" tag to global maptags table
-local MapTags = GLOBAL.require("map/maptags")
-local map_tags = MapTags()
-map_tags.Tag["scorpions"] = function(tagdata) return "TAG", "scorpions" end
---[[
+--Add new map tags to storygen
+local MapTags = {"scorpions"}
+
+AddGlobalClassPostConstruct("map/storygen", "Story", function(self)
+    for k, v in pairs(MapTags) do
+        self.map_tags.Tag[v] = function(tagdata) return "TAG", v end
+    end
+end)
+
 --All the desert rooms. I excluded "DragonflyArena", "LightningBluffAntlion", and "LightningBluffOasis"
 local deserts = { "BGBadlands", "Badlands", "HoundyBadlands", "BuzzardyBadlands", 
     "BGLightningBluff", "LightningBluffLightning" }
@@ -43,7 +47,6 @@ for k, v in pairs(deserts) do
     end)
 end
 -----KoreanWaffle's Spawner Limiter Tag Adding Code 
-]]
 GLOBAL.require("map/rooms/forest/challengespawner")
 GLOBAL.require("map/rooms/forest/extraswamp")
 AddTaskPreInit("Make a pick",function(task)

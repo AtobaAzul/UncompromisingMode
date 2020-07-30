@@ -42,7 +42,7 @@ local function GetSpawnPoint(pt, player)
         local spawnpoint = pt + offset
 		local spawnpoint_x, spawnpoint_y, spawnpoint_z = (pt + offset):Get()
         return _map:IsAboveGroundAtPoint(spawnpoint:Get())
-		and VALID_TILES[_map:GetTileAtPoint(spawnpoint:Get())] ~= nil --and player.components.areaaware:CurrentlyInTag("scorpions")
+		and VALID_TILES[_map:GetTileAtPoint(spawnpoint:Get())] ~= nil and player.components.areaaware:CurrentlyInTag("scorpions")
 		and
         #(TheSim:FindEntities(spawnpoint_x, 0, spawnpoint_z, 4, { "player" })) == 0
 		end
