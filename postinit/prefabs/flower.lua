@@ -4,18 +4,19 @@ GLOBAL.setfenv(1, GLOBAL)
     return TheWorld.state.isfullmoon
 end]]
 local function Revert(inst)
-print("code ran")
+--print("code ran")
 		local obj = SpawnPrefab("flower")
 		local x, y, z = inst.Transform:GetWorldPosition()
 			obj.Transform:SetPosition(x,y,z)
 			inst:Remove()
 end
 local function Transform(inst)
-print("code ran")
+--print("code ran")
 		local obj = SpawnPrefab("flower_evil")
 		local x, y, z = inst.Transform:GetWorldPosition()
 			obj.Transform:SetPosition(x,y,z)
-			obj:DoTaskInTime(math.random()*100+800, function(inst) Revert(inst) end)
+			obj:AddTag("transformed")
+			obj:DoTaskInTime(math.random()*100+480, function(inst) Revert(inst) end)
 			inst:Remove()
 end
 local function OnFullMoon(inst, isfullmoon)
@@ -37,10 +38,27 @@ env.AddPrefabPostInit("flower", function(inst)
 	
 --return inst
 end)
+local function onsaveevil(inst, data)
+    data.anim = inst.animname
+	if inst:HasTag("transformed") then
+	data.transformed = true
+	end
+end
+local function onloadevil(inst, data)
+    if data and data.anim then
+        inst.animname = data.anim
+        inst.AnimState:PlayAnimation(inst.animname)
+    end
+	if data and data.anim and data.transformed == true then
+	inst:DoTaskInTime(0.1,Revert)
+	end
+end
 env.AddPrefabPostInit("flower_evil", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
+    inst.OnLoad = onloadevil
+	inst.OnSave = onsaveevil
 --return inst
 end)
 env.AddPrefabPostInit("flower_planted", function(inst)
