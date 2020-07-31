@@ -98,6 +98,7 @@ local prefab_post = {
 	"critterlab",
 	"wobster",
 	"hambat",
+	"lighter",
 }
 
 local stategraph_post = {
