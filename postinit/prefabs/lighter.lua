@@ -57,14 +57,89 @@ env.AddPrefabPostInit("lighter", function(inst)
 end)
 
 local function gobig(inst)
+
+	if inst.components.burnable:IsBurning() then
+		local skin_name = nil
+		if inst:GetSkinName() ~= nil then
+			skin_name = string.gsub(inst:GetSkinName(), "_active", "_big")
+		end
+		
+		local big = SpawnPrefab("bernie_big", skin_name, inst.skin_id, nil)
+		if big ~= nil then
+			--Rescale health %
+			big.components.health:SetPercent(inst.components.health:GetPercent())
+			big.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			big.Transform:SetRotation(inst.Transform:GetRotation())
+			big.components.burnable:Ignite()
+			inst:Remove()
+			return big
+		end
+	end
 end
 
 env.AddPrefabPostInit("bernie_active", function(inst)
 
-if not TheWorld.ismastersim then
-	return
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+    inst:AddComponent("burnable")
+    inst.components.burnable:SetFXLevel(1)
+    inst.components.burnable:SetBurnTime(30)
+    inst.components.burnable.canlight = true
+    inst.components.burnable:AddBurnFX("character_fire", Vector3(0, 0, 1), "bernie_torso")
+	
+	inst.GoBig = gobig
+
+end)
+
+local function goinactive(inst)
+    local skin_name = nil
+    if inst:GetSkinName() ~= nil then
+        skin_name = string.gsub(inst:GetSkinName(), "_big", "")
+    end
+    local inactive = SpawnPrefab("bernie_inactive", skin_name, inst.skin_id, nil)
+    if inactive ~= nil then
+        --Transform health % into fuel.
+        inactive.components.fueled:SetPercent(inst.components.health:GetPercent())
+        inactive.Transform:SetPosition(inst.Transform:GetWorldPosition())
+        inactive.Transform:SetRotation(inst.Transform:GetRotation())
+        inactive.components.timer:StartTimer("transform_cd", TUNING.BERNIE_BIG_COOLDOWN)
+        inst:Remove()
+        return inactive
+    end
+end
+	
+local function revertbrnt(inst)
+    inst.sg:GoToState("deactivate")
 end
 
-inst.GoBig = gobig
+local function revertex(inst)
+	if not inst.components.health:IsDead() then
+		inst.sg:GoToState("deactivate")
+	end
+end
+
+local function OnPreLoad(inst)
+	inst.components.burnable:Ignite()
+end
+
+env.AddPrefabPostInit("bernie_big", function(inst)
+
+	if not TheWorld.ismastersim then
+		return
+	end
+
+    
+    inst:AddComponent("burnable")
+    inst.components.burnable:SetFXLevel(3)
+    inst.components.burnable.canlight = false
+    inst.components.burnable:SetBurnTime(60)
+    inst.components.burnable:AddBurnFX("character_fire", Vector3(0, 0, 1), "big_body")
+	--inst.components.burnable:SetOnBurntFn(revertbrnt)
+	inst.components.burnable:SetOnExtinguishFn(revertex)
+	MakeSmallPropagator(inst)
+	
+    inst.OnPreLoad = OnPreLoad
 
 end)
