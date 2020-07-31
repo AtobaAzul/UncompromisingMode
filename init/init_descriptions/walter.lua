@@ -124,3 +124,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
 	DESCRIBE.LUREPLAGUE_RAT = "They're kinda cute when you get over the extra eyes."
 	DESCRIBE.MARSH_GRASS = "We could hide behind it, I guess?"
+	DESCRIBE.CURSED_ANTLER = "A memento of a story-worthy fight!"

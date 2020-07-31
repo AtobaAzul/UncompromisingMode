@@ -123,3 +123,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
 	DESCRIBE.LUREPLAGUE_RAT = "Actual demons wrought to topple me!"
 	DESCRIBE.MARSH_GRASS = "I have nothing to say about this."
+	DESCRIBE.CURSED_ANTLER = "Life doesn't wear it down. I envy it."

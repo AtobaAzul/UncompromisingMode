@@ -1,7 +1,7 @@
 local assets =
 {
-    Asset("ANIM", "anim/spear.zip"),
-    Asset("ANIM", "anim/swap_spear.zip"),
+    Asset("ANIM", "anim/cursed_antler.zip"),
+    Asset("ANIM", "anim/swap_cursed_antler.zip"),
 }
 local function onunequip(inst, owner)
     owner.AnimState:Hide("ARM_carry")
@@ -10,7 +10,7 @@ local function onunequip(inst, owner)
 end
 local function onequip(inst, owner)
 
-    owner.AnimState:OverrideSymbol("swap_object", "swap_spear", "swap_spear")
+    owner.AnimState:OverrideSymbol("swap_object", "swap_cursed_antler", "swap_cursed_antler")
 
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
@@ -29,8 +29,8 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("spear")
-    inst.AnimState:SetBuild("swap_spear")
+    inst.AnimState:SetBank("cursed_antler")
+    inst.AnimState:SetBuild("cursed_antler")
     inst.AnimState:PlayAnimation("idle")
 
     MakeInventoryFloatable(inst, "med", 0.2, 0.65)
@@ -51,6 +51,7 @@ local function fn()
     inst.components.weapon:SetDamage(40)
 	
     inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/cursed_antler.xml"
 
 
     inst:AddComponent("equippable")
