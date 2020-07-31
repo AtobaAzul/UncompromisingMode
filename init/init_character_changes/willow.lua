@@ -10,8 +10,8 @@ local function propegation(inst)
 end
 
 local function OnIgniteFn(inst)
-   inst.SoundEmitter:KillSound("hiss")
-    SpawnPrefab("firesplash_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	inst.SoundEmitter:KillSound("hiss")
+	SpawnPrefab("firesplash_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
     inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
 	
 	local x, y, z = inst.Transform:GetWorldPosition()
@@ -35,6 +35,9 @@ local function OnIgniteFn(inst)
                         dmg = dmg * (1 - v.components.explosiveresist:GetResistance())
                         v.components.explosiveresist:OnExplosiveDamage(dmg, inst)
                     end
+					if v:HasTag("shadow") or v:HasTag("shadowchesspiece") then
+						dmg = dmg * 3
+					end
                     v.components.combat:GetAttacked(inst, dmg, nil)
                 end
             end
@@ -68,6 +71,12 @@ local function OnRespawnedFromGhost2(inst)
 	end)
 end
 
+local function onattacked(inst, data)
+    if data.attacker ~= nil and inst.components.health ~= nil and not inst.components.health:IsDead() and inst.components.sanity ~= nil and not inst.components.sanity:IsSane() and (data.attacker:HasTag("shadow") or data.attacker:HasTag("shadowchesspiece") or data.attacker:HasTag("stalker")) then
+        inst.components.burnable:Ignite(true, inst)
+	end
+end
+
 env.AddPrefabPostInit("willow", function(inst)
 	if not TheWorld.ismastersim then
 		return
@@ -78,11 +87,12 @@ env.AddPrefabPostInit("willow", function(inst)
 	--if inst.components.burnable ~= nil then
 		--propegation(inst)
 		MakeSmallPropagator(inst)
-		inst.components.burnable:SetBurnTime(TUNING.WORMWOOD_BURN_TIME * 2)
+		inst.components.burnable:SetBurnTime(TUNING.WORMWOOD_BURN_TIME * 1.5)
 		inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
 		inst.components.burnable:SetOnBurntFn(OnBurnt)
 	--end
 	
+    inst:ListenForEvent("attacked", onattacked)
 	
     inst:ListenForEvent("ms_respawnedfromghost", OnRespawnedFromGhost2)
 	

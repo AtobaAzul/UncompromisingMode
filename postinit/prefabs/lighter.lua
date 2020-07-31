@@ -55,3 +55,16 @@ env.AddPrefabPostInit("lighter", function(inst)
 	end
 	
 end)
+
+local function gobig(inst)
+end
+
+env.AddPrefabPostInit("bernie_active", function(inst)
+
+if not TheWorld.ismastersim then
+	return
+end
+
+inst.GoBig = gobig
+
+end)
