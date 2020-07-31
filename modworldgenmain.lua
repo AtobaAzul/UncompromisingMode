@@ -21,6 +21,28 @@ room.contents.countprefabs=
 									{
 										trapdoorspawner = function() return math.random(2,4) end,} --returned number for whole area should be multiplied between 2-4 due to multiple rooms
 end)
+-----------Marsh Grass
+AddRoomPreInit("BGMarsh", function(room)					--This effects the outer areas of the Triple Mac and The Major Beefalo Plains
+room.contents.countprefabs=
+									{
+										marsh_grass = function() return math.random(2,6) end,}
+end)
+AddRoomPreInit("Marsh", function(room)						--This effects areas in the Major Beefalo Plains and the Grasslands next to the portal
+room.contents.countprefabs=
+									{
+										marsh_grass = function() return math.random(2,6) end,} --returned number for whole area should be multiplied between 2-4 due to multiple rooms
+end)
+
+AddRoomPreInit("SpiderMarsh", function(room)					--This effects the outer areas of the Triple Mac and The Major Beefalo Plains
+room.contents.countprefabs=
+									{
+										marsh_grass = function() return math.random(4,8) end,}
+end)
+AddRoomPreInit("SlightlyMermySwamp", function(room)						--This effects areas in the Major Beefalo Plains and the Grasslands next to the portal
+room.contents.countprefabs=
+									{
+										marsh_grass = function() return math.random(4,8) end,} --returned number for whole area should be multiplied between 2-4 due to multiple rooms
+end)
 
 -----KoreanWaffle's Spawner Limiter Tag Adding Code
 --Add new map tags to storygen

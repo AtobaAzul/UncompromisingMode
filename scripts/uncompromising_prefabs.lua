@@ -107,4 +107,5 @@ return {
 	"snapperturtle",
 	"snapperturtlenest",
 	"cursed_antler",
+	"marsh_grass",
 }

@@ -168,6 +168,7 @@ Assets = {
 	Asset("ANIM", "anim/snapperturtle.zip"),
 	Asset("ANIM", "anim/snapperturtle_water.zip"),
 	Asset("ANIM", "anim/beefalo_paw.zip"),
+	Asset("ANIM", "anim/bush_marsh.zip"),
 	--Map Icons Start--
 	Asset("IMAGE", "images/inventoryimages/seafoodpaella.tex"),
 	Asset("ATLAS", "images/inventoryimages/seafoodpaella.xml"),

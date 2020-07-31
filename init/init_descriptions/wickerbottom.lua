@@ -123,6 +123,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.SUNGLASSES = "Time for some daylight reading."
 	DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
 	DESCRIBE.LUREPLAGUE_RAT = "It appears the lureplant is acting as a parasite to the rodentia kleptomanis, is it still alive?"
+	DESCRIBE.MARSH_GRASS = "A nondescript bush."
 	
 	ACTIONFAIL.READ =
         {
