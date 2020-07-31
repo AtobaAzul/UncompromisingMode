@@ -99,6 +99,7 @@ local prefab_post = {
 	"wobster",
 	"hambat",
 	"lighter",
+	"townportal",
 }
 
 local stategraph_post = {
