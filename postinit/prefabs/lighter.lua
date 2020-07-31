@@ -134,7 +134,7 @@ env.AddPrefabPostInit("bernie_big", function(inst)
     inst:AddComponent("burnable")
     inst.components.burnable:SetFXLevel(3)
     inst.components.burnable.canlight = false
-    inst.components.burnable:SetBurnTime(60)
+    inst.components.burnable:SetBurnTime(30)
     inst.components.burnable:AddBurnFX("character_fire", Vector3(0, 0, 1), "big_body")
 	--inst.components.burnable:SetOnBurntFn(revertbrnt)
 	inst.components.burnable:SetOnExtinguishFn(revertex)
