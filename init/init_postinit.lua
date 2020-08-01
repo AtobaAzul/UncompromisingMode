@@ -105,6 +105,7 @@ local prefab_post = {
 local stategraph_post = {
     --example:
     --"wilson",
+	"spiderqueen",
 	"deerclops",
 	"wilson",
 	"Leif",
@@ -133,6 +134,7 @@ local brain_post = {
     --"hound",
 	"werepig",
 	"frog",
+	"spiderqueen",
 }
 
 modimport("postinit/sim")

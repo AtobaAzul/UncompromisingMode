@@ -173,6 +173,11 @@ Assets = {
     Asset("ANIM", "anim/swap_cursed_antler.zip"),
 	Asset("IMAGE", "images/inventoryimages/cursed_antler.tex"),
 	Asset("ATLAS", "images/inventoryimages/cursed_antler.xml"),
+	Asset("ANIM", "anim/web_net_splat.zip"),
+	Asset("ANIM", "anim/web_net_splash.zip"),
+	Asset("ANIM", "anim/web_net_shot.zip"),
+	Asset("ANIM", "anim/web_net_trap.zip"),
+	
 	--Map Icons Start--
 	Asset("IMAGE", "images/inventoryimages/seafoodpaella.tex"),
 	Asset("ATLAS", "images/inventoryimages/seafoodpaella.xml"),
