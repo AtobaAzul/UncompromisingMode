@@ -17,7 +17,15 @@ local function fn_websplat(Sim)
     inst.AnimState:SetBuild("web_net_splat")
     inst.AnimState:SetBank("spat_splat")
     inst.AnimState:PlayAnimation("idle")
-
+	inst.AnimState:Hide("goosplat")
+	--[[inst.AnimState:Hide("goosplat-0")
+	inst.AnimState:Hide("goosplat-1")
+	inst.AnimState:Hide("goosplat-2")
+	inst.AnimState:Hide("goosplat-5")
+	inst.AnimState:Hide("goosplat-6")
+	inst.AnimState:Hide("goosplat-7")
+	inst.AnimState:Hide("goosplat-8")
+	inst.AnimState:Hide("goosplat-9")]]
 	inst:AddTag("FX")
 	inst:AddTag("NOCLICK")
 	
