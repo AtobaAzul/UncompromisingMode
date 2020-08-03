@@ -177,7 +177,7 @@ Assets = {
 	Asset("ANIM", "anim/web_net_splash.zip"),
 	Asset("ANIM", "anim/web_net_shot.zip"),
 	Asset("ANIM", "anim/web_net_trap.zip"),
-	
+	Asset("ANIM", "anim/hoodedcanopy.zip"),	
 	--Map Icons Start--
 	Asset("IMAGE", "images/inventoryimages/seafoodpaella.tex"),
 	Asset("ATLAS", "images/inventoryimages/seafoodpaella.xml"),
