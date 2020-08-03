@@ -9,6 +9,20 @@ local function SetPhysicalScale(inst, scale)
         inst.Physics:SetCapsule(1.2 * scale, 1)
     end
 end
+local function Unchain(inst, warning)
+    if not inst._unchained:value() then
+        inst.AnimState:Hide("swap_chain")
+        inst.AnimState:Hide("swap_chain_lock")
+        inst.components.sanityaura.aura = inst.enraged and -TUNING.SANITYAURA_HUGE or -TUNING.SANITYAURA_LARGE
+        inst.components.burnable.nocharring = false
+        inst.DoFoleySounds = DoNothing
+        inst._unchained:set(true)
+        OnMusicDirty(inst)
+        if warning then
+            PushWarning(inst, "ANNOUNCE_KLAUS_UNCHAINED")
+        end
+    end
+end
 local function SetStatScale(inst, scale)
     inst.deer_dist = 3.5 * scale
     inst.hit_recovery = TUNING.KLAUS_HIT_RECOVERY * scale
