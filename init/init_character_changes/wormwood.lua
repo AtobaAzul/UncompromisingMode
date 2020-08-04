@@ -71,8 +71,19 @@ end
 local function OnBurnt(inst)
 	--Overriding the OnBurnt function to prevent propegator from sometimes removing, hopefully.
 	inst:DoTaskInTime(0, function(inst) 
-		if inst.components.health and not inst.components.health:IsDead() then 
+		if inst.components.health and not inst.components.health:IsDead() then
 			MakeSmallPropagator(inst) 
+		end 
+	end)
+end
+
+local function OnMoistureDelta(inst)
+	--Overriding the OnBurnt function to prevent propegator from sometimes removing, hopefully.
+	inst:DoTaskInTime(0, function(inst) 
+		if inst.components.health and not inst.components.health:IsDead() and inst.components.moisture and inst.components.moisture:GetMoisturePercent() >= 0.4 then
+			inst.components.propagator.acceptsheat = false
+		elseif inst.components.health and not inst.components.health:IsDead() then
+			inst.components.propagator.acceptsheat = true
 		end 
 	end)
 end
@@ -92,5 +103,6 @@ env.AddPrefabPostInit("wormwood", function(inst)
     WatchWorldPlants2(inst)
     inst:ListenForEvent("ms_becameghost", OnBecameGhost2)
     inst:ListenForEvent("ms_respawnedfromghost", OnRespawnedFromGhost2)
+    inst:ListenForEvent("moisturedelta", OnMoistureDelta)
 	
 end)

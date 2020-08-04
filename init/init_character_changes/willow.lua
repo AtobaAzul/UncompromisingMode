@@ -77,6 +77,17 @@ local function onattacked(inst, data)
 	end
 end
 
+local function OnMoistureDelta(inst)
+	--Overriding the OnBurnt function to prevent propegator from sometimes removing, hopefully.
+	inst:DoTaskInTime(0, function(inst) 
+		if inst.components.health and not inst.components.health:IsDead() and inst.components.moisture and inst.components.moisture:GetMoisturePercent() >= 0.4 then
+			inst.components.propagator.acceptsheat = false
+		elseif inst.components.health and not inst.components.health:IsDead() then
+			inst.components.propagator.acceptsheat = true
+		end 
+	end)
+end
+
 env.AddPrefabPostInit("willow", function(inst)
 	if not TheWorld.ismastersim then
 		return
@@ -93,7 +104,7 @@ env.AddPrefabPostInit("willow", function(inst)
 	--end
 	
     inst:ListenForEvent("attacked", onattacked)
-	
     inst:ListenForEvent("ms_respawnedfromghost", OnRespawnedFromGhost2)
+    inst:ListenForEvent("moisturedelta", OnMoistureDelta)
 	
 end)
