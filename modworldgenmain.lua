@@ -1,4 +1,24 @@
 GLOBAL.require("map/terrain")
+
+------Turf Using Tile Adder From ADM's Turf Mod
+modimport("tile_adder.lua")
+AddTile(
+	"JUNGLE",
+	102,
+	"jungle",
+	{
+		noise_texture = "levels/textures/noise_jungle.tex",
+		runsound = "dontstarve/movement/walk_grass",
+		walksound = "dontstarve/movement/walk_grass",
+		snowsound = "dontstarve/movement/run_snow",
+		mudsound = "dontstarve/movement/run_mud",
+	},
+	{noise_texture = "levels/textures/mini_noise_jungle.tex"}
+)
+------
+
+
+
 if GetModConfigData("caveless") == false then
 
     AddTaskSetPreInitAny(function(tasksetdata)

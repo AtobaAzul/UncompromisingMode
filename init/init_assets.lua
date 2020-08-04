@@ -1,4 +1,15 @@
 Assets = {
+	----Turf
+	Asset( "IMAGE", "levels/textures/noise_jungle.tex" ),
+	Asset( "IMAGE", "levels/textures/mini_noise_jungle.tex" ),
+	Asset( "IMAGE", "levels/tiles/jungle.tex" ),
+	Asset( "FILE", "levels/tiles/jungle.xml" ),
+	Asset("ANIM", "anim/swturf.zip"),
+	Asset("ATLAS", "images/inventoryimages/turf_jungle.xml"),
+	Asset("IMAGE", "images/inventoryimages/turf_jungle.tex"),
+	----Turf
+
+
     -- Livingtree root attack custom art by @Advent (modded from poison birchnut roots)
     Asset("ANIM", "anim/tree_leaf_spike_lt.zip"),
     Asset("ANIM", "anim/frog_yellow_build.zip"),

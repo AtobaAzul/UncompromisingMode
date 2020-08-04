@@ -16,7 +16,7 @@ local function fn(Sim)
 
     inst.AnimState:SetBuild("hoodedcanopy")
     inst.AnimState:SetBank("hoodedcanopy")
-    inst.AnimState:PlayAnimation("idle")
+    inst.AnimState:PlayAnimation("idle", true)
     inst.AnimState:SetMultColour(1, 1, 1, .5)
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
