@@ -112,4 +112,5 @@ return {
 	"web_bomb",
 	"hoodedcanopy",
 	"jungleturf",
+	"poopregenbuff",
 }

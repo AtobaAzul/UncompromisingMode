@@ -10,6 +10,7 @@ local component_post = {
 	--"hunter",
 	"kramped",
 	"explosiveresist",
+	"fertilizer",
 }
 
 local prefab_post = {
@@ -100,6 +101,7 @@ local prefab_post = {
 	"hambat",
 	"lighter",
 	"townportal",
+	"compostwrap",
 }
 
 local stategraph_post = {
