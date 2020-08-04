@@ -66,7 +66,7 @@ end)
 
 -----KoreanWaffle's Spawner Limiter Tag Adding Code
 --Add new map tags to storygen
-local MapTags = {"scorpions"}
+local MapTags = {"scorpions", "hoodedcanopy"}
 
 AddGlobalClassPostConstruct("map/storygen", "Story", function(self)
     for k, v in pairs(MapTags) do
@@ -123,12 +123,13 @@ task.room_choices["ricepatch"] = 1      --Comment to test task based rice worldg
 --table.insert(task.keys_given,KEYS.RICE)   Uncomment to test task based rice worldgen
 end)
 GLOBAL.require("map/tasks/newswamp")
+GLOBAL.require("map/tasks/gianttrees")
 AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "forest" then
         return
     end
 
---table.insert(tasksetdata.tasks,"RiceSqueltch")   Uncomment to test task based rice worldgen
+table.insert(tasksetdata.tasks,"GiantTrees")  -- Uncomment to test task based rice worldgen
 end)
 --GLOBAL.require("map/static_layouts/licepatch")
 --[[local Layouts = GLOBAL.require("map/layouts").Layouts

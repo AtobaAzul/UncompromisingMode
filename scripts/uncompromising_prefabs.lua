@@ -4,7 +4,6 @@ return {
 	"sporecloud_toad",
 	"deerclops_ground_fx",
 	"root_spike",
-
 	"uncompromising_rat",
 	"ratpoison",
 	--"ratpoisonbottle",
@@ -113,4 +112,5 @@ return {
 	"hoodedcanopy",
 	"jungleturf",
 	"poopregenbuff",
+	"giant_tree",
 }
