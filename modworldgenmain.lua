@@ -2,6 +2,13 @@ GLOBAL.require("map/terrain")
 
 ------Turf Using Tile Adder From ADM's Turf Mod
 modimport("tile_adder.lua")
+local GROUND_OCEAN_COLOR = -- Color for the main island ground tiles 
+{ 
+    primary_color =         {  0,   0,   0,  25 }, 
+    secondary_color =       { 0,  20,  33,  0 }, 
+    secondary_color_dusk =  { 0,  20,  33,  80 }, 
+    minimap_color =         { 46,  32,  18,  64 },
+}
 AddTile(
 	"JUNGLE",
 	102,
@@ -12,6 +19,7 @@ AddTile(
 		walksound = "dontstarve/movement/walk_grass",
 		snowsound = "dontstarve/movement/run_snow",
 		mudsound = "dontstarve/movement/run_mud",
+		colors = GROUND_OCEAN_COLOR,
 	},
 	{noise_texture = "levels/textures/mini_noise_jungle.tex"}
 )

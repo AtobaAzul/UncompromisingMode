@@ -1,11 +1,22 @@
---[[
--- The following tables list what may be present in the tile and minimap
--- tile specifications passed to AddTile(). The values listed here are the
--- default ones used when none are specified.
---]]
 
--- Lists the structure for a tile specification by mapping the possible fields to their
--- default values.
+--Thanks for the tile adder, ADM.
+local GROUND_OCEAN_COLOR = -- Color for the main island ground tiles 
+{ 
+    primary_color =         {  0,   0,   0,  25 }, 
+    secondary_color =       { 0,  20,  33,  0 }, 
+    secondary_color_dusk =  { 0,  20,  33,  80 }, 
+    minimap_color =         { 46,  32,  18,  64 },
+}
+
+local MOON_OCEAN_COLOR =  -- Color for the moon island ground tiles
+{ 
+    primary_color =         { 255, 255, 255,  25 }, 
+    secondary_color =       {   0, 170, 255,  89 },
+    secondary_color_dusk =  {   0, 170, 255,  89 },
+    minimap_color =         {   25, 140, 155,  89 },
+}  
+
+
 local tile_spec_defaults = {
 	noise_texture = "images/square.tex",
 	runsound = "dontstarve/movement/run_dirt",
@@ -13,17 +24,15 @@ local tile_spec_defaults = {
 	snowsound = "dontstarve/movement/run_ice",
 	mudsound = "dontstarve/movement/run_mud",
 	flashpoint_modifier = 0,
+	colors = GROUND_OCEAN_COLOR,
 }
 
--- Like the above, but for the minimap tile specification.
 local mini_tile_spec_defaults = {
 	name = "map_edge",
 	noise_texture = "levels/textures/mini_dirt_noise.tex",
 }
 
-
-------------------------------------------------------------------------
-
+--	[ 	The Good ol' tile_adder.lua		]	--
 
 local _G = GLOBAL
 local require = _G.require
@@ -31,7 +40,6 @@ local require = _G.require
 
 require 'util'
 require 'map/terrain'
-
 
 local Asset = _G.Asset
 
@@ -46,7 +54,6 @@ local assert = _G.assert
 local error = _G.error
 local type = _G.type
 local rawget = _G.rawget
-
 
 local GroundAtlas = rawget(_G, "GroundAtlas") or function( name )
 	return ("levels/tiles/%s.xml"):format(name) 
@@ -70,7 +77,6 @@ local function GroundNoise( name )
 		end
 	end
 
-	-- This is meant to trigger an error.
 	local status, err = pcall(resolvefilepath, name)
 	return error(err or "This shouldn't be thrown. But your texture path is invalid, btw.", 3)
 end
@@ -99,27 +105,17 @@ local function validate_ground_numerical_id(numerical_id)
 	end
 end
 
---[[
--- name should match the texture/atlas specification in levels/tiles.
--- (it's not just an arbitrary name, it defines the texture used)
---]]
 function AddTile(id, numerical_id, name, specs, minispecs, isflooring)
 	assert( type(id) == "string" )
 	assert( type(numerical_id) == "number" )
 	assert( type(name) == "string" )
 	assert( isflooring == nil or type(isflooring) == "boolean" )
 
-	-- the same tile can be added multiple times if the mod is loaded via the frontend mod loader, see http://forums.kleientertainment.com/topic/66075-world-gen-data-and-mod-changes/
 	if GROUND[id] ~= nil then
 		modassert(GROUND[id] == numerical_id, ("GROUND.%s already exists: %s (%s), and differs from intended %s."):format(
 			id, tostring(GROUND_NAMES[GROUND[id]]), tostring(GROUND[id]), tostring(numerical_id)
 		))
 		modassert(GROUND_NAMES[numerical_id] == name, ("GROUND_NAMES[%s] %s differs from intended %s."):format(tostring(numerical_id), tostring(GROUND_NAMES[numerical_id]), name))
-		-- flooring checking can't be currently done, modworldgenmain.lua can get loaded by frontend mod loader multiple times
-		-- if the user changes the setting between the loads, the value can differ and cause unwanted error
-		--modassert(GROUND_FLOORING[numerical_id] == isflooring, ('GROUND_FLOORING[%s] (%s) differs from intended %s.'):format(
-		--	tostring(numerical_id), tostring(GROUND_FLOORING[numerical_id]), tostring(isflooring)
-		--))
 		return
 	end
 
@@ -129,13 +125,11 @@ function AddTile(id, numerical_id, name, specs, minispecs, isflooring)
 	assert( type(specs) == "table" )
 	assert( type(minispecs) == "table" )
 
-	-- Ideally, this should never be passed, and we would wither generate it or load it
-	-- from savedata if it had already been generated once for the current map/saveslot.
 	validate_ground_numerical_id(numerical_id)
 
 	GROUND[id] = numerical_id
 	GROUND_NAMES[numerical_id] = name
-	GROUND_FLOORING[numerical_id] = isflooring -- don't allow planting (saplings etc.) on this turf
+	GROUND_FLOORING[numerical_id] = isflooring
 
 
 	local real_specs = { name = name }
@@ -143,7 +137,6 @@ function AddTile(id, numerical_id, name, specs, minispecs, isflooring)
 		if specs[k] == nil then
 			real_specs[k] = default
 		else
-			-- resolvefilepath() gets called by the world entity.
 			real_specs[k] = specs[k]
 		end
 	end
@@ -178,15 +171,8 @@ function AddTile(id, numerical_id, name, specs, minispecs, isflooring)
 
 		AddAssets(real_minispecs)
 	end
-
-
-	--return real_specs, real_minispecs
 end
 
--- moves tile type with specified id before (or after) target tile type in the rendering layer order table
--- @param tiletypeid  id of the tile type that will be moved
--- @param targettiletypeid  id of the tile type in relation to which the moving tile type will be moved
--- @param moveafter  boolean  nil/false - move before target tile; true - move after target tile
 function ChangeTileTypeRenderOrder(tiletypeid, targettiletypeid, moveafter)
 	assert(tiletypeid ~= nil)
 	assert(targettiletypeid ~= nil)
@@ -210,7 +196,6 @@ function ChangeTileTypeRenderOrder(tiletypeid, targettiletypeid, moveafter)
 		end
 	end
 	if idx == nil then
-		-- tile type not found
 		moderror(("[ChangeTileTypeRenderOrder(%s,%s,%s)] Tile type %s (%s) not found."):format(
 			tostring(tiletypeid), tostring(targettiletypeid), tostring(moveafter), tostring(tiletypeid), tostring(GROUND_LOOKUP[tiletypeid])
 		))
@@ -218,7 +203,6 @@ function ChangeTileTypeRenderOrder(tiletypeid, targettiletypeid, moveafter)
 	end
 
 	local targetidx = nil
-	-- this is just a check for existence, the index might change during the moving
 	for i, ground in ipairs(grounds) do
 		if ground[1] ~= nil and ground[1] == targettiletypeid then
 			targetidx = i
@@ -226,18 +210,13 @@ function ChangeTileTypeRenderOrder(tiletypeid, targettiletypeid, moveafter)
 		end
 	end
 	if targetidx == nil then
-		-- tile type not found
 		moderror(("[ChangeTileTypeRenderOrder(%s,%s,%s)] Tile type %s (%s) not found."):format(
 			tostring(tiletypeid), tostring(targettiletypeid), tostring(moveafter), tostring(targettiletypeid), tostring(GROUND_LOOKUP[targettiletypeid])
 		))
 		return nil
 	end
 
-	--print(("[ChangeTileTypeRenderOrder(%s,%s,%s)] Moving tile type %s (%s) from index %s to index %s."):format(
-	--	tostring(tiletypeid), tostring(targettiletypeid), tostring(moveafter), tostring(tiletypeid), tostring(GROUND_LOOKUP[tiletypeid]), tostring(idx), tostring(targetidx)
-	--))
 	local item = table.remove(grounds, idx)
-	-- get the real target index
 	targetidx = nil
 	for i, ground in ipairs(grounds) do
 		if ground[1] ~= nil and ground[1] == targettiletypeid then
