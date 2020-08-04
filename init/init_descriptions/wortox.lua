@@ -125,3 +125,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.LUREPLAGUE_RAT = "He's trying to run off with me!"
 	DESCRIBE.MARSH_GRASS = "A bush."
 	DESCRIBE.CURSED_ANTLER = "Hard to miss with something this large!"
+	DESCRIBE.BLOOMERSHOT = "I'm not going to fall for this prank!"

@@ -124,3 +124,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.LUREPLAGUE_RAT = "A new plague arrives!"
 	DESCRIBE.MARSH_GRASS = "It's a bush!"
 	DESCRIBE.CURSED_ANTLER = "A magnificent weapon!"
+	DESCRIBE.BLOOMERSHOT = "All the pain, with none of the glory."

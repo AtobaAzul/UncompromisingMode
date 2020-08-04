@@ -154,6 +154,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.LUREPLAGUE_RAT = "They're rat..tal... Oh no."
 	DESCRIBE.MARSH_GRASS = "It's all bushy."
 	DESCRIBE.CURSED_ANTLER = "Strong AND reliable!"
+	DESCRIBE.BLOOMERSHOT = "The only outcome of this experiment is pain."
 	
 	ACTIONFAIL.READ =
         {

@@ -124,3 +124,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.LUREPLAGUE_RAT = "I'm not on the menu!"
 	DESCRIBE.MARSH_GRASS = "It provides scenery."
 	DESCRIBE.CURSED_ANTLER = "I know a thing or two about bones."
+	DESCRIBE.BLOOMERSHOT = "Seems a bit cruel if I'm being honest."

@@ -46,6 +46,8 @@ Assets = {
 	Asset("IMAGE", "images/mushroom_slot.tex"),
 	Asset("ATLAS", "images/inventoryimages/critterlab_real.xml"),
 	Asset("IMAGE", "images/inventoryimages/critterlab_real.tex"),
+	Asset("ATLAS", "images/inventoryimages/bloomershot.xml"),
+	Asset("IMAGE", "images/inventoryimages/bloomershot.tex"),
 	
 	Asset("ANIM", "anim/geyser.zip"),
 	Asset("ANIM", "anim/lava_vomit.zip"),
@@ -105,6 +107,7 @@ Assets = {
 	Asset("ANIM", "anim/hat_shadowcrown.zip"),
 	Asset("ANIM", "anim/critterlab_broken.zip"),
 	Asset("ANIM", "anim/swap_nightstick_off.zip"),
+	Asset("ANIM", "anim/bloomershot.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),

@@ -113,4 +113,5 @@ return {
 	"hoodedcanopy",
 	"jungleturf",
 	"poopregenbuff",
+	"bloomershot",
 }

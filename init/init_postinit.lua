@@ -11,6 +11,7 @@ local component_post = {
 	"kramped",
 	"explosiveresist",
 	"fertilizer",
+	"healer",
 }
 
 local prefab_post = {

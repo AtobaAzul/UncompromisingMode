@@ -125,3 +125,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.LUREPLAGUE_RAT = "I prefered you when you had fewer eyes!"
 	DESCRIBE.MARSH_GRASS = "Look, a bush!"
 	DESCRIBE.CURSED_ANTLER = "It'll never punch out on 'ya."
+	DESCRIBE.BLOOMERSHOT = "I can't say I see the point. Oh, wait, hah!"

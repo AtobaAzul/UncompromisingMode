@@ -125,3 +125,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.LUREPLAGUE_RAT = "Not comin for kit this time, eh?"
 	DESCRIBE.MARSH_GRASS = "It's a bush, eh."
 	DESCRIBE.CURSED_ANTLER = "This'll last us forever!"
+	DESCRIBE.BLOOMERSHOT = "What's the point, eh?"

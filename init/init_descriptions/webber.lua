@@ -124,3 +124,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.LUREPLAGUE_RAT = "Hey there buddy, nice eyes!"
 	DESCRIBE.MARSH_GRASS = "A bush."
 	DESCRIBE.CURSED_ANTLER = "Woah, look at how big it is!"
+	DESCRIBE.BLOOMERSHOT = "Hey little guy, you're trapped too huh?."

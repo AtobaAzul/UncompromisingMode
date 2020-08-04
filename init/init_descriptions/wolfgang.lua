@@ -125,3 +125,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.LUREPLAGUE_RAT = "GAH! Hairpuff scare wolfgang!"
 	DESCRIBE.MARSH_GRASS = "Is mighty bush!"
 	DESCRIBE.CURSED_ANTLER = "Ha! Stick is MIGHTY!"
+	DESCRIBE.BLOOMERSHOT = "It's angry bee in a needle. Wolfgang not like needles."
