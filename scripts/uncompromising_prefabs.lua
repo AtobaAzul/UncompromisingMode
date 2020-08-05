@@ -114,4 +114,5 @@ return {
 	"poopregenbuff",
 	"bloomershot",
 	"giant_tree",
+	"webbedcreature",
 }
