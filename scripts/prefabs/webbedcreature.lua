@@ -21,7 +21,6 @@ local function SetStage(inst, stage)
 		inst.AnimState:PlayAnimation(inst.anims.init)
 		inst.AnimState:PushAnimation(inst.anims.idle, true)
 	end  
-    inst.data.stage = stage -- track here, as growable component may go away
 end
 
 local function SetSmall(inst)
@@ -64,17 +63,30 @@ end
 
 
 local function OnKilled(inst)
-    inst.AnimState:PlayAnimation("cocoon_dead")
+	inst.AnimState:PlayAnimation("cocoon_dead")
     inst.Physics:ClearCollisionMask()
-
-    inst.SoundEmitter:KillSound("loop")
-
-    inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_destroy")
 	local x, y, z = inst.Transform:GetWorldPosition()
+    inst.SoundEmitter:KillSound("loop")
+	inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_destroy")
+	local creature = nil
+	if inst.size ~= nil then
+		if inst.size == 1 then
+		creature = "pigman"
+		end
+		if inst.size == 2 then
+		creature = "krampus"
+		end
+		if inst.size == 3 then
+		creature = "beefalo"
+		end
+    local deadcreature = SpawnPrefab(creature)
+	deadcreature.Transform:SetPosition(x, y, z)
+	deadcreature.components.health:Kill()
+	else
     local deadcreature = SpawnPrefab("pigman")
 	deadcreature.Transform:SetPosition(x, y, z)
 	deadcreature.components.health:Kill()
-	
+	end	
 end
 
 local function OnEntityWake(inst)
@@ -85,7 +97,43 @@ local function OnEntitySleep(inst)
 	inst.SoundEmitter:KillSound("loop")
 end
 
+local function onsave(inst,data)
+if inst.size ~= nil then
+data.size = inst.size
+else
+data.size = math.random(1,3)
+end
+end
+local function onload(inst,data)
+if data and data.size ~= nil then
+inst.size = data.size
+else
+inst.size = math.random(1,3)
+end
+end
+local function SetSize(inst)
+if inst.size == 1 then
+SetSmall(inst)
+end
+if inst.size == 2 then
+SetMedium(inst)
+end
+if inst.size == 3 then
+SetLarge(inst)
+end
+end
 
+local function Regen(inst, attacker)
+    if not inst.components.health:IsDead() then
+        inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_hit")
+        inst.AnimState:PlayAnimation(inst.anims.hit)
+        inst.AnimState:PushAnimation(inst.anims.idle)
+		inst.components.health:SetCurrentHealth(1000000)
+		if attacker:HasTag("widowsgrasp") then
+		inst.components.health:Kill()
+		end
+	end
+end
 local function fn()
 		local inst = CreateEntity()
 		inst.entity:AddTransform()
@@ -94,7 +142,6 @@ local function fn()
 
 		inst.entity:AddSoundEmitter()
 
-		inst.data = {}
 
 		MakeObstaclePhysics(inst, .5)
 
@@ -110,51 +157,25 @@ local function fn()
 			return inst
 		end
 		inst:AddTag("structure")
-	    --inst:AddTag("hostile")
-		--inst:AddTag("spiderden")
-		--inst:AddTag("hive")
-
+		inst:AddTag("webbedcreature")
 		-------------------
 		inst:AddComponent("health")
-		inst.components.health:SetMaxHealth(100)
+		inst.components.health:SetMaxHealth(1000000)
 
-		-------------------
-
-		---------------------
-		---------------------
-
-		---------------------
-		-------------------
-
-		---------------------
-		-------------------
-
-
-		-------------------
-
-		inst:AddComponent("combat")
+		inst:AddComponent("combat")       
+        inst.components.combat:SetOnHit(Regen)
 		inst:ListenForEvent("death", OnKilled)
 
-
-		--------------------
-
-		---------------------
 		MakeLargePropagator(inst)
 
-		---------------------
-
-		---------------------
-
-		--inst:AddComponent( "spawner" )
-		--inst.components.spawner:Configure( "resident", max, initial, rate )
-		--inst.spawn_weight = global_spawn_weight
-
 		inst:AddComponent("inspectable")
-		
+		inst:DoTaskInTime(0,SetSize)
 		MakeSnowCovered(inst)
-
+		inst.OnSave = onsave
+		inst.OnLoad = onload
 		inst.OnEntitySleep = OnEntitySleep
 		inst.OnEntityWake = OnEntityWake
+		inst.size = math.random(1,3)
 		return inst
 end
 

@@ -115,4 +115,5 @@ return {
 	"bloomershot",
 	"giant_tree",
 	"webbedcreature",
+	"widowsgrasp",
 }
