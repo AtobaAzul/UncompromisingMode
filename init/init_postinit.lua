@@ -81,7 +81,6 @@ local prefab_post = {
 	"heatrock",
 	"firesuppressor",
 	"dragonfly_spawner",
-	"mist",
 	"rneghostfire",
 	"frog", -- also toad
 	"monkey",

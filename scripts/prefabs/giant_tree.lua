@@ -1,8 +1,7 @@
-local function makeassetlist(name)
-    return {
-        Asset("ANIM", "anim/"..name..".zip")
-    }
-end
+local assets =
+{
+Asset("ANIM", "anim/pillar_algae.zip"),
+}
 SetSharedLootTable( 'um_giant_tree',
 {
     {'twigs',           1.0},
@@ -76,8 +75,7 @@ x = x - 55
 z = z + 11
 end
 end
-local function makefn(name, collide)
-    return function()
+local function makefn()
     	local inst = CreateEntity()
 
     	inst.entity:AddTransform()
@@ -89,12 +87,10 @@ local function makefn(name, collide)
 		inst:AddTag("tree")
 		inst.MiniMapEntity:SetIcon("grass.png")
 		
-        if collide then
-            MakeObstaclePhysics(inst, 2.35)
-        end
+        MakeObstaclePhysics(inst, 2.35)
 
-        inst.AnimState:SetBank(name)
-        inst.AnimState:SetBuild(name)
+        inst.AnimState:SetBank("pillar_algae")
+        inst.AnimState:SetBuild("pillar_algae")
         inst.AnimState:PlayAnimation("idle", true)
         inst.entity:SetPristine()
 		
@@ -118,11 +114,7 @@ local function makefn(name, collide)
 		inst.OnSave = onsave
 		inst.OnLoad = onload
         return inst
-    end
 end
 
-local function pillar(name, collide)
-    return Prefab("giant_tree", makefn(name, collide), makeassetlist(name))
-end
+return Prefab("giant_tree", makefn, assets)
 
-return pillar("pillar_algae", true)
