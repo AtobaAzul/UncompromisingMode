@@ -1,6 +1,6 @@
 local assets =
 {
-Asset("ANIM", "anim/pillar_algae.zip"),
+Asset("ANIM", "anim/giant_tree.zip"),
 }
 SetSharedLootTable( 'um_giant_tree',
 {
@@ -89,8 +89,8 @@ local function makefn()
 		
         MakeObstaclePhysics(inst, 2.35)
 
-        inst.AnimState:SetBank("pillar_algae")
-        inst.AnimState:SetBuild("pillar_algae")
+        inst.AnimState:SetBank("giant_tree")
+        inst.AnimState:SetBuild("giant_tree")
         inst.AnimState:PlayAnimation("idle", true)
         inst.entity:SetPristine()
 		
