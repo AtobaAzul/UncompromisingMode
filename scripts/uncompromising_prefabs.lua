@@ -116,4 +116,5 @@ return {
 	"giant_tree",
 	"webbedcreature",
 	"widowsgrasp",
+	"extracanopyspawner",
 }

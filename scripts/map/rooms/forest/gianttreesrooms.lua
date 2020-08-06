@@ -5,9 +5,17 @@ AddRoom("GiantTrees",
 	tags = {"RoadPoison", "hoodedcanopy"}, --"ForceDisconnected"
 	contents =  
 	{	
+		distributepercent = 0.3,
+		distributeprefabs = {
+		sapling = 0.2,
+		evergreen_sparse = 0.5,
+		cave_fern = 0.5,
+		},
+		
 			countprefabs =	
 		{
 			giant_tree = function () return 6 + math.random(1,2) end,
+			extracanopyspawner = function () return 6 + math.random(0,1) end,
 			
 		}
 }})
@@ -18,9 +26,17 @@ AddRoom("BGGiantTrees",
 	tags = {"hoodedcanopy"}, --"ForceDisconnected"
 	contents =  
 	{	
+		distributepercent = 0.3,
+		distributeprefabs = {
+		sapling = 0.2,
+		evergreen_sparse = 0.5,
+		cave_fern = 0.5,
+		},
 			countprefabs =	
 		{
+			
 			giant_tree = function () return 6 + math.random(0,1) end,
+			extracanopyspawner = function () return 6 + math.random(0,1) end,
 			
 		}
 }})
