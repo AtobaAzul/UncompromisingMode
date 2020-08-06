@@ -557,7 +557,7 @@ local function SpawnKrampus(player)
 			player:DoTaskInTime(2 * math.random(4) * 0.3, function()
 				--local thunder = SpawnPrefab("thunder_far")
 				--thunder.Transform:SetPosition(x + math.random(-10,10), y, z + math.random(-10,10))
-				local level = 2 + PlayerScaling(player)
+				local level = 1 + PlayerScaling(player) --Canis said to set to 1
 
 				TheWorld:PushEvent("ms_forcenaughtinessrne", { player = player, numspawns = level })
 				--TheWorld:PushEvent("ms_forcenaughtiness", { player = nil, numspawns = level })
