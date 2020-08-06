@@ -118,4 +118,5 @@ return {
 	"widowsgrasp",
 	"extracanopyspawner",
 	"widowweb",
+	"webbedcreaturespawner",
 }

@@ -86,7 +86,9 @@ local function OnKilled(inst)
     local deadcreature = SpawnPrefab("pigman")
 	deadcreature.Transform:SetPosition(x, y, z)
 	deadcreature.components.health:Kill()
-	end	
+	end
+	local spawner = SpawnPrefab("webbedcreaturespawner")
+	spawner.Transform:SetPosition(x, y, z)
 end
 
 local function OnEntityWake(inst)
