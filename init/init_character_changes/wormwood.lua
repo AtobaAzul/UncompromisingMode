@@ -470,7 +470,7 @@ local function ForceBloom(inst)
 		SetBloomStage(inst, 3)
 		inst.SoundEmitter:PlaySound("dontstarve/bee/bee_death", nil, .6)
 		SpawnBloomFX(inst)
-		inst:DoTaskInTime(60, ForceBloomTimeout)
+		inst:DoTaskInTime(240, ForceBloomTimeout)
 	end
 end
 
