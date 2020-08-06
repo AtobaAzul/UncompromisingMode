@@ -91,6 +91,7 @@ local function OnMoistureDelta(inst)
 		end 
 	end)
 end
+
 local WATCH_WORLD_PLANTS_DIST_SQ = 20 * 20
 local SANITY_DRAIN_TIME = 5
 

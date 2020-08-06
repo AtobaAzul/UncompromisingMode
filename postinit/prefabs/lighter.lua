@@ -45,14 +45,67 @@ local function onequip(inst, owner)
     end]]
 end
 
+local function createlight(inst)
+
+    local caster = inst.components.inventoryitem.owner
+
+    inst.SoundEmitter:KillSound("hiss")
+	SpawnPrefab("firesplash_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+    inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
+	
+	local x, y, z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x, y, z, 4, nil, { "INLIMBO", "player", "abigail" })
+
+    for i, v in ipairs(ents) do
+        if v ~= inst and v:IsValid() and not v:IsInLimbo() then
+           
+            --Recheck valid after work
+            if v:IsValid() and not v:IsInLimbo() then
+                if v.components.fueled == nil and
+                    v.components.burnable ~= nil and
+                    not v.components.burnable:IsBurning() and
+                    not v:HasTag("burnt") then
+                    v.components.burnable:Ignite()
+                end
+				
+				if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
+                    local dmg = 40
+                    if v.components.explosiveresist ~= nil then
+                        dmg = dmg * (1 - v.components.explosiveresist:GetResistance())
+                        v.components.explosiveresist:OnExplosiveDamage(dmg, inst)
+                    end
+					if v:HasTag("shadow") or v:HasTag("shadowchesspiece") then
+						dmg = dmg * 3
+					end
+                    v.components.combat:GetAttacked(inst, dmg, nil)
+                end
+            end
+        end
+    end
+	
+	if caster ~= nil then
+		SpawnPrefab("willowfire").Transform:SetPosition(caster.Transform:GetWorldPosition())
+	end
+	
+	local reduce = inst.components.fueled:GetPercent() - 0.1001
+	inst.components.fueled:SetPercent(reduce)
+	
+end
+
 env.AddPrefabPostInit("lighter", function(inst)
 	if not TheWorld.ismastersim then
 		return 
 	end
 	
+	inst:AddTag("lighter")
+	
 	if inst.components.equippable ~= nil then
 		inst.components.equippable:SetOnEquip(onequip)
 	end
+	
+	inst:AddComponent("spellcaster")
+    inst.components.spellcaster:SetSpellFn(createlight)
+    inst.components.spellcaster.canusefrominventory = true
 	
 end)
 
