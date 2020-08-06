@@ -168,7 +168,7 @@ local days_survived = player.components.age ~= nil and player.components.age:Get
     local target = FindEntity(player, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, { "evergreens", "tree" }, { "leif", "stump", "burnt" })
     if target ~= nil then
 		for k = 1, (days_survived <= 30 and 1) or math.random(days_survived <= 80 and 2 or 3) do
-			print("targetfound")
+			--print("targetfound")
 			target.noleif = true
 			target.chopper = player
 			target.leifscale = 1 --GetGrowthStages(target)[target.components.growable.stage].leifscale or 1 Getting size is muck
@@ -181,7 +181,7 @@ local days_survived = player.components.age ~= nil and player.components.age:Get
 			for i = 1, level + 2 do
 				SpawnBirchNutters(player)
 			end
-			print("leifattackfailed")
+			--print("leifattackfailed")
 		end)
 	end
 end
@@ -211,7 +211,7 @@ local days_survived = player.components.age ~= nil and player.components.age:Get
 	for k = 1, (days_survived <= 30 and 4) or math.random(days_survived <= 80 and 8 or 12) do
     local target = FindEntity(player, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, {"stump","evergreen"}, { "leif","burnt","deciduoustree" })
 		if target ~= nil then
-			print("targetfound")
+			--print("targetfound")
 			target.noleif = true
 			target.chopper = player--GetGrowthStages(target)[target.components.growable.stage].leifscale or 1 Getting size is muck
 				--assert(GetBuild(target).leif ~= nil)
@@ -223,7 +223,7 @@ local days_survived = player.components.age ~= nil and player.components.age:Get
 			for i = 1, level do
 				SpawnBirchNutters(player)
 			end
-			print("leifattackfailed")
+			--print("leifattackfailed")
 		end)
 		end
 	end
@@ -1346,7 +1346,6 @@ local function CheckPlayers()
 						--nothing, not really accounting for other players in other bases but meh
 					else
 						DoSecondaryWildRNE(i)--DoWildRNE(v)
-						print("no find base")
 					end
 				else
 					return

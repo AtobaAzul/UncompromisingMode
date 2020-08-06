@@ -23,7 +23,7 @@ AddRoom("BGGiantTrees",
 {
 	colour = {r=1,g=1,b=1,a=.50}, 
 	value = GROUND.JUNGLE,
-	tags = {"hoodedcanopy"}, --"ForceDisconnected"
+	tags = {"RoadPoison","hoodedcanopy"}, --"ForceDisconnected"
 	contents =  
 	{	
 		distributepercent = 0.3,
@@ -52,5 +52,11 @@ AddRoom("SpideryGiantTrees",
 			{
 				giant_tree = 0.01,
 				spiderden = 0.01,
+			},
+			countprefabs =	
+			{
+			giant_tree = function () return 3 + math.random(0,1) end,
+			extracanopyspawner = function () return 6 + math.random(0,1) end,
+			widowweb = 1 
 			},
 }})
