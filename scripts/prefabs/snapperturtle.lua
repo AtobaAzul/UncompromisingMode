@@ -134,7 +134,7 @@ local function fncommon(n, build, morphlist, custombrain, tag, data)
     MakeCharacterPhysics(inst, 10, .5)
 
     inst.DynamicShadow:SetSize(2.5, 1.5)
-    inst.Transform:SetTwoFaced()
+    inst.Transform:SetSixFaced()
 
     inst:AddTag("scarytoprey")
     inst:AddTag("scarytooceanprey")
