@@ -116,6 +116,9 @@ local function EquipWeapons(inst)
         inst.weaponitems.meleeweapon = meleeweapon
     end
 end
+local function OnLoad(inst)
+inst.WebReady = true
+end
 local function fn()
     local inst = CreateEntity()
 
@@ -211,7 +214,7 @@ local function fn()
     inst.weaponitems = {}
 	EquipWeapons(inst)
     inst:SetBrain(brain)
-
+	inst.OnLoad = OnLoad
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("death", OnDead)
 
