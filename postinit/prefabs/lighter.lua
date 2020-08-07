@@ -137,11 +137,45 @@ local function gobig(inst)
 	end
 end
 
+local function getstatus(inst)
+    local skin_name = nil
+	
+    if inst:GetSkinName() ~= nil then
+        --skin_name = inst:GetSkinName()
+		--return skin_name
+		--print(skin_name)
+		return inst.components.fueled ~= nil and inst.components.fueled:IsEmpty() and "ASHLEY_BROKEN" or "ASHLEY"
+	end
+	
+    return inst.components.fueled ~= nil and inst.components.fueled:IsEmpty() and "BROKEN" or nil
+end
+
+local function SetName(inst)
+	inst.pickname = "Bernie"
+	if inst:GetSkinName() ~= nil then
+		inst.pickname = "Ashley"
+	end
+	inst.components.named:SetName(inst.pickname)
+end
+
+local function SetNameBig(inst)
+	inst.pickname = "BERNIE!"
+	if inst:GetSkinName() ~= nil then
+		inst.pickname = "ASHLEY!"
+	end
+	inst.components.named:SetName(inst.pickname)
+end
+
 env.AddPrefabPostInit("bernie_active", function(inst)
 
 	if not TheWorld.ismastersim then
 		return
 	end
+	
+    inst.components.inspectable.getstatus = getstatus
+	
+	inst:AddComponent("named")
+	inst:DoTaskInTime(0, SetName)
 	
     inst:AddComponent("burnable")
     inst.components.burnable:SetFXLevel(1)
@@ -152,23 +186,6 @@ env.AddPrefabPostInit("bernie_active", function(inst)
 	inst.GoBig = gobig
 
 end)
-
-local function goinactive(inst)
-    local skin_name = nil
-    if inst:GetSkinName() ~= nil then
-        skin_name = string.gsub(inst:GetSkinName(), "_big", "")
-    end
-    local inactive = SpawnPrefab("bernie_inactive", skin_name, inst.skin_id, nil)
-    if inactive ~= nil then
-        --Transform health % into fuel.
-        inactive.components.fueled:SetPercent(inst.components.health:GetPercent())
-        inactive.Transform:SetPosition(inst.Transform:GetWorldPosition())
-        inactive.Transform:SetRotation(inst.Transform:GetRotation())
-        inactive.components.timer:StartTimer("transform_cd", TUNING.BERNIE_BIG_COOLDOWN)
-        inst:Remove()
-        return inactive
-    end
-end
 	
 local function revertbrnt(inst)
     inst.sg:GoToState("deactivate")
@@ -189,7 +206,11 @@ env.AddPrefabPostInit("bernie_big", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
+	
+    inst.components.inspectable.getstatus = getstatus
 
+	inst:AddComponent("named")
+	inst:DoTaskInTime(0, SetNameBig)
     
     inst:AddComponent("burnable")
     inst.components.burnable:SetFXLevel(3)
@@ -201,5 +222,18 @@ env.AddPrefabPostInit("bernie_big", function(inst)
 	MakeSmallPropagator(inst)
 	
     inst.OnPreLoad = OnPreLoad
+
+end)
+
+env.AddPrefabPostInit("bernie_inactive", function(inst)
+
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+    inst.components.inspectable.getstatus = getstatus
+
+	inst:AddComponent("named")
+	inst:DoTaskInTime(0, SetName)
 
 end)

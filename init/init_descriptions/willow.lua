@@ -126,3 +126,21 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "Will it burn?"	
 	DESCRIBE.CURSED_ANTLER = "It will never leave me, unless I leave it behind."
 	DESCRIBE.BLOOMERSHOT = "What idiot would use this?"
+	DESCRIBE.BERNIE_INACTIVE =
+        {
+            BROKEN = "I need to fix Bernie up.",
+            GENERIC = "My childhood buddy - Bernie!",
+            ASHLEY_BROKEN = "I need to fix Ashley up.",
+            ASHLEY = "My childhood buddy - Ashley!",
+        }
+	
+	DESCRIBE.BERNIE_ACTIVE =
+        {
+            GENERIC = "Help me, Bernie!",
+            ASHLEY = "Help me, Ashley!",
+        }
+	DESCRIBE.BERNIE_BIG =
+        {
+            GENERIC = "GET'EM, BERNIE!!",
+            ASHLEY = "GET'EM, ASHLEY!!",
+        }
