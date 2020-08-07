@@ -91,6 +91,7 @@ local function OnMoistureDelta(inst)
 		end 
 	end)
 end
+
 local WATCH_WORLD_PLANTS_DIST_SQ = 20 * 20
 local SANITY_DRAIN_TIME = 5
 
@@ -469,7 +470,7 @@ local function ForceBloom(inst)
 		SetBloomStage(inst, 3)
 		inst.SoundEmitter:PlaySound("dontstarve/bee/bee_death", nil, .6)
 		SpawnBloomFX(inst)
-		inst:DoTaskInTime(60, ForceBloomTimeout)
+		inst:DoTaskInTime(240, ForceBloomTimeout)
 	end
 end
 

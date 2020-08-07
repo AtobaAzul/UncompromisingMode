@@ -120,4 +120,5 @@ return {
 	"widowweb",
 	"webbedcreaturespawner",
 	"hoodedwidow",
+	"willowfire",]
 }

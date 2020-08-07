@@ -10,39 +10,44 @@ local function propegation(inst)
 end
 
 local function OnIgniteFn(inst)
-	inst.SoundEmitter:KillSound("hiss")
-	SpawnPrefab("firesplash_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
-    inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
-	
-	local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 4, nil, { "INLIMBO", "player", "abigail" })
 
-    for i, v in ipairs(ents) do
-        if v ~= inst and v:IsValid() and not v:IsInLimbo() then
-           
-            --Recheck valid after work
-            if v:IsValid() and not v:IsInLimbo() then
-                if v.components.fueled == nil and
-                    v.components.burnable ~= nil and
-                    not v.components.burnable:IsBurning() and
-                    not v:HasTag("burnt") then
-                    v.components.burnable:Ignite()
-                end
-				
-				if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
-                    local dmg = 40
-                    if v.components.explosiveresist ~= nil then
-                        dmg = dmg * (1 - v.components.explosiveresist:GetResistance())
-                        v.components.explosiveresist:OnExplosiveDamage(dmg, inst)
-                    end
-					if v:HasTag("shadow") or v:HasTag("shadowchesspiece") then
-						dmg = dmg * 3
+	if inst.components.sanity:IsInsane() then
+	
+		inst.SoundEmitter:KillSound("hiss")
+		SpawnPrefab("firesplash_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
+		
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local ents = TheSim:FindEntities(x, y, z, 4, nil, { "INLIMBO", "player", "abigail" })
+
+		for i, v in ipairs(ents) do
+			if v ~= inst and v:IsValid() and not v:IsInLimbo() then
+			   
+				--Recheck valid after work
+				if v:IsValid() and not v:IsInLimbo() then
+					if v.components.fueled == nil and
+						v.components.burnable ~= nil and
+						not v.components.burnable:IsBurning() and
+						not v:HasTag("burnt") then
+						v.components.burnable:Ignite()
 					end
-                    v.components.combat:GetAttacked(inst, dmg, nil)
-                end
-            end
-        end
-    end
+					
+					if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
+						local dmg = 40
+						if v.components.explosiveresist ~= nil then
+							dmg = dmg * (1 - v.components.explosiveresist:GetResistance())
+							v.components.explosiveresist:OnExplosiveDamage(dmg, inst)
+						end
+						if v:HasTag("shadow") or v:HasTag("shadowchesspiece") then
+							dmg = dmg * 3
+						end
+						v.components.combat:GetAttacked(inst, dmg, nil)
+					end
+				end
+			end
+		end
+	
+	end
 	
 	--propegation(inst)
 
@@ -81,9 +86,13 @@ local function OnMoistureDelta(inst)
 	--Overriding the OnBurnt function to prevent propegator from sometimes removing, hopefully.
 	inst:DoTaskInTime(0, function(inst) 
 		if inst.components.health and not inst.components.health:IsDead() and inst.components.moisture and inst.components.moisture:GetMoisturePercent() >= 0.4 then
-			inst.components.propagator.acceptsheat = false
+			if inst.components.propegator ~= nil then
+				inst.components.propagator.acceptsheat = false
+			end
 		elseif inst.components.health and not inst.components.health:IsDead() then
-			inst.components.propagator.acceptsheat = true
+			if inst.components.propegator ~= nil then
+				inst.components.propagator.acceptsheat = true
+			end
 		end 
 	end)
 end

@@ -8,7 +8,7 @@ env.AddPrefabPostInit("compostwrap", function(inst)
 	end
 
 	if inst.components.fertilizer ~= nil then
-		inst.components.fertilizer:SetHealingAmount(TUNING.HEALING_MEDSMALL)
+		inst.components.fertilizer:SetHealingAmount(TUNING.HEALING_SMALL)
 		inst.components.fertilizer:SetBuff(true)
 	end
 
