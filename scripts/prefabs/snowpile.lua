@@ -99,8 +99,10 @@ startregen = function(inst, regentime)
 	if inst.components.workable.workleft <= 0 then
 		inst:Remove()
 	else
+		if inst.components.workable.workleft ~= nil then
 		inst.AnimState:PlayAnimation(anims[inst.components.workable.workleft])
 		inst.AnimState:PlayAnimation(anims[inst.components.pickable.cycles_left])
+		end
 	end
 
 	-- print('startregen', inst.components.workable.workleft, regentime, anims[inst.components.workable.workleft])
