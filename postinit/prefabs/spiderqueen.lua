@@ -44,7 +44,7 @@ local function EquipWeapons(inst)
         meleeweapon.entity:AddTransform()
         meleeweapon:AddComponent("weapon")
         meleeweapon.components.weapon:SetDamage(TUNING.SPIDERQUEEN_DAMAGE)
-        meleeweapon.components.weapon:SetRange(TUNING.SPIDERQUEEN_ATTACKRANGE)
+        meleeweapon.components.weapon:SetRange(TUNING.SPAT_MELEE_ATTACKRANGE/4)
         meleeweapon:AddComponent("inventoryitem")
         meleeweapon.persists = false
         meleeweapon.components.inventoryitem:SetOnDroppedFn(meleeweapon.Remove)

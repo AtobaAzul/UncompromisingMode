@@ -26,6 +26,15 @@ for i, v in ipairs(tree) do
 v:Remove()
 end
 end
+local function SpawnCacoons(inst)
+for i = 1, 3 do
+local x,y,z = inst.Transform:GetWorldPosition()
+x=x+math.random(-7,7)
+z=z+math.random(-7,7)
+local cacoon = SpawnPrefab("webbedcreature")
+cacoon.Transform:SetPosition(x, y, z)
+end
+end
 local function fn()
     local inst = CreateEntity()
 
@@ -57,6 +66,7 @@ local function fn()
     inst.components.childspawner.childname = "hoodedwidow"
 
 	inst:DoTaskInTime(0.1, ClearTrees)
+	inst:DoTaskInTime(0.1, SpawnCacoons)
     return inst
 end
 
