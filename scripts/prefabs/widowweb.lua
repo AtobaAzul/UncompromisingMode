@@ -19,22 +19,6 @@ local function SpawnInvestigators(inst, data)
             end
     end
 end
-local function ClearTrees(inst)
-local x,y,z = inst.Transform:GetWorldPosition()
-local tree = TheSim:FindEntities(x,y,z,12, {"tree"},{"canopy"})
-for i, v in ipairs(tree) do
-v:Remove()
-end
-end
-local function SpawnCacoons(inst)
-for i = 1, 3 do
-local x,y,z = inst.Transform:GetWorldPosition()
-x=x+math.random(-7,7)
-z=z+math.random(-7,7)
-local cacoon = SpawnPrefab("webbedcreature")
-cacoon.Transform:SetPosition(x, y, z)
-end
-end
 local function fn()
     local inst = CreateEntity()
 
@@ -63,8 +47,6 @@ local function fn()
     inst.components.childspawner:SetMaxChildren(1)
     inst.components.childspawner:StartRegen()
     inst.components.childspawner.childname = "hoodedwidow"
-	inst:DoTaskInTime(0.1, SpawnCacoons)
-	inst:DoTaskInTime(0.1, ClearTrees)
     return inst
 end
 

@@ -229,7 +229,7 @@ local states=
     },
     State{
         name = "fall",
-        tags = {"busy"},
+        tags = {"busy","noweb"},
         onenter = function(inst, data)
 			inst.components.locomotor:Stop()
             inst.Physics:SetDamping(0)
@@ -274,7 +274,8 @@ local states=
         },
         events=
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst) inst:PerformBufferedAction()
+			inst.sg:GoToState("idle") end),
         },       
 
     },
