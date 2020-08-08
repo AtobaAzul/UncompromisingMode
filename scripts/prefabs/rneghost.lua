@@ -56,6 +56,12 @@ local ghosts = TheSim:FindEntities(m,n,o, 100, {"ghost"})
 inst.sg:GoToState("dissipate")
 end
 
+local function OnIsDay(v, isday)
+	if isday then
+		v.components.fueled.accepting = true
+	end
+end
+
 local function TakeAllFire(inst)
 local m,n,o = inst.Transform:GetWorldPosition()
 DismissOtherGhosts(inst)
@@ -66,6 +72,9 @@ local firestuffs = TheSim:FindEntities(m,n,o, 100, {"campfire"})
 	v.components.fueled:MakeEmpty()
 	v.components.fueled.accepting = false
 	v:DoTaskInTime(120,function(v) v.components.fueled.accepting = true end)
+	
+	v:WatchWorldState("isday", OnIsDay)
+    OnIsDay(v, TheWorld.state.isday)
 								
 	end
 	end
@@ -75,6 +84,9 @@ local lightstuffs = TheSim:FindEntities(m,n,o, 100, {"lighttarget1"})
 	v.components.fueled:MakeEmpty()
 	v.components.fueled.accepting = false
 	v:DoTaskInTime(120,function(v) v.components.fueled.accepting = true end)
+	
+	v:WatchWorldState("isday", OnIsDay)
+    OnIsDay(v, TheWorld.state.isday)
 									
 	end
 	end

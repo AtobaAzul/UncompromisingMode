@@ -33,6 +33,16 @@ SetSharedLootTable( 'snowmong',
 	{'snowball_throwable',  			 2.00},
 	
 })
+
+SetSharedLootTable( 'snowmong_melting',
+{
+    {'charcoal',            1.00},
+	{'charcoal',            1.00},
+    {'ice',  			 1.00},
+	{'snowball_throwable',  			 1.00},
+	
+})
+
 local SEE_VICTIM_DIST = 25
 
 --local function IsCompleteDisguise(target)
@@ -135,6 +145,20 @@ for k = 1, maxsnow do
    end
 end
 end
+
+local function melting(inst)
+	if not TheWorld.state.iswinter then
+		if not inst.components.health:IsDead() then
+			inst.components.lootdropper:SetChanceLootTable('snowmong_melting')
+			SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+			SpawnPrefab("washashore_puddle_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+			inst.components.health:DoDelta(-50)
+		end
+	else
+		inst.components.lootdropper:SetChanceLootTable('snowmong')
+	end
+end
+
 local function fn(Sim)
 	local inst = CreateEntity()
 
@@ -164,8 +188,8 @@ local function fn(Sim)
     end
 	
 	
-	MakeSmallBurnableCharacter(inst, "chest")
-	MakeTinyFreezableCharacter(inst, "chest")
+	--MakeSmallBurnableCharacter(inst, "chest")
+	--MakeTinyFreezableCharacter(inst, "chest")
 	
 	inst.components.freezable:SetResistance(999)
 
@@ -219,6 +243,8 @@ local function fn(Sim)
 	inst.data = {}
 
 	inst.sounds = giantgrubsounds
+	
+	inst.seasontask = inst:DoPeriodicTask(3, melting)
 
 	inst.attackUponSurfacing = false
     inst.SetUnderPhysics = SetUnderPhysics
