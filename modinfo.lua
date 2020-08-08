@@ -299,4 +299,15 @@ configuration_options =
 		},
 		default = 0.7,
 	},
+	{
+		name = "willow",
+		label = "Willow Rework.",
+		hover = "Lighter is infinite while Willow is holding it, she can cast explosions, Bernie is now small by default, can be lit on fire to grow. And MUCH more!",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
+	},
 }

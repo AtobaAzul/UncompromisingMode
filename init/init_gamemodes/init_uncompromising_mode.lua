@@ -133,6 +133,11 @@ local require = GLOBAL.require
 		modimport("init/init_durability")
 	end
 	
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("willow") == true or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("willow") == true) then
+		modimport("postinit/prefabs/lighter")
+	end
+	
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("caveless") == false and GetModConfigData("acidrain") == true or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("caveless") == false and GetModConfigData("acidrain") == true) then
 		modimport("init/init_weather/init_overworld_toadstool")
