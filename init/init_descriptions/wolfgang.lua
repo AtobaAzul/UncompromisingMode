@@ -126,6 +126,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "Is mighty bush!"
 	DESCRIBE.CURSED_ANTLER = "Ha! Stick is MIGHTY!"
 	DESCRIBE.BLOOMERSHOT = "It's angry bee in a needle. Wolfgang not like needles."
+	DESCRIBE.BERNIEBOX = "Wolfgang get turnip as child."
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "Is so broken.",

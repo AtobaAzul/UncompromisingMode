@@ -126,6 +126,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "Look, a bush!"
 	DESCRIBE.CURSED_ANTLER = "It'll never punch out on 'ya."
 	DESCRIBE.BLOOMERSHOT = "I can't say I see the point. Oh, wait, hah!"
+	DESCRIBE.BERNIEBOX = "If it ain't tools, I ain't interested."
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "He's a bit of a fixer-upper.",

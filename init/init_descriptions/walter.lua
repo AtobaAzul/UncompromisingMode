@@ -126,6 +126,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "We could hide behind it, I guess?"
 	DESCRIBE.CURSED_ANTLER = "A memento of a story-worthy fight!"
 	DESCRIBE.BLOOMERSHOT = "No WAY am I injecting myself with THAT!"
+	DESCRIBE.BERNIEBOX = "That belongs to Willow, I fear what would happen if I touch it..."
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "I-I'm sure we can fix him.",

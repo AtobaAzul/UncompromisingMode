@@ -126,6 +126,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "Fish?"
 	DESCRIBE.CURSED_ANTLER = "Glurph, is heavy..."
 	DESCRIBE.BLOOMERSHOT = "Why hurt self?"
+	DESCRIBE.BERNIEBOX = "Fun box... what inside?"
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "Aww...",

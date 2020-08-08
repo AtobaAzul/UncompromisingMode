@@ -125,6 +125,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "It provides scenery."
 	DESCRIBE.CURSED_ANTLER = "I know a thing or two about bones."
 	DESCRIBE.BLOOMERSHOT = "Seems a bit cruel if I'm being honest."
+	DESCRIBE.BERNIEBOX = "That's one mystery i'll leave to Willow."
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "Poor little fellow.",

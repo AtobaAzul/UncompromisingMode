@@ -126,6 +126,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "It's a bush, eh."
 	DESCRIBE.CURSED_ANTLER = "This'll last us forever!"
 	DESCRIBE.BLOOMERSHOT = "What's the point, eh?"
+	DESCRIBE.BERNIEBOX = "I'm not one for stuffed things."
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "Poor lil thing.",

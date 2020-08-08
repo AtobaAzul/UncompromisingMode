@@ -126,6 +126,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.MARSH_GRASS = "A nondescript bush."
 	DESCRIBE.CURSED_ANTLER = "It seems to be extraordinarily durable as a weapon."
 	DESCRIBE.BLOOMERSHOT = "I don't understand that thing at all."
+	DESCRIBE.BERNIEBOX = "Toys never came in packaging like this when I was a kid."
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "That bear is in need of repair.",

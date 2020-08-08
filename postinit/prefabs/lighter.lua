@@ -167,6 +167,8 @@ local function SetNameBig(inst)
 end
 
 env.AddPrefabPostInit("bernie_active", function(inst)
+	
+	inst:AddTag("irreplaceable")
 
 	if not TheWorld.ismastersim then
 		return
@@ -202,6 +204,8 @@ local function OnPreLoad(inst)
 end
 
 env.AddPrefabPostInit("bernie_big", function(inst)
+	
+	inst:AddTag("irreplaceable")
 
 	if not TheWorld.ismastersim then
 		return
@@ -226,6 +230,8 @@ env.AddPrefabPostInit("bernie_big", function(inst)
 end)
 
 env.AddPrefabPostInit("bernie_inactive", function(inst)
+
+    inst:AddTag("irreplaceable")
 
 	if not TheWorld.ismastersim then
 		return

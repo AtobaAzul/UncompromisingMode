@@ -121,5 +121,6 @@ return {
 	"webbedcreaturespawner",
 	"hoodedwidow",
 	"willowfire",
+	"berniebox",
 	"chomper",
 }
