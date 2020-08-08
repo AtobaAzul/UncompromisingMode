@@ -145,7 +145,7 @@ local function fn()
     inst.AnimState:SetBank("spider_queen")
     inst.AnimState:SetBuild("spider_queen_build")
     inst.AnimState:PlayAnimation("idle", true)
-
+	inst.Transform:SetScale(1.5,1.5,1.5)
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -222,6 +222,7 @@ local function fn()
 	inst.OnLoad = OnLoad
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("death", OnDead)
+
 
     return inst
 end

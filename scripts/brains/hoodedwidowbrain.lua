@@ -54,6 +54,7 @@ local function EquipRange(inst)
         -- print("phlegm equipped")
     end
 end
+
 local function GoHomeAction(inst)
     local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
     return home ~= nil
@@ -63,6 +64,7 @@ local function GoHomeAction(inst)
         and BufferedAction(inst, home, ACTIONS.GOHOME)
         or nil
 end
+
 function HoodedWidowBrain:OnStart()
     local root = PriorityNode(
     {
@@ -77,7 +79,10 @@ function HoodedWidowBrain:OnStart()
             SequenceNode({
                 ActionNode(function() EquipRange(self.inst) end, "Equip phlegm"),
                 ChaseAndAttack(self.inst, MAX_CHASE_TIME) })),
-				DoAction(self.inst, function() return GoHomeAction(self.inst) end ),
+				SequenceNode({
+                ActionNode(function() EquipMeleeAndResetCooldown(self.inst) end, "Equip melee"),
+                ChaseAndAttack(self.inst, MAX_CHASE_TIME) }),
+                DoAction(self.inst, function() return GoHomeAction(self.inst) end ),
         
         Wander(self.inst),
     }, 2)

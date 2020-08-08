@@ -2,6 +2,7 @@ require("stategraphs/commonstates")
 
 local actionhandlers =
 {
+ActionHandler(ACTIONS.GOHOME, "jumphome"),
 }
 
 local events=
@@ -256,7 +257,27 @@ local states=
             end
         end,
 
-    }
+    },
+    State{
+        name = "jumphome",
+        tags = {"busy"},
+        onenter = function(inst, data)
+			inst.components.locomotor:Stop()
+            inst.Physics:SetDamping(0)
+            inst.AnimState:PlayAnimation("enter", true)
+        end,
+		timeline=
+        {
+            TimeEvent(3*FRAMES, function(inst)
+               inst.Physics:SetMotorVel(0,20,0)
+            end),
+        },
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },       
+
+    },
 
 }
 

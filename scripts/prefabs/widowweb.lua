@@ -46,7 +46,6 @@ local function fn()
     inst.GroundCreepEntity:SetRadius(10)
     inst:AddTag("spiderden")
     inst.MiniMapEntity:SetIcon("whitespider_den.png")
-
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -64,9 +63,8 @@ local function fn()
     inst.components.childspawner:SetMaxChildren(1)
     inst.components.childspawner:StartRegen()
     inst.components.childspawner.childname = "hoodedwidow"
-
-	inst:DoTaskInTime(0.1, ClearTrees)
 	inst:DoTaskInTime(0.1, SpawnCacoons)
+	inst:DoTaskInTime(0.1, ClearTrees)
     return inst
 end
 
