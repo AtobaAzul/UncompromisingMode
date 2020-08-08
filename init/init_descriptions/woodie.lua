@@ -126,3 +126,22 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "It's a bush, eh."
 	DESCRIBE.CURSED_ANTLER = "This'll last us forever!"
 	DESCRIBE.BLOOMERSHOT = "What's the point, eh?"
+	DESCRIBE.BERNIEBOX = "I'm not one for stuffed things."
+	DESCRIBE.BERNIE_INACTIVE =
+        {
+            BROKEN = "Poor lil thing.",
+            GENERIC = "Cute, isn't it 'Luce?",
+            ASHLEY_BROKEN = "Poor lil thing.",
+            ASHLEY = "Cute, isn't it 'Luce?",
+        }
+	
+	DESCRIBE.BERNIE_ACTIVE =
+        {
+            GENERIC = "I guess I should be used to weird stuff by now.",
+            ASHLEY = "I guess I should be used to weird stuff by now.",
+        }
+	DESCRIBE.BERNIE_BIG =
+        {
+            GENERIC = "Hm. Yep. Just another day.",
+            ASHLEY = "Hm. Yep. Just another day.",
+        }

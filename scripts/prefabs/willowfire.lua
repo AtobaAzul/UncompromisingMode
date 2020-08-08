@@ -3,6 +3,7 @@ local function fn(Sim)
     local trans = inst.entity:AddTransform()
 	
 	inst.entity:AddTransform()
+    inst.entity:AddNetwork()
     MakeInventoryPhysics(inst)
 	
     if not TheWorld.ismastersim then

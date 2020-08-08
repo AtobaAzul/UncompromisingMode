@@ -125,3 +125,22 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "A bush."
 	DESCRIBE.CURSED_ANTLER = "Woah, look at how big it is!"
 	DESCRIBE.BLOOMERSHOT = "Hey little guy, you're trapped too huh?."
+	DESCRIBE.BERNIEBOX = "I want to open it, but it doesn't belong to us."
+	DESCRIBE.BERNIE_INACTIVE =
+        {
+            BROKEN = "It's all busted up.",
+            GENERIC = "A teddy bear.",
+            ASHLEY_BROKEN = "It's all busted up.",
+            ASHLEY = "A stuffed kitty.",
+        }
+	
+	DESCRIBE.BERNIE_ACTIVE =
+        {
+            GENERIC = "That teddy bear is moving!",
+            ASHLEY = "That kitten is moving!",
+        }
+	DESCRIBE.BERNIE_BIG =
+        {
+            GENERIC = "It's creepy and cute at the same time!!",
+            ASHLEY = "It's creepy and cute at the same time!!",
+        }

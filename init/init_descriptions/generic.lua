@@ -155,7 +155,26 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.MARSH_GRASS = "It's all bushy."
 	DESCRIBE.CURSED_ANTLER = "Strong AND reliable!"
 	DESCRIBE.BLOOMERSHOT = "The only outcome of this experiment is pain."
+	DESCRIBE.BERNIEBOX = "What could be inside? If only I could open it..."
+	DESCRIBE.BERNIE_INACTIVE =
+        {
+            BROKEN = "It finally fell apart.",
+            GENERIC = "It's all scorched.",
+            ASHLEY_BROKEN = "It finally fell apart.",
+            ASHLEY = "It's all scorched.",
+        }
 	
+	DESCRIBE.BERNIE_ACTIVE =
+        {
+            GENERIC = "That teddy bear is moving around. Interesting.",
+            ASHLEY = "That stuffed cat is moving around. Interesting.",
+        }
+	DESCRIBE.BERNIE_BIG =
+        {
+            GENERIC = "Remind me not to get on Willow's bad side.",
+            ASHLEY = "Remind me not to get on Willow's bad side.",
+        }
+
 	ACTIONFAIL.READ =
         {
             GENERIC = "It seems the magic is inert in this state.",

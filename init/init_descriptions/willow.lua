@@ -126,6 +126,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "Will it burn?"	
 	DESCRIBE.CURSED_ANTLER = "It will never leave me, unless I leave it behind."
 	DESCRIBE.BLOOMERSHOT = "What idiot would use this?"
+	DESCRIBE.BERNIEBOX = "I like to keep the packaging."
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "I need to fix Bernie up.",

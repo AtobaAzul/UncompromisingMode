@@ -125,3 +125,22 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "It's a bush!"
 	DESCRIBE.CURSED_ANTLER = "A magnificent weapon!"
 	DESCRIBE.BLOOMERSHOT = "All the pain, with none of the glory."
+	DESCRIBE.BERNIEBOX = "I've no need for toys!"
+	DESCRIBE.BERNIE_INACTIVE =
+        {
+            BROKEN = "It has gone to Valhalla.",
+            GENERIC = "It's a stuffed beast.",
+            ASHLEY_BROKEN = "It has gone to Valhalla.",
+            ASHLEY = "It's a stuffed beast.",
+        }
+	
+	DESCRIBE.BERNIE_ACTIVE =
+        {
+            GENERIC = "What a brave beast!",
+            ASHLEY = "What a brave beast!",
+        }
+	DESCRIBE.BERNIE_BIG =
+        {
+            GENERIC = "The beast hath been imbued with a fighting spirit!",
+            ASHLEY = "The beast hath been imbued with a fighting spirit!",
+        }

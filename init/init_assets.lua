@@ -146,6 +146,8 @@ Assets = {
 	Asset("ANIM", "anim/scorpion_leave.zip"),
 	Asset("ANIM", "anim/bat_vamp_build.zip"),
 	Asset("ANIM", "anim/bat_vamp_shadow.zip"),
+	Asset("ANIM", "anim/berniebox.zip"),
+	
 	Asset("IMAGE", "images/inventoryimages/zaspberryparfait.tex"),
 	Asset("ATLAS", "images/inventoryimages/zaspberryparfait.xml"),
 	Asset("IMAGE", "images/inventoryimages/bugzapper.tex"),
@@ -158,6 +160,8 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/moon_tear.xml"),
 	Asset("IMAGE", "images/inventoryimages/shadow_crown.tex"),
 	Asset("ATLAS", "images/inventoryimages/shadow_crown.xml"),
+	Asset("IMAGE", "images/inventoryimages/berniebox.tex"),
+	Asset("ATLAS", "images/inventoryimages/berniebox.xml"),
 	
 	--Asset("ANIM", "anim/gatorsnake.zip"),
 	Asset("ANIM", "anim/swilson.zip"),
@@ -205,5 +209,10 @@ Assets = {
 	Asset( "IMAGE", "images/map_icons/air_conditioner_map.tex" ),
 	Asset( "ATLAS", "images/map_icons/air_conditioner_map.xml" ),
 	--Map Icons End--
+
+	Asset( "IMAGE", "bigportraits/willow.tex" ),
+    Asset( "ATLAS", "bigportraits/willow.xml" ),
+	Asset( "IMAGE", "bigportraits/willow_none.tex" ),
+    Asset( "ATLAS", "bigportraits/willow_none.xml" ),
 
 }

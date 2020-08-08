@@ -125,3 +125,22 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "I have nothing to say about this."
 	DESCRIBE.CURSED_ANTLER = "Life doesn't wear it down. I envy it."
 	DESCRIBE.BLOOMERSHOT = "I'm already in pain, I don't need any more."
+	DESCRIBE.BERNIEBOX = "Toys are for kids."
+	DESCRIBE.BERNIE_INACTIVE =
+        {
+            BROKEN = "It has passed.",
+            GENERIC = "It's had a rough life.",
+            ASHLEY_BROKEN = "It has passed.",
+            ASHLEY = "It's had a rough life.",
+        }
+	
+	DESCRIBE.BERNIE_ACTIVE =
+        {
+            GENERIC = "It dances to forget the pain.",
+            ASHLEY = "It dances to forget the pain.",
+        }
+	DESCRIBE.BERNIE_BIG =
+        {
+            GENERIC = "Wow... What a big stuffy.",
+            ASHLEY = "Wow... What a big stuffy.",
+        }

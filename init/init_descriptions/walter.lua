@@ -126,3 +126,22 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "We could hide behind it, I guess?"
 	DESCRIBE.CURSED_ANTLER = "A memento of a story-worthy fight!"
 	DESCRIBE.BLOOMERSHOT = "No WAY am I injecting myself with THAT!"
+	DESCRIBE.BERNIEBOX = "That belongs to Willow, I fear what would happen if I touch it..."
+	DESCRIBE.BERNIE_INACTIVE =
+        {
+            BROKEN = "I-I'm sure we can fix him.",
+            GENERIC = "He burnt himself out.",
+            ASHLEY_BROKEN = "I-I'm sure we can fix her.",
+            ASHLEY = "She burnt herself out.",
+        }
+	
+	DESCRIBE.BERNIE_ACTIVE =
+        {
+            GENERIC = "Woah! Is your bear haunted? Cursed?",
+            ASHLEY = "Woah! Is your cat haunted? Cursed?",
+        }
+	DESCRIBE.BERNIE_BIG =
+        {
+            GENERIC = "If you play with fire, you're gonna get Bernie'd. Heh...",
+            ASHLEY = "If you play with fire, you'll turn to Ash-ley. Heh...",
+        }

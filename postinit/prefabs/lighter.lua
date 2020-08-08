@@ -1,6 +1,22 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
+
+TUNING.BERNIE_HEALTH = 1200
+
+TUNING.BERNIE_BIG_HEALTH = 2400
+
+TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WILLOW = {"lighter", "berniebox"}
+
+TUNING.STARTING_ITEM_IMAGE_OVERRIDE["berniebox"] =
+	{
+		atlas = "images/inventoryimages/berniebox.xml",
+		image = "berniebox.tex",
+	}
+	
+Recipe("bernie_inactive", {Ingredient("berniebox", 1, "images/inventoryimages/berniebox.xml")}, RECIPETABS.SURVIVAL,  TECH.NONE, nil, nil, nil, nil, "pyromaniac")
+AllRecipes["bernie_inactive"].sortkey = AllRecipes["healingsalve"].sortkey - .1
+
 local function createlight(inst)
 
     local caster = inst.components.inventoryitem.owner
@@ -167,6 +183,8 @@ local function SetNameBig(inst)
 end
 
 env.AddPrefabPostInit("bernie_active", function(inst)
+	
+	--inst:AddTag("irreplaceable")
 
 	if not TheWorld.ismastersim then
 		return
@@ -202,6 +220,8 @@ local function OnPreLoad(inst)
 end
 
 env.AddPrefabPostInit("bernie_big", function(inst)
+	
+	--inst:AddTag("irreplaceable")
 
 	if not TheWorld.ismastersim then
 		return
@@ -226,6 +246,8 @@ env.AddPrefabPostInit("bernie_big", function(inst)
 end)
 
 env.AddPrefabPostInit("bernie_inactive", function(inst)
+
+    --inst:AddTag("irreplaceable")
 
 	if not TheWorld.ismastersim then
 		return

@@ -244,4 +244,12 @@ TUNING.ARMORBRAMBLE_DMG = 10
 
 TUNING.WORTOX_HEALTH = 120
 
+TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WILLOW = {"lighter", "berniebox"}
+
+TUNING.STARTING_ITEM_IMAGE_OVERRIDE["berniebox"] =
+	{
+		atlas = "images/inventoryimages/berniebox.xml",
+		image = "berniebox.tex",
+	}
+
 -- [              DST Related Overrides                  ]
