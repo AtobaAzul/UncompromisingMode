@@ -20,7 +20,7 @@ local function fn()
 
     inst.entity:SetPristine()
 	
-	inst:AddTag("irreplaceable")
+	--inst:AddTag("irreplaceable")
 
     if not TheWorld.ismastersim then
         return inst

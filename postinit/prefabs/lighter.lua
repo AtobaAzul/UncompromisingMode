@@ -168,7 +168,7 @@ end
 
 env.AddPrefabPostInit("bernie_active", function(inst)
 	
-	inst:AddTag("irreplaceable")
+	--inst:AddTag("irreplaceable")
 
 	if not TheWorld.ismastersim then
 		return
@@ -205,7 +205,7 @@ end
 
 env.AddPrefabPostInit("bernie_big", function(inst)
 	
-	inst:AddTag("irreplaceable")
+	--inst:AddTag("irreplaceable")
 
 	if not TheWorld.ismastersim then
 		return
@@ -231,7 +231,7 @@ end)
 
 env.AddPrefabPostInit("bernie_inactive", function(inst)
 
-    inst:AddTag("irreplaceable")
+    --inst:AddTag("irreplaceable")
 
 	if not TheWorld.ismastersim then
 		return
