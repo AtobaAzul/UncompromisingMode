@@ -13,7 +13,9 @@ local function SpawnInvestigators(inst, data)
     if inst.components.childspawner ~= nil then
             local spider = inst.components.childspawner:SpawnChild(data.target, nil, 3)
             if spider ~= nil then
-                spider.sg:GoToState("dropper_enter")
+			local x,y,z = inst.Transform:GetWorldPosition()
+			spider.Physics:Teleport(x, 15, z)
+            spider.sg:GoToState("fall")
             end
     end
 end
@@ -52,7 +54,7 @@ local function fn()
     inst.components.childspawner:SetSpawnPeriod(20)
     inst.components.childspawner:SetMaxChildren(1)
     inst.components.childspawner:StartRegen()
-    inst.components.childspawner.childname = "spider_dropper"
+    inst.components.childspawner.childname = "hoodedwidow"
 
 	inst:DoTaskInTime(0.1, ClearTrees)
     return inst

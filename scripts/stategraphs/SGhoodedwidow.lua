@@ -225,7 +225,38 @@ local states=
         {
             EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
         },
-    }, 
+    },
+    State{
+        name = "fall",
+        tags = {"busy"},
+        onenter = function(inst, data)
+			inst.components.locomotor:Stop()
+            inst.Physics:SetDamping(0)
+            inst.Physics:SetMotorVel(0,-20,0)
+            inst.AnimState:PlayAnimation("distress_loop", true)
+        end,
+        
+        onupdate = function(inst)
+		
+            local pt = Point(inst.Transform:GetWorldPosition())
+			inst.Physics:SetMotorVel(0,-20,0)
+            if pt.y < 2 then
+                inst.Physics:SetMotorVel(0,0,0)
+
+                inst.components.groundpounder:GroundPound()
+
+
+                pt.y = 0
+                
+                inst.Physics:Stop()
+                inst.Physics:SetDamping(5)
+                inst.Physics:Teleport(pt.x,pt.y,pt.z)
+                inst.DynamicShadow:Enable(true)
+            inst.sg:GoToState("taunt")
+            end
+        end,
+
+    }
 
 }
 

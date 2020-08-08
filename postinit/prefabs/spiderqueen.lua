@@ -43,8 +43,8 @@ local function EquipWeapons(inst)
         --[[Non-networked entity]]
         meleeweapon.entity:AddTransform()
         meleeweapon:AddComponent("weapon")
-        meleeweapon.components.weapon:SetDamage(TUNING.SPAT_MELEE_DAMAGE)
-        meleeweapon.components.weapon:SetRange(TUNING.SPAT_MELEE_ATTACKRANGE)
+        meleeweapon.components.weapon:SetDamage(TUNING.SPIDERQUEEN_DAMAGE)
+        meleeweapon.components.weapon:SetRange(TUNING.SPIDERQUEEN_ATTACKRANGE)
         meleeweapon:AddComponent("inventoryitem")
         meleeweapon.persists = false
         meleeweapon.components.inventoryitem:SetOnDroppedFn(meleeweapon.Remove)
