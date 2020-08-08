@@ -206,4 +206,9 @@ Assets = {
 	Asset( "ATLAS", "images/map_icons/air_conditioner_map.xml" ),
 	--Map Icons End--
 
+	Asset( "IMAGE", "bigportraits/willow.tex" ),
+    Asset( "ATLAS", "bigportraits/willow.xml" ),
+	Asset( "IMAGE", "bigportraits/willow_none.tex" ),
+    Asset( "ATLAS", "bigportraits/willow_none.xml" ),
+
 }
