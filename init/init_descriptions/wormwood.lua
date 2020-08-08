@@ -126,3 +126,21 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "Friend."
 	DESCRIBE.CURSED_ANTLER = "Big bash stick"
 	DESCRIBE.BLOOMERSHOT = "Buzzer make bloomer."
+	DESCRIBE.BERNIE_INACTIVE =
+        {
+            BROKEN = "What happened?",
+            GENERIC = "Hello, Squishy Friend!",
+            ASHLEY_BROKEN = "What happened?",
+            ASHLEY = "Hello, Squishy Friend!",
+        }
+	
+	DESCRIBE.BERNIE_ACTIVE =
+        {
+            GENERIC = "Yay! Squishy Friend can play!",
+            ASHLEY = "Yay! Squishy Friend can play!",
+        }
+	DESCRIBE.BERNIE_BIG =
+        {
+            GENERIC = "Big Squishy Friend!",
+            ASHLEY = "Big Squishy Friend!",
+        }

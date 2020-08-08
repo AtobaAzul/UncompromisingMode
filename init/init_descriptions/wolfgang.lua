@@ -126,3 +126,21 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "Is mighty bush!"
 	DESCRIBE.CURSED_ANTLER = "Ha! Stick is MIGHTY!"
 	DESCRIBE.BLOOMERSHOT = "It's angry bee in a needle. Wolfgang not like needles."
+	DESCRIBE.BERNIE_INACTIVE =
+        {
+            BROKEN = "Is so broken.",
+            GENERIC = "Is so cuddly!",
+            ASHLEY_BROKEN = "Is so broken.",
+            ASHLEY = "Is so cuddly!",
+        }
+	
+	DESCRIBE.BERNIE_ACTIVE =
+        {
+            GENERIC = "Is so brave!",
+            ASHLEY = "Is so brave!",
+        }
+	DESCRIBE.BERNIE_BIG =
+        {
+            GENERIC = "Oh no! Wolfgang has shrunken!",
+            ASHLEY = "Oh no! Wolfgang has shrunken!",
+        }

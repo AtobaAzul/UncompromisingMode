@@ -126,6 +126,24 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.MARSH_GRASS = "A nondescript bush."
 	DESCRIBE.CURSED_ANTLER = "It seems to be extraordinarily durable as a weapon."
 	DESCRIBE.BLOOMERSHOT = "I don't understand that thing at all."
+	DESCRIBE.BERNIE_INACTIVE =
+        {
+            BROKEN = "That bear is in need of repair.",
+            GENERIC = "It's a teddy bear.",
+            ASHLEY_BROKEN = "That kitten is in need of repair.",
+            ASHLEY = "It's a plush cat.",
+        }
+	
+	DESCRIBE.BERNIE_ACTIVE =
+        {
+            GENERIC = "That teddy bear seems to be animated somehow.",
+            ASHLEY = "That toy seems to be animated somehow.",
+        }
+	DESCRIBE.BERNIE_BIG =
+        {
+            GENERIC = "As whimsical as it is befuddling.",
+            ASHLEY = "As whimsical as it is befuddling.",
+        }
 	
 	ACTIONFAIL.READ =
         {

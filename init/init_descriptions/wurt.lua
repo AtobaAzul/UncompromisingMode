@@ -126,3 +126,21 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "Fish?"
 	DESCRIBE.CURSED_ANTLER = "Glurph, is heavy..."
 	DESCRIBE.BLOOMERSHOT = "Why hurt self?"
+	DESCRIBE.BERNIE_INACTIVE =
+        {
+            BROKEN = "Aww...",
+            GENERIC = "No playing anymore?",
+            ASHLEY_BROKEN = "Aww...",
+            ASHLEY = "No playing anymore?",
+        }
+	
+	DESCRIBE.BERNIE_ACTIVE =
+        {
+            GENERIC = "Wanna play with it!",
+            ASHLEY = "Wanna play with it!",
+        }
+	DESCRIBE.BERNIE_BIG =
+        {
+            GENERIC = "Fun toy, flurp!",
+            ASHLEY = "Fun toy, flurp!",
+        }

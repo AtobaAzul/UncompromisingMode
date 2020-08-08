@@ -127,3 +127,21 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "I should have let them in, this place is a real drab."
 	DESCRIBE.CURSED_ANTLER = "You expect me to carry this?!"
 	DESCRIBE.BLOOMERSHOT = "I don't see any use for this."
+	DESCRIBE.BERNIE_INACTIVE =
+        {
+            BROKEN = "It's seen better days.",
+            GENERIC = "It makes me a little nostalgic.",
+            ASHLEY_BROKEN = "It's seen better days.",
+            ASHLEY = "It makes me a little nostalgic.",
+        }
+	
+	DESCRIBE.BERNIE_ACTIVE =
+        {
+            GENERIC = "Just what am I looking at here?",
+            ASHLEY = "Just what am I looking at here?",
+        }
+	DESCRIBE.BERNIE_BIG =
+        {
+            GENERIC = "How truly unnerving.",
+            ASHLEY = "How truly unnerving.",
+        }

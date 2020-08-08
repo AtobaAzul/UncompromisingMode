@@ -126,3 +126,21 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "Look, a bush!"
 	DESCRIBE.CURSED_ANTLER = "It'll never punch out on 'ya."
 	DESCRIBE.BLOOMERSHOT = "I can't say I see the point. Oh, wait, hah!"
+	DESCRIBE.BERNIE_INACTIVE =
+        {
+            BROKEN = "He's a bit of a fixer-upper.",
+            GENERIC = "This little guy's been well loved.",
+            ASHLEY_BROKEN = "She's a bit of a fixer-upper.",
+            ASHLEY = "This little ladies' been well loved.",
+        }
+	
+	DESCRIBE.BERNIE_ACTIVE =
+        {
+            GENERIC = "Is he clockwork? Can I peek inside?",
+            ASHLEY = "Is she clockwork? Can I peek inside?",
+        }
+	DESCRIBE.BERNIE_BIG =
+        {
+            GENERIC = "That girl knows how to put on a show.",
+            ASHLEY = "That girl knows how to put on a show.",
+        }

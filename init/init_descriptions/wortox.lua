@@ -126,3 +126,21 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.MARSH_GRASS = "A bush."
 	DESCRIBE.CURSED_ANTLER = "Hard to miss with something this large!"
 	DESCRIBE.BLOOMERSHOT = "I'm not going to fall for this prank!"
+	DESCRIBE.BERNIE_INACTIVE =
+        {
+            BROKEN = "He seemed a fine chap.",
+            GENERIC = "What a pity.",
+            ASHLEY_BROKEN = "She seemed a fine gal.",
+            ASHLEY = "What a pity.",
+        }
+	
+	DESCRIBE.BERNIE_ACTIVE =
+        {
+            GENERIC = "Good sir, are you aware you've no soul?",
+            ASHLEY = "Madam, are you aware you've no soul?",
+        }
+	DESCRIBE.BERNIE_BIG =
+        {
+            GENERIC = "It's grown to new heights to win all our fights!",
+            ASHLEY = "It's grown to new heights to win all our fights!",
+        }
