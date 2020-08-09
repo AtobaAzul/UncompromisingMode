@@ -263,7 +263,9 @@ local states=
         name = "leapattack",
         tags = {"busy", "noweb","superbusy","nointerrupt"},
         onenter = function(inst, data)
-			inst:ForceFacePoint(inst.components.combat.target:GetPosition())  
+			if inst.components.combat.target ~= nil then
+			inst:ForceFacePoint(inst.components.combat.target:GetPosition()) 
+			end
             inst.components.locomotor:Stop()
 			inst.brain:Stop()
 			inst.AnimState:PlayAnimation("enter", true)
