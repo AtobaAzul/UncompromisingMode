@@ -191,7 +191,7 @@ local function fn(Sim)
 	--MakeSmallBurnableCharacter(inst, "chest")
 	--MakeTinyFreezableCharacter(inst, "chest")
 	
-	inst.components.freezable:SetResistance(999)
+	--inst.components.freezable:SetResistance(999)
 
 	inst.AnimState:SetBank("giant_grub")
 	inst.AnimState:SetBuild("giant_grub")

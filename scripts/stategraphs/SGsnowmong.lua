@@ -7,7 +7,7 @@ local actionhandlers =
 local events =
 {
     CommonHandlers.OnSleep(),
-    CommonHandlers.OnFreeze(),
+    --CommonHandlers.OnFreeze(),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     EventHandler("attacked",
     	function(inst)
@@ -115,9 +115,9 @@ local states =
 			end),
             
             TimeEvent(20* FRAMES, function(inst) 
-                if inst.components.burnable:IsBurning() then
+                --[[if inst.components.burnable:IsBurning() then
                     inst.components.burnable:Extinguish()
-                end
+                end]]
                 inst.SoundEmitter:PlaySound("UCSounds/Grub/submerge") 
             end),
 
