@@ -100,7 +100,7 @@ local function EquipWeapons(inst)
         inst.weaponitems.snotbomb = snotbomb
 
         local meleeweapon = CreateEntity()
-        meleeweapon.name = "Snaut Bash"
+        meleeweapon.name = "Claw"
         --[[Non-networked entity]]
         meleeweapon.entity:AddTransform()
         meleeweapon:AddComponent("weapon")
@@ -114,11 +114,49 @@ local function EquipWeapons(inst)
 
         inst.components.inventory:GiveItem(meleeweapon)
         inst.weaponitems.meleeweapon = meleeweapon
+
+        local leapweapon = CreateEntity()
+        leapweapon.name = "Leap"
+        --[[Non-networked entity]]
+        leapweapon.entity:AddTransform()
+        leapweapon:AddComponent("weapon")
+        leapweapon.components.weapon:SetDamage(TUNING.SPIDERQUEEN_DAMAGE)
+        leapweapon.components.weapon:SetRange(TUNING.SPAT_PHLEGM_ATTACKRANGE)
+        leapweapon:AddComponent("inventoryitem")
+		leapweapon:AddTag("leap")
+        leapweapon.persists = false
+        leapweapon.components.inventoryitem:SetOnDroppedFn(leapweapon.Remove)
+        leapweapon:AddComponent("equippable")
+        leapweapon:AddTag("leapweapon")
+		
+        inst.components.inventory:GiveItem(leapweapon)
+        inst.weaponitems.leapweapon = leapweapon
     end
 end
 local function OnLoad(inst)
 inst.WebReady = true
+inst.LeapReady = true
 end
+local function TryPowerMove(inst)
+print("powermovetried")
+print(inst.LeapReady)
+if not inst.sg:HasStateTag("superbusy") and not inst:HasTag("gonnasuper") then
+if inst.LeapReady == true then
+		if not inst.sg:HasStateTag("superbusy") then
+			if not inst.sg:HasStateTag("nointerrupts") then
+			inst:AddTag("gonnasuper")
+			inst:DoTaskInTime(1, function(inst) inst.sg:GoToState("leapattack") end)
+			else
+			inst:AddTag("gonnasuper")
+			inst.sg:GoToState("leapattack")
+			end
+		end	
+else
+inst:DoTaskInTime(10,function(inst) inst.LeapReady = true end)
+end
+end
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -215,6 +253,7 @@ local function fn()
     inst.components.groundpounder.numRings = 3
     ------------------
 	inst.WebReady = true
+	inst.LeapReady = false
 	inst:AddComponent("inventory")
     inst.weaponitems = {}
 	EquipWeapons(inst)
@@ -222,6 +261,7 @@ local function fn()
 	inst.OnLoad = OnLoad
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("death", OnDead)
+	inst:DoPeriodicTask(3, TryPowerMove)
 
 
     return inst

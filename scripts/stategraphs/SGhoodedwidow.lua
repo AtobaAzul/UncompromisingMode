@@ -15,8 +15,9 @@ local events=
             if weapon then
                 if weapon:HasTag("snotbomb") then
                     inst.sg:GoToState("launchprojectile", data.target)
-                else
-                    inst.sg:GoToState("attack", data.target)
+                end
+				if weapon:HasTag("meleeweapon") then
+                    inst.sg:GoToState("leapattack", data.target)
                 end
             end
         end
@@ -66,7 +67,7 @@ local states=
 
         events=
         {
-            EventHandler("animover", function(inst)inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst)	inst.sg:GoToState("idle") end),
         },
     },
 
@@ -198,9 +199,9 @@ local states=
     },
     State{
         name = "launchprojectile",
-        tags = {"attack", "busy"},
+        tags = {"attack", "busy", "superbusy","nointerrupt"},
         
-        onenter = function(inst, target)    
+        onenter = function(inst, target)
 			inst.sg.statemem.target = target
             inst.components.combat:StartAttack()
             inst.components.locomotor:StopMoving()
@@ -224,7 +225,7 @@ local states=
         
         events=
         {
-            EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animqueueover", function(inst) inst.sg:GoToState("leapattack") end),
         },
     },
     State{
@@ -256,6 +257,35 @@ local states=
             inst.sg:GoToState("taunt")
             end
         end,
+
+    },
+    State{
+        name = "leapattack",
+        tags = {"busy", "noweb","superbusy","nointerrupt"},
+        onenter = function(inst, data)
+			inst:ForceFacePoint(inst.components.combat.target:GetPosition())  
+            inst.components.locomotor:Stop()
+			inst.brain:Stop()
+			inst.AnimState:PlayAnimation("enter", true)
+			print("code ran")
+        end,
+		timeline =
+        {
+			TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/scream_short") end),
+            TimeEvent(1	*FRAMES, function(inst) inst.Physics:SetMotorVelOverride(2,0,0) end),
+            TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/attack_grunt") end),
+			TimeEvent(15*FRAMES, function(inst) inst.components.locomotor:Stop()
+			inst.components.groundpounder:GroundPound()			end),
+        },
+        events=
+        {
+            EventHandler("animover", function(inst)
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/scream_short")
+			inst.LeapReady = false
+			inst:RemoveTag("gonnasuper")
+			inst.brain:Start()
+			inst.sg:GoToState("idle") end),
+        },       
 
     },
     State{

@@ -28,7 +28,24 @@ local function EquipMelee(inst)
         -- print("melee equipped")
     end
 end
+local function EquipLeapAndResetCooldown(inst)
+    if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
+        inst.components.combat:ResetCooldown()
+        inst.components.inventory:Equip(inst.weaponitems.leapweapon)
+        -- print("melee equipped and cooldown reset")
+    end
+end
 
+local function EquipLeap(inst)
+    if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
+        inst.components.inventory:Equip(inst.weaponitems.leapweapon)
+        -- print("melee equipped")
+    end
+end
+local function CanLeapNow(inst)
+    local target = inst.components.combat.target
+    return target ~= nil and inst.LeapReady == true and not inst.sg:HasStateTag("noleap")
+end
 local function CanRangeNow(inst)
     local target = inst.components.combat.target
     return target ~= nil and target.components.pinnable and target.components.pinnable:IsValidPinTarget() and inst.WebReady == true and not inst.sg:HasStateTag("noweb")
@@ -60,6 +77,12 @@ function HoodedWidowBrain:OnStart()
             SequenceNode({
                 ActionNode(function() EquipRange(self.inst) end, "Equip phlegm"),
                 ChaseAndAttack(self.inst, MAX_CHASE_TIME) })),
+
+		WhileNode(function() return CanLeapNow(self.inst) end, "AttackMomentarily",
+            SequenceNode({
+                ActionNode(function() EquipLeap(self.inst) end, "Equip phlegm"),
+                ChaseAndAttack(self.inst, MAX_CHASE_TIME) })),
+				
             SequenceNode({
                 ActionNode(function() EquipMeleeAndResetCooldown(self.inst) end, "Equip melee"),
                 ChaseAndAttack(self.inst, MAX_CHASE_TIME) }),
