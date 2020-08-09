@@ -195,7 +195,7 @@
 
 --Misc
 
-* [x]  Moonrock idol requires 5 moonstone.
+* [x] Moonrock idol requires 5 moonstone.
 
 * [x] Mini-fan cost increased, now protects against hayfever while in use.
 
@@ -205,15 +205,35 @@
 
 * [x] Moggles now act as sandstorm/snowstorm goggles.
 
+* [x] [FEAR THE DARK!] The Lazy Deserter will now pick up and deliver all nearby items to the player when used, including berry bushes, grass, etc. Costs sanity.
+
+* [x] [FEAR THE DARK!] Flowers will temporarily turn into Evil Flowers on full moons.
+
+* [x] [FEAR THE DARK!] Overworld Mushrooms will temporarily turn into Mushtrees on full moons.
+
 --[ Character changes]--
 
 --Willow
 
-* [x] [FEAR THE DARK!] Willow can now catch on fire! You can put her out by hovering your mouse over her if she's smoldering. (She does not take damage from being on fire).
+* [x] [FEAR THE DARK!] Willow can now catch on fire! (As long as she is below 40% wetness) You can put her out by hovering your mouse over her if she's smoldering. (She does not take damage from being on fire).
 
-* [x] [FEAR THE DARK!] When willow catches on fire, she will do an AOE explosion before she bursts into flames.
+* [x] [FEAR THE DARK!] When willow catches on fire while insane, she will do an AOE explosion before she bursts into flames.
 
 * [x] [FEAR THE DARK!] Willow bypasses the winter smoldering effect we added.
+
+[TOGGLEABLE OPTIONS]
+
+* [x] [FEAR THE DARK!] Willow's lighter no longer drains fuel while she is holding it.
+
+* [x] [FEAR THE DARK!] Willow can cast a fire explosion with her lighter for 10% of its fuel, deals 40 damage, lights everything around her on fire, and drops a small fire at her feet.
+
+* [x] [FEAR THE DARK!] Bernie by default starts off in his small form, when ignited he grows into his big form, after 60 seconds he will revert back.
+
+* [x] [FEAR THE DARK!] Bernie now has 20% more health.
+
+* [x] [FEAR THE DARK!] Willow starts with a "Cuddly Friends Toy Box" instead of Bernie, which can be crafted into Bernie (Allowing for access to Ashley from day 1). The Toy Box is limited to 1 per Willow, so be careful not to lose Bernie!
+
+* [x] [FEAR THE DARK!] Ashley is now properly referred to as Ashley! Both through her entity name, and character inspection quotes.
 
 
 --Wolfgang
@@ -279,7 +299,7 @@
 
 * [x] Wormwood takes more fire damage, for more time.
 
-* [x] [FEAR THE DARK!] Wormwood can now catch on fire! You can hover your mouse over him to put him out if he's smoldering (he does take damage from the fire).
+* [x] [FEAR THE DARK!] Wormwood can now catch on fire! (As long as he is below 40% wetness) You can hover your mouse over him to put him out if he's smoldering (he does take damage from the fire).
 
 * [x] Wormwood is immune to passive hayfever, [FEAR THE DARK!] but not hayfever induced by smaller creatures.
 
@@ -290,6 +310,11 @@
 * [x] [FEAR THE DARK!] The Bramble Husk now has double durability.
 
 * [x] [FEAR THE DARK!] Wormwood now takes an additional -5 sanity from digging up plants, no more infinite sanity gain from sapling digging/planting, its not equal loss and gain
+
+* [x] [FEAR THE DARK!] NEW WORMWOOD EXCLUSIVE ITEM: Blooming Shot - Costs 1 living log, 1 nitre, and 2 killer Bees. When used, Wormwood will lose 10 hp and will instantly full bloom for half a day, before returning to his previous bloomed state.
+
+* [x] [FEAR THE DARK!] Wormwood's compost wrap now heals him by 3 health, and an additional 48 health over 2 minutes.
+
 
 --Warly
 
