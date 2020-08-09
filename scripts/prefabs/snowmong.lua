@@ -118,6 +118,7 @@ local function OnRemove(inst)
 end
 
 local function SnowballBelch(inst, target)
+	if target ~= nil then
     local x, y, z = inst.Transform:GetWorldPosition()
     local projectile = SpawnPrefab("snowball_throwable")
     projectile.Transform:SetPosition(x, y, z)
@@ -135,6 +136,7 @@ local function SnowballBelch(inst, target)
 	--projectile.components.wateryprotection.addwetness = TUNING.WATERBALLOON_ADD_WETNESS/2
     projectile.components.complexprojectile:SetHorizontalSpeed(speed+math.random(4,9))
     projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+	end
 end
 local function DoSnowballBelch(inst)
 local maxsnow =  math.floor(math.random(8,12))
