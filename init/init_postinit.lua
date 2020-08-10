@@ -20,7 +20,6 @@ local prefab_post = {
     "toadstool_cap",
     "yellowamulet",
     "trap_teeth",
-    --"cave",
 	"beequeen",
 	"dragonfly",
 	"deerclops",
