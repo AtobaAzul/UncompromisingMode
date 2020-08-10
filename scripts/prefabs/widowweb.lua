@@ -42,8 +42,8 @@ local function fn()
     --inst.components.health.nofadeout = true
 	inst:AddTag("widowweb")
     inst:AddComponent("childspawner")
-    inst.components.childspawner:SetRegenPeriod(20)
-    inst.components.childspawner:SetSpawnPeriod(20)
+    inst.components.childspawner:SetRegenPeriod(100)
+    inst.components.childspawner:SetSpawnPeriod(100)
     inst.components.childspawner:SetMaxChildren(1)
     inst.components.childspawner:StartRegen()
     inst.components.childspawner.childname = "hoodedwidow"
