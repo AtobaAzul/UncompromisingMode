@@ -67,10 +67,34 @@ local function GoHomeAction(inst)
         and BufferedAction(inst, home, ACTIONS.GOHOME)
         or nil
 end
-
+local function ShouldResetFight(self)
+		local home = self.inst.components.homeseeker ~= nil and self.inst.components.homeseeker.home or nil
+		if home then
+        local dx, dy, dz = self.inst.Transform:GetWorldPosition()
+        local spx, spy, spz = home.Transform:GetWorldPosition()
+        if distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*TUNING.DRAGONFLY_RESET_DIST) then
+		return true
+        else
+        return false
+        end
+		end
+end
+local function ShouldRetryReset(self)
+    if self.resetting then
+        local action = self.inst:GetBufferedAction()
+        return action == nil or action.action ~= ACTIONS.GOHOME
+    end
+    return false
+end
 function HoodedWidowBrain:OnStart()
     local root = PriorityNode(
-    {
+    {	
+	            WhileNode(function() return ShouldResetFight(self) end, "Reset Fight",
+                PriorityNode({
+                    WhileNode(function() return ShouldRetryReset(self) end, "Retry Reset", ActionNode(function() end)),
+                    DoAction(self.inst, GoHomeAction),
+                }, .25)),
+		
     	WhileNode( function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
         WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
 		WhileNode(function() return CanRangeNow(self.inst) end, "AttackMomentarily",

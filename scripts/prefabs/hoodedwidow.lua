@@ -145,10 +145,10 @@ if inst.LeapReady == true then
 		if not inst.sg:HasStateTag("superbusy") then
 			if not inst.sg:HasStateTag("nointerrupts") then
 			inst:AddTag("gonnasuper")
-			inst:DoTaskInTime(1, function(inst) inst.sg:GoToState("leapattack") end)
+			inst:DoTaskInTime(1, function(inst) inst.sg:GoToState("preleapattack") end)
 			else
 			inst:AddTag("gonnasuper")
-			inst.sg:GoToState("leapattack")
+			inst.sg:GoToState("preleapattack")
 			end
 		end	
 else
@@ -156,7 +156,9 @@ inst:DoTaskInTime(10,function(inst) inst.LeapReady = true end)
 end
 end
 end
-
+local function Reset(inst)
+    inst.reset = true
+end
 local function fn()
     local inst = CreateEntity()
 
@@ -205,7 +207,7 @@ local function fn()
     inst.components.health:SetMaxHealth(TUNING.SPIDERQUEEN_HEALTH)
 
     ------------------
-
+    inst:AddComponent("knownlocations")
     inst:AddComponent("combat")
     inst.components.combat:SetRange(TUNING.SPIDERQUEEN_ATTACKRANGE)
     inst.components.combat:SetDefaultDamage(TUNING.SPIDERQUEEN_DAMAGE)
@@ -254,6 +256,7 @@ local function fn()
     ------------------
 	inst.WebReady = true
 	inst.LeapReady = false
+	inst.Reset = Reset
 	inst:AddComponent("inventory")
     inst.weaponitems = {}
 	EquipWeapons(inst)
