@@ -93,6 +93,17 @@ configuration_options =
 		},
 		default = true,
 	},
+	{
+		name = "waxwell",
+		label = "Classic Maxwell Shadows.",
+		hover = "Singleplayer style Shadow workers, but with no health cost, no limited timer, and you can force them to leave!",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
+	},
 	--[[{
 		name = "harder_recipes",
 		label = "Harder Recipes",

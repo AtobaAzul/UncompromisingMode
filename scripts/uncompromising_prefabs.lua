@@ -124,4 +124,6 @@ return {
 	"willowfire",
 	"berniebox",
 	"chomper",
+	"old_shadowwaxwell",
+	"codexumbra",
 }

@@ -138,6 +138,11 @@ local require = GLOBAL.require
 		modimport("postinit/prefabs/lighter")
 	end
 	
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("waxwell") == true or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("waxwell") == true) then
+		modimport("init/init_character_changes/waxwell")
+	end
+	
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("caveless") == false and GetModConfigData("acidrain") == true or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("caveless") == false and GetModConfigData("acidrain") == true) then
 		modimport("init/init_weather/init_overworld_toadstool")
@@ -154,7 +159,6 @@ local require = GLOBAL.require
 		modimport("init/init_character_changes/wickerbottom")
 		modimport("init/init_character_changes/woodie")
 		modimport("init/init_character_changes/wes")
-		modimport("init/init_character_changes/waxwell")
 		modimport("init/init_character_changes/wathgrithr")
 		modimport("init/init_character_changes/webber")
 		modimport("init/init_character_changes/winona")

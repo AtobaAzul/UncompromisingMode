@@ -146,3 +146,6 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
             GENERIC = "How truly unnerving.",
             ASHLEY = "How truly unnerving.",
         }
+	
+	ANNOUNCE.ANNOUNCE_NOSANITY = "I have the worst headache!"
+	ANNOUNCE.ANNOUNCE_NOFUEL = "I need some nightmare fuel."
