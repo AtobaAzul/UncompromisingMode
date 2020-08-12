@@ -284,6 +284,9 @@ local states=
 			if inst.components.combat.target ~= nil then
 			inst:ForceFacePoint(inst.components.combat.target:GetPosition())
 			speed = inst:GetDistanceSqToInst(inst.components.combat.target)*0.1
+			if speed > 15 then
+			speed = 15
+			end
 			end
             inst.components.locomotor:Stop()
 			if inst.brain then
@@ -314,7 +317,7 @@ local states=
     },
     State{
         name = "jumphome",
-        tags = {"busy"},
+        tags = {"busy", "noweb","superbusy","nointerrupt"},
         onenter = function(inst, data)
 			inst.components.locomotor:Stop()
             inst.Physics:SetDamping(0)
@@ -333,7 +336,85 @@ local states=
         },       
 
     },
+    State{
+        name = "precanopy",
+        tags = {"busy", "noweb","superbusy","nointerrupt"},
+        onenter = function(inst, data)
+		inst.components.locomotor:Stop()
+		inst.AnimState:PlayAnimation("poop_pre")
+		inst.AnimState:PushAnimation("poop_loop", false)
+        end,
+		timeline =
+        {
+            TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/givebirth_voice") end),
 
+            TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/givebirth_foley") end),
+        },
+        events=
+        {
+            EventHandler("animqueueover", function(inst) inst.sg:GoToState("canopyjump") end),
+        },       
+
+    },
+State{
+        name = "canopyjump",
+        tags = {"busy", "noweb","superbusy","nointerrupt"},
+        onenter = function(inst, data)
+			inst.components.locomotor:Stop()
+            inst.Physics:SetDamping(0)
+            inst.AnimState:PlayAnimation("enter", true)
+        end,
+        onupdate = function(inst)
+			inst.Physics:SetMotorVel(0,20,0)		
+		end,
+        events=
+        {
+            EventHandler("animover", function(inst) 
+			inst:DoTaskInTime(3+math.random(-1,1),function(inst)inst.sg:GoToState("canopyland") end) end),
+        },       
+
+    },
+    State{
+        name = "canopyland",
+        tags = {"busy", "noweb","superbusy","nointerrupt"},
+        onenter = function(inst, data)
+			inst.components.locomotor:Stop()
+			local pt = Point(inst.Transform:GetWorldPosition())
+            inst.Physics:SetDamping(0)
+			if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
+			local target = inst.components.combat.target
+			pt = Point(target.Transform:GetWorldPosition())
+			end
+			inst.Physics:Teleport(pt.x, 25, pt.z)
+            inst.Physics:SetMotorVel(0,-20,0)
+            inst.AnimState:PlayAnimation("distress_loop", true)
+			
+			
+        end,
+        
+        onupdate = function(inst)
+		
+            local pt = Point(inst.Transform:GetWorldPosition())
+			inst.Physics:SetMotorVel(0,-20,0)
+            if pt.y < 2 then
+                inst.Physics:SetMotorVel(0,0,0)
+
+                inst.components.groundpounder:GroundPound()
+
+
+                pt.y = 0
+                
+                inst.Physics:Stop()
+                inst.Physics:SetDamping(5)
+                inst.Physics:Teleport(pt.x,pt.y,pt.z)
+                inst.DynamicShadow:Enable(true)
+			inst.CanopyReady = false
+			inst:RemoveTag("gonnasuper")
+            inst.sg:GoToState("taunt")
+            end
+        end,
+
+    },
 }
 
 CommonStates.AddSleepStates(states,

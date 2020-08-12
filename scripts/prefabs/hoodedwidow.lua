@@ -140,8 +140,10 @@ end
 local function TryPowerMove(inst)
 print("powermovetried")
 print(inst.LeapReady)
+print(inst.CanopyReady)
 if not inst.sg:HasStateTag("superbusy") and not inst:HasTag("gonnasuper") then
-if inst.LeapReady == true then
+if inst.LeapReady == true or inst.CanopyReady == true then
+	if inst.LeapReady == true then
 		if not inst.sg:HasStateTag("superbusy") then
 			if not inst.sg:HasStateTag("nointerrupts") then
 			inst:AddTag("gonnasuper")
@@ -150,9 +152,27 @@ if inst.LeapReady == true then
 			inst:AddTag("gonnasuper")
 			inst.sg:GoToState("preleapattack")
 			end
-		end	
+		end
+	end
+	if inst.CanopyReady == true then
+		if not inst.sg:HasStateTag("superbusy") then
+			if not inst.sg:HasStateTag("nointerrupts") then
+			inst:AddTag("gonnasuper")
+			inst:DoTaskInTime(1, function(inst) inst.sg:GoToState("precanopy") end)
+			else
+			inst:AddTag("gonnasuper")
+			inst.sg:GoToState("precanopy")
+			end
+		end
+	end
 else
-inst:DoTaskInTime(10,function(inst) inst.LeapReady = true end)
+inst:DoTaskInTime(10,function(inst) 
+if math.random()>0.33 then
+inst.LeapReady = true
+else
+inst.CanopyReady = true
+end
+end)
 end
 end
 end
@@ -229,7 +249,7 @@ local function fn()
     inst.components.locomotor:SetSlowMultiplier( 1 )
     inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = true }
-    inst.components.locomotor.walkspeed = TUNING.SPIDERQUEEN_WALKSPEED
+    inst.components.locomotor.walkspeed = 5.5
 
     ------------------
 
@@ -256,6 +276,7 @@ local function fn()
     ------------------
 	inst.WebReady = true
 	inst.LeapReady = false
+	inst.CanopyReady = false
 	inst.Reset = Reset
 	inst:AddComponent("inventory")
     inst.weaponitems = {}
