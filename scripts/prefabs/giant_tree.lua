@@ -15,10 +15,24 @@ local function on_chop(inst, chopper, remaining_chops)
     if not (chopper ~= nil and chopper:HasTag("playerghost")) then
         inst.SoundEmitter:PlaySound("turnoftides/common/together/driftwood/chop")
     end
-
-    if remaining_chops > 0 then
-        --inst.AnimState:PlayAnimation("chop")
+	local phase = 0
+	if remaining_chops > 15 and remaining_chops < 20 then
+    phase = 1
     end
+    if remaining_chops > 10 and remaining_chops < 15 then
+    phase = 1
+    end
+    if remaining_chops > 5 and remaining_chops < 10 then
+    phase = 2
+    end	
+    if remaining_chops > 0 and remaining_chops < 5 then
+    phase = 3
+    end		
+    if remaining_chops == 0 or remaining_chops < 0 then
+    phase = 4
+    end			
+	--inst.AnimState:PlayAnimation("chopdamaged-"..phase)
+	inst.AnimState:PushAnimation("damaged-"..phase,true)
 end
 local function on_chopped_down(inst, chopper)
     inst.SoundEmitter:PlaySound("dontstarve/forest/appear_wood")
@@ -28,6 +42,7 @@ local function on_chopped_down(inst, chopper)
 	inst.components.lootdropper:DropLoot()
 	inst:RemoveComponent("workable")
 	inst.ReadyToChop = false
+	inst.AnimState:PlayAnimation("damaged-4")
 end
 
 local function Regrow(inst)
@@ -39,6 +54,7 @@ local function Regrow(inst)
 	inst.components.workable:SetOnWorkCallback(on_chop)
 	inst.components.workable:SetOnFinishCallback(on_chopped_down)
 	inst.RegrowCounter = 0
+	inst.AnimState:PlayAnimation("damaged-0")
 	end
 	if inst.ReadyToChop == false then
 	inst.RegrowCounter = inst.RegrowCounter + 1
@@ -91,7 +107,7 @@ local function makefn()
 
         inst.AnimState:SetBank("giant_tree")
         inst.AnimState:SetBuild("giant_tree")
-        inst.AnimState:PlayAnimation("idle", true)
+        inst.AnimState:PlayAnimation("damaged-0", true)
         inst.entity:SetPristine()
 		
         if not TheWorld.ismastersim then
@@ -99,7 +115,7 @@ local function makefn()
         end
 		inst:AddComponent("workable")
 		inst.components.workable:SetWorkAction(ACTIONS.CHOP)
-		inst.components.workable:SetWorkLeft(TUNING.DRIFTWOOD_TREE_CHOPS)
+		inst.components.workable:SetWorkLeft(25)
 
 		inst.components.workable:SetOnWorkCallback(on_chop)
 		inst.components.workable:SetOnFinishCallback(on_chopped_down)
