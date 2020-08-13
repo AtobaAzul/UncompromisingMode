@@ -8,6 +8,7 @@ AddTask("GiantTrees", {
 			["GiantTrees"] = function() return 2 + math.random(1,2) end, 
 			["SpideryGiantTrees"] = function() return 1 + math.random(0,0) end,
 			["RoadGiantTrees"] = 1,
+			["SnapDragons"] = 1,
 		},
 		room_bg=GROUND.JUNGLE,
 		background_room="BGGiantTrees",

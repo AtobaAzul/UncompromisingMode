@@ -221,6 +221,9 @@ local function fn()
 	inst.components.infester.bitefn = bite
 	inst.components.infester.stopinfesttestfn = stopinfesttest
 	------------------
+    
+    inst:AddComponent("edible")
+    inst.components.edible.foodtype = FOODTYPE.INSECT
 	
     MakeMediumPropagator(inst)
 	

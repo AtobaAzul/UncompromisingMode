@@ -80,3 +80,24 @@ AddRoom("SpideryGiantTrees",
 			widowwebspawner = 1 
 			},
 }})
+AddRoom("SnapDragons", 
+{
+	colour = {r=1,g=1,b=1,a=.50}, 
+	value = GROUND.MUD,
+	tags = {"hoodedcanopy"}, --"ForceDisconnected"
+	contents =  
+	{	
+			distributepercent = .05,
+			distributeprefabs =
+			{
+				snapdragon = 0.02,
+				cave_fern= 0.02,
+				giant_tree = 0.005,
+			},
+			countprefabs =	
+			{
+			--snapdragon = function () return 3 + math.random(0,1) end,
+			giant_tree = function () return 3 + math.random(0,1) end,
+			extracanopyspawner = function () return 6 + math.random(0,1) end,
+			},
+}})

@@ -126,4 +126,6 @@ return {
 	"chomper",
 	"old_shadowwaxwell",
 	"codexumbra",
+	"snapdragon",
+	"snapdragonherd",
 }
