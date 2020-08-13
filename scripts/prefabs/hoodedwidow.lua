@@ -27,8 +27,6 @@ local loot =
     "silk",
     "silk",
     "silk",
-    "spidereggsack",
-    "spiderhat",
 	"widowsgrasp",
 }
 
