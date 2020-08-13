@@ -216,7 +216,7 @@ local states=
             TimeEvent(27*FRAMES, function(inst)
                 inst.components.combat:DoAttack(inst.sg.statemem.target)
 				inst.WebReady = false
-				inst:DoTaskInTime(50,function(inst) inst.WebReady = true end)
+				inst:DoTaskInTime(75,function(inst) inst.WebReady = true end)
             end),
         },
         
@@ -280,13 +280,13 @@ local states=
         name = "leapattack",
         tags = {"busy", "noweb","superbusy","nointerrupt"},
         onenter = function(inst, data)
-			local speed = 2
+			local speed = 15
 			if inst.components.combat.target ~= nil then
 			inst:ForceFacePoint(inst.components.combat.target:GetPosition())
-			speed = inst:GetDistanceSqToInst(inst.components.combat.target)*0.1
-			if speed > 15 then
-			speed = 15
-			end
+			--speed = inst:GetDistanceSqToInst(inst.components.combat.target)*0.1
+			--if speed > 15 then
+			--speed = 15
+			--end
 			end
             inst.components.locomotor:Stop()
 			if inst.brain then

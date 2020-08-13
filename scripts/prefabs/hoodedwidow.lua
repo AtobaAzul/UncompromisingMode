@@ -124,13 +124,13 @@ local function TryPowerMove(inst)
 print("powermovetried")
 print(inst.LeapReady)
 print(inst.CanopyReady)
-if not inst.sg:HasStateTag("superbusy") and not inst:HasTag("gonnasuper") then
+if not inst.sg:HasStateTag("superbusy") and not inst:HasTag("gonnasuper") and not inst.components.health:IsDead() then
 if inst.LeapReady == true or inst.CanopyReady == true then
 	if inst.LeapReady == true then
 		if not inst.sg:HasStateTag("superbusy") then
 			if not inst.sg:HasStateTag("nointerrupts") then
 			inst:AddTag("gonnasuper")
-			inst:DoTaskInTime(1, function(inst) inst.sg:GoToState("preleapattack") end)
+			inst:DoTaskInTime(1, function(inst) if not inst.components.health:IsDead() then inst.sg:GoToState("preleapattack") end end)
 			else
 			inst:AddTag("gonnasuper")
 			inst.sg:GoToState("preleapattack")
@@ -141,7 +141,7 @@ if inst.LeapReady == true or inst.CanopyReady == true then
 		if not inst.sg:HasStateTag("superbusy") then
 			if not inst.sg:HasStateTag("nointerrupts") then
 			inst:AddTag("gonnasuper")
-			inst:DoTaskInTime(1, function(inst) inst.sg:GoToState("precanopy") end)
+			inst:DoTaskInTime(1, function(inst) if not inst.components.health:IsDead() then inst.sg:GoToState("precanopy") end end)
 			else
 			inst:AddTag("gonnasuper")
 			inst.sg:GoToState("precanopy")

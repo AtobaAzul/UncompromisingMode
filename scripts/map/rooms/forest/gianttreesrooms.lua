@@ -65,7 +65,7 @@ AddRoom("SpideryGiantTrees",
 {
 	colour = {r=1,g=1,b=1,a=.50}, 
 	value = GROUND.JUNGLE,
-	tags = {"hoodedcanopy"}, --"ForceDisconnected"
+	tags = {"RoadPoison", "hoodedcanopy"}, --"ForceDisconnected"
 	contents =  
 	{	
 			distributepercent = 0.001,
@@ -84,7 +84,7 @@ AddRoom("SnapDragons",
 {
 	colour = {r=1,g=1,b=1,a=.50}, 
 	value = GROUND.MUD,
-	tags = {"hoodedcanopy"}, --"ForceDisconnected"
+	tags = {"RoadPoison","hoodedcanopy"}, --"ForceDisconnected"
 	contents =  
 	{	
 			distributepercent = .05,
