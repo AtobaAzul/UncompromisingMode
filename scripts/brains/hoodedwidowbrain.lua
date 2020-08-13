@@ -102,10 +102,10 @@ function HoodedWidowBrain:OnStart()
                 ActionNode(function() EquipRange(self.inst) end, "Equip phlegm"),
                 ChaseAndAttack(self.inst, MAX_CHASE_TIME) })),
 
-		WhileNode(function() return CanLeapNow(self.inst) end, "AttackMomentarily",
+		--[[WhileNode(function() return CanLeapNow(self.inst) end, "AttackMomentarily",
             SequenceNode({
                 ActionNode(function() EquipLeap(self.inst) end, "Equip phlegm"),
-                ChaseAndAttack(self.inst, MAX_CHASE_TIME) })),
+                ChaseAndAttack(self.inst, MAX_CHASE_TIME) })),]]
 				
             SequenceNode({
                 ActionNode(function() EquipMeleeAndResetCooldown(self.inst) end, "Equip melee"),

@@ -113,24 +113,9 @@ local function EquipWeapons(inst)
         inst.components.inventory:GiveItem(meleeweapon)
         inst.weaponitems.meleeweapon = meleeweapon
 
-        local leapweapon = CreateEntity()
-        leapweapon.name = "Leap"
-        --[[Non-networked entity]]
-        leapweapon.entity:AddTransform()
-        leapweapon:AddComponent("weapon")
-        leapweapon.components.weapon:SetDamage(TUNING.SPIDERQUEEN_DAMAGE)
-        leapweapon.components.weapon:SetRange(TUNING.SPAT_PHLEGM_ATTACKRANGE)
-        leapweapon:AddComponent("inventoryitem")
-		leapweapon:AddTag("leap")
-        leapweapon.persists = false
-        leapweapon.components.inventoryitem:SetOnDroppedFn(leapweapon.Remove)
-        leapweapon:AddComponent("equippable")
-        leapweapon:AddTag("leapweapon")
-		
-        inst.components.inventory:GiveItem(leapweapon)
-        inst.weaponitems.leapweapon = leapweapon
     end
 end
+
 local function OnLoad(inst)
 inst.WebReady = true
 inst.LeapReady = true

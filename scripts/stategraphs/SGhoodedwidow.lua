@@ -17,7 +17,7 @@ local events=
                     inst.sg:GoToState("launchprojectile", data.target)
                 end
 				if weapon:HasTag("meleeweapon") then
-                    inst.sg:GoToState("leapattack", data.target)
+                    inst.sg:GoToState("attack", data.target)
                 end
             end
         end
@@ -216,7 +216,7 @@ local states=
             TimeEvent(27*FRAMES, function(inst)
                 inst.components.combat:DoAttack(inst.sg.statemem.target)
 				inst.WebReady = false
-				inst:DoTaskInTime(35,function(inst) inst.WebReady = true end)
+				inst:DoTaskInTime(50,function(inst) inst.WebReady = true end)
             end),
         },
         
@@ -319,6 +319,7 @@ local states=
         name = "jumphome",
         tags = {"busy", "noweb","superbusy","nointerrupt"},
         onenter = function(inst, data)
+			inst.DynamicShadow:Enable(false)
 			inst.components.locomotor:Stop()
             inst.Physics:SetDamping(0)
             inst.AnimState:PlayAnimation("enter", true)
@@ -362,6 +363,7 @@ State{
         onenter = function(inst, data)
 			inst.components.locomotor:Stop()
             inst.Physics:SetDamping(0)
+			inst.DynamicShadow:Enable(false)
             inst.AnimState:PlayAnimation("enter", true)
         end,
         onupdate = function(inst)
@@ -410,6 +412,7 @@ State{
                 inst.DynamicShadow:Enable(true)
 			inst.CanopyReady = false
 			inst:RemoveTag("gonnasuper")
+			inst.DynamicShadow:Enable(true)
             inst.sg:GoToState("taunt")
             end
         end,
