@@ -71,14 +71,47 @@ local function OnKilled(inst)
 	local creature = nil
 	if inst.size ~= nil then
 		if inst.size == 1 then
-		creature = "pigman"
+		creature = "deer"
 		end
 		if inst.size == 2 then
-		creature = "krampus"
-		end
-		if inst.size == 3 then
 		creature = "beefalo"
 		end
+		if inst.size == 3 then
+		creature = "mossling"
+		end
+		if inst.size == 4 then
+		creature = "pigman"
+		end
+		if inst.size == 5 then
+		creature = "bunnyman"
+		end
+		if inst.size == 6 then
+		creature = "koalefant_summer"
+		end
+		if inst.size == 7 then
+		creature = "little_walrus"
+		end
+		if inst.size == 8 then
+		creature = "tallbird"
+		end
+		if inst.size == 9 then
+		creature = "spiderqueen"
+		end
+		if inst.size == 10 then
+		creature = "warg"
+		end
+		if inst.size == 11 then
+		creature = "krampus"
+		end
+		if inst.size == 12 then
+		creature = "walrus"
+		end
+		if inst.size == 13 then
+		creature = "knight"
+		end
+		if inst.size == 14 then
+		creature = "spat"
+		end	
     local deadcreature = SpawnPrefab(creature)
 	deadcreature.Transform:SetPosition(x, y, z)
 	deadcreature.components.health:Kill()
@@ -103,24 +136,57 @@ local function onsave(inst,data)
 if inst.size ~= nil then
 data.size = inst.size
 else
-data.size = math.random(1,3)
+data.size = math.random(1,14)
 end
 end
 local function onload(inst,data)
 if data and data.size ~= nil then
 inst.size = data.size
 else
-inst.size = math.random(1,3)
+inst.size = math.random(1,14)
 end
 end
 local function SetSize(inst)
-if inst.size == 1 then
-SetSmall(inst)
-end
-if inst.size == 2 then
+if inst.size == 1 then   --No Eyed Deer
 SetMedium(inst)
 end
-if inst.size == 3 then
+if inst.size == 2 then   --Beefalo
+SetLarge(inst)
+end
+if inst.size == 3 then   --Mossling
+SetMedium(inst)
+end
+if inst.size == 4 then   --Pigman
+SetSmall(inst)
+end
+if inst.size == 5 then   --Bunnyman
+SetSmall(inst)
+end
+if inst.size == 6 then   --koalefant
+SetLarge(inst)
+end
+if inst.size == 7 then   --wee mactusk
+SetSmall(inst)
+end
+if inst.size == 8 then   --Tallbird
+SetMedium(inst)
+end
+if inst.size == 9 then   --SpiderQueen
+SetLarge(inst)
+end
+if inst.size == 10 then   --Varg
+SetLarge(inst)
+end
+if inst.size == 11 then   --Krampus
+SetMedium(inst)
+end
+if inst.size == 12 then   --Mactusk
+SetMedium(inst)
+end
+if inst.size == 13 then   --Clockwork Knight
+SetSmall(inst)
+end
+if inst.size == 14 then   --Ewecus
 SetLarge(inst)
 end
 end
@@ -177,7 +243,7 @@ local function fn()
 		inst.OnLoad = onload
 		inst.OnEntitySleep = OnEntitySleep
 		inst.OnEntityWake = OnEntityWake
-		inst.size = math.random(1,3)
+		inst.size = math.random(1,14)
 		return inst
 end
 
