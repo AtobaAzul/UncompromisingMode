@@ -128,4 +128,6 @@ return {
 	"codexumbra",
 	"snapdragon",
 	"snapdragonherd",
+	"giant_blueberry",
+	"blueberryplant",
 }
