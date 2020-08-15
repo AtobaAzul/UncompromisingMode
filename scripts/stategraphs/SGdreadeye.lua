@@ -133,10 +133,10 @@ local states =
 
     State{
         name = "disguise",
-        tags = { "disguise", "busy" }, -- , "busy" 
+        tags = { "disguise", "busy", "disguised" }, -- , "busy" 
 
         onenter = function(inst)
-            --inst.AnimState:PlayAnimation("disappear")
+            inst.AnimState:PlayAnimation("idonotexist")
             inst.components.locomotor:StopMoving()
             inst.Physics:Stop()
 			inst:Disguise()

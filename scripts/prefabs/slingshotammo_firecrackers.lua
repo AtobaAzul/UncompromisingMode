@@ -196,7 +196,7 @@ local function DoPop(inst, remaining, total, level, hissvol)
 					end
 				else
 					--v:PushEvent("attacked", { attacker = inst.attacker or nil, damage = 5} )
-					v.components.combat:GetAttacked(nil, 5)
+					v.components.combat:GetAttacked(inst, 5)
 					v.components.combat:SetTarget(inst.attacker or nil)
 				end
 			end

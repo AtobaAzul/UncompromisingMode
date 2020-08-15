@@ -32,7 +32,7 @@ local function OnHitSnow(inst, attacker, target)
 				if v.sg ~= nil and not inst:HasTag("canthit") and not v.sg:HasStateTag("frozen") and not v:HasTag("abigail") and not v:HasTag("companion") and not v:HasTag("player") then
 					v:PushEvent("attacked", { attacker = attacker, damage = 0} )
 				elseif v.sg ~= nil and not inst:HasTag("canthit") then
-					v:PushEvent("attacked", { attacker = nil, damage = 0} )
+					v:PushEvent("attacked", { attacker = inst, damage = 0} )
 				end
 				
 				if v.components.freezable ~= nil then
