@@ -75,15 +75,42 @@ env.AddPrefabPostInit("armor_bramble", function(inst)
 		return
 	end
 	
+	local _SetOnEquip = inst.components.equippable.onequipfn
+
+	inst.components.equippable.onequipfn = function(inst, owner)
+		if _SetOnEquip ~= nil then
+		   _SetOnEquip(inst, owner)
+		end
+	
+		if owner.spiketask == nil then
+			owner.spiketask = owner:DoTaskInTime(2, function(owner) SpikeAttack(owner, inst) end)
+		end
+
+	end
+	
+	local _SetOnUnequip = inst.components.equippable.onunequipfn
+
+	inst.components.equippable.onunequipfn = function(inst, owner)
+		if _SetOnUnequip ~= nil then
+		   _SetOnUnequip(inst, owner)
+		end
+	
+		if owner.spiketask ~= nil then
+			owner.spiketask:Cancel()
+			owner.spiketask = nil
+		end
+
+	end
+	--[[
 	if inst.components.equippable ~= nil then
 		inst.components.equippable:SetOnEquip(onequip)
 		inst.components.equippable:SetOnUnequip(onunequip)
-	end
+	end]]
 	
 	if inst.components.armor ~= nil then
 		inst.components.armor:InitCondition(TUNING.ARMORBRAMBLE * 2, TUNING.ARMORBRAMBLE_ABSORPTION)
 	end
 	
-	inst._onblocked = function(owner, data) OnBlocked(owner, data, inst) end
+	--inst._onblocked = function(owner, data) OnBlocked(owner, data, inst) end
 	
 end)
