@@ -48,7 +48,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
 	DESCRIBE.SPIDERQUEENCORPSE = "I think the spiders will manage fine without a queen."
 	ANNOUNCE.ANNOUNCE_SNEEZE = "ooAaaAGH-CHU"
-	ANNOUNCE.ANNOUNCE_HAYFEVER = "My Alergies are agting up again!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER = "My Allergies are acting up again!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Back to my regular level of allergies."
 	ANNOUNCE.ANNOUNCE_FIREFALL = {
 		"I get the feeling we should all review fire safety again!",
