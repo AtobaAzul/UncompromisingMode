@@ -104,6 +104,17 @@ configuration_options =
 		},
 		default = true,
 	},
+	{
+		name = "warly",
+		label = "Improved Warly.",
+		hover = "Warly gets 1.2x health and sanity from unique foods, and 1.15x hunger, similar to singleplayer. Increased food memory to 3 days.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = true,
+	},
 	--[[{
 		name = "harder_recipes",
 		label = "Harder Recipes",
