@@ -281,6 +281,8 @@
 
 * [x] Maxwell cannot read books while insane.
 
+* [x] [FEAR THE DARK!] Added config option to use Maxwell's classic DS shadows, with no 2.5 day time limit, no health cost for summoning, and the ability to manually banish them.
+
 --Wigfrid
 
 * [x] [FEAR THE DARK!] Wigfrid's life and sanity leech is reduced by 1/3, but she gains her singleplayer health and sanity on kill perk (which is also reduced) This means she usually gets more restored from small mobs, but less during large boss fights.
