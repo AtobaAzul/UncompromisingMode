@@ -204,15 +204,21 @@ Assets = {
 	Asset("ANIM", "anim/hoodedcanopy.zip"),
 	Asset("ANIM", "anim/chomper.zip"),
 	Asset("ANIM", "anim/wspider_queen_build.zip"),
-	--Map Icons Start--
+	Asset("ANIM", "anim/blueberryplant.zip"),
 	Asset("IMAGE", "images/inventoryimages/seafoodpaella.tex"),
 	Asset("ATLAS", "images/inventoryimages/seafoodpaella.xml"),
+	Asset("IMAGE", "images/inventoryimages/giant_blueberry.tex"),
+	Asset("ATLAS", "images/inventoryimages/giant_blueberry.xml"),
+	Asset("ANIM", "anim/blueberry.zip"),
+	--Map Icons Start--
 	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),
 	Asset( "ATLAS", "images/map_icons/riceplant.xml" ),
 	Asset( "IMAGE", "images/map_icons/sporepack_map.tex" ),
 	Asset( "ATLAS", "images/map_icons/sporepack_map.xml" ),
 	Asset( "IMAGE", "images/map_icons/air_conditioner_map.tex" ),
 	Asset( "ATLAS", "images/map_icons/air_conditioner_map.xml" ),
+	Asset( "IMAGE", "images/map_icons/blueberryplant_map.tex" ),
+	Asset( "ATLAS", "images/map_icons/blueberryplant_map.xml" ),
 	--Map Icons End--
 
 	Asset( "IMAGE", "bigportraits/willow.tex" ),

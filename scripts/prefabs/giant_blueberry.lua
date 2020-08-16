@@ -1,8 +1,8 @@
 local assets =
 {
-    Asset("ANIM", "anim/zaspberry.zip"),
-	Asset("ATLAS", "images/inventoryimages/zaspberry.xml"),
-	Asset("IMAGE", "images/inventoryimages/zaspberry.tex"),
+    Asset("ANIM", "anim/blueberry.zip"),
+	Asset("ATLAS", "images/inventoryimages/giant_blueberry.xml"),
+	Asset("IMAGE", "images/inventoryimages/giant_blueberry.tex"),
 }
 
 local function fn()
@@ -15,10 +15,10 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("zaspberry")
-    inst.AnimState:SetBuild("zaspberry")
+    inst.AnimState:SetBank("blueberry")
+    inst.AnimState:SetBuild("blueberry")
     inst.AnimState:PlayAnimation("idle")
-
+	inst.Transform:SetScale(1.4,1.4,1.4)
     MakeInventoryFloatable(inst)
 	
     inst.entity:SetPristine()
@@ -33,7 +33,7 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/zaspberry.xml"
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/giant_blueberry.xml"
     inst:AddComponent("edible")
     inst.components.edible.healthvalue = 3
     inst.components.edible.hungervalue = 25

@@ -10,6 +10,7 @@ AddRoom("GiantTrees",
 		sapling = 0.2,
 		evergreen_sparse = 0.5,
 		cave_fern = 0.5,
+		blueberryplant = 0.1,
 		},
 		
 			countprefabs =	
@@ -31,6 +32,7 @@ AddRoom("RoadGiantTrees",
 		sapling = 0.2,
 		evergreen_sparse = 0.5,
 		cave_fern = 0.5,
+		blueberryplant = 0.04,
 		},
 		
 			countprefabs =	
@@ -52,6 +54,7 @@ AddRoom("BGGiantTrees",
 		sapling = 0.2,
 		evergreen_sparse = 0.5,
 		cave_fern = 0.5,
+		blueberryplant = 0.07,
 		},
 			countprefabs =	
 		{
