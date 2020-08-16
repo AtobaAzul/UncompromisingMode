@@ -6,7 +6,6 @@ local require = GLOBAL.require
 	modimport("init/minimap_icons")
 	
 	--  [   Import customized shard RPC module ]    --
-    modimport("init/init_uncompromisingshardrpc")
 	
 	
 	--  [   Mock Dragonfly Spit Bait ]    --
@@ -114,6 +113,7 @@ local require = GLOBAL.require
 	
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("acidrain") == true or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("acidrain") == true) then
+		modimport("init/init_uncompromisingshardrpc")
 		modimport("init/init_weather/init_acidmushroom_networking")
 	end
 	
