@@ -124,7 +124,7 @@ local function TryPowerMove(inst)
 print("powermovetried")
 print(inst.LeapReady)
 print(inst.CanopyReady)
-if not inst.sg:HasStateTag("superbusy") and not inst:HasTag("gonnasuper") and not inst.components.health:IsDead() then
+if not inst.sg:HasStateTag("superbusy") and not inst:HasTag("gonnasuper") and not inst.components.health:IsDead() and inst.components.combat.target then
 if inst.LeapReady == true or inst.CanopyReady == true then
 	if inst.LeapReady == true then
 		if not inst.sg:HasStateTag("superbusy") then

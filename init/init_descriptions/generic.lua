@@ -156,6 +156,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.CURSED_ANTLER = "Strong AND reliable!"
 	DESCRIBE.BLOOMERSHOT = "The only outcome of this experiment is pain."
 	DESCRIBE.BERNIEBOX = "What could be inside? If only I could open it..."
+	DESCRIBE.BLUEBERRYPLANT =         
+		{
+            READY = "She's gonna blow!",
+			REGROWING = "It seems to be coming back.",
+		}
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "It finally fell apart.",

@@ -331,6 +331,7 @@ function InsertIngredientValues(names, tags, cancook, candry, keepoldvalues) -- 
 end
 
 InsertIngredientValues({"zaspberry"},{fruit=1},true,false,false)
+InsertIngredientValues({"giant_blueberry"},{fruit=1},true,false,false)
 InsertIngredientValues({"iceboomerang"},{ice=1},true,false,false)
 InsertIngredientValues({"rice"},{veggie=1,rice=1},true,false,false)
 InsertIngredientValues({"rice_cooked"},{veggie=1,rice=1},true,false,false)

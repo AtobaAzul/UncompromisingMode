@@ -2,8 +2,8 @@ require "prefabutil" -- for the MakePlacer function
 
 local assets =
 {
-    Asset("ANIM", "anim/star_trap.zip"),
-    Asset("MINIMAP_IMAGE", "star_trap"),
+    Asset("ANIM", "anim/blueberryplant.zip"),
+    Asset("MINIMAP_IMAGE", "blueberryplant"),
 }
 
 local prefabs =
@@ -53,11 +53,11 @@ local function do_snap(inst)
         end
     end
 	inst.Harvestable = false
+	end
     if inst._snap_task ~= nil then
         inst._snap_task:Cancel()
         inst._snap_task = nil
     end
-	end
 end
 
 local function reset(inst)
@@ -81,7 +81,7 @@ local function on_explode(inst, target)
     inst:RemoveEventCallback("animover", on_anim_over)
 
     if target ~= nil and inst._snap_task == nil then
-        local frames_until_anim_snap = 50
+        local frames_until_anim_snap = 40
         inst._snap_task = inst:DoTaskInTime(frames_until_anim_snap * FRAMES, do_snap)
     end
 
@@ -115,7 +115,7 @@ local function on_deactivate(inst)
 		inst.components.lootdropper:SpawnLootPrefab("giant_blueberry") 
 		end
 		if TheWorld.state.isspring then
-        inst.components.lootdropper:SpawnLootPrefab("blueberryflower")
+        --inst.components.lootdropper:SpawnLootPrefab("blueberryflower") --Add functionality once we get the visuals
 		end
     end
 
@@ -128,15 +128,16 @@ local function on_deactivate(inst)
 end
 
 local function get_status(inst)
-    return (inst.components.mine.issprung and "CLOSED") or nil
+    return (inst.components.mine.issprung and "REGROWING") or "READY"
 end
 
 local function on_blueberry_dug_up(inst, digger)
+	inst.AnimState:PlayAnimation("dig")
     on_deactivate(inst)
 end
 
 local function calculate_mine_test_time()
-    return TUNING.STARFISH_TRAP_TIMING.BASE + (math.random() * TUNING.STARFISH_TRAP_TIMING.VARIANCE)
+    return TUNING.STARFISH_TRAP_TIMING.BASE + (math.random() * TUNING.STARFISH_TRAP_TIMING.VARIANCE) --This will be the "regrow" period of the blueberry, will extend it to be much longer.
 end
 
 local function on_save(inst, data)
@@ -170,19 +171,18 @@ local function blueberryplant()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
-    inst.entity:AddMiniMapEntity()
+    local minimap = inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    inst.MiniMapEntity:SetIcon("star_trap.png")
+    inst.MiniMapEntity:SetIcon("blueberryplant_map.tex")
 
-    inst.AnimState:SetBank("star_trap")
-    inst.AnimState:SetBuild("star_trap")
+    inst.AnimState:SetBank("blueberryplant")
+    inst.AnimState:SetBuild("blueberryplant")
     inst.AnimState:PlayAnimation("idle", true)
 
     inst:AddTag("trap")
     inst:AddTag("trapdamage")
     inst:AddTag("birdblocker")
-    inst:AddTag("wet")
 
     inst.entity:SetPristine()
 
@@ -191,7 +191,7 @@ local function blueberryplant()
     end
 
     inst:AddComponent("inspectable")
-    inst.components.inspectable.nameoverride = "TRAP_STARFISH"
+    inst.components.inspectable.nameoverride = "BLUEBERRYPLANT"
     inst.components.inspectable.getstatus = get_status
 
     inst:AddComponent("lootdropper")
@@ -251,8 +251,8 @@ local function blueberryflower()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("star_trap")
-    inst.AnimState:SetBuild("star_trap")
+    inst.AnimState:SetBank("blueberryplant")
+    inst.AnimState:SetBuild("blueberryplant")
     inst.AnimState:PlayAnimation("inactive", true)
 
     MakeInventoryFloatable(inst, "med")

@@ -91,7 +91,6 @@ function HoodedWidowBrain:OnStart()
     {	
 	            WhileNode(function() return ShouldResetFight(self) end, "Reset Fight",
                 PriorityNode({
-                    WhileNode(function() return ShouldRetryReset(self) end, "Retry Reset", ActionNode(function() end)),
                     DoAction(self.inst, GoHomeAction),
                 }, .25)),
 		
