@@ -27,8 +27,8 @@ local function setPillarDestroyed(inst)
 		inst.AnimState:SetBuild("pillar_ruins_damaged")
 		RemovePhysicsColliders(inst)
 	else
-		inst.AnimState:SetBuild("pillar_ruins_damaged")
-		RemovePhysicsColliders(inst)
+		inst.AnimState:SetBuild("pillar_ruins")
+        MakeObstaclePhysics(inst, 2.35)
 	end
 end
 
