@@ -132,8 +132,12 @@ local function get_status(inst)
 end
 
 local function on_blueberry_dug_up(inst, digger)
+	if digger:HasTag("player") then
 	inst.AnimState:PlayAnimation("dig")
     on_deactivate(inst)
+	else
+	inst.components.workable:SetWorkLeft(1)
+	end
 end
 
 local function calculate_mine_test_time()

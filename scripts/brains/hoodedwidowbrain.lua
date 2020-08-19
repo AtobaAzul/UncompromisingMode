@@ -64,7 +64,7 @@ local function GoHomeAction(inst)
         and home:IsValid()
         and home.components.childspawner ~= nil
         and (home.components.health == nil or not home.components.health:IsDead())
-        and BufferedAction(inst, home, ACTIONS.GOHOME)
+        and BufferedAction(inst, nil, ACTIONS.GOHOME)
         or nil
 end
 local function ShouldResetFight(self)
@@ -72,7 +72,7 @@ local function ShouldResetFight(self)
 		if home then
         local dx, dy, dz = self.inst.Transform:GetWorldPosition()
         local spx, spy, spz = home.Transform:GetWorldPosition()
-        if distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*TUNING.DRAGONFLY_RESET_DIST) then
+        if distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*6) then
 		return true
         else
         return false
@@ -96,7 +96,7 @@ function HoodedWidowBrain:OnStart()
 		
     	WhileNode( function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
         WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
-		WhileNode(function() return CanRangeNow(self.inst) end, "AttackMomentarily",
+		WhileNode(function() return CanRangeNow(self.inst) and not ShouldResetFight(self)  end, "AttackMomentarily",
             SequenceNode({
                 ActionNode(function() EquipRange(self.inst) end, "Equip phlegm"),
                 ChaseAndAttack(self.inst, MAX_CHASE_TIME) })),
@@ -105,11 +105,11 @@ function HoodedWidowBrain:OnStart()
             SequenceNode({
                 ActionNode(function() EquipLeap(self.inst) end, "Equip phlegm"),
                 ChaseAndAttack(self.inst, MAX_CHASE_TIME) })),]]
-				
+		WhileNode(function() return not ShouldResetFight(self) end, "Attack",
             SequenceNode({
                 ActionNode(function() EquipMeleeAndResetCooldown(self.inst) end, "Equip melee"),
-                ChaseAndAttack(self.inst, MAX_CHASE_TIME) }),
-                DoAction(self.inst, function() return GoHomeAction(self.inst) end ),
+                ChaseAndAttack(self.inst, MAX_CHASE_TIME) })),
+        DoAction(self.inst, function() return GoHomeAction(self.inst) end ),
         
         Wander(self.inst),
     }, 2)

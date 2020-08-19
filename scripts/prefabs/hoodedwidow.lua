@@ -70,6 +70,21 @@ local PLAYER_IGNORE_TAGS = { "playerghost" }
 local function OnDead(inst)
     AwardRadialAchievement("spiderqueen_killed", inst:GetPosition(), TUNING.ACHIEVEMENT_RADIUS_FOR_GIANT_KILL)
 end
+
+local function DoDespawn(inst)
+    --Schedule new spawn time
+    --Called at the time the hooded widow actually leaves the world.
+    local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
+    if home ~= nil then
+        home.components.childspawner:GoHome(inst)
+        home.components.childspawner:StartSpawning()
+		--print("despawn")
+    else
+        inst:Remove() --Hooded Widow was probably debug spawned in?
+		print("removed, OH NO!")
+    end
+end
+
 local projectile_prefabs =
 {
     "spat_splat_fx",
@@ -120,45 +135,38 @@ local function OnLoad(inst)
 inst.WebReady = true
 inst.LeapReady = true
 end
-local function TryPowerMove(inst)
-print("powermovetried")
-print(inst.LeapReady)
-print(inst.CanopyReady)
+
+local function DoSuper(inst)
 if not inst.sg:HasStateTag("superbusy") and not inst:HasTag("gonnasuper") and not inst.components.health:IsDead() and inst.components.combat.target then
-if inst.LeapReady == true or inst.CanopyReady == true then
+if math.random()>0.2 then
+inst.sg:GoToState("preleapattack")
+else
+inst.sg:GoToState("precanopy")
+end
+end
+end
+local function TryPowerMove(inst)
+--print("powermovetried")
+--print(inst.LeapReady)
+if not inst.sg:HasStateTag("superbusy") and not inst:HasTag("gonnasuper") and not inst.components.health:IsDead() and inst.components.combat.target then
 	if inst.LeapReady == true then
 		if not inst.sg:HasStateTag("superbusy") then
 			if not inst.sg:HasStateTag("nointerrupts") then
 			inst:AddTag("gonnasuper")
-			inst:DoTaskInTime(1, function(inst) if not inst.components.health:IsDead() then inst.sg:GoToState("preleapattack") end end)
+			inst:DoTaskInTime(1, function(inst) if not inst.components.health:IsDead() then DoSuper(inst) end end)
 			else
 			inst:AddTag("gonnasuper")
-			inst.sg:GoToState("preleapattack")
+			DoSuper(inst)
 			end
 		end
+	else
+	inst:DoTaskInTime(10,function(inst) 
+	inst.LeapReady = true
+	end)
 	end
-	if inst.CanopyReady == true then
-		if not inst.sg:HasStateTag("superbusy") then
-			if not inst.sg:HasStateTag("nointerrupts") then
-			inst:AddTag("gonnasuper")
-			inst:DoTaskInTime(1, function(inst) if not inst.components.health:IsDead() then inst.sg:GoToState("precanopy") end end)
-			else
-			inst:AddTag("gonnasuper")
-			inst.sg:GoToState("precanopy")
-			end
-		end
-	end
-else
-inst:DoTaskInTime(10,function(inst) 
-if math.random()>0.33 then
-inst.LeapReady = true
-else
-inst.CanopyReady = true
-end
-end)
 end
 end
-end
+
 local function Reset(inst)
     inst.reset = true
 end
@@ -261,6 +269,7 @@ local function fn()
 	inst.LeapReady = false
 	inst.CanopyReady = false
 	inst.Reset = Reset
+    inst.DoDespawn = DoDespawn
 	inst:AddComponent("inventory")
     inst.weaponitems = {}
 	EquipWeapons(inst)

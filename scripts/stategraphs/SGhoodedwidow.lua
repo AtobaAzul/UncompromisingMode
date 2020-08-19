@@ -322,19 +322,23 @@ local states=
 			inst.DynamicShadow:Enable(false)
 			inst.components.locomotor:Stop()
             inst.Physics:SetDamping(0)
-            inst.AnimState:PlayAnimation("enter", true)
+			inst.AnimState:PlayAnimation("poop_loop")
+			inst.AnimState:PushAnimation("enter", false)
         end,
 		timeline=
         {
-            TimeEvent(3*FRAMES, function(inst)
+            TimeEvent(25*FRAMES, function(inst)
                inst.Physics:SetMotorVel(0,20,0)
             end),
+			TimeEvent(100*FRAMES, function(inst) 
+                inst:DoDespawn()
+            end)
         },
-        events=
+       --[[ events=
         {
             EventHandler("animover", function(inst) inst:PerformBufferedAction()
 			inst.sg:GoToState("idle") end),
-        },       
+        },  ]]     
 
     },
     State{
@@ -372,7 +376,7 @@ State{
         events=
         {
             EventHandler("animover", function(inst) 
-			inst:DoTaskInTime(3+math.random(-1,1),function(inst)inst.sg:GoToState("canopyland") end) end),
+			inst:DoTaskInTime(1.5+math.random(-1,1),function(inst)inst.sg:GoToState("canopyland") end) end),
         },       
 
     },
@@ -410,7 +414,7 @@ State{
                 inst.Physics:SetDamping(5)
                 inst.Physics:Teleport(pt.x,pt.y,pt.z)
                 inst.DynamicShadow:Enable(true)
-			inst.CanopyReady = false
+			inst.LeapReady = false
 			inst:RemoveTag("gonnasuper")
 			inst.DynamicShadow:Enable(true)
             inst.sg:GoToState("taunt")
