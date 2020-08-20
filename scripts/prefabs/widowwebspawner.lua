@@ -16,8 +16,10 @@ for i = 1, 3 do
 local x,y,z = inst.Transform:GetWorldPosition()
 x=x+math.random(-7,7)
 z=z+math.random(-7,7)
+if TheWorld.Map:IsPassableAtPoint(x, 0, z) then
 local cacoon = SpawnPrefab("webbedcreature")
 cacoon.Transform:SetPosition(x, y, z)
+end
 end
 end
 local function fn()

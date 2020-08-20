@@ -36,12 +36,12 @@ local function fn()
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/giant_blueberry.xml"
     inst:AddComponent("edible")
     inst.components.edible.healthvalue = 3
-    inst.components.edible.hungervalue = 25
+    inst.components.edible.hungervalue = 22.5
     inst.components.edible.sanityvalue = 0
     inst.components.edible.foodtype = FOODTYPE.VEGGIE
 
     inst:AddComponent("perishable")
-    inst.components.perishable:SetPerishTime(5*TUNING.PERISH_TWO_DAY)
+    inst.components.perishable:SetPerishTime(2.5*TUNING.PERISH_TWO_DAY)
     inst.components.perishable:StartPerishing()
     inst.components.perishable.onperishreplacement = "spoiled_food"
 

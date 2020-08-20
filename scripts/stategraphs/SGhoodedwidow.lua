@@ -103,84 +103,6 @@ local states=
         },
     },
 
-
-
-	State{
-		name = "poop_pre",
-        tags = {"busy", "nointerrupt"},
-
-        onenter = function(inst, cb)
-            inst.Physics:Stop()
-            inst.components.locomotor:Stop()
-			local angle = TheCamera:GetHeadingTarget()*DEGREES -- -22.5*DEGREES
-			inst.Transform:SetRotation(angle / DEGREES)
-            inst.AnimState:PlayAnimation("poop_pre")
-
-        end,
-
-        timeline=
-        {
-            TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/scream_short") end),
-        },
-
-        events=
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("poop_loop") end),
-        },
-    },
-
-    State{
-        name = "poop_loop",
-        tags = {"busy", "nointerrupt"},
-
-        onenter = function(inst, cb)
-            inst.Physics:Stop()
-            inst.components.locomotor:Stop()
-            local angle = TheCamera:GetHeadingTarget()*DEGREES -- -22.5*DEGREES
-            inst.Transform:SetRotation(angle / DEGREES)
-            inst.AnimState:PlayAnimation("poop_loop")
-
-        end,
-
-        timeline=
-        {
-            TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/givebirth_voice") end),
-
-            TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/givebirth_foley") end),
-            TimeEvent(10*FRAMES, function(inst)
-            end),
-        },
-
-        events=
-        {
-            EventHandler("animover", function(inst)
-                if inst.components.incrementalproducer and inst.components.incrementalproducer:CanProduce() then
-                    inst.sg:GoToState("poop_loop")
-                else
-                    inst.sg:GoToState("poop_pst")
-                end
-            end),
-        },
-    },
-
-    State{
-        name = "poop_pst",
-        tags = {"busy", "nointerrupt"},
-
-        onenter = function(inst, cb)
-            inst.Physics:Stop()
-            inst.components.locomotor:Stop()
-            local angle = TheCamera:GetHeadingTarget()*DEGREES -- -22.5*DEGREES
-            inst.Transform:SetRotation(angle / DEGREES)
-            inst.AnimState:PlayAnimation("poop_pst")
-
-        end,
-        events=
-        {
-			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
-        },
-    },
-
 	State{
         name = "death",
         tags = {"busy"},
@@ -229,6 +151,7 @@ local states=
         name = "fall",
         tags = {"busy","noweb"},
         onenter = function(inst, data)
+			inst:Show()
 			inst.components.locomotor:Stop()
             inst.Physics:SetDamping(0)
             inst.Physics:SetMotorVel(0,-20,0)
@@ -246,7 +169,6 @@ local states=
 
 
                 pt.y = 0
-                
                 inst.Physics:Stop()
                 inst.Physics:SetDamping(5)
                 inst.Physics:Teleport(pt.x,pt.y,pt.z)
@@ -322,23 +244,38 @@ local states=
 			inst.DynamicShadow:Enable(false)
 			inst.components.locomotor:Stop()
             inst.Physics:SetDamping(0)
+			local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
+			if home then
+			local dx, dy, dz = inst.Transform:GetWorldPosition()
+			local spx, spy, spz = home.Transform:GetWorldPosition()
+			if distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*8) then
 			inst.AnimState:PlayAnimation("poop_loop")
 			inst.AnimState:PushAnimation("enter", false)
+			else
+			inst:Hide()
+			end
+			end
         end,
 		timeline=
         {
             TimeEvent(25*FRAMES, function(inst)
                inst.Physics:SetMotorVel(0,20,0)
             end),
-			TimeEvent(100*FRAMES, function(inst) 
+			TimeEvent(30*FRAMES, function(inst)
+				inst.Physics:SetMotorVel(0,0,0)
+				--inst.entity:Show(false)
                 inst:DoDespawn()
+				inst.Home = true
             end)
         },
-       --[[ events=
-        {
-            EventHandler("animover", function(inst) inst:PerformBufferedAction()
-			inst.sg:GoToState("idle") end),
-        },  ]]     
+        onexit = function(inst)
+            --You somehow left this state?! (not supposed to happen).
+            --Cancel the action to avoid getting stuck.
+            print("Hooded Widow left the jumphome state! How could this happen?!")
+            inst.components.health:SetInvincible(false)
+            inst:ClearBufferedAction()
+            inst.DynamicShadow:Enable(true)
+        end,
 
     },
     State{

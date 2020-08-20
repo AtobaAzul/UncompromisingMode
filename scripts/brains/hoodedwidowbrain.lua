@@ -72,24 +72,17 @@ local function ShouldResetFight(self)
 		if home then
         local dx, dy, dz = self.inst.Transform:GetWorldPosition()
         local spx, spy, spz = home.Transform:GetWorldPosition()
-        if distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*6) then
+        if distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*12) then
 		return true
         else
         return false
         end
 		end
 end
-local function ShouldRetryReset(self)
-    if self.resetting then
-        local action = self.inst:GetBufferedAction()
-        return action == nil or action.action ~= ACTIONS.GOHOME
-    end
-    return false
-end
 function HoodedWidowBrain:OnStart()
     local root = PriorityNode(
     {	
-	            WhileNode(function() return ShouldResetFight(self) end, "Reset Fight",
+	            WhileNode(function() return ShouldResetFight(self) or not self.inst.components.combat.target end, "Reset Fight",
                 PriorityNode({
                     DoAction(self.inst, GoHomeAction),
                 }, .25)),
@@ -109,7 +102,6 @@ function HoodedWidowBrain:OnStart()
             SequenceNode({
                 ActionNode(function() EquipMeleeAndResetCooldown(self.inst) end, "Equip melee"),
                 ChaseAndAttack(self.inst, MAX_CHASE_TIME) })),
-        DoAction(self.inst, function() return GoHomeAction(self.inst) end ),
         
         Wander(self.inst),
     }, 2)

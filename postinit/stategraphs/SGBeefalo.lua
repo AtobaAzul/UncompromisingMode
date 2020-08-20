@@ -30,7 +30,8 @@ local states = {
             inst.SoundEmitter:PlaySound(inst.sounds.angry)
             inst.components.combat:StartAttack()
             inst.components.locomotor:StopMoving()
-			print("code")
+			inst.AnimState:SetBank("beefalo")
+			inst.AnimState:SetBuild("beefalo_build")
             inst.AnimState:PlayAnimation("atk_pre")
             inst.AnimState:PushAnimation("atk", false)
 			if inst:HasTag("chargespeed") then

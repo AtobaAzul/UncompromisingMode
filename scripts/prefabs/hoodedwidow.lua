@@ -79,10 +79,12 @@ local function DoDespawn(inst)
         home.components.childspawner:GoHome(inst)
         home.components.childspawner:StartSpawning()
 		--print("despawn")
+		inst:AddTag("home")
     else
         inst:Remove() --Hooded Widow was probably debug spawned in?
 		print("removed, OH NO!")
     end
+	
 end
 
 local projectile_prefabs =
@@ -137,13 +139,13 @@ inst.LeapReady = true
 end
 
 local function DoSuper(inst)
-if not inst.sg:HasStateTag("superbusy") and not inst:HasTag("gonnasuper") and not inst.components.health:IsDead() and inst.components.combat.target then
+--if not inst.sg:HasStateTag("superbusy") and not inst:HasTag("gonnasuper") and not inst.components.health:IsDead() and inst.components.combat.target then
 if math.random()>0.2 then
 inst.sg:GoToState("preleapattack")
 else
 inst.sg:GoToState("precanopy")
 end
-end
+--end
 end
 local function TryPowerMove(inst)
 --print("powermovetried")

@@ -46,10 +46,16 @@ local function do_snap(inst)
 
     -- Do an AOE attack, based on how the combat component does it.
     local x, y, z = inst.Transform:GetWorldPosition()
-    local target_ents = TheSim:FindEntities(x, y, z, TUNING.STARFISH_TRAP_RADIUS, mine_must_tags, mine_no_tags, mine_test_tags)
+    local target_ents = TheSim:FindEntities(x, y, z, 1.1*TUNING.STARFISH_TRAP_RADIUS, mine_must_tags, mine_no_tags, mine_test_tags)
     for i, target in ipairs(target_ents) do
         if target ~= inst and target.entity:IsVisible() and mine_test_fn(target, inst) then
             target.components.combat:GetAttacked(inst, TUNING.STARFISH_TRAP_DAMAGE)
+        end
+    end
+	local otherbombs = TheSim:FindEntities(x, y, z, 3*TUNING.STARFISH_TRAP_RADIUS, {"blueberrybomb"}, mine_no_tags)
+    for i, target in ipairs(otherbombs) do
+        if target ~= inst and target.components.mine and not target.components.mine.issprung then
+            target.components.mine:Explode()
         end
     end
 	inst.Harvestable = false
@@ -101,7 +107,7 @@ end
 
 local function on_sprung(inst)
     inst.AnimState:PlayAnimation("trap_idle", true)
-
+	inst.AnimState:PushAnimation("trap_idle", true)
     inst.AnimState:SetTime(math.random() * inst.AnimState:GetCurrentAnimationLength())
 
     inst:RemoveEventCallback("animover", on_anim_over)
@@ -134,6 +140,7 @@ end
 local function on_blueberry_dug_up(inst, digger)
 	if digger:HasTag("player") then
 	inst.AnimState:PlayAnimation("dig")
+
     on_deactivate(inst)
 	else
 	inst.components.workable:SetWorkLeft(1)
@@ -185,6 +192,7 @@ local function blueberryplant()
     inst.AnimState:PlayAnimation("idle", true)
 
     inst:AddTag("trap")
+	inst:AddTag("blueberrybomb")
     inst:AddTag("trapdamage")
     inst:AddTag("birdblocker")
 
@@ -210,8 +218,8 @@ local function blueberryplant()
     inst.components.hauntable.hauntvalue = TUNING.HAUNT_TINY
 
     inst:AddComponent("mine")
-    inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS)--*1.1)
-    inst.components.mine:SetAlignment(nil) -- starfish trigger on EVERYTHING on the ground, players and non-players alike.
+    inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*1.1)
+    inst.components.mine:SetAlignment(nil) -- blueberries trigger on EVERYTHING on the ground, players and non-players alike.
     inst.components.mine:SetOnExplodeFn(on_explode)
     inst.components.mine:SetOnResetFn(on_reset)
     inst.components.mine:SetOnSprungFn(on_sprung)
@@ -220,7 +228,7 @@ local function blueberryplant()
     inst.components.mine:SetReusable(false)
     reset(inst)
 
-    -- Stop the starfish from idling in unison.
+    -- Stop the blueberries from idling in unison.
     inst.AnimState:SetTime(math.random() * inst.AnimState:GetCurrentAnimationLength())
 
     -- Start the task for the characterizing additional idles.
