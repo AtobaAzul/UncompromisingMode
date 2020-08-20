@@ -184,7 +184,7 @@ end
 
 env.AddPrefabPostInit("bernie_active", function(inst)
 	
-	--inst:AddTag("irreplaceable")
+	inst:AddTag("irreplaceable")
 
 	if not TheWorld.ismastersim then
 		return
@@ -221,7 +221,7 @@ end
 
 env.AddPrefabPostInit("bernie_big", function(inst)
 	
-	--inst:AddTag("irreplaceable")
+	inst:AddTag("irreplaceable")
 
 	if not TheWorld.ismastersim then
 		return
@@ -245,17 +245,29 @@ env.AddPrefabPostInit("bernie_big", function(inst)
 
 end)
 
-env.AddPrefabPostInit("bernie_inactive", function(inst)
+local function canceldecaying(inst)
+	inst._decaytask = nil
+end
 
-    --inst:AddTag("irreplaceable")
+env.AddPrefabPostInit("bernie_inactive", function(inst)
 
 	if not TheWorld.ismastersim then
 		return
 	end
 	
+    inst:AddComponent("floater")
+    inst.components.floater:SetSize("small")
+	
     inst.components.inspectable.getstatus = getstatus
 
 	inst:AddComponent("named")
 	inst:DoTaskInTime(0, SetName)
+	
+	if inst.components.inventoryitem ~= nil then
+		inst.components.inventoryitem:SetSinks(false)
+	end
+	
+	inst:ListenForEvent("onfueldsectionchanged", canceldecaying)
+    inst:ListenForEvent("ondropped", canceldecaying)
 
 end)
