@@ -130,4 +130,5 @@ return {
 	"snapdragonherd",
 	"giant_blueberry",
 	"blueberryplant",
+	"blueberryplantbuncher",
 }
