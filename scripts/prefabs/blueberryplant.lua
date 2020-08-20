@@ -91,12 +91,12 @@ end
 local function on_reset(inst)
     inst:ListenForEvent("animover", on_anim_over)
 
-    if inst.AnimState:IsCurrentAnimation("trap_idle") then
+    --if inst.AnimState:IsCurrentAnimation("trap_idle") then
         inst.AnimState:PlayAnimation("reset")
         --- scott this one is playing as expected
         inst.SoundEmitter:PlaySound("turnoftides/creatures/together/starfishtrap/idle")
         inst.AnimState:PushAnimation("idle", true)
-    end
+    --end
 end
 
 local function on_sprung(inst)
@@ -210,7 +210,7 @@ local function blueberryplant()
     inst.components.hauntable.hauntvalue = TUNING.HAUNT_TINY
 
     inst:AddComponent("mine")
-    inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS)
+    inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS)--*1.1)
     inst.components.mine:SetAlignment(nil) -- starfish trigger on EVERYTHING on the ground, players and non-players alike.
     inst.components.mine:SetOnExplodeFn(on_explode)
     inst.components.mine:SetOnResetFn(on_reset)
