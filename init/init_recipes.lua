@@ -2,13 +2,13 @@
 -- The global objects needed for recipe changes
 -- Find the default recipes in recipes.lua
 	GLOBAL.require("recipe")
+	TechTree = GLOBAL.require("techtree")
 	TECH = GLOBAL.TECH
 	Recipe = GLOBAL.Recipe
 	RECIPETABS = GLOBAL.RECIPETABS
 	Ingredient = GLOBAL.Ingredient
 	AllRecipes = GLOBAL.AllRecipes
 	STRINGS = GLOBAL.STRINGS
-	TECH = GLOBAL.TECH
 	CUSTOM_RECIPETABS = GLOBAL.CUSTOM_RECIPETABS
 
 --	[ 				Recipes				]	--
@@ -61,10 +61,10 @@ AddRecipe("reviver", {Ingredient("skeletonmeat", 1, "images/inventoryimages/skel
 AddRecipe("bernie_inactive", {Ingredient("berniebox", 1, "images/inventoryimages/berniebox.xml")}, RECIPETABS.SURVIVAL,  TECH.NONE, nil, nil, nil, nil, "pyromaniac")
 AddRecipe("moonrockidol", {Ingredient("moonrocknugget", GLOBAL.TUNING.DSTU.RECIPE_MOONROCK_IDOL_MOONSTONE_COST), Ingredient("purplegem", 1)}, RECIPETABS.CELESTIAL, TECH.CELESTIAL_ONE, nil, nil, true)
 AddRecipe("minifan", {Ingredient("twigs", 3), Ingredient("petals",4)}, RECIPETABS.SURVIVAL, TECH.NONE)
-]]
-AddRecipe("ghostlyelixir_fastregen", {Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 50), Ingredient("ghostflower", 4)}, CUSTOM_RECIPETABS.ELIXIRBREWING, TECH.NONE, nil, nil, nil, nil, "elixirbrewer")
 AddRecipe("goggleshat", {Ingredient("goldnugget", 1), Ingredient("pigskin", 1)}, RECIPETABS.DRESS, TECH.SCIENCE_ONE)
 AddRecipe("deserthat", {Ingredient("goggleshat", 1), Ingredient("pigskin", 1)}, RECIPETABS.DRESS, TECH.SCIENCE_TWO)
+]]
+AddRecipe("ghostlyelixir_fastregen", {Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 50), Ingredient("ghostflower", 4)}, CUSTOM_RECIPETABS.ELIXIRBREWING, TECH.NONE, nil, nil, nil, nil, "elixirbrewer")
 
 
 AllRecipes["reviver"].ingredients = {Ingredient("skeletonmeat", 1, "images/inventoryimages/skeletonmeat.xml"), Ingredient("spidergland", 1)}
@@ -74,6 +74,8 @@ AllRecipes["moonrockidol"].ingredients = {Ingredient("moonrocknugget", GLOBAL.TU
 AllRecipes["minifan"].ingredients = {Ingredient("twigs", 3), Ingredient("petals",4)}
 AllRecipes["goggleshat"].ingredients = {Ingredient("goldnugget", 4), Ingredient("pigskin",1), Ingredient("houndstooth", 2)}
 AllRecipes["deserthat"].ingredients = {Ingredient("goggleshat", 1), Ingredient("pigskin",2)}
+AllRecipes["goggleshat"].level = TechTree.Create(TECH.SCIENCE_ONE)
+AllRecipes["deserthat"].level = TechTree.Create(TECH.SCIENCE_TWO)
 
 AddRecipe("ice", {Ingredient("snowball_throwable", 4, "images/inventoryimages/snowball_throwable.xml", nil, "snowball_throwable.tex")}, RECIPETABS.FARM, TECH.SCIENCE_ONE)
 

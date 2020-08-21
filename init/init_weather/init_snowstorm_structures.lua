@@ -53,6 +53,8 @@ local function RemoveSnowedTag(inst)
 	if inst:HasTag("snowpiledin") then
 		inst:RemoveTag("snowpiledin")
 	end
+	
+	inst.removetagtask = nil
 end
 
 local function CheckForSnow(inst)
@@ -72,6 +74,10 @@ local function CheckForSnow(inst)
 			end
 			
 			inst:AddTag("snowpiledin")
+			
+			if inst.removetagtask == nil then
+				inst.removetagtask = inst:DoTaskInTime(400, RemoveSnowedTag)
+			end
 		--end
 	else
 		--if inst.components.container == nil then
@@ -81,9 +87,21 @@ local function CheckForSnow(inst)
 		inst:RemoveTag("INLIMBO")
 	end
 	
-	inst:DoTaskInTime(400, RemoveSnowedTag)	
 	
-	inst:DoTaskInTime(2, CheckForSnow)
+	inst.checktask = nil
+	
+	if TheWorld.state.iswinter then
+		if inst.checktask == nil then
+			inst.checktask = inst:DoTaskInTime(2, CheckForSnow)
+		end
+	else
+		inst:RemoveTag("snowpiledin")
+		inst:RemoveTag("INLIMBO")
+		if inst.removetagtask ~= nil then
+			inst.removetagtask = nil
+		end
+	end
+	
 end
 
 local function AddContainers(prefab)
@@ -92,7 +110,10 @@ local function AddContainers(prefab)
 			return
 		end
 	
-		inst:DoTaskInTime(2, CheckForSnow)
+		inst.removetagtask = nil
+		inst.checktask = nil
+	
+		inst:WatchWorldState("season", CheckForSnow)
 		
     end)
 end
