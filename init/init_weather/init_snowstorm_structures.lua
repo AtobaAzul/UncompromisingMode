@@ -90,7 +90,7 @@ local function CheckForSnow(inst)
 	
 	inst.checktask = nil
 	
-	if TheWorld.state.iswinter then
+	if GLOBAL.TheWorld.state.iswinter then
 		if inst.checktask == nil then
 			inst.checktask = inst:DoTaskInTime(2, CheckForSnow)
 		end
