@@ -44,4 +44,4 @@ local function fn()
     return inst
 end
 
-return Prefab( "snapdragonherd", fn, assets, prefabs) 
+return Prefab( "snapdragonherd", fn, nil, prefabs) 
