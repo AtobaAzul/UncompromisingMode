@@ -40,8 +40,26 @@ local states=
         end,
         
         ontimeout=function(inst)
-            inst.sg:GoToState("idle")
+			if math.random() < .5 then
+                inst.sg:GoToState("taunt")
+			else
+				inst.sg:GoToState("idle")
+			end
         end,
+    },
+	
+	State{
+        name = "taunt",
+        tags = {},
+        onenter = function(inst)
+            inst.components.locomotor:StopMoving()
+            inst.AnimState:PlayAnimation("taunt")
+            inst.SoundEmitter:PlaySound(inst.sounds.yell)
+        end,
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
     },
     
     State{
@@ -54,7 +72,9 @@ local states=
             inst.components.combat:StartAttack()
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("atk_pre")
-            inst.AnimState:PushAnimation("atk", false)
+			inst.AnimState:PushAnimation("atk")
+            --inst.AnimState:PushAnimation("atk", false)
+			inst.AnimState:PushAnimation("atk_pst", false)
         end,
         
         
@@ -76,6 +96,7 @@ local states=
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PushAnimation("eat", false)
+            inst.SoundEmitter:PlaySound("dontstarve/beefalo/eat_treat")
         end,
 
         timeline=
@@ -85,7 +106,7 @@ local states=
 
         events=
         {
-            EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
