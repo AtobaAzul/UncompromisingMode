@@ -119,9 +119,10 @@ local function fn()
 	inst.components.colourtweener:StartTween({0,0,0,.5}, 0)
 
 	inst:AddComponent("locomotor")
-    inst.components.locomotor:SetSlowMultiplier( 0.6 )
-    inst.components.locomotor.pathcaps = { ignorecreep = true }
     inst.components.locomotor.runspeed = TUNING.SHADOWWAXWELL_SPEED
+	inst.components.locomotor:SetTriggersCreep(false)
+    inst.components.locomotor.pathcaps = { ignorecreep = true }
+    inst.components.locomotor:SetSlowMultiplier(.6)
 
     inst:AddComponent("combat")
     inst.components.combat.hiteffectsymbol = "torso"
@@ -133,6 +134,7 @@ local function fn()
 
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(TUNING.SHADOWWAXWELL_LIFE)
+    inst.components.health:StartRegen(TUNING.CHESTER_HEALTH_REGEN_AMOUNT / 2, TUNING.CHESTER_HEALTH_REGEN_PERIOD / 2)
     inst.components.health.nofadeout = true
         inst.components.health.redirect = nodebrisdmg
 

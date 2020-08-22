@@ -93,13 +93,13 @@ AddRoom("SnapDragons",
 			distributepercent = .05,
 			distributeprefabs =
 			{
-				snapdragon = 0.02,
+				snapdragon = 0.2,
 				cave_fern= 0.02,
 				giant_tree = 0.005,
 			},
 			countprefabs =	
 			{
-			--snapdragon = function () return 3 + math.random(0,1) end,
+			snapdragon = 1,
 			giant_tree = function () return 3 + math.random(0,1) end,
 			extracanopyspawner = function () return 6 + math.random(0,1) end,
 			},

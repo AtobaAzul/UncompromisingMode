@@ -10,12 +10,14 @@ local assets=
 
 local prefabs =
 {
-    --TODO !!
+    "snapdragonherd",
 }
 
 SetSharedLootTable( 'snapdragon',
 {
     --{'whisperpod',             1.00},
+    {'plantmeat',        1.00},
+    {'dragonfruit_seeds',        1.00},
     {'flower',                 1.00},
 })
 

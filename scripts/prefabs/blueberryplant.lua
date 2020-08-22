@@ -37,7 +37,7 @@ local mine_test_fn = function(target, inst)
 end
 local mine_test_tags = { "monster", "character", "animal" }
 local mine_must_tags = { "_combat" }
-local mine_no_tags = { "notraptrigger", "flying", "ghost", "playerghost" }
+local mine_no_tags = { "notraptrigger", "flying", "ghost", "playerghost", "snapdragon" }
 
 local function do_snap(inst)
     -- We're going off whether we hit somebody or not, so play the trap sound.

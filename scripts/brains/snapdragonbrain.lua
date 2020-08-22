@@ -10,7 +10,7 @@ require "behaviours/attackwall"
 local SEE_FOOD_DIST = 20
 local STOP_RUN_DIST = 10
 local SEE_PLAYER_DIST = 5
-local WANDER_DIST_DAY = 20
+local WANDER_DIST_DAY = 10
 local WANDER_DIST_NIGHT = 5
 local START_FACE_DIST = 4
 local KEEP_FACE_DIST = 6
