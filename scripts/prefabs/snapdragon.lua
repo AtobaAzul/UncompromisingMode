@@ -45,7 +45,7 @@ local RETARGET_MUST_TAGS = { "_combat", "player" }
 local RETARGET_CANT_TAGS = { "snapdragon", "wall", "plantkin", "INLIMBO" }
 
 local function Retarget(inst)
-    return FindEntity(
+    return TheWorld.state.issummer and FindEntity(
                 inst,
                 TUNING.BEEFALO_TARGET_DIST,
                 function(guy)
@@ -92,6 +92,55 @@ end
 local function isnotsnapdragon(ent)
 	if ent ~= nil and not ent:HasTag("snapdragon") then -- fix to friendly AOE: refer for later AOE mobs -Axe
 		return true
+	end
+end
+
+local function OnPollenDirty(inst)
+    local fx = CreateEntity()
+
+    fx:AddTag("FX")
+    fx:AddTag("NOCLICK")
+    --[[Non-networked entity]]
+    fx.entity:SetCanSleep(false)
+    fx.persists = false
+
+    fx.entity:AddTransform()
+    fx.entity:AddAnimState()
+
+    fx.AnimState:SetBank("wormwood_pollen_fx")
+    fx.AnimState:SetBuild("wormwood_pollen_fx")
+    fx.AnimState:PlayAnimation("pollen"..tostring(inst.pollen:value()))
+    fx.AnimState:SetFinalOffset(2)
+
+    fx:ListenForEvent("animover", fx.Remove)
+
+    fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+end
+
+local function DoSpawnPollen(inst)
+    --This is an untracked task from PollenTick, so we nil check .pollentask instead.
+    if inst.pollentask ~= nil and
+        not (inst.sg:HasStateTag("nomorph") or
+            inst.sg:HasStateTag("silentmorph") or
+            inst.sg:HasStateTag("ghostbuild") or
+            inst.components.health:IsDead()) and
+        inst.entity:IsVisible() then
+        --randomize, favoring ones that haven't been used recently
+        local rnd = math.random()
+        rnd = table.remove(inst.pollenpool, math.clamp(math.ceil(rnd * rnd * #inst.pollenpool), 1, #inst.pollenpool))
+        table.insert(inst.pollenpool, rnd)
+        inst.pollen:set_local(0)
+        inst.pollen:set(rnd)
+        --Dedicated server does not need to spawn the local fx
+        if not TheNet:IsDedicated() then
+            OnPollenDirty(inst)
+        end
+    end
+end
+
+local function PollenTick(inst)
+	if TheWorld.state.issummer then
+		inst:DoTaskInTime(math.random() * .6, DoSpawnPollen)
 	end
 end
 
@@ -180,6 +229,16 @@ local function fn(Sim)
 	
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetResistance(3)
+	
+	
+    inst.pollen = net_tinybyte(inst.GUID, "wormwood.pollen", "pollendirty")
+    inst.pollentask = nil
+    inst.pollenpool = { 1, 2, 3, 4, 5 }
+    for i = #inst.pollenpool, 1, -1 do
+        --randomize in place
+        table.insert(inst.pollenpool, table.remove(inst.pollenpool, math.random(i)))
+    end
+    inst.pollentask = inst:DoPeriodicTask(.7, PollenTick)
     
     local brain = require "brains/snapdragonbrain"
     inst:SetBrain(brain)
