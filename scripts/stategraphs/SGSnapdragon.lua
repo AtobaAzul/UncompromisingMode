@@ -101,15 +101,12 @@ local states=
 
         timeline=
         {
-            TimeEvent(32*FRAMES, function(inst) inst:PerformBufferedAction() end),
-            TimeEvent(56*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/beefalo/chew") end),
-            TimeEvent(84*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/beefalo/chew") end),
-            TimeEvent(112*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/beefalo/chew") end),
+            --TimeEvent(32*FRAMES, function(inst) inst:PerformBufferedAction() end)
         },
 
         events=
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
 
