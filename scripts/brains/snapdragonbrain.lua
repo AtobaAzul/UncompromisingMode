@@ -29,7 +29,7 @@ local function EatFoodAction(inst)
             item.components.bait and
             not item:HasTag("planted") and
             not (item.components.inventoryitem and
-                item.components.inventoryitem:IsHeld()) or item:HasTag("insect") and item.components and item.components.edible
+                item.components.inventoryitem:IsHeld()) and inst.components.follower.leader == nil or item:HasTag("insect") and item.components and item.components.edible and inst.components.follower.leader == nil
         end)
     if target then
         local act = BufferedAction(inst, target, ACTIONS.EAT)
@@ -62,9 +62,9 @@ function SnapdragonBrain:OnStart()
     {
         WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
 		IfNode( function() return self.inst.components.combat.target ~= nil end, "hastarget", AttackWall(self.inst)),
-        DoAction(self.inst, EatFoodAction),
         ChaseAndAttack(self.inst, MAX_CHASE_TIME),
         Follow(self.inst, function() return self.inst.components.follower and self.inst.components.follower.leader end, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST, false),
+        DoAction(self.inst, EatFoodAction),
         FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
         Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("herd") end, GetWanderDistFn)
     }, .25)

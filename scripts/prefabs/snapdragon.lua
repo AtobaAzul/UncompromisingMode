@@ -144,6 +144,43 @@ local function PollenTick(inst)
 	end
 end
 
+local function ShouldAcceptItem(inst, item)
+    return inst.components.eater:CanEat(item)
+        and not inst.components.combat:HasTarget()
+end
+
+local function OnGetItemFromPlayer(inst, giver, item)
+    if inst.components.eater:CanEat(item) then
+        inst.components.eater:Eat(item, giver)
+        inst.sg:GoToState("eat", true)
+		
+        if inst.components.combat.target == giver then
+            inst.components.combat:SetTarget(nil)
+        elseif giver.components.leader ~= nil and
+            inst.components.follower ~= nil then
+			if giver.components.minigame_participator == nil then
+	            giver:PushEvent("makefriend")
+				giver.components.leader:AddFollower(inst)
+			end
+            inst.components.follower:AddLoyaltyTime(item.components.edible:GetHunger() * TUNING.SPIDER_LOYALTY_PER_HUNGER)
+        end
+		
+    end
+end
+
+local function OnRefuseItem(inst, item)
+    inst.sg:GoToState("refuse")
+    if inst.components.sleeper:IsAsleep() then
+        inst.components.sleeper:WakeUp()
+    end
+end
+
+local function OnAttackOther(inst, data)
+    if data.target ~= nil and data.target.components ~= nil and data.target.components.edible ~= nil and data.target:HasTag("insect") then
+        inst.components.eater:Eat(data.target)--, giver)
+    end
+end
+
 local function fn(Sim)
 	local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
@@ -174,6 +211,7 @@ local function fn(Sim)
 
     inst:AddTag("animal")
     inst:AddTag("largecreature")
+    inst:AddTag("trader")
 	
     if not TheWorld.ismastersim then
         return inst
@@ -209,9 +247,11 @@ local function fn(Sim)
     inst:AddComponent("follower")
     inst.components.follower.maxfollowtime = TUNING.BEEFALO_FOLLOW_TIME
     inst.components.follower.canaccepttarget = false
+	
     inst:ListenForEvent("newcombattarget", OnNewTarget)
     inst:ListenForEvent("attacked", OnAttacked)
-
+    inst:ListenForEvent("onattackother", OnAttackOther)
+--[[
     inst:AddComponent("periodicspawner")
     inst.components.periodicspawner:SetPrefab("dragonfruit_seeds")
     --inst.components.periodicspawner.chancetable = periodictable
@@ -219,12 +259,18 @@ local function fn(Sim)
     inst.components.periodicspawner:SetDensityInRange(20, 2)
     inst.components.periodicspawner:SetMinimumSpacing(8)
     inst.components.periodicspawner:Start()
+]]
+	inst:AddComponent("trader")
+    inst.components.trader:SetAcceptTest(ShouldAcceptItem)
+    inst.components.trader.onaccept = OnGetItemFromPlayer
+    inst.components.trader.onrefuse = OnRefuseItem
+    inst.components.trader.deleteitemonaccept = false
 
     MakeLargeBurnableCharacter(inst, "swap_fire")
     MakeLargeFreezableCharacter(inst, "beefalo_body")
     
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-    inst.components.locomotor.walkspeed = 2
+    inst.components.locomotor.walkspeed = 3
     inst.components.locomotor:SetTriggersCreep(false)
 	
     inst:AddComponent("sleeper")
