@@ -7,7 +7,7 @@ require "behaviours/attackwall"
 --require "behaviours/runaway"
 --require "behaviours/doaction"
 
-local SEE_FOOD_DIST = 20
+local SEE_FOOD_DIST = 15
 local STOP_RUN_DIST = 10
 local SEE_PLAYER_DIST = 5
 local WANDER_DIST_DAY = 10
