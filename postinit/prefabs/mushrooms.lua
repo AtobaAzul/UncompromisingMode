@@ -71,10 +71,12 @@ end)
 -----------
 local function Revert(inst, prefab)
 --print("code ran")
+	local x, y, z = inst.Transform:GetWorldPosition()
+	if 0 < #TheSim:FindEntities(x, 0, z, 3, {"canopy"}) then
 		local obj = SpawnPrefab(prefab)
-		local x, y, z = inst.Transform:GetWorldPosition()
-			obj.Transform:SetPosition(x,y,z)
-			inst:Remove()
+		obj.Transform:SetPosition(x,y,z)
+		inst:Remove()
+	end
 end
 local function Transform(inst, prefab, revert)
 --print("code ran")
@@ -146,7 +148,7 @@ env.AddPrefabPostInit("green_mushroom", function(inst)
 	end
 	inst:WatchWorldState("isfullmoon", OnFullMoonGreen)
     OnFullMoonGreen(inst, TheWorld.state.isfullmoon)
-	
+
 --return inst
 end)
 

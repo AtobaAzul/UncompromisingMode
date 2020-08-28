@@ -136,7 +136,7 @@ AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "forest" then
         return
     end
-
+table.remove(tasksetdata.tasks,7) 
 table.insert(tasksetdata.tasks,"GiantTrees")  -- Uncomment to test task based rice worldgen
 end)
 --GLOBAL.require("map/static_layouts/licepatch")
