@@ -55,7 +55,7 @@ local function do_snap(inst)
 	local otherbombs = TheSim:FindEntities(x, y, z, 3*TUNING.STARFISH_TRAP_RADIUS, {"blueberrybomb"}, mine_no_tags)
     for i, target in ipairs(otherbombs) do
         if target ~= inst and target.components.mine and not target.components.mine.issprung then
-            target.components.mine:Explode()
+		target.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*12)
         end
     end
 	inst.Harvestable = false
@@ -76,14 +76,14 @@ local function start_reset_task(inst)
         inst._reset_task:Cancel()
     end
     local reset_task_randomized_time = GetRandomWithVariance(TUNING.STARFISH_TRAP_NOTDAY_RESET.BASE, TUNING.STARFISH_TRAP_NOTDAY_RESET.VARIANCE)
-    inst._reset_task = inst:DoTaskInTime(reset_task_randomized_time, reset)
+    inst._reset_task = inst:DoTaskInTime(24*reset_task_randomized_time, reset)
     inst._reset_task_end_time = GetTime() + reset_task_randomized_time
 end
 
 local function on_explode(inst, target)
     inst.AnimState:PlayAnimation("trap")
     inst.AnimState:PushAnimation("trap_idle", true)
-
+	inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*1.1) --Gotta Reset
     inst:RemoveEventCallback("animover", on_anim_over)
 
     if target ~= nil and inst._snap_task == nil then
@@ -140,6 +140,7 @@ end
 local function on_blueberry_dug_up(inst, digger)
 	if digger:HasTag("player") then
 	inst.AnimState:PlayAnimation("dig")
+	inst.AnimState:PushAnimation("trap_idle")
 
     on_deactivate(inst)
 	else
