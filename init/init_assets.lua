@@ -210,6 +210,8 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/giant_blueberry.tex"),
 	Asset("ATLAS", "images/inventoryimages/giant_blueberry.xml"),
 	Asset("ANIM", "anim/blueberry.zip"),
+	Asset("ANIM", "anim/sheeplet.zip"),
+	Asset("ANIM", "anim/sheepletbomb.zip"),
 	--Map Icons Start--
 	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),
 	Asset( "ATLAS", "images/map_icons/riceplant.xml" ),

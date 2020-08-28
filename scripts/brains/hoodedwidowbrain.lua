@@ -92,7 +92,7 @@ function HoodedWidowBrain:OnStart()
 		WhileNode(function() return CanRangeNow(self.inst) and not ShouldResetFight(self)  end, "AttackMomentarily",
             SequenceNode({
                 ActionNode(function() EquipRange(self.inst) end, "Equip phlegm"),
-                ChaseAndAttack(self.inst, MAX_CHASE_TIME) })),
+                ChaseAndAttack(self.inst) })),
 
 		--[[WhileNode(function() return CanLeapNow(self.inst) end, "AttackMomentarily",
             SequenceNode({
@@ -101,7 +101,7 @@ function HoodedWidowBrain:OnStart()
 		WhileNode(function() return not ShouldResetFight(self) end, "Attack",
             SequenceNode({
                 ActionNode(function() EquipMeleeAndResetCooldown(self.inst) end, "Equip melee"),
-                ChaseAndAttack(self.inst, MAX_CHASE_TIME) })),
+                ChaseAndAttack(self.inst) })),
         
         Wander(self.inst),
     }, 2)

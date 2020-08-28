@@ -242,7 +242,7 @@ local function fn()
     inst.components.locomotor:SetSlowMultiplier( 1 )
     inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = true }
-    inst.components.locomotor.walkspeed = 5.5
+    inst.components.locomotor.walkspeed = 3
 
     ------------------
 

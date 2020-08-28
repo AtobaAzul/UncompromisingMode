@@ -131,4 +131,9 @@ return {
 	"giant_blueberry",
 	"blueberryplant",
 	"blueberryplantbuncher",
+	"rambranch",
+	"rambranch_horn",
+	"nightmarehorn",
+	"sheeplet",
+	"sheepletbomb",
 }
