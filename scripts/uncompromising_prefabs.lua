@@ -125,7 +125,6 @@ return {
 	"berniebox",
 	"chomper",
 	"old_shadowwaxwell",
-	"codexumbra",
 	"snapdragon",
 	"snapdragonherd",
 	"giant_blueberry",

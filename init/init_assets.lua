@@ -50,8 +50,6 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/critterlab_real.tex"),
 	Asset("ATLAS", "images/inventoryimages/bloomershot.xml"),
 	Asset("IMAGE", "images/inventoryimages/bloomershot.tex"),
-	Asset("ATLAS", "images/inventoryimages/codexumbra.xml"),
-	Asset("IMAGE", "images/inventoryimages/codexumbra.tex"),
 	
 	Asset("ANIM", "anim/geyser.zip"),
 	Asset("ANIM", "anim/lava_vomit.zip"),

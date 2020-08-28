@@ -1,13 +1,6 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
-TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WAXWELL = {"codexumbra", "nightmarefuel", "nightmarefuel", "nightmarefuel", "nightmarefuel", "nightmarefuel", "nightmarefuel"}
-
-TUNING.STARTING_ITEM_IMAGE_OVERRIDE["codexumbra"] =
-	{
-		atlas = "images/inventoryimages/codexumbra.xml",
-		image = "codexumbra.tex",
-	}
 	
 TUNING.SHADOWWAXWELL_FUEL_COST = 2
 TUNING.SHADOWWAXWELL_HEALTH_COST = -15
@@ -28,8 +21,69 @@ env.AddPrefabPostInit("waxwell", function(inst)
 		return
 	end
 	
-	inst:RemoveTag("shadowmagic")
 	inst:AddTag("codexumbrareader")
 
 end)
 
+local function doeffects(inst, pos)
+    SpawnPrefab("statue_transition").Transform:SetPosition(pos:Get())
+    SpawnPrefab("statue_transition_2").Transform:SetPosition(pos:Get())
+end
+
+local function canread(inst, reader)
+    return (inst.components.sanity:GetMaxWithPenalty() >= TUNING.OLD_SHADOWWAXWELL_SANITY_PENALTY)
+end
+
+local function onread(inst, reader)
+
+	if not reader:HasTag("codexumbrareader") then
+		return false
+	end
+	
+    --Check sanity
+    if not canread(reader) then 
+        if reader.components.talker then
+            reader.components.talker:Say(GetString(reader.prefab, "ANNOUNCE_NOSANITY"))
+            return true
+        end
+    end
+
+    --Check reagent
+    if not reader.components.inventory:Has("nightmarefuel", TUNING.SHADOWWAXWELL_FUEL_COST) then
+        if reader.components.talker then
+            reader.components.talker:Say(GetString(reader.prefab, "ANNOUNCE_NOFUEL"))
+            return true
+        end
+    end
+
+    reader.components.inventory:ConsumeByName("nightmarefuel", TUNING.SHADOWWAXWELL_FUEL_COST)
+
+    --Ok you had everything. Make the image.
+    local theta = math.random() * 2 * PI
+    local pt = inst:GetPosition()
+    local radius = math.random(3, 6)
+    local offset = FindWalkableOffset(pt, theta, radius, 12, true)
+    if offset then
+		pt.x = pt.x + offset.x
+		pt.z = pt.z + offset.z
+		reader.components.petleash:SpawnPetAt(pt.x, 0, pt.z, "old_shadowwaxwell")
+        reader.components.sanity:RecalculatePenalty()
+        inst.SoundEmitter:PlaySound("dontstarve/maxwell/shadowmax_appear")
+        return true
+    end
+end
+
+env.AddPrefabPostInit("waxwelljournal", function(inst)
+
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+	if inst.components.prototyper ~= nil then
+		inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.PRESTIHATITATOR
+	end
+
+    inst:AddComponent("book")
+    inst.components.book.onread = onread
+
+end)

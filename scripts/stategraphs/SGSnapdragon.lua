@@ -93,25 +93,40 @@ local states=
         name = "eat",
         tags = {"busy"},
         
-        onenter = function(inst)
+        onenter = function(inst, forced)
             inst.Physics:Stop()
-            inst.AnimState:PushAnimation("eat", false)
+            inst.AnimState:PlayAnimation("eat")
+            inst.sg.statemem.forced = forced
             inst.SoundEmitter:PlaySound("dontstarve/beefalo/eat_treat")
         end,
 
         timeline=
         {
-            TimeEvent(32*FRAMES, function(inst) inst:PerformBufferedAction() end),
-            TimeEvent(56*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/beefalo/chew") end),
-            TimeEvent(84*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/beefalo/chew") end),
-            TimeEvent(112*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/beefalo/chew") end),
+            TimeEvent(18*FRAMES, function(inst) inst:PerformBufferedAction() end)
         },
-
-        events=
+		
+        events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst)
+                inst.sg:GoToState((inst:PerformBufferedAction() or inst.sg.statemem.forced) and "eat_loop" or "idle")
+            end),
         },
     },
+	
+	State{
+        name = "eat_loop",
+        tags = {"busy"},
+
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("eat_loop", true)
+            inst.sg:SetTimeout(1+math.random()*1)
+        end,
+
+        ontimeout = function(inst)
+            inst.sg:GoToState("idle")
+        end,       
+    },  
 
     State{
         name = "death",

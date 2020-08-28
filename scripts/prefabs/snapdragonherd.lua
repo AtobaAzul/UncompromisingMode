@@ -27,7 +27,7 @@ local function fn()
     inst:AddComponent("herd")
     inst.components.herd:SetMemberTag("snapdragon")
     inst.components.herd:SetGatherRange(40)
-    inst.components.herd:SetUpdateRange(20)
+    inst.components.herd:SetUpdateRange(30)
     inst.components.herd:SetOnEmptyFn(inst.Remove)
 
 --[[
