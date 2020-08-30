@@ -81,6 +81,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.PLAGUEMASK = "The beak looks ridiculous."
 	DESCRIBE.SPIDER_TRAPDOOR = "Oh great, they're getting smarter."
 	DESCRIBE.TRAPDOOR = "Something's off here, I can feel it."
+	DESCRIBE.HOODEDTRAPDOOR = "They're here too, aren't they."
 	DESCRIBE.WICKER_TENTACLE = "They have been ripped from their plane of existence."
 	DESCRIBE.HONEY_LOG = "...I've got nothing."
 

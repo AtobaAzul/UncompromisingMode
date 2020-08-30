@@ -80,6 +80,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.PLAGUEMASK = "A mask, popularized by plague doctors during the bubonic plague."
 	DESCRIBE.SPIDER_TRAPDOOR = "A Ctenizidae Arachnid, from the looks of it."
 	DESCRIBE.TRAPDOOR = "An unremarkable mound in the terrain."
+	DESCRIBE.HOODEDTRAPDOOR = "An unremarkable rock in the terrain."
 	DESCRIBE.WICKER_TENTACLE = "They appear to have some sort of degenerative disease."
 	DESCRIBE.HONEY_LOG = "Utter nonsense. This place is utter nonsense."
 

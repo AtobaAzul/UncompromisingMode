@@ -3,11 +3,13 @@ GLOBAL.setfenv(1, GLOBAL)
 ----------------------------------------------------------------
 local function OnDead(inst)
     AwardRadialAchievement("spiderqueen_killed", inst:GetPosition(), TUNING.ACHIEVEMENT_RADIUS_FOR_GIANT_KILL)
+	if not inst:HasTag("nodecomposepls") then
 	local corpse = SpawnPrefab("spiderqueencorpse")
 	corpse.Transform:SetPosition(inst.Transform:GetWorldPosition())
 	inst:DoTaskInTime(0.3, function(inst)
 	inst:Remove()
 	end)
+	end
 end
 
 

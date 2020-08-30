@@ -116,6 +116,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.SNOWBALL_THROWABLE = "Not the face!"
 	DESCRIBE.SPIDER_TRAPDOOR = "Agh! An ambush!"
 	DESCRIBE.TRAPDOOR = "Nothing out of the ordinary here."
+	DESCRIBE.HOODEDTRAPDOOR = "Nothing out of the... not this time."
 	DESCRIBE.SHROOM_SKIN_FRAGMENT = "It's small, but the stench is still a punch in the face."
 	DESCRIBE.AIR_CONDITIONER = "Smells great!"
 	

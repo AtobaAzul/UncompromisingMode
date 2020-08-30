@@ -5,10 +5,12 @@ AddRoom("SpideryGiantTrees",
 	tags = {"RoadPoison", "hoodedcanopy"}, --"ForceDisconnected"
 	contents =  
 	{	
-			distributepercent = 0.001,
+			distributepercent = 0.01,
 			distributeprefabs =
 			{
 				giant_tree = 0.01,
+				houndbone = 1,
+				extracanopyspawner = 1,
 			},
 			countprefabs =	
 			{
@@ -31,6 +33,7 @@ AddRoom("GiantTrees",
 		cave_fern = 0.5,
 		blueberryplantbuncher = 0.05,
 		mushtree_medium = 0.05,
+		hoodedtrapdoor = 0.05,
 		},
 		
 			countprefabs =	
@@ -55,6 +58,7 @@ AddRoom("ShroomInfestedGiantTrees",
 		mushtree_small = 0.3,
 		mushtree_tall = 0.2,
 		mushtree_medium = 0.3,
+		hoodedtrapdoor = 0.015,
 		},
 		
 			countprefabs =	
@@ -78,6 +82,7 @@ AddRoom("WalrusGiantTrees",
 		cave_fern = 0.5,
 		blueberryplantbuncher = 0.02,
 		mushtree_small = 0.05,
+		hoodedtrapdoor = 0.2,
 		},
 		
 			countprefabs =	

@@ -122,7 +122,7 @@ local function workcallback(inst, worker, workleft)
     end
 end
 
-local function fn()
+local function fn1()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -221,4 +221,104 @@ local function fn()
     return inst
 end
 
-return Prefab("trapdoor", fn, assets, prefabs)
+local function fn2()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    --inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+
+
+    
+
+    inst.AnimState:SetBank("flipping_rock")
+    inst.AnimState:SetBuild("rock_flipping")
+    inst.AnimState:PlayAnimation("idle", true)
+
+    inst:AddTag("structure")
+    inst:AddTag("hive")
+    inst:AddTag("WORM_DANGER")
+	inst:AddTag("trapdoor")
+	--inst:AddTag("CLASSIFIED")
+    MakeSnowCoveredPristine(inst)
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	--inst.entity:SetTint(1,1,1,1)
+    -------------------------
+    --inst:AddComponent("health")
+    --inst.components.health:SetMaxHealth(250) --increase health?
+    -------------------------
+    inst:AddComponent("childspawner")
+    --Set spawner to wasp. Change tuning values to wasp values.
+    inst.components.childspawner.childspawner = "spider_trapdoor"
+    inst.components.childspawner:SetMaxChildren(0)
+    inst.components.childspawner:SetEmergencyRadius(TUNING.WASPHIVE_EMERGENCY_RADIUS/2)
+	inst.components.childspawner:SetSpawnedFn(OpenMound)
+	inst.components.childspawner:SetGoHomeFn(CloseMound)
+	inst.components.childspawner:SetRegenPeriod(20,2)
+	inst.components.childspawner:SetOnChildKilledFn(FindNewHole)
+	local startrandomtest = math.random()
+	inst.components.childspawner:StopRegen()
+	if startrandomtest >= 0.75 then
+	inst.components.childspawner:SetMaxChildren(1)
+	inst.components.childspawner:StartRegen()
+	end
+    -------------------------
+    -------------------------
+    inst:AddComponent("playerprox")
+    inst.components.playerprox:SetDist(10, 13) --set specific values
+    inst.components.playerprox:SetOnPlayerNear(onnear)
+    inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
+    -------------------------
+    --inst:AddComponent("combat")
+    --wasp hive should trigger on proximity, release wasps.
+    --inst.components.combat:SetOnHit(onhitbyplayer)
+    --inst:ListenForEvent("death", OnKilled)
+    -------------------------
+
+    MakeSnowCovered(inst)
+    -------------------------
+    inst:AddComponent("inspectable")
+
+    inst:AddComponent("hauntable")
+    inst.components.hauntable:SetHauntValue(TUNING.HAUNT_MEDIUM)
+    inst.components.hauntable:SetOnHauntFn(OnHaunt)
+	
+	if inst.components.trapdoor == nil then
+		inst:AddComponent("lootdropper")
+	end
+	
+	inst.components.lootdropper:SetChanceLootTable('trapdoor')
+	
+	inst:AddComponent("workable")
+    inst.components.workable:SetWorkAction(ACTIONS.MINE)
+    inst.components.workable:SetWorkLeft(TUNING.ROCKS_MINE)
+
+    inst.components.workable:SetOnWorkCallback(workcallback)
+	--[[if not inst:HasTag("finishedgrass") then
+		inst:DoTaskInTime(0, function(inst)
+		-- Spawn Trapdoor Grass
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local grasschance = math.random()
+			if grasschance > 0.25 then
+			local grassycover = SpawnPrefab("trapdoorgrass")
+			grassycover.Transform:SetPosition(x, y, z)
+			--inst:AddChild(grassycover)
+			end
+			inst:AddTag("finishedgrass")
+		end)	
+	end]]
+    inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+	--inst.AnimState:SetSortOrder(1)
+	
+	MakeMediumPropagator(inst)
+    return inst
+end
+
+return Prefab("trapdoor", fn1, assets, prefabs),
+	   Prefab("hoodedtrapdoor", fn2, assets, prefabs)

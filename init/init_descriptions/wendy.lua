@@ -79,6 +79,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.PLAGUEMASK = "Like a crow, a plague doctor is attracted to death."
 	DESCRIBE.SPIDER_TRAPDOOR = "Is it the prey, or am I?"
 	DESCRIBE.TRAPDOOR = "A hill to die on."
+	DESCRIBE.HOODEDTRAPDOOR = "A rock to cry on."
 	DESCRIBE.WICKER_TENTACLE = "This one is near the end of its life."
 	DESCRIBE.HONEY_LOG = "I will consume its flesh to survive, if I have to."
 

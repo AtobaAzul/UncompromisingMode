@@ -79,6 +79,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.PLAGUEMASK = "You gotta be careful not to bump the beak on anything."
 	DESCRIBE.SPIDER_TRAPDOOR = "I might have to steal that \"trapdoor\" idea."
 	DESCRIBE.TRAPDOOR = "I don't see anything."
+	DESCRIBE.HOODEDTRAPDOOR = "A rock in the woods"
 	DESCRIBE.WICKER_TENTACLE = "Looks to have some sort of manufacturing defect."
 	DESCRIBE.HONEY_LOG = "Looks like it came off some snack factory line."
 

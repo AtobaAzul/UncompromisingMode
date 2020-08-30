@@ -79,6 +79,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.PLAGUEMASK = "It looks like a chicken!"
 	DESCRIBE.SPIDER_TRAPDOOR = "We don't care that you don't have hair, you're still our friend!"
 	DESCRIBE.TRAPDOOR = "Our smart friends made those!"
+	DESCRIBE.HOODEDTRAPDOOR = "Our smart friends must be nearby!"
 	DESCRIBE.WICKER_TENTACLE = "I think it's sea sick, or land sick."
 	DESCRIBE.HONEY_LOG = "How nice! It made us... sweets?"
 

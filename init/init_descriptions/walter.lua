@@ -78,6 +78,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.PLAGUEMASK = "Now I can be one with the birds!"
 	DESCRIBE.SPIDER_TRAPDOOR = "I told you!"
 	DESCRIBE.TRAPDOOR = "Careful, some spiders use these as hiding places!"
+	DESCRIBE.HOODEDTRAPDOOR = "Remember the spiders!"
 	DESCRIBE.WICKER_TENTACLE = "I think it's poisoned, wish I could help..."
 	DESCRIBE.HONEY_LOG = "A Pine Tree Pioneer knows better than to try and eat yourself."
 	

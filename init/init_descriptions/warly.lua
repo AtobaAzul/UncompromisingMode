@@ -79,6 +79,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.PLAGUEMASK = "Maybe I should count my blessings."
 	DESCRIBE.SPIDER_TRAPDOOR = "Another jumping spider? Mon dieu..."
 	DESCRIBE.TRAPDOOR = "I wouldn't want to trip and spill something."
+	DESCRIBE.HOODEDTRAPDOOR = "Better watch that closely."
 	DESCRIBE.WICKER_TENTACLE = "Were it not on land I would say it looks sea sick."
 	DESCRIBE.HONEY_LOG = "Not quite an Ube Roll, but good effort."
 	

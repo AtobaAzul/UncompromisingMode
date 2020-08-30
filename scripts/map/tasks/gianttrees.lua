@@ -5,7 +5,7 @@ AddTask("GiantTrees", {
 		--region_id = "ricearea",
 		level_set_piece_blocker = true,
 		room_choices={
-			["GiantTrees"] = function() return 2 + math.random(1,2) end, 
+			["GiantTrees"] = function() return math.random(1,2) end, 
 			["SpideryGiantTrees"] = 1,
 			--["RoadGiantTrees"] = 1,
 			["WalrusGiantTrees"] = 1,

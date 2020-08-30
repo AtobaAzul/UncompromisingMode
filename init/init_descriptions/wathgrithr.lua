@@ -78,6 +78,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.PLAGUEMASK = "I am a warrior against Pestilence!"
 	DESCRIBE.SPIDER_TRAPDOOR = "My own battle tactics, used against me!"
 	DESCRIBE.TRAPDOOR = "Nothing here."
+	DESCRIBE.HOODEDTRAPDOOR = "Nothing there."
 	DESCRIBE.WICKER_TENTACLE = "A poisoned foe is no challenge!"
 	DESCRIBE.HONEY_LOG = "Flesh of the woods... what trickster is responsible for this?"
 	

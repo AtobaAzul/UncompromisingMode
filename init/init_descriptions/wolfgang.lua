@@ -79,6 +79,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.PLAGUEMASK = "Is bird mask."
 	DESCRIBE.SPIDER_TRAPDOOR = "Don't scare Wolfgang!"
 	DESCRIBE.TRAPDOOR = "Little hill in grass."
+	DESCRIBE.HOODEDTRAPDOOR = "Is Stone."
 	DESCRIBE.WICKER_TENTACLE = "Skinny monster is sick."
 	DESCRIBE.HONEY_LOG = "Creepy face log is now creepy snack log."
 

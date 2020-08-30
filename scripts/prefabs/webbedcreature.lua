@@ -114,6 +114,9 @@ local function OnKilled(inst)
 		end	
     local deadcreature = SpawnPrefab(creature)
 	deadcreature.Transform:SetPosition(x, y, z)
+	if creature == "spiderqueen" then
+	deadcreature:AddTag("nodecomposepls")
+	end
 	deadcreature.components.health:Kill()
 	else
     local deadcreature = SpawnPrefab("pigman")

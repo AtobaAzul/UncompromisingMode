@@ -79,6 +79,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.PLAGUEMASK = "Keeps the bad air out and the good air in, eh?"
 	DESCRIBE.SPIDER_TRAPDOOR = "They look nastier without hair."
 	DESCRIBE.TRAPDOOR = "Is something in the grass?"
+	DESCRIBE.HOODEDTRAPDOOR = "Familiar, eh?"
 	DESCRIBE.WICKER_TENTACLE = "Lookin' a bit green, eh?"
 	DESCRIBE.HONEY_LOG = "It's... been awhile since I've had a taste."
 
