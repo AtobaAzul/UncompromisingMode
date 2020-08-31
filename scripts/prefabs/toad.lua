@@ -12,7 +12,7 @@ local prefabs =
 
 SetSharedLootTable('toad',
 {
-    {'froglegs', 1.0},
+    --{'froglegs', 1.0},
     {'sporecloud_toad', .5},
 })
 

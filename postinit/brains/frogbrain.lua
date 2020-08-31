@@ -17,6 +17,8 @@ local function EatFoodAction(inst)
             return item.prefab ~= "mandrake"
                 and item.components.edible ~= nil
                 and item:IsOnPassablePoint()
+				and item:IsOnValidGround()
+				and not (item:HasTag("bee") or item:HasTag("mosquito"))
                 and inst.components.eater:CanEat(item)
         end,
         nil,
