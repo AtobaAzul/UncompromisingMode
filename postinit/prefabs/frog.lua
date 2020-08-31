@@ -1,7 +1,7 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
-SetSharedLootTable('toad',
+--[[SetSharedLootTable('toad',
 {
     {'sporecloud_toad', .5},
 })
@@ -9,7 +9,7 @@ SetSharedLootTable('toad',
 SetSharedLootTable('frog',
 {
 })
-
+]]
 local function OnIsAutumn(inst, isautumn)
     if isautumn and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
 		inst.components.lootdropper:SetChanceLootTable('toad')

@@ -1,3 +1,11 @@
+AddPrefabPostInit("forest", function(inst)
+    inst:AddComponent("ratcheck")
+end)
+
+AddPrefabPostInit("cave", function(inst)
+    inst:AddComponent("ratcheck")
+end)
+
 local function CooldownRaid(inst)
 	GLOBAL.TheWorld.net:RemoveTag("raided")
 	print("Rat Raid Cooldown is over.")
@@ -12,7 +20,9 @@ local function SpawnRaid(inst)
 		local z2 = z + math.random(-10, 10)
 		if GLOBAL.TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
 			raid.Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
-			GLOBAL.TheWorld:DoTaskInTime(9600 + math.random(4800), CooldownRaid)
+			--GLOBAL.TheWorld:DoTaskInTime(9600 + math.random(4800), CooldownRaid)
+			GLOBAL.TheWorld:PushEvent("ratcooldown", inst)
+			--GLOBAL.TheWorld.components.ratcheck:StartTimer()
 		else
 			inst:DoTaskInTime(0, SpawnRaid)
 		end
@@ -76,6 +86,7 @@ local function ActiveRaid(inst, doer)
 		not inst.components.container:IsEmpty() and
 		#ents >= 20 then
 		GLOBAL.TheWorld.net:AddTag("raided")
+		GLOBAL.TheWorld:AddTag("raided")
 		print("Rat Raid Triggered !")
 		inst:DoTaskInTime(3, StartRaid, doer)
 	end
