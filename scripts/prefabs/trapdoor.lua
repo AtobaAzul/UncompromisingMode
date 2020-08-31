@@ -40,7 +40,9 @@ local function OnHaunt(inst)
         inst,
         25,
         function(guy)
+			if inst.components.combat ~= nil then
             return inst.components.combat:CanTarget(guy)
+			end
         end,
         { "_combat" }, --See entityreplica.lua (re: "_combat" tag)
         { "insect", "playerghost", "INLIMBO" },
