@@ -72,7 +72,7 @@ end)
 local function Revert(inst, prefab)
 --print("code ran")
 	local x, y, z = inst.Transform:GetWorldPosition()
-	if 0 < #TheSim:FindEntities(x, 0, z, 3, {"canopy"}) then
+	if 1 > #TheSim:FindEntities(x, 0, z, 3, {"canopy"}) then
 		local obj = SpawnPrefab(prefab)
 		obj.Transform:SetPosition(x,y,z)
 		inst:Remove()
