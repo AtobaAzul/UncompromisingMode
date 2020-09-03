@@ -135,4 +135,6 @@ return {
 	"nightmarehorn",
 	"sheeplet",
 	"sheepletbomb",
+	"whisperpod",
+	"whisperpod_normal",
 }

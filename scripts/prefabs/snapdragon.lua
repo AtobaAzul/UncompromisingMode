@@ -78,9 +78,6 @@ local function OnEat(inst, data)
 	if data ~= nil and data:HasTag("pollenmites") then
 		inst.SoundEmitter:PlaySound("UCSounds/pollenmite/die")
 	end
-
-    -- Increase the amount of food in the stomach.
-    inst.foodItemsEatenCount = inst.foodItemsEatenCount + 1
 end
 
 local function GetStatus(inst)
@@ -144,6 +141,29 @@ local function PollenTick(inst)
 	end
 end
 
+local function OnRestoreItemPhysics(item)
+    item.Physics:CollidesWith(COLLISION.OBSTACLES)
+end
+
+local function LaunchItem(inst, item, angle, minorspeedvariance)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local spd = 3.5 + math.random() * (minorspeedvariance and 1 or 3.5)
+    item.Physics:ClearCollisionMask()
+    item.Physics:CollidesWith(COLLISION.WORLD)
+    item.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
+    item.Physics:Teleport(x, 2.5, z)
+    item.Physics:SetVel(math.cos(angle) * spd, 11.5, math.sin(angle) * spd)
+    item:DoTaskInTime(.6, OnRestoreItemPhysics)
+    item:PushEvent("knockbackdropped", { owner = inst, knocker = inst, delayinteraction = .75, delayplayerinteraction = .5 })
+    if item.components.burnable ~= nil then
+        inst:ListenForEvent("onignite", function()
+            for k, v in pairs(inst._minigame_elites) do
+                k:SetCheatFlag()
+            end
+        end, item)
+    end
+end
+
 local function ShouldAcceptItem(inst, item)
     return inst.components.eater:CanEat(item)
         and not inst.components.combat:HasTarget()
@@ -152,7 +172,7 @@ end
 local function OnGetItemFromPlayer(inst, giver, item)
     if inst.components.eater:CanEat(item) then
         inst.components.eater:Eat(item, giver)
-        inst.sg:GoToState("eat", true)
+        inst.sg:GoToState("eat")--, true)
 		
         if inst.components.combat.target == giver then
             inst.components.combat:SetTarget(nil)
@@ -164,6 +184,22 @@ local function OnGetItemFromPlayer(inst, giver, item)
 			end
             inst.components.follower:AddLoyaltyTime(item.components.edible:GetHunger() * TUNING.SPIDER_LOYALTY_PER_HUNGER)
         end
+
+		-- Increase the amount of food in the stomach.
+		inst.foodItemsEatenCount = inst.foodItemsEatenCount + 1
+		
+		if inst.foodItemsEatenCount >= 4 then
+			inst.sg:GoToState("taunt")
+			
+			local item = SpawnPrefab("whisperpod")
+			local angle = math.random() * 2 * PI
+			local delta = 2 * PI / 3 --/ (numgold + numprops + 1) --purposely leave a random gap
+			local variance = delta * .4
+			
+			LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
+			
+			inst.foodItemsEatenCount = 0
+		end
 		
     end
 end
@@ -218,7 +254,7 @@ local function fn(Sim)
     end
 	
     inst:AddComponent("eater")
-    inst.components.eater:SetDiet({ FOODTYPE.INSECT }, { FOODTYPE.INSECT })
+    inst.components.eater:SetDiet({ FOODTYPE.VEGGIE, FOODTYPE.INSECT }, { FOODTYPE.INSECT })
 	
     --inst.components.eater:SetSnappy()
     inst.components.eater:SetOnEatFn(OnEat)
