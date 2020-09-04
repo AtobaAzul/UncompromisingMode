@@ -140,7 +140,7 @@ end
 
 local function DoSuper(inst)
 --if not inst.sg:HasStateTag("superbusy") and not inst:HasTag("gonnasuper") and not inst.components.health:IsDead() and inst.components.combat.target then
-if math.random()>0.2 then
+if math.random()>0.1 then
 inst.sg:GoToState("preleapattack")
 else
 inst.sg:GoToState("precanopy")
