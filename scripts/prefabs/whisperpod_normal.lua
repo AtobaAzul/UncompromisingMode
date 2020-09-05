@@ -183,6 +183,20 @@ local function OnLoad(inst, data)--, ents)
     end
 end
 
+local function OnGetItemFromPlayer(inst, giver, item)
+    if item.components.plantable ~= nil and not item.prefab == "whisperpod" then
+		inst.components.crop:StartGrowing("snapdragon", TUNING.SEEDS_GROW_TIME / 3)
+    end
+end
+
+local function AbleToAcceptTest(inst, item, giver)
+	return item.components.plantable ~= nil and not item.prefab == "whisperpod"
+end
+
+local function AcceptTest(inst, item, giver)
+    return item.components.plantable ~= nil and not item.prefab == "whisperpod"
+end
+
 --------------------------------------------------------------------------
 
 local function MakePlant(name, build, isground)
@@ -220,6 +234,7 @@ local function MakePlant(name, build, isground)
         inst.AnimState:Hide("mouseover")
 
         inst:AddTag("NPC_workable")
+		inst:AddTag("trader")
 
         --witherable (from witherable component) added to pristine state for optimization
         inst:AddTag("witherable")
@@ -230,6 +245,11 @@ local function MakePlant(name, build, isground)
             return inst
         end
 
+		inst:AddComponent("trader")
+		inst.components.trader:SetAbleToAcceptTest(AbleToAcceptTest)
+		inst.components.trader:SetAcceptTest(AcceptTest)
+		inst.components.trader.onaccept = OnGetItemFromPlayer
+	
         inst:AddComponent("crop")
         inst.components.crop:SetOnMatureFn(onmatured)
         inst.components.crop:SetOnWitheredFn(onwithered)

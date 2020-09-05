@@ -24,7 +24,7 @@ end
 
 local function OnDeploy(inst, pt)--, deployer, rot)
     local plant = SpawnPrefab("whisperpod_normal_ground")
-    plant.components.crop:StartGrowing(inst.components.plantable.product(inst), inst.components.plantable.growtime)
+    --plant.components.crop:StartGrowing(inst.components.plantable.product(inst), inst.components.plantable.growtime)
     plant.Transform:SetPosition(pt.x, 0, pt.z)
     plant.SoundEmitter:PlaySound("dontstarve/wilson/plant_seeds")
     inst:Remove()
