@@ -61,7 +61,7 @@ local function battleborn_onattack(inst, data)
                     or (total_health <= 0 and math.huge)
                     or damage / total_health
         --math and clamp does account for 0 and infinite cases
-        local delta = math.clamp(victim.components.combat.defaultdamage * .25 * percent / 2, .11, 0.66)
+        local delta = math.clamp(victim.components.combat.defaultdamage * .25 * percent / 1.5, .11, 0.66)
 
         --decay stored battleborn
         if inst.battleborn2 > 0 then
@@ -102,7 +102,7 @@ env.AddPrefabPostInit("wathgrithr", function(inst)
     inst.battleborn2 = 0
     inst.battleborn2_time = 0
 	inst:ListenForEvent("onattackother", battleborn_onattack)
-    inst:ListenForEvent("entity_death", function(wrld, data) onkill(inst, data) end, TheWorld)
+    --inst:ListenForEvent("entity_death", function(wrld, data) onkill(inst, data) end, TheWorld)
 	
     inst:ListenForEvent("death", ondeath)
 end)

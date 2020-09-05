@@ -18,7 +18,7 @@ local function OnBlocked(owner, data, inst)
         end
     end
 	
-	if data.attacker ~= nil and
+	if data.attacker ~= nil and data.attacker.components.combat ~= nil and
         not (data.attacker.components.health ~= nil and data.attacker.components.health:IsDead()) and
         (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) and
         not data.redirected and
