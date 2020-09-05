@@ -174,7 +174,7 @@ local function fn1()
     -------------------------
     -------------------------
     inst:AddComponent("playerprox")
-    inst.components.playerprox:SetDist(10, 13) --set specific values
+    inst.components.playerprox:SetDist(6, 8) --set specific values
     inst.components.playerprox:SetOnPlayerNear(onnear)
     inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
     -------------------------
@@ -273,7 +273,7 @@ local function fn2()
     -------------------------
     -------------------------
     inst:AddComponent("playerprox")
-    inst.components.playerprox:SetDist(10, 13) --set specific values
+    inst.components.playerprox:SetDist(6, 8) --set specific values
     inst.components.playerprox:SetOnPlayerNear(onnear)
     inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
     -------------------------

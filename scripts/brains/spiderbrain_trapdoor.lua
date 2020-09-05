@@ -19,8 +19,8 @@ local MAX_FOLLOW_DIST = 8
 
 local TRADE_DIST = 20
 
-local MAX_CHASE_DIST = 7
-local MAX_CHASE_TIME = 8
+local MAX_CHASE_DIST = 7 * .8
+local MAX_CHASE_TIME = 4
 local MAX_WANDER_DIST = 32
 
 local START_RUN_DIST = 8

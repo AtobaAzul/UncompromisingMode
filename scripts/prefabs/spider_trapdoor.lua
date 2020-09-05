@@ -103,7 +103,7 @@ local function NormalRetarget(inst)
 end
 
 local function WarriorRetarget(inst)
-    return FindTarget(inst, TUNING.SPIDER_WARRIOR_TARGET_DIST)
+    return FindTarget(inst, TUNING.SPIDER_TARGET_DIST)
 end
 
 local function keeptargetfn(inst, target)
