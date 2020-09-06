@@ -184,17 +184,17 @@ local function OnLoad(inst, data)--, ents)
 end
 
 local function OnGetItemFromPlayer(inst, giver, item)
-    if item.components.plantable ~= nil and not item.prefab == "whisperpod" then
-		inst.components.crop:StartGrowing("snapdragon", TUNING.SEEDS_GROW_TIME / 3)
+    if item.components.plantable ~= nil then
+		inst.components.crop:StartGrowing("snapdragon", TUNING.SEEDS_GROW_TIME / 10)
     end
 end
 
 local function AbleToAcceptTest(inst, item, giver)
-	return item.components.plantable ~= nil and not item.prefab == "whisperpod"
+	return item.components.plantable ~= nil
 end
 
 local function AcceptTest(inst, item, giver)
-    return item.components.plantable ~= nil and not item.prefab == "whisperpod"
+    return item.components.plantable ~= nil
 end
 
 --------------------------------------------------------------------------
@@ -228,9 +228,9 @@ local function MakePlant(name, build, isground)
         else
             inst.AnimState:SetFinalOffset(-1)
         end
-        inst.AnimState:SetBank(build)
-        inst.AnimState:SetBuild(build)
-        inst.AnimState:PlayAnimation("grow")
+        inst.AnimState:SetBank("whisperpod_normal_ground")
+        inst.AnimState:SetBuild("whisperpod_normal_ground")
+        inst.AnimState:PlayAnimation("placer")
         inst.AnimState:Hide("mouseover")
 
         inst:AddTag("NPC_workable")
