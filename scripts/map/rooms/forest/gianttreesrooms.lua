@@ -30,7 +30,7 @@ AddRoom("GiantTrees",
 		distributeprefabs = {
 		sapling = 0.2,
 		evergreen_sparse = 0.5,
-		cave_fern = 0.5,
+		hooded_fern = 0.5,
 		blueberryplantbuncher = 0.05,
 		mushtree_medium = 0.05,
 		hoodedtrapdoor = 0.05,
@@ -54,7 +54,7 @@ AddRoom("ShroomInfestedGiantTrees",
 		distributeprefabs = {
 		sapling = 0.2,
 		--evergreen_sparse = 0.5,
-		cave_fern = 0.5,
+		hooded_fern = 0.5,
 		mushtree_small = 0.3,
 		mushtree_tall = 0.2,
 		mushtree_medium = 0.3,
@@ -79,7 +79,7 @@ AddRoom("WalrusGiantTrees",
 		distributeprefabs = {
 		sapling = 0.2,
 		evergreen_sparse = 0.5,
-		cave_fern = 0.5,
+		hooded_fern = 0.5,
 		blueberryplantbuncher = 0.02,
 		mushtree_small = 0.05,
 		hoodedtrapdoor = 0.2,
@@ -104,7 +104,7 @@ AddRoom("BGGiantTrees",
 		distributeprefabs = {
 		sapling = 0.2,
 		evergreen_sparse = 0.5,
-		cave_fern = 0.5,
+		hooded_fern = 0.5,
 		blueberryplantbuncher = 0.035,
 		mushtree_tall = 0.05,
 		},
@@ -127,7 +127,7 @@ AddRoom("SnapDragons",
 			distributeprefabs =
 			{
 				snapdragon = 0.2,
-				cave_fern= 0.02,
+				hooded_fern= 0.02,
 				giant_tree = 0.005,
 			},
 			countprefabs =	
@@ -153,7 +153,7 @@ AddRoom("MoonBaseGiantTrees", {
 					                {
 									sapling = 0.2,
 									evergreen_sparse = 0.5,
-									cave_fern = 0.5,
+									hooded_fern = 0.5,
 									blueberryplantbuncher = 0.001,
 					                },
 					            }

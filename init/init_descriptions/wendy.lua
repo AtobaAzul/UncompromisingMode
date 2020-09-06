@@ -127,6 +127,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.CURSED_ANTLER = "Life doesn't wear it down. I envy it."
 	DESCRIBE.BLOOMERSHOT = "I'm already in pain, I don't need any more."
 	DESCRIBE.BERNIEBOX = "Toys are for kids."
+	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "It has passed.",

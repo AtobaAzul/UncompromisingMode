@@ -128,6 +128,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.CURSED_ANTLER = "This'll last us forever!"
 	DESCRIBE.BLOOMERSHOT = "What's the point, eh?"
 	DESCRIBE.BERNIEBOX = "I'm not one for stuffed things."
+	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "Poor lil thing.",

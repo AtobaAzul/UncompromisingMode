@@ -127,6 +127,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.CURSED_ANTLER = "A magnificent weapon!"
 	DESCRIBE.BLOOMERSHOT = "All the pain, with none of the glory."
 	DESCRIBE.BERNIEBOX = "I've no need for toys!"
+	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "It has gone to Valhalla.",

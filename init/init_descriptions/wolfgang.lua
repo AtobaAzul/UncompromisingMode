@@ -128,6 +128,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.CURSED_ANTLER = "Ha! Stick is MIGHTY!"
 	DESCRIBE.BLOOMERSHOT = "It's angry bee in a needle. Wolfgang not like needles."
 	DESCRIBE.BERNIEBOX = "Wolfgang get turnip as child."
+	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "Is so broken.",

@@ -137,4 +137,5 @@ return {
 	"sheepletbomb",
 	"whisperpod",
 	"whisperpod_normal",
+	"hooded_fern",
 }

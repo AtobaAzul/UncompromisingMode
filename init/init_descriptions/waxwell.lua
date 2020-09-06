@@ -129,6 +129,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.CURSED_ANTLER = "You expect me to carry this?!"
 	DESCRIBE.BLOOMERSHOT = "I don't see any use for this."
 	DESCRIBE.BERNIEBOX = "Great power lies within."
+	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "It's seen better days.",
