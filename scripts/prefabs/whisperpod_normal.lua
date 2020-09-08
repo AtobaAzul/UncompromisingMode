@@ -20,7 +20,7 @@ local function onmatured(inst)
 	local pos = inst:GetPosition()
     local snappy = SpawnPrefab("snapdragon")
 	snappy.Transform:SetPosition(pos:Get())
-	snappy.AnimState:PlayAnimation("sleep_pst")
+	snappy.sg:GoToState("create")
     SpawnPrefab("snapdragonherd").Transform:SetPosition(pos:Get())
 	
 	inst.components.workable:SetWorkAction(nil)
@@ -42,7 +42,7 @@ end
 
 local function GetStatus(inst)
     return (inst:HasTag("withered") and "WITHERED")
-        or (inst.components.crop:IsReadyForHarvest() and "READY")
+        or (inst.components.crop ~= nil and inst.components.crop:IsReadyForHarvest() and "READY")
         or "GROWING"
 end
 
@@ -50,7 +50,9 @@ end
 
 local function OnGetItemFromPlayer(inst, giver, item)
     if item.components.plantable ~= nil and not inst.growing then
-		inst.components.crop:StartGrowing("snapdragon", TUNING.SEEDS_GROW_TIME / 30)
+		inst:AddComponent("crop")
+		inst.components.crop:StartGrowing("snapdragon", TUNING.SEEDS_GROW_TIME / 4)
+		inst.components.crop:SetOnMatureFn(onmatured)
 		inst.growing = true
     end
 end
@@ -67,9 +69,15 @@ local function OnSave(inst, data)
     data.burnt = inst.growing
 end
 
-local function OnLoad(inst, data)
+local function OnPreLoad(inst, data)
     if data ~= nil and data.growing then
         inst.growing = data.growing
+    end
+end
+
+local function OnInit(inst, data)
+    if not inst.growing then
+		inst:RemoveComponent("crop")
     end
 end
 
@@ -89,11 +97,12 @@ local function fn()
 	inst.AnimState:SetBank("whisperpod_normal_ground")
 	inst.AnimState:SetBuild("whisperpod_normal_ground")
 	inst.AnimState:PlayAnimation("placer")
-	inst.AnimState:Hide("mouseover")
+	--inst.AnimState:Hide("mouseover")
 	
     --[[local scale = 1.22
     inst.Transform:SetScale(scale, scale, scale)]]
 
+	inst:AddTag("whisperpod")
 	inst:AddTag("NPC_workable")
 	inst:AddTag("trader")
 
@@ -102,7 +111,7 @@ local function fn()
 	if not TheWorld.ismastersim then
 		return inst
 	end
-
+	
 	inst:AddComponent("trader")
 	inst.components.trader:SetAbleToAcceptTest(AbleToAcceptTest)
 	inst.components.trader:SetAcceptTest(AcceptTest)
@@ -110,7 +119,7 @@ local function fn()
 	
 	inst:AddComponent("crop")
 	inst.components.crop:SetOnMatureFn(onmatured)
-
+		
 	inst:AddComponent("inspectable")
 	inst.components.inspectable.getstatus = GetStatus
 	inst.components.inspectable.nameoverride = "plant_normal"
@@ -130,7 +139,9 @@ local function fn()
 	inst.growing = false
 	
     inst.OnSave = OnSave
-    inst.OnLoad = OnLoad
+    inst.OnPreLoad = OnPreLoad
+	
+	inst:DoTaskInTime(0, OnInit)
 
 	return inst
 end

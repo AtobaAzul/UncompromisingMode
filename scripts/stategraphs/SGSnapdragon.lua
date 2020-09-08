@@ -61,6 +61,18 @@ local states=
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
+	
+	State{
+        name = "create",
+        tags = {},
+        onenter = function(inst)
+            inst.AnimState:PlayAnimation("sleep_pst")
+        end,
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
+    },
     
     State{
         name = "attack",
