@@ -236,8 +236,8 @@ local function fn(Sim)
     inst.foodItemsEatenCount = 0
     
     MakeCharacterPhysics(inst, 100, 0.2)
-    local scale = 1.22
-    inst.Transform:SetScale(scale, scale, scale)
+    --[[local scale = 1.22
+    inst.Transform:SetScale(scale, scale, scale)]]
     
     inst:AddTag("snapdragon")
 

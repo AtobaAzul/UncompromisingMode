@@ -18,7 +18,9 @@ local function onmatured(inst)
     end
 	
 	local pos = inst:GetPosition()
-    SpawnPrefab("snapdragon").Transform:SetPosition(pos:Get())
+    local snappy = SpawnPrefab("snapdragon")
+	snappy.Transform:SetPosition(pos:Get())
+	snappy.AnimState:PlayAnimation("sleep_pst")
     SpawnPrefab("snapdragonherd").Transform:SetPosition(pos:Get())
 	
 	inst.components.workable:SetWorkAction(nil)
@@ -48,7 +50,7 @@ end
 
 local function OnGetItemFromPlayer(inst, giver, item)
     if item.components.plantable ~= nil and not inst.growing then
-		inst.components.crop:StartGrowing("snapdragon", TUNING.SEEDS_GROW_TIME / 3)
+		inst.components.crop:StartGrowing("snapdragon", TUNING.SEEDS_GROW_TIME / 30)
 		inst.growing = true
     end
 end
@@ -88,6 +90,9 @@ local function fn()
 	inst.AnimState:SetBuild("whisperpod_normal_ground")
 	inst.AnimState:PlayAnimation("placer")
 	inst.AnimState:Hide("mouseover")
+	
+    --[[local scale = 1.22
+    inst.Transform:SetScale(scale, scale, scale)]]
 
 	inst:AddTag("NPC_workable")
 	inst:AddTag("trader")
