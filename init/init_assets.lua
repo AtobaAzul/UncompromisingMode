@@ -203,7 +203,7 @@ Assets = {
 	Asset("ANIM", "anim/web_net_trap.zip"),
 	Asset("ANIM", "anim/hoodedcanopy.zip"),
 	Asset("ANIM", "anim/chomper.zip"),
-	Asset("ANIM", "anim/wspider_queen_build.zip"),
+	Asset("ANIM", "anim/widow.zip"),
 	Asset("ANIM", "anim/blueberryplant.zip"),
 	Asset("IMAGE", "images/inventoryimages/seafoodpaella.tex"),
 	Asset("ATLAS", "images/inventoryimages/seafoodpaella.xml"),

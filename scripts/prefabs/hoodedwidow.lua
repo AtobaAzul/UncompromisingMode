@@ -196,7 +196,7 @@ local function fn()
     inst:AddTag("spider")
 
     inst.AnimState:SetBank("spider_queen")
-    inst.AnimState:SetBuild("wspider_queen_build")
+    inst.AnimState:SetBuild("widow")
     inst.AnimState:PlayAnimation("idle", true)
 	inst.Transform:SetScale(1.5,1.5,1.5)
     inst.entity:SetPristine()

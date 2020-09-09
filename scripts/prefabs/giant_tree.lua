@@ -7,6 +7,7 @@ local lootlist =
     "log",
 	"log",
     "twigs",
+	"spider",
 }
 --Code From quaker
 local function _BreakDebris(debris)
@@ -187,15 +188,21 @@ local function SpawnDebris(inst)
             if math.random() < .5 then
                 debris.Transform:SetRotation(180)
             end
+			if not debris:HasTag("spider") then
             debris.Physics:Teleport(x, 35, z)
-
             debris.shadow = SpawnPrefab("warningshadow")
             debris.shadow:ListenForEvent("onremove", function(debris) debris.shadow:Remove() end, debris)
             debris.shadow.Transform:SetPosition(x, 0, z)
 			local scaleFactor = Lerp(.5, 1.5, 1)
-			debris.shadow.Transform:SetScale(scaleFactor, scaleFactor, scaleFactor)											 
+			debris.shadow.Transform:SetScale(scaleFactor, scaleFactor, scaleFactor)
+
 			debris.updatetask = debris:DoPeriodicTask(FRAMES, _GroundDetectionUpdate, nil, 5)
-        end																				-- ^This Value is from quaker
+																						-- ^This Value is from quaker
+			else
+			debris.Physics:Teleport(x, y, z)
+			debris.sg:GoToState("dropper_enter")
+			end
+		end																				
        
     end
 end
