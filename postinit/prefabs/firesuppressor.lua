@@ -22,7 +22,7 @@ local function LaunchProjectile2(inst, targetpos)
     projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 	
 	if inst.components.fueled ~= nil then
-		inst.components.fueled:DoDelta(-25)
+		inst.components.fueled:DoDelta(-18)
 	end
 end
 

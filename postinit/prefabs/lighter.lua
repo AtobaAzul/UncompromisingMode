@@ -5,7 +5,7 @@ GLOBAL.setfenv(1, GLOBAL)
 TUNING.BERNIE_HEALTH = 1200
 
 TUNING.BERNIE_BIG_HEALTH = 2400
-
+--[[
 TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WILLOW = {"lighter", "berniebox"}
 
 TUNING.STARTING_ITEM_IMAGE_OVERRIDE["berniebox"] =
@@ -16,7 +16,7 @@ TUNING.STARTING_ITEM_IMAGE_OVERRIDE["berniebox"] =
 	
 Recipe("bernie_inactive", {Ingredient("berniebox", 1, "images/inventoryimages/berniebox.xml")}, RECIPETABS.SURVIVAL,  TECH.NONE, nil, nil, nil, nil, "pyromaniac")
 AllRecipes["bernie_inactive"].sortkey = AllRecipes["healingsalve"].sortkey - .1
-
+]]
 local function createlight(inst)
 
     local caster = inst.components.inventoryitem.owner
@@ -189,12 +189,12 @@ env.AddPrefabPostInit("bernie_active", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	
+	--[[
     inst.components.inspectable.getstatus = getstatus
 	
 	inst:AddComponent("named")
 	inst:DoTaskInTime(0, SetName)
-	
+	]]
     inst:AddComponent("burnable")
     inst.components.burnable:SetFXLevel(1)
     inst.components.burnable:SetBurnTime(30)
@@ -226,12 +226,12 @@ env.AddPrefabPostInit("bernie_big", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	
+	--[[
     inst.components.inspectable.getstatus = getstatus
 
 	inst:AddComponent("named")
 	inst:DoTaskInTime(0, SetNameBig)
-    
+    ]]
     inst:AddComponent("burnable")
     inst.components.burnable:SetFXLevel(3)
     inst.components.burnable.canlight = false
@@ -254,7 +254,7 @@ env.AddPrefabPostInit("bernie_inactive", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	
+	--[[
     inst:AddComponent("floater")
     inst.components.floater:SetSize("small")
 	
@@ -266,7 +266,7 @@ env.AddPrefabPostInit("bernie_inactive", function(inst)
 	if inst.components.inventoryitem ~= nil then
 		inst.components.inventoryitem:SetSinks(false)
 	end
-	
+	]]
 	inst:ListenForEvent("onfueldsectionchanged", canceldecaying)
     inst:ListenForEvent("ondropped", canceldecaying)
 
