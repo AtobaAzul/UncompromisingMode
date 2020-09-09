@@ -157,7 +157,7 @@ local function GetDebris()
 local loot = lootlist[math.random(#lootlist)]
 return loot
 end
-local function SpawnDebris(inst)
+local function SpawnDebris(inst,chopper)
 	local x,y,z = inst.Transform:GetWorldPosition()
 	if math.random() < 0.5 then
 		if math.random() < 0.5 then
@@ -201,6 +201,9 @@ local function SpawnDebris(inst)
 			else
 			debris.Physics:Teleport(x, y, z)
 			debris.sg:GoToState("dropper_enter")
+			if debris.components.combat ~= nil then
+			debris.components.combat:SuggestTarget(chopper)
+			end
 			end
 		end																				
        
@@ -211,8 +214,11 @@ local function on_chop(inst, chopper, remaining_chops)
     if not (chopper ~= nil and chopper:HasTag("playerghost")) then
         inst.SoundEmitter:PlaySound("turnoftides/common/together/driftwood/chop")
     end
-	SpawnDebris(inst)
+	SpawnDebris(inst,chopper)
 	local phase = 0
+	if not (chopper:HasTag("epic") or chopper:HasTag("antlion_sinkhole")) then 
+	inst.previouschops = remaining_chops
+	end
 	if remaining_chops > 15 and remaining_chops < 20 then
     phase = 1
     end
@@ -230,22 +236,33 @@ local function on_chop(inst, chopper, remaining_chops)
     end			
 	--inst.AnimState:PlayAnimation("chopdamaged-"..phase)
 	inst.AnimState:PushAnimation("damaged-"..phase,true)
+	
 end
 
-local function BringTheForestDown(inst)--!
+local function BringTheForestDown(inst,chopper)--!
 for i = 1, 3 + math.random(4,7) do
-SpawnDebris(inst)
-inst:DoTaskInTime(math.random(1,2),SpawnDebris(inst))
-inst:DoTaskInTime(math.random(4,5),SpawnDebris(inst))
+SpawnDebris(inst,chopper)
+inst:DoTaskInTime(math.random(1,2),SpawnDebris(inst,chopper))
+inst:DoTaskInTime(math.random(4,5),SpawnDebris(inst,chopper))
 end
 end
 local function on_chopped_down(inst, chopper)
+	if chopper:HasTag("epic") or chopper:HasTag("antlion_sinkhole") then
+	inst:AddComponent("workable")
+	inst.components.workable:SetWorkAction(ACTIONS.CHOP)
+	inst.components.workable:SetWorkLeft(inst.previouschops)
+	inst.components.workable:SetOnWorkCallback(on_chop)
+	inst.components.workable:SetOnFinishCallback(on_chopped_down)
+	inst.RegrowCounter = 0
+	inst.AnimState:PlayAnimation("damaged-0")
+	else
     inst.SoundEmitter:PlaySound("dontstarve/forest/appear_wood")
     inst.SoundEmitter:PlaySound("dontstarve/forest/treeCrumble",nil,.4)
 	inst:RemoveComponent("workable")
 	inst.ReadyToChop = false
 	inst.AnimState:PlayAnimation("damaged-4")
-	BringTheForestDown(inst)--!
+	BringTheForestDown(inst,chopper)--!
+	end
 end
 
 local function Regrow(inst)
@@ -327,6 +344,7 @@ local function makefn()
 		inst:AddComponent("inspectable")
 		inst.ReadyToChop = true
 		inst.RegrowCounter = 0
+		inst.previouschops = nil
 		inst:DoPeriodicTask(5,Regrow)
 		inst:DoTaskInTime(0,SpawnTreeShadows)
 		inst.OnSave = onsave
