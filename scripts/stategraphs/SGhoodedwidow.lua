@@ -246,9 +246,8 @@ local states=
             inst.Physics:SetDamping(0)
 			local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
 			if home then
-			local dx, dy, dz = inst.Transform:GetWorldPosition()
-			local spx, spy, spz = home.Transform:GetWorldPosition()
-			if distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*8) then
+			if inst:HasTag("justcame") then
+			--if distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*8) then
 			inst.AnimState:PlayAnimation("poop_loop")
 			inst.AnimState:PushAnimation("enter", false)
 			else

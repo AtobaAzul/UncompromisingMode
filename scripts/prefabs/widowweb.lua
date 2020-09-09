@@ -16,6 +16,8 @@ local function SpawnInvestigators(inst, data)
 			local x,y,z = inst.Transform:GetWorldPosition()
 			spider.Physics:Teleport(x, 15, z)
             spider.sg:GoToState("fall")
+			spider:AddTag("justcame")
+			spider:DoTaskInTime(1,function(spider) inst:RemoveTag("justcame") end)
             end
     end
 end
