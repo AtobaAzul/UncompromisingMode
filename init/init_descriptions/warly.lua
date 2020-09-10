@@ -128,6 +128,13 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.BLOOMERSHOT = "Seems a bit cruel if I'm being honest."
 	DESCRIBE.BERNIEBOX = "That's one mystery I'll leave to Willow."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODEDWIDOW = "I don't think I'm getting any monster meat from it."
+	DESCRIBE.GIANT_TREE = "What a marvel."
+	DESCRIBE.BLUEBERRYPLANT =         
+		{
+            READY = "She's gonna blow!",
+			REGROWING = "It seems to be coming back.",
+		}
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "Poor little fellow.",

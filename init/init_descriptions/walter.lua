@@ -129,6 +129,13 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.BLOOMERSHOT = "No WAY am I injecting myself with THAT!"
 	DESCRIBE.BERNIEBOX = "That belongs to Willow, I fear what would happen if I touch it..."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODEDWIDOW = "Wow! That could eat anything!"
+	DESCRIBE.GIANT_TREE = "A redwood tree! You can see it from miles away!"
+	DESCRIBE.BLUEBERRYPLANT =         
+		{
+            READY = "She's gonna blow!",
+			REGROWING = "It seems to be coming back.",
+		}
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "I-I'm sure we can fix him.",

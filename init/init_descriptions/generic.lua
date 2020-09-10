@@ -158,6 +158,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.BLOOMERSHOT = "The only outcome of this experiment is pain."
 	DESCRIBE.BERNIEBOX = "What could be inside? If only I could open it..."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODEDWIDOW = "That thing could eat a giant!!"
+	DESCRIBE.GIANT_TREE = "It totally blocks out the sun."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

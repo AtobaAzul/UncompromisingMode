@@ -129,6 +129,13 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 	DESCRIBE.BLOOMERSHOT = "Buzzer make bloomer."
 	DESCRIBE.BERNIEBOX = "Trapped inside."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODEDWIDOW = "Can eat anything"
+	DESCRIBE.GIANT_TREE = "Big friend?"
+	DESCRIBE.BLUEBERRYPLANT =         
+		{
+            READY = "She's gonna blow!",
+			REGROWING = "It seems to be coming back.",
+		}
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "What happened?",

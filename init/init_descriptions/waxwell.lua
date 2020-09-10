@@ -130,6 +130,13 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.BLOOMERSHOT = "I don't see any use for this."
 	DESCRIBE.BERNIEBOX = "Great power lies within."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODEDWIDOW = "I want to stay FAR away from her."
+	DESCRIBE.GIANT_TREE = "This tree is unusually large."
+	DESCRIBE.BLUEBERRYPLANT =         
+		{
+            READY = "She's gonna blow!",
+			REGROWING = "It seems to be coming back.",
+		}
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "It's seen better days.",

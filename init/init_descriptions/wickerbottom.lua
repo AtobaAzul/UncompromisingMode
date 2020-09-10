@@ -129,6 +129,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.BLOOMERSHOT = "I don't understand that thing at all."
 	DESCRIBE.BERNIEBOX = "Toys never came in packaging like this when I was a kid."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODEDWIDOW = "A solidary predator. It appears to be near the top of the food chain."
+	DESCRIBE.GIANT_TREE = "Sequoioideae, the redwood tree."
+	DESCRIBE.BLUEBERRYPLANT =         
+		{
+            READY = "She's gonna blow!",
+			REGROWING = "It seems to be coming back.",
+		}
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "That bear is in need of repair.",

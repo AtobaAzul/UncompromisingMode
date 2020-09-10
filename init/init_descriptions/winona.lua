@@ -129,6 +129,13 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.BLOOMERSHOT = "I can't say I see the point. Oh, wait, hah!"
 	DESCRIBE.BERNIEBOX = "If it ain't tools, I ain't interested."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODEDWIDOW = "I'll, uh, stay over here."
+	DESCRIBE.GIANT_TREE = "We're not chopping that one down any time soon."
+	DESCRIBE.BLUEBERRYPLANT =         
+		{
+            READY = "She's gonna blow!",
+			REGROWING = "It seems to be coming back.",
+		}
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "He's a bit of a fixer-upper.",

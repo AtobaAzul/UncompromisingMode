@@ -129,6 +129,13 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.BLOOMERSHOT = "I'm not going to fall for this prank!"
 	DESCRIBE.BERNIEBOX = "I'm curious to see whats inside, I hope she opens it soon."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODEDWIDOW = "The soul guardian!"
+	DESCRIBE.GIANT_TREE = "The bigger they are... Hyuyu!"
+	DESCRIBE.BLUEBERRYPLANT =         
+		{
+            READY = "She's gonna blow!",
+			REGROWING = "It seems to be coming back.",
+		}
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "He seemed a fine chap.",

@@ -129,6 +129,13 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.BLOOMERSHOT = "It's angry bee in a needle. Wolfgang not like needles."
 	DESCRIBE.BERNIEBOX = "Wolfgang get turnip as child."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODEDWIDOW = "AAAAH! AAAAAAAAAAHH!!"
+	DESCRIBE.GIANT_TREE = "Mightiest tree!"
+	DESCRIBE.BLUEBERRYPLANT =         
+		{
+            READY = "She's gonna blow!",
+			REGROWING = "It seems to be coming back.",
+		}
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "Is so broken.",

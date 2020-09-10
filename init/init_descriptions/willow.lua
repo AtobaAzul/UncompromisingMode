@@ -129,6 +129,13 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.BLOOMERSHOT = "What idiot would use this?"
 	DESCRIBE.BERNIEBOX = "I like to keep the packaging."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODEDWIDOW = "I am NOT getting near that!"
+	DESCRIBE.GIANT_TREE = "That's a big ol' tree."
+	DESCRIBE.BLUEBERRYPLANT =         
+		{
+            READY = "She's gonna blow!",
+			REGROWING = "It seems to be coming back.",
+		}
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "I need to fix Bernie up.",

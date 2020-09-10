@@ -128,6 +128,13 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.BLOOMERSHOT = "All the pain, with none of the glory."
 	DESCRIBE.BERNIEBOX = "I've no need for toys!"
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODEDWIDOW = "I... I am not fearful!"
+	DESCRIBE.GIANT_TREE = "Surely I stand before Yggdrasil!"
+	DESCRIBE.BLUEBERRYPLANT =         
+		{
+            READY = "She's gonna blow!",
+			REGROWING = "It seems to be coming back.",
+		}
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "It has gone to Valhalla.",

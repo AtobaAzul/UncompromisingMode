@@ -128,6 +128,13 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.BLOOMERSHOT = "Hey little guy, you're trapped too huh?."
 	DESCRIBE.BERNIEBOX = "I want to open it, but it doesn't belong to us."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODEDWIDOW = "We're a spider too!! Why are you attacking us?!"
+	DESCRIBE.GIANT_TREE = "It's probably super old."
+	DESCRIBE.BLUEBERRYPLANT =         
+		{
+            READY = "She's gonna blow!",
+			REGROWING = "It seems to be coming back.",
+		}
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "It's all busted up.",

@@ -129,6 +129,13 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.BLOOMERSHOT = "What's the point, eh?"
 	DESCRIBE.BERNIEBOX = "I'm not one for stuffed things."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODEDWIDOW = "You can have the trees!!"
+	DESCRIBE.GIANT_TREE = "That's a real beaut."
+	DESCRIBE.BLUEBERRYPLANT =         
+		{
+            READY = "She's gonna blow!",
+			REGROWING = "It seems to be coming back.",
+		}
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "Poor lil thing.",

@@ -128,6 +128,13 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.BLOOMERSHOT = "I'm already in pain, I don't need any more."
 	DESCRIBE.BERNIEBOX = "Toys are for kids."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODEDWIDOW = "She could eat me in a single bite."
+	DESCRIBE.GIANT_TREE = "Ancient, and full of life."
+	DESCRIBE.BLUEBERRYPLANT =         
+		{
+            READY = "She's gonna blow!",
+			REGROWING = "It seems to be coming back.",
+		}
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "It has passed.",

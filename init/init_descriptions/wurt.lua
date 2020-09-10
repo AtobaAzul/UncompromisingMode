@@ -129,6 +129,13 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 	DESCRIBE.BLOOMERSHOT = "Why hurt self?"
 	DESCRIBE.BERNIEBOX = "Fun box... what inside?"
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODEDWIDOW = "F-florp!! Im not bite-sized!"
+	DESCRIBE.GIANT_TREE = "Wurgh, big tree!"
+	DESCRIBE.BLUEBERRYPLANT =         
+		{
+            READY = "She's gonna blow!",
+			REGROWING = "It seems to be coming back.",
+		}
 	DESCRIBE.BERNIE_INACTIVE =
         {
             BROKEN = "Aww...",
