@@ -2,12 +2,25 @@ local assets =
 {
 Asset("ANIM", "anim/giant_tree.zip"),
 }
-local lootlist =
+local felloot =
 {
     "log",
 	"log",
     "twigs",
 	"spider",
+}
+local choploot =
+{
+    "log",
+	"log",
+    "twigs",
+	"twigs",
+	"twigs",
+	"spider",
+	"nothinglol",
+	"nothinglol",
+	"nothinglol",
+	"nothinglol",
 }
 --Code From quaker
 local function _BreakDebris(debris)
@@ -60,7 +73,7 @@ local function _GroundDetectionUpdate(debris, override_density)
                             if v.components.mine ~= nil then
                                 v.components.mine:Deactivate()
                             end
-                            Launch(v, debris, TUNING.LAUNCH_SPEED_SMALL)
+                            Launch(v, debris, TUNING.LAUNCH_SPEED_SMALL/10)
                         end
                     end
                 end
@@ -153,11 +166,11 @@ local function _GroundDetectionUpdate(debris, override_density)
     end
 
 end
-local function GetDebris()
-local loot = lootlist[math.random(#lootlist)]
+local function GetDebris(loottable)
+local loot = loottable[math.random(#loottable)]
 return loot
 end
-local function SpawnDebris(inst,chopper)
+local function SpawnDebris(inst,chopper,loottable)
 	local x,y,z = inst.Transform:GetWorldPosition()
 	if math.random() < 0.5 then
 		if math.random() < 0.5 then
@@ -174,8 +187,8 @@ local function SpawnDebris(inst,chopper)
 		end
 		x = x + math.random(-5,5)
 	end
-	local prefab = GetDebris()
-    if prefab ~= nil then
+	local prefab = GetDebris(loottable)
+    if prefab ~= nil or "nothinglol" then
         local debris = SpawnPrefab(prefab)
         if debris ~= nil then
             debris.entity:SetCanSleep(false)
@@ -214,10 +227,13 @@ local function on_chop(inst, chopper, remaining_chops)
     if not (chopper ~= nil and chopper:HasTag("playerghost")) then
         inst.SoundEmitter:PlaySound("turnoftides/common/together/driftwood/chop")
     end
-	SpawnDebris(inst,chopper)
 	local phase = 0
-	if not (chopper:HasTag("epic") or chopper:HasTag("antlion_sinkhole")) then 
+	if not (chopper:HasTag("epic") or chopper:HasTag("antlion_sinkhole")) then
+	local oldchops = inst.previouschops
 	inst.previouschops = remaining_chops
+	for k = 1, (oldchops-remaining_chops) do
+	SpawnDebris(inst,chopper,choploot)
+	end
 	end
 	if remaining_chops > 15 and remaining_chops < 20 then
     phase = 1
@@ -240,10 +256,10 @@ local function on_chop(inst, chopper, remaining_chops)
 end
 
 local function BringTheForestDown(inst,chopper)--!
-for i = 1, 3 + math.random(4,7) do
-SpawnDebris(inst,chopper)
-inst:DoTaskInTime(math.random(1,2),SpawnDebris(inst,chopper))
-inst:DoTaskInTime(math.random(4,5),SpawnDebris(inst,chopper))
+for i = 1, (3 + math.random(4,7)) do
+SpawnDebris(inst,chopper,felloot)
+inst:DoTaskInTime(math.random(1,2),SpawnDebris(inst,chopper,felloot))
+inst:DoTaskInTime(math.random(4,5),SpawnDebris(inst,chopper,felloot))
 end
 end
 local function on_chopped_down(inst, chopper)
@@ -270,7 +286,7 @@ local function Regrow(inst)
 	inst.ReadyToChop = true
 	inst:AddComponent("workable")
 	inst.components.workable:SetWorkAction(ACTIONS.CHOP)
-	inst.components.workable:SetWorkLeft(TUNING.DRIFTWOOD_TREE_CHOPS)
+	inst.components.workable:SetWorkLeft(25)
 	inst.components.workable:SetOnWorkCallback(on_chop)
 	inst.components.workable:SetOnFinishCallback(on_chopped_down)
 	inst.RegrowCounter = 0
@@ -284,18 +300,23 @@ end
 local function onsave(inst, data)
 data.ReadyToChop = inst.ReadyToChop
 data.RegrowCounter = inst.RegrowCounter
+data.previouschops = inst.previouschops
 end
 
 local function onload(inst,data)
 if data then
 inst.ReadyToChop = data.ReadyToChop
 inst.RegrowCounter = data.RegrowCounter
+inst.previouschops = data.previouschops
 else
 inst.ReadyToChop = true
 inst.RegrowCounter = 0
+inst.previouschops = 25
 end
+inst.components.workable:SetWorkLeft(inst.previouschops)
 inst:DoPeriodicTask(5,Regrow)
 end
+
 --Shadow Spawning Function, for now
 local function SpawnTreeShadows(inst)
 local x, y, z = inst.Transform:GetWorldPosition()
