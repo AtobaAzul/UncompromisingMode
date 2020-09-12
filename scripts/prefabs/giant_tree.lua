@@ -2,7 +2,7 @@ local assets =
 {
 Asset("ANIM", "anim/giant_tree.zip"),
 }
-local felloot =
+--[[local felloot =  -Rip
 {
     "log",
 	"log",
@@ -14,9 +14,10 @@ local felloot =
     "twigs",
 	"spider",
 	"fallingbeehive",
-}
+}]]
 local choploot =
 {
+	--"fallingbeehive",
     "log",
 	"log",
     "log",
@@ -27,7 +28,28 @@ local choploot =
     "twigs",
 	"twigs",
 	"twigs",
+    "log",
+	"log",
+    "log",
+	"log",
+    "twigs",
+	"twigs",
+	"twigs",
+    "twigs",
+	"twigs",
+	"twigs",
+	"bird_egg",
+	"feather",
 	"spider",
+	"nothinglol",
+	"nothinglol",
+	"nothinglol",
+	"nothinglol",
+	"nothinglol",
+	"nothinglol",
+	"nothinglol",
+	"nothinglol",
+	"nothinglol",
 	"nothinglol",
 	"nothinglol",
 	"nothinglol",
@@ -196,6 +218,21 @@ local function _GroundDetectionUpdate(debris, override_density)
 end
 local function GetDebris(loottable)
 local loot = loottable[math.random(#loottable)]
+if loot == "feather" then
+	if math.random() > 0.5 then
+	loot = "feather_crow"
+	else
+		if math.random() > 0.25 then
+			if not TheWorld.state.iswinter then
+			loot = "feather_robin"
+			else
+			loot = "feather_robin_winter"
+			end
+		else
+		loot = "feather_canary"
+		end
+	end
+end
 return loot
 end
 local function SpawnDebris(inst,chopper,loottable)
@@ -241,10 +278,14 @@ local function SpawnDebris(inst,chopper,loottable)
 			debris.updatetask = debris:DoPeriodicTask(FRAMES, _GroundDetectionUpdate, nil, 5)
 																						-- ^This Value is from quaker
 			else
+			if TheWorld.Map:IsVisualGroundAtPoint(x,y,z) then
 			debris.Physics:Teleport(x, y, z)
 			debris.sg:GoToState("dropper_enter")
 			if debris.components.combat ~= nil and not chopper:HasTag("spiderwhisperer") then
 			debris.components.combat:SuggestTarget(chopper)
+			end
+			else
+			debris:Remove()
 			end
 			end
 		end																				
@@ -307,7 +348,7 @@ local function on_chopped_down(inst, chopper)
 	inst:RemoveComponent("workable")
 	inst.AnimState:PlayAnimation("damaged-4")
 	--BringTheForestDown(inst,chopper)--!
-	inst.components.timer:StartTimer("regrow", 30)
+	inst.components.timer:StartTimer("regrow", 3840)
 	end
 end
 

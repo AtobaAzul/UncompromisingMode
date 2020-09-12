@@ -36,7 +36,7 @@ local RETARGET_CANT_TAGS = { "INLIMBO" }
 local function Retarget(inst)
     if not inst.components.health:IsDead() and not inst.components.sleeper:IsAsleep() then
         local oldtarget = inst.components.combat.target
-        local newtarget = FindEntity(inst, 10, 
+        local newtarget = FindEntity(inst, 20, 
             function(guy) 
                 return (guy:HasTag("player"))
                     and inst.components.combat:CanTarget(guy) 
@@ -172,6 +172,11 @@ end
 local function Reset(inst)
     inst.reset = true
 end
+
+local function OnKilledOther(inst)
+inst.justkilled = true
+inst:DoTaskInTime(1, function(inst) inst.justkilled = false end)
+end
 local function fn()
     local inst = CreateEntity()
 
@@ -280,7 +285,8 @@ local function fn()
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("death", OnDead)
 	inst:DoPeriodicTask(3, TryPowerMove)
-
+	inst.justkilled = false
+	inst:ListenForEvent("killed", OnKilledOther)
 
     return inst
 end

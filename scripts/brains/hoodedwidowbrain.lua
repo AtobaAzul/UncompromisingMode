@@ -13,7 +13,7 @@ end)
 -----------------------------------------------------------------
 local MAX_CHASE_TIME = 10
 local MAX_CHASE_DIST = 30
-
+local FLEE_WARNING_DELAY = 3.5
 local function EquipMeleeAndResetCooldown(inst)
     if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
         inst.components.combat:ResetCooldown()
@@ -79,31 +79,32 @@ local function ShouldResetFight(self)
         end
 		end
 end
+
 function HoodedWidowBrain:OnStart()
     local root = PriorityNode(
     {	
-	            WhileNode(function() return ShouldResetFight(self) or not self.inst.components.combat.target end, "Reset Fight",
+				WhileNode(function() return ShouldResetFight(self) end, "Reset Fight",
                 PriorityNode({
+                    DoAction(self.inst, GoHomeAction), --no delay
+                }, .25)),
+				
+	            WhileNode(function() return not self.inst.components.combat.target  end, "Reset Fight",
+                PriorityNode({
+					WaitNode(FLEE_WARNING_DELAY),
                     DoAction(self.inst, GoHomeAction),
                 }, .25)),
-		
+				
     	WhileNode( function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
         WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
 		WhileNode(function() return CanRangeNow(self.inst) and not ShouldResetFight(self)  end, "AttackMomentarily",
             SequenceNode({
                 ActionNode(function() EquipRange(self.inst) end, "Equip phlegm"),
                 ChaseAndAttack(self.inst) })),
-
-		--[[WhileNode(function() return CanLeapNow(self.inst) end, "AttackMomentarily",
-            SequenceNode({
-                ActionNode(function() EquipLeap(self.inst) end, "Equip phlegm"),
-                ChaseAndAttack(self.inst, MAX_CHASE_TIME) })),]]
 		WhileNode(function() return not ShouldResetFight(self) end, "Attack",
             SequenceNode({
                 ActionNode(function() EquipMeleeAndResetCooldown(self.inst) end, "Equip melee"),
                 ChaseAndAttack(self.inst) })),
         
-        Wander(self.inst),
     }, 2)
     
     self.bt = BT(self.inst, root)

@@ -8,7 +8,20 @@ local prefabs =
     "spider_dropper",
 }
 
+local function OnKilled(inst)
+    inst.components.timer:StartTimer("regen_widow", TUNING.DRAGONFLY_RESPAWN_TIME)
+end
 
+local function GenerateNewWidow(inst)
+    inst.components.childspawner:AddChildrenInside(1)
+    --inst.components.childspawner:StartSpawning()
+end
+
+local function ontimerdone(inst, data)
+    if data.name == "regen_widow" then
+        GenerateNewWidow(inst)
+    end
+end
 local function SpawnInvestigators(inst, data)
     if inst.components.childspawner ~= nil then
             local spider = inst.components.childspawner:SpawnChild(data.target, nil, 3)
@@ -42,13 +55,16 @@ local function fn()
 
    -- inst:AddComponent("health")
     --inst.components.health.nofadeout = true
-	inst:AddTag("widowweb")
     inst:AddComponent("childspawner")
-    inst.components.childspawner:SetRegenPeriod(100)
-    inst.components.childspawner:SetSpawnPeriod(100)
-    inst.components.childspawner:SetMaxChildren(1)
-    inst.components.childspawner:StartRegen()
     inst.components.childspawner.childname = "hoodedwidow"
+    inst.components.childspawner:SetMaxChildren(1)
+    inst.components.childspawner:SetSpawnPeriod(TUNING.DRAGONFLY_SPAWN_TIME, 0)
+    inst.components.childspawner.onchildkilledfn = OnKilled
+    --inst.components.childspawner:StartSpawning()
+    inst.components.childspawner:StopRegen()
+
+    inst:AddComponent("timer")
+    inst:ListenForEvent("timerdone", ontimerdone)
     return inst
 end
 
