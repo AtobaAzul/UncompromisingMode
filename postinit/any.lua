@@ -21,6 +21,14 @@ local IMPASSABLES = {
     ["chesspiece_butterfly"] = true,
     ["chesspiece_anchor"] = true,
     ["chesspiece_moon"] = true,
+	["chesspiece_minotaur"] = true,
+	["chesspiece_toadstool"] = true,
+	["chesspiece_beequeen"] = true,
+	["chesspiece_klaus"] = true,
+	["chesspiece_antlion"] = true,
+	["chesspiece_ancientFuelweaver"] = true,
+	["chesspiece_malbatross"] = true,
+	["chesspiece_crabking"] = true,
     ["endtable"] = true,
     ["fossil_stalker"] = true, --Hornet: Why are we making the stalkers passable nocliped?
     ["homesign"] = true,
@@ -29,6 +37,9 @@ local IMPASSABLES = {
     ["gravestone"] = true,
     ["arrowsign_post"] = true,
 	["lureplant"] = true,
+	["spiderden"] = true,
+	["spiderden_2"] = true,
+	["spiderden_3"] = true,
 }
 
 env.AddPrefabPostInitAny(function(inst)

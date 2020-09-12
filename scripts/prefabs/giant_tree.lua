@@ -6,17 +6,33 @@ local felloot =
 {
     "log",
 	"log",
+    "log",
+	"log",
+    "twigs",
+    "twigs",
+    "twigs",
     "twigs",
 	"spider",
+	"fallingbeehive",
 }
 local choploot =
 {
     "log",
 	"log",
+    "log",
+	"log",
+    "twigs",
+	"twigs",
+	"twigs",
     "twigs",
 	"twigs",
 	"twigs",
 	"spider",
+	"nothinglol",
+	"nothinglol",
+	"nothinglol",
+	"nothinglol",
+	"nothinglol",
 	"nothinglol",
 	"nothinglol",
 	"nothinglol",
@@ -36,6 +52,12 @@ local NON_SMASHABLE_TAGS = { "INLIMBO", "playerghost", "irreplaceable" }
 local function _GroundDetectionUpdate(debris, override_density)
     local x, y, z = debris.Transform:GetWorldPosition()
     if y <= .2 then
+		if debris:HasTag("hive") then
+			if debris.components.health ~= nil then
+			debris.components.health:Kill()
+			--return -- We have to stop hive here
+			end
+		end
         if not debris:IsOnValidGround() then
             debris:PushEvent("detachchild")
             debris:Remove()
@@ -141,7 +163,9 @@ local function _GroundDetectionUpdate(debris, override_density)
         end
         local scaleFactor = Lerp(.5, 1.5, y / 35)
 		debris.shadow.Transform:SetScale(scaleFactor, scaleFactor, scaleFactor)
+		if debris.components.inventoryitem ~= nil then
 		debris.components.inventoryitem.canbepickedup = true
+		end
     elseif debris:IsInLimbo() then
         --failsafe, but maybe we got trapped or picked up somehow, so keep it
         debris.persists = true
@@ -157,14 +181,18 @@ local function _GroundDetectionUpdate(debris, override_density)
             end
         end
         debris:PushEvent("stopfalling")
+		if debris.components.inventoryitem ~= nil then
 		debris.components.inventoryitem.canbepickedup = true
+		end
     elseif debris.prefab == "mole" or debris.prefab == "rabbit" then
         --failsafe
         debris:PushEvent("detachchild")
         debris:Remove()
+	if debris.components.inventoryitem ~= nil then
 	debris.components.inventoryitem.canbepickedup = true
+	end
     end
-
+	
 end
 local function GetDebris(loottable)
 local loot = loottable[math.random(#loottable)]
@@ -193,6 +221,7 @@ local function SpawnDebris(inst,chopper,loottable)
         if debris ~= nil then
             debris.entity:SetCanSleep(false)
             debris.persists = false
+			
 
             if debris.components.inventoryitem ~= nil and debris.components.inventoryitem.canbepickedup then
                 debris.components.inventoryitem.canbepickedup = false
@@ -214,7 +243,7 @@ local function SpawnDebris(inst,chopper,loottable)
 			else
 			debris.Physics:Teleport(x, y, z)
 			debris.sg:GoToState("dropper_enter")
-			if debris.components.combat ~= nil then
+			if debris.components.combat ~= nil and not chopper:HasTag("spiderwhisperer") then
 			debris.components.combat:SuggestTarget(chopper)
 			end
 			end
@@ -269,52 +298,50 @@ local function on_chopped_down(inst, chopper)
 	inst.components.workable:SetWorkLeft(inst.previouschops)
 	inst.components.workable:SetOnWorkCallback(on_chop)
 	inst.components.workable:SetOnFinishCallback(on_chopped_down)
-	inst.RegrowCounter = 0
 	inst.AnimState:PlayAnimation("damaged-0")
 	else
+	inst.previouschops = 0
+	inst.chopped = true
     inst.SoundEmitter:PlaySound("dontstarve/forest/appear_wood")
     inst.SoundEmitter:PlaySound("dontstarve/forest/treeCrumble",nil,.4)
 	inst:RemoveComponent("workable")
-	inst.ReadyToChop = false
 	inst.AnimState:PlayAnimation("damaged-4")
-	BringTheForestDown(inst,chopper)--!
+	--BringTheForestDown(inst,chopper)--!
+	inst.components.timer:StartTimer("regrow", 30)
 	end
 end
 
 local function Regrow(inst)
-	if inst.ReadyToChop == false and inst.RegrowCounter > 10 then
-	inst.ReadyToChop = true
+	inst.chopped = false
 	inst:AddComponent("workable")
 	inst.components.workable:SetWorkAction(ACTIONS.CHOP)
 	inst.components.workable:SetWorkLeft(25)
 	inst.components.workable:SetOnWorkCallback(on_chop)
 	inst.components.workable:SetOnFinishCallback(on_chopped_down)
-	inst.RegrowCounter = 0
 	inst.AnimState:PlayAnimation("damaged-0")
-	end
-	if inst.ReadyToChop == false then
-	inst.RegrowCounter = inst.RegrowCounter + 1
-	end
 end
 
 local function onsave(inst, data)
-data.ReadyToChop = inst.ReadyToChop
-data.RegrowCounter = inst.RegrowCounter
 data.previouschops = inst.previouschops
+data.chopped = inst.chopped
 end
 
 local function onload(inst,data)
 if data then
-inst.ReadyToChop = data.ReadyToChop
-inst.RegrowCounter = data.RegrowCounter
 inst.previouschops = data.previouschops
+if data.chopped == true then
+inst:RemoveComponent("workable")
+end
 else
-inst.ReadyToChop = true
-inst.RegrowCounter = 0
 inst.previouschops = 25
 end
-inst.components.workable:SetWorkLeft(inst.previouschops)
-inst:DoPeriodicTask(5,Regrow)
+
+
+if inst.components.workable ~= nil and inst.components.workable:CanBeWorked() then
+inst.AnimState:PlayAnimation("damaged-0")
+else
+inst.AnimState:PlayAnimation("damaged-4")
+end
 end
 
 --Shadow Spawning Function, for now
@@ -349,24 +376,23 @@ local function makefn()
         inst.AnimState:SetBank("giant_tree")
         inst.AnimState:SetBuild("giant_tree")
         inst.AnimState:PlayAnimation("damaged-0", true)
+
         inst.entity:SetPristine()
 		
         if not TheWorld.ismastersim then
             return inst
         end
 		inst:AddComponent("workable")
-		
 		inst.components.workable:SetWorkAction(ACTIONS.CHOP)
 		inst.components.workable:SetWorkLeft(25)
 
 		inst.components.workable:SetOnWorkCallback(on_chop)
 		inst.components.workable:SetOnFinishCallback(on_chopped_down)
-		
+		inst:AddComponent("timer")
+		inst:ListenForEvent("timerdone", Regrow)
 		inst:AddComponent("inspectable")
-		inst.ReadyToChop = true
-		inst.RegrowCounter = 0
 		inst.previouschops = nil
-		inst:DoPeriodicTask(5,Regrow)
+		--inst:DoPeriodicTask(5,Regrow)
 		inst:DoTaskInTime(0,SpawnTreeShadows)
 		inst.OnSave = onsave
 		inst.OnLoad = onload
