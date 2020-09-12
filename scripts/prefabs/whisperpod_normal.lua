@@ -18,7 +18,7 @@ local function onmatured(inst)
     end
 	
 	local pos = inst:GetPosition()
-    local snappy = SpawnPrefab("snapdragon")
+    local snappy = SpawnPrefab("snapdragon_buddy")
 	snappy.Transform:SetPosition(pos:Get())
 	snappy.sg:GoToState("create")
     SpawnPrefab("snapdragonherd").Transform:SetPosition(pos:Get())

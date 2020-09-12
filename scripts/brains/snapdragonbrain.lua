@@ -29,7 +29,7 @@ local function EatFoodAction(inst)
             item.components.bait and
             not item:HasTag("planted") and
             not (item.components.inventoryitem and
-                item.components.inventoryitem:IsHeld()) and inst.components.follower.leader == nil or item:HasTag("insect") and item.components and item.components.edible and inst.components.follower.leader == nil
+                item.components.inventoryitem:IsHeld()) and (inst.components.follower and inst.components.follower.leader == nil) or item:HasTag("insect") and item.components and item.components.edible and (inst.components.follower and inst.components.follower.leader == nil)
         end)
     if target then
         local act = BufferedAction(inst, target, ACTIONS.EAT)

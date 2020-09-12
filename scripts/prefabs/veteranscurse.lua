@@ -17,7 +17,7 @@ local function ForceToTakeMoreHunger(inst)
 	local self = inst.components.hunger
 	local _DoDelta = self.DoDelta
 	self.DoDelta = function(self, delta, overtime, ignore_invincible)
-	if delta and delta < 0 then
+	if delta and overtime and delta < 0 then
 		-- Take extra hunger
 		delta = delta * 1.2
 		--print(delta)
@@ -42,7 +42,7 @@ local function ForceToTakeUsualHunger(inst)
 	local self = inst.components.hunger
 	local _DoDelta = self.DoDelta
 	self.DoDelta = function(self, delta, overtime, ignore_invincible)
-	if delta then
+	if delta and overtime and delta < 0 then
 		-- Take normal hunger
 		delta = delta / 1.2
 		--print(delta)

@@ -18,15 +18,8 @@ SetSharedLootTable( 'snapdragon',
     --{'whisperpod',             1.00},
     {'plantmeat',        1.00},
     {'dragonfruit_seeds',        1.00},
-    {'flower',                 1.00},
+    {'petals',                 1.00},
 })
-
-local periodictable = 
-{
-    {'dragonfruit_seeds',      0.05},
-    {'flower',                 0.90},
-}
-
 
 local sounds = 
 {
@@ -81,7 +74,7 @@ local function OnEat(inst, data)
 end
 
 local function GetStatus(inst)
-    if inst.components.follower.leader ~= nil then
+    if inst.components.follower and inst.components.follower.leader ~= nil then
         return "FOLLOWER"
     end
 end
@@ -147,7 +140,7 @@ end
 
 local function LaunchItem(inst, item, angle, minorspeedvariance)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local spd = 3.5 + math.random() * (minorspeedvariance and 1 or 3.5)
+    local spd = 1.5 + math.random() * (minorspeedvariance and 1 or 3.5)
     item.Physics:ClearCollisionMask()
     item.Physics:CollidesWith(COLLISION.WORLD)
     item.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
@@ -173,6 +166,51 @@ local function OnGetItemFromPlayer(inst, giver, item)
     if inst.components.eater:CanEat(item) then
         inst.components.eater:Eat(item, giver)
         inst.sg:GoToState("eat")--, true)
+
+		-- Increase the amount of food in the stomach.
+		inst.foodItemsEatenCount = inst.foodItemsEatenCount + 1
+		
+		if inst.foodItemsEatenCount >= 4 then
+			inst.sg:GoToState("taunt")
+			
+			if not inst.podspawned then
+				inst.AnimState:SetMultColour(0.6, 0.8, 0.8, 1)
+				inst.podspawned = true
+	
+				local item = SpawnPrefab("whisperpod")
+				local angle = math.random() * 2 * PI
+				local delta = 2 * PI / 3 --/ (numgold + numprops + 1) --purposely leave a random gap
+				local variance = delta * .4
+				
+				LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
+			else
+				if math.random() >= 0.5 then
+					local item = SpawnPrefab("seeds")
+					local angle = math.random() * 2 * PI
+					local delta = 2 * PI / 3 --/ (numgold + numprops + 1) --purposely leave a random gap
+					local variance = delta * .4
+					
+					LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
+				else
+					local item = SpawnPrefab("dragonfruit_seeds")
+					local angle = math.random() * 2 * PI
+					local delta = 2 * PI / 3 --/ (numgold + numprops + 1) --purposely leave a random gap
+					local variance = delta * .4
+					
+					LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
+				end
+			end
+			
+			inst.foodItemsEatenCount = 0
+		end
+		
+    end
+end
+
+local function OnGetItemFromPlayer_Buddy(inst, giver, item)
+    if inst.components.eater:CanEat(item) then
+        inst.components.eater:Eat(item, giver)
+        inst.sg:GoToState("eat")--, true)
 		
         if inst.components.combat.target == giver then
             inst.components.combat:SetTarget(nil)
@@ -188,16 +226,15 @@ local function OnGetItemFromPlayer(inst, giver, item)
 		-- Increase the amount of food in the stomach.
 		inst.foodItemsEatenCount = inst.foodItemsEatenCount + 1
 		
-		if inst.foodItemsEatenCount >= 4 then
+		if inst.foodItemsEatenCount >= 2 then
 			inst.sg:GoToState("taunt")
-			
-			local item = SpawnPrefab("whisperpod")
+			local item = SpawnPrefab(inst.seeds)
 			local angle = math.random() * 2 * PI
 			local delta = 2 * PI / 3 --/ (numgold + numprops + 1) --purposely leave a random gap
 			local variance = delta * .4
-			
+				
 			LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
-			
+				
 			inst.foodItemsEatenCount = 0
 		end
 		
@@ -217,7 +254,27 @@ local function OnAttackOther(inst, data)
     end
 end
 
-local function fn(Sim)
+local function OnSave(inst, data)
+	if inst.podspawned ~= nil then
+		data.podspawned = inst.podspawned
+	end
+end
+
+local function OnLoad(inst, data)
+	if data ~= nil and data.podspawned ~= nil then
+		inst.podspawned = data.podspawned
+	end
+end
+
+local function InitPodSpawned(inst)
+	if inst.podspawned ~= nil then
+		if inst.podspawned then
+			inst.AnimState:SetMultColour(0.6, 0.8, 0.8, 1)
+		end
+	end
+end
+
+local function common_fn(scale)
 	local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
 	local anim = inst.entity:AddAnimState()
@@ -236,8 +293,8 @@ local function fn(Sim)
     inst.foodItemsEatenCount = 0
     
     MakeCharacterPhysics(inst, 100, 0.2)
-    --[[local scale = 1.22
-    inst.Transform:SetScale(scale, scale, scale)]]
+	
+    inst.Transform:SetScale(scale, scale, scale)
     
     inst:AddTag("snapdragon")
 
@@ -254,7 +311,7 @@ local function fn(Sim)
     end
 	
     inst:AddComponent("eater")
-    inst.components.eater:SetDiet({ FOODTYPE.VEGGIE, FOODTYPE.INSECT }, { FOODTYPE.INSECT })
+    inst.components.eater:SetDiet({ FOODTYPE.INSECT, FOODTYPE.VEGGIE }, { FOODTYPE.INSECT, FOODTYPE.VEGGIE })
 	
     --inst.components.eater:SetSnappy()
     inst.components.eater:SetOnEatFn(OnEat)
@@ -264,13 +321,9 @@ local function fn(Sim)
     inst.components.combat:SetDefaultDamage(34)
     inst.components.combat:SetRetargetFunction(1, Retarget)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
-	--inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE * 0.1, TUNING.DEERCLOPS_AOE_SCALE * 0.1, isnotsnapdragon)
-     
+
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(TUNING.BEEFALO_HEALTH)
-
-    inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetChanceLootTable('snapdragon')    
     
     inst:AddComponent("inspectable")
     inst.components.inspectable.getstatus = GetStatus
@@ -278,40 +331,23 @@ local function fn(Sim)
     inst:AddComponent("knownlocations")
     inst:AddComponent("herdmember")
     inst.components.herdmember:SetHerdPrefab("snapdragonherd")
+	
+    inst:AddComponent("lootdropper")
+    inst.components.lootdropper:SetChanceLootTable('snapdragon')
+	
+    inst:AddComponent("locomotor")
     
     inst:AddComponent("leader")
-    inst:AddComponent("follower")
-    inst.components.follower.maxfollowtime = TUNING.BEEFALO_FOLLOW_TIME
-    inst.components.follower.canaccepttarget = false
 	
     inst:ListenForEvent("newcombattarget", OnNewTarget)
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("onattackother", OnAttackOther)
---[[
-    inst:AddComponent("periodicspawner")
-    inst.components.periodicspawner:SetPrefab("dragonfruit_seeds")
-    --inst.components.periodicspawner.chancetable = periodictable
-    inst.components.periodicspawner:SetRandomTimes(40, 60)
-    inst.components.periodicspawner:SetDensityInRange(20, 2)
-    inst.components.periodicspawner:SetMinimumSpacing(8)
-    inst.components.periodicspawner:Start()
-]]
-	inst:AddComponent("trader")
-    inst.components.trader:SetAcceptTest(ShouldAcceptItem)
-    inst.components.trader.onaccept = OnGetItemFromPlayer
-    inst.components.trader.onrefuse = OnRefuseItem
-    inst.components.trader.deleteitemonaccept = false
 
     MakeLargeBurnableCharacter(inst, "swap_fire")
     MakeLargeFreezableCharacter(inst, "beefalo_body")
     
-    inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-    inst.components.locomotor.walkspeed = 3
-    inst.components.locomotor:SetTriggersCreep(false)
-	
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetResistance(3)
-	
 	
     inst.pollen = net_tinybyte(inst.GUID, "wormwood.pollen", "pollendirty")
     inst.pollentask = nil
@@ -325,7 +361,67 @@ local function fn(Sim)
     local brain = require "brains/snapdragonbrain"
     inst:SetBrain(brain)
     inst:SetStateGraph("SGSnapdragon")
+	
+	inst.podspawned = nil
+	
+	inst.OnSave = OnSave
+	inst.OnLoad = OnLoad
+	
+	inst:DoTaskInTime(0, InitPodSpawned)
+	
     return inst
 end
 
-return Prefab( "snapdragon", fn, assets, prefabs) 
+local function prime_fn()
+    local inst = common_fn(1.33)
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+	inst:AddComponent("trader")
+    inst.components.trader:SetAcceptTest(ShouldAcceptItem)
+    inst.components.trader.onaccept = OnGetItemFromPlayer
+    inst.components.trader.onrefuse = OnRefuseItem
+    inst.components.trader.deleteitemonaccept = true
+	
+    inst.components.locomotor.walkspeed = 3
+    inst.components.locomotor:SetTriggersCreep(false)
+
+    return inst
+end
+
+local function buddy_fn()
+    local inst = common_fn(1)
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	if inst.seeds == nil then
+		inst.seeds = "watermelon_seeds"
+	end
+	
+    inst:AddComponent("follower")
+    inst.components.follower.maxfollowtime = TUNING.BEEFALO_FOLLOW_TIME
+    inst.components.follower.canaccepttarget = false
+
+	inst:AddComponent("trader")
+    inst.components.trader:SetAcceptTest(ShouldAcceptItem)
+    inst.components.trader.onaccept = OnGetItemFromPlayer_Buddy
+    inst.components.trader.onrefuse = OnRefuseItem
+    inst.components.trader.deleteitemonaccept = true
+	
+    inst.components.locomotor.walkspeed = 2.77
+    inst.components.locomotor:SetTriggersCreep(false)
+	
+	inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("hair", "snapdragon_build_watermelon", "hair") end)
+	inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("ear", "snapdragon_build_watermelon", "ear") end)
+	inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("face", "snapdragon_build_watermelon", "face") end)
+	inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("jaw", "snapdragon_build_watermelon", "jaw") end)
+
+    return inst
+end
+
+return Prefab( "snapdragon", prime_fn, assets, prefabs),
+		Prefab( "snapdragon_buddy", buddy_fn, assets, prefabs) 
