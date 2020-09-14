@@ -23,6 +23,12 @@ local function onmatured(inst)
 	snappy.sg:GoToState("create")
     SpawnPrefab("snapdragonherd").Transform:SetPosition(pos:Get())
 	
+	snappy:DoTaskInTime(0, function(snappy) snappy.AnimState:OverrideSymbol("hair", "snapdragon_build_"..inst.planted or "snapdragon_build", "hair") end)
+	snappy:DoTaskInTime(0, function(snappy) snappy.AnimState:OverrideSymbol("ear", "snapdragon_build_"..inst.planted or "snapdragon_build", "ear") end)
+	snappy:DoTaskInTime(0, function(snappy) snappy.AnimState:OverrideSymbol("face", "snapdragon_build_"..inst.planted or "snapdragon_build", "face") end)
+	snappy:DoTaskInTime(0, function(snappy) snappy.AnimState:OverrideSymbol("jaw", "snapdragon_build_"..inst.planted or "snapdragon_build", "jaw") end)
+	snappy.seeds = inst.planted or "seeds"
+	
 	inst.components.workable:SetWorkAction(nil)
 	inst:Remove()
 end
@@ -51,9 +57,16 @@ end
 local function OnGetItemFromPlayer(inst, giver, item)
     if item.components.plantable ~= nil and not inst.growing then
 		inst:AddComponent("crop")
-		inst.components.crop:StartGrowing("snapdragon", TUNING.SEEDS_GROW_TIME / 4)
+		inst.components.crop:StartGrowing("snapdragon", TUNING.SEEDS_GROW_TIME / 40)
 		inst.components.crop:SetOnMatureFn(onmatured)
 		inst.growing = true
+		
+		if (item.prefab == "watermelon_seeds" or "pomegranate_seeds" or "pumpkin_seeds" or "dragonfruit_seeds" or "eggplant_seeds" or "durian_seeds") then
+			inst.planted = item.prefab
+			inst.AnimState:SetBuild("snapdragon_build_"..inst.planted)
+		else
+			inst.planted = "seeds"
+		end
     end
 end
 
@@ -67,11 +80,16 @@ end
 
 local function OnSave(inst, data)
     data.burnt = inst.growing
+    data.planted = inst.planted
 end
 
 local function OnPreLoad(inst, data)
     if data ~= nil and data.growing then
         inst.growing = data.growing
+    end
+	
+    if data ~= nil and data.planted then
+        inst.planted = data.planted
     end
 end
 
@@ -79,6 +97,11 @@ local function OnInit(inst, data)
     if not inst.growing then
 		inst:RemoveComponent("crop")
     end
+	
+	
+    if inst.planted ~= nil then
+		inst.AnimState:SetBuild("snapdragon_build_"..inst.planted)
+	end
 end
 
 --------------------------------------------------------------------------
@@ -137,6 +160,7 @@ local function fn()
 	inst.components.burnable:SetOnExtinguishFn(nil)
 	
 	inst.growing = false
+	inst.planted = nil
 	
     inst.OnSave = OnSave
     inst.OnPreLoad = OnPreLoad

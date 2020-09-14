@@ -258,11 +258,19 @@ local function OnSave(inst, data)
 	if inst.podspawned ~= nil then
 		data.podspawned = inst.podspawned
 	end
+	
+	if inst.seeds ~= nil then
+		data.seeds = inst.seeds
+	end
 end
 
 local function OnLoad(inst, data)
 	if data ~= nil and data.podspawned ~= nil then
 		inst.podspawned = data.podspawned
+	end
+	
+	if data ~= nil and data.seeds ~= nil then
+		inst.seeds = data.seeds
 	end
 end
 
@@ -271,6 +279,10 @@ local function InitPodSpawned(inst)
 		if inst.podspawned then
 			inst.AnimState:SetMultColour(0.6, 0.8, 0.8, 1)
 		end
+	end
+	
+	if inst.seeds ~= nil then
+		inst.AnimState:SetBuild("snapdragon_build_"..inst.seeds)
 	end
 end
 
@@ -399,7 +411,7 @@ local function buddy_fn()
     end
 	
 	if inst.seeds == nil then
-		inst.seeds = "watermelon_seeds"
+		inst.seeds = "seeds"
 	end
 	
     inst:AddComponent("follower")
@@ -414,11 +426,6 @@ local function buddy_fn()
 	
     inst.components.locomotor.walkspeed = 2.77
     inst.components.locomotor:SetTriggersCreep(false)
-	
-	inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("hair", "snapdragon_build_watermelon", "hair") end)
-	inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("ear", "snapdragon_build_watermelon", "ear") end)
-	inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("face", "snapdragon_build_watermelon", "face") end)
-	inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("jaw", "snapdragon_build_watermelon", "jaw") end)
 
     return inst
 end
