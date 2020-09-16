@@ -174,8 +174,11 @@ local function OnGetItemFromPlayer(inst, giver, item)
 			inst.sg:GoToState("taunt")
 			
 			if not inst.podspawned then
-				inst.AnimState:SetMultColour(0.6, 0.8, 0.8, 1)
+				inst.AnimState:SetMultColour(1, 0.8, 0.8, 1)
 				inst.podspawned = true
+				
+				inst.components.timer:StopTimer("podreset")
+				inst.components.timer:StartTimer("podreset", 19200)
 	
 				local item = SpawnPrefab("whisperpod")
 				local angle = math.random() * 2 * PI
@@ -277,13 +280,20 @@ end
 local function InitPodSpawned(inst)
 	if inst.podspawned ~= nil then
 		if inst.podspawned then
-			inst.AnimState:SetMultColour(0.6, 0.8, 0.8, 1)
+			inst.AnimState:SetMultColour(1, 0.8, 0.8, 1)
 		end
 	end
 	
 	if inst.seeds ~= nil then
 		inst.AnimState:SetBuild("snapdragon_build_"..inst.seeds)
 	end
+end
+
+local function ontimerdone(inst, data)
+    if data.name == "podreset" then
+		inst.podspawned = false
+		inst.AnimState:SetMultColour(1, 1, 1, 1)
+    end
 end
 
 local function common_fn(scale)
@@ -396,6 +406,9 @@ local function prime_fn()
     inst.components.trader.onaccept = OnGetItemFromPlayer
     inst.components.trader.onrefuse = OnRefuseItem
     inst.components.trader.deleteitemonaccept = true
+	
+    inst:AddComponent("timer")
+    inst:ListenForEvent("timerdone", ontimerdone)
 	
     inst.components.locomotor.walkspeed = 3
     inst.components.locomotor:SetTriggersCreep(false)
