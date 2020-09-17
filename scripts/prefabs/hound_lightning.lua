@@ -23,7 +23,7 @@ local function Zap(inst)
 	SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
 	SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
 	SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
-    local ents = TheSim:FindEntities(x, y, z, 3.5, { "_combat" }, { "INLIMBO", "shadow", "hound" })
+    local ents = TheSim:FindEntities(x, y, z, 3.5, { "_health" }, { "INLIMBO", "shadow", "hound" })
 	
 	for i, v in ipairs(ents) do
 		if v ~= nil and v.components.health ~= nil and not v.components.health:IsDead() then
@@ -48,9 +48,9 @@ local function fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
-	inst.entity:AddAnimState()
+	--inst.entity:AddAnimState()
     inst.entity:AddNetwork()
-
+--[[
     inst.AnimState:SetBank("sinkhole")
     inst.AnimState:SetBuild("antlion_sinkhole")
     inst.AnimState:PlayAnimation("idle")
@@ -61,7 +61,7 @@ local function fn()
 	inst.AnimState:SetMultColour(1, 1, 0, 0)
 
     inst.Transform:SetEightFaced()
-	
+]]
 	inst:AddTag("hound_lightning")
 
     inst.entity:SetPristine()

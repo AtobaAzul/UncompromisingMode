@@ -225,7 +225,7 @@ local function moon_keeptargetfn(inst, target)
 end
 
 local function OnAttacked(inst, data)
-	if data ~= nil and data.attacker ~= nil then
+	if inst.sg:HasStateTag("charging") and data ~= nil and data.attacker ~= nil then
 		if data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead() and
 			(data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) and
 			not (data.attacker.components.inventory ~= nil and data.attacker.components.inventory:IsInsulated()) then

@@ -12,19 +12,9 @@ local events =
     EventHandler("doattack", function(inst, data) 
 		if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then 
 			if inst.lightningshot then
-				inst.sg:GoToState("howl", data.target) 
-			else
-				if data.target:HasTag("player") then 
-					inst.sg:GoToState(
-						data.target:IsValid()
-						and inst:IsNear(data.target, 3)
-						and "attack"
-						or "charging_pre",
-						data.target
-					)
-				elseif data.target:IsValid() and inst:IsNear(data.target, 3) then
-					inst.sg:GoToState("attack", data.target)
-				end
+				inst.sg:GoToState("charging_pre", data.target) 
+			elseif data.target:IsValid() and inst:IsNear(data.target, 3) then
+				inst.sg:GoToState("attack", data.target)
 			end
 		end 
 	end),
@@ -169,7 +159,7 @@ local states =
 	
 	State{
         name = "charging_loop",
-        tags = { "attack", "canrotate", "busy" },
+        tags = { "attack", "canrotate", "busy", "charging" },
         onenter = function(inst)
             inst.SoundEmitter:PlaySound(inst.sounds.pant)
             inst.Physics:Stop()
@@ -196,7 +186,7 @@ local states =
 
         events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst) inst.sg:GoToState("howl") end),
         },
     },
 
