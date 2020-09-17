@@ -121,6 +121,7 @@ Assets = {
 	Asset("ANIM", "anim/snapdragon_build_pumpkin_seeds.zip"),
 	Asset("ANIM", "anim/snapdragon_build_watermelon_seeds.zip"),
 	Asset("ANIM", "anim/whisperpod_normal_ground.zip"),
+	Asset("ANIM", "anim/hound_lightning.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),

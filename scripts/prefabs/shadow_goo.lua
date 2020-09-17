@@ -31,9 +31,9 @@ end
 local function doprojectilehit(inst, other)
     local caster = (inst._caster ~= nil and inst._caster:IsValid()) and inst._caster or nil
 
-	local other = other or FindEntity(inst, TUNING.WARG_GOO_RADIUS * 1.25, { "_combat", "player" }, { "INLIMBO", "shadow" })
+	local other = other or FindEntity(inst, TUNING.WARG_GOO_RADIUS * 1.5, { "_combat", "player" }, { "INLIMBO", "shadow" })
 	if other ~= nil and other ~= caster and other.components.combat ~= nil  then
-        if other.components.sanity ~= nil and (other.components.health == nil or not other.components.health:IsDead()) and other.components.sanity:IsInsane() and other.components.inkable and not other:HasTag("shadowdominant") then
+        if other.components.sanity ~= nil and other.components.health ~= nil and not other.components.health:IsDead() and other.components.sanity:IsInsane() and other.components.inkable and not other:HasTag("shadowdominant") then
 			DoSplatFx(other.components.pinnable.stuck and inst or other)
             other.components.inkable:Ink()
 			other.components.combat:GetAttacked(caster, TUNING.WARG_GOO_DAMAGE/2)

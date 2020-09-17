@@ -139,4 +139,6 @@ return {
 	"whisperpod_normal",
 	"hooded_fern",
 	"fallingbeehive",
+	"lightninghound",
+	"hound_lightning",
 }
