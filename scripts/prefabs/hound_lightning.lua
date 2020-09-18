@@ -6,7 +6,16 @@ local assets =
 local function Sparks(inst)
 
 	local x, y, z = inst.Transform:GetWorldPosition()
-	SpawnPrefab("sparks").Transform:SetPosition(x + math.random(-2,2), y + .25, z + math.random(-2,2))
+	
+	local x1 = x + math.random(-2, 2)
+	local z1 = z + math.random(-2, 2)
+	
+	if math.random() >= 0.6 then
+		SpawnPrefab("electricchargedfx").Transform:SetPosition(x1, 0, z1)
+	end
+	
+    SpawnPrefab("sparks").Transform:SetPosition(x1, 0 + 0.25 * math.random(), z1)
+
 end
 
 local function Zap(inst)

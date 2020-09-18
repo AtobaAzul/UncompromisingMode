@@ -324,7 +324,7 @@ local states =
 				inst.SoundEmitter:PlaySound(inst.sounds.howl)
 				inst.lightningshot = false
 				inst.components.timer:StopTimer("lightningshot_cooldown")
-				inst.components.timer:StartTimer("lightningshot_cooldown", 4 + math.random())
+				inst.components.timer:StartTimer("lightningshot_cooldown", 6 + math.random())
 			end),
             TimeEvent(15*FRAMES, function(inst) 
 				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
