@@ -431,6 +431,8 @@ local function buddy_fn()
     inst.components.follower.maxfollowtime = TUNING.BEEFALO_FOLLOW_TIME
     inst.components.follower.canaccepttarget = false
 
+	inst.components.lootdropper:AddChanceLoot(inst.seeds, 1)
+	
 	inst:AddComponent("trader")
     inst.components.trader:SetAcceptTest(ShouldAcceptItem)
     inst.components.trader.onaccept = OnGetItemFromPlayer_Buddy
