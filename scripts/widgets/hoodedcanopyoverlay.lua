@@ -44,7 +44,7 @@ function FogOver:OnUpdate(dt)
 	self:Hide()
 	end
 	if self.owner.components.areaaware:CurrentlyInTag("hoodedcanopy") then
-		TheFocalPoint.SoundEmitter:KillSound("creepyforest")
+		--TheFocalPoint.SoundEmitter:KillSound("creepyforest")
 		TheFocalPoint.SoundEmitter:PlaySound("UCSounds/music/creepyforest", "creepyforest")
 	self:Show()
         self.time = self.transitiontime
