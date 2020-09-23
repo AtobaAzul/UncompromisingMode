@@ -73,13 +73,70 @@ local function onlightingstrike(inst)
     end
 end
 
+local function dowetsparks(inst, dt)
+    if inst.components.moisture ~= nil and inst.components.moisture:GetMoisture() > 0 then
+        local t = GetTime()
+
+        -- Raining, no moisture-giving equipment on head, and moisture is increasing. Pro-rate damage based on waterproofness.
+        if inst.components.inventory:GetEquippedMoistureRate(EQUIPSLOTS.HEAD) <= 0 and inst.components.moisture:GetRate() > 0 then
+            local waterproofmult =
+                (   inst.components.sheltered ~= nil and
+                    inst.components.sheltered.sheltered and
+                    inst.components.sheltered.waterproofness or 0
+                ) +
+                (   inst.components.inventory ~= nil and
+                    inst.components.inventory:GetWaterproofness() or 0
+                )
+            if waterproofmult < 1 and t > inst.wet_spark_time + inst.wet_spark_time_offset + waterproofmult * 7 then
+                inst.components.health:DoDelta(TUNING.WX78_MAX_MOISTURE_DAMAGE, false, "water")
+                inst.wet_spark_time_offset = 3 + math.random() * 2
+                inst.wet_spark_time = t
+                local x, y, z = inst.Transform:GetWorldPosition()
+                SpawnPrefab("sparks").Transform:SetPosition(x, y + 1 + math.random() * 1.5, z)
+            end
+        elseif t > inst.wet_spark_time + inst.wet_spark_time_offset then -- We have moisture-giving equipment on our head or it is not raining and we are just passively wet (but drying off). Do full damage.
+            inst.components.health:DoDelta(
+                inst.components.moisture:GetRate() >= 0 and
+                TUNING.WX78_MAX_MOISTURE_DAMAGE or
+                TUNING.WX78_MOISTURE_DRYING_DAMAGE,
+                false, "water")
+            inst.wet_spark_time_offset = 3 + math.random() * 2
+            inst.wet_spark_time = t
+            local x, y, z = inst.Transform:GetWorldPosition()
+            SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
+        end
+    end
+end
+
+local function OnMoistureDelta(inst)
+
+    if inst.watchingrain then
+        inst.watchingrain = false
+        inst:StopWatchingWorldState("israining")
+    end
+		
+    if inst.components.moisture ~= nil and inst.components.moisture:GetMoisturePercent() > 0 then
+        if inst.wet_task == nil then
+            inst.wet_task = inst:DoPeriodicTask(.1, dowetsparks, nil, .1)
+        end
+    elseif inst.wet_task ~= nil then
+        inst.wet_task:Cancel()
+        inst.wet_task = nil
+    end
+end
 
 env.AddPrefabPostInit("wx78", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
 
+    inst.wet_task = nil
+    inst.wet_spark_time = 0
+    inst.wet_spark_time_offset = 3
+	
 	if inst.components.playerlightningtarget ~= nil then
 		inst.components.playerlightningtarget:SetOnStrikeFn(onlightingstrike)
 	end
+	
+	inst:ListenForEvent("moisturedelta", OnMoistureDelta)
 end)
