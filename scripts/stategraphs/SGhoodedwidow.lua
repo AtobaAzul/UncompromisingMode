@@ -151,11 +151,14 @@ local states=
         name = "fall",
         tags = {"busy","noweb"},
         onenter = function(inst, data)
-			inst:Show()
-			inst.components.locomotor:Stop()
+	    inst:Show()
+      
             inst.Physics:SetDamping(0)
             inst.Physics:SetMotorVel(0,-20,0)
             inst.AnimState:PlayAnimation("distress_loop", true)
+          if inst.components.locomotor ~= nil then -- Check to make sure 
+			inst.components.locomotor:Stop()
+		end
         end,
         
         onupdate = function(inst)
@@ -241,32 +244,36 @@ local states=
         name = "jumphome",
         tags = {"busy", "noweb","superbusy","nointerrupt"},
         onenter = function(inst, data)
-			inst.DynamicShadow:Enable(false)
-			inst.components.locomotor:Stop()
+            inst.DynamicShadow:Enable(false)
             inst.Physics:SetDamping(0)
-			local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
-			if home then
-			if inst:HasTag("justcame") then
-			--if distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*8) then
-			inst.AnimState:PlayAnimation("poop_loop")
-			inst.AnimState:PushAnimation("enter", false)
-			else
-			inst:Hide()
-			end
-			end
+
+	    --Previous check for tags and home were redundant and the root of the disappearing. Always play the animation; there's no reason not to
+	    --She was actually just going invisible while never despawning. FIXED.
+            inst.AnimState:PlayAnimation("poop_loop")
+	    inst.AnimState:PushAnimation("enter", false)
+
+
+                if inst.components.locomotor ~= nil then -- Check to make sure 
+                    inst.components.locomotor:Stop()
+                end
+
         end,
-		timeline=
+          timeline=
         {
             TimeEvent(25*FRAMES, function(inst)
                inst.Physics:SetMotorVel(0,20,0)
             end),
-			TimeEvent(30*FRAMES, function(inst)
-				inst.Physics:SetMotorVel(0,0,0)
-				--inst.entity:Show(false)
-                inst:DoDespawn()
-				inst.Home = true
-            end)
         },
+	
+-- WAS 30*FRAMES TimeEvent; NOW animqueueover EventHandler because despawning wasn't actually occuring due to animations not being 30 frames long collectively
+-- Reduced redundancy
+	  events=
+        {
+            EventHandler("animqueueover", function(inst) 
+                inst:DoDespawn()
+        	inst.Home = true -- I couldn't find this mentioned anywhere else. Depricated? ~ Kind Stranger
+            end),
+        },   
         onexit = function(inst)
             --You somehow left this state?! (not supposed to happen).
             --Cancel the action to avoid getting stuck.
@@ -393,6 +400,12 @@ CommonStates.AddWalkStates(states,
 
 CommonStates.AddFrozenStates(states)
 
+-- WAS "spiderqueen" NOW "hoodedwidow" as to not replace regular spiderqueen stategraph
+-- replaced "idle" with "fall" so queen always spawns from falling
+return StateGraph("hoodedwidow", states, events, "fall", actionhandlers)
 
-return StateGraph("spiderqueen", states, events, "idle", actionhandlers)
+--You're welcome :) ~Kind Stranger
+ 
+--Thanks ~Lureplague Guy 
+
 

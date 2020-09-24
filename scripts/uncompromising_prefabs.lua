@@ -141,4 +141,5 @@ return {
 	"fallingbeehive",
 	"lightninghound",
 	"hound_lightning",
+	"aphid",
 }

@@ -159,9 +159,6 @@ local shadow = inst.entity:AddDynamicShadow()
     --inst.DynamicShadow:SetSize(1, .75)
     inst.Transform:SetFourFaced()
 
-	--shadow:SetSize(1, 0.75)
-	inst.Transform:SetFourFaced()
-
 	MakeCharacterPhysics(inst, 10, .5)
 	--MakePoisonableCharacter(inst)
 

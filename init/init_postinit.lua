@@ -13,6 +13,7 @@ local component_post = {
 	"fertilizer",
 	"healer",
 	"crop",
+	"wildfires",
 }
 
 local prefab_post = {
