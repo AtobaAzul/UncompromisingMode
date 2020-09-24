@@ -222,7 +222,7 @@ local function fn()
 
     ------------------
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(TUNING.SPIDERQUEEN_HEALTH)
+    inst.components.health:SetMaxHealth(6000)
 
     ------------------
     inst:AddComponent("knownlocations")

@@ -24,7 +24,7 @@ local function makefn()
             return inst
         end
 		inst:AddComponent("timer")
-		inst.components.timer:StartTimer("regrowcreature",3)
+		inst.components.timer:StartTimer("regrowcreature",3840*1.5)
 		inst:ListenForEvent("timerdone", SpawnWebbedCreature)
         return inst
 end
