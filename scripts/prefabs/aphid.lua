@@ -1,4 +1,3 @@
-
 require "stategraphs/SGaphid"
 
 local assets =
@@ -9,16 +8,34 @@ local assets =
 local prefabs =
 {
     --"weevole_carapace",
-    "monstermeat",
+    "monstersmallmeat",
 }
 
 SetSharedLootTable("aphid_loot",
 {
     --{'weevole_carapace', 1},
-    {'monstermeat',      0.25},
+    {'monstersmallmeat',      0.25},
 })
 
 local brain = require "brains/aphidbrain"
+
+local function OnDropped(inst)
+    inst.sg:GoToState("idle")
+    if inst.components.workable ~= nil then
+        inst.components.workable:SetWorkLeft(1)
+    end
+    if inst.components.stackable ~= nil then
+        while inst.components.stackable:StackSize() > 1 do
+            local item = inst.components.stackable:Get()
+            if item ~= nil then
+                if item.components.inventoryitem ~= nil then
+                    item.components.inventoryitem:OnDropped()
+                end
+                item.Physics:Teleport(inst.Transform:GetWorldPosition())
+            end
+        end
+    end
+end
 
 local function retargetfn(inst)
     local dist = 5
@@ -51,6 +68,14 @@ local function OnFlyIn(inst)
     inst.Transform:SetPosition(x,15,z)
 end
 
+local function OnWorked(inst, worker)
+    if worker.components.inventory ~= nil then
+        inst.SoundEmitter:KillAllSounds()
+
+        worker.components.inventory:GiveItem(inst, nil, inst:GetPosition())
+    end
+end
+
 local function fn()
     local inst = CreateEntity()
     
@@ -62,12 +87,10 @@ local function fn()
     MakeCharacterPhysics(inst, 10, .5)
     inst.DynamicShadow:SetSize(1.5, .5)
     inst.Transform:SetSixFaced()
-	inst.entity:SetPristine()
-	
-	if not TheWorld.ismastersim then
-        return inst
-    end
 
+    inst.AnimState:SetBank("weevole")
+    inst.AnimState:SetBuild("aphid")
+    inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("scarytoprey")
     inst:AddTag("monster")
@@ -78,9 +101,15 @@ local function fn()
     inst:AddTag("aphid")
     inst:AddTag("animal")
 
-    inst.AnimState:SetBank("weevole")
-    inst.AnimState:SetBuild("aphid")
-    inst.AnimState:PlayAnimation("idle")
+    MakeInventoryFloatable(inst)
+
+    MakeFeedableSmallLivestockPristine(inst)
+	
+	inst.entity:SetPristine()
+	
+	if not TheWorld.ismastersim then
+        return inst
+    end
 
     -- locomotor must be constructed before the stategraph!
     inst:AddComponent("locomotor")
@@ -88,9 +117,26 @@ local function fn()
     inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = true }
     inst.components.locomotor.walkspeed = 3
+	 
+    inst:AddComponent("stackable")
+	
+    inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.canbepickedup = false
+    inst.components.inventoryitem.canbepickedupalive = true
+    inst.components.inventoryitem.nobounce = true
+    inst.components.inventoryitem.pushlandedevents = false
+	
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/aphid.xml"
+	
+    inst:AddComponent("tradable")
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetChanceLootTable("aphid_loot")
+	
+    inst:AddComponent("workable")
+    inst.components.workable:SetWorkAction(ACTIONS.NET)
+    inst.components.workable:SetWorkLeft(1)
+    inst.components.workable:SetOnFinishCallback(OnWorked)
 
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(100)
@@ -108,10 +154,9 @@ local function fn()
 
     inst:ListenForEvent("attacked", OnAttacked)
 
-
     inst:AddComponent("eater")
-    inst.components.eater.foodprefs = { "WOOD","SEEDS","ROUGHAGE" }
-    inst.components.eater.ablefoods = { "WOOD","SEEDS","ROUGHAGE" }
+    inst.components.eater:SetDiet({ FOODTYPE.WOOD, FOODTYPE.SEEDS, FOODTYPE.ROUGHAGE }, { FOODTYPE.WOOD, FOODTYPE.SEEDS, FOODTYPE.ROUGHAGE })
+	
     --inst.OnEntitySleep = OnEntitySleep
     --inst.OnEntityWake = OnEntityWake
 
@@ -120,6 +165,8 @@ local function fn()
     inst:SetStateGraph("SGaphid")
     inst:SetBrain(brain)
 
+    MakeFeedableSmallLivestock(inst, TUNING.BUTTERFLY_PERISH_TIME, nil, OnDropped)
+	
     MakeSmallBurnableCharacter(inst, "body")
     MakeSmallFreezableCharacter(inst, "body")
 
