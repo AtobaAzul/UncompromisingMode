@@ -1,7 +1,7 @@
 local assets =
 {
-    Asset("ANIM", "anim/bugzapper.zip"),
-    Asset("ANIM", "anim/swap_bugzapper.zip"),
+    Asset("ANIM", "anim/widowsgrasp.zip"),
+    Asset("ANIM", "anim/swap_widowsgrasp.zip"),
     Asset("SOUND", "sound/wilson.fsb"),
     Asset("INV_IMAGE", "lantern_lit"),
 }
@@ -9,7 +9,7 @@ local assets =
 
 local function onequip(inst, owner)
     
-    owner.AnimState:OverrideSymbol("swap_object", "swap_bugzapper", "swap_bugzapper")
+    owner.AnimState:OverrideSymbol("swap_object", "swap_widowsgrasp", "swap_widowsgrasp")
 	
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
@@ -38,9 +38,9 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("bugzapper")
-    inst.AnimState:SetBuild("bugzapper")
-    inst.AnimState:PlayAnimation("idle_off")
+    inst.AnimState:SetBank("widowsgrasp")
+    inst.AnimState:SetBuild("widowsgrasp")
+    inst.AnimState:PlayAnimation("idle")
 
 
     MakeInventoryFloatable(inst, "med", 0.2, 0.65)
@@ -61,7 +61,7 @@ local function fn()
     inst:AddTag("weapon")
     inst.components.weapon:SetDamage(150)
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/bugzapper.xml"
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/widowsgrasp.xml"
 
     inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetMaxUses(3)
