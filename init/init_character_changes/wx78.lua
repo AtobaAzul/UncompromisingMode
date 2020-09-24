@@ -93,6 +93,7 @@ local function dowetsparks(inst, dt)
                 inst.wet_spark_time = t
                 local x, y, z = inst.Transform:GetWorldPosition()
                 SpawnPrefab("sparks").Transform:SetPosition(x, y + 1 + math.random() * 1.5, z)
+	print("damage")
             end
         elseif t > inst.wet_spark_time + inst.wet_spark_time_offset then -- We have moisture-giving equipment on our head or it is not raining and we are just passively wet (but drying off). Do full damage.
             inst.components.health:DoDelta(
@@ -104,15 +105,16 @@ local function dowetsparks(inst, dt)
             inst.wet_spark_time = t
             local x, y, z = inst.Transform:GetWorldPosition()
             SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
+	print("damage")
         end
     end
+	
 end
 
 local function OnMoistureDelta(inst)
 
-    if inst.watchingrain then
-        inst.watchingrain = false
-        inst:StopWatchingWorldState("israining")
+	if inst.spark_task ~= nil then
+		inst.spark_task:Cancel()
     end
 		
     if inst.components.moisture ~= nil and inst.components.moisture:GetMoisturePercent() > 0 then
