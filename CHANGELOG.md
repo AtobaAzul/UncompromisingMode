@@ -256,6 +256,8 @@
 
 * [x]  WX will take more damage from rain (3x).
 
+* [x]  WX now takes damage if wet, not only if it is arbitrarily raining.
+
 --Wickerbottom
 
 * [x] Applied horticulture recipe nerf (uses 1 leafy meat + 1 bucket o poop instead of 1 seeds + 1 poop).
@@ -285,7 +287,9 @@
 
 --Wigfrid
 
-* [x] [FEAR THE DARK!] Wigfrid's life and sanity leech is reduced by 1/3, but she gains her singleplayer health and sanity on kill perk (which is also reduced) This means she usually gets more restored from small mobs, but less during large boss fights.
+* [x] [FEAR THE DARK!] Wigfrid's life and sanity leech is reduced by 1/3.
+
+* [x] [FEAR THE DARK!] Wigfrid can no longer eat candy.
 
 --Winona
 
