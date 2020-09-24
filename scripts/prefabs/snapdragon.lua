@@ -160,6 +160,7 @@ end
 local function ShouldAcceptItem(inst, item)
     return inst.components.eater:CanEat(item)
         and not inst.components.combat:HasTarget()
+		and not item.prefab == "butterflywings"
 end
 
 local function OnGetItemFromPlayer(inst, giver, item)
@@ -245,7 +246,7 @@ local function OnGetItemFromPlayer_Buddy(inst, giver, item)
 end
 
 local function OnRefuseItem(inst, item)
-    inst.sg:GoToState("refuse")
+    inst.sg:GoToState("taunt")
     if inst.components.sleeper:IsAsleep() then
         inst.components.sleeper:WakeUp()
     end
@@ -254,6 +255,7 @@ end
 local function OnAttackOther(inst, data)
     if data.target ~= nil and data.target.components ~= nil and data.target.components.edible ~= nil and data.target:HasTag("insect") then
         inst.components.eater:Eat(data.target)--, giver)
+		inst.sg:GoToState("eat")
     end
 end
 
