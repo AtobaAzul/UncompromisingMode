@@ -97,7 +97,7 @@ local TREESTATES =
 -----------
 local function loadred(inst)
 	if TheWorld:HasTag("forest") then
-		inst:DoTaskInTime(1, Revert(inst, "red_mushroom"))
+		inst:DoTaskInTime(0, Revert(inst, "red_mushroom"))
 	end
 end
 
@@ -135,7 +135,7 @@ end)
 ------------
 local function loadgreen(inst)
 	if TheWorld:HasTag("forest") then
-		inst:DoTaskInTime(1, Revert(inst, "green_mushroom"))
+		inst:DoTaskInTime(0, Revert(inst, "green_mushroom"))
 	end
 end
 
@@ -173,7 +173,7 @@ end)
 ----------------
 local function loadblue(inst)
 	if TheWorld:HasTag("forest") then
-		inst:DoTaskInTime(1, Revert(inst, "blue_mushroom"))
+		inst:DoTaskInTime(0, Revert(inst, "blue_mushroom"))
 	end
 end
 
