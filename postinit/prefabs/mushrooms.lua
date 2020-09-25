@@ -96,32 +96,36 @@ local TREESTATES =
 
 -----------
 local function loadred(inst)
-if TheWorld:HasTag("forest") then
-inst:DoTaskInTime(1, Revert(inst, "red_mushroom"))
+	if TheWorld:HasTag("forest") then
+		inst:DoTaskInTime(1, Revert(inst, "red_mushroom"))
+	end
 end
-end
+
 local function OnFullMoonRed(inst, isfullmoon)
         if isfullmoon then
 			inst:DoTaskInTime(math.random()*4+3, function(inst) 
 			Transform(inst,"mushtree_medium","red_mushroom") 
             end)
-        else
         end
 end
+
 env.AddPrefabPostInit("red_mushroom", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
+	
 	inst:WatchWorldState("isfullmoon", OnFullMoonRed)
     OnFullMoonRed(inst, TheWorld.state.isfullmoon)
 	
 --return inst
 end)
+
 env.AddPrefabPostInit("mushtree_medium", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	inst.OnPreLoad= loadred
+	
+	inst.OnLoad= loadred
     --inst.OnLoad = onloadred
 	--inst.OnSave = onsavered
 --return inst
@@ -130,22 +134,24 @@ end)
 
 ------------
 local function loadgreen(inst)
-if TheWorld:HasTag("forest") then
-inst:DoTaskInTime(1, Revert(inst, "green_mushroom"))
+	if TheWorld:HasTag("forest") then
+		inst:DoTaskInTime(1, Revert(inst, "green_mushroom"))
+	end
 end
-end
+
 local function OnFullMoonGreen(inst, isfullmoon)
         if isfullmoon then
 			inst:DoTaskInTime(math.random()*4+3, function(inst) 
 			Transform(inst,"mushtree_small","green_mushroom") 
             end)
-        else
         end
 end
+
 env.AddPrefabPostInit("green_mushroom", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
+	
 	inst:WatchWorldState("isfullmoon", OnFullMoonGreen)
     OnFullMoonGreen(inst, TheWorld.state.isfullmoon)
 
@@ -156,7 +162,8 @@ env.AddPrefabPostInit("mushtree_small", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	inst.OnPreLoad= loadgreen
+	
+	inst.OnLoad= loadgreen
     --inst.OnLoad = onloadgreen
 	--inst.OnSave = onsavegreen
 --return inst
@@ -165,18 +172,19 @@ end)
 
 ----------------
 local function loadblue(inst)
-if TheWorld:HasTag("forest") then
-inst:DoTaskInTime(1, Revert(inst, "blue_mushroom"))
+	if TheWorld:HasTag("forest") then
+		inst:DoTaskInTime(1, Revert(inst, "blue_mushroom"))
+	end
 end
-end
+
 local function OnFullMoonBlue(inst, isfullmoon)
         if isfullmoon then
 			inst:DoTaskInTime(math.random()*4+3, function(inst) 
 			Transform(inst,"mushtree_tall","blue_mushroom") 
             end)
-        else
         end
 end
+
 env.AddPrefabPostInit("blue_mushroom", function(inst)
 	if not TheWorld.ismastersim then
 		return
@@ -192,7 +200,8 @@ env.AddPrefabPostInit("mushtree_tall", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	inst.OnPreLoad= loadblue
+	
+	inst.OnLoad= loadblue
     --inst.OnLoad = onloadblue
 	--inst.OnSave = onsaveblue
 --return inst

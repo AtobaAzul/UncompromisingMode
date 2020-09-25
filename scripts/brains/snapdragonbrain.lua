@@ -28,6 +28,10 @@ local function EatFoodAction(inst)
 			return inst.components.eater:CanEat(item) and
             item:HasTag("insect") and
 			not (inst.components.follower and inst.components.follower.leader)
+				or TheWorld.state.issummer and 
+				inst.components.eater:CanEat(item) and
+				(item:HasTag("insect") or item:HasTag("meat")) and
+				not (inst.components.follower and inst.components.follower.leader)
 		--[[
             return inst.components.eater:CanEat(item) and
             item.components.bait and

@@ -100,7 +100,7 @@ local function OnPollenDirty(inst)
     fx.AnimState:SetBank("wormwood_pollen_fx")
     fx.AnimState:SetBuild("wormwood_pollen_fx")
     fx.AnimState:PlayAnimation("pollen"..tostring(inst.pollen:value()))
-    fx.AnimState:SetFinalOffset(2)
+    fx.AnimState:SetFinalOffset(4)
 
     fx:ListenForEvent("animover", fx.Remove)
 
@@ -298,6 +298,18 @@ local function ontimerdone(inst, data)
     end
 end
 
+local function OnIsSummer(inst, issummer)
+    if issummer then
+		if inst.components.eater ~= nil then
+			inst.components.eater:SetDiet({ FOODTYPE.INSECT, FOODTYPE.VEGGIE, FOODTYPE.MEAT }, { FOODTYPE.INSECT, FOODTYPE.VEGGIE, FOODTYPE.MEAT })
+		end
+    else
+		if inst.components.eater ~= nil then
+			inst.components.eater:SetDiet({ FOODTYPE.INSECT, FOODTYPE.VEGGIE }, { FOODTYPE.INSECT, FOODTYPE.VEGGIE })
+		end
+    end
+end
+
 local function common_fn(scale)
 	local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
@@ -336,6 +348,11 @@ local function common_fn(scale)
 	
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODTYPE.INSECT, FOODTYPE.VEGGIE }, { FOODTYPE.INSECT, FOODTYPE.VEGGIE })
+	
+    inst:WatchWorldState("issummer", OnIsSummer)
+    if TheWorld.state.issummer then
+        OnIsSummer(inst, true)
+    end
 	
     --inst.components.eater:SetSnappy()
     inst.components.eater:SetOnEatFn(OnEat)
