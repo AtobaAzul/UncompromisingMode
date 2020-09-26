@@ -3,6 +3,9 @@ require("stategraphs/commonstates")
 local actionhandlers =
 {
     ActionHandler(ACTIONS.GOHOME, "burrow"),
+    ActionHandler(ACTIONS.PICKUP, "action"),
+    ActionHandler(ACTIONS.PICK, "action"),
+    ActionHandler(ACTIONS.HARVEST, "action"),
     ActionHandler(ACTIONS.EAT, "eat"),    
     --ActionHandler(ACTIONS.BUILDHOME, "buildhome"),
 }
@@ -30,7 +33,7 @@ local events =
         if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) then
             inst.sg:GoToState(
                 data.target:IsValid()
-                and not inst:IsNear(data.target, 2)
+                and not inst:IsNear(data.target, 1.5)
                 and "leap_attack" --Do leap attack
                 or "attack",
                 data.target
@@ -330,7 +333,29 @@ local states =
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
+	
+	State{
+        name = "action",
+        tags = {"busy"},
+        
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("eat_pre")
+        end,
+        
+        events=
+        {
+            EventHandler("animover", function(inst)
 
+                if inst:PerformBufferedAction() then
+                    inst.sg:GoToState("eat_loop")
+                else
+                    inst.sg:GoToState("idle")
+                end
+            end),
+        },
+    },
+	
     State{
         name = "eat",
         tags = {"busy"},

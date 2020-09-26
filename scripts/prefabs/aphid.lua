@@ -118,6 +118,8 @@ local function fn()
     inst.components.locomotor.pathcaps = { ignorecreep = true }
     inst.components.locomotor.walkspeed = 3
 	 
+    inst:AddComponent("inventory")
+	
     inst:AddComponent("stackable")
 	
     inst:AddComponent("inventoryitem")
@@ -147,7 +149,7 @@ local function fn()
     inst.components.combat:SetRetargetFunction(3, retargetfn)
     inst.components.combat:SetDefaultDamage(20)
     inst.components.combat:SetAttackPeriod(GetRandomMinMax(1, 3))
-    inst.components.combat:SetRange(2, 2)
+    inst.components.combat:SetRange(5, 2)
 
     inst:AddComponent("knownlocations")
     inst:AddComponent("inspectable")
@@ -155,7 +157,8 @@ local function fn()
     inst:ListenForEvent("attacked", OnAttacked)
 
     inst:AddComponent("eater")
-    inst.components.eater:SetDiet({ FOODTYPE.WOOD, FOODTYPE.SEEDS, FOODTYPE.ROUGHAGE }, { FOODTYPE.WOOD, FOODTYPE.SEEDS, FOODTYPE.ROUGHAGE })
+    --inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
+    inst.components.eater:SetDiet({ FOODGROUP.OMNI, FOODTYPE.WOOD, FOODTYPE.SEEDS, FOODTYPE.ROUGHAGE }, { FOODGROUP.OMNI, FOODTYPE.WOOD, FOODTYPE.SEEDS, FOODTYPE.ROUGHAGE })
 	
     --inst.OnEntitySleep = OnEntitySleep
     --inst.OnEntityWake = OnEntityWake

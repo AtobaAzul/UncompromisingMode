@@ -43,10 +43,11 @@ function FogOver:OnUpdate(dt)
 	if self.alpha == 0 then
 	self:Hide()
 	end
-	if self.owner.components.areaaware:CurrentlyInTag("hoodedcanopy") then
-		--TheFocalPoint.SoundEmitter:KillSound("creepyforest")
+	if self.owner.components.areaaware:CurrentlyInTag("hoodedcanopy") and not TheWorld.state.isnight then
+		TheFocalPoint.SoundEmitter:KillSound("danger")
+		TheFocalPoint.SoundEmitter:KillSound("busy")
 		TheFocalPoint.SoundEmitter:PlaySound("UCSounds/music/creepyforest", "creepyforest")
-	self:Show()
+		self:Show()
         self.time = self.transitiontime
         self.alphagoal = 0.8
 	else

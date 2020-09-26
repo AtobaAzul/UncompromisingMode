@@ -29,7 +29,7 @@ local function onothercollide(inst, other)
 		
 		if other:HasTag("guardianbonk") or other:HasTag("megaboulder") then
 			inst.sg:GoToState("AGStun")
-			inst:DoTaskInTime(6, Bonk, inst)
+			inst:DoTaskInTime(4.5, Bonk, inst)
 		end
 		
     elseif other.components.health ~= nil and not other.components.health:IsDead() then
