@@ -85,13 +85,24 @@ configuration_options =
 	{
 		name = "willow",
 		label = "Willow Rework.",
-		hover = "Lighter is infinite while Willow is holding it, she can cast explosions, Bernie is now small by default, can be lit on fire to grow. And MUCH more!",
+		hover = "Lighter is infinite while Willow is holding it, she can cast explosions, Bernie is now small by default. And MUCH more!",
 		options =
 		{
 			{description = "Disabled", data = false},
 			{description = "Enabled", data = true},
 		},
 		default = true,
+	},
+	{
+		name = "bernie",
+		label = "Willow Rework - Bernie.",
+		hover = "Toggle if Bernie can turn into Big Bernie. Must be set on fire to transform if Enabled.",
+		options =
+		{
+			{description = "Disabled", data = false},
+			{description = "Enabled", data = true},
+		},
+		default = false,
 	},
 	{
 		name = "waxwell",

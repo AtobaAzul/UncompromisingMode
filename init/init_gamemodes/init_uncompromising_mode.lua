@@ -136,7 +136,12 @@ local require = GLOBAL.require
 	
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("willow") == true or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("willow") == true) then
-		modimport("postinit/prefabs/lighter")
+		modimport("init/init_character_changes/willow")
+	end
+	
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("bernie") == true or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("bernie") == true) then
+		modimport("init/init_character_changes/willow_bernie")
 	end
 	
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("waxwell") == true or
@@ -158,7 +163,6 @@ local require = GLOBAL.require
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("character_changes")) then
 		modimport("init/init_character_changes/generic")
-		modimport("init/init_character_changes/willow")
 		modimport("init/init_character_changes/wolfgang")
 		modimport("init/init_character_changes/wendy")
 		modimport("init/init_character_changes/wx78")

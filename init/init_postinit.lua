@@ -100,7 +100,6 @@ local prefab_post = {
 	"critterlab",
 	"wobster",
 	"hambat",
-	"lighter",
 	"townportal",
 	"compostwrap",
 }
