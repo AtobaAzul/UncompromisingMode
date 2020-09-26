@@ -148,8 +148,6 @@ local function fn()
 
     -----------------------------
 
-    inst:AddComponent("inspectable")
-
 	inst:WatchWorldState("isday", function() 
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local despawnfx = SpawnPrefab("shadow_despawn")
