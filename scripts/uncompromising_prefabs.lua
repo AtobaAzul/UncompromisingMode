@@ -93,6 +93,7 @@ return {
 	"charliephonograph",
 	"stumpling",
 	"shadow_teleporter",
+	"shadow_teleporter_light",
 	"shadowtalker",
 	"liceloaf",
 	"shadow_crown",

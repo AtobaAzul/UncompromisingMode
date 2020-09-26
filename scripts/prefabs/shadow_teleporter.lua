@@ -45,8 +45,12 @@ local MAX_LIGHT_FRAME = 20
 
 local function getrandomposition(caster)
 		local centers = {}
+		
 		for i, node in ipairs(TheWorld.topology.nodes) do
-			if TheWorld.Map:IsPassableAtPoint(node.x, 0, node.y) and node.type ~= NODE_TYPE.SeparatedRoom then
+		
+			--local antimoonnode = TheWorld.Map:FindNodeAtPoint(node.x, 0, node.z)
+		
+			if TheWorld.Map:IsPassableAtPoint(node.x, 0, node.y) and node.type ~= NODE_TYPE.SeparatedRoom and not (node ~= nil and node.tags ~= nil and table.contains(node.tags, "lunacyarea")) then
 				table.insert(centers, {x = node.x, z = node.y})
 			end
 		end
@@ -81,22 +85,6 @@ local function DayBreak(mob)
 		end)
 	end
 	
-end
-
-local function NightLightModifier(nightylight)
-	nightylight.AnimState:SetMultColour(0, 0, 0, 0.6)
-	nightylight:RemoveComponent("inspectable")
-	nightylight:RemoveComponent("workable")
-	
-	nightylight:WatchWorldState("isday", function() 
-		local x, y, z = nightylight.Transform:GetWorldPosition()
-		local despawnfx = SpawnPrefab("shadow_despawn")
-		despawnfx.Transform:SetPosition(x, y, z)
-		
-		nightylight:Remove()
-	end)
-	
-	nightylight.persists = false
 end
 
 local function OnDoneTalking(inst)
@@ -151,33 +139,15 @@ local function teleport_end(teleportee, locpos)
 	
 	
 	local x, y, z = teleportee.Transform:GetWorldPosition()
-	local nightylight1 = SpawnPrefab("nightlight")
+	local nightylight1 = SpawnPrefab("shadow_teleporter_light")
 	nightylight1.Transform:SetPosition(x - 5, y, z - 5)
-	nightylight1:DoTaskInTime(0, function(nightylight1) NightLightModifier(nightylight1) end)
+	nightylight1:DoTaskInTime(0, function(nightylight1) nightylight1.components.talker:Say(GetString(nightylight1, "SHADOW_CROWN_CHALLENGE")) end)
 	
-	nightylight1:AddComponent("talker")        
-    nightylight1.components.talker.colour = Vector3(252/255, 226/255, 219/255)
-    nightylight1.components.talker.offset = Vector3(0, -500, 0)
-    nightylight1.components.talker:MakeChatter()
-    nightylight1.components.talker.lineduration = TUNING.HERMITCRAB.SPEAKTIME * 2 -0.5
-    if LOC.GetTextScale() == 1 then
-		nightylight1.components.talker.fontsize = 30
-    end
-    nightylight1.components.talker.font = TALKINGFONT_HERMIT
-    nightylight1:AddComponent("npc_talker")
-    nightylight1:ListenForEvent("ontalk", OnTalk)
-    nightylight1:ListenForEvent("donetalking", OnDoneTalking)
-	nightylight1.components.talker:Say(GetString(nightylight1, "SHADOW_CROWN_CHALLENGE"))
-	
-	
-	local nightylight2 = SpawnPrefab("nightlight")
+	local nightylight2 = SpawnPrefab("shadow_teleporter_light")
 	nightylight2.Transform:SetPosition(x + 5, y, z - 5)
-	nightylight2:DoTaskInTime(0, function(nightylight2) NightLightModifier(nightylight2) end)
 	
-	
-	local nightylight3 = SpawnPrefab("nightlight")
+	local nightylight3 = SpawnPrefab("shadow_teleporter_light")
 	nightylight3.Transform:SetPosition(x - 5, y, z + 5)
-	nightylight3:DoTaskInTime(0, function(nightylight3) NightLightModifier(nightylight3) end)
 	
 	
 				local chesscheck = math.random()
