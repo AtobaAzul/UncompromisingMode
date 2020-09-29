@@ -66,7 +66,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_OVER_EAT =
 	{
 		STUFFED = "I'm quite full, thanks.",
-		OVERSTUFFED = "This much food can not be health!",
+		OVERSTUFFED = "This much food can not be healthy!",
     }
 	DESCRIBE.SAND = "Sand always seems to find its way into my books."
 	DESCRIBE.SANDHILL = "The dune's iconic shape is formed by the winds."
