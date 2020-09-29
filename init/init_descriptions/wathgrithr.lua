@@ -55,6 +55,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 		"Ragnarok has come!",
 		"The beast roars loud!",
 	}
+	ANNOUNCE.ANNOUNCE_OVER_EAT =
+	{
+		STUFFED = "A glorious feast!",
+		OVERSTUFFED = "Try as I might, I cannot force myself to be hungry!",
+    }
 	ANNOUNCE.ANNOUNCE_ROOTING = "A cheap trick! Fight with honor!"
 	ANNOUNCE.ANNOUNCE_SNOWSTORM = "The winds grow fierce!"
 	ANNOUNCE.SHADOWTALKER = {

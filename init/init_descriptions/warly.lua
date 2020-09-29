@@ -62,6 +62,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
         "SHE DOESN'T REMEMBER ME",
         "I'M NOT THERE FOR HER",
     }
+	ANNOUNCE.ANNOUNCE_OVER_EAT =
+	{
+		STUFFED = "Ah, perhaps I had one bite too many...",
+		OVERSTUFFED = "Hard to enjoy a meal when you force yourself to eat!",
+    }
 	DESCRIBE.SAND = "Lots of tiny, tiny stones."
 	DESCRIBE.SANDHILL = "The sand has formed a small pile."
 	DESCRIBE.SNOWPILE = "Snow is a new thing for me, seems like a problem."

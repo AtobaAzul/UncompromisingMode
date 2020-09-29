@@ -63,6 +63,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
         "THEY WONT LET US GO",
         "I CANNOT BE FORGIVEN",
     }
+	ANNOUNCE.ANNOUNCE_OVER_EAT =
+	{
+		STUFFED = "What can I say? I'm a gluttonous king.",
+		OVERSTUFFED = "Gluttony is a sin, and I've sinned enough!",
+    }
 	DESCRIBE.SAND = "Rocks so thoroughly beaten down they are no longer recognizable."
 	DESCRIBE.SANDHILL = "A little mound of yellow sand."
 	DESCRIBE.SNOWPILE = "Remove it, before it gets in my boots."

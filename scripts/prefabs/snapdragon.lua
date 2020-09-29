@@ -303,10 +303,12 @@ local function OnIsSummer(inst, issummer)
 		if inst.components.eater ~= nil then
 			inst.components.eater:SetDiet({ FOODTYPE.INSECT, FOODTYPE.VEGGIE, FOODTYPE.MEAT }, { FOODTYPE.INSECT, FOODTYPE.VEGGIE, FOODTYPE.MEAT })
 		end
+		inst.AnimState:OverrideSymbol("neck", "snapdragon_build_neck", "neck")
     else
 		if inst.components.eater ~= nil then
 			inst.components.eater:SetDiet({ FOODTYPE.INSECT, FOODTYPE.VEGGIE }, { FOODTYPE.INSECT, FOODTYPE.VEGGIE })
 		end
+		inst.AnimState:OverrideSymbol("neck", "snapdragon_build", "neck")
     end
 end
 

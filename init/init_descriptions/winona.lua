@@ -62,6 +62,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
         "SHE'S GONE",
         "I MISS HER",
     }
+	ANNOUNCE.ANNOUNCE_OVER_EAT =
+	{
+		STUFFED = "I'm stuffed, let's get to work!",
+		OVERSTUFFED = "My stomach is jammed!",
+    }
 	DESCRIBE.SAND = "I can only break it down so much."
 	DESCRIBE.SANDHILL = "I usually leave the cleanup to the janitors."
 	DESCRIBE.SNOWPILE = "Save your back, shovel early."

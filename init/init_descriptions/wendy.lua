@@ -62,6 +62,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
         "I CAN'T HELP HER",
         "IT WAS MY FAULT",
     }
+	ANNOUNCE.ANNOUNCE_OVER_EAT =
+	{
+		STUFFED = "Greed and gluttony.",
+		OVERSTUFFED = "Sheer gluttony. I am ashamed.",
+    }
 	DESCRIBE.SAND = "I wonder if the sand knows of its own insignificance?"
 	DESCRIBE.SANDHILL = "This looks impermanent."
 	DESCRIBE.SNOWPILE = "Cold death awaits us."

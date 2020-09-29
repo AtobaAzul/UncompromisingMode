@@ -62,6 +62,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
         "I AM AFRAID.",
         "NOT STRONG ENOUGH.",
     }
+	ANNOUNCE.ANNOUNCE_OVER_EAT =
+	{
+		STUFFED = "Wolfgang full, ready to fight!",
+		OVERSTUFFED = "Too much food bad for workout.",
+    }
 	DESCRIBE.SAND = "When Wolfgang holds it it slips through his large, strong hands."
 	DESCRIBE.SANDHILL = "Tiny, crushable hill."
 	DESCRIBE.SNOWPILE = "Cold is no good for the muscles!."

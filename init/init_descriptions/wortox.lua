@@ -62,6 +62,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
         "I STILL FEEL THE HUNGER",
         "JUST LAUGH IT OFF",
     }
+	ANNOUNCE.ANNOUNCE_OVER_EAT =
+	{
+		STUFFED = "My stomach is full, but my soul still hungers.",
+		OVERSTUFFED = "I almost don't feel starved at all!",
+    }
 	DESCRIBE.SAND = "Itchy and scratchy!"
 	DESCRIBE.SANDHILL = "Great grains of gravel!"
 	DESCRIBE.SNOWPILE = "Ooh what mischief we could cause with this! Hyuyu!"

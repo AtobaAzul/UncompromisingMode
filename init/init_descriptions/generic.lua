@@ -87,6 +87,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	}
 	
 	ANNOUNCE.SHADOW_CROWN_CHALLENGE = "DEFEAT THIS CREATURE AND CLAIM YOUR PRIZE"
+	ANNOUNCE.ANNOUNCE_OVER_EAT =
+	{
+		STUFFED = "I'm full!",
+		OVERSTUFFED = "Oooh... I shouldn't eat more!",
+    }
 	
 	DESCRIBE.SAND = "A handy pile of pocket sand."
 	DESCRIBE.SANDHILL = "You better stay out of my shoes."

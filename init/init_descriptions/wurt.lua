@@ -60,8 +60,14 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 	ANNOUNCE.SHADOWTALKER = {
         "DO SCALELESS TRUST ME?",
         "WHERE... FROM...",
-        "CAN'T REMEMBER",
+        "WHY... HORNS? AM... MERMFOLK?",
     }
+	ANNOUNCE.ANNOUNCE_OVER_EAT =
+	{
+		STUFFED = "Belly ache, eat no more!",
+		OVERSTUFFED = "Brlghh, belly full!",
+    }
+	
 	DESCRIBE.SAND = "Grainy stuffs."
 	DESCRIBE.SANDHILL = "Itch on scales..."
 	DESCRIBE.SNOWPILE = "Fun! Brr..."

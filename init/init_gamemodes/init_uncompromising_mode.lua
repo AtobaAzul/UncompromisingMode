@@ -11,6 +11,8 @@ local require = GLOBAL.require
 	--  [   Mock Dragonfly Spit Bait ]    --
 	modimport("init/init_weather/init_dragonfly_bait")
 	
+	--  [  	Over Eating Nerf	     ]    --
+	modimport("init/init_food/init_stuffed")
 	
 --	[ 	Import Names and Descriptions	]	--
 	modimport("init/init_names")

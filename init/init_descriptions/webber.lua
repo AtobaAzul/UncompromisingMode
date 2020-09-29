@@ -62,6 +62,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
         "I CAN NEVER GO HOME",
         "I WANT TO GO HOME",
     }
+	ANNOUNCE.ANNOUNCE_OVER_EAT =
+	{
+		STUFFED = "We've really packed both stomachs.",
+		OVERSTUFFED = "We wish we had a third stomach!",
+    }
 	DESCRIBE.SAND = "It's nice to feel it beneath our many feet."
 	DESCRIBE.SANDHILL = "Wish we had a bucket and a shovel."
 	DESCRIBE.SNOWPILE = "I wish it was a good time to play..."

@@ -62,6 +62,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
         "THEY THINK IM CRAZY",
         "SHES ALL I HAVE LEFT",
     }
+	ANNOUNCE.ANNOUNCE_OVER_EAT =
+	{
+		STUFFED = "Feels like my first thanksgiving.",
+		OVERSTUFFED = "I'm stuck!",
+    }
 	DESCRIBE.SAND = "Sandy."
 	DESCRIBE.SANDHILL = "It's a big pile of sand."
 	DESCRIBE.SNOWPILE = "You call that being snowed in?"

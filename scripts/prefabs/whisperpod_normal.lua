@@ -63,6 +63,10 @@ local function OnGetItemFromPlayer(inst, giver, item)
 		
 		if (item.prefab == "watermelon_seeds" or "pomegranate_seeds" or "pumpkin_seeds" or "dragonfruit_seeds" or "eggplant_seeds" or "durian_seeds") then
 			inst.planted = item.prefab
+			--[[local prefab = nil
+			prefab = item.components.plantable.product
+			inst.planted = prefab
+			inst.AnimState:SetBuild("snapdragon_build_"..inst.planted"_seeds")--]]
 			inst.AnimState:SetBuild("snapdragon_build_"..inst.planted)
 		else
 			inst.planted = "seeds"

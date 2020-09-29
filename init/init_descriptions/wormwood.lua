@@ -62,6 +62,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
         "NOT LIKE THEM",
         "SAD",
     }
+	ANNOUNCE.ANNOUNCE_OVER_EAT =
+	{
+		STUFFED = "Too much belly stuff",
+		OVERSTUFFED = "Too full!",
+    }
 	DESCRIBE.SAND = "Dirt"
 	DESCRIBE.SANDHILL = "Pile of dirt"
 	DESCRIBE.SNOWPILE = "Friend killer!"

@@ -62,6 +62,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
         "I BURNED IT ALL DOWN",
         "ASHES, ASHES...",
     }
+	ANNOUNCE.ANNOUNCE_OVER_EAT =
+	{
+		STUFFED = "Seconds were too tempting.",
+		OVERSTUFFED = "I really shouldn't have eaten thirds!",
+    }
 	DESCRIBE.SAND = "Big deal, it's sand."
 	DESCRIBE.SANDHILL = "Oh, look! It's some sand."
 	DESCRIBE.SNOWPILE = "Fire seems oddly ineffective."

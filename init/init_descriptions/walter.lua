@@ -62,6 +62,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
         "I SHOULDN'T HAVE DONE IT",
         "I CAN'T GIVE UP",
     }
+	ANNOUNCE.ANNOUNCE_OVER_EAT =
+	{
+		STUFFED = "A Pinetree Pioneer never wastes food, even when stuffed...",
+		OVERSTUFFED = "This much food is a bad idea!",
+    }
 	DESCRIBE.SAND = "make fun of me if I forget to change this if sand is reimplemented."
 	DESCRIBE.SANDHILL = "I will not make a mountain out of a sandhill."
 	DESCRIBE.SNOWPILE = "A shovel would help against frostbite when clearing these!"
