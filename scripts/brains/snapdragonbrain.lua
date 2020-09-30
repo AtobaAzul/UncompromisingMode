@@ -26,12 +26,12 @@ local function EatFoodAction(inst)
     local target = FindEntity(inst, SEE_FOOD_DIST,
         function(item)
 			return inst.components.eater:CanEat(item) and
-            item:HasTag("insect")-- and
-			--not (inst.components.follower and inst.components.follower.leader)
+            item:HasTag("insect") and
+			not (inst.components.follower and inst.components.follower.leader)
 				or TheWorld.state.issummer and 
 				inst.components.eater:CanEat(item) and
-				(item:HasTag("insect") or item:HasTag("meat")) --and
-				--not (inst.components.follower and inst.components.follower.leader)
+				(item:HasTag("insect") or item:HasTag("meat")) and
+				not (inst.components.follower and inst.components.follower.leader)
 		--[[
             return inst.components.eater:CanEat(item) and
             item.components.bait and

@@ -298,19 +298,6 @@ local function ontimerdone(inst, data)
     end
 end
 
-local function OnIsSummer(inst, issummer)
-    if issummer then
-		if inst.components.eater ~= nil then
-			inst.components.eater:SetDiet({ FOODTYPE.INSECT, FOODTYPE.VEGGIE, FOODTYPE.MEAT }, { FOODTYPE.INSECT, FOODTYPE.VEGGIE, FOODTYPE.MEAT })
-		end
-		inst.AnimState:OverrideSymbol("neck", "snapdragon_build_neck", "neck")
-    else
-		if inst.components.eater ~= nil then
-			inst.components.eater:SetDiet({ FOODTYPE.INSECT, FOODTYPE.VEGGIE }, { FOODTYPE.INSECT, FOODTYPE.VEGGIE })
-		end
-		inst.AnimState:OverrideSymbol("neck", "snapdragon_build", "neck")
-    end
-end
 
 local function common_fn(scale)
 	local inst = CreateEntity()
@@ -351,10 +338,6 @@ local function common_fn(scale)
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODTYPE.INSECT, FOODTYPE.VEGGIE }, { FOODTYPE.INSECT, FOODTYPE.VEGGIE })
 	
-    inst:WatchWorldState("issummer", OnIsSummer)
-    if TheWorld.state.issummer then
-        OnIsSummer(inst, true)
-    end
 	
     --inst.components.eater:SetSnappy()
     inst.components.eater:SetOnEatFn(OnEat)
