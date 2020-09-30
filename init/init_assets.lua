@@ -228,6 +228,8 @@ Assets = {
 	Asset("ANIM", "anim/weevole.zip"),
 	Asset("ANIM", "anim/widowsgrasp.zip"), 
 	Asset("ANIM", "anim/swap_widowsgrasp.zip"),
+	Asset("ANIM", "anim/fruitbat.zip"),
+	Asset("ANIM", "anim/pitcher.zip"),
 	Asset("IMAGE", "images/inventoryimages/widowsgrasp.tex"),
 	Asset("ATLAS", "images/inventoryimages/widowsgrasp.xml"),
 	--Map Icons Start--

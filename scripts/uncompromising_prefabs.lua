@@ -143,4 +143,6 @@ return {
 	"lightninghound",
 	"hound_lightning",
 	"aphid",
+	"fruitbat",
+	"pitcherplant",
 }
