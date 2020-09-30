@@ -77,8 +77,10 @@ recipes.vegstinger.health = 10
 -- butterfly health reduced
 -----------------------------------------------------------------
 AddPrefabPostInit("butterflywings", function (inst)
+	inst:AddTag("snapdragons_cant_eat")
+
     if inst ~= nil and inst.components.edible ~= nil then
-        inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.FOOD_BUTTERFLY_WING_HEALTH
+        inst.components.edible.healthvalue = 0 --GLOBAL.TUNING.DSTU.FOOD_BUTTERFLY_WING_HEALTH
         inst.components.edible.hungervalue = GLOBAL.TUNING.DSTU.FOOD_BUTTERFLY_WING_HUNGER
         inst.components.edible.perishtime = GLOBAL.TUNING.DSTU.FOOD_BUTTERFLY_WING_HUNGER
     end
