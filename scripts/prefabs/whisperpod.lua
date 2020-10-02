@@ -2,7 +2,7 @@ require "prefabutil"
 
 local assets =
 {
-    Asset("ANIM", "anim/whisperpod_normal_ground.zip"),
+    Asset("ANIM", "anim/whisperpod.zip"),
 }
 
 local prefabs =
@@ -26,8 +26,8 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("seeds")
-    inst.AnimState:SetBuild("seeds")
+    inst.AnimState:SetBank("whisperpod")
+    inst.AnimState:SetBuild("whisperpod")
     inst.AnimState:PlayAnimation("idle")
     inst.AnimState:SetRayTestOnBB(true)
 
@@ -46,6 +46,7 @@ local function fn()
     inst.components.deployable.ondeploy = OnDeploy
 	
     inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/whisperpod.xml"
 
     inst:AddComponent("inspectable")
 	
