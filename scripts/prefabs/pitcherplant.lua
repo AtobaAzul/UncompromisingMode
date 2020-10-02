@@ -31,18 +31,12 @@ local function OnEnterDark(inst)
 end
 
 
-local function UpdateSap(inst)
-if inst.count ~= nil and inst.count > 2 then
-inst.components.lootdropper:DropLoot()
-inst.count = inst.count - 2
-end
-end
+
 local function onchildgoinghome(inst, data)
         if data.child ~= nil and
         data.child.bugcount ~= nil then
 		inst.count = data.child.bugcount
         end
-UpdateSap(inst)
 end
 
 local function SeasonalSpawnChanges(inst, season)
@@ -91,9 +85,15 @@ end
 local function OnInit(inst)
     inst:WatchWorldState("isday", OnIsDay)
     OnIsDay(inst, TheWorld.state.isday)
+	local x, y ,z = inst.Transform:GetWorldPosition()
+	inst.Transform:SetPosition(x,9,z)
 end
 
-local function MakeBeebox(name, common_postinit, master_postinit)
+local function onspawnbat(inst, bat)
+    bat.sg:GoToState("flyback")
+end
+
+local function MakeBeebox(name, common_postinit)
 
     local function fn()
         local inst = CreateEntity()
@@ -142,14 +142,14 @@ local function MakeBeebox(name, common_postinit, master_postinit)
 		inst:DoTaskInTime(0, OnInit)
 
         inst:AddComponent("inspectable")
-		
+		inst.components.childspawner:SetSpawnedFn(onspawnbat)
+		inst:AddComponent("lootdropper")
+		inst.components.lootdropper:SetChanceLootTable("pitcherplant")
+		MakeLargePropagator(inst)
 		inst.count = 0
 		inst.OnSave = onsave
-		inst.OnLoad = onload
-        if master_postinit then
-            master_postinit(inst)
-        end        
-
+		inst.OnLoad = onload  
+		
         return inst
     end
 
@@ -159,15 +159,10 @@ end
 local function pitcher_common(inst)
     inst.AnimState:SetBank("pitcher")
     inst.AnimState:SetBuild("pitcher")
-    inst.AnimState:PlayAnimation("swing")
+    inst.AnimState:PlayAnimation("swinglong")
 end
 
-local function pitcher_master(inst)
-    inst:AddComponent("lootdropper")
 
-    MakeLargePropagator(inst)  
-end
-
-return MakeBeebox("pitcherplant", pitcher_common, pitcher_master)
+return MakeBeebox("pitcherplant", pitcher_common)
 
     

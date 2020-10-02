@@ -1,5 +1,5 @@
 require "brains/fruitbatbrain"
-require "stategraphs/SGvampirebat"
+require "stategraphs/SGfruitbat"
 
 local assets=
 {
@@ -44,19 +44,12 @@ end
 local function KeepTarget(inst, target)
     return true 
 end
-local function OnAttackOther(inst, data)
-    if data.target ~= nil and data.target.components ~= nil and data.target.components.edible ~= nil and data.target:HasTag("insect") then
-        inst.components.eater:Eat(data.target)--, giver)
-		inst.sg:GoToState("eat")
-    end
-end
+
 local function OnEat(inst, data)
 	if data ~= nil and data:HasTag("pollenmites") then
 		inst.SoundEmitter:PlaySound("UCSounds/pollenmite/die")
 	end
-		if data ~= nil and data:HasTag("insect") then
 		inst.bugcount = inst.bugcount + 1
-	end
 end
 local function MakeTeam(inst, attacker)
     local leader = SpawnPrefab("teamleader")
@@ -141,9 +134,6 @@ local function OnAttacked(inst, data)
 end
 
 
-local function OnAttackOther(inst, data)
-    inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST, function(dude) return dude:HasTag("fruitbat") and not dude.components.health:IsDead() end, 5)
-end
 
 local function OnWaterChange(inst, onwater)
     if onwater then
@@ -160,6 +150,7 @@ local function onsave(inst, data)
     if inst.sg:HasStateTag("sleeping") then
         data.forcesleep = true
     end
+	data.bugcount = inst.bugcount
 end
 
 local function onload(inst, data)
@@ -171,7 +162,12 @@ local function onload(inst, data)
         inst.sg:GoToState("forcesleep")
         inst.components.sleeper.hibernate = true
         inst.components.sleeper:GoToSleep()
-    end    
+    end
+	if data.bugcount then
+	inst.bugcount = data.bugcount
+	else
+	inst.bugcount = 0
+	end
   end
 end
 local function OnPreLoad(inst, data)
@@ -213,6 +209,7 @@ local function fn()
     --inst.Physics:CollidesWith(COLLISION.CHARACTERS)
 
     inst:AddTag("bat")
+	inst:AddTag("fruitbat")
     inst:AddTag("scarytoprey")
     inst:AddTag("monster")
     inst:AddTag("hostile")
@@ -242,7 +239,7 @@ local function fn()
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetResistance(3)
     
-    inst:SetStateGraph("SGvampirebat")
+    inst:SetStateGraph("SGfruitbat")
  
     local brain = require "brains/fruitbatbrain"
     inst:SetBrain(brain)
@@ -259,7 +256,6 @@ local function fn()
     
     inst:ListenForEvent("wingdown", OnWingDown)
     inst:ListenForEvent("attacked", OnAttacked)
-    inst:ListenForEvent("onattackother", OnAttackOther)
     --inst:ListenForEvent("death", OnKilled)
 
     --inst:AddComponent("tiletracker")

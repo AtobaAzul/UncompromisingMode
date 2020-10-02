@@ -7,7 +7,7 @@ require "behaviours/chaseandattack"
 
 local MAX_CHASE_TIME = 60
 local MAX_CHASE_DIST = 40
-local SEE_FOOD_DIST = 30
+local SEE_FOOD_DIST = 40
 local MAX_WANDER_DIST = 40
 local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
 
