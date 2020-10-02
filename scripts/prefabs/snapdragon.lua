@@ -160,7 +160,7 @@ end
 local function ShouldAcceptItem(inst, item)
     return inst.components.eater:CanEat(item)
         and not inst.components.combat:HasTarget()
-		and not item.prefab == "butterflywings"
+		and not item:HasTag("snapdragons_cant_eat")
 end
 
 local function OnGetItemFromPlayer(inst, giver, item)

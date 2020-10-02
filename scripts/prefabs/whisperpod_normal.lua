@@ -123,7 +123,7 @@ local function fn()
 			
 	inst.AnimState:SetBank("whisperpod_normal_ground")
 	inst.AnimState:SetBuild("whisperpod_normal_ground")
-	inst.AnimState:PlayAnimation("placer")
+	inst.AnimState:PlayAnimation("sprout")
 	--inst.AnimState:Hide("mouseover")
 	
     --[[local scale = 1.22
