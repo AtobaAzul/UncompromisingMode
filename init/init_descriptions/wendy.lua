@@ -135,6 +135,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "She could eat me in a single bite."
 	DESCRIBE.GIANT_TREE = "Ancient, and full of life."
+	DESCRIBE.WIDOWSGRASP = "It could've impaled my chest with ease. I wish it did."
+	DESCRIBE.WEBBEDCREATURE = "If I make a mistake, it could be me in one of those."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

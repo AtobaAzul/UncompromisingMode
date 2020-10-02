@@ -136,6 +136,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "A solidary predator. It appears to be near the top of the food chain."
 	DESCRIBE.GIANT_TREE = "Sequoioideae, the redwood tree."
+	DESCRIBE.WIDOWSGRASP = "The limb of the predator arachnid."
+	DESCRIBE.WEBBEDCREATURE = "It doesnt appear to be a nest. I assume it contains something."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

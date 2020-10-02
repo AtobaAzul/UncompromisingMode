@@ -165,6 +165,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "That thing could eat a giant!!"
 	DESCRIBE.GIANT_TREE = "It totally blocks out the sun."
+	DESCRIBE.WIDOWSGRASP =  "Let's open up those cocoons!"
+	DESCRIBE.WEBBEDCREATURE = "It wouldn't hurt to see what's inside, right?"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

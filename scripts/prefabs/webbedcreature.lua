@@ -216,8 +216,6 @@ local function fn()
 
 		MakeObstaclePhysics(inst, .5)
 
-		local minimap = inst.entity:AddMiniMapEntity()
-		minimap:SetIcon( "spiderden.png" )
 
 		inst.AnimState:SetBank("spider_cocoon")
 		inst.AnimState:SetBuild("spider_cocoon")

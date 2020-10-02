@@ -135,6 +135,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "I don't think I'm getting any monster meat from it."
 	DESCRIBE.GIANT_TREE = "What a marvel."
+	DESCRIBE.WIDOWSGRASP = "I could fry it?"
+	DESCRIBE.WEBBEDCREATURE = "Do I really want to get my ingredients from that?"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

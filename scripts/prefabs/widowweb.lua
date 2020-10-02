@@ -44,7 +44,6 @@ local function fn()
 
     inst.GroundCreepEntity:SetRadius(10)
     inst:AddTag("spiderden")
-    inst.MiniMapEntity:SetIcon("whitespider_den.png")
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then

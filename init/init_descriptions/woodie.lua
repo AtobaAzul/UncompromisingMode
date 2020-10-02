@@ -136,6 +136,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "You can have the trees!!"
 	DESCRIBE.GIANT_TREE = "That's a real beaut."
+	DESCRIBE.WIDOWSGRASP = "Maybe this could rip open those cocoons, eh?"
+	DESCRIBE.WEBBEDCREATURE = "Should I really put my neck out to find out what it has?"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

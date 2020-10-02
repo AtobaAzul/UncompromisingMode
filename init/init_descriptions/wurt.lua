@@ -137,6 +137,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "F-florp!! Im not bite-sized!"
 	DESCRIBE.GIANT_TREE = "Wurgh, big tree!"
+	DESCRIBE.WIDOWSGRASP = "Got an owie, florp."
+	DESCRIBE.WEBBEDCREATURE = "Florp, belongs to spiderfolk."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

@@ -136,6 +136,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "I'll, uh, stay over here."
 	DESCRIBE.GIANT_TREE = "We're not chopping that one down any time soon."
+	DESCRIBE.WIDOWSGRASP = "We could bash open those cocoons now!"
+	DESCRIBE.WEBBEDCREATURE = "Hm, I'd like to crack it open."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

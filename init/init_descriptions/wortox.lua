@@ -136,6 +136,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "The soul guardian!"
 	DESCRIBE.GIANT_TREE = "The bigger they are... Hyuyu!"
+	DESCRIBE.WIDOWSGRASP = "It costed it an arm and a leg! Hyuyu!"
+	DESCRIBE.WEBBEDCREATURE = "Theft is an old trick, but it never gets old!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

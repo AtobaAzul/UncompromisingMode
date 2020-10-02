@@ -135,6 +135,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "We're a spider too!! Why are you attacking us?!"
 	DESCRIBE.GIANT_TREE = "It's probably super old."
+	DESCRIBE.WIDOWSGRASP = "..."
+	DESCRIBE.WEBBEDCREATURE = "Ooh! Did our friends leave a gift?"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

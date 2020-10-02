@@ -106,7 +106,7 @@ local function MakeBeebox(name, common_postinit)
         inst.entity:AddLightWatcher()
 
 
-        inst.MiniMapEntity:SetIcon("beebox.png")
+        inst.MiniMapEntity:SetIcon("pitcher.tex")
 
         inst.AnimState:SetBank("bee_box")
         inst.AnimState:SetBuild("bee_box")

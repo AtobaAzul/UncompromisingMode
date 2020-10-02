@@ -245,6 +245,10 @@ Assets = {
 	Asset( "ATLAS", "images/map_icons/air_conditioner_map.xml" ),
 	Asset( "IMAGE", "images/map_icons/blueberryplant_map.tex" ),
 	Asset( "ATLAS", "images/map_icons/blueberryplant_map.xml" ),
+	Asset( "IMAGE", "images/map_icons/giant_tree.tex" ),
+	Asset( "ATLAS", "images/map_icons/giant_tree.xml" ),
+	Asset( "IMAGE", "images/map_icons/pitcher.tex" ),
+	Asset( "ATLAS", "images/map_icons/pitcher.xml" ),
 	--Map Icons End--
 
 	Asset( "IMAGE", "bigportraits/willow.tex" ),

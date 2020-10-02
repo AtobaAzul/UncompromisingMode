@@ -410,7 +410,7 @@ local function makefn()
 		inst.entity:AddMiniMapEntity()
 		inst.entity:AddDynamicShadow()
 		inst:AddTag("tree")
-		inst.MiniMapEntity:SetIcon("grass.png")
+		inst.MiniMapEntity:SetIcon("giant_tree.tex")
 		
         MakeObstaclePhysics(inst, 2.35)
 

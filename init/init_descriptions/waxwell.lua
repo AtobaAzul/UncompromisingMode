@@ -137,6 +137,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "I want to stay FAR away from her."
 	DESCRIBE.GIANT_TREE = "This tree is unusually large."
+	DESCRIBE.WIDOWSGRASP = "It got blood on my suit!"
+	DESCRIBE.WEBBEDCREATURE = "Ugh, there's a vile stench coming from them."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",
