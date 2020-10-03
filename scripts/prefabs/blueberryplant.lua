@@ -66,18 +66,13 @@ local function do_snap(inst)
     end
 end
 
-local function reset(inst)
+local function Regrow(inst)
     inst.components.mine:Reset()
 	inst.Harvestable = true
 end
 
 local function start_reset_task(inst)
-    if inst._reset_task ~= nil then
-        inst._reset_task:Cancel()
-    end
-    local reset_task_randomized_time = GetRandomWithVariance(TUNING.STARFISH_TRAP_NOTDAY_RESET.BASE, TUNING.STARFISH_TRAP_NOTDAY_RESET.VARIANCE)
-    inst._reset_task = inst:DoTaskInTime(24*reset_task_randomized_time, reset)
-    inst._reset_task_end_time = GetTime() + reset_task_randomized_time
+	inst.components.timer:StartTimer("regrow", 3840)
 end
 
 local function on_explode(inst, target)
@@ -227,11 +222,12 @@ local function blueberryplant()
     inst.components.mine:SetOnDeactivateFn(on_deactivate)
     inst.components.mine:SetTestTimeFn(calculate_mine_test_time)
     inst.components.mine:SetReusable(false)
-    reset(inst)
+    Regrow(inst)
 
     -- Stop the blueberries from idling in unison.
     inst.AnimState:SetTime(math.random() * inst.AnimState:GetCurrentAnimationLength())
-
+	inst:AddComponent("timer")
+	inst:ListenForEvent("timerdone", Regrow)
     -- Start the task for the characterizing additional idles.
     inst:ListenForEvent("animover", on_anim_over)
 	inst.Harvestable = true

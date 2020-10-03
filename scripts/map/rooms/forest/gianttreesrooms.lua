@@ -168,7 +168,7 @@ AddRoom("MoonBaseGiantTrees", {
 									evergreen_sparse = 0.5,
 									hooded_fern = 0.5,
 									blueberryplantbuncher = 0.001,
-									pitcherplant = 0.05,
+									pitcherplant = 0.0001,
 					                },
 					            }
 					})

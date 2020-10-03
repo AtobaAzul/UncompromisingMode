@@ -66,23 +66,15 @@ local function EatFoodAction(inst)
 end
 function VampireBatBrain:OnStart()
     local root = PriorityNode({
-        EventNode(self.inst, "panic",
-            ParallelNode{
-                Panic(self.inst),
-                WaitNode(6),
-            }),
         WhileNode(function() return self.inst.components.health.takingfiredamage or self.inst.components.hauntable.panic end, "Panic", Panic(self.inst)),
-        AttackWall(self.inst),
         ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST),
         WhileNode(function() return TheWorld.state.isnight end, "IsNight",
             DoAction(self.inst, GoHomeAction)),
-        WhileNode(function() return self.inst.components.teamattacker.teamleader == nil end, "No Leader",
-            PriorityNode{
+          
                 DoAction(self.inst, EatFoodAction),
                 MinPeriod(self.inst, TUNING.BAT_ESCAPE_TIME, false,
                     DoAction(self.inst, EscapeAction)),
                 Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST),
-            }),
     }, .25)
 
     self.bt = BT(self.inst, root)
