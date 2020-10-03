@@ -23,12 +23,12 @@ SetSharedLootTable( 'snapdragon',
 
 local sounds = 
 {
-    walk = "dontstarve/beefalo/walk",
-    grunt = "dontstarve/beefalo/grunt",
-    yell = "dontstarve/beefalo/yell",
+    walk = "dontstarve/creatures/eyeplant/eye_emerge",
+    grunt = "UCSounds/snapdragon/grunt",
+    yell = "UCSounds/snapdragon/yell",
     swish = "dontstarve/beefalo/tail_swish",
     curious = "dontstarve/beefalo/curious",
-    angry = "dontstarve/beefalo/angry",
+    angry = "UCSounds/snapdragon/angry",
 }
 
 --local function Retarget(inst)
@@ -51,7 +51,7 @@ local function Retarget(inst)
 end
 
 local function KeepTarget(inst, target)
-    return true 
+    return inst.components.combat:CanTarget(target) and inst:IsNear(target, 10)
 end
 
 local function OnNewTarget(inst, data)

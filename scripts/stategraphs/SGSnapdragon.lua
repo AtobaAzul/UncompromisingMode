@@ -54,8 +54,14 @@ local states=
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("taunt")
-            inst.SoundEmitter:PlaySound(inst.sounds.yell)
+            
         end,
+		
+        timeline=
+        {
+            TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.yell) end),
+        },
+		
         events=
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
@@ -160,8 +166,8 @@ CommonStates.AddWalkStates(
     {
         walktimeline = 
         { 
-            TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.walk) end),
-            TimeEvent(40*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.walk) end),
+            TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.walk, nil, 0.1) end),
+            TimeEvent(21*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.walk, nil, 0.1) end),
         }
     })
     
@@ -170,7 +176,8 @@ CommonStates.AddRunStates(
     {
         runtimeline = 
         { 
-            TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.walk) end),
+            TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.walk, nil, 0.1) end),
+            TimeEvent(21*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.walk, nil, 0.1) end),
         }
     })
 
@@ -181,7 +188,7 @@ CommonStates.AddSleepStates(states,
 {
     sleeptimeline = 
     {
-        TimeEvent(46*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.grunt) end)
+        TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.grunt) end)
     },
 })
     
