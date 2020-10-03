@@ -87,8 +87,8 @@ AddPrefabPostInit("butterflywings", function (inst)
 end)
 AddPrefabPostInit("spoiled_food", function (inst)
     if inst ~= nil and inst.components.edible ~= nil then
-        inst.components.edible.healthvalue = FOOD_SPOILED_FOOD_HEALTH
-        inst.components.edible.sanityvalue = FOOD_SPOILED_FOOD_SANITY
+        inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.FOOD_SPOILED_FOOD_HEALTH
+        inst.components.edible.sanityvalue = GLOBAL.TUNING.DSTU.FOOD_SPOILED_FOOD_SANITY
     end
 end)
 AddPrefabPostInit("cactus_meat", function (inst)
