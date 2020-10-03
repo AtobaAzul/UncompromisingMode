@@ -5,7 +5,7 @@ require "behaviours/panic"
 require "behaviours/follow"
 require "behaviours/attackwall"
 --require "behaviours/runaway"
---require "behaviours/doaction"
+require "behaviours/doaction"
 
 local SEE_FOOD_DIST = 15
 local STOP_RUN_DIST = 10

@@ -60,11 +60,17 @@ local function OnNewTarget(inst, data)
     end
 end
 
+local function IsSnapDragon(dude)
+    return dude:HasTag("snapdragon")
+end
+
 local function OnAttacked(inst, data)
-    inst.components.combat:SetTarget(data.attacker)
-    inst.components.combat:ShareTarget(data.attacker, 30,function(dude)
-        return dude:HasTag("snapdragon") and not dude:HasTag("player") and not dude.components.health:IsDead()
-    end, 5)
+    local attacker = data.attacker
+	
+	if attacker ~= nil then
+		inst.components.combat:SetTarget(attacker)
+		inst.components.combat:ShareTarget(attacker, 30, IsSnapDragon, 5)
+	end
 end
 
 local function OnEat(inst, data)
@@ -82,55 +88,6 @@ end
 local function isnotsnapdragon(ent)
 	if ent ~= nil and not ent:HasTag("snapdragon") then -- fix to friendly AOE: refer for later AOE mobs -Axe
 		return true
-	end
-end
-
-local function OnPollenDirty(inst)
-    local fx = CreateEntity()
-
-    fx:AddTag("FX")
-    fx:AddTag("NOCLICK")
-    --[[Non-networked entity]]
-    fx.entity:SetCanSleep(false)
-    fx.persists = false
-
-    fx.entity:AddTransform()
-    fx.entity:AddAnimState()
-
-    fx.AnimState:SetBank("wormwood_pollen_fx")
-    fx.AnimState:SetBuild("wormwood_pollen_fx")
-    fx.AnimState:PlayAnimation("pollen"..tostring(inst.pollen:value()))
-    fx.AnimState:SetFinalOffset(4)
-
-    fx:ListenForEvent("animover", fx.Remove)
-
-    fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
-end
-
-local function DoSpawnPollen(inst)
-    --This is an untracked task from PollenTick, so we nil check .pollentask instead.
-    if inst.pollentask ~= nil and
-        not (inst.sg:HasStateTag("nomorph") or
-            inst.sg:HasStateTag("silentmorph") or
-            inst.sg:HasStateTag("ghostbuild") or
-            inst.components.health:IsDead()) and
-        inst.entity:IsVisible() then
-        --randomize, favoring ones that haven't been used recently
-        local rnd = math.random()
-        rnd = table.remove(inst.pollenpool, math.clamp(math.ceil(rnd * rnd * #inst.pollenpool), 1, #inst.pollenpool))
-        table.insert(inst.pollenpool, rnd)
-        inst.pollen:set_local(0)
-        inst.pollen:set(rnd)
-        --Dedicated server does not need to spawn the local fx
-        if not TheNet:IsDedicated() then
-            OnPollenDirty(inst)
-        end
-    end
-end
-
-local function PollenTick(inst)
-	if TheWorld.state.issummer then
-		inst:DoTaskInTime(math.random() * .6, DoSpawnPollen)
 	end
 end
 
@@ -360,7 +317,7 @@ local function common_fn(scale)
     inst.components.eater:SetOnEatFn(OnEat)
     
     inst:AddComponent("combat")
-    inst.components.combat.hiteffectsymbol = "beefalo_body"
+    inst.components.combat.hiteffectsymbol = "body"
     inst.components.combat:SetDefaultDamage(34)
     inst.components.combat:SetRetargetFunction(1, Retarget)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
@@ -384,22 +341,13 @@ local function common_fn(scale)
 	
     inst:ListenForEvent("newcombattarget", OnNewTarget)
     inst:ListenForEvent("attacked", OnAttacked)
-    inst:ListenForEvent("onattackother", OnAttackOther)
+	inst:ListenForEvent("onattackother", OnAttackOther)
 
-    MakeLargeBurnableCharacter(inst, "swap_fire")
-    MakeLargeFreezableCharacter(inst, "beefalo_body")
+    MakeLargeBurnableCharacter(inst, "body")
+    MakeLargeFreezableCharacter(inst, "body")
     
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetResistance(3)
-	
-    inst.pollen = net_tinybyte(inst.GUID, "wormwood.pollen", "pollendirty")
-    inst.pollentask = nil
-    inst.pollenpool = { 1, 2, 3, 4, 5 }
-    for i = #inst.pollenpool, 1, -1 do
-        --randomize in place
-        table.insert(inst.pollenpool, table.remove(inst.pollenpool, math.random(i)))
-    end
-    inst.pollentask = inst:DoPeriodicTask(.7, PollenTick)
     
     local brain = require "brains/snapdragonbrain"
     inst:SetBrain(brain)
