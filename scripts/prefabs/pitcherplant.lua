@@ -108,10 +108,10 @@ local function MakeBeebox(name, common_postinit)
 
         inst.MiniMapEntity:SetIcon("pitcher.tex")
 
-        inst.AnimState:SetBank("bee_box")
-        inst.AnimState:SetBuild("bee_box")
-        inst.AnimState:PlayAnimation("swing")
-
+		inst.AnimState:SetBank("pitcher")
+		inst.AnimState:SetBuild("pitcher")
+		inst.AnimState:PlayAnimation("swinglong")
+	
       
   
         if common_postinit ~= nil then
@@ -156,13 +156,7 @@ local function MakeBeebox(name, common_postinit)
     return Prefab(name, fn, assets, prefabs)
 end
 
-local function pitcher_common(inst)
-    inst.AnimState:SetBank("pitcher")
-    inst.AnimState:SetBuild("pitcher")
-    inst.AnimState:PlayAnimation("swinglong")
-end
 
-
-return MakeBeebox("pitcherplant", pitcher_common)
+return MakeBeebox("pitcherplant")
 
     
