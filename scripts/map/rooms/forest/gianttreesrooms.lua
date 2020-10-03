@@ -13,11 +13,37 @@ AddRoom("GiantTrees",
 		blueberryplantbuncher = 0.05,
 		mushtree_medium = 0.05,
 		hoodedtrapdoor = 0.05,
+		giant_tree_infested = 0.01,
 		},
 		
 			countprefabs =	
 		{
 			giant_tree = function () return 6 + math.random(1,2) end,
+			extracanopyspawner = function () return 6 + math.random(0,1) end,
+			pitcherplant = function () return math.random(1,2) end,
+			
+		}
+}})
+AddRoom("AphidLand", 
+{
+	colour={r=.6,g=.2,b=.8,a=.50},
+	value = GROUND.JUNGLE,
+	tags = {"RoadPoison", "hoodedcanopy"}, --"ForceDisconnected"
+	contents =  
+	{	
+		distributepercent = 0.3,
+		distributeprefabs = {
+		sapling = 0.2,
+		evergreen_sparse = 0.5,
+		hooded_fern = 0.5,
+		blueberryplantbuncher = 0.05,
+		mushtree_tall = 0.05,
+		hoodedtrapdoor = 0.05,
+		},
+		
+			countprefabs =	
+		{
+			giant_tree_infested = function () return 6 + math.random(1,2) end,
 			extracanopyspawner = function () return 6 + math.random(0,1) end,
 			pitcherplant = function () return math.random(1,2) end,
 			
@@ -39,6 +65,7 @@ AddRoom("ShroomInfestedGiantTrees",
 		mushtree_tall = 0.2,
 		mushtree_medium = 0.3,
 		hoodedtrapdoor = 0.015,
+		giant_tree_infested = 0.005,
 		},
 		
 			countprefabs =	
@@ -64,6 +91,7 @@ AddRoom("WalrusGiantTrees",
 		blueberryplantbuncher = 0.02,
 		mushtree_small = 0.05,
 		hoodedtrapdoor = 0.2,
+		giant_tree_infested = 0.005,
 		},
 		
 			countprefabs =	
@@ -89,6 +117,7 @@ AddRoom("BGGiantTrees",
 		hooded_fern = 0.5,
 		blueberryplantbuncher = 0.035,
 		mushtree_tall = 0.05,
+		giant_tree_infested = 0.005,
 		},
 			countprefabs =	
 		{
@@ -112,6 +141,7 @@ AddRoom("SnapDragons",
 				snapdragon = 0.2,
 				hooded_fern= 0.02,
 				giant_tree = 0.005,
+				giant_tree_infested = 0.005,
 			},
 			countprefabs =	
 			{
@@ -156,6 +186,7 @@ AddRoom("SpideryGiantTrees",
 				houndbone = 0.25,
 				extracanopyspawner = 1,
 				hooded_fern = 0.5,
+				giant_tree_infested = 0.006,
 			},
 			countprefabs =	
 			{

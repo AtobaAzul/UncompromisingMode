@@ -12,6 +12,7 @@ AddTask("GiantTrees", {
 			["MoonBaseGiantTrees"] = 1,
 			["ShroomInfestedGiantTrees"] = 1,
 			["SnapDragons"] = 1,
+			["AphidLand"] = 1,
 		},
 		room_bg=GROUND.JUNGLE,
 		background_room="BGGiantTrees",

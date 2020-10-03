@@ -1,6 +1,7 @@
 local assets =
 {
 Asset("ANIM", "anim/giant_tree.zip"),
+Asset("ANIM", "anim/giant_tree_infested.zip"),
 }
 --[[local felloot =  -Rip
 {
@@ -56,6 +57,26 @@ local choploot =
 	"nothinglol",
 	"nothinglol",
 	"nothinglol",
+	"nothinglol",
+	"nothinglol",
+	"nothinglol",
+}
+
+local infestedloot =
+{
+	--"fallingbeehive",
+    "log",
+    "twigs",
+    "log",
+    "twigs",
+	"twigs",
+	"twigs",
+    "twigs",
+	"aphid",
+	"aphid",
+	"aphid",
+	"aphid",
+	"aphid",
 	"nothinglol",
 	"nothinglol",
 	"nothinglol",
@@ -267,7 +288,7 @@ local function SpawnDebris(inst,chopper,loottable)
             if math.random() < .5 then
                 debris.Transform:SetRotation(180)
             end
-			if not debris:HasTag("spider") then
+			if not (debris:HasTag("spider") or debris:HasTag("aphid")) then
             debris.Physics:Teleport(x, 35, z)
             debris.shadow = SpawnPrefab("warningshadow")
             debris.shadow:ListenForEvent("onremove", function(debris) debris.shadow:Remove() end, debris)
@@ -279,10 +300,19 @@ local function SpawnDebris(inst,chopper,loottable)
 																						-- ^This Value is from quaker
 			else
 			if TheWorld.Map:IsVisualGroundAtPoint(x,y,z) then
+			if debris:HasTag("spider") then
+			
 			debris.Physics:Teleport(x, y, z)
 			debris.sg:GoToState("dropper_enter")
 			if debris.components.combat ~= nil and not chopper:HasTag("spiderwhisperer") then
 			debris.components.combat:SuggestTarget(chopper)
+			end
+			end
+			if debris:HasTag("aphid") then
+			debris.Physics:Teleport(x, y, z)
+			if debris.components.combat ~= nil and not chopper:HasTag("spiderwhisperer") then
+			debris.components.combat:SuggestTarget(chopper)
+			end
 			end
 			else
 			debris:Remove()
@@ -299,10 +329,13 @@ local function on_chop(inst, chopper, remaining_chops)
     end
 	local phase = 0
 	if not (chopper:HasTag("epic") or chopper:HasTag("antlion_sinkhole")) then
-	local oldchops = inst.previouschops
+	local oldchops = inst.previouschops or 24
 	inst.previouschops = remaining_chops
 	for k = 1, (oldchops-remaining_chops) do
-	SpawnDebris(inst,chopper,choploot)
+	if inst:HasTag("infestedtree") then
+	SpawnDebris(inst,chopper,infestedloot)
+	else
+	SpawnDebris(inst,chopper,choploot)	
 	end
 	end
 	if remaining_chops > 15 and remaining_chops < 20 then
@@ -322,6 +355,7 @@ local function on_chop(inst, chopper, remaining_chops)
     end			
 	--inst.AnimState:PlayAnimation("chopdamaged-"..phase)
 	inst.AnimState:PushAnimation("damaged-"..phase,true)
+	end
 	
 end
 
@@ -439,6 +473,76 @@ local function makefn()
 		inst.OnLoad = onload
         return inst
 end
+local function StartSpawning(inst)
+    if inst.components.childspawner ~= nil and
+        not (inst.components.freezable ~= nil and
+            inst.components.freezable:IsFrozen()) and
+        not TheWorld.state.isnight then
+        inst.components.childspawner:StartSpawning()
+    end
+end
+local function StopSpawning(inst)
+    if inst.components.childspawner ~= nil then
+        inst.components.childspawner:StopSpawning()
+    end
+end
+local function OnIsNight(inst, isnight)
+    if isnight then
+        StopSpawning(inst)
+    else
+        StartSpawning(inst)
+    end
+end
+local function OnInit(inst)
+    inst:WatchWorldState("isnight", OnIsNight)
+    OnIsNight(inst, TheWorld.state.isnight)
+end
+local function makeinfested()
+    	local inst = CreateEntity()
 
-return Prefab("giant_tree", makefn, assets)
+    	inst.entity:AddTransform()
+    	inst.entity:AddAnimState()
+        inst.entity:AddNetwork()
+		inst.entity:AddSoundEmitter()
+		inst.entity:AddMiniMapEntity()
+		inst.entity:AddDynamicShadow()
+		inst:AddTag("tree")
+		inst.MiniMapEntity:SetIcon("giant_tree.tex")
+		inst:AddTag("infestedtree")
+        MakeObstaclePhysics(inst, 2.35)
+
+        inst.AnimState:SetBank("giant_tree_infested")
+        inst.AnimState:SetBuild("giant_tree_infested")
+        inst.AnimState:PlayAnimation("damaged-0", true)
+
+        inst.entity:SetPristine()
+		
+        if not TheWorld.ismastersim then
+            return inst
+        end
+        inst:DoTaskInTime(0, OnInit)		
+		inst:AddComponent("workable")
+		inst.components.workable:SetWorkAction(ACTIONS.CHOP)
+		inst.components.workable:SetWorkLeft(25)
+		
+        inst:AddComponent("childspawner")
+        inst.components.childspawner.childname = "aphid"
+        inst.components.childspawner:SetRegenPeriod(TUNING.SPIDERDEN_REGEN_TIME)
+        inst.components.childspawner:SetSpawnPeriod(TUNING.SPIDERDEN_RELEASE_TIME)
+		
+        inst.components.childspawner.allowboats = true
+		inst.components.workable:SetOnWorkCallback(on_chop)
+		inst.components.workable:SetOnFinishCallback(on_chopped_down)
+		inst:AddComponent("timer")
+		inst:ListenForEvent("timerdone", Regrow)
+		inst:AddComponent("inspectable")
+		inst.previouschops = nil
+		--inst:DoPeriodicTask(5,Regrow)
+		inst:DoTaskInTime(0,SpawnTreeShadows)
+		inst.OnSave = onsave
+		inst.OnLoad = onload
+        return inst
+end
+return Prefab("giant_tree", makefn, assets),
+Prefab("giant_tree_infested", makeinfested, assets)
 
