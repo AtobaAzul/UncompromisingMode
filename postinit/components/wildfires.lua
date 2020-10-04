@@ -2,13 +2,14 @@ local env = env
 local getupvalue = GLOBAL.debug.getupvalue
 GLOBAL.setfenv(1, GLOBAL)
 local easing = require("easing")
-local UpvalueHacker = require("tools/upvaluehacker") --Baby's first upvaluehack, thanks Zark! -Axe
+local UpvalueHacker = require("tools/upvaluehacker") 
 
 
 
 
 
-env.AddClassPostConstruct("components/wildfires", function(self) 
+env.AddClassPostConstruct("components/wildfires", function(self)
+--[[	--local OLD = UpvalueHacker.GetUpvalue(LightFireForPlayer)
 	local function _Old(player, rescheduleFn) --TODO: Grab the original value from wildfires to prevent any issues with using another mod that modifies wildfires.
     _scheduledtasks[player] = nil
 
@@ -42,14 +43,14 @@ env.AddClassPostConstruct("components/wildfires", function(self)
 	end
 	
 	local function LightFireForPlayer(player, rescheduleFn)
+	print("coderunning")
 	if player.components.areaaware ~= nil then
 	if not player.components.areaaware:CurrentlyInTag("hoodedcanopy") then
-		--_Old(player, rescheduleFn)
+		--OLD(player, rescheduleFn)
 		else
 	    rescheduleFn(player)
 	end
 	end
-	UpvalueHacker.SetUpvalue(LightFireForPlayer, "ScheduleSpawn")
-	UpvalueHacker.SetUpvalue(LightFireForPlayer, "ForceWildfireForPlayer")
-end
+	UpvalueHacker.SetUpvalue(GLOBAL.Components.wildfires.class, LightFireForPlayer)
+end]]
 end)

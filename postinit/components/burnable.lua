@@ -3,6 +3,7 @@ GLOBAL.setfenv(1, GLOBAL)
 ------------------------Fire spread is less efficient in winter-----------------------------------------
 env.AddComponentPostInit("burnable", function(self)
 	local _OldExtendBurning = self.ExtendBurning
+	local _OldStartWildfire = self.StartWildfire
 	
 	local function DoneBurning(inst, self)
 		local isplant = inst:HasTag("plant") and not (inst.components.diseaseable ~= nil and inst.components.diseaseable:IsDiseased())
@@ -35,6 +36,14 @@ env.AddComponentPostInit("burnable", function(self)
 			self.task = self.burntime ~= nil and self.inst:DoTaskInTime(self.burntime * 0.24, DoneBurning, self) or nil
 		else
 			return _OldExtendBurning(self)
+		end
+	end
+	function self:StartWildfire()
+	local x,y,z = self.inst.Transform:GetWorldPosition()
+		if TheWorld.state.issummer and #TheSim:FindEntities(x,y,z,12,{"canopy"}) > 0 then
+		
+		else
+		return _OldStartWildfire(self)
 		end
 	end
 end)
