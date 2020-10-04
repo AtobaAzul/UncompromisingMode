@@ -449,7 +449,9 @@ local function makefn()
 		inst.entity:AddMiniMapEntity()
 		inst.entity:AddDynamicShadow()
 		inst:AddTag("tree")
+		inst:AddTag("giant_tree")
 		inst.MiniMapEntity:SetIcon("giant_tree.tex")
+        inst.MiniMapEntity:SetPriority(-1)
 		
         MakeObstaclePhysics(inst, 2.35)
 
@@ -513,7 +515,10 @@ local function makeinfested()
 		inst.entity:AddMiniMapEntity()
 		inst.entity:AddDynamicShadow()
 		inst:AddTag("tree")
+		inst:AddTag("giant_tree")
 		inst.MiniMapEntity:SetIcon("giant_tree.tex")
+        inst.MiniMapEntity:SetPriority(-1)
+		
 		inst:AddTag("infestedtree")
         MakeObstaclePhysics(inst, 2.35)
 

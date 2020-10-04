@@ -62,6 +62,21 @@ local function OnPreLoad(inst, data)
     end
 end
 
+local function oncollapse(inst, other)
+    if other:IsValid() and other.components.workable ~= nil and other.components.workable:CanBeWorked() then
+        SpawnPrefab("collapse_small").Transform:SetPosition(other.Transform:GetWorldPosition())
+        other.components.workable:Destroy(inst)
+    end
+end
+
+local function oncollide(inst, other)
+    if other ~= nil and
+        (other:HasTag("tree") or other:HasTag("boulder")) and not other:HasTag("giant_tree") and --HasTag implies IsValid
+        Vector3(inst.Physics:GetVelocity()):LengthSq() >= 1 then
+        inst:DoTaskInTime(2 * FRAMES, oncollapse, other)
+    end
+end
+
 env.AddPrefabPostInit("deerclops", function(inst)
 	
 	if not IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then
@@ -78,6 +93,8 @@ env.AddPrefabPostInit("deerclops", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
+	
+    inst.Physics:SetCollisionCallback(oncollide)
 	
 	inst.OnSave = OnSave
     inst.OnPreLoad = OnPreLoad
