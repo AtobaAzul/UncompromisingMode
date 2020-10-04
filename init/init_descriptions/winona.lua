@@ -138,6 +138,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.GIANT_TREE = "We're not chopping that one down any time soon."
 	DESCRIBE.WIDOWSGRASP = "We could bash open those cocoons now!"
 	DESCRIBE.WEBBEDCREATURE = "Hm, I'd like to crack it open."
+	DESCRIBE.SNAPDRAGON_BUDDY = "They work up quite an appetite!"
+	DESCRIBE.SNAPDRAGON = "Why's everything gotta be huge around here?"
+	DESCRIBE.FRUITBAT = "I actually don't mind this one."
+	DESCRIBE.FRUITBAT = "Flyin'... fruit?"
+	DESCRIBE.PITCHERPLANT = "It's just a plant."
+	DESCRIBE.APHID = "Just another pest."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

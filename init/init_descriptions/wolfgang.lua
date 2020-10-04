@@ -138,6 +138,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.GIANT_TREE = "Mightiest tree!"
 	DESCRIBE.WIDOWSGRASP = "Monster leg!"
 	DESCRIBE.WEBBEDCREATURE = "Wolfgang don't want to touch."
+	DESCRIBE.SNAPDRAGON_BUDDY = "Plant need food to grow strong like Wolfgang!"
+	DESCRIBE.SNAPDRAGON = "Mightiest plant!"
+	DESCRIBE.FRUITBAT = "Flying fruity!"
+	DESCRIBE.PITCHERPLANT = "If not skip leg day, Wolfgang could reach!"
+	DESCRIBE.APHID = "Is tiny bug!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

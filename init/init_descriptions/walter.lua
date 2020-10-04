@@ -138,6 +138,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.GIANT_TREE = "A redwood tree! You can see it from miles away!"
 	DESCRIBE.WIDOWSGRASP =  "Woby, fetch!"
 	DESCRIBE.WEBBEDCREATURE = "Ooh, I wonder what's in it!"
+	DESCRIBE.SNAPDRAGON_BUDDY = "Careful Woby! Those plants look hungry!"
+	DESCRIBE.SNAPDRAGON = "I've never seen anything like this before!"
+	DESCRIBE.FRUITBAT = "Maybe if we're lucky it'll turn me into a fruit!"
+	DESCRIBE.PITCHERPLANT = "I could hit it with my sling for practice!"
+	DESCRIBE.APHID = "It's fuzzy!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

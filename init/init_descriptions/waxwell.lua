@@ -139,6 +139,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.GIANT_TREE = "This tree is unusually large."
 	DESCRIBE.WIDOWSGRASP = "It got blood on my suit!"
 	DESCRIBE.WEBBEDCREATURE = "Ugh, there's a vile stench coming from them."
+	DESCRIBE.SNAPDRAGON_BUDDY = "If I feed it, will it go away?"
+	DESCRIBE.SNAPDRAGON = "I have no quarrel with you. Yet."
+	DESCRIBE.FRUITBAT = "Even uglier!"
+	DESCRIBE.PITCHERPLANT = "It's a plant, but high up."
+	DESCRIBE.APHID = "I don't like you."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

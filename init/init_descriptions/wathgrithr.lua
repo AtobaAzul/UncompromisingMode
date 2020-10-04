@@ -137,6 +137,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.GIANT_TREE = "Surely I stand before Yggdrasil!"
 	DESCRIBE.WIDOWSGRASP = "A key to my spoils!"
 	DESCRIBE.WEBBEDCREATURE = "I see spoils!"
+	DESCRIBE.SNAPDRAGON_BUDDY = "'Tis no warrior!"
+	DESCRIBE.SNAPDRAGON = "'Tis a vegetable - mine mortal enemy!"
+	DESCRIBE.FRUITBAT = "Tis not meat!"
+	DESCRIBE.PITCHERPLANT = "A plant!"
+	DESCRIBE.APHID = "Have at thee, bug!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

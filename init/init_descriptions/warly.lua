@@ -137,6 +137,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.GIANT_TREE = "What a marvel."
 	DESCRIBE.WIDOWSGRASP = "I could fry it?"
 	DESCRIBE.WEBBEDCREATURE = "Do I really want to get my ingredients from that?"
+	DESCRIBE.SNAPDRAGON_BUDDY = "It's hunger calls for me!"
+	DESCRIBE.SNAPDRAGON = "Goodness, you're large."
+	DESCRIBE.FRUITBAT = "I actually don't mind this one."
+	DESCRIBE.PITCHERPLANT = "I wonder if it has any dew inside?"
+	DESCRIBE.APHID = "A horrible pest."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

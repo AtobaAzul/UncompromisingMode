@@ -138,6 +138,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 	DESCRIBE.GIANT_TREE = "Big friend?"
 	DESCRIBE.WIDOWSGRASP = "Leggy Leg"
 	DESCRIBE.WEBBEDCREATURE = "Leggy bug goodies?"
+	DESCRIBE.SNAPDRAGON_BUDDY = "Hungry friend."
+	DESCRIBE.SNAPDRAGON = "Big friend! Big belly!"
+	DESCRIBE.FRUITBAT = "Flying friend."
+	DESCRIBE.PITCHERPLANT = "Hanging friend."
+	DESCRIBE.APHID = "Eating big friends!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

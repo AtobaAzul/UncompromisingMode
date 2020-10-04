@@ -167,6 +167,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.GIANT_TREE = "It totally blocks out the sun."
 	DESCRIBE.WIDOWSGRASP =  "Let's open up those cocoons!"
 	DESCRIBE.WEBBEDCREATURE = "It wouldn't hurt to see what's inside, right?"
+	DESCRIBE.SNAPDRAGON_BUDDY = "It looks hungry. Me too."
+	DESCRIBE.SNAPDRAGON = "It looks nice enough."
+	DESCRIBE.FRUITBAT = "Agh, it's still terrifying!"
+	DESCRIBE.PITCHERPLANT = "It's quite high up."
+	DESCRIBE.APHID = "A horrible pest."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

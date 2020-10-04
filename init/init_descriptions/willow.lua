@@ -138,6 +138,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.GIANT_TREE = "That's a big ol' tree."
 	DESCRIBE.WIDOWSGRASP = "Ugh, I don't wanna hold it!"
 	DESCRIBE.WEBBEDCREATURE = "Why SHOULDN'T I burn them?"
+	DESCRIBE.SNAPDRAGON_BUDDY = "This food's mine, you can't have it!"
+	DESCRIBE.SNAPDRAGON = "I wonder if you'd burn brighter than most."
+	DESCRIBE.FRUITBAT = "If it'd sit still I would burn it."
+	DESCRIBE.PITCHERPLANT = "If it were lower down I'd burn it."
+	DESCRIBE.APHID = "Your fuzzyness would make good tinder."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

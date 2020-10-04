@@ -137,6 +137,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.GIANT_TREE = "It's probably super old."
 	DESCRIBE.WIDOWSGRASP = "..."
 	DESCRIBE.WEBBEDCREATURE = "Ooh! Did our friends leave a gift?"
+	DESCRIBE.SNAPDRAGON_BUDDY = "Golly! We're glad they don't eat meat!"
+	DESCRIBE.SNAPDRAGON = "It looks pretty!"
+	DESCRIBE.FRUITBAT = "It's our favorite color!"
+	DESCRIBE.PITCHERPLANT = "If we could climb like the other spiders we could reach it."
+	DESCRIBE.APHID = "Not a spider!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

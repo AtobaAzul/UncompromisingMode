@@ -57,7 +57,7 @@ end
 local function OnGetItemFromPlayer(inst, giver, item)
     if item.components.plantable ~= nil and not inst.growing then
 		inst:AddComponent("crop")
-		inst.components.crop:StartGrowing("snapdragon", TUNING.SEEDS_GROW_TIME / 40)
+		inst.components.crop:StartGrowing("snapdragon", TUNING.SEEDS_GROW_TIME)
 		inst.components.crop:SetOnMatureFn(onmatured)
 		inst.growing = true
 		

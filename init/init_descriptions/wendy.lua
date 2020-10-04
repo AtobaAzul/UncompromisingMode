@@ -137,6 +137,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.GIANT_TREE = "Ancient, and full of life."
 	DESCRIBE.WIDOWSGRASP = "It could've impaled my chest with ease. I wish it did."
 	DESCRIBE.WEBBEDCREATURE = "If I make a mistake, it could be me in one of those."
+	DESCRIBE.SNAPDRAGON_BUDDY = "Lives for food, like everything else."
+	DESCRIBE.SNAPDRAGON = "Ive seen prettier flowers."
+	DESCRIBE.FRUITBAT = "What?!"
+	DESCRIBE.PITCHERPLANT = "Out of reach..."
+	DESCRIBE.APHID = "They plague the trees."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

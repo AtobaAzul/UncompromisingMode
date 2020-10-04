@@ -138,6 +138,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.GIANT_TREE = "Sequoioideae, the redwood tree."
 	DESCRIBE.WIDOWSGRASP = "The limb of the predator arachnid."
 	DESCRIBE.WEBBEDCREATURE = "It doesnt appear to be a nest. I assume it contains something."
+	DESCRIBE.SNAPDRAGON_BUDDY = "Reminds me of a dionaea muscipula."
+	DESCRIBE.SNAPDRAGON = "Truly a Lusus Naturae!"
+	DESCRIBE.FRUITBAT = "It seems to be connected to the pitcher plant somehow."
+	DESCRIBE.PITCHERPLANT = "The fruit bats can be seen going in and out of it."
+	DESCRIBE.APHID = "They're infesting the Sequoioideae."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

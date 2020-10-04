@@ -138,6 +138,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.GIANT_TREE = "The bigger they are... Hyuyu!"
 	DESCRIBE.WIDOWSGRASP = "It costed it an arm and a leg! Hyuyu!"
 	DESCRIBE.WEBBEDCREATURE = "Theft is an old trick, but it never gets old!"
+	DESCRIBE.SNAPDRAGON_BUDDY = "It's quite a growler, for a flower!"
+	DESCRIBE.SNAPDRAGON = "I've got a hunch that they're leaders of the bunch!"
+	DESCRIBE.FRUITBAT = "A flying fruit! I've seen it all!"
+	DESCRIBE.PITCHERPLANT = "Behold, it's a plant, but this time it's high up!"
+	DESCRIBE.APHID = "The trees had it coming to them!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

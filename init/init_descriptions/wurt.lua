@@ -139,6 +139,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 	DESCRIBE.GIANT_TREE = "Wurgh, big tree!"
 	DESCRIBE.WIDOWSGRASP = "Got an owie, florp."
 	DESCRIBE.WEBBEDCREATURE = "Florp, belongs to spiderfolk."
+	DESCRIBE.SNAPDRAGON_BUDDY = "We eat same thing!"
+	DESCRIBE.SNAPDRAGON = "Friendly, florp?"
+	DESCRIBE.FRUITBAT = "Looks tasty, florp."
+	DESCRIBE.PITCHERPLANT = "Can't reach."
+	DESCRIBE.APHID = "Bug, florp."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",

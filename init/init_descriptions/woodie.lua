@@ -138,6 +138,11 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.GIANT_TREE = "That's a real beaut."
 	DESCRIBE.WIDOWSGRASP = "Maybe this could rip open those cocoons, eh?"
 	DESCRIBE.WEBBEDCREATURE = "Should I really put my neck out to find out what it has?"
+	DESCRIBE.SNAPDRAGON_BUDDY = "This one seems friendly enough."
+	DESCRIBE.SNAPDRAGON = "Seems like a well endowed bunch."
+	DESCRIBE.FRUITBAT = "Who taught that fruit to fly?"
+	DESCRIBE.PITCHERPLANT = "It's a plant, but not the choppin' kind."
+	DESCRIBE.APHID = "They like the trees too, eh?"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "She's gonna blow!",
