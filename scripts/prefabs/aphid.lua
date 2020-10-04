@@ -79,17 +79,19 @@ end
 
 
 local function TryToInfestTree(inst)
-if math.random() > 0.95 or inst:HasTag("fromthebush") then
-local tree = FindEntity(inst,30,function(tree) return not tree:HasTag("infestedtree") and tree:HasTag("giant_tree") end)
-print(tree)
-if tree ~= nil then
-print(2)
-inst.brain:Stop()
-inst.sg:GoToState("flyintree")
-if tree.components.timer ~= nil then
-tree.components.timer:StartTimer("infest", 1600)
-end
-end
+if inst.components.combat ~= nil then
+	if not inst.components.combat.target then
+		if math.random() > 0.95 or inst:HasTag("fromthebush") then
+		local tree = FindEntity(inst,30,function(tree) return not tree:HasTag("infestedtree") and tree:HasTag("giant_tree") end)
+			if tree ~= nil then
+			inst.brain:Stop()
+			inst.sg:GoToState("flyintree")
+				if tree.components.timer ~= nil then
+				tree.components.timer:StartTimer("infest", 1600)
+				end
+			end
+		end
+	end
 end
 end
 local function fn()
