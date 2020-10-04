@@ -84,7 +84,9 @@ if inst.components.combat ~= nil then
 		if math.random() > 0.95 or inst:HasTag("fromthebush") then
 		local tree = FindEntity(inst,30,function(tree) return not tree:HasTag("infestedtree") and tree:HasTag("giant_tree") end)
 			if tree ~= nil then
+			if inst.brain ~= nil then
 			inst.brain:Stop()
+			end
 			inst.sg:GoToState("flyintree")
 				if tree.components.timer ~= nil then
 				tree.components.timer:StartTimer("infest", 1600)
