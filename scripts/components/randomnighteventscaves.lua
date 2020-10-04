@@ -1262,7 +1262,15 @@ local function IsEligible(player)
 	local area = player.components.areaaware
 	return TheWorld.Map:IsVisualGroundAtPoint(player.Transform:GetWorldPosition())
 			and area:GetCurrentArea() ~= nil 
-			--and not area:CurrentlyInTag("nohasslers")
+end
+
+local function IsLiving(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	local theent = #TheSim:FindEntities(x, 0, z, 30, {"epic", "_health"}, {"leif"})
+	local hounding = TheWorld.components.hounded:GetWarning()
+	local deerclopsed = TheWorld.components.cavedeerclopsspawner:GetWarning()
+	
+	return not player:HasTag("playerghost") and theent <= 0 and not (hounding or deerclopsed)
 end
 
 local function CheckPlayers()
@@ -1273,9 +1281,9 @@ local function CheckPlayers()
 
 	local playerlist = {}
 	for _, v in ipairs(_activeplayers) do
-		--if IsEligible(v) then
+		if IsLiving(v) then
 			table.insert(playerlist, v)
-		--end
+		end
 	end
 	
 		
@@ -1399,7 +1407,6 @@ end
 inst:ListenForEvent("ms_playerjoined", OnPlayerJoined)
 inst:ListenForEvent("ms_playerleft", OnPlayerLeft)
 
---self:WatchWorldState("isnight", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end) --RNE could happen any night
-self:WatchWorldState("iscavenight", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end)
---self:WatchWorldState("isnight", TryRandomNightEvent) --RNE could happen any night
+self:WatchWorldState("iscavenight", function() self.inst:DoTaskInTime(10, TryRandomNightEvent) end)
+self:WatchWorldState("cycleschanged", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end)
 end)

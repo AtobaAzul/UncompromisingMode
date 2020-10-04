@@ -14,6 +14,7 @@ local component_post = {
 	"healer",
 	"crop",
 	"wildfires",
+	--"beargerspawner",
 }
 
 local prefab_post = {

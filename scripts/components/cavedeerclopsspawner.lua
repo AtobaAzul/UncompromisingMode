@@ -416,6 +416,10 @@ function self:SummonMonster(player)
 	self.inst:StartUpdatingComponent(self)
 end
 
+function self:GetWarning()
+	return _warning
+end
+
 --------------------------------------------------------------------------
 --[[ Initialization ]]
 --------------------------------------------------------------------------
