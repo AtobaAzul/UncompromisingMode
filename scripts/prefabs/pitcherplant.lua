@@ -86,7 +86,7 @@ local function OnInit(inst)
     inst:WatchWorldState("isday", OnIsDay)
     OnIsDay(inst, TheWorld.state.isday)
 	local x, y ,z = inst.Transform:GetWorldPosition()
-	inst.Transform:SetPosition(x,9,z)
+	--inst.Transform:SetPosition(x,9,z)
 end
 
 local function onspawnbat(inst, bat)
@@ -111,7 +111,7 @@ local function MakeBeebox(name, common_postinit)
 		inst.AnimState:SetBank("pitcher")
 		inst.AnimState:SetBuild("pitcher")
 		inst.AnimState:PlayAnimation("swinglong")
-	
+		inst:AddTag("CLASSIFIED")
       
   
         if common_postinit ~= nil then

@@ -129,7 +129,7 @@ local states =
 				
 				while inst.bugcount > 3 do
 				if home ~= nil and home:IsValid() and home.components.lootdropper ~= nil then
-				local loot = home.components.lootdropper:DropLoot()
+				local loot = home.components.lootdropper:DropLoot(pt)
 				inst.bugcount = inst.bugcount - 3
 				end
 				end
