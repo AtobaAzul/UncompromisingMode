@@ -67,7 +67,7 @@ local states =
         tags = {"busy"},
 
         onenter = function(inst)
-            --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/death")
+            inst.SoundEmitter:PlaySound("UCSounds/aphid/death")
             inst.AnimState:PlayAnimation("death")
             inst.AnimState:PushAnimation("dead")
             inst.Physics:Stop()
@@ -106,9 +106,9 @@ local states =
 
         timeline=
         {
-            --[[TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/walk") end),         
-            TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/walk") end),
-            TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/walk") end),]]
+            TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/aphid/step") end),         
+            TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/aphid/step") end),
+            TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/aphid/step") end),
          },
 
         events=
@@ -128,7 +128,7 @@ local states =
         timeline=
         {
            
-            --TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/idle") end),
+            --TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/aphid/idle") end),
          },
 
         onenter = function(inst, start_anim)
@@ -190,8 +190,9 @@ local states =
 
         timeline =
         {
-            TimeEvent(5 * FRAMES, function(inst) 
-                --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/burrow", "move")
+            TimeEvent(5 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("UCSounds/aphid/dig", "move")
+				inst.SoundEmitter:PlaySound("UCSounds/aphid/burrow")
             end),
 
             TimeEvent(9 * FRAMES, function(inst) 
@@ -217,7 +218,8 @@ local states =
         tags = {"busy", "invisible"},
 
         onenter = function(inst)
-            --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/burrow", "move")
+            inst.SoundEmitter:PlaySound("UCSounds/aphid/dig", "move")
+            inst.SoundEmitter:PlaySound("UCSounds/aphid/burrow")
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("unburrow")
             inst.AnimState:SetDeltaTimeMultiplier(GetRandomWithVariance(.9, .2))
@@ -265,7 +267,7 @@ local states =
 
          timeline=
         {
-            --TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/taunt") end),         
+            TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/aphid/taunt") end),         
             
          },
 
@@ -408,7 +410,7 @@ local states =
         timeline=
         {
             TimeEvent(25*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
-            --TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/attack") end),
+            TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/aphid/taunt") end),
 
         },
 
@@ -446,11 +448,11 @@ local states =
         timeline =
         {
             TimeEvent(7*FRAMES, function(inst) 
-                --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/fly_LP", "buzz")
+                inst.SoundEmitter:PlaySound("UCSounds/aphid/fly", "buzz")
             end),
             TimeEvent(17*FRAMES, function(inst) 
                 inst.SoundEmitter:KillSound("buzz")
-                --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/idle")
+                inst.SoundEmitter:PlaySound("UCSounds/aphid/idle")
             end),
 
             TimeEvent(11*FRAMES, function(inst) 
@@ -476,6 +478,7 @@ local states =
         tags = {"busy"},
 
         onenter = function(inst)
+			inst.SoundEmitter:PlaySound("UCSounds/aphid/walk")
             --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/weevole/hit")
             inst.AnimState:PlayAnimation("hit")
             inst.Physics:Stop()            
