@@ -1,16 +1,52 @@
 local env = env
+local getupvalue = GLOBAL.debug.getupvalue
 GLOBAL.setfenv(1, GLOBAL)
 local easing = require("easing")
-------------------------Fire spread is less efficient in winter-----------------------------------------
-env.AddComponentPostInit("wildfires", function(self)
+local UpvalueHacker = require("tools/upvaluehacker") --Baby's first upvaluehack, thanks Zark! -Axe
 
-	local _Old = self.LightFireForPlayer
+
+
+
+env.AddComponentPostInit("wildfires", function(self)
+	local function _Old(player, rescheduleFn) --TODO: Grab the original value from wildfires to prevent any issues with using another mod that modifies wildfires.
+    _scheduledtasks[player] = nil
+
+    if math.random() <= _chance and
+        not (_world.components.sandstorms ~= nil and
+            _world.components.sandstorms:IsInSandstorm(player)) then
+        local x, y, z = player.Transform:GetWorldPosition()
+        local firestarters = TheSim:FindEntities(x, y, z, _radius, nil, _excludetags)
+        if #firestarters > 0 then
+            local highprio = {}
+            local lowprio = {}
+            for i, v in ipairs(firestarters) do
+                if v.components.burnable ~= nil then
+                    table.insert(v:HasTag("wildfirepriority") and highprio or lowprio, v)
+                end
+            end
+            firestarters = #highprio > 0 and highprio or lowprio
+            while #firestarters > 0 do
+                local i = math.random(#firestarters)
+                if CheckValidWildfireStarter(firestarters[i]) then
+                    firestarters[i].components.burnable:StartWildfire()
+                    break
+                else
+                    table.remove(firestarters, i)
+                end
+            end
+        end
+    end
+
+    rescheduleFn(player)
+	end
 	
-	function self:LightFireForPlayer(player, rescheduleFn)
+	local function LightFireForPlayer(player, rescheduleFn)
 	if 	not	(player.components.areaaware ~= nil and player.components.areaaware:CurrentlyInTag("hoodedcanopy")) then
 		_Old(player, rescheduleFn)
 		else
 	    rescheduleFn(player)
 	end
+	UpvalueHacker.SetUpvalue(GLOBAL.Components.wildfires, LightFireForPlayer, "ScheduleSpawn")
+	UpvalueHacker.SetUpvalue(GLOBAL.Components.wildfires, LightFireForPlayer, "ForceWildfireForPlayer")
 end
 end)

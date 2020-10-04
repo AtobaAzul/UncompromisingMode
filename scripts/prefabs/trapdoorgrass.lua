@@ -181,5 +181,4 @@ local function grasspart_fn()
 end
 
 return grass("trapdoorgrass", 0),
-    grass("depleted_trapdoorgrass", 1),
-    Prefab("grasspartfx", grasspart_fn, grasspart_assets)
+    grass("depleted_trapdoorgrass", 1)

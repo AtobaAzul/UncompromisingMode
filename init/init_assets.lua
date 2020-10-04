@@ -238,6 +238,7 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/widowsgrasp.tex"),
 	Asset("ATLAS", "images/inventoryimages/widowsgrasp.xml"),
 	Asset("ANIM", "anim/giant_tree_infested.zip"),
+	Asset("ANIM", "anim/largefern.zip"),
 	--Map Icons Start--
 	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),
 	Asset( "ATLAS", "images/map_icons/riceplant.xml" ),
