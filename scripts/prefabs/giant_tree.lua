@@ -386,7 +386,9 @@ local function on_chopped_down(inst, chopper)
 end
 --Workable Stuff^
 
-local function Regrow(inst)
+local function Regrow(inst, data)
+
+	if data.name == "regrow" then
 	inst.chopped = false
 	inst:AddComponent("workable")
 	inst.components.workable:SetWorkAction(ACTIONS.CHOP)
@@ -394,6 +396,14 @@ local function Regrow(inst)
 	inst.components.workable:SetOnWorkCallback(on_chop)
 	inst.components.workable:SetOnFinishCallback(on_chopped_down)
 	inst.AnimState:PlayAnimation("damaged-0")
+	end
+	if data.name == "infest" then
+	local newtree = SpawnPrefab("giant_tree_infested")
+	newtree:AddTag("midgame")
+	newtree.Transform:SetPosition(inst.Transform:GetWorldPosition())
+	inst:Remove()
+	end
+
 end
 
 local function onsave(inst, data)

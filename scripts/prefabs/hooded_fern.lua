@@ -49,6 +49,7 @@ local function onnear(inst)
 		if inst.recentlypassed == false and not inst.components.pickable:IsBarren() and not TheWorld.state.iswinter then
 			if math.random() > 0.95 then
 			local aphid = SpawnPrefab("aphid")
+			aphid:AddTag("fromthebush")
 			aphid.Transform:SetPosition(inst.Transform:GetWorldPosition())
 			end
 			inst.recentlypassed = true

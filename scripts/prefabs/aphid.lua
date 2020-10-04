@@ -76,6 +76,22 @@ local function OnWorked(inst, worker)
     end
 end
 
+
+
+local function TryToInfestTree(inst)
+if math.random() > 0.95 or inst:HasTag("fromthebush") then
+local tree = FindEntity(inst,30,function(tree) return not tree:HasTag("infestedtree") and tree:HasTag("giant_tree") end)
+print(tree)
+if tree ~= nil then
+print(2)
+inst.brain:Stop()
+inst.sg:GoToState("flyintree")
+if tree.components.timer ~= nil then
+tree.components.timer:StartTimer("infest", 1600)
+end
+end
+end
+end
 local function fn()
     local inst = CreateEntity()
     
@@ -159,7 +175,7 @@ local function fn()
     inst:AddComponent("eater")
     --inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
     inst.components.eater:SetDiet({ FOODGROUP.OMNI, FOODTYPE.WOOD, FOODTYPE.SEEDS, FOODTYPE.ROUGHAGE }, { FOODGROUP.OMNI, FOODTYPE.WOOD, FOODTYPE.SEEDS, FOODTYPE.ROUGHAGE })
-	
+	inst:DoPeriodicTask(4+4*math.random() ,TryToInfestTree)
     --inst.OnEntitySleep = OnEntitySleep
     --inst.OnEntityWake = OnEntityWake
 

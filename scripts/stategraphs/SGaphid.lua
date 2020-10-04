@@ -487,28 +487,29 @@ local states =
         },
     },
 
+
     State{
-        name = "buildhome",
+        name = "flyintree",
         tags = {"busy", "jumping"},
 
         onenter = function(inst)
-            inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("tree_attack")
-            inst.AnimState:PushAnimation("taunt", false)
+		inst.Physics:ClearMotorVelOverride()
+		inst.AnimState:PlayAnimation("takeoff")
+		inst.Physics:Stop()
         end,
-
-		onexit = function(inst)
-            --inst:ClearBufferedAction()
-		end,
-
+        onupdate= function(inst)
+            inst.Physics:SetMotorVel(0,10+math.random()*2,0)
+        end,
         timeline =
         {
-            TimeEvent(27*FRAMES, function(inst) inst:PerformBufferedAction() inst:ClearBufferedAction() end),
+            TimeEvent(50*FRAMES, function(inst) inst:Remove() end),
 		},
-
         events=
         {
-            EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst) 		
+			inst.AnimState:PushAnimation("fly")
+			end)
+
         },
     },
 }
