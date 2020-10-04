@@ -3,19 +3,6 @@ local assets =
 Asset("ANIM", "anim/giant_tree.zip"),
 Asset("ANIM", "anim/giant_tree_infested.zip"),
 }
---[[local felloot =  -Rip
-{
-    "log",
-	"log",
-    "log",
-	"log",
-    "twigs",
-    "twigs",
-    "twigs",
-    "twigs",
-	"spider",
-	"fallingbeehive",
-}]]
 local choploot =
 {
 	--"fallingbeehive",
@@ -322,7 +309,10 @@ local function SpawnDebris(inst,chopper,loottable)
        
     end
 end
+--Code From Quaker^
 
+
+--Workable Stuff
 local function on_chop(inst, chopper, remaining_chops)
     if not (chopper ~= nil and chopper:HasTag("playerghost")) then
         inst.SoundEmitter:PlaySound("turnoftides/common/together/driftwood/chop")
@@ -382,9 +372,16 @@ local function on_chopped_down(inst, chopper)
 	inst:RemoveComponent("workable")
 	inst.AnimState:PlayAnimation("damaged-4")
 	--BringTheForestDown(inst,chopper)--!
+	if inst:HasTag("infestedtree") then
+	local newtree = SpawnPrefab("giant_tree")
+	newtree:AddTag("midgame")
+	newtree.Transform:SetPosition(inst.Transform:GetWorldPosition())
+	inst:Remove()
+	end
 	inst.components.timer:StartTimer("regrow", 3840)
 	end
 end
+--Workable Stuff^
 
 local function Regrow(inst)
 	inst.chopped = false
@@ -419,8 +416,10 @@ inst.AnimState:PlayAnimation("damaged-4")
 end
 end
 
+
 --Shadow Spawning Function, for now
 local function SpawnTreeShadows(inst)
+if not inst:HasTag("midgame") then
 local x, y, z = inst.Transform:GetWorldPosition()
 x = x - 22
 z = z - 22
@@ -434,6 +433,9 @@ x = x - 55
 z = z + 11
 end
 end
+end
+--Shadow Spawning function^
+
 local function makefn()
     	local inst = CreateEntity()
 
@@ -457,6 +459,7 @@ local function makefn()
         if not TheWorld.ismastersim then
             return inst
         end
+		
 		inst:AddComponent("workable")
 		inst.components.workable:SetWorkAction(ACTIONS.CHOP)
 		inst.components.workable:SetWorkLeft(25)
