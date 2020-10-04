@@ -49,7 +49,11 @@ function FogOver:OnUpdate(dt)
 		TheFocalPoint.SoundEmitter:PlaySound("UCSounds/music/creepyforest", "creepyforest")
 		self:Show()
         self.time = self.transitiontime
+		if TheWorld.state.isdusk then
+		self.alphagoal = 0.4
+		else
         self.alphagoal = 0.8
+		end
 	else
 		TheFocalPoint.SoundEmitter:KillSound("creepyforest")
         self.time = self.transitiontime

@@ -127,11 +127,9 @@ local states =
 			local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
             if pt.y >= 10 then
 				
-				while inst.bugcount > 3 do
 				if home ~= nil and home:IsValid() and home.components.lootdropper ~= nil then
-				local loot = home.components.lootdropper:DropLoot(pt)
+				local loot = home.components.lootdropper:DropLoot(pt) --Drop loot only once every time it goes home.
 				inst.bugcount = inst.bugcount - 3
-				end
 				end
                 inst:PerformBufferedAction()
             end
