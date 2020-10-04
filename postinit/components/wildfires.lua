@@ -7,7 +7,8 @@ local UpvalueHacker = require("tools/upvaluehacker") --Baby's first upvaluehack,
 
 
 
-env.AddComponentPostInit("wildfires", function(self)
+
+env.AddClassPostConstruct("components/wildfires", function(self) 
 	local function _Old(player, rescheduleFn) --TODO: Grab the original value from wildfires to prevent any issues with using another mod that modifies wildfires.
     _scheduledtasks[player] = nil
 
@@ -41,12 +42,14 @@ env.AddComponentPostInit("wildfires", function(self)
 	end
 	
 	local function LightFireForPlayer(player, rescheduleFn)
-	if 	not	(player.components.areaaware ~= nil and player.components.areaaware:CurrentlyInTag("hoodedcanopy")) then
-		_Old(player, rescheduleFn)
+	if player.components.areaaware ~= nil then
+	if not player.components.areaaware:CurrentlyInTag("hoodedcanopy") then
+		--_Old(player, rescheduleFn)
 		else
 	    rescheduleFn(player)
 	end
-	UpvalueHacker.SetUpvalue(GLOBAL.Components.wildfires, LightFireForPlayer, "ScheduleSpawn")
-	UpvalueHacker.SetUpvalue(GLOBAL.Components.wildfires, LightFireForPlayer, "ForceWildfireForPlayer")
+	end
+	UpvalueHacker.SetUpvalue(LightFireForPlayer, "ScheduleSpawn")
+	UpvalueHacker.SetUpvalue(LightFireForPlayer, "ForceWildfireForPlayer")
 end
 end)
