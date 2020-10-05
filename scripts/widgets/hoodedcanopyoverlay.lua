@@ -52,7 +52,7 @@ function FogOver:OnUpdate(dt)
 		if TheWorld.state.isdusk then
 		self.alphagoal = 0.4
 		else
-        self.alphagoal = 0.6
+        self.alphagoal = 0.8
 		end
 	else
 		TheFocalPoint.SoundEmitter:KillSound("creepyforest")
