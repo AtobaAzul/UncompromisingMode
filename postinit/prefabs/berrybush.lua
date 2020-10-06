@@ -199,17 +199,8 @@ env.AddPrefabPostInit("berrybush_juicy", function(inst)
 	end
 	
 	if inst.components.pickable ~= nil then
-		inst.components.pickable.onpickedfn = onpicked2fn
+		inst.components.pickable.max_cycles = TUNING.DSTU.BERRYBUSH_JUICY_CYCLES + math.random(1)
+		--inst.components.pickable.onpickedfn = onpicked2fn
 	end
---[[
-	inst:AddComponent("childspawner")
-    inst.components.childspawner.childname = "mosquito"
-    inst.components.childspawner:SetRegenPeriod(TUNING.POND_REGEN_TIME)
-    inst.components.childspawner:SetSpawnPeriod(TUNING.POND_SPAWN_TIME)
-    inst.components.childspawner:SetMaxChildren(math.random(0,1))
-    inst.components.childspawner:StartRegen()
-    inst.dayspawn = false
-	
-    inst.task = inst:DoTaskInTime(0, OnInit)--]]
 
 end)
