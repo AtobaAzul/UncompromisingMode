@@ -879,6 +879,38 @@ local function SpawnShadowTalker(player, mathmin, mathmax)
 	end
 end
 
+local function SpawnShadowBoomer(player)
+	if TheWorld.state.isnight or TheWorld.state.iscavenight then
+		player:DoTaskInTime(0.1 + math.random(), function()
+			local radius = 10 + math.random() * 10
+			local theta = math.random() * 2 * PI
+			local x, y, z = player.Transform:GetWorldPosition()
+			local x1 = x + radius * math.cos(theta)
+			local z1 = z - radius * math.sin(theta)
+			local light = TheSim:GetLightAtPoint(x1, 0, z1)
+			
+			if light <= .1 and #TheSim:FindEntities(x1, 0, z1, 50, {"stalkerminion"}) <= 25 then
+				local ent = SpawnPrefab("stalker_minion")
+				ent.Transform:SetPosition(x1, 0, z1)
+				ent.speech = player
+				ent:OnSpawnedBy(player)
+				ent.Physics:ClearCollisionMask()
+				ent.Physics:CollidesWith(COLLISION.GROUND)
+				ent.Physics:CollidesWith(COLLISION.CHARACTERS)
+				ent.components.timer:StopTimer("selfdestruct")
+				
+				ent:WatchWorldState("isday", function() 
+					ent.components.health:Kill()
+				end)
+				
+				ent.persists = false
+			end
+			print("what")
+			SpawnShadowBoomer(player)
+		end)
+	end
+end
+
 ---------------------------------------------------
 ---RNE list above
 ---------------------------------------------------
@@ -1030,11 +1062,13 @@ AddCaveEvent(SpawnDroppers,.6)
 AddCaveEvent(SpawnShadowTalker,.4)
 --AddCaveEvent(SpawnPhonograph,.1)
 AddCaveEvent(SpawnLightFlowersNFerns,.3)
+AddCaveEvent(SpawnShadowBoomer,.2)
 --Secondary Cave
 AddSecondaryCaveEvent(SpawnBats,.5)
 AddSecondaryCaveEvent(SpawnDroppers,.6)
 AddSecondaryCaveEvent(SpawnShadowTalker,.4)
 AddSecondaryCaveEvent(SpawnLightFlowersNFerns,.3)
+AddSecondaryCaveEvent(SpawnShadowBoomer,.1)
 --Winter
 AddWinterEvent(SpawnKrampus,.5)
 AddWinterEvent(SpawnWalrusHunt,.5)

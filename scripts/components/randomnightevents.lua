@@ -101,6 +101,8 @@ local function DayBreak(mob)
 		end
 	end
 	
+	mob.AnimState:SetHaunted(true)
+	
 	mob.persists = false
 	
 	mob:WatchWorldState("isday", function() 
@@ -899,6 +901,38 @@ local function SpawnShadowTalker(player, mathmin, mathmax)
 	end
 end
 
+local function SpawnShadowBoomer(player)
+	if TheWorld.state.isnight or TheWorld.state.iscavenight then
+		player:DoTaskInTime(0.1 + math.random(), function()
+			local radius = 10 + math.random() * 10
+			local theta = math.random() * 2 * PI
+			local x, y, z = player.Transform:GetWorldPosition()
+			local x1 = x + radius * math.cos(theta)
+			local z1 = z - radius * math.sin(theta)
+			local light = TheSim:GetLightAtPoint(x1, 0, z1)
+			
+			if light <= .1 and #TheSim:FindEntities(x1, 0, z1, 50, {"stalkerminion"}) <= 25 then
+				local ent = SpawnPrefab("stalker_minion")
+				ent.Transform:SetPosition(x1, 0, z1)
+				ent.speech = player
+				ent:OnSpawnedBy(player)
+				ent.Physics:ClearCollisionMask()
+				ent.Physics:CollidesWith(COLLISION.GROUND)
+				ent.Physics:CollidesWith(COLLISION.CHARACTERS)
+				ent.components.timer:StopTimer("selfdestruct")
+				
+				ent:WatchWorldState("isday", function() 
+					ent.components.health:Kill()
+				end)
+				
+				ent.persists = false
+			end
+			print("what")
+			SpawnShadowBoomer(player)
+		end)
+	end
+end
+
 ---------------------------------------------------
 ---RNE list above
 ---------------------------------------------------
@@ -1015,12 +1049,14 @@ AddWildEvent(SpawnPhonograph,.2)
 AddWildEvent(SpawnShadowTeleporter,.3)
 AddWildEvent(StumpsAttack,.3)
 AddWildEvent(SpawnShadowTalker,.6)
+AddWildEvent(SpawnShadowBoomer,.2)
 --Secondary Wild
 AddSecondaryWildEvent(SpawnBats,.4)
 AddSecondaryWildEvent(SpawnLightFlowersNFerns,.3)
 AddSecondaryWildEvent(SpawnSkitts,.5)
 AddSecondaryWildEvent(StumpsAttack,.2)
 AddSecondaryWildEvent(SpawnShadowTalker,.6)
+AddSecondaryWildEvent(SpawnShadowBoomer,.1)
 --Base
 AddBaseEvent(SpawnBaseBats,.4)
 AddBaseEvent(SpawnFissures,.3)
@@ -1033,6 +1069,7 @@ AddBaseEvent(SpawnPhonograph,.2)
 AddBaseEvent(SpawnShadowTeleporter,.2)
 AddBaseEvent(StumpsAttack,.3)
 AddBaseEvent(SpawnShadowTalker,.6)
+AddBaseEvent(SpawnShadowBoomer,.2)
 --Cave
 AddCaveEvent(SpawnBats,.5)
 AddCaveEvent(SpawnFissures,.2)
@@ -1040,12 +1077,13 @@ AddCaveEvent(SpawnDroppers,.6)
 AddCaveEvent(SpawnShadowTalker,.4)
 AddCaveEvent(SpawnPhonograph,.1)
 AddCaveEvent(SpawnLightFlowersNFerns,.3)
+AddCaveEvent(SpawnShadowBoomer,.2)
 --Winter
 AddWinterEvent(SpawnKrampus,.5)
 AddWinterEvent(SpawnWalrusHunt,.5)
 --Spring
 AddSpringEvent(SpawnThunderFar,1)
-AddSpringEvent(SpawnLureplagueRat,0.1)
+AddSpringEvent(SpawnLureplagueRat,.1)
 --Summer
 AddSummerEvent(SpawnWalrusHunt,1)
 --Full Moon
