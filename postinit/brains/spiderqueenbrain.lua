@@ -1,6 +1,7 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
+--[[
 local MAX_CHASE_TIME = 10
 local MAX_CHASE_DIST = 30
 
@@ -62,4 +63,4 @@ end
 				
 				
 				
-env.AddBrainPostInit("spiderqueenbrain", AddWeaponsToQueenBrain)
+env.AddBrainPostInit("spiderqueenbrain", AddWeaponsToQueenBrain)]]

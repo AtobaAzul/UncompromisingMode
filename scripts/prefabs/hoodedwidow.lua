@@ -31,15 +31,15 @@ local loot =
 }
 
 
-local RETARGET_MUST_TAGS = { "character", "_combat" }
-local RETARGET_CANT_TAGS = { "INLIMBO" }
+local RETARGET_MUST_TAGS = {"_combat" }
+local RETARGET_CANT_TAGS = { "INLIMBO","structure" }
 local function Retarget(inst)
     if not inst.components.health:IsDead() and not inst.components.sleeper:IsAsleep() then
         local oldtarget = inst.components.combat.target
         local newtarget = FindEntity(inst, 20, 
             function(guy) 
-                return (guy:HasTag("player"))
-                    and inst.components.combat:CanTarget(guy) 
+                return 
+                    inst.components.combat:CanTarget(guy) 
             end,
             RETARGET_MUST_TAGS,
             RETARGET_CANT_TAGS
@@ -85,6 +85,20 @@ local function DoDespawn(inst)
 		print("removed, OH NO!")
     end
 	
+end
+
+
+local function OutOfRange(self)
+		local home = self.inst.components.homeseeker ~= nil and self.inst.components.homeseeker.home or nil
+		if home then
+        local dx, dy, dz = self.inst.Transform:GetWorldPosition()
+        local spx, spy, spz = home.Transform:GetWorldPosition()
+        if distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*12) then
+		return true
+        else
+        return false
+        end
+		end
 end
 
 local projectile_prefabs =
@@ -140,7 +154,7 @@ end
 
 local function DoSuper(inst)
 --if not inst.sg:HasStateTag("superbusy") and not inst:HasTag("gonnasuper") and not inst.components.health:IsDead() and inst.components.combat.target then
-if math.random()>0.1 then
+if math.random()>0 then  --Removing canopy attack, for now.
 inst.sg:GoToState("preleapattack")
 else
 inst.sg:GoToState("precanopy")
@@ -197,8 +211,8 @@ local function fn()
     inst:AddTag("hostile")
     inst:AddTag("epic")
     inst:AddTag("largecreature")
-    inst:AddTag("spiderqueen")
-    inst:AddTag("spider")
+    --inst:AddTag("spiderqueen")  --She left this faction
+    --inst:AddTag("spider")
 
     inst.AnimState:SetBank("spider_queen")
     inst.AnimState:SetBuild("widow")

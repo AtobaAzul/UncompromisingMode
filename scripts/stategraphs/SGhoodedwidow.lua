@@ -15,13 +15,13 @@ local events=
             if weapon then
                 if weapon:HasTag("snotbomb") then
                     inst.sg:GoToState("launchprojectile", data.target)
-                end
-				if weapon:HasTag("meleeweapon") then
+                else
                     inst.sg:GoToState("attack", data.target)
                 end
             end
         end
     end),
+
     CommonHandlers.OnSleep(),
     CommonHandlers.OnLocomote(false,true),
     CommonHandlers.OnFreeze(),
@@ -137,8 +137,6 @@ local states=
             end),
             TimeEvent(27*FRAMES, function(inst)
                 inst.components.combat:DoAttack(inst.sg.statemem.target)
-				inst.WebReady = false
-				inst:DoTaskInTime(75,function(inst) inst.WebReady = true end)
             end),
         },
         
@@ -217,6 +215,7 @@ local states=
 			if inst.brain then
 			inst.brain:Stop()
 			end
+			inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
 			inst.AnimState:PlayAnimation("enter", true)
 			inst.Physics:SetMotorVelOverride(speed,0,0)
         end,

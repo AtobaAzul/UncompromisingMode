@@ -21,6 +21,7 @@ local projectile_prefabs =
     "spat_splash_fx_low",
     "spat_splash_fx_melted",
 }
+--These weapons are unused since the part of her brain that can use them is inactive
 local function EquipWeapons(inst)
     if inst.components.inventory ~= nil and not inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) then
         local snotbomb = CreateEntity()
