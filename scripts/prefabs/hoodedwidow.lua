@@ -32,7 +32,7 @@ local loot =
 
 
 local RETARGET_MUST_TAGS = {"_combat" }
-local RETARGET_CANT_TAGS = { "INLIMBO","structure" }
+local RETARGET_CANT_TAGS = { "INLIMBO","structure", "bird" }
 local function Retarget(inst)
     if not inst.components.health:IsDead() and not inst.components.sleeper:IsAsleep() then
         local oldtarget = inst.components.combat.target
@@ -77,7 +77,7 @@ local function DoDespawn(inst)
     local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
     if home ~= nil then
         home.components.childspawner:GoHome(inst)
-        home.components.childspawner:StartSpawning()
+        --home.components.childspawner:StartSpawning()
 		--print("despawn")
 		inst:AddTag("home")
     else
@@ -148,18 +148,20 @@ local function EquipWeapons(inst)
 end
 
 local function OnLoad(inst)
-inst.WebReady = true
+--inst.WebReady = true
 inst.LeapReady = true
 end
 
 local function DoSuper(inst)
 --if not inst.sg:HasStateTag("superbusy") and not inst:HasTag("gonnasuper") and not inst.components.health:IsDead() and inst.components.combat.target then
+if inst.components.combat ~= nil and inst.components.combat.target and not inst.components.health:IsDead() then
 if math.random()>0 then  --Removing canopy attack, for now.
 inst.sg:GoToState("preleapattack")
 else
 inst.sg:GoToState("precanopy")
 end
 --end
+end
 end
 local function TryPowerMove(inst)
 --print("powermovetried")
@@ -286,7 +288,7 @@ local function fn()
     inst.components.groundpounder.platformPushingRings = 2
     inst.components.groundpounder.numRings = 3
     ------------------
-	inst.WebReady = true
+	--inst.WebReady = true
 	inst.LeapReady = false
 	inst.CanopyReady = false
 	inst.Reset = Reset

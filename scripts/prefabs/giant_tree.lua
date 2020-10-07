@@ -315,7 +315,7 @@ end
 --Workable Stuff
 local function on_chop(inst, chopper, remaining_chops)
     if not (chopper ~= nil and chopper:HasTag("playerghost")) then
-        inst.SoundEmitter:PlaySound("turnoftides/common/together/driftwood/chop")
+        inst.SoundEmitter:PlaySound("dontstarve/wilson/use_axe_tree")
     end
 	local phase = 0
 	if not (chopper:HasTag("epic") or chopper:HasTag("antlion_sinkhole")) then

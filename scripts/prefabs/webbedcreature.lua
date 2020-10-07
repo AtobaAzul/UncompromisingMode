@@ -64,7 +64,6 @@ end
 
 local function OnKilled(inst)
 	inst.AnimState:PlayAnimation("cocoon_dead")
-    inst.Physics:ClearCollisionMask()
 	local x, y, z = inst.Transform:GetWorldPosition()
     inst.SoundEmitter:KillSound("loop")
 	inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_destroy")
@@ -214,7 +213,7 @@ local function fn()
 		inst.entity:AddSoundEmitter()
 
 
-		MakeObstaclePhysics(inst, .5)
+		--MakeObstaclePhysics(inst, .5)
 
 
 		inst.AnimState:SetBank("spider_cocoon")

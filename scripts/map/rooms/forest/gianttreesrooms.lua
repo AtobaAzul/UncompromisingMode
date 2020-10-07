@@ -76,6 +76,30 @@ AddRoom("ShroomInfestedGiantTrees",
 			
 		}
 }})
+AddRoom("SpideryGiantTrees", 
+{
+	colour = {r=1,g=1,b=1,a=.50}, 
+	value = GROUND.JUNGLE,
+	tags = {"RoadPoison", "hoodedcanopy"}, --"ForceDisconnected"
+	contents =  
+	{	
+			distributepercent = 0.3,
+			distributeprefabs =
+			{
+				giant_tree = 0.01,
+				houndbone = 0.25,
+				extracanopyspawner = 1,
+				hooded_fern = 0.5,
+				--giant_tree_infested = 0.006,
+				webbedcreature = 0.2,
+			},
+			countprefabs =	
+			{
+			giant_tree = function () return 3 + math.random(0,1) end,
+			extracanopyspawner = function () return 6 + math.random(0,1) end,
+			widowwebspawner = 1 
+			},
+}})
 AddRoom("WalrusGiantTrees", 
 {
 	colour={r=.6,g=.2,b=.8,a=.50},
@@ -172,26 +196,3 @@ AddRoom("MoonBaseGiantTrees", {
 					                },
 					            }
 					})
-AddRoom("SpideryGiantTrees", 
-{
-	colour = {r=1,g=1,b=1,a=.50}, 
-	value = GROUND.JUNGLE,
-	tags = {"RoadPoison", "hoodedcanopy"}, --"ForceDisconnected"
-	contents =  
-	{	
-			distributepercent = 0.3,
-			distributeprefabs =
-			{
-				giant_tree = 0.01,
-				houndbone = 0.25,
-				extracanopyspawner = 1,
-				hooded_fern = 0.5,
-				giant_tree_infested = 0.006,
-			},
-			countprefabs =	
-			{
-			giant_tree = function () return 3 + math.random(0,1) end,
-			extracanopyspawner = function () return 6 + math.random(0,1) end,
-			widowwebspawner = 1 
-			},
-}})

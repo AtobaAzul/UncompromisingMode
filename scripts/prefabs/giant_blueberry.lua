@@ -5,6 +5,15 @@ local assets =
 	Asset("IMAGE", "images/inventoryimages/giant_blueberry.tex"),
 }
 
+local function oneatenfn(inst, eater)
+	if  eater.components.moisture ~= nil and
+                not (eater.components.health ~= nil and eater.components.health:IsDead()) and
+                not eater:HasTag("playerghost") then
+                eater.components.moisture:DoDelta(10)
+	end
+end
+
+
 local function fn()
     local inst = CreateEntity()
 
@@ -36,10 +45,10 @@ local function fn()
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/giant_blueberry.xml"
     inst:AddComponent("edible")
     inst.components.edible.healthvalue = 3
-    inst.components.edible.hungervalue = 22.5
+    inst.components.edible.hungervalue = 20
     inst.components.edible.sanityvalue = 0
     inst.components.edible.foodtype = FOODTYPE.VEGGIE
-
+	inst.components.edible:SetOnEatenFn(oneatenfn)
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.PERISH_TWO_DAY)
     inst.components.perishable:StartPerishing()

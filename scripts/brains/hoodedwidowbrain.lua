@@ -129,10 +129,8 @@ function HoodedWidowBrain:OnStart()
             SequenceNode({
                 ActionNode(function() EquipPhlegm(self.inst) end, "Equip phlegm"),
                 ChaseAndAttack(self.inst, MAX_CHASE_TIME) })),
-		WhileNode(function() return ShouldResetFight(self) end, "Reset Fight",
-                PriorityNode({
-                    DoAction(self.inst, GoHomeAction), --no delay
-                }, .25)),
+                
+		DoAction(self.inst, GoHomeAction), --no delay
         
     }, 2)
     

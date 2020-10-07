@@ -6,13 +6,14 @@ AddTask("GiantTrees", {
 		level_set_piece_blocker = true,
 		room_choices={
 			["GiantTrees"] = function() return math.random(1,2) end, 
-			["SpideryGiantTrees"] = 1,
+			["AphidLand"] = 1,
 			--["RoadGiantTrees"] = 1,
 			["WalrusGiantTrees"] = 1,
 			["MoonBaseGiantTrees"] = 1,
 			["ShroomInfestedGiantTrees"] = 1,
 			["SnapDragons"] = 1,
-			["AphidLand"] = 1,
+			["SpideryGiantTrees"] = 1,
+
 		},
 		room_bg=GROUND.JUNGLE,
 		background_room="BGGiantTrees",
