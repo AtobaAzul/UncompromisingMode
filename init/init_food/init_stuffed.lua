@@ -5,7 +5,7 @@ GLOBAL.setfenv(1, GLOBAL)
 
 env.AddPlayerPostInit(function(inst)
 	inst:ListenForEvent("oneat", function(inst, data)
-		if data.food ~= nil and data.food.components.edible ~= nil and data.food.components.edible.hungervalue ~= nil then
+		if inst:HasTag("vetcurse") and data.food ~= nil and data.food.components.edible ~= nil and data.food.components.edible.hungervalue ~= nil then
 			local overstuffed = inst.components.hunger.current + data.food.components.edible.hungervalue
 			local maxhunger = inst.components.hunger.max
 			local clampvalue = overstuffed - maxhunger
