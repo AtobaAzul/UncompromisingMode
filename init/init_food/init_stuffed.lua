@@ -18,7 +18,7 @@ env.AddPlayerPostInit(function(inst)
 						print("STOP THIS FORCE FEEDING ITS TOO MUCH")
 					else
 						inst.components.talker:Say(GetString(inst, "ANNOUNCE_OVER_EAT", "STUFFED"))
-						local delta = math.clamp(clampvalue / 10, 0.5, 2.9)
+						local delta = math.clamp(clampvalue / 10, 0.1, 2.9)
 						inst.components.grogginess:AddGrogginess(delta)
 						print("OVERSTUFFED AMOUNT:")
 						print(clampvalue)

@@ -68,8 +68,8 @@ local EAT_ONEOF_TAGS = {
             "harvestable",
         }
 		
-if inst.sg:HasStateTag("busy") or
-        (inst.components.eater:TimeSinceLastEating() ~= nil and inst.components.eater:TimeSinceLastEating() < TUNING.WORM_EATING_COOLDOWN / 2) then
+if inst.sg:HasStateTag("busy") or inst:GetTimeAlive() < 5 or
+        (inst.components.eater:TimeSinceLastEating() ~= nil and inst.components.eater:TimeSinceLastEating() < 5) then
         return
     elseif inst.components.inventory ~= nil then
         if inst.components.eater ~= nil then

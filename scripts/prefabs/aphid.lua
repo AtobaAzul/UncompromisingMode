@@ -41,7 +41,7 @@ local function retargetfn(inst)
     local dist = 5
     local notags = {"FX", "NOCLICK","INLIMBO", "wall", "aphid", "structure", "aquatic"}
     return FindEntity(inst, dist, function(guy)
-        return  inst.components.combat:CanTarget(guy)
+        return  TheWorld.state.issummer and inst.components.combat:CanTarget(guy)
     end, nil, notags)
 end
 

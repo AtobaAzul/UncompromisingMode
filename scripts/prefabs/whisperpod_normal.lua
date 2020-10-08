@@ -70,6 +70,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
 			inst.AnimState:SetBuild("snapdragon_build_"..inst.planted)
 		else
 			inst.planted = "seeds"
+			inst.AnimState:SetBuild("snapdragon_build_"..inst.planted)
 		end
     end
 end

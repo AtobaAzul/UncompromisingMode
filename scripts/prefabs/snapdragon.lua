@@ -96,6 +96,8 @@ local function OnRestoreItemPhysics(item)
 end
 
 local function LaunchItem(inst, item, angle, minorspeedvariance)
+    inst.SoundEmitter:PlaySound("dontstarve/common/farm_harvestable")
+	
     local x, y, z = inst.Transform:GetWorldPosition()
     local spd = 1.5 + math.random() * (minorspeedvariance and 1 or 3.5)
     item.Physics:ClearCollisionMask()
@@ -104,14 +106,6 @@ local function LaunchItem(inst, item, angle, minorspeedvariance)
     item.Physics:Teleport(x, 2.5, z)
     item.Physics:SetVel(math.cos(angle) * spd, 11.5, math.sin(angle) * spd)
     item:DoTaskInTime(.6, OnRestoreItemPhysics)
-    item:PushEvent("knockbackdropped", { owner = inst, knocker = inst, delayinteraction = .75, delayplayerinteraction = .5 })
-    if item.components.burnable ~= nil then
-        inst:ListenForEvent("onignite", function()
-            for k, v in pairs(inst._minigame_elites) do
-                k:SetCheatFlag()
-            end
-        end, item)
-    end
 end
 
 local function ShouldAcceptItem(inst, item)
@@ -187,9 +181,18 @@ local function OnGetItemFromPlayer_Buddy(inst, giver, item)
 		-- Increase the amount of food in the stomach.
 		inst.foodItemsEatenCount = inst.foodItemsEatenCount + 1
 		
+		inst.rewarditem =
+        (inst.seeds == "pumpkin_seeds" and "pumpkin") or 
+        (inst.seeds == "pomegranate_seeds" and "pomegranate") or 
+        (inst.seeds == "eggplant_seeds" and "eggplant") or 
+        (inst.seeds == "duriant_seeds" and "duriant") or 
+        (inst.seeds == "dragonfruit_seeds" and "dragonfruit") or 
+        (inst.seeds == "watermelon_seeds" and "watermelon") or 
+        (inst.seeds ~= nil and "seeds")
+		
 		if inst.foodItemsEatenCount >= 2 then
 			inst.sg:GoToState("taunt")
-			local item = SpawnPrefab(inst.seeds)
+			local item = SpawnPrefab(inst.rewarditem)
 			local angle = math.random() * 2 * PI
 			local delta = 2 * PI / 3 --/ (numgold + numprops + 1) --purposely leave a random gap
 			local variance = delta * .4
@@ -318,7 +321,7 @@ local function common_fn(scale)
     
     inst:AddComponent("combat")
     inst.components.combat.hiteffectsymbol = "body"
-    inst.components.combat:SetDefaultDamage(34)
+    inst.components.combat:SetDefaultDamage(26 * scale)
     inst.components.combat:SetRetargetFunction(1, Retarget)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
 
@@ -385,6 +388,10 @@ local function prime_fn()
     return inst
 end
 
+local function Rename(inst)
+    inst.components.named:SetName(STRINGS.NAMES["SNAPDRAGON_BUDDY_"..inst.seeds]) 
+end
+
 local function buddy_fn()
     local inst = common_fn(1)
 
@@ -395,6 +402,9 @@ local function buddy_fn()
 	if inst.seeds == nil then
 		inst.seeds = "seeds"
 	end
+	
+    inst:AddComponent("named")
+	inst:DoTaskInTime(0, Rename)
 	
     inst:AddComponent("follower")
     inst.components.follower.maxfollowtime = TUNING.BEEFALO_FOLLOW_TIME
