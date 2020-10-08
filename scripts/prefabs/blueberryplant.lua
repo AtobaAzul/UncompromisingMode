@@ -113,7 +113,11 @@ end
 local function on_deactivate(inst)
     if inst.components.lootdropper ~= nil then
 		if inst.Harvestable == true then
-		inst.components.lootdropper:SpawnLootPrefab("giant_blueberry") 
+		if TheWorld.state.iswinter then
+		inst.components.lootdropper:SpawnLootPrefab("ice")
+		else
+		inst.components.lootdropper:SpawnLootPrefab("giant_blueberry")
+		end		
 		end
 		if TheWorld.state.isspring then
         --inst.components.lootdropper:SpawnLootPrefab("blueberryflower") --Add functionality once we get the visuals

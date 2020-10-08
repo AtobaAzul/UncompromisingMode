@@ -145,4 +145,5 @@ return {
 	"aphid",
 	"fruitbat",
 	"pitcherplant",
+	"widowshead",
 }

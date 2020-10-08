@@ -239,6 +239,9 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/widowsgrasp.xml"),
 	Asset("ANIM", "anim/giant_tree_infested.zip"),
 	Asset("ANIM", "anim/largefern.zip"),
+	Asset("ANIM", "anim/hat_widowshead.zip"),
+	Asset("IMAGE", "images/inventoryimages/widowshead.tex"),
+	Asset("ATLAS", "images/inventoryimages/widowshead.xml"),
 	--Map Icons Start--
 	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),
 	Asset( "ATLAS", "images/map_icons/riceplant.xml" ),
