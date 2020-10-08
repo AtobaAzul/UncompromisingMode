@@ -432,6 +432,7 @@ end
 
 --Shadow Spawning Function, for now
 local function SpawnTreeShadows(inst)
+
 if not inst:HasTag("midgame") then
 local x, y, z = inst.Transform:GetWorldPosition()
 x = x - 22
@@ -448,6 +449,18 @@ end
 end
 end
 --Shadow Spawning function^
+
+local function Deletus(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+
+	local tree = TheSim:FindEntities(x, y, z, 6, { "giant_tree" })
+	
+		for i, v in ipairs(tree) do
+			if v ~= inst and v:IsValid() and not v:IsInLimbo() then
+				v:Remove()
+			end
+		end
+end
 
 local function makefn()
     	local inst = CreateEntity()
@@ -486,6 +499,7 @@ local function makefn()
 		inst:AddComponent("inspectable")
 		inst.previouschops = nil
 		--inst:DoPeriodicTask(5,Regrow)
+		inst:DoTaskInTime(0,Deletus)
 		inst:DoTaskInTime(0,SpawnTreeShadows)
 		inst.OnSave = onsave
 		inst.OnLoad = onload
@@ -559,6 +573,7 @@ local function makeinfested()
 		inst:AddComponent("inspectable")
 		inst.previouschops = nil
 		--inst:DoPeriodicTask(5,Regrow)
+		inst:DoTaskInTime(0,Deletus)
 		inst:DoTaskInTime(0,SpawnTreeShadows)
 		inst.OnSave = onsave
 		inst.OnLoad = onload

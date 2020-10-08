@@ -104,6 +104,10 @@ env.AddPrefabPostInit("deerclops", function(inst)
 	inst:AddComponent("healthtrigger")
     inst.components.healthtrigger:AddTrigger(PHASE2_HEALTH, EnterPhase2Trigger)
 	
+	if inst.components.lootdropper ~= nil then
+		inst.components.lootdropper:AddChanceLoot("cursed_antler", 1)
+	end
+	
 	inst:AddComponent("groundpounder")
 	inst.components.groundpounder.destroyer = true
 	inst.components.groundpounder.damageRings = 2
