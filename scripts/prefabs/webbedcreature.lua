@@ -198,7 +198,6 @@ local function Regen(inst, attacker)
         inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_hit")
         inst.AnimState:PlayAnimation(inst.anims.hit)
         inst.AnimState:PushAnimation(inst.anims.idle)
-		inst.components.health:SetCurrentHealth(1000000)
 		if attacker:HasTag("widowsgrasp") then
 		inst.components.health:Kill()
 		end
@@ -229,7 +228,7 @@ local function fn()
 		-------------------
 		inst:AddComponent("health")
 		inst.components.health:SetMaxHealth(1000000)
-
+		inst.components.health.invincible = true
 		inst:AddComponent("combat")       
         inst.components.combat:SetOnHit(Regen)
 		inst:ListenForEvent("death", OnKilled)
