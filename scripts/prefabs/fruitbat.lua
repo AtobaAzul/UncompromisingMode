@@ -26,7 +26,7 @@ local MAX_TARGET_SHARES = 100
 local SHARE_TARGET_DIST = 100
 --Thanks for these functions scrimbles
 local RETARGET_MUST_TAGS = { "_combat", "player" }
-local RETARGET_CANT_TAGS = { "bat", "wall", "plantkin", "INLIMBO" }
+local RETARGET_CANT_TAGS = { "bat", "wall", "plantkin", "INLIMBO", "notarget" }
 
 local function retargetfn(inst)
     return TheWorld.state.issummer and FindEntity(

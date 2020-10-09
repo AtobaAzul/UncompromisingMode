@@ -225,6 +225,7 @@ local function fn()
 		end
 		inst:AddTag("structure")
 		inst:AddTag("webbedcreature")
+		inst:AddTag("notarget")
 		-------------------
 		inst:AddComponent("health")
 		inst.components.health:SetMaxHealth(1000000)
