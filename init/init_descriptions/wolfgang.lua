@@ -143,10 +143,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.FRUITBAT = "Flying fruity!"
 	DESCRIBE.PITCHERPLANT = "If not skip leg day, Wolfgang could reach!"
 	DESCRIBE.APHID = "Is tiny bug!"
+	DESCRIBE.GIANT_TREE_INFESTED = "Tree is sick!"
+	DESCRIBE.GIANT_BLUEBERRY = "Mighty berry, for mighty Wolfgang!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
-            READY = "She's gonna blow!",
-			REGROWING = "It seems to be coming back.",
+            READY = "Can't rip out of ground with muscles?",
+			REGROWING = "Berry not gone?",
 		}
 	DESCRIBE.BERNIE_INACTIVE =
         {

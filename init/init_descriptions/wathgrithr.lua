@@ -142,10 +142,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.FRUITBAT = "Tis not meat!"
 	DESCRIBE.PITCHERPLANT = "A plant!"
 	DESCRIBE.APHID = "Have at thee, bug!"
+	DESCRIBE.GIANT_TREE_INFESTED = "A plague is wrought upon it."
+	DESCRIBE.GIANT_BLUEBERRY = "I shalln't be tempted!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
-            READY = "She's gonna blow!",
-			REGROWING = "It seems to be coming back.",
+            READY = "Fruit that fights back? Respectable.",
+			REGROWING = "Honorable. Still isn't meat.",
 		}
 	DESCRIBE.BERNIE_INACTIVE =
         {

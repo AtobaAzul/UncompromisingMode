@@ -143,10 +143,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.FRUITBAT = "Maybe if we're lucky it'll turn me into a fruit!"
 	DESCRIBE.PITCHERPLANT = "I could hit it with my sling for practice!"
 	DESCRIBE.APHID = "It's fuzzy!"
+	DESCRIBE.GIANT_TREE_INFESTED = "Get out'a there!"
+	DESCRIBE.GIANT_BLUEBERRY = "Good thing a Pinetree Pioneer's outfit is resistant to water!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
-            READY = "She's gonna blow!",
-			REGROWING = "It seems to be coming back.",
+            READY = "Wow! Everything is huge around here!",
+			REGROWING = "It'll come back, right?",
 		}
 	DESCRIBE.BERNIE_INACTIVE =
         {

@@ -143,10 +143,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.FRUITBAT = "A flying fruit! I've seen it all!"
 	DESCRIBE.PITCHERPLANT = "Behold, it's a plant, but this time it's high up!"
 	DESCRIBE.APHID = "The trees had it coming to them!"
+	DESCRIBE.GIANT_TREE_INFESTED = "What's bugging you?"
+	DESCRIBE.GIANT_BLUEBERRY = "Could I use this like a waterballoon? Hyuyu!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
-            READY = "She's gonna blow!",
-			REGROWING = "It seems to be coming back.",
+            READY = "If you don't give it room, It'll give a big boom!",
+			REGROWING = "What a joyful experience!",
 		}
 	DESCRIBE.BERNIE_INACTIVE =
         {

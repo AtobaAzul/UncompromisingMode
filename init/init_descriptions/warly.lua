@@ -142,10 +142,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.FRUITBAT = "I actually don't mind this one."
 	DESCRIBE.PITCHERPLANT = "I wonder if it has any dew inside?"
 	DESCRIBE.APHID = "A horrible pest."
+	DESCRIBE.GIANT_TREE_INFESTED = "It seems rather sick."
+	DESCRIBE.GIANT_BLUEBERRY = "Ohoho, I have plenty of ideas for you!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
-            READY = "She's gonna blow!",
-			REGROWING = "It seems to be coming back.",
+            READY = "Oh, the possibilities!",
+			REGROWING = "Oh good, it'll come back. I desire more!",
 		}
 	DESCRIBE.BERNIE_INACTIVE =
         {

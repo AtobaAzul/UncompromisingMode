@@ -143,10 +143,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.FRUITBAT = "If it'd sit still I would burn it."
 	DESCRIBE.PITCHERPLANT = "If it were lower down I'd burn it."
 	DESCRIBE.APHID = "Your fuzzyness would make good tinder."
+	DESCRIBE.GIANT_TREE_INFESTED = "Burn the insects out!"
+	DESCRIBE.GIANT_BLUEBERRY = "My jaw is getting in the way!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
-            READY = "She's gonna blow!",
-			REGROWING = "It seems to be coming back.",
+            READY = "Mmmm! Don't mind if I do!",
+			REGROWING = "That was fun!",
 		}
 	DESCRIBE.BERNIE_INACTIVE =
         {

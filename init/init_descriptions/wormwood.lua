@@ -143,10 +143,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORMWOOD.DESCRIBE
 	DESCRIBE.FRUITBAT = "Flying friend."
 	DESCRIBE.PITCHERPLANT = "Hanging friend."
 	DESCRIBE.APHID = "Eating big friends!"
+	DESCRIBE.GIANT_TREE_INFESTED = "Big friend is sick."
+	DESCRIBE.GIANT_BLUEBERRY = "Yay! Water!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
-            READY = "She's gonna blow!",
-			REGROWING = "It seems to be coming back.",
+            READY = "Boom fruit",
+			REGROWING = "Grow!",
 		}
 	DESCRIBE.BERNIE_INACTIVE =
         {

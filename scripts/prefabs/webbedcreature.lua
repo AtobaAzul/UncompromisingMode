@@ -225,7 +225,7 @@ local function fn()
 		end
 		inst:AddTag("structure")
 		inst:AddTag("webbedcreature")
-		inst:AddTag("notarget")
+
 		-------------------
 		inst:AddComponent("health")
 		inst.components.health:SetMaxHealth(1000000)
@@ -233,7 +233,8 @@ local function fn()
 		inst:AddComponent("combat")       
         inst.components.combat:SetOnHit(Regen)
 		inst:ListenForEvent("death", OnKilled)
-
+		inst:AddTag("prey")
+		inst:AddTag("hound")
 		MakeLargePropagator(inst)
 
 		inst:AddComponent("inspectable")

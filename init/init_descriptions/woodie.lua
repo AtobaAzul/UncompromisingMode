@@ -143,10 +143,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.FRUITBAT = "Who taught that fruit to fly?"
 	DESCRIBE.PITCHERPLANT = "It's a plant, but not the choppin' kind."
 	DESCRIBE.APHID = "They like the trees too, eh?"
+	DESCRIBE.GIANT_TREE_INFESTED = "Quit hoggin' it to yourselves, hosers!"
+	DESCRIBE.GIANT_BLUEBERRY = "A lot of water in this, eh?"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
-            READY = "She's gonna blow!",
-			REGROWING = "It seems to be coming back.",
+            READY = "It's shaking around, eh?",
+			REGROWING = "That was an ordeal, eh?",
 		}
 	DESCRIBE.BERNIE_INACTIVE =
         {

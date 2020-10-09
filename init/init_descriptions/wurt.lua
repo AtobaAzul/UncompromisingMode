@@ -144,10 +144,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 	DESCRIBE.FRUITBAT = "Looks tasty, florp."
 	DESCRIBE.PITCHERPLANT = "Can't reach."
 	DESCRIBE.APHID = "Bug, florp."
+	DESCRIBE.GIANT_TREE_INFESTED = "Bugs eating big tree."
+	DESCRIBE.GIANT_BLUEBERRY = "Yum!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
-            READY = "She's gonna blow!",
-			REGROWING = "It seems to be coming back.",
+            READY = "Look tasty! Hard to dig, though...",
+			REGROWING = "Loud boom scary, florp!",
 		}
 	DESCRIBE.BERNIE_INACTIVE =
         {

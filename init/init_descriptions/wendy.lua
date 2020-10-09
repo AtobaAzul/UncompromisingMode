@@ -142,10 +142,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.FRUITBAT = "What?!"
 	DESCRIBE.PITCHERPLANT = "Out of reach..."
 	DESCRIBE.APHID = "They plague the trees."
+	DESCRIBE.GIANT_TREE_INFESTED = "It battles against death."
+	DESCRIBE.GIANT_BLUEBERRY = "Will it explode in my mouth?"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
-            READY = "She's gonna blow!",
-			REGROWING = "It seems to be coming back.",
+            READY = "Eating it causes a mess, like everything else I do.",
+			REGROWING = "Oh, it's still there.",
 		}
 	DESCRIBE.BERNIE_INACTIVE =
         {

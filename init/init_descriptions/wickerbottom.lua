@@ -143,10 +143,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.FRUITBAT = "It seems to be connected to the pitcher plant somehow."
 	DESCRIBE.PITCHERPLANT = "The fruit bats can be seen going in and out of it."
 	DESCRIBE.APHID = "They're infesting the Sequoioideae."
+	DESCRIBE.GIANT_TREE_INFESTED = "This Sequoioideae is a bit worse for wear."
+	DESCRIBE.GIANT_BLUEBERRY = "I hope that it's no longer volatile."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
-            READY = "She's gonna blow!",
-			REGROWING = "It seems to be coming back.",
+            READY = "Normal Cyanococcus berries don't pulsate.",
+			REGROWING = "It appears that the root is still intact.",
 		}
 	DESCRIBE.BERNIE_INACTIVE =
         {

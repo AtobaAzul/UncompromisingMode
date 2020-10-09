@@ -144,10 +144,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.FRUITBAT = "Flyin'... fruit?"
 	DESCRIBE.PITCHERPLANT = "It's just a plant."
 	DESCRIBE.APHID = "Just another pest."
+	DESCRIBE.GIANT_TREE_INFESTED = "That seems to be where the buggers are comin' from."
+	DESCRIBE.GIANT_BLUEBERRY = "It's packed to the brim with liquid!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
-            READY = "She's gonna blow!",
-			REGROWING = "It seems to be coming back.",
+            READY = "Gonna make a mess, but what else is new?",
+			REGROWING = "That must be the root.",
 		}
 	DESCRIBE.BERNIE_INACTIVE =
         {

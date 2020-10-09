@@ -178,10 +178,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.FRUITBAT = "Agh, it's still terrifying!"
 	DESCRIBE.PITCHERPLANT = "It's quite high up."
 	DESCRIBE.APHID = "A horrible pest."
+	DESCRIBE.GIANT_TREE_INFESTED = "It doesn't look too well."
+	DESCRIBE.GIANT_BLUEBERRY = "This'll be messy, for sure."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
-            READY = "She's gonna blow!",
-			REGROWING = "It seems to be coming back.",
+            READY = "It's pretty big, maybe I can dig it up.",
+			REGROWING = "The plant survived, it'll probably grow back?",
 		}
 	DESCRIBE.BERNIE_INACTIVE =
         {

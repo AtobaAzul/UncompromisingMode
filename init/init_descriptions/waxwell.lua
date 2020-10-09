@@ -144,10 +144,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.FRUITBAT = "Even uglier!"
 	DESCRIBE.PITCHERPLANT = "It's a plant, but high up."
 	DESCRIBE.APHID = "I don't like you."
+	DESCRIBE.GIANT_TREE_INFESTED = "It's riddled with vermin."
+	DESCRIBE.GIANT_BLUEBERRY = "This is going to get messy. Sigh."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
-            READY = "She's gonna blow!",
-			REGROWING = "It seems to be coming back.",
+            READY = "If it bursts all over this suit, I'm going to kill something.",
+			REGROWING = "It'll grow more.",
 		}
 	DESCRIBE.BERNIE_INACTIVE =
         {

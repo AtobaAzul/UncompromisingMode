@@ -142,10 +142,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.FRUITBAT = "It's our favorite color!"
 	DESCRIBE.PITCHERPLANT = "If we could climb like the other spiders we could reach it."
 	DESCRIBE.APHID = "Not a spider!"
+	DESCRIBE.GIANT_TREE_INFESTED = "It looks pretty sick."
+	DESCRIBE.GIANT_BLUEBERRY = "The juice gets everywhere!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
-            READY = "She's gonna blow!",
-			REGROWING = "It seems to be coming back.",
+            READY = "It's huge! No way we can pull that out with our arms!",
+			REGROWING = "Exploding must be exhausting.",
 		}
 	DESCRIBE.BERNIE_INACTIVE =
         {
