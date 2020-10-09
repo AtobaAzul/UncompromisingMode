@@ -317,7 +317,6 @@ local function common_fn(scale)
         OnIsSummer(inst, true)
     end
 	
-    --inst.components.eater:SetSnappy()
     inst.components.eater:SetOnEatFn(OnEat)
     
     inst:AddComponent("combat")
