@@ -111,7 +111,7 @@ end
 local function ShouldAcceptItem(inst, item)
     return inst.components.eater:CanEat(item)
         and not inst.components.combat:HasTarget()
-		and not item:HasTag("snapdragons_cant_eat") and ((item.components.edible.hungervalue ~= nil and item.components.hungervalue > 5) or item:HasTag("insect"))
+		and not item:HasTag("snapdragons_cant_eat") and ((item.components.edible.hungervalue ~= nil and item.components.edible.hungervalue > 5) or item:HasTag("insect"))
 end
 
 local function OnGetItemFromPlayer(inst, giver, item)
