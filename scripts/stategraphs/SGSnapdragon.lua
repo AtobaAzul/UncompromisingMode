@@ -126,7 +126,7 @@ local states=
         events =
         {
             EventHandler("animover", function(inst)
-                inst.sg:GoToState((inst:PerformBufferedAction() or inst.sg.statemem.forced) and "eat_loop" or "idle")
+                inst.sg:GoToState(inst:PerformBufferedAction() and "eat_loop" or "idle")
             end),
         },
     },
@@ -137,13 +137,20 @@ local states=
 
         onenter = function(inst)
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("eat_loop", true)
+            inst.AnimState:PlayAnimation("eat_loop")
             inst.sg:SetTimeout(1+math.random()*1)
         end,
 
         ontimeout = function(inst)
             inst.sg:GoToState("idle")
         end,       
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+                inst.sg:GoToState("idle")
+            end),
+        },      
     },  
 
     State{

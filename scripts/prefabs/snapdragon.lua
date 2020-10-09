@@ -117,7 +117,7 @@ end
 local function OnGetItemFromPlayer(inst, giver, item)
     if inst.components.eater:CanEat(item) then
         inst.components.eater:Eat(item, giver)
-        inst.sg:GoToState("eat")--, true)
+        inst.sg:GoToState("eat")
 
 		-- Increase the amount of food in the stomach.
 		inst.foodItemsEatenCount = inst.foodItemsEatenCount + 1
@@ -165,8 +165,8 @@ end
 local function OnGetItemFromPlayer_Buddy(inst, giver, item)
     if inst.components.eater:CanEat(item) then
         inst.components.eater:Eat(item, giver)
-        inst.sg:GoToState("eat")--, true)
-		
+        inst.sg:GoToState("eat")
+
         if inst.components.combat.target == giver then
             inst.components.combat:SetTarget(nil)
         elseif giver.components.leader ~= nil and
