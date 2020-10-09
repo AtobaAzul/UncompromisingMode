@@ -229,6 +229,7 @@ local function fn()
 		-------------------
 		inst:AddComponent("health")
 		inst.components.health:SetMaxHealth(1000000)
+		inst.components.health.absorb = 1
 		--inst.components.health.invincible = true
 		inst:AddComponent("combat")       
         inst.components.combat:SetOnHit(Regen)
