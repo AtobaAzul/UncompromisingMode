@@ -32,11 +32,11 @@ local loot =
 
 
 local RETARGET_MUST_TAGS = {"_combat" }
-local RETARGET_CANT_TAGS = { "INLIMBO","structure", "bird" }
+local RETARGET_CANT_TAGS = { "INLIMBO","structure", "bird","snapdragon" }
 local function Retarget(inst)
     if not inst.components.health:IsDead() and not inst.components.sleeper:IsAsleep() then
         local oldtarget = inst.components.combat.target
-        local newtarget = FindEntity(inst, 20, 
+        local newtarget = FindEntity(inst, 12, 
             function(guy) 
                 return 
                     inst.components.combat:CanTarget(guy) 
