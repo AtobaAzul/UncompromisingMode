@@ -235,6 +235,7 @@ local function fn()
 		inst:ListenForEvent("death", OnKilled)
 		inst:AddTag("prey")
 		inst:AddTag("hound")
+		inst:AddTag("antlion_sinkhole_blocker")
 		MakeLargePropagator(inst)
 
 		inst:AddComponent("inspectable")
