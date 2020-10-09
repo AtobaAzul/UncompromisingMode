@@ -37,8 +37,16 @@ end
 local function onpickedfn(inst, picker)
     inst.SoundEmitter:PlaySound("dontstarve/wilson/pickup_reeds")
     inst.AnimState:PlayAnimation("picked")
-  
-        inst.AnimState:PushAnimation("empty", false)
+	if picker.components.inventory ~= nil then
+	if math.random() < 0.2 then
+		if math.random() < 0.5 then
+		picker.components.inventory:GiveItem(SpawnPrefab("cutgrass"), nil, inst:GetPosition())
+		else
+		picker.components.inventory:GiveItem(SpawnPrefab("twigs"), nil, inst:GetPosition())
+		end
+	end
+	end
+    inst.AnimState:PushAnimation("empty", false)
  
 end
 local function dig_up(inst, worker)
