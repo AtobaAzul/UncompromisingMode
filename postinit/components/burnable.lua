@@ -40,7 +40,7 @@ env.AddComponentPostInit("burnable", function(self)
 	end
 	function self:StartWildfire()
 	local x,y,z = self.inst.Transform:GetWorldPosition()
-		if TheWorld.state.issummer and #TheSim:FindEntities(x,y,z,12,{"canopy"}) > 0 then
+		if #TheSim:FindEntities(x,y,z,12,{"canopy"}) > 0 then
 		
 		else
 		return _OldStartWildfire(self)
