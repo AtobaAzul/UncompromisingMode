@@ -111,7 +111,7 @@ end
 local function ShouldAcceptItem(inst, item)
     return inst.components.eater:CanEat(item)
         and not inst.components.combat:HasTarget()
-		and not item:HasTag("snapdragons_cant_eat")
+		and not item:HasTag("snapdragons_cant_eat") and ((item.components.edible.hungervalue ~= nil and item.components.hungervalue > 5) or item:HasTag("insect"))
 end
 
 local function OnGetItemFromPlayer(inst, giver, item)
@@ -301,6 +301,7 @@ local function common_fn(scale)
     anim:PlayAnimation("idle", true)
 
     inst:AddTag("animal")
+    inst:AddTag("veggie")
     inst:AddTag("largecreature")
     inst:AddTag("trader")
 	
