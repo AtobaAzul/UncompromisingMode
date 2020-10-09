@@ -73,12 +73,12 @@ local function IsEligible(doer)
 end
 
 local function ActiveRaid(inst, doer)
-	if not doer or not doer:IsValid() or not doer.Transform then
+	if not doer or not doer:IsValid() or not doer.Transform or not IsEligible(doer) then
         return
     end
 
 	local x, y, z = doer.Transform:GetWorldPosition()
-	local playerage = doer.components.age:GetAgeInDays()
+	local playerage = doer.components.age ~= nil and doer.components.age:GetAgeInDays()
 	local ents = TheSim:FindEntities(x, y, z, 20, nil, nil, {"_inventoryitem"})
 	if playerage >= 50 and math.random() > 0.05 and IsEligible(doer) and
 		not GLOBAL.TheWorld:HasTag("cave") and
@@ -89,6 +89,8 @@ local function ActiveRaid(inst, doer)
 		GLOBAL.TheWorld:AddTag("raided")
 		print("Rat Raid Triggered !")
 		inst:DoTaskInTime(3, StartRaid, doer)
+	else
+		return
 	end
 end
 
