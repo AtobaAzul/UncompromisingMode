@@ -136,6 +136,7 @@ local class_post = {
 local brain_post = {
     --example:
     --"hound",
+	"pig",
 	"werepig",
 	"frog",
 	"spiderqueen",
