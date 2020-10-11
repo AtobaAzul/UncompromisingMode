@@ -44,7 +44,9 @@ local function SpawnPollenmiteDenForPlayer(reschedule)
 	if _storming or not TheWorld.state.iswinter or TheWorld.state.remainingdaysinseason <= 2 then
 		_storming = false
 		TheWorld:RemoveTag("snowstormstart")
-		TheWorld.net:RemoveTag("snowstormstartnet")
+		if TheWorld.net ~= nil then
+			TheWorld.net:RemoveTag("snowstormstartnet")
+		end
 		--print("remove")
 	else
 		_storming = true
@@ -60,7 +62,9 @@ local function SpawnPollenmiteDenForPlayer(reschedule)
 		TheWorld:DoTaskInTime(60, function()
 			if TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
 				TheWorld:AddTag("snowstormstart")
-				TheWorld.net:AddTag("snowstormstartnet")
+				if TheWorld.net ~= nil then
+					TheWorld.net:AddTag("snowstormstartnet")
+				end
 			end
 		end)
 		--print("add")
@@ -182,7 +186,9 @@ function self:OnLoad(data)
 		if _storming then
 			if TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
 				TheWorld:AddTag("snowstormstart")
-				TheWorld.net:AddTag("snowstormstartnet")
+				if TheWorld.net ~= nil then
+					TheWorld.net:AddTag("snowstormstartnet")
+				end
 			end
 		end
 	end)

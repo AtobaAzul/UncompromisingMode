@@ -16,14 +16,18 @@ local _respawntimeremaining = nil
 local function CooldownRaid()
 	_respawntime = nil
 
-	TheWorld.net:RemoveTag("raided")
+	if TheWorld.net ~= nil then
+		TheWorld.net:RemoveTag("raided")
+	end
 	TheWorld:RemoveTag("raided")
 	print("Rat Raid Cooldown is over.")
 end
 
 local function Print()
 	print(_respawntime)
-	TheWorld.net:AddTag("raided")
+	if TheWorld.net ~= nil then
+		TheWorld.net:AddTag("raided")
+	end
 	TheWorld:AddTag("raided")
 end
 
@@ -37,7 +41,7 @@ end
 
 function self:OnSave()
 	
-	if TheWorld.net:HasTag("raided") or TheWorld:HasTag("raided") then
+	if (TheWorld.net ~= nil and TheWorld.net:HasTag("raided")) or TheWorld:HasTag("raided") then
 		_raided = true
 	end
 

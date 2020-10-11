@@ -7,7 +7,11 @@ AddPrefabPostInit("cave", function(inst)
 end)
 
 local function CooldownRaid(inst)
-	GLOBAL.TheWorld.net:RemoveTag("raided")
+	if GLOBAL.TheWorld.net ~= nil then
+		GLOBAL.TheWorld.net:RemoveTag("raided")
+	end
+
+	GLOBAL.TheWorld:RemoveTag("raided")
 	print("Rat Raid Cooldown is over.")
 end
 
@@ -82,10 +86,13 @@ local function ActiveRaid(inst, doer)
 	local ents = TheSim:FindEntities(x, y, z, 20, nil, nil, {"_inventoryitem"})
 	if playerage >= 50 and math.random() > 0.05 and IsEligible(doer) and
 		not GLOBAL.TheWorld:HasTag("cave") and
-		not GLOBAL.TheWorld.net:HasTag("raided") and
+		not (GLOBAL.TheWorld.net ~= nil and GLOBAL.TheWorld.net:HasTag("raided")) and
 		not inst.components.container:IsEmpty() and
 		#ents >= 20 then
-		GLOBAL.TheWorld.net:AddTag("raided")
+		if TheWorld.net ~= nil then
+			GLOBAL.TheWorld.net:AddTag("raided")
+		end
+		
 		GLOBAL.TheWorld:AddTag("raided")
 		print("Rat Raid Triggered !")
 		inst:DoTaskInTime(3, StartRaid, doer)

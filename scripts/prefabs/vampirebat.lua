@@ -31,12 +31,10 @@ local MAX_CHASEAWAY_DIST = 80
 local MAX_TARGET_SHARES = 100
 local SHARE_TARGET_DIST = 100
 
+
 local function MakeTeam(inst, attacker)
     local leader = SpawnPrefab("teamleader")
-    leader:AddTag("bat")
-    leader.components.teamleader.threat = attacker
-    leader.components.teamleader.team_type = inst.components.teamattacker.team_type
-    leader.components.teamleader:NewTeammate(inst)
+    leader.components.teamleader:SetUp(attacker, inst)
     leader.components.teamleader:BroadcastDistress(inst)
 end
 
@@ -97,24 +95,18 @@ end
 
 -- TEAM ATTACKER STUFF
 
-
-local function KeepTarget(inst, target)
-    if (inst.components.teamattacker.teamleader and not inst.components.teamattacker.teamleader:CanAttack()) or
-        inst.components.teamattacker.orders == "ATTACK" then
-        return true
-    else
-        return false
-    end 
-end
-
-local function retargetfn(inst)
+local RETARGET_CANT_TAGS = {"bat"}
+local RETARGET_ONEOF_TAGS = {"character", "monster"}
+local function Retarget(inst)
     local ta = inst.components.teamattacker
 
-    local newtarget = FindEntity(inst, TUNING.BISHOP_TARGET_DIST, function(guy)
-            return (guy:HasTag("character") or guy:HasTag("monster") )
-                   and not guy:HasTag("bat")
-                   and inst.components.combat:CanTarget(guy)
-    end)
+    local newtarget = FindEntity(inst, TUNING.BAT_TARGET_DIST, function(guy)
+            return inst.components.combat:CanTarget(guy)
+        end,
+        nil,
+        RETARGET_CANT_TAGS,
+        RETARGET_ONEOF_TAGS
+    )
 
     if newtarget and not ta.inteam and not ta:SearchForTeam() then
         MakeTeam(inst, newtarget)
@@ -123,6 +115,11 @@ local function retargetfn(inst)
     if ta.inteam and not ta.teamleader:CanAttack() then
         return newtarget
     end
+end
+
+local function KeepTarget(inst, target)
+    return (inst.components.teamattacker.inteam and not inst.components.teamattacker.teamleader:CanAttack())
+        or inst.components.teamattacker.orders == ORDERS.ATTACK
 end
 
 local function OnAttacked(inst, data)
@@ -139,41 +136,8 @@ local function OnAttacked(inst, data)
     end
 end
 
-
---[[
-local function KeepTarget(inst, target)
-    local shouldkeep = inst.components.combat:CanTarget(target) and (not inst:HasTag("pet_hound") or inst:IsNear(target, TUNING.HOUND_FOLLOWER_TARGET_KEEP))
-   -- local onboat = target.components.driver and target.components.driver:GetIsDriving()
-    return shouldkeep
-end
-
-local function retargetfn(inst)
-    local dist = TUNING.HOUND_TARGET_DIST
-    if inst:HasTag("pet_hound") then
-        dist = TUNING.HOUND_FOLLOWER_TARGET_DIST
-    end
-    local notags = {"FX", "NOCLICK","INLIMBO", "wall", "vampirebat"}
-    return FindEntity(inst, dist, function(guy) 
-        local shouldtarget = inst.components.combat:CanTarget(guy)
-        return shouldtarget
-    end, nil, notags)
-end
-
-local function OnAttacked(inst, data)
-    inst.components.combat:SetTarget(data.attacker)
-    inst.components.combat:ShareTarget(data.attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("hound") or dude:HasTag("houndfriend") and not dude.components.health:IsDead() end, 5)
-end
-]]
 local function OnAttackOther(inst, data)
     inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST, function(dude) return dude:HasTag("bat") and not dude.components.health:IsDead() end, 5)
-end
-
-local function OnWaterChange(inst, onwater)
-    if onwater then
-        inst.onwater = true
-    else
-        inst.onwater = false        
-    end
 end
 
 local function onsave(inst, data)    
@@ -197,6 +161,7 @@ local function onload(inst, data)
     end    
   end
 end
+
 local function OnPreLoad(inst, data)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	if y > 0 then
@@ -265,7 +230,7 @@ local function fn()
     inst:AddComponent("combat")
     inst.components.combat:SetDefaultDamage(25)
     inst.components.combat:SetAttackPeriod(1.8)
-    inst.components.combat:SetRetargetFunction(3, retargetfn)
+    inst.components.combat:SetRetargetFunction(3, Retarget)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
 
     inst:AddComponent("sleeper")

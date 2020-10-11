@@ -75,9 +75,9 @@ startregen = function(inst, regentime)
 		regentime = regentime or (TUNING.SNOW_REGROW_TIME + math.random()*TUNING.SNOW_REGROW_VARIANCE)
 
 
-		if TheWorld.state.issnowing or ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") ) then
+		if TheWorld.state.issnowing or ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart") ) then
 			regentime = regentime / 2
-		elseif TheWorld.state.iswinter and not TheWorld.state.issnowing and not ( TheWorld.net:HasTag("snowstormstartnet") or TheWorld:HasTag("snowstormstart") ) then
+		elseif TheWorld.state.iswinter and not TheWorld.state.issnowing and not ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart") ) then
 			regentime = regentime
 		else
 			regentime = regentime / 2

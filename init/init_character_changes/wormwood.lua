@@ -3,6 +3,7 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local function propegation(inst)
 	if inst.components.burnable and not inst.components.burnable:IsBurning() then
+		inst.components.burnable:Extinguish()
 		MakeSmallPropagator(inst)
 	else
 		inst:DoTaskInTime(5, propegation)
@@ -57,7 +58,8 @@ local function OnRespawnedFromGhost2(inst)
 	
 	--MakeMediumBurnableCharacter(inst, "torso")
 	inst:DoTaskInTime(0, function(inst) 
-		if inst.components.health and not inst.components.health:IsDead() then 
+		if inst.components.health and not inst.components.health:IsDead() then
+			inst.components.burnable:Extinguish()
 			MakeSmallPropagator(inst) 
 		end 
 	end)
@@ -72,6 +74,7 @@ local function OnBurnt(inst)
 	--Overriding the OnBurnt function to prevent propegator from sometimes removing, hopefully.
 	inst:DoTaskInTime(0, function(inst) 
 		if inst.components.health and not inst.components.health:IsDead() then
+			inst.components.burnable:Extinguish()
 			MakeSmallPropagator(inst) 
 		end 
 	end)

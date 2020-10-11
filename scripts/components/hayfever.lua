@@ -160,7 +160,7 @@ function Hayfever:Enable()
 end
 
 function Hayfever:Disable()
-    if self.enabled  then --and (TheWorld:HasTag("hayfever") or TheWorld.net:HasTag("hayfever"))then	
+    if self.enabled then --and (TheWorld:HasTag("hayfever") or TheWorld.net:HasTag("hayfever"))then	
         self.inst:PushEvent("updatepollen", {sneezetime = nil}) 
         self.inst.components.talker:Say(GetString(self.inst.prefab, "ANNOUNCE_HAYFEVER_OFF"))    
     end
