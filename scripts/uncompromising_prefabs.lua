@@ -146,4 +146,5 @@ return {
 	"fruitbat",
 	"pitcherplant",
 	"widowshead",
+	"cctrinkets",
 }

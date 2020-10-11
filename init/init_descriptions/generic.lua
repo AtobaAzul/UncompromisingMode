@@ -38,6 +38,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.CALIFORNIAKING = "This dish is gruesome."
 	--CaliforniaKing
 	
+	--Content Creators
+	DESCRIBE.CCTRINKET_DON = "I can only make out the words \"Don\" and \"Guide\"."
+	DESCRIBE.CCTRINKET_JAZZY = "Looks pretty jazzy."
+	DESCRIBE.CCTRINKET_FREDDO = "The name \"Freddo\" is etched onto it."		
+	--Content Creators
     DESCRIBE.UNCOMPROMISING_RAT = "They're rataliating!"
     DESCRIBE.UNCOMPROMISING_RATHOLD = "It must lead to their labo-rat-ory."
     DESCRIBE.RATPOISONBOTTLE = "It's labeled \"Do not drink. That means you Webber.\""
