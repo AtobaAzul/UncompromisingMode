@@ -20,8 +20,11 @@ local function fn()
     inst.AnimState:PlayAnimation(name)
     MakeInventoryFloatable(inst)
 	if name == "jazzy" then
-	inst.Transform:SetScale(.75,.75,.75)	
+	inst.Transform:SetScale(.66,.66,.66)	
 	end
+
+	inst:AddTag("specialtrinket_"..name)
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -35,7 +38,7 @@ local function fn()
     inst:AddTag("molebait")
     inst:AddTag("cattoy")
     inst:AddComponent("tradable")
-    inst.components.tradable.goldvalue = 4
+    inst.components.tradable.goldvalue = 1
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/cctrinket_"..name..".xml"
     return inst
