@@ -7,7 +7,7 @@ local function ForceToTakeMoreDamage(inst)
 	self.GetAttacked = function(self, attacker, damage, weapon, stimuli)
 		if attacker and damage then
 			-- Take extra damage
-			damage = damage * 1.5
+			damage = damage * 1.2
 		end
 		return _GetAttacked(self, attacker, damage, weapon, stimuli)
 	end
