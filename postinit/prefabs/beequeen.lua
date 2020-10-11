@@ -3,8 +3,11 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 
 local function DisableThatStuff(inst)
-		TheWorld:PushEvent("beequeenkilled")
+	TheWorld:PushEvent("beequeenkilled")
+		
+	if TheWorld.net ~= nil then
 		TheWorld.net:AddTag("queenbeekilled")
+	end
 end
 
 env.AddPrefabPostInit("beequeen", function(inst)
@@ -34,7 +37,9 @@ end)
 local function OnTagTimer(inst, data)
 	if data.name == "hivegrowth" then
 		TheWorld:PushEvent("beequeenrespawned")
-		TheWorld.net:RemoveTag("queenbeekilled")
+		if TheWorld.net ~= nil then
+			TheWorld.net:RemoveTag("queenbeekilled")
+		end
 	end
 end
 

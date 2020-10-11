@@ -48,26 +48,32 @@ local function OnIgniteFn(inst)
 		end
 	
 	end
-	
 	--propegation(inst)
 
 end
 
 local function OnBurnt(inst)
 	--will this stop her from losing her burning effect?
-	inst:DoTaskInTime(0, function(inst) 
+	inst:DoTaskInTime(1, function(inst) 
 		if inst.components.health and not inst.components.health:IsDead() then 
+			inst.components.burnable:Extinguish()
 			MakeSmallPropagator(inst)
 			inst.components.burnable:SetBurnTime(TUNING.WORMWOOD_BURN_TIME * 2)
 			inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
 			inst.components.burnable:SetOnBurntFn(OnBurnt)
 		end 
 	end)
+
+
+	if inst.components.burnable ~= nil then 
+		inst.components.burnable:Extinguish()	
+	end
 end
 
 local function OnRespawnedFromGhost2(inst)
-	inst:DoTaskInTime(0, function(inst) 
-		if inst.components.health and not inst.components.health:IsDead() then 
+	inst:DoTaskInTime(1, function(inst) 
+		if inst.components.health and not inst.components.health:IsDead() then
+			inst.components.burnable:Extinguish()
 			MakeSmallPropagator(inst) 
 			inst.components.burnable:SetBurnTime(TUNING.WORMWOOD_BURN_TIME * 2)
 			inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
@@ -84,7 +90,7 @@ end
 
 local function OnMoistureDelta(inst)
 	--Overriding the OnBurnt function to prevent propegator from sometimes removing, hopefully.
-	inst:DoTaskInTime(0, function(inst) 
+	inst:DoTaskInTime(1, function(inst) 
 		if inst.components.health and not inst.components.health:IsDead() and inst.components.moisture and inst.components.moisture:GetMoisturePercent() >= 0.4 then
 			if inst.components.propegator ~= nil then
 				inst.components.propagator.acceptsheat = false
@@ -107,7 +113,7 @@ env.AddPrefabPostInit("willow", function(inst)
 	--if inst.components.burnable ~= nil then
 		--propegation(inst)
 		MakeSmallPropagator(inst)
-		inst.components.burnable:SetBurnTime(TUNING.WORMWOOD_BURN_TIME * 1.5)
+		inst.components.burnable:SetBurnTime(TUNING.WORMWOOD_BURN_TIME * 2)
 		inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
 		inst.components.burnable:SetOnBurntFn(OnBurnt)
 	--end

@@ -55,6 +55,9 @@ recipes.asparagussoup.hunger = 25
 recipes.asparagussoup.health = 30
 recipes.asparagussoup.sanity = 20
 
+recipes.butterflymuffin.health = 30
+recipes.butterflymuffin.sanity = 10
+
 --recipes.watermelonicle.health = number
 --recipes.watermelonicle.sanity = number
 --recipes.watermelonicle.hunger = number

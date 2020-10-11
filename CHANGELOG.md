@@ -370,7 +370,7 @@
 
 --Non-Crockpot
 
-* [x]  Butterfly wing nerf - Health restored to 5 (down from 8).
+* [x]  Butterfly wing nerf - Health restored to 1 (down from 8).
 
 * [x] Cactus Flesh, Cooked Cactus Flesh, and Cooked Green Caps now deal slightly more damage when eaten. (A lot of other sanity foods like pumpkin cookies have been buffed! Seek them out!).
 
@@ -413,6 +413,8 @@
 * [x] Fish Tacos now restores 37.5 Hunger -> 62.5 Hunger 20 Health -> 15 Health!
 
 * [x] Vegetable Stinger now restores 3 Health -> 10 Health! (Not buffed as heavily because of hayfever usage.)
+
+* [x] Butterfly Muffins now restore 20 Health -> 30 Health, and 5 Sanity -> 10 sanity!
 
 
 
