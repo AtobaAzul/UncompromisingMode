@@ -897,7 +897,6 @@ local function SpawnShadowBoomer(player)
 				ent.Physics:ClearCollisionMask()
 				ent.Physics:CollidesWith(COLLISION.GROUND)
 				ent.Physics:CollidesWith(COLLISION.CHARACTERS)
-				ent.components.timer:StopTimer("selfdestruct")
 				
 				ent:WatchWorldState("isday", function() 
 					ent.components.health:Kill()

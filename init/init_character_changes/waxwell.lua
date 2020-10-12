@@ -80,7 +80,7 @@ env.AddPrefabPostInit("waxwelljournal", function(inst)
 	end
 	
 	if inst.components.prototyper ~= nil then
-		inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.PRESTIHATITATOR
+		--inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.PRESTIHATITATOR
 	end
 
     inst:AddComponent("book")

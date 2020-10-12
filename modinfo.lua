@@ -104,7 +104,7 @@ configuration_options =
 		},
 		default = false,
 	},
-	{
+	--[[{
 		name = "waxwell",
 		label = "Classic Maxwell Shadows.",
 		hover = "Singleplayer style Shadow workers, but with no health cost, no limited timer, and you can force them to leave!",
@@ -114,7 +114,7 @@ configuration_options =
 			{description = "Enabled", data = true},
 		},
 		default = true,
-	},
+	},]]
 	{
 		name = "warly",
 		label = "Improved Warly.",

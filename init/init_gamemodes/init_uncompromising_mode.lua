@@ -146,10 +146,10 @@ local require = GLOBAL.require
 		modimport("init/init_character_changes/willow_bernie")
 	end
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("waxwell") == true or
+	--[[if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("waxwell") == true or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("waxwell") == true) then
 		modimport("init/init_character_changes/waxwell")
-	end
+	end]]
 	
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("warly") == true or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("warly") == true) then
@@ -176,7 +176,7 @@ local require = GLOBAL.require
 		modimport("init/init_character_changes/winona")
 		modimport("init/init_character_changes/wortox")
 		modimport("init/init_character_changes/wormwood")
-		--modimport("init/init_character_changes/waxwell")
+		modimport("init/init_character_changes/waxwell")
 	end
 
 	if GetModConfigData("hardcore") then
