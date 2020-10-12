@@ -178,6 +178,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.GIANT_TREE = "It totally blocks out the sun."
 	DESCRIBE.WIDOWSGRASP =  "Let's open up those cocoons!"
 	DESCRIBE.WEBBEDCREATURE = "It wouldn't hurt to see what's inside, right?"
+	ANNOUNCE.WEBBEDCREATURE = "Only a spider could rip through silk this tough!"
 	DESCRIBE.SNAPDRAGON_BUDDY = "It looks hungry. Me too."
 	DESCRIBE.SNAPDRAGON = "It looks nice enough."
 	DESCRIBE.FRUITBAT = "Agh, it's still terrifying!"

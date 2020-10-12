@@ -200,6 +200,8 @@ local function Regen(inst, attacker)
         inst.AnimState:PushAnimation(inst.anims.idle)
 		if attacker:HasTag("widowsgrasp") then
 		inst.components.health:Kill()
+		elseif attacker:HasTag("player") and not attacker:HasTag("mime") and not attacker:HasTag("widowsgrasp") then
+ 		attacker.components.talker:Say(GetString(attacker.prefab, "WEBBEDCREATURE"))  
 		end
 	end
 end
