@@ -198,6 +198,14 @@ local function fn()
 	MakeFlyingCharacterPhysics(inst, 1, .5)
 	--MakePoisonableCharacter(inst)
 
+    inst:AddTag("bat")
+	inst:AddTag("fruitbat")
+    inst:AddTag("scarytoprey")
+    inst:AddTag("monster")
+    inst:AddTag("hostile")
+    inst:AddTag("flying")
+    inst:AddTag("veggie")
+
 	inst.entity:SetPristine()
 	
 	if not TheWorld.ismastersim then
@@ -208,12 +216,6 @@ local function fn()
     --inst.Physics:CollidesWith(COLLISION.FLYERS) 
     --inst.Physics:CollidesWith(COLLISION.CHARACTERS)
 
-    inst:AddTag("bat")
-	inst:AddTag("fruitbat")
-    inst:AddTag("scarytoprey")
-    inst:AddTag("monster")
-    inst:AddTag("hostile")
-    inst:AddTag("flying")
 
     inst.AnimState:SetBank("bat")
     inst.AnimState:SetBuild("fruitbat")
