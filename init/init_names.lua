@@ -119,6 +119,7 @@ STRINGS = GLOBAL.STRINGS.NAMES
 	STRINGS.SNAPDRAGON_BUDDY_dragonfruit_seeds = "Pink Snap Buddy"
 	STRINGS.SNAPDRAGON_BUDDY_watermelon_seeds = "Green Snap Buddy"
 	STRINGS.SNAPDRAGON_BUDDY_durian_seeds = "Yellow Snap Buddy"
+	STRINGS.SNAPPLANT = "Snap Plant"
 	STRINGS.WHISPERPOD = "Whisper Pod"
 	STRINGS.WHISPERPOD_NORMAL_GROUND = "Whisper Pod"
 	STRINGS.DEPLETED_HOODED_FERN = "Large Fern"

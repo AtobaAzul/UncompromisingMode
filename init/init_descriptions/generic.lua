@@ -181,6 +181,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	ANNOUNCE.WEBBEDCREATURE = "Only a spider could rip through silk this tough!"
 	DESCRIBE.SNAPDRAGON_BUDDY = "It looks hungry. Me too."
 	DESCRIBE.SNAPDRAGON = "It looks nice enough."
+	DESCRIBE.SNAPPLANT = "A little piece of home."
 	DESCRIBE.FRUITBAT = "Agh, it's still terrifying!"
 	DESCRIBE.PITCHERPLANT = "It's quite high up."
 	DESCRIBE.APHID = "A horrible pest."
