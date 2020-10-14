@@ -18,7 +18,7 @@ env.AddStategraphState("deerclops",
 
                 inst.components.groundpounder:GroundPound()
 
-                SpawnPrefab("antlion_sinkhole").Transform:SetPosition(pt.x, 0, pt.z)
+                SpawnPrefab("bearger_sinkhole").Transform:SetPosition(pt.x, 0, pt.z)
 
                 pt.y = 0
                 
