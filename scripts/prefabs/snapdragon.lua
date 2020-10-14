@@ -134,9 +134,9 @@ local function OnGetItemFromPlayer(inst, giver, item)
 		local angle = math.random() * 2 * PI
 		local delta = 2 * PI / 3 --/ (numgold + numprops + 1) --purposely leave a random gap
 		local variance = delta * .4
+		inst.sg:GoToState("taunt")
 
 		if inst.foodItemsEatenCount >= 3 then
-			inst.sg:GoToState("taunt")
 			
 			if not inst.podspawned then
 				inst.AnimState:SetMultColour(0.9, 0.8, 0.8, 1)
@@ -149,20 +149,14 @@ local function OnGetItemFromPlayer(inst, giver, item)
 				
 				LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
 			else
-				if math.random() >= 0.5 then
-					local item = SpawnPrefab("seeds")
+				local item = SpawnPrefab("dragonfruit_seeds")
 					
-					LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
-				else
-					local item = SpawnPrefab("dragonfruit_seeds")
-					
-					LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
-				end
+				LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
 			end
 			
 			inst.foodItemsEatenCount = 0
 		else
-			if math.random() >= 0.5 then
+			if math.random() >= 0.25 then
 				local item = SpawnPrefab("seeds")
 					
 				LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
@@ -209,7 +203,7 @@ local function OnGetItemFromPlayer_Buddy(inst, giver, item)
 			inst.foodItemsEatenCount = 0
 		else
 			if inst.seeds == "seeds" then
-				if math.random() >= 0.5 then
+				if math.random() >= 0.75 then
 					local item = SpawnPrefab(weighted_random_choice(spawns))
 					LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
 				else
@@ -217,7 +211,7 @@ local function OnGetItemFromPlayer_Buddy(inst, giver, item)
 					LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
 				end
 			else
-				if math.random() >= 0.5 then
+				if math.random() >= 0.75 then
 					local item = SpawnPrefab(inst.seeds)
 					LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
 				else
