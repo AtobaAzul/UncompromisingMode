@@ -122,6 +122,7 @@ Assets = {
 	Asset("ANIM", "anim/snapdragon_build_watermelon_seeds.zip"),
 	Asset("ANIM", "anim/snapdragon_build_neck.zip"),
 	Asset("ANIM", "anim/snapdragon_build_frozen.zip"),
+	Asset("ANIM", "anim/snapplant.zip"),
 	Asset("ANIM", "anim/whisperpod.zip"),
 	Asset("ANIM", "anim/whisperpod_normal_ground.zip"),
 	Asset("ANIM", "anim/hound_lightning.zip"),
@@ -157,6 +158,8 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/honey_log.xml"),
 	Asset("IMAGE", "images/inventoryimages/aphid.tex"),
 	Asset("ATLAS", "images/inventoryimages/aphid.xml"),
+	Asset("IMAGE", "images/inventoryimages/snapplant.tex"),
+	Asset("ATLAS", "images/inventoryimages/snapplant.xml"),
 	
 	Asset("ANIM", "anim/scorpion_basic.zip"),
 	Asset("ANIM", "anim/scorpion_build.zip"),
@@ -255,6 +258,8 @@ Assets = {
 	Asset( "ATLAS", "images/map_icons/giant_tree.xml" ),
 	Asset( "IMAGE", "images/map_icons/pitcher.tex" ),
 	Asset( "ATLAS", "images/map_icons/pitcher.xml" ),
+	Asset( "IMAGE", "images/map_icons/snapplant_map.tex"),
+	Asset( "ATLAS", "images/map_icons/snapplant_map.xml"),
 	--Map Icons End--
 
 	Asset( "IMAGE", "bigportraits/willow.tex" ),

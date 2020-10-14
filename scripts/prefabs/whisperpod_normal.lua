@@ -21,7 +21,11 @@ local function onmatured(inst)
     local snappy = SpawnPrefab("snapdragon_buddy")
 	snappy.Transform:SetPosition(pos:Get())
 	snappy.sg:GoToState("create")
-    SpawnPrefab("snapdragonherd").Transform:SetPosition(pos:Get())
+    --SpawnPrefab("snapdragonherd").Transform:SetPosition(pos:Get())
+
+	local snapplant = SpawnPrefab("snapplant")
+	snapplant.Transform:SetPosition(pos:Get())
+	snapplant.Bind(snapplant, snappy)
 	
 	snappy:DoTaskInTime(0, function(snappy) snappy.AnimState:OverrideSymbol("hair", "snapdragon_build_"..inst.planted or "snapdragon_build", "hair") end)
 	snappy:DoTaskInTime(0, function(snappy) snappy.AnimState:OverrideSymbol("ear", "snapdragon_build_"..inst.planted or "snapdragon_build", "ear") end)
@@ -30,6 +34,7 @@ local function onmatured(inst)
 	snappy.seeds = inst.planted or "seeds"
 	
 	inst.components.workable:SetWorkAction(nil)
+
 	inst:Remove()
 end
 

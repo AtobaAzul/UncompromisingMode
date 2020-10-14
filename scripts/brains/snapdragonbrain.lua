@@ -19,19 +19,17 @@ local MAX_CHASE_TIME = 6
 
 local MIN_FOLLOW_DIST = 1
 local TARGET_FOLLOW_DIST = 5
-local MAX_FOLLOW_DIST = 5
+local MAX_FOLLOW_DIST = 12
 
 
 local function EatFoodAction(inst)
     local target = FindEntity(inst, SEE_FOOD_DIST,
         function(item)
 			return inst.components.eater:CanEat(item) and
-            item:HasTag("insect") and
-			not (inst.components.follower and inst.components.follower.leader)
+            item:HasTag("insect")
 				or TheWorld.state.issummer and 
 				inst.components.eater:CanEat(item) and
-				(item:HasTag("insect") or item:HasTag("meat")) and
-				not (inst.components.follower and inst.components.follower.leader)
+				(item:HasTag("insect") or item:HasTag("meat"))
 		--[[
             return inst.components.eater:CanEat(item) and
             item.components.bait and
@@ -75,9 +73,9 @@ function SnapdragonBrain:OnStart()
         WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
 		IfNode( function() return self.inst.components.combat.target ~= nil end, "hastarget", AttackWall(self.inst)),
         ChaseAndAttack(self.inst, MAX_CHASE_TIME),
-        Follow(self.inst, function() return self.inst.components.follower and self.inst.components.follower.leader end, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST, false),
         DoAction(self.inst, EatFoodAction),
-        FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
+		FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
+		Follow(self.inst, function() return self.inst.components.follower and self.inst.components.follower.leader end, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST, false),
         Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("herd") end, GetWanderDistFn)
     }, .25)
     

@@ -128,6 +128,7 @@ return {
 	"old_shadowwaxwell",
 	"snapdragon",
 	"snapdragonherd",
+	"snapplant",
 	"giant_blueberry",
 	"blueberryplant",
 	"blueberryplantbuncher",

@@ -131,7 +131,11 @@ local function OnGetItemFromPlayer(inst, giver, item)
 		-- Increase the amount of food in the stomach.
 		inst.foodItemsEatenCount = inst.foodItemsEatenCount + 1
 		
-		if inst.foodItemsEatenCount >= 4 then
+		local angle = math.random() * 2 * PI
+		local delta = 2 * PI / 3 --/ (numgold + numprops + 1) --purposely leave a random gap
+		local variance = delta * .4
+
+		if inst.foodItemsEatenCount >= 3 then
 			inst.sg:GoToState("taunt")
 			
 			if not inst.podspawned then
@@ -142,30 +146,31 @@ local function OnGetItemFromPlayer(inst, giver, item)
 				inst.components.timer:StartTimer("podreset", 19200)
 	
 				local item = SpawnPrefab("whisperpod")
-				local angle = math.random() * 2 * PI
-				local delta = 2 * PI / 3 --/ (numgold + numprops + 1) --purposely leave a random gap
-				local variance = delta * .4
 				
 				LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
 			else
 				if math.random() >= 0.5 then
 					local item = SpawnPrefab("seeds")
-					local angle = math.random() * 2 * PI
-					local delta = 2 * PI / 3 --/ (numgold + numprops + 1) --purposely leave a random gap
-					local variance = delta * .4
 					
 					LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
 				else
 					local item = SpawnPrefab("dragonfruit_seeds")
-					local angle = math.random() * 2 * PI
-					local delta = 2 * PI / 3 --/ (numgold + numprops + 1) --purposely leave a random gap
-					local variance = delta * .4
 					
 					LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
 				end
 			end
 			
 			inst.foodItemsEatenCount = 0
+		else
+			if math.random() >= 0.5 then
+				local item = SpawnPrefab("seeds")
+					
+				LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
+			else
+				local item = SpawnPrefab("dragonfruit_seeds")
+					
+				LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
+			end
 		end
 		
     end
@@ -175,17 +180,6 @@ local function OnGetItemFromPlayer_Buddy(inst, giver, item)
     if inst.components.eater:CanEat(item) then
         inst.components.eater:Eat(item, giver)
         inst.sg:GoToState("eat")
-
-        if inst.components.combat.target == giver then
-            inst.components.combat:SetTarget(nil)
-        elseif giver.components.leader ~= nil and
-            inst.components.follower ~= nil then
-			if giver.components.minigame_participator == nil then
-	            giver:PushEvent("makefriend")
-				giver.components.leader:AddFollower(inst)
-			end
-            inst.components.follower:AddLoyaltyTime(item.components.edible:GetHunger() * TUNING.SPIDER_LOYALTY_PER_HUNGER)
-        end
 
 		-- Increase the amount of food in the stomach.
 		inst.foodItemsEatenCount = inst.foodItemsEatenCount + 1
@@ -205,7 +199,7 @@ local function OnGetItemFromPlayer_Buddy(inst, giver, item)
 		inst.sg:GoToState("taunt")
 		
 		if inst.foodItemsEatenCount >= 2 then
-			if inst.seeds == "seeds" and math.random() >= 0.5 then
+			if inst.seeds == "seeds" then
 				local bonusitem = SpawnPrefab(weighted_random_choice(spawns))
 				LaunchItem(inst, bonusitem, GetRandomWithVariance(angle, variance))
 			else
@@ -362,8 +356,6 @@ local function common_fn(scale)
     inst.components.inspectable.getstatus = GetStatus
     
     inst:AddComponent("knownlocations")
-    inst:AddComponent("herdmember")
-    inst.components.herdmember:SetHerdPrefab("snapdragonherd")
 	
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetChanceLootTable('snapdragon')
@@ -403,6 +395,9 @@ local function prime_fn()
         return inst
     end
 
+    inst:AddComponent("herdmember")
+    inst.components.herdmember:SetHerdPrefab("snapdragonherd")
+
 	inst:AddComponent("trader")
     inst.components.trader:SetAcceptTest(ShouldAcceptItem)
     inst.components.trader.onaccept = OnGetItemFromPlayer
@@ -437,7 +432,6 @@ local function buddy_fn()
 	inst:DoTaskInTime(0, Rename)
 	
     inst:AddComponent("follower")
-    inst.components.follower.maxfollowtime = TUNING.BEEFALO_FOLLOW_TIME
     inst.components.follower.canaccepttarget = false
 
 	inst.components.lootdropper:AddChanceLoot(inst.seeds, 1)
