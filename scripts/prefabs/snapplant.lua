@@ -67,6 +67,7 @@ local function fn()
     inst.Transform:SetScale(0.66, 0.66, 0.66)
 
     inst:AddTag("snapplant")
+	inst:AddTag("irreplaceable")
     
 	MakeSnowCoveredPristine(inst)  
     
