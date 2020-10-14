@@ -911,7 +911,7 @@ local function SpawnShadowBoomer(player)
 			local z1 = z - radius * math.sin(theta)
 			local light = TheSim:GetLightAtPoint(x1, 0, z1)
 			
-			if light <= .1 and #TheSim:FindEntities(x1, 0, z1, 50, {"stalkerminion"}) <= 25 then
+			if light <= .1 and #TheSim:FindEntities(x1, 0, z1, 50, {"stalkerminion"}) <= 25 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 				local ent = SpawnPrefab("stalker_minion")
 				ent.Transform:SetPosition(x1, 0, z1)
 				ent.speech = player

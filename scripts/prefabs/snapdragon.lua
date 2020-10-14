@@ -31,8 +31,17 @@ local sounds =
     angry = "UCSounds/snapdragon/angry",
 }
 
---local function Retarget(inst)
---end
+local spawns =
+{
+    carrot_seeds	= 1,
+    corn_seeds	= 1,
+    asparagus_seeds	= 0.75,
+    garlic_seeds	= 0.5,
+    onion_seeds	= 0.5,
+    pepper_seeds	= 0.5,
+    potato_seeds	= 1,
+	tomato_seeds	= 1,
+}
 
 local RETARGET_MUST_TAGS = { "_combat", "player" }
 local RETARGET_CANT_TAGS = { "snapdragon", "wall", "plantkin", "INLIMBO" }
@@ -126,7 +135,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
 			inst.sg:GoToState("taunt")
 			
 			if not inst.podspawned then
-				inst.AnimState:SetMultColour(1, 0.8, 0.8, 1)
+				inst.AnimState:SetMultColour(0.9, 0.8, 0.8, 1)
 				inst.podspawned = true
 				
 				inst.components.timer:StopTimer("podreset")
@@ -189,19 +198,40 @@ local function OnGetItemFromPlayer_Buddy(inst, giver, item)
         (inst.seeds == "dragonfruit_seeds" and "dragonfruit") or 
         (inst.seeds == "watermelon_seeds" and "watermelon") or 
         (inst.seeds ~= nil and "seeds")
+
+		local angle = math.random() * 2 * PI
+		local delta = 2 * PI / 3 --/ (numgold + numprops + 1) --purposely leave a random gap
+		local variance = delta * .4
+		inst.sg:GoToState("taunt")
 		
 		if inst.foodItemsEatenCount >= 2 then
-			inst.sg:GoToState("taunt")
-			local item = SpawnPrefab(inst.rewarditem)
-			local angle = math.random() * 2 * PI
-			local delta = 2 * PI / 3 --/ (numgold + numprops + 1) --purposely leave a random gap
-			local variance = delta * .4
-				
-			LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
-				
+			if inst.seeds == "seeds" and math.random() >= 0.5 then
+				local bonusitem = SpawnPrefab(weighted_random_choice(spawns))
+				LaunchItem(inst, bonusitem, GetRandomWithVariance(angle, variance))
+			else
+				local bonusitem = SpawnPrefab(inst.rewarditem)
+				LaunchItem(inst, bonusitem, GetRandomWithVariance(angle, variance))
+			end
 			inst.foodItemsEatenCount = 0
+		else
+			if inst.seeds == "seeds" then
+				if math.random() >= 0.5 then
+					local item = SpawnPrefab(weighted_random_choice(spawns))
+					LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
+				else
+					local item = SpawnPrefab(inst.seeds)
+					LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
+				end
+			else
+				if math.random() >= 0.5 then
+					local item = SpawnPrefab(inst.seeds)
+					LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
+				else
+					local item = SpawnPrefab("seeds")
+					LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
+				end
+			end
 		end
-		
     end
 end
 
@@ -242,7 +272,7 @@ end
 local function InitPodSpawned(inst)
 	if inst.podspawned ~= nil then
 		if inst.podspawned then
-			inst.AnimState:SetMultColour(1, 0.8, 0.8, 1)
+			inst.AnimState:SetMultColour(0.9, 0.8, 0.8, 1)
 		end
 	end
 	

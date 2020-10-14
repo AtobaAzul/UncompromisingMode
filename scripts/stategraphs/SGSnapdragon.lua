@@ -19,7 +19,7 @@ local events=
     EventHandler("doattack", function(inst, data) if not inst.components.health:IsDead() then inst.sg:GoToState("attack", data.target) end end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     EventHandler("attacked", function(inst) if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),    
-    
+	EventHandler("onwakeup", function(inst) inst.SoundEmitter:PlaySound(inst.sounds.angry) end),
 }
 
 local states=
@@ -47,6 +47,25 @@ local states=
 			end
         end,
     },
+
+	State{
+        name = "hit",
+        tags = { "busy" },
+
+        onenter = function(inst)
+            inst.AnimState:PlayAnimation("hit")
+            inst.SoundEmitter:PlaySound(inst.sounds.angry)
+        end,
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+                if inst.AnimState:AnimDone() then
+                    inst.sg:GoToState("idle")
+                end
+            end),
+        },
+    },
 	
 	State{
         name = "taunt",
@@ -73,6 +92,20 @@ local states=
         tags = {},
         onenter = function(inst)
             inst.AnimState:PlayAnimation("sleep_pst")
+			inst.SoundEmitter:PlaySound(inst.sounds.grunt)
+        end,
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
+    },
+
+	State{
+        name = "create",
+        tags = {},
+        onenter = function(inst)
+            inst.AnimState:PlayAnimation("sleep_pst")
+			inst.SoundEmitter:PlaySound(inst.sounds.grunt)
         end,
         events=
         {
@@ -188,7 +221,6 @@ CommonStates.AddRunStates(
         }
     })
 
-CommonStates.AddSimpleState(states,"hit", "hit")
 CommonStates.AddFrozenStates(states)
 
 CommonStates.AddSleepStates(states,
