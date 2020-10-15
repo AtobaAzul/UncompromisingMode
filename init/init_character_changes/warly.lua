@@ -3,7 +3,7 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local function oneat(inst, food)
 	if food and food.components.edible then
-		local hungerbonus = food.components.edible:GetHunger() * 0.15
+		local hungerbonus = food.components.edible:GetHunger() * 0.2
 		local sanitybonus = food.components.edible:GetSanity() * 0.2
 		local healthbonus = food.components.edible:GetHealth() * 0.2
 		
