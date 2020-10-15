@@ -34,7 +34,7 @@ local SnowOver =  Class(Widget, function(self, owner, storm_overlays)
     self.bg2:GetAnimState():SetBank("sand_over")
     self.bg2:GetAnimState():SetBuild("snow_over")
     self.bg2:GetAnimState():PlayAnimation("dust_loop", true)
-	self.bg2:GetAnimState():SetMultColour(1, 1, 1, .7)
+	self.bg2:GetAnimState():SetMultColour(1, 1, 1, .8)
 	
     self:Hide()
 	self:OnUpdate(0)
@@ -83,7 +83,7 @@ function SnowOver:OnUpdate(dt)
 	
 	local equationdingus = suppressorNearby1 + suppressorNearby2 + suppressorNearby3 + suppressorNearby4
 
-	if TheWorld.state.iswinter and ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")) then
+	if TheWorld.state.iswinter then--and ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")) then
 		if self.alphaquation == nil then
 		self.alphaquation = 0
 		elseif self.alphaquation <= equationdingus then
@@ -99,13 +99,13 @@ function SnowOver:OnUpdate(dt)
 		end
 	end
 
-	if TheWorld.state.iswinter and ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")) then
+	if TheWorld.state.iswinter then--and ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")) then
 			if self.changed == nil then
 				self.changed = 0.01
 			elseif self.changed <= 0.8 then
 				self.changed = self.changed + 0.001 
 				--print("plus 0.1")
-				self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed)
+				self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed - 0.2)
 			
 				if self.owner.components.playervision ~= nil and self.owner.components.playervision:HasGoggleVision() then
 					
@@ -125,7 +125,7 @@ function SnowOver:OnUpdate(dt)
 		elseif self.changed >= 0 then
 			self.changed = self.changed - 0.001
 			--print("plus 0.1")
-			self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed)
+			self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed - 0.2)
 			if self.owner.components.playervision ~= nil and self.owner.components.playervision:HasGoggleVision() then
 				self.bg:GetAnimState():SetMultColour(1, 1, 1, 0)
 			else
