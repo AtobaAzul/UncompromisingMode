@@ -1,25 +1,23 @@
-name = " [1 TESTING] Uncompromising Mode"
+name = "[DEV] 󰀕 Uncompromising Mode"
 description = 
 [[
-󰀔 [ Version 1.1.5 : "Pests & Pestilence Update" ]
+󰀔 [ Version 1.1.5 : "The Hooded Forest" ]
+Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
+Prominent features:
+- Random Night Events
+- Rebalances and tweaks to nearly everything
+- New weather, like snowstorms and acid rain
+- A new overworld biome
+- Character tweaks and rebalances
+- More insanity monsters
+- A bunch of new mobs, items, and bosses
+󰀏 NEXT UPDATE: The Combat Update, which overhauls day-to-day fighting.
 
+(Check out the configuration options below!)]]
 
+author = "󰀈 The Uncomp Dev Team 󰀈"
 
-
-
-
-
-
-
-
-
-
-
-
-							   ⬇Config⬇		 ⬇Infos⬇]]
-
-author = "Uncompromising Team"
 version = "1.1.5"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
@@ -51,262 +49,49 @@ server_filter_tags = {
 }
 
 priority = 10
---[[
-game_modes =
-{
-	{
-		name = "uncompromising_hardcore",
-		label = "Hardcore",
-		description = "Rollback is permanently disabled. No second chances.\n\n* Players leave a dead body upon death, which needs to be given a Telltale heart for ressurection.\n* Repair Touch Stones, attune effigies, and wear Life amulets to revive yourself.\n* If no living players remain, the world is deleted.",
-		settings =
-		{
-			ghost_sanity_drain = true,
-			portal_rez = false,
-			level_type = "LEVELTYPE_FOREST",
-			reset_time = { time = 10, loadingtime = 10 },
-			hardcore = true
-		},
-	}
-}
---]]
+
+------------------------------
+-- local functions to makes things prettier
+
+local function Header(title)
+	return { name = "", label = title, hover = "", options = { {description = "", data = false}, }, default = false, }
+end
+
+local function SkipSpace()
+	return { name = "", label = "", hover = "", options = { {description = "", data = false}, }, default = false, }
+end
+
+local function BinaryConfig(name, label, hover, default)
+    return { name = name, label = label, hover = hover, options = { {description = "Enabled", data = true}, {description = "Disabled", data = false}, }, default = default, }
+end
+------------------------------
+
 configuration_options =
 {
+------------------------------
+-- Core Gameplay --
+------------------------------
+    Header("Core Gameplay"),
+    BinaryConfig("caveless", "[IMPORTANT] CAVES", "ENABLE IF YOU HAVE CAVES ENABLED, VISE VERSA. \n>VERY< IMPORTANT.", true),
 	{
-		name = "gamemode",
-		label = "Mode",
-		hover = "Change this if you want to crash the game. DONT", --"Choose gamemode. 1) Original Uncompromising version (default settings). 2) Mod is enabled after first Fuelweaver is defeated. 3) Choose custom settings.",
+		name = "rne chance",
+		label = "Random Night Event Chance",
+		hover = "Remember: Too much of a good thing is a bad thing! \n(Increases by 10% per extra player)",
 		options =
 		{
-			{description = "Uncompromising", data = 0}, -- TODO: When this is selected, disable the below ones (gray them out)
-			--{description = "Custom", data = 2}, --TODO: On custom, enable editing the below settings
+			{description = "None", data = 100},
+			{description = "20%", data = 0.9},
+			{description = "40%", data = 0.7},
+			{description = "60%", data = 0.5},
+			{description = "80%", data = 0.3},
+			{description = "INSANITY", data = 0},
 		},
-		default = 0,
+		default = 0.7,
 	},
-	{
-		name = "willow",
-		label = "Willow Rework.",
-		hover = "Lighter is infinite while Willow is holding it, she can cast explosions, Bernie is now small by default. And MUCH more!",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = true,
-	},
-	{
-		name = "bernie",
-		label = "Willow Rework - Bernie.",
-		hover = "Toggle if Bernie can turn into Big Bernie. Must be set on fire to transform if Enabled.",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = false,
-	},
-	--[[{
-		name = "waxwell",
-		label = "Classic Maxwell Shadows.",
-		hover = "Singleplayer style Shadow workers, but with no health cost, no limited timer, and you can force them to leave!",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = true,
-	},]]
-	{
-		name = "warly",
-		label = "Improved Warly.",
-		hover = "Warly gets 1.2x health and sanity from unique foods, and 1.15x hunger, similar to singleplayer. Increased food memory to 3 days.",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = true,
-	},
-	--[[{
-		name = "harder_recipes",
-		label = "Harder Recipes",
-		hover = "Some recipes become modified to be harder to craft.",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = true,
-	},
-	{
-		name = "harder_monsters",
-		label = "Harder Monsters",
-		hover = "Monsters become stronger.",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = true,
-	},
-	{
-		name = "harder_bosses",
-		label = "Harder Bosses",
-		hover = "Bosses become stronger.",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = true,
-	},--]]
-	{
-		name = "harder_shadows",
-		label = "Harder Nightmare Creatures",
-		hover = "New troubles rest within your mind.",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = true,
-	},
-	--[[{
-		name = "harder_weather",
-		label = "Harder Weather",
-		hover = "Nature becomes unforgiving.",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = true,
-	},--]]
-	{
-		name = "rat_raids",
-		label = "Rat Raids",
-		hover = "Your base will be raided by rats.",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = true,
-	},
-	--[[{
-		name = "rare_food",
-		label = "Rare Food",
-		hover = "Food is harder to find now.",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = true,
-	},
-	{
-		name = "character_changes",
-		label = "Changed Characters",
-		hover = "Survivals' power is not what it used to be.",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = true,
-	},
-	{
-		name = "hardcore_mode",
-		label = "Hardcore Mode",
-		hover = "Life is precious now.",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = false,
-	},
-	{
-		name = "hound_increase",
-		label = "Hound Number Increase",
-		hover = "The hounds grow hungry.",
-		options =
-		{
-			{description = "1.0x", data = 1},
-			{description = "1.5x", data = 1.5},
-			{description = "2.0x", data = 2},
-			{description = "2.5x", data = 2.5},
-			{description = "3.0x", data = 3},
-			{description = "5.0x", data = 5},
-		},
-		default = 1.5,
-	},--]]
-	{
-		name = "durability",
-		label = "Clothing Degradation",
-		hover = "Certain clothing items are less effective the lower their durability.",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = true,
-	},
-	{
-		name = "snowstorms",
-		label = "Snowstorms",
-		hover = "Snow Overlay, Snow Piles, begone!",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = true,
-	},
-	{
-		name = "hayfever",
-		label = "Hayfever",
-		hover = "I promise it was reworked to be better!",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = true,
-	},
-	{
-		name = "acidrain",
-		label = "Acid Rain.",
-		hover = "During later game Autumn, the Toadstool will spawn \npoisonous Mushtrees and Toadling Guards on the surface.",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = true,
-	},
-	{
-		name = "weather start date",
-		label = "Start Date for New Weather.",
-		hover = "Snowstorms, Hayfever, and Acid Rain.",
-		options =
-		{
-			{description = "First Year", data = 22},
-			{description = "Second Year", data = 55},
-		},
-		default = 22,
-	},
-	{
-		name = "caveless",
-		label = "[IMPORTANT] CAVES",
-		hover = "ENABLE IF YOU HAVE CAVES ENABLED, VISE VERSA. \n>VERY< IMPORTANT.",
-		options =
-		{
-			{description = "Disabled", data = false},
-			{description = "Enabled", data = true},
-		},
-		default = true,
-	},
-	{
+    BinaryConfig("harder_shadows", "Harder Nightmare Creatures", "New troubles rest within your mind.", true),
+    BinaryConfig("rat_raids", "Rat Raids", "Your base will be raided by rats.", true),
+    BinaryConfig("durability", "Clothing Degradation", "Certain clothing items are less effective the lower their durability.", true),
+    {
 		name = "toadstool health",
 		label = "Toadstool Health",
 		hover = "The Toadstool now affects survival, this is mostly for solo play.",
@@ -328,19 +113,35 @@ configuration_options =
 		},
 		default = 22500,
 	},
+
+
+------------------------------
+-- Character Reworks --
+------------------------------
+    Header("Character Reworks"),
+------------------------------
+    BinaryConfig("willow", "Willow Rework", "Lighter is infinite while Willow is holding it, she can cast explosions, Bernie is now small by default. And MUCH more!", true),
+    BinaryConfig("bernie", "Willow Rework - Bernie", "Toggle if Bernie can turn into Big Bernie. Must be set on fire to transform if Enabled.", false),
+    BinaryConfig("warly", "Improved Warly", "Warly gets 1.2x health and sanity from unique foods, and 1.15x hunger, similar to singleplayer. Increased food memory to 3 days.", true),
+
+
+------------------------------
+-- Weather --
+------------------------------
+    Header("Weather"),
+------------------------------
+    BinaryConfig("snowstorms", "Snowstorms", "Snow Overlay, Snow Piles, begone!", true),
+    BinaryConfig("hayfever", "Hayfever", "I promise it was reworked to be better!", true),
+    BinaryConfig("acidrain", "Acid Rain", "During later game Autumn, the Toadstool will spawn \npoisonous Mushtrees and Toadling Guards on the surface.", true),
 	{
-		name = "rne chance",
-		label = "Random Night Even Chance.",
-		hover = "Remember: Too much of a good thing is a bad thing! \n(Increases by 10% per extra player)",
+		name = "weather start date",
+		label = "Start Date for New Weather.",
+		hover = "Snowstorms, Hayfever, and Acid Rain.",
 		options =
 		{
-			{description = "None", data = 100},
-			{description = "20%", data = 0.9},
-			{description = "40%", data = 0.7},
-			{description = "60%", data = 0.5},
-			{description = "80%", data = 0.3},
-			{description = "INSANITY", data = 0},
+			{description = "First Year", data = 22},
+			{description = "Second Year", data = 55},
 		},
-		default = 0.7,
+		default = 22,
 	},
 }

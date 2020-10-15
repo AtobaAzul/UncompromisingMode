@@ -89,7 +89,7 @@ local function ActiveRaid(inst, doer)
 		not (GLOBAL.TheWorld.net ~= nil and GLOBAL.TheWorld.net:HasTag("raided")) and
 		not inst.components.container:IsEmpty() and
 		#ents >= 20 then
-		if TheWorld.net ~= nil then
+		if GLOBAL.TheWorld.net ~= nil then
 			GLOBAL.TheWorld.net:AddTag("raided")
 		end
 		
