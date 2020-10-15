@@ -78,6 +78,8 @@ local function fn(Sim)
     inst.entity:AddSoundEmitter()
     inst.entity:AddDynamicShadow()
     inst.entity:AddNetwork()
+	inst.entity:AddMiniMapEntity()
+	inst.MiniMapEntity:SetIcon("veteranshrine_map.tex")
 
     anim:SetBuild("veteranshrine")    
     anim:SetBank("veteranshrine")
