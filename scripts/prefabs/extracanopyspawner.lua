@@ -12,10 +12,10 @@ for i = 1, 5 do
 for k = 1, 5 do
 local shadow = SpawnPrefab("hoodedcanopy")
 shadow.Transform:SetPosition(x, y, z)
-x = x + 11
+x = x + 11 + math.random(-0.75,0.75)
 end
 x = x - 55
-z = z + 11
+z = z + 11 + math.random(-0.75,0.75)
 end
 inst:Remove()
 end
