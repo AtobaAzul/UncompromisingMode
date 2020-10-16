@@ -27,9 +27,13 @@ local function EatFoodAction(inst)
         function(item)
 			return inst.components.eater:CanEat(item) and
             item:HasTag("insect")
+                and item:IsOnPassablePoint()
+				and item:IsOnValidGround()
 				or TheWorld.state.issummer and 
 				inst.components.eater:CanEat(item) and
 				(item:HasTag("insect") or item:HasTag("meat"))
+                and item:IsOnPassablePoint()
+				and item:IsOnValidGround()
 		--[[
             return inst.components.eater:CanEat(item) and
             item.components.bait and
