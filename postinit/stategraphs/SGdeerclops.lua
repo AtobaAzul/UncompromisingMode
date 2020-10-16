@@ -18,7 +18,9 @@ env.AddStategraphState("deerclops",
 
                 inst.components.groundpounder:GroundPound()
 
-                SpawnPrefab("bearger_sinkhole").Transform:SetPosition(pt.x, 0, pt.z)
+                local sinkhole = SpawnPrefab("bearger_sinkhole")
+				sinkhole.Transform:SetPosition(pt.x, 0, pt.z)
+				sinkhole.components.timer:StartTimer("nextrepair", 30 + (math.random() * 20))
 
                 pt.y = 0
                 
