@@ -1,6 +1,206 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
+local EFFECTS =
+{
+    hot = "dr_hot_loop",
+    warmer = "dr_warmer_loop",
+    warm = "dr_warm_loop_2",
+    cold = "dr_warm_loop_1",
+}
+
+local SPIDER_DIVINING_DISTANCES =
+        {
+            {maxdist=10, describe="hot", pingtime=1},
+            {maxdist=15, describe="warmer", pingtime=2},
+            {maxdist=20, describe="warm", pingtime=3},
+            {maxdist=30, describe="cold", pingtime=5},
+        }
+		
+local SPIDER_DIVINING_MAXDIST = 30000
+local SPIDER_DIVINING_DEFAULTPING = 3
+
+local function FindClosestPart(inst)
+
+    if inst.tracking_parts == nil then
+        inst.tracking_parts = {}
+        for k,v in pairs(Ents) do
+            if v:HasTag("player") then
+                table.insert(inst.tracking_parts, v)
+            end
+        end
+    end
+
+    if inst.tracking_parts then
+        local closest = nil
+        local closest_dist = nil
+        for k,v in pairs(inst.tracking_parts) do
+            if v:IsValid() and not v:IsInLimbo() then
+                local dist = v:GetDistanceSqToInst(inst)
+                if not closest_dist or dist < closest_dist then
+                    closest = v
+                    closest_dist = dist
+                end
+            end
+        end
+
+        return closest
+    end
+
+end
+
+local function CheckTargetPiece(inst)
+    --if inst.components.equippable:IsEquipped() and inst.components.inventoryitem.owner then
+		inst.SoundEmitter:KillSound("ping")
+        local intensity = 0
+        local closeness = nil
+        local fxname = nil
+        local target = FindClosestPart(inst)
+        local nextpingtime = SPIDER_DIVINING_DEFAULTPING
+        if target ~= nil then
+            local distsq = inst:GetDistanceSqToInst(target)
+			
+			if distsq < 50 then
+				intensity = 1
+			elseif distsq < 80 and distsq >= 50 then
+				intensity = 0.8
+			elseif distsq < 120 and distsq >= 80 then
+				intensity = 0.6
+			elseif distsq < 150 and distsq >= 120 then
+				intensity = 0.4
+			else
+				intensity = 0.2
+			end
+            --intensity = math.max(0, 1 - (distsq/(SPIDER_DIVINING_MAXDIST*SPIDER_DIVINING_MAXDIST) ))
+            for k,v in ipairs(SPIDER_DIVINING_DISTANCES) do
+                closeness = v
+                fxname = EFFECTS[v.describe]
+
+                if v.maxdist and distsq <= v.maxdist*v.maxdist then
+                    nextpingtime = closeness.pingtime
+                    break
+                end
+            end
+        end
+
+
+        if fxname ~= nil then
+            --Don't care if there is still a reference to previous fx...
+            --just let it finish on its own and remove itself
+            inst.fx = SpawnPrefab(fxname)
+            inst.fx.entity:SetParent(inst.entity)
+        end
+
+        --inst.SoundEmitter:PlaySound("dontstarve/common/diviningrod_ping")
+        inst.SoundEmitter:PlaySound("dontstarve/common/diviningrod_ping", "ping")
+        inst.SoundEmitter:SetParameter("ping", "intensity", intensity)
+		inst.task:Cancel()
+		inst.task = nil
+		if not inst.components.health:IsDead() then
+			inst.task = inst:DoTaskInTime(nextpingtime or 1, CheckTargetPiece)
+		end
+        --inst.alarmtask = inst:DoTaskInTime(2, CheckTargetPiece)
+    --end 
+end
+
+
+local function GenerateSpiralSpikes(inst)
+    local spawnpoints = {}
+    local source = inst
+    local x, y, z = source.Transform:GetWorldPosition()
+    local spacing = 2
+    local radius = 5
+    local deltaradius = .2
+    local angle = 2 * PI * math.random()
+    local deltaanglemult = (inst.reversespikes and -2 or 2) * PI * spacing
+    inst.reversespikes = not inst.reversespikes
+    local delay = 0
+    local deltadelay = 2 * FRAMES
+    local num = 16
+    local map = TheWorld.Map
+    for i = 1, num do
+        local oldradius = radius
+        radius = radius --+ deltaradius
+        local circ = PI * (oldradius + radius)
+        local deltaangle = deltaanglemult / circ
+        angle = angle + deltaangle
+        local x1 = x + radius * math.cos(angle)
+        local z1 = z + radius * math.sin(angle)
+        if map:IsPassableAtPoint(x1, 0, z1) then
+            table.insert(spawnpoints, {
+                t = delay,
+                level = i / num,
+                pts = { Vector3(x1, 0, z1) },
+            })
+            delay = delay + deltadelay
+        end
+    end
+    return spawnpoints, source
+end
+
+local function DoSpawnSpikes(inst, pts, level, cache)
+    if not inst.components.health:IsDead() then
+        for i, v in ipairs(pts) do
+            local variation = table.remove(cache.vars, math.random(#cache.vars))
+            table.insert(cache.used, variation)
+            if #cache.used > 3 then
+                table.insert(cache.queued, table.remove(cache.used, 1))
+            end
+            if #cache.vars <= 0 then
+                local swap = cache.vars
+                cache.vars = cache.queued
+                cache.queued = swap
+            end
+
+            local spike = SpawnPrefab("nightmaregrowth")
+				spike.Transform:SetPosition(v:Get())
+				spike:growfn()
+				
+				spike:WatchWorldState("isday", function()
+					spike:DoTaskInTime(0.5 + math.random(), function(spike)
+						local despawnfx = SpawnPrefab("shadow_despawn")
+						despawnfx.Transform:SetPosition(spike.Transform:GetWorldPosition())
+						spike.AnimState:PlayAnimation("shrink")
+						spike:ListenForEvent("animover", spike.Remove)
+					end)
+				end)
+				
+			local x, y, z = spike.Transform:GetWorldPosition()
+			if #TheSim:FindEntities(x, y, z, 5, {"structure", "tree", "boulder"}) > 0 then
+				spike:Remove()
+			end
+        end
+    end
+end
+
+local function SpawnSpikes(inst)
+
+    local spikes, source = GenerateSpiralSpikes(inst)
+    if #spikes > 0 then
+        local cache =
+        {
+            vars = { 1, 2, 3, 4, 5, 6, 7 },
+            used = {},
+            queued = {},
+        }
+        local flameperiod = .8
+        for i, v in ipairs(spikes) do
+            inst:DoTaskInTime(v.t, DoSpawnSpikes, v.pts, v.level, cache)
+        end
+
+    end
+end
+
+local function onnear(inst, target)
+    SpawnSpikes(target)
+end
+
+
+
+
+
+
+
 
 local variations = {1, 2, 3, 4, 5}
 
@@ -110,8 +310,15 @@ env.AddPrefabPostInit("spider", function(inst)
 		inst.components.locomotor.runspeed = TUNING.SPIDER_WARRIOR_RUN_SPEED
 	end
 	
+   --[[ inst:AddComponent("playerprox")
+    inst.components.playerprox:SetDist(5, 13) --set specific values
+    inst.components.playerprox:SetOnPlayerNear(onnear)
+    inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)]]
+	
 	inst:WatchWorldState("isfullmoon", OnFullMoon)
 	OnFullMoon(inst, TheWorld.state.isfullmoon)
+	
+    --inst.task = inst:DoTaskInTime(3, CheckTargetPiece)
 
 	inst.DoSpikeAttack = DoSpikeAttack
 end)

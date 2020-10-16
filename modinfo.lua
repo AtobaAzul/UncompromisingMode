@@ -144,4 +144,17 @@ configuration_options =
     BinaryConfig("snowstorms", "Snowstorms", "Snowtorms impede on players' speed and vision if they are not wearing eye protection. Snowstorms also causes snow to build up on structures.", true),
     BinaryConfig("hayfever", "Hayfever", "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.", true),
     BinaryConfig("acidrain", "Acid Rain", "After the First Year, Toadstool will grow poisionous mushtrees aboveground and pollute the world, making the rain acidic.", true),
+	
+	Header("Gamemode"),
+	{
+		name = "gamemode",
+		label = "Mode",
+		hover = "Currently, there are no other modes. Yet.", --"Choose gamemode. 1) Original Uncompromising version (default settings). 2) Mod is enabled after first Fuelweaver is defeated. 3) Choose custom settings.",
+		options =
+		{
+			{description = "Uncompromising", data = 0}, -- TODO: When this is selected, disable the below ones (gray them out)
+			--{description = "Custom", data = 2}, --TODO: On custom, enable editing the below settings
+		},
+		default = 0,
+	},
 }

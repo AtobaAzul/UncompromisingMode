@@ -34,6 +34,10 @@ local function OnAttacked(inst, data)
     if data.attacker ~= nil then
         if data.attacker.components.petleash ~= nil and
             data.attacker.components.petleash:IsPet(inst) then
+            if inst.components.lootdropper == nil then
+                inst:AddComponent("lootdropper")
+            end
+            inst.components.lootdropper:SpawnLootPrefab("nightmarefuel", inst:GetPosition())
             data.attacker.components.petleash:DespawnPet(inst)
         --[[elseif data.attacker.components.combat ~= nil then
             inst.components.combat:SuggestTarget(data.attacker)]]
@@ -60,7 +64,7 @@ local function onsave(inst, data)
 end
 ]]
 local function KeepTarget(isnt, target)
-    return target and target:IsValid()
+    return target and target:IsValid() and not target:HasTag("shadowminion")
 end
 --[[
 local function onload(inst, data)
