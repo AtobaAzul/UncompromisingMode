@@ -857,7 +857,7 @@ local function SpawnWalrusHunt(player)
 end
 
 local function SpawnShadowTalker(player, mathmin, mathmax)
-	if TheWorld.state.isnight or TheWorld.state.iscavenight then
+	if TheWorld.state.iscavenight then
 		local randommin = mathmin or 5
 		local randommax = mathmax or 10
 		player:DoTaskInTime(1+math.random(randommin, randommax), function()
@@ -880,7 +880,7 @@ local function SpawnShadowTalker(player, mathmin, mathmax)
 end
 
 local function SpawnShadowBoomer(player)
-	if TheWorld.state.isnight or TheWorld.state.iscavenight then
+	if TheWorld.state.iscavenight then
 		player:DoTaskInTime(0.1 + math.random(), function()
 			local radius = 10 + math.random() * 10
 			local theta = math.random() * 2 * PI
@@ -897,6 +897,7 @@ local function SpawnShadowBoomer(player)
 				ent.Physics:ClearCollisionMask()
 				ent.Physics:CollidesWith(COLLISION.GROUND)
 				ent.Physics:CollidesWith(COLLISION.CHARACTERS)
+				ent.Physics:SetCollisionCallback(nil)
 				
 				ent:WatchWorldState("isday", function() 
 					ent.components.health:Kill()
@@ -1295,6 +1296,8 @@ local function IsEligible(player)
 	local area = player.components.areaaware
 	return TheWorld.Map:IsVisualGroundAtPoint(player.Transform:GetWorldPosition())
 			and area:GetCurrentArea() ~= nil 
+			and not area:CurrentlyInTag("nohasslers")
+			and not area:CurrentlyInTag("nocavein")
 end
 
 local function IsLiving(player)
@@ -1340,7 +1343,7 @@ local function CheckPlayers()
 			numStructures = #ents
 			
 			if not IsEligible(player) then
-				DoOceanRNE(player)
+				--DoOceanRNE(player)
 			elseif IsEligible(player) then
 				if numStructures >= 4 then
 					if TheWorld:HasTag("cave") then
