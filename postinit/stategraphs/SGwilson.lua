@@ -140,10 +140,10 @@ State{
 				inst.AnimState:PlayAnimation("sneeze")
 			end
 			
-            inst.SoundEmitter:PlaySound("UCSounds/Sneeze/sneeze")
             inst:ClearBufferedAction()
             
             if inst.prefab ~= "wes" then
+				inst.SoundEmitter:PlaySound("UCSounds/Sneeze/sneeze")
                 local sound_name = inst.soundsname or inst.prefab
                 local path = inst.talker_path_override or "dontstarve/characters/"
                 --local equippedHat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
@@ -153,10 +153,10 @@ State{
                     local sound_event = path..sound_name.."/hurt"
                     inst.SoundEmitter:PlaySound(inst.hurtsoundoverride or sound_event)
                 --end
-            end
-            inst.components.locomotor:Stop()  
 
-            inst.components.talker:Say(GetString(inst.prefab, "ANNOUNCE_SNEEZE"))        
+				inst.components.talker:Say(GetString(inst.prefab, "ANNOUNCE_SNEEZE"))  
+            end
+            inst.components.locomotor:Stop()        
         end,
         
         events=

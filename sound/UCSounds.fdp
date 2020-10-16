@@ -12473,7 +12473,7 @@
 <speaker_spread>0</speaker_spread>
 <panlevel3d>1</panlevel3d>
 <fadein_time>3000</fadein_time>
-<fadeout_time>0</fadeout_time>
+<fadeout_time>3000</fadeout_time>
 <spawn_intensity>1</spawn_intensity>
 <spawn_intensity_randomization>0</spawn_intensity_randomization>
 <TEMPLATE_PROP_LAYERS>1</TEMPLATE_PROP_LAYERS>

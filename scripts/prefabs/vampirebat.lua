@@ -251,7 +251,7 @@ local function fn()
     inst:AddComponent("inspectable")
     inst:AddComponent("knownlocations")
     
-    inst:DoTaskInTime(1*FRAMES, function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()), true) end)
+    --inst:DoTaskInTime(1*FRAMES, function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()), true) end)
     
     inst:ListenForEvent("wingdown", OnWingDown)
     inst:ListenForEvent("attacked", OnAttacked)
@@ -344,7 +344,7 @@ local function circlingbatfn()
 
     inst.AnimState:SetMultColour(1,1,1,0)
     inst:AddComponent("colourtweener")
-    if not GetClock():IsNight() then
+    if not TheWorld.state.isnight then
         inst.components.colourtweener:StartTween({1,1,1,1}, 3)
     end
 
