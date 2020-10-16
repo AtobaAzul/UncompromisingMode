@@ -145,6 +145,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.APHID = "A horrible pest."
 	DESCRIBE.GIANT_TREE_INFESTED = "It seems rather sick."
 	DESCRIBE.GIANT_BLUEBERRY = "Ohoho, I have plenty of ideas for you!"
+	DESCRIBE.STEAMEDHAMS = "Tastes like fast food."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Oh, the possibilities!",

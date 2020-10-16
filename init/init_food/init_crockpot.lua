@@ -48,7 +48,7 @@ local function LimitIcePlusTwigTestFn(tags, ice_plus_twig_limit)
     return true
 end
 
-local function UncompromisingFillerCustomTestFn(tags, ice_limit, twig_limit, ice_plus_twig_limit)
+local function UncompromisingFillerCustomTestFn(tags, ice_limit, twig_limit, ice_plus_twig_limit)									
     return LimitIceTestFn(tags,ice_limit) and LimitTwigTestFn(tags,twig_limit) and LimitIcePlusTwigTestFn(tags,ice_plus_twig_limit)
 end
 
@@ -335,6 +335,7 @@ InsertIngredientValues({"giant_blueberry"},{fruit=1},true,false,false)
 InsertIngredientValues({"iceboomerang"},{ice=1},true,false,false)
 InsertIngredientValues({"rice"},{veggie=1,rice=1},true,false,false)
 InsertIngredientValues({"rice_cooked"},{veggie=1,rice=1},true,false,false)
+InsertIngredientValues({"foliage"},{veggie=.1,foliage=1},true,false,false)
 local zaspberryparfait =
 {
     name = "zaspberryparfait",
@@ -405,3 +406,27 @@ local californiaking =
 }
 AddCookerRecipe("cookpot", californiaking)
 AddCookerRecipe("portablecookpot", californiaking)
+local steamedhams =
+{
+    name = "steamedhams",
+    test = function(cooker, names, tags) return names.foliage and tags.veggie and tags.veggie >= 1 and (names.meat or names.meatcooked) and not (tags.monster or tags.inedible or names.smallmeat or names.smallmeatcooked) end,
+
+    priority = 30,
+    weight = 30,
+    perishtime = nil,
+    cooktime = 0.6,
+}
+AddCookerRecipe("cookpot", steamedhams)
+AddCookerRecipe("portablecookpot", steamedhams)
+local foliage =
+{
+    name = "foliage",
+    test = function(cooker, names, tags) return names.foliage end,
+
+    priority = 20,
+    weight = 30,
+    perishtime = nil,
+    cooktime = 0.1,
+}
+AddCookerRecipe("cookpot", foliage)
+AddCookerRecipe("portablecookpot", foliage)

@@ -146,6 +146,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.APHID = "They like the trees too, eh?"
 	DESCRIBE.GIANT_TREE_INFESTED = "Quit hoggin' it to yourselves, hosers!"
 	DESCRIBE.GIANT_BLUEBERRY = "A lot of water in this, eh?"
+	DESCRIBE.STEAMEDHAMS = "Mouth watering hamburgers."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "It's shaking around, eh?",

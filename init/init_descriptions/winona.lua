@@ -147,6 +147,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.APHID = "Just another pest."
 	DESCRIBE.GIANT_TREE_INFESTED = "That seems to be where the buggers are comin' from."
 	DESCRIBE.GIANT_BLUEBERRY = "It's packed to the brim with liquid!"
+	DESCRIBE.STEAMEDHAMS = "It's obviously grilled."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Gonna make a mess, but what else is new?",

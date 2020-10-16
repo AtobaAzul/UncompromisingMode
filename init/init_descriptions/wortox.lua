@@ -146,6 +146,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.APHID = "The trees had it coming to them!"
 	DESCRIBE.GIANT_TREE_INFESTED = "What's bugging you?"
 	DESCRIBE.GIANT_BLUEBERRY = "Could I use this like a waterballoon? Hyuyu!"
+	DESCRIBE.STEAMEDHAMS = "This dish has got to be joking."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "If you don't give it room, It'll give a big boom!",

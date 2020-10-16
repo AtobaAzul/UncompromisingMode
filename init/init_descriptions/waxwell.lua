@@ -147,6 +147,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.APHID = "I don't like you."
 	DESCRIBE.GIANT_TREE_INFESTED = "It's riddled with vermin."
 	DESCRIBE.GIANT_BLUEBERRY = "This is going to get messy. Sigh."
+	DESCRIBE.STEAMEDHAMS = "They're obviously grilled."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "If it bursts all over this suit, I'm going to kill something.",

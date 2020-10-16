@@ -146,6 +146,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
 	DESCRIBE.APHID = "Is tiny bug!"
 	DESCRIBE.GIANT_TREE_INFESTED = "Tree is sick!"
 	DESCRIBE.GIANT_BLUEBERRY = "Mighty berry, for mighty Wolfgang!"
+	DESCRIBE.STEAMEDHAMS = "Is mouthwatering hamburgers."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Can't rip out of ground with muscles?",

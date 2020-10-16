@@ -187,6 +187,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.APHID = "A horrible pest."
 	DESCRIBE.GIANT_TREE_INFESTED = "It doesn't look too well."
 	DESCRIBE.GIANT_BLUEBERRY = "This'll be messy, for sure."
+	DESCRIBE.STEAMEDHAMS = "Science says it's a hamburger."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "It's pretty big, maybe I can dig it up.",

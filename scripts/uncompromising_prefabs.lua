@@ -148,4 +148,5 @@ return {
 	"pitcherplant",
 	"widowshead",
 	"cctrinkets",
+	"steamedhams",
 }

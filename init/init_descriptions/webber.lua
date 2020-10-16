@@ -145,6 +145,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.APHID = "Not a spider!"
 	DESCRIBE.GIANT_TREE_INFESTED = "It looks pretty sick."
 	DESCRIBE.GIANT_BLUEBERRY = "The juice gets everywhere!"
+	DESCRIBE.STEAMEDHAMS = "This is just a hamburger."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "It's huge! No way we can pull that out with our arms!",

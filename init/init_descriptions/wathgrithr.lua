@@ -145,6 +145,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.APHID = "Have at thee, bug!"
 	DESCRIBE.GIANT_TREE_INFESTED = "A plague is wrought upon it."
 	DESCRIBE.GIANT_BLUEBERRY = "I shalln't be tempted!"
+	DESCRIBE.STEAMEDHAMS = "'Tis obviously grilled!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Fruit that fights back? Respectable.",

@@ -146,6 +146,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.APHID = "Your fuzzyness would make good tinder."
 	DESCRIBE.GIANT_TREE_INFESTED = "Burn the insects out!"
 	DESCRIBE.GIANT_BLUEBERRY = "My jaw is getting in the way!"
+	DESCRIBE.STEAMEDHAMS = "It's a ham sandwich."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Mmmm! Don't mind if I do!",

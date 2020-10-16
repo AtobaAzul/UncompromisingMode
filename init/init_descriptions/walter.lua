@@ -146,6 +146,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.APHID = "It's fuzzy!"
 	DESCRIBE.GIANT_TREE_INFESTED = "Get out'a there!"
 	DESCRIBE.GIANT_BLUEBERRY = "Good thing a Pinetree Pioneer's outfit is resistant to water!"
+	DESCRIBE.STEAMEDHAMS = "I'm ready for an unforgettable luncheon!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Wow! Everything is huge around here!",

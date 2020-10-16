@@ -145,6 +145,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.APHID = "They plague the trees."
 	DESCRIBE.GIANT_TREE_INFESTED = "It battles against death."
 	DESCRIBE.GIANT_BLUEBERRY = "Will it explode in my mouth?"
+	DESCRIBE.STEAMEDHAMS = "Old family recipe."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Eating it causes a mess, like everything else I do.",

@@ -146,6 +146,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.APHID = "They're infesting the Sequoioideae."
 	DESCRIBE.GIANT_TREE_INFESTED = "This Sequoioideae is a bit worse for wear."
 	DESCRIBE.GIANT_BLUEBERRY = "I hope that it's no longer volatile."
+	DESCRIBE.STEAMEDHAMS = "I am prepared for an unforgettable luncheon."
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Normal Cyanococcus berries don't pulsate.",

@@ -147,6 +147,7 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WURT.DESCRIBE
 	DESCRIBE.APHID = "Bug, florp."
 	DESCRIBE.GIANT_TREE_INFESTED = "Bugs eating big tree."
 	DESCRIBE.GIANT_BLUEBERRY = "Yum!"
+	DESCRIBE.STEAMEDHAMS = "Ham? Gross!"
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Look tasty! Hard to dig, though...",
