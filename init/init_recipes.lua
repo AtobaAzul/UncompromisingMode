@@ -51,11 +51,22 @@ AddComponentPostInit("ConstructionSite", function (self)
 end)
 
 -- Moonrock idol change
-AddRecipe("catcoonhat", {Ingredient("coontail", 5), Ingredient("silk", 4)}, RECIPETABS.DRESS, TECH.SCIENCE_TWO)
+AddRecipe("catcoonhat", {Ingredient("coontail", 4), Ingredient("silk", 4)}, RECIPETABS.DRESS, TECH.SCIENCE_TWO)
+GLOBAL.AllRecipes["catcoonhat"].sortkey = GLOBAL.AllRecipes["winterhat"].sortkey + .1
+
 AddRecipe("snowgoggles", {Ingredient("catcoonhat", 1), Ingredient("goggleshat",1), Ingredient("beefalowool",2)}, RECIPETABS.DRESS, TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/snowgoggles.xml", "snowgoggles.tex" )
+GLOBAL.AllRecipes["snowgoggles"].sortkey = GLOBAL.AllRecipes["catcoonhat"].sortkey + .1
+
 AddRecipe("ratpoisonbottle", {Ingredient("red_cap", 1), Ingredient("jammypreserves",1), Ingredient("rocks",1)}, RECIPETABS.FARM, TECH.SCIENCE_ONE, nil, nil, nil, nil, nil, "images/inventoryimages/ratpoisonbottle.xml", "ratpoisonbottle.tex" )
+GLOBAL.AllRecipes["ratpoisonbottle"].sortkey = GLOBAL.AllRecipes["fertilizer"].sortkey + .1
+
 --Recipe("sand", {Ingredient("townportaltalisman", 1)}, RECIPETABS.SURVIVAL, TECH.SCIENCE_ONE, nil, nil, nil, 4, nil, "images/inventoryimages/sand.xml", "sand.tex" )
+
 AddRecipe("diseasecurebomb", {Ingredient("cactus_flower", 2), Ingredient("moonrocknugget", 2), Ingredient("spidergland", 3)}, RECIPETABS.SURVIVAL,  TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/diseasecurebomb.xml", "diseasecurebomb.tex" )
+GLOBAL.AllRecipes["diseasecurebomb"].sortkey = GLOBAL.AllRecipes["lifeinjector"].sortkey + .1
+
+
+
 --[[
 AddRecipe("reviver", {Ingredient("skeletonmeat", 1, "images/inventoryimages/skeletonmeat.xml"), Ingredient("spidergland", 1), Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 40)}, RECIPETABS.SURVIVAL,  TECH.NONE)
 AddRecipe("bernie_inactive", {Ingredient("berniebox", 1, "images/inventoryimages/berniebox.xml")}, RECIPETABS.SURVIVAL,  TECH.NONE, nil, nil, nil, nil, "pyromaniac")
@@ -84,14 +95,29 @@ GLOBAL.AllRecipes["reviver"].sortkey = GLOBAL.AllRecipes["healingsalve"].sortkey
 
 --AddRecipe("critterlab_real", {Ingredient("moonrocknugget",2),Ingredient("cutgrass", 4),Ingredient("beefalowool",2)}, GLOBAL.RECIPETABS.TOWN, GLOBAL.TECH.LOST, "critterlab_real_placer", nil, nil, nil, nil, "images/inventoryimages/critterlab_real.xml", "critterlab_real.tex" )
 AddRecipe("gasmask", {Ingredient("goose_feather", 10),Ingredient("red_cap", 2),Ingredient("pigskin",2)}, GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/gasmask.xml", "gasmask.tex" )
+GLOBAL.AllRecipes["gasmask"].sortkey = GLOBAL.AllRecipes["beehat"].sortkey + .1
+
 AddRecipe("plaguemask", {Ingredient("malbatross_beak", 1),Ingredient("red_cap", 2),Ingredient("rat_tail",4, "images/inventoryimages/rat_tail.xml")}, GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/plaguemask.xml", "plaguemask.tex" )
-AddRecipe("saltpack", {Ingredient("gears", 1),Ingredient("boards", 2),Ingredient("saltrock",8)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/saltpack.xml", "saltpack.tex" )
+GLOBAL.AllRecipes["plaguemask"].sortkey = GLOBAL.AllRecipes["gasmask"].sortkey + .1
+
 AddRecipe("shroom_skin", {Ingredient("shroom_skin_fragment",4, "images/inventoryimages/shroom_skin_fragment.xml"),Ingredient("froglegs",2)}, GLOBAL.RECIPETABS.REFINE, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil)--, "images/inventoryimages/plaguemask.xml", "plaguemask.tex" )
+GLOBAL.AllRecipes["shroom_skin"].sortkey = GLOBAL.AllRecipes["bearger_fur"].sortkey + .1
+
 AddRecipe("sporepack", {Ingredient("shroom_skin",1),Ingredient("rope", 2),Ingredient("spoiled_food",2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/sporepack.xml", "sporepack.tex" )
+GLOBAL.AllRecipes["sporepack"].sortkey = GLOBAL.AllRecipes["icepack"].sortkey + .1
+
+AddRecipe("saltpack", {Ingredient("gears", 1),Ingredient("boards", 2),Ingredient("saltrock",8)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/saltpack.xml", "saltpack.tex" )
+GLOBAL.AllRecipes["saltpack"].sortkey = GLOBAL.AllRecipes["sporepack"].sortkey + .1
+
 AddRecipe("air_conditioner", {Ingredient("shroom_skin",2),Ingredient("gears", 2),Ingredient("cutstone",4)}, GLOBAL.RECIPETABS.SCIENCE, GLOBAL.TECH.SCIENCE_TWO, "air_conditioner_placer", nil, nil, nil, nil, "images/inventoryimages/air_conditioner.xml", "air_conditioner.tex" )
-AddRecipe("honey_log",   {Ingredient("livinglog", 1), Ingredient("honey", 2)}, CUSTOM_RECIPETABS.NATURE, TECH.NONE, nil, nil, nil, nil, "plantkin", "images/inventoryimages/honey_log.xml", "honey_log.tex" )
+GLOBAL.AllRecipes["air_conditioner"].sortkey = GLOBAL.AllRecipes["firesuppressor"].sortkey + .1
+
 AddRecipe("bloomershot",   {Ingredient("livinglog", 1), Ingredient("nitre", 1), Ingredient("killerbee", 2)}, CUSTOM_RECIPETABS.NATURE, TECH.NONE, nil, nil, nil, nil, "plantkin", "images/inventoryimages/bloomershot.xml", "bloomershot.tex" )
+AddRecipe("honey_log",   {Ingredient("livinglog", 1), Ingredient("honey", 2)}, CUSTOM_RECIPETABS.NATURE, TECH.NONE, nil, nil, nil, nil, "plantkin", "images/inventoryimages/honey_log.xml", "honey_log.tex" )
+
 AddRecipe("bugzapper",   {Ingredient("torch", 1), Ingredient("transistor", 2), Ingredient("feather_robin", 2)}, GLOBAL.RECIPETABS.WAR, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/bugzapper.xml", "bugzapper.tex" )
+GLOBAL.AllRecipes["bugzapper"].sortkey = GLOBAL.AllRecipes["nightstick"].sortkey + .1
+
 AddRecipe("slingshotammo_firecrackers",	{Ingredient("nitre", 1)},	CUSTOM_RECIPETABS.SLINGSHOTAMMO, TECH.SCIENCE_TWO,		{no_deconstruction = true}, nil, nil, 10, "pebblemaker", "images/inventoryimages/slingshotammo_firecrackers.xml", "slingshotammo_firecrackers.tex" )
 GLOBAL.AllRecipes["slingshotammo_firecrackers"].sortkey = GLOBAL.AllRecipes["slingshotammo_poop"].sortkey - 0.1
 
