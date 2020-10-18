@@ -19,18 +19,16 @@ local function OnFullMoon(self, inst, isfullmoon, new_inst)
 
 end
 
-local function OnNonFullMoon(self, inst, isfullmoon, new_inst)
-local node = TheWorld.Map:FindNodeAtPoint(self.Transform:GetWorldPosition())
-	if node ~= nil and node.tags ~= nil and not table.contains(node.tags, "lunacyarea") and not TheWorld.state.isfullmoon and not self.components.health:IsDead() then
-	self:DoTaskInTime(math.random(2,5), function(inst)
-		local mspuff = SpawnPrefab("halloween_moonpuff")
-		mspuff.Transform:SetPosition(self.Transform:GetWorldPosition())
-			self.components.halloweenmoonmutable:Mutate()
-			end)
-	else
+local function OnNonFullMoon(inst, isfullmoon)
+	local node = TheWorld.Map:FindNodeAtPoint(inst.Transform:GetWorldPosition())
 	
+	if node ~= nil and node.tags ~= nil and not table.contains(node.tags, "lunacyarea") and not TheWorld.state.isfullmoon and not inst.components.health:IsDead() then
+		inst:DoTaskInTime(math.random(2,5), function(inst)
+			local mspuff = SpawnPrefab("halloween_moonpuff")
+			mspuff.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			inst.components.halloweenmoonmutable:Mutate()
+		end)
 	end
-
 end
 
 local function MakeTeam(inst, attacker)
@@ -133,7 +131,7 @@ env.AddPrefabPostInit("mutated_penguin", function(inst)
 	inst.components.halloweenmoonmutable:SetPrefabMutated("penguin")
 	inst.components.halloweenmoonmutable:SetOnMutateFn(OnMoonMutate)
 
-	inst:WatchWorldState("isfullmoon", OnNonFullMoon)
-	OnNonFullMoon(inst, TheWorld.state.isfullmoon)
+	--inst:WatchWorldState("isfullmoon", OnNonFullMoon)
+	--OnNonFullMoon(inst, TheWorld.state.isfullmoon)
 
 end)
