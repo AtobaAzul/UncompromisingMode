@@ -122,6 +122,8 @@
 
 * [x]  Toadstool only drops shroom skin when he dies, though he drops all that the player would get throughout each phase. This is because of the new shroom skin items we added.
 
+* [x] [HOODED FOREST] Toadstool's spawns have been moved to 1 in each of the 3 mushroom biomes. (The old minibiomes were uninteresting and adding toadstool spawners to the mushroom biomes spices them up even more, also removed the pointless areas so we can fill it in with interesting stuff when cave update hits)
+
 --Antlion
 
 * [x] [Fear the Dark!] Antlion's craters can cause some fires to erupt from the earth.
@@ -134,6 +136,7 @@
 
 * [x]  Sometimes while underground in winter, the deerclops will make a desperate attempt to attack the player, and will crash through the cave ceiling with anger. (Fun fact: This was in since launch, it just wasn't listed in the changelog).
 
+* [x] [HOODED FOREST] Cursed Antler Vetcurse item.
 --Dragonfly
 
 * [x]  Raidfly's Lavae will now drop explosive slime on death, destroying structures and settings things on fire.
@@ -205,7 +208,7 @@
 
 * [x] Moggles now act as sandstorm/snowstorm goggles.
 
-* [x] [FEAR THE DARK!] The Lazy Deserter will now pick up and deliver all nearby items to the player when used, including berry bushes, grass, etc. Costs sanity.
+* [x] [FEAR THE DARK!] The Lazy Deserter will now pick up and deliver all nearby items to the player when used, including berry bushes, grass, etc. Costs sanity to channel as usual.
 
 * [x] [FEAR THE DARK!] Flowers will temporarily turn into Evil Flowers on full moons.
 
@@ -220,6 +223,8 @@
 * [x] [FEAR THE DARK!] When willow catches on fire while insane, she will do an AOE explosion before she bursts into flames.
 
 * [x] [FEAR THE DARK!] Willow bypasses the winter smoldering effect we added.
+
+* [x] [HOODED FOREST] BERNIE!! Removed by default, you can toggle him back on if you wish.
 
 [TOGGLEABLE OPTIONS]
 
@@ -283,13 +288,13 @@
 
 * [x] Maxwell cannot read books while insane.
 
-* [x] [FEAR THE DARK!] Added config option to use Maxwell's classic DS shadows, with no 2.5 day time limit, no health cost for summoning, and the ability to manually banish them.
+* [x] [FEAR THE DARK!] Added option to use Maxwell's classic DS shadows by reading the umbra, with no 2.5 day time limit, no health cost for summoning, and the ability to manually banish them.
+
+* [x] [HOODED FOREST] Codex umbra grants tier 1 magic.
 
 --Wigfrid
 
 * [x] [FEAR THE DARK!] Wigfrid's life and sanity leech is reduced by 1/3.
-
-* [x] [FEAR THE DARK!] Wigfrid can no longer eat candy.
 
 --Winona
 
@@ -324,7 +329,7 @@
 
 --Warly
 
-* [x] [FEAR THE DARK!] Warly now gains +15% hunger and +20% Health/Sanity from eating dishes, however his penalties for repeat dishes are more severe, and his food memory is increased to 3 days. This more closely mirrors his unique singleplayer perk.
+* [x] [HOODED FOREST] Warly now gains +20% Hunger/Health/Sanity from eating dishes, however his penalties for repeat dishes are more severe, and his food memory is increased to 3 days. This more closely mirrors his unique singleplayer perk.
 
 
 --Walter and Woby
@@ -370,7 +375,9 @@
 
 --Non-Crockpot
 
-* [x]  Butterfly wing nerf - Health restored to 1 (down from 8).
+* [x]  Butterfly wing nerf - Health restored to 1 (down from 8), hunger significantly reduced.
+
+* [x] Seeds give less hunger.
 
 * [x] Cactus Flesh, Cooked Cactus Flesh, and Cooked Green Caps now deal slightly more damage when eaten. (A lot of other sanity foods like pumpkin cookies have been buffed! Seek them out!).
 
@@ -611,18 +618,21 @@
 
 * [x] [FEAR THE DARK] New dish: Hard shell tacos, using vegetable and scorpion carapaces, this hamlet dish can be recreated. Is a very good way to regain hunger through scorpions.
 
---[Flooded Swamp and Rice]--
+--[Marsh Aesthetics, Flooded Swamp and Rice]--
 
 * [x] [FEAR THE DARK] New area: Flooded Swamp, some of the swamp has been flooded by water!
 
 * [x] [FEAR THE DARK] New plant: Rice plants, found floating in the flooded swamp, can be harvested by punching or ramming with a boat.
 
-* [x] [FEAR THE DARK] New food: Rice, cannot be eaten without cooking, used for 2 dishes. Cannot spoil.
+* [x] [FEAR THE DARK] New food: Rice, a new vegetable that cannot be eaten without cooking, used for 2 dishes. Cannot spoil.
 
-* [x] [FEAR THE DARK] New dish: R(L)iceloaf, hunger restoring dish that uses 2 rice. Takes a long time to spoil. Noticably bland though.
+* [x] [FEAR THE DARK] New dish: R(L)iceloaf, hunger restoring dish that uses 2 rice. Takes a very long time to spoil. Noticably bland though, so it doesn't provide many other benefits.
 
 * [x] [FEAR THE DARK] New dish: Seafood paella, dish restores hunger and provides 1.5 days of hayfever protection. Uses a Wobster, rice, and vegetables.
 
+* [x] [HOODED FOREST] Added marsh bushes to the swamp biome, they are currently asthetic, but may possibly have a function in the future.
+
+* [x] [HOODED FOREST] Most of the swamp is covered in the thick fog similar to the graveyard.
 
 --[Acid Rain and Toadstool]--
 
@@ -659,7 +669,7 @@
 
 * [x] [FEAR THE DARK] Wormwood gains 80% less healing from the Air Conditioners Blue Caps and Spores.
 
-* [x]  [GOODIES GALORE!] New Item, Spore Pack, New backpack with 12 slots without slowness, but rots foods incredibly fast if it's inside
+* [x] [GOODIES GALORE!] New Item, Spore Pack, New backpack with 12 slots without slowness, but rots foods incredibly fast if it's inside
 
 
 
@@ -691,8 +701,122 @@
 
 * [x] [FEAR THE DARK!] Add veteran shrine, a horrible altar with which to obtain "veterans curse"
 
-* [x] [FEAR THE DARK!] [[INCOMPLETE MECHANIC]] Veteran's Curse, players under this effect take more damage and have a faster hunger drain. In the future, bosses will have special drops for players who are under the effects of the curse.
+* [x] [FEAR THE DARK!] [[INCOMPLETE MECHANIC]] Veteran's Curse, players under this effect take more damage and have a faster hunger drain.
 
+* [x] [HOODED FOREST] Opting for veteran's curse enables the overstuffing mechanic, which will slow you down if you eat when full or near full.
+
+* [x] [HOODED FOREST] Added cursed antler veteran's curse item, it does heavy aoe damage and freezes on hit, has infinite durability, requires a few moments to recharge before it's effective again.
+
+
+
+--[Beefalo Wings]--
+
+* [x] [HOODED FOREST] Beefalo horn can now be used in the crockpot, counts as 1 meat.
+
+* [x] [HOODED FOREST] New crockpot dish made with 2 batwings, 1 pepper, and 1 beefalo horn. 100 hunger, 33 sanity, 60 health. Grants knockback immunity for a short period.
+
+
+
+---[The Hooded Forest]---
+
+* [x] [HOODED FOREST] New biome added which replaces the Moonstone/Mactusk dark forest. Generates in the same area.
+
+* [x] [HOODED FOREST] Hooded forest contains the moonstone and a mactusk camp, their presence may give a clue on the forest's origins.
+
+* [x] [HOODED FOREST] Hooded forest is covered by a canopy which halts smoldering, even in summer.
+
+--[Giant Redwoods]--
+
+* [x] [HOODED FOREST] Added giant redwoods, these huge trees can be chopped to make items drop from the canopy.
+
+* [x] [HOODED FOREST] After 25 chops, the tree will begin to ooze sap, preventing it from being chopped anymore.
+
+* [x] [HOODED FOREST] Can be infested by aphids.
+
+--[Large Ferns]--
+
+* [x] [HOODED FOREST] Added large ferns, they are basically harvestable ferns, they give 2 ferns and a 20% chance for either a grass or twig.
+
+* [x] [HOODED FOREST] Large Ferns are not relocatable, and are sometimes used as hiding spots for aphids.
+
+--[Boomberries]--
+
+* [x] [HOODED FOREST] Boomberries are blue pulsating berries which grow on the forest floor, walking near it will trigger a reaction which will make the berry explode!
+
+* [x] [HOODED FOREST] Exploding boomberries will trigger other nearby boomberries as well.
+
+* [x] [HOODED FOREST] Boomberries can be harvested by digging them up before they explode.
+
+* [x] [HOODED FOREST] The giant berries can be eaten for a hefty 20 hunger and 3 health, but cause 10 wetness, which can be a good or bad thing.
+
+* [x] [HOODED FOREST] Digging up a root after the plant has exploded or has been harvested destroys the root.
+
+--[New (or old) Hooded Forest Crockpot Dishes]--
+
+* [x] [HOODED FOREST] Boomberry pancakes: a hearty dish made with 2 boomberries and 2 eggs. Restores 75 hunger, 20 sanity, and 5 health. (Swapped bacon and eggs!)
+
+* [x] [HOODED FOREST] Ferns can be used in the crockpot, but be careful doing so...
+
+* [x] [HOODED FOREST] Added in steamed hams from hamlet, because if we didn't we'd be trampled by an angry mob. Uses the same recipe and stats from hamlet: 1 meat/cooked meat, 1 or more vegetables, and 1 fern. 40 health 37.5 hunger 15 sanity
+
+* [x] [HOODED FOREST] Added simple salad, this food prevents the player from using ferns in crockpot dishes not meant to have ferns in them (Don't want any cheap meatballs eh!)
+
+* [x] [HOODED FOREST] Simple salad can still be beneficial if you use 4 ferns or 1 fern 3 twigs. Requirements for dish is 1 fern and has a very high priority, but not higher than steamed hams. Dish restores 12.5 hunger 3 health 5 sanity.
+
+--[Aphids and Infested Redwoods]--
+
+* [x] [HOODED FOREST] Aphids are small wooly bugs which resemble the weevoles from hamlet. They eat and harvest nearly everything nearby, but are otherwise neutral.
+
+* [x] [HOODED FOREST] Aphids will periodically attempt to fly into the canopy and begin infesting a redwood tree.
+
+* [x] [HOODED FOREST] Infested redwood trees become spawners for more aphids, but can be cured if you trigger the tree's defence mechanisms by chopping it.
+
+* [x] [HOODED FOREST] Some redwood trees in the hooded forest spawn in infested.
+
+--[Snapdragons, snapbuddies, and whisper pods]--
+
+* [x] [HOODED FOREST] Snapdragons can be found in a muddy area of the hooded forest. (They're actually unimplemented creatures from hamlet, at least they get a time to shine here, huh?)
+
+* [x] [HOODED FOREST] They are friendly aside from the time in summer when they become heavily carnivorous. (They're still friendly to wormwood then though)
+
+* [x] [HOODED FOREST] Snapdragons eat insects WHOLE. They are phenomenal in countering hoards of pollen mites or aphids.
+
+* [x] [HOODED FOREST] Snapdragons can be fed vegetables and will give seeds in return, if given enough they'll give you a whisper pod.
+
+* [x] [HOODED FOREST] Whisper pods are mechanisms to grow snap buddies which can give you a desired farmplot fruit or gourd. Just plant their corresponding seed in the whisper pod.
+
+* [x] [HOODED FOREST] After the whipser pod grows, it will become a snap buddy, which can be traded with for whole fruit/gourds as well as seeds.
+
+--[Pitcher plants and Fruit bats]--
+
+* [x] [HOODED FOREST] Pitcher plants are the homes of fruit bats, they are suspended up in the canopy.
+
+* [x] [HOODED FOREST] Fruit bats, like snapdragons, are friendly aside from summertime and are excellent at eating bugs.
+
+* [x] [HOODED FOREST] Fruit bats will produce honey at their pitcher plants at night if they eat enough bugs.
+
+* [x] [HOODED FOREST] Pitcher plants cannot be destroyed, fruit bats may pester any bee box system the player sets up.
+
+--[Hooded Widow and her Cocoons]--
+
+* [x] [HOODED FOREST] Hooded widow is a new boss that spawns in the hooded forest, she can be summoned by triggering the web creep in the middle of her cocoons.
+
+* [x] [HOODED FOREST] After summoning the widow, do not run too far away from the web or else she'll web you in sticky webs like a ewecus.
+
+* [x] [HOODED FOREST] After defeating the Hooded Widow, she drops the Widow's Claw and Head.
+
+* [x] [HOODED FOREST] The widow's head is simply a night vision hat with a spoilage time rather than fuel time, takes a long time to spoil, perfect for a small bout of speulunking.
+
+* [x] [HOODED FOREST] The widow's claw is used to open the cocoons near her spawner. Using the claw on the cocoons will open them up and reveal a trapped mob inside, which will instantly die.
+
+* [x] [HOODED FOREST] The loot pool for the mobs is quite large, the sizes of the mobs tend to match the sizes of the cocoons as well.
+
+
+
+
+--[skldfJDAvva]--
+
+* [x] [HOODED FOREST] Added :Waldo:
 
 --[Add any future changes past this line, I'll sort them when we're about to ship an update. -Axe]--
 

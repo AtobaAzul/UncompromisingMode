@@ -146,6 +146,15 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.GIANT_TREE_INFESTED = "It seems rather sick."
 	DESCRIBE.GIANT_BLUEBERRY = "Ohoho, I have plenty of ideas for you!"
 	DESCRIBE.STEAMEDHAMS = "Tastes like fast food."
+	DESCRIBE.BLUEBERRYPANCAKES = "Didn't even have to add any sugar to the berries."
+	DESCRIBE.SIMPSALAD = "The simplicity is ammendable, but I'll need more than just this."
+	DESCRIBE.BEEFALOWINGS = "The horn really brings out the heat in the peppers."
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I've got the sturdyness of a beefalo!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "Back to being knocked around."
+	DESCRIBE.WIDOWSHEAD = "Another head? I wonder what this one will do."
+	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
+	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
+	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Oh, the possibilities!",

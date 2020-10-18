@@ -49,28 +49,89 @@ room.contents.countprefabs=
 									{
 										trapdoorspawner = function() return math.random(2,4) end,} --returned number for whole area should be multiplied between 2-4 due to multiple rooms
 end)
+
+
+--Swamp Mist
+local deserts = { "BGMarsh", "Marsh", "SpiderMarsh", "SlightlyMermySwamp"}
+
+--Add "scorpions" room tag to all desert rooms
+for k, v in pairs(deserts) do
+    AddRoomPreInit(v, function(room)
+        if not room.tags then
+            room.tags = {"Mist"}
+        elseif room.tags then
+            table.insert(room.tags, "Mist")
+        end
+    end)
+end
+-----KoreanWaffle's Spawner Limiter Tag Adding Code
+
 -----------Marsh Grass
-AddRoomPreInit("BGMarsh", function(room)					--This effects the outer areas of the Triple Mac and The Major Beefalo Plains
+AddRoomPreInit("BGMarsh", function(room)					
 room.contents.countprefabs=
 									{
 										marsh_grass = function() return math.random(2,6) end,}
 end)
-AddRoomPreInit("Marsh", function(room)						--This effects areas in the Major Beefalo Plains and the Grasslands next to the portal
+AddRoomPreInit("Marsh", function(room)						
 room.contents.countprefabs=
 									{
-										marsh_grass = function() return math.random(2,6) end,} --returned number for whole area should be multiplied between 2-4 due to multiple rooms
+										marsh_grass = function() return math.random(2,6) end,} 
 end)
 
-AddRoomPreInit("SpiderMarsh", function(room)					--This effects the outer areas of the Triple Mac and The Major Beefalo Plains
+AddRoomPreInit("SpiderMarsh", function(room)				
 room.contents.countprefabs=
 									{
 										marsh_grass = function() return math.random(4,8) end,}
 end)
-AddRoomPreInit("SlightlyMermySwamp", function(room)						--This effects areas in the Major Beefalo Plains and the Grasslands next to the portal
+AddRoomPreInit("SlightlyMermySwamp", function(room)					
 room.contents.countprefabs=
 									{
-										marsh_grass = function() return math.random(4,8) end,} --returned number for whole area should be multiplied between 2-4 due to multiple rooms
+										marsh_grass = function() return math.random(4,8) end,} 
 end)
+--[[
+GLOBAL.require("map/rooms/caves/mushroomtoadstool")
+AddTaskPreInit("Redforest",function(task)
+--table.insert(task.room_choices,"ToadstoolArenaRed") --It seems AddTaskPreInit doesn't function in the caves....
+--task.room_choices["ToadstoolArenaRed"] = 1
+task.room_choices["veteranshrine"] = 1
+end)
+AddTaskPreInit("Greenforest",function(task)
+--table.insert(task.room_choices,"ToadstoolArenaGreen")
+--task.room_choices["ToadstoolArenaGreen"] = 1
+task.room_choices["veteranshrine"] = 1
+end)
+AddTaskPreInit("Blueforest",function(task)
+--table.insert(task.room_choices,"ToadstoolArenaBlue")
+--task.room_choices["ToadstoolArenaBlue"] = 1
+task.room_choices["veteranshrine"] = 1
+end)]]
+--Toadstool moved to the mushroom biomes.
+
+AddTaskSetPreInitAny(function(tasksetdata)
+    if tasksetdata.location ~= "cave" then
+        return
+    end
+table.remove(tasksetdata.tasks,23)
+table.remove(tasksetdata.tasks,22) 
+table.remove(tasksetdata.tasks,21) 
+end)
+AddRoomPreInit("RedMushPillars", function(room)			--red	
+room.contents.countstaticlayouts = {
+            ["ToadstoolArena"] = 1,
+        }
+end)
+AddRoomPreInit("GreenMushNoise", function(room)		    --green		
+room.contents.countstaticlayouts = {
+            ["ToadstoolArena"] = 1,
+        }
+end)
+AddRoomPreInit("DropperDesolation", function(room)	    --blue			
+room.contents.countstaticlayouts = {
+            ["ToadstoolArena"] = 1,
+        }
+end)
+
+
 
 -----KoreanWaffle's Spawner Limiter Tag Adding Code
 --Add new map tags to storygen
@@ -137,8 +198,9 @@ AddTaskSetPreInitAny(function(tasksetdata)
         return
     end
 table.remove(tasksetdata.tasks,7) 
-table.insert(tasksetdata.tasks,"GiantTrees")  -- Uncomment to test task based rice worldgen
+table.insert(tasksetdata.tasks,"GiantTrees") 
 end)
+ -- Uncomment to test task based rice worldgen
 --GLOBAL.require("map/static_layouts/licepatch")
 --[[local Layouts = GLOBAL.require("map/layouts").Layouts
 local StaticLayout = GLOBAL.require("map/static_layout")

@@ -147,6 +147,15 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.GIANT_TREE_INFESTED = "Get out'a there!"
 	DESCRIBE.GIANT_BLUEBERRY = "Good thing a Pinetree Pioneer's outfit is resistant to water!"
 	DESCRIBE.STEAMEDHAMS = "I'm ready for an unforgettable luncheon!"
+	DESCRIBE.BLUEBERRYPANCAKES = "Ah, sweet eats!"
+	DESCRIBE.SIMPSALAD = "A Pinetree Pioneer always eats his greens! Er purples...."
+	DESCRIBE.BEEFALOWINGS = "Haven't had hot wings in ages!"
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I'm planting my feet!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "I've lost my balance again!"
+	DESCRIBE.WIDOWSHEAD = "Don't worry Woby, it's me!"
+	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
+	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
+	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Wow! Everything is huge around here!",

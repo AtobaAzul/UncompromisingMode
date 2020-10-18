@@ -37,7 +37,7 @@ local function fn()
     end
 
     inst:AddComponent("stackable")
-    inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
+    --inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDIUMITEM
 
     inst:AddComponent("inspectable")
 
@@ -50,6 +50,7 @@ local function fn()
     inst.components.edible.foodtype = FOODTYPE.VEGGIE
 	inst.components.edible:SetOnEatenFn(oneatenfn)
     inst:AddComponent("perishable")
+	inst:AddComponent("tradable")
     inst.components.perishable:SetPerishTime(TUNING.PERISH_TWO_DAY)
     inst.components.perishable:StartPerishing()
     inst.components.perishable.onperishreplacement = "spoiled_food"

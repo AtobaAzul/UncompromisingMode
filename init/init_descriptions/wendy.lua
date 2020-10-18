@@ -146,6 +146,15 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.GIANT_TREE_INFESTED = "It battles against death."
 	DESCRIBE.GIANT_BLUEBERRY = "Will it explode in my mouth?"
 	DESCRIBE.STEAMEDHAMS = "Old family recipe."
+	DESCRIBE.BLUEBERRYPANCAKES = "A flavor explosion."
+	DESCRIBE.SIMPSALAD = "This is not the time to fast."
+	DESCRIBE.BEEFALOWINGS = "Would you like to try some, Abigail?"
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "My stance will not falter."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "My stance is faltering."
+	DESCRIBE.WIDOWSHEAD = "This time, the abyss will stare into me."
+	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
+	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
+	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Eating it causes a mess, like everything else I do.",

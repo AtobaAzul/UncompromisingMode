@@ -147,6 +147,15 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.GIANT_TREE_INFESTED = "What's bugging you?"
 	DESCRIBE.GIANT_BLUEBERRY = "Could I use this like a waterballoon? Hyuyu!"
 	DESCRIBE.STEAMEDHAMS = "This dish has got to be joking."
+	DESCRIBE.BLUEBERRYPANCAKES = "These pancakes have been defused!"
+	DESCRIBE.SIMPSALAD = "I don't think the mortals like this one too much."
+	DESCRIBE.BEEFALOWINGS = "It's not bad, for mortal food."
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I was light on my feet, now I'm heavy as well!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "Still can't catch me!"
+	DESCRIBE.WIDOWSHEAD = " \"Apex predator\", pshh!"
+	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
+	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
+	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "If you don't give it room, It'll give a big boom!",

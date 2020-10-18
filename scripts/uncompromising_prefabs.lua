@@ -149,4 +149,9 @@ return {
 	"widowshead",
 	"cctrinkets",
 	"steamedhams",
+	"blueberrypancakes",
+	"simpsalad",
+	"beefalowings",
+	"pinepile",
+	"hooded_mushtree",
 }

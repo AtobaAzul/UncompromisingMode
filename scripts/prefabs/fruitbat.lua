@@ -11,12 +11,12 @@ local assets=
 
 local prefabs =
 {
-    "seeds",
+    "pomegranate_seeds",
 }
 
 SetSharedLootTable( 'fruitbat',
 {
-    {'seeds',1},
+    {'pomegranate_seeds',1},
 })
 
 local SLEEP_DIST_FROMHOME = 1
@@ -201,8 +201,6 @@ local function fn()
     inst:AddTag("bat")
 	inst:AddTag("fruitbat")
     inst:AddTag("scarytoprey")
-    inst:AddTag("monster")
-    inst:AddTag("hostile")
     inst:AddTag("flying")
     inst:AddTag("veggie")
 

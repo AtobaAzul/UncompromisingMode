@@ -147,6 +147,15 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.GIANT_TREE_INFESTED = "This Sequoioideae is a bit worse for wear."
 	DESCRIBE.GIANT_BLUEBERRY = "I hope that it's no longer volatile."
 	DESCRIBE.STEAMEDHAMS = "I am prepared for an unforgettable luncheon."
+	DESCRIBE.BLUEBERRYPANCAKES = "I believe the juice has been stabilized."
+	DESCRIBE.SIMPSALAD = "It may not be calorie dense, but it is still good for you."
+	DESCRIBE.BEEFALOWINGS = "Not a very posh dish, but good none-the-less."
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I'm feeling less displacable."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "My mass has returned to normal."
+	DESCRIBE.WIDOWSHEAD = "It seems the head is still transferring information..."
+	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
+	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
+	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Normal Cyanococcus berries don't pulsate.",

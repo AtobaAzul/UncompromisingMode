@@ -148,6 +148,15 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.GIANT_TREE_INFESTED = "That seems to be where the buggers are comin' from."
 	DESCRIBE.GIANT_BLUEBERRY = "It's packed to the brim with liquid!"
 	DESCRIBE.STEAMEDHAMS = "It's obviously grilled."
+	DESCRIBE.BLUEBERRYPANCAKES = "It was messy, but it was worth it."
+	DESCRIBE.SIMPSALAD = "It's just some roughage."
+	DESCRIBE.BEEFALOWINGS = "That's good eatin' there."
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I'm feeling sturdier than usual."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "Back to work."
+	DESCRIBE.WIDOWSHEAD = "Why does this keep happening!"
+	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
+	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
+	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Gonna make a mess, but what else is new?",

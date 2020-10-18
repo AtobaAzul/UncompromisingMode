@@ -28,6 +28,7 @@ local loot =
     "silk",
     "silk",
 	"widowsgrasp",
+	"widowshead",
 }
 
 
@@ -190,8 +191,9 @@ local function Reset(inst)
 end
 
 local function OnKilledOther(inst)
-inst.justkilled = true
-inst:DoTaskInTime(1, function(inst) inst.justkilled = false end)
+if inst.components.combat ~= nil then
+inst.components.combat:TryRetarget()
+end
 end
 local function fn()
     local inst = CreateEntity()
@@ -303,6 +305,7 @@ local function fn()
 	inst:DoPeriodicTask(3, TryPowerMove)
 	inst.justkilled = false
 	inst:ListenForEvent("killed", OnKilledOther)
+	
 
     return inst
 end

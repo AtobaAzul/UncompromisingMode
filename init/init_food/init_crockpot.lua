@@ -336,6 +336,7 @@ InsertIngredientValues({"iceboomerang"},{ice=1},true,false,false)
 InsertIngredientValues({"rice"},{veggie=1,rice=1},true,false,false)
 InsertIngredientValues({"rice_cooked"},{veggie=1,rice=1},true,false,false)
 InsertIngredientValues({"foliage"},{veggie=.1,foliage=1},true,false,false)
+InsertIngredientValues({"horn"},{meat=1},true,false,false)
 local zaspberryparfait =
 {
     name = "zaspberryparfait",
@@ -418,15 +419,39 @@ local steamedhams =
 }
 AddCookerRecipe("cookpot", steamedhams)
 AddCookerRecipe("portablecookpot", steamedhams)
-local foliage =
+local simpsalad =
 {
-    name = "foliage",
+    name = "simpsalad",
     test = function(cooker, names, tags) return names.foliage end,
 
     priority = 20,
     weight = 30,
     perishtime = nil,
-    cooktime = 0.1,
+    cooktime = 0.4,
 }
-AddCookerRecipe("cookpot", foliage)
-AddCookerRecipe("portablecookpot", foliage)
+AddCookerRecipe("cookpot", simpsalad)
+AddCookerRecipe("portablecookpot", simpsalad)
+local blueberrypancakes =
+{
+    name = "blueberrypancakes",
+    test = function(cooker, names, tags) return names.giant_blueberry and names.giant_blueberry >= 2 and tags.egg and tags.egg > 1 end,
+
+    priority = 20,
+    weight = 30,
+    perishtime = nil,
+    cooktime = 1.8,
+}
+AddCookerRecipe("cookpot", blueberrypancakes)
+AddCookerRecipe("portablecookpot", blueberrypancakes)
+local beefalowings =
+{
+    name = "beefalowings",
+    test = function(cooker, names, tags) return (names.pepper or names.pepper_cooked) and names.horn and ((names.batwing and names.batwing > 1) or (names.batwing_cooked and names.batwing_cooked > 1)) end,
+
+    priority = 20,
+    weight = 30,
+    perishtime = nil,
+    cooktime = 2.4,
+}
+AddCookerRecipe("cookpot", beefalowings)
+AddCookerRecipe("portablecookpot", beefalowings)

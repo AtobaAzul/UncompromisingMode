@@ -1,21 +1,32 @@
 local assets =
 {
-	Asset("ANIM", "anim/hat_snowgoggles.zip"),
-	Asset("ATLAS", "images/inventoryimages/gasmask.xml"),
-	Asset("IMAGE", "images/inventoryimages/gasmask.tex"),
+	Asset("ANIM", "anim/hat_widowshead.zip"),
+	Asset("ATLAS", "images/inventoryimages/widowshead.xml"),
+	Asset("IMAGE", "images/inventoryimages/widowshead.tex"),
 }
-
+local BEAVERVISION_COLOURCUBES =
+{
+    day = "images/colour_cubes/beaver_vision_cc.tex",
+    dusk = "images/colour_cubes/beaver_vision_cc.tex",
+    night = "images/colour_cubes/beaver_vision_cc.tex",
+    full_moon = "images/colour_cubes/beaver_vision_cc.tex",
+}
 	local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_hat", "hat_widowshead", "swap_hat")
 
         owner.AnimState:Show("HAT")
-        owner.AnimState:Hide("HAIR_HAT")
-        owner.AnimState:Show("HAIR_NOHAT")
-        owner.AnimState:Show("HAIR")
+        owner.AnimState:Show("HAIR_HAT")
+        owner.AnimState:Hide("HAIR_NOHAT")
+        owner.AnimState:Hide("HAIR")
 
-        owner.AnimState:Show("HEAD")
-        owner.AnimState:Hide("HEAD_HAT")
-		
+        if owner:HasTag("player") then
+            owner.AnimState:Hide("HEAD")
+            owner.AnimState:Show("HEAD_HAT")
+        end
+		--[[if owner.components.playervision ~= nil then   --Colorcubes don't listen....
+		owner.components.playervision:SetCustomCCTable(BEAVERVISION_COLOURCUBES)
+        owner.components.playervision:ForceNightVision(true)
+		end]]
     end
 
 	local function onunequip(inst, owner)
@@ -30,7 +41,10 @@ local assets =
             owner.AnimState:Show("HEAD")
             owner.AnimState:Hide("HEAD_HAT")
         end
-		
+		--[[if owner.components.playervision ~= nil then
+		owner.components.playervision:SetCustomCCTable(nil)
+		owner.components.playervision:ForceNightVision(false)
+		end]]
     end
 	
 	
@@ -70,6 +84,11 @@ local assets =
         inst.components.equippable:SetOnEquip(onequip)
         inst.components.equippable:SetOnUnequip(onunequip)
 		inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL/10
+		inst:AddComponent("edible")
+		inst:AddComponent("perishable")
+		inst.components.perishable:SetPerishTime((7.5*TUNING.PERISH_TWO_DAY))
+		inst.components.perishable:StartPerishing()
+		inst.components.perishable.onperishreplacement = "spoiled_food"
 
         MakeHauntableLaunch(inst)
 		--------------------------------------------------------------

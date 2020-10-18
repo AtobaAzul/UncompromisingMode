@@ -105,8 +105,26 @@ local function californiaking_extend(inst, target)
 end
 
 local function californiaking_detach(inst, target)
-if target:HasTag("californiaking") then
-target:RemoveTag("californiaking")
+if target:HasTag("foodknockbackimmune") then
+target:RemoveTag("foodknockbackimmune")
+end
+end
+
+local function kbimmune_attach(inst, target)
+target:DoTaskInTime(4, function(target)
+if not target:HasTag("foodknockbackimmune") then
+target:AddTag("foodknockbackimmune")
+end
+end)
+end
+
+local function kbimmune_extend(inst, target)
+    --SpawnPrefab("electricchargedfx"):SetTarget(target)
+end
+
+local function kbimmune_detach(inst, target)
+if target:HasTag("foodknockbackimmune") then
+target:RemoveTag("foodknockbackimmune")
 end
 end
 -------------------------------------------------------------------------
@@ -189,4 +207,5 @@ end
 return MakeBuff("electricretaliation", attachretaliationdamage, electric_extend, removeretaliationdamageretaliationdamage, TUNING.BUFF_ELECTRICATTACK_DURATION, 2, { "electrichitsparks", "electricchargedfx" }),
 MakeBuff("frozenfury", attachfrozenness, nil, removefrozenness, TUNING.BUFF_ELECTRICATTACK_DURATION, 2),
 MakeBuff("lesserelectricattack", electric_attach, electric_extend, electric_detach, 30, 2, { "electrichitsparks", "electricchargedfx" }),
+MakeBuff("knockbackimmune", kbimmune_attach, kbimmune_extend, kbimmune_detach, TUNING.BUFF_ATTACK_DURATION, 2),
 MakeBuff("californiaking", californiaking_attach, californiaking_extend, californiaking_detach, TUNING.BUFF_ATTACK_DURATION*8, 2)

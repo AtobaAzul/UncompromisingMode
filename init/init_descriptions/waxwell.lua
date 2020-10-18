@@ -148,6 +148,15 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.GIANT_TREE_INFESTED = "It's riddled with vermin."
 	DESCRIBE.GIANT_BLUEBERRY = "This is going to get messy. Sigh."
 	DESCRIBE.STEAMEDHAMS = "They're obviously grilled."
+	DESCRIBE.BLUEBERRYPANCAKES = "It was a mess to make."
+	DESCRIBE.SIMPSALAD = "It's nothing more than a bit of roughage."
+	DESCRIBE.BEEFALOWINGS = "Beefalo in heat."
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I may be frail, but you aren't moving me!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "I've lost my footing."
+	DESCRIBE.WIDOWSHEAD = "It seems the cortex is still semi-functional."
+	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
+	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
+	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "If it bursts all over this suit, I'm going to kill something.",

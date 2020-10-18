@@ -146,6 +146,15 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.GIANT_TREE_INFESTED = "It looks pretty sick."
 	DESCRIBE.GIANT_BLUEBERRY = "The juice gets everywhere!"
 	DESCRIBE.STEAMEDHAMS = "This is just a hamburger."
+	DESCRIBE.BLUEBERRYPANCAKES = "It's really sweet!"
+	DESCRIBE.SIMPSALAD = "We'll need more than just this."
+	DESCRIBE.BEEFALOWINGS = "We like the crunch of the bat wings!"
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "We will not be pushed around!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "That's the end of that."
+	DESCRIBE.WIDOWSHEAD = "We could have been friends...."
+	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
+	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
+	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "It's huge! No way we can pull that out with our arms!",
