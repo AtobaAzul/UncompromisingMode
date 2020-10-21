@@ -154,4 +154,5 @@ return {
 	"beefalowings",
 	"pinepile",
 	"hooded_mushtree",
+	"hooded_forest_rubble",
 }

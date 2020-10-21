@@ -197,10 +197,33 @@ AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "forest" then
         return
     end
-table.remove(tasksetdata.tasks,7) 
-table.insert(tasksetdata.tasks,"GiantTrees") 
+
+table.remove(tasksetdata.tasks,9) 
+table.insert(tasksetdata.tasks,"GiantTrees")  -- Uncomment to test task based rice worldgen
 end)
- -- Uncomment to test task based rice worldgen
+
+
+local Layouts = GLOBAL.require("map/layouts").Layouts
+local StaticLayout = GLOBAL.require("map/static_layout")
+
+Layouts["hooded_town"] = StaticLayout.Get("map/static_layouts/hooded_town")
+Layouts["rose_garden"] = StaticLayout.Get("map/static_layouts/rose_garden")
+
+AddRoomPreInit("HoodedTown", function(room)
+	if not room.contents.countstaticlayouts then
+		room.contents.countstaticlayouts = {}
+	end
+	room.contents.countstaticlayouts["hooded_town"] = 1
+end)
+
+AddRoomPreInit("RoseGarden", function(room)
+	if not room.contents.countstaticlayouts then
+		room.contents.countstaticlayouts = {}
+	end
+	room.contents.countstaticlayouts["rose_garden"] = 1
+end)
+
+
 --GLOBAL.require("map/static_layouts/licepatch")
 --[[local Layouts = GLOBAL.require("map/layouts").Layouts
 local StaticLayout = GLOBAL.require("map/static_layout")

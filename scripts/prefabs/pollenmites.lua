@@ -153,11 +153,6 @@ local function fn()
 	--inst.AnimState:SetRayTestOnBB(true);
 
 	---------------------------------
-	inst.entity:SetPristine()
-	
-    if not TheWorld.ismastersim then
-        return inst
-    end
 	
 	inst:AddTag("pollenmites")
 	inst:AddTag("flying")
@@ -167,10 +162,16 @@ local function fn()
 	inst:AddTag("avoidonhit")
 	inst:AddTag("no_durability_loss_on_hit")
     inst:AddTag("hostile")
-
+	inst:AddTag("soulless")
     inst:AddTag("burnable") -- needs this to be frozen by flingomatic
 
     inst:AddTag("lastresort") -- for auto attacking
+	
+	inst.entity:SetPristine()
+	
+    if not TheWorld.ismastersim then
+        return inst
+    end
 	
 	inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
 	inst.components.locomotor:EnableGroundSpeedMultiplier(false)
