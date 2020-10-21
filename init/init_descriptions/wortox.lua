@@ -30,12 +30,6 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.CALIFORNIAKING = "I'll slip some in the others' drinks!"
 	--CaliforniaKing
 	
-	--Content Creators
-	DESCRIBE.CCTRINKET_DON = "A book from Don, for this little pawn?"
-	DESCRIBE.CCTRINKET_JAZZY = "It's rather crassly, for something that Jazzy!"
-	DESCRIBE.CCTRINKET_FREDDO = "Freddo? That's a funny name, hyuyu!"		
-	--Content Creators
-	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "I love tempting fate! Hyuyu!"
     DESCRIBE.UNCOMPROMISING_RAT = "You won't run off with my flute again, hm?"
     DESCRIBE.UNCOMPROMISING_RATHOLD = "A portal to the little pranksters' den."
@@ -153,12 +147,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.GIANT_TREE_INFESTED = "What's bugging you?"
 	DESCRIBE.GIANT_BLUEBERRY = "Could I use this like a waterballoon? Hyuyu!"
 	DESCRIBE.STEAMEDHAMS = "This dish has got to be joking."
-    DESCRIBE.BLUEBERRYPANCAKES = "These pancakes have been defused!"
-    DESCRIBE.SIMPSALAD = "Even mortals dislike this!"
-    DESCRIBE.BEEFALOWINGS = "It's not bad, for mortal food."
-    ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I'm as dense as a rock, for I cannot be knocked!"
-    ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "You'll have to catch me to hit me, hyuyu!"
-	DESCRIBE.WIDOWSHEAD = "\"Apex Predator\". That's funny."
+	DESCRIBE.BLUEBERRYPANCAKES = "These pancakes have been defused!"
+	DESCRIBE.SIMPSALAD = "I don't think the mortals like this one too much."
+	DESCRIBE.BEEFALOWINGS = "It's not bad, for mortal food."
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I was light on my feet, now I'm heavy as well!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "Still can't catch me!"
+	DESCRIBE.WIDOWSHEAD = " \"Apex predator\", pshh!"
 	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
@@ -185,3 +179,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
             GENERIC = "It's grown to new heights to win all our fights!",
             ASHLEY = "It's grown to new heights to win all our fights!",
         }
+	DESCRIBE.ANTIHISTAMINE = "Keeps my snout clean!"

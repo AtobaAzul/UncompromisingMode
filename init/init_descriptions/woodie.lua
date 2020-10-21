@@ -30,12 +30,6 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.CALIFORNIAKING = "That better not be what I think it is."
 	--CaliforniaKing
 	
-	--Content Creators
-	DESCRIBE.CCTRINKET_DON = "\"Don's Survival Guide\", eh? That's cute."
-	DESCRIBE.CCTRINKET_JAZZY = "I can get behind some Jazzy tunes, eh?"
-	DESCRIBE.CCTRINKET_FREDDO = "The label says \"Freddo\". Pretty odd for a name, eh?"		
-	--Content Creators
-	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "I'm not sure aboot this..."
     DESCRIBE.UNCOMPROMISING_RAT = "More vermin come to steal my kit!"
     DESCRIBE.UNCOMPROMISING_RATHOLD = "That's where the varments are shackin' up!"
@@ -153,12 +147,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.GIANT_TREE_INFESTED = "Quit hoggin' it to yourselves, hosers!"
 	DESCRIBE.GIANT_BLUEBERRY = "A lot of water in this, eh?"
 	DESCRIBE.STEAMEDHAMS = "Mouth watering hamburgers."
-    DESCRIBE.BLUEBERRYPANCAKES = "It isn't maple syrup, but it'll do."
-    DESCRIBE.SIMPSALAD = "Just a bit of roughage, eh?"
-    DESCRIBE.BEEFALOWINGS = "Hooh, really knocks you down, eh?"
-    ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I'm standin' as stiff as a moose!"
-    ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "I'm not feeling as sturdy."
-	DESCRIBE.WIDOWSHEAD = "It gives me the heebie-jeebies."
+	DESCRIBE.BLUEBERRYPANCAKES = "It ain't maple syrup, but it'll do just nicely."
+	DESCRIBE.SIMPSALAD = "Just a bit of roughage, eh?"
+	DESCRIBE.BEEFALOWINGS = "Shew- that's hot!"
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I'm standin' as stiff as a moose!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "Well, that's over."
+	DESCRIBE.WIDOWSHEAD = "Hmm, not bad!"
 	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
@@ -185,3 +179,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
             GENERIC = "Hm. Yep. Just another day.",
             ASHLEY = "Hm. Yep. Just another day.",
         }
+	DESCRIBE.ANTIHISTAMINE = "It'll clear your nose up come hayfever season."

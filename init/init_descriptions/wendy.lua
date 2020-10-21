@@ -30,12 +30,6 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.CALIFORNIAKING = "What do I have left to lose?"
 	--CaliforniaKing
 	
-	--Content Creators
-	DESCRIBE.CCTRINKET_DON = "\"Don's Survival Guide\"? I can sum it up: Don't fear death."
-	DESCRIBE.CCTRINKET_JAZZY = "A Jazzy instrument to distract you from the inevitable."
-	DESCRIBE.CCTRINKET_FREDDO = "The name \"Freddo\" is on it. That's a peculiar name."	
-	--Content Creators
-	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "Death peers at me from the darkness."
     DESCRIBE.UNCOMPROMISING_RAT = "Wreched daemons wrought to topple the pillars of vanity."
     DESCRIBE.UNCOMPROMISING_RATHOLD = "But one mouth of a den of thieves."
@@ -152,12 +146,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
 	DESCRIBE.GIANT_TREE_INFESTED = "It battles against death."
 	DESCRIBE.GIANT_BLUEBERRY = "Will it explode in my mouth?"
 	DESCRIBE.STEAMEDHAMS = "Old family recipe."
-    DESCRIBE.BLUEBERRYPANCAKES = "Do you want to share, Abigail?"
-    DESCRIBE.SIMPSALAD = "As bland as life itself."
-    DESCRIBE.BEEFALOWINGS = "Several dead animals."
-    ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I've built a resistance to suffering."
-    ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "I'm starting to falter. What a surprise."
-	DESCRIBE.WIDOWSHEAD = "Everything dies."
+	DESCRIBE.BLUEBERRYPANCAKES = "A flavor explosion."
+	DESCRIBE.SIMPSALAD = "This is not the time to fast."
+	DESCRIBE.BEEFALOWINGS = "Would you like to try some, Abigail?"
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "My stance will not falter."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "My stance is faltering."
+	DESCRIBE.WIDOWSHEAD = "This time, the abyss will stare into me."
 	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
@@ -184,3 +178,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
             GENERIC = "Wow... What a big stuffy.",
             ASHLEY = "Wow... What a big stuffy.",
         }
+	DESCRIBE.ANTIHISTAMINE = "I suppose this would clear blocked sinuses."
