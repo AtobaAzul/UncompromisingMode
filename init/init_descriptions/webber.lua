@@ -30,6 +30,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.CALIFORNIAKING = "Surely we've eaten worse."
 	--CaliforniaKing
 	
+	--Content Creators
+	DESCRIBE.CCTRINKET_DON = "\"Don's Survival Guide\". We wish this was readable..."
+	DESCRIBE.CCTRINKET_JAZZY = "Ooh! We love Jazzy music!"
+	DESCRIBE.CCTRINKET_FREDDO = "This weird box says \"Freddo\". That's a funny name!"		
+	--Content Creators
+	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "W-what's that sound? We're scared!"
     DESCRIBE.UNCOMPROMISING_RAT = "Nice fur!"
     DESCRIBE.UNCOMPROMISING_RATHOLD = "It's looking at us! Hey there little guy!"
@@ -146,12 +152,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
 	DESCRIBE.GIANT_TREE_INFESTED = "It looks pretty sick."
 	DESCRIBE.GIANT_BLUEBERRY = "The juice gets everywhere!"
 	DESCRIBE.STEAMEDHAMS = "This is just a hamburger."
-	DESCRIBE.BLUEBERRYPANCAKES = "It's really sweet!"
-	DESCRIBE.SIMPSALAD = "We'll need more than just this."
-	DESCRIBE.BEEFALOWINGS = "We like the crunch of the bat wings!"
-	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "We will not be pushed around!"
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "That's the end of that."
-	DESCRIBE.WIDOWSHEAD = "We could have been friends...."
+    DESCRIBE.BLUEBERRYPANCAKES = "Like Mom's pancakes! ... Sigh..."
+    DESCRIBE.SIMPSALAD = "Blegh."
+    DESCRIBE.BEEFALOWINGS = "We like the crunch!"
+    ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "We won't be pushed around, you bullies!"
+    ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "Eep! Don't throw me!"
+	DESCRIBE.WIDOWSHEAD = "We're sorry..."
 	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL

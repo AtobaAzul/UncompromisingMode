@@ -30,6 +30,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.CALIFORNIAKING = "A challenge in a glass?"
 	--CaliforniaKing
 	
+	--Content Creators
+	DESCRIBE.CCTRINKET_DON = "Who is this \"Don\" author? They must have bountiful knowledge!"
+	DESCRIBE.CCTRINKET_JAZZY = "A tool to provide Jazzy fanfare!"
+	DESCRIBE.CCTRINKET_FREDDO = "A strange box! A written message transcribes \"Freddo\"."		
+	--Content Creators
+	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "A warrior needs to stay alert!"
     DESCRIBE.UNCOMPROMISING_RAT = "And thus cometh a plague upon both our houses!"
     DESCRIBE.UNCOMPROMISING_RATHOLD = "Den of the little beasts!"
@@ -146,12 +152,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
 	DESCRIBE.GIANT_TREE_INFESTED = "A plague is wrought upon it."
 	DESCRIBE.GIANT_BLUEBERRY = "I shalln't be tempted!"
 	DESCRIBE.STEAMEDHAMS = "'Tis obviously grilled!"
-	DESCRIBE.BLUEBERRYPANCAKES = "I will resist!"
-	DESCRIBE.SIMPSALAD = "This is why I eat meat!"
-	DESCRIBE.BEEFALOWINGS = "We sing to the honor of this beefalo!"
-	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I will not be moved!"
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "I've lost connection with the beefalo."
-	DESCRIBE.WIDOWSHEAD = "The head of mine enemy is before me!"
+    DESCRIBE.BLUEBERRYPANCAKES = "A \"Pancake\"? Disgusting! What even IS this?"
+    DESCRIBE.SIMPSALAD = "No."
+    DESCRIBE.BEEFALOWINGS = "We sing to the honor of this beefalo!"
+    ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I will not be moved!"
+    ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "I've lost connection with the beefalo."
+	DESCRIBE.WIDOWSHEAD = "The most glorious crown!"
 	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL

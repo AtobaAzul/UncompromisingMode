@@ -30,6 +30,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.CALIFORNIAKING = "What on earth is that?"
 	--CaliforniaKing
 	
+	--Content Creators
+	DESCRIBE.CCTRINKET_DON = "\"Don's Survival Guide\" huh? I probably don't need it."
+	DESCRIBE.CCTRINKET_JAZZY = "Dunno what this is, but it has the word \"Freddo\" on it."
+	DESCRIBE.CCTRINKET_FREDDO = "The name \"Freddo\" is etched onto it."		
+	--Content Creators
+	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "The fog's rollin' in. What are you up to, Charlie?"
     DESCRIBE.UNCOMPROMISING_RAT = "That's one part of home I was hoping NOT to see again."
     DESCRIBE.UNCOMPROMISING_RATHOLD = "Seems you've been ratted out!"
@@ -148,12 +154,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.GIANT_TREE_INFESTED = "That seems to be where the buggers are comin' from."
 	DESCRIBE.GIANT_BLUEBERRY = "It's packed to the brim with liquid!"
 	DESCRIBE.STEAMEDHAMS = "It's obviously grilled."
-	DESCRIBE.BLUEBERRYPANCAKES = "It was messy, but it was worth it."
-	DESCRIBE.SIMPSALAD = "It's just some roughage."
-	DESCRIBE.BEEFALOWINGS = "That's good eatin' there."
-	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I'm feeling sturdier than usual."
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "Back to work."
-	DESCRIBE.WIDOWSHEAD = "Why does this keep happening!"
+    DESCRIBE.BLUEBERRYPANCAKES = "A good morning to me!"
+    DESCRIBE.SIMPSALAD = "I'll pass."
+    DESCRIBE.BEEFALOWINGS = "That's good eatin'!"
+    ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I'm feeling sturdier than usual."
+    ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "Gotta worry about gettin' flinged around again."
+	DESCRIBE.WIDOWSHEAD = "Not really looking forward to fighting that thing again."
 	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL

@@ -39,7 +39,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	--CaliforniaKing
 	
 	--Content Creators
-	DESCRIBE.CCTRINKET_DON = "I can only make out the words \"Don\" and \"Guide\"."
+	DESCRIBE.CCTRINKET_DON = "\"Don's Survival Guide to...\" I can't read any more."
 	DESCRIBE.CCTRINKET_JAZZY = "Looks pretty jazzy."
 	DESCRIBE.CCTRINKET_FREDDO = "The name \"Freddo\" is etched onto it."		
 	--Content Creators
@@ -188,12 +188,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.GIANT_TREE_INFESTED = "It doesn't look too well."
 	DESCRIBE.GIANT_BLUEBERRY = "This'll be messy, for sure."
 	DESCRIBE.STEAMEDHAMS = "Science says it's a hamburger."
-	DESCRIBE.BLUEBERRYPANCAKES = "Exploding with flavor."
-	DESCRIBE.SIMPSALAD = "It's a rather light meal."
-	DESCRIBE.BEEFALOWINGS = "I'm sure the beefalo didn't mind."
-	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "Never gonna knock me down."
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "My legs are getting flimsy again."
-	ANNOUNCE.WIDOWSHEAD = "It seems to augment my vision."
+    DESCRIBE.BLUEBERRYPANCAKES = "Exploding with flavor."
+    DESCRIBE.SIMPSALAD = "I should've put more in this salad..."
+    DESCRIBE.BEEFALOWINGS = "I'm sure the beefalo didn't mind."
+    ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "You're never gonna knock me down!"
+    ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "My legs are getting flimsy again."
+	DESCRIBE.WIDOWSHEAD = "I can see through the eyes of a giant!"
 	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL

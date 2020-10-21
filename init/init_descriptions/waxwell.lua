@@ -31,6 +31,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.CALIFORNIAKING = "What foul amalgam is this?"
 	--CaliforniaKing
 	
+	--Content Creators
+	DESCRIBE.CCTRINKET_DON = "\"Don's Survival Guide\"? How could he possibly know more about this place than me?"
+	DESCRIBE.CCTRINKET_JAZZY = "I can enjoy some Jazzy music, myself."
+	DESCRIBE.CCTRINKET_FREDDO = "It appears to belong to a Mr... \"Freddo\"?"		
+	--Content Creators
+	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "It's not just Charlie out there, is it?"
     DESCRIBE.UNCOMPROMISING_RAT = "Filthy vermin!"
     DESCRIBE.UNCOMPROMISING_RATHOLD = "I don't recall granting you vermin permission to settle in my world."
@@ -148,12 +154,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
 	DESCRIBE.GIANT_TREE_INFESTED = "It's riddled with vermin."
 	DESCRIBE.GIANT_BLUEBERRY = "This is going to get messy. Sigh."
 	DESCRIBE.STEAMEDHAMS = "They're obviously grilled."
-	DESCRIBE.BLUEBERRYPANCAKES = "It was a mess to make."
-	DESCRIBE.SIMPSALAD = "It's nothing more than a bit of roughage."
-	DESCRIBE.BEEFALOWINGS = "Beefalo in heat."
-	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I may be frail, but you aren't moving me!"
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "I've lost my footing."
-	DESCRIBE.WIDOWSHEAD = "It seems the cortex is still semi-functional."
+    DESCRIBE.BLUEBERRYPANCAKES = "It was a mess to make."
+    DESCRIBE.SIMPSALAD = "This isn't a meal, it's a bowl of leaves!"
+    DESCRIBE.BEEFALOWINGS = "With this amount of spice, I'll be knocked onto my rear."
+    ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I am the king of this world! Nothing can move me!"
+    ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "I've lost my footing."
+	DESCRIBE.WIDOWSHEAD = "If I have to put that on my face, maybe I SHOULD let Charlie get me."
 	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL

@@ -31,6 +31,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.CALIFORNIAKING = "Would be useful if I were suffering from allergies."
 	--CaliforniaKing
 	
+	--Content Creators
+	DESCRIBE.CCTRINKET_DON = "Ah, D. Giani. I've read many books from that author."
+	DESCRIBE.CCTRINKET_JAZZY = "A saxophone, primarily used for Jazzy-type music."
+	DESCRIBE.CCTRINKET_FREDDO = "I'm not sure what this device is. It's labeled \"Freddo\"."		
+	--Content Creators
+	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "This fog makes it hard to view my surroundings."
     DESCRIBE.UNCOMPROMISING_RAT = "Rodentia kleptomanis, and quite the large specimen!"
     DESCRIBE.UNCOMPROMISING_RATHOLD = "One entrance to a no doubt vast tunnel system!"
@@ -147,12 +153,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.GIANT_TREE_INFESTED = "This Sequoioideae is a bit worse for wear."
 	DESCRIBE.GIANT_BLUEBERRY = "I hope that it's no longer volatile."
 	DESCRIBE.STEAMEDHAMS = "I am prepared for an unforgettable luncheon."
-	DESCRIBE.BLUEBERRYPANCAKES = "I believe the juice has been stabilized."
-	DESCRIBE.SIMPSALAD = "It may not be calorie dense, but it is still good for you."
-	DESCRIBE.BEEFALOWINGS = "Not a very posh dish, but good none-the-less."
-	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I'm feeling less displacable."
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "My mass has returned to normal."
-	DESCRIBE.WIDOWSHEAD = "It seems the head is still transferring information..."
+    DESCRIBE.BLUEBERRYPANCAKES = "I believe the juice has been stabilized."
+    DESCRIBE.SIMPSALAD = "It may not be caloric, but it's healthy."
+    DESCRIBE.BEEFALOWINGS = "Not a very posh dish, but still a decent meal regardless."
+    ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I feel less displacable."
+    ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "My mass has returned to normal."
+	DESCRIBE.WIDOWSHEAD = "Fascinating, I can see through the eyes of the arachnid!"
 	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL

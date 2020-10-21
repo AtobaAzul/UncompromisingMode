@@ -30,6 +30,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "I would rather not do that again."
 	DESCRIBE.CALIFORNIAKING = "I don't want to touch this thing again...."
 	--CaliforniaKing
+
+	--Content Creators
+	DESCRIBE.CCTRINKET_DON = "It seems to be a guide book by a Mr. \"Don\"?"
+	DESCRIBE.CCTRINKET_JAZZY = "I'd love to have a restaurant, with Jazzy music playing."
+	DESCRIBE.CCTRINKET_FREDDO = "No clue what this could be. The label says \"Freddo.\""		
+	--Content Creators
 	
     DESCRIBE.UNCOMPROMISING_RAT = "Don't let the filthy little pestes near my kitchen!"
     DESCRIBE.UNCOMPROMISING_RATHOLD = "A trouble trou!"
@@ -146,12 +152,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
 	DESCRIBE.GIANT_TREE_INFESTED = "It seems rather sick."
 	DESCRIBE.GIANT_BLUEBERRY = "Ohoho, I have plenty of ideas for you!"
 	DESCRIBE.STEAMEDHAMS = "Tastes like fast food."
-	DESCRIBE.BLUEBERRYPANCAKES = "Didn't even have to add any sugar to the berries."
-	DESCRIBE.SIMPSALAD = "The simplicity is ammendable, but I'll need more than just this."
-	DESCRIBE.BEEFALOWINGS = "The horn really brings out the heat in the peppers."
-	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I've got the sturdyness of a beefalo!"
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "Back to being knocked around."
-	DESCRIBE.WIDOWSHEAD = "Another head? I wonder what this one will do."
+    DESCRIBE.BLUEBERRYPANCAKES = "I didn't even have to add sugar!"
+    DESCRIBE.SIMPSALAD = "Oh no no no, where's the flavor? We can do better than this!"
+    DESCRIBE.BEEFALOWINGS = "The horn really brings out the heat in the peppers."
+    ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I've got the sturdiness of a beefalo!"
+    ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "Back to being knocked around."
+	DESCRIBE.WIDOWSHEAD = "That wouldn't even fit in a pot."
 	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL

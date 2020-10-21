@@ -30,6 +30,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.CALIFORNIAKING = "It would be better if it were on fire."
 	--CaliforniaKing
 	
+	--Content Creators
+	DESCRIBE.CCTRINKET_DON = "This \"Don\" author seems really knowful."
+	DESCRIBE.CCTRINKET_JAZZY = "It makes some pretty Jazzy music."
+	DESCRIBE.CCTRINKET_FREDDO = "It's labelled \"Freddo\". Tsk, doesn't look like it'd burn."		
+	--Content Creators
+	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "H-hello?"
     DESCRIBE.UNCOMPROMISING_RAT = "Stay away from Bernie!"
     DESCRIBE.UNCOMPROMISING_RATHOLD = "Eugh. Can we just smash it shut?"
@@ -147,12 +153,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
 	DESCRIBE.GIANT_TREE_INFESTED = "Burn the insects out!"
 	DESCRIBE.GIANT_BLUEBERRY = "My jaw is getting in the way!"
 	DESCRIBE.STEAMEDHAMS = "It's a ham sandwich."
-	DESCRIBE.BLUEBERRYPANCAKES = "Oh ho ho! I can't wait to eat you!"
-	DESCRIBE.SIMPSALAD = "All I see is a potential fire."
-	DESCRIBE.BEEFALOWINGS = "It'd even hotter if it was actually on fire."
-	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I'm not getting pushed around any more!"
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "Uh oh, back to being pushed around!"
-	DESCRIBE.WIDOWSHEAD = "Widow no more!"
+    DESCRIBE.BLUEBERRYPANCAKES = "I've never eaten pancakes before. Boy, did I miss out!"
+    DESCRIBE.SIMPSALAD = "Ugh."
+    DESCRIBE.BEEFALOWINGS = "I could eat a dozen!"
+    ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I'm on top of the word! I'm immovable!"
+    ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "I'm back to being pushed around."
+	DESCRIBE.WIDOWSHEAD = "Oh, ew, no! Do you realize how much blood is in that thing?!"
 	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
