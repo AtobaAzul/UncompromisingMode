@@ -21,7 +21,7 @@ local component_post = {
 local prefab_post = {
 	"flower",
 	"butterfly",
-    --"toadstool_cap",
+    --"toadstool_cap", Moved to init_uncompromising_mod.lua
     "yellowamulet",
     "trap_teeth",
 	"beequeen",

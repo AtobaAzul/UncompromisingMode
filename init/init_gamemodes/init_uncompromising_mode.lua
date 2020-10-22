@@ -118,6 +118,7 @@ local require = GLOBAL.require
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("acidrain") == true) then
 		modimport("init/init_uncompromisingshardrpc")
 		modimport("init/init_weather/init_acidmushroom_networking")
+		modimport("postinit/prefabs/toadstool_cap")
 	end
 	
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("snowstorms") == true or
