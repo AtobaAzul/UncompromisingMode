@@ -27,7 +27,7 @@ AddTile(
 
 
 
-if GetModConfigData("caveless") == false then
+if GetModConfigData("caved") == false then
 
     AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "forest" then
