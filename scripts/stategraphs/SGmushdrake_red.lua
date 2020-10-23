@@ -129,8 +129,6 @@ local states=
 		tags = {"busy", "spinning"},
 
 		onenter = function(inst)
-			inst.DynamicShadow:SetSize(2.5,1.25)
-			inst.components.sizetweener:StartTween(1.55, 2)
 
 			inst.AnimState:PlayAnimation("atk_loop")
 			inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/mossling/spin", "spinLoop")
@@ -139,11 +137,14 @@ local states=
 			fx.entity:SetParent(inst.entity)
 			fx.Transform:SetPosition(0,0.1,0)
 			inst.components.burnable:Extinguish()
-			inst.components.locomotor.walkspeed = TUNING.MOOSE_WALK_SPEED*2
+			inst.components.locomotor.walkspeed = TUNING.MOOSE_WALK_SPEED
 		end,
 
 		onupdate = function(inst)
 			if inst.sg.statemem.move then
+				if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
+			    inst:ForceFacePoint(inst.components.combat.target:GetPosition())
+				end
 				inst.components.locomotor:WalkForward()
 			else
 				inst.components.locomotor:StopMoving()
