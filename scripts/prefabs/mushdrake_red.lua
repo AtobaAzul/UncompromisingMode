@@ -115,8 +115,8 @@ local function fn()
 
     ------------------------------------------
 
-    inst:AddComponent("sizetweener")
-	inst.components.sizetweener:StartTween(1.55, 2)
+    ---inst:AddComponent("sizetweener")
+	---inst.components.sizetweener:StartTween(1.55, 2)
     ------------------------------------------
 
     --inst:AddComponent("sleeper")
