@@ -159,9 +159,12 @@ local states=
 
 		timeline=
 		{
-			TimeEvent(0*FRAMES, function(inst) inst.components.combat:DoAttack() end),
-			TimeEvent(35*FRAMES, function(inst) inst.components.combat:DoAttack() end),
-			TimeEvent(70*FRAMES, function(inst) inst.components.combat:DoAttack() end),
+			TimeEvent(0*FRAMES, function(inst) SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition()) 
+			inst.components.combat:DoAttack() end),
+			TimeEvent(35*FRAMES, function(inst) SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition()) 
+			inst.components.combat:DoAttack() end),
+			TimeEvent(70*FRAMES, function(inst) SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition()) 
+			inst.components.combat:DoAttack() end),
 		},
 
 		events=
