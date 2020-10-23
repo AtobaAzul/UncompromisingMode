@@ -72,7 +72,7 @@ configuration_options =
 -- Core Gameplay --
 ------------------------------
     Header("Core Gameplay"),
-    BinaryConfig("caveless", "[IMPORTANT] Cave Config", "Switches some things around so players who can't run Caves can still enjoy the game. ENABLE IF CAVES ARE ENABLED!", true),
+    BinaryConfig("caved", "[IMPORTANT] Cave Config", "Switches some things around so players who can't run Caves can still enjoy the game. ENABLE IF CAVES ARE ENABLED!", true),
 	{
 		name = "rne chance",
 		label = "RNE Chance",

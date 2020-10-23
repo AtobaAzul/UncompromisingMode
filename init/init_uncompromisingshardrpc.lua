@@ -18,6 +18,10 @@ To view a copy of the RECEX SHARED SOURCE LICENSE please refer to
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
+local SHARD_LIST = {}
+local SHARD_RPC_HANDLERS = {}
+local SHARD_RPC = {}
+
 if rawget(_G, "AddShardRPCHandler") then
     --Uncompromising Survival Shard RPC or USSR
     USSR = {
@@ -32,14 +36,10 @@ if rawget(_G, "AddShardRPCHandler") then
 end
 
 env.AddPrefabPostInitAny(function(inst)
-    if TheWorld and TheWorld.shard == inst then
+    if TheWorld ~= nil and TheWorld and TheWorld.shard == inst then
         inst:AddComponent("uncompromising_shard_report")
     end
 end)
-
-local SHARD_LIST = {}
-local SHARD_RPC_HANDLERS = {}
-local SHARD_RPC = {}
 
 local function __index_lower(t, k)
     return rawget(t, string.lower(k))

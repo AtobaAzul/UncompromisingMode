@@ -4,6 +4,25 @@ GLOBAL.setfenv(1, GLOBAL)
 ---	The Hunger Value Of Eaten Food Is Compared To The Players Max Hunger. Min 1, Max 6
 
 env.AddPlayerPostInit(function(inst)
+--[[	inst:ListenForEvent("hungerdelta", function(inst, data)
+	local myvalue = data.oldpercent * inst.components.hunger.max
+	local myvalueover = myvalue + data.truedelta
+	print(myvalue)
+	print(myvalueover)
+	print(data.truedelta)
+	
+	
+		if myvalueover > inst.components.hunger.max then	
+			print("I won!")
+		end
+	end)]]
+
+
+
+
+
+
+
 	inst:ListenForEvent("oneat", function(inst, data)
 		if inst:HasTag("vetcurse") and data.food ~= nil and data.food.components.edible ~= nil and data.food.components.edible.hungervalue ~= nil then
 			local overstuffed = inst.components.hunger.current + data.food.components.edible.hungervalue
@@ -30,3 +49,25 @@ env.AddPlayerPostInit(function(inst)
 		end
 	end)
 end)
+--[[
+env.AddComponentPostInit("hunger", function(self)
+	local _OldDoDelta = self.DoDelta
+	
+	function self:DoDelta(delta, overtime, ignore_invincible)
+		if self.redirect ~= nil then
+			self.redirect(self.inst, delta, overtime)
+			return
+		end
+
+		if not ignore_invincible and self.inst.components.health and self.inst.components.health.invincible or self.inst.is_teleporting then
+			return
+		end 
+
+		local old = self.current
+		self.current = math.clamp(self.current + delta, 0, self.max)
+
+		self.inst:PushEvent("overstuff", { oldpercent = old / self.max, newpercent = self.current / self.max, overtime = overtime, delta2 = self.current-old, delta = delta })
+
+		return _OldDoDelta(delta, overtime, ignore_invincible)
+	end
+end)]]

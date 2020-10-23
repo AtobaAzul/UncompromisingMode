@@ -215,6 +215,7 @@ local function fn()
     inst:AddTag("hostile")
     inst:AddTag("epic")
     inst:AddTag("largecreature")
+    inst:AddTag("hoodedwidow")
     --inst:AddTag("spiderqueen")  --She left this faction
     --inst:AddTag("spider")
 
