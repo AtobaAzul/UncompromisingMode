@@ -275,6 +275,7 @@ Assets = {
 	Asset( "ATLAS", "images/map_icons/snapplant_map.xml"),
 	Asset( "IMAGE", "images/map_icons/veteranshrine_map.tex"),
 	Asset( "ATLAS", "images/map_icons/veteranshrine_map.xml"),
+	Asset("ANIM", "anim/mushdrake_red.zip"),
 	--Map Icons End--
 
 	Asset( "IMAGE", "bigportraits/willow.tex" ),

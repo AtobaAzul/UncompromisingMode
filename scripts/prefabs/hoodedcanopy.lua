@@ -8,6 +8,9 @@ local function Thin(inst)
  if #(TheSim:FindEntities(pt.x, pt.y, pt.z, 9, { "canopy" })) > 4 then
  inst:Remove()
  end
+ if #(TheSim:FindEntities(pt.x, pt.y, pt.z, 0.3, { "canopy" })) > 1 then
+ inst:Remove()
+ end
 end
 
 local function fn(Sim)
