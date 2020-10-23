@@ -179,3 +179,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WENDY.DESCRIBE
             ASHLEY = "Wow... What a big stuffy.",
         }
 	DESCRIBE.ANTIHISTAMINE = "I suppose this would clear blocked sinuses."
+    ANNOUNCE.CURSED_ITEM_EQUIP = "It burns at the touch."
+	DESCRIBE.SCREECHER_TRINKET = "The stench of death lingers here."

@@ -156,4 +156,5 @@ return {
 	"hooded_mushtree",
 	"hooded_forest_rubble",
 	"rnelevitator",
+	"screecher_trinket",
 }

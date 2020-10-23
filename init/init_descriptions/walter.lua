@@ -180,3 +180,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
             ASHLEY = "If you play with fire, you'll turn to Ash-ley. Heh...",
         }
 	DESCRIBE.ANTIHISTAMINE = "It'll keep my allergies from flaring up!"
+    ANNOUNCE.CURSED_ITEM_EQUIP = "OWWW! First aid please!"
+	DESCRIBE.SCREECHER_TRINKET = "Our Scout Masters told us to keep away from symbols like this."

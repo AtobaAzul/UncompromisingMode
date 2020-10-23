@@ -180,3 +180,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
             ASHLEY = "Hm. Yep. Just another day.",
         }
 	DESCRIBE.ANTIHISTAMINE = "It'll clear your nose up come hayfever season."
+    ANNOUNCE.CURSED_ITEM_EQUIP = "Ouch, this ones a jumper!"
+	DESCRIBE.SCREECHER_TRINKET = "Symbols like these are what got me in trouble in the first place."

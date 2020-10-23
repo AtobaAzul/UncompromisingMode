@@ -50,6 +50,8 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/critterlab_real.tex"),
 	Asset("ATLAS", "images/inventoryimages/bloomershot.xml"),
 	Asset("IMAGE", "images/inventoryimages/bloomershot.tex"),
+	Asset("ATLAS", "images/inventoryimages/screecher_trinket.xml"),
+	Asset("IMAGE", "images/inventoryimages/screecher_trinket.tex"),
 	
 	Asset("ANIM", "anim/geyser.zip"),
 	Asset("ANIM", "anim/lava_vomit.zip"),
@@ -169,6 +171,7 @@ Assets = {
 	Asset("ANIM", "anim/bat_vamp_build.zip"),
 	Asset("ANIM", "anim/bat_vamp_shadow.zip"),
 	Asset("ANIM", "anim/berniebox.zip"),
+	Asset("ANIM", "anim/screecher_trinket.zip"),
 	
 	Asset("IMAGE", "images/inventoryimages/zaspberryparfait.tex"),
 	Asset("ATLAS", "images/inventoryimages/zaspberryparfait.xml"),

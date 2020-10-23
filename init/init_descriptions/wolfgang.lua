@@ -180,3 +180,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.DESCRIBE
             ASHLEY = "Oh no! Wolfgang has shrunken!",
         }
 	DESCRIBE.ANTIHISTAMINE = "Good for sneeze time."
+    ANNOUNCE.CURSED_ITEM_EQUIP = "The harder Wolfgang squeeze, the more it hurts!"
+	DESCRIBE.SCREECHER_TRINKET = "Ah! Looks scary!"

@@ -179,3 +179,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
             ASHLEY = "Tres géant!",
         }
 	DESCRIBE.ANTIHISTAMINE = "I hate sneezing near food, this will help."
+    ANNOUNCE.CURSED_ITEM_EQUIP = "My hands been sizzled!"
+	DESCRIBE.SCREECHER_TRINKET = "Something dark stirs."

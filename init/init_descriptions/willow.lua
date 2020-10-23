@@ -180,3 +180,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WILLOW.DESCRIBE
             ASHLEY = "GET'EM, ASHLEY!!",
         }
 	DESCRIBE.ANTIHISTAMINE = "It'll clear my snot."
+    ANNOUNCE.CURSED_ITEM_EQUIP = "OUCH! Is that what burning feels like?"
+	DESCRIBE.SCREECHER_TRINKET = "I... I don't think I should burn this."

@@ -179,3 +179,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WEBBER.DESCRIBE
             ASHLEY = "It's creepy and cute at the same time!!",
         }
 	DESCRIBE.ANTIHISTAMINE = "It stops us from sneezing! We're not sure how, but it does!"
+    ANNOUNCE.CURSED_ITEM_EQUIP = "Ouchies!"
+	DESCRIBE.SCREECHER_TRINKET = "I don't like it."

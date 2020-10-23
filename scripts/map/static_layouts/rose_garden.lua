@@ -172,7 +172,7 @@ return {
         },
         {
           name = "",
-          type = "nightmarefuel",
+          type = "screecher_trinket",
           shape = "rectangle",
           x = 130,
           y = 130,

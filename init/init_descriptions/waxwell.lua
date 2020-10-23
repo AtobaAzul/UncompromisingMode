@@ -181,6 +181,8 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WAXWELL.DESCRIBE
             ASHLEY = "How truly unnerving.",
         }
 	DESCRIBE.ANTIHISTAMINE = "It'll help keep allergies down."
+    ANNOUNCE.CURSED_ITEM_EQUIP = "It seems I've lost my touch!"
+	DESCRIBE.SCREECHER_TRINKET = "It came from someplace far away."
 	
 	ANNOUNCE.ANNOUNCE_NOSANITY = "I have the worst headache!"
 	ANNOUNCE.ANNOUNCE_NOFUEL = "I need some nightmare fuel."

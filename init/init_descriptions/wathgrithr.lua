@@ -179,3 +179,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.DESCRIBE
             ASHLEY = "The beast hath been imbued with a fighting spirit!",
         }
 	DESCRIBE.ANTIHISTAMINE = "It shall keep mine nose safe!"
+    ANNOUNCE.CURSED_ITEM_EQUIP = "This tool fights back!"
+	DESCRIBE.SCREECHER_TRINKET = "A cursed symbol, no doubt!"

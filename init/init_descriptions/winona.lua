@@ -181,3 +181,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
             ASHLEY = "That girl knows how to put on a show.",
         }
 	DESCRIBE.ANTIHISTAMINE = "It'll help my lungs stay clean."
+    ANNOUNCE.CURSED_ITEM_EQUIP = "Seems like safety gloves aren't enough!"
+	DESCRIBE.SCREECHER_TRINKET = "What practical use does it have, other than being creepy?"

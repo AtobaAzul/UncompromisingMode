@@ -97,12 +97,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 		STUFFED = "I'm full!",
 		OVERSTUFFED = "Oooh... I shouldn't eat more!",
     }
-    ANNOUNCE.CURSED_ITEM_EQUIP =
-	{
-		"It burns!",
-		"It's cursed!",
-		"My hand!",
-    }
+    ANNOUNCE.CURSED_ITEM_EQUIP = "Ow, my hand!"
+	DESCRIBE.SCREECHER_TRINKET = "Lets investigate further."
 	
 	DESCRIBE.SAND = "A handy pile of pocket sand."
 	DESCRIBE.SANDHILL = "You better stay out of my shoes."

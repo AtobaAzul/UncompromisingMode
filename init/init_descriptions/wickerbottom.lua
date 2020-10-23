@@ -185,3 +185,5 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
             GENERIC = "I cannot concentrate under these conditions!",
         }
 	DESCRIBE.ANTIHISTAMINE = "I believe this has antihistamine properties."
+    ANNOUNCE.CURSED_ITEM_EQUIP = "It seems a cursed power lingers here."
+	DESCRIBE.SCREECHER_TRINKET = "A pagan symbol, perhaps?"

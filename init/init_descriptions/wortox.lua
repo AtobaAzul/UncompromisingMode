@@ -180,3 +180,5 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
             ASHLEY = "It's grown to new heights to win all our fights!",
         }
 	DESCRIBE.ANTIHISTAMINE = "Keeps my snout clean!"
+    ANNOUNCE.CURSED_ITEM_EQUIP = "It scorched my paw! Is this some kind of practical joke?"
+	DESCRIBE.SCREECHER_TRINKET = "And just what dimension are you from, friend?"
