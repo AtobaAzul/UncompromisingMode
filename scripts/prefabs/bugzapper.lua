@@ -135,7 +135,7 @@ local function onattack(inst, attacker, target)
 			target.components.health:DoDelta(-30)
 		end
 		
-		if target:HasTag("spider") and not target.components.health:IsDead() then
+		if (target:HasTag("spider") or target:HasTag("hoodedwidow")) and not target.components.health:IsDead() then
 			target.components.health:DoDelta(-15)
 		end
     end

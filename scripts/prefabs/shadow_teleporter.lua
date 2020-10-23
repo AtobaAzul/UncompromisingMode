@@ -117,7 +117,9 @@ local function teleport_end(teleportee, locpos)
     if preventburning then
         teleportee.components.burnable.burning = true
     end
-    TheWorld:PushEvent("ms_sendlightningstrike", locpos)
+		local fx = SpawnPrefab("lightning")
+		fx.Transform:SetPosition(teleportee.Transform:GetWorldPosition())
+    --TheWorld:PushEvent("ms_sendlightningstrike", locpos)
     if preventburning then
         teleportee.components.burnable.burning = false
     end
