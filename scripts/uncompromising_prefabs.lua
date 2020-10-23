@@ -155,4 +155,5 @@ return {
 	"pinepile",
 	"hooded_mushtree",
 	"hooded_forest_rubble",
+	"rnelevitator",
 }
