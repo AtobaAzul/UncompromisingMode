@@ -261,6 +261,16 @@ Assets = {
     Asset("ANIM", "anim/beefalowings.zip"),
 	Asset("ATLAS", "images/inventoryimages/beefalowings.xml"),
 	Asset("IMAGE", "images/inventoryimages/beefalowings.tex"),
+	Asset("ANIM", "anim/mushdrake_red.zip"),
+	Asset("ANIM", "anim/snowcone.zip"),
+	Asset("ATLAS", "images/inventoryimages/snowcone.xml"),
+	Asset("IMAGE", "images/inventoryimages/snowcone.tex"),
+	
+	
+	
+	
+	
+	
 	--Map Icons Start--
 	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),
 	Asset( "ATLAS", "images/map_icons/riceplant.xml" ),
@@ -278,8 +288,9 @@ Assets = {
 	Asset( "ATLAS", "images/map_icons/snapplant_map.xml"),
 	Asset( "IMAGE", "images/map_icons/veteranshrine_map.tex"),
 	Asset( "ATLAS", "images/map_icons/veteranshrine_map.xml"),
-	Asset("ANIM", "anim/mushdrake_red.zip"),
 	--Map Icons End--
+
+
 
 	Asset( "IMAGE", "bigportraits/willow.tex" ),
     Asset( "ATLAS", "bigportraits/willow.xml" ),

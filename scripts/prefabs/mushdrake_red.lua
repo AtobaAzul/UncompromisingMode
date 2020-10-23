@@ -107,7 +107,7 @@ local function fn()
     inst.components.combat:SetDefaultDamage(TUNING.MOSSLING_DAMAGE)
     inst.components.combat.playerdamagepercent = .5
     inst.components.combat:SetRange(TUNING.MOSSLING_ATTACK_RANGE*3,TUNING.MOSSLING_ATTACK_RANGE)
-    inst.components.combat.hiteffectsymbol = "mossling_body"
+    inst.components.combat.hiteffectsymbol = "body-0"
     inst.components.combat:SetAttackPeriod(TUNING.MOSSLING_ATTACK_PERIOD)
     inst.components.combat:SetRetargetFunction(1.5, RetargetFn)
     inst.components.combat:SetKeepTargetFunction(KeepTargetFn)

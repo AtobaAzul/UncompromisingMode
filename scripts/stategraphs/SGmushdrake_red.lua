@@ -6,7 +6,6 @@ local actionhandlers =
 
 local events=
 {
-	CommonHandlers.OnSleep(),
 	CommonHandlers.OnFreeze(),
 	EventHandler("doattack", function(inst)
 		if inst.components.health and not inst.components.health:IsDead()
@@ -221,21 +220,6 @@ CommonStates.AddCombatStates(states,
 	{
 		TimeEvent(FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/mossling/death") end)
 	},
-})
-CommonStates.AddSleepStates(states,
-{
-	starttimeline =
-	{
-		TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/mossling/yawn") end)
-	},
-	sleeptimeline =
-	{
-		TimeEvent(25*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/mossling/sleep") end)
-	},
-	waketimeline =
-	{
-		TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/mossling/hatch") end)
-	}
 })
 
 return StateGraph("mushdrake_red", states, events, "idle", actionhandlers)

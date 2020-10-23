@@ -158,4 +158,5 @@ return {
 	"rnelevitator",
 	"screecher_trinket",
 	"mushdrake_red",
+	"snowcone",
 }

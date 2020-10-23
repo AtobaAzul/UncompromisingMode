@@ -455,3 +455,15 @@ local beefalowings =
 }
 AddCookerRecipe("cookpot", beefalowings)
 AddCookerRecipe("portablecookpot", beefalowings)
+local snowcone =
+{
+    name = "snowcone",
+    test = function(cooker, names, tags) return (names.ice and names.ice > 1) or (names.ice and names.twigs) end,
+
+    priority = 0.5,
+    weight = 0.5,
+    perishtime = nil,
+    cooktime = 1,
+}
+AddCookerRecipe("cookpot", snowcone)
+AddCookerRecipe("portablecookpot", snowcone)
