@@ -303,7 +303,7 @@ local function snowpilefn(Sim)
 	
 	inst.entity:SetPristine()
 	
-	MakeObstaclePhysics(inst, 2, 0)
+	MakeObstaclePhysics(inst, 2.5, 0)
 	
 	inst.Transform:SetScale(1.5, 1.5, 1.5)
 	

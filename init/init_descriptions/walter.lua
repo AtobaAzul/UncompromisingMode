@@ -30,12 +30,6 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.CALIFORNIAKING = "I'd dare Wortox to finish the whole thing!"
 	--CaliforniaKing
 	
-	--Content Creators
-	DESCRIBE.CCTRINKET_DON = "\"Don's Survival Guide\"? I don't need a survival guide!"
-	DESCRIBE.CCTRINKET_JAZZY = "Hey Woby, look at this Jazzy saxophone!"
-	DESCRIBE.CCTRINKET_FREDDO = "What's this weird box? Why is the name \"Freddo\" on it?"		
-	--Content Creators
-	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "ooOOOOoo, it's getting VERY spooky now!"
     DESCRIBE.UNCOMPROMISING_RAT = "I'd share, but they seem more interested in just TAKING our stuff."
     DESCRIBE.UNCOMPROMISING_RATHOLD = "A Pine Tree Pioneer never enters a rat den head first!"
@@ -153,12 +147,12 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.GIANT_TREE_INFESTED = "Get out'a there!"
 	DESCRIBE.GIANT_BLUEBERRY = "Good thing a Pinetree Pioneer's outfit is resistant to water!"
 	DESCRIBE.STEAMEDHAMS = "I'm ready for an unforgettable luncheon!"
-    DESCRIBE.BLUEBERRYPANCAKES = "Ah, sweet eats!"
-    DESCRIBE.SIMPSALAD = "A Pinetree Pioneer always eats his greens! Or in this case, purples?"
-    DESCRIBE.BEEFALOWINGS = "Wow, that's spicy!"
-    ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I'm planting my feet!"
-    ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "I've lost my balance again!"
-	DESCRIBE.WIDOWSHEAD = "Woby, it's me, calm down!"
+	DESCRIBE.BLUEBERRYPANCAKES = "Ah, sweet eats!"
+	DESCRIBE.SIMPSALAD = "A Pinetree Pioneer always eats his greens! Er purples...."
+	DESCRIBE.BEEFALOWINGS = "Haven't had hot wings in ages!"
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I'm planting my feet!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "I've lost my balance again!"
+	DESCRIBE.WIDOWSHEAD = "Don't worry Woby, it's me!"
 	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
@@ -185,3 +179,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
             GENERIC = "If you play with fire, you're gonna get Bernie'd. Heh...",
             ASHLEY = "If you play with fire, you'll turn to Ash-ley. Heh...",
         }
+	DESCRIBE.ANTIHISTAMINE = "It'll keep my allergies from flaring up!"

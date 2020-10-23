@@ -83,6 +83,12 @@ local function nodebrisdmg(inst, amount, overtime, cause, ignore_invincible, aff
     return afflicter ~= nil and afflicter:HasTag("quakedebris")
 end
 
+local function DisappearShadow(inst)
+	if ThePlayer then
+	    ThePlayer.waxwellshadow = nil
+    end	
+end
+
 local function fn()
 	local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
@@ -165,6 +171,15 @@ local function fn()
 	inst:SetBrain(brain)
 	inst:SetStateGraph("SGold_shadowwaxwell")
 
+    inst:DoTaskInTime(0, function()	
+		inst:DoPeriodicTask(0.02, function()
+			if ThePlayer then
+			    ThePlayer.waxwellshadow = inst
+            end			
+		end)
+	end)
+	inst:ListenForEvent("onremove", DisappearShadow)
+	
 	return inst
 end
 

@@ -15,3 +15,19 @@ end)
 USSR.AddShardRPCHandler("UncompromisingSurvival", "AcidMushroomsTargetFinished", function(shard_id, data)
     GLOBAL.TheWorld:PushEvent("master_acidmushroomsfinished", data)
 end)
+--[[
+AddShardModRPCHandler("UncompromisingSurvival", "AcidMushroomsUpdate", function(shard_id, data)
+    GLOBAL.TheWorld:PushEvent("acidmushroomsdirty", {shard_id = shard_id, uuid = data.uuid, targets = data.targets})
+end)
+
+AddShardModRPCHandler("UncompromisingSurvival", "TestAcidMushroomPlayerValidity", function(shard_id)
+    GLOBAL.TheWorld:PushEvent("slave_acidmushrooms_testplayervalidity", shard_id)
+end)
+
+AddShardModRPCHandler("UncompromisingSurvival", "ReportAcidMushroomPlayerValidity", function(shard_id, data)
+    GLOBAL.TheWorld:PushEvent("master_acidmushrooms_reportplayervalidity", {shard_id = GLOBAL.tonumber(shard_id), players = data})
+end)
+
+AddShardModRPCHandler("UncompromisingSurvival", "AcidMushroomsTargetFinished", function(shard_id, data)
+    GLOBAL.TheWorld:PushEvent("master_acidmushroomsfinished", data)
+end)]]

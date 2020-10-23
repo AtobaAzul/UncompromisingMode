@@ -13,6 +13,127 @@ local assets =
 	Asset("SOUND", "sound/spider.fsb"),
 }
 
+SetSharedLootTable('webbedcreature_deer',
+{
+    {"meat",    1.00},
+    {"meat",    0.5},
+    {"boneshard",    1.00},
+    {"boneshard",    0.5},
+    {"bluegem",    0.5},
+    {"redgem",    0.5},
+})
+
+SetSharedLootTable('webbedcreature_beefalo',
+{
+    {"meat",    1.00},
+    {"meat",    1.00},
+    {"beefalowool",    1.00},
+    {"beefalowool",    1.00},
+    {"beefalowool",    0.5},
+    {"horn",    0.5},
+    {"poop",    0.5},
+    {"poop",    0.5},
+    {"poop",    0.5},
+})
+
+SetSharedLootTable('webbedcreature_mossling',
+{
+    {"meat",    1.00},
+    {"drumstick",    1.00},
+    {"goose_feather",    1.00},
+    {"goose_feather",    1.00},
+})
+
+SetSharedLootTable('webbedcreature_pigman',
+{
+    {"meat",    1.00},
+    {"pigskin",    1.00},
+    {"tophat",    1.00},
+})
+
+SetSharedLootTable('webbedcreature_bunnyman',
+{
+    {"meat",    1.00},
+    {"meat",    0.5},
+    {"carrot",    1.00},
+    {"carrot",    1.00},
+    {"manrabbit_tail",    1.00},
+    {"manrabbit_tail",    0.5},
+})
+
+SetSharedLootTable('webbedcreature_koalefant_summer',
+{
+    {"meat",    1.00},
+    {"meat",    1.00},
+    {"meat",    1.00},
+    {"meat",    1.00},
+    {"poop",    1.00},
+    {"poop",    0.5},
+    {"phlegm",    0.5},
+})
+
+SetSharedLootTable('webbedcreature_little_walrus',
+{
+    {"meat",    1.00},
+    {"earmuffshat",    1.00},
+    {"bluegem",    1.00},
+})
+
+SetSharedLootTable('webbedcreature_tallbird',
+{
+    {"meat",    1.00},
+    {"smallmeat",    0.5},
+    {"tallbirdegg",    1.00},
+    {"cutgrass",    1.00},
+    {"cutgrass",    0.5},
+    {"twigs",    1.00},
+    {"twigs",    0.5},
+})
+
+SetSharedLootTable('webbedcreature_warg',
+{
+    {"monstermeat",    1.00},
+    {"monstersmallmeat",    0.5},
+    {"houndstooth",    1.00},
+    {"houndstooth",    0.5},
+    {"boneshard",    1.00},
+    {"boneshard",    0.5},
+    {"bluegem",    0.5},
+    {"redgem",    0.5},
+})
+
+SetSharedLootTable('webbedcreature_krampus',
+{
+    {"monstermeat",    1.00},
+    {"monstersmallmeat",    0.5},
+    {"charcoal",    1.00},
+    {"charcoal",    0.5},
+    {"boneshard",    1.00},
+    {"krampus_sack",    0.05},
+    {"bluegem",    0.5},
+    {"redgem",    0.5},
+})
+
+SetSharedLootTable('webbedcreature_walrus',
+{
+    {"meat",    1.00},
+    {"meat",    1.00},
+    {"blowdart_pipe",    0.5},
+})
+
+SetSharedLootTable('webbedcreature_bishop',
+{
+    {"trinket_6",    1.00},
+})
+
+SetSharedLootTable('webbedcreature_spat',
+{
+    {"meat",    1.00},
+    {"meat",    0.5},
+    {"steelwool",    1.00},
+    {"steelwool",    0.5},
+    {"phlegm",    1.00},
+})
 
 local function SetStage(inst, stage)
 	if stage <= 3 then
@@ -32,9 +153,6 @@ local function SetSmall(inst)
     	thaw="frozen_loop_pst_small",
     }
     SetStage(inst, 1)
-
-
-
 end
 
 
@@ -71,46 +189,119 @@ local function OnKilled(inst)
 	if inst.size ~= nil then
 		if inst.size == 1 then
 		creature = "deer"
+		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("meat",    0.5)
+		inst.components.lootdropper:AddChanceLoot("boneshard",    1.00)
+		inst.components.lootdropper:AddChanceLoot("boneshard",    0.5)
+		inst.components.lootdropper:AddChanceLoot("bluegem",    0.5)
+		inst.components.lootdropper:AddChanceLoot("redgem",    0.5)
 		end
 		if inst.size == 2 then
 		creature = "beefalo"
+		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("beefalowool",    1.00)
+		inst.components.lootdropper:AddChanceLoot("beefalowool",    1.00)
+		inst.components.lootdropper:AddChanceLoot("beefalowool",    0.5)
+		inst.components.lootdropper:AddChanceLoot("horn",    0.5)
+		inst.components.lootdropper:AddChanceLoot("poop",    0.5)
 		end
 		if inst.size == 3 then
 		creature = "mossling"
+		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("drumstick",    1.00)
+		inst.components.lootdropper:AddChanceLoot("goose_feather",    1.00)
+		inst.components.lootdropper:AddChanceLoot("goose_feather",    1.00)
 		end
 		if inst.size == 4 then
 		creature = "pigman"
+		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("pigskin",    1.00)
+		inst.components.lootdropper:AddChanceLoot("tophat",    1.00)
 		end
 		if inst.size == 5 then
 		creature = "bunnyman"
+		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("carrot",    1.00)
+		inst.components.lootdropper:AddChanceLoot("carrot",    1.00)
+		inst.components.lootdropper:AddChanceLoot("manrabbit_tail",    1.00)
+		inst.components.lootdropper:AddChanceLoot("manrabbit_tail",    0.5)
 		end
 		if inst.size == 6 then
 		creature = "koalefant_summer"
+		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("poop",    1.00)
+		inst.components.lootdropper:AddChanceLoot("poop",    0.5)
+		inst.components.lootdropper:AddChanceLoot("phlegm",    0.5)
 		end
 		if inst.size == 7 then
 		creature = "little_walrus"
+		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("earmuffshat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("bluegem",    1.00)
 		end
 		if inst.size == 8 then
 		creature = "tallbird"
+		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("smallmeat",    0.5)
+		inst.components.lootdropper:AddChanceLoot("tallbirdegg",    1.00)
+		inst.components.lootdropper:AddChanceLoot("cutgrass",    1.00)
+		inst.components.lootdropper:AddChanceLoot("cutgrass",    0.5)
+		inst.components.lootdropper:AddChanceLoot("twigs",    1.00)
+		inst.components.lootdropper:AddChanceLoot("twigs",    0.5)
 		end
 		if inst.size == 9 then
 		creature = "spiderqueen"
 		end
 		if inst.size == 10 then
 		creature = "warg"
+		inst.components.lootdropper:AddChanceLoot("monstermeat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("monstersmallmeat",    0.5)
+		inst.components.lootdropper:AddChanceLoot("houndstooth",    1.00)
+		inst.components.lootdropper:AddChanceLoot("houndstooth",    0.5)
+		inst.components.lootdropper:AddChanceLoot("boneshard",    1.00)
+		inst.components.lootdropper:AddChanceLoot("boneshard",    0.5)
+		inst.components.lootdropper:AddChanceLoot("bluegem",    0.5)
+		inst.components.lootdropper:AddChanceLoot("redgem",    0.5)
 		end
 		if inst.size == 11 then
 		creature = "krampus"
+		inst.components.lootdropper:AddChanceLoot("monstermeat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("monstersmallmeat",    0.5)
+		inst.components.lootdropper:AddChanceLoot("charcoal",    1.00)
+		inst.components.lootdropper:AddChanceLoot("charcoal",    0.5)
+		inst.components.lootdropper:AddChanceLoot("boneshard",    1.00)
+		inst.components.lootdropper:AddChanceLoot("krampus_sack",    0.05)
+		inst.components.lootdropper:AddChanceLoot("bluegem",    0.5)
+		inst.components.lootdropper:AddChanceLoot("redgem",    0.5)
 		end
 		if inst.size == 12 then
 		creature = "walrus"
+		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("meat",   0.5)
+		inst.components.lootdropper:AddChanceLoot("blowdart_pipe",    0.5)
 		end
 		if inst.size == 13 then
-		creature = "knight"
+		creature = "bishop"
+		inst.components.lootdropper:AddChanceLoot("trinket_6",    1.00)
 		end
 		if inst.size == 14 then
 		creature = "spat"
+		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("meat",    0.5)
+		inst.components.lootdropper:AddChanceLoot("steelwool",    1.00)
+		inst.components.lootdropper:AddChanceLoot("steelwool",    0.5)
+		inst.components.lootdropper:AddChanceLoot("phlegm",    1.00)
 		end	
+	
+		inst.components.lootdropper:DropLoot()
+	--[[if creature ~= nil and not creature == "spiderqueen" then
+		inst.components.lootdropper:SetChanceLootTable('webbedcreature_'..creature)
+	end]]
+	
     local deadcreature = SpawnPrefab(creature)
 	deadcreature.Transform:SetPosition(x, y, z)
 	if creature == "spiderqueen" then
@@ -220,13 +411,15 @@ local function fn()
 		inst.AnimState:SetBank("spider_cocoon")
 		inst.AnimState:SetBuild("spider_cocoon")
 		inst.AnimState:PlayAnimation("cocoon_small", true)
+		
+		inst:AddTag("structure")
+		inst:AddTag("webbedcreature")
+		
 		inst.entity:SetPristine()
 
 		if not TheWorld.ismastersim then
 			return inst
 		end
-		inst:AddTag("structure")
-		inst:AddTag("webbedcreature")
 
 		-------------------
 		inst:AddComponent("health")
@@ -236,6 +429,9 @@ local function fn()
 		inst:AddComponent("combat")       
         inst.components.combat:SetOnHit(Regen)
 		inst:ListenForEvent("death", OnKilled)
+		
+		inst:AddComponent("lootdropper")
+		
 		inst:AddTag("prey")
 		inst:AddTag("hound")
 		inst:AddTag("antlion_sinkhole_blocker")
