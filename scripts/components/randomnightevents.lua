@@ -901,6 +901,10 @@ local function SpawnShadowTalker(player, mathmin, mathmax)
 	end
 end
 
+local function OnCollide()
+	return
+end
+
 local function SpawnShadowBoomer(player)
 	if TheWorld.state.isnight then
 		player:DoTaskInTime(0.1 + math.random(), function()
@@ -919,7 +923,7 @@ local function SpawnShadowBoomer(player)
 				ent.Physics:ClearCollisionMask()
 				ent.Physics:CollidesWith(COLLISION.GROUND)
 				ent.Physics:CollidesWith(COLLISION.CHARACTERS)
-				ent.Physics:SetCollisionCallback(nil)
+				ent.Physics:SetCollisionCallback(OnCollide)
 				
 				ent:WatchWorldState("isday", function() 
 					ent.components.health:Kill()
