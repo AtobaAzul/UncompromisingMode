@@ -198,7 +198,7 @@ AddTaskSetPreInitAny(function(tasksetdata)
         return
     end
 
-table.remove(tasksetdata.tasks,9) 
+table.remove(tasksetdata.tasks,7) 
 table.insert(tasksetdata.tasks,"GiantTrees")  -- Uncomment to test task based rice worldgen
 end)
 
