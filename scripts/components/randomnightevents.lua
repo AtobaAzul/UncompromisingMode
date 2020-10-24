@@ -927,7 +927,7 @@ local function SpawnShadowBoomer(player)
 				
 				ent.persists = false
 			end
-			print("what")
+			--print("what")
 			SpawnShadowBoomer(player)
 		end)
 	end
