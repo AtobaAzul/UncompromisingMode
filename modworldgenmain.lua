@@ -193,12 +193,21 @@ task.room_choices["ricepatch"] = 1      --Comment to test task based rice worldg
 end)
 GLOBAL.require("map/tasks/newswamp")
 GLOBAL.require("map/tasks/gianttrees")
+
+--Waffle's Specific Task Remover Code
+AddTaskSetPreInitAny(function(tasksetdata)
+  for _, task in pairs(tasksetdata.tasks) do
+    if task == "Forest hunters" then
+      table.remove(tasksetdata.tasks, _)
+    end
+  end
+end)
+--Waffle's Specific Task Remover Code
+
 AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "forest" then
         return
     end
-
-table.remove(tasksetdata.tasks,7) 
 table.insert(tasksetdata.tasks,"GiantTrees")  -- Uncomment to test task based rice worldgen
 end)
 
