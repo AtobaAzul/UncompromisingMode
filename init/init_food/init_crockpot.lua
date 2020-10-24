@@ -410,7 +410,7 @@ AddCookerRecipe("portablecookpot", californiaking)
 local steamedhams =
 {
     name = "steamedhams",
-    test = function(cooker, names, tags) return names.foliage and not names.foliage > 1 and tags.veggie and tags.veggie >= 1 and (names.meat or names.meatcooked) and not (tags.monster or tags.inedible or names.smallmeat or names.smallmeatcooked) end,
+    test = function(cooker, names, tags) return names.foliage and tags.veggie and tags.veggie >= 1 and (names.meat or names.meatcooked) and not (tags.monster or tags.inedible or names.smallmeat or names.smallmeatcooked) end,
 
     priority = 30,
     weight = 30,
