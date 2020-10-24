@@ -110,7 +110,7 @@ local function MakeBeebox(name, common_postinit)
 
 		inst.AnimState:SetBank("pitcher")
 		inst.AnimState:SetBuild("pitcher")
-		inst.AnimState:PlayAnimation("swinglong")
+		inst.AnimState:PushAnimation("swinglong")
 		inst:AddTag("CLASSIFIED")
       
   

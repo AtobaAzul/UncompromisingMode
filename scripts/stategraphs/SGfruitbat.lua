@@ -128,7 +128,11 @@ local states =
             if pt.y >= 10 then
 				
 				if home ~= nil and home:IsValid() and home.components.lootdropper ~= nil then
-				local loot = home.components.lootdropper:DropLoot(pt) --Drop loot only once every time it goes home.
+				home:DoTaskInTime(1+math.random(), function(home)
+				home.AnimState:PlayAnimation("spit")
+				home.AnimState:PushAnimation("swinglong")
+				home:DoTaskInTime(0.3, function(home) home.components.lootdropper:DropLoot(pt) end) --Drop loot only once every time it goes home.
+				end)
 				inst.bugcount = inst.bugcount - 3
 				end
                 inst:PerformBufferedAction()
