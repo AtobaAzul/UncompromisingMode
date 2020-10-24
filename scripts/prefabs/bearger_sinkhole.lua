@@ -51,7 +51,9 @@ end
 -- c_sel():PushEvent("timerdone", {name = "nextrepair"})
 local function OnTimerDone(inst, data)
     if data ~= nil and data.name == "nextrepair" then
-        inst.remainingrepairs = inst.remainingrepairs - 1
+		
+	
+        inst.remainingrepairs = inst.remainingrepairs ~= nil and inst.remainingrepairs - 1 or 3
         if inst.remainingrepairs <= 0 then
             inst.components.unevenground:Disable()
             inst.persists = false
