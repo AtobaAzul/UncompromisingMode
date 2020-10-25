@@ -53,8 +53,9 @@ local states=
         tags = { "busy" },
 
         onenter = function(inst)
-            inst.AnimState:PlayAnimation("hit")
             inst.SoundEmitter:PlaySound(inst.sounds.angry)
+            inst.AnimState:PlayAnimation("hit")
+            inst.Physics:Stop()
         end,
 
         events =
@@ -87,19 +88,6 @@ local states=
         },
     },
 	
-	State{
-        name = "create",
-        tags = {},
-        onenter = function(inst)
-            inst.AnimState:PlayAnimation("sleep_pst")
-			inst.SoundEmitter:PlaySound(inst.sounds.grunt)
-        end,
-        events=
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
-        },
-    },
-
 	State{
         name = "create",
         tags = {},

@@ -290,6 +290,54 @@ local function OnIsSummer(inst, issummer)
     end
 end
 
+local function OnFreeze(inst)
+    inst.AnimState:SetBuild("snapdragon_build_frozen")
+
+	if inst.seeds ~= nil then
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("hair", "snapdragon_build_"..inst.seeds, "hair") end)
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("ear", "snapdragon_build_"..inst.seeds, "ear") end)
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("face", "snapdragon_build_"..inst.seeds, "face") end)
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("jaw", "snapdragon_build_"..inst.seeds, "jaw") end)
+	end
+	
+	if TheWorld.state.issummer then
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("neck", "snapdragon_build_neck", "neck") end)
+    else
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("neck", "snapdragon_build", "neck") end)
+    end
+end
+
+local function OnThaw(inst)
+	if inst.seeds ~= nil then
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("hair", "snapdragon_build_"..inst.seeds, "hair") end)
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("ear", "snapdragon_build_"..inst.seeds, "ear") end)
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("face", "snapdragon_build_"..inst.seeds, "face") end)
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("jaw", "snapdragon_build_"..inst.seeds, "jaw") end)
+	end
+	
+	if TheWorld.state.issummer then
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("neck", "snapdragon_build_neck", "neck") end)
+    else
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("neck", "snapdragon_build", "neck") end)
+    end
+end
+
+local function OnUnFreeze(inst)
+	if inst.seeds ~= nil then
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:SetBuild("snapdragon_build_"..inst.seeds) end)
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("hair", "snapdragon_build_"..inst.seeds, "hair") end)
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("ear", "snapdragon_build_"..inst.seeds, "ear") end)
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("face", "snapdragon_build_"..inst.seeds, "face") end)
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("jaw", "snapdragon_build_"..inst.seeds, "jaw") end)
+	end
+	
+	if TheWorld.state.issummer then
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("neck", "snapdragon_build_neck", "neck") end)
+    else
+		inst:DoTaskInTime(0, function(inst) inst.AnimState:OverrideSymbol("neck", "snapdragon_build", "neck") end)
+    end
+end
+
 local function common_fn(scale)
 	local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
@@ -304,7 +352,7 @@ local function common_fn(scale)
     inst.entity:AddNetwork()
 	inst.entity:AddDynamicShadow()
 	
-	shadow:SetSize( 6, 2 )
+	inst.DynamicShadow:SetSize( 6, 2 )
     inst.Transform:SetFourFaced()
     inst.foodItemsEatenCount = 0
     
@@ -314,9 +362,9 @@ local function common_fn(scale)
     
     inst:AddTag("snapdragon")
 
-    anim:SetBank("snapdragon")
-    anim:SetBuild("snapdragon_build")
-    anim:PlayAnimation("idle", true)
+    inst.AnimState:SetBank("snapdragon")
+    inst.AnimState:SetBuild("snapdragon_build")
+    inst.AnimState:PlayAnimation("idle", true)
 
     inst:AddTag("animal")
     inst:AddTag("veggie")
@@ -364,6 +412,10 @@ local function common_fn(scale)
 
     MakeLargeBurnableCharacter(inst, "body")
     MakeLargeFreezableCharacter(inst, "body")
+	
+    inst:ListenForEvent("freeze", OnFreeze)
+    inst:ListenForEvent("onthaw", OnThaw)
+    inst:ListenForEvent("unfreeze", OnUnFreeze)
     
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetResistance(3)
