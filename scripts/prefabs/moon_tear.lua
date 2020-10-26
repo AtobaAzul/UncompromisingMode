@@ -262,6 +262,8 @@ local function fn()
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/moon_tear.xml"
     inst.components.inventoryitem.nobounce = true
     inst.components.inventoryitem:SetSinks(true)
+	
+    inst:AddComponent("tradable")
 
     --[[inst:AddComponent("prototyper")
     inst.components.prototyper.onturnon = onturnon

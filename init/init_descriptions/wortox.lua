@@ -1,5 +1,6 @@
 ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.WORTOX
 DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
+ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 
 --	[ 		Wortox Descriptions		]	--
 
@@ -182,3 +183,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WORTOX.DESCRIBE
 	DESCRIBE.ANTIHISTAMINE = "Keeps my snout clean!"
     ANNOUNCE.CURSED_ITEM_EQUIP = "It scorched my paw! Is this some kind of practical joke?"
 	DESCRIBE.SCREECHER_TRINKET = "And just what dimension are you from, friend?"
+	ACTIONFAIL.GIVE = {NOTNIGHT = "Lets play when the moon comes out!"}

@@ -223,6 +223,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
         {
             GENERIC = "It seems the magic is inert in this state.",
         }
+	ACTIONFAIL.GIVE = {NOTNIGHT = "I should wait until the moon is out."}
 
 RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 

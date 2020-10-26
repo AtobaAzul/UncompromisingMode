@@ -105,6 +105,7 @@ local prefab_post = {
 	"townportal",
 	"compostwrap",
 	"trinkets", --This is for the grave mound cc trinkets
+	"moonbase",
 }
 
 local stategraph_post = {

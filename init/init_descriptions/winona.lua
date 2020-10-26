@@ -1,5 +1,6 @@
 ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.WINONA
 DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
+ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 
 --	[ 		Winona Descriptions		]   --
 
@@ -183,3 +184,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WINONA.DESCRIBE
 	DESCRIBE.ANTIHISTAMINE = "It'll help my lungs stay clean."
     ANNOUNCE.CURSED_ITEM_EQUIP = "Seems like safety gloves aren't enough!"
 	DESCRIBE.SCREECHER_TRINKET = "What practical use does it have, other than being creepy?"
+	ACTIONFAIL.GIVE = {NOTNIGHT = "This ones a night owl."}

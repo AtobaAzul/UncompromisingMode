@@ -1,5 +1,6 @@
 ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.WALTER
 DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
+ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 
 --	[ 		Wigfrid Descriptions		]   --
 
@@ -182,3 +183,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 	DESCRIBE.ANTIHISTAMINE = "It'll keep my allergies from flaring up!"
     ANNOUNCE.CURSED_ITEM_EQUIP = "OWWW! First aid please!"
 	DESCRIBE.SCREECHER_TRINKET = "Our Scout Masters told us to keep away from symbols like this."
+	ACTIONFAIL.GIVE = {NOTNIGHT = "I think moon power works best when the moon is around."}

@@ -1,5 +1,6 @@
 ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.WOODIE
 DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
+ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 
 --	[ 			Woodie Descriptions			]	--
 
@@ -182,3 +183,4 @@ DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WOODIE.DESCRIBE
 	DESCRIBE.ANTIHISTAMINE = "It'll clear your nose up come hayfever season."
     ANNOUNCE.CURSED_ITEM_EQUIP = "Ouch, this ones a jumper!"
 	DESCRIBE.SCREECHER_TRINKET = "Symbols like these are what got me in trouble in the first place."
+	ACTIONFAIL.GIVE = {NOTNIGHT = "Perhaps I should try again when the moons out, eh?"}

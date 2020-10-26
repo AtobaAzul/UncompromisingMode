@@ -58,7 +58,7 @@ local function QueenTrue()
 	_queenkilled = true
 	
 	for i, v in ipairs(AllPlayers) do
-		if v.components.hayfever and v.components.hayfever.enabled then
+		if v.components.hayfever and v.components.hayfever.enabled and not v.components.health:IsDead() and v.prefab ~= "wes" then
 			v.components.talker:Say(GetString(v, "ANNOUNCE_HAYFEVER_OFF"))   
 		end
 	end
