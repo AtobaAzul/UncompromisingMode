@@ -129,10 +129,12 @@ local states = {
 
 State{
         name = "sneeze",
-        tags = {"busy","sneeze"},
+        tags = {"busy", "sneeze", "pausepredict" },
         
         onenter = function(inst)
             inst.wantstosneeze = false
+            inst:ClearBufferedAction()
+            inst.components.locomotor:Stop()
             inst.SoundEmitter:PlaySound("dontstarve/wilson/hit",nil,.02)
 			
 			
@@ -140,7 +142,6 @@ State{
 				inst.AnimState:PlayAnimation("sneeze")
 			end
 			
-            inst:ClearBufferedAction()
             
             if inst.prefab ~= "wes" then
 				inst.SoundEmitter:PlaySound("UCSounds/Sneeze/sneeze")
@@ -155,8 +156,7 @@ State{
                 --end
 
 				inst.components.talker:Say(GetString(inst.prefab, "ANNOUNCE_SNEEZE"))  
-            end
-            inst.components.locomotor:Stop()        
+            end        
         end,
         
         events=
