@@ -89,7 +89,7 @@ end
 local function giveopal(inst, item, giver)
 
     local x, y, z = inst.Transform:GetWorldPosition()
-    y = 4.5
+    y = 2.5
 
     local angle
     if giver ~= nil and giver:IsValid() then

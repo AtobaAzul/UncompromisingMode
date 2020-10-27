@@ -105,7 +105,7 @@ local function onattack(inst, attacker, target)
         end
 		
 		if not target.components.health:IsDead() then
-			target.components.health:DoDelta(-60)
+			target.components.health:DoDelta(-60, nil, attacker)
 		end
 		
 		local ents = TheSim:FindEntities(x, y, z, 2, nil, { "INLIMBO", "player", "abigail" })
@@ -113,10 +113,10 @@ local function onattack(inst, attacker, target)
 		for i, v in ipairs(ents) do
 			if v ~= inst and v:IsValid() and not v:IsInLimbo() then
 				if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
-					v.components.combat:GetAttacked(inst, 34, nil)
+					v.components.combat:GetAttacked(attacker, 34, nil)
 						
-					if v.components.freezable ~= nil and not v.components.health:IsDead() then
-						v.components.freezable:AddColdness(1)
+					if v.components.freezable ~= nil and not v.components.health:IsDead() and not v.components.freezable:IsFrozen() then
+						v.components.freezable:AddColdness(0.5)
 						v.components.freezable:SpawnShatterFX()
 					end
 				end
