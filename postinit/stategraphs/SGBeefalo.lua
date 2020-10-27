@@ -6,7 +6,7 @@ local events={
 EventHandler("doattack", function(inst)
 								if not inst.sg:HasStateTag("precharging") then
                                 local nstate = "attack"
-                                if inst.sg:HasStateTag("charging") then
+                                if inst.sg:HasStateTag("charging") or inst:HasTag("chargespeed") then
                                     nstate = "chargeattack"
                                 end
                                 if inst.components.health and not inst.components.health:IsDead()
@@ -30,8 +30,6 @@ local states = {
             inst.SoundEmitter:PlaySound(inst.sounds.angry)
             inst.components.combat:StartAttack()
             inst.components.locomotor:StopMoving()
-			inst.AnimState:SetBank("beefalo")
-			inst.AnimState:SetBuild("beefalo_build")
             inst.AnimState:PlayAnimation("atk_pre")
             inst.AnimState:PushAnimation("atk", false)
 			if inst:HasTag("chargespeed") then
@@ -69,15 +67,8 @@ local states = {
             onenter = function(inst)
                 inst.Physics:Stop()
 				inst.components.locomotor:StopMoving()
-				inst.AnimState:SetBank("beefalo_paw")
-				inst.AnimState:SetBuild("beefalo_paw")
-				local herd = inst.components.herdmember and inst.components.herdmember:GetHerd()
-				if (herd and herd.components.mood and herd.components.mood:IsInMood())    --Build Magic to allow us to see the beefalo's mouth
-				or (inst.components.mood and inst.components.mood:IsInMood()) then
-				inst.AnimState:PlayAnimation("pawheat")
-				else
-				inst.AnimState:PlayAnimation("paw")
-				end
+				inst.components.combat:ResetCooldown()
+				inst.AnimState:PlayAnimation("mating_taunt1")
 				inst.SoundEmitter:PlaySound(inst.sounds.angry)
 				inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT*2.29  --should be equal to rook
 				inst:AddTag("chargespeed")
@@ -93,9 +84,7 @@ local states = {
 
 			events =
             {
-                EventHandler("animover", function(inst) 				
-				inst.AnimState:SetBank("beefalo")
-				inst.AnimState:SetBuild("beefalo_build")
+                EventHandler("animover", function(inst) 		
 				if inst.components.rideable and inst.components.rideable:GetRider() ~= nil then
 				inst:ApplyBuildOverrides(inst.components.rideable:GetRider().AnimState)
 				end
@@ -112,6 +101,7 @@ local states = {
             tags = {"moving", "charging", "busy", "running"},
             
             onenter = function(inst) 
+				inst.components.combat:ResetCooldown()
                 inst.components.locomotor:RunForward()
                 if inst.components.combat.target and inst.components.combat.target:IsValid() then
                 inst:ForceFacePoint(inst.components.combat.target:GetPosition() )
@@ -194,6 +184,7 @@ local states = {
             tags = {"busy", "runningattack"},
             
             onenter = function(inst)
+				print("chargeattack")
                 --inst.SoundEmitter:KillSound("charge")
                 inst.components.combat:StartAttack()
                 inst.components.locomotor:StopMoving()
