@@ -142,6 +142,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	ANNOUNCE.WEBBEDCREATURE = "Yeah, no, we're not breaking through that on our own."
 	DESCRIBE.SNAPDRAGON_BUDDY = "They work up quite an appetite!"
 	DESCRIBE.SNAPDRAGON = "Why's everything gotta be huge around here?"
+	DESCRIBE.SNAPPLANT = "Home base, huh?"
+	DESCRIBE.WHISPERPOD = "Lets get our hands dirty."
+	DESCRIBE.WHISPERPOD_NORMAL_GROUND =
+	{
+		GENERIC = "It's missing a piece, something to grow, maybe?",
+		GROWING = "It's hard at work.",
+	}
 	DESCRIBE.FRUITBAT = "I actually don't mind this one."
 	DESCRIBE.FRUITBAT = "Flyin'... fruit?"
 	DESCRIBE.PITCHERPLANT = "It's just a plant."

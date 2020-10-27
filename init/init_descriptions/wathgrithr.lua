@@ -141,6 +141,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	ANNOUNCE.WEBBEDCREATURE = "Too tough! The spider hath the key!"
 	DESCRIBE.SNAPDRAGON_BUDDY = "'Tis no warrior!"
 	DESCRIBE.SNAPDRAGON = "'Tis a vegetable - mine mortal enemy!"
+	DESCRIBE.SNAPPLANT = "They have a strong bond!"
+	DESCRIBE.WHISPERPOD = "Gardening is not a warriors task!"
+	DESCRIBE.WHISPERPOD_NORMAL_GROUND =
+	{
+		GENERIC = "Mayhaps seeds could come in handy.",
+		GROWING = "I am a shieldmaiden, not a farmer!",
+	}
 	DESCRIBE.FRUITBAT = "Tis not meat!"
 	DESCRIBE.PITCHERPLANT = "A plant!"
 	DESCRIBE.APHID = "Have at thee, bug!"

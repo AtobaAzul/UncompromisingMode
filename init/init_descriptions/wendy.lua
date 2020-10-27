@@ -141,6 +141,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	ANNOUNCE.WEBBEDCREATURE = "Unraveling this would require a spiders touch..."
 	DESCRIBE.SNAPDRAGON_BUDDY = "Lives for food, like everything else."
 	DESCRIBE.SNAPDRAGON = "Ive seen prettier flowers."
+	DESCRIBE.SNAPPLANT = "These two have a near inseperable bond."
+	DESCRIBE.WHISPERPOD = "It won't grow on its own."
+	DESCRIBE.WHISPERPOD_NORMAL_GROUND =
+	{
+		GENERIC = "It needs something else to grow.",
+		GROWING = "Keep growing. I'll wait.",
+	}
 	DESCRIBE.FRUITBAT = "What?!"
 	DESCRIBE.PITCHERPLANT = "Out of reach..."
 	DESCRIBE.APHID = "They plague the trees."

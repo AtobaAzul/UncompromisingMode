@@ -142,6 +142,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	ANNOUNCE.WEBBEDCREATURE = "It only opens up for spiders!"
 	DESCRIBE.SNAPDRAGON_BUDDY = "It's quite a growler, for a flower!"
 	DESCRIBE.SNAPDRAGON = "I've got a hunch that they're leaders of the bunch!"
+	DESCRIBE.SNAPPLANT = "They have a captive audience!"
+	DESCRIBE.WHISPERPOD = "Its roots need some soil."
+	DESCRIBE.WHISPERPOD_NORMAL_GROUND =
+	{
+		GENERIC = "it has a need to feed on seeds!",
+		GROWING = "Grow big, grow tall, or not at all!",
+	}
 	DESCRIBE.FRUITBAT = "A flying fruit! I've seen it all!"
 	DESCRIBE.PITCHERPLANT = "Behold, it's a plant, but this time it's high up!"
 	DESCRIBE.APHID = "The trees had it coming to them!"

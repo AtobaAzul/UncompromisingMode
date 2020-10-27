@@ -52,9 +52,7 @@ local function OnDigUp(inst)--, worker)
 end
 
 local function GetStatus(inst)
-    return (inst:HasTag("withered") and "WITHERED")
-        or (inst.components.crop ~= nil and inst.components.crop:IsReadyForHarvest() and "READY")
-        or "GROWING"
+    return inst.growing and "GROWING" or "GENERIC"
 end
 
 --------------------------------------------------------------------------
@@ -155,7 +153,7 @@ local function fn()
 		
 	inst:AddComponent("inspectable")
 	inst.components.inspectable.getstatus = GetStatus
-	inst.components.inspectable.nameoverride = "plant_normal"
+	--inst.components.inspectable.nameoverride = "plant_normal"
 
 	inst:AddComponent("workable")
 	inst.components.workable:SetWorkAction(ACTIONS.DIG)

@@ -136,11 +136,18 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "We're a spider too!! Why are you attacking us?!"
 	DESCRIBE.GIANT_TREE = "It's probably super old."
-	DESCRIBE.WIDOWSGRASP = "..."
+	DESCRIBE.WIDOWSGRASP = "Sorry..."
 	DESCRIBE.WEBBEDCREATURE = "Ooh! Are our friends storing gifts for us?"
 	ANNOUNCE.WEBBEDCREATURE = "We need bigger hands, from a bigger spider!"
 	DESCRIBE.SNAPDRAGON_BUDDY = "Golly! We're glad they don't eat meat!"
 	DESCRIBE.SNAPDRAGON = "It looks pretty!"
+	DESCRIBE.SNAPPLANT = "Best buds! Get it?"
+	DESCRIBE.WHISPERPOD = "Lets get you planted!"
+	DESCRIBE.WHISPERPOD_NORMAL_GROUND =
+	{
+		GENERIC = "Let's try growing something in it!",
+		GROWING = "Is it done yet?",
+	}
 	DESCRIBE.FRUITBAT = "It's our favorite color!"
 	DESCRIBE.PITCHERPLANT = "If we could climb like the other spiders we could reach it."
 	DESCRIBE.APHID = "Not a spider!"

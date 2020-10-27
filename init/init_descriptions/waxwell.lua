@@ -143,6 +143,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	ANNOUNCE.WEBBEDCREATURE = "Only the spider can access the contents. Hmmm."
 	DESCRIBE.SNAPDRAGON_BUDDY = "If I feed it, will it go away?"
 	DESCRIBE.SNAPDRAGON = "I have no quarrel with you. Yet."
+	DESCRIBE.SNAPPLANT = "You look familiar."
+	DESCRIBE.WHISPERPOD = "Great, more dirty work."
+	DESCRIBE.WHISPERPOD_NORMAL_GROUND =
+	{
+		GENERIC = "It needs more? How do these things reproduce on their own?",
+		GROWING = "It's growing.",
+	}
 	DESCRIBE.FRUITBAT = "Even uglier!"
 	DESCRIBE.PITCHERPLANT = "It's a plant, but high up."
 	DESCRIBE.APHID = "I don't like you."

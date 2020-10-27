@@ -146,19 +146,21 @@ end
 
 local function SpawnBirchNutters(player)
 	local x, y, z = player.Transform:GetWorldPosition()
-	player:DoTaskInTime(2 * math.random() * 0.3, function()
-				
-		local x1 = x + math.random(-10, 10)
-		local z1 = z + math.random(-10, 10)
-		local nutters = SpawnPrefab("birchnutdrake")
-		if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
-			nutters.Transform:SetPosition(x1, y, z1)
-			nutters:DoTaskInTime(0, function(nutters) DayBreak(nutters) end)
-			nutters.components.combat:SetTarget(player)
-		else
-			SpawnBirchNutters(player)
-		end
-	end)
+	if TheWorld.state.isnight then
+		player:DoTaskInTime(2 * math.random() * 0.3, function()
+					
+			local x1 = x + math.random(-10, 10)
+			local z1 = z + math.random(-10, 10)
+			local nutters = SpawnPrefab("birchnutdrake")
+			if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+				nutters.Transform:SetPosition(x1, y, z1)
+				nutters:DoTaskInTime(0, function(nutters) DayBreak(nutters) end)
+				nutters.components.combat:SetTarget(player)
+			else
+				player:DoTaskInTime(0.1, function(player) SpawnBirchNutters(player) end)
+			end
+		end)
+	end
 end
 
 local function LeifAttack(player)
@@ -239,9 +241,13 @@ local function SpawnShadowCharsFunction(player)
 	local z2 = z - math.random(12, 16)
 	
 	local shadow = SpawnPrefab("swilson")
-	if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
-		shadow.Transform:SetPosition(x1, y, z1)
-		shadow:DoTaskInTime(0, function(shadow) DayBreak(shadow) end)
+	if TheWorld.state.isnight then
+		if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+			shadow.Transform:SetPosition(x1, y, z1)
+			shadow:DoTaskInTime(0, function(shadow) DayBreak(shadow) end)
+		else
+			player:DoTaskInTime(0.1, function(player) SpawnShadowCharsFunction(player) end)
+		end
 	end
 
 end
@@ -276,20 +282,21 @@ local function SpawnMonkeysFunction(player)
 	local z2 = z - math.random(12, 16)
 	
 	local monkey = SpawnPrefab("chimp")
-	
-	if math.random()>0.5 then
-		if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
-			monkey.Transform:SetPosition(x1, y, z1)
-			monkey:DoTaskInTime(0, function(monkey) DayBreak(monkey) end)
+	if TheWorld.state.isnight then 
+		if math.random()>0.5 then
+			if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+				monkey.Transform:SetPosition(x1, y, z1)
+				monkey:DoTaskInTime(0, function(monkey) DayBreak(monkey) end)
+			else
+				player:DoTaskInTime(0.1, function(player) SpawnMonkeysFunction(player) end)
+			end
 		else
-			SpawnMonkeysFunction(player)
-		end
-	else
-		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
-			monkey.Transform:SetPosition(x2, y, z2)
-			monkey:DoTaskInTime(0, function(monkey) DayBreak(monkey) end)
-		else
-			SpawnMonkeysFunction(player)
+			if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+				monkey.Transform:SetPosition(x2, y, z2)
+				monkey:DoTaskInTime(0, function(monkey) DayBreak(monkey) end)
+			else
+				player:DoTaskInTime(0.1, function(player) SpawnMonkeysFunction(player) end)
+			end
 		end
 	end
 
@@ -317,52 +324,53 @@ local function SpawnWerePigsFunction(player)
 	local z2 = z - math.random(12, 16)
 	
 	local pig = SpawnPrefab("pigman")
-	
-	if math.random()>0.5 then
-		if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
-			local fx = SpawnPrefab("statue_transition_2")
-			if fx ~= nil then
-			fx.Transform:SetPosition(x1, 0, z1)
-			fx.Transform:SetScale(.8, .8, .8)
-			end
-			fx = SpawnPrefab("statue_transition")
-			if fx ~= nil then
+	if TheWorld.state.isnight then
+		if math.random()>0.5 then
+			if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+				local fx = SpawnPrefab("statue_transition_2")
+				if fx ~= nil then
 				fx.Transform:SetPosition(x1, 0, z1)
 				fx.Transform:SetScale(.8, .8, .8)
+				end
+				fx = SpawnPrefab("statue_transition")
+				if fx ~= nil then
+					fx.Transform:SetPosition(x1, 0, z1)
+					fx.Transform:SetScale(.8, .8, .8)
+				end
+				pig.Transform:SetPosition(x1, y, z1)
+				if pig.components.werebeast ~= nil then
+				pig.components.werebeast:SetWere(math.max(TUNING.SEG_TIME, TUNING.TOTAL_DAY_TIME * (1 - TheWorld.state.time)) + math.random() * TUNING.SEG_TIME)
+				end
+				if pig.components.combat ~= nil then
+				pig.components.combat:SuggestTarget(player)
+				end
+				pig:DoTaskInTime(0, function(pig) DayBreak(pig) end)
+			else
+				player:DoTaskInTime(0.1, function(player) SpawnWerePigsFunction(player) end)
 			end
-			pig.Transform:SetPosition(x1, y, z1)
-			if pig.components.werebeast ~= nil then
-			pig.components.werebeast:SetWere(math.max(TUNING.SEG_TIME, TUNING.TOTAL_DAY_TIME * (1 - TheWorld.state.time)) + math.random() * TUNING.SEG_TIME)
-			end
-			if pig.components.combat ~= nil then
-			pig.components.combat:SuggestTarget(player)
-			end
-			pig:DoTaskInTime(0, function(pig) DayBreak(pig) end)
 		else
-			SpawnWerePigsFunction(player)
-		end
-	else
-		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
-		local fx = SpawnPrefab("statue_transition_2")
-			if fx ~= nil then
-			fx.Transform:SetPosition(x2, 0, z2)
-			fx.Transform:SetScale(.8, .8, .8)
-			end
-			fx = SpawnPrefab("statue_transition")
-			if fx ~= nil then
+			if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+			local fx = SpawnPrefab("statue_transition_2")
+				if fx ~= nil then
 				fx.Transform:SetPosition(x2, 0, z2)
 				fx.Transform:SetScale(.8, .8, .8)
+				end
+				fx = SpawnPrefab("statue_transition")
+				if fx ~= nil then
+					fx.Transform:SetPosition(x2, 0, z2)
+					fx.Transform:SetScale(.8, .8, .8)
+				end
+				pig.Transform:SetPosition(x2, y, z2)
+				if pig.components.werebeast ~= nil then
+				pig.components.werebeast:SetWere(math.max(TUNING.SEG_TIME, TUNING.TOTAL_DAY_TIME * (1 - TheWorld.state.time)) + math.random() * TUNING.SEG_TIME)
+				end
+				if pig.components.combat ~= nil then
+				pig.components.combat:SuggestTarget(player)
+				end
+				pig:DoTaskInTime(0, function(pig) DayBreak(pig) end)
+			else
+				player:DoTaskInTime(0.1, function(player) SpawnWerePigsFunction(player) end)
 			end
-			pig.Transform:SetPosition(x2, y, z2)
-			if pig.components.werebeast ~= nil then
-			pig.components.werebeast:SetWere(math.max(TUNING.SEG_TIME, TUNING.TOTAL_DAY_TIME * (1 - TheWorld.state.time)) + math.random() * TUNING.SEG_TIME)
-			end
-			if pig.components.combat ~= nil then
-			pig.components.combat:SuggestTarget(player)
-			end
-			pig:DoTaskInTime(0, function(pig) DayBreak(pig) end)
-		else
-			SpawnWerePigsFunction(player)
 		end
 	end
 
@@ -477,13 +485,15 @@ local function SpawnDroppersFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local x2 = x + math.random(-8, 8)
 	local z2 = z + math.random(-8, 8)
-	if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
-		local dropper = SpawnPrefab("spider_dropper")
-		dropper.Transform:SetPosition(x2, 0, z2)
-		dropper.sg:GoToState("dropper_enter")
-		dropper.persists = false
-	else
-		SpawnDroppersFunction(player)
+	if TheWorld.state.isnight then
+		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+			local dropper = SpawnPrefab("spider_dropper")
+			dropper.Transform:SetPosition(x2, 0, z2)
+			dropper.sg:GoToState("dropper_enter")
+			dropper.persists = false
+		else
+			player:DoTaskInTime(0.1, function(player) SpawnDroppersFunction(player) end)
+		end
 	end
 end
 
@@ -506,28 +516,31 @@ end
 local function SpawnSkitts(player)
 	--print("SpawnSkitts")
 	local skitttime = 10 * math.random() * 2
-	player:DoTaskInTime(skitttime, function()
+	if TheWorld.state.isnight then
+		player:DoTaskInTime(skitttime, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local num_skitts = 150
 			for i = 1, num_skitts do
 				player:DoTaskInTime(0.2 * i + math.random() * 0.3, function()
 					local skitts = SpawnPrefab("shadowskittish")
-					if TheWorld.state.isnight then
-						skitts.Transform:SetPosition(x + math.random(-12,12), y, z + math.random(-12,12))
-					end
+					skitts.Transform:SetPosition(x + math.random(-12,12), y, z + math.random(-12,12))
 				end)
 			end
-	end)
+		end)
+	end
 end
 
 local function SpawnFissuresFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local x2 = x + math.random(-10, 10)
 	local z2 = z + math.random(-10, 10)
-	if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
-		SpawnPrefab("rnefissure").Transform:SetPosition(x2, 0, z2)
-	else
-		SpawnFissuresFunction(player)
+	
+	if TheWorld.isnight then
+		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+			SpawnPrefab("rnefissure").Transform:SetPosition(x2, 0, z2)
+		else
+			player:DoTaskInTime(0.1, function(player) SpawnFissuresFunction(player) end)
+		end
 	end
 end
 
@@ -570,19 +583,21 @@ end
 
 local function SpawnLureplagueRat(player)
 	local x, y, z = player.Transform:GetWorldPosition()
-	player:DoTaskInTime(2 * math.random() * 0.3, function()
-		
-		local x1 = x + math.random(6, 10)
-		local z1 = z + math.random(6, 10)
+	if TheWorld.state.isnight then
+		player:DoTaskInTime(2 * math.random() * 0.3, function()
+			
+			local x1 = x + math.random(6, 10)
+			local z1 = z + math.random(6, 10)
 
-		local rat = SpawnPrefab("lureplague_rat")
-		if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
-			rat.Transform:SetPosition(x1, y, z1)
-			rat.components.combat:SetTarget(player)
-		else
-			SpawnLureplagueRat(player)
-		end
-	end)
+			local rat = SpawnPrefab("lureplague_rat")
+			if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+				rat.Transform:SetPosition(x1, y, z1)
+				rat.components.combat:SetTarget(player)
+			else
+				player:DoTaskInTime(0.1, function(player) SpawnLureplagueRat(player) end)
+			end
+		end)
+	end
 end
 
 ---------------------------------------------------------------
@@ -659,14 +674,16 @@ local function SpawnSquidFunction(player)
 	local squid = SpawnPrefab("squid")
 	local splash = SpawnPrefab("splash_green")
 	
-	if not TheWorld.Map:IsPassableAtPoint(xoff, 0, zoff) then
-		squid.Transform:SetPosition(xoff, y, zoff)
-		splash.Transform:SetPosition(xoff, y, zoff)
-		squid:PushEvent("spawn")
-		squid.components.combat:SetTarget(player)
-		--squid:PushEvent("attacked", {attacker = player, damage = 0, weapon = nil})
-	else
-		SpawnSquidFunction(player)
+	if TheWorld.state.isnight then
+		if not TheWorld.Map:IsPassableAtPoint(xoff, 0, zoff) then
+			squid.Transform:SetPosition(xoff, y, zoff)
+			splash.Transform:SetPosition(xoff, y, zoff)
+			squid:PushEvent("spawn")
+			squid.components.combat:SetTarget(player)
+			--squid:PushEvent("attacked", {attacker = player, damage = 0, weapon = nil})
+		else
+			player:DoTaskInTime(0.1, function(player) SpawnSquidFunction(player) end)
+		end
 	end
 end
 
@@ -694,18 +711,19 @@ local function SpawnGnarwailFunction(player)
 	
 	local gnarwail = SpawnPrefab("gnarwail")
 	local splash = SpawnPrefab("splash_green")
-	
-	if not TheWorld.Map:IsPassableAtPoint(xoff, 0, zoff) then
-		gnarwail.Transform:SetPosition(xoff, y, zoff)
-		splash.Transform:SetPosition(xoff, y, zoff)
-		gnarwail.sg:GoToState("emerge")
-		gnarwail.components.combat:SetTarget(player)
-		gnarwail:DoTaskInTime(0, function(gnarwail) DayBreak(gnarwail) end)
-		gnarwail:PushEvent("attacked", {attacker = player, damage = 0, weapon = nil})
-		
-		--shark.sg:GoToState("eat_pre")
-	else
-		SpawnGnarwailFunction(player)
+	if TheWorld.state.isnight then
+		if not TheWorld.Map:IsPassableAtPoint(xoff, 0, zoff) then
+			gnarwail.Transform:SetPosition(xoff, y, zoff)
+			splash.Transform:SetPosition(xoff, y, zoff)
+			gnarwail.sg:GoToState("emerge")
+			gnarwail.components.combat:SetTarget(player)
+			gnarwail:DoTaskInTime(0, function(gnarwail) DayBreak(gnarwail) end)
+			gnarwail:PushEvent("attacked", {attacker = player, damage = 0, weapon = nil})
+			
+			--shark.sg:GoToState("eat_pre")
+		else
+			player:DoTaskInTime(0.1, function(player) SpawnGnarwailFunction(player) end)
+		end
 	end
 end
 
@@ -723,21 +741,23 @@ local function SpawnLightFlowersNFernsFunction(player)
 	local x2 = x + math.random(-8, 8)
 	local z2 = z + math.random(-8, 8)
 	
-	if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
-		if math.random() > 0.7 then
-			local flowerdbl = SpawnPrefab("stalker_bulb_double")
-			flowerdbl.Transform:SetPosition(x2, y, z2)
-		else
+	if TheWorld.state.isnight then
+		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
 			if math.random() > 0.7 then
-				local flowersng = SpawnPrefab("stalker_bulb")
-				flowersng.Transform:SetPosition(x2, y, z2)				
+				local flowerdbl = SpawnPrefab("stalker_bulb_double")
+				flowerdbl.Transform:SetPosition(x2, y, z2)
 			else
-				local fern = SpawnPrefab("stalker_fern")
-				fern.Transform:SetPosition(x2, y, z2)
+				if math.random() > 0.7 then
+					local flowersng = SpawnPrefab("stalker_bulb")
+					flowersng.Transform:SetPosition(x2, y, z2)				
+				else
+					local fern = SpawnPrefab("stalker_fern")
+					fern.Transform:SetPosition(x2, y, z2)
+				end
 			end
+		else
+			player:DoTaskInTime(0.1, function(player) SpawnLightFlowersNFernsFunction(player) end)
 		end
-	else
-		SpawnLightFlowersNFernsFunction(player)
 	end
 end	
 											
@@ -759,7 +779,7 @@ local function MoonTear(player)
 		local x, y, z = player.Transform:GetWorldPosition()
 		player:DoTaskInTime(0.6 + math.random(4), function()
 			local tear = SpawnPrefab("moon_tear_meteor")
-			tear.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
+			tear.Transform:SetPosition(x + math.random(-5,5), y, z + math.random(-5,5))
 		end)
 	end
 end
@@ -796,12 +816,13 @@ local function SpawnPhonographFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local x2 = x + math.random(-15, 15)
 	local z2 = z + math.random(-15, 15)
-	
-	if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
-		local phonograph = SpawnPrefab("charliephonograph_20")
-		phonograph.Transform:SetPosition(x2, y, z2)
-	else
-		SpawnPhonographFunction(player)
+	if TheWorld.state.isnight then
+		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+			local phonograph = SpawnPrefab("charliephonograph_20")
+			phonograph.Transform:SetPosition(x2, y, z2)
+		else
+			player:DoTaskInTime(0.1, function(player) SpawnPhonographFunction(player) end)
+		end
 	end
 end	
 											
@@ -815,12 +836,13 @@ local function SpawnShadowTeleporterFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local x2 = x + math.random(-8, 8)
 	local z2 = z + math.random(-8, 8)
-	
-	if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
-		local teleporter = SpawnPrefab("shadow_teleporter")
-		teleporter.Transform:SetPosition(x2, y, z2)
-	else
-		SpawnShadowTeleporterFunction(player)
+	if TheWorld.state.isnight then
+		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+			local teleporter = SpawnPrefab("shadow_teleporter")
+			teleporter.Transform:SetPosition(x2, y, z2)
+		else
+			player:DoTaskInTime(0.1, function(player) SpawnShadowTeleporterFunction(player) end)
+		end
 	end
 end	
 											
@@ -896,7 +918,7 @@ local function SpawnShadowTalker(player, mathmin, mathmax)
 				ent.speech = player
 			end
 			
-			SpawnShadowTalker(player, 1, 1)
+			player:DoTaskInTime(0.1, function(player) SpawnShadowTalker(player, 1, 1) end)
 		end)
 	end
 end
@@ -918,8 +940,8 @@ local function SpawnShadowBoomer(player)
 			if light <= .1 and #TheSim:FindEntities(x1, 0, z1, 50, {"stalkerminion"}) <= 25 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 				local ent = SpawnPrefab("stalker_minion")
 				ent.Transform:SetPosition(x1, 0, z1)
-				ent.speech = player
 				ent:OnSpawnedBy(player)
+				ent.sg:GoToState("emerge_noburst")
 				ent.Physics:ClearCollisionMask()
 				ent.Physics:CollidesWith(COLLISION.GROUND)
 				ent.Physics:CollidesWith(COLLISION.CHARACTERS)
@@ -932,7 +954,7 @@ local function SpawnShadowBoomer(player)
 				ent.persists = false
 			end
 			--print("what")
-			SpawnShadowBoomer(player)
+			player:DoTaskInTime(0.1, function(player) SpawnShadowBoomer(player) end)
 		end)
 	end
 end

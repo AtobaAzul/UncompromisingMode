@@ -13,7 +13,10 @@ local prefabs =
 
 local function OnDropped(inst)
     inst.AnimState:PlayAnimation("drop")
-    inst.AnimState:PushAnimation("idle_loop",true)
+	inst:DoTaskInTime(0.5, function(inst) 
+		inst:DoTaskInTime(0.1, function(inst) inst.AnimState:PlayAnimation("idle_loop",true) end)
+		SpawnPrefab("splash").Transform:SetPosition(inst.Transform:GetWorldPosition()) 
+	end)
 end
 
 local function onsave(inst)
@@ -40,10 +43,12 @@ end
 
 local function extinguish(inst)
 	inst.AnimState:PlayAnimation("idle_gargle")
-	inst:ListenForEvent("animover", function(inst) inst.components.burnable:Extinguish() end)
+	inst:DoTaskInTime(1.8, function(inst) 
+		SpawnPrefab("splash").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		inst:DoTaskInTime(0.1, function(inst) inst.components.burnable:Extinguish() end)
+	end)
 	inst.AnimState:PushAnimation("idle_loop",true)
 
-	SpawnPrefab("splash").Transform:SetPosition(inst:GetPosition())
 	
 end
 

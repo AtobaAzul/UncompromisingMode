@@ -142,6 +142,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	ANNOUNCE.WEBBEDCREATURE = "I can't get through! I need that thing's claw!"
 	DESCRIBE.SNAPDRAGON_BUDDY = "This food's mine, you can't have it!"
 	DESCRIBE.SNAPDRAGON = "I wonder if you'd burn brighter than most."
+	DESCRIBE.SNAPPLANT = "The big guy likes that dumb plant alot."
+	DESCRIBE.WHISPERPOD = "Yuck, lets just stick it in the ground and be done with it."
+	DESCRIBE.WHISPERPOD_NORMAL_GROUND =
+	{
+		GENERIC = "I think it wants something.",
+		GROWING = "Hurry up, you stupid plant!",
+	}
 	DESCRIBE.FRUITBAT = "If it'd sit still I would burn it."
 	DESCRIBE.PITCHERPLANT = "If it were lower down I'd burn it."
 	DESCRIBE.APHID = "Your fuzzyness would make good tinder."

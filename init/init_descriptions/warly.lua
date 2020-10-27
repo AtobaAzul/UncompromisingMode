@@ -141,6 +141,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	ANNOUNCE.WEBBEDCREATURE = "I can't pierce it. My hands are different than a spider's."
 	DESCRIBE.SNAPDRAGON_BUDDY = "It's hunger calls for me!"
 	DESCRIBE.SNAPDRAGON = "Goodness, you're large."
+	DESCRIBE.SNAPPLANT = "A lively plant!"
+	DESCRIBE.WHISPERPOD = "Lets get you some soil!"
+	DESCRIBE.WHISPERPOD_NORMAL_GROUND =
+	{
+		GENERIC = "Crop seeds could be handy.",
+		GROWING = "That is it, just a little more...",
+	}
 	DESCRIBE.FRUITBAT = "I actually don't mind this one."
 	DESCRIBE.PITCHERPLANT = "I wonder if it has any dew inside?"
 	DESCRIBE.APHID = "A horrible pest."

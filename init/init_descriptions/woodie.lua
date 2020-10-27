@@ -142,6 +142,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	ANNOUNCE.WEBBEDCREATURE = "Not even a moose can break it. Maybe a spider could?"
 	DESCRIBE.SNAPDRAGON_BUDDY = "This one seems friendly enough."
 	DESCRIBE.SNAPDRAGON = "Seems like a well endowed bunch."
+	DESCRIBE.SNAPPLANT = "Ah, the beauty of nature!"
+	DESCRIBE.WHISPERPOD = "It belongs in the ground, I think?"
+	DESCRIBE.WHISPERPOD_NORMAL_GROUND =
+	{
+		GENERIC = "Needs something else to grow.",
+		GROWING = "A watched plant never grows.",
+	}
 	DESCRIBE.FRUITBAT = "Who taught that fruit to fly?"
 	DESCRIBE.PITCHERPLANT = "It's a plant, but not the choppin' kind."
 	DESCRIBE.APHID = "They like the trees too, eh?"

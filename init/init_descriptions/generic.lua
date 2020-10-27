@@ -178,6 +178,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.SNAPDRAGON_BUDDY = "It looks hungry. Me too."
 	DESCRIBE.SNAPDRAGON = "It looks nice enough."
 	DESCRIBE.SNAPPLANT = "A little piece of home."
+	DESCRIBE.WHISPERPOD = "Lets see what happens when you put it in the ground."
+	DESCRIBE.WHISPERPOD_NORMAL_GROUND =
+	{
+		GENERIC = "Need some seeds?",
+		GROWING = "Guh! It's growing so slowly!",
+	}
 	DESCRIBE.FRUITBAT = "Agh, it's still terrifying!"
 	DESCRIBE.PITCHERPLANT = "It's quite high up."
 	DESCRIBE.APHID = "A horrible pest."

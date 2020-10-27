@@ -142,6 +142,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	ANNOUNCE.WEBBEDCREATURE = "Only the spider itself can match this tensile strength."
 	DESCRIBE.SNAPDRAGON_BUDDY = "Reminds me of a dionaea muscipula."
 	DESCRIBE.SNAPDRAGON = "Truly a Lusus Naturae!"
+	DESCRIBE.SNAPPLANT = "I believe it has formed a symbiotic relationship."
+	DESCRIBE.WHISPERPOD = "Some gardening may be required."
+	DESCRIBE.WHISPERPOD_NORMAL_GROUND =
+	{
+		GENERIC = "A host for plant growth, perhaps?",
+		GROWING = "It is not yet ready for harvest.",
+	}
 	DESCRIBE.FRUITBAT = "It seems to be connected to the pitcher plant somehow."
 	DESCRIBE.PITCHERPLANT = "The fruit bats can be seen going in and out of it."
 	DESCRIBE.APHID = "They're infesting the Sequoioideae."

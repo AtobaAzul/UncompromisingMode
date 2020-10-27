@@ -142,6 +142,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORMWOOD.ACTIONFAIL
 	ANNOUNCE.WEBBEDCREATURE = "Need leggy stabby"
 	DESCRIBE.SNAPDRAGON_BUDDY = "Hungry friend."
 	DESCRIBE.SNAPDRAGON = "Big friend! Big belly!"
+	DESCRIBE.SNAPPLANT = "Looking good!"
+	DESCRIBE.WHISPERPOD = "Need some dirt?"
+	DESCRIBE.WHISPERPOD_NORMAL_GROUND =
+	{
+		GENERIC = "Plant seed.",
+		GROWING = "Almost there!",
+	}
 	DESCRIBE.FRUITBAT = "Flying friend."
 	DESCRIBE.PITCHERPLANT = "Hanging friend."
 	DESCRIBE.APHID = "Eating big friends!"

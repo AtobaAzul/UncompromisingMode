@@ -475,19 +475,22 @@ local function SpawnDroppersFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local x2 = x + math.random(-8, 8)
 	local z2 = z + math.random(-8, 8)
-	if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
-		local dropper = SpawnPrefab("spider_dropper")
-		dropper.Transform:SetPosition(x2, 0, z2)
-		dropper.sg:GoToState("dropper_enter")
-		dropper.persists = false
-	else
-		SpawnDroppersFunction(player)
+	if TheWorld.state.iscavenight then
+		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+			local dropper = SpawnPrefab("spider_dropper")
+			dropper.Transform:SetPosition(x2, 0, z2)
+			dropper.sg:GoToState("dropper_enter")
+			dropper.persists = false
+		else
+			player:DoTaskInTime(0.1, function(player) SpawnDroppersFunction(player) end)
+		end
 	end
 end
 
 local function SpawnDroppers(player)
 	--print("SpawnDropper")
-	player:DoTaskInTime(10 * math.random() * 2, function()
+	if TheWorld.state.iscavenight then
+		player:DoTaskInTime(10 * math.random() * 2, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
 			
@@ -498,7 +501,8 @@ local function SpawnDroppers(player)
 					SpawnDroppersFunction(player)
 				end)
 			end
-	end)
+		end)
+	end
 end
 
 local function SpawnSkitts(player)
@@ -510,7 +514,7 @@ local function SpawnSkitts(player)
 			for i = 1, num_skitts do
 				player:DoTaskInTime(0.2 * i + math.random() * 0.3, function()
 					local skitts = SpawnPrefab("shadowskittish")
-					if TheWorld.state.isnight then
+					if TheWorld.state.iscavenight then
 						skitts.Transform:SetPosition(x + math.random(-12,12), y, z + math.random(-12,12))
 					end
 				end)
@@ -522,10 +526,12 @@ local function SpawnFissuresFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local x2 = x + math.random(-10, 10)
 	local z2 = z + math.random(-10, 10)
-	if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
-		SpawnPrefab("rnefissure").Transform:SetPosition(x2, 0, z2)
-	else
-		SpawnFissuresFunction(player)
+	if TheWorld.state.iscavenight then
+		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+			SpawnPrefab("rnefissure").Transform:SetPosition(x2, 0, z2)
+		else
+			player:DoTaskInTime(0.1, function(player) SpawnFissuresFunction(player) end)
+		end
 	end
 end
 
@@ -701,21 +707,23 @@ local function SpawnLightFlowersNFernsFunction(player)
 	local x2 = x + math.random(-8, 8)
 	local z2 = z + math.random(-8, 8)
 	
-	if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
-		if math.random() > 0.7 then
-			local flowerdbl = SpawnPrefab("stalker_bulb_double")
-			flowerdbl.Transform:SetPosition(x2, y, z2)
-		else
+	if TheWorld.state.iscavenight then
+		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
 			if math.random() > 0.7 then
-				local flowersng = SpawnPrefab("stalker_bulb")
-				flowersng.Transform:SetPosition(x2, y, z2)				
+				local flowerdbl = SpawnPrefab("stalker_bulb_double")
+				flowerdbl.Transform:SetPosition(x2, y, z2)
 			else
-				local fern = SpawnPrefab("stalker_fern")
-				fern.Transform:SetPosition(x2, y, z2)
+				if math.random() > 0.7 then
+					local flowersng = SpawnPrefab("stalker_bulb")
+					flowersng.Transform:SetPosition(x2, y, z2)				
+				else
+					local fern = SpawnPrefab("stalker_fern")
+					fern.Transform:SetPosition(x2, y, z2)
+				end
 			end
+		else
+			player:DoTaskInTime(0.1, function(player) SpawnLightFlowersNFernsFunction(player) end)
 		end
-	else
-		SpawnLightFlowersNFernsFunction(player)
 	end
 end	
 											
@@ -812,7 +820,7 @@ local function SpawnWalrusHuntFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local x2 = x + math.random(-40, 40)
 	local z2 = z + math.random(-40, 40)
-	if TheWorld.state.isnight then
+	if TheWorld.state.iscavenight then
 		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) and #TheSim:FindEntities(x2, y, z2, 20, {"player"}) < 1 then
 			local leader = SpawnPrefab("walrus")
 			
@@ -892,8 +900,8 @@ local function SpawnShadowBoomer(player)
 			if light <= .1 and #TheSim:FindEntities(x1, 0, z1, 50, {"stalkerminion"}) <= 25 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 				local ent = SpawnPrefab("stalker_minion")
 				ent.Transform:SetPosition(x1, 0, z1)
-				ent.speech = player
 				ent:OnSpawnedBy(player)
+				ent.sg:GoToState("emerge_noburst")
 				ent.Physics:ClearCollisionMask()
 				ent.Physics:CollidesWith(COLLISION.GROUND)
 				ent.Physics:CollidesWith(COLLISION.CHARACTERS)
@@ -906,7 +914,7 @@ local function SpawnShadowBoomer(player)
 				ent.persists = false
 			end
 			--print("what")
-			SpawnShadowBoomer(player)
+			player:DoTaskInTime(0.1, function(player) SpawnShadowBoomer(player) end)
 		end)
 	end
 end

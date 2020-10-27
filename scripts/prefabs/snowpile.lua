@@ -37,11 +37,12 @@ local function onregen(inst)
 				inst.components.workable:SetWorkLeft(inst.components.workable.workleft+1)
 				inst.components.pickable.cycles_left = inst.components.pickable.cycles_left + 1
 				startregen(inst)
-			elseif inst.components.workable.workleft == 3 and math.random() <= 0.25 and not TheWorld.Map:GetPlatformAtPoint(my_x, my_z) then
+			elseif not inst.nospawning and inst.components.workable.workleft == 3 and math.random() <= 0.25 and not TheWorld.Map:GetPlatformAtPoint(my_x, my_z) then
 				local x1, y1, z1 = inst.Transform:GetWorldPosition()
 				local ents2 = TheSim:FindEntities(x1, y1, z1, 45, { "player" })
 				if #ents2 > 0 then
 					print("Snowball Fight!")
+					inst.nospawning = true
 					local snowattack = SpawnPrefab("snowmong")
 					local spawnpoint = inst.Transform:GetWorldPosition()
 					snowattack.Transform:SetPosition(inst.Transform:GetWorldPosition())
@@ -244,7 +245,7 @@ local function onpickedfn(inst, picker)
     end
 	
 	if picker.components.temperature ~= nil then
-		picker.components.temperature:DoDelta(-25)
+		picker.components.temperature:DoDelta(-15)
 	end
 	
 	if picker.components.health ~= nil and not picker.components.health:IsDead() then
@@ -319,6 +320,7 @@ local function snowpilefn(Sim)
 	--local xscale = 0 + math.random(0.3,0.5)
 	--local yscale = 0 + math.random(0.1,0.3)
 	
+	inst.nospawning = false
 	
 	inst:AddComponent("aura")
     inst.components.aura.radius = 2

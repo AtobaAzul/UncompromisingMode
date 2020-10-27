@@ -142,6 +142,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	ANNOUNCE.WEBBEDCREATURE = "How am I going to get her to unwrap this for me?"
 	DESCRIBE.SNAPDRAGON_BUDDY = "Careful Woby! Those plants look hungry!"
 	DESCRIBE.SNAPDRAGON = "I've never seen anything like this before!"
+	DESCRIBE.SNAPPLANT = "They are really captivating!"
+	DESCRIBE.WHISPERPOD = "I think it needs some soil!"
+	DESCRIBE.WHISPERPOD_NORMAL_GROUND =
+	{
+		GENERIC = "I think it needs some seeds! Got any, Woby?",
+		GROWING = "I wish plants could grow as fast as you do Woby.",
+	}
 	DESCRIBE.FRUITBAT = "Maybe if we're lucky it'll turn me into a fruit!"
 	DESCRIBE.PITCHERPLANT = "I could hit it with my sling for practice!"
 	DESCRIBE.APHID = "It's fuzzy!"
@@ -157,7 +164,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
-	DESCRIBE.BLUEBERRYPLANT =         
+	DESCRIBE.BLUEBERRYPLANT =
 		{
             READY = "Wow! Everything is huge around here!",
 			REGROWING = "It'll come back, right?",

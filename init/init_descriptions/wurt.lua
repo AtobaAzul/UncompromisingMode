@@ -143,6 +143,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	ANNOUNCE.WEBBEDCREATURE = "Can't break! Flurgh! How spiderfolk break?"
 	DESCRIBE.SNAPDRAGON_BUDDY = "We eat same thing!"
 	DESCRIBE.SNAPDRAGON = "Friendly, florp?"
+	DESCRIBE.SNAPPLANT = "Big plant likes that gross flower."
+	DESCRIBE.WHISPERPOD = "Wants soil?"
+	DESCRIBE.WHISPERPOD_NORMAL_GROUND =
+	{
+		GENERIC = "Need growy seeds?",
+		GROWING = "Ready soon, flort?",
+	}
 	DESCRIBE.FRUITBAT = "Looks tasty, florp."
 	DESCRIBE.PITCHERPLANT = "Can't reach."
 	DESCRIBE.APHID = "Bug, florp."

@@ -142,6 +142,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	ANNOUNCE.WEBBEDCREATURE = "Spider is not mightier!!"
 	DESCRIBE.SNAPDRAGON_BUDDY = "Plant need food to grow strong like Wolfgang!"
 	DESCRIBE.SNAPDRAGON = "Mightiest plant!"
+	DESCRIBE.SNAPPLANT = "Good looking plant!"
+	DESCRIBE.WHISPERPOD = "Wolfgang use green thumb?"
+	DESCRIBE.WHISPERPOD_NORMAL_GROUND =
+	{
+		GENERIC = "Need something to grow big and strong!",
+		GROWING = "Is still growing.",
+	}
 	DESCRIBE.FRUITBAT = "Flying fruity!"
 	DESCRIBE.PITCHERPLANT = "If not skip leg day, Wolfgang could reach!"
 	DESCRIBE.APHID = "Is tiny bug!"
