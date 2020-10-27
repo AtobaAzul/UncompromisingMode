@@ -15,8 +15,9 @@ AddTask("GiantTrees", {
 			["SnapDragons"] = 1,
 			["SpideryGiantTrees"] = 1,
 			["HoodedTown"] = 1,
+			["HFHolidays"] = 1,
 		},
 		room_bg=GROUND.JUNGLE,
 		background_room="BGGiantTrees",
 		colour={r=.1,g=.1,b=.1,a=1}
-	}) 
+	})

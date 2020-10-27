@@ -217,6 +217,7 @@ local StaticLayout = GLOBAL.require("map/static_layout")
 
 Layouts["hooded_town"] = StaticLayout.Get("map/static_layouts/hooded_town")
 Layouts["rose_garden"] = StaticLayout.Get("map/static_layouts/rose_garden")
+Layouts["hf_holidays"] = StaticLayout.Get("map/static_layouts/hf_holidays")
 
 AddRoomPreInit("HoodedTown", function(room)
 	if not room.contents.countstaticlayouts then
@@ -230,6 +231,13 @@ AddRoomPreInit("RoseGarden", function(room)
 		room.contents.countstaticlayouts = {}
 	end
 	room.contents.countstaticlayouts["rose_garden"] = 1
+end)
+
+AddRoomPreInit("HFHolidays", function(room)
+	if not room.contents.countstaticlayouts then
+		room.contents.countstaticlayouts = {}
+	end
+	room.contents.countstaticlayouts["hf_holidays"] = 1
 end)
 
 

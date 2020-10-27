@@ -4,12 +4,12 @@ GLOBAL.setfenv(1, GLOBAL)
 ---	The Hunger Value Of Eaten Food Is Compared To The Players Max Hunger. Min 1, Max 6
 
 env.AddPlayerPostInit(function(inst)
---[[	inst:ListenForEvent("hungerdelta", function(inst, data)
+	--[[inst:ListenForEvent("overstuff", function(inst, data)
 	local myvalue = data.oldpercent * inst.components.hunger.max
-	local myvalueover = myvalue + data.truedelta
+	local myvalueover = myvalue + data.delta
 	print(myvalue)
 	print(myvalueover)
-	print(data.truedelta)
+	print(data.delta)
 	
 	
 		if myvalueover > inst.components.hunger.max then	
@@ -61,13 +61,15 @@ env.AddComponentPostInit("hunger", function(self)
 
 		if not ignore_invincible and self.inst.components.health and self.inst.components.health.invincible or self.inst.is_teleporting then
 			return
-		end 
-
+		end
+		
+		print("success")
+		
 		local old = self.current
 		self.current = math.clamp(self.current + delta, 0, self.max)
 
 		self.inst:PushEvent("overstuff", { oldpercent = old / self.max, newpercent = self.current / self.max, overtime = overtime, delta2 = self.current-old, delta = delta })
 
-		return _OldDoDelta(delta, overtime, ignore_invincible)
+		return _OldDoDelta(self, delta, overtime, ignore_invincible)
 	end
 end)]]

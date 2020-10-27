@@ -237,3 +237,23 @@ AddRoom("RoseGarden", {
 					                },
 					            }
 					})
+AddRoom("HFHolidays", {
+					colour={r=.8,g=0.5,b=.6,a=.50},
+					value = GROUND.JUNGLE,
+					tags = { "RoadPoison","hoodedcanopy" },
+					contents =  {
+									countprefabs = {
+										giant_tree = function () return 3 + math.random(0,1) end,
+										extracanopyspawner = function () return 6 + math.random(0,1) end,
+    									},
+									
+					                distributepercent = .4,
+					                distributeprefabs=
+					                {
+									sapling = 0.2,
+									evergreen_sparse = 0.4,
+									hooded_fern = 0.3,
+									blueberryplantbuncher = 0.001,
+					                },
+					            }
+					})
