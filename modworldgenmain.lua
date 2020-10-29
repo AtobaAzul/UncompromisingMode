@@ -107,14 +107,34 @@ task.room_choices["veteranshrine"] = 1
 end)]]
 --Toadstool moved to the mushroom biomes.
 
+--Waffle's Specific Task Remover Code
 AddTaskSetPreInitAny(function(tasksetdata)
-    if tasksetdata.location ~= "cave" then
-        return
+  for _, task in pairs(tasksetdata.tasks) do
+    if task == "ToadStoolTask1" then
+      table.remove(tasksetdata.tasks, _)
     end
-table.remove(tasksetdata.tasks,23)
-table.remove(tasksetdata.tasks,22) 
-table.remove(tasksetdata.tasks,21) 
+  end
 end)
+--Waffle's Specific Task Remover Code
+--Waffle's Specific Task Remover Code
+AddTaskSetPreInitAny(function(tasksetdata)
+  for _, task in pairs(tasksetdata.tasks) do
+    if task == "ToadStoolTask2" then
+      table.remove(tasksetdata.tasks, _)
+    end
+  end
+end)
+--Waffle's Specific Task Remover Code
+--Waffle's Specific Task Remover Code
+AddTaskSetPreInitAny(function(tasksetdata)
+  for _, task in pairs(tasksetdata.tasks) do
+    if task == "ToadStoolTask3" then
+      table.remove(tasksetdata.tasks, _)
+    end
+  end
+end)
+--Waffle's Specific Task Remover Code
+
 AddRoomPreInit("RedMushPillars", function(room)			--red	
 room.contents.countstaticlayouts = {
             ["ToadstoolArena"] = 1,

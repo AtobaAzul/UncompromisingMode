@@ -603,7 +603,7 @@ return {
 		
         {
           name = "",
-          type = "hf_rubble_cathedral",
+          type = "gravestone",
           shape = "rectangle",
           x = 146,
           y = 138,
@@ -614,7 +614,7 @@ return {
         },
         {
           name = "",
-          type = "hf_rubble_chimney",
+          type = "mound",
           shape = "rectangle",
           x = 160,
           y = 61,
@@ -691,7 +691,7 @@ return {
         },
         {
           name = "",
-          type = "hf_rubble_pubdoor",
+          type = "mound",
           shape = "rectangle",
           x = 258,
           y = 293,
@@ -702,12 +702,12 @@ return {
         },
         {
           name = "",
-          type = "grass",
+          type = "gravestone",
           shape = "rectangle",
           x = 259,
           y = 45,
           width = 0,
-          height = 0,
+          height = 0,	
           visible = true,
           properties = {}
         },

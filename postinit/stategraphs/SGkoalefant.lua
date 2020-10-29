@@ -15,9 +15,20 @@ EventHandler("doattack", function(inst)
                                 end
 								end
                             end),
-							    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("charging") then inst.sg:GoToState("hit") end end),
+EventHandler("attacked", function(inst, data) 
+if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("charging") then
+
+if (math.random() > 0.75) and inst.components.combat.target ~= nil and (2 > inst:GetDistanceSqToInst(inst.components.combat.target)) then
+inst.sg:GoToState("stomp") 
+else
+inst.sg:GoToState("hit")
+end
+end
+end),
 
 	}
+	
+	
 local function DisarmTarget(inst, target)
 	local item = nil
 	if target and target.components.inventory then
@@ -180,7 +191,7 @@ local states = {
         },
     
     State{  name = "charge_stop",
-            tags = {"canrotate", "busy", "idle"},
+            tags = {"canrotate", "busy", "idle","charging"},
             
             onenter = function(inst) 
                 --inst.SoundEmitter:KillSound("charge")
@@ -202,7 +213,7 @@ local states = {
         },    
 
     State{  name = "chargeattack",
-            tags = {"busy", "runningattack"},
+            tags = {"busy", "runningattack","charging"},
             
             onenter = function(inst)
 				print("chargeattack")
@@ -231,7 +242,7 @@ local states = {
         },
 	State{
 		name = "disarm",
-		tags = {"busy"},
+		tags = {"attack","busy"},
 
 		onenter = function(inst)
 			inst.Physics:Stop()
@@ -257,6 +268,51 @@ local states = {
 		},
 
 	},
+	State{
+        name = "stomp",
+        tags = {"attack", "busy"},
+
+        onenter = function(inst, target)
+            inst.sg.statemem.target = target
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/koalefant/angry")
+            inst.components.combat:StartAttack()
+            inst.components.locomotor:StopMoving()
+            inst.AnimState:PlayAnimation("atk_pre")
+            inst.AnimState:PushAnimation("surprise", false)
+			if inst:HasTag("chargespeed") then
+			inst.components.locomotor.runspeed = 7
+			inst:RemoveTag("chargespeed")
+			end
+			local function isplayer(ent)
+			if ent ~= nil and ent:HasTag("player") then-- fix to friendly AOE: refer for later AOE mobs -Axe
+				return true
+			end
+			end
+			inst.components.combat:SetAreaDamage(1, 1, isplayer)
+			
+        end,
+
+        timeline=
+        {
+            TimeEvent(30*FRAMES, function(inst) 
+			
+			inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+        },
+
+        events=
+        {
+            EventHandler("animqueueover", function(inst)
+			local function isplayer(ent)
+			if ent ~= nil and ent:HasTag("player") then -- fix to friendly AOE: refer for later AOE mobs -Axe
+				return true
+			end
+			end
+			inst.components.combat:ResetCooldown()
+			inst.components.combat:SetAreaDamage(0,0,isplayer)
+			inst.sg:GoToState("idle")
+			end),
+        },
+    },
 }
 
 for k, v in pairs(events) do
