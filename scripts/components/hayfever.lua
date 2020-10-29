@@ -176,8 +176,8 @@ function Hayfever:DoSneezeEffects()
     
     self.inst.components.sanity:DoDelta(-TUNING.SANITY_SUPERTINY*3)
 	
-	if not TheWorld.state.isspring then
-		self.inst.components.Hayfever:Disable()
+	if not TheWorld.state.isspring and self.inst.components.hayfever ~= nil then
+		self.inst.components.hayfever:Disable()
 	end
 --[[
     -- cause player to drop stuff here.
