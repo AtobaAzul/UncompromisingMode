@@ -1,8 +1,8 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
-env.AddStategraphPostInit("beefalo", function(inst)
-local events={
+env.AddStategraphPostInit("koalefant", function(inst)
+local events= {
 EventHandler("doattack", function(inst)
 								if not inst.sg:HasStateTag("precharging") then
                                 local nstate = "attack"
@@ -18,7 +18,25 @@ EventHandler("doattack", function(inst)
 							    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("charging") then inst.sg:GoToState("hit") end end),
 
 	}
-
+local function DisarmTarget(inst, target)
+	local item = nil
+	if target and target.components.inventory then
+		item = target.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+	end
+	if item and item.Physics then
+		target.components.inventory:DropItem(item)
+		local x, y, z = item:GetPosition():Get()
+		y = .1
+		item.Physics:Teleport(x,y,z)
+		local hp = target:GetPosition()
+		local pt = inst:GetPosition()
+		local vel = (hp - pt):GetNormalized()
+		local speed = 5 + (math.random() * 2)
+		local angle = math.atan2(vel.z, vel.x) + (math.random() * 20 - 10) * DEGREES
+		item.Physics:SetVel(math.cos(angle) * speed, 10, math.sin(angle) * speed)
+	end
+	inst.CanDisarm = false
+end
 
 local states = {
 	State{
@@ -27,13 +45,13 @@ local states = {
 
         onenter = function(inst, target)
             inst.sg.statemem.target = target
-            inst.SoundEmitter:PlaySound(inst.sounds.angry)
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/koalefant/angry")
             inst.components.combat:StartAttack()
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("atk_pre")
             inst.AnimState:PushAnimation("atk", false)
 			if inst:HasTag("chargespeed") then
-			inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT
+			inst.components.locomotor.runspeed = 7
 			inst:RemoveTag("chargespeed")
 			end
 			
@@ -48,13 +66,17 @@ local states = {
         {
             EventHandler("animqueueover", function(inst)
 			if inst.components.combat.target ~= nil then
-			if math.random() < 0.33 and not inst.components.domesticatable:IsDomesticated() then
+			local distance = inst:GetDistanceSqToInst(inst.components.combat.target)
+			local chance = math.random()
+			if chance < 0.33 then
 				inst.sg:GoToState("charge_start")
+			else
+				if chance > 0.77 then
+				inst.sg:GoToState("disarm")
 				else
 				inst.sg:GoToState("idle")
 				end
-			else
-			inst.sg:GoToState("idle")
+			end
 			end
 			end),
         },
@@ -67,9 +89,9 @@ local states = {
                 inst.Physics:Stop()
 				inst.components.locomotor:StopMoving()
 				inst.components.combat:ResetCooldown()
-				inst.AnimState:PlayAnimation("mating_taunt1")
-				inst.SoundEmitter:PlaySound(inst.sounds.angry)
-				inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT*2.29  --should be equal to rook
+				inst.AnimState:PlayAnimation("shake")
+				inst.SoundEmitter:PlaySound("dontstarve/creatures/koalefant/angry")
+				inst.components.locomotor.runspeed = 7*2.29  --should be equal to rook
 				inst:AddTag("chargespeed")
             end,
             
@@ -144,7 +166,7 @@ local states = {
                     if distance > MAXDIST then
                         inst.sg:GoToState("idle") 
 						if inst:HasTag("chargespeed") then
-						inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT
+						inst.components.locomotor.runspeed = 7
 						inst:RemoveTag("chargespeed")
 						end
                     end
@@ -166,7 +188,7 @@ local states = {
                 --inst.AnimState:PlayAnimation("run_pst")
 		        --inst.SoundEmitter:PlaySound(inst.effortsound)
 				if inst:HasTag("chargespeed") then
-					inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT
+					inst.components.locomotor.runspeed = 7
 					inst:RemoveTag("chargespeed")
 				end
 				
@@ -190,7 +212,7 @@ local states = {
 		        --inst.SoundEmitter:PlaySound(inst.effortsound)
                 inst.AnimState:PlayAnimation("atk")
 				if inst:HasTag("chargespeed") then
-					inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT
+					inst.components.locomotor.runspeed = 7
 					inst:RemoveTag("chargespeed")
 				end
             end,
@@ -207,6 +229,34 @@ local states = {
                 EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
             },
         },
+	State{
+		name = "disarm",
+		tags = {"busy"},
+
+		onenter = function(inst)
+			inst.Physics:Stop()
+			inst.AnimState:PlayAnimation("scare")
+		end,
+
+		timeline =
+		{
+			TimeEvent(2*FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound("dontstarve/creatures/koalefant/angry")
+				if inst.components.combat.target and inst.components.combat.target.ShakeCamera then
+					inst.components.combat.target:ShakeCamera(CAMERASHAKE.FULL, 0.75, 0.01, 1.5, 40)
+				end
+			end),
+			TimeEvent(2*FRAMES, function(inst) DisarmTarget(inst, inst.components.combat.target) end),
+		},
+
+		events=
+		{
+			EventHandler("animqueueover", function(inst)
+				inst.sg:GoToState("idle")
+			end ),
+		},
+
+	},
 }
 
 for k, v in pairs(events) do
@@ -218,6 +268,5 @@ for k, v in pairs(states) do
     assert(v:is_a(State), "Non-state added in mod state table!")
     inst.states[v.name] = v
 end
-
 end)
 

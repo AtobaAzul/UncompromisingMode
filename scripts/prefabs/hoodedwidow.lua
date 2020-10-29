@@ -37,7 +37,7 @@ local RETARGET_CANT_TAGS = { "INLIMBO","structure", "bird","snapdragon" }
 local function Retarget(inst)
     if not inst.components.health:IsDead() and not inst.components.sleeper:IsAsleep() then
         local oldtarget = inst.components.combat.target
-        local newtarget = FindEntity(inst, 12, 
+        local newtarget = FindEntity(inst, 6, 
             function(guy) 
                 return 
                     inst.components.combat:CanTarget(guy) 

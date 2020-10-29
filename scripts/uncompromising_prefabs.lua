@@ -160,4 +160,5 @@ return {
 	"mushdrake_red",
 	"snowcone",
 	"rneshadowskittish",
+	"cinnamon_tree",
 }
