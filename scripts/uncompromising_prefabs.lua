@@ -159,4 +159,5 @@ return {
 	"screecher_trinket",
 	"mushdrake_red",
 	"snowcone",
+	"rneshadowskittish",
 }

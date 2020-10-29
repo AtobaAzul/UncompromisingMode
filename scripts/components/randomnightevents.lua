@@ -522,7 +522,7 @@ local function SpawnSkitts(player)
 			local num_skitts = 150
 			for i = 1, num_skitts do
 				player:DoTaskInTime(0.2 * i + math.random() * 0.3, function()
-					local skitts = SpawnPrefab("shadowskittish")
+					local skitts = SpawnPrefab("rneshadowskittish")
 					skitts.Transform:SetPosition(x + math.random(-12,12), y, z + math.random(-12,12))
 				end)
 			end
