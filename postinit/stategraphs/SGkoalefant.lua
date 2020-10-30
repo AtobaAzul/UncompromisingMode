@@ -65,14 +65,16 @@ local states = {
 			inst.components.locomotor.runspeed = 7
 			inst:RemoveTag("chargespeed")
 			end
-			
+			inst.sg:SetTimeout(4)
         end,
 
         timeline=
         {
             TimeEvent(15*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
-
+        ontimeout = function(inst)
+            inst.sg:GoToState("disarm")
+        end,
         events=
         {
             EventHandler("animqueueover", function(inst)
@@ -100,7 +102,7 @@ local states = {
                 inst.Physics:Stop()
 				inst.components.locomotor:StopMoving()
 				inst.components.combat:ResetCooldown()
-				inst.AnimState:PlayAnimation("shake")
+				inst.AnimState:PlayAnimation("paw")
 				inst.SoundEmitter:PlaySound("dontstarve/creatures/koalefant/angry")
 				inst.components.locomotor.runspeed = 7*2.29  --should be equal to rook
 				inst:AddTag("chargespeed")
@@ -295,7 +297,10 @@ local states = {
         timeline=
         {
             TimeEvent(30*FRAMES, function(inst) 
-			
+			SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
+			SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
+			SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
+			SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
 			inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
 

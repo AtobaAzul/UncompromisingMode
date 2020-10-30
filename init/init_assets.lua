@@ -266,6 +266,7 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/snowcone.xml"),
 	Asset("IMAGE", "images/inventoryimages/snowcone.tex"),
 	Asset("ANIM", "anim/koalefant_scare.zip"),
+	Asset("ANIM", "anim/koalefant_paw.zip"),
 	
 	
 	
