@@ -18,7 +18,7 @@ EventHandler("doattack", function(inst)
 EventHandler("attacked", function(inst, data) 
 if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("charging") then
 
-if (math.random() > 0.75) and inst.components.combat.target ~= nil and (2 > inst:GetDistanceSqToInst(inst.components.combat.target)) then
+if (math.random() > 0.9) and inst.components.combat.target ~= nil and (2 > inst:GetDistanceSqToInst(inst.components.combat.target)) then
 inst.sg:GoToState("stomp") 
 else
 inst.sg:GoToState("hit")
