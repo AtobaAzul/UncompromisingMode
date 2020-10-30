@@ -147,7 +147,7 @@ end)
 AddPrefabPostInit("trunkvest_summer", function (inst)
     if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
 		inst.components.fueled:SetSections(4)
-    		inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedium)
+    		inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedhigh)
     end
 end)
 
