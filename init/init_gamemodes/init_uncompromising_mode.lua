@@ -12,7 +12,8 @@ local require = GLOBAL.require
 	modimport("init/init_weather/init_dragonfly_bait")
 	
 	--  [  	Over Eating Nerf	     ]    --
-	modimport("init/init_food/init_stuffed")
+	--modimport("init/init_food/init_stuffed") 
+	--Currently shelved due to hunger upvalue return error
 	
 --	[ 	Import Names and Descriptions	]	--
 	modimport("init/init_names")
