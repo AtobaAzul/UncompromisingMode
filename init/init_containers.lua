@@ -48,6 +48,22 @@ modparams.air_conditioner =
     acceptsstacks = false,
     type = "cooker",
 }
+modparams.puffvest =
+{
+    widget =
+    {
+        slotpos = {},
+        animbank = "ui_lamp_1x4",
+        animbuild = "ui_lamp_1x4",
+        pos = Vector3(-70, -70, 0),
+    },
+    issidewidget = true,
+    type = "pack",
+}
+
+for y = 0, 3 do
+    table.insert(modparams.puffvest.widget.slotpos, Vector3(-1, -75 * y + 110, 0))	
+end
 
 for k, v in pairs(modparams) do
 	containers.MAXITEMSLOTS = math.max(containers.MAXITEMSLOTS, v.widget.slotpos ~= nil and #v.widget.slotpos or 0)
