@@ -16,15 +16,15 @@ print("DSTU: wortox")
 
 local REMOVE_SOULS = 
 {
-    "spider",
-    "mosquito",
+    --""spider",
+    --""mosquito",
     "bee",
     "killerbee",
     "butterfly",
-    "birchnutdrake",
-    "mole",
-    "beeguard",
-    "bat",
+    --""birchnutdrake",
+    --""mole",
+    --""beeguard",
+    --""bat",
 }
 
 for k, v in pairs(REMOVE_SOULS) do
