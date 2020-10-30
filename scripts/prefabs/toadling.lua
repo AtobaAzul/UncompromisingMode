@@ -168,7 +168,7 @@ local function Retarget(inst)
        and inst.components.herdmember:GetHerd().components.mood
        and inst.components.herdmember:GetHerd().components.mood:IsInMood() then--]]
         return FindEntity(inst, TUNING.BEEFALO_TARGET_DIST, function(guy)
-            return not guy:HasTag("toadstool") and not guy:HasTag("frog") and not guy:HasTag("toad") 
+            return not guy:HasTag("toadstool") and not guy:HasTag("frog") and not guy:HasTag("bird") and not guy:HasTag("toad") 
 			and not guy:HasTag("prey") and not guy:HasTag("insect") and not guy:HasTag("small_creature") and
                     inst.components.combat:CanTarget(guy) and 
                     not guy:HasTag("wall")
