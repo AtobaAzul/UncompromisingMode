@@ -15,6 +15,7 @@ SetSharedLootTable("aphid_loot",
 {
     --{'weevole_carapace', 1},
     {'monstersmallmeat',      0.25},
+    {'steelwool',      0.25},
 })
 
 local brain = require "brains/aphidbrain"

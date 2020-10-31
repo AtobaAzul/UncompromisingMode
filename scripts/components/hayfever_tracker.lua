@@ -51,7 +51,7 @@ end
 local function QueenFalse()
 	_queenkilled = false
 	OnSeasonTick()
-	print(_queenkilled)
+	--print(_queenkilled)
 end
 
 local function QueenTrue()
@@ -63,7 +63,7 @@ local function QueenTrue()
 		end
 	end
 
-	print(_queenkilled)
+	--print(_queenkilled)
 end
 
 function self:CheckQueen()

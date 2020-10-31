@@ -63,7 +63,7 @@ env.AddPrefabPostInit("mound", function(inst)
 					inst.components.lootdropper:SpawnLootPrefab(item)
 				end
 			end
-			print("jazzy")
+			--print("jazzy")
 			TheWorld:AddTag("jazzy_spawned")
 			return _OnFinishCallBack(inst, worker)
 		elseif not TheWorld:HasTag("freddo_spawned") and TheSim:FindFirstEntityWithTag("specialtrinket_jazzy") and not TheSim:FindFirstEntityWithTag("specialtrinket_freddo") then
@@ -80,7 +80,7 @@ env.AddPrefabPostInit("mound", function(inst)
 					inst.components.lootdropper:SpawnLootPrefab(item)
 				end
 			end
-			print("freddo")
+			--print("freddo")
 			TheWorld:AddTag("freddo_spawned")
 			return _OnFinishCallBack(inst, worker)
 		elseif not TheWorld:HasTag("don_spawned") and TheSim:FindFirstEntityWithTag("specialtrinket_jazzy") and TheSim:FindFirstEntityWithTag("specialtrinket_freddo") and not TheSim:FindFirstEntityWithTag("specialtrinket_don") then
@@ -97,11 +97,11 @@ env.AddPrefabPostInit("mound", function(inst)
 					inst.components.lootdropper:SpawnLootPrefab(item)
 				end
 			end
-			print("don")
+			--print("don")
 			TheWorld:AddTag("don_spawned")
 			_OnFinishCallBack(inst, worker)
 		else
-			print("nothing")
+			--print("nothing")
 			return _OnFinishCallBack(inst, worker)
 		end
 	end

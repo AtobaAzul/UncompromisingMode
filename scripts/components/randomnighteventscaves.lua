@@ -43,7 +43,7 @@ local function PlayerScaling(player)
 		return 4
 	end
 	
-	print("default")
+	--print("default")
 	return 1
 end
 	
@@ -160,7 +160,7 @@ local function SpawnBirchNutters(player)
 end
 
 local function LeifAttack(player)
---print("leifattack")
+print("leifattack")
 local leiftime = 8 + math.random() * 3
 MultiFogAuto(player,leiftime)
 
@@ -168,7 +168,7 @@ local days_survived = player.components.age ~= nil and player.components.age:Get
     local target = FindEntity(player, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, { "evergreens", "tree" }, { "leif", "stump", "burnt" })
     if target ~= nil then
 		for k = 1, (days_survived <= 30 and 1) or math.random(days_survived <= 80 and 2 or 3) do
-			print("targetfound")
+			--print("targetfound")
 			target.noleif = true
 			target.chopper = player
 			target.leifscale = 1 --GetGrowthStages(target)[target.components.growable.stage].leifscale or 1 Getting size is muck
@@ -203,7 +203,7 @@ local function spawn_stumpling(target)
 end
 
 local function StumpsAttack(player)
---print("myshins!")
+print("myshins!")
 local leiftime = 8 + math.random() * 3
 MultiFogAuto(player,leiftime)
 
@@ -211,7 +211,7 @@ local days_survived = player.components.age ~= nil and player.components.age:Get
 	for k = 1, (days_survived <= 30 and 4) or math.random(days_survived <= 80 and 8 or 12) do
     local target = FindEntity(player, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, {"stump","evergreen"}, { "leif","burnt","deciduoustree" })
 		if target ~= nil then
-			print("targetfound")
+			--print("targetfound")
 			target.noleif = true
 			target.chopper = player--GetGrowthStages(target)[target.components.growable.stage].leifscale or 1 Getting size is muck
 				--assert(GetBuild(target).leif ~= nil)
@@ -245,7 +245,7 @@ local function SpawnShadowCharsFunction(player)
 end
 
 local function SpawnShadowChars(player)
-	--print("SpawnShadowChars")
+	print("SpawnShadowChars")
 	player:DoTaskInTime(5 + math.random(0,5), function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
@@ -294,7 +294,7 @@ local function SpawnMonkeysFunction(player)
 end
 
 local function SpawnMonkeys(player)
-	--print("SpawnMonkeys")
+	print("SpawnMonkeys")
 	player:DoTaskInTime(5 + math.random(0,5), function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
@@ -382,7 +382,7 @@ local function SpawnWerePigs(player)
 end
 
 local function FireHungryGhostAttack(player)
-	--print("ooooOOOOoooo")
+	print("ooooOOOOoooo")
 	local ghosttime = 5 + math.random(0,5)
 	MultiFogAuto(player,ghosttime)
 	player:DoTaskInTime(ghosttime, function()
@@ -400,7 +400,7 @@ local function FireHungryGhostAttack(player)
 end
 
 local function SpawnBats(player)
-	--print("SpawnBats")
+	print("SpawnBats")
 	
 	local battime = 10 * math.random() * 2
 	MultiFogAuto(player,battime)
@@ -488,7 +488,7 @@ local function SpawnDroppersFunction(player)
 end
 
 local function SpawnDroppers(player)
-	--print("SpawnDropper")
+	print("SpawnDropper")
 	if TheWorld.state.iscavenight then
 		player:DoTaskInTime(10 * math.random() * 2, function()
 			local x, y, z = player.Transform:GetWorldPosition()
@@ -506,7 +506,7 @@ local function SpawnDroppers(player)
 end
 
 local function SpawnSkitts(player)
-	--print("SpawnSkitts")
+	print("SpawnSkitts")
 	local skitttime = 10 * math.random() * 2
 	player:DoTaskInTime(skitttime, function()
 			local x, y, z = player.Transform:GetWorldPosition()
@@ -536,7 +536,7 @@ local function SpawnFissuresFunction(player)
 end
 
 local function SpawnFissures(player)
-	--print("SpawnFissures")
+	print("SpawnFissures")
 	local tillrne = 10 + math.random(10,15)
 	MultiFogAuto(player,tillrne)
 		player:DoTaskInTime(tillrne, function()
@@ -551,7 +551,7 @@ local function SpawnFissures(player)
 end
 
 local function SpawnKrampus(player)
-	--print("Thundering")
+	print("kramping")
 	
 	if not TheWorld.state.israining then
 		TheWorld:PushEvent("ms_forceprecipitation")
@@ -604,7 +604,7 @@ local function SpawnThunderClose(player)
 end
 
 local function SpawnThunderFar(player)
-	--print("Thundering")
+	print("Thundering")
 	
 	if not TheWorld.state.israining then
 		TheWorld:PushEvent("ms_forceprecipitation")
@@ -655,7 +655,7 @@ local function SpawnSquidFunction(player)
 end
 
 local function SpawnSquids(player)
-	--print("Spawnsquids")
+	print("Spawnsquids")
 	local squidtime = 10 * math.random() * 2
 	MultiFogAuto(player,squidtime)
 	player:DoTaskInTime(squidtime, function()
@@ -694,7 +694,7 @@ local function SpawnGnarwailFunction(player)
 end
 
 local function SpawnGnarwail(player)
-	--print("Spawnsquids")
+	print("Spawnsquids")
 	local sharktime = 10 * math.random() * 2
 	MultiFogAuto(player,sharktime)
 	player:DoTaskInTime(sharktime, function()
@@ -741,7 +741,7 @@ end
 
 local function MoonTear(player)
 	if TheWorld.state.isfullmoon then
-		--print("The Moon is Crying")
+		print("The Moon is Crying")
 		local x, y, z = player.Transform:GetWorldPosition()
 		player:DoTaskInTime(0.6 + math.random(4), function()
 			local tear = SpawnPrefab("moon_tear_meteor")
@@ -753,7 +753,7 @@ end
 local function ChessPiece(player)
 	MultiFogAuto(player,10)
 	if TheWorld.state.isnewmoon and TheWorld.state.cycles > 10 then
-		--print("Shadows...")
+		print("Shadows...")
 		local x, y, z = player.Transform:GetWorldPosition()
 		local chesscheck = math.random()
 		
@@ -1103,7 +1103,7 @@ AddOceanEvent(SpawnShadowTalker,.4)
 ------------------------
 
 local function DoBaseRNE(player)
-print("done")
+--print("done")
 	if math.random() >= .6 and TheWorld.state.iswinter and TheWorld.state.isnight then
 		if self.totalrandomwinterweight and self.totalrandomwinterweight > 0 and self.winterevents then
 			local rnd = math.random()*self.totalrandomwinterweight
@@ -1340,7 +1340,7 @@ local function CheckPlayers()
 	local numStructures2 = 0
 	
 	local playerchancescaling = TUNING.DSTU.RNE_CHANCE - (#playerlist * 0.1)
-	print(playerchancescaling)
+	--print(playerchancescaling)
 	
 	if TheWorld.state.cycles >= 5 and math.random() >= playerchancescaling or (TheWorld.state.isfullmoon and math.random() >= 0.5) or (TheWorld.state.isnewmoon and math.random() >= 0.75) then
 		
@@ -1358,31 +1358,31 @@ local function CheckPlayers()
 						DoCaveRNE(player)
 					else
 						if TheWorld.state.isfullmoon then
-							print("fullmoon")
+							--print("fullmoon")
 							DoFullMoonRNE(player)--DoFullMoonRNE(v)
 						elseif TheWorld.state.isnewmoon then
-							print("newmoon")
+							--print("newmoon")
 							DoNewMoonRNE(player)--DoNewMoonRNE(v)
 						else
 							DoBaseRNE(player)--DoBaseRNE(v)
 						end
 					end
-					print("found base")
+					--print("found base")
 				else
 					if TheWorld:HasTag("cave") then
 						DoCaveRNE(player)
 					else
 						if TheWorld.state.isfullmoon then
-							print("fullmoon")
+							--print("fullmoon")
 							DoFullMoonRNE(player)--DoFullMoonRNE(v)
 						elseif TheWorld.state.isnewmoon then
-							print("newmoon")
+							--print("newmoon")
 							DoNewMoonRNE(player)--DoNewMoonRNE(v)
 						else
 							DoWildRNE(player)--DoWildRNE(v)
 						end
 					end
-					print("no find base")
+					--print("no find base")
 				end
 			else
 				return
@@ -1403,7 +1403,7 @@ local function CheckPlayers()
 						--nothing, not really accounting for other players in other bases but meh
 					elseif TheWorld:HasTag("cave") then
 						DoSecondaryCaveRNE(i)--DoWildRNE(v)
-						print("no find base")
+						--print("no find base")
 					end
 				else
 					return
