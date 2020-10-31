@@ -54,7 +54,13 @@
 
 --Koalefant
 
-* [x]  Koalefants drop 4 meat now, instead of 8.
+* [x] [THE HOODED FOREST] Koalefants now have 2000 health
+
+* [x] [THE HOODED FOREST] Koalefants have a small chance to counter-attack when hit, disrupting the kiting pattern.
+
+* [x] [THE HOODED FOREST] Koalefants now have a chance to charge at the player. This is telegraphed by it dragging it's hoof on the ground.
+
+* [x] [THE HOODED FOREST] Koalefants will occasionally honk their nose with extreme volume, knocking the player's weapon out of their hand.
 
 --Hounds
 
@@ -122,7 +128,7 @@
 
 * [x]  Toadstool only drops shroom skin when he dies, though he drops all that the player would get throughout each phase. This is because of the new shroom skin items we added.
 
-* [x] [HOODED FOREST] Toadstool's spawns have been moved to 1 in each of the 3 mushroom biomes. (The old minibiomes were uninteresting and adding toadstool spawners to the mushroom biomes spices them up even more, also removed the pointless areas so we can fill it in with interesting stuff when cave update hits)
+* [x] [THE HOODED FOREST] Toadstool's spawns have been moved to 1 in each of the 3 mushroom biomes. (The old minibiomes were uninteresting and adding toadstool spawners to the mushroom biomes spices them up even more, also removed the pointless areas so we can fill it in with interesting stuff when cave update hits)
 
 --Antlion
 
@@ -136,7 +142,7 @@
 
 * [x]  Sometimes while underground in winter, the deerclops will make a desperate attempt to attack the player, and will crash through the cave ceiling with anger. (Fun fact: This was in since launch, it just wasn't listed in the changelog).
 
-* [x] [HOODED FOREST] Cursed Antler Vetcurse item.
+* [x] [THE HOODED FOREST] Cursed Antler Vetcurse item.
 --Dragonfly
 
 * [x]  Raidfly's Lavae will now drop explosive slime on death, destroying structures and settings things on fire.
@@ -181,6 +187,12 @@
 * [x]  Thulecite Armor has knockback resistance.
 
 * [x]  [Fear the Dark!] Theulicite suit and dapper vest reduces insanity auras from monsters by 40%.
+
+* [x]  [THE HOODED FOREST] The Breezy Vest now has 6 inventory slots, along with having 120 insulation (from 60.) Also has 30% Wetness resistance (from 20%.)
+
+* [x]  [THE HOODED FOREST] The Puffy Vest now has 4 backpack slots.
+
+* [x]  [THE HOODED FOREST] The Summer Frest now has 4 backpack slots.
 
 --Clothing
 
@@ -288,9 +300,8 @@
 
 * [x] Maxwell cannot read books while insane.
 
-* [x] [FEAR THE DARK!] Added option to use Maxwell's classic DS shadows by reading the umbra, with no 2.5 day time limit, no health cost for summoning, and the ability to manually banish them.
+* [x] [THE HOODED FOREST] Maxwell can now summon his classic Shadows (with infinite duration and health regen) by reading the Codex Umbra.
 
-* [x] [HOODED FOREST] Codex umbra grants tier 1 magic.
 
 --Wigfrid
 
@@ -302,7 +313,7 @@
 
 --Wortox
 
-* [x] [GOODIES GALORE!] Most smaller creatures like spiders and butterflies no longer carry souls.
+* [x] [THE HOODED FOREST] Bees, Killer Bees, and Butterflies no longer drop souls
 
 * [x] [GOODIES GALORE!] Wortox health changed to 120 from 200 (Poor wortox, let's hope we can get soul fragments in soon).
 
@@ -349,7 +360,7 @@
 
 * [x]  Cactus, stone fruits and spiky bushs don't grow in winter.
 
-* [x]  Small chance to spawn mosquitos when picking juicy berry bushes.
+* [x]  [THE HOODED FOREST] Reduced max harvests from Juicy Berry bushes by 1 before needing fertilization.
 
 --Bird Cage
 
@@ -369,7 +380,9 @@
 
 * [x]  Bee box honey yield is 1,2,4 instead of 1,3,6. (Barely noticable in actual play).
 
+--Rot
 
+* [x]  [THE HOODED FOREST] Rot now deals health and sanity damage.
 
 --[ Vanilla Food changes]--
 
@@ -695,6 +708,8 @@
 * [x] [FEAR THE DARK!] New item: Shadow Crown, headslot item that gives you 20% additional movement speed, you take more damage while wearing it, only obtainable from a specific RNE, also drains sanity when worn.
 
 * [x] [FEAR THE DARK!] New item: Moon Tear, a rock found in a specific RNE that makes the player wet when it is held, can be useful during summer, but will probably have more uses in a later update.
+
+* [x] [THE HOODED FOREST] The Moon Tear can now be exchanged at the Moon Base for Iridescent Gems.
 
 
 --[Veteran Shrine and Veteran's Curse]--
