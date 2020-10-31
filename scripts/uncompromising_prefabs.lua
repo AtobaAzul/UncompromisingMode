@@ -161,4 +161,5 @@ return {
 	"snowcone",
 	"rneshadowskittish",
 	"cinnamon_tree",
+	"watermelon_lantern",
 }
