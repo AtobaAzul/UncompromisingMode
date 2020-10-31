@@ -246,6 +246,9 @@ local function fn()
     inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
     inst.components.inventoryitem:SetOnPutInInventoryFn(OnPutInInventory)
 
+    inst:AddComponent("sanityaura")
+    inst.components.sanityaura.aura = TUNING.SANITYAURA_SMALL_TINY
+	
     inst:WatchWorldState("isday", OnIsDay)
     if not TheWorld.state.isday then
         FadeIn(inst)
