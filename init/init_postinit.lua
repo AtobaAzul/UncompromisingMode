@@ -108,6 +108,7 @@ local prefab_post = {
 	"moonbase",
 	"koalas",
 	"pocket_powertrip",
+	"pumpkin_lantern",
 }
 
 local stategraph_post = {

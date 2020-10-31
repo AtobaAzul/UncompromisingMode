@@ -246,7 +246,6 @@ GLOBAL.GetDescription = function(inst, item, ...)
         or (inst ~= nil and inst.prefab or nil)
 
     character = character ~= nil and string.upper(character) or nil
-	print(character)
 		
 	local ret = OldGetDescription(inst, item, ...)
 	local prefab = item and item.prefab

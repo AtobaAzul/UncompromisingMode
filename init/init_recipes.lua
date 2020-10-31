@@ -121,7 +121,11 @@ GLOBAL.AllRecipes["bugzapper"].sortkey = GLOBAL.AllRecipes["nightstick"].sortkey
 AddRecipe("slingshotammo_firecrackers",	{Ingredient("nitre", 1)},	CUSTOM_RECIPETABS.SLINGSHOTAMMO, TECH.SCIENCE_TWO,		{no_deconstruction = true}, nil, nil, 10, "pebblemaker", "images/inventoryimages/slingshotammo_firecrackers.xml", "slingshotammo_firecrackers.tex" )
 GLOBAL.AllRecipes["slingshotammo_firecrackers"].sortkey = GLOBAL.AllRecipes["slingshotammo_poop"].sortkey - 0.1
 
+AddRecipe("watermelon_lantern", {Ingredient("watermelon", 1), Ingredient("fireflies", 1)}, RECIPETABS.LIGHT, TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/watermelon_lantern.xml", "watermelon_lantern.tex" )
+GLOBAL.AllRecipes["watermelon_lantern"].sortkey = GLOBAL.AllRecipes["pumpkin_lantern"].sortkey + 0.1
+
 STRINGS.RECIPE_DESC.SLINGSHOTAMMO_FIRECRACKERS = "For the aspiring young menace."
+STRINGS.RECIPE_DESC.WATERMELON_LANTERN = "Juicy illumination."
 STRINGS.RECIPE_DESC.CRITTERLAB_REAL = "Cute pals to ruin the mood."
 STRINGS.RECIPE_DESC.SAND = "Turn a big rock into smaller rocks."
 STRINGS.RECIPE_DESC.SNOWGOGGLES = "Keep your eyes clear and ears extra warm."

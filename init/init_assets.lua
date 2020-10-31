@@ -52,6 +52,8 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/bloomershot.tex"),
 	Asset("ATLAS", "images/inventoryimages/screecher_trinket.xml"),
 	Asset("IMAGE", "images/inventoryimages/screecher_trinket.tex"),
+	Asset("ATLAS", "images/inventoryimages/watermelon_lantern.xml"),
+	Asset("IMAGE", "images/inventoryimages/watermelon_lantern.tex"),
 	
 	Asset("ANIM", "anim/geyser.zip"),
 	Asset("ANIM", "anim/lava_vomit.zip"),
@@ -129,6 +131,7 @@ Assets = {
 	Asset("ANIM", "anim/whisperpod_normal_ground.zip"),
 	Asset("ANIM", "anim/hound_lightning.zip"),
 	Asset("ANIM", "anim/nightmaregrowth_shrink.zip"),
+	Asset("ANIM", "anim/watermelon_lantern.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),

@@ -60,7 +60,7 @@ env.AddPrefabPostInit("wobybig", function(inst)
 end)
 
 local function SpawnWoby(inst)
-	print(inst.respawntime)
+	--print(inst.respawntime)
     local player_check_distance = 40
     local attempts = 0
     
