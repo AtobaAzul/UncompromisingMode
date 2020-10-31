@@ -425,7 +425,7 @@ local simpsalad =
     test = function(cooker, names, tags) return names.foliage end,
 
     priority = 20,
-    weight = 30,
+    weight = 20,
     perishtime = nil,
     cooktime = 0.4,
 }
