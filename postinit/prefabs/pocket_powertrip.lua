@@ -30,6 +30,22 @@ inst.components.container:DropEverything()
 end
 inst:Remove()
 end
+
+local function Folded(inst)
+	if inst.components.container ~= nil then
+		inst:DoTaskInTime(0, function(inst) 
+			local owner = inst.components.inventoryitem.owner
+			
+			if not inst.components.equippable:IsEquipped() and owner ~= nil then
+				if #inst.components.container:FindItems( function(item) return item.components.inventoryitem ~= nil end ) > 0 then
+					owner.SoundEmitter:PlaySound("dontstarve/common/tool_slip")
+				end
+				inst.components.container:DropEverything() 
+			end
+		end)
+	end
+end
+
 env.AddPrefabPostInit("trunkvest_summer", function(inst)
 	if not TheWorld.ismastersim then
 		inst.OnEntityReplicated = function(inst) 
@@ -40,12 +56,14 @@ env.AddPrefabPostInit("trunkvest_summer", function(inst)
     inst:AddComponent("container")
     inst.components.container:WidgetSetup("spicepack")
 	
-	inst.components.inventoryitem.cangoincontainer = false
+	--inst.components.inventoryitem.cangoincontainer = false
     inst.components.equippable:SetOnEquip(onequipsummer)
     inst.components.equippable:SetOnUnequip(onunequip)
 	inst.components.waterproofer:SetEffectiveness(0.3)
     inst.components.insulator:SetInsulation(120)
+    inst.components.inventoryitem:SetOnPutInInventoryFn(Folded)
 	inst.components.fueled:SetDepletedFn(ExplodeInventory)
+	inst:ListenForEvent("itemget", Folded)
 --return inst
 end)
 
@@ -59,10 +77,12 @@ env.AddPrefabPostInit("trunkvest_winter", function(inst)
     inst:AddComponent("container")
     inst.components.container:WidgetSetup("puffvest")
 	
-	inst.components.inventoryitem.cangoincontainer = false
+	--inst.components.inventoryitem.cangoincontainer = false
     inst.components.equippable:SetOnEquip(onequipwinter)
     inst.components.equippable:SetOnUnequip(onunequip)
+    inst.components.inventoryitem:SetOnPutInInventoryFn(Folded)
 	inst.components.fueled:SetDepletedFn(ExplodeInventory)
+	inst:ListenForEvent("itemget", Folded)
 --return inst
 end)
 env.AddPrefabPostInit("reflectivevest", function(inst)
@@ -75,9 +95,11 @@ env.AddPrefabPostInit("reflectivevest", function(inst)
     inst:AddComponent("container")
     inst.components.container:WidgetSetup("puffvest")
 	
-	inst.components.inventoryitem.cangoincontainer = false
+	--inst.components.inventoryitem.cangoincontainer = false
     inst.components.equippable:SetOnEquip(onequipreflect)
     inst.components.equippable:SetOnUnequip(onunequip)
+    inst.components.inventoryitem:SetOnPutInInventoryFn(Folded)
 	inst.components.fueled:SetDepletedFn(ExplodeInventory)
+	inst:ListenForEvent("itemget", Folded)
 --return inst
 end)
