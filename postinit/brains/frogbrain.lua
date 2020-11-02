@@ -19,7 +19,7 @@ local function EatFoodAction(inst)
                 and item:IsOnPassablePoint()
 				and item:IsOnValidGround()
 				and not (item:HasTag("bee") or item:HasTag("mosquito"))
-                and inst.components.eater:CanEat(item)
+                and (inst.components.eater ~= nil and inst.components.eater:CanEat(item))
         end,
         nil,
         FINDFOOD_CANT_TAGS

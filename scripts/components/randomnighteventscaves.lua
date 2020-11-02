@@ -1310,7 +1310,7 @@ end
 
 local function IsLiving(player)
 	local x, y, z = player.Transform:GetWorldPosition()
-	local theent = #TheSim:FindEntities(x, 0, z, 30, {"epic", "_health"}, {"leif"})
+	local theent = #TheSim:FindEntities(x, 0, z, 40, {"epic", "_health"}, {"leif"})
 	local hounding = TheWorld.components.hounded:GetWarning()
 	local deerclopsed = TheWorld.components.cavedeerclopsspawner:GetWarning()
 	

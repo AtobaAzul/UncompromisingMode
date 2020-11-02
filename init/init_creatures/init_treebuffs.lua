@@ -49,3 +49,33 @@ local function livingtree_postinit(inst)
 end
 
 AddPrefabPostInit("livingtree", livingtree_postinit)
+
+local function onworked_halloween(inst, chopper, workleft)
+    if not (chopper ~= nil and chopper:HasTag("playerghost")) then
+        inst.SoundEmitter:PlaySound(
+            chopper ~= nil and chopper:HasTag("beaver") and
+            "dontstarve/characters/woodie/beaver_chop_tree" or
+            "dontstarve/wilson/use_axe_tree"
+        )
+
+        -- Spawn deciduous_root
+        spawn_root_attack(inst,chopper)
+    end
+    inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/livingtree_hit")
+    inst.AnimState:PlayAnimation("chop_"..inst.statedata.anim_postfix)
+    inst.AnimState:PushAnimation("idle_"..inst.statedata.anim_postfix, true)
+
+    if inst.components.container ~= nil then
+        inst.components.container:DropEverything()
+        inst.components.container:Close()
+    end
+end
+
+local function livingtree_halloween_postinit(inst)
+    -- Change the onworked callback to the above
+    if inst~=nil and inst.components~=nil and inst.components.workable~=nil then
+        inst.components.workable:SetOnWorkCallback(onworked_halloween)
+    end
+end
+
+AddPrefabPostInit("livingtree_halloween", livingtree_halloween_postinit)
