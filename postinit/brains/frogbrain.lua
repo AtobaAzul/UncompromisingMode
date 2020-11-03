@@ -46,4 +46,4 @@ local function ToadFindFood(self)
     table.insert(self.bt.root.children, 3, findfood)
 end
 
-env.AddBrainPostInit("toadbrain", ToadFindFood)
+env.AddBrainPostInit("uncompromising_toadbrain", ToadFindFood)
