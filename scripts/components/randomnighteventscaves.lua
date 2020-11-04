@@ -1300,21 +1300,17 @@ local function DoSecondaryCaveRNE(player)
 	end
 end
 
-local function IsEligible(player)
-	local area = player.components.areaaware
-	return TheWorld.Map:IsVisualGroundAtPoint(player.Transform:GetWorldPosition())
-			and area:GetCurrentArea() ~= nil 
-			and not area:CurrentlyInTag("nohasslers")
-			and not area:CurrentlyInTag("nocavein")
-end
-
 local function IsLiving(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local theent = #TheSim:FindEntities(x, 0, z, 40, {"epic", "_health"}, {"leif"})
 	local hounding = TheWorld.components.hounded:GetWarning()
 	local deerclopsed = TheWorld.components.cavedeerclopsspawner:GetWarning()
+	local area = player.components.areaaware
 	
-	return not player:HasTag("playerghost") and theent <= 0 and not (hounding or deerclopsed)
+	return not player:HasTag("playerghost") and theent <= 0 and not (hounding or deerclopsed) or 
+			area:GetCurrentArea() ~= nil 
+			and not area:CurrentlyInTag("nohasslers")
+			and not area:CurrentlyInTag("nocavein")
 end
 
 local function CheckPlayers()
@@ -1350,9 +1346,7 @@ local function CheckPlayers()
 			local ents = TheSim:FindEntities(x,y,z, STRUCTURE_DIST, {"structure"})
 			numStructures = #ents
 			
-			if not IsEligible(player) then
-				--DoOceanRNE(player)
-			elseif IsEligible(player) then
+			if IsLiving(player) then
 				if numStructures >= 4 then
 					if TheWorld:HasTag("cave") then
 						DoCaveRNE(player)
@@ -1398,7 +1392,7 @@ local function CheckPlayers()
 				local ents2 = TheSim:FindEntities(x,y,z, STRUCTURE_DIST, {"structure"})
 				numStructures2 = #ents2
 		
-				if IsEligible(i) then
+				if IsLiving(i) then
 					if numStructures2 >= 4 then
 						--nothing, not really accounting for other players in other bases but meh
 					elseif TheWorld:HasTag("cave") then
