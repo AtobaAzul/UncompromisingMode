@@ -414,6 +414,8 @@ local function fn()
 		
 		inst:AddTag("structure")
 		inst:AddTag("webbedcreature")
+		inst:AddTag("notarget")
+		inst:AddTag("antlion_sinkhole_blocker")
 		
 		inst.entity:SetPristine()
 
@@ -432,9 +434,6 @@ local function fn()
 		
 		inst:AddComponent("lootdropper")
 		
-		inst:AddTag("prey")
-		inst:AddTag("hound")
-		inst:AddTag("antlion_sinkhole_blocker")
 		MakeLargePropagator(inst)
 
 		inst:AddComponent("inspectable")

@@ -199,6 +199,7 @@ local function fn()
 	--MakePoisonableCharacter(inst)
 
     inst:AddTag("bat")
+    inst:AddTag("animal")
 	inst:AddTag("fruitbat")
     inst:AddTag("scarytoprey")
     inst:AddTag("flying")
