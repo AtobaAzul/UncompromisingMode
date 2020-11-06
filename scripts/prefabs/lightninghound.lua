@@ -544,7 +544,6 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
     inst:AddComponent("combat")
     inst.components.combat:SetDefaultDamage(TUNING.HOUND_DAMAGE)
     inst.components.combat:SetAttackPeriod(TUNING.HOUND_ATTACK_PERIOD)
-    inst.components.combat:SetRange(10, 3)
     inst.components.combat:SetRetargetFunction(3, retargetfn)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
     inst.components.combat:SetHurtSound(inst.sounds.hurt)
@@ -613,6 +612,8 @@ local function fnlightning()
     MakeMediumFreezableCharacter(inst, "hound_body")
 	
     inst.components.lootdropper:SetChanceLootTable('hound_lightning')
+	
+    inst.components.combat:SetRange(10, 3)
 	
     inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", ontimerdone)
