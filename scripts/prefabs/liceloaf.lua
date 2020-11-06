@@ -4,9 +4,9 @@ local assets =
     Asset("ATLAS", "images/inventoryimages/liceloaf.xml"),
 }
 local function oneatenfn(inst, eater)
-	--if eater.components.hayfever and eater.components.hayfever.enabled then
-	--	eater.components.hayfever:SetNextSneezeTime(720)			--If we add hayfever effects, do it here.
-	--end	
+	if eater.components.hayfever and eater.components.hayfever.enabled then
+		eater.components.hayfever:SetNextSneezeTime(720)			
+	end	
 end
 
 local function rename(inst)

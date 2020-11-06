@@ -5,7 +5,7 @@ local assets =
 }
 local function oneatenfn(inst, eater)
 	if eater.components.hayfever and eater.components.hayfever.enabled then
-		eater.components.hayfever:SetNextSneezeTime(720)			
+		eater.components.hayfever:SetNextSneezeTime(1440)			
 	end	
 end
 local function fn()
