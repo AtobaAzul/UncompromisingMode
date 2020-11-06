@@ -12,9 +12,9 @@ SetSharedLootTable('frog',
 ]]
 local function OnIsAutumn(inst, isautumn)
     if isautumn and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
-		inst.components.lootdropper:SetChanceLootTable('toad')
+		inst.components.lootdropper:SetChanceLootTable('uncompromising_toad')
         inst.AnimState:SetBuild("frog_yellow_build")
-		inst:SetPrefabNameOverride("toad")
+		inst:SetPrefabNameOverride("uncompromising_toad")
     else
 		inst.components.lootdropper:SetChanceLootTable('frog')
         inst.AnimState:SetBuild("frog")
@@ -59,7 +59,7 @@ env.AddPrefabPostInit("frog", function (inst)
 
 end)
 
-env.AddPrefabPostInit("toad", function (inst)
+env.AddPrefabPostInit("uncompromising_toad", function (inst)
     if not TheWorld.ismastersim then
 		return
 	end

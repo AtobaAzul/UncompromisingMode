@@ -49,7 +49,7 @@ local function GetSpawnPoint(pt)
 end
 
 local function SpawnToad(spawn_point)
-    local toad = SpawnPrefab("toad")
+    local toad = SpawnPrefab("uncompromising_toad")
     toad.persists = false
     if math.random() < .5 then
         toad.Transform:SetRotation(180)

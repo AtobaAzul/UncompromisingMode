@@ -250,4 +250,6 @@ TUNING.ARMORBRAMBLE_DMG = 10
 
 TUNING.WORTOX_HEALTH = 120
 
+TUNING.SLEEP_TICK_PERIOD = TUNING.SLEEP_TICK_PERIOD / 2
+
 -- [              DST Related Overrides                  ]

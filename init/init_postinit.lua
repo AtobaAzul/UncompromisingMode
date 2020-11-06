@@ -16,6 +16,8 @@ local component_post = {
 	"wildfires",
 	--"beargerspawner",
 	"workable",
+	"sleepingbaguser",
+	"hounded",
 }
 
 local prefab_post = {

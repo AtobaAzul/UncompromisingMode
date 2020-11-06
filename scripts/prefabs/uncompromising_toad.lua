@@ -10,13 +10,13 @@ local prefabs =
 	"sporecloud"
 }
 
-SetSharedLootTable('toad',
+SetSharedLootTable('uncompromising_toad',
 {
     --{'froglegs', 1.0},
     {'sporecloud_toad', .5},
 })
 
-local brain = require "brains/toadbrain"
+local brain = require "brains/uncompromising_toadbrain"
 
 local function retargetfn(inst)
     if not inst.components.health:IsDead() and not inst.components.sleeper:IsAsleep() then
@@ -108,7 +108,7 @@ local function fn()
     MakeHauntablePanic(inst)
 
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetChanceLootTable('toad')
+    inst.components.lootdropper:SetChanceLootTable('uncompromising_toad')
 
     inst:AddComponent("knownlocations")
     inst:AddComponent("inspectable")
@@ -119,4 +119,4 @@ local function fn()
     return inst
 end
 
-return Prefab("toad", fn, assets, prefabs)
+return Prefab("uncompromising_toad", fn, assets, prefabs)
