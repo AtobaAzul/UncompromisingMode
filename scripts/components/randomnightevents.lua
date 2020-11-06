@@ -121,6 +121,25 @@ end
 ----------------------------------------------------
 --RNE list below
 ----------------------------------------------------
+
+local function SpawnGnomes(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	if TheWorld.state.isnight then
+		player:DoTaskInTime(2 * math.random() * 0.3, function()
+					
+			local x1 = x + math.random(-10, 10)
+			local z1 = z + math.random(-10, 10)
+			local gnomes = SpawnPrefab("gnome_organizer")
+			if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+				gnomes.Transform:SetPosition(x1, y, z1)
+			else
+				player:DoTaskInTime(0.1, function(player) SpawnGnomes(player) end)
+			end
+		
+		end)
+	end
+end
+
 local function find_leif_spawn_target(item)
     return not item.noleif
         and item.components.growable ~= nil
@@ -1096,6 +1115,7 @@ AddBaseEvent(SpawnShadowTeleporter,.2)
 AddBaseEvent(StumpsAttack,.3)
 AddBaseEvent(SpawnShadowTalker,.6)
 AddBaseEvent(SpawnShadowBoomer,.2)
+AddBaseEvent(SpawnGnomes,0.4)
 --Cave
 AddCaveEvent(SpawnBats,.5)
 AddCaveEvent(SpawnFissures,.2)
