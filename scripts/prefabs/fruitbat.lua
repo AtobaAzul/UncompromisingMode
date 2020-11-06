@@ -200,6 +200,7 @@ local function fn()
 
     inst:AddTag("bat")
 	inst:AddTag("fruitbat")
+	inst:AddTag("animal")
     inst:AddTag("scarytoprey")
     inst:AddTag("flying")
     inst:AddTag("veggie")

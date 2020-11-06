@@ -162,4 +162,5 @@ return {
 	"rneshadowskittish",
 	"cinnamon_tree",
 	"watermelon_lantern",
+	"gnome_organizer",
 }
