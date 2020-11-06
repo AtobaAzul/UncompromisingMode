@@ -414,7 +414,9 @@ local function fn()
 		
 		inst:AddTag("structure")
 		inst:AddTag("webbedcreature")
-		inst:AddTag("notarget")
+		--inst:AddTag("notarget")
+		inst:AddTag("prey")
+		inst:AddTag("houndfriend")
 		inst:AddTag("antlion_sinkhole_blocker")
 		
 		inst.entity:SetPristine()

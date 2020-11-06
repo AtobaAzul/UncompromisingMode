@@ -62,18 +62,36 @@ local sounds =
     howl = "dontstarve/creatures/together/clayhound/howl",
     hurt = "dontstarve/creatures/hound/hurt",
 }
---[[
-SetSharedLootTable('hound',
-{
-    {'monstermeat', 1.000},
-    {'houndstooth', 0.125},
-})
-]]
+
 SetSharedLootTable('hound_lightning',
 {
     {'monstermeat', 1.0},
     {'houndstooth', 1.0},
     {'yellowgem',      0.05},
+})
+
+SetSharedLootTable('hound_magma',
+{
+    {'monstermeat', 1.0},
+    {'houndstooth', 1.0},
+    --{'deer_fire_circle',   1.0},
+    {'redgem',      0.3},
+})
+
+SetSharedLootTable('hound_glacial',
+{
+    {'monstermeat', 1.0},
+    {'houndstooth', 1.0},
+    --{'deer_ice_circle', 1.0},
+    {'bluegem',     0.3},
+})
+
+SetSharedLootTable('hound_spore',
+{
+    {'monstermeat', 1.0},
+    {'houndstooth', 1.0},
+    {'sporecloud', 1.0},
+    {'greengem',      0.05},
 })
 
 local WAKE_TO_FOLLOW_DISTANCE = 8
@@ -470,12 +488,16 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
 
 	inst._CanMutateFromCorpse = data.canmutatefn
 
-    inst.sounds = (tag == "clay" and sounds_clay) or (build == "hound_mutated" and sounds_mutated) or sounds
+    inst.sounds = sounds
 
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
     inst.components.locomotor.runspeed = tag == "clay" and TUNING.CLAYHOUND_SPEED or TUNING.HOUND_SPEED
 
-    inst:SetStateGraph("SGlightninghound")
+    inst:SetStateGraph("SGhound")
+	
+	if build ~= nil and build == "lightninghound" then
+		inst:SetStateGraph("SGlightninghound")
+	end
 
     if data.amphibious then
 		inst:AddComponent("embarker")
@@ -565,8 +587,10 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
 
-    inst:ListenForEvent("attacked", OnAttacked)
-    inst:ListenForEvent("onattackother", OnAttackOther)
+	if build ~= nil and build == "lightninghound" then
+		inst:ListenForEvent("attacked", OnAttacked)
+		inst:ListenForEvent("onattackother", OnAttackOther)
+	end
     inst:ListenForEvent("startfollowing", OnStartFollowing)
     inst:ListenForEvent("stopfollowing", OnStopFollowing)
 
@@ -579,7 +603,7 @@ local function ontimerdone(inst, data)
     end
 end
 
-local function fndefault()
+local function fnlightning()
     local inst = fncommon("hound", "hound_lightning", { "firehound", "icehound" }, nil, nil, {amphibious = true})
 
     if not TheWorld.ismastersim then
@@ -604,29 +628,74 @@ local function fndefault()
     return inst
 end
 
-local function PlayFireExplosionSound(inst)
-    inst.SoundEmitter:PlaySound("dontstarve/creatures/hound/firehound_explo")
+local function DoGlacialExplosion(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+
+    local spell = SpawnPrefab("deer_ice_circle")
+    spell.Transform:SetPosition(x, 0, z)
+    spell:DoTaskInTime(6, spell.KillFX)
 end
 
-local function fnfire()
-    local inst = fncommon("hound", "hound_red_ocean", { "hound", "icehound" }, nil, nil, {amphibious = true})
+local function fnglacial()
+    local inst = fncommon("hound", "hound_mutated", nil, nil, nil, {amphibious = true})
 
     if not TheWorld.ismastersim then
         return inst
     end
+	
+	inst.AnimState:SetMultColour(0, 0, 1, 1)
 
-    MakeMediumFreezableCharacter(inst, "hound_body")
-    inst.components.freezable:SetResistance(4) --because fire
-
-    inst.components.combat:SetDefaultDamage(TUNING.FIREHOUND_DAMAGE)
-    inst.components.combat:SetAttackPeriod(TUNING.FIREHOUND_ATTACK_PERIOD)
-    inst.components.locomotor.runspeed = TUNING.FIREHOUND_SPEED
-    inst.components.health:SetMaxHealth(TUNING.FIREHOUND_HEALTH)
-    inst.components.lootdropper:SetChanceLootTable('hound_fire')
-
-    inst:ListenForEvent("death", PlayFireExplosionSound)
+    MakeMediumBurnableCharacter(inst, "hound_body")
+	
+    inst.components.lootdropper:SetChanceLootTable('hound_glacial')
+	
+    inst:ListenForEvent("death", DoGlacialExplosion)
 
     return inst
 end
 
-return Prefab("lightninghound", fndefault, assets, prefabs)
+local function DoMagmaExplosion(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+
+    local spell = SpawnPrefab("deer_fire_circle")
+    spell.Transform:SetPosition(x, 0, z)
+    spell:DoTaskInTime(4, spell.KillFX)
+end
+
+local function fnmagma()
+    local inst = fncommon("hound", "hound_mutated", nil, nil, nil, {amphibious = true})
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.AnimState:SetMultColour(1, 0, 0, 1)
+
+    MakeMediumFreezableCharacter(inst, "hound_body")
+    inst.components.freezable:SetResistance(4)
+	
+    inst.components.lootdropper:SetChanceLootTable('hound_magma')
+	
+    inst:ListenForEvent("death", DoMagmaExplosion)
+
+    return inst
+end
+
+local function fnspore()
+    local inst = fncommon("hound", "hound_mutated", nil, nil, nil, {amphibious = true})
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.AnimState:SetMultColour(0, 1, 0, 1)
+	
+    inst.components.lootdropper:SetChanceLootTable('hound_spore')
+
+    return inst
+end
+
+return Prefab("lightninghound", fnlightning, assets, prefabs),
+	Prefab("glacialhound", fnglacial, assets, prefabs),
+	Prefab("magmahound", fnmagma, assets, prefabs),
+	Prefab("sporehound", fnspore, assets, prefabs)

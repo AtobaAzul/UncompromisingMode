@@ -31,3 +31,13 @@ env.AddPrefabPostInit("icehound", function (inst)
         inst:ListenForEvent("onhitother", OnHitOtherFreeze)
     end
 end)
+
+env.AddPrefabPostInit("glacialhound", function (inst)
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+    if inst.components.combat ~= nil then
+        inst:ListenForEvent("onhitother", OnHitOtherFreeze)
+    end
+end)

@@ -113,7 +113,9 @@ AddPrefabPostInit("treasurechest", function(inst)
 			inst.SoundEmitter:PlaySound("dontstarve/wilson/chest_close")
 			
 			--Rat Raid
-			inst:DoTaskInTime(0, ActiveRaid, doer)
+			if doer ~= nil and doer:HasTag("player") then
+				inst:DoTaskInTime(0, ActiveRaid, doer)
+			end
 		end
 	end
 	
@@ -130,7 +132,9 @@ AddPrefabPostInit("icebox", function(inst)
 		inst.SoundEmitter:PlaySound("dontstarve/common/icebox_close")
 		
 		--Rat Raid
-		inst:DoTaskInTime(0, ActiveRaid, doer)
+		if doer ~= nil and doer:HasTag("player") then
+			inst:DoTaskInTime(0, ActiveRaid, doer)
+		end
 	end
 	
 	inst.components.container.onclosefn = onclose_raid
@@ -147,7 +151,9 @@ AddPrefabPostInit("dragonflychest", function(inst)
 			inst.SoundEmitter:PlaySound("dontstarve/wilson/chest_close")
 			
 			--Rat Raid
-			inst:DoTaskInTime(0, ActiveRaid, doer)
+			if doer ~= nil and doer:HasTag("player") then
+				inst:DoTaskInTime(0, ActiveRaid, doer)
+			end
 		end
 	end
 	
@@ -165,7 +171,9 @@ AddPrefabPostInit("saltbox", function(inst)
 			inst.SoundEmitter:PlaySound("dontstarve/common/icebox_close")
 			
 			--Rat Raid
-			inst:DoTaskInTime(0, ActiveRaid, doer)
+			if doer ~= nil and doer:HasTag("player") then
+				inst:DoTaskInTime(0, ActiveRaid, doer)
+			end
 		end
 	end
 	
