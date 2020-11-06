@@ -62,7 +62,7 @@ local players = TheSim:FindEntities(pt.x, pt.y, pt.z, 8, {"player"})
 if #players == 0 then
 SpawnGomes(inst)
 else
-Reposition(inst)
+inst:DoTaskInTime(0.1,Reposition)
 end
 end
 
