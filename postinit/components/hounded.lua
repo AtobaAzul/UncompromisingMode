@@ -17,10 +17,10 @@ AddComponentPostInit("hounded", function(self)
     --framework for future spawn additions
     --seasonal boss hounds will be chosen randomly from their respective season tables
     self.seasonal_boss_prefabs = {
-        ["autumn"] = "warg",--{"koalefant_summer", "knight", },
-        ["winter"] = "warg",--{"koalefant_winter", "walrus"  },
-        ["spring"] = "warg",--{"lightninggoat", "bishop", },
-        ["summer"] = "warg",--{"spat", "rook", },
+        ["autumn"] = {},
+        ["winter"] = {},
+        ["spring"] = {},
+        ["summer"] = {},
     }
     --seasonal hound variants will be chosen randomly from their respective season tables
     self.seasonal_prefabs = {
