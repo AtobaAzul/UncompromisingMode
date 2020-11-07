@@ -7,7 +7,7 @@ local function StartSoundLoop(inst)
     end
 end
 ---ORANGE
-local ORANGE_PICKUP_MUST_TAGS = { "_inventoryitem", "plant","witherable"}
+local ORANGE_PICKUP_MUST_TAGS = { "_inventoryitem", "plant","witherable", "kelp", "structure", "lureplant","mush-room", "waterplant"}
 local ORANGE_PICKUP_CANT_TAGS = { "INLIMBO", "NOCLICK", "knockbackdelayinteraction", "catchable", "fire", "minesprung", "mineactive" }
 local function pickup(inst, channeler)
     if channeler == nil or channeler.components.inventory == nil then
@@ -16,19 +16,6 @@ local function pickup(inst, channeler)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, TUNING.FIRE_DETECTOR_RANGE*1.1, nil, ORANGE_PICKUP_CANT_TAGS, ORANGE_PICKUP_MUST_TAGS)
     for i, v in ipairs(ents) do
-		if v.components.crop ~= nil and v.components.crop.matured == true then
-		v.components.crop:Harvest(channeler)
-		SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
-		inst.channeler.components.sanity:DoDelta(-0.5)   --Can't take too much sanity if the purpose is to use in large farms
-		return
-		end
-		if v.components.pickable ~= nil and v.components.pickable:CanBePicked() then  --Pickable stuff
-        v.components.pickable:Pick(channeler)
-		SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
-		inst.channeler.components.sanity:DoDelta(-0.25)   --Can't take too much sanity if the purpose is to use in large farms
-		return
-		end
-		
         if v.components.inventoryitem ~= nil and                                 --Inventory stuff
             v.components.inventoryitem.canbepickedup and
             v.components.inventoryitem.cangoincontainer and
@@ -58,6 +45,44 @@ local function pickup(inst, channeler)
             end
             return
         end
+		
+		
+		if v.components.crop ~= nil and v.components.crop.matured == true then   --Farmplots/Wild Crops
+		v.components.crop:Harvest(channeler)
+		SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
+		inst.channeler.components.sanity:DoDelta(-0.5)   --Can't take too much sanity if the purpose is to use in large farms
+		return
+		end
+		if v.components.harvestable ~= nil and v.components.harvestable:CanBeHarvested() then-- and v:HasTag("mushroom_farm") then --Mushroom Farms
+		v.components.harvestable:Harvest(channeler)	
+		SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
+		inst.channeler.components.sanity:DoDelta(-0.25)   --Can't take too much sanity if the purpose is to use in large farms
+		return
+		end
+		if v.components.stewer ~= nil and v.components.stewer:IsDone() then   --Crockpot dishes, not sure who's gonna do this though lol
+		v.components.stewer:Harvest(channeler)
+		SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
+		inst.channeler.components.sanity:DoDelta(-0.25)   --Can't take too much sanity if the purpose is to use in large farms
+		return
+		end
+		if v.components.pickable ~= nil and v.components.pickable:CanBePicked() then  --Pickable stuff
+        v.components.pickable:Pick(channeler)
+		SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
+		inst.channeler.components.sanity:DoDelta(-0.25)   --Can't take too much sanity if the purpose is to use in large farms
+		return
+		end
+		if v.components.dryer ~= nil and v.components.dryer:IsDone() then          --Drying racks
+        v.components.dryer:Harvest(channeler)
+		SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
+		inst.channeler.components.sanity:DoDelta(-0.25) 
+		return
+		end
+		if v.components.shelf ~= nil and v.components.shelf.itemonshelf ~= nil then  --Lureplants
+		v.components.shelf:TakeItem(channeler)
+		SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
+		inst.channeler.components.sanity:DoDelta(-0.25) 
+		return
+		end
     end
 end
 local function OnStartChanneling(inst, channeler)

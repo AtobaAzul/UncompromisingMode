@@ -111,7 +111,7 @@ env.AddPrefabPostInit("red_mushroom", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	
+	inst:AddTag("mush-room") --To differentiate between the item added an "-"
 	inst:WatchWorldState("isfullmoon", OnFullMoonRed)
     OnFullMoonRed(inst, TheWorld.state.isfullmoon)
 	
@@ -149,7 +149,7 @@ env.AddPrefabPostInit("green_mushroom", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	
+	inst:AddTag("mush-room")	
 	inst:WatchWorldState("isfullmoon", OnFullMoonGreen)
     OnFullMoonGreen(inst, TheWorld.state.isfullmoon)
 
@@ -189,7 +189,7 @@ env.AddPrefabPostInit("blue_mushroom", function(inst)
 	end
 	inst:WatchWorldState("isfullmoon", OnFullMoonBlue)
     OnFullMoonBlue(inst, TheWorld.state.isfullmoon)
-	
+	inst:AddTag("mush-room")	
 --return inst
 end)
 
