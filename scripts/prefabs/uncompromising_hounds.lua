@@ -90,7 +90,7 @@ SetSharedLootTable('hound_spore',
 {
     {'monstermeat', 1.0},
     {'houndstooth', 1.0},
-    {'sporecloud', 1.0},
+    {'sporecloud_toad', 1.0},
     {'greengem',      0.05},
 })
 
@@ -492,13 +492,7 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
 
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
     inst.components.locomotor.runspeed = tag == "clay" and TUNING.CLAYHOUND_SPEED or TUNING.HOUND_SPEED
-
-    inst:SetStateGraph("SGhound")
 	
-	if build ~= nil and build == "lightninghound" then
-		inst:SetStateGraph("SGlightninghound")
-	end
-
     if data.amphibious then
 		inst:AddComponent("embarker")
 		inst.components.embarker.embark_speed = inst.components.locomotor.runspeed
@@ -586,10 +580,6 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
 
-	if build ~= nil and build == "lightninghound" then
-		inst:ListenForEvent("attacked", OnAttacked)
-		inst:ListenForEvent("onattackother", OnAttackOther)
-	end
     inst:ListenForEvent("startfollowing", OnStartFollowing)
     inst:ListenForEvent("stopfollowing", OnStopFollowing)
 
@@ -611,6 +601,8 @@ local function fnlightning()
 
     MakeMediumFreezableCharacter(inst, "hound_body")
 	
+	inst:SetStateGraph("SGlightninghound")
+		
     inst.components.lootdropper:SetChanceLootTable('hound_lightning')
 	
     inst.components.combat:SetRange(10, 3)
@@ -623,6 +615,9 @@ local function fnlightning()
     inst.LaunchProjectile = LaunchProjectile
     inst.CancelCharge = CancelCharge
     inst.Charge = Charge
+	
+	inst:ListenForEvent("attacked", OnAttacked)
+	inst:ListenForEvent("onattackother", OnAttackOther)
 	
 	inst.lightningshot = true
 
@@ -645,6 +640,8 @@ local function fnglacial()
     end
 	
 	inst.AnimState:SetMultColour(0, 0, 1, 1)
+	
+    inst:SetStateGraph("SGhound")
 
     MakeMediumBurnableCharacter(inst, "hound_body")
 	
@@ -663,6 +660,32 @@ local function DoMagmaExplosion(inst)
     spell:DoTaskInTime(4, spell.KillFX)
 end
 
+local easing = require("easing")
+
+local function ShootProjectile(inst, target)
+   local target = inst.components.combat.target
+	if target ~= nil then
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local projectile = SpawnPrefab("fireball_throwable")
+    projectile.Transform:SetPosition(x, y, z)
+    local a, b, c = target.Transform:GetWorldPosition()
+	local targetpos = target:GetPosition()
+	targetpos.x = targetpos.x + math.random(-3,3)
+	targetpos.z = targetpos.z + math.random(-3,3)
+    local dx = a - x
+    local dz = c - z
+    local rangesq = dx * dx + dz * dz
+    local maxrange = 15
+    local bigNum = 10
+    local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange * 2)
+	projectile:AddTag("canthit")
+	--projectile.components.wateryprotection.addwetness = TUNING.WATERBALLOON_ADD_WETNESS/2
+    projectile.components.complexprojectile:SetHorizontalSpeed(speed+math.random(4,9))
+    projectile.components.complexprojectile:SetGravity(-25)
+    projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+	end
+end
+
 local function fnmagma()
     local inst = fncommon("hound", "hound_mutated", nil, nil, nil, {amphibious = true})
 
@@ -671,13 +694,31 @@ local function fnmagma()
     end
 	
 	inst.AnimState:SetMultColour(1, 0, 0, 1)
+	
+    inst:SetStateGraph("SGmagmahound")
 
     MakeMediumFreezableCharacter(inst, "hound_body")
+	
+    inst:AddComponent("timer")
+    inst:ListenForEvent("timerdone", ontimerdone)
+
+	inst.task = nil
+	
+    inst.components.combat:SetRange(10, 3)
+	
     inst.components.freezable:SetResistance(4)
 	
     inst.components.lootdropper:SetChanceLootTable('hound_magma')
 	
+    inst.LaunchProjectile = ShootProjectile
+    inst.CancelCharge = CancelCharge
+    inst.Charge = Charge
+	
     inst:ListenForEvent("death", DoMagmaExplosion)
+	
+	inst.foogley = 0
+	
+	inst.lightningshot = true
 
     return inst
 end
@@ -690,6 +731,8 @@ local function fnspore()
     end
 	
 	inst.AnimState:SetMultColour(0, 1, 0, 1)
+	
+    inst:SetStateGraph("SGhound")
 	
     inst.components.lootdropper:SetChanceLootTable('hound_spore')
 

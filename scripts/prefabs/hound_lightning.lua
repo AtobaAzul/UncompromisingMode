@@ -37,13 +37,15 @@ local function Zap(inst)
 	for i, v in ipairs(ents) do
 		if v ~= nil and v.components.health ~= nil and not v.components.health:IsDead() then
 			if v:HasTag("player") and (v.components.inventory ~= nil and not v.components.inventory:IsInsulated()) then
-				v.components.health:DoDelta(-30, nil, inst.prefab, nil, inst)
+				if not v:HasTag("electricdamageimmune") then
+					v.components.health:DoDelta(-25, nil, inst.prefab, nil, inst)
+				else
+					v.components.health:DoDelta(-5, nil, inst.prefab, nil, inst)
+				end
+				
 				v.sg:GoToState("electrocute")
-
-				--local shockvictim = 
-				--inst:DoTaskInTime(2, shockvictim)
 			else
-				v.components.combat:GetAttacked(nil, -30)
+				v.components.combat:GetAttacked(inst, -25)
 			end
 		end
 	end
@@ -57,20 +59,9 @@ local function fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
-	--inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
---[[
-    inst.AnimState:SetBank("sinkhole")
-    inst.AnimState:SetBuild("antlion_sinkhole")
-    inst.AnimState:PlayAnimation("idle")
-    inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-    inst.AnimState:SetLayer(LAYER_BACKGROUND)
-    inst.AnimState:SetSortOrder(2)
-
-	inst.AnimState:SetMultColour(1, 1, 0, 0)
-
-    inst.Transform:SetEightFaced()
-]]
+	
 	inst:AddTag("hound_lightning")
 
     inst.entity:SetPristine()
@@ -82,6 +73,8 @@ local function fn()
 	Sparks(inst)
 	
 	inst.task = inst:DoPeriodicTask(0.05, Sparks)
+	
+    inst.SoundEmitter:PlaySound("dontstarve/rain/thunder_far")
 	
 	inst:DoTaskInTime(1, Zap)
 
