@@ -50,6 +50,14 @@ local function onpickedfn(inst, picker)
  
 end
 local function dig_up(inst, worker)
+	inst.components.lootdropper:SpawnLootPrefab("foliage")
+	
+	if math.random() > 0.5 then
+		inst.components.lootdropper:SpawnLootPrefab("cut_grass")
+	else
+		inst.components.lootdropper:SpawnLootPrefab("twigs")
+	end
+	
     inst:Remove()
 end
 local function onnear(inst)
@@ -111,6 +119,8 @@ local function grass(name, stage)
         inst.components.pickable.makebarrenfn = makebarrenfn
         inst.components.pickable.max_cycles = 20
         inst.components.pickable.cycles_left = 20
+		
+		inst:AddComponent("lootdropper")
 
 		inst:AddComponent("timer")
 		inst:ListenForEvent("timerdone", onothertimerdone)
