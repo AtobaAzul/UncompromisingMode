@@ -49,30 +49,30 @@ local function onattack(inst, owner, target)
 	local redgem = #inst.components.container:FindItems( function(item) return item.prefab == "redgem" end )
 	
 	if redgem > 0 and owner.components.health ~= nil and owner.components.health:GetPercent() < 1 and not (target:HasTag("wall") or target:HasTag("engineering")) then
-        owner.components.health:DoDelta(redgem / 5 + opalgem / 2, false, "crabclaw")
+        owner.components.health:DoDelta(redgem + opalgem / 5, false, "crabclaw")
     end
 	
 	local yellowgem = #inst.components.container:FindItems( function(item) return item.prefab == "yellowgem" end )
 	
 	if yellowgem > 0 and owner.components.sanity ~= nil and owner.components.sanity:GetPercent() < 1 and not (target:HasTag("wall") or target:HasTag("engineering")) then
-        owner.components.sanity:DoDelta(yellowgem / 5 + opalgem / 2, false, "crabclaw")
+        owner.components.sanity:DoDelta(yellowgem + opalgem / 5, false, "crabclaw")
     end
 	
 	local bluegem = #inst.components.container:FindItems( function(item) return item.prefab == "bluegem" end )
 	
 	if bluegem > 0 and target:IsValid() and target.components.combat ~= nil and target.components.freezable ~= nil and not target.components.health:IsDead() and not target.components.freezable:IsFrozen() then
-		target.components.freezable:AddColdness((bluegem / 10) + (opalgem / 5))
+		target.components.freezable:AddColdness((bluegem + opalgem / 10))
 	end
 	
 	local greengem = #inst.components.container:FindItems( function(item) return item.prefab == "greengem" end )
 	
 	if greengem > 0 and inst.components.finiteuses and inst.components.finiteuses:GetPercent() < 1 then
-		inst.components.finiteuses:SetUses(inst.components.finiteuses:GetUses() + 0.1 + (greengem / 10) + (opalgem / 5))
+		inst.components.finiteuses:SetUses(inst.components.finiteuses:GetUses() + 0.1 + (greengem + opalgem / 10))
 	end
 	
 	local purplegem = #inst.components.container:FindItems( function(item) return item.prefab == "purplegem" end )
 	
-	if purplegem > 0 and math.random() < ((purplegem / 10) + (opalgem / 5)) then
+	if purplegem > 0 and math.random() < ((purplegem + opalgem / 10)) then
         local pt
         if target ~= nil and target:IsValid() then
             pt = target:GetPosition()
@@ -103,7 +103,7 @@ local function onattack(inst, owner, target)
 		end
 		target._crabclaw_speedmulttask = target:DoTaskInTime(5, function(i) i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) i._crabclaw_speedmulttask = nil end)
 
-		local slowamount = 0.9 - ((orangegem / 10) + (opalgem / 5))
+		local slowamount = 0.9 - (orangegem + opalgem / 10)
 		
 		target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, slowamount or 0.9)
 	end
