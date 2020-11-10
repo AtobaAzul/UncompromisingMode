@@ -320,7 +320,7 @@ local states =
             end
 			
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("atk_pre")
+            inst.AnimState:PlayAnimation("hellhound_scream")
         end,
 
         timeline =
@@ -331,7 +331,35 @@ local states =
 				inst.components.timer:StopTimer("lightningshot_cooldown")
 				inst.components.timer:StartTimer("lightningshot_cooldown", 6 + math.random())
 			end),
-            TimeEvent(5*FRAMES, function(inst) 
+            TimeEvent(2*FRAMES, function(inst) 
+				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
+					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
+					inst:LaunchProjectile(inst.sg.statemem.target)
+					
+				end
+			end),
+            TimeEvent(4*FRAMES, function(inst) 
+				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
+					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
+					inst:LaunchProjectile(inst.sg.statemem.target)
+					
+				end
+			end),
+            TimeEvent(6*FRAMES, function(inst) 
+				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
+					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
+					inst:LaunchProjectile(inst.sg.statemem.target)
+					
+				end
+			end),
+            TimeEvent(8*FRAMES, function(inst) 
+				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
+					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
+					inst:LaunchProjectile(inst.sg.statemem.target)
+					
+				end
+			end),
+            TimeEvent(10*FRAMES, function(inst) 
 				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
 					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
 					inst:LaunchProjectile(inst.sg.statemem.target)

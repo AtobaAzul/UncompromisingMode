@@ -164,4 +164,5 @@ return {
 	"watermelon_lantern",
 	"gnome_organizer",
 	"fireball_throwable",
+	"crabclaw",
 }

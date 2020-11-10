@@ -670,8 +670,8 @@ local function ShootProjectile(inst, target)
     projectile.Transform:SetPosition(x, y, z)
     local a, b, c = target.Transform:GetWorldPosition()
 	local targetpos = target:GetPosition()
-	targetpos.x = targetpos.x + math.random(-3,3)
-	targetpos.z = targetpos.z + math.random(-3,3)
+	targetpos.x = targetpos.x + math.random(-1,1)
+	targetpos.z = targetpos.z + math.random(-1,1)
     local dx = a - x
     local dz = c - z
     local rangesq = dx * dx + dz * dz
@@ -681,7 +681,7 @@ local function ShootProjectile(inst, target)
 	projectile:AddTag("canthit")
 	--projectile.components.wateryprotection.addwetness = TUNING.WATERBALLOON_ADD_WETNESS/2
     projectile.components.complexprojectile:SetHorizontalSpeed(speed+math.random(4,9))
-    projectile.components.complexprojectile:SetGravity(-25)
+    --projectile.components.complexprojectile:SetGravity(-25)
     projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 	end
 end
