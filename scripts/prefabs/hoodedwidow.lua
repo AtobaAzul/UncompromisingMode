@@ -32,8 +32,9 @@ local loot =
 }
 
 
-local RETARGET_MUST_TAGS = {"_combat" }
-local RETARGET_CANT_TAGS = { "INLIMBO","structure", "bird","snapdragon" }
+local RETARGET_MUST_TAGS = { "_combat" }
+local RETARGET_CANT_TAGS = { "INLIMBO", "structure", "bird", "snapdragon" }
+local RETARGET_ONE_OF_TAGS = { "player" }
 local function Retarget(inst)
     if not inst.components.health:IsDead() and not inst.components.sleeper:IsAsleep() then
         local oldtarget = inst.components.combat.target
@@ -43,7 +44,8 @@ local function Retarget(inst)
                     inst.components.combat:CanTarget(guy) 
             end,
             RETARGET_MUST_TAGS,
-            RETARGET_CANT_TAGS
+            RETARGET_CANT_TAGS,
+			RETARGET_ONE_OF_TAGS
         )
 
         if newtarget ~= nil and newtarget ~= oldtarget then
@@ -247,7 +249,8 @@ local function fn()
     inst:AddComponent("knownlocations")
     inst:AddComponent("combat")
     inst.components.combat:SetRange(TUNING.SPIDERQUEEN_ATTACKRANGE)
-    inst.components.combat:SetDefaultDamage(TUNING.SPIDERQUEEN_DAMAGE)
+    inst.components.combat:SetDefaultDamage(TUNING.SPIDERQUEEN_DAMAGE * 2)
+    inst.components.combat.playerdamagepercent = TUNING.DEERCLOPS_DAMAGE_PLAYER_PERCENT
     inst.components.combat:SetAttackPeriod(TUNING.SPIDERQUEEN_ATTACKPERIOD)
     inst.components.combat:SetRetargetFunction(3, Retarget)
 

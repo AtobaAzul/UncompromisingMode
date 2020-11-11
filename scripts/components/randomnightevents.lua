@@ -189,8 +189,8 @@ MultiFogAuto(player,leiftime)
 
 local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
     local target = FindEntity(player, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, { "evergreens", "tree" }, { "leif", "stump", "burnt" })
-    if target ~= nil then
-		for k = 1, (days_survived <= 30 and 1) or math.random(days_survived <= 80 and 2 or 3) do
+    if target ~= nil and days_survived >= 30 then
+		for k = 1, (days_survived <= 50 and 1) or math.random(days_survived <= 80 and 2 or 3) do
 			--print("targetfound")
 			target.noleif = true
 			target.chopper = player
@@ -1379,7 +1379,9 @@ local function CheckPlayers()
 	local playerchancescaling = TUNING.DSTU.RNE_CHANCE - (#playerlist * 0.1)
 	--print(playerchancescaling)
 	
-	if TheWorld.state.cycles >= 5 and math.random() >= playerchancescaling or (TheWorld.state.cycles >= 5 and TheWorld.state.isfullmoon and math.random() >= 0.5) or (TheWorld.state.cycles >= 5 and TheWorld.state.isnewmoon and math.random() >= 0.75) then
+	local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
+	
+	if --[[TheWorld.state.cycles]]days_survived >= 5 and math.random() >= playerchancescaling or (days_survived >= 5 and TheWorld.state.isfullmoon and math.random() >= 0.5) or (days_survived >= 5 and TheWorld.state.isnewmoon and math.random() >= 0.75) then
 		
 		--for i, 1 in ipairs(playerlist) do  --try a base RNE
 		if player ~= nil then
@@ -1421,15 +1423,16 @@ local function CheckPlayers()
 					end
 					--print("no find base")
 				end
-			else
-				return
 			end
 		end
 		
 		local k = #playerlist
 		
 		for _, i in ipairs(playerlist) do
-			if i ~= player and math.random() >= 0.5 then
+		
+		local days_survived_secondary = i.components.age ~= nil and i.components.age:GetAgeInDays()
+	
+			if i ~= player and days_survived_secondary >= 5 and math.random() >= 0.5 then
 				local x,y,z = i.Transform:GetWorldPosition()--local x,y,z = v.Transform:GetWorldPosition()
 				local ents2 = TheSim:FindEntities(x,y,z, STRUCTURE_DIST, {"structure"})
 				numStructures2 = #ents2
@@ -1438,10 +1441,8 @@ local function CheckPlayers()
 					if numStructures2 >= 4 then
 						--nothing, not really accounting for other players in other bases but meh
 					else
-						DoSecondaryWildRNE(i)--DoWildRNE(v)
+						DoSecondaryWildRNE(i)
 					end
-				else
-					return
 				end
 			end
 		end

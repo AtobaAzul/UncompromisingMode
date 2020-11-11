@@ -414,6 +414,7 @@ local function fn()
 		
 		inst:AddTag("structure")
 		inst:AddTag("webbedcreature")
+		inst:AddTag("noauradamage")
 		--inst:AddTag("notarget")
 		inst:AddTag("prey")
 		inst:AddTag("houndfriend")

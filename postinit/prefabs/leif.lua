@@ -115,33 +115,37 @@ local function SpawnSnare(inst, target)
     local thetaoffset = math.random() * PI * 2
     local delaytoggle = 0
     local map = TheWorld.Map
-    for theta = math.random() * dtheta, PI * 2, dtheta do
-        local x1 = x + r * math.cos(theta)
-        local z1 = z + r * math.sin(theta)
-        if map:IsPassableAtPoint(x1, 0, z1) and not map:IsPointNearHole(Vector3(x1, 0, z1)) then
-            local spike = SpawnPrefab("rootspike")
-            spike.Transform:SetPosition(x1, 0, z1)
+	
+	
+	if x ~= nil and z ~= nil then
+		for theta = math.random() * dtheta, PI * 2, dtheta do
+			local x1 = x + r * math.cos(theta)
+			local z1 = z + r * math.sin(theta)
+			if map:IsPassableAtPoint(x1, 0, z1) and not map:IsPointNearHole(Vector3(x1, 0, z1)) then
+				local spike = SpawnPrefab("rootspike")
+				spike.Transform:SetPosition(x1, 0, z1)
 
-            local delay = delaytoggle == 0 and 0 or .2 + delaytoggle * math.random() * .2
-            delaytoggle = delaytoggle == 1 and -1 or 1
+				local delay = delaytoggle == 0 and 0 or .2 + delaytoggle * math.random() * .2
+				delaytoggle = delaytoggle == 1 and -1 or 1
 
-            local duration = GetRandomWithVariance(TUNING.STALKER_SNARE_TIME, TUNING.STALKER_SNARE_TIME_VARIANCE)
+				local duration = GetRandomWithVariance(TUNING.STALKER_SNARE_TIME, TUNING.STALKER_SNARE_TIME_VARIANCE)
 
-            local variation = table.remove(vars, math.random(#vars))
-            table.insert(used, variation)
-            if #used > 3 then
-                table.insert(queued, table.remove(used, 1))
-            end
-            if #vars <= 0 then
-                local swap = vars
-                vars = queued
-                queued = swap
-            end
+				local variation = table.remove(vars, math.random(#vars))
+				table.insert(used, variation)
+				if #used > 3 then
+					table.insert(queued, table.remove(used, 1))
+				end
+				if #vars <= 0 then
+					local swap = vars
+					vars = queued
+					queued = swap
+				end
 
-            spike:RestartSpike(delay, duration, variation)
-            count = count + 1
-        end
-    end
+				spike:RestartSpike(delay, duration, variation)
+				count = count + 1
+			end
+		end
+	end
     if count <= 0 then
         return false
     elseif target:IsValid() then

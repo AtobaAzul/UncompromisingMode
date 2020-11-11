@@ -1338,7 +1338,9 @@ local function CheckPlayers()
 	local playerchancescaling = TUNING.DSTU.RNE_CHANCE - (#playerlist * 0.1)
 	--print(playerchancescaling)
 	
-	if TheWorld.state.cycles >= 5 and math.random() >= playerchancescaling or (TheWorld.state.isfullmoon and math.random() >= 0.5) or (TheWorld.state.isnewmoon and math.random() >= 0.75) then
+	local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
+	
+	if days_survived >= 5 and math.random() >= playerchancescaling then
 		
 		--for i, 1 in ipairs(playerlist) do  --try a base RNE
 		if player ~= nil then
@@ -1387,7 +1389,9 @@ local function CheckPlayers()
 		
 		for _, i in ipairs(playerlist) do
 		
-			if i ~= player and math.random() >= 0.5 then
+		local days_survived_secondary = i.components.age ~= nil and i.components.age:GetAgeInDays()
+	
+			if i ~= player and days_survived_secondary >= 5 and math.random() >= 0.5 then
 				local x,y,z = i.Transform:GetWorldPosition()--local x,y,z = v.Transform:GetWorldPosition()
 				local ents2 = TheSim:FindEntities(x,y,z, STRUCTURE_DIST, {"structure"})
 				numStructures2 = #ents2
