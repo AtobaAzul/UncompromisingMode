@@ -116,7 +116,6 @@ local prefab_post = {
 local stategraph_post = {
     --example:
     --"wilson",
-	"spiderqueen",
 	"deerclops",
 	"wilson",
 	"Leif",

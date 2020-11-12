@@ -64,11 +64,11 @@ env.AddPrefabPostInit("spiderqueen", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	inst.WebReady = true
-	inst:AddComponent("inventory")
-    inst.weaponitems = {}
-	EquipWeapons(inst)
+	--inst.WebReady = true
+	--inst:AddComponent("inventory")
+    --inst.weaponitems = {}
+	--EquipWeapons(inst)
 	inst.GroundCreepEntity:SetRadius(2)
 	inst:ListenForEvent("death", OnDead)
-	inst.OnLoad = function(inst)  inst.WebReady = true   end
+	--inst.OnLoad = function(inst)  inst.WebReady = true   end
 end)
