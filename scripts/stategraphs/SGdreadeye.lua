@@ -117,7 +117,7 @@ local states =
                     if target == nil or
                         target.components.combat == nil or
                         not target.components.combat:IsRecentTarget(inst) or
-                        t > target.components.combat.laststartattacktime + 5 then
+                        target.components.combat.laststartattacktime ~= nil and t > target.components.combat.laststartattacktime + 5 then
                         inst.sg:GoToState("disappear")
                         return
                     end
