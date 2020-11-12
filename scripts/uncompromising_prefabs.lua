@@ -141,7 +141,7 @@ return {
 	"whisperpod_normal",
 	"hooded_fern",
 	"fallingbeehive",
-	"lightninghound",
+	"uncompromising_hounds",
 	"hound_lightning",
 	"aphid",
 	"fruitbat",
@@ -163,4 +163,6 @@ return {
 	"cinnamon_tree",
 	"watermelon_lantern",
 	"gnome_organizer",
+	"fireball_throwable",
+	"crabclaw",
 }

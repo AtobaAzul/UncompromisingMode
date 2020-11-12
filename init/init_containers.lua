@@ -21,6 +21,10 @@ function CheckItem(container, item, slot)
     return item:HasTag("mushroom_fuel")
 end
 
+function CheckGem(container, item, slot)
+    return item:HasTag("gem")
+end
+
 modparams.air_conditioner =
 {
     widget =
@@ -61,8 +65,33 @@ modparams.puffvest =
     type = "pack",
 }
 
+modparams.crabclaw =
+{
+    widget =
+    {
+        slotpos =
+        {
+            --Vector3(0,   32 + 4,  0),
+        },
+        --[[slotbg =
+        {
+            { image = "slingshot_ammo_slot.tex" },
+        },]]
+        animbank = "ui_lamp_1x4",
+        animbuild = "ui_lamp_1x4",
+        pos = Vector3(0, 125, 0),
+    },
+	itemtestfn = CheckGem,
+    acceptsstacks = false,
+    type = "hand_inv",
+}
+
 for y = 0, 3 do
     table.insert(modparams.puffvest.widget.slotpos, Vector3(-1, -75 * y + 110, 0))	
+end
+
+for y = 0, 3 do
+    table.insert(modparams.crabclaw.widget.slotpos, Vector3(-1, -75 * y + 110, 0))	
 end
 
 for k, v in pairs(modparams) do

@@ -142,7 +142,10 @@ local function grass(name, stage)
         MakeSmallPropagator(inst)
         MakeNoGrowInWinter(inst)
         MakeHauntableIgnite(inst)
+		
         ---------------------
+		
+		inst:ListenForEvent("onremove", function(inst) inst.components.lootdropper:SpawnLootPrefab("dug_grass") end)
 
 
         return inst
