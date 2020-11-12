@@ -446,7 +446,7 @@ AddCookerRecipe("portablecookpot", blueberrypancakes)
 local beefalowings =
 {
     name = "beefalowings",
-    test = function(cooker, names, tags) return (names.pepper or names.pepper_cooked) and names.horn and ((names.batwing and names.batwing > 1) or (names.batwing_cooked and names.batwing_cooked > 1)) end,
+    test = function(cooker, names, tags) return tags.veggie and names.horn and ((names.batwing and names.batwing > 1) or (names.batwing_cooked and names.batwing_cooked > 1)) end,
 
     priority = 20,
     weight = 30,

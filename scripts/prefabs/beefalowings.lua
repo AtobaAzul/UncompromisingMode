@@ -41,9 +41,9 @@ local function fn()
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/beefalowings.xml"
     inst:AddComponent("edible")
-    inst.components.edible.healthvalue = 60
-    inst.components.edible.hungervalue = 100
-    inst.components.edible.sanityvalue = 33
+    inst.components.edible.healthvalue = 30
+    inst.components.edible.hungervalue = 50
+    inst.components.edible.sanityvalue = 5
     inst.components.edible.foodtype = FOODTYPE.MEAT
 
     inst:AddComponent("perishable")
