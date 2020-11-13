@@ -64,7 +64,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
 		inst.components.crop:SetOnMatureFn(onmatured)
 		inst.growing = true
 		
-		if (item.prefab == "watermelon_seeds" or "pomegranate_seeds" or "pumpkin_seeds" or "dragonfruit_seeds" or "eggplant_seeds" or "durian_seeds") then
+		if item.prefab == ("watermelon_seeds" or "pomegranate_seeds" or "pumpkin_seeds" or "dragonfruit_seeds" or "eggplant_seeds" or "durian_seeds") then
 			inst.planted = item.prefab
 			--[[local prefab = nil
 			prefab = item.components.plantable.product

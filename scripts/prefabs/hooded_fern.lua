@@ -53,7 +53,7 @@ local function dig_up(inst, worker)
 	inst.components.lootdropper:SpawnLootPrefab("foliage")
 	
 	if math.random() > 0.5 then
-		inst.components.lootdropper:SpawnLootPrefab("cut_grass")
+		inst.components.lootdropper:SpawnLootPrefab("cutgrass")
 	else
 		inst.components.lootdropper:SpawnLootPrefab("twigs")
 	end
