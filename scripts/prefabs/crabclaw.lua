@@ -49,30 +49,30 @@ local function onattack(inst, owner, target)
 	local redgem = #inst.components.container:FindItems( function(item) return item.prefab == "redgem" end )
 	
 	if redgem > 0 and owner.components.health ~= nil and owner.components.health:GetPercent() < 1 and not (target:HasTag("wall") or target:HasTag("engineering")) then
-        owner.components.health:DoDelta(redgem + opalgem / 5, false, "crabclaw")
+        owner.components.health:DoDelta((redgem + opalgem) / 5, false, "crabclaw")
     end
 	
 	local yellowgem = #inst.components.container:FindItems( function(item) return item.prefab == "yellowgem" end )
 	
 	if yellowgem > 0 and owner.components.sanity ~= nil and owner.components.sanity:GetPercent() < 1 and not (target:HasTag("wall") or target:HasTag("engineering")) then
-        owner.components.sanity:DoDelta(yellowgem + opalgem / 5, false, "crabclaw")
+        owner.components.sanity:DoDelta((yellowgem + opalgem) / 5, false, "crabclaw")
     end
 	
 	local bluegem = #inst.components.container:FindItems( function(item) return item.prefab == "bluegem" end )
 	
 	if bluegem > 0 and target:IsValid() and target.components.combat ~= nil and target.components.freezable ~= nil and not target.components.health:IsDead() and not target.components.freezable:IsFrozen() then
-		target.components.freezable:AddColdness((bluegem + opalgem / 10))
+		target.components.freezable:AddColdness((bluegem + opalgem) / 10)
 	end
 	
 	local greengem = #inst.components.container:FindItems( function(item) return item.prefab == "greengem" end )
 	
 	if greengem > 0 and inst.components.finiteuses and inst.components.finiteuses:GetPercent() < 1 then
-		inst.components.finiteuses:SetUses(inst.components.finiteuses:GetUses() + 0.1 + (greengem + opalgem / 10))
+		inst.components.finiteuses:SetUses(inst.components.finiteuses:GetUses() + 0.1 + (greengem + opalgem) / 10)
 	end
 	
 	local purplegem = #inst.components.container:FindItems( function(item) return item.prefab == "purplegem" end )
 	
-	if purplegem > 0 and math.random() < ((purplegem + opalgem / 10)) then
+	if purplegem > 0 and math.random() < ((purplegem + opalgem) / 10) then
         local pt
         if target ~= nil and target:IsValid() then
             pt = target:GetPosition()
@@ -103,11 +103,113 @@ local function onattack(inst, owner, target)
 		end
 		target._crabclaw_speedmulttask = target:DoTaskInTime(5, function(i) i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) i._crabclaw_speedmulttask = nil end)
 
-		local slowamount = 0.9 - (orangegem + opalgem / 10)
+		local slowamount = 0.9 - ((orangegem + opalgem) / 10)
 		
 		target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, slowamount or 0.9)
 	end
 	
+end
+
+local function ItemGet(inst)
+	local owner = inst.components.inventoryitem.owner
+	local item1 = inst.components.container.slots[1]
+	local item2 = inst.components.container.slots[2]
+	local item3 = inst.components.container.slots[3]
+	local item4 = inst.components.container.slots[4]
+
+	if item1 ~= nil and owner ~= nil then
+		inst.SoundEmitter:PlaySound("hookline_2/creatures/boss/crabking/gem_place")
+		inst.shinefx_slot1 = SpawnPrefab(item1.prefab)
+		inst.shinefx_slot1.entity:SetParent(owner.entity)
+		inst.shinefx_slot1.entity:AddFollower()
+		inst.shinefx_slot1.Follower:FollowSymbol(owner.GUID, "swap_object", 50, -100, 0)
+		inst.shinefx_slot1.Transform:SetScale(0.2,0.2,0.2)
+		
+		
+		inst.shinefx2 = SpawnPrefab("crab_king_shine")
+		inst.shinefx2.entity:SetParent(owner.entity)
+		inst.shinefx2.entity:AddFollower()
+		inst.shinefx2.Follower:FollowSymbol(owner.GUID, "swap_object", 50, -100, 0)
+		inst.shinefx2.Transform:SetScale(0.2,0.2,0.2)
+	end
+	
+	if item2 ~= nil and owner ~= nil then
+		inst.SoundEmitter:PlaySound("hookline_2/creatures/boss/crabking/gem_place")
+		inst.shinefx_slot2 = SpawnPrefab(item2.prefab)
+		inst.shinefx_slot2.entity:SetParent(owner.entity)
+		inst.shinefx_slot2.entity:AddFollower()
+		inst.shinefx_slot2.Follower:FollowSymbol(owner.GUID, "swap_object", 100, -100, 0)
+		inst.shinefx_slot2.Transform:SetScale(0.2,0.2,0.2)
+		
+		
+		inst.shinefx2 = SpawnPrefab("crab_king_shine")
+		inst.shinefx2.entity:SetParent(owner.entity)
+		inst.shinefx2.entity:AddFollower()
+		inst.shinefx2.Follower:FollowSymbol(owner.GUID, "swap_object", 100, -100, 0)
+		inst.shinefx2.Transform:SetScale(0.2,0.2,0.2)
+	end
+	
+	if item3 ~= nil and owner ~= nil then
+		inst.SoundEmitter:PlaySound("hookline_2/creatures/boss/crabking/gem_place")
+		inst.shinefx_slot3 = SpawnPrefab(item3.prefab)
+		inst.shinefx_slot3.entity:SetParent(owner.entity)
+		inst.shinefx_slot3.entity:AddFollower()
+		inst.shinefx_slot3.Follower:FollowSymbol(owner.GUID, "swap_object", 100, -50, 0)
+		inst.shinefx_slot3.Transform:SetScale(0.2,0.2,0.2)
+		
+		
+		inst.shinefx2 = SpawnPrefab("crab_king_shine")
+		inst.shinefx2.entity:SetParent(owner.entity)
+		inst.shinefx2.entity:AddFollower()
+		inst.shinefx2.Follower:FollowSymbol(owner.GUID, "swap_object", 50, -50, 0)
+		inst.shinefx2.Transform:SetScale(0.2,0.2,0.2)
+	end
+	
+	if item4 ~= nil and owner ~= nil then
+		inst.SoundEmitter:PlaySound("hookline_2/creatures/boss/crabking/gem_place")
+		inst.shinefx_slot4 = SpawnPrefab(item4.prefab)
+		inst.shinefx_slot4.entity:SetParent(owner.entity)
+		inst.shinefx_slot4.entity:AddFollower()
+		inst.shinefx_slot4.Follower:FollowSymbol(owner.GUID, "swap_object", 50, -50, 0)
+		inst.shinefx_slot4.Transform:SetScale(0.2,0.2,0.2)
+		
+		
+		inst.shinefx2 = SpawnPrefab("crab_king_shine")
+		inst.shinefx2.entity:SetParent(owner.entity)
+		inst.shinefx2.entity:AddFollower()
+		inst.shinefx2.Follower:FollowSymbol(owner.GUID, "swap_object", 50, -50, 0)
+		inst.shinefx2.Transform:SetScale(0.2,0.2,0.2)
+	end
+	
+end
+
+local function ItemLose(inst)
+	local owner = inst.components.inventoryitem.owner
+	local item1 = inst.components.container.slots[1]
+	local item2 = inst.components.container.slots[2]
+	local item3 = inst.components.container.slots[3]
+	local item4 = inst.components.container.slots[4]
+
+	if item1 ~= nil and owner ~= nil and inst.shinefx_slot1 ~= nil then
+		print("1")
+		inst.shinefx_slot1:Remove()
+	end
+	
+	if item2 ~= nil and owner ~= nil and inst.shinefx_slot2 ~= nil then
+		print("2")
+		inst.shinefx_slot2:Remove()
+	end
+	
+	if item3 ~= nil and owner ~= nil and inst.shinefx_slot3 ~= nil then
+		print("3")
+		inst.shinefx_slot3:Remove()
+	end
+	
+	if item4 ~= nil and owner ~= nil and inst.shinefx_slot4 ~= nil then
+		print("4")
+		inst.shinefx_slot4:Remove()
+	end
+
 end
 
 local function fn()
@@ -154,8 +256,8 @@ local function fn()
     inst:AddComponent("container")
     inst.components.container:WidgetSetup("crabclaw")
 	inst.components.container.canbeopened = true
-    --inst:ListenForEvent("itemget", OnAmmoLoaded)
-    --inst:ListenForEvent("itemlose", OnAmmoUnloaded)
+    inst:ListenForEvent("itemget", ItemGet)
+    inst:ListenForEvent("itemlose", ItemLose)
 
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)
