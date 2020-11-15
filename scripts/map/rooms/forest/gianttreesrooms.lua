@@ -1,7 +1,7 @@
 AddRoom("GiantTrees", 
 {
 	colour={r=.6,g=.2,b=.8,a=.50},
-	value = GROUND.JUNGLE,
+	value = GROUND.HOODEDFOREST,
 	tags = {"RoadPoison", "hoodedcanopy"}, --"ForceDisconnected"
 	contents =  
 	{	
@@ -27,7 +27,7 @@ AddRoom("GiantTrees",
 AddRoom("AphidLand", 
 {
 	colour={r=.6,g=.2,b=.8,a=.50},
-	value = GROUND.JUNGLE,
+	value = GROUND.HOODEDFOREST,
 	tags = {"RoadPoison", "hoodedcanopy"}, --"ForceDisconnected"
 	contents =  
 	{	
@@ -52,7 +52,7 @@ AddRoom("AphidLand",
 AddRoom("ShroomInfestedGiantTrees", 
 {
 	colour={r=.6,g=.2,b=.8,a=.50},
-	value = GROUND.JUNGLE,
+	value = GROUND.HOODEDFOREST,
 	tags = {"RoadPoison", "hoodedcanopy"}, --"ForceDisconnected"
 	contents =  
 	{	
@@ -79,7 +79,7 @@ AddRoom("ShroomInfestedGiantTrees",
 AddRoom("SpideryGiantTrees", 
 {
 	colour = {r=1,g=1,b=1,a=.50}, 
-	value = GROUND.JUNGLE,
+	value = GROUND.HOODEDFOREST,
 	tags = {"RoadPoison", "hoodedcanopy"}, --"ForceDisconnected"
 	contents =  
 	{	
@@ -103,7 +103,7 @@ AddRoom("SpideryGiantTrees",
 AddRoom("WalrusGiantTrees", 
 {
 	colour={r=.6,g=.2,b=.8,a=.50},
-	value = GROUND.JUNGLE,
+	value = GROUND.HOODEDFOREST,
 	tags = {"hoodedcanopy"}, --"ForceDisconnected"
 	contents =  
 	{	
@@ -130,7 +130,7 @@ AddRoom("WalrusGiantTrees",
 AddRoom("BGGiantTrees", 
 {
 	colour = {r=1,g=1,b=1,a=.50}, 
-	value = GROUND.JUNGLE,
+	value = GROUND.HOODEDFOREST,
 	tags = {"RoadPoison","hoodedcanopy"}, --"ForceDisconnected"
 	contents =  
 	{	
@@ -175,7 +175,7 @@ AddRoom("SnapDragons",
 }})
 AddRoom("MoonBaseGiantTrees", {
 					colour={r=.8,g=0.5,b=.6,a=.50},
-					value = GROUND.JUNGLE,
+					value = GROUND.HOODEDFOREST,
 					tags = { "RoadPoison","hoodedcanopy" },
 					contents =  {
 									countprefabs = {
@@ -197,7 +197,7 @@ AddRoom("MoonBaseGiantTrees", {
 					})
 AddRoom("HoodedTown", {
 					colour={r=.8,g=0.5,b=.6,a=.50},
-					value = GROUND.JUNGLE,
+					value = GROUND.HOODEDFOREST,
 					tags = { "RoadPoison","hoodedcanopy" },
 					contents =  {
 									countprefabs = {
@@ -218,7 +218,7 @@ AddRoom("HoodedTown", {
 					})
 AddRoom("RoseGarden", {
 					colour={r=.8,g=0.5,b=.6,a=.50},
-					value = GROUND.JUNGLE,
+					value = GROUND.HOODEDFOREST,
 					tags = { "RoadPoison","hoodedcanopy" },
 					contents =  {
 									countprefabs = {
@@ -238,7 +238,7 @@ AddRoom("RoseGarden", {
 					})
 AddRoom("HFHolidays", {
 					colour={r=.8,g=0.5,b=.6,a=.50},
-					value = GROUND.JUNGLE,
+					value = GROUND.HOODEDFOREST,
 					tags = { "RoadPoison","hoodedcanopy" },
 					contents =  {
 									countprefabs = {

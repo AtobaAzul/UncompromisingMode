@@ -67,7 +67,7 @@ local function dig_up(inst, worker)
         if inst.components.pickable:CanBePicked() then
             inst.components.lootdropper:SpawnLootPrefab(inst.components.pickable.product)
         end
-		for i = 1, 2 do
+		for i = 1, 3 do
         inst.components.lootdropper:SpawnLootPrefab(
             (withered) and
             "cutgrass" or
@@ -144,9 +144,6 @@ local function grass(name, stage)
         MakeHauntableIgnite(inst)
 		
         ---------------------
-		
-		inst:ListenForEvent("onremove", function(inst) inst.components.lootdropper:SpawnLootPrefab("dug_grass") end)
-
 
         return inst
     end

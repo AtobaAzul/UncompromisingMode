@@ -111,7 +111,7 @@ return {
 	"web_net_splat_fx",
 	"web_bomb",
 	"hoodedcanopy",
-	"jungleturf",
+	"hoodedforestturf",
 	"poopregenbuff",
 	"bloomershot",
 	"giant_tree",

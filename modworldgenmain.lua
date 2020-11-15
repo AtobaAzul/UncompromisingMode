@@ -10,7 +10,7 @@ local GROUND_OCEAN_COLOR = -- Color for the main island ground tiles
     minimap_color =         { 46,  32,  18,  64 },
 }
 AddTile(
-	"JUNGLE",
+	"HOODEDFOREST",
 	102,
 	"jungle",
 	{

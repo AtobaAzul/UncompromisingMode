@@ -87,7 +87,7 @@ end
 
 local turfs =
 {
-    {name="jungle",			anim="jungle",			tile=GROUND.JUNGLE},
+    {name="jungle",			anim="jungle",			tile=GROUND.HOODEDFOREST},
     --[[{name="meadow",			anim="meadow",			tile=GROUND.MEADOW},
 	{name="tidalmarsh",		anim="tidalmarsh",		tile=GROUND.TIDALMARSH},
 	{name="magmafield",		anim="magmafield",		tile=GROUND.MAGMAFIELD},

@@ -120,6 +120,7 @@ local function workcallback(inst, worker, workleft)
         inst.components.lootdropper:DropLoot(pos)
 		local grass = FindEntity(inst, 0.5, nil, "trapdoorgrass")
 		if grass ~= nil then
+            inst.components.lootdropper:SpawnLootPrefab("dug_grass")
 		grass:Remove()
 		end
         inst:Remove()
@@ -232,9 +233,6 @@ local function fn2()
     inst.entity:AddAnimState()
     --inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-
-
-    
 
     inst.AnimState:SetBank("flipping_rock")
     inst.AnimState:SetBuild("rock_flipping")

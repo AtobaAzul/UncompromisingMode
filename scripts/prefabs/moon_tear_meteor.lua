@@ -48,7 +48,7 @@ local prefabs =
     "rock1",
 }
 
-local SMASHABLE_TAGS = { "_combat", "_inventoryitem", "NPC_workable" }
+local SMASHABLE_TAGS = { "player" }
 local NON_SMASHABLE_TAGS = { "INLIMBO", "playerghost", "meteor_protection" }
 
 local DENSITY = 0.1 -- the approximate density of rock prefabs in the rocky biomes

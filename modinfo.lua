@@ -48,7 +48,7 @@ server_filter_tags = {
 	"hardcore"
 }
 
-priority = 10
+priority = -10
 
 ------------------------------
 -- local functions to makes things prettier
@@ -143,7 +143,7 @@ configuration_options =
 	},
     BinaryConfig("snowstorms", "Snowstorms", "Snowtorms impede on players' speed and vision if they are not wearing eye protection. Snowstorms also causes snow to build up on structures.", true),
     BinaryConfig("hayfever", "Hayfever", "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.", true),
-    BinaryConfig("acidrain", "Acid Rain", "After the First Year, Toadstool will grow poisionous mushtrees aboveground and pollute the world, making the rain acidic.", true),
+    --BinaryConfig("acidrain", "Acid Rain", "After the First Year, Toadstool will grow poisionous mushtrees aboveground and pollute the world, making the rain acidic.", true),
 	
 	Header("Gamemode"),
 	{
