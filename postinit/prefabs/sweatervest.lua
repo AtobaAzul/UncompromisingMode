@@ -11,7 +11,7 @@ local function onequip(inst, owner)
     inst.components.fueled:StartConsuming()
 	
 	if owner.components.sanity ~= nil then
-        owner.components.sanity.neg_aura_modifiers:SetModifier(inst, TUNING.BATTLESONG_NEG_SANITY_AURA_MOD - 0.1)
+        owner.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.4)
     end
 end
 

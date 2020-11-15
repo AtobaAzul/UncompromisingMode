@@ -111,7 +111,7 @@ local KEY_STAFF = "yellowstaff"
 
 local function ItemTradeTest(inst, item, giver)
 	if item.prefab == "moon_tear" and not inst.mooning then
-		if TheWorld.state.isnight then
+		if TheWorld.state.isfullmoon then
 			inst.mooning = true
 			StartFX(inst)
 			item:Remove()

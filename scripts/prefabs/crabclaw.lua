@@ -10,6 +10,22 @@ local prefabs =
 }
 
 local function onequip(inst, owner)
+	if inst.shinefx_slot1 ~= nil then
+		inst.shinefx_slot1:Remove()
+	end
+	
+	if inst.shinefx_slot2 ~= nil then
+		inst.shinefx_slot2:Remove()
+	end
+	
+	if inst.shinefx_slot3 ~= nil then
+		inst.shinefx_slot3:Remove()
+	end
+	
+	if inst.shinefx_slot4 ~= nil then
+		inst.shinefx_slot4:Remove()
+	end
+
     local skin_build = inst:GetSkinBuild()
     if skin_build ~= nil then
         owner:PushEvent("equipskinneditem", inst:GetSkinName())
@@ -110,6 +126,22 @@ local function onattack(inst, owner, target)
 	
 end
 
+local function onremovebody1(body)
+    body._lantern._body = nil
+end
+
+local function onremovebody2(body)
+    body._lantern._body = nil
+end
+
+local function onremovebody3(body)
+    body._lantern._body = nil
+end
+
+local function onremovebody4(body)
+    body._lantern._body = nil
+end
+
 local function ItemGet(inst)
 	local owner = inst.components.inventoryitem.owner
 	local item1 = inst.components.container.slots[1]
@@ -119,7 +151,9 @@ local function ItemGet(inst)
 
 	if item1 ~= nil and owner ~= nil then
 		inst.SoundEmitter:PlaySound("hookline_2/creatures/boss/crabking/gem_place")
-		inst.shinefx_slot1 = SpawnPrefab(item1.prefab)
+		inst.shinefx_slot1 = SpawnPrefab("crabclaw_gempiece")
+		inst.shinefx_slot1._lantern = inst
+		inst:ListenForEvent("onremove", onremovebody1, inst.shinefx_slot1)
 		inst.shinefx_slot1.entity:SetParent(owner.entity)
 		inst.shinefx_slot1.entity:AddFollower()
 		inst.shinefx_slot1.Follower:FollowSymbol(owner.GUID, "swap_object", 50, -100, 0)
@@ -135,7 +169,9 @@ local function ItemGet(inst)
 	
 	if item2 ~= nil and owner ~= nil then
 		inst.SoundEmitter:PlaySound("hookline_2/creatures/boss/crabking/gem_place")
-		inst.shinefx_slot2 = SpawnPrefab(item2.prefab)
+		inst.shinefx_slot2 = SpawnPrefab("crabclaw_gempiece")
+		inst.shinefx_slot2._lantern = inst
+		inst:ListenForEvent("onremove", onremovebody2, inst.shinefx_slot2)
 		inst.shinefx_slot2.entity:SetParent(owner.entity)
 		inst.shinefx_slot2.entity:AddFollower()
 		inst.shinefx_slot2.Follower:FollowSymbol(owner.GUID, "swap_object", 100, -100, 0)
@@ -151,7 +187,9 @@ local function ItemGet(inst)
 	
 	if item3 ~= nil and owner ~= nil then
 		inst.SoundEmitter:PlaySound("hookline_2/creatures/boss/crabking/gem_place")
-		inst.shinefx_slot3 = SpawnPrefab(item3.prefab)
+		inst.shinefx_slot3 = SpawnPrefab("crabclaw_gempiece")
+		inst.shinefx_slot3._lantern = inst
+		inst:ListenForEvent("onremove", onremovebody3, inst.shinefx_slot3)
 		inst.shinefx_slot3.entity:SetParent(owner.entity)
 		inst.shinefx_slot3.entity:AddFollower()
 		inst.shinefx_slot3.Follower:FollowSymbol(owner.GUID, "swap_object", 100, -50, 0)
@@ -161,13 +199,15 @@ local function ItemGet(inst)
 		inst.shinefx2 = SpawnPrefab("crab_king_shine")
 		inst.shinefx2.entity:SetParent(owner.entity)
 		inst.shinefx2.entity:AddFollower()
-		inst.shinefx2.Follower:FollowSymbol(owner.GUID, "swap_object", 50, -50, 0)
+		inst.shinefx2.Follower:FollowSymbol(owner.GUID, "swap_object", 100, -50, 0)
 		inst.shinefx2.Transform:SetScale(0.2,0.2,0.2)
 	end
 	
 	if item4 ~= nil and owner ~= nil then
 		inst.SoundEmitter:PlaySound("hookline_2/creatures/boss/crabking/gem_place")
-		inst.shinefx_slot4 = SpawnPrefab(item4.prefab)
+		inst.shinefx_slot4 = SpawnPrefab("crabclaw_gempiece")
+		inst.shinefx_slot4._lantern = inst
+		inst:ListenForEvent("onremove", onremovebody4, inst.shinefx_slot4)
 		inst.shinefx_slot4.entity:SetParent(owner.entity)
 		inst.shinefx_slot4.entity:AddFollower()
 		inst.shinefx_slot4.Follower:FollowSymbol(owner.GUID, "swap_object", 50, -50, 0)
@@ -190,22 +230,22 @@ local function ItemLose(inst)
 	local item3 = inst.components.container.slots[3]
 	local item4 = inst.components.container.slots[4]
 
-	if item1 ~= nil and owner ~= nil and inst.shinefx_slot1 ~= nil then
+	if item1 == nil and inst.shinefx_slot1 ~= nil then
 		print("1")
 		inst.shinefx_slot1:Remove()
 	end
 	
-	if item2 ~= nil and owner ~= nil and inst.shinefx_slot2 ~= nil then
+	if item2 == nil and inst.shinefx_slot2 ~= nil then
 		print("2")
 		inst.shinefx_slot2:Remove()
 	end
 	
-	if item3 ~= nil and owner ~= nil and inst.shinefx_slot3 ~= nil then
+	if item3 == nil and inst.shinefx_slot3 ~= nil then
 		print("3")
 		inst.shinefx_slot3:Remove()
 	end
 	
-	if item4 ~= nil and owner ~= nil and inst.shinefx_slot4 ~= nil then
+	if item4 == nil and inst.shinefx_slot4 ~= nil then
 		print("4")
 		inst.shinefx_slot4:Remove()
 	end
@@ -269,4 +309,31 @@ local function fn()
     return inst
 end
 
-return Prefab("crabclaw", fn, assets, prefabs)
+local function lanternbodyfn()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+
+    inst.AnimState:SetBank("redlantern")
+    inst.AnimState:SetBuild("redlantern")
+    inst.AnimState:PlayAnimation("idle_body_loop", true)
+
+    inst:AddTag("FX")
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst.AnimState:SetTime(math.random() * inst.AnimState:GetCurrentAnimationLength())
+
+    inst.persists = false
+
+    return inst
+end
+
+return Prefab("crabclaw", fn, assets, prefabs),
+    Prefab("crabclaw_gempiece", lanternbodyfn)
