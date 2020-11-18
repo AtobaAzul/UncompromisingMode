@@ -44,9 +44,9 @@ function FogOver:OnUpdate(dt)
 	self:Hide()
 	end
 	if self.owner.components.areaaware:CurrentlyInTag("hoodedcanopy") and not TheWorld.state.isnight then
-		TheFocalPoint.SoundEmitter:KillSound("danger")
-		TheFocalPoint.SoundEmitter:KillSound("busy")
-		TheFocalPoint.SoundEmitter:PlaySound("UCSounds/music/creepyforest", "creepyforest")
+		--TheFocalPoint.SoundEmitter:KillSound("danger")
+		--TheFocalPoint.SoundEmitter:KillSound("busy")
+		--TheFocalPoint.SoundEmitter:PlaySound("UCSounds/music/creepyforest", "creepyforest")
 		self:Show()
         self.time = self.transitiontime
 		if TheWorld.state.isdusk then
@@ -55,7 +55,7 @@ function FogOver:OnUpdate(dt)
         self.alphagoal = 0.8
 		end
 	else
-		TheFocalPoint.SoundEmitter:KillSound("creepyforest")
+		--TheFocalPoint.SoundEmitter:KillSound("creepyforest")
         self.time = self.transitiontime
         self.alphagoal = 0
 	end
