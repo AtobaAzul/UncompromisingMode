@@ -130,7 +130,7 @@ local function fn()
 	
     inst.AnimState:SetBank("snowball")
     inst.AnimState:SetBuild("snowball")
-    --inst.AnimState:PlayAnimation("idle")
+    inst.AnimState:PlayAnimation("idle")
 	
     inst:AddTag("projectile")
 	inst:AddTag("weapon")
