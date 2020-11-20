@@ -165,4 +165,5 @@ return {
 	"gnome_organizer",
 	"fireball_throwable",
 	"crabclaw",
+	"ancient_trepidation"
 }
