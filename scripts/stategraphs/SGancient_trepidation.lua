@@ -25,9 +25,9 @@ local events=
             local wants_to_move = inst.components.locomotor:WantsToMoveForward()
             if not inst.sg:HasStateTag("attack") and is_moving ~= wants_to_move then
                 if wants_to_move then
-                    --inst.sg:GoToState("premoving")
+                    inst.sg:GoToState("premoving")
                 else
-                    --inst.sg:GoToState("idle")
+                    inst.sg:GoToState("idle")
                 end
             end
         end
