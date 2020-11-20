@@ -119,9 +119,8 @@ local function workcallback(inst, worker, workleft)
         SpawnPrefab("rock_break_fx").Transform:SetPosition(pos:Get())
         inst.components.lootdropper:DropLoot(pos)
 		local grass = FindEntity(inst, 0.5, nil, "trapdoorgrass")
-		if grass ~= nil then
-            inst.components.lootdropper:SpawnLootPrefab("dug_grass")
-		grass:Remove()
+		if grass ~= nil and grass.components.workable ~= nil then
+		grass.components.workable:WorkedBy(worker)
 		end
         inst:Remove()
     end

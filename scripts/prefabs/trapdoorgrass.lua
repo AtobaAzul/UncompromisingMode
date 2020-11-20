@@ -66,6 +66,8 @@ local function dig_up(inst, worker)
 
         if inst.components.pickable:CanBePicked() then
             inst.components.lootdropper:SpawnLootPrefab(inst.components.pickable.product)
+			inst.components.lootdropper:SpawnLootPrefab(inst.components.pickable.product)
+			inst.components.lootdropper:SpawnLootPrefab(inst.components.pickable.product)
         end
 		for i = 1, 3 do
         inst.components.lootdropper:SpawnLootPrefab(
