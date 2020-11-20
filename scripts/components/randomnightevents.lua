@@ -254,10 +254,10 @@ end
 
 local function SpawnShadowCharsFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
-	local x1 = x + math.random(12, 16)
-	local z1 = z + math.random(12, 16)
-	local x2 = x - math.random(12, 16)
-	local z2 = z - math.random(12, 16)
+	local x1 = x + math.random(6, 8)
+	local z1 = z + math.random(6, 8)
+	local x2 = x - math.random(6, 8)
+	local z2 = z - math.random(6, 8)
 	
 
 	if TheWorld.state.isnight then
