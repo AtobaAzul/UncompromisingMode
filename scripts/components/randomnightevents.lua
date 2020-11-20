@@ -259,9 +259,10 @@ local function SpawnShadowCharsFunction(player)
 	local x2 = x - math.random(12, 16)
 	local z2 = z - math.random(12, 16)
 	
-	local shadow = SpawnPrefab("swilson")
+
 	if TheWorld.state.isnight then
 		if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+			local shadow = SpawnPrefab("swilson")
 			shadow.Transform:SetPosition(x1, y, z1)
 			shadow:DoTaskInTime(0, function(shadow) DayBreak(shadow) end)
 		else
