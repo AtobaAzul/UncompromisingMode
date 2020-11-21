@@ -19,23 +19,15 @@ local _activatedplayer = nil
 
 	local HFMusic = {
     	--busy
-    	["dontstarve/music/music_work"] = "UCSounds/music/creepyforest",
-    	["dontstarve/music/music_work_winter"] = "UCSounds/music/creepyforest",
-    	["dontstarve_DLC001/music/music_work_spring"] = "UCSounds/music/creepyforest",
-    	["dontstarve_DLC001/music/music_work_summer"] = "UCSounds/music/creepyforest",
-    	--combat
-    	--[[["dontstarve/music/music_danger"] = "ia/music/music_danger_season_1",
-    	["dontstarve/music/music_danger_winter"] = "ia/music/music_danger_season_2",
-    	["dontstarve_DLC001/music/music_danger_spring"] = "ia/music/music_danger_season_3",
-    	["dontstarve_DLC001/music/music_danger_summer"] = "ia/music/music_danger_season_4",
-    	--epic
-    	["dontstarve/music/music_epicfight"] = "ia/music/music_epicfight_season_1",
-    	["dontstarve/music/music_epicfight_winter"] = "ia/music/music_epicfight_season_2",
-    	["dontstarve_DLC001/music/music_epicfight_spring"] = "ia/music/music_epicfight_season_3",
-    	["dontstarve_DLC001/music/music_epicfight_summer"] = "ia/music/music_epicfight_season_4",
-    	--stinger
-    	["dontstarve/music/music_dawn_stinger"] = "ia/music/music_dawn_stinger",
-    	["dontstarve/music/music_dusk_stinger"] = "ia/music/music_dusk_stinger",]]
+    	["dontstarve/music/music_work"] = "UMMusic/music/hoodedforest_work",
+    	["dontstarve/music/music_work_winter"] = "UMMusic/music/hoodedforest_work",
+    	["dontstarve_DLC001/music/music_work_spring"] = "UMMusic/music/hoodedforest_work",
+    	["dontstarve_DLC001/music/music_work_summer"] = "UMMusic/music/hoodedforest_work",
+		
+    	["dontstarve/music/music_epicfight"] = "UMMusic/music/hoodedforest_efs",
+    	["dontstarve/music/music_epicfight_winter"] = "UMMusic/music/hoodedforest_efs",
+    	["dontstarve_DLC001/music/music_epicfight_spring"] = "UMMusic/music/hoodedforest_efs",
+    	["dontstarve_DLC001/music/music_epicfight_summer"] = "UMMusic/music/hoodedforest_efs",
     }
 	
 	
@@ -45,19 +37,12 @@ local _activatedplayer = nil
     	["dontstarve/music/music_work_winter"] = "dontstarve/music/music_work_winter",
     	["dontstarve_DLC001/music/music_work_spring"] = "dontstarve_DLC001/music/music_work_spring",
     	["dontstarve_DLC001/music/music_work_summer"] = "dontstarve_DLC001/music/music_work_summer",
-    	--combat
-    	--[[["dontstarve/music/music_danger"] = "ia/music/music_danger_season_1",
-    	["dontstarve/music/music_danger_winter"] = "ia/music/music_danger_season_2",
-    	["dontstarve_DLC001/music/music_danger_spring"] = "ia/music/music_danger_season_3",
-    	["dontstarve_DLC001/music/music_danger_summer"] = "ia/music/music_danger_season_4",
-    	--epic
-    	["dontstarve/music/music_epicfight"] = "ia/music/music_epicfight_season_1",
-    	["dontstarve/music/music_epicfight_winter"] = "ia/music/music_epicfight_season_2",
-    	["dontstarve_DLC001/music/music_epicfight_spring"] = "ia/music/music_epicfight_season_3",
-    	["dontstarve_DLC001/music/music_epicfight_summer"] = "ia/music/music_epicfight_season_4",
-    	--stinger
-    	["dontstarve/music/music_dawn_stinger"] = "ia/music/music_dawn_stinger",
-    	["dontstarve/music/music_dusk_stinger"] = "ia/music/music_dusk_stinger",]]
+		
+    	["dontstarve/music/music_epicfight"] = "dontstarve/music/music_epicfight",
+    	["dontstarve/music/music_epicfight_winter"] = "dontstarve/music/music_epicfight",
+    	["dontstarve_DLC001/music/music_epicfight_spring"] = "dontstarve/music/music_epicfight",
+    	["dontstarve_DLC001/music/music_epicfight_summer"] = "dontstarve/music/music_epicfight",
+		
     }
 
 	local function IsInHF(player)
