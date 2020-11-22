@@ -1302,12 +1302,12 @@ end
 
 local function IsLiving(player)
 	local x, y, z = player.Transform:GetWorldPosition()
-	local theent = #TheSim:FindEntities(x, 0, z, 40, {"epic", "_health"}, {"leif"})
+	local theent = #TheSim:FindEntities(x, 0, z, 40, {"epic"}, {"leif", "crabking"})
 	local hounding = TheWorld.components.hounded:GetWarning()
 	local deerclopsed = TheWorld.components.cavedeerclopsspawner:GetWarning()
 	local area = player.components.areaaware
 	
-	return not player:HasTag("playerghost") and theent <= 0 and not (hounding or deerclopsed) or 
+	return not player:HasTag("playerghost") and theent < 1 and not (hounding or deerclopsed) or 
 			area:GetCurrentArea() ~= nil 
 			and not area:CurrentlyInTag("nohasslers")
 			and not area:CurrentlyInTag("nocavein")
