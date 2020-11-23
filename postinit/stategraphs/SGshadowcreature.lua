@@ -105,14 +105,8 @@ local states = {
         tags = { "attack", "busy" },
 
         onenter = function(inst, target)
-            inst.sg.statemem.target = target
+            inst.sg.statemem.target = target 
 			inst.Physics:Stop()
-			if inst:HasTag("terrorbeak") then 
-				inst:DoTaskInTime(10*FRAMES, function(inst) 
-					inst.components.locomotor:WalkForward()
-				end)
-			end
-			
 			
             inst.components.combat:StartAttack()
             inst.AnimState:PlayAnimation("atk_pre")
@@ -133,12 +127,80 @@ local states = {
         events =
         {
             EventHandler("animqueueover", function(inst)
-                if math.random() < .333 then
-                    inst.components.combat:SetTarget(nil)
-                    inst.sg:GoToState("taunt")
-                else
-                    inst.sg:GoToState("idle")
-                end
+				if inst:HasTag("terrorbeak") and math.random() < .333 then
+					inst.sg:GoToState("taunttp")
+				else
+					if math.random() < .333 then
+						if inst:HasTag("terrorbeak") then
+							inst.sg:GoToState("taunt")
+						else
+							inst.components.combat:SetTarget(nil)
+							inst.sg:GoToState("taunt")
+						end
+					else
+						inst.sg:GoToState("idle")
+					end
+				end
+            end),
+        },
+    },
+	
+	State{
+        name = "tauntport",
+        tags = { "busy" },
+
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("taunt")
+            PlayExtendedSound(inst, "taunt")
+        end,
+
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("taunttp") end),
+        },
+    },
+
+    State{
+        name = "taunttp",
+        tags = { "busy", "hit" },
+
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("disappear")
+        end,
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+                local max_tries = 4
+				local target = inst.components.combat.target
+				
+				if target ~= nil then
+					for k = 1, max_tries do
+						local x, y, z = target.Transform:GetWorldPosition()
+						local offset = 10
+						x = x + math.random(2 * 5) - 5
+						z = z + math.random(2 * 5) - 5
+						if TheWorld.Map:IsPassableAtPoint(x, y, z) then
+							inst.Physics:Teleport(x, y, z)
+							break
+						end
+					end
+				else
+					for k = 1, max_tries do
+						local x, y, z = inst.Transform:GetWorldPosition()
+						local offset = 10
+						x = x + math.random(2 * offset) - offset
+						z = z + math.random(2 * offset) - offset
+						if TheWorld.Map:IsPassableAtPoint(x, y, z) then
+							inst.Physics:Teleport(x, y, z)
+							break
+						end
+					end
+				end
+
+                inst.sg:GoToState("appear")
             end),
         },
     }
