@@ -4,14 +4,41 @@ local actionhandlers =
 {
     --ActionHandler(ACTIONS.INVESTIGATE, "investigate"),
 }
+local function FinishExtendedSound(inst, soundid)
+    inst.SoundEmitter:KillSound("sound_"..tostring(soundid))
+    inst.sg.mem.soundcache[soundid] = nil
+    if inst.sg.statemem.readytoremove and next(inst.sg.mem.soundcache) == nil then
+        inst:Remove()
+    end
+end
 
+local function PlayExtendedSound(inst, soundname)
+    if inst.sg.mem.soundcache == nil then
+        inst.sg.mem.soundcache = {}
+        inst.sg.mem.soundid = 0
+    else
+        inst.sg.mem.soundid = inst.sg.mem.soundid + 1
+    end
+    inst.sg.mem.soundcache[inst.sg.mem.soundid] = true
+    inst.SoundEmitter:PlaySound(inst.sounds[soundname], "sound_"..tostring(inst.sg.mem.soundid))
+    inst:DoTaskInTime(5, FinishExtendedSound, inst.sg.mem.soundid)
+end
+
+local function OnAnimOverRemoveAfterSounds(inst)
+    if inst.sg.mem.soundcache == nil or next(inst.sg.mem.soundcache) == nil then
+        inst:Remove()
+    else
+        inst:Hide()
+        inst.sg.statemem.readytoremove = true
+    end
+end
 local events=
 {
 
     EventHandler("doattack", function(inst, data) 
         if not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") and data and data.target  then 
 
-        --inst.sg:GoToState("attack", data.target) 
+        inst.sg:GoToState("attack", data.target) 
 
         end 
     end),
@@ -45,9 +72,13 @@ local states=
         onenter = function(inst)
             --inst.SoundEmitter:PlaySound("UCSounds/Scorpion/death")
 			inst.Physics:Stop()
+			PlayExtendedSound(inst, "death")
+			PlayExtendedSound(inst, "death")
+			PlayExtendedSound(inst, "death")
 			RemovePhysicsColliders(inst) 
             inst.AnimState:PlayAnimation("death")
             inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition())) 
+			inst:AddTag("NOCLICK")
 			
         end,
 		ontimeout = function(inst)
@@ -111,7 +142,7 @@ local states=
         tags = {"idle", "canrotate"},
         
         ontimeout = function(inst)
-			--inst.sg:GoToState("taunt")
+			inst.sg:GoToState("taunt")
         end,
         
         onenter = function(inst, start_anim)
@@ -137,7 +168,26 @@ local states=
         
         onenter = function(inst)
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("idle")
+            inst.AnimState:PlayAnimation("taunt")
+			PlayExtendedSound(inst, "taunt")
+            --inst.SoundEmitter:PlaySound("UCSounds/Scorpion/taunt")
+        end,
+        timeline=
+        {	TimeEvent(5*FRAMES, function(inst) PlayExtendedSound(inst, "taunt") end),
+			TimeEvent(10*FRAMES, function(inst) PlayExtendedSound(inst, "taunt") end),
+        },      
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
+    },    
+    State{
+        name = "spawn",
+        tags = {"busy"},
+        
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("give_life")
             --inst.SoundEmitter:PlaySound("UCSounds/Scorpion/taunt")
         end,
         
@@ -145,8 +195,7 @@ local states=
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
-    },    
-      
+    },        
     
     State{
         name = "attack",
@@ -160,7 +209,9 @@ local states=
         end,
         
         timeline=
-        {
+        {	TimeEvent(10*FRAMES, function(inst) PlayExtendedSound(inst, "attack") end),
+			TimeEvent(12*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+			TimeEvent(22*FRAMES, function(inst) PlayExtendedSound(inst, "attack") end),
             TimeEvent(25*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
         

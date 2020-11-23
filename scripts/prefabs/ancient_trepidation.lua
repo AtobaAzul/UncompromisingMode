@@ -47,7 +47,16 @@ local function OnAttacked(inst, data)
     inst.components.combat:SetTarget(data.attacker)
 end
 
-
+    local sounds =
+    {
+        attack = "dontstarve/sanity/creature2/attack",
+        attack_grunt = "dontstarve/sanity/creature2/attack_grunt",
+        death = "dontstarve/sanity/creature2/die",
+        idle = "dontstarve/sanity/creature2/idle",
+        taunt = "dontstarve/sanity/creature2/taunt",
+        appear = "dontstarve/sanity/creature2/appear",
+        disappear = "dontstarve/sanity/creature2/dissappear",
+    }
 
 local function fn(Sim)
 	local inst = CreateEntity()
@@ -74,13 +83,13 @@ local function fn(Sim)
 	
     inst.AnimState:SetBank("ancient_trepidation")
     inst.AnimState:SetBuild("ancient_trepidation")
-    inst.AnimState:PlayAnimation("idle",true)
+    inst.AnimState:PlayAnimation("give_life",true)
     
 	inst.AnimState:SetMultColour(0, 0, 0, 0.6)
     -- locomotor must be constructed before the stategraph!
     inst:AddComponent("locomotor")
-    inst.components.locomotor.walkspeed = 3/1.5
-    inst.components.locomotor.runspeed = 5/1.5
+    inst.components.locomotor.walkspeed = 3/1.2
+    inst.components.locomotor.runspeed = 5/1.2
 
     
     inst:AddComponent("lootdropper")
@@ -89,16 +98,16 @@ local function fn(Sim)
 	
 	inst:AddTag("monster")
     inst:AddTag("hostile") 
-
+	inst:AddTag("shadowcreature")
 
     ------------------
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(200)-- Scorpion stats
+    inst.components.health:SetMaxHealth(2000)-- Scorpion stats
     ------------------
 	inst:AddComponent("shadowsubmissive")
     inst:AddComponent("combat")
     inst.components.combat:SetKeepTargetFunction(keeptargetfn)    
-    inst.components.combat:SetDefaultDamage(20)--Scorpion stats
+    inst.components.combat:SetDefaultDamage(75)
     inst.components.combat:SetAttackPeriod(3)
     inst.components.combat:SetRetargetFunction(1, NormalRetarget)
     --inst.components.combat:SetHurtSound("dontstarve/creatures/spider/hit_response")
@@ -106,7 +115,7 @@ local function fn(Sim)
     ------------------
     
     ------------------
-    
+    inst.sounds = sounds   
     inst:AddComponent("knownlocations")
     ------------------
     
@@ -121,6 +130,7 @@ local function fn(Sim)
     inst:SetStateGraph("SGancient_trepidation")
     inst:SetBrain(brain)  
     inst:ListenForEvent("attacked", OnAttacked)
+	inst.sg:GoToState("spawn")
 
     return inst
 end
