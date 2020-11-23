@@ -226,6 +226,15 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
         }
 	DESCRIBE.ANTIHISTAMINE = "It's useful for ailing a stuffy nose!"
 
+	DESCRIBE.HEATROCK_LEVEL = 
+	{
+		TINY = "A lonely old rock, sitting out in the open.",
+		SMALL = "It's a little bit insulated when sitting in my pocket.",
+		MED = "I'm keeping it somewhat insulated now.",
+		LARGE = "It's well protected against the elements now.",
+		HUGE = "It's perfectly protected against the elements!",
+	}
+
 	ACTIONFAIL.READ =
         {
             GENERIC = "It seems the magic is inert in this state.",

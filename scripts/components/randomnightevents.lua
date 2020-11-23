@@ -301,8 +301,8 @@ local function SpawnMonkeysFunction(player)
 	local x2 = x - math.random(12, 16)
 	local z2 = z - math.random(12, 16)
 	
-	local monkey = SpawnPrefab("chimp")
 	if TheWorld.state.isnight then 
+	local monkey = SpawnPrefab("chimp")
 		if math.random()>0.5 then
 			if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 				monkey.Transform:SetPosition(x1, y, z1)
@@ -343,8 +343,8 @@ local function SpawnWerePigsFunction(player)
 	local x2 = x - math.random(12, 16)
 	local z2 = z - math.random(12, 16)
 	
-	local pig = SpawnPrefab("pigman")
 	if TheWorld.state.isnight then
+	local pig = SpawnPrefab("pigman")
 		if math.random()>0.5 then
 			if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 				local fx = SpawnPrefab("statue_transition_2")

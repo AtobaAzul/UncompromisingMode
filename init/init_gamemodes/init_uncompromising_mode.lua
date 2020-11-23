@@ -17,6 +17,7 @@ local require = GLOBAL.require
 	
 --	[ 	Import Names and Descriptions	]	--
 	modimport("init/init_names")
+	modimport("init/init_bonusdescriptors")
 	modimport("init/init_descriptions/generic")
 	modimport("init/init_descriptions/willow")
 	modimport("init/init_descriptions/wolfgang")

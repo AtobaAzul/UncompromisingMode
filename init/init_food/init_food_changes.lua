@@ -237,29 +237,6 @@ for k, v in pairs(ANTIHISTAMINES_SUPER) do
 	AddAntihistamineSuper(v)
 end
 
-GLOBAL.require("stringutil")
-local OldGetDescription = GLOBAL.GetDescription
-GLOBAL.GetDescription = function(inst, item, ...)
-	local character =
-        type(inst) == "string"
-        and inst
-        or (inst ~= nil and inst.prefab or nil)
-
-    character = character ~= nil and string.upper(character) or nil
-		
-	local ret = OldGetDescription(inst, item, ...)
-	local prefab = item and item.prefab
-	if prefab and item and item:HasTag("antihistamine") and character ~= nil then
-		if STRINGS.CHARACTERS[character].DESCRIBE.ANTIHISTAMINE ~= nil then
-			ret = ret .."\n".. GLOBAL.STRINGS.CHARACTERS[character].DESCRIBE.ANTIHISTAMINE--(GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTIHISTAMINE or "")--
-		else
-			ret = ret .."\n".. "It's useful for ailing a stuffy nose!"
-		end
-	end
-		
-	return ret
-end
-
 -----------------------------------------------------------------
 -- Reduce seeds hunger
 -----------------------------------------------------------------
