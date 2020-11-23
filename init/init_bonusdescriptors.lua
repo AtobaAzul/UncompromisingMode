@@ -18,18 +18,13 @@ GLOBAL.GetDescription = function(inst, item, ...)
 			ret = ret .."\n".. "It's useful for ailing a stuffy nose!"
 		end
 	end
-				print("bababba")
 	
 	if prefab and item and item:HasTag("heatrock") and character ~= nil then
-				print("stage one")
 		if item.components and item.components.temperature ~= nil then
 				
 			item.currentheat = item.components.temperature:GetInsulation()
 			
-			print(item.currentheat)
-			
 			item.heatstring = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.HEATROCK_LEVEL
-			
 			
 			if not inst.prefab == "wilson" and GLOBAL.STRINGS.CHARACTERS[character].DESCRIBE.HEATROCK_LEVEL ~= nil then
 				item.heatstring = GLOBAL.STRINGS.CHARACTERS[character].DESCRIBE.HEATROCK_LEVEL
