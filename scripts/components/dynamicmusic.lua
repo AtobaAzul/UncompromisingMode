@@ -111,6 +111,7 @@ local BUSYTHEMES = {
     RACE = 7,
     TRAINING = 8,
     HERMIT = 9,
+    HOODEDFOREST = 10,
 }
 
 --------------------------------------------------------------------------
@@ -203,7 +204,7 @@ local function StartBusy(player)
             elseif IsInHF(player) then
                 if _busytheme ~= BUSYTHEMES.HOODEDFOREST then
                     _soundemitter:KillSound("busy")
-                    _soundemitter:PlaySound("UCSounds/music/creepyforest", "busy")
+                    _soundemitter:PlaySound("UMMusic/music/hoodedforest_work", "busy")
                 end
                 _busytheme = BUSYTHEMES.HOODEDFOREST
 			else
@@ -351,7 +352,7 @@ local function StartDanger(player)
             #TheSim:FindEntities(x, y, z, 30, EPIC_TAGS, NO_EPIC_TAGS) > 0
             and ((IsInRuins(player) and "dontstarve/music/music_epicfight_ruins") or
                 (_iscave and "dontstarve/music/music_epicfight_cave") or
-				(IsInHF(player) and "UCSounds/music/hoodedforest_efs") or
+				(IsInHF(player) and "UMMusic/music/hoodedforest_efs") or
                 (SEASON_EPICFIGHT_MUSIC[inst.state.season]))
             or ((IsInRuins(player) and "dontstarve/music/music_danger_ruins") or
                 (_iscave and "dontstarve/music/music_danger_cave") or

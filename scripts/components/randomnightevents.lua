@@ -1341,7 +1341,7 @@ end
 
 local function IsEligible(player)
 	local x, y, z = player.Transform:GetWorldPosition()
-	local theent = #TheSim:FindEntities(x, 0, z, 40, {"epic", "_health"}, {"leif"})
+	local theent = #TheSim:FindEntities(x, 0, z, 40, {"epic"}, {"leif", "crabking"})
 	local hounding = TheWorld.components.hounded:GetWarning()
 	local deerclopsed = TheWorld.components.uncompromising_deerclopsspawner:GetWarning()
 	--local beargered = TheWorld.components.beargerspawner:GetWarning()
@@ -1349,7 +1349,9 @@ local function IsEligible(player)
 	local dragonflied = TheWorld.components.mock_dragonflyspawner:GetWarning()
 	local area = player.components.areaaware
 	
-	return not player:HasTag("playerghost") and theent <= 0 and not (hounding or deerclopsed --[[or beargered]] or gmoosed or dragonflied) or 
+	print(theent)
+	
+	return not player:HasTag("playerghost") and theent < 1 and not (hounding or deerclopsed --[[or beargered]] or gmoosed or dragonflied) or 
 			area:GetCurrentArea() ~= nil
 			and not area:CurrentlyInTag("nohasslers")
 end

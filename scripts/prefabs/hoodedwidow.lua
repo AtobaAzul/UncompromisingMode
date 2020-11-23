@@ -249,6 +249,7 @@ local function fn()
     inst:AddComponent("knownlocations")
     inst:AddComponent("combat")
     inst.components.combat:SetRange(TUNING.SPIDERQUEEN_ATTACKRANGE)
+    inst.components.combat:SetAreaDamage(4, TUNING.DEERCLOPS_AOE_SCALE)
     inst.components.combat:SetDefaultDamage(TUNING.SPIDERQUEEN_DAMAGE * 2)
     inst.components.combat.playerdamagepercent = TUNING.DEERCLOPS_DAMAGE_PLAYER_PERCENT
     inst.components.combat:SetAttackPeriod(TUNING.SPIDERQUEEN_ATTACKPERIOD)

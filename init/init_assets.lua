@@ -138,6 +138,8 @@ Assets = {
 
 	Asset("SOUNDPACKAGE", "sound/UCSounds.fev"), 
 	Asset( "SOUND", "sound/UCSounds_bank00.fsb"),
+	Asset("SOUNDPACKAGE", "sound/UMMusic.fev"), 
+	Asset( "SOUND", "sound/UMMusic.fsb"),
 
 	Asset("IMAGE", "images/inventoryimages/rat_tail.tex"),
 	Asset("ATLAS", "images/inventoryimages/rat_tail.xml"),
