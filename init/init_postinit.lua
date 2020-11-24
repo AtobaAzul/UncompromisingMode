@@ -18,7 +18,7 @@ local component_post = {
 	"workable",
 	"sleepingbaguser",
 	"hounded",
-	--"dynamicmusic",
+	"dynamicmusic",
 }
 
 local prefab_post = {
