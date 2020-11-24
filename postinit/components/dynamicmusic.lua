@@ -1,4 +1,3 @@
-
 local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
 
 -- Oh the hoops you have to jump through to modify local functions 
@@ -16,7 +15,7 @@ AddComponentPostInit("dynamicmusic", function(self)
             break
         end
     end
-    _OnPlayerActivated = UpvalueHacker.GetComponentEvent(self.inst, "dynamicmusic", "playeractivated")
+    _OnPlayerActivated = inst.event_listeners["playeractivated"][inst][index]
 
     local _StartBusy = UpvalueHacker.GetUpvalue(_OnPlayerActivated, "StartPlayerListeners", "StartBusy")
     local _StopBusy = UpvalueHacker.GetUpvalue(_OnPlayerActivated, "StartPlayerListeners", "StartBusy", "StopBusy")
