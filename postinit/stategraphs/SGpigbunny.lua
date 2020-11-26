@@ -27,32 +27,30 @@ local events =
 	
 	
 	EventHandler("attacked", function(inst)
+		
+		if inst:HasTag("pig") and not inst:HasTag("werepig") and inst.components.health ~= nil and not inst.components.health:IsDead() then
+			if inst.counter ~= nil and inst.counter >= 3 then
+				inst.counter = 0
+				inst.sg:GoToState("counterattack_pre")
+				return
+			elseif not inst.sg:HasStateTag("attack") then
+				if inst.counter ~= nil then
+					inst.counter = inst.counter + 1
+					if inst.coutertask ~= nil then
+						inst.countertask:Cancel()
+						inst.countertask = nil
+					end
+					inst.countertask = inst:DoTaskInTime(10, function(inst) inst.counter = 0 end)
+				else
+					inst.counter = 0
+				end
+			end
+		end
 	
 		if inst.components.health ~= nil and not inst.components.health:IsDead()
 		and (not inst.sg:HasStateTag("busy") or
 		inst.sg:HasStateTag("caninterrupt") or
 		inst.sg:HasStateTag("frozen")) then
-			if inst:HasTag("pig") and not inst:HasTag("werepig") then
-				if not inst.components.health:IsDead() then
-					if inst.counter ~= nil and inst.counter >= 3 then
-						inst.counter = 0
-						inst.sg:GoToState("counterattack_pre")
-						return
-					elseif not inst.sg:HasStateTag("attack") then
-						if inst.counter ~= nil then
-							inst.counter = inst.counter + 1
-							if inst.coutertask ~= nil then
-								inst.countertask:Cancel()
-								inst.countertask = nil
-							end
-							inst.countertask = inst:DoTaskInTime(10, function(inst) inst.counter = 0 end)
-						else
-							inst.counter = 0
-						end
-					end
-				end
-			end
-			
 			inst.sg:GoToState("hit")
 		end
 	
@@ -70,7 +68,7 @@ local states = {
             inst.SoundEmitter:PlaySound("dontstarve/pig/attack")
             inst.components.combat:StartAttack()
             inst.Physics:Stop()
-            inst.sg:SetTimeout(1)
+            inst.sg:SetTimeout(0.5)
             inst.AnimState:PlayAnimation("idle_angry")
         end,
 
