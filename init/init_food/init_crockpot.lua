@@ -422,7 +422,7 @@ AddCookerRecipe("portablecookpot", steamedhams)
 local simpsalad =
 {
     name = "simpsalad",
-    test = function(cooker, names, tags) return names.foliage end,
+    test = function(cooker, names, tags) return names.foliage and names.foliage > 1 end,
 
     priority = 20,
     weight = 20,
