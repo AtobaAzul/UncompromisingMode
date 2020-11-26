@@ -274,6 +274,8 @@ Assets = {
 	Asset("ANIM", "anim/koalefant_paw.zip"),
 	Asset("ANIM", "anim/hellhound_scream.zip"),
 	Asset("ANIM", "anim/ancient_trepidation.zip"),
+	Asset("ANIM", "anim/ds_pig_charge.zip"),
+	Asset("ANIM", "anim/ds_pig_uppercut.zip"),
 	
 	
 	

@@ -170,9 +170,6 @@ local function fn()
     inst:AddComponent("equippable")
 	inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
-
-	inst:AddComponent("freezable")
-	inst.components.freezable:SetShatterFXLevel(0)
 	
     inst:AddComponent("fueled")
     inst.components.fueled:InitializeFuelLevel(100)
@@ -183,9 +180,6 @@ local function fn()
 	end
 	
     MakeHauntableLaunch(inst)
-
-    inst.components.equippable:SetOnEquip(onequip)
-    inst.components.equippable:SetOnUnequip(onunequip)
 
     return inst
 end
