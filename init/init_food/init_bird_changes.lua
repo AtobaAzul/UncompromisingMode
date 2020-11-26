@@ -78,22 +78,11 @@ end
 
 local function DigestFood(inst, food)
     if food.components.edible.foodtype == FOODTYPE.MEAT then
-        if food.prefab == "bird_egg_cooked" then
-			local loot = inst.components.lootdropper:SpawnLootPrefab("guano")
-            loot.Transform:SetScale(.33, .33, .33)
-        else
-            inst.components.lootdropper:SpawnLootPrefab("bird_egg")
-        end
+		inst.components.lootdropper:SpawnLootPrefab("bird_egg")
     else
         local seed_name = string.lower(food.prefab .. "_seeds")
         if Prefabs[seed_name] ~= nil then
-            local num_seeds = math.random(2)
-            for k = 1, num_seeds do
                 inst.components.lootdropper:SpawnLootPrefab(seed_name)
-            end
-            if math.random() < 0.5 then
-                inst.components.lootdropper:SpawnLootPrefab("seeds")
-            end
         else
             if math.random() < 0.33 then
                 local loot = inst.components.lootdropper:SpawnLootPrefab("guano")

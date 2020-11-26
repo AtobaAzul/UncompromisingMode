@@ -95,58 +95,93 @@ env.AddPrefabPostInit("book_sleep", function(inst)
 	end
 end)
 
+local GARDENING_CANT_TAGS = { "pickable", "stump", "withered", "barren", "INLIMBO" }
+
 local function trygrowth(inst)
     if inst:IsInLimbo()
         or (inst.components.witherable ~= nil and
             inst.components.witherable:IsWithered()) then
-        return
+        return false
     end
 
     if inst.components.pickable ~= nil then
         if inst.components.pickable:CanBePicked() and inst.components.pickable.caninteractwith then
-            return
+            return false
         end
-        inst.components.pickable:FinishGrowing()
+        if inst.components.pickable:FinishGrowing() then
+			inst.components.pickable:ConsumeCycles(1) -- magic grow is hard on plants
+			return true
+		end
     end
 
     if inst.components.crop ~= nil and (inst.components.crop.rate or 0) > 0 then
-		if inst:HasTag("wormwood_plant_ground") then
-			inst.components.crop:DoGrow(0.44 / inst.components.crop.rate, true)
-		else
-			inst.components.crop:DoGrow(0.66 / inst.components.crop.rate, true)
+        if inst.components.crop:DoGrow(1 / inst.components.crop.rate, true) then
+			return true
 		end
     end
 
     if inst.components.growable ~= nil then
         -- If we're a tree and not a stump, or we've explicitly allowed magic growth, do the growth.
-        if ((inst:HasTag("tree") or inst:HasTag("winter_tree")) and not inst:HasTag("stump")) or
-                inst.components.growable.magicgrowable then
-            inst.components.growable:DoGrowth()
+        if inst.components.growable.magicgrowable or ((inst:HasTag("tree") or inst:HasTag("winter_tree")) and not inst:HasTag("stump")) then
+			if inst.components.growable.domagicgrowthfn ~= nil then
+				return inst.components.growable:DoMagicGrowth()
+			else
+	            return inst.components.growable:DoGrowth()
+			end
         end
     end
 
     if inst.components.harvestable ~= nil and inst.components.harvestable:CanBeHarvested() and inst:HasTag("mushroom_farm") then
-        inst.components.harvestable:Grow()
+        if inst.components.harvestable:Grow() then
+			return true
+		end
     end
+
+	return false
+end
+
+local function GrowNext(spell, reader)
+	while spell._next <= #spell._targets do
+		local target = spell._targets[spell._next]
+		spell._next = spell._next + 1
+
+		if target:IsValid() and trygrowth(target) then
+			spell._count = spell._count + 1
+			if spell._count < TUNING.BOOK_GARDENING_MAX_TARGETS then
+				spell:DoTaskInTime(0.1 + 0.3 * math.random(), GrowNext)
+				return
+			else
+				break
+			end
+		end
+	end
+
+	spell:Remove() 
+end
+
+local function do_book_gardening_spell(spell, reader)
+    local x, y, z = reader.Transform:GetWorldPosition()
+    local range = 30
+    spell._targets = TheSim:FindEntities(x, y, z, range, nil, GARDENING_CANT_TAGS)
+	if #spell._targets == 0 then
+		spell:Remove()
+		return
+	end
+
+	spell._next = 1
+	spell._count = 0
+	GrowNext(spell, reader)
 end
 
 local function newgarden(inst, reader)
 	if reader.components.sanity ~= nil and not reader.components.sanity:IsInsane() then
-            reader.components.sanity:DoDelta(-TUNING.SANITY_LARGE)
+		reader.components.sanity:DoDelta(-TUNING.SANITY_LARGE)
 
-            local x, y, z = reader.Transform:GetWorldPosition()
-            local range = 15
-            local ents = TheSim:FindEntities(x, y, z, range, nil, { "pickable", "stump", "withered", "INLIMBO" })
-            if #ents > 0 then
-                trygrowth(table.remove(ents, math.random(#ents)))
-                if #ents > 0 then
-                    local timevar = 1 - 1 / (#ents + 1)
-                    for i, v in ipairs(ents) do
-                        v:DoTaskInTime(timevar * math.random(), trygrowth)
-                    end
-                end
-            end
-            return true
+		local spell = SpawnPrefab("book_gardening_spell")
+		spell.Transform:SetPosition(reader.Transform:GetWorldPosition())
+		do_book_gardening_spell(spell, reader)
+
+		return true
 	else
 		return false
 	end

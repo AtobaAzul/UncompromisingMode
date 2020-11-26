@@ -116,7 +116,6 @@ end)
 -- Bunnies don't drop carrots anymore
 -----------------------------------------------------------------
 local beardlordloot = { "beardhair", "beardhair", "monstermeat" }
-local regularloot = { }
 
 local function SetBeardLord(inst)
     inst.beardlord = true
@@ -140,7 +139,6 @@ local function LootSetupFunction(lootdropper)
             lootdropper:SetLoot(beardlordloot)
         else
             -- regular loot
-            lootdropper:SetLoot(regularloot)
             lootdropper:AddRandomLoot("meat", 3)
             lootdropper:AddRandomLoot("manrabbit_tail", 1)
             lootdropper.numrandomloot = 1
