@@ -97,12 +97,12 @@ startregen = function(inst, regentime)
 		inst.targettime = nil]]
 	end
 
-	if inst.components.workable.workleft <= 0 then
+	if inst.components.workable.workleft <= 0 or inst.components.pickable.cycles_left <= 0 then
 		inst:Remove()
 	else
-		if inst.components.workable.workleft ~= nil then
-		inst.AnimState:PlayAnimation(anims[inst.components.workable.workleft])
-		inst.AnimState:PlayAnimation(anims[inst.components.pickable.cycles_left])
+		if inst.components.workable.workleft ~= nil or inst.components.pickable.cycles_left ~= nil then
+			inst.AnimState:PlayAnimation(anims[inst.components.workable.workleft])
+			inst.AnimState:PlayAnimation(anims[inst.components.pickable.cycles_left])
 		end
 	end
 
@@ -113,6 +113,22 @@ local function workcallback(inst, worker, workleft)
 	-- print('trying to spawn SNOW', inst, worker, workleft)
 	if math.random() >= 0.5 then
 		inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
+	end
+	
+	if worker ~= nil and worker:HasTag("wereplayer") and worker.components.moisture then
+		worker.components.moisture:DoDelta(5)
+    end
+	
+	if worker ~= nil and worker:HasTag("wereplayer") and worker.components.health ~= nil and not worker.components.health:IsDead() then
+		worker.components.health:DoDelta(-2)
+	end
+	
+	if inst.components.workable.workleft == 0.5 then
+		inst.components.workable.workleft = 0
+	elseif inst.components.workable.workleft == 1.5 then
+		inst.components.workable.workleft = 1
+	elseif inst.components.workable.workleft == 2.5 then
+		inst.components.workable.workleft = 2
 	end
 
 	if inst.components.pickable.cycles_left > 0 then
