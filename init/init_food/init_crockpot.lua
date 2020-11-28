@@ -337,7 +337,7 @@ InsertIngredientValues({"rice"},{veggie=1,rice=1},true,false,false)
 InsertIngredientValues({"rice_cooked"},{veggie=1,rice=1},true,false,false)
 InsertIngredientValues({"foliage"},{veggie=.1,foliage=1},true,false,false)
 InsertIngredientValues({"horn"},{meat=1},true,false,false)
---[[local zaspberryparfait =
+local zaspberryparfait =
 {
     name = "zaspberryparfait",
     test = function(cooker, names, tags) return not tags.monster and not tags.inedible and UncompromisingFillers(tags) and names.zaspberry and tags.sweetener and tags.dairy end,
@@ -466,4 +466,4 @@ local snowcone =
     cooktime = 1,
 }
 AddCookerRecipe("cookpot", snowcone)
-AddCookerRecipe("portablecookpot", snowcone)--]]
+AddCookerRecipe("portablecookpot", snowcone)
