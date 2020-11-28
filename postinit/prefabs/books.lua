@@ -173,6 +173,83 @@ local function do_book_gardening_spell(spell, reader)
 	GrowNext(spell, reader)
 end
 
+local function trygrowth(inst)
+    if not inst:IsValid()
+		or inst:IsInLimbo()
+        or (inst.components.witherable ~= nil and inst.components.witherable:IsWithered()) then
+
+        return false
+    end
+
+    if inst.components.pickable ~= nil then
+        if inst.components.pickable:CanBePicked() and inst.components.pickable.caninteractwith then
+            return false
+        end
+        if inst.components.pickable:FinishGrowing() then
+			inst.components.pickable:ConsumeCycles(1) -- magic grow is hard on plants
+			return true
+		end
+    end
+
+    if inst.components.crop ~= nil and (inst.components.crop.rate or 0) > 0 then
+        if inst.components.crop:DoGrow(1 / inst.components.crop.rate, true) then
+			return true
+		end
+    end
+
+    if inst.components.growable ~= nil then
+        -- If we're a tree and not a stump, or we've explicitly allowed magic growth, do the growth.
+        if inst.components.growable.magicgrowable or ((inst:HasTag("tree") or inst:HasTag("winter_tree")) and not inst:HasTag("stump")) then
+			if inst.components.growable.domagicgrowthfn ~= nil then
+				return inst.components.growable:DoMagicGrowth()
+			else
+	            return inst.components.growable:DoGrowth()
+			end
+        end
+    end
+
+    if inst.components.harvestable ~= nil and inst.components.harvestable:CanBeHarvested() and inst:HasTag("mushroom_farm") then
+        if inst.components.harvestable:Grow() then
+			return true
+		end
+    end
+
+	return false
+end
+
+local function GrowNext(spell, reader)
+	while spell._next <= #spell._targets do
+		local target = spell._targets[spell._next]
+		spell._next = spell._next + 1
+
+		if target:IsValid() and trygrowth(target) then
+			spell._count = spell._count + 1
+			if spell._count < TUNING.BOOK_GARDENING_MAX_TARGETS then
+				spell:DoTaskInTime(0.1 + 0.3 * math.random(), GrowNext)
+				return
+			else
+				break
+			end
+		end
+	end
+
+	spell:Remove() 
+end
+
+local function do_book_gardening_spell(spell, reader)
+    local x, y, z = reader.Transform:GetWorldPosition()
+    local range = 30
+    spell._targets = TheSim:FindEntities(x, y, z, range, nil, GARDENING_CANT_TAGS)
+	if #spell._targets == 0 then
+		spell:Remove()
+		return
+	end
+
+	spell._next = 1
+	spell._count = 0
+	GrowNext(spell, reader)
+end
+
 local function newgarden(inst, reader)
 	if reader.components.sanity ~= nil and not reader.components.sanity:IsInsane() then
 		reader.components.sanity:DoDelta(-TUNING.SANITY_LARGE)

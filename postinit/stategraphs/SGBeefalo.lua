@@ -69,7 +69,7 @@ local states = {
 				inst.components.combat:ResetCooldown()
 				inst.AnimState:PlayAnimation("mating_taunt1")
 				inst.SoundEmitter:PlaySound(inst.sounds.angry)
-				inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT*2.29  --should be equal to rook
+				--	inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT*2.29  --should be equal to rook
 				inst:AddTag("chargespeed")
             end,
             
@@ -101,9 +101,10 @@ local states = {
             
             onenter = function(inst) 
 				inst.components.combat:ResetCooldown()
+				inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT*2.29
                 inst.components.locomotor:RunForward()
                 if inst.components.combat.target and inst.components.combat.target:IsValid() then
-                inst:ForceFacePoint(inst.components.combat.target:GetPosition() )
+					inst:ForceFacePoint(inst.components.combat.target:GetPosition() )
 				end
                 if not inst.AnimState:IsCurrentAnimation("run_loop") then
                     inst.AnimState:PlayAnimation("run_loop", true)
@@ -138,19 +139,25 @@ local states = {
                                     end ),
 				TimeEvent(30*FRAMES, function(inst)
                     local MAXDIST = 5 
-
-                    local distance = inst:GetDistanceSqToInst(inst.components.combat.target )
-                    --print(distance)
-                    if distance > MAXDIST then
-                        inst.sg:GoToState("idle") 
-						if inst:HasTag("chargespeed") then
-						inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT
-						inst:RemoveTag("chargespeed")
+					
+                    local distance = inst ~= nil and inst:GetDistanceSqToInst(inst.components.combat.target) or 6
+                    if distance ~= nil then
+						if distance > MAXDIST then
+							inst.sg:GoToState("idle")
 						end
+					else
+                        inst.sg:GoToState("idle")
                     end
-									end ),
+				end ),
             },
             
+			onexit = function(inst)
+				if inst:HasTag("chargespeed") then
+					inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT
+					inst:RemoveTag("chargespeed")
+				end
+			end,
+		
             {   
                 EventHandler("animover", function(inst) 
 				inst.sg:GoToState("charge") end ),        
