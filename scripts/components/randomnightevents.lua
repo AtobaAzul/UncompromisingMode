@@ -105,6 +105,8 @@ local function DayBreak(mob)
 	
 	mob.persists = false
 	
+	mob:AddTag("soulless")
+	
 	mob:WatchWorldState("isday", function() 
 		local x, y, z = mob.Transform:GetWorldPosition()
 		local despawnfx = SpawnPrefab("shadow_despawn")
@@ -966,6 +968,7 @@ local function SpawnShadowBoomer(player)
 				ent.Physics:CollidesWith(COLLISION.GROUND)
 				ent.Physics:CollidesWith(COLLISION.CHARACTERS)
 				ent.Physics:SetCollisionCallback(OnCollide)
+				ent:AddTag("soulless")
 				
 				ent:WatchWorldState("isday", function() 
 					ent.components.health:Kill()
