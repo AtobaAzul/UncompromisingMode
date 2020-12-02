@@ -54,6 +54,8 @@ local function fn()
     inst.OnEntitySleep = OnEntitySleep
     inst.OnEntityWake = OnEntityWake
 	
+	inst:DoTaskInTime(5, inst.Remove)
+	
     inst.persists = false
 
     return inst
