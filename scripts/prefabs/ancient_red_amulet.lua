@@ -4,14 +4,43 @@ local assets =
     Asset("ANIM", "anim/torso_amulets.zip"),
 }
 
+local easing = require("easing")
+
+local function LaunchProjectile(inst, value)
+	for i = 1, 4 do
+		local theta = math.random() * 2 * PI
+		local r = inst:GetPhysicsRadius(0) + 0.25 + math.sqrt(math.random()) * TUNING.WARG_GINGERBREAD_GOO_DIST_VAR
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local dest_x, dest_z = math.cos(theta) * r + x, math.sin(theta) * r + z
+
+		local goo = SpawnPrefab("amulet_health_orb_projectile")
+		goo.Transform:SetPosition(x, y, z)
+		goo.Transform:SetRotation(theta / DEGREES)
+		goo._caster = inst
+		goo.healthvalue = value / 8
+
+		Launch2(goo, inst, 4, 1, 4, 1)
+	end
+end
+
+local function OnCooldown(inst)
+    inst._cdtask = nil
+end
+
 local function onequip_blue(inst, owner)
     owner.AnimState:OverrideSymbol("swap_body", "torso_amulets", "redamulet")
 
     inst.orbfn = function(attacked, data)
         if data and data.attacker and data.damage then
-			inst.healthvalue = data.damage
-			inst.components.finiteuses:Use(1)
-			print(inst.healthvalue)
+			if inst._cdtask == nil and data ~= nil then
+				inst._cdtask = inst:DoTaskInTime(1, OnCooldown)
+				
+				inst.healthvalue = data.damage
+				inst.components.finiteuses:Use(1)
+				print(inst.healthvalue)
+				
+				LaunchProjectile(owner, data.damage)
+			end
         end 
     end
 
@@ -73,4 +102,4 @@ local function ancient_red_amulet_fn(anim, tag, should_sink)
     return inst
 end
 
-return Prefab("ancient_red_amulet", ancient_red_amulet_fn, assets)
+return Prefab("ancient_amulet_red", ancient_red_amulet_fn, assets)

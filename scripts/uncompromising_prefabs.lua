@@ -166,5 +166,6 @@ return {
 	"fireball_throwable",
 	"crabclaw",
 	"ancient_trepidation",
-	"ancient_red_amulet"
+	"ancient_amulet_red",
+	"amulet_health_orb"
 }
