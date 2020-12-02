@@ -14,10 +14,12 @@ CUSTOM_RECIPETABS = GLOBAL.CUSTOM_RECIPETABS
 -----------------------------------------------------------------
 if GetModConfigData("harder_recipes") then
 	-- Also use fertilizer instead of poop
-	Recipe("book_gardening", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("fertilizer", 1)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
+		Recipe("book_horticulture", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("fertilizer", 1)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
+		--Recipe("book_gardening", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("fertilizer", 1)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
 else
-	-- Use poop as normal
-	Recipe("book_gardening", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("poop", 1)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
+	-- Use poop as normal	
+	Recipe("book_horticulture", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("poop", 1)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
+	--Recipe("book_gardening", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("poop", 1)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
 end
 
 AddPrefabPostInit("wickerbottom", function(inst)

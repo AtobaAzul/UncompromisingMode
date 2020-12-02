@@ -25,7 +25,7 @@ local prefab_post = {
 	"flower",
 	"butterfly",
     --"toadstool_cap", Moved to init_uncompromising_mod.lua
-    "yellowamulet",
+    "amulet",
     "trap_teeth",
 	"beequeen",
 	"dragonfly",
@@ -66,7 +66,6 @@ local prefab_post = {
 	"bat",
 	"featherhat",
 	"lavae",
-	--"amulet",
 	--"malbatross",
 	"mushrooms",
 	"rock_ice",

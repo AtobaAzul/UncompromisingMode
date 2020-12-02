@@ -9,6 +9,9 @@ env.AddPrefabPostInit("terrorbeak", function(inst)
 		return
 	end
 	
+	if inst.components.combat ~= nil then
+		inst.components.combat:SetRange(3,4)
+	end
 end)
 
 env.AddPrefabPostInit("nightmarebeak", function(inst)
@@ -18,6 +21,9 @@ env.AddPrefabPostInit("nightmarebeak", function(inst)
 		return
 	end
 	
+	if inst.components.combat ~= nil then
+		inst.components.combat:SetRange(3,4)
+	end
 end)
 
 local easing = require("easing")
