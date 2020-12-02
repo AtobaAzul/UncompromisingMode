@@ -17,7 +17,7 @@ local function LaunchProjectile(inst, value)
 		goo.Transform:SetPosition(x, y, z)
 		goo.Transform:SetRotation(theta / DEGREES)
 		goo._caster = inst
-		goo.healthvalue = value / 8
+		goo.healthvalue = value / 4
 
 		Launch2(goo, inst, 4, 1, 4, 1)
 	end
