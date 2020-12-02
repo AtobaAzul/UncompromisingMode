@@ -147,7 +147,7 @@ local function healowner(inst, owner)
     and (owner.components.hunger and owner.components.hunger.current > 5 )then
         owner.components.health:DoDelta(3,false,"redamulet")
         owner.components.hunger:DoDelta(-TUNING.REDAMULET_CONVERSION)
-        inst.components.fueled:DoDelta(36)
+        inst.components.fueled:DoDelta(-36)
     end
 end
 
@@ -200,8 +200,8 @@ local function ontakefuel_red(inst)
     end
 end
 
-local function OnLoad()
-	if inst.components.fueled ~= nil then
+local function OnInit(inst)
+	if inst ~= nil and inst.components.fueled ~= nil then
 		if inst.components.fueled.currentfuel == 0 then
 			if inst.components.hauntable ~= nil then
 				inst:RemoveComponent("hauntable")
@@ -229,7 +229,7 @@ env.AddPrefabPostInit("amulet", function(inst)
         inst.components.equippable:SetOnUnequip(onunequip_red)
     end
 	
-	inst.OnLoad = OnLoad
+    inst:DoTaskInTime(0, OnInit)
 
     --inst._onownerequip = _onownerequip
 end)

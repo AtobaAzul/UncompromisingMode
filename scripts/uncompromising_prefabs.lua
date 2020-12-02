@@ -165,5 +165,6 @@ return {
 	"gnome_organizer",
 	"fireball_throwable",
 	"crabclaw",
-	"ancient_trepidation"
+	"ancient_trepidation",
+	"ancient_red_amulet"
 }
