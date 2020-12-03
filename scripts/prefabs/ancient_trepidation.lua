@@ -85,7 +85,7 @@ local function fn(Sim)
     inst.AnimState:SetBuild("ancient_trepidation")
     inst.AnimState:PlayAnimation("give_life",true)
     
-	inst.AnimState:SetMultColour(0, 0, 0, 0.6)
+	inst.AnimState:SetMultColour(0, 0, 0, 0.8)
     -- locomotor must be constructed before the stategraph!
     inst:AddComponent("locomotor")
     inst.components.locomotor.walkspeed = 3/1.2
@@ -102,7 +102,7 @@ local function fn(Sim)
 
     ------------------
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(2000)-- Scorpion stats
+    inst.components.health:SetMaxHealth(3000)
     ------------------
 	inst:AddComponent("shadowsubmissive")
     inst:AddComponent("combat")

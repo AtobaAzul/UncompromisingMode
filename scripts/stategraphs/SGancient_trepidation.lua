@@ -77,14 +77,18 @@ local states=
 			PlayExtendedSound(inst, "death")
 			RemovePhysicsColliders(inst) 
             inst.AnimState:PlayAnimation("death")
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition())) 
 			inst:AddTag("NOCLICK")
 			
         end,
-		ontimeout = function(inst)
-			local x, y, z = inst.Transform:GetWorldPosition()
-
-        end,
+        timeline=
+        {	TimeEvent(10*FRAMES, function(inst) inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))  end),
+			TimeEvent(14*FRAMES, function(inst) inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))  end),
+			TimeEvent(18*FRAMES, function(inst) inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))  end),
+			TimeEvent(22*FRAMES, function(inst) inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))  end),
+			TimeEvent(26*FRAMES, function(inst) inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))  end),
+			TimeEvent(30*FRAMES, function(inst) inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))  end),
+			TimeEvent(34*FRAMES, function(inst) inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))  end),
+        }, 
 		        events=
         {
             EventHandler("animover", function(inst) 
