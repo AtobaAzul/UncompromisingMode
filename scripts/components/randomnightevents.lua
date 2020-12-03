@@ -1382,7 +1382,7 @@ local function CheckPlayers()
 	local numStructures = 0
 	local numStructures2 = 0
 	
-	local playerchancescaling = TUNING.DSTU.RNE_CHANCE - (#playerlist * 0.1)
+	local playerchancescaling = TUNING.DSTU.RNE_CHANCE -- - (#playerlist * 0.1)
 	--print(playerchancescaling)
 	
 	local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
