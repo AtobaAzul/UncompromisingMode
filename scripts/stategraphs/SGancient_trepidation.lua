@@ -32,9 +32,49 @@ local function OnAnimOverRemoveAfterSounds(inst)
         inst.sg.statemem.readytoremove = true
     end
 end
+
+
+local MAIN_SHIELD_CD = 1.2
+local function PickShield(inst)
+    local t = GetTime()
+    if (inst.sg.mem.lastshieldtime or 0) + .2 >= t then
+        return
+    end
+
+    inst.sg.mem.lastshieldtime = t
+
+    --variation 3 or 4 is the main shield
+    local dt = t - (inst.sg.mem.lastmainshield or 0)
+    if dt >= MAIN_SHIELD_CD then
+        inst.sg.mem.lastmainshield = t
+        return math.random(3, 4)
+    end
+
+    local rnd = math.random()
+    if rnd < dt / MAIN_SHIELD_CD then
+        inst.sg.mem.lastmainshield = t
+        return math.random(3, 4)
+    end
+
+    return rnd < dt / (MAIN_SHIELD_CD * 2) + .5 and 2 or 1
+end
+
 local events=
 {
-
+    EventHandler("attacked", function(inst, data)
+        if not inst.components.health:IsDead() then
+            if inst.hasshield then
+                local shieldtype = PickShield(inst)
+                if shieldtype ~= nil then
+                    local fx = SpawnPrefab("stalker_shield"..tostring(shieldtype))
+                    fx.entity:SetParent(inst.entity)
+                    if shieldtype < 3 and math.random() < .5 then
+                        fx.AnimState:SetScale(-2.36, 2.36, 2.36)
+                    end
+                end
+            end
+		end
+    end),
     EventHandler("doattack", function(inst, data) 
         if not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") and data and data.target  then 
 
@@ -44,7 +84,11 @@ local events=
     end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     
-    
+    EventHandler("shadowchannelers", function(inst)
+        if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) then
+            inst.sg:GoToState("summon_channelers_pre")
+        end
+    end),
     EventHandler("locomote", function(inst) 
         if not inst.sg:HasStateTag("busy") then
             
@@ -60,7 +104,13 @@ local events=
         end
     end),    
 }
+local function ShakeSummonRoar(inst)
+    ShakeAllCameras(CAMERASHAKE.FULL, .7, .03, .4, inst, 30)
+end
 
+local function ShakeSummon(inst)
+    ShakeAllCameras(CAMERASHAKE.VERTICAL, .5, .02, .2, inst, 30)
+end
 local states=
 {
     
@@ -153,7 +203,7 @@ local states=
             inst.Physics:Stop()
             local animname = "idle"
             if math.random() < .3 then
-				inst.sg:SetTimeout(math.random()*2 + 2)
+				--inst.sg:SetTimeout(math.random()*2 + 2)
 			end
 
             if start_anim then
@@ -222,6 +272,65 @@ local states=
         events=
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
+    },
+    State{
+        name = "summon_channelers_pre",
+        tags = { "busy", "summoning" },
+
+        onenter = function(inst)
+            inst.components.locomotor:StopMoving()
+            inst.AnimState:PlayAnimation("taunt")
+            inst.sg.statemem.count = 2
+            --V2C: don't trigger attack cooldown
+            --inst.components.combat:StartAttack()
+            inst:StartAbility("channelers")
+        end,
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+                if inst.AnimState:AnimDone() then
+                    inst:SpawnChannelers()
+                    --inst:BattleChatter("summon_channelers")
+                    inst.sg:GoToState("summon_channelers_loop", inst.sg.statemem.count)
+                end
+            end),
+        },
+    },
+    State{
+        name = "summon_channelers_loop",
+        tags = { "busy", "summoning" },
+
+        onenter = function(inst, count)
+            inst.components.locomotor:StopMoving()
+            inst.AnimState:PlayAnimation("taunt",true)
+			inst.sg:SetTimeout(math.random()*2 + 40)
+        end,
+        ontimeout = function(inst)
+			if inst.components.health ~= nil then
+			inst.components.health:SetCurrentHealth(3000)
+			end
+			inst:DespawnChannelers()
+			inst.sg:GoToState("taunt")
+        end,
+        timeline =
+        {
+            TimeEvent(8 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/stalker/taunt_short") end),
+            TimeEvent(11 * FRAMES, ShakeSummonRoar),
+            TimeEvent(12 * FRAMES, function(inst)
+                inst.components.epicscare:Scare(5)
+            end),
+            TimeEvent(29 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/stalker/taunt_short") end),
+            TimeEvent(34 * FRAMES, ShakeSummonRoar),
+            TimeEvent(35 * FRAMES, function(inst)
+                inst.components.epicscare:Scare(5)
+            end),
+        },
+
+        events =
+        {
+
         },
     },
 

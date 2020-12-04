@@ -1,6 +1,6 @@
 require "stategraphs/SGancient_trepidation"
 
-local brain = require "brains/nightmarecreaturebrain"
+local brain = require "brains/trepidationbrain"
 local assets =
 {
 }
@@ -57,7 +57,88 @@ end
         appear = "dontstarve/sanity/creature2/appear",
         disappear = "dontstarve/sanity/creature2/dissappear",
     }
+local function ResetAbilityCooldown(inst, ability)
+    local id = ability.."_cd"
+    local remaining = TUNING["STALKER_"..string.upper(id)] - (inst.components.timer:GetTimeElapsed(id) or TUNING.STALKER_ABILITY_RETRY_CD)
+    inst.components.timer:StopTimer(id)
+    if remaining > 0 then
+        inst.components.timer:StartTimer(id, remaining)
+    end
+end	
+local CHANNELER_SPAWN_RADIUS = 8.7
+local CHANNELER_SPAWN_PERIOD = 1
+local function DoSpawnChanneler(inst)
+    if inst.components.health:IsDead() then
+        inst.channelertask = nil
+        inst.channelerparams = nil
+        return
+    end
 
+    local x = inst.channelerparams.x + CHANNELER_SPAWN_RADIUS * math.cos(inst.channelerparams.angle)
+    local z = inst.channelerparams.z + CHANNELER_SPAWN_RADIUS * math.sin(inst.channelerparams.angle)
+    if TheWorld.Map:IsAboveGroundAtPoint(x, 0, z) then
+        local channeler = SpawnPrefab("shadowchanneler")
+        channeler.Transform:SetPosition(x, 0, z)
+        channeler:ForceFacePoint(Vector3(inst.channelerparams.x, 0, inst.channelerparams.z))
+        inst.components.commander:AddSoldier(channeler)
+    end
+
+    if inst.channelerparams.count > 1 then
+        inst.channelerparams.angle = inst.channelerparams.angle + inst.channelerparams.delta
+        inst.channelerparams.count = inst.channelerparams.count - 1
+        inst.channelertask = inst:DoTaskInTime(CHANNELER_SPAWN_PERIOD, DoSpawnChanneler)
+    else
+        inst.channelertask = nil
+        inst.channelerparams = nil
+    end
+end
+local function SpawnChannelers(inst)
+    ResetAbilityCooldown(inst, "channelers")
+
+    local count = TUNING.STALKER_CHANNELERS_COUNT
+    if count <= 0 or inst.channelertask ~= nil then
+        return
+    end
+
+    local x, y, z = (inst.components.entitytracker:GetEntity("stargate") or inst).Transform:GetWorldPosition()
+    inst.channelerparams =
+    {
+        x = x,
+        z = z,
+        angle = math.random() * 2 * PI,
+        delta = -2 * PI / count,
+        count = count,
+    }
+    DoSpawnChanneler(inst)
+end
+local function DespawnChannelers(inst)
+    if inst.channelertask ~= nil then
+        inst.channelertask:Cancel()
+        inst.channelertask = nil
+        inst.channelerparams = nil
+    end
+    for i, v in ipairs(inst.components.commander:GetAllSoldiers()) do
+        if not v.components.health:IsDead() then
+            v.components.health:Kill()
+        end
+    end
+end
+local function nodmgshielded(inst, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb)
+    return inst.hasshield and amount <= 0 and not ignore_absorb
+end
+local function OnSoldiersChanged(inst)
+    if inst.hasshield ~= (inst.components.commander:GetNumSoldiers() > 0) then
+        inst.hasshield = not inst.hasshield
+        if not inst.hasshield then
+            inst.components.timer:StopTimer("channelers_cd")
+			inst.sg:GoToState("taunt")
+            inst.components.timer:StartTimer("channelers_cd", TUNING.STALKER_CHANNELERS_CD)
+        end
+    end
+end
+local function StartAbility(inst, ability)
+    inst.components.timer:StartTimer(ability.."_cd", TUNING.STALKER_ABILITY_RETRY_CD)
+end
 local function fn(Sim)
 	local inst = CreateEntity()
 
@@ -103,6 +184,8 @@ local function fn(Sim)
     ------------------
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(3000)
+	inst.components.health.redirect = nodmgshielded
+	inst.hasshield = false
     ------------------
 	inst:AddComponent("shadowsubmissive")
     inst:AddComponent("combat")
@@ -118,15 +201,22 @@ local function fn(Sim)
     inst.sounds = sounds   
     inst:AddComponent("knownlocations")
     ------------------
-    
+	inst:AddComponent("commander")
+	inst:AddComponent("timer")
+	inst:AddComponent("entitytracker")
+    inst:AddComponent("epicscare")
+    inst.components.epicscare:SetRange(TUNING.STALKER_EPICSCARE_RANGE)
     ------------------
     
-    
+    inst.SpawnChannelers = SpawnChannelers
+    inst.DespawnChannelers = DespawnChannelers
+	inst.StartAbility = StartAbility    
     ------------------
-    
+    inst:ListenForEvent("soldierschanged", OnSoldiersChanged)    
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aura = -TUNING.SANITYAURA_SMALL
-    
+
+    inst.components.timer:StartTimer("channelers_cd", TUNING.STALKER_FIRST_CHANNELERS_CD)    
     inst:SetStateGraph("SGancient_trepidation")
     inst:SetBrain(brain)  
     inst:ListenForEvent("attacked", OnAttacked)
