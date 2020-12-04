@@ -9,6 +9,9 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 --Try to initialise all functions locally outside of the post-init so they exist in RAM only once
 -----------------------------------------------------------------
+
+-------Red
+
 local function onremovelight(light)
     light._yellowamulet._light = nil
 end
@@ -132,6 +135,9 @@ env.AddPrefabPostInit("yellowamulet", function(inst)
     inst._onownerequip = _onownerequip
 end)
 
+-------Red
+
+
 local function healowner(inst, owner)
 	if inst.components.fueled and inst.components.fueled.currentfuel == 0 then
 		if inst.task ~= nil then
@@ -233,3 +239,101 @@ env.AddPrefabPostInit("amulet", function(inst)
 
     --inst._onownerequip = _onownerequip
 end)
+
+-------Orange
+
+
+local ORANGE_PICKUP_MUST_TAGS = { "_inventoryitem", "plant","witherable", "kelp","lureplant","waterplant"}
+local ORANGE_PICKUP_CANT_TAGS = { "INLIMBO", "NOCLICK", "knockbackdelayinteraction", "catchable", "fire", "minesprung", "mineactive" }
+local function pickup_UM(inst, owner)
+    if owner == nil or owner.components.inventory == nil then
+        return
+    end
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x, y, z, 1.2*TUNING.ORANGEAMULET_RANGE, nil, ORANGE_PICKUP_CANT_TAGS, ORANGE_PICKUP_MUST_TAGS)
+    for i, v in ipairs(ents) do
+        if v.components.inventoryitem ~= nil and                                 --Inventory stuff
+            v.components.inventoryitem.canbepickedup and
+            v.components.inventoryitem.cangoincontainer and
+            not v.components.inventoryitem:IsHeld() and
+            owner.components.inventory:CanAcceptCount(v, 1) > 0 then
+
+            if owner.components.minigame_participator ~= nil then
+                local minigame = owner.components.minigame_participator:GetMinigame()
+                if minigame ~= nil then
+                    minigame:PushEvent("pickupcheat", { cheater = owner, item = v })
+					inst.components.fueled:DoDelta(-2)
+                end
+            end
+
+            --Amulet will only ever pick up items one at a time. Even from stacks.
+            SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
+			
+            local v_pos = v:GetPosition()
+            if v.components.stackable ~= nil then
+                v = v.components.stackable:Get()
+				inst.components.fueled:DoDelta(-2)
+            end
+			
+            if v.components.trap ~= nil and v.components.trap:IsSprung() then
+                v.components.trap:Harvest(owner)
+				inst.components.fueled:DoDelta(-2)
+            else
+                owner.components.inventory:GiveItem(v, nil, v_pos)
+				inst.components.fueled:DoDelta(-2)
+            end
+            return
+        end
+		if v.components.pickable ~= nil and v.components.pickable:CanBePicked() then  --Pickable stuff
+        v.components.pickable:Pick(owner)
+		inst.components.fueled:DoDelta(-2)
+		SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
+		owner.components.sanity:DoDelta(-0.25)   --Can't take too much sanity if the purpose is to use in large farms
+		return
+		end
+    end
+end
+
+local function onequip_orange_UM(inst, owner)
+    owner.AnimState:OverrideSymbol("swap_body", "torso_amulets", "orangeamulet")
+    inst.task = inst:DoPeriodicTask(TUNING.ORANGEAMULET_ICD, pickup_UM, nil, owner)
+	inst._owner = owner
+end
+
+local function ontakefuel_orange(inst)
+    if inst.components.equippable:IsEquipped() then
+		if inst.task == nil then
+			inst.task = inst:DoPeriodicTask(TUNING.ORANGEAMULET_ICD, pickup_UM, nil, inst._owner)
+		end
+	end
+end
+
+local function nofuel_orange(inst)
+    if inst.task ~= nil then
+        inst.task:Cancel()
+        inst.task = nil
+    end
+end
+
+env.AddPrefabPostInit("orangeamulet", function(inst)
+    if not TheWorld.ismastersim then
+        return
+    end
+
+    inst:RemoveComponent("finiteuses")
+
+	inst:AddComponent("fueled")
+    inst.components.fueled:InitializeFuelLevel(2*TUNING.ORANGEAMULET_USES) 
+	inst.components.fueled.fueltype = FUELTYPE.NIGHTMARE
+    inst.components.fueled:SetDepletedFn(nofuel_orange)
+    inst.components.fueled:SetTakeFuelFn(ontakefuel_orange)
+	inst.components.fueled.accepting = true
+
+    if inst.components.equippable ~= nil then
+    inst.components.equippable:SetOnEquip(onequip_orange_UM)
+    end
+
+end)
+
+
+   
