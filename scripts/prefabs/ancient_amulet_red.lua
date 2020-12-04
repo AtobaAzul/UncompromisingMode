@@ -19,7 +19,7 @@ local function LaunchProjectile(inst, value)
 		goo._caster = inst
 		goo.healthvalue = value / 4
 
-		Launch2(goo, inst, 4, 1, 4, 1)
+		Launch2(goo, inst, 5, 1, 3, 1)
 	end
 end
 

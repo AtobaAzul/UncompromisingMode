@@ -184,6 +184,25 @@ local function SpawnBirchNutters(player)
 	end
 end
 
+local function SpawnEyePlants(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	if TheWorld.state.isnight then
+		player:DoTaskInTime(2 * math.random() * 0.3, function()
+					
+			local x1 = x + math.random(-10, 10)
+			local z1 = z + math.random(-10, 10)
+			local eyeplant = SpawnPrefab("eyeplant")
+			if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+				eyeplant.Transform:SetPosition(x1, y, z1)
+				eyeplant:DoTaskInTime(0, function(eyeplant) DayBreak(eyeplant) end)
+				eyeplant.components.combat:SetTarget(player)
+			else
+				player:DoTaskInTime(0.1, function(player) SpawnEyePlants(player) end)
+			end
+		end)
+	end
+end
+
 local function LeifAttack(player)
 print("leifattack")
 local leiftime = 8 + math.random() * 3
@@ -246,7 +265,7 @@ local days_survived = player.components.age ~= nil and player.components.age:Get
 		player:DoTaskInTime(10 * math.random() + 3, function()
 			local level = PlayerScaling(player)
 			for i = 1, level do
-				SpawnBirchNutters(player)
+				SpawnEyePlants(player)
 			end
 			print("leifattackfailed")
 		end)
@@ -1382,7 +1401,7 @@ local function CheckPlayers()
 	local numStructures = 0
 	local numStructures2 = 0
 	
-	local playerchancescaling = TUNING.DSTU.RNE_CHANCE - (#playerlist * 0.1)
+	local playerchancescaling = TUNING.DSTU.RNE_CHANCE -- - (#playerlist * 0.1)
 	--print(playerchancescaling)
 	
 	local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()

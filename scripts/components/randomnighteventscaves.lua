@@ -1111,7 +1111,7 @@ AddOceanEvent(SpawnShadowTalker,.4)
 
 local function DoBaseRNE(player)
 --print("done")
-	if math.random() >= .6 and TheWorld.state.iswinter and TheWorld.state.isnight then
+	if math.random() >= .7 and TheWorld.state.iswinter and TheWorld.state.isnight then
 		if self.totalrandomwinterweight and self.totalrandomwinterweight > 0 and self.winterevents then
 			local rnd = math.random()*self.totalrandomwinterweight
 			for k,v in pairs(self.winterevents) do
@@ -1122,7 +1122,7 @@ local function DoBaseRNE(player)
 				end
 			end
 		end
-	elseif math.random() >= .6 and TheWorld.state.isspring and TheWorld.state.isnight then
+	elseif math.random() >= .7 and TheWorld.state.isspring and TheWorld.state.isnight then
 		if self.totalrandomspringweight and self.totalrandomspringweight > 0 and self.springevents then
 			local rnd = math.random()*self.totalrandomspringweight
 			for k,v in pairs(self.springevents) do
@@ -1133,7 +1133,7 @@ local function DoBaseRNE(player)
 				end
 			end
 		end
-	elseif math.random() >= .6 and TheWorld.state.issummer and TheWorld.state.isnight then
+	elseif math.random() >= .7 and TheWorld.state.issummer and TheWorld.state.isnight then
 		if self.totalrandomsummerweight and self.totalrandomsummerweight > 0 and self.summerevents then
 			local rnd = math.random()*self.totalrandomsummerweight
 			for k,v in pairs(self.summerevents) do
@@ -1159,7 +1159,7 @@ local function DoBaseRNE(player)
 end
 
 local function DoWildRNE(player)
-	if math.random() >= .6 and TheWorld.state.iswinter and TheWorld.state.isnight then
+	if math.random() >= .7 and TheWorld.state.iswinter and TheWorld.state.isnight then
 		if self.totalrandomwinterweight and self.totalrandomwinterweight > 0 and self.winterevents then
 			local rnd = math.random()*self.totalrandomwinterweight
 			for k,v in pairs(self.winterevents) do
@@ -1170,7 +1170,7 @@ local function DoWildRNE(player)
 				end
 			end
 		end
-	elseif math.random() >= .6 and TheWorld.state.isspring and TheWorld.state.isnight then
+	elseif math.random() >= .7 and TheWorld.state.isspring and TheWorld.state.isnight then
 		if self.totalrandomspringweight and self.totalrandomspringweight > 0 and self.springevents then
 			local rnd = math.random()*self.totalrandomspringweight
 			for k,v in pairs(self.springevents) do
@@ -1181,7 +1181,7 @@ local function DoWildRNE(player)
 				end
 			end
 		end
-	elseif math.random() >= .6 and TheWorld.state.issummer and TheWorld.state.isnight then
+	elseif math.random() >= .7 and TheWorld.state.issummer and TheWorld.state.isnight then
 		if self.totalrandomsummerweight and self.totalrandomsummerweight > 0 and self.summerevents then
 			local rnd = math.random()*self.totalrandomsummerweight
 			for k,v in pairs(self.summerevents) do
@@ -1222,7 +1222,7 @@ local function DoSecondaryWildRNE(player)
 end
 
 local function DoOceanRNE(player)
-	if math.random() >= .6 and TheWorld.state.isspring and TheWorld.state.isnight then
+	if math.random() >= .7 and TheWorld.state.isspring and TheWorld.state.isnight then
 		if self.totalrandomspringweight and self.totalrandomspringweight > 0 and self.springevents then
 			local rnd = math.random()*self.totalrandomspringweight
 			for k,v in pairs(self.springevents) do
@@ -1342,7 +1342,7 @@ local function CheckPlayers()
 	local numStructures = 0
 	local numStructures2 = 0
 	
-	local playerchancescaling = TUNING.DSTU.RNE_CHANCE - (#playerlist * 0.1)
+	local playerchancescaling = TUNING.DSTU.RNE_CHANCE -- - (#playerlist * 0.1)
 	--print(playerchancescaling)
 	
 	local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
