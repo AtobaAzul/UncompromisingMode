@@ -119,7 +119,7 @@ recipes.honeyham.test = function(cooker, names, tags) return names.honey and tag
 recipes.dragonpie.test = function(cooker, names, tags) return (names.dragonfruit or names.dragonfruit_cooked) and not tags.meat and UncompromisingFillers(tags) end 
 -- Original:      test = function(cooker, names, tags) return (names.dragonfruit or names.dragonfruit_cooked) and not tags.meat end,
 
-recipes.kabobs.test = function(cooker, names, tags) return tags.meat and names.twigs and (tags.inedible and tags.inedible <= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) and MonsterMeatSupport(tags) end 
+recipes.kabobs.test = function(cooker, names, tags) return tags.meat and names.twigs and (tags.inedible and tags.inedible <= 1) and (not tags.ice) and (not tags.monster or tags.monster <= 3.5) end 
 -- Original:   test = function(cooker, names, tags) return tags.meat and names.twigs and (not tags.monster or tags.monster <= 1) and (tags.inedible and tags.inedible <= 1) end,
 
 recipes.mandrakesoup.test = function(cooker, names, tags) return names.mandrake and UncompromisingFillers(tags) and MonsterMeatSupport(tags) end 
