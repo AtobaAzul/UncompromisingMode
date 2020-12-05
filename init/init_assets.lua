@@ -276,9 +276,12 @@ Assets = {
 	Asset("ANIM", "anim/ancient_trepidation.zip"),
 	Asset("ANIM", "anim/ds_pig_charge.zip"),
 	Asset("ANIM", "anim/ds_pig_uppercut.zip"),
-	
-	
-	
+	Asset("ANIM", "anim/lazy_chester.zip"),
+	Asset("ATLAS", "images/inventoryimages/chester_eyebone_lazy.xml"),
+	Asset("IMAGE", "images/inventoryimages/chester_eyebone_lazy.tex"),	
+	Asset("ATLAS", "images/inventoryimages/chester_eyebone_closed_lazy.xml"),
+	Asset("IMAGE", "images/inventoryimages/chester_eyebone_closed_lazy.tex"),		
+	Asset("ANIM", "anim/chester_eyebone_lazy.zip"),	
 	
 	
 	
@@ -299,6 +302,8 @@ Assets = {
 	Asset( "ATLAS", "images/map_icons/snapplant_map.xml"),
 	Asset( "IMAGE", "images/map_icons/veteranshrine_map.tex"),
 	Asset( "ATLAS", "images/map_icons/veteranshrine_map.xml"),
+	Asset( "IMAGE", "images/map_icons/lazychester_minimap.tex"),
+	Asset( "ATLAS", "images/map_icons/lazychester_minimap.xml"),
 	--Map Icons End--
 
 

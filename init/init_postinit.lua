@@ -22,6 +22,8 @@ local component_post = {
 }
 
 local prefab_post = {
+	"chester",
+	"mushlight",
 	"flower",
 	"butterfly",
     --"toadstool_cap", Moved to init_uncompromising_mod.lua
@@ -148,6 +150,7 @@ local brain_post = {
 	"werepig",
 	"frog",
 	"spiderqueen",
+	"chester",
 }
 
 modimport("postinit/sim")

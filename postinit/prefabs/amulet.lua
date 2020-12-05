@@ -272,15 +272,12 @@ local function pickup_UM(inst, owner)
             local v_pos = v:GetPosition()
             if v.components.stackable ~= nil then
                 v = v.components.stackable:Get()
-				inst.components.fueled:DoDelta(-2)
             end
-			
+			inst.components.fueled:DoDelta(-2)
             if v.components.trap ~= nil and v.components.trap:IsSprung() then
                 v.components.trap:Harvest(owner)
-				inst.components.fueled:DoDelta(-2)
             else
                 owner.components.inventory:GiveItem(v, nil, v_pos)
-				inst.components.fueled:DoDelta(-2)
             end
             return
         end
