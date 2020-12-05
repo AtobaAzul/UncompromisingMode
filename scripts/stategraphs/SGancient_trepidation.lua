@@ -280,7 +280,7 @@ local states=
 
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
-            inst.AnimState:PlayAnimation("taunt")
+            inst.AnimState:PlayAnimation("channel_pre")
             inst.sg.statemem.count = 2
             --V2C: don't trigger attack cooldown
             --inst.components.combat:StartAttack()
@@ -304,7 +304,7 @@ local states=
 
         onenter = function(inst, count)
             inst.components.locomotor:StopMoving()
-            inst.AnimState:PlayAnimation("taunt",true)
+            inst.AnimState:PlayAnimation("channel_loop",true)
 			inst.sg:SetTimeout(math.random()*2 + 40)
         end,
         ontimeout = function(inst)
@@ -312,7 +312,7 @@ local states=
 			inst.components.health:SetCurrentHealth(3000)
 			end
 			inst:DespawnChannelers()
-			inst.sg:GoToState("taunt")
+			inst.sg:GoToState("summon_channelers_pst")
         end,
         timeline =
         {
@@ -333,7 +333,24 @@ local states=
 
         },
     },
-
+    State{
+        name = "summon_channelers_pst",
+        tags = {"busy"},
+        
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("channel_pst")
+			PlayExtendedSound(inst, "taunt")
+        end,
+        timeline=
+        {	--TimeEvent(5*FRAMES, function(inst) PlayExtendedSound(inst, "taunt") end),
+			--TimeEvent(10*FRAMES, function(inst) PlayExtendedSound(inst, "taunt") end),
+        },      
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
+    }, 
     State{
         name = "hit",
         
