@@ -652,8 +652,13 @@ local function SpawnLightning(player)
 			local lightnings = 1
 			for i = 1, lightnings do
 				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
-				local pos = Vector3(x + math.random(-10,10), y, z + math.random(-10,10))
-				TheWorld:PushEvent("ms_sendlightningstrike", pos)
+					if math.random() > 0.33 then
+						local pos = Vector3(x + math.random(-10,10), y, z + math.random(-10,10))
+						TheWorld:PushEvent("ms_sendlightningstrike", pos)
+					else
+						local lightningstrike = SpawnPrefab("hound_lightning")
+						lightningstrike.Transform:SetPosition(x + math.random(-10,10), y, z + math.random(-10,10))
+					end
 				end)
 			end
 	end)
@@ -825,6 +830,16 @@ local function MoonTear(player)
 	end
 end
 
+local function lootset_rnefn(lootdropper)
+    local loot = {}
+	
+	for i = 1, math.random(2, 3) do
+		table.insert(loot, "nightmarefuel")
+	end
+
+    lootdropper:SetLoot(loot)
+end
+
 local function ChessPiece(player)
 	MultiFogAuto(player,10)
 	if TheWorld.state.isnewmoon and TheWorld.state.cycles > 10 then
@@ -839,14 +854,23 @@ local function ChessPiece(player)
 					local piece = SpawnPrefab("shadow_bishop")
 					piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
 					piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
+					piece:DoTaskInTime(0, function(piece) piece:ListenForEvent("levelup", nil) end)--, piece.OnLevelUp)
+					
+					piece.components.lootdropper:SetLootSetupFn(lootset_rnefn)
 				elseif chesscheck >= 0.33 and chesscheck < 0.66 then
 					local piece = SpawnPrefab("shadow_rook")
 					piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
 					piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
+					piece:DoTaskInTime(0, function(piece) piece:ListenForEvent("levelup", nil) end)--, piece.OnLevelUp)
+					
+					piece.components.lootdropper:SetLootSetupFn(lootset_rnefn)
 				else
 					local piece = SpawnPrefab("shadow_knight")
 					piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
 					piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
+					piece:DoTaskInTime(0, function(piece) piece:ListenForEvent("levelup", nil) end)
+					
+					piece.components.lootdropper:SetLootSetupFn(lootset_rnefn)
 				end
 			end)
 		end
