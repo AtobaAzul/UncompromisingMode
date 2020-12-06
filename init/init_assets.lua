@@ -132,6 +132,10 @@ Assets = {
 	Asset("ANIM", "anim/hound_lightning.zip"),
 	Asset("ANIM", "anim/nightmaregrowth_shrink.zip"),
 	Asset("ANIM", "anim/watermelon_lantern.zip"),
+	Asset("ANIM", "anim/nightcrawler_build.zip"),
+	Asset("ANIM", "anim/slips_actions.zip"),
+	Asset("ANIM", "anim/slips_basic.zip"),
+	Asset("ANIM", "anim/slips_build.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),

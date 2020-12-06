@@ -76,14 +76,14 @@ configuration_options =
 	{
 		name = "rne chance",
 		label = "RNE Chance",
-		hover = "Random Night Events have a default 40% chance to occur each night +10% per extra player. RNEs are disabled before Day 5.",
+		hover = "Random Night Events have a default 40% chance to occur each night. RNEs are disabled before Day 5.",
 		options =
 		{
 			{description = "None", data = 100},
-			{description = "20%", data = 0.9},
-			{description = "40%", data = 0.7},
-			{description = "60%", data = 0.5},
-			{description = "80%", data = 0.3},
+			{description = "20%", data = 0.8},
+			{description = "40%", data = 0.6},
+			{description = "60%", data = 0.4},
+			{description = "80%", data = 0.2},
 			{description = "INSANITY", data = 0},
 		},
 		default = 0.7,
