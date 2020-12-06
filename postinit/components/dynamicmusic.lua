@@ -103,7 +103,7 @@ AddComponentPostInit("dynamicmusic", function(self)
 ]]
     local function StartDanger(player)
 	
-	print("check")
+	--print("check")
         -- get updated private variables
         --local SEASON_DANGER_MUSIC = UpvalueHacker.GetUpvalue(_StartDanger, "SEASON_DANGER_MUSIC")
         local _iscave = UpvalueHacker.GetUpvalue(_StartDanger, "_iscave")
