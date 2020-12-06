@@ -20,16 +20,11 @@ AddComponentPostInit("dynamicmusic", function(self)
     local _StartBusy = UpvalueHacker.GetUpvalue(_OnPlayerActivated, "StartPlayerListeners", "StartBusy")
     local _StopBusy = UpvalueHacker.GetUpvalue(_OnPlayerActivated, "StartPlayerListeners", "StartBusy", "StopBusy")
     
-	--local _StartDanger = UpvalueHacker.GetUpvalue(_OnPlayerActivated, "StartPlayerListeners", "StartDanger")
-	local _CheckAction = UpvalueHacker.GetUpvalue(_OnPlayerActivated, "StartPlayerListeners", "CheckAction")
 	local _StartDanger = UpvalueHacker.GetUpvalue(_OnPlayerActivated, "StartPlayerListeners", "CheckAction", "StartDanger")
-    --local _StopDanger = UpvalueHacker.GetUpvalue(_OnPlayerActivated, "StartPlayerListeners", "CheckAction", "StartDanger", "StopDanger")
-                  
+
     local BUSYTHEMES = UpvalueHacker.GetUpvalue(_StartBusy, "BUSYTHEMES")
     BUSYTHEMES["HOODEDFOREST"] = 10
 	
-    --local SEASON_DANGER_MUSIC = UpvalueHacker.GetUpvalue(_StartDanger, "SEASON_DANGER_MUSIC")
-
     local function IsInHoodedForest(player)
         return player.components.areaaware ~= nil
             and player.components.areaaware:CurrentlyInTag("hoodedcanopy")
@@ -71,41 +66,11 @@ AddComponentPostInit("dynamicmusic", function(self)
         end
     end
 	
-	--[[
-	local function StopDanger(inst, istimeout)
-	print("stop")
-        -- get updated private variables
-        local _extendtime = UpvalueHacker.GetUpvalue(_StartDanger, "_extendtime")
-        local _dangertask = UpvalueHacker.GetUpvalue(_StartBusy, "_dangertask")
-        local _soundemitter = UpvalueHacker.GetUpvalue(_StartDanger, "_soundemitter")
-        local istimeout = UpvalueHacker.GetUpvalue(_StartDanger, "istimeout")
-		
-		if _dangertask ~= nil then
-			if not istimeout then
-	print("cancek")
-				_dangertask:Cancel()
-			elseif _extendtime > 0 then
-	print("exten")
-				local time = GetTime()
-				if time < _extendtime then
-					_dangertask = inst:DoTaskInTime(_extendtime - time, StopDanger, true)
-					_extendtime = 0
-					return
-				end
-			end
-			_dangertask = nil
-			_triggeredlevel = nil
-			_extendtime = 0
-	print("kill")
-			_soundemitter:KillSound("danger")
-		end
-	end
-]]
+	local EPIC_TAGS = { "epic" }
+	local NO_EPIC_TAGS = { "noepicmusic" }
     local function StartDanger(player)
-	
-	print("check")
         -- get updated private variables
-        --local SEASON_DANGER_MUSIC = UpvalueHacker.GetUpvalue(_StartDanger, "SEASON_DANGER_MUSIC")
+        local SEASON_DANGER_MUSIC = UpvalueHacker.GetUpvalue(_StartDanger, "SEASON_DANGER_MUSIC")
         local _iscave = UpvalueHacker.GetUpvalue(_StartDanger, "_iscave")
         local _extendtime = UpvalueHacker.GetUpvalue(_StartDanger, "_extendtime")
         local _dangertask = UpvalueHacker.GetUpvalue(_StartDanger, "_dangertask")
