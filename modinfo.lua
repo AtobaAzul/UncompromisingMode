@@ -121,8 +121,9 @@ configuration_options =
     Header("Character Reworks"),
 ------------------------------
     BinaryConfig("willow", "Willow Rework", "Willow's Lighter now has infinite durability, Willow can cast explosions, etc.", true),
-    BinaryConfig("bernie", "Big Bernie", "BERNIE! is disabled by default. If enabled, Bernie transforms if he is set on fire.", false),
+    BinaryConfig("bernie", "Big Bernie", "Enable Big BERNIE!!", true),
     BinaryConfig("warly", "Improved Warly", "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.", true),
+	BinaryConfig("wolfgang", "Balanced Wolfgang", "Set to false if you want Wolfgang to be unbalanced.", true),
 
 
 ------------------------------

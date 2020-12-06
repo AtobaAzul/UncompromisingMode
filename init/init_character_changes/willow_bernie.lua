@@ -3,7 +3,8 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 
 local function gobig(inst)
-
+--no
+--[[
 	if inst.components.burnable:IsBurning() then
 		local skin_name = nil
 		if inst:GetSkinName() ~= nil then
@@ -20,7 +21,7 @@ local function gobig(inst)
 			inst:Remove()
 			return big
 		end
-	end
+	end]]
 end
 
 local function getstatus(inst)
@@ -64,13 +65,13 @@ env.AddPrefabPostInit("bernie_active", function(inst)
 	
 	inst:AddComponent("named")
 	inst:DoTaskInTime(0, SetName)
-	]]
+	
     inst:AddComponent("burnable")
     inst.components.burnable:SetFXLevel(1)
     inst.components.burnable:SetBurnTime(30)
     inst.components.burnable.canlight = true
     inst.components.burnable:AddBurnFX("character_fire", Vector3(0, 0, 1), "bernie_torso")
-	
+	]]
 	inst.GoBig = gobig
 
 end)
@@ -101,7 +102,7 @@ env.AddPrefabPostInit("bernie_big", function(inst)
 
 	inst:AddComponent("named")
 	inst:DoTaskInTime(0, SetNameBig)
-    ]]
+    
     inst:AddComponent("burnable")
     inst.components.burnable:SetFXLevel(3)
     inst.components.burnable.canlight = false
@@ -111,6 +112,6 @@ env.AddPrefabPostInit("bernie_big", function(inst)
 	inst.components.burnable:SetOnExtinguishFn(revertex)
 	MakeSmallPropagator(inst)
 	
-    inst.OnPreLoad = OnPreLoad
+    inst.OnPreLoad = OnPreLoad]]
 
 end)
