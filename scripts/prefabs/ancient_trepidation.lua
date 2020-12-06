@@ -180,7 +180,7 @@ local function fn(Sim)
 	inst:AddTag("monster")
     inst:AddTag("hostile") 
 	inst:AddTag("shadowcreature")
-
+    inst:AddTag("shadow")
     ------------------
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(3000)
@@ -221,7 +221,7 @@ local function fn(Sim)
     inst:SetBrain(brain)  
     inst:ListenForEvent("attacked", OnAttacked)
 	inst.sg:GoToState("spawn")
-
+    inst.hasshield = false
     return inst
 end
 
