@@ -11,7 +11,7 @@ local HoodedWidowBrain = Class(Brain, function(self, inst)
 end)
 
 -----------------------------------------------------------------
-local MAX_CHASE_TIME = 10
+local MAX_CHASE_TIME = 5
 local MAX_CHASE_DIST = 30
 local FLEE_WARNING_DELAY = 3.5
 local FORCE_MELEE_DIST = 4
