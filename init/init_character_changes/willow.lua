@@ -298,10 +298,10 @@ env.AddPrefabPostInit("bernie_inactive", function(inst)
 	if inst.components.inventoryitem ~= nil then
 		inst.components.inventoryitem:SetSinks(false)
 	end
-	]]
+	
 	inst:ListenForEvent("onfueldsectionchanged", canceldecaying)
     inst:ListenForEvent("ondropped", canceldecaying)
-	
+	]]
 end)
 
 
@@ -311,6 +311,6 @@ env.AddPrefabPostInit("bernie_active", function(inst)
 		return
 	end
 	
-	inst.GoBig = gobig
+	--inst.GoBig = gobig
 
 end)

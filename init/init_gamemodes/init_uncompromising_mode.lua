@@ -144,8 +144,8 @@ local require = GLOBAL.require
 		modimport("init/init_character_changes/willow")
 	end
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("bernie") == true or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("bernie") == true) then
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("bernie") == false or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("bernie") == false) then
 		modimport("init/init_character_changes/willow_bernie")
 	end
 	
@@ -159,6 +159,11 @@ local require = GLOBAL.require
 		modimport("init/init_character_changes/warly")
 	end
 	
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("wolfgang") == true or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("wolfgang") == true) then
+		modimport("init/init_character_changes/wolfgang")
+	end
+	
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("caved") == false and GetModConfigData("acidrain") == true or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("caved") == false and GetModConfigData("acidrain") == true) then
 		modimport("init/init_weather/init_overworld_toadstool")
@@ -168,7 +173,6 @@ local require = GLOBAL.require
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("character_changes")) then
 		modimport("init/init_character_changes/generic")
-		modimport("init/init_character_changes/wolfgang")
 		modimport("init/init_character_changes/wendy")
 		modimport("init/init_character_changes/wx78")
 		modimport("init/init_character_changes/wickerbottom")
