@@ -286,7 +286,7 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/chester_eyebone_closed_lazy.xml"),
 	Asset("IMAGE", "images/inventoryimages/chester_eyebone_closed_lazy.tex"),		
 	Asset("ANIM", "anim/chester_eyebone_lazy.zip"),	
-	
+	Asset("ANIM", "anim/ancient_trepidation_arm.zip"),		
 	
 	
 	--Map Icons Start--

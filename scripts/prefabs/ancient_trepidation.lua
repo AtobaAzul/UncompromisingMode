@@ -77,9 +77,9 @@ local function DoSpawnChanneler(inst)
     local x = inst.channelerparams.x + CHANNELER_SPAWN_RADIUS * math.cos(inst.channelerparams.angle)
     local z = inst.channelerparams.z + CHANNELER_SPAWN_RADIUS * math.sin(inst.channelerparams.angle)
     if TheWorld.Map:IsAboveGroundAtPoint(x, 0, z) then
-        local channeler = SpawnPrefab("shadowchanneler")
+        local channeler = SpawnPrefab("ancient_trepidation_arm")
         channeler.Transform:SetPosition(x, 0, z)
-        channeler:ForceFacePoint(Vector3(inst.channelerparams.x, 0, inst.channelerparams.z))
+        --channeler:ForceFacePoint(Vector3(inst.channelerparams.x, 0, inst.channelerparams.z))
         inst.components.commander:AddSoldier(channeler)
     end
 
@@ -95,7 +95,7 @@ end
 local function SpawnChannelers(inst)
     ResetAbilityCooldown(inst, "channelers")
 
-    local count = TUNING.STALKER_CHANNELERS_COUNT
+    local count = 4
     if count <= 0 or inst.channelertask ~= nil then
         return
     end
@@ -131,7 +131,7 @@ local function OnSoldiersChanged(inst)
         inst.hasshield = not inst.hasshield
         if not inst.hasshield then
             inst.components.timer:StopTimer("channelers_cd")
-			inst.sg:GoToState("taunt")
+			inst.sg:GoToState("summon_channelers_pst")
             inst.components.timer:StartTimer("channelers_cd", TUNING.STALKER_CHANNELERS_CD)
         end
     end
