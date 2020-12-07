@@ -37,8 +37,8 @@ local function doprojectilehit(inst, other)
 			DoSplatFx(other.components.pinnable.stuck and inst or other)
             other.components.inkable:Ink()
 			other.components.combat:GetAttacked(caster, TUNING.WARG_GOO_DAMAGE/2)
-		elseif other.components.inkable and not other:HasTag("shadowdominant") then
-            other.components.inkable:Ink()
+		elseif other.components.sanity ~= nil and not other:HasTag("shadowdominant") then
+			other.components.sanity:DoDelta(-5)
 			DoSplatFx(inst)
         end
 	else

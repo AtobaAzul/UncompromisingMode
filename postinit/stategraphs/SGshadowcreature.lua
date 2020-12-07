@@ -1,13 +1,22 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
+local function OnCooldown(inst)
+    inst._cdtask = nil
+end
+
 env.AddStategraphPostInit("shadowcreature", function(inst)
 
 local events=
 {
 	EventHandler("attacked", function(inst)
         if not (inst.sg:HasStateTag("attack") or inst.sg:HasStateTag("hit") or inst.sg:HasStateTag("noattack") or inst.components.health:IsDead()) then
-            inst.sg:GoToState("hit")
+			if inst._cdtask == nil and inst:HasTag("crawlinghorror") then
+				inst._cdtask = inst:DoTaskInTime(1, OnCooldown)
+				inst.sg:GoToState("hit_goo")
+			else
+				inst.sg:GoToState("hit")
+			end
         end
     end),
 
@@ -42,7 +51,7 @@ end
 local states = {
 
 	State{
-        name = "hit",
+        name = "hit_goo",
         tags = { "busy", "hit" },
 
         onenter = function(inst)
@@ -54,29 +63,19 @@ local states = {
 		timeline =
         {   
             TimeEvent(FRAMES, function(inst)
-                if inst:HasTag("crawlinghorror") then
-                    inst:LaunchProjectile()
-				end
+				inst:LaunchProjectile()
             end),
             TimeEvent(2*FRAMES, function(inst)
-                if inst:HasTag("crawlinghorror") then
-                    inst:LaunchProjectile()
-				end
+				inst:LaunchProjectile()
             end),
             TimeEvent(4*FRAMES, function(inst)
-                if inst:HasTag("crawlinghorror") then
-                    inst:LaunchProjectile()
-				end
+				inst:LaunchProjectile()
             end),
 			TimeEvent(6*FRAMES, function(inst)
-                if inst:HasTag("crawlinghorror") then
-                    inst:LaunchProjectile()
-				end
+				inst:LaunchProjectile()
             end),
 			TimeEvent(8*FRAMES, function(inst)
-                if inst:HasTag("crawlinghorror") then
-                    inst:LaunchProjectile()
-				end
+				inst:LaunchProjectile()
             end),
         },
 
@@ -127,19 +126,15 @@ local states = {
         events =
         {
             EventHandler("animqueueover", function(inst)
-				if inst:HasTag("terrorbeak") and math.random() < .333 then
-					inst.sg:GoToState("taunttp")
-				else
-					if math.random() < .333 then
-						if inst:HasTag("terrorbeak") then
-							inst.sg:GoToState("taunt")
-						else
-							inst.components.combat:SetTarget(nil)
-							inst.sg:GoToState("taunt")
-						end
+				if math.random() < .333 then
+					if inst:HasTag("terrorbeak") then
+						inst.sg:GoToState("tauntport")
 					else
-						inst.sg:GoToState("idle")
+						inst.components.combat:SetTarget(nil)
+						inst.sg:GoToState("taunt")
 					end
+				else
+					inst.sg:GoToState("idle")
 				end
             end),
         },
