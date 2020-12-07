@@ -344,18 +344,27 @@ local zaspberryparfait =
 
     priority = 30,
     weight = 1,
-    perishtime = nil,
-    cooktime = 0.5,
+    foodtype = "GOODIES",
+    health = 40,
+    hunger = 37.5,
+	oneat_desc = "Attackers are shocked"
+	sanity = 15,
+    perishtime = 2*TUNING.PERISH_TWO_DAY,
+    cooktime = 1.8,
 }
 AddCookerRecipe("portablecookpot", zaspberryparfait)
 local carapacecooler =
 {
     name = "carapacecooler",
     test = function(cooker, names, tags) return not tags.monster and not tags.inedible and UncompromisingFillers(tags) and names.iceboomerang and tags.sweetener end,
-
+    foodtype = "GOODIE",
+    health = 40,
+    hunger = 37.5,
+    perishtime = 2*TUNING.PERISH_TWO_DAY,
+	oneat_desc = "Attacks freeze enemies"
+    sanity = 15,
     priority = 30,
     weight = 1,
-    perishtime = nil,
     cooktime = 0.5,
 }
 --AddCookerRecipe("portablecookpot", carapacecooler)
@@ -366,8 +375,13 @@ local seafoodpaella =
 
     priority = 30,
     weight = 1,
-    perishtime = nil,
-    cooktime = 0.5,
+    foodtype = "MEAT",
+    health = 12,
+    hunger = 75,
+	oneat_desc = "Significantly clears sinuses"
+    perishtime = 5*TUNING.PERISH_TWO_DAY,
+    sanity = 5,
+    cooktime = 1,
 }
 AddCookerRecipe("cookpot", seafoodpaella)
 AddCookerRecipe("portablecookpot", seafoodpaella)
@@ -378,8 +392,13 @@ local liceloaf =
 
     priority = 30,
     weight = 1,
-    perishtime = nil,
-    cooktime = 0.5,
+    foodtype = "VEGGIE",
+    health = 0,
+    hunger = 62.5,
+	oneat_desc = "Somewhat clears sinuses"
+    perishtime = 15*TUNING.PERISH_TWO_DAY,
+    sanity = 0,
+    cooktime = 1.2,
 }
 AddCookerRecipe("cookpot", liceloaf)
 AddCookerRecipe("portablecookpot", liceloaf)
@@ -390,8 +409,12 @@ local hardshelltacos =
 
     priority = 30,
     weight = 1,
-    perishtime = nil,
-    cooktime = 0.5,
+    foodtype = "MEAT",
+    health = 20,
+    hunger = 37.5,
+    perishtime = 7.5*TUNING.PERISH_TWO_DAY,
+    sanity = 5,
+    cooktime = 1,
 }
 AddCookerRecipe("cookpot", hardshelltacos)
 AddCookerRecipe("portablecookpot", hardshelltacos)
@@ -402,8 +425,13 @@ local californiaking =
 
     priority = 30,
     weight = 30,
-    perishtime = nil,
-    cooktime = 0.5,
+    foodtype = "MEAT",
+    health = 3,
+    hunger = 62.5,
+	oneat_desc = "A victory drink"
+    perishtime = 5*TUNING.PERISH_TWO_DAY,
+    sanity = -15,
+    cooktime = 2,
 }
 AddCookerRecipe("cookpot", californiaking)
 AddCookerRecipe("portablecookpot", californiaking)
@@ -414,8 +442,12 @@ local steamedhams =
 
     priority = 30,
     weight = 30,
-    perishtime = nil,
-    cooktime = 0.6,
+    foodtype = "MEAT",
+    health = 40,
+    hunger = 37.5,
+    perishtime = 3*TUNING.PERISH_TWO_DAY,
+    sanity = 15,
+    cooktime = 1,
 }
 AddCookerRecipe("cookpot", steamedhams)
 AddCookerRecipe("portablecookpot", steamedhams)
@@ -426,7 +458,12 @@ local simpsalad =
 
     priority = 20,
     weight = 20,
-    perishtime = nil,
+    foodtype = "VEGGIE",
+    health = 3,
+    hunger = 12.5,
+    perishtime = 2*TUNING.PERISH_TWO_DAY,
+	oneat_desc = "An unforgettable luncheon"
+    sanity = 5,
     cooktime = 0.4,
 }
 AddCookerRecipe("cookpot", simpsalad)
@@ -438,7 +475,11 @@ local blueberrypancakes =
 
     priority = 20,
     weight = 30,
-    perishtime = nil,
+    foodtype = "VEGGIE",
+    health = 5,
+    hunger = 75,
+    perishtime = 5*TUNING.PERISH_TWO_DAY,
+    sanity = 20,
     cooktime = 1.8,
 }
 AddCookerRecipe("cookpot", blueberrypancakes)
@@ -450,7 +491,12 @@ local beefalowings =
 
     priority = 20,
     weight = 30,
-    perishtime = nil,
+    foodtype = "MEAT",
+    health = 30,
+    hunger = 62.5,
+    perishtime = 5*TUNING.PERISH_TWO_DAY,
+    oneat_desc = "Ignore knockback"
+    sanity = 30,
     cooktime = 2.4,
 }
 AddCookerRecipe("cookpot", beefalowings)
@@ -462,8 +508,13 @@ local snowcone =
 
     priority = 0.5,
     weight = 0.5,
-    perishtime = nil,
-    cooktime = 1,
+    foodtype = "VEGGIE",
+    health = 3,
+    hunger = 9.375,
+	oneat_desc = "Slightly cools player"
+    perishtime = 2*TUNING.PERISH_TWO_DAY,
+    sanity = 5,
+    cooktime = 0.5,
 }
 AddCookerRecipe("cookpot", snowcone)
 AddCookerRecipe("portablecookpot", snowcone)

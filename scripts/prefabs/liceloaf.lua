@@ -54,7 +54,7 @@ local function fn()
     inst.components.edible.foodtype = FOODTYPE.VEGGIE
 
     inst:AddComponent("perishable")
-    inst.components.perishable:SetPerishTime((10*TUNING.PERISH_TWO_DAY))
+    inst.components.perishable:SetPerishTime((15*TUNING.PERISH_TWO_DAY))
     inst.components.perishable:StartPerishing()
     inst.components.perishable.onperishreplacement = "spoiled_food"
 
