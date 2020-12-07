@@ -1,7 +1,7 @@
-local env = env
-GLOBAL.setfenv(1, GLOBAL)
------------------------------------------------------------------
+local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
+--PIGS SHOULDNT BE EATING BUGS OUT OF THE SKY--
 
-env.AddBrainPostInit("pigbrain", function(inst)
-	local FINDFOOD_CANT_TAGS = { "outofreach", "insect" }
+AddClassPostConstruct("brains/pigbrain", function(self)
+    local FINDFOOD_CANT_TAGS = UpvalueHacker.GetUpvalue(self.OnStart, "FindFoodAction", "FINDFOOD_CANT_TAGS")
+    table.insert(FINDFOOD_CANT_TAGS, "insect")
 end)
