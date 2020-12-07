@@ -97,7 +97,7 @@ end
         inst.components.equippable:SetOnUnequip(onunequip)
 		inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL
 		inst.components.equippable.is_magic_dapperness = true
-		inst.components.equippable.walkspeedmult = 1.2
+		inst.components.equippable.walkspeedmult = TUNING.CANE_SPEED_MULT
 
         MakeHauntableLaunch(inst)
 		--------------------------------------------------------------

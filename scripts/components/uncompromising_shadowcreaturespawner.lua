@@ -210,7 +210,7 @@ local function UpdatePopulation(player, params)
 
         if sanity > 0.5 then
             maxpop = 0
-        elseif sanity > TUNING.DSTU.DREADEYE_SPAWN_THRESH and sanity <= 0.5 then
+        elseif sanity > TUNING.DSTU.DREADEYE_SPAWN_THRESH and sanity <= 0.3 then
             maxpop = 1
             if targetpop >= maxpop then
                 dec_chance = 0.2
