@@ -11,7 +11,7 @@ GLOBAL.GetDescription = function(inst, item, ...)
 		
 	local ret = _GetDescription(inst, item, ...)
 	local prefab = item and item.prefab
-	if prefab and item and item:HasTag("antihistamine") and character ~= nil then
+	if prefab and item and item:HasTag("antihistamine") and character ~= nil and character ~= "WES" then
 		if not inst.prefab == "wilson" and GLOBAL.STRINGS.CHARACTERS[character].DESCRIBE.ANTIHISTAMINE ~= nil then
 			ret = ret .."\n".. GLOBAL.STRINGS.CHARACTERS[character].DESCRIBE.ANTIHISTAMINE--(GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTIHISTAMINE or "")--
 		else
@@ -19,7 +19,7 @@ GLOBAL.GetDescription = function(inst, item, ...)
 		end
 	end
 	
-	if prefab and item and item:HasTag("heatrock") and character ~= nil then
+	if prefab and item and item:HasTag("heatrock") and character ~= nil and character ~= "WES" then
 		if item.components and item.components.temperature ~= nil then
 				
 			item.currentheat = item.components.temperature:GetInsulation()
