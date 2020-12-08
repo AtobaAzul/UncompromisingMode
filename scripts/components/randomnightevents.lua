@@ -1134,13 +1134,13 @@ end
 --Wild
 AddWildEvent(SpawnBats,.4)
 AddWildEvent(SpawnLightFlowersNFerns,.3)
-AddWildEvent(SpawnSkitts,.5)
+AddWildEvent(SpawnSkitts,.6)
 AddWildEvent(SpawnMonkeys,.2)
 AddWildEvent(LeifAttack,.2)
 AddWildEvent(SpawnPhonograph,.2)
 AddWildEvent(SpawnShadowTeleporter,.3)
 AddWildEvent(StumpsAttack,.3)
-AddWildEvent(SpawnShadowTalker,.6)
+AddWildEvent(SpawnShadowTalker,.7)
 AddWildEvent(SpawnShadowBoomer,.2)
 --Secondary Wild
 AddSecondaryWildEvent(SpawnBats,.4)
@@ -1150,7 +1150,7 @@ AddSecondaryWildEvent(StumpsAttack,.2)
 AddSecondaryWildEvent(SpawnShadowTalker,.6)
 AddSecondaryWildEvent(SpawnShadowBoomer,.1)
 --Base
-AddBaseEvent(SpawnBaseBats,.4)
+AddBaseEvent(SpawnBaseBats,.3)
 AddBaseEvent(SpawnFissures,.3)
 AddBaseEvent(SpawnSkitts,.5)
 AddBaseEvent(FireHungryGhostAttack,.4)
@@ -1395,9 +1395,7 @@ local function IsEligible(player)
 	local dragonflied = TheWorld.components.mock_dragonflyspawner:GetWarning()
 	local area = player.components.areaaware
 	
-	print(theent)
-	
-	return not player:HasTag("playerghost") and theent < 1 and not (hounding or deerclopsed --[[or beargered]] or gmoosed or dragonflied) or 
+	return not player:HasTag("playerghost") and theent == 0 and not (hounding or deerclopsed --[[or beargered]] or gmoosed or dragonflied) and
 			area:GetCurrentArea() ~= nil
 			and not area:CurrentlyInTag("nohasslers")
 end
