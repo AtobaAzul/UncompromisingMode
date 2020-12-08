@@ -134,6 +134,13 @@ local function fn()
     inst.components.locomotor.pathcaps = { ignorecreep = true }
     inst.components.locomotor:SetSlowMultiplier(.6)
 
+    inst:AddComponent("health")
+    inst.components.health:SetMaxHealth(TUNING.SHADOWWAXWELL_LIFE)
+    inst.components.health:StartRegen(TUNING.CHESTER_HEALTH_REGEN_AMOUNT / 2, TUNING.CHESTER_HEALTH_REGEN_PERIOD / 2)
+    inst.components.health.nofadeout = true
+    inst.components.health.fire_damage_scale = TUNING.WILLOW_FIRE_DAMAGE
+    inst.components.health.redirect = nodebrisdmg
+
     inst:AddComponent("combat")
     inst.components.combat.hiteffectsymbol = "torso"
     -- inst.components.combat:SetRetargetFunction(1, Retarget)
@@ -141,12 +148,6 @@ local function fn()
     inst.components.combat:SetAttackPeriod(TUNING.SHADOWWAXWELL_ATTACK_PERIOD)
     inst.components.combat:SetRange(2, 3)
     inst.components.combat:SetDefaultDamage(TUNING.SHADOWWAXWELL_DAMAGE)
-
-    inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(TUNING.SHADOWWAXWELL_LIFE)
-    inst.components.health:StartRegen(TUNING.CHESTER_HEALTH_REGEN_AMOUNT / 2, TUNING.CHESTER_HEALTH_REGEN_PERIOD / 2)
-    inst.components.health.nofadeout = true
-        inst.components.health.redirect = nodebrisdmg
 
 	inst:AddComponent("inventory")
     inst.components.inventory.dropondeath = false
@@ -159,11 +160,12 @@ local function fn()
 
     EquipItem(inst)
 
-    inst:ListenForEvent("entity_death", function(world, data) entitydeathfn(inst, data) end, TheWorld)
+    --inst:ListenForEvent("entity_death", function(world, data) entitydeathfn(inst, data) end, TheWorld)
 
     inst:AddComponent("follower")
     inst.components.follower:KeepLeaderOnAttacked()
     inst.components.follower.keepdeadleader = true
+    inst.components.follower.keepleaderduringminigame = true
 	
     inst:ListenForEvent("attacked", OnAttacked)
 

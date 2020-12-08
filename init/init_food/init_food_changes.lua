@@ -187,7 +187,7 @@ local ANTIHISTAMINES_HIGH =
 	"hotchili",
 	"vegstinger",
 	"pepperpopper",
-	--"tea",
+	"sweettea",
 }
 
 local function item_oneatenhigh(inst, eater)
