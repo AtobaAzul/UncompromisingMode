@@ -7,8 +7,11 @@
 
 AddPrefabPostInit("heatrock", function(inst)
     local base_insulation = GLOBAL.TUNING.INSULATION_SMALL --60 insulation
-    inst.components.temperature.inherentinsulation = base_insulation
-    inst.components.temperature.inherentsummerinsulation = base_insulation
+	
+	if inst.components.temperature ~= nil then
+		inst.components.temperature.inherentinsulation = base_insulation
+		inst.components.temperature.inherentsummerinsulation = base_insulation
+	end
     
     local function CalculateInsulation()
         local owner = inst.components.inventoryitem.owner
