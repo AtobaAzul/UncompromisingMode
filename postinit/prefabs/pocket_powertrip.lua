@@ -3,13 +3,20 @@ GLOBAL.setfenv(1, GLOBAL)
 
 local function onequipsummer(inst, owner)
     owner.AnimState:OverrideSymbol("swap_body", "armor_trunkvest_summer", "swap_body")
-    inst.components.fueled:StartConsuming()
-    inst.components.container:Open(owner)
+	if inst.components.fueled ~= nil then
+		inst.components.fueled:StartConsuming()
+	end
+	
+	inst.components.container:Open(owner)
 end
+
 local function onequipwinter(inst, owner)
     owner.AnimState:OverrideSymbol("swap_body", "armor_trunkvest_winter", "swap_body")
-    inst.components.fueled:StartConsuming()
-    inst.components.container:Open(owner)
+	if inst.components.fueled ~= nil then
+		inst.components.fueled:StartConsuming()
+	end
+
+	inst.components.container:Open(owner)
 end
 local function onequip_steel(inst, owner)
     owner.AnimState:OverrideSymbol("swap_body", "armor_trunkvest_summer", "swap_body")
@@ -18,21 +25,28 @@ local function onequip_steel(inst, owner)
 end
 local function onequipreflect(inst, owner)
     owner.AnimState:OverrideSymbol("swap_body", "torso_reflective", "swap_body")
-    inst.components.fueled:StartConsuming()
+	if inst.components.fueled ~= nil then
+		inst.components.fueled:StartConsuming()
+	end
+	
 	inst.components.container:Open(owner)
 end
 
 local function onunequip(inst, owner)
     owner.AnimState:ClearOverrideSymbol("swap_body")
-    inst.components.fueled:StopConsuming()
+	if inst.components.fueled ~= nil then
+		inst.components.fueled:StopConsuming()
+	end
+	
     inst.components.container:Close(owner)
 end
 
 local function ExplodeInventory(inst)
-if inst.components.container ~= nil then
-inst.components.container:DropEverything()
-end
-inst:Remove()
+	if inst.components.container ~= nil then
+		inst.components.container:DropEverything()
+	end
+	
+	inst:Remove()
 end
 
 local function Folded(inst)

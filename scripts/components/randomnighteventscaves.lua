@@ -1043,7 +1043,7 @@ end
 --Inclusion and Tuning
 ------------------------
 --Wild
-AddWildEvent(SpawnBats,.5)
+AddWildEvent(SpawnBats,.4)
 AddWildEvent(SpawnLightFlowersNFerns,.3)
 AddWildEvent(SpawnSkitts,.5)
 AddWildEvent(SpawnMonkeys,.2)
@@ -1053,7 +1053,7 @@ AddWildEvent(SpawnShadowTeleporter,.2)
 AddWildEvent(StumpsAttack,.3)
 AddWildEvent(SpawnShadowTalker,.5)
 --Secondary Wild
-AddSecondaryWildEvent(SpawnBats,.5)
+AddSecondaryWildEvent(SpawnBats,.4)
 AddSecondaryWildEvent(SpawnLightFlowersNFerns,.3)
 AddSecondaryWildEvent(SpawnSkitts,.5)
 AddSecondaryWildEvent(StumpsAttack,.2)
@@ -1071,15 +1071,15 @@ AddBaseEvent(SpawnShadowTeleporter,.2)
 AddBaseEvent(StumpsAttack,.3)
 AddBaseEvent(SpawnShadowTalker,.5)
 --Cave
-AddCaveEvent(SpawnBats,.5)
+AddCaveEvent(SpawnBats,.4)
 AddCaveEvent(SpawnFissures,.2)
 AddCaveEvent(SpawnDroppers,.6)
-AddCaveEvent(SpawnShadowTalker,.4)
+AddCaveEvent(SpawnShadowTalker,.5)
 --AddCaveEvent(SpawnPhonograph,.1)
 AddCaveEvent(SpawnLightFlowersNFerns,.3)
 AddCaveEvent(SpawnShadowBoomer,.2)
 --Secondary Cave
-AddSecondaryCaveEvent(SpawnBats,.5)
+AddSecondaryCaveEvent(SpawnBats,.4)
 AddSecondaryCaveEvent(SpawnDroppers,.6)
 AddSecondaryCaveEvent(SpawnShadowTalker,.4)
 AddSecondaryCaveEvent(SpawnLightFlowersNFerns,.3)
@@ -1314,7 +1314,7 @@ local function IsLiving(player)
 	local deerclopsed = TheWorld.components.cavedeerclopsspawner:GetWarning()
 	local area = player.components.areaaware
 	
-	return not player:HasTag("playerghost") and theent < 1 and not (hounding or deerclopsed) or 
+	return not player:HasTag("playerghost") and theent < 1 and not (hounding or deerclopsed) and 
 			area:GetCurrentArea() ~= nil 
 			and not area:CurrentlyInTag("nohasslers")
 			and not area:CurrentlyInTag("nocavein")
