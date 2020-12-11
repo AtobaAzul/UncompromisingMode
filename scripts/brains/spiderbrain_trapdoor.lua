@@ -122,8 +122,8 @@ function SpiderBrain_TrapDoor:OnStart()
             IfNode(function() return self.inst:HasTag("spider_hider") end, "IsHider",
                 UseShield(self.inst, DAMAGE_UNTIL_SHIELD, SHIELD_TIME, AVOID_PROJECTILE_ATTACKS, HIDE_WHEN_SCARED)),
             AttackWall(self.inst),
-			WhileNode(function() return CheckForWebber(self.inst) and not Attacking(self.inst) and not Taunting(self.inst) end, "AmIBusyAttacking", RunAway(self.inst, "scarytoprey", 4, 8)),
 			WhileNode(function() return CanAttackNow(self.inst) end, "AttackMomentarily", ChaseAndAttack(self.inst, MAX_CHASE_TIME)),
+			WhileNode(function() return CheckForWebber(self.inst) and not Attacking(self.inst) and not Taunting(self.inst) end, "AmIBusyAttacking", RunAway(self.inst, "scarytoprey", 4, 8)),
 			WhileNode(function() return not Attacking(self.inst) and not Taunting(self.inst) end, "AmIBusyAttacking", RunAway(self.inst, RUN_AWAY_PARAMS, 4, 8)),
 			
 			ChaseAndAttack(self.inst, MAX_CHASE_TIME),
