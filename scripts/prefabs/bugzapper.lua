@@ -132,11 +132,11 @@ local function onattack(inst, attacker, target)
     if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and inst.components.weapon.stimuli == "electric" then
         SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
 		if target:HasTag("insect") and not target.components.health:IsDead() then
-			target.components.health:DoDelta(-30)
+			target.components.health:DoDelta(-30, false, attacker)
 		end
 		
 		if (target:HasTag("spider") or target:HasTag("hoodedwidow")) and not target.components.health:IsDead() then
-			target.components.health:DoDelta(-15)
+			target.components.health:DoDelta(-15, false, attacker)
 		end
     end
 end

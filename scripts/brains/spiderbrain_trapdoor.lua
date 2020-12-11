@@ -98,6 +98,20 @@ local RUN_AWAY_PARAMS =
     tags = { "_combat", "_health","player"},
     notags = { "spiderwhisperer" },
 }
+
+
+local function CheckForWebber(itsame)
+	if itsame.components.combat ~= nil then
+		local target = itsame.components.combat.target
+		
+		if target ~= nil and target:HasTag("spiderwhisperer") then
+			return true
+		end
+	end
+	
+	return false
+end
+
 function SpiderBrain_TrapDoor:OnStart()
     local root =
         PriorityNode(
@@ -108,6 +122,7 @@ function SpiderBrain_TrapDoor:OnStart()
             IfNode(function() return self.inst:HasTag("spider_hider") end, "IsHider",
                 UseShield(self.inst, DAMAGE_UNTIL_SHIELD, SHIELD_TIME, AVOID_PROJECTILE_ATTACKS, HIDE_WHEN_SCARED)),
             AttackWall(self.inst),
+			WhileNode(function() return CheckForWebber(self.inst) and not Attacking(self.inst) and not Taunting(self.inst) end, "AmIBusyAttacking", RunAway(self.inst, "scarytoprey", 4, 8)),
 			WhileNode(function() return CanAttackNow(self.inst) end, "AttackMomentarily", ChaseAndAttack(self.inst, MAX_CHASE_TIME)),
 			WhileNode(function() return not Attacking(self.inst) and not Taunting(self.inst) end, "AmIBusyAttacking", RunAway(self.inst, RUN_AWAY_PARAMS, 4, 8)),
 			

@@ -172,4 +172,5 @@ return {
 	"ancient_trepidation_arm",
 	"steel_sweater",
 	"rat_hat",
+	"rat_whip",
 }
