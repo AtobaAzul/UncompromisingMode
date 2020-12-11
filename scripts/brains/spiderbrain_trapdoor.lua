@@ -93,7 +93,11 @@ end
 local function Taunting(inst)
 	return inst.sg:HasStateTag("taunting")
 end
-
+local RUN_AWAY_PARAMS =
+{
+    tags = { "_combat", "_health","player"},
+    notags = { "spiderwhisperer" },
+}
 function SpiderBrain_TrapDoor:OnStart()
     local root =
         PriorityNode(
@@ -105,7 +109,7 @@ function SpiderBrain_TrapDoor:OnStart()
                 UseShield(self.inst, DAMAGE_UNTIL_SHIELD, SHIELD_TIME, AVOID_PROJECTILE_ATTACKS, HIDE_WHEN_SCARED)),
             AttackWall(self.inst),
 			WhileNode(function() return CanAttackNow(self.inst) end, "AttackMomentarily", ChaseAndAttack(self.inst, MAX_CHASE_TIME)),
-			WhileNode(function() return not Attacking(self.inst) and not Taunting(self.inst) end, "AmIBusyAttacking", RunAway(self.inst, "scarytoprey", 4, 8)),
+			WhileNode(function() return not Attacking(self.inst) and not Taunting(self.inst) end, "AmIBusyAttacking", RunAway(self.inst, RUN_AWAY_PARAMS, 4, 8)),
 			
 			ChaseAndAttack(self.inst, MAX_CHASE_TIME),
             DoAction(self.inst, function() return EatFoodAction(self.inst) end ),
