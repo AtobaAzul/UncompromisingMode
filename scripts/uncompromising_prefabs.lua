@@ -170,4 +170,5 @@ return {
 	"amulet_health_orb",
 	"nightcrawler",
 	"ancient_trepidation_arm",
+	"steel_sweater",
 }

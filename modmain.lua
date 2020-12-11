@@ -6,3 +6,4 @@ PrefabFiles = require("uncompromising_prefabs")
 modimport("init/init_gamemodes/init_uncompromising_mode")
 
 GLOBAL.FUELTYPE.BATTERYPOWER = "BATTERYPOWER"
+GLOBAL.FUELTYPE.SWEATERPOWER = "SWEATERPOWER"

@@ -11,7 +11,11 @@ local function onequipwinter(inst, owner)
     inst.components.fueled:StartConsuming()
     inst.components.container:Open(owner)
 end
-
+local function onequip_steel(inst, owner)
+    owner.AnimState:OverrideSymbol("swap_body", "armor_trunkvest_summer", "swap_body")
+    inst.components.fueled:StartConsuming()
+	inst.components.container:Open(owner)
+end
 local function onequipreflect(inst, owner)
     owner.AnimState:OverrideSymbol("swap_body", "torso_reflective", "swap_body")
     inst.components.fueled:StartConsuming()
@@ -136,3 +140,30 @@ env.AddPrefabPostInit("reflectivevest", function(inst)
 	inst:ListenForEvent("itemget", Folded)
 --return inst
 end)
+--[[env.AddPrefabPostInit("steel_sweater", function(inst)
+	if not TheWorld.ismastersim then
+		inst.OnEntityReplicated = function(inst) 
+			inst.replica.container:WidgetSetup("puffvest") 
+		end
+        return inst
+    end
+    inst:AddComponent("container")
+    inst.components.container:WidgetSetup("puffvest")
+	
+	--inst.components.inventoryitem.cangoincontainer = false
+	if inst.components.equippable ~= nil then
+		inst.components.equippable:SetOnEquip(onequip_steel)
+		inst.components.equippable:SetOnUnequip(onunequip)
+	end
+	
+	if inst.components.inventoryitem ~= nil then
+		inst.components.inventoryitem:SetOnPutInInventoryFn(Folded)
+	end
+	
+	if inst.components.fueled ~= nil then
+		inst.components.fueled:SetDepletedFn(ExplodeInventory)
+	end
+	
+	inst:ListenForEvent("itemget", Folded)
+--return inst
+end)]]

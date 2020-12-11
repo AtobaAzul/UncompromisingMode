@@ -287,8 +287,10 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/chester_eyebone_closed_lazy.tex"),		
 	Asset("ANIM", "anim/chester_eyebone_lazy.zip"),	
 	Asset("ANIM", "anim/ancient_trepidation_arm.zip"),		
-	
-	
+	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_closed_lazy"),
+	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_lazy"),
+	Asset("ANIM", "anim/armor_steelsweater.zip"),
+	Asset("ANIM", "anim/steelsweater.zip"),	
 	--Map Icons Start--
 	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),
 	Asset( "ATLAS", "images/map_icons/riceplant.xml" ),
@@ -310,7 +312,7 @@ Assets = {
 	Asset( "ATLAS", "images/map_icons/lazychester_minimap.xml"),
 	--Map Icons End--
 
-
+	
 
 	Asset( "IMAGE", "bigportraits/willow.tex" ),
     Asset( "ATLAS", "bigportraits/willow.xml" ),
