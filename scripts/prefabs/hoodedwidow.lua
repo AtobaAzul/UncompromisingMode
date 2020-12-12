@@ -153,6 +153,7 @@ end
 local function OnLoad(inst)
 --inst.WebReady = true
 inst.LeapReady = true
+inst.investigated = true
 end
 
 local function DoSuper(inst)
@@ -193,6 +194,8 @@ local function Reset(inst)
 end
 
 local function OnKilledOther(inst)
+inst.investigated = false
+inst:DoTaskInTime(5,function(inst) inst.investigated = true end)
 if inst.components.combat ~= nil then
 inst.components.combat:TryRetarget()
 end
@@ -298,6 +301,7 @@ local function fn()
 	--inst.WebReady = true
 	inst.LeapReady = false
 	inst.CanopyReady = false
+	inst.investigated = true
 	inst.Reset = Reset
     inst.DoDespawn = DoDespawn
 	inst:AddComponent("inventory")

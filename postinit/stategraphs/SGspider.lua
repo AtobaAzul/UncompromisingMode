@@ -129,34 +129,6 @@ local states = {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
-	    State{
-        name = "idle",
-        tags = {"idle", "canrotate"},
-
-        ontimeout = function(inst)
-            inst.sg:GoToState("taunt")
-        end,
-
-        onenter = function(inst, start_anim)
-            inst.Physics:Stop()
-            local animname = "idle"
-            if math.random() < .3 then
-                inst.sg:SetTimeout(math.random()*2 + 2)
-            end
-
-            if inst.LightWatcher:GetLightValue() > 1 then
-				if not inst:HasTag("tauntless") then
-                inst.AnimState:PlayAnimation("cower" )
-                inst.AnimState:PushAnimation("cower_loop", true)
-				end
-            elseif start_anim then
-                inst.AnimState:PlayAnimation(start_anim)
-                inst.AnimState:PushAnimation("idle", true)
-            else
-                inst.AnimState:PlayAnimation("idle", true)
-            end
-        end,
-    },
     State{
         name = "shield",
         tags = {"busy", "shield"},

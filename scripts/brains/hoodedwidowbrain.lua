@@ -15,6 +15,7 @@ local MAX_CHASE_TIME = 5
 local MAX_CHASE_DIST = 30
 local FLEE_WARNING_DELAY = 3.5
 local FORCE_MELEE_DIST = 4
+local MAX_WANDER_DIST = 7
 local function EquipMeleeAndResetCooldown(inst)
     if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
         inst.components.combat:ResetCooldown()
@@ -116,6 +117,13 @@ local function EquipPhlegm(inst)
         -- print("phlegm equipped")
     end
 end
+
+local function NoTarget(inst)
+if inst.investigated == true then
+return true
+end
+end
+
 function HoodedWidowBrain:OnStart()
     local root = PriorityNode(
     {	
@@ -130,8 +138,9 @@ function HoodedWidowBrain:OnStart()
                 ActionNode(function() EquipPhlegm(self.inst) end, "Equip phlegm"),
                 ChaseAndAttack(self.inst, MAX_CHASE_TIME) })),
                 
-		DoAction(self.inst, GoHomeAction), --no delay
-        
+		WhileNode(function() return NoTarget(self.inst) end,"No Target",
+		DoAction(self.inst, GoHomeAction)),
+        Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST),
     }, 2)
     
     self.bt = BT(self.inst, root)
