@@ -136,6 +136,7 @@ Assets = {
 	Asset("ANIM", "anim/slips_actions.zip"),
 	Asset("ANIM", "anim/slips_basic.zip"),
 	Asset("ANIM", "anim/slips_build.zip"),
+	Asset("ANIM", "anim/swap_rat_whip.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),

@@ -193,7 +193,7 @@ local function newgarden(inst, reader)
 	end
 end
 
-env.AddPrefabPostInit("book_gardening", function(inst)
+--[[env.AddPrefabPostInit("book_gardening", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
@@ -201,7 +201,7 @@ env.AddPrefabPostInit("book_gardening", function(inst)
 	if inst.components.book ~= nil then
         inst.components.book.onread = newgarden
 	end
-end)
+end)]]
 
 env.AddPrefabPostInit("book_horticulture", function(inst)
 	if not TheWorld.ismastersim then
