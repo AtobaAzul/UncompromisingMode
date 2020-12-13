@@ -291,6 +291,8 @@ Assets = {
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_lazy"),
 	Asset("ANIM", "anim/armor_steelsweater.zip"),
 	Asset("ANIM", "anim/steelsweater.zip"),	
+	Asset("ANIM", "anim/hellhound.zip"),
+	
 	--Map Icons Start--
 	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),
 	Asset( "ATLAS", "images/map_icons/riceplant.xml" ),

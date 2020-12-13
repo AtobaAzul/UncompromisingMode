@@ -687,13 +687,12 @@ local function ShootProjectile(inst, target)
 end
 
 local function fnmagma()
-    local inst = fncommon("hound", "hound_mutated", nil, nil, nil, {amphibious = true})
+    local inst = fncommon("hound", "hellhound", nil, nil, nil, {amphibious = true})
 
     if not TheWorld.ismastersim then
         return inst
     end
 	
-	inst.AnimState:SetMultColour(1, 0, 0, 1)
 	
     inst:SetStateGraph("SGmagmahound")
 
