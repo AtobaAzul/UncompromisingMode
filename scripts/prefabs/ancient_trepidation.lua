@@ -23,7 +23,7 @@ local function NormalRetarget(inst)
     return FindEntity(inst, targetDist, 
         function(guy) 
             if inst.components.combat:CanTarget(guy) then
-                return guy:HasTag("character") or guy:HasTag("pig")
+                return guy:HasTag("character")
             end
     end)
 end
@@ -65,9 +65,9 @@ local function ResetAbilityCooldown(inst, ability)
         inst.components.timer:StartTimer(id, remaining)
     end
 end	
-local CHANNELER_SPAWN_RADIUS = 8.7
-local CHANNELER_SPAWN_PERIOD = 1
+local CHANNELER_SPAWN_PERIOD = 0.5
 local function DoSpawnChanneler(inst)
+local CHANNELER_SPAWN_RADIUS = 8.7
     if inst.components.health:IsDead() then
         inst.channelertask = nil
         inst.channelerparams = nil
@@ -79,13 +79,15 @@ local function DoSpawnChanneler(inst)
     if TheWorld.Map:IsAboveGroundAtPoint(x, 0, z) then
         local channeler = SpawnPrefab("ancient_trepidation_arm")
         channeler.Transform:SetPosition(x, 0, z)
+		inst.channelerparams.count = inst.channelerparams.count - 1
         --channeler:ForceFacePoint(Vector3(inst.channelerparams.x, 0, inst.channelerparams.z))
         inst.components.commander:AddSoldier(channeler)
+	else
+	CHANNELER_SPAWN_RADIUS = CHANNELER_SPAWN_RADIUS/2
     end
 
-    if inst.channelerparams.count > 1 then
+    if inst.channelerparams.count > 0 then
         inst.channelerparams.angle = inst.channelerparams.angle + inst.channelerparams.delta
-        inst.channelerparams.count = inst.channelerparams.count - 1
         inst.channelertask = inst:DoTaskInTime(CHANNELER_SPAWN_PERIOD, DoSpawnChanneler)
     else
         inst.channelertask = nil
@@ -138,6 +140,36 @@ local function OnSoldiersChanged(inst)
 end
 local function StartAbility(inst, ability)
     inst.components.timer:StartTimer(ability.."_cd", TUNING.STALKER_ABILITY_RETRY_CD)
+end
+
+local function CheckIfBozoLeft(inst)
+if FindEntity(inst, 20, 
+        function(guy) 
+            if inst.components.combat:CanTarget(guy) then
+                return guy:HasTag("character")
+            end
+    end) == nil then
+
+inst.sg:GoToState("spawn")
+local x, y, z = inst.Transform:GetWorldPosition()
+local Despawn = SpawnPrefab("shadow_despawn")
+inst:DespawnChannelers()
+if inst.components.health ~= nil then
+inst.components.health:SetCurrentHealth(3000)
+end
+Despawn.Transform:SetPosition(x, 0, z)
+local bozo =FindEntity(inst, 40, 
+        function(guy) 
+            if inst.components.combat:CanTarget(guy) then
+                return guy:HasTag("character")
+            end
+    end)
+if bozo ~= nil then
+inst.components.combat:SuggestTarget(bozo)
+local x, y, z = bozo.Transform:GetWorldPosition()
+inst.Transform:SetPosition(x, 0, z)
+end
+end
 end
 local function fn(Sim)
 	local inst = CreateEntity()
@@ -210,7 +242,8 @@ local function fn(Sim)
     
     inst.SpawnChannelers = SpawnChannelers
     inst.DespawnChannelers = DespawnChannelers
-	inst.StartAbility = StartAbility    
+	inst.StartAbility = StartAbility
+	inst.CheckIfBozoLeft = CheckIfBozoLeft
     ------------------
     inst:ListenForEvent("soldierschanged", OnSoldiersChanged)    
     inst:AddComponent("sanityaura")

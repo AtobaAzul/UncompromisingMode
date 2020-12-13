@@ -312,6 +312,9 @@ local states=
 			inst:DespawnChannelers()
 			inst.sg:GoToState("summon_channelers_pst")
         end,
+        onupdate= function(inst)
+            inst.CheckIfBozoLeft(inst)
+        end,
         timeline =
         {
             TimeEvent(8 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/stalker/taunt_short") end),

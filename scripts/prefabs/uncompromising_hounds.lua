@@ -696,7 +696,7 @@ local function fnmagma()
 	
     inst:SetStateGraph("SGmagmahound")
 
-    MakeMediumFreezableCharacter(inst, "hound_body")
+    --MakeMediumFreezableCharacter(inst, "hound_body") No freeze bc haha FIRE
 	
     inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", ontimerdone)

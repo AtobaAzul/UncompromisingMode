@@ -40,7 +40,7 @@ end
     end
 	
 	
-	local function OnTakeDamage(inst, damage_amount)
+local function OnTakeDamage(inst, damage_amount)
     local owner = inst.components.inventoryitem.owner
     if owner then
         local health = owner.components.health

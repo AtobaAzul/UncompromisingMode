@@ -114,6 +114,7 @@ local prefab_post = {
 	"pocket_powertrip",
 	"pumpkin_lantern",
 	"nightlight",
+	"armor_sanity",
 }
 
 local stategraph_post = {
