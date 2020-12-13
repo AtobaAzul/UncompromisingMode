@@ -52,7 +52,7 @@ local function SpawnPollenmiteDenForPlayer(reschedule)
 		_storming = true
 		
 		for i, v in ipairs(AllPlayers) do
-			if v.components ~= nil and v.components.talker ~= nil then
+			if v.components ~= nil and v.components.talker ~= nil and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
 				v.components.talker:Say(GetString(v, "ANNOUNCE_SNOWSTORM"))
 			end
 		end
