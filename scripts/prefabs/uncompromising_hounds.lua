@@ -705,7 +705,7 @@ local function fnmagma()
 	
     inst.components.combat:SetRange(10, 3)
 	
-    inst.components.freezable:SetResistance(4)
+    --inst.components.freezable:SetResistance(4)
 	
     inst.components.lootdropper:SetChanceLootTable('hound_magma')
 	
