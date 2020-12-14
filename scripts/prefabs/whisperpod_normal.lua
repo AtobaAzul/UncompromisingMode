@@ -64,17 +64,23 @@ local function OnGetItemFromPlayer(inst, giver, item)
 		inst.components.crop:SetOnMatureFn(onmatured)
 		inst.growing = true
 		
-		if item.prefab == ("watermelon_seeds" or "pomegranate_seeds" or "pumpkin_seeds" or "dragonfruit_seeds" or "eggplant_seeds" or "durian_seeds") then
+		--if item.prefab == ("watermelon_seeds" or "pomegranate_seeds" or "pumpkin_seeds" or "dragonfruit_seeds" or "eggplant_seeds" or "durian_seeds") then
 			inst.planted = item.prefab
 			--[[local prefab = nil
 			prefab = item.components.plantable.product
 			inst.planted = prefab
 			inst.AnimState:SetBuild("snapdragon_build_"..inst.planted"_seeds")--]]
+			if (inst.planted =="watermelon_seeds") or (inst.planted =="pomegranate_seeds") or (inst.planted =="pumpkin_seeds") or (inst.planted =="dragonfruit_seeds") or (inst.planted =="eggplant_seeds") or (inst.planted =="durian_seeds") then
 			inst.AnimState:SetBuild("snapdragon_build_"..inst.planted)
-		else
+			else
 			inst.planted = "seeds"
 			inst.AnimState:SetBuild("snapdragon_build_"..inst.planted)
-		end
+			end
+		--end
+		--[[else
+			inst.planted = "seeds"
+			inst.AnimState:SetBuild("snapdragon_build_"..inst.planted)
+		end]]
     end
 end
 
