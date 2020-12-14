@@ -115,6 +115,8 @@ local prefab_post = {
 	"pumpkin_lantern",
 	"nightlight",
 	"armor_sanity",
+	"tophat",
+	"nightsword",
 }
 
 local stategraph_post = {
