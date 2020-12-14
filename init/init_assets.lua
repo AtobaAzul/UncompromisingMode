@@ -293,6 +293,7 @@ Assets = {
 	Asset("ANIM", "anim/armor_steelsweater.zip"),
 	Asset("ANIM", "anim/steelsweater.zip"),	
 	Asset("ANIM", "anim/hellhound.zip"),
+	Asset("ANIM", "anim/wilton.zip"),
 	
 	--Map Icons Start--
 	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),

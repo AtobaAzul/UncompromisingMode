@@ -123,7 +123,27 @@ end
 ----------------------------------------------------
 --RNE list below
 ----------------------------------------------------
-
+local function SkeleBros(player)
+local CHANNELER_SPAWN_RADIUS = 30
+    if player.components.health:IsDead() then
+        return
+    end
+	for i = 1,6 do
+	local x, y, z = player.Transform:GetWorldPosition()
+    local angle = math.random() * 2 * PI
+    x = x + CHANNELER_SPAWN_RADIUS * math.cos(angle)
+    z = z + CHANNELER_SPAWN_RADIUS * math.sin(angle)
+    if TheWorld.Map:IsAboveGroundAtPoint(x, 0, z) then
+        local skele = SpawnPrefab("rneskeleton")
+		if skele.components.combat ~= nil then
+		skele.components.combat:SuggestTarget(player)
+		end
+        skele.Transform:SetPosition(x, 0, z)
+	else
+	CHANNELER_SPAWN_RADIUS = CHANNELER_SPAWN_RADIUS/2
+    end
+	end
+end
 local function SpawnGnomes(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	if TheWorld.state.isnight then
@@ -1142,6 +1162,7 @@ AddWildEvent(SpawnShadowTeleporter,.3)
 AddWildEvent(StumpsAttack,.3)
 AddWildEvent(SpawnShadowTalker,.7)
 AddWildEvent(SpawnShadowBoomer,.2)
+AddWildEvent(SkeleBros,0.3)
 --Secondary Wild
 AddSecondaryWildEvent(SpawnBats,.4)
 AddSecondaryWildEvent(SpawnLightFlowersNFerns,.3)
@@ -1163,6 +1184,7 @@ AddBaseEvent(StumpsAttack,.3)
 AddBaseEvent(SpawnShadowTalker,.6)
 AddBaseEvent(SpawnShadowBoomer,.2)
 AddBaseEvent(SpawnGnomes,0.4)
+AddBaseEvent(SkeleBros,0.4)
 --Cave
 AddCaveEvent(SpawnBats,.5)
 AddCaveEvent(SpawnFissures,.2)
