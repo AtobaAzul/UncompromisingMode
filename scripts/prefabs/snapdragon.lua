@@ -17,7 +17,7 @@ SetSharedLootTable( 'snapdragon',
 {
     --{'whisperpod',             1.00},
     {'plantmeat',        1.00},
-    {'dragonfruit_seeds',        1.00},
+    {'pale_vomit',        3.00},
     {'petals',                 1.00},
 })
 
@@ -136,7 +136,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
 		local variance = delta * .4
 		inst.sg:GoToState("taunt")
 
-		if inst.foodItemsEatenCount >= 3 then
+		if inst.foodItemsEatenCount >= 2 then
 			
 			if not inst.podspawned then
 				inst.AnimState:SetMultColour(0.9, 0.8, 0.8, 1)
@@ -149,22 +149,12 @@ local function OnGetItemFromPlayer(inst, giver, item)
 				
 				LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
 			else
-				local item = SpawnPrefab("dragonfruit_seeds")
+				local item = SpawnPrefab("pale_vomit")
 					
 				LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
 			end
 			
 			inst.foodItemsEatenCount = 0
-		else
-			if math.random() >= 0.25 then
-				local item = SpawnPrefab("seeds")
-					
-				LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
-			else
-				local item = SpawnPrefab("dragonfruit_seeds")
-					
-				LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
-			end
 		end
 		
     end
@@ -178,14 +168,7 @@ local function OnGetItemFromPlayer_Buddy(inst, giver, item)
 		-- Increase the amount of food in the stomach.
 		inst.foodItemsEatenCount = inst.foodItemsEatenCount + 1
 		
-		inst.rewarditem =
-        (inst.seeds == "pumpkin_seeds" and "pumpkin") or 
-        (inst.seeds == "pomegranate_seeds" and "pomegranate") or 
-        (inst.seeds == "eggplant_seeds" and "eggplant") or 
-        (inst.seeds == "duriant_seeds" and "duriant") or 
-        (inst.seeds == "dragonfruit_seeds" and "dragonfruit") or 
-        (inst.seeds == "watermelon_seeds" and "watermelon") or 
-        (inst.seeds ~= nil and "seeds")
+		inst.rewarditem = inst.seeds.."_vomit"
 
 		local angle = math.random() * 2 * PI
 		local delta = 2 * PI / 3 --/ (numgold + numprops + 1) --purposely leave a random gap
@@ -193,32 +176,9 @@ local function OnGetItemFromPlayer_Buddy(inst, giver, item)
 		inst.sg:GoToState("taunt")
 		
 		if inst.foodItemsEatenCount >= 2 then
-			if inst.seeds == "seeds" then
-				local bonusitem = SpawnPrefab(weighted_random_choice(spawns))
-				LaunchItem(inst, bonusitem, GetRandomWithVariance(angle, variance))
-			else
-				local bonusitem = SpawnPrefab(inst.rewarditem)
-				LaunchItem(inst, bonusitem, GetRandomWithVariance(angle, variance))
-			end
+			local bonusitem = SpawnPrefab(inst.rewarditem)
+			LaunchItem(inst, bonusitem, GetRandomWithVariance(angle, variance))
 			inst.foodItemsEatenCount = 0
-		else
-			if inst.seeds == "seeds" then
-				if math.random() >= 0.75 then
-					local item = SpawnPrefab(weighted_random_choice(spawns))
-					LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
-				else
-					local item = SpawnPrefab(inst.seeds)
-					LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
-				end
-			else
-				if math.random() >= 0.75 then
-					local item = SpawnPrefab(inst.seeds)
-					LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
-				else
-					local item = SpawnPrefab("seeds")
-					LaunchItem(inst, item, GetRandomWithVariance(angle, variance))
-				end
-			end
 		end
     end
 end
@@ -273,6 +233,12 @@ local function ontimerdone(inst, data)
     if data.name == "podreset" then
 		inst.podspawned = false
 		inst.AnimState:SetMultColour(1, 1, 1, 1)
+    end
+end
+
+local function on_buddytimerdone(inst, data)
+    if data.name == "vomit_time" then
+        inst.vomit_time = true
     end
 end
 
@@ -471,7 +437,7 @@ local function buddy_fn()
     end
 	
 	if inst.seeds == nil then
-		inst.seeds = "seeds"
+		inst.seeds = "pale"
 	end
 	
     inst:AddComponent("named")
@@ -480,7 +446,7 @@ local function buddy_fn()
     inst:AddComponent("follower")
     inst.components.follower.canaccepttarget = false
 
-	inst.components.lootdropper:AddChanceLoot(inst.seeds, 1)
+	inst.components.lootdropper:AddChanceLoot((inst.seeds.."_vomit"), 1)
 	
 	inst:AddComponent("trader")
     inst.components.trader:SetAcceptTest(ShouldAcceptItem)
@@ -490,6 +456,27 @@ local function buddy_fn()
 	
     inst.components.locomotor.walkspeed = 2.77
     inst.components.locomotor:SetTriggersCreep(false)
+	
+	inst:AddComponent("playerprox")
+	inst.components.playerprox:SetDist(10,11)
+	inst.components.playerprox:SetOnPlayerNear(function(inst)
+		if inst.vomit_time ~= nil and inst.vomit_time then
+			
+		inst.rewarditem = inst.seeds.."_vomit"
+
+			local angle = math.random() * 2 * PI
+			local delta = 2 * PI / 3 --/ (numgold + numprops + 1) --purposely leave a random gap
+			local variance = delta * .4
+			inst.sg:GoToState("taunt")
+			
+			local bonusitem = SpawnPrefab(inst.rewarditem)
+			LaunchItem(inst, bonusitem, GetRandomWithVariance(angle, variance))
+		end
+	end)
+	
+	inst:AddComponent("timer")
+	inst.components.timer:StartTimer("vomit_time", 480)
+    inst:ListenForEvent("timerdone", on_buddytimerdone)
 
     return inst
 end

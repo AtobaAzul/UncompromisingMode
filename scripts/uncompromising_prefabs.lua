@@ -174,4 +174,5 @@ return {
 	"rat_hat",
 	"rat_whip",
 	"rneskeleton",
+	"snapdragon_fertilizer",
 }

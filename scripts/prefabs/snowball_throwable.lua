@@ -116,6 +116,14 @@ local function onstopfiremelt(inst)
     inst.components.perishable.frozenfiremult = false
 end
 
+local function onuseaswatersource(inst)
+    if inst.components.stackable:IsStack() then
+        inst.components.stackable:Get():Remove()
+    else
+        inst:Remove()
+    end
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -134,7 +142,9 @@ local function fn()
 	
     inst:AddTag("projectile")
 	inst:AddTag("weapon")
-    --inst:AddTag("frozen")
+    
+	inst:AddTag("frozen")
+    inst:AddTag("watersource")
 	
     MakeInventoryFloatable(inst, "med", 0.05, 0.65)
 
@@ -186,6 +196,11 @@ local function fn()
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/snowball_throwable.xml"
     inst.components.inventoryitem:SetOnPickupFn(onstopfiremelt)
+	
+	
+    inst:AddComponent("watersource")
+    inst.components.watersource.onusefn = onuseaswatersource
+    inst.components.watersource.override_fill_uses = 1
 	
     inst:AddComponent("inspectable")
 	

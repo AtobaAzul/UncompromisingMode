@@ -31,7 +31,7 @@ local function onmatured(inst)
 	snappy:DoTaskInTime(0, function(snappy) snappy.AnimState:OverrideSymbol("ear", "snapdragon_build_"..inst.planted or "snapdragon_build", "ear") end)
 	snappy:DoTaskInTime(0, function(snappy) snappy.AnimState:OverrideSymbol("face", "snapdragon_build_"..inst.planted or "snapdragon_build", "face") end)
 	snappy:DoTaskInTime(0, function(snappy) snappy.AnimState:OverrideSymbol("jaw", "snapdragon_build_"..inst.planted or "snapdragon_build", "jaw") end)
-	snappy.seeds = inst.planted or "seeds"
+	snappy.seeds = inst.planted or "pale"
 	
 	inst.components.workable:SetWorkAction(nil)
 
@@ -55,6 +55,40 @@ local function GetStatus(inst)
     return inst.growing and "GROWING" or "GENERIC"
 end
 
+local function Colors(color)
+	if color == "carrot_seeds" or color == "pumpkin_seeds" then
+		return "orange"
+	elseif color == "potato_seeds" or color == "eggplant_seeds" then
+		return "purple"
+	elseif color == "asparagus_seeds" or color == "corn_seeds" then
+		return "green"
+	elseif color == "dragonfruit_seeds" or  color == "pepper_seeds" then
+		if math.random() > 0.5 then
+			return "pink"
+		else
+			return "red"
+		end
+	elseif color == "durian_seeds" or color == "garlic_seeds" then
+		if math.random() > 0.5 then
+			return "pink"
+		else
+			return "yellow"
+		end
+	elseif color == "pomegranate_seeds" or color == "onion_seeds" then
+		if math.random() > 0.5 then
+			return "red"
+		else
+			return "yellow"
+		end
+	elseif color == "watermelon_seeds" then
+		return "pink"
+	elseif color == "tomato_seeds" then
+		return "yellow"
+	else
+		return "pale"
+	end
+end
+	
 --------------------------------------------------------------------------
 
 local function OnGetItemFromPlayer(inst, giver, item)
@@ -65,16 +99,30 @@ local function OnGetItemFromPlayer(inst, giver, item)
 		inst.growing = true
 		
 		--if item.prefab == ("watermelon_seeds" or "pomegranate_seeds" or "pumpkin_seeds" or "dragonfruit_seeds" or "eggplant_seeds" or "durian_seeds") then
-			inst.planted = item.prefab
+			--inst.planted = item.prefab
 			--[[local prefab = nil
 			prefab = item.components.plantable.product
 			inst.planted = prefab
 			inst.AnimState:SetBuild("snapdragon_build_"..inst.planted"_seeds")--]]
-			if (inst.planted =="watermelon_seeds") or (inst.planted =="pomegranate_seeds") or (inst.planted =="pumpkin_seeds") or (inst.planted =="dragonfruit_seeds") or (inst.planted =="eggplant_seeds") or (inst.planted =="durian_seeds") then
-			inst.AnimState:SetBuild("snapdragon_build_"..inst.planted)
+			inst.planted = Colors(item.prefab)
+				--[[item.prefab == ("carrot_seeds" or "pumpkin_seeds") and "orange" or
+				item.prefab == ("potato_seeds" or "eggplant_seeds") and "purple" or
+				item.prefab == ("asparagus_seeds" or "corn_seeds") and "green" or
+				item.prefab == ("dragonfruit_seeds" or "pepper_seeds") and (math.random() > 0.5 and "pink" or "red") or
+				item.prefab == ("durian_seeds" or "garlic_seeds") and (math.random() > 0.5 and "pink" or "yellow") or
+				item.prefab == ("pomegranate_seeds" or "onion_seeds") and (math.random() > 0.5 and "red" or "yellow") or
+				item.prefab == "watermelon_seeds" and "pink" or
+				item.prefab == "tomato_seeds" and "yellow" or 
+				item.prefab == "seeds" and "pale"]]
+				
+				
+			if inst.planted ~= nil then
+				inst.AnimState:SetBuild("snapdragon_build_"..inst.planted)
+				print(inst.planted)
 			else
-			inst.planted = "seeds"
-			inst.AnimState:SetBuild("snapdragon_build_"..inst.planted)
+				inst.planted = "pale"
+				inst.AnimState:SetBuild("snapdragon_build_"..inst.planted)
+				print(inst.planted)
 			end
 		--end
 		--[[else
