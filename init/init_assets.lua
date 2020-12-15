@@ -133,6 +133,7 @@ Assets = {
 	Asset("ANIM", "anim/slips_actions.zip"),
 	Asset("ANIM", "anim/slips_basic.zip"),
 	Asset("ANIM", "anim/slips_build.zip"),
+	Asset("ANIM", "anim/rat_whip.zip"),
 	Asset("ANIM", "anim/swap_rat_whip.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
@@ -287,11 +288,18 @@ Assets = {
 	Asset("ANIM", "anim/ancient_trepidation_arm.zip"),		
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_closed_lazy"),
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_lazy"),
+	
+	Asset("ATLAS", "images/inventoryimages/ancient_amulet_red.xml"),
+	Asset("IMAGE", "images/inventoryimages/ancient_amulet_red.tex"),
+	Asset("ATLAS", "images/inventoryimages/rat_whip.xml"),
+	Asset("IMAGE", "images/inventoryimages/rat_whip.tex"),
+	
 	Asset("ANIM", "anim/armor_steelsweater.zip"),
 	Asset("ANIM", "anim/steelsweater.zip"),	
 	Asset("ANIM", "anim/hellhound.zip"),
 	Asset("ANIM", "anim/wilton.zip"),
 	Asset("ANIM", "anim/torso_amulets_ancient.zip"),
+	Asset("ANIM", "anim/amulets_ancient.zip"),
 	
 	--Map Icons Start--
 	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),

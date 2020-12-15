@@ -123,6 +123,12 @@ GLOBAL.AllRecipes["slingshotammo_firecrackers"].sortkey = GLOBAL.AllRecipes["sli
 AddRecipe("watermelon_lantern", {Ingredient("watermelon", 1), Ingredient("fireflies", 1)}, RECIPETABS.LIGHT, TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/watermelon_lantern.xml", "watermelon_lantern.tex" )
 GLOBAL.AllRecipes["watermelon_lantern"].sortkey = GLOBAL.AllRecipes["pumpkin_lantern"].sortkey + 0.1
 
+AddRecipe("rat_whip",   {Ingredient("twigs", 3), Ingredient("rope", 1), Ingredient("rat_tail", 3, "images/inventoryimages/rat_tail.xml")}, GLOBAL.RECIPETABS.WAR, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/rat_whip.xml", "rat_whip.tex" )
+GLOBAL.AllRecipes["rat_whip"].sortkey = GLOBAL.AllRecipes["whip"].sortkey + .1
+
+Recipe("ancient_amulet_red", 	 {Ingredient("thulecite", 2), 		  Ingredient("nightmarefuel", 3),    Ingredient("redgem", 2)}, GLOBAL.RECIPETABS.ANCIENT, GLOBAL.TECH.ANCIENT_FOUR, nil, nil, true, nil, nil, "images/inventoryimages/ancient_amulet_red.xml", "ancient_amulet_red.tex" )
+GLOBAL.AllRecipes["ancient_amulet_red"].sortkey = GLOBAL.AllRecipes["orangeamulet"].sortkey - .1
+
 STRINGS.RECIPE_DESC.SLINGSHOTAMMO_FIRECRACKERS = "For the aspiring young menace."
 STRINGS.RECIPE_DESC.WATERMELON_LANTERN = "Juicy illumination."
 STRINGS.RECIPE_DESC.CRITTERLAB_REAL = "Cute pals to ruin the mood."

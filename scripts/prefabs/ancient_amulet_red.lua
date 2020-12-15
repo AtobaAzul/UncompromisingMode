@@ -19,7 +19,7 @@ local function LaunchProjectile(inst, value)
 		goo._caster = inst
 		goo.healthvalue = value / 4
 
-		Launch2(goo, inst, 5, 1, 3, 1)
+		Launch2(goo, inst, 4, 1, 3, 1)
 	end
 end
 
@@ -54,7 +54,14 @@ local function onunequip_blue(inst, owner)
     inst:RemoveEventCallback("attacked", inst.orbfn, owner)
 end
 
-local function ancient_red_amulet_fn(anim, tag, should_sink)
+local function OnHaunt(inst, haunter)
+	haunter:PushEvent("respawnfromghost", { source = inst })
+    haunter.components.inventory:Equip(inst)
+    haunter.sg:GoToState("amulet_rebirth")
+	inst:Remove()
+end
+
+local function fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -64,7 +71,7 @@ local function ancient_red_amulet_fn(anim, tag, should_sink)
     MakeInventoryPhysics(inst)
 
     inst.AnimState:SetBank("amulets")
-    inst.AnimState:SetBuild("amulets")
+    inst.AnimState:SetBuild("amulets_ancient")
     inst.AnimState:PlayAnimation("redamulet")
 
     inst:AddTag("resurrector")
@@ -87,6 +94,7 @@ local function ancient_red_amulet_fn(anim, tag, should_sink)
     inst.components.equippable.is_magic_dapperness = true
 
     inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/ancient_amulet_red.xml"
 	
     inst.components.equippable:SetOnEquip(onequip_blue)
     inst.components.equippable:SetOnUnequip(onunequip_blue)
@@ -97,9 +105,10 @@ local function ancient_red_amulet_fn(anim, tag, should_sink)
     inst.components.finiteuses:SetUses(TUNING.REDAMULET_USES)
 
     inst:AddComponent("hauntable")
+	inst.components.hauntable:SetOnHauntFn(OnHaunt)
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_INSTANT_REZ)
 
     return inst
 end
 
-return Prefab("ancient_amulet_red", ancient_red_amulet_fn, assets)
+return Prefab("ancient_amulet_red", fn, assets)
