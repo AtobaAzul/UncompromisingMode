@@ -48,8 +48,6 @@ Assets = {
 	Asset("IMAGE", "images/mushroom_slot.tex"),
 	Asset("ATLAS", "images/inventoryimages/critterlab_real.xml"),
 	Asset("IMAGE", "images/inventoryimages/critterlab_real.tex"),
-	Asset("ATLAS", "images/inventoryimages/bloomershot.xml"),
-	Asset("IMAGE", "images/inventoryimages/bloomershot.tex"),
 	Asset("ATLAS", "images/inventoryimages/screecher_trinket.xml"),
 	Asset("IMAGE", "images/inventoryimages/screecher_trinket.tex"),
 	Asset("ATLAS", "images/inventoryimages/watermelon_lantern.xml"),
@@ -114,7 +112,6 @@ Assets = {
 	Asset("ANIM", "anim/hat_shadowcrown.zip"),
 	Asset("ANIM", "anim/critterlab_broken.zip"),
 	Asset("ANIM", "anim/swap_nightstick_off.zip"),
-	Asset("ANIM", "anim/bloomershot.zip"),
 	Asset("ANIM", "anim/snapdragon.zip"),
 	Asset("ANIM", "anim/snapdragon_build.zip"),
 	Asset("ANIM", "anim/snapdragon_build_pale.zip"),
@@ -294,6 +291,7 @@ Assets = {
 	Asset("ANIM", "anim/steelsweater.zip"),	
 	Asset("ANIM", "anim/hellhound.zip"),
 	Asset("ANIM", "anim/wilton.zip"),
+	Asset("ANIM", "anim/torso_amulets_ancient.zip"),
 	
 	--Map Icons Start--
 	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),

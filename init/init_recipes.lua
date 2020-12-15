@@ -112,7 +112,6 @@ GLOBAL.AllRecipes["saltpack"].sortkey = GLOBAL.AllRecipes["sporepack"].sortkey +
 AddRecipe("air_conditioner", {Ingredient("shroom_skin",2),Ingredient("gears", 2),Ingredient("cutstone",4)}, GLOBAL.RECIPETABS.SCIENCE, GLOBAL.TECH.SCIENCE_TWO, "air_conditioner_placer", nil, nil, nil, nil, "images/inventoryimages/air_conditioner.xml", "air_conditioner.tex" )
 GLOBAL.AllRecipes["air_conditioner"].sortkey = GLOBAL.AllRecipes["firesuppressor"].sortkey + .1
 
-AddRecipe("bloomershot",   {Ingredient("livinglog", 1), Ingredient("nitre", 1), Ingredient("killerbee", 2)}, CUSTOM_RECIPETABS.NATURE, TECH.NONE, nil, nil, nil, nil, "plantkin", "images/inventoryimages/bloomershot.xml", "bloomershot.tex" )
 AddRecipe("honey_log",   {Ingredient("livinglog", 1), Ingredient("honey", 2)}, CUSTOM_RECIPETABS.NATURE, TECH.NONE, nil, nil, nil, nil, "plantkin", "images/inventoryimages/honey_log.xml", "honey_log.tex" )
 
 AddRecipe("bugzapper",   {Ingredient("torch", 1), Ingredient("transistor", 2), Ingredient("feather_robin", 2)}, GLOBAL.RECIPETABS.WAR, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/bugzapper.xml", "bugzapper.tex" )
@@ -141,5 +140,4 @@ STRINGS.RECIPE_DESC.SPOREPACK = "Unhygenic storage."
 STRINGS.RECIPE_DESC.AIR_CONDITIONER = "Condition the air."
 STRINGS.RECIPE_DESC.REVIVER = "Dead flesh revived to revive a dead friend."
 STRINGS.RECIPE_DESC.HONEY_LOG = "A log a day keeps the sickness at bay."
-STRINGS.RECIPE_DESC.BLOOMERSHOT = "Natural growth, with a helping hand."
 STRINGS.RECIPE_DESC.BUGZAPPER = "Bite back with electricity!"

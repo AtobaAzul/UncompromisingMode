@@ -132,7 +132,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.LUREPLAGUE_RAT = "He's trying to run off with me!"
 	DESCRIBE.MARSH_GRASS = "A bush."
 	DESCRIBE.CURSED_ANTLER = "Hard to miss with something this large!"
-	DESCRIBE.BLOOMERSHOT = "I'm not going to fall for this prank!"
 	DESCRIBE.BERNIEBOX = "I'm curious to see whats inside, I hope she opens it soon."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "The soul guardian!"

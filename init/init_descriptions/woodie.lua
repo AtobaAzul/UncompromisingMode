@@ -132,7 +132,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.LUREPLAGUE_RAT = "Not comin for kit this time, eh?"
 	DESCRIBE.MARSH_GRASS = "It's a bush, eh."
 	DESCRIBE.CURSED_ANTLER = "This'll last us forever!"
-	DESCRIBE.BLOOMERSHOT = "What's the point, eh?"
 	DESCRIBE.BERNIEBOX = "I'm not one for stuffed things."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "You can have the trees!!"

@@ -132,7 +132,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.LUREPLAGUE_RAT = "They're kinda cute when you get over the extra eyes."
 	DESCRIBE.MARSH_GRASS = "We could hide behind it, I guess?"
 	DESCRIBE.CURSED_ANTLER = "A memento of a story-worthy fight!"
-	DESCRIBE.BLOOMERSHOT = "No WAY am I injecting myself with THAT!"
 	DESCRIBE.BERNIEBOX = "That belongs to Willow, I fear what would happen if I touch it..."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "Wow! That could eat anything!"

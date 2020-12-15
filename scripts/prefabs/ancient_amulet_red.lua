@@ -28,7 +28,7 @@ local function OnCooldown(inst)
 end
 
 local function onequip_blue(inst, owner)
-    owner.AnimState:OverrideSymbol("swap_body", "torso_amulets", "redamulet")
+    owner.AnimState:OverrideSymbol("swap_body", "torso_amulets_ancient", "redamulet")
 
     inst.orbfn = function(attacked, data)
         if data and data.attacker and data.damage then

@@ -113,7 +113,6 @@ return {
 	"hoodedcanopy",
 	"hoodedforestturf",
 	"poopregenbuff",
-	"bloomershot",
 	"giant_tree",
 	"webbedcreature",
 	"widowsgrasp",
