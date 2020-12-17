@@ -178,7 +178,7 @@ local bozo =FindEntity(inst, 40,
                 return guy:HasTag("character")
             end
     end)
-if bozo.components.sanity ~= nil and bozo.components.sanity:GetPercent() < 0.5 and inst.enraged == false then
+if bozo ~= nil and bozo.components.sanity ~= nil and bozo.components.sanity:GetPercent() < 0.5 and inst.enraged == false then
 inst.sg:GoToState("anger")
 if inst.components.combat ~= nil then
 inst.components.combat:SuggestTarget(bozo)
@@ -234,9 +234,9 @@ local function fn(Sim)
     inst.components.lootdropper:SetChanceLootTable('ancient_trepidation')
     
 	
-	inst:AddTag("monster")
+	--inst:AddTag("monster")
     inst:AddTag("hostile") 
-	inst:AddTag("shadowcreature")
+	--inst:AddTag("shadowcreature")
     inst:AddTag("shadow")
     ------------------
     inst:AddComponent("health")

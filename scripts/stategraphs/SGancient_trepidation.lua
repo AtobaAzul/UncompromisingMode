@@ -1,9 +1,6 @@
 require("stategraphs/commonstates")
 
-local events = 
-{
-EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and inst.enraged == false then inst.sg:GoToState("anger") end end),
-}
+
 local function FinishExtendedSound(inst, soundid)
     inst.SoundEmitter:KillSound("sound_"..tostring(soundid))
     inst.sg.mem.soundcache[soundid] = nil
@@ -63,6 +60,9 @@ local events=
 {
     EventHandler("attacked", function(inst, data)
         if not inst.components.health:IsDead() then
+		if inst.enraged == false then
+		inst.sg:GoToState("anger")
+		end
             if inst.hasshield then
                 local shieldtype = PickShield(inst)
                 if shieldtype ~= nil then
