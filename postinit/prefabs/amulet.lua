@@ -145,7 +145,6 @@ local function healowner(inst, owner)
 			inst.task = nil
 		end
 		
-		inst:RemoveComponent("hauntable")
 		return
 	end
 	
@@ -190,28 +189,12 @@ local function nofuel_red(inst)
         inst.task:Cancel()
         inst.task = nil
     end
-	
-    inst:RemoveComponent("hauntable")
 end
 
 local function ontakefuel_red(inst)
     if inst.components.equippable:IsEquipped() then
 		if inst.task == nil then
 			inst.task = inst:DoPeriodicTask(10, healowner, nil, owner)
-		end
-	end
-	
-	if not inst.components.hauntable then
-		inst:AddComponent("hauntable")
-    end
-end
-
-local function OnInit(inst)
-	if inst ~= nil and inst.components.fueled ~= nil then
-		if inst.components.fueled.currentfuel == 0 then
-			if inst.components.hauntable ~= nil then
-				inst:RemoveComponent("hauntable")
-			end
 		end
 	end
 end
@@ -235,11 +218,25 @@ env.AddPrefabPostInit("amulet", function(inst)
         inst.components.equippable:SetOnUnequip(onunequip_red)
     end
 	
-    inst:DoTaskInTime(0, OnInit)
-
-    --inst._onownerequip = _onownerequip
+    inst:RemoveComponent("hauntable")
+	
 end)
 
+env.AddPlayerPostInit(function(inst)
+    
+    local function amulet_resurrect(inst)
+        for k, v in pairs(inst.components.inventory.equipslots) do
+            if v.prefab == "amulet" then
+                inst:DoTaskInTime(115/60, function(inst)
+                    inst:PushEvent("respawnfromghost", { source = v })
+                    v:DoTaskInTime(115/60, v.Remove)
+                end)
+            end
+        end
+    end
+
+    inst:ListenForEvent("death", amulet_resurrect)    
+end)
 -------Orange
 
 
