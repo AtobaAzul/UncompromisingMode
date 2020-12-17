@@ -45,6 +45,12 @@ local function EatFoodAction(inst)
 				item.components.edible and not 
 				inst.components.follower]]
         end)
+	
+    local time_since_eat = inst.components.eater:TimeSinceLastEating()
+    if time_since_eat ~= nil and time_since_eat <= TUNING.PIG_MIN_POOP_PERIOD then
+        return
+    end	
+		
     if target then
         local act = BufferedAction(inst, target, ACTIONS.EAT)
         act.validfn = function() return not (target.components.inventoryitem and target.components.inventoryitem:IsHeld()) end

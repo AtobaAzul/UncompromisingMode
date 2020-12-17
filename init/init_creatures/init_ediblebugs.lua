@@ -6,6 +6,8 @@ local EDIBLES =
 	"butterfly",
 	"moonbutterfly",
 	"aphid",
+	"fruitfly",
+	"lightflier",
 }
 
 local function AddEdibles(prefab)
