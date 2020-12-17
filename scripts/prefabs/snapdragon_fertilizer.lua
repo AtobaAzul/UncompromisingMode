@@ -30,11 +30,9 @@ local function MakeVomit(name, color, x, y, z)
 
 		MakeInventoryPhysics(inst)
 
-		inst.AnimState:SetBank("glommer_fuel")
-		inst.AnimState:SetBuild("glommer_fuel")
+		inst.AnimState:SetBank("snapdragon_fertilizer")
+		inst.AnimState:SetBuild("snapdragon_fertilizer")
 		inst.AnimState:PlayAnimation("idle_"..color)
-		
-		inst.AnimState:SetMultColour(x, y, z, 1)
 
 		MakeInventoryFloatable(inst)
 		MakeDeployableFertilizerPristine(inst)
