@@ -154,6 +154,42 @@ AddPrefabPostInit("bunnyman", function (inst)
     end
 end)
 
+local rabbitloot = { "smallmeat" }
+
+local function SetRabbitLoot(lootdropper)
+    if lootdropper.loot ~= rabbitloot and not lootdropper.inst._fixedloot then
+        lootdropper:SetLoot(rabbitloot)
+    end
+end
+
+local function SetBeardlingLoot(lootdropper)
+    if lootdropper.loot == rabbitloot and not lootdropper.inst._fixedloot then
+        lootdropper:SetLoot(nil)
+        lootdropper:AddRandomLoot("beardhair", .5)
+        lootdropper:AddRandomLoot("monstersmallmeat", 1)
+        lootdropper:AddRandomLoot("nightmarefuel", 1)
+        lootdropper.numrandomloot = 1
+    end
+end
+
+local function LootSetupFunction_jack(lootdropper)
+    if lootdropper.inst ~= nil then 
+		local guy = lootdropper.inst.causeofdeath
+		if IsCrazyGuy(guy ~= nil and guy.components.follower ~= nil and guy.components.follower.leader or guy) then
+			SetBeardlingLoot(lootdropper)
+		else
+			SetRabbitLoot(lootdropper)
+		end
+	end
+end
+
+AddPrefabPostInit("rabbit", LootSetupFunction_jack, IsCrazyGuy, SetBeardLord)
+AddPrefabPostInit("rabbit", function (inst)
+    if inst ~= nil and inst.components.lootdropper ~= nil then 
+        inst.components.lootdropper:SetLootSetupFn(LootSetupFunction_jack)
+        LootSetupFunction_jack(inst.components.lootdropper)
+    end
+end)
 -----------------------------------------------------------------
 -- Bunny huts respawn bunnies not as often
 -----------------------------------------------------------------

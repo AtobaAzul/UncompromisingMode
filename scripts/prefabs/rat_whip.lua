@@ -66,7 +66,7 @@ local function fn()
     MakeInventoryPhysics(inst)
 
     inst.AnimState:SetBank("whip")
-    inst.AnimState:SetBuild("whip")
+    inst.AnimState:SetBuild("rat_whip")
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("whip")
@@ -95,6 +95,7 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/rat_whip.xml"
 
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)

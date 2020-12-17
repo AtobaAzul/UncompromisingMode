@@ -132,7 +132,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.LUREPLAGUE_RAT = "It appears the lureplant is acting as a parasite to the rodentia kleptomanis, is it still alive?"
 	DESCRIBE.MARSH_GRASS = "A nondescript bush."
 	DESCRIBE.CURSED_ANTLER = "It seems to be extraordinarily durable as a weapon."
-	DESCRIBE.BLOOMERSHOT = "I don't understand that thing at all."
 	DESCRIBE.BERNIEBOX = "Toys never came in packaging like this when I was a kid."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "A solidary predator. It appears to be near the top of the food chain."

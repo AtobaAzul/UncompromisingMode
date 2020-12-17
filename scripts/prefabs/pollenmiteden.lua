@@ -290,15 +290,15 @@ local function OnUnFreeze(inst)
 end
 
 local function GetSmallGrowTime(inst)
-    return 10 + math.random()
+    return 15 + math.random()
 end
 
 local function GetMedGrowTime(inst)
-    return 15 + math.random()
+    return 20 + math.random()
 end
 
 local function GetLargeGrowTime(inst)
-    return 15 + math.random()
+    return 25 + math.random()
 end
 
 local function OnEntityWake(inst)
@@ -423,12 +423,12 @@ local function MakePollenmiteDenFn(den_level)
         inst:AddComponent("childspawner")
         inst.components.childspawner.childname = "pollenmites"
         inst.components.childspawner:SetRegenPeriod(TUNING.SPIDERDEN_REGEN_TIME / 3)
-        inst.components.childspawner:SetSpawnPeriod(TUNING.SPIDERDEN_RELEASE_TIME * 2)
+        inst.components.childspawner:SetSpawnPeriod(TUNING.SPIDERDEN_RELEASE_TIME)
         inst.components.childspawner.allowboats = true
 		inst.components.childspawner:StartSpawning()
         --inst.components.childspawner:SetMaxChildren(TUNING.SPIDERDEN_SPIDERS[stage])
         --inst.components.childspawner:ScheduleNextSpawn(0)
-        inst:ListenForEvent("creepactivate", SpawnInvestigators)
+        --inst:ListenForEvent("creepactivate", SpawnInvestigators)
 
         ---------------------
         inst:AddComponent("lootdropper")

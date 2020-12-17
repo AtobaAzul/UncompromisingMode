@@ -131,7 +131,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.LUREPLAGUE_RAT = "Actual demons wrought to topple me!"
 	DESCRIBE.MARSH_GRASS = "I have nothing to say about this."
 	DESCRIBE.CURSED_ANTLER = "Life doesn't wear it down. I envy it."
-	DESCRIBE.BLOOMERSHOT = "I'm already in pain, I don't need any more."
 	DESCRIBE.BERNIEBOX = "Toys are for kids."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "She could eat me in a single bite."

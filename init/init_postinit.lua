@@ -10,8 +10,6 @@ local component_post = {
 	--"hunter",
 	"kramped",
 	"explosiveresist",
-	"fertilizer",
-	"healer",
 	"crop",
 	"wildfires",
 	--"beargerspawner",
@@ -107,7 +105,6 @@ local prefab_post = {
 	"wobster",
 	"hambat",
 	"townportal",
-	"compostwrap",
 	"trinkets", --This is for the grave mound cc trinkets
 	"moonbase",
 	"koalas",

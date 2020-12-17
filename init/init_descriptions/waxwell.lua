@@ -133,7 +133,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.LUREPLAGUE_RAT = "This isn't right, eyeplants, on rats? Is this your doing Charlie?"
 	DESCRIBE.MARSH_GRASS = "I should have let them in, this place is a real drab."
 	DESCRIBE.CURSED_ANTLER = "You expect me to carry this?!"
-	DESCRIBE.BLOOMERSHOT = "I don't see any use for this."
 	DESCRIBE.BERNIEBOX = "Great power lies within."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "I want to stay FAR away from her."

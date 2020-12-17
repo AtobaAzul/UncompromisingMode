@@ -132,7 +132,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.LUREPLAGUE_RAT = "I prefered you when you had fewer eyes!"
 	DESCRIBE.MARSH_GRASS = "Look, a bush!"
 	DESCRIBE.CURSED_ANTLER = "It'll never punch out on 'ya."
-	DESCRIBE.BLOOMERSHOT = "I can't say I see the point. Oh, wait, hah!"
 	DESCRIBE.BERNIEBOX = "If it ain't tools, I ain't interested."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "I'll, uh, stay over here."

@@ -131,7 +131,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.LUREPLAGUE_RAT = "Hey there buddy, nice eyes!"
 	DESCRIBE.MARSH_GRASS = "A bush."
 	DESCRIBE.CURSED_ANTLER = "Woah, look at how big it is!"
-	DESCRIBE.BLOOMERSHOT = "Hey little guy, you're trapped too huh?."
 	DESCRIBE.BERNIEBOX = "I want to open it, but it doesn't belong to us."
 	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
 	DESCRIBE.HOODEDWIDOW = "We're a spider too!! Why are you attacking us?!"

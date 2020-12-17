@@ -850,14 +850,12 @@ local function MoonTear(player)
 	end
 end
 
-local function lootset_rnefn(lootdropper)
-    local loot = {}
-	
-	for i = 1, math.random(2, 3) do
-		table.insert(loot, "nightmarefuel")
+local function DropRneFuel(piece)
+	if piece.components.lootdropper ~= nil then
+		piece.components.lootdropper:SpawnLootPrefab("nightmarefuel")
+		piece.components.lootdropper:SpawnLootPrefab("nightmarefuel")
+		piece.components.lootdropper:SpawnLootPrefab("nightmarefuel")
 	end
-
-    lootdropper:SetLoot(loot)
 end
 
 local function ChessPiece(player)
@@ -875,22 +873,22 @@ local function ChessPiece(player)
 					piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
 					piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
 					piece:DoTaskInTime(0, function(piece) piece:ListenForEvent("levelup", nil) end)--, piece.OnLevelUp)
+					piece:DoTaskInTime(0, function(piece) piece:ListenForEvent("death", DropRneFuel) end)--, piece.OnLevelUp)
 					
-					piece.components.lootdropper:SetLootSetupFn(lootset_rnefn)
 				elseif chesscheck >= 0.33 and chesscheck < 0.66 then
 					local piece = SpawnPrefab("shadow_rook")
 					piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
 					piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
 					piece:DoTaskInTime(0, function(piece) piece:ListenForEvent("levelup", nil) end)--, piece.OnLevelUp)
+					piece:DoTaskInTime(0, function(piece) piece:ListenForEvent("death", DropRneFuel) end)--, piece.OnLevelUp)
 					
-					piece.components.lootdropper:SetLootSetupFn(lootset_rnefn)
 				else
 					local piece = SpawnPrefab("shadow_knight")
 					piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
 					piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
 					piece:DoTaskInTime(0, function(piece) piece:ListenForEvent("levelup", nil) end)
+					piece:DoTaskInTime(0, function(piece) piece:ListenForEvent("death", DropRneFuel) end)--, piece.OnLevelUp)
 					
-					piece.components.lootdropper:SetLootSetupFn(lootset_rnefn)
 				end
 			end)
 		end
