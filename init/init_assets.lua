@@ -277,7 +277,7 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/snowcone.tex"),
 	Asset("ANIM", "anim/koalefant_scare.zip"),
 	Asset("ANIM", "anim/koalefant_paw.zip"),
-	Asset("ANIM", "anim/hellhound_scream.zip"),
+	Asset("ANIM", "anim/magmaanims.zip"),
 	Asset("ANIM", "anim/ancient_trepidation.zip"),
 	Asset("ANIM", "anim/ds_pig_charge.zip"),
 	Asset("ANIM", "anim/ds_pig_uppercut.zip"),
@@ -291,9 +291,9 @@ Assets = {
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_closed_lazy"),
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_lazy"),
 	Asset("ANIM", "anim/armor_steelsweater.zip"),
-	Asset("ANIM", "anim/steelsweater.zip"),	
-	Asset("ANIM", "anim/hellhound.zip"),
+	Asset("ANIM", "anim/steelsweater.zip"),
 	Asset("ANIM", "anim/wilton.zip"),
+	Asset("ANIM", "anim/magmahound.zip"),
 	
 	--Map Icons Start--
 	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),

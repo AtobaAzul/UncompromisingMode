@@ -64,7 +64,7 @@ local events =
     --Clay hounds
     EventHandler("becomestatue", function(inst)
         if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) then
-            inst.sg:GoToState("transformstatue")
+            inst.sg:GoToState("taunt")
         end
     end),
 }
@@ -148,6 +148,7 @@ local states =
 
         onenter = function(inst)
             inst.Physics:Stop()
+			ShowEyeFX(inst)
             inst.AnimState:PlayAnimation("scared_pre")
         end,
 
@@ -163,7 +164,8 @@ local states =
         onenter = function(inst)
             inst.SoundEmitter:PlaySound(inst.sounds.pant)
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("scared_loop", true)
+			ShowEyeFX(inst)
+            inst.AnimState:PlayAnimation("burningup", true)
 			inst:Charge()
 
             inst.sg:SetTimeout(4+math.random())
@@ -201,7 +203,7 @@ local states =
             inst.Physics:Stop()
             inst.components.combat:StartAttack()
             inst.AnimState:PlayAnimation("atk_pre")
-            inst.AnimState:PushAnimation("atk", false)
+            inst.AnimState:PushAnimation("atk_magma", false)
         end,
 
         timeline =
@@ -225,7 +227,7 @@ local states =
             inst.Physics:Stop()
             inst.components.combat:StartAttack()
             inst.AnimState:PlayAnimation("atk_pre")
-            inst.AnimState:PushAnimation("atk", false)
+            inst.AnimState:PushAnimation("atk_magma", false)
         end,
 
         timeline =
@@ -245,7 +247,7 @@ local states =
 
         onenter = function(inst)
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("hit")
+            inst.AnimState:PlayAnimation("magmahit")
         end,
 
         events =
@@ -276,13 +278,15 @@ local states =
         tags = { "busy" },
 
         onenter = function(inst, norepeat)
-            if inst:HasTag("clay") then
-                inst.sg:GoToState("howl", norepeat and -1 or 0)
-            else
+            --if inst:HasTag("clay") then
+            --    inst.sg:GoToState("howl", norepeat and -1 or 0)
+            --else
+
+				ShowEyeFX(inst)
                 inst.Physics:Stop()
                 inst.AnimState:PlayAnimation("taunt")
                 inst.sg.statemem.norepeat = norepeat
-            end
+            --end
         end,
 
         timeline =
@@ -308,7 +312,7 @@ local states =
         tags = { "attack", "busy", "howling" },
 
         onenter = function(inst, target)
-			
+			ShowEyeFX(inst)
 			inst.foogley = inst.foogley + 1 or 0
 			
             if not target then
@@ -320,7 +324,7 @@ local states =
             end
 			
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("hellhound_scream")
+            inst.AnimState:PlayAnimation("belch")
         end,
 
         timeline =
@@ -390,9 +394,9 @@ local states =
             if reanimating then
                 inst.AnimState:Pause()
             else
-                inst.AnimState:PlayAnimation("death")
+                inst.AnimState:PlayAnimation("magmadeath")
 				if inst.components.amphibiouscreature ~= nil and inst.components.amphibiouscreature.in_water then
-		            inst.AnimState:PushAnimation("death_idle", true)
+		            --inst.AnimState:PushAnimation("death_idle", true)
 				end			
             end
             inst.Physics:Stop()
@@ -461,7 +465,7 @@ local states =
             inst.components.locomotor:Stop()
             inst:ClearBufferedAction()
             inst.AnimState:PlayAnimation("atk_pre")
-            inst.AnimState:PushAnimation("atk", false)
+            inst.AnimState:PushAnimation("atk_magma", false)
         end,
 
         timeline =

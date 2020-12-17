@@ -469,8 +469,8 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
         inst:AddTag(tag)
 
         if tag == "clay" then
-            inst._eyeflames = net_bool(inst.GUID, "clayhound._eyeflames", "eyeflamesdirty")
-            inst:ListenForEvent("eyeflamesdirty", OnEyeFlamesDirty)
+            --inst._eyeflames = net_bool(inst.GUID, "magmahound._eyeflames", "eyeflamesdirty")   Eye flame no work :(
+            --inst:ListenForEvent("eyeflamesdirty", OnEyeFlamesDirty)
         end
     end
 
@@ -549,7 +549,7 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
     inst.components.inspectable.getstatus = GetStatus
 
     if tag == "clay" then
-        inst.sg:GoToState("statue")
+        --inst.sg:GoToState("statue")
 
         inst:AddComponent("hauntable")
         inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
@@ -687,7 +687,7 @@ local function ShootProjectile(inst, target)
 end
 
 local function fnmagma()
-    local inst = fncommon("hound", "hellhound", nil, nil, nil, {amphibious = true})
+    local inst = fncommon("clayhound", "magmahound", nil, nil, "clay", {amphibious = true})
 
     if not TheWorld.ismastersim then
         return inst
@@ -695,7 +695,7 @@ local function fnmagma()
 	
 	
     inst:SetStateGraph("SGmagmahound")
-
+	inst.sg:GoToState("taunt")
     --MakeMediumFreezableCharacter(inst, "hound_body") No freeze bc haha FIRE
 	
     inst:AddComponent("timer")
