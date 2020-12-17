@@ -97,7 +97,7 @@ GLOBAL.AllRecipes["reviver"].sortkey = GLOBAL.AllRecipes["healingsalve"].sortkey
 AddRecipe("gasmask", {Ingredient("goose_feather", 10),Ingredient("red_cap", 2),Ingredient("pigskin",2)}, GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/gasmask.xml", "gasmask.tex" )
 GLOBAL.AllRecipes["gasmask"].sortkey = GLOBAL.AllRecipes["beehat"].sortkey + .1
 
-AddRecipe("plaguemask", {Ingredient("malbatross_beak", 1),Ingredient("red_cap", 2),Ingredient("rat_tail",4, "images/inventoryimages/rat_tail.xml")}, GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/plaguemask.xml", "plaguemask.tex" )
+AddRecipe("plaguemask", {Ingredient("gasmask", 1),Ingredient("red_cap", 2),Ingredient("rat_tail",4, "images/inventoryimages/rat_tail.xml")}, GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/plaguemask.xml", "plaguemask.tex" )
 GLOBAL.AllRecipes["plaguemask"].sortkey = GLOBAL.AllRecipes["gasmask"].sortkey + .1
 
 AddRecipe("shroom_skin", {Ingredient("shroom_skin_fragment",4, "images/inventoryimages/shroom_skin_fragment.xml"),Ingredient("froglegs",2)}, GLOBAL.RECIPETABS.REFINE, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil)--, "images/inventoryimages/plaguemask.xml", "plaguemask.tex" )
