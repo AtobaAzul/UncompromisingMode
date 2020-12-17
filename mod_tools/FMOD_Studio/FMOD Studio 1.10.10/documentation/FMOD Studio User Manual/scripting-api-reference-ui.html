@@ -1,0 +1,253 @@
+<html>
+<head>
+<title>Scripting API Reference | UI</title>
+<link rel="stylesheet" href="style/docs.css">
+<link rel="stylesheet" href="style/code_highlight.css">
+</head>
+<body>
+<div class="docs-body">
+<div class="manual-toc">
+<p>FMOD Studio User Manual 1.10</p>
+<ul>
+<li><a href="welcome-to-fmod-studio.html">Welcome to FMOD Studio</a></li>
+<li><a href="fmod-studio-concepts.html">FMOD Studio Concepts</a></li>
+<li><a href="organizing-the-project.html">Organizing the Project</a></li>
+<li><a href="authoring-events.html">Authoring Events</a></li>
+<li><a href="working-with-instruments.html">Working with Instruments</a></li>
+<li><a href="managing-assets.html">Managing Assets</a></li>
+<li><a href="getting-events-into-your-game.html">Getting Events into Your Game</a></li>
+<li><a href="mixing.html">Mixing</a></li>
+<li><a href="profiling.html">Profiling</a></li>
+<li><a href="editing-during-live-update.html">Editing During Live Update</a></li>
+<li><a href="supporting-downloadable-and-user-generated-content.html">Supporting Downloadable and User-generated Content</a></li>
+<li><a href="advanced-topics.html">Advanced Topics</a></li>
+<li><a href="event-macro-controls-reference.html">Event Macro Controls Reference</a></li>
+<li><a href="plugin-reference.html">Plug-in Reference</a></li>
+<li><a href="modulator-reference.html">Modulator Reference</a></li>
+<li><a href="built-in-parameters-reference.html">Built-In Parameters Reference</a></li>
+<li><a href="scripting-terminal-reference.html">Scripting</a></li>
+<li class="manual-current-chapter manual-inactive-chapter"><a href="scripting-api-reference.html">Scripting API Reference</a><ul class="subchapters"><li><a href="scripting-api-reference-globals.html">Globals</a></li><li><a href="scripting-api-reference-menu.html">Menu</a></li><li><a href="scripting-api-reference-project.html">Project</a></li><li><a href="scripting-api-reference-system.html">System</a></li><li class="manual-current-chapter manual-active-chapter"><a href="scripting-api-reference-ui.html">UI</a></li><li><a href="scripting-api-reference-window.html">Window</a></li></ul></li>
+<li><a href="keyboard-shortcut-reference.html">Keyboard Shortcut Reference</a></li>
+<li><a href="glossary.html">Glossary</a></li>
+<li><a href="appendix-a-celeste.html">Appendix: Celeste Getting Started Guide</a></li>
+</ul>
+</div>
+<div class="manual-content">
+<h1>18. Scripting API Reference | UI</h1>
+<div class="toc">
+<ul>
+<li><a href="#module-ui">Module: UI</a><ul>
+<li><a href="#uishowmodaldialogdescription">ui.showModalDialog(description)</a></li>
+<li><a href="#uishowmodelessdialogdescription">ui.showModelessDialog(description)</a></li>
+<li><a href="#uiwidgettype">ui.widgetType</a></li>
+<li><a href="#uilayouttype">ui.layoutType</a></li>
+<li><a href="#uialignment">ui.alignment</a></li>
+<li><a href="#uisizepolicy">ui.sizePolicy</a></li>
+<li><a href="#uiorientation">ui.orientation</a></li>
+<li><a href="#uiechomode">ui.echoMode</a></li>
+<li><a href="#uipathtype">ui.pathType</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="module-ui"><a href="#module-ui">Module: UI</a></h2>
+<p>The <code>studio.ui</code> module allows you to create user interfaces.</p>
+<h3 id="uishowmodaldialogdescription"><a href="#uishowmodaldialogdescription">ui.showModalDialog(description)</a></h3>
+<p>Displays a dialog window. The function returns once the dialog has been closed. </p>
+<p>See <a href="#uishowmodelessdialogdescription">ui.showModelessDialog(description)</a> for further information about the widget <code>description</code> argument.</p>
+<h3 id="uishowmodelessdialogdescription"><a href="#uishowmodelessdialogdescription">ui.showModelessDialog(description)</a></h3>
+<p>Displays a dialog window. The function returns once the dialog is shown. </p>
+<p>The layout of the dialog is based on a widget <code>description</code> object, which contains the following attributes:</p>
+<ul>
+<li><code>widgetType</code>: An <a href="#uiwidgettype">studio.ui.widgetType</a>. A required attribute.</li>
+<li><code>widgetId</code>: A <code>string</code> used to reference this widget. Immutable.</li>
+<li><code>isVisible</code>: A <code>Boolean</code> which sets widget visiblity.</li>
+<li><code>isEnabled</code>:  A <code>Boolean</code> which sets whether a widget is interactive.</li>
+<li><code>minimumWidth</code>: The minimum width in pixels for a widget (<code>number</code>).</li>
+<li><code>minimumHeight</code>: The minimum height in pixels for a widget (<code>number</code>).</li>
+<li><code>sizePolicy</code>: An <a href="#uisizepolicy">studio.ui.sizePolicy</a>.</li>
+<li><code>onConstructed</code>: A <code>Function</code> which is called after the widget is constructed.</li>
+<li><code>onTimerEvent(timerId)</code>: A callback <code>Function</code>. This will be called periodically after calling <code>startTimer()</code> on a widget. The <code>timerId</code> matches a corresponding <code>timerId</code> returned by <code>startTimer()</code>.</li>
+</ul>
+<p>Applicable to the root widget description in a dialog:</p>
+<ul>
+<li><code>windowTitle</code>: A <code>string</code> for the window title.</li>
+<li><code>windowWidth</code>: Width of the window (<code>number</code>).</li>
+<li><code>windowHeight</code>: Height of the window (<code>number</code>).</li>
+<li><code>onClose</code>: A <code>Function</code> which is called as the widget is destroyed.</li>
+</ul>
+<p>Applicable to <code>widgetType.Layout</code>:</p>
+<ul>
+<li><code>layout</code>: An <a href="#uilayouttype">studio.ui.layoutType</a>. A required attribute.</li>
+<li><code>items</code>: An <code>Array</code> of deck widget descriptions to nest in this layout.</li>
+<li><code>contentsMargins</code>: Describes the margins around a layout. An <code>Object</code> with the format <code>{ left:[number], top:[number], right:[number], bottom:[number] }</code>.</li>
+<li><code>spacing</code>: Spacing between items in pixels (<code>number</code>).</li>
+</ul>
+<p>Applicable to items within a <code>layoutType.HBoxLayout</code> or <code>layoutType.VBoxLayout</code>:</p>
+<ul>
+<li><code>stretchFactor</code>: Determines how much space an item consumes relative to its siblings (<code>number</code>). Immutable.</li>
+<li><code>alignment</code>: A <a href="#uialignment">studio.ui.alignment</a>. Immutable.</li>
+</ul>
+<p>Applicable to items within a <code>layoutType.GridLayout</code>:</p>
+<ul>
+<li><code>row</code>: Row index in grid (<code>number</code>). Immutable.</li>
+<li><code>column</code>: Column index in grid (<code>number</code>). Immutable.</li>
+<li><code>rowSpan</code>: <code>number</code> of rows for item to span. Immutable.</li>
+<li><code>columnSpan</code>: <code>number</code> of columns for item to span. Immutable.</li>
+<li><code>alignment</code>: A <a href="#uialignment">studio.ui.alignment</a>. Immutable.</li>
+</ul>
+<p>Applicable to <code>widgetType.Label</code>:</p>
+<ul>
+<li><code>text</code>: A <code>string</code>.</li>
+<li><code>wordWrap</code>: A <code>boolean</code>.</li>
+</ul>
+<p>Applicable to <code>widgetType.PushButton</code>:</p>
+<ul>
+<li><code>text</code>: A <code>string</code>.</li>
+<li><code>onClicked</code>: A callback <code>Function</code>.</li>
+</ul>
+<p>Applicable to <code>widgetType.LineEdit</code>:</p>
+<ul>
+<li><code>text</code>: A <code>string</code>.</li>
+<li><code>isReadOnly</code>: A <code>bool</code>.</li>
+<li><code>echoMode</code>: A <a href="#uiechomode">studio.ui.echoMode</a>.</li>
+<li><code>onTextEdited</code>: A callback <code>Function</code>.</li>
+<li><code>onEditingFinished</code>: A callback <code>Function</code>.</li>
+</ul>
+<p>Applicable to <code>widgetType.TextEdit</code>:</p>
+<ul>
+<li><code>text</code>: The contents of the text edit, as plain text <code>string</code>. Alternatively, use the <code>html</code> attribute to specify HTML formatted text.</li>
+<li><code>html</code>: The contents of the text edit, as a HTML formatted <code>string</code>. This can be used instead of <code>text</code>.</li>
+<li><code>isReadOnly</code>: A <code>boolean</code>.</li>
+</ul>
+<p>Applicable to <code>widgetType.ComboBox</code>:</p>
+<ul>
+<li><code>items</code>: An array of objects with the format <code>{ text:[string], userData:[]}</code>. Write-only.</li>
+<li><code>currentIndex</code>: A <code>number</code>.</li>
+<li><code>currentText</code>: A <code>string</code>. Read-only.</li>
+<li><code>currentUserData</code>: Read-only.</li>
+<li><code>onCurrentIndexChanged</code>: A callback <code>Function</code>.</li>
+</ul>
+<p>Applicable to <code>widgetType.CheckBox</code>:</p>
+<ul>
+<li><code>text</code>: A <code>string</code>.</li>
+<li><code>isChecked</code>: A <code>boolean</code>.</li>
+<li><code>onToggled</code>: A callback <code>Function</code>.</li>
+</ul>
+<p>Applicable to <code>widgetType.Slider</code>:</p>
+<ul>
+<li><code>orientation</code>: A <a href="#uiorientation">studio.ui.orientation</a>.</li>
+<li><code>value</code>: A <code>number</code>.</li>
+<li><code>range</code>: An object with the format <code>{ minimum:[int], maximum:[int] }</code>.</li>
+<li><code>onValueChanged</code>: A callback <code>Function</code>.</li>
+</ul>
+<p>Applicable to <code>widgetType.SpinBox</code>:</p>
+<ul>
+<li><code>value</code>: A <code>number</code>.</li>
+<li><code>range</code>: An object with the format <code>{ minimum:[int], maximum:[int] }</code>.</li>
+<li><code>onValueChanged</code>: A callback <code>Function</code>.</li>
+</ul>
+<p>Applicable to <code>widgetType.PathLineEdit</code>:</p>
+<ul>
+<li><code>text</code>: A <code>string</code>.</li>
+<li><code>label</code>: A <code>string</code>. Immutable.</li>
+<li><code>caption</code>: A <code>string</code>. Immutable.</li>
+<li><code>pathType</code>: A <a href="#uipathtype">studio.ui.pathType</a>. Immutable.</li>
+<li><code>onEditingFinished</code>: A callback <code>Function</code>.</li>
+</ul>
+<p>Note that all attributes are optional except for those marked as required.</p>
+<p>Widget callbacks functions are called with the <code>this</code> value set to the corresponding widget. You can dynamically get and set the various attributes available in the widget description using the corresponding 'getter' and 'setter' (e.g. calling <code>widget.setVisible()</code> will modify the <code>widget.isVisible()</code> attribute). Attributes marked as immutable do not have a 'setter' function. For example:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">widgetType</span><span class="o">:</span> <span class="nx">ui</span><span class="p">.</span><span class="nx">widgetType</span><span class="p">.</span><span class="nx">PushButton</span><span class="p">,</span>
+    <span class="nx">text</span><span class="o">:</span> <span class="s2">&quot;Show Alert&quot;</span><span class="p">,</span>
+    <span class="nx">onClicked</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// displays an alert with the text of the button that was clicked</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">&quot;The button&#39;s text is: &quot;</span><span class="p">;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">text</span><span class="p">());</span>
+    <span class="p">},</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>From the context of a callback, a number of additional member functions are available for widgets:</p>
+<ul>
+<li><code>findWidget(widgetId)</code>: Returns a sibling widget with the matching <code>widgetId</code>.</li>
+<li><code>closeDialog()</code>: Closes the parent window.</li>
+<li><code>startTimer(intervalInMs)</code>: Starts a timer with the <code>intervalInMs</code> and returns a <code>timerId</code>. Once a timer is started, the <code>onTimerEvent()</code> function of the widget description will be called periodically. The <code>timerId</code> can be used to differentiate between timers when multiple timers have been started.</li>
+<li><code>stopTimer(timerId)</code>: Stops a timer with the given <code>timerId</code>.</li>
+</ul>
+<p>For an in-depth example of writing your own widgets, see the <code>EngineDesigner.js</code> example in the Scripts folder of the FMOD Studio install directory.</p>
+<h3 id="uiwidgettype"><a href="#uiwidgettype">ui.widgetType</a></h3>
+<p>An enumeration corresponding to different widget types available within a UI widget description. Possible values are:</p>
+<ul>
+<li><code>Spacer</code>: A blank widget.</li>
+<li><code>Layout</code>: A container widget. Must specify a corresponding layout type.</li>
+<li><code>Label</code>: A text label.</li>
+<li><code>PushButton</code>: A clickable button.</li>
+<li><code>LineEdit</code>: A single-line text entry widget.</li>
+<li><code>TextEdit</code>: A multi-line text entry widget. Supports plain text and HTML. </li>
+<li><code>ComboBox</code>: A drop down. </li>
+<li><code>CheckBox</code>: A boolean check box with a text label. </li>
+<li><code>Slider</code>: A slider that with an integer range. </li>
+<li><code>SpinBox</code>: A number box with a integer range. </li>
+<li><code>PathLineEdit</code>: A convenience widget providing a single-line text entry widget and a "Browse" push button to allow user to input a file or a directory path.</li>
+</ul>
+<h3 id="uilayouttype"><a href="#uilayouttype">ui.layoutType</a></h3>
+<p>An enumeration corresponding to different layout types available within a UI widget description of <code>widgetType.Layout</code>. Possible values are:</p>
+<ul>
+<li><code>HBoxLayout</code>: A horizontal layout. Items are spaced evenly, unless a <code>stretchFactor</code> is specified. </li>
+<li><code>VBoxLayout</code>: A vertical layout. Items are spaced evenly, unless a <code>stretchFactor</code> is specified. </li>
+<li><code>GridLayout</code>: A grid layout. Items can specify a row, column, rowSpan and columnSpan.</li>
+</ul>
+<h3 id="uialignment"><a href="#uialignment">ui.alignment</a></h3>
+<p>An enumeration corresponding to the alignment of an item within a layout widget. Possible values are:</p>
+<ul>
+<li><code>AlignLeft</code> </li>
+<li><code>AlignRight</code> </li>
+<li><code>AlignHCenter</code> </li>
+<li><code>AlignJustify</code> </li>
+<li><code>AlignAbsolute</code> </li>
+<li><code>AlignTop</code> </li>
+<li><code>AlignBottom</code> </li>
+<li><code>AlignVCenter</code> </li>
+<li><code>AlignBaseline</code> </li>
+<li><code>AlignCenter</code></li>
+</ul>
+<h3 id="uisizepolicy"><a href="#uisizepolicy">ui.sizePolicy</a></h3>
+<p>An enumeration corresponding to the size policy of a widget. This determines how much space it will try to consume within its layout, and how it will react when more or less space is made available. </p>
+<p>Possible values are:</p>
+<ul>
+<li><code>Fixed</code></li>
+<li><code>Minimum</code></li>
+<li><code>Maximum</code></li>
+<li><code>Preferred</code></li>
+<li><code>MinimumExpanding</code></li>
+<li><code>Expanding</code></li>
+<li><code>Ignored</code></li>
+</ul>
+<h3 id="uiorientation"><a href="#uiorientation">ui.orientation</a></h3>
+<p>An enumeration representing an orientation. Possible values are:</p>
+<ul>
+<li><code>Horizontal</code> </li>
+<li><code>Vertical</code></li>
+</ul>
+<h3 id="uiechomode"><a href="#uiechomode">ui.echoMode</a></h3>
+<p>An enumeration corresponding to the echo mode of a <code>LineEdit</code> widget. This can be used to display asterisks instead of characters when entering a password. Possible values are:</p>
+<ul>
+<li><code>Normal</code></li>
+<li><code>NoEcho</code></li>
+<li><code>Password</code></li>
+<li><code>PasswordEchoOnEdit</code></li>
+</ul>
+<h3 id="uipathtype"><a href="#uipathtype">ui.pathType</a></h3>
+<p>An enumeration corresponding to the different path types the <code>PathLineEdit</code> supports. This controls the behavior of browser dialog presented. Possible values are:</p>
+<ul>
+<li><code>OpenFile</code>: User will be able to select an existing file. </li>
+<li><code>SaveFile</code>: User will be able to specify a new file name at a given directory.</li>
+<li><code>Directory</code>: User will be able to select an existing directory.</li>
+</ul></div>
+
+<p class="manual-footer">FMOD Studio User Manual 1.10.10 (2018-12-07). &copy; 2018 Firelight Technologies Pty Ltd.</p>
+</body>
+</html>
+
+</div>

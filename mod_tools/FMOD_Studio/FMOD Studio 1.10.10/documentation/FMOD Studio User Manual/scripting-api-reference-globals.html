@@ -1,0 +1,91 @@
+<html>
+<head>
+<title>Scripting API Reference | Globals</title>
+<link rel="stylesheet" href="style/docs.css">
+<link rel="stylesheet" href="style/code_highlight.css">
+</head>
+<body>
+<div class="docs-body">
+<div class="manual-toc">
+<p>FMOD Studio User Manual 1.10</p>
+<ul>
+<li><a href="welcome-to-fmod-studio.html">Welcome to FMOD Studio</a></li>
+<li><a href="fmod-studio-concepts.html">FMOD Studio Concepts</a></li>
+<li><a href="organizing-the-project.html">Organizing the Project</a></li>
+<li><a href="authoring-events.html">Authoring Events</a></li>
+<li><a href="working-with-instruments.html">Working with Instruments</a></li>
+<li><a href="managing-assets.html">Managing Assets</a></li>
+<li><a href="getting-events-into-your-game.html">Getting Events into Your Game</a></li>
+<li><a href="mixing.html">Mixing</a></li>
+<li><a href="profiling.html">Profiling</a></li>
+<li><a href="editing-during-live-update.html">Editing During Live Update</a></li>
+<li><a href="supporting-downloadable-and-user-generated-content.html">Supporting Downloadable and User-generated Content</a></li>
+<li><a href="advanced-topics.html">Advanced Topics</a></li>
+<li><a href="event-macro-controls-reference.html">Event Macro Controls Reference</a></li>
+<li><a href="plugin-reference.html">Plug-in Reference</a></li>
+<li><a href="modulator-reference.html">Modulator Reference</a></li>
+<li><a href="built-in-parameters-reference.html">Built-In Parameters Reference</a></li>
+<li><a href="scripting-terminal-reference.html">Scripting</a></li>
+<li class="manual-current-chapter manual-inactive-chapter"><a href="scripting-api-reference.html">Scripting API Reference</a><ul class="subchapters"><li class="manual-current-chapter manual-active-chapter"><a href="scripting-api-reference-globals.html">Globals</a></li><li><a href="scripting-api-reference-menu.html">Menu</a></li><li><a href="scripting-api-reference-project.html">Project</a></li><li><a href="scripting-api-reference-system.html">System</a></li><li><a href="scripting-api-reference-ui.html">UI</a></li><li><a href="scripting-api-reference-window.html">Window</a></li></ul></li>
+<li><a href="keyboard-shortcut-reference.html">Keyboard Shortcut Reference</a></li>
+<li><a href="glossary.html">Glossary</a></li>
+<li><a href="appendix-a-celeste.html">Appendix: Celeste Getting Started Guide</a></li>
+</ul>
+</div>
+<div class="manual-content">
+<h1>18. Scripting API Reference | Globals</h1>
+<div class="toc">
+<ul>
+<li><a href="#globals">Globals</a><ul>
+<li><a href="#consolelogmsg">console.log(msg)</a></li>
+<li><a href="#consolewarnmsg">console.warn(msg)</a></li>
+<li><a href="#consoleerrormsg">console.error(msg)</a></li>
+<li><a href="#consoledumpobject">console.dump(object)</a></li>
+<li><a href="#alertmsg">alert(msg)</a></li>
+<li><a href="#studioosplatform">studio.os.platform</a></li>
+<li><a href="#studioapplicationfilepath">studio.application.filePath</a></li>
+<li><a href="#studioversion">studio.version</a></li>
+<li><a href="#__dirname">__dirname</a></li>
+<li><a href="#__filename">__filename</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="globals"><a href="#globals">Globals</a></h2>
+<p>Available within the global object context (e.g. <code>console.log("hello");</code> ).</p>
+<h3 id="consolelogmsg"><a href="#consolelogmsg">console.log(msg)</a></h3>
+<p>Logs a message. Alias for <code>studio.system.print</code>.</p>
+<h3 id="consolewarnmsg"><a href="#consolewarnmsg">console.warn(msg)</a></h3>
+<p>Logs a warning. Alias for <code>studio.system.warn</code>.</p>
+<h3 id="consoleerrormsg"><a href="#consoleerrormsg">console.error(msg)</a></h3>
+<p>Logs an error. Alias for <code>studio.system.error</code>.</p>
+<h3 id="consoledumpobject"><a href="#consoledumpobject">console.dump(object)</a></h3>
+<p>Logs all members of object.</p>
+<h3 id="alertmsg"><a href="#alertmsg">alert(msg)</a></h3>
+<p>Logs a message in a popup dialog (blocking). Alias for <code>studio.system.message</code>.</p>
+<h3 id="studioosplatform"><a href="#studioosplatform">studio.os.platform</a></h3>
+<p>The current operating system of the computer. Returns either "mac" for Mac OS X or "win" for all Windows versions.</p>
+<h3 id="studioapplicationfilepath"><a href="#studioapplicationfilepath">studio.application.filePath</a></h3>
+<p>The absolute file path of the FMOD Studio process executable.</p>
+<h3 id="studioversion"><a href="#studioversion">studio.version</a></h3>
+<p>An object containing version information for the Studio tool:</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">productVersion</span><span class="o">:</span> <span class="p">[</span><span class="nx">number</span><span class="p">],</span>
+    <span class="nx">majorVersion</span><span class="o">:</span> <span class="p">[</span><span class="nx">number</span><span class="p">],</span>
+    <span class="nx">minorVersion</span><span class="o">:</span> <span class="p">[</span><span class="nx">number</span><span class="p">],</span>
+    <span class="nx">changelist</span><span class="o">:</span> <span class="p">[</span><span class="nx">number</span><span class="p">],</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>This object also implements <code>toString()</code> which returns the version in a human-readable format (e.g. "Version 1.00.00 (100000)").</p>
+<h3 id="__dirname"><a href="#__dirname">__dirname</a></h3>
+<p>The absolute directory path of the file currently being loaded. This does not include a trailing '/' character.</p>
+<h3 id="__filename"><a href="#__filename">__filename</a></h3>
+<p>The absolute path of the file currently being loaded.</p></div>
+
+<p class="manual-footer">FMOD Studio User Manual 1.10.10 (2018-12-07). &copy; 2018 Firelight Technologies Pty Ltd.</p>
+</body>
+</html>
+
+</div>

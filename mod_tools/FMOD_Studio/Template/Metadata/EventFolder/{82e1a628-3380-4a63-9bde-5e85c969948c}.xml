@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="EventFolder" id="{82e1a628-3380-4a63-9bde-5e85c969948c}">
+        <property name="name">
+            <value>spiderhatch</value>
+        </property>
+        <relationship name="folder">
+            <destination>{6164eb4c-8a73-4d41-b8f5-ebc330b724e9}</destination>
+        </relationship>
+    </object>
+</objects>

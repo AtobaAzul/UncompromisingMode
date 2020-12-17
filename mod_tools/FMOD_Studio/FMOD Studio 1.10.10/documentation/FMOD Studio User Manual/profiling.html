@@ -1,0 +1,179 @@
+<html>
+<head>
+<title>Profiling</title>
+<link rel="stylesheet" href="style/docs.css">
+<link rel="stylesheet" href="style/code_highlight.css">
+</head>
+<body>
+<div class="docs-body">
+<div class="manual-toc">
+<p>FMOD Studio User Manual 1.10</p>
+<ul>
+<li><a href="welcome-to-fmod-studio.html">Welcome to FMOD Studio</a></li>
+<li><a href="fmod-studio-concepts.html">FMOD Studio Concepts</a></li>
+<li><a href="organizing-the-project.html">Organizing the Project</a></li>
+<li><a href="authoring-events.html">Authoring Events</a></li>
+<li><a href="working-with-instruments.html">Working with Instruments</a></li>
+<li><a href="managing-assets.html">Managing Assets</a></li>
+<li><a href="getting-events-into-your-game.html">Getting Events into Your Game</a></li>
+<li><a href="mixing.html">Mixing</a></li>
+<li class="manual-current-chapter manual-active-chapter"><a href="profiling.html">Profiling</a><ul>
+<li><a href="#connecting-to-your-game">Connecting to Your Game</a><ul>
+<li><a href="#initializing-live-update-in-the-fmod-unity-integration">Initializing Live Update in the FMOD Unity Integration</a></li>
+<li><a href="#initializing-live-update-in-the-fmod-unreal-engine-4-integration">Initializing Live Update in the FMOD Unreal Engine 4 Integration</a></li>
+<li><a href="#initializing-live-update-in-the-fmod-low-level-api">Initializing Live Update in the FMOD low-level API</a></li>
+<li><a href="#connecting-to-your-game-with-live-update">Connecting to your game with Live Update</a></li>
+</ul>
+</li>
+<li><a href="#managing-sessions">Managing Sessions</a></li>
+<li><a href="#recording-a-new-session">Recording A New Session</a></li>
+<li><a href="#reading-a-recorded-session">Reading A Recorded Session</a><ul>
+<li><a href="#cpu-graphs">CPU Graphs</a></li>
+<li><a href="#project-overview-event-instances-and-snapshot-activity">Project Overview, Event Instances, and Snapshot Activity</a></li>
+<li><a href="#api-view">API View</a></li>
+</ul>
+</li>
+<li><a href="#api-capture-and-playback">API Capture and Playback</a><ul>
+<li><a href="#api-playback">API Playback</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="editing-during-live-update.html">Editing During Live Update</a></li>
+<li><a href="supporting-downloadable-and-user-generated-content.html">Supporting Downloadable and User-generated Content</a></li>
+<li><a href="advanced-topics.html">Advanced Topics</a></li>
+<li><a href="event-macro-controls-reference.html">Event Macro Controls Reference</a></li>
+<li><a href="plugin-reference.html">Plug-in Reference</a></li>
+<li><a href="modulator-reference.html">Modulator Reference</a></li>
+<li><a href="built-in-parameters-reference.html">Built-In Parameters Reference</a></li>
+<li><a href="scripting-terminal-reference.html">Scripting</a></li>
+<li><a href="scripting-api-reference.html">Scripting API Reference</a></li>
+<li><a href="keyboard-shortcut-reference.html">Keyboard Shortcut Reference</a></li>
+<li><a href="glossary.html">Glossary</a></li>
+<li><a href="appendix-a-celeste.html">Appendix: Celeste Getting Started Guide</a></li>
+</ul>
+</div>
+<div class="manual-content">
+<h1>9. Profiling</h1>
+<p>FMOD Studio includes a profiler tool that allows you to assess the performance and output of your projects. The profiler can be used to check performance of events and projects directly in FMOD Studio, and can also work when a project is linked to a game running on a computer or console development kit to assess performance at runtime.</p>
+<p>Profiling in Studio provides a way to both inspect and debug audio. This can be performed within the tool or, more importantly, through a network connection with your game via <a href="#recording-a-new-session">live update</a>.</p>
+<p>You can open the profiler window by clicking "Profiler" in the "Window" menu.</p>
+<h2 id="connecting-to-your-game"><a href="#connecting-to-your-game">9.1 Connecting to Your Game</a></h2>
+<p>To connect to your game with <span class="dead-link" href="glossary.html#live-update">Live Update</span class="dead-link">, there are two requirements: Your game's code must set the FMOD_STUDIO_INIT_LIVEUPDATE flag when calling Studio::System::initialize, and you must connect to the game over the network using FMOD Studio.</p>
+<p>For more information about the FMOD_STUDIO_INIT_LIVEUPDATE flag, see <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_Studio_System_Initialize.html">Studio::System::initialize</a> and <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_STUDIO_INITFLAGS.html">FMOD_STUDIO_INITFLAGS</a> in the <a href="https://www.fmod.com/resources/documentation-api">FMOD Studio Programmer's API Documentation</a>.</p>
+<div class="admonition warning">
+<p>Ensure that you disable Live Update initialization before shipping a game.</p>
+</div>
+<h3 id="initializing-live-update-in-the-fmod-unity-integration"><a href="#initializing-live-update-in-the-fmod-unity-integration">9.1.1 Initializing Live Update in the FMOD Unity Integration</a></h3>
+<p>When using the <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/engine_new_unity/overview.html#/">FMOD Unity integration</a>, Live Update is automatically enabled by default. To check this, select "Edit Settings" from the "FMOD" menu in your Unity project. </p>
+<p>By default, Live Update will be set to enabled for "Play in Editor" and disabled for built games. A text box underneath these settings will inform you what port is being used.</p>
+<p>Starting your game or beginning in the "Play in Editor" mode will send information over the specified port.</p>
+<h3 id="initializing-live-update-in-the-fmod-unreal-engine-4-integration"><a href="#initializing-live-update-in-the-fmod-unreal-engine-4-integration">9.1.2 Initializing Live Update in the FMOD Unreal Engine 4 Integration</a></h3>
+<p>When using the <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/engine_ue4/overview.html#/">FMOD Unreal Engine 4 integration</a>, Live Update is automatically enabled by default. To check this, select "Project Settings" from the "Edit" menu in your Unreal Engine 4 project, and look in the "FMOD Studio" section in "Plugins".</p>
+<p>Live Update will be set to enabled for all non-final builds by default. You can specify a port number in the "Live Update Port" option under the "Advanced" settings.</p>
+<p>Starting your game or beginning in the "Play in Editor" mode will send information over the specified port.</p>
+<h3 id="initializing-live-update-in-the-fmod-low-level-api"><a href="#initializing-live-update-in-the-fmod-low-level-api">9.1.3 Initializing Live Update in the FMOD low-level API</a></h3>
+<p>When using the <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/studio_api.html#/">FMOD low-level API</a>, you can enable Live Update by using <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_STUDIO_INITFLAGS.html">FMOD_STUDIO_INIT_LIVEUPDATE</a> when <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_Studio_System_Initialize.html#/">initializing the FMOD Studio system</a>.</p>
+<p>By default, FMOD Studio streams to <code>localhost:9264</code>, however you can specify a specific port using <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_Studio_System_SetAdvancedSettings.html#/">Studio::System::setAdvanceSettings</a>.</p>
+<h3 id="connecting-to-your-game-with-live-update"><a href="#connecting-to-your-game-with-live-update">9.1.4 Connecting to your game with Live Update</a></h3>
+<p>After correctly initializing and starting your game, open your FMOD Studio project and select "Connect to Game" in the "File" menu. The dialog prompts for an I.P. address for connecting to the machine where the game is running. There are several ways of providing the same default address:</p>
+<blockquote>
+<ul>
+<li><code>localhost</code></li>
+<li><code>localhost:(port number)</code></li>
+<li><code>127.0.0.1</code></li>
+<li><code>127.0.0.1:(port number)</code></li>
+</ul>
+</blockquote>
+<p>In this situation "localhost" is referring to the machine that the FMOD Studio tool is running on.</p>
+<p>The default port number is 9264. It is possible to specify which port to use by altering the <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_ADVANCEDSETTINGS.html">FMOD_ADVANCESETTINGS</a> before initializing FMOD in your game code.</p>
+<p>Once you are connected to your game, you will see a green "Live Update On" icon at the bottom right of the FMOD Studio window.</p>
+<h2 id="managing-sessions"><a href="#managing-sessions">9.2 Managing Sessions</a></h2>
+<p>There may be instances where you wish to save lots of profiles of your game, for example to profile different levels to ensure the volumes and mix is consistent, or to see the differences between build versions.</p>
+<p>The profiler window provides the session browser. Here you can see all previously recorded sessions, create new ones, and organize them into folders for easy access.</p>
+<p>To create a new folder, right click in an empty space of the session browser and choose "New Folder". You can even right click on an existing session and choose "Move Into New Folder" to move that session into a newly created folder on the same hierarchical level.</p>
+<p>You can also export sessions. This is useful for sharing information on any issues encountered either with fellow audio team members or with <a href="https://www.fmod.com/resources/qa">FMOD Studio support</a>. To do this, right click on a recorded session or folder in the sessions browser and choose "Package Selection".</p>
+<p><img alt="Package Sessions" src="images/packageSelection.png" /></p>
+<p>In this dialog you can choose whether to bundle the audio assets and/or the banks along with the session(s). This is useful for when the person you are sending this package to does not have access to the full FMOD Studio project in question.</p>
+<h2 id="recording-a-new-session"><a href="#recording-a-new-session">9.3 Recording A New Session</a></h2>
+<p>To record a new session, right click in an empty space of the sessions browser and select "New Session" to create a blank session. Click on the "Record" button in the <a href="glossary.html#transport-controls">transport controls</a>, represented by a circle, to begin recording. If you do not have a session actively selected in the sessions browser, clicking "Record" automatically creates a new session.</p>
+<p>You should be able to see waveform data coming in on the master track, as well as a graph overlay.</p>
+<p><img alt="Recording Playback" src="images/recordingPlayback.png" /></p>
+<p>Once you have finished capturing data, press the "Stop" button in the transport bar.</p>
+<p>By default, a track for each recorded event will automatically be added to the session once the recording is completed. You can optionally scope in mixer strips or events to see information pertaining to those items by dragging and dropping them into the profiler session.</p>
+<h2 id="reading-a-recorded-session"><a href="#reading-a-recorded-session">9.4 Reading A Recorded Session</a></h2>
+<p>Once you have a recorded session, you can now playback the recorded session, as you would with an event, and hear your game's recorded output. Areas that show instantaneous values (such as the transport bar and 3D View) correspond to the playhead position. You can also use <a href="glossary.html#loop-region">loop regions</a> to focus in on parts of the recording.</p>
+<p>Each <a href="glossary.html#event">event</a> or <a href="glossary.html#bus">bus</a> in the profiler can be used to view more information about it. You can switch which property of that event or bus is graphed by clicking on the categories of the master profiling statistics in the <a href="glossary.html#transport-controls">transport controls</a>.</p>
+<p>You can hover over graphs to see the value at a particular point.</p>
+<p>The current graphs available are:</p>
+<ul>
+<li>
+<p><strong>CPU (%)</strong>: Displays how much of the CPU is being used. On the master bus, the transparent background graph represents both time spent updating events and the mixer DSP.</p>
+</li>
+<li>
+<p><strong>Levels (dB)</strong>: Shows how loud the output of that event or bus is in dB. The lines represent the peak value and the solid colors represent the RMS (Root Mean Square).</p>
+</li>
+<li>
+<p><strong>Memory (KB)</strong>: Only available on the master bus. Displays how much of the available RAM is being used. </p>
+</li>
+<li>
+<p><strong>File I/O (KB)</strong>: Only available on the master bus. Displays the file I/O used for sample data, stream data, and bank metadata loading. The event instance lifetime view has indicators for when event instances are waiting for sample data to load in.</p>
+</li>
+<li>
+<p><strong>Voices</strong>: Available for "Self" and "Total". Displays how many <span class="dead-link" href="glossary.html#voice">voices</span class="dead-link"> are spawned in the game world. The transparent background graph represents voices and virtual voices.</p>
+</li>
+<li>
+<p><strong>Instances</strong>: Available for "Self" and "Total". Displays how many <span class="dead-link" href="glossary.html#instance">instances</span class="dead-link"> of events are spawned in the game world. The transparent background graph represents instances and virtual instances.</p>
+</li>
+</ul>
+<p>For "Voices" and "Instances" you can choose to show either self or total. Self is referring to voices or instances that are spawned only from that event. Total is referring to voices or instances that are also spawned from nested or references events.</p>
+<p>Keep in mind that you can also see a summary of the active graph type for the entire session in the <span class="dead-link" href="glossary.html#birdseye-view">birds eye view</span class="dead-link">.</p>
+<h3 id="cpu-graphs"><a href="#cpu-graphs">9.4.1 CPU Graphs</a></h3>
+<p>The CPU usage displayed on the master bus of the profiler is split into 2 streams:</p>
+<ul>
+<li>
+<p><strong>DSP</strong> (solid colored graph): Indicates the percentage of time the mixer thread is taking. The percentage represents how long it takes, in relation to the amount of time it has to complete a mix. For example, on XBox One where a mix block is 10ms (512 samples), 50% usage represents the mixer thread taking 5ms to complete.</p>
+<ul>
+<li>
+<p><strong>DSP Self</strong> (solid colored graph): Indicates the percentage of time taken on the mixer thread for the given item, exclusive of children routing into it.</p>
+</li>
+<li>
+<p><strong>DSP Total</strong> (transparent colored graph): Indicates the percentage of time taken on the mixer thread for the given item, inclusive of children routing into it.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Events</strong> (transparent colored graph): Indicates the percentage of time the Studio update thread takes to complete. The update thread typically runs every 20ms in its own thread, so the percentage indicates how much of the 20ms is used up.</p>
+</li>
+</ul>
+<p>CPU numbers do not include time spent calling <code>update()</code> from you game thread (which theoretically should be quite small). FMOD Studio also uses some other smaller worker threads (e.g. File I/O thread) which aren't included in these numbers.</p>
+<h3 id="project-overview-event-instances-and-snapshot-activity"><a href="#project-overview-event-instances-and-snapshot-activity">9.4.2 Project Overview, Event Instances, and Snapshot Activity</a></h3>
+<p>Along the right hand side of the profiler window is the <span class="dead-link" href="glossary.html#overview">overview</span class="dead-link"> section. </p>
+<p>At the top is a 3D view of the entire session, displaying all event instances and where they spawned in relation to the player. Playing event instances are shown as filled circles, while virtual events are hollow circles. Stopped event instances become dimmer and fade over time, which assists with finding short-lived event instances. Once an event instance has been released it is removed from the 3D view. </p>
+<p>The profiler provides additional information about each event instance. </p>
+<p>Clicking on an event in this view highlights its associated track and also presents a secondary 3D view in the deck which shows only events of a given type.</p>
+<p>If an event instance is selected, the deck displays that instance's parameter values over time. Right clicking a parameter dial allows you to add a graph for that particular event instance's parameter. This is added as a subgraph in the multitrack view.</p>
+<p><img alt="Profiler with Parameters" src="images/profilerParameters.png" /></p>
+<p>Underneath the 3D View is a list of all the <a href="glossary.html#snapshot">snapshot</a> activities instanciated. Once a snapshot has started it will appear in this list. The percentage to the right of the name of the snapshot indicates the <a href="mixing.html#snapshot-intensity">intensity</a> of the snapshot. The background of the name will also display how much intensity is being applied at that moment in time. Once a snapshot has been released it will be removed from this list.</p>
+<p>You can view the snapshot's mixer view by right clicking on any snapshot in this list and choosing "Open in Mixer".</p>
+<h3 id="api-view"><a href="#api-view">9.4.3 API View</a></h3>
+<p>All session captures also capture the API calls made by your FMOD Studio project.</p>
+<p>Located at the top of the session editor window are two buttons. The <span class="dead-link" href="glossary.html#tracks-view">track view</span class="dead-link"> and the API view.</p>
+<p>For more information on the API view, please see the <a href="#api-capture-and-playback">API Capture and Playback</a> section below.</p>
+<h2 id="api-capture-and-playback"><a href="#api-capture-and-playback">9.5 API Capture and Playback</a></h2>
+<p>Recording a profiler session also captures all API calls made by FMOD Studio during that session.</p>
+<p>To view the API calls being made, click on the API View button (<code>&lt;/&gt;</code>) located next to the <span class="dead-link" href="glossary.html#time-beats-display">time indicator</span class="dead-link">.</p>
+<p>You can copy text from the API view if you need to view it in an external text editor, however it is important to note that larger captures are truncated. After recording a profiler session, ensure that you save your project so that these sessions are stored in your project's folder. Now you can right click on a session and choose "Open in Explorer/Finder" and view the API captures text file.</p>
+<p>The captured API calls are not written in any particular programming language, instead only displaying what FMOD API function was called and the arguments passed into it. All comments are prefixed with a hash (<code>#</code>) and do not affect playback.</p>
+<h3 id="api-playback"><a href="#api-playback">9.5.1 API Playback</a></h3>
+<p>FMOD Studio gives the option to play back recorded profiler sessions using API calls rather than playing back recorded audio. This is useful for situations such as debugging an audio issue replicated in a recorded session or making adjustments to events and buses then auditioning them in a real game scenario.</p>
+<p>You can toggle between playing back with the recorded audio or with the API capture by clicking on the "API" button next to the time indicator.</p>
+<p><img alt="Playback with API Capture" src="images/apiPlayback.png" /></p>
+<p>While in this mode you can hear events being played as if playing them through the <a href="glossary.html#event-editor-window">event editor</a>, so random playlists in <a href="glossary.html#multi-instrument">multi instruments</a> and <a href="glossary.html#scatterer-instrument">scatterer instruments</a> have randomized results.</p>
+<p>You have to rebuild the banks after making a change in order to hear that change in API playback mode.</p></div>
+
+<p class="manual-footer">FMOD Studio User Manual 1.10.10 (2018-12-07). &copy; 2018 Firelight Technologies Pty Ltd.</p>
+</body>
+</html>
+
+</div>

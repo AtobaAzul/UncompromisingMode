@@ -1,0 +1,621 @@
+<html>
+<head>
+<title>Glossary</title>
+<link rel="stylesheet" href="style/docs.css">
+<link rel="stylesheet" href="style/code_highlight.css">
+</head>
+<body>
+<div class="docs-body">
+<div class="manual-toc">
+<p>FMOD Studio User Manual 1.10</p>
+<ul>
+<li><a href="welcome-to-fmod-studio.html">Welcome to FMOD Studio</a></li>
+<li><a href="fmod-studio-concepts.html">FMOD Studio Concepts</a></li>
+<li><a href="organizing-the-project.html">Organizing the Project</a></li>
+<li><a href="authoring-events.html">Authoring Events</a></li>
+<li><a href="working-with-instruments.html">Working with Instruments</a></li>
+<li><a href="managing-assets.html">Managing Assets</a></li>
+<li><a href="getting-events-into-your-game.html">Getting Events into Your Game</a></li>
+<li><a href="mixing.html">Mixing</a></li>
+<li><a href="profiling.html">Profiling</a></li>
+<li><a href="editing-during-live-update.html">Editing During Live Update</a></li>
+<li><a href="supporting-downloadable-and-user-generated-content.html">Supporting Downloadable and User-generated Content</a></li>
+<li><a href="advanced-topics.html">Advanced Topics</a></li>
+<li><a href="event-macro-controls-reference.html">Event Macro Controls Reference</a></li>
+<li><a href="plugin-reference.html">Plug-in Reference</a></li>
+<li><a href="modulator-reference.html">Modulator Reference</a></li>
+<li><a href="built-in-parameters-reference.html">Built-In Parameters Reference</a></li>
+<li><a href="scripting-terminal-reference.html">Scripting</a></li>
+<li><a href="scripting-api-reference.html">Scripting API Reference</a></li>
+<li><a href="keyboard-shortcut-reference.html">Keyboard Shortcut Reference</a></li>
+<li class="manual-current-chapter manual-active-chapter"><a href="glossary.html">Glossary</a><ul>
+<li><a href="#3d-event">3D Event</a></li>
+<li><a href="#3d-preview">3D Preview</a></li>
+<li><a href="#ahdsr-modulator">AHDSR Modulator</a></li>
+<li><a href="#assets-browser">Assets Browser</a></li>
+<li><a href="#assets-tab">Assets Tab</a></li>
+<li><a href="#asynchronous">Asynchronous</a></li>
+<li><a href="#audio-bin-window">Audio Bin Window</a></li>
+<li><a href="#audio-file">Audio File</a></li>
+<li><a href="#audio-track">Audio Track</a></li>
+<li><a href="#audition">Audition</a></li>
+<li><a href="#automation">Automation</a></li>
+<li><a href="#bank">Bank</a></li>
+<li><a href="#banks-browser">Banks Browser</a></li>
+<li><a href="#base-property-value">Base Property Value</a></li>
+<li><a href="#built-banks-output-directory">Built Banks Output Directory</a></li>
+<li><a href="#bus">Bus</a></li>
+<li><a href="#bypass">Bypass</a></li>
+<li><a href="#compression-format">Compression Format</a></li>
+<li><a href="#context-menu">Context Menu</a></li>
+<li><a href="#cue">Cue</a></li>
+<li><a href="#cursor">Cursor</a></li>
+<li><a href="#cut-behavior">Cut Behavior</a></li>
+<li><a href="#deck">Deck</a></li>
+<li><a href="#default">Default</a></li>
+<li><a href="#destination-marker">Destination Marker</a></li>
+<li><a href="#editor">Editor</a></li>
+<li><a href="#effect">Effect</a></li>
+<li><a href="#event">Event</a></li>
+<li><a href="#event-editor-window">Event Editor Window</a></li>
+<li><a href="#event-instance">Event Instance</a></li>
+<li><a href="#event-property">Event Property</a></li>
+<li><a href="#event-reference-instrument">Event Reference Instrument</a></li>
+<li><a href="#events-browser">Events Browser</a></li>
+<li><a href="#file-manager">File Manager</a></li>
+<li><a href="#final-property-value">Final Property Value</a></li>
+<li><a href="#fmodio">FMOD.io</a></li>
+<li><a href="#follow-playback-position-mode">Follow Playback Position Mode</a></li>
+<li><a href="#game-parameter">Game Parameter</a></li>
+<li><a href="#group-bus">Group Bus</a></li>
+<li><a href="#instrument">Instrument</a></li>
+<li><a href="#listener">Listener</a></li>
+<li><a href="#logic-marker">Logic Marker</a></li>
+<li><a href="#logic-point">Logic Point</a></li>
+<li><a href="#logic-track">Logic Track</a></li>
+<li><a href="#loop-playback-mode">Loop Playback Mode</a></li>
+<li><a href="#loop-region">Loop Region</a></li>
+<li><a href="#master-bus">Master Bus</a></li>
+<li><a href="#master-track">Master Track</a></li>
+<li><a href="#metadata">Metadata</a></li>
+<li><a href="#mixer">Mixer</a></li>
+<li><a href="#mixer-strip">Mixer Strip</a></li>
+<li><a href="#mixer-window">Mixer Window</a></li>
+<li><a href="#mixing-desk">Mixing Desk</a></li>
+<li><a href="#modulator">Modulator</a></li>
+<li><a href="#multi-instrument">Multi Instrument</a></li>
+<li><a href="#panel">Panel</a></li>
+<li><a href="#panner">Panner</a></li>
+<li><a href="#parameter">Parameter</a></li>
+<li><a href="#parameter-condition">Parameter Condition</a></li>
+<li><a href="#parameter-cursor">Parameter Cursor</a></li>
+<li><a href="#parameter-tab">Parameter Tab</a></li>
+<li><a href="#persistent">Persistent</a></li>
+<li><a href="#playback-position">Playback Position</a></li>
+<li><a href="#playlist">Playlist</a></li>
+<li><a href="#play-state">Play State</a></li>
+<li><a href="#post-fader">Post-fader</a></li>
+<li><a href="#pre-fader">Pre-fader</a></li>
+<li><a href="#preset-effect">Preset Effect</a></li>
+<li><a href="#probability-condition">Probability Condition</a></li>
+<li><a href="#programmer-instrument">Programmer Instrument</a></li>
+<li><a href="#project-mixer">Project Mixer</a></li>
+<li><a href="#quantization">Quantization</a></li>
+<li><a href="#return-bus">Return Bus</a></li>
+<li><a href="#return-track">Return Track</a></li>
+<li><a href="#routing">Routing</a></li>
+<li><a href="#routing-browser">Routing Browser</a></li>
+<li><a href="#sandbox-window">Sandbox Window</a></li>
+<li><a href="#scatterer-instrument">Scatterer Instrument</a></li>
+<li><a href="#searching">Searching</a></li>
+<li><a href="#send">Send</a></li>
+<li><a href="#sidechain-effect">Sidechain Effect</a></li>
+<li><a href="#signal-chain">Signal Chain</a></li>
+<li><a href="#single-instrument">Single Instrument</a></li>
+<li><a href="#snapshot">Snapshot</a></li>
+<li><a href="#spatializer-effect">Spatializer Effect</a></li>
+<li><a href="#spatial-randomization">Spatial Randomization</a></li>
+<li><a href="#sustain-point">Sustain Point</a></li>
+<li><a href="#synchronous">Synchronous</a></li>
+<li><a href="#tempo-marker">Tempo Marker</a></li>
+<li><a href="#timeline">Timeline</a></li>
+<li><a href="#track">Track</a></li>
+<li><a href="#track-head">Track Head</a></li>
+<li><a href="#transition-marker">Transition Marker</a></li>
+<li><a href="#transition-region">Transition Region</a></li>
+<li><a href="#transition-timeline">Transition Timeline</a></li>
+<li><a href="#transport-controls">Transport Controls</a></li>
+<li><a href="#trigger">Trigger</a></li>
+<li><a href="#trigger-region">Trigger Region</a></li>
+<li><a href="#untrigger">Untrigger</a></li>
+<li><a href="#version">Version</a></li>
+</ul>
+</li>
+<li><a href="appendix-a-celeste.html">Appendix: Celeste Getting Started Guide</a></li>
+</ul>
+</div>
+<div class="manual-content">
+<h1>26. Glossary</h1>
+<p>This page includes definitions for various common FMOD Studio terms, along with references to related terms and documentation.</p>
+<h2 id="3d-event"><a href="#3d-event">26.1 3D Event</a></h2>
+<p>A 3D event is an <a href="glossary.html#event">event</a> whose position in three-dimensional space affects its behavior. To be 3D, an event must feature at least one <span class="dead-link" href="glossary.html#built-in-parameter">built-in parameter</span class="dead-link"> or <a href="glossary.html#effect">effect</a> with spatial behavior.</p>
+<p>The most common way of making an event 3D is to add an <a href="glossary.html#spatializer-effect">FMOD spatializer effect</a> to one of its <a href="glossary.html#track">tracks</a>. This effect pans and attenuates the <span class="dead-link" href="glossary.html#signal">signal</span class="dead-link"> as if it came from a particular direction and distance relative to the <a href="glossary.html#listener">listener</a>. Other effects with spatial behavior, such as the <span class="dead-link" href="glossary.html#object-spatializer-effect">FMOD object spatializer</span class="dead-link"> and the Resonance Audio listener, also make an event 3D.</p>
+<p>Built-in parameters only audibly alter an event's behavior if they are used to trigger <a href="glossary.html#instrument">instruments</a> in that event, to <a href="glossary.html#automation">automate</a> properties of that event, or to automate the properties of that event's instruments.</p>
+<p>When viewing a 3D event in the event editor window, the <a href="glossary.html#3d-preview">3D preview</a> appears in the <span class="dead-link" href="glossary.html#overview">overview pane</span class="dead-link">.</p>
+<h2 id="3d-preview"><a href="#3d-preview">26.2 3D Preview</a></h2>
+<p>The 3D Preview is a tool for auditioning any behavior of an event that depends on the event's position relative to the listener in three-dimensional space. The 3D Preview appears in the overview pane when a 3D event is displayed in the <a href="glossary.html#editor">editor</a>.</p>
+<p>The 3D preview represents a top-down view of a spherical area surrounding the <a href="glossary.html#listener">listener</a>. The radius of this circle is equal to the event's max distance, as defined by either the max distance property of the event's <span class="dead-link" href="glossary.html#spatializer">spatializer effect</span class="dead-link">, or by the maximum value of its <span class="dead-link" href="glossary.html#distance-parameter">distance parameter</span class="dead-link">. The listener is always located at the exact center of the circle, facing forward ('up' on the 3D preview).</p>
+<p>The arrow-shaped icon represents the event emitter, and the direction that the arrow points represents the direction the emitter is facing. By default, the emitter is positioned in the same location as the listener and facing the same direction. You can change the position of the emitter by clicking and dragging it to any new location in the circle, and you can rotate the emitter by hovering the mouse cursor over the 3D preview and spinning the mouse wheel. Holding down the Ctrl key while dragging the listener changes the emitter's elevation. (If the current elevation of the emitter is above or below that of the listener, the difference in elevation is indicated by a dashed line.) Double-clicking on the 3D Preview returns the emitter to its default position and facing.</p>
+<p><img alt="3D Preview" src="images/3DPreviewEmitterDisplacedAndRotated.png" /></p>
+<p>The light-gray circle surrounding the arrow represents the event's envelopment, as defined by the sound size property of the event's spatializer effect. The light gray arc or circle that appears around the edge of the 3D preview represents the current extent of the event. If a spatializer's minimum extent has been set to a value greater than 0 degrees, the minimum extent is shown as a white arc overlapping the light gray arc that represents current extent.</p>
+<h2 id="ahdsr-modulator"><a href="#ahdsr-modulator">26.3 AHDSR Modulator</a></h2>
+<p>An AHDSR modulator can be applied to the <a href="glossary.html#event-property">properties</a> of any project element that can be started and stopped, including <a href="glossary.html#instrument">instruments</a>, <a href="glossary.html#event">events</a>, and <a href="glossary.html#snapshot">snapshots</a>. AHDSR modulators respond to the starting of their associated project elements by ramping their modulated properties up from neutral values to specified values, and to the stopping of their associated project elements by ramping their modulated properties down from those specified values to neutral values.</p>
+<p>AHDSR modulators are most commonly used to add fade-ins and fade-outs to instruments without those fades being dependent on the position of the <a href="glossary.html#playback-position">playback position</a>. This is especially useful for instruments on <span class="dead-link" href="glossary.html#parameter-sheet">parameter sheets</span class="dead-link"> other than that of the <a href="glossary.html#timeline">timeline</a>.</p>
+<h2 id="assets-browser"><a href="#assets-browser">26.4 Assets Browser</a></h2>
+<p>The assets browser is a tool for managing, organizing, and auditioning your project's imported audio files. It can be found in the assets tab of the <a href="glossary.html#event-editor-window">event editor window</a>, as well as in the <a href="glossary.html#audio-bin-window">audio bin window</a></p>
+<h2 id="assets-tab"><a href="#assets-tab">26.5 Assets Tab</a></h2>
+<p>The assets tab appears in the <a href="glossary.html#event-editor-window">event editor window</a> and the <a href="glossary.html#audio-bin-window">audio bin window</a>. Clicking on it allows you to access the <a href="glossary.html#assets-browser">assets browser</a>.</p>
+<h2 id="asynchronous"><a href="#asynchronous">26.6 Asynchronous</a></h2>
+<p>In asynchronous <a href="glossary.html#instrument">instruments</a>, the precise position of the <a href="glossary.html#playback-position">playback position</a> within the instrument's <a href="glossary.html#trigger-region">trigger region</a> has no bearing on which part of each <a href="glossary.html#audio-file">audio file</a> plays. This allows you to treat instruments as switches that can be turned on and off, adding sounds to the event on demand.</p>
+<p>The <span class="dead-link" href="glossary.html#synchonous">synchronous</span class="dead-link"> or asynchronous behavior of an instrument can be identified by the appearance of the waveform graphics drawn on its trigger region: If the waveforms stretch all the way to the edge of the trigger region, the instrument is synchronous; And if the waveforms are contained within borders, the instrument is asynchronous.</p>
+<h2 id="audio-bin-window"><a href="#audio-bin-window">26.7 Audio Bin Window</a></h2>
+<p>The audio bin window contains tools for importing, managing, organizing, and auditioning <span class="dead-link" href="glossary.html#audio-files">audio files</span class="dead-link"> in your project, as well as to specify <span class="dead-link" href="glossary.html#streaming">loading behavior</span class="dead-link"> and <span class="dead-link" href="glossary.html#platform-encoding-settings">platform encoding settings</span class="dead-link">. It also allows you to access <a href="glossary.html#fmodio">FMOD.io</a>.</p>
+<p>The two main tabs of the audio bin window are the <a href="glossary.html#assets-tab">assets tab</a> and the <a href="glossary.html#fmodio">FMOD.io tab</a>.</p>
+<h2 id="audio-file"><a href="#audio-file">26.8 Audio File</a></h2>
+<p>An audio file is a file formatted such that its content can be played audibly using a media player application.</p>
+<p><a href="glossary.html#audio-file">Audio files</a> are the raw building blocks used to construct <a href="glossary.html#instrument">instruments</a> and <a href="glossary.html#event">events</a> in FMOD Studio.</p>
+<h2 id="audio-track"><a href="#audio-track">26.9 Audio Track</a></h2>
+<p>An audio track is a kind of <a href="glossary.html#track">event track</a> that functions as a <a href="glossary.html#group-bus">group bus</a> within an event, allowing each event instance to function as a small <a href="glossary.html#mixer">mixer</a>. Audio tracks can hold and receive input from <a href="glossary.html#instrument">instruments</a> of all kinds. Audio tracks can be <a href="glossary.html#routing">routed</a> into other audio tracks, or into the event's <a href="glossary.html#master-track">master track</a>.</p>
+<p>An event's tracks can be viewed in the <a href="glossary.html#event-editor-window">event editor window</a> by selecting the event in the <a href="glossary.html#events-browser">events browser</a>.</p>
+<p>The <a href="glossary.html#signal-chain">signal chain</a> of an audio track can be seen by clicking on the audio track's head in the <a href="glossary.html#editor">editor</a>.</p>
+<p>The content on a track can not vary between instances of an event.</p>
+<p>The output of a track can vary between instances of an event.</p>
+<h2 id="audition"><a href="#audition">26.10 Audition</a></h2>
+<p>For the purposes of this manual, auditioning is playing the content of an FMOD Studio project through the FMOD Studio Tool. Auditioning allows you to preview and tweak your project's <a href="glossary.html#event">events</a>, <a href="glossary.html#audio-file">assets</a>, and <span class="dead-link" href="glossary.html#mix">mix</span class="dead-link"> prior to their being implemented into your game.</p>
+<p>Events can be auditioned in the <a href="glossary.html#editor">editor</a> by using the <a href="glossary.html#transport-controls">transport controls</a>. They can also be auditioned in the <a href="glossary.html#sandbox-window">sandbox window</a> by clicking and dragging events from the <a href="glossary.html#events-browser">events browser</a> into the <span class="dead-link" href="glossary.html#sandbox">sandbox</span class="dead-link">.</p>
+<p>Assets can be auditioned in the <a href="glossary.html#assets-browser">assets browser</a> by selecting the asset to be auditioned, then clicking on the play button or waveform graphic at the bottom of the browser. They can also be auditioned in the <a href="glossary.html#deck">deck</a> if they're part of the selected <a href="glossary.html#single-instrument">single</a>, <a href="glossary.html#multi-instrument">multi</a>, or <a href="glossary.html#scatterer-instrument">scatterer</a> <a href="glossary.html#instrument">instrument</a>.</p>
+<p>Programmer instruments cannot be auditioned in FMOD Studio, but each programmer instrument can be assigned a placeholder asset for the purposes of auditioning the event. These placeholder assets can be auditioned in the deck.</p>
+<p>Your project's mix is automatically applied to all events auditioned through FMOD Studio. You can audition a <a href="glossary.html#snapshot">snapshot</a> in the <a href="glossary.html#mixer-window">mixer window</a> by selecting it in the <span class="dead-link" href="glossary.html#snapshots-browser">snapshots browser</span class="dead-link"> and using the transport controls that appear in the <a href="glossary.html#mixing-desk">mixing desk</a>.</p>
+<p>Auditioning should not be confused with playing the content of an FMOD Studio project in your game.</p>
+<h2 id="automation"><a href="#automation">26.11 Automation</a></h2>
+<p>Automation is a means to map particular values of a <a href="glossary.html#parameter">parameter</a> to values of an <a href="glossary.html#event">event</a> or <a href="glossary.html#snapshot">snapshot's</a> <a href="glossary.html#event-property">properties</a>, such that setting the parameter to a particular value sets any property automated on that parameter to the corresponding value specified by its automation.</p>
+<p>Automation is displayed in the deck when the <a href="glossary.html#instrument">instrument</a> or <a href="glossary.html#track">track</a> whose property is automated is selected. Automation may also be displayed in the <a href="glossary.html#editor">editor</a> as a red line on the event's <span class="dead-link" href="glossary.html#automation-track">automation tracks</span class="dead-link"> when the relevant parameter sheet is displayed. In either case, the <span class="dead-link" href="glossary.html#automation-point">circular points</span class="dead-link"> on the line define the points through which the line passes, while the <span class="dead-link" href="glossary.html#shape-handle">shape handles</span class="dead-link"> allow the line's curve to be adjusted.</p>
+<p><img alt="Automation" src="images/automation.png" /></p>
+<p>Automation can be added to event properties by right-clicking on the property control and selecting 'Add Automation' from the <a href="glossary.html#context-menu">context menu</a>. This adds an automation widget to the deck; Click on the 'Add Curve' button to begin creating automation.</p>
+<h2 id="bank"><a href="#bank">26.12 Bank</a></h2>
+<p>A bank is a collection of <a href="glossary.html#event">events</a> from your FMOD Studio project, <span class="dead-link" href="glossary.html#encoding-setting">formatted and compressed</span class="dead-link"> for use in your game. Banks allow you to choose which content is loaded into memory at any given time.</p>
+<p><img alt="Bank" src="images/banksBrowserWithSelectedBank.png" /></p>
+<p>The "Built bank file separation" setting in the "Build" tab of the preferences dialog determines how your project's <span class="dead-link" href="glossary.html#sample-data">sample data</span class="dead-link"> and <a href="glossary.html#metadata">metadata</a> are built into banks.</p>
+<p>If the "Build metadata and assets to a single bank" option is selected, building your project creates a .bank file in your project's <a href="glossary.html#built-banks-output-directory">built banks output directory</a> for each bank built.</p>
+<p>If the "Build metadata and assets to separate banks" option is selected, building your project creates a .bank file and an .assets.bank file in your project's built banks output directory for each bank built.</p>
+<p>If the "Build metadata, non-streaming assets, and streaming assets to separate banks" option is selected, building your project creates a .bank file, a .streams.bank file, and an .assets.bank file in your project's built banks output directory for each bank built.</p>
+<p>These built bank files are all your game code needs to make use of the events they contain.</p>
+<p><img alt="Built banks output directory" src="images/builtBanksOutputDirectoryField.png" /></p>
+<p>One bank in your FMOD Studio project is the project's <span class="dead-link" href="glossary.html#master-bank">master bank</span class="dead-link">. In addition to events, the master bank contains data relevant to your entire FMOD Studio project, and so must be loaded into memory before <em>any</em> event in <em>any</em> bank may be used by your game. In most games, the master bank is kept loaded into memory at all times.</p>
+<h2 id="banks-browser"><a href="#banks-browser">26.13 Banks Browser</a></h2>
+<p>The banks browser is a tool for creating and naming <a href="glossary.html#bank">banks</a>, and for assigning <a href="glossary.html#event">events</a> to and from those banks. It can be found under the banks tab of the <a href="glossary.html#event-editor-window">event editor window</a>.</p>
+<h2 id="base-property-value"><a href="#base-property-value">26.14 Base Property Value</a></h2>
+<p>A property's base value is the value of that <span class="dead-link" href="glossary.html#property">property</span class="dead-link"> before it is modified by <a href="glossary.html#modulator">modulators</a>, <a href="glossary.html#automation">automation</a>, and <a href="glossary.html#snapshot">snapshots</a>. If all automation and modulation is removed from a property and it is not scoped into any active snapshots, the property returns to its base value.</p>
+<h2 id="built-banks-output-directory"><a href="#built-banks-output-directory">26.15 Built Banks Output Directory</a></h2>
+<p>The built banks output directory is the folder on your hard drive that FMOD Studio outputs built bank files into when you build your project. By default, this is a folder named 'Build' found inside your FMOD Studio project folder once you have built the project.</p>
+<p>You can change the built banks output directory in the 'Build' tab of the 'Preferences' window.</p>
+<h2 id="bus"><a href="#bus">26.16 Bus</a></h2>
+<p>In FMOD Studio, a bus is a modular component of the <a href="glossary.html#mixer">mixer</a> that produces a submix from the signals <a href="glossary.html#routing">routed</a> into it and has its own <a href="glossary.html#signal-chain">signal chain</a>. Buses can be routed into <a href="glossary.html#group-bus">group buses</a> or into the <a href="glossary.html#master-bus">master bus</a>.</p>
+<h2 id="bypass"><a href="#bypass">26.17 Bypass</a></h2>
+<p>Any effect in a <a href="glossary.html#signal-chain">signal chain</a> may be bypassed.</p>
+<p>Bypassed effects continue to <span class="dead-link" href="glossary.html#upmix">upmix</span class="dead-link"> or <span class="dead-link" href="glossary.html#downmix">downmix</span class="dead-link"> the <span class="dead-link" href="glossary.html#channel-format">channel format</span class="dead-link"> as usual, but do not otherwise process the <span class="dead-link" href="glossary.html#signal">signal</span class="dead-link">.</p>
+<p>Effects that are bypassed when you <span class="dead-link" href="glossary.html#build">build</span class="dead-link"> your project will be bypassed in your project's <a href="glossary.html#bank">banks</a>, and therefore won't process the signal in your game.</p>
+<p>To bypass an effect or make an effect no longer bypassed, right-click on the effect in the <a href="glossary.html#deck">deck</a> and select "Bypass" from the context menu.</p>
+<h2 id="compression-format"><a href="#compression-format">26.18 Compression Format</a></h2>
+<p>Compression format is a property of <a href="glossary.html#audio-file">audio files</a>, being the encoding format used by those files. Note that an audio file's compression format has no effect on the size or performance of your game, as FMOD Studio's <span class="dead-link" href="glossary.html#build">build</span class="dead-link"> process recompresses all audio files according to their <span class="dead-link" href="glossary.html#platform-encoding-settings">platform encoding settings</span class="dead-link">, effectively replacing any existing compression.</p>
+<h2 id="context-menu"><a href="#context-menu">26.19 Context Menu</a></h2>
+<p>The context menu is a menu of commands that appears when you right-click on something in FMOD Studio. The commands in a context menu always apply to the specific thing you clicked on when selected.</p>
+<p><img alt="Context menu" src="images/contextMenu.png" /></p>
+<h2 id="cue"><a href="#cue">26.20 Cue</a></h2>
+<p>A cue is a command given to an <a href="glossary.html#event">event</a> instance that tells the <a href="glossary.html#timeline">timeline</a> <a href="glossary.html#playback-position">playback position</a> to continue past the next <a href="glossary.html#sustain-point">sustain point</a> it encounters. Cues serve no purpose in events without sustain points.</p>
+<p>You can <a href="glossary.html#audition">audition</a> cues in the <a href="glossary.html#event-editor-window">event editor window</a> by clicking on the 'A' button in the event editor window's editor's <span class="dead-link" href="glossary.html#transport-bar">transport bar</span class="dead-link">. This button only appears if the event displayed in the event editor window's <a href="glossary.html#editor">editor</a> contains at least one sustain point.</p>
+<p><img alt="Cue button and sustain point" src="images/cueButtonAndSustainPoint.png" /></p>
+<p>Note that there is no way to send a cue to an event instance created by an <a href="glossary.html#event-reference-instrument">event reference instrument</a>. If you want to mimic the effect of a cue in a way that works in <span class="dead-link" href="glossary.html#referenced-event">referenced events</span class="dead-link">, it is best to use a <a href="glossary.html#loop-region">loop region</a> with a <a href="glossary.html#parameter-condition">parameter condition</a> instead of a sustain point, and change the <span class="dead-link" href="glossary.html#parameter-value">parameter's value</span class="dead-link"> instead of using a cue.</p>
+<h2 id="cursor"><a href="#cursor">26.21 Cursor</a></h2>
+<p>The cursor is a vertical gray line that appears on each <span class="dead-link" href="glossary.html#parameter-sheet">parameter sheet</span class="dead-link"> in your project. It represents the value to which the displayed parameter was last set. Note that the actual current value of the parameter may be different from the cursor value, and is indicated by the <a href="glossary.html#playback-position">playback position</a>.</p>
+<p><img alt="Cursor" src="images/cursor.png" /></p>
+<p>You can reposition the cursor by clicking on any part of the parameter sheet's ruler. Note that repositioning the cursor also changes the playback position in most cases.</p>
+<p>In versions of FMOD Studio prior to 1.10.00, the playback position was called the 'cursor,' and the cursor was called the 'ghosted cursor.'</p>
+<h2 id="cut-behavior"><a href="#cut-behavior">26.22 Cut Behavior</a></h2>
+<p>The cut behavior of an <a href="glossary.html#instrument">instrument</a> is how it acts when <a href="glossary.html#untrigger">untriggered</a>. The most common cut behaviors are "cut immediately" and "play to end."</p>
+<p>"Cut immediately" cut behavior causes the instrument to immediately stop producing output when untriggered. All <a href="glossary.html#synchronous">synchronous</a> instruments use this cut behavior.</p>
+<p>"Play to end" causes the instrument to continue playing any existing output to completion when untriggered.</p>
+<p>For more information about cut behavior, see the <span class="dead-link" href="instrument-reference.html">instrument reference</span class="dead-link"> chapter.</p>
+<h2 id="deck"><a href="#deck">26.23 Deck</a></h2>
+<p>The deck is found below the <span class="dead-link" href="glossary.html#birdseye-view">birdseye view</span class="dead-link"> in the <a href="glossary.html#event-editor-window">event editor window</a> and the <a href="glossary.html#mixer-window">mixer window</a>, and allows you to view and edit the properties or <a href="glossary.html#signal-chain">signal chain</a> of the currently-selected item in the <a href="glossary.html#editor">editor</a> or <a href="glossary.html#mixing-desk">mixing desk</a>.</p>
+<h2 id="default"><a href="#default">26.24 Default</a></h2>
+<p>A default is an <a href="glossary.html#event">event</a> on which new events may be based. You can use a default to quickly create copies of an existing event. These copies may subsequently be customized freely.</p>
+<p>The "#default" <span class="dead-link" href="glossary.html#tag">tag</span class="dead-link"> appears next to defaults when they are displayed in the <a href="glossary.html#events-browser">events browser</a>. Defaults do not display the "#unassigned" tag when not assigned to a <a href="glossary.html#bank">bank</a>.</p>
+<p>You can designate an event as a default by right-clicking on the event in the events browser, then selecting "Add to Defaults" from the <a href="glossary.html#context-menu">context menu</a>. <span class="dead-link" href="glossary.html#nested-event">Nested events</span class="dead-link"> may not be designated as defaults.</p>
+<p>An event created based on a default is initially identical to the default, but has no special connection to the default thereafter. Editing an event based on a default does not change the default, and editing a default does not change events that were based on that default. You can create an event based on a default by right-clicking on the events browser, then selecting "New Event &gt; Defaults" from the context menu and selecting the desired default event. </p>
+<p>Defaults are otherwise identical to other events.</p>
+<h2 id="destination-marker"><a href="#destination-marker">26.25 Destination Marker</a></h2>
+<p>A destination marker is a kind of <a href="glossary.html#logic-marker">logic marker</a> that defines a possible destination for a <a href="glossary.html#transition-marker">transition marker</a> or <a href="glossary.html#transition-region">transition region</a>.</p>
+<p><img alt="Destination marker" src="images/destinationMarker.png" /></p>
+<p>To add a destination marker to the <a href="glossary.html#event">event</a> displayed in the <a href="glossary.html#editor">editor</a>, right-click on the logic tracks, then select 'Add Destination Marker' from the <a href="glossary.html#context-menu">context menu</a>.</p>
+<p>To rename a destination marker, double-click on it, then enter a new name. Renaming a destination marker automatically updates all transition markers or regions linked to that marker to the new name.</p>
+<p>You can move a destination marker to a new logic track or location on the timeline by clicking and dragging it to the new location.</p>
+<h2 id="editor"><a href="#editor">26.26 Editor</a></h2>
+<p>The editor is found in the center of the <a href="glossary.html#event-editor-window">event editor window</a>, and allows you to view, edit, and audition <a href="glossary.html#event">events</a>. To view an event in the event editor window's editor, click on it in the <a href="glossary.html#events-browser">Events browser</a>.</p>
+<h2 id="effect"><a href="#effect">26.27 Effect</a></h2>
+<p>An effect is a modular unit that can be inserted into the <a href="glossary.html#signal-chain">signal chain</a> of a <a href="glossary.html#track">track</a> or <a href="glossary.html#bus">bus</a> to perform real-time signal processing. There are many different effects, and different effects process the signal in different ways.</p>
+<p><img alt="Effects" src="images/effects.png" /></p>
+<p>The effects in an event are the same in all instances of that event, but the property values of those effects can vary between event instances if they are affected by automation or modulation.</p>
+<p>Some effects are instances of <a href="glossary.html#preset-effect">preset effects</a> and can be present in multiple different events in the project. All instances of a single preset effect feature the same basic property values, automation, and modulation.</p>
+<p>See the <span class="dead-link" href="effects-reference.html">Effects Reference</span class="dead-link"> chapter for information about specific effects.</p>
+<h2 id="event"><a href="#event">26.28 Event</a></h2>
+<p>An event is an instanceable unit of sound content that can be triggered, controlled and stopped from game code. Everything that produces a sound in a game should have a corresponding event.</p>
+<p><img alt="step 0" src="images/event.png" /></p>
+<p>An event contains and is composed of <a href="glossary.html#track">tracks</a>, <a href="glossary.html#instrument">instruments</a>, and <a href="glossary.html#parameter">parameters</a>. The parameters trigger the instruments, which route audio content into the tracks. The tracks route into other tracks, or into the event's <a href="glossary.html#master-track">master track</a>; The output of the event's master track routes into the <a href="glossary.html#mixer">project mixer</a>. In addition, the event's parameters can control and manipulate most properties of the event, of the event's instruments and <a href="glossary.html#logic-marker">logic markers</a>, and of effect modules on the event's tracks.</p>
+<h2 id="event-editor-window"><a href="#event-editor-window">26.29 Event Editor Window</a></h2>
+<p>The event editor window contains tools for creating, viewing, organizing, editing, and auditioning events. Its major components include the <a href="glossary.html#events-browser">events browser</a>, <a href="glossary.html#banks-browser">banks browser</a>, and <a href="glossary.html#assets-browser">assets browser</a>, the <a href="glossary.html#editor">editor</a>, the <a href="glossary.html">overview</a>, the <span class="dead-link" href="glossary.html#birdseye-view">birdseye view</span class="dead-link">, and the <a href="glossary.html#deck">deck</a>.</p>
+<p><img alt="step 0" src="images/eventEditorWindow.png" /></p>
+<p>The event editor window can be opened by selecting 'Windows &gt; Event Editor' in the menu bar.</p>
+<h2 id="event-instance"><a href="#event-instance">26.30 Event Instance</a></h2>
+<p>Your game can play multiple instances of each <a href="glossary.html#event">event</a> in your project. It is even possible for multiple instances of the same event to be playing simultaneously.</p>
+<p>For example, an event that represents a gunshot might play very frequently in a game. Perhaps guns may be fired simultaneously in two different parts of the same map, or a gun might be fired again before the previous gunshot's tail has ended.</p>
+<p>All instances of the same event have the same content. However, each event instance has its own <a href="glossary.html#timeline">timeline</a> position, <span class="dead-link" href="glossary.html#3d-position">position in 3D space</span class="dead-link">, <span class="dead-link" href="glossary.html#random-modulator">random modulator</span class="dead-link"> adjustments, random <a href="glossary.html#playlist">playlist</a> selections, and <a href="glossary.html#parameter">parameter</a> values. Different instances of the same event can therefore produce very different output, even if they play simultaneously.</p>
+<p>For information on creating and playing event instances in your game's code, see <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/overview/getting_started.html#/">Getting Started</a> in the <a href="https://www.fmod.com/resources/documentation-api">FMOD Studio API documentation</a>.</p>
+<h2 id="event-property"><a href="#event-property">26.31 Event Property</a></h2>
+<p>An event property is any attribute of an event that can be <span class="dead-link" href="glossary.html#random-modulator">randomized</span class="dead-link">, or which could be made to vary over time.</p>
+<p>The value of an event property can vary between instances of an event.</p>
+<h2 id="event-reference-instrument"><a href="#event-reference-instrument">26.32 Event Reference Instrument</a></h2>
+<p>An event reference instrument (or 'event instrument') is a kind of <a href="glossary.html#instrument">instrument</a> that plays an instance of a specified <a href="glossary.html#event">event</a> elsewhere in the project when <a href="glossary.html#trigger">triggered</a>. The resultant instance's output is routed into the <a href="glossary.html#track">track</a> that holds the event reference instrument.</p>
+<h2 id="events-browser"><a href="#events-browser">26.33 Events Browser</a></h2>
+<p>The events browser is a tool for creating, naming, and organizing <a href="glossary.html#event">events</a>. It can be found in the <span class="dead-link" href="glossary.html#events-browser-window">event browser window</span class="dead-link">, as well as under the events tab of the <a href="glossary.html#event-editor-window">event editor window</a>.</p>
+<p><img alt="step 0" src="images/eventsBrowser.png" /></p>
+<h2 id="file-manager"><a href="#file-manager">26.34 File Manager</a></h2>
+<p>A file manager is an application that allows you to view and manage files and folders. Most operating systems include a file manager.</p>
+<p>The file manager included in Windows is Explorer. The file manager included in macOS is Finder.</p>
+<h2 id="final-property-value"><a href="#final-property-value">26.35 Final Property Value</a></h2>
+<p>The final value of a <span class="dead-link" href="glossary.html#property">property</span class="dead-link"> includes adjustments applied by <a href="glossary.html#automation">automation</a> and <span class="dead-link" href="glossary.html#modulation">modulation</span class="dead-link">.</p>
+<p>By comparison, <a href="glossary.html#base-property-value">base value</a> of a property does not include adjustments applied by that property's automation and modulators, and <span class="dead-link" href="glossary.html#displayed-property-value">displayed property value</span class="dead-link"> includes adjustments applied by automation but not modulators. If a property is not subject to modulation, its final value is equal to its displayed value. If a property is subject to neither automation nor modulation, its final value is equal to both its base value and its displayed value.</p>
+<h2 id="fmodio"><a href="#fmodio">26.36 FMOD.io</a></h2>
+<p>FMOD.io is an online store that sells a variety of <a href="glossary.html#audio-file">audio files</a> suitable for use as sound effects. It can be found in the <a href="glossary.html#audio-bin-window">audio bin window</a>, or by selecting 'Jump to FMOD.io' from the 'FMOD.io' menu.</p>
+<p>For more information about FMOD.io, go to <a href="http://www.fmod.io/">www.fmod.io</a>.</p>
+<h2 id="follow-playback-position-mode"><a href="#follow-playback-position-mode">26.37 Follow Playback Position Mode</a></h2>
+<p>Follow playback position mode is a tool for auditioning events repeatedly. Follow playback position can be set by clicking on the follow playback toggle button that appears to the right of the <span class="dead-link" href="glossary.html#time-beats-display">time/beats display</span class="dead-link">.</p>
+<p><img alt="Follow playback position on" src="images/followPlaybackPositionButtonOn.png" /></p>
+<p>When follow playback position mode is on, the <a href="glossary.html#editor">editor</a> and <a href="glossary.html#mixing-desk">mixing desk</a> automatically scroll to keep the <a href="glossary.html#playback-position">playback position</a> visible. In addition, any <a href="glossary.html#transition-timeline">transition timelines</a> that the playback position enters are automatically expanded.</p>
+<p>When follow playback position mode is off, the editor and mixer may only be scrolled manually.</p>
+<p>Follow playback position mode can also be turned on or off by selecting 'View &gt; Follow Playback Position'.</p>
+<p><img alt="Follow playback position command" src="images/followPlaybackPositionMenuItem.png" /></p>
+<h2 id="game-parameter"><a href="#game-parameter">26.38 Game Parameter</a></h2>
+<p>Any <a href="glossary.html#parameter">parameter</a> other than the <a href="glossary.html#timeline">timeline</a> is a game parameter. Game parameters typically represent the current state of your game.</p>
+<h2 id="group-bus"><a href="#group-bus">26.39 Group Bus</a></h2>
+<p>A group bus is a kind of <a href="glossary.html#bus">bus</a>. Like other kinds of bus, group buses create a submix of all <span class="dead-link" href="glossary.html#signal">signals</span class="dead-link"> <a href="glossary.html#routing">routed</a> into them, and have their own <a href="glossary.html#signal-chain">signal chains</a>. Any kind of bus or <a href="glossary.html#event">event</a> other than a <span class="dead-link" href="glossary.html#nested-event">nested event</span class="dead-link"> can be routed into a group bus.</p>
+<p>Group buses can be created, modified and routed in the <a href="glossary.html#routing-browser">routing browser</a>.</p>
+<h2 id="instrument"><a href="#instrument">26.40 Instrument</a></h2>
+<p>Instruments are triggerable elements that route audio content into the <a href="glossary.html#track">tracks</a> of an <a href="glossary.html#event">event</a>. Instruments appear in the 'editor' section of the <a href="glossary.html#event-editor-window">event editor window</a> as colored boxes.</p>
+<p><img alt="Instruments" src="images/InstrumentsOnTrack.png" /></p>
+<p>The instruments in an event can not vary between instances of that event.</p>
+<p>The output of an instrument can vary between instances of an event.</p>
+<h2 id="listener"><a href="#listener">26.41 Listener</a></h2>
+<p>A listener represents a virtual pair of ears that pick up output from event instances. Event instances with a <span class="dead-link" href="glossary.html#spatializer">spatializer</span class="dead-link"> effect or <span class="dead-link" href="glossary.html#built-in-parameter">built-in parameter</span class="dead-link"> can respond to the relative listener location. This can be used to process audio signals in a way that gives the perception of 3D space.</p>
+<p>Each listener has a weight that determines how much that listener contributes to the mix. Listener weights are useful for setting up multiple listeners, such as for multiplayer games, or to smoothly transition from one listener to another, such as for moving from camera to camera during an action replay. Listener weights are set via <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_Studio_System_SetListenerWeight.html">Studio::System::setListenerWeight</a>.</p>
+<p>It is possible to have more than one listener active at the same time. In these situations FMOD Studio has the following behaviors:</p>
+<ul>
+<li>Only one instance of each event instance plays for all listeners to hear, rather than one event instance per listener.</li>
+<li>3D event instances' effective audibility calculation for <span class="dead-link" href="glossary.html#virtualization">virtualization</span class="dead-link"> is determined by the closest listener to the event instance.</li>
+<li>For a 3D event instance's Doppler effect and distance attenuation, a weighted average of each of the available listeners is used. The weighted average only considers the closest listeners, up to a total weight of 1. If the listener weights for all listeners are set to 1, FMOD Studio uses the closest listener for distance attenuation. </li>
+<li>Panning is calculated as the weighted average of the panning according to each listener within the event emitter's max distance. This is weighted by how close the listeners are to the emitter and the listeners' listener weight.</li>
+</ul>
+<h2 id="logic-marker"><a href="#logic-marker">26.42 Logic Marker</a></h2>
+<p>Logic markers are flags placed along an <a href="glossary.html#event">event's</a> <a href="glossary.html#timeline">timeline</a> that change how the timeline <a href="glossary.html#playback-position">playback position</a> moves and how <a href="glossary.html#instrument">instruments</a> in the event react to the passage of time.</p>
+<p>The markers of an event appear on an event's <a href="glossary.html#logic-track">logic tracks</a> when the event's timeline is displayed in the <a href="glossary.html#editor">editor</a>.</p>
+<p>There are several different types of logic marker: <a href="glossary.html#destination-marker">Destination markers</a>, <a href="glossary.html#tempo-marker">tempo markers</a>, <a href="glossary.html#loop-region">loop regions</a>, <a href="glossary.html#sustain-point">sustain points</a>, <a href="glossary.html#transition-marker">transition markers</a>, and <a href="glossary.html#transition-region">transition regions</a>. All of these can be added to an event by right-clicking on the event's logic tracks in the <a href="glossary.html#editor">editor</a> and selecting the marker to be added from the <a href="glossary.html#context-menu">context menu</a>.</p>
+<h2 id="logic-point"><a href="#logic-point">26.43 Logic Point</a></h2>
+<p>A logic point is a collection of <a href="glossary.html#transition-marker">transition markers</a>, <a href="glossary.html#transition-region">transition region</a> <span class="dead-link" href="glossary.html#quantization-point">quantization points</span class="dead-link">, and/or <a href="glossary.html#loop-region">loop region</a> end points in the same <a href="glossary.html#event">event</a> that share the same position on the <a href="glossary.html#timeline">timeline</a>. In conjunction with <a href="glossary.html#probability-condition">probability conditions</a> and <a href="glossary.html#parameter-condition">parameter conditions</a>, logic points are a way of creating decision trees that determine the behavior of the playback position at that point.</p>
+<p>Note that when the playback position encounters multiple transition markers, transition regions, or loop region end points at a single timeline position, the highest marker whose probability and parameter conditions are met is the one that determines the behavior of the playback position.</p>
+<p>Note that if a destination marker shares the same timeline position as a logic point, the playback position, upon transitioning to that destination marker, immediately encounters the logic point.</p>
+<h2 id="logic-track"><a href="#logic-track">26.44 Logic Track</a></h2>
+<p>The logic tracks are black tracks that appear in the <a href="glossary.html#editor">editor</a>, and hold the <a href="glossary.html#logic-marker">logic markers</a> of an <a href="glossary.html#event">event</a>.</p>
+<p>To add logic markers to the logic track, right-click on a logic track and select the desired marker from the <a href="glossary.html#context-menu">context menu</a>. Logic markers can only be placed on logic tracks while viewing the event's <a href="glossary.html#timeline">timeline</a>.</p>
+<p>You can add more logic tracks to an event by clicking and dragging existing logic markers up and down. The height of a marker on the logic tracks determines which <a href="glossary.html#transition-marker">transition marker</a>, <a href="glossary.html#transition-region">transition region</a> <a href="glossary.html#quantization">quantization</a> point, or <a href="glossary.html#loop-region">loop region</a> end point should take priority when more than one exists at the same timeline position. Higher markers take priority.</p>
+<p>You can show or hide the logic tracks by clicking on the logic track disclosure triangle, located to the left of the <span class="dead-link" href="glossary.html#parameter-ruler">parameter ruler</span class="dead-link"> in the event editor window's editor.</p>
+<p><img alt="Logic track disclosure triangle" src="images/logicTrackDisclosureTriangle.png" /></p>
+<h2 id="loop-playback-mode"><a href="#loop-playback-mode">26.45 Loop Playback Mode</a></h2>
+<p>When loop playback mode is on, an <a href="glossary.html#audition">auditioning</a> <a href="glossary.html#event">event</a> automatically begins auditioning again from the beginning if it automatically stops due to there being no content currently playing and no further content on its timeline.</p>
+<p>When loop playback mode is off, an auditioning event that automatically stops does not automatically begin auditioning again.</p>
+<p>Loop playback mode can be set by clicking on the loop playback toggle button that appears to the right of the <span class="dead-link" href="glossary.html#time-beats-display">time/beats display</span class="dead-link">.</p>
+<p><img alt="Loop playback on" src="images/loopPlaybackModeOn.png" /></p>
+<p>Loop playback mode can also be set by selecting 'View &gt; Loop Playback'.</p>
+<p><img alt="Loop playback on" src="images/loopPlaybackModeOn.png" /></p>
+<h2 id="loop-region"><a href="#loop-region">26.46 Loop Region</a></h2>
+<p>A loop region is a kind of <a href="glossary.html#logic-marker">logic marker</a> that defines two points on the <a href="glossary.html#timeline">timeline</a> that the playback position is to loop between. Whenever the playback position reaches the end of a loop region, it returns to the beginning of that loop region.</p>
+<p><img alt="Loop region" src="images/loopRegion.png" /></p>
+<p>To add a loop region to the <a href="glossary.html#event">event</a> displayed in the <a href="glossary.html#editor">editor</a>, right-click on the logic tracks, then select 'Add Loop Region' from the <a href="glossary.html#context-menu">context menu</a>.</p>
+<p>You can move a loop region to a new logic track or location on the timeline by clicking and dragging it to the new location.</p>
+<p>To resize a loop region, click and drag either of its ends. Note that it is not possible to move the end point of a loop region to the same position as its start point, or vice versa.</p>
+<p>You can add trigger conditions to a loop region so that it only functions under certain circumstances. To do this, click on the loop region, then change its trigger behavior in the deck. The two kinds of trigger behavior available for transition markers are <a href="glossary.html#probability-condition">probability conditions</a> and <a href="glossary.html#parameter-condition">parameter conditions</a>. Note that the parameter conditions of a loop region are evaluated each time the playback reaches the <em>end</em> of the loop region.</p>
+<h2 id="master-bus"><a href="#master-bus">26.47 Master Bus</a></h2>
+<p>Every FMOD Studio project has exactly one master bus. Every signal in your project is eventually <a href="glossary.html#routing">routed</a> into the master bus, which creates and outputs the final mix that the player hears when playing your game. The master bus can be seen and edited in the <a href="glossary.html#mixer-window">mixer window</a>.</p>
+<p><img alt="Master bus mixer strip" src="images/masterBusMixerStrip.png" /></p>
+<p>In the <a href="glossary.html#routing-browser">routing browser</a>, the <a href="glossary.html#bus">buses</a> and <a href="glossary.html#event">events</a> at far left edge of the browser are routed directly into the master bus.</p>
+<p><img alt="Buses routed into the master bus" src="images/routingBrowserTopLevelSelected.png" /></p>
+<h2 id="master-track"><a href="#master-track">26.48 Master Track</a></h2>
+<p>The master track functions as the master bus of an event instance. It produces a submix of the <a href="glossary.html#track">tracks</a> and <a href="glossary.html#instrument">instruments</a> that route into it.</p>
+<p><img alt="step 0" src="images/masterTrack.png" /></p>
+<p>The content on a track can not vary between instances of an event.</p>
+<p>The output of a track can vary between instances of an event.</p>
+<h2 id="metadata"><a href="#metadata">26.49 Metadata</a></h2>
+<p>There are two distinct definitions of metadata in FMOD Studio: Project metadata, and bank metadata.</p>
+<p>Project metadata includes events, buses, parameters, instruments, automation, tracks, modulators, instruments, and all the other data that makes up an FMOD Studio project, with the exception of its <a href="glossary.html#audio-file">audio assets</a> and other binary format files. This kind of metadata is stored in xml format in your project folder's "Metadata" subdirectory.</p>
+<p>Bank metadata is project metadata that has been built into <a href="glossary.html#bank">banks</a>. This kind of metadata is stored in binary format in your project's built .bank files.</p>
+<p>Bank metadata is created based on project metadata as part of building your project's banks.</p>
+<h2 id="mixer"><a href="#mixer">26.50 Mixer</a></h2>
+<p>FMOD Studio's mixer is what mixes the outputs of your <a href="glossary.html#event">events</a> into a coherent whole. It functions continuously while your game runs, and can be adjusted and updated in real time by means of <a href="glossary.html#snapshot">snapshots</a>.</p>
+<p>The <a href="glossary.html#mixer-window">mixer window</a> contains tools and features that allow you to set up routing and mix your project, to apply effects to its signal chains, and to define how those effects and that mix can change in response to game events.</p>
+<h2 id="mixer-strip"><a href="#mixer-strip">26.51 Mixer Strip</a></h2>
+<p>Mixer strips resemble the channel strips found on a hardware mixing desk, and are found in the <a href="glossary.html#mixing-desk">mixing desk</a> of the <a href="glossary.html#mixer-window">mixer window</a>. Each mixer strip is a visual representation of a <a href="glossary.html#bus">bus</a> or <a href="glossary.html#event">event</a> in your project's <a href="glossary.html#routing-browser">routing browser</a>.</p>
+<p>You can use the sliders that appear on mixer strips to tweak your project's levels while auditioning events in the <a href="glossary.html#sandbox-window">sandbox window</a>, or while using <span class="dead-link" href="glossary.html#live-update">live update</span class="dead-link"> to connect to a running copy of your game.</p>
+<h2 id="mixer-window"><a href="#mixer-window">26.52 Mixer Window</a></h2>
+<p>The mixer window contains tools for setting up and editing your project's <a href="glossary.html#routing">routing</a>, as well as for <span class="dead-link" href="glossary.html#mixing">mixing</span class="dead-link"> your <span class="dead-link" href="glossary.html#fmod-studio-project">project</span class="dead-link"> and defining how that mix changes in response to <a href="glossary.html#event">events</a> in your game. Its major components include the <a href="glossary.html#routing-browser">routing browser</a> and <span class="dead-link" href="glossary.html#snapshots-browser">snapshots browser</span class="dead-link">, the <a href="glossary.html#mixing-desk">mixing desk</a>, the <span class="dead-link" href="glossary.html#birdseye-view">birdseye view</span class="dead-link">, and the <a href="glossary.html#deck">deck</a>.</p>
+<p><img alt="step 0" src="images/mixerWindow.png" /></p>
+<p>The mixer window can be opened by selecting 'Windows &gt; Mixer' in the <span class="dead-link" href="glossary.html#menu-bar">menu bar</span class="dead-link">.</p>
+<h2 id="mixing-desk"><a href="#mixing-desk">26.53 Mixing Desk</a></h2>
+<p>The mixing desk is found in the <a href="glossary.html#mixer-window">mixer window</a>, and allows you to view and edit your project's <a href="glossary.html#mixer">mixer</a>. In the mixing desk, <a href="glossary.html#bus">buses</a> are represented by <a href="glossary.html#mixer-strip">mixer strips</a>, and selecting one of these strips causes the <a href="glossary.html#signal-chain">signal chain</a> of the associated bus to appear in the <a href="glossary.html#deck">deck</a>.</p>
+<p><img alt="Mixing desk" src="images/mixingDesk.png" /></p>
+<h2 id="modulator"><a href="#modulator">26.54 Modulator</a></h2>
+<p>Modulators are devices that modify the value of an <a href="glossary.html#event-property">event property</a> over time, independent of the <a href="glossary.html#event">event</a> or <a href="glossary.html#snapshot">snapshot's</a> <a href="glossary.html#timeline">timeline</a>. They appear in the <span class="dead-link" href="glossary.html#modulation-drawer">modulation drawer</span class="dead-link"> of the modulated property's associated <a href="glossary.html#panel">panel</a>, when that panel is displayed in the <a href="glossary.html#deck">deck</a>.</p>
+<p>There are four kinds of modulator in FMOD Studio: <span class="dead-link" href="glossary.html#random-modulator">Random modulators</span class="dead-link">, <a href="glossary.html#ahdsr-modulator">AHDSR modulators</a>, <span class="dead-link" href="glossary.html#autopitch-modulator">autopitch modulators</span class="dead-link"> and <span class="dead-link" href="glossary.html#sidechain-modulator">sidechain modulators</span class="dead-link">.</p>
+<p><img alt="Modulators" src="images/modulatorRoguesGallery.png" /></p>
+<p>To add a modulator to a property, right-click on the property's controller, then select 'Add Modulation' from the <a href="glossary.html#context-menu">context menu</a>.</p>
+<h2 id="multi-instrument"><a href="#multi-instrument">26.55 Multi Instrument</a></h2>
+<p>A multi instrument is a kind of <a href="glossary.html#instrument">instrument</a> with a <a href="glossary.html#playlist">playlist</a>. When the instrument is <a href="glossary.html#trigger">triggered</a>, an item from its playlist is selected for play. A multi instrument's playlist can contain <a href="glossary.html#single-instrument">single instruments</a>, <span class="dead-link" href="glossary.html#event-instrument">event instruments</span class="dead-link">, and <a href="glossary.html#programmer-instrument">programmer instruments</a>.</p>
+<p>By default, a multi instrument's playlist is set to randomize playlist mode. In this mode, the instruments in its playlist are selected for playback in random order. In addition, as long as the playlist contains at least three instruments and does not include play percentages, no instrument in that playlist will be selected twice in a row.</p>
+<p>Playlists can also be set to sequential playlist mode. In this mode, instruments in a playlist are selected for playback in the order in which they are listed.</p>
+<p>To switch between sequential playlist mode and randomize playlist mode, click on the randomize playlist toggle button.</p>
+<p><img alt="Randomize playlist toggle button" src="images/randomizePlaylistToggleButton.png" /></p>
+<p>For more information about multi instruments, see the <span class="dead-link" href="instrument-reference.html#multi-instrument">Multi Instrument</span class="dead-link"> section of the <span class="dead-link" href="instrument-reference.html">Instrument Reference</span class="dead-link"> chapter.</p>
+<h2 id="panel"><a href="#panel">26.56 Panel</a></h2>
+<p>A panel is a gray box that represents a selected project element in the <a href="glossary.html#deck">deck</a> when that project element is selected, and holds a number of controls that represent that element's <span class="dead-link" href="glossary.html#event-properties">properties</span class="dead-link">.</p>
+<h2 id="panner"><a href="#panner">26.57 Panner</a></h2>
+<p>Every <a href="glossary.html#audio-track">audio track</a>, <a href="glossary.html#return-track">return track</a> and <a href="glossary.html#master-track">master track</a> features a panner that determines how the output of that <a href="glossary.html#track">track</a> is panned. The form of the panner corresponds to the <span class="dead-link" href="glossary.html#track-output-format">output format of the track</span class="dead-link">.</p>
+<h2 id="parameter"><a href="#parameter">26.58 Parameter</a></h2>
+<p>A parameter is an <a href="glossary.html#event-property">event property</a> that can be used to trigger and control an event's <a href="glossary.html#instrument">instruments</a>, <a href="glossary.html#logic-marker">logic markers</a>, and <a href="glossary.html#automation">automateable</a> <a href="glossary.html#event-property">properties</a>, and whose value can be set by game code.</p>
+<p><img alt="step 0" src="images/parameter.png" /></p>
+<p>Parameter values can vary between instances of an event.</p>
+<p>Every parameter is a reference to a <span class="dead-link" href="glossary.html#preset-parameter">preset parameter</span class="dead-link">. With the exception of its current value, a parameter has no properties or settings of its own. Editing any property or setting that a parameter appears to have, including the parameter's name, actually alters the property or setting of the preset parameter on which the parameter is based. Multiple preset parameters may have the same name only if they are located in different folders.</p>
+<h2 id="parameter-condition"><a href="#parameter-condition">26.59 Parameter Condition</a></h2>
+<p>Parameter conditions can be added to any <a href="glossary.html#instrument">instrument</a>, <a href="glossary.html#transition-marker">transition marker</a>, <a href="glossary.html#transition-region">transition region</a>, or <a href="glossary.html#loop-region">loop region</a>. A parameter condition specifies a <a href="glossary.html#parameter">parameter</a> and a range of values that that parameter's value must fall between for the instrument or marker to trigger when encountered by the <a href="glossary.html#playback-position">playback position</a>.</p>
+<p><img alt="Parameter conditions" src="images/loopRegionDeckPanelWithParameters.png" /></p>
+<p>To assign a parameter condition to a marker or instrument, select the marker or instrument in the <a href="glossary.html#editor">editor</a>, click on the 'Add Condition' button in the <a href="glossary.html#deck">deck</a>, then select the desired preset parameter from the menu. This automatically adds a parameter based on the preset parameter to the event if one was not already present. Once a parameter condition has been added, click and drag the handles of the <span class="dead-link" href="glossary.html#ribbon-slider">ribbon slider</span class="dead-link"> to change the parameter condition's range.</p>
+<p>The parameter conditions of an instrument are evaluated continuously for as long as the playback position continues overlapping the instrument. The parameter conditions of a transition marker are evaluated once each time the playback position encounters it. The parameter conditions of a transition region are evaluated continuously for as long as the playback position remains inside the region (if it is not quantized) or once each time the playback position encounters one of the region's quantization points.</p>
+<h2 id="parameter-cursor"><a href="#parameter-cursor">26.60 Parameter Cursor</a></h2>
+<p>The parameter cursor indicates the value to which a <a href="glossary.html#parameter">parameter</a> was most recently set. It appears as a ghosted gray vertical line when a <span class="dead-link" href="glossary.html#parameter-sheet">parameter sheet</span class="dead-link"> is displayed in the <a href="glossary.html#editor">editor</a>.</p>
+<p>Clicking on the <span class="dead-link" href="glossary.html#parameter-ruler">parameter ruler</span class="dead-link"> or adjusting the <span class="dead-link" href="glossary.html#parameter-valueKnob">parameter's value knob</span class="dead-link"> sets the parameter to a new value, repositioning the cursor.</p>
+<p>Depending on your parameter's <a href="authoring-events.html#parameters">seek speed</a> settings, the <a href="glossary.html#playback-position">playback position</a> may travel instantly or at a fixed rate to the parameter cursor. Seek speed is only applied to playing events; if an event is stopped when the parameter is set to a new value, the playback position jumps to the parameter cursor immediately.</p>
+<p>Note that the parameter cursor indicates the set value of the currently displayed event instance only. Event instances triggered by other <a href="glossary.html#event">events</a> or in other windows may have completely different parameter values.</p>
+<h2 id="parameter-tab"><a href="#parameter-tab">26.61 Parameter Tab</a></h2>
+<p>Parameter tabs appear above the <span class="dead-link" href="glossary.html#parameter-ruler">parameter ruler</span class="dead-link"> in the <a href="glossary.html#editor">editor</a>. Clicking on a parameter tab causes the associated <span class="dead-link" href="glossary.html#parameter-sheet">parameter sheet</span class="dead-link"> to be displayed.</p>
+<h2 id="persistent"><a href="#persistent">26.62 Persistent</a></h2>
+<p>A persistent <a href="glossary.html#event-instance">event instance</a> does not automatically enter the stopped <a href="glossary.html#play-state">play state</a> when there is no content to the right of its <a href="glossary.html#timeline">timeline</a> <a href="glossary.html#playback-position">playback position</a> and no <a href="glossary.html#instrument">instruments</a> in that event instance are currently producing output.</p>
+<p>You can change whether an event is persistent or not by clicking the "Persistent" toggle button in the event's macro controls. By default, a newly created event is not persistent.</p>
+<h2 id="playback-position"><a href="#playback-position">26.63 Playback Position</a></h2>
+<p>The playback position of a <a href="glossary.html#parameter">parameter</a> is the actual value of that parameter. When a <span class="dead-link" href="glossary.html#parameter-sheet">parameter sheet</span class="dead-link"> is displayed in the <a href="glossary.html#editor">editor</a>, the parameter's playback position is displayed as a vertical white line.</p>
+<p><img alt="Playback position" src="images/playbackPosition.png" /></p>
+<p>When viewing an <a href="glossary.html#event">event</a> in the <a href="glossary.html#editor">editor</a> or a <a href="glossary.html#snapshot">snapshot</a> in the <a href="glossary.html#mixing-desk">mixing desk</a>, the playback position of a parameter indicates which content on that parameter would play if that event or snapshot were <a href="glossary.html#audition">auditioned</a>; or, if the event or snapshot is currently auditioning, it indicates which content on that parameter is currently playing.</p>
+<p>Note that repositioning the <a href="glossary.html#cursor">cursor</a> also changes the playback position in most cases.</p>
+<p>In versions of FMOD Studio prior to 1.10.00, the playback position was called the 'cursor,' and the cursor was called the 'ghosted cursor.'</p>
+<h2 id="playlist"><a href="#playlist">26.64 Playlist</a></h2>
+<p>A playlist is a list found in <a href="glossary.html#multi-instrument">multi instruments</a> and <a href="glossary.html#scatterer-instrument">scatterer instruments</a>. Playlists can contain <a href="glossary.html#single-instrument">single instruments</a>, <a href="glossary.html#programmer-instrument">programmer instruments</a> and <a href="glossary.html#event-reference-instrument">event reference instruments</a>, allowing multi instruments and scatterer instruments to produce a variety of possible outputs instead of just one.</p>
+<p>Multi instruments select entries to play from their playlists when triggered, and again subsequently if their playlists are set to loop. See <span class="dead-link" href="instrument-reference.html#multi-instrument">multi instruments</span class="dead-link"> in the <span class="dead-link" href="instrument-reference.html">instrument reference</span class="dead-link"> chapter for more information about multi instruments.</p>
+<p>Scatterer instruments select entries to play from their playlists when triggered, and again subsequently every time their spawn interval passes, subject to the limits imposed by their polyphony and spawn total properties. See <span class="dead-link" href="instrument-reference.html#scatterer-instrument">scatterer instruments</span class="dead-link"> in the <span class="dead-link" href="instrument-reference.html">instrument reference</span class="dead-link"> chapter for more information about scatterer instruments.</p>
+<h2 id="play-state"><a href="#play-state">26.65 Play State</a></h2>
+<p>The play state of an <a href="glossary.html#event-instance">event instance</a> is what that instance is currently doing: Whether it is currently playing, paused, stopping, or stopped. The playback state of an event instance influences how and when it is loaded into memory, the amount of memory it consumes, and the number of <span class="dead-link" href="glossary.html#voice">voices</span class="dead-link"> it requires. As such, a detailed understanding of play states can help you improve your game's performance.</p>
+<p>Each play state is associated with certain behaviors.</p>
+<p>A <strong>playing</strong> event instance outputs to the <a href="glossary.html#mixer">mixer</a>. Its <a href="glossary.html#timeline">timeline</a> playback position automatically advances until it encounters a <a href="glossary.html#sustain-point">sustain point</a>. If one of its <a href="glossary.html#parameter">parameters</a> is set to a new value, that parameter's <a href="glossary.html#playback-position">playback position</a> changes to the new value at a rate defined by that parameter's <span class="dead-link" href="glossary.html#seek-speed">seek speed</span class="dead-link">. If any of its parameters have <span class="dead-link" href="glossary.html#velocity">velocity</span class="dead-link">, the playback positions of those parameters automatically advance.</p>
+<p>A playing event instance can be made to enter the paused, stopping, or stopped play states. A playing instance of a non-persistent event automatically enters the stopped play state if there is no content to the right of its timeline playback position and no <a href="glossary.html#instrument">instruments</a> in that event instance are currently producing output.</p>
+<p>A <strong>paused</strong> event instance does not produce output, but continues to consume system resources as if it were playing. The playback positions of its timeline and parameters do not automatically advance. If one of its parameter values is changed, that parameter's playback position is updated when the event instance is next unpaused. An event instance that was paused while stopping resumes stopping when unpaused.</p>
+<p>A paused event instance can be unpaused, which causes it to enter the play state it was in prior to being paused. Immediately stopping a paused event instance causes it to enter the stopped play state.</p>
+<p>A <strong>stopping</strong> event instance behaves identically to a playing event instance, except that the release periods of <a href="glossary.html#ahdsr-modulator">AHDSR modulators</a> on the event's properties are applied to those properties, and that the event instance automatically enters the stopped play state once all of those release periods are completed and the tails from all its reverb and delay effects have played out.</p>
+<p>A stopping event instance can be made to enter the paused or stopped play states. A stopping event instance automatically enters the stopped play state once the release periods of all AHDSR modulators on the event's properties are completed.</p>
+<p>A <strong>stopped</strong> event instance does not produce output. Its playback positions do not automatically advance. If its parameter values are changed, the playback positions of those parameters instantly move to their new positions.</p>
+<p>A stopped event instance can be made to enter the playing play state.</p>
+<h2 id="post-fader"><a href="#post-fader">26.66 Post-fader</a></h2>
+<p>An <span class="dead-link" href="glossary.html#effects-module">effects module</span class="dead-link"> is said to be post-fader if its <a href="glossary.html#panel">panel</a> is positioned to the right of the <span class="dead-link" href="glossary.html#fader">fader</span class="dead-link"> panel in a <a href="glossary.html#signal-chain">signal chain</a>. The panels in a signal chain are processed from left to right, meaning that a post-fader effect is applied to the signal after the fader.</p>
+<p>An effects module whose panel is positioned to the left of the fader panel is instead <a href="glossary.html#pre-fader">pre-fader</a>.</p>
+<p><img alt="Post-fader effect" src="images/postFaderEffect.png" /></p>
+<h2 id="pre-fader"><a href="#pre-fader">26.67 Pre-fader</a></h2>
+<p>An <span class="dead-link" href="glossary.html#effects-module">effects module</span class="dead-link"> is said to be pre-fader if its <a href="glossary.html#panel">panel</a> is positioned to the left of the <span class="dead-link" href="glossary.html#fader">fader</span class="dead-link"> panel in a <a href="glossary.html#signal-chain">signal chain</a>. The panels in a signal chain are processed from left to right, meaning that a pre-fader effect is applied to the signal before the fader.</p>
+<p>An effects module whose panel is positioned to the right of the fader panel is instead <a href="glossary.html#post-fader">post-fader</a>.</p>
+<p><img alt="Pre-fader effect" src="images/preFaderEffect.png" /></p>
+<h2 id="preset-effect"><a href="#preset-effect">26.68 Preset Effect</a></h2>
+<p>A preset effect is a version of an <a href="glossary.html#effect">effect</a> or <span class="dead-link" href="glossary.html#sidechain">sidechain</span class="dead-link"> that you can create multiple instances of throughout your project, all of which share the same property values. They allow you to save time when making changes to your project, as any change made to the preset effect will affect every instance of that preset effect throughout your project.</p>
+<p>Preset effects can be used in the <a href="glossary.html#signal-chain">signal chains</a> of events' <a href="glossary.html#track">tracks</a>, but not in the signal chains of <a href="glossary.html#bus">mixer buses</a>.</p>
+<p>To convert an existing effect or sidechain into a preset effect, right-click on the effect or sidechain in the <a href="glossary.html#deck">deck</a> and select "Convert to Preset" from the <a href="glossary.html#context-menu">context menu</a>.</p>
+<p><img alt="Convert to Preset" src="images/convertToPresetContextMenuItem.png" /></p>
+<p>To create a new preset effect from scratch, navigate to the <span class="dead-link" href="glossary.html#effects-browser">effects browser</span class="dead-link"> in the <span class="dead-link" href="glossary.html#preset-browser-window">preset browser window</span class="dead-link">, right-click on the gray space, select "New Preset" from the context menu, then select the appropriate kind of effect or sidechain from the submenu.</p>
+<p>You can create an instance of an existing preset anywhere in an event where an effect or sidechain of that type could exist. To do this, right-click on the desired location and select "Add Effect &gt; Preset Effects" from the context menu, then select the desired preset effect. Alternatively, click and drag the preset effect from the effects browser to the desired location.</p>
+<p>All instances of a preset effect have the same property settings, including any <a href="glossary.html#automation">automation</a> and <a href="glossary.html#modulator">modulators</a>. Because the property values of a preset effect can be subject to automation and modulation, it is possible for different instances of a preset effect to have different current property values. If a preset effect makes use of <a href="glossary.html#game-parameter">game parameters</a> (for example, for automation), those parameters are automatically added to every event that contains an instance of the preset effect. </p>
+<p>Preset effects are identified in the deck by an arrow icon next to the effect's name. This icon is called the <span class="dead-link" href="glossary.html#preset-effect-indicator-icon">preset effect indicator icon</span class="dead-link">. If this icon is present, the effect is a preset.</p>
+<p><img alt="Preset effect indicator icon" src="images/presetEffectIndicatorIcon.png" /></p>
+<p>Editing any property of any instance of a preset effect causes the preset effect indicator icon to flash. This indicates that all instances of the preset effect are affected by the change.</p>
+<p>You may rename a preset effect by double-clicking on it in the effects browser. The name of a preset effect is displayed below every instance of that preset effect.</p>
+<p>You can <span class="dead-link" href="glossary.html#detach">detach</span class="dead-link"> an instance of a preset effect from that preset effect. This causes that instance to become a normal effect or sidechain of the same type, no longer linked to the preset effect. To do this, right-click on the preset effect instance and select "Detach from Preset" from the context menu.</p>
+<p>Note that if an event contains multiple instances of a sidechain preset effect, anything in the event that uses that sidechain as its input will receive input from all instances of that preset effect in the effect instance.</p>
+<h2 id="probability-condition"><a href="#probability-condition">26.69 Probability Condition</a></h2>
+<p>A probability condition can be specified for any <a href="glossary.html#instrument">instrument</a>, <a href="glossary.html#loop-region">loop region</a>, <a href="glossary.html#transition-marker">transition marker</a> or <a href="glossary.html#transition-region">transition region</a>. It specifies the probability of that marker or instrument being triggered each time the <a href="glossary.html#playback-position">playback position</a> interacts with it.</p>
+<p><img alt="Probability condition" src="images/loopRegionDeckPanelWithProbability.png" /></p>
+<p>To assign a probability condition to a marker or instrument, select the marker or instrument in the event editor window's editor, click on the dice icon in the <a href="glossary.html#deck">deck</a>, then click and drag the probability dial to the desired value.</p>
+<p>The probability condition of an instrument is evaluated once each time the playback position enters the instrument. The probability condition of a transition marker is evaluated once each time the playback position encounters it. The probability condition of a transition region is evaluated once each time the playback position enters the region (if it is not quantized) or once each time the playback position encounters one of the region's quantization points.</p>
+<h2 id="programmer-instrument"><a href="#programmer-instrument">26.70 Programmer Instrument</a></h2>
+<p>A programmer instrument generates a callback which is passed to your game's code. Your game's code can then specify an <a href="glossary.html#audio-file">audio file</a> for FMOD Studio to play.</p>
+<p>For more information about programmer instruments, see the <a href="https://www.fmod.com/resources/documentation-api">FMOD Studio API documentation</a>.</p>
+<p>For the purposes of auditioning in FMOD Studio, programmer instruments can be assigned placeholder audio files. These placeholder files are not <span class="dead-link" href="glossary.html#building">built</span class="dead-link"> into <a href="glossary.html#bank">banks</a> and do not play when the instrument is triggered in your game. They exist purely so that programmer instruments can make a sound when auditioned in the FMOD Studio <a href="glossary.html#editor">editor</a>.</p>
+<p>For more information about programmer instruments, see the <span class="dead-link" href="instrument-reference#programmer-instrument">Programmer Instrument</span class="dead-link"> section of the <span class="dead-link" href="instrument-reference.html">Instrument Reference</span class="dead-link"> chapter.</p>
+<h2 id="project-mixer"><a href="#project-mixer">26.71 Project Mixer</a></h2>
+<p>The mixer represents and allows you to edit your project's routing and <span class="dead-link" href="glossary.html#mixing">mix</span class="dead-link">.</p>
+<p>The mixer may be found in the <a href="glossary.html#mixer-window">mixer window</a>.</p>
+<h2 id="quantization"><a href="#quantization">26.72 Quantization</a></h2>
+<p>Quantization is a behavior that can be added to any <a href="glossary.html#instrument">instrument</a> or <a href="glossary.html#transition-region">transition region</a>. It causes the quantized transition region or instrument to trigger only on certain beats or bars.</p>
+<p>The beats and bars of an event are positioned along the timeline based on the event's <a href="glossary.html#tempo-marker">tempo markers</a>.</p>
+<p>To quantize an instrument or transition region, select it in the <a href="glossary.html#editor">editor</a>, then select the desired <span class="dead-link" href="glossary.html#quantization-interval">quantization interval</span class="dead-link"> in the <a href="glossary.html#deck">deck</a>.</p>
+<h2 id="return-bus"><a href="#return-bus">26.73 Return Bus</a></h2>
+<p>A return bus is a type of <a href="glossary.html#bus">bus</a>. Like a <a href="glossary.html#group-bus">group bus</a>, it creates a submix of the <span class="dead-link" href="glossary.html#signal">signals</span class="dead-link"> it receives; However, unlike a group bus, <a href="glossary.html#event">events</a> and buses cannot be routed into a return bus. Instead, a return bus receives signals from <a href="glossary.html#send">sends</a> in the <a href="glossary.html#signal-chain">signal chains</a> of buses and <a href="glossary.html#track">tracks</a>.</p>
+<p>Return buses may be created and modified in the <a href="glossary.html#routing-browser">routing browser</a>.</p>
+<h2 id="return-track"><a href="#return-track">26.74 Return Track</a></h2>
+<p>A return track is a kind of <a href="glossary.html#track">track</a>. Like an <a href="glossary.html#audio-track">audio track</a>, it creates a submix of the <span class="dead-link" href="glossary.html#signals">signals</span class="dead-link"> it receives. However, unlike an audio track, <a href="glossary.html#instrument">instruments</a> and other tracks cannot be routed into a return track. Instead, a return track receives signals from <a href="glossary.html#send">sends</a> in the <a href="glossary.html#signal-chain">signal chains</a> of tracks.</p>
+<p>Return tracks may be created and modified in the <a href="glossary.html#editor">editor</a> of the <a href="glossary.html#event-editor-window">event editor window</a>.</p>
+<p><a href="glossary.html#return-bus">Return buses</a> can be displayed as return tracks in the <a href="glossary.html#mixing-desk">mixing desk</a>. To do this, select a snapshot whose scope includes the return bus, then set the mixing desk to <span class="dead-link" href="glossary.html#tracks-view">tracks view</span class="dead-link">.</p>
+<h2 id="routing"><a href="#routing">26.75 Routing</a></h2>
+<p>Routing is the process by which audio <span class="dead-link" href="glossary.html#signal">signals</span class="dead-link"> are transported from one element of a project to another. The outputs of <a href="glossary.html#instrument">instruments</a> are routed into the <a href="glossary.html#audio-track">audio tracks</a> or <a href="glossary.html#master-track">master tracks</a> on which those instruments are placed, the outputs of audio tracks are routed into other audio tracks or into the event's master track, the output of events' master tracks are routed into <a href="glossary.html#group-bus">group buses</a> or the project's <a href="glossary.html#master-bus">master bus</a> in the <a href="glossary.html#mixer">mixer</a>, and the outputs of buses in the mixer are routed into other group buses or into the project's master bus.</p>
+<p><img alt="Routing browser" src="images/routingBrowser.png" /></p>
+<p>In the <a href="glossary.html#routing-browser">Routing Browser</a>, the arrangement of buses represents the routing of the project; Signals are routed from right to left, with the outputs of the leftmost buses being routed into the project's master bus.</p>
+<p>Setting up routing is an essential part of <span class="dead-link" href="glossary.html#mixing">mixing</span class="dead-link"> your project.</p>
+<h2 id="routing-browser"><a href="#routing-browser">26.76 Routing Browser</a></h2>
+<p>The routing browser is a tool for viewing and editing your project's <a href="glossary.html#bus">bus</a> and <a href="glossary.html#event">event</a> <a href="glossary.html#routing">routing</a>. It can be found under the 'Routing' tab in the <a href="glossary.html#mixer-window">mixer window</a>, as well as in the <span class="dead-link" href="glossary.html#mixer-routing-window">mixer routing window</span class="dead-link">.</p>
+<h2 id="sandbox-window"><a href="#sandbox-window">26.77 Sandbox Window</a></h2>
+<p>The sandbox window contains tools for <a href="glossary.html#audition">auditioning</a> your project's <span class="dead-link" href="glossary.html#events">events</span class="dead-link"> and <a href="glossary.html#snapshot">snapshots</a> in a game-like context. This allows you to more easily audition 3D behavior or mix your project without using <span class="dead-link" href="glossary.html#live-update">live update</span class="dead-link"> to connect to a running instance of your game.</p>
+<p><img alt="step 0" src="images/sandboxWindow.png" /></p>
+<p>The sandbox window can be opened by selecting 'Windows &gt; Sandbox' in the <span class="dead-link" href="glossary.html#menu-bar">menu bar</span class="dead-link">.</p>
+<h2 id="scatterer-instrument"><a href="#scatterer-instrument">26.78 Scatterer Instrument</a></h2>
+<p>The scatterer instrument is a type of <a href="glossary.html#instrument">instrument</a> with features that permit spatial and temporal randomization. Scatterer instruments 'spawn' instances of instruments in their playlists in a similar manner to <a href="glossary.html#multi-instrument">multi instruments</a>. Unlike multi instruments, however, a scatterer instrument can select and spawn an instrument from its playlist regardless of when the previous one it spawned finishes playing, can randomize the volume and pitch of each spawned instance individually, and can assign a different location to each spawned instance for the purposes of panning and other location-dependent behaviors.</p>
+<p>By setting a scatterer instrument's min &amp; max spawn interval ribbon slider, you can define its temporal randomization behavior. A scatterer instrument's min &amp; max spawn interval ribbon slider defines the range of duration that can pass between the start of one playlist entry instance spawned by that scatterer instrument and the start of the next.</p>
+<p>By setting a scatterer instrument's min &amp; max distance ribbon slider, you can define its spatial randomization behavior. All instances spawned by the scatterer are randomly assigned a location (for the purposes of panning) that's a random distance away from the event emitter in a random direction. The min &amp; max distance ribbon slider defines the range of possible distances. Setting a scatterer instrument's min &amp; max distance to 0 disables spatial randomization for that scatterer instrument.</p>
+<p>Event reference instruments in a scatterer instrument playlist use the referenced events' 3D behaviors for the purposes spatial randomization. This means that referenced events that lack 3D behavior (due to having no built-in parameters or spatializer effects) are not affected in any way by spatial randomization.</p>
+<p>Single instruments and programmer instruments in a scatterer instrument playlist are panned as if affected by a spatializer effect with a linear squared rolloff curve and a max distance of 20. Setting a scatterer instrument's min &amp; max distance to 0 disables this, and prevents that scatterer instrument from applying panning to single instruments in its playlist.</p>
+<p>By setting a scatterer instrument's vol rnd and pitch rnd properties, you can specify the degree to which the pitch and volume of each instance it spawns should be randomized. The degree of pitch or volume adjustment is determined independently for each spawned instance.</p>
+<h2 id="searching"><a href="#searching">26.79 Searching</a></h2>
+<p>Large projects often contain hundreds, thousand or even tens of thousands of Events, audio files, Buses, and other items. Being able to find specific elements of a project quickly and efficiently is a critical aspect of project management and workflow.</p>
+<p>FMOD Studio offers a Browser Search Bar in all of its windows that have a Browser tab.</p>
+<p>It can be located at the underneath the Browser tabs for that window, identifiable by the white loupe icon.</p>
+<p><img alt="console" src="images/searchbar.png" /></p>
+<p>You can type in complete words, partial words, or even single letters to define a search. FMOD Studio instantly updates the items displayed in the Browser that match the search terms. The items listed are relevant only to the type associated with the active Browser, so searching in the Event Browser displays matching Events, searching in the Asset Browser/Audio Bin only displays matching sound files and so on.</p>
+<p>All Search Bars can be used to search for items using the following terms:</p>
+<blockquote>
+<ul>
+<li>Snippets of text inserted</li>
+<li><code>{%items_GUID%}</code> - The items GUID</li>
+<li><code>event:/%path_to_item%</code> - The items Path</li>
+</ul>
+</blockquote>
+<p>Items can be dragged onto the Browser Search Bar to find out the GUID and path, as well as right clicking and choosing "Copy GUID" or "Copy Path".</p>
+<p>You can find some pre-defined search terms by clicking on the white magnifying glass in the Event Browser and Asset Browser/Audio Bin and choosing one from the drop down menu.</p>
+<p><img alt="loupe_dropdown_menu" src="images/loupeDropDownMenu.png" /></p>
+<h2 id="send"><a href="#send">26.80 Send</a></h2>
+<p>A send creates a duplicate of the <span class="dead-link" href="glossary.html#signal">signal</span class="dead-link"> at the send's location, and sends the duplicate signal to a specified <a href="glossary.html#return-track">return track</a> or <a href="glossary.html#return-bus">return bus</a>. Sends exist in <a href="glossary.html#signal-chain">signal chains</a>, and can be placed before or after specific <span class="dead-link" href="glossary.html#effects-module">effects modules</span class="dead-link"> in the chain in order to duplicate the signal before or after it is processed by those effects modules.</p>
+<p><img alt="Send" src="images/sends.png" /></p>
+<p>Sends in events can target both return tracks within the same <a href="glossary.html#event">event</a> and return buses in the <a href="glossary.html#mixer">mixer</a>. Sends on buses can only target return buses in the mixer.</p>
+<h2 id="sidechain-effect"><a href="#sidechain-effect">26.81 Sidechain Effect</a></h2>
+<p>A sidechain effect is an <a href="glossary.html#effect">effect</a> whose function is to create a duplicate signal that may be used by an effect or <a href="glossary.html#modulator">modulator</a> that can be sidechained, such as an <span class="dead-link" href="glossary.html#fmod-compressor-effect">FMOD compressor effect</span class="dead-link"> or a <span class="dead-link" href="glossary.html#sidechain-modulator">sidechain modulator</span class="dead-link">.</p>
+<p>If a sidechain effect is a preset, and there are multiple instances of that preset in an event, any modulator in that event set to receive a signal from that sidechain will receive a signal from all of them.</p>
+<h2 id="signal-chain"><a href="#signal-chain">26.82 Signal Chain</a></h2>
+<p>A signal chain is a representation of the processing undergone by a signal as it passes through a <a href="glossary.html#bus">bus</a> or <a href="glossary.html#track">track</a>. Clicking on a bus or the <a href="glossary.html#track-head">head</a> of a track causes that bus or track's signal chain to be displayed in the <a href="glossary.html#deck">deck</a>.</p>
+<p><img alt="Signal chain" src="images/signalChain.png" /></p>
+<p>The signal chain of an event's track is the same in all instances of that event.</p>
+<h2 id="single-instrument"><a href="#single-instrument">26.83 Single Instrument</a></h2>
+<p>Single instruments are a kind of <a href="glossary.html#instrument">instrument</a> that can hold only one <span class="dead-link" href="glossary.html#audio-files">audio file</span class="dead-link">. As such, single instruments lack <a href="glossary.html#playlist">playlists</a>, but otherwise closely resemble <a href="glossary.html#multi-instrument">multi instruments</a>.</p>
+<p>The content of a single instrument can not vary between instances of an event.</p>
+<p>The output of a single instrument can vary between instances of an event.</p>
+<h2 id="snapshot"><a href="#snapshot">26.84 Snapshot</a></h2>
+<p>A snapshot is an instanceable unit of changes to the project mix that can be <a href="glossary.html#trigger">triggered</a>, controlled, and stopped from game code. Each snapshot represents a different way your game's mix can change in response to the circumstances in your game as it runs.</p>
+<p><img alt="Snapshots in the snapshots browser" src="images/snapshotPriority.png" /></p>
+<p>Like <a href="glossary.html#event">events</a>, snapshots are ongoing once triggered, and last until they're stopped. An active snapshot replaces some property values of the project mix until the snapshot is stopped, at which point the mix reverts to the state it would have been in were the snapshot never active.</p>
+<p>Snapshots can be created in the <span class="dead-link" href="glossary.html#snapshots-browser">snapshots browser</span class="dead-link">, under the <span class="dead-link" href="glossary.html#snapshots-tab">snapshots tab</span class="dead-link"> of the mixer window. Clicking on a snapshot in the snapshots browser displays it and makes it editable and auditionable in the <a href="glossary.html#mixing-desk">mixing desk</a>.</p>
+<p><img alt="Mixing desk with snapshot selected" src="images/mixingDeskWithSnapshotSelected.png" /></p>
+<p>Most snapshots only include a small subset of the properties in your project. Properties not included in a snapshot are never affected by that snapshot, meaning that they can be freely altered by other snapshots with no chance of a clash. This means that you can have multiple snapshots active at once without them overriding each other as long as each snapshot affects a different subset of the project's properties.</p>
+<p>The properties that a snapshot affects are said to be '<span class="dead-link" href="glossary.html#scoped-in">scoped in</span class="dead-link">' to that snapshot. The <span class="dead-link" href="glossary.html#controller">controllers</span class="dead-link"> of properties <em>not</em> scoped in to a snapshot are displayed as dashed outlines in the mixing desk and deck. When viewing a snapshot in the mixing desk, to change whether a given property is scoped in, right-click on the desired property in the mixing desk or deck, then select 'Scope In' from the <a href="glossary.html#context-menu">context menu</a>.</p>
+<p>When two different snapshots that affect the same property (or two instances of the same snapshot) are active at the same time, the mix's behavior depends on the <span class="dead-link" href="glossary.html#snapshot-priority">priority</span class="dead-link"> and <span class="dead-link" href="glossary.html#snapshot-intensity">intensity</span class="dead-link"> of those snapshots, and whether those snapshots are <span class="dead-link" href="glossary.html#blending-snapshot">blending</span class="dead-link"> or <span class="dead-link" href="glossary.html#overriding-snapshot">overriding</span class="dead-link">. For detailed information about combining multiple snapshots, see <a href="mixing.html#snapshots-and-the-tracks-view">Snapshots and the Tracks View</a> in the <a href="mixing.html">Mixing</a> chapter.</p>
+<h2 id="spatializer-effect"><a href="#spatializer-effect">26.85 Spatializer Effect</a></h2>
+<p>The spatializer effect is an <a href="glossary.html#effect">effect</a> that attenuates and pans a <span class="dead-link" href="glossary.html#signal">signal</span class="dead-link"> based on the <span class="dead-link" href="glossary.html#event-emitter">event emitter's</span class="dead-link"> position relative to the <a href="glossary.html#listener">listener</a> and the spatializer effect's properties. This "spatializes" the signal, making it sound as if it came from a particular direction and distance.</p>
+<p><img alt="Spatializer Effect" src="images/spatializerEffect.png" /></p>
+<p>Note that the spatializer effect <span class="dead-link" href="glossary.html#downmix">upmixes</span class="dead-link"> signals to the platform surround speaker mode in order to apply panning and attenuation in that mode, and so may result in minor changes to the stereo or surround qualities (including panning) that the signal had prior to being spatialized if it was in a different format.</p>
+<p>Note also that, as each <a href="glossary.html#event-instance">instance</a> of an event can have a different <span class="dead-link" href="glossary.html#3d-position">position</span class="dead-link"> relative to the listener, each instance may be affected differently by that event's spatializer. This is the most common method by which event instances in different game locations are made distinct.</p>
+<p>The min &amp; max distance properties and <span class="dead-link" href="glossary.html#rolloff-mode">rolloff mode</span class="dead-link"> of a spatializer effect together determine how much the signal is attenuated at different distances.</p>
+<p>The default rolloff mode is linear squared, and is suitable for the vast majority of games and events without further modification. In linear squared rolloff mode, the signal is not attenuated when the listener is within the spatializer's min distance, is -oo dB when the listener is beyond the spatializer's max distance, and drops off according to a linear squared curve as the listener moves from the min distance to the max distance. The other available rolloff modes are linear, inverse, inverse tapered, and off.</p>
+<p>The distance property uses the same unit of distance as your game unless your game code provides a conversion. (FMOD Studio's UE4 integration includes such a conversion by default: It converts from Unreal units to FMOD Studio distance units at a rate of 100 Unreal units = 1 FMOD Studio distance unit.) Note that most examples and tutorials for FMOD Studio are designed for distance units one meter long, as many modern game engines use meters as their standard unit of measurement.</p>
+<p>The <span class="dead-link" href="glossary.html#pan-override">pan override</span class="dead-link"> section of the spatializer effect is accessed by clicking on the disclosure triangle in the center of the spatializer. The pan override panner allows you to manually define panning for the signal, and the mix property allows you to blend between this manually defined panning and the automatic panning based on the event emitter's position relative to the listener. Note that the panning specified using the pan override panner does not depend on the event emitter's position relative to the listener.</p>
+<p><span class="dead-link" href="glossary.html#envelopment">Envelopment</span class="dead-link"> determines the <span class="dead-link" href="glossary.html#extent">extent</span class="dead-link"> of the event at any distance from the listener. The default, auto mode, sets min extent to 0 degrees and sets sound size to twice the spatializer's min distance property, and is usually sufficient to prevent event instances from suddenly "flipping" from one side of the listener to the other when they pass the listener at close range. User mode allows you to specify the spatializer's sound size and min extent manually, and off mode disables sound size and min extent.</p>
+<p>Note that even if the listener is inside the diameter defined by the sound size, the event will still have some directional qualities unless the listener is at the exact same location as the emitter.</p>
+<p>The spatializer's <span class="dead-link" href="glossary.html#lfe-property">LFE property</span class="dead-link"> determines the volume of the Low Frequency Effect (LFE) channel in the spatializer's output. If the signal has no LFE content prior to being spatialized, you can click on the speaker icon below the LFE slider to enable or disable LFE upmix, which automatially generates LFE output based on the output of the other channels.</p>
+<p>The spatializer's <span class="dead-link" href="glossary.html#meter">meters</span class="dead-link"> show the levels of each channel in the spatializer's output.</p>
+<h2 id="spatial-randomization"><a href="#spatial-randomization">26.86 Spatial Randomization</a></h2>
+<p>Spatial randomization is the name for causing an <a href="glossary.html#instrument">instrument</a> in an <a href="glossary.html#event">event</a> to be panned as if it were located a random distance in a random direction from the event's actual location.</p>
+<p>Spatial randomization may be applied to an instrument if that instrument is in the <a href="glossary.html#playlist">playlist</a> of a <a href="glossary.html#scatterer-instrument">scatterer instrument</a>. The area within which such an instrument could potentially be for the purposes of panning when randomly spatialized is defined by the scatterer instrument's min &amp; max scatter distance ribbon slider.</p>
+<h2 id="sustain-point"><a href="#sustain-point">26.87 Sustain Point</a></h2>
+<p>Sustain points are a type of <a href="glossary.html#logic-marker">logic marker</a>.</p>
+<p>When the <a href="glossary.html#timeline">timeline</a> <a href="glossary.html#playback-position">playback position</a> reaches a sustain point, it stops there. This effectively pauses any <a href="glossary.html#synchronous">synchronous</a> <a href="glossary.html#instrument">instrument</a> overlapped by the timeline playback position, without affecting the playback of <a href="glossary.html#asynchronous">asynchronous</a> instruments.</p>
+<p>Note that even if an instrument falls silent due to being paused, that instrument is still technically outputting a <span class="dead-link" href="glossary.html#signal">signal</span class="dead-link"> and taking up <span class="dead-link" href="glossary.html#voice">voices</span class="dead-link"> within your project. This means that an event that falls silent due to a sustain point may continue to take up system resources as if it was still audible.</p>
+<p>Note that sustain points do not respect <span class="dead-link" href="glossary.html#logic-markerPriority">logic marker priority</span class="dead-link">. When the timeline playback position arrives at a sustain point, it stops there even if there are other higher-priority logic markers at the same timeline position.</p>
+<h2 id="synchronous"><a href="#synchronous">26.88 Synchronous</a></h2>
+<p>In synchronous <a href="glossary.html#instrument">instruments</a>, the part of the <a href="glossary.html#audio-file">audio file</a> that plays always corresponds to the part of the trigger region's <span class="dead-link" href="glossary.html#waveform-graphic">waveform graphic</span class="dead-link"> that is overlapped by the timeline <a href="glossary.html#playback-position">playback position</a>. This allows you to seek within the audio files in a synchronous instrument by repositioning the timeline playback position.</p>
+<p>The synchronous behavior of an instrument can be identified by the appearance of the waveform graphics drawn on its trigger region: If the waveforms stretch all the way to the edge of the trigger region, the instrument is synchronous; And if the waveforms are contained within borders, the instrument is asynchronous.</p>
+<p>Note that synchronous instruments were called "Timelocked Sound Modules" in FMOD Studio versions 1.09 and earlier.</p>
+<h2 id="tempo-marker"><a href="#tempo-marker">26.89 Tempo Marker</a></h2>
+<p>A tempo marker is a kind of <a href="glossary.html#logic-marker">logic marker</a> that defines the beats per minute and time of an <a href="glossary.html#event">event</a>. These properties are necessary when quantizing <span class="dead-link" href="glossary.html#instruments">instruments</span class="dead-link"> and <span class="dead-link" href="glossary.html#transition-regions">transition regions</span class="dead-link"> to beats and bars. If there is more than one tempo marker in an event, each tempo marker sets the BPM and time for the region of the timeline between that marker and the next tempo marker to the right.</p>
+<p><img alt="Tempo marker" src="images/tempoMarker.png" /></p>
+<p>To add a tempo marker to the event currently displayed in the <a href="glossary.html#editor">editor</a>, right-click on the <a href="glossary.html#logic-track">logic tracks</a>, then select 'Add Tempo Marker' from the <a href="glossary.html#context-menu">context menu</a>.</p>
+<p>To change the beats per minute or time specified by a tempo marker, double-click on it, then enter new values with your keyboard.</p>
+<p>You can move a tempo marker to a new logic track or location on the timeline by clicking and dragging it to the new location.</p>
+<h2 id="timeline"><a href="#timeline">26.90 Timeline</a></h2>
+<p>The timeline is a special kind of <a href="glossary.html#parameter">parameter</a> with a number of special properties.</p>
+<p>Each <a href="glossary.html#event">event</a> always has exactly one timeline.</p>
+<p>A timeline automatically increases its value over time while the event plays. The initial value of a timeline is always zero.</p>
+<p>Timelines are the only parameters capable of triggering <a href="glossary.html#logic-marker">logic markers</a>.</p>
+<p>Timelines are not based on preset parameters.</p>
+<h2 id="track"><a href="#track">26.91 Track</a></h2>
+<p>With the exception of automation tracks, tracks function as buses within an <a href="glossary.html#event">event</a>, allowing each event instance to function as a small mixer. An event's tracks can be viewed in the <a href="glossary.html#event-editor-window">event editor window</a> by selecting the event in the <a href="glossary.html#events-browser">events browser</a>. Tracks can additionally be viewed as <a href="glossary.html#mixer-strip">mixer strips</a> in the event editor window's <span class="dead-link" href="glossary.html#strips-view">strips view</span class="dead-link">. (Automation tracks do not function as buses, and are instead used in conjunction with parameters to control an event's properties. See the <a href="authoring-events.html#automation-and-modulation">Automation and Modulation</a> section of the <a href="authoring-events.html">Authoring Events</a> chapter for more information.)</p>
+<p><img alt="step 0" src="images/tracks.png" /></p>
+<p>See also <a href="glossary.html#master-track">master track</a>, <a href="glossary.html#audio-track">audio track</a> and <a href="glossary.html#return-track">return track</a>.</p>
+<p>The content on a track can not vary between instances of an event.</p>
+<p>The output of a track can vary between instances of an event.</p>
+<h2 id="track-head"><a href="#track-head">26.92 Track Head</a></h2>
+<p><a href="glossary.html#track">Track</a> heads are gray panels that appear down the left side of the <a href="glossary.html#editor">editor</a> or <a href="glossary.html#mixing-desk">mixing desk</a> when in <span class="dead-link" href="glossary.html#tracks-view">tracks view</span class="dead-link">. Each track head shows the associated track's name and simplified <span class="dead-link" href="glossary.html#output-meter">output meter</span class="dead-link">, as well as <span class="dead-link" href="glossary.html#monitoring-controls">monitoring controls</span class="dead-link"> and the track's <span class="dead-link" href="glossary.html#fader">fader</span class="dead-link"> control.</p>
+<p>Clicking on a track head selects the associated track and causes its <a href="glossary.html#signal-chain">signal chain</a> to be displayed in the <a href="glossary.html#deck">deck</a>.</p>
+<h2 id="transition-marker"><a href="#transition-marker">26.93 Transition Marker</a></h2>
+<p>A transition marker is a kind of <a href="glossary.html#logic-marker">logic marker</a> that makes the playback position jump from the transition marker's location to a specified <a href="glossary.html#destination-marker">destination marker</a> elsewhere in the <a href="glossary.html#event">event</a>.</p>
+<p><img alt="Transition markers" src="images/transitionMarkers.png" /></p>
+<p>To add a transition marker to the event displayed in the <a href="glossary.html#editor">editor</a>, right-click on the logic tracks, then select 'Add Transition Marker' from the <a href="glossary.html#context-menu">context menu</a>.</p>
+<p>You can move a transition marker to a new logic track or location on the timeline by clicking and dragging it to the new location.</p>
+<p>You can add trigger conditions to a transition marker so that it only functions under certain circumstances. To do this, click on the transition marker, then change its trigger behavior in the deck. The two kinds of trigger behavior available for transition markers are <a href="glossary.html#probability-condition">probability conditions</a> and <a href="glossary.html#parameter-condition">parameter conditions</a>. Note that the parameter conditions of a transition marker are evaluated each time the playback position reaches the transition marker.</p>
+<p>You can add a <a href="glossary.html#transition-timeline">transition timeline</a> to a transition marker by double-clicking on it. Transition markers that already feature transition timelines are indicated by a hollow circle icon.</p>
+<p><img alt="Transition marker with hidden transition timeline" src="images/transitionTimelineCollapsed.png" /></p>
+<p>Double-clicking on a transition marker that already features a transition timeline opens that transition timeline, or closes it if it is already open.</p>
+<h2 id="transition-region"><a href="#transition-region">26.94 Transition Region</a></h2>
+<p>A transition region is a kind of <a href="glossary.html#logic-marker">logic marker</a> that makes the playback position jump from the transition region's location to a specified <a href="glossary.html#destination-marker">destination marker</a> elsewhere in the <a href="glossary.html#event">event</a>.</p>
+<p><img alt="Transition regions" src="images/transitionRegions.png" /></p>
+<p>To add a transition region to the event displayed in the <a href="glossary.html#editor">editor</a>, right-click on the logic tracks, then select 'Add Transition region' from the <a href="glossary.html#context-menu">context menu</a>.</p>
+<p>You can move a transition region to a new logic track or location on the timeline by clicking and dragging it to the new location.</p>
+<p>You can add trigger conditions to a transition region so that it only functions under certain circumstances. To do this, clicking on the transition region, then change its trigger behavior in the deck. The three kinds of trigger behavior available for transition regions are <a href="glossary.html#probability-condition">probability conditions</a>, <a href="glossary.html#parameter-condition">parameter conditions</a>, and <a href="glossary.html#quantization">quantization</a>. Note that the parameter conditions of a transition region are evaluated continuously for as long as the playback position remains inside the transition region, but that the probability condition of the transition region is evaluated only when the playback position enters the loop region (if it is not quantized) or encounters one of its quantization points (if it is quantized).</p>
+<p>You can add a <a href="glossary.html#transition-timeline">transition timeline</a> to a transition region by double-clicking on it. Transition regions that already feature transition timelines are indicated by a hollow circle icon.</p>
+<p><img alt="Transition region with hidden transition timeline" src="images/transitionRegionWithCollapsedTransitionTimeline.png" /></p>
+<p>Double-clicking on a transition region that already features a transition timeline opens that transition timeline, or closes it if it is already open.</p>
+<h2 id="transition-timeline"><a href="#transition-timeline">26.95 Transition Timeline</a></h2>
+<p>A transition timeline is a special timeline that can exist between a <a href="glossary.html#transition-marker">transition marker</a> (or <a href="glossary.html#transition-region">transition region</a>) and its associated <a href="glossary.html#destination-marker">destination marker</a>. When the <a href="glossary.html#playback-position">playback position</a> is inside a transition timeline, it is not present on the normal <a href="glossary.html#timeline">timeline</a>. Transition timelines may contain <span class="dead-link" href="glossary.html#instruments">instruments</span class="dead-link"> and <span class="dead-link" href="glossary.html#automation-point">automation points</span class="dead-link">, and can be used to make transitions more complex and detailed.</p>
+<p>To add a transition region to a transition marker or transition region that doesn't already have one, double-click on the marker or region. Transition markers and transition regions that already feature transition timelines are marked with a hollow circle icon.</p>
+<p><img alt="Transition region with hollow circle icon" src="images/transitionRegionWithCollapsedTransitionTimeline.png" /></p>
+<p>You can open an existing transition timeline for display in the <a href="glossary.html#editor">editor</a> by double-clicking on the associated transition marker or transition region. Double-clicking on the transition marker or transition region of an open transition timeline closes the transition timeline.</p>
+<p>Only one transition timeline can be displayed in the event editor window's editor at any given time. If a transition timeline is already open for display and you double-click on another transition marker or transition region to open its transition timeline, the displayed transition timeline will automatically close.</p>
+<p>Transition timelines can be made to play content from parts of the main timeline. To play content from after the transition marker on a transition timeline, click and drag the left edge of the transition timeline to the right to create a <span class="dead-link" href="glossary.html#source-region">source region</span class="dead-link"> on the track. To play content from after the destination marker on a transition timeline, click and drag the right edge of the transition timeline to the left to create a <span class="dead-link" href="glossary.html#source-region">destination region</span class="dead-link"> on the track.</p>
+<p><img alt="Transition timeline with source and destination regions" src="images/transitionTimelineWithSourceAndDestinationRegions.png" /></p>
+<p>Source and destination regions cannot overlap each other, but can be crossfaded with instruments on the transition timeline.</p>
+<h2 id="transport-controls"><a href="#transport-controls">26.96 Transport Controls</a></h2>
+<p>The transport controls are a collection of buttons used to <a href="glossary.html#audition">audition</a> content in FMOD Studio. Transport controls are found in several places throughout the FMOD Studio tool.</p>
+<p>In the <a href="glossary.html#editor">editor</a>, the transport controls allow you to play, pause and stop the currently displayed <a href="glossary.html#event">event</a>. For more information about auditioning events, see the <a href="authoring-events.html">auditioning events</a> section of the <a href="authoring-events.html">authoring events</a> chapter.</p>
+<p>In the <span class="dead-link" href="glossary.html#sandbox">sandbox</span class="dead-link">, the transport controls allow you to play and stop the currently selected <span class="dead-link" href="glossary.html#event-emitter">event emitter</span class="dead-link">. These controls are grayed out when no event emitter is selected.</p>
+<p>In the <a href="glossary.html#mixing-desk">mixing desk</a>, the transport controls allow you to play, pause and stop the currently selected <a href="glossary.html#snapshot">snapshot</a>. These transport controls appear only when a snapshot is selected in the <span class="dead-link" href="glossary.html#snapshots-browser">snapshots browser</span class="dead-link">.</p>
+<p>In the <span class="dead-link" href="glossary.html#profiler">profiler</span class="dead-link">, the transport controls allow you to play, pause, stop and record the currently selected profiler session. When no session is selected, clicking the record button creates a new session.</p>
+<h2 id="trigger"><a href="#trigger">26.97 Trigger</a></h2>
+<p>An <a href="glossary.html#instrument">instrument</a> is triggered when the <a href="glossary.html#playback-position">playback position</a> begins to overlap the instrument's <a href="glossary.html#trigger-region">trigger region</a>. A triggered instrument begins producing a signal that is output to the <a href="glossary.html#track">track</a> the instrument is on.</p>
+<h2 id="trigger-region"><a href="#trigger-region">26.98 Trigger Region</a></h2>
+<p>A colored box that represents the range of <a href="glossary.html#parameter">parameter</a> values that can <a href="glossary.html#trigger">trigger</a> an <a href="glossary.html#instrument">instrument</a> or <a href="glossary.html#snapshot">snapshot</a>. Trigger regions that represent instruments are displayed on the tracks to which they output a signal when triggered.</p>
+<h2 id="untrigger"><a href="#untrigger">26.99 Untrigger</a></h2>
+<p>An <a href="glossary.html#instrument">instrument</a> is untriggered when the <a href="glossary.html#playback-position">playback position</a> ceases to overlap the instrument's <a href="glossary.html#trigger-region">trigger region</a>.</p>
+<p>The behavior of an untriggered instrument is determined by a number of factors, including its <a href="glossary.html#cut-behavior">cut behavior</a>, whether it is <a href="glossary.html#synchronous">synchronous</a> or <a href="glossary.html#asynchronous">asynchronous</a>, and whether any of its properties are subject to <a href="glossary.html#ahdsr-modulator">AHDSR modulation</a>.</p>
+<h2 id="version"><a href="#version">26.100 Version</a></h2>
+<p>The version number of FMOD Studio. Version numbers are split into three parts, in the format: <em>productVersion</em>.<em>majorVersion</em>.<em>minorVersion</em>. For example, the version 1.23.45 would indicate product version 1, major version 23, and minor version 45 of that major version.</p>
+<p>Major versions contain significant changes, add new features, and may affect bank compatibility. Updating to a new major version usually requires project migration. New major versions may change playback behavior in some cases.</p>
+<p>Minor versions, also known as patch versions, contain bug fixes and smaller workflow improvements.</p></div>
+
+<p class="manual-footer">FMOD Studio User Manual 1.10.10 (2018-12-07). &copy; 2018 Firelight Technologies Pty Ltd.</p>
+</body>
+</html>
+
+</div>

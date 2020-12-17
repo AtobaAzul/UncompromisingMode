@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="EncodableAsset" id="{4727fc67-628d-4b95-966b-8ff0534e42a2}">
+        <property name="assetPath">
+            <value>hatch/</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{0e622e9a-5820-4286-bf7d-7de674a43cb2}</destination>
+        </relationship>
+    </object>
+</objects>

@@ -1,0 +1,328 @@
+<html>
+<head>
+<title>Organizing the Project</title>
+<link rel="stylesheet" href="style/docs.css">
+<link rel="stylesheet" href="style/code_highlight.css">
+</head>
+<body>
+<div class="docs-body">
+<div class="manual-toc">
+<p>FMOD Studio User Manual 1.10</p>
+<ul>
+<li><a href="welcome-to-fmod-studio.html">Welcome to FMOD Studio</a></li>
+<li><a href="fmod-studio-concepts.html">FMOD Studio Concepts</a></li>
+<li class="manual-current-chapter manual-active-chapter"><a href="organizing-the-project.html">Organizing the Project</a><ul>
+<li><a href="#events-browser">Events Browser</a><ul>
+<li><a href="#events-and-event-instances">Events and Event Instances</a></li>
+<li><a href="#referenced-events">Referenced Events</a></li>
+<li><a href="#nested-events">Nested Events</a></li>
+</ul>
+</li>
+<li><a href="#banks-browser">Banks Browser</a></li>
+<li><a href="#assets-browser">Assets Browser</a></li>
+<li><a href="#searching">Searching</a><ul>
+<li><a href="#tags">Tags</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="authoring-events.html">Authoring Events</a></li>
+<li><a href="working-with-instruments.html">Working with Instruments</a></li>
+<li><a href="managing-assets.html">Managing Assets</a></li>
+<li><a href="getting-events-into-your-game.html">Getting Events into Your Game</a></li>
+<li><a href="mixing.html">Mixing</a></li>
+<li><a href="profiling.html">Profiling</a></li>
+<li><a href="editing-during-live-update.html">Editing During Live Update</a></li>
+<li><a href="supporting-downloadable-and-user-generated-content.html">Supporting Downloadable and User-generated Content</a></li>
+<li><a href="advanced-topics.html">Advanced Topics</a></li>
+<li><a href="event-macro-controls-reference.html">Event Macro Controls Reference</a></li>
+<li><a href="plugin-reference.html">Plug-in Reference</a></li>
+<li><a href="modulator-reference.html">Modulator Reference</a></li>
+<li><a href="built-in-parameters-reference.html">Built-In Parameters Reference</a></li>
+<li><a href="scripting-terminal-reference.html">Scripting</a></li>
+<li><a href="scripting-api-reference.html">Scripting API Reference</a></li>
+<li><a href="keyboard-shortcut-reference.html">Keyboard Shortcut Reference</a></li>
+<li><a href="glossary.html">Glossary</a></li>
+<li><a href="appendix-a-celeste.html">Appendix: Celeste Getting Started Guide</a></li>
+</ul>
+</div>
+<div class="manual-content">
+<h1>3. Organizing the Project</h1>
+<p>The main building blocks of an FMOD Studio project are <a href="glossary.html#event">events</a>.</p>
+<p>Events are important because of how flexible they are. You can have a simple 2D event that loops for music, and another event that changes its output on the fly. The parameters of an event can trigger new sounds, or even alter or reroute audio signals, giving a very real and dynamic feel to your game.</p>
+<p>Events are the fundamental units of sound design in FMOD Studio, and most of your time spent working with FMOD Studio will be in the <a href="glossary.html#event-editor-window">event editor window</a>.</p>
+<p>The event editor window is the first window that opens when FMOD Studio is run. This window contains a variety of features and tools for creating, editing and organizing <a href="glossary.html#event">events</a>.</p>
+<p>There are three <span class="dead-link" href="glossary.html#browser">browsers</span class="dead-link"> that can appear in an event editor window: the <a href="glossary.html#events-browser">events browser</a>, the <a href="glossary.html#banks-browser">banks browser</a>, and the <a href="#assets-browser">assets browser</a>. Only one of these can be displayed at a time. You can change which browser is displayed by clicking on the tabs at the top of the browser.</p>
+<p>You are able to organize your project to work best with your workflow in these browsers.</p>
+<p><img alt="The events browser" src="images/eventsBrowser.png" /></p>
+<p>You can hide all folders and show only the items in the current browser on a single level by clicking on the "Flatten" button. This is useful for searching for items without showing the folders that they reside in.</p>
+<p>You can drag a project element from any browser over another browser's tab, and FMOD Studio will switch to that browser.</p>
+<h2 id="events-browser"><a href="#events-browser">3.1 Events Browser</a></h2>
+<p>The <a href="glossary.html#events-browser">events browser</a> displays your project's <a href="glossary.html#event">events</a> and event folders. It allows you to create, assign and organize events.</p>
+<p>To create an event in this browser, right click on an empty space and select "New Event". This opens a sub-menu, in which you have the option to make a 3D Event, a 2D Event, or a <a href="glossary.html#default">default</a> event. </p>
+<p>3D events include the <span class="dead-link" href="effects-reference.html#spatializer">spatializer</span class="dead-link"> effect on the <a href="glossary.html#master-track">master track</a> and are set to the current <span class="dead-link" href="glossary.html#platform">platform's</span class="dead-link"> <a href="">channel format</a> by default. 2D events do not include any effects by default and is set to "Automatic" output, taking the channel format from the content placed in the event. For more information, please see the <a href="mixing.html#channel-formats">channel formats</a> section of the Mixing chapter.</p>
+<p>You can make templates of events called <a href="glossary.html#default">defaults</a> and create new events with these through the "Defaults" sub-menu.</p>
+<p>To create a folder, right click on an empty space and select "New Folder". You can place as many folders as you need into your project and nest folders within folders. You can drag and drop both folders and events into other folders to organize your project to best suit your workflow. </p>
+<p>Right click on an event and select "Move Into New Folder" to create a new folder on that hierarchical level and move the event into that newly created folder.</p>
+<p>To filter which items are displayed, click on the search bar at the top of the browser and type part of the name of the item you want to see, or by click on the loupe icon and selecting an option from the loupe menu.</p>
+<p>Clicking on an event displays it in the <a href="glossary.html#event-editor-window">event editor window's</a> editor and overview panes. Hold down the 'Shift' or 'Ctrl' keys when clicking on events to select multiple events, allowing you to edit or manipulate them as a group.</p>
+<p>The events browser can be found in the event editor window and the events browser window.</p>
+<h3 id="events-and-event-instances"><a href="#events-and-event-instances">3.1.1 Events and Event Instances</a></h3>
+<p>An <a href="glossary.html#event">event</a> is an instanceable unit of sound content that can be triggered, controlled and stopped from game code. Everything that produces a sound in a game should have a corresponding event. An event defines how an audio <span class="dead-link" href="glossary.html#asset">asset</span class="dead-link"> behaves and sounds.</p>
+<p>When an FMOD Studio event is called in your game's engine, this creates an instance of said event. Once created, this instance is independent of the original event and of any other instances of that event that might be playing. Once it is finished, that instance is then removed from memory.</p>
+<p>This means that multiple instances of the same event can have different parameter values, instead of needing a different event for each and every event instance.</p>
+<p>As an example, should your game require footstep sounds for all enemies on screen; rather than creating multiple events for each enemy, the same event can be shared across all enemies - each playing in a different 3D location and having different parameter values passed in for floor surfaces and velocity/pitch of footsteps.</p>
+<h3 id="referenced-events"><a href="#referenced-events">3.1.2 Referenced Events</a></h3>
+<p>One of the most powerful functions of FMOD Studio is the ability to reference an event within an event. </p>
+<p>This allows for an <a href="glossary.html#instrument">instrument</a> with one type of function to be nested within a instrument with a separate function. In this manner it is possible to combine the entire range of instrument functions to achieve a vast range of output results.</p>
+<p><img alt="referencedEvents" src="images/referencedEvents.png" /></p>
+<p>Each referenced event can be opened in a separate tab or window for ease of workflow and editing.</p>
+<p>To create a referenced event, drag and drop an event from the event browser onto an audio track in the event editor window. This creates an <span class="dead-link" href="instrument-reference.html#event-instrument">event instrument</span class="dead-link"> which will play the event that it is referencing when triggered.</p>
+<p>By default, built banks include any referenced events and their sample data for events assigned to that bank. To include referenced events in only the banks to which they are explicitly assigned, please see the <a href="getting-events-into-your-game.html#including-referenced-events-in-banks">Including Referenced Events in Banks</a> section of the <a href="getting-events-into-your-game.html">Getting Events into Your Game</a> chapter.</p>
+<h3 id="nested-events"><a href="#nested-events">3.1.3 Nested Events</a></h3>
+<p>A nested event can be thought of as a special <a href="#referenced-events">referenced event</a>.</p>
+<p>A nested event can only be referenced by its parent event and can be referenced as many times as needed, but does not route into the project's mixer. Instead, it outputs to its parent's which route into the project's mixer.</p>
+<p>To create a nested event, either right click on an event's <a href="glossary.html#timeline">timeline</a> and select "Add Event Instrument", or right click on a <span class="dead-link" href="instrument-reference.html#multi-instrument">multi instrument's</span class="dead-link"> or <span class="dead-link" href="instrument-reference.html#scatterer-instrument">scatterer instrument's</span class="dead-link"> <a href="glossary.html#playlist">playlist</a> and select "Add Event Instrument".</p>
+<p>For all information on how to use referenced events, please see the the <a href="#referenced-events">referenced events</a> section.</p>
+<h2 id="banks-browser"><a href="#banks-browser">3.2 Banks Browser</a></h2>
+<p>The <a href="glossary.html#banks-browser">banks browser</a> displays your project's banks and bank folders, as well as the events and <a href="advanced-topics.html#audio-tables">audio tables</a> assigned to each bank. It allows you to create, edit and organize your project's banks, as well as to assign events to banks.</p>
+<p>To create a new <a href="glossary.html#bank">bank</a>, right click in an empty space in the banks browser and select "New Bank". You can also create folders by right clicking in an empty space in the banks browser and selecting "New Folder". All banks apart from the master bank can be moved into a folder.</p>
+<p>Please note that placing banks into folders does not affect the build process - all banks will be built into the same folder specified in the Build tab of the <span class="dead-link" href="glossary.html#preferences">preferences</span class="dead-link"> dialog.</p>
+<p>You can filter what is displayed by clicking on the search bar at the top of the browser and typing part of the name of the bank you want to see.</p>
+<p>For more information on banks, please see the FMOD Studio concepts section on <a href="fmod-studio-concepts.html#banks">banks</a>.</p>
+<h2 id="assets-browser"><a href="#assets-browser">3.3 Assets Browser</a></h2>
+<p>The <a href="glossary.html#assets-browser">assets browser</a> displays the audio files and folders in your project's assets directory. It allows you to audition, edit and organize your project's audio files, as well as to add those files to instruments and events.</p>
+<p>To add a new <span class="dead-link" href="glossary.html#asset">asset</span class="dead-link"> to your project, drag and drop <a href="glossary.html#audio-file">audio files</a> into the assets browser. It is also possible to copy audio files directly into the asset folder of the project's file hierarchy. </p>
+<p>You can also create folders by right clicking in an empty space in the banks browser and selecting "New Folder". All banks apart from the master bank can be moved into a folder.</p>
+<p>You can filter which assets are displayed by clicking on the search bar at the top of the browser and typing part of the name of the asset you want to see.</p>
+<p>For more information on assets and the assets browser, please see the <a href="managing-assets.html#anatomy-of-the-assets-browser">managing assets</a> section.</p>
+<h2 id="searching"><a href="#searching">3.4 Searching</a></h2>
+<p>Most <span class="dead-link" href="glossary.html#browser">browsers</span class="dead-link"> in FMOD Studio feature a <span class="dead-link" href="glossary.html#search-bar">search bar</span class="dead-link"> that you can use to find specific items in those browsers.</p>
+<p>Typing text into the search bar causes the browser to display items whose names contain that text. Typing a hash symbol ("#") followed by the name of a <span class="dead-link" href="glossary.html#tag">tag</span class="dead-link"> into the events browser, routing browser, VCAs browser, or banks browser`s search bar causes that browser to display events that feature that tag. This kind of search is not case-sensitive.</p>
+<p>Clicking on a search bar`s <span class="dead-link" href="glossary.html#loupe-icon">loupe icon</span class="dead-link"> opens the <span class="dead-link" href="glossary.html#loupe-menu">loupe menu</span class="dead-link">. Clicking on any item in the loupe menu adds a special search term to the search bar. All special search terms are case-sensitive, and can also be typed into the search bar manually.</p>
+<p><img alt="Loupe Menu" src="images/loupeDropDownMenu.png" /></p>
+<p>The loupe menu items are summarized in the table below, along with their corresponding special search terms, the browsers in which they may be found, and their effects.</p>
+<table>
+<thead>
+<tr>
+<th>Events Browser Loupe Menu Item</th>
+<th>Term</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filter by Default Events</td>
+<td><code>#default</code></td>
+<td>Searches for events that are <a href="glossary.html#default">defaults</a>.</td>
+</tr>
+<tr>
+<td>Filter by Referenced Events</td>
+<td><code>#referenced</code></td>
+<td>Searches for events that are <span class="dead-link" href="glossary.html#referenced-event">referenced</span class="dead-link"> by other events.</td>
+</tr>
+<tr>
+<td>Filter by Unassigned Events</td>
+<td><code>#unassigned</code></td>
+<td>Searches for events that are not assigned to any <a href="glossary.html#bank">banks</a>.</td>
+</tr>
+<tr>
+<td>Filter by Persistent Events</td>
+<td><code>#query:(EventAutomatableProperties.isPersistent == true)</code></td>
+<td>Searches for events that are <a href="glossary.html#persistent">persistent</a> and so never naturally stop.</td>
+</tr>
+<tr>
+<td>Filter by Effect &gt; <specific effect></td>
+<td><code>#query:(&lt;entity name&gt;)</code></td>
+<td>Searches for events that contain the specified <a href="glossary.html#effect">effect</a>.</td>
+</tr>
+<tr>
+<td>Operators &gt; AND</td>
+<td><code>AND</code></td>
+<td>Searches for items that match both the search term preceding the AND in the search bar, and the search term following it.</td>
+</tr>
+<tr>
+<td>Operators &gt; OR</td>
+<td><code>OR</code></td>
+<td>Searches for items that match either the search term preceding the OR in the search bar, or the search term following it.</td>
+</tr>
+<tr>
+<td>Operators &gt; NOT</td>
+<td><code>NOT</code></td>
+<td>Searches for items that match the search term preceding the NOT in the search bar, and do not match the search term following it.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Assets Browser Loupe Menu item</th>
+<th>Term</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filter by Missing Assets</td>
+<td><code>#missing</code></td>
+<td>Searches for assets that exist according to the project`s metadata, but which are not present in the paths specified in that metadata.</td>
+</tr>
+<tr>
+<td>Filter by Modified Assets</td>
+<td><code>#modified</code></td>
+<td>Searches for assets that have been edited in an external editor since the last time their metadata was updated.</td>
+</tr>
+<tr>
+<td>Filter by Unimported Assets</td>
+<td><code>#unimported</code></td>
+<td>Searches for assets that are present in the project`s assets folder, but which are not currently imported into the project.</td>
+</tr>
+<tr>
+<td>Filter by Unused Assets</td>
+<td><code>#unused</code></td>
+<td>Searches for assets that are not used in any event. (This search term will find assets that are used in audio tables and programmer instruments if they are not also used in at least one instrument of another type.)</td>
+</tr>
+<tr>
+<td>Filter by Streaming Assets</td>
+<td><code>#streaming</code></td>
+<td>Searches for assets that are set to <a href="glossary.html#bank">stream</a>. For more information about streaming assets, see the <a href="managing-assets.html#compression-and-platform-encoding">Compression and Platform Encoding</a> section of the <a href="managing-assets.html">Managing Assets</a> chapter.</td>
+</tr>
+<tr>
+<td>Filter by Custom Encoding Settings</td>
+<td><code>#customized</code></td>
+<td>Searches for assets that have <span class="dead-link" href="glossary.html#custom-encoding-settings">custom encoding settings</span class="dead-link">. For more information about encoding settings, see the <a href="managing-assets.html#compression-and-platform-encoding">Compression and Platform Encoding</a> section of the <a href="managing-assets.html">Managing Assets</a> chapter.</td>
+</tr>
+<tr>
+<td>Filter by File Length</td>
+<td><code>#query:(AudioFile.length &gt; &lt;length in seconds&gt;)</code></td>
+<td>Searches for assets by the specified length in seconds. The method used to compare asset lengths depends on the operator specified. Valid operators include greater than ("&gt;"), less that ("&lt;"), equal to ("=="), greater than or equal to ("&gt;="), less than or equal to ("&lt;=").</td>
+</tr>
+<tr>
+<td>Operators &gt; AND</td>
+<td><code>AND</code></td>
+<td>Searches for items that match both the search term preceding the AND in the search bar, and the search term following it.</td>
+</tr>
+<tr>
+<td>Operators &gt; OR</td>
+<td><code>OR</code></td>
+<td>Searches for items that match either the search term preceding the OR in the search bar, or the search term following it.</td>
+</tr>
+<tr>
+<td>Operators &gt; NOT</td>
+<td><code>NOT</code></td>
+<td>Searches for items that match the search term preceding the NOT in the search bar, and do not match the search term following it.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Parameters Browser Loupe Menu item</th>
+<th>Term</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filter by Unused Parameters</td>
+<td><code>#unused</code></td>
+<td>Searches for <span class="dead-link" href="glossary.html#preset-parameter">preset parameters</span class="dead-link"> that are not used in any event in your project.</td>
+</tr>
+<tr>
+<td>Filter by Parameter Type &gt; User</td>
+<td><code>#query:(GameParameter.parameterType == "0")</code></td>
+<td>Searches for preset parameters of the <span class="dead-link" href="glossary.html#user-parameter">user</span class="dead-link"> <span class="dead-link" href="glossary.html#parameter-type">parameter type</span class="dead-link">.</td>
+</tr>
+<tr>
+<td>Filter by Parameter Type &gt; Distance</td>
+<td><code>#query:(GameParameter.parameterType == "1")</code></td>
+<td>Searches for preset parameters of the <span class="dead-link" href="glossary.html#distance-parameter">distance</span class="dead-link"> <span class="dead-link" href="glossary.html#built-in-parameter">built-in parameter</span class="dead-link"> type.</td>
+</tr>
+<tr>
+<td>Filter by Parameter Type &gt; Direction</td>
+<td><code>#query:(GameParameter.parameterType == "2")</code></td>
+<td>Searches for preset parameters of the <span class="dead-link" href="glossary.html#direction-parameter">direction</span class="dead-link"> built-in parameter type.</td>
+</tr>
+<tr>
+<td>Filter by Parameter Type &gt; Elevation</td>
+<td><code>#query:(GameParameter.parameterType == "3")</code></td>
+<td>Searches for preset parameters of the <span class="dead-link" href="glossary.html#direction-parameter">elevation</span class="dead-link"> built-in parameter type.</td>
+</tr>
+<tr>
+<td>Filter by Parameter Type &gt; Event Cone Angle</td>
+<td><code>#query:(GameParameter.parameterType == "4")</code></td>
+<td>Searches for preset parameters of the <span class="dead-link" href="glossary.html#event-cone-angle-parameter">event cone angle</span class="dead-link"> built-in parameter type.</td>
+</tr>
+<tr>
+<td>Filter by Parameter Type &gt; Event Orientation</td>
+<td><code>#query:(GameParameter.parameterType == "5")</code></td>
+<td>Searches for preset parameters of the <span class="dead-link" href="glossary.html#event-orientation-parameter">event orientation</span class="dead-link"> built-in parameter type.</td>
+</tr>
+<tr>
+<td>Operators &gt; AND</td>
+<td><code>AND</code></td>
+<td>Searches for items that match both the search term preceding the AND in the search bar, and the search term following it.</td>
+</tr>
+<tr>
+<td>Operators &gt; OR</td>
+<td><code>OR</code></td>
+<td>Searches for items that match either the search term preceding the OR in the search bar, or the search term following it.</td>
+</tr>
+<tr>
+<td>Operators &gt; NOT</td>
+<td><code>NOT</code></td>
+<td>Searches for items that match the search term preceding the NOT in the search bar, and do not match the search term following it.</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Effects Browser Loupe Menu item</th>
+<th>Term</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filter by Unused Effects</td>
+<td><code>#unused</code></td>
+<td>Searches for <a href="glossary.html#preset-effect">preset effects</a> that are not used in any event in your project.</td>
+</tr>
+<tr>
+<td>Filter by Effect &gt; <specific effect></td>
+<td><code>#query:(&lt;entity name&gt;)</code></td>
+<td>Searches for events that are not assigned to any <a href="glossary.html#bank">banks</a>.</td>
+</tr>
+<tr>
+<td>Operators &gt; AND</td>
+<td><code>AND</code></td>
+<td>Searches for items that match both the search term preceding the AND in the search bar, and the search term following it.</td>
+</tr>
+<tr>
+<td>Operators &gt; OR</td>
+<td><code>OR</code></td>
+<td>Searches for items that match either the search term preceding the OR in the search bar, or the search term following it.</td>
+</tr>
+<tr>
+<td>Operators &gt; NOT</td>
+<td><code>NOT</code></td>
+<td>Searches for items that match the search term preceding the NOT in the search bar, and do not match the search term following it.</td>
+</tr>
+</tbody>
+</table>
+<p>If the menu item corresponding to a special search term does not appear in the loupe menu, that special search term is not available in that browser.</p>
+<p>When searching using multiple "AND", "OR", and "NOT" operators, it may sometimes be useful to surround groups of search terms in parenthesis ("()"). Surrounding a group of search terms in parenthesis indicates precedence, such that the operators inside the parenthesis must be evaluated before those outside it. As a result, this could be used to disambiguate between, for example, "river NOT (#boat AND #highTension)" and "(river NOT #boat) AND #highTension".</p>
+<h3 id="tags"><a href="#tags">3.4.1 Tags</a></h3>
+<p>A tag is a search term that can be used to search for events with that tag in the <a href="glossary.html#events-browser">events browser</a>, <a href="glossary.html#routing-browser">routing browser</a>, <span class="dead-link" href="glossary.html#vcas-browser">VCAs browser</span class="dead-link">, and <a href="glossary.html#banks-browser">banks browser</a>. To search for events with a particular tag, click on the browser`s search bar, then type a hash symbol ("#") followed by the name of the tag.</p>
+<p>To add a tag to an event, select that event in the event editor window. Then, in the overview pane, click on the I-beam icon that appears under "Tags", and type the name of the new tag.</p>
+<p><img alt="Tagging an event" src="images/taggingAnEvent.png" /></p>
+<p>You can also add a tag to an event by right-clicking on the event in the events browser, then selecting "Assign to Tag" from the context menu, and an appropriate tag from the submenu.</p>
+<p>There is no limit to the number of tags that an event may have, and multiple events may have the same tag.</p>
+<p>The tags browser contains tools for creating, viewing, organizing, editing, and deleting tags. To access the tags browser, select <code>Windows &gt; Event Browser</code> in the menu bar to open the <span class="dead-link" href="glossary.html#event-browser-window">event browser window</span class="dead-link">, then click on the event browser window`s "Tags" tab.</p></div>
+
+<p class="manual-footer">FMOD Studio User Manual 1.10.10 (2018-12-07). &copy; 2018 Firelight Technologies Pty Ltd.</p>
+</body>
+</html>
+
+</div>

@@ -1,0 +1,417 @@
+<html>
+<head>
+<title>Mixing</title>
+<link rel="stylesheet" href="style/docs.css">
+<link rel="stylesheet" href="style/code_highlight.css">
+</head>
+<body>
+<div class="docs-body">
+<div class="manual-toc">
+<p>FMOD Studio User Manual 1.10</p>
+<ul>
+<li><a href="welcome-to-fmod-studio.html">Welcome to FMOD Studio</a></li>
+<li><a href="fmod-studio-concepts.html">FMOD Studio Concepts</a></li>
+<li><a href="organizing-the-project.html">Organizing the Project</a></li>
+<li><a href="authoring-events.html">Authoring Events</a></li>
+<li><a href="working-with-instruments.html">Working with Instruments</a></li>
+<li><a href="managing-assets.html">Managing Assets</a></li>
+<li><a href="getting-events-into-your-game.html">Getting Events into Your Game</a></li>
+<li class="manual-current-chapter manual-active-chapter"><a href="mixing.html">Mixing</a><ul>
+<li><a href="#anatomy-of-the-mixer">Anatomy of the Mixer</a><ul>
+<li><a href="#the-mixer-browser">The Mixer Browser</a><ul>
+<li><a href="#routing-tab">Routing Tab</a></li>
+<li><a href="#vcas-tab">VCAs Tab</a></li>
+<li><a href="#snapshots-tab">Snapshots Tab</a></li>
+</ul>
+</li>
+<li><a href="#mixing-desk">Mixing Desk</a></li>
+<li><a href="#mixer-view">Mixer View</a></li>
+<li><a href="#selected-buses-tab">Selected Buses Tab</a></li>
+<li><a href="#the-deck">The Deck</a></li>
+<li><a href="#master-bus">Master Bus</a></li>
+</ul>
+</li>
+<li><a href="#group-buses-and-routing">Group Buses and Routing</a><ul>
+<li><a href="#master-bus_1">Master Bus</a></li>
+<li><a href="#bus-instance-limiting">Bus Instance Limiting</a></li>
+<li><a href="#mixer-routing-window">Mixer Routing Window</a></li>
+<li><a href="#submixes">Submixes</a></li>
+</ul>
+</li>
+<li><a href="#sends-and-return-buses">Sends and Return Buses</a><ul>
+<li><a href="#sends">Sends</a></li>
+<li><a href="#returns">Returns</a></li>
+</ul>
+</li>
+<li><a href="#bus-volumes">Bus Volumes</a></li>
+<li><a href="#vcas">VCAs</a></li>
+<li><a href="#soloing-and-muting-buses">Soloing and Muting Buses</a></li>
+<li><a href="#signal-chains-and-effects">Signal Chains and Effects</a></li>
+<li><a href="#snapshots-and-the-tracks-view">Snapshots and the Tracks View</a><ul>
+<li><a href="#triggering-snapshots">Triggering Snapshots</a></li>
+<li><a href="#overriding-versus-blending-snapshots">Overriding versus Blending Snapshots</a><ul>
+<li><a href="#behavior">Behavior</a></li>
+<li><a href="#priority">Priority</a></li>
+<li><a href="#grouping">Grouping</a></li>
+</ul>
+</li>
+<li><a href="#snapshot-intensity">Snapshot Intensity</a></li>
+<li><a href="#the-tracks-view">The Tracks View</a></li>
+</ul>
+</li>
+<li><a href="#channel-formats">Channel Formats</a><ul>
+<li><a href="#changing-channel-formats">Changing Channel Formats</a></li>
+<li><a href="#metering-channel-order">Metering Channel Order</a></li>
+</ul>
+</li>
+<li><a href="#the-panner">The Panner</a></li>
+</ul>
+</li>
+<li><a href="profiling.html">Profiling</a></li>
+<li><a href="editing-during-live-update.html">Editing During Live Update</a></li>
+<li><a href="supporting-downloadable-and-user-generated-content.html">Supporting Downloadable and User-generated Content</a></li>
+<li><a href="advanced-topics.html">Advanced Topics</a></li>
+<li><a href="event-macro-controls-reference.html">Event Macro Controls Reference</a></li>
+<li><a href="plugin-reference.html">Plug-in Reference</a></li>
+<li><a href="modulator-reference.html">Modulator Reference</a></li>
+<li><a href="built-in-parameters-reference.html">Built-In Parameters Reference</a></li>
+<li><a href="scripting-terminal-reference.html">Scripting</a></li>
+<li><a href="scripting-api-reference.html">Scripting API Reference</a></li>
+<li><a href="keyboard-shortcut-reference.html">Keyboard Shortcut Reference</a></li>
+<li><a href="glossary.html">Glossary</a></li>
+<li><a href="appendix-a-celeste.html">Appendix: Celeste Getting Started Guide</a></li>
+</ul>
+</div>
+<div class="manual-content">
+<h1>8. Mixing</h1>
+<p>It is important to make sure events in your FMOD Studio project all sit nicely together in terms of volume and the audio spectrum. This is where the FMOD Studio mixer comes into play; in it you can adjust the volume levels on groups of events, as well as creating <a href="#mixer-view">custom mixer views</a> and <a href="#snapshots-and-the-tracks-view">snapshots</a>.</p>
+<p>You can also create <a href="glossary.html#return-bus">return buses</a> for events to share effects and save resources on placing these effects on every event needed.</p>
+<p>The <a href="glossary.html#mixer-window">mixer window</a> contains tools and features that allow you to set up <a href="glossary.html#routing">routing</a> and mix your project, to apply effects to its signal chains, and to define how those effects and that mix can change in response to game events.</p>
+<p>In addition, all of these features can be used while connected in real time to your game as it runs.</p>
+<p>By default, all events created in your project are routed directly to your project's <a href="glossary.html#master-bus">master bus</a>. The mixer window allows you to supplement your events with <a href="glossary.html#group-bus">group buses</a> and <a href="glossary.html#return-bus">return buses</a>. These buses can then be routed into group buses, and their signal chains can be populated with sends to return buses and effects modules. These features resemble those of hardware mixers.</p>
+<p>You can also create <a href="glossary.html#snapshot">snapshots</a>. When active, a snapshot alters the value of any <a href="glossary.html#effect">effect</a> property or <a href="glossary.html#bus">bus</a> volume scoped into it. Volumes and properties not scoped in to a snapshot are left unchanged, meaning that multiple snapshots can be active at once without overriding each other if they apply to different parts of the project.</p>
+<h2 id="anatomy-of-the-mixer"><a href="#anatomy-of-the-mixer">8.1 Anatomy of the Mixer</a></h2>
+<p>The mixer window is broken up into three main areas:</p>
+<p><img alt="The mixer window" src="images/mixerWindow.png" /></p>
+<h3 id="the-mixer-browser"><a href="#the-mixer-browser">8.1.1 The Mixer Browser</a></h3>
+<p>Located at the left-hand side of the window, the mixer browser is used for routing signal path information in the mixer. </p>
+<h4 id="routing-tab"><a href="#routing-tab">Routing Tab</a></h4>
+<p>Each event in your project appears in the routing browser, with the exception of <a href="organizing-the-project.html#nested-events">nested events</a>. By default these are all routed directly to the <a href="glossary.html#master-bus">master bus</a> for playback output.</p>
+<p><a href="glossary.html#return-bus">Return buses</a> are labeled with a blue "Return" icon, <a href="glossary.html#group-bus">group buses</a> are labeled with a gray "Groups" icon, and events are labeled with the event icon.</p>
+<p>To create more buses, right click on an empty space and select "Create Return" or "Create Group" from the context menu.</p>
+<p>To route events, buses, and groups, drag them onto other group buses. The top level group bus is a <a href="#submixes">submix</a> of the buses below it, which may have submixes of child group buses and so on.</p>
+<p><img alt="Routing example" src="images/routingBrowser.png" /></p>
+<p>You can also change the routing of groups and returns using the <a href="#mixer-routing-window">mixer routing window</a>.</p>
+<p>For more information, please see the <a href="#sends-and-return-buses">sends and return buses</a> and <a href="#group-buses-and-routing">group buses and routing</a> sections.</p>
+<h4 id="vcas-tab"><a href="#vcas-tab">VCAs Tab</a></h4>
+<p><span class="dead-link" href="glossary.html#vca">VCAs</span class="dead-link"> are for controlling the volumes of disparate buses that do not share routing.</p>
+<p>To create new VCAs, right click in an empty space of the VCAs browser and select "New VCA" from the context menu. To assign group buses, return buses, and other VCAs, drag and drop them from the <a href="glossary.html#events-browser">events browser</a> to the VCA, or right click on the desired bus and select "Assign To VCA" and then your VCA.</p>
+<p>For more information, please see the <a href="#vcas">VCA</a> section.</p>
+<h4 id="snapshots-tab"><a href="#snapshots-tab">Snapshots Tab</a></h4>
+<p>A snapshot is an instanceable unit of changes to the project mix that can be <a href="glossary.html#trigger">triggered</a>, controlled, and stopped from game code. Each snapshot represents a different way your game's mix can change in response to the circumstances in your game as it runs.</p>
+<p>To create an <a href="#overriding-versus-blending-snapshots">overriding</a> or <a href="#overriding-versus-blending-snapshots">blending</a> snapshot, right click on an empty space and select "New Overriding Snapshot" or "New Blending Snapshot".</p>
+<p>For more information, please see the <a href="#snapshots-and-the-tracks-view">snapshots and the tracks view</a> section.</p>
+<h3 id="mixing-desk"><a href="#mixing-desk">8.1.2 Mixing Desk</a></h3>
+<p>The main section of the mixer window is the mixing desk. This is a simple visual representation of a selection of <a href="glossary.html#bus">buses</a>. Buses are displayed as vertical strips (called "channel strips") to the left of the master bus.</p>
+<p><img alt="Mixing Desk" src="images/mixingDesk.png" /></p>
+<h3 id="mixer-view"><a href="#mixer-view">8.1.3 Mixer View</a></h3>
+<p>You can create a custom view of mixer objects for your convenience. Although mixer views do not affect the in-game behavior of their contents, they can be a handy tool when working in larger projects to easily find and view specific objects or groups of objects.</p>
+<p>To add a bus to a custom mixer view, either drag the bus into the mixing deck, or right click on the bus, select "Assign to Mixer View", and then your mixer view.</p>
+<p>Any group bus, return bus, or VCA can be added to a mixer view.</p>
+<p>As an example, you can set up a specific mixer view that contains all of a project's character sounds, another for enemy sounds, and a third one for environmental sounds. Right clicking on a created tab lets you create or remove a mixer view. </p>
+<p>To open a mixer view in a new window, right click on the mixer view's tab and select "Open in a New Window". </p>
+<p>Double click on a mixer view tab to rename it.</p>
+<h3 id="selected-buses-tab"><a href="#selected-buses-tab">8.1.4 Selected Buses Tab</a></h3>
+<p>In a larger project with many buses, you may want to view only a specific selection of buses. You can do this by selecting all of the desired objects in the mixer browser and then clicking the "Selected Buses" tab. You can select and deselect different buses as desired.</p>
+<h3 id="the-deck"><a href="#the-deck">8.1.5 The Deck</a></h3>
+<p>The deck displays the controls of the selected bus.</p>
+<h3 id="master-bus"><a href="#master-bus">8.1.6 Master Bus</a></h3>
+<p>The <a href="glossary.html#master-bus">master bus</a> is the final bus before the sound is sent to the output device. All sounds in FMOD Studio eventually pass through the master bus.</p>
+<h2 id="group-buses-and-routing"><a href="#group-buses-and-routing">8.2 Group Buses and Routing</a></h2>
+<p>FMOD Studio populates the <a href="#the-mixer-browser">mixer browser</a> with all events that exist in a project, other than nested events. By default, these events are all routed directly to the master bus for playback output.</p>
+<p>If a project requires a further level of control over the output behavior of the signal paths then they can be assigned to specific groups within the mixer view; these groups are called group buses.</p>
+<p><img alt="Routing Example" src="images/routingBrowser.png" /></p>
+<p>A group bus mixes the output of multiple events and buses together, allowing you to apply <a href="glossary.html#effect">effects</a> and <a href="glossary.html#routing">routing</a> behavior to all the signals within a group.</p>
+<p>Any event that is not nested and does not route into a group bus instead routes into the master bus. Each event must route into exactly one group bus or master bus.</p>
+<p>To create a group bus, right click in an empty space in the mixer <a href="glossary.html#routing-browser">routing browser</a> and choose "New Group" from the context menu.</p>
+<h3 id="master-bus_1"><a href="#master-bus_1">8.2.1 Master Bus</a></h3>
+<p>The master bus creates the final <span class="dead-link" href="glossary.html#submix">submix</span class="dead-link"> of all buses routed to it before outputting audio to the speaker channels. All <a href="glossary.html#group-bus">group buses</a>, <a href="glossary.html#return-bus">return buses</a>, and <a href="glossary.html#event">events</a> not assigned to a group are routed into the master bus.</p>
+<p>The master bus combines all buses, allowing for final level adjustments and simpler mastering. The master bus delivers the combined output to the hardware, in the format specified by the project for the given platform.</p>
+<h3 id="bus-instance-limiting"><a href="#bus-instance-limiting">8.2.2 Bus Instance Limiting</a></h3>
+<p>There may be times in your game where there are a lot of events from the same group bus playing at once. It is possible to limit the number of event instances being passed through a <a href="glossary.html#group-bus">group bus</a>.</p>
+<p>For example, your game has footstep sound events assigned to soldiers and there is an army on screen. Rather than each of the army's 100 or more soldiers all playing footsteps at once, it would be better for performance and audibility of other events to limit the number of footstep event instances.</p>
+<p>When a group bus is selected, there is a "Group Macros" section on the far right of the <a href="glossary.html#deck">deck</a>.</p>
+<p><img alt="Max Instances" src="images/maxInstances.png" /></p>
+<p>The max instances property sets an upper limit on how many instances of events routed to this bus can play simultaneously. By default, it is set to allow infinite simultaneous instances.</p>
+<p>If your game's code attempts to create a new instance of an event that would exceed the value of the max instances property set, FMOD Studio culls or <span class="dead-link" href="glossary.html#virtualize">virtualizes</span class="dead-link"> event instances according to the event's "stealing" macro control.</p>
+<p>The stealing property determines how FMOD Studio behaves when your game's code attempts to create a new instance of the event, and the number of instances of that event is already equal to the event's max instances property. The various stealing behaviors are as follows:</p>
+<blockquote>
+<ul>
+<li><strong>Oldest</strong>: The oldest instance of the event is immediately stopped and replaced by the new instance.</li>
+<li><strong>Quietest</strong>: The quietest existing instance of the event is immediately stopped and replaced by the new instance. An event instance's 'Quietness' is derived from the volume of the mixer hierarchy, the event's master track volume, and the gain applied to the event by its <span class="dead-link" href="glossary.html#spatializer">spatializer</span class="dead-link"> effect. The volume settings of the event's audio tracks, nested events, and playing instruments are not taken into account.</li>
+<li><strong>Virtualize</strong>: All new event instances are created and behave normally, but instances in excess of the event's max instances property are not routed to the project mixer and so produce no audible output. Only the quietest instances of an event are made virtual. If a virtualized event instance ever becomes louder than a non-virtual event instance, FMOD Studio automatically makes the quieter instance virtual and begins routing the louder instance into the mixer. Virtualized event instances are also made audible if the number of event instances drops below the event's max instances property.</li>
+<li><strong>Off</strong>: New event instances are not created when the number of concurrent instances is already equal to the max instances.</li>
+</ul>
+</blockquote>
+<p>Virtual voices will still consume resources even if they are not included in the mix.</p>
+<h3 id="mixer-routing-window"><a href="#mixer-routing-window">8.2.3 Mixer Routing Window</a></h3>
+<p>The mixer routing window displays the <a href="#routing-tab">routing browser</a> and <a href="#vcas-tab">VCAs</a> tab which are also found in the mixer window. </p>
+<h3 id="submixes"><a href="#submixes">8.2.4 Submixes</a></h3>
+<p>A submix is the sound produced in a bus which is the sum of all tracks and return tracks before it reaches the <a href="glossary.html#master-bus">master bus</a>. All changes made to a submix will affect the sound being routed out, whether it is to another bus or the master bus.</p>
+<p><img alt="Submix" src="images/submixExample.png" /></p>
+<p>In the above screenshot, the Country event is a submix of all the tracks in the event, the Ambience group bus is a submix of the Country and Forest events, and the SFX group bus is a submix of all the return and group buses (and their events) underneath.</p>
+<h2 id="sends-and-return-buses"><a href="#sends-and-return-buses">8.3 Sends and Return Buses</a></h2>
+<p>If you are using a specific effect chain in multiple events or tracks in FMOD Studio, it may be more effective in both workflow and performance to use <a href="glossary.html#send">sends</a> with a <a href="glossary.html#return-bus">return bus</a>. You can also use <a href="glossary.html#group-bus">group buses</a> in a similar way, however a return bus can provide more flexibility.</p>
+<h3 id="sends"><a href="#sends">8.3.1 Sends</a></h3>
+<p>A <a href="glossary.html#send">send</a> duplicates audio signals from the point it exists in the <a href="glossary.html#signal-chain">signal chain</a> of a track and sends it to a <a href="glossary.html#return-track">return track</a> or <a href="glossary.html#return-bus">return bus</a> it is pointing to. The audio being sent is affected by all changes made to the audio <em>before</em> it reaches the send. A send only has a volume control which affects the level of the duplicated signal.</p>
+<p><img alt="Send" src="images/sends.png" /></p>
+<p>The above screenshot shows the send to the "Reverb" return bus located to the right of the <span class="dead-link" href="glossary.html#fader">volume fader</span class="dead-link">.</p>
+<p>You can adjust the volume being sent to a return bus by adjusting the "Volume" dial on the send.</p>
+<p>For sends to a return bus in the <a href="glossary.html#mixer">mixer</a>, you can open the target return in a <a href="glossary.html#mixer-window">mixer window</a> by selecting "Open Target in Mixer" from the context menu.</p>
+<p>Sends may be rerouted to send their signal to a different return bus. To reroute a send, right-click on the send and select a return bus from the "Reroute" sub-menu in the context menu.</p>
+<h3 id="returns"><a href="#returns">8.3.2 Returns</a></h3>
+<p>A return bus is a special type of bus. It does not allow <a href="glossary.html#event">events</a> or <a href="glossary.html#group-bus">group buses</a> to route into it. Instead you can only send duplicate signals into return buses via a <a href="glossary.html#send">send</a>. This bus then makes a submix of all of these sends and outputs to whichever bus it is routed to. By default, all returns are routed to the <a href="glossary.html#master-bus">master bus</a>.</p>
+<p>It is best practice to have all "Dry" properties in effects set to -&#8734;dB and all "Wet" properties to 0dB. This is to ensure that the return bus is only outputting the effect properties on the duplicated signal.</p>
+<p><img alt="Return" src="images/returnBusInTheMixer.png" /></p>
+<p>All new FMOD Studio projects have a "Reverb" return bus included.</p>
+<p>You can use <a href="glossary.html#group-bus">group buses</a> to a similar effect but a return bus offers much more flexibility. Sends to return buses have a volume control, which alters the volume of the duplicate signal without affecting the original to specific points in an event's signal chain. You can place a send in a variety of places such as the <a href="glossary.html#master-track">master track</a> of an event, on a specific track or tracks, and even pre-volume <span class="dead-link" href="glossary.html#fader">fader</span class="dead-link">.</p>
+<h2 id="bus-volumes"><a href="#bus-volumes">8.4 Bus Volumes</a></h2>
+<p>The main component on each bus is the <a href="fmod-studio-concepts.html#signal-chains">volume fader</a>. These control how loud the <a href="#submixes">submix</a> output is. When a volume fader is set to 0dB, there has been no alteration made to the output.</p>
+<p>To bulk edit bus volumes from the <a href="#anatomy-of-the-mixer">mixing desk</a>, make a multi selection by holding either 'Shift' or 'Ctrl' and click on buses either in the mixing desk or the routing browser. Once you've made your selection, release the 'Shift' or 'Ctrl' keys. Moving one of the volume faders in the mixing desk will move all the selected buses as well.</p>
+<p>By default, bulk editing volumes will make all volumes the same level. By holding onto the 'Shift' key whilst dragging the faders, you can relatively bulk edit volumes; reducing the volume by -2dB will reduce the volume of all selected buses <em>by</em> 2dB.</p>
+<h2 id="vcas"><a href="#vcas">8.5 VCAs</a></h2>
+<p><span class="dead-link" href="glossary.html#vca">VCAs</span class="dead-link"> are a way of grouping buses for the purposes of volume control. </p>
+<p>VCAs provide a further level of volume control designed to allow a selection of buses to be volume adjusted relatively across the selection. They exist in parallel with the normal signal chain.</p>
+<p>You can view the <span class="dead-link" href="glossary.html#vcas-browser">VCAs browser</span class="dead-link"> in the <a href="glossary.html#mixer-window">mixer window</a> in the VCA tab. </p>
+<p>To create a new VCA, right click on an empty space and select "New VCA". When a VCA is selected, you can see it in the <a href="glossary.html#mixing-desk">mixing desk</a> and includes the standard channel strip volume fader, solo and mute controls.</p>
+<p>Within the VCA browser there is a flat hierarchy - all VCAs exist on the same level - which is not part of the <a href="glossary.html#routing">routing chain</a>; they exist alongside it.</p>
+<p>Events, group buses, and return buses can all be assigned to VCAs. Signals are not routed through VCAs but are assigned as parallel controls of the main signal chain.</p>
+<p>To assign something to a VCA, you can either drag that bus or event onto the VCA from a different window, or you can right click on that bus in the "Routing" tab and choose "Assign to VCA..." from the context menu.</p>
+<p>Because VCAs exist outside of the signal chain they allow for buses to be grouped together in any way. Within a VCA there is no relationship other than the VCA group so buses from different group buses, returns, and events can all be grouped and controlled without fear of interfering with their routing pathways.</p>
+<p>VCAs can be useful for general project balancing and level mixing as they provide a quick way of grouping and adjusting events without affecting the signal chain in any way.  The most common use situation for VCAs is as master controls within a game's user settings. Sound Effects, Dialogue and Music are excellent examples of typical VCA grouping in a game project.</p>
+<h2 id="soloing-and-muting-buses"><a href="#soloing-and-muting-buses">8.6 Soloing and Muting Buses</a></h2>
+<p>To <span class="dead-link" href="glossary.html#solo">solo</span class="dead-link"> or <span class="dead-link" href="glossary.html#mute">mute</span class="dead-link"> a bus, click on the "Solo" or "Mute" buttons located on the <a href="glossary.html#bus">bus strip</a>.</p>
+<p>This is a very useful feature for when you want to make sure a group bus submix is leveling out nicely, or to make sure a return bus has the right amount of an effect mixed in.</p>
+<p>Muting a bus will silence that bus. Any sends placed on that bus <em>before</em> the <a href="glossary.html#pre-fader">pre-fader</a> (ie. in any child group bus or event, or placed on the bus signal chain before the pre-fader volume control) will not be silenced because the signal was duplicated and sent to another bus.</p>
+<p>Soloing a bus mutes all other buses, with the exception of the <a href="glossary.html#master-bus">master bus</a> and any bus that is <a href="glossary.html#routing">routed</a> into it. If a return bus is set to solo, the buses it is receiving audio signals from are not muted. However, setting a group bus that has a send on it to solo will mute all returns regardless of if that bus is sending a signal to it or not.</p>
+<h2 id="signal-chains-and-effects"><a href="#signal-chains-and-effects">8.7 Signal Chains and Effects</a></h2>
+<p>A <a href="glossary.html#signal-chain">signal chain</a> is a representation of the processing undergone by a signal as it passes through a <a href="glossary.html#bus">bus</a> or <a href="glossary.html#track">track</a>. When you select a track or a bus, the signal chain is displayed in <a href="glossary.html#deck">the deck</a>.</p>
+<p><img alt="Deck Signal Chain" src="images/deckSignalChain.png" /></p>
+<p>The signal chain flows from left to right in the deck. An <a href="glossary.html#effect">effect</a> alters the audio passing through it and passes the audio down the chain. After the last effect the signal will route out to whichever bus it is routed to. Those buses may also have their own effects and signal chains to consider.</p>
+<p>Please see the <a href="#group-buses-and-routing">group buses and routing</a> section for more information.</p>
+<p>Effects are modular units that alter the audio signal passed through them in real-time. It is always important to take the signal chain into consideration when adding effects. For example, look at the follow signal chain:</p>
+<p><img alt="Example signal chain" src="images/exampleSignalChain.png" /></p>
+<p>In the above example, the audio signal is coming into the left end of the deck. There is no effects in the pre-fader so it passes through the track's <span class="dead-link" href="glossary.html#fader">volume fader</span class="dead-link"> and out to post-fader. </p>
+<p>The signal is first being duplicated and sent off to the "Reverb" <a href="glossary.html#return-bus">return bus</a> by the <a href="glossary.html#send">send</a>. The audio signal sent to the return bus is not affected by any effects placed after the send on this signal chain. </p>
+<p>Next, the still dry signal is being processed through the <span class="dead-link" href="effects-reference.html#3-eq-effect">3-EQ effect</span class="dead-link">, removing all of the high end of the signal.</p>
+<p>The result is a dry reverb sound (output from the "Reverb" return bus) accompanied by the original signal with a low-pass filter (output from the event master track).</p>
+<p>Altering the signal chain can dramatically affect the output. Switching the 3-EQ and the send effects will result in the reverb also having all the high ends removed from the signal.</p>
+<p>Effects may be <a href="glossary.html#bypass">bypassed</a>. Bypassed effects continue to <span class="dead-link" href="glossary.html#upmix">upmix</span class="dead-link"> or <span class="dead-link" href="glossary.html#downmix">downmix</span class="dead-link"> the <span class="dead-link" href="glossary.html#channel-format">channel format</span class="dead-link"> as usual, but do not otherwise alter the signal. To bypass an effect or make an effect no longer bypassed, right-click on the effect and select "Bypass" from the context menu.</p>
+<p>For more information on each effect available, please see the <span class="dead-link" href="effects-reference.html">effects reference</span class="dead-link"> section.</p>
+<h2 id="snapshots-and-the-tracks-view"><a href="#snapshots-and-the-tracks-view">8.8 Snapshots and the Tracks View</a></h2>
+<p><a href="glossary.html#snapshot">Snapshots</a> are a method of selecting a list of properties that you want to affect and specify new values for the properties of scoped in <a href="glossary.html#bus">buses</a> when the snapshot is playing. You can freely add as many or as few properties to the snapshot as you need by 'scoping in' and 'scoping out' individual properties until you have a list that suits your purpose.</p>
+<p>Snapshots only apply their property values when triggered which causes them to play; snapshots not being played have no effect on their scoped properties. You can trigger snapshots either through your game engines collider detection system or through your game code.</p>
+<p>This means that two snapshots might affect completely different sets of properties. For example, one of the most common uses of snapshots is to reduce the volume of non-dialog channels during in-game conversations. For this purpose, you'd make a snapshot that includes only the volumes of those buses that needed to be ducked - often just a handful of group buses.</p>
+<p>You are able to have multiple snapshots existing concurrently. It is also possible to set up transitions between snapshots.</p>
+<p>When used individually, FMOD Studio transitions the values of properties scoped into a snapshot from the current values specified in the mixer to the snapshot's values. For blending snapshots, the values of the snapshots volume properties are applied on top of the existing buses volume (ie. they are the sum of both values).</p>
+<h3 id="triggering-snapshots"><a href="#triggering-snapshots">8.8.1 Triggering Snapshots</a></h3>
+<p>There are two ways to trigger snapshots in FMOD Studio.</p>
+<p>Adding a snapshot instrument to a <a href="glossary.html#timeline">timeline</a> makes it a snapshot trigger region. When the <a href="glossary.html#cursor">cursor</a> enters the snapshot instrument, it becomes triggered.</p>
+<p>A triggered snapshot instrument is an instance. When triggered it's property values are applied based on its <span class="dead-link" href="glossary.html#intensity">intensity</span class="dead-link">. There can be multiple trigger regions for the same snapshot across various <a href="glossary.html#event">events</a>. There can even be multiple instances of a snapshot triggered by multiple instances of a single event.</p>
+<p>It is also possible to rename and adjust the properties of snapshot instruments independently of each other and of the snapshot. Because of this we recommend you name your snapshots and associated trigger regions very carefully to avoid confusion.</p>
+<p>A snapshot can also be triggered from game code. A snapshot is a type of event, therefore starting the snapshot as an event will work. For example, in Unity 3D this would be:</p>
+<div class="codehilite"><pre><span></span><span class="nt">EventInstance</span> <span class="nt">inGamePause</span> <span class="o">=</span> <span class="nt">FMODUnity</span><span class="p">.</span><span class="nc">RuntimeManager</span><span class="p">.</span><span class="nc">CreateInstance</span><span class="o">(</span><span class="s2">&quot;snapshot:/IngamePause&quot;</span><span class="o">);</span>
+<span class="nt">inGamePause</span><span class="p">.</span><span class="nc">start</span><span class="o">();</span>
+</pre></div>
+
+
+<h3 id="overriding-versus-blending-snapshots"><a href="#overriding-versus-blending-snapshots">8.8.2 Overriding versus Blending Snapshots</a></h3>
+<p>FMOD Studio supports complex combining behaviors when multiple snapshots are activated at the same time. The combining of multiple snapshots depends on a snapshot's behavior, priority, and grouping.</p>
+<div class="admonition warning">
+<p>This explanation has been simplified by not taking into account snapshot <a href="#snapshot-intensity">intensity</a>. In cases where the intensity of a snapshot is less than 100%, the behavior is slightly more complicated.</p>
+</div>
+<h4 id="behavior"><a href="#behavior">Behavior</a></h4>
+<p>There are two types of snapshots - overriding snapshots and blending snapshots. For overriding snapshots, all scoped in properties override the underlying values. For blended snapshots, any changes to volumes will be applied additively, while other property changes will still override their underlying values.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Overriding Snapshot</th>
+<th>Blending Snapshot</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Volume Property</td>
+<td>Override</td>
+<td>Additive</td>
+</tr>
+<tr>
+<td>Other Property</td>
+<td>Override</td>
+<td>Override</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Snapshot behavior" src="images/snapshotBehaviors.png" /></p>
+<p>As such, a blending snapshot is useful for doing relative volume changes. For example, you might setup overriding snapshots for each level in your game, then use a blending snapshot to apply a -2dB relative change to the ambience bus when an explosion occurs.</p>
+<h4 id="priority"><a href="#priority">Priority</a></h4>
+<p>When multiple snapshots are active, they are evaluated in the order defined by a snapshot's priority. This is determined by the ordering in the snapshots browser.</p>
+<p><img alt="Priority" src="images/snapshotPriority.png" /></p>
+<p>For example, if a high priority and low priority snapshot are both activated, the low priority snapshot's values are applied first (stomping out values from the baseline mix), then the high priority snapshot's values are again applied on top of that (stomping out values from the low priority snapshot mix). When there is no overlap, all properties are applied with no interference.</p>
+<p><img alt="Snapshot priorities" src="images/snapshotPrioritiesExample.png" /></p>
+<p>This is where modifying a snapshot's scope can be useful. Because the priority of combining snapshots is ordered, you can scope in or out elements within a given snapshot. This means that the snapshot will not apply changes to that particular property. For example, you may want the PauseMenu snapshot to lower the music volume, but maintain the volume changes to ambience that are currently active.</p>
+<p>Snapshots in the same group are considered to be of equal priority, and are averaged together to get the net values that they should apply to the mix.</p>
+<h4 id="grouping"><a href="#grouping">Grouping</a></h4>
+<p>Snapshot groups provide you with a way to specify that certain snapshots are of equal priority.</p>
+<p>To create a snapshot group, right click on an empty space in the <span class="dead-link" href="glossary.html#snapshots-browser">snapshots browser</span class="dead-link"> and select "New Group".</p>
+<p>When multiple snapshots from the same group are enabled, their effects will be averaged together, before being applied as if they were part of a single snapshot. This can be used in various situations where no prioritization should occur. For example, you may want to create a group for snapshots that change reverb settings, based on proximity to trigger regions in a level. Using a group, along with <a href="glossary.html#ahdsr-modulator">AHDSR modulator</a> on the intensity (see below), would allow for a smooth transition between the reverb states.</p>
+<p>Groups also provide a way in which you can organize mutually exclusive snapshots. For example, you may want to group all cutscene snapshots, even if you're only planning to have one cutscene active at any given moment.</p>
+<h3 id="snapshot-intensity"><a href="#snapshot-intensity">8.8.3 Snapshot Intensity</a></h3>
+<p>A snapshot's <span class="dead-link" href="glossary.html#intensity">intensity</span class="dead-link"> is the "mix" between the property values specified in a snapshot and those that would be in place were the snapshot not active.</p>
+<p>The intensity of a snapshot is visible in the <a href="glossary.html#deck">deck</a> when selecting a snapshot trigger region in the <a href="glossary.html#event-editor-window">event editor</a>.</p>
+<p><img alt="Snapshot Intensity" src="images/snapshotIntensity.png" /></p>
+<p>The above screenshot shows the snapshot's intensity dial located on the right hand side of the deck.</p>
+<p>As the intensity property is increased, the more the properties' values are blended to those of the snapshot. So an intensity value of 0% results in none of the snapshot being applied, where as a value of 50% is an equal mix of both the current values and the snapshot values. It can be thought of as a wet/dry mix dial.</p>
+<p>The snapshot intensity property multiplies with the intensity applied by snapshot trigger regions when the snapshot is applied.</p>
+<p>When a snapshot is triggered, the <span class="dead-link" href="glossary.html#intensity">intensity</span class="dead-link"> will immediately be applied. If you wish the snapshot to smoothly fade in and out when triggering and untriggering, it is recommended to apply an <a href="glossary.html#ahdsr-modulator">AHDSR modulator</a> to the intensity property located on the right hand side of the <a href="glossary.html#deck">deck</a>.</p>
+<p>When multiple instances of the same snapshot are simultaneously active, their <a href="#snapshot-intensity">intensities</a> are averaged to determine the intensity with which the snapshot is applied to the mix.</p>
+<h3 id="the-tracks-view"><a href="#the-tracks-view">8.8.4 The Tracks View</a></h3>
+<p>A snapshot can be displayed in either the <span class="dead-link" href="glossary.html#strips-view">strips view</span class="dead-link"> or the <span class="dead-link" href="glossary.html#tracks-view">tracks view</span class="dead-link">.</p>
+<p>The tracks view for snapshots includes a <span class="dead-link" href="glossary.html#parameter-sheet">parameter sheet</span class="dead-link"> for the snapshot's <a href="glossary.html#timeline">timeline</a>, can also have parameter sheets for the snapshot's <a href="glossary.html#game-parameter">game parameters</a>, and supports the creation of <a href="glossary.html#automation">automation tracks</a> and their relevant functionality.</p>
+<p>Using the timeline and game parameters is optional but they can both extend the functionality of a snapshot significantly.</p>
+<p>Snapshots behave almost identically to events. When triggered the timeline will move from the beginning and follow any <a href="glossary.html#logic-marker">logic markers</a>, <a href="glossary.html#loop-region">loop regions</a>, and <a href="glossary.html#transition-marker">transition markers</a> placed. Parameters, automation, and modulation can be added to snapshots in the same manner as to events. The only difference is that no <span class="dead-link" href="glossary.html#asset">assets</span class="dead-link"> can be placed onto a snapshot's timeline.</p>
+<p>Only effects properties that have been scoped in for the snapshot in question can have automation or modulation applied.</p>
+<p>It is also possible to <a href="glossary.html#automation">automate</a> and <span class="dead-link" href="glossary.html#modulation">modulate</span class="dead-link"> the snapshot intensity. If an <a href="glossary.html#ahdsr-modulator">AHDSR modulator</a> is applied to the snapshot's intensity, this will assist in smoothly fading the snapshot in and out when started and stopped.</p>
+<h2 id="channel-formats"><a href="#channel-formats">8.9 Channel Formats</a></h2>
+<p>A <span class="dead-link" href="glossary.html#channel">channel</span class="dead-link"> is a single pathway for a mono audio signal. The <span class="dead-link" href="glossary.html#subchannel">subchannels</span class="dead-link"> of an <a href="glossary.html#audio-file">audio file</a> or <a href="glossary.html#effect">effect</a> can potentially use these channels. A specific number of channels and assumed speaker configuration is known as a <span class="dead-link" href="glossary.html#channel-format">channel format</span class="dead-link">.</p>
+<p>It is important to be careful with choosing channel formats to optimize performance for the hardware you are deploying your game to. The more channels being used, the more processing power is required from the hardware. For example, this can be crucial when running FMOD on low end hardware such as mobile devices or handheld consoles which won't require surround sound features.</p>
+<p>FMOD Studio allows you to build your project towards the following speaker configurations:</p>
+<table>
+<thead>
+<tr>
+<th>Speaker Configuration</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Mono</strong></td>
+<td>One speaker (no panning is be applied to this signal, panning can occur later)</td>
+</tr>
+<tr>
+<td><strong>Stereo</strong></td>
+<td>Two speakers</td>
+</tr>
+<tr>
+<td><strong>Surround 4.0</strong></td>
+<td>Four speakers</td>
+</tr>
+<tr>
+<td><strong>Surround 5.0</strong></td>
+<td>Five speakers</td>
+</tr>
+<tr>
+<td><strong>Surround 5.1</strong></td>
+<td>Five speakers and one <span class="dead-link" href="glossary.html#low-frequency-effects">Low Frequency Effects (LFE)</span class="dead-link"></td>
+</tr>
+<tr>
+<td><strong>Surround 7.1</strong></td>
+<td>Seven speakers and one LFE</td>
+</tr>
+<tr>
+<td><strong>Surround 7.1.4</strong></td>
+<td>Seven speakers, one LFE, and four speakers on the ceiling</td>
+</tr>
+</tbody>
+</table>
+<p>The channel format specified in the <a href="getting-events-into-your-game.html#compression-formats-and-platform-settings">build tab of the preferences window</a> is the one used by <span class="dead-link" href="effects-reference.html#spatializer">spatializers</span class="dead-link">. Not all assets, buses, or tracks need to use this format. This is to support 2D music and non-diegetic sound effects alongside 3D sound.</p>
+<p>The channel format chosen for your game may or may not match the speaker configuration that the user is using. In these circumstances, the <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/lowlevel_api.html">low-level API</a> detects the output capabilities of the hardware it is running on and automatically up mix or down mix to match that configuration. This way, if you set your FMOD Studio project to be 5.1 Surround but the player only has stereo speakers, FMOD automatically maps the outputs to the two available speakers.</p>
+<p>To the left and right ends of the <a href="glossary.html#deck">deck</a> are the <span class="dead-link" href="glossary.html#input">input</span class="dead-link"> and <span class="dead-link" href="glossary.html#output">output</span class="dead-link"> of the given <a href="glossary.html#track">track</a> or <a href="glossary.html#bus">bus</a>, labeled as "In" and "Out". These give you a visual representation of all speakers being used in that track.</p>
+<p><img alt="Channel formats" src="images/channelFormats.png" /></p>
+<p>By default the channel format for a track is automatically dictated by the assets, instruments, or effects used.</p>
+<p>When you place a <span class="dead-link" href="effects-reference.html#spatializer">spatializer</span class="dead-link"> effect into the deck, this automatically sets the channel format to your build settings' surround sound format at that point in the <a href="glossary.html#signal-chain">signal chain</a>.</p>
+<h3 id="changing-channel-formats"><a href="#changing-channel-formats">8.9.1 Changing Channel Formats</a></h3>
+<p>It is also possible to force the channel format of individual tracks and buses by right clicking on the In or Out meters. You are able to choose any of the aforementioned configurations as well as "Automatic" (which chooses a format based on the instruments/assets/effects on that track or bus), or "Platform" (which sets the channel format to match the builds section of the <span class="dead-link" href="glossary.html#preferences">preferences window</span class="dead-link"> for the <a href="getting-events-into-your-game.html#compression-formats-and-platform-settings">selected platform</a>).</p>
+<p>You can also change the channel format of the <a href="glossary.html#master-bus">master bus</a> in the <a href="glossary.html#mixer">mixer</a>, which otherwise uses the platform's channel format specified in the surround speaker mode option in the <span class="dead-link" href="glossary.html#preferences">preferences window</span class="dead-link">.</p>
+<p><img alt="Changing channel format" src="images/changeChannelFormat.png" /></p>
+<p>The channel format of a bus or track set to use the "Automatic" format depends on the formats of the instruments and tracks or buses routed into it. Choosing "Platform" will force the channel format to match the platform's channel format specified in the surround speaker mode option in preferences window, otherwise "Automatic" chooses the format with the most channels.</p>
+<p>Also note for the <a href="#the-panner">panner</a>, if the output format is "Automatic", FMOD Studio uses the stereo pan mode if the effective output format is stereo. If the output format is "Platform", FMOD Studio uses the surround pan mode.</p>
+<p>The FMOD low-level API has even more customizable features, such as per-channel effects and custom mapping of input channels to output speakers. For more information, see our <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/lowlevel_api_Channel.html">FMOD::Channel</a> API documentation.</p>
+<h3 id="metering-channel-order"><a href="#metering-channel-order">8.9.2 Metering Channel Order</a></h3>
+<p>The metering for the input and output of a <a href="glossary.html#track">track</a> or <a href="glossary.html#bus">bus</a> shows you the volume going in and out of each individual channel.</p>
+<p>In the <span class="dead-link" href="glossary.html#preferences">preferences window</span class="dead-link"> you are able to change the order in which the meters appear in the <a href="glossary.html#deck">deck</a>. Changing the settings here only alters how the metering is displayed in the FMOD Studio tool and does not affect the project or any audio being produced or built.</p>
+<p><img alt="Metering Channel Order" src="images/meteringChannelOrder.png" /></p>
+<p>You can see below a list of what each acronym means:</p>
+<table>
+<thead>
+<tr>
+<th>Interface Element</th>
+<th>Speaker</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>L</strong></td>
+<td>Left</td>
+</tr>
+<tr>
+<td><strong>R</strong></td>
+<td>Right</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>Center</td>
+</tr>
+<tr>
+<td><strong>LFE</strong></td>
+<td>Low Frequency Effects (subwoofer)</td>
+</tr>
+<tr>
+<td><strong>LS</strong></td>
+<td>Left Surround</td>
+</tr>
+<tr>
+<td><strong>RS</strong></td>
+<td>Right Surround</td>
+</tr>
+<tr>
+<td><strong>LSR</strong></td>
+<td>Left Surround Rear</td>
+</tr>
+<tr>
+<td><strong>RSR</strong></td>
+<td>Right Surround Rear</td>
+</tr>
+<tr>
+<td><strong>TFL</strong></td>
+<td>Top Front Left</td>
+</tr>
+<tr>
+<td><strong>TFR</strong></td>
+<td>Top Front Right</td>
+</tr>
+<tr>
+<td><strong>TBL</strong></td>
+<td>Top Back Left</td>
+</tr>
+<tr>
+<td><strong>TBR</strong></td>
+<td>Top Back Right</td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-panner"><a href="#the-panner">8.10 The Panner</a></h2>
+<p>If a track or bus is set to stereo or a higher <a href="#channel-formats">speaker configuration</a>, to the right end of the <a href="glossary.html#deck">deck</a> of each track or bus is the panner.</p>
+<p><img alt="The panner" src="images/panner.png" /></p>
+<p>You are able to pan the output of that track between the available speakers. Stereo can only pan between left (L) and right (R) using a dial. Surround 4.0 and a higher speaker configuration will display a surround panner where you move a dot. Moving this dot allows panning between all the available speakers.</p>
+<p>There are two surround panner modes for when the input <span class="dead-link" href="glossary.html#channel-format">channel format</span class="dead-link"> is stereo. In "Stereo In: Distributed" mode the surround panner behaves as if the output channel format is surround 4.0 or higher. In "Stereo In: L/R" mode, the white dot represents the left speaker and the red dot represents the right speaker. Moving the empty circle pans the sound, and moving the red or white dots adjusts the stereo width (how far apart the Left and Right speakers are). To switch between these two modes, right click on the panner and select your choice from the context menu.</p>
+<p>You are able to further customize the output of the track or bus by disabling individual speakers on a surround panner. Clicking on a white speaker on the surround panner will disable it and turn the icon grey. These settings will be <span class="dead-link" href="glossary.html#build">built</span class="dead-link"> into the <a href="glossary.html#bank">banks</a> so be careful if you are disabling speakers when auditioning.</p>
+<p>When using 5.1, 7.1, or 7.1.4 the settings of the LFE and height (when using 7.1.4) to the right of the panner. The LFE controls the volume being sent to the LFE (subwoofer), whereas the height controls the perceived "height" of the 4 ceiling speakers. You are able to disable the LFE by clicking on the white icon below the slider. Height is set between -100% and +100%. If the player is using headphones (for example, with Windows Sonic for Headphones or Dolby Atmos for Headphones) they will hear an approximation of ceiling speakers.</p>
+<p>The 4 "height" channels are represented as the four corner speakers on the surround panner.</p></div>
+
+<p class="manual-footer">FMOD Studio User Manual 1.10.10 (2018-12-07). &copy; 2018 Firelight Technologies Pty Ltd.</p>
+</body>
+</html>
+
+</div>

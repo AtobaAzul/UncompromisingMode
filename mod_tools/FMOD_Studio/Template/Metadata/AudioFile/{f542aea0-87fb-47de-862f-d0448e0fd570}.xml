@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{f542aea0-87fb-47de-862f-d0448e0fd570}">
+        <property name="assetPath">
+            <value>hatch/SG_FLY_hatch_fs_dirt_10.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>48</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>0.081979166666666672</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{0e622e9a-5820-4286-bf7d-7de674a43cb2}</destination>
+        </relationship>
+    </object>
+</objects>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{3f177bf1-130d-4a20-a6f9-83964d5941bd}">
+        <property name="assetPath">
+            <value>duplicant/SG_DupVoc01_tired_02.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>48</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>1.0472916666666667</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{0e622e9a-5820-4286-bf7d-7de674a43cb2}</destination>
+        </relationship>
+    </object>
+</objects>

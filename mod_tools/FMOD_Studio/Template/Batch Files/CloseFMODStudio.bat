@@ -1,0 +1,1 @@
+taskkill /IM "FMOD Studio.exe" /F

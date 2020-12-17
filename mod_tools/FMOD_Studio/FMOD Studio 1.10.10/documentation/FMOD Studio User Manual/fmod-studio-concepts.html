@@ -1,0 +1,182 @@
+<html>
+<head>
+<title>FMOD Studio Concepts</title>
+<link rel="stylesheet" href="style/docs.css">
+<link rel="stylesheet" href="style/code_highlight.css">
+</head>
+<body>
+<div class="docs-body">
+<div class="manual-toc">
+<p>FMOD Studio User Manual 1.10</p>
+<ul>
+<li><a href="welcome-to-fmod-studio.html">Welcome to FMOD Studio</a></li>
+<li class="manual-current-chapter manual-active-chapter"><a href="fmod-studio-concepts.html">FMOD Studio Concepts</a><ul>
+<li><a href="#event">Event</a><ul>
+<li><a href="#events-and-event-instances">Events and Event Instances</a></li>
+</ul>
+</li>
+<li><a href="#track">Track</a><ul>
+<li><a href="#signal-chains">Signal Chains</a></li>
+</ul>
+</li>
+<li><a href="#instruments">Instruments</a><ul>
+<li><a href="#synchronous-versus-asynchronous">Synchronous versus Asynchronous</a></li>
+</ul>
+</li>
+<li><a href="#audio-files">Audio Files</a><ul>
+<li><a href="#working-outside-studio">Working Outside Studio</a></li>
+</ul>
+</li>
+<li><a href="#effects">Effects</a><ul>
+<li><a href="#preset-effects">Preset effects</a></li>
+</ul>
+</li>
+<li><a href="#parameters-and-cues">Parameters and Cues</a></li>
+<li><a href="#routing-and-mixing">Routing and Mixing</a></li>
+<li><a href="#banks">Banks</a><ul>
+<li><a href="#the-master-bank">The Master Bank</a></li>
+</ul>
+</li>
+<li><a href="#building">Building</a></li>
+<li><a href="#platforms">Platforms</a></li>
+</ul>
+</li>
+<li><a href="organizing-the-project.html">Organizing the Project</a></li>
+<li><a href="authoring-events.html">Authoring Events</a></li>
+<li><a href="working-with-instruments.html">Working with Instruments</a></li>
+<li><a href="managing-assets.html">Managing Assets</a></li>
+<li><a href="getting-events-into-your-game.html">Getting Events into Your Game</a></li>
+<li><a href="mixing.html">Mixing</a></li>
+<li><a href="profiling.html">Profiling</a></li>
+<li><a href="editing-during-live-update.html">Editing During Live Update</a></li>
+<li><a href="supporting-downloadable-and-user-generated-content.html">Supporting Downloadable and User-generated Content</a></li>
+<li><a href="advanced-topics.html">Advanced Topics</a></li>
+<li><a href="event-macro-controls-reference.html">Event Macro Controls Reference</a></li>
+<li><a href="plugin-reference.html">Plug-in Reference</a></li>
+<li><a href="modulator-reference.html">Modulator Reference</a></li>
+<li><a href="built-in-parameters-reference.html">Built-In Parameters Reference</a></li>
+<li><a href="scripting-terminal-reference.html">Scripting</a></li>
+<li><a href="scripting-api-reference.html">Scripting API Reference</a></li>
+<li><a href="keyboard-shortcut-reference.html">Keyboard Shortcut Reference</a></li>
+<li><a href="glossary.html">Glossary</a></li>
+<li><a href="appendix-a-celeste.html">Appendix: Celeste Getting Started Guide</a></li>
+</ul>
+</div>
+<div class="manual-content">
+<h1>2. FMOD Studio Concepts</h1>
+<p>This chapter introduces several essential FMOD Studio concepts. Together, these concepts explain how the various components of an FMOD Studio project work together, and how to best develop and FMOD Studio project and implement it in your game.</p>
+<p>This chapter is designed to be read before proceeding on to the rest of this manual, as the concepts introduced here come up frequently in later chapters.</p>
+<h2 id="event"><a href="#event">2.1 Event</a></h2>
+<p>An <a href="glossary.html#event">event</a> is an instanceable unit of sound content that can be triggered, controlled and stopped from game code. As a rule, every situation in your game that produces a sound should have a corresponding event.</p>
+<p><img alt="step 0" src="images/event.png" /></p>
+<p>An event contains and is primarily composed of <a href="glossary.html#track">tracks</a>, <a href="glossary.html#instrument">instruments</a>, and <a href="glossary.html#parameter">parameters</a>. The parameters trigger the instruments, which route audio content into the tracks. The tracks route into other tracks, or into the event's <a href="glossary.html#master-track">master track</a>. The output of the event's master track routes into the <a href="glossary.html#mixer">project mixer</a>. In addition, the event's parameters can control and manipulate most <a href="glossary.html#event-property">properties</a> of the event, of the event's instruments, and of effects on the event's tracks; and the event's <span class="dead-link" href="glossary.html#logic-markers">logic markers</span class="dead-link"> can manipulate the event's timeline parameter.</p>
+<p>Events can be created and organized in the <a href="glossary.html#events-browser">events browser</a>, edited in the <a href="glossary.html#event-editor-window">event editor window</a>, routed in the <a href="glossary.html#mixer-window">mixer window</a>, and auditioned in context in the <a href="glossary.html#sandbox-window">sandbox window</a>.</p>
+<p>For more information about using events through your game's code, see <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/common/introduction_web.html">API docs</a>.</p>
+<h3 id="events-and-event-instances"><a href="#events-and-event-instances">2.1.1 Events and Event Instances</a></h3>
+<p>Events are 'instanced,' meaning that multiple copies of a single event can play concurrently. This allows a single event to be used for multiple similar in-game occurrences; For example, a game with a '45 magnum gunshot' event would create a new instance of that event each time a gun was fired in-game.</p>
+<p>Any aspect of an event that is randomized or which can vary over the event's lifetime can vary between instances of an event. This means that separate concurrent instances of a single event can each have unique parameter values and be producing different output at any given time.</p>
+<p>Note that the event instance displayed in the event editor window is a specific instance that exists for the purpose of auditioning the event through that window. It does not represent any other instances of that event, and as such, does not indicate or allow you to change the parameter values and playback states of other instances you may hear.</p>
+<h2 id="track"><a href="#track">2.2 Track</a></h2>
+<p>In most cases, an event's tracks function as buses within the event, allowing each event instance to function as a small mixer. An event's tracks can be viewed in the event editor window by selecting the event in the events browser. (Automation tracks do not function as buses, and are instead used in conjunction with parameters to control an event's properties. See <a href="authoring-events.html#automation-and-modulation">Automation and Modulation</a> for more information.)</p>
+<p><img alt="step 0" src="images/tracks.png" /></p>
+<p><a href="glossary.html#audio-track">Audio tracks</a> function as <a href="glossary.html#group-bus">group buses</a>. Each audio track creates a submix from the outputs of <a href="glossary.html#instrument">instruments</a> on that audio track, as well as of any other group tracks in the event that route into it.</p>
+<p><a href="glossary.html#return-track">Return tracks</a> function as <a href="glossary.html#return-bus">return buses</a>, and are valid targets for <a href="glossary.html#send">sends</a> on other tracks within the event.</p>
+<p>The <a href="glossary.html#master-track">master track</a> functions as an event's master bus. All signals within an event eventually route into the event's master track, and from there into the <a href="glossary.html#mixer">project mixer</a>.</p>
+<h3 id="signal-chains"><a href="#signal-chains">2.2.1 Signal Chains</a></h3>
+<p>Each Audio, return or master track has a signal chain, a series of <a href="glossary.html#effect">effects</a> applied to the signal as it routes through a track. Selecting a track in the event editor window's editor allows you to view its signal chain in the <a href="glossary.html#deck">deck</a>.</p>
+<p><img alt="step 0" src="images/signalChain.png" /></p>
+<p>The effects modules in a signal chain are applied from left to right in the order they appear in the deck. By default, a signal chain contains only its "fader," a volume control.</p>
+<h2 id="instruments"><a href="#instruments">2.3 Instruments</a></h2>
+<p>All audio signals in an event originate from 'instruments,' the basic noisemaking components of an event.</p>
+<p>Instruments appear as colored boxes on the tracks of an event in the <a href="glossary.html#editor">editor</a>. These colored boxes are called "<a href="glossary.html#trigger-region">trigger regions</a>."</p>
+<p>Each instrument is on a particular <span class="dead-link" href="glossary.html#parameter-sheet">parameter sheet</span class="dead-link"> that can trigger it, and only appears in the event editor window's editor when that parameter sheet is displayed. The range of parameter values covered by an instrument's trigger region represents the range of parameter values that can <a href="glossary.html#trigger">trigger</a> the instrument.</p>
+<p>An instrument is triggered when the parameter sheet's playback position begins to overlap the instrument's trigger region. A triggered instrument begins producing a signal that is output to the track the instrument is on.</p>
+<p>When the playback position ceases overlapping an instrument's trigger region, that instrument is <a href="glossary.html#untrigger">untriggered</a>. The behavior of an untriggered instrument is determined by a number of factors, including its <a href="glossary.html#cut-behavior">cut behavior</a>, whether it is <a href="glossary.html#synchronous">synchronous</a> or <a href="glossary.html#asynchronous">asynchronous</a>, and whether any of its properties are subject to <a href="glossary.html#ahdsr-modulator">AHDSR modulation</a>.</p>
+<p>Clicking on an instrument in the event editor window's editor selects it, and displays its <a href="glossary.html#panel">panel</a> in the <a href="glossary.html#deck">deck</a>, allowing you to edit its properties and content. For more information about instrument properties, see <span class="dead-link" href="instrument-reference.html">Instrument Reference</span class="dead-link">.</p>
+<p>Many instruments feature a <a href="glossary.html#playlist">playlist</a>. Playlists can contain multiple audio files, or even <a href="glossary.html#event-reference-instrument">events located elsewhere in the project</a>. Whenever the instrument is triggered, the event or audio file to play is selected from the playlist according to the instrument's playlist settings; By default, a playlist entry is selected at random. For more information about playlist behavior, see the <span class="dead-link" href="instrument-reference.html">instrument reference</span class="dead-link"> chapter.</p>
+<p>The color of a trigger region is customizable, and has no bearing on the instrument's behavior.</p>
+<p>Note that instruments were called "<a href="glossary.html#instrument">Sound Modules</a>" in FMOD Studio versions 1.09 and earlier.</p>
+<h3 id="synchronous-versus-asynchronous"><a href="#synchronous-versus-asynchronous">2.3.1 Synchronous versus Asynchronous</a></h3>
+<p>Instruments on the <a href="glossary.html#timeline">timeline</a> may be either synchronous or asynchronous. Instruments on <span class="dead-link" href="glossary.html#parameter-sheet">parameter sheets</span class="dead-link"> other than the timeline are always asynchronous.</p>
+<p>In synchronous instruments, the part of the <a href="glossary.html#audio-file">audio file</a> that plays always corresponds to the part of the trigger region's waveform graphic overlapped by the timeline <a href="glossary.html#playback-position">playback position</a>. This allows you to seek within the audio files in a synchronous instrument by repositioning the timeline playback position.</p>
+<p>In asynchronous instruments, the precise position of the playback position within the trigger region has no bearing on which part of each audio asset plays. This allows you to treat instruments as switches that can be turned on and off, adding sounds to the event on demand.</p>
+<p>The synchronous or asynchronous behavior of an instrument can be identified by the appearance of the waveform graphics drawn on its trigger region: If the waveforms stretch all the way to the edge of the trigger region, the instrument is synchronous; And if the waveforms are contained within borders, the instrument is asynchronous.</p>
+<p>Note that synchronous instruments were called "Timelocked Sound Modules" in FMOD Studio versions 1.09 and earlier.</p>
+<h2 id="audio-files"><a href="#audio-files">2.4 Audio Files</a></h2>
+<p><a href="glossary.html#audio-file">Audio files</a> are the raw building blocks used to construct <a href="glossary.html#instrument">instruments</a> and <a href="glossary.html#event">events</a> in FMOD Studio.</p>
+<p>Audio files are organised and managed in the <a href="glossary.html#assets-browser">assets browser</a>, which can be found under the <a href="glossary.html#assets-tab">Assets tab</a> of the <a href="glossary.html#event-editor-window">event editor window</a>, as well as in the <a href="glossary.html#audio-bin-window">audio bin window</a>. You can import audio files into your project by dragging them into the assets browser from a <a href="glossary.html#file-manager">file manager</a> application, or from <a href="glossary.html#fmodio">FMOD.io</a>.</p>
+<p>Once an audio file has been imported, you can add it to an instrument's <a href="glossary.html#playlist">playlist</a> by dragging the file onto that playlist in the <a href="glossary.html#deck">deck</a>. You can also drag an audio file directly onto an <a href="glossary.html#audio-track">audio track</a> in order to create a <a href="glossary.html#single-instrument">single instrument</a> that uses that audio file, or onto the <a href="glossary.html#events-browser">events browser</a> to create an <a href="glossary.html#event">event</a> that uses it.</p>
+<p>Note that the <a href="glossary.html#compression-format">compression format</a> of audio files imported into FMOD Studio has no effect on your game's size or performance. This is because FMOD Studio's build process recompresses all audio files according to their platform encoding settings, effectively replacing any existing compression.</p>
+<h3 id="working-outside-studio"><a href="#working-outside-studio">2.4.1 Working Outside Studio</a></h3>
+<p>FMOD Studio has a lot in common with Digital Audio Workstations (DAWs), but it does have one major difference: Almost all the effects and behaviours it applies to your game's sound are processed in real time as your game is being played, rather than in advance. This allows the behaviour of events to change dynamically in response to changing circumstances in your game, but also takes up small amounts of CPU and memory.</p>
+<p>If your game features events that make use of FMOD Studio's advanced features, but which always behave in exactly the same way then triggered, you may be able to save resources by  'baking' the desired behaviour into your audio files in a third party DAW prior to importing them into FMOD Studio.</p>
+<h2 id="effects"><a href="#effects">2.5 Effects</a></h2>
+<p><a href="glossary.html#effect">Effects</a> can be inserted at any point in your project's <a href="glossary.html#signal-chain">signal chains</a> in order to process and modify the signal at that point. The properties of those effects can then be updated and adjusted in real time as your game runs, allowing the sound of anything and everything in your game to be processed differently in response to changing in-game circumstances.</p>
+<p><img alt="Signal chain with effects and sends" src="images/signalChainWithEffects.png" /></p>
+<p>There are a variety of effects available, each with numerous possible applications. For example, a game could use <span class="dead-link" href="effects-reference.html#fmod-multiband-eq">FMOD Multiband EQ</span class="dead-link"> effects to cutoff high frequencies whenever the player avatar is underwater, or to represent hearing damage after an explosion. The same game might use an <span class="dead-link" href="effects-reference.html#fmod-delay">FMOD Delay</span class="dead-link"> effect to simulate the echo in a cavern, or to produce feedback on an in-game two-way radio.</p>
+<p>In FMOD Studio, each effect in a signal chain is represented by a <a href="glossary.html#panel">panel</a> in the <a href="glossary.html#deck">deck</a> when a <a href="glossary.html#bus">bus</a> or <a href="glossary.html#track">track</a> is selected in the <a href="glossary.html#mixing-desk">mixing desk</a> or <a href="glossary.html#editor">editor</a>.</p>
+<p>Most effects can be inserted into the signal chains of both mixer buses and event tracks. Within a signal chain, effects can be arranged in almost any order, both <a href="glossary.html#pre-fader">pre-</a> and <a href="glossary.html#post-fader">post-fader</a>, and can be interspersed freely with other effects and <a href="glossary.html#send">sends</a>.</p>
+<p>You can add new effect modules to a signal chain by right-clicking on the signal chain where you want the effect to be placed and selecting 'Add Effect' or 'Insert Effect' from the <a href="glossary.html#context-menu">context menu</a>.</p>
+<p>For more information about specific effects modules, see the <span class="dead-link" href="effects-reference.html">effects module reference</span class="dead-link"> chapter.</p>
+<h3 id="preset-effects"><a href="#preset-effects">2.5.1 Preset effects</a></h3>
+<p><a href="glossary.html#preset-effect">Preset effects</a> are a way of creating the same behavior in a large number of <a href="glossary.html#event">events</a> without having to update each of those events individually when you want to change that behavior. </p>
+<p>All <span class="dead-link" href="glossary.html#preset-effect-instance">instances of a preset effect</span class="dead-link"> in a project share the same <a href="glossary.html#base-property-value">base property values</a>, <a href="glossary.html#modulator">modulators</a>, and <a href="glossary.html#automation">automation</a>. Changing the base property values, modulators, or automation of any instance of a preset effect therefore changes all other instances of that preset effect. Preset effects in the deck feature a <span class="dead-link" href="glossary.html#preset-icon">preset icon</span class="dead-link">, which resembles an arrow inside a circle. This icon blinks whenever the preset effect changes.</p>
+<p><img alt="Preset effect icon" src="images/presetEffectIcon.png" /> <img alt="Preset effect icon blinking" src="images/presetEffectIconBlinking.png" /></p>
+<p>This means that you can, for example, create a single <a href="glossary.html#spatializer-effect">spatializer</a> preset effect for all the <a href="glossary.html#3d-event">3D events</a> in your project. If you later need to tweak this spatializer's min and max distance properties, you only need to make the change to the preset effect once, instead of having to change each and every 3D event in your project individually.</p>
+<p>Note that different instances of a preset effect may be in different states due to differences in their parent <a href="glossary.html#event-instance">event instances</a>. For example, two event instances containing instances of a preset effect may have different parameter values, and thus result in those preset effect instances having different <a href="glossary.html#final-property-value">final property values</a> if they feature automation on that parameter.</p>
+<p>You can manage your project's preset effects in the <span class="dead-link" href="glossary.html#effects-tab">effects tab</span class="dead-link"> of the <span class="dead-link" href="glossary.html#preset-browser-window">preset browser window</span class="dead-link">.</p>
+<p><img alt="Preset effects browser" src="images/presetEffectsBrowser.png" /></p>
+<p>To create a new preset effect, right-click in the empty space in the preset effects browser and select the "New Preset" context menu item, then navigate to the specific effect you want the new preset effect to be. You can also convert an existing effect in your project into a preset effect by right-clicking on it in the deck and selecting "Convert to Preset" from the context menu.</p>
+<p>Note that you can create multiple preset effects from the same effect, each with its own base property values, modulation, and automation. You can also add effects to signal chains that aren't instances of a preset effect, even if you have already created a preset effect of that same effect, and that such effects' base property values, modulation and automation can be changed without affecting the preset effect, and vice versa.</p>
+<p>Once a preset effect has been created, you can add instances of it to signal chains throughout your project. To add an instance of a preset effect to a signal chain, either drag it from the presets browser to the deck, or right-click on the deck and select "Add Effect &gt; Preset Effects" (or "Insert Effect &gt; Preset Effects") and then the specific effect you want from the context menu.</p>
+<p>You can detach an instance of a preset effect from the preset effect. This causes it to become an independent effect whose base property values, automation, and modulation can be adjusted without altering the base property values, automation, and modulation of the preset effect. To disconnect an instance of a preset effect from that preset effect, right-click on it in the deck and select "Detach from Preset" from the context menu.</p>
+<h2 id="parameters-and-cues"><a href="#parameters-and-cues">2.6 Parameters and Cues</a></h2>
+<p><a href="glossary.html#event">Events</a> don't have to be "fire and forget." There are two major ways to change what an event is doing while it's playing, and those two ways are <a href="glossary.html#parameter">parameters</a> and <a href="glossary.html#cue">cues</a>.</p>
+<p><img alt="Cue button and sustain point" src="images/cueButtonAndSustainPoint.png" /></p>
+<p>Parameters are by far the more common of the two. They're properties of an event that can be updated at any time by your game's code, and you can hook them up to nearly anything else in an event: You can use parameters to <a href="glossary.html#automation">automate</a> the values of <a href="glossary.html#event-property">event properties</a>, and to control the event's <a href="glossary.html#timeline">timeline</a> through <a href="glossary.html#logic-marker">logic markers</a>.</p>
+<p>However, the most common use of parameters is to <a href="glossary.html#trigger">trigger</a> <a href="glossary.html#instrument">instruments</a>. Every instrument is associated with one or more parameters and has a specific range of values for each of the parameters required to trigger it. When the event's parameters are all set to values in those ranges, the instrument is triggered, and begins producing output.</p>
+<p><img alt="Parameter triggering an instrument" src="images/parameterTriggeringInstrument.png" /></p>
+<p>Every event starts with one parameter, called the "Timeline." The timeline has the special property of automatically advancing: As long as the event is playing, the value of the timeline parameter increases at a steady rate.</p>
+<p>Parameters other than the timeline are collectively known as '<a href="glossary.html#game-parameter">game parameters</a>,' because they're used to represent the state of your game.</p>
+<p>You can change the current value of any parameter in your game's code by using the <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_Studio_ParameterInstance_SetValue.html">FMOD Studio programmer's API</a>.</p>
+<p>Parameter values can also be controlled by <a href="glossary.html#modulator">modulators</a>, or by events that <a href="glossary.html#event-reference-instrument">reference</a> the event the parameter is in.</p>
+<p>Every instance of every event can have different parameter values, allowing different instances of the same event to produce wildly different output.</p>
+<p>For more information about parameters, see the <a href="authoring-events.html#parameters">Parameters</a> section of the <a href="authoring-events.html">Authoring Events</a> chapter.</p>
+<p>Cues are much less common than parameters. A cue tells the timeline <a href="glossary.html#playback-position">playback position</a> of an event instance to move past the next <a href="glossary.html#sustain-point">sustain point</a>.</p>
+<p>For more information about cues and sustain points, see <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_Studio_EventInstance_TriggerCue.html">Studio::EventInstance::triggerCue</a> in the Programmer's API documentation.</p>
+<h2 id="routing-and-mixing"><a href="#routing-and-mixing">2.7 Routing and Mixing</a></h2>
+<p><a href="glossary.html#event">Events</a> in FMOD Studio do not exist in a vacuum. Their output is routed into the <a href="glossary.html#mixer">project mixer</a>. The project mixer consists of a number of interconnected <a href="glossary.html#bus">buses</a>. By customizing these buses' <a href="glossary.html#routing">routing</a>, properties and <a href="glossary.html#effect">effects</a> in the mixer window, it's possible to create a complex mix for your project.</p>
+<p><img alt="Mixer window" src="images/mixerWindow.png" /></p>
+<p>Events and <a href="glossary.html#return-bus">return buses</a> are routed into <a href="glossary.html#group-bus">group buses</a> or the <a href="glossary.html#master-bus">master bus</a>, group buses are routed into other group buses, and eventually everything routes into the project's master bus. Every bus along the way creates a submix of all the signals that route into it.</p>
+<p>Your project's routing can be inspected and modified in the <a href="glossary.html#routing-browser">routing browser</a>. In this browser, the signal flows from right to left, and from the buses and events at the left edge of the browser into the project's master bus. You can also add <a href="glossary.html#send">sends</a> to buses' <a href="glossary.html#signal-chain">signal chains</a> to duplicate their signals, and send the duplicated signals to <a href="glossary.html#return-bus">return buses</a>.</p>
+<p><img alt="Routing browser" src="images/routingBrowser.png" /></p>
+<p>Every bus has its own volume property and signal chain that alters the signal passing through it. By customizing the properties and signal chains of your buses, you can tailor each submix in your project. The signal chain of any bus can be viewed in the deck by selecting the bus in the mixing desk or mixer window's routing browser.</p>
+<p><img alt="Bus signal chain" src="images/busSignalChain.png" /></p>
+<p>Once your project's routing and <a href="glossary.html#effect">effects</a> are in place, you can use the <a href="glossary.html#mixer-strip">mixer strips</a> in the mixing desk to tweak and customize the overall mix to fit your project's requirements.</p>
+<p><img alt="Mixing desk with active buses" src="images/mixingDeskWithActiveBuses.png" /></p>
+<p>The meter on each mixer strip represents the output volume of the corresponding bus, and a horizontal orange line indicates that the corresponding bus is active. You can click and drag a mixer strip's slider handle to adjust the bus' fader volume. If you <span class="dead-link" href="glossary.html#live-update">connect FMOD Studio to a running copy of your game</span class="dead-link">, you can even adjust the mix of your game project as it runs.</p>
+<p>It's even possible to make the mix dynamic by creating <a href="glossary.html#snapshot">snapshots</a> that adjust the values some or all of the properties in the mixer when active. For more information about snapshots, see <a href="mixing.html#snapshots-and-the-tracks-view">Snapshots and the Tracks View</a> in the <a href="mixing.html">Mixing</a> chapter.</p>
+<h2 id="banks"><a href="#banks">2.8 Banks</a></h2>
+<p>A <a href="glossary.html#bank">bank</a> is a collection of <a href="glossary.html#event">events</a> from your FMOD Studio project, formatted and compressed for use in your game. The purpose of banks is to let you choose which content from your project is loaded at any given time, allowing you greater control over how much memory your game's audio consumes. Banks can be created, edited, and organized in the <a href="glossary.html#banks-browser">banks browser</a>, under the banks tab of the <a href="glossary.html#event-editor-window">event editor window</a>.</p>
+<p><img alt="Banks browser" src="images/banksBrowserWithBanks.png" /></p>
+<p>Before an event can be used in your game, you need to assign it to at least one bank, and that bank needs to be built. To assign an event to a bank, right-click on the event in the events browser, then select 'Assign to Bank' from the context menu. For information about building banks, see the <a href="fmod-studio-concepts.html#building">Building</a> section of this chapter.</p>
+<h3 id="the-master-bank"><a href="#the-master-bank">2.8.1 The Master Bank</a></h3>
+<p>In addition to normal banks, every FMOD Studio project contains at least one "master bank." The master bank contains data relevant to your entire FMOD Studio project, and so must be loaded into memory before <em>any</em> event in <em>any</em> bank may be used by your game.</p>
+<p>Because the master bank is loaded into memory at all times, it is generally best for performance to keep it as small as possible, by assigning no events to it.</p>
+<h2 id="building"><a href="#building">2.9 Building</a></h2>
+<p>To build your project's <a href="glossary.html#bank">banks</a> for use in your game, select 'File &gt; Build...' You can also build individual banks by right-clicking on the desired bank in the <a href="glossary.html#banks-browser">banks browser</a> and selecting 'Build...' from the context menu, and you can build your banks for every platform in your project platforms list by selecting 'File &gt; Build All Platforms...'</p>
+<p>Building your banks causes the built ".bank" files to appear in your project's <a href="glossary.html#built-banks-output-directory">built banks output directory</a>. These built bank files are all your game code needs to make use of the <a href="glossary.html#event">events</a> they contain.</p>
+<p>In most cases, your game's code should load a bank into memory with <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_Studio_System_LoadBankFile.html">Studio::System::loadBankFile</a> and <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_Studio_Bank_LoadSampleData.html">Studio::Bank::loadSampleData</a> some time before using any of the events it contains, then create and play instances of that bank's events with <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_Studio_EventDescription_CreateInstance.html">Studio::EventDescription::createInstance</a> and <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_Studio_EventInstance_Start.html">Studio::EventInstance::start</a>.</p>
+<p>Multiple banks may be loaded into memory simultaneously, but to conserve memory it's best to unload banks that your game is unlikely to use in the near future.</p>
+<p>For more detailed information about using built banks in the FMOD Studio Programmer's API, see the <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/common/introduction_web.html">FMOD Studio Programmer's API Documentation</a>.</p>
+<h2 id="platforms"><a href="#platforms">2.10 Platforms</a></h2>
+<p>When developing content in FMOD Studio, it is useful to bear in mind the platforms that content is intended to be used on. Depending on the needs of your project, different platforms may budget different amounts of memory and processing power for audio, and some platforms may support different <span class="dead-link" href="glossary.html#speaker-mode">numbers and configurations of speakers</span class="dead-link">.</p>
+<p>Because platforms are so important, you are able to control certain settings in FMOD Studio on a per-platform basis. These properties include <span class="dead-link" href="glossary.html#speaker-mode">project output format</span class="dead-link">, and the <span class="dead-link" href="glossary.html#encoding-setting">encoding settings of audio files</span class="dead-link">.</p>
+<p>By default, each FMOD Studio project has one platform, called "Desktop." The current platform is displayed in the bottom-right of most FMOD Studio windows. You can change the current platform by clicking on the current platform display and selecting a new platform from the dropdown menu.</p>
+<p>You can rename platforms, add additional platforms to the project, and change the speaker configurations and default encoding settings of existing platforms in the "Build" tab of the "Preferences" window.</p></div>
+
+<p class="manual-footer">FMOD Studio User Manual 1.10.10 (2018-12-07). &copy; 2018 Firelight Technologies Pty Ltd.</p>
+</body>
+</html>
+
+</div>

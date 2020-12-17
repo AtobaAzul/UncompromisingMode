@@ -1,0 +1,256 @@
+<html>
+<head>
+<title>Managing Assets</title>
+<link rel="stylesheet" href="style/docs.css">
+<link rel="stylesheet" href="style/code_highlight.css">
+</head>
+<body>
+<div class="docs-body">
+<div class="manual-toc">
+<p>FMOD Studio User Manual 1.10</p>
+<ul>
+<li><a href="welcome-to-fmod-studio.html">Welcome to FMOD Studio</a></li>
+<li><a href="fmod-studio-concepts.html">FMOD Studio Concepts</a></li>
+<li><a href="organizing-the-project.html">Organizing the Project</a></li>
+<li><a href="authoring-events.html">Authoring Events</a></li>
+<li><a href="working-with-instruments.html">Working with Instruments</a></li>
+<li class="manual-current-chapter manual-active-chapter"><a href="managing-assets.html">Managing Assets</a><ul>
+<li><a href="#anatomy-of-the-assets-browser">Anatomy of the Assets Browser</a></li>
+<li><a href="#folders-and-files">Folders and Files</a><ul>
+<li><a href="#importing-audio-files">Importing Audio Files</a></li>
+<li><a href="#using-audio-files">Using Audio Files</a></li>
+<li><a href="#folders">Folders</a></li>
+<li><a href="#unimported-files">Unimported Files</a></li>
+<li><a href="#filename-clashes">Filename Clashes</a></li>
+<li><a href="#open-in-an-external-sample-editor">Open in an External Sample Editor</a></li>
+<li><a href="#searching-for-assets">Searching for Assets</a><ul>
+<li><a href="#searching-for-assets-examples">Searching for Assets Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#compression-and-platform-encoding">Compression and Platform Encoding</a><ul>
+<li><a href="#custom-platform-encoding-settings">Custom Platform Encoding Settings</a></li>
+<li><a href="#loading-modes">Loading Modes</a></li>
+</ul>
+</li>
+<li><a href="#consolidating-assets">Consolidating Assets</a></li>
+<li><a href="#dealing-with-missing-files">Dealing with Missing Files</a></li>
+<li><a href="#fmodio">FMOD.io</a><ul>
+<li><a href="#browsing-the-catalog">Browsing the catalog</a></li>
+<li><a href="#purchasing-from-fmodio">Purchasing from FMOD.io</a></li>
+<li><a href="#importing-audio-files-from-fmodio">Importing audio files from FMOD.io</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="getting-events-into-your-game.html">Getting Events into Your Game</a></li>
+<li><a href="mixing.html">Mixing</a></li>
+<li><a href="profiling.html">Profiling</a></li>
+<li><a href="editing-during-live-update.html">Editing During Live Update</a></li>
+<li><a href="supporting-downloadable-and-user-generated-content.html">Supporting Downloadable and User-generated Content</a></li>
+<li><a href="advanced-topics.html">Advanced Topics</a></li>
+<li><a href="event-macro-controls-reference.html">Event Macro Controls Reference</a></li>
+<li><a href="plugin-reference.html">Plug-in Reference</a></li>
+<li><a href="modulator-reference.html">Modulator Reference</a></li>
+<li><a href="built-in-parameters-reference.html">Built-In Parameters Reference</a></li>
+<li><a href="scripting-terminal-reference.html">Scripting</a></li>
+<li><a href="scripting-api-reference.html">Scripting API Reference</a></li>
+<li><a href="keyboard-shortcut-reference.html">Keyboard Shortcut Reference</a></li>
+<li><a href="glossary.html">Glossary</a></li>
+<li><a href="appendix-a-celeste.html">Appendix: Celeste Getting Started Guide</a></li>
+</ul>
+</div>
+<div class="manual-content">
+<h1>6. Managing Assets</h1>
+<p>Managing a project's audio assets is an important part of using FMOD Studio efficiently.</p>
+<p>You can import, manage, organize, and audition audio files in the <a href="glossary.html#assets-browser">assets browser</a>. The assets browser also allows you to add files you've imported to events and instruments, and to specify how they'll be encoded into banks.</p>
+<p>In addition to importing audio files that you already own, you can buy a variety of audio files from our online store, FMOD.io.</p>
+<div class="admonition warning">
+<p>The assets browser represents the actual files and folders in your project's "Assets" directory. Any change to the items displayed in the assets browser represents a change to those files and folders, and <em>cannot</em> be undone via the "Edit &gt; Undo" menu item.</p>
+</div>
+<h2 id="anatomy-of-the-assets-browser"><a href="#anatomy-of-the-assets-browser">6.1 Anatomy of the Assets Browser</a></h2>
+<p>The <a href="glossary.html#assets-browser">assets browser</a> displays the <a href="glossary.html#audio-file">audio files</a> and folders in your project's assets directory. It allows you to audition, edit, and organize your project's audio files, as well as to add those files to <a href="glossary.html#instrument">instruments</a> and <a href="glossary.html#event">events</a>. It can be found in the <a href="glossary.html#event-editor-window">event editor</a> and the <a href="glossary.html#audio-bin-window">audio bin</a> windows.</p>
+<p><img alt="assets browser" src="images/assetsBrowser.png" /></p>
+<p>At the top of the assets browser is the assets browser <span class="dead-link" href="glossary.html#search-bar">search bar</span class="dead-link">. Below it are all the files and folders in your project's "Assets" subdirectory. You can drag files from your <a href="glossary.html#file-manager">file manager</a> onto the assets browser in order to import them into your project. You can drag files from the assets browser onto instruments, <a href="glossary.html#track">tracks</a>, <a href="glossary.html#playlist">playlists</a>, and the <a href="glossary.html#events-browser">events browser</a> to use them in your project.</p>
+<p>When an asset or folder is selected, its <a href="#compression-and-platform-encoding">custom encoding settings</a> and <span class="dead-link" href="glossary.html#asset-preview">asset preview</span class="dead-link"> (if any) are displayed at the bottom of the assets browser. </p>
+<p><img alt="Custom Encoding Settings" src="images/customEncodingSettings.png" /></p>
+<p>In addition to setting the encoding format for the current platform, you can set an asset's loading mode. For more information about loading modes and compression, see the <a href="managing-assets.html#compression-and-platform-encoding">Compression and Platform Encoding</a> section of this chapter.</p>
+<p><img alt="Asset Preview" src="images/assetPreview.png" /></p>
+<p>The asset preview allows you to view the waveform of an asset, and to <a href="glossary.html#audition">audition</a> it both with and without compression.</p>
+<h2 id="folders-and-files"><a href="#folders-and-files">6.2 Folders and Files</a></h2>
+<p>All the <a href="glossary.html#audio-file">audio files</a> and folders in your project's "Assets" directory are displayed in the <a href="glossary.html#assets-browser">assets browser</a>. This browser is your main tool for importing and organizing your project's audio files, and for adding them to <a href="glossary.html#instrument">instruments</a> and <a href="glossary.html#event">events</a>.</p>
+<p>Please note that making changes in the assets browser makes changes to the contents of project directory on disk. If you create, delete, or move files or folders in the assets browser in FMOD Studio, the corresponding files and folders in the "Assets" folder on disk are also created, deleted, or moved.</p>
+<h3 id="importing-audio-files"><a href="#importing-audio-files">6.2.1 Importing Audio Files</a></h3>
+<p>You can <span class="dead-link" href="glossary.html#import">import</span class="dead-link"> an audio file into FMOD Studio by dragging it from a <a href="glossary.html#file-manager">file manager</a> window onto the assets browser. This copies the file into your project's "Assets" folder. If you drag the file onto a particular folder in the assets browser, it will be added to that folder.</p>
+<p>You can also import audio files by selecting "File &gt; Import Audio Files..." and selecting the files you want to import in the dialog. Files imported in this way are copied into your project's "Assets" folder.</p>
+<h3 id="using-audio-files"><a href="#using-audio-files">6.2.2 Using Audio Files</a></h3>
+<p>You can use assets from the assets browser in your project by dragging them onto instruments, <a href="glossary.html#playlist">playlists</a>, <a href="glossary.html#track">tracks</a>, and the <a href="glossary.html#events-browser">events browser</a>.</p>
+<p>Dragging one or more assets onto an <a href="glossary.html#audio-track">audio track</a> or <a href="glossary.html#master-track">master track</a> creates a <a href="working-with-instruments.html#instrument-types">single instrument</a> or <a href="working-with-instruments.html#instrument-types">multi instrument</a>, depending on the number of assets selected.</p>
+<p>Dragging assets onto the playlist of a <a href="glossary.html#multi-instrument">multi instrument</a> or <a href="glossary.html#scatterer-instrument">scatterer instrument</a> adds them to that playlist.</p>
+<p>Dragging an asset onto the events browser creates a new event. If you drag more than one asset onto the events browser at a time, you'll be prompted to choose between creating a new event for each audio file, creating a new event containing a multi instrument, and creating a new event with one track per audio file.</p>
+<h3 id="folders"><a href="#folders">6.2.3 Folders</a></h3>
+<p>Folders in the assets browser represent actual folders in your FMOD Studio project's "Assets" subdirectory. To create a new folder, right-click on an empty space and select "New Folder". </p>
+<p>You can right-click on an asset or folder and select "Move Into New Folder" from the context menu to create a new folder in that location and move the selected item into that new folder.</p>
+<p>You can move any item in the assets browser into a new folder by dragging it onto that folder.</p>
+<h3 id="unimported-files"><a href="#unimported-files">6.2.4 Unimported Files</a></h3>
+<p>Audio files that were copied into the project's "Assets" directory using a file manager application are automatically tagged by FMOD Studio as '#unimported', and are marked with a yellow 'New!' icon in the assets browser.</p>
+<p><img alt="An Unimported Asset" src="images/unimportedAsset.png" /></p>
+<p>Unimported files are not included in your project's metadata, cannot be assigned custom encoding settings, and are ignored by FMOD Studio's integrated source control solutions.</p>
+<p>Dragging an unimported audio file onto an audio track, an instrument, a playlist, or the events browser automatically imports it. You can also import an unimported file by right-clicking on it and selecting "Import" from the context menu.</p>
+<h3 id="filename-clashes"><a href="#filename-clashes">6.2.5 Filename Clashes</a></h3>
+<p>If you attempt to move or import a file into the same location as a different file with the same name, you will be prompted to replace or rename the file.</p>
+<p><img alt="filenameClash" src="images/filenameClash.png" /></p>
+<p>Choosing to replace the file overwrites the file already in that location with the file being imported or moved.</p>
+<p>Choosing to rename the file automatically appends a number to the name of the file being imported or moved. For example, a file named "A.wav" will be renamed "A (2).wav".</p>
+<p>You may also choose to cancel the operation. If you do, the file will not be imported, moved, or changed.</p>
+<h3 id="open-in-an-external-sample-editor"><a href="#open-in-an-external-sample-editor">6.2.6 Open in an External Sample Editor</a></h3>
+<p>You can use an audio file editing application to edit any audio file in the assets browser. To do this, right-click on the audio file in the assets browser and select "Open in External Sample Editor" from the context menu.</p>
+<p>This opens the audio file using the external sample editor specified in the "Assets" tab of the <span class="dead-link" href="glossary.html#preferences">preferences</span class="dead-link"> window. If no external sample editor is specified, the file is opened using the application associated with that file type in your operating system.</p>
+<div class="admonition warning">
+<p>Editing an audio file in an external application alters the file on disk in your project's "Assets" folder, and is <em>not</em> undoable. </p>
+</div>
+<p>FMOD Studio does not automatically update all instruments that use an asset when that asset is edited. To update all instruments that use an edited asset, right-click on the asset in the assets browser and select "Refresh" from the context menu.</p>
+<h3 id="searching-for-assets"><a href="#searching-for-assets">6.2.7 Searching for Assets</a></h3>
+<p>You are able to search through your FMOD Studio project's assets in the <a href="glossary.html#assets-browser">assets browser</a>.</p>
+<p><img alt="loupeAssets.png" src="images/loupeAssets.png" /></p>
+<p>In addition to searching for assets by name, you can search for assets that fit particular categories by clicking the loupe icon and selecting an item from the menu. Each menu item automatically fills the search bar with a specific search term and filters the browser to display only files and folders that fit specific criteria, as follows:</p>
+<table>
+<thead>
+<tr>
+<th>Menu item</th>
+<th>Term</th>
+<th>Displays</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Filter by Missing Assets</td>
+<td><code>#missing</code></td>
+<td>Assets that are <a href="managing-assets.html#dealing-with-missing-files">missing</a>.</td>
+</tr>
+<tr>
+<td>Filter by Modified Assets</td>
+<td><code>#modified</code></td>
+<td>Assets that have been modified in an external application.</td>
+</tr>
+<tr>
+<td>Filter by Unimported Assets</td>
+<td><code>#unimported</code></td>
+<td>Assets that are unimported (tagged as "New!" in the assets browser).</td>
+</tr>
+<tr>
+<td>Filter by Unused Assets</td>
+<td><code>#unused</code></td>
+<td>Assets that are not used in any event. Note that assets used in audio tables are still shown if they are not also used in events.</td>
+</tr>
+<tr>
+<td>Filter by Streaming Assets</td>
+<td><code>#streaming</code></td>
+<td>Assets that are <span class="dead-link" href="glossary.html#streaming-loading-mode">streaming</span class="dead-link">.</td>
+</tr>
+<tr>
+<td>Filter by Custom Encoding Settings</td>
+<td><code>#customized</code></td>
+<td>Assets and folders that have custom encoding settings. Assets in folders with custom encoding settings are not shown.</td>
+</tr>
+<tr>
+<td>Filter by File Length</td>
+<td><code>#query:(AudioFile.length &gt; x)</code></td>
+<td>Find assets with a length longer than <code>x</code> (where <code>x</code> is a duration in seconds).</td>
+</tr>
+</tbody>
+</table>
+<p>These search terms may also be manually typed into the search bar.</p>
+<p>For more information about searching for browser content, see the <a href="organizing-the-project.html#searching">Searching</a> section of the <a href="organizing-the-project.html">Organizing the Project</a> chapter.</p>
+<h4 id="searching-for-assets-examples"><a href="#searching-for-assets-examples">Searching for Assets Examples</a></h4>
+<table>
+<thead>
+<tr>
+<th>Example</th>
+<th>Code</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Search for all unused assets that are longer than 10 seconds</td>
+<td><code>#unused #query:(AudioFile.length &gt; 10)</code></td>
+</tr>
+<tr>
+<td>Search for all streaming assets that contain the word "Ambience"</td>
+<td><code>#streaming ambience</code></td>
+</tr>
+<tr>
+<td>Search for all modified assets with custom encoding settings</td>
+<td><code>#modified #customized</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="compression-and-platform-encoding"><a href="#compression-and-platform-encoding">6.3 Compression and Platform Encoding</a></h2>
+<p>In order for content to be used in your game, it needs to be <span class="dead-link" href="glossary.html#build">built</span class="dead-link"> into <a href="glossary.html#bank">banks</a>. As part of this process, FMOD Studio automatically compresses and encodes your project's assets.</p>
+<p>The <a href="glossary.html#assets-browser">assets browser</a> allows you to set the encoding format to be used for each asset and asset folder in your project. These encoding settings, if specified for an asset or asset folder, are used for that asset or the assets in that folder in place of the default encoding setting specified for the <span class="dead-link" href="glossary.html#platform">platform</span class="dead-link"> in the "Build" tab of the preferences window. Encoding formats are always platform-specific, and so apply only for the platform selected when the new encoding setting is set.</p>
+<p>The assets browser also allows you to specify the <span class="dead-link" href="glossary.html#loading-mode">loading modes</span class="dead-link"> of individual assets within your project.</p>
+<p>For information about banks and building your project, see the <a href="getting-events-into-your-game.html">Getting Events into Your Game</a> chapter.</p>
+<p>For information about specific encoding formats, see the <a href="getting-events-into-your-game.html#compression-formats-and-platform-settings">compression formats and platform settings</a> section of the <a href="getting-events-into-your-game.html">Getting Events into Your Game</a> chapter.</p>
+<h3 id="custom-platform-encoding-settings"><a href="#custom-platform-encoding-settings">6.3.1 Custom Platform Encoding Settings</a></h3>
+<p>When an <span class="dead-link" href="glossary.html#asset">asset</span class="dead-link"> or folder is selected in the <a href="glossary.html#assets-browser">assets browser</a>, and that asset or folder does not currently have custom encoding settings for the current platform, the words "Click to add a custom platform encoding setting" appear in blue at the bottom of the assets browser. You can click on this text to add a custom encoding setting to the selected asset or folder.</p>
+<p><img alt="Click to Add a Custom Platform Encoding Setting" src="images/clickToAddACPES.png" /></p>
+<p>Once custom encoding settings have been added to an asset or folder, the blue text is replaced by the Encoding Format, Quality, and Advanced Loading Mode drop-down menus. These menus can be used to change the corresponding settings of the asset or folder. You can change the encoding and loading settings for multiple assets or folders at a time by multi-selecting them before adjusting their settings.</p>
+<p><img alt="Custom Platform Encoding Setting" src="images/customPlatformEncodingSetting.png" /></p>
+<p>Assets and folders with custom encoding settings are labeled with those settings in the assets browser.</p>
+<p><img alt="Custom encoded asset" src="images/customEncodedAssets.png" /></p>
+<p>You can preview how your assets will sound when compressed by turning on <span class="dead-link" href="glossary.html#audition-with-compression">audition with compression mode</span class="dead-link"> before auditioning them. In this mode, assets auditioned in the asset preview are compressed and encoded for the purposes of auditioning in the asset preview only. To turn on audition with compression mode, click on the "Compress" button in the <span class="dead-link" href="glossary.html#asset-preview">asset preview</span class="dead-link">. Audition with compression mode cannot be used to audition the XMA and AT9 compression formats.</p>
+<h3 id="loading-modes"><a href="#loading-modes">6.3.2 Loading Modes</a></h3>
+<p>There are several different ways in which an asset can be loaded into memory for use in your game. Each loading mode has its own advantages and disadvantages.</p>
+<p>Assets with <span class="dead-link" href="glossary.html#compressed-loading-mode">compressed loading mode</span class="dead-link"> are loaded into memory in compressed format when loaded, and then decompressed when played. This requires less memory than decompressed loading mode, but requires slightly more CPU when playing assets.</p>
+<p>Assets with <span class="dead-link" href="glossary.html#decompressed-loading-mode">decompressed loading mode</span class="dead-link"> are completely decompressed into memory when loaded. This uses more memory than streaming loading mode and compressed loading mode, but requires very little CPU when playing assets. This loading mode is most commonly used for short assets that are played frequently and for mobile platforms.</p>
+<p>Assets with <span class="dead-link" href="glossary.html#streaming-loading-mode">streaming loading mode</span class="dead-link"> are continuously loaded piecemeal from disk into a small memory buffer while playing. This substantially reduces the memory required to load and play assets. However, most platforms can only support a single-digit number of simultaneously playing streams, as streaming assets require constant disk access while playing. Streaming loading mode is most commonly used for music and background ambiences.</p>
+<p>By default, assets ten seconds or longer are automatically set to use streaming loading mode. Other assets default to compressed loading mode. You can change this behavior in the assets tab of the <span class="dead-link" href="glossary.html#preferences">preferences</span class="dead-link"> window.</p>
+<p><img alt="Automatically Stream Imported Assets Checkbox" src="images/automaticallyStreamAssetsCheckbox.png" /></p>
+<p>You can change the loading mode of an asset with custom platform encoding settings by using the advanced loading mode drop-down menu.</p>
+<p><img alt="Streaming Settings on Assets" src="images/streamingAssets.png" /></p>
+<p>You can change the loading mode of an asset that does not have custom platform encoding settings by clicking on the "Stream" button. This toggles between decompressed and streaming loading modes.</p>
+<p>Because streaming assets are loaded as they play and must be buffered before they can begin playback, an instrument that plays a streaming asset may exhibit latency when triggered. It is therefore best to use non-streaming assets in instruments that require low latency.</p>
+<h2 id="consolidating-assets"><a href="#consolidating-assets">6.4 Consolidating Assets</a></h2>
+<p>It's occasionally necessary to replace one <a href="glossary.html#audio-file">audio file</a> in your project with a different audio file, or with a newer version of the same audio file. When doing this, it is not necessary to manually edit every <a href="glossary.html#instrument">instrument</a> in which the old file was used. Instead, you can use the assets browser to consolidate the new and old files.</p>
+<div class="admonition warning">
+<p>Consolidating assets is not undoable, and deletes the replaced assets from your project's "Assets" folder on disk.</p>
+</div>
+<p>To consolidate some files, you must first multi-select the audio files to be consolidated in the <a href="glossary.html#assets-browser">assets browser</a>. To multi-select audio files, hold down the 'Shift' or 'Ctrl' keys when clicking on the files you want to add to the multi-selection. Make sure the selection includes both the audio file(s) you want to replace and the audio file you want to replace them with. Then, right-click on the file you want to replace the other files with, and select "Consolidate..." from the <a href="glossary.html#context-menu">context menu</a>.</p>
+<p>Consolidating assets deletes all assets in the selection other than the one on which you right-clicked. It also automatically replaces all references to the deleted assets with references to the asset on which you right-clicked.</p>
+<p><img alt="Consolidating Assets" src="images/consolidatingAssets.png" /></p>
+<p>For example, in the above screenshot, right-clicking on "ExplosionLarge.ogg" and selecting "Consolidate..." from the context menu would cause "ExplosionMedium.ogg" and "ExplosionSmall.ogg" to be deleted from the project, and would also update all instruments that reference "ExplosionMedium.ogg" and "ExplosionSmall.ogg" to reference "ExplosionLarge.ogg" instead.</p>
+<h2 id="dealing-with-missing-files"><a href="#dealing-with-missing-files">6.5 Dealing with Missing Files</a></h2>
+<p>FMOD Studio monitors the contents of your project's "Assets" folder for changes. Should an <a href="glossary.html#audio-file">audio file</a> be moved, deleted, or renamed outside of FMOD Studio, it is automatically tagged as "#missing" in the <a href="glossary.html#assets-browser">assets browser</a>. Changing the path of your project's assets folder in the Assets tab of the Preferences dialog also results in missing files if the files are not found under the new path.</p>
+<p><img alt="Missing Files" src="images/missingFile.png" /></p>
+<p>When FMOD Studio tries to play an <a href="glossary.html#instrument">instrument</a> that contains a missing file, it plays no audio for that asset. If you try to audition a missing audio file in the <span class="dead-link" href="glossary.html#asset-preview">asset preview</span class="dead-link">, an error message is displayed, stating that the file cannot be found. A similar error message is displayed when trying to <span class="dead-link" href="glossary.html#build">build</span class="dead-link"> a <a href="glossary.html#bank">bank</a> with a missing file.</p>
+<p>You can <a href="#searching-for-assets">search</a> for missing audio files by searching for "#missing" in the assets browser search bar.</p>
+<p>The simplest way to fix a missing file is to add a file with the same filename as the missing file to the folder where the missing file is supposed to be. After replacing the file, right-click on it in the assets browser and select "Refresh" from the <a href="glossary.html#context-menu">context menu</a> to update all instruments that use the formerly-missing asset throughout your project.</p>
+<p>Another way is to consolidate the missing asset with another asset in your project. For more information about consolidating assets, see the <a href="managing-assets.html#consolidating-assets">consolidating assets</a> section of this chapter.</p>
+<h2 id="fmodio"><a href="#fmodio">6.6 FMOD.io</a></h2>
+<p><a href="http://fmod.io">FMOD.io</a> is an online service where you can preview, purchase, and download <a href="glossary.html#audio-file">audio files</a> for use in your projects. All these files have been specially selected for use in games, and are brought to you by Soundrangers and Sound Ideas.</p>
+<p><img alt="fmodIO" src="images/fmodIO.png" /></p>
+<p>To access FMOD.io, either click on the FMOD.io tab in the <a href="glossary.html#audio-bin-window">audio bin window</a>, or select "Jump to FMOD.io" from the "FMOD.io" menu.</p>
+<p>You will need to sign in to an FMOD.com account in order to purchase or download audio files from FMOD.io. If you do not already have an FMOD.com account, you can sign up for one at <a href="https://www.fmod.com/profile/register">www.FMOD.com</a>. Creating an FMOD.com account automatically adds 50 free audio files to that account's library.</p>
+<p>All audio files purchased through FMOD.io are yours to keep forever, and are licensed for use in any media you choose. For more information on licensing and the terms and conditions of use, please click on the "Terms of Use" button located at the bottom right of the FMOD.io window.</p>
+<h3 id="browsing-the-catalog"><a href="#browsing-the-catalog">6.6.1 Browsing the catalog</a></h3>
+<p>You can browse everything that FMOD.io has to offer by clicking on the "Browse the Collection" link underneath the search bar. </p>
+<p><img alt="fmodIO" src="images/fmodIOBrowse.png" /></p>
+<p>You can also search the catalog for specific audio files by typing search terms into the search bar and clicking the "Find" button.</p>
+<p><img alt="fmodIO" src="images/fmodIOSearch.png" /></p>
+<p>Results with a right-facing green arrow are categories of audio files. You can click on any category to view the files and bundles it contains. You can go back up a category by clicking on the Back button at the top left of the FMOD.io window.</p>
+<p>Results with a forward slash and a number next to them are bundles of multiple audio files.</p>
+<p>You can click on any audio file or bundle of files to view its details. While viewing the details of a file or bundle, you can preview an audio file by clicking on its name.</p>
+<h3 id="purchasing-from-fmodio"><a href="#purchasing-from-fmodio">6.6.2 Purchasing from FMOD.io</a></h3>
+<p>Clicking on the price next to an audio file adds it to your cart.</p>
+<p>The total number of items in your cart and their total value is displayed at the bottom of the window next to the shopping cart icon.</p>
+<p>You can click on this icon to view the contents of your cart. Clicking on the "Checkout" button prompts you to enter payment details and finalize your purchase.</p>
+<h3 id="importing-audio-files-from-fmodio"><a href="#importing-audio-files-from-fmodio">6.6.3 Importing audio files from FMOD.io</a></h3>
+<p>To import audio files from FMOD.io into your project, sign in to FMOD.io and click on your account name at the bottom of the window to view your library of purchased sound files.</p>
+<p>You can navigate through your library by clicking on the categories and sub-categories. To import a file into your project, drag it onto the <a href="glossary.html#assets-browser">assets browser</a>. You can also drag files directly onto <a href="glossary.html#instrument">instruments</a>, <a href="glossary.html#playlist">playlists</a>, <a href="glossary.html#track">tracks</a>, and the <a href="glossary.html#events-browser">events browser</a> as if you were using an already-imported asset.</p></div>
+
+<p class="manual-footer">FMOD Studio User Manual 1.10.10 (2018-12-07). &copy; 2018 Firelight Technologies Pty Ltd.</p>
+</body>
+</html>
+
+</div>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{0c225eb5-c870-4315-b7e7-fa3bc5cf0b5b}">
+        <property name="assetPath">
+            <value>hatch/SG_SFX_hatch_idle_03.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>48</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>0.68520833333333331</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{0e622e9a-5820-4286-bf7d-7de674a43cb2}</destination>
+        </relationship>
+    </object>
+</objects>

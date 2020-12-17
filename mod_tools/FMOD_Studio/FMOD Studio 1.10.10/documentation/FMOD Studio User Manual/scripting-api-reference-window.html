@@ -1,0 +1,69 @@
+<html>
+<head>
+<title>Scripting API Reference | Window</title>
+<link rel="stylesheet" href="style/docs.css">
+<link rel="stylesheet" href="style/code_highlight.css">
+</head>
+<body>
+<div class="docs-body">
+<div class="manual-toc">
+<p>FMOD Studio User Manual 1.10</p>
+<ul>
+<li><a href="welcome-to-fmod-studio.html">Welcome to FMOD Studio</a></li>
+<li><a href="fmod-studio-concepts.html">FMOD Studio Concepts</a></li>
+<li><a href="organizing-the-project.html">Organizing the Project</a></li>
+<li><a href="authoring-events.html">Authoring Events</a></li>
+<li><a href="working-with-instruments.html">Working with Instruments</a></li>
+<li><a href="managing-assets.html">Managing Assets</a></li>
+<li><a href="getting-events-into-your-game.html">Getting Events into Your Game</a></li>
+<li><a href="mixing.html">Mixing</a></li>
+<li><a href="profiling.html">Profiling</a></li>
+<li><a href="editing-during-live-update.html">Editing During Live Update</a></li>
+<li><a href="supporting-downloadable-and-user-generated-content.html">Supporting Downloadable and User-generated Content</a></li>
+<li><a href="advanced-topics.html">Advanced Topics</a></li>
+<li><a href="event-macro-controls-reference.html">Event Macro Controls Reference</a></li>
+<li><a href="plugin-reference.html">Plug-in Reference</a></li>
+<li><a href="modulator-reference.html">Modulator Reference</a></li>
+<li><a href="built-in-parameters-reference.html">Built-In Parameters Reference</a></li>
+<li><a href="scripting-terminal-reference.html">Scripting</a></li>
+<li class="manual-current-chapter manual-inactive-chapter"><a href="scripting-api-reference.html">Scripting API Reference</a><ul class="subchapters"><li><a href="scripting-api-reference-globals.html">Globals</a></li><li><a href="scripting-api-reference-menu.html">Menu</a></li><li><a href="scripting-api-reference-project.html">Project</a></li><li><a href="scripting-api-reference-system.html">System</a></li><li><a href="scripting-api-reference-ui.html">UI</a></li><li class="manual-current-chapter manual-active-chapter"><a href="scripting-api-reference-window.html">Window</a></li></ul></li>
+<li><a href="keyboard-shortcut-reference.html">Keyboard Shortcut Reference</a></li>
+<li><a href="glossary.html">Glossary</a></li>
+<li><a href="appendix-a-celeste.html">Appendix: Celeste Getting Started Guide</a></li>
+</ul>
+</div>
+<div class="manual-content">
+<h1>18. Scripting API Reference | Window</h1>
+<div class="toc">
+<ul>
+<li><a href="#module-window">Module: Window</a><ul>
+<li><a href="#windowopenwindowtype">window.open(windowType)</a></li>
+<li><a href="#windownavigatetomanagedobject">window.navigateTo(managedObject)</a></li>
+<li><a href="#windowbrowsercurrenttabname">window.browserCurrent([tabName])</a></li>
+<li><a href="#windowbrowserselectiontabname">window.browserSelection([tabName])</a></li>
+<li><a href="#windoweditorcurrent">window.editorCurrent()</a></li>
+<li><a href="#windoweditorselection">window.editorSelection()</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="module-window"><a href="#module-window">Module: Window</a></h2>
+<p>The <code>studio.window</code> module allows for interaction with the window context.</p>
+<h3 id="windowopenwindowtype"><a href="#windowopenwindowtype">window.open(windowType)</a></h3>
+<p>Opens a new window of the given window type (e.g. "Event Editor").</p>
+<h3 id="windownavigatetomanagedobject"><a href="#windownavigatetomanagedobject">window.navigateTo(managedObject)</a></h3>
+<p>Attempts to navigate to a <a href="scripting-api-reference-project.html#class-managedobject">ManagedObject</a> in the UI. Will open a new window if required. Returns <code>true</code> if successful.</p>
+<h3 id="windowbrowsercurrenttabname"><a href="#windowbrowsercurrenttabname">window.browserCurrent([tabName])</a></h3>
+<p>Returns the currently selected <a href="scripting-api-reference-project.html#class-managedobject">ManagedObject</a> in the active browser tab of the last active window. A <code>tabName</code> can optionally be specified to select from a different browser tab.</p>
+<h3 id="windowbrowserselectiontabname"><a href="#windowbrowserselectiontabname">window.browserSelection([tabName])</a></h3>
+<p>Returns an <code>Array</code> of selected <a href="scripting-api-reference-project.html#class-managedobject">ManagedObjects</a> in the active browser tab of the last active window. A <code>tabName</code> can optionally be specified to select from a different browser tab.</p>
+<h3 id="windoweditorcurrent"><a href="#windoweditorcurrent">window.editorCurrent()</a></h3>
+<p>Returns the currently selected <a href="scripting-api-reference-project.html#class-managedobject">ManagedObject</a> in the last active editor (e.g. in the multitrack view).</p>
+<h3 id="windoweditorselection"><a href="#windoweditorselection">window.editorSelection()</a></h3>
+<p>Returns an array of selected <a href="scripting-api-reference-project.html#class-managedobject">ManagedObjects</a> in the last active editor (e.g. in the multitrack view).</p></div>
+
+<p class="manual-footer">FMOD Studio User Manual 1.10.10 (2018-12-07). &copy; 2018 Firelight Technologies Pty Ltd.</p>
+</body>
+</html>
+
+</div>

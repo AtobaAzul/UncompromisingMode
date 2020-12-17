@@ -1,0 +1,187 @@
+<html>
+<head>
+<title>Getting Events into Your Game</title>
+<link rel="stylesheet" href="style/docs.css">
+<link rel="stylesheet" href="style/code_highlight.css">
+</head>
+<body>
+<div class="docs-body">
+<div class="manual-toc">
+<p>FMOD Studio User Manual 1.10</p>
+<ul>
+<li><a href="welcome-to-fmod-studio.html">Welcome to FMOD Studio</a></li>
+<li><a href="fmod-studio-concepts.html">FMOD Studio Concepts</a></li>
+<li><a href="organizing-the-project.html">Organizing the Project</a></li>
+<li><a href="authoring-events.html">Authoring Events</a></li>
+<li><a href="working-with-instruments.html">Working with Instruments</a></li>
+<li><a href="managing-assets.html">Managing Assets</a></li>
+<li class="manual-current-chapter manual-active-chapter"><a href="getting-events-into-your-game.html">Getting Events into Your Game</a><ul>
+<li><a href="#banks">Banks</a><ul>
+<li><a href="#including-referenced-events-in-banks">Including Referenced Events in Banks</a></li>
+<li><a href="#building-metadata-and-assets-to-separate-banks">Building Metadata and Assets to Separate Banks</a></li>
+</ul>
+</li>
+<li><a href="#compression-formats-and-platform-settings">Compression Formats and Platform Settings</a></li>
+<li><a href="#building-the-project">Building the Project</a></li>
+<li><a href="#what-building-creates">What Building Creates</a></li>
+<li><a href="#playing-events">Playing Events</a><ul>
+<li><a href="#playing-events-in-unity">Playing Events in Unity</a></li>
+<li><a href="#playing-events-in-unreal-engine-4">Playing Events in Unreal Engine 4</a></li>
+<li><a href="#playing-events-via-the-fmod-studio-api">Playing Events via the FMOD Studio API</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="mixing.html">Mixing</a></li>
+<li><a href="profiling.html">Profiling</a></li>
+<li><a href="editing-during-live-update.html">Editing During Live Update</a></li>
+<li><a href="supporting-downloadable-and-user-generated-content.html">Supporting Downloadable and User-generated Content</a></li>
+<li><a href="advanced-topics.html">Advanced Topics</a></li>
+<li><a href="event-macro-controls-reference.html">Event Macro Controls Reference</a></li>
+<li><a href="plugin-reference.html">Plug-in Reference</a></li>
+<li><a href="modulator-reference.html">Modulator Reference</a></li>
+<li><a href="built-in-parameters-reference.html">Built-In Parameters Reference</a></li>
+<li><a href="scripting-terminal-reference.html">Scripting</a></li>
+<li><a href="scripting-api-reference.html">Scripting API Reference</a></li>
+<li><a href="keyboard-shortcut-reference.html">Keyboard Shortcut Reference</a></li>
+<li><a href="glossary.html">Glossary</a></li>
+<li><a href="appendix-a-celeste.html">Appendix: Celeste Getting Started Guide</a></li>
+</ul>
+</div>
+<div class="manual-content">
+<h1>7. Getting Events into Your Game</h1>
+<p>After gathering all your assets, creating your events, and adjusting your mixer settings, the next step is getting that content into your game. The process consists of assigning events to banks, building those banks, and then copying those built banks to your game.</p>
+<p>There are several aspects to correctly building an FMOD Studio project that can impact its efficiency and overall functionality. Depending on the size and scope of your project some of these specifications may need to be planned early in development, and others can be applied when implementing your content.</p>
+<p>FMOD Studio provides a variety of settings to ensure effective workflow and efficient performance for your game.</p>
+<h2 id="banks"><a href="#banks">7.1 Banks</a></h2>
+<p>In order for content to be used in your it needs to be built into <a href="glossary.html#bank">banks</a>. Banks are collections of the <a href="glossary.html#metadata">metadata</a>, assets, <a href="glossary.html#event">events</a> and other content used in your project, to be built and used in your game. Your game's code calls banks and manipulates FMOD Studio events to produce sound.</p>
+<p>FMOD Studio does not automatically assign any events to banks. If you run the build process without first assigning the project's events to banks, the resulting bank files will not include those events.</p>
+<p>To assign events to a bank, you can either right click on an <a href="glossary.html#event">event</a> in the <a href="glossary.html#events-browser">events browser</a> and choose "Assign to Bank...", or you can drag the event from the events browser into the banks browser and drop onto the bank of your choosing. Any event not assigned to a bank is tagged with <code>#unassigned</code>.</p>
+<p>How you allocate events and set up your banks can significantly affect the performance and efficiency of your project. A bank needs to be loaded into memory before any events in that bank can be used. The amount of memory consumed by a bank depends on its content. There is otherwise no limit to the number of banks your project can include or to how many banks can be loaded into memory at a time.</p>
+<p>By default all projects are created with a single <span class="dead-link" href="glossary.html#master-bank">master bank</span class="dead-link">. You do not need to assign any events to the master bank, but <a href="#what-building-creates">it must be loaded at all times</a> while your game runs. In small projects where only one bank is needed, assigning events to and loading only the master bank is a viable option.</p>
+<p>You can view all banks and add more in the <a href="glossary.html#banks-browser">banks browser</a>.</p>
+<p>To create a new bank, right click in an empty space in the banks browser and choose "New Bank". You can also create folders by right clicking in an empty space in the banks browser and choosing "New Folder". All banks apart from the master bank can be moved into a folder.</p>
+<p>Please note that placing banks into folders does not affect the build process - all banks are built into the same folder specified in the Build tab of the <span class="dead-link" href="glossary.html#preferences">preferences</span class="dead-link"> dialog.</p>
+<h3 id="including-referenced-events-in-banks"><a href="#including-referenced-events-in-banks">7.1.1 Including Referenced Events in Banks</a></h3>
+<p>By default, referenced events and their sample data are automatically assigned to the same banks as each of the events by which they are referenced. This means that a referenced event does not need to be specifically assigned to a bank before building.</p>
+<p>FMOD Studio has an option that stops referenced events from being automatically assigned to their parent events' banks. To enable this option, open the <a href="glossary.html#">Preferences</a> dialog and uncheck the "Include referenced events in banks" option in the "Build" tab.</p>
+<p><img alt="Include referenced events in banks option" src="images/includeReferencedEventsAudioFileNamesInBanks.png" /></p>
+<p>Enabling this option means you have to manually assign each referenced event to a bank in order to use it in game. By assigning and building a commonly used referenced event to a specific bank, the referenced event and its sample data is only built into that bank and can be used by all events referencing it. This assists with reducing the file size of built banks.</p>
+<h3 id="building-metadata-and-assets-to-separate-banks"><a href="#building-metadata-and-assets-to-separate-banks">7.1.2 Building Metadata and Assets to Separate Banks</a></h3>
+<p>Banks can contain two types of data: <span class="dead-link" href="glossary.html#sample-data">Sample data</span class="dead-link"> and metadata. Sample data is the encoded <a href="glossary.html#audio-file">audio assets</a> used by the events in a bank, while metadata is every other defining feature of those events.</p>
+<p>Your game must load both the sample data and the metadata of an event to play instances of that event. For this reason, banks contain both metadata and sample data for each of the events assigned to them by default.</p>
+<p>It is also possible to build the metadata and sample data into separate bank files. This produces two bank files for each bank in your project. Separate metadata and sample banks require slightly more resource overhead, but can also be updated independently, allowing you to patch your game's metadata banks without including the sample data banks in the download. To build your project's metadata and sample data into separate bank files, select the "Build metadata and assets to separate banks" option under "Built bank file separation" in the "Build" tab of the preferences dialog before building your project.</p>
+<p>Some game engines additionally require that the sample data of streaming assets and non-streaming assets be in separate files. To build your project's metadata, streaming asset sample data and non-streaming asset sample data into separate bank files, select the "Build metadata, non-streaming assets, and streaming assets to separate banks" option under "Built bank file separation" in the "Build" tab of the preferences dialog before building your project.</p>
+<p>All banks are built in binary format and are not human-readable, regardless of whether they contain metadata, sample data, or both.</p>
+<h2 id="compression-formats-and-platform-settings"><a href="#compression-formats-and-platform-settings">7.2 Compression Formats and Platform Settings</a></h2>
+<p>Each platform has its own hardware and limitations to consider. For example, some consoles have a hardware audio decoder which will save on processing power, and the vast majority of handheld devices have no need for 7.1 surround sound speaker modes. FMOD Studio allows you to use one project to build to multiple platforms.</p>
+<p>To add platforms to your builds list, right click into the "Project Platforms" list in the preferences dialog's "Build" tab and choose the appropriate platform from the "Add Platform" list.</p>
+<p><img alt="Platform Encoding Settings" src="images/platformEncodingSettings.png" /></p>
+<p>You can add the same platform to the project platforms list multiple times to represent multiple hardware types. For example, you can have two Desktop platforms, naming one as "Windows" and one as "Mac", if needed.</p>
+<p>You can specify how your assets are compressed and encoded when built into your <a href="glossary.html#bank">banks</a>. This affects file sizes, load times, and performance. Compression formats are set on a per platform basis and can be overridden on a per asset basis.</p>
+<p>You can set the default encoding setting for a platform in the <span class="dead-link" href="glossary.html#preferences">preferences</span class="dead-link"> window. Under the <a href="#building-the-project">build</a> tab, select the desired platform in the project platforms list, then select a default encoding setting. Some platforms support special encoding formats, such as AT9 and XMA. All encoding settings other than <span class="dead-link" href="glossary.html#encoding-formats">PCM</span class="dead-link"> involve compression.</p>
+<p>Below is a table showing each platform available and their recommended encoders.</p>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Recommended Encoder</th>
+<th>Reason for Recommendation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Desktop<br>(Windows, Mac, Linux)</td>
+<td><span class="dead-link" href="glossary.html#encoding-formats">Vorbis</span class="dead-link"></td>
+<td>Good all rounder, offers decent compression to quality ratio, recommended for all music files regardless of platform</td>
+</tr>
+<tr>
+<td>PlayStation 4</td>
+<td><span class="dead-link" href="glossary.html#encoding-formats">AT9</span class="dead-link"></td>
+<td>PS4 has a hardware decoder and therefore utilizing it will save on CPU cycles</td>
+</tr>
+<tr>
+<td>PlayStation 3</td>
+<td><span class="dead-link" href="glossary.html#encoding-formats">Vorbis</span class="dead-link"></td>
+<td>Good all rounder, offers decent compression to quality ratio, recommended for all music files regardless of platform</td>
+</tr>
+<tr>
+<td>PlayStation Vita</td>
+<td><span class="dead-link" href="glossary.html#encoding-formats">FADPCM</span class="dead-link">, <span class="dead-link" href="glossary.html#encoding-formats">AT9</span class="dead-link"></td>
+<td>As with the PS4, the PS Vita has a hardware decoder that can save CPU cycles, however there are a limited number of AT9 decoders and therefore FADPCM may be a better fit. It is recommended to use AT9 encoding for music</td>
+</tr>
+<tr>
+<td>Xbox One<br>Xbox 360</td>
+<td><span class="dead-link" href="glossary.html#encoding-formats">XMA</span class="dead-link"></td>
+<td>Xbox One and Xbox 360 have a hardware decoder and therefore utilizing it will save on CPU cycles</td>
+</tr>
+<tr>
+<td>Nintendo Switch<br>Wii U</td>
+<td><span class="dead-link" href="glossary.html#encoding-formats">FADPCM</span class="dead-link"></td>
+<td>Lightweight codec which is good for the Switch and Wii U</td>
+</tr>
+<tr>
+<td>Mobile<br>(Android, iOS)</td>
+<td><span class="dead-link" href="glossary.html#encoding-formats">FADPCM</span class="dead-link"></td>
+<td>Lightweight codec which is good for mobile devices</td>
+</tr>
+</tbody>
+</table>
+<p>The FADPCM and PCM encoding formats do not allow their compression amounts to be adjusted but do offer altering the sample rates from 48.0kHz to 4.0kHz. PCM is not recommended for most platforms, however it is still worth using for short sounds if FADPCM's cost is too high. </p>
+<p>The AT9, XMA, and Vorbis encoding formats offer a "Quality" slider that allows you to control the amount of compression used when building. Please note that even though the quality slider represents quality in percentages, the actual compression ratio of some encoders will be fixed within a certain range. For example, AT9 encoding won't have any difference in compression ratio when the quality slider is set between 40% and 48%. You can see how FMOD Studio determines compression ratios below:</p>
+<ul>
+<li><strong>Vorbis</strong> - Vorbis quality maps linearly to FMOD Studio's quality slider 1% to 100%. Defaults to 37% as <a href="http://vorbis.com/faq/#quality">recommended by Vorbis</a> for the best balance between compression and quality</li>
+<li><strong>AT9</strong> - Bitrate (Kbps) depends on channel count, quality slider 1% to 100% steps up every 16%. For more information see the <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FSBank_Build.html">FMOD FSBank API</a></li>
+<li><strong>XMA</strong> - XMA quality maps linearly to FMOD Studio's quality slider</li>
+</ul>
+<p>For information on how to override encoding settings on a per asset basis, please see the <a href="managing-assets.html#compression-and-platform-encoding">managing assets</a> section.</p>
+<p>The <a href="mixing.html#channel-formats">surround speaker mode</a> and <a href="glossary.html#built-banks-output-directory">output sub-directory</a> settings are also set on a per platform basis.</p>
+<h2 id="building-the-project"><a href="#building-the-project">7.3 Building the Project</a></h2>
+<p>Once all the events have been assigned to the relevant banks and all build settings have been defined as needed, you can build the project. Building in FMOD Studio gathers all the metadata, <a href="glossary.html#event">events</a>, <span class="dead-link" href="glossary.html#audio-table">audio tables (and their keys)</span class="dead-link">, and <a href="glossary.html#audio-file">assets</a> of your project and bundles them into easy-to-transfer <a href="glossary.html#bank">bank files</a>. These bank files are what your game engine reads to produce audio.</p>
+<p>To build, select "Build..." or "Build All Platforms..." from the "File" menu. "Build..." only builds for the <span class="dead-link" href="glossary.html#selected-platform">selected platform</span class="dead-link">. "Build All Platforms..." builds banks for all the platforms in the <span class="dead-link" href="glossary.html#project-platforms-list">project platforms list</span class="dead-link">.</p>
+<p>You can also right click on a bank in the <span class="dead-link" href="glossary.html#bank-browser">bank browser</span class="dead-link"> and choose "Build..." from there. This will build only this bank to the selected platform.</p>
+<p>The time it takes to build banks may vary, depending on their <span class="dead-link" href="glossary.html#asset">assets</span class="dead-link">, target <span class="dead-link" href="glossary.html#platform">platforms</span class="dead-link">, <a href="glossary.html#compression-format">compression and encoding settings</a>, and <span class="dead-link" href="glossary.html#build-cache">build cache</span class="dead-link">.</p>
+<h2 id="what-building-creates"><a href="#what-building-creates">7.4 What Building Creates</a></h2>
+<p>If the "Build metadata and assets to a single bank" option is selected in the "Build" tab of the preferences dialog, every <a href="glossary.html#bank">bank</a> is built into a <code>.bank</code> file. Each .bank file contains the <a href="glossary.html#metadata">metadata</a> and <span class="dead-link" href="glossary.html#sample-data">sample data</span class="dead-link"> for the events assigned to that bank.</p>
+<p>If the "Build metadata and assets to separate banks" option is selected, every <a href="glossary.html#bank">bank</a> is built into a <code>.bank</code> file and an <code>.assets.bank</code> file. Each .bank file contains the metadata for the events assigned to that bank, and each .assets.bank file contains the sample data for the events assigned to that bank.</p>
+<p>If the "Build metadata, non-streaming assets, and streaming assets to separate banks" option is selected, every <a href="glossary.html#bank">bank</a> is built into a <code>.bank</code> file, an <code>.assets.bank</code> file, and a <code>.streams.bank</code> file. Each .bank file contains the metadata for the events assigned to that bank, each .assets.bank file contains the non-streaming sample data for the events assigned to that bank, and each .streams.bank file contains the streaming sample data for the events assigned to that bank.</p>
+<p>In addition, building the <span class="dead-link" href="glossary.html#master-bank">master bank</span class="dead-link"> produces a <code>.strings.bank</code> file that contains the name, path, and <span class="dead-link" href="glossary.html#guid">GUID</span class="dead-link"> of every event in the project. While a <code>.strings.bank</code> file is not compulsory for loading sounds into a game, it contains all of the paths for events in the project. Without it, you can <em>only</em> look up events via their GUIDs, which may not suit your workflow.</p>
+<p><img alt="Built Banks" src="images/builtBanks.png" /></p>
+<p>In the above screenshot, you can see each bank from the FMOD Studio example project is built into a <code>.bank</code> file, along with <code>Master Bank.bank</code> and a <code>Master Bank.strings.bank</code> file. Note that the <code>Master Bank</code> can be renamed and may therefore be named differently in some projects.</p>
+<p>Bank files are what your game uses to produce audio. Once built, they no longer require FMOD Studio to function, and are ready to be added to your game.</p>
+<p>By using the Unity integration, Unreal Engine 4 integration, or <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_Studio_System_LoadBankFile.html"><code>System::loadBankFile()</code></a> API call your game will load the bank and give you access to all events <span class="dead-link" href="glossary.html#assign">assigned</span class="dead-link"> to that bank. After loading, you can <a href="#playing-events">play events</a> assigned to that bank.</p>
+<div class="admonition warning">
+<p>The <span class="dead-link" href="glossary.html#master-bank">master bank</span class="dead-link"> contains all the metadata, mixer, and routing data of your project. It must be loaded into memory at all times while your game runs.</p>
+<p>You do not need to assign any events to the master bank.</p>
+</div>
+<h2 id="playing-events"><a href="#playing-events">7.5 Playing Events</a></h2>
+<p>After <span class="dead-link" href="glossary.html#build">building</span class="dead-link"> the banks and <a href="#what-building-creates">loading</a> them into your game, it is now time to play events.</p>
+<h3 id="playing-events-in-unity"><a href="#playing-events-in-unity">7.5.1 Playing Events in Unity</a></h3>
+<p>When using the FMOD Studio <a href="https://www.fmod.com/download">Unity integration</a> plugin, there are two ways to play events.</p>
+<p>The first way is to add an FMOD Event Emitter component to a game object, choosing the event to play, and when to play it.</p>
+<p><img alt="Unity Event Emitter" src="images/unityStudioEventEmitter.png" /></p>
+<p>The second way is to use the <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/engine_new_unity/scripting.html">FMOD Unity API</a> to call events from code.</p>
+<h3 id="playing-events-in-unreal-engine-4"><a href="#playing-events-in-unreal-engine-4">7.5.2 Playing Events in Unreal Engine 4</a></h3>
+<p>When using the FMOD Studio <a href="https://www.fmod.com/download">Unreal Engine 4</a> plugin, there are several ways to play events.</p>
+<p>The first way is to drag and drop an event from the Content Browser into a scene Viewport.</p>
+<p><img alt="Unreal event player" src="images/unrealBlueprintExample.png" /></p>
+<p>The second way is to use the "Play Event at Location" function in Blueprints to trigger any given event.</p>
+<p>See more information on both of these methods in our <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/engine_ue4/getting_started.html">Unreal Engine 4 documentation</a>.</p>
+<p>The third way is to use the <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/engine_ue4/programming.html">FMOD Unreal Engine 4 API</a> to call events from code.</p>
+<h3 id="playing-events-via-the-fmod-studio-api"><a href="#playing-events-via-the-fmod-studio-api">7.5.3 Playing Events via the FMOD Studio API</a></h3>
+<p>In order to play events through the FMOD Studio API, you will need to create an event instance and then instruct it to start.</p>
+<div class="codehilite"><pre><span></span><span class="n">system</span><span class="o">-&gt;</span><span class="n">getEvent</span><span class="p">(</span><span class="s">&quot;event:/UI/Cancel&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">cancelDescription</span><span class="p">);</span>
+<span class="n">cancelDescription</span><span class="o">-&gt;</span><span class="n">createInstance</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cancelInstance</span><span class="p">);</span>
+
+<span class="n">cancelInstance</span><span class="o">-&gt;</span><span class="n">start</span><span class="p">();</span>
+<span class="n">cancelInstance</span><span class="o">-&gt;</span><span class="n">stop</span><span class="p">(</span><span class="n">FMOD_STUDIO_STOP_ALLOWFADEOUT</span><span class="p">);</span>
+</pre></div>
+
+
+<p>For more information, please see our <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/studio_api.html">FMOD API Documentation</a>.</p></div>
+
+<p class="manual-footer">FMOD Studio User Manual 1.10.10 (2018-12-07). &copy; 2018 Firelight Technologies Pty Ltd.</p>
+</body>
+</html>
+
+</div>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="AudioFile" id="{b24fe131-dbe1-451e-babd-3f0c44d48a8f}">
+        <property name="assetPath">
+            <value>hatch/SG_SFX_hatch_chomp_04.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>48</value>
+        </property>
+        <property name="channelCount">
+            <value>1</value>
+        </property>
+        <property name="length">
+            <value>0.53181250000000002</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{0e622e9a-5820-4286-bf7d-7de674a43cb2}</destination>
+        </relationship>
+    </object>
+</objects>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="EffectPreset" id="{fc3ad14a-2e81-00de-25c3-d40580af60fd}">
+        <property name="name">
+            <value>Spatializer - 3 to 30</value>
+        </property>
+        <relationship name="folder">
+            <destination>{0c4fcca1-ba95-0760-3d34-01eff37ff304}</destination>
+        </relationship>
+        <relationship name="effect">
+            <destination>{c35c1eb3-21a5-421d-a413-d5f28c33b9f2}</destination>
+        </relationship>
+    </object>
+    <object class="SpatialiserEffect" id="{c35c1eb3-21a5-421d-a413-d5f28c33b9f2}">
+        <property name="minimumDistance">
+            <value>3</value>
+        </property>
+        <property name="maximumDistance">
+            <value>30</value>
+        </property>
+        <property name="userLFELevel">
+            <value>-80</value>
+        </property>
+        <property name="stereoToSurroundUserPanMode">
+            <value>0</value>
+        </property>
+    </object>
+</objects>

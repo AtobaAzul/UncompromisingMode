@@ -1,0 +1,172 @@
+<html>
+<head>
+<title>Scripting API Reference | System</title>
+<link rel="stylesheet" href="style/docs.css">
+<link rel="stylesheet" href="style/code_highlight.css">
+</head>
+<body>
+<div class="docs-body">
+<div class="manual-toc">
+<p>FMOD Studio User Manual 1.10</p>
+<ul>
+<li><a href="welcome-to-fmod-studio.html">Welcome to FMOD Studio</a></li>
+<li><a href="fmod-studio-concepts.html">FMOD Studio Concepts</a></li>
+<li><a href="organizing-the-project.html">Organizing the Project</a></li>
+<li><a href="authoring-events.html">Authoring Events</a></li>
+<li><a href="working-with-instruments.html">Working with Instruments</a></li>
+<li><a href="managing-assets.html">Managing Assets</a></li>
+<li><a href="getting-events-into-your-game.html">Getting Events into Your Game</a></li>
+<li><a href="mixing.html">Mixing</a></li>
+<li><a href="profiling.html">Profiling</a></li>
+<li><a href="editing-during-live-update.html">Editing During Live Update</a></li>
+<li><a href="supporting-downloadable-and-user-generated-content.html">Supporting Downloadable and User-generated Content</a></li>
+<li><a href="advanced-topics.html">Advanced Topics</a></li>
+<li><a href="event-macro-controls-reference.html">Event Macro Controls Reference</a></li>
+<li><a href="plugin-reference.html">Plug-in Reference</a></li>
+<li><a href="modulator-reference.html">Modulator Reference</a></li>
+<li><a href="built-in-parameters-reference.html">Built-In Parameters Reference</a></li>
+<li><a href="scripting-terminal-reference.html">Scripting</a></li>
+<li class="manual-current-chapter manual-inactive-chapter"><a href="scripting-api-reference.html">Scripting API Reference</a><ul class="subchapters"><li><a href="scripting-api-reference-globals.html">Globals</a></li><li><a href="scripting-api-reference-menu.html">Menu</a></li><li><a href="scripting-api-reference-project.html">Project</a></li><li class="manual-current-chapter manual-active-chapter"><a href="scripting-api-reference-system.html">System</a></li><li><a href="scripting-api-reference-ui.html">UI</a></li><li><a href="scripting-api-reference-window.html">Window</a></li></ul></li>
+<li><a href="keyboard-shortcut-reference.html">Keyboard Shortcut Reference</a></li>
+<li><a href="glossary.html">Glossary</a></li>
+<li><a href="appendix-a-celeste.html">Appendix: Celeste Getting Started Guide</a></li>
+</ul>
+</div>
+<div class="manual-content">
+<h1>18. Scripting API Reference | System</h1>
+<div class="toc">
+<ul>
+<li><a href="#module-system">Module: System</a><ul>
+<li><a href="#systemrequirefilename">system.require(fileName)</a></li>
+<li><a href="#systembacktrace">system.backtrace()</a></li>
+<li><a href="#systemverbosemsg">system.verbose(msg)</a></li>
+<li><a href="#systemprintmsg">system.print(msg)</a></li>
+<li><a href="#systemwarnmsg">system.warn(msg)</a></li>
+<li><a href="#systemerrormsg">system.error(msg)</a></li>
+<li><a href="#systemmessagemsg">system.message(msg)</a></li>
+<li><a href="#systemquestionmsg">system.question(msg)</a></li>
+<li><a href="#systemgettextmsg-defaulttext">system.getText(msg[, defaultText])</a></li>
+<li><a href="#systemgetnumbermsg-defaulttext">system.getNumber(msg[, defaultText])</a></li>
+<li><a href="#systemstartpathtoexecutable-processoptions">system.start(pathToExecutable, processOptions)</a></li>
+<li><a href="#systemstartasyncpathtoexecutable-processoptions">system.startAsync(pathToExecutable, processOptions)</a></li>
+<li><a href="#systemgetfilefilepath">system.getFile(filePath)</a></li>
+<li><a href="#systemopenmode">system.openMode</a></li>
+<li><a href="#systempermission">system.permission</a></li>
+</ul>
+</li>
+<li><a href="#class-file">Class: File</a><ul>
+<li><a href="#fileexists">File.exists()</a></li>
+<li><a href="#fileopenopenmodeflag">File.open(openModeFlag)</a></li>
+<li><a href="#filewritetexttext">File.writeText(text)</a></li>
+<li><a href="#filereadtextmaxsize">File.readText(maxSize)</a></li>
+<li><a href="#fileclose">File.close()</a></li>
+<li><a href="#filecopyfilepath">File.copy(filePath)</a></li>
+<li><a href="#fileremove">File.remove()</a></li>
+<li><a href="#filesize">File.size()</a></li>
+<li><a href="#filepermissions">File.permissions()</a></li>
+<li><a href="#filesetpermissionspermissions">File.setPermissions(permissions)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="module-system"><a href="#module-system">Module: System</a></h2>
+<p>The <code>studio.system</code> module provides general system-wide functionality.</p>
+<h3 id="systemrequirefilename"><a href="#systemrequirefilename">system.require(fileName)</a></h3>
+<p>Loads a javascript file as a library. The <code>fileName</code> passed can be either a relative or absolute path. The file being loaded should contain a module. For example:</p>
+<div class="codehilite"><pre><span></span><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">foobar</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">// implementation</span>
+    <span class="p">},</span>
+<span class="p">};</span>
+</pre></div>
+
+
+<p>The module can then be used:</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">MyModule</span> <span class="o">=</span> <span class="nx">studio</span><span class="p">.</span><span class="nx">system</span><span class="p">.</span><span class="nx">require</span><span class="p">(</span><span class="s2">&quot;utils/file_name.js&quot;</span><span class="p">);</span> <span class="c1">// relative file path</span>
+<span class="nx">MyModule</span><span class="p">.</span><span class="nx">foobar</span><span class="p">();</span>
+</pre></div>
+
+
+<p>When loading relative module files, it is recommended that the modules are placed in a different folder, such as a subfolder. This ensures the modules files are not loaded as top-level <a href="scripting-terminal-reference.html#script-files">script files</a>.</p>
+<h3 id="systembacktrace"><a href="#systembacktrace">system.backtrace()</a></h3>
+<p>Returns the callstack as an array of strings.</p>
+<h3 id="systemverbosemsg"><a href="#systemverbosemsg">system.verbose(msg)</a></h3>
+<p>Logs a verbose message.</p>
+<h3 id="systemprintmsg"><a href="#systemprintmsg">system.print(msg)</a></h3>
+<p>Logs a message.</p>
+<h3 id="systemwarnmsg"><a href="#systemwarnmsg">system.warn(msg)</a></h3>
+<p>Logs a warning.</p>
+<h3 id="systemerrormsg"><a href="#systemerrormsg">system.error(msg)</a></h3>
+<p>Logs an error.</p>
+<h3 id="systemmessagemsg"><a href="#systemmessagemsg">system.message(msg)</a></h3>
+<p>Logs a message in a popup dialog (blocking).</p>
+<h3 id="systemquestionmsg"><a href="#systemquestionmsg">system.question(msg)</a></h3>
+<p>Prompts for a 'yes'/'no' response to a given message and returns a boolean value (blocking).</p>
+<h3 id="systemgettextmsg-defaulttext"><a href="#systemgettextmsg-defaulttext">system.getText(msg[, defaultText])</a></h3>
+<p>Prompts for text input and returns the string, or null if cancelled (blocking).</p>
+<h3 id="systemgetnumbermsg-defaulttext"><a href="#systemgetnumbermsg-defaulttext">system.getNumber(msg[, defaultText])</a></h3>
+<p>Prompts for numeric input and returns the value, or null if cancelled (blocking).</p>
+<h3 id="systemstartpathtoexecutable-processoptions"><a href="#systemstartpathtoexecutable-processoptions">system.start(pathToExecutable, processOptions)</a></h3>
+<p>Runs an external process with options object <code>{ workingDir, args, timeout (milliseconds) }</code> (blocking).</p>
+<p>Returns a result object <code>{ exitCode, standardOutput, standardError }</code>.</p>
+<h3 id="systemstartasyncpathtoexecutable-processoptions"><a href="#systemstartasyncpathtoexecutable-processoptions">system.startAsync(pathToExecutable, processOptions)</a></h3>
+<p>Runs an external asynchronous process with options object <code>{ workingDir, args }</code>.</p>
+<p>Returns a ScriptProcess object representing the asynchronous process</p>
+<h3 id="systemgetfilefilepath"><a href="#systemgetfilefilepath">system.getFile(filePath)</a></h3>
+<p>Returns a <a href="#class-file">studio.system.File</a> object representing the file at <code>filePath</code>.</p>
+<h3 id="systemopenmode"><a href="#systemopenmode">system.openMode</a></h3>
+<p>An enumeration used with <code>studio.system.File.open()</code> to describe the mode in which a file is opened. Possible values are:</p>
+<ul>
+<li><code>ReadOnly</code>: The file is open for reading. </li>
+<li><code>WriteOnly</code>: The file is open for writing. Note that this mode implies <code>Truncate</code>. </li>
+<li><code>ReadWrite</code>: The file is open for reading and writing. </li>
+<li><code>Append</code>: The file is opened in append mode so that all data is written to the end of the file. </li>
+<li><code>Truncate</code>: Is possible, the file is truncated before it is opened. All earlier contents of the file are lost.</li>
+</ul>
+<h3 id="systempermission"><a href="#systempermission">system.permission</a></h3>
+<p>An enumeration used with <a href="#filesetpermissionspermissions">studio.system.File.setPermissions()</a> to alter the permissions of a file. The permissions of a file can be queried using <a href="#filepermissions">studio.system.File.permissions</a>. The values may be OR-ed together to test multiple permissions and ownership values. Possible values are:</p>
+<ul>
+<li><code>ReadOwner</code>: The file is readable by the owner of the file.</li>
+<li><code>WriteOwner</code>: The file is writable by the owner of the file.</li>
+<li><code>ExeOwner</code>: The file is executable by the owner of the file.</li>
+<li><code>ReadUser</code>: The file is readable by the user (platform-dependent).</li>
+<li><code>WriteUser</code>: The file is writable by the user (platform-dependent).</li>
+<li><code>ExeUser</code>: The file is executable by the user (platform-dependent).</li>
+<li><code>ReadGroup</code>: The file is readable by the group.</li>
+<li><code>WriteGroup</code>: The file is writable by the group.</li>
+<li><code>ExeGroup</code>: The file is executable by the group.</li>
+<li><code>ReadOther</code>: The file is readable by anyone.</li>
+<li><code>WriteOther</code>: The file is writable by anyone.</li>
+<li><code>ExeOther</code>: The file is executable by anyone.</li>
+<li><code>Exe</code>: The file is executable by everyone.</li>
+<li><code>Write</code>: The file is writable by everyone.</li>
+<li><code>Read</code>: The file is readable by everyone.</li>
+</ul>
+<h2 id="class-file"><a href="#class-file">Class: File</a></h2>
+<p>The <code>studio.system.File</code> object allows for interaction with files on disk. A <code>studio.system.File</code> can be created using <a href="#systemgetfilefilepath">system.getFile()</a>.</p>
+<h3 id="fileexists"><a href="#fileexists">File.exists()</a></h3>
+<p>Returns <code>true</code> if the file the object represents exists on disk, or <code>false</code> otherwise.</p>
+<h3 id="fileopenopenmodeflag"><a href="#fileopenopenmodeflag">File.open(openModeFlag)</a></h3>
+<p>Opens the file in the mode specified by <code>openModeFlag</code>. The available options are described by the <a href="#systemopenmode">system.openMode</a> enum. Returns <code>true</code> if the operation succeeds, or <code>false</code> otherwise.</p>
+<h3 id="filewritetexttext"><a href="#filewritetexttext">File.writeText(text)</a></h3>
+<p>Writes the content of text to the file. Returns the number of bytes that were actually written, or -1 if an error occurred.</p>
+<h3 id="filereadtextmaxsize"><a href="#filereadtextmaxsize">File.readText(maxSize)</a></h3>
+<p>Reads at most maxSize bytes from the file.</p>
+<h3 id="fileclose"><a href="#fileclose">File.close()</a></h3>
+<p>Closes the file and flushes any changes to disk.</p>
+<h3 id="filecopyfilepath"><a href="#filecopyfilepath">File.copy(filePath)</a></h3>
+<p>Copies the file to the absolute <code>filePath</code> specified. Directories that don't exist within the <code>filePath</code> will be created as required.</p>
+<h3 id="fileremove"><a href="#fileremove">File.remove()</a></h3>
+<p>Removes the file from disk. The operation is not undoable and the file will not be recoverable from the Recycle Bin on Windows or the Trash on Mac OS X.</p>
+<h3 id="filesize"><a href="#filesize">File.size()</a></h3>
+<p>Returns the size of the file in bytes.</p>
+<h3 id="filepermissions"><a href="#filepermissions">File.permissions()</a></h3>
+<p>Returns the complete OR-ed together combination of <a href="#systempermission">system.permission</a> flags if the file exists on disk, or 0 otherwise.</p>
+<h3 id="filesetpermissionspermissions"><a href="#filesetpermissionspermissions">File.setPermissions(permissions)</a></h3>
+<p>Sets the <a href="#systempermission">system.permission</a> flags for the file to the <code>permissions</code> specified. Returns true if successful, or false if the permissions cannot be modified.</p></div>
+
+<p class="manual-footer">FMOD Studio User Manual 1.10.10 (2018-12-07). &copy; 2018 Firelight Technologies Pty Ltd.</p>
+</body>
+</html>
+
+</div>

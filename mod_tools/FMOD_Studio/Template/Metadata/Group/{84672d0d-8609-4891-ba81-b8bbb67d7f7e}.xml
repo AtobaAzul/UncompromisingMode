@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.10.00">
+    <object class="MixerGroup" id="{84672d0d-8609-4891-ba81-b8bbb67d7f7e}">
+        <property name="name">
+            <value>set_music</value>
+        </property>
+        <relationship name="effectChain">
+            <destination>{5f0df093-5766-4aa7-9f5e-b016f9d4c35b}</destination>
+        </relationship>
+        <relationship name="panner">
+            <destination>{e13e2360-34ce-4629-a595-d6903d05cb54}</destination>
+        </relationship>
+        <relationship name="output">
+            <destination>{0fb203f5-9ef4-4e35-9f6e-f7221f534be8}</destination>
+        </relationship>
+    </object>
+    <object class="MixerBusEffectChain" id="{5f0df093-5766-4aa7-9f5e-b016f9d4c35b}">
+        <relationship name="effects">
+            <destination>{807d0015-9505-4fff-995f-5c045c1de039}</destination>
+            <destination>{980a1123-432c-4631-8c3f-9aaef8e9e1ce}</destination>
+        </relationship>
+    </object>
+    <object class="MixerBusPanner" id="{e13e2360-34ce-4629-a595-d6903d05cb54}"/>
+    <object class="MixerBusFader" id="{807d0015-9505-4fff-995f-5c045c1de039}"/>
+    <object class="MultibandEqEffect" id="{980a1123-432c-4631-8c3f-9aaef8e9e1ce}">
+        <property name="filterTypeA">
+            <value>4</value>
+        </property>
+        <property name="filterTypeE">
+            <value>1</value>
+        </property>
+        <property name="frequencyA">
+            <value>20</value>
+        </property>
+        <property name="frequencyE">
+            <value>22000</value>
+        </property>
+    </object>
+</objects>

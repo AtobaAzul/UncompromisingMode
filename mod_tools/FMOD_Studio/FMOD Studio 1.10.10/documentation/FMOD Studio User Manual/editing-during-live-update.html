@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Editing During Live Update</title>
+<link rel="stylesheet" href="style/docs.css">
+<link rel="stylesheet" href="style/code_highlight.css">
+</head>
+<body>
+<div class="docs-body">
+<div class="manual-toc">
+<p>FMOD Studio User Manual 1.10</p>
+<ul>
+<li><a href="welcome-to-fmod-studio.html">Welcome to FMOD Studio</a></li>
+<li><a href="fmod-studio-concepts.html">FMOD Studio Concepts</a></li>
+<li><a href="organizing-the-project.html">Organizing the Project</a></li>
+<li><a href="authoring-events.html">Authoring Events</a></li>
+<li><a href="working-with-instruments.html">Working with Instruments</a></li>
+<li><a href="managing-assets.html">Managing Assets</a></li>
+<li><a href="getting-events-into-your-game.html">Getting Events into Your Game</a></li>
+<li><a href="mixing.html">Mixing</a></li>
+<li><a href="profiling.html">Profiling</a></li>
+<li class="manual-current-chapter manual-active-chapter"><a href="editing-during-live-update.html">Editing During Live Update</a><ul>
+<li><a href="#preparing-your-game-for-connection">Preparing Your Game for Connection</a><ul>
+<li><a href="#initializing-live-update-in-the-fmod-unity-integration">Initializing Live Update in the FMOD Unity Integration</a></li>
+<li><a href="#initializing-live-update-in-the-fmod-unreal-engine-4-integration">Initializing Live Update in the FMOD Unreal Engine 4 Integration</a></li>
+<li><a href="#initializing-live-update-in-other-game-engines">Initializing Live Update in Other Game Engines</a></li>
+</ul>
+</li>
+<li><a href="#connecting-to-your-game">Connecting to Your Game</a></li>
+</ul>
+</li>
+<li><a href="supporting-downloadable-and-user-generated-content.html">Supporting Downloadable and User-generated Content</a></li>
+<li><a href="advanced-topics.html">Advanced Topics</a></li>
+<li><a href="event-macro-controls-reference.html">Event Macro Controls Reference</a></li>
+<li><a href="plugin-reference.html">Plug-in Reference</a></li>
+<li><a href="modulator-reference.html">Modulator Reference</a></li>
+<li><a href="built-in-parameters-reference.html">Built-In Parameters Reference</a></li>
+<li><a href="scripting-terminal-reference.html">Scripting</a></li>
+<li><a href="scripting-api-reference.html">Scripting API Reference</a></li>
+<li><a href="keyboard-shortcut-reference.html">Keyboard Shortcut Reference</a></li>
+<li><a href="glossary.html">Glossary</a></li>
+<li><a href="appendix-a-celeste.html">Appendix: Celeste Getting Started Guide</a></li>
+</ul>
+</div>
+<div class="manual-content">
+<h1>10. Editing During Live Update</h1>
+<p>As mentioned in the chapter on <a href="profiling.html">profiling</a>, <span class="dead-link" href="glossary.html#live-update">live update</span class="dead-link"> is a way of connecting FMOD Studio to your game as it runs, allowing you to update and monitor audio content in real time. This chapter focuses on how you can use live update while editing your FMOD Studio project.</p>
+<p>Any and all changes made to your FMOD Studio project during a <span class="dead-link" href="glossary.html#live-update-session">live update session</span class="dead-link"> become audible in your game as immediately as your network connection speed permits. Being able to hear the changes being made as you make them means that you can tweak, adjust, and mix your game's audio content live. This reduces the amount of time and effort required to iterate on your game's audio content.</p>
+<p>Any and every change you make to your project during a live update session is immediately propagated to your game, and there are no restrictions on the kind of changes you can make.  For example, if you import a new <a href="glossary.html#audio-file">audio asset</a> and add it to one of the <a href="glossary.html#event">events</a> playing in your game, you will hear your game begin to play that asset within moments.</p>
+<p>If you create a new event during a live update session, you will need to add appropriate triggers for that event to your game if you want your game to play it. Similarly, if you change an <span class="dead-link" href="glossary.html#event-path">event's path</span class="dead-link"> to something other than what your game currently uses to identify it, or replace an event that your game identifies by <span class="dead-link" href="glossary.html#event-guid">GUID</span class="dead-link">, that event will not play until you update your game code to use the new path or GUID.</p>
+<p>As with changes made to your FMOD Studio project in other circumstances, changes made to your FMOD Studio project during a live update session only become a permanent part of your game if you then save and <span class="dead-link" href="glossary.html#build">build</span class="dead-link"> the FMOD Studio project and copy the built banks into your game. If you do not <a href="getting-events-into-your-game.html#what-building-creates">build and copy the banks to your game</a>, the changes you make during a live update session will no longer apply to your game once the live update session is ended.</p>
+<h2 id="preparing-your-game-for-connection"><a href="#preparing-your-game-for-connection">10.1 Preparing Your Game for Connection</a></h2>
+<p>Before you can connect to your game, it must be prepared to receive a live update connection. The exact details of preparing a game for connection differ depending on the engine your game uses.</p>
+<h3 id="initializing-live-update-in-the-fmod-unity-integration"><a href="#initializing-live-update-in-the-fmod-unity-integration">10.1.1 Initializing Live Update in the FMOD Unity Integration</a></h3>
+<p>When using the <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/engine_new_unity/overview.html#/">FMOD Unity integration</a>, live update is automatically enabled by default. To check this, select "Edit Settings" from the "FMOD" menu in your Unity project. </p>
+<p>By default, live update will be set to enabled for "Play in Editor" and disabled for built games. A text box underneath these settings will inform you what port is being used.</p>
+<p>Starting your game or beginning in the "Play in Editor" mode will send information over the specified port.</p>
+<h3 id="initializing-live-update-in-the-fmod-unreal-engine-4-integration"><a href="#initializing-live-update-in-the-fmod-unreal-engine-4-integration">10.1.2 Initializing Live Update in the FMOD Unreal Engine 4 Integration</a></h3>
+<p>When using the <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/engine_ue4/overview.html#/">FMOD Unreal Engine 4 integration</a>, live update is automatically enabled by default. To check this, select "Project Settings" from the "Edit" menu in your Unreal Engine 4 project, and look in the "FMOD Studio" section in "Plugins".</p>
+<p>Live update will be set to enabled for all non-final builds by default. You can specify a port number in the "Live Update Port" option under the "Advanced" settings.</p>
+<p>Starting your game or beginning in the "Play in Editor" mode will send information over the specified port.</p>
+<h3 id="initializing-live-update-in-other-game-engines"><a href="#initializing-live-update-in-other-game-engines">10.1.3 Initializing Live Update in Other Game Engines</a></h3>
+<p>When using the <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/studio_api.html#/">FMOD Studio API</a>, you can enable live update by using <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_STUDIO_INITFLAGS.html">FMOD_STUDIO_INIT_LIVEUPDATE</a> when <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_Studio_System_Initialize.html#/">initializing the FMOD Studio system</a>.</p>
+<p>By default, FMOD Studio listens for connections on port 9264, however you can specify a different port using <a href="https://www.fmod.com/resources/documentation-api?page=content/generated/FMOD_Studio_System_SetAdvancedSettings.html#/">Studio::System::setAdvanceSettings</a>.</p>
+<p>Note that while the FMOD Studio API includes support for live update, the FMOD Studio Low Level API does not. If your game uses only the FMOD Studio low level API and not the FMOD Studio API, it will not be possible to connect to your game with live update.</p>
+<h2 id="connecting-to-your-game"><a href="#connecting-to-your-game">10.2 Connecting to Your Game</a></h2>
+<p>Once your game is prepared for live update connection, you can connect FMOD Studio to it over a network.</p>
+<p>To connect FMOD Studio to your game, select "Connect to Game..." in FMOD Studio's "File" menu. This opens the "Connect to Game" dialog, in which you can specify the IP address and port of a machine on which an instance of your game is running. This dialog accepts the following formats:</p>
+<ul>
+<li>localhost</li>
+<li>localhost:(port number)</li>
+<li>127.0.0.1</li>
+<li>127.0.0.1:(port number)</li>
+</ul>
+<p>"localhost" indicates the machine on which FMOD Studio is running. If you do not specify a port, FMOD Studio defaults to port 9264.</p>
+<p>If you specify an appropriate IP address and port and click the "Connect" button, a live update session begins.</p>
+<p>During a live update session, the <span class="dead-link" href="glossary.html#live-update-status-indicator">live update status indicator</span class="dead-link"> in the bottom-right corner of every FMOD Studio window is green and reads "Live Update ON". In addition, <span class="dead-link" href="glossary.html#meter">meters</span class="dead-link"> throughout FMOD Studio reflect the audio playing through your game instead of the events auditioning in FMOD Studio.</p>
+<p><img alt="Live Update Off" src="images/liveUpdateOff.png" /><br />
+<img alt="Live Update On" src="images/liveUpdateOn.png" /></p>
+<p>You can also use live update to connect to the FMOD Studio <a href="glossary.html#sandbox-window">sandbox</a>. This may be useful if your game does not support live update, or if it is currently unable to receive a connection.</p>
+<p>A live update connection to the sandbox is automatically attempted whenever you open the Sandbox window.</p></div>
+
+<p class="manual-footer">FMOD Studio User Manual 1.10.10 (2018-12-07). &copy; 2018 Firelight Technologies Pty Ltd.</p>
+</body>
+</html>
+
+</div>
