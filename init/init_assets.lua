@@ -293,6 +293,8 @@ Assets = {
 	Asset("ANIM", "anim/koalefant_paw.zip"),
 	Asset("ANIM", "anim/magmaanims.zip"),
 	Asset("ANIM", "anim/ancient_trepidation.zip"),
+	Asset("ANIM", "anim/ancient_trepidation_arm.zip"),	
+	Asset("ANIM", "anim/ancient_trepidation_nomouth.zip"),	
 	Asset("ANIM", "anim/ds_pig_charge.zip"),
 	Asset("ANIM", "anim/ds_pig_uppercut.zip"),
 	Asset("ANIM", "anim/lazy_chester.zip"),
@@ -301,7 +303,7 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/chester_eyebone_closed_lazy.xml"),
 	Asset("IMAGE", "images/inventoryimages/chester_eyebone_closed_lazy.tex"),		
 	Asset("ANIM", "anim/chester_eyebone_lazy.zip"),	
-	Asset("ANIM", "anim/ancient_trepidation_arm.zip"),		
+	
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_closed_lazy"),
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_lazy"),
 	

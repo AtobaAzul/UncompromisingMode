@@ -22,7 +22,7 @@ local function NormalRetarget(inst)
     end
     return FindEntity(inst, targetDist, 
         function(guy) 
-            if inst.components.combat:CanTarget(guy) then
+            if inst.components.combat:CanTarget(guy) and inst.enraged == true then
                 return guy:HasTag("character")
             end
     end)
@@ -171,6 +171,31 @@ inst.Transform:SetPosition(x, 0, z)
 end
 end
 end
+local function CheckIfInsaners(inst)  --Actually just checks if anyone is below half sanity, rather than completely insane.
+local bozo =FindEntity(inst, 40, 
+        function(guy) 
+            if inst.components.combat:CanTarget(guy) then
+                return guy:HasTag("character")
+            end
+    end)
+if bozo.components.sanity ~= nil and bozo.components.sanity:GetPercent() < 0.5 and inst.enraged == false then
+inst.sg:GoToState("anger")
+if inst.components.combat ~= nil then
+inst.components.combat:SuggestTarget(bozo)
+end
+end
+end
+local function OnSave(inst,data)
+data.enraged = inst.enraged
+end
+local function OnLoad(inst,data)
+if data ~= nil and data.enraged ~= nil then
+inst.enraged = data.enraged
+if inst.enraged == true then
+inst.AnimState:SetBuild("ancient_trepidation")
+end
+end
+end
 local function fn(Sim)
 	local inst = CreateEntity()
 
@@ -195,7 +220,7 @@ local function fn(Sim)
     end
 	
     inst.AnimState:SetBank("ancient_trepidation")
-    inst.AnimState:SetBuild("ancient_trepidation")
+    inst.AnimState:SetBuild("ancient_trepidation_nomouth")
     inst.AnimState:PlayAnimation("give_life",true)
     
 	inst.AnimState:SetMultColour(0, 0, 0, 0.8)
@@ -255,6 +280,10 @@ local function fn(Sim)
     inst:ListenForEvent("attacked", OnAttacked)
 	inst.sg:GoToState("spawn")
     inst.hasshield = false
+	inst.enraged = false
+	inst.onsave = OnSave
+	inst.onload = OnLoad
+	inst:DoPeriodicTask(3,CheckIfInsaners)
     return inst
 end
 

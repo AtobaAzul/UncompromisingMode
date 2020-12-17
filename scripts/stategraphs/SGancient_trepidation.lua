@@ -1,8 +1,8 @@
 require("stategraphs/commonstates")
 
-local actionhandlers = 
+local events = 
 {
-    --ActionHandler(ACTIONS.INVESTIGATE, "investigate"),
+EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and inst.enraged == false then inst.sg:GoToState("anger") end end),
 }
 local function FinishExtendedSound(inst, soundid)
     inst.SoundEmitter:KillSound("sound_"..tostring(soundid))
@@ -232,7 +232,36 @@ local states=
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
-    },    
+    },
+    State{
+        name = "anger",
+        tags = {"busy"},
+        
+        onenter = function(inst)
+		    local shieldtype = PickShield(inst)
+                if shieldtype ~= nil then
+                    local fx = SpawnPrefab("stalker_shield"..tostring(shieldtype))
+                    fx.entity:SetParent(inst.entity)
+                        fx.AnimState:SetScale(-1.3, 1, 1)
+					
+				end
+			inst.AnimState:SetBuild("ancient_trepidation")
+			inst.enraged = true
+            inst.Physics:Stop()
+			inst.AnimState:PlayAnimation("anger")
+            --inst.AnimState:PushAnimation("taunt")
+			PlayExtendedSound(inst, "taunt")
+            --inst.SoundEmitter:PlaySound("UCSounds/Scorpion/taunt")
+        end,
+        timeline=
+        {	TimeEvent(5*FRAMES, function(inst) PlayExtendedSound(inst, "taunt") end),
+			TimeEvent(10*FRAMES, function(inst) PlayExtendedSound(inst, "taunt") end),
+        },      
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("taunt") end),
+        },
+    },  	
     State{
         name = "spawn",
         tags = {"busy"},
@@ -370,5 +399,5 @@ local states=
 
 
 
-return StateGraph("ancient_trepidation", states, events, "idle", actionhandlers)
+return StateGraph("ancient_trepidation", states, events, "idle")
 
