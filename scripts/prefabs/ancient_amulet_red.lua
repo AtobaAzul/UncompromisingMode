@@ -54,11 +54,55 @@ local function onunequip_blue(inst, owner)
     inst:RemoveEventCallback("attacked", inst.orbfn, owner)
 end
 
+local function aac_fxanim(haunter)
+	haunter._AARfx.AnimState:PlayAnimation("hit")
+	haunter._AARfx.AnimState:PushAnimation("idle_loop")
+end
+	
+local function aac_unproc(haunter)
+	if haunter._AARfx ~= nil then
+		haunter._AARfx:kill_fx()
+		haunter._AARfx = nil
+	end
+    
+	haunter:RemoveEventCallback("attacked", aac_fxanim)
+	
+	haunter._aactask = nil
+end
+	
+local function aac_proc(haunter)
+	haunter.components.debuffable:AddDebuff("buff_ancient_amulet_red", "buff_ancient_amulet_red")
+    TheWorld:PushEvent("ms_sendlightningstrike", haunter:GetPosition())
+	
+	if haunter._AARfx ~= nil then
+		haunter._AARfx:kill_fx()
+	end
+	haunter._AARfx = SpawnPrefab("forcefieldfx")
+	haunter._AARfx.entity:SetParent(haunter.entity)
+	haunter._AARfx.Transform:SetPosition(0, 0.2, 0)
+    haunter:ListenForEvent("attacked", aac_fxanim)
+
+    if haunter._aactask ~= nil then
+        haunter._aactask:Cancel()
+    end
+    haunter._aactask = haunter:DoTaskInTime(10, aac_unproc)
+end
+
 local function OnHaunt(inst, haunter)
 	haunter:PushEvent("respawnfromghost", { source = inst })
-    haunter.components.inventory:Equip(inst)
-    haunter.sg:GoToState("amulet_rebirth")
-	inst:Remove()
+    haunter.Physics:Teleport(inst.Transform:GetWorldPosition())
+	haunter:DoTaskInTime(3, aac_proc)
+	
+	inst:DoTaskInTime(1, function(inst)
+		local colour = { 1, 0, 0 }
+			
+		inst.revivefx = SpawnPrefab("staff_castinglight")
+		inst.revivefx.entity:SetParent(inst.entity)
+		inst.revivefx.Transform:SetRotation(inst.Transform:GetWorldPosition())
+		inst.revivefx:SetUp(colour, 1.9, .33)
+	end)
+	
+	inst:DoTaskInTime(3, function(inst) inst:Remove() end)
 end
 
 local function fn()
@@ -73,6 +117,8 @@ local function fn()
     inst.AnimState:SetBank("amulets")
     inst.AnimState:SetBuild("amulets_ancient")
     inst.AnimState:PlayAnimation("redamulet")
+	
+	inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
 
     inst:AddTag("resurrector")
 

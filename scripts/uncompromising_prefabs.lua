@@ -166,6 +166,7 @@ return {
 	"crabclaw",
 	"ancient_trepidation",
 	"ancient_amulet_red",
+	"buff_ancient_amulet_red",
 	"amulet_health_orb",
 	"nightcrawler",
 	"ancient_trepidation_arm",
