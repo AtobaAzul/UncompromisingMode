@@ -72,7 +72,7 @@ AddIngredientValues({"monstersmallmeat_dried"}, {meat=0.5, monster=GLOBAL.TUNING
 AddIngredientValues({"scorpioncarapace"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_RAW_MONSTER_VALUE + meat_reduction_factor, insectoid=0.5}, true, true)
 AddIngredientValues({"scorpioncarapacecooked"}, {meat=1, meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE + meat_reduction_factor, insectoid=0.5}, true, true)
 AddIngredientValues({"butterflywings"}, {decoration=2, insectoid=0.5})
-
+AddIngredientValues({"acorn"}, {seed=1})
 --Substract the meat value from the monster value, since it dillutes it
 local function MonsterMeatSupport(tags)
     return tags~=nil and not tags.monster or tags.monster < 2 or (tags.meat and (tags.monster - tags.meat*meat_reduction_factor) < 2)
@@ -173,7 +173,7 @@ recipes.flowersalad.test = function(cooker, names, tags) return names.cactus_flo
 --recipes.watermelonicle.test = function(cooker, names, tags) return names.watermelon and tags.frozen and names.twigs and not tags.meat and not tags.veggie and not tags.egg and UncompromisingFillers(tags) end 
 -- Original:           test = function(cooker, names, tags) return names.watermelon and tags.frozen and names.twigs and not tags.meat and not tags.veggie and not tags.egg end,
 
-recipes.trailmix.test = function(cooker, names, tags) return names.acorn_cooked and tags.seed and tags.seed >= 1 and (names.berries or names.berries_cooked or names.berries_juicy or names.berries_juicy_cooked) and tags.fruit and tags.fruit >= 1 and not tags.meat and not tags.veggie and not tags.egg and not tags.dairy and UncompromisingFillers(tags) end 
+recipes.trailmix.test = function(cooker, names, tags) return (names.acorn or names.acorn_cooked) and tags.seed and tags.seed >= 1 and (names.berries or names.berries_cooked or names.berries_juicy or names.berries_juicy_cooked) and tags.fruit and tags.fruit >= 1 and not tags.meat and not tags.veggie and not tags.egg and not tags.dairy and UncompromisingFillers(tags) end 
 -- Original:     test = function(cooker, names, tags) return names.acorn_cooked and tags.seed and tags.seed >= 1 and (names.berries or names.berries_cooked or names.berries_juicy or names.berries_juicy_cooked) and tags.fruit and tags.fruit >= 1 and not tags.meat and not tags.veggie and not tags.egg and not tags.dairy end,
 
 recipes.hotchili.test = function(cooker, names, tags) return tags.meat and tags.veggie and tags.meat >= 1.5 and tags.veggie >= 1.5 and UncompromisingFillers(tags) and MonsterMeatSupport(tags)end 
