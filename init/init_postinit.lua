@@ -110,6 +110,7 @@ local prefab_post = {
 	"koalas",
 	"pocket_powertrip",
 	"pumpkin_lantern",
+	"piggyback",
 	"nightlight",
 	"armor_sanity",
 	"tophat",

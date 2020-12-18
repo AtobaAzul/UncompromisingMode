@@ -191,7 +191,7 @@ local function StrongmanPickup(inst)
 	
 			if itembody.name == "Piggyback" then
 		
-				inst.components.locomotor:SetExternalSpeedMultiplier(inst, "strongmanpiggy", (1/TUNING.PIGGYBACK_SPEED_MULT))
+				inst.components.locomotor:SetExternalSpeedMultiplier(inst, "strongmanpiggy", (1/itembody.components.equippable.walkspeedmult))
 				inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongman")
 				inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanmarble")
 				return
