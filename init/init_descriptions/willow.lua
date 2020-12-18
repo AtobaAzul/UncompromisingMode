@@ -85,7 +85,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.PLAGUEMASK = "I'm like a phoenix!"
 	DESCRIBE.SPIDER_TRAPDOOR = "I like you better underneath a rock."
 	DESCRIBE.TRAPDOOR = "It's just a rock."
-	DESCRIBE.HOODEDTRAPDOOR = "It's just a rock"
+	DESCRIBE.HOODEDTRAPDOOR = DESCRIBE.TRAPDOOR 
 	DESCRIBE.WICKER_TENTACLE = "Now they look extra gross!"
 	DESCRIBE.HONEY_LOG = "You've ruined it! This fire wood is useless!"
 

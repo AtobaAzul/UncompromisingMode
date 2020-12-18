@@ -46,7 +46,7 @@ local function fn()
 
     if not TheWorld.ismastersim then
 		inst.OnEntityReplicated = function(inst) 
-			inst.replica.container:WidgetSetup("piggyback") 
+			inst.replica.container:WidgetSetup("krampus_sack") 
 		end
         return inst
     end
@@ -66,7 +66,7 @@ local function fn()
     inst.components.waterproofer:SetEffectiveness(0)
 
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup("piggyback")
+    inst.components.container:WidgetSetup("krampus_sack")
 	
 	inst:AddComponent("preserver")
 	inst.components.preserver:SetPerishRateMultiplier(50)

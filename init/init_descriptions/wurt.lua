@@ -86,7 +86,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.PLAGUEMASK = "I don't like it! It's scary, florp!"
 	DESCRIBE.SPIDER_TRAPDOOR = "Is it naked?"
 	DESCRIBE.TRAPDOOR = "I see nothing!"
-	DESCRIBE.HOODEDTRAPDOOR = "Just a stone."
+	DESCRIBE.HOODEDTRAPDOOR = DESCRIBE.TRAPDOOR 
 	DESCRIBE.WICKER_TENTACLE = "Wiggler don't look normal... sick?"
 	DESCRIBE.HONEY_LOG = "Flrbbl... not alive is it?"
 
