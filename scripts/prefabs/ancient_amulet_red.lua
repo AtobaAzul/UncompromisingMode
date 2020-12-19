@@ -118,6 +118,8 @@ local function fn()
     inst.AnimState:SetBuild("amulets_ancient")
     inst.AnimState:PlayAnimation("redamulet")
 	
+	inst.Transform:SetScale(1.1, 1.1, 1.1)
+	
 	inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
 
     inst:AddTag("resurrector")
