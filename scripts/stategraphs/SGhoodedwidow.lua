@@ -287,8 +287,7 @@ local states=
         tags = {"busy", "noweb","superbusy","nointerrupt"},
         onenter = function(inst, data)
 		inst.components.locomotor:Stop()
-		inst.AnimState:PlayAnimation("poop_pre")
-		inst.AnimState:PushAnimation("poop_loop", false)
+		inst.AnimState:PlayAnimation("prejump")
         end,
 		timeline =
         {
