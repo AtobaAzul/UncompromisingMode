@@ -145,6 +145,8 @@ local function SetStage(inst, stage)
 end
 
 local function SetSmall(inst)
+	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
+	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
     inst.anims = {
     	hit="cocoon_small_hit", 
     	idle="cocoon_small", 
@@ -157,6 +159,10 @@ end
 
 
 local function SetMedium(inst)
+	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
+	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
+	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
+	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
     inst.anims = {
     	hit="cocoon_medium_hit", 
     	idle="cocoon_medium", 
@@ -168,6 +174,12 @@ local function SetMedium(inst)
 end
 
 local function SetLarge(inst)
+	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
+	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
+	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
+	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
+	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
+	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
     inst.anims = {
     	hit="cocoon_large_hit", 
     	idle="cocoon_large", 
