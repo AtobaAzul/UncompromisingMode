@@ -28,6 +28,7 @@ end
 local function ToggleCurse(inst, doer)
 	if doer.components.debuffable ~= nil then
 		if not doer.vetcurse == true then
+			doer.SoundEmitter:PlaySound("dontstarve/sanity/creature2/taunt")
 			inst.SoundEmitter:PlaySound("dontstarve/common/teleportato/teleportato_maxwelllaugh", "teleportato_laugh")
 			doer.components.debuffable:AddDebuff("buff_vetcurse", "buff_vetcurse")
 			doer:PushEvent("foodbuffattached", { buff = "ANNOUNCE_ATTACH_BUFF_VETCURSE", 1 })
