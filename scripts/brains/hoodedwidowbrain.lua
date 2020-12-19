@@ -68,7 +68,13 @@ local function EquipRange(inst)
         -- print("phlegm equipped")
     end
 end
-
+local function BossCheck(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x, y, z, 50, { "epic" }, { "hoodedwidow" } )
+	if #ents >= 1 then
+	inst.sg:GoToState("jumphome")
+	end
+end
 local function ShouldResetFight(self)
 		local home = self.inst.components.homeseeker ~= nil and self.inst.components.homeseeker.home or nil
 		if home then
@@ -123,11 +129,21 @@ if inst.investigated == true then
 return true
 end
 end
-
+local function GettingBullied(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x, y, z, 50, { "epic" }, { "hoodedwidow" } )
+	if #ents >= 1 then
+	return true
+	else
+	return false
+	end
+end
 function HoodedWidowBrain:OnStart()
     local root = PriorityNode(
     {	
-    	WhileNode( function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
+		WhileNode(function() return GettingBullied(self.inst) end,"Being Bullied",
+		DoAction(self.inst, GoHomeAction)),
+    	--WhileNode( function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
         --WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)), No fire cheese please
         WhileNode(function() return CanMeleeNow(self.inst) or not ShouldResetFight(self) end, "Hit Stuck Target or Creature",
             SequenceNode({

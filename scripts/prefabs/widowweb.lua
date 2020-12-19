@@ -22,8 +22,17 @@ local function ontimerdone(inst, data)
         GenerateNewWidow(inst)
     end
 end
+
 local function SpawnInvestigators(inst, data)
-    if inst.components.childspawner ~= nil then
+	local test = nil
+	local x, y, z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x, y, z, 50, { "epic" }, {"hoodedwidow"})
+	if #ents >= 1 then
+	test = true
+	else
+	test = false
+	end
+    if inst.components.childspawner ~= nil and not test == true then
             local spider = inst.components.childspawner:SpawnChild(data.target, nil, 3)
             if spider ~= nil then
 			local x,y,z = inst.Transform:GetWorldPosition()
