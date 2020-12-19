@@ -58,6 +58,11 @@ local function AttachCurse(inst, target)
 		ForceToTakeMoreDamage(target)
 		ForceToTakeMoreHunger(target)
 		target:AddTag("vetcurse")
+        target:ListenForEvent("respawnfromghost", function()
+			target:DoTaskInTime(3, function(target) 
+				target.components.debuffable:AddDebuff("buff_vetcurse", "buff_vetcurse")
+			end)
+        end, target)
     end
 end
 
@@ -74,9 +79,9 @@ local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration
     local function OnAttached(inst, target)
         inst.entity:SetParent(target.entity)
         inst.Transform:SetPosition(0, 0, 0) --in case of loading
-        inst:ListenForEvent("death", function()
+        --[[inst:ListenForEvent("death", function()
             inst.components.debuff:Stop()
-        end, target)
+        end, target)]]
 
         --target:PushEvent("foodbuffattached", { buff = "ANNOUNCE_ATTACH_BUFF_"..string.upper(name), priority = priority })
         if onattachedfn ~= nil then

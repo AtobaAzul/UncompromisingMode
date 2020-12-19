@@ -25,7 +25,7 @@ end)
 
 function Vetcursewidget:RefreshTooltips()
     local controller_id = TheInput:GetControllerID()
-    self.bg2:SetTooltip("Veteran's Curse:\n - Receive more damage when attacked.\n - Overeating briefly slows you down, based on hunger points wasted.\n - Gain the ability to wield cursed items, dropped by cerain bosses.\n - The only way to lift the curse is through death.")
+    self.bg2:SetTooltip("Veteran's Curse:\n - Receive more damage when attacked.\n - Hunger drains faster.\n - Gain the ability to wield cursed items, dropped by cerain bosses.\n - There is no way to lift this curse.")
 end
 
 

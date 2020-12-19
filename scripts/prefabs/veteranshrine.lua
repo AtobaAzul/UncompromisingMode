@@ -1,3 +1,5 @@
+local BigPopupDialogScreen = require "screens/bigpopupdialog"
+
 local assets =
 {
     Asset("ANIM", "anim/veteranshrine.zip"),      
@@ -26,6 +28,7 @@ end
 local function ToggleCurse(inst, doer)
 	if doer.components.debuffable ~= nil then
 		if not doer.vetcurse == true then
+			inst.SoundEmitter:PlaySound("dontstarve/common/teleportato/teleportato_maxwelllaugh", "teleportato_laugh")
 			doer.components.debuffable:AddDebuff("buff_vetcurse", "buff_vetcurse")
 			doer:PushEvent("foodbuffattached", { buff = "ANNOUNCE_ATTACH_BUFF_VETCURSE", 1 })
 			local x, y, z = inst.Transform:GetWorldPosition()
@@ -52,6 +55,19 @@ local function OnDoneTalking(inst)
     inst.SoundEmitter:KillSound("talk")
 end
 
+local function StartRagtime(inst)
+	if inst.ragtime_playing == nil then
+		inst.ragtime_playing = true
+		inst.SoundEmitter:PlaySound("dontstarve/common/teleportato/ragtime", "ragtime")
+	else
+		inst.SoundEmitter:SetVolume("ragtime", 1)
+	end
+end
+
+local function ShutUpRagtime(inst)
+	inst.SoundEmitter:SetVolume("ragtime", 0)
+end
+
 local function OnTalk(inst)
     OnDoneTalking(inst)
     inst.SoundEmitter:PlaySound("dontstarve/creatures/together/stalker/talk_LP", "talk")
@@ -64,6 +80,55 @@ local function onnear(inst, target)
 			inst.components.talker:Say(GetString(inst.target, "VETERANCURSED"))
 		else
 			inst.components.talker:Say(GetString(inst.target, "VETERANCURSETAUNT"))
+		end
+	end
+	
+	inst:DoTaskInTime(0, StartRagtime)
+end
+
+local function onfar(inst, target)
+	inst:DoTaskInTime(0, ShutUpRagtime)
+end
+
+local function ToggleCursee(inst, doer)
+	if doer == ThePlayer then
+		if doer:HasTag("vetcurse") then
+			local function acceptance()
+				TheFrontEnd:PopScreen()
+				inst.components.activatable.inactive = true
+			end
+			local title = "You Made Your Choice."
+			local bodytext = "Now you must live with the consequences."
+			local yes_box = { text = "Ok", cb = acceptance }
+
+			local bpds = BigPopupDialogScreen(title, bodytext, { yes_box })
+			bpds.title:SetPosition(0, 85, 0)
+			bpds.text:SetPosition(0, -15, 0)
+
+			TheFrontEnd:PushScreen(bpds)
+		else
+			local function start_curse()
+				TheFrontEnd:PopScreen()
+				inst.components.activatable.inactive = true
+				doer.sg:GoToState("curse_controlled")
+				ToggleCurse(inst, doer)
+			end
+
+			local function reject_curse()
+				TheFrontEnd:PopScreen()
+				inst.components.activatable.inactive = true
+			end
+
+			local title = "The Veterans Curse."
+			local bodytext = "- Receive more damage when attacked.\n - Hunger drains faster.\n - Gain the ability to wield cursed items, dropped by cerain bosses.\n - There is no way to lift this curse."
+			local yes_box = { text = "Yes", cb = start_curse }
+			local no_box = { text = "No", cb = reject_curse }
+
+			local bpds = BigPopupDialogScreen(title, bodytext, { yes_box, no_box })
+			bpds.title:SetPosition(0, 85, 0)
+			bpds.text:SetPosition(0, -15, 0)
+
+			TheFrontEnd:PushScreen(bpds)
 		end
 	end
 end
@@ -84,8 +149,11 @@ local function fn(Sim)
     anim:SetBuild("veteranshrine")    
     anim:SetBank("veteranshrine")
     anim:PlayAnimation("idle", true)
+	
     inst.GetActivateVerb = GetVerb
+	
     MakeObstaclePhysics(inst, 1.8)
+	
 	inst.entity:SetPristine()
 	
 	inst:AddComponent("talker")        
@@ -105,15 +173,18 @@ local function fn(Sim)
 	
 	
     inst:AddComponent("activatable")
-    inst.components.activatable.OnActivate = ToggleCurse
+    inst.components.activatable.OnActivate = ToggleCursee
     inst.components.activatable.inactive = true
+	inst.components.activatable.quickaction = true
+	
     inst:AddComponent("inspectable")
     inst.components.inspectable:RecordViews()
 	
 	
     inst:AddComponent("playerprox")
+    inst.components.playerprox:SetDist(6, 10)
     inst.components.playerprox:SetOnPlayerNear(onnear)
-    inst.components.playerprox:SetDist(6, 40)
+    inst.components.playerprox:SetOnPlayerFar(onfar)
 
     --inst.deactivate = deactivate
 

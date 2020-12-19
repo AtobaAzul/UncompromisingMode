@@ -126,6 +126,38 @@ local states = {
     },
 
 
+    State{
+        name = "curse_controlled",
+        tags = { "busy", "pausepredict", "nomorph", "nodangle" },
+
+        onenter = function(inst)
+            if not inst.AnimState:IsCurrentAnimation("mindcontrol_loop") then
+                inst.AnimState:PlayAnimation("mindcontrol_loop", true)
+            end
+            inst.sg:SetTimeout(2)
+        end,
+
+        events =
+        {
+            EventHandler("mindcontrolled", function(inst)
+                inst.sg.statemem.mindcontrolled = true
+                inst.sg:GoToState("mindcontrolled_loop")
+            end),
+        },
+
+        ontimeout = function(inst)
+            inst.sg:GoToState("mindcontrolled_pst")
+        end,
+
+        onexit = function(inst)
+            if not inst.sg.statemem.mindcontrolled then
+                if inst.components.playercontroller ~= nil then
+                    inst.components.playercontroller:Enable(true)
+                end
+                inst.components.inventory:Show()
+            end
+        end,
+    },
 
 State{
         name = "sneeze",
