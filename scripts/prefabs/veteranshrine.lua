@@ -25,12 +25,12 @@ local function GetVerb()
     return "TOUCH"
 end
 
-local function ToggleCurse(inst, doer)
-	if doer.components.debuffable ~= nil then
-		if not doer.vetcurse == true then
-			doer.SoundEmitter:PlaySound("dontstarve/sanity/creature2/taunt")
+local function ToggleCurse(player)
+	if player.components.debuffable ~= nil then
+		if not player.vetcurse == true then
+			player.SoundEmitter:PlaySound("dontstarve/sanity/creature2/taunt")
 			inst.SoundEmitter:PlaySound("dontstarve/common/teleportato/teleportato_maxwelllaugh", "teleportato_laugh")
-			doer.components.debuffable:AddDebuff("buff_vetcurse", "buff_vetcurse")
+			player.components.debuffable:AddDebuff("buff_vetcurse", "buff_vetcurse")
 			doer:PushEvent("foodbuffattached", { buff = "ANNOUNCE_ATTACH_BUFF_VETCURSE", 1 })
 			local x, y, z = inst.Transform:GetWorldPosition()
 			local fx = SpawnPrefab("statue_transition_2")
@@ -45,7 +45,6 @@ local function ToggleCurse(inst, doer)
 			end
 		end
 	end
-	inst.components.activatable.inactive = true
 end
 
 local function OnDoneTalking(inst)
@@ -91,12 +90,12 @@ local function onfar(inst, target)
 	inst:DoTaskInTime(0, ShutUpRagtime)
 end
 
-local function ToggleCursee(inst, doer)
-	if doer == ThePlayer then
-		if doer:HasTag("vetcurse") then
+local function ToggleCursee(inst)
+	local player = inst.Cursee:value()
+	if player == ThePlayer then
+		if player:HasTag("vetcurse") then
 			local function acceptance()
 				TheFrontEnd:PopScreen()
-				inst.components.activatable.inactive = true
 			end
 			local title = "You Made Your Choice."
 			local bodytext = "Now you must live with the consequences."
@@ -108,16 +107,15 @@ local function ToggleCursee(inst, doer)
 
 			TheFrontEnd:PushScreen(bpds)
 		else
-			local function start_curse()
+			local function start_curse(inst)
+				local player = inst.Cursee:value()
 				TheFrontEnd:PopScreen()
-				inst.components.activatable.inactive = true
-				doer.sg:GoToState("curse_controlled")
-				ToggleCurse(inst, doer)
+				player.sg:GoToState("curse_controlled")
+				ToggleCurse(player)
 			end
 
 			local function reject_curse()
 				TheFrontEnd:PopScreen()
-				inst.components.activatable.inactive = true
 			end
 
 			local title = "The Veterans Curse."
@@ -132,6 +130,17 @@ local function ToggleCursee(inst, doer)
 			TheFrontEnd:PushScreen(bpds)
 		end
 	end
+end
+
+local function OnActivate(inst, doer)
+	inst.valid_cursee_id = doer.userid
+	inst.Cursee:set_local(doer)
+	inst.Cursee:set(doer)
+    inst.components.activatable.inactive = true
+end
+
+local function RegisterNetListeners(inst)
+	inst:ListenForEvent("SetCurseedirty", ToggleCursee)
 end
 
 local function fn(Sim)
@@ -152,6 +161,10 @@ local function fn(Sim)
     anim:PlayAnimation("idle", true)
 	
     inst.GetActivateVerb = GetVerb
+	
+	inst.Cursee = net_entity(inst.GUID, "SetCursee.plyr", "SetCurseedirty")
+
+	inst:DoTaskInTime(0, RegisterNetListeners)
 	
     MakeObstaclePhysics(inst, 1.8)
 	
@@ -174,9 +187,9 @@ local function fn(Sim)
 	
 	
     inst:AddComponent("activatable")
-    inst.components.activatable.OnActivate = ToggleCursee
+    inst.components.activatable.OnActivate = OnActivate
     inst.components.activatable.inactive = true
-	inst.components.activatable.quickaction = true
+	inst.components.activatable.quickaction = false
 	
     inst:AddComponent("inspectable")
     inst.components.inspectable:RecordViews()
