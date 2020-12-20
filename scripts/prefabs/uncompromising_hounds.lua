@@ -73,7 +73,9 @@ SetSharedLootTable('hound_lightning',
 SetSharedLootTable('hound_magma',
 {
     {'monstermeat', 1.0},
-    {'houndstooth', 1.0},
+    {'rocks', 1.0},
+	{'rocks', 1.0},
+	{'rocks', 1.0},
     --{'deer_fire_circle',   1.0},
     {'redgem',      0.3},
 })
