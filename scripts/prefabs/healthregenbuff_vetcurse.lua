@@ -68,7 +68,7 @@ local function fn_health()
     return inst
 end
 
-local function OnTick2(inst, target)
+local function OnTick2(inst, target, data)
     if target.components.health ~= nil and
         not target.components.health:IsDead() and
 		target.components.sanity ~= nil and
