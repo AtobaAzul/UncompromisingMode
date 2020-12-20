@@ -62,7 +62,7 @@ local function oneat(inst, data)
 		print((data.food.components.edible:GetHealth() * warlybuff) * base_mult)
 		print((data.food.components.edible:GetHealth() * warlybuff) * base_mult)
 		print("health")
-	else
+	elseif not inst:HasTag("plantkin") then
 		inst.components.health:DoDelta((data.food.components.edible:GetHealth() * warlybuff) * base_mult)
 		print((data.food.components.edible:GetHealth() * warlybuff) * base_mult)
 		print((data.food.components.edible:GetHealth() * warlybuff) * base_mult)
