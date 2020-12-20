@@ -5,7 +5,7 @@ local function OnHitOtherFreeze(inst, data)
     local other = data.target
     if other ~= nil then
         if not (other.components.health ~= nil and other.components.health:IsDead()) then
-            if other.components.freezable ~= nil and other:HasTag("player") then
+            if other.components.freezable ~= nil and other:HasTag("player") and not other.components.freezable:IsFrozen() then
                 other.components.freezable:AddColdness(2)
             end
             if other.components.temperature ~= nil then
