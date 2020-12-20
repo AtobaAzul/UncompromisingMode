@@ -176,4 +176,7 @@ return {
 	"rat_whip",
 	"rneskeleton",
 	"snapdragon_fertilizer",
+	"viperworm",
+	"viperfruit",
+	"viperjam",
 }

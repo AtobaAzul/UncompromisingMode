@@ -319,7 +319,13 @@ Assets = {
 	Asset("ANIM", "anim/magmahound.zip"),
 	Asset("ANIM", "anim/torso_amulets_ancient.zip"),
 	Asset("ANIM", "anim/amulets_ancient.zip"),
-	
+	Asset("ANIM", "anim/viperworm.zip"),
+	Asset("IMAGE", "images/inventoryimages/viperfruit.tex"),
+	Asset("ATLAS", "images/inventoryimages/viperfruit.xml"),
+	Asset("ANIM", "anim/viperfruit.zip"),
+	Asset("IMAGE", "images/inventoryimages/viperjam.tex"),
+	Asset("ATLAS", "images/inventoryimages/viperjam.xml"),
+	Asset("ANIM", "anim/viperjam.zip"),	
 	--Map Icons Start--
 	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),
 	Asset( "ATLAS", "images/map_icons/riceplant.xml" ),

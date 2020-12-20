@@ -331,6 +331,7 @@ function InsertIngredientValues(names, tags, cancook, candry, keepoldvalues) -- 
 end
 
 InsertIngredientValues({"zaspberry"},{fruit=1},true,false,false)
+InsertIngredientValues({"viperfruit"},{fruit=1},true,false,false)
 InsertIngredientValues({"giant_blueberry"},{fruit=1},true,false,false)
 InsertIngredientValues({"iceboomerang"},{ice=1},true,false,false)
 InsertIngredientValues({"rice"},{veggie=1,rice=1},true,false,false)
@@ -518,3 +519,21 @@ local snowcone =
 }
 AddCookerRecipe("cookpot", snowcone)
 AddCookerRecipe("portablecookpot", snowcone)
+
+local viperjam =
+{
+    name = "viperjam",
+    test = function(cooker, names, tags) return not tags.monster and not tags.inedible and UncompromisingFillers(tags) and names.viperfruit and names.giant_blueberry end,
+
+    priority = 30,
+    weight = 1,
+    foodtype = "VEGGIE",
+    health = 40,
+    hunger = 37.5,
+	oneat_desc = "Who knows!?",
+	sanity = 15,
+    perishtime = 10*TUNING.PERISH_TWO_DAY,
+    cooktime = 1.8,
+}
+AddCookerRecipe("cookpot", viperjam)
+AddCookerRecipe("portablecookpot", viperjam)
