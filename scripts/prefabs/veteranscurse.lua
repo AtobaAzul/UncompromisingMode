@@ -66,7 +66,7 @@ local function oneat(inst, data)
 		inst.components.health:DoDelta((data.food.components.edible:GetHealth() * warlybuff) * base_mult)
 		print((data.food.components.edible:GetHealth() * warlybuff) * base_mult)
 		print((data.food.components.edible:GetHealth() * warlybuff) * base_mult)
-		print("health")]]
+		print("health")
 	end
 	
 	if data.food.components.edible:GetSanity() ~= nil and ((data.food.components.edible:GetSanity() * warlybuff) * base_mult) > 3 then
@@ -78,7 +78,7 @@ local function oneat(inst, data)
 		inst.components.sanity:DoDelta((data.food.components.edible:GetSanity() * warlybuff) * base_mult)
 		print((data.food.components.edible:GetSanity() * warlybuff) * base_mult)
 		print((data.food.components.edible:GetSanity() * warlybuff) * base_mult)
-		print("sanity")]]
+		print("sanity")
 	end
 	
 end
