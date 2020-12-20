@@ -103,7 +103,7 @@ local function ToggleCursee(inst)
 
 			local bpds = BigPopupDialogScreen(title, bodytext, { yes_box })
 			bpds.title:SetPosition(0, 100, 0)
-			bpds.text:SetPosition(0, -15, 0)
+			bpds.text:SetPosition(0, -12.5, 0)
 
 			TheFrontEnd:PushScreen(bpds)
 		else
@@ -117,7 +117,7 @@ local function ToggleCursee(inst)
 
 			local bpds = BigPopupDialogScreen(title, bodytext, { yes_box })
 			bpds.title:SetPosition(0, 100, 0)
-			bpds.text:SetPosition(0, -15, 0)
+			bpds.text:SetPosition(0, -12.5, 0)
 
 			TheFrontEnd:PushScreen(bpds)
 		end
