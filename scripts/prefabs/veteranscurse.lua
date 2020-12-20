@@ -51,12 +51,51 @@ local function ForceToTakeUsualHunger(inst)
 	end
 end
 
+local function oneat(inst, data)
+    inst.components.eater:SetAbsorptionModifiers(0, 1, 0)
+	
+	local base_mult = inst.components.foodmemory ~= nil and inst.components.foodmemory:GetFoodMultiplier(data.food.prefab) or (inst:HasTag("souleater") and 0.5) or 1
+	local warlybuff = inst:HasTag("warlybuffed") and 1.2 or 1
+
+	if not inst:HasTag("plantkin") and data.food.components.edible:GetHealth() ~= nil and ((data.food.components.edible:GetHealth() * warlybuff) * base_mult) >= 10 then
+		inst.components.debuffable:AddDebuff("healthregenbuff_vetcurse", "healthregenbuff_vetcurse", {duration = ((data.food.components.edible:GetHealth() * warlybuff) * base_mult) / 10})
+		print((data.food.components.edible:GetHealth() * warlybuff) * base_mult)
+		print((data.food.components.edible:GetHealth() * warlybuff) * base_mult)
+		print("health")
+	else
+		inst.components.health:DoDelta((data.food.components.edible:GetHealth() * warlybuff) * base_mult)
+		print((data.food.components.edible:GetHealth() * warlybuff) * base_mult)
+		print((data.food.components.edible:GetHealth() * warlybuff) * base_mult)
+		print("health")
+	end
+	
+	if data.food.components.edible:GetSanity() ~= nil and ((data.food.components.edible:GetSanity() * warlybuff) * base_mult) >= 10 then
+		inst.components.debuffable:AddDebuff("sanityregenbuff_vetcurse", "sanityregenbuff_vetcurse", {duration = ((data.food.components.edible:GetSanity() * warlybuff) * base_mult) / 10})
+		print((data.food.components.edible:GetSanity() * warlybuff) * base_mult)
+		print((data.food.components.edible:GetSanity() * warlybuff) * base_mult)
+		print("sanity")
+	else
+		inst.components.sanity:DoDelta((data.food.components.edible:GetSanity() * warlybuff) * base_mult)
+		print((data.food.components.edible:GetSanity() * warlybuff) * base_mult)
+		print((data.food.components.edible:GetSanity() * warlybuff) * base_mult)
+		print("sanity")
+	end
+	
+end
+
+local function ForceOvertimeFoodEffects(inst)
+    inst.components.eater:SetAbsorptionModifiers(0, 1, 0)
+
+	inst:ListenForEvent("oneat", oneat)
+end
+
 local function AttachCurse(inst, target)
     if target.components.combat ~= nil then
         --target.components.combat.externaldamagemultipliers:SetModifier(inst, .75)    Effect Removed
 		target.vetcurse = true
 		ForceToTakeMoreDamage(target)
 		ForceToTakeMoreHunger(target)
+		ForceOvertimeFoodEffects(target)
 		target:AddTag("vetcurse")
         target:ListenForEvent("respawnfromghost", function()
 			target:DoTaskInTime(3, function(target) 

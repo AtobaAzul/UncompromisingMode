@@ -11,11 +11,11 @@ local function oneat(inst, food)
 			inst.components.hunger:DoDelta(hungerbonus)
 		end
 		
-		if inst.components.sanity and sanitybonus > 0 then
+		if not inst:HasTag("vetcurse") and  inst.components.sanity and sanitybonus > 0 then
 			inst.components.sanity:DoDelta(hungerbonus)
 		end
 		
-		if inst.components.health and healthbonus > 0 then
+		if not inst:HasTag("vetcurse") and  inst.components.health and healthbonus > 0 then
 			inst.components.health:DoDelta(hungerbonus, food.prefab)
 		end
 		
@@ -26,6 +26,8 @@ env.AddPrefabPostInit("warly", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
+	
+	inst:AddTag("warlybuffed")
 	
 	if inst.components.eater ~= nil then
 		inst.components.eater:SetOnEatFn(oneat)

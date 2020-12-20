@@ -25,12 +25,12 @@ local function GetVerb()
     return "TOUCH"
 end
 
-local function ToggleCurse(player)
-	if player.components.debuffable ~= nil then
-		if not player.vetcurse == true then
-			player.SoundEmitter:PlaySound("dontstarve/sanity/creature2/taunt")
-			inst.SoundEmitter:PlaySound("dontstarve/common/teleportato/teleportato_maxwelllaugh", "teleportato_laugh")
-			player.components.debuffable:AddDebuff("buff_vetcurse", "buff_vetcurse")
+local function ToggleCurse(inst, doer)
+	if doer.components.debuffable ~= nil then
+		if not doer.vetcurse == true then
+			inst.SoundEmitter:PlaySound("dontstarve/common/teleportato/teleportato_maxwelllaugh")
+			doer.SoundEmitter:PlaySound("dontstarve/sanity/creature2/taunt")
+			doer.components.debuffable:AddDebuff("buff_vetcurse", "buff_vetcurse")
 			doer:PushEvent("foodbuffattached", { buff = "ANNOUNCE_ATTACH_BUFF_VETCURSE", 1 })
 			local x, y, z = inst.Transform:GetWorldPosition()
 			local fx = SpawnPrefab("statue_transition_2")
@@ -75,13 +75,13 @@ local function OnTalk(inst)
 end
 
 local function onnear(inst, target)
-	if target ~= nil then
+	--[[if target ~= nil then
 		if target:HasTag("vetcurse") then
 			inst.components.talker:Say(GetString(inst.target, "VETERANCURSED"))
 		else
 			inst.components.talker:Say(GetString(inst.target, "VETERANCURSETAUNT"))
 		end
-	end
+	end]]
 	
 	inst:DoTaskInTime(0, StartRagtime)
 end
@@ -102,29 +102,21 @@ local function ToggleCursee(inst)
 			local yes_box = { text = "Ok", cb = acceptance }
 
 			local bpds = BigPopupDialogScreen(title, bodytext, { yes_box })
-			bpds.title:SetPosition(0, 85, 0)
+			bpds.title:SetPosition(0, 100, 0)
 			bpds.text:SetPosition(0, -15, 0)
 
 			TheFrontEnd:PushScreen(bpds)
 		else
 			local function start_curse(inst)
-				local player = inst.Cursee:value()
-				TheFrontEnd:PopScreen()
-				player.sg:GoToState("curse_controlled")
-				ToggleCurse(player)
-			end
-
-			local function reject_curse()
 				TheFrontEnd:PopScreen()
 			end
 
 			local title = "The Veterans Curse."
-			local bodytext = "- Receive more damage when attacked.\n - Hunger drains faster.\n - Gain the ability to wield cursed items, dropped by cerain bosses.\n - There is no way to lift this curse."
-			local yes_box = { text = "Yes", cb = start_curse }
-			local no_box = { text = "No", cb = reject_curse }
+			local bodytext = "- Receive more damage when attacked.\n - Hunger drains faster.\n - Gain the ability to wield cursed items, dropped by cerain bosses.\n - There is no way to lift this curse. \n - If you're up for the challenge, then come closer..."
+			local yes_box = { text = "Ok", cb = start_curse }
 
-			local bpds = BigPopupDialogScreen(title, bodytext, { yes_box, no_box })
-			bpds.title:SetPosition(0, 85, 0)
+			local bpds = BigPopupDialogScreen(title, bodytext, { yes_box })
+			bpds.title:SetPosition(0, 100, 0)
 			bpds.text:SetPosition(0, -15, 0)
 
 			TheFrontEnd:PushScreen(bpds)
@@ -133,10 +125,22 @@ local function ToggleCursee(inst)
 end
 
 local function OnActivate(inst, doer)
-	inst.valid_cursee_id = doer.userid
-	inst.Cursee:set_local(doer)
-	inst.Cursee:set(doer)
-    inst.components.activatable.inactive = true
+	if doer:HasTag("vetcurse") then
+		inst.valid_cursee_id = doer.userid
+		inst.Cursee:set_local(doer)
+		inst.Cursee:set(doer)
+	elseif doer:HasTag("vetcurse_warning") and not doer:HasTag("vetcurse") then
+		doer.sg:GoToState("curse_controlled")
+		ToggleCurse(inst, doer)
+		doer:RemoveTag("vetcurse_warning")
+	else
+		inst.valid_cursee_id = doer.userid
+		inst.Cursee:set_local(doer)
+		inst.Cursee:set(doer)
+		doer:AddTag("vetcurse_warning")
+	end
+	
+	inst.components.activatable.inactive = true
 end
 
 local function RegisterNetListeners(inst)
@@ -160,7 +164,7 @@ local function fn(Sim)
     anim:SetBank("veteranshrine")
     anim:PlayAnimation("idle", true)
 	
-    inst.GetActivateVerb = GetVerb
+    --inst.GetActivateVerb = GetVerb
 	
 	inst.Cursee = net_entity(inst.GUID, "SetCursee.plyr", "SetCurseedirty")
 
@@ -170,7 +174,7 @@ local function fn(Sim)
 	
 	inst.entity:SetPristine()
 	
-	inst:AddComponent("talker")        
+	--[[inst:AddComponent("talker")        
     inst.components.talker.colour = Vector3(252/255, 226/255, 219/255)
     inst.components.talker.offset = Vector3(0, -500, 0)
     inst.components.talker:MakeChatter()
@@ -179,17 +183,17 @@ local function fn(Sim)
 		inst.components.talker.fontsize = 30
     end
     inst.components.talker.font = TALKINGFONT_HERMIT
-    inst:AddComponent("npc_talker")
+    inst:AddComponent("npc_talker")]]
 
     if not TheWorld.ismastersim then
         return inst
     end
 	
-	
     inst:AddComponent("activatable")
     inst.components.activatable.OnActivate = OnActivate
     inst.components.activatable.inactive = true
 	inst.components.activatable.quickaction = false
+	--inst.components.activatable.standingaction = true
 	
     inst:AddComponent("inspectable")
     inst.components.inspectable:RecordViews()
