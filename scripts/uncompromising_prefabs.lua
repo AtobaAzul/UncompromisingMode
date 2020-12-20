@@ -86,6 +86,7 @@ return {
 	"swilson",
 	"seafoodpaella",
 	"veteranscurse",
+	"healthregenbuff_vetcurse",
 	"antlion_sinkhole_boat",
 	"riceplantspawner",
 	"critterlab_real",
