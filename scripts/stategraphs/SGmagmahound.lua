@@ -394,7 +394,7 @@ local states =
             if reanimating then
                 inst.AnimState:Pause()
             else
-                inst.AnimState:PlayAnimation("magmadeath")
+                inst.AnimState:PlayAnimation("death")
 				if inst.components.amphibiouscreature ~= nil and inst.components.amphibiouscreature.in_water then
 		            --inst.AnimState:PushAnimation("death_idle", true)
 				end			
@@ -404,7 +404,7 @@ local states =
             if inst:HasTag("clay") then
                 inst.sg.statemem.clay = true
                 HideEyeFX(inst)
-                inst.SoundEmitter:PlaySound("dontstarve/common/destroy_pot")
+                --inst.SoundEmitter:PlaySound("dontstarve/common/destroy_pot")
             end
             inst.SoundEmitter:PlaySound(inst.sounds.death)
             inst.components.lootdropper:DropLoot(inst:GetPosition())
