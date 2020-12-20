@@ -82,7 +82,7 @@ end
 local function OnAttached2(inst, target, followsymbol, followoffset, data)
     inst.entity:SetParent(target.entity)
     inst.Transform:SetPosition(0, 0, 0) --in case of loading
-    inst.task = inst:DoPeriodicTask(data ~= nil and data.duration or 1, OnTick, nil, target, data)
+    inst.task = inst:DoPeriodicTask(data ~= nil and data.duration or 1, OnTick2, nil, target, data)
 	inst.components.timer:StartTimer("regenover", data ~= nil and ((data.duration * 10) + 0.1) or 1)
     inst:ListenForEvent("death", function()
         inst.components.debuff:Stop()
