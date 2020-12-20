@@ -112,7 +112,7 @@ local function ToggleCursee(inst)
 			end
 
 			local title = "The Veterans Curse."
-			local bodytext = "- Receive more damage when attacked.\n - Hunger drains faster.\n - Gain the ability to wield cursed items, dropped by cerain bosses.\n - There is no way to lift this curse. \n - If you're up for the challenge, then come closer..."
+			local bodytext = "- Receive more damage when attacked, and Hunger drains faster.\n - Health and Sanity from foods is applied over time.\n - Gain the ability to wield cursed items, dropped by cerain bosses.\n - There is no way to lift this curse. \n - If you're up for the challenge, then come closer..."
 			local yes_box = { text = "Ok", cb = start_curse }
 
 			local bpds = BigPopupDialogScreen(title, bodytext, { yes_box })
