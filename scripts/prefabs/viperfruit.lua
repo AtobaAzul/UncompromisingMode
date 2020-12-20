@@ -32,7 +32,6 @@ local function oneatenfn(inst, eater)
 	if eater.components.debuffable ~= nil and eater.components.debuffable:IsEnabled() and
                 not (eater.components.health ~= nil and eater.components.health:IsDead()) and
                 not eater:HasTag("playerghost") then
-                eater.components.debuffable:AddDebuff("buff_lesserelectricattack", "buff_lesserelectricattack")
 				create_light(eater, "wormlight_light")
 	end
 end
@@ -47,8 +46,8 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("zaspberry")
-    inst.AnimState:SetBuild("zaspberry")
+    inst.AnimState:SetBank("viperfruit")
+    inst.AnimState:SetBuild("viperfruit")
     inst.AnimState:PlayAnimation("idle")
 
     MakeInventoryFloatable(inst)
@@ -56,7 +55,7 @@ local function fn()
 	inst.Light:SetFalloff(0.7)
     inst.Light:SetIntensity(.5)
     inst.Light:SetRadius(0.5)
-    inst.Light:SetColour(237/255, 237/255, 209/255)
+    inst.Light:SetColour(237/255, 100/255, 100/255)
     inst.Light:Enable(true)
 	
     inst.entity:SetPristine()
@@ -71,7 +70,7 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/zaspberry.xml"
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/viperfruit.xml"
     inst:AddComponent("edible")
     inst.components.edible.healthvalue = 20
     inst.components.edible.hungervalue = 25
@@ -88,4 +87,4 @@ local function fn()
     return inst
 end
 
-return Prefab("zaspberry", fn, assets)
+return Prefab("viperfruit", fn, assets)
