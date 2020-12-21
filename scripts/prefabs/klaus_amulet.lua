@@ -64,8 +64,7 @@ end
 
 local function onequip_blue(inst, owner)
 	if not owner:HasTag("vetcurse") then
-		owner.AnimState:OverrideSymbol("swap_body", "torso_amulets_klaus", "redamulet")
-		inst:DoTaskInTime(1, function(inst, owner)
+		inst:DoTaskInTime(0, function(inst, owner)
 			local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner
 			owner.components.inventory:Unequip(EQUIPSLOTS.BODY, false)
 			owner.components.inventory:DropItem(inst)
