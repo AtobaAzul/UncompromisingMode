@@ -39,7 +39,7 @@ local function DoubleSlap(owner)
 		owner.sg:GoToState("attack")
 		print(target)
 		target:DoTaskInTime(0.3, function(target, owner, equip) 
-			if target ~= nil and owner:IsNear(target, (range + 0.1)) then
+			if target ~= nil and owner.sg:HasStateTag("attack") and owner:IsNear(target, (range + 0.1)) then
 				target.components.combat:GetAttacked(owner, damage / 2, equip) 
 			end
 		end, owner)
