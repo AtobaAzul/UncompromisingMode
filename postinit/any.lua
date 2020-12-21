@@ -41,11 +41,39 @@ local IMPASSABLES = {
 	["spiderden_2"] = true,
 	["spiderden_3"] = true,
 }
-
+local IMPASSABLES_STATUES = {
+    ["chesspiece_pawn"] = true,
+    ["chesspiece_rook"] = true,
+    ["chesspiece_knight"] = true,
+    ["chesspiece_bishop"] = true,
+    ["chesspiece_muse"] = true,
+    ["chesspiece_formal"] = true,
+    ["chesspiece_deerclops"] = true,
+    ["chesspiece_bearger"] = true,
+    ["chesspiece_moosegoose"] = true,
+    ["chesspiece_dragonfly"] = true,
+    ["chesspiece_clayhound"] = true,
+    ["chesspiece_claywarg"] = true,
+    ["chesspiece_butterfly"] = true,
+    ["chesspiece_anchor"] = true,
+    ["chesspiece_moon"] = true,
+	["chesspiece_minotaur"] = true,
+	["chesspiece_toadstool"] = true,
+	["chesspiece_beequeen"] = true,
+	["chesspiece_klaus"] = true,
+	["chesspiece_antlion"] = true,
+	["chesspiece_ancientFuelweaver"] = true,
+	["chesspiece_malbatross"] = true,
+	["chesspiece_crabking"] = true,
+}
 env.AddPrefabPostInitAny(function(inst)
     if IMPASSABLES[inst.prefab] and inst.Physics ~= nil then
         RemovePhysicsColliders(inst)
     end
+    if IMPASSABLES_STATUES[inst.prefab] and inst.Physics ~= nil and inst.components.heavyobstaclephysics ~= nil then
+	RemovePhysicsColliders(inst)
+	inst.components.heavyobstaclephysics:SetRadius(0)
+	end
     if TheWorld and TheWorld.shard == inst then
         inst:AddComponent("shard_acidmushrooms")
     end
