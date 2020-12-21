@@ -135,6 +135,8 @@ Assets = {
 	Asset("ANIM", "anim/slips_build.zip"),
 	Asset("ANIM", "anim/rat_whip.zip"),
 	Asset("ANIM", "anim/swap_rat_whip.zip"),
+	Asset("ANIM", "anim/torso_amulets_klaus.zip"),
+	Asset("ANIM", "anim/amulet_klaus.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),
@@ -312,6 +314,8 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/ancient_amulet_red.tex"),
 	Asset("ATLAS", "images/inventoryimages/rat_whip.xml"),
 	Asset("IMAGE", "images/inventoryimages/rat_whip.tex"),
+	Asset("IMAGE", "images/inventoryimages/klaus_amulet.tex"),
+	Asset("ATLAS", "images/inventoryimages/klaus_amulet.xml"),
 	
 	Asset("ANIM", "anim/armor_steelsweater.zip"),
 	Asset("ANIM", "anim/steelsweater.zip"),
