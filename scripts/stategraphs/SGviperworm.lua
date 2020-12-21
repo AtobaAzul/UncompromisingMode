@@ -62,40 +62,10 @@ local events =
     EventHandler("dolure", function(inst)
         inst.sg:GoToState("lure_enter")
     end),
-    EventHandler("shadowchannelers", function(inst)
-        if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) then
-            inst.sg:GoToState("summon")
-        end
-    end),
 }
 
 local states =
 {	
-    State{
-        name = "summon",
-        tags = { "busy", "summoning" },
-
-        onenter = function(inst)
-            inst.components.locomotor:StopMoving()
-            inst.AnimState:PlayAnimation("taunt")
-            inst.sg.statemem.count = 2
-            --V2C: don't trigger attack cooldown
-            --inst.components.combat:StartAttack()
-            inst:StartAbility("channelers")
-        end,
-
-        events =
-        {
-            EventHandler("animover", function(inst)
-                if inst.AnimState:AnimDone() then
-                    inst:SpawnShadows()
-					inst:StartAbility("channelers")
-                    --inst:BattleChatter("summon_channelers")
-                    inst.sg:GoToState("idle", inst.sg.statemem.count)
-                end
-            end),
-        },
-    },
     State{
         name = "idle_enter",
         tags = { "idle", "invisible", "dirt" },
@@ -294,6 +264,9 @@ local states =
         onenter = function(inst)
 		if not inst:HasTag("viperling") then
             inst.Physics:Stop()
+				if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
+				inst.ViperlingBelch(inst,inst.components.combat.target)
+				end
 			else
 			inst.components.locomotor:StopMoving()
 		end
@@ -313,7 +286,6 @@ local states =
             TimeEvent(25 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySound("dontstarve/creatures/worm/bite")
                 inst.components.combat:DoAttack()
-				local x, y, z = inst.Transform:GetWorldPosition()
             end),
             TimeEvent(40 * FRAMES, function(inst) 
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/worm/retract")
@@ -324,6 +296,12 @@ local states =
         events =
         {
             EventHandler("animover", function(inst)
+				if inst:HasTag("viperling") then
+				inst.attacks = inst.attacks + 1
+				if inst.attacks >= 2 then
+				inst.ShadowDespawn(inst)
+				end
+				end
                 inst.sg:GoToState("idle")
             end),
         },
@@ -337,7 +315,6 @@ local states =
             inst.AnimState:PlayAnimation("death")
 			if not inst:HasTag("viperling") then
             RemovePhysicsColliders(inst)
-			inst:DespawnShadows()
             inst.components.lootdropper:DropLoot(inst:GetPosition())
 			end
         end,
