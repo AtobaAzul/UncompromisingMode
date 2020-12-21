@@ -179,4 +179,5 @@ return {
 	"viperworm",
 	"viperfruit",
 	"viperjam",
+	"viperprojectile",
 }

@@ -12,7 +12,7 @@
     Spawn a dirt mound that must be dug up to get loot?
 ]]
 
-
+local easing = require("easing")
 local assets =
 {
 }
@@ -143,8 +143,8 @@ local function displaynamefnviperling(inst)
     return
 
         STRINGS.NAMES[
-            (inst:HasTag("lure") and "WORM_PLANT") or
-            (inst:HasTag("dirt") and "WORM_DIRT") or
+            --(inst:HasTag("lure") and "WORM_PLANT") or
+            --(inst:HasTag("dirt") and "WORM_DIRT") or
             "VIPERLING"
         ]
 
@@ -233,7 +233,12 @@ local function CustomOnHaunt(inst, haunter)
     end
     return false
 end
-
+local function ShadowDespawn(inst)
+local x,y,z = inst.Transform:GetWorldPosition()
+local despawn = SpawnPrefab("shadow_despawn")
+despawn.Transform:SetPosition(x,y,z)
+inst:Remove()
+end
 local function fnviperling()
     local inst = CreateEntity()
 
@@ -258,6 +263,8 @@ local function fnviperling()
     inst:AddTag("worm")
 	inst:AddTag("viperling")
     inst:AddTag("cavedweller")
+	inst:AddTag("shadowcreature")
+	inst:AddTag("shadow")
 	inst.AnimState:SetMultColour(0, 0, 0, 0.5)
 
     inst._lightframe = net_smallbyte(inst.GUID, "worm._lightframe", "lightdirty")
@@ -322,100 +329,46 @@ local function fnviperling()
 
     inst.turnonlight = turnonlight
     inst.turnofflight = turnofflight
-
+	inst.attacks = 0
     inst:SetStateGraph("SGviperworm")
     inst:SetBrain(viperlingbrain)
-	
+	inst.ShadowDespawn = ShadowDespawn
+	inst:DoTaskInTime(10,ShadowDespawn)
 	
 
     return inst
 end
 
---Ripped from AFW
-local function ResetAbilityCooldown(inst, ability)
-    local id = ability.."_cd"
-    local remaining = TUNING["STALKER_"..string.upper(id)] - (inst.components.timer:GetTimeElapsed(id) or TUNING.STALKER_ABILITY_RETRY_CD)
-    inst.components.timer:StopTimer(id)
-    if remaining > 0 then
-        inst.components.timer:StartTimer(id, remaining)
-    end
-end	
-local function StartAbility(inst, ability)
-    inst.components.timer:StartTimer(ability.."_cd", TUNING.STALKER_ABILITY_RETRY_CD)
+local function ViperlingBelch(inst, target)
+	if target ~= nil then
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local projectile = SpawnPrefab("viperprojectile")
+    projectile.Transform:SetPosition(x, y, z)
+    local a, b, c = target.Transform:GetWorldPosition()
+	local targetpos = target:GetPosition()
+	local theta = inst.Transform:GetRotation()
+	theta = theta*DEGREES
+	--if (c-z) > 0 then
+	targetpos.x = targetpos.x + 15*math.cos(theta)
+	--else
+	--targetpos.x = targetpos.x + 5*math.sin(-theta)
+	--end
+	--if (a-x) > 0 then
+	targetpos.z = targetpos.z - 15*math.sin(theta)
+	--else
+	--targetpos.z = targetpos.z + 5*math.cos(-theta)
+	--end
+	local rangesq = ((a-x)^2) + ((c-z)^2)
+    local maxrange = 15
+    local bigNum = 10
+    local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
+	projectile:AddTag("canthit")
+	--projectile.components.wateryprotection.addwetness = TUNING.WATERBALLOON_ADD_WETNESS/2
+    projectile.components.complexprojectile:SetHorizontalSpeed(speed+math.random(4,9))
+    projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+	end
 end
-local function OnSoldiersChanged(inst)
 
-inst.components.timer:StopTimer("channelers_cd")
-inst.components.timer:StartTimer("channelers_cd", TUNING.STALKER_CHANNELERS_CD)
- 
-end
-local CHANNELER_SPAWN_PERIOD = 0.5
-local function DoSpawnShadow(inst)
-local CHANNELER_SPAWN_RADIUS = 8.7
-    if inst.components.health:IsDead() then
-        inst.channelertask = nil
-        inst.soldierparams = nil
-        return
-    end
-
-    local x = inst.soldierparams.x + CHANNELER_SPAWN_RADIUS * math.cos(inst.soldierparams.angle)
-    local z = inst.soldierparams.z + CHANNELER_SPAWN_RADIUS * math.sin(inst.soldierparams.angle)
-    if TheWorld.Map:IsAboveGroundAtPoint(x, 0, z) then
-        local channeler = SpawnPrefab("viperling")
-		local target = inst.components.combat.target
-		if target ~= nil and target:HasTag("player") and channeler.components.combat ~= nil then
-		channeler.components.combat:SuggestTarget(inst.components.combat.target)
-		end
-
-        channeler:AddComponent("follower")
-        channeler.components.follower:SetLeader(inst)
-        channeler.Transform:SetPosition(x, 0, z)
-		inst.soldierparams.count = inst.soldierparams.count - 1
-        --channeler:ForceFacePoint(Vector3(inst.soldierparams.x, 0, inst.soldierparams.z))
-        inst.components.commander:AddSoldier(channeler)
-	else
-	CHANNELER_SPAWN_RADIUS = CHANNELER_SPAWN_RADIUS/2
-    end
-
-    if inst.soldierparams.count > 0 then
-        inst.soldierparams.angle = inst.soldierparams.angle + inst.soldierparams.delta
-        inst.channelertask = inst:DoTaskInTime(CHANNELER_SPAWN_PERIOD, DoSpawnShadow)
-    else
-        inst.channelertask = nil
-        inst.soldierparams = nil
-    end
-end
-local function SpawnShadows(inst)
-    ResetAbilityCooldown(inst, "channelers")
-	
-    local count = 4
-    if count <= 0 or inst.channelertask ~= nil then
-        return
-    end
-
-    local x, y, z = (inst.components.entitytracker:GetEntity("stargate") or inst).Transform:GetWorldPosition()
-    inst.soldierparams =
-    {
-        x = x,
-        z = z,
-        angle = math.random() * 2 * PI,
-        delta = -2 * PI / count,
-        count = count,
-    }
-    DoSpawnShadow(inst)
-end
-local function DespawnShadows(inst)
-    if inst.channelertask ~= nil then
-        inst.channelertask:Cancel()
-        inst.channelertask = nil
-        inst.soldierparams = nil
-    end
-    for i, v in ipairs(inst.components.commander:GetAllSoldiers()) do
-        if not v.components.health:IsDead() then
-            v.components.health:Kill()
-        end
-    end
-end	
 local function fn()
     local inst = CreateEntity()
 
@@ -515,7 +468,7 @@ local function fn()
 
     inst:SetStateGraph("SGviperworm")
     inst:SetBrain(brain)
-	
+	inst.ViperlingBelch = ViperlingBelch
 	inst:ListenForEvent("freeze", function()
 		inst:turnonlight()
 	end)    
@@ -523,11 +476,6 @@ local function fn()
 	inst:ListenForEvent("unfreeze", function() 
 		inst:turnofflight()
 	end)
-    inst:ListenForEvent("soldierschanged", OnSoldiersChanged)
-    inst.SpawnShadows = SpawnShadows
-    inst.DespawnShadows = DespawnShadows
-	inst.StartAbility = StartAbility
-    inst.components.timer:StartTimer("channelers_cd", TUNING.STALKER_FIRST_CHANNELERS_CD)   	
     return inst
 end
 

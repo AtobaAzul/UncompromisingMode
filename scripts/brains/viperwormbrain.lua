@@ -86,23 +86,11 @@ local function EatFoodAction(inst)
         end
     end
 end
-local function ShouldSummonChannelers(self)
-    return  self.inst.components.commander:GetNumSoldiers() < 2
-        and not self.inst.components.timer:TimerExists("channelers_cd")
-end
-local function ShouldUseAbility(self)
-    self.abilityname = self.inst.components.combat:HasTarget() and ((ShouldSummonChannelers(self) and "shadowchannelers")) or nil
-    return self.abilityname ~= nil
-end
+
 function ViperWormBrain:OnStart()
     local root = PriorityNode(
     {
-		WhileNode(function() return ShouldUseAbility(self) end, "Ability",
-				ActionNode(function()
-                    self.inst:PushEvent(self.abilityname, self.abilitydata)
-                    self.abilityname = nil
-                    self.abilitydata = nil
-                end)),
+
         WhileNode(function() return self.inst.sg:HasStateTag("lure") end, "Lure", StandStill(self.inst)),
 
         WhileNode(function() return self.inst.components.knownlocations:GetLocation("home") ~= nil end, "Has Home",
