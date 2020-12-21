@@ -98,7 +98,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 		OVERSTUFFED = "Oooh... I shouldn't eat more!",
     }
     ANNOUNCE.CURSED_ITEM_EQUIP = "Ow, my hand!"
-	DESCRIBE.SCREECHER_TRINKET = "Lets investigate further."
+	DESCRIBE.SCREECHER_TRINKET = "Great, just what I needed."
 	
 	DESCRIBE.SAND = "A handy pile of pocket sand."
 	DESCRIBE.SANDHILL = "You better stay out of my shoes."
@@ -133,8 +133,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.AIR_CONDITIONER = "Smells great!"
 	
 	DESCRIBE.SCORPION = "That better not be venomous."
-	DESCRIBE.SCORPIONCARAPACE = "I do not want to eat this."
-	DESCRIBE.SCORPIONCARAPACECOOKED = "Its shell is still hard."
+	DESCRIBE.SCORPIONCARAPACE = "I'll pass."
+	DESCRIBE.SCORPIONCARAPACECOOKED = "The shell is still pretty hard."
 	DESCRIBE.HARDSHELLTACOS = "Must be Tuesday."
 	
 	DESCRIBE.SKELETONMEAT = "Flesh is flesh. Where do I draw the line?"
@@ -154,8 +154,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.SEAFOODPAELLA = "Clears the sinuses."
 	
 	DESCRIBE.STUMPLING = "He's small, but he's angry!"
-	DESCRIBE.BUGZAPPER = "Now I'll show those pesky bugs."
-	DESCRIBE.MOON_TEAR = "I think the moon is upset at its missing piece. Let's keep this safe."
+	DESCRIBE.BUGZAPPER = "Now I'll show those pesky pests!"
+	DESCRIBE.MOON_TEAR = "I think the moon is upset at it's missing piece. Let's keep this safe."
 	DESCRIBE.SHADOW_TELEPORTER = "Hey! Let go of that gem!"
 	DESCRIBE.POLLENMITEDEN = "Science says it mite be dangerous."
     DESCRIBE.POLLENMITES = "I mite want to keep my distance."
