@@ -266,6 +266,7 @@ local function SpawnDebris(inst,chopper,loottable)
         if debris ~= nil then
             debris.entity:SetCanSleep(false)
             debris.persists = false
+			debris:AddTag("quakedebris")
 			
 
             if debris.components.inventoryitem ~= nil and debris.components.inventoryitem.canbepickedup then

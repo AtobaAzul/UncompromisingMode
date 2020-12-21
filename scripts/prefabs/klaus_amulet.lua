@@ -4,19 +4,62 @@ local assets =
     Asset("ANIM", "anim/torso_amulets.zip"),
 }
 
-local function ResetSpeed(inst)
-    inst.components.equippable.walkspeedmult = TUNING.PIGGYBACK_SPEED_MULT
+local function OnCooldown(inst)
+    inst._cdtask = nil
 end
 
-local function DoubleSlap(inst)
-    inst.components.equippable.walkspeedmult = 2
+local function fuelme(inst)
+	if inst.components.fueled:GetPercent() < 1 then
+		inst.components.fueled:DoDelta(1)
+			
+		if inst.components.fueled:GetPercent() >= 1 then
+			if inst.fueltask ~= nil then
+				inst.fueltask:Cancel()
+				inst.fueltask = nil
+			end
+		end
+	else
+		if inst.fueltask ~= nil then
+			inst.fueltask:Cancel()
+			inst.fueltask = nil
+		end
+	end
+end
+
+local function DoubleSlap(owner)
+	local target = owner.components.combat ~= nil and owner.components.combat.target
+	local equip = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+	--owner.components.combat:SetTarget(target)
 	
-	if inst.task ~= nil then
-		inst.task:Cancel()
-		inst.task = nil
+	if not owner.components.rider:IsRiding() and equip ~= nil and equip.components.weapon ~= nil and not (equip.components.projectile ~= nil or equip:HasTag("rangedweapon")) and target ~= nil then
+		local damage = equip.components.weapon ~= nil and equip.components.weapon.damage
+		local range = owner.components.combat:GetAttackRange() or 0
+		--owner.components.combat:StartAttack()
+        owner.components.locomotor:StopMoving()
+		owner.sg:GoToState("attack")
+		print(target)
+		target:DoTaskInTime(0.3, function(target, owner, equip) 
+			if target ~= nil and owner:IsNear(target, (range + 0.1)) then
+				target.components.combat:GetAttacked(owner, damage / 2, equip) 
+			end
+		end, owner)
+	end
+end
+
+local function Attacked(owner, data, inst)
+	if inst._cdtask == nil then
+        inst._cdtask = inst:DoTaskInTime(.3, OnCooldown)
+		
+		inst.SoundEmitter:PlaySound("dontstarve/creatures/together/klaus/lock_break")
+		
+		if inst.components.fueled:GetPercent() > 0 then
+			inst.components.fueled:DoDelta(-20)
+		end
 	end
 	
-	inst.task = inst:DoTaskInTime(3, ResetSpeed)
+	if inst.fueltask == nil then
+		inst.fueltask = inst:DoPeriodicTask(1, fuelme)
+	end
 end
 
 local function onequip_blue(inst, owner)
@@ -42,21 +85,31 @@ local function onequip_blue(inst, owner)
 		end)
 	else
 		owner.AnimState:OverrideSymbol("swap_body", "torso_amulets_klaus", "redamulet")
-		--[[inst:ListenForEvent("attacked", function(inst)
-			inst.components.equippable.walkspeedmult = 2
-			
-			if inst.task ~= nil then
-				inst.task:Cancel()
-				inst.task = nil
-			end
-			
-			inst.task = inst:DoTaskInTime(3, ResetSpeed)
-		end, owner)]]
+		owner:ListenForEvent("onattackother", DoubleSlap)
+		inst:ListenForEvent("attacked", inst._attacked, owner)
+
+		if inst.fueltask == nil then
+			inst.fueltask = inst:DoPeriodicTask(1, fuelme)
+		end
 	end
 end
 
 local function onunequip_blue(inst, owner)
     owner.AnimState:ClearOverrideSymbol("swap_body")
+
+    owner:RemoveEventCallback("onattackother", DoubleSlap)
+	inst:RemoveEventCallback("attacked", inst._attacked, owner)
+	
+	if inst.fueltask == nil then
+		inst.fueltask = inst:DoPeriodicTask(1, fuelme)
+	end
+end
+
+local function onfuelchange(newsection, oldsection, inst)
+    if newsection <= 0 then
+		inst.SoundEmitter:PlaySound("dontstarve/creatures/together/klaus/lock_break")
+        inst:Remove()
+    end
 end
 
 local function fn()
@@ -88,12 +141,24 @@ local function fn()
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BODY
     inst.components.equippable.walkspeedmult = TUNING.PIGGYBACK_SPEED_MULT
+	
+    inst:AddComponent("fueled")
+    inst.components.fueled:SetSectionCallback(onfuelchange)
+    inst.components.fueled:InitializeFuelLevel(100)
+    inst.components.fueled:SetDepletedFn(inst.Remove)
+	inst.components.fueled.accepting = false
 
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/klaus_amulet.xml"
 	
     inst.components.equippable:SetOnEquip(onequip_blue)
     inst.components.equippable:SetOnUnequip(onunequip_blue)
+	
+	if inst.fueltask == nil then
+		inst.fueltask = inst:DoPeriodicTask(1, fuelme)
+	end
+	
+    inst._attacked = function(owner, data) Attacked(owner, data, inst) end
 
     return inst
 end
