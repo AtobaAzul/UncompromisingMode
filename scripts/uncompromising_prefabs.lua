@@ -176,6 +176,7 @@ return {
 	"steel_sweater",
 	"rat_hat",
 	"rat_whip",
+	"bearger_mask",
 	"rneskeleton",
 	"snapdragon_fertilizer",
 	"viperworm",
