@@ -105,9 +105,9 @@ local states = {
         timeline =
         {
             --TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/stalker/attack1_pbaoe_pre") end),
-            TimeEvent(15 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/leif/foley") end),
-			TimeEvent(18 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/leif/footstep") end),
-            TimeEvent(40 * FRAMES, function(inst)
+            TimeEvent(25 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/leif/foley") end),
+			TimeEvent(34 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/leif/footstep") end),
+            TimeEvent(35 * FRAMES, function(inst)
                 inst.components.combat:DoAreaAttack(inst, 3.5, nil, nil, nil, { "INLIMBO", "epic", "notarget", "invisible", "noattack", "flight", "playerghost", "shadow", "shadowchesspiece", "shadowcreature" })
                 if inst.sg.statemem.target ~= nil then
                     inst:SummonStumplings(inst.sg.statemem.target)
