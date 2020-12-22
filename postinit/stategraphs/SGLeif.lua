@@ -47,7 +47,7 @@ local states = {
 
         onenter = function(inst, target)
             inst.components.locomotor:StopMoving()
-            inst.AnimState:PlayAnimation("root")
+            inst.AnimState:PlayAnimation("special")
             --V2C: don't trigger attack cooldown
             --inst.components.combat:StartAttack()
 			inst.sg.statemem.target = target
@@ -58,9 +58,9 @@ local states = {
         timeline =
         {
             --TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/stalker/attack1_pbaoe_pre") end),
-            TimeEvent(15 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/leif/foley") end),
-			TimeEvent(18 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/leif/footstep") end),
-            TimeEvent(20 * FRAMES, function(inst)
+            TimeEvent(25 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/leif/foley") end),
+			TimeEvent(34 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/leif/footstep") end),
+            TimeEvent(35 * FRAMES, function(inst)
                 inst.components.combat:DoAreaAttack(inst, 3.5, nil, nil, nil, { "INLIMBO", "epic", "stumpling", "notarget", "invisible", "noattack", "flight", "playerghost", "shadow", "shadowchesspiece", "shadowcreature" })
                 if inst.sg.statemem.target ~= nil then
                     inst:SpawnSnare(inst.sg.statemem.target)
@@ -68,7 +68,7 @@ local states = {
                 end
             end),
 			
-            TimeEvent(39 * FRAMES, function(inst)
+            TimeEvent(50 * FRAMES, function(inst)
 						inst:DoTaskInTime(800*FRAMES, function(inst) 
 						inst.rootready = true
 						inst.components.combat:SetRange(3*inst.oldrange)
@@ -94,7 +94,7 @@ local states = {
 
         onenter = function(inst, target)
             inst.components.locomotor:StopMoving()
-            inst.AnimState:PlayAnimation("root")
+            inst.AnimState:PlayAnimation("special")
             --V2C: don't trigger attack cooldown
             --inst.components.combat:StartAttack()
 			inst.sg.statemem.target = target
@@ -107,7 +107,7 @@ local states = {
             --TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/stalker/attack1_pbaoe_pre") end),
             TimeEvent(15 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/leif/foley") end),
 			TimeEvent(18 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/leif/footstep") end),
-            TimeEvent(20 * FRAMES, function(inst)
+            TimeEvent(40 * FRAMES, function(inst)
                 inst.components.combat:DoAreaAttack(inst, 3.5, nil, nil, nil, { "INLIMBO", "epic", "notarget", "invisible", "noattack", "flight", "playerghost", "shadow", "shadowchesspiece", "shadowcreature" })
                 if inst.sg.statemem.target ~= nil then
                     inst:SummonStumplings(inst.sg.statemem.target)
@@ -115,7 +115,7 @@ local states = {
                 end
             end),
 			
-            TimeEvent(39 * FRAMES, function(inst)
+            TimeEvent(50 * FRAMES, function(inst)
 						inst:DoTaskInTime(800*FRAMES, function(inst) 
 						inst.rootready = true
 						inst.components.combat:SetRange(3*inst.oldrange)
