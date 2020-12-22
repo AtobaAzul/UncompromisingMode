@@ -207,6 +207,231 @@ State{
         },        
                
     },
+	
+	
+	State{
+        name = "force_klaus_attack",
+        tags = { "busy", "attack", "notalking", "abouttoattack", "autopredict" },
+
+        onenter = function(inst)
+            --[[if inst.components.combat:InCooldown() then
+                inst.sg:RemoveStateTag("abouttoattack")
+                inst:ClearBufferedAction()
+                inst.sg:GoToState("idle", true)
+                return
+            end]]
+            local buffaction = inst:GetBufferedAction()
+            local target = buffaction ~= nil and buffaction.target or nil
+            local equip = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+            inst.components.combat:SetTarget(target)
+            inst.components.combat:StartAttack()
+            inst.components.locomotor:Stop()
+            local cooldown = inst.components.combat.min_attack_period + .5 * FRAMES
+            if inst.components.rider:IsRiding() then
+                if equip ~= nil and (equip.components.projectile ~= nil or equip:HasTag("rangedweapon")) then
+                    inst.AnimState:PlayAnimation("player_atk_pre")
+                    inst.AnimState:PushAnimation("player_atk", false)
+                    if (equip.projectiledelay or 0) > 0 then
+                        --V2C: Projectiles don't show in the initial delayed frames so that
+                        --     when they do appear, they're already in front of the player.
+                        --     Start the attack early to keep animation in sync.
+                        inst.sg.statemem.projectiledelay = 8 * FRAMES - equip.projectiledelay
+                        if inst.sg.statemem.projectiledelay > FRAMES then
+                            inst.sg.statemem.projectilesound =
+                                (equip:HasTag("icestaff") and "dontstarve/wilson/attack_icestaff") or
+                                (equip:HasTag("firestaff") and "dontstarve/wilson/attack_firestaff") or
+                                "dontstarve/wilson/attack_weapon"
+                        elseif inst.sg.statemem.projectiledelay <= 0 then
+                            inst.sg.statemem.projectiledelay = nil
+                        end
+                    end
+                    if inst.sg.statemem.projectilesound == nil then
+                        inst.SoundEmitter:PlaySound(
+                            (equip:HasTag("icestaff") and "dontstarve/wilson/attack_icestaff") or
+                            (equip:HasTag("firestaff") and "dontstarve/wilson/attack_firestaff") or
+                            "dontstarve/wilson/attack_weapon",
+                            nil, nil, true
+                        )
+                    end
+                    cooldown = math.max(cooldown, 13 * FRAMES)
+                else
+                    inst.AnimState:PlayAnimation("atk_pre")
+                    inst.AnimState:PushAnimation("atk", false)
+                    DoMountSound(inst, inst.components.rider:GetMount(), "angry", true)
+                    cooldown = math.max(cooldown, 16 * FRAMES)
+                end
+            elseif equip ~= nil and equip:HasTag("whip") then
+                inst.AnimState:PlayAnimation("whip_pre")
+                inst.AnimState:PushAnimation("whip", false)
+                inst.sg.statemem.iswhip = true
+                inst.SoundEmitter:PlaySound("dontstarve/common/whip_large", nil, nil, true)
+                cooldown = math.max(cooldown, 17 * FRAMES)
+            elseif equip ~= nil and equip:HasTag("book") then
+                inst.AnimState:PlayAnimation("attack_book")
+                inst.sg.statemem.isbook = true
+                inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_whoosh", nil, nil, true)
+                cooldown = math.max(cooldown, 19 * FRAMES)
+            elseif equip ~= nil and equip:HasTag("chop_attack") and inst:HasTag("woodcutter") then
+                inst.AnimState:PlayAnimation(inst.AnimState:IsCurrentAnimation("woodie_chop_loop") and inst.AnimState:GetCurrentAnimationTime() < 7.1 * FRAMES and "woodie_chop_atk_pre" or "woodie_chop_pre")
+                inst.AnimState:PushAnimation("woodie_chop_loop", false)
+                inst.sg.statemem.ischop = true
+                cooldown = math.max(cooldown, 11 * FRAMES)
+            elseif equip ~= nil and equip.components.weapon ~= nil and not equip:HasTag("punch") then
+                inst.AnimState:PlayAnimation("atk_pre")
+                inst.AnimState:PushAnimation("atk", false)
+                if (equip.projectiledelay or 0) > 0 then
+                    --V2C: Projectiles don't show in the initial delayed frames so that
+                    --     when they do appear, they're already in front of the player.
+                    --     Start the attack early to keep animation in sync.
+                    inst.sg.statemem.projectiledelay = 8 * FRAMES - equip.projectiledelay
+                    if inst.sg.statemem.projectiledelay > FRAMES then
+                        inst.sg.statemem.projectilesound =
+                            (equip:HasTag("icestaff") and "dontstarve/wilson/attack_icestaff") or
+                            (equip:HasTag("firestaff") and "dontstarve/wilson/attack_firestaff") or
+                            "dontstarve/wilson/attack_weapon"
+                    elseif inst.sg.statemem.projectiledelay <= 0 then
+                        inst.sg.statemem.projectiledelay = nil
+                    end
+                end
+                if inst.sg.statemem.projectilesound == nil then
+                    inst.SoundEmitter:PlaySound(
+                        (equip:HasTag("icestaff") and "dontstarve/wilson/attack_icestaff") or
+                        (equip:HasTag("shadow") and "dontstarve/wilson/attack_nightsword") or
+                        (equip:HasTag("firestaff") and "dontstarve/wilson/attack_firestaff") or
+                        "dontstarve/wilson/attack_weapon",
+                        nil, nil, true
+                    )
+                end
+                cooldown = math.max(cooldown, 13 * FRAMES)
+            elseif equip ~= nil and (equip:HasTag("light") or equip:HasTag("nopunch")) then
+                inst.AnimState:PlayAnimation("atk_pre")
+                inst.AnimState:PushAnimation("atk", false)
+                inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_weapon", nil, nil, true)
+                cooldown = math.max(cooldown, 13 * FRAMES)
+            elseif inst:HasTag("beaver") then
+                inst.sg.statemem.isbeaver = true
+                inst.AnimState:PlayAnimation("atk_pre")
+                inst.AnimState:PushAnimation("atk", false)
+                inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_whoosh", nil, nil, true)
+                cooldown = math.max(cooldown, 13 * FRAMES)
+            elseif inst:HasTag("weremoose") then
+                inst.sg.statemem.ismoose = true
+                inst.AnimState:PlayAnimation(
+                    ((inst.AnimState:IsCurrentAnimation("punch_a") or inst.AnimState:IsCurrentAnimation("punch_c")) and "punch_b") or
+                    (inst.AnimState:IsCurrentAnimation("punch_b") and "punch_c") or
+                    "punch_a"
+                )
+                cooldown = math.max(cooldown, 15 * FRAMES)
+            else
+                inst.AnimState:PlayAnimation("punch")
+                inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_whoosh", nil, nil, true)
+                cooldown = math.max(cooldown, 24 * FRAMES)
+            end
+
+            inst.sg:SetTimeout(cooldown)
+
+            if target ~= nil then
+                inst.components.combat:BattleCry()
+                if target:IsValid() then
+                    inst:FacePoint(target:GetPosition())
+                    inst.sg.statemem.attacktarget = target
+                end
+            end
+        end,
+
+        onupdate = function(inst, dt)
+            if (inst.sg.statemem.projectiledelay or 0) > 0 then
+                inst.sg.statemem.projectiledelay = inst.sg.statemem.projectiledelay - dt
+                if inst.sg.statemem.projectiledelay <= FRAMES then
+                    if inst.sg.statemem.projectilesound ~= nil then
+                        inst.SoundEmitter:PlaySound(inst.sg.statemem.projectilesound, nil, nil, true)
+                        inst.sg.statemem.projectilesound = nil
+                    end
+                    if inst.sg.statemem.projectiledelay <= 0 then
+                        inst:PerformBufferedAction()
+                        inst.sg:RemoveStateTag("abouttoattack")
+                    end
+                end
+            end
+        end,
+
+        timeline =
+        {
+            TimeEvent(5 * FRAMES, function(inst)
+                if inst.sg.statemem.ismoose then
+                    inst.SoundEmitter:PlaySound("dontstarve/characters/woodie/moose/punch", nil, nil, true)
+                end
+            end),
+            TimeEvent(6 * FRAMES, function(inst)
+                if inst.sg.statemem.isbeaver then
+                    inst:PerformBufferedAction()
+                    inst.sg:RemoveStateTag("abouttoattack")
+                elseif inst.sg.statemem.ischop then
+                    inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_weapon", nil, nil, true)
+                end
+            end),
+            TimeEvent(7 * FRAMES, function(inst)
+                if inst.sg.statemem.ismoose then
+                    inst:PerformBufferedAction()
+                    inst.sg:RemoveStateTag("abouttoattack")
+                end
+            end),
+            TimeEvent(8 * FRAMES, function(inst)
+                if not (inst.sg.statemem.isbeaver or
+                        inst.sg.statemem.ismoose or
+                        inst.sg.statemem.iswhip or
+                        inst.sg.statemem.isbook) and
+                    inst.sg.statemem.projectiledelay == nil then
+                    inst:PerformBufferedAction()
+                    inst.sg:RemoveStateTag("abouttoattack")
+					inst.sg:RemoveStateTag("busy")
+                end
+            end),
+            TimeEvent(10 * FRAMES, function(inst)
+                if inst.sg.statemem.iswhip or inst.sg.statemem.isbook then
+                    inst:PerformBufferedAction()
+                    inst.sg:RemoveStateTag("abouttoattack")
+					inst.sg:RemoveStateTag("busy")
+                end
+            end),
+        },
+
+        ontimeout = function(inst)
+            inst.sg:RemoveStateTag("attack")
+			inst.sg:RemoveStateTag("busy")
+            inst.sg:AddStateTag("idle")
+        end,
+
+        events =
+        {
+            EventHandler("equip", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("unequip", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animqueueover", function(inst)
+                if inst.AnimState:AnimDone() then
+                    inst.sg:GoToState("idle")
+                end
+            end),
+        },
+
+        onexit = function(inst)
+            inst.components.combat:SetTarget(nil)
+            if inst.sg:HasStateTag("abouttoattack") then
+                inst.components.combat:CancelAttack()
+            end
+        end,
+    },
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 for k, v in pairs(events) do
