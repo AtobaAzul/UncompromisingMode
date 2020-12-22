@@ -16,9 +16,9 @@ SetSharedLootTable( 'ancient_trepidation',
 local SHARE_TARGET_DIST = 30
 
 local function NormalRetarget(inst)
-    local targetDist = 6
+    local targetDist = 40
     if inst.components.knownlocations:GetLocation("investigate") then
-        targetDist = 8
+        targetDist = 40
     end
     return FindEntity(inst, targetDist, 
         function(guy) 

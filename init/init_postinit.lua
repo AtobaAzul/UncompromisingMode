@@ -115,6 +115,7 @@ local prefab_post = {
 	"armor_sanity",
 	"tophat",
 	"nightsword",
+	"ruinsstatues",
 }
 
 local stategraph_post = {

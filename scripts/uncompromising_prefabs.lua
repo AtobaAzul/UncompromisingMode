@@ -166,6 +166,7 @@ return {
 	"fireball_throwable",
 	"crabclaw",
 	"ancient_trepidation",
+	"ancient_trepidation_anchor",
 	"klaus_amulet",
 	"ancient_amulet_red",
 	"buff_ancient_amulet_red",
@@ -181,4 +182,5 @@ return {
 	"viperfruit",
 	"viperjam",
 	"viperprojectile",
+
 }
