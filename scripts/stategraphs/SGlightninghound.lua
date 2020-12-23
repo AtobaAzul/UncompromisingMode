@@ -169,10 +169,31 @@ local states =
             inst.sg:SetTimeout(4+math.random())
         end,
 		
+        onexit = function(inst)
+			inst:CancelCharge()
+        end,
+		
         ontimeout = function(inst)
 			inst:CancelCharge()
-            inst.sg:GoToState("scared_pst")
+            inst.sg:GoToState("charging_pst")
         end,
+    },
+	
+    State{
+        name = "charging_pst",
+        tags = { "attack", "busy", "canrotate" },
+
+        onenter = function(inst)
+			inst.foogley = 0
+		
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("scared_pst")
+        end,
+
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("howl_attack") end),
+        },
     },
 	
     State{
@@ -180,6 +201,8 @@ local states =
         tags = { "attack", "busy", "canrotate" },
 
         onenter = function(inst)
+			inst.foogley = 0
+		
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("scared_pst")
         end,
@@ -303,6 +326,38 @@ local states =
 
     State{
         name = "howl",
+        tags = { "busy", "howling" },
+
+        onenter = function(inst, count)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("howl")
+            inst.sg.statemem.count = count or 0
+        end,
+
+        timeline =
+        {
+            TimeEvent(0, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.howl) end),
+        },
+
+        events =
+        {
+            EventHandler("heardwhistle", function(inst)
+                inst.sg.statemem.count = 2
+            end),
+            EventHandler("animover", function(inst)
+                if inst.sg.statemem.count > 0 then
+                    inst.sg:GoToState("howl", inst.sg.statemem.count > 1 and inst.sg.statemem.count - 1 or -1)
+                elseif inst.sg.statemem.count == 0 and math.random() < .333 then
+                    inst.sg:GoToState("howl", inst.components.follower.leader ~= nil and inst.components.follower.leader:HasTag("player") and -1 or 0)
+                else
+                    inst.sg:GoToState("idle")
+                end
+            end),
+        },
+    },
+
+    State{
+        name = "howl_attack",
         tags = { "attack", "busy", "howling" },
 
         onenter = function(inst, target)

@@ -465,9 +465,12 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
     inst:AddTag("monster")
     inst:AddTag("hostile")
     inst:AddTag("hound")
-    inst:AddTag("canbestartled")
 
     if tag ~= nil then
+        if not tag == "clay" then
+			inst:AddTag("canbestartled")
+		end
+		
         inst:AddTag(tag)
 
         if tag == "clay" then
@@ -693,15 +696,19 @@ local function MagmaCharging(inst)
 	
 	local x1 = x + math.random(-2, 2)
 	local z1 = z + math.random(-2, 2)
+	local y1 = 0 + 0.25 * math.random()
 	
 	local chance = math.random()
 	
 	if chance >= 0.66 then
-		SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x1, 0 + 0.25 * math.random(), z1)
+		SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x1, y1, z1)
+		SpawnPrefab("magmafire").Transform:SetPosition(x1, 0, z1)
 	elseif chance >= 0.33 and chance < 0.66 then
-		SpawnPrefab("halloween_firepuff_2").Transform:SetPosition(x1, 0 + 0.25 * math.random(), z1)
+		SpawnPrefab("halloween_firepuff_2").Transform:SetPosition(x1, y1, z1)
+		SpawnPrefab("magmafire").Transform:SetPosition(x1, 0, z1)
 	else
-		SpawnPrefab("halloween_firepuff_3").Transform:SetPosition(x1, 0 + 0.25 * math.random(), z1)
+		SpawnPrefab("halloween_firepuff_3").Transform:SetPosition(x1, y1, z1)
+		SpawnPrefab("magmafire").Transform:SetPosition(x1, 0, z1)
 	end
 end
 
@@ -713,7 +720,7 @@ local function CancelMagmaCharge(inst)
 end
 
 local function MagmaCharge(inst)
-    inst.task = inst:DoPeriodicTask(0.3, function(inst) MagmaCharging(inst) end)
+    inst.task = inst:DoPeriodicTask(0.25, function(inst) MagmaCharging(inst) end)
 end
 
 local function OnMagmaAttacked(inst, data)
@@ -743,7 +750,6 @@ local function fnmagma()
     if not TheWorld.ismastersim then
         return inst
     end
-	
 	
     inst:SetStateGraph("SGmagmahound")
 	inst.sg:GoToState("taunt")

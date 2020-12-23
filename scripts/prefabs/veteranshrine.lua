@@ -112,7 +112,7 @@ local function ToggleCursee(inst)
 			end
 
 			local title = "The Veterans Curse."
-			local bodytext = "You're about to be afflicted with a crippling curse.\nHowever, fortune favors the bold (or foolish)!\nThere is no way to lift this curse. \nIf you're up for the challenge, then come closer..."
+			local bodytext = "You're about to be afflicted with a crippling curse.\nYour odds of survival will be lowered.\nHowever, fortune favors the bold (or foolish)!\n - \nIf you're up for the challenge, then touch this altar again..."
 			local yes_box = { text = "Ok", cb = start_curse }
 
 			local bpds = BigPopupDialogScreen(title, bodytext, { yes_box })

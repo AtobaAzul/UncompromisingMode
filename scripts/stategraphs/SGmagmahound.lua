@@ -36,7 +36,7 @@ local events =
         end
     end),
 
-    EventHandler("heardwhistle", function(inst, data)
+    --[[EventHandler("heardwhistle", function(inst, data)
         if not (inst.sg:HasStateTag("statue") or
                 inst.components.health:IsDead() or
                 (inst.components.freezable ~= nil and inst.components.freezable:IsFrozen())) then
@@ -52,7 +52,7 @@ local events =
                 end
             end
         end
-    end),
+    end),]]
 
     --Moon hounds
     EventHandler("workmoonbase", function(inst, data)
@@ -167,14 +167,39 @@ local states =
 			ShowEyeFX(inst)
             inst.AnimState:PlayAnimation("burningup", true)
 			inst:Charge()
+			
+			if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+				inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+			end
 
             inst.sg:SetTimeout(2+math.random())
         end,
 		
+        onexit = function(inst)
+			inst:CancelCharge()
+        end,
+		
         ontimeout = function(inst)
 			inst:CancelCharge()
-            inst.sg:GoToState("scared_pst")
+            inst.sg:GoToState("charging_pst")
         end,
+    },
+	
+    State{
+        name = "charging_pst",
+        tags = { "attack", "busy", "canrotate" },
+
+        onenter = function(inst)
+			inst.foogley = 0
+		
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("scared_pst")
+        end,
+
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("howl_attack") end),
+        },
     },
 	
     State{
@@ -309,10 +334,43 @@ local states =
 
     State{
         name = "howl",
+        tags = { "busy", "howling" },
+
+        onenter = function(inst, count)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("howl")
+            inst.sg.statemem.count = count or 0
+        end,
+
+        timeline =
+        {
+            TimeEvent(0, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.howl) end),
+        },
+
+        events =
+        {
+            EventHandler("heardwhistle", function(inst)
+                inst.sg.statemem.count = 2
+            end),
+            EventHandler("animover", function(inst)
+                if inst.sg.statemem.count > 0 then
+                    inst.sg:GoToState("howl", inst.sg.statemem.count > 1 and inst.sg.statemem.count - 1 or -1)
+                elseif inst.sg.statemem.count == 0 and math.random() < .333 then
+                    inst.sg:GoToState("howl", inst.components.follower.leader ~= nil and inst.components.follower.leader:HasTag("player") and -1 or 0)
+                else
+                    inst.sg:GoToState("idle")
+                end
+            end),
+        },
+    },
+	
+    State{
+        name = "howl_attack",
         tags = { "attack", "busy", "howling" },
 
         onenter = function(inst, target)
 			ShowEyeFX(inst)
+            inst.Transform:SetFourFaced()
 			inst.foogley = inst.foogley + 1 or 0
 			
             if not target then
@@ -325,6 +383,10 @@ local states =
 			
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("belch")
+			
+				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+                    inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                end
         end,
 
         timeline =
@@ -385,7 +447,7 @@ local states =
         {
             EventHandler("animover", function(inst) 
 				if inst.foogley < 10 then
-					inst.sg:GoToState("howl")
+					inst.sg:GoToState("howl_attack")
 				else
 					inst.foogley = 0
 					inst.sg:GoToState("idle")
