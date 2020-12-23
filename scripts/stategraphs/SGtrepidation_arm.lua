@@ -129,6 +129,9 @@ local states=
         name = "attack",
         tags = {"attack"},
         onenter = function(inst)
+			if inst.components.combat.target ~= nil then
+			inst:ForceFacePoint(inst.components.combat.target:GetPosition() )
+			end
             inst.AnimState:PlayAnimation("atk_loop")
             inst.AnimState:PushAnimation("taunt", false)
         end,
@@ -147,7 +150,8 @@ local states=
             EventHandler("animqueueover", function(inst) 
                 inst.sg.statemem.keeprumblesound = true
                 if inst.components.combat.target then
-                    inst.sg:GoToState("attack") 
+                    inst.sg:GoToState("attack")
+					
                 else
                     inst.sg:GoToState("attack_post") 
                 end
