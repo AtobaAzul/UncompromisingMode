@@ -58,20 +58,11 @@ local function onequip(inst, owner)
 		--owner.components.inventory:Unequip(EQUIPSLOTS.HANDS, true)
 		inst:DoTaskInTime(0, function(inst, owner)
 			local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner
-			owner.components.inventory:Unequip(EQUIPSLOTS.HANDS, false)
-			owner.components.inventory:DropItem(inst)
+            local inst_pos = inst:GetPosition()
+			
+			owner.components.inventory:GiveItem(inst, nil, inst_pos)
 			owner.components.talker:Say(GetString(owner, "CURSED_ITEM_EQUIP"))
 			inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/HUD_hot_level1")
-			
-			if inst.Physics ~= nil then
-				local x, y, z = inst.Transform:GetWorldPosition()
-				inst.Physics:Teleport(x, .3, z)
-
-				local angle = (math.random() * 20 - 10) * DEGREES
-				angle = angle + math.random() * 2 * PI
-				local speed = inst and 2 + math.random() or 3 + math.random() * 2
-				inst.Physics:SetVel(math.cos(angle) * speed, 10, math.sin(angle) * speed)
-			end
 			
 			owner.components.combat:GetAttacked(inst, 0.1, nil)
 		end)
