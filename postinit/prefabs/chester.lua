@@ -231,8 +231,8 @@ end
 local function MorphLazyEyebone(inst)
     inst.AnimState:SetBuild("chester_eyebone_lazy")
 
-    inst.openEye = "chester_eyebone_lazy.tex"
-    inst.closedEye = "chester_eyebone_closed_lazy.tex"
+    --inst.openEye = "chester_eyebone_lazy"
+    --inst.closedEye = "chester_eyebone_closed_lazy"
     RefreshEye(inst)
 
     inst.EyeboneState = "LAZY"
