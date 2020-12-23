@@ -312,6 +312,7 @@ local states=
             --V2C: don't trigger attack cooldown
             --inst.components.combat:StartAttack()
             inst:StartAbility("channelers")
+			inst:AddTag("spawning")
         end,
 
         events =
@@ -371,6 +372,7 @@ local states=
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("channel_pst")
 			PlayExtendedSound(inst, "taunt")
+			inst:RemoveTag("spawning")
         end,
         timeline=
         {	--TimeEvent(5*FRAMES, function(inst) PlayExtendedSound(inst, "taunt") end),

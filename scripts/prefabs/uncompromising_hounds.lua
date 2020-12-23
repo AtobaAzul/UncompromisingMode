@@ -689,7 +689,7 @@ local function ShootProjectile(inst, target)
 end
 
 local function fnmagma()
-    local inst = fncommon("clayhound", "magmahound", nil, nil, "clay", {amphibious = true})
+    local inst = fncommon("clayhound", "magmahound", nil, nil, "clay", {amphibious = false})
 
     if not TheWorld.ismastersim then
         return inst
@@ -699,7 +699,7 @@ local function fnmagma()
     inst:SetStateGraph("SGmagmahound")
 	inst.sg:GoToState("taunt")
     --MakeMediumFreezableCharacter(inst, "hound_body") No freeze bc haha FIRE
-	
+	inst.Transform:SetScale(1.2,1.2,1.2)
     inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", ontimerdone)
 

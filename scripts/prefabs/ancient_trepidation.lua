@@ -66,8 +66,11 @@ local function ResetAbilityCooldown(inst, ability)
     end
 end	
 local CHANNELER_SPAWN_PERIOD = 0.5
-local function DoSpawnChanneler(inst)
+local function DoSpawnChanneler(inst,radius)
 local CHANNELER_SPAWN_RADIUS = 8.7
+if radius ~= nil then
+CHANNELER_SPAWN_RADIUS = radius
+end
     if inst.components.health:IsDead() then
         inst.channelertask = nil
         inst.channelerparams = nil
@@ -76,7 +79,7 @@ local CHANNELER_SPAWN_RADIUS = 8.7
 
     local x = inst.channelerparams.x + CHANNELER_SPAWN_RADIUS * math.cos(inst.channelerparams.angle)
     local z = inst.channelerparams.z + CHANNELER_SPAWN_RADIUS * math.sin(inst.channelerparams.angle)
-    if TheWorld.Map:IsAboveGroundAtPoint(x, 0, z) then
+    if TheWorld.Map:IsAboveGroundAtPoint(x, 0, z) and #TheSim:FindEntities(x,0,z,1,{"treparm"}) == 0 then
         local channeler = SpawnPrefab("ancient_trepidation_arm")
         channeler.Transform:SetPosition(x, 0, z)
 		inst.channelerparams.count = inst.channelerparams.count - 1
@@ -88,7 +91,9 @@ local CHANNELER_SPAWN_RADIUS = 8.7
 
     if inst.channelerparams.count > 0 then
         inst.channelerparams.angle = inst.channelerparams.angle + inst.channelerparams.delta
+		if inst:HasTag("spawning") then
         inst.channelertask = inst:DoTaskInTime(CHANNELER_SPAWN_PERIOD, DoSpawnChanneler)
+		end
     else
         inst.channelertask = nil
         inst.channelerparams = nil
@@ -196,6 +201,47 @@ inst.AnimState:SetBuild("ancient_trepidation")
 end
 end
 end
+
+local function SetHarassPlayer(inst, player)
+    if inst.harassplayer ~= player then
+        if inst._harassovertask ~= nil then
+            inst._harassovertask:Cancel()
+            inst._harassovertask = nil
+        end
+        if inst.harassplayer ~= nil then
+            --inst:RemoveEventCallback("onremove", inst._onharassplayerremoved, inst.harassplayer)
+            inst.harassplayer = nil
+        end
+        if player ~= nil then
+            --inst:ListenForEvent("onremove", inst._onharassplayerremoved, player)
+            inst.harassplayer = player
+            inst._harassovertask = inst:DoTaskInTime(120, SetHarassPlayer, nil)
+        end
+    end
+end
+
+local function FindTargetOfInterest(inst)
+
+    if inst.harassplayer == nil and inst.components.combat.target == nil then
+        local x, y, z = inst.Transform:GetWorldPosition()
+        -- Get all players in range
+        local targets = FindPlayersInRange(x, y, z, 40)
+        -- randomly iterate over all players until we find one we're interested in.
+        for i = 1, #targets do
+            local randomtarget = math.random(#targets)
+            local target = targets[randomtarget]
+            table.remove(targets, randomtarget)
+            --Higher chance to follow if he has bananas
+				local x, y, z = target.Transform:GetWorldPosition()
+				if #TheSim:FindEntities(x,y,z,60,{"trepidation"}) <= 1 then
+                SetHarassPlayer(inst, target)
+				return
+				end
+        end
+    end
+end
+
+
 local function fn(Sim)
 	local inst = CreateEntity()
 
@@ -238,6 +284,7 @@ local function fn(Sim)
     inst:AddTag("hostile") 
 	--inst:AddTag("shadowcreature")
     inst:AddTag("shadow")
+	inst:AddTag("trepidation")
     ------------------
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(3000)
@@ -284,6 +331,7 @@ local function fn(Sim)
 	inst.onsave = OnSave
 	inst.onload = OnLoad
 	inst:DoPeriodicTask(3,CheckIfInsaners)
+	inst.FindTargetOfInterestTask = inst:DoPeriodicTask(5, FindTargetOfInterest) --Find something to be interested in!
     return inst
 end
 

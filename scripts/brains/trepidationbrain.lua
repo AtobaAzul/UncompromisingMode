@@ -33,11 +33,6 @@ local function ShouldAttack(self)
     return true
 end
 
-local function ShouldHarass(self)
-    return self._harasstarget ~= nil
-        and (self.inst.components.combat.nextbattlecrytime == nil or
-            self.inst.components.combat.nextbattlecrytime < GetTime())
-end
 
 local function ShouldChaseAndHarass(self)
     return self.inst.components.locomotor.walkspeed < 5
@@ -51,7 +46,27 @@ end
 local TrepidationBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
-
+local function GetHome(inst)
+    return inst.components.homeseeker and inst.components.homeseeker.home
+end
+local TARGET_FOLLOW_DIST = 7
+local MAX_FOLLOW_DIST = 10
+local function WithinDomain(inst)
+local x, y, z = inst.Transform:GetWorldPosition()
+local nearestspawner = FindEntity(inst, 50, nil,{"trepidationspawner"})
+local home = GetHome(inst)
+if nearestspawner ~= nil and home ~= nil then
+local dist1 = inst:GetDistanceSqToInst(nearestspawner)
+local dist2 = inst:GetDistanceSqToInst(home)
+	if dist1-4 > dist2 then
+	return false
+	else
+	return true
+	end
+else
+return true
+end
+end
 function TrepidationBrain:OnStart()
     local root = PriorityNode(
     {	
@@ -62,23 +77,20 @@ function TrepidationBrain:OnStart()
                     self.abilitydata = nil
                 end)),
         WhileNode(function() return ShouldAttack(self) end, "Attack", ChaseAndAttack(self.inst, 40)),
-        WhileNode(function() return ShouldHarass(self) end, "Harass",
-            PriorityNode({
-                WhileNode(function() return ShouldChaseAndHarass(self) end, "ChaseAndHarass",
-                    Follow(self.inst, function() return self._harasstarget end, HARASS_MIN, HARASS_MED, HARASS_MAX)),
-                ActionNode(function()
-                    self.inst.components.combat:BattleCry()
-                    if self.inst.sg.currentstate.name == "taunt" then
-                        self.inst:ForceFacePoint(self._harasstarget.Transform:GetWorldPosition())
-                    end
-                end),
-            }, .25)),
-        WhileNode(function() return self._harasstarget ~= nil end, "LoiterAndHarass",
-            Wander(self.inst, function() return self._harasstarget:GetPosition() end, 20, { minwaittime = 0, randwaittime = .3 }, function() return GetHarassWanderDir(self) end)),
-        Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, 20),
+		
+		--WhileNode(function() return WithinDomain(self.inst) end, "Follow",
+		Follow(self.inst, function() return self.inst.harassplayer end, 0, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST),--),
+		
+        WhileNode(function() return self.inst.harassplayer == nil end, "Home",
+		Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, 20)),
     }, .25)
 
     self.bt = BT(self.inst, root)
+end
+function TrepidationBrain:OnInitializationComplete()
+    local pos = self.inst:GetPosition()
+    pos.y = 0
+    self.inst.components.knownlocations:RememberLocation("spawnpoint", pos, true)
 end
 
 return TrepidationBrain

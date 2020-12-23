@@ -126,8 +126,8 @@ local shadow = inst.entity:AddDynamicShadow()
 	
     -- locomotor must be constructed before the stategraph!
     inst:AddComponent("locomotor")
-    inst.components.locomotor.walkspeed = 2
-    inst.components.locomotor.runspeed = 2
+    inst.components.locomotor.walkspeed = 3
+    inst.components.locomotor.runspeed = 3
 
     
     inst:AddComponent("lootdropper")
