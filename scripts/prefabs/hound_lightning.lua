@@ -44,7 +44,7 @@ local function Zap(inst)
 				end
 				
 				v.sg:GoToState("electrocute")
-			else
+			elseif v.components.combat ~= nil then
 				v.components.combat:GetAttacked(inst, -25)
 			end
 		end

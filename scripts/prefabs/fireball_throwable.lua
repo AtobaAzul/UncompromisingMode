@@ -12,7 +12,7 @@ local function OnHitFire(inst, attacker, target)
     SpawnPrefab("firesplash_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	
 	if math.random() > 0.5 then
-		SpawnPrefab("willowfire").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		SpawnPrefab("magmafire").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	end
 	
 	local x, y, z = inst.Transform:GetWorldPosition() 

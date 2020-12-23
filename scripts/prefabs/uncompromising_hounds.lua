@@ -688,6 +688,55 @@ local function ShootProjectile(inst, target)
 	end
 end
 
+local function MagmaCharging(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	
+	local x1 = x + math.random(-2, 2)
+	local z1 = z + math.random(-2, 2)
+	
+	local chance = math.random()
+	
+	if chance >= 0.66 then
+		SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x1, 0 + 0.25 * math.random(), z1)
+	elseif chance >= 0.33 and chance < 0.66 then
+		SpawnPrefab("halloween_firepuff_2").Transform:SetPosition(x1, 0 + 0.25 * math.random(), z1)
+	else
+		SpawnPrefab("halloween_firepuff_3").Transform:SetPosition(x1, 0 + 0.25 * math.random(), z1)
+	end
+end
+
+local function CancelMagmaCharge(inst)
+	if inst.task ~= nil then
+		inst.task:Cancel()
+		inst.task = nil
+	end
+end
+
+local function MagmaCharge(inst)
+    inst.task = inst:DoPeriodicTask(0.3, function(inst) MagmaCharging(inst) end)
+end
+
+local function OnMagmaAttacked(inst, data)
+	if inst.sg:HasStateTag("charging") and data ~= nil and data.attacker ~= nil then
+		if data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead() and
+			(data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) then
+		
+			data.attacker.components.health:DoDelta(-5, nil, inst.prefab, nil, inst)
+			if data.attacker:HasTag("player") and not data.attacker.components.burnable ~= nil then
+				data.attacker.components.burnable:Ignite()
+			end
+        end
+    end
+	
+    inst.components.combat:SetTarget(data.attacker)
+    inst.components.combat:ShareTarget(data.attacker, SHARE_TARGET_DIST,
+        function(dude)
+            return not (dude.components.health ~= nil and dude.components.health:IsDead())
+                and (dude:HasTag("hound") or dude:HasTag("houndfriend"))
+                and data.attacker ~= (dude.components.follower ~= nil and dude.components.follower.leader or nil)
+        end, 5)
+end
+
 local function fnmagma()
     local inst = fncommon("clayhound", "magmahound", nil, nil, "clay", {amphibious = false})
 
@@ -712,9 +761,10 @@ local function fnmagma()
     inst.components.lootdropper:SetChanceLootTable('hound_magma')
 	
     inst.LaunchProjectile = ShootProjectile
-    inst.CancelCharge = CancelCharge
-    inst.Charge = Charge
+    inst.CancelCharge = CancelMagmaCharge
+    inst.Charge = MagmaCharge
 	
+	inst:ListenForEvent("attacked", OnMagmaAttacked)
     inst:ListenForEvent("death", DoMagmaExplosion)
 	
 	inst.foogley = 0

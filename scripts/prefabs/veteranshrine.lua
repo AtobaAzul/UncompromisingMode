@@ -1,4 +1,4 @@
-local BigPopupDialogScreen = require "screens/bigpopupdialog"
+local BigPopupDialogScreen = require "screens/popupdialog"
 
 local assets =
 {
@@ -102,7 +102,7 @@ local function ToggleCursee(inst)
 			local yes_box = { text = "Ok", cb = acceptance }
 
 			local bpds = BigPopupDialogScreen(title, bodytext, { yes_box })
-			bpds.title:SetPosition(0, 100, 0)
+			bpds.title:SetPosition(0, 90, 0)
 			bpds.text:SetPosition(0, -15, 0)
 
 			TheFrontEnd:PushScreen(bpds)
@@ -112,11 +112,11 @@ local function ToggleCursee(inst)
 			end
 
 			local title = "The Veterans Curse."
-			local bodytext = "- Receive more damage when attacked, and Hunger drains faster.\n - Health and Sanity from foods is applied over time.\n - Gain the ability to wield cursed items, dropped by cerain bosses.\n - There is no way to lift this curse. \n - If you're up for the challenge, then come closer..."
+			local bodytext = "You're about to be afflicted with a crippling curse.\nHowever, fortune favors the bold (or foolish)!\nThere is no way to lift this curse. \nIf you're up for the challenge, then come closer..."
 			local yes_box = { text = "Ok", cb = start_curse }
 
 			local bpds = BigPopupDialogScreen(title, bodytext, { yes_box })
-			bpds.title:SetPosition(0, 100, 0)
+			bpds.title:SetPosition(0, 90, 0)
 			bpds.text:SetPosition(0, -15, 0)
 
 			TheFrontEnd:PushScreen(bpds)

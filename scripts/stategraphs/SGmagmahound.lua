@@ -168,7 +168,7 @@ local states =
             inst.AnimState:PlayAnimation("burningup", true)
 			inst:Charge()
 
-            inst.sg:SetTimeout(4+math.random())
+            inst.sg:SetTimeout(2+math.random())
         end,
 		
         ontimeout = function(inst)
@@ -335,14 +335,11 @@ local states =
 				inst.components.timer:StopTimer("lightningshot_cooldown")
 				inst.components.timer:StartTimer("lightningshot_cooldown", 6 + math.random())
 			end),
-            TimeEvent(2*FRAMES, function(inst) 
-				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
-					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
-					inst:LaunchProjectile(inst.sg.statemem.target)
-					
-				end
-			end),
-            TimeEvent(4*FRAMES, function(inst) 
+            TimeEvent(3*FRAMES, function(inst)
+				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+                    inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                end
+			
 				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
 					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
 					inst:LaunchProjectile(inst.sg.statemem.target)
@@ -350,20 +347,32 @@ local states =
 				end
 			end),
             TimeEvent(6*FRAMES, function(inst) 
+				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+                    inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                end
+			
 				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
 					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
 					inst:LaunchProjectile(inst.sg.statemem.target)
 					
 				end
 			end),
-            TimeEvent(8*FRAMES, function(inst) 
+            TimeEvent(9*FRAMES, function(inst) 
+				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+                    inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                end
+			
 				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
 					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
 					inst:LaunchProjectile(inst.sg.statemem.target)
 					
 				end
 			end),
-            TimeEvent(10*FRAMES, function(inst) 
+            TimeEvent(12*FRAMES, function(inst) 
+				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+                    inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                end
+			
 				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
 					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
 					inst:LaunchProjectile(inst.sg.statemem.target)

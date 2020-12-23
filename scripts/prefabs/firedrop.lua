@@ -39,5 +39,34 @@ local function fn()
     return inst
 end
 
+local function magmafn()
+    local inst = CreateEntity()
 
-return Prefab("firedrop", fn, assets)
+    inst.entity:AddTransform()
+    inst.entity:AddNetwork()
+
+    MakeInventoryPhysics(inst)
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    MakeSmallBurnable(inst, 1)
+    MakeSmallBurnable(inst)
+
+    --Remove the default handlers that toggle persists flag
+    inst.components.burnable:SetOnIgniteFn(nil)
+    inst.components.burnable:SetOnExtinguishFn(inst.Remove)
+    inst.components.burnable:Ignite()
+    inst.components.burnable:SetOnBurntFn(inst.Remove)
+
+	inst:DoTaskInTime(1+math.random(), function(inst) inst.components.burnable:Extinguish() end)
+
+    return inst
+end
+
+return Prefab("firedrop", fn, assets),
+		Prefab("magmafire", magmafn, assets)
+		
