@@ -465,15 +465,13 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
     inst:AddTag("monster")
     inst:AddTag("hostile")
     inst:AddTag("hound")
+	inst:AddTag("canbestartled")
 
     if tag ~= nil then
-        if not tag == "clay" then
-			inst:AddTag("canbestartled")
-		end
-		
         inst:AddTag(tag)
 
         if tag == "clay" then
+			inst:RemoveTag("canbestartled")
             --inst._eyeflames = net_bool(inst.GUID, "magmahound._eyeflames", "eyeflamesdirty")   Eye flame no work :(
             --inst:ListenForEvent("eyeflamesdirty", OnEyeFlamesDirty)
         end
