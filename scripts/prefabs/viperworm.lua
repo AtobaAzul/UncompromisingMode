@@ -339,6 +339,79 @@ local function fnviperling()
     return inst
 end
 
+local function FindPerson(inst)
+local person = FindEntity(inst,10,nil,{"player"})
+if person ~= nil then
+person.components.leader:AddFollower(inst)
+else
+inst.sg:GoToState("death")
+end
+end
+local function fnviperlingfriend()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddLight()
+    inst.entity:AddNetwork()
+
+       MakeCharacterPhysics(inst, 10, 0.5)
+        RemovePhysicsColliders(inst)
+    inst.Transform:SetFourFaced()
+	local scale = 0.5
+    inst.AnimState:SetBank("worm")
+    inst.AnimState:SetBuild("viperworm")
+    inst.AnimState:PlayAnimation("idle_loop", true)
+    inst.Transform:SetScale(scale, scale, scale)
+	
+    inst:AddTag("monster")
+    inst:AddTag("hostile")
+    inst:AddTag("wet")
+	inst:AddTag("viperling")
+	inst:AddTag("viperlingfriend")
+    inst:AddTag("cavedweller")
+	inst:AddTag("shadowcreature")
+	inst:AddTag("shadow")
+	inst.AnimState:SetMultColour(0, 0, 0, 0.5)
+
+
+
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+
+        return inst
+    end
+
+
+    inst:AddComponent("combat")
+    inst.components.combat:SetRange(TUNING.WORM_ATTACK_DIST)
+    inst.components.combat:SetDefaultDamage(37.5)
+    inst.components.combat:SetAttackPeriod(TUNING.WORM_ATTACK_PERIOD)
+
+    inst:AddComponent("locomotor")
+    inst.components.locomotor.walkspeed = 12
+    inst.components.locomotor:SetSlowMultiplier( 1 )
+    inst.components.locomotor:SetTriggersCreep(false)
+    inst.components.locomotor.pathcaps = { ignorecreep = true }
+
+
+	inst:AddComponent("follower")
+
+
+    inst.turnonlight = turnonlight
+    inst.turnofflight = turnofflight
+	inst.attacks = 0
+    inst:SetStateGraph("SGviperworm")
+    inst:SetBrain(viperlingbrain)
+	inst.ShadowDespawn = ShadowDespawn
+	inst:DoTaskInTime(60,ShadowDespawn)
+	inst:DoTaskInTime(0,FindPerson)
+	inst.OnLoad = function(inst) inst:Remove() end
+    return inst
+end
 local function ViperlingBelch(inst, target)
 	if target ~= nil then
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -480,4 +553,5 @@ local function fn()
 end
 
 return Prefab("viperworm", fn, assets, prefabs),
-Prefab("viperling",fnviperling)
+Prefab("viperling",fnviperling),
+Prefab("viperlingfriend",fnviperlingfriend)

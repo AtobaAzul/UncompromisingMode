@@ -200,6 +200,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.WATERMELON_LANTERN = "Spooky?"
 	DESCRIBE.SNOWCONE = "Must've used too much ice."
+	
+	--Viperstuff Quotes
+	DESCRIBE.VIPERWORM = "Depths Viper"
+	DESCRIBE.VIPERLING = "Writhing Apparition"
+	DESCRIBE.VIPERFRUIT = "Gloomberry"
+	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "It's pretty big, maybe I can dig it up.",

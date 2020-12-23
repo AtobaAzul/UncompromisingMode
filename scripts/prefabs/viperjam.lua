@@ -4,12 +4,33 @@ local assets =
 	Asset("ATLAS", "images/inventoryimages/zaspberryparfait.xml"),
 	--Asset("IMAGE", "images/inventoryimages/zaspberryparfait.tex"),
 }
-
+local easing = require("easing")
+local function spawnfriends(inst)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local projectile = SpawnPrefab("viperprojectile")
+    projectile.Transform:SetPosition(x, y, z)
+    local pt = inst:GetPosition()
+	pt.x = pt.x + math.random(-3,3)
+	pt.z = pt.z + math.random(-3,3)
+	local speed = easing.linear(3, 7, 3, 10)
+	projectile:AddTag("canthit")
+	projectile:AddTag("friendly")
+	--projectile.components.wateryprotection.addwetness = TUNING.WATERBALLOON_ADD_WETNESS/2
+    projectile.components.complexprojectile:SetHorizontalSpeed(speed+math.random(4,9))
+	if TheWorld.Map:IsAboveGroundAtPoint(pt.x, 0, pt.z) then
+    projectile.components.complexprojectile:Launch(pt, inst, inst)
+	else
+	inst:DoTaskInTime(0,spawnfriends(inst))
+	projectile:Remove()
+	end
+end
 local function oneatenfn(inst, eater)
 	if eater.components.debuffable ~= nil and eater.components.debuffable:IsEnabled() and
                 not (eater.components.health ~= nil and eater.components.health:IsDead()) and
                 not eater:HasTag("playerghost") then
-                --eater.components.debuffable:AddDebuff("buff_electricretaliation", "buff_electricretaliation") Nothing, for now.
+				for k = 1,6 do
+				inst:DoTaskInTime(0,spawnfriends(inst))
+				end
 	end
 end
 local function fn()

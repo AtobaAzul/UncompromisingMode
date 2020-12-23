@@ -1,9 +1,13 @@
 require("stategraphs/commonstates")
 
 local function doattackfn(inst, data)
+	if not inst:HasTag("viperlingfriend") then
     if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) then
         inst.sg:GoToState(inst.sg:HasStateTag("lure") and "attack_pre" or "attack")
     end
+	else
+	inst.sg:GoToState("attack")
+	end
 end
 
 local function onattackedfn(inst, data)
@@ -298,9 +302,15 @@ local states =
             EventHandler("animover", function(inst)
 				if inst:HasTag("viperling") then
 				inst.attacks = inst.attacks + 1
-				if inst.attacks >= 2 then
-				inst.ShadowDespawn(inst)
-				end
+					if inst:HasTag("viperlingfriend") then
+						if inst.attacks >= 8 then
+						inst.ShadowDespawn(inst)
+						end				
+						else
+						if inst.attacks >= 2 then
+						inst.ShadowDespawn(inst)
+						end
+					end
 				end
                 inst.sg:GoToState("idle")
             end),
@@ -317,6 +327,7 @@ local states =
             RemovePhysicsColliders(inst)
             inst.components.lootdropper:DropLoot(inst:GetPosition())
 			end
+			
         end,
 
         timeline =
@@ -326,6 +337,11 @@ local states =
                 inst.SoundEmitter:PlaySound("dontstarve/creatures/worm/death")
             end),
         },
+        EventHandler("animover", function(inst)
+            if inst:HasTag("viperlingfriend") then
+			inst:Remove()
+			end
+        end),
     },
 
     State{

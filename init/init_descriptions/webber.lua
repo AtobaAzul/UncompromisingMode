@@ -163,6 +163,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.WATERMELON_LANTERN = "Never tried this with a melon before!"
+	
+		--Viperstuff Quotes
+	DESCRIBE.VIPERWORM = "Depths Viper"
+	DESCRIBE.VIPERLING = "Writhing Apparition"
+	DESCRIBE.VIPERFRUIT = "Gloomberry"
+	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	
+	
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "It's huge! No way we can pull that out with our arms!",

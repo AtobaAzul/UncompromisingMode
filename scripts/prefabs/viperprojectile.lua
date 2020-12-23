@@ -27,6 +27,9 @@ local splashfxlist =
 local function OnLand(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local worm = SpawnPrefab("viperling")
+	if inst:HasTag("friendly") then
+	worm = SpawnPrefab("viperlingfriend")
+	end
 	worm.Transform:SetPosition(x,y,z)
 	if worm.components.combat ~= nil then
 	local bozo = FindEntity(inst, 10, 
@@ -35,7 +38,7 @@ local function OnLand(inst)
                 return guy:HasTag("character")
             end
     end)
-	if bozo ~= nil then
+	if bozo ~= nil and not inst:HasTag("viperlingfriend") then
 	bozo.components.combat:SuggestTarget(bozo)
 	end
 	worm.sg:GoToState("taunt")

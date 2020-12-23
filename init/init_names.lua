@@ -20,9 +20,10 @@ STRINGS = GLOBAL.STRINGS.NAMES
 	STRINGS.SHOCKWORM = "Depths Eel"
 	STRINGS.VIPERWORM = "Depths Viper"
 	STRINGS.VIPERLING = "Writhing Apparition"
+	STRINGS.VIPERLINGFRIEND = "Writhing Apparition"
 	STRINGS.ZASPBERRY = "Zaspberry"
-	STRINGS.VIPERFRUIT = "Viper Fruit (Please give name)"
-	STRINGS.VIPERJAM = "Viper Jam"
+	STRINGS.VIPERFRUIT = "Gloomberry"
+	STRINGS.VIPERJAM = "Gloomberry Jam"
 	
 	STRINGS.SNOWMONG = "Abominamole"
 	STRINGS.MINOTAUR_BOULDER = "Ancient Stone Slab"

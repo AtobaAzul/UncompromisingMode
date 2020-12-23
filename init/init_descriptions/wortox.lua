@@ -164,6 +164,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.WATERMELON_LANTERN = "We made a jack-o-lantern with a watermelon! HAH!"
+	
+		--Viperstuff Quotes
+	DESCRIBE.VIPERWORM = "Depths Viper"
+	DESCRIBE.VIPERLING = "Writhing Apparition"
+	DESCRIBE.VIPERFRUIT = "Gloomberry"
+	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	
+	
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "If you don't give it room, It'll give a big boom!",

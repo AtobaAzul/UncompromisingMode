@@ -164,6 +164,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.WATERMELON_LANTERN = "I don't believe a Citrullus lanatus is usually carved like this, but we make do."
+	
+		--Viperstuff Quotes
+	DESCRIBE.VIPERWORM = "Depths Viper"
+	DESCRIBE.VIPERLING = "Writhing Apparition"
+	DESCRIBE.VIPERFRUIT = "Gloomberry"
+	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	
+	
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Normal Cyanococcus berries don't pulsate.",
