@@ -259,7 +259,6 @@ local function fnviperling()
 	
     inst:AddTag("monster")
     inst:AddTag("hostile")
-    inst:AddTag("wet")
     inst:AddTag("worm")
 	inst:AddTag("viperling")
     inst:AddTag("cavedweller")
@@ -316,8 +315,6 @@ local function fnviperling()
 
     inst:AddComponent("inventory")
 
-    inst:AddComponent("inspectable")
-    inst.components.inspectable.getstatus = getstatus
 
 
     --Disable this task for worm attacks
@@ -365,12 +362,8 @@ local function fnviperlingfriend()
     inst.AnimState:PlayAnimation("idle_loop", true)
     inst.Transform:SetScale(scale, scale, scale)
 	
-    inst:AddTag("monster")
-    inst:AddTag("hostile")
-    inst:AddTag("wet")
 	inst:AddTag("viperling")
 	inst:AddTag("viperlingfriend")
-    inst:AddTag("cavedweller")
 	inst:AddTag("shadowcreature")
 	inst:AddTag("shadow")
 	inst.AnimState:SetMultColour(0, 0, 0, 0.5)
