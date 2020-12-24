@@ -54,7 +54,7 @@ local function magmafn()
     end
 
     MakeSmallBurnable(inst, 1)
-    MakeSmallBurnable(inst)
+    MakeSmallPropagator(inst)
 
     --Remove the default handlers that toggle persists flag
     inst.components.burnable:SetOnIgniteFn(nil)
