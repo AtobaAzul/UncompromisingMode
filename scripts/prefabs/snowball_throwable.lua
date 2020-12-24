@@ -40,7 +40,7 @@ local function OnHitSnow(inst, attacker, target)
 				end
 			end
 		end
-     end
+    end
 	
     inst:Remove()
 end

@@ -9,7 +9,7 @@ end)
 
 local function onfuelchangehigh(newsection, oldsection, inst, doer)
     if newsection <= 0 then
-        --print("destroy")
+        
     elseif newsection <= 1 then
 	inst.components.waterproofer:SetEffectiveness(0.3)
     elseif newsection <= 2 then
@@ -23,7 +23,7 @@ end
 
 local function onfuelchangeabsolute(newsection, oldsection, inst, doer)
     if newsection <= 0 then
-        --print("destroy")
+        
     elseif newsection <= 1 then
 	inst.components.waterproofer:SetEffectiveness(0.4)
     elseif newsection <= 2 then
@@ -37,7 +37,7 @@ end
 
 local function onfuelchangemedium(newsection, oldsection, inst, doer)
     if newsection <= 0 then
-        --print("destroy")
+        
     elseif newsection <= 1 then
 	inst.components.waterproofer:SetEffectiveness(0.15)
     elseif newsection <= 2 then
@@ -83,7 +83,7 @@ end)
 
 local function onfuelchangeinsulationmedium(newsection, oldsection, inst, doer)
     if newsection <= 0 then
-        --print("destroy")
+        
     elseif newsection <= 1 then
 	inst.components.insulator:SetInsulation(30*1.4)
     elseif newsection <= 2 then
@@ -97,7 +97,7 @@ end
 
 local function onfuelchangeinsulationmedhigh(newsection, oldsection, inst, doer)
     if newsection <= 0 then
-        --print("destroy")
+        
     elseif newsection <= 1 then
 	inst.components.insulator:SetInsulation(30*3.25)
     elseif newsection <= 2 then
@@ -111,7 +111,7 @@ end
 
 local function onfuelchangeinsulationhigh(newsection, oldsection, inst, doer)
     if newsection <= 0 then
-        --print("destroy")
+        
     elseif newsection <= 1 then
 	inst.components.insulator:SetInsulation(30*7.1)
     elseif newsection <= 2 then

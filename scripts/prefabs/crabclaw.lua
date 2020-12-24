@@ -1,7 +1,7 @@
 local assets =
 {
-    Asset("ANIM", "anim/ruins_bat.zip"),
-    Asset("ANIM", "anim/swap_ruins_bat.zip"),
+    Asset("ANIM", "anim/cursedcrabclaw.zip"),
+    Asset("ANIM", "anim/swap_crabclaw.zip"),
 }
 
 local gemassets =
@@ -31,7 +31,6 @@ local function onremovebody4(body)
 end
 
 local function AddGem(inst)
-print("Add gem")
 	local owner = inst.components.inventoryitem.owner
 	local item1 = inst.components.container.slots[1]
 	local item2 = inst.components.container.slots[2]
@@ -45,16 +44,16 @@ print("Add gem")
 		--inst:ListenForEvent("onremove", onremovebody1, inst.shinefx_slot1)
 		inst.shinefx_slot1.entity:SetParent(owner.entity)
 		inst.shinefx_slot1.entity:AddFollower()
-		inst.shinefx_slot1.Follower:FollowSymbol(owner.GUID, "swap_object", 37, -112, 0.1)
-		inst.shinefx_slot1.Transform:SetScale(0.2,0.2,0.2)
+		inst.shinefx_slot1.Follower:FollowSymbol(owner.GUID, "swap_object", 48, -203, 0.1)
+		inst.shinefx_slot1.Transform:SetScale(0.25,0.25,0.25)
 		
 		inst.slot1_inserted = true
 		
 		inst.shinefx2 = SpawnPrefab("crab_king_shine")
 		inst.shinefx2.entity:SetParent(owner.entity)
 		inst.shinefx2.entity:AddFollower()
-		inst.shinefx2.Follower:FollowSymbol(owner.GUID, "swap_object", 37, -112, 0)
-		inst.shinefx2.Transform:SetScale(0.2,0.2,0.2)
+		inst.shinefx2.Follower:FollowSymbol(owner.GUID, "swap_object", 48, -203, 0)
+		inst.shinefx2.Transform:SetScale(0.25,0.25,0.25)
 	end
 	
 	if item2 ~= nil and owner ~= nil and not inst.slot2_inserted then
@@ -64,8 +63,8 @@ print("Add gem")
 		--inst:ListenForEvent("onremove", onremovebody2, inst.shinefx_slot2)
 		inst.shinefx_slot2.entity:SetParent(owner.entity)
 		inst.shinefx_slot2.entity:AddFollower()
-		inst.shinefx_slot2.Follower:FollowSymbol(owner.GUID, "swap_object", 32, -94, 0.1)
-		inst.shinefx_slot2.Transform:SetScale(0.2,0.2,0.2)
+		inst.shinefx_slot2.Follower:FollowSymbol(owner.GUID, "swap_object", 63, -150, 0.1)
+		inst.shinefx_slot2.Transform:SetScale(0.25,0.25,0.25)
 		
 		inst.slot2_inserted = true
 		
@@ -73,8 +72,8 @@ print("Add gem")
 		inst.shinefx2 = SpawnPrefab("crab_king_shine")
 		inst.shinefx2.entity:SetParent(owner.entity)
 		inst.shinefx2.entity:AddFollower()
-		inst.shinefx2.Follower:FollowSymbol(owner.GUID, "swap_object", 32, -94, 0)
-		inst.shinefx2.Transform:SetScale(0.2,0.2,0.2)
+		inst.shinefx2.Follower:FollowSymbol(owner.GUID, "swap_object", 63, -150, 0)
+		inst.shinefx2.Transform:SetScale(0.25,0.25,0.25)
 	end
 	
 	if item3 ~= nil and owner ~= nil and not inst.slot3_inserted then
@@ -84,8 +83,8 @@ print("Add gem")
 		--inst:ListenForEvent("onremove", onremovebody3, inst.shinefx_slot3)
 		inst.shinefx_slot3.entity:SetParent(owner.entity)
 		inst.shinefx_slot3.entity:AddFollower()
-		inst.shinefx_slot3.Follower:FollowSymbol(owner.GUID, "swap_object", 27, -76, 0.1)
-		inst.shinefx_slot3.Transform:SetScale(0.2,0.2,0.2)
+		inst.shinefx_slot3.Follower:FollowSymbol(owner.GUID, "swap_object", 48, -102, 0.1)
+		inst.shinefx_slot3.Transform:SetScale(0.25,0.25,0.25)
 		
 		inst.slot3_inserted = true
 		
@@ -93,8 +92,8 @@ print("Add gem")
 		inst.shinefx2 = SpawnPrefab("crab_king_shine")
 		inst.shinefx2.entity:SetParent(owner.entity)
 		inst.shinefx2.entity:AddFollower()
-		inst.shinefx2.Follower:FollowSymbol(owner.GUID, "swap_object", 27, -76, 0)
-		inst.shinefx2.Transform:SetScale(0.2,0.2,0.2)
+		inst.shinefx2.Follower:FollowSymbol(owner.GUID, "swap_object", 48, -102, 0)
+		inst.shinefx2.Transform:SetScale(0.25,0.25,0.25)
 	end
 	
 	if item4 ~= nil and owner ~= nil and not inst.slot4_inserted then
@@ -104,8 +103,8 @@ print("Add gem")
 		--inst:ListenForEvent("onremove", onremovebody4, inst.shinefx_slot4)
 		inst.shinefx_slot4.entity:SetParent(owner.entity)
 		inst.shinefx_slot4.entity:AddFollower()
-		inst.shinefx_slot4.Follower:FollowSymbol(owner.GUID, "swap_object", 22, -58, 0.1)
-		inst.shinefx_slot4.Transform:SetScale(0.2,0.2,0.2)
+		inst.shinefx_slot4.Follower:FollowSymbol(owner.GUID, "swap_object", 23, -61, 0.1)
+		inst.shinefx_slot4.Transform:SetScale(0.25,0.25,0.25)
 		
 		inst.slot4_inserted = true
 		
@@ -113,13 +112,12 @@ print("Add gem")
 		inst.shinefx2 = SpawnPrefab("crab_king_shine")
 		inst.shinefx2.entity:SetParent(owner.entity)
 		inst.shinefx2.entity:AddFollower()
-		inst.shinefx2.Follower:FollowSymbol(owner.GUID, "swap_object", 22, -58, 0)
-		inst.shinefx2.Transform:SetScale(0.2,0.2,0.2)
+		inst.shinefx2.Follower:FollowSymbol(owner.GUID, "swap_object", 23, -61, 0)
+		inst.shinefx2.Transform:SetScale(0.25,0.25,0.25)
 	end
 end
 
 local function RemoveGem(inst)
-print("Remove gem")
 	local owner = inst.components.inventoryitem.owner
 	local item1 = inst.components.container.slots[1]
 	local item2 = inst.components.container.slots[2]
@@ -127,55 +125,46 @@ print("Remove gem")
 	local item4 = inst.components.container.slots[4]
 
 	if item1 == nil and inst.shinefx_slot1 ~= nil and inst.slot1_inserted then
-		print("1")
 		inst.shinefx_slot1:Remove()
 
 		inst.slot1_inserted = false
 	end
 	
 	if item2 == nil and inst.shinefx_slot2 ~= nil and inst.slot2_inserted then
-		print("2")
 		inst.shinefx_slot2:Remove()
 		inst.slot2_inserted = false
 	end
 	
 	if item3 == nil and inst.shinefx_slot3 ~= nil and inst.slot3_inserted then
-		print("3")
 		inst.shinefx_slot3:Remove()
 		inst.slot3_inserted = false
 	end
 	
 	if item4 == nil and inst.shinefx_slot4 ~= nil and inst.slot4_inserted then
-		print("4")
 		inst.shinefx_slot4:Remove()
 		inst.slot4_inserted = false
 	end
 end
 
 local function UnequipRemoveGem(inst)
-print("U Remove gem")
 
 	if inst.shinefx_slot1 ~= nil and inst.slot1_inserted then
-		print("1")
 		inst.shinefx_slot1:Remove()
 
 		inst.slot1_inserted = false
 	end
 	
 	if inst.shinefx_slot2 ~= nil and inst.slot2_inserted then
-		print("2")
 		inst.shinefx_slot2:Remove()
 		inst.slot2_inserted = false
 	end
 	
 	if inst.shinefx_slot3 ~= nil and inst.slot3_inserted then
-		print("3")
 		inst.shinefx_slot3:Remove()
 		inst.slot3_inserted = false
 	end
 	
 	if inst.shinefx_slot4 ~= nil and inst.slot4_inserted then
-		print("4")
 		inst.shinefx_slot4:Remove()
 		inst.slot4_inserted = false
 	end
@@ -185,13 +174,8 @@ local function onequip(inst, owner)
 	
 	AddGem(inst)
 
-    local skin_build = inst:GetSkinBuild()
-    if skin_build ~= nil then
-        owner:PushEvent("equipskinneditem", inst:GetSkinName())
-        owner.AnimState:OverrideItemSkinSymbol("swap_object", skin_build, "swap_ruins_bat", inst.GUID, "swap_ruins_bat")
-    else
-        owner.AnimState:OverrideSymbol("swap_object", "swap_ruins_bat", "swap_ruins_bat")
-    end
+    owner.AnimState:OverrideSymbol("swap_object", "swap_crabclaw", "swap_crabclaw")
+	
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 
@@ -306,14 +290,9 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("ruins_bat")
-    inst.AnimState:SetBuild("swap_ruins_bat")
+    inst.AnimState:SetBank("cursedcrabclaw")
+    inst.AnimState:SetBuild("cursedcrabclaw")
     inst.AnimState:PlayAnimation("idle")
-
-    inst:AddTag("sharp")
-
-    --weapon (from weapon component) added to pristine state for optimization
-    inst:AddTag("weapon")
 
     inst.entity:SetPristine()
 
@@ -340,7 +319,8 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem:SetSinks(true)
+    inst.components.inventoryitem:SetSinks(false)
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/crabclaw.xml"
 	
     inst:AddComponent("container")
     inst.components.container:WidgetSetup("crabclaw")
@@ -351,12 +331,12 @@ local function fn()
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
-    inst.components.equippable.walkspeedmult = 1.1
 
     MakeHauntableLaunch(inst)
 
     return inst
 end
+
 
 local function buildgem(colour)
 	local function fn()
@@ -366,9 +346,14 @@ local function buildgem(colour)
 		inst.entity:AddAnimState()
 		inst.entity:AddNetwork()
 
-			inst.AnimState:SetBank("gems")
-			inst.AnimState:SetBuild("gems")
+		inst.AnimState:SetBank("gems")
+		inst.AnimState:SetBuild("gems_crabclaw")
+			
+		if colour == "opalprecious" then
+			inst.AnimState:PlayAnimation("opalgem_idle", true)
+		else
 			inst.AnimState:PlayAnimation(colour.."gem_idle", true)
+		end
 
 		inst:AddTag("INLIMBO")
 

@@ -75,7 +75,6 @@ end)
 --[[
 local function MakeTeam(inst, attacker)
     local leader = GLOBAL.SpawnPrefab("teamleader")
---print("<<<<<<<<================>>>>> Making TEAM:",attacker)
     leader:AddTag("penguin")
     leader.components.teamleader.threat = attacker
     leader.components.teamleader.radius = 10
@@ -88,7 +87,6 @@ local function MakeTeam(inst, attacker)
     leader.components.teamleader.team_type = inst.components.teamattacker.team_type
     leader.components.teamleader:NewTeammate(inst)
     leader.components.teamleader:BroadcastDistress(inst)
---print("<<<<<<<>>>>>")
 end
 
 --TODO add penguin attack on ice picked
@@ -122,7 +120,6 @@ local function PenguinKeepTarget(inst, target)
         or inst.components.teamattacker.orders == "ATTACK" then
         return true
     else
-        --print(inst,"Loses TARGET")
         return true
     end 
 end

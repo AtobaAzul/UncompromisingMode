@@ -22,7 +22,7 @@ function CheckItem(container, item, slot)
 end
 
 function CheckGem(container, item, slot)
-    return item:HasTag("gem")
+    return not item:HasTag("irreplaceable") and item:HasTag("gem")
 end
 
 modparams.air_conditioner =

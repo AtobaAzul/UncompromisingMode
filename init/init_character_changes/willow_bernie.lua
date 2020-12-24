@@ -30,7 +30,6 @@ local function getstatus(inst)
     if inst:GetSkinName() ~= nil then
         --skin_name = inst:GetSkinName()
 		--return skin_name
-		--print(skin_name)
 		return inst.components.fueled ~= nil and inst.components.fueled:IsEmpty() and "ASHLEY_BROKEN" or "ASHLEY"
 	end
 	

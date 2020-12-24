@@ -37,7 +37,6 @@ local function onequip_blue(inst, owner)
 				
 				inst.healthvalue = data.damage
 				inst.components.finiteuses:Use(1)
-				print(inst.healthvalue)
 				
 				LaunchProjectile(owner, data.damage)
 			end

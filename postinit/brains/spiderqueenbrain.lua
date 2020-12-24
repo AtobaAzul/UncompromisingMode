@@ -23,14 +23,12 @@ local function EquipMeleeAndResetCooldown(inst)
     if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
         inst.components.combat:ResetCooldown()
         inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
-        -- print("melee equipped and cooldown reset")
     end
 end
 
 local function EquipMelee(inst)
     if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
         inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
-        -- print("melee equipped")
     end
 end
 
@@ -42,7 +40,6 @@ end
 local function EquipRange(inst)
     if not inst.weaponitems.snotbomb.components.equippable:IsEquipped() then
         inst.components.inventory:Equip(inst.weaponitems.snotbomb)
-        -- print("phlegm equipped")
     end
 end
 

@@ -24,7 +24,6 @@ local function OnBlocked(owner, data, inst)
         not data.redirected and
         not data.attacker:HasTag("thorny") and data.attacker.components.combat:CanBeAttacked() then
 		local damage = data.attacker.components.combat.defaultdamage * (data.attacker.components.combat.playerdamagepercent or 1) * 0.75
-		--print(damage)
         data.attacker.components.combat:GetAttacked(inst, damage)
     end
 	

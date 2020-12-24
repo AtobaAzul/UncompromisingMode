@@ -65,7 +65,6 @@ local states=
 			EventHandler("animover", function(inst)
 				if inst.components.combat.target then
 					if math.random() < 0.25 then
-						print("idle")
 						inst.sg:GoToState("taunt")
 						return
 					end
@@ -80,7 +79,6 @@ local states=
 
 		onenter = function(inst)
 			inst.Physics:Stop()
-			print("taunt")
 			inst.AnimState:PlayAnimation("taunt")
 		end,
 
@@ -105,7 +103,6 @@ local states=
 		tags = {"busy"},
 
 		onenter = function(inst)
-			print("1")
 			--inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("atk_pre")
 			inst.components.burnable:Extinguish()

@@ -158,4 +158,13 @@ configuration_options =
 		},
 		default = 0,
 	},
+	
+	
+------------------------------
+-- Secret --
+------------------------------
+    Header("Secret"),
+------------------------------
+BinaryConfig("crabking_claws", "Crabking Fight Adjustment", "The Crabkings imposing claws now deal 500 damage to the king when killed", false),
+    
 }

@@ -52,27 +52,21 @@ local _inforest = false
 	end
 
 	local function SwapHFMusic(player)
-		print("swap")
 		if IsInHF(player) then
 			for k, v in pairs(HFMusic) do
-				print("ISHF")
 				
 				if IsInHF(player) and not _inforest then--and _soundemitter ~= nil then
 					_inforest = true
 					--GLOBAL.TheFocalPoint.SoundEmitter:KillSound("busy")
-					print(_inforest)
 				end
 				
 				SetSoundAlias(k,v)
 			end
 		else
     		for k, v in pairs(DefaultMusic) do
-				print("ISVN")
-				
 				if not IsInHF(player) and _inforest then--and _soundemitter ~= nil then
 					_inforest = false
 					--GLOBAL.TheFocalPoint.SoundEmitter:KillSound("busy")
-					print(_inforest)
 				end
 				
     			SetSoundAlias(k,v)
@@ -81,22 +75,17 @@ local _inforest = false
 	end
 	
 	local function CheckForKillSound(player)
-			print(_inforest)
 		if IsInHF(player) and not _inforest then--and _soundemitter ~= nil then
 			_inforest = true
 			GLOBAL.TheFocalPoint.SoundEmitter:KillSound("busy")
-			print(_inforest)
 		elseif not IsInHF(player) and _inforest then--and _soundemitter ~= nil then
 			_inforest = false
 			GLOBAL.TheFocalPoint.SoundEmitter:KillSound("busy")
-			print(_inforest)
 		end
 	end
 
 	local function StartPlayerListeners_HF(player)
-			print("Activate")
 		if player ~= nil then
-			print("Activatep")
 			--inst:ListenForEvent("performaction", CheckForKillSound, player)
 			inst:ListenForEvent("changearea", SwapHFMusic, player)
 		end
@@ -130,9 +119,7 @@ local function StopSoundEmitter()
 end
 
 	local function StopPlayerListeners_HF(player)
-			print("Deactivate")
 		if player ~= nil then
-			print("Deactivatep")
 			--inst:RemoveEventCallback("performaction", CheckForKillSound, player)
 			inst:RemoveEventCallback("changearea", SwapHFMusic, player)
 		end

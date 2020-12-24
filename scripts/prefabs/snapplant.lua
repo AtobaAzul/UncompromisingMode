@@ -32,7 +32,6 @@ end
 
 local function Bind(inst, buddy)
 	if buddy ~= nil and buddy.components.follower then
-		print("snapbud linked")
 		buddy.components.follower:SetLeader(inst)
         inst:ListenForEvent("death", function() Die(inst) end, buddy)
 	end

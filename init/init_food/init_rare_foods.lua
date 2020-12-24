@@ -230,7 +230,6 @@ levels =
 }
 
 local function setlevel(inst, level)
-    --print("DSTU setlevel")
     if not inst:HasTag("burnt") then
         if inst.anims == nil then
             inst.anims = { idle = level.idle, hit = level.hit }
@@ -243,7 +242,6 @@ local function setlevel(inst, level)
 end
 
 local function updatelevel(inst)
-    --print("DSTU updatelevel")
     if not inst:HasTag("burnt") then
         for k, v in pairs(levels) do
             if inst.components.harvestable.produce >= v.amount then
@@ -255,7 +253,6 @@ local function updatelevel(inst)
 end
 
 local function onharvest(inst, picker, produce)
-    --print("DSTU onharvest")
     if not inst:HasTag("burnt") then
         updatelevel(inst)
         if inst.components.childspawner ~= nil and not GLOBAL.TheWorld.state.iswinter then

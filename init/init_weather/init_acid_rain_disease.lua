@@ -1,10 +1,8 @@
 local function RandomDiseaseChance(inst)
 	local mushroomcheck = TheSim:FindFirstEntityWithTag("acidrain_mushroom")
-	--print("disease chance")
 	if inst.components.pickable ~= nil then
 		if mushroomcheck ~= nil and math.random() < 0.05 and 
 		GLOBAL.TheWorld.state.israining and GLOBAL.TheWorld.state.isautumn then
-			--print("disease DO")
 			local fx = GLOBAL.SpawnPrefab("disease_puff")
 			fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
 			
