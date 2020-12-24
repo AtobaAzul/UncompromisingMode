@@ -285,7 +285,6 @@ function InsertIngredientValues(names, tags, cancook, candry, keepoldvalues) -- 
 
             for tagname,tagval in pairs(tags) do
                 ingredients[name].tags[tagname] = tagval
-                --print(name,tagname,tagval,ingtable[name].tags[tagname])
 
                 if cancook then
                     ingredients[name.."_cooked"].tags.precook = 1
@@ -301,7 +300,6 @@ function InsertIngredientValues(names, tags, cancook, candry, keepoldvalues) -- 
                 if ingredients[name].tags[tagname]==nil or not keepoldvalues then -- only overwrite old value, if there is no old value, or if keepoldvalues is not true (will be not true by default)
                     ingredients[name].tags[tagname] = tagval -- this will overwrite the old value, if there was one
                 end
-                --print(name,tagname,tagval,ingtable[name].tags[tagname])
 
                 if cancook then
                     if ingredients[name.."_cooked"] == nil then

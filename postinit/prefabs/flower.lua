@@ -4,14 +4,12 @@ GLOBAL.setfenv(1, GLOBAL)
     return TheWorld.state.isfullmoon
 end]]
 local function Revert(inst)
---print("code ran")
 		local obj = SpawnPrefab("flower")
 		local x, y, z = inst.Transform:GetWorldPosition()
 			obj.Transform:SetPosition(x,y,z)
 			inst:Remove()
 end
 local function Transform(inst)
---print("code ran")
 		local obj = SpawnPrefab("flower_evil")
 		local x, y, z = inst.Transform:GetWorldPosition()
 			obj.Transform:SetPosition(x,y,z)

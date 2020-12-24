@@ -118,11 +118,9 @@ local function OnGetItemFromPlayer(inst, giver, item)
 				
 			if inst.planted ~= nil then
 				inst.AnimState:SetBuild("snapdragon_build_"..inst.planted)
-				print(inst.planted)
 			else
 				inst.planted = "pale"
 				inst.AnimState:SetBuild("snapdragon_build_"..inst.planted)
-				print(inst.planted)
 			end
 		--end
 		--[[else

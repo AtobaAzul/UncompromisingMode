@@ -25,9 +25,7 @@ v:DoTaskInTime(0.5,Perterbate(v))
 end
 end
 local function Levitato(v)
-print("4")
 if v.Physics ~= nil then
-print("5")
 v.Physics:SetMotorVel(0, 4, 0)
 v:DoTaskInTime(15+math.random(1,3), Perterbate(v))
 end

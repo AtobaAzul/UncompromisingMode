@@ -10,8 +10,6 @@ local function BonusDamage(inst)
 				if v.components.health ~= nil and not v.components.health:IsDead() then
 					v.components.health:DoDelta(-500)
 				end
-				
-				print(v)
 			end
 		end
     end

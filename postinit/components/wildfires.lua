@@ -43,7 +43,6 @@ env.AddClassPostConstruct("components/wildfires", function(self)
 	end
 	
 	local function LightFireForPlayer(player, rescheduleFn)
-	print("coderunning")
 	if player.components.areaaware ~= nil then
 	if not player.components.areaaware:CurrentlyInTag("hoodedcanopy") then
 		--OLD(player, rescheduleFn)

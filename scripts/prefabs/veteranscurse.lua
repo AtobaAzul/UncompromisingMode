@@ -20,7 +20,6 @@ local function ForceToTakeMoreHunger(inst)
 	if delta and overtime and delta < 0 then
 		-- Take extra hunger
 		delta = delta * 1.2
-		--print(delta)
 		end
 		return _DoDelta(self, delta, overtime, ignore_invincible)
 	end
@@ -45,7 +44,6 @@ local function ForceToTakeUsualHunger(inst)
 	if delta and overtime and delta < 0 then
 		-- Take normal hunger
 		delta = delta / 1.2
-		--print(delta)
 		end
 		return _DoDelta(self, delta, overtime, ignore_invincible)
 	end
@@ -59,26 +57,14 @@ local function oneat(inst, data)
 
 	if not inst:HasTag("plantkin") and data.food.components.edible:GetHealth() ~= nil and ((data.food.components.edible:GetHealth() * base_mult) * warlybuff) > 3 then
 		inst.components.debuffable:AddDebuff("healthregenbuff_vetcurse", "healthregenbuff_vetcurse", {duration = ((data.food.components.edible:GetHealth() * base_mult) * warlybuff) * 0.1})
-		print((data.food.components.edible:GetHealth() * base_mult) * warlybuff)
-		print((data.food.components.edible:GetHealth() * base_mult) * warlybuff)
-		print("health")
 	elseif not inst:HasTag("plantkin") then
 		inst.components.health:DoDelta((data.food.components.edible:GetHealth() * base_mult) * warlybuff, data.food.prefab)
-		print((data.food.components.edible:GetHealth() * base_mult) * warlybuff)
-		print((data.food.components.edible:GetHealth() * base_mult) * warlybuff)
-		print("health")
 	end
 	
 	if data.food.components.edible:GetSanity() ~= nil and ((data.food.components.edible:GetSanity() * base_mult) * warlybuff) > 3 then
 		inst.components.debuffable:AddDebuff("sanityregenbuff_vetcurse", "sanityregenbuff_vetcurse", {duration = ((data.food.components.edible:GetSanity() * base_mult) * warlybuff) * 0.1})
-		print((data.food.components.edible:GetSanity() * base_mult) * warlybuff)
-		print((data.food.components.edible:GetSanity() * base_mult) * warlybuff)
-		print("sanity")
 	else
 		inst.components.sanity:DoDelta((data.food.components.edible:GetSanity() * base_mult) * warlybuff)
-		print((data.food.components.edible:GetSanity() * base_mult) * warlybuff)
-		print((data.food.components.edible:GetSanity() * base_mult) * warlybuff)
-		print("sanity")
 	end
 	
 end

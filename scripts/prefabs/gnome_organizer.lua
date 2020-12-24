@@ -54,7 +54,6 @@ ptnew.z = ptnew.z + 8
 else
 ptnew.z = ptnew.z - 8
 end
-print(ptnew)
 inst.Transform:SetPosition(ptnew.x, ptnew.y, ptnew.z)
 end
 local pt = inst:GetPosition()

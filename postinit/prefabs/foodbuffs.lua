@@ -21,7 +21,6 @@ local function Retaliate(owner, data, inst)
 end
 
 local function attachretaliationdamage(inst, owner) 
-	print("attached")
     inst:ListenForEvent("blocked", Retaliate, owner)
     inst:ListenForEvent("attacked", Retaliate, owner)
 	SpawnPrefab("electricchargedfx"):SetTarget(owner)

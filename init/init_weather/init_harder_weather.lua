@@ -91,13 +91,11 @@ end
 
 local function OnLoad(inst, data)
 	if inst.components.deerclopsspawner ~= nil then
-		print("removedeer")
 		TheWorld.components.deerclopsspawner:OverrideAttacksPerSeason("DEERCLOPS", 0)
 		inst:RemoveComponent("deerclopsspawner")
 	end
 	
 	if inst.components.forestresourcespawner ~= nil then
-		print("removegrow")
 		inst:RemoveComponent("forestresourcespawner")
 	end
 	
@@ -123,7 +121,6 @@ local function OnSave()
 		TheWorld.components.deerclopsspawner:OverrideAttacksPerSeason("DEERCLOPS", 0)
 		inst:RemoveComponent("deerclopsspawner")
 	end
-	print("override")
 	--/////////--
 end
 

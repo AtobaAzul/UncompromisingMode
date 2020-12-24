@@ -7,13 +7,9 @@ env.AddPlayerPostInit(function(inst)
 	--[[inst:ListenForEvent("overstuff", function(inst, data)
 	local myvalue = data.oldpercent * inst.components.hunger.max
 	local myvalueover = myvalue + data.delta
-	print(myvalue)
-	print(myvalueover)
-	print(data.delta)
 	
 	
 		if myvalueover > inst.components.hunger.max then	
-			print("I won!")
 		end
 	end)]]
 
@@ -34,15 +30,10 @@ env.AddPlayerPostInit(function(inst)
 					if inst.components.grogginess:HasGrogginess() then
 						inst.components.talker:Say(GetString(inst, "ANNOUNCE_OVER_EAT", "OVERSTUFFED"))
 						inst.components.grogginess:MaximizeGrogginess()
-						print("STOP THIS FORCE FEEDING ITS TOO MUCH")
 					else
 						inst.components.talker:Say(GetString(inst, "ANNOUNCE_OVER_EAT", "STUFFED"))
 						local delta = math.clamp(clampvalue / 10, 0.1, 2.9)
 						inst.components.grogginess:AddGrogginess(delta)
-						print("OVERSTUFFED AMOUNT:")
-						print(clampvalue)
-						print("GROGINESS DELTA:")
-						print(delta)
 					end
 				end
 			end
@@ -62,8 +53,6 @@ env.AddComponentPostInit("hunger", function(self)
 		if not ignore_invincible and self.inst.components.health and self.inst.components.health.invincible or self.inst.is_teleporting then
 			return
 		end
-		
-		print("success")
 		
 		local old = self.current
 		self.current = math.clamp(self.current + delta, 0, self.max)

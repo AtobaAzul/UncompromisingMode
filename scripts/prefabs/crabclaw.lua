@@ -31,7 +31,6 @@ local function onremovebody4(body)
 end
 
 local function AddGem(inst)
-print("Add gem")
 	local owner = inst.components.inventoryitem.owner
 	local item1 = inst.components.container.slots[1]
 	local item2 = inst.components.container.slots[2]
@@ -119,7 +118,6 @@ print("Add gem")
 end
 
 local function RemoveGem(inst)
-print("Remove gem")
 	local owner = inst.components.inventoryitem.owner
 	local item1 = inst.components.container.slots[1]
 	local item2 = inst.components.container.slots[2]
@@ -127,55 +125,46 @@ print("Remove gem")
 	local item4 = inst.components.container.slots[4]
 
 	if item1 == nil and inst.shinefx_slot1 ~= nil and inst.slot1_inserted then
-		print("1")
 		inst.shinefx_slot1:Remove()
 
 		inst.slot1_inserted = false
 	end
 	
 	if item2 == nil and inst.shinefx_slot2 ~= nil and inst.slot2_inserted then
-		print("2")
 		inst.shinefx_slot2:Remove()
 		inst.slot2_inserted = false
 	end
 	
 	if item3 == nil and inst.shinefx_slot3 ~= nil and inst.slot3_inserted then
-		print("3")
 		inst.shinefx_slot3:Remove()
 		inst.slot3_inserted = false
 	end
 	
 	if item4 == nil and inst.shinefx_slot4 ~= nil and inst.slot4_inserted then
-		print("4")
 		inst.shinefx_slot4:Remove()
 		inst.slot4_inserted = false
 	end
 end
 
 local function UnequipRemoveGem(inst)
-print("U Remove gem")
 
 	if inst.shinefx_slot1 ~= nil and inst.slot1_inserted then
-		print("1")
 		inst.shinefx_slot1:Remove()
 
 		inst.slot1_inserted = false
 	end
 	
 	if inst.shinefx_slot2 ~= nil and inst.slot2_inserted then
-		print("2")
 		inst.shinefx_slot2:Remove()
 		inst.slot2_inserted = false
 	end
 	
 	if inst.shinefx_slot3 ~= nil and inst.slot3_inserted then
-		print("3")
 		inst.shinefx_slot3:Remove()
 		inst.slot3_inserted = false
 	end
 	
 	if inst.shinefx_slot4 ~= nil and inst.slot4_inserted then
-		print("4")
 		inst.shinefx_slot4:Remove()
 		inst.slot4_inserted = false
 	end

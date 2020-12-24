@@ -5,7 +5,6 @@ GLOBAL.setfenv(1, GLOBAL)
 local function onothertimerdone(inst, data)
 	if data.name == "rage" then
 			inst:DoTaskInTime(17, function(inst)
-			--print("bingo")
 			inst:PushEvent("firefall")
 			end)
 			inst:DoTaskInTime(21, function(inst)
@@ -25,7 +24,6 @@ end
 
 local function OnAttackedExplo(inst, data)
 	inst.components.explosiveresist:SetResistance(0.9)
-	--print(inst.components.explosiveresist:GetResistance())
 	if data.attacker:HasTag("explosive") then
 		inst.AnimState:PlayAnimation("block_loop", true)
 	end

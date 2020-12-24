@@ -5,8 +5,6 @@
 local function MakeSoulless(prefab)
     AddPrefabPostInit(prefab, function(inst)
         if inst~= nil then
-            --print("DSTU: made soulless")
-            --print(prefab)
             inst:AddTag("soulless")
         end
     end)
