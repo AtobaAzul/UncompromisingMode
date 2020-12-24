@@ -234,6 +234,9 @@ local function ontimerdone(inst, data)
 		inst.podspawned = false
 		inst.AnimState:SetMultColour(1, 1, 1, 1)
     end
+    if data.name == "vomit_time" then
+        inst.vomit_time = true
+    end
 end
 
 local function on_buddytimerdone(inst, data)
@@ -417,10 +420,29 @@ local function prime_fn()
     inst.components.trader.deleteitemonaccept = true
 	
     inst:AddComponent("timer")
+	inst.components.timer:StartTimer("vomit_time", 480)
     inst:ListenForEvent("timerdone", ontimerdone)
 	
     inst.components.locomotor.walkspeed = 3
     inst.components.locomotor:SetTriggersCreep(false)
+	
+	
+	inst:AddComponent("playerprox")
+	inst.components.playerprox:SetDist(10,11)
+	inst.components.playerprox:SetOnPlayerNear(function(inst)
+		if inst.vomit_time ~= nil and inst.vomit_time then
+			
+		inst.rewarditem = "pale_vomit"
+
+			local angle = math.random() * 2 * PI
+			local delta = 2 * PI / 3 --/ (numgold + numprops + 1) --purposely leave a random gap
+			local variance = delta * .4
+			inst.sg:GoToState("taunt")
+			
+			local bonusitem = SpawnPrefab(inst.rewarditem)
+			LaunchItem(inst, bonusitem, GetRandomWithVariance(angle, variance))
+		end
+	end)
 
     return inst
 end
