@@ -114,8 +114,8 @@ local prefab_post = {
 	"nightlight",
 	"armor_sanity",
 	"tophat",
-	"nightsword",
-	"ruinsstatues",
+	"tophatreduction",
+	--"ruinsstatues", Commented out until time for testing AT
 }
 
 local stategraph_post = {

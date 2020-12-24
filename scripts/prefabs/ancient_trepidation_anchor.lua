@@ -20,11 +20,9 @@ end
         inst.entity:AddTransform()
         inst.entity:AddAnimState()
         inst.entity:AddSoundEmitter()
-        inst.entity:AddMiniMapEntity()
         inst.entity:AddNetwork()
 
 
-        inst.MiniMapEntity:SetIcon("pitcher.tex")
 
 		--inst.AnimState:SetBank("pitcher")
 		--inst.AnimState:SetBuild("pitcher")
