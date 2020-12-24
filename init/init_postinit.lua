@@ -114,7 +114,7 @@ local prefab_post = {
 	"nightlight",
 	"armor_sanity",
 	"tophat",
-	"nightsword",
+	"tophatreduction",
 	"ruinsstatues",
 }
 
