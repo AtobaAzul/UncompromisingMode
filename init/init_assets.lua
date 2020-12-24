@@ -52,6 +52,8 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/screecher_trinket.tex"),
 	Asset("ATLAS", "images/inventoryimages/watermelon_lantern.xml"),
 	Asset("IMAGE", "images/inventoryimages/watermelon_lantern.tex"),
+	Asset("ATLAS", "images/inventoryimages/crabclaw.xml"),
+	Asset("IMAGE", "images/inventoryimages/crabclaw.tex"),
 	
 	Asset("ANIM", "anim/geyser.zip"),
 	Asset("ANIM", "anim/lava_vomit.zip"),
@@ -138,6 +140,9 @@ Assets = {
 	Asset("ANIM", "anim/swap_rat_whip.zip"),
 	Asset("ANIM", "anim/torso_amulets_klaus.zip"),
 	Asset("ANIM", "anim/amulet_klaus.zip"),
+	Asset("ANIM", "anim/swap_crabclaw.zip"),
+	Asset("ANIM", "anim/cursedcrabclaw.zip"),
+	Asset("ANIM", "anim/gems_crabclaw.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),

@@ -596,7 +596,7 @@ local function ontimerdone(inst, data)
 end
 
 local function fnlightning()
-    local inst = fncommon("hound", "hound_lightning", { "firehound", "icehound" }, nil, nil, {amphibious = true})
+    local inst = fncommon("hound", "hound_lightning_ocean", { "firehound", "icehound" }, nil, nil, {amphibious = true})
 
     if not TheWorld.ismastersim then
         return inst

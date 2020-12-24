@@ -175,9 +175,9 @@ local states = {
 					for k = 1, max_tries do
 						local x, y, z = target.Transform:GetWorldPosition()
 						local offset = 10
-						x = x + math.random(2 * 5) - 5
-						z = z + math.random(2 * 5) - 5
-						if TheWorld.Map:IsPassableAtPoint(x, y, z) then
+						x = x + math.random(2 * offset) - offset
+						z = z + math.random(2 * offset) - offset
+						if TheWorld.Map:IsPassableAtPoint(x, y, z) and #TheSim:FindEntities(x, y, z, 3, { "player" }) == 0 then
 							inst.Physics:Teleport(x, y, z)
 							break
 						end
