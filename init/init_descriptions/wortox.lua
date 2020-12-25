@@ -166,8 +166,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.WATERMELON_LANTERN = "We made a jack-o-lantern with a watermelon! HAH!"
 	
 		--Viperstuff Quotes
-	DESCRIBE.VIPERWORM = "Depths Viper"
-	DESCRIBE.VIPERFRUIT = "Gloomberry"
+	DESCRIBE.VIPERWORM = "A snake who's quite good at making fakes!"
+	DESCRIBE.VIPERFRUIT = "It reeks, but it's unique!"
 	DESCRIBE.VIPERJAM = "Gloomberry Jam"
 	
 	
