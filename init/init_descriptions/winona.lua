@@ -167,8 +167,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.WATERMELON_LANTERN = DESCRIBE.PUMPKIN_LANTERN
 	
 		--Viperstuff Quotes
-	DESCRIBE.VIPERWORM = "Depths Viper"
-	DESCRIBE.VIPERFRUIT = "Gloomberry"
+	DESCRIBE.VIPERWORM = "Don't think you can deceive me!"
+	DESCRIBE.VIPERFRUIT = "It's nice to have some helping hands."
 	DESCRIBE.VIPERJAM = "Gloomberry Jam"
 	
 	
