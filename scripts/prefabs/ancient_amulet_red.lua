@@ -148,8 +148,8 @@ local function fn()
 
     inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetOnFinished(inst.Remove)
-    inst.components.finiteuses:SetMaxUses(TUNING.REDAMULET_USES)
-    inst.components.finiteuses:SetUses(TUNING.REDAMULET_USES)
+    inst.components.finiteuses:SetMaxUses(30)
+    inst.components.finiteuses:SetUses(30)
 
     inst:AddComponent("hauntable")
 	inst.components.hauntable:SetOnHauntFn(OnHaunt)

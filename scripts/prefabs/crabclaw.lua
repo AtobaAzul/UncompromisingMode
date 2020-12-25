@@ -293,6 +293,8 @@ local function fn()
     inst.AnimState:SetBank("cursedcrabclaw")
     inst.AnimState:SetBuild("cursedcrabclaw")
     inst.AnimState:PlayAnimation("idle")
+	
+    MakeInventoryFloatable(inst, "med", 0.05)
 
     inst.entity:SetPristine()
 

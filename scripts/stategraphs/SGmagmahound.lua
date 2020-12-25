@@ -366,11 +366,11 @@ local states =
 	
     State{
         name = "howl_attack",
-        tags = { "attack", "busy", "howling" },
+        tags = { "attack", "busy", "howling", "canrotate" },
 
         onenter = function(inst, target)
 			ShowEyeFX(inst)
-            inst.Transform:SetFourFaced()
+            --inst.Transform:SetFourFaced()
 			inst.foogley = inst.foogley + 1 or 0
 			
             if not target then
@@ -399,7 +399,7 @@ local states =
 			end),
             TimeEvent(3*FRAMES, function(inst)
 				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
-                    inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
                 end
 			
 				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
@@ -410,7 +410,7 @@ local states =
 			end),
             TimeEvent(6*FRAMES, function(inst) 
 				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
-                    inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
                 end
 			
 				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
@@ -421,7 +421,7 @@ local states =
 			end),
             TimeEvent(9*FRAMES, function(inst) 
 				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
-                    inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
                 end
 			
 				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
@@ -432,7 +432,7 @@ local states =
 			end),
             TimeEvent(12*FRAMES, function(inst) 
 				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
-                    inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
                 end
 			
 				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
