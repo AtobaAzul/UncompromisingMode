@@ -165,8 +165,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.WATERMELON_LANTERN = "Never tried this with a melon before!"
 	
 		--Viperstuff Quotes
-	DESCRIBE.VIPERWORM = "Depths Viper"
-	DESCRIBE.VIPERFRUIT = "Gloomberry"
+	DESCRIBE.VIPERWORM = "We don't like the looks of him!"
+	DESCRIBE.VIPERFRUIT = "It reminds us of a strawberry."
 	DESCRIBE.VIPERJAM = "Gloomberry Jam"
 	
 	
