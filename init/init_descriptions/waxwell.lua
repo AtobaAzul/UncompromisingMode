@@ -167,8 +167,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.WATERMELON_LANTERN = "Why hello, Ms. Katrina."
 	
 		--Viperstuff Quotes
-	DESCRIBE.VIPERWORM = "Depths Viper"
-	DESCRIBE.VIPERFRUIT = "Gloomberry"
+	DESCRIBE.VIPERWORM = "This one's been blighted by the fuel."
+	DESCRIBE.VIPERFRUIT = "More to the army, I suppose."
 	DESCRIBE.VIPERJAM = "Gloomberry Jam"
 	
 	
