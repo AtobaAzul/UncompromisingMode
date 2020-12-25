@@ -166,8 +166,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.WATERMELON_LANTERN = "I don't believe a Citrullus lanatus is usually carved like this, but we make do."
 	
 		--Viperstuff Quotes
-	DESCRIBE.VIPERWORM = "Depths Viper"
-	DESCRIBE.VIPERFRUIT = "Gloomberry"
+	DESCRIBE.VIPERWORM = "It appears to have hallucinogenic bile."
+	DESCRIBE.VIPERFRUIT = "Consumption provides access to the snake's abilites."
 	DESCRIBE.VIPERJAM = "Gloomberry Jam"
 	
 	
