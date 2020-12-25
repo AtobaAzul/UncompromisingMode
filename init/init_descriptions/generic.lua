@@ -249,4 +249,15 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 
     RECIPE_DESC.RAT_BURROW = "A den of annoying little hairballs."
+
+	-- Xmas Update
+	DESCRIBE.MAGMAHOUND = "Hot dog!"
+	DESCRIBE.LIGHTNINGHOUND = "Watch it, that one stings!"
+	DESCRIBE.RNESKELETON = "They are spooky AND scary!"
+	DESCRIBE.RATWHIP = "I make all the rules."
+	DESCRIBE_VOMIT = "Oh, how nice of you..." --Im not making several quotes fuck you
+	DESCRIBE.KLAUS_AMULET = "It's chains contain the King of Winter!"
+	DESCRIBE.CRAB_CLAW = "Hey, these are gem holes!" --Generic line for now, this is unimplemented
+	DESCIRBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+
 	
