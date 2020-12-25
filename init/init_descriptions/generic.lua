@@ -254,10 +254,18 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.MAGMAHOUND = "Hot dog!"
 	DESCRIBE.LIGHTNINGHOUND = "Watch it, that one stings!"
 	DESCRIBE.RNESKELETON = "They are spooky AND scary!"
-	DESCRIBE.RATWHIP = "I make all the rules."
-	DESCRIBE_VOMIT = "Oh, how nice of you..." --Im not making several quotes fuck you
+	DESCRIBE.RAT_WHIP = "I make all the rules."
+	
+	DESCRIBE.ORANGE_VOMIT = "Oh, how nice of you..."
+	DESCRIBE.GREEN_VOMIT = "Oh, how nice of you..."
+	DESCRIBE.RED_VOMIT = "Oh, how nice of you..."
+	DESCRIBE.PINK_VOMIT = "Oh, how nice of you..."
+	DESCRIBE.YELLOW_VOMIT = "Oh, how nice of you..."
+	DESCRIBE.PURPLE_VOMIT = "Oh, how nice of you..."
+	DESCRIBE.PALE_VOMIT = "Oh, how nice of you..."
+	
 	DESCRIBE.KLAUS_AMULET = "It's chains contain the King of Winter!"
-	DESCRIBE.CRAB_CLAW = "Hey, these are gem holes!" --Generic line for now, this is unimplemented
-	DESCIRBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+	DESCRIBE.CRABCLAW = "Hey, these are gem holes!"
+	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
 
 	
