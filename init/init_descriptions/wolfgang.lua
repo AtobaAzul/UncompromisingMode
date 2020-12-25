@@ -166,8 +166,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.WATERMELON_LANTERN = "Is still scary!"
 	
 		--Viperstuff Quotes
-	DESCRIBE.VIPERWORM = "Depths Viper"
-	DESCRIBE.VIPERFRUIT = "Gloomberry"
+	DESCRIBE.VIPERWORM = "Snake makes scarier snakes!"
+	DESCRIBE.VIPERFRUIT = "Snakes help Wolfgang?"
 	DESCRIBE.VIPERJAM = "Gloomberry Jam"
 	
 	
