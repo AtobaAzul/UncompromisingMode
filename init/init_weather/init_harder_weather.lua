@@ -49,7 +49,7 @@ env.AddPrefabPostInit("cave", function(inst)
 {
     base_prefab = "worm",
     winter_prefab = "shockworm",
-    summer_prefab = "shockworm",
+    summer_prefab = "viperworm",
 
     attack_levels =
     {
