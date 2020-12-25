@@ -1150,7 +1150,7 @@ end
 --Inclusion and Tuning
 ------------------------
 --Wild
-AddWildEvent(SpawnBats,.4)
+AddWildEvent(SpawnBats,.2)
 AddWildEvent(SpawnLightFlowersNFerns,.3)
 AddWildEvent(SpawnSkitts,.6)
 AddWildEvent(SpawnMonkeys,.2)
@@ -1162,7 +1162,7 @@ AddWildEvent(SpawnShadowTalker,.7)
 AddWildEvent(SpawnShadowBoomer,.2)
 AddWildEvent(SkeleBros,0.3)
 --Secondary Wild
-AddSecondaryWildEvent(SpawnBats,.4)
+AddSecondaryWildEvent(SpawnBats,.2)
 AddSecondaryWildEvent(SpawnLightFlowersNFerns,.3)
 AddSecondaryWildEvent(SpawnSkitts,.5)
 AddSecondaryWildEvent(StumpsAttack,.2)
@@ -1172,7 +1172,7 @@ AddSecondaryWildEvent(SpawnShadowBoomer,.1)
 AddBaseEvent(SpawnBaseBats,.3)
 AddBaseEvent(SpawnFissures,.3)
 AddBaseEvent(SpawnSkitts,.5)
-AddBaseEvent(FireHungryGhostAttack,.4)
+AddBaseEvent(FireHungryGhostAttack,.2)
 AddBaseEvent(SpawnShadowChars,.3)
 AddBaseEvent(SpawnMonkeys,.1)
 AddBaseEvent(LeifAttack,.1)
@@ -1181,8 +1181,8 @@ AddBaseEvent(SpawnShadowTeleporter,.2)
 AddBaseEvent(StumpsAttack,.3)
 AddBaseEvent(SpawnShadowTalker,.6)
 AddBaseEvent(SpawnShadowBoomer,.2)
-AddBaseEvent(SpawnGnomes,0.4)
-AddBaseEvent(SkeleBros,0.4)
+AddBaseEvent(SpawnGnomes,.4)
+AddBaseEvent(SkeleBros,.4)
 --Cave
 AddCaveEvent(SpawnBats,.5)
 AddCaveEvent(SpawnFissures,.2)
@@ -1193,7 +1193,7 @@ AddCaveEvent(SpawnLightFlowersNFerns,.3)
 AddCaveEvent(SpawnShadowBoomer,.2)
 --Winter
 AddWinterEvent(SpawnKrampus,.5)
-AddWinterEvent(SpawnWalrusHunt,.5)
+--AddWinterEvent(SpawnWalrusHunt,.5)
 --Spring
 AddSpringEvent(SpawnThunderFar,1)
 AddSpringEvent(SpawnLureplagueRat,.1)
@@ -1201,16 +1201,16 @@ AddSpringEvent(SpawnLureplagueRat,.1)
 AddSummerEvent(SpawnWalrusHunt,1)
 --Full Moon
 AddFullMoonEvent(MoonTear,.5)
-AddFullMoonEvent(SpawnWerePigs,.5)
+--AddFullMoonEvent(SpawnWerePigs,.5)
 --New Moon
 AddNewMoonEvent(ChessPiece,.5)
 AddNewMoonEvent(SpawnPhonograph,.2)
 --Ocean
-AddOceanEvent(SpawnSquids,.8)
+AddOceanEvent(SpawnSquids,.6)
 AddOceanEvent(SpawnBats,.4)
 --AddOceanEvent(FireHungryGhostAttack,.2)
-AddOceanEvent(SpawnSkitts,.3)
-AddOceanEvent(SpawnShadowTalker,.4)
+AddOceanEvent(SpawnSkitts,.4)
+AddOceanEvent(SpawnShadowTalker,.5)
 --AddOceanEvent(SpawnGnarwail,.5)
 
 ------------------------
