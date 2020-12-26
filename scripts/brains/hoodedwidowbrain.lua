@@ -141,7 +141,7 @@ end
 function HoodedWidowBrain:OnStart()
     local root = PriorityNode(
     {	
-		WhileNode(function() return GettingBullied(self.inst) end,"Being Bullied",
+		WhileNode(function() return self.inst.bullier == true end,"Being Bullied",
 		DoAction(self.inst, GoHomeAction)),
     	--WhileNode( function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
         --WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)), No fire cheese please

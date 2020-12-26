@@ -336,7 +336,11 @@ Assets = {
 	Asset("ANIM", "anim/viperfruit.zip"),
 	Asset("IMAGE", "images/inventoryimages/viperjam.tex"),
 	Asset("ATLAS", "images/inventoryimages/viperjam.xml"),
-	Asset("ANIM", "anim/viperjam.zip"),	
+	Asset("ANIM", "anim/viperjam.zip"),
+	Asset("ANIM", "anim/bight.zip"),	
+	
+	
+	
 	--Map Icons Start--
 	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),
 	Asset( "ATLAS", "images/map_icons/riceplant.xml" ),

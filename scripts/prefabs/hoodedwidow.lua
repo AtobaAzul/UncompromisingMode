@@ -200,6 +200,17 @@ if inst.components.combat ~= nil then
 inst.components.combat:TryRetarget()
 end
 end
+
+local function GettingBullied(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x, y, z, 30, { "epic" }, { "hoodedwidow" } )
+	if #ents >= 1 then
+	inst.bullier = true
+	else
+	inst.bullier = false
+	end
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -312,7 +323,9 @@ local function fn()
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("death", OnDead)
 	inst:DoPeriodicTask(3, TryPowerMove)
+	inst:DoPeriodicTask(3, GettingBullied)
 	inst.justkilled = false
+	inst.bullier = nil
 	inst:ListenForEvent("killed", OnKilledOther)
 	
 
