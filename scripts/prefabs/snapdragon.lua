@@ -441,6 +441,7 @@ local function prime_fn()
 			
 			local bonusitem = SpawnPrefab(inst.rewarditem)
 			LaunchItem(inst, bonusitem, GetRandomWithVariance(angle, variance))
+			inst.vomit_time = false
 		end
 	end)
 
@@ -493,6 +494,7 @@ local function buddy_fn()
 			
 			local bonusitem = SpawnPrefab(inst.rewarditem)
 			LaunchItem(inst, bonusitem, GetRandomWithVariance(angle, variance))
+			inst.vomit_time = false
 		end
 	end)
 	
