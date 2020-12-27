@@ -234,13 +234,24 @@ local function FindTargetOfInterest(inst)
             --Higher chance to follow if he has bananas
 				local x, y, z = target.Transform:GetWorldPosition()
 				if #TheSim:FindEntities(x,y,z,60,{"trepidation"}) <= 1 then
-                SetHarassPlayer(inst, target)
-				return
+					if not target:HasTag("playerghost") then
+					SetHarassPlayer(inst, target)
+					return
+					end
 				end
         end
     end
 end
 
+local function CheckIfTargetIsFrigginAlive(inst)
+print(inst.harassplayer)
+if inst.harassplayer ~= nil then
+local player = inst.harassplayer
+	if player:HasTag("playerghost") then
+	inst.harassplayer = nil
+	end
+end
+end
 
 local function fn(Sim)
 	local inst = CreateEntity()
@@ -331,8 +342,9 @@ local function fn(Sim)
 	inst.onsave = OnSave
 	inst.onload = OnLoad
 	inst:DoPeriodicTask(3,CheckIfInsaners)
+	inst:DoPeriodicTask(6,CheckIfTargetIsFrigginAlive)
 	inst.FindTargetOfInterestTask = inst:DoPeriodicTask(5, FindTargetOfInterest) --Find something to be interested in!
     return inst
 end
 
-return Prefab( "ancient_trepidation", fn, assets, prefabs)
+return Prefab("ancient_trepidation", fn, assets, prefabs)

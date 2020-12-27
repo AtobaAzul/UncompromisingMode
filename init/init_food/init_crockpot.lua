@@ -336,6 +336,10 @@ InsertIngredientValues({"rice"},{veggie=1,rice=1},true,false,false)
 InsertIngredientValues({"rice_cooked"},{veggie=1,rice=1},true,false,false)
 InsertIngredientValues({"foliage"},{veggie=.1,foliage=1},true,false,false)
 InsertIngredientValues({"horn"},{meat=1},true,false,false)
+InsertIngredientValues({"trunk_summer"},{meat=2},true,false,false)
+InsertIngredientValues({"trunk_winter"},{meat=2},true,false,false)
+InsertIngredientValues({"trunk_cooked"},{meat=2},true,false,false)
+
 local zaspberryparfait =
 {
     name = "zaspberryparfait",

@@ -34,7 +34,7 @@ recipes.icecream.oneatenfn = ApplyIcecreamBuff
 
 
 ------Rare Farmplot Crockpot Foods Change
-recipes.mashedpotatoes.hunger = 100
+recipes.mashedpotatoes.hunger = 75
 
 recipes.salsa.hunger = 25
 recipes.salsa.sanity = 50

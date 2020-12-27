@@ -314,8 +314,8 @@ local function fn()
     -------
 
     inst:AddComponent("finiteuses")
-    inst.components.finiteuses:SetMaxUses(TUNING.RUINS_BAT_USES)
-    inst.components.finiteuses:SetUses(TUNING.RUINS_BAT_USES)
+    inst.components.finiteuses:SetMaxUses(250)
+    inst.components.finiteuses:SetUses(250)
     inst.components.finiteuses:SetOnFinished(inst.Remove)
 
     inst:AddComponent("inspectable")
