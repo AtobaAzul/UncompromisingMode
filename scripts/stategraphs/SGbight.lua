@@ -2,9 +2,6 @@ require("stategraphs/commonstates")
 
 local actionhandlers = 
 {
-    ActionHandler(ACTIONS.EAT, "eat"),
-    ActionHandler(ACTIONS.GOHOME, "eat"),
-    ActionHandler(ACTIONS.INVESTIGATE, "investigate"),
 }
 
 local events=
@@ -22,7 +19,20 @@ local events=
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     CommonHandlers.OnSleep(),
     CommonHandlers.OnFreeze(),
-    CommonHandlers.OnLocomote(false, true),   
+    EventHandler("locomote", function(inst) 
+        if not inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("evade")  then
+            
+            local is_moving = inst.sg:HasStateTag("moving")
+            local wants_to_move = inst.components.locomotor:WantsToMoveForward()
+            if not inst.sg:HasStateTag("attack") and is_moving ~= wants_to_move then
+                if wants_to_move then
+                    inst.sg:GoToState("premoving")
+                else
+                    inst.sg:GoToState("idle")
+                end
+            end
+        end
+    end),     
 }
 
 local states=
@@ -60,28 +70,47 @@ local states=
 
     },    
     
---[[
     State{
-        name = "moving",
+        name = "premoving",
         tags = {"moving", "canrotate"},
         
         onenter = function(inst)
-			inst.components.locomotor:RunForward()
-            inst.AnimState:PlayAnimation("shamble")
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("walk_pre")
         end,
         
         timeline=
         {
-            TimeEvent(8*FRAMES, function(inst) inst.components.locomotor:RunForward() end),
+            TimeEvent(3*FRAMES, PlayFootstep),
         },
         
         events=
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("moving") end),
         },
-        
-    },]] 
+    },
     
+    State{
+        name = "moving",
+        tags = {"moving", "canrotate"},
+        
+        onenter = function(inst)
+			inst.components.locomotor:WalkForward()
+            inst.AnimState:PlayAnimation("walk_loop")
+        end,
+        
+        timeline=
+        {
+            TimeEvent(4*FRAMES, PlayFootstep),
+            TimeEvent(8*FRAMES, PlayFootstep),
+        },
+        
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("premoving") end),
+        },
+        
+    },   
     
     State{
         name = "idle",
@@ -100,9 +129,9 @@ local states=
 
             if start_anim then
                 inst.AnimState:PlayAnimation(start_anim)
-                inst.AnimState:PushAnimation("idle", true)
+                inst.AnimState:PushAnimation("idle_loop", true)
             else
-                inst.AnimState:PlayAnimation("idle", true)
+                inst.AnimState:PlayAnimation("idle_loop", true)
             end
 
         end,
@@ -116,7 +145,7 @@ local states=
         
         onenter = function(inst)
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("idle")
+            inst.AnimState:PlayAnimation("idle_loop")
         end,
         
         events=
@@ -125,23 +154,6 @@ local states=
         },
     },    
     
-    State{
-        name = "investigate",
-        tags = {"busy"},
-        
-        onenter = function(inst)
-            inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("idle")
-        end,
-        
-        events=
-        {
-            EventHandler("animover", function(inst)
-                inst:PerformBufferedAction()
-                inst.sg:GoToState("idle")
-            end),
-        },
-    },    
     
     State{
         name = "attack",
@@ -197,24 +209,6 @@ local states=
         },
     },  
 }
-CommonStates.AddWalkStates(states,
-{
-    starttimeline = 
-    {
-	    TimeEvent(0*FRAMES, function(inst) inst.Physics:Stop() end ),
-    },
-	walktimeline = {
-		    TimeEvent(0*FRAMES, function(inst) inst.Physics:Stop() end ),
-            TimeEvent(15*FRAMES, function(inst) 
-                inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/bounce")
-                inst.components.locomotor:WalkForward()
-            end ),
-            --[[TimeEvent(25*FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/land")
-                inst.Physics:Stop()
-            end ),]]
-	},
-}, nil,true)
 CommonStates.AddFrozenStates(states)
 
 return StateGraph("bight", states, events, "idle", actionhandlers)

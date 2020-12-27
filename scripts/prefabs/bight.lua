@@ -61,11 +61,10 @@ local function fn(Sim)
     inst.entity:AddLightWatcher()
 
     --inst.DynamicShadow:SetSize(1, .75)
-    inst.Transform:SetFourFaced()
-
-	--shadow:SetSize(1, 0.75)
-	inst.Transform:SetSixFaced()
-
+    inst.Transform:SetSixFaced()
+    inst.AnimState:SetBank("bight")
+    inst.AnimState:SetBuild("bight")
+    inst.AnimState:PlayAnimation("idle_loop",true)
 	MakeCharacterPhysics(inst, 10, .5)
 	--MakePoisonableCharacter(inst)
 
@@ -74,10 +73,7 @@ local function fn(Sim)
 	if not TheWorld.ismastersim then
         return inst
     end
-	
-    inst.AnimState:SetBank("bight")
-    inst.AnimState:SetBuild("bight")
-    inst.AnimState:PlayAnimation("idle",true)
+
     inst.Transform:SetScale(1.2,1.2,1.2)
     -- locomotor must be constructed before the stategraph!
     inst:AddComponent("locomotor")
