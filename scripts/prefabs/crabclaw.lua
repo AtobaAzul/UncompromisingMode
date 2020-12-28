@@ -171,17 +171,31 @@ local function UnequipRemoveGem(inst)
 end
 
 local function onequip(inst, owner)
-	
-	AddGem(inst)
 
-    owner.AnimState:OverrideSymbol("swap_object", "swap_crabclaw", "swap_crabclaw")
-	
-    owner.AnimState:Show("ARM_carry")
-    owner.AnimState:Hide("ARM_normal")
+	if not owner:HasTag("vetcurse") then
+		--owner.components.inventory:Unequip(EQUIPSLOTS.HANDS, true)
+		inst:DoTaskInTime(0, function(inst, owner)
+			local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner
+            local inst_pos = inst:GetPosition()
+			
+			owner.components.inventory:GiveItem(inst, nil, inst_pos)
+			owner.components.talker:Say(GetString(owner, "CURSED_ITEM_EQUIP"))
+			inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/HUD_hot_level1")
+			
+			owner.components.combat:GetAttacked(inst, 0.1, nil)
+		end)
+	else
+		AddGem(inst)
 
-    if inst.components.container ~= nil then
-        inst.components.container:Open(owner)
-    end
+		owner.AnimState:OverrideSymbol("swap_object", "swap_crabclaw", "swap_crabclaw")
+		
+		owner.AnimState:Show("ARM_carry")
+		owner.AnimState:Hide("ARM_normal")
+
+		if inst.components.container ~= nil then
+			inst.components.container:Open(owner)
+		end
+	end
 end
 
 local function onunequip(inst, owner)

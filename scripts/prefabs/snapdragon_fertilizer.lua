@@ -74,9 +74,9 @@ local function MakeVomit(name, color, x, y, z)
 		inst.components.fertilizer:SetNutrients({x, y, z})
 
 		inst:AddComponent("edible")
-		inst.components.edible.healthvalue = x / 4
-		inst.components.edible.hungervalue = y / 4
-		inst.components.edible.sanityvalue = z / 4
+		inst.components.edible.healthvalue = -(x / 4)
+		inst.components.edible.hungervalue = -(y / 4)
+		inst.components.edible.sanityvalue = -(z / 4)
 
 
 		MakeDeployableFertilizer(inst)
