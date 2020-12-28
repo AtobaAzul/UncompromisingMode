@@ -172,7 +172,7 @@ local states =
 				inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
 			end
 
-            inst.sg:SetTimeout(2+math.random())
+            inst.sg:SetTimeout(1+math.random())
         end,
 		
         onexit = function(inst)
@@ -446,7 +446,7 @@ local states =
         events =
         {
             EventHandler("animover", function(inst) 
-				if inst.foogley < 10 then
+				if inst.foogley < 6 then
 					inst.sg:GoToState("howl_attack")
 				else
 					inst.foogley = 0

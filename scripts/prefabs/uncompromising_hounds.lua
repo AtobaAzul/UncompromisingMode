@@ -680,8 +680,8 @@ local function ShootProjectile(inst, target)
     local dx = a - x
     local dz = c - z
     local rangesq = dx * dx + dz * dz
-    local maxrange = 15
-    local bigNum = 10
+    local maxrange = 20
+    local bigNum = 15
     local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange * 2)
 	projectile:AddTag("canthit")
 	--projectile.components.wateryprotection.addwetness = TUNING.WATERBALLOON_ADD_WETNESS/2
