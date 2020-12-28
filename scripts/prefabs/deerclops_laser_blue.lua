@@ -138,22 +138,22 @@ local function DoDamage(inst, targets, skiptoss)
                     if v:IsValid() then
                         SpawnPrefab("deerclops_laserhit_blue"):SetTarget(v)
                         if not v.components.health:IsDead() then
-                            if v.components.temperature ~= nil then
-                                local maxtemp = math.min(v.components.temperature.mintemp, -10)
-                                local curtemp = v.components.temperature:GetCurrent()
-                                if maxtemp > curtemp then
-                                    v.components.temperature:DoDelta(math.min(-20, maxtemp - curtemp))
-									print(math.min(-20, maxtemp - curtemp))
-                                end
+                            if v.components.freezable ~= nil and not v.components.freezable:IsFrozen() then
+								if v.components.freezable ~= nil then
+									v.components.freezable:AddColdness(1.1)
+								end
                             end
-                            if v.components.freezable ~= nil then
-                                if v.components.freezable:IsFrozen() then
-                                    v.components.freezable:Unfreeze()
-                                elseif v.components.freezable.coldness > 0 then
-                                    v.components.freezable:AddColdness(2)
+                            if v.components.temperature ~= nil then
+								local mintemp = math.max(v.components.temperature.mintemp, 0)
+								local curtemp = v.components.temperature:GetCurrent()
+								if mintemp < curtemp then
+									v.components.temperature:DoDelta(math.max(-5, mintemp - curtemp))
                                 end
                             end
                         end
+						if v.components.freezable ~= nil then
+							v.components.freezable:SpawnShatterFX()
+						end
                     end
                 end
             end
