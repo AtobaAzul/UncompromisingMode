@@ -20,7 +20,7 @@ local events=
     CommonHandlers.OnSleep(),
     CommonHandlers.OnFreeze(),
     EventHandler("locomote", function(inst) 
-        if not inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("evade")  then
+        if not inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("evade") and not inst.sg:HasStateTag("beinghit")  then
             
             local is_moving = inst.sg:HasStateTag("moving")
             local wants_to_move = inst.components.locomotor:WantsToMoveForward()
@@ -46,20 +46,9 @@ local states=
         onenter = function(inst)
 			inst.Physics:Stop()
 			RemovePhysicsColliders(inst) 
-            --inst.AnimState:PlayAnimation("death")
-			local x, y, z = inst.Transform:GetWorldPosition()
-		local fx = SpawnPrefab("statue_transition_2")
-		if fx ~= nil then
-			fx.Transform:SetPosition(x, y, z)
-			fx.Transform:SetScale(1.2,1.2,1.2)
-		end
-		fx = SpawnPrefab("statue_transition")
-		if fx ~= nil then
-			fx.Transform:SetPosition(x, y, z)
-			fx.Transform:SetScale(1.2,1.2,1.2)
-		end
+            inst.AnimState:PlayAnimation("death")
             inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
-			inst:Remove()
+			
         end,
 		timeline=
         {
@@ -67,7 +56,10 @@ local states=
 			TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
 			TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
         },
-
+        events=
+        {
+            EventHandler("animover", function(inst)  end),
+        },
     },    
     
     State{
@@ -136,7 +128,23 @@ local states=
 
         end,
     },
+    State{
+        name = "waken",
+        tags = {"idle", "busy"},
+        
 
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("waken")
+        end,
+        timeline=
+        {
+        },
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle")	end),
+        },
+    },
 
 
     State{
@@ -145,7 +153,7 @@ local states=
         
         onenter = function(inst)
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("idle_loop")
+            inst.AnimState:PlayAnimation("taunt")
         end,
         
         events=
@@ -168,8 +176,7 @@ local states=
         
         timeline=
         {
-            TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
-            TimeEvent(13*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+            TimeEvent(26*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
         
         events=
@@ -180,7 +187,7 @@ local states=
 
     State{
         name = "hit",
-        
+        tags = {"beinghit"},      
         onenter = function(inst)
             inst.AnimState:PlayAnimation("hit")
             inst.Physics:Stop()            

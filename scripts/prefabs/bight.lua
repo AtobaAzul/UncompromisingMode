@@ -74,7 +74,6 @@ local function fn(Sim)
         return inst
     end
 
-    inst.Transform:SetScale(1.2,1.2,1.2)
     -- locomotor must be constructed before the stategraph!
     inst:AddComponent("locomotor")
     inst.components.locomotor.walkspeed = 6
@@ -107,10 +106,10 @@ local function fn(Sim)
     inst.components.combat.hiteffectsymbol = "torso"
     inst.components.combat:SetKeepTargetFunction(keeptargetfn)    
     inst.components.combat:SetDefaultDamage(37)
-    inst.components.combat:SetAttackPeriod(1)
+    inst.components.combat:SetAttackPeriod(4)
     inst.components.combat:SetRetargetFunction(1, NormalRetarget)
     inst.components.combat:SetHurtSound("dontstarve/sanity/creature1/death")
-    inst.components.combat:SetRange(1, 1)
+    inst.components.combat:SetRange(2, 2)
     ------------------
     
     ------------------
@@ -126,7 +125,8 @@ local function fn(Sim)
     ------------------
     
     inst:SetStateGraph("SGbight")
-    inst:SetBrain(brain) 
+    inst:SetBrain(brain)
+	inst.sg:GoToState("waken")
     return inst
 end
 

@@ -448,7 +448,8 @@ local steamedhams =
     foodtype = "MEAT",
     health = 40,
     hunger = 37.5,
-    perishtime = 3*TUNING.PERISH_TWO_DAY,
+    perishtime = 3*TUNING.PERISH_TWO_DAY,	
+	oneat_desc = "An unforgettable luncheon",
     sanity = 15,
     cooktime = 1,
 }
@@ -465,7 +466,6 @@ local simpsalad =
     health = 3,
     hunger = 12.5,
     perishtime = 2*TUNING.PERISH_TWO_DAY,
-	oneat_desc = "An unforgettable luncheon",
     sanity = 5,
     cooktime = 0.4,
 }
@@ -532,7 +532,7 @@ local viperjam =
     foodtype = "VEGGIE",
     health = 40,
     hunger = 37.5,
-	oneat_desc = "Who knows!?",
+	oneat_desc = "Apparitions' aid.",
 	sanity = 15,
     perishtime = 10*TUNING.PERISH_TWO_DAY,
     cooktime = 1.8,
