@@ -91,7 +91,7 @@ AddComponentPostInit("dynamicmusic", function(self)
 				_StopBusy()
 				local x, y, z = player.Transform:GetWorldPosition()
 				_soundemitter:PlaySound(
-					#TheSim:FindEntities(x, y, z, 30, EPIC_TAGS, NO_EPIC_TAGS) > 0
+					TheSim ~= nil and #TheSim:FindEntities(x, y, z, 30, EPIC_TAGS, NO_EPIC_TAGS) > 0
 					and ((_IsInRuins(player) and "dontstarve/music/music_epicfight_ruins") or
 						(_iscave and "dontstarve/music/music_epicfight_cave") or
 						(IsInHoodedForest(player) and "UMMusic/music/hoodedforest_efs") or

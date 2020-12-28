@@ -77,7 +77,13 @@ local function SpawnLaser_Blue(inst)
             end
             noground = true
         end
-        fx = SpawnPrefab(i > 0 and "deerclops_laser_blue" or "deerclops_laserempty_blue")
+			
+        fx = SpawnPrefab(i > 0 and "deerclops_laser" or "deerclops_laserempty")
+		
+		if inst.components.health:GetPercent() <= 0.5 then
+			fx = SpawnPrefab(i > 0 and "deerclops_laser_blue" or "deerclops_laserempty_blue")
+		end
+		
         fx.caster = inst
         fx.Transform:SetPosition(x1, 0, z1)
         fx:Trigger(delay * FRAMES, targets, skiptoss)
@@ -94,11 +100,22 @@ local function SpawnLaser_Blue(inst)
         x1 = x + dist * math.sin(angle)
         z1 = z + dist * math.cos(angle)
     end
-    fx = SpawnPrefab("deerclops_laser_blue")
+	
+    fx = SpawnPrefab("deerclops_laser")
+	
+	if inst.components.health:GetPercent() <= 0.5 then
+		fx = SpawnPrefab(i > 0 and "deerclops_laser_blue" or "deerclops_laserempty_blue")
+	end
+		
     fx.Transform:SetPosition(x1, 0, z1)
     fx:Trigger((delay + 1) * FRAMES, targets, skiptoss)
 
-    fx = SpawnPrefab("deerclops_laser_blue")
+    fx = SpawnPrefab("deerclops_laser")
+	
+	if inst.components.health:GetPercent() <= 0.5 then
+		fx = SpawnPrefab(i > 0 and "deerclops_laser_blue" or "deerclops_laserempty_blue")
+	end
+	
     fx.Transform:SetPosition(x1, 0, z1)
     fx:Trigger((delay + 2) * FRAMES, targets, skiptoss)
 end
