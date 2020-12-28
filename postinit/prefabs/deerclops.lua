@@ -9,7 +9,7 @@ local function OnNewState(inst, data)
         inst.Light:SetIntensity(.6)
         inst.Light:SetRadius(8)
         inst.Light:SetFalloff(3)
-        inst.Light:SetColour(1, 0, 0)
+        inst.Light:SetColour(0, 0, 1)
 		--inst.Light:Enable(true)
 	--else
 		--inst:DoTaskInTime(2, inst.Light:Enable(false))
@@ -29,20 +29,20 @@ local function EnterPhase2Trigger(inst)
 		
 		
 
-			if not IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then
-				inst.AnimState:SetBuild("deerclops_yule")
+			--if not IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then
+				inst.AnimState:SetBuild("deerclops_yule_blue")
 
 				--inst.entity:AddLight()
 				inst.Light:SetIntensity(.6)
 				inst.Light:SetRadius(8)
 				inst.Light:SetFalloff(3)
-				inst.Light:SetColour(1, 0, 0)
+				inst.Light:SetColour(0, 0, 1)
 				inst.Light:Enable(true)
 
 				inst:DoTaskInTime(0.1, inst:AddComponent("timer"))
 				inst:ListenForEvent("newstate", OnNewState)
 				
-			end
+			--end
 		
 		inst.sg:GoToState("taunt")
 		inst.enraged = true
@@ -84,7 +84,7 @@ env.AddPrefabPostInit("deerclops", function(inst)
 		inst.Light:SetIntensity(.6)
         inst.Light:SetRadius(8)
         inst.Light:SetFalloff(3)
-        inst.Light:SetColour(1, 0, 0)
+        inst.Light:SetColour(0, 0, 1)
 		
 		inst.Light:Enable(false)
 	end

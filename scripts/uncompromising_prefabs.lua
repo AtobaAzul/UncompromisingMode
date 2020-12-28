@@ -184,4 +184,5 @@ return {
 	"viperjam",
 	"viperprojectile",
 	"bight",
+	"deerclops_laser_blue",
 }
