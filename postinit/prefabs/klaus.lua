@@ -98,7 +98,12 @@ env.AddPrefabPostInit("klaus", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-inst.Enrage = Enrage2
-inst.OnPreLoad = OnPreLoad2
+	
+	inst.Enrage = Enrage2
+	inst.OnPreLoad = OnPreLoad2
+
+	if inst.components.lootdropper ~= nil then
+		inst.components.lootdropper:AddChanceLoot("klaus_amulet", 1)
+	end
 --return inst
 end)

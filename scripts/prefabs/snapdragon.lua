@@ -202,6 +202,10 @@ local function OnSave(inst, data)
 		data.podspawned = inst.podspawned
 	end
 	
+	if inst.vomit_time ~= nil then
+		data.vomit_time = inst.vomit_time
+	end
+	
 	if inst.seeds ~= nil then
 		data.seeds = inst.seeds
 	end
@@ -210,6 +214,10 @@ end
 local function OnLoad(inst, data)
 	if data ~= nil and data.podspawned ~= nil then
 		inst.podspawned = data.podspawned
+	end
+	
+	if data ~= nil and data.vomit_time ~= nil then
+		inst.vomit_time = data.vomit_time
 	end
 	
 	if data ~= nil and data.seeds ~= nil then
@@ -442,6 +450,7 @@ local function prime_fn()
 			local bonusitem = SpawnPrefab(inst.rewarditem)
 			LaunchItem(inst, bonusitem, GetRandomWithVariance(angle, variance))
 			inst.vomit_time = false
+			inst.components.timer:StartTimer("vomit_time", 480)
 		end
 	end)
 
@@ -495,6 +504,7 @@ local function buddy_fn()
 			local bonusitem = SpawnPrefab(inst.rewarditem)
 			LaunchItem(inst, bonusitem, GetRandomWithVariance(angle, variance))
 			inst.vomit_time = false
+			inst.components.timer:StartTimer("vomit_time", 480)
 		end
 	end)
 	
