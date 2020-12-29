@@ -117,6 +117,7 @@ local prefab_post = {
 	"tophatreduction",
 	"crabking",
 	--"ruinsstatues", Commented out until time for testing AT
+	--"chessjunk",
 }
 
 local stategraph_post = {

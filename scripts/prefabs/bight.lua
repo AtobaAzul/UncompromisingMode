@@ -10,11 +10,14 @@ local prefabs =
 {
 
 }
-
 SetSharedLootTable('bight',
 {
-    {'nightmarefuel',     1.0},
-	{'nightmarefuel',     1.0},
+    {'gears',     1.0},
+    {'gears',     1.0},
+    {'nightmarefuel',    0.6},
+    {'thulecite_pieces', 0.5},
+    {'trinket_6', 1.0},
+    {'trinket_6', 1.0},
 })
 
 local SHARE_TARGET_DIST = 30
@@ -76,8 +79,8 @@ local function fn(Sim)
 
     -- locomotor must be constructed before the stategraph!
     inst:AddComponent("locomotor")
-    inst.components.locomotor.walkspeed = 6
-    inst.components.locomotor.runspeed = 6
+    inst.components.locomotor.walkspeed = 4
+    inst.components.locomotor.runspeed = 4
 
     
     inst:AddComponent("lootdropper")
@@ -85,17 +88,15 @@ local function fn(Sim)
     
     ---------------------            
     --MakeMediumBurnableCharacter(inst, "torso")
-    --MakeMediumFreezableCharacter(inst, "torso")    
+    MakeMediumFreezableCharacter(inst, "torso")    
     --inst.components.burnable.flammability = 0.33
     ---------------------       
     
 	
-	inst:AddTag("monster")
-    inst:AddTag("hostile")   
-    inst:AddTag("swilson") 
-	inst:AddTag("nightmarecreature")
-	inst:AddTag("shadow")
-	inst:AddTag("notraptrigger")
+    inst:AddTag("monster")
+    inst:AddTag("hostile")
+    inst:AddTag("chess")
+    inst:AddTag("bight")
 
     ------------------
     inst:AddComponent("health")
@@ -105,18 +106,21 @@ local function fn(Sim)
     inst:AddComponent("combat")
     inst.components.combat.hiteffectsymbol = "torso"
     inst.components.combat:SetKeepTargetFunction(keeptargetfn)    
-    inst.components.combat:SetDefaultDamage(37)
+    inst.components.combat:SetDefaultDamage(50)
     inst.components.combat:SetAttackPeriod(4)
     inst.components.combat:SetRetargetFunction(1, NormalRetarget)
     inst.components.combat:SetHurtSound("dontstarve/sanity/creature1/death")
-    inst.components.combat:SetRange(2, 2)
+    inst.components.combat:SetRange(3, 3)
     ------------------
     
     ------------------
     
     inst:AddComponent("knownlocations")
     ------------------
-    
+    inst:AddComponent("sleeper")
+    --inst.components.sleeper:SetWakeTest(ShouldWake)
+    --inst.components.sleeper:SetSleepTest(ShouldSleep)
+    inst.components.sleeper:SetResistance(3)  
     
     ------------------
     
