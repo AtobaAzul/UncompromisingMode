@@ -48,13 +48,13 @@ local states=
 			RemovePhysicsColliders(inst) 
             inst.AnimState:PlayAnimation("death")
             inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/death")
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/bishop_nightmare/death")
 			
         end,
 		timeline=
         {
             TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
-			TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
-			TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
         },
         events=
         {
@@ -78,7 +78,8 @@ local states=
         
         events=
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("moving") end),
+            EventHandler("animover", function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/rook_nightmare/rattle")
+			inst.sg:GoToState("moving") end),
         },
     },
     
@@ -93,13 +94,13 @@ local states=
         
         timeline=
         {
-            TimeEvent(4*FRAMES, PlayFootstep),
-            TimeEvent(8*FRAMES, PlayFootstep),
+		TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/bounce") end),
         },
         
         events=
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("premoving") end),
+            EventHandler("animover", function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/land")
+			inst.sg:GoToState("premoving") end),
         },
         
     },   
@@ -127,6 +128,11 @@ local states=
             end
 
         end,
+        timeline = 
+        {
+		    TimeEvent(21*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/idle")
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/bishop_nightmare/idle") end ),
+        },
     },
     State{
         name = "waken",
@@ -154,8 +160,14 @@ local states=
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("taunt")
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/voice")
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/bishop_nightmare/voice")
         end,
-        
+        timeline = 
+        {
+		    TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/pawground") end ),
+		    TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/pawground") end ),
+        },        
         events=
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
@@ -175,8 +187,11 @@ local states=
         end,
         
         timeline=
-        {
-            TimeEvent(26*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+        {   
+			TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/bounce") end),
+			TimeEvent(22*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/attack") end),
+            TimeEvent(26*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) 
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/rook_nightmare/rattle") end),
         },
         
         events=
@@ -190,7 +205,8 @@ local states=
         tags = {"beinghit"},      
         onenter = function(inst)
             inst.AnimState:PlayAnimation("hit")
-            inst.Physics:Stop()            
+            inst.Physics:Stop()   
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/hurt")			
         end,
         
         events=
@@ -199,23 +215,18 @@ local states=
         },
     },    
     
-    State{
-        name = "hit_stunlock",
-        tags = {"busy"},
-        
-        onenter = function(inst)
-            inst.AnimState:PlayAnimation("hit")
-            inst.Physics:Stop()            
-        end,
-        
-        events=
-        {
-            EventHandler("animover", function(inst) 
-            inst.sg:GoToState("idle") 
-            end ),
-        },
-    },  
 }
+CommonStates.AddSleepStates(states,
+{
+    starttimeline = 
+    {
+		TimeEvent(11*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/liedown") end ),
+    },
+    
+	sleeptimeline = {
+        TimeEvent(18*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/sleep") end),
+	},
+})
 CommonStates.AddFrozenStates(states)
 
 return StateGraph("bight", states, events, "idle", actionhandlers)
