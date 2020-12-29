@@ -41,10 +41,16 @@ local HITTERS =
 	--No klaus, since he does double attacks and has deer 
 }
 
+AddPrefabPostInit("beehat", function(inst)
+	inst:AddTag("beehat")
+end)
+
 for k, v in pairs(HITTERS) do
 	AddPrefabPostInit(k, function(inst)
 		local function OnHitOther(inst, other)
-			if other ~= nil and other.components.hayfever and other.components.hayfever.enabled and other.components.hayfever:CanSneeze() then
+			if other ~= nil and other.components.hayfever and other.components.hayfever.enabled and other.components.hayfever:CanSneeze() and
+			(other.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) == nil or not other.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD):HasTag("beehat")) then
+			print(other.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD))
 			--Don't knockback ifws you wear marble
 				other.components.hayfever:DoDelta(v.power)
 			end

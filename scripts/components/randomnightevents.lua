@@ -1043,6 +1043,24 @@ local function SpawnShadowBoomer(player)
 	end
 end
 
+local function SpawnGingerDeadPigFunction(player)
+	local x, y, z = player.Transform:GetWorldPosition()
+	local x2 = x + math.random(-40, 40)
+	local z2 = z + math.random(-40, 40)
+	local ent = SpawnPrefab("gingerdeadpig_rne")
+	ent:OnSpawnedBy(player)
+	ent.Transform:SetPosition(x2, y, z2)
+end	
+
+local function SpawnGingerDeadPig(player)
+	print("ginger dead")
+
+	player:DoTaskInTime(5+math.random(5,10), function()
+		player:DoTaskInTime(0.2 * math.random(4) * 0.3, function()
+			SpawnGingerDeadPigFunction(player)
+		end)
+	end)
+end
 ---------------------------------------------------
 ---RNE list above
 ---------------------------------------------------
@@ -1193,6 +1211,7 @@ AddCaveEvent(SpawnLightFlowersNFerns,.3)
 AddCaveEvent(SpawnShadowBoomer,.2)
 --Winter
 AddWinterEvent(SpawnKrampus,.5)
+AddWinterEvent(SpawnGingerDeadPig,12.5)
 --AddWinterEvent(SpawnWalrusHunt,.5)
 --Spring
 AddSpringEvent(SpawnThunderFar,1)
@@ -1415,9 +1434,11 @@ local function IsEligible(player)
 	local dragonflied = TheWorld.components.mock_dragonflyspawner:GetWarning()
 	local area = player.components.areaaware
 	
-	return not player:HasTag("playerghost") and theent == 0 and not (hounding or deerclopsed --[[or beargered]] or gmoosed or dragonflied) and
-			area:GetCurrentArea() ~= nil
-			and not area:CurrentlyInTag("nohasslers")
+	return not TheWorld:HasTag("snowstormstart") and not TheWorld.net:HasTag("snowstormstart") and not 
+		player:HasTag("playerghost") and theent == 0 and not (hounding or deerclopsed --[[or beargered]] 
+		or gmoosed or dragonflied) and
+		area:GetCurrentArea() ~= nil
+		and not area:CurrentlyInTag("nohasslers")
 end
 
 

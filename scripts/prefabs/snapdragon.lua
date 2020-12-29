@@ -438,6 +438,7 @@ local function prime_fn()
 	inst:AddComponent("playerprox")
 	inst.components.playerprox:SetDist(10,11)
 	inst.components.playerprox:SetOnPlayerNear(function(inst)
+    inst.components.playerprox:SetPlayerAliveMode(true)
 		if inst.vomit_time ~= nil and inst.vomit_time then
 			
 		inst.rewarditem = "pale_vomit"
@@ -492,6 +493,7 @@ local function buddy_fn()
 	inst:AddComponent("playerprox")
 	inst.components.playerprox:SetDist(10,11)
 	inst.components.playerprox:SetOnPlayerNear(function(inst)
+    inst.components.playerprox:SetPlayerAliveMode(true)
 		if inst.vomit_time ~= nil and inst.vomit_time then
 			
 		inst.rewarditem = inst.seeds.."_vomit"
