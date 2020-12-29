@@ -62,21 +62,23 @@ local function onread(inst, reader)
     local theta = math.random() * 2 * PI
     local pt = inst:GetPosition()
     local radius = math.random(3, 6)
-    local offset = FindWalkableOffset(pt, theta, radius, 12, true)
-	local boatx, boaty, boatz = reader.Transform:GetWorldPosition()
-    if offset then
+    --local offset = FindWalkableOffset(pt, theta, radius, 12, true)
+	local readx, ready, readz = reader.Transform:GetWorldPosition()
+    --[[if offset then
 		pt.x = pt.x + offset.x
 		pt.z = pt.z + offset.z
-		reader.components.petleash:SpawnPetAt(pt.x, 0, pt.z, "old_shadowwaxwell")
+		local shadowmax = reader.components.petleash:SpawnPetAt(boatx, 0, boatz, "old_shadowwaxwell")
+		shadowmax.sg:GoToState("jumpout")
         reader.components.sanity:RecalculatePenalty()
         inst.SoundEmitter:PlaySound("dontstarve/maxwell/shadowmax_appear")
         return true
-	else
-		reader.components.petleash:SpawnPetAt(boatx, boaty, boatz, "old_shadowwaxwell")
+	else]]
+		local shadowmax = reader.components.petleash:SpawnPetAt(readx, ready, readz, "old_shadowwaxwell")
+		shadowmax.sg:GoToState("jumpout")
         reader.components.sanity:RecalculatePenalty()
         inst.SoundEmitter:PlaySound("dontstarve/maxwell/shadowmax_appear")
         return true
-    end
+    --end
 end
 
 env.AddPrefabPostInit("waxwelljournal", function(inst)
