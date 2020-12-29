@@ -68,7 +68,7 @@ local states = {
                 end
             end),
 			
-            TimeEvent(50 * FRAMES, function(inst)
+            TimeEvent(36 * FRAMES, function(inst)
 						inst:DoTaskInTime(800*FRAMES, function(inst) 
 						inst.rootready = true
 						inst.components.combat:SetRange(3*inst.oldrange)
