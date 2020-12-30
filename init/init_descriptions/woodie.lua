@@ -198,3 +198,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
     ANNOUNCE.CURSED_ITEM_EQUIP = "Ouch, this ones a jumper!"
 	DESCRIBE.SCREECHER_TRINKET = "Symbols like these are what got me in trouble in the first place."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "Perhaps I should try again when the moons out, eh?"}
+
+	DESCRIBE.MAGMAHOUND = "That thing'll burn a forest down!!"
+	DESCRIBE.LIGHTNINGHOUND = "Lightning never strikes twice... Right, Lucy?"
+	DESCRIBE.RNESKELETON = "He's seen better days."
+	DESCRIBE.RATWHIP = "That's not something I want to keep on me."
+	DESCRIBE.KLAUS_AMULET = "The chains are comin' off now!"
+	DESCRIBE.CRABCLAW = "Use every part of the animal, I suppose." --Generic line for now, this is unimplemented
+	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+
+	DESCRIBE.ORANGE_VOMIT = "Hoo-wee..."
+	DESCRIBE.GREEN_VOMIT = "Hoo-wee..."
+	DESCRIBE.RED_VOMIT = "Hoo-wee..."
+	DESCRIBE.PINK_VOMIT = "Hoo-wee..."
+	DESCRIBE.YELLOW_VOMIT = "Hoo-wee..."
+	DESCRIBE.PURPLE_VOMIT = "Hoo-wee..."
+	DESCRIBE.PALE_VOMIT = "Hoo-wee..."

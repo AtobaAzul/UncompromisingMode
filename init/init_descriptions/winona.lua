@@ -199,3 +199,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
     ANNOUNCE.CURSED_ITEM_EQUIP = "Seems like safety gloves aren't enough!"
 	DESCRIBE.SCREECHER_TRINKET = "What practical use does it have, other than being creepy?"
 	ACTIONFAIL.GIVE = {NOTNIGHT = "This ones a night owl."}
+
+	DESCRIBE.MAGMAHOUND = "He's got a case of hot breath."
+	DESCRIBE.LIGHTNINGHOUND = "A walkin' generator!"
+	DESCRIBE.RNESKELETON = "Someone's back on the clock."
+	DESCRIBE.RATWHIP = "The smell alone should scare someone away."
+	DESCRIBE.KLAUS_AMULET = "Time to overclock!"
+	DESCRIBE.CRABCLAW = "I have a knack for stickin' gems into things, don't I?" --Generic line for now, this is unimplemented
+	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+
+	DESCRIBE.ORANGE_VOMIT = "Thanks."
+	DESCRIBE.GREEN_VOMIT = "Thanks."
+	DESCRIBE.RED_VOMIT = "Thanks."
+	DESCRIBE.PINK_VOMIT = "Thanks."
+	DESCRIBE.YELLOW_VOMIT = "Thanks."
+	DESCRIBE.PURPLE_VOMIT = "Thanks."
+	DESCRIBE.PALE_VOMIT = "Thanks."

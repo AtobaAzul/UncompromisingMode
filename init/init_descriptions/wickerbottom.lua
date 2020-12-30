@@ -203,3 +203,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
     ANNOUNCE.CURSED_ITEM_EQUIP = "It seems a cursed power lingers here."
 	DESCRIBE.SCREECHER_TRINKET = "A pagan symbol, perhaps?"
 	ACTIONFAIL.GIVE = {NOTNIGHT = "Moon magic seems to work best when the moon is around."}
+
+	DESCRIBE.MAGMAHOUND = "A hound that projectile vomits magma."
+	DESCRIBE.LIGHTNINGHOUND = "I must watch my step, they electrify the earth."
+	DESCRIBE.RNESKELETON = "A living human skeleton."
+	DESCRIBE.RATWHIP = "A makeshift whip fashioned from rat appendages. Lovely."
+	DESCRIBE.KLAUS_AMULET = "My old bones are invigorated!"
+	DESCRIBE.CRABCLAW = "The appendage has distinct engravings. For gemstones, I presume." --Generic line for now, this is unimplemented
+	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+
+	DESCRIBE.ORANGE_VOMIT = "Delightful."
+	DESCRIBE.GREEN_VOMIT = "Delightful."
+	DESCRIBE.RED_VOMIT = "Delightful."
+	DESCRIBE.PINK_VOMIT = "Delightful."
+	DESCRIBE.YELLOW_VOMIT = "Delightful."
+	DESCRIBE.PURPLE_VOMIT = "Delightful."
+	DESCRIBE.PALE_VOMIT = "Delightful."

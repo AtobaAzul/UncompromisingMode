@@ -197,3 +197,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
     ANNOUNCE.CURSED_ITEM_EQUIP = "It burns at the touch."
 	DESCRIBE.SCREECHER_TRINKET = "The stench of death lingers here."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "It's waiting for nightfall."}
+
+	DESCRIBE.MAGMAHOUND = "It rains hell on the unfortunate."
+	DESCRIBE.LIGHTNINGHOUND = "Death from above!"
+	DESCRIBE.RNESKELETON = "Has the reaper come to take me? What took you so long?"
+	DESCRIBE.RATWHIP = "How degrading."
+	DESCRIBE.KLAUS_AMULET = "Another lock to be behind."
+	DESCRIBE.CRABCLAW = "One small snip will sever a limb." --Generic line for now, this is unimplemented
+	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+
+	DESCRIBE.ORANGE_VOMIT = "Such as life."
+	DESCRIBE.GREEN_VOMIT = "Such as life."
+	DESCRIBE.RED_VOMIT = "Such as life."
+	DESCRIBE.PINK_VOMIT = "Such as life."
+	DESCRIBE.YELLOW_VOMIT = "Such as life."
+	DESCRIBE.PURPLE_VOMIT = "Such as life."
+	DESCRIBE.PALE_VOMIT = "Such as life."

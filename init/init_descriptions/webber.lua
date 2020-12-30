@@ -197,3 +197,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
     ANNOUNCE.CURSED_ITEM_EQUIP = "Ouchies!"
 	DESCRIBE.SCREECHER_TRINKET = "I don't like it."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "I think its sleeping? But, in the day time?"}
+
+	DESCRIBE.MAGMAHOUND = "Eep, he spits!"
+	DESCRIBE.LIGHTNINGHOUND = "Ouch ouch ouch! Our feetsies!"
+	DESCRIBE.RNESKELETON = "Oh, hello there! Would you like something?"
+	DESCRIBE.RATWHIP = "It's pretty stinky. We'd rather use something else."
+	DESCRIBE.KLAUS_AMULET = "We've been naughty..."
+	DESCRIBE.CRABCLAW = "It's so fun to swing around! Wooosh! Fwooosh!" --Generic line for now, this is unimplemented
+	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+
+	DESCRIBE.ORANGE_VOMIT = "Haha, ew."
+	DESCRIBE.GREEN_VOMIT = "Haha, ew."
+	DESCRIBE.RED_VOMIT = "Haha, ew."
+	DESCRIBE.PINK_VOMIT = "Haha, ew."
+	DESCRIBE.YELLOW_VOMIT = "Haha, ew."
+	DESCRIBE.PURPLE_VOMIT = "Haha, ew."
+	DESCRIBE.PALE_VOMIT = "Haha, ew."

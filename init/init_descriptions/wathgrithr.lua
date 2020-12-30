@@ -197,3 +197,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
     ANNOUNCE.CURSED_ITEM_EQUIP = "This tool fights back!"
 	DESCRIBE.SCREECHER_TRINKET = "A cursed symbol, no doubt!"
 	ACTIONFAIL.GIVE = {NOTNIGHT = "The great moon in the sky will give it power."}
+
+	DESCRIBE.MAGMAHOUND = "It battles from afar, thy coward!"
+	DESCRIBE.LIGHTNINGHOUND = "Thor's minion? What hath I done to gain his ire?"
+	DESCRIBE.RNESKELETON = "Fallen warriors!"
+	DESCRIBE.RATWHIP = "Thy lashes sting, a feared weapon!"
+	DESCRIBE.KLAUS_AMULET = "The lock of a warrior!"
+	DESCRIBE.CRABCLAW = "A magnificent weapon to be adorned with jewels!" --Generic line for now, this is unimplemented
+	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+
+	DESCRIBE.ORANGE_VOMIT = "... No."
+	DESCRIBE.GREEN_VOMIT = "... No."
+	DESCRIBE.RED_VOMIT = "... No."
+	DESCRIBE.PINK_VOMIT = "... No."
+	DESCRIBE.YELLOW_VOMIT = "... No."
+	DESCRIBE.PURPLE_VOMIT = "... No."
+	DESCRIBE.PALE_VOMIT = "... No."

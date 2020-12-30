@@ -197,3 +197,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
     ANNOUNCE.CURSED_ITEM_EQUIP = "My hands been sizzled!"
 	DESCRIBE.SCREECHER_TRINKET = "Something dark stirs."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "Some dishes are best served in the evening."}
+	
+	DESCRIBE.MAGMAHOUND = "A walking furnace. If only they could be domesticated..."
+	DESCRIBE.LIGHTNINGHOUND = "It's definitely from the tropics."
+	DESCRIBE.RNESKELETON = "No more stomach? Sorry ami, I can't help you!"
+	DESCRIBE.RATWHIP = "This is a bad idea."
+	DESCRIBE.KLAUS_AMULET = "The steel is chilling."
+	DESCRIBE.CRABCLAW = "Theres not a whole lot of meat on this claw." --Generic line for now, this is unimplemented
+	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+
+	DESCRIBE.ORANGE_VOMIT = "The last thing a chef wishes to see!"
+	DESCRIBE.GREEN_VOMIT = "The last thing a chef wishes to see!"
+	DESCRIBE.RED_VOMIT = "The last thing a chef wishes to see!"
+	DESCRIBE.PINK_VOMIT = "The last thing a chef wishes to see!"
+	DESCRIBE.YELLOW_VOMIT = "The last thing a chef wishes to see!"
+	DESCRIBE.PURPLE_VOMIT = "The last thing a chef wishes to see!"
+	DESCRIBE.PALE_VOMIT = "The last thing a chef wishes to see!"

@@ -202,3 +202,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_NOSANITY = "I have the worst headache!"
 	ANNOUNCE.ANNOUNCE_NOFUEL = "I need some nightmare fuel."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "Maybe we should try this again when the MOON is out?"}
+
+	DESCRIBE.MAGMAHOUND = "I'm jealous, I shouldve made red hounds do that."
+	DESCRIBE.LIGHTNINGHOUND = "Why didn't I think of that? Tsk."
+	DESCRIBE.RNESKELETON = "Back for revenge? I'll kill you again if I have to."
+	DESCRIBE.RATWHIP = "What a way to go."
+	DESCRIBE.KLAUS_AMULET = "A powerful, wonderful enchantment!"
+	DESCRIBE.CRABCLAW = "I know gem-holes when I see them." --Generic line for now, this is unimplemented
+	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+
+	DESCRIBE.ORANGE_VOMIT = "That's life!"
+	DESCRIBE.GREEN_VOMIT = "That's life!"
+	DESCRIBE.RED_VOMIT = "That's life!"
+	DESCRIBE.PINK_VOMIT = "That's life!"
+	DESCRIBE.YELLOW_VOMIT = "That's life!"
+	DESCRIBE.PURPLE_VOMIT = "That's life!"
+	DESCRIBE.PALE_VOMIT = "That's life!"

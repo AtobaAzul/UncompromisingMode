@@ -198,3 +198,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
     ANNOUNCE.CURSED_ITEM_EQUIP = "The harder Wolfgang squeeze, the more it hurts!"
 	DESCRIBE.SCREECHER_TRINKET = "Ah! Looks scary!"
 	ACTIONFAIL.GIVE = {NOTNIGHT = "Needs big moon?"}
+
+	DESCRIBE.MAGMAHOUND = "Arf, arf!"
+	DESCRIBE.LIGHTNINGHOUND = "Yip yip!"
+	DESCRIBE.RNESKELETON = "W-WOLFGANG WILL SMASH YOU! STAY BACK!"
+	DESCRIBE.RATWHIP = "Whap!"
+	DESCRIBE.KLAUS_AMULET = "Wolfgang mightiest man in world!"
+	DESCRIBE.CRABCLAW = "Little holes for little rocks!" --Generic line for now, this is unimplemented
+	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+
+	DESCRIBE.ORANGE_VOMIT = "Is face poop."
+	DESCRIBE.GREEN_VOMIT = "Is face poop."
+	DESCRIBE.RED_VOMIT = "Is face poop."
+	DESCRIBE.PINK_VOMIT = "Is face poop."
+	DESCRIBE.YELLOW_VOMIT = "Is face poop."
+	DESCRIBE.PURPLE_VOMIT = "Is face poop."
+	DESCRIBE.PALE_VOMIT = "Is face poop."
