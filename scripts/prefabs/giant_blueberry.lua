@@ -9,7 +9,7 @@ local function oneatenfn(inst, eater)
 	if  eater.components.moisture ~= nil and
                 not (eater.components.health ~= nil and eater.components.health:IsDead()) and
                 not eater:HasTag("playerghost") then
-                eater.components.moisture:DoDelta(10)
+                eater.components.moisture:DoDelta(5)
 	end
 end
 
@@ -44,8 +44,8 @@ local function fn()
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/giant_blueberry.xml"
     inst:AddComponent("edible")
-    inst.components.edible.healthvalue = 3
-    inst.components.edible.hungervalue = 20
+    inst.components.edible.healthvalue = 1
+    inst.components.edible.hungervalue = 12.5
     inst.components.edible.sanityvalue = 0
     inst.components.edible.foodtype = FOODTYPE.VEGGIE
 	inst.components.edible:SetOnEatenFn(oneatenfn)
