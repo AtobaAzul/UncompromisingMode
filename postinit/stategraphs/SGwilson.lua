@@ -164,6 +164,8 @@ State{
         tags = {"busy", "sneeze", "pausepredict" },
         
         onenter = function(inst)
+            local usehit = inst.components.rider:IsRiding() or inst:HasTag("wereplayer")
+            local stun_frames = usehit and 6 or 9
             inst.wantstosneeze = false
             inst:ClearBufferedAction()
             inst.components.locomotor:Stop()
@@ -173,6 +175,10 @@ State{
 			if inst.components.rider ~= nil and not inst.components.rider:IsRiding() then
 				inst.AnimState:PlayAnimation("sneeze")
 			end
+			
+			if inst.components.playercontroller ~= nil then
+                inst.components.playercontroller:RemotePausePrediction(stun_frames <= 7 and stun_frames or nil)
+            end
 			
             
             if inst.prefab ~= "wes" then

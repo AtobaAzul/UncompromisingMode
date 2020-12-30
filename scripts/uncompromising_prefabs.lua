@@ -185,4 +185,5 @@ return {
 	"viperprojectile",
 	"bight",
 	"deerclops_laser_blue",
+	"gingerdeadpig_rne",
 }

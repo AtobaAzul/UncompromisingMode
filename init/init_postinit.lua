@@ -115,6 +115,7 @@ local prefab_post = {
 	"armor_sanity",
 	"tophat",
 	"tophatreduction",
+	"crabking",
 	--"ruinsstatues", Commented out until time for testing AT
 	--"chessjunk",
 }

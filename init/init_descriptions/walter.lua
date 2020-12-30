@@ -166,9 +166,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.WATERMELON_LANTERN = "I've heard of pumpkin heads before, but never melon heads!"
 	
 		--Viperstuff Quotes
-	DESCRIBE.VIPERWORM = "Depths Viper"
-	DESCRIBE.VIPERFRUIT = "Gloomberry"
-	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	DESCRIBE.VIPERWORM = "I wonder how it's making those!"
+	DESCRIBE.VIPERFRUIT = "I always wanted a pet snake!"
+	DESCRIBE.VIPERJAM = "I wish I could have some PB n' J."
 	
 	DESCRIBE.BLUEBERRYPLANT =
 		{

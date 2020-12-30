@@ -30,6 +30,11 @@ local events =
     CommonHandlers.OnAttacked(),
     CommonHandlers.OnDeath(),
     CommonHandlers.OnAttack(),
+    EventHandler("dance", function(inst)
+        if not (inst.sg:HasStateTag("dancing") or inst.sg:HasStateTag("busy")) then
+            inst.sg:GoToState("dance")
+        end
+    end),
 }
 
 local states =
@@ -323,6 +328,78 @@ local states =
                 inst.sg:GoToState("idle", true)
             end ),            
         },        
+    },
+
+    State{
+        name = "dance",
+        tags = {"idle", "dancing"},
+
+        onenter = function(inst)
+            inst.components.locomotor:Stop()
+            inst:ClearBufferedAction()
+            if inst.AnimState:IsCurrentAnimation("run_pst") then
+                inst.AnimState:PushAnimation("emoteXL_pre_dance0")
+            else
+                inst.AnimState:PlayAnimation("emoteXL_pre_dance0")
+            end
+            inst.AnimState:PushAnimation("emoteXL_loop_dance0", true)
+        end,
+    },
+
+    State{
+        name = "jumpout",
+        tags = { "busy", "canrotate", "jumping" },
+
+        onenter = function(inst)
+			inst.x = math.random(-4, 4)
+			inst.y = math.random(-4, 4)
+            inst.components.locomotor:Stop()
+            inst.AnimState:PlayAnimation("jumpout")
+            inst.Physics:SetMotorVel(inst.x, inst.y, 0)
+            inst.Physics:ClearCollisionMask()
+            inst.Physics:CollidesWith(COLLISION.GROUND)
+        end,
+
+        timeline =
+        {
+            TimeEvent(10 * FRAMES, function(inst)
+                inst.Physics:SetMotorVel(inst.x * 0.75, inst.y * 0.75, 0)
+            end),
+            TimeEvent(15 * FRAMES, function(inst)
+                inst.Physics:SetMotorVel(inst.x * 0.5, inst.y * 0.5, 0)
+            end),
+            TimeEvent(15.2 * FRAMES, function(inst)
+                inst.sg.statemem.physicson = true
+                inst.Physics:ClearCollisionMask()
+                inst.Physics:CollidesWith(COLLISION.WORLD)
+                inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+                inst.Physics:CollidesWith(COLLISION.GIANTS)
+            end),
+            TimeEvent(17 * FRAMES, function(inst)
+                inst.Physics:SetMotorVel(inst.x * 0.25, inst.y * 0.25, 0)
+            end),
+            TimeEvent(18 * FRAMES, function(inst)
+                inst.Physics:Stop()
+            end),
+        },
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+                if inst.AnimState:AnimDone() then
+                    inst.sg:GoToState("idle")
+                end
+            end),
+        },
+
+        onexit = function(inst)
+            if not inst.sg.statemem.physicson then
+                inst.Physics:ClearCollisionMask()
+                inst.Physics:CollidesWith(COLLISION.WORLD)
+                inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+                inst.Physics:CollidesWith(COLLISION.GIANTS)
+            end
+        end,
     },
 }
 

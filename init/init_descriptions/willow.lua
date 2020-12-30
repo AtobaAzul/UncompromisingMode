@@ -166,9 +166,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.WATERMELON_LANTERN = "Keep burning bright, melon head."
 	
 		--Viperstuff Quotes
-	DESCRIBE.VIPERWORM = "Depths Viper"
-	DESCRIBE.VIPERFRUIT = "Gloomberry"
-	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	DESCRIBE.VIPERWORM = "Come on, Bernie! Do something!"
+	DESCRIBE.VIPERFRUIT = "They're with us now, Bernie."
+	DESCRIBE.VIPERJAM = "Hey, all the stickiness is contained!"
 	
 	
 	DESCRIBE.BLUEBERRYPLANT =         
