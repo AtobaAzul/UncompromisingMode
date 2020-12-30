@@ -356,8 +356,6 @@ local states =
             inst.components.locomotor:Stop()
             inst.AnimState:PlayAnimation("jumpout")
             inst.Physics:SetMotorVel(inst.x, inst.y, 0)
-            inst.Physics:ClearCollisionMask()
-            inst.Physics:CollidesWith(COLLISION.GROUND)
         end,
 
         timeline =
@@ -367,13 +365,6 @@ local states =
             end),
             TimeEvent(15 * FRAMES, function(inst)
                 inst.Physics:SetMotorVel(inst.x * 0.5, inst.y * 0.5, 0)
-            end),
-            TimeEvent(15.2 * FRAMES, function(inst)
-                inst.sg.statemem.physicson = true
-                inst.Physics:ClearCollisionMask()
-                inst.Physics:CollidesWith(COLLISION.WORLD)
-                inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-                inst.Physics:CollidesWith(COLLISION.GIANTS)
             end),
             TimeEvent(17 * FRAMES, function(inst)
                 inst.Physics:SetMotorVel(inst.x * 0.25, inst.y * 0.25, 0)
@@ -391,15 +382,6 @@ local states =
                 end
             end),
         },
-
-        onexit = function(inst)
-            if not inst.sg.statemem.physicson then
-                inst.Physics:ClearCollisionMask()
-                inst.Physics:CollidesWith(COLLISION.WORLD)
-                inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-                inst.Physics:CollidesWith(COLLISION.GIANTS)
-            end
-        end,
     },
 }
 

@@ -198,3 +198,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
     ANNOUNCE.CURSED_ITEM_EQUIP = "It scorched my paw! Is this some kind of practical joke?"
 	DESCRIBE.SCREECHER_TRINKET = "And just what dimension are you from, friend?"
 	ACTIONFAIL.GIVE = {NOTNIGHT = "Lets play when the moon comes out!"}
+
+	DESCRIBE.MAGMAHOUND = "It breathes fire onto our desires!"
+	DESCRIBE.LIGHTNINGHOUND = "A caster of elemental energy!"
+	DESCRIBE.RNESKELETON = "Your soul came back! That's not how it works!"
+	DESCRIBE.RATWHIP = "Equally as cruel as it's kitty-cousin!"
+	DESCRIBE.KLAUS_AMULET = "Do you have the key to my heart?"
+	DESCRIBE.CRABCLAW = "Magic is fun! Hyuyu!" --Generic line for now, this is unimplemented
+	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+
+	DESCRIBE.ORANGE_VOMIT = "Hyuyu! Gross!"
+	DESCRIBE.GREEN_VOMIT = "Hyuyu! Gross!"
+	DESCRIBE.RED_VOMIT = "Hyuyu! Gross!"
+	DESCRIBE.PINK_VOMIT = "Hyuyu! Gross!"
+	DESCRIBE.YELLOW_VOMIT = "Hyuyu! Gross!"
+	DESCRIBE.PURPLE_VOMIT = "Hyuyu! Gross!"
+	DESCRIBE.PALE_VOMIT = "Hyuyu! Gross!"

@@ -198,3 +198,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
     ANNOUNCE.CURSED_ITEM_EQUIP = "OUCH! Is that what burning feels like?"
 	DESCRIBE.SCREECHER_TRINKET = "I... I don't think I should burn this."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "I'll try waiting until night. UGH."}
+
+	DESCRIBE.MAGMAHOUND = "YES! SHOWER ME IN FIRE!"
+	DESCRIBE.LIGHTNINGHOUND = "Lightning is just burning without the fun part!"
+	DESCRIBE.RNESKELETON = "Holy crap, a skeleton!!"
+	DESCRIBE.RATWHIP = "It's so tiring to swing this around..."
+	DESCRIBE.KLAUS_AMULET = "Guh, it's so heavy! I'm supposed to wear this?!"
+	DESCRIBE.CRABCLAW = "Haha. Whack." --Generic line for now, this is unimplemented
+	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+
+	DESCRIBE.ORANGE_VOMIT = "Ewwwww!"
+	DESCRIBE.GREEN_VOMIT = "Ewwwww!"
+	DESCRIBE.RED_VOMIT = "Ewwwww!"
+	DESCRIBE.PINK_VOMIT = "Ewwwww!"
+	DESCRIBE.YELLOW_VOMIT = "Ewwwww!"
+	DESCRIBE.PURPLE_VOMIT = "Ewwwww!"
+	DESCRIBE.PALE_VOMIT = "Ewwwww!"

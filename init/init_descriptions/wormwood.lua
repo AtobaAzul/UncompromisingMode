@@ -198,3 +198,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORMWOOD.ACTIONFAIL
     ANNOUNCE.CURSED_ITEM_EQUIP = "No good!"
 	DESCRIBE.SCREECHER_TRINKET = "Scary, not friend"
 	ACTIONFAIL.GIVE = {NOTNIGHT = "Needs moon"}
+
+	DESCRIBE.MAGMAHOUND = "Bad! Bad!"
+	DESCRIBE.LIGHTNINGHOUND = "Zzzt woofer!"
+	DESCRIBE.RNESKELETON = "Alive. Friend?"
+	DESCRIBE.RATWHIP = "Chewy"
+	DESCRIBE.KLAUS_AMULET = "Feel strong"
+	DESCRIBE.CRABCLAW = "Snip snip snip" --Generic line for now, this is unimplemented
+	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+
+	DESCRIBE.ORANGE_VOMIT = "Taste funny"
+	DESCRIBE.GREEN_VOMIT = "Taste funny"
+	DESCRIBE.RED_VOMIT = "Taste funny"
+	DESCRIBE.PINK_VOMIT = "Taste funny"
+	DESCRIBE.YELLOW_VOMIT = "Taste funny"
+	DESCRIBE.PURPLE_VOMIT = "Taste funny"
+	DESCRIBE.PALE_VOMIT = "Taste funny"

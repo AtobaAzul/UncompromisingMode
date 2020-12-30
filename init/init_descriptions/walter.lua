@@ -197,3 +197,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
     ANNOUNCE.CURSED_ITEM_EQUIP = "OWWW! First aid please!"
 	DESCRIBE.SCREECHER_TRINKET = "Our Scout Masters told us to keep away from symbols like this."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "I think moon power works best when the moon is around."}
+
+	DESCRIBE.MAGMAHOUND = "You're not supposed to play with fire!"
+	DESCRIBE.LIGHTNINGHOUND = "This isn't normal lightning, this is ADVANCED lightning!"
+	DESCRIBE.RNESKELETON = "Wanna dance?"
+	DESCRIBE.RATWHIP = "Nature never intended for this."
+	DESCRIBE.KLAUS_AMULET = "Goat power!"
+	DESCRIBE.CRABCLAW = "He left his claw behind!" --Generic line for now, this is unimplemented
+	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+
+	DESCRIBE.ORANGE_VOMIT = "Thanks for sharing your digestive juices?"
+	DESCRIBE.GREEN_VOMIT = "Thanks for sharing your digestive juices?"
+	DESCRIBE.RED_VOMIT = "Thanks for sharing your digestive juices?"
+	DESCRIBE.PINK_VOMIT = "Thanks for sharing your digestive juices?"
+	DESCRIBE.YELLOW_VOMIT = "Thanks for sharing your digestive juices?"
+	DESCRIBE.PURPLE_VOMIT = "Thanks for sharing your digestive juices?"
+	DESCRIBE.PALE_VOMIT = "Thanks for sharing your digestive juices?"

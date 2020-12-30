@@ -199,3 +199,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
     ANNOUNCE.CURSED_ITEM_EQUIP = "FLORP! HURTS!"
 	DESCRIBE.SCREECHER_TRINKET = "Glurp, scary!"
 	ACTIONFAIL.GIVE = {NOTNIGHT = "It sleepy? Wake up at night maybe."}
+
+	DESCRIBE.MAGMAHOUND = "FLURGH! Run!"
+	DESCRIBE.LIGHTNINGHOUND = "Lightning hurts!!"
+	DESCRIBE.RNESKELETON = "It not dead!!"
+	DESCRIBE.RATWHIP = "Fun to play with! ... OUCH!"
+	DESCRIBE.KLAUS_AMULET = "Cold! Brr!"
+	DESCRIBE.CRABCLAW = "Is big, it hurt!" --Generic line for now, this is unimplemented
+	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+
+	DESCRIBE.ORANGE_VOMIT = "Flurgh..."
+	DESCRIBE.GREEN_VOMIT = "Flurgh..."
+	DESCRIBE.RED_VOMIT = "Flurgh..."
+	DESCRIBE.PINK_VOMIT = "Flurgh..."
+	DESCRIBE.YELLOW_VOMIT = "Flurgh..."
+	DESCRIBE.PURPLE_VOMIT = "Flurgh..."
+	DESCRIBE.PALE_VOMIT = "Flurgh..."
