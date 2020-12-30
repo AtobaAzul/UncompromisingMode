@@ -202,9 +202,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.SNOWCONE = "Must've used too much ice."
 	
 	--Viperstuff Quotes
-	DESCRIBE.VIPERWORM = "Depths Viper"
-	DESCRIBE.VIPERFRUIT = "Gloomberry"
-	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	DESCRIBE.VIPERWORM = "It's messing with my head!"
+	DESCRIBE.VIPERFRUIT = "I create snakes through the power of science!"
+	DESCRIBE.VIPERJAM = "At least I have the jar now."
 	
 	DESCRIBE.BLUEBERRYPLANT =         
 		{

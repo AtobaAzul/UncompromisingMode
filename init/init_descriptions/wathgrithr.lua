@@ -165,9 +165,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.WATERMELON_LANTERN = "Do you wish to fight, melon head?"
 	
 		--Viperstuff Quotes
-	DESCRIBE.VIPERWORM = "Depths Viper"
-	DESCRIBE.VIPERFRUIT = "Gloomberry"
-	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	DESCRIBE.VIPERWORM = "A serpent whö fights a cöward's way!"
+	DESCRIBE.VIPERFRUIT = "A fruit fröm Löki himself!"
+	DESCRIBE.VIPERJAM = "Still sticky and gröss, but cöntained."
 	
 	
 	DESCRIBE.BLUEBERRYPLANT =         

@@ -165,9 +165,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.WATERMELON_LANTERN = "You're not scary at all."
 	
 		--Viperstuff Quotes
-	DESCRIBE.VIPERWORM = "Depths Viper"
-	DESCRIBE.VIPERFRUIT = "Gloomberry"
-	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	DESCRIBE.VIPERWORM = "Illusions merely distract one from reality."
+	DESCRIBE.VIPERFRUIT = "Our friendship is only an illusion."
+	DESCRIBE.VIPERJAM = "An imperfect blend of color."
 	
 	
 	DESCRIBE.BLUEBERRYPLANT =         
