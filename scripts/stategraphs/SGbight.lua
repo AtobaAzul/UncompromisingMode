@@ -41,7 +41,7 @@ local states=
     
     State{
         name = "death",
-        tags = {"busy"},
+        tags = {"busy","dying"},
         
         onenter = function(inst)
 			inst.Physics:Stop()
@@ -54,7 +54,6 @@ local states=
         end,
 		timeline=
         {
-            TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
         },
         events=
         {
@@ -145,6 +144,9 @@ local states=
         end,
         timeline=
         {
+		TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/bounce") end),
+		TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/rook_nightmare/rattle") end),
+		TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/rook_nightmare/rattle") end),
         },
         events=
         {
