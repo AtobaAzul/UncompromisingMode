@@ -167,7 +167,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 		--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "That berry smells alluring."
 	DESCRIBE.VIPERFRUIT = "A jam, perhaps?"
-	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	DESCRIBE.VIPERJAM = "A perfect blend of flavors!"
 	
 	
 	DESCRIBE.BLUEBERRYPLANT =         

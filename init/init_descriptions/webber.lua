@@ -167,7 +167,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 		--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "We don't like the looks of him!"
 	DESCRIBE.VIPERFRUIT = "It reminds us of a strawberry."
-	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	DESCRIBE.VIPERJAM = "No more sticky fingies."
 	
 	
 	DESCRIBE.BLUEBERRYPLANT =         

@@ -167,7 +167,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 		--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "Illusions merely distract one from reality."
 	DESCRIBE.VIPERFRUIT = "Our friendship is only an illusion."
-	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	DESCRIBE.VIPERJAM = "An imperfect blend of color."
 	
 	
 	DESCRIBE.BLUEBERRYPLANT =         

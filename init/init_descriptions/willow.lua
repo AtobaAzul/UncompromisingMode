@@ -168,7 +168,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 		--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "Come on, Bernie! Do something!"
 	DESCRIBE.VIPERFRUIT = "They're with us now, Bernie."
-	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	DESCRIBE.VIPERJAM = "Hey, all the stickiness is contained!"
 	
 	
 	DESCRIBE.BLUEBERRYPLANT =         

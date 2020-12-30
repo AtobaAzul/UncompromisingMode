@@ -169,7 +169,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 		--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "Don't think you can deceive me!"
 	DESCRIBE.VIPERFRUIT = "It's nice to have some helping hands."
-	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	DESCRIBE.VIPERJAM = "It's tied up quite nicely."
 	
 	
 	DESCRIBE.BLUEBERRYPLANT =         

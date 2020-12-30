@@ -167,7 +167,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 		--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "A serpent whö fights a cöward's way!"
 	DESCRIBE.VIPERFRUIT = "A fruit fröm Löki himself!"
-	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	DESCRIBE.VIPERJAM = "Still sticky and gröss, but cöntained."
 	
 	
 	DESCRIBE.BLUEBERRYPLANT =         

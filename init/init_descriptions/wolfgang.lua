@@ -168,7 +168,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 		--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "Snake makes scarier snakes!"
 	DESCRIBE.VIPERFRUIT = "Snakes help Wolfgang?"
-	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	DESCRIBE.VIPERJAM = "Cannot ooze. Wolfgang is sad."
 	
 	
 	DESCRIBE.BLUEBERRYPLANT =         

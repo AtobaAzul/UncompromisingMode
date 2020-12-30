@@ -168,7 +168,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 		--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "I think I'm seeing things, eh?"
 	DESCRIBE.VIPERFRUIT = "It's got a hearty chew to it."
-	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	DESCRIBE.VIPERJAM = "Perfect for a piece of toast."
 	
 	
 	DESCRIBE.BLUEBERRYPLANT =         

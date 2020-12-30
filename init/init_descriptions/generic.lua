@@ -204,7 +204,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "It's messing with my head!"
 	DESCRIBE.VIPERFRUIT = "I create snakes through the power of science!"
-	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	DESCRIBE.VIPERJAM = "At least I have the jar now."
 	
 	DESCRIBE.BLUEBERRYPLANT =         
 		{

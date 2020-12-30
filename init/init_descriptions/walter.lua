@@ -168,7 +168,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 		--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "I wonder how it's making those!"
 	DESCRIBE.VIPERFRUIT = "I always wanted a pet snake!"
-	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	DESCRIBE.VIPERJAM = "I wish I could have some PB n' J."
 	
 	DESCRIBE.BLUEBERRYPLANT =
 		{

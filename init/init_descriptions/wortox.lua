@@ -168,7 +168,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 		--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "A snake who's quite good at making fakes!"
 	DESCRIBE.VIPERFRUIT = "It reeks, but it's unique!"
-	DESCRIBE.VIPERJAM = "Gloomberry Jam"
+	DESCRIBE.VIPERJAM = "I'm sure the mortals would enjoy the taste."
 	
 	
 	DESCRIBE.BLUEBERRYPLANT =         
