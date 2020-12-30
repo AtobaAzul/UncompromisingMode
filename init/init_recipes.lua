@@ -147,5 +147,6 @@ STRINGS.RECIPE_DESC.AIR_CONDITIONER = "Condition the air."
 STRINGS.RECIPE_DESC.REVIVER = "Dead flesh revived to revive a dead friend."
 STRINGS.RECIPE_DESC.HONEY_LOG = "A log a day keeps the sickness at bay."
 STRINGS.RECIPE_DESC.BUGZAPPER = "Bite back with electricity!"
-
 STRINGS.RECIPE_DESC.AMULET = "Protects you from death, while worn."
+STRINGS.RECIPE_DESC.ANCIENT_AMULET_RED = "Recalls your lost soul."
+STRINGS.RECIPE_DESC.RAT_WHIP = "A long rat tail on a stick."
