@@ -126,8 +126,8 @@ local function fn(Sim)
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
-    
-
+	inst.entity:AddDynamicShadow()	    
+	inst.DynamicShadow:SetSize(4, 2)
     inst.entity:AddNetwork()
     inst.entity:AddLightWatcher()
 

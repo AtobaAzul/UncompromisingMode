@@ -52,10 +52,10 @@ end)
 
 
 --Swamp Mist
-local deserts = { "BGMarsh", "Marsh", "SpiderMarsh", "SlightlyMermySwamp"}
+local swamps = { "BGMarsh", "Marsh", "SpiderMarsh", "SlightlyMermySwamp"}
 
 --Add "scorpions" room tag to all desert rooms
-for k, v in pairs(deserts) do
+for k, v in pairs(swamps) do
     AddRoomPreInit(v, function(room)
         if not room.tags then
             room.tags = {"Mist"}
