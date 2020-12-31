@@ -86,7 +86,7 @@ configuration_options =
 			{description = "80%", data = 0.2},
 			{description = "INSANITY", data = 0},
 		},
-		default = 0.7,
+		default = 0.6,
 	},
     BinaryConfig("harder_shadows", "Harder Nightmare Creatures", "Insanity is a big threat now. Those who pass the brink may never return.", true),
     BinaryConfig("rat_raids", "Rat Raids", "Rats will periodically be attracted to your base.", true),
