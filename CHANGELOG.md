@@ -615,7 +615,9 @@ NERFS:
 
 * [x] [FEAR THE DARK!] New item: Bug Zapper, this handy weapon does 33 damage if fueled, but double that if the target is wet, BUT also 15 more damage if the target is a spider, 20 more if they are a different type of insect (very good vs Bee Queen when she's wet), and 50 more if the target is a pollen mite swarm! (Added damage cannot be scaled by character effects).
 
+--Tail O' Twined Rats
 
+* [x] Added the "Tail O' Twined Rats", a new craftable whip made out of rat tails, that will deal critical hits, at the cost of a small amount of hunger
 
 --[California King]--
 
@@ -662,7 +664,13 @@ NERFS:
 * [x] [FEAR THE DARK!] New Warly exclusive dish: Zaspberry Parfait, electricutes entities nearby when player is attacked with a violent shockstun, delaying their next attack. Crafted with a zaspberry, dairy, and sweetener.
 
 
+--[Depths Vipers and Gloomberries--
 
+* [x] New mob: The terrifying Depths Viper, added to Depth Worm attacks.
+
+* [x] Gloomberry: A Berry that drops from the Depths Viper that summons shadow vipers to fight for the player.
+
+* [x] [FEAR THE DARK!] New Crockpot dish: Gloomberry Jam, summons EVEN MORE shadow vipers to fight for the player.
 
 
 --[Bush Crabs]--
