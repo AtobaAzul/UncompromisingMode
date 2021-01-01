@@ -165,4 +165,3 @@ STRINGS = GLOBAL.STRINGS.NAMES
 	STRINGS.MAGMAHOUND = "Magma Hound"
 	STRINGS.CRABCLAW = "Crab Claw"
 	STRINGS.BIGHT = "Comingled Clockwork" --One of the next ones will be called "mangled monstricity" I'm thinking rook+bishop try to name following two of the same letter....
-	STRINGS.AMULET = "Lesser Life Amulet"

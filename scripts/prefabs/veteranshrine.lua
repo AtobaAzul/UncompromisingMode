@@ -199,10 +199,10 @@ local function fn(Sim)
     inst.components.inspectable:RecordViews()
 	
 	
-    inst:AddComponent("playerprox")
+    --[[inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(6, 10)
     inst.components.playerprox:SetOnPlayerNear(onnear)
-    inst.components.playerprox:SetOnPlayerFar(onfar)
+    inst.components.playerprox:SetOnPlayerFar(onfar)]]
 
     --inst.deactivate = deactivate
 

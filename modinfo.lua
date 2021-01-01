@@ -114,7 +114,8 @@ configuration_options =
 		default = 22500,
 	},
 
-
+	BinaryConfig("lifeamulet", "Life Giving Amulet Changes", "The Life Giving Amulet acts like vanilla Don't Starve, only reviving when worn upon death. \nIts hunger > health conversion ticks much faster.", true),
+    
 ------------------------------
 -- Character Reworks --
 ------------------------------

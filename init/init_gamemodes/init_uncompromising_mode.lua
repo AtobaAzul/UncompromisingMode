@@ -165,6 +165,11 @@ local require = GLOBAL.require
 		modimport("init/init_character_changes/wolfgang")
 	end
 	
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("lifeamulet") == true or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("lifeamulet") == true) then
+		modimport("init/init_lifeamulet")
+	end
+	
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("caved") == false and GetModConfigData("acidrain") == true or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("caved") == false and GetModConfigData("acidrain") == true) then
 		modimport("init/init_weather/init_overworld_toadstool")
