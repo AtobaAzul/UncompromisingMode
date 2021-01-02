@@ -77,7 +77,7 @@ end
 
 local QUAKEDEBRIS_CANT_TAGS = { "quakedebris" }
 local QUAKEDEBRIS_ONEOF_TAGS = { "INLIMBO" }
-local SMASHABLE_TAGS = { "smashable", "quakedebris", "_combat" }
+local SMASHABLE_TAGS = { "smashable", "_combat" }
 local NON_SMASHABLE_TAGS = { "INLIMBO", "playerghost", "irreplaceable" }
 local function _GroundDetectionUpdate(debris, override_density)
     local x, y, z = debris.Transform:GetWorldPosition()
@@ -103,23 +103,7 @@ local function _GroundDetectionUpdate(debris, override_density)
                     if v ~= debris and v:IsValid() and not v:IsInLimbo() then
                         softbounce = true
                         --NOTE: "smashable" excluded for now
-                        if v:HasTag("quakedebris") then
-                            local vx, vy, vz = v.Transform:GetWorldPosition()
-                            SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(vx, 0, vz)
-                            v:Remove()
-                        elseif v.components.workable ~= nil then
-                            if v.sg == nil or not v.sg:HasStateTag("busy") then
-                                local work_action = v.components.workable:GetWorkAction()
-                                --V2C: nil action for NPC_workable (e.g. campfires)
-                                if (    (work_action == nil and v:HasTag("NPC_workable")) or
-                                        (work_action ~= nil and HEAVY_WORK_ACTIONS[work_action.id]) ) and
-                                    (work_action ~= ACTIONS.DIG
-                                    or (v.components.spawner == nil and
-                                        v.components.childspawner == nil)) then
-                                    v.components.workable:Destroy(debris)
-                                end
-                            end
-                        elseif v.components.combat ~= nil then
+                        if v.components.combat ~= nil then
                             v.components.combat:GetAttacked(debris, 30, nil)
                         elseif v.components.inventoryitem ~= nil then
                             if v.components.mine ~= nil then
@@ -135,11 +119,7 @@ local function _GroundDetectionUpdate(debris, override_density)
                     if v ~= debris and v:IsValid() and not v:IsInLimbo() then
                         softbounce = true
                         --NOTE: "smashable" excluded for now
-                        if v:HasTag("quakedebris") then
-                            local vx, vy, vz = v.Transform:GetWorldPosition()
-                            SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(vx, 0, vz)
-                            v:Remove()
-                        elseif v.components.combat ~= nil and not (v:HasTag("epic") or v:HasTag("wall")) then
+                        if v.components.combat ~= nil and not (v:HasTag("epic") or v:HasTag("wall")) then
                             v.components.combat:GetAttacked(debris, 20, nil)
                         end
                     end
@@ -214,13 +194,6 @@ local function _GroundDetectionUpdate(debris, override_density)
 		if debris.components.inventoryitem ~= nil then
 		debris.components.inventoryitem.canbepickedup = true
 		end
-    elseif debris.prefab == "mole" or debris.prefab == "rabbit" then
-        --failsafe
-        debris:PushEvent("detachchild")
-        debris:Remove()
-	if debris.components.inventoryitem ~= nil then
-	debris.components.inventoryitem.canbepickedup = true
-	end
     end
 	
 end
@@ -287,24 +260,24 @@ local function SpawnDebris(inst,chopper,loottable)
 			debris.updatetask = debris:DoPeriodicTask(FRAMES, _GroundDetectionUpdate, nil, 5)
 																						-- ^This Value is from quaker
 			else
-			if TheWorld.Map:IsVisualGroundAtPoint(x,y,z) then
-			if debris:HasTag("spider") then
-			
-			debris.Physics:Teleport(x, y, z)
-			debris.sg:GoToState("dropper_enter")
-			if debris.components.combat ~= nil and not chopper:HasTag("spiderwhisperer") then
-			debris.components.combat:SuggestTarget(chopper)
-			end
-			end
-			if debris:HasTag("aphid") then
-			debris.Physics:Teleport(x, y, z)
-			if debris.components.combat ~= nil and not chopper:HasTag("spiderwhisperer") then
-			debris.components.combat:SuggestTarget(chopper)
-			end
-			end
-			else
-			debris:Remove()
-			end
+				if TheWorld.Map:IsVisualGroundAtPoint(x,y,z) then
+					if debris:HasTag("spider") then
+						debris.Physics:Teleport(x, y, z)
+						debris.sg:GoToState("dropper_enter")
+						if debris.components.combat ~= nil and not chopper:HasTag("spiderwhisperer") then
+							debris.components.combat:SuggestTarget(chopper)
+						end
+					end
+					
+					if debris:HasTag("aphid") then
+						debris.Physics:Teleport(x, y, z)
+						if debris.components.combat ~= nil and not chopper:HasTag("spiderwhisperer") then
+							debris.components.combat:SuggestTarget(chopper)
+						end
+					end
+				else
+					debris:Remove()
+				end
 			end
 		end																				
        
