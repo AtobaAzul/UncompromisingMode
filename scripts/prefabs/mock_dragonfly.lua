@@ -88,7 +88,7 @@ end
 local function SetFlameOn(inst, flameon, newtarget, freeze)
     if flameon and not inst.flame_on then
         inst.flame_on = true
-        if newtarget then
+        if newtarget and inst.components.health:GetPercent() <= 0.5 then
             inst.sg:GoToState("taunt_pre")
         end
     elseif not flameon and inst.flame_on then

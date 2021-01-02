@@ -32,19 +32,25 @@ local function DoubleSlap(owner)
 	--owner.components.combat:SetTarget(target)
 	
 	if not owner.components.rider:IsRiding() and equip ~= nil and equip.components.weapon ~= nil and not (equip.components.projectile ~= nil or equip:HasTag("rangedweapon")) and target ~= nil then
-		local damage = equip.components.weapon ~= nil and equip.components.weapon.damage
+		local damage = equip.components.weapon ~= nil and equip.components.weapon:GetDamage(owner, target)
 		local damagemult = owner.components.combat.damagemultiplier ~= nil and owner.components.combat.damagemultiplier or 1
 		local damagemultex = owner.components.combat.externaldamagemultipliers ~= nil and owner.components.combat.externaldamagemultipliers:Get() or 1
 		local range = owner.components.combat:GetAttackRange() or 0
-		
 		--owner.components.combat:StartAttack()
         owner.components.locomotor:StopMoving()
 		owner.sg:GoToState("force_klaus_attack")
 		
 		local damagecalc = ((damage / 2) * damagemult) * damagemultex
 
+		
 		target:DoTaskInTime(0.3, function(target, owner, equip) 
 			if target ~= nil and owner.sg:HasStateTag("attack") and owner:IsNear(target, (range + 0.5)) then
+				
+				local equip = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+				if equip ~= nil then
+					equip.components.weapon:OnAttack(owner, target)
+				end
+				
 				target.components.combat:GetAttacked(owner, damagecalc, equip) 
 			end
 		end, owner)
