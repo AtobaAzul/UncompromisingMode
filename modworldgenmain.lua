@@ -216,10 +216,10 @@ task.room_choices["ricepatch"] = 1      --Comment to test task based rice worldg
 end)
 GLOBAL.require("map/tasks/newswamp")
 GLOBAL.require("map/tasks/gianttrees")
-AddTaskPreInit("RedForest",function(task)
+--[[AddTaskPreInit("RedForest",function(task)
 
 table.insert(task.keys_given,KEYS.HF)  
-end)
+end)]]
 --Waffle's Specific Task Remover Code
 AddTaskSetPreInitAny(function(tasksetdata)
   for _, task in pairs(tasksetdata.tasks) do
@@ -236,12 +236,12 @@ AddTaskSetPreInitAny(function(tasksetdata)
     end
 table.insert(tasksetdata.tasks,"GiantTrees")  -- Uncomment to test task based rice worldgen
 end)
-AddTaskSetPreInitAny(function(tasksetdata)
+--[[AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "cave" then
         return
     end
 table.insert(tasksetdata.tasks,"CaveGiantTrees")  -- Uncomment to test task based rice worldgen
-end)
+end)]]
 
 local Layouts = GLOBAL.require("map/layouts").Layouts
 local StaticLayout = GLOBAL.require("map/static_layout")
