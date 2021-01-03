@@ -195,6 +195,7 @@ for k, v in pairs(KEYS) do
     keycount = keycount + 1
 end
 KEYS["RICE"] = keycount + 1
+KEYS["HF"] = keycount + 1
 
 --locks
 local lockcount = 0
@@ -202,9 +203,11 @@ for k, v in pairs(LOCKS) do
     lockcount = lockcount + 1
 end
 LOCKS["RICE"] = lockcount + 1
+LOCKS["HF"] = lockcount + 1
 
 --link keys to locks
 LOCKS_KEYS[LOCKS.RICE] = {KEYS.RICE}
+LOCKS_KEYS[LOCKS.HF] = {KEYS.HF}
 
 AddTaskPreInit("Squeltch",function(task)
 task.room_choices["ricepatch"] = 1      --Comment to test task based rice worldgen
@@ -213,7 +216,10 @@ task.room_choices["ricepatch"] = 1      --Comment to test task based rice worldg
 end)
 GLOBAL.require("map/tasks/newswamp")
 GLOBAL.require("map/tasks/gianttrees")
+AddTaskPreInit("RedForest",function(task)
 
+table.insert(task.keys_given,KEYS.HF)  
+end)
 --Waffle's Specific Task Remover Code
 AddTaskSetPreInitAny(function(tasksetdata)
   for _, task in pairs(tasksetdata.tasks) do
@@ -230,7 +236,12 @@ AddTaskSetPreInitAny(function(tasksetdata)
     end
 table.insert(tasksetdata.tasks,"GiantTrees")  -- Uncomment to test task based rice worldgen
 end)
-
+AddTaskSetPreInitAny(function(tasksetdata)
+    if tasksetdata.location ~= "cave" then
+        return
+    end
+table.insert(tasksetdata.tasks,"CaveGiantTrees")  -- Uncomment to test task based rice worldgen
+end)
 
 local Layouts = GLOBAL.require("map/layouts").Layouts
 local StaticLayout = GLOBAL.require("map/static_layout")

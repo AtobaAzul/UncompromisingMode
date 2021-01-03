@@ -431,7 +431,7 @@ local californiaking =
     foodtype = "MEAT",
     health = 3,
     hunger = 62.5,
-	oneat_desc = "A victory drink",
+	oneat_desc = "For the worthy",
     perishtime = 5*TUNING.PERISH_TWO_DAY,
     sanity = -15,
     cooktime = 2,
@@ -532,10 +532,27 @@ local viperjam =
     foodtype = "VEGGIE",
     health = 40,
     hunger = 37.5,
-	oneat_desc = "Apparitions' aid.",
+	oneat_desc = "Apparitions' aid",
 	sanity = 15,
     perishtime = 10*TUNING.PERISH_TWO_DAY,
     cooktime = 1.8,
 }
 AddCookerRecipe("cookpot", viperjam)
 AddCookerRecipe("portablecookpot", viperjam)
+local snotroast =
+{
+    name = "snotroast",
+    test = function(cooker, names, tags) return (names.trunk_summer or names.trunk_winter or names.trunk_cooked) and (names.carrot or names.carrot_cooked) and (names.potato or names.potato_cooked) and (names.onion or names.onion_cooked) end,
+
+    priority = 30,
+    weight = 1,
+    foodtype = "MEAT",
+    health = 3,
+    hunger = 150,
+	oneat_desc = "Extremely filling",
+	sanity = 5,
+    perishtime = 10*TUNING.PERISH_TWO_DAY,
+    cooktime = 1.8,
+}
+AddCookerRecipe("cookpot", snotroast)
+AddCookerRecipe("portablecookpot", snotroast)

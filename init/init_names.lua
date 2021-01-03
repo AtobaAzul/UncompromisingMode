@@ -165,4 +165,14 @@ STRINGS = GLOBAL.STRINGS.NAMES
 	STRINGS.MAGMAHOUND = "Magma Hound"
 	STRINGS.CRABCLAW = "Crab Claw"
 	STRINGS.BIGHT = "Comingled Clockwork" --One of the next ones will be called "mangled monstricity" I'm thinking rook+bishop try to name following two of the same letter....
+	STRINGS.KNOOK = "Automaton Abomination"
 	STRINGS.AMULET = "Lesser Life Amulet"
+	STRINGS.SNOTROAST = "Snot Roast"
+	STRINGS.LICELOAF = "Liceloaf" --For the cookbook
+	
+	-- Blowgun stuff
+	STRINGS.UNCOMPROMISING_BLOWGUN = "Blowpipe" --Lol
+	STRINGS.BLOWGUNAMMO_TOOTH = "Dart"
+	STRINGS.BLOWGUNAMMO_FIRE = "Fire Dart"
+	STRINGS.BLOWGUNAMMO_SLEEP = "Sleep Dart"
+	STRINGS.BLOWGUNAMMO_ELECTRIC = "Electric Dart"

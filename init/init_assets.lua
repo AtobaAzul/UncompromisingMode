@@ -339,7 +339,22 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/viperjam.tex"),
 	Asset("ATLAS", "images/inventoryimages/viperjam.xml"),
 	Asset("ANIM", "anim/viperjam.zip"),
-	Asset("ANIM", "anim/bight.zip"),	
+	Asset("ANIM", "anim/bight.zip"),
+	Asset("ANIM", "anim/knook.zip"),
+	
+	--Dart Stuff
+	Asset("ANIM", "anim/um_blowguns.zip"),
+	Asset("ANIM", "anim/um_darts.zip"),
+	Asset("IMAGE", "images/inventoryimages/uncompromising_blowgun.tex"),
+	Asset("ATLAS", "images/inventoryimages/uncompromising_blowgun.xml"),	
+	Asset("IMAGE", "images/inventoryimages/blowgunammo_fire.tex"),
+	Asset("ATLAS", "images/inventoryimages/blowgunammo_fire.xml"),	
+	Asset("IMAGE", "images/inventoryimages/blowgunammo_sleep.tex"),
+	Asset("ATLAS", "images/inventoryimages/blowgunammo_sleep.xml"),
+	Asset("IMAGE", "images/inventoryimages/blowgunammo_tooth.tex"),
+	Asset("ATLAS", "images/inventoryimages/blowgunammo_tooth.xml"),	
+	Asset("IMAGE", "images/inventoryimages/blowgunammo_electric.tex"),
+	Asset("ATLAS", "images/inventoryimages/blowgunammo_electric.xml"),
 	
 	
 	

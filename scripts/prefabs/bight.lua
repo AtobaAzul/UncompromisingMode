@@ -23,9 +23,9 @@ SetSharedLootTable('bight',
 local SHARE_TARGET_DIST = 30
 
 local function NormalRetarget(inst)
-    local targetDist = 30
+    local targetDist = 16
     if inst.components.knownlocations:GetLocation("investigate") then
-        targetDist = 32
+        targetDist = 16
     end
     return FindEntity(inst, targetDist, 
         function(guy) 
@@ -63,7 +63,7 @@ local function OnAttacked(inst, data)
     end
 	
     inst.components.combat:SetTarget(data.attacker)
-    inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST, function(dude) return dude:HasTag("swilson") and not dude.components.health:IsDead() end, 5)
+    inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST, function(dude) return dude:HasTag("chess") and not dude.components.health:IsDead() end, 5)
 end
 
 local function Shockness(inst,x,y,z)
@@ -136,7 +136,7 @@ local function fn(Sim)
     inst.AnimState:SetBank("bight")
     inst.AnimState:SetBuild("bight")
     inst.AnimState:PlayAnimation("idle_loop",true)
-	MakeCharacterPhysics(inst, 10, .5)
+	MakeCharacterPhysics(inst, 100, 0.5)
 	--MakePoisonableCharacter(inst)
 
 	inst.entity:SetPristine()

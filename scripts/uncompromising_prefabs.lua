@@ -186,4 +186,8 @@ return {
 	"bight",
 	"deerclops_laser_blue",
 	"gingerdeadpig_rne",
+	"uncompromising_blowguns",
+	"uncompromising_blowgun_ammo",
+	"knook",
+	"snotroast",
 }

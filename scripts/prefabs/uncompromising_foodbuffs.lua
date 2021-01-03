@@ -127,6 +127,20 @@ if target:HasTag("foodknockbackimmune") then
 target:RemoveTag("foodknockbackimmune")
 end
 end
+
+local function largehungerslow_attach(inst, target)
+target.components.hunger.burnratemodifiers:SetModifier(inst, .5)
+end
+
+local function largehungerslow_extend(inst, target)
+target.components.hunger.burnratemodifiers:RemoveModifier(inst)
+target.components.hunger.burnratemodifiers:SetModifier(inst, .5)
+end
+
+local function largehungerslow_detach(inst, target)
+target.components.hunger.burnratemodifiers:RemoveModifier(inst)
+end
+
 -------------------------------------------------------------------------
 ----------------------- Prefab building functions -----------------------
 -------------------------------------------------------------------------
@@ -208,4 +222,5 @@ return MakeBuff("electricretaliation", attachretaliationdamage, electric_extend,
 MakeBuff("frozenfury", attachfrozenness, nil, removefrozenness, TUNING.BUFF_ELECTRICATTACK_DURATION, 2),
 MakeBuff("lesserelectricattack", electric_attach, electric_extend, electric_detach, 30, 2, { "electrichitsparks", "electricchargedfx" }),
 MakeBuff("knockbackimmune", kbimmune_attach, kbimmune_extend, kbimmune_detach, TUNING.BUFF_ATTACK_DURATION, 2),
-MakeBuff("californiaking", californiaking_attach, californiaking_extend, californiaking_detach, TUNING.BUFF_ATTACK_DURATION*8, 2)
+MakeBuff("californiaking", californiaking_attach, californiaking_extend, californiaking_detach, TUNING.BUFF_ATTACK_DURATION*8, 2),
+MakeBuff("largehungerslow", largehungerslow_attach, largehungerslow_extend, largehungerslow_detach, TUNING.BUFF_ATTACK_DURATION*8, 2)

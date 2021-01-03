@@ -24,7 +24,9 @@ end
 function CheckGem(container, item, slot)
     return not item:HasTag("irreplaceable") and item:HasTag("gem")
 end
-
+function CheckDart(container, item, slot)
+    return item:HasTag("um_dart")
+end
 modparams.air_conditioner =
 {
     widget =
@@ -83,6 +85,27 @@ modparams.crabclaw =
     },
 	itemtestfn = CheckGem,
     acceptsstacks = false,
+    type = "hand_inv",
+}
+
+modparams.um_blowgun =
+{
+    widget =
+    {
+        slotpos =
+        {
+            Vector3(0,   32 + 4,  0),
+        },
+        --[[slotbg =
+        {
+            { image = "slingshot_ammo_slot.tex" },
+        },]]
+        animbank = "ui_cookpot_1x2",
+        animbuild = "ui_cookpot_1x2",
+        pos = Vector3(0, 15, 0),
+    },
+	itemtestfn = CheckDart,
+    acceptsstacks = true,
     type = "hand_inv",
 }
 
