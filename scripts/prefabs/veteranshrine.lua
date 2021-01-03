@@ -98,7 +98,7 @@ local function ToggleCursee(inst)
 				TheFrontEnd:PopScreen()
 			end
 			local title = "You Made Your Choice."
-			local bodytext = "Now you must live with the consequences."
+			local bodytext = "Now you must live with the consequences..."
 			local yes_box = { text = "Ok", cb = acceptance }
 
 			local bpds = BigPopupDialogScreen(title, bodytext, { yes_box })
@@ -112,7 +112,7 @@ local function ToggleCursee(inst)
 			end
 
 			local title = "The Veterans Curse."
-			local bodytext = "You're about to be afflicted with a crippling curse.\nYour odds of survival will be lowered.\nHowever, fortune favors the bold (or foolish)!\n - \nIf you're up for the challenge, then touch this altar again..."
+			local bodytext = "You're about to be afflicted with a crippling curse.\nYour body will treat you more harshly,\nhowever fortune favors the, bold (or foolish)! \n \nTouch the skull again to seal your fate."
 			local yes_box = { text = "Ok", cb = start_curse }
 
 			local bpds = BigPopupDialogScreen(title, bodytext, { yes_box })
@@ -199,10 +199,10 @@ local function fn(Sim)
     inst.components.inspectable:RecordViews()
 	
 	
-    inst:AddComponent("playerprox")
+    --[[inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(6, 10)
     inst.components.playerprox:SetOnPlayerNear(onnear)
-    inst.components.playerprox:SetOnPlayerFar(onfar)
+    inst.components.playerprox:SetOnPlayerFar(onfar)]]
 
     --inst.deactivate = deactivate
 

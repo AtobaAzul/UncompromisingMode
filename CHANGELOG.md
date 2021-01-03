@@ -17,6 +17,8 @@
 
 * [x]  Hounds, Spiders, and Pengulls will mutate on full moons.
 
+* [x]  [STALKING STUFFERS] Vargs can arrive with hound waves after day 100
+
 * [x]  Most small monsters drop monster morsels instead of monster meat.
 
 --Misc
@@ -31,6 +33,8 @@
 * [x]  [Fear the Dark!] Pigs and Bunnymen refuse to in-fight.
 
 * [x]  Bunnymen no longer drop carrots.
+
+* [x]  [STALKING STUFFERS] Pig Men have learned some new moves: They will attempt to uppercut counter the players attacks, and then charge.
 
 * [x]  Pig guards now break free by attacking walls that entrap them.
 
@@ -64,6 +68,8 @@
 
 --Hounds
 
+* [x] [STALKING STUFFERS] Added two new Hounds to hound waves: Lightning Hounds in Spring, and Magma Hounds in summer
+
 * [x]  Fire and ice hounds have fire and ice attacks on their bite.
 
 * [x]  Mutated Hounds attack faster and move faster.
@@ -89,7 +95,7 @@
 
 --Shadows
 
-* [x] [GOODIES GALORE!] Terror Beaks will now slightly lunge at the player when attacking.
+* [x] [STALKING STUFFERS] Terror Beaks will now ocassionally teleport around the player to reposition themselves, and are more aggresive in general.
 
 * [x] [GOODIES GALORE!] Crawling Horror's now drop shadow bombs around itself when hit, inking the player and dealing damage.
 
@@ -108,6 +114,8 @@
 * [x]  Knockback mechanic on some bosses.
 
 * [x] "Wilting Dragonfly" and "Mother Goose" will search out your base during spring and summer similar to ROG.
+
+* [x] [STALKING STUFFERS] The Wilting Dragonfly will no longer enrage until she is half health.
 
 * [x] Added options to reduce the Bee Queen and Toadstool's health, due to their raised importance. (Decent for solo play.)
 
@@ -140,16 +148,19 @@
 
 * [x]  Deerclops "enrages" at half health.
 
+* [x]  [STALKING STUFFERS] Added a Blue variant of the Deerclops to replace the default half health Enraged > Yule Deerclops
+
+* [x]  [STALKING STUFFERS] Blue Deerclops fires Blue icy lasers that freeze the player and reduce their temperature
+
 * [x]  Sometimes while underground in winter, the deerclops will make a desperate attempt to attack the player, and will crash through the cave ceiling with anger. (Fun fact: This was in since launch, it just wasn't listed in the changelog).
 
 * [x] [THE HOODED FOREST] Cursed Antler Vetcurse item.
+
 --Dragonfly
 
 * [x]  Raidfly's Lavae will now drop explosive slime on death, destroying structures and settings things on fire.
 
 * [x]  [FEAR THE DARK!] Raidfly leaves her area if a boss is nearby, and will also leave in summer to fly overhead, searching for bases to burn as the "Wilting Dragonfly".
-
-* [x] Dragonfly gets 15% reduced damage when in wilting form!
 
 --G/Moose
 
@@ -169,6 +180,13 @@
 
 * [x] Upon enraging, Klaus will heal back to full health; however, Enraged Klaus will always guarantee a Krampus Sack upon dropping. (Try forcing him to revive, then kill the deer to fight enraged klaus for a minimum amount of time.)
 
+* [x] [STALKING STUFFERS] "Naught Lock" item for Veterans Cursed players. Enables a double attack, similar to Klaus's double swipe.
+
+--Crab King
+
+* [x] [STALKING STUFFERS] Added toggleable option in the mod config that lets the kings Imposing Claws deal damage to him when killed.
+
+* [x] [STALKING STUFFERS] "Crab Claw" item for Veterans Cursed players. Can be slotted with Gems for different effects.
 
 --[ Vanilla Item changes]--
 
@@ -181,6 +199,8 @@
 * [x] [FEAR THE DARK!] Hambat spoils two days quicker (it used to spoil in 10), and does less damage when it's spoiled. It can also be fed to various mobs, like Pigs and Spiders!
 
 --Armor
+
+* [x] [STALKING STUFFERS] Night Armor now prevents hit s tun when worn.
 
 * [x]  Marble armor ignores our knockback mechanic.
 
@@ -196,6 +216,10 @@
 
 --Clothing
 
+* [x] [STALKING STUFFERS] The Top Hat now reduces sanity loss from certain sanity draining equipment.
+
+* [x] [STALKING STUFFERS] The Beekeeper Hat prevents player from taking hayfever "damage" from bees, mosquitos, etc.
+
 * [x]  Weather protective clothing will become less effective at lower percents (75%-50%-25%) (can be toggled in options).
 
 * [x]  Sewing Kits repair 50% less, but have DOUBLE THE USES. (Makes it easier to keep clothing in acceptable durability levels).
@@ -208,7 +232,21 @@
 
 * [x] [FEAR THE DARK!] Cookie cutter cap now reflects 75% of the attackers base attack back at them, along with 5 damage spikes, similar to the Bramble Husk.
 
+--Amulets
+
+* [x] [STALKING STUFFERS] The Life Giving Amulet now only revives the player if worn at the time of death (Just like Vanilla Don't Starve). (Toggleable mod config option)
+
+* [x] [STALKING STUFFERS] Renamed the "Life Giving Amulet" to the "Lesser Life Amulet", changed its recipe description to match its updated effects.
+
+* [x] [STALKING STUFFERS] The "Lesser Life Amulet" now heals at a much faster rate, with slightly reduced health per tick. It can also be replenished with Nightmare Fuel.
+
+* [x] [STALKING STUFFERS] The Lazy Forager is now fuelable, has increased range, and will harvest various things like Berry Bushes and Grass Tufts.
+
 --Misc
+
+* [x] [STALKING STUFFERS] The Piggy Back no longer has passive movement speed reduction, instead, it slows the player based on the amount of items inside.
+
+* [x] [STALKING STUFFERS] Thermal Stones now have much less inherent insulation, but gain 50% of the PLAYERS insulation.
 
 * [x] Moonrock idol requires 5 moonstone.
 
@@ -255,11 +293,24 @@
 
 --Wolfgang
 
-* [x]  Wolfgang sanity drain to 1.5x (prev was 1.1x).
+* [x] [STALKING STUFFERS] - Toroic's Wolfgang rework has been added as a base part of Uncompromising Mode! (Wolfgang changes are now a toggleable option)
+------------------------------------------------------------------------------------------------------------------------------------------
+BUFFS:
+-Wolfgang can now carry heavy objects on his back at normal speed and with his hands free while mighty
+-Wolfgang now ignores the speed penalties from piggyback and marble armor while not wimpy
+-Wolfgang is much faster at carrying sculptures and marble pieces while in normal form (45% normal speed instead of 15% normal speed)
+-Wolfgang's rowing is much stronger while mighty
+-Transforming animations can be cancelled by moving (Credit to Rezecib for the code)
+-Hunger drain in Mighty form now tops out at 2x instead of 3x
+-Wolfgang's damage uses the same scaling while mighty but normal form is now 1.25x
 
-* [x] [GOODIES GALORE!] Wolfgang no longer gains speed from being mighty.
-
-* [x] [GOODIES GALORE!] Wolfgang gains knockback immunity when mighty.
+NERFS:
+-Wolfgang's size and speed are now a consistent 1x. Items no longer grow when he uses them while mighty, and he no longer has a speed boost while mighty or slowdown while wimpy.
+-His health does not increase above 200 while in mighty form.
+-His maximum sanity was nerfed to 150 instead of 200.
+-Wolfgang loses sanity at 1.3x the normal rate instead of 1.1x from darkness and insanity auras.
+-When under 10% sanity, Wolfgang now gains induced insanity (just like a purple amulet) which increases the number of shadow creatures that can spawn to 5 (up from 1-2).
+------------------------------------------------------------------------------------------------------------------------------------------
 
 --Wendy
 
@@ -333,8 +384,6 @@
 
 * [x] [FEAR THE DARK!] Wormwood now takes an additional -5 sanity from digging up plants, no more infinite sanity gain from sapling digging/planting, its not equal loss and gain
 
-* [x] [FEAR THE DARK!] NEW WORMWOOD EXCLUSIVE ITEM: Blooming Shot - Costs 1 living log, 1 nitre, and 2 killer Bees. When used, Wormwood will lose 10 hp and will instantly full bloom for half a day, before returning to his previous bloomed state.
-
 * [x] [FEAR THE DARK!] Wormwood's compost wrap now heals him by 3 health, and an additional 48 health over 2 minutes.
 
 
@@ -396,6 +445,8 @@
 
 --Crockpot
 
+* [x]  [STALKING STUFFERS] - Uncooked Birchnuts can be used in crockpots.
+
 * [x]  Meatballs nerf - Hunger restored to 50 (down from 62.5).
 
 * [x]  Pierogi spoils in 10 days instead of 20.
@@ -414,7 +465,7 @@
 
 --Rare
 
-* [x]  Creamy Potato Puree 37.5 Hunger -> 100 Hunger! (Seems extreme, but dish requires garlic, which is a rare product, and two potatos.)
+* [x]  Creamy Potato Puree 37.5 Hunger -> 75 Hunger! (Seems extreme, but dish requires garlic, which is a rare product, and two potatos.)
 
 * [x]  Salsa fresca 33 Sanity -> 50 Sanity!
 
@@ -477,6 +528,11 @@
 
 * [x]  More shadows spawns on insane players.
 
+--Sleeping
+
+* [x]  [STALKING STUFFERS] Sleeping now heals players faster, and drains hunger faster to match
+
+* [x]  [STALKING STUFFERS] Sleeping now reverses max health loss
 
 
 --[ Vanilla Misc changes]--
@@ -559,7 +615,9 @@
 
 * [x] [FEAR THE DARK!] New item: Bug Zapper, this handy weapon does 33 damage if fueled, but double that if the target is wet, BUT also 15 more damage if the target is a spider, 20 more if they are a different type of insect (very good vs Bee Queen when she's wet), and 50 more if the target is a pollen mite swarm! (Added damage cannot be scaled by character effects).
 
+--Tail O' Twined Rats
 
+* [x] Added the "Tail O' Twined Rats", a new craftable whip made out of rat tails, that will deal critical hits, at the cost of a small amount of hunger
 
 --[California King]--
 
@@ -606,7 +664,13 @@
 * [x] [FEAR THE DARK!] New Warly exclusive dish: Zaspberry Parfait, electricutes entities nearby when player is attacked with a violent shockstun, delaying their next attack. Crafted with a zaspberry, dairy, and sweetener.
 
 
+--[Depths Vipers and Gloomberries--
 
+* [x] New mob: The terrifying Depths Viper, added to Depth Worm attacks.
+
+* [x] Gloomberry: A Berry that drops from the Depths Viper that summons shadow vipers to fight for the player.
+
+* [x] [FEAR THE DARK!] New Crockpot dish: Gloomberry Jam, summons EVEN MORE shadow vipers to fight for the player.
 
 
 --[Bush Crabs]--
@@ -682,7 +746,9 @@
 
 * [x] [FEAR THE DARK] Wormwood gains 80% less healing from the Air Conditioners Blue Caps and Spores.
 
-* [x] [GOODIES GALORE!] New Item, Spore Pack, New backpack with 12 slots without slowness, but rots foods incredibly fast if it's inside
+* [x] [GOODIES GALORE!] New Item, Spore Pack, New backpack with 14 slots without slowness, but rots foods incredibly fast if it's inside.
+
+* [x] [STALKING STUFFERS] The Spore Pack now periodically rots valid things in an area around the player when worn.
 
 
 
@@ -718,11 +784,24 @@
 
 * [x] [FEAR THE DARK!] [[INCOMPLETE MECHANIC]] Veteran's Curse, players under this effect take more damage and have a faster hunger drain.
 
-* [x] [HOODED FOREST] Opting for veteran's curse enables the overstuffing mechanic, which will slow you down if you eat when full or near full.
+* [x] [STALKING STUFFERS] The Veterans Curse will make players recieve health/sanity effects from foods over time.
 
 * [x] [HOODED FOREST] Added cursed antler veteran's curse item, it does heavy aoe damage and freezes on hit, has infinite durability, requires a few moments to recharge before it's effective again.
 
+* [x] [STALKING STUFFERS] - Added the Naught Lock, a Veterans Curse item dropped by Klaus. When equipped, it will make the player deal a fast second attack after every attack, which deals 50% less damage.
 
+
+* [x] [STALKING STUFFERS] - Added the Crab Claw, a Veterans Curse item dropped by the Crab King. Can be slotted with up to 4 gems, which will modify the effects of the Crab Claw.
+
+----------------------------------------------------------------
+Red Gems will regenerate a small amount of health on hit
+Blue Gems will apply a small amount of freeze on it
+Green Gems will reduce the amount of durability lost on attack
+Yellow Gems will regenerate a small amount of sanity on hit
+Purple Gems will add a chance to spawn shadow tentacles on hit
+Orange Gems will apply a small amount of slow on hit
+Opal's will increase the effects of all other gems slotted
+----------------------------------------------------------------
 
 --[Beefalo Wings]--
 
@@ -800,7 +879,9 @@
 
 * [x] [HOODED FOREST] Whisper pods are mechanisms to grow snap buddies which can give you a desired farmplot fruit or gourd. Just plant their corresponding seed in the whisper pod.
 
-* [x] [HOODED FOREST] After the whipser pod grows, it will become a snap buddy, which can be traded with for whole fruit/gourds as well as seeds.
+* [x] [HOODED FOREST] After the whipser pod grows, it will become a snap buddy.
+
+* [x] [STALKING STUFFERS] Snapdragons can spit up unique fertilize, the values of which are determined by the crop seed planted.
 
 --[Pitcher plants and Fruit bats]--
 
@@ -813,6 +894,8 @@
 * [x] [HOODED FOREST] Pitcher plants cannot be destroyed, fruit bats may pester any bee box system the player sets up.
 
 --[Hooded Widow and her Cocoons]--
+
+* [x] [STALKING STUFFERS] Added a brand new music track for the Hooded Widow boss fight!
 
 * [x] [HOODED FOREST] Hooded widow is a new boss that spawns in the hooded forest, she can be summoned by triggering the web creep in the middle of her cocoons.
 

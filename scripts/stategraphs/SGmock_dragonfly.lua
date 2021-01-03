@@ -167,12 +167,14 @@ local states=
         {
             TimeEvent(2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end),
             TimeEvent(6*FRAMES, function(inst)
-                inst.AnimState:SetBuild("dragonfly_fire_build")
-                inst.SoundEmitter:KillSound("fireflying")
-                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/firedup", "fireflying")
-                ---inst.AnimState:SetBloomEffectHandle( "shaders/anim.ksh" )
-                inst.Light:Enable(true)
-                inst.components.propagator:StartSpreading()
+                if inst.components.health:GetPercent() <= 0.5 then
+					inst.AnimState:SetBuild("dragonfly_fire_build")
+					inst.SoundEmitter:KillSound("fireflying")
+					inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/firedup", "fireflying")
+					---inst.AnimState:SetBloomEffectHandle( "shaders/anim.ksh" )
+					inst.Light:Enable(true)
+					inst.components.propagator:StartSpreading()
+				end
                 inst.fire_build = true
             end),
         },
@@ -290,10 +292,14 @@ local states=
         events =
         {
             EventHandler("animover", function(inst) 
-                if inst.flame_on and not inst.fire_build then
-                    inst.sg:GoToState("idle") 
+                if inst.flame_on and not inst.fire_build and inst.components.health:GetPercent() > 0.5 then
+                    inst.sg:GoToState("idle")
                 else
-                    inst.sg:GoToState("taunt_pre")
+					if inst.components.health:GetPercent() <= 0.5 then
+						inst.sg:GoToState("taunt_pre")
+					else
+						inst.sg:GoToState("idle")
+					end
                 end
             end),
         },
@@ -304,10 +310,14 @@ local states=
         tags = {"attack", "busy", "canrotate"},
         
         onenter = function(inst)
-            if not inst.flame_on or not inst.fire_build then
+            if not (inst.flame_on or not inst.fire_build) and inst.components.health:GetPercent() <= 0.5 then
                 inst.flame_on = true
                 inst.sg:GoToState("taunt_pre")
             else
+				if inst.components.health:GetPercent() > 0.5 then
+					inst.components.locomotor:StopMoving()
+				end
+				
                 inst.components.combat:StartAttack()
                 inst.AnimState:PlayAnimation("atk")
                 local attackfx = SpawnPrefab("attackfire_fx")

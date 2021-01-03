@@ -131,7 +131,7 @@ local function fn_sanity()
     inst.components.debuff:SetAttachedFn(OnAttached2)
     inst.components.debuff:SetDetachedFn(inst.Remove)
     inst.components.debuff:SetExtendedFn(OnExtended2)
-    inst.components.debuff.keepondespawn = false
+    inst.components.debuff.keepondespawn = true
 
     inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", OnTimerDone2)

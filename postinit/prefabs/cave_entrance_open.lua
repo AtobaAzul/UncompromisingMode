@@ -58,10 +58,10 @@ env.AddPrefabPostInit("cave_entrance_open", function(inst)
 		inst.components.childspawner.rarechild = "vampirebat"
 		
 		
-		inst:AddComponent("playerprox")
+		--[[inst:AddComponent("playerprox")
 		inst.components.playerprox:SetDist(11, 14) --set specific values
 		inst.components.playerprox:SetOnPlayerNear(onnear)
-		inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
+		inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)]]
 	end
 	
 	

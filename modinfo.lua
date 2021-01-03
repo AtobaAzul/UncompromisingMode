@@ -86,7 +86,7 @@ configuration_options =
 			{description = "80%", data = 0.2},
 			{description = "INSANITY", data = 0},
 		},
-		default = 0.7,
+		default = 0.6,
 	},
     BinaryConfig("harder_shadows", "Harder Nightmare Creatures", "Insanity is a big threat now. Those who pass the brink may never return.", true),
     BinaryConfig("rat_raids", "Rat Raids", "Rats will periodically be attracted to your base.", true),
@@ -114,7 +114,8 @@ configuration_options =
 		default = 22500,
 	},
 
-
+	BinaryConfig("lifeamulet", "Life Giving Amulet Changes", "The Life Giving Amulet acts like vanilla Don't Starve, only reviving when worn upon death. \nIts hunger > health conversion ticks much faster.", true),
+    
 ------------------------------
 -- Character Reworks --
 ------------------------------
@@ -123,7 +124,7 @@ configuration_options =
     BinaryConfig("willow", "Willow Rework", "Willow's Lighter now has infinite durability, Willow can cast explosions, etc.", true),
     BinaryConfig("bernie", "Big Bernie", "Enable Big BERNIE!!", true),
     BinaryConfig("warly", "Improved Warly", "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.", true),
-	BinaryConfig("wolfgang", "Balanced Wolfgang", "Set to false if you want Wolfgang to be unbalanced.", true),
+	BinaryConfig("wolfgang", "Improved/Balanced Wolfgang", "Wolfgang gains new perks and downsides. Read the patch notes included in the mod folder or workshop for details.", true),
 
 
 ------------------------------

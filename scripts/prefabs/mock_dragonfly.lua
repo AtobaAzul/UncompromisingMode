@@ -33,7 +33,7 @@ end
 local function NearPlayerBase(inst)
     local pt = inst:GetPosition()
     local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, SEE_STRUCTURE_DIST, BASE_TAGS)
-    if #ents >= 2 then
+    if #ents >= 5 then
         inst.SeenBase = true
         return true
     end
@@ -88,7 +88,7 @@ end
 local function SetFlameOn(inst, flameon, newtarget, freeze)
     if flameon and not inst.flame_on then
         inst.flame_on = true
-        if newtarget then
+        if newtarget and inst.components.health:GetPercent() <= 0.5 then
             inst.sg:GoToState("taunt_pre")
         end
     elseif not flameon and inst.flame_on then
@@ -148,7 +148,7 @@ local function OnEntitySleep(inst)
         or (inst.components.combat:TargetIs(ThePlayer) and not inst.KilledPlayer) then
         --Get back in there Dragonfly! You still have work to do.--]]
 		
-		if PlayerPosition ~= nil then
+		if PlayerPosition ~= nil and not inst:NearPlayerBase() and not inst.SeenBase then
 			print("Porting Dragonfly to Player!")
 			local init_pos = inst:GetPosition()
 			local player_pos = PlayerPosition:GetPosition()

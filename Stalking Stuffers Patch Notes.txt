@@ -1,0 +1,100 @@
+NEW UPDATE: Stalking Stuffers v1
+
+[NEW!]
+
+- Added BRAND NEW BOSS MUSIC for the Hooded Widow!
+- The Creepy Forest track will no longer play at all times in the Hooded Forest, only when the player is working
+- Added new Magma Hounds and Lightning Hounds to Summer / Spring hound waves respectively
+- Vargs will now spawn with Hound waves after day 100
+- Snapdragons will now spit up fertilizer every day. Fertilizer type will be specialized based on the seed planted when growing a new one!
+- Snapdragons now eat Fruit Flies and Bulbous Lightbugs, but now have a cooldown time between eating bugs
+- Pigs can now counter attack uppercut + charge enemies
+- Sleeping now regenerates at a faster rate, while it drains hunger at an equally faster rate.
+- Sleeping now regenerates maximum health loss.
+- Thermal Stones have much less inherent insulation, but now gains 50% of the players insulation
+- Hooded Widow now has a new jumping animation
+- The Life Giving Amulet no longer revives the player when haunted, it only revives the player if worn at the time of death.
+- However, the Life Giving Amulet now heals at a much faster rate, with slightly reduced health. It can also be replenished with Nightmare Fuel.
+- Added the "Ancient Soul Amulet", which drops soul bits based on the damage a player takes, when picked up, they will heal the player. When haunted, it will revive the player and give them temporary invincibility.
+- The Lazy Forager is now fuelable, has increased range, and will harvest various things like Berry Bushes and Grass Tufts.
+- Added "Lazy Chester", a Chester transformation triggered by giving him 9 Sandstone, Lazy Chester will automatically pick up additional instances of items that are placed inside of him.
+- Added the "Depths Viper", a new cave worm variant during summer/autumn, with a unique berry.
+- Added "Gloomberry Jam", a new food item created with the Depths Vipers "Gloomberry"
+- Added the "Tail O' Twined Rats", a new craftable whip made out of rat tails, that will deal critical hits, at the cost of a small amount of hunger
+- Night Armor now prevents the player from taking hitstun
+- Top Hat now reduces sanity loss from certain sanity draining equippable items
+- Spore Pack now has 14 inventory slots, and has a new ability in place of its old one: When worn, it will release rotting puffs around the player.
+- Piggyback no longer has innate movement speed reduction, now reduces player speed based on the amount of items inside
+- Uncooked birchnut usable in crockpots
+- Added new Veterans Curse warning upon being activated for the first time, and new visual/audio effects when curse is activated
+- The Veterans Curse now makes the player absorb health and sanity from foods over time
+- Added the Naught Lock, a Veterans Curse item dropped by Klaus. When equipped, it will make the player deal a fast second attack after every attack, which deals 50% less damage.
+- Added the Crab Claw, a Veterans Curse item dropped by the Crab King. Can be slotted with up to 4 gems, which will modify the effects of the Crab Claw.
+----------------------------------------------------------------
+Red Gems will regenerate a small amount of health on hit
+Blue Gems will apply a small amount of freeze on it
+Green Gems will reduce the amount of durability lost on attack
+Yellow Gems will regenerate a small amount of sanity on hit
+Purple Gems will add a chance to spawn shadow tentacles on hit
+Orange Gems will apply a small amount of slow on hit
+Opal's will increase the effects of all other gems slotted
+----------------------------------------------------------------
+- Toroic's Wolfgang rework has been added as a base part of Uncompromising Mode! (Wolfgang changes are now a toggleable option)
+------------------------------------------------------------------------------------------------------------------------------------------
+BUFFS:
+-Wolfgang can now carry heavy objects on his back at normal speed and with his hands free while mighty
+-Wolfgang now ignores the speed penalties from piggyback and marble armor while not wimpy
+-Wolfgang is much faster at carrying sculptures and marble pieces while in normal form (45% normal speed instead of 15% normal speed)
+-Wolfgang's rowing is much stronger while mighty
+-Transforming animations can be cancelled by moving (Credit to Rezecib for the code)
+-Hunger drain in Mighty form now tops out at 2x instead of 3x
+-Wolfgang's damage uses the same scaling while mighty but normal form is now 1.25x
+
+NERFS:
+-Wolfgang's size and speed are now a consistent 1x. Items no longer grow when he uses them while mighty, and he no longer has a speed boost while mighty or slowdown while wimpy.
+-His health does not increase above 200 while in mighty form.
+-His maximum sanity was nerfed to 150 instead of 200.
+-Wolfgang loses sanity at 1.3x the normal rate instead of 1.1x from darkness and insanity auras.
+-When under 10% sanity, Wolfgang now gains induced insanity (just like a purple amulet) which increases the number of shadow creatures that can spawn to 5 (up from 1-2).
+------------------------------------------------------------------------------------------------------------------------------------------
+
+- Added new Treeguard rooting animation, which has more windup.
+- Added NEW Random Night Event, and tuned Random Night Events odds to avoid as many "mob spawn" RNE.
+- Added Toggleable option for Imposing Claws to deal 500 damage to crab king when killed (default false)
+- Changed the Summerfly fight, she now enrages when at half health
+- Koalefant trunks can now be added to Crockpots for 2 meat value
+- Added a Blue variant of the Deerclops to replace the default half health Enraged > Yule Deerclops
+- Blue Deerclops fires Blue icy lasers that freeze the player and reduce their temperature
+- Added new Winter exclusive RNE
+- Beekeeper Hat prevents player from taking hayfever "damage" from bees, mosquitos, etc.
+- Reduced Simple Salad hunger to 4.9
+- Reduced Blueberry hunger to 12.5
+- Reduced Blueberry wetness gain to 5
+
+[FIXES]
+
+- Giant Tree loot drops no longer damage debris immune targets (like Maxwell shadows)
+- Fixed statues regaining collision upon being picked up and placed again
+- Fixed Beefalos crashing the game when trying to charge attack without a combat target
+- Ice Hounds no longer apply freezing to frozen targets
+- Abominamoles no longer target Webbed Cocoons, forever.
+- Beardlings now drop monster morsels instead of regular morsels
+- Fixed Trapdoor Spiders walking in place on rare occasions
+- Snow/Wet ground no longer causes visual errors with the hooded forest shadows
+- Added TheSim ~= nil check to snowpiles to fix rare crash
+
+[TUNING/MISC]
+
+- Terrorbeaks no longer have increased range, their taunt teleport will try to avoid spawning them on top of the player
+- Webbed Cocoons now drops silk based on the size of the Cocoon
+- Updated Bunnyman drops for the latest major farming update
+- Updated Wicker's books further for the latest major farming update
+- Increased Pollenmite Den growth timers
+- Pollenmite Dens no longer spawn Pollenmites when the player steps on their webbing
+- Veterans Curse items will now try to be added to the players inventory instead of dropped when an uncursed player tries to equip them
+- Removed the Blooming Shot, since Klei added an offical method for manually blooming Wormwood
+- Trapdoor Spiders no longer run away from Webber, unless he is hostile
+- Hooded Widow now gives up chasing the player much sooner
+- Hooded Widow no has an easier time returning to her den
+- Hooded Widow will now go back to its den when a boss is nearby
+- Improved Cookpot Mod compatibility

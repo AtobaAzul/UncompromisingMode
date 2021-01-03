@@ -71,7 +71,7 @@ end
 	
 local function aac_proc(haunter)
 	haunter.components.debuffable:AddDebuff("buff_ancient_amulet_red", "buff_ancient_amulet_red")
-    TheWorld:PushEvent("ms_sendlightningstrike", haunter:GetPosition())
+	SpawnPrefab("lightning").Transform:SetPosition(haunter.Transform:GetWorldPosition())
 	
 	if haunter._AARfx ~= nil then
 		haunter._AARfx:kill_fx()

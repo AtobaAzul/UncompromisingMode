@@ -23,7 +23,7 @@ AddComponentPostInit("dynamicmusic", function(self)
 	local _StartDanger = UpvalueHacker.GetUpvalue(_OnPlayerActivated, "StartPlayerListeners", "CheckAction", "StartDanger")
 
     local BUSYTHEMES = UpvalueHacker.GetUpvalue(_StartBusy, "BUSYTHEMES")
-    BUSYTHEMES["HOODEDFOREST"] = 10
+    BUSYTHEMES["HOODEDFOREST"] = 11
 	
     local function IsInHoodedForest(player)
         return player.components.areaaware ~= nil

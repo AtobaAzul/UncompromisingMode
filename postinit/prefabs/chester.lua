@@ -57,7 +57,7 @@ local function pickup_UM(inst)
                 for k = 1, 9 do
                     local other_item = inst.components.container.slots[k]
                     if other_item and other_item.prefab == v.prefab and other_item.skinname == v.skinname then
-							if not other_item.components.stackable:IsFull() then
+							if other_item.components.stackable ~= nil and not other_item.components.stackable:IsFull() then
 							--Amulet will only ever pick up items one at a time. Even from stacks.
 							SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
 			
