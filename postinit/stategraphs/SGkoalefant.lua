@@ -174,7 +174,7 @@ local states = {
 				TimeEvent(30*FRAMES, function(inst)
                     local MAXDIST = 5 
 
-                    local distance = inst:GetDistanceSqToInst(inst.components.combat.target )
+                    local distance = inst:GetDistanceSqToInst(inst ~= nil and inst.components.combat.target ~= nil and inst.components.combat.target )
                     --print(distance)
                     if distance > MAXDIST then
                         inst.sg:GoToState("idle") 
