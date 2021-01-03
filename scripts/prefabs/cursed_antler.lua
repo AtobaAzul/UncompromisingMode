@@ -55,16 +55,18 @@ end
 
 local function onequip(inst, owner)
 	if not owner:HasTag("vetcurse") then
-		--owner.components.inventory:Unequip(EQUIPSLOTS.HANDS, true)
 		inst:DoTaskInTime(0, function(inst, owner)
 			local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner
-            local inst_pos = inst:GetPosition()
-			
-			owner.components.inventory:GiveItem(inst, nil, inst_pos)
-			owner.components.talker:Say(GetString(owner, "CURSED_ITEM_EQUIP"))
-			inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/HUD_hot_level1")
-			
-			owner.components.combat:GetAttacked(inst, 0.1, nil)
+			local tool = owner ~= nil and owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+			if tool ~= nil and owner ~= nil then
+				owner.components.inventory:Unequip(EQUIPSLOTS.HANDS)
+				owner.components.inventory:DropItem(tool)
+				owner.components.inventory:GiveItem(inst)
+				owner.components.talker:Say(GetString(owner, "CURSED_ITEM_EQUIP"))
+				inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/HUD_hot_level1")
+				
+				owner.components.combat:GetAttacked(inst, 0.1, nil)
+			end
 		end)
 	else
 		owner.AnimState:OverrideSymbol("swap_object", "swap_cursed_antler", "swap_cursed_antler")
