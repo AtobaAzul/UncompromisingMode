@@ -86,30 +86,30 @@ GLOBAL.TUNING.ROCK_FRUIT_REGROW =
 
 -- Stone fruits bushs
 AddPrefabPostInit("rock_avocado_bush", function(inst)
-    if inst~= nil and inst.components.pickable ~= nil then
+    --if inst~= nil and inst.components.pickable ~= nil then
         GLOBAL.MakeNoGrowInWinter(inst)
-    end
+    --end
 end)
 
 -- Cactus
 AddPrefabPostInit("cactus", function(inst)
-    if inst~= nil and inst.components.pickable ~= nil then
+    --if inst~= nil and inst.components.pickable ~= nil then
         GLOBAL.MakeNoGrowInWinter(inst)
-    end
+    --end
 end)
 
 -- Oasis Cactus
 AddPrefabPostInit("oasis_cactus", function(inst)
-    if inst~= nil and inst.components.pickable ~= nil then
+    --if inst~= nil and inst.components.pickable ~= nil then
         GLOBAL.MakeNoGrowInWinter(inst)
-    end
+    --end
 end)
 
 -- Spiky twigs
 AddPrefabPostInit("marsh_bush", function(inst)
-    if inst~= nil and inst.components.pickable ~= nil then
+    --if inst~= nil and inst.components.pickable ~= nil then
         GLOBAL.MakeNoGrowInWinter(inst)
-    end
+    --end
 end)
 
 -----------------------------------------------------------------
