@@ -36,7 +36,7 @@ AddComponentPostInit("hounded", function(self)
     local _OnUpdate = self.OnUpdate
     self.OnUpdate = function(self, dt)
         if self.GetTimeToAttack(self) > 0 and GLOBAL.TheWorld.state.cycles >= self.boss_grace then
-            self.spawn_boss = true
+            self.spawn_boss = false
         end
         _OnUpdate(self, dt)
     end
