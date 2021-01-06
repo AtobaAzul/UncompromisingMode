@@ -30,8 +30,15 @@ local function onothercollide(inst, other)
 		if other:HasTag("guardianbonk") or other:HasTag("megaboulder") then
 			inst.sg:GoToState("AGStun")
 			inst:DoTaskInTime(4.5, Bonk, inst)
+			
+			if other:HasTag("guardianbonk") then
+				other:Smash()
+			end
 		end
-		
+	elseif other:HasTag("guardianbonk") then
+			inst.sg:GoToState("AGStun")
+			inst:DoTaskInTime(4.5, Bonk, inst)
+			other:Smash()
     elseif other.components.health ~= nil and not other.components.health:IsDead() then
         inst.recentlycharged[other] = true
         inst:DoTaskInTime(3, ClearRecentlyCharged, other)
