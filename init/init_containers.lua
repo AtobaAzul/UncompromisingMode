@@ -66,6 +66,36 @@ modparams.puffvest =
     issidewidget = true,
     type = "pack",
 }
+modparams.puffvest =
+{
+    widget =
+    {
+        slotpos = {},
+        animbank = "ui_lamp_1x4",
+        animbuild = "ui_lamp_1x4",
+        pos = Vector3(-70, -70, 0),
+    },
+    issidewidget = true,
+    type = "pack",
+}
+
+modparams.puffvest_big =
+{
+    widget =
+    {
+        slotpos = {},
+        animbank = "ui_icepack_2x3",
+        animbuild = "ui_icepack_2x3",
+        pos = Vector3(-5, -70, 0),
+    },
+    issidewidget = true,
+    type = "pack",
+}
+
+for y = 0, 2 do
+    table.insert(modparams.puffvest_big.widget.slotpos, Vector3(-162, -75 * y + 75, 0))
+    table.insert(modparams.puffvest_big.widget.slotpos, Vector3(-162 + 75, -75 * y + 75, 0))
+end
 
 modparams.crabclaw =
 {
