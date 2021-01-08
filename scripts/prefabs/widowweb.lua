@@ -50,7 +50,7 @@ local function fn()
     inst.entity:AddGroundCreepEntity()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
-
+	inst.MiniMapEntity:SetIcon("hoodedwidow_map.tex")
     inst.GroundCreepEntity:SetRadius(10)
     inst:AddTag("spiderden")
     inst.entity:SetPristine()

@@ -125,7 +125,7 @@ local function fn(Sim)
 	inst:ListenForEvent("attacked", OnAttacked)    
     inst:SetStateGraph("SGknook")
     inst:SetBrain(brain)
-	inst.sg:GoToState("waken")
+	inst.sg:GoToState("zombie")
     return inst
 end
 

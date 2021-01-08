@@ -14,8 +14,8 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("zaspberryparfait")
-    inst.AnimState:SetBuild("zaspberryparfait")
+    inst.AnimState:SetBank("snotroast")
+    inst.AnimState:SetBuild("snotroast")
     inst.AnimState:PlayAnimation("idle")
 
     MakeInventoryFloatable(inst)
@@ -32,7 +32,7 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/zaspberryparfait.xml"
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/snotroast.xml"
     inst:AddComponent("edible")
     inst.components.edible.healthvalue = 3
     inst.components.edible.hungervalue = 150

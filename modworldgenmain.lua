@@ -88,6 +88,59 @@ room.contents.countprefabs=
 									{
 										marsh_grass = function() return math.random(4,8) end,} 
 end)
+
+----------Walrus Replacement Surgury
+
+GLOBAL.require("map/rooms/forest/morewalruses")
+AddRoomPreInit("WalrusHut_Plains", function(room)					
+room.contents.countprefabs=
+									{
+										walrus_camp = 0,
+										walrus_camp_empty = 1,}
+end)
+
+AddRoomPreInit("WalrusHut_Grassy", function(room)					
+room.contents.countprefabs=
+									{
+										walrus_camp = 0,
+										walrus_camp_empty = 1,}
+end)
+
+AddRoomPreInit("WalrusHut_Rocky", function(room)					
+room.contents.countprefabs=
+									{
+										walrus_camp = 0,
+										walrus_camp_empty = 1,}
+end)
+
+--Rip moles
+AddRoomPreInit("MolesvilleDeciduous", function(room)					
+room.contents.countprefabs=
+									{
+										walrus_camp_empty = 1,}
+end)
+
+AddRoomPreInit("MolesvilleRocky", function(room)					
+room.contents.countprefabs=
+									{
+										walrus_camp_empty = 1,}
+end)
+
+AddTaskPreInit("Squeltch",function(task)
+task.room_choices["WalrusHut_Marsh"] = 1
+end)
+if math.random() > 0.5 then  --Spawn a camp in one of the deserts... at random
+AddTaskPreInit("Badlands",function(task)
+task.room_choices["WalrusHut_Badlands"] = 1
+end)
+else
+AddTaskPreInit("Lightning Bluff",function(task)
+task.room_choices["WalrusHut_Oasis"] = 1
+end)
+end
+AddTaskPreInit("Great Plains",function(task)
+task.room_choices["WalrusHut_Plains"] = 1
+end)
 --[[
 GLOBAL.require("map/rooms/caves/mushroomtoadstool")
 AddTaskPreInit("Redforest",function(task)

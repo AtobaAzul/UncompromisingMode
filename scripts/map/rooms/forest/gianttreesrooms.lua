@@ -123,7 +123,7 @@ AddRoom("WalrusGiantTrees",
 			giant_tree = function () return 6 + math.random(1,2) end,
 			extracanopyspawner = function () return 6 + math.random(0,1) end,
 			pitcherplant = function () return math.random(0,1) end,
-			walrus_camp = 1,
+			walrus_camp_empty = 1,
 			
 		}
 }})

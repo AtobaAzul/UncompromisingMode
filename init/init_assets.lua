@@ -339,6 +339,10 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/viperjam.tex"),
 	Asset("ATLAS", "images/inventoryimages/viperjam.xml"),
 	Asset("ANIM", "anim/viperjam.zip"),
+	Asset("ANIM", "anim/snotroast.zip"),	
+	Asset("IMAGE", "images/inventoryimages/snotroast.tex"),
+	Asset("ATLAS", "images/inventoryimages/snotroast.xml"),
+	
 	Asset("ANIM", "anim/bight.zip"),
 	Asset("ANIM", "anim/knook.zip"),
 	
@@ -356,7 +360,7 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/blowgunammo_electric.tex"),
 	Asset("ATLAS", "images/inventoryimages/blowgunammo_electric.xml"),
 	
-	
+
 	
 	--Map Icons Start--
 	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),
@@ -377,6 +381,8 @@ Assets = {
 	Asset( "ATLAS", "images/map_icons/veteranshrine_map.xml"),
 	Asset( "IMAGE", "images/map_icons/lazychester_minimap.tex"),
 	Asset( "ATLAS", "images/map_icons/lazychester_minimap.xml"),
+	Asset( "IMAGE", "images/map_icons/hoodedwidow_map.tex"),
+	Asset( "ATLAS", "images/map_icons/hoodedwidow_map.xml"),
 	--Map Icons End--
 
 	
