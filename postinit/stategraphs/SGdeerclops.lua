@@ -24,11 +24,13 @@ local function SetLightValueAndOverride(inst, val, override)
 end
 
 local function SetLightColour(inst, val)
-    if inst.components.health ~= nil and inst.components.health:GetPercent() <= 0.5 and inst.Light ~= nil then
-        inst.Light:SetColour(0, 0, val)
-	elseif inst.Light ~= nil then
-        inst.Light:SetColour(val, 0, 0)
-    end
+	if inst.Light ~= nil then
+		if inst.components.health ~= nil and (inst.components.health:GetPercent() <= 0.5 or inst.components.health:IsDead()) then
+			inst.Light:SetColour(0, 0, val)
+		else
+			inst.Light:SetColour(val, 0, 0)
+		end
+	end
 end
 
 local function DoSpawnIceSpike(inst, x, z)
