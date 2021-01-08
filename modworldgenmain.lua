@@ -92,38 +92,18 @@ end)
 ----------Walrus Replacement Surgury
 
 GLOBAL.require("map/rooms/forest/morewalruses")
-AddRoomPreInit("WalrusHut_Plains", function(room)					
-room.contents.countprefabs=
-									{
-										walrus_camp = 0,
-										walrus_camp_empty = 1,}
-end)
-
-AddRoomPreInit("WalrusHut_Grassy", function(room)					
-room.contents.countprefabs=
-									{
-										walrus_camp = 0,
-										walrus_camp_empty = 1,}
-end)
-
-AddRoomPreInit("WalrusHut_Rocky", function(room)					
-room.contents.countprefabs=
-									{
-										walrus_camp = 0,
-										walrus_camp_empty = 1,}
-end)
 
 --Rip moles
 AddRoomPreInit("MolesvilleDeciduous", function(room)					
 room.contents.countprefabs=
 									{
-										walrus_camp_empty = 1,}
+										walrus_camp = 1,}
 end)
 
 AddRoomPreInit("MolesvilleRocky", function(room)					
 room.contents.countprefabs=
 									{
-										walrus_camp_empty = 1,}
+										walrus_camp = 1,}
 end)
 
 AddTaskPreInit("Squeltch",function(task)

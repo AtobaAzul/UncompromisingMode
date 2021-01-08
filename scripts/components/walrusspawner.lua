@@ -32,7 +32,7 @@ local function FindCamps()
 	local camps = {}
 
 	for k,v in pairs(Ents) do
-		if v.prefab == "walrus_camp_empty" then
+		if v.prefab == "walrus_camp" then
 			table.insert(camps, v)
 		end
 	end
@@ -43,35 +43,16 @@ end
 --------------------------------------------------------------------------
 --[[ Public member functions ]]
 --------------------------------------------------------------------------
-function self:DoSoftSpawn(camp)
-	--Spawn the camp
-	camp.mooseIncoming = false
-	local spawnpt = camp:GetPosition()
-	local camp = SpawnPrefab("walrus_camp")
-	camp.Transform:SetPosition(spawnpt:Get())
 
-	camp.components.timer:StopTimer("CallMoose")
-end
-
-function self:DoHardSpawn(camp)
-
-	camp.mooseIncoming = false
-
-	local spawnpt = camp:GetPosition()
-
-	local camp = SpawnPrefab("walrus_camp")
-	camp.Transform:SetPosition(spawnpt:Get())
-end
 
 function self:InitializeNest(camp)
-	camp.components.timer:StartTimer("CallMoose", 3)--TUNING.SEG_TIME * math.random(8, 24))
-	camp.mooseIncoming = true
+camp.chosen = true
 end
 
 function self:InitializeNests()
 	--print("MooseSpawner - InitializeNests")
 	local camps = FindCamps()
-	local num_to_spawn = math.ceil(#camps * _walrusdensity)
+	local num_to_spawn = 1--math.ceil(#camps * _walrusdensity)
 	_seasonalcamps = PickSome(num_to_spawn, camps)
 
 	for _, camp in ipairs(_seasonalcamps) do
@@ -84,7 +65,15 @@ local function OnWinterChange(inst, isWinter)
 		self:InitializeNests()	
 	end
 end
-
+local function OnSpringChange(inst, isSpring)
+	if isSpring then
+	local camps = FindCamps()
+	for _, camp in ipairs(camps) do
+		camp.chosen = false
+	end	
+	end	
+end
+inst:WatchWorldState("isspring", OnSpringChange)
 inst:WatchWorldState("iswinter", OnWinterChange)
 
 end)
