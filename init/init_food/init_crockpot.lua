@@ -29,21 +29,21 @@ local RECIPE_ICE_PLUS_TWIG_LIMIT = GLOBAL.TUNING.DSTU.CROCKPOT_RECIPE_ICE_PLUS_T
 
 local function LimitIceTestFn(tags, ice_limit)
     if tags~=nil and tags.frozen ~= nil then
-        return not tags.frozen or (tags.frozen <= ice_limit)
+        return not tags.frozen or (tags.frozen + (tags.foliage ~= nil and tags.foliage or 0) <= ice_limit)
     end
     return true
 end
 
 local function LimitTwigTestFn(tags, twig_limit)
     if tags~=nil and tags.inedible ~= nil then 
-        return not tags.inedible or (tags.inedible <= twig_limit)
+        return not tags.inedible or (tags.inedible + (tags.foliage ~= nil and tags.foliage or 0) <= twig_limit)
     end
     return true
 end
 
 local function LimitIcePlusTwigTestFn(tags, ice_plus_twig_limit)
     if tags~=nil and tags.frozen ~= nil and tags.inedible ~= nil then
-        return (tags.frozen + tags.inedible) <= ice_plus_twig_limit
+        return (tags.frozen + tags.inedible + (tags.foliage ~= nil and tags.foliage or 0)) <= ice_plus_twig_limit
     end
     return true
 end
@@ -334,7 +334,7 @@ InsertIngredientValues({"giant_blueberry"},{fruit=1},true,false,false)
 InsertIngredientValues({"iceboomerang"},{ice=1},true,false,false)
 InsertIngredientValues({"rice"},{veggie=1,rice=1},true,false,false)
 InsertIngredientValues({"rice_cooked"},{veggie=1,rice=1},true,false,false)
-InsertIngredientValues({"foliage"},{veggie=.1,foliage=1},true,false,false)
+InsertIngredientValues({"foliage"},{foliage=1},true,false,false)
 InsertIngredientValues({"horn"},{meat=1},true,false,false)
 InsertIngredientValues({"trunk_summer"},{meat=2},true,false,false)
 InsertIngredientValues({"trunk_winter"},{meat=2},true,false,false)

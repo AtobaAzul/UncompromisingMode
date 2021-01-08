@@ -36,7 +36,7 @@ AddComponentPostInit("hounded", function(self)
     local _OnUpdate = self.OnUpdate
     self.OnUpdate = function(self, dt)
         if self.GetTimeToAttack(self) > 0 and GLOBAL.TheWorld.state.cycles >= self.boss_grace then
-            self.spawn_boss = true
+            self.spawn_boss = false
         end
         _OnUpdate(self, dt)
     end
@@ -58,10 +58,29 @@ AddComponentPostInit("hounded", function(self)
                 return spawn
             end
         end
-    end     
+    end
+	
+	local function NoHoles(pt)
+		return not GLOBAL.TheWorld.Map:IsPointNearHole(pt)
+	end
+
+	local SPAWN_DIST = 30
+	
+	local function GetMagmaSpawnPoint(pt)
+		if not GLOBAL.TheWorld.Map:IsAboveGroundAtPoint(pt:Get()) then
+			pt = GLOBAL.FindNearbyLand(pt, 1) or pt
+		end
+		local offset = GLOBAL.FindWalkableOffset(pt, math.random() * 2 * GLOBAL.PI, SPAWN_DIST, 12, true, true, NoHoles)
+		if offset ~= nil then
+			offset.x = offset.x + pt.x
+			offset.z = offset.z + pt.z
+			return offset
+		end
+	end
 
     local function SummonSpawn(pt)
         local spawn_pt = _GetSpawnPoint(pt)
+        local magmaspawn_pt = GetMagmaSpawnPoint(pt)
         local season = GLOBAL.TheWorld.state.season
         local chance = math.random()
         local prefab_list = {}
@@ -75,12 +94,15 @@ AddComponentPostInit("hounded", function(self)
             SpawnHounded(prefab, pt, spawn_pt)
             return
         end
-
         --spawn a random seasonal hound
         if pt and chance < self.seasonal_chance then
             prefab_list = self.seasonal_prefabs[season]
             prefab = #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or nil
-            SpawnHounded(prefab, pt, spawn_pt)
+			if prefab == "magmahound" then
+				SpawnHounded(prefab, pt, magmaspawn_pt)
+			else
+				SpawnHounded(prefab, pt, spawn_pt)
+			end
         else
             _SummonSpawn(pt)
         end

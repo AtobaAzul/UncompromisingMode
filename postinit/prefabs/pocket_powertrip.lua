@@ -67,13 +67,13 @@ end
 env.AddPrefabPostInit("trunkvest_summer", function(inst)
 	if not TheWorld.ismastersim then
 		inst.OnEntityReplicated = function(inst) 
-			inst.replica.container:WidgetSetup("spicepack") 
+			inst.replica.container:WidgetSetup("puffvest_big") 
 		end
         return inst
     end
 	
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup("spicepack")
+    inst.components.container:WidgetSetup("puffvest_big")
 	
 	--inst.components.inventoryitem.cangoincontainer = false
 	if inst.components.equippable ~= nil then

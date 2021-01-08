@@ -84,11 +84,25 @@ GLOBAL.TUNING.ROCK_FRUIT_REGROW =
 -----------------------------------------------------------------
 -- Relevant: MakeNoGrowInWinter in standardcomponents.lua
 
+local function ToggleGrowable(growable, iswinter)
+    if iswinter then
+        growable:Pause()
+    else
+        growable:Resume()
+    end
+end
+
 -- Stone fruits bushs
 AddPrefabPostInit("rock_avocado_bush", function(inst)
     if inst~= nil and inst.components.pickable ~= nil then
         GLOBAL.MakeNoGrowInWinter(inst)
     end
+	
+	if inst.components.growable ~= nil then
+		inst.components.growable:WatchWorldState("iswinter", ToggleGrowable)
+		ToggleGrowable(inst.components.growable, GLOBAL.TheWorld.state.iswinter)
+	end
+	
 end)
 
 -- Cactus

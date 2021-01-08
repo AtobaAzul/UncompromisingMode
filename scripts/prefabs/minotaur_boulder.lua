@@ -561,7 +561,7 @@ local function fn()
 	inst:AddComponent("combat")
     inst.components.combat:SetDefaultDamage(80)
     inst.components.combat.playerdamagepercent = TUNING.DEERCLOPS_DAMAGE_PLAYER_PERCENT
-    inst.components.combat:SetRange(6)
+    inst.components.combat:SetRange(5)
 	
 	inst:AddComponent("groundpounder")
     inst.components.groundpounder.destroyer = true

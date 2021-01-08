@@ -62,7 +62,9 @@ end
 
 local function ontakefuel_red(inst)
     if inst.components.equippable:IsEquipped() then
-		if inst.task == nil then
+	local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner or nil
+	
+		if inst.task == nil and owner ~= nil then
 			inst.task = inst:DoPeriodicTask(10, healowner, nil, owner)
 		end
 	end

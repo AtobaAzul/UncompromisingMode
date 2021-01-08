@@ -79,7 +79,7 @@ local states = {
         {
             EventHandler("animqueueover", function(inst)
 			if inst.components.combat.target ~= nil then
-			local distance = inst:GetDistanceSqToInst(inst.components.combat.target)
+			local distance = inst:GetDistanceSqToInst(inst ~= nil and inst.components.combat.target ~= nil and inst.components.combat.target )
 			local chance = math.random()
 			if chance < 0.33 then
 				inst.sg:GoToState("charge_start")
@@ -176,7 +176,7 @@ local states = {
 
                     local distance = inst:GetDistanceSqToInst(inst ~= nil and inst.components.combat.target ~= nil and inst.components.combat.target )
                     --print(distance)
-                    if distance > MAXDIST then
+                    if distance ~= nil and distance > MAXDIST or distance == nil then
                         inst.sg:GoToState("idle") 
 						if inst:HasTag("chargespeed") then
 						inst.components.locomotor.runspeed = 7
