@@ -190,4 +190,5 @@ return {
 	"uncompromising_blowgun_ammo",
 	"knook",
 	"snotroast",
+	"walrus_camp_empty",
 }

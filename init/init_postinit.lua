@@ -118,6 +118,7 @@ local prefab_post = {
 	"crabking",
 	--"ruinsstatues", Commented out until time for testing AT
 	"chessjunk",
+	"walrus_camp",
 }
 
 local stategraph_post = {
@@ -136,6 +137,7 @@ local stategraph_post = {
 	"Beefalo",
 	"stalker_minion",
 	"koalefant",
+	"bee",
 }
 
 local class_post = {

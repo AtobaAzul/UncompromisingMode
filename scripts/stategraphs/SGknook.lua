@@ -115,7 +115,7 @@ local states=
     },   
      State{
         name = "aggresivehop",
-        tags = {"moving", "canrotate","attack"},
+        tags = {"moving","attack"},
         
         onenter = function(inst)
 			inst.components.locomotor:WalkForward()
@@ -192,7 +192,29 @@ local states=
             EventHandler("animover", function(inst) inst.sg:GoToState("idle")	end),
         },
     },
+    State{
+        name = "zombie",
+        tags = {"idle", "busy"},
+        
 
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("zombie")
+        end,
+        timeline=
+        {
+		TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/bounce")
+		SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())end),
+		TimeEvent(5*FRAMES, function(inst) SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition()) end),
+		TimeEvent(7*FRAMES, function(inst) SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition()) end),
+		TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/rook_nightmare/rattle") end),
+		TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/rook_nightmare/rattle") end),
+        },
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle")	end),
+        },
+    },
 
     State{
         name = "taunt",
