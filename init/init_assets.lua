@@ -339,6 +339,10 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/viperjam.tex"),
 	Asset("ATLAS", "images/inventoryimages/viperjam.xml"),
 	Asset("ANIM", "anim/viperjam.zip"),
+	Asset("ANIM", "anim/snotroast.zip"),	
+	Asset("IMAGE", "images/inventoryimages/snotroast.tex"),
+	Asset("ATLAS", "images/inventoryimages/snotroast.xml"),
+	
 	Asset("ANIM", "anim/bight.zip"),
 	Asset("ANIM", "anim/knook.zip"),
 	
