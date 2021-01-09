@@ -138,6 +138,7 @@ local stategraph_post = {
 	"stalker_minion",
 	"koalefant",
 	"bee",
+	"bearger",
 }
 
 local class_post = {

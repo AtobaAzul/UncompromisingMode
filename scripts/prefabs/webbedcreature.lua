@@ -351,49 +351,77 @@ else
 inst.size = math.random(1,14)
 end
 end
+
 local function SetSize(inst)
-if inst.size == 1 then   --No Eyed Deer
-SetMedium(inst)
-end
-if inst.size == 2 then   --Beefalo
-SetLarge(inst)
-end
-if inst.size == 3 then   --Mossling
-SetMedium(inst)
-end
-if inst.size == 4 then   --Pigman
-SetSmall(inst)
-end
-if inst.size == 5 then   --Bunnyman
-SetSmall(inst)
-end
-if inst.size == 6 then   --koalefant
-SetLarge(inst)
-end
-if inst.size == 7 then   --wee mactusk
-SetSmall(inst)
-end
-if inst.size == 8 then   --Tallbird
-SetMedium(inst)
-end
-if inst.size == 9 then   --SpiderQueen
-SetLarge(inst)
-end
-if inst.size == 10 then   --Varg
-SetLarge(inst)
-end
-if inst.size == 11 then   --Krampus
-SetMedium(inst)
-end
-if inst.size == 12 then   --Mactusk
-SetMedium(inst)
-end
-if inst.size == 13 then   --Clockwork Knight
-SetSmall(inst)
-end
-if inst.size == 14 then   --Ewecus
-SetLarge(inst)
-end
+	if inst.size == 1 then   --No Eyed Deer
+		SetMedium(inst)
+		inst.components.named:SetName("Fuzzy Cocoon")
+	end
+	
+	if inst.size == 2 then   --Beefalo
+		SetLarge(inst)
+		inst.components.named:SetName("Hairy Cocoon")
+	end
+	
+	if inst.size == 3 then   --Mossling
+		SetMedium(inst)
+		inst.components.named:SetName("Fuzzy Cocoon")
+	end
+	
+	if inst.size == 4 then   --Pigman
+		SetSmall(inst)
+		inst.components.named:SetName("Leathery Cocoon")
+	end
+	
+	if inst.size == 5 then   --Bunnyman
+		SetSmall(inst)
+		inst.components.named:SetName("Fuzzy Cocoon")
+	end
+	
+	if inst.size == 6 then   --koalefant
+		SetLarge(inst)
+		inst.components.named:SetName("Leathery Cocoon")
+	end
+	
+	if inst.size == 7 then   --wee mactusk
+		SetSmall(inst)
+		inst.components.named:SetName("Leathery Cocoon")
+	end
+	
+	if inst.size == 8 then   --Tallbird
+		SetMedium(inst)
+		inst.components.named:SetName("Hairy Cocoon")
+	end
+	
+	if inst.size == 9 then   --SpiderQueen
+		SetLarge(inst)
+		inst.components.named:SetName("Grotesque Cocoon")
+	end
+	
+	if inst.size == 10 then   --Varg
+		SetLarge(inst)
+		inst.components.named:SetName("Hairy Cocoon")
+	end
+	
+	if inst.size == 11 then   --Krampus
+		SetMedium(inst)
+		inst.components.named:SetName("Grotesque Cocoon")
+	end
+	
+	if inst.size == 12 then   --Mactusk
+		SetMedium(inst)
+		inst.components.named:SetName("Leathery Cocoon")
+	end
+	
+	if inst.size == 13 then   --Clockwork Knight
+		SetSmall(inst)
+		inst.components.named:SetName("Hardened Cocoon")
+	end
+	
+	if inst.size == 14 then   --Ewecus
+		SetLarge(inst)
+		inst.components.named:SetName("Hardened Cocoon")
+	end
 end
 
 local function Regen(inst, attacker)
@@ -448,6 +476,7 @@ local function fn()
 		inst:ListenForEvent("death", OnKilled)
 		
 		inst:AddComponent("lootdropper")
+		inst:AddComponent("named")
 		
 		MakeLargePropagator(inst)
 
