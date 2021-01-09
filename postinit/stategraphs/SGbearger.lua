@@ -70,13 +70,13 @@ local states = {
             end
 
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("taunt")
+            inst.AnimState:PlayAnimation("shoot")
         end,
 
         timeline =
         {   
             TimeEvent(7*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/taunt", "taunt") end),
-            TimeEvent(20*FRAMES, function(inst)
+            TimeEvent(25*FRAMES, function(inst)
                 if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
                     inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())            
                     inst:LaunchProjectile(inst.sg.statemem.inkpos)
