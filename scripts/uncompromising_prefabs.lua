@@ -191,4 +191,5 @@ return {
 	"knook",
 	"snotroast",
 	"walrus_camp_empty",
+	"bearger_boulder",
 }
