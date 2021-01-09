@@ -6,7 +6,7 @@ AddRoom("WalrusHut_Deciduous", {
 					                countprefabs= {
 					                    pumpkin = function () return IsSpecialEventActive(SPECIAL_EVENTS.HALLOWED_NIGHTS) and (0 + math.random(3)) or 0 end,
 					                    deerspawningground = 1,
-										walrus_camp_empty = 1,
+										walrus_camp = 1,
 					                },
 
 					                distributepercent = .2,
@@ -45,7 +45,7 @@ AddRoom("WalrusHut_Badlands", {
 					value = GROUND.DIRT_NOISE,
 					contents =  {	
 					                countprefabs= {
-										walrus_camp_empty = 1,
+										walrus_camp = 1,
 					                },
 									distributepercent = 0.07,
 									distributeprefabs =
@@ -69,7 +69,7 @@ AddRoom("WalrusHut_Oasis", {
 					tags = {"RoadPoison", "sandstorm"},
 					contents =  {
 					                countprefabs= {
-										walrus_camp_empty = 1,
+										walrus_camp = 1,
 					                },
 									distributepercent = 0.06,
 									distributeprefabs =
@@ -94,7 +94,7 @@ AddRoom("WalrusHut_Marsh", {
 																				return 0 
 																			   end},
 					                countprefabs= {
-										walrus_camp_empty = 1,
+										walrus_camp = 1,
 					                },
 					                distributepercent = .1,
 					                distributeprefabs=

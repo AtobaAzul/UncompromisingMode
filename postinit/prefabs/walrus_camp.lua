@@ -1,52 +1,45 @@
+local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
---[[local function CheckForSummerSpawn(inst)
-    local anim = inst.AnimState
 
-	if TheWorld.state.issummer then
-        anim:PlayAnimation("idleno")
-	else
-        anim:PlayAnimation("idle")
-	end
-	
-    local x, y, z = inst.Transform:GetWorldPosition()
-	if #TheSim:FindEntities(x, y, z, 2, nil, nil, { "summercamp" }) < 1 then
-		SpawnPrefab("walrus_camp_summer").Transform:SetPosition(x, y, z)
-	end
-end
-
-local function seasonalalpha(inst)
-    local anim = inst.AnimState
-
-	if TheWorld.state.issummer then
-        anim:PlayAnimation("idleno")
-	else
-        anim:PlayAnimation("idle")
-	end
-end
-]]
-local function RemoveSelf(inst)
-local x,y,z = inst.Transform:GetWorldPosition()
-if #TheSim:FindEntities(x,y,z,3,{"wal_camp_pos"}) == 0 then
-local camp = SpawnPrefab("walrus_camp_empty")
-camp.Transform:SetPosition(x,y,z)
-end
-inst:Remove()
-end
-local function OnIsSpring(inst)
-inst:AddComponent("playerprox")
-
-inst.components.playerprox:SetDist(15, 20)
-inst.components.playerprox:SetOnPlayerNear(RemoveSelf)
-end
 env.AddPrefabPostInit("walrus_camp", function (inst)
+local _OnIsWinter = UpvalueHacker.GetUpvalue(Prefabs.walrus_camp.fn, "OnIsWinter")
     if not TheWorld.ismastersim then
 		return
 	end
 	
-	--[[inst:DoTaskInTime(0, function(inst) CheckForSummerSpawn(inst) end)
+	local _onsave = inst.OnSave
+	local _onload = inst.OnLoad
 	
-    inst:WatchWorldState("issummer", seasonalalpha)]]
-	inst:WatchWorldState("isspring", OnIsSpring)
+local function OnIsWinter(inst)
+if inst.chosen ~= nil and inst.chosen == true then
+print(inst.chosen)
+_OnIsWinter(inst)
+else
+inst.chosen = false
+end
+end
+UpvalueHacker.SetUpvalue(Prefabs.walrus_camp.fn, OnIsWinter,"OnIsWinter")
+
+local _onsleep = inst.OnEntitySleep
+
+local function OnEntitySleep(inst)
+if inst.chosen ~= nil and inst.chosen == true then
+_onsleep(inst)
+end
+end
+inst.OnEntitySleep = OnEntitySleep
+local function onsave(inst,data)
+if inst.chosen ~= nil then
+data.chosen = inst.chosen
+end
+_onsave(inst,data)
+end
+local function onsave(inst,data)
+if data.chosen ~= nil then
+inst.chosen = data.chosen
+end
+_onsave(inst,data)
+end
 end)
