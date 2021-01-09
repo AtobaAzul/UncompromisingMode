@@ -345,6 +345,7 @@ Assets = {
 	
 	Asset("ANIM", "anim/bight.zip"),
 	Asset("ANIM", "anim/knook.zip"),
+	Asset("ANIM", "anim/roship.zip"),
 	
 	--Dart Stuff
 	Asset("ANIM", "anim/um_blowguns.zip"),
