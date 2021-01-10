@@ -146,6 +146,7 @@ Assets = {
 	Asset("ANIM", "anim/gems_crabclaw.zip"),
 	Asset("ANIM", "anim/deerclops_yule_blue.zip"),
 	Asset("ANIM", "anim/deerclops_laser_hit_sparks_fx_blue.zip"),
+	Asset("ANIM", "anim/bearger_rockthrow.zip"),
 	
 	Asset("ANIM", "anim/hippo_water_attacks.zip"),
 	Asset("ANIM", "anim/hippo_water.zip"),

@@ -87,6 +87,15 @@ local function OnHitInk(inst, attacker, target)
     inst:Remove()
 end
 
+local function oncollide(inst, other)
+    -- If there is a physics collision, try to do some damage to that thing.
+    -- This is so you can't hide forever behind walls etc.
+
+	if other ~= nil and other:IsValid() and other:HasTag("_combat") and not other:HasTag("gingerbread") then
+		OnHitInk(inst, other)
+	end
+end
+
 local function common_fn(bank, build, anim, tag, isinventoryitem)
     local inst = CreateEntity()
 
@@ -126,6 +135,8 @@ local function common_fn(bank, build, anim, tag, isinventoryitem)
     if not TheWorld.ismastersim then
         return inst
     end
+	
+    inst.Physics:SetCollisionCallback(oncollide)
 
     inst:AddComponent("locomotor")
 
