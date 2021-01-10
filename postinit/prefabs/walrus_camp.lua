@@ -14,7 +14,6 @@ local _OnIsWinter = UpvalueHacker.GetUpvalue(Prefabs.walrus_camp.fn, "OnIsWinter
 	
 local function OnIsWinter(inst)
 if inst.chosen ~= nil and inst.chosen == true then
-print(inst.chosen)
 _OnIsWinter(inst)
 else
 inst.chosen = false

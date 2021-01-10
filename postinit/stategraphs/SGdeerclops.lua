@@ -135,10 +135,7 @@ local function DisableEightFaced(inst)
         inst.Transform:SetFourFaced()
     end
 end
-
-local events =
-{	
-    EventHandler("doattack", function(inst, data)
+local function IceAttackBank(inst,data)
         if inst.components.health ~= nil and not inst.components.health:IsDead()
             and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("hit")) then
             if inst.components.timer == nil then
@@ -167,6 +164,30 @@ local events =
                 end
             end
         end
+end
+local function StrongAttackBank(inst,data)
+        if inst.components.health ~= nil and not inst.components.health:IsDead()
+            and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("hit")) then
+            if math.random() > 0.4 then
+                inst.sg:GoToState("attack")
+            else
+				if inst.components.health:GetPercent() >= 0.5 then
+				inst.sg:GoToState("uppercut")
+				else
+				inst.sg:GoToState("uppercutcombo")
+				end
+            end
+        end
+end
+local events =
+{	
+    EventHandler("doattack", function(inst, data)
+	if inst.upgrade == "ice_mutation" then
+	IceAttackBank(inst,data)
+	end
+	if inst.upgrade == "strength_mutation" then
+	StrongAttackBank(inst,data)
+	end
     end),
 }
 
@@ -352,6 +373,103 @@ local states = {
             SetLightColour(inst, 1)
         end,
     },
+	State{
+        name = "uppercut",
+        tags = { "attack","busy","heavyhit" },
+
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("uppercut")
+			inst.components.combat:StartAttack()
+
+        end,
+
+
+        timeline =
+        {
+        TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/attack") end),
+        --TimeEvent(29 * FRAMES, function(inst) SpawnIceFx(inst, inst.components.combat.target) end),
+        TimeEvent(35 * FRAMES, function(inst)
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe")
+			inst.components.combat:DoAttack(inst.sg.statemem.target)
+            if inst.bufferedaction ~= nil and inst.bufferedaction.action == ACTIONS.HAMMER then
+                local target = inst.bufferedaction.target
+                inst:ClearBufferedAction()
+                if target ~= nil and
+                    target:IsValid() and
+                    target.components.workable ~= nil and
+                    target.components.workable:CanBeWorked() and
+                    target.components.workable:GetWorkAction() == ACTIONS.HAMMER then
+                    target.components.workable:Destroy(inst)
+                end
+            end
+            ShakeAllCameras(CAMERASHAKE.FULL, .5, .025, 1.25, inst, SHAKE_DIST)
+        end),
+        TimeEvent(36 * FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
+        },
+
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
+
+    },
+	State{
+        name = "uppercutcombo",
+        tags = { "attack","busy","heavyhit","noice" },
+
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("uppercutcombo")
+			inst.components.combat:StartAttack()
+
+        end,
+
+
+        timeline =
+        {
+        TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/attack") end),
+        --TimeEvent(29 * FRAMES, function(inst) SpawnIceFx(inst, inst.components.combat.target) end),
+        TimeEvent(35 * FRAMES, function(inst)
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe")
+			inst.components.combat:DoAttack(inst.sg.statemem.target)
+            if inst.bufferedaction ~= nil and inst.bufferedaction.action == ACTIONS.HAMMER then
+                local target = inst.bufferedaction.target
+                inst:ClearBufferedAction()
+                if target ~= nil and
+                    target:IsValid() and
+                    target.components.workable ~= nil and
+                    target.components.workable:CanBeWorked() and
+                    target.components.workable:GetWorkAction() == ACTIONS.HAMMER then
+                    target.components.workable:Destroy(inst)
+                end
+            end
+            ShakeAllCameras(CAMERASHAKE.FULL, .5, .025, 1.25, inst, SHAKE_DIST)
+        end),
+        TimeEvent(36 * FRAMES, function(inst) inst.sg:RemoveStateTag("heavyhit")
+		inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/attack")		end),
+		TimeEvent(60 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe") 	
+		if inst.components.combat.target ~= nil then
+		local target = inst.components.combat.target
+		inst:ForceFacePoint(target.Transform:GetWorldPosition())
+		end
+		inst.components.locomotor.walkspeed = 20
+		inst.components.locomotor:WalkForward() end),
+		TimeEvent(70 * FRAMES, function(inst) 
+		inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE/2)
+		inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE/2, TUNING.DEERCLOPS_AOE_SCALE/2)
+		inst.components.combat:DoAttack(inst.sg.statemem.target)
+		inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE)
+		inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE, TUNING.DEERCLOPS_AOE_SCALE)
+		inst.Physics:Stop() end),
+        },
+
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle")
+			inst.components.locomotor.walkspeed = 3 end),
+        },
+    },
 }
 
 for k, v in pairs(events) do
@@ -510,8 +628,9 @@ env.AddStategraphState("deerclops",
             local pt = Point(inst.Transform:GetWorldPosition())
             if pt.y < 2 then
                 inst.Physics:SetMotorVel(0,0,0)
-
+				inst.components.groundpounder.groundpoundfx = "deerclops_ground_fx"
                 inst.components.groundpounder:GroundPound()
+				inst.components.groundpounder.groundpoundfx = nil
 
                 local sinkhole = SpawnPrefab("bearger_sinkhole")
 				sinkhole.Transform:SetPosition(pt.x, 0, pt.z)

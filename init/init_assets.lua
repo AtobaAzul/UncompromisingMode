@@ -347,6 +347,8 @@ Assets = {
 	Asset("ANIM", "anim/knook.zip"),
 	Asset("ANIM", "anim/roship.zip"),
 	
+	Asset("ANIM", "anim/deerclops_mutation_anims.zip"),
+	
 	--Dart Stuff
 	Asset("ANIM", "anim/um_blowguns.zip"),
 	Asset("ANIM", "anim/um_darts.zip"),

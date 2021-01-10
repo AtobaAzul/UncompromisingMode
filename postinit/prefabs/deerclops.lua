@@ -1,6 +1,8 @@
+local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
+
 
 local PHASE2_HEALTH = .5
 
@@ -49,9 +51,30 @@ local function EnterPhase2Trigger(inst)
 	
 	end
 end
-
+local function MakeIcey(inst)
+inst:AddComponent("healthtrigger")
+inst.components.healthtrigger:AddTrigger(PHASE2_HEALTH, EnterPhase2Trigger)
+inst.upgrade = "ice_mutation"
+print(inst.upgrade)
+end
+local function MakeStrong(inst)
+inst.components.health:SetMaxHealth(5000)
+inst.upgrade = "strength_mutation"
+print(inst.upgrade)
+end
+local function ChooseUpgrades(inst)
+if inst.upgrades == nil then
+if math.random() > 0.5 then
+MakeIcey(inst)
+else
+MakeStrong(inst)
+end
+end
+end
 local function OnSave(inst, data)
     data.enraged = inst.enraged or nil
+	data.upgrade = inst.upgrade
+	print(inst.upgrade)
 end
 
 local function OnPreLoad(inst, data)
@@ -61,7 +84,22 @@ local function OnPreLoad(inst, data)
         end
     end
 end
-
+local function OnLoad(inst, data)
+    if data then
+		print(data.upgrade)
+		if data.upgrade == nil then
+		ChooseUpgrades(inst)
+		else
+		
+			if data.upgrade == "ice_mutation" then
+			MakeIcey(inst)
+			end
+			if data.upgrade == "strength_mutation" then
+			MakeStrong(inst)
+			end
+		end
+    end
+end
 local function oncollapse(inst, other)
     if other:IsValid() and other.components.workable ~= nil and other.components.workable:CanBeWorked() then
         SpawnPrefab("collapse_small").Transform:SetPosition(other.Transform:GetWorldPosition())
@@ -78,6 +116,28 @@ local function oncollide(inst, other)
 end
 
 env.AddPrefabPostInit("deerclops", function(inst)
+
+	local _OnHitOther = UpvalueHacker.GetUpvalue(Prefabs.deerclops.fn, "OnHitOther")
+
+	local function OnHitOther(inst,data)
+	if inst.sg:HasStateTag("heavyhit") then
+		local other = data.target
+		if other ~= nil then
+			if not (other.components.health ~= nil and other.components.health:IsDead()) then
+			if other ~= nil and other.components and other.components.inventory ~= nil and not other:HasTag("fat_gang") and not other:HasTag("foodknockbackimmune") and (other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) == nil or not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
+			other:PushEvent("knockback", {knocker = inst, radius = 150, strengthmult = 1.2})
+			end
+			end
+		end
+	else
+	if not inst.sg:HasStateTag("noice") then
+	_OnHitOther(inst,data)
+	end
+	end
+	end
+
+	inst:RemoveEventCallback("onhitother", _OnHitOther)
+    inst:ListenForEvent("onhitother", OnHitOther)
 	
 	if not IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then
 		inst.entity:AddLight()
@@ -98,11 +158,10 @@ env.AddPrefabPostInit("deerclops", function(inst)
 	
 	inst.OnSave = OnSave
     inst.OnPreLoad = OnPreLoad
-	
+	inst.OnLoad = OnLoad
 	inst:RemoveComponent("freezable")
 	
-	inst:AddComponent("healthtrigger")
-    inst.components.healthtrigger:AddTrigger(PHASE2_HEALTH, EnterPhase2Trigger)
+
 	
 	if inst.components.lootdropper ~= nil then
 		inst.components.lootdropper:AddChanceLoot("cursed_antler", 1)
@@ -114,5 +173,6 @@ env.AddPrefabPostInit("deerclops", function(inst)
     inst.components.groundpounder.destructionRings = 2
     inst.components.groundpounder.platformPushingRings = 2
     inst.components.groundpounder.numRings = 3
-	inst.components.groundpounder.groundpoundfx = "deerclops_ground_fx"
+	inst:DoTaskInTime(0,ChooseUpgrades(inst))
+
 end)
