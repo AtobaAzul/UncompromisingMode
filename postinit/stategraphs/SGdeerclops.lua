@@ -168,16 +168,17 @@ end
 local function StrongAttackBank(inst,data)
         if inst.components.health ~= nil and not inst.components.health:IsDead()
             and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("hit")) then
-            if math.random() > 0.4 then
-                inst.sg:GoToState("attack")
-            else
-				if inst.components.health:GetPercent() >= 0.5 then
-				inst.sg:GoToState("uppercut")
+				if inst.components.timer ~= nil and not inst.components.timer:TimerExists("uppercuttime") then
+					if inst.components.health:GetPercent() >= 0.5 then
+					inst.sg:GoToState("uppercut")
+					else
+					inst.sg:GoToState("uppercutcombo")
+					end
 				else
-				inst.sg:GoToState("uppercutcombo")
+				inst.sg:GoToState("attack")
 				end
             end
-        end
+
 end
 local events =
 {	
@@ -381,7 +382,9 @@ local states = {
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("uppercut")
 			inst.components.combat:StartAttack()
-
+            inst.components.timer:StopTimer("uppercuttime")
+            inst.components.timer:StartTimer("uppercuttime", TUNING.DEERCLOPS_ATTACK_PERIOD * (math.random(1,3)))
+			inst.components.combat:SetDefaultDamage(1.5*TUNING.DEERCLOPS_DAMAGE)
         end,
 
 
@@ -392,6 +395,7 @@ local states = {
         TimeEvent(35 * FRAMES, function(inst)
             inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe")
 			inst.components.combat:DoAttack(inst.sg.statemem.target)
+			inst.components.combat:SetDefaultDamage(TUNING.DEERCLOPS_DAMAGE)
             if inst.bufferedaction ~= nil and inst.bufferedaction.action == ACTIONS.HAMMER then
                 local target = inst.bufferedaction.target
                 inst:ClearBufferedAction()
@@ -422,7 +426,9 @@ local states = {
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("uppercutcombo")
 			inst.components.combat:StartAttack()
-
+            inst.components.timer:StopTimer("uppercuttime")
+            inst.components.timer:StartTimer("uppercuttime", TUNING.DEERCLOPS_ATTACK_PERIOD * (math.random(2,5)))
+			inst.components.combat:SetDefaultDamage(1.5*TUNING.DEERCLOPS_DAMAGE)
         end,
 
 
@@ -433,6 +439,7 @@ local states = {
         TimeEvent(35 * FRAMES, function(inst)
             inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe")
 			inst.components.combat:DoAttack(inst.sg.statemem.target)
+			inst.components.combat:SetDefaultDamage(2*TUNING.DEERCLOPS_DAMAGE)
             if inst.bufferedaction ~= nil and inst.bufferedaction.action == ACTIONS.HAMMER then
                 local target = inst.bufferedaction.target
                 inst:ClearBufferedAction()
@@ -461,6 +468,7 @@ local states = {
 		inst.components.combat:DoAttack(inst.sg.statemem.target)
 		inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE)
 		inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE, TUNING.DEERCLOPS_AOE_SCALE)
+		inst.components.combat:SetDefaultDamage(TUNING.DEERCLOPS_DAMAGE)
 		inst.Physics:Stop() end),
         },
 

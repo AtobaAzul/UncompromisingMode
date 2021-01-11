@@ -60,6 +60,10 @@ end
 local function MakeStrong(inst)
 inst.components.health:SetMaxHealth(5000)
 inst.upgrade = "strength_mutation"
+inst:DoTaskInTime(0.1, inst:AddComponent("timer"))
+if inst.components.healthtrigger ~= nil then
+inst:RemoveComponent("healthtrigger")      --Bandaid fix to attempt to correct the health trigger just getting added anyways
+end
 print(inst.upgrade)
 end
 local function ChooseUpgrades(inst)
@@ -86,6 +90,7 @@ local function OnPreLoad(inst, data)
 end
 local function OnLoad(inst, data)
     if data then
+		print("here's the upgrades")
 		print(data.upgrade)
 		if data.upgrade == nil then
 		ChooseUpgrades(inst)
