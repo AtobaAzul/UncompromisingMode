@@ -19,7 +19,7 @@ AddRoom("GiantTrees",
 			countprefabs =	
 		{
 			giant_tree = function () return 6 + math.random(1,2) end,
-			extracanopyspawner = function () return 6 + math.random(0,1) end,
+			extracanopyspawner = function () return 10 + math.random(0,1) end,
 			pitcherplant = function () return math.random(1,2) end,
 			
 		}
@@ -44,7 +44,7 @@ AddRoom("AphidLand",
 			countprefabs =	
 		{
 			giant_tree_infested = function () return 6 + math.random(1,2) end,
-			extracanopyspawner = function () return 6 + math.random(0,1) end,
+			extracanopyspawner = function () return 10 + math.random(0,1) end,
 			pitcherplant = function () return math.random(1,2) end,
 			
 		}
@@ -72,7 +72,7 @@ AddRoom("ShroomInfestedGiantTrees",
 		{
 			giant_tree = function () return 6 + math.random(1,2) end,
 			pitcherplant = function () return math.random(0,1) end,
-			extracanopyspawner = function () return 6 + math.random(0,1) end,
+			extracanopyspawner = function () return 10 + math.random(0,1) end,
 			
 		}
 }})
@@ -96,7 +96,7 @@ AddRoom("SpideryGiantTrees",
 			countprefabs =	
 			{
 			giant_tree = function () return 3 + math.random(0,1) end,
-			extracanopyspawner = function () return 6 + math.random(0,1) end,
+			extracanopyspawner = function () return 10 + math.random(0,1) end,
 			widowwebspawner = 1 
 			},
 }})
@@ -121,9 +121,9 @@ AddRoom("WalrusGiantTrees",
 			countprefabs =	
 		{
 			giant_tree = function () return 6 + math.random(1,2) end,
-			extracanopyspawner = function () return 6 + math.random(0,1) end,
+			extracanopyspawner = function () return 10 + math.random(0,1) end,
 			pitcherplant = function () return math.random(0,1) end,
-			walrus_camp_empty = 1,
+			walrus_camp = 1,
 			
 		}
 }})
@@ -147,7 +147,7 @@ AddRoom("BGGiantTrees",
 		{
 			
 			giant_tree = function () return 6 + math.random(0,1) end,
-			extracanopyspawner = function () return 6 + math.random(0,1) end,
+			extracanopyspawner = function () return 10 + math.random(0,1) end,
 			pitcherplant = function () return math.random(0,1) end,
 			
 		}
@@ -170,17 +170,16 @@ AddRoom("SnapDragons",
 			{
 			snapdragon = function () return 1 + math.random(3,4) end,
 			giant_tree = function () return 3 + math.random(0,1) end,
-			extracanopyspawner = function () return 6 + math.random(0,1) end,
+			extracanopyspawner = function () return 10 + math.random(0,1) end,
 			},
 }})
 AddRoom("MoonBaseGiantTrees", {
 					colour={r=.8,g=0.5,b=.6,a=.50},
-					value = GROUND.HOODEDFOREST,
-					tags = { "RoadPoison","hoodedcanopy" },
+					value = GROUND.FOREST,
+					tags = { "RoadPoison",},
 					contents =  {
 									countprefabs = {
 										giant_tree = function () return 3 + math.random(0,1) end,
-										extracanopyspawner = function () return 6 + math.random(0,1) end,
     									},
 									countstaticlayouts={["MoonbaseOne"]=1},
 									
@@ -202,7 +201,7 @@ AddRoom("HoodedTown", {
 					contents =  {
 									countprefabs = {
 										giant_tree = function () return 3 + math.random(0,1) end,
-										extracanopyspawner = function () return 6 + math.random(0,1) end,
+										extracanopyspawner = function () return 10 + math.random(0,1) end,
     									},
 									
 					                distributepercent = .4,
@@ -223,7 +222,7 @@ AddRoom("RoseGarden", {
 					contents =  {
 									countprefabs = {
 										giant_tree = function () return 3 + math.random(0,1) end,
-										extracanopyspawner = function () return 6 + math.random(0,1) end,
+										extracanopyspawner = function () return 10 + math.random(0,1) end,
     									},
 									
 					                distributepercent = .4,
@@ -243,7 +242,7 @@ AddRoom("HFHolidays", {
 					contents =  {
 									countprefabs = {
 										giant_tree = function () return 3 + math.random(0,1) end,
-										extracanopyspawner = function () return 6 + math.random(0,1) end,
+										extracanopyspawner = function () return 10 + math.random(0,1) end,
     									},
 									
 					                distributepercent = .4,

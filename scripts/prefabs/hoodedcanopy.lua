@@ -11,6 +11,14 @@ local function Thin(inst)
  if #(TheSim:FindEntities(pt.x, pt.y, pt.z, 0.3, { "canopy" })) > 1 then
  inst:Remove()
  end
+ if #(TheSim:FindEntities(pt.x, pt.y, pt.z, 4, { "moonbase" })) > 0 then
+ inst:Remove()
+ end
+ 
+ if not inst.components.areaaware:CurrentlyInTag("hoodedcanopy") then
+ inst:Remove()
+ end
+
 end
 
 local function fn(Sim)
@@ -31,7 +39,8 @@ local function fn(Sim)
     inst.AnimState:SetLayer(LAYER_GROUND)
     inst.AnimState:SetSortOrder(1)
 	inst.AnimState:SetScale(4, 4, 4)
-	inst:DoTaskInTime(math.random(0,0.1),Thin)
+	inst:AddComponent("areaaware")
+	inst:DoTaskInTime(0.1,Thin)
     return inst
 end
 
