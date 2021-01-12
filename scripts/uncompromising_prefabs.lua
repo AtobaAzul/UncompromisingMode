@@ -191,6 +191,6 @@ return {
 	"uncompromising_blowguns",
 	"uncompromising_blowgun_ammo",
 	"snotroast",
-	"walrus_camp_empty",
 	"bearger_boulder",
+	"nymph",
 }
