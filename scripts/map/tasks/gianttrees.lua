@@ -2,7 +2,7 @@ require ("map/rooms/forest/gianttreesrooms")
 AddTask("GiantTrees", {
 		locks={LOCKS.ADVANCED_COMBAT,LOCKS.MONSTERS_DEFEATED,LOCKS.TIER5},
 		keys_given={KEYS.HF},
-		region_id = "hoodedforest",
+		--region_id = "hoodedforest",
 		level_set_piece_blocker = true,
 		room_choices={
 			["GiantTrees"] = function() return math.random(1,2) end, 
@@ -13,7 +13,7 @@ AddTask("GiantTrees", {
 			["MoonBaseGiantTrees"] = 1,
 			["ShroomInfestedGiantTrees"] = 1,
 			["SnapDragons"] = 1,
-			--["SpideryGiantTrees"] = 1,
+			["SpideryGiantTrees"] = 1,
 			["HoodedTown"] = 1,
 			["HFHolidays"] = 1,
 		},

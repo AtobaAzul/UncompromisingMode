@@ -277,15 +277,15 @@ AddTaskSetPreInitAny(function(tasksetdata)
         return
     end
 table.insert(tasksetdata.tasks,"GiantTrees")
-table.insert(tasksetdata.tasks,"DarkGiantTrees")
+--table.insert(tasksetdata.tasks,"DarkGiantTrees")
 
 end)
-AddTaskSetPreInitAny(function(tasksetdata)
+--[[AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "cave" then
         return
     end
 table.insert(tasksetdata.tasks,"DarkGiantTrees")  -- Uncomment to test task based rice worldgen
-end)
+end)]]
 
 local Layouts = GLOBAL.require("map/layouts").Layouts
 local StaticLayout = GLOBAL.require("map/static_layout")
