@@ -26,7 +26,16 @@ AddTile(
 ------
 
 
-
+AddLevelPreInitAny(function(level)
+    if level.location == "forest" then
+        level.overrides.layout_mode = "RestrictNodesByKey"
+    end
+end)
+AddLevelPreInitAny(function(level)
+    if level.location == "cave" then
+        level.overrides.keep_disconnected_tiles = true
+    end
+end)
 if GetModConfigData("caved") == false then
 
     AddTaskSetPreInitAny(function(tasksetdata)
@@ -267,14 +276,16 @@ AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "forest" then
         return
     end
-table.insert(tasksetdata.tasks,"GiantTrees")  -- Uncomment to test task based rice worldgen
+table.insert(tasksetdata.tasks,"GiantTrees")
+table.insert(tasksetdata.tasks,"DarkGiantTrees")
+
 end)
---[[AddTaskSetPreInitAny(function(tasksetdata)
+AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "cave" then
         return
     end
-table.insert(tasksetdata.tasks,"CaveGiantTrees")  -- Uncomment to test task based rice worldgen
-end)]]
+table.insert(tasksetdata.tasks,"DarkGiantTrees")  -- Uncomment to test task based rice worldgen
+end)
 
 local Layouts = GLOBAL.require("map/layouts").Layouts
 local StaticLayout = GLOBAL.require("map/static_layout")

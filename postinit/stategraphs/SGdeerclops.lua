@@ -135,7 +135,7 @@ local function DisableEightFaced(inst)
         inst.Transform:SetFourFaced()
     end
 end
-local function IceAttackBank(inst,data)
+local function EnrageAttackBank(inst,data)
         if inst.components.health ~= nil and not inst.components.health:IsDead()
             and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("hit")) then
             if inst.components.timer == nil then
@@ -180,14 +180,23 @@ local function StrongAttackBank(inst,data)
             end
 
 end
+local function IceAttackBank(inst,data)
+if inst.components.health ~= nil and not inst.components.health:IsDead()
+            and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("hit")) then
+inst.sg:GoToState("attack")
+end
+end
 local events =
 {	
     EventHandler("doattack", function(inst, data)
-	if inst.upgrade == "ice_mutation" then
-	IceAttackBank(inst,data)
+	if inst.upgrade == "enrage_mutation" then
+	EnrageAttackBank(inst,data)
 	end
 	if inst.upgrade == "strength_mutation" then
 	StrongAttackBank(inst,data)
+	end
+	if inst.upgrade == "ice_mutation" then
+	IceAttackBank(inst,data)
 	end
     end),
 }

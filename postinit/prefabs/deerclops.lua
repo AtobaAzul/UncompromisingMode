@@ -51,11 +51,40 @@ local function EnterPhase2Trigger(inst)
 	
 	end
 end
-local function MakeIcey(inst)
+
+local function UpdateLevel(inst)
+if inst.components.workable ~= nil then
+inst.components.health:SetAbsorptionAmount(.8)
+end
+end
+local function OnWork(inst, worker, workleft)
+    if workleft <= 0 then
+	inst:RemoveComponent("workable")
+	UpdateLevel(inst)
+	inst.components.timer:StartTimer("freezearmor",30+math.random(0,10))
+	end
+end
+local function FreezeArmor(inst,data)
+    if data ~= nil then
+        if data.name == "freezearmor" then
+		inst:AddComponent("workable")
+		inst.components.workable:SetWorkAction(ACTIONS.MINE)
+		inst.components.workable:SetWorkLeft(TUNING.ROCKS_MINE)
+		inst.components.workable:SetOnWorkCallback(OnWork)
+		inst.sg:GoToState("taunt")
+		UpdateLevel(inst)
+		end
+	end
+end
+
+---------
+
+---------
+
+local function MakeEnrageable(inst)
 inst:AddComponent("healthtrigger")
 inst.components.healthtrigger:AddTrigger(PHASE2_HEALTH, EnterPhase2Trigger)
-inst.upgrade = "ice_mutation"
-print(inst.upgrade)
+inst.upgrade = "enrage_mutation"
 end
 local function MakeStrong(inst)
 inst.components.health:SetMaxHealth(5000)
@@ -64,21 +93,40 @@ inst:DoTaskInTime(0.1, inst:AddComponent("timer"))
 if inst.components.healthtrigger ~= nil then
 inst:RemoveComponent("healthtrigger")      --Bandaid fix to attempt to correct the health trigger just getting added anyways
 end
-print(inst.upgrade)
 end
+local function MakeIcey(inst)
+inst.components.health:SetMaxHealth(3500)
+inst.upgrade = "ice_mutation"
+inst:AddComponent("timer")
+inst:ListenForEvent("timerdone", FreezeArmor)
+inst.components.timer:StartTimer("freezearmor",0.1)
+end
+
+------------
+
+------------
 local function ChooseUpgrades(inst)
 if inst.upgrades == nil then
 if math.random() > 0.5 then
-MakeIcey(inst)
+MakeEnrageable(inst)
 else
 MakeStrong(inst)
 end
+else
+			if data.upgrade == "enrage_mutation" then
+			MakeEnrageable(inst)
+			end
+			if data.upgrade == "strength_mutation" then
+			MakeStrong(inst)
+			end
+			if data.upgrade == "ice_mutation" then
+			MakeStrong(inst)
+			end
 end
 end
 local function OnSave(inst, data)
     data.enraged = inst.enraged or nil
 	data.upgrade = inst.upgrade
-	print(inst.upgrade)
 end
 
 local function OnPreLoad(inst, data)
@@ -90,16 +138,17 @@ local function OnPreLoad(inst, data)
 end
 local function OnLoad(inst, data)
     if data then
-		print("here's the upgrades")
-		print(data.upgrade)
 		if data.upgrade == nil then
 		ChooseUpgrades(inst)
 		else
 		
-			if data.upgrade == "ice_mutation" then
-			MakeIcey(inst)
+			if data.upgrade == "enrage_mutation" then
+			MakeEnrageable(inst)
 			end
 			if data.upgrade == "strength_mutation" then
+			MakeStrong(inst)
+			end
+			if data.upgrade == "ice_mutation" then
 			MakeStrong(inst)
 			end
 		end
@@ -178,6 +227,6 @@ env.AddPrefabPostInit("deerclops", function(inst)
     inst.components.groundpounder.destructionRings = 2
     inst.components.groundpounder.platformPushingRings = 2
     inst.components.groundpounder.numRings = 3
-	inst:DoTaskInTime(0,ChooseUpgrades(inst))
+	inst:DoTaskInTime(0.1,ChooseUpgrades(inst))	--Incase we need to specify an upgrade because this deerclops despawned.
 
 end)
