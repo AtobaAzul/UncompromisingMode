@@ -1,12 +1,12 @@
 Assets = {
 	----Turf
-	Asset( "IMAGE", "levels/textures/noise_jungle.tex" ),
+	Asset( "IMAGE", "levels/textures/noise_hoodedmoss.tex" ),
 	Asset( "IMAGE", "levels/textures/mini_noise_jungle.tex" ),
 	Asset( "IMAGE", "levels/tiles/jungle.tex" ),
 	Asset( "FILE", "levels/tiles/jungle.xml" ),
 	Asset("ANIM", "anim/swturf.zip"),
-	Asset("ATLAS", "images/inventoryimages/turf_jungle.xml"),
-	Asset("IMAGE", "images/inventoryimages/turf_jungle.tex"),
+	--Asset("ATLAS", "images/inventoryimages/turf_jungle.xml"),
+	--Asset("IMAGE", "images/inventoryimages/turf_jungle.tex"),
 	----Turf
 
 

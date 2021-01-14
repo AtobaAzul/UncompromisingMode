@@ -50,9 +50,9 @@ function FogOver:OnUpdate(dt)
 		self:Show()
         self.time = self.transitiontime
 		if TheWorld.state.isdusk then
-		self.alphagoal = 0.4
+		self.alphagoal = 0.1
 		else
-        self.alphagoal = 0.8
+        self.alphagoal = 0.5
 		end
 	else
 		--TheFocalPoint.SoundEmitter:KillSound("creepyforest")

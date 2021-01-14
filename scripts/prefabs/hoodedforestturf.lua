@@ -21,7 +21,7 @@ end
 
 local assets =
 {
-    Asset("ANIM", "anim/swturf.zip"),
+    Asset("ANIM", "anim/hfturf.zip"),
 }
 
 local prefabs =
@@ -41,8 +41,8 @@ local function make_turf(data)
 
         inst:AddTag("groundtile")
 
-        inst.AnimState:SetBank("swturf")
-        inst.AnimState:SetBuild("swturf")
+        inst.AnimState:SetBank("hfturf")
+        inst.AnimState:SetBuild("hfturf")
         inst.AnimState:PlayAnimation(data.anim)
 
         inst:AddTag("molebait")
@@ -87,9 +87,9 @@ end
 
 local turfs =
 {
-    {name="jungle",			anim="jungle",			tile=GROUND.HOODEDFOREST},
-    --[[{name="meadow",			anim="meadow",			tile=GROUND.MEADOW},
-	{name="tidalmarsh",		anim="tidalmarsh",		tile=GROUND.TIDALMARSH},
+    {name="hoodedmoss",			anim="hoodedmoss",			tile=GROUND.HOODEDFOREST},
+    {name="ancienthoodedturf",	anim="ancienthoodedturf",   tile=GROUND.ANCIENTHOODEDFOREST},
+	--[[{name="tidalmarsh",		anim="tidalmarsh",		tile=GROUND.TIDALMARSH},
 	{name="magmafield",		anim="magmafield",		tile=GROUND.MAGMAFIELD},
 	{name="ash",			anim="ash",				tile=GROUND.ASH},
 	{name="volcano",		anim="volcano",			tile=GROUND.VOLCANO},

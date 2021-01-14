@@ -12,7 +12,21 @@ local GROUND_OCEAN_COLOR = -- Color for the main island ground tiles
 AddTile(
 	"HOODEDFOREST",
 	102,
-	"jungle",
+	"hoodedmoss",
+	{
+		noise_texture = "levels/textures/noise_hoodedmoss.tex",
+		runsound = "dontstarve/movement/walk_grass",
+		walksound = "dontstarve/movement/walk_grass",
+		snowsound = "dontstarve/movement/run_snow",
+		mudsound = "dontstarve/movement/run_mud",
+		colors = GROUND_OCEAN_COLOR,
+	},
+	{noise_texture = "levels/textures/mini_noise_hoodedmoss.tex"}
+)
+AddTile(
+	"ANCIENTHOODEDFOREST",
+	110,
+	"ancienthoodedturf",
 	{
 		noise_texture = "levels/textures/noise_jungle.tex",
 		runsound = "dontstarve/movement/walk_grass",
@@ -26,16 +40,12 @@ AddTile(
 ------
 
 
-AddLevelPreInitAny(function(level)
-    if level.location == "forest" then
-        level.overrides.layout_mode = "RestrictNodesByKey"
-    end
-end)
+--[[ Keep for Cave Update
 AddLevelPreInitAny(function(level)
     if level.location == "cave" then
         level.overrides.keep_disconnected_tiles = true
     end
-end)
+end)]]
 if GetModConfigData("caved") == false then
 
     AddTaskSetPreInitAny(function(tasksetdata)
