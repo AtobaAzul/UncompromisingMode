@@ -37,6 +37,22 @@ AddTile(
 	},
 	{noise_texture = "levels/textures/mini_noise_jungle.tex"}
 )
+
+	local worldtiledefs = require 'worldtiledefs'
+	
+	local MOD_TURF_PROPERTIES =
+	{
+		[GROUND.HOODEDFOREST] = 	{name = "hoodedmoss", 	anim = "hoodedmoss", 	bank_build = "hfturf"},
+		[GROUND.ANCIENTHOODEDFOREST] = {name = "ancienthoodedturf", 	anim = "ancienthoodedturf", 	bank_build = "hfturf"},
+	}
+	
+	for k, v in pairs(MOD_TURF_PROPERTIES) do
+		worldtiledefs.turf[k] = MOD_TURF_PROPERTIES[k]
+	end
+	
+	ChangeTileTypeRenderOrder(GLOBAL.GROUND.HOODEDFOREST, GLOBAL.GROUND.DIRT)
+	ChangeTileTypeRenderOrder(GLOBAL.GROUND.ANCIENTHOODEDFOREST, GLOBAL.GROUND.DIRT)
+	
 ------
 
 

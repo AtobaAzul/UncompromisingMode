@@ -350,6 +350,10 @@ Assets = {
 	
 	Asset("ANIM", "anim/deerclops_mutation_anims.zip"),
 	Asset("ANIM", "anim/nymph.zip"),
+	Asset("IMAGE", "images/inventoryimages/turf_hoodedmoss.tex"),
+	Asset("ATLAS", "images/inventoryimages/turf_hoodedmoss.xml"),
+	Asset("IMAGE", "images/inventoryimages/turf_ancienthoodedturf.tex"),
+	Asset("ATLAS", "images/inventoryimages/turf_ancienthoodedturf.xml"),
 	
 	--Dart Stuff
 	Asset("ANIM", "anim/um_blowguns.zip"),
