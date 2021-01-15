@@ -8,6 +8,8 @@ local function DisableThatStuff(inst)
 	if TheWorld.net ~= nil then
 		TheWorld.net:AddTag("queenbeekilled")
 	end
+	
+	SendModRPCToShard(GetShardModRPC("UncompromisingSurvival", "Hayfever_Stop"), nil)
 end
 
 env.AddPrefabPostInit("beequeen", function(inst)
@@ -40,6 +42,8 @@ local function OnTagTimer(inst, data)
 		if TheWorld.net ~= nil then
 			TheWorld.net:RemoveTag("queenbeekilled")
 		end
+		
+		SendModRPCToShard(GetShardModRPC("UncompromisingSurvival", "Hayfever_Start"), nil)
 	end
 end
 
