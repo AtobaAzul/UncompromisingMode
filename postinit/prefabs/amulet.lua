@@ -213,7 +213,7 @@ env.AddPrefabPostInit("orangeamulet", function(inst)
     end
 
     inst:RemoveComponent("finiteuses")
-
+	inst:AddTag("lazy_forager")
 	inst:AddComponent("fueled")
     inst.components.fueled:InitializeFuelLevel(2*TUNING.ORANGEAMULET_USES) 
 	inst.components.fueled.fueltype = FUELTYPE.NIGHTMARE
@@ -226,6 +226,134 @@ env.AddPrefabPostInit("orangeamulet", function(inst)
     end
 
 end)
+---
+--Postinits for the spikey pickables
+---
+env.AddPrefabPostInit("cactus", function(inst)
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+local _OnPick = inst.components.pickable.onpickedfn
+local function onpickedchannel(inst, picker)
+    inst.Physics:SetActive(false)
+    inst.AnimState:PlayAnimation(inst.has_flower and "picked_flower" or "picked")
+    inst.AnimState:PushAnimation("empty", true)
 
+    if picker ~= nil then
+        if inst.has_flower then
+            -- You get a cactus flower, yay.
+            local loot = SpawnPrefab("cactus_flower")
+            loot.components.inventoryitem:InheritMoisture(TheWorld.state.wetness, TheWorld.state.iswet)
+            if picker.components.inventory ~= nil then
+                picker.components.inventory:GiveItem(loot, nil, inst:GetPosition())
+            else
+                local x, y, z = inst.Transform:GetWorldPosition()
+                loot.components.inventoryitem:DoDropPhysics(x, y, z, true)
+            end
+        end
+    end
 
+    inst.has_flower = false
+end
+local function OnPickNew(inst,picker)
+if (picker.components.inventory ~= nil and picker.components.inventory:EquipHasTag("lazy_forager")) then
+	local amulet = picker.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+		if amulet.components.fueled ~= nil and not amulet.components.fueled:IsEmpty() then
+		amulet:AddTag("bramble_resistant")
+		_OnPick(inst,picker)
+		amulet:RemoveTag("bramble_resistant")
+		else
+		_OnPick(inst,picker)
+		end
+	else
+	if picker:HasTag("channelingpicker") then
+	onpickedchannel(inst, picker)
+	else
+	_OnPick(inst,picker)
+	end
+	end
+end
+inst.components.pickable.onpickedfn = OnPickNew
+
+end)
+env.AddPrefabPostInit("oasis_cactus", function(inst)
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+local _OnPick = inst.components.pickable.onpickedfn
+local function onpickedchannel(inst, picker)
+    inst.Physics:SetActive(false)
+    inst.AnimState:PlayAnimation(inst.has_flower and "picked_flower" or "picked")
+    inst.AnimState:PushAnimation("empty", true)
+
+    if picker ~= nil then
+        if inst.has_flower then
+            -- You get a cactus flower, yay.
+            local loot = SpawnPrefab("cactus_flower")
+            loot.components.inventoryitem:InheritMoisture(TheWorld.state.wetness, TheWorld.state.iswet)
+            if picker.components.inventory ~= nil then
+                picker.components.inventory:GiveItem(loot, nil, inst:GetPosition())
+            else
+                local x, y, z = inst.Transform:GetWorldPosition()
+                loot.components.inventoryitem:DoDropPhysics(x, y, z, true)
+            end
+        end
+    end
+
+    inst.has_flower = false
+end
+local function OnPickNew(inst,picker)
+if (picker.components.inventory ~= nil and picker.components.inventory:EquipHasTag("lazy_forager")) then
+	local amulet = picker.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+		if amulet.components.fueled ~= nil and not amulet.components.fueled:IsEmpty() then
+		amulet:AddTag("bramble_resistant")
+		_OnPick(inst,picker)
+		amulet:RemoveTag("bramble_resistant")
+		else
+		_OnPick(inst,picker)
+		end
+	else
+	if picker:HasTag("channelingpicker") then
+	onpickedchannel(inst, picker)
+	else
+	_OnPick(inst,picker)
+	end
+	end
+end
+inst.components.pickable.onpickedfn = OnPickNew
+
+end)
+env.AddPrefabPostInit("marsh_bush", function(inst)
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+local _OnPick = inst.components.pickable.onpickedfn
+local function onpickedchannel(inst, picker)
+    inst.AnimState:PlayAnimation("picking")
+    inst.AnimState:PushAnimation("picked", false)
+end
+local function OnPickNew(inst,picker)
+if (picker.components.inventory ~= nil and picker.components.inventory:EquipHasTag("lazy_forager")) then
+	local amulet = picker.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+		if amulet.components.fueled ~= nil and not amulet.components.fueled:IsEmpty() then
+		amulet:AddTag("bramble_resistant")
+		_OnPick(inst,picker)
+		amulet:RemoveTag("bramble_resistant")
+		else
+		_OnPick(inst,picker)
+		end
+	else
+	if picker:HasTag("channelingpicker") then
+	onpickedchannel(inst, picker)
+	else
+	_OnPick(inst,picker)
+	end
+	end
+end
+inst.components.pickable.onpickedfn = OnPickNew
+
+end)
    

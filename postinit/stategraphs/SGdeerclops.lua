@@ -165,6 +165,69 @@ local function EnrageAttackBank(inst,data)
             end
         end
 end
+local function CanSpawnSpikeAt(pos, size)
+    local radius = 1.1
+    for i, v in ipairs(TheSim:FindEntities(pos.x, 0, pos.z, radius + 1.5, nil, { "antlion_sinkhole" }, { "groundspike", "antlion_sinkhole_blocker" })) do
+        if v.Physics == nil then
+            return false
+        end
+        local spacing = radius + v:GetPhysicsRadius(0)
+        if v:GetDistanceSqToPoint(pos) < spacing * spacing then
+            return false
+        end
+    end
+    return true
+end
+local function SpawnBlock(inst, x, z)
+	local blockade = SpawnPrefab("rock_ice")
+    blockade.Transform:SetPosition(x, 0, z)
+	blockade:DoTaskInTime(9,function(blockade) blockade:Remove() end)
+	
+end
+local function SpawnBlocks(inst, pos, count)
+    if count > 0 then
+        local dtheta = PI * 2 / count
+        local thetaoffset = math.random() * PI * 2
+        for theta = math.random() * dtheta, PI * 2, dtheta do
+            local offset = FindWalkableOffset(pos, theta + thetaoffset, 8 + math.random(), 3, false, true,
+                function(pt)
+                    return CanSpawnSpikeAt(pt, "block")
+                end)
+            if offset ~= nil then
+                if theta < dtheta then
+                    SpawnBlock(inst, pos.x + offset.x, pos.z + offset.z)
+                else
+                    inst:DoTaskInTime(math.random() * .5, SpawnBlock, pos.x + offset.x, pos.z + offset.z)
+                end
+            end
+        end
+    end
+end
+local function FreezeEverything(inst)
+	if inst.components.combat.target ~= nil then
+	local target = inst.components.combat.target
+	inst:ForceFacePoint(target.Transform:GetWorldPosition())
+	local side = math.random(-1,1)
+	side = 0
+		for i = 1,2 do
+		if i == 2 then
+		SpawnBlocks(inst, inst:GetPosition(), 19)
+		else
+			for n = 1,5 do
+			local aura = SpawnPrefab("deer_ice_circle")
+			local x, y, z = inst.Transform:GetWorldPosition()
+			local theta = inst.Transform:GetRotation()*DEGREES
+			theta = theta + (n-2)/1.1+side
+			x = x + 5*i*math.cos(theta)
+			z = z - 5*i*math.sin(theta)
+			aura.Transform:SetPosition(x,y,z)
+			aura:DoTaskInTime(6, aura.KillFX)
+			end
+		end
+		end
+	end
+end
+
 local function StrongAttackBank(inst,data)
         if inst.components.health ~= nil and not inst.components.health:IsDead()
             and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("hit")) then
@@ -321,6 +384,42 @@ local states = {
                 DisableEightFaced(inst)
             end
         end,
+    },
+	
+	State{
+        name = "aurafreeze",
+        tags = { "busy" },
+
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("taunt",true)
+
+        end,
+
+
+
+        timeline =
+        {
+            TimeEvent(5 * FRAMES, function(inst)
+				FreezeEverything(inst)
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/taunt_grrr")
+            end),
+            TimeEvent(16 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/taunt_howl")
+            end),
+            TimeEvent(150 * FRAMES, function(inst)
+                inst.sg:GoToState("idle")
+			inst.components.timer:StartTimer("auratime", 30)
+            end),
+        },
+
+        --[[events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle")
+			inst.components.timer:StartTimer("auratime", 30) end),
+        },]]
+
+
     },
 	
 	State{

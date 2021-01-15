@@ -52,19 +52,19 @@ local function EnterPhase2Trigger(inst)
 	end
 end
 
-local function UpdateLevel(inst)
+local function UpdateLevelIce(inst)  --Save For Tier2
 if inst.components.workable ~= nil then
 inst.components.health:SetAbsorptionAmount(.8)
 end
 end
-local function OnWork(inst, worker, workleft)
+local function OnWork(inst, worker, workleft) --Save for Tier 2
     if workleft <= 0 then
 	inst:RemoveComponent("workable")
-	UpdateLevel(inst)
+	UpdateLevelIce(inst)
 	inst.components.timer:StartTimer("freezearmor",30+math.random(0,10))
 	end
 end
-local function FreezeArmor(inst,data)
+local function FreezeArmor(inst,data) --Save For Tier 2
     if data ~= nil then
         if data.name == "freezearmor" then
 		inst:AddComponent("workable")
@@ -72,46 +72,68 @@ local function FreezeArmor(inst,data)
 		inst.components.workable:SetWorkLeft(TUNING.ROCKS_MINE)
 		inst.components.workable:SetOnWorkCallback(OnWork)
 		inst.sg:GoToState("taunt")
-		UpdateLevel(inst)
+		UpdateLevelIce(inst)
 		end
 	end
 end
 
+
+local function AuraFreezeEnemies(inst)
+if inst.components.combat.target ~= nil then
+inst.sg:GoToState("aurafreeze")
+else
+inst.components.timer:StartTimer("auratime", 30)
+end
+end
+local function IceyCheck(inst,data)
+if data ~= nil and data.name == "auratime" then
+AuraFreezeEnemies(inst)
+end
+end
 ---------
 
 ---------
 
 local function MakeEnrageable(inst)
 inst:AddComponent("healthtrigger")
+inst.components.health:SetMaxHealth(4400)
 inst.components.healthtrigger:AddTrigger(PHASE2_HEALTH, EnterPhase2Trigger)
 inst.upgrade = "enrage_mutation"
 end
 local function MakeStrong(inst)
-inst.components.health:SetMaxHealth(5000)
+inst.components.health:SetMaxHealth(4500)
 inst.upgrade = "strength_mutation"
-inst:DoTaskInTime(0.1, inst:AddComponent("timer"))
+inst:DoTaskInTime(0.1, function(inst) inst:AddComponent("timer") end)
 if inst.components.healthtrigger ~= nil then
 inst:RemoveComponent("healthtrigger")      --Bandaid fix to attempt to correct the health trigger just getting added anyways
 end
 end
 local function MakeIcey(inst)
-inst.components.health:SetMaxHealth(3500)
+inst.components.health:SetMaxHealth(4250)
 inst.upgrade = "ice_mutation"
+inst:DoTaskInTime(0.1, function(inst) inst:AddComponent("timer")
+inst.components.timer:StartTimer("auratime", 30) end)
+inst:ListenForEvent("timerdone", IceyCheck)
+if inst.components.healthtrigger ~= nil then
+inst:RemoveComponent("healthtrigger")      --Bandaid fix to attempt to correct the health trigger just getting added anyways
+end
+end
+--[[ Save For Tier 2
 inst:AddComponent("timer")
 inst:ListenForEvent("timerdone", FreezeArmor)
-inst.components.timer:StartTimer("freezearmor",0.1)
-end
-
+inst.components.timer:StartTimer("freezearmor",0.1)]]
 ------------
 
 ------------
 local function ChooseUpgrades(inst)
 if inst.upgrades == nil then
+--[[
 if math.random() > 0.5 then
 MakeEnrageable(inst)
 else
 MakeStrong(inst)
-end
+end]]
+MakeIcey(inst)
 else
 			if data.upgrade == "enrage_mutation" then
 			MakeEnrageable(inst)
@@ -149,7 +171,7 @@ local function OnLoad(inst, data)
 			MakeStrong(inst)
 			end
 			if data.upgrade == "ice_mutation" then
-			MakeStrong(inst)
+			MakeIcey(inst)
 			end
 		end
     end

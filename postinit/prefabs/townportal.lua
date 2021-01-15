@@ -66,7 +66,9 @@ local function pickup(inst, channeler)
 		return
 		end
 		if v.components.pickable ~= nil and v.components.pickable:CanBePicked() then  --Pickable stuff
+		channeler:AddTag("channelingpicker")
         v.components.pickable:Pick(channeler)
+		channeler:RemoveTag("channelingpicker")
 		SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
 		inst.channeler.components.sanity:DoDelta(-0.25)   --Can't take too much sanity if the purpose is to use in large farms
 		return
@@ -121,6 +123,7 @@ local function OnStopChanneling(inst, aborted)
 
     if inst.channeler ~= nil and inst.channeler:IsValid() and inst.channeler.components.sanity ~= nil then
         inst.channeler.components.sanity.externalmodifiers:RemoveModifier(inst)
+
     end
 	if inst.task ~= nil then
         inst.task:Cancel()
