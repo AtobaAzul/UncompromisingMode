@@ -22,3 +22,42 @@ FERTILIZER_DEFS.pale_vomit = {nutrients = TUNING.DSTU.PALE_VOMIT_NUTRIENTS}
 for k, v in pairs(MOD_FERTILIZER_DEFS) do
     FERTILIZER_DEFS[k] = v
 end
+
+local function Effects_Stop()
+print("Effects_Stop")
+GLOBAL.TheWorld.components.hayfever_tracker:QueenTrue()
+	GLOBAL.TheWorld:PushEvent("beequeenkilled")
+end
+
+AddShardModRPCHandler("UncompromisingSurvival", "Hayfever_Stop", function()
+
+GLOBAL.TheWorld.components.hayfever_tracker:QueenFalse()
+	GLOBAL.TheWorld:PushEvent("beequeenrespawned")
+end)
+
+local function SendQueenDieRPC()
+print("SendQueenDieRPC")
+	SendModRPCToShard(GetShardModRPC("UncompromisingSurvival", "Hayfever_Stop"))
+end
+
+GLOBAL.TheInput:AddKeyDownHandler(GLOBAL.KEY_V, SendQueenDieRPC)
+
+local function Effects_Start()
+print("Effects_Start")
+
+GLOBAL.TheWorld.components.hayfever_tracker:QueenFalse()
+	GLOBAL.TheWorld:PushEvent("beequeenrespawned")
+end
+
+AddShardModRPCHandler("UncompromisingSurvival", "Hayfever_Start", function()
+GLOBAL.TheWorld.components.hayfever_tracker:QueenFalse()
+	GLOBAL.TheWorld:PushEvent("beequeenrespawned")
+
+end)
+
+local function SendQueenRespawnedRPC()
+print("SendQueenRespawnedRPC")
+	SendModRPCToShard(GetShardModRPC("UncompromisingSurvival", "Hayfever_Start"))
+end
+
+GLOBAL.TheInput:AddKeyDownHandler(GLOBAL.KEY_B, SendQueenRespawnedRPC)
