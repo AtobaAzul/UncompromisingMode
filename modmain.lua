@@ -32,3 +32,26 @@ AddShardModRPCHandler("UncompromisingSurvival", "Hayfever_Start", function(...)
 	print("RPC Hayfever_Start")
 	GLOBAL.TheWorld:PushEvent("beequeenrespawned")
 end)
+
+AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsDeath", function(...)
+	print("RPC DeerclopsDeath")
+	GLOBAL.TheWorld:PushEvent("hasslerkilled")
+end)
+
+AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsRemoved", function(...)
+	print("RPC DeerclopsRemoved")
+	GLOBAL.TheWorld:PushEvent("hasslerremoved")
+end)
+
+AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsStored", function(...)
+	print("RPC DeerclopsStored")
+	GLOBAL.TheWorld:PushEvent("storehassler")
+end)
+--[[
+AddShardModRPCHandler("UncompromisingSurvival", "AcidMushroomsUpdate", function(shard_id, data)
+    GLOBAL.TheWorld:PushEvent("acidmushroomsdirty", {shard_id = shard_id, uuid = data.uuid, targets = data.targets})
+end)
+
+AddShardModRPCHandler("UncompromisingSurvival", "AcidMushroomsTargetFinished", function(shard_id, data)
+    GLOBAL.TheWorld:PushEvent("master_acidmushroomsfinished", data)
+end)]]
