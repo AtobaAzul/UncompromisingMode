@@ -168,14 +168,18 @@ AddPrefabPostInit("dragonflychest", function(inst)
 			if doer ~= nil and doer:HasTag("player") then
 				inst:DoTaskInTime(0, ActiveRaid, doer)
 			end
-		
-			if doer ~= nil and doer:HasTag("raidrat") then
-				if doer.components.health ~= nil then
-					doer.components.health:Kill()
-				end
-			end
 		end
 	end
+	
+	local function killrat(inst, data)
+		data.rat = data.doer or data.worker
+		
+		if data.rat ~= nil and data.rat:HasTag("raidrat") and data.rat.components.health ~= nil then
+			data.rat.components.health:Kill()
+		end
+	end
+	
+    inst:ListenForEvent("worked", killrat)
 	
 	inst.components.container.onclosefn = onclose_raid
 end)
