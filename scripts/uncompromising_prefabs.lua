@@ -1,4 +1,5 @@
 return {
+	"deathstick",
 	"uncompromising_toad",
 	"mushroomsprout_overworld",
 	"sporecloud_toad",
