@@ -62,7 +62,7 @@ local function rock_ice_fn()
     inst.components.workable:SetWorkLeft(12)
 
     inst.components.workable:SetOnWorkCallback(OnWorked)
-
+	inst.persists = false
     inst:AddComponent("inspectable")
     inst.AnimState:PlayAnimation("form")
     inst.AnimState:PushAnimation("full")
