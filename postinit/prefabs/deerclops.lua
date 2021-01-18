@@ -80,9 +80,11 @@ end
 
 local function AuraFreezeEnemies(inst)
 if inst.components.combat.target ~= nil then
+if inst:GetDistanceSqToPoint(inst.components.combat.target:GetPosition()) < 6 then
 inst.sg:GoToState("aurafreeze")
+end
 else
-inst.components.timer:StartTimer("auratime", 30)
+inst.components.timer:StartTimer("auratime", 15)
 end
 end
 local function IceyCheck(inst,data)
@@ -112,7 +114,7 @@ local function MakeIcey(inst)
 inst.components.health:SetMaxHealth(4250)
 inst.upgrade = "ice_mutation"
 inst:DoTaskInTime(0.1, function(inst) inst:AddComponent("timer")
-inst.components.timer:StartTimer("auratime", 30) end)
+inst.components.timer:StartTimer("auratime", 15) end)
 inst:ListenForEvent("timerdone", IceyCheck)
 if inst.components.healthtrigger ~= nil then
 inst:RemoveComponent("healthtrigger")      --Bandaid fix to attempt to correct the health trigger just getting added anyways

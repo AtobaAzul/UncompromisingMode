@@ -193,4 +193,5 @@ return {
 	"snotroast",
 	"bearger_boulder",
 	"nymph",
+	"deerclops_barrier",
 }

@@ -179,9 +179,9 @@ local function CanSpawnSpikeAt(pos, size)
     return true
 end
 local function SpawnBlock(inst, x, z)
-	local blockade = SpawnPrefab("rock_ice")
+	local blockade = SpawnPrefab("deerclops_barrier")
     blockade.Transform:SetPosition(x, 0, z)
-	blockade:DoTaskInTime(9,function(blockade) blockade:Remove() end)
+	blockade:DoTaskInTime(17,function(blockade) blockade:RemoveIt(blockade) end)
 	
 end
 local function SpawnBlocks(inst, pos, count)
@@ -207,6 +207,15 @@ local function FreezeEverything(inst)
 	if inst.components.combat.target ~= nil then
 	local target = inst.components.combat.target
 	inst:ForceFacePoint(target.Transform:GetWorldPosition())
+			local aura = SpawnPrefab("deer_ice_circle")
+			local x, y, z = inst.Transform:GetWorldPosition()
+			local theta = inst.Transform:GetRotation()*DEGREES
+			x = x + 2*math.cos(theta)
+			z = z - 2*math.sin(theta)
+			aura.Transform:SetPosition(x,y,z)
+			aura:DoTaskInTime(8, function(aura) aura:TriggerFX() end)
+			aura:DoTaskInTime(15, aura.KillFX)
+		
 	local side = math.random(-1,1)
 	side = 0
 		for i = 1,2 do
@@ -221,7 +230,8 @@ local function FreezeEverything(inst)
 			x = x + 5*i*math.cos(theta)
 			z = z - 5*i*math.sin(theta)
 			aura.Transform:SetPosition(x,y,z)
-			aura:DoTaskInTime(6, aura.KillFX)
+			aura:DoTaskInTime(8, function(aura) aura:TriggerFX() end)
+			aura:DoTaskInTime(15, aura.KillFX)
 			end
 		end
 		end
@@ -246,9 +256,14 @@ end
 local function IceAttackBank(inst,data)
 if inst.components.health ~= nil and not inst.components.health:IsDead()
             and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("hit")) then
+if inst.components.timer ~= nil and not inst.components.timer:TimerExists("auratime") then
+inst.sg:GoToState("aurafreeze")
+else
 inst.sg:GoToState("attack")
 end
 end
+end
+
 local events =
 {	
     EventHandler("doattack", function(inst, data)
@@ -409,7 +424,7 @@ local states = {
             end),
             TimeEvent(150 * FRAMES, function(inst)
                 inst.sg:GoToState("idle")
-			inst.components.timer:StartTimer("auratime", 30)
+			inst.components.timer:StartTimer("auratime", 15)
             end),
         },
 
