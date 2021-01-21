@@ -82,10 +82,7 @@ local function AuraFreezeEnemies(inst)
 if inst.components.combat.target ~= nil then
 if inst:GetDistanceSqToPoint(inst.components.combat.target:GetPosition()) < 6 then
 inst.sg:GoToState("aurafreeze_pre")
-inst:DoTaskInTime(15,function(inst) inst.AnimState:PlayAnimation("fortresscast_pst")
-inst.sg:GoToState("idle")
-inst.components.timer:StartTimer("auratime", 15)
-end)
+inst:DoTaskInTime(10,function(inst) inst.sg:GoToState("aurafreeze_pst") end)
 end
 else
 inst.components.timer:StartTimer("auratime", 15)

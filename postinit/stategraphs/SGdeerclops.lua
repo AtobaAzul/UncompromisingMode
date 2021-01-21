@@ -213,8 +213,8 @@ local function FreezeEverything(inst)
 			x = x + 2*math.cos(theta)
 			z = z - 2*math.sin(theta)
 			aura.Transform:SetPosition(x,y,z)
-			aura:DoTaskInTime(8, function(aura) aura:TriggerFX() end)
-			aura:DoTaskInTime(15, aura.KillFX)
+			aura:DoTaskInTime(5, function(aura) aura:TriggerFX() end)
+			aura:DoTaskInTime(10, aura.KillFX)
 		
 	local side = math.random(-1,1)
 	side = 0
@@ -230,8 +230,8 @@ local function FreezeEverything(inst)
 			x = x + 5*i*math.cos(theta)
 			z = z - 5*i*math.sin(theta)
 			aura.Transform:SetPosition(x,y,z)
-			aura:DoTaskInTime(8, function(aura) aura:TriggerFX() end)
-			aura:DoTaskInTime(15, aura.KillFX)
+			aura:DoTaskInTime(5, function(aura) aura:TriggerFX() end)
+			aura:DoTaskInTime(10, aura.KillFX)
 			end
 		end
 		end
@@ -258,10 +258,7 @@ if inst.components.health ~= nil and not inst.components.health:IsDead()
             and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("hit")) then
 if inst.components.timer ~= nil and not inst.components.timer:TimerExists("auratime") then
 inst.sg:GoToState("aurafreeze_pre")
-inst:DoTaskInTime(15,function(inst) inst.AnimState:PlayAnimation("fortresscast_pst")
-inst.sg:GoToState("idle")
-inst.components.timer:StartTimer("auratime", 15)
-end)
+inst:DoTaskInTime(10,function(inst) inst.sg:GoToState("aurafreeze_pst") end)
 else
 inst.sg:GoToState("attack")
 end
@@ -284,11 +281,11 @@ local events =
 	EventHandler("attacked", function(inst, data)
     if inst.components.health ~= nil and
         not inst.components.health:IsDead() and
-       (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("frozen")) then
+       ((not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("frozen")) or inst.sg:HasStateTag("aurafreeze")) then
 
 		if inst.sg:HasStateTag("aurafreeze") then
 		inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/taunt_grrr")
-		inst.AnimState:PlayAnimation("fortresscast_hit")
+		inst.sg:GoToState("aurafreeze_hit")
 		else
         inst.sg:GoToState("hit")
 		end
@@ -449,6 +446,36 @@ local states = {
 
     },	
 	State{
+        name = "aurafreeze_pst",
+        tags = { "busy",},
+
+        onenter = function(inst)
+            inst.Physics:Stop()
+			inst.AnimState:PlayAnimation("fortresscast_pst")
+			inst.components.timer:StartTimer("auratime", 15)
+        end,
+
+
+
+        timeline =
+        {
+            TimeEvent(5 * FRAMES, function(inst)
+				
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/taunt_grrr")
+            end),
+            TimeEvent(16 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/taunt_howl")
+            end),
+        },
+
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
+
+
+    },	
+	State{
         name = "aurafreeze",
         tags = { "busy", "aurafreeze" },
 
@@ -476,7 +503,34 @@ local states = {
 
 
     },
-	
+	State{
+        name = "aurafreeze_hit",
+        tags = { "busy",},
+
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PushAnimation("fortresscast_hit")
+
+
+        end,
+
+
+
+        timeline =
+        {
+          
+            --[[TimeEvent(16 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/taunt_howl")
+            end),]]
+        },
+
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("aurafreeze") end),
+        },
+
+
+    },	
 	State{
         name = "taunt",
         tags = { "busy" },
