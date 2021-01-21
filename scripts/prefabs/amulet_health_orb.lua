@@ -64,7 +64,7 @@ local function fn()
     inst.components.playerprox:SetDist(2, 3) --set specific values
     inst.components.playerprox:SetOnPlayerNear(onnear)
 	
-    inst:AddComponent("inspectable")
+    --inst:AddComponent("inspectable")
 	
     inst.OnEntityWake = OnEntityWake
 	
