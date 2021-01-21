@@ -28,8 +28,6 @@ local function SpawnRaid(inst)
 				--GLOBAL.TheWorld:DoTaskInTime(9600 + math.random(4800), CooldownRaid)
 				GLOBAL.TheWorld:PushEvent("ratcooldown", inst)
 				--GLOBAL.TheWorld.components.ratcheck:StartTimer()
-			else
-				inst:DoTaskInTime(0, SpawnRaid)
 			end
 		end
 	else
@@ -41,8 +39,6 @@ local function SpawnRaid(inst)
 			--GLOBAL.TheWorld:DoTaskInTime(9600 + math.random(4800), CooldownRaid)
 			GLOBAL.TheWorld:PushEvent("ratcooldown", inst)
 			--GLOBAL.TheWorld.components.ratcheck:StartTimer()
-		else
-			inst:DoTaskInTime(0, SpawnRaid)
 		end
 	end
 end
@@ -53,6 +49,13 @@ local function SoundRaid(inst)
 		inst.SoundEmitter:SetParameter("ratwarning", "size", ratwarning)
 		inst:DoTaskInTime(math.random(10 / ratwarning, 15 / ratwarning), SoundRaid)
 	end
+end
+
+local function IsEligible(doer)
+	local area = doer.components.areaaware
+	return GLOBAL.TheWorld.Map:IsVisualGroundAtPoint(doer.Transform:GetWorldPosition())
+			and area:GetCurrentArea() ~= nil 
+			and not area:CurrentlyInTag("nohasslers")
 end
 
 local function StartRaid(inst)
@@ -68,26 +71,19 @@ local function StartRaid(inst)
 	end
 	if ratwarning == 3 then
 		for i, v in ipairs(players) do
-			v.components.talker:Say(GLOBAL.GetString(v, "ANNOUNCE_RATRAID"))
+			if not IsEligible(v) then
+				v.components.talker:Say(GLOBAL.GetString(v, "ANNOUNCE_RATRAID"))
+			end
 		end
 	end
 	if ratwarning == 10 then
 		inst:DoTaskInTime(1, SpawnRaid)
-		for i, v in ipairs(players) do
-			v.components.talker:Say(GLOBAL.GetString(v, "ANNOUNCE_RATRAID_SPAWN"))
-		end
 		ratwarning = nil
 	else
 		inst:DoTaskInTime(math.random(3, 6), StartRaid)
 	end
 	
 	print("Rat Raid Warning :", ratwarning)
-end
-local function IsEligible(doer)
-	local area = doer.components.areaaware
-	return GLOBAL.TheWorld.Map:IsVisualGroundAtPoint(doer.Transform:GetWorldPosition())
-			and area:GetCurrentArea() ~= nil 
-			and not area:CurrentlyInTag("nohasslers")
 end
 
 local function ActiveRaid(inst, doer)
