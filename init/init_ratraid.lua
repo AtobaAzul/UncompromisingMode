@@ -18,7 +18,21 @@ end
 local function SpawnRaid(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local players = GLOBAL.FindPlayersInRange(x, y, z, 50)
-	for i, v in ipairs(players) do
+	if players ~= nil then
+		for i, v in ipairs(players) do
+			local raid = GLOBAL.SpawnPrefab("uncompromising_ratherd")
+			local x2 = x + math.random(-10, 10)
+			local z2 = z + math.random(-10, 10)
+			if GLOBAL.TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+				raid.Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
+				--GLOBAL.TheWorld:DoTaskInTime(9600 + math.random(4800), CooldownRaid)
+				GLOBAL.TheWorld:PushEvent("ratcooldown", inst)
+				--GLOBAL.TheWorld.components.ratcheck:StartTimer()
+			else
+				inst:DoTaskInTime(0, SpawnRaid)
+			end
+		end
+	else
 		local raid = GLOBAL.SpawnPrefab("uncompromising_ratherd")
 		local x2 = x + math.random(-10, 10)
 		local z2 = z + math.random(-10, 10)
@@ -154,14 +168,18 @@ AddPrefabPostInit("dragonflychest", function(inst)
 			if doer ~= nil and doer:HasTag("player") then
 				inst:DoTaskInTime(0, ActiveRaid, doer)
 			end
-		
-			if doer ~= nil and doer:HasTag("raidrat") then
-				if doer.components.health ~= nil then
-					doer.components.health:Kill()
-				end
-			end
 		end
 	end
+	
+	local function killrat(inst, data)
+		data.rat = data.doer or data.worker
+		
+		if data.rat ~= nil and data.rat:HasTag("raidrat") and data.rat.components.health ~= nil then
+			data.rat.components.health:Kill()
+		end
+	end
+	
+    inst:ListenForEvent("worked", killrat)
 	
 	inst.components.container.onclosefn = onclose_raid
 end)
