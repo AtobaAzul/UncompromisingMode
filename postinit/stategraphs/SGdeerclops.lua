@@ -257,7 +257,11 @@ local function IceAttackBank(inst,data)
 if inst.components.health ~= nil and not inst.components.health:IsDead()
             and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("hit")) then
 if inst.components.timer ~= nil and not inst.components.timer:TimerExists("auratime") then
-inst.sg:GoToState("aurafreeze")
+inst.sg:GoToState("aurafreeze_pre")
+inst:DoTaskInTime(15,function(inst) inst.AnimState:PlayAnimation("fortresscast_pst")
+inst.sg:GoToState("idle")
+inst.components.timer:StartTimer("auratime", 15)
+end)
 else
 inst.sg:GoToState("attack")
 end
@@ -276,6 +280,19 @@ local events =
 	if inst.upgrade == "ice_mutation" then
 	IceAttackBank(inst,data)
 	end
+    end),
+	EventHandler("attacked", function(inst, data)
+    if inst.components.health ~= nil and
+        not inst.components.health:IsDead() and
+       (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("frozen")) then
+
+		if inst.sg:HasStateTag("aurafreeze") then
+		inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/taunt_grrr")
+		inst.AnimState:PlayAnimation("fortresscast_hit")
+		else
+        inst.sg:GoToState("hit")
+		end
+    end
     end),
 }
 
@@ -400,15 +417,13 @@ local states = {
             end
         end,
     },
-	
 	State{
-        name = "aurafreeze",
-        tags = { "busy" },
+        name = "aurafreeze_pre",
+        tags = { "busy",},
 
         onenter = function(inst)
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("taunt",true)
-
+			inst.AnimState:PlayAnimation("fortresscast_pre")
         end,
 
 
@@ -416,23 +431,48 @@ local states = {
         timeline =
         {
             TimeEvent(5 * FRAMES, function(inst)
-				FreezeEverything(inst)
+				
                 inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/taunt_grrr")
             end),
             TimeEvent(16 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/taunt_howl")
             end),
-            TimeEvent(150 * FRAMES, function(inst)
-                inst.sg:GoToState("idle")
-			inst.components.timer:StartTimer("auratime", 15)
-            end),
         },
 
-        --[[events =
+        events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle")
-			inst.components.timer:StartTimer("auratime", 30) end),
-        },]]
+            EventHandler("animover", function(inst) inst.sg:GoToState("aurafreeze")
+			FreezeEverything(inst)
+			end),
+        },
+
+
+    },	
+	State{
+        name = "aurafreeze",
+        tags = { "busy", "aurafreeze" },
+
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PushAnimation("fortresscast_loop")
+
+
+        end,
+
+
+
+        timeline =
+        {
+          
+            --[[TimeEvent(16 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/taunt_howl")
+            end),]]
+        },
+
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("aurafreeze") end),
+        },
 
 
     },
