@@ -52,7 +52,7 @@ end
 function self:InitializeNests()
 	--print("MooseSpawner - InitializeNests")
 	local camps = FindCamps()
-	local num_to_spawn = math.ceil(#camps * _walrusdensity)
+	local num_to_spawn = 1--math.ceil(#camps * _walrusdensity)
 	_seasonalcamps = PickSome(num_to_spawn, camps)
 
 	for _, camp in ipairs(_seasonalcamps) do
