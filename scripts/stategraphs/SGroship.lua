@@ -248,7 +248,8 @@ CommonStates.AddSleepStates(states,
     },
     
 	sleeptimeline = {
-        TimeEvent(18*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/sleep") end),
+        TimeEvent(18*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/bishop_nightmare/sleep")
+		inst.SoundEmitter:PlaySound("dontstarve/creatures/rook_nightmare/sleep") end),
 	},
 })
 CommonStates.AddFrozenStates(states)

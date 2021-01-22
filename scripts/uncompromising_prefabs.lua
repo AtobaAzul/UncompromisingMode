@@ -195,4 +195,5 @@ return {
 	"bearger_boulder",
 	"nymph",
 	"deerclops_barrier",
+	"roship_projectile",
 }

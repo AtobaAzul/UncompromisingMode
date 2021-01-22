@@ -4,12 +4,19 @@ local easing = require("easing")
 
 SetSharedLootTable('roship',
 {
-    {'gears',     1.0},
-    {'gears',     1.0},
+    {'gears',     0.5},
     {'nightmarefuel',    0.6},
     {'thulecite_pieces', 0.5},
-    {'trinket_6', 1.0},
-    {'trinket_6', 1.0},
+    {'trinket_6',      1.00},
+    {'trinket_6',      0.55},
+    {'trinket_1',      0.25},
+    {'gears',          0.25},
+    {'redgem',         0.25},
+    {"greengem" ,      0.05},
+    {"yellowgem",      0.05},
+    {"purplegem",      0.05},
+    {"orangegem",      0.05},
+    {"thulecite",      0.01},
 })
 
 local SHARE_TARGET_DIST = 30
@@ -38,15 +45,15 @@ end
 local function OnAttacked(inst, data)
     clockwork_common.OnAttacked(inst, data)
 end
-local function SnowballBelch(inst, target)
+local function Zapp(inst, target)
 	if target ~= nil then
     local x, y, z = inst.Transform:GetWorldPosition()
-    local projectile = SpawnPrefab("snowball_throwable")
+    local projectile = SpawnPrefab("roship_projectile")
     projectile.Transform:SetPosition(x, y, z)
     local a, b, c = target.Transform:GetWorldPosition()
 	local targetpos = target:GetPosition()
-	targetpos.x = targetpos.x + math.random(-3,3)
-	targetpos.z = targetpos.z + math.random(-3,3)
+	targetpos.x = targetpos.x + math.random(-1,1)
+	targetpos.z = targetpos.z + math.random(-1,1)
     local dx = a - x
     local dz = c - z
     local rangesq = dx * dx + dz * dz
@@ -54,17 +61,16 @@ local function SnowballBelch(inst, target)
     local bigNum = 10
     local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
 	projectile:AddTag("canthit")
-	--projectile.components.wateryprotection.addwetness = TUNING.WATERBALLOON_ADD_WETNESS/2
     projectile.components.complexprojectile:SetHorizontalSpeed(speed+math.random(4,9))
     projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 	end
 end
 local function DoSnowballBelch(inst)
-local maxsnow =  math.floor(math.random(8,12))
+local maxsnow =  1
 for k = 1, maxsnow do
    if inst.components.combat.target ~= nil then
    local target = inst.components.combat.target
-   inst:DoTaskInTime(FRAMES+math.random()*0.1, SnowballBelch, target)
+   inst:DoTaskInTime(FRAMES+math.random()*0.1, Zapp, target)
    end
 end
 end
@@ -104,7 +110,7 @@ local function fn(Sim)
     
     ---------------------            
     --MakeMediumBurnableCharacter(inst, "torso")
-    MakeMediumFreezableCharacter(inst, "knight_spring")    
+    MakeMediumFreezableCharacter(inst, "rook_head")    
     --inst.components.burnable.flammability = 0.33
     ---------------------       
     
@@ -125,6 +131,7 @@ local function fn(Sim)
     inst.components.combat:SetAttackPeriod(TUNING.BISHOP_ATTACK_PERIOD)
     inst.components.combat:SetRange(TUNING.BISHOP_ATTACK_DIST*2)
     inst.components.combat:SetRetargetFunction(1, NormalRetarget)
+	inst.components.combat:SetDefaultDamage(40)
     ------------------
     
     ------------------

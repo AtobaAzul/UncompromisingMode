@@ -12,12 +12,19 @@ local prefabs =
 }
 SetSharedLootTable('bight',
 {
-    {'gears',     1.0},
-    {'gears',     1.0},
+    {'gears',     0.5},
     {'nightmarefuel',    0.6},
     {'thulecite_pieces', 0.5},
-    {'trinket_6', 1.0},
-    {'trinket_6', 1.0},
+    {'trinket_6',      1.00},
+    {'trinket_6',      0.55},
+    {'trinket_1',      0.25},
+    {'gears',          0.25},
+    {'redgem',         0.25},
+    {"greengem" ,      0.05},
+    {"yellowgem",      0.05},
+    {"purplegem",      0.05},
+    {"orangegem",      0.05},
+    {"thulecite",      0.01},
 })
 
 local SHARE_TARGET_DIST = 30
@@ -198,7 +205,7 @@ local function fn(Sim)
 	inst:ListenForEvent("attacked", OnAttacked)    
     inst:SetStateGraph("SGbight")
     inst:SetBrain(brain)
-	inst.sg:GoToState("zombie")
+	inst.sg:GoToState("waken")
 	inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", OnTimerDone)	
 	inst.components.timer:StartTimer("electrify", TUNING.STALKER_FIRST_CHANNELERS_CD)
