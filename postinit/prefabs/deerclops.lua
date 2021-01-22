@@ -136,7 +136,7 @@ MakeEnrageable(inst)
 else
 MakeStrong(inst)
 end]]
-MakeEnrageable(inst)
+MakeIcey(inst)
 else
 			if data.upgrade == "enrage_mutation" then
 			MakeEnrageable(inst)
