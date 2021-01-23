@@ -347,6 +347,9 @@ Assets = {
 	Asset("ANIM", "anim/bight.zip"),
 	Asset("ANIM", "anim/knook.zip"),
 	Asset("ANIM", "anim/roship.zip"),
+	Asset("ANIM", "anim/roship_attack.zip"),
+	Asset("ANIM", "anim/electric_explosion.zip"),
+	Asset("ANIM", "anim/electric_explosion_fx.zip"),
 	
 	Asset("ANIM", "anim/deerclops_mutation_anims.zip"),
 	Asset("ANIM", "anim/deerclops_barrier.zip"),

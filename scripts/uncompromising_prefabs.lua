@@ -196,4 +196,5 @@ return {
 	"nymph",
 	"deerclops_barrier",
 	"roship_projectile",
+	"electric_ring",
 }
