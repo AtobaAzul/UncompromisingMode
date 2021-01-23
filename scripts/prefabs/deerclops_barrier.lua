@@ -1,3 +1,7 @@
+require "prefabutil"
+local function Melt(inst)
+inst._puddle.AnimState:PlayAnimation("dryup")
+end
 local function OnWorked(inst, worker, workleft)
 	if workleft > 8 then
 	inst.AnimState:PlayAnimation("full")
@@ -10,7 +14,9 @@ local function OnWorked(inst, worker, workleft)
 	end
     if workleft <= 0 then
             inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/iceboulder_smash")
-			inst:Remove()
+			inst.AnimState:PlayAnimation("break")
+			inst.Physics:ClearCollisionMask()
+			inst:DoTaskInTime(4,function(inst) ErodeAway(inst) end)
     end
 end
 local function RemoveIt(inst)
@@ -24,9 +30,13 @@ local function RemoveIt(inst)
 		if inst.components.workable.workleft < 4 then
 		inst.AnimState:PlayAnimation("melt_weak")
 		end
-		inst:DoTaskInTime(0.25,function(inst) inst:Remove() end)
+		inst.Physics:ClearCollisionMask()
+		inst.AnimState:PushAnimation("break")
+		inst:DoTaskInTime(4,function(inst) ErodeAway(inst) end)
 	else
-		inst:Remove()
+		inst.Physics:ClearCollisionMask()
+		inst.AnimState:PlayAnimation("break")
+		inst:DoTaskInTime(4,function(inst) ErodeAway(inst) end)
 	end
 end
 local function rock_ice_fn()
@@ -51,10 +61,9 @@ local function rock_ice_fn()
 
 
     inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
+        if not TheWorld.ismastersim then
+            return inst
+        end
 
 
     inst:AddComponent("workable")

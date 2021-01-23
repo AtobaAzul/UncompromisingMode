@@ -213,14 +213,14 @@ local function FreezeEverything(inst)
 			x = x + 2*math.cos(theta)
 			z = z - 2*math.sin(theta)
 			aura.Transform:SetPosition(x,y,z)
-			aura:DoTaskInTime(5, function(aura) aura:TriggerFX() end)
-			aura:DoTaskInTime(10, aura.KillFX)
+			aura:DoTaskInTime(3, function(aura) aura:TriggerFX() end)
+			aura:DoTaskInTime(7, aura.KillFX)
 		
 	local side = math.random(-1,1)
 	side = 0
 		for i = 1,2 do
 		if i == 2 then
-		SpawnBlocks(inst, inst:GetPosition(), 19)
+
 		else
 			for n = 1,5 do
 			local aura = SpawnPrefab("deer_ice_circle")
@@ -230,8 +230,8 @@ local function FreezeEverything(inst)
 			x = x + 5*i*math.cos(theta)
 			z = z - 5*i*math.sin(theta)
 			aura.Transform:SetPosition(x,y,z)
-			aura:DoTaskInTime(5, function(aura) aura:TriggerFX() end)
-			aura:DoTaskInTime(10, aura.KillFX)
+			aura:DoTaskInTime(3, function(aura) aura:TriggerFX() end)
+			aura:DoTaskInTime(7, aura.KillFX)
 			end
 		end
 		end
@@ -258,7 +258,7 @@ if inst.components.health ~= nil and not inst.components.health:IsDead()
             and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("hit")) then
 if inst.components.timer ~= nil and not inst.components.timer:TimerExists("auratime") then
 inst.sg:GoToState("aurafreeze_pre")
-inst:DoTaskInTime(10,function(inst) inst.sg:GoToState("aurafreeze_pst") end)
+inst:DoTaskInTime(7,function(inst) inst.sg:GoToState("aurafreeze_pst") end)
 else
 inst.sg:GoToState("attack")
 end
@@ -421,6 +421,8 @@ local states = {
         onenter = function(inst)
             inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("fortresscast_pre")
+			SpawnBlocks(inst, inst:GetPosition(), 19)
+			FreezeEverything(inst)
         end,
 
 
@@ -439,7 +441,7 @@ local states = {
         events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("aurafreeze")
-			FreezeEverything(inst)
+			
 			end),
         },
 

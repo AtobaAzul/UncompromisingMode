@@ -172,6 +172,7 @@ STRINGS = GLOBAL.STRINGS.NAMES
 	STRINGS.LICELOAF = "Liceloaf" --For the cookbook
 	STRINGS.TURF_HOODEDMOSS = "Mossy Forest Turf"
 	STRINGS.TURF_ANCIENTHOODEDTURF = "Ancient Hooded Turf"
+	STRINGS.DEERCLOPS_BARRIER = "Glacial Wall"
 	
 	
 	-- Blowgun stuff
