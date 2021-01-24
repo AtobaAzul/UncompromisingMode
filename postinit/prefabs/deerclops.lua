@@ -83,6 +83,8 @@ if inst.components.combat.target ~= nil then
 if inst:GetDistanceSqToPoint(inst.components.combat.target:GetPosition()) < 4 then
 inst.sg:GoToState("aurafreeze_pre")
 inst:DoTaskInTime(7,function(inst) inst.sg:GoToState("aurafreeze_pst") end)
+else
+inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE * 0.6)
 end
 else
 inst.components.timer:StartTimer("auratime", 15)

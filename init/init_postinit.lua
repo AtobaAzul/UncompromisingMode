@@ -17,6 +17,7 @@ local component_post = {
 	"sleepingbaguser",
 	"hounded",
 	"dynamicmusic",
+	"sleeper",
 }
 
 local prefab_post = {
