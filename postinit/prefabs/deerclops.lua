@@ -114,6 +114,9 @@ end
 local function MakeIcey(inst)
 inst.components.health:SetMaxHealth(4250)
 inst.upgrade = "ice_mutation"
+if inst.components.freezable ~= nil then
+inst:RemoveComponent("freezable")
+end
 inst:DoTaskInTime(0.1, function(inst) inst:AddComponent("timer")
 inst.components.timer:StartTimer("auratime", 15) end)
 inst:ListenForEvent("timerdone", IceyCheck)

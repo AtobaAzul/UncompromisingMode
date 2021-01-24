@@ -167,7 +167,7 @@ local function EnrageAttackBank(inst,data)
 end
 local function CanSpawnSpikeAt(pos, size)
     local radius = 1.1
-    for i, v in ipairs(TheSim:FindEntities(pos.x, 0, pos.z, radius + 1.5, nil, { "antlion_sinkhole" }, { "groundspike", "antlion_sinkhole_blocker" })) do
+    for i, v in ipairs(TheSim:FindEntities(pos.x, 0, pos.z, radius + 1.5, nil, { "antlion_sinkhole" }, { "groundspike" })) do
         if v.Physics == nil then
             return false
         end
@@ -416,9 +416,10 @@ local states = {
     },
 	State{
         name = "aurafreeze_pre",
-        tags = { "busy",},
+        tags = { "busy"},
 
         onenter = function(inst)
+			inst.components.sleeper:SetResistance(400)
             inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("fortresscast_pre")
 			SpawnBlocks(inst, inst:GetPosition(), 19)
@@ -449,7 +450,7 @@ local states = {
     },	
 	State{
         name = "aurafreeze_pst",
-        tags = { "busy",},
+        tags = { "busy"},
 
         onenter = function(inst)
             inst.Physics:Stop()
@@ -472,14 +473,15 @@ local states = {
 
         events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst) inst.components.sleeper:SetResistance(4)
+			inst.sg:GoToState("idle") end),
         },
 
 
     },	
 	State{
         name = "aurafreeze",
-        tags = { "busy", "aurafreeze" },
+        tags = { "busy", "aurafreeze", "nosleep" },
 
         onenter = function(inst)
             inst.Physics:Stop()
