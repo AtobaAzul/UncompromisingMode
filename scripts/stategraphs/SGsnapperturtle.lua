@@ -26,7 +26,7 @@ local events =
     EventHandler("death", function(inst) inst.sg:GoToState("death", inst.sg.statemem.dead) end),
     EventHandler("doattack", function(inst, data) 
 	if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
-		if not (inst.components.timer ~= nil and inst.components.timer:TimerExists("dospin")) then
+		if not (inst.components.timer == nil or inst.components.timer:TimerExists("dospin")) then
         inst.sg:GoToState("speen_pre", data.target)
 		else
 		inst.sg:GoToState("attack", data.target) 
@@ -70,6 +70,11 @@ local states =
             inst.Physics:Stop()
             inst.components.combat:StartAttack()
             inst.AnimState:PlayAnimation("atk")
+			if inst.components.timer == nil then
+			inst:AddComponent("timer")
+			inst.components.timer:StartTimer("dospin", TUNING.DEERCLOPS_ATTACK_PERIOD*2) --Placeholder time constant
+			inst:ListenForEvent("timerdone", IsSpeenDone)
+			end
         end,
 
         timeline =
