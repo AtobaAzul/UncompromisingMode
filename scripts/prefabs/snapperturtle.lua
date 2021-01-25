@@ -24,7 +24,7 @@ local sounds =
 
 SetSharedLootTable('snapperturtle',
 {
-    {'fishmeat', 1.000},
+    {'meat', 1.000},
 })
 
 
@@ -116,7 +116,13 @@ local function RetargetFn(inst)
 	end
 end
 
-
+local function AuraTest(inst)
+if inst.sg:HasStateTag("speen") then
+return true
+else
+return false
+end
+end
 
 
 
@@ -134,11 +140,12 @@ local function fncommon(n, build, morphlist, custombrain, tag, data)
     MakeCharacterPhysics(inst, 10, .5)
 
     inst.DynamicShadow:SetSize(2.5, 1.5)
-    inst.Transform:SetSixFaced()
+    inst.Transform:SetFourFaced()
 
     inst:AddTag("scarytoprey")
     inst:AddTag("scarytooceanprey")
 	inst:AddTag("snappingturtle")
+	inst:AddTag("creatureknockbackable")
     if tag ~= nil then
         inst:AddTag(tag)
 
@@ -160,13 +167,12 @@ local function fncommon(n, build, morphlist, custombrain, tag, data)
     inst.sounds = sounds
 
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-    inst.components.locomotor.runspeed = TUNING.HOUND_SPEED/3
 	inst.components.locomotor.walkspeed = TUNING.HOUND_SPEED/6
 
     inst:SetStateGraph("SGsnapperturtle")
 
 		inst:AddComponent("embarker")
-		inst.components.embarker.embark_speed = inst.components.locomotor.runspeed
+		inst.components.embarker.embark_speed = inst.components.locomotor.walkspeed
         inst.components.embarker.antic = true
 
 	    inst.components.locomotor:SetAllowPlatformHopping(true)
@@ -226,6 +232,11 @@ local function fncommon(n, build, morphlist, custombrain, tag, data)
     inst:ListenForEvent("newcombattarget", OnNewTarget)
 
 	inst:AddComponent("knownlocations")
+	
+    inst:AddComponent("aura")
+    inst.components.aura.radius = TUNING.GHOST_RADIUS
+    inst.components.aura.tickperiod = TUNING.GHOST_DMG_PERIOD
+    inst.components.aura.auratestfn = AuraTest
 	
     MakeHauntablePanic(inst)
 

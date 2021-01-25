@@ -105,8 +105,8 @@ local function californiaking_extend(inst, target)
 end
 
 local function californiaking_detach(inst, target)
-if target:HasTag("foodknockbackimmune") then
-target:RemoveTag("foodknockbackimmune")
+if target:HasTag("californiaking") then
+target:RemoveTag("californiaking")
 end
 end
 

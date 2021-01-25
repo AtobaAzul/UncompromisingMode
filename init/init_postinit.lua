@@ -160,6 +160,7 @@ local brain_post = {
 	"frog",
 	"spiderqueen",
 	"chester",
+	"mossling",
 }
 
 modimport("postinit/sim")
