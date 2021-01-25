@@ -135,21 +135,24 @@ inst.components.timer:StartTimer("freezearmor",0.1)]]
 ------------
 local function ChooseUpgrades(inst)
 if inst.upgrades == nil then
---[[
-if math.random() > 0.5 then
+local chance = math.random()
+if chance < 0.33 then
 MakeEnrageable(inst)
-else
+end
+if chance >= 0.33 and chance <= 0.66 then
 MakeStrong(inst)
-end]]
+end
+if chance > 0.66 then
 MakeIcey(inst)
+end
 else
-			if data.upgrade == "enrage_mutation" then
+			if inst.upgrade == "enrage_mutation" then
 			MakeEnrageable(inst)
 			end
-			if data.upgrade == "strength_mutation" then
+			if inst.upgrade == "strength_mutation" then
 			MakeStrong(inst)
 			end
-			if data.upgrade == "ice_mutation" then
+			if inst.upgrade == "ice_mutation" then
 			MakeStrong(inst)
 			end
 end

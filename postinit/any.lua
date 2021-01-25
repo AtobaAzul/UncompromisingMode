@@ -42,6 +42,23 @@ local IMPASSABLES = {
 	["spiderden_3"] = true,
 }
 local IMPASSABLES_STATUES = {
+	["carrot_oversized"] = true,
+	["onion_oversized"] = true,
+	["garlic_oversized"] = true,
+	["tomato_oversized"] = true,
+	["potato_oversized"] = true,
+	["pomegranate_oversized"] = true,
+	["watermelon_oversized"] = true,
+	["pumpkin_oversized"] = true,
+	["pepper_oversized"] = true,
+	["corn_oversized"] = true,
+	["durian_oversized"] = true,
+	["eggplant_oversized"] = true,
+	["asparagus_oversized"] = true,
+	["dragonfruit_oversized"] = true,
+	
+	["chesspiece_hornucopia"] = true,
+	["chesspiece_pipe"] = true,
     ["chesspiece_pawn"] = true,
     ["chesspiece_rook"] = true,
     ["chesspiece_knight"] = true,
@@ -65,6 +82,7 @@ local IMPASSABLES_STATUES = {
 	["chesspiece_ancientFuelweaver"] = true,
 	["chesspiece_malbatross"] = true,
 	["chesspiece_crabking"] = true,
+	
 }
 env.AddPrefabPostInitAny(function(inst)
     if IMPASSABLES[inst.prefab] and inst.Physics ~= nil then
