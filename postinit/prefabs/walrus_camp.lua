@@ -35,10 +35,12 @@ data.chosen = inst.chosen
 end
 _onsave(inst,data)
 end
-local function onsave(inst,data)
-if data.chosen ~= nil then
+local function onload(inst,data)
+if data ~= nil and data.chosen ~= nil then
 inst.chosen = data.chosen
 end
-_onsave(inst,data)
+_onload(inst,data)
 end
+inst.OnLoad = onload
+inst.OnSave = onsave
 end)
