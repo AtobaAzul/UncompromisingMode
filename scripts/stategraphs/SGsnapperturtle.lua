@@ -5,15 +5,45 @@ local actionhandlers =
     ActionHandler(ACTIONS.EAT, "eat"),
 }
 
+local function IsSpeenDone(inst,data)
+if data ~= nil and data.name == "speendone" then
+inst.sg:GoToState("speen_pst")
+end
+end
+
+local function GetHomeLocation(inst)
+    local home = GetHome(inst)
+    return home ~= nil and home:GetPosition() or nil
+end
+
 local events =
 {
     EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),
+	
+	
+	
+	
     EventHandler("death", function(inst) inst.sg:GoToState("death", inst.sg.statemem.dead) end),
-    EventHandler("doattack", function(inst, data) if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then inst.sg:GoToState("attack", data.target) end end),
+    EventHandler("doattack", function(inst, data) 
+	if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
+		if not (inst.components.timer == nil or inst.components.timer:TimerExists("dospin")) then
+        inst.sg:GoToState("speen_pre", data.target)
+		else
+		inst.sg:GoToState("attack", data.target) 
+		end
+	end
+	end),
     CommonHandlers.OnSleep(),
     CommonHandlers.OnHop(),
-    CommonHandlers.OnLocomote(true, true),
+    CommonHandlers.OnLocomote(false, true),
     CommonHandlers.OnFreeze(),
+    EventHandler("knockback", function(inst, data)
+        if not inst.components.health:IsDead() then
+                inst.sg:GoToState("knockback", data)
+           
+        end
+    end),
+
 }
 
 
@@ -40,6 +70,11 @@ local states =
             inst.Physics:Stop()
             inst.components.combat:StartAttack()
             inst.AnimState:PlayAnimation("atk")
+			if inst.components.timer == nil then
+			inst:AddComponent("timer")
+			inst.components.timer:StartTimer("dospin", TUNING.DEERCLOPS_ATTACK_PERIOD*2) --Placeholder time constant
+			inst:ListenForEvent("timerdone", IsSpeenDone)
+			end
         end,
 
         timeline =
@@ -54,7 +89,83 @@ local states =
             EventHandler("animqueueover", function(inst) if math.random() < .333 then inst.components.combat:SetTarget(nil) inst.sg:GoToState("taunt") else inst.sg:GoToState("idle", "atk_pst") end end),
         },
     },
+    State{
+        name = "speen_pre",
+        tags = { "attack", "busy" },
 
+        onenter = function(inst, target)
+            inst.sg.statemem.target = target
+            inst.Physics:Stop()
+            inst.components.combat:StartAttack()
+            inst.AnimState:PlayAnimation("spin_pre")
+			inst.components.timer:StartTimer("speendone", TUNING.DEERCLOPS_ATTACK_PERIOD)
+			inst.components.locomotor.walkspeed = TUNING.HOUND_SPEED
+        end,
+
+        timeline =
+        {
+
+            TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.attack) end),
+            TimeEvent(16*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+        },
+
+        events =
+        {
+            EventHandler("animqueueover", function(inst) inst.sg:GoToState("speen_loop") end),
+        },
+    },
+
+    State{
+        name = "speen_loop",
+        tags = { "attack", "busy" ,"speen","canrotate"},
+
+        onenter = function(inst, target)
+            inst.sg.statemem.target = target
+            inst.AnimState:PlayAnimation("spin_loop",true)
+        end,
+
+        timeline =
+        {
+
+            TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.attack) end),
+            TimeEvent(16*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+        },
+		onupdate = function(inst)
+			--if inst.sg.statemem.move then
+				if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
+			    inst:ForceFacePoint(inst.components.combat.target:GetPosition())
+				elseif GetHome(inst) ~= nil then
+				inst:ForceFacePoint(GetHome(inst))
+				end
+				inst.components.locomotor:WalkForward()
+			--else
+				--inst.components.locomotor:StopMoving()
+			--end
+		end,
+    },
+State{
+        name = "speen_pst",
+        tags = {"busy" },
+
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("spin_pst")
+			inst.components.timer:StartTimer("dospin", TUNING.DEERCLOPS_ATTACK_PERIOD*2)
+			inst.components.locomotor.walkspeed = TUNING.HOUND_SPEED/6
+        end,
+
+        timeline =
+        {
+
+            TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.attack) end),
+            TimeEvent(16*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+        },
+
+        events =
+        {
+            EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
+        },
+    },
     State{
         name = "eat",
         tags = { "busy" },
@@ -84,6 +195,11 @@ local states =
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("hit")
+			if inst.components.timer == nil then
+			inst:AddComponent("timer")
+			inst.components.timer:StartTimer("dospin", TUNING.DEERCLOPS_ATTACK_PERIOD*2) --Placeholder time constant
+			inst:ListenForEvent("timerdone", IsSpeenDone)
+			end
         end,
 
         events =
@@ -98,7 +214,7 @@ local states =
 
         onenter = function(inst, norepeat)
                 inst.Physics:Stop()
-                inst.AnimState:PlayAnimation("atk")
+                inst.AnimState:PlayAnimation("taunt")
                 inst.sg.statemem.norepeat = norepeat
         end,
 
@@ -111,11 +227,7 @@ local states =
         events =
         {
             EventHandler("animover", function(inst)
-                if not inst.sg.statemem.norepeat and math.random() < .333 then
-                    inst.sg:GoToState("taunt", inst.components.follower.leader ~= nil and inst.components.follower.leader:HasTag("player"))
-                else
-                    inst.sg:GoToState("idle")
-                end
+			inst.sg:GoToState("idle")
             end),
         },
     },
@@ -158,8 +270,80 @@ local states =
             inst.AnimState:PlayAnimation("sleep_loop", true)
         end,
     },
-}
 
+    State{
+        name = "knockback",
+        tags = { "busy", "nopredict", "nomorph", "nodangle" },
+
+        onenter = function(inst, data)
+            inst.components.locomotor:Stop()
+            inst:ClearBufferedAction()
+
+            inst.AnimState:PlayAnimation("smacked")
+
+            if data ~= nil then
+                if data.radius ~= nil and data.knocker ~= nil and data.knocker:IsValid() then
+                    local x, y, z = data.knocker.Transform:GetWorldPosition()
+                    local distsq = inst:GetDistanceSqToPoint(x, y, z)
+                    local rangesq = data.radius * data.radius
+                    local rot = inst.Transform:GetRotation()
+                    local rot1 = distsq > 0 and inst:GetAngleToPoint(x, y, z) or data.knocker.Transform:GetRotation() + 180
+                    local drot = math.abs(rot - rot1)
+                    while drot > 180 do
+                        drot = math.abs(drot - 360)
+                    end
+                    local k = distsq < rangesq and .3 * distsq / rangesq - 1 or -.7
+                    inst.sg.statemem.speed = (data.strengthmult or 1) * 12 * k
+                    inst.sg.statemem.dspeed = 0
+                    if drot > 90 then
+                        inst.sg.statemem.reverse = true
+                        inst.Transform:SetRotation(rot1 + 180)
+                        inst.Physics:SetMotorVel(-inst.sg.statemem.speed, 0, 0)
+                    else
+                        inst.Transform:SetRotation(rot1)
+                        inst.Physics:SetMotorVel(inst.sg.statemem.speed, 0, 0)
+                    end
+                end
+            end
+        end,
+
+        onupdate = function(inst)
+            if inst.sg.statemem.speed ~= nil then
+                inst.sg.statemem.speed = inst.sg.statemem.speed + inst.sg.statemem.dspeed
+                if inst.sg.statemem.speed < 0 then
+                    inst.sg.statemem.dspeed = inst.sg.statemem.dspeed + .075
+                    inst.Physics:SetMotorVel(inst.sg.statemem.reverse and -inst.sg.statemem.speed or inst.sg.statemem.speed, 0, 0)
+                else
+                    inst.sg.statemem.speed = nil
+                    inst.sg.statemem.dspeed = nil
+                    inst.Physics:Stop()
+                end
+            end
+        end,
+
+        timeline =
+        {
+            TimeEvent(8 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve/movement/bodyfall_dirt")
+            end),
+        },
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+                if inst.AnimState:AnimDone() then
+                    inst.sg:GoToState("idle")
+                end
+            end),
+        },
+
+        onexit = function(inst)
+            if inst.sg.statemem.speed ~= nil then
+                inst.Physics:Stop()
+            end
+        end,
+    },
+}
 CommonStates.AddAmphibiousCreatureHopStates(states, 
 { -- config
 	swimming_clear_collision_frame = 9 * FRAMES,
@@ -198,27 +382,6 @@ CommonStates.AddSleepStates(states,
     },
 })
 
-CommonStates.AddRunStates(states,
-{
-    runtimeline =
-    {
-        TimeEvent(0, function(inst)
-            inst.SoundEmitter:PlaySound(inst.sounds.growl)
-            if inst:HasTag("swimming") then
-                inst.SoundEmitter:PlaySound("turnoftides/common/together/water/splash/jump_small",nil,.25)
-            else
-                PlayFootstep(inst) 
-            end
-        end),
-        TimeEvent(4 * FRAMES, function(inst)
-            if inst:HasTag("swimming") then
-                inst.SoundEmitter:PlaySound("turnoftides/common/together/water/splash/jump_small",nil,.25)
-            else 
-                PlayFootstep(inst)
-            end
-        end),
-    },
-})
 CommonStates.AddFrozenStates(states)
 
 CommonStates.AddWalkStates(states, nil, nil, nil, true)

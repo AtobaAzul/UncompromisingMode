@@ -17,6 +17,7 @@ local component_post = {
 	"sleepingbaguser",
 	"hounded",
 	"dynamicmusic",
+	"sleeper",
 }
 
 local prefab_post = {
@@ -160,6 +161,7 @@ local brain_post = {
 	"spiderqueen",
 	"chester",
 	--"bearger",
+	"mossling",
 }
 
 modimport("postinit/sim")

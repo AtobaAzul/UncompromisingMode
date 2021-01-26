@@ -181,7 +181,11 @@ end
 local function SpawnBlock(inst, x, z)
 	local blockade = SpawnPrefab("deerclops_barrier")
     blockade.Transform:SetPosition(x, 0, z)
-	blockade:DoTaskInTime(17,function(blockade) blockade:RemoveIt(blockade) end)
+	blockade:DoTaskInTime(17,function(blockade) 
+	if blockade.components.workable ~= nil and blockade.components.workable.workleft > 0 then 
+	blockade:RemoveIt(blockade) 
+	end 
+	end)
 	
 end
 local function SpawnBlocks(inst, pos, count)
@@ -213,7 +217,7 @@ local function FreezeEverything(inst)
 			x = x + 2*math.cos(theta)
 			z = z - 2*math.sin(theta)
 			aura.Transform:SetPosition(x,y,z)
-			aura:DoTaskInTime(3, function(aura) aura:TriggerFX() end)
+			aura:DoTaskInTime(5, function(aura) aura:TriggerFX() end)
 			aura:DoTaskInTime(7, aura.KillFX)
 		
 	local side = math.random(-1,1)
@@ -416,10 +420,10 @@ local states = {
     },
 	State{
         name = "aurafreeze_pre",
-        tags = { "busy"},
+        tags = { "busy","nosleep"},
 
         onenter = function(inst)
-			inst.components.sleeper:SetResistance(400)
+			--inst.components.sleeper:SetResistance(400)
             inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("fortresscast_pre")
 			SpawnBlocks(inst, inst:GetPosition(), 19)
@@ -450,10 +454,11 @@ local states = {
     },	
 	State{
         name = "aurafreeze_pst",
-        tags = { "busy"},
+        tags = { "busy","nosleep"},
 
         onenter = function(inst)
             inst.Physics:Stop()
+			inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE)
 			inst.AnimState:PlayAnimation("fortresscast_pst")
 			inst.components.timer:StartTimer("auratime", 15)
         end,
@@ -473,7 +478,7 @@ local states = {
 
         events =
         {
-            EventHandler("animover", function(inst) inst.components.sleeper:SetResistance(4)
+            EventHandler("animover", function(inst) --inst.components.sleeper:SetResistance(4)
 			inst.sg:GoToState("idle") end),
         },
 

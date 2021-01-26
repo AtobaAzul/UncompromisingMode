@@ -3,13 +3,13 @@ local function Melt(inst)
 inst._puddle.AnimState:PlayAnimation("dryup")
 end
 local function OnWorked(inst, worker, workleft)
-	if workleft > 8 then
+	if workleft > 4 then
 	inst.AnimState:PlayAnimation("full")
 	end
-	if workleft <= 8 and workleft >= 4 then
+	if workleft <= 4 and workleft >= 2 then
 	inst.AnimState:PlayAnimation("med")
 	end
-	if workleft < 4 then
+	if workleft < 2 then
 	inst.AnimState:PlayAnimation("weak")
 	end
     if workleft <= 0 then
@@ -21,15 +21,16 @@ local function OnWorked(inst, worker, workleft)
 end
 local function RemoveIt(inst)
 	if inst.components.workable ~= nil then
-		if inst.components.workable.workleft > 8 then
+		if inst.components.workable.workleft > 4 then
 		inst.AnimState:PlayAnimation("melt_full")
 		end
-		if inst.components.workable.workleft <= 8 and inst.components.workable.workleft >= 4 then
+		if inst.components.workable.workleft <= 4 and inst.components.workable.workleft >= 2 then
 		inst.AnimState:PlayAnimation("melt_med")
 		end
-		if inst.components.workable.workleft < 4 then
+		if inst.components.workable.workleft < 2 then
 		inst.AnimState:PlayAnimation("melt_weak")
 		end
+		inst:RemoveComponent("workable")
 		inst.Physics:ClearCollisionMask()
 		inst.AnimState:PushAnimation("break")
 		inst:DoTaskInTime(4,function(inst) ErodeAway(inst) end)
@@ -68,7 +69,7 @@ local function rock_ice_fn()
 
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.MINE)
-    inst.components.workable:SetWorkLeft(12)
+    inst.components.workable:SetWorkLeft(6)
 
     inst.components.workable:SetOnWorkCallback(OnWorked)
 	inst.persists = false
