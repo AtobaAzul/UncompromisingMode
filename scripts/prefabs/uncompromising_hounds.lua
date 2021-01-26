@@ -49,6 +49,7 @@ end
 
 local brain = require("brains/houndbrain")
 local moonbrain = require("brains/moonbeastbrain")
+local sporebrain = require "brains/sporehoundbrain"
 
 local sounds =
 {
@@ -789,8 +790,14 @@ local function fnspore()
 	
 	inst.AnimState:SetMultColour(0, 1, 0, 1)
 	
-    inst:SetStateGraph("SGhound")
-	
+    inst:SetStateGraph("SGsporehound")
+    inst:SetBrain(sporebrain)
+
+	inst.lightningshot = true
+		
+    inst:AddComponent("timer")
+    inst:ListenForEvent("timerdone", ontimerdone)
+
     inst.components.lootdropper:SetChanceLootTable('hound_spore')
 
     return inst

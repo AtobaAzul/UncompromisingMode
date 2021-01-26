@@ -36,7 +36,7 @@ local events =
 			elseif not inst.sg:HasStateTag("attack") then
 				if inst.counter ~= nil then
 					inst.counter = inst.counter + 1
-					if inst.coutertask ~= nil then
+					if inst.countertask ~= nil then
 						inst.countertask:Cancel()
 						inst.countertask = nil
 					end

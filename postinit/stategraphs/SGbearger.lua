@@ -62,11 +62,7 @@ local states = {
 
         onenter = function(inst, target)
             if not target then
-                target = inst.components.combat.target
-            end
-
-            if target then
-                inst.sg.statemem.target = target
+                target = inst.components.combat.target ~= nil and inst.components.combat.target
             end
 
             inst.Physics:Stop()
@@ -76,14 +72,13 @@ local states = {
         timeline =
         {   
             TimeEvent(7*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/taunt", "taunt") end),
-            TimeEvent(25*FRAMES, function(inst)
-                if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
-                    inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())            
-                    inst:LaunchProjectile(inst.sg.statemem.inkpos)
-
-                    inst.components.timer:StopTimer("RockThrow")
+            TimeEvent(23*FRAMES, function(inst)
+				if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
+					inst.LaunchProjectile(inst, inst.components.combat.target)
+					inst.components.timer:StopTimer("RockThrow")
 					inst.components.timer:StartTimer("RockThrow", TUNING.BEARGER_NORMAL_GROUNDPOUND_COOLDOWN)
-                end
+                
+				end
             end),
         },
 
