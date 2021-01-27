@@ -88,7 +88,7 @@ AllRecipes["deserthat"].ingredients = {Ingredient("goggleshat", 1), Ingredient("
 AllRecipes["goggleshat"].level = TechTree.Create(TECH.SCIENCE_ONE)
 AllRecipes["deserthat"].level = TechTree.Create(TECH.SCIENCE_TWO)
 
-AddRecipe("ice", {Ingredient("snowball_throwable", 4, "images/inventoryimages/snowball_throwable.xml", nil, "snowball_throwable.tex")}, RECIPETABS.FARM, TECH.SCIENCE_ONE)
+AddRecipe("ice", {Ingredient("snowball_throwable", 4, "images/inventoryimages/snowball_throwable.xml", nil, "snowball_throwable.tex")}, RECIPETABS.REFINE, TECH.SCIENCE_ONE)
 
 --GLOBAL.AllRecipes["bernie_inactive"].sortkey = GLOBAL.AllRecipes["healingsalve"].sortkey - .1
 GLOBAL.AllRecipes["reviver"].sortkey = GLOBAL.AllRecipes["healingsalve"].sortkey - .2
