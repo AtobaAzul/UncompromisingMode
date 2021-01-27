@@ -140,6 +140,7 @@ local stategraph_post = {
 	"koalefant",
 	"bee",
 	"bearger",
+	"krampus",
 }
 
 local class_post = {

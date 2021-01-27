@@ -33,7 +33,7 @@ local events =
 				inst.counter = 0
 				inst.sg:GoToState("counterattack_pre")
 				return
-			elseif not inst.sg:HasStateTag("attack") then
+			else
 				if inst.counter ~= nil then
 					inst.counter = inst.counter + 1
 					if inst.countertask ~= nil then
