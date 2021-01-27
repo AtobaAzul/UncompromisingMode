@@ -120,6 +120,7 @@ local prefab_post = {
 	"ruinsstatues", 
 	"chessjunk",
 	"walrus_camp",
+	"moondial",
 }
 
 local stategraph_post = {
