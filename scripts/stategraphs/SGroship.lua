@@ -120,8 +120,9 @@ local states=
         
 
         onenter = function(inst)
+			inst.Transform:SetNoFaced()
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("waken")
+            inst.AnimState:PlayAnimation("zombie")
         end,
         timeline=
         {
@@ -131,7 +132,8 @@ local states=
         },
         events=
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle")	end),
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle")
+				inst.Transform:SetFourFaced() end),
         },
     },
     State{
