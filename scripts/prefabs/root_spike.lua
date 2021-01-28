@@ -243,7 +243,7 @@ local function fn()
     end
 	
 	inst:AddComponent("workable")
-	inst.components.workable:SetWorkLeft(6)
+	inst.components.workable:SetWorkLeft(5)
 	inst.components.workable:SetOnWorkCallback(chop_root)
     inst.components.workable:SetOnFinishCallback(chop_down_root)
 
