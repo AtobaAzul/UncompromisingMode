@@ -146,7 +146,6 @@ local function DropItem(inst, data)
 		if thing:HasTag("washeavy") then
 			thing:RemoveTag("washeavy")
 			thing:AddTag("heavy")
-			thing.components.equippable.walkspeedmult = TUNING.HEAVY_SPEED_MULT
 		end
 	end
 end
@@ -160,7 +159,6 @@ local function NewItem(inst, data)
 					thing:RemoveTag("heavy")
 					thing:AddTag("washeavy")
 					inst.components.inventory:Equip(thing)
-					thing.components.equippable.walkspeedmult = 1
 				end)
 			end
 		end
@@ -169,8 +167,10 @@ end
 
 
 local function StrongmanPickup(inst)
+	local itemhead = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HEAD)
 	local itembody = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BODY)
 	local itemhand = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
+	
 
 	
 	if itemhand ~= nil then
@@ -184,43 +184,59 @@ local function StrongmanPickup(inst)
 			end
 		end
 	end
-
 	
 	if inst.strength ~= "wimpy" then
-		if itembody ~= nil then 
 	
-			if itembody.name == "Piggyback" then
-		
-				inst.components.locomotor:SetExternalSpeedMultiplier(inst, "strongmanpiggy", (1/itembody.components.equippable.walkspeedmult))
-				inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongman")
-				inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanmarble")
-				return
-		
-			elseif itembody.name == "Marble Suit" then
-			
-				inst.components.locomotor:SetExternalSpeedMultiplier(inst, "strongmanmarble", (1/TUNING.ARMORMARBLE_SLOW))
-				inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongman")
-				inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanpiggy")
-				return
+		--counteracts head slowdown
+		if itemhead ~= nil then 	
+			local itemheadspeed = itemhead.components.equippable.walkspeedmult
+
+			if itemheadspeed and itemheadspeed <= 1 then
+				inst.components.locomotor:SetExternalSpeedMultiplier(inst, "strongmanhead", (1/itemheadspeed))
 			end
+		else 
+			inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanhead")
 		end
-	
+		
+		--counteracts body slowdown
+		if itembody ~= nil then 	
+			local itembodyspeed = itembody.components.equippable.walkspeedmult
+
+			if itembodyspeed and itembodyspeed <= 1 then
+				inst.components.locomotor:SetExternalSpeedMultiplier(inst, "strongmanbody", (1/itembodyspeed))
+			end
+		else 
+			inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanbody")
+		end
+		
+		--counteracts hand slowdown (currently only for mod compatibility)
+		if itemhand ~= nil then 	
+			local itemhandspeed = itemhand.components.equippable.walkspeedmult
+
+			if itemhandspeed and itemhandspeed <= 1 then
+				inst.components.locomotor:SetExternalSpeedMultiplier(inst, "strongmanhand", (1/itemhandspeed))
+			end
+		else 
+			inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanhand")
+		end		
+	else --inst.strength == "wimpy"
+		inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanhead")
+		inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanbody")
+		inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanhand")
 	end
+	
 	if inst.strength == "normal" and itembody ~= nil then
+		
 		if itembody:HasTag("washeavy") then
 			inst.components.inventory:DropItem(itembody)
 		end
+		
 		if inst.components.inventory:IsHeavyLifting() then
-			inst.components.locomotor:SetExternalSpeedMultiplier(inst, "strongman", 3)
-			inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanpiggy")
-			inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanmarble")
-			return
+			inst.components.locomotor:SetExternalSpeedMultiplier(inst, "strongmancarry", (TUNING.HEAVY_SPEED_MULT*3))
 		end
+	else
+		inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmancarry")
 	end
-	
-	inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongman")
-	inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanpiggy")
-	inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanmarble")
 end
 
 AddPrefabPostInit("world", function(inst)
