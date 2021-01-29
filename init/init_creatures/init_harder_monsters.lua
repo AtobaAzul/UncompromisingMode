@@ -47,6 +47,7 @@ end
 local function onworked_pighouse(inst, worker)
     if inst.components.spawner ~= nil and inst.components.spawner.child then
         RetaliateAttacker(inst.components.spawner.child, worker, pigtaunts)
+		inst.components.spawner:ReleaseChild()
     end
 end
 
@@ -60,6 +61,7 @@ end)
 local function onworked_rabbithouse(inst, worker)
     if inst.components.spawner ~= nil and inst.components.spawner.child then
         RetaliateAttacker(inst.components.spawner.child, worker, bunnytaunts)
+		inst.components.spawner:ReleaseChild()
     end
 end
 
