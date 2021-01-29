@@ -214,7 +214,8 @@ local states=
         },
         events=
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle")	end),
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle")
+				inst.Transform:SetFourFaced() end),
         },
     },
 
