@@ -197,4 +197,6 @@ return {
 	"deerclops_barrier",
 	"roship_projectile",
 	"electric_ring",
+	"cave_entrance_sunkdecid",
+	"cave_exit_sunkdecid",
 }

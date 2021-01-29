@@ -121,6 +121,7 @@ local prefab_post = {
 	"chessjunk",
 	"walrus_camp",
 	"moondial",
+	--"deciduoustrees",
 }
 
 local stategraph_post = {

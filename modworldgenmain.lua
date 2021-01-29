@@ -156,6 +156,10 @@ end
 AddTaskPreInit("Great Plains",function(task)
 task.room_choices["WalrusHut_Plains"] = 1
 end)
+
+AddTaskPreInit("Speak to the king",function(task)
+task.room_choices["SunkDecidEntrance"] = 1
+end)
 --[[
 GLOBAL.require("map/rooms/caves/mushroomtoadstool")
 AddTaskPreInit("Redforest",function(task)
@@ -284,6 +288,7 @@ task.room_choices["ricepatch"] = 1      --Comment to test task based rice worldg
 end)
 GLOBAL.require("map/tasks/newswamp")
 GLOBAL.require("map/tasks/gianttrees")
+GLOBAL.require("map/tasks/sunkendecid")
 --[[AddTaskPreInit("RedForest",function(task)
 
 table.insert(task.keys_given,KEYS.HF)  
@@ -304,6 +309,13 @@ AddTaskSetPreInitAny(function(tasksetdata)
     end
 table.insert(tasksetdata.tasks,"GiantTrees")
 --table.insert(tasksetdata.tasks,"DarkGiantTrees")
+
+end)
+AddTaskSetPreInitAny(function(tasksetdata)
+    if tasksetdata.location ~= "cave" then
+        return
+    end
+table.insert(tasksetdata.tasks,"SunkDecid")
 
 end)
 --[[AddTaskSetPreInitAny(function(tasksetdata)
