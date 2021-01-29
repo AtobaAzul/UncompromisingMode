@@ -238,6 +238,7 @@ local states=
         tags = {"busy"},
         
         onenter = function(inst)
+			inst:AddTag("hostile")
 		    local shieldtype = PickShield(inst)
                 if shieldtype ~= nil then
                     local fx = SpawnPrefab("stalker_shield"..tostring(shieldtype))
@@ -261,7 +262,37 @@ local states=
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("taunt") end),
         },
-    },  	
+    },
+    State{
+        name = "calm",
+        tags = {"busy"},
+        
+        onenter = function(inst)
+			inst:RemoveTag("hostile")
+		    local shieldtype = PickShield(inst)
+                if shieldtype ~= nil then
+                    local fx = SpawnPrefab("stalker_shield"..tostring(shieldtype))
+                    fx.entity:SetParent(inst.entity)
+                        fx.AnimState:SetScale(-1.3, 1, 1)
+					
+				end
+			inst.AnimState:SetBuild("ancient_trepidation_nomouth")
+			inst.enraged = false
+            inst.Physics:Stop()
+			inst.AnimState:PlayAnimation("anger")
+            --inst.AnimState:PushAnimation("taunt")
+			PlayExtendedSound(inst, "taunt")
+            --inst.SoundEmitter:PlaySound("UCSounds/Scorpion/taunt")
+        end,
+        timeline=
+        {	TimeEvent(5*FRAMES, function(inst) PlayExtendedSound(inst, "taunt") end),
+			TimeEvent(10*FRAMES, function(inst) PlayExtendedSound(inst, "taunt") end),
+        },      
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("taunt") end),
+        },
+    },  		
     State{
         name = "spawn",
         tags = {"busy"},

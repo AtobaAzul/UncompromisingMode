@@ -188,6 +188,8 @@ inst.sg:GoToState("anger")
 if inst.components.combat ~= nil then
 inst.components.combat:SuggestTarget(bozo)
 end
+elseif inst.enraged == true and inst.components.combat ~= nil and inst.components.combat.target == nil then
+inst.sg:GoToState("calm")
 end
 end
 local function OnSave(inst,data)
@@ -292,7 +294,7 @@ local function fn(Sim)
     
 	
 	--inst:AddTag("monster")
-    inst:AddTag("hostile") 
+     
 	--inst:AddTag("shadowcreature")
     inst:AddTag("shadow")
 	inst:AddTag("trepidation")
