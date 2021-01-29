@@ -33,3 +33,19 @@ AddAction(
 		return true
 	end
 )
+
+AddAction(
+	"UNCOMPROMISING_PAWN_HIDE",
+	"UNCOMPROMISING_PAWN_HIDE",
+	function(act)
+		--Dummy action for pawn.
+	end
+)
+
+AddAction(
+	"UNCOMPROMISING_PAWN_SHAKE",
+	"UNCOMPROMISING_PAWN_SHAKE",
+	function(act)
+		--Dummy action for pawn.
+	end
+)

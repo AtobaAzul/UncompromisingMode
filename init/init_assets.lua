@@ -315,9 +315,10 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/chester_eyebone_lazy.tex"),	
 	Asset("ATLAS", "images/inventoryimages/chester_eyebone_closed_lazy.xml"),
 	Asset("IMAGE", "images/inventoryimages/chester_eyebone_closed_lazy.tex"),		
-	Asset("ANIM", "anim/chester_eyebone_lazy.zip"),	
-	Asset("ANIM", "anim/hound_jump_attack.zip"),	
-	
+	Asset("ANIM", "anim/chester_eyebone_lazy.zip"),
+	Asset("ANIM", "anim/hound_jump_attack.zip"),
+	Asset("ANIM", "anim/uncompromising_pawn_build.zip"),
+
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_closed_lazy"),
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_lazy"),
 	
