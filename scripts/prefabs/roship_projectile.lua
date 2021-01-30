@@ -7,7 +7,9 @@ local function OnHitZap(inst)
 		for i, v in ipairs(ents) do			
 				if v.components.health ~= nil and not v.components.health:IsDead() then
 					if not (v.components.inventory ~= nil and v.components.inventory:IsInsulated()) then
-					v.sg:GoToState("electrocute")
+						if v.sg ~= nil then
+							v.sg:GoToState("electrocute")
+						end
 					v.components.health:DoDelta(-30, nil, inst.prefab, nil, inst) --From the onhit stuff...
 					else
 					v.components.health:DoDelta(-15, nil, inst.prefab, nil, inst)

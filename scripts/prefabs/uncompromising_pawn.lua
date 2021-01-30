@@ -61,7 +61,7 @@ local function FindClosestPart(inst)
                 end
             end
         end
-
+		
         return closest
     end
 end
@@ -98,9 +98,10 @@ local function CheckTargetPiece(inst)
             inst.fx.entity:AddFollower()
             inst.fx.Follower:FollowSymbol(inst.GUID, "body", 0, -40, 0)
         end
+		
 		inst.SoundEmitter:KillSound("ping")
-        inst.SoundEmitter:PlaySound("dontstarve/common/diviningrod_ping", "ping")
-        inst.SoundEmitter:SetParameter("ping", "intensity", intensity)
+		inst.SoundEmitter:PlaySound("dontstarve/common/diviningrod_ping", "ping")
+		inst.SoundEmitter:SetParameter("ping", "intensity", intensity)
 		
 		if inst.task ~= nil then
 			inst.task:Cancel()
@@ -317,8 +318,8 @@ local function fn()
     anim:PlayAnimation("idle")
     
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-    inst.components.locomotor.runspeed = 6
-    inst.components.locomotor.walkspeed = 4
+    inst.components.locomotor.runspeed = 5.5
+    inst.components.locomotor.walkspeed = 2.5
     inst:SetStateGraph("SGuncompromising_pawn")
 
     inst:AddTag("cavedweller") 
@@ -331,8 +332,6 @@ local function fn()
 	if not TheWorld.ismastersim then
 		return inst
 	end
-    
-    inst.data = {}
 
 	inst:AddComponent("sanityaura")
 
