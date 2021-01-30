@@ -9,7 +9,7 @@ local SEE_PLAYER_DIST = 7
 local SEE_PLAYER_STOP_DIST = 12
 
 local SEE_BAIT_DIST = 20
-local MAX_WANDER_DIST = 20
+local MAX_WANDER_DIST = 40
 
 
 local Uncompromising_PawnBrain = Class(Brain, function(self, inst)
@@ -52,7 +52,7 @@ function Uncompromising_PawnBrain:OnStart()
                 IfNode(function() return IsDangerClose(self.inst) end, "DangerClose", DoAction(self.inst, TryHide, "Hide")),
             },
         },
-		FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
+		--FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
         Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST)
     }, .25)
     self.bt = BT(self.inst, root)

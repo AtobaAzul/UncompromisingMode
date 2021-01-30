@@ -393,4 +393,20 @@ end)
 	GLOBAL.terrain.filter.sandhill = {GLOBAL.GROUND.WOODFLOOR, GLOBAL.GROUND.CARPET, GLOBAL.GROUND.CHECKER, GLOBAL.GROUND.ROAD}
 --]]
 
+	if GLOBAL.terrain.rooms.RuinedCity then
+	GLOBAL.terrain.rooms.RuinedCity.contents.distributeprefabs.pawn_hopper = 0.2
+	end
+
+	if GLOBAL.terrain.rooms.Vacant then
+		GLOBAL.terrain.rooms.Vacant.contents.distributeprefabs.pawn_hopper = 0.2
+	end
+	
+	if GLOBAL.terrain.rooms.Barracks then
+		GLOBAL.terrain.rooms.Barracks.contents.distributeprefabs.pawn_hopper = 0.2
+	end
+	
+	if GLOBAL.terrain.rooms.LabyrinthEntrance then
+		GLOBAL.terrain.rooms.LabyrinthEntrance.contents.distributeprefabs.pawn_hopper = 0.2
+	end
+
 modimport("init/init_food/init_food_worldgen")
