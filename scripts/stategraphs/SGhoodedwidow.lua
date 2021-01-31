@@ -222,8 +222,8 @@ local states=
         {
 			TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/scream_short") end),
             TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/attack_grunt") end),
-			TimeEvent(15*FRAMES, function(inst) inst.components.locomotor:Stop()
-			inst.components.groundpounder:GroundPound()			end),
+			TimeEvent(17*FRAMES, function(inst) inst.components.locomotor:Stop()
+			inst.components.combat:DoAreaAttack(inst, 5, nil, nil, nil, { "INLIMBO", "notarget", "invisible", "noattack", "flight", "playerghost", "shadow", "shadowchesspiece", "shadowcreature" })			end),
         },
         events=
         {

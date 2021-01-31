@@ -114,7 +114,14 @@ end
 
 local function CanPhlegmNow(inst)
     local target = inst.components.combat.target
-    return target ~= nil and target.components.pinnable and target.components.pinnable:IsValidPinTarget() and not inst.components.combat:InCooldown()
+	local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
+	if (target ~= nil and home ~= nil) then
+	local dx, dy, dz = target.Transform:GetWorldPosition()
+    local spx, spy, spz = home.Transform:GetWorldPosition()
+    return target ~= nil and home ~= nil and target.components.pinnable and target.components.pinnable:IsValidPinTarget() and not inst.components.combat:InCooldown() and distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*12)
+	else
+	return false
+	end
 end
 
 local function EquipPhlegm(inst)
