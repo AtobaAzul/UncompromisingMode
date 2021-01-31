@@ -200,4 +200,5 @@ return {
 	"cave_entrance_sunkdecid",
 	"cave_exit_sunkdecid",
 	"uncompromising_pawn",
+	"pawn_spawn",
 }

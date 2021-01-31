@@ -61,7 +61,7 @@ local function FindClosestPart(inst)
                 end
             end
         end
-
+		
         return closest
     end
 end
@@ -98,9 +98,10 @@ local function CheckTargetPiece(inst)
             inst.fx.entity:AddFollower()
             inst.fx.Follower:FollowSymbol(inst.GUID, "body", 0, -40, 0)
         end
+		
 		inst.SoundEmitter:KillSound("ping")
-        inst.SoundEmitter:PlaySound("dontstarve/common/diviningrod_ping", "ping")
-        inst.SoundEmitter:SetParameter("ping", "intensity", intensity)
+		inst.SoundEmitter:PlaySound("dontstarve/common/diviningrod_ping", "ping")
+		inst.SoundEmitter:SetParameter("ping", "intensity", intensity)
 		
 		if inst.task ~= nil then
 			inst.task:Cancel()
@@ -199,6 +200,7 @@ local function DoSpawnSpikes(inst, pts, level, cache)
             local spike = SpawnPrefab("nightmaregrowth")
 				spike.Transform:SetPosition(v:Get())
 				spike:growfn()
+				spike.persists = false
 				
 					spike:DoTaskInTime(20 + (5*math.random()), function(spike)
 						local despawnfx = SpawnPrefab("shadow_despawn")
@@ -219,22 +221,6 @@ local function SpawnSpikes(inst)
 
     local spikes, source = GenerateSpiralSpikes(inst)
 	
-	local x, y, z = inst.Transform:GetWorldPosition()
-	
-	inst:PushEvent("attacked", {isattackedbydanger = true})
-	
-	local knook = SpawnPrefab("knook")
-	local roship = SpawnPrefab("roship")
-	local bight = SpawnPrefab("bight")
-	
-	knook.Transform:SetPosition(x + 8, 0, z + 8)
-	roship.Transform:SetPosition(x - 8 , 0, z + 8)
-	bight.Transform:SetPosition(x + 8, 0, z - 8)
-	
-	knook.sg:GoToState("zombie")
-	roship.sg:GoToState("zombie")
-	bight.sg:GoToState("zombie")
-	
     if #spikes > 0 then
         local cache =
         {
@@ -254,8 +240,52 @@ local function OnExplodeFn(inst)
     SpawnPrefab("explode_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
 end
 
+local function SpawnAmalgams(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local knook = SpawnPrefab("knook")
+	local roship = SpawnPrefab("roship")
+	local bight = SpawnPrefab("bight")
+	
+	
+	local amalgams = { knook }
+	
+	if math.random() > 0.5 then
+		amalgams = { knook, roship }
+	else
+		amalgams = { roship, bight }
+	end
+	
+	for q, v in pairs(amalgams) do
+		for k = 1, 4 do
+			local x, y, z = inst.Transform:GetWorldPosition()
+			local offset = 10
+
+			local x2 = x + math.random(-8, 8)
+			local z2 = z + math.random(-8, 8)
+
+			if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+				v.Transform:SetPosition(x2, 0, z2)
+				v.sg:GoToState("zombie")
+				break
+			end
+			
+			v.Transform:SetPosition(x, 0, z)
+			v.sg:GoToState("zombie")
+		end
+	end
+	--[[
+	knook.Transform:SetPosition(x, 0, z)
+	roship.Transform:SetPosition(x, 0, z)
+	bight.Transform:SetPosition(x, 0, z)
+	knook.sg:GoToState("zombie")
+	roship.sg:GoToState("zombie")
+	bight.sg:GoToState("zombie")]]
+end
+
 local function onnear(inst, target)
     SpawnSpikes(target)
+	
+	SpawnAmalgams(target)
 	
     inst:AddComponent("explosive")
     inst.components.explosive:SetOnExplodeFn(OnExplodeFn)
@@ -288,8 +318,8 @@ local function fn()
     anim:PlayAnimation("idle")
     
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-    inst.components.locomotor.runspeed = 5
-    inst.components.locomotor.walkspeed = 1
+    inst.components.locomotor.runspeed = 5.5
+    inst.components.locomotor.walkspeed = 2.5
     inst:SetStateGraph("SGuncompromising_pawn")
 
     inst:AddTag("cavedweller") 
@@ -302,12 +332,9 @@ local function fn()
 	if not TheWorld.ismastersim then
 		return inst
 	end
-    
-    inst.data = {}
 
 	inst:AddComponent("sanityaura")
 
-    
     inst:AddComponent("knownlocations")
     inst:AddComponent("combat")
     inst.components.combat.hiteffectsymbol = "chest"
@@ -341,6 +368,8 @@ local function fn()
 	if inst.checktask == nil then
         inst.checktask = inst:DoTaskInTime(1, CheckTargetPiece)
 	end
+	
+	inst.sg:GoToState("hide_post")
 
     return inst
 end
@@ -421,7 +450,7 @@ local function bluelight()
 end
 
 
-return Prefab("uncompromising_pawn", fn, assets, prefabs),
+return Prefab("um_pawn", fn, assets, prefabs),
 		Prefab("dr_hot_loop_light", redlight),
 		Prefab("dr_warmer_loop_light", orangelight),
 		Prefab("dr_warm_loop_2_light", yellowlight),

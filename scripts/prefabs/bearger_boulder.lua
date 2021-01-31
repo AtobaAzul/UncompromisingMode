@@ -36,21 +36,21 @@ local function OnHitInk(inst, attacker, target)
 	inst.fx = "groundpound_fx"
 	
 	if boat then
-		local pt = inst:GetPosition()
+		local pt = x, 0, z
 		if boat ~= nil then
 			boat:PushEvent("spawnnewboatleak", {pt = pt, leak_size = "med_leak", playsoundfx = true})
 		end
 	elseif not inst:IsOnOcean() and not boat then
 		local sinkhole = SpawnPrefab("bearger_sinkhole")
-		sinkhole.Transform:SetPosition(inst.Transform:GetWorldPosition())
+		sinkhole.Transform:SetPosition(x, 0, z)
 		sinkhole.components.timer:StartTimer("nextrepair", 20 + (math.random() * 10))
 	elseif inst:IsOnOcean() then
 		inst.fx = "splash_green"
 	end
 					
-	SpawnPrefab(inst.fx).Transform:SetPosition(inst.Transform:GetWorldPosition())
+	SpawnPrefab(inst.fx).Transform:SetPosition(x, 0, z)
 	local ring = SpawnPrefab("groundpoundring_fx")
-	ring.Transform:SetPosition(inst.Transform:GetWorldPosition())
+	ring.Transform:SetPosition(x, 0, z)
 	ring.Transform:SetScale(0.7, 0.7, 0.7)
 	
     inst:Remove()
