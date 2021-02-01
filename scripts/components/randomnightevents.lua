@@ -124,6 +124,7 @@ end
 --RNE list below
 ----------------------------------------------------
 local function SkeleBros(player)
+MultiFogAuto(player,5)
 local CHANNELER_SPAWN_RADIUS = 30
     if player.components.health:IsDead() then
         return
@@ -314,7 +315,8 @@ local function SpawnShadowCharsFunction(player)
 end
 
 local function SpawnShadowChars(player)
-	print("SpawnShadowChars")
+	--print("SpawnShadowChars")
+	MultiFogAuto(player,5)
 	player:DoTaskInTime(5 + math.random(0,5), function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
