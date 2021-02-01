@@ -12,7 +12,7 @@ local function CooldownRaid(inst)
 	end
 
 	GLOBAL.TheWorld:RemoveTag("raided")
-	print("Rat Raid Cooldown is over.")
+	--print("Rat Raid Cooldown is over.")
 end
 
 local function SpawnRaid(inst)
@@ -83,7 +83,7 @@ local function StartRaid(inst)
 		inst:DoTaskInTime(math.random(3, 6), StartRaid)
 	end
 	
-	print("Rat Raid Warning :", ratwarning)
+	--print("Rat Raid Warning :", ratwarning)
 end
 
 local function ActiveRaid(inst, doer)
@@ -104,7 +104,7 @@ local function ActiveRaid(inst, doer)
 		end
 		
 		GLOBAL.TheWorld:AddTag("raided")
-		print("Rat Raid Triggered !")
+		--print("Rat Raid Triggered !")
 		inst:DoTaskInTime(3, StartRaid, doer)
 	else
 		return

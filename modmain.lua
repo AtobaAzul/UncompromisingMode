@@ -24,52 +24,52 @@ for k, v in pairs(MOD_FERTILIZER_DEFS) do
 end
 
 AddShardModRPCHandler("UncompromisingSurvival", "Hayfever_Stop", function(...)
-	print("RPC Hayfever_Stop")
+	--print("RPC Hayfever_Stop")
 	GLOBAL.TheWorld:PushEvent("beequeenkilled")
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "Hayfever_Start", function(...)
-	print("RPC Hayfever_Start")
+	--print("RPC Hayfever_Start")
 	GLOBAL.TheWorld:PushEvent("beequeenrespawned")
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsDeath", function(...)
-	print("RPC DeerclopsDeath")
+	--print("RPC DeerclopsDeath")
 	if not GLOBAL.TheWorld.ismastershard then
 		GLOBAL.TheWorld:PushEvent("hasslerkilled")
 	end
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsRemoved", function(...)
-	print("RPC DeerclopsRemoved")
+	--print("RPC DeerclopsRemoved")
 	if not GLOBAL.TheWorld.ismastershard then
 		GLOBAL.TheWorld:PushEvent("hasslerremoved")
 	end
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsStored", function(...)
-	print("RPC DeerclopsStored")
+	--print("RPC DeerclopsStored")
 	if not GLOBAL.TheWorld.ismastershard then
 		GLOBAL.TheWorld:PushEvent("storehassler")
 	end
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsDeath_caves", function(...)
-	print("RPC DeerclopsDeath")
+	--print("RPC DeerclopsDeath")
 	if GLOBAL.TheWorld.ismastershard then
 		GLOBAL.TheWorld:PushEvent("hasslerkilled_secondary")
 	end
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsRemoved_caves", function(...)
-	print("RPC DeerclopsRemoved")
+	--print("RPC DeerclopsRemoved")
 	if GLOBAL.TheWorld.ismastershard then
 		GLOBAL.TheWorld:PushEvent("hasslerremoved")
 	end
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsStored_caves", function(...)
-	print("RPC DeerclopsStored")
+	--print("RPC DeerclopsStored")
 	if GLOBAL.TheWorld.ismastershard then
 		GLOBAL.TheWorld:PushEvent("storehassler")
 	end

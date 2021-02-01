@@ -154,7 +154,7 @@ local function OnLoad(inst, data)
 end
 
 local function printout(inst)
-	print(inst.respawntime)
+	--print(inst.respawntime)
 	inst:DoTaskInTime(5, printout)
 end
 
