@@ -201,4 +201,5 @@ return {
 	"cave_exit_sunkdecid",
 	"uncompromising_pawn",
 	"pawn_spawn",
+	"pigking_pigtorch",
 }

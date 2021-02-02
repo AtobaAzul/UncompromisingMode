@@ -47,6 +47,13 @@ end
 local function onworked_pighouse(inst, worker)
     if inst.components.spawner ~= nil and inst.components.spawner.child then
         RetaliateAttacker(inst.components.spawner.child, worker, pigtaunts)
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local guards = TheSim:FindEntities(x,y,z,40,{"guard"})
+		for i, v in ipairs(guards) do
+		if v.components.health ~= nil and v.components.combat ~= nil and not v.components.health:IsDead() then
+		v.components.combat:SuggestTarget(worker)
+		end
+		end
 		inst.components.spawner:ReleaseChild()
     end
 end

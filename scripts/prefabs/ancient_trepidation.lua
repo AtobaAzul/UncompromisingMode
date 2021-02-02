@@ -246,7 +246,7 @@ local function FindTargetOfInterest(inst)
 end
 
 local function CheckIfTargetIsFrigginAlive(inst)
-print(inst.harassplayer)
+--print(inst.harassplayer)
 if inst.harassplayer ~= nil then
 local player = inst.harassplayer
 	if player:HasTag("playerghost") then

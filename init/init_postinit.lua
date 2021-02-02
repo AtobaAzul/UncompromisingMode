@@ -123,6 +123,7 @@ local prefab_post = {
 	"moondial",
 	--"deciduoustrees",
 	"pktrades",
+	"pigking",
 }
 
 local stategraph_post = {
