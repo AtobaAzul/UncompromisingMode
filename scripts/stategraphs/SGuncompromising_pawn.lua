@@ -10,109 +10,6 @@ local actionhandlers =
     ActionHandler(ACTIONS.UNCOMPROMISING_PAWN_SHAKE, "rattle_and_shake"),
 }
 
-local function PlayCrabFootstep(inst)
-    local sound = inst.SoundEmitter
-
-    if sound then
-        local tile, tileinfo = inst:GetCurrentTileType()
-        
-        if tile and tileinfo then
-            local x, y, z = inst.Transform:GetWorldPosition()
-
-            local oncreep = TheWorld.GroundCreep:OnCreep( x, y, z )
-            if oncreep then
-                sound:PlaySound("dontstarve_DLC002/creatures/crab/walk_web")
-                return
-            end
-
-            if tile == GROUND.FLOOD or tile == GROUND.MARSH or tile == GROUND.MUD then
-                sound:PlaySound("dontstarve_DLC002/creatures/crab/walk_mud")
-                return
-            end
-
-            if tile == GROUND.FUNGUS or tile == GROUND.FUNGUSRED or tile == GROUND.FUNGUSGREEN then
-                sound:PlaySound("dontstarve_DLC002/creatures/crab/walk_moss")
-                return
-            end
-
-            if tile == GROUND.GRASS then
-                sound:PlaySound("dontstarve_DLC002/creatures/crab/walk_grass")
-                return
-            end
-
-            if tile == GROUND.SAVANNA then
-                sound:PlaySound("dontstarve_DLC002/creatures/crab/walk_tallgrass")
-                return
-            end
-
-            if tile == GROUND.CARPET then
-                sound:PlaySound("dontstarve_DLC002/creatures/crab/walk_carpet")
-                return
-            end
-
-            if tile == GROUND.ROAD or tile == GROUND.ROCKY or tile == GROUND.CHECKER or 
-                tile == GROUND.VOLCANO or tile == GROUND.UNDERROCK or tile == GROUND.BRICK_GLOW or tile == GROUND.BRICK then
-                
-                sound:PlaySound("dontstarve_DLC002/creatures/crab/walk_marble")
-                return
-            end
-
-        end
-    end
-
-end
-
-local function PlayCrabFootstepRun(inst)
-    local sound = inst.SoundEmitter
-
-    if sound then
-        local tile, tileinfo = inst:GetCurrentTileType()
-        
-        if tile and tileinfo then
-            local x, y, z = inst.Transform:GetWorldPosition()
-
-            local oncreep = TheWorld.GroundCreep:OnCreep( x, y, z )
-            if oncreep then
-                sound:PlaySound("dontstarve_DLC002/creatures/crab/run_web")
-                return
-            end
-
-            if tile == GROUND.FLOOD or tile == GROUND.MARSH or tile == GROUND.MUD then
-                sound:PlaySound("dontstarve_DLC002/creatures/crab/run_mud")
-                return
-            end
-
-            if tile == GROUND.FUNGUS or tile == GROUND.FUNGUSRED or tile == GROUND.FUNGUSGREEN then
-                sound:PlaySound("dontstarve_DLC002/creatures/crab/run_moss")
-                return
-            end
-
-            if tile == GROUND.GRASS then
-                sound:PlaySound("dontstarve_DLC002/creatures/crab/run_grass")
-                return
-            end
-
-            if tile == GROUND.SAVANNA then
-                sound:PlaySound("dontstarve_DLC002/creatures/crab/run_tallgrass")
-                return
-            end
-
-            if tile == GROUND.CARPET then
-                sound:PlaySound("dontstarve_DLC002/creatures/crab/run_carpet")
-                return
-            end
-
-            if tile == GROUND.ROAD or tile == GROUND.ROCKY or tile == GROUND.CHECKER or 
-                tile == GROUND.VOLCANO or tile == GROUND.UNDERROCK or tile == GROUND.BRICK_GLOW or tile == GROUND.BRICK then
-                
-                sound:PlaySound("dontstarve_DLC002/creatures/crab/run_marble")
-                return
-            end
-
-        end
-    end
-end
-
 local events=
 {
     CommonHandlers.OnSleep(),
@@ -264,14 +161,21 @@ local states=
 
         timeline=
         {
-            TimeEvent(0*FRAMES, PlayCrabFootstep),
-            TimeEvent(3*FRAMES, PlayCrabFootstep),
-            TimeEvent(7*FRAMES, PlayCrabFootstep),
-            TimeEvent(12*FRAMES, PlayCrabFootstep),
-            TimeEvent(16*FRAMES, PlayCrabFootstep),
-            TimeEvent(20*FRAMES, PlayCrabFootstep),
-            TimeEvent(24*FRAMES, PlayCrabFootstep),
-            TimeEvent(28*FRAMES, PlayCrabFootstep),
+            TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
+            TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
+            TimeEvent(7*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
+            TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
+            TimeEvent(16*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
+            TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
+            TimeEvent(24*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
+            TimeEvent(28*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
+            TimeEvent(32*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
+            TimeEvent(36*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
+            TimeEvent(40*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
+            TimeEvent(44*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
+            TimeEvent(48*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
+            TimeEvent(52*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
+            TimeEvent(56*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
         },
 
         onenter = function(inst) 
@@ -302,7 +206,7 @@ local states=
                 play_scream = inst.components.inventoryitem.owner == nil
             end
             if play_scream then
-                --inst.SoundEmitter:PlaySound(inst.sounds.scream)
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/knight/hurt")
             end
             inst.AnimState:PlayAnimation("run_pre")
             inst.components.locomotor:RunForward()
@@ -320,7 +224,7 @@ local states=
 
         onenter = function(inst) 
             inst.AnimState:PlayAnimation("run")
-            PlayCrabFootstepRun(inst)
+            inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk")
             inst.components.locomotor:RunForward()
         end,
 
@@ -335,7 +239,7 @@ local states=
         tags = {"busy"},
         
         onenter = function(inst)
-            --inst.SoundEmitter:PlaySound(inst.sounds.scream)
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/knight/hurt")
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)        
@@ -434,7 +338,7 @@ local states=
         tags = {"busy"},
         
         onenter = function(inst)
-            --inst.SoundEmitter:PlaySound(inst.sounds.hurt)
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/knight/hurt")
             inst.AnimState:PlayAnimation("hit")
             inst.Physics:Stop()            
         end,
@@ -450,7 +354,7 @@ local states=
         tags = {"busy", "invisible"},
 
         onenter = function(inst)
-            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/crab/bury")
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/knight/hurt")
             inst.AnimState:PlayAnimation("hide")
             inst.Physics:Stop()
             inst:PerformBufferedAction()
@@ -507,7 +411,7 @@ local states=
             inst.AnimState:PlayAnimation("look_pre")
             inst.AnimState:PushAnimation("look")
             inst.AnimState:PushAnimation("look_pst", false)
-            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/crab/sandeyes")
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/knight/hurt")
             inst.Physics:Stop()
             ChangeToInventoryPhysics(inst)
             inst.components.health:SetInvincible(true)
@@ -543,7 +447,7 @@ local states=
         tags = {"busy"},
 
         onenter = function(inst)
-            inst.SoundEmitter:PlaySound("dontstarve_DLC002/creatures/crab/emerge")
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/knight/hurt")
             inst.AnimState:PlayAnimation("hide_pst")
             inst.Physics:Stop()
         end,
