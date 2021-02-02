@@ -222,9 +222,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	WEREPIG = DESCRIBE.PIGMAN.WEREPIG,
 	}
 	
-	DESCRIBE.BIGHT = ""
-	DESCRIBE.KNOOK = ""
-	DESCRIBE.ROSHIP = ""
+	DESCRIBE.BIGHT = "This metal ain't so dead, eh?"
+	DESCRIBE.KNOOK = "The fact they stick together is a tad admirable."
+	DESCRIBE.ROSHIP = "He can hock a loogie real far."
 	
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH	
 	-- Blowgun stuff
