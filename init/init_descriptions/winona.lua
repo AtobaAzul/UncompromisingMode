@@ -223,9 +223,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	WEREPIG = DESCRIBE.PIGMAN.WEREPIG,
 	}
 	
-	DESCRIBE.BIGHT = ""
-	DESCRIBE.KNOOK = ""
-	DESCRIBE.ROSHIP = ""
+	DESCRIBE.BIGHT = "It's full of loose wires."
+	DESCRIBE.KNOOK = "They don't look very comfortable."
+	DESCRIBE.ROSHIP = "I'm surprised it can function at all."
 	
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH		
 	-- Blowgun stuff
