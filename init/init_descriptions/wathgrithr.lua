@@ -221,9 +221,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	WEREPIG = DESCRIBE.PIGMAN.WEREPIG,
 	}
 	
-	DESCRIBE.BIGHT = ""
-	DESCRIBE.KNOOK = ""
-	DESCRIBE.ROSHIP = ""
+	DESCRIBE.BIGHT = "These warriors shall not accept defeat!"
+	DESCRIBE.KNOOK = "Two warriors mashed together!"
+	DESCRIBE.ROSHIP = "They fight a coward's way."
 	
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH	
 	-- Blowgun stuff
