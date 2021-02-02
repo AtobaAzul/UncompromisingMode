@@ -316,6 +316,7 @@ local function fn()
     anim:PlayAnimation("idle")
     
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
+	inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.runspeed = 5.5
     inst.components.locomotor.walkspeed = 2.5
     inst:SetStateGraph("SGuncompromising_pawn")
