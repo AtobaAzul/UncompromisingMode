@@ -221,9 +221,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	WEREPIG = DESCRIBE.PIGMAN.WEREPIG,
 	}
 	
-	DESCRIBE.BIGHT = ""
-	DESCRIBE.KNOOK = ""
-	DESCRIBE.ROSHIP = ""
+	DESCRIBE.BIGHT = "We're sorry we didn't fix you!"
+	DESCRIBE.KNOOK = "We think we should keep a distance."
+	DESCRIBE.ROSHIP = "You're our least favorite!"
 	
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH		
 	-- Blowgun stuff
