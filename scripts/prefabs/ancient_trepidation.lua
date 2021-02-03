@@ -23,7 +23,7 @@ local function NormalRetarget(inst)
     return FindEntity(inst, targetDist, 
         function(guy) 
             if inst.components.combat:CanTarget(guy) and inst.enraged == true then
-                return guy:HasTag("character")
+                return guy:HasTag("character") and guy.components.sanity ~= nil and guy.components.sanity:GetPercent() < 0.5
             end
     end)
 end
