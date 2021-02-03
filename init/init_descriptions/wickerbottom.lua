@@ -232,6 +232,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.ROSHIP = "It lacks the amount of firepower the Bishop has."
 	
 	DESCRIBE.UM_PAWN = "It's based on proximity, so let's steer clear."
+	DESCRIBE.UM_PAWN_NIGHTMARE = ""
 	
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH		
 	-- Blowgun stuff

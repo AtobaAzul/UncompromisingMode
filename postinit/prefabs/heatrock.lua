@@ -6,7 +6,7 @@
 ]]
 
 AddPrefabPostInit("heatrock", function(inst)
-    local base_insulation = GLOBAL.TUNING.INSULATION_SMALL --60 insulation
+    local base_insulation = GLOBAL.TUNING.INSULATION_TINY --60 insulation
 	
 	if inst.components.temperature ~= nil then
 		inst.components.temperature.inherentinsulation = base_insulation

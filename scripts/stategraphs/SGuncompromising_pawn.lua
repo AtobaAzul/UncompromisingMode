@@ -6,7 +6,13 @@ require("stategraphs/commonstates")
 local actionhandlers = 
 {
     ActionHandler(ACTIONS.EAT, "eat"),
-    ActionHandler(ACTIONS.UNCOMPROMISING_PAWN_HIDE, "hide_pre"),
+    ActionHandler(ACTIONS.UNCOMPROMISING_PAWN_HIDE, function(inst)
+		if inst.pawntype == "_nightmare" then
+			inst.sg:GoToState("hide_pre_nightmare")
+		else
+			inst.sg:GoToState("hide_pre")
+		end
+	end),
     ActionHandler(ACTIONS.UNCOMPROMISING_PAWN_SHAKE, "rattle_and_shake"),
 }
 
@@ -357,7 +363,7 @@ local states=
             inst.SoundEmitter:PlaySound("dontstarve/creatures/knight/hurt")
             inst.AnimState:PlayAnimation("hide")
             inst.Physics:Stop()
-            inst:PerformBufferedAction()
+            --inst:PerformBufferedAction()
             ChangeToInventoryPhysics(inst)
             inst.components.health:SetInvincible(true)
         end,
@@ -369,8 +375,32 @@ local states=
 
         events=
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("hide_loop") end ),
+            EventHandler("animover", function(inst) inst:Remove() end ),
         },
+    },
+	
+    State{
+        name = "hide_pre_nightmare",
+        tags = {"busy"},
+
+        onenter = function(inst)
+            inst.AnimState:PlayAnimation("frozen_loop_pst", true)
+			inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_fuse_LP", "pawn_hiss")
+            inst.Physics:Stop()
+			inst.sg:SetTimeout(2)
+        end,
+		
+		ontimeout = function(inst)
+			local x, y, z = inst.Transform:GetWorldPosition()
+			local ents = #TheSim:FindEntities(x, y, z, 7, nil, { "playerghost", "INLIMBO" }, { "player" })
+			
+			if ents > 0 and not inst.components.health:IsDead() then
+				inst.components.explosive:OnBurnt()
+			else
+				inst.SoundEmitter:KillSound("pawn_hiss")
+				inst.sg:GoToState("idle")
+			end
+        end,
     },
 
     State{

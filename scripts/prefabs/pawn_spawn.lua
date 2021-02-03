@@ -24,7 +24,7 @@ local function onhit(inst)
     end
 end
 
-local function fn()
+local function create_common(pawntype)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -53,7 +53,7 @@ local function fn()
 
     -------------------
     inst:AddComponent("childspawner")
-    inst.components.childspawner.childname = "um_pawn"
+    inst.components.childspawner.childname = "um_pawn"..pawntype
     inst.components.childspawner:SetRegenPeriod(TUNING.CATCOONDEN_REGEN_TIME)
     inst.components.childspawner:SetSpawnPeriod(1)
     inst.components.childspawner:SetMaxChildren(1)
@@ -62,4 +62,25 @@ local function fn()
     return inst
 end
 
-return Prefab("pawn_hopper", fn, assets, prefabs)
+local function pawn()
+    local inst = create_common("")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    return inst
+end
+
+local function pawn_nightmare()
+    local inst = create_common("_nightmare")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    return inst
+end
+
+return Prefab("pawn_hopper", pawn, assets, prefabs),
+		Prefab("pawn_hopper_nightmare", pawn_nightmare, assets, prefabs)

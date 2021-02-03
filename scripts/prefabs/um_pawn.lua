@@ -93,7 +93,7 @@ local function CheckTargetPiece(inst)
             inst.fx.entity:AddFollower()
             inst.fx.Follower:FollowSymbol(inst.GUID, "body", 0, -40, 0)
 			
-            inst.fxlight = SpawnPrefab(fxname.."_light")
+            inst.fxlight = SpawnPrefab(fxname.."_light"..inst.pawntype)
             inst.fxlight.entity:AddFollower()
             inst.fxlight.Follower:FollowSymbol(inst.GUID, "body", 0, -40, 0)
         end
@@ -233,7 +233,10 @@ local function SpawnSpikes(inst)
 end
 
 local function OnExplodeFn(inst)
-    SpawnPrefab("explode_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
+    inst.SoundEmitter:KillSound("pawn_hiss")
+    local explosive = SpawnPrefab("explode_small")
+	explosive.Transform:SetPosition(inst.Transform:GetWorldPosition())
+	explosive.Transform:SetScale(2, 2, 2)
 end
 
 local function SpawnAmalgams(inst)
@@ -271,28 +274,14 @@ local function SpawnAmalgams(inst)
 			v.components.lootdropper:SetChanceLootTable('um_pawn')
 		end
 	end
-	--[[
-	knook.Transform:SetPosition(x, 0, z)
-	roship.Transform:SetPosition(x, 0, z)
-	bight.Transform:SetPosition(x, 0, z)
-	knook.sg:GoToState("zombie")
-	roship.sg:GoToState("zombie")
-	bight.sg:GoToState("zombie")]]
 end
 
 local function onnear(inst, target)
-    SpawnSpikes(target)
-	
+	SpawnSpikes(target)
 	SpawnAmalgams(target)
-	
-    inst:AddComponent("explosive")
-    inst.components.explosive:SetOnExplodeFn(OnExplodeFn)
-    inst.components.explosive.explosivedamage = 0
-    --inst.components.explosive:OnBurnt()
-	inst:DoTaskInTime(3,function(inst) inst:Remove() end)
 end
 
-local function fn()
+local function pawn_common(pawntype)
 	local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
 	local anim = inst.entity:AddAnimState()
@@ -313,7 +302,7 @@ local function fn()
     MakeCharacterPhysics(inst, 1, 0.5)
 
     anim:SetBank("uncompromising_pawn")
-    anim:SetBuild("uncompromising_pawn_build")
+    anim:SetBuild("uncompromising_pawn"..pawntype.."_build")
     anim:PlayAnimation("idle")
     
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
@@ -332,6 +321,8 @@ local function fn()
 	if not TheWorld.ismastersim then
 		return inst
 	end
+	
+	inst.pawntype = pawntype
 
 	inst:AddComponent("sanityaura")
 
@@ -350,10 +341,13 @@ local function fn()
     inst:AddComponent("inspectable")
     inst.components.inspectable.getstatus = getstatus
 	
-	inst:AddComponent("playerprox")
-    inst.components.playerprox:SetDist(7, 13) --set specific values
-    inst.components.playerprox:SetOnPlayerNear(onnear)
-    inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
+	if inst.pawntype == "_nightmare" then
+		inst:AddComponent("explosive")
+		inst.components.explosive:SetOnExplodeFn(OnExplodeFn)
+		inst.components.explosive.explosiverange = 6
+		inst.components.explosive.buildingdamage = 0
+		inst.components.explosive.explosivedamage = TUNING.GUNPOWDER_DAMAGE
+	end
 	
 	inst.OnEntityWake = OnWake
 	inst.OnEntitySleep = OnSleep
@@ -370,6 +364,31 @@ local function fn()
 	end
 	
 	inst.sg:GoToState("hide_post")
+
+    return inst
+end
+
+local function pawn()
+    local inst = pawn_common("")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+	inst:AddComponent("playerprox")
+    inst.components.playerprox:SetDist(7, 13) --set specific values
+    inst.components.playerprox:SetOnPlayerNear(onnear)
+    inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
+	
+    return inst
+end
+
+local function pawn_nightmare()
+    local inst = pawn_common("_nightmare")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
 
     return inst
 end
@@ -432,7 +451,6 @@ local function orangelight()
     return inst
 end
 
-
 local function yellowlight()
     local inst = create_common(255,255,0)
 
@@ -444,7 +462,6 @@ local function yellowlight()
 
     return inst
 end
-
 
 local function bluelight()
     local inst = create_common(0,0,255)
@@ -458,9 +475,61 @@ local function bluelight()
     return inst
 end
 
+local function redlight_nightmare()
+    local inst = create_common(255,0,0)
 
-return Prefab("um_pawn", fn, assets, prefabs),
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+	inst.SoundEmitter:PlaySound("UCSounds/pawn/ping_nightmare_hot")
+
+    return inst
+end
+
+local function orangelight_nightmare()
+    local inst = create_common(255,125,0)
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+	inst.SoundEmitter:PlaySound("UCSounds/pawn/ping_nightmare_warmer")
+
+    return inst
+end
+
+local function yellowlight_nightmare()
+    local inst = create_common(255,255,0)
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+	inst.SoundEmitter:PlaySound("UCSounds/pawn/ping_nightmare_warm")
+
+    return inst
+end
+
+local function bluelight_nightmare()
+    local inst = create_common(0,0,255)
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.SoundEmitter:PlaySound("UCSounds/pawn/ping_nightmare_cold")
+
+    return inst
+end
+
+return Prefab("um_pawn", pawn, assets, prefabs),
+		Prefab("um_pawn_nightmare", pawn_nightmare, assets, prefabs),
 		Prefab("dr_hot_loop_light", redlight),
 		Prefab("dr_warmer_loop_light", orangelight),
 		Prefab("dr_warm_loop_2_light", yellowlight),
-		Prefab("dr_warm_loop_1_light", bluelight)
+		Prefab("dr_warm_loop_1_light", bluelight),
+		Prefab("dr_hot_loop_light_nightmare", redlight_nightmare),
+		Prefab("dr_warmer_loop_light_nightmare", orangelight_nightmare),
+		Prefab("dr_warm_loop_2_light_nightmare", yellowlight_nightmare),
+		Prefab("dr_warm_loop_1_light_nightmare", bluelight_nightmare)

@@ -408,5 +408,13 @@ end)
 	if GLOBAL.terrain.rooms.LabyrinthEntrance then
 		GLOBAL.terrain.rooms.LabyrinthEntrance.contents.distributeprefabs.pawn_hopper = 0.2
 	end
+	
+	if GLOBAL.terrain.rooms.Labyrinth then
+		GLOBAL.terrain.rooms.Labyrinth.contents.distributeprefabs.pawn_hopper_nightmare = 0.2
+	end
+	
+	if GLOBAL.terrain.rooms.AtriumMazeEntrance then
+		GLOBAL.terrain.rooms.AtriumMazeEntrance.contents.distributeprefabs.pawn_hopper_nightmare = 0.2
+	end
 
 modimport("init/init_food/init_food_worldgen")

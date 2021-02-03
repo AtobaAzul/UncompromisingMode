@@ -227,6 +227,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.ROSHIP = "He can hock a loogie real far."
 	
 	DESCRIBE.UM_PAWN = "I think his message is pretty clear, eh?"
+	DESCRIBE.UM_PAWN_NIGHTMARE = ""
 	
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH	
 	-- Blowgun stuff

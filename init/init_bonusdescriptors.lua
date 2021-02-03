@@ -30,15 +30,15 @@ GLOBAL.GetDescription = function(inst, item, ...)
 				item.heatstring = GLOBAL.STRINGS.CHARACTERS[character].DESCRIBE.HEATROCK_LEVEL
 			end
 			
-			if item.currentheat < 60 then
+			if item.currentheat <= 30 then
 				ret = ret .."\n".. item.heatstring.TINY
-			elseif item.currentheat >= 60 and item.currentheat < 120 then
+			elseif item.currentheat > 30 and item.currentheat <= 90 then
 				ret = ret .."\n".. item.heatstring.SMALL
-			elseif item.currentheat >= 120 and item.currentheat < 180 then
+			elseif item.currentheat > 90 and item.currentheat <= 150 then
 				ret = ret .."\n".. item.heatstring.MED
-			elseif item.currentheat >= 180 and item.currentheat < 240 then
+			elseif item.currentheat > 150 and item.currentheat <= 210 then
 				ret = ret .."\n".. item.heatstring.LARGE
-			elseif item.currentheat >= 240 then
+			elseif item.currentheat > 210 then
 				ret = ret .."\n".. item.heatstring.HUGE
 			end
 		end

@@ -227,6 +227,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.ROSHIP = "That toss is making me feel crossed."
 	
 	DESCRIBE.UM_PAWN = "Don't get too close, you'll regret it the most!"
+	DESCRIBE.UM_PAWN_NIGHTMARE = ""
 	
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH	
 	-- Blowgun stuff
