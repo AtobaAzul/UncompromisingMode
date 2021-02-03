@@ -231,7 +231,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.KNOOK = "He's even more of a jerk in motion!"
 	DESCRIBE.ROSHIP = "Your face looks even worse now!"
 	
-	DESCRIBE.UM_PAWN = ""
+	DESCRIBE.UM_PAWN = "The miniature work took me a while."
 	
 	-- Blowgun stuff
 	DESCRIBE.UNCOMPROMISING_BLOWGUN = DESCRIBE.BLOWDART_PIPE
