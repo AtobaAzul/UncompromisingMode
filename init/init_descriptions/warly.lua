@@ -226,7 +226,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.KNOOK = "The horse is baked into the inside."
 	DESCRIBE.ROSHIP = "It cooks up a shocker!"
 	
-	DESCRIBE.UM_PAWN = ""
+	DESCRIBE.UM_PAWN = "I'll watch my step."
 	
 	-- Blowgun stuff
 	DESCRIBE.UNCOMPROMISING_BLOWGUN = DESCRIBE.BLOWDART_PIPE
