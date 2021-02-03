@@ -227,7 +227,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.KNOOK = "Jumpy Ironfolk is scary!"
 	DESCRIBE.ROSHIP = "Scales don't mix well with shock!"
 	
-	DESCRIBE.UM_PAWN = ""
+	DESCRIBE.UM_PAWN = "Don't like Ironfolk's noises."
 	
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH	
 	-- Blowgun stuff
