@@ -54,12 +54,12 @@ local GIANTS =
     {
         radius = 150,
 		power = 1,
-    },]]
+    },
 	["krampus"] =
     {
         radius = 150,
 		power = 1.5,
-    },
+    },]]
 	["moose"] =
     {
         radius = 200,

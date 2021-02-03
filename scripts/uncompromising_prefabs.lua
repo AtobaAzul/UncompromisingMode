@@ -199,7 +199,7 @@ return {
 	"electric_ring",
 	"cave_entrance_sunkdecid",
 	"cave_exit_sunkdecid",
-	"uncompromising_pawn",
+	"um_pawn",
 	"pawn_spawn",
 	"pigking_pigtorch",
 }

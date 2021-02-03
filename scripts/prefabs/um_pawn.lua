@@ -12,15 +12,6 @@ local prefabs =
 {
 }
 
-local crabbitsounds = 
-{
-}
-
-local beardsounds = 
-{
-}
-
---local brain = require "uncompromising_pawn"
 local EFFECTS =
 {
     hot = "dr_hot_loop",
@@ -28,6 +19,13 @@ local EFFECTS =
     warm = "dr_warm_loop_2",
     cold = "dr_warm_loop_1",
 }
+
+SetSharedLootTable('um_pawn',
+{
+    {'nightmarefuel',    0.2},
+    {'thulecite_pieces', 0.1},
+    {'trinket_6',      0.4},
+})
 
 local PAWN_DIVINING_DISTANCES = 
 		{
@@ -67,6 +65,9 @@ local function FindClosestPart(inst)
 end
 
 local function CheckTargetPiece(inst)
+	--inst.SoundEmitter:KillSound("ping")
+		
+	if not inst.components.health:IsDead() then
         local intensity = 0
         local closeness = nil
         local fxname = nil
@@ -79,7 +80,7 @@ local function CheckTargetPiece(inst)
             for k,v in ipairs(PAWN_DIVINING_DISTANCES) do
                 closeness = v
                 fxname = EFFECTS[v.describe]
-
+		
                 if v.maxdist and distsq <= v.maxdist*v.maxdist then
                     nextpingtime = closeness.pingtime
                     break
@@ -88,27 +89,22 @@ local function CheckTargetPiece(inst)
         end
 
         if fxname ~= nil then
-            --Don't care if there is still a reference to previous fx...
-            --just let it finish on its own and remove itself
-            inst.fxlight = SpawnPrefab(fxname.."_light")
-            inst.fxlight.entity:AddFollower()
-            inst.fxlight.Follower:FollowSymbol(inst.GUID, "body", 0, -40, 0)
-			
             inst.fx = SpawnPrefab(fxname)
             inst.fx.entity:AddFollower()
             inst.fx.Follower:FollowSymbol(inst.GUID, "body", 0, -40, 0)
+			
+            inst.fxlight = SpawnPrefab(fxname.."_light")
+            inst.fxlight.entity:AddFollower()
+            inst.fxlight.Follower:FollowSymbol(inst.GUID, "body", 0, -40, 0)
         end
-		
-		inst.SoundEmitter:KillSound("ping")
-		inst.SoundEmitter:PlaySound("dontstarve/common/diviningrod_ping", "ping")
-		inst.SoundEmitter:SetParameter("ping", "intensity", intensity)
 		
 		if inst.task ~= nil then
 			inst.task:Cancel()
 		end
 		
 		inst.task = nil
-        inst.task = inst:DoTaskInTime(nextpingtime or 5, CheckTargetPiece)
+        inst.task = inst:DoTaskInTime(nextpingtime or PAWN_DIVINING_DEFAULTPING, CheckTargetPiece)
+	end
 end
 
 local function OnWake(inst)
@@ -266,11 +262,13 @@ local function SpawnAmalgams(inst)
 			if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
 				v.Transform:SetPosition(x2, 0, z2)
 				v.sg:GoToState("zombie")
+				v.components.lootdropper:SetChanceLootTable('um_pawn')
 				break
 			end
 			
 			v.Transform:SetPosition(x, 0, z)
 			v.sg:GoToState("zombie")
+			v.components.lootdropper:SetChanceLootTable('um_pawn')
 		end
 	end
 	--[[
@@ -319,6 +317,7 @@ local function fn()
     anim:PlayAnimation("idle")
     
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
+	inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.runspeed = 5.5
     inst.components.locomotor.walkspeed = 2.5
     inst:SetStateGraph("SGuncompromising_pawn")
@@ -343,10 +342,10 @@ local function fn()
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(100)
 
-    MakeSmallBurnableCharacter(inst, "chest")
     MakeTinyFreezableCharacter(inst, "chest")
 
     inst:AddComponent("lootdropper")
+	inst.components.lootdropper:SetChanceLootTable('um_pawn')
 
     inst:AddComponent("inspectable")
     inst.components.inspectable.getstatus = getstatus
@@ -379,6 +378,7 @@ local function create_common(r, g, b)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
+	inst.entity:AddSoundEmitter()
     inst.entity:AddLight()
     inst.entity:AddNetwork()
 
@@ -415,6 +415,8 @@ local function redlight()
         return inst
     end
 
+	inst.SoundEmitter:PlaySound("UCSounds/pawn/ping_hot")
+
     return inst
 end
 
@@ -424,6 +426,8 @@ local function orangelight()
     if not TheWorld.ismastersim then
         return inst
     end
+
+	inst.SoundEmitter:PlaySound("UCSounds/pawn/ping_warmer")
 
     return inst
 end
@@ -436,6 +440,8 @@ local function yellowlight()
         return inst
     end
 
+	inst.SoundEmitter:PlaySound("UCSounds/pawn/ping_warm")
+
     return inst
 end
 
@@ -446,6 +452,8 @@ local function bluelight()
     if not TheWorld.ismastersim then
         return inst
     end
+	
+	inst.SoundEmitter:PlaySound("UCSounds/pawn/ping_cold")
 
     return inst
 end

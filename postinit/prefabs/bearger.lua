@@ -97,7 +97,7 @@ env.AddPrefabPostInit("bearger", function(inst)
 	
     inst.LaunchProjectile = LaunchProjectile
 	
-	inst:ListenForEvent("oneat", function(inst, data)
+	--[[inst:ListenForEvent("oneat", function(inst, data)
 		if data.food ~= nil and data.food.components.edible ~= nil and data.food.components.edible.hungervalue ~= nil then
 			if data.food.prefab == "honey" then
 				inst.components.health:DoDelta(250)
@@ -105,5 +105,5 @@ env.AddPrefabPostInit("bearger", function(inst)
 				inst.components.health:DoDelta(100 + (data.food.components.edible.hungervalue * 10))
 			end
 		end
-	end)
+	end)]]
 end)

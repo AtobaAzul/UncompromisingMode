@@ -227,9 +227,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	WEREPIG = DESCRIBE.PIGMAN.WEREPIG,
 	}
 	
-	DESCRIBE.BIGHT = ""
-	DESCRIBE.KNOOK = ""
-	DESCRIBE.ROSHIP = ""
+	DESCRIBE.BIGHT = "It's a wonder that it still functions."
+	DESCRIBE.KNOOK = "They work in conjunction surprisingly well."
+	DESCRIBE.ROSHIP = "It lacks the amount of firepower the Bishop has."
 	
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH		
 	-- Blowgun stuff
