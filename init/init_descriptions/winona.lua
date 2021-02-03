@@ -227,7 +227,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.KNOOK = "They don't look very comfortable."
 	DESCRIBE.ROSHIP = "I'm surprised it can function at all."
 	
-	DESCRIBE.UM_PAWN = ""
+	DESCRIBE.UM_PAWN = "I think I'll keep away."
 	
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH		
 	-- Blowgun stuff
