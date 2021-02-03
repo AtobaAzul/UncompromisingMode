@@ -145,7 +145,6 @@ local function fn()
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BODY
-    inst.components.equippable.walkspeedmult = 0.8
 	
     inst:AddComponent("fueled")
     inst.components.fueled:SetSectionCallback(onfuelchange)
