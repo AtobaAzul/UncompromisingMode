@@ -231,7 +231,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.KNOOK = "They work in conjunction surprisingly well."
 	DESCRIBE.ROSHIP = "It lacks the amount of firepower the Bishop has."
 	
-	DESCRIBE.UM_PAWN = ""
+	DESCRIBE.UM_PAWN = "It's based on proximity, so let's steer clear."
 	
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH		
 	-- Blowgun stuff

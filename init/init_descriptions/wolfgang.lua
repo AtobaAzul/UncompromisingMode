@@ -226,7 +226,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.KNOOK = "Head is tongue! Makes Wolfgang laugh."
 	DESCRIBE.ROSHIP = "This one scares Wolfgang."
 	
-	DESCRIBE.UM_PAWN = ""
+	DESCRIBE.UM_PAWN = "Wolfgang doesn't like beeping."
 	
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH		
 	-- Blowgun stuff

@@ -225,7 +225,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.KNOOK = "Every second of life for it is agony."
 	DESCRIBE.ROSHIP = "What a miserable existence."
 	
-	DESCRIBE.UM_PAWN = ""
+	DESCRIBE.UM_PAWN = "A life of endless patrol."
 	
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH		
 	-- Blowgun stuff

@@ -226,7 +226,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.KNOOK = "With his hops, he could make me drop!"
 	DESCRIBE.ROSHIP = "That toss is making me feel crossed."
 	
-	DESCRIBE.UM_PAWN = ""
+	DESCRIBE.UM_PAWN = "Don't get too close, you'll regret it the most!"
 	
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH	
 	-- Blowgun stuff

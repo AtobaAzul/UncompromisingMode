@@ -226,7 +226,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.KNOOK = "The fact they stick together is a tad admirable."
 	DESCRIBE.ROSHIP = "He can hock a loogie real far."
 	
-	DESCRIBE.UM_PAWN = ""
+	DESCRIBE.UM_PAWN = "I think his message is pretty clear, eh?"
 	
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH	
 	-- Blowgun stuff

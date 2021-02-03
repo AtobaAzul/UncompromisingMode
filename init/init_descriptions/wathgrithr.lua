@@ -225,7 +225,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.KNOOK = "Two warriors mashed together!"
 	DESCRIBE.ROSHIP = "They fight a coward's way."
 	
-	DESCRIBE.UM_PAWN = ""
+	DESCRIBE.UM_PAWN = "A coward who hides behind his comrades."
 	
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH	
 	-- Blowgun stuff
