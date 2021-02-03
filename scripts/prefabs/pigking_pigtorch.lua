@@ -82,7 +82,7 @@ local function fn()
 
     inst:AddTag("structure")
     inst:AddTag("wildfireprotected")
-
+	inst:AddTag("pkpole")
     --MakeSnowCoveredPristine(inst)
 
     inst.entity:SetPristine()
@@ -583,3 +583,4 @@ end
 
 return Prefab("pigking_pigtorch", fn),
 Prefab("pigking_pigguard", guard)
+

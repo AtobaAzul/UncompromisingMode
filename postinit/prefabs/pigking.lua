@@ -44,13 +44,29 @@ local _OnAcceptOld = inst.components.trader.onaccept
 local function OnGetItemFromPlayer(inst, giver, item)
 if item.components.edible ~= nil and item.components.edible.hungervalue > 70 and FindRecruit(inst) then
 SendRecruit(inst,item.components.edible.hungervalue,FindRecruit(inst),giver)
+inst.sg:GoToState("cointoss")
 --inst.sg:GoToState("recruit")
 else
 _OnAcceptOld(inst,giver,item)
 end
 end
 
+local function ErectPole(inst)
+local x,y,z = inst.Transform:GetWorldPosition()
+if #TheSim:FindEntities(x,y,z,20,{"pkpole"}) <= 12 and TheWorld.Map:IsAboveGroundAtPoint(x, 0, z) and not TheWorld.state.isnight then
+local angle = math.random(-360,360)
+local dist = math.random(7,10)
+        x = x + dist * math.sin(angle)
+        z = z + dist * math.cos(angle)
+local pole = SpawnPrefab("pigking_pigtorch")
+local collapse = SpawnPrefab("collapse_big")
+pole.Transform:SetPosition(x,y,z)
+collapse.Transform:SetPosition(x,y,z)
+inst.sg:GoToState("cointoss")
+end
+end
+
 inst.components.trader:SetAcceptTest(AcceptTest)
 inst.components.trader.onaccept = OnGetItemFromPlayer
-
+inst:DoPeriodicTask(720+math.random(-380,480),ErectPole)
 end)

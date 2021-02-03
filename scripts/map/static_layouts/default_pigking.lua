@@ -77,8 +77,9 @@ return {
       properties = {},
       objects = {
         {
+        {
           name = "",
-          type = "pigtorch",
+          type = "insanityrock",
           shape = "rectangle",
           x = 240,
           y = 112,
@@ -89,7 +90,7 @@ return {
         },
         {
           name = "",
-          type = "pigtorch",
+          type = "insanityrock",
           shape = "rectangle",
           x = 112,
           y = 256,
@@ -100,7 +101,7 @@ return {
         },
         {
           name = "",
-          type = "pigtorch",
+          type = "insanityrock",
           shape = "rectangle",
           x = 384,
           y = 256,
@@ -111,7 +112,94 @@ return {
         },
         {
           name = "",
-          type = "pigtorch",
+          type = "insanityrock",
+          shape = "rectangle",
+          x = 260,
+          y = 395,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "sanityrock",
+          shape = "rectangle",
+          x = 329,
+          y = 188,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "sanityrock",
+          shape = "rectangle",
+          x = 186,
+          y = 179,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "sanityrock",
+          shape = "rectangle",
+          x = 190,
+          y = 329,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "sanityrock",
+          shape = "rectangle",
+          x = 327,
+          y = 324,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+          name = "",
+          type = "pigking_pigtorch",
+          shape = "rectangle",
+          x = 240,
+          y = 112,
+          width = 16,
+          height = 16,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "pigking_pigtorch",
+          shape = "rectangle",
+          x = 112,
+          y = 256,
+          width = 16,
+          height = 16,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "pigking_pigtorch",
+          shape = "rectangle",
+          x = 384,
+          y = 256,
+          width = 16,
+          height = 16,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "pigking_pigtorch",
           shape = "rectangle",
           x = 240,
           y = 400,

@@ -91,7 +91,7 @@ function PigGuard_pigkingBrain:OnStart()
             WhileNode(function() return self.inst.components.combat.target ~= nil and self.inst.components.combat:InCooldown() end, "Dodge",
                 RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST))),
 				
-		IfNode(function() return GetLeader(self.inst) end, "has leader",		
+		IfNode(function() return GetLeader(self.inst) and not (self.inst.components.combat ~= nil and self.inst.components.combat.target ~= nil) end, "has leader",		
 		ChattyNode(self.inst, "PIG_GUARD_PIGKING_TALK_LOOKATWILSON_FRIEND",
                 Follow(self.inst, GetLeader, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST)),
 				

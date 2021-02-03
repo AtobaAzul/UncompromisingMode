@@ -290,7 +290,8 @@ local function onnear(inst, target)
     inst:AddComponent("explosive")
     inst.components.explosive:SetOnExplodeFn(OnExplodeFn)
     inst.components.explosive.explosivedamage = 0
-    inst.components.explosive:OnBurnt()
+    --inst.components.explosive:OnBurnt()
+	inst:DoTaskInTime(3,function(inst) inst:Remove() end)
 end
 
 local function fn()
