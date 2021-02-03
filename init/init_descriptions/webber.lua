@@ -225,7 +225,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.KNOOK = "We think we should keep a distance."
 	DESCRIBE.ROSHIP = "You're our least favorite!"
 	
-	DESCRIBE.UM_PAWN = ""
+	DESCRIBE.UM_PAWN = "We never liked alarms."
 	
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH		
 	-- Blowgun stuff
