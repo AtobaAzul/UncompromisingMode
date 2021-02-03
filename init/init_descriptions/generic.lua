@@ -279,7 +279,7 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.KNOOK = "I don't like that maw!"
 	DESCRIBE.ROSHIP = "What a horror!"
 	
-	DESCRIBE.UM_PAWN = "That's a pawn (test)"
+	DESCRIBE.UM_PAWN = "I should keep a distance."
 	
 	-- Blowgun stuff
 	DESCRIBE.UNCOMPROMISING_BLOWGUN = DESCRIBE.BLOWDART_PIPE
