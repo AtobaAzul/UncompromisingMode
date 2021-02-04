@@ -325,7 +325,7 @@ local function OnKill(inst, data)
     end--]]
 end
 
-local loot = {"meat", "meat", "meat", "meat", "meat", "meat", "meat", "meat", "dragon_scales"}
+local loot = {"meat", "meat", "meat", "meat", "meat", "meat", "meat", "meat", "dragon_scales","dragon_scales","dragon_scales"}
 
 local function OnDead(inst)
     TheWorld:PushEvent("mockflykilled", inst)

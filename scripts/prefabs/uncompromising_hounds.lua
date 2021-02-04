@@ -68,6 +68,8 @@ SetSharedLootTable('hound_lightning',
 {
     {'monstermeat', 1.0},
     {'houndstooth', 1.0},
+	{'goldnugget',      1},
+	{'goldnugget',      1},
     {'yellowgem',      0.05},
 })
 
