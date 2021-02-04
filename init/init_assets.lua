@@ -250,7 +250,6 @@ Assets = {
 	Asset("ANIM", "anim/lureplague_rat.zip"),
 	Asset("ANIM", "anim/snapperturtle.zip"),
 	Asset("ANIM", "anim/snapperturtle_water.zip"),
-	Asset("ANIM", "anim/beefalo_paw.zip"),
 	Asset("ANIM", "anim/bush_marsh.zip"),
     Asset("ANIM", "anim/cursed_antler.zip"),
     Asset("ANIM", "anim/swap_cursed_antler.zip"),
@@ -352,7 +351,6 @@ Assets = {
 	Asset("ANIM", "anim/roship.zip"),
 	Asset("ANIM", "anim/roship_attack.zip"),
 	Asset("ANIM", "anim/electric_explosion.zip"),
-	Asset("ANIM", "anim/electric_explosion_fx.zip"),
 	
 	Asset("ANIM", "anim/deerclops_mutation_anims.zip"),
 	Asset("ANIM", "anim/deerclops_barrier.zip"),
