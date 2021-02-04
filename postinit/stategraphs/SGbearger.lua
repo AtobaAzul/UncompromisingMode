@@ -43,10 +43,23 @@ local function onattackfn(inst)
     end
 end
 
+local function ShakeIfClose_Footstep(inst)
+    ShakeAllCameras(CAMERASHAKE.FULL, .35, .02, 1, inst, 40)
+end
+
+local function DoFootstep(inst)
+	if inst:IsStandState("quad") then
+		inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/step_soft")
+	else
+		inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/step_stomp")
+		ShakeIfClose_Footstep(inst)
+	end
+end
+
 local events={
 	EventHandler("doattack", function(inst, data)
 		if inst.rockthrow == true and not inst.components.health:IsDead() then
-            inst.sg:GoToState("shoot", data.target)
+            inst.sg:GoToState("pre_shoot", data.target)
 		else
 			onattackfn(inst)
 		end
@@ -55,6 +68,28 @@ local events={
 
 
 local states = {
+
+	State{
+		name = "pre_shoot",
+		tags = {"busy", "canrotate"},
+
+		onenter = function(inst, target)
+			inst.Physics:Stop()
+			inst.AnimState:PlayAnimation("taunt")
+		end,
+
+		timeline=
+		{
+			TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/taunt") end),
+			TimeEvent(9*FRAMES, function(inst) DoFootstep(inst) end),
+			TimeEvent(33*FRAMES, function(inst) DoFootstep(inst) end),
+		},
+
+		events=
+		{
+			EventHandler("animover", function(inst, target) inst:ClearBufferedAction() inst.sg:GoToState("shoot", target) end),
+		},
+	},
 	
     State{
         name = "shoot",
@@ -66,8 +101,7 @@ local states = {
             end
 
             inst.Physics:Stop()
-            inst.AnimState:PushAnimation("action")
-            inst.AnimState:PlayAnimation("shoot")
+            inst.AnimState:PlayAnimation("atk")
         end,
 
         timeline =
@@ -85,9 +119,9 @@ local states = {
 
         events =
         {
-			EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
+			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
-    },    
+	},
 }
 
 for k, v in pairs(events) do
