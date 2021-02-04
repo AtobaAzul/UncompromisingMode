@@ -66,6 +66,7 @@ local states = {
             end
 
             inst.Physics:Stop()
+            inst.AnimState:PushAnimation("action")
             inst.AnimState:PlayAnimation("shoot")
         end,
 
@@ -84,7 +85,7 @@ local states = {
 
         events =
         {
-			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+			EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
         },
     },    
 }

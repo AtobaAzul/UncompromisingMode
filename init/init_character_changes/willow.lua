@@ -140,7 +140,7 @@ AllRecipes["bernie_inactive"].sortkey = AllRecipes["healingsalve"].sortkey - .1
 local function createlight(inst)
 
     local caster = inst.components.inventoryitem.owner
-
+	caster.components.talker:Say(GetString(caster.prefab, "ANNOUNCE_UNCOMP_LIGHTFIRE"))  
     inst.SoundEmitter:KillSound("hiss")
 	SpawnPrefab("firesplash_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
     inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
