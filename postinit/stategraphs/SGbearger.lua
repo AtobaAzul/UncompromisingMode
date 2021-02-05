@@ -76,6 +76,9 @@ local states = {
 		onenter = function(inst, target)
 			inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("taunt")
+			if target ~= nil then
+				inst:FacePoint(target.Transform:GetWorldPosition())
+			end
 		end,
 
 		timeline=
@@ -87,7 +90,7 @@ local states = {
 
 		events=
 		{
-			EventHandler("animover", function(inst, target) inst:ClearBufferedAction() inst.sg:GoToState("shoot", target) end),
+			EventHandler("animover", function(inst) inst:ClearBufferedAction() inst.sg:GoToState("shoot") end),
 		},
 	},
 	
@@ -95,11 +98,13 @@ local states = {
         name = "shoot",
         tags = { "attack", "busy" },
 
-        onenter = function(inst, target)
-            if not target then
-                target = inst.components.combat.target ~= nil and inst.components.combat.target
-            end
-
+        onenter = function(inst)
+            local target = inst.components.combat.target ~= nil and inst.components.combat.target
+			
+			if target ~= nil and target.Transform ~= nil then
+				inst:FacePoint(target.Transform:GetWorldPosition())
+			end
+			
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("atk")
         end,
@@ -109,6 +114,12 @@ local states = {
             TimeEvent(7*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/taunt", "taunt") end),
             TimeEvent(23*FRAMES, function(inst)
 				if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
+				local target = inst.components.combat.target ~= nil and inst.components.combat.target
+			
+					if target ~= nil and target.Transform ~= nil then
+						inst:FacePoint(target.Transform:GetWorldPosition())
+					end
+				
 					inst.LaunchProjectile(inst, inst.components.combat.target)
 					inst.components.timer:StopTimer("RockThrow")
 					inst.components.timer:StartTimer("RockThrow", TUNING.BEARGER_NORMAL_GROUNDPOUND_COOLDOWN)
