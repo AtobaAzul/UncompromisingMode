@@ -348,6 +348,19 @@ local function WerepigRetargetFn(inst)
     )
 end
 local werepigbrain = require "brains/werepigbrain"
+local function WerepigSleepTest(inst)
+    return false
+end
+
+local function WerepigWakeTest(inst)
+    return true
+end
+local function WerepigKeepTargetFn(inst, target)
+    return inst.components.combat:CanTarget(target)
+           and not target:HasTag("werepig")
+           and not target:HasTag("wereplayer")
+           and not (target.sg ~= nil and target.sg:HasStateTag("transform"))
+end
 local function SetWerePig(inst)
     inst:AddTag("werepig")
     inst:RemoveTag("guard")
