@@ -194,6 +194,16 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
             GENERIC = "GET'EM, BERNIE!!",
             ASHLEY = "GET'EM, ASHLEY!!",
         }
+		
+	ANNOUNCE.ANNOUNCE_UNCOMP_LIGHTFIRE =
+	{
+		"Teehee!",
+		"Pretty!",
+		"Oops!",
+		"I made a fire!",
+		"Burn!",
+		"I can't help myself!",
+	}
 	DESCRIBE.ANTIHISTAMINE = "It'll clear my snot."
     ANNOUNCE.CURSED_ITEM_EQUIP = "OUCH! Is that what burning feels like?"
 	DESCRIBE.SCREECHER_TRINKET = "I... I don't think I should burn this."

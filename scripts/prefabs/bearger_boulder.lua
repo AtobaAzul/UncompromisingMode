@@ -72,16 +72,16 @@ local function onthrown(inst)
     inst.AnimState:SetBuild("rock")
     inst.AnimState:PlayAnimation("full")
 
+    
     inst.Physics:SetMass(1)
-    inst.Physics:SetCapsule(0.2, 0.2)
-    inst.Physics:SetFriction(0)
-    inst.Physics:SetDamping(0)
+    inst.Physics:SetFriction(10)
+    inst.Physics:SetDamping(5)
     inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
     inst.Physics:ClearCollisionMask()
-    inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-    inst.Physics:CollidesWith(COLLISION.GROUND)
+    inst.Physics:CollidesWith(COLLISION.WORLD)
     inst.Physics:CollidesWith(COLLISION.OBSTACLES)
-    inst.Physics:CollidesWith(COLLISION.ITEMS)
+    inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+    inst.Physics:SetCapsule(0.02, 0.02)
 	
     inst.Physics:SetCollisionCallback(oncollide)
 end
@@ -95,7 +95,8 @@ local function projectilefn()
     inst.entity:AddPhysics()
     inst.entity:AddNetwork()
 
-
+	local shadow = inst.entity:AddDynamicShadow()
+    shadow:SetSize( 1.5, 1 )
 
     inst.AnimState:SetBank("rock")
     inst.AnimState:SetBuild("rock")
@@ -113,6 +114,7 @@ local function projectilefn()
     inst.components.complexprojectile:SetLaunchOffset(Vector3(0, .2, 0))
     inst.components.complexprojectile:SetOnLaunch(onthrown)
     inst.components.complexprojectile:SetOnHit(OnHitInk)
+    inst.components.complexprojectile.usehigharc = false
 
     inst.persists = false
 
