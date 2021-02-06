@@ -347,6 +347,7 @@ local function WerepigRetargetFn(inst)
         WEREPIG_RETARGET_CANT_TAGS
     )
 end
+local werepigbrain = require "brains/werepigbrain"
 local function SetWerePig(inst)
     inst:AddTag("werepig")
     inst:RemoveTag("guard")
