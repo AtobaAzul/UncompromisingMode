@@ -1,5 +1,6 @@
 require "behaviours/wander"
 require "behaviours/runaway"
+require "behaviours/chaseandattack"
 require "behaviours/doaction"
 require "behaviours/panic"
 
@@ -29,7 +30,11 @@ local function KeepFaceTargetFn(inst, target)
 end
 
 local function IsDangerClose(inst)
-    return FindEntity(inst, 7, nil, {"player"}) ~= nil
+	if inst:HasTag("landmine") then
+		return FindEntity(inst, 2, nil, {"player"}) ~= nil
+	else
+		return FindEntity(inst, 7, nil, {"player"}) ~= nil
+	end
 end
 
 local function TryHide(inst)
@@ -46,12 +51,15 @@ function Uncompromising_PawnBrain:OnStart()
         --RunAway(self.inst, "scarytopr1ey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
         ParallelNode
         {
-            RunAway(self.inst, "player", SEE_PLAYER_DIST, STOP_RUN_DIST),
+            --RunAway(self.inst, "player", SEE_PLAYER_DIST, STOP_RUN_DIST),
             SequenceNode
             {
                 IfNode(function() return IsDangerClose(self.inst) end, "DangerClose", DoAction(self.inst, TryHide, "Hide")),
             },
         },
+		
+        ChaseAndAttack(self.inst, 10),
+		
 		--FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
         Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST)
     }, .25)

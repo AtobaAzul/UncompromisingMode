@@ -131,7 +131,7 @@ local function DespawnChannelers(inst)
     end
 end
 local function nodmgshielded(inst, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb)
-    return inst.hasshield and amount <= 0 and not ignore_absorb
+    return inst.hasshield and amount <= 0 and not ignore_absorb or afflicter ~= nil and afflicter:HasTag("quakedebris")
 end
 local function OnSoldiersChanged(inst)
     if inst.hasshield ~= (inst.components.commander:GetNumSoldiers() > 0) then

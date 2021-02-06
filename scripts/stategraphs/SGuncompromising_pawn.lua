@@ -391,14 +391,8 @@ local states=
         end,
 		
 		ontimeout = function(inst)
-			local x, y, z = inst.Transform:GetWorldPosition()
-			local ents = #TheSim:FindEntities(x, y, z, 7, nil, { "playerghost", "INLIMBO" }, { "player" })
-			
-			if ents > 0 and not inst.components.health:IsDead() then
+			if not inst.components.health:IsDead() then
 				inst.components.explosive:OnBurnt()
-			else
-				inst.SoundEmitter:KillSound("pawn_hiss")
-				inst.sg:GoToState("idle")
 			end
         end,
     },

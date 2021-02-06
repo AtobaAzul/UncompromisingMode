@@ -281,6 +281,23 @@ local function onnear(inst, target)
 	SpawnAmalgams(target)
 end
 
+local function FindTarget(inst, radius)
+    return FindEntity(
+        inst,
+        radius,
+        function(guy)
+            return guy:HasTag("player")
+                and inst.components.combat:CanTarget(guy)
+        end,
+        "player",
+        "playerghost"
+    )
+end
+
+local function NormalRetarget(inst)
+    return FindTarget(inst, 8)
+end
+
 local function pawn_common(pawntype)
 	local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
@@ -331,7 +348,7 @@ local function pawn_common(pawntype)
     inst.components.combat.hiteffectsymbol = "chest"
 	
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(100)
+    inst.components.health:SetMaxHealth(150)
 
     MakeTinyFreezableCharacter(inst, "chest")
 
@@ -342,6 +359,7 @@ local function pawn_common(pawntype)
     inst.components.inspectable.getstatus = getstatus
 	
 	if inst.pawntype == "_nightmare" then
+		inst.components.combat:SetRetargetFunction(1, NormalRetarget)
 		inst:AddComponent("explosive")
 		inst.components.explosive:SetOnExplodeFn(OnExplodeFn)
 		inst.components.explosive.explosiverange = 6
@@ -389,6 +407,8 @@ local function pawn_nightmare()
     if not TheWorld.ismastersim then
         return inst
     end
+	
+	inst:AddTag("landmine")
 
     return inst
 end

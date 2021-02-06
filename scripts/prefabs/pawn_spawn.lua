@@ -32,8 +32,6 @@ local function create_common(pawntype)
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    MakeSmallObstaclePhysics(inst, .5)
-
     inst.MiniMapEntity:SetIcon("catcoonden.png")
 
     inst:AddTag("cavedweller")
