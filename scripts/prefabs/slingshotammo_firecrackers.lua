@@ -300,8 +300,6 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
 
-    inst:AddComponent("inspectable")
-
     inst:AddComponent("burnable")
     inst.components.burnable:SetOnIgniteFn(DefaultBurnFn)
     inst.components.burnable:SetOnExtinguishFn(DefaultExtinguishFn)

@@ -18,7 +18,7 @@ nil,
 
 local INVALID_TILES = table.invert(
 {
-        GROUND.DRAGONFLY
+        GROUND.SCALE
 })
 
 local function UpdateSnowstormWalkSpeed(inst)

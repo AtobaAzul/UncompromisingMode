@@ -22,7 +22,7 @@ GLOBAL.GetDescription = function(inst, item, ...)
 	if prefab and item and item:HasTag("heatrock") and character ~= nil and character ~= "WES" then
 		if item.components and item.components.temperature ~= nil then
 				
-			item.currentheat = item.components.temperature:GetInsulation()
+            local winter_insulation, summer_insulation = item.components.temperature:GetInsulation()
 			
 			item.heatstring = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.HEATROCK_LEVEL
 			
@@ -30,16 +30,56 @@ GLOBAL.GetDescription = function(inst, item, ...)
 				item.heatstring = GLOBAL.STRINGS.CHARACTERS[character].DESCRIBE.HEATROCK_LEVEL
 			end
 			
-			if item.currentheat <= 30 then
-				ret = ret .."\n".. item.heatstring.TINY
-			elseif item.currentheat > 30 and item.currentheat <= 90 then
-				ret = ret .."\n".. item.heatstring.SMALL
-			elseif item.currentheat > 90 and item.currentheat <= 150 then
-				ret = ret .."\n".. item.heatstring.MED
-			elseif item.currentheat > 150 and item.currentheat <= 210 then
-				ret = ret .."\n".. item.heatstring.LARGE
-			elseif item.currentheat > 210 then
-				ret = ret .."\n".. item.heatstring.HUGE
+			if GLOBAL.TheWorld.state.issummer then
+				if summer_insulation <= 30 then
+					ret = ret .."\n".. item.heatstring.TINY
+				elseif summer_insulation > 30 and summer_insulation <= 90 then
+					ret = ret .."\n".. item.heatstring.SMALL
+				elseif summer_insulation > 90 and summer_insulation <= 150 then
+					ret = ret .."\n".. item.heatstring.MED
+				elseif summer_insulation > 150 and summer_insulation <= 210 then
+					ret = ret .."\n".. item.heatstring.LARGE
+				elseif summer_insulation > 210 then
+					ret = ret .."\n".. item.heatstring.HUGE
+				end
+			elseif GLOBAL.TheWorld.state.iswinter then
+				if winter_insulation <= 30 then
+					ret = ret .."\n".. item.heatstring.TINY
+				elseif winter_insulation > 30 and winter_insulation <= 90 then
+					ret = ret .."\n".. item.heatstring.SMALL
+				elseif winter_insulation > 90 and winter_insulation <= 150 then
+					ret = ret .."\n".. item.heatstring.MED
+				elseif winter_insulation > 150 and winter_insulation <= 210 then
+					ret = ret .."\n".. item.heatstring.LARGE
+				elseif winter_insulation > 210 then
+					ret = ret .."\n".. item.heatstring.HUGE
+				end
+			else
+				if winter_insulation > summer_insulation then
+					if winter_insulation <= 30 then
+						ret = ret .."\n".. item.heatstring.TINY
+					elseif winter_insulation > 30 and winter_insulation <= 90 then
+						ret = ret .."\n".. item.heatstring.SMALL
+					elseif winter_insulation > 90 and winter_insulation <= 150 then
+						ret = ret .."\n".. item.heatstring.MED
+					elseif winter_insulation > 150 and winter_insulation <= 210 then
+						ret = ret .."\n".. item.heatstring.LARGE
+					elseif winter_insulation > 210 then
+						ret = ret .."\n".. item.heatstring.HUGE
+					end
+				else
+					if summer_insulation <= 30 then
+						ret = ret .."\n".. item.heatstring.TINY
+					elseif summer_insulation > 30 and summer_insulation <= 90 then
+						ret = ret .."\n".. item.heatstring.SMALL
+					elseif summer_insulation > 90 and summer_insulation <= 150 then
+						ret = ret .."\n".. item.heatstring.MED
+					elseif summer_insulation > 150 and summer_insulation <= 210 then
+						ret = ret .."\n".. item.heatstring.LARGE
+					elseif summer_insulation > 210 then
+						ret = ret .."\n".. item.heatstring.HUGE
+					end
+				end
 			end
 		end
 	end

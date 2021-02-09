@@ -45,12 +45,14 @@ AddComponentPostInit("hounded", function(self)
     local _GetSpawnPoint = UpvalueHacker.GetUpvalue(self.SummonSpawn, "SummonSpawn", "GetSpawnPoint")
 
 	local function FindNearbyPlayer(inst,pt)
-	local playerlist = TheSim:FindEntities(pt.x,pt.y,pt.z, 25, {"player", "_health"},{"dead", "playerghost"})
-	local player = playerlist[math.random(#playerlist)]
-	if inst.components.combat ~= nil then	
-	inst.components.combat:SuggestTarget(player)	
+		local playerlist = TheSim:FindEntities(pt.x,pt.y,pt.z, 25, {"player", "_health"},{"dead", "playerghost"})
+		local player = playerlist[math.random(#playerlist)]
+		
+		if inst.components.combat ~= nil then	
+			inst.components.combat:SuggestTarget(player)	
+		end
 	end
-	end
+	
     local function SpawnHounded(prefab, pt, spawn_pt)
         if not prefab then
             return _SummonSpawn(pt)

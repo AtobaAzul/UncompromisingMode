@@ -16,6 +16,11 @@ TUNING.SNOW_DEPLETE_CHANCE = 0.25
 
 local AURA_EXCLUDE_TAGS = { "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "invisible" }
 
+local INVALID_TILES = table.invert(
+{
+        GROUND.SCALE
+})
+
 local startregen
 
 -- these should match the animation names to the workleft
@@ -31,7 +36,7 @@ local function onregen(inst)
 	--if inst ~= nil then
 		local my_x, my_y, my_z = inst.Transform:GetWorldPosition()
 		
-		if TheWorld.state.iswinter then--or ents2 ~= nil and #ents2 < 0 then
+		if TheWorld.state.iswinter and not INVALID_TILES[TheWorld.Map:GetTileAtPoint(my_x, my_y, my_z)] then--or ents2 ~= nil and #ents2 < 0 then
 			if inst.components.workable.workleft < 3 then
 				SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
 				inst.components.workable:SetWorkLeft(inst.components.workable.workleft+1)
@@ -326,6 +331,7 @@ local function snowpilefn(Sim)
 	
 	inst:AddTag("snowpileradius")
 	inst:AddTag("snowpile_basic")
+	inst:AddTag("snowpile")
 	inst:AddTag("salt_workable")
 	
 	if not TheWorld.ismastersim then

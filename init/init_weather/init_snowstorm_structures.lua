@@ -60,14 +60,14 @@ end
 local function CheckForSnow(inst)
 	
 	local x, y, z = inst.Transform:GetWorldPosition()
-	local ents = TheSim ~= nil and TheSim:FindEntities(x, y, z, 1, { "snowpile_basic" })
+	local ents = TheSim ~= nil and TheSim:FindEntities(x, y, z, 2, { "snowpile_basic" })
 	
 	if #ents > 0 then
 		--if inst.components.container ~= nil then
 			--inst:RemoveComponent("container")
 					
 			local x1, y1, z1 = inst.Transform:GetWorldPosition()
-			local ents2 = TheSim:FindEntities(x1, y1, z1, 1, { "snowpile" })
+			local ents2 = TheSim:FindEntities(x1, y1, z1, 2, { "snowpile" })
 			
 			if #ents2 > 0 then
 				inst:AddTag("INLIMBO")
