@@ -217,8 +217,8 @@ local function FreezeEverything(inst)
 			x = x + 2*math.cos(theta)
 			z = z - 2*math.sin(theta)
 			aura.Transform:SetPosition(x,y,z)
-			aura:DoTaskInTime(5, function(aura) aura:TriggerFX() end)
-			aura:DoTaskInTime(7, aura.KillFX)
+			aura:DoTaskInTime(6, function(aura) aura:TriggerFX() end)
+			aura:DoTaskInTime(9, aura.KillFX)
 		
 	local side = math.random(-1,1)
 	side = 0
@@ -234,8 +234,8 @@ local function FreezeEverything(inst)
 			x = x + 5*i*math.cos(theta)
 			z = z - 5*i*math.sin(theta)
 			aura.Transform:SetPosition(x,y,z)
-			aura:DoTaskInTime(3, function(aura) aura:TriggerFX() end)
-			aura:DoTaskInTime(7, aura.KillFX)
+			aura:DoTaskInTime(6, function(aura) aura:TriggerFX() end)
+			aura:DoTaskInTime(9, aura.KillFX)
 			end
 		end
 		end

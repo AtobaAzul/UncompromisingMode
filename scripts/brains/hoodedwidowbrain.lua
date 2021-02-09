@@ -113,6 +113,7 @@ local function EquipMelee(inst)
 end
 
 local function CanPhlegmNow(inst)
+if inst.components.combat~= nil and inst.components.combat.target ~= nil then
     local target = inst.components.combat.target
 	local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
 	if (target ~= nil and home ~= nil) then
@@ -122,6 +123,9 @@ local function CanPhlegmNow(inst)
 	else
 	return false
 	end
+else
+return false
+end
 end
 
 local function EquipPhlegm(inst)
