@@ -397,6 +397,8 @@ Assets = {
 	Asset( "ATLAS", "images/map_icons/lazychester_minimap.xml"),
 	Asset( "IMAGE", "images/map_icons/hoodedwidow_map.tex"),
 	Asset( "ATLAS", "images/map_icons/hoodedwidow_map.xml"),
+	Asset( "IMAGE", "images/map_icons/pollenmiteden_map.tex"),
+	Asset( "ATLAS", "images/map_icons/pollenmiteden_map.xml"),
 	--Map Icons End--
 
 	

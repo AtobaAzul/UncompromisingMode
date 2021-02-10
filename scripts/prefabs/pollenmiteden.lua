@@ -7,7 +7,7 @@ local assets =
 {
     Asset("ANIM", "anim/gnat_cocoon.zip"),
     Asset("SOUND", "sound/spider.fsb"),
-	Asset("MINIMAP_IMAGE", "spiderden"), --shared with spiderden2 and 3
+    Asset("MINIMAP_IMAGE", "pollenmiteden_map"),
 }
 
 local ANIM_DATA =
@@ -386,7 +386,7 @@ local function MakePollenmiteDenFn(den_level)
 
         MakeObstaclePhysics(inst, .5)
 
-        inst.MiniMapEntity:SetIcon("spiderden.png")
+        inst.MiniMapEntity:SetIcon("pollenmiteden_map.tex")
 
         inst.AnimState:SetBank("spider_cocoon")
         inst.AnimState:SetBuild("gnat_cocoon")
