@@ -429,7 +429,7 @@ local function Regen(inst, attacker)
         inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_hit")
         inst.AnimState:PlayAnimation(inst.anims.hit)
         inst.AnimState:PushAnimation(inst.anims.idle)
-		if attacker:HasTag("widowsgrasp") then
+		if attacker:HasTag("widowsgrasp") and not (attacker.components.rider ~= nil and attacker.components.rider:IsRiding()) then
 		inst.components.health:Kill()
 		elseif attacker:HasTag("player") and not attacker:HasTag("mime") and not attacker:HasTag("widowsgrasp") then
  		attacker.components.talker:Say(GetString(attacker.prefab, "WEBBEDCREATURE"))  

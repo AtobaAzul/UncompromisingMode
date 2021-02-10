@@ -14,6 +14,7 @@
 local require = GLOBAL.require
 local cooking = require "cooking"
 local recipes = cooking.recipes.cookpot
+local warly_recipes = cooking.recipes.portablecookpot
 --recipes.meatballs.test = function(cooker, names, tags) return tags.antihistamine and tags.antihistamine >= 3  end,
 
 local ApplyIcecreamBuff = function(inst, eater)
@@ -71,6 +72,16 @@ recipes.fishtacos.sanity = 5
 
 recipes.vegstinger.hunger = 30
 recipes.vegstinger.health = 10
+
+------Puffed Potato Souffle Buff
+warly_recipes.potatosouffle.hunger = 50
+warly_recipes.potatosouffle.health = 60
+warly_recipes.potatosouffle.sanity = 5
+
+------Veggie burger Reallocation
+recipes.leafymeatburger.hunger = 100
+recipes.leafymeatburger.sanity = 5
+recipes.leafymeatburger.health = 3
 -----------------------------------------------------------------
 -- Prevent cooked eggs birdcage infinite loop
 -----------------------------------------------------------------

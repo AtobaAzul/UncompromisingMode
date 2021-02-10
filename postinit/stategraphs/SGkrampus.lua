@@ -97,8 +97,9 @@ local states = {
 					if v.components.combat ~= nil then
 						v.components.combat:GetAttacked(inst, 50, nil)
 					end
-						
-					if v ~= nil and v.components and v.components.inventory ~= nil and not v:HasTag("fat_gang") and not v:HasTag("foodknockbackimmune") and (v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) == nil or not v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
+					if v ~= nil and v.components.inventory ~= nil and not v:HasTag("fat_gang") and not v:HasTag("foodknockbackimmune") and not (v.components.rider ~= nil and v.components.rider:IsRiding()) and 
+					--Don't knockback if you wear marble
+					(v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ==nil or not v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
 						v:PushEvent("knockback", {knocker = inst, radius = 150, strengthmult = 1})
 					end
 				end

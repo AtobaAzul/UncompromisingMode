@@ -211,7 +211,9 @@ env.AddPrefabPostInit("deerclops", function(inst)
 		local other = data.target
 		if other ~= nil then
 			if not (other.components.health ~= nil and other.components.health:IsDead()) then
-			if other ~= nil and other.components and other.components.inventory ~= nil and not other:HasTag("fat_gang") and not other:HasTag("foodknockbackimmune") and (other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) == nil or not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
+			if other ~= nil and other.components.inventory ~= nil and not other:HasTag("fat_gang") and not other:HasTag("foodknockbackimmune") and not (other.components.rider ~= nil and other.components.rider:IsRiding()) and 
+			--Don't knockback if you wear marble
+			(other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ==nil or not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
 			other:PushEvent("knockback", {knocker = inst, radius = 150, strengthmult = 1.2})
 			end
 			end

@@ -7,7 +7,7 @@ local actionhandlers =
 local events=
 {
     EventHandler("attacked", function(inst) 
-        if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then 
+        if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg.HasStateTag('busy') then 
             inst.sg:GoToState("hit")  -- can't attack during hit reaction
         end 
     end),
@@ -286,7 +286,9 @@ local states=
 					if inst.components.combat.target ~= nil and inst.components.combat:CanHitTarget(inst.components.combat.target) then--distsq(target:GetPosition(), inst:GetPosition()) <= 10 then
 					--Don't knockback if you wear marble
 					local target = inst.components.combat.target
-					if target ~= nil and target.components and target.components.inventory ~= nil and not target:HasTag("fat_gang") and not target:HasTag("foodknockbackimmune") and (target.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) == nil or not target.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not target.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
+					if target ~= nil and target.components.inventory ~= nil and not target:HasTag("fat_gang") and not target:HasTag("foodknockbackimmune") and not (target.components.rider ~= nil and target.components.rider:IsRiding()) and 
+					--Don't knockback if you wear marble
+					(target.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ==nil or not target.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not target.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
 						target:PushEvent("knockback", {knocker = inst, radius = 150, strengthmult = 1})
 					end
 				end
