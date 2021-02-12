@@ -75,13 +75,13 @@ local function OnTalk(inst)
 end
 
 local function onnear(inst, target)
-	--[[if target ~= nil then
+	if target ~= nil then
 		if target:HasTag("vetcurse") then
 			inst.components.talker:Say(GetString(inst.target, "VETERANCURSED"))
 		else
 			inst.components.talker:Say(GetString(inst.target, "VETERANCURSETAUNT"))
 		end
-	end]]
+	end
 	
 	inst:DoTaskInTime(0, StartRagtime)
 end
@@ -174,7 +174,7 @@ local function fn(Sim)
 	
 	inst.entity:SetPristine()
 	
-	--[[inst:AddComponent("talker")        
+	inst:AddComponent("talker")        
     inst.components.talker.colour = Vector3(252/255, 226/255, 219/255)
     inst.components.talker.offset = Vector3(0, -500, 0)
     inst.components.talker:MakeChatter()
@@ -199,7 +199,7 @@ local function fn(Sim)
     inst.components.inspectable:RecordViews()
 	
 	
-    --[[inst:AddComponent("playerprox")
+    inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(6, 10)
     inst.components.playerprox:SetOnPlayerNear(onnear)
     inst.components.playerprox:SetOnPlayerFar(onfar)]]
