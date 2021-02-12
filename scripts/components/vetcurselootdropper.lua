@@ -26,12 +26,9 @@ local VetcurseLootdropper = Class(function(self, inst)
     self.inst:ListenForEvent("attacked", OnAttacked)
 end)
 
-function VetcurseLootdropper:OnSave()
-if self.vetrate ~= nil then
-data.vetrate = self.vetrate
-end
-if self.loot ~= nil then
-data.loot = self.loot
+function VetcurseLootdropper:OnSave(data)
+if self.vetrate ~= nil and self.loot ~= nil then
+return {loot = self.loot,vetrate = self.vetrate,}
 end
 end
 

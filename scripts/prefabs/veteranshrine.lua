@@ -183,7 +183,7 @@ local function fn(Sim)
 		inst.components.talker.fontsize = 30
     end
     inst.components.talker.font = TALKINGFONT_HERMIT
-    inst:AddComponent("npc_talker")]]
+    inst:AddComponent("npc_talker")
 
     if not TheWorld.ismastersim then
         return inst
@@ -202,7 +202,7 @@ local function fn(Sim)
     inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(6, 10)
     inst.components.playerprox:SetOnPlayerNear(onnear)
-    inst.components.playerprox:SetOnPlayerFar(onfar)]]
+    inst.components.playerprox:SetOnPlayerFar(onfar)
 
     --inst.deactivate = deactivate
 
