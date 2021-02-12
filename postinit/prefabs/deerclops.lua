@@ -252,9 +252,8 @@ env.AddPrefabPostInit("deerclops", function(inst)
 	
 
 	
-	if inst.components.lootdropper ~= nil then
-		inst.components.lootdropper:AddChanceLoot("cursed_antler", 1)
-	end
+	inst:AddComponent("vetcurselootdropper")
+	inst.components.vetcurselootdropper.loot = "cursed_antler"
 	
 	inst:AddComponent("groundpounder")
 	inst.components.groundpounder.destroyer = true

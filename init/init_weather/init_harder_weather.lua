@@ -141,7 +141,6 @@ env.AddPrefabPostInit("forest", function(inst)
 	inst:AddComponent("snowstorminitiator")
 	inst:AddComponent("scorpionspawner")
 	inst:AddComponent("randomnightevents")
-	inst:AddComponent("walrusspawner")
 	
 	
 	inst.OnSave = OnSave

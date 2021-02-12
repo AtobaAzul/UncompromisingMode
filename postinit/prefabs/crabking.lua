@@ -6,7 +6,6 @@ env.AddPrefabPostInit("crabking", function(inst)
 		return
 	end
 	
-	if inst.components.lootdropper ~= nil then
-		inst.components.lootdropper:AddChanceLoot("crabclaw", 1)
-	end
+	inst:AddComponent("vetcurselootdropper")
+	inst.components.vetcurselootdropper.loot = "crabclaw"
 end)

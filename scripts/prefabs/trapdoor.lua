@@ -234,7 +234,7 @@ local function fn2()
     inst.entity:AddNetwork()
 
     inst.AnimState:SetBank("flipping_rock")
-    inst.AnimState:SetBuild("rock_flipping")
+    inst.AnimState:SetBuild("rock_flipping_moss")
     inst.AnimState:PlayAnimation("idle", true)
 
     inst:AddTag("structure")
