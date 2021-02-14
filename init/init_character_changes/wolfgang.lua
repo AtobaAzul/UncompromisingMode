@@ -185,7 +185,7 @@ local function StrongmanPickup(inst)
 		end
 	end
 	
-	if inst.strength ~= "wimpy" then
+	if inst.strength ~= "wimpy" and not inst.components.rider.riding then
 	
 		--counteracts head slowdown
 		if itemhead ~= nil then 	
@@ -231,7 +231,7 @@ local function StrongmanPickup(inst)
 			inst.components.inventory:DropItem(itembody)
 		end
 		
-		if inst.components.inventory:IsHeavyLifting() then
+		if inst.components.inventory:IsHeavyLifting() and not inst.components.rider.riding then
 			inst.components.locomotor:SetExternalSpeedMultiplier(inst, "strongmancarry", (TUNING.HEAVY_SPEED_MULT*3))
 		end
 	else
@@ -279,6 +279,10 @@ end
 	UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.wolfgang.fn, applymightiness, "master_postinit", "onload", "onbecamehuman", "onhungerchange", "applymightiness")
 	end)
 
+--This is used to fix an issue with mounting beefalo in normal form causing slowdown
+local function MountFix(inst)
+	inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmancarry")
+end
 
 AddPrefabPostInit("wolfgang", function(inst)
     
@@ -298,5 +302,6 @@ AddPrefabPostInit("wolfgang", function(inst)
 	inst:ListenForEvent("equip", NewItem)
 	inst:ListenForEvent("dropitem", DropItem)
 	inst:ListenForEvent("unequip", FixItem)
+	inst:ListenForEvent("mounted", MountFix)
 	
 end)
