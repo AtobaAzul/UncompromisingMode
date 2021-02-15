@@ -8,6 +8,9 @@ GLOBAL.setfenv(1, GLOBAL)
 --Classic DS Red Amulet revive (only when worn upon death), and health tick changes
 
 local function healowner(inst, owner)
+	
+	local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner or nil
+
 	if inst.components.fueled and inst.components.fueled.currentfuel == 0 then
 		if inst.task ~= nil then
 			inst.task:Cancel()
@@ -22,7 +25,18 @@ local function healowner(inst, owner)
         owner.components.health:DoDelta(3,false,"redamulet")
         owner.components.hunger:DoDelta(-TUNING.REDAMULET_CONVERSION)
         inst.components.fueled:DoDelta(-36)
+	
+		local healtime = 10
+				
+		if owner.components.health ~= nil and owner.components.health:GetPercent() <= 0.5 then
+			healtime = 1 + (10 * owner.components.health:GetPercent())
+		end
+				
+		print(healtime)
+		
+		inst.task = inst:DoTaskInTime(healtime, healowner, owner)
     end
+	
 end
 
 local function onequip_red(inst, owner)
@@ -33,8 +47,17 @@ local function onequip_red(inst, owner)
     else
         owner.AnimState:OverrideSymbol("swap_body", "torso_amulets", "redamulet")
     end
+	
+	local healtime = 10
+			
+	if owner.components.health ~= nil and owner.components.health:GetPercent() <= 0.5 then
+		healtime = 1 + (10 * owner.components.health:GetPercent())
+	end
+			
+	print(healtime)
     
-    inst.task = inst:DoPeriodicTask(10, healowner, nil, owner)
+    inst.task = inst:DoTaskInTime(healtime, healowner, nil, owner)
+    --inst.task = inst:DoPeriodicTask(10, healowner, nil, owner)
 end
 
 local function onunequip_red(inst, owner)
@@ -65,7 +88,17 @@ local function ontakefuel_red(inst)
 	local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner or nil
 	
 		if inst.task == nil and owner ~= nil then
-			inst.task = inst:DoPeriodicTask(10, healowner, nil, owner)
+			
+			local healtime = 10
+					
+			if owner.components.health ~= nil and owner.components.health:GetPercent() <= 0.5 then
+				healtime = 1 + (10 * owner.components.health:GetPercent())
+			end
+					
+			print(healtime)
+		
+		
+			inst.task = inst:DoTaskInTime(healtime, healowner, owner)
 		end
 	end
 end

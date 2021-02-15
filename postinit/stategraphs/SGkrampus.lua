@@ -63,7 +63,7 @@ local states = {
             inst.SoundEmitter:PlaySound("dontstarve/creatures/krampus/growlshort")
             inst.components.combat:StartAttack()
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("steal_pre")
+            inst.AnimState:PlayAnimation("bag_smack_pre")
         end,
 
         events =
@@ -83,7 +83,7 @@ local states = {
             inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_whoosh")
             inst.components.combat:StartAttack()
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("steal")
+            inst.AnimState:PlayAnimation("bag_atk")
         end,
 
         timeline =
@@ -92,11 +92,16 @@ local states = {
                 
 				local x, y, z = inst:GetPosition():Get()
 			
-				local ents = TheSim:FindEntities(x, y, z, 3, nil, {"deergemresistance", "snowish", "ghost", "playerghost", "shadow", "INLIMBO"})
+				local ents = TheSim:FindEntities(x, y, z, 5, nil, {"deergemresistance", "snowish", "ghost", "playerghost", "shadow", "INLIMBO"})
 				for i, v in ipairs(ents) do
 					if v.components.combat ~= nil then
 						v.components.combat:GetAttacked(inst, 50, nil)
 					end
+					
+					--inst.SoundEmitter:PlaySound("dontstarve/creatures/krampus/bag_drop")
+					--inst.SoundEmitter:PlaySound("dontstarve/creatures/krampus/bag_foley")
+					inst.SoundEmitter:PlaySound("dontstarve/creatures/krampus/bag_swing")
+					
 					if v ~= nil and v.components.inventory ~= nil and not v:HasTag("fat_gang") and not v:HasTag("foodknockbackimmune") and not (v.components.rider ~= nil and v.components.rider:IsRiding()) and 
 					--Don't knockback if you wear marble
 					(v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ==nil or not v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then

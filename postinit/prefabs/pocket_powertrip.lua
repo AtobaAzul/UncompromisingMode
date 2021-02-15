@@ -56,7 +56,9 @@ local function Folded(inst)
 			
 			if not inst.components.equippable:IsEquipped() and owner ~= nil then
 				if #inst.components.container:FindItems( function(item) return item.components.inventoryitem ~= nil end ) > 0 then
-					owner.SoundEmitter:PlaySound("dontstarve/common/tool_slip")
+					if owner.SoundEmitter ~= nil then
+						owner.SoundEmitter:PlaySound("dontstarve/common/tool_slip")
+					end
 				end
 				inst.components.container:DropEverything() 
 			end

@@ -124,6 +124,7 @@ local prefab_post = {
 	"pigking",
 	"marblebean",
 	"reviver",
+	"krampus_sack",
 }
 
 local stategraph_post = {
