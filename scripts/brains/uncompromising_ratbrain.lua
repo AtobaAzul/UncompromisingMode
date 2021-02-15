@@ -136,6 +136,7 @@ function CarratBrain:OnStart()
 	local stealnode = PriorityNode(
 	{
 		DoAction(self.inst, function() return StealAction(self.inst) end, "steal", true ),
+		DoAction(self.inst, eat_food_action),
 		DoAction(self.inst, function() return EmptyChest(self.inst) end, "emptychest", true )
 	}, 0.25)
 	local root = PriorityNode(
