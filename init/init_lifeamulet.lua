@@ -28,7 +28,7 @@ local function healowner(inst, owner)
 	
 		local healtime = 10
 				
-		if owner.components.health ~= nil and owner.components.health:GetPercent() < 0.5 then
+		if owner.components.health ~= nil and owner.components.health:GetPercent() <= 0.5 then
 			healtime = 1 + (10 * owner.components.health:GetPercent())
 		end
 				
@@ -50,7 +50,7 @@ local function onequip_red(inst, owner)
 	
 	local healtime = 10
 			
-	if owner.components.health ~= nil and owner.components.health:GetPercent() < 0.5 then
+	if owner.components.health ~= nil and owner.components.health:GetPercent() <= 0.5 then
 		healtime = 1 + (10 * owner.components.health:GetPercent())
 	end
 			
@@ -91,7 +91,7 @@ local function ontakefuel_red(inst)
 			
 			local healtime = 10
 					
-			if owner.components.health ~= nil and owner.components.health:GetPercent() < 0.5 then
+			if owner.components.health ~= nil and owner.components.health:GetPercent() <= 0.5 then
 				healtime = 1 + (10 * owner.components.health:GetPercent())
 			end
 					
