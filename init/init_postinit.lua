@@ -122,6 +122,8 @@ local prefab_post = {
 	--"deciduoustrees",
 	"pktrades",
 	"pigking",
+	"marblebean",
+	"reviver",
 }
 
 local stategraph_post = {

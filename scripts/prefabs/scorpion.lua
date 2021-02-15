@@ -140,7 +140,7 @@ local function OnHitOther(inst, data)
 end
 local function WhenDusk(inst)
 inst:AddTag("notactuallydead")
-if inst.components.health ~= nil then
+if inst.components.health ~= nil and not inst.components.health:IsDead() then
 inst.components.health:Kill()
 end
 end

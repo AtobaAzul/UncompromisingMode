@@ -10,7 +10,7 @@ GLOBAL.setfenv(1, GLOBAL)
 --Try to initialise all functions locally outside of the post-init so they exist in RAM only once
 -----------------------------------------------------------------
 
--------Red Amulet changes are hosted in init_redamulet
+-------Red Amulet changes are hosted in init_lifeamulet
 
 local function onremovelight(light)
     light._yellowamulet._light = nil
@@ -188,7 +188,9 @@ end
 
 local function onequip_orange_UM(inst, owner)
     owner.AnimState:OverrideSymbol("swap_body", "torso_amulets", "orangeamulet")
+	if inst.components.fueled ~= nil and  not inst.components.fueled:IsEmpty() then
     inst.task = inst:DoPeriodicTask(TUNING.ORANGEAMULET_ICD, pickup_UM, nil, owner)
+	end
 	inst._owner = owner
 end
 
