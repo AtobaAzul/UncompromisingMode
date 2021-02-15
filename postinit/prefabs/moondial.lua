@@ -11,13 +11,17 @@ local function ItemTradeTest(inst, item, giver)
 			inst.hastear = true
 			MakeWaterSource(inst)
 			item:Remove()
+			inst.AnimState:SetBuild("moondialtear_build")
+			inst.AnimState:SetBank("moondialtear")
 			return true
 		else
 			return false
 		
 	end
 end
-
+local function OnAccept(inst)
+inst:RemoveComponent("tradable")
+end
 local function OnLoad(inst, data)
 if data ~= nil then
 	if data.hastear ~= nil and data.hastear == true then
@@ -26,6 +30,8 @@ if data ~= nil then
 	if inst.components.trader ~= nil then
 	inst:RemoveComponent("trader")
 	end
+	inst.AnimState:SetBuild("moondialtear_build")
+	inst.AnimState:SetBank("moondialtear")
 	end
 end
 end
@@ -42,7 +48,7 @@ env.AddPrefabPostInit("moondial", function(inst)
 	
 	inst:AddComponent("trader")
     inst.components.trader:SetAbleToAcceptTest(ItemTradeTest)
-	
+	inst.components.trader.onaccept = OnAccept
 	inst.OnLoad = OnLoad
 	inst.OnSave = OnSave
 	
