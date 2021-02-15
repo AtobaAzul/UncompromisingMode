@@ -91,7 +91,7 @@ inst.components.timer:StartTimer("auratime", 15)
 end
 end
 local function IceyCheck(inst,data)
-if data ~= nil and data.name == "auratime" then
+if data ~= nil and data.name == "auratime" and inst.upgrade = "ice_mutation" then
 AuraFreezeEnemies(inst)
 end
 end

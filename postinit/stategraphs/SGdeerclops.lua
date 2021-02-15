@@ -664,8 +664,8 @@ local states = {
         --TimeEvent(29 * FRAMES, function(inst) SpawnIceFx(inst, inst.components.combat.target) end),
         TimeEvent(35 * FRAMES, function(inst)
             inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe")
-			inst.components.combat:DoAttack(inst.sg.statemem.target)
 			inst.components.combat:SetDefaultDamage(2*TUNING.DEERCLOPS_DAMAGE)
+			inst.components.combat:DoAttack(inst.sg.statemem.target)
             if inst.bufferedaction ~= nil and inst.bufferedaction.action == ACTIONS.HAMMER then
                 local target = inst.bufferedaction.target
                 inst:ClearBufferedAction()
