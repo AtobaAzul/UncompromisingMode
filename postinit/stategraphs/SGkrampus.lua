@@ -25,7 +25,7 @@ local events =
 					inst.counter = 0
 				end
 			end
-			inst.sg:GoToState("attack")
+			inst.sg:GoToState("feint_attack")
 		end
 	end),
 }
@@ -63,7 +63,7 @@ local states = {
             inst.SoundEmitter:PlaySound("dontstarve/creatures/krampus/growlshort")
             inst.components.combat:StartAttack()
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("bag_smack_pre")
+            inst.AnimState:PlayAnimation("b_s_p")
         end,
 
         events =
@@ -83,7 +83,7 @@ local states = {
             inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_whoosh")
             inst.components.combat:StartAttack()
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("bag_atk")
+            inst.AnimState:PlayAnimation("bs_s")
         end,
 
         timeline =
