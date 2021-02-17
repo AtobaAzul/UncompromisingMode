@@ -302,13 +302,13 @@ local function on_chop(inst, chopper, remaining_chops)
 	SpawnDebris(inst,chopper,choploot)	
 	end
 	end
-	if remaining_chops > 15 and remaining_chops < 20 then
+	if remaining_chops >= 15 and remaining_chops < 20 then
     phase = 1
     end
-    if remaining_chops > 10 and remaining_chops < 15 then
+    if remaining_chops >= 10 and remaining_chops < 15 then
     phase = 1
     end
-    if remaining_chops > 5 and remaining_chops < 10 then
+    if remaining_chops >= 5 and remaining_chops < 10 then
     phase = 2
     end	
     if remaining_chops > 0 and remaining_chops < 5 then
@@ -318,7 +318,7 @@ local function on_chop(inst, chopper, remaining_chops)
     phase = 4
     end			
 	--inst.AnimState:PlayAnimation("chopdamaged-"..phase)
-	inst.AnimState:PushAnimation("damaged-"..phase,true)
+	inst.AnimState:PlayAnimation("damaged-"..phase,true)
 	end
 	
 end
