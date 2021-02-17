@@ -862,13 +862,13 @@ env.AddStategraphState("deerclops",
             local pt = Point(inst.Transform:GetWorldPosition())
             if pt.y < 2 then
                 inst.Physics:SetMotorVel(0,0,0)
-				inst.components.groundpounder.groundpoundfx = "deerclops_ground_fx"
-                inst.components.groundpounder:GroundPound()
-				inst.components.groundpounder.groundpoundfx = nil
+				--inst.components.groundpounder.groundpoundfx = "deerclops_ground_fx"
+                --inst.components.groundpounder:GroundPound()
+				--inst.components.groundpounder.groundpoundfx = nil
 
-                local sinkhole = SpawnPrefab("bearger_sinkhole")
-				sinkhole.Transform:SetPosition(pt.x, 0, pt.z)
-				sinkhole.components.timer:StartTimer("nextrepair", 30 + (math.random() * 20))
+                --local sinkhole = SpawnPrefab("bearger_sinkhole")
+				--sinkhole.Transform:SetPosition(pt.x, 0, pt.z)
+				--sinkhole.components.timer:StartTimer("nextrepair", 30 + (math.random() * 20))
 
                 pt.y = 0
                 
