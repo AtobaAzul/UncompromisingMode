@@ -28,7 +28,7 @@ local function FindTarget(inst, radius)
         inst,
         SpringCombatMod(radius),
         function(guy)
-            return (not guy:HasTag("monster") or guy:HasTag("player"))
+            return (not guy:HasTag("monster") or not guy:HasTag("plantkin") or guy:HasTag("player"))
                 and inst.components.combat:CanTarget(guy)
                 and not (inst.components.follower ~= nil and inst.components.follower.leader == guy)
         end,
