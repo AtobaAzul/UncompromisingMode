@@ -144,7 +144,6 @@ local stategraph_post = {
 	"Beefalo",
 	"stalker_minion",
 	"koalefant",
-	"bee",
 	"bearger",
 	"krampus",
 }
