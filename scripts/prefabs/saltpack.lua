@@ -239,7 +239,7 @@ local function fn()
     inst.components.fueled:SetDepletedFn(nofuel)
 	
     inst.components.fueled:SetTakeFuelFn(ontakefuel)
-    inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION * 3, TUNING.TURNON_FULL_FUELED_CONSUMPTION * 3)
+    inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION * 2, TUNING.TURNON_FULL_FUELED_CONSUMPTION * 2)
     inst.components.fueled.accepting = true
 
     MakeHauntableLaunch(inst)

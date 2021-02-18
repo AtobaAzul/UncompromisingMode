@@ -50,11 +50,11 @@ local function fn()
 		
 		inst:RemoveTag("_named")
 
-        --inst:AddComponent("edible")
-        --inst.components.edible.healthvalue = 0
-        --inst.components.edible.hungervalue = 9.8
-        --inst.components.edible.sanityvalue = 0      
-        --inst.components.edible.foodtype = FOODTYPE.HORRIBLE
+        inst:AddComponent("edible")
+        inst.components.edible.healthvalue = 0
+        inst.components.edible.hungervalue = 9.8
+        inst.components.edible.sanityvalue = 0      
+        inst.components.edible.foodtype = FOODTYPE.HORRIBLE
 
         --inst:AddComponent("perishable")
         --inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)

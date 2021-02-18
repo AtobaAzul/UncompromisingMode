@@ -190,4 +190,24 @@ end
 		inst.SummonStumplings = SummonStumplings
         inst.FindSnareTargets = FindSnareTargets
         inst.SpawnSnare = SpawnSnare
+		
+		local function UnHide(inst, data)
+			if data.statename ~= "sleeping" then
+				print("flimbus")
+				inst.sg:RemoveStateTag("hiding")
+				inst:RemoveEventCallback("newstate", UnHide)
+			end
+		end
+	
+		local function BossCheck(inst, data)
+			if data.attacker ~= nil and data.attacker:HasTag("epic") then
+				inst:PushEvent("bosshide")
+				if data.attacker.components.combat:HasTarget() and not data.attacker.components.combat.TargetIs(inst) then
+					print("flimbo")
+					data.attacker.components.combat:DropTarget()
+				end
+			end
+		end
+		
+		inst:ListenForEvent("attacked", BossCheck)
 end)

@@ -130,13 +130,35 @@ end
 
 local function onattack(inst, attacker, target)
     if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and inst.components.weapon.stimuli == "electric" then
-        SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
+        local sparks = SpawnPrefab("electrichitsparks")
+		
+		--SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
 		if target:HasTag("insect") and not target.components.health:IsDead() then
 			target.components.health:DoDelta(-30, false, attacker)
+			
+			sparks:AlignToTarget(target, attacker, true)
+			sparks.Transform:SetScale(5, 5, 5)
+			
+			local x, y, z = target.Transform:GetWorldPosition()
+			local ents = TheSim:FindEntities(x, y, z, 2, nil, { "INLIMBO", "player", "abigail" })
+
+			for i, v in ipairs(ents) do
+				if v ~= inst and v:IsValid() and not v:IsInLimbo() then
+					if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
+						v.components.combat:GetAttacked(attacker, 15, nil)
+					end
+				end
+			end
+			
+			return
 		end
 		
 		if (target:HasTag("spider") or target:HasTag("hoodedwidow")) and not target.components.health:IsDead() then
 			target.components.health:DoDelta(-15, false, attacker)
+			
+			sparks:AlignToTarget(target, attacker, true)
+			
+			return
 		end
     end
 end
@@ -172,7 +194,7 @@ local function fn()
     inst.components.burnable.fxprefab = nil]]
 	
 	inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(22)
+    inst.components.weapon:SetDamage(24)
     inst.components.weapon:SetOnAttack(onattack)
 	
     inst:AddComponent("inventoryitem")

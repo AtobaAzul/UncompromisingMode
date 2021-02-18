@@ -102,6 +102,32 @@ local icepuddle = FindEntity(inst, 15, nil, { "penguin_ice_puddle" })
 
 end
 
+local function OnExplodeFn(inst)
+    SpawnPrefab("explode_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
+end
+
+local function Ricexplosion(inst, item)
+	inst:AddComponent("explosive")
+	inst.components.explosive:SetOnExplodeFn(OnExplodeFn)
+	inst.components.explosive.explosiverange = 1
+	inst.components.explosive.explosivedamage = 0
+	inst.components.explosive:OnBurnt()
+end
+
+local function OnEat(inst, data)
+	if data.food.components.edible and math.random() < .2 then
+        local poo = SpawnPrefab("guano")
+        poo.Transform:SetPosition(inst.Transform:GetWorldPosition())
+    end
+	
+	if data.food.prefab == "rice" or data.food.prefab == "rice_cooked" then
+        inst:DoTaskInTime(1, function(inst) inst.sg:GoToState("taunt") end)
+		
+        inst:DoTaskInTime(2, Ricexplosion)
+    end
+end
+	
+
 env.AddPrefabPostInit("penguin", function(inst)
 	if not TheWorld.ismastersim then
 		return
@@ -119,6 +145,8 @@ env.AddPrefabPostInit("penguin", function(inst)
 	
 	inst:WatchWorldState("isfullmoon", OnFullMoon)
 	OnFullMoon(inst, TheWorld.state.isfullmoon)
+	
+	inst:ListenForEvent("oneat", OnEat)
 
 end)
 

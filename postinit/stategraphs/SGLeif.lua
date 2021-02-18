@@ -35,6 +35,7 @@ local events=
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     EventHandler("gotosleep", function(inst) inst.sg:GoToState("sleeping") end),
     EventHandler("onwakeup", function(inst) inst.sg:GoToState("wake") end),
+    EventHandler("bosshide", function(inst) inst.sg:GoToState("hide") end),
     
     
 }
@@ -132,6 +133,38 @@ local states = {
                     inst.sg:GoToState("idle")
                 end
             end),
+        },
+    },
+	
+	State{
+        name = "hide",
+        tags = {"hiding", "sleeping", "busy"},
+
+        onenter = function(inst)
+			inst:AddTag("notarget")
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("transform_tree", false)
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/transform_VO")
+			inst.sg:SetTimeout(10)
+        end,
+        events=
+        {
+		    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() then inst.sg:GoToState("wake") end end),
+        },
+		
+        onexit = function(inst)
+			inst:RemoveTag("notarget")
+        end,
+		
+		ontimeout = function(inst)
+			inst:RemoveTag("notarget")
+            inst.sg:GoToState("wake")
+        end,
+        
+        timeline=
+        {
+            TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/foley") end),
+            TimeEvent(25*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/foley") end),
         },
     },
 }

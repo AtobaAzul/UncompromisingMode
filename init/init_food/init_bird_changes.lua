@@ -76,6 +76,12 @@ local function GetHunger(bird)
     return (bird and bird.components.perishable and bird.components.perishable:GetPercent()) or 1
 end
 
+local function OnExplodeFn(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+    SpawnPrefab("explode_small").Transform:SetPosition(x, 2, z)
+    SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
+end
+
 local function DigestFood(inst, food)
     if food.components.edible.foodtype == FOODTYPE.MEAT then
 		inst.components.lootdropper:SpawnLootPrefab("bird_egg")
@@ -96,10 +102,29 @@ local function DigestFood(inst, food)
     end
 end
 
+local function Ricexplosion(inst, item)
+	inst:AddComponent("explosive")
+	inst.components.explosive:SetOnExplodeFn(OnExplodeFn)
+	inst.components.explosive.explosiverange = 1
+	inst.components.explosive.explosivedamage = 0
+	inst.components.explosive:OnBurnt()
+end
+
 local function OnGetItem(inst, giver, item)
 	local dead = false
 	local bird = GetBird(inst)
 	if bird then
+
+    if item.prefab == "rice" or item.prefab == "rice_cooked" then
+        inst.AnimState:PlayAnimation("peck")
+        inst.AnimState:PushAnimation("peck")
+        inst.AnimState:PushAnimation("idle")
+        inst.AnimState:PushAnimation("flap")
+        inst.AnimState:PushAnimation("flap")
+		
+        inst:DoTaskInTime(3, Ricexplosion, item)
+    end
+	
 		if item.components.edible.foodtype == FOODTYPE.MEAT then
 				if  item.components.edible:GetHealth(inst) < 0 then --monster meat is currently the only negative health meat item
 					if bird.monsterbelly ~= nil and bird.monsterbelly ~= 0 then 
@@ -198,8 +223,36 @@ bird.monsterbelly = bird.monsterbelly-0.51
 end
 end
 
+local invalid_foods =
+{
+    "bird_egg",
+    "bird_egg_cooked",
+    "rottenegg",
+    -- "monstermeat",
+    -- "cookedmonstermeat",
+    -- "monstermeat_dried",
+}
+
+local function ShouldAcceptItem(inst, item)
+    local seed_name = string.lower(item.prefab .. "_seeds")
+
+    local can_accept = item.components.edible
+        and (Prefabs[seed_name] 
+        or item.prefab == "seeds"
+        or string.match(item.prefab, "_seeds")
+        or item.components.edible.foodtype == FOODTYPE.MEAT)
+		or item.prefab == "rice" or item.prefab == "rice_cooked"
+
+    if table.contains(invalid_foods, item.prefab) then
+        can_accept = false
+    end
+
+    return can_accept
+end
+
 function ThankYouToshInit(inst)
 	if inst and inst.components.trader then
+    inst.components.trader:SetAcceptTest(ShouldAcceptItem)
 	inst.components.trader.onaccept = OnGetItem
 	end
 	if inst then
@@ -211,3 +264,24 @@ function ThankYouToshInit(inst)
 end
 
 env.AddPrefabPostInit("birdcage", ThankYouToshInit)
+--[[env.AddPrefabPostInit("birdcage", function(inst)
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+	local _ShouldAcceptItem = inst.components.trader.test
+
+	inst.components.trader.test = function(inst, item)
+		if _ShouldAcceptItem ~= nil then
+		print("fuck")
+			_ShouldAcceptItem(inst, item)
+		end
+		
+		print(_ShouldAcceptItem)
+		
+		if item.prefab == "rice" or item.prefab == "rice_cooked" then  
+			local can_accept = true
+			return can_accept
+		end
+	end
+end)]]
