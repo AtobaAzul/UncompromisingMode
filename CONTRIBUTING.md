@@ -2,13 +2,27 @@
 
 ## Head Developers & Founders
 
-- @ ADM
-
 - @ Canis
 
 - @ Sho / Scrimbles
 
+- @ The Axe Swinging Smasher
+
+- @ -Variant-
+
+- @ ADM
+
 ## Code contributors
+
+- @ Sho / Scrimbles
+
+- @ The Axe Swinging Smasher
+
+- @ Zarklord
+
+- @ Toroic
+
+- @ KoreanWaffles
 
 - @ ADM
 
@@ -19,9 +33,9 @@
 - @ loopuleasa
 
 
-- @ Sho / Scrimbles
-
 ## Art contributors
+
+- @ The Axe Swinging Smasher
 
 - @ Advent - Living tree root attack custom animation
 
@@ -36,6 +50,11 @@
 - @ Maradyne - Quote quality assurance
 
 - @ Canis
+
+
+## Brand new music!
+
+- @ rampage
 
 &nbsp;
 
