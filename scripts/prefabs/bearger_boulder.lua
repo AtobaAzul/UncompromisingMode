@@ -25,7 +25,7 @@ local function OnHitInk(inst, attacker, target)
                 and not v:HasTag("bearger")
                 and not v.components.health:IsDead() then
                 if v.components.combat:CanBeAttacked() then
-                    v.components.combat:GetAttacked(inst, TUNING.ANTLION_SINKHOLE.DAMAGE)
+                    v.components.combat:GetAttacked(inst, 100)
                 end
             end
         end
@@ -72,12 +72,12 @@ local function onthrown(inst)
     inst.AnimState:SetBuild("rock")
     inst.AnimState:PlayAnimation("full")
 
-    
     inst.Physics:SetMass(1)
     inst.Physics:SetFriction(10)
     inst.Physics:SetDamping(5)
     inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
     inst.Physics:ClearCollisionMask()
+    inst:SetPhysicsRadiusOverride(3)
     inst.Physics:CollidesWith(COLLISION.WORLD)
     inst.Physics:CollidesWith(COLLISION.OBSTACLES)
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
@@ -111,7 +111,7 @@ local function projectilefn()
     inst:AddComponent("complexprojectile")
     inst.components.complexprojectile:SetHorizontalSpeed(15)
     inst.components.complexprojectile:SetGravity(-20)
-    inst.components.complexprojectile:SetLaunchOffset(Vector3(0, .2, 0))
+    inst.components.complexprojectile:SetLaunchOffset(Vector3(0, .1, 0))
     inst.components.complexprojectile:SetOnLaunch(onthrown)
     inst.components.complexprojectile:SetOnHit(OnHitInk)
     inst.components.complexprojectile.usehigharc = false

@@ -130,14 +130,10 @@ end
 
 local function onattack(inst, attacker, target)
     if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and inst.components.weapon.stimuli == "electric" then
-        local sparks = SpawnPrefab("electrichitsparks")
-		
-		--SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
-		if target:HasTag("insect") and not target.components.health:IsDead() then
+        if target:HasTag("insect") and not target.components.health:IsDead() then
 			target.components.health:DoDelta(-30, false, attacker)
 			
-			sparks:AlignToTarget(target, attacker, true)
-			sparks.Transform:SetScale(5, 5, 5)
+			SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
 			
 			local x, y, z = target.Transform:GetWorldPosition()
 			local ents = TheSim:FindEntities(x, y, z, 2, nil, { "INLIMBO", "player", "abigail" })
@@ -146,6 +142,7 @@ local function onattack(inst, attacker, target)
 				if v ~= inst and v:IsValid() and not v:IsInLimbo() then
 					if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
 						v.components.combat:GetAttacked(attacker, 15, nil)
+						SpawnPrefab("electrichitsparks"):AlignToTarget(v, attacker, true)
 					end
 				end
 			end
@@ -156,7 +153,7 @@ local function onattack(inst, attacker, target)
 		if (target:HasTag("spider") or target:HasTag("hoodedwidow")) and not target.components.health:IsDead() then
 			target.components.health:DoDelta(-15, false, attacker)
 			
-			sparks:AlignToTarget(target, attacker, true)
+			SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
 			
 			return
 		end

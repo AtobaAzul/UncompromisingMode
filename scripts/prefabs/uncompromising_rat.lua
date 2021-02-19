@@ -114,6 +114,22 @@ local function DoRipple(inst)
     end
 end
 
+local function Trapped(inst)
+	print("bumpk")
+
+	local x, y, z = inst.Transform:GetWorldPosition()
+
+	local ents = TheSim:FindEntities(x, y, z, 2, {"trap"})
+				
+	for i, v in ipairs(ents) do
+		print("bumpkin")
+		v:DoTaskInTime(5, function(v)
+			print("frumpkin")
+			v:PushEvent("harvesttrap")--.components.trap:Disarm()
+		end)
+	end
+end
+
 local function fn()
 	local inst = CreateEntity()
 	
@@ -224,6 +240,7 @@ local function fn()
 	inst:ListenForEvent("attacked", OnAttacked)
 	inst:ListenForEvent("death", OnDeath)
 	inst:ListenForEvent("onpickupitem", OnPickup)
+	inst:ListenForEvent("trapped", Trapped)
 	
 	MakeHauntablePanic(inst)
 	
