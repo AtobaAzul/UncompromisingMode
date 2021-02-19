@@ -174,7 +174,7 @@ return {
 	"amulet_health_orb",
 	"nightcrawler",
 	"ancient_trepidation_arm",
-	"steel_sweater",
+	--"steel_sweater",
 	"rat_hat",
 	"rat_whip",
 	"bearger_mask",
