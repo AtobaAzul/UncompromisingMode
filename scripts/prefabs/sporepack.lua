@@ -64,11 +64,8 @@ local function CreateBase(isnew)
 end
 
 local function InitFX(inst)
-    --Dedicated server does not need to spawn the local fx
-    if not TheNet:IsDedicated() then
-        inst._basefx = CreateBase(true)
-        inst._basefx.entity:SetParent(inst.entity)
-    end
+	inst._basefx = CreateBase(true)
+	inst._basefx.entity:SetParent(inst.entity)
 end
 
 local function onequip(inst, owner)
