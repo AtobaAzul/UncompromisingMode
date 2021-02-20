@@ -152,7 +152,6 @@ end
 
 local function OnLoad(inst)
 --inst.WebReady = true
-inst.LeapReady = true
 inst.investigated = true
 end
 
@@ -167,27 +166,14 @@ end
 --end
 end
 end
-local function TryPowerMove(inst)
---print("powermovetried")
---print(inst.LeapReady)
-if not inst.sg:HasStateTag("superbusy") and not inst:HasTag("gonnasuper") and not inst.components.health:IsDead() and inst.components.combat.target then
-	if inst.LeapReady == true then
-		if not inst.sg:HasStateTag("superbusy") then
-			if not inst.sg:HasStateTag("nointerrupts") then
-			inst:AddTag("gonnasuper")
-			inst:DoTaskInTime(1, function(inst) if not inst.components.health:IsDead() then DoSuper(inst) end end)
-			else
-			inst:AddTag("gonnasuper")
-			DoSuper(inst)
-			end
+local function TryPowerMove(inst,data)
+if not inst.sg:HasStateTag("busy") and (inst.components.health ~= nil and not inst.components.health:IsDead()) and (inst.components.combat ~= nil and inst.components.combat.target ~= nil) then
+	if data ~= nil and data.name == "pounce" then
+			DoSuper(inst)	
 		end
-	else
-	inst:DoTaskInTime(10,function(inst) 
-	inst.LeapReady = true
-	end)
 	end
 end
-end
+
 
 local function Reset(inst)
     inst.reset = true
@@ -310,7 +296,6 @@ local function fn()
     inst.components.groundpounder.numRings = 3
     ------------------
 	--inst.WebReady = true
-	inst.LeapReady = false
 	inst.CanopyReady = false
 	inst.investigated = true
 	inst.Reset = Reset
@@ -322,7 +307,11 @@ local function fn()
 	inst.OnLoad = OnLoad
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("death", OnDead)
-	inst:DoPeriodicTask(3, TryPowerMove)
+	
+	inst:AddComponent("timer")
+	inst:ListenForEvent("timerdone", TryPowerMove)
+	inst.components.timer:StartTimer("pounce",10+math.random(-3,5))
+
 	inst:DoPeriodicTask(3, GettingBullied)
 	inst.justkilled = false
 	inst.bullier = nil

@@ -16,7 +16,11 @@ local events=
                 if weapon:HasTag("snotbomb") then
                     inst.sg:GoToState("launchprojectile", data.target)
                 else
+					if inst.components.timer ~= nil and not inst.components.timer:TimerExists("pounce") then
+					inst.sg:GoToState("preleapattack")
+					else
                     inst.sg:GoToState("attack", data.target)
+					end
                 end
             end
         end
@@ -229,8 +233,8 @@ local states=
         {
             EventHandler("animover", function(inst)
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/scream_short")
-			inst.LeapReady = false
-			inst:RemoveTag("gonnasuper")
+			inst.components.timer:StartTimer("pounce",10+math.random(-3,5))
+			
 			if inst.brain then
 			inst.brain:Start()
 			end
@@ -354,8 +358,6 @@ State{
                 inst.Physics:SetDamping(5)
                 inst.Physics:Teleport(pt.x,pt.y,pt.z)
                 inst.DynamicShadow:Enable(true)
-			inst.LeapReady = false
-			inst:RemoveTag("gonnasuper")
 			inst.DynamicShadow:Enable(true)
             inst.sg:GoToState("taunt")
             end
