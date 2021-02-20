@@ -62,6 +62,7 @@ AddLevelPreInitAny(function(level)
         level.overrides.keep_disconnected_tiles = true
     end
 end)]]
+
 if GetModConfigData("caved") == false then
 
     AddTaskSetPreInitAny(function(tasksetdata)
@@ -292,8 +293,8 @@ AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "cave" then
         return
     end
-table.insert(tasksetdata.tasks,"SunkDecid")
-
+--table.insert(tasksetdata.tasks,"SunkDecid")
+--table.insert(tasksetdata.tasks,"RiceSqueltch")
 end)
 --[[AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "cave" then

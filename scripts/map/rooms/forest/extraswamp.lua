@@ -43,7 +43,7 @@ AddRoom("sparsericepatch",
 	{
 		countprefabs =	
 		{
-			riceplantspawner = function () return 1 + math.random(1,2) end,
+			--riceplantspawner = function () return 1 + math.random(1,2) end,
 			--seastack = function () return 1 + math.random(1,2) end,
 			
 	}
