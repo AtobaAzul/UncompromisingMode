@@ -66,6 +66,7 @@ local states=
         tags = {"moving", "canrotate"},
         
         onenter = function(inst)
+			inst.Transform:SetFourFaced()
             inst.Physics:Stop()
 			if inst.components.combat.target ~= nil then
 			inst.AnimState:PlayAnimation("jump_pre")
@@ -95,6 +96,7 @@ local states=
         tags = {"moving", "canrotate"},
         
         onenter = function(inst)
+			
 			inst.components.locomotor:WalkForward()
 			inst.components.locomotor.walkspeed = 4
             inst.AnimState:PlayAnimation("jump")
@@ -190,8 +192,9 @@ local states=
         },
         events=
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle")
-				inst.Transform:SetFourFaced() end),
+            EventHandler("animover", function(inst) inst.Transform:SetFourFaced()
+			inst.sg:GoToState("idle")
+				 end),
         },
     },
     State{

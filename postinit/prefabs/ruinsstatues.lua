@@ -5,7 +5,6 @@ local function SpawnSpawner(inst)
 local pt = inst:GetPosition()
 pt.x = pt.x + math.random(-10,10)
 pt.z = pt.z + math.random(-10,10)
-print("didthat2")
 if TheWorld.Map:IsAboveGroundAtPoint(pt.x, 0, pt.z) then
 local spawner = SpawnPrefab("ancient_trepidation_anchor")
 spawner.Transform:SetPosition(pt.x,0,pt.z)
@@ -16,11 +15,8 @@ end
 
 local function CheckForSpawners(inst)
 local pt = inst:GetPosition()
-local spawners = TheSim:FindEntities(pt.x,pt.y,pt.z,50,{"trepidationspawner"})
-print(spawners)
-print(#spawners)
+local spawners = TheSim:FindEntities(pt.x,pt.y,pt.z,100,{"trepidationspawner"})
 if #spawners == 0 then
-print("didthat")
 SpawnSpawner(inst)
 end
 end
