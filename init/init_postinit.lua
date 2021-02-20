@@ -126,6 +126,7 @@ local prefab_post = {
 	"reviver",
 	"krampus_sack",
 	"armor_dragonfly",
+	"evergreen_stump",
 }
 
 local stategraph_post = {

@@ -25,7 +25,7 @@ local events =
 					inst.counter = 0
 				end
 			end
-			inst.sg:GoToState("feint_attack")
+			inst.sg:GoToState("attack")
 		end
 	end),
 }
