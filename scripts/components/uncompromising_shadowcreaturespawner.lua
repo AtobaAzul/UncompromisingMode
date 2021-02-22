@@ -64,6 +64,19 @@ local function StartTracking(player, params, ent)
     end, player)
 end
 
+local function OnExchangeShadowCreature(inst, data)
+    local origent = data.ent
+    local exchangedent = data.exchangedent
+
+    local player = origent.spawnedforplayer
+    if not player then return end
+
+    local params = _players[player]
+    if not table.contains(params.ents, origent) then return end
+
+    StartTracking(player, params, exchangedent)
+end
+
 UpdateSpawn = function(player, params)
     if params.targetpop > #params.ents then
 
@@ -272,7 +285,7 @@ local function UpdatePopulation(player, params)
         end
 
         --Reschedule population update
-        params.poptask = player:DoTaskInTime(is_inasnity_mode and (POP_CHANGE_INTERVAL + POP_CHANGE_VARIANCE * math.random()) 
+        params.poptask = player:DoTaskInTime(is_insanity_mode and (TUNING.SANITYMONSTERS_POP_CHANGE_INTERVAL + TUNING.SANITYMONSTERS_POP_CHANGE_VARIANCE * math.random()) 
 												or (NON_INSANITY_MODE_DESPAWN_INTERVAL + NON_INSANITY_MODE_DESPAWN_VARIANCE * math.random())
 											, UpdatePopulation, params)
     end
@@ -337,6 +350,7 @@ end
 --Register events
 inst:ListenForEvent("ms_playerjoined", OnPlayerJoined)
 inst:ListenForEvent("ms_playerleft", OnPlayerLeft)
+inst:ListenForEvent("ms_exchangeshadowcreature", OnExchangeShadowCreature)
 
 --------------------------------------------------------------------------
 --[[ Debug ]]
