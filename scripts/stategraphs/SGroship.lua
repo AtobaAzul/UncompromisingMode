@@ -68,6 +68,7 @@ local states=
         tags = {"moving", "canrotate"},
         
         onenter = function(inst)
+		inst.Transform:SetFourFaced()
 			inst.components.locomotor:WalkForward()
             inst.AnimState:PlayAnimation("walk")
         end,
@@ -156,8 +157,9 @@ local states=
         },
         events=
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle")
-				inst.Transform:SetFourFaced() end),
+            EventHandler("animover", function(inst) 
+			inst.Transform:SetFourFaced()
+			inst.sg:GoToState("idle") end),
         },
     },
 

@@ -249,7 +249,7 @@ local function CheckIfTargetIsFrigginAlive(inst)
 --print(inst.harassplayer)
 if inst.harassplayer ~= nil then
 local player = inst.harassplayer
-	if player:HasTag("playerghost") then
+	if player:HasTag("playerghost") or (player.components.areaaware:CurrentlyInTag("Nightmare")) then
 	inst.harassplayer = nil
 	end
 end
