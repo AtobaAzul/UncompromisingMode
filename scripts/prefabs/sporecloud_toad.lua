@@ -6,7 +6,7 @@ local assets =
 
 local prefabs =
 {
-    "sporecloud_overlay",
+    "sporecloud_toad_overlay",
 }
 
 local AURA_EXCLUDE_TAGS = { "epic", "hound", "bird", "pigman", "toad", "frog", "toadstool", "playerghost", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "invisible", "toadling", "has_gasmask" }
@@ -83,7 +83,7 @@ local function SpawnOverlayFX(inst, i, set, isnew)
         end
     end
 
-    local fx = SpawnPrefab("sporecloud_overlay")
+    local fx = SpawnPrefab("sporecloud_toad_overlay")
     fx.entity:SetParent(inst.entity)
     fx.Transform:SetPosition(set[1] * .85, 0, set[3] * .85)
     fx.Transform:SetScale(set[4], set[4], set[4])
@@ -415,4 +415,4 @@ local function overlayfn()
 end
 
 return Prefab("sporecloud_toad", fn, assets, prefabs),
-    Prefab("sporecloud_overlay", overlayfn, assets)
+    Prefab("sporecloud_toad_overlay", overlayfn, assets)

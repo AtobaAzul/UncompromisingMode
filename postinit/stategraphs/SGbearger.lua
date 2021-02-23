@@ -96,13 +96,13 @@ local states = {
 	
     State{
         name = "shoot",
-        tags = { "attack", "busy" },
+        tags = { "attack", "canrotate", "busy" },
 
         onenter = function(inst)
             local target = inst.components.combat.target ~= nil and inst.components.combat.target
 			
 			if target ~= nil and target.Transform ~= nil then
-				inst:FacePoint(target.Transform:GetWorldPosition())
+				inst:ForceFacePoint(target.Transform:GetWorldPosition())
 			end
 			
             inst.Physics:Stop()
@@ -111,13 +111,21 @@ local states = {
 
         timeline =
         {   
-            TimeEvent(7*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/taunt", "taunt") end),
-            TimeEvent(23*FRAMES, function(inst)
+            TimeEvent(7*FRAMES, function(inst) 
+				local target = inst.components.combat.target ~= nil and inst.components.combat.target
+			
+				if target ~= nil and target.Transform ~= nil then
+					inst:ForceFacePoint(target.Transform:GetWorldPosition())
+				end
+				
+				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/taunt", "taunt") 
+			end),
+            TimeEvent(25*FRAMES, function(inst)
 				if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
 				local target = inst.components.combat.target ~= nil and inst.components.combat.target
 			
 					if target ~= nil and target.Transform ~= nil then
-						inst:FacePoint(target.Transform:GetWorldPosition())
+						inst:ForceFacePoint(target.Transform:GetWorldPosition())
 					end
 					
 					for i = 1, math.random(4,6) do

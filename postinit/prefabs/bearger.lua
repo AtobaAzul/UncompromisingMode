@@ -91,34 +91,34 @@ local function Sinkholes(inst)
 		local target_index = {}
 		local found_targets = {}
 		local ix, iy, iz = inst.Transform:GetWorldPosition()
-		local px, py, pz = target.Transform:GetWorldPosition()
-		local rad = math.rad(inst:GetAngleToPoint(px, py, pz))
-		local velx = math.cos(rad) * 4
-		local velz = -math.sin(rad) * 4
 		for i = 1,5 do
 			local delay = i / 20
 		
 			inst:DoTaskInTime(FRAMES * i * 1.5 + delay, function()
-				local dx, dy, dz = ix + (i * velx), 0, iz + (i * velz)
+				if target ~= nil then
+					local px, py, pz = target.Transform:GetWorldPosition()
+					local rad = math.rad(inst:GetAngleToPoint(px, py, pz))
+					local velx = math.cos(rad) * 4
+					local velz = -math.sin(rad) * 4
 				
-				local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
-				local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
-				local pt = dx, 0, dz
-				
-				if boat then
-					if boat ~= nil then
-						boat:PushEvent("spawnnewboatleak", {pt = pt, leak_size = "med_leak", playsoundfx = true})
+					local dx, dy, dz = ix + (i * velx), 0, iz + (i * velz)
+					
+					local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
+					local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
+					local pt = dx, 0, dz
+					
+					if boat then
+						local fx1 = SpawnPrefab("antlion_sinkhole_boat")
+						fx1.Transform:SetPosition(dx, dy, dz)
+					elseif ground and not boat then
+						local fx1 = SpawnPrefab("bearger_sinkhole")
+						fx1.Transform:SetPosition(dx, dy, dz)
+						fx1:PushEvent("startcollapse")
+					else
+						local fx1 = SpawnPrefab("splash_green")
+						fx1.Transform:SetPosition(dx, dy, dz)
 					end
-				elseif ground and not boat then
-					local fx1 = SpawnPrefab("bearger_sinkhole")
-					fx1.Transform:SetPosition(dx, dy, dz)
-					fx1:PushEvent("startcollapse")
-				else
-					local fx1 = SpawnPrefab("splash_green")
-					fx1.Transform:SetPosition(dx, dy, dz)
 				end
-				
-				
 			end)
 		end
 	end
