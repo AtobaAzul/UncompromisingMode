@@ -72,10 +72,12 @@ local function onthrown(inst)
     inst.AnimState:SetBuild("rock")
     inst.AnimState:PlayAnimation("full")
 
+	inst.Transform:SetScale(0.5, 0.5, 0.5)
+	
     inst.Physics:SetMass(1)
     inst.Physics:SetFriction(10)
     inst.Physics:SetDamping(5)
-    inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
+    inst.Physics:SetCollisionGroup(COLLISION.ITEMS)
     inst.Physics:ClearCollisionMask()
     inst:SetPhysicsRadiusOverride(3)
     inst.Physics:CollidesWith(COLLISION.WORLD)

@@ -95,6 +95,14 @@ local function OnPickup(inst, data)
 	end
 end
 
+local function ShouldSleep(inst)
+    return false
+end
+
+local function ShouldWake(inst)
+    return true
+end
+
 local function onsave_rat(inst, data)
 	if inst:HasTag("carrying") then
 		data.carrying = true
@@ -215,6 +223,8 @@ local function fn()
 	inst.components.lootdropper.numrandomloot = 1
 	
 	inst:AddComponent("sleeper")
+    inst.components.sleeper:SetSleepTest(ShouldSleep)
+    inst.components.sleeper:SetWakeTest(ShouldWake)
 	inst.components.sleeper:SetResistance(1)
 	
 	inst:AddComponent("inventoryitem")

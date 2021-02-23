@@ -119,10 +119,13 @@ local states = {
 					if target ~= nil and target.Transform ~= nil then
 						inst:FacePoint(target.Transform:GetWorldPosition())
 					end
-				
-					inst.LaunchProjectile(inst, inst.components.combat.target)
+					
+					for i = 1, math.random(4,6) do
+						inst.LaunchProjectile(inst, inst.components.combat.target)
+					end
+					
 					inst.components.timer:StopTimer("RockThrow")
-					inst.components.timer:StartTimer("RockThrow", TUNING.BEARGER_NORMAL_GROUNDPOUND_COOLDOWN)
+					inst.components.timer:StartTimer("RockThrow", TUNING.BEARGER_NORMAL_GROUNDPOUND_COOLDOWN * 1.25)
                 
 				end
             end),
