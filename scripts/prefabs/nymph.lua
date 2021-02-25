@@ -99,7 +99,26 @@ local miniassets =
     Asset("ANIM", "anim/fruitfly.zip"),
     Asset("ANIM", "anim/fruitfly_evil_minion.zip"),
 }
-
+local function TryToInfestTree(inst)
+if inst.components.combat ~= nil then
+	if not inst.components.combat.target then
+		--if math.random() > 0.95 or inst:HasTag("fromthebush") then
+		local tree = FindEntity(inst,30,function(tree) return not tree:HasTag("infestedtree") and tree:HasTag("giant_tree") end)
+			if tree ~= nil then
+			if inst.brain ~= nil then
+			inst.brain:Stop()
+			end
+			inst.AnimState:PlayAnimation("walk_loop",true)
+			inst.Physics:SetMotorVel(0,3+math.random()*2,0)
+			--inst:DoTaskInTime(3,function(inst) inst:Remove() end)
+				if tree.components.timer ~= nil then
+				tree.components.timer:StartTimer("infest", 1600)
+				end
+			end
+		end
+	--end
+end
+end
 local function minifn()
     local inst = common()
 
@@ -140,7 +159,7 @@ local function minifn()
 	inst:AddComponent("knownlocations")
     inst:SetBrain(brain)
     inst:SetStateGraph("SGfruitfly")
-
+	inst:DoPeriodicTask(4+4*math.random() ,TryToInfestTree)
     inst:ListenForEvent("attacked", OnAttacked)
 
     return inst

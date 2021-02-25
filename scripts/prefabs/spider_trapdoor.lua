@@ -233,7 +233,7 @@ local function create_common(build, tag)
     if not TheWorld.ismastersim then
         return inst
     end
-
+	inst.Transform:SetScale(1.1,1.1,1.1)
     ----------
     inst.OnEntitySleep = OnEntitySleep
 

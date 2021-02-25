@@ -235,7 +235,7 @@ local function FindTargetOfInterest(inst)
             table.remove(targets, randomtarget)
             --Higher chance to follow if he has bananas
 				local x, y, z = target.Transform:GetWorldPosition()
-				if #TheSim:FindEntities(x,y,z,60,{"trepidation"}) <= 1 then
+				if #TheSim:FindEntities(x,y,z,60,{"trepidation"}) <= 1 and target.components.areaaware:CurrentlyInTag("Nightmare") then
 					if not target:HasTag("playerghost") then
 					SetHarassPlayer(inst, target)
 					return
@@ -249,7 +249,7 @@ local function CheckIfTargetIsFrigginAlive(inst)
 --print(inst.harassplayer)
 if inst.harassplayer ~= nil then
 local player = inst.harassplayer
-	if player:HasTag("playerghost") or (player.components.areaaware:CurrentlyInTag("Nightmare")) then
+	if player:HasTag("playerghost") or not (player.components.areaaware:CurrentlyInTag("Nightmare")) then
 	inst.harassplayer = nil
 	end
 end
