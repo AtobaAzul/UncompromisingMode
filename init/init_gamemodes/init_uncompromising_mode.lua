@@ -176,9 +176,14 @@ local require = GLOBAL.require
 		modimport("init/init_weather/init_overworld_toadstool")
 	end
 	
-	if GetModConfigData("crabking_claws") == GAMEMODE_UNCOMPROMISING and GetModConfigData("crabking_claws") == true or
-	(GetModConfigData("crabking_claws") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("crabking_claws") == true) then
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("crabking_claws") == true or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("crabking_claws") == true) then
 		modimport("postinit/prefabs/crabking_claw")
+	end
+	
+	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("foodregen") == true or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("foodregen") == true) then
+		modimport("init/init_food/init_foodregen")
 	end
 
 	--TODO: Add settings for each individual character after we add many changes

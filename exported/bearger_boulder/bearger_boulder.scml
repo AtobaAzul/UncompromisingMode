@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spriter_data scml_version="1.0" generator="BrashMonkey Spriter" generator_version="r11">
+    <folder id="0" name="bearger_boulder">
+        <file id="0" name="bearger_boulder/lil boulder.png" width="128" height="128" pivot_x="0.5" pivot_y="0.484496"/>
+    </folder>
+    <entity id="0" name="bearger_boulder">
+        <animation id="0" name="idle" length="500" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="500">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="lil boulder">
+                <key id="0" spin="0">
+                    <object folder="0" file="0"/>
+                </key>
+                <key id="1" time="500" spin="0">
+                    <object folder="0" file="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="1" name="spin_loop1" length="500" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="125">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+                <key id="2" time="250">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+                <key id="3" time="375">
+                    <object_ref id="0" timeline="0" key="3" z_index="0"/>
+                </key>
+                <key id="4" time="500">
+                    <object_ref id="0" timeline="0" key="4" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="lil boulder">
+                <key id="0" spin="-1">
+                    <object folder="0" file="0"/>
+                </key>
+                <key id="1" time="125" spin="-1">
+                    <object folder="0" file="0" angle="270"/>
+                </key>
+                <key id="2" time="250" spin="-1">
+                    <object folder="0" file="0" angle="180"/>
+                </key>
+                <key id="3" time="375" spin="-1">
+                    <object folder="0" file="0" angle="90"/>
+                </key>
+                <key id="4" time="500">
+                    <object folder="0" file="0" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="2" name="spin_loop4" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="250">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+                <key id="2" time="500">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+                <key id="3" time="750">
+                    <object_ref id="0" timeline="0" key="3" z_index="0"/>
+                </key>
+                <key id="4" time="1000">
+                    <object_ref id="0" timeline="0" key="4" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="lil boulder">
+                <key id="0" spin="-1">
+                    <object folder="0" file="0"/>
+                </key>
+                <key id="1" time="250" spin="-1">
+                    <object folder="0" file="0" angle="270"/>
+                </key>
+                <key id="2" time="500" spin="-1">
+                    <object folder="0" file="0" angle="180"/>
+                </key>
+                <key id="3" time="750" spin="-1">
+                    <object folder="0" file="0" angle="90"/>
+                </key>
+                <key id="4" time="1000">
+                    <object folder="0" file="0" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="3" name="spin_loop2" length="500" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="125">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+                <key id="2" time="250">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+                <key id="3" time="375">
+                    <object_ref id="0" timeline="0" key="3" z_index="0"/>
+                </key>
+                <key id="4" time="500">
+                    <object_ref id="0" timeline="0" key="4" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="lil boulder">
+                <key id="0">
+                    <object folder="0" file="0"/>
+                </key>
+                <key id="1" time="125">
+                    <object folder="0" file="0" angle="90"/>
+                </key>
+                <key id="2" time="250">
+                    <object folder="0" file="0" angle="180"/>
+                </key>
+                <key id="3" time="375">
+                    <object folder="0" file="0" angle="270"/>
+                </key>
+                <key id="4" time="500">
+                    <object folder="0" file="0" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+        <animation id="4" name="spin_loop3" length="1000" interval="100">
+            <mainline>
+                <key id="0">
+                    <object_ref id="0" timeline="0" key="0" z_index="0"/>
+                </key>
+                <key id="1" time="250">
+                    <object_ref id="0" timeline="0" key="1" z_index="0"/>
+                </key>
+                <key id="2" time="500">
+                    <object_ref id="0" timeline="0" key="2" z_index="0"/>
+                </key>
+                <key id="3" time="750">
+                    <object_ref id="0" timeline="0" key="3" z_index="0"/>
+                </key>
+                <key id="4" time="1000">
+                    <object_ref id="0" timeline="0" key="4" z_index="0"/>
+                </key>
+            </mainline>
+            <timeline id="0" name="lil boulder">
+                <key id="0">
+                    <object folder="0" file="0"/>
+                </key>
+                <key id="1" time="250">
+                    <object folder="0" file="0" angle="90"/>
+                </key>
+                <key id="2" time="500">
+                    <object folder="0" file="0" angle="180"/>
+                </key>
+                <key id="3" time="750">
+                    <object folder="0" file="0" angle="270" scale_x="1" scale_y="1"/>
+                </key>
+                <key id="4" time="1000">
+                    <object folder="0" file="0" angle="0"/>
+                </key>
+            </timeline>
+        </animation>
+    </entity>
+</spriter_data>

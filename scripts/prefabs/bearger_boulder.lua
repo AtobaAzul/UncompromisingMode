@@ -58,7 +58,7 @@ end
 local function oncollide(inst, other)
 	local x, y, z = inst.Transform:GetWorldPosition()
 
-	if other ~= nil and other:IsValid() and other:HasTag("_combat") and not other:HasTag("gingerbread") or y <= inst:GetPhysicsRadius() + 0.001 then
+	if other ~= nil and other:IsValid() --[[and other:HasTag("_combat") and not other:HasTag("gingerbread")]] or y <= inst:GetPhysicsRadius() + 0.001 then
 		OnHitInk(inst, other)
 	end
 end
@@ -67,11 +67,11 @@ end
 local function onthrown(inst)
     inst:AddTag("NOCLICK")
     inst.persists = false
-    inst.AnimState:SetBank("rock")
-    inst.AnimState:SetBuild("rock")
-    inst.AnimState:PlayAnimation("full")
+    inst.AnimState:SetBank("bearger_boulder")
+    inst.AnimState:SetBuild("bearger_boulder")
+    inst.AnimState:PlayAnimation("spin_loop"..math.random(4), true)
 
-	inst.Transform:SetScale(0.5, 0.5, 0.5)
+	inst.Transform:SetScale(1.1, 1.1, 1.1)
 	
     inst.Physics:SetMass(1)
     inst.Physics:SetFriction(10)
@@ -82,7 +82,7 @@ local function onthrown(inst)
     inst.Physics:CollidesWith(COLLISION.WORLD)
     inst.Physics:CollidesWith(COLLISION.OBSTACLES)
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-    inst.Physics:SetCapsule(0.02, 0.02)
+    inst.Physics:SetCapsule(2, 2)
 	
     inst.Physics:SetCollisionCallback(oncollide)
 end
@@ -99,9 +99,9 @@ local function projectilefn()
 	local shadow = inst.entity:AddDynamicShadow()
     shadow:SetSize( 1.5, 1 )
 
-    inst.AnimState:SetBank("rock")
-    inst.AnimState:SetBuild("rock")
-    inst.AnimState:PlayAnimation("full")
+    inst.AnimState:SetBank("bearger_boulder")
+    inst.AnimState:SetBuild("bearger_boulder")
+    inst.AnimState:PlayAnimation("idle")
 
     inst.entity:SetPristine()
 

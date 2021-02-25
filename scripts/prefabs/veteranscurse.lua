@@ -87,9 +87,11 @@ local function oneat(inst, data)
 end
 
 local function ForceOvertimeFoodEffects(inst)
-    inst.components.eater:SetAbsorptionModifiers(0, 1, 0)
+	if not inst:HasTag("UM_foodregen") then
+		inst.components.eater:SetAbsorptionModifiers(0, 1, 0)
 
-	inst:ListenForEvent("oneat", oneat)
+		inst:ListenForEvent("oneat", oneat)
+	end
 end
 
 local function AttachCurse(inst, target)
@@ -117,6 +119,7 @@ local function DetachCurse(inst, target)
 		target:RemoveTag("vetcurse")
     end
 end
+
 local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration, priority, prefabs)
     local function OnAttached(inst, target)
         inst.entity:SetParent(target.entity)
