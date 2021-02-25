@@ -39,7 +39,7 @@ local function StopTracking(player, params, ent)
 
     if params.targetpop ~= #params.ents then
         if params.spawntask == nil then
-            params.spawntask = player:DoTaskInTime(SPAWN_INTERVAL + SPAWN_VARIANCE * math.random(), UpdateSpawn, params)
+            params.spawntask = player:DoTaskInTime(TUNING.SANITYMONSTERS_SPAWN_INTERVAL + TUNING.SANITYMONSTERS_SPAWN_VARIANCE * math.random(), UpdateSpawn, params)
         end
     elseif params.spawntask ~= nil then
         params.spawntask:Cancel()
@@ -62,6 +62,19 @@ local function StartTracking(player, params, ent)
         ent.persists = false
         ent.wantstodespawn = true
     end, player)
+end
+
+local function OnExchangeShadowCreature(inst, data)
+    local origent = data.ent
+    local exchangedent = data.exchangedent
+
+    local player = origent.spawnedforplayer
+    if not player then return end
+
+    local params = _players[player]
+    if not table.contains(params.ents, origent) then return end
+
+    StartTracking(player, params, exchangedent)
 end
 
 UpdateSpawn = function(player, params)
@@ -169,10 +182,10 @@ local function StopSpawn(player, params)
 end
 
 local function UpdatePopulation(player, params)
-	local is_inasnity_mode = player.components.sanity:IsInsanityMode()
+	local is_insanity_mode = player.components.sanity:IsInsanityMode()
 
-    if is_inasnity_mode and player.components.sanity.inducedinsanity then
-        local maxpop = 6
+    if is_insanity_mode and player.components.sanity.inducedinsanity then
+        local maxpop = SANITYMONSTERS_INDUCED_MAXPOP + 1
         local inc_chance = 0.4
         local dec_chance = 0.3
         local targetpop = params.targetpop
@@ -201,36 +214,36 @@ local function UpdatePopulation(player, params)
         local inc_chance = 0
         local dec_chance = 0
         local targetpop = params.targetpop
-        local sanity = is_inasnity_mode and player.components.sanity:GetPercent() or 1
+        local sanity = is_insanity_mode and player.components.sanity:GetPercent() or 1
 
         if sanity > 0.5 then
             maxpop = 0
         elseif sanity > TUNING.DSTU.DREADEYE_SPAWN_THRESH and sanity <= 0.3 then
-            maxpop = 1
+            maxpop = TUNING.SANITYMONSTERS_MAXPOP[1]
             if targetpop >= maxpop then
-                dec_chance = 0.2
+                dec_chance = TUNING.SANITYMONSTERS_CHANCES[1].dec
             else
-                inc_chance = 0.3
+                inc_chance = TUNING.SANITYMONSTERS_CHANCES[1].inc
             end
         elseif sanity > TUNING.DSTU.CREEPINGFEAR_SPAWN_THRESH and sanity <= TUNING.DSTU.DREADEYE_SPAWN_THRESH then -- 0.20
-            maxpop = 2
+            maxpop = TUNING.SANITYMONSTERS_MAXPOP[2]
             if targetpop >= maxpop then
-                dec_chance = 0.22
+                dec_chance = TUNING.SANITYMONSTERS_CHANCES[2].dec + 0.02
             elseif targetpop <= 0 then
-                inc_chance = 0.30
+                inc_chance = TUNING.SANITYMONSTERS_CHANCES[2].inc
             else
-                inc_chance = 0.22
-                dec_chance = 0.22
+                inc_chance = TUNING.SANITYMONSTERS_CHANCES[2].inc + 0.02
+                dec_chance = TUNING.SANITYMONSTERS_CHANCES[2].dec + 0.02
             end
         elseif sanity == 0 then -- 0
-            maxpop = 3
+            maxpop = TUNING.SANITYMONSTERS_MAXPOP[2] + 1
             if targetpop >= maxpop then
-                dec_chance = 0.22
+                dec_chance = TUNING.SANITYMONSTERS_CHANCES[2].dec + 0.02
             elseif targetpop <= 1 then
-                inc_chance = 0.34
+                inc_chance = TUNING.SANITYMONSTERS_CHANCES[2].inc + 0.04
             else
-                inc_chance = 0.24
-                dec_chance = 0.22
+                inc_chance = TUNING.SANITYMONSTERS_CHANCES[2].inc + 0.04
+                dec_chance = TUNING.SANITYMONSTERS_CHANCES[2].dec + 0.02
             end
         --elseif sanity >= 0 and sanity < TUNING.DSTU.CREEPINGFEAR_SPAWN_THRESH then -- 0.10
         --    maxpop = 3
@@ -272,7 +285,7 @@ local function UpdatePopulation(player, params)
         end
 
         --Reschedule population update
-        params.poptask = player:DoTaskInTime(is_inasnity_mode and (POP_CHANGE_INTERVAL + POP_CHANGE_VARIANCE * math.random()) 
+        params.poptask = player:DoTaskInTime(is_insanity_mode and (TUNING.SANITYMONSTERS_POP_CHANGE_INTERVAL + TUNING.SANITYMONSTERS_POP_CHANGE_VARIANCE * math.random()) 
 												or (NON_INSANITY_MODE_DESPAWN_INTERVAL + NON_INSANITY_MODE_DESPAWN_VARIANCE * math.random())
 											, UpdatePopulation, params)
     end
@@ -337,6 +350,7 @@ end
 --Register events
 inst:ListenForEvent("ms_playerjoined", OnPlayerJoined)
 inst:ListenForEvent("ms_playerleft", OnPlayerLeft)
+inst:ListenForEvent("ms_exchangeshadowcreature", OnExchangeShadowCreature)
 
 --------------------------------------------------------------------------
 --[[ Debug ]]

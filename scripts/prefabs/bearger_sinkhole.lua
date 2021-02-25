@@ -60,7 +60,7 @@ local function OnTimerDone(inst, data)
             ErodeAway(inst)
         else
             UpdateOverrideSymbols(inst, inst.remainingrepairs)
-            inst.components.timer:StartTimer("nextrepair", 30 + (math.random() * 20))
+            inst.components.timer:StartTimer("nextrepair", 1)
         end
 
         if not inst:IsAsleep() then
@@ -105,7 +105,7 @@ local function donextcollapse(inst)
         inst:RemoveTag("scarytoprey")
         ShakeAllCameras(CAMERASHAKE.FULL, COLLAPSE_STAGE_DURATION, .03, .15, inst, TUNING.ANTLION_SINKHOLE.RADIUS*6)
         inst.remainingrepairs = NUM_CRACKING_STAGES
-        inst.components.timer:StartTimer("nextrepair", 30 + (math.random() * 20))
+        inst.components.timer:StartTimer("nextrepair", 3)
     else
         ShakeAllCameras(CAMERASHAKE.FULL, COLLAPSE_STAGE_DURATION, .015, .15, inst, TUNING.ANTLION_SINKHOLE.RADIUS*4)
     end

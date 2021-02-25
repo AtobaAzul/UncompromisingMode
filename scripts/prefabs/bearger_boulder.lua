@@ -36,10 +36,9 @@ local function OnHitInk(inst, attacker, target)
 	inst.fx = "groundpound_fx"
 	
 	if boat then
-		local pt = x, 0, z
-		if boat ~= nil then
-			boat:PushEvent("spawnnewboatleak", {pt = pt, leak_size = "med_leak", playsoundfx = true})
-		end
+		local sinkhole = SpawnPrefab("antlion_sinkhole_boat")
+		sinkhole.Transform:SetPosition(x, 0, z)
+		sinkhole.components.timer:StartTimer("nextrepair", 20 + (math.random() * 10))
 	elseif not inst:IsOnOcean() and not boat then
 		local sinkhole = SpawnPrefab("bearger_sinkhole")
 		sinkhole.Transform:SetPosition(x, 0, z)
@@ -72,10 +71,12 @@ local function onthrown(inst)
     inst.AnimState:SetBuild("rock")
     inst.AnimState:PlayAnimation("full")
 
+	inst.Transform:SetScale(0.5, 0.5, 0.5)
+	
     inst.Physics:SetMass(1)
     inst.Physics:SetFriction(10)
     inst.Physics:SetDamping(5)
-    inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
+    inst.Physics:SetCollisionGroup(COLLISION.ITEMS)
     inst.Physics:ClearCollisionMask()
     inst:SetPhysicsRadiusOverride(3)
     inst.Physics:CollidesWith(COLLISION.WORLD)

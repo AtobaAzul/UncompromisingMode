@@ -108,6 +108,9 @@ local function CheckTargetPiece(inst)
 end
 
 local function OnWake(inst)
+	if inst.task == nil then
+        inst.task = inst:DoTaskInTime(1, CheckTargetPiece)
+	end
 end
 
 local function OnSleep(inst)
@@ -377,8 +380,8 @@ local function pawn_common(pawntype)
 
     inst:ListenForEvent("attacked", OnAttacked)
 	
-	if inst.checktask == nil then
-        inst.checktask = inst:DoTaskInTime(1, CheckTargetPiece)
+	if inst.task == nil then
+        inst.task = inst:DoTaskInTime(1, CheckTargetPiece)
 	end
 	
 	inst.sg:GoToState("hide_post")

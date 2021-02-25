@@ -67,8 +67,11 @@ local function LaunchProjectile(inst, target)
 		local theta = inst.Transform:GetRotation()
 		
 		theta = theta*DEGREES
-		targetpos.x = targetpos.x + 15*math.cos(theta)
-		targetpos.z = targetpos.z - 15*math.sin(theta)
+		
+		local variableanglex = math.random(0, 30)
+		local variableanglez = math.random(0, 30)
+		targetpos.x = targetpos.x + variableanglex*math.cos(theta)
+		targetpos.z = targetpos.z - variableanglez*math.sin(theta)
 		
 		local rangesq = ((a-x)^2) + ((c-z)^2)
 		local maxrange = 15
@@ -77,8 +80,47 @@ local function LaunchProjectile(inst, target)
 		
 		local projectile = SpawnPrefab("bearger_boulder")
 		projectile.Transform:SetPosition(x, y, z)
-		projectile.components.complexprojectile:SetHorizontalSpeed(speed + 8)
+		projectile.components.complexprojectile:SetHorizontalSpeed(speed + math.random(10, 15))
 		projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+	end
+end
+
+local function Sinkholes(inst)
+	local target = inst.components.combat.target ~= nil and inst.components.combat.target
+	if target ~= nil then
+		local target_index = {}
+		local found_targets = {}
+		local ix, iy, iz = inst.Transform:GetWorldPosition()
+		for i = 1,5 do
+			local delay = i / 20
+		
+			inst:DoTaskInTime(FRAMES * i * 1.5 + delay, function()
+				if target ~= nil then
+					local px, py, pz = target.Transform:GetWorldPosition()
+					local rad = math.rad(inst:GetAngleToPoint(px, py, pz))
+					local velx = math.cos(rad) * 4
+					local velz = -math.sin(rad) * 4
+				
+					local dx, dy, dz = ix + (i * velx), 0, iz + (i * velz)
+					
+					local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
+					local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
+					local pt = dx, 0, dz
+					
+					if boat then
+						local fx1 = SpawnPrefab("antlion_sinkhole_boat")
+						fx1.Transform:SetPosition(dx, dy, dz)
+					elseif ground and not boat then
+						local fx1 = SpawnPrefab("bearger_sinkhole")
+						fx1.Transform:SetPosition(dx, dy, dz)
+						fx1:PushEvent("startcollapse")
+					else
+						local fx1 = SpawnPrefab("splash_green")
+						fx1.Transform:SetPosition(dx, dy, dz)
+					end
+				end
+			end)
+		end
 	end
 end
 
@@ -88,7 +130,8 @@ env.AddPrefabPostInit("bearger", function(inst)
 	end
 	
 	if inst.components.groundpounder then
-		inst.components.groundpounder.sinkhole = true
+		--inst.components.groundpounder.sinkhole = true
+		inst.components.groundpounder.groundpoundFn = Sinkholes
 	end
 	
     inst:ListenForEvent("timerdone", RockThrowTimer)
