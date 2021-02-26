@@ -106,7 +106,7 @@ local states = {
 			end
 			
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("atk")
+            inst.AnimState:PlayAnimation("shoot")
         end,
 
         timeline =
