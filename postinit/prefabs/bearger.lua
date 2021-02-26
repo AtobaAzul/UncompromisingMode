@@ -80,7 +80,7 @@ local function LaunchProjectile(inst, target)
 		
 		local projectile = SpawnPrefab("bearger_boulder")
 		projectile.Transform:SetPosition(x, y, z)
-		projectile.components.complexprojectile:SetHorizontalSpeed(speed + math.random(10, 15))
+		projectile.components.complexprojectile:SetHorizontalSpeed(speed + math.random(3, 5))
 		projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 	end
 end
@@ -92,14 +92,14 @@ local function Sinkholes(inst)
 		local found_targets = {}
 		local ix, iy, iz = inst.Transform:GetWorldPosition()
 		for i = 1,5 do
-			local delay = i / 20
+			local delay = i / 10
 		
 			inst:DoTaskInTime(FRAMES * i * 1.5 + delay, function()
 				if target ~= nil then
 					local px, py, pz = target.Transform:GetWorldPosition()
 					local rad = math.rad(inst:GetAngleToPoint(px, py, pz))
-					local velx = math.cos(rad) * 4
-					local velz = -math.sin(rad) * 4
+					local velx = math.cos(rad) * 4.5
+					local velz = -math.sin(rad) * 4.5
 				
 					local dx, dy, dz = ix + (i * velx), 0, iz + (i * velz)
 					

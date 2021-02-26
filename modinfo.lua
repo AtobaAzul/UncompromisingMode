@@ -72,6 +72,7 @@ configuration_options =
 -- Core Gameplay --
 ------------------------------
     Header("Core Gameplay"),
+	BinaryConfig("foodregen", "Over Time Food Stats", "Health and Sanity from foods is applied over time, each food acting as a unique stackable buff.", true),
     BinaryConfig("caved", "[IMPORTANT] Cave Config", "Switches some things around so players who can't run Caves can still enjoy the game. ENABLE IF CAVES ARE ENABLED!", true),
 	{
 		name = "rne chance",

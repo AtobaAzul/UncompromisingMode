@@ -1,18 +1,30 @@
 local function OnTick(inst, target, data)
+
+	local duration = data ~= nil and data.duration or 1
+	
+	--[[local warlybuff = target:HasTag("warlybuffed") and 2 or 1
+	duration = duration / warlybuff]]
+
     if target.components.health ~= nil and
         not target.components.health:IsDead() and
         not target:HasTag("playerghost") then
-        target.components.health:DoDelta(data ~= nil and data.duration or 1, nil, inst.prefab)
+        target.components.health:DoDelta(data ~= nil and duration or 1, nil, inst.prefab)
     else
         inst.components.debuff:Stop()
     end
 end
 
 local function OnAttached(inst, target, followsymbol, followoffset, data)
+	
+	local duration = data ~= nil and data.duration or 1
+	
+	local warlybuff = target:HasTag("warlybuffed") and 2 or 1
+	duration = duration / warlybuff
+
     inst.entity:SetParent(target.entity)
     inst.Transform:SetPosition(0, 0, 0) --in case of loading
-    inst.task = inst:DoPeriodicTask(data ~= nil and data.duration or 1, OnTick, nil, target, data)
-	inst.components.timer:StartTimer("regenover", data ~= nil and ((data.duration * 10) + 0.01) or 1)
+    inst.task = inst:DoPeriodicTask(data ~= nil and duration or 1, OnTick, nil, target, data)
+	inst.components.timer:StartTimer("regenover", data ~= nil and ((duration * 10) + 0.01) or 1)
     inst:ListenForEvent("death", function()
         inst.components.debuff:Stop()
     end, target)
@@ -26,6 +38,10 @@ end
 
 local function OnExtended(inst, target, data)
 	local duration = data ~= nil and data.duration or 1
+	
+	local warlybuff = target:HasTag("warlybuffed") and 2 or 1
+	duration = duration / warlybuff
+	
 
     local time_remaining = inst.components.timer:GetTimeLeft("regenover")
 	if time_remaining ~= nil then
@@ -69,21 +85,33 @@ local function fn_health()
 end
 
 local function OnTick2(inst, target, data)
+
+	local duration = data ~= nil and data.duration or 1
+	
+	local warlybuff = target:HasTag("warlybuffed") and 2 or 1
+	duration = duration / warlybuff
+
     if target.components.health ~= nil and
         not target.components.health:IsDead() and
 		target.components.sanity ~= nil and
         not target:HasTag("playerghost") then
-        target.components.sanity:DoDelta(data ~= nil and data.duration or 1, nil, inst.prefab)
+        target.components.sanity:DoDelta(data ~= nil and duration or 1, nil, inst.prefab)
     else
         inst.components.debuff:Stop()
     end
 end
 
 local function OnAttached2(inst, target, followsymbol, followoffset, data)
+
+	local duration = data ~= nil and data.duration or 1
+	
+	local warlybuff = target:HasTag("warlybuffed") and 2 or 1
+	duration = duration / warlybuff
+
     inst.entity:SetParent(target.entity)
     inst.Transform:SetPosition(0, 0, 0) --in case of loading
-    inst.task = inst:DoPeriodicTask(data ~= nil and data.duration or 1, OnTick2, nil, target, data)
-	inst.components.timer:StartTimer("regenover", data ~= nil and ((data.duration * 10) + 0.01) or 1)
+    inst.task = inst:DoPeriodicTask(data ~= nil and duration or 1, OnTick2, nil, target, data)
+	inst.components.timer:StartTimer("regenover", data ~= nil and ((duration * 10) + 0.01) or 1)
     inst:ListenForEvent("death", function()
         inst.components.debuff:Stop()
     end, target)
@@ -96,7 +124,11 @@ local function OnTimerDone2(inst, data)
 end
 
 local function OnExtended2(inst, target, data)
+	
 	local duration = data ~= nil and data.duration or 1
+	
+	local warlybuff = target:HasTag("warlybuffed") and 2 or 1
+	duration = duration / warlybuff
 
     local time_remaining = inst.components.timer:GetTimeLeft("regenover")
 	if time_remaining ~= nil then

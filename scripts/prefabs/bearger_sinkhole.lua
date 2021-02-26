@@ -105,7 +105,7 @@ local function donextcollapse(inst)
         inst:RemoveTag("scarytoprey")
         ShakeAllCameras(CAMERASHAKE.FULL, COLLAPSE_STAGE_DURATION, .03, .15, inst, TUNING.ANTLION_SINKHOLE.RADIUS*6)
         inst.remainingrepairs = NUM_CRACKING_STAGES
-        inst.components.timer:StartTimer("nextrepair", 3)
+        inst.components.timer:StartTimer("nextrepair", 5)
     else
         ShakeAllCameras(CAMERASHAKE.FULL, COLLAPSE_STAGE_DURATION, .015, .15, inst, TUNING.ANTLION_SINKHOLE.RADIUS*4)
     end

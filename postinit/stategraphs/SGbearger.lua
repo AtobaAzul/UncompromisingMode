@@ -106,7 +106,9 @@ local states = {
 			end
 			
             inst.Physics:Stop()
+
             inst.AnimState:PlayAnimation("t")
+
         end,
 
         timeline =
