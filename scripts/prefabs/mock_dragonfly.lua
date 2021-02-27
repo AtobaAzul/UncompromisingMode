@@ -88,7 +88,7 @@ end
 local function SetFlameOn(inst, flameon, newtarget, freeze)
     if flameon and not inst.flame_on then
         inst.flame_on = true
-        if newtarget and inst.components.health:GetPercent() <= 0.5 then
+        if newtarget then
             inst.sg:GoToState("taunt_pre")
         end
     elseif not flameon and inst.flame_on then
@@ -325,7 +325,7 @@ local function OnKill(inst, data)
     end--]]
 end
 
-local loot = {"meat", "meat", "meat", "meat", "meat", "meat", "meat", "meat", "dragon_scales","dragon_scales","dragon_scales"}
+local loot = {"meat", "meat", "meat", "meat", "meat", "meat", "meat", "meat", "dragon_scales", "dragon_scales", "dragon_scales"}
 
 local function OnDead(inst)
     TheWorld:PushEvent("mockflykilled", inst)
@@ -397,13 +397,12 @@ local function fn(Sim)
     inst:AddTag("largecreature")
     inst:AddTag("flying")
 	inst:AddTag("ignorewalkableplatformdrowning")
-	inst:AddTag("insect")
 
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aurafn = CalcSanityAura
     
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(5000)
+    inst.components.health:SetMaxHealth(4000)
     inst.components.health.destroytime = 5
     inst.components.health.fire_damage_scale = 0
 
