@@ -57,8 +57,7 @@ end
 
 local function oncollide(inst, other)
 	local x, y, z = inst.Transform:GetWorldPosition()
-
-	if other ~= nil and other:IsValid() --[[and other:HasTag("_combat") and not other:HasTag("gingerbread")]] or y <= inst:GetPhysicsRadius() + 0.001 then
+	if other ~= nil and other:IsValid() and other:HasTag("_combat") and not other:HasTag("bearger_boulder") or y <= inst:GetPhysicsRadius() + 0.001 then
 		OnHitInk(inst, other)
 	end
 end
@@ -76,19 +75,21 @@ local function onthrown(inst)
     inst.Physics:SetMass(1)
     inst.Physics:SetFriction(10)
     inst.Physics:SetDamping(5)
-    inst.Physics:SetCollisionGroup(COLLISION.ITEMS)
+    inst.Physics:SetCollisionGroup(COLLISION.OBSTACLES)
     inst.Physics:ClearCollisionMask()
     inst:SetPhysicsRadiusOverride(3)
     inst.Physics:CollidesWith(COLLISION.WORLD)
-    inst.Physics:CollidesWith(COLLISION.OBSTACLES)
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-    inst.Physics:SetCapsule(2, 2)
+    inst.Physics:SetCapsule(1.5, 1.5)
 	
     inst.Physics:SetCollisionCallback(oncollide)
 end
 
 local function projectilefn()
     local inst = CreateEntity()
+	
+	
+    inst:AddTag("bearger_boulder")
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
