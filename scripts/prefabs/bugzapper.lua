@@ -136,7 +136,7 @@ local function onattack(inst, attacker, target)
 			SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
 			
 			local x, y, z = target.Transform:GetWorldPosition()
-			local ents = TheSim:FindEntities(x, y, z, 3, nil, { "INLIMBO", "player", "abigail" }, { "insect", "spider", "hoodedwidow")
+			local ents = TheSim:FindEntities(x, y, z, 3, nil, { "INLIMBO", "player", "abigail" }, { "insect", "spider", "hoodedwidow"})
 
 			for i, v in ipairs(ents) do
 				if v ~= inst and v:IsValid() and not v:IsInLimbo() then
@@ -156,7 +156,7 @@ local function onattack(inst, attacker, target)
 			SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
 			
 			local x, y, z = target.Transform:GetWorldPosition()
-			local ents = TheSim:FindEntities(x, y, z, 3, nil, { "INLIMBO", "player", "abigail" }, { "insect", "spider", "hoodedwidow")
+			local ents = TheSim:FindEntities(x, y, z, 3, nil, { "INLIMBO", "player", "abigail" }, { "insect", "spider", "hoodedwidow"})
 
 			for i, v in ipairs(ents) do
 				if v ~= inst and v:IsValid() and not v:IsInLimbo() then
