@@ -397,6 +397,7 @@ local function fn(Sim)
     inst:AddTag("largecreature")
     inst:AddTag("flying")
 	inst:AddTag("ignorewalkableplatformdrowning")
+	inst:AddTag("insect")
 
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aurafn = CalcSanityAura
@@ -424,6 +425,9 @@ local function fn(Sim)
     inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
     inst.components.combat.battlecryenabled = false
     inst.components.combat:SetHurtSound("dontstarve_DLC001/creatures/dragonfly/hurt")
+	
+    inst:AddComponent("explosiveresist")
+	
     inst.flame_on = false
     inst.KilledPlayer = false
     inst:ListenForEvent("killed", OnKill)

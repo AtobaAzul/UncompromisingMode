@@ -45,6 +45,8 @@ env.AddPrefabPostInit("dragonfly", function (inst)
 		return
 	end
 	
+	inst:AddTag("insect")
+	
 	inst.task = nil
 
     inst:AddComponent("playerprox")

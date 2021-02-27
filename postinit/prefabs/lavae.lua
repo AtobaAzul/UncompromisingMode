@@ -14,5 +14,7 @@ env.AddPrefabPostInit("lavae", function(inst)
 		return
 	end
 	
+	inst:AddTag("insect")
+	
     inst:ListenForEvent("death", ondeath)
 end)
