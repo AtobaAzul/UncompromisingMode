@@ -397,6 +397,7 @@ local function fn(Sim)
     inst:AddTag("largecreature")
     inst:AddTag("flying")
 	inst:AddTag("ignorewalkableplatformdrowning")
+	inst:AddTag("insect")
 
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aurafn = CalcSanityAura
