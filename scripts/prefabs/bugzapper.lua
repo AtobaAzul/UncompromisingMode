@@ -136,12 +136,12 @@ local function onattack(inst, attacker, target)
 			SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
 			
 			local x, y, z = target.Transform:GetWorldPosition()
-			local ents = TheSim:FindEntities(x, y, z, 2, nil, { "INLIMBO", "player", "abigail" })
+			local ents = TheSim:FindEntities(x, y, z, 3, nil, { "INLIMBO", "player", "abigail" }, { "insect", "spider", "hoodedwidow")
 
 			for i, v in ipairs(ents) do
 				if v ~= inst and v:IsValid() and not v:IsInLimbo() then
 					if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
-						v.components.combat:GetAttacked(attacker, 15, nil)
+						v.components.combat:GetAttacked(attacker, 10, nil)
 						SpawnPrefab("electrichitsparks"):AlignToTarget(v, attacker, true)
 					end
 				end
@@ -154,6 +154,18 @@ local function onattack(inst, attacker, target)
 			target.components.health:DoDelta(-15, false, attacker)
 			
 			SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
+			
+			local x, y, z = target.Transform:GetWorldPosition()
+			local ents = TheSim:FindEntities(x, y, z, 3, nil, { "INLIMBO", "player", "abigail" }, { "insect", "spider", "hoodedwidow")
+
+			for i, v in ipairs(ents) do
+				if v ~= inst and v:IsValid() and not v:IsInLimbo() then
+					if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
+						v.components.combat:GetAttacked(attacker, 10, nil)
+						SpawnPrefab("electrichitsparks"):AlignToTarget(v, attacker, true)
+					end
+				end
+			end
 			
 			return
 		end

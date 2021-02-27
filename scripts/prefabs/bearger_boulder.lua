@@ -17,7 +17,7 @@ local function OnHitInk(inst, attacker, target)
 	
     
 	local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, 0, z, 5, nil, NON_COLLAPSIBLE_TAGS, COLLAPSIBLE_TAGS)
+    local ents = TheSim:FindEntities(x, 0, z, 4, nil, NON_COLLAPSIBLE_TAGS, COLLAPSIBLE_TAGS)
     for i, v in ipairs(ents) do
         if v:IsValid() then
             if v.components.combat ~= nil
@@ -25,7 +25,7 @@ local function OnHitInk(inst, attacker, target)
                 and not v:HasTag("bearger")
                 and not v.components.health:IsDead() then
                 if v.components.combat:CanBeAttacked() then
-                    v.components.combat:GetAttacked(inst, 100)
+                    v.components.combat:GetAttacked(inst, 30)
                 end
             end
         end
@@ -36,15 +36,13 @@ local function OnHitInk(inst, attacker, target)
 	inst.fx = "groundpound_fx"
 	
 	if boat then
+		inst.SoundEmitter:PlaySound("dontstarve/wilson/rock_break")
 		local sinkhole = SpawnPrefab("antlion_sinkhole_boat")
 		sinkhole.Transform:SetPosition(x, 0, z)
-		sinkhole.components.timer:StartTimer("nextrepair", 20 + (math.random() * 10))
-	elseif not inst:IsOnOcean() and not boat then
-		local sinkhole = SpawnPrefab("bearger_sinkhole")
-		sinkhole.Transform:SetPosition(x, 0, z)
-		sinkhole.components.timer:StartTimer("nextrepair", 20 + (math.random() * 10))
 	elseif inst:IsOnOcean() then
 		inst.fx = "splash_green"
+	else
+		inst.SoundEmitter:PlaySound("dontstarve/wilson/rock_break")
 	end
 					
 	SpawnPrefab(inst.fx).Transform:SetPosition(x, 0, z)
