@@ -109,7 +109,12 @@ AddComponentPostInit("hounded", function(self)
             prefab_list = self.seasonal_prefabs[season]
             prefab = #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or nil
 			if prefab == "magmahound" then
-				SpawnHounded(prefab, pt, magmaspawn_pt)
+				if magmaspawn_pt ~= nil then
+					SpawnHounded(prefab, pt, magmaspawn_pt)
+				else
+					prefab = "hound"
+					SpawnHounded(prefab, pt, spawn_pt)
+				end
 			else
 				SpawnHounded(prefab, pt, spawn_pt)
 			end
