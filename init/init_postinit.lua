@@ -18,6 +18,7 @@ local component_post = {
 	"hounded",
 	"dynamicmusic",
 	"sleeper",
+	"fueled",
 }
 
 local prefab_post = {
