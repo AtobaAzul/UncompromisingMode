@@ -219,7 +219,7 @@ local function SetGuardPig(inst)
     inst.components.health:SetMaxHealth(TUNING.PIG_GUARD_HEALTH)
     inst.components.combat:SetDefaultDamage(TUNING.PIG_GUARD_DAMAGE)
     inst.components.combat:SetAttackPeriod(TUNING.PIG_GUARD_ATTACK_PERIOD)
-    inst.components.combat:SetKeepTargetFunction(GuardKeepTargetFn)
+    inst.components.combat:SetKeepTargetFunction(NormalKeepTargetFn)
     inst.components.combat:SetRetargetFunction(1, NormalRetargetFn)
     inst.components.combat:SetTarget(nil)
     inst.components.locomotor.runspeed = TUNING.PIG_RUN_SPEED
@@ -419,6 +419,20 @@ end
 local function IsGuardPig(dude)
     return dude:HasTag("guard") and dude:HasTag("pig")
 end
+local function OnAttackedByDecidRoot(inst, attacker)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(SHARE_TARGET_DIST) * .5, SUGGESTTARGET_MUST_TAGS, SUGGESTTARGET_CANT_TAGS)
+    local num_helpers = 0
+    for i, v in ipairs(ents) do
+        if v ~= inst and not v.components.health:IsDead() then
+            v:PushEvent("suggest_tree_target", { tree = attacker })
+            num_helpers = num_helpers + 1
+            if num_helpers >= MAX_TARGET_SHARES then
+                break
+            end
+        end
+    end
+end
 local function OnAttacked(inst, data)
     --print(inst, "OnAttacked")
     local attacker = data.attacker
@@ -445,6 +459,13 @@ local function OnNewTarget(inst, data)
         inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST, IsWerePig, MAX_TARGET_SHARES)
     end
 end
+
+local function SuggestTreeTarget(inst, data)
+    if data ~= nil and data.tree ~= nil and inst:GetBufferedAction() ~= ACTIONS.CHOP then
+        inst.tree_target = data.tree
+    end
+end
+
 local function common(moonbeast)
     local inst = CreateEntity()
 
@@ -572,7 +593,7 @@ local function common(moonbeast)
 
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("newcombattarget", OnNewTarget)
-
+	inst:ListenForEvent("suggest_tree_target", SuggestTreeTarget)
     return inst
 end
 

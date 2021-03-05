@@ -14,7 +14,44 @@ local MAX_CHASE_TIME = 10
 local MAX_CHASE_DIST = 20
 local RUN_AWAY_DIST = 5
 local STOP_RUN_AWAY_DIST = 6
+local KEEP_CHOPPING_DIST = 15
+local SEE_TREE_DIST = 15
+local function IsDeciduousTreeMonster(guy)
+    return guy.monster and guy.prefab == "deciduoustree"
+end
 
+local CHOP_MUST_TAGS = { "CHOP_workable" }
+local function FindDeciduousTreeMonster(inst)
+    return FindEntity(inst, SEE_TREE_DIST, IsDeciduousTreeMonster, CHOP_MUST_TAGS)
+end
+
+local function KeepChoppingAction(inst)
+    return inst.tree_target ~= nil
+        or (inst.components.follower.leader ~= nil and
+            inst:IsNear(inst.components.follower.leader, KEEP_CHOPPING_DIST))
+        or FindDeciduousTreeMonster(inst) ~= nil
+end
+
+local function StartChoppingCondition(inst)
+    return inst.tree_target ~= nil
+        or (inst.components.follower.leader ~= nil and
+            inst.components.follower.leader.sg ~= nil and
+            inst.components.follower.leader.sg:HasStateTag("chopping"))
+        or FindDeciduousTreeMonster(inst) ~= nil
+end
+
+local function FindTreeToChopAction(inst)
+    local target = FindEntity(inst, SEE_TREE_DIST, nil, CHOP_MUST_TAGS)
+    if target ~= nil then
+        if inst.tree_target ~= nil then
+            target = inst.tree_target
+            inst.tree_target = nil
+        else
+            target = FindDeciduousTreeMonster(inst) or target
+        end
+        return BufferedAction(inst, target, ACTIONS.CHOP)
+    end
+end
 local function GoHomeAction(inst)
     if inst.components.combat.target ~= nil then
         return
@@ -81,9 +118,6 @@ function PigGuard_pigkingBrain:OnStart()
     local root = PriorityNode(
     {
 		--Fearless Guards, not afraid of anything
-        --BrainCommon.PanicWhenScared(self.inst, .2, "PIG_TALK_PANICBOSS"),
-        --WhileNode(function() return self.inst.components.hauntable ~= nil and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
-        --WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
         ChattyNode(self.inst, "PIG_GUARD_TALK_FIGHT",
             WhileNode(function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
                 ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME), SpringCombatMod(MAX_CHASE_DIST)))),
@@ -91,7 +125,8 @@ function PigGuard_pigkingBrain:OnStart()
             WhileNode(function() return self.inst.components.combat.target ~= nil and self.inst.components.combat:InCooldown() end, "Dodge",
                 RunAway(self.inst, function() return self.inst.components.combat.target end, RUN_AWAY_DIST, STOP_RUN_AWAY_DIST))),
 				
-		IfNode(function() return GetLeader(self.inst) and not (self.inst.components.combat ~= nil and self.inst.components.combat.target ~= nil) end, "has leader",		
+		IfNode(function() return GetLeader(self.inst) and not (self.inst.components.combat ~= nil and self.inst.components.combat.target ~= nil) end, "has leader",	
+	
 		ChattyNode(self.inst, "PIG_GUARD_PIGKING_TALK_LOOKATWILSON_FRIEND",
                 Follow(self.inst, GetLeader, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST)),
 				
@@ -105,8 +140,11 @@ function PigGuard_pigkingBrain:OnStart()
 		        ChattyNode(self.inst, "PIG_TALK_FIND_MEAT",
             DoAction(self.inst, function() return FindFoodAction(self.inst) end))),
 
-
-		--WhileNode(function() return not GetLeader(self.inst) end,
+        IfNode(function() return StartChoppingCondition(self.inst) end, "chop", 
+                WhileNode(function() return KeepChoppingAction(self.inst) end, "keep chopping",
+                    LoopNode{ 
+                        ChattyNode(self.inst, "PIG_TALK_HELP_CHOP_WOOD",
+                            DoAction(self.inst, FindTreeToChopAction ))})),	
 		IfNode(function() return GetLeader(self.inst) end, "has leader",	
         ChattyNode(self.inst, "PIG_GUARD_PIGKING_TALK_LOOKATWILSON_FRIEND",
             FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn))),
