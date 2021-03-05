@@ -364,7 +364,7 @@ local function fnviperlingfriend()
 	
 	inst:AddTag("viperling")
 	inst:AddTag("viperlingfriend")
-	inst:AddTag("shadowcreature")
+	--inst:AddTag("shadowcreature")
 	inst:AddTag("shadow")
 	inst.AnimState:SetMultColour(0, 0, 0, 0.5)
 
