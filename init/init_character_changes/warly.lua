@@ -2,23 +2,21 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local function oneat(inst, food)
-	if not inst:HasTag("UM_foodregen") then
-		if food and food.components.edible then
-			local hungerbonus = food.components.edible:GetHunger() * 0.2
-			local sanitybonus = food.components.edible:GetSanity() * 0.2
-			local healthbonus = food.components.edible:GetHealth() * 0.2
+	if food and food.components.edible then
+		local hungerbonus = food.components.edible:GetHunger() * 0.2
+		local sanitybonus = food.components.edible:GetSanity() * 0.2
+		local healthbonus = food.components.edible:GetHealth() * 0.2
 			
-			if inst.components.hunger and hungerbonus > 0 then
-				inst.components.hunger:DoDelta(hungerbonus)
-			end
+		if inst.components.hunger and hungerbonus > 0 then
+			inst.components.hunger:DoDelta(hungerbonus)
+		end
 			
-			if not inst:HasTag("vetcurse") and  inst.components.sanity and sanitybonus > 0 then
-				inst.components.sanity:DoDelta(hungerbonus)
-			end
+		if not inst:HasTag("vetcurse") and not inst:HasTag("UM_foodregen") and inst.components.sanity and sanitybonus > 0 then
+			inst.components.sanity:DoDelta(hungerbonus)
+		end
 			
-			if not inst:HasTag("vetcurse") and  inst.components.health and healthbonus > 0 then
-				inst.components.health:DoDelta(hungerbonus, food.prefab)
-			end
+		if not inst:HasTag("vetcurse") and not inst:HasTag("UM_foodregen") and inst.components.health and healthbonus > 0 then
+			inst.components.health:DoDelta(hungerbonus, food.prefab)
 		end
 	end
 end

@@ -13,7 +13,7 @@ local events =
 		if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then 
 			if inst.lightningshot then
 				inst.sg:GoToState("charging_pre", data.target) 
-			elseif data.target:IsValid() and inst:IsNear(data.target, 3) then
+			else
 				inst.sg:GoToState("attack", data.target)
 			end
 		end 
@@ -361,6 +361,10 @@ local states =
         tags = { "attack", "busy", "howling" },
 
         onenter = function(inst, target)
+			if inst.tripleshot == nil then
+				inst.tripleshot = 1
+			end
+		
             if not target then
                 target = inst.components.combat.target
             end
@@ -374,29 +378,41 @@ local states =
 			end
 			
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("howl")
+            --inst.AnimState:PlayAnimation("taunt")
+            inst.AnimState:PlayAnimation("atk_pre")
         end,
 
         timeline =
         {
             TimeEvent(0, function(inst) 
-				inst.SoundEmitter:PlaySound(inst.sounds.howl)
+				inst.SoundEmitter:PlaySound(inst.sounds.bark)
 				inst.lightningshot = false
 				inst.components.timer:StopTimer("lightningshot_cooldown")
 				inst.components.timer:StartTimer("lightningshot_cooldown", 6 + math.random())
 			end),
-            TimeEvent(15*FRAMES, function(inst) 
-				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
-					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
-					inst:LaunchProjectile(inst.sg.statemem.target)
-					
+            TimeEvent(5*FRAMES, function(inst, target) 
+				if not target then
+					target = inst.components.combat.target
+				end
+			
+				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() and target ~= nil then
+					inst:LaunchProjectile(target)
 				end
 			end),
         },
 
         events =
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+		
+            EventHandler("animover", function(inst) 
+				if inst.tripleshot < 3 then
+					inst.tripleshot = inst.tripleshot + 1
+					inst.sg:GoToState("howl_attack") 
+				else
+					inst.tripleshot = nil
+					inst.sg:GoToState("idle") 
+				end
+			end),
         },
     },
 
@@ -777,4 +793,4 @@ CommonStates.AddRunStates(states,
 })
 CommonStates.AddFrozenStates(states, HideEyeFX, ShowEyeFX)
 
-return StateGraph("lightninghound", states, events, "taunt", actionhandlers)
+return StateGraph("glacialhound", states, events, "taunt", actionhandlers)

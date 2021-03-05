@@ -321,7 +321,8 @@ Assets = {
 	Asset("ANIM", "anim/uncompromising_pawn_build.zip"),
 	Asset("ANIM", "anim/uncompromising_pawn_nightmare_build.zip"),
 	Asset("ANIM", "anim/krampus_bag_smack.zip"),
-
+	Asset("ANIM", "anim/glacial_hound_projectile.zip"),
+	
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_closed_lazy"),
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_lazy"),
 	

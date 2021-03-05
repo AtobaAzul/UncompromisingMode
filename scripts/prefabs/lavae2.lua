@@ -144,6 +144,7 @@ local function fn()
     inst:AddTag("lavae")
     inst:AddTag("monster")
     inst:AddTag("hostile")
+    inst:AddTag("insect")
 
     inst.Light:SetRadius(2)
     inst.Light:SetFalloff(0.5)

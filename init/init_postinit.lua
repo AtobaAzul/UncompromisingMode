@@ -18,6 +18,7 @@ local component_post = {
 	"hounded",
 	"dynamicmusic",
 	"sleeper",
+	"fueled",
 }
 
 local prefab_post = {
@@ -127,6 +128,7 @@ local prefab_post = {
 	"krampus_sack",
 	"armor_dragonfly",
 	"evergreen_stump",
+	--"bundle",
 }
 
 local stategraph_post = {
@@ -147,6 +149,7 @@ local stategraph_post = {
 	"koalefant",
 	"bearger",
 	"krampus",
+	"moose",
 }
 
 local class_post = {
@@ -167,6 +170,7 @@ local brain_post = {
 	"frog",
 	"spiderqueen",
 	"chester",
+	"moose",
 	--"bearger",
 	--"mossling",
 }
