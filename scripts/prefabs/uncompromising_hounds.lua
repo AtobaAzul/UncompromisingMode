@@ -640,6 +640,36 @@ local function DoGlacialExplosion(inst)
     spell:DoTaskInTime(6, spell.KillFX)
 end
 
+local function GlacialProjectile(inst, target)
+	local proj = SpawnPrefab("glacialhound_projectile")
+	local x, y, z = inst.Transform:GetWorldPosition()
+	proj.Transform:SetPosition(x, y, z)
+	proj.components.projectile:Throw(inst, target, inst)
+end
+
+local function CancelGlacialCharge(inst)
+	if inst.task ~= nil then
+		inst.task:Cancel()
+		inst.task = nil
+	end
+end
+
+local function GlacialCharging(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	
+	local x1 = x + math.random(-2, 2)
+	local z1 = z + math.random(-2, 2)
+	local y1 = 0 + 0.25 * math.random()
+	
+	local flakes = SpawnPrefab("deer_ice_flakes")
+	flakes.Transform:SetPosition(x1, y1, z1)
+	flakes:DoTaskInTime(1, flakes.Remove)
+end
+
+local function GlacialCharge(inst)
+    inst.task = inst:DoPeriodicTask(0.25, function(inst) GlacialCharging(inst) end)
+end
+
 local function fnglacial()
     local inst = fncommon("hound", "hound_mutated", nil, nil, nil, {amphibious = true})
 
@@ -649,13 +679,108 @@ local function fnglacial()
 	
 	inst.AnimState:SetMultColour(0, 0, 1, 1)
 	
-    inst:SetStateGraph("SGhound")
+    inst:SetStateGraph("SGglacialhound")
 
     MakeMediumBurnableCharacter(inst, "hound_body")
 	
     inst.components.lootdropper:SetChanceLootTable('hound_glacial')
 	
+    inst:AddComponent("timer")
+    inst:ListenForEvent("timerdone", ontimerdone)
+
+	inst.task = nil
+	
     inst:ListenForEvent("death", DoGlacialExplosion)
+    inst.LaunchProjectile = GlacialProjectile
+    inst.CancelCharge = CancelGlacialCharge
+    inst.Charge = GlacialCharge
+	
+	inst.lightningshot = true
+	
+    return inst
+end
+
+local function pipethrown(inst)
+    inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+    inst.AnimState:PlayAnimation("shoot")
+    inst:AddTag("NOCLICK")
+    inst.persists = false
+end
+
+local function onhit(inst, attacker, target)
+
+    if not target:IsValid() then
+        --target killed or removed in combat damage phase
+        return
+    end
+
+    if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
+        target.components.sleeper:WakeUp()
+    end
+
+    if target.components.burnable ~= nil then
+        if target.components.burnable:IsBurning() then
+            target.components.burnable:Extinguish()
+        elseif target.components.burnable:IsSmoldering() then
+            target.components.burnable:SmotherSmolder()
+        end
+    end
+
+    if target.components.combat ~= nil then
+        target.components.combat:SuggestTarget(attacker)
+    end
+
+    if target.sg ~= nil and not target.sg:HasStateTag("frozen") then
+        target:PushEvent("attacked", { attacker = attacker, damage = 25, weapon = inst })
+    end
+
+    if target.components.freezable ~= nil then
+        target.components.freezable:AddColdness(1)
+        target.components.freezable:SpawnShatterFX()
+    end
+	
+	inst:Remove()
+end
+
+local function fnglacial_proj()
+	local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+
+    MakeInventoryPhysics(inst)
+    RemovePhysicsColliders(inst)
+
+    inst.AnimState:SetBank("glacial_hound_projectile")
+    inst.AnimState:SetBuild("glacial_hound_projectile")
+    inst.AnimState:PlayAnimation("shoot_side")
+	
+    inst:AddTag("NOCLICK")
+    inst:AddTag("sharp")
+    inst:AddTag("weapon")
+    inst:AddTag("projectile")
+	
+    inst.entity:SetPristine()
+	
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst:AddComponent("weapon")
+    inst.components.weapon:SetDamage(0)
+	
+    inst:AddComponent("projectile")
+    inst.components.projectile:SetSpeed(30)
+    inst.components.projectile:SetOnThrownFn(pipethrown)
+    inst.components.projectile:SetHoming(false)
+    inst.components.projectile:SetHitDist(math.sqrt(5))
+    inst.components.projectile:SetOnHitFn(onhit)
+    inst.components.projectile:SetOnMissFn(inst.Remove)
+    --inst.components.projectile:SetLaunchOffset(Vector3(3, 2, 0))
+	
+    inst.persists = false
 
     return inst
 end
@@ -807,5 +932,6 @@ end
 
 return Prefab("lightninghound", fnlightning, assets, prefabs),
 	Prefab("glacialhound", fnglacial, assets, prefabs),
+	Prefab("glacialhound_projectile", fnglacial_proj, assets, prefabs),
 	Prefab("magmahound", fnmagma, assets, prefabs),
 	Prefab("sporehound", fnspore, assets, prefabs)

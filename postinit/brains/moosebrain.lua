@@ -18,7 +18,6 @@ local function EatFoodAction(inst)
                 and item.components.edible ~= nil
                 and item:IsOnPassablePoint()
 				and item:IsOnValidGround()
-				and not (item:HasTag("bee") or item:HasTag("mosquito"))
                 and (inst.components.eater ~= nil and inst.components.eater:CanEat(item))
         end,
         nil,
@@ -29,21 +28,11 @@ local function EatFoodAction(inst)
     end
 end
 
-local function FrogFindFood(self)
-
-
-    local findfood = DoAction(self.inst, EatFoodAction, "eat food", true)
-	
-    table.insert(self.bt.root.children, 2, findfood)
-end
-
-env.AddBrainPostInit("frogbrain", FrogFindFood)
-
-local function ToadFindFood(self)
+local function GooseFindFood(self)
 
     local findfood = DoAction(self.inst, EatFoodAction, "eat food", true)
 	
-    table.insert(self.bt.root.children, 2, findfood)
+    table.insert(self.bt.root.children, 4, findfood)
 end
 
-env.AddBrainPostInit("uncompromising_toadbrain", ToadFindFood)
+env.AddBrainPostInit("moosebrain", GooseFindFood)
