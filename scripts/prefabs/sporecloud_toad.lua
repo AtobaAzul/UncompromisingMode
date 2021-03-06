@@ -366,7 +366,7 @@ local function fn()
     inst:ListenForEvent("animover", OnAnimOver)
 
     inst:AddComponent("timer")
-    inst.components.timer:StartTimer("disperse", TUNING.TOADSTOOL_SPORECLOUD_LIFETIME)
+    inst.components.timer:StartTimer("disperse", TUNING.TOADSTOOL_SPORECLOUD_LIFETIME / 2)
 
     inst:ListenForEvent("timerdone", OnTimerDone)
 

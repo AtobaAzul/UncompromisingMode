@@ -276,7 +276,7 @@ local states =
 			
 			local x, y, z = inst:GetPosition():Get()
 			
-			local ents = TheSim:FindEntities(x, y, z, 2, { "_combat" }, { "wall", "houndmound", "hound", "houndfriend" })
+			local ents = TheSim:FindEntities(x, y, z, 3, { "_combat" }, { "wall", "houndmound", "hound", "houndfriend" })
 			for i, v in ipairs(ents) do
 				if v.components.combat ~= nil then
 					v.components.combat:GetAttacked(inst, 25, nil)
