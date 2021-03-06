@@ -17,7 +17,8 @@ local events =
 	
     EventHandler("doleapattack", function(inst,data)
                                 if inst.components.health and not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") then
-                                    inst.sg:GoToState("leap_attack_pre", data.target)
+                                    --inst.sg:GoToState("leap_attack_pre", data.target)
+									inst.sg:GoToState("leap_attack", data.target)
                                 end
                             end),
 							
@@ -210,9 +211,13 @@ local states =
         name = "leap_attack",
         tags = {"attack", "canrotate", "busy", "leapattack"},
         
-        onenter = function(inst, data)
-            inst.sg.statemem.startpos = data.startpos
-            inst.sg.statemem.targetpos = data.targetpos
+        onenter = function(inst, target)
+		
+            inst.sg.statemem.startpos = Vector3(inst.Transform:GetWorldPosition())
+            inst.sg.statemem.targetpos = Vector3(target.Transform:GetWorldPosition())
+
+            --[[inst.sg.statemem.startpos = data.startpos
+            inst.sg.statemem.targetpos = data.targetpos]]
             inst.components.locomotor:Stop()
             inst.Physics:SetActive(false)
             inst.components.locomotor:EnableGroundSpeedMultiplier(false)
@@ -271,10 +276,10 @@ local states =
 			
 			local x, y, z = inst:GetPosition():Get()
 			
-			local ents = TheSim:FindEntities(x, y, z, TUNING.METEOR_RADIUS, nil, { "wall", "houndmound", "hound", "houndfriend" })
+			local ents = TheSim:FindEntities(x, y, z, 2, { "_combat" }, { "wall", "houndmound", "hound", "houndfriend" })
 			for i, v in ipairs(ents) do
 				if v.components.combat ~= nil then
-					v.components.combat:GetAttacked(inst, TUNING.METEOR_DAMAGE, nil)
+					v.components.combat:GetAttacked(inst, 25, nil)
 				end
 			end
 			
