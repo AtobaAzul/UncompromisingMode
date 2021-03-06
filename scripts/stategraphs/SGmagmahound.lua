@@ -385,7 +385,7 @@ local states =
             inst.AnimState:PlayAnimation("belch")
 			
 				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
-                    inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                    inst:ForceFacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
                 end
         end,
 
