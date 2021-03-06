@@ -1,7 +1,14 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
+require "behaviours/runaway"
 -----------------------------------------------------------------
 local SEE_DIST = 20
+
+local AVOID_PLAYER_DIST = 7
+local AVOID_PLAYER_STOP = 12
+
+local AVOID_DIST = 10
+local AVOID_STOP = 12
 
 local FINDFOOD_CANT_TAGS = { "outofreach" }
 local function EatFoodAction(inst)
@@ -31,19 +38,26 @@ end
 
 local function FrogFindFood(self)
 
+    local avoidthenoid = RunAway(self.inst, "epic", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP , function() return true end )
+	
+    table.insert(self.bt.root.children, 2, avoidthenoid)
 
     local findfood = DoAction(self.inst, EatFoodAction, "eat food", true)
 	
-    table.insert(self.bt.root.children, 2, findfood)
+    table.insert(self.bt.root.children, 4, findfood)
 end
 
 env.AddBrainPostInit("frogbrain", FrogFindFood)
 
 local function ToadFindFood(self)
 
+    local avoidthenoid = RunAway(self.inst, "epic", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP , function() return true end )
+	
+    table.insert(self.bt.root.children, 2, avoidthenoid)
+
     local findfood = DoAction(self.inst, EatFoodAction, "eat food", true)
 	
-    table.insert(self.bt.root.children, 2, findfood)
+    table.insert(self.bt.root.children, 4, findfood)
 end
 
 env.AddBrainPostInit("uncompromising_toadbrain", ToadFindFood)

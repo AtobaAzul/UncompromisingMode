@@ -7,14 +7,6 @@ env.AddPrefabPostInit("moose", function(inst)
 		return
 	end
 	
-	if not inst.components.eater then
-		inst:AddComponent("eater")
-		inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
-		inst.components.eater:SetCanEatHorrible()
-		inst.components.eater:SetCanEatRaw()
-		inst.components.eater.strongstomach = true -- can eat monster meat!
-	end
-	
 	if inst.components.combat ~= nil then
 		local function isnotmossling(ent)
 			if ent ~= nil and not ent:HasTag("mossling") and not ent:HasTag("moose")then -- fix to friendly AOE: refer for later AOE mobs -Axe
@@ -33,14 +25,6 @@ env.AddPrefabPostInit("mothergoose", function(inst)
 
 	if not TheWorld.ismastersim then
 		return
-	end
-	
-	if not inst.components.eater then
-		inst:AddComponent("eater")
-		inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
-		inst.components.eater:SetCanEatHorrible()
-		inst.components.eater:SetCanEatRaw()
-		inst.components.eater.strongstomach = true -- can eat monster meat!
 	end
 	
 	if inst.components.combat ~= nil then
