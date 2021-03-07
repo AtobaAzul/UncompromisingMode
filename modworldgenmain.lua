@@ -226,9 +226,9 @@ AddTaskPreInit("Make a pick",function(task)
 task.room_choices["veteranshrine"] = 1
 
 end)
-AddTaskPreInit("Redforest",function(task)
+--[[AddTaskPreInit("RedForest",function(task)
 task.room_choices["veteranshrine"] = 1
-end)
+end)]]
 
 ---- KoreanWaffle's LOCK/KEY initialization code  --Inactive atm 
 local LOCKS = GLOBAL.LOCKS
