@@ -64,9 +64,6 @@ AddLevelPreInitAny(function(level)
 end)
 
 
-AddTaskPreInit("Redforest",function(task)
-task.room_choices["veteranshrine"] = 1
-end)
 
 
 if GetModConfigData("caved") == false then
@@ -229,6 +226,10 @@ AddTaskPreInit("Make a pick",function(task)
 task.room_choices["veteranshrine"] = 1
 
 end)
+AddTaskPreInit("Redforest",function(task)
+task.room_choices["veteranshrine"] = 1
+end)
+
 ---- KoreanWaffle's LOCK/KEY initialization code  --Inactive atm 
 local LOCKS = GLOBAL.LOCKS
 local KEYS = GLOBAL.KEYS
