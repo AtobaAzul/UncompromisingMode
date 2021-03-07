@@ -149,7 +149,7 @@ local stategraph_post = {
 	"koalefant",
 	"bearger",
 	"krampus",
-	"moose",
+	--"moose",
 }
 
 local class_post = {
@@ -170,7 +170,6 @@ local brain_post = {
 	"frog",
 	"spiderqueen",
 	"chester",
-	"moose",
 	--"bearger",
 	--"mossling",
 }

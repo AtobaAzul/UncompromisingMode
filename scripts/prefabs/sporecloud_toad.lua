@@ -289,7 +289,7 @@ local function TryPerish(item)
         if owner == nil or
             (   owner.components.container ~= nil and
                 not owner.components.container:IsOpen() and
-                owner:HasTag("chest")   ) then
+                owner:HasTag("structure")   ) then
             --in limbo but not inventory or container?
             --or in a closed chest
             return
@@ -366,7 +366,7 @@ local function fn()
     inst:ListenForEvent("animover", OnAnimOver)
 
     inst:AddComponent("timer")
-    inst.components.timer:StartTimer("disperse", TUNING.TOADSTOOL_SPORECLOUD_LIFETIME)
+    inst.components.timer:StartTimer("disperse", TUNING.TOADSTOOL_SPORECLOUD_LIFETIME / 2)
 
     inst:ListenForEvent("timerdone", OnTimerDone)
 
