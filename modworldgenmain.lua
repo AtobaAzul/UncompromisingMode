@@ -56,12 +56,18 @@ AddTile(
 ------
 
 
---[[ Keep for Cave Update
+
 AddLevelPreInitAny(function(level)
     if level.location == "cave" then
         level.overrides.keep_disconnected_tiles = true
     end
-end)]]
+end)
+
+
+AddTaskPreInit("Redforest",function(task)
+task.room_choices["veteranshrine"] = 1
+end)
+
 
 if GetModConfigData("caved") == false then
 
@@ -268,18 +274,6 @@ AddTaskSetPreInitAny(function(tasksetdata)
   end
 end)
 --Waffle's Specific Task Remover Code
-
-AddTaskSetPreInitAny(function(tasksetdata)
-  for _, set_piece in pairs(tasksetdata.set_pieces) do
-    if set_piece == "CaveEntrance" then
-        for _, task in pairs(set_piece.tasks) do
-			if task == "Speak to the king" then
-				table.remove(set_piece.tasks, _)
-			end
-		end
-    end
-  end
-end)
 
 AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "forest" then
