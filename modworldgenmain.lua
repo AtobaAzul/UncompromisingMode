@@ -56,15 +56,42 @@ AddTile(
 ------
 
 
-
+-- <<Cave Update WIP: Toggle at your own risk you buffoons! (That means you atoba, don't leak it please eh?)>>
+--[[
+--Ruins Split
 AddLevelPreInitAny(function(level)
     if level.location == "cave" then
         level.overrides.keep_disconnected_tiles = true
     end
 end)
+AddTaskPreInit("LichenLand",function(task) --This is the new "starting task" for the island (at least trying to make it that)
+task.region_id = "RuinsIsland"
+task.locks = {}
+end)
 
+local ruins_tasks = {
+        "Residential",
+        "Military",
+        "Sacred",
+        "TheLabyrinth",
+        "SacredAltar",
+        "AtriumMaze",
+        "MoreAltars",
+        "CaveJungle",
+        "SacredDanger",
+        "MilitaryPits",
+        "MuddySacred",
+        "Residential2",
+        "Residential3",		
+}
+for k, v in pairs(ruins_tasks) do
+AddTaskPreInit(v,function(task)
+task.region_id = "RuinsIsland"
+end)
+end
 
-
+--Ruins Split
+]]
 
 if GetModConfigData("caved") == false then
 
