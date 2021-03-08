@@ -18,6 +18,29 @@ Recipe("wereitem_moose", {Ingredient("monstermeat", 3), Ingredient("cutgrass", 2
 -- If goose is over water, increase wetness
 -----------------------------------------------------------------
 --TODO: increase wetness properly, and make sure he gets freezing damage
+
+local WEREMODE_NAMES =
+{
+    "beaver",
+}
+
+local WEREMODES = { NONE = 0 }
+for i, v in ipairs(WEREMODE_NAMES) do
+    WEREMODES[string.upper(v)] = i
+end
+
+local function IsWereMode(mode)
+    return WEREMODE_NAMES[mode] ~= nil
+end
+
+local function onworked(inst, data)
+    if data.target ~= nil and data.target.components.workable ~= nil then
+        if IsWereMode(inst.weremode:value()) and not inst.components.wereeater then
+            inst.components.wereness:DoDelta(-3, true)
+        end
+    end
+end
+
 local function OnGooseOverWater(inst)
     if inst.weremode:value() == 3 then
         if inst~=nil and inst.components.drownable ~= nil and inst.components.drownable:IsOverWater() then
@@ -29,4 +52,6 @@ end
 
 AddPrefabPostInit("woodie", function (inst)
     inst:DoTaskInTime(GLOBAL.TUNING.WEREGOOSE_RUN_DRAIN_TIME_DURATION, OnGooseOverWater)
+	
+	inst:ListenForEvent("working", onworked)
 end)
