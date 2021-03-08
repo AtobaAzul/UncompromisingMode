@@ -56,12 +56,42 @@ AddTile(
 ------
 
 
---[[ Keep for Cave Update
+-- <<Cave Update WIP: Toggle at your own risk you buffoons! (That means you atoba, don't leak it please eh?)>>
+--[[
+--Ruins Split
 AddLevelPreInitAny(function(level)
     if level.location == "cave" then
         level.overrides.keep_disconnected_tiles = true
     end
-end)]]
+end)
+AddTaskPreInit("LichenLand",function(task) --This is the new "starting task" for the island (at least trying to make it that)
+task.region_id = "RuinsIsland"
+task.locks = {}
+end)
+
+local ruins_tasks = {
+        "Residential",
+        "Military",
+        "Sacred",
+        "TheLabyrinth",
+        "SacredAltar",
+        "AtriumMaze",
+        "MoreAltars",
+        "CaveJungle",
+        "SacredDanger",
+        "MilitaryPits",
+        "MuddySacred",
+        "Residential2",
+        "Residential3",		
+}
+for k, v in pairs(ruins_tasks) do
+AddTaskPreInit(v,function(task)
+task.region_id = "RuinsIsland"
+end)
+end
+
+--Ruins Split
+]]
 
 if GetModConfigData("caved") == false then
 
@@ -223,6 +253,10 @@ AddTaskPreInit("Make a pick",function(task)
 task.room_choices["veteranshrine"] = 1
 
 end)
+--[[AddTaskPreInit("RedForest",function(task)
+task.room_choices["veteranshrine"] = 1
+end)]]
+
 ---- KoreanWaffle's LOCK/KEY initialization code  --Inactive atm 
 local LOCKS = GLOBAL.LOCKS
 local KEYS = GLOBAL.KEYS
@@ -268,18 +302,6 @@ AddTaskSetPreInitAny(function(tasksetdata)
   end
 end)
 --Waffle's Specific Task Remover Code
-
-AddTaskSetPreInitAny(function(tasksetdata)
-  for _, set_piece in pairs(tasksetdata.set_pieces) do
-    if set_piece == "CaveEntrance" then
-        for _, task in pairs(set_piece.tasks) do
-			if task == "Speak to the king" then
-				table.remove(set_piece.tasks, _)
-			end
-		end
-    end
-  end
-end)
 
 AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "forest" then
