@@ -1,6 +1,12 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
+local function SuperHop(inst, data)
+    if data.name == "SuperHop" then
+        inst.superhop = true
+    end
+end
+
 env.AddPrefabPostInit("moose", function(inst)
 
 	if not TheWorld.ismastersim then
@@ -19,6 +25,18 @@ env.AddPrefabPostInit("moose", function(inst)
 	if inst.components.combat ~= nil then
 		inst.components.combat:SetRange(TUNING.MOOSE_ATTACK_RANGE * 1.1)
 	end
+	
+    inst:AddComponent("groundpounder")
+    inst.components.groundpounder.destroyer = false
+    inst.components.groundpounder.damageRings = 2
+    inst.components.groundpounder.destructionRings = 2
+    inst.components.groundpounder.platformPushingRings = 2
+    inst.components.groundpounder.numRings = 2
+	
+	inst.superhop = true
+	
+	inst:AddComponent("timer")
+    inst:ListenForEvent("timerdone", SuperHop)
 end)
 
 env.AddPrefabPostInit("mothergoose", function(inst)
@@ -39,4 +57,16 @@ env.AddPrefabPostInit("mothergoose", function(inst)
 	if inst.components.combat ~= nil then
 		inst.components.combat:SetRange(TUNING.MOOSE_ATTACK_RANGE * 1.1)
 	end
+	
+    inst:AddComponent("groundpounder")
+    inst.components.groundpounder.destroyer = false
+    inst.components.groundpounder.damageRings = 2
+    inst.components.groundpounder.destructionRings = 2
+    inst.components.groundpounder.platformPushingRings = 2
+    inst.components.groundpounder.numRings = 2
+	
+	inst.superhop = true
+	
+	inst:AddComponent("timer")
+    inst:ListenForEvent("timerdone", SuperHop)
 end)
