@@ -132,7 +132,7 @@ local function fn()
 	inst:AddComponent("lootdropper")
 
     inst:AddComponent("herd")
-    inst.components.herd:SetMemberTag("mossling")
+    inst.components.herd:SetMemberTag("mothermossling")
     inst.components.herd:SetGatherRange(40)
     inst.components.herd:SetUpdateRange(20)
     inst.components.herd.updatepos = false
@@ -151,7 +151,7 @@ local function fn()
 
     inst.MakeWorkable = MakeWorkable
 
-    inst:SetStateGraph("SGmooseegg")
+    inst:SetStateGraph("SGmothermooseegg")
     inst:ListenForEvent("timerdone", OnTimerDone)
 
     inst.InitEgg = InitEgg

@@ -135,6 +135,7 @@ local function Zap(posx, posz)
 
     if offset ~= nil then
         local sinkhole = SpawnPrefab("hound_lightning")
+        sinkhole.NoTags = { "INLIMBO", "shadow", "hound", "houndfriend" }
         sinkhole.Transform:SetPosition(x + offset.x, 0, z + offset.z)
     end
 	
