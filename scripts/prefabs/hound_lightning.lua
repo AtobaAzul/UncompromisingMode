@@ -32,7 +32,7 @@ local function Zap(inst)
 	SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
 	SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
 	SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
-    local ents = TheSim:FindEntities(x, y, z, 3.5, { "_health" }, { "INLIMBO", "shadow", "hound" })
+    local ents = TheSim:FindEntities(x, y, z, 3.5, { "_health" }, inst.NoTags)
 	
 	for i, v in ipairs(ents) do
 		if v ~= nil and v.components.health ~= nil and not v.components.health:IsDead() then
@@ -69,6 +69,8 @@ local function fn()
     if not TheWorld.ismastersim then
         return inst
     end
+	
+	inst.NoTags = { "INLIMBO", "shadow" }
 	
 	Sparks(inst)
 	

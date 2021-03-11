@@ -199,6 +199,11 @@ end
 		local function BossCheck(inst, data)
 			if not inst.components.health:IsDead() and data.attacker ~= nil and data.attacker:HasTag("epic") then
 				inst:PushEvent("bosshide")
+				
+				if inst.components.combat.target ~= nil and not inst.components.combat.target:HasTag("player") then
+					inst.components.combat:DropTarget()
+				end
+				
 				if data.attacker.components.combat:HasTarget() and not data.attacker.components.combat.TargetIs(inst) then
 					print("flimbo")
 					data.attacker.components.combat:DropTarget()

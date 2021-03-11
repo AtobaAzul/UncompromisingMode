@@ -56,6 +56,7 @@ return {
 	"air_conditioner",
 	"air_conditioner_smoke",
 	"mothergoose",
+	"mothergooseegg",
 	"shadow_goo",
 	"mini_dreadeye",
 	"scorpion",
@@ -204,4 +205,5 @@ return {
 	"pigking_pigtorch",
 	"armor_dragonfly_light",
 	"haul_hound",
+	"mothermossling",
 }

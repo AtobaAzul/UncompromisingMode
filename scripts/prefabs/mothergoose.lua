@@ -9,8 +9,8 @@ local assets =
 
 local prefabs =
 {
-    "mooseegg",
-    "moose_nesting_ground",
+    "mothergooseegg",
+    "mothergoose_nesting_ground",
     "mossling",
     "goose_feather",
     "drumstick",
@@ -289,7 +289,7 @@ local function fn()
 	inst:ListenForEvent("death", OnDead)
     inst:ListenForEvent("onremove", OnRemove)
 
-    inst:SetStateGraph("SGmoose")
+    inst:SetStateGraph("SGmothermoose")
     inst:SetBrain(brain)
 
     return inst
