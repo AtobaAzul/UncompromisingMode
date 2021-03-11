@@ -62,6 +62,7 @@ AddTile(
 AddLevelPreInitAny(function(level)
     if level.location == "cave" then
         level.overrides.keep_disconnected_tiles = true
+		level.overrides.no_joining_islands = true
     end
 end)
 AddTaskPreInit("LichenLand",function(task) --This is the new "starting task" for the island (at least trying to make it that)
@@ -69,6 +70,20 @@ task.region_id = "RuinsIsland"
 task.locks = {}
 end)
 
+AddTaskSetPreInitAny(function(tasksetdata)
+  for _, task in pairs(tasksetdata.optionaltasks) do
+    if task == "Residential3" or task == "Residential2" or task == "MoreAltars" or task == "CaveJungle" or task == "SacredDanger" or task == "MilitaryPits" or task == "MuddySacred" then
+      table.remove(tasksetdata.optionaltasks, _)
+    end
+  end
+end)
+AddTaskSetPreInitAny(function(tasksetdata)
+  for _, task in pairs(tasksetdata.tasks) do
+    if task == "Residential3" or task == "Residential2" or task == "MoreAltars" or task == "CaveJungle" or task == "SacredDanger" or task == "MilitaryPits" or task == "MuddySacred" then
+      table.remove(tasksetdata.tasks, _)
+    end
+  end
+end)
 local ruins_tasks = {
         "Residential",
         "Military",

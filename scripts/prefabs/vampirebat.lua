@@ -22,7 +22,7 @@ SetSharedLootTable( 'vampirebat',
 {
     {'monstersmallmeat',0.25},
     {'pigskin',0.05},
-    {'batwing',0.5},
+    {'batwing',0.75},
 })
 
 local SLEEP_DIST_FROMHOME = 1
