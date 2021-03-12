@@ -5,6 +5,11 @@ local SEE_FOOD_DIST = 15
 local NO_TAGS = {"FX", "NOCLICK", "DECOR","INLIMBO"}
 local FINDFOOD_CANT_TAGS = { "outofreach" }
 
+local MIN_FOLLOW_LEADER = 5
+local MAX_FOLLOW_LEADER = 12
+local TARGET_FOLLOW_LEADER = (MAX_FOLLOW_LEADER + MIN_FOLLOW_LEADER) / 2
+
+
 local function TargetNotClaimed(inst, target)
 	local herd = inst.components.herdmember.herd
 	if herd and herd.components.herd.members then
@@ -58,10 +63,17 @@ local function EatFoodAction_UM(inst)	--Look for food to eat
 	end
 end
 
+local function GetLeader(inst)
+    return inst.components.follower ~= nil and inst.components.follower.leader or nil
+end
+
 local function GosFindFood(self)
-	local findfood = DoAction(self.inst, EatFoodAction_UM, "eat food", true)
+	--[[local findfood = DoAction(self.inst, EatFoodAction_UM, "eat food", true)
 	
-	table.insert(self.bt.root.children, 1, findfood)
+	table.insert(self.bt.root.children, 1, findfood)]]
+	
+	local FollowMom = Follow(self.inst, GetLeader, MIN_FOLLOW_LEADER, TARGET_FOLLOW_LEADER, MAX_FOLLOW_LEADER)
+	table.insert(self.bt.root.children, 4, FollowMom)
 end
 
 env.AddBrainPostInit("mosslingbrain", GosFindFood)
