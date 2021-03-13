@@ -50,7 +50,7 @@ local states = {
 				inst.doublesuperhop = 1
 			end
 			
-            local target = inst.components.combat.target ~= nil and inst.components.combat.target
+            local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 			
 			if target ~= nil and target.Transform ~= nil then
 				inst:ForceFacePoint(target.Transform:GetWorldPosition())
@@ -203,7 +203,7 @@ local states = {
 				inst.doublesuperhop = 1
 			end
 			
-            local target = inst.components.combat.target ~= nil and inst.components.combat.target
+            local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 			
 			if target ~= nil and target.Transform ~= nil then
 				inst:ForceFacePoint(target.Transform:GetWorldPosition())

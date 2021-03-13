@@ -17,6 +17,8 @@ local prefabs =
     "dragon_scales",
 }
 
+local easing = require("easing")
+
 TUNING.DRAGONFLY_SLEEP_WHEN_SATISFIED_TIME = 240
 TUNING.DRAGONFLY_VOMIT_TARGETS_FOR_SATISFIED = 40
 TUNING.DRAGONFLY_ASH_EATEN_FOR_SATISFIED = 20
@@ -344,6 +346,43 @@ local function OnRemove(inst)
     TheWorld:PushEvent("mockflyremoved", inst)
 end
 
+local function RockThrowTimer(inst, data)
+    if data.name == "RockThrow" then
+        inst.rockthrow = true
+		
+		--EquipWeapon(inst)
+    end
+end
+
+local function LaunchProjectile(inst, target)
+	if target ~= nil then
+	
+		inst.rockthrow = false
+		
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local a, b, c = target.Transform:GetWorldPosition()
+		local targetpos = target:GetPosition()
+		--[[local theta = inst.Transform:GetRotation()
+		
+		theta = theta*DEGREES
+		
+		local variableanglex = math.random(0, 30)
+		local variableanglez = math.random(0, 30)
+		targetpos.x = targetpos.x + variableanglex*math.cos(theta)
+		targetpos.z = targetpos.z - variableanglez*math.sin(theta)]]
+		
+		local rangesq = ((a-x)^2) + ((c-z)^2)
+		local maxrange = 15
+		local bigNum = 10
+		local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
+		
+		local projectile = SpawnPrefab("dragonfly_egg_projectile")
+		projectile.Transform:SetPosition(x, y, z)
+		projectile.components.complexprojectile:SetHorizontalSpeed(speed)
+		projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+	end
+end
+
 local function fn(Sim)
     local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
@@ -407,18 +446,26 @@ local function fn(Sim)
     inst.components.health.destroytime = 5
     inst.components.health.fire_damage_scale = 0
 
+	local function isnottree(ent)
+		if ent ~= nil and not ent:HasTag("mock_dragonfly") and not ent:HasTag("dragonfly") and not ent:HasTag("lavae") then -- fix to friendly AOE: refer for later AOE mobs -Axe
+			return true
+		end
+	end
+
     inst:AddComponent("groundpounder")
     inst.components.groundpounder.numRings = 2
     inst.components.groundpounder.burner = true
     inst.components.groundpounder.groundpoundfx = "firesplash_fx"
     inst.components.groundpounder.groundpounddamagemult = .5
     inst.components.groundpounder.groundpoundringfx = "firering_fx"
+    inst.components.groundpounder.noTags = { "FX", "NOCLICK", "DECOR", "INLIMBO", "dragonfly", "lavae" }
     
     inst:AddComponent("combat")
     inst.components.combat:SetDefaultDamage(TUNING.DSTU.MOCK_DRAGONFLY_DAMAGE)
     inst.components.combat.playerdamagepercent = .5
     inst.components.combat:SetRange(4)
-    inst.components.combat:SetAreaDamage(6, 0.8)
+    --inst.components.combat:SetAreaDamage(6, 0.8)
+	inst.components.combat:SetAreaDamage(6, 0.8, isnottree)
     inst.components.combat.hiteffectsymbol = "dragonfly_body"
     inst.components.combat:SetAttackPeriod(TUNING.DRAGONFLY_ATTACK_PERIOD)
     inst.components.combat:SetRetargetFunction(3, RetargetFn)
@@ -460,6 +507,8 @@ local function fn(Sim)
     inst.components.sleeper:SetWakeTest(ShouldWake)
     inst.playsleepsound = false
     inst.shouldGoAway = false
+	
+    inst:AddComponent("timer")
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetLoot(loot)
@@ -502,6 +551,12 @@ local function fn(Sim)
     inst:ListenForEvent("onremove", OnRemove)
     inst:ListenForEvent("death", OnDead)
 
+    inst:ListenForEvent("timerdone", RockThrowTimer)
+	
+	inst.rockthrow = true
+	
+    inst.LaunchProjectile = LaunchProjectile
+	
     return inst
 end
 

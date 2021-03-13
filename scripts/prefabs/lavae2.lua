@@ -65,7 +65,7 @@ local function RetargetFn(inst)
                     return inst.components.combat:CanTarget(guy)
                 end,
                 nil,
-                { "lavae" }
+                { "lavae", "dragonfly", "mock_dragonfly" }
             )
         or nil
 end

@@ -99,7 +99,7 @@ local states = {
         tags = { "attack", "canrotate", "busy" },
 
         onenter = function(inst)
-            local target = inst.components.combat.target ~= nil and inst.components.combat.target
+            local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 			
 			if target ~= nil and target.Transform ~= nil then
 				inst:ForceFacePoint(target.Transform:GetWorldPosition())
@@ -114,7 +114,7 @@ local states = {
         timeline =
         {   
             TimeEvent(7*FRAMES, function(inst) 
-				local target = inst.components.combat.target ~= nil and inst.components.combat.target
+				local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 			
 				if target ~= nil and target.Transform ~= nil then
 					inst:ForceFacePoint(target.Transform:GetWorldPosition())
@@ -124,7 +124,7 @@ local states = {
 			end),
             TimeEvent(25*FRAMES, function(inst)
 				if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
-				local target = inst.components.combat.target ~= nil and inst.components.combat.target
+				local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 			
 					if target ~= nil and target.Transform ~= nil then
 						inst:ForceFacePoint(target.Transform:GetWorldPosition())

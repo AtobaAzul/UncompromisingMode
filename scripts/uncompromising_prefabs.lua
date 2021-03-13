@@ -206,4 +206,5 @@ return {
 	"armor_dragonfly_light",
 	"haul_hound",
 	"mothermossling",
+	"dragonfly_egg",
 }

@@ -86,7 +86,7 @@ local function LaunchProjectile(inst, target)
 end
 
 local function Sinkholes(inst)
-	local target = inst.components.combat.target ~= nil and inst.components.combat.target
+	local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 	if target ~= nil then
 		local target_index = {}
 		local found_targets = {}

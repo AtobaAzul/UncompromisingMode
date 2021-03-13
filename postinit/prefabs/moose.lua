@@ -14,7 +14,7 @@ local function EnterPhase2TriggerMoose(inst)
 	
 	for i = 1, 2 do
 		if not inst.components.health:IsDead() then
-            local target = inst.components.combat.target ~= nil and inst.components.combat.target
+            local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 			local upgradeburst = SpawnPrefab("mossling")
 			upgradeburst.Transform:SetPosition(inst.Transform:GetWorldPosition())
 			upgradeburst.components.herdmember.herdprefab = "lightning"
@@ -87,7 +87,7 @@ env.AddPrefabPostInit("moose", function(inst)
 						inst.stormtask = nil
 						inst.stormtaskcounter = 0
 					else
-						local target = inst.components.combat.target ~= nil and inst.components.combat.target
+						local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 						if target ~= nil and math.random() > 0.95 then
 							local LightningStorm = SpawnPrefab("hound_lightning")
 							LightningStorm.NoTags = { "INLIMBO", "shadow", "moose", "mossling" }
@@ -112,7 +112,7 @@ local function EnterPhase2TriggerMother(inst)
 
 	for i = 1, 2 do
 		if not inst.components.health:IsDead() then
-            local target = inst.components.combat.target ~= nil and inst.components.combat.target
+            local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 			local upgradeburst = SpawnPrefab("mothermossling")
 			upgradeburst.Transform:SetPosition(inst.Transform:GetWorldPosition())
 			upgradeburst.components.herdmember.herdprefab = "lightning"
@@ -185,7 +185,7 @@ env.AddPrefabPostInit("mothergoose", function(inst)
 						inst.stormtask = nil
 						inst.stormtaskcounter = 0
 					else
-						local target = inst.components.combat.target ~= nil and inst.components.combat.target
+						local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 						if target ~= nil and math.random() > 0.95 then
 							local LightningStorm = SpawnPrefab("hound_lightning")
 							LightningStorm.NoTags = { "INLIMBO", "shadow", "moose", "mossling" }
