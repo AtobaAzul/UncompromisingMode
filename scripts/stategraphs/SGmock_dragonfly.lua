@@ -792,7 +792,7 @@ local states=
 				inst.AnimState:PlayAnimation("walk_angry")
 				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/vomitrumble", "spinLoop")
 
-                inst.components.locomotor:EnableGroundSpeedMultiplier(false)
+				inst.components.locomotor.runspeed = 8
 				
 				local fx = SpawnPrefab("mossling_spin_fx")
 				fx.entity:SetParent(inst.entity)
@@ -810,7 +810,7 @@ local states=
 			end,
 
 			onexit = function(inst)
-                inst.components.locomotor:EnableGroundSpeedMultiplier(true)
+				inst.components.locomotor.runspeed = 6
 				inst.SoundEmitter:KillSound("spinLoop")
 				inst.components.locomotor:StopMoving()
 			end,

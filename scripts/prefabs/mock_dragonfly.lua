@@ -543,6 +543,7 @@ local function fn(Sim)
 
     inst:AddComponent("locomotor")
     inst.components.locomotor.walkspeed = 4
+    inst.components.locomotor.runspeed = 6
 
     inst:SetStateGraph("SGmock_dragonfly")
     --local brain = require("brains/dragonflybrain")
