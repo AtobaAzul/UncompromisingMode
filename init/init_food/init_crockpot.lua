@@ -355,6 +355,7 @@ local zaspberryparfait =
     perishtime = 2*TUNING.PERISH_TWO_DAY,
     cooktime = 1.8,
 }
+AddCookerRecipe("cookpot", zaspberryparfait)
 AddCookerRecipe("portablecookpot", zaspberryparfait)
 local carapacecooler =
 {
@@ -490,7 +491,7 @@ AddCookerRecipe("portablecookpot", blueberrypancakes)
 local beefalowings =
 {
     name = "beefalowings",
-    test = function(cooker, names, tags) return tags.veggie and names.horn and ((names.batwing and names.batwing > 1) or (names.batwing_cooked and names.batwing_cooked > 1)) end,
+    test = function(cooker, names, tags) return tags.veggie and names.horn and ((names.batwing and names.batwing > 1) or (names.batwing_cooked and names.batwing_cooked > 1) or (names.batwing and names.batwing_cooked)) end,
 
     priority = 20,
     weight = 30,

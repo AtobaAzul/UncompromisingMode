@@ -200,28 +200,28 @@ env.AddPrefabPostInit("chester_eyebone", function(inst)
 	end
 local SPAWN_DIST = 30
 
+
 local function OpenEye(inst)
     if not inst.isOpenEye then
         inst.isOpenEye = true
-        inst.components.inventoryitem:ChangeImageName(nil)
-		--duct tape fix
+		inst.components.inventoryitem.atlasname = nil
+        inst.components.inventoryitem:ChangeImageName(inst.openEye)
 		if inst.EyeboneState == "LAZY" then
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/chester_eyebone_closed_lazy.xml"		
+		inst.components.inventoryitem.atlasname = "images/inventoryimages/chester_eyebone_closed_lazy.xml"
+		inst.components.inventoryitem:ChangeImageName("chester_eyebone_lazy")
 		end
-		--duct tape fix
         inst.AnimState:PlayAnimation("idle_loop", true)
     end
 end
-
 local function CloseEye(inst)
     if inst.isOpenEye then
         inst.isOpenEye = nil
-        inst.components.inventoryitem:ChangeImageName(nil)
-		--duct tape fix
+		inst.components.inventoryitem.atlasname = nil
+        inst.components.inventoryitem:ChangeImageName(inst.closedEye)
 		if inst.EyeboneState == "LAZY" then
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/chester_eyebone_lazy.xml"		
+		inst.components.inventoryitem.atlasname = "images/inventoryimages/chester_eyebone_lazy.xml"
+		inst.components.inventoryitem:ChangeImageName("chester_eyebone_lazy")
 		end
-		--duct tape fix
         inst.AnimState:PlayAnimation("dead", true)
     end
 end
@@ -230,12 +230,21 @@ local function RefreshEye(inst)
 end
 local function MorphLazyEyebone(inst)
     inst.AnimState:SetBuild("chester_eyebone_lazy")
+	inst.EyeboneState = "LAZY"
+    inst.openEye = "chester_eyebone_lazy"
+    inst.closedEye = "chester_eyebone_closed_lazy"
+	if inst.respawntime == nil then
+	OpenEye(inst)
+	else
+	CloseEye(inst)
+	end
+	print('~~~')
+	print('~~~')
+	print('~~~')
+	print('~~~')
+	print('Morphed')
 
-    --inst.openEye = "chester_eyebone_lazy"
-    --inst.closedEye = "chester_eyebone_closed_lazy"
-    RefreshEye(inst)
-
-    inst.EyeboneState = "LAZY"
+ 
 end
 local function MorphShadowEyebone(inst)
     inst.AnimState:SetBuild("chester_eyebone_shadow_build")
@@ -256,11 +265,21 @@ local function MorphSnowEyebone(inst)
 
     inst.EyeboneState = "SNOW"
 end
+
 local function OnLoadBoneUM(inst, data)
     if data == nil then
         return
     end
 
+    if data.respawntimeremaining ~= nil then
+        inst.respawntime = data.respawntimeremaining + GetTime()
+    else
+        OpenEye(inst)
+    end
+	
+	if data.EyeboneState ~= nil then
+	inst.EyeboneState = data.EyeboneState
+	end
     if data.EyeboneState == "SHADOW" then
         MorphShadowEyebone(inst)
     elseif data.EyeboneState == "SNOW" then
@@ -269,11 +288,7 @@ local function OnLoadBoneUM(inst, data)
         MorphLazyEyebone(inst)
     end
 
-    if data.respawntimeremaining ~= nil then
-        inst.respawntime = data.respawntimeremaining + GetTime()
-    else
-        OpenEye(inst)
-    end
+
 end
 
 	inst.MorphLazyEyebone = MorphLazyEyebone
