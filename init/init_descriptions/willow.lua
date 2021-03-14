@@ -76,6 +76,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.SNOWMONG = "Melt that sucker!"
 	DESCRIBE.SHOCKWORM = "It's so frilly!"
 	DESCRIBE.ZASPBERRY = "I'm not blowing any raspberries."
+	DESCRIBE.ZASPBERRYPARFAIT = "My tongue tingles when I lick it."
 	DESCRIBE.ICEBOOMERANG = "I mean, I guess I can use it."
 	DESCRIBE.MINOTAUR_BOULDER = "Careful where you're dropping those thing!"
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "Over here dummy! Ram yourself into this!"

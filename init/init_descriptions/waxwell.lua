@@ -78,6 +78,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.SHOCKWORM = "I definitely did not make that one!"
 	 -- ...
 	DESCRIBE.ZASPBERRY = "I'm not one for wild berries, magical or not."
+	DESCRIBE.ZASPBERRYPARFAIT = "It looks as good as it tastes."
 	DESCRIBE.ICEBOOMERANG = "Magic is great, isn't it?"
 	DESCRIBE.MINOTAUR_BOULDER = "This place is in much worse shape than I thought."
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "Maybe we can use this to our advantage?"

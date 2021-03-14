@@ -76,6 +76,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.SNOWMONG = "4 eyes?! Definitely not our friend!"
 	DESCRIBE.SHOCKWORM = "Freaky frilly!"
 	DESCRIBE.ZASPBERRY = "Zappy!"
+	DESCRIBE.ZASPBERRYPARFAIT = "We never had this before, it looks yummy."
 	DESCRIBE.ICEBOOMERANG = "Brrrr, it's chilly just to have near us!"
 	DESCRIBE.MINOTAUR_BOULDER = "Hope our ceiling friends are okay!"
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "Come on big guy, charge over here!"

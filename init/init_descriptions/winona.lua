@@ -76,6 +76,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.SNOWMONG = "Is that one of those snow-mole-bile things I've heard about?"
 	DESCRIBE.SHOCKWORM = "That's a saftey hazard if I've ever seen one!"
 	DESCRIBE.ZASPBERRY = "May as well taste it."
+	DESCRIBE.ZASPBERRYPARFAIT = "This'll put some pep in my step."
 	DESCRIBE.ICEBOOMERANG = "Quite a handy tool, ain't it?"
 	DESCRIBE.MINOTAUR_BOULDER = "Hard hats, everyone! Saftey first!"
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "Take a hit of this, ya big lug."

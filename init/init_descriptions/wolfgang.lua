@@ -76,6 +76,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.SNOWMONG = "Snow is fighting back!"
 	DESCRIBE.SHOCKWORM = "Wolfgang shocked!"
 	DESCRIBE.ZASPBERRY = "Sparky berry!"
+	DESCRIBE.ZASPBERRYPARFAIT = "No one touches mighty Wolfgang."
 	DESCRIBE.ICEBOOMERANG = "Little ice stick too cold to hold!"
 	DESCRIBE.MINOTAUR_BOULDER = "Would try and lift, if not for danger."
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "Come! Break this one!"

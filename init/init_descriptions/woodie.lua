@@ -76,6 +76,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.SNOWMONG = "The bumble sinks!"
 	DESCRIBE.SHOCKWORM = "That worm's lit up like the Northern lights!"
 	DESCRIBE.ZASPBERRY = "Blue raspberry is not a real berry."
+	DESCRIBE.ZASPBERRYPARFAIT = "Gives ya that static cling, like after you rub your feet on the carpet too much."
 	DESCRIBE.ICEBOOMERANG = "This is just Canada on a stick, eh?"
 	DESCRIBE.MINOTAUR_BOULDER = "That guys causing some serious damage."
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "Wreck this one, why dont'cha!"

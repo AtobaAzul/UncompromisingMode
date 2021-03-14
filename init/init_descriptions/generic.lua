@@ -108,6 +108,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.SNOWMONG = "Shiverbug!"
 	DESCRIBE.SHOCKWORM = "Quite the conductive worm!"
 	DESCRIBE.ZASPBERRY = "I can feel the electricity flowing through it."
+	DESCRIBE.ZASPBERRYPARFAIT = "Shockingly delicious."
 	DESCRIBE.ICEBOOMERANG = "It has a chilling bite to it."
 	
 	DESCRIBE.MINOTAUR_BOULDER = "Thats a nice boulder."
