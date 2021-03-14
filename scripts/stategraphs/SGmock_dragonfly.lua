@@ -19,7 +19,7 @@ local function FireTrail(inst, x, y, z)
     --inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
 	local firefx = SpawnPrefab("halloween_firepuff_"..math.random(3))
 	firefx.Transform:SetPosition(x, y, z)
-	firefx.transform:SetScale(1.2, 1.2, 1.2)
+	firefx.Transform:SetScale(1.2, 1.2, 1.2)
 	
 	--local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, 3, nil, { "INLIMBO" })

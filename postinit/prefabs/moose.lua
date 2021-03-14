@@ -65,7 +65,6 @@ env.AddPrefabPostInit("moose", function(inst)
 	
 	inst.superhop = true
 	
-	inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", SuperHop)
 	
 	inst:ListenForEvent("newstate", function(inst, data)
@@ -163,7 +162,6 @@ env.AddPrefabPostInit("mothergoose", function(inst)
 	
 	inst.superhop = true
 	
-	inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", SuperHop)
 	
 	inst:ListenForEvent("newstate", function(inst, data)
