@@ -185,7 +185,7 @@ local function UpdatePopulation(player, params)
 	local is_insanity_mode = player.components.sanity:IsInsanityMode()
 
     if is_insanity_mode and player.components.sanity.inducedinsanity then
-        local maxpop = SANITYMONSTERS_INDUCED_MAXPOP + 1
+        local maxpop = TUNING.SANITYMONSTERS_INDUCED_MAXPOP + 1
         local inc_chance = 0.4
         local dec_chance = 0.3
         local targetpop = params.targetpop

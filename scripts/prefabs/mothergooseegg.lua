@@ -139,7 +139,7 @@ local function fn()
     inst.components.herd.onempty = ErodeAway
 
     inst:AddComponent("guardian")
-    inst.components.guardian.prefab = "mothermoose"
+    inst.components.guardian.prefab = "mothergoose"
     inst.components.guardian.onsummonfn = OnSummonMoose
     inst.components.guardian.ondismissfn = OnDismissMoose
     inst.components.guardian.onguardiandeathfn = OnGuardianDeath
