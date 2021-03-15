@@ -76,6 +76,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.SNOWMONG = "This is no frozen treat!"
 	DESCRIBE.SHOCKWORM = "Touching it could cook me to perfection!"
 	DESCRIBE.ZASPBERRY = "Perhaps a nice raspberry parfait?"
+	DESCRIBE.ZASPBERRYPARFAIT = "I can only imagine how it tastes! I hope it doesn't electrocute anybody..."
 	DESCRIBE.ICEBOOMERANG = "Maybe if I dip it in flavor, and save it for Summer?"
 	DESCRIBE.MINOTAUR_BOULDER = "Watch your heads!"
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "Let's give that thing a taste of its own medicine!"

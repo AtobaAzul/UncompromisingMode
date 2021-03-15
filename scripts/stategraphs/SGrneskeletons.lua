@@ -210,19 +210,20 @@ local states=
         onenter = function(inst, target)
             inst.Physics:Stop()
             inst.components.combat:StartAttack()
-            inst.AnimState:PlayAnimation("atk")
+            inst.AnimState:PlayAnimation("atk_pre")
+			inst.AnimState:PushAnimation("atk",false)
             inst.sg.statemem.target = target
         end,
         
         timeline=
         {
-            TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
-            TimeEvent(6*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+            TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
+            TimeEvent(10*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
         
         events=
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("moving") end),
+            EventHandler("animqueueover", function(inst) inst.sg:GoToState("moving") end),
         },
     },
 

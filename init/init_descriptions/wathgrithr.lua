@@ -76,6 +76,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.SNOWMONG = "Begone, vile snowmonger!"
 	DESCRIBE.SHOCKWORM = "A vicious counter attack!"
 	DESCRIBE.ZASPBERRY = "Could Thor's power truly be contained in a wild fruit?"
+	DESCRIBE.ZASPBERRYPARFAIT = "Thy foes will shudder before my power."
 	DESCRIBE.ICEBOOMERANG = "No one can run from my spear!"
 	DESCRIBE.MINOTAUR_BOULDER = "Foul trickery!"
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "Let the beast ram it's head into this one!"

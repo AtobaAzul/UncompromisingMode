@@ -76,6 +76,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.SNOWMONG = "What large teeth you have!"
 	DESCRIBE.SHOCKWORM = "This one is sparking!"
 	DESCRIBE.ZASPBERRY = "This will give someone quite a shock!"
+	DESCRIBE.ZASPBERRYPARFAIT = "Hyuyu, my enemy won't know what hit 'em!"
 	DESCRIBE.ICEBOOMERANG = "They cease their attacks, by being stopped in their tracks!"
 	DESCRIBE.MINOTAUR_BOULDER = "It's learned a new trick!"
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "Come and hit me! I promise it's not a trick!"

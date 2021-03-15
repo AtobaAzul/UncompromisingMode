@@ -55,9 +55,9 @@ AddTile(
 	
 ------
 
-
--- <<Cave Update WIP: Toggle at your own risk you buffoons! (That means you atoba, don't leak it please eh?)>>
 --[[
+-- <<Cave Update WIP: Toggle at your own risk you buffoons! (That means you atoba, don't leak it please eh?)>>
+
 --Ruins Split
 AddLevelPreInitAny(function(level)
     if level.location == "cave" then
@@ -70,20 +70,7 @@ task.region_id = "RuinsIsland"
 task.locks = {}
 end)
 
-AddTaskSetPreInitAny(function(tasksetdata)
-  for _, task in pairs(tasksetdata.optionaltasks) do
-    if task == "Residential3" or task == "Residential2" or task == "MoreAltars" or task == "CaveJungle" or task == "SacredDanger" or task == "MilitaryPits" or task == "MuddySacred" then
-      table.remove(tasksetdata.optionaltasks, _)
-    end
-  end
-end)
-AddTaskSetPreInitAny(function(tasksetdata)
-  for _, task in pairs(tasksetdata.tasks) do
-    if task == "Residential3" or task == "Residential2" or task == "MoreAltars" or task == "CaveJungle" or task == "SacredDanger" or task == "MilitaryPits" or task == "MuddySacred" then
-      table.remove(tasksetdata.tasks, _)
-    end
-  end
-end)
+
 local ruins_tasks = {
         "Residential",
         "Military",
@@ -96,14 +83,23 @@ local ruins_tasks = {
         "SacredDanger",
         "MilitaryPits",
         "MuddySacred",
-        "Residential2",
-        "Residential3",		
+		"Residential2",
+		"Residential3",
 }
 for k, v in pairs(ruins_tasks) do
 AddTaskPreInit(v,function(task)
 task.region_id = "RuinsIsland"
 end)
 end
+
+AddTaskPreInit("Residential2",function(task)
+task.entrance_room = "BGSinkhole"
+task.room_choices = {["BGSinkhole"] = 1}
+end)
+AddTaskPreInit("Residential3",function(task)
+task.entrance_room = "BGSinkhole"
+task.room_choices = {["BGSinkhole"] = 1}
+end)
 
 --Ruins Split
 ]]

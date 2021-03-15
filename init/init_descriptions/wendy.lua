@@ -76,6 +76,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.SNOWMONG = "Just another cruel joke."
 	DESCRIBE.SHOCKWORM = "A light in the darkness."
 	DESCRIBE.ZASPBERRY = "Perhaps it will bring some light to my life. Probably not."
+	DESCRIBE.ZASPBERRYPARFAIT = "Numbing."
 	DESCRIBE.ICEBOOMERANG = "Ripped off the tail of a maggot."
 	DESCRIBE.MINOTAUR_BOULDER = "Once again we have barely avoided death."
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "Recklessness will be that creatures demise."

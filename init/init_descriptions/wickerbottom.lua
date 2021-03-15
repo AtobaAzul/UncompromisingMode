@@ -77,6 +77,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.SNOWMONG = "I have no idea."
 	DESCRIBE.SHOCKWORM = "A highly conductive Annelida!"
 	DESCRIBE.ZASPBERRY = "Nonsense, there's no such thing as a blue Rubus."
+	DESCRIBE.ZASPBERRYPARFAIT = "How delightful, a French dessert with a little kick."
 	DESCRIBE.ICEBOOMERANG = "A severed appendage that dramatically lowers body temperature on contact."
 	DESCRIBE.MINOTAUR_BOULDER = "My my! It will bring the whole place down on our heads!"
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "It's size may be to our benefit..."

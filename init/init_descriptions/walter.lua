@@ -76,6 +76,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.SNOWMONG = "Big burrowing bugs and beetles bite back big burrowing bugs and beagles-- aww..."
 	DESCRIBE.SHOCKWORM = "Don't touch it! It's a living electrical hazard!"
 	DESCRIBE.ZASPBERRY = "A whats berry?"
+	DESCRIBE.ZASPBERRYPARFAIT = "Oh boy, Dessert!"
 	DESCRIBE.ICEBOOMERANG = "No Woby, don't fetch this one!"
 	DESCRIBE.MINOTAUR_BOULDER = "Watch out for land slides!"
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "That one could hurt it!"
