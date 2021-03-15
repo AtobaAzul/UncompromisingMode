@@ -200,6 +200,7 @@ local function DoSpawnSpikes(inst, pts, level, cache)
 				spike.Transform:SetPosition(v:Get())
 				spike:growfn()
 				spike.persists = false
+				spike.components.sanityaura.aura = -TUNING.SANITYAURA_SMALL
 				
 					spike:DoTaskInTime(20 + (5*math.random()), function(spike)
 						local despawnfx = SpawnPrefab("shadow_despawn")

@@ -14,21 +14,22 @@ local function ShouldStopSpin(inst)
 end
 
 local function FireTrail(inst, x, y, z)
-	--SpawnPrefab("firesplash_fx").Transform:SetPosition(x, y, z)
+	SpawnPrefab("firesplash_fx").Transform:SetPosition(x, y, z)
+	inst.firedrop = SpawnPrefab("firedrop")
+	inst.firedrop.Transform:SetPosition(x, y, z)
+	inst.firedrop:DoTaskInTime(1, function(inst) inst.components.burnable:Extinguish() end)
     --inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
-    --inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
-	local firefx = SpawnPrefab("halloween_firepuff_"..math.random(3))
+    inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
+	--[[local firefx = SpawnPrefab("halloween_firepuff_"..math.random(3))
 	firefx.Transform:SetPosition(x, y, z)
-	firefx.Transform:SetScale(1.2, 1.2, 1.2)
-	
-	--local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 3, nil, { "INLIMBO" })
+	firefx.Transform:SetScale(1.2, 1.2, 1.2)]]
+    local ents = TheSim:FindEntities(x, y, z, 3.5, nil, { "INLIMBO" })
 
     for i, v in ipairs(ents) do
         if v ~= inst and v:IsValid() and not v:IsInLimbo() then
-            if v.components.workable ~= nil and v.components.workable:CanBeWorked() then
-                v.components.workable:WorkedBy(inst, 10)
-            end
+			--[[if v.components.workable ~= nil and v.components.workable:CanBeWorked() then
+				v.components.workable:WorkedBy(inst, 10)
+			end]]
 
             --Recheck valid after work
             if v:IsValid() and not v:IsInLimbo() then
@@ -854,7 +855,7 @@ local states=
 
 			timeline=
 			{
-				TimeEvent(0*FRAMES, function(inst)
+				--TimeEvent(0*FRAMES, function(inst)
 					--if math.random() < 0.1 then
 						LightningStrike(inst)
 					--end
@@ -909,9 +910,8 @@ local states=
 						LightningStrike(inst)
 					--end
 				end),
-				TimeEvent(0*FRAMES, function(inst) inst.components.combat:DoAttack() end),
-				TimeEvent(34*FRAMES, function(inst) inst.components.combat:DoAttack() end),
-				TimeEvent(17*FRAMES, function(inst) inst.components.combat:DoAttack() end),
+				TimeEvent(15*FRAMES, function(inst) inst.components.combat:DoAttack() end),
+				TimeEvent(45*FRAMES, function(inst) inst.components.combat:DoAttack() end),
 			},
 
 			events=
