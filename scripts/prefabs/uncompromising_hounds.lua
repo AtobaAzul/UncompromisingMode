@@ -735,7 +735,7 @@ local function onhit(inst, attacker, target)
         target:PushEvent("attacked", { attacker = attacker, damage = 25, weapon = inst })
     end
 
-    if target.components.freezable ~= nil then
+    if target.components.freezable ~= nil and not target.sg:HasStateTag("frozen") then
         target.components.freezable:AddColdness(1)
         target.components.freezable:SpawnShatterFX()
     end
@@ -773,10 +773,10 @@ local function fnglacial_proj()
     inst.components.weapon:SetDamage(0)
 	
     inst:AddComponent("projectile")
-    inst.components.projectile:SetSpeed(30)
+    inst.components.projectile:SetSpeed(25)
     inst.components.projectile:SetOnThrownFn(pipethrown)
     inst.components.projectile:SetHoming(false)
-    inst.components.projectile:SetHitDist(math.sqrt(5))
+    inst.components.projectile:SetHitDist(math.sqrt(3))
     inst.components.projectile:SetOnHitFn(onhit)
     inst.components.projectile:SetOnMissFn(inst.Remove)
     --inst.components.projectile:SetLaunchOffset(Vector3(3, 2, 0))

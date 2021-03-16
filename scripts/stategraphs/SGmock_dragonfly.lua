@@ -830,7 +830,7 @@ local states=
 				--inst.AnimState:PlayAnimation("walk_angry")
 				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/vomitrumble", "spinLoop")
 
-				inst.components.locomotor.runspeed = 10
+				inst.components.locomotor.runspeed = 12
 				
 				local fx = SpawnPrefab("mossling_spin_fx")
 				fx.entity:SetParent(inst.entity)
@@ -855,7 +855,7 @@ local states=
 
 			timeline=
 			{
-				--TimeEvent(0*FRAMES, function(inst)
+				TimeEvent(0*FRAMES, function(inst)
 					--if math.random() < 0.1 then
 						LightningStrike(inst)
 					--end
@@ -910,7 +910,8 @@ local states=
 						LightningStrike(inst)
 					--end
 				end),
-				TimeEvent(15*FRAMES, function(inst) inst.components.combat:DoAttack() end),
+				TimeEvent(5*FRAMES, function(inst) inst.components.combat:DoAttack() end),
+				TimeEvent(25*FRAMES, function(inst) inst.components.combat:DoAttack() end),
 				TimeEvent(45*FRAMES, function(inst) inst.components.combat:DoAttack() end),
 			},
 
