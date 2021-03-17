@@ -23,6 +23,7 @@ local function EnterPhase2TriggerMoose(inst)
 			upgradeburst:AddComponent("follower")
 			upgradeburst.components.follower:SetLeader(inst)
 			upgradeburst.sg:GoToState("hatch")
+			upgradeburst.components.combat:SuggestTarget(target)
 			--[[if target ~= nil then
 				upgradeburst.components.locomotor:GoToEntity(target)
 				upgradeburst:DoTaskInTime(0, function(inst)
@@ -54,10 +55,10 @@ env.AddPrefabPostInit("moose", function(inst)
 	
     inst:AddComponent("groundpounder")
     inst.components.groundpounder.destroyer = false
-    inst.components.groundpounder.damageRings = 2
+    inst.components.groundpounder.damageRings = 3
     inst.components.groundpounder.destructionRings = 2
     inst.components.groundpounder.platformPushingRings = 2
-    inst.components.groundpounder.numRings = 2
+    inst.components.groundpounder.numRings = 3
     inst.components.groundpounder.noTags = { "FX", "NOCLICK", "DECOR", "INLIMBO", "mossling", "moose" }
 	
 	inst:AddComponent("healthtrigger")
@@ -93,8 +94,8 @@ env.AddPrefabPostInit("moose", function(inst)
 							LightningStorm.Transform:SetPosition(target.Transform:GetWorldPosition())
 						else
 							local x, y, z = inst.Transform:GetWorldPosition()      
-							local x1 = x + math.random(-20, 20)
-							local z1 = z + math.random(-20, 20)
+							local x1 = x + math.random(-15, 15)
+							local z1 = z + math.random(-15, 15)
 							local LightningStorm = SpawnPrefab("hound_lightning")
 							LightningStorm.NoTags = { "INLIMBO", "shadow", "moose", "mossling" }
 							LightningStorm.Transform:SetPosition(x1, y, z1)
@@ -120,6 +121,7 @@ local function EnterPhase2TriggerMother(inst)
 			upgradeburst:AddComponent("follower")
 			upgradeburst.components.follower:SetLeader(inst)
 			upgradeburst.sg:GoToState("hatch")
+			upgradeburst.components.combat:SuggestTarget(target)
 			--[[if target ~= nil then
 				upgradeburst.components.locomotor:GoToEntity(target)
 				upgradeburst:DoTaskInTime(0, function(inst)
@@ -151,10 +153,10 @@ env.AddPrefabPostInit("mothergoose", function(inst)
 	
     inst:AddComponent("groundpounder")
     inst.components.groundpounder.destroyer = false
-    inst.components.groundpounder.damageRings = 2
+    inst.components.groundpounder.damageRings = 3
     inst.components.groundpounder.destructionRings = 2
     inst.components.groundpounder.platformPushingRings = 2
-    inst.components.groundpounder.numRings = 2
+    inst.components.groundpounder.numRings = 3
     inst.components.groundpounder.noTags = { "FX", "NOCLICK", "DECOR", "INLIMBO", "mossling", "moose" }
 	
 	inst:AddComponent("healthtrigger")
@@ -190,8 +192,8 @@ env.AddPrefabPostInit("mothergoose", function(inst)
 							LightningStorm.Transform:SetPosition(target.Transform:GetWorldPosition())
 						else
 							local x, y, z = inst.Transform:GetWorldPosition()      
-							local x1 = x + math.random(-20, 20)
-							local z1 = z + math.random(-20, 20)
+							local x1 = x + math.random(-15, 15)
+							local z1 = z + math.random(-15, 15)
 							local LightningStorm = SpawnPrefab("hound_lightning")
 							LightningStorm.NoTags = { "INLIMBO", "shadow", "moose", "mossling" }
 							LightningStorm.Transform:SetPosition(x1, y, z1)

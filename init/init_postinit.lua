@@ -150,6 +150,7 @@ local stategraph_post = {
 	"bearger",
 	"krampus",
 	"moose",
+	"spiderqueen",
 }
 
 local class_post = {

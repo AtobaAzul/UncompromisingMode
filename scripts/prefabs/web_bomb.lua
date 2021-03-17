@@ -46,7 +46,7 @@ local function doprojectilehit(inst, attacker, other)
     end
 
     if other ~= nil and other:IsValid() then
-        if attacker ~= nil then
+        if attacker ~= nil and attacker.components.weapon then
             attacker.components.combat:DoAttack(other, inst.components.complexprojectile.owningweapon, inst)
         end
         if other.components.pinnable ~= nil then
@@ -71,7 +71,7 @@ local function oncollide(inst, other)
         other ~= nil and
         other:IsValid() and
         other.components.combat ~= nil then
-        if attacker ~= nil and attacker:IsValid() then
+        if attacker ~= nil and attacker:IsValid() and attacker.components.weapon then
             attacker.components.combat:DoAttack(other, inst.components.complexprojectile.owningweapon, inst)
         end
         if other.components.pinnable ~= nil then

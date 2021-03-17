@@ -16,7 +16,7 @@ end
 
 local function OnAttached(inst, target, followsymbol, followoffset, data)
 	
-	local duration = data ~= nil and data.duration or 1
+	local duration = data ~= nil and (data.duration / 2) or 1
 	
 	local warlybuff = target:HasTag("warlybuffed") and 2 or 1
 	duration = duration / warlybuff
