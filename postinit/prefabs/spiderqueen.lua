@@ -1,6 +1,8 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 ----------------------------------------------------------------
+local easing = require("easing")
+
 local function OnDead(inst)
     AwardRadialAchievement("spiderqueen_killed", inst:GetPosition(), TUNING.ACHIEVEMENT_RADIUS_FOR_GIANT_KILL)
 	if not inst:HasTag("nodecomposepls") then
@@ -58,6 +60,68 @@ local function EquipWeapons(inst)
         inst.weaponitems.meleeweapon = meleeweapon
     end
 end
+
+local function SpitCooldown(inst, data)
+	local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
+	
+	if data.name == "SpitCooldown" and target ~= nil and target.components.pinnable ~= nil and inst:GetDistanceSqToInst(target) <= 200 then
+		if not inst.sg:HasStateTag("busy") then
+			inst.sg:GoToState("give_off_cob_web")
+			inst.spitweb = true
+			inst.components.timer:StopTimer("SpitCooldown")
+		else
+			inst.components.timer:StopTimer("SpitCooldown")
+			inst.components.timer:StartTimer("SpitCooldown", 3)
+		end
+    end
+end
+
+
+local function LaunchWeb(inst, target)
+	if target ~= nil then
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local projectile = SpawnPrefab("web_bomb")
+		local a, b, c = target.Transform:GetWorldPosition()
+		local targetpos = target:GetPosition()
+		local dx = a - x
+		local dz = c - z
+		local rangesq = dx * dx + dz * dz
+		local maxrange = 15
+		local bigNum = 10
+		local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
+		
+		--targetpos.x = targetpos.x + math.random(-1,1)
+		--targetpos.z = targetpos.z + math.random(-1,1)
+		
+		local function shrink(inst, time, startsize, endsize)
+			inst.AnimState:SetMultColour(1,1,1,.9)
+			inst.Transform:SetScale(startsize, startsize, startsize)
+			inst.components.colourtweener:StartTween({1,1,1,1}, time)
+			inst.components.sizetweener:StartTween(.5, time, inst.Remove)
+			--inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/bomb_fall")
+		end
+
+		local shadow = SpawnPrefab("warningshadow")
+		shadow.Transform:SetPosition(a, b, c)
+
+		shadow:AddComponent("sizetweener")
+		shadow:AddComponent("colourtweener")
+
+		shadow.shrink = shrink
+	
+		shadow:shrink(((speed + 5) / 14), 1.75, 0.5)
+		
+		projectile.Transform:SetPosition(x, y, z)
+		projectile.Physics:ClearCollisionMask()
+		projectile.components.complexprojectile:SetGravity(-30)
+		projectile.Physics:CollidesWith(COLLISION.WORLD)
+		projectile.Physics:CollidesWith(COLLISION.OBSTACLES)
+		projectile.components.complexprojectile.usehigharc = true
+		projectile.components.complexprojectile:SetHorizontalSpeed(speed + 5)
+		projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+	end
+end
+
 env.AddPrefabPostInit("spiderqueen", function(inst)
 	inst.entity:AddGroundCreepEntity()
 	
@@ -70,5 +134,11 @@ env.AddPrefabPostInit("spiderqueen", function(inst)
 	--EquipWeapons(inst)
 	inst.GroundCreepEntity:SetRadius(2)
 	inst:ListenForEvent("death", OnDead)
+	
+	inst:AddComponent("timer")
+    inst:ListenForEvent("timerdone", SpitCooldown)
+	
+	inst.LaunchWeb = LaunchWeb
+	
 	--inst.OnLoad = function(inst)  inst.WebReady = true   end
 end)
