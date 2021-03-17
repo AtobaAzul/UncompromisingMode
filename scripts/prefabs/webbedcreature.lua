@@ -138,42 +138,46 @@ SetSharedLootTable('webbedcreature_spat',
 local function SetStage(inst, stage)
 	if stage <= 3 then
 
-    
+		
 		inst.AnimState:PlayAnimation(inst.anims.init)
 		inst.AnimState:PushAnimation(inst.anims.idle, true)
+		inst:DoTaskInTime(3,function(inst) inst.AnimState:SetTime(math.random() * 2) end)
 	end  
 end
 
 local function SetSmall(inst)
+	inst.AnimState:SetBank("wackycocoonsmall")
+	inst.AnimState:SetBuild("wackycocoonsmall")
+	inst.DynamicShadow:SetSize(3.5, 2.5)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
     inst.anims = {
-    	hit="cocoon_small_hit", 
-    	idle="cocoon_small", 
-    	init="grow_sac_to_small", 
-    	freeze="frozen_small", 
-    	thaw="frozen_loop_pst_small",
+    	hit="hit_small", 
+    	idle="idle_small", 
+    	kill="break_small",
+		init = "appear_small",
     }
     SetStage(inst, 1)
 end
 
 
 local function SetMedium(inst)
+	inst.DynamicShadow:SetSize(4, 3.5)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
     inst.anims = {
-    	hit="cocoon_medium_hit", 
-    	idle="cocoon_medium", 
-    	init="grow_small_to_medium", 
-    	freeze="frozen_medium", 
-    	thaw="frozen_loop_pst_medium",
+    	hit="hit_medium", 
+    	idle="idle_medium", 
+    	kill="break_medium",
+		init = "appear_medium",
     }
     SetStage(inst, 2)
 end
 
 local function SetLarge(inst)
+	inst.DynamicShadow:SetSize(5, 4)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
@@ -181,19 +185,17 @@ local function SetLarge(inst)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
     inst.anims = {
-    	hit="cocoon_large_hit", 
-    	idle="cocoon_large", 
-    	init="grow_medium_to_large", 
-    	freeze="frozen_large", 
-    	thaw="frozen_loop_pst_large",
+    	hit="hit_large", 
+    	idle="idle_large", 
+    	kill="break_large",
+		init = "appear_large",
     }
     SetStage(inst, 3)
 end
 
 
-
 local function OnKilled(inst)
-	inst.AnimState:PlayAnimation("cocoon_dead")
+	inst.AnimState:PlayAnimation(inst.anims.kill)
 	local x, y, z = inst.Transform:GetWorldPosition()
     inst.SoundEmitter:KillSound("loop")
 	inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_destroy")
@@ -441,16 +443,16 @@ local function fn()
 		inst.entity:AddTransform()
 		inst.entity:AddAnimState()
 		inst.entity:AddNetwork()
-
+		inst.entity:AddDynamicShadow()
 		inst.entity:AddSoundEmitter()
 
 
 		--MakeObstaclePhysics(inst, .5)
 
 
-		inst.AnimState:SetBank("spider_cocoon")
-		inst.AnimState:SetBuild("spider_cocoon")
-		inst.AnimState:PlayAnimation("cocoon_small", true)
+		inst.AnimState:SetBank("wackycocoons")
+		inst.AnimState:SetBuild("wackycocoons")
+		inst.AnimState:PlayAnimation("idle_small", true)
 		
 		inst:AddTag("structure")
 		inst:AddTag("webbedcreature")

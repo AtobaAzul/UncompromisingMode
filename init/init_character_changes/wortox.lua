@@ -10,7 +10,7 @@ local function MakeSoulless(prefab)
     end)
 end
 
-print("DSTU: wortox")
+--print("DSTU: wortox")
 
 local REMOVE_SOULS = 
 {

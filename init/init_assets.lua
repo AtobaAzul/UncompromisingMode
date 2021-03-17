@@ -370,7 +370,8 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/turf_ancienthoodedturf.tex"),
 	Asset("ATLAS", "images/inventoryimages/turf_ancienthoodedturf.xml"),
 	Asset("ANIM", "anim/haul_pigman.zip"),
-	
+	Asset("ANIM", "anim/wackycocoons.zip"),
+	Asset("ANIM", "anim/wackycocoonsmall.zip"), --Had to seperate into second build, too big for a single build
 	
 	
 	
