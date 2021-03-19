@@ -7,7 +7,7 @@ TUNING.DRAGONFLY_ASH_EATEN_FOR_SATISFIED = 20
 local function ShouldStopSpin(inst)
 	local pos = inst:GetPosition()
 
-	local nearby_player = FindClosestPlayerInRange(pos.x, pos.y, pos.z, 15, true)
+	local nearby_player = FindClosestPlayerInRange(pos.x, pos.y, pos.z, 20, true)
 	local time_out = inst.numSpins >= 3
 
 	return not nearby_player or time_out
@@ -17,19 +17,13 @@ local function FireTrail(inst, x, y, z)
 	SpawnPrefab("firesplash_fx").Transform:SetPosition(x, y, z)
 	inst.firedrop = SpawnPrefab("firedrop")
 	inst.firedrop.Transform:SetPosition(x, y, z)
-	inst.firedrop:DoTaskInTime(1, function(inst) inst.components.burnable:Extinguish() end)
-    --inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
-    inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
-	--[[local firefx = SpawnPrefab("halloween_firepuff_"..math.random(3))
-	firefx.Transform:SetPosition(x, y, z)
-	firefx.Transform:SetScale(1.2, 1.2, 1.2)]]
+	inst.firedrop:DoTaskInTime(1.5, function(inst) inst.components.burnable:Extinguish() end)
+    inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
+    --inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
     local ents = TheSim:FindEntities(x, y, z, 3.5, nil, { "INLIMBO" })
 
     for i, v in ipairs(ents) do
         if v ~= inst and v:IsValid() and not v:IsInLimbo() then
-			--[[if v.components.workable ~= nil and v.components.workable:CanBeWorked() then
-				v.components.workable:WorkedBy(inst, 10)
-			end]]
 
             --Recheck valid after work
             if v:IsValid() and not v:IsInLimbo() then
@@ -49,8 +43,6 @@ local function LightningStrike(inst)
 	--inst.rockthrow = false
 
 	local x, y, z = inst.Transform:GetWorldPosition()
-	--local x1, y1, z1 = inst.Transform:GetWorldPosition()
-	--local x2, y2, z2 = inst.Transform:GetWorldPosition()
 	local targetpos = inst:GetPosition()
 	local theta = inst.Transform:GetRotation()
 
@@ -66,27 +58,11 @@ local function LightningStrike(inst)
 	
 	FireTrail(inst, x1, 0, z1)
 	FireTrail(inst, x2, 0, z2)
-	--[[local projectile1 = SpawnPrefab("houndfire")
-	projectile1.Transform:SetPosition(x1, 0, z1)
-	local projectile2 = SpawnPrefab("houndfire")
-	projectile2.Transform:SetPosition(x2, 0, z2)]]
 
 	local scorch1 = SpawnPrefab("deerclops_laserscorch")
 	scorch1.Transform:SetPosition(x1, 0, z1)
 	local scorch2 = SpawnPrefab("deerclops_laserscorch")
 	scorch2.Transform:SetPosition(x2, 0, z2)
-
-	--[[local rad = math.random(0,3)
-	local angle = math.random() * 2 * PI
-	local offset = Vector3(rad * math.cos(angle), 0, -rad * math.sin(angle))
-	
-	local pos = inst:GetPosition() + offset
-
-	TheWorld:PushEvent("ms_sendlightningstrike", pos)
-	TheWorld:PushEvent("ms_forceprecipitation", true)
-	SpawnPrefab("houndfire").Transform:SetPosition(pos)
-    
-	SpawnPrefab("houndfire").Transform:SetPosition(inst.Transform:GetWorldPosition())]]
 end
 
 local function onattackedfn(inst, data)
@@ -124,17 +100,17 @@ local events=
     CommonHandlers.OnSleep(),
     CommonHandlers.OnFreeze(),
     --[[CommonHandlers.OnAttack(),]]
-	EventHandler("doattack", function(inst, data)
+	--[[EventHandler("doattack", function(inst, data)
 		if inst.rockthrow == true and not inst.components.health:IsDead() and inst.fire_build ~= nil and inst.fire_build == true then
-			--if math.random() >= 0.5 then
+			if math.random() >= 0.5 then
 				inst.sg:GoToState("charge_warning")
-			--else
-				--inst.sg:GoToState("shoot", data.target)
-			--end
+			else
+				inst.sg:GoToState("shoot", data.target)
+			end
 		else
 			onattackfn(inst)
 		end
-	end),
+	end),]]
     CommonHandlers.OnDeath(),
     EventHandler("attacked", onattackedfn),
 }
@@ -337,7 +313,14 @@ local states=
         
         events=
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst) 
+				if inst.rockthrow == true and not inst.components.health:IsDead() and inst.fire_build ~= nil and inst.fire_build == true then
+					inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/distant")
+					inst.sg:GoToState("spin_pre")
+				else
+					inst.sg:GoToState("idle") 
+				end
+			end),
         },
 
         timeline=
@@ -779,7 +762,6 @@ local states=
 			
 				inst.Physics:Stop()
 				inst.AnimState:PlayAnimation("charge_pre")
-				--inst.AnimState:PlayAnimation("walk_angry_pre")
 				inst.numSpins = 0
 			end,
 
@@ -807,7 +789,6 @@ local states=
 			
 				inst.Physics:Stop()
 				inst.AnimState:PlayAnimation("charge_pre")
-				--inst.AnimState:PlayAnimation("walk_angry_pre")
 			end,
 
 			events =
@@ -827,27 +808,29 @@ local states=
 
 			onenter = function(inst)
 				inst.AnimState:PlayAnimation("charge")
-				--inst.AnimState:PlayAnimation("walk_angry")
 				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/vomitrumble", "spinLoop")
 
-				inst.components.locomotor.runspeed = 12
+				inst.components.locomotor.runspeed = 15
 				
 				local fx = SpawnPrefab("mossling_spin_fx")
 				fx.entity:SetParent(inst.entity)
 				fx.Transform:SetPosition(0,0.1,0)
+				
+				inst.TrailFire = inst:DoPeriodicTask(2.3*FRAMES,
+				function(inst)
+					LightningStrike(inst)
+				end)
 			end,
 
 			onupdate = function(inst)
-				--[[if inst.sg.statemem.move then
-					inst.components.locomotor:WalkForward()
-				else
-					inst.components.locomotor:StopMoving()
-				end]]
-					inst.components.locomotor:RunForward()
-					--LightningStrike(inst)
+				inst.components.locomotor:RunForward()
 			end,
 
 			onexit = function(inst)
+				if inst.TrailFire then
+					inst.TrailFire:Cancel()
+					inst.TrailFire = nil
+				end
 				inst.components.locomotor.runspeed = 6
 				inst.SoundEmitter:KillSound("spinLoop")
 				inst.components.locomotor:StopMoving()
@@ -855,61 +838,6 @@ local states=
 
 			timeline=
 			{
-				TimeEvent(0*FRAMES, function(inst)
-					--if math.random() < 0.1 then
-						LightningStrike(inst)
-					--end
-				end),
-				TimeEvent(3*FRAMES, function(inst)
-					--if math.random() < 0.1 then
-						LightningStrike(inst)
-					--end
-				end),
-				TimeEvent(6*FRAMES, function(inst)
-					--if math.random() < 0.1 then
-						LightningStrike(inst)
-					--end
-				end),
-				TimeEvent(9*FRAMES, function(inst)
-					--if math.random() < 0.1 then
-						LightningStrike(inst)
-					--end
-				end),
-				TimeEvent(12*FRAMES, function(inst)
-					--if math.random() < 0.1 then
-						LightningStrike(inst)
-					--end
-				end),
-				TimeEvent(15*FRAMES, function(inst)
-					--if math.random() < 0.1 then
-						LightningStrike(inst)
-					--end
-				end),
-				TimeEvent(18*FRAMES, function(inst)
-					--if math.random() < 0.1 then
-						LightningStrike(inst)
-					--end
-				end),
-				TimeEvent(21*FRAMES, function(inst)
-					--if math.random() < 0.1 then
-						LightningStrike(inst)
-					--end
-				end),
-				TimeEvent(24*FRAMES, function(inst)
-					--if math.random() < 0.1 then
-						LightningStrike(inst)
-					--end
-				end),
-				TimeEvent(27*FRAMES, function(inst)
-					--if math.random() < 0.1 then
-						LightningStrike(inst)
-					--end
-				end),
-				TimeEvent(30*FRAMES, function(inst)
-					--if math.random() < 0.1 then
-						LightningStrike(inst)
-					--end
-				end),
 				TimeEvent(5*FRAMES, function(inst) inst.components.combat:DoAttack() end),
 				TimeEvent(25*FRAMES, function(inst) inst.components.combat:DoAttack() end),
 				TimeEvent(45*FRAMES, function(inst) inst.components.combat:DoAttack() end),
@@ -935,7 +863,6 @@ local states=
 
 			onenter = function(inst)
 				inst.AnimState:PlayAnimation("charge_pst")
-				--inst.AnimState:PlayAnimation("walk_angry_pst")
 				
 				inst.rockthrow = false
 				

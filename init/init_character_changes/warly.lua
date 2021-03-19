@@ -30,7 +30,7 @@ env.AddPrefabPostInit("warly", function(inst)
 	
 	if inst.components.eater ~= nil then
 		inst.components.eater:SetOnEatFn(oneat)
-		--inst.components.eater:SetAbsorptionModifiers(1.2, 1.15, 1.2)
+		--inst.components.eater:SetAbsorptionModifiers(1.2, 1.2, 1.2)
 	end
 	
 	if inst.components.foodmemory ~= nil then
