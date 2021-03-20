@@ -202,8 +202,10 @@ local ANTIHISTAMINES_HIGH =
 }
 
 local function item_oneatenhigh(inst, eater)
+	local SugarBuff = inst:HasTag("antihistamine_sugar") and 60 or 0
+
 	if eater.components.hayfever and eater.components.hayfever.enabled then
-		eater.components.hayfever:SetNextSneezeTime(300)			
+		eater.components.hayfever:SetNextSneezeTime(300 + SugarBuff)			
 	end	
 end
 
@@ -217,8 +219,23 @@ local function AddAntihistamineHigh(prefab)
     end)
 end
 
+local function AddAntihistamineHighSugar(prefab)
+    AddPrefabPostInit(prefab, function (inst)
+		inst:AddTag("antihistamine")
+		inst:AddTag("antihistamine_sugar")
+	
+		if inst.components.edible ~= nil then
+			inst.components.edible:SetOnEatenFn(item_oneatenhigh)
+		end
+    end)
+end
+
 for k, v in pairs(ANTIHISTAMINES_HIGH) do
 	AddAntihistamineHigh(v)
+	AddAntihistamineHigh(v.."_spice_chili")
+	AddAntihistamineHigh(v.."_spice_garlic")
+	AddAntihistamineHigh(v.."_spice_salt")
+	AddAntihistamineHighSugar(v.."_spice_sugar")
 end
 
 -------------------------------------------------------
@@ -229,8 +246,10 @@ local ANTIHISTAMINES_SUPER =
 }
 
 local function item_oneatensuper(inst, eater)
+	local SugarBuff = inst:HasTag("antihistamine_sugar") and 60 or 0
+	
 	if eater.components.hayfever and eater.components.hayfever.enabled then
-		eater.components.hayfever:SetNextSneezeTime(800)	
+		eater.components.hayfever:SetNextSneezeTime(800 + SugarBuff)	
 	end	
 end
 
@@ -244,8 +263,23 @@ local function AddAntihistamineSuper(prefab)
     end)
 end
 
+local function AddAntihistamineSuper(prefab)
+    AddPrefabPostInit(prefab, function (inst)
+		inst:AddTag("antihistamine")
+		inst:AddTag("antihistamine_sugar")
+	
+		if inst.components.edible ~= nil then
+			inst.components.edible:SetOnEatenFn(item_oneatensuper)
+		end
+    end)
+end
+
 for k, v in pairs(ANTIHISTAMINES_SUPER) do
 	AddAntihistamineSuper(v)
+	AddAntihistamineSuper(v.."_spice_chili")
+	AddAntihistamineSuper(v.."_spice_garlic")
+	AddAntihistamineSuper(v.."_spice_salt")
+	AddAntihistamineSuper(v.."_spice_sugar")
 end
 
 -----------------------------------------------------------------

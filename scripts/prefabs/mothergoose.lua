@@ -43,8 +43,8 @@ SetSharedLootTable( 'mothergoose',
 local BASE_TAGS = {"structure"}
 local SEE_STRUCTURE_DIST = 20
 
-local TARGET_DIST = 10
-local LOSE_TARGET_DIST = 20
+local TARGET_DIST = 15
+local LOSE_TARGET_DIST = 25
 
 local function RetargetFn(inst)
     if inst.sg:HasStateTag("busy") then return end
@@ -64,6 +64,14 @@ local function RetargetFn(inst)
                 return inst.components.combat:CanTarget(guy)
             end,
             nil,
+            { "prey", "smallcreature", "mossling", "moose" })
+    end
+	
+    if not target then
+        target =  FindEntity(inst, TARGET_DIST + 5, function(guy)
+                return inst.components.combat:CanTarget(guy)
+            end,
+            { "structure" },
             { "prey", "smallcreature", "mossling", "moose" })
     end
 
