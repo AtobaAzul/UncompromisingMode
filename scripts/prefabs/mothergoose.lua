@@ -89,6 +89,7 @@ end
 
 local function OnEntitySleep(inst)
     if inst.shouldGoAway then
+        TheWorld:PushEvent("storehasslergmoose", inst)
         inst:Remove()
     end
 end

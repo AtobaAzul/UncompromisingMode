@@ -29,6 +29,7 @@ local SEE_STRUCTURE_DIST = 20
 local TARGET_DIST = 3
 
 local function LeaveWorld(inst)
+	TheWorld:PushEvent("storehasslermockdragonfly", inst)
     inst:Remove()
 end
 

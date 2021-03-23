@@ -21,11 +21,43 @@ local function EquipWeapon(inst)
     end
 end
 
+local function TeleportToFood(inst)
+	print("find food")
+
+    local flower = GetClosestInstWithTag(inst.components.eater:GetEdibleTags(), inst, 600)
+    if flower and flower:IsValid() --[[and inst.findnewfood]] then
+		local init_pos = inst:GetPosition()
+		local player_pos = flower:GetPosition()
+		if player_pos then
+			local angle = PlayerPosition:GetAngleToPoint(init_pos)
+			local offset = FindWalkableOffset(player_pos, angle*DEGREES, 30, 10)
+				
+			if offset ~= nil then
+				local pos = player_pos + offset
+				if pos --[[and distsq(player_pos, init_pos) > 1600]] then
+					inst.components.combat:SetTarget(nil)
+					
+					inst:DoTaskInTime(.1, function() 
+						inst.Transform:SetPosition(pos:Get())
+					end)
+					return
+				end
+			end
+		end
+    end
+	
+	inst.components.timer:StopTimer("FindNewFood")
+	inst.components.timer:StartTimer("FindNewFood", 10)
+	
+end
+
 local function RockThrowTimer(inst, data)
     if data.name == "RockThrow" then
         inst.rockthrow = true
-		
-		--EquipWeapon(inst)
+    end
+	
+    if data.name == "FindNewFood" then
+        inst.findnewfood = true
     end
 end
 --[[
@@ -128,6 +160,8 @@ env.AddPrefabPostInit("bearger", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
+
+	inst.entity:SetCanSleep(false)
 	
 	if inst.components.groundpounder then
 		--inst.components.groundpounder.sinkhole = true
@@ -140,13 +174,19 @@ env.AddPrefabPostInit("bearger", function(inst)
 	
     inst.LaunchProjectile = LaunchProjectile
 	
-	--[[inst:ListenForEvent("oneat", function(inst, data)
-		if data.food ~= nil and data.food.components.edible ~= nil and data.food.components.edible.hungervalue ~= nil then
+    inst.TeleportToFood = TeleportToFood
+	
+	inst:ListenForEvent("oneat", function(inst, data)
+		inst.components.timer:StopTimer("FindNewFood")
+		inst.components.timer:StartTimer("FindNewFood", 10)
+                
+	
+		--[[if data.food ~= nil and data.food.components.edible ~= nil and data.food.components.edible.hungervalue ~= nil then
 			if data.food.prefab == "honey" then
 				inst.components.health:DoDelta(250)
 			else
 				inst.components.health:DoDelta(100 + (data.food.components.edible.hungervalue * 10))
 			end
-		end
-	end)]]
+		end]]
+	end)
 end)
