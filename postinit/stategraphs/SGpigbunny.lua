@@ -100,13 +100,13 @@ local states = {
         {
             TimeEvent(9 * FRAMES, function(inst)
 				local target = inst.components.combat.target
-                
+				
+				if target ~= nil and distsq(target:GetPosition(), inst:GetPosition()) <= inst.components.combat:CalcAttackRangeSq(target) then
+					target:PushEvent("attacked", { attacker = inst, damage = inst.components.combat.defaultdamage / 1.5} )
+					
 					if target ~= nil and target.components.inventory ~= nil and not target:HasTag("fat_gang") and not target:HasTag("foodknockbackimmune") and not (target.components.rider ~= nil and target.components.rider:IsRiding()) and 
 					--Don't knockback if you wear marble
 					(target.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ==nil or not target.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not target.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
-					target:PushEvent("attacked", { attacker = inst, damage = 5} )
-					
-					if target ~= nil and target.components and target.components.inventory ~= nil and not target:HasTag("fat_gang") and not target:HasTag("foodknockbackimmune") and (target.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) == nil or not target.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not target.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
 						target:PushEvent("knockback", {knocker = inst, radius = 150, strengthmult = 1})
 					end
 				end
