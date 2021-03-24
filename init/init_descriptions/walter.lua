@@ -127,7 +127,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.SHADOW_CROWN = "A crown? A Pinetree Pioneer must stay humble!"
 	DESCRIBE.POLLENMITEDEN = "These little guys are spreading fast!"
     DESCRIBE.POLLENMITES = "My eyes are watering just looking at them."
-    DESCRIBE.SHADOW_CROWN = "Wearing this gives me a strange feeling of dread."
     DESCRIBE.RNEGHOST = DESCRIBE.GHOST
 	DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
 	DESCRIBE.LUREPLAGUE_RAT = "They're kinda cute when you get over the extra eyes."

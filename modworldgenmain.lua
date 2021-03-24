@@ -304,15 +304,22 @@ GLOBAL.require("map/tasks/sunkendecid")
 
 table.insert(task.keys_given,KEYS.HF)  
 end)]]
---Waffle's Specific Task Remover Code
+--[[Waffle's Specific Task Remover Code (Archived)
 AddTaskSetPreInitAny(function(tasksetdata)
   for _, task in pairs(tasksetdata.tasks) do
     if task == "Forest hunters" then
       table.remove(tasksetdata.tasks, _)
     end
   end
+end)]]
+
+AddTaskPreInit("Forest hunters",function(task) --Leave Forest Hunters in incase someone adds something to its setpieces.
+task.room_choices={
+["Forest"] = 1,
+["Clearing"] = 1,
+}
 end)
---Waffle's Specific Task Remover Code
+
 
 AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "forest" then
