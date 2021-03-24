@@ -23,7 +23,7 @@ AddComponentPostInit("dynamicmusic", function(self)
 	local _StartDanger = UpvalueHacker.GetUpvalue(_OnPlayerActivated, "StartPlayerListeners", "CheckAction", "StartDanger")
 
     local BUSYTHEMES = UpvalueHacker.GetUpvalue(_StartBusy, "BUSYTHEMES")
-    BUSYTHEMES["HOODEDFOREST"] = 11
+    BUSYTHEMES["HOODEDFOREST"] = 1337
 	
     local function IsInHoodedForest(player)
         return player.components.areaaware ~= nil
@@ -33,6 +33,7 @@ AddComponentPostInit("dynamicmusic", function(self)
     local function StartBusy(player)
         -- get updated private variables
         local BUSYTHEMES = UpvalueHacker.GetUpvalue(_StartBusy, "BUSYTHEMES")
+        local SEASON_DANGER_MUSIC = UpvalueHacker.GetUpvalue(_StartBusy, "SEASON_DANGER_MUSIC")
         local _iscave = UpvalueHacker.GetUpvalue(_StartBusy, "_iscave")
         local _isday = UpvalueHacker.GetUpvalue(_StartBusy, "_isday")
         local _busytask = UpvalueHacker.GetUpvalue(_StartBusy, "_busytask")
@@ -71,6 +72,7 @@ AddComponentPostInit("dynamicmusic", function(self)
     local function StartDanger(player)
         -- get updated private variables
         local SEASON_DANGER_MUSIC = UpvalueHacker.GetUpvalue(_StartDanger, "SEASON_DANGER_MUSIC")
+        local SEASON_EPICFIGHT_MUSIC = UpvalueHacker.GetUpvalue(_StartDanger, "SEASON_EPICFIGHT_MUSIC")
         local _iscave = UpvalueHacker.GetUpvalue(_StartDanger, "_iscave")
         local _extendtime = UpvalueHacker.GetUpvalue(_StartDanger, "_extendtime")
         local _dangertask = UpvalueHacker.GetUpvalue(_StartDanger, "_dangertask")

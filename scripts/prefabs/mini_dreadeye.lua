@@ -8,13 +8,17 @@ local AURA_EXCLUDE_TAGS = { "noauradamage", "INLIMBO", "notarget", "noattack" }
 
 local NOTAGS = { "playerghost", "INLIMBO" }
 
-local function TryFear(v)
+local function TryFear(inst, v)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	
+	SpawnPrefab("mini_dreadeye_fx").Transform:SetPosition(x, y + 1, z)
+	
 	if v.components.health ~= nil and v.components.sanity and v.components.sanity:IsInsane() then
 		v.components.health:DoDelta(-1)
 	end
 			
 	if v.components.sanity and not v.components.sanity:IsInsane() then
-		v.components.sanity:DoDelta(-1)
+		v.components.sanity:DoDelta(-2)
 	end
 end
 
@@ -24,7 +28,7 @@ local function DoAreaFear(inst)
 	
 	if not inst.AnimState:IsCurrentAnimation("spawn") then
 		for i, v in ipairs(ents) do
-			TryFear(v)
+			TryFear(inst, v)
 		end
 	end
 end
@@ -81,7 +85,7 @@ local function CancelCreepingSound(inst)
 	inst.SoundEmitter:KillSound("creeping")
 end
 
-local function snowpilefn(Sim)
+local function fn(Sim)
 	-- print ('sandhillfn')
 	local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
@@ -151,4 +155,41 @@ local function snowpilefn(Sim)
 	return inst
 end
 
-return Prefab("mini_dreadeye", snowpilefn, assets, prefabs)
+local function fxfn(Sim)
+	-- print ('sandhillfn')
+	local inst = CreateEntity()
+	local trans = inst.entity:AddTransform()
+	local anim = inst.entity:AddAnimState()
+	local sound = inst.entity:AddSoundEmitter()
+	inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+			
+	anim:SetBuild("statue_ruins_fx")
+	anim:SetBank("statue_ruins_fx")
+	anim:PlayAnimation("transform_nightmare")
+	
+	inst.AnimState:SetMultColour(0, 0, 0, 0.6)
+	
+	inst:AddTag("fx")
+	
+    inst:AddComponent("transparentonsanity_dreadeye_objects")
+	
+	inst.entity:SetPristine()
+	
+	if not TheWorld.ismastersim then
+        return inst
+    end
+	
+    inst.SoundEmitter:PlaySound("dontstarve/maxwell/shadowmax_despawn")
+	
+    inst.persists = false
+	
+	inst:ListenForEvent("animover", inst.Remove)
+	
+	return inst
+end
+
+return Prefab("mini_dreadeye", fn, assets, prefabs),
+		Prefab("mini_dreadeye_fx", fxfn, assets, prefabs)

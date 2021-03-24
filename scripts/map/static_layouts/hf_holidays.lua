@@ -179,7 +179,7 @@ return {
         },
         {
           name = "",
-          type = "winter_food7",
+          type = "trinket_26",
           shape = "rectangle",
           x = 376,--416,
           y = 176,--146,
