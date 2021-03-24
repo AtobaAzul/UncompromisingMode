@@ -672,13 +672,11 @@ local function GlacialCharge(inst)
 end
 
 local function fnglacial()
-    local inst = fncommon("hound", "hound_mutated", nil, nil, nil, {amphibious = true})
+    local inst = fncommon("hound", "glacial_hound_ocean", nil, nil, nil, {amphibious = true})
 
     if not TheWorld.ismastersim then
         return inst
     end
-	
-	inst.AnimState:SetMultColour(0, 0, 1, 1)
 	
     inst:SetStateGraph("SGglacialhound")
 
@@ -779,7 +777,7 @@ local function fnglacial_proj()
     inst.components.projectile:SetHitDist(math.sqrt(3))
     inst.components.projectile:SetOnHitFn(onhit)
     inst.components.projectile:SetOnMissFn(inst.Remove)
-    --inst.components.projectile:SetLaunchOffset(Vector3(3, 2, 0))
+    inst.components.projectile:SetLaunchOffset(Vector3(0, 2, 0))
 	
     inst.persists = false
 

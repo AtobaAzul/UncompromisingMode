@@ -131,6 +131,8 @@ GLOBAL.AllRecipes["ancient_amulet_red"].sortkey = GLOBAL.AllRecipes["orangeamule
 AddRecipe("turf_hoodedmoss", {Ingredient("twigs", 1), Ingredient("foliage", 1), Ingredient("moonrocknugget", 1)}, RECIPETABS.TURFCRAFTING, TECH.TURFCRAFTING_ONE, nil, nil, nil, nil, nil, "images/inventoryimages/turf_hoodedmoss.xml", "turf_hoodedmoss.tex")
 AddRecipe("turf_ancienthoodedturf", {Ingredient("turf_hoodedmoss", 1,"images/inventoryimages/turf_hoodedmoss.xml"), Ingredient("moonrocknugget", 1), Ingredient("thulecite_pieces", 1)}, RECIPETABS.TURFCRAFTING, TECH.TURFCRAFTING_ONE, nil, nil, nil, nil, nil, "images/inventoryimages/turf_ancienthoodedturf.xml", "turf_ancienthoodedturf.tex")
 
+AddRecipe("um_trap_snare", {Ingredient("livinglog", 1),Ingredient("rope", 1),Ingredient("pinecone", 1)}, RECIPETABS.WAR,  TECH.SCIENCE_TWO)
+
 
 STRINGS.RECIPE_DESC.SLINGSHOTAMMO_FIRECRACKERS = "For the aspiring young menace."
 STRINGS.RECIPE_DESC.WATERMELON_LANTERN = "Juicy illumination."
