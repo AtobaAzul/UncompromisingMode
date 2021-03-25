@@ -26,6 +26,7 @@ local function ChangeToObstacle(inst)
     inst.Physics:ClearCollisionMask()
     inst.Physics:CollidesWith(COLLISION.ITEMS)
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+    inst.Physics:CollidesWith(COLLISION.GIANTS)
     inst.Physics:Teleport(x, 0, z)
 end
 
@@ -226,10 +227,12 @@ local function fn()
     inst.AnimState:SetFinalOffset(1)
 
     inst.Physics:SetMass(99999)
-    inst.Physics:SetCollisionGroup(COLLISION.SMALLOBSTACLES)
+    inst.Physics:SetCollisionGroup(COLLISION.OBSTACLES)
+    --inst.Physics:SetCollisionGroup(COLLISION.SMALLOBSTACLES)
     inst.Physics:ClearCollisionMask()
     inst.Physics:CollidesWith(COLLISION.ITEMS)
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+    inst.Physics:CollidesWith(COLLISION.GIANTS)
     inst.Physics:CollidesWith(COLLISION.WORLD)
     inst.Physics:SetCapsule(PHYSICS_RADIUS, 2)
 	

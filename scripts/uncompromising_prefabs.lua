@@ -207,4 +207,5 @@ return {
 	"haul_hound",
 	"mothermossling",
 	"dragonfly_egg",
+	"um_trap_snare",
 }

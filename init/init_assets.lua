@@ -131,6 +131,8 @@ Assets = {
 	Asset("ANIM", "anim/whisperpod_normal_ground.zip"),
 	Asset("ANIM", "anim/hound_lightning.zip"),
 	Asset("ANIM", "anim/hound_lightning_ocean.zip"),
+	Asset("ANIM", "anim/glacial_hound.zip"),
+	Asset("ANIM", "anim/glacial_hound_ocean.zip"),
 	Asset("ANIM", "anim/nightmaregrowth_shrink.zip"),
 	Asset("ANIM", "anim/watermelon_lantern.zip"),
 	Asset("ANIM", "anim/nightcrawler_build.zip"),
@@ -327,6 +329,7 @@ Assets = {
 	Asset("ANIM", "anim/mothergoosemoose_nest.zip"),
 	Asset("ANIM", "anim/dragonfly_egg.zip"),
 	Asset("ANIM", "anim/dragonfly_charge_attack.zip"),
+	Asset("ANIM", "anim/um_trap_snare.zip"),
 	
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_closed_lazy"),
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_lazy"),
