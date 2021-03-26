@@ -20,7 +20,7 @@ local function SpitCooldown(inst, data)
 			inst.components.timer:StopTimer("SpitCooldown")
 			inst.components.timer:StartTimer("SpitCooldown", 3)
 		else
-			if target ~= nil and inst:GetDistanceSqToInst(target) <= 300 and inst:GetDistanceSqToInst(target) >= 25 then
+			if target ~= nil and inst:GetDistanceSqToInst(target) <= 300 and inst:GetDistanceSqToInst(target) >= 50 then
 				inst.sg:GoToState("throw_trap")
 				inst.spitweb = true
 				inst.components.timer:StopTimer("SpitCooldown")
@@ -75,11 +75,11 @@ local function LaunchTrap(inst, target)
 		
 		projectile.Transform:SetPosition(x, y, z)
 		projectile.Physics:ClearCollisionMask()
-		projectile.components.complexprojectile:SetGravity(-30)
+		projectile.components.complexprojectile:SetGravity(-50)
 		projectile.Physics:CollidesWith(COLLISION.WORLD)
 		projectile.Physics:CollidesWith(COLLISION.OBSTACLES)
-		projectile.components.complexprojectile.usehigharc = true
-		projectile.components.complexprojectile:SetHorizontalSpeed(speed + 4)
+		projectile.components.complexprojectile.usehigharc = true --true?
+		projectile.components.complexprojectile:SetHorizontalSpeed(speed + 5)
 		projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 	end
 end

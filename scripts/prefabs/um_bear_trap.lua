@@ -12,6 +12,8 @@ local assets_maxwell =
 }
 
 local function onfinished_normal(inst)
+	inst.DynamicShadow:Enable(false)
+	
 	if inst.deathtask ~= nil then
 		inst.deathtask:Cancel()
 	end
@@ -48,7 +50,7 @@ end
 local function OnExplode(inst, target)
 	inst.Snapped = true
 	inst.SoundEmitter:PlaySound("dontstarve/common/trap_teeth_trigger")
-	inst.SoundEmitter:PlaySound("dontstarve/impacts/impact_metal_armour_sharp")
+	--inst.SoundEmitter:PlaySound("dontstarve/impacts/impact_metal_armour_sharp")
 
     inst.AnimState:PlayAnimation("activate")
     if target then
@@ -159,6 +161,10 @@ local function OnAttacked(inst, worker)
     end
 end
 
+local function calculate_mine_test_time()
+    return TUNING.STARFISH_TRAP_TIMING.BASE + (math.random() * TUNING.STARFISH_TRAP_TIMING.VARIANCE)
+end
+
 local function common_fn()
     local inst = CreateEntity()
 
@@ -167,6 +173,9 @@ local function common_fn()
     inst.entity:AddSoundEmitter()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
+	
+	local shadow = inst.entity:AddDynamicShadow()
+    shadow:SetSize( 1.5, 1 )
 
     MakeInventoryPhysics(inst)
 
@@ -192,6 +201,8 @@ local function common_fn()
 	inst.Snapped = false
 	
     inst:AddComponent("inspectable")
+	
+	inst.SoundEmitter:PlaySound("dontstarve/impacts/impact_metal_armour_blunt")
 
 	--inst:AddComponent("inventoryitem")
 	--inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
@@ -203,6 +214,7 @@ local function common_fn()
     inst.components.mine:SetOnResetFn(OnReset)
     inst.components.mine:SetOnSprungFn(SetSprung)
     inst.components.mine:SetOnDeactivateFn(SetInactive)
+    inst.components.mine:SetTestTimeFn(calculate_mine_test_time)
     inst.components.mine:Reset()
 	
 	inst:AddComponent("health")
@@ -285,9 +297,6 @@ local function projectilefn()
     inst.entity:AddPhysics()
     inst.entity:AddNetwork()
 
-	local shadow = inst.entity:AddDynamicShadow()
-    shadow:SetSize( 1.5, 1 )
-
     inst.AnimState:SetBank("lavaarena_trap_beartrap")
     inst.AnimState:SetBuild("lavaarena_trap_beartrap")
 	inst.AnimState:PushAnimation("idle", false)
@@ -302,7 +311,7 @@ local function projectilefn()
     inst.components.complexprojectile:SetOnHit(OnHitInk)
     inst.components.complexprojectile:SetOnLaunch(onthrown)
     inst.components.complexprojectile:SetHorizontalSpeed(30)
-    inst.components.complexprojectile:SetLaunchOffset(Vector3(3, 2, 0))
+    inst.components.complexprojectile:SetLaunchOffset(Vector3(2, 2, 0))
     inst.components.complexprojectile.usehigharc = false
 
     inst.persists = false
