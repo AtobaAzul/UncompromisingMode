@@ -16,7 +16,7 @@ local function SpitCooldown(inst, data)
 	local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 
 	if data.name == "SpitCooldown" then
-		if inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("attack") then
+		if inst.sg:HasStateTag("busy") then
 			inst.components.timer:StopTimer("SpitCooldown")
 			inst.components.timer:StartTimer("SpitCooldown", 3)
 		else
