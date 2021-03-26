@@ -231,6 +231,7 @@ local function fn()
     inst:AddTag("monster")
     inst:AddTag("hostile")
     inst:AddTag("shadow")
+	inst:AddTag("creepingfear")
     --inst:AddTag("epic")
     inst:AddTag("notraptrigger")
 
