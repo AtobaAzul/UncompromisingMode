@@ -51,7 +51,7 @@ local states = {
 
 		timeline=
         {
-            TimeEvent(20*FRAMES, function(inst)
+            TimeEvent(18*FRAMES, function(inst)
 				local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 			
 				if target ~= nil and target.Transform ~= nil then
