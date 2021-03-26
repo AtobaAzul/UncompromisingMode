@@ -208,4 +208,5 @@ return {
 	"mothermossling",
 	"dragonfly_egg",
 	"um_trap_snare",
+	"um_bear_trap",
 }

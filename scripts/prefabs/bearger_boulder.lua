@@ -86,7 +86,6 @@ end
 local function projectilefn()
     local inst = CreateEntity()
 	
-	
     inst:AddTag("bearger_boulder")
 
     inst.entity:AddTransform()
