@@ -11,7 +11,7 @@ local function onequip(inst, owner)
     inst.components.fueled:StartConsuming()
 	
 	if owner.components.sanity ~= nil then
-        owner.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.4)
+        owner.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.7)
     end
 end
 

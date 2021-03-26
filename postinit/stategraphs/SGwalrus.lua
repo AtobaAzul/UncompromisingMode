@@ -37,6 +37,62 @@ local events=
 }
 
 local states = {
+	State{
+		name = "throw_trap",
+        tags = { "attack", "busy", "canrotate"},
+
+        onenter = function(inst, cb)
+            PlayCreatureSound(inst, "attack")
+            inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_whoosh")
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("pig_take")
+			inst.spitweb = false
+        end,
+
+		timeline=
+        {
+            TimeEvent(20*FRAMES, function(inst)
+				local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
+			
+				if target ~= nil and target.Transform ~= nil then
+					inst:ForceFacePoint(target.Transform:GetWorldPosition())
+				end
+				
+				inst.LaunchTrap(inst, inst.components.combat.target)
+			end),
+        },
+
+        events=
+        {
+			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
+    },
+	
+	State{
+		name = "drop_trap",
+        tags = { "attack", "busy"},
+
+        onenter = function(inst, cb)
+            PlayCreatureSound(inst, "attack")
+            inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_whoosh")
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("pig_pickup")
+			inst.spitweb = false
+        end,
+
+		timeline=
+        {
+            TimeEvent(20*FRAMES, function(inst)
+				local x, y, z = inst.Transform:GetWorldPosition()
+				SpawnPrefab("um_bear_trap").Transform:SetPosition(x, 0, z)
+			end),
+        },
+
+        events=
+        {
+			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
+    },
 
     State{
         name = "counterattack",

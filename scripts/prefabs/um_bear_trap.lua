@@ -20,13 +20,23 @@ local function onfinished_normal(inst)
     inst:RemoveComponent("mine")
     inst.persists = false
     inst.Physics:SetActive(false)
-    inst.AnimState:PushAnimation("death", false)
+	
+	if not inst.Snapped then
+		inst.AnimState:PlayAnimation("activate")
+		inst.AnimState:PushAnimation("death", false)
+	else
+		inst.AnimState:PushAnimation("death", false)
+	end
+	
     inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
     inst:DoTaskInTime(3, inst.Remove)
 	
 	if inst.latchedtarget ~= nil then
+		local pos = Vector3(inst.latchedtarget.Transform:GetWorldPosition())
 		inst.latchedtarget.components.locomotor:RemoveExternalSpeedMultiplier(inst.latchedtarget, "um_bear_trap") 
 		inst.latchedtarget._bear_trap_speedmulttask = nil
+		inst.latchedtarget:RemoveChild(inst)
+		inst.Physics:Teleport(pos.x,pos.y,pos.z) 
 	end
 end
 
@@ -36,6 +46,10 @@ local function debuffremoval(inst)
 end
 
 local function OnExplode(inst, target)
+	inst.Snapped = true
+	inst.SoundEmitter:PlaySound("dontstarve/common/trap_teeth_trigger")
+	inst.SoundEmitter:PlaySound("dontstarve/impacts/impact_metal_armour_sharp")
+
     inst.AnimState:PlayAnimation("activate")
     if target then
 		if inst.deathtask ~= nil then
@@ -43,12 +57,14 @@ local function OnExplode(inst, target)
 		end
 		inst.deathtask = nil
 	
-        inst.SoundEmitter:PlaySound("dontstarve/common/trap_teeth_trigger")
         target.components.combat:GetAttacked(inst, TUNING.TRAP_TEETH_DAMAGE)
 		
 		inst.latchedtarget = target
 		
-        inst.entity:AddFollower():FollowSymbol(target.GUID, target.components.combat.hiteffectsymbol or "body", 0, --[[-50]]0, 0)
+		inst.AnimState:SetFinalOffset(-1)
+		inst.Physics:Teleport(0,0,0)	
+		target:AddChild(inst)
+        --inst.entity:AddFollower():FollowSymbol(target.GUID, target.components.combat.hiteffectsymbol or "body", 0, --[[-50]]0, 0)
 		
 		local debuffkey = inst.prefab
 		
@@ -76,6 +92,7 @@ local function OnExplode(inst, target)
 end
 
 local function OnReset(inst)
+	inst.Snapped = false
     if inst.components.inventoryitem ~= nil then
         inst.components.inventoryitem.nobounce = true
     end
@@ -132,6 +149,16 @@ local function OnHaunt(inst, haunter)
     return false
 end
 
+local function OnAttacked(inst, worker)
+    if not inst.components.health:IsDead() then
+		if inst.Snapped then
+			inst.AnimState:PlayAnimation("hit")
+		else
+			OnExplode(inst, nil)
+		end
+    end
+end
+
 local function common_fn()
     local inst = CreateEntity()
 
@@ -150,6 +177,8 @@ local function common_fn()
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("trap")
+    inst:AddTag("bear_trap")
+    inst:AddTag("mech")
 
         MakeInventoryFloatable(inst)
 
@@ -160,6 +189,7 @@ local function common_fn()
     end
 	
 	inst.latchedtarget = nil
+	inst.Snapped = false
 	
     inst:AddComponent("inspectable")
 
@@ -167,8 +197,8 @@ local function common_fn()
 	--inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
 
     inst:AddComponent("mine")
-    inst.components.mine:SetRadius(TUNING.TRAP_TEETH_RADIUS)
-    inst.components.mine:SetAlignment({ "walrus", "hound" })
+    inst.components.mine:SetRadius(TUNING.TRAP_TEETH_RADIUS * 1.5)
+    inst.components.mine:SetAlignment("walrus", "hound")
     inst.components.mine:SetOnExplodeFn(OnExplode)
     inst.components.mine:SetOnResetFn(OnReset)
     inst.components.mine:SetOnSprungFn(SetSprung)
@@ -180,6 +210,7 @@ local function common_fn()
     inst:ListenForEvent("death", onfinished_normal)
 
     inst:AddComponent("combat")
+    inst:ListenForEvent("attacked", OnAttacked)
 	
     inst:AddComponent("deployable")
     inst.components.deployable.ondeploy = ondeploy
@@ -193,17 +224,32 @@ local function common_fn()
     return inst
 end
 
-local function OnHitInk(inst, attacker, target)
+local function OnHitInk(inst, target)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	
-	SpawnPrefab("antlion_sinkhole_boat").Transform:SetPosition(x, 0, z)
+	inst.trap = SpawnPrefab("um_bear_trap")
+	inst.trap.Transform:SetPosition(x, 0, z)
+	
+    inst:Remove()
+end
+
+local function OnHitTarget(inst, target)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	
+	inst.trap = SpawnPrefab("um_bear_trap")
+	inst.trap.Transform:SetPosition(x, 0, z)
+	if target ~= nil then
+		inst.trap.components.mine:Explode(target)
+	end
 	
     inst:Remove()
 end
 
 local function oncollide(inst, other)
 	local x, y, z = inst.Transform:GetWorldPosition()
-	if other ~= nil and other:IsValid() and other:HasTag("_combat") or y <= inst:GetPhysicsRadius() + 0.001 then
+	if other ~= nil and not other:HasTag("walrus") and not other:HasTag("hound") and other:IsValid() and other:HasTag("_combat") then
+		OnHitTarget(inst, other)
+	elseif y <= inst:GetPhysicsRadius() + 0.001 then
 		OnHitInk(inst, other)
 	end
 end
@@ -231,7 +277,7 @@ end
 local function projectilefn()
     local inst = CreateEntity()
 	
-    inst:AddTag("bearger_boulder")
+    inst:AddTag("bear_trap")
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -244,7 +290,6 @@ local function projectilefn()
 
     inst.AnimState:SetBank("lavaarena_trap_beartrap")
     inst.AnimState:SetBuild("lavaarena_trap_beartrap")
-	inst.AnimState:PlayAnimation("land")
 	inst.AnimState:PushAnimation("idle", false)
 
     inst.entity:SetPristine()
@@ -254,11 +299,10 @@ local function projectilefn()
     end
 
     inst:AddComponent("complexprojectile")
-    inst.components.complexprojectile:SetHorizontalSpeed(15)
-    inst.components.complexprojectile:SetGravity(-20)
-    inst.components.complexprojectile:SetLaunchOffset(Vector3(0, .1, 0))
-    inst.components.complexprojectile:SetOnLaunch(onthrown)
     inst.components.complexprojectile:SetOnHit(OnHitInk)
+    inst.components.complexprojectile:SetOnLaunch(onthrown)
+    inst.components.complexprojectile:SetHorizontalSpeed(30)
+    inst.components.complexprojectile:SetLaunchOffset(Vector3(3, 2, 0))
     inst.components.complexprojectile.usehigharc = false
 
     inst.persists = false
