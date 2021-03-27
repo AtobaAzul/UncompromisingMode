@@ -30,7 +30,7 @@ local function onfinished_normal(inst)
 		inst.AnimState:PushAnimation("death", false)
 	end
 	
-    inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
+    inst.SoundEmitter:PlaySound("dontstarve/common/destroy_stone")
     inst:DoTaskInTime(3, inst.Remove)
 	
 	if inst.latchedtarget ~= nil then
@@ -154,6 +154,7 @@ end
 local function OnAttacked(inst, worker)
     if not inst.components.health:IsDead() then
 		if inst.Snapped then
+			inst.SoundEmitter:PlaySound("dontstarve/impacts/impact_metal_armour_dull")
 			inst.AnimState:PlayAnimation("hit")
 		else
 			OnExplode(inst, nil)
@@ -187,8 +188,8 @@ local function common_fn()
 
     inst:AddTag("trap")
     inst:AddTag("bear_trap")
-    inst:AddTag("mech")
     inst:AddTag("smallcreature")
+    inst:AddTag("mech")
 
 	MakeInventoryFloatable(inst)
 
