@@ -188,8 +188,9 @@ local function common_fn()
     inst:AddTag("trap")
     inst:AddTag("bear_trap")
     inst:AddTag("mech")
+    inst:AddTag("smallcreature")
 
-        MakeInventoryFloatable(inst)
+	MakeInventoryFloatable(inst)
 
     inst.entity:SetPristine()
 
@@ -209,7 +210,7 @@ local function common_fn()
 
     inst:AddComponent("mine")
     inst.components.mine:SetRadius(TUNING.TRAP_TEETH_RADIUS * 1.5)
-    inst.components.mine:SetAlignment("walrus", "hound")
+    inst.components.mine:SetAlignment("bear_trap_immune")
     inst.components.mine:SetOnExplodeFn(OnExplode)
     inst.components.mine:SetOnResetFn(OnReset)
     inst.components.mine:SetOnSprungFn(SetSprung)

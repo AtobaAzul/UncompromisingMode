@@ -21,7 +21,7 @@ local function SpitCooldown(inst, data)
 			inst.components.timer:StartTimer("SpitCooldown", 3)
 		else
 			if target ~= nil and inst:GetDistanceSqToInst(target) <= 300 and inst:GetDistanceSqToInst(target) >= 50 then
-				inst.sg:GoToState("throw_trap")
+				inst.sg:GoToState("throw_trap_pre")
 				inst.spitweb = true
 				inst.components.timer:StopTimer("SpitCooldown")
 				inst.components.timer:StartTimer("SpitCooldown", 15)
