@@ -18,50 +18,67 @@ local EFFECTS =
 
 
 local function speedcheck(inst)
-	print("speedcheck")
 
-	if inst.facing_angle ~= nil then
-		inst.facing_angle_old = inst.facing_angle
+	if inst.binarytoggle == nil then
+		inst.binarytoggle = true
 	end
-	inst.facing_angle = inst.Transform:GetRotation() + 180
-	
-	inst.angleadjustment1 = 0
-	inst.angleadjustment2 = 0
-	
-	if inst.facing_angle_old ~= nil and inst.facing_angle_old < 15 and inst.facing_angle > 345 then
-		inst.angleadjustment1 = 360
-	elseif inst.facing_angle_old ~= nil and inst.facing_angle_old > 345 and inst.facing_angle < 15 then
-		inst.angleadjustment2 = -360
-	end
-	
-	if inst.components.inventory and inst.components.inventory:EquipHasTag("gore_horn") and inst.facing_angle ~= nil and inst.facing_angle_old ~= nil and
-	(inst.facing_angle >= inst.facing_angle_old + inst.angleadjustment2 - 15 and inst.facing_angle <= inst.facing_angle_old + inst.angleadjustment1 + 15)
-	and inst.components.locomotor ~= nil
-	and not inst.components.rider:IsRiding() then
-		if inst.runspeed == nil then
+
+	if inst.binarytoggle ~= nil and inst.binarytoggle then
+		inst.binarytoggle = false
+		print("speedcheck")
+
+		if inst.facing_angle ~= nil then
+			inst.facing_angle_old = inst.facing_angle
+		end
+		inst.facing_angle = inst.Transform:GetRotation() + 180
+		if inst.facing_angle == nil then
+			inst.facing_angle_old = inst.facing_angle
+		end
+
+		inst.angleadjustment1 = 0
+		inst.angleadjustment2 = 0
+		
+		if inst.facing_angle_old ~= nil and inst.facing_angle_old < 15 and inst.facing_angle > 345 then
+			inst.angleadjustment1 = 360
+		elseif inst.facing_angle_old ~= nil and inst.facing_angle_old > 345 and inst.facing_angle < 15 then
+			inst.angleadjustment2 = -360
+		end
+		
+		if inst.components.inventory and inst.components.inventory:EquipHasTag("gore_horn") and inst.facing_angle ~= nil and inst.facing_angle_old ~= nil and
+		(inst.facing_angle >= inst.facing_angle_old + inst.angleadjustment2 - 10 and inst.facing_angle <= inst.facing_angle_old + inst.angleadjustment1 + 10)
+		and inst.components.locomotor ~= nil
+		and not inst.components.rider:IsRiding() then
+			if inst.runspeed == nil then
+				inst.runspeed = 1
+			elseif inst.runspeed ~= nil and inst.runspeed < 2.5 then
+				if inst.facing_angle ~= nil and inst.facing_angle_old ~= nil and (inst.facing_angle >= inst.facing_angle_old + inst.angleadjustment2 - 2 and inst.facing_angle <= inst.facing_angle_old + inst.angleadjustment1 + 2) then
+					inst.runspeed = inst.runspeed + 0.02
+				elseif inst.runspeed > 1 then
+					inst.runspeed = inst.runspeed - 0.02
+				end
+			end
+			
+			if inst.runspeed >= 2.5 and inst.physbox == nil then
+				inst.physbox = SpawnPrefab("gore_horn_physbox")
+				inst.physbox.AnimState:SetFinalOffset(-1)
+				inst.physbox.Physics:Teleport(0,0,0)	
+				inst:AddChild(inst.physbox)
+			end
+			
+			
+			
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/rook_minotaur/pawground", nil, inst.runspeed / 3)
+			inst.components.locomotor:SetExternalSpeedMultiplier(inst, "gore_horn", inst.runspeed)
+		else
+			if inst.physbox ~= nil then
+				inst.physbox:Remove()
+				inst.physbox = nil
+			end
 			inst.runspeed = 1
-			inst.acceleration = 0.005
-		elseif inst.runspeed ~= nil and inst.runspeed < 3 then
-			inst.acceleration = inst.acceleration + 0.005
-			inst.runspeed = inst.runspeed + inst.acceleration
+			inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "gore_horn") 
 		end
-		
-		if inst.runspeed >= 3 and inst.physbox == nil then
-			inst.physbox = SpawnPrefab("gore_horn_physbox")
-			inst.physbox.AnimState:SetFinalOffset(-1)
-			inst.physbox.Physics:Teleport(0,0,0)	
-			inst:AddChild(inst.physbox)
-		end
-		
-		inst.components.locomotor:SetExternalSpeedMultiplier(inst, "gore_horn", inst.runspeed)
 	else
-		if inst.physbox ~= nil then
-			inst.physbox:Remove()
-			inst.physbox = nil
-		end
-		inst.runspeed = 1
-		inst.acceleration = 0
-		inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "gore_horn") 
+		inst.binarytoggle = true
 	end
 end
 	
