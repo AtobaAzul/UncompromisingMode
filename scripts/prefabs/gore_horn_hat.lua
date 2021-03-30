@@ -44,36 +44,69 @@ local function speedcheck(inst)
 			inst.angleadjustment2 = -360
 		end
 		
-		if inst.components.inventory and inst.components.inventory:EquipHasTag("gore_horn") and inst.facing_angle ~= nil and inst.facing_angle_old ~= nil and
+		if inst.components.inventory and inst.components.inventory:EquipHasTag("gore_horn") and inst.sg:HasStateTag("moving") and inst.facing_angle ~= nil and inst.facing_angle_old ~= nil and
 		(inst.facing_angle >= inst.facing_angle_old + inst.angleadjustment2 - 10 and inst.facing_angle <= inst.facing_angle_old + inst.angleadjustment1 + 10)
 		and inst.components.locomotor ~= nil
 		and not inst.components.rider:IsRiding() then
 			if inst.runspeed == nil then
 				inst.runspeed = 1
 			elseif inst.runspeed ~= nil and inst.runspeed < 2.5 then
-				if inst.facing_angle ~= nil and inst.facing_angle_old ~= nil and (inst.facing_angle >= inst.facing_angle_old + inst.angleadjustment2 - 2 and inst.facing_angle <= inst.facing_angle_old + inst.angleadjustment1 + 2) then
-					inst.runspeed = inst.runspeed + 0.02
+				if inst.facing_angle ~= nil and inst.facing_angle_old ~= nil and (inst.facing_angle >= inst.facing_angle_old + inst.angleadjustment2 - 3 and inst.facing_angle <= inst.facing_angle_old + inst.angleadjustment1 + 3) then
+					inst.runspeed = inst.runspeed + 0.025
 				elseif inst.runspeed > 1 then
-					inst.runspeed = inst.runspeed - 0.02
+					inst.runspeed = inst.runspeed - 0.025
 				end
 			end
 			
 			if inst.runspeed >= 2.5 and inst.physbox == nil then
 				inst.physbox = SpawnPrefab("gore_horn_physbox")
-				inst.physbox.AnimState:SetFinalOffset(-1)
-				inst.physbox.Physics:Teleport(0,0,0)	
-				inst:AddChild(inst.physbox)
+				--inst.physbox.AnimState:SetFinalOffset(-1)
+				--inst.physbox.Physics:Teleport(0,0,0)
+				inst.physbox.owner = inst
+				inst.physbox.entity:AddFollower()
+				inst.physbox.Follower:FollowSymbol(inst.GUID, "swap_hat", 0, 80, 0)
+			
+				--inst:AddChild(inst.physbox)
+				inst.SoundEmitter:PlaySound("dontstarve/creatures/rook_nightmare/charge_LP", "gorehorn")	
 			end
 			
+			--[[if inst.runspeed < 0.25 and inst.task ~= nil then
+				inst.task:Cancel()
+				inst.task = nil
+			end]]
 			
-			
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/rook_minotaur/pawground", nil, inst.runspeed / 3)
+			--inst.SoundEmitter:SetParameter("gorehorn", "intensity", inst.runspeed / 2.5)
+			if inst.task == nil then
+				inst.task = inst:DoPeriodicTask(0.27, function(inst) 
+					inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/steam", nil, inst.runspeed / 2.5) 
+					if inst.runspeed > 2.3 then
+						SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
+					end
+					
+					--[[if not inst.sg:HasStateTag("moving") then
+						inst.task:Cancel()
+						inst.task = nil
+					end]]
+				end)
+			end
+			--inst.SoundEmitter:KillSound("gorecharge")
+            --inst.SoundEmitter:PlaySound("dontstarve/creatures/rook_nightmare/charge_LP", "gorecharge", inst.runspeed / 2.5)
+			--inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/steam", nil, inst.runspeed / 2.5)
 			inst.components.locomotor:SetExternalSpeedMultiplier(inst, "gore_horn", inst.runspeed)
 		else
 			if inst.physbox ~= nil then
-				inst.physbox:Remove()
+				inst.physbox.AnimState:PlayAnimation("close")
+				inst.physbox:DoTaskInTime(0.3, inst.Remove)
 				inst.physbox = nil
+				inst.SoundEmitter:KillSound("gorehorn")
 			end
+            --inst.SoundEmitter:KillSound("gorecharge")
+			if inst.task ~= nil then
+				inst.task:Cancel()
+				inst.task = nil
+				inst.SoundEmitter:KillSound("gorehorncharge")
+			end
+			
 			inst.runspeed = 1
 			inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "gore_horn") 
 		end
@@ -161,10 +194,55 @@ end
         return inst
     end
 	
-	local function oncollide(inst, other)
-		if other ~= nil and not other:HasTag("player") and other:IsValid() then
-			SpawnPrefab("explode_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
-			inst:Remove()
+	local function ClearRecentlyCharged(inst, other)
+		inst.recentlycharged[other] = nil
+	end
+	
+	local function onothercollide(inst, other)
+		if not other:IsValid() or inst.recentlycharged[other] then
+			return
+		elseif other:HasTag("smashable") and other.components.health ~= nil then
+			--other.Physics:SetCollides(false)
+			other.components.health:Kill()
+			ShakeAllCameras(CAMERASHAKE.SIDE, .5, .05, .1, inst, 40)
+		elseif other.components.workable ~= nil
+			and other.components.workable:CanBeWorked()
+			and other.components.workable.action ~= ACTIONS.NET then
+			SpawnPrefab("collapse_small").Transform:SetPosition(other.Transform:GetWorldPosition())
+			other.components.workable:Destroy(inst)
+			ShakeAllCameras(CAMERASHAKE.SIDE, .5, .05, .1, inst, 40)
+			if other:IsValid() and other.components.workable ~= nil and other.components.workable:CanBeWorked() then
+				inst.recentlycharged[other] = true
+				inst:DoTaskInTime(3, ClearRecentlyCharged, other)
+			end
+		elseif other.components.health ~= nil and not other.components.health:IsDead() then
+			inst.recentlycharged[other] = true
+			inst:DoTaskInTime(3, ClearRecentlyCharged, other)
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
+            other.components.combat:GetAttacked(inst, 50, nil)
+			ShakeAllCameras(CAMERASHAKE.SIDE, .5, .05, .1, inst, 40)
+		end
+	end
+	
+	--[[local function oncollide(inst, other)
+		if not (other ~= nil and other:IsValid() and inst:IsValid())
+			or inst.recentlycharged[other]
+			or other:HasTag("player") then
+			--or Vector3(inst.Physics:GetVelocity()):LengthSq() < 42 then
+			return
+		end
+		ShakeAllCameras(CAMERASHAKE.SIDE, .5, .05, .1, inst, 40)
+		inst:DoTaskInTime(2 * FRAMES, onothercollide, other)
+	end]]
+	
+	local NOTAGS = { "fx", "INLIMBO", "shadow", "player" }
+	local function oncollide(inst)
+		if inst.owner ~= nil then
+			local x, y, z = inst.owner.Transform:GetWorldPosition()
+			local ents = TheSim:FindEntities(x, y, z, 3, nil, NOTAGS)
+			for i, v in ipairs(ents) do
+				onothercollide(inst, v)
+			end
 		end
 	end
 
@@ -176,17 +254,23 @@ end
 		inst.entity:AddPhysics()
         inst.entity:AddNetwork()
 		
-		inst.AnimState:SetBank("hardshelltacos")
-		inst.AnimState:SetBuild("hardshelltacos")
-		inst.AnimState:PlayAnimation("idle")
-		inst:AddTag("NOCLICK")
+		inst.AnimState:SetBank("forcefield")
+		inst.AnimState:SetBuild("forcefield")
+		inst.AnimState:PlayAnimation("open")
+		inst.AnimState:PushAnimation("idle_loop", true)
+		
+		--MakeCharacterPhysics(inst, 50, 1.5)
 
-		inst.Physics:SetCollisionGroup(COLLISION.ITEMS)
-		inst:SetPhysicsRadiusOverride(3)
+		--[[inst.Physics:SetCollisionGroup(COLLISION.ITEMS)
+		inst.Physics:ClearCollisionMask()
+		inst:SetPhysicsRadiusOverride(10)
 		inst.Physics:CollidesWith(COLLISION.OBSTACLES)
 		inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+		inst.Physics:SetCapsule(1.5, 1.5)]]
 
-        inst:AddTag("fx")
+		--inst:AddTag("fx")
+		
+		inst:AddTag("NOCLICK")
 
         inst.entity:SetPristine()
 
@@ -194,8 +278,17 @@ end
             return inst
         end
 
+		--[[inst:AddComponent("locomotor")
+		inst.recentlycharged = {}
 		inst.Physics:SetCollisionCallback(oncollide)
-
+		inst:ListenForEvent("on_collide", oncollide)]]
+		
+		inst.owner = nil
+		
+		inst.recentlycharged = {}
+		inst:DoPeriodicTask(0.2, oncollide)
+		
+		
 		inst.persists = false
 
         return inst
