@@ -269,7 +269,7 @@ end
 		inst.recentlycharged[other] = nil
 	end
 	
-	local function onothercollide(inst, other)
+	local function onothercollide(inst, other,owner)
 		if not other:IsValid() or inst.recentlycharged[other] then
 			return
 		elseif other:HasTag("smashable") and other.components.health ~= nil then
@@ -287,7 +287,7 @@ end
 			and other.components.workable:CanBeWorked()
 			and other.components.workable.action ~= ACTIONS.NET then
 			SpawnPrefab("collapse_small").Transform:SetPosition(other.Transform:GetWorldPosition())
-			other.components.workable:Destroy(inst)
+			other.components.workable:Destroy(owner)
 			if other:IsValid() and other.components.workable ~= nil and other.components.workable:CanBeWorked() then
 				inst.recentlycharged[other] = true
 				inst:DoTaskInTime(3, ClearRecentlyCharged, other)
@@ -305,7 +305,7 @@ end
 			inst.recentlycharged[other] = true
 			inst:DoTaskInTime(3, ClearRecentlyCharged, other)
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
-            other.components.combat:GetAttacked(inst, 100, nil)
+            other.components.combat:GetAttacked(owner, 100,nil)
 			
 			ShakeAllCameras(CAMERASHAKE.SIDE, .5, .05, .1, inst, 40)
 			
@@ -324,7 +324,7 @@ end
 			local x, y, z = inst.owner.Transform:GetWorldPosition()
 			local ents = TheSim:FindEntities(x, y, z, 3, nil, NOTAGS)
 			for i, v in ipairs(ents) do
-				onothercollide(inst, v)
+				onothercollide(inst, v,inst.owner)
 			end
 		end
 	end
