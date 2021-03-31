@@ -155,10 +155,8 @@ local function EnrageAttackBank(inst,data)
                         end
                     end
                 end
-                if inst.components.health:GetPercent() <= 0.5 and isfrozen or not (shouldfreeze or inst.components.timer:TimerExists("laserbeam_cd")) then
-                    inst.sg:GoToState("laserbeam_blue", target)
-                elseif isfrozen or not (shouldfreeze or inst.components.timer:TimerExists("laserbeam_cd")) then
-                    inst.sg:GoToState("laserbeam", target)
+                if inst.components.health:GetPercent() <= 0.5 and (isfrozen or not (shouldfreeze or inst.components.timer:TimerExists("laserbeam_cd"))) then
+					inst.sg:GoToState("laserbeam_blue", target)
                 else
                     inst.sg:GoToState("attack")
                 end
@@ -178,8 +176,17 @@ local function CanSpawnSpikeAt(pos, size)
     end
     return true
 end
-local function SpawnBlock(inst, x, z)
+local function SpawnBlock(inst, x, z, cracked)
 	local blockade = SpawnPrefab("deerclops_barrier")
+	if cracked == true then
+	blockade:AddTag("cracked")
+    blockade.AnimState:PlayAnimation("form_cracked")
+    blockade.AnimState:PushAnimation("full_cracked")
+	blockade.components.workable:SetWorkLeft(2)
+	else
+    blockade.AnimState:PlayAnimation("form")
+    blockade.AnimState:PushAnimation("full")	
+	end
     blockade.Transform:SetPosition(x, 0, z)
 	blockade:DoTaskInTime(17,function(blockade) 
 	if blockade.components.workable ~= nil and blockade.components.workable.workleft > 0 then 
@@ -192,16 +199,38 @@ local function SpawnBlocks(inst, pos, count)
     if count > 0 then
         local dtheta = PI * 2 / count
         local thetaoffset = math.random() * PI * 2
+		inst.blockrun = 0
+		inst.crackblocks = 0
         for theta = math.random() * dtheta, PI * 2, dtheta do
+		inst.blockrun = inst.blockrun+1
             local offset = FindWalkableOffset(pos, theta + thetaoffset, 8 + math.random(), 3, false, true,
                 function(pt)
                     return CanSpawnSpikeAt(pt, "block")
                 end)
             if offset ~= nil then
+			local blockcrack = false
+				if inst.blockrun > 5 and inst.crackblocks <= 2 then
+				if math.random() > 0.75 then
+				blockcrack = true
+				else
+				blockcrack = false
+				end
+				else
+				blockcrack = true 
+				end
+				if inst.blockrun > 10 and inst.crackblocks <= 4 then
+				if math.random() > 0.75 then
+				blockcrack = true
+				else
+				blockcrack = false
+				end
+				else
+				blockcrack = true
+				end
                 if theta < dtheta then
-                    SpawnBlock(inst, pos.x + offset.x, pos.z + offset.z)
+                    SpawnBlock(inst, pos.x + offset.x, pos.z + offset.z,blockcrack)	
                 else
-                    inst:DoTaskInTime(math.random() * .5, SpawnBlock, pos.x + offset.x, pos.z + offset.z)
+                    inst:DoTaskInTime(math.random() * .5, SpawnBlock, pos.x + offset.x, pos.z + offset.z,blockcrack)
                 end
             end
         end

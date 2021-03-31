@@ -3,6 +3,17 @@ local function Melt(inst)
 inst._puddle.AnimState:PlayAnimation("dryup")
 end
 local function OnWorked(inst, worker, workleft)
+	if inst:HasTag("cracked") then
+	if workleft == 1 then
+	inst.AnimState:PlayAnimation("weak_cracked")
+	end
+    if workleft <= 0 then
+            inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/iceboulder_smash")
+			inst.AnimState:PlayAnimation("break")
+			inst.Physics:ClearCollisionMask()
+			inst:DoTaskInTime(4,function(inst) ErodeAway(inst) end)
+    end
+	else
 	if workleft > 4 then
 	inst.AnimState:PlayAnimation("full")
 	end
@@ -18,22 +29,36 @@ local function OnWorked(inst, worker, workleft)
 			inst.Physics:ClearCollisionMask()
 			inst:DoTaskInTime(4,function(inst) ErodeAway(inst) end)
     end
+	end
 end
 local function RemoveIt(inst)
 	if inst.components.workable ~= nil then
-		if inst.components.workable.workleft > 4 then
-		inst.AnimState:PlayAnimation("melt_full")
+		if inst:HasTag("cracked") then
+			if inst.components.workable.workleft == 2 then
+			inst.AnimState:PlayAnimation("melt_full_cracked")
+			end
+			if inst.components.workable.workleft == 1 then
+			inst.AnimState:PlayAnimation("melt_weak_cracked")
+			end	
+			inst:RemoveComponent("workable")
+			inst.Physics:ClearCollisionMask()
+			inst.AnimState:PushAnimation("break")
+			inst:DoTaskInTime(4,function(inst) ErodeAway(inst) end)
+		else
+			if inst.components.workable.workleft > 4 then
+			inst.AnimState:PlayAnimation("melt_full")
+			end
+			if inst.components.workable.workleft <= 4 and inst.components.workable.workleft >= 2 then
+			inst.AnimState:PlayAnimation("melt_med")
+			end
+			if inst.components.workable.workleft < 2 then
+			inst.AnimState:PlayAnimation("melt_weak")
+			end
+			inst:RemoveComponent("workable")
+			inst.Physics:ClearCollisionMask()
+			inst.AnimState:PushAnimation("break")
+			inst:DoTaskInTime(4,function(inst) ErodeAway(inst) end)
 		end
-		if inst.components.workable.workleft <= 4 and inst.components.workable.workleft >= 2 then
-		inst.AnimState:PlayAnimation("melt_med")
-		end
-		if inst.components.workable.workleft < 2 then
-		inst.AnimState:PlayAnimation("melt_weak")
-		end
-		inst:RemoveComponent("workable")
-		inst.Physics:ClearCollisionMask()
-		inst.AnimState:PushAnimation("break")
-		inst:DoTaskInTime(4,function(inst) ErodeAway(inst) end)
 	else
 		inst.Physics:ClearCollisionMask()
 		inst.AnimState:PlayAnimation("break")
@@ -66,16 +91,17 @@ local function rock_ice_fn()
             return inst
         end
 
-
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.MINE)
-    inst.components.workable:SetWorkLeft(6)
+	--inst:AddTag("cracked")
+    --inst.AnimState:PlayAnimation("form_cracked")
+    --inst.AnimState:PushAnimation("full_cracked")
+    --inst.components.workable:SetWorkLeft(2)
 
     inst.components.workable:SetOnWorkCallback(OnWorked)
 	inst.persists = false
     inst:AddComponent("inspectable")
-    inst.AnimState:PlayAnimation("form")
-    inst.AnimState:PushAnimation("full")
+
 	inst.RemoveIt = RemoveIt
     MakeSnowCovered(inst)
 

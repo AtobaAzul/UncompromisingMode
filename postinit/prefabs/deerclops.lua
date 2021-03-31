@@ -101,7 +101,7 @@ end
 
 local function MakeEnrageable(inst)
 inst:AddComponent("healthtrigger")
-inst.components.health:SetMaxHealth(4400)
+inst.components.health:SetMaxHealth(4000)
 inst.components.healthtrigger:AddTrigger(PHASE2_HEALTH, EnterPhase2Trigger)
 inst.upgrade = "enrage_mutation"
 end
@@ -114,7 +114,7 @@ inst:RemoveComponent("healthtrigger")      --Bandaid fix to attempt to correct t
 end
 end
 local function MakeIcey(inst)
-inst.components.health:SetMaxHealth(4250)
+inst.components.health:SetMaxHealth(3500)
 inst.upgrade = "ice_mutation"
 if inst.components.freezable ~= nil then
 inst:RemoveComponent("freezable")
@@ -173,8 +173,7 @@ local function OnLoad(inst, data)
     if data then
 		if data.upgrade == nil then
 		ChooseUpgrades(inst)
-		else
-		
+		else	
 			if data.upgrade == "enrage_mutation" then
 			MakeEnrageable(inst)
 			end

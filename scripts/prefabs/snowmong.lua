@@ -94,7 +94,7 @@ end
 
 local function Retarget(inst)
     local targetDist = 30
-    local notags = {"FX", "NOCLICK","INLIMBO", "playerghost", "shadowcreature","webbedcreature"}
+    local notags = {"FX", "NOCLICK","INLIMBO", "playerghost", "shadowcreature","webbedcreature","wall"}
     return FindEntity(inst, targetDist, 
         function(guy) 
             if inst.components.combat:CanTarget(guy)
