@@ -330,6 +330,7 @@ Assets = {
 	Asset("ANIM", "anim/dragonfly_egg.zip"),
 	Asset("ANIM", "anim/dragonfly_charge_attack.zip"),
 	Asset("ANIM", "anim/um_trap_snare.zip"),
+	Asset("ANIM", "anim/um_bear_trap.zip"),
 	
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_closed_lazy"),
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_lazy"),

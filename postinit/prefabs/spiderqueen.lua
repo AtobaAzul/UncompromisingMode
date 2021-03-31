@@ -64,7 +64,7 @@ end
 local function SpitCooldown(inst, data)
 	local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 	
-	if data.name == "SpitCooldown" and target ~= nil and target.components.pinnable ~= nil and inst:GetDistanceSqToInst(target) <= 200 then
+	if data.name == "SpitCooldown" and target ~= nil and target.components.pinnable ~= nil and inst:GetDistanceSqToInst(target) <= 300 and inst:GetDistanceSqToInst(target) >= 25 then
 		if not inst.sg:HasStateTag("busy") then
 			inst.sg:GoToState("give_off_cob_web")
 			inst.spitweb = true

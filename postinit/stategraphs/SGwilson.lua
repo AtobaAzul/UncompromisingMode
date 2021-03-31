@@ -33,11 +33,11 @@ local actionhandlers =
 }
 
 local _OldIdleState = inst.states["idle"].onenter
-    inst.states["idle"].onenter = function(inst, pushanim)
-            _OldIdleState(inst, pushanim)
-           if inst.wantstosneeze then
-                    inst.sg:GoToState("sneeze")
-            end
+	inst.states["idle"].onenter = function(inst, pushanim)
+		_OldIdleState(inst, pushanim)
+		if inst.wantstosneeze then
+			inst.sg:GoToState("sneeze")
+		end
     end
 
 local states = {
