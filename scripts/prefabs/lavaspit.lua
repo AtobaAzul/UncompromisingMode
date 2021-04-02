@@ -35,7 +35,15 @@ local function TrySlowdown(inst, target)
 	end
 	target._lavavomit_speedmulttask = target:DoTaskInTime(0.6, function(i) i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) i._lavavomit_speedmulttask = nil end)
 
-	target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.4)
+	target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.3)
+	
+	if inst.components.propagator ~= nil and target.components.combat ~= nil and target.components.health ~= nil and not target.components.health:IsDead() then
+		target.components.health:DoDelta(-2)
+		if inst.lobber ~= nil then
+			target.components.combat:SuggestTarget(inst.lobber)
+		end
+		SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(target.Transform:GetWorldPosition())
+	end
 end
 
 local function DoAreaSlow(inst)
@@ -71,16 +79,18 @@ local function fn(Sim)--Sim
     light:Enable(false)
     light:SetColour(200/255, 100/255, 170/255)
     fade_in(inst)
-	--[[]]
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
+	
     inst.AnimState:PlayAnimation("dump")
     inst.AnimState:PushAnimation("idle_loop")
     inst.AnimState:SetBloomEffectHandle( "shaders/anim.ksh" )
+	
+	inst.Transform:SetScale(1.1, 1.1, 1.1)
+	
+    inst.entity:SetPristine()
+	--[[]]
+    if not TheWorld.ismastersim then
+        return inst
+    end
 
     MakeLargePropagator(inst)
     inst.components.propagator.heatoutput = 24
@@ -88,7 +98,7 @@ local function fn(Sim)--Sim
     inst.components.propagator:Flash()
     inst.components.propagator:StartSpreading()
 	
-	inst.coolingtime = 4
+	inst.coolingtime = 5
 		
     inst.cooltask = inst:DoTaskInTime(inst.coolingtime, function(inst) 
     	inst.AnimState:PushAnimation("cool", false)
@@ -140,7 +150,7 @@ local function fn(Sim)--Sim
 	
     inst:AddComponent("aura")
     inst.components.aura.radius = 3
-    inst.components.aura.tickperiod = TUNING.TOADSTOOL_SPORECLOUD_TICK
+    inst.components.aura.tickperiod = 0.6
     inst.components.aura.auraexcludetags = AURA_EXCLUDE_TAGS
     inst.components.aura:Enable(true)
 
@@ -160,6 +170,8 @@ local function slobberfn()
         return inst
     end
 	
+	inst.lobber = nil
+	
 	inst.coolingtime = 8
 
     return inst
@@ -167,7 +179,9 @@ end
 
 local function OnHitInk(inst, attacker, target)
 	local x, y, z = inst.Transform:GetWorldPosition()
-	SpawnPrefab("lavaspit_slobber").Transform:SetPosition(x, 0, z)
+	local lavaspit = SpawnPrefab("lavaspit_slobber")
+	lavaspit.Transform:SetPosition(x, 0, z)
+	lavaspit.lobber = inst.lobber
     inst:Remove()
 end
 
@@ -219,6 +233,8 @@ local function projectilefn()
     if not TheWorld.ismastersim then
         return inst
     end
+	
+	inst.lobber = nil
 
     inst:AddComponent("complexprojectile")
     inst.components.complexprojectile:SetHorizontalSpeed(15)

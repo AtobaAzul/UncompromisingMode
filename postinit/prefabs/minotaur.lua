@@ -69,6 +69,9 @@ env.AddPrefabPostInit("minotaur", function(inst)
 	
 	inst:AddComponent("timer")
 	
+	inst:AddComponent("vetcurselootdropper")
+	inst.components.vetcurselootdropper.loot = "gore_horn_hat"
+	
 	inst:AddComponent("groundpounder")
     inst.components.groundpounder.destroyer = true
     inst.components.groundpounder.damageRings = 3

@@ -529,6 +529,9 @@ local function fn(Sim)
     inst:ListenForEvent("freeze", OnFreeze)
     inst:ListenForEvent("unfreeze", OnUnfreeze)
 	
+	inst:AddComponent("vetcurselootdropper")
+	inst.components.vetcurselootdropper.loot = "slobberlobber"
+	
 	inst:DoTaskInTime(10, CheckTarget)
 
     inst.SeenBase = false
