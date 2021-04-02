@@ -3,6 +3,8 @@ local assets=
 	Asset("ANIM", "anim/lava_vomit.zip"),
 }
 
+local AURA_EXCLUDE_TAGS = { "player", "playerghost", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "invisible" }
+
 local function OnLoad(inst, data)
 	inst:Remove()
 end
@@ -25,10 +27,33 @@ local function fade_out(inst)
     inst.components.fader:Fade(INTENSITY, 0, 5*FRAMES, function(v) inst.Light:SetIntensity(v) end, function() inst.Light:Enable(false) end)
 end
 
-local function fn(Sim)
+local function TrySlowdown(inst, target)
+	local debuffkey = inst.prefab
+		
+	if target._lavavomit_speedmulttask ~= nil then
+		target._lavavomit_speedmulttask:Cancel()
+	end
+	target._lavavomit_speedmulttask = target:DoTaskInTime(0.6, function(i) i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) i._lavavomit_speedmulttask = nil end)
+
+	target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.4)
+end
+
+local function DoAreaSlow(inst)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x, y, z, inst.components.aura.radius, nil, AURA_EXCLUDE_TAGS)
+    for i, v in ipairs(ents) do
+		if v.components ~= nil and v.components.locomotor ~= nil then
+			TrySlowdown(inst, v)
+		end
+    end
+end
+
+local function fn(Sim)--Sim
 	local inst = CreateEntity()
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
+	inst.entity:AddLight()
+    inst.entity:AddNetwork()
 
     inst.AnimState:SetBank("lava_vomit")
     inst.AnimState:SetBuild("lava_vomit")
@@ -39,8 +64,6 @@ local function fn(Sim)
     -- inst.AnimState:SetSortOrder( 3 )
     
     inst:AddComponent("fader")
-	inst.entity:AddLight()
-    inst.entity:AddNetwork()
     local light = inst.entity:AddLight()
     light:SetFalloff(.5)
     light:SetIntensity(INTENSITY)
@@ -48,13 +71,13 @@ local function fn(Sim)
     light:Enable(false)
     light:SetColour(200/255, 100/255, 170/255)
     fade_in(inst)
-	--[[
+	--[[]]
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-]]
+
     inst.AnimState:PlayAnimation("dump")
     inst.AnimState:PushAnimation("idle_loop")
     inst.AnimState:SetBloomEffectHandle( "shaders/anim.ksh" )
@@ -64,15 +87,39 @@ local function fn(Sim)
     inst.components.propagator.decayrate = 0
     inst.components.propagator:Flash()
     inst.components.propagator:StartSpreading()
-
-    inst.cooltask = inst:DoTaskInTime(3, function(inst) 
+	
+	inst.coolingtime = 4
+		
+    inst.cooltask = inst:DoTaskInTime(inst.coolingtime, function(inst) 
     	inst.AnimState:PushAnimation("cool", false)
     	fade_out(inst)
         inst:DoTaskInTime(4*FRAMES, function(inst)
             inst.AnimState:ClearBloomEffectHandle()
         end)
     end)
-    inst:ListenForEvent("animqueueover", function(inst)
+	
+     inst.cooltask2 = inst:DoTaskInTime(inst.coolingtime, function(inst)
+   		inst.AnimState:SetPercent("cool", 1)
+        if inst.components.propagator then 
+            inst.components.propagator:StopSpreading()
+            inst:RemoveComponent("propagator") 
+        end
+        inst.cooled = true
+		
+		if not inst.components.colortweener then
+			inst:AddComponent("colourtweener")
+		end
+		
+		inst.cooltask3 = inst:DoTaskInTime(4, function(inst)
+			inst:RemoveComponent("unevenground")
+			inst._spoiltask = nil
+		end)
+		
+		
+        inst.components.colourtweener:StartTween({0,0,0,0}, 7, function(inst) inst:Remove() end)
+    end)
+	
+    --[[inst:ListenForEvent("animqueueover", function(inst)
    		inst.AnimState:SetPercent("cool", 1)
         if inst.components.propagator then 
             inst.components.propagator:StopSpreading()
@@ -81,10 +128,24 @@ local function fn(Sim)
         inst.cooled = true
         inst:AddComponent("colourtweener")
         inst.components.colourtweener:StartTween({0,0,0,0}, 7, function(inst) inst:Remove() end)
-    end)
+    end)]]
       
     inst:AddComponent("inspectable")
     inst.components.inspectable.getstatus = GetStatus
+	
+    inst.slowed_objects = {}
+	
+    inst:AddComponent("unevenground")
+    inst.components.unevenground.radius = 2
+	
+    inst:AddComponent("aura")
+    inst.components.aura.radius = 3
+    inst.components.aura.tickperiod = TUNING.TOADSTOOL_SPORECLOUD_TICK
+    inst.components.aura.auraexcludetags = AURA_EXCLUDE_TAGS
+    inst.components.aura:Enable(true)
+
+    inst._spoiltask = inst:DoPeriodicTask(inst.components.aura.tickperiod, DoAreaSlow, inst.components.aura.tickperiod * .5)
+
     inst.cooled = false
 
     inst.OnLoad = OnLoad
@@ -92,4 +153,107 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab( "common/objects/lavaspit", fn, assets)
+local function slobberfn()
+    local inst = fn()
+	
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.coolingtime = 8
+
+    return inst
+end
+
+local function OnHitInk(inst, attacker, target)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	SpawnPrefab("lavaspit_slobber").Transform:SetPosition(x, 0, z)
+    inst:Remove()
+end
+
+local function oncollide(inst, other)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	if y <= inst:GetPhysicsRadius() + 0.001 then
+		OnHitInk(inst, other)
+	end
+end
+
+local function onthrown(inst)
+    inst:AddTag("NOCLICK")
+    inst.persists = false
+    inst.AnimState:SetBank("lava_spitball")
+    inst.AnimState:SetBuild("lava_spitball")
+    inst.AnimState:PlayAnimation("spin_loop", true)
+
+	inst.Transform:SetScale(1.1, 1.1, 1.1)
+	
+    inst.Physics:SetMass(1)
+    inst.Physics:SetFriction(10)
+    inst.Physics:SetDamping(5)
+    inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
+    inst.Physics:ClearCollisionMask()
+    inst.Physics:CollidesWith(COLLISION.WORLD)
+    inst.Physics:SetCapsule(0.02, 0.02)
+	
+    inst.Physics:SetCollisionCallback(oncollide)
+end
+
+local function projectilefn()
+    local inst = CreateEntity()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddPhysics()
+    inst.entity:AddNetwork()
+
+	local shadow = inst.entity:AddDynamicShadow()
+    shadow:SetSize( 1.5, 1 )
+
+    inst.AnimState:SetBank("lava_spitball")
+    inst.AnimState:SetBuild("lava_spitball")
+    inst.AnimState:PlayAnimation("spin_loop")
+    inst.AnimState:SetBloomEffectHandle( "shaders/anim.ksh" )
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst:AddComponent("complexprojectile")
+    inst.components.complexprojectile:SetHorizontalSpeed(15)
+    inst.components.complexprojectile:SetGravity(-20)
+    inst.components.complexprojectile:SetLaunchOffset(Vector3(0, 1, 0))
+    inst.components.complexprojectile:SetOnLaunch(onthrown)
+    inst.components.complexprojectile:SetOnHit(OnHitInk)
+    inst.components.complexprojectile.usehigharc = false
+
+    inst.persists = false
+
+    inst:AddComponent("locomotor")
+
+	--inst:DoTaskInTime(0.1, function(inst) inst:DoPeriodicTask(0, TestProjectileLand) end)
+
+    return inst
+end
+
+local function projectiletargetfn()
+    local inst = CreateEntity()
+    inst.entity:AddTransform()
+    inst.entity:AddNetwork()
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst.persists = false
+
+    return inst
+end
+
+return Prefab( "lavaspit", fn, assets),
+		Prefab( "lavaspit_slobber", slobberfn, assets),
+		Prefab("lavaspit_projectile", projectilefn),
+		Prefab("lavaspit_target", projectiletargetfn)
