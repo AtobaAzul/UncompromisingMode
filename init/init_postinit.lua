@@ -129,6 +129,7 @@ local prefab_post = {
 	"armor_dragonfly",
 	"evergreen_stump",
 	--"bundle",
+	"eyebrella",
 }
 
 local stategraph_post = {
