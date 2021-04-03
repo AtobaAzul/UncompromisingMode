@@ -32,7 +32,7 @@ end
 
 local function fuelme(inst)
 	if inst.components.fueled:GetPercent() < 1 then
-		inst.components.fueled:DoDelta(10)
+		inst.components.fueled:DoDelta(5)
 		if inst.components.fueled:GetPercent() >= 1 then
 			inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/angry", nil, 0.6)
 

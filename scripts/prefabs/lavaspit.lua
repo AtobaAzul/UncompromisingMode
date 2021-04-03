@@ -35,7 +35,7 @@ local function TrySlowdown(inst, target)
 	end
 	target._lavavomit_speedmulttask = target:DoTaskInTime(0.6, function(i) i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) i._lavavomit_speedmulttask = nil end)
 
-	target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.3)
+	target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.4)
 	
 	if inst.components.propagator ~= nil and target.components.combat ~= nil and target.components.health ~= nil and not target.components.health:IsDead() then
 		target.components.health:DoDelta(-2)
@@ -187,7 +187,7 @@ end
 
 local function oncollide(inst, other)
 	local x, y, z = inst.Transform:GetWorldPosition()
-	if y <= inst:GetPhysicsRadius() + 0.001 then
+	if other ~= nil and other:IsValid() and other:HasTag("_combat") and not other:HasTag("player") or y <= inst:GetPhysicsRadius() + 0.001 then
 		OnHitInk(inst, other)
 	end
 end
@@ -204,9 +204,11 @@ local function onthrown(inst)
     inst.Physics:SetMass(1)
     inst.Physics:SetFriction(10)
     inst.Physics:SetDamping(5)
-    inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
+    inst.Physics:SetCollisionGroup(COLLISION.OBSTACLES)
     inst.Physics:ClearCollisionMask()
     inst.Physics:CollidesWith(COLLISION.WORLD)
+    inst.Physics:CollidesWith(COLLISION.GIANTS)
+    inst.Physics:CollidesWith(COLLISION.CHARACTERS)
     inst.Physics:SetCapsule(0.02, 0.02)
 	
     inst.Physics:SetCollisionCallback(oncollide)

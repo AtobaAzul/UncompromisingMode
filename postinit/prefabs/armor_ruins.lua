@@ -17,7 +17,7 @@ local function onequip(inst, owner)
     inst:ListenForEvent("blocked", OnBlocked, owner)
 	
     if owner.components.sanity ~= nil then
-        owner.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.4)
+        owner.components.sanity.neg_aura_modifiers:SetModifier(inst, 0.6)
     end
 end
 

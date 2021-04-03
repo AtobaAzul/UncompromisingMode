@@ -94,14 +94,16 @@ end
 
 local function DayBreak(mob)
 	
-	if not mob:HasTag("shadow") and not mob:HasTag("shadowchesspiece") and not mob:HasTag("shadowteleporter") then
+	--[[if not mob:HasTag("shadow") and not mob:HasTag("shadowchesspiece") and not mob:HasTag("shadowteleporter") then
 		local smoke = SpawnPrefab("thurible_smoke")
 		if smoke ~= nil then
 			smoke.entity:SetParent(mob.entity)
 		end
-	end
+	end]]
 	
 	mob.AnimState:SetHaunted(true)
+	
+	mob.AnimState:SetMultColour(0, 0, 0, 0.5)
 	
 	mob.persists = false
 	
@@ -216,7 +218,8 @@ local function SpawnEyePlants(player)
 			if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 				eyeplant.Transform:SetPosition(x1, y, z1)
 				eyeplant:DoTaskInTime(0, function(eyeplant) DayBreak(eyeplant) end)
-				eyeplant.components.combat:SetTarget(player)
+				eyeplant.sg:GoToState("spawn")
+				eyeplant:AddTag("planted")
 			else
 				player:DoTaskInTime(0.1, function(player) SpawnEyePlants(player) end)
 			end
@@ -285,7 +288,7 @@ local days_survived = player.components.age ~= nil and player.components.age:Get
 	
 		player:DoTaskInTime(10 * math.random() + 3, function()
 			local level = PlayerScaling(player)
-			for i = 1, level do
+			for i = 1, level * 3 do
 				SpawnEyePlants(player)
 			end
 			print("leifattackfailed")
@@ -489,6 +492,7 @@ local function SpawnBats(player)
 					local bat = SpawnPrefab("bat")
 					bat.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
 					bat:PushEvent("fly_back")
+					bat:DoTaskInTime(0, function(bat) DayBreak(bat) end)
 				end)
 			end
 		else
@@ -502,6 +506,7 @@ local function SpawnBats(player)
 					local bat = SpawnPrefab("vampirebat")
 					bat.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
 					bat:PushEvent("fly_back")
+					bat:DoTaskInTime(0, function(bat) DayBreak(bat) end)
 				end)
 			end
 		end
@@ -525,6 +530,7 @@ local function SpawnBaseBats(player)
 					local bat = SpawnPrefab("bat")
 					bat.Transform:SetPosition(x + math.random(-10,12), y, z + math.random(-10,12))
 					bat:PushEvent("fly_back")
+					bat:DoTaskInTime(0, function(bat) DayBreak(bat) end)
 				end)
 			end
 		else
@@ -538,6 +544,7 @@ local function SpawnBaseBats(player)
 					local bat = SpawnPrefab("vampirebat")
 					bat.Transform:SetPosition(x + math.random(-12,12), y, z + math.random(-12,12))
 					bat:PushEvent("fly_back")
+					bat:DoTaskInTime(0, function(bat) DayBreak(bat) end)
 				end)
 			end
 		end
