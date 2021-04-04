@@ -107,7 +107,7 @@ startregen = function(inst, regentime)
 	else
 		if inst.components.workable.workleft ~= nil or inst.components.pickable.cycles_left ~= nil then
 			inst.AnimState:PlayAnimation(anims[inst.components.workable.workleft])
-			inst.AnimState:PlayAnimation(anims[inst.components.pickable.cycles_left])
+			--inst.AnimState:PlayAnimation(anims[inst.components.pickable.cycles_left])
 		end
 	end
 
@@ -293,8 +293,8 @@ local function makefullfn(inst)
     if inst.components.pickable.cycles_left <= 0 then
         inst.components.workable:SetWorkLeft(1)
         inst:AddTag("dungpile")
-        inst.AnimState:PlayAnimation("dead_to_idle")
-        inst.AnimState:PushAnimation("idle")
+        --inst.AnimState:PushAnimation("dead_to_idle")
+        --inst.AnimState:PushAnimation("idle")
     end
 end
 
@@ -302,7 +302,27 @@ local function makebarrenfn(inst)
     inst:Remove()
 end
 
-
+local function on_anim_over(inst)
+if inst.components.workable ~= nil then
+	if inst.components.workable.workleft ~= 3 then
+	inst.AnimState:PushAnimation(anims[inst.components.workable.workleft])
+	else
+		if math.random() < 0.85 then
+		inst.AnimState:PushAnimation(anims[inst.components.workable.workleft])
+		else
+			if math.random() > 0.33 then
+			inst.AnimState:PushAnimation('teeth')
+			else
+				if math.random() > 0.5 then
+				inst.AnimState:PushAnimation('eyes')
+				else
+				inst.AnimState:PushAnimation('teyes')
+				end
+			end
+		end
+	end
+end
+end
 local function snowpilefn(Sim)
 	-- print ('sandhillfn')
 	local inst = CreateEntity()
@@ -319,9 +339,9 @@ local function snowpilefn(Sim)
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-	anim:SetBuild("snowpile")
-	anim:SetBank("sand_dune")
-	anim:PlayAnimation(anims[#anims])
+	anim:SetBuild("snow_dune")
+	anim:SetBank("snow_dune")
+	anim:PlayAnimation("low")
 	
 	inst.entity:SetPristine()
 	
@@ -379,7 +399,7 @@ local function snowpilefn(Sim)
     inst.components.pickable.transplanted = true
 	
 	SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
-	
+	inst:ListenForEvent("animover", on_anim_over)
 	startregen(inst)
 	
 	return inst

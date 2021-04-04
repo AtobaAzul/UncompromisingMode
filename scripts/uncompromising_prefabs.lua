@@ -211,4 +211,5 @@ return {
 	"um_bear_trap",
 	"gore_horn_hat",
 	"slobberlobber",
+	"uncompromising_birds",
 }

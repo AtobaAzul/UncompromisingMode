@@ -130,6 +130,7 @@ local prefab_post = {
 	"evergreen_stump",
 	--"bundle",
 	"eyebrella",
+	"birds",
 }
 
 local stategraph_post = {

@@ -61,7 +61,7 @@ Assets = {
 	Asset("ANIM", "anim/root_spike.zip"),
 	Asset("ANIM", "anim/chop_root_spike.zip"),
 	Asset("ANIM", "anim/snow_over.zip"),
-	Asset("ANIM", "anim/sand_dune.zip"),
+	Asset("ANIM", "anim/snow_dune.zip"),
 	Asset("ANIM", "anim/sandhill.zip"),
 	Asset("ANIM", "anim/snowpile.zip"),
 	Asset("ANIM", "anim/tar.zip"),
@@ -379,7 +379,9 @@ Assets = {
 	Asset("ANIM", "anim/haul_pigman.zip"),
 	Asset("ANIM", "anim/wackycocoons.zip"),
 	Asset("ANIM", "anim/wackycocoonsmall.zip"), --Had to seperate into second build, too big for a single build
-	
+	Asset("ANIM", "anim/woodpecker_build.zip"),
+	Asset("IMAGE", "images/inventoryimages/woodpecker.tex"),
+	Asset("ATLAS", "images/inventoryimages/woodpecker.xml"),	
 	
 	
 	--Dart Stuff
