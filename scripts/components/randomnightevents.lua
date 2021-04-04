@@ -103,7 +103,7 @@ local function DayBreak(mob)
 	
 	mob.AnimState:SetHaunted(true)
 	
-	mob.AnimState:SetMultColour(0, 0, 0, 0.5)
+	mob.AnimState:SetMultColour(0, 0, 0, 0.6)
 	
 	mob.persists = false
 	
@@ -126,7 +126,7 @@ end
 --RNE list below
 ----------------------------------------------------
 local function SkeleBros(player)
-MultiFogAuto(player,5)
+MultiFogAuto(player,6)
 local CHANNELER_SPAWN_RADIUS = 30
     if player.components.health:IsDead() then
         return
@@ -195,7 +195,9 @@ local function SpawnBirchNutters(player)
 					
 			local x1 = x + math.random(-10, 10)
 			local z1 = z + math.random(-10, 10)
+			--local nutters = math.random() >= 0.7 and SpawnPrefab("nightmarebeak") or SpawnPrefab("crawlingnightmare")
 			local nutters = SpawnPrefab("birchnutdrake")
+			
 			if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 				nutters.Transform:SetPosition(x1, y, z1)
 				nutters:DoTaskInTime(0, function(nutters) DayBreak(nutters) end)
@@ -244,10 +246,12 @@ local days_survived = player.components.age ~= nil and player.components.age:Get
 			target:DoTaskInTime(leiftime, spawn_leif)
 		end
 	else
-		player:DoTaskInTime(10 * math.random() + 3, function()
+		player:DoTaskInTime(5 + (10 * math.random() + 3), function()
 			local level = PlayerScaling(player)
 			for i = 1, level + 2 do
-				SpawnBirchNutters(player)
+				player:DoTaskInTime(1 + i, function()
+					SpawnBirchNutters(player)
+				end
 			end
 			print("leifattackfailed")
 		end)
@@ -319,8 +323,8 @@ end
 
 local function SpawnShadowChars(player)
 	--print("SpawnShadowChars")
-	MultiFogAuto(player,5)
-	player:DoTaskInTime(5 + math.random(0,5), function()
+	MultiFogAuto(player,8)
+	player:DoTaskInTime(8 + math.random(0,5), function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
 			local extras = 0
@@ -459,7 +463,7 @@ end
 
 local function FireHungryGhostAttack(player)
 	print("ooooOOOOoooo")
-	local ghosttime = 5 + math.random(0,5)
+	local ghosttime = 6 + math.random(0,5)
 	MultiFogAuto(player,ghosttime)
 	player:DoTaskInTime(ghosttime, function()
 			local x, y, z = player.Transform:GetWorldPosition()
@@ -478,7 +482,7 @@ end
 local function SpawnBats(player)
 	print("SpawnBats")
 	
-	local battime = 10 * math.random() * 2
+	local battime = 5 + (10 * math.random() * 2)
 	MultiFogAuto(player,battime)
 	player:DoTaskInTime(battime, function()
 		if TheWorld.state.cycles <= 10 then
@@ -516,7 +520,7 @@ end
 local function SpawnBaseBats(player)
 	print("SpawnBaseBats")
 	
-	local battime = 10 * math.random() * 2
+	local battime = 5 + (10 * math.random() * 2)
 	MultiFogAuto(player,battime)
 	player:DoTaskInTime(battime, function()
 		if TheWorld.state.cycles <= 10 then
@@ -764,7 +768,7 @@ end
 
 local function SpawnSquids(player)
 	print("Spawnsquids")
-	local squidtime = 10 * math.random() * 2
+	local squidtime = 5 + (10 * math.random() * 2)
 	MultiFogAuto(player,squidtime)
 	player:DoTaskInTime(squidtime, function()
 		local x, y, z = player.Transform:GetWorldPosition()
@@ -804,7 +808,7 @@ end
 
 local function SpawnGnarwail(player)
 	print("Spawnsquids")
-	local sharktime = 10 * math.random() * 2
+	local sharktime = 5 + (10 * math.random() * 2)
 	MultiFogAuto(player,sharktime)
 	player:DoTaskInTime(sharktime, function()
 		SpawnGnarwailFunction(player)
@@ -1181,7 +1185,7 @@ AddWildEvent(SpawnBats,.2)
 AddWildEvent(SpawnLightFlowersNFerns,.3)
 AddWildEvent(SpawnSkitts,.6)
 AddWildEvent(SpawnMonkeys,.2)
-AddWildEvent(LeifAttack,.2)
+AddWildEvent(LeifAttack,1111.2)
 AddWildEvent(SpawnPhonograph,.2)
 AddWildEvent(SpawnShadowTeleporter,.3)
 AddWildEvent(StumpsAttack,.3)

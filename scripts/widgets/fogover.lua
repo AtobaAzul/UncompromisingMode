@@ -41,12 +41,15 @@ end
 function FogOver:OnUpdate(dt)
 	self.bg2:SetTint(1, 1, 1, self.alpha)
 	if self.alpha == 0 then
-	self:Hide()
+		self:Hide()
+		TheFocalPoint.SoundEmitter:KillSound("fogfear")
 	end
 	if self.owner:HasTag("infog") then
 	self:Show()
         self.time = self.transitiontime
         self.alphagoal = 0.6
+		
+		TheFocalPoint.SoundEmitter:PlaySound("UCSounds/screecher/feer", "fogfear")
 	else
         self.time = self.transitiontime
         self.alphagoal = 0
