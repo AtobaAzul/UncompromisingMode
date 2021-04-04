@@ -105,7 +105,7 @@ AddComponentPostInit("hounded", function(self)
             return
         end
         --spawn a random seasonal hound
-        if pt and chance < self.seasonal_chance and TheWorld.state.cycles >= 22 then
+        if pt and chance < self.seasonal_chance and GLOBAL.TheWorld.state.cycles >= 22 then
             prefab_list = self.seasonal_prefabs[season]
             prefab = #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or nil
 			if prefab == "magmahound" then
