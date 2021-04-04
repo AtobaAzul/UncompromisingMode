@@ -251,7 +251,7 @@ local days_survived = player.components.age ~= nil and player.components.age:Get
 			for i = 1, level + 2 do
 				player:DoTaskInTime(1 + i, function()
 					SpawnBirchNutters(player)
-				end
+				end)
 			end
 			print("leifattackfailed")
 		end)
