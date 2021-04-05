@@ -73,9 +73,9 @@ local function speedcheck(inst)
 		inst.angleadjustment1 = 0
 		inst.angleadjustment2 = 0
 		
-		if inst.facing_angle_old ~= nil and inst.facing_angle_old < 15 and inst.facing_angle > 345 then
+		if inst.facing_angle_old ~= nil and inst.facing_angle_old < 10 and inst.facing_angle > 350 then
 			inst.angleadjustment1 = 360
-		elseif inst.facing_angle_old ~= nil and inst.facing_angle_old > 345 and inst.facing_angle < 15 then
+		elseif inst.facing_angle_old ~= nil and inst.facing_angle_old > 350 and inst.facing_angle < 10 then
 			inst.angleadjustment2 = -360
 		end
 		
@@ -131,7 +131,7 @@ local function speedcheck(inst)
 		else
 			if inst.physbox ~= nil then
 				inst.physbox.AnimState:PlayAnimation("close")
-				inst.physbox:DoTaskInTime(0.3, inst.Remove)
+				inst.physbox:DoTaskInTime(0.3, inst.physbox.Remove)
 				inst.physbox = nil
 				inst.SoundEmitter:KillSound("gorehorn")
 			end
@@ -205,6 +205,19 @@ end
         end
 
 		owner:RemoveEventCallback("locomote", speedcheck)
+		
+		if owner.physbox ~= nil then
+			owner.physbox.AnimState:PlayAnimation("close")
+			owner.physbox:DoTaskInTime(0.3, owner.physbox.Remove)
+			owner.physbox = nil
+			owner.SoundEmitter:KillSound("gorehorn")
+		end
+
+		if owner.task ~= nil then
+			owner.task:Cancel()
+			owner.task = nil
+			owner.SoundEmitter:KillSound("gorehorncharge")
+		end
 		
 		owner.components.locomotor:RemoveExternalSpeedMultiplier(owner, "gore_horn") 
 		

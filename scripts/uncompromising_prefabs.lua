@@ -212,4 +212,5 @@ return {
 	"gore_horn_hat",
 	"slobberlobber",
 	"uncompromising_birds",
+	"um_shambler",
 }
