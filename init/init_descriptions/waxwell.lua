@@ -201,6 +201,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.SCREECHER_TRINKET = "It came from someplace far away."
 	
 	ANNOUNCE.ANNOUNCE_NOSANITY = "I have the worst headache!"
+	ANNOUNCE.ANNOUNCE_NOHEALTH = "My body is too frail!"
 	ANNOUNCE.ANNOUNCE_NOFUEL = "I need some nightmare fuel."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "Maybe we should try this again when the MOON is out?"}
 

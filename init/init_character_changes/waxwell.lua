@@ -16,12 +16,21 @@ TUNING.SHADOWWAXWELL_SANITY_PENALTY =
 		
 TUNING.OLD_SHADOWWAXWELL_SANITY_PENALTY = 55
 
+local function CalculateMaxHealthLoss(inst, data)
+	if inst.components.health ~= nil and not inst.components.health:IsDead() then
+		local healthloss = (data.damageresolved * TUNING.ARMOR_SANITY_DMG_AS_SANITY) / 75
+		inst.components.health:DeltaPenalty(healthloss)
+	end
+end
+
 env.AddPrefabPostInit("waxwell", function(inst) 
 	if not TheWorld.ismastersim then
 		return
 	end
 	
 	inst:AddTag("codexumbrareader")
+	
+	inst:ListenForEvent("attacked", CalculateMaxHealthLoss)
 
 end)
 
@@ -31,7 +40,7 @@ local function doeffects(inst, pos)
 end
 
 local function canread(inst, reader)
-    return (inst.components.sanity:GetMaxWithPenalty() >= TUNING.OLD_SHADOWWAXWELL_SANITY_PENALTY)
+    return (inst.components.sanity:GetMaxWithPenalty() >= TUNING.OLD_SHADOWWAXWELL_SANITY_PENALTY) and (inst.components.health.currenthealth > TUNING.SHADOWWAXWELL_HEALTH_COST)
 end
 
 local function onread(inst, reader)
@@ -43,20 +52,24 @@ local function onread(inst, reader)
     --Check sanity
     if not canread(reader) then 
         if reader.components.talker then
-            reader.components.talker:Say(GetString(reader.prefab, "ANNOUNCE_NOSANITY"))
+			if inst.components.sanity:GetMaxWithPenalty() < TUNING.OLD_SHADOWWAXWELL_SANITY_PENALTY then
+				reader.components.talker:Say(GetString(reader.prefab, "ANNOUNCE_NOSANITY"))
+			elseif inst.components.health.currenthealth <= TUNING.SHADOWWAXWELL_HEALTH_COST then
+				reader.components.talker:Say(GetString(reader.prefab, "ANNOUNCE_NOHEALTH"))
+			end
             return true
         end
     end
 
     --Check reagent
-    if not reader.components.inventory:Has("nightmarefuel", TUNING.SHADOWWAXWELL_FUEL_COST) then
+    if not reader.components.inventory:Has("nightmarefuel", TUNING.SHADOWWAXWELL_FUEL_COST + 1) then
         if reader.components.talker then
             reader.components.talker:Say(GetString(reader.prefab, "ANNOUNCE_NOFUEL"))
             return true
         end
     end
 
-    reader.components.inventory:ConsumeByName("nightmarefuel", TUNING.SHADOWWAXWELL_FUEL_COST)
+    reader.components.inventory:ConsumeByName("nightmarefuel", TUNING.SHADOWWAXWELL_FUEL_COST + 1)
 
     --Ok you had everything. Make the image.
     local theta = math.random() * 2 * PI
@@ -75,6 +88,7 @@ local function onread(inst, reader)
 	else]]
 		local shadowmax = reader.components.petleash:SpawnPetAt(readx, ready, readz, "old_shadowwaxwell")
 		shadowmax.sg:GoToState("jumpout")
+        reader.components.health:DoDelta(TUNING.SHADOWWAXWELL_HEALTH_COST)
         reader.components.sanity:RecalculatePenalty()
         inst.SoundEmitter:PlaySound("dontstarve/maxwell/shadowmax_appear")
         return true
