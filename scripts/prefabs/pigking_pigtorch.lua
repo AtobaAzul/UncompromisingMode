@@ -49,9 +49,6 @@ local function onhit(inst,worker)
 		for i, v in ipairs(guards) do
 		if v.components.health ~= nil and v.components.combat ~= nil and not v.components.health:IsDead() then
 		v.components.combat:SuggestTarget(worker)
-		if worker.userid ~= nil and not table.contains(v.hitlist,worker.userid) then
-		table.insert(v.hitlist,worker.userid)
-		end
 		end
 		end
     inst.AnimState:PlayAnimation("hit")
@@ -514,9 +511,24 @@ end
 local function OnNewTarget(inst, data)
     if inst:HasTag("werepig") then
         inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST, IsWerePig, MAX_TARGET_SHARES)
-		elseif data.target:HasTag("pig") then
+		else
+		if data.target:HasTag("pig") then
 		inst.components.combat.target = nil
-	
+		end
+		if data.target.userid ~= nil and not table.contains(inst.hitlist,data.target.userid) then
+		table.insert(inst.hitlist,data.target.userid)
+		end
+		if data.target.userid ~= nil then
+		local x,y,z = inst.Transform:GetWorldPosition()
+		local ents = TheSim:FindEntities(x, y, z, 40, {"pig","guard"}) --Spread the news, they'll let any new pig guards nearby know that there's a bad man around
+		for i, v in ipairs(ents) do
+			if v ~= inst and not v.components.health:IsDead() then
+				if data.target.userid ~= nil and not table.contains(v.hitlist,data.target.userid) then
+				table.insert(v.hitlist,data.target.userid)
+				end
+			end
+		end
+		end
     end
 end
 
