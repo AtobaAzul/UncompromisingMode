@@ -5,7 +5,27 @@ env.AddPrefabPostInit("pigking", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	
+local function ErectPoleBuild(x,y,z)
+local pole = SpawnPrefab("pigking_pigtorch")
+local collapse = SpawnPrefab("collapse_big")
+pole.Transform:SetPosition(x,y,z)
+collapse.Transform:SetPosition(x,y,z)
+inst.sg:GoToState("cointoss")
+end
+inst.Rebuild = ErectPoleBuild
+
+inst:DoTaskInTime(0,function(inst)
+local x,y,z = inst.Transform:GetWorldPosition()
+if #TheSim:FindEntities(x, y, z, 30, { "pkpole" }) == 0 then
+ErectPoleBuild(x+7,y,z+7)
+ErectPoleBuild(x+7,y,z-7)
+ErectPoleBuild(x-7,y,z+7)
+ErectPoleBuild(x-7,y,z-7)
+end
+end)
+
+
+
 local function AcceptTest(inst, item, giver)
     -- Wurt can still play the mini-game though
     if giver:HasTag("merm") and item.prefab ~= "pig_token" then
@@ -30,8 +50,8 @@ end
 end
 
 local function SendRecruit(inst,hunger,guard,giver)
-giver:PushEvent("makefriend")
-	giver.components.leader:AddFollower(inst)
+    giver:PushEvent("makefriend")
+	giver.components.leader:AddFollower(guard)
 	guard.components.follower.leader = giver
     guard.components.follower:AddLoyaltyTime(hunger * TUNING.PIG_LOYALTY_PER_HUNGER)
     guard.components.follower.maxfollowtime =
@@ -50,23 +70,6 @@ else
 _OnAcceptOld(inst,giver,item)
 end
 end
-
-local function ErectPole(inst)
-local x,y,z = inst.Transform:GetWorldPosition()
-if #TheSim:FindEntities(x,y,z,20,{"pkpole"}) <= 12 and TheWorld.Map:IsAboveGroundAtPoint(x, 0, z) and not TheWorld.state.isnight then
-local angle = math.random(-360,360)
-local dist = math.random(7,10)
-        x = x + dist * math.sin(angle)
-        z = z + dist * math.cos(angle)
-local pole = SpawnPrefab("pigking_pigtorch")
-local collapse = SpawnPrefab("collapse_big")
-pole.Transform:SetPosition(x,y,z)
-collapse.Transform:SetPosition(x,y,z)
-inst.sg:GoToState("cointoss")
-end
-end
-
 inst.components.trader:SetAcceptTest(AcceptTest)
 inst.components.trader.onaccept = OnGetItemFromPlayer
-inst:DoPeriodicTask(720+math.random(-380,480),ErectPole)
 end)

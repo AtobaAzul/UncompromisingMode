@@ -6,18 +6,51 @@ local loot =
     "poop",
 }
 
+local function OnVacate(inst)
+    SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
+end
+
+local function ReBuild(inst)
+inst:Show()
+local fx = SpawnPrefab("collapse_small")
+fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+inst:Show()
+MakeObstaclePhysics(inst, 0.33)
+
+    inst:AddComponent("spawner")
+    inst.components.spawner:Configure("pigking_pigguard", TUNING.TOTAL_DAY_TIME * 4)
+    inst.components.spawner:SetOnlySpawnOffscreen(true)
+    inst.components.spawner:SetOnVacateFn(OnVacate)
+inst.demolished = false
+end
+
 local function onhammered(inst)
     inst.components.lootdropper:DropLoot()
+	inst.demolished = true
     local fx = SpawnPrefab("collapse_small")
     fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
     fx:SetMaterial("wood")
-    inst:Remove()
+	local x,y,z = inst.Transform:GetWorldPosition()
+	inst.Physics:ClearCollisionMask()
+	inst:Hide()
+	inst.components.fueled:InitializeFuelLevel(0)
+	inst.components.timer:StartTimer("rebuild", 60)
+	if inst.components.spawner ~= nil then
+	if inst.components.spawner.child ~= nil then
+	inst.components.spawner.child:RemoveComponent("homeseeker")
+	end
+	inst:RemoveComponent("spawner")
+	end
 end
 
 local function onhit(inst,worker)
-    if inst.components.spawner.child ~= nil and inst.components.spawner.child.components.combat ~= nil then
-        inst.components.spawner.child.components.combat:SuggestTarget(worker)
-    end
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local guards = TheSim:FindEntities(x,y,z,40,{"guard"})
+		for i, v in ipairs(guards) do
+		if v.components.health ~= nil and v.components.combat ~= nil and not v.components.health:IsDead() then
+		v.components.combat:SuggestTarget(worker)
+		end
+		end
     inst.AnimState:PlayAnimation("hit")
     inst.AnimState:PushAnimation("idle")
 end
@@ -56,14 +89,35 @@ local function onfuelchange(newsection, oldsection, inst)
     end
 end
 
-local function OnVacate(inst)
-    SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
-end
-
 local function OnHaunt(inst)
     inst.components.fueled:TakeFuelItem(SpawnPrefab("pigtorch_fuel"))
     inst.components.spawner:ReleaseChild()
     return true
+end
+
+local function OnLoadTorch(inst,data)
+if data ~= nil and data.demolished ~= nil then
+inst.demolished = data.demolished
+if inst.demolished == true then
+	local x,y,z = inst.Transform:GetWorldPosition()
+	inst.Physics:ClearCollisionMask()
+	inst:Hide()
+	inst.components.fueled:InitializeFuelLevel(0)
+	inst.components.timer:StartTimer("rebuild", 1000+math.random(400,1000))
+	if inst.components.spawner ~= nil then
+	if inst.components.spawner.child ~= nil then
+	inst.components.spawner.child:RemoveComponent("homeseeker")
+	end
+	inst:RemoveComponent("spawner")
+	end
+end
+end
+end
+
+local function OnSaveTorch(inst,data)
+if inst.demolished ~= nil then
+data.demolished = inst.demolished
+end
 end
 
 local function fn()
@@ -125,9 +179,12 @@ local function fn()
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_SMALL)
     inst.components.hauntable:SetOnHauntFn(OnHaunt)
-
+	inst:AddComponent("timer")
+	inst:ListenForEvent("timerdone", ReBuild)
     --MakeSnowCovered(inst)
-
+	
+	inst.OnLoad = OnLoadTorch
+	inst.OnSave = OnSaveTorch
     return inst
 end
 local RETARGET_MUST_TAGS = { "_combat" }
@@ -164,12 +221,21 @@ local function NormalRetargetFn(inst)
                 inst,
                 TUNING.PIG_TARGET_DIST,
                 function(guy)
-                    return (guy.LightWatcher == nil or guy.LightWatcher:IsInLight())
+				for i,v in ipairs(inst.hitlist) do
+				if guy.userid ~= nil and v == guy.userid then
+				return (guy.LightWatcher == nil or guy.LightWatcher:IsInLight())
                         and inst.components.combat:CanTarget(guy)
+				end
+				end
+				for i,v in ipairs(oneof_tags) do --Have to emulate the oneof_tags effect
+				if guy:HasTag(v) then
+				return (guy.LightWatcher == nil or guy.LightWatcher:IsInLight())
+                        and inst.components.combat:CanTarget(guy)
+				end
+				end
                 end,
                 RETARGET_MUST_TAGS, -- see entityreplica.lua
-                exclude_tags,
-                oneof_tags
+                exclude_tags
             )
         or nil
 end
@@ -181,25 +247,7 @@ local function NormalKeepTargetFn(inst, target)
 end
 local guardbrain = require "brains/pigguard_pigkingbrain"
 local guardbuilds = { "pig_guard_build" }
-local function GuardKeepTargetFn(inst, target)
-    if not inst.components.combat:CanTarget(target) or
-        (target.sg ~= nil and target.sg:HasStateTag("transform")) or
-        (target:HasTag("guard") and target:HasTag("pig")) then
-        return false
-    end
 
-    local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
-    if home == nil then
-        return true
-    end
-
-    local defendDist = not TheWorld.state.isday
-                    and home.components.burnable ~= nil
-                    and home.components.burnable:IsBurning()
-                    and home.components.burnable:GetLargestLightRadius()
-                    or SpringCombatMod(TUNING.PIG_GUARD_DEFEND_DIST)
-    return target:IsNear(home, defendDist) and inst:IsNear(home, defendDist)
-end
 local function GuardShouldSleep(inst)
     return false
 end
@@ -393,6 +441,9 @@ end
 local function OnSave(inst, data)
     data.build = inst.build
 	data._pigtokeninitialized = inst._pigtokeninitialized
+	if inst.hitlist ~= nil then
+	data.hitlist = inst.hitlist
+	end
 end
 
 local function OnLoad(inst, data)
@@ -402,6 +453,9 @@ local function OnLoad(inst, data)
             inst.AnimState:SetBuild(inst.build)
         end
 		inst._pigtokeninitialized = data._pigtokeninitialized
+	if data.hitlist ~= nil then
+	inst.hitlist = data.hitlist
+	end
     end
 end
 local function IsPig(dude)
@@ -457,6 +511,24 @@ end
 local function OnNewTarget(inst, data)
     if inst:HasTag("werepig") then
         inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST, IsWerePig, MAX_TARGET_SHARES)
+		else
+		if data.target:HasTag("pig") then
+		inst.components.combat.target = nil
+		end
+		if data.target.userid ~= nil and not table.contains(inst.hitlist,data.target.userid) then
+		table.insert(inst.hitlist,data.target.userid)
+		end
+		if data.target.userid ~= nil then
+		local x,y,z = inst.Transform:GetWorldPosition()
+		local ents = TheSim:FindEntities(x, y, z, 40, {"pig","guard"}) --Spread the news, they'll let any new pig guards nearby know that there's a bad man around
+		for i, v in ipairs(ents) do
+			if v ~= inst and not v.components.health:IsDead() then
+				if data.target.userid ~= nil and not table.contains(v.hitlist,data.target.userid) then
+				table.insert(v.hitlist,data.target.userid)
+				end
+			end
+		end
+		end
     end
 end
 
@@ -574,7 +646,6 @@ local function common(moonbeast)
 
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aurafn = CalcSanityAura
-
     ------------------------------------------
 
     inst:AddComponent("sleeper")
@@ -594,6 +665,7 @@ local function common(moonbeast)
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("newcombattarget", OnNewTarget)
 	inst:ListenForEvent("suggest_tree_target", SuggestTreeTarget)
+	inst.hitlist = {}
     return inst
 end
 
