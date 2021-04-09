@@ -180,7 +180,8 @@ local function ActionHungerDrain(inst, data)
 	data.action.action == ACTIONS.HAMMER or 
 	data.action.action == ACTIONS.ROW or 
 	data.action.action == ACTIONS.DIG or 
-	data.action.action == ACTIONS.ATTACK then
+	data.action.action == ACTIONS.ATTACK or
+	data.action.action == ACTIONS.TILL then
 			if fast then
 				inst.hungryslowbuildtalktime = nil
 				if inst.hungryfastbuildtalktime == nil or inst.hungryfastbuildtalktime + 10 < t then
@@ -189,7 +190,7 @@ local function ActionHungerDrain(inst, data)
 					inst.hungryfastbuildtalktime = nil
 					inst.components.talker:Say(GetString(inst, "ANNOUNCE_HUNGRY_FASTBUILD"))
 				end
-				if data.action.action == ACTIONS.ROW then
+				if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL then
 					inst.components.hunger:DoDelta(-0.15)
 					print("row")
 				elseif data.action.action == ACTIONS.CHOP or
@@ -222,6 +223,7 @@ local function onhungerchange(inst, data)
 		inst.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, 1.33, "ohungy")
 		inst.components.workmultiplier:AddMultiplier(ACTIONS.DIG, 1.33, "ohungy")
 		inst.components.workmultiplier:AddMultiplier(ACTIONS.ROW, 1.33, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.TILL, 1.33, "ohungy")
 		inst.components.efficientuser:AddMultiplier(ACTIONS.CHOP,   0.75, "ohungy")
 		inst.components.efficientuser:AddMultiplier(ACTIONS.MINE,   0.75, "ohungy")
 		inst.components.efficientuser:AddMultiplier(ACTIONS.HAMMER, 0.75, "ohungy")
@@ -235,6 +237,7 @@ local function onhungerchange(inst, data)
 		inst.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, 0.66, "ohungy")
 		inst.components.workmultiplier:AddMultiplier(ACTIONS.DIG, 0.66, "ohungy")
 		inst.components.workmultiplier:AddMultiplier(ACTIONS.ROW, 0.66, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.TILL, 0.66, "ohungy")
 		inst.components.efficientuser:AddMultiplier(ACTIONS.CHOP,   1.25, "ohungy")
 		inst.components.efficientuser:AddMultiplier(ACTIONS.MINE,   1.25, "ohungy")
 		inst.components.efficientuser:AddMultiplier(ACTIONS.HAMMER, 1.25, "ohungy")
@@ -249,6 +252,7 @@ local function onhungerchange(inst, data)
 			inst.components.workmultiplier:RemoveMultiplier(ACTIONS.HAMMER, "ohungy")
 			inst.components.workmultiplier:RemoveMultiplier(ACTIONS.DIG, "ohungy")
 			inst.components.workmultiplier:RemoveMultiplier(ACTIONS.ROW, "ohungy")
+			inst.components.workmultiplier:RemoveMultiplier(ACTIONS.TILL, "ohungy")
 			inst.components.efficientuser:RemoveMultiplier(ACTIONS.CHOP, "ohungy")
 			inst.components.efficientuser:RemoveMultiplier(ACTIONS.MINE, "ohungy")
 			inst.components.efficientuser:RemoveMultiplier(ACTIONS.HAMMER, "ohungy")

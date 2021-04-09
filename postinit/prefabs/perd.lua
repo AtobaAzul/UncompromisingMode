@@ -77,7 +77,7 @@ local function OnHitOther(inst, other, damage)
 	end
 end
 
-local function OnSave(inst)
+local function OnSave(inst, data)
     if inst.mehungy ~= nil then
 		data.mehungy = inst.mehungy
 	end
