@@ -43,7 +43,7 @@ end
 
 local function OnGooseOverWater(inst)
     if inst.weremode:value() == 3 then
-        if inst~=nil and inst.components.drownable ~= nil and inst.components.drownable:IsOverWater() then
+        if inst~=nil and inst.components.drownable ~= nil and inst.components.drownable:IsOverWater() and inst.components.moisture ~= nil then
             inst.components.moisture:DoDelta(GLOBAL.TUNING.DSTU.GOOSE_WATER_WETNESS_RATE, true)
         end
     end

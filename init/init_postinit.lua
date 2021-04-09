@@ -131,6 +131,7 @@ local prefab_post = {
 	--"bundle",
 	"eyebrella",
 	"birds",
+	"perd",
 }
 
 local stategraph_post = {
@@ -175,6 +176,7 @@ local brain_post = {
 	"chester",
 	"bearger",
 	"mossling",
+	"perd",
 }
 
 modimport("postinit/sim")

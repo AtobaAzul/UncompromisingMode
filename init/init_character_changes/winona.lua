@@ -6,7 +6,7 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
-
+local HUNGRY_THRESH_HIGH = 0.666
 
 local function ItemTradeTest(inst, item, giver)
     if item == nil then
@@ -166,6 +166,128 @@ env.AddPrefabPostInit("winona_battery_low", function(inst)
 	
 end)
 
+local function OnCooldown(inst)
+    inst._cdtask = nil
+end
+
+local function ActionHungerDrain(inst, data)
+	local fast = inst.components.hunger:GetPercent() > HUNGRY_THRESH_HIGH
+	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
+	local t = GetTime()
+	
+	if data.action.action == ACTIONS.CHOP or 
+	data.action.action == ACTIONS.MINE or 
+	data.action.action == ACTIONS.HAMMER or 
+	data.action.action == ACTIONS.ROW or 
+	data.action.action == ACTIONS.DIG or 
+	data.action.action == ACTIONS.ATTACK then
+			if fast then
+				inst.hungryslowbuildtalktime = nil
+				if inst.hungryfastbuildtalktime == nil or inst.hungryfastbuildtalktime + 10 < t then
+					inst.hungryfastbuildtalktime = t + GetRandomMinMax(8, 12)
+				elseif inst.hungryfastbuildtalktime < t then
+					inst.hungryfastbuildtalktime = nil
+					inst.components.talker:Say(GetString(inst, "ANNOUNCE_HUNGRY_FASTBUILD"))
+				end
+				if data.action.action == ACTIONS.ROW then
+					inst.components.hunger:DoDelta(-0.15)
+					print("row")
+				elseif data.action.action == ACTIONS.CHOP or
+				data.action.action == ACTIONS.MINE or
+				data.action.action == ACTIONS.HAMMER or
+				data.action.action == ACTIONS.DIG then
+					inst.components.hunger:DoDelta(-0.25)
+					print("work")
+				else
+					inst.components.hunger:DoDelta(-0.2)
+					print("attack")
+				end
+			elseif slow then
+				inst.hungryfastbuildtalktime = nil
+				if (inst.hungryslowbuildtalktime or 0) < t then
+					inst.hungryslowbuildtalktime = t + GetRandomMinMax(8, 16)
+					inst.components.talker:Say(GetString(inst, "ANNOUNCE_HUNGRY_SLOWBUILD"))
+				end
+			end
+	end
+end
+
+local function onhungerchange(inst, data)
+	local fast = inst.components.hunger:GetPercent() > HUNGRY_THRESH_HIGH
+	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
+	
+	if fast then
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.CHOP,   1.33, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.MINE,   1.33, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, 1.33, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.DIG, 1.33, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.ROW, 1.33, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.CHOP,   0.75, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.MINE,   0.75, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.HAMMER, 0.75, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.DIG, 0.75, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.ATTACK, 0.75, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.ROW,   0.75, "ohungy")
+		inst.multiplierapplied = true
+	elseif slow then
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.CHOP,   0.66, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.MINE,   0.66, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, 0.66, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.DIG, 0.66, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.ROW, 0.66, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.CHOP,   1.25, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.MINE,   1.25, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.HAMMER, 1.25, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.DIG, 1.25, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.ATTACK, 1.25, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.ROW,   1.25, "ohungy")
+		inst.multiplierapplied = true
+	else
+		if inst.multiplierapplied then
+			inst.components.workmultiplier:RemoveMultiplier(ACTIONS.CHOP, "ohungy")
+			inst.components.workmultiplier:RemoveMultiplier(ACTIONS.MINE, "ohungy")
+			inst.components.workmultiplier:RemoveMultiplier(ACTIONS.HAMMER, "ohungy")
+			inst.components.workmultiplier:RemoveMultiplier(ACTIONS.DIG, "ohungy")
+			inst.components.workmultiplier:RemoveMultiplier(ACTIONS.ROW, "ohungy")
+			inst.components.efficientuser:RemoveMultiplier(ACTIONS.CHOP, "ohungy")
+			inst.components.efficientuser:RemoveMultiplier(ACTIONS.MINE, "ohungy")
+			inst.components.efficientuser:RemoveMultiplier(ACTIONS.HAMMER, "ohungy")
+			inst.components.efficientuser:RemoveMultiplier(ACTIONS.DIG, "ohungy")
+			inst.components.efficientuser:RemoveMultiplier(ACTIONS.ATTACK, "ohungy")
+			inst.components.efficientuser:RemoveMultiplier(ACTIONS.ROW, "ohungy")
+			inst.multiplierapplied = false
+		end
+	end
+end
+
+local function onbecamehuman(inst, data)
+    inst:ListenForEvent("performaction", ActionHungerDrain)
+	inst:ListenForEvent("hungerdelta", onhungerchange)
+	onhungerchange(inst, nil)
+end
+
+local function onbecameghost(inst, data)
+    inst:ListenForEvent("performaction", ActionHungerDrain)
+	inst:RemoveEventCallback("hungerdelta", onhungerchange)
+end
+
+env.AddPrefabPostInit("winona", function(inst)
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+	inst.multiplierapplied = false
+	
+    inst:ListenForEvent("performaction", ActionHungerDrain)
+	inst:ListenForEvent("hungerdelta", onhungerchange)
+	
+    inst:ListenForEvent("ms_respawnedfromghost", onbecamehuman)
+    inst:ListenForEvent("ms_becameghost", onbecameghost)
+	
+	if inst.components.efficientuser == nil then
+		inst:AddComponent("efficientuser")
+	end
+end)
     
 
 --[[

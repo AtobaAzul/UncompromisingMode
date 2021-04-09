@@ -136,7 +136,7 @@ local function fn()
 
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(TUNING.SHADOWWAXWELL_LIFE)
-    inst.components.health:StartRegen(TUNING.CHESTER_HEALTH_REGEN_AMOUNT / 2, TUNING.CHESTER_HEALTH_REGEN_PERIOD)
+    inst.components.health:StartRegen(TUNING.CHESTER_HEALTH_REGEN_AMOUNT / 4, TUNING.CHESTER_HEALTH_REGEN_PERIOD)
     inst.components.health.nofadeout = true
     inst.components.health.fire_damage_scale = TUNING.WILLOW_FIRE_DAMAGE
     inst.components.health.redirect = nodebrisdmg
