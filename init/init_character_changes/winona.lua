@@ -175,6 +175,7 @@ local function ActionHungerDrain(inst, data)
 	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
 	local t = GetTime()
 	
+	
 	if data.action.action == ACTIONS.CHOP or 
 	data.action.action == ACTIONS.MINE or 
 	data.action.action == ACTIONS.HAMMER or 
@@ -182,7 +183,9 @@ local function ActionHungerDrain(inst, data)
 	data.action.action == ACTIONS.DIG or 
 	data.action.action == ACTIONS.ATTACK or
 	data.action.action == ACTIONS.TILL then
-			if fast then
+		if fast then
+			if inst._cdtask == nil then
+				inst._cdtask = inst:DoTaskInTime(.3, OnCooldown)
 				inst.hungryslowbuildtalktime = nil
 				if inst.hungryfastbuildtalktime == nil or inst.hungryfastbuildtalktime + 10 < t then
 					inst.hungryfastbuildtalktime = t + GetRandomMinMax(8, 12)
@@ -194,22 +197,23 @@ local function ActionHungerDrain(inst, data)
 					inst.components.hunger:DoDelta(-0.15)
 					print("row")
 				elseif data.action.action == ACTIONS.CHOP or
-				data.action.action == ACTIONS.MINE or
-				data.action.action == ACTIONS.HAMMER or
-				data.action.action == ACTIONS.DIG then
+					data.action.action == ACTIONS.MINE or
+					data.action.action == ACTIONS.HAMMER or
+					data.action.action == ACTIONS.DIG then
 					inst.components.hunger:DoDelta(-0.25)
 					print("work")
 				else
 					inst.components.hunger:DoDelta(-0.2)
 					print("attack")
 				end
-			elseif slow then
-				inst.hungryfastbuildtalktime = nil
-				if (inst.hungryslowbuildtalktime or 0) < t then
-					inst.hungryslowbuildtalktime = t + GetRandomMinMax(8, 16)
-					inst.components.talker:Say(GetString(inst, "ANNOUNCE_HUNGRY_SLOWBUILD"))
-				end
 			end
+		elseif slow then
+			inst.hungryfastbuildtalktime = nil
+			if (inst.hungryslowbuildtalktime or 0) < t then
+				inst.hungryslowbuildtalktime = t + GetRandomMinMax(8, 16)
+				inst.components.talker:Say(GetString(inst, "ANNOUNCE_HUNGRY_SLOWBUILD"))
+			end
+		end
 	end
 end
 

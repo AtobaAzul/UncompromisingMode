@@ -1,7 +1,9 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
-local function oneat(inst, food)
+local function oneat(inst, data)
+	local food = data.food
+
 	if food and food.components.edible then
 		local hungerbonus = food.components.edible:GetHunger() * 0.2
 		local sanitybonus = food.components.edible:GetSanity() * 0.2
@@ -29,7 +31,8 @@ env.AddPrefabPostInit("warly", function(inst)
 	inst:AddTag("warlybuffed")
 	
 	if inst.components.eater ~= nil then
-		inst.components.eater:SetOnEatFn(oneat)
+		inst:ListenForEvent("oneat", oneat)
+		--inst.components.eater:SetOnEatFn(oneat)
 		--inst.components.eater:SetAbsorptionModifiers(1.2, 1.2, 1.2)
 	end
 	

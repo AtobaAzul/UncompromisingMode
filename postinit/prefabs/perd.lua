@@ -137,13 +137,14 @@ env.AddPrefabPostInit("perd", function(inst)
 		inst.components.health:SetMaxHealth(TUNING.BUNNYMAN_HEALTH)
 	end
 	
-	inst:AddComponent("combat")
-	inst.components.combat:SetRange(3)
-    inst.components.combat:SetDefaultDamage(20)
-	inst.components.combat:SetAttackPeriod(TUNING.BEARDLORD_ATTACK_PERIOD)
-	inst.components.combat:SetRetargetFunction(2, NormalRetargetFn)
-    inst.components.combat:SetKeepTargetFunction(NormalKeepTargetFn)
-	inst.components.combat.onhitotherfn = OnHitOther
+	if inst.components.combat ~= nil then
+		inst.components.combat:SetRange(3)
+		inst.components.combat:SetDefaultDamage(20)
+		inst.components.combat:SetAttackPeriod(TUNING.BEARDLORD_ATTACK_PERIOD)
+		inst.components.combat:SetRetargetFunction(2, NormalRetargetFn)
+		inst.components.combat:SetKeepTargetFunction(NormalKeepTargetFn)
+		inst.components.combat.onhitotherfn = OnHitOther
+	end
 	
     inst:ListenForEvent("attacked", OnAttacked)
 	inst:ListenForEvent("oneat", hungycounter)
