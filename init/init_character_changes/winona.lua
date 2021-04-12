@@ -171,17 +171,17 @@ local function OnCooldown(inst)
 end
 
 local function ActionHungerDrain(inst, data)
-	local fast = inst.components.hunger:GetPercent() > HUNGRY_THRESH_HIGH
+	local fast = inst.components.hunger:GetPercent() >= TUNING.HUNGRY_THRESH --HUNGRY_THRESH_HIGH
 	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
 	local t = GetTime()
-	
-	
+
 	if data.action.action == ACTIONS.CHOP or 
 	data.action.action == ACTIONS.MINE or 
 	data.action.action == ACTIONS.HAMMER or 
 	data.action.action == ACTIONS.ROW or 
 	data.action.action == ACTIONS.DIG or 
 	data.action.action == ACTIONS.ATTACK or
+	data.action.action == ACTIONS.PICK or
 	data.action.action == ACTIONS.TILL then
 		if fast then
 			if inst._cdtask == nil then
@@ -193,17 +193,39 @@ local function ActionHungerDrain(inst, data)
 					inst.hungryfastbuildtalktime = nil
 					inst.components.talker:Say(GetString(inst, "ANNOUNCE_HUNGRY_FASTBUILD"))
 				end
-				if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL then
-					inst.components.hunger:DoDelta(-0.15)
+				if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL or data.action.action == ACTIONS.PICK then
+					inst.components.hunger:DoDelta(-0.20, true)
 					print("row")
-				elseif data.action.action == ACTIONS.CHOP or
-					data.action.action == ACTIONS.MINE or
-					data.action.action == ACTIONS.HAMMER or
-					data.action.action == ACTIONS.DIG then
-					inst.components.hunger:DoDelta(-0.25)
+				elseif data.action.action == ACTIONS.CHOP then
+					if data.action.target ~= nil then
+						local snap = SpawnPrefab("impact")
+						local x, y, z = inst.Transform:GetWorldPosition()
+						local x1, y1, z1 = data.action.target.Transform:GetWorldPosition()
+						local angle = -math.atan2(z1 - z, x1 - x)
+						snap.Transform:SetPosition(x1, y1, z1)
+						snap.Transform:SetRotation(angle * RADIANS)
+						snap.Transform:SetScale(0.8, 0.8, 0.8)
+					end
+					
+					inst.components.hunger:DoDelta(-0.30, true)
 					print("work")
+				elseif data.action.action == ACTIONS.MINE or
+				data.action.action == ACTIONS.HAMMER then
+					if data.action.target ~= nil then
+						local snap = SpawnPrefab("impact")
+						local x, y, z = inst.Transform:GetWorldPosition()
+						local x1, y1, z1 = data.action.target.Transform:GetWorldPosition()
+						local angle = -math.atan2(z1 - z, x1 - x)
+						snap.Transform:SetPosition(x1, y1, z1)
+						snap.Transform:SetRotation(angle * RADIANS)
+						snap.Transform:SetScale(0.8, 0.8, 0.8)
+					end
+					
+					inst.components.hunger:DoDelta(-0.40, true)
+				elseif data.action.action == ACTIONS.DIG then
+					inst.components.hunger:DoDelta(-0.5, true)
 				else
-					inst.components.hunger:DoDelta(-0.2)
+					inst.components.hunger:DoDelta(-0.25, true)
 					print("attack")
 				end
 			end
@@ -218,11 +240,11 @@ local function ActionHungerDrain(inst, data)
 end
 
 local function onhungerchange(inst, data)
-	local fast = inst.components.hunger:GetPercent() > HUNGRY_THRESH_HIGH
+	local fast = inst.components.hunger:GetPercent() >= TUNING.HUNGRY_THRESH --HUNGRY_THRESH_HIGH
 	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
-	
+
 	if fast then
-		inst.components.workmultiplier:AddMultiplier(ACTIONS.CHOP,   1.33, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.CHOP,   1.43, "ohungy")
 		inst.components.workmultiplier:AddMultiplier(ACTIONS.MINE,   1.33, "ohungy")
 		inst.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, 1.33, "ohungy")
 		inst.components.workmultiplier:AddMultiplier(ACTIONS.DIG, 1.33, "ohungy")
@@ -294,6 +316,18 @@ env.AddPrefabPostInit("winona", function(inst)
 	
 	if inst.components.efficientuser == nil then
 		inst:AddComponent("efficientuser")
+	end
+	
+	local fast = inst.components.hunger:GetPercent() >= TUNING.HUNGRY_THRESH --HUNGRY_THRESH_HIGH
+	
+	inst.sg.sg.actionhandlers[ACTIONS.PICK].deststate = function(inst, act) 
+		if act.target.components.pickable.quickpick == true then 
+			return "doshortaction" 
+		elseif fast then 
+			return  "domediumaction" 
+		else 
+			return "dolongaction" 
+		end
 	end
 end)
     

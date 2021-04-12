@@ -114,8 +114,8 @@ local function HungryPerd(self)
 	local MeHungy = WhileNode(function() return self.inst.mehungy <= 5 end, "Still Hungry",
 					PriorityNode({
 						DoAction(self.inst, EatFoodAnytime, "Eat Food", true),
-						ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME)),
 						DoAction(self.inst, PickBerriesActionHungry, "Pick Berries", true),
+						ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME)),
 						RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST),
 						Wander(self.inst, HomePos, MAX_WANDER_DIST),
 					}, .25))
