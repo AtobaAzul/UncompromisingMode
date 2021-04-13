@@ -295,12 +295,29 @@ local function on_chop(inst, chopper, remaining_chops)
 	if not (chopper:HasTag("epic") or chopper:HasTag("antlion_sinkhole")) then
 	local oldchops = inst.previouschops or 24
 	inst.previouschops = remaining_chops
-	for k = 1, (oldchops-remaining_chops) do
+	print(oldchops)
+	print(inst.previouschops)
+	if (oldchops+inst.partchops-remaining_chops) >= 1 then
+
+	local queuedchops = (oldchops+inst.partchops-remaining_chops)
+	print(queuedchops)
+	for k = 1, (oldchops+inst.partchops-remaining_chops) do
 	if inst:HasTag("infestedtree") then
 	SpawnDebris(inst,chopper,infestedloot)
 	else
-	SpawnDebris(inst,chopper,choploot)	
+	print('spawndebris')
+	SpawnDebris(inst,chopper,choploot)
+	if (oldchops+inst.partchops-remaining_chops)-k < 1 and (oldchops+inst.partchops-remaining_chops)-k > 0  then
+	inst.partchops = (oldchops+inst.partchops-remaining_chops)-k
+	else
+	inst.partchops = 0
 	end
+	print(inst.partchops)
+	print('-------')
+	end
+	end
+	elseif (oldchops - remaining_chops) < 1 then
+	inst.partchops = (oldchops-remaining_chops)--This accounts for characters like wes and our winona doing partial works
 	end
 	if remaining_chops >= 15 and remaining_chops < 20 then
     phase = 1
@@ -475,6 +492,7 @@ local function makefn()
 		--inst:DoPeriodicTask(5,Regrow)
 		inst:DoTaskInTime(0,Deletus)
 		inst:DoTaskInTime(0,SpawnTreeShadows)
+		inst.partchops = 0
 		inst.OnSave = onsave
 		inst.OnLoad = onload
         return inst
@@ -546,6 +564,7 @@ local function makeinfested()
 		inst:ListenForEvent("timerdone", Regrow)
 		inst:AddComponent("inspectable")
 		inst.previouschops = nil
+		inst.partchops = 0
 		--inst:DoPeriodicTask(5,Regrow)
 		inst:DoTaskInTime(0,Deletus)
 		inst:DoTaskInTime(0,SpawnTreeShadows)
