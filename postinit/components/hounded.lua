@@ -48,7 +48,7 @@ AddComponentPostInit("hounded", function(self)
 		local playerlist = TheSim:FindEntities(pt.x,pt.y,pt.z, 25, {"player", "_health"},{"dead", "playerghost"})
 		local player = playerlist[math.random(#playerlist)]
 		
-		if inst.components.combat ~= nil then	
+		if inst.components.combat ~= nil and player ~= nil then	
 			inst.components.combat:SuggestTarget(player)	
 		end
 	end
