@@ -195,7 +195,6 @@ local function ActionHungerDrain(inst, data)
 				end
 				if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL or data.action.action == ACTIONS.PICK then
 					inst.components.hunger:DoDelta(-0.20, true)
-					print("row")
 				elseif data.action.action == ACTIONS.CHOP then
 					if data.action.target ~= nil then
 						local snap = SpawnPrefab("impact")
@@ -208,7 +207,6 @@ local function ActionHungerDrain(inst, data)
 					end
 					
 					inst.components.hunger:DoDelta(-0.30, true)
-					print("work")
 				elseif data.action.action == ACTIONS.MINE or
 				data.action.action == ACTIONS.HAMMER then
 					if data.action.target ~= nil then
@@ -226,7 +224,6 @@ local function ActionHungerDrain(inst, data)
 					inst.components.hunger:DoDelta(-0.5, true)
 				else
 					inst.components.hunger:DoDelta(-0.25, true)
-					print("attack")
 				end
 			end
 		elseif slow then
@@ -234,6 +231,22 @@ local function ActionHungerDrain(inst, data)
 			if (inst.hungryslowbuildtalktime or 0) < t then
 				inst.hungryslowbuildtalktime = t + GetRandomMinMax(8, 16)
 				inst.components.talker:Say(GetString(inst, "ANNOUNCE_HUNGRY_SLOWBUILD"))
+			end
+		else
+			if inst._cdtask == nil then
+				inst._cdtask = inst:DoTaskInTime(.3, OnCooldown)
+				if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL or data.action.action == ACTIONS.PICK then
+					inst.components.hunger:DoDelta(-0.1, true)
+				elseif data.action.action == ACTIONS.CHOP then
+					inst.components.hunger:DoDelta(-0.15, true)
+				elseif data.action.action == ACTIONS.MINE or
+				data.action.action == ACTIONS.HAMMER then
+					inst.components.hunger:DoDelta(-0.20, true)
+				elseif data.action.action == ACTIONS.DIG then
+					inst.components.hunger:DoDelta(-0.25, true)
+				else
+					inst.components.hunger:DoDelta(-0.125, true)
+				end
 			end
 		end
 	end
@@ -324,16 +337,12 @@ env.AddPrefabPostInit("winona", function(inst)
 	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
 	
 		if act.target.components.pickable.quickpick == true then
-			print("short")
 			return "doshortaction" 
-		elseif fast then 
-			print("med")
+		elseif fast then
 			return  "domediumaction"
-		elseif slow then 
-			print("long")
+		elseif slow then
 			return "dohungrybuild"
 		else
-			print("default")
 			return "dolongaction"
 		end
 	end
