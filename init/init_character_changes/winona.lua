@@ -171,7 +171,7 @@ local function OnCooldown(inst)
 end
 
 local function ActionHungerDrain(inst, data)
-	local fast = inst.components.hunger:GetPercent() >= TUNING.HUNGRY_THRESH --HUNGRY_THRESH_HIGH
+	local fast = inst.components.hunger:GetPercent() >= HUNGRY_THRESH_HIGH
 	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
 	local t = GetTime()
 
@@ -240,7 +240,7 @@ local function ActionHungerDrain(inst, data)
 end
 
 local function onhungerchange(inst, data)
-	local fast = inst.components.hunger:GetPercent() >= TUNING.HUNGRY_THRESH --HUNGRY_THRESH_HIGH
+	local fast = inst.components.hunger:GetPercent() >= HUNGRY_THRESH_HIGH
 	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
 
 	if fast then
@@ -318,15 +318,23 @@ env.AddPrefabPostInit("winona", function(inst)
 		inst:AddComponent("efficientuser")
 	end
 	
-	local fast = inst.components.hunger:GetPercent() >= TUNING.HUNGRY_THRESH --HUNGRY_THRESH_HIGH
+	inst.sg.sg.actionhandlers[ACTIONS.PICK].deststate = function(inst, act)
 	
-	inst.sg.sg.actionhandlers[ACTIONS.PICK].deststate = function(inst, act) 
-		if act.target.components.pickable.quickpick == true then 
+	local fast = inst.components.hunger:GetPercent() >= HUNGRY_THRESH_HIGH
+	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
+	
+		if act.target.components.pickable.quickpick == true then
+			print("short")
 			return "doshortaction" 
 		elseif fast then 
-			return  "domediumaction" 
-		else 
-			return "dolongaction" 
+			print("med")
+			return  "domediumaction"
+		elseif slow then 
+			print("long")
+			return "dohungrybuild"
+		else
+			print("default")
+			return "dolongaction"
 		end
 	end
 end)
