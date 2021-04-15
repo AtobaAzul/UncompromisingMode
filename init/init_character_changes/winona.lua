@@ -331,19 +331,31 @@ env.AddPrefabPostInit("winona", function(inst)
 		inst:AddComponent("efficientuser")
 	end
 	
-	inst.sg.sg.actionhandlers[ACTIONS.PICK].deststate = function(inst, act)
-	
+	local _PickActionOld = inst.sg.sg.actionhandlers[ACTIONS.PICK].deststate
+	inst.sg.sg.actionhandlers[ACTIONS.PICK].deststate = function(inst, action)
 	local fast = inst.components.hunger:GetPercent() >= HUNGRY_THRESH_HIGH
 	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
-	
-		if act.target.components.pickable.quickpick == true then
-			return "doshortaction" 
-		elseif fast then
-			return  "domediumaction"
-		elseif slow then
-			return "dohungrybuild"
+		if inst:HasTag("hungrybuilder") then
+            return (inst.components.rider ~= nil and inst.components.rider:IsRiding() and "dolongaction")
+                or (action.target ~= nil
+                and action.target.components.pickable ~= nil
+                and (   (action.target.components.pickable.jostlepick and "dojostleaction") or
+                        (action.target.components.pickable.quickpick and "doshortaction") or
+                        (inst:HasTag("fastpicker") and "doshortaction") or
+                        (inst:HasTag("quagmire_fasthands") or fast and "domediumaction") or
+						(slow and "dohungrybuild") or
+                        "dolongaction"  ))
+                or nil
 		else
-			return "dolongaction"
+            return (inst.components.rider ~= nil and inst.components.rider:IsRiding() and "dolongaction")
+                or (action.target ~= nil
+                and action.target.components.pickable ~= nil
+                and (   (action.target.components.pickable.jostlepick and "dojostleaction") or
+                        (action.target.components.pickable.quickpick and "doshortaction") or
+                        (inst:HasTag("fastpicker") and "doshortaction") or
+                        (inst:HasTag("quagmire_fasthands") and "domediumaction") or
+                        "dolongaction"  ))
+                or nil
 		end
 	end
 end)

@@ -35,15 +35,14 @@ local function Zap(inst)
     local ents = TheSim:FindEntities(x, y, z, 3.5, { "_health" }, inst.NoTags)
 	
 	for i, v in ipairs(ents) do
-		if v ~= nil and v.components.health ~= nil and not v.components.health:IsDead() then
+		if v ~= nil and v.components.health ~= nil and not v.components.health:IsDead() and v.components.combat ~= nil then
 			if v:HasTag("player") and (v.components.inventory ~= nil and not v.components.inventory:IsInsulated()) then
 				if not v:HasTag("electricdamageimmune") then
 					v.components.health:DoDelta(-25, nil, inst.prefab, nil, inst)
+					v.sg:GoToState("electrocute")
 				else
-					v.components.health:DoDelta(-5, nil, inst.prefab, nil, inst)
+					v.components.combat:GetAttacked(inst, -10, inst.prefab)
 				end
-				
-				v.sg:GoToState("electrocute")
 			elseif v.components.combat ~= nil then
 				v.components.combat:GetAttacked(inst, -25)
 			end
