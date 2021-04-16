@@ -411,6 +411,55 @@ local states =
 		},
 
 	},
+	
+	State{
+		name = "tornadostorm",
+		tags = {"busy"},
+
+		onenter = function(inst)
+			inst.Physics:Stop()
+			inst.AnimState:PlayAnimation("taunt_pre")
+			inst.AnimState:PushAnimation("taunt")
+			inst.AnimState:PushAnimation("taunt_pst", false)
+			
+			
+			local tornado1 = SpawnPrefab("mothergoose_tornado")
+			tornado1.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			tornado1.rotation = 90
+			tornado1.spawnmore = false
+			
+			local tornado2 = SpawnPrefab("mothergoose_tornado")
+			tornado2.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			tornado2.rotation = 180
+			tornado2.spawnmore = false
+			
+			local tornado3 = SpawnPrefab("mothergoose_tornado")
+			tornado3.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			tornado3.rotation = 270
+			tornado3.spawnmore = false
+			
+			local tornado4 = SpawnPrefab("mothergoose_tornado")
+			tornado4.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			tornado4.rotation = 0
+			tornado4.spawnmore = false
+		end,
+
+		timeline=
+		{
+			TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/flap") end),
+			TimeEvent(11*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/taunt") end),
+			TimeEvent(13*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/flap") end),
+			TimeEvent(17*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/flap") end),
+			TimeEvent(21*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/flap") end),
+			TimeEvent(27*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/flap") end),
+			TimeEvent(37*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/flap") end),
+		},
+
+		events=
+		{
+			EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
+		},
+	}
 
 --[[ This doesn't seem to be used animore...
 	State{

@@ -213,4 +213,5 @@ return {
 	"slobberlobber",
 	"uncompromising_birds",
 	"um_shambler",
+	"mothergoose_tornado",
 }
