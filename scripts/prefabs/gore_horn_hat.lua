@@ -85,15 +85,15 @@ local function speedcheck(inst)
 		and not inst.components.rider:IsRiding() then
 			if inst.runspeed == nil then
 				inst.runspeed = 1
-			elseif inst.runspeed ~= nil and inst.runspeed < 2.5 then
+			elseif inst.runspeed ~= nil and inst.runspeed < 1.8 then
 				if inst.facing_angle ~= nil and inst.facing_angle_old ~= nil and (inst.facing_angle >= inst.facing_angle_old + inst.angleadjustment2 - 3 and inst.facing_angle <= inst.facing_angle_old + inst.angleadjustment1 + 3) then
-					inst.runspeed = inst.runspeed + 0.025
+					inst.runspeed = inst.runspeed + 0.02
 				elseif inst.runspeed > 1 then
-					inst.runspeed = inst.runspeed - 0.025
+					inst.runspeed = inst.runspeed - 0.02
 				end
 			end
 			
-			if inst.runspeed >= 2 and inst.physbox == nil then
+			if inst.runspeed >= 1.8 and inst.physbox == nil then
 				inst.physbox = SpawnPrefab("gore_horn_physbox")
 				inst.physbox.owner = inst
 				inst.physbox.entity:AddFollower()
@@ -111,15 +111,15 @@ local function speedcheck(inst)
 			
 			if inst.task == nil then
 				inst.task = inst:DoPeriodicTask(0.27, function(inst) 
-					inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/steam", nil, inst.runspeed / 2) 
-					if inst.runspeed > 1.7 then
+					inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/steam", nil, inst.runspeed / 1.8) 
+					if inst.runspeed > 1.6 then
 						SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
 					end
 				end)
 			end
 			
 			inst.components.locomotor:SetExternalSpeedMultiplier(inst, "gore_horn", inst.runspeed)
-			if inst.runspeed >= 2 then
+			if inst.runspeed >= 1.8 then
 				inst.gorehorn.components.fueled:DoDelta(-1)
 				inst.gorehorn.pausedfuel = false
 				if inst.gorehorn.unpausefueledtask ~= nil then
@@ -127,6 +127,9 @@ local function speedcheck(inst)
 					inst.gorehorn.unpausefueledtask = nil
 				end
 				inst.gorehorn.unpausefueledtask = inst.gorehorn:DoTaskInTime(3, unpausefueled)
+				inst.AnimState:OverrideSymbol("swap_hat", "hat_gore_horn_swap_on", "swap_hat")
+			else
+				inst.AnimState:OverrideSymbol("swap_hat", "hat_gore_horn_swap_off", "swap_hat")
 			end
 		else
 			if inst.physbox ~= nil then
@@ -144,6 +147,7 @@ local function speedcheck(inst)
 			
 			inst.runspeed = 1
 			inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "gore_horn") 
+			inst.AnimState:OverrideSymbol("swap_hat", "hat_gore_horn_swap_off", "swap_hat")
 			
 			inst:RemoveEventCallback("gore_horn_collision", reducespeed)
 		end
@@ -168,7 +172,7 @@ local function onequip(inst, owner)
 			end
 		end)
 	else
-		owner.AnimState:OverrideSymbol("swap_hat", "hat_mole", "swap_hat")
+		owner.AnimState:OverrideSymbol("swap_hat", "hat_gore_horn_swap_off", "swap_hat")
 
         owner.AnimState:Show("HAT")
         owner.AnimState:Show("HAIR_HAT")
@@ -246,9 +250,9 @@ end
 
         MakeInventoryPhysics(inst)
 
-        inst.AnimState:SetBank("hat_mole")
-        inst.AnimState:SetBuild("molehat")
-        inst.AnimState:PlayAnimation("anim")
+        inst.AnimState:SetBank("hat_gore_horn")
+        inst.AnimState:SetBuild("hat_gore_horn")
+        inst.AnimState:PlayAnimation("idle")
 
         inst:AddTag("hat")
         inst:AddTag("gore_horn")
