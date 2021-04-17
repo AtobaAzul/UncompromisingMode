@@ -33,12 +33,12 @@ local TARGET_TAGS = { "_combat" }
 for k, v in pairs(WORK_ACTIONS) do
     table.insert(TARGET_TAGS, k.."_workable")
 end
-local TARGET_IGNORE_TAGS = { "INLIMBO" }
+local TARGET_IGNORE_TAGS = { "INLIMBO", "mothergoose", "mossling", "moose", "mothergoose" }
 
 local function destroystuff(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
 	
-	local sizecheck = inst.Transform:GetScale() * 2 or 0
+	local sizecheck = 1 + (inst.Transform:GetScale() * 2) or 0
 	print(sizecheck)
     local ents = TheSim:FindEntities(x, y, z, sizecheck, nil, TARGET_IGNORE_TAGS, TARGET_TAGS)
     for i, v in ipairs(ents) do
@@ -95,7 +95,11 @@ local states =
         onenter = function(inst)
             inst.Physics:Stop()
             inst.AnimState:PushAnimation("tornado_loop", false)
-            destroystuff(inst)
+			inst:DoTaskInTime(1, function(inst)
+				if inst.destroytask == nil then
+					inst.destroytask = inst:DoPeriodicTask(0.5, destroystuff)
+				end
+			end)
         end,
 
         events =
@@ -212,19 +216,14 @@ local states =
 			if inst.rotation == nil then
 				inst.rotation = 90
 			else
-				inst.components.locomotor.runspeed = inst.components.locomotor.runspeed + 0.2
+				inst.components.locomotor.runspeed = inst.components.locomotor.runspeed + 0.25
 				inst.rotation = inst.rotation + 5
 			end
 			
 			inst.Transform:SetRotation(inst.rotation)
-				
+			
             inst.AnimState:PushAnimation("tornado_loop", false)
         end,
-
-        timeline =
-        {
-            TimeEvent(5*FRAMES, destroystuff),
-        },
 
         events =
         {

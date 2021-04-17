@@ -427,21 +427,25 @@ local states =
 			tornado1.Transform:SetPosition(inst.Transform:GetWorldPosition())
 			tornado1.rotation = 90
 			tornado1.spawnmore = false
+			tornado1.WINDSTAFF_CASTER = inst
 			
 			local tornado2 = SpawnPrefab("mothergoose_tornado")
 			tornado2.Transform:SetPosition(inst.Transform:GetWorldPosition())
 			tornado2.rotation = 180
 			tornado2.spawnmore = false
+			tornado2.WINDSTAFF_CASTER = inst
 			
 			local tornado3 = SpawnPrefab("mothergoose_tornado")
 			tornado3.Transform:SetPosition(inst.Transform:GetWorldPosition())
 			tornado3.rotation = 270
 			tornado3.spawnmore = false
+			tornado3.WINDSTAFF_CASTER = inst
 			
 			local tornado4 = SpawnPrefab("mothergoose_tornado")
 			tornado4.Transform:SetPosition(inst.Transform:GetWorldPosition())
 			tornado4.rotation = 0
 			tornado4.spawnmore = false
+			tornado4.WINDSTAFF_CASTER = inst
 		end,
 
 		timeline=
