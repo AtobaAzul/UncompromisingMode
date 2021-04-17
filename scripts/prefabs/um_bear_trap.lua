@@ -1,16 +1,5 @@
 require "prefabutil"
 
-local assets =
-{
-    Asset("ANIM", "anim/trap_teeth.zip"),
-}
-
-local assets_maxwell =
-{
-    Asset("ANIM", "anim/trap_teeth_maxwell.zip"),
-    Asset("MINIMAP_IMAGE", "trap_teeth"),
-}
-
 local function onfinished_normal(inst)
 	inst.DynamicShadow:Enable(false)
 	
@@ -182,8 +171,80 @@ local function common_fn()
 
     inst.MiniMapEntity:SetIcon("trap_teeth.png")
 
-    inst.AnimState:SetBank("lavaarena_trap_beartrap")
-    inst.AnimState:SetBuild("lavaarena_trap_beartrap")
+    inst.AnimState:SetBank("um_bear_trap")
+    inst.AnimState:SetBuild("um_bear_trap")
+    inst.AnimState:PlayAnimation("idle")
+
+    inst:AddTag("trap")
+    inst:AddTag("bear_trap")
+    inst:AddTag("smallcreature")
+    inst:AddTag("mech")
+
+	MakeInventoryFloatable(inst)
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.latchedtarget = nil
+	inst.Snapped = false
+	
+    inst:AddComponent("inspectable")
+	
+	inst.SoundEmitter:PlaySound("dontstarve/impacts/impact_metal_armour_blunt")
+
+	--inst:AddComponent("inventoryitem")
+	--inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
+
+    inst:AddComponent("mine")
+    inst.components.mine:SetRadius(TUNING.TRAP_TEETH_RADIUS * 1.5)
+    inst.components.mine:SetAlignment("bear_trap_immune")
+    inst.components.mine:SetOnExplodeFn(OnExplode)
+    inst.components.mine:SetOnResetFn(OnReset)
+    inst.components.mine:SetOnSprungFn(SetSprung)
+    inst.components.mine:SetOnDeactivateFn(SetInactive)
+    inst.components.mine:SetTestTimeFn(calculate_mine_test_time)
+    inst.components.mine:Reset()
+	
+	inst:AddComponent("health")
+    inst.components.health:SetMaxHealth(TUNING.WALRUS_HEALTH)
+    inst:ListenForEvent("death", onfinished_normal)
+
+    inst:AddComponent("combat")
+    inst:ListenForEvent("attacked", OnAttacked)
+	
+    inst:AddComponent("deployable")
+    inst.components.deployable.ondeploy = ondeploy
+    inst.components.deployable:SetDeploySpacing(DEPLOYSPACING.LESS)
+
+    inst:AddComponent("hauntable")
+    inst.components.hauntable:SetOnHauntFn(OnHaunt)
+	
+	inst.deathtask = inst:DoTaskInTime(30, onfinished_normal)
+
+    return inst
+end
+
+local function old_fn(build)
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddMiniMapEntity()
+    inst.entity:AddNetwork()
+	
+	local shadow = inst.entity:AddDynamicShadow()
+    shadow:SetSize( 1.5, 1 )
+
+    MakeInventoryPhysics(inst)
+
+    inst.MiniMapEntity:SetIcon("trap_teeth.png")
+
+    inst.AnimState:SetBank("um_bear_trap")
+    inst.AnimState:SetBuild("um_bear_trap_old")
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("trap")
@@ -271,8 +332,8 @@ end
 local function onthrown(inst)
     inst:AddTag("NOCLICK")
     inst.persists = false
-    inst.AnimState:SetBank("lavaarena_trap_beartrap")
-    inst.AnimState:SetBuild("lavaarena_trap_beartrap")
+    inst.AnimState:SetBank("um_bear_trap")
+    inst.AnimState:SetBuild("um_bear_trap")
     inst.AnimState:PlayAnimation("spin_loop", true)
 	
     inst.Physics:SetMass(1)
@@ -299,8 +360,8 @@ local function projectilefn()
     inst.entity:AddPhysics()
     inst.entity:AddNetwork()
 
-    inst.AnimState:SetBank("lavaarena_trap_beartrap")
-    inst.AnimState:SetBuild("lavaarena_trap_beartrap")
+    inst.AnimState:SetBank("um_bear_trap")
+    inst.AnimState:SetBuild("um_bear_trap")
 	inst.AnimState:PushAnimation("idle", false)
 
     inst.entity:SetPristine()
@@ -325,6 +386,7 @@ local function projectilefn()
     return inst
 end
 
-return Prefab("um_bear_trap", common_fn, assets),
+return Prefab("um_bear_trap", common_fn),
+    Prefab("um_bear_trap_old", old_fn),
     MakePlacer("um_bear_trap_placer", "trap_teeth", "trap_teeth", "idle"),
-    Prefab("um_bear_trap_projectile", projectilefn, assets_maxwell)
+    Prefab("um_bear_trap_projectile", projectilefn)
