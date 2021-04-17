@@ -335,6 +335,9 @@ Assets = {
 	Asset("ANIM", "anim/slobberlobber.zip"),
 	Asset("ANIM", "anim/lava_spitball.zip"),
 	Asset("ANIM", "anim/shambler.zip"),
+	Asset("ANIM", "anim/hat_gore_horn.zip"),
+	Asset("ANIM", "anim/hat_gore_horn_swap_on.zip"),
+	Asset("ANIM", "anim/hat_gore_horn_swap_off.zip"),
 	
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_closed_lazy"),
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_lazy"),

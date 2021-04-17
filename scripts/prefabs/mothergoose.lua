@@ -300,6 +300,8 @@ local function fn()
 
     inst:SetStateGraph("SGmothermoose")
     inst:SetBrain(brain)
+	
+	inst:DoPeriodicTask(15, function(inst) print("okay now storm") inst.sg:GoToState("tornadostorm") end)
 
     return inst
 end
