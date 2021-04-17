@@ -73,6 +73,7 @@ end
 		
 		inst:AddTag("sanity")
 		inst:AddTag("shadow")
+		inst:AddTag("shadow_item")
 
 		MakeInventoryFloatable(inst, "small", 0.2, 0.80)
 
