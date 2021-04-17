@@ -324,7 +324,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
                     end) ~= nil)
             ) then
             if inst.components.combat:TargetIs(giver) then
-                inst.components.combat:SetTarget(nil)
+                inst.components.combat:SetTarget(nil)          --hmmmm I wonder if I have the guard tag or not?
             elseif giver.components.leader ~= nil and not (inst:HasTag("guard") or giver:HasTag("monster") or giver:HasTag("merm")) then
 
 				if giver.components.minigame_participator == nil then

@@ -210,6 +210,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "It's pretty big, maybe I can dig it up.",
+			FROZE = "It's frozen solid.",
 			REGROWING = "That plant survived, it'll probably grow back?",
 		}
 	DESCRIBE.BERNIE_INACTIVE =

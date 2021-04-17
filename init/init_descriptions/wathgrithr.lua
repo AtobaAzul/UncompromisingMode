@@ -174,6 +174,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Fruit that fights back? Respectable.",
+			FROZE = "It can't fight back anymore.",
 			REGROWING = "Honorable. Still isn't meat.",
 		}
 	DESCRIBE.BERNIE_INACTIVE =

@@ -176,6 +176,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Gonna make a mess, but what else is new?",
+			FROZE = "Just a block of ice now.",
 			REGROWING = "That must be the root.",
 		}
 	DESCRIBE.BERNIE_INACTIVE =

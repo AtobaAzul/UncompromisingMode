@@ -174,6 +174,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Oh, the possibilities!",
+			FROZE = "You can't be used in this state mon amie!",
 			REGROWING = "Oh good, it'll come back. I desire more!",
 		}
 	DESCRIBE.BERNIE_INACTIVE =

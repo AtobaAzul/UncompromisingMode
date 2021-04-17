@@ -176,6 +176,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "If it bursts all over this suit, I'm going to kill something.",
+			FROZE = "It's been frozen solid, good.",
 			REGROWING = "It'll grow more.",
 		}
 	DESCRIBE.BERNIE_INACTIVE =

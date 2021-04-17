@@ -174,6 +174,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "It's huge! No way we can pull that out with our arms!",
+			FROZE = "I can see the berry trapped within! Oh...",
 			REGROWING = "Exploding must be exhausting.",
 		}
 	DESCRIBE.BERNIE_INACTIVE =

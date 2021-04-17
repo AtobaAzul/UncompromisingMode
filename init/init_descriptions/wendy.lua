@@ -174,6 +174,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Eating it causes a mess, like everything else I do.",
+			FROZE = "Out of reach, just like Abigail.",
 			REGROWING = "Oh, it's still there.",
 		}
 	DESCRIBE.BERNIE_INACTIVE =

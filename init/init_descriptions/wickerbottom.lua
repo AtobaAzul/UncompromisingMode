@@ -175,6 +175,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Normal Cyanococcus berries don't pulsate.",
+			FROZE = "Normal Cyanococcus berries don't freeze solid either.",
 			REGROWING = "It appears that the root is still intact.",
 		}
 	DESCRIBE.BERNIE_INACTIVE =

@@ -175,6 +175,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "It's shaking around, eh?",
+			FROZE = "Well, it's not moving anymore.",
 			REGROWING = "That was an ordeal, eh?",
 		}
 	DESCRIBE.BERNIE_INACTIVE =

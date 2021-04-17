@@ -175,6 +175,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Can't rip out of ground with muscles?",
+			FROZE = "Ha! Wolfgang can see reflection in berry!",
 			REGROWING = "Berry not gone?",
 		}
 	DESCRIBE.BERNIE_INACTIVE =

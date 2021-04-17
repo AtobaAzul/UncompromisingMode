@@ -176,6 +176,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "Look tasty! Hard to dig, though...",
+			FROZE = "Look Chilly",
 			REGROWING = "Loud boom scary, florp!",
 		}
 	DESCRIBE.BERNIE_INACTIVE =

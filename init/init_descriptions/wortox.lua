@@ -175,6 +175,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
             READY = "If you don't give it room, It'll give a big boom!",
+			FROZE = "It finally chilled out!",
 			REGROWING = "What a joyful experience!",
 		}
 	DESCRIBE.BERNIE_INACTIVE =

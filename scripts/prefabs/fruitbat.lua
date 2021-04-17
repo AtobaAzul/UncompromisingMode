@@ -1,22 +1,9 @@
 require "brains/fruitbatbrain"
 require "stategraphs/SGfruitbat"
 
-local assets=
-{
-    Asset("ANIM", "anim/bat_basic.zip"),
-    Asset("ANIM", "anim/fruitbat.zip"),
-    Asset("SOUND", "sound/bat.fsb"),
-    Asset("INV_IMAGE", "bat"),
-}
-
-local prefabs =
-{
-    "pomegranate_seeds",
-}
-
 SetSharedLootTable( 'fruitbat',
 {
-    {'pomegranate_seeds',1},
+    {'giant_blueberry',1},
 })
 
 local SLEEP_DIST_FROMHOME = 1
@@ -282,5 +269,5 @@ local function fn()
     return inst
 end
 
-return Prefab("fruitbat", fn, assets, prefabs)
+return Prefab("fruitbat", fn)
 
