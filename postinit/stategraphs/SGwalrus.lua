@@ -37,29 +37,6 @@ local events=
 }
 
 local states = {
-    State{
-        name = "attack",
-        tags = {"attack"},
-        
-        onenter = function(inst)
-            PlayCreatureSound(inst, "attack")
-            inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_whoosh")
-            inst.components.combat:StartAttack()
-            inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("atk")
-			inst.AnimState:OverrideSymbol("pipe", "walswap_beartrap", "beartrap")
-        end,
-        
-        timeline =
-        {
-            TimeEvent(20*FRAMES, function(inst) inst.components.combat:DoAttack() end),
-        },
-        
-        events =
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
-        },
-    },
 	State{
         name = "throw_trap_pre",
         tags = { "attack", "busy" },
