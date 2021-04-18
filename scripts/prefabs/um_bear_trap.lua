@@ -37,6 +37,9 @@ local function debuffremoval(inst)
 end
 
 local function OnExplode(inst, target)
+	if inst.deathtask == nil then
+	inst.deathtask = inst:DoTaskInTime(30, onfinished_normal)
+	end
 	inst.Snapped = true
 	inst.SoundEmitter:PlaySound("dontstarve/common/trap_teeth_trigger")
 	--inst.SoundEmitter:PlaySound("dontstarve/impacts/impact_metal_armour_sharp")
@@ -88,7 +91,6 @@ local function OnReset(inst)
         inst.components.inventoryitem.nobounce = true
     end
     if not inst:IsInLimbo() then
-        inst.MiniMapEntity:SetEnabled(true)
     end
     if not inst.AnimState:IsCurrentAnimation("idle") then
         inst.SoundEmitter:PlaySound("dontstarve/common/trap_teeth_reset")
@@ -102,7 +104,6 @@ local function SetSprung(inst)
         inst.components.inventoryitem.nobounce = true
     end
     if not inst:IsInLimbo() then
-        inst.MiniMapEntity:SetEnabled(true)
     end
     inst.AnimState:PlayAnimation("idle_active")
 end
@@ -111,7 +112,6 @@ local function SetInactive(inst)
     if inst.components.inventoryitem ~= nil then
         inst.components.inventoryitem.nobounce = false
     end
-    inst.MiniMapEntity:SetEnabled(false)
     inst.AnimState:PlayAnimation("idle")
 end
 
@@ -161,7 +161,6 @@ local function common_fn()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
-    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 	
 	local shadow = inst.entity:AddDynamicShadow()
@@ -169,7 +168,6 @@ local function common_fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.MiniMapEntity:SetIcon("trap_teeth.png")
 
     inst.AnimState:SetBank("um_bear_trap")
     inst.AnimState:SetBuild("um_bear_trap")
@@ -199,7 +197,7 @@ local function common_fn()
 	--inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
 
     inst:AddComponent("mine")
-    inst.components.mine:SetRadius(TUNING.TRAP_TEETH_RADIUS * 1.5)
+    inst.components.mine:SetRadius(TUNING.TRAP_TEETH_RADIUS * 1.3)
     inst.components.mine:SetAlignment("bear_trap_immune")
     inst.components.mine:SetOnExplodeFn(OnExplode)
     inst.components.mine:SetOnResetFn(OnReset)
@@ -233,7 +231,6 @@ local function old_fn(build)
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
-    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 	
 	local shadow = inst.entity:AddDynamicShadow()
@@ -241,7 +238,7 @@ local function old_fn(build)
 
     MakeInventoryPhysics(inst)
 
-    inst.MiniMapEntity:SetIcon("trap_teeth.png")
+
 
     inst.AnimState:SetBank("um_bear_trap")
     inst.AnimState:SetBuild("um_bear_trap_old")
@@ -271,7 +268,7 @@ local function old_fn(build)
 	--inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
 
     inst:AddComponent("mine")
-    inst.components.mine:SetRadius(TUNING.TRAP_TEETH_RADIUS * 1.5)
+    inst.components.mine:SetRadius(TUNING.TRAP_TEETH_RADIUS * 1.3)
     inst.components.mine:SetAlignment("bear_trap_immune")
     inst.components.mine:SetOnExplodeFn(OnExplode)
     inst.components.mine:SetOnResetFn(OnReset)
@@ -294,7 +291,7 @@ local function old_fn(build)
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetOnHauntFn(OnHaunt)
 	
-	inst.deathtask = inst:DoTaskInTime(30, onfinished_normal)
+	--inst.deathtask = inst:DoTaskInTime(30, onfinished_normal) don't die
 
     return inst
 end
@@ -386,7 +383,54 @@ local function projectilefn()
     return inst
 end
 
+local function DoSpawnTrap(x,y,z)
+local xi = x+math.random(-7,7)
+local zi = z+math.random(-7,7)															--Prevent traps from being placed inside things. Add more things to list as you please
+if TheWorld.Map:IsAboveGroundAtPoint(xi, 0, zi) and #TheSim:FindEntities(xi,y,zi,1.5,{"giant_tree"}) and #TheSim:FindEntities(xi,y,zi,1.5,{"bear_trap"}) == 0 and #TheSim:FindEntities(xi,y,zi,5,{"bear_trap"}) < 2 then
+local trap = SpawnPrefab("um_bear_trap_old")
+trap.Transform:SetPosition(xi,y,zi)
+else
+DoSpawnTrap(x,y,z)
+end
+end
+
+local function Spawntrap(inst)
+local x,y,z = inst.Transform:GetWorldPosition()         --If the area is heavily lived in, bear traps will become a nuisance rather than a danger, know when to stop.
+if #TheSim:FindEntities(x,y,z,10,{"bear_trap"}) < 3 and #TheSim:FindEntities(x,y,z,30,{"structure"}) < 20 and #TheSim:FindEntities(x,y,z,40,{"player"}) == 0 then
+DoSpawnTrap(x,y,z)
+end
+inst.components.timer:StartTimer("spawntrap", 200+math.random(1000,2000))
+end
+local function ghost_walrusfn() --ghost walrus
+    local inst = CreateEntity()
+	
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddPhysics()
+    inst.entity:AddNetwork()
+
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	inst:AddTag("ghost_walrus")
+	inst:AddTag("CLASSIFIED")
+
+	inst:AddComponent("timer")
+	if not inst.components.timer:TimerExists("spawntrap") then
+	inst.components.timer:StartTimer("spawntrap", 2000+math.random(100,1000)) --ghost walrus leaves bear traps in the player's fridge
+	end
+	inst:ListenForEvent("timerdone", Spawntrap)
+
+    return inst
+end
+
 return Prefab("um_bear_trap", common_fn),
     Prefab("um_bear_trap_old", old_fn),
     MakePlacer("um_bear_trap_placer", "trap_teeth", "trap_teeth", "idle"),
-    Prefab("um_bear_trap_projectile", projectilefn)
+    Prefab("um_bear_trap_projectile", projectilefn),
+	Prefab("ghost_walrus",ghost_walrusfn)
