@@ -3,7 +3,11 @@ require("stategraphs/commonstates")
 local events =
 {
     EventHandler("locomote", function(inst)
-		inst.sg:GoToState("run")
+		if inst.timetorun then
+			inst.sg:GoToState("run")
+		else
+			inst.sg:GoToState("idle")
+		end
     end)
     -- EventHandler("locomote", function(inst)
     --     local is_moving = inst.sg:HasStateTag("moving")
@@ -115,7 +119,7 @@ local states =
         tags = {"moving", "canrotate"},
 
         onenter = function(inst)
-            inst.components.locomotor:RunForward()
+            --inst.components.locomotor:RunForward()
             inst.AnimState:PlayAnimation("tornado_pre")
         end,
 
@@ -158,7 +162,7 @@ local states =
         tags = {"moving", "canrotate"},
 
         onenter = function(inst)
-            inst.components.locomotor:WalkForward()
+            --inst.components.locomotor:WalkForward()
             inst.AnimState:PushAnimation("tornado_loop")
             destroystuff(inst)
         end,
@@ -190,7 +194,7 @@ local states =
         tags = {"moving", "running", "canrotate"},
 
         onenter = function(inst)
-            inst.components.locomotor:RunForward()
+            --inst.components.locomotor:RunForward()
             inst.AnimState:PushAnimation("tornado_loop", false)
         end,
 
@@ -202,7 +206,7 @@ local states =
         events =
         {
             EventHandler("animqueueover", function(inst)
-                inst.sg:GoToState("run")
+                --inst.sg:GoToState("run")
             end),
         },
     },
@@ -213,10 +217,11 @@ local states =
 
         onenter = function(inst)
             inst.components.locomotor:RunForward()
+			print(" RUN RUN ROOOO ")
 			if inst.rotation == nil then
 				inst.rotation = 90
 			else
-				inst.components.locomotor.runspeed = inst.components.locomotor.runspeed + 0.25
+				inst.components.locomotor.runspeed = inst.components.locomotor.runspeed + 0.15
 				inst.rotation = inst.rotation + 5
 			end
 			

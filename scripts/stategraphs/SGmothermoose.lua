@@ -15,6 +15,8 @@ local function onattackfn(inst)
 	   and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
 		if inst.CanDisarm then
 			inst.sg:GoToState("disarm")
+		elseif inst.TornadoAttack then
+			inst.sg:GoToState("tornadostorm")
 		else
 			inst.sg:GoToState("attack")
 		end
@@ -421,31 +423,43 @@ local states =
 			inst.AnimState:PlayAnimation("taunt_pre")
 			inst.AnimState:PushAnimation("taunt")
 			inst.AnimState:PushAnimation("taunt_pst", false)
-			
+			inst.TornadoAttack = false
 			
 			local tornado1 = SpawnPrefab("mothergoose_tornado")
 			tornado1.Transform:SetPosition(inst.Transform:GetWorldPosition())
 			tornado1.rotation = 90
 			tornado1.spawnmore = false
 			tornado1.WINDSTAFF_CASTER = inst
+			tornado1.Physics:Teleport(0,0,0)
+			inst:AddChild(tornado1)
+            tornado1.Physics:Stop()
 			
 			local tornado2 = SpawnPrefab("mothergoose_tornado")
 			tornado2.Transform:SetPosition(inst.Transform:GetWorldPosition())
 			tornado2.rotation = 180
 			tornado2.spawnmore = false
 			tornado2.WINDSTAFF_CASTER = inst
+			tornado2.Physics:Teleport(0,0,0)
+			inst:AddChild(tornado2)
+            tornado2.Physics:Stop()
 			
 			local tornado3 = SpawnPrefab("mothergoose_tornado")
 			tornado3.Transform:SetPosition(inst.Transform:GetWorldPosition())
 			tornado3.rotation = 270
 			tornado3.spawnmore = false
 			tornado3.WINDSTAFF_CASTER = inst
+			tornado3.Physics:Teleport(0,0,0)
+			inst:AddChild(tornado3)
+            tornado3.Physics:Stop()
 			
 			local tornado4 = SpawnPrefab("mothergoose_tornado")
 			tornado4.Transform:SetPosition(inst.Transform:GetWorldPosition())
 			tornado4.rotation = 0
 			tornado4.spawnmore = false
 			tornado4.WINDSTAFF_CASTER = inst
+			tornado4.Physics:Teleport(0,0,0)
+			inst:AddChild(tornado4)
+            tornado4.Physics:Stop()
 		end,
 
 		timeline=
@@ -558,6 +572,10 @@ CommonStates.AddCombatStates(states,
 		TimeEvent(20*FRAMES, function(inst)
 			if not inst.components.timer:TimerExists("DisarmCooldown") then
 				inst.components.timer:StartTimer("DisarmCooldown", 10)
+			end
+			
+			if not inst.components.timer:TimerExists("TornadoAttack") then
+				inst.components.timer:StartTimer("TornadoAttack", 20)
 			end
 			inst.components.combat:DoAttack(inst.sg.statemem.target)
 			inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/attack")

@@ -16,8 +16,9 @@ local function SetDuration(inst, duration)
 end
 
 local function shrink(inst)
+	inst.timetorun = true
 	inst.sg:GoToState("run")
-	inst.components.sizetweener:StartTween(0.1, 5, inst.Remove)
+	inst.components.sizetweener:StartTween(0.1, 2.9, inst.Remove)
 end
 
 local function shrinktask(inst)
@@ -26,7 +27,7 @@ end
 		
 local function grow(inst, time, startsize, endsize)
 	inst.Transform:SetScale(0.1, 0.1, 0.1)
-	inst.components.sizetweener:StartTween(2, 1.5, shrinktask)
+	inst.components.sizetweener:StartTween(1.5, 1.5, shrinktask)
 end
 
 local function tornado_fn()
@@ -51,14 +52,16 @@ local function tornado_fn()
     if not TheWorld.ismastersim then
         return inst
     end
+	
+	inst.timetorun = false
 
     inst:AddComponent("knownlocations")
 	
 	inst:AddComponent("sizetweener")
 
     inst:AddComponent("locomotor")
-    inst.components.locomotor.walkspeed = 5.5
-    inst.components.locomotor.runspeed = 5.5
+    inst.components.locomotor.walkspeed = 6
+    inst.components.locomotor.runspeed = 6
 
     inst:SetStateGraph("SGmothergoose_tornado")
 	inst.sg:GoToState("idle")

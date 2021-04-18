@@ -109,10 +109,19 @@ local function OnCollide(inst, other)
     --Destroy?
 end
 
+local function StartTornadoTimer(inst)
+	if not inst.components.timer:TimerExists("TornadoAttack") then
+		inst.components.timer:StartTimer("TornadoAttack", 10)
+	end
+	
+	inst.enraged = true
+end
+
 local function OnSave(inst, data)
     data.WantsToLayEgg = inst.WantsToLayEgg
     data.CanDisarm = inst.CanDisarm
     data.shouldGoAway = inst.shouldGoAway
+    data.enraged = inst.enraged or nil
 end
 
 local function OnLoad(inst, data)
@@ -133,6 +142,11 @@ local function ontimerdone(inst, data)
     if data.name == "DisarmCooldown" then
         inst.CanDisarm = true
     end
+
+    if data.name == "TornadoAttack" then
+		print("asidmaisdnasiofnaonagnoiadngionASDAFAFGA")
+        inst.TornadoAttack = true
+    end
 end
 
 local function rename(inst)
@@ -144,6 +158,12 @@ local function OnPreLoad(inst, data)
 	if y > 0 then
 		inst.Transform:SetPosition(x, 0, z)
 	end
+	
+    if data ~= nil then
+        if data.enraged then
+            StartTornadoTimer(inst)
+        end
+    end
 end
 
 local function OnDead(inst)
@@ -217,7 +237,7 @@ local function fn()
     ------------------
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(TUNING.MOOSE_HEALTH)
+    inst.components.health:SetMaxHealth(8000)
     inst.components.health.destroytime = 3
 
     ------------------
@@ -300,8 +320,6 @@ local function fn()
 
     inst:SetStateGraph("SGmothermoose")
     inst:SetBrain(brain)
-	
-	inst:DoPeriodicTask(15, function(inst) print("okay now storm") inst.sg:GoToState("tornadostorm") end)
 
     return inst
 end
