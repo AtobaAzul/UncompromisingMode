@@ -3,7 +3,7 @@
 local LinearCircler = Class(function(self, inst)
     self.inst = inst
 
-    self.speed = 0.3 
+    self.speed = 0.2 
     self.circleTarget = nil
 
     self.minSpeed = 5
@@ -17,6 +17,8 @@ local LinearCircler = Class(function(self, inst)
 
     self.sineMod = 25 * .001
     self.sine = 0
+	
+	self.clockwise = false
 
 	self.retract = false
 end)
@@ -27,13 +29,13 @@ function LinearCircler:Start()
         return
     end
 
-    self.speed = 0.3-- * .01
+    self.speed = 0.2-- * .01
 	
     self.angleRad = self.randAng * 2 * PI
     self.offset = Vector3(self.distance * math.cos(self.angleRad), 0, -self.distance * math.sin(self.angleRad))
     self.facingAngle = self.angleRad * RADIANS
 
-    self.direction = .5 * PI
+    self.direction = (self.clockwise and .5 or -.5) * PI
     self.facingAngle = (math.atan2(self.offset.x, self.offset.z) + self.direction) * RADIANS
 
     local x, y, z = self.circleTarget.Transform:GetWorldPosition()
@@ -79,13 +81,13 @@ function LinearCircler:OnUpdate(dt)
     --self.speed = easing.inExpo(self.sine, self:GetMinSpeed(), self:GetMaxSpeed() - self:GetMinSpeed() , 1)
 	--self.speed = Lerp(self:GetMinSpeed() - .003, self:GetMaxSpeed() + .003, self.sine)
     --self.speed = math.clamp(self.speed, self:GetMinSpeed(), self:GetMaxSpeed()) 
-	self.speed = 0.3-- * .01
+	self.speed = 0.2-- * .01
     self.angleRad = self.angleRad + self:GetSpeed(dt)
 	
-	if self.retract and self.distance > 1 then
+	if self.retract and self.distance > 1 and self.clockwise then
 		self.distance = self.distance - 0.3
 	elseif self.distance < 18 and not self.retract then
-		if self.distance >= 17 then
+		if self.distance >= (self.clockwise and 17 or 15) then
 			self.retract = true
 		end
 		if self.distance < 3 then

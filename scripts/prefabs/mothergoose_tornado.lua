@@ -75,7 +75,12 @@ end
 
 local function shrinktask(inst)
 	--inst:DoPeriodicTask(0.5, function(inst) inst.components.circler.distance = inst.components.circler.distance + 0.1 end)
-	inst:DoTaskInTime(1.5, shrink)
+	
+    if inst.components.linearcircler.clockwise then
+		inst:DoTaskInTime(1.5, shrink)
+	else
+		inst:DoTaskInTime(5, shrink)
+	end
 end
 		
 local function grow(inst, time, startsize, endsize)
@@ -139,7 +144,7 @@ local function tornado_fn()
     inst:SetDuration(3000)
 	
 	inst:DoTaskInTime(1, function(inst)
-		inst:DoPeriodicTask(.5, destroystuff)
+		inst:DoPeriodicTask(.4, destroystuff)
 	end)
 
     return inst

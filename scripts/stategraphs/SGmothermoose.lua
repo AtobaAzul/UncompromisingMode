@@ -425,6 +425,12 @@ local states =
 			inst.AnimState:PushAnimation("taunt_pst", false)
 			inst.TornadoAttack = false
 			
+			if math.random() > .5 then
+				inst.tornadotype = true
+			else
+				inst.tornadotype = false
+			end
+			
 			local tornado1 = SpawnPrefab("mothergoose_tornado")
 			--tornado1.Transform:SetPosition(inst.Transform:GetWorldPosition())
 			--tornado1.rotation = 90
@@ -433,6 +439,7 @@ local states =
     tornado1.components.linearcircler:SetCircleTarget(inst)
     tornado1.components.linearcircler:Start()
     tornado1.components.linearcircler.randAng = 0
+    tornado1.components.linearcircler.clockwise = inst.tornadotype
 			--tornado1.Physics:Teleport(0,0,0)
 			--inst:AddChild(tornado1)
            -- tornado1.Physics:Stop()
@@ -445,6 +452,7 @@ local states =
     tornado2.components.linearcircler:SetCircleTarget(inst)
     tornado2.components.linearcircler:Start()
     tornado2.components.linearcircler.randAng = 0.25
+    tornado2.components.linearcircler.clockwise = inst.tornadotype
 			--tornado2.Physics:Teleport(0,0,0)
 			--inst:AddChild(tornado2)
            -- tornado2.Physics:Stop()
@@ -457,6 +465,7 @@ local states =
     tornado3.components.linearcircler:SetCircleTarget(inst)
     tornado3.components.linearcircler:Start()
     tornado3.components.linearcircler.randAng = 0.5
+    tornado3.components.linearcircler.clockwise = inst.tornadotype
 			--tornado3.Physics:Teleport(0,0,0)
 			--inst:AddChild(tornado3)
            -- tornado3.Physics:Stop()
@@ -469,6 +478,7 @@ local states =
     tornado4.components.linearcircler:SetCircleTarget(inst)
     tornado4.components.linearcircler:Start()
     tornado4.components.linearcircler.randAng = 0.75
+    tornado4.components.linearcircler.clockwise = inst.tornadotype
 			--tornado4.Physics:Teleport(0,0,0)
 			--inst:AddChild(tornado4)
             --tornado4.Physics:Stop()
