@@ -2,7 +2,6 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local PHASE2_HEALTH = .6
-local PHASE3_HEALTH = .4
 
 local function SuperHop(inst, data)
     if data.name == "SuperHop" then
@@ -109,36 +108,34 @@ env.AddPrefabPostInit("moose", function(inst)
 end)
 
 local function EnterPhase2TriggerMother(inst)
-	if inst.components.health:GetPercent() > 0.5 then
-		inst.sg:GoToState("taunt")
+	inst.sg:GoToState("taunt")
 
-		for i = 1, 2 do
-			if not inst.components.health:IsDead() then
-				local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
-				local upgradeburst = SpawnPrefab("mothermossling")
-				upgradeburst.Transform:SetPosition(inst.Transform:GetWorldPosition())
-				upgradeburst.components.herdmember.herdprefab = "lightning"
-				upgradeburst.persists = false
-				upgradeburst.mother_dead = true
-				upgradeburst:AddComponent("follower")
-				upgradeburst.components.follower:SetLeader(inst)
-				upgradeburst.sg:GoToState("hatch")
-				upgradeburst.components.combat:SuggestTarget(target)
-				--[[if target ~= nil then
-					upgradeburst.components.locomotor:GoToEntity(target)
-					upgradeburst:DoTaskInTime(0, function(inst)
-						upgradeburst.sg:GoToState("spin_pre")
-					end)
-				end]]
-			end
+	for i = 1, 2 do
+		if not inst.components.health:IsDead() then
+			local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
+			local upgradeburst = SpawnPrefab("mothermossling")
+			upgradeburst.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			upgradeburst.components.herdmember.herdprefab = "lightning"
+			upgradeburst.persists = false
+			upgradeburst.mother_dead = true
+			upgradeburst:AddComponent("follower")
+			upgradeburst.components.follower:SetLeader(inst)
+			upgradeburst.sg:GoToState("hatch")
+			upgradeburst.components.combat:SuggestTarget(target)
+			--[[if target ~= nil then
+				upgradeburst.components.locomotor:GoToEntity(target)
+				upgradeburst:DoTaskInTime(0, function(inst)
+					upgradeburst.sg:GoToState("spin_pre")
+				end)
+			end]]
 		end
-	else
-		if not inst.components.timer:TimerExists("TornadoAttack") then
-			inst.components.timer:StartTimer("TornadoAttack", 10)
-		end
-		
-		inst.enraged = true
 	end
+	
+	if not inst.components.timer:TimerExists("TornadoAttack") then
+		inst.components.timer:StartTimer("TornadoAttack", 10)
+	end
+		
+	inst.enraged = true
 end
 
 env.AddPrefabPostInit("mothergoose", function(inst)
@@ -170,7 +167,6 @@ env.AddPrefabPostInit("mothergoose", function(inst)
 	
 	inst:AddComponent("healthtrigger")
 	inst.components.healthtrigger:AddTrigger(PHASE2_HEALTH, EnterPhase2TriggerMother)
-	inst.components.healthtrigger:AddTrigger(PHASE3_HEALTH, EnterPhase2TriggerMother)
 	
 	inst.superhop = true
 	
