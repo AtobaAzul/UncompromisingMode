@@ -223,6 +223,7 @@ local states =
 			else
 				inst.components.locomotor.runspeed = inst.components.locomotor.runspeed + 0.15
 				inst.rotation = inst.rotation + 5
+				inst.components.circler.distance = inst.components.circler.distance + 0.1
 			end
 			
 			inst.Transform:SetRotation(inst.rotation)

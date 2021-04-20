@@ -426,40 +426,52 @@ local states =
 			inst.TornadoAttack = false
 			
 			local tornado1 = SpawnPrefab("mothergoose_tornado")
-			tornado1.Transform:SetPosition(inst.Transform:GetWorldPosition())
-			tornado1.rotation = 90
-			tornado1.spawnmore = false
+			--tornado1.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			--tornado1.rotation = 90
+			--tornado1.spawnmore = false
 			tornado1.WINDSTAFF_CASTER = inst
-			tornado1.Physics:Teleport(0,0,0)
-			inst:AddChild(tornado1)
-            tornado1.Physics:Stop()
+    tornado1.components.linearcircler:SetCircleTarget(inst)
+    tornado1.components.linearcircler:Start()
+    tornado1.components.linearcircler.randAng = 0
+			--tornado1.Physics:Teleport(0,0,0)
+			--inst:AddChild(tornado1)
+           -- tornado1.Physics:Stop()
 			
 			local tornado2 = SpawnPrefab("mothergoose_tornado")
-			tornado2.Transform:SetPosition(inst.Transform:GetWorldPosition())
-			tornado2.rotation = 180
-			tornado2.spawnmore = false
+			--tornado2.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			--tornado2.rotation = 180
+			--tornado2.spawnmore = false
 			tornado2.WINDSTAFF_CASTER = inst
-			tornado2.Physics:Teleport(0,0,0)
-			inst:AddChild(tornado2)
-            tornado2.Physics:Stop()
+    tornado2.components.linearcircler:SetCircleTarget(inst)
+    tornado2.components.linearcircler:Start()
+    tornado2.components.linearcircler.randAng = 0.25
+			--tornado2.Physics:Teleport(0,0,0)
+			--inst:AddChild(tornado2)
+           -- tornado2.Physics:Stop()
 			
 			local tornado3 = SpawnPrefab("mothergoose_tornado")
-			tornado3.Transform:SetPosition(inst.Transform:GetWorldPosition())
-			tornado3.rotation = 270
-			tornado3.spawnmore = false
+			--tornado3.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			--tornado3.rotation = 270
+			--tornado3.spawnmore = false
 			tornado3.WINDSTAFF_CASTER = inst
-			tornado3.Physics:Teleport(0,0,0)
-			inst:AddChild(tornado3)
-            tornado3.Physics:Stop()
+    tornado3.components.linearcircler:SetCircleTarget(inst)
+    tornado3.components.linearcircler:Start()
+    tornado3.components.linearcircler.randAng = 0.5
+			--tornado3.Physics:Teleport(0,0,0)
+			--inst:AddChild(tornado3)
+           -- tornado3.Physics:Stop()
 			
 			local tornado4 = SpawnPrefab("mothergoose_tornado")
-			tornado4.Transform:SetPosition(inst.Transform:GetWorldPosition())
-			tornado4.rotation = 0
-			tornado4.spawnmore = false
+			--tornado4.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			--tornado4.rotation = 0
+			--tornado4.spawnmore = false
 			tornado4.WINDSTAFF_CASTER = inst
-			tornado4.Physics:Teleport(0,0,0)
-			inst:AddChild(tornado4)
-            tornado4.Physics:Stop()
+    tornado4.components.linearcircler:SetCircleTarget(inst)
+    tornado4.components.linearcircler:Start()
+    tornado4.components.linearcircler.randAng = 0.75
+			--tornado4.Physics:Teleport(0,0,0)
+			--inst:AddChild(tornado4)
+            --tornado4.Physics:Stop()
 		end,
 
 		timeline=
