@@ -6,7 +6,9 @@ local actionhandlers =
 	ActionHandler(ACTIONS.PICKUP, "action"),
 	ActionHandler(ACTIONS.HARVEST, "action"),
 	ActionHandler(ACTIONS.PICK, "action"),
-	ActionHandler(ACTIONS.LAYEGG, "layegg2"),
+	ActionHandler(ACTIONS.LAYEGG, function(inst)
+        return not inst.components.combat:HasTarget() and "layegg2"
+    end),
 	ActionHandler(ACTIONS.GOHOME, "flyaway"),
 }
 
@@ -47,7 +49,7 @@ local events=
 	CommonHandlers.OnDeath(),
 
 	EventHandler("flyaway", function(inst)
-		if not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") then
+		if not TheWorld.state.isspring and not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") then
 			inst.sg:GoToState("flyaway")
 		end
 	end),
@@ -596,7 +598,7 @@ CommonStates.AddCombatStates(states,
 				inst.components.timer:StartTimer("DisarmCooldown", 10)
 			end
 			
-			if not inst.components.timer:TimerExists("TornadoAttack") then
+			if inst.enraged ~= nil and inst.enraged and not inst.components.timer:TimerExists("TornadoAttack") then
 				inst.components.timer:StartTimer("TornadoAttack", 20)
 			end
 			inst.components.combat:DoAttack(inst.sg.statemem.target)

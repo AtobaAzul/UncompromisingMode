@@ -14,7 +14,7 @@ local TARGET_TAGS = { "_combat" }
 for k, v in pairs(WORK_ACTIONS) do
     table.insert(TARGET_TAGS, k.."_workable")
 end
-local TARGET_IGNORE_TAGS = { "INLIMBO", "mothergoose", "mossling", "moose", "mothergoose" }
+local TARGET_IGNORE_TAGS = { "gmooseegg", "INLIMBO", "mothergoose", "mossling", "moose", "mothergoose" }
 
 local function destroystuff(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
