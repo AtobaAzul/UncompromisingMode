@@ -155,6 +155,7 @@ local stategraph_post = {
 	"moose",
 	"spiderqueen",
 	"perd",
+	"merm",
 }
 
 local class_post = {

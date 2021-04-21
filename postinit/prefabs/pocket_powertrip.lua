@@ -133,12 +133,12 @@ end)
 env.AddPrefabPostInit("reflectivevest", function(inst)
 	if not TheWorld.ismastersim then
 		inst.OnEntityReplicated = function(inst) 
-			inst.replica.container:WidgetSetup("puffvest") 
+			inst.replica.container:WidgetSetup("reflvest") 
 		end
         return inst
     end
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup("puffvest")
+    inst.components.container:WidgetSetup("reflvest")
 	
 	--inst.components.inventoryitem.cangoincontainer = false
 	if inst.components.equippable ~= nil then

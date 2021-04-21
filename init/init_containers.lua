@@ -66,7 +66,7 @@ modparams.puffvest =
     issidewidget = true,
     type = "pack",
 }
-modparams.puffvest =
+modparams.reflvest =
 {
     widget =
     {
@@ -142,7 +142,9 @@ modparams.um_blowgun =
 for y = 0, 3 do
     table.insert(modparams.puffvest.widget.slotpos, Vector3(-1, -75 * y + 110, 0))	
 end
-
+for y = 0, 3 do
+    table.insert(modparams.reflvest.widget.slotpos, Vector3(-1, -75 * y + 110, 0))	
+end
 for y = 0, 3 do
     table.insert(modparams.crabclaw.widget.slotpos, Vector3(-1, -75 * y + 110, 0))	
 end
