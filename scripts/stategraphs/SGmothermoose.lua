@@ -49,7 +49,7 @@ local events=
 	CommonHandlers.OnDeath(),
 
 	EventHandler("flyaway", function(inst)
-		if not TheWorld.state.isspring and not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") then
+		if not inst.components.combat:HasTarget() and not TheWorld.state.isspring and not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") then
 			inst.sg:GoToState("flyaway")
 		end
 	end),

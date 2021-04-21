@@ -39,6 +39,11 @@ local events=
 			end
 		end
 	end),
+	EventHandler("flyaway", function(inst)
+		if not inst.components.combat:HasTarget() and not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") then
+			inst.sg:GoToState("flyaway")
+		end
+	end),
 }
 
 local states = {
