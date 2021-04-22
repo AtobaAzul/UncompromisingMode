@@ -134,6 +134,9 @@ AddRecipe("turf_ancienthoodedturf", {Ingredient("turf_hoodedmoss", 1,"images/inv
 AddRecipe("um_trap_snare", {Ingredient("livinglog", 1),Ingredient("rope", 1),Ingredient("pinecone", 1)}, RECIPETABS.WAR,  TECH.SCIENCE_TWO)
 
 
+--Seedpackitchange
+AllRecipes["seedpouch"].ingredients = {Ingredient("slurtle_shellpieces", 2), Ingredient("waxpaper",1), Ingredient("seeds", 2)}
+
 STRINGS.RECIPE_DESC.SLINGSHOTAMMO_FIRECRACKERS = "For the aspiring young menace."
 STRINGS.RECIPE_DESC.WATERMELON_LANTERN = "Juicy illumination."
 STRINGS.RECIPE_DESC.CRITTERLAB_REAL = "Cute pals to ruin the mood."

@@ -132,6 +132,7 @@ local prefab_post = {
 	"eyebrella",
 	"birds",
 	"perd",
+	"seedpouch",
 }
 
 local stategraph_post = {
