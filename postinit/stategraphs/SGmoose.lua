@@ -7,6 +7,13 @@ local function ShakeIfClose(inst)
     ShakeAllCameras(CAMERASHAKE.FULL, .35, .02, 1, inst, 40)
 end
 
+local actionhandlers =
+{
+	ActionHandler(ACTIONS.LAYEGG, function(inst)
+        return not inst.components.combat:HasTarget() and "layegg2"
+    end)
+}
+
 local events=
 {
     EventHandler("locomote",
@@ -30,6 +37,11 @@ local events=
 		print("chumba4")
 				inst.sg:GoToState("hop")
 			end
+		end
+	end),
+	EventHandler("flyaway", function(inst)
+		if not inst.components.combat:HasTarget() and not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") then
+			inst.sg:GoToState("flyaway")
 		end
 	end),
 }
@@ -303,6 +315,11 @@ end
 for k, v in pairs(states) do
     assert(v:is_a(State), "Non-state added in mod state table!")
     inst.states[v.name] = v
+end
+
+for k, v in pairs(actionhandlers) do
+    assert(v:is_a(ActionHandler), "Non-action added in mod state table!")
+    inst.actionhandlers[v.action] = v
 end
 
 end)

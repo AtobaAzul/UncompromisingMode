@@ -112,6 +112,7 @@ local function fn()
     inst.AnimState:PlayAnimation("nest")
 
     inst:AddTag("lightningrod")
+    inst:AddTag("gmooseegg")
 
     --Sneak these into pristine state for optimization
     inst:AddTag("_named")

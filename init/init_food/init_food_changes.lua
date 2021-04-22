@@ -49,8 +49,8 @@ recipes.pumpkincookie.hunger = 40
 recipes.pumpkincookie.sanity = 33
 recipes.pumpkincookie.health = 15
 
-recipes.stuffedeggplant.hunger = 45
-recipes.stuffedeggplant.health = 15
+recipes.stuffedeggplant.hunger = 50
+recipes.stuffedeggplant.health = 20
 
 recipes.asparagussoup.hunger = 25
 recipes.asparagussoup.health = 30
