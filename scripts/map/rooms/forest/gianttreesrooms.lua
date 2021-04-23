@@ -98,7 +98,7 @@ AddRoom("SpideryGiantTrees",
 				extracanopyspawner = 1,
 				hooded_fern = 0.5,
 				--giant_tree_infested = 0.006,
-				webbedcreature = 0.2,
+				--webbedcreature = 0.2,
 			},
 			countprefabs =	
 			{

@@ -146,6 +146,14 @@ local function SetStage(inst, stage)
 end
 
 local function SetSmall(inst)
+	if inst:HasTag("mediumcocoon") then
+	inst:RemoveTag("mediumcocoon")
+	end
+	if inst:HasTag("largecocoon") then
+	inst:RemoveTag("largecocoon")
+	end	
+	inst:AddTag("smallcocoon")
+	
 	inst.AnimState:SetBank("wackycocoonsmall")
 	inst.AnimState:SetBuild("wackycocoonsmall")
 	inst.DynamicShadow:SetSize(3.5, 2.5)
@@ -162,6 +170,14 @@ end
 
 
 local function SetMedium(inst)
+	if inst:HasTag("smallcocoon") then
+	inst:RemoveTag("smallcocoon")
+	end
+	if inst:HasTag("largecocoon") then
+	inst:RemoveTag("largecocoon")
+	end	
+	inst:AddTag("mediumcocoon")
+	
 	inst.DynamicShadow:SetSize(4, 3.5)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
@@ -177,6 +193,14 @@ local function SetMedium(inst)
 end
 
 local function SetLarge(inst)
+	if inst:HasTag("smallcocoon") then
+	inst:RemoveTag("smallcocoon")
+	end
+	if inst:HasTag("mediumcocoon") then
+	inst:RemoveTag("mediumcocoon")
+	end	
+	inst:AddTag("largecocoon")
+	
 	inst.DynamicShadow:SetSize(5, 4)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
@@ -309,8 +333,29 @@ local function OnKilled(inst)
 		inst.components.lootdropper:AddChanceLoot("steelwool",    1.00)
 		inst.components.lootdropper:AddChanceLoot("steelwool",    0.5)
 		inst.components.lootdropper:AddChanceLoot("phlegm",    1.00)
+		end
+		if inst.size == 15 then
+		creature = "lightninggoat"
+		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("meat",    0.5)
+		inst.components.lootdropper:AddChanceLoot("lightninggoathorn",    1.00)
+		inst.components.lootdropper:AddChanceLoot("lightninggoathorn",    1.00)
 		end	
-	
+		if inst.size == 16 then
+		creature = "snapdragon"
+		inst.components.lootdropper:AddChanceLoot("plantmeat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("plantmeat",    0.5)
+		inst.components.lootdropper:AddChanceLoot("livinglog",    1.00)
+		inst.components.lootdropper:AddChanceLoot("livinglog",    1.00)
+		inst.components.lootdropper:AddChanceLoot("livinglog",    1.00)
+		inst.components.lootdropper:AddChanceLoot("livinglog",    0.50)
+		end	
+		if inst.size == 17 then
+		creature = "catcoon"
+		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("coontail",    1.00)
+		inst.components.lootdropper:AddChanceLoot("coontail",    1.00)
+		end			
 		inst.components.lootdropper:DropLoot()
 	--[[if creature ~= nil and not creature == "spiderqueen" then
 		inst.components.lootdropper:SetChanceLootTable('webbedcreature_'..creature)
@@ -343,14 +388,14 @@ local function onsave(inst,data)
 if inst.size ~= nil then
 data.size = inst.size
 else
-data.size = math.random(1,14)
+data.size = math.random(1,17)
 end
 end
 local function onload(inst,data)
 if data and data.size ~= nil then
 inst.size = data.size
 else
-inst.size = math.random(1,14)
+inst.size = math.random(1,17)
 end
 end
 
@@ -424,10 +469,31 @@ local function SetSize(inst)
 		SetLarge(inst)
 		inst.components.named:SetName("Hardened Cocoon")
 	end
+	if inst.size == 15 then   --Volt goat
+		SetSmall(inst)
+		inst.components.named:SetName("Hairy Cocoon")
+	end
+	if inst.size == 16 then   --Snapdragon
+		SetMedium(inst)
+		inst.components.named:SetName("Leafy Cocoon")
+	end
+	if inst.size == 17 then   --Snapdragon
+		SetSmall(inst)
+		inst.components.named:SetName("Fuzzy Cocoon")
+	end
 end
-
+local function LandCheck(inst)
+local x,y,z = inst.Transform:GetWorldPosition()
+	if not TheWorld.Map:IsPassableAtPoint(x, 0, z) then
+	inst.GroundCreepEntity:SetRadius(0)
+	end
+end
 local function Regen(inst, attacker)
     if not inst.components.health:IsDead() then
+	local widowweb = FindEntity(inst,50,function(guy) return guy:HasTag("widowweb") end)
+	print(widowweb)
+	widowweb.SpawnInvestigators(widowweb,attacker)
+	
         inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_hit")
         inst.AnimState:PlayAnimation(inst.anims.hit)
         inst.AnimState:PushAnimation(inst.anims.idle)
@@ -445,7 +511,7 @@ local function fn()
 		inst.entity:AddNetwork()
 		inst.entity:AddDynamicShadow()
 		inst.entity:AddSoundEmitter()
-
+		inst.entity:AddGroundCreepEntity()
 
 		--MakeObstaclePhysics(inst, .5)
 
@@ -454,10 +520,13 @@ local function fn()
 		inst.AnimState:SetBuild("wackycocoons")
 		inst.AnimState:PlayAnimation("idle_small", true)
 		
-		inst:AddTag("structure")
+
 		inst:AddTag("webbedcreature")
+		inst:AddTag("structure")
 		inst:AddTag("noauradamage")
 		--inst:AddTag("notarget")
+		inst.GroundCreepEntity:SetRadius(3)
+		inst:AddTag("spiderden")
 		inst:AddTag("prey")
 		inst:AddTag("houndfriend")
 		inst:AddTag("antlion_sinkhole_blocker")
@@ -484,17 +553,85 @@ local function fn()
 
 		inst:AddComponent("inspectable")
 		inst:DoTaskInTime(0,SetSize)
+		inst:DoTaskInTime(0,LandCheck)
 		MakeSnowCovered(inst)
 		inst.OnSave = onsave
 		inst.OnLoad = onload
 		inst.OnEntitySleep = OnEntitySleep
 		inst.OnEntityWake = OnEntityWake
-		inst.size = math.random(1,14)
+		inst.size = math.random(1,17)
 		return inst
 end
 
+local function on_anim_over(inst)
+    if inst.components.mine.issprung then
+        return
+    end
+
+	if inst.froze == true then
+	if inst.Harvestable == true then
+	inst.AnimState:PushAnimation("idle_frozen", true)
+	else
+	inst.AnimState:PushAnimation("trap_idle", true)
+	end
+	else
+    local random_value = math.random()
+    if random_value < 0.4 then
+        inst.AnimState:PushAnimation("idle_2")
+        -- inst.SoundEmitter:PlaySound("turnoftides/creatures/together/starfishtrap/idle")
+        inst.AnimState:PushAnimation("idle", true)
+
+
+    elseif random_value < 0.8 then
+        inst.AnimState:PushAnimation("idle_3")
+        -- inst.SoundEmitter:PlaySound("turnoftides/creatures/together/starfishtrap/idle")
+        inst.AnimState:PushAnimation("idle", true)
+    end
+	end
 
 	
+end
 
-return Prefab( "webbedcreature", fn, assets, prefabs )
+local function on_anim_over(inst)
+if math.random() > 0.95 then
+inst.AnimState:PlayAnimation(inst.category.."_twitch")
+else
+inst.AnimState:PlayAnimation(inst.category)
+end
+end
+
+local function decorsave(inst,data)
+if data~= nil then
+data.category = inst.category
+end
+end
+
+local function decorload(inst,data)
+if data ~= nil then
+inst.category = data.category
+inst.AnimState:PlayAnimation(inst.category)
+end
+end
+local function fndecor()
+		local inst = CreateEntity()
+		inst.entity:AddTransform()
+		inst.entity:AddAnimState()
+		inst.entity:AddNetwork()
+		inst:AddTag("webdecor")
+		inst:AddTag("antlion_sinkhole_blocker")
+		inst.AnimState:SetBank("cocoondecor")
+		inst.AnimState:SetBuild("cocoondecor")
+		inst.entity:SetPristine()
+		if not TheWorld.ismastersim then
+			return inst
+		end
+		inst:ListenForEvent("animover", on_anim_over)
+		inst.OnSave = decorsave
+		inst.OnLoad = decorload
+		return inst
+end
+	
+
+return Prefab("webbedcreature", fn),
+Prefab("widowdecor", fndecor)
 

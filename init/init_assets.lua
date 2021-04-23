@@ -148,6 +148,7 @@ Assets = {
 	Asset("ANIM", "anim/cursedcrabclaw.zip"),
 	Asset("ANIM", "anim/gems_crabclaw.zip"),
 	Asset("ANIM", "anim/deerclops_yule_blue.zip"),
+	--Asset("ANIM", "anim/yuleclops_actions_UM.zip"),
 	Asset("ANIM", "anim/deerclops_laser_hit_sparks_fx_blue.zip"),
 	Asset("ANIM", "anim/bearger_rockthrow.zip"),
 	Asset("ANIM", "anim/bearger_boulder.zip"),
@@ -383,6 +384,7 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/turf_ancienthoodedturf.xml"),
 	Asset("ANIM", "anim/haul_pigman.zip"),
 	Asset("ANIM", "anim/wackycocoons.zip"),
+	Asset("ANIM", "anim/cocoondecor.zip"),
 	Asset("ANIM", "anim/wackycocoonsmall.zip"), --Had to seperate into second build, too big for a single build
 	Asset("ANIM", "anim/woodpecker_build.zip"),
 	Asset("IMAGE", "images/inventoryimages/woodpecker.tex"),

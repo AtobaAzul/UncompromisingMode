@@ -23,7 +23,8 @@ local function ontimerdone(inst, data)
     end
 end
 
-local function SpawnInvestigators(inst, data)
+local function SpawnInvestigators(inst, target)
+	print("test")
 	local test = nil
 	local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, 50, { "epic" }, {"hoodedwidow"})
@@ -32,8 +33,8 @@ local function SpawnInvestigators(inst, data)
 	else
 	test = false
 	end
-    if inst.components.childspawner ~= nil and not test == true then
-            local spider = inst.components.childspawner:SpawnChild(data.target, nil, 3)
+    if inst.components.childspawner ~= nil and not test == true and target ~= nil then
+            local spider = inst.components.childspawner:SpawnChild(target, nil, 3)
             if spider ~= nil then
 			local x,y,z = inst.Transform:GetWorldPosition()
 			spider.Physics:Teleport(x, 15, z)
@@ -51,16 +52,14 @@ local function fn()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 	inst.MiniMapEntity:SetIcon("hoodedwidow_map.tex")
-    inst.GroundCreepEntity:SetRadius(10)
-    inst:AddTag("spiderden")
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
 
-    inst:ListenForEvent("creepactivate", SpawnInvestigators)
-
+    inst.SpawnInvestigators = SpawnInvestigators
+	inst:AddTag("widowweb")
    -- inst:AddComponent("health")
     --inst.components.health.nofadeout = true
     inst:AddComponent("childspawner")

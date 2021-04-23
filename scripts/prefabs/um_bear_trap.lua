@@ -396,7 +396,7 @@ end
 
 local function Spawntrap(inst)
 local x,y,z = inst.Transform:GetWorldPosition()         --If the area is heavily lived in, bear traps will become a nuisance rather than a danger, know when to stop.
-if #TheSim:FindEntities(x,y,z,10,{"bear_trap"}) < 3 and #TheSim:FindEntities(x,y,z,30,{"structure"}) < 20 and #TheSim:FindEntities(x,y,z,40,{"player"}) == 0 then
+if #TheSim:FindEntities(x,y,z,10,{"bear_trap"}) < 3 and #TheSim:FindEntities(x,y,z,30,{"structure"},{"webbedcreature"}) < 20 and #TheSim:FindEntities(x,y,z,40,{"player"}) == 0 then
 DoSpawnTrap(x,y,z)
 end
 inst.components.timer:StartTimer("spawntrap", 200+math.random(1000,2000))

@@ -36,8 +36,7 @@ local RETARGET_MUST_TAGS = { "_combat" }
 local RETARGET_CANT_TAGS = { "INLIMBO", "structure", "bird", "snapdragon" }
 local RETARGET_ONE_OF_TAGS = { "player" }
 local function Retarget(inst)
-    if not inst.components.health:IsDead() and not inst.components.sleeper:IsAsleep() then
-        local oldtarget = inst.components.combat.target
+    if not inst.components.health:IsDead() and not inst.components.sleeper:IsAsleep() and not inst.sg:HasStateTag("attack") then
         local newtarget = FindEntity(inst, 6, 
             function(guy) 
                 return 
@@ -48,7 +47,7 @@ local function Retarget(inst)
 			RETARGET_ONE_OF_TAGS
         )
 
-        if newtarget ~= nil and newtarget ~= oldtarget then
+        if newtarget ~= nil then
             inst.components.combat:SetTarget(newtarget)
         end
     end
