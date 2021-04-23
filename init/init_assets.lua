@@ -131,6 +131,8 @@ Assets = {
 	Asset("ANIM", "anim/whisperpod_normal_ground.zip"),
 	Asset("ANIM", "anim/hound_lightning.zip"),
 	Asset("ANIM", "anim/hound_lightning_ocean.zip"),
+	Asset("ANIM", "anim/hound_spore.zip"),
+	Asset("ANIM", "anim/hound_spore_ocean.zip"),
 	Asset("ANIM", "anim/glacial_hound.zip"),
 	Asset("ANIM", "anim/glacial_hound_ocean.zip"),
 	Asset("ANIM", "anim/nightmaregrowth_shrink.zip"),
