@@ -4,21 +4,23 @@ GLOBAL.setfenv(1, GLOBAL)
 
 local function onothertimerdone(inst, data)
 	if data.name == "rage" then
+		if TheWorld.state.issummer then
 			inst:DoTaskInTime(17, function(inst)
-			inst:PushEvent("firefall")
+				inst:PushEvent("firefall")
 			end)
 			inst:DoTaskInTime(21, function(inst)
-			inst:PushEvent("firefall")
+				inst:PushEvent("firefall")
 			end)
 			inst:DoTaskInTime(25, function(inst)
-			inst:PushEvent("firefall")
+				inst:PushEvent("firefall")
 			end)
 			inst:DoTaskInTime(29, function(inst)
-			inst:PushEvent("firefall")
+				inst:PushEvent("firefall")
 			end)
 			inst:DoTaskInTime(30, function(inst)
-			inst:PushEvent("firefallstart")
+				inst:PushEvent("firefallstart")
 			end)
+		end
 	end
 end
 

@@ -432,6 +432,10 @@ Assets = {
 	Asset( "ATLAS", "images/map_icons/hoodedwidow_map.xml"),
 	Asset( "IMAGE", "images/map_icons/pollenmiteden_map.tex"),
 	Asset( "ATLAS", "images/map_icons/pollenmiteden_map.xml"),
+	Asset( "IMAGE", "images/map_icons/um_pawn.tex"),
+	Asset( "ATLAS", "images/map_icons/um_pawn.xml"),
+	Asset( "IMAGE", "images/map_icons/um_pawn_nightmare.tex"),
+	Asset( "ATLAS", "images/map_icons/um_pawn_nightmare.xml"),
 	--Map Icons End--
 
 	

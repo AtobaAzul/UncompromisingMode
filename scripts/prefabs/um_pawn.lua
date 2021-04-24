@@ -314,6 +314,7 @@ local function pawn_common(pawntype)
     inst.entity:AddPhysics()
 	inst.entity:AddSoundEmitter()
 	inst.entity:AddDynamicShadow()
+    inst.entity:AddMiniMapEntity()
 	inst.entity:AddNetwork()
 		
 		
@@ -392,6 +393,8 @@ end
 
 local function pawn()
     local inst = pawn_common("")
+	
+    inst.MiniMapEntity:SetIcon("um_pawn.tex")
 
     if not TheWorld.ismastersim then
         return inst
@@ -407,6 +410,8 @@ end
 
 local function pawn_nightmare()
     local inst = pawn_common("_nightmare")
+	
+    inst.MiniMapEntity:SetIcon("um_pawn_nightmare.tex")
 
     if not TheWorld.ismastersim then
         return inst
