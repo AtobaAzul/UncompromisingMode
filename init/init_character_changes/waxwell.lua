@@ -18,7 +18,7 @@ TUNING.OLD_SHADOWWAXWELL_SANITY_PENALTY = 55
 
 local function CalculateMaxHealthLoss(inst, data)
 	if inst.components.health ~= nil and not inst.components.health:IsDead() then
-		local healthloss = (data.damageresolved * TUNING.ARMOR_SANITY_DMG_AS_SANITY) / 75
+		local healthloss = ((data.damageresolved ~= nil and data.damageresolved or data.damage) * 0.2) / 75
 		inst.components.health:DeltaPenalty(healthloss)
 	end
 end

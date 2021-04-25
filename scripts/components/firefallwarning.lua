@@ -49,21 +49,25 @@ end
 
 local function DoTargetWarning(_activeplayers, player)
 	for i, v in ipairs(AllPlayers) do
+		if TheWorld.state.issummer then
             v.components.talker:Say(GetString(v, "ANNOUNCE_FIREFALL"))
 			SpawnPrefab("antlionwarning").Transform:SetPosition(v.Transform:GetWorldPosition())
 			if v.sg:HasStateTag("sleeping") and v.components.sleepingbaguser ~= nil then
 				v.components.sleepingbaguser:DoWakeUp()
 			end
+		end
     end
 end
 
 local function DoTargetFireFall(_activeplayers, player)
 	for i, v in ipairs(AllPlayers) do
+		if TheWorld.state.issummer then
 			v.components.firerain:StartShower(1)
 			SpawnPrefab("antlionwarning").Transform:SetPosition(v.Transform:GetWorldPosition())
 			if v.sg:HasStateTag("sleeping") and v.components.sleepingbaguser ~= nil then
 				v.components.sleepingbaguser:DoWakeUp()
 			end
+		end
     end
 end
 

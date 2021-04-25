@@ -29,10 +29,7 @@ local function create_common(pawntype)
 
     inst.entity:AddTransform()
     inst.entity:AddSoundEmitter()
-    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
-
-    inst.MiniMapEntity:SetIcon("catcoonden.png")
 
     inst:AddTag("cavedweller")
 	
