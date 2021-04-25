@@ -117,8 +117,10 @@ function TrySpawning(v)
 			local ents7 = TheSim:FindEntities(x1, y1, z1, 2, nil, nil, { "snowpiledin"})
 				--local ents = TheSim:FindEntities(x, y, z, 40, {"wall" "player" "campfire"})
 			if #ents5 < 1 and #ents6 < 1 and #ents7 < 1 and not INVALID_TILES[TheWorld.Map:GetTileAtPoint(x1, 0, z1)] then
+			if #TheSim:FindEntities(x + xrandom, 0, z + zrandom,5,{"snowpileblocker"}) == 0 then
 				local snowpilespawn = SpawnPrefab("snowpile")
 				snowpilespawn.Transform:SetPosition(x1, 0.05, z1)
+			end
 			end
 		end
 	end
@@ -143,9 +145,10 @@ local function SnowpileChance(inst, self)
 				local ents8 = TheSim:FindEntities(x + xrandom, y, z + zrandom, 8, nil, nil, { "fire" })
 
 				if TheWorld.Map:IsPassableAtPoint(x + xrandom, 0, z + zrandom) and #ents7 < 1 and #ents8 < 1 and not INVALID_TILES[TheWorld.Map:GetTileAtPoint(x + xrandom, 0, z + zrandom)] then
+					if #TheSim:FindEntities(x + xrandom, 0, z + zrandom,5,{"snowpileblocker"}) == 0 then
 					local snowpilespawn = SpawnPrefab("snowpile")
-
 					snowpilespawn.Transform:SetPosition(x + xrandom, 0.05, z + zrandom)
+					end
 				end
 		else
 			for i, v in ipairs(ents4) do

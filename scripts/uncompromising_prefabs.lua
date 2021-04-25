@@ -45,6 +45,7 @@ return {
 	"extra_monsterfoods",
 	"sporepack",
 	"saltpack",
+	"saltpile",
 	"veteranshrine",
 	"rat_tail",
 	"shroom_skin_fragment",
@@ -214,4 +215,5 @@ return {
 	"uncompromising_birds",
 	"um_shambler",
 	"mothergoose_tornado",
+	"corncan",
 }

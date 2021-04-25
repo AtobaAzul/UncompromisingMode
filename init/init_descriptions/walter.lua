@@ -243,3 +243,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	
 	DESCRIBE.UM_BEAR_TRAP = "Wow! I wish I could place a bear trap that fast!"
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Who left their gear out like this?"
+	DESCRIBE.CORNCAN = "Oh boy! Corn!"

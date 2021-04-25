@@ -57,3 +57,24 @@ for k, v in pairs(BATTERY) do
 		end
 	end)
 end
+
+local SALT = 
+{
+	["saltrock"] =
+    {
+		power = TUNING.MED_FUEL * 2,
+    },
+}
+
+for k, v in pairs(SALT) do
+	AddPrefabPostInit(k, function(inst)
+		if inst.components.fuel == nil then
+			inst:AddComponent("fuel")
+		end
+		
+		if inst.components.fuel ~= nil then
+			inst.components.fuel.fuelvalue = v.power
+			inst.components.fuel.fueltype = GLOBAL.FUELTYPE.SALT
+		end
+	end)
+end
