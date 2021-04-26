@@ -245,3 +245,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	
 	DESCRIBE.UM_BEAR_TRAP = "Wolfgang too smart to step on trap!"
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Wolfgang too smart to step on trap!"
+	DESCRIBE.CORNCAN = "Corn is trapped inside. Will save with bare hands!"

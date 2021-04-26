@@ -247,3 +247,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 
 	DESCRIBE.UM_BEAR_TRAP = "Ice house people have mean things."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Ice house people have mean things."
+	DESCRIBE.CORNCAN = "Where come from? Pigfolk?"

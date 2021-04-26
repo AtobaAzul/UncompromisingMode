@@ -35,7 +35,8 @@ recipes.icecream.oneatenfn = ApplyIcecreamBuff
 
 
 ------Rare Farmplot Crockpot Foods Change
-recipes.mashedpotatoes.hunger = 75
+recipes.mashedpotatoes.hunger = 100
+recipes.mashedpotatoes.sanity = 15
 
 recipes.salsa.hunger = 25
 recipes.salsa.sanity = 50
@@ -126,6 +127,32 @@ end)
 AddPrefabPostInit("cookedmonstermeat", function (inst)
     if inst ~= nil and inst.components.edible ~= nil then
         inst.components.edible.healthvalue = -8
+    end
+end)
+
+AddPrefabPostInit("potato_cooked", function (inst)
+    if inst ~= nil and inst.components.edible ~= nil then
+        inst.components.edible.healthvalue = 8
+		inst.components.edible.hungervalue = 18.75
+    end
+end)
+
+AddPrefabPostInit("tomato_cooked", function (inst)
+    if inst ~= nil and inst.components.edible ~= nil then
+        inst.components.edible.healthvalue = 8
+    end
+end)
+
+AddPrefabPostInit("eggplant", function (inst)
+    if inst ~= nil and inst.components.edible ~= nil then
+        inst.components.edible.hungervalue = 18.75
+    end
+end)
+
+AddPrefabPostInit("eggplant_cooked", function (inst)
+    if inst ~= nil and inst.components.edible ~= nil then
+        inst.components.edible.hungervalue = 18.75
+		inst.components.edible.healthvalue = 12
     end
 end)
 

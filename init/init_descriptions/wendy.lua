@@ -244,3 +244,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	
 	DESCRIBE.UM_BEAR_TRAP = "Would lead to a slow and gruesome death in the right circumstances."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Would lead to a slow and gruesome death in the right circumstances."
+	DESCRIBE.CORNCAN = "It seems like it's corn."

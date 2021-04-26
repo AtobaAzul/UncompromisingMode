@@ -245,4 +245,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	
 	DESCRIBE.UM_BEAR_TRAP = "Surprised they can lay em that fast."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Someone left their kit out."
-
+	DESCRIBE.CORNCAN = "I'll get at 'cha with lucy."

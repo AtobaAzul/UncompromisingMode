@@ -46,7 +46,10 @@ local function Salted(inst)
 		saltedfx.Transform:SetPosition(x, 1.6, z)
 	end
     
-    
+    local salted = SpawnPrefab("saltpile")
+	salted.Transform:SetPosition(x+math.random(-1,1), y, z+math.random(-1,1))
+
+	
 	inst.SoundEmitter:PlaySound("dontstarve/creatures/together/antlion/sfx/ground_break")
 	
 		local ents = TheSim:FindEntities(x, y, z, 5, {"salt_workable"})
@@ -77,19 +80,19 @@ local function Salted(inst)
 				end
 			end
 			
-		if not TheWorld.state.iswinter and TheWorld:HasTag("forest") then
+		--[[if not TheWorld.state.iswinter and TheWorld:HasTag("forest") then
 			inst.components.equippable.walkspeedmult = 1
-		end
+		end]]
 end
 
 local function turnon(inst, owner)
     if not inst.components.fueled:IsEmpty() then
 	
 	if inst.salttask == nil then
-		inst.salttask = inst:DoPeriodicTask(3, Salted)
+		inst.salttask = inst:DoPeriodicTask(2, Salted)
 	end
 	
-    inst.components.insulator:SetInsulation(TUNING.INSULATION_SMALL)
+    --inst.components.insulator:SetInsulation(TUNING.INSULATION_SMALL)
 		
 	if not inst.SoundEmitter:PlayingSound("idlesound") then
 		inst.SoundEmitter:PlaySound("dontstarve/common/research_machine_gift_active_LP", "idlesound")
@@ -98,13 +101,13 @@ local function turnon(inst, owner)
 	
         inst.components.fueled:StartConsuming()
 		
-		if TheWorld.state.iswinter and TheWorld:HasTag("forest") then
-			inst.components.equippable.walkspeedmult = 1.1
-		else
-			inst.components.equippable.walkspeedmult = 1
-		end
+		--if TheWorld.state.iswinter and TheWorld:HasTag("forest") then
+		--	inst.components.equippable.walkspeedmult = 1.1
+		--else
+		--	inst.components.equippable.walkspeedmult = 1
+		--end
 		
-		inst:AddTag("snowstorm_protection_high")
+		--inst:AddTag("snowstorm_protection_high")
         local owner = inst.components.inventoryitem.owner
 
         inst.components.machine.ison = true
@@ -117,14 +120,14 @@ local function turnoff(inst)
 	end
 	inst.salttask = nil
 	
-	inst:RemoveTag("snowstorm_protection_high")
+	--inst:RemoveTag("snowstorm_protection_high")
 	
-    inst.components.insulator:SetInsulation(0)
+    --inst.components.insulator:SetInsulation(0)
 	
 	inst.SoundEmitter:KillSound("idlesound")
 
     inst.components.fueled:StopConsuming()
-	inst.components.equippable.walkspeedmult = 1
+	--inst.components.equippable.walkspeedmult = 1
 
     DoTurnOffSound(inst)
 
@@ -234,7 +237,8 @@ local function fn()
     inst.components.machine.turnonfn = turnon
     inst.components.machine.turnofffn = turnoff
     inst.components.machine.cooldowntime = 0
-
+	
+	inst.components.fueled.fueltype = FUELTYPE.SALT
     inst.components.fueled:InitializeFuelLevel(TUNING.TORCH_FUEL * 2)
     inst.components.fueled:SetDepletedFn(nofuel)
 	
