@@ -3,11 +3,10 @@ local require = GLOBAL.require
 local ACTIONS = GLOBAL.ACTIONS
 local Inv = require "widgets/inventorybar"
 local EQUIPSLOTS = GLOBAL.EQUIPSLOTS
-local modparams = {}
 local SpawnPrefab = GLOBAL.SpawnPrefab
 
 local containers = require("containers")
-
+--[[
 AddComponentPostInit("container", function(self)
 	function self:RemoveSingleItemBySlot(slot)
 		if slot and self.slots[slot] then
@@ -16,7 +15,7 @@ AddComponentPostInit("container", function(self)
 		end
 	end
 end)
-
+]]
 function CheckItem(container, item, slot)
     return item:HasTag("mushroom_fuel")
 end
@@ -27,6 +26,8 @@ end
 function CheckDart(container, item, slot)
     return item:HasTag("um_dart")
 end
+
+local modparams = {}
 modparams.air_conditioner =
 {
     widget =
@@ -155,9 +156,18 @@ end
 
 local old_wsetup = containers.widgetsetup
 
-function containers.widgetsetup(container, prefab, data)
-	if modparams[prefab or container.inst.prefab] and not data then
-		data = modparams[prefab or container.inst.prefab]
+function containers.widgetsetup(container, prefab, data, ...)
+    local t = modparams[prefab or container.inst.prefab or inst.widgetsetup]
+    if t ~= nil then
+	--if modparams[prefab or container.inst.prefab] and not data then
+        for k, v in pairs(t) do
+            container[k] = v
+        end
+        container:SetNumSlots(container.widget.slotpos ~= nil and #container.widget.slotpos or 0)
+		--data = modparams[prefab or container.inst.prefab]
+		--return old_wsetup(container, prefab, data, ...)
+	else
+		old_wsetup(container, prefab, data, ...)
+        --containers_widgetsetup_base(container, prefab, data, ...)
 	end
-	old_wsetup(container, prefab, data)
 end

@@ -146,7 +146,7 @@ local function fn()
     inst.components.guardian.onguardiandeathfn = OnGuardianDeath
 
     inst:AddComponent("named")
-    inst.components.named.possiblenames = { STRINGS.NAMES["MOOSEEGG1"], STRINGS.NAMES["MOOSEEGG2"] }
+    inst.components.named.possiblenames = { STRINGS.NAMES["MOTHERMOOSEEGG1"], STRINGS.NAMES["MOTHERMOOSEEGG2"] }
     inst.components.named:PickNewName()
     inst:DoPeriodicTask(5, rename)
 

@@ -58,6 +58,7 @@ local function OnExplode(inst, target)
 		inst.AnimState:SetFinalOffset(-1)
 		inst.Physics:Teleport(0,0,0)	
 		target:AddChild(inst)
+		inst.AnimState:SetFinalOffset(-1)
         --inst.entity:AddFollower():FollowSymbol(target.GUID, target.components.combat.hiteffectsymbol or "body", 0, --[[-50]]0, 0)
 		
 		local debuffkey = inst.prefab
