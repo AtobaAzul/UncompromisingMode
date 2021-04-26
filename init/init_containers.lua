@@ -167,7 +167,7 @@ function containers.widgetsetup(container, prefab, data, ...)
 		--data = modparams[prefab or container.inst.prefab]
 		--return old_wsetup(container, prefab, data, ...)
 	else
-		old_wsetup(container, prefab, data, ...)
+		return old_wsetup(container, prefab, data, ...)
         --containers_widgetsetup_base(container, prefab, data, ...)
 	end
 end
