@@ -49,3 +49,29 @@ AddAction(
 		--Dummy action for pawn.
 	end
 )
+
+AddAction(
+	"CASTLIGHTER",
+	"CASTLIGHTER",
+	function(act)
+		local staff = act.invobject or act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+		local act_pos = act:GetActionPoint()
+		if staff and staff.components.spellcaster and staff.components.spellcaster:CanCast(act.doer, act.target, act_pos) then
+			staff.components.spellcaster:CastSpell(act.target, act_pos)
+			return true
+		end
+	end
+)
+
+AddAction(
+	"WINGSUIT",
+	"WINGSUIT",
+	function(act)
+		local staff = act.invobject or act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+		local act_pos = act:GetActionPoint()
+		if staff and staff.components.spellcaster and staff.components.spellcaster:CanCast(act.doer, act.target, act_pos) then
+			staff.components.spellcaster:CastSpell(act.target, act_pos)
+			return true
+		end
+	end
+)

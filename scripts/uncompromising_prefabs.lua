@@ -216,4 +216,5 @@ return {
 	"um_shambler",
 	"mothergoose_tornado",
 	"corncan",
+	"wingsuit",
 }

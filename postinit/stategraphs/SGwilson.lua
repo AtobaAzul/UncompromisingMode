@@ -18,17 +18,14 @@ EventHandler("sneeze", function(inst, data)
 
 local actionhandlers =
 {
-	ActionHandler(ACTIONS.CASTSPELL,
+	ActionHandler(ACTIONS.CASTLIGHTER,
         function(inst, action)
             return action.invobject ~= nil
-                and ((action.invobject:HasTag("gnarwail_horn") and "play_gnarwail_horn")
-                    or (action.invobject:HasTag("guitar") and "play_strum")
-                    or (action.invobject:HasTag("cointosscast") and "cointosscastspell")
-                    or (action.invobject:HasTag("quickcast") and "quickcastspell")
-                    or (action.invobject:HasTag("veryquickcast") and "veryquickcastspell")
-                    or (action.invobject:HasTag("lighter") and "castspelllighter")
-                    )
-                or "castspell"
+                and action.invobject:HasTag("lighter") and "castspelllighter"
+        end),
+	ActionHandler(ACTIONS.WINGSUIT,
+        function(inst, action)
+            return "castspell"
         end)
 }
 
