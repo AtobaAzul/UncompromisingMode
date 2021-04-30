@@ -55,7 +55,9 @@ local function OnTimerDone(inst, data)
 	
         inst.remainingrepairs = inst.remainingrepairs ~= nil and inst.remainingrepairs - 1 or 3
         if inst.remainingrepairs <= 0 then
-            inst.components.unevenground:Disable()
+			if inst.components.unevenground ~= nil then
+				inst.components.unevenground:Disable()
+			end
             inst.persists = false
             ErodeAway(inst)
         else
@@ -256,4 +258,51 @@ local function fn()
     return inst
 end
 
-return Prefab("bearger_sinkhole", fn, assets, prefabs)
+local function clawfn()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddMiniMapEntity()
+    inst.entity:AddNetwork()
+
+    inst.AnimState:SetBank("sinkhole")
+    inst.AnimState:SetBuild("antlion_sinkhole")
+    inst.AnimState:PlayAnimation("idle")
+    inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+    inst.AnimState:SetLayer(LAYER_BACKGROUND)
+    inst.AnimState:SetSortOrder(2)
+
+    inst.MiniMapEntity:SetIcon("sinkhole.png")
+
+    inst.Transform:SetEightFaced()
+
+    inst:AddTag("antlion_sinkhole")
+    inst:AddTag("bearclaw_sinkhole")
+    inst:AddTag("NOCLICK")
+
+    inst:SetDeployExtraSpacing(4)
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst:AddComponent("timer")
+    inst:ListenForEvent("timerdone", OnTimerDone)
+	inst.components.timer:StartTimer("nextrepair", 15)
+	
+	inst.remainingrepairs = 1
+    UpdateOverrideSymbols(inst, inst.remainingrepairs)
+
+    inst.OnSave = OnSave
+    inst.OnLoad = OnLoad
+
+    inst:ListenForEvent("startcollapse", onstartcollapse)
+
+    return inst
+end
+return Prefab("bearger_sinkhole", fn, assets, prefabs),
+		Prefab("beargerclaw_sinkhole", clawfn, assets, prefabs)

@@ -217,4 +217,5 @@ return {
 	"mothergoose_tornado",
 	"corncan",
 	"wingsuit",
+	"beargerclaw",
 }

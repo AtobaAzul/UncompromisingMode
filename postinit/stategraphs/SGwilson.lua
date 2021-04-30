@@ -16,8 +16,27 @@ EventHandler("sneeze", function(inst, data)
     end)
 }
 
+local _OldSpellCast = inst.actionhandlers[ACTIONS.CASTSPELL].deststate
+inst.actionhandlers[ACTIONS.CASTSPELL].deststate = 
+        function(inst, action, ...)
+			if action.invobject ~= nil then
+				if action.invobject:HasTag("lighter") then
+					return "castspelllighter"
+				elseif action.invobject:HasTag("beargerclaw") then
+					return "bearclaw_dig_start"
+				end
+            end
+			return _OldSpellCast(inst, action, ...)
+        end
+		
 local actionhandlers =
 {
+	--[[ActionHandler(ACTIONS.CASTSPELL,
+        function(inst, action)
+            return action.invobject ~= nil
+                and action.invobject:HasTag("lighter") and "castspelllighter"
+				or _OldSpellCast
+        end),]]
 	ActionHandler(ACTIONS.CASTLIGHTER,
         function(inst, action)
             return action.invobject ~= nil
@@ -25,7 +44,8 @@ local actionhandlers =
         end),
 	ActionHandler(ACTIONS.WINGSUIT,
         function(inst, action)
-            return "castspell"
+            return action.invobject ~= nil
+                and action.invobject:HasTag("wingsuit") and "castspell"
         end)
 }
 
@@ -120,6 +140,54 @@ local states = {
                 OnRemoveCleanupTargetFX(inst)
             end
         end,
+    },
+
+    State{
+        name = "bearclaw_dig_start",
+        tags = { "predig", "working" },
+
+        onenter = function(inst)
+            inst.components.locomotor:Stop()
+            inst.AnimState:PlayAnimation("shovel_pre")
+        end,
+
+        events =
+        {
+            EventHandler("unequip", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst)
+                if inst.AnimState:AnimDone() then
+                    inst.sg:GoToState("bearclaw_dig")
+                end
+            end),
+        },
+    },
+
+    State{
+        name = "bearclaw_dig",
+        tags = { "busy", "attack" },
+
+        onenter = function(inst)
+            inst.AnimState:PlayAnimation("shovel_loop")
+        end,
+		
+        timeline =
+        {
+            TimeEvent(15 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve/wilson/dig")
+                inst:PerformBufferedAction()
+            end),
+        },
+
+        events =
+        {
+            EventHandler("unequip", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst)
+                if inst.AnimState:AnimDone() then
+                    inst.AnimState:PlayAnimation("shovel_pst")
+                    inst.sg:GoToState("idle", true)
+                end
+            end),
+        },
     },
 
 

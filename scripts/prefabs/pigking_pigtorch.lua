@@ -221,18 +221,28 @@ local function NormalRetargetFn(inst)
                 inst,
                 TUNING.PIG_TARGET_DIST,
                 function(guy)
-				for i,v in ipairs(inst.hitlist) do
-				if guy.userid ~= nil and v == guy.userid then
-				return (guy.LightWatcher == nil or guy.LightWatcher:IsInLight())
-                        and inst.components.combat:CanTarget(guy)
-				end
-				end
-				for i,v in ipairs(oneof_tags) do --Have to emulate the oneof_tags effect
-				if guy:HasTag(v) then
-				return (guy.LightWatcher == nil or guy.LightWatcher:IsInLight())
-                        and inst.components.combat:CanTarget(guy)
-				end
-				end
+					for i,v in ipairs(inst.hitlist) do
+						if guy.userid ~= nil and v == guy.userid then
+						return (guy.LightWatcher == nil or guy.LightWatcher:IsInLight())
+								and inst.components.combat:CanTarget(guy)
+						end
+					end
+					
+					for i,v in ipairs(oneof_tags) do --Have to emulate the oneof_tags effect
+						if guy:HasTag(v) then
+						return (guy.LightWatcher == nil or guy.LightWatcher:IsInLight())
+								and inst.components.combat:CanTarget(guy)
+						end
+					end
+					
+					if TheWorld.state.isnight then
+						for i,v in ipairs({"player"}) do --Have to emulate the oneof_tags effect
+							if guy:HasTag(v) and not guy:HasTag("playerghost") then
+							return (inst.components.follower.leader == nil and guy.LightWatcher == nil or guy.LightWatcher:IsInLight())
+									and inst.components.combat:CanTarget(guy)
+							end
+						end
+					end
                 end,
                 RETARGET_MUST_TAGS, -- see entityreplica.lua
                 exclude_tags

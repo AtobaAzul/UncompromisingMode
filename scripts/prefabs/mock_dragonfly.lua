@@ -282,7 +282,7 @@ local function ShouldWake(inst)
 end
 
 local function OnCollide(inst, other)
-    if other:HasTag("burnt") then
+    if other and other:HasTag("burnt") then
         -- local v1 = Vector3(inst.Physics:GetVelocity())
         -- if v1:LengthSq() < 1 then return end
 

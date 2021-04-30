@@ -76,15 +76,16 @@ local BEAVERVISION_COLOURCUBES =
 		inst.components.inventoryitem.atlasname = "images/inventoryimages/widowshead.xml"
 
         inst:AddComponent("inspectable")
-
-
 		
         inst:AddComponent("equippable")
         inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
         inst.components.equippable:SetOnEquip(onequip)
         inst.components.equippable:SetOnUnequip(onunequip)
 		inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL/10
+		
 		inst:AddComponent("edible")
+		inst.components.edible.foodtype = FOODTYPE.HORRIBLE
+		
 		inst:AddComponent("perishable")
 		inst.components.perishable:SetPerishTime((7.5*TUNING.PERISH_TWO_DAY))
 		inst.components.perishable:StartPerishing()

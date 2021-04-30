@@ -164,6 +164,11 @@ for k, v in pairs(states) do
     inst.states[v.name] = v
 end
 
+for k, v in pairs(actionhandlers) do
+    assert(v:is_a(ActionHandler), "Non-action added in mod state table!")
+    inst.actionhandlers[v.action] = v
+end
+
 end)
 
 env.AddStategraphPostInit("mothermoose", function(inst)
@@ -171,6 +176,13 @@ env.AddStategraphPostInit("mothermoose", function(inst)
 local function ShakeIfClose(inst)
     ShakeAllCameras(CAMERASHAKE.FULL, .35, .02, 1, inst, 40)
 end
+
+local actionhandlers =
+{
+	ActionHandler(ACTIONS.LAYEGG, function(inst)
+        return not inst.components.combat:HasTarget() and "layegg2"
+    end)
+}
 
 local events=
 {
