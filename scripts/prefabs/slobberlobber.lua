@@ -62,6 +62,7 @@ local function LaunchSpit(caster, target)
 	projectile.coolingtime = 8
     projectile.Transform:SetPosition(x, y, z)
 	projectile.lobber = caster
+	projectile.LaunchMoreSpit = true
     --V2C: scale the launch speed based on distance
     --     because 15 does not reach our max range.
     local dx = targetpos.x - x

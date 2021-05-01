@@ -44,11 +44,12 @@ local function LaunchSpit(caster, target)
 			projectile.Transform:SetPosition(x, y, z)
 			projectile.clawer = caster
 			
+			targetpos.x = targetpos.x + math.random(-2, 2)
+			targetpos.z = targetpos.z + math.random(-2, 2)
+			
 			local dx = targetpos.x - x
 			local dz = targetpos.z - z
 			
-			targetpos.x = targetpos.x + math.random(-2, 2)
-			targetpos.z = targetpos.z + math.random(-2, 2)
 		
 			--local rangesq = (dx * dx + dz * dz) / 1.2
 			local rangesq = dx * dx + dz * dz

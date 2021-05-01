@@ -151,7 +151,7 @@ function PigGuard_pigkingBrain:OnStart()
 		IfNode(function() return not GetLeader(self.inst) end, "has leader",
         ChattyNode(self.inst, "PIG_GUARD_TALK_TORCH",
             DoAction(self.inst, AddFuelAction, "Add Fuel", true))),
-		IfNode(function() return TheWorld.state.isevening and not GetLeader(self.inst), "has leader",	
+		IfNode(function() return TheWorld.state.isevening and not GetLeader(self.inst) end, "has leader",	
         ChattyNode(self.inst, "PIG_GUARD_PIGKING_TALK_LOOKATWILSON_EVENING",
             FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn))),
 		IfNode(function() return not GetLeader(self.inst) end, "has leader",

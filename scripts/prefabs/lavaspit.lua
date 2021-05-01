@@ -3,6 +3,8 @@ local assets=
 	Asset("ANIM", "anim/lava_vomit.zip"),
 }
 
+local easing = require("easing")
+
 local AURA_EXCLUDE_TAGS = { "player", "playerghost", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "invisible" }
 
 local function OnLoad(inst, data)
@@ -177,17 +179,52 @@ local function slobberfn()
     return inst
 end
 
+local function LaunchMore(inst, xpos, zpos)
+    local x, y, z = inst.Transform:GetWorldPosition()
+	local targetpos = inst:GetPosition()
+
+	local projectile = SpawnPrefab("lavaspit_projectile")
+	projectile.coolingtime = 5
+	projectile.Transform:SetPosition(x, y, z)
+	projectile.lobber = inst.lobber
+	projectile.LaunchMorePhys = true
+	projectile.lobber = inst.lobber
+	
+	targetpos.x = targetpos.x + xpos
+	targetpos.z = targetpos.z + zpos
+			
+	local dx = targetpos.x - x
+	local dz = targetpos.z - z
+			
+	local rangesq = dx * dx + dz * dz
+	local maxrange = TUNING.FIRE_DETECTOR_RANGE
+	--local speed = easing.linear(rangesq, 15, 3, maxrange * maxrange)
+	local speed = easing.linear(rangesq, maxrange, 5, maxrange * maxrange)
+	projectile.components.complexprojectile:SetHorizontalSpeed(20) --speed
+	projectile.components.complexprojectile:SetGravity(-40)
+	projectile.components.complexprojectile:SetLaunchOffset(Vector3(0, 1, 0))
+    projectile.components.complexprojectile.usehigharc = true
+	projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+end
+
 local function OnHitInk(inst, attacker, target)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local lavaspit = SpawnPrefab("lavaspit_slobber")
 	lavaspit.Transform:SetPosition(x, 0, z)
-	lavaspit.lobber = inst.lobber
-    inst:Remove()
+	inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/vomit")
+	
+	if inst.LaunchMoreSpit then
+		LaunchMore(inst, -2.5, 0)
+		LaunchMore(inst, 2.5, -2.5)
+		LaunchMore(inst, 2.5, 2.5)
+	end
+	
+    inst:DoTaskInTime(0, inst.Remove)
 end
 
 local function oncollide(inst, other)
 	local x, y, z = inst.Transform:GetWorldPosition()
-	if other ~= nil and other:IsValid() and other:HasTag("_combat") and not other:HasTag("player") or y <= inst:GetPhysicsRadius() + 0.001 then
+	if other ~= nil and other:IsValid() and other:HasTag("_combat") and not other:HasTag("player") and not other:HasTag("lavaspit") or y <= inst:GetPhysicsRadius() + 0.001 then
 		OnHitInk(inst, other)
 	end
 end
@@ -199,7 +236,9 @@ local function onthrown(inst)
     inst.AnimState:SetBuild("lava_spitball")
     inst.AnimState:PlayAnimation("spin_loop", true)
 
-	inst.Transform:SetScale(1.1, 1.1, 1.1)
+	if not inst.LaunchMorePhys then
+		inst.Transform:SetScale(1.1, 1.1, 1.1)
+	end
 	
     inst.Physics:SetMass(1)
     inst.Physics:SetFriction(10)
@@ -207,9 +246,13 @@ local function onthrown(inst)
     inst.Physics:SetCollisionGroup(COLLISION.OBSTACLES)
     inst.Physics:ClearCollisionMask()
     inst.Physics:CollidesWith(COLLISION.WORLD)
-    inst.Physics:CollidesWith(COLLISION.GIANTS)
-    inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-    inst.Physics:SetCapsule(0.02, 0.02)
+	
+	if not inst.LaunchMorePhys then
+		inst.Physics:CollidesWith(COLLISION.GIANTS)
+		inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+	end
+
+	inst.Physics:SetCapsule(0.02, 0.02)
 	
     inst.Physics:SetCollisionCallback(oncollide)
 end
@@ -230,13 +273,17 @@ local function projectilefn()
     inst.AnimState:PlayAnimation("spin_loop")
     inst.AnimState:SetBloomEffectHandle( "shaders/anim.ksh" )
 
+	inst:AddTag("lavaspit")
+	
     inst.entity:SetPristine()
-
+	
     if not TheWorld.ismastersim then
         return inst
     end
 	
 	inst.lobber = nil
+	inst.LaunchMoreSpit = false
+	inst.LaunchMorePhys = false
 
     inst:AddComponent("complexprojectile")
     inst.components.complexprojectile:SetHorizontalSpeed(15)
