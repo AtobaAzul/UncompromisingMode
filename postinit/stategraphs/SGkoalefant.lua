@@ -16,7 +16,7 @@ EventHandler("doattack", function(inst)
 								end
                             end),
 EventHandler("attacked", function(inst, data) 
-if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("charging") then
+if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("charging") then
 
 if (math.random() > 0.9) and inst.components.combat.target ~= nil and (2 > inst:GetDistanceSqToInst(inst.components.combat.target)) then
 inst.sg:GoToState("stomp") 
@@ -52,7 +52,7 @@ end
 local states = {
 	State{
         name = "attack",
-        tags = {"attack", "busy"},
+        tags = {"attack", "busy", "nointerrupt"},
 
         onenter = function(inst, target)
             inst.sg.statemem.target = target
@@ -96,7 +96,7 @@ local states = {
     },
 	
     State{  name = "charge_start",
-            tags = {"moving", "running", "charging", "precharging", "busy", "atk_pre", "canrotate"},
+            tags = {"moving", "running", "charging", "precharging", "busy", "atk_pre", "canrotate", "nointerrupt"},
             
             onenter = function(inst)
                 inst.Physics:Stop()
@@ -132,7 +132,7 @@ local states = {
         },
 
     State{  name = "charge",
-            tags = {"moving", "charging", "busy", "running"},
+            tags = {"moving", "charging", "busy", "running", "nointerrupt"},
             
             onenter = function(inst) 
 				inst.components.combat:ResetCooldown()
@@ -193,7 +193,7 @@ local states = {
         },
     
     State{  name = "charge_stop",
-            tags = {"canrotate", "busy", "idle","charging"},
+            tags = {"canrotate", "busy", "idle","charging", "nointerrupt"},
             
             onenter = function(inst) 
                 --inst.SoundEmitter:KillSound("charge")
@@ -215,7 +215,7 @@ local states = {
         },    
 
     State{  name = "chargeattack",
-            tags = {"busy", "runningattack","charging"},
+            tags = {"busy", "runningattack","charging", "nointerrupt"},
             
             onenter = function(inst)
 				--print("chargeattack")
@@ -244,7 +244,7 @@ local states = {
         },
 	State{
 		name = "disarm",
-		tags = {"attack","busy"},
+		tags = {"attack","busy", "nointerrupt"},
 
 		onenter = function(inst)
 			inst.Physics:Stop()
@@ -272,7 +272,7 @@ local states = {
 	},
 	State{
         name = "stomp",
-        tags = {"attack", "busy"},
+        tags = {"attack", "busy", "nointerrupt"},
 
         onenter = function(inst, target)
             inst.sg.statemem.target = target
