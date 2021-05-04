@@ -75,7 +75,6 @@ local function getspawnlocation(inst, target)
 end
 
 local function createlight(staff, target, pos)
-		staff.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/vomit")
 		local spittarget = SpawnPrefab("lavaspit_target")
 		local caster = staff.components.inventoryitem.owner
 		
@@ -99,7 +98,7 @@ local function light_reticuletargetfn()
     for r = 6.5, 3.5, -.25 do
         pos.x, pos.y, pos.z = player.entity:LocalToWorldSpace(r, 0, 0)
         if ground:IsPassableAtPoint(pos:Get()) and not ground:IsGroundTargetBlocked(pos) then
-            return pos
+            return posf
         end
     end
     return pos
@@ -121,7 +120,7 @@ local function onequip(inst, owner)
 			end
 		end)
 	else
-		owner.AnimState:OverrideSymbol("swap_object", "swap_bearclaw", "swap_bearclaw")
+		owner.AnimState:OverrideSymbol("swap_object", "swap_beargerclaw", "swap_shovel")
 		owner.AnimState:Show("ARM_carry")
 		owner.AnimState:Hide("ARM_normal")
 	end
@@ -167,15 +166,10 @@ local function staff_fn()
         return inst
     end
 
-    -------
-    inst:AddComponent("finiteuses")
-    inst.components.finiteuses:SetMaxUses(TUNING.TORNADOSTAFF_USES)
-    inst.components.finiteuses:SetUses(TUNING.TORNADOSTAFF_USES)
-    inst.components.finiteuses:SetOnFinished(inst.Remove)
-
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/beargerclaw.xml"
 
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)
@@ -188,7 +182,6 @@ local function staff_fn()
     inst.components.spellcaster.canonlyuseoncombat = true
     inst.components.spellcaster.canuseonpoint = true
     inst.components.spellcaster.canuseonpoint_water = false
-    inst.components.spellcaster.quickcast = true
 
     MakeHauntableLaunch(inst)
 

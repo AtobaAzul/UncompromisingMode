@@ -186,7 +186,6 @@ local function LaunchMore(inst, xpos, zpos)
 	local projectile = SpawnPrefab("lavaspit_projectile")
 	projectile.coolingtime = 5
 	projectile.Transform:SetPosition(x, y, z)
-	projectile.lobber = inst.lobber
 	projectile.LaunchMorePhys = true
 	projectile.lobber = inst.lobber
 	
@@ -210,10 +209,12 @@ end
 local function OnHitInk(inst, attacker, target)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local lavaspit = SpawnPrefab("lavaspit_slobber")
+	
 	lavaspit.Transform:SetPosition(x, 0, z)
-	inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/vomit")
+	lavaspit.lobber = inst.lobber
 	
 	if inst.LaunchMoreSpit then
+		inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/vomit")
 		LaunchMore(inst, -2.5, 0)
 		LaunchMore(inst, 2.5, -2.5)
 		LaunchMore(inst, 2.5, 2.5)

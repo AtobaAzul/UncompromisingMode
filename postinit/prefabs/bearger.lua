@@ -89,11 +89,11 @@ local function LaunchProjectile(inst, targetpos)
 end]]
 
 local function LaunchProjectile(inst, target)
-	if target ~= nil then
+	local x, y, z = inst.Transform:GetWorldPosition()
 	
+	if target ~= nil then
 		inst.rockthrow = false
 		
-		local x, y, z = inst.Transform:GetWorldPosition()
 		local a, b, c = target.Transform:GetWorldPosition()
 		local targetpos = target:GetPosition()
 		local theta = inst.Transform:GetRotation()
@@ -112,7 +112,7 @@ local function LaunchProjectile(inst, target)
 		
 		local projectile = SpawnPrefab("bearger_boulder")
 		projectile.Transform:SetPosition(x, y, z)
-		projectile.components.complexprojectile:SetHorizontalSpeed(speed + math.random(3, 5))
+		projectile.components.complexprojectile:SetHorizontalSpeed(speed + math.random(4, 6))
 		projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 	end
 end

@@ -99,6 +99,7 @@ local states = {
         tags = { "attack", "canrotate", "busy" },
 
         onenter = function(inst)
+		
             local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 			
 			if target ~= nil and target.Transform ~= nil then
@@ -130,9 +131,16 @@ local states = {
 						inst:ForceFacePoint(target.Transform:GetWorldPosition())
 					end
 					
-					for i = 1, math.random(4,6) do
+					for i = 1, math.random(5,6) do
 						inst.LaunchProjectile(inst, inst.components.combat.target)
 					end
+					
+					local x, y, z = inst.Transform:GetWorldPosition()
+
+					SpawnPrefab("groundpound_fx").Transform:SetPosition(x, 0, z)
+					local sandpuff = SpawnPrefab("sand_puff")
+					sandpuff.Transform:SetPosition(x, 0, z)
+					sandpuff.Transform:SetScale(2,2,2)
 					
 					inst.components.timer:StopTimer("RockThrow")
 					inst.components.timer:StartTimer("RockThrow", TUNING.BEARGER_NORMAL_GROUNDPOUND_COOLDOWN * 1.25)
