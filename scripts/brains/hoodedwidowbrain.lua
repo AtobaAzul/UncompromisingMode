@@ -47,6 +47,15 @@ local function GoHomeAction(inst)
         and BufferedAction(inst, home, ACTIONS.GOHOME)
         or nil
 end
+local function JumpHomeAction(inst)
+    local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
+    return home ~= nil
+        and home:IsValid()
+        and home.components.childspawner ~= nil
+        and (home.components.health == nil or not home.components.health:IsDead())
+        and inst.sg:GoToState("jumphome") --Instead we should be just jumping back into the canopy
+        or nil
+end
 local function EquipLeap(inst)
     if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
         inst.components.inventory:Equip(inst.weaponitems.leapweapon)
@@ -75,18 +84,6 @@ local function BossCheck(inst)
 	inst.sg:GoToState("jumphome")
 	end
 end
-local function ShouldResetFight(self)
-		local home = self.inst.components.homeseeker ~= nil and self.inst.components.homeseeker.home or nil
-		if home then
-        local dx, dy, dz = self.inst.Transform:GetWorldPosition()
-        local spx, spy, spz = home.Transform:GetWorldPosition()
-        if distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*12) then
-		return true
-        else
-        return false
-        end
-		end
-end
 local function CanMeleeNow(inst)
     local target = inst.components.combat.target
     if target == nil or inst.components.combat:InCooldown() then
@@ -112,14 +109,14 @@ local function EquipMelee(inst)
     end
 end
 
-local function CanPhlegmNow(inst)
+local function TargetLeavingArena(inst)
 if inst.components.combat~= nil and inst.components.combat.target ~= nil then
     local target = inst.components.combat.target
 	local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
 	if (target ~= nil and home ~= nil) then
 	local dx, dy, dz = target.Transform:GetWorldPosition()
     local spx, spy, spz = home.Transform:GetWorldPosition()
-    return target ~= nil and home ~= nil and target.components.pinnable and target.components.pinnable:IsValidPinTarget() and not inst.components.combat:InCooldown() and distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*12)
+    return target ~= nil and home ~= nil and distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*10)
 	else
 	return false
 	end
@@ -128,17 +125,11 @@ return false
 end
 end
 
-local function EquipPhlegm(inst)
-    if not inst.weaponitems.snotbomb.components.equippable:IsEquipped() then
-        inst.components.inventory:Equip(inst.weaponitems.snotbomb)
-        -- print("phlegm equipped")
-    end
-end
 
 local function NoTarget(inst)
-if inst.investigated == true then
-return true
-end
+	if inst.investigated and inst.components.combat.target == nil then
+	return true
+	end
 end
 local function GettingBullied(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
@@ -153,17 +144,15 @@ function HoodedWidowBrain:OnStart()
     local root = PriorityNode(
     {	
 		WhileNode(function() return self.inst.bullier == true end,"Being Bullied",
-		DoAction(self.inst, GoHomeAction)),
-    	--WhileNode( function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
-        --WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)), No fire cheese please
-        WhileNode(function() return CanMeleeNow(self.inst) or not ShouldResetFight(self) end, "Hit Stuck Target or Creature",
+		DoAction(self.inst, JumpHomeAction)),
+        WhileNode(function() return CanMeleeNow(self.inst) or not TargetLeavingArena(self.inst) end, "Hit Stuck Target or Creature",
             SequenceNode({
                 ActionNode(function() EquipMeleeAndResetCooldown(self.inst) end, "Equip melee"),
-                ChaseAndAttack(self.inst, MAX_CHASE_TIME) })),
-        WhileNode(function() return CanPhlegmNow(self.inst) end, "AttackMomentarily",
+                ChaseAndAttack(self.inst) })),
+        WhileNode(function() return TargetLeavingArena(self.inst) end, "AttackMomentarily",
             SequenceNode({
-                ActionNode(function() EquipPhlegm(self.inst) end, "Equip phlegm"),
-                ChaseAndAttack(self.inst, MAX_CHASE_TIME) })),
+                ActionNode(function() EquipRange(self.inst) end, "Equip phlegm"),
+                ChaseAndAttack(self.inst) })),
                 
 		WhileNode(function() return NoTarget(self.inst) end,"No Target",
 		DoAction(self.inst, GoHomeAction)),

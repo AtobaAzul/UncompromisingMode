@@ -1,11 +1,3 @@
-local projectile_prefabs =
-{
-    "web_net_splat_fx",
-    "spat_splash_fx_full",
-    "spat_splash_fx_med",
-    "spat_splash_fx_low",
-    "spat_splash_fx_melted",
-}
 local splashprefabs =
 {
     "web_splash_fx_melted",
@@ -20,13 +12,6 @@ local splashfxlist =
     "icing_splash_fx_low",
     "icing_splash_fx_melted",
 }
-local projectile_assets =
-{
-    Asset("ANIM", "anim/spat_bomb.zip"),
-    Asset("ANIM", "anim/web_net_shot.zip"),
-	Asset("ANIM", "anim/web_net_trap.zip"),
-}
-
 local function doprojectilehit(inst, attacker, other)
     inst.SoundEmitter:PlaySound("dontstarve/creatures/spat/spit_hit")
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -51,8 +36,35 @@ local function doprojectilehit(inst, attacker, other)
         end
         if other.components.pinnable ~= nil then
 			
-            other.components.pinnable:Stick("web_net_trap",splashprefabs)
-        end
+           other.components.pinnable:Stick("web_net_trap",splashprefabs)
+				local widow = TheSim:FindFirstEntityWithTag("hoodedwidow")
+				widow.sg:GoToState("tossplayer")
+				other:DoTaskInTime(1.3, function(other)
+				other.components.pinnable:Unstick()
+				local widowhome = TheSim:FindFirstEntityWithTag("widowweb")
+				if other:HasTag("wereplayer") then
+				other.sg:GoToState("hit")
+				else
+				other.sg:GoToState("knockback")
+				end
+                    local x, y, z = widowhome.Transform:GetWorldPosition() --Ripped knockback code, but it's rigged to go backwards.
+                    local distsq = other:GetDistanceSqToPoint(x, y, z)
+                    local rot = other.Transform:GetRotation()
+                    local rot1 = distsq > 0 and other:GetAngleToPoint(x, y, z) or widowhome.Transform:GetRotation() + 180
+                    local drot = math.abs(rot - rot1)
+                    while drot > 180 do
+                        drot = math.abs(drot - 360)
+                    end
+                    if drot > 90 then
+                        other.Transform:SetRotation(rot1 + 180)
+                        other.Physics:SetMotorVel(-30, 0, 0)
+                    else
+                        other.Transform:SetRotation(rot1)
+                        other.Physics:SetMotorVel(30, 0, 0)
+                    end
+			other:DoTaskInTime(0.6,function(other) other.Physics:SetMotorVel(0, 0, 0) end)
+			end)
+       end
     end
 
     return other
@@ -125,4 +137,111 @@ local function projectilefn()
     return inst
 end
 
-return Prefab("web_bomb", projectilefn, projectile_assets, projectile_prefabs)
+local function OnLand(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	SpawnPrefab("widow_web_combat").Transform:SetPosition(x,y,z)
+	local players = TheSim:FindEntities(x,y,z,1.5,{"player"},{"ghost","wereplayer"})
+	for i, v in ipairs(players) do
+	v.components.pinnable:Stick("web_net_trap",splashprefabs)
+	v:DoTaskInTime(1.5,function(v) v.components.pinnable:Unstick() end)
+	end
+    inst:Remove()
+	
+end
+local function TestProjectileLand(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	if y <= inst:GetPhysicsRadius() + 0.001 	then
+		OnLand(inst)
+		inst:Remove()
+	end
+end
+
+
+local function onthrown(inst)
+    inst:AddTag("NOCLICK")
+    inst.persists = false
+    inst.AnimState:SetBank("spat_bomb")
+    inst.AnimState:SetBuild("web_net_shot")  
+    inst.AnimState:PlayAnimation("spin_loop", true)
+
+    inst.Physics:SetMass(1)
+    inst.Physics:SetCapsule(0.2, 0.2)
+    inst.Physics:SetFriction(0)
+    inst.Physics:SetDamping(0)
+    inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
+    inst.Physics:ClearCollisionMask()
+    inst.Physics:CollidesWith(COLLISION.GROUND)
+    inst.Physics:CollidesWith(COLLISION.OBSTACLES)
+    inst.Physics:CollidesWith(COLLISION.ITEMS)
+end
+local function projectilelobfn()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddPhysics()
+    inst.entity:AddNetwork()
+
+
+
+    inst.AnimState:SetBank("spat_bomb")
+    inst.AnimState:SetBuild("web_net_shot")
+    inst.AnimState:PlayAnimation("spin_loop", true)
+	
+
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst:AddComponent("complexprojectile")
+    inst.components.complexprojectile:SetHorizontalSpeed(15)
+    inst.components.complexprojectile:SetGravity(-35)
+    inst.components.complexprojectile:SetLaunchOffset(Vector3(0, 1, 0))
+    inst.components.complexprojectile:SetOnLaunch(onthrown)
+    inst.components.complexprojectile:SetOnHit(OnLand)
+
+    inst.persists = false
+
+    inst:AddComponent("locomotor")
+    return inst
+end
+
+
+local function webbingfn()
+		local inst = CreateEntity()
+		inst.entity:AddTransform()
+		inst.entity:AddAnimState()
+		inst.entity:AddNetwork()
+		inst.entity:AddDynamicShadow()
+		inst.entity:AddSoundEmitter()
+		inst.entity:AddGroundCreepEntity()
+
+		inst.AnimState:SetBank("silk")
+		inst.AnimState:SetBuild("silk")
+		inst.AnimState:PlayAnimation("idle")
+		MakeInventoryPhysics(inst)
+		inst.GroundCreepEntity:SetRadius(2)
+		inst:AddTag("queensstuff")
+		inst:AddTag("noauradamage")
+		inst:AddTag("spiderden")
+		
+		inst.entity:SetPristine()
+
+		if not TheWorld.ismastersim then
+			return inst
+		end
+
+		-------------------
+		inst:AddComponent("health")
+		inst.components.health:SetMaxHealth(200)
+		inst:AddComponent("combat")
+		return inst
+end
+
+return Prefab("widow_web_combat", webbingfn),
+Prefab("web_mortar", projectilelobfn),
+Prefab("web_bomb", projectilefn)

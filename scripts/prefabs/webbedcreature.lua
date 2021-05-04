@@ -437,7 +437,7 @@ local function SetSize(inst)
 	
 	if inst.size == 8 then   --Tallbird
 		SetMedium(inst)
-		inst.components.named:SetName("Hairy Cocoon")
+		inst.components.named:SetName("Feathery Cocoon")
 	end
 	
 	if inst.size == 9 then   --SpiderQueen
@@ -530,6 +530,7 @@ local function fn()
 		inst:AddTag("prey")
 		inst:AddTag("houndfriend")
 		inst:AddTag("antlion_sinkhole_blocker")
+		inst:AddTag("queensstuff")
 		
 		inst.entity:SetPristine()
 

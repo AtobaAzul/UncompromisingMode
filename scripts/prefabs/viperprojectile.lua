@@ -1,29 +1,3 @@
-
-local projectile_assets =
-{
-    Asset("ANIM", "anim/warg_gingerbread_bomb.zip"),
-    Asset("ANIM", "anim/goo_icing.zip"),
-}
-
-local projectile_prefabs =
-{
-    "icing_splat_fx",
-    "icing_splash_fx_full",
-    "icing_splash_fx_med",
-    "icing_splash_fx_low",
-    "icing_splash_fx_melted",
-}
-
-local splashfxlist =
-{
-    "icing_splash_fx_full",
-    "icing_splash_fx_med",
-    "icing_splash_fx_low",
-    "icing_splash_fx_melted",
-}
-
-
-
 local function OnLand(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local worm = SpawnPrefab("viperling")
@@ -45,25 +19,7 @@ local function OnLand(inst)
 	end
     inst:Remove()
 end
---[[
-local function doprojectilehit(inst)
-    SpawnPrefab("ink_splash").Transform:SetPosition(inst.Transform:GetWorldPosition())
-    if inst:IsOnOcean() then
-        SpawnPrefab("ink_puddle_water").Transform:SetPosition(inst.Transform:GetWorldPosition())
-    else
-        SpawnPrefab("ink_puddle_land").Transform:SetPosition(inst.Transform:GetWorldPosition())
-    end
-    local pt = Vector3(inst.Transform:GetWorldPosition())
-    local ents = TheSim:FindEntities(pt.x, pt.y, pt.z, 1)
-    for i,ent in ipairs(ents) do
-        if ent.components.inkable then
-            ent.components.inkable:Ink()
-        end
-    end
 
-    inst:Remove()
-end
---]]
 local function TestProjectileLand(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	if y <= inst:GetPhysicsRadius() + 0.001 	then
@@ -107,8 +63,6 @@ local function projectilefn()
     inst.AnimState:PlayAnimation("spin_loop", true)
 	
 	inst.AnimState:SetMultColour(0, 0, 0, 0.4)
-	
-    --inst:AddComponent("transparentonsanity")
 
     inst.entity:SetPristine()
 
@@ -126,10 +80,7 @@ local function projectilefn()
     inst.persists = false
 
     inst:AddComponent("locomotor")
-
-	--inst:DoTaskInTime(0.1, function(inst) inst:DoPeriodicTask(0, TestProjectileLand) end)
-
     return inst
 end
 
-return Prefab("viperprojectile", projectilefn, projectile_assets, projectile_prefabs)
+return Prefab("viperprojectile", projectilefn)

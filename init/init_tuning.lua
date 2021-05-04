@@ -129,7 +129,9 @@ TUNING.DSTU =
 	
 	--Bee Queen
 	BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
-
+	
+	--Hooded Widow
+	WIDOW_HEALTH = GetModConfigData("widow health"),
     ----------------------------------------------------------------------------
     --Player changes
     ----------------------------------------------------------------------------

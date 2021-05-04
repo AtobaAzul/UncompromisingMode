@@ -1,20 +1,3 @@
-local assets =
-{
-    Asset("ANIM", "anim/spider_queen_build.zip"),
-    Asset("ANIM", "anim/spider_queen.zip"),
-    Asset("ANIM", "anim/spider_queen_2.zip"),
-    --Asset("ANIM", "anim/spider_queen_3.zip"),
-    --Asset("SOUND", "sound/spider.fsb"),
-}
-
-local prefabs =
-{
-    "monstermeat",
-    "silk",
-    "spiderhat",
-    "spidereggsack",
-}
-
 local brain = require "brains/hoodedwidowbrain"
 
 local loot =
@@ -37,10 +20,10 @@ local RETARGET_CANT_TAGS = { "INLIMBO", "structure", "bird", "snapdragon" }
 local RETARGET_ONE_OF_TAGS = { "player" }
 local function Retarget(inst)
     if not inst.components.health:IsDead() and not inst.components.sleeper:IsAsleep() and not inst.sg:HasStateTag("attack") then
-        local newtarget = FindEntity(inst, 6, 
-            function(guy) 
-                return 
-                    inst.components.combat:CanTarget(guy) 
+        local newtarget = FindEntity(inst, 9, 
+            function(guy)
+                return inst.components.combat:CanTarget(guy)
+					--distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*12) 
             end,
             RETARGET_MUST_TAGS,
             RETARGET_CANT_TAGS,
@@ -53,12 +36,12 @@ local function Retarget(inst)
     end
 end
 
-local function CalcSanityAura(inst, observer)
-    return observer:HasTag("spiderwhisperer") and 0 or -TUNING.SANITYAURA_HUGE
+local function CalcSanityAura(inst, observer)	--Webber is caught offguard by her aggression?
+    return observer:HasTag("spiderwhisperer") and -TUNING.SANITYAURA_HUGE*1.25 or -TUNING.SANITYAURA_HUGE
 end
 
 local function OnAttacked(inst, data)
-    if data.attacker ~= nil then
+    if data.attacker ~= nil and not inst.sg:HasStateTag("attack")then
         inst.components.combat:SetTarget(data.attacker)
     end
 end
@@ -87,20 +70,6 @@ local function DoDespawn(inst)
 		print("removed, OH NO!")
     end
 	
-end
-
-
-local function OutOfRange(self)
-		local home = self.inst.components.homeseeker ~= nil and self.inst.components.homeseeker.home or nil
-		if home then
-        local dx, dy, dz = self.inst.Transform:GetWorldPosition()
-        local spx, spy, spz = home.Transform:GetWorldPosition()
-        if distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*12) then
-		return true
-        else
-        return false
-        end
-		end
 end
 
 local projectile_prefabs =
@@ -154,23 +123,29 @@ local function OnLoad(inst)
 inst.investigated = true
 end
 
-local function DoSuper(inst)
---if not inst.sg:HasStateTag("superbusy") and not inst:HasTag("gonnasuper") and not inst.components.health:IsDead() and inst.components.combat.target then
+local function DoLeap(inst)
 if inst.components.combat ~= nil and inst.components.combat.target and not inst.components.health:IsDead() then
-if math.random()>0 then  --Removing canopy attack, for now.
+if math.random()>0 then
 inst.sg:GoToState("preleapattack")
-else
-inst.sg:GoToState("precanopy")
 end
---end
+end
+end
+local function DoMortar(inst)
+if inst.components.combat ~= nil and inst.components.combat.target and not inst.components.health:IsDead() then
+if math.random()>0 then
+inst.sg:GoToState("lobprojectile")
+end
 end
 end
 local function TryPowerMove(inst,data)
 if not inst.sg:HasStateTag("busy") and (inst.components.health ~= nil and not inst.components.health:IsDead()) and (inst.components.combat ~= nil and inst.components.combat.target ~= nil) then
 	if data ~= nil and data.name == "pounce" then
-			DoSuper(inst)	
-		end
+			DoLeap(inst)	
 	end
+	if data ~= nil and data.name == "mortar" then
+			DoMortar(inst)	
+	end
+end
 end
 
 
@@ -179,22 +154,28 @@ local function Reset(inst)
 end
 
 local function OnKilledOther(inst)
-inst.investigated = false
-inst:DoTaskInTime(5,function(inst) inst.investigated = true end)
-if inst.components.combat ~= nil then
-inst.components.combat:TryRetarget()
-end
+  if inst.components.combat ~= nil then
+    inst.components.combat:TryRetarget()
+  end
+
+  if inst.investigatedtask ~= nil then
+    inst.investigatedtask:Cancel()
+    inst.investigatedtask = nil
+  end
+  inst.investigated = nil
+  inst.investigatedtask = inst:DoTaskInTime(5, function(inst) inst.investigated = true end)
 end
 
 local function GettingBullied(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 30, { "epic" }, { "hoodedwidow" } )
-	if #ents >= 1 then
+    local ents = TheSim:FindEntities(x, y, z, 20, { "epic" }, { "hoodedwidow" } )
+	if #ents >= 1 or inst:GetDistanceSqToInst(inst.components.homeseeker.home) > TUNING.DRAGONFLY_RESET_DIST*15 then
 	inst.bullier = true
 	else
 	inst.bullier = false
 	end
 end
+
 
 local function fn()
     local inst = CreateEntity()
@@ -220,8 +201,8 @@ local function fn()
     --inst:AddTag("spiderqueen")  --She left this faction
     --inst:AddTag("spider")
 
-    inst.AnimState:SetBank("spider_queen")
-    inst.AnimState:SetBuild("widow")
+    inst.AnimState:SetBank("widow")
+    inst.AnimState:SetBuild("widow1")
     inst.AnimState:PlayAnimation("idle", true)
 	inst.Transform:SetScale(1.5,1.5,1.5)
     inst.entity:SetPristine()
@@ -242,17 +223,31 @@ local function fn()
 
     ------------------
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(6000)
+    inst.components.health:SetMaxHealth(TUNING.DSTU.WIDOW_HEALTH)
 
     ------------------
     inst:AddComponent("knownlocations")
     inst:AddComponent("combat")
     inst.components.combat:SetRange(TUNING.SPIDERQUEEN_ATTACKRANGE)
-    inst.components.combat:SetAreaDamage(4, TUNING.DEERCLOPS_AOE_SCALE)
+	
+    if inst.components.combat ~= nil then
+		local function queensstuff(ent)
+			if ent ~= nil and ent:HasTag("queensstuff") then -- fix to friendly AOE: refer for later AOE mobs -Axe
+				return true
+			end
+		end
+        inst.components.combat:SetAreaDamage(4, TUNING.DEERCLOPS_AOE_SCALE, queensstuff) -- you can edit these values to your liking -Axe
+    end
     inst.components.combat:SetDefaultDamage(TUNING.SPIDERQUEEN_DAMAGE * 2)
     inst.components.combat.playerdamagepercent = TUNING.DEERCLOPS_DAMAGE_PLAYER_PERCENT
     inst.components.combat:SetAttackPeriod(TUNING.SPIDERQUEEN_ATTACKPERIOD)
-    inst.components.combat:SetRetargetFunction(3, Retarget)
+    inst.components.combat:SetRetargetFunction(1, Retarget)
+	inst:AddComponent("groundpounder")
+    --inst.components.groundpounder.destroyer = true
+    inst.components.groundpounder.damageRings = 2
+    --inst.components.groundpounder.destructionRings = 2
+    inst.components.groundpounder.platformPushingRings = 2
+    inst.components.groundpounder.numRings = 3
 
     ------------------
 
@@ -294,8 +289,6 @@ local function fn()
     inst.components.groundpounder.platformPushingRings = 2
     inst.components.groundpounder.numRings = 3
     ------------------
-	--inst.WebReady = true
-	inst.CanopyReady = false
 	inst.investigated = true
 	inst.Reset = Reset
     inst.DoDespawn = DoDespawn
@@ -309,15 +302,13 @@ local function fn()
 	
 	inst:AddComponent("timer")
 	inst:ListenForEvent("timerdone", TryPowerMove)
-	inst.components.timer:StartTimer("pounce",10+math.random(-3,5))
-
+	inst.components.timer:StartTimer("pounce",10+math.random(-3,1))
+	inst.components.timer:StartTimer("mortar",20+math.random(-1,5))
 	inst:DoPeriodicTask(3, GettingBullied)
-	inst.justkilled = false
 	inst.bullier = nil
 	inst:ListenForEvent("killed", OnKilledOther)
 	
 
     return inst
 end
-
-return Prefab("hoodedwidow", fn, assets, prefabs)
+return Prefab("hoodedwidow", fn)
