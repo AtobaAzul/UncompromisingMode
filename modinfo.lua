@@ -114,6 +114,17 @@ configuration_options =
 		},
 		default = 22500,
 	},
+	{
+		name = "widow health",
+		label = "Hooded Widow Health",
+		hover = "Hooded Widow's health can be lowered to closer match a singleplayer experience.",
+		options =
+		{
+			{description = "Default[8000]", data = 8000},
+			{description = "Lowered[6000]", data = 6000},
+		},
+		default = 8000,
+	},
 
 	BinaryConfig("lifeamulet", "Life Giving Amulet Changes", "The Life Giving Amulet acts like vanilla Don't Starve, only reviving when worn upon death. \nIts hunger > health conversion ticks much faster.", true),
     

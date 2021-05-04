@@ -414,22 +414,17 @@ local function ViperlingBelch(inst, target)
 	local targetpos = target:GetPosition()
 	local theta = inst.Transform:GetRotation()
 	theta = theta*DEGREES
-	--if (c-z) > 0 then
+
 	targetpos.x = targetpos.x + 15*math.cos(theta)
-	--else
-	--targetpos.x = targetpos.x + 5*math.sin(-theta)
-	--end
-	--if (a-x) > 0 then
+
 	targetpos.z = targetpos.z - 15*math.sin(theta)
-	--else
-	--targetpos.z = targetpos.z + 5*math.cos(-theta)
-	--end
+
 	local rangesq = ((a-x)^2) + ((c-z)^2)
     local maxrange = 15
     local bigNum = 10
     local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
 	projectile:AddTag("canthit")
-	--projectile.components.wateryprotection.addwetness = TUNING.WATERBALLOON_ADD_WETNESS/2
+
     projectile.components.complexprojectile:SetHorizontalSpeed(speed+math.random(4,9))
     projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 	end

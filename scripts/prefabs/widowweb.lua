@@ -24,10 +24,9 @@ local function ontimerdone(inst, data)
 end
 
 local function SpawnInvestigators(inst, target)
-	print("test")
 	local test = nil
 	local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 50, { "epic" }, {"hoodedwidow"})
+    local ents = TheSim:FindEntities(x, y, z, 20, { "epic" }, {"hoodedwidow"})
 	if #ents >= 1 then
 	test = true
 	else
@@ -37,7 +36,6 @@ local function SpawnInvestigators(inst, target)
             local spider = inst.components.childspawner:SpawnChild(target, nil, 3)
             if spider ~= nil then
 			local x,y,z = inst.Transform:GetWorldPosition()
-			spider.Physics:Teleport(x, 15, z)
             spider.sg:GoToState("fall")
 			spider:AddTag("justcame")
 			spider:DoTaskInTime(1,function(spider) inst:RemoveTag("justcame") end)
@@ -60,14 +58,11 @@ local function fn()
 
     inst.SpawnInvestigators = SpawnInvestigators
 	inst:AddTag("widowweb")
-   -- inst:AddComponent("health")
-    --inst.components.health.nofadeout = true
     inst:AddComponent("childspawner")
     inst.components.childspawner.childname = "hoodedwidow"
     inst.components.childspawner:SetMaxChildren(1)
     inst.components.childspawner:SetSpawnPeriod(TUNING.DRAGONFLY_SPAWN_TIME, 0)
     inst.components.childspawner.onchildkilledfn = OnKilled
-    --inst.components.childspawner:StartSpawning()
     inst.components.childspawner:StopRegen()
 
     inst:AddComponent("timer")
