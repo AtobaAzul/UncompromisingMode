@@ -358,6 +358,10 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/rat_whip.tex"),
 	Asset("IMAGE", "images/inventoryimages/klaus_amulet.tex"),
 	Asset("ATLAS", "images/inventoryimages/klaus_amulet.xml"),
+	Asset("IMAGE", "images/inventoryimages/beargerclaw.tex"),
+	Asset("ATLAS", "images/inventoryimages/beargerclaw.xml"),
+	Asset("IMAGE", "images/inventoryimages/slobberlobber.tex"),
+	Asset("ATLAS", "images/inventoryimages/slobberlobber.xml"),
 	
 	Asset("ANIM", "anim/armor_steelsweater.zip"),
 	Asset("ANIM", "anim/steelsweater.zip"),

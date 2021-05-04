@@ -92,9 +92,6 @@ local function projectilefn()
     inst.entity:AddPhysics()
     inst.entity:AddNetwork()
 
-	local shadow = inst.entity:AddDynamicShadow()
-    shadow:SetSize( 1.5, 1 )
-
     inst.AnimState:SetBank("bearger_boulder")
     inst.AnimState:SetBuild("bearger_boulder")
     inst.AnimState:PlayAnimation("idle")
@@ -203,9 +200,6 @@ local function clawprojectilefn()
     inst.entity:AddSoundEmitter()
     inst.entity:AddPhysics()
     inst.entity:AddNetwork()
-
-	local shadow = inst.entity:AddDynamicShadow()
-    shadow:SetSize( 1.5, 1 )
 
     inst.AnimState:SetBank("bearger_boulder")
     inst.AnimState:SetBuild("bearger_boulder")
