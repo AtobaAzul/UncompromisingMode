@@ -367,6 +367,9 @@ local function OnKilled(inst)
 	deadcreature:AddTag("nodecomposepls")
 	end
 	deadcreature.components.health:Kill()
+	if creature == "mossling" then --Fix funny mossling glitch
+	deadcreature:DoTaskInTime(0.1,function(deadcreature) deadcreature.sg:GoToState("death") end)
+	end
 	else
     local deadcreature = SpawnPrefab("pigman")
 	deadcreature.Transform:SetPosition(x, y, z)
@@ -412,7 +415,7 @@ local function SetSize(inst)
 	
 	if inst.size == 3 then   --Mossling
 		SetMedium(inst)
-		inst.components.named:SetName("Fuzzy Cocoon")
+		inst.components.named:SetName("Feathery Cocoon")
 	end
 	
 	if inst.size == 4 then   --Pigman
@@ -491,8 +494,9 @@ end
 local function Regen(inst, attacker)
     if not inst.components.health:IsDead() then
 	local widowweb = FindEntity(inst,50,function(guy) return guy:HasTag("widowweb") end)
-	print(widowweb)
+	if widowweb ~= nil then
 	widowweb.SpawnInvestigators(widowweb,attacker)
+	end
 	
         inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_hit")
         inst.AnimState:PlayAnimation(inst.anims.hit)
@@ -526,7 +530,6 @@ local function fn()
 		inst:AddTag("noauradamage")
 		--inst:AddTag("notarget")
 		inst.GroundCreepEntity:SetRadius(3)
-		inst:AddTag("spiderden")
 		inst:AddTag("prey")
 		inst:AddTag("houndfriend")
 		inst:AddTag("antlion_sinkhole_blocker")

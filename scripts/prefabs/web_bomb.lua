@@ -5,13 +5,6 @@ local splashprefabs =
     "web_splash_fx_med",
     "web_splash_fx_full",
 }
-local splashfxlist =
-{
-    "icing_splash_fx_full",
-    "icing_splash_fx_med",
-    "icing_splash_fx_low",
-    "icing_splash_fx_melted",
-}
 local function doprojectilehit(inst, attacker, other)
     inst.SoundEmitter:PlaySound("dontstarve/creatures/spat/spit_hit")
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -47,10 +40,10 @@ local function doprojectilehit(inst, attacker, other)
 				else
 				other.sg:GoToState("knockback")
 				end
-                    local x, y, z = widowhome.Transform:GetWorldPosition() --Ripped knockback code, but it's rigged to go backwards.
+                    local x, y, z = widow.Transform:GetWorldPosition() --Ripped knockback code, but it's rigged to go backwards.
                     local distsq = other:GetDistanceSqToPoint(x, y, z)
                     local rot = other.Transform:GetRotation()
-                    local rot1 = distsq > 0 and other:GetAngleToPoint(x, y, z) or widowhome.Transform:GetRotation() + 180
+                    local rot1 = distsq > 0 and other:GetAngleToPoint(x, y, z) or widow.Transform:GetRotation() + 180
                     local drot = math.abs(rot - rot1)
                     while drot > 180 do
                         drot = math.abs(drot - 360)
@@ -62,6 +55,16 @@ local function doprojectilehit(inst, attacker, other)
                         other.Transform:SetRotation(rot1)
                         other.Physics:SetMotorVel(30, 0, 0)
                     end
+					local strings = TheSim:FindEntities(x,y,z,20,{"webchord"})
+					for i, v in ipairs(strings) do
+					    if drot > 90 then
+                        v.Transform:SetRotation(rot1 + 180)
+                        v.Physics:SetMotorVel(-30, 0, 0)
+                    else
+                        v.Transform:SetRotation(rot1)
+                        v.Physics:SetMotorVel(30, 0, 0)
+                    end
+					end
 			other:DoTaskInTime(0.6,function(other) other.Physics:SetMotorVel(0, 0, 0) end)
 			end)
        end
@@ -92,6 +95,11 @@ local function oncollide(inst, other)
     end
 
     inst:Remove()
+end
+
+local function SpawnString(inst)
+local x,y,z = inst.Transform:GetWorldPosition()
+SpawnPrefab("widow_web_detrius").Transform:SetPosition(x,y,z)
 end
 
 local function projectilefn()
@@ -133,6 +141,7 @@ local function projectilefn()
     inst.components.complexprojectile:SetHorizontalSpeed(30)
     inst.components.complexprojectile:SetLaunchOffset(Vector3(3, 2, 0))
     inst.components.complexprojectile.usehigharc = false
+	inst:DoPeriodicTask(0.05, SpawnString)
 
     return inst
 end
@@ -224,24 +233,47 @@ local function webbingfn()
 		inst.AnimState:SetBuild("silk")
 		inst.AnimState:PlayAnimation("idle")
 		MakeInventoryPhysics(inst)
-		inst.GroundCreepEntity:SetRadius(2)
+		inst.GroundCreepEntity:SetRadius(3)
 		inst:AddTag("queensstuff")
 		inst:AddTag("noauradamage")
-		inst:AddTag("spiderden")
 		
 		inst.entity:SetPristine()
 
 		if not TheWorld.ismastersim then
 			return inst
 		end
-
+		--inst:DoPeriodicTask(60,function(inst) if inst.components.health ~= nil then inst.components.health:DoDelta(-25) end end)
+		inst:ListenForEvent("death", function(inst) inst:Remove() end)
 		-------------------
 		inst:AddComponent("health")
-		inst.components.health:SetMaxHealth(200)
+		inst.components.health:SetMaxHealth(100)
 		inst:AddComponent("combat")
 		return inst
 end
 
-return Prefab("widow_web_combat", webbingfn),
+local function webdetriusfn()
+		local inst = CreateEntity()
+		inst.entity:AddTransform()
+		inst.entity:AddAnimState()
+		inst.entity:AddNetwork()
+		inst.entity:AddDynamicShadow()
+		inst.entity:AddSoundEmitter()
+
+		inst.AnimState:SetBank("silk")
+		inst.AnimState:SetBuild("silk")
+		inst.AnimState:PlayAnimation("idle")
+		MakeInventoryPhysics(inst)
+		inst:AddTag("webchord")
+		inst.entity:SetPristine()
+
+		if not TheWorld.ismastersim then
+			return inst
+		end
+		inst:DoTaskInTime(1.8,function(inst) inst:Remove() end)
+		return inst
+end
+
+return Prefab("widow_web_detrius", webdetriusfn),
+Prefab("widow_web_combat", webbingfn),
 Prefab("web_mortar", projectilelobfn),
 Prefab("web_bomb", projectilefn)

@@ -66,7 +66,7 @@ recipes.butterflymuffin.sanity = 10
 ------
 
 ------Common Farmplot Crockpot Foods Change
-recipes.fishtacos.hunger = 62.5
+recipes.fishtacos.hunger = 75
 recipes.fishtacos.health = 15
 recipes.fishtacos.sanity = 5
 ------

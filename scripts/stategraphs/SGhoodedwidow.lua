@@ -48,7 +48,7 @@ local splashprefabs =
     "web_splash_fx_med",
     "web_splash_fx_full",
 }
-local function WebMortar(inst)
+local function WebMortar(inst,angle)
 
 	if inst.components.combat.target ~= nil then
 	local target = inst.components.combat.target
@@ -63,7 +63,10 @@ local function WebMortar(inst)
     projectile.Transform:SetPosition(x, y, z)
     local a, b, c = target.Transform:GetWorldPosition()
 	local targetpos = target:GetPosition()
-	local theta = inst.Transform:GetRotation()+math.random(-15,15)
+	if angle == nil then
+	angle = 0
+	end
+	local theta = inst.Transform:GetRotation()+angle
 	theta = theta*DEGREES
 
 	targetpos.x = targetpos.x + 15*math.cos(theta)
@@ -71,12 +74,19 @@ local function WebMortar(inst)
 	targetpos.z = targetpos.z - 15*math.sin(theta)
 
 	local rangesq = ((a-x)^2) + ((c-z)^2)
+	--print("rangsq "..rangesq)
     local maxrange = 15
     local bigNum = 10
     local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
 	projectile:AddTag("canthit")
-
-    projectile.components.complexprojectile:SetHorizontalSpeed(speed*2.5*math.random(0.5,.75))
+	--print("speed "..speed)
+	speed = speed*2*math.random(0.5,1)
+	--print("speedrand ".. speed)
+	if speed < 5 then
+	speed = 14*math.random(100,200)*0.01
+	end
+	print("speed = "..speed)
+    projectile.components.complexprojectile:SetHorizontalSpeed(speed)
     projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 	end
 end
@@ -132,7 +142,14 @@ local states=
 
         events=
         {
-            EventHandler("animover", function(inst)	inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst)
+			if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.5 and math.random() < 0.5/inst.combo then
+			inst.sg:GoToState("attack")
+			inst.combo = inst.combo+2
+			else
+			inst.combo = 1
+			inst.sg:GoToState("idle") 
+			end end),
         },
     },
 
@@ -197,7 +214,7 @@ local states=
         
         timeline=
         {
-            TimeEvent(43*FRAMES, function(inst)
+            TimeEvent(45*FRAMES, function(inst)
 			inst.components.combat:DoAttack(inst.sg.statemem.target)
             end),
         },
@@ -224,23 +241,27 @@ local states=
         
         timeline=
         {
-            TimeEvent(43*FRAMES, function(inst)
+            TimeEvent(46*FRAMES, function(inst)
 			if inst.components.combat ~= nil and inst.components.combat.target ~= nil and inst.components.combat:CanHitTarget(inst.components.combat.target) then
 			local target = inst.components.combat.target
-			if target.components.pinnable ~= nil then
-			target.components.pinnable:Stick("web_net_trap",splashprefabs)
-			target:DoTaskInTime(1, function(target) target.components.pinnable:Unstick() end)
+				if target.components.pinnable ~= nil then
+				target.components.pinnable:Stick("web_net_trap",splashprefabs)
+				target:DoTaskInTime(1, function(target) target.components.pinnable:Unstick() end)
+				end
 			inst.sg:GoToState("attack")
-			end
 			else
-			WebMortar(inst)
-			if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.66 then
-			WebMortar(inst)
-			end
-			if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.33 then
-			WebMortar(inst)
-			WebMortar(inst)
-			end
+			WebMortar(inst,-15)
+			WebMortar(inst,15)
+				if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.66 then
+				WebMortar(inst,-30)
+				WebMortar(inst,30)
+				end
+				if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.33 then
+				WebMortar(inst,-45)
+				WebMortar(inst,45)
+				WebMortar(inst,-60)
+				WebMortar(inst,60)
+				end
 			end
 			inst.components.timer:StartTimer("mortar",20+math.random(-3,5))
             end),
@@ -267,7 +288,7 @@ local states=
         {
             EventHandler("animqueueover", function(inst) 
 		
-			inst.sg:GoToState("leapattack") end),
+			inst.sg:GoToState("attack") end),
         },
     },
 	
@@ -280,10 +301,14 @@ local states=
 			end
 			inst.AnimState:PlayAnimation("fall")	
         end,
+		timeline =
+        {
+            TimeEvent(10*FRAMES, function(inst) inst.components.groundpounder:GroundPound() end),
+
+        },
         events=
         {
             EventHandler("animqueueover", function(inst)
-			inst.components.groundpounder:GroundPound()
             inst.sg:GoToState("taunt") end),
         },          
     },

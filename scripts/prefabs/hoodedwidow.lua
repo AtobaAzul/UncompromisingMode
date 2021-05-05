@@ -232,7 +232,7 @@ local function fn()
 	
     if inst.components.combat ~= nil then
 		local function queensstuff(ent)
-			if ent ~= nil and ent:HasTag("queensstuff") then -- fix to friendly AOE: refer for later AOE mobs -Axe
+			if ent ~= nil and not ent:HasTag("queensstuff") then -- fix to friendly AOE: refer for later AOE mobs -Axe
 				return true
 			end
 		end
@@ -299,7 +299,7 @@ local function fn()
 	inst.OnLoad = OnLoad
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("death", OnDead)
-	
+	inst.combo = 1
 	inst:AddComponent("timer")
 	inst:ListenForEvent("timerdone", TryPowerMove)
 	inst.components.timer:StartTimer("pounce",10+math.random(-3,1))
