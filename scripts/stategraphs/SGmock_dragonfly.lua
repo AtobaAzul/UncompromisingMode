@@ -99,18 +99,19 @@ local events=
     CommonHandlers.OnLocomote(false,true),
     CommonHandlers.OnSleep(),
     CommonHandlers.OnFreeze(),
-    --[[CommonHandlers.OnAttack(),]]
-	--[[EventHandler("doattack", function(inst, data)
+    --CommonHandlers.OnAttack(),
+	EventHandler("doattack", function(inst, data)
 		if inst.rockthrow == true and not inst.components.health:IsDead() and inst.fire_build ~= nil and inst.fire_build == true then
-			if math.random() >= 0.5 then
+			inst.sg:GoToState("charge_warning")
+			--[[if math.random() >= 0.5 then
 				inst.sg:GoToState("charge_warning")
 			else
 				inst.sg:GoToState("shoot", data.target)
-			end
+			end]]
 		else
 			onattackfn(inst)
 		end
-	end),]]
+	end),
     CommonHandlers.OnDeath(),
     EventHandler("attacked", onattackedfn),
 }

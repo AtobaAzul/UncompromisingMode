@@ -11,11 +11,11 @@ local ink_prefabs =
 }
 
 local COLLAPSIBLE_TAGS = { "_combat", "pickable", "NPC_workable" }
-local NON_COLLAPSIBLE_TAGS = { "bearger", "flying", "bird", "playerghost", "FX", "NOCLICK", "DECOR", "INLIMBO" }
+local NON_COLLAPSIBLE_TAGS = { "bearger", "bird", "playerghost", "FX", "NOCLICK", "DECOR", "INLIMBO" }
 
 local function OnHitInk(inst, attacker, target)
 	local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, 0, z, 4, nil, NON_COLLAPSIBLE_TAGS, COLLAPSIBLE_TAGS)
+    local ents = TheSim:FindEntities(x, 0, z, 4, nil, NON_TARGERABLE_TAGS, COLLAPSIBLE_TAGS)
     for i, v in ipairs(ents) do
         if v:IsValid() then
             if v.components.combat ~= nil
@@ -119,12 +119,12 @@ local function projectilefn()
     return inst
 end
 
-local COLLAPSIBLE_TAGS = { "_combat", "pickable", "NPC_workable" }
-local NON_COLLAPSIBLE_TAGS = { "player", "flying", "bird", "playerghost", "FX", "NOCLICK", "DECOR", "INLIMBO" }
+local COLLAPSIBLE_TAGS_PLAYER = { "_combat", "pickable", "NPC_workable" }
+local NON_COLLAPSIBLE_TAGS_PLAYER = { "player", "bird", "playerghost", "FX", "NOCLICK", "DECOR", "INLIMBO" }
 
 local function OnHitInk_claw(inst, attacker, target)
 	local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, 0, z, 3, nil, NON_COLLAPSIBLE_TAGS, COLLAPSIBLE_TAGS)
+    local ents = TheSim:FindEntities(x, 0, z, 3, nil, NON_COLLAPSIBLE_TAGS_PLAYER, COLLAPSIBLE_TAGS_PLAYER)
     for i, v in ipairs(ents) do
         if v:IsValid() then
             if v.components.combat ~= nil
