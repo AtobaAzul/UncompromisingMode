@@ -216,9 +216,13 @@ Assets = {
 	Asset("ANIM", "anim/bat_vamp_shadow.zip"),
 	Asset("ANIM", "anim/berniebox.zip"),
 	Asset("ANIM", "anim/screecher_trinket.zip"),
-	
+
+	Asset("ANIM", "anim/zaspberryparfait.zip"),
 	Asset("IMAGE", "images/inventoryimages/zaspberryparfait.tex"),
 	Asset("ATLAS", "images/inventoryimages/zaspberryparfait.xml"),
+	Asset("ANIM", "anim/theatercorn.zip"),
+	Asset("IMAGE", "images/inventoryimages/theatercorn.tex"),
+	Asset("ATLAS", "images/inventoryimages/theatercorn.xml"),
 	Asset("IMAGE", "images/inventoryimages/bugzapper.tex"),
 	Asset("ATLAS", "images/inventoryimages/bugzapper.xml"),
 	Asset("IMAGE", "images/inventoryimages/sunglasses.tex"),
@@ -401,7 +405,10 @@ Assets = {
 	Asset("ANIM", "anim/woodpecker_build.zip"),
 	Asset("IMAGE", "images/inventoryimages/woodpecker.tex"),
 	Asset("ATLAS", "images/inventoryimages/woodpecker.xml"),	
-	
+	Asset("ANIM", "anim/skull_chest.zip"),
+	Asset("IMAGE", "images/inventoryimages/skullchest_child.tex"),
+	Asset("ATLAS", "images/inventoryimages/skullchest_child.xml"),
+
 	
 	--Dart Stuff
 	Asset("ANIM", "anim/um_blowguns.zip"),

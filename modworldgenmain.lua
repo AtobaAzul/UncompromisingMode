@@ -55,16 +55,18 @@ AddTile(
 	
 ------
 
---[[
--- <<Cave Update WIP: Toggle at your own risk you buffoons! (That means you atoba, don't leak it please eh?)>>
 
+-- <<Cave Update WIP: Toggle at your own risk you buffoons! (That means you atoba, don't leak it please eh?)>>
+--[[
 --Ruins Split
 AddLevelPreInitAny(function(level)
     if level.location == "cave" then
         level.overrides.keep_disconnected_tiles = true
 		level.overrides.no_joining_islands = true
+		level.overrides.has_ocean = true
     end
 end)
+
 AddTaskPreInit("LichenLand",function(task) --This is the new "starting task" for the island (at least trying to make it that)
 task.region_id = "RuinsIsland"
 task.locks = {}

@@ -223,7 +223,7 @@ local states=
         
         timeline=
         {
-            TimeEvent(45*FRAMES, function(inst)
+            TimeEvent(47*FRAMES, function(inst)
 			inst.components.combat:DoAttack(inst.sg.statemem.target)
             end),
         },
@@ -250,27 +250,26 @@ local states=
         
         timeline=
         {
-            TimeEvent(46*FRAMES, function(inst)
+            TimeEvent(47*FRAMES, function(inst)
 			if inst.components.combat ~= nil and inst.components.combat.target ~= nil and inst.components.combat:CanHitTarget(inst.components.combat.target) then
-			local target = inst.components.combat.target
+				local target = inst.components.combat.target
 				if target.components.pinnable ~= nil then
-				target.components.pinnable:Stick("web_net_trap",splashprefabs)
-				target:DoTaskInTime(1, function(target) target.components.pinnable:Unstick() end)
+					target.components.pinnable:Stick("web_net_trap",splashprefabs)
+					target:DoTaskInTime(1, function(target) target.components.pinnable:Unstick() end)
 				end
-			inst.sg:GoToState("attack")
-			else
+				inst.sg:GoToState("attack")
+			end
 			WebMortar(inst,-15)
 			WebMortar(inst,15)
-				if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.66 then
+			if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.66 then
 				WebMortar(inst,-30)
 				WebMortar(inst,30)
-				end
-				if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.33 then
+			end
+			if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.33 then
 				WebMortar(inst,-45)
 				WebMortar(inst,45)
 				WebMortar(inst,-60)
 				WebMortar(inst,60)
-				end
 			end
 			inst.components.timer:StartTimer("mortar",20+math.random(-3,5))
             end),

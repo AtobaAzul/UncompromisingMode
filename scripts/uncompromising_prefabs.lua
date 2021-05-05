@@ -218,4 +218,6 @@ return {
 	"corncan",
 	"wingsuit",
 	"beargerclaw",
+	"theatercorn",
+	"skullchest",
 }

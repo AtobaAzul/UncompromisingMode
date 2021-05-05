@@ -29,7 +29,7 @@ env.AddPrefabPostInit("mound", function(inst)
 	local _OnFinishCallBack = inst.components.workable.onfinish
 
 	inst.components.workable.onfinish = function(inst, worker)
-		if math.random() > 0.9 then
+		if math.random() > 0.95 then
 			return onfinishcallbackUM(inst, worker)
 		else
 			return _OnFinishCallBack(inst, worker)

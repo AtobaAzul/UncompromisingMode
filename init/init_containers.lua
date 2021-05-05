@@ -154,6 +154,8 @@ for k, v in pairs(modparams) do
 	containers.MAXITEMSLOTS = math.max(containers.MAXITEMSLOTS, v.widget.slotpos ~= nil and #v.widget.slotpos or 0)
 end
 
+modparams.skullchest_child = containers.params.skullchest
+
 local old_wsetup = containers.widgetsetup
 
 function containers.widgetsetup(container, prefab, data, ...)
