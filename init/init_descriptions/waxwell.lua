@@ -251,3 +251,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP = "I never taught them to do that."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Someone is hunting us. Walrus perhaps?"
 	DESCRIBE.CORNCAN = "Corn is presumably contained inside."
+	DESCRIBE.SKULLCHEST_CHILD = "It keeps items inside the local pocket dimension."

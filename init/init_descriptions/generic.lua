@@ -298,3 +298,4 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.UM_BEAR_TRAP = "Best not step on that."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Someone left this here."
 	DESCRIBE.CORNCAN = "Where did this can come from?"
+	DESCRIBE.SKULLCHEST_CHILD = "If only I could fit inside."

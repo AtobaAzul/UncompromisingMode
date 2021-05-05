@@ -245,3 +245,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP = "A fanged metal web!"
 	DESCRIBE.UM_BEAR_TRAP_OLD = "A fanged metal web!"
 	DESCRIBE.CORNCAN = "We left our can opener at home."
+	DESCRIBE.SKULLCHEST_CHILD = "We can give things to others far away."

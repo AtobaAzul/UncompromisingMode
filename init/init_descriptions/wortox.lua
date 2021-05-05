@@ -246,3 +246,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP = "You gotta be a dope to fall for this joke!"
 	DESCRIBE.UM_BEAR_TRAP_OLD = "You gotta be a dope to fall for this joke!"
 	DESCRIBE.CORNCAN = "Go to corny jail."
+	DESCRIBE.SKULLCHEST_CHILD = "Now this is an item that I find amusing."

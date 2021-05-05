@@ -245,3 +245,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP = "Disarming it would be easy."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Disarming it would be easy."
 	DESCRIBE.CORNCAN = "Food that can survive a voyage!"
+	DESCRIBE.SKULLCHEST_CHILD = "The gods keep my spoils safe."

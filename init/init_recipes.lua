@@ -66,7 +66,6 @@ AddRecipe("diseasecurebomb", {Ingredient("cactus_flower", 2), Ingredient("moonro
 GLOBAL.AllRecipes["diseasecurebomb"].sortkey = GLOBAL.AllRecipes["lifeinjector"].sortkey + .1
 
 
-
 --[[
 AddRecipe("reviver", {Ingredient("skeletonmeat", 1, "images/inventoryimages/skeletonmeat.xml"), Ingredient("spidergland", 1), Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 40)}, RECIPETABS.SURVIVAL,  TECH.NONE)
 AddRecipe("bernie_inactive", {Ingredient("berniebox", 1, "images/inventoryimages/berniebox.xml")}, RECIPETABS.SURVIVAL,  TECH.NONE, nil, nil, nil, nil, "pyromaniac")
@@ -111,6 +110,9 @@ GLOBAL.AllRecipes["saltpack"].sortkey = GLOBAL.AllRecipes["sporepack"].sortkey +
 
 AddRecipe("air_conditioner", {Ingredient("shroom_skin",2),Ingredient("gears", 2),Ingredient("cutstone",4)}, GLOBAL.RECIPETABS.SCIENCE, GLOBAL.TECH.SCIENCE_TWO, "air_conditioner_placer", nil, nil, nil, nil, "images/inventoryimages/air_conditioner.xml", "air_conditioner.tex" )
 GLOBAL.AllRecipes["air_conditioner"].sortkey = GLOBAL.AllRecipes["firesuppressor"].sortkey + .1
+
+AddRecipe("skullchest_child", {Ingredient("fossil_piece", 2), Ingredient("nightmarefuel",4), Ingredient("boards",3)}, RECIPETABS.TOWN, TECH.LOST, "skullchest_child_placer", nil, nil, nil, nil, "images/inventoryimages/skullchest_child.xml", "skullchest_child.tex" )
+GLOBAL.AllRecipes["skullchest_child"].sortkey = GLOBAL.AllRecipes["dragonflychest"].sortkey + .1
 
 AddRecipe("honey_log",   {Ingredient("livinglog", 1), Ingredient("honey", 2)}, CUSTOM_RECIPETABS.NATURE, TECH.NONE, nil, nil, nil, nil, "plantkin", "images/inventoryimages/honey_log.xml", "honey_log.tex" )
 
@@ -159,3 +161,4 @@ STRINGS.RECIPE_DESC.ANCIENT_AMULET_RED = "Recalls your lost soul."
 STRINGS.RECIPE_DESC.RAT_WHIP = "A long rat tail on a stick."
 STRINGS.RECIPE_DESC.TURF_HOODEDMOSS = "Mossy ground with a hint of lunar magic."
 STRINGS.RECIPE_DESC.TURF_ANCIENTHOODEDTURF = "The hooded forest's younger years."
+STRINGS.RECIPE_DESC.SKULLCHEST_CHILD = "Interdimensional item storage."

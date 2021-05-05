@@ -247,3 +247,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP = "The handiwork is nice. I wonder how they got the materials to make it."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "The handiwork is nice, although a bit rusted."
 	DESCRIBE.CORNCAN = "An ear of corn waiting for conversation."
+	DESCRIBE.SKULLCHEST_CHILD = "With proper coordination, I could get anything from anywhere."

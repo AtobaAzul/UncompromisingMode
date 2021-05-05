@@ -37,7 +37,7 @@ env.AddPrefabPostInit("forest", function(inst)
     end
 	
 	
-	
+	inst:AddComponent("skullchestinventory")
 	inst:ListenForEvent("hasslerremoved", DeerclopsRemovedRPC, TheWorld)
 	inst:ListenForEvent("hasslerkilled", DeerclopsDeathRPC, TheWorld)
 	inst:ListenForEvent("storehassler", DeerclopsStoredRPC, TheWorld)
@@ -77,7 +77,7 @@ env.AddPrefabPostInit("caves", function(inst)
     if not TheWorld.ismastersim then
         return
     end
-	
+	inst:AddComponent("skullchestinventory")
 	inst:ListenForEvent("hasslerremoved", DeerclopsRemovedRPC_caves, TheWorld)
 	inst:ListenForEvent("hasslerkilled", DeerclopsDeathRPC_caves, TheWorld)
 	inst:ListenForEvent("storehassler", DeerclopsStoredRPC_caves, TheWorld)

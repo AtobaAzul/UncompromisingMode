@@ -244,3 +244,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	
 	DESCRIBE.UM_BEAR_TRAP = "I'll keep my distance."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "I'll keep my distance."
+	DESCRIBE.SKULLCHEST_CHILD = "Now I can get fresh produce from far away!"

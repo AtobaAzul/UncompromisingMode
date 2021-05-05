@@ -119,13 +119,6 @@ AddPrefabPostInit("oasis_cactus", function(inst)
     end
 end)
 
--- Spiky twigs
-AddPrefabPostInit("marsh_bush", function(inst)
-    if inst~= nil and inst.components.pickable ~= nil then
-        GLOBAL.MakeNoGrowInWinter(inst)
-    end
-end)
-
 -----------------------------------------------------------------
 -- Bunnies don't drop carrots anymore
 -----------------------------------------------------------------
