@@ -16,10 +16,10 @@ local events=
                     inst.sg:GoToState("launchprojectile", data.target)
                 else
 					if inst.components.timer ~= nil and not inst.components.timer:TimerExists("pounce") then
-					inst.sg:GoToState("preleapattack",data.target)
+					inst.sg:GoToState("preleapattack")
 					else
 					if inst.components.timer ~= nil and not inst.components.timer:TimerExists("mortar") then
-					inst.sg:GoToState("lobprojectile",data.target)
+					inst.sg:GoToState("lobprojectile")
 					else
                     inst.sg:GoToState("attack", data.target)
 					end
@@ -143,13 +143,22 @@ local states=
         events=
         {
             EventHandler("animover", function(inst)
-			if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.5 and math.random() < 0.5/inst.combo then
-			inst.sg:GoToState("attack")
-			inst.combo = inst.combo+2
+			if inst.components.timer ~= nil and not inst.components.timer:TimerExists("pounce") then
+			inst.sg:GoToState("preleapattack")
 			else
-			inst.combo = 1
-			inst.sg:GoToState("idle") 
-			end end),
+				if inst.components.timer ~= nil and not inst.components.timer:TimerExists("mortar") then
+				inst.sg:GoToState("lobprojectile")
+				else
+   					if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.5 and math.random() < 0.5/inst.combo then
+					inst.sg:GoToState("attack")
+					inst.combo = inst.combo+2
+					else
+					inst.combo = 1
+					inst.sg:GoToState("idle") 
+					end 
+				end
+			end
+		end),
         },
     },
 
@@ -315,7 +324,7 @@ local states=
     State{
         name = "preleapattack",
         tags = {"busy", "noweb","superbusy","nointerrupt"},
-        onenter = function(inst, data)
+        onenter = function(inst)
 		inst.components.locomotor:Stop()
 		inst.AnimState:PlayAnimation("prejump")
         end,

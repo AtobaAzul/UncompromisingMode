@@ -38,7 +38,7 @@ local function fn()
     inst:AddTag("molebait")
     inst:AddTag("cattoy")
     inst:AddComponent("tradable")
-    inst.components.tradable.goldvalue = 1
+    inst.components.tradable.goldvalue = 5
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/cctrinket_"..name..".xml"
     return inst

@@ -29,7 +29,7 @@ local function fn()
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/corncan.xml"
     
     inst:AddComponent("tradable")
-    inst.components.tradable.goldvalue = 1
+    inst.components.tradable.goldvalue = 8
 	inst:AddComponent("lootdropper")
 	inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)

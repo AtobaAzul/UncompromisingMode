@@ -138,7 +138,7 @@ end
 end
 end
 local function TryPowerMove(inst,data)
-if not inst.sg:HasStateTag("busy") and (inst.components.health ~= nil and not inst.components.health:IsDead()) and (inst.components.combat ~= nil and inst.components.combat.target ~= nil) then
+if not inst.sg:HasStateTag("busy") and (inst.components.health ~= nil and not inst.components.health:IsDead()) and (inst.components.combat ~= nil and inst.components.combat.target ~= nil) and not inst.sg:HasStateTag("attack") then
 	if data ~= nil and data.name == "pounce" then
 			DoLeap(inst)	
 	end
