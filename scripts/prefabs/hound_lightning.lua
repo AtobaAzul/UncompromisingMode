@@ -41,7 +41,7 @@ local function Zap(inst)
 					v.components.health:DoDelta(-25, nil, inst.prefab, nil, inst)
 					v.sg:GoToState("electrocute")
 				else
-					v.components.combat:GetAttacked(inst, -10, inst.prefab)
+					v.components.combat:GetAttacked(inst.prefab, -10)
 				end
 			elseif v.components.combat ~= nil then
 				v.components.combat:GetAttacked(inst, -25)
@@ -62,6 +62,7 @@ local function fn()
     inst.entity:AddNetwork()
 	
 	inst:AddTag("hound_lightning")
+	inst:AddTag("sharp")
 
     inst.entity:SetPristine()
 

@@ -15,7 +15,7 @@ local NON_COLLAPSIBLE_TAGS = { "bearger", "bird", "playerghost", "FX", "NOCLICK"
 
 local function OnHitInk(inst, attacker, target)
 	local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, 0, z, 4, nil, NON_TARGERABLE_TAGS, COLLAPSIBLE_TAGS)
+    local ents = TheSim:FindEntities(x, 0, z, 4, nil, NON_COLLAPSIBLE_TAGS, COLLAPSIBLE_TAGS)
     for i, v in ipairs(ents) do
         if v:IsValid() then
             if v.components.combat ~= nil
