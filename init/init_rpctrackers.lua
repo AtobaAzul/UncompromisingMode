@@ -73,11 +73,18 @@ local function DeerclopsStoredRPC_caves(inst)
 	end
 end
 
-env.AddPrefabPostInit("caves", function(inst)
+env.AddPrefabPostInit("cave", function(inst)
     if not TheWorld.ismastersim then
         return
     end
 	inst:AddComponent("skullchestinventory")
+end)
+
+env.AddPrefabPostInit("caves", function(inst)
+    if not TheWorld.ismastersim then
+        return
+    end
+	--inst:AddComponent("skullchestinventory")
 	inst:ListenForEvent("hasslerremoved", DeerclopsRemovedRPC_caves, TheWorld)
 	inst:ListenForEvent("hasslerkilled", DeerclopsDeathRPC_caves, TheWorld)
 	inst:ListenForEvent("storehassler", DeerclopsStoredRPC_caves, TheWorld)

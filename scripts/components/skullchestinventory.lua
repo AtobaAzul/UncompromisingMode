@@ -1,5 +1,6 @@
 local SkullChestInventory = Class(function(self, inst)
 	self.inst = inst
+	--print("skullchestcomponentadded")
 	self.inst:DoTaskInTime(0,function() self:SpawnTrunk() end)
 end)
 
@@ -63,7 +64,7 @@ end
 
 function SkullChestInventory:SpawnTrunk()
 	if not self.trunk then
-		print("SPAWN TRUNK!!!!!!!!!!!!!!!!!!!!!!!!")
+		--print("SPAWN TRUNK!!!!!!!!!!!!!!!!!!!!!!!!")
 		self.trunk = SpawnPrefab("skullchest")
 	end
 	self.trunk:RemoveFromScene()
