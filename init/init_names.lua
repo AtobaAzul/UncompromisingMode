@@ -192,6 +192,14 @@ STRINGS = GLOBAL.STRINGS.NAMES
 	STRINGS.CORNCAN = "Canned Corn"
 	STRINGS.SKULLCHEST_CHILD = "Skull Chest"
 	
+	--Stanton's Stash
+	STRINGS.STANTON_SHADOW_TONIC = "Shadow Tonic"
+	STRINGS.STANTON = "Stanton Cree"
+	STRINGS.SKULLFLASK = "Skull Flask"
+	STRINGS.SKULLFLASK_EMPTY = "Empty Skull Flask"
+	--Stanton's Stash
+	
+	
 	-- Blowgun stuff
 	STRINGS.UNCOMPROMISING_BLOWGUN = "Blowpipe" --Lol
 	STRINGS.BLOWGUNAMMO_TOOTH = "Dart"

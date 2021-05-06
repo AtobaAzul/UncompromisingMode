@@ -141,6 +141,71 @@ local function largehungerslow_detach(inst, target)
 target.components.hunger.burnratemodifiers:RemoveModifier(inst)
 end
 
+local function stantonslumber_attach(inst, target)
+if target.stantonslumberstack == nil then
+	target.stantonslumberstack = 0
+else
+	if target.components.debuffable ~= nil and target.components.debuffable:HasDebuff("buff_sleepresistance") then
+		target.stantonslumberstack = target.stantonslumberstack + 0.05
+	else
+		target.stantonslumberstack = target.stantonslumberstack + 0.1
+	end
+end
+if math.random() < target.stantonslumberstack then
+	if target.components.sleeper ~= nil then
+		target.components.sleeper:GoToSleep(20)
+		local stanton = FindEntity(target,10,nil,{"stanton"})
+		if stanton ~= nil then
+			stanton.Gloat(stanton)
+		end		
+	end
+else
+	if target.components.grogginess ~= nil and target.components.grogginess.grog_amount == 0 then
+		target.components.grogginess:AddGrogginess(1, 1)
+	end
+end
+end
+
+local function stantonslumber_extend(inst, target)
+if target.stantonslumberstack == nil then
+	target.stantonslumberstack = 0
+else
+	if target.components.debuffable ~= nil and target.components.debuffable:HasDebuff("buff_sleepresistance") then
+		target.stantonslumberstack = target.stantonslumberstack + 0.05
+	else
+		target.stantonslumberstack = target.stantonslumberstack + 0.1
+	end
+end
+if math.random() < target.stantonslumberstack then
+	if target.components.sleeper ~= nil then
+		target.components.sleeper:GoToSleep(20)
+		local stanton = FindEntity(target,10,nil,{"stanton"})
+		if stanton ~= nil then
+			stanton.Gloat(stanton)
+		end		
+	end
+else
+	if target.components.grogginess ~= nil and target.components.grogginess.grog_amount == 0 then
+		target.components.grogginess:AddGrogginess(1, 1)
+	end
+end
+end
+
+local function stantonslumber_detach(inst, target)
+target.stantonslumberstack = nil
+end
+
+local function hypercourage_attach(inst,target)
+target.components.sanity.neg_aura_modifiers:SetModifier(inst, 0)
+end
+
+local function hypercourage_extend(inst,target)
+
+end
+
+local function hypercourage_detach(inst,target)
+target.components.sanity.neg_aura_modifiers:RemoveModifier(inst)
+end
 -------------------------------------------------------------------------
 ----------------------- Prefab building functions -----------------------
 -------------------------------------------------------------------------
@@ -151,15 +216,16 @@ local function OnTimerDone(inst, data)
     end
 end
 
-local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration, priority, prefabs)
+local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration, priority, nospeech)
     local function OnAttached(inst, target)
         inst.entity:SetParent(target.entity)
         inst.Transform:SetPosition(0, 0, 0) --in case of loading
         inst:ListenForEvent("death", function()
             inst.components.debuff:Stop()
         end, target)
-
+		if not nospeech == true then
         target:PushEvent("foodbuffattached", { buff = "ANNOUNCE_ATTACH_BUFF_"..string.upper(name), priority = priority })
+		end
         if onattachedfn ~= nil then
             onattachedfn(inst, target)
         end
@@ -168,8 +234,9 @@ local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration
     local function OnExtended(inst, target)
         inst.components.timer:StopTimer("buffover")
         inst.components.timer:StartTimer("buffover", duration)
-
+		if not nospeech == true then
         target:PushEvent("foodbuffattached", { buff = "ANNOUNCE_ATTACH_BUFF_"..string.upper(name), priority = priority })
+		end
         if onextendedfn ~= nil then
             onextendedfn(inst, target)
         end
@@ -179,8 +246,9 @@ local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration
         if ondetachedfn ~= nil then
             ondetachedfn(inst, target)
         end
-
+		if not nospeech == true then
         target:PushEvent("foodbuffdetached", { buff = "ANNOUNCE_DETACH_BUFF_"..string.upper(name), priority = priority })
+		end
         inst:Remove()
     end
 
@@ -215,7 +283,7 @@ local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration
         return inst
     end
 
-    return Prefab("buff_"..name, fn, nil, prefabs)
+    return Prefab("buff_"..name, fn, nil)
 end
 
 return MakeBuff("electricretaliation", attachretaliationdamage, electric_extend, removeretaliationdamageretaliationdamage, TUNING.BUFF_ELECTRICATTACK_DURATION, 2, { "electrichitsparks", "electricchargedfx" }),
@@ -223,4 +291,6 @@ MakeBuff("frozenfury", attachfrozenness, nil, removefrozenness, TUNING.BUFF_ELEC
 MakeBuff("lesserelectricattack", electric_attach, electric_extend, electric_detach, 30, 2, { "electrichitsparks", "electricchargedfx" }),
 MakeBuff("knockbackimmune", kbimmune_attach, kbimmune_extend, kbimmune_detach, TUNING.BUFF_ATTACK_DURATION, 2),
 MakeBuff("californiaking", californiaking_attach, californiaking_extend, californiaking_detach, TUNING.BUFF_ATTACK_DURATION*8, 2),
-MakeBuff("largehungerslow", largehungerslow_attach, largehungerslow_extend, largehungerslow_detach, TUNING.BUFF_ATTACK_DURATION*8, 2)
+MakeBuff("largehungerslow", largehungerslow_attach, largehungerslow_extend, largehungerslow_detach, TUNING.BUFF_ATTACK_DURATION*8, 2),
+MakeBuff("stantonslumber", stantonslumber_attach, stantonslumber_extend, stantonslumber_detach, TUNING.BUFF_ATTACK_DURATION, 2,true),
+MakeBuff("hypercourage", hypercourage_attach, hypercourage_extend, hypercourage_detach, 30, 2)

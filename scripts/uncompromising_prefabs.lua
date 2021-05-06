@@ -220,4 +220,5 @@ return {
 	"beargerclaw",
 	"theatercorn",
 	"skullchest",
+	"drink_with_the_living_dead",
 }
