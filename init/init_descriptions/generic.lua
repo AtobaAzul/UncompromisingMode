@@ -266,6 +266,8 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	-- Xmas Update
 	DESCRIBE.MAGMAHOUND = "Hot dog!"
 	DESCRIBE.LIGHTNINGHOUND = "Watch it, that one stings!"
+	DESCRIBE.SPOREHOUND = "You sick dog."
+	DESCRIBE.GLACIALHOUND = "This hound's on ice."
 	DESCRIBE.RNESKELETON = "They are spooky AND scary!"
 	DESCRIBE.RAT_WHIP = "I make all the rules."
 	DESCRIBE.KLAUS_AMULET = "It's chains contain the King of Winter!"

@@ -202,6 +202,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	
 	DESCRIBE.MAGMAHOUND = "A walking furnace. If only they could be domesticated..."
 	DESCRIBE.LIGHTNINGHOUND = "It's definitely from the tropics."
+	DESCRIBE.SPOREHOUND = "This chein's sick."
+	DESCRIBE.GLACIALHOUND = "I don't like its cold stare."
 	DESCRIBE.RNESKELETON = "No more stomach? Sorry ami, I can't help you!"
 	DESCRIBE.RAT_WHIP = "This is a bad idea."
 	DESCRIBE.KLAUS_AMULET = "The steel is chilling."

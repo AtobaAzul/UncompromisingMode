@@ -203,6 +203,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 
 	DESCRIBE.MAGMAHOUND = "That thing'll burn a forest down!!"
 	DESCRIBE.LIGHTNINGHOUND = "Lightning never strikes twice... Right, Lucy?"
+	DESCRIBE.SPOREHOUND = "What's that toad been up to now?"
+	DESCRIBE.GLACIALHOUND = "Glacial, huh. Still lukewarm to me."
 	DESCRIBE.RNESKELETON = "He's seen better days."
 	DESCRIBE.RAT_WHIP = "That's not something I want to keep on me."
 	DESCRIBE.KLAUS_AMULET = "The chains are comin' off now!"

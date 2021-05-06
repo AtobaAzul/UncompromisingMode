@@ -208,6 +208,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 
 	DESCRIBE.MAGMAHOUND = "A hound that projectile vomits magma."
 	DESCRIBE.LIGHTNINGHOUND = "I must watch my step, they electrify the earth."
+	DESCRIBE.SPOREHOUND = "I wonder how the toad transmitted the mushrooms."
+	DESCRIBE.GLACIALHOUND = "This one throws frozen spikes."
 	DESCRIBE.RNESKELETON = "A living human skeleton."
 	DESCRIBE.RAT_WHIP = "A makeshift whip fashioned from rat appendages. Lovely."
 	DESCRIBE.KLAUS_AMULET = "My old bones are invigorated!"

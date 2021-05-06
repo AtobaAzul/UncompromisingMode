@@ -203,6 +203,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 
 	DESCRIBE.MAGMAHOUND = "It breathes fire onto our desires!"
 	DESCRIBE.LIGHTNINGHOUND = "A caster of elemental energy!"
+	DESCRIBE.SPOREHOUND = "Even toadstool wants in on the new hound action!"
+	DESCRIBE.GLACIALHOUND = "It's giving me the cold shoulder!"
 	DESCRIBE.RNESKELETON = "Your soul came back! That's not how it works!"
 	DESCRIBE.RAT_WHIP = "Equally as cruel as it's kitty-cousin!"
 	DESCRIBE.KLAUS_AMULET = "Do you have the key to my heart?"

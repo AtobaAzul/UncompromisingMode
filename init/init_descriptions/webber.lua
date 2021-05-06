@@ -202,6 +202,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 
 	DESCRIBE.MAGMAHOUND = "Eep, he spits!"
 	DESCRIBE.LIGHTNINGHOUND = "Ouch ouch ouch! Our feetsies!"
+	DESCRIBE.SPOREHOUND = "A sick angry puppy!"
+	DESCRIBE.GLACIALHOUND = "Its frozen glare frightens us."
 	DESCRIBE.RNESKELETON = "Oh, hello there! Would you like something?"
 	DESCRIBE.RAT_WHIP = "It's pretty stinky. We'd rather use something else."
 	DESCRIBE.KLAUS_AMULET = "We've been naughty..."

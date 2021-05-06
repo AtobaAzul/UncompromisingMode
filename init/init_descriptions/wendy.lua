@@ -202,6 +202,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 
 	DESCRIBE.MAGMAHOUND = "It rains hell on the unfortunate."
 	DESCRIBE.LIGHTNINGHOUND = "Death from above!"
+	DESCRIBE.SPOREHOUND = "An ill fated beast."
+	DESCRIBE.GLACIALHOUND = "Its frozen heart still beats."
 	DESCRIBE.RNESKELETON = "Has the reaper come to take me? What took you so long?"
 	DESCRIBE.RAT_WHIP = "How degrading."
 	DESCRIBE.KLAUS_AMULET = "Another lock to be behind."
