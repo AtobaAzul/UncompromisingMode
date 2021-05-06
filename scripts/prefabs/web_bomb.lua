@@ -247,6 +247,7 @@ local function webbingfn()
 		-------------------
 		inst:AddComponent("health")
 		inst.components.health:SetMaxHealth(100)
+		inst:AddTag("soulless")
 		inst:AddComponent("combat")
 		return inst
 end
