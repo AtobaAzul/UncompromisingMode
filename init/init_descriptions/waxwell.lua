@@ -237,7 +237,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.ROSHIP = "Your face looks even worse now!"
 	
 	DESCRIBE.UM_PAWN = "The miniature work took me a while."
-	DESCRIBE.UM_PAWN_NIGHTMARE = ""
+	DESCRIBE.UM_PAWN_NIGHTMARE = "These are the ones I based them off of."
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
@@ -254,3 +254,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Someone is hunting us. Walrus perhaps?"
 	DESCRIBE.CORNCAN = "Corn is presumably contained inside."
 	DESCRIBE.SKULLCHEST_CHILD = "It keeps items inside the local pocket dimension."
+	
+	--StantonStuff
+	DESCRIBE.SKULLFLASK = "His mixture is actually quite impressive."
+	DESCRIBE.SKULLFLASK_EMPTY = "The flask appears to be enchanted as well, brilliant."
+	DESCRIBE.STANTON_SHADOW_TONIC = "A fuel drink? I could do this all day."
+	DESCRIBE.STANTON = "Who are you? Did I kill you?"
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "A comforting effect as well, almost like eggnog."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "I would desire more."
+	--StantonStuff

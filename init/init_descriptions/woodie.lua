@@ -231,7 +231,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.ROSHIP = "He can hock a loogie real far."
 	
 	DESCRIBE.UM_PAWN = "I think his message is pretty clear, eh?"
-	DESCRIBE.UM_PAWN_NIGHTMARE = ""
+	DESCRIBE.UM_PAWN_NIGHTMARE = "I think his message is pretty clear, eh?"
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
@@ -249,3 +249,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Someone left their kit out."
 	DESCRIBE.CORNCAN = "I'll get at 'cha with lucy."
 	DESCRIBE.SKULLCHEST_CHILD = "Who knew wood and magic made such a great pair!"
+	
+	--StantonStuff
+	DESCRIBE.SKULLFLASK = "Keeps your mind at ease."
+	DESCRIBE.SKULLFLASK_EMPTY = "Well, it's gone now."
+	DESCRIBE.STANTON_SHADOW_TONIC = "It wouldn't be the weirdest thing I ate..."
+	DESCRIBE.STANTON = "State your business, hoser!"
+	--StantonStuff

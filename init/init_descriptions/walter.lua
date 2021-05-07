@@ -230,7 +230,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.ROSHIP = "What a hotshot you are."
 	
 	DESCRIBE.UM_PAWN = "Don't get too close now, Woby."
-	DESCRIBE.UM_PAWN_NIGHTMARE = ""
+	DESCRIBE.UM_PAWN_NIGHTMARE = "Don't get too close now, Woby."
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
@@ -247,3 +247,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Who left their gear out like this?"
 	DESCRIBE.CORNCAN = "Oh boy! Corn!"
 	DESCRIBE.SKULLCHEST_CHILD = "Wortox once popped out of this thing. Almost gave me a heart attack!"
+	
+	--StantonStuff
+	DESCRIBE.SKULLFLASK = "That's a spooky cup."
+	DESCRIBE.SKULLFLASK_EMPTY = "It's empty, for now."
+	DESCRIBE.STANTON_SHADOW_TONIC = "I don't like the look of this."
+	DESCRIBE.STANTON = "I don't think I should drink with him."
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "Huh, it didn't do anything."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = ""
+	--StantonStuff

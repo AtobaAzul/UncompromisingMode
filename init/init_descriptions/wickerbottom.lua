@@ -236,7 +236,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.ROSHIP = "It lacks the amount of firepower the Bishop has."
 	
 	DESCRIBE.UM_PAWN = "It's based on proximity, so let's steer clear."
-	DESCRIBE.UM_PAWN_NIGHTMARE = ""
+	DESCRIBE.UM_PAWN_NIGHTMARE = "Another proximity drone, best keep away."
 	
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
@@ -254,3 +254,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP_OLD = "A mundane trap, I best stay clear of it."
 	DESCRIBE.CORNCAN = "Preserved corn."
 	DESCRIBE.SKULLCHEST_CHILD = "The items inside fade into blackness."
+	
+	--StantonStuff
+	DESCRIBE.SKULLFLASK = "It keeps me alert, but without care."
+	DESCRIBE.SKULLFLASK_EMPTY = "I can see the liquid slowly returning."
+	DESCRIBE.STANTON_SHADOW_TONIC = "Fall asleep? Why I never."
+	DESCRIBE.STANTON = "Hold still, I simply must study your anatomy."
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "I can study, unwavered."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Science no longer comforts me."
+	--StantonStuff

@@ -230,7 +230,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.ROSHIP = "They fight a coward's way."
 	
 	DESCRIBE.UM_PAWN = "A coward who hides behind his comrades."
-	DESCRIBE.UM_PAWN_NIGHTMARE = ""
+	DESCRIBE.UM_PAWN_NIGHTMARE = "This one's different, are you a coward as well!"
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
@@ -248,3 +248,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Disarming it would be easy."
 	DESCRIBE.CORNCAN = "Food that can survive a voyage!"
 	DESCRIBE.SKULLCHEST_CHILD = "The gods keep my spoils safe."
+	
+	--StantonStuff
+	DESCRIBE.SKULLFLASK = "I drink for before or during battle!"
+	DESCRIBE.SKULLFLASK_EMPTY = "An empty flask, it will be refilled!"
+	DESCRIBE.STANTON_SHADOW_TONIC = "To our health!"
+	DESCRIBE.STANTON = "A drinking contest!? You're bound to lose."
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "I fear NOTHING!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "A valkyrie never backs down."
+	--StantonStuff

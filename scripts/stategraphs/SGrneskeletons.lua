@@ -94,6 +94,23 @@ local states=
        },
 },
     State{
+        name = "enter",
+        tags = {"busy"},
+        
+        onenter = function(inst)
+			inst.Physics:Stop()
+			RemovePhysicsColliders(inst)
+            inst.AnimState:PlayAnimation("jump")
+        end,
+		timeline=
+        {
+            TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
+			TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
+			TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
+			TimeEvent(18*FRAMES, function(inst) inst.sg:GoToState("idle") end),
+        },
+},
+    State{
         name = "dance",
         tags = {"idle", "busy", "dancing"},
         onenter = function(inst)

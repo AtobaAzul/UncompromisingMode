@@ -230,7 +230,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.ROSHIP = "You're our least favorite!"
 	
 	DESCRIBE.UM_PAWN = "We never liked alarms."
-	DESCRIBE.UM_PAWN_NIGHTMARE = ""
+	DESCRIBE.UM_PAWN_NIGHTMARE = "We never liked alarms."
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
@@ -248,3 +248,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP_OLD = "A fanged metal web!"
 	DESCRIBE.CORNCAN = "We left our can opener at home."
 	DESCRIBE.SKULLCHEST_CHILD = "We can give things to others far away."
+	
+	--StantonStuff
+	DESCRIBE.SKULLFLASK = "This drink calms our mind."
+	DESCRIBE.SKULLFLASK_EMPTY = "I wonder where we can get more."
+	DESCRIBE.STANTON_SHADOW_TONIC = "Should we drink?"
+	DESCRIBE.STANTON = "He's a bit creepy."
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "We're feeling much more comfortable."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Everything's getting scary again."
+	--StantonStuff

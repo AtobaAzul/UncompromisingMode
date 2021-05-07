@@ -231,7 +231,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.ROSHIP = "This one scares Wolfgang."
 	
 	DESCRIBE.UM_PAWN = "Wolfgang doesn't like beeping."
-	DESCRIBE.UM_PAWN_NIGHTMARE = ""
+	DESCRIBE.UM_PAWN_NIGHTMARE = "Wolfgang doesn't like beeping."
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
@@ -249,3 +249,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Wolfgang too smart to step on trap!"
 	DESCRIBE.CORNCAN = "Corn is trapped inside. Will save with bare hands!"
 	DESCRIBE.SKULLCHEST_CHILD = "Wolfgang don't like chest that look like skull."
+	
+	--StantonStuff
+	DESCRIBE.SKULLFLASK = "Drink makes mind mighty!"
+	DESCRIBE.SKULLFLASK_EMPTY = "Drink come back later."
+	DESCRIBE.STANTON_SHADOW_TONIC = "Is spooky drink."
+	DESCRIBE.STANTON = "Creepy skeleton only want drink?"
+	--StantonStuff

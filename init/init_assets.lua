@@ -424,7 +424,16 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/blowgunammo_electric.tex"),
 	Asset("ATLAS", "images/inventoryimages/blowgunammo_electric.xml"),
 	
-
+	--Stanton's Stuff
+	Asset("ANIM", "anim/stanton_shadow_tonic.zip"),
+	Asset("IMAGE", "images/inventoryimages/stanton_shadow_tonic.tex"),
+	Asset("ATLAS", "images/inventoryimages/stanton_shadow_tonic.xml"),
+	Asset("ANIM", "anim/skullflask.zip"),
+	Asset("IMAGE", "images/inventoryimages/skullflask.tex"),
+	Asset("ATLAS", "images/inventoryimages/skullflask.xml"),	
+	Asset("ANIM", "anim/skullflask_empty.zip"),
+	Asset("IMAGE", "images/inventoryimages/skullflask_empty.tex"),
+	Asset("ATLAS", "images/inventoryimages/skullflask_empty.xml"),	
 	
 	--Map Icons Start--
 	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),

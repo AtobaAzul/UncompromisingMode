@@ -231,7 +231,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.ROSHIP = "That toss is making me feel crossed."
 	
 	DESCRIBE.UM_PAWN = "Don't get too close, you'll regret it the most!"
-	DESCRIBE.UM_PAWN_NIGHTMARE = ""
+	DESCRIBE.UM_PAWN_NIGHTMARE = "Don't get too close, you'll regret it the most!"
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
@@ -249,3 +249,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP_OLD = "You gotta be a dope to fall for this joke!"
 	DESCRIBE.CORNCAN = "Go to corny jail."
 	DESCRIBE.SKULLCHEST_CHILD = "Now this is an item that I find amusing."
+	
+	--StantonStuff
+	DESCRIBE.SKULLFLASK = "I'm still not sure if this is mortal food."
+	DESCRIBE.SKULLFLASK_EMPTY = "I gobbled it up!"
+	DESCRIBE.STANTON_SHADOW_TONIC = "Is this mortal food?"
+	DESCRIBE.STANTON = "What souls inhabits you."
+	--StantonStuff

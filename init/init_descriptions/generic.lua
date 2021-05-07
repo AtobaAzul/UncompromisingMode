@@ -91,8 +91,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
         "CURSE TOO TOUGH? THERE IS ONLY ONE WAY OUT...",
 	}
 	
-	ANNOUNCE.STANTON_GREET = {"Care to drink with the dead?", "How's about a drink?", "C'mon and drink with me."}
-	ANNOUNCE.STANTON_GIVE = {"There ya go.", "The finest."}
+	ANNOUNCE.STANTON_GREET = {"Care to drink with the dead?", "How's about a drink?", "Come and drink with me."}
+	ANNOUNCE.STANTON_GIVE = {"You seem willing, I'll drink with you.", "It'll be you then."}
+	ANNOUNCE.STANTON_RESTOCK = {"Still awake? Come closer and we'll drink again.", "Come closer and I'll give you another."}
 	ANNOUNCE.STANTON_RULES = {"I only drink with one at a time."}
 	ANNOUNCE.STANTON_GLOAT = {"Ha! I knew you were soft.", "Ha! You lose!"}
 
@@ -102,6 +103,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	ANNOUNCE.STANTON_POET4 = { "Go ahead… drink with the living dead." }
 	ANNOUNCE.STANTON_POET5 = { "Drink with the living dead." }
 
+	ANNOUNCE.STANTON_IMPATIENT = {"I'm getting tired of waiting here.","Your inaction irks me."}
+	ANNOUNCE.STANTON_SUPERIMPATIENT = {"I'm done waiting.","That's it! You've incurred my wrath!"}
+	
 	ANNOUNCE.SHADOW_CROWN_CHALLENGE = "DEFEAT THIS CREATURE AND CLAIM YOUR PRIZE"
 	ANNOUNCE.ANNOUNCE_OVER_EAT =
 	{
@@ -312,3 +316,13 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Someone left this here."
 	DESCRIBE.CORNCAN = "Where did this can come from?"
 	DESCRIBE.SKULLCHEST_CHILD = "If only I could fit inside."
+
+	--StantonStuff
+	DESCRIBE.SKULLFLASK = "The science within keeps me calm."
+	DESCRIBE.SKULLFLASK_EMPTY = "The science will make it refill later."
+	DESCRIBE.STANTON_SHADOW_TONIC = "For science!"
+	DESCRIBE.STANTON = "I wonder what he wants?"
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "Science keeps my mind at peace!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Science no longer comforts me."
+	--StantonStuff
+	

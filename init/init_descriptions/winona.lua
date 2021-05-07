@@ -232,7 +232,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.ROSHIP = "I'm surprised it can function at all."
 	
 	DESCRIBE.UM_PAWN = "I think I'll keep away."
-	DESCRIBE.UM_PAWN_NIGHTMARE = ""
+	DESCRIBE.UM_PAWN_NIGHTMARE = "I think I'll keep away."
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
@@ -250,3 +250,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP_OLD = "The handiwork is nice, although a bit rusted."
 	DESCRIBE.CORNCAN = "An ear of corn waiting for conversation."
 	DESCRIBE.SKULLCHEST_CHILD = "With proper coordination, I could get anything from anywhere."
+	
+	--StantonStuff
+	DESCRIBE.SKULLFLASK = "Keeps me at ease."
+	DESCRIBE.SKULLFLASK_EMPTY = "Nothin' left."
+	DESCRIBE.STANTON_SHADOW_TONIC = "Bottoms up!"
+	DESCRIBE.STANTON = "Drinking game, huh?"
+	--StantonStuff

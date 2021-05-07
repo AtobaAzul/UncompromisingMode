@@ -64,20 +64,20 @@ local function OnAttacked(inst, data)
 end
 local function CheckIfNearPlayer(inst)
 local bozo =FindEntity(inst, 7, 
-        function(guy) 
+    function(guy) 
             if inst.components.combat:CanTarget(guy) then
                 return guy:HasTag("character")
             end
     end)
-if bozo ~= nil and inst.decided == false then
-inst.decided = true
-if math.random() > 0.5 then
-inst.sg:GoToState("dance")
-TellOthersTo(inst,true)
-else
-TellOthersTo(inst,false)
-end
-end
+	if bozo ~= nil and inst.decided == false then
+		inst.decided = true
+		if math.random() > 0.5 then
+			inst.sg:GoToState("dance")
+			TellOthersTo(inst,true)
+		else
+			TellOthersTo(inst,false)
+		end
+	end
 end
 local function fn(Sim)
 	local inst = CreateEntity()
@@ -86,19 +86,14 @@ local function fn(Sim)
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     
-local shadow = inst.entity:AddDynamicShadow()
+	local shadow = inst.entity:AddDynamicShadow()
     shadow:SetSize( 1.5, .5 )
     inst.entity:AddNetwork()
     inst.entity:AddLightWatcher()
 
-    --inst.DynamicShadow:SetSize(1, .75)
     inst.Transform:SetFourFaced()
 
-	--shadow:SetSize(1, 0.75)
-	inst.Transform:SetFourFaced()
-
 	MakeCharacterPhysics(inst, 10, .5)
-	--MakePoisonableCharacter(inst)
 
 	inst.entity:SetPristine()
 	
@@ -119,10 +114,7 @@ local shadow = inst.entity:AddDynamicShadow()
         inst.AnimState:Show("HAIR_HAT")
         inst.AnimState:Hide("HAIR_NOHAT")
         inst.AnimState:Hide("HAIR")
-		
-	--
-	
-	
+
 	
     -- locomotor must be constructed before the stategraph!
     inst:AddComponent("locomotor")
@@ -132,14 +124,7 @@ local shadow = inst.entity:AddDynamicShadow()
     
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetChanceLootTable('rneskeleton')
-    
-    ---------------------            
-    --MakeMediumBurnableCharacter(inst, "torso")
-    --MakeMediumFreezableCharacter(inst, "torso")    
-    --inst.components.burnable.flammability = 0.33
-    ---------------------       
-    
-	 
+	
     inst:AddTag("rneskeleton") 
 	inst:AddTag("notraptrigger")
 
@@ -177,8 +162,17 @@ local shadow = inst.entity:AddDynamicShadow()
     inst:SetStateGraph("SGrneskeletons")
     inst:SetBrain(brain)
 	inst:DoPeriodicTask(1,CheckIfNearPlayer)
+	
 	inst:WatchWorldState("isday", function() 
-	inst.sg:GoToState("grounded")
+		inst.sg:GoToState("grounded")
+	end)
+	
+	inst.sg:GoToState("enter")
+	
+	inst:DoTaskInTime(0,function(inst)
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local despawnfx = SpawnPrefab("maxwell_smoke")
+		despawnfx.Transform:SetPosition(x, y, z)
 	end)
     return inst
 end

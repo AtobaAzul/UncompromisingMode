@@ -126,12 +126,13 @@ end
 --RNE list below
 ----------------------------------------------------
 local function SkeleBros(player)
-MultiFogAuto(player,6)
+MultiFogAuto(player,10)
+player:DoTaskInTime(8,function(player)
 local CHANNELER_SPAWN_RADIUS = 30
     if player.components.health:IsDead() then
         return
     end
-	for i = 1,6 do
+	for i = 1,3 do
 	local x, y, z = player.Transform:GetWorldPosition()
     local angle = math.random() * 2 * PI
     x = x + CHANNELER_SPAWN_RADIUS * math.cos(angle)
@@ -146,7 +147,27 @@ local CHANNELER_SPAWN_RADIUS = 30
 	CHANNELER_SPAWN_RADIUS = CHANNELER_SPAWN_RADIUS/2
     end
 	end
+end)
 end
+
+local function TrySpawnStanton(player)
+local x,y,z = player.Transform:GetWorldPosition()
+x = x+math.random(-4,4)
+z = z+math.random(-4,4)
+if TheWorld.Map:IsAboveGroundAtPoint(x,y,z) then 
+	SpawnPrefab("stanton").Transform:SetPosition(x,y,z)
+else
+	TrySpawnStanton(player)
+end
+end
+
+local function Stanton(player)
+MultiFogAuto(player,10)
+player:DoTaskInTime(8,function(player)
+	TrySpawnStanton(player)
+end)
+end
+
 local function SpawnGnomes(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	if TheWorld.state.isnight then
@@ -1192,6 +1213,7 @@ AddWildEvent(StumpsAttack,.3)
 AddWildEvent(SpawnShadowTalker,.7)
 AddWildEvent(SpawnShadowBoomer,.2)
 AddWildEvent(SkeleBros,0.3)
+AddWildEvent(Stanton,0.4)
 --Secondary Wild
 AddSecondaryWildEvent(SpawnBats,.2)
 AddSecondaryWildEvent(SpawnLightFlowersNFerns,.3)
@@ -1214,6 +1236,7 @@ AddBaseEvent(SpawnShadowTalker,.6)
 AddBaseEvent(SpawnShadowBoomer,.2)
 AddBaseEvent(SpawnGnomes,.4)
 AddBaseEvent(SkeleBros,.4)
+AddBaseEvent(Stanton,0.2)
 --Cave
 AddCaveEvent(SpawnBats,.5)
 AddCaveEvent(SpawnFissures,.2)

@@ -231,7 +231,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.ROSHIP = "It cooks up a shocker!"
 	
 	DESCRIBE.UM_PAWN = "I'll watch my step."
-	DESCRIBE.UM_PAWN_NIGHTMARE = ""
+	DESCRIBE.UM_PAWN_NIGHTMARE = "I'll watch my step."
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
@@ -247,3 +247,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP = "I'll keep my distance."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "I'll keep my distance."
 	DESCRIBE.SKULLCHEST_CHILD = "Now I can get fresh produce from far away!"
+
+	--StantonStuff
+	DESCRIBE.SKULLFLASK = "It was nice of him to give me his recipe."
+	DESCRIBE.SKULLFLASK_EMPTY = "I wonder when I'll have more."
+	DESCRIBE.STANTON_SHADOW_TONIC = "Maybe it contains a new desired taste?"
+	DESCRIBE.STANTON = "He's interrupting my cooking."
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "Such a comforting taste."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Oh well, that's over now."
+	--StantonStuff

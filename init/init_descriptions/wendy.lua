@@ -230,7 +230,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.ROSHIP = "What a miserable existence."
 	
 	DESCRIBE.UM_PAWN = "A life of endless patrol."
-	DESCRIBE.UM_PAWN_NIGHTMARE = ""
+	DESCRIBE.UM_PAWN_NIGHTMARE = "It has a violent end."
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
@@ -248,3 +248,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Would lead to a slow and gruesome death in the right circumstances."
 	DESCRIBE.CORNCAN = "It seems like it's corn."
 	DESCRIBE.SKULLCHEST_CHILD = "I'm able to reach another plane, but I still cannot reach Abigail..."
+	
+	--StantonStuff
+	DESCRIBE.SKULLFLASK = "Keeps my mind calm, for a moment."
+	DESCRIBE.SKULLFLASK_EMPTY = "I doubt it will return."
+	DESCRIBE.STANTON_SHADOW_TONIC = "Gross blackness."
+	DESCRIBE.STANTON = "I have no interest in you."
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "The tonic clouds my mind."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "My mind is clearing."
+	--StantonStuff
