@@ -216,6 +216,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 
 	DESCRIBE.MAGMAHOUND = "YES! SHOWER ME IN FIRE!"
 	DESCRIBE.LIGHTNINGHOUND = "Lightning is just burning without the fun part!"
+	DESCRIBE.SPOREHOUND = "I don't care that you're sick. You're still a jerk."
+	DESCRIBE.GLACIALHOUND = "Another cold dog? Why can't you be on fire!"
 	DESCRIBE.RNESKELETON = "Holy crap, a skeleton!!"
 	DESCRIBE.RAT_WHIP = "It's so tiring to swing this around..."
 	DESCRIBE.KLAUS_AMULET = "Guh, it's so heavy! I'm supposed to wear this?!"

@@ -530,10 +530,10 @@ local function fn()
 		inst:AddTag("noauradamage")
 		--inst:AddTag("notarget")
 		inst.GroundCreepEntity:SetRadius(3)
-		inst:AddTag("prey")
 		inst:AddTag("houndfriend")
 		inst:AddTag("antlion_sinkhole_blocker")
 		inst:AddTag("queensstuff")
+		inst:AddTag("companion")
 		
 		inst.entity:SetPristine()
 

@@ -204,6 +204,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 
 	DESCRIBE.MAGMAHOUND = "He's got a case of hot breath."
 	DESCRIBE.LIGHTNINGHOUND = "A walkin' generator!"
+	DESCRIBE.SPOREHOUND = "I'm surprised it's stil alive."
+	DESCRIBE.GLACIALHOUND = "Another blue one? Was the old one not enough!?"
 	DESCRIBE.RNESKELETON = "Someone's back on the clock."
 	DESCRIBE.RAT_WHIP = "The smell alone should scare someone away."
 	DESCRIBE.KLAUS_AMULET = "Time to overclock!"

@@ -572,5 +572,5 @@ local theatercorn =
     perishtime = 10*TUNING.PERISH_TWO_DAY,
     cooktime = 1.8,
 }
-AddCookerRecipe("cookpot", theatercorn)
-AddCookerRecipe("portablecookpot", theatercorn)
+--AddCookerRecipe("cookpot", theatercorn)
+--AddCookerRecipe("portablecookpot", theatercorn)

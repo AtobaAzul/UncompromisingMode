@@ -163,6 +163,8 @@ STRINGS = GLOBAL.STRINGS.NAMES
 	STRINGS.KLAUS_AMULET = "Naught Lock"
 	STRINGS.LIGHTNINGHOUND = "Lightning Hound"
 	STRINGS.MAGMAHOUND = "Magma Hound"
+	STRINGS.SPOREHOUND = "Spore Hound"
+	STRINGS.GLACIALHOUND = "Glacial Hound"
 	STRINGS.CRABCLAW = "Crab Claw"
 	STRINGS.BIGHT = "Comingled Clockwork" 
 	STRINGS.KNOOK = "Automaton Abomination"
@@ -191,6 +193,14 @@ STRINGS = GLOBAL.STRINGS.NAMES
 	STRINGS.MOTHERMOOSEEGG2 = "Golden Goose Egg"
 	STRINGS.CORNCAN = "Canned Corn"
 	STRINGS.SKULLCHEST_CHILD = "Skull Chest"
+	
+	--Stanton's Stash
+	STRINGS.STANTON_SHADOW_TONIC = "Shadow Tonic"
+	STRINGS.STANTON = "Stanton Cree"
+	STRINGS.SKULLFLASK = "Skull Flask"
+	STRINGS.SKULLFLASK_EMPTY = "Empty Skull Flask"
+	--Stanton's Stash
+	
 	
 	-- Blowgun stuff
 	STRINGS.UNCOMPROMISING_BLOWGUN = "Blowpipe" --Lol

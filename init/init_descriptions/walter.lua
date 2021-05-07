@@ -201,6 +201,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 
 	DESCRIBE.MAGMAHOUND = "You're not supposed to play with fire!"
 	DESCRIBE.LIGHTNINGHOUND = "This isn't normal lightning, this is ADVANCED lightning!"
+	DESCRIBE.SPOREHOUND = "Get away Woby! He might be contagious!"
+	DESCRIBE.GLACIALHOUND = "Cool friend, Woby!"
 	DESCRIBE.RNESKELETON = "Wanna dance?"
 	DESCRIBE.RAT_WHIP = "Nature never intended for this."
 	DESCRIBE.KLAUS_AMULET = "Goat power!"

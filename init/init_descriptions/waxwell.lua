@@ -208,6 +208,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 
 	DESCRIBE.MAGMAHOUND = "I'm jealous, I shouldve made red hounds do that."
 	DESCRIBE.LIGHTNINGHOUND = "Why didn't I think of that? Tsk."
+	DESCRIBE.SPOREHOUND = "Hrmmph, it seems like that sickly toad improved them."
+	DESCRIBE.GLACIALHOUND = "Blue hounds too. Is Charlie pulling your strings?"
 	DESCRIBE.RNESKELETON = "Back for revenge? I'll kill you again if I have to."
 	DESCRIBE.RAT_WHIP = "What a way to go."
 	DESCRIBE.KLAUS_AMULET = "A powerful, wonderful enchantment!"

@@ -91,6 +91,17 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
         "CURSE TOO TOUGH? THERE IS ONLY ONE WAY OUT...",
 	}
 	
+	ANNOUNCE.STANTON_GREET = {"Care to drink with the dead?", "How's about a drink?", "C'mon and drink with me."}
+	ANNOUNCE.STANTON_GIVE = {"There ya go.", "The finest."}
+	ANNOUNCE.STANTON_RULES = {"I only drink with one at a time."}
+	ANNOUNCE.STANTON_GLOAT = {"Ha! I knew you were soft.", "Ha! You lose!"}
+
+	ANNOUNCE.STANTON_POET1 = { "When it's six to midnight and the boney hand of death is nigh."}
+	ANNOUNCE.STANTON_POET2 = { "You better drink your drink and shut your mouth."}
+	ANNOUNCE.STANTON_POET3 = { "If you draw against his hand, you can never win." }
+	ANNOUNCE.STANTON_POET4 = { "Go ahead… drink with the living dead." }
+	ANNOUNCE.STANTON_POET5 = { "Drink with the living dead." }
+
 	ANNOUNCE.SHADOW_CROWN_CHALLENGE = "DEFEAT THIS CREATURE AND CLAIM YOUR PRIZE"
 	ANNOUNCE.ANNOUNCE_OVER_EAT =
 	{
@@ -255,6 +266,8 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	-- Xmas Update
 	DESCRIBE.MAGMAHOUND = "Hot dog!"
 	DESCRIBE.LIGHTNINGHOUND = "Watch it, that one stings!"
+	DESCRIBE.SPOREHOUND = "You sick dog."
+	DESCRIBE.GLACIALHOUND = "This hound's on ice."
 	DESCRIBE.RNESKELETON = "They are spooky AND scary!"
 	DESCRIBE.RAT_WHIP = "I make all the rules."
 	DESCRIBE.KLAUS_AMULET = "It's chains contain the King of Winter!"

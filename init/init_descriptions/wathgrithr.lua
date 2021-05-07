@@ -202,6 +202,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 
 	DESCRIBE.MAGMAHOUND = "It battles from afar, thy coward!"
 	DESCRIBE.LIGHTNINGHOUND = "Thor's minion? What hath I done to gain his ire?"
+	DESCRIBE.SPOREHOUND = "Fenrir's spawn, twisted beyond recognition."
+	DESCRIBE.GLACIALHOUND = "A frozen hide!"	
 	DESCRIBE.RNESKELETON = "Fallen warriors!"
 	DESCRIBE.RAT_WHIP = "Thy lashes sting, a feared weapon!"
 	DESCRIBE.KLAUS_AMULET = "The lock of a warrior!"
