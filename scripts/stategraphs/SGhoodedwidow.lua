@@ -311,7 +311,9 @@ local states=
         end,
 		timeline =
         {
-            TimeEvent(10*FRAMES, function(inst) inst.components.groundpounder:GroundPound() end),
+            TimeEvent(10*FRAMES, function(inst) 
+			inst.components.combat:DoAreaAttack(inst, 5) --GroundPound Is purely visual
+			inst.components.groundpounder:GroundPound() end),
 
         },
         events=
@@ -361,7 +363,10 @@ local states=
 			TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/scream_short") end),
             TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/attack_grunt") end),
 			TimeEvent(17*FRAMES, function(inst) inst.components.locomotor:Stop()
+			
+			inst.components.combat:DoAreaAttack(inst, 5) --GroundPound Is purely visual
 			inst.components.groundpounder:GroundPound()
+			
 			local x,y,z = inst.Transform:GetWorldPosition()
 			MakeCharacterPhysics(inst, 1000, 1)
 			inst.Transform:SetPosition(x,y,z) --I know this seems strange, but if I don't the widow actually teleports 
@@ -453,6 +458,7 @@ State{
         {
             EventHandler("animqueueover", function(inst)
 			inst.components.groundpounder:GroundPound()
+			inst.components.combat:DoAreaAttack(inst, 5) --GroundPound Is purely visual
             inst.sg:GoToState("taunt") end),
         }, 
 

@@ -284,7 +284,7 @@ local function fn()
     MakeHauntableGoToState(inst, "poop", TUNING.HAUNT_CHANCE_OCCASIONAL, TUNING.HAUNT_COOLDOWN_MEDIUM, TUNING.HAUNT_CHANCE_LARGE)
 	inst:AddComponent("groundpounder")
 	inst.components.groundpounder.destroyer = true
-	inst.components.groundpounder.damageRings = 2
+	inst.components.groundpounder.damageRings = 0
     inst.components.groundpounder.destructionRings = 2
     inst.components.groundpounder.platformPushingRings = 2
     inst.components.groundpounder.numRings = 3

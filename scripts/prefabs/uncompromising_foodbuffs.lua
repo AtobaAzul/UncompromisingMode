@@ -142,52 +142,47 @@ target.components.hunger.burnratemodifiers:RemoveModifier(inst)
 end
 
 local function stantonslumber_attach(inst, target)
-if target.stantonslumberstack == nil then
-	target.stantonslumberstack = 0
-else
-	if target.components.debuffable ~= nil and target.components.debuffable:HasDebuff("buff_sleepresistance") then
-		target.stantonslumberstack = target.stantonslumberstack + 0.05
+local stanton = FindEntity(target,20,nil,{"stanton"})
+if stanton ~= nil then
+	if stanton.contestent == target then
+		if target.stantonslumberstack == nil then
+			target.stantonslumberstack = 0
+		else
+			if target.components.debuffable ~= nil and target.components.debuffable:HasDebuff("buff_sleepresistance") then
+				target.stantonslumberstack = target.stantonslumberstack + 0.05
+			else
+				target.stantonslumberstack = target.stantonslumberstack + 0.1
+			end
+		end
+		if math.random() < target.stantonslumberstack then
+			if target.components.grogginess ~= nil then
+				target.components.grogginess:AddGrogginess(34, 5)
+				local stanton = FindEntity(target,10,nil,{"stanton"})
+				if stanton ~= nil then
+					stanton:AddTag("won")
+				end
+			target:DoTaskInTime(4,function(target) 
+				target.components.grogginess:SubtractGrogginess(-30)
+				target.components.grogginess:ComeTo()	
+			end)
+			end
+		else
+			if target.components.grogginess ~= nil and target.components.grogginess.grog_amount == 0 then
+				target.components.grogginess:AddGrogginess(1, 1)
+			end
+		end
 	else
-		target.stantonslumberstack = target.stantonslumberstack + 0.1
-	end
-end
-if math.random() < target.stantonslumberstack then
-	if target.components.sleeper ~= nil then
-		target.components.sleeper:GoToSleep(20)
-		local stanton = FindEntity(target,10,nil,{"stanton"})
-		if stanton ~= nil then
-			stanton.Gloat(stanton)
-		end		
+		stanton.TellThemRules(stanton)
+		if target.components.health ~= nil then
+			target.components.health:DoDelta(-20)
+		end
 	end
 else
-	if target.components.grogginess ~= nil and target.components.grogginess.grog_amount == 0 then
-		target.components.grogginess:AddGrogginess(1, 1)
+	local stanton = TheSim:FindFirstEntityWithTag("stanton")
+	if stanton ~= nil then
+		stanton.TellThemRules(stanton)
 	end
-end
-end
-
-local function stantonslumber_extend(inst, target)
-if target.stantonslumberstack == nil then
-	target.stantonslumberstack = 0
-else
-	if target.components.debuffable ~= nil and target.components.debuffable:HasDebuff("buff_sleepresistance") then
-		target.stantonslumberstack = target.stantonslumberstack + 0.05
-	else
-		target.stantonslumberstack = target.stantonslumberstack + 0.1
-	end
-end
-if math.random() < target.stantonslumberstack then
-	if target.components.sleeper ~= nil then
-		target.components.sleeper:GoToSleep(20)
-		local stanton = FindEntity(target,10,nil,{"stanton"})
-		if stanton ~= nil then
-			stanton.Gloat(stanton)
-		end		
-	end
-else
-	if target.components.grogginess ~= nil and target.components.grogginess.grog_amount == 0 then
-		target.components.grogginess:AddGrogginess(1, 1)
-	end
+	target.components.health:DoDelta(-20)
 end
 end
 
@@ -292,5 +287,5 @@ MakeBuff("lesserelectricattack", electric_attach, electric_extend, electric_deta
 MakeBuff("knockbackimmune", kbimmune_attach, kbimmune_extend, kbimmune_detach, TUNING.BUFF_ATTACK_DURATION, 2),
 MakeBuff("californiaking", californiaking_attach, californiaking_extend, californiaking_detach, TUNING.BUFF_ATTACK_DURATION*8, 2),
 MakeBuff("largehungerslow", largehungerslow_attach, largehungerslow_extend, largehungerslow_detach, TUNING.BUFF_ATTACK_DURATION*8, 2),
-MakeBuff("stantonslumber", stantonslumber_attach, stantonslumber_extend, stantonslumber_detach, TUNING.BUFF_ATTACK_DURATION, 2,true),
-MakeBuff("hypercourage", hypercourage_attach, hypercourage_extend, hypercourage_detach, 30, 2)
+MakeBuff("stantonslumber", stantonslumber_attach, stantonslumber_attach, stantonslumber_detach, TUNING.BUFF_ATTACK_DURATION, 2,true),
+MakeBuff("hypercourage", hypercourage_attach, hypercourage_extend, hypercourage_detach, 30, 2,true)

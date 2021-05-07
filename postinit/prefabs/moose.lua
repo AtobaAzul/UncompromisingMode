@@ -159,7 +159,7 @@ env.AddPrefabPostInit("mothergoose", function(inst)
 	
     inst:AddComponent("groundpounder")
     inst.components.groundpounder.destroyer = false
-    inst.components.groundpounder.damageRings = 3
+    inst.components.groundpounder.damageRings = 0
     inst.components.groundpounder.destructionRings = 2
     inst.components.groundpounder.platformPushingRings = 2
     inst.components.groundpounder.numRings = 3
