@@ -114,7 +114,7 @@ local function projectilefn()
 
     inst:AddComponent("locomotor")
 
-	--inst:DoTaskInTime(0.1, function(inst) inst:DoPeriodicTask(0, TestProjectileLand) end)
+	inst:DoTaskInTime(5, inst.Remove)
 
     return inst
 end
@@ -225,7 +225,7 @@ local function clawprojectilefn()
 
     inst:AddComponent("locomotor")
 
-	--inst:DoTaskInTime(0.1, function(inst) inst:DoPeriodicTask(0, TestProjectileLand) end)
+	inst:DoTaskInTime(5, inst.Remove)
 
     return inst
 end

@@ -23,8 +23,13 @@ end
 function CheckGem(container, item, slot)
     return not item:HasTag("irreplaceable") and item:HasTag("gem")
 end
+
 function CheckDart(container, item, slot)
     return item:HasTag("um_dart")
+end
+
+function CheckFeather(container, item, slot)
+    return item:HasTag("wingsuit_feather")
 end
 
 local modparams = {}
@@ -138,6 +143,27 @@ modparams.um_blowgun =
 	itemtestfn = CheckDart,
     acceptsstacks = true,
     type = "hand_inv",
+}
+
+modparams.wingsuit =
+{
+    widget =
+    {
+        slotpos =
+        {
+            Vector3(0,   32 + 4,  0),
+        },
+        slotbg =
+        {
+            { image = "slingshot_ammo_slot.tex" },
+        },
+        animbank = "ui_cookpot_1x2",
+        animbuild = "ui_cookpot_1x2",
+        pos = Vector3(0, 85, 0),
+    },
+	itemtestfn = CheckFeather,
+    usespecificslotsforitems = true,
+    type = "pack",
 }
 
 for y = 0, 3 do

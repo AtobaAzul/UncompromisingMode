@@ -176,9 +176,13 @@ env.AddPrefabPostInit("bearger", function(inst)
 	
     inst.TeleportToFood = TeleportToFood
 	
+	
+	inst:AddComponent("vetcurselootdropper")
+	inst.components.vetcurselootdropper.loot = "beargerclaw"
+	
 	inst:ListenForEvent("oneat", function(inst, data)
-		inst.components.timer:StopTimer("FindNewFood")
-		inst.components.timer:StartTimer("FindNewFood", 10)
+		--inst.components.timer:StopTimer("FindNewFood")
+		--inst.components.timer:StartTimer("FindNewFood", 10)
                 
 	
 		--[[if data.food ~= nil and data.food.components.edible ~= nil and data.food.components.edible.hungervalue ~= nil then

@@ -181,7 +181,7 @@ local function staff_fn()
 
     --inst.spelltype = "SCIENCE"
 
-    MakeInventoryFloatable(inst, "med", 0.05, {1.1, 0.5, 1.1}, true, -9)
+    MakeInventoryFloatable(inst)
 
     inst.entity:SetPristine()
 	

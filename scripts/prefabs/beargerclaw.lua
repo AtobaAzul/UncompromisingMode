@@ -34,8 +34,10 @@ local function LaunchSpit(caster, target)
     local x, y, z = caster.Transform:GetWorldPosition()
 	
 	local ents = TheSim:FindEntities(x, y, z, 5, {"antlion_sinkhole"})
+	local pt = caster:GetPosition()
+	local boat = TheWorld.Map:GetPlatformAtPoint(pt.x, pt.z)
 	
-	if #ents == 0 then
+	if #ents == 0 and not boat then
 		for i = 1, 3 do 
 			local targetpos = target:GetPosition()
 
@@ -65,7 +67,12 @@ local function LaunchSpit(caster, target)
 		SpawnPrefab("beargerclaw_sinkhole").Transform:SetPosition(x, 0, z)
 	end
 	
-	SpawnPrefab("groundpound_fx").Transform:SetPosition(x, 0, z)
+	
+	if boat ~= nil then
+		boat:PushEvent("spawnnewboatleak", {pt = pt, leak_size = "small_leak", playsoundfx = true})
+	else
+		SpawnPrefab("groundpound_fx").Transform:SetPosition(x, 0, z)
+	end
 end
 
 local function getspawnlocation(inst, target)
@@ -150,10 +157,10 @@ local function staff_fn()
     --Sneak these into pristine state for optimization
     inst:AddTag("beargerclaw")
     inst:AddTag("quickcast")
+	
+	MakeInventoryFloatable(inst)
 
-    --inst.spelltype = "SCIENCE"
-
-    MakeInventoryFloatable(inst, "med", 0.05, {1.1, 0.5, 1.1}, true, -9)
+    inst.spelltype = "SCIENCE"
 
     inst.entity:SetPristine()
 	
@@ -181,7 +188,7 @@ local function staff_fn()
     inst.components.spellcaster.canonlyuseonworkable = true
     inst.components.spellcaster.canonlyuseoncombat = true
     inst.components.spellcaster.canuseonpoint = true
-    inst.components.spellcaster.canuseonpoint_water = false
+    inst.components.spellcaster.canuseonpoint_water = true
 
     MakeHauntableLaunch(inst)
 

@@ -53,4 +53,7 @@ env.AddPrefabPostInit("dragonfly", function (inst)
     inst.components.playerprox:SetDist(50, 51) --set specific values
     inst.components.playerprox:SetOnPlayerNear(onnear)
     inst.components.playerprox:SetOnPlayerFar(onfar)
+	
+	inst:AddComponent("vetcurselootdropper")
+	inst.components.vetcurselootdropper.loot = "slobberlobber"
 end)
