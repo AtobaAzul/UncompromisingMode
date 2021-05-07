@@ -111,8 +111,8 @@ GLOBAL.AllRecipes["saltpack"].sortkey = GLOBAL.AllRecipes["sporepack"].sortkey +
 AddRecipe("air_conditioner", {Ingredient("shroom_skin",2),Ingredient("gears", 2),Ingredient("cutstone",4)}, GLOBAL.RECIPETABS.SCIENCE, GLOBAL.TECH.SCIENCE_TWO, "air_conditioner_placer", nil, nil, nil, nil, "images/inventoryimages/air_conditioner.xml", "air_conditioner.tex" )
 GLOBAL.AllRecipes["air_conditioner"].sortkey = GLOBAL.AllRecipes["firesuppressor"].sortkey + .1
 
-AddRecipe("skullchest_child", {Ingredient("fossil_piece", 2), Ingredient("nightmarefuel",4), Ingredient("boards",3)}, RECIPETABS.TOWN, TECH.LOST, "skullchest_child_placer", nil, nil, nil, nil, "images/inventoryimages/skullchest_child.xml", "skullchest_child.tex" )
-GLOBAL.AllRecipes["skullchest_child"].sortkey = GLOBAL.AllRecipes["dragonflychest"].sortkey + .1
+AddRecipe("skullchest_child", {Ingredient("fossil_piece", 2), Ingredient("nightmarefuel",4), Ingredient("boards",3)}, RECIPETABS.MAGIC, TECH.LOST, "skullchest_child_placer", nil, nil, nil, nil, "images/inventoryimages/skullchest_child.xml", "skullchest_child.tex" )
+--GLOBAL.AllRecipes["skullchest_child"].sortkey = GLOBAL.AllRecipes["dragonflychest"].sortkey + .1
 
 AddRecipe("honey_log",   {Ingredient("livinglog", 1), Ingredient("honey", 2)}, CUSTOM_RECIPETABS.NATURE, TECH.NONE, nil, nil, nil, nil, "plantkin", "images/inventoryimages/honey_log.xml", "honey_log.tex" )
 
