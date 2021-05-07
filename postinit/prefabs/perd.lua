@@ -102,7 +102,7 @@ local function hungycounter(inst)
 end
 
 local function OnAttacked(inst, data)
-    print("ON ATTACKED")
+    --print("ON ATTACKED")
     local attacker = data.attacker
     inst:ClearBufferedAction()
     inst.attacked = true

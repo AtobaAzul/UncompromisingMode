@@ -131,7 +131,6 @@ local prefab_post = {
 	--"bundle",
 	"eyebrella",
 	"birds",
-	"perd",
 	"seedpouch",
 	"tonichandlers",
 }
@@ -156,7 +155,6 @@ local stategraph_post = {
 	"krampus",
 	"moose",
 	"spiderqueen",
-	"perd",
 	"merm",
 }
 
@@ -180,9 +178,14 @@ local brain_post = {
 	"chester",
 	"bearger",
 	"mossling",
-	"perd",
 	"moose",
 }
+
+if GetModConfigData("hangyperds") == true then
+table.insert(stategraph_post,"perd")
+table.insert(brain_post,"perd")
+table.insert(prefab_post,"perd")
+end
 
 modimport("postinit/sim")
 modimport("postinit/any")
