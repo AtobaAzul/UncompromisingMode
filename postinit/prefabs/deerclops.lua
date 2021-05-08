@@ -147,10 +147,7 @@ inst.components.timer:StartTimer("freezearmor",0.1)]]
 ------------
 
 ------------
-local function ChooseUpgrades(inst)
-MakeEnrageable(inst)
-end
---[[
+
 local function ChooseUpgrades(inst)
 if inst.upgrades == nil then
 local chance = math.random()
@@ -175,7 +172,7 @@ else
 			end
 end
 end
-]]
+
 local function OnSave(inst, data)
     data.enraged = inst.enraged or nil
 	data.upgrade = inst.upgrade
