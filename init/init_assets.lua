@@ -393,6 +393,8 @@ Assets = {
 	
 	Asset("ANIM", "anim/deerclops_mutation_anims.zip"),
 	Asset("ANIM", "anim/deerclops_barrier.zip"),
+	Asset("ANIM", "anim/laserclops_anims.zip"),
+	
 	Asset("ANIM", "anim/nymph.zip"),
 	Asset("IMAGE", "images/inventoryimages/turf_hoodedmoss.tex"),
 	Asset("ATLAS", "images/inventoryimages/turf_hoodedmoss.xml"),

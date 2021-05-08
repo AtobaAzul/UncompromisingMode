@@ -122,6 +122,80 @@ local function SpawnLaser_Blue(inst)
     fx:Trigger((delay + 2) * FRAMES, targets, skiptoss)
 end
 
+local BASE_NUM_ANGULAR_STEPS = 60
+local SWEEP_ANGULAR_LENGTH = 400
+local MIN_SWEEP_DISTANCE = 1
+local function SpawnSweep(inst, target_pos,BASE_SWEEP_DISTANCE)
+    local gx, gy, gz = inst.Transform:GetWorldPosition()
+
+    local angle = nil
+    local dist = nil
+    local angle_step_dir = 1
+    local x_dir = 1
+
+    if target_pos == nil then
+        angle = DEGREES * (inst.Transform:GetRotation() + (SWEEP_ANGULAR_LENGTH))+90*DEGREES
+        dist = BASE_SWEEP_DISTANCE
+        x_dir = -1
+        angle_step_dir = -1
+    else
+        angle = math.atan2(gz - target_pos.z, gx - target_pos.x) - (SWEEP_ANGULAR_LENGTH * DEGREES)
+        dist = math.max(math.sqrt(inst:GetDistanceSqToPoint(target_pos:Get())), MIN_SWEEP_DISTANCE)
+    end
+
+    local num_angle_steps = BASE_NUM_ANGULAR_STEPS + RoundBiasedDown((math.abs(dist) - BASE_SWEEP_DISTANCE))
+    local angle_step = (SWEEP_ANGULAR_LENGTH / num_angle_steps) * DEGREES
+
+    local targets, skiptoss = {}, {}
+
+    local fx = nil
+    local delay = nil
+    local x1, z1 = nil, nil
+
+    local i = -1
+    while i < num_angle_steps do
+        i = i + 1
+        delay = math.max(0, i - 1)
+
+        x1 = gx - (x_dir * dist * math.cos(angle))
+        z1 = gz - dist * math.sin(angle)
+        angle = angle + (angle_step_dir * angle_step)
+
+        fx = SpawnPrefab(i > 0 and "deerclops_laser_blue" or "deerclops_laserempty_blue")
+		if BASE_SWEEP_DISTANCE == 11 then
+		fx.deerclops = inst
+		end
+        fx.caster = inst
+        fx.Transform:SetPosition(x1, 0, z1)
+        fx:Trigger(delay * FRAMES, targets, skiptoss)
+        if i == 0 then
+            ShakeAllCameras(CAMERASHAKE.FULL, .7, .02, .6, target_pos or fx, 30)
+        end
+    end
+
+	if inst.components.health:GetPercent() <= 0.5 then
+		fx = SpawnPrefab(i > 0 and "deerclops_laser_blue" or "deerclops_laserempty_blue")
+		if BASE_SWEEP_DISTANCE == 11 then
+		fx.deerclops = inst
+		end
+	end
+    fx.Transform:SetPosition(x1, 0, z1)
+		if BASE_SWEEP_DISTANCE == 11 then
+		fx.deerclops = inst
+		end
+    fx:Trigger(math.max(1, i) * FRAMES, targets, skiptoss)
+
+
+	if inst.components.health:GetPercent() <= 0.5 then
+		fx = SpawnPrefab(i > 0 and "deerclops_laser_blue" or "deerclops_laserempty_blue")
+		if BASE_SWEEP_DISTANCE == 11 then
+		fx.deerclops = inst
+		end
+	end
+    fx.Transform:SetPosition(x1, 0, z1)
+    fx:Trigger(math.max(2, i + 1) * FRAMES, targets, skiptoss)
+end
+
 local function EnableEightFaced(inst)
     if not inst.sg.mem.eightfaced then
         inst.sg.mem.eightfaced = true
@@ -393,7 +467,13 @@ local states = {
             end),
             TimeEvent(19 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/laser")
-                SpawnLaser_Blue(inst)
+				
+                if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+                    inst.sg.statemem.target_pos = inst.sg.statemem.target:GetPosition()
+                end
+				local target_pos = inst.sg.statemem.target_pos
+				SpawnLaser_Blue(inst)
+                
                 SetLightValueAndOverride(inst, 1.08, .7)
             end),
             TimeEvent(20 * FRAMES, function(inst) SetLightValueAndOverride(inst, 1.12, 1) end),
@@ -442,6 +522,145 @@ local states = {
         onexit = function(inst)
             SetLightValueAndOverride(inst, 1, 0)
             SetLightColour(inst, 1)
+            if not inst.sg.statemem.keepfacing then
+                DisableEightFaced(inst)
+            end
+        end,
+    },
+
+	State{
+        name = "spinbeam_pre",
+        tags = { "busy","nosleep"},
+
+        onenter = function(inst)
+			inst.Physics:Stop()
+			inst.AnimState:PlayAnimation("ring_pre")
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/charge")
+            inst.components.timer:StopTimer("laserbeam_cd")
+            inst.components.timer:StartTimer("laserbeam_cd", TUNING.DEERCLOPS_ATTACK_PERIOD * (math.random(3) - .5))
+        end,
+		
+        timeline =
+        {		
+            TimeEvent(FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/attack", nil) end),
+            TimeEvent(4 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/step", nil, .7) end),
+            TimeEvent(6 * FRAMES, function(inst)
+                ShakeAllCameras(CAMERASHAKE.VERTICAL, .2, .02, .5, inst, SHAKE_DIST)
+                SetLightValue(inst, .97)
+            end),
+            TimeEvent(7 * FRAMES, function(inst) SetLightValueAndOverride(inst, 1, .2) end),
+            TimeEvent(8 * FRAMES, function(inst) SetLightValueAndOverride(inst, .99, .15) end),
+            TimeEvent(9 * FRAMES, function(inst) SetLightValueAndOverride(inst, .97, .05) end),
+            TimeEvent(10 * FRAMES, function(inst) SetLightValueAndOverride(inst, .96, 0) end),
+            TimeEvent(11 * FRAMES, function(inst) SetLightValueAndOverride(inst, 1.01, .35) end),
+            TimeEvent(12 * FRAMES, function(inst) SetLightValueAndOverride(inst, 1, .3) end),
+            TimeEvent(13 * FRAMES, function(inst) SetLightValueAndOverride(inst, .95, .05) end),
+            TimeEvent(14 * FRAMES, function(inst) SetLightValueAndOverride(inst, .94, 0) end),
+            TimeEvent(15 * FRAMES, function(inst) SetLightValueAndOverride(inst, 1, .3) end),
+            TimeEvent(16 * FRAMES, function(inst) SetLightValueAndOverride(inst, .99, .25) end),
+            TimeEvent(17 * FRAMES, function(inst) SetLightValueAndOverride(inst, .92, .05) end),
+            TimeEvent(18 * FRAMES, function(inst)
+                SetLightValueAndOverride(inst, .9, 0)
+                inst.sg.statemem.target = nil
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/taunt_howl", nil, .4)
+            end),
+		},
+        events =
+        {
+            EventHandler("animover", function(inst) 
+				inst.sg:GoToState("spinbeam")
+			end),
+        },
+    },	
+	State{
+        name = "spinbeam",
+        tags = { "busy","attack" },
+
+        onenter = function(inst, target)
+		EnableEightFaced(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("ring_loop",true)
+            if target ~= nil and target:IsValid() then
+                if inst.components.combat:TargetIs(target) then
+                    inst.components.combat:StartAttack()
+                end
+                inst.sg.statemem.target = target
+            end
+        end,
+
+        timeline =
+        {
+            TimeEvent(0 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/laser")
+				
+                if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+                    inst.sg.statemem.target_pos = inst.sg.statemem.target:GetPosition()
+                end
+				local target_pos = inst.sg.statemem.target_pos
+				SpawnSweep(inst, target_pos,1)
+				SpawnSweep(inst, target_pos,3)
+				SpawnSweep(inst, target_pos,5)
+				SpawnSweep(inst, target_pos,7)
+				SpawnSweep(inst, target_pos,9)
+				SpawnSweep(inst, target_pos,11)
+					--SpawnLaser_Blue(inst)
+                
+                --SpawnLaser_Blue(inst)
+                SetLightValueAndOverride(inst, 1.08, .7)
+            end),
+            TimeEvent(20 * FRAMES, function(inst) SetLightValueAndOverride(inst, 1.12, 1) end),
+            TimeEvent(21 * FRAMES, function(inst) SetLightValueAndOverride(inst, 1.1, .9) end),
+            TimeEvent(22 * FRAMES, function(inst) SetLightValueAndOverride(inst, 1.06, .4) end),
+            TimeEvent(23 * FRAMES, function(inst) SetLightValueAndOverride(inst, 1.1, .6) end),
+            TimeEvent(24 * FRAMES, function(inst) SetLightValueAndOverride(inst, 1.06, .3) end),
+            TimeEvent(25 * FRAMES, function(inst) SetLightValueAndOverride(inst, 1.05, .25) end),
+            TimeEvent(26 * FRAMES, function(inst) SetLightValueAndOverride(inst, 1.1, .5) end),
+            TimeEvent(27 * FRAMES, function(inst) SetLightValueAndOverride(inst, 1.08, .45) end),
+            TimeEvent(28 * FRAMES, function(inst) SetLightValueAndOverride(inst, 1.05, .2) end),
+            TimeEvent(29 * FRAMES, function(inst) SetLightValueAndOverride(inst, 1.1, .3) end),
+            TimeEvent(30 * FRAMES, function(inst)
+                inst.sg.statemem.lightval = 1.1
+            end),
+            TimeEvent(32 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/taunt_grrr", nil, .5)
+                inst.sg.statemem.lightval = 1.035
+                SetLightColour(inst, .9)
+            end),
+            TimeEvent(33 * FRAMES, function(inst) SetLightColour(inst, .8) end),
+            TimeEvent(41 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/step", nil, .7) end),
+            TimeEvent(43 * FRAMES, function(inst)
+                ShakeAllCameras(CAMERASHAKE.VERTICAL, .3, .02, .7, inst, SHAKE_DIST)
+            end),
+            TimeEvent(47 * FRAMES, function(inst)
+                inst.sg.statemem.lightval = nil
+                SetLightValueAndOverride(inst, .9, 0)
+                SetLightColour(inst, .9)
+            end),
+            TimeEvent(48 * FRAMES, function(inst)
+                inst.sg:RemoveStateTag("busy")
+                SetLightValue(inst, 1)
+                SetLightColour(inst, 1)
+            end),
+            TimeEvent(75 * FRAMES, function(inst)
+				inst.sg:GoToState("idle")
+            end),
+        },
+
+        --[[events =
+        {
+            EventHandler("animover", function(inst)
+                inst.sg.statemem.keepfacing = true
+                inst.sg:GoToState("idle")
+            end),
+        },]]
+
+        onexit = function(inst)
+            SetLightValueAndOverride(inst, 1, 0)
+            SetLightColour(inst, 1)
+			inst.components.timer:StartTimer("spinattack",10+math.random(1,5))
+			if inst.components.combat.target ~= nil then
+				inst:ForceFacePoint(inst.components.combat.target.Transform:GetWorldPosition())
+			end
             if not inst.sg.statemem.keepfacing then
                 DisableEightFaced(inst)
             end

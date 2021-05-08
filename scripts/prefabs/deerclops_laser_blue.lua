@@ -59,7 +59,9 @@ end
 
 local function DoDamage(inst, targets, skiptoss)
     inst.task = nil
-
+	if inst.deerclops ~= nil then
+	inst.deerclops:ForceFacePoint(inst.Transform:GetWorldPosition())
+	end
     local x, y, z = inst.Transform:GetWorldPosition()
     if inst.AnimState ~= nil then
         inst.AnimState:PlayAnimation("hit_"..tostring(math.random(5)))
@@ -130,10 +132,14 @@ local function DoDamage(inst, targets, skiptoss)
                     targets[v] = true
                     if inst.caster ~= nil and inst.caster:IsValid() then
                         inst.caster.components.combat.ignorehitrange = true
+						if not v:HasTag("deerclops") then
                         inst.caster.components.combat:DoAttack(v)
+						end
                         inst.caster.components.combat.ignorehitrange = false
                     else
+					if not v:HasTag("deerclops") then
                         inst.components.combat:DoAttack(v)
+					end
                     end
                     if v:IsValid() then
                         SpawnPrefab("deerclops_laserhit_blue"):SetTarget(v)

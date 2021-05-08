@@ -18,6 +18,16 @@ local function OnNewState(inst, data)
     end
 end
 
+local function SpinCheck(inst,data)
+if data ~= nil and data.name == "spinattack" then
+	if inst.components.combat.target ~= nil and inst:GetDistanceSqToInst(inst.components.combat.target) < 8 and not inst.sg:HasStateTag("attack") then
+		inst.sg:GoToState("spinbeam_pre")
+	else
+		inst.components.timer:StartTimer("spinattack",1) 
+	end
+end
+end
+
 local function EnterPhase2Trigger(inst)
     if not inst.components.health:IsDead() then
 		local upgradeburst = SpawnPrefab("maxwell_smoke")
@@ -41,7 +51,11 @@ local function EnterPhase2Trigger(inst)
 				inst.Light:SetColour(0, 0, 1)
 				inst.Light:Enable(true)
 
-				inst:DoTaskInTime(0.1, inst:AddComponent("timer"))
+				inst:DoTaskInTime(0.1, function(inst) 
+					inst:AddComponent("timer")
+					inst:ListenForEvent("timerdone", SpinCheck)
+					inst.components.timer:StartTimer("spinattack",10+math.random(1,5)) 
+				end)
 				inst:ListenForEvent("newstate", OnNewState)
 				
 			--end
@@ -134,6 +148,10 @@ inst.components.timer:StartTimer("freezearmor",0.1)]]
 
 ------------
 local function ChooseUpgrades(inst)
+MakeEnrageable(inst)
+end
+--[[
+local function ChooseUpgrades(inst)
 if inst.upgrades == nil then
 local chance = math.random()
 if chance < 0.33 then
@@ -157,6 +175,7 @@ else
 			end
 end
 end
+]]
 local function OnSave(inst, data)
     data.enraged = inst.enraged or nil
 	data.upgrade = inst.upgrade
@@ -165,7 +184,7 @@ end
 local function OnPreLoad(inst, data)
     if data ~= nil then
         if data.enraged then
-            EnterPhase2Trigger(inst)
+            --EnterPhase2Trigger(inst)
         end
     end
 end
@@ -249,7 +268,7 @@ env.AddPrefabPostInit("deerclops", function(inst)
 	inst.OnLoad = OnLoad
 	inst:RemoveComponent("freezable")
 	
-
+	inst.count = 0
 	
 	inst:AddComponent("vetcurselootdropper")
 	inst.components.vetcurselootdropper.loot = "cursed_antler"
