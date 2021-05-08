@@ -5,14 +5,64 @@ env.AddStategraphPostInit("merm", function(inst)
 
 local events =
 {	
-    EventHandler("doattack", function(inst, data) 
-            inst.sg:GoToState("attack", data.target)
-    end),   
+
+	EventHandler("attacked", function(inst)
+		
+		if inst.components.health ~= nil and not inst.components.health:IsDead() then
+			if inst.counter ~= nil and inst.counter >= 3 then
+				inst.counter = 0
+				inst.sg:GoToState("karate_pre")
+				return
+			else
+				if inst.counter ~= nil then
+					inst.counter = inst.counter + 1
+					if inst.countertask ~= nil then
+						inst.countertask:Cancel()
+						inst.countertask = nil
+					end
+					inst.countertask = inst:DoTaskInTime(10, function(inst) inst.counter = 0 end)
+				else
+					inst.counter = 0
+				end
+			end
+		end
+	
+		if inst.components.health ~= nil and not inst.components.health:IsDead()
+		and (not inst.sg:HasStateTag("busy") or
+		inst.sg:HasStateTag("caninterrupt") or
+		inst.sg:HasStateTag("frozen")) then
+			inst.sg:GoToState("hit")
+		end
+	
+	end),
 }
 
 local states = {
+	State{
+        name = "karate_pre",
+        tags = { "attack", "busy" },
+
+        onenter = function(inst)
+            inst.SoundEmitter:PlaySound("dontstarve/merm/attack")
+            inst.components.combat:StartAttack()
+            inst.Physics:Stop()
+            inst.sg:SetTimeout(0.5)
+            inst.AnimState:PlayAnimation("idle_angry")
+        end,
+
+        ontimeout= function(inst)
+            inst.sg:GoToState("karate")
+        end,
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+                inst.sg:GoToState("karate")
+            end),
+        },
+    },
     State{
-        name = "attack",
+        name = "karate",
         tags = { "attack", "busy" },
 
         onenter = function(inst)
