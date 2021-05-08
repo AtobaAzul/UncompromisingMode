@@ -51,7 +51,7 @@ local function fn()
     inst.AnimState:SetBank("saltpile")
     inst.AnimState:SetBuild("saltpile")
 
-    inst:AddTag("CLASSIFIED")
+    --inst:AddTag("CLASSIFIED")
 	inst:AddTag("snowpileblocker")
 	inst.entity:SetPristine()
 	

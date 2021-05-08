@@ -323,6 +323,18 @@ if inst.components.workable ~= nil then
 	end
 end
 end
+
+local function Init(inst)
+print("1")
+	if FindEntity(inst,5,nil,{"snowpileblocker"}) ~= nil then
+	print("2")
+		if inst.Transform:GetWorldPosition() ~= nil then
+			SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		end
+		inst:Remove()
+	end
+end
+
 local function snowpilefn(Sim)
 	-- print ('sandhillfn')
 	local inst = CreateEntity()
@@ -401,6 +413,7 @@ local function snowpilefn(Sim)
 	SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	inst:ListenForEvent("animover", on_anim_over)
 	startregen(inst)
+	inst:DoTaskInTime(0,Init)
 	
 	return inst
 end

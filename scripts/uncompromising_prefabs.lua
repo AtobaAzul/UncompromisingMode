@@ -151,7 +151,7 @@ return {
 	"pitcherplant",
 	"widowshead",
 	"cctrinkets",
-	"steamedhams",
+	"uncompromising_steamedhams",
 	"blueberrypancakes",
 	"simpsalad",
 	"beefalowings",
@@ -221,4 +221,5 @@ return {
 	"theatercorn",
 	"skullchest",
 	"drink_with_the_living_dead",
+	"hoodedturfchanger",
 }
