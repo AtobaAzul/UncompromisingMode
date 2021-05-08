@@ -297,9 +297,21 @@ Assets = {
 	Asset("ANIM", "anim/hat_widowshead.zip"),
 	Asset("IMAGE", "images/inventoryimages/widowshead.tex"),
 	Asset("ATLAS", "images/inventoryimages/widowshead.xml"),
-	Asset("ANIM", "anim/steamedhams.zip"),
-	Asset("ATLAS", "images/inventoryimages/steamedhams.xml"),
-	Asset("IMAGE", "images/inventoryimages/steamedhams.tex"),
+
+
+	Asset("ANIM", "anim/purplesteamedhams.zip"),
+	Asset("ATLAS", "images/inventoryimages/purplesteamedhams.xml"),
+	Asset("IMAGE", "images/inventoryimages/purplesteamedhams.tex"),
+	
+	Asset("ANIM", "anim/greensteamedhams.zip"),
+	Asset("ATLAS", "images/inventoryimages/greensteamedhams.xml"),
+	Asset("IMAGE", "images/inventoryimages/greensteamedhams.tex"),
+
+	Asset("ANIM", "anim/greenfoliage.zip"),
+	Asset("IMAGE", "images/inventoryimages/greenfoliage.tex"),
+	Asset("ATLAS", "images/inventoryimages/greenfoliage.xml"),
+
+	
 	Asset("ANIM", "anim/blueberrypancakes.zip"),
 	Asset("ATLAS", "images/inventoryimages/blueberrypancakes.xml"),
 	Asset("IMAGE", "images/inventoryimages/blueberrypancakes.tex"),
@@ -411,6 +423,7 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/skullchest_child.tex"),
 	Asset("ATLAS", "images/inventoryimages/skullchest_child.xml"),
 
+	
 	
 	--Dart Stuff
 	Asset("ANIM", "anim/um_blowguns.zip"),

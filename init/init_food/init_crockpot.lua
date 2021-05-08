@@ -335,6 +335,7 @@ InsertIngredientValues({"iceboomerang"},{ice=1},true,false,false)
 InsertIngredientValues({"rice"},{veggie=1,rice=1},true,false,false)
 InsertIngredientValues({"rice_cooked"},{veggie=1,rice=1},true,false,false)
 InsertIngredientValues({"foliage"},{foliage=1},true,false,false)
+InsertIngredientValues({"greenfoliage"},{foliage=1},true,false,false)
 InsertIngredientValues({"horn"},{meat=1},true,false,false)
 InsertIngredientValues({"trunk_summer"},{meat=2},true,false,false)
 InsertIngredientValues({"trunk_winter"},{meat=2},true,false,false)
@@ -439,9 +440,10 @@ local californiaking =
 }
 AddCookerRecipe("cookpot", californiaking)
 AddCookerRecipe("portablecookpot", californiaking)
-local steamedhams =
+
+local purplesteamedhams =
 {
-    name = "steamedhams",
+    name = "purplesteamedhams",
     test = function(cooker, names, tags) return names.foliage and tags.veggie and tags.veggie >= 1 and (names.meat or names.meatcooked) and not (tags.monster or tags.inedible or names.smallmeat or names.smallmeatcooked) end,
 
     priority = 30,
@@ -454,12 +456,31 @@ local steamedhams =
     sanity = 15,
     cooktime = 1,
 }
-AddCookerRecipe("cookpot", steamedhams)
-AddCookerRecipe("portablecookpot", steamedhams)
+AddCookerRecipe("cookpot", purplesteamedhams)
+AddCookerRecipe("portablecookpot", purplesteamedhams)
+
+local greensteamedhams =
+{
+    name = "greensteamedhams",
+    test = function(cooker, names, tags) return names.greenfoliage and tags.veggie and tags.veggie >= 1 and (names.meat or names.meatcooked) and not (tags.monster or tags.inedible or names.smallmeat or names.smallmeatcooked) end,
+
+    priority = 30,
+    weight = 30,
+    foodtype = "MEAT",
+    health = 40,
+    hunger = 37.5,
+    perishtime = 3*TUNING.PERISH_TWO_DAY,	
+	oneat_desc = "An unforgettable luncheon",
+    sanity = 15,
+    cooktime = 1,
+}
+AddCookerRecipe("cookpot", greensteamedhams)
+AddCookerRecipe("portablecookpot", greensteamedhams)
+
 local simpsalad =
 {
     name = "simpsalad",
-    test = function(cooker, names, tags) return names.foliage and names.foliage > 1 end,
+    test = function(cooker, names, tags) return tags.foliage and tags.foliage > 1 end,
 
     priority = 20,
     weight = 20,

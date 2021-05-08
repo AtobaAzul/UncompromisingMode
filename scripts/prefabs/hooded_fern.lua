@@ -112,7 +112,7 @@ local function grass(name, stage)
         inst:AddComponent("pickable")
         inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
 
-        inst.components.pickable:SetUp("foliage", TUNING.GRASS_REGROW_TIME,2)
+        inst.components.pickable:SetUp("greenfoliage", TUNING.GRASS_REGROW_TIME,2)
         inst.components.pickable.onregenfn = onregenfn
         inst.components.pickable.onpickedfn = onpickedfn
         inst.components.pickable.makeemptyfn = makeemptyfn
