@@ -289,6 +289,10 @@ local function fn()
     inst:AddComponent("eater")
     inst.components.eater:SetDiet({ FOODGROUP.MOOSE }, { FOODGROUP.MOOSE })
     inst.components.eater.eatwholestack = true
+	
+	
+	inst:AddComponent("vetcurselootdropper")
+	inst.components.vetcurselootdropper.loot = "feather_frock"
 
     ------------------------------------------
 
