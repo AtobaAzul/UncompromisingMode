@@ -150,4 +150,85 @@ local function tornado_fn()
     return inst
 end
 
-return Prefab("mothergoose_tornado", tornado_fn, assets)
+local function Disappear_mini(inst)
+	inst.components.sizetweener:StartTween(0.05, 0.2, inst.Remove)
+end
+
+local function shrink_mini(inst)
+	--inst.sg:GoToState("run")
+	inst.components.sizetweener:StartTween(0.2, 0.5, Disappear_mini)
+end
+
+local function shrinktask_mini(inst)
+	inst:DoTaskInTime(1.5, shrink_mini)
+end
+		
+local function grow_mini(inst, time, startsize, endsize)
+	inst.Transform:SetScale(0.1, 0.1, 0.1)
+	inst.components.sizetweener:StartTween(0.8, 0.7, shrinktask_mini)
+end
+
+local function minitornado_fn()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+
+	inst.AnimState:SetFinalOffset(2)
+    inst.AnimState:SetBank("tornado")
+    inst.AnimState:SetBuild("tornado")
+    inst.AnimState:PlayAnimation("tornado_loop", true)
+
+    inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/tornado", "spinLoop")
+
+    MakeInventoryPhysics(inst)
+    RemovePhysicsColliders(inst)
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.timetorun = false
+
+    --inst:AddComponent("knownlocations")
+	
+	inst:AddComponent("sizetweener")
+	
+	inst:AddComponent("linearcircler")
+	--[[inst.components.circler.scale = 1
+	inst.components.circler.speed = 6
+	inst.components.circler.minSpeed = 6
+	inst.components.circler.maxSpeed = 6
+	inst.components.circler.minDist = 1
+	inst.components.circler.maxDist = 1
+	inst.components.circler.minScale = 1
+	inst.components.circler.maxScale = 1]]
+
+    --[[inst:AddComponent("locomotor")
+    inst.components.locomotor.walkspeed = 6
+    inst.components.locomotor.runspeed = 6]]
+
+    --inst:SetStateGraph("SGmothergoose_tornado")
+	--inst.sg:GoToState("idle")
+
+    inst.WINDSTAFF_CASTER = nil
+    inst.persists = false
+	inst.grow_mini = grow_mini
+	inst:grow_mini()
+
+    inst.SetDuration = SetDuration
+    inst:SetDuration(3000)
+	
+	inst:DoTaskInTime(0.2, function(inst)
+		inst:DoPeriodicTask(.4, destroystuff)
+	end)
+
+    return inst
+end
+
+return Prefab("mothergoose_tornado", tornado_fn, assets),
+		Prefab("mini_mothergoose_tornado", minitornado_fn, assets)

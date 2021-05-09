@@ -159,11 +159,11 @@ modparams.wingsuit =
         },
         animbank = "ui_cookpot_1x2",
         animbuild = "ui_cookpot_1x2",
-        pos = Vector3(0, 85, 0),
+        pos = Vector3(53, 15, 0),
     },
 	itemtestfn = CheckFeather,
     usespecificslotsforitems = true,
-    type = "pack",
+    type = "hand_inv",
 }
 
 for y = 0, 3 do

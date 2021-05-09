@@ -216,7 +216,7 @@ return {
 	"um_shambler",
 	"mothergoose_tornado",
 	"corncan",
-	"wingsuit",
+	"feather_frock",
 	"beargerclaw",
 	"theatercorn",
 	"skullchest",

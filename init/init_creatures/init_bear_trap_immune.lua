@@ -32,6 +32,8 @@ local FEATHERS =
 	"feather_robin",
 	"feather_robin_winter",
 	"feather_canary",
+	"goose_feather",
+	"malbatross_feather",
 }
 
 local function AddFeatherTag(prefab)

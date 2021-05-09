@@ -373,7 +373,17 @@ AddRoomPreInit("HFHolidays", function(room)
 	room.contents.countstaticlayouts["hf_holidays"] = 1
 end)
 
+AddLevel(GLOBAL.LEVELTYPE.SURVIVAL, {
+	id = "UNCOMPROMISING",
+	name = GLOBAL.STRINGS.UI.CUSTOMIZATIONSCREEN.PRESETLEVELS.UNCOMPROMISING,
+	desc = GLOBAL.STRINGS.UI.CUSTOMIZATIONSCREEN.PRESETLEVELDESC.UNCOMPROMISING,
+	location = "forest",
+	version = 4,
+	overrides = {
 
+		antliontribute = "more", --unnecessary
+	},
+})
 --GLOBAL.require("map/static_layouts/licepatch")
 --[[local Layouts = GLOBAL.require("map/layouts").Layouts
 local StaticLayout = GLOBAL.require("map/static_layout")

@@ -1,6 +1,7 @@
 SKINS = GLOBAL.STRINGS.SKIN_NAMES
 STRINGS = GLOBAL.STRINGS.NAMES
-	
+UI = GLOBAL.STRINGS.UI
+
 	STRINGS.UNCOMPROMISING_RAT = "Rat" -- Maybe change the name with a pun with Robber or Raider, any idea ?
 	STRINGS.UNCOMPROMISING_RATHOLD = "Burrow"
 	STRINGS.GASMASK = "Goose Mask"
@@ -197,7 +198,7 @@ STRINGS = GLOBAL.STRINGS.NAMES
 	STRINGS.CORNCAN = "Canned Corn"
 	STRINGS.SKULLCHEST_CHILD = "Skull Chest"
 	STRINGS.GREENFOLIAGE = "Hooded Foliage" --Well, I guess I did this then...
-
+	STRINGS.FEATHER_FROCK = "Feather Frock"
 	
 	--Stanton's Stash
 	STRINGS.STANTON_SHADOW_TONIC = "Shadow Tonic"
@@ -213,3 +214,16 @@ STRINGS = GLOBAL.STRINGS.NAMES
 	STRINGS.BLOWGUNAMMO_FIRE = "Fire Dart"
 	STRINGS.BLOWGUNAMMO_SLEEP = "Sleep Dart"
 	STRINGS.BLOWGUNAMMO_ELECTRIC = "Electric Dart"
+	
+		UI.CUSTOMIZATIONSCREEN = {
+			PRESETLEVELS = 
+			{
+				UNCOMPROMISING = "Standard Forest",
+			},
+		}
+		UI.CUSTOMIZATIONSCREEN = {
+			PRESETLEVELDESC = 
+			{
+				UNCOMPROMISING = "descr",
+			},
+		}
