@@ -14,6 +14,7 @@ local COMBAT_TARGET_TAGS = { "_combat" }
 
 local function SpawnThorns(inst, feather, owner)
 
+	local owner = inst.components.inventoryitem.owner
 	local impactfx = SpawnPrefab("impact")
 	inst.fxscale = 1
 	inst.speedboost = 0
@@ -58,30 +59,6 @@ local function SpawnThorns(inst, feather, owner)
 						SpawnPrefab("electricchargedfx"):SetTarget(v)
 						SpawnPrefab("shockotherfx"):SetFXOwner(owner)
 						v.components.combat:GetAttacked(owner, 10)
-					elseif feather == "goose" then
-						local tornado1 = SpawnPrefab("mini_mothergoose_tornado")
-						tornado1.WINDSTAFF_CASTER = owner
-						tornado1.components.linearcircler:SetCircleTarget(owner)
-						tornado1.components.linearcircler:Start()
-						tornado1.components.linearcircler.randAng = 0
-						tornado1.components.linearcircler.clockwise = true
-						tornado1.components.linearcircler.distance_mod = 4
-						
-						local tornado2 = SpawnPrefab("mini_mothergoose_tornado")
-						tornado2.WINDSTAFF_CASTER = owner
-						tornado2.components.linearcircler:SetCircleTarget(owner)
-						tornado2.components.linearcircler:Start()
-						tornado2.components.linearcircler.randAng = 0.33
-						tornado2.components.linearcircler.clockwise = true
-						tornado2.components.linearcircler.distance_mod = 4
-						
-						local tornado3 = SpawnPrefab("mini_mothergoose_tornado")
-						tornado3.WINDSTAFF_CASTER = owner
-						tornado3.components.linearcircler:SetCircleTarget(owner)
-						tornado3.components.linearcircler:Start()
-						tornado3.components.linearcircler.randAng = 0.66
-						tornado3.components.linearcircler.clockwise = true
-						tornado3.components.linearcircler.distance_mod = 4
 					elseif feather == "malbatross" then
 						inst.speedboost = 1
 						v.components.combat:GetAttacked(owner, 20)
@@ -100,8 +77,34 @@ local function SpawnThorns(inst, feather, owner)
         end
     end
 
+	if feather == "goose" then
+		local tornado1 = SpawnPrefab("mini_mothergoose_tornado")
+		tornado1.WINDSTAFF_CASTER = owner
+		tornado1.components.linearcircler:SetCircleTarget(owner)
+		tornado1.components.linearcircler:Start()
+		tornado1.components.linearcircler.randAng = 0
+		tornado1.components.linearcircler.clockwise = false
+		tornado1.components.linearcircler.distance_mod = 4
+						
+		local tornado2 = SpawnPrefab("mini_mothergoose_tornado")
+		tornado2.WINDSTAFF_CASTER = owner
+		tornado2.components.linearcircler:SetCircleTarget(owner)
+		tornado2.components.linearcircler:Start()
+		tornado2.components.linearcircler.randAng = 0.33
+		tornado2.components.linearcircler.clockwise = false
+		tornado2.components.linearcircler.distance_mod = 4
+						
+		local tornado3 = SpawnPrefab("mini_mothergoose_tornado")
+		tornado3.WINDSTAFF_CASTER = owner
+		tornado3.components.linearcircler:SetCircleTarget(owner)
+		tornado3.components.linearcircler:Start()
+		tornado3.components.linearcircler.randAng = 0.66
+		tornado3.components.linearcircler.clockwise = false
+		tornado3.components.linearcircler.distance_mod = 4
+	end
+
 	owner.components.locomotor:SetExternalSpeedMultiplier(inst, "wingsuit", 1.5 + inst.speedboost)
-	owner:DoTaskInTime(1 + inst.speedboost, function(owner) owner.components.locomotor:RemoveExternalSpeedMultiplier(inst, "wingsuit") end)
+	owner:DoTaskInTime(1.5 + inst.speedboost, function(owner) owner.components.locomotor:RemoveExternalSpeedMultiplier(inst, "wingsuit") end)
 
 end
 
@@ -110,50 +113,6 @@ local function OnCooldown(inst)
 	inst.components.useableitem.inuse = false
 end
 
-local function OnBlocked(inst)
-	local owner = inst.components.inventoryitem.owner
-
-	if inst ~= nil then
-		local feather = inst.components.container:FindItems(function(item) return item:HasTag("wingsuit_feather") end)
-
-		if feather and inst._cdtask == nil then
-			--V2C: tiny CD to limit chain reactions
-			inst.components.useableitem.inuse = true
-			inst._cdtask = inst:DoTaskInTime(3, OnCooldown)
-			
-			local robin = inst.components.container:Has("feather_robin", 1)
-			local robin_winter = inst.components.container:Has("feather_robin_winter", 1)
-			local crow = inst.components.container:Has("feather_crow", 1)
-			local canary = inst.components.container:Has("feather_canary", 1)
-			local goose = inst.components.container:Has("goose_feather", 1)
-			local malbatross = inst.components.container:Has("malbatross_feather", 1)
-			
-			if robin then
-				inst.components.container:ConsumeByName("feather_robin", 1)
-				SpawnThorns(inst, "robin", owner)
-			elseif robin_winter then
-				inst.components.container:ConsumeByName("feather_robin_winter", 1)
-				SpawnThorns(inst, "robin_winter", owner)
-			elseif crow then
-				inst.components.container:ConsumeByName("feather_crow", 1)
-				SpawnThorns(inst, "crow", owner)
-			elseif canary then
-				inst.components.container:ConsumeByName("feather_canary", 1)
-				SpawnThorns(inst, "canary", owner)
-			elseif goose then
-				inst.components.container:ConsumeByName("goose_feather", 1)
-				SpawnThorns(inst, "goose", owner)
-			elseif malbatross then
-				inst.components.container:ConsumeByName("malbatross_feather", 1)
-				SpawnThorns(inst, "malbatross", owner)
-			end
-			
-			if owner.SoundEmitter ~= nil then
-				owner.SoundEmitter:PlaySound("dontstarve/common/together/armor/cactus")
-			end
-		end
-	end
-end
 local function OnBlocked(owner, data, inst)
 	if owner == nil then
 		local owner = inst.components.inventoryitem.owner
@@ -178,21 +137,39 @@ local function OnBlocked(owner, data, inst)
 			if robin then
 				inst.components.container:ConsumeByName("feather_robin", 1)
 				SpawnThorns(inst, "robin", owner)
+				for i = 1, 3 do 
+					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
+				end
 			elseif robin_winter then
 				inst.components.container:ConsumeByName("feather_robin_winter", 1)
 				SpawnThorns(inst, "robin_winter", owner)
+				for i = 1, 3 do 
+					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
+				end
 			elseif crow then
 				inst.components.container:ConsumeByName("feather_crow", 1)
 				SpawnThorns(inst, "crow", owner)
+				for i = 1, 3 do 
+					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
+				end
 			elseif canary then
 				inst.components.container:ConsumeByName("feather_canary", 1)
 				SpawnThorns(inst, "canary", owner)
+				for i = 1, 3 do 
+					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
+				end
 			elseif goose then
 				inst.components.container:ConsumeByName("goose_feather", 1)
 				SpawnThorns(inst, "goose", owner)
+				for i = 1, 3 do 
+					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
+				end
 			elseif malbatross then
 				inst.components.container:ConsumeByName("malbatross_feather", 1)
 				SpawnThorns(inst, "malbatross", owner)
+				for i = 1, 3 do 
+					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
+				end
 			end
 			
 			if owner.SoundEmitter ~= nil then
@@ -222,21 +199,39 @@ local function OnUse(inst)
 			if robin then
 				inst.components.container:ConsumeByName("feather_robin", 1)
 				SpawnThorns(inst, "robin", owner)
+				for i = 1, 3 do 
+					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
+				end
 			elseif robin_winter then
 				inst.components.container:ConsumeByName("feather_robin_winter", 1)
 				SpawnThorns(inst, "robin_winter", owner)
+				for i = 1, 3 do 
+					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
+				end
 			elseif crow then
 				inst.components.container:ConsumeByName("feather_crow", 1)
 				SpawnThorns(inst, "crow", owner)
+				for i = 1, 3 do 
+					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
+				end
 			elseif canary then
 				inst.components.container:ConsumeByName("feather_canary", 1)
 				SpawnThorns(inst, "canary", owner)
+				for i = 1, 3 do 
+					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
+				end
 			elseif goose then
 				inst.components.container:ConsumeByName("goose_feather", 1)
 				SpawnThorns(inst, "goose", owner)
+				for i = 1, 3 do 
+					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
+				end
 			elseif malbatross then
 				inst.components.container:ConsumeByName("malbatross_feather", 1)
 				SpawnThorns(inst, "malbatross", owner)
+				for i = 1, 3 do 
+					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
+				end
 			end
 			
 			if owner.SoundEmitter ~= nil then
@@ -250,7 +245,7 @@ local function onequip(inst, owner)
     if inst.components.container ~= nil then
         inst.components.container:Open(owner)
     end
-    owner.AnimState:OverrideSymbol("swap_body", "armor_bramble", "swap_body")
+    owner.AnimState:OverrideSymbol("swap_body", "armor_grass", "swap_body")
 	
     inst:ListenForEvent("blocked", inst._onblocked, owner)
     inst:ListenForEvent("attacked", inst._onblocked, owner)
@@ -279,8 +274,8 @@ local function frockfn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("armor_bramble")
-    inst.AnimState:SetBuild("armor_bramble")
+    inst.AnimState:SetBank("armor_grass")
+    inst.AnimState:SetBuild("armor_grass")
     inst.AnimState:PlayAnimation("anim")
 	
 	--inst:AddTag("wingsuit")
