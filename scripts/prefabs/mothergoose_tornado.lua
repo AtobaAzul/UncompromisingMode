@@ -156,7 +156,7 @@ end
 
 local function shrink_mini(inst)
 	--inst.sg:GoToState("run")
-	inst.components.sizetweener:StartTween(0.2, 0.5, Disappear_mini)
+	inst.components.sizetweener:StartTween(0.2, 0.8, Disappear_mini)
 end
 
 local function shrinktask_mini(inst)
