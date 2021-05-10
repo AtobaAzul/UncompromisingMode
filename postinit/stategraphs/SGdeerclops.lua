@@ -163,7 +163,9 @@ local function SpawnSweep(inst, target_pos,BASE_SWEEP_DISTANCE)
 
         fx = SpawnPrefab(i > 0 and "deerclops_laser_blue" or "deerclops_laserempty_blue")
 		if BASE_SWEEP_DISTANCE == 10 then
-		fx.deerclops = inst
+			fx.deerclops = inst
+		else
+			fx.ice = false
 		end
 		fx.ice = false
         fx.caster = inst
@@ -177,7 +179,9 @@ local function SpawnSweep(inst, target_pos,BASE_SWEEP_DISTANCE)
 		fx = SpawnPrefab(i > 0 and "deerclops_laser_blue" or "deerclops_laserempty_blue")
 		fx.ice = false
 		if BASE_SWEEP_DISTANCE == 10 then
-		fx.deerclops = inst
+			fx.deerclops = inst
+		else
+			fx.ice = false
 		end
 		fx.Transform:SetPosition(x1, 0, z1)
 	
@@ -186,9 +190,10 @@ local function SpawnSweep(inst, target_pos,BASE_SWEEP_DISTANCE)
 
 	if inst.components.health:GetPercent() <= 0.5 then
 		fx = SpawnPrefab(i > 0 and "deerclops_laser_blue" or "deerclops_laserempty_blue")
-		fx.ice = false
 		if BASE_SWEEP_DISTANCE == 10 then
-		fx.deerclops = inst
+			fx.deerclops = inst
+		else
+			fx.ice = false
 		end
 	end
     fx.Transform:SetPosition(x1, 0, z1)

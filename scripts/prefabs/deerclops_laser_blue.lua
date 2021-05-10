@@ -58,12 +58,14 @@ local function DoDamage(inst, targets, skiptoss)
 		
 		--SpawnIceFx(inst)
         --SpawnPrefab("deerclops_laserscorch_blue").Transform:SetPosition(x, 0, z)
-		--if inst.ice == nil or inst.deerclops ~= nil then
-        local fx = SpawnPrefab("deerclops_lasertrail_blue")
 		
+        local fx = SpawnPrefab("deerclops_lasertrail_blue")
+		if inst.ice ~= nil then
+		fx.nosound = true
+		end
         fx.Transform:SetPosition(x, 0, z)
         fx:FastForward(GetRandomMinMax(.3, .7))
-		--end
+		
     else
         inst:DoTaskInTime(2 * FRAMES, inst.Remove)
     end
@@ -341,7 +343,11 @@ local function trailfn()
         return inst
     end
 	
-	inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/ice_small")
+	inst:DoTaskInTime(0,function(inst) 
+	if inst.nosound == nil then
+		inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/ice_small")
+	end 
+	end)
 
     inst.persists = false
     inst._task = inst:DoTaskInTime(inst.AnimState:GetCurrentAnimationLength() + 2 * FRAMES, inst.Remove)
