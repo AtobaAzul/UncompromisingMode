@@ -19,11 +19,11 @@ local function OnNewState(inst, data)
 end
 
 local function SpinCheck(inst,data)
-if data ~= nil and data.name == "spinattack" then
-	if inst.components.combat.target ~= nil and inst:GetDistanceSqToInst(inst.components.combat.target) < 8 and not inst.sg:HasStateTag("attack") then
+if data ~= nil and data.name == "spinattack" and inst.components.health ~= nil and not inst.components.health:IsDead() then
+	if inst.components.combat.target ~= nil and inst:GetDistanceSqToInst(inst.components.combat.target) < 12 and not inst.sg:HasStateTag("attack") then
 		inst.sg:GoToState("spinbeam_pre")
 	else
-		inst.components.timer:StartTimer("spinattack",1) 
+		inst.components.timer:StartTimer("spinattack",0.5)
 	end
 end
 end
@@ -93,7 +93,7 @@ end
 
 
 local function AuraFreezeEnemies(inst)
-if inst.components.combat.target ~= nil then
+if inst.components.combat.target ~= nil and inst.components.health ~= nil and not inst.components.health:IsDead() then
 if inst:GetDistanceSqToPoint(inst.components.combat.target:GetPosition()) < 4 then
 inst.sg:GoToState("aurafreeze_pre")
 inst:DoTaskInTime(7,function(inst) inst.sg:GoToState("aurafreeze_pst") end)
@@ -119,6 +119,7 @@ inst.components.health:SetMaxHealth(4000)
 inst.components.healthtrigger:AddTrigger(PHASE2_HEALTH, EnterPhase2Trigger)
 inst.upgrade = "enrage_mutation"
 end
+
 local function MakeStrong(inst)
 inst.components.health:SetMaxHealth(4500)
 inst.upgrade = "strength_mutation"
@@ -127,6 +128,7 @@ if inst.components.healthtrigger ~= nil then
 inst:RemoveComponent("healthtrigger")      --Bandaid fix to attempt to correct the health trigger just getting added anyways
 end
 end
+
 local function MakeIcey(inst)
 inst.components.health:SetMaxHealth(3500)
 inst.upgrade = "ice_mutation"
@@ -161,27 +163,30 @@ if chance > 0.66 then
 MakeIcey(inst)
 end
 else
-			if inst.upgrade == "enrage_mutation" then
-			MakeEnrageable(inst)
-			end
-			if inst.upgrade == "strength_mutation" then
-			MakeStrong(inst)
-			end
-			if inst.upgrade == "ice_mutation" then
-			MakeStrong(inst)
-			end
+	if inst.upgrade == "enrage_mutation" then
+		MakeEnrageable(inst)
+	end
+	if inst.upgrade == "strength_mutation" then
+		MakeStrong(inst)
+	end
+	if inst.upgrade == "ice_mutation" then
+		MakeIcey(inst)
+	end
 end
 end
 
 local function OnSave(inst, data)
     data.enraged = inst.enraged or nil
 	data.upgrade = inst.upgrade
+	if inst.components.health ~= nil then
+		data.healthUM = inst.components.health.currenthealth
+	end
 end
 
 local function OnPreLoad(inst, data)
     if data ~= nil then
         if data.enraged then
-            --EnterPhase2Trigger(inst)
+            EnterPhase2Trigger(inst)
         end
     end
 end
@@ -199,6 +204,9 @@ local function OnLoad(inst, data)
 			if data.upgrade == "ice_mutation" then
 			MakeIcey(inst)
 			end
+		end
+		if data.healthUM ~= nil then
+		inst.components.health.currenthealth = data.healthUM
 		end
     end
 end
@@ -269,13 +277,21 @@ env.AddPrefabPostInit("deerclops", function(inst)
 	
 	inst:AddComponent("vetcurselootdropper")
 	inst.components.vetcurselootdropper.loot = "cursed_antler"
-	
+	inst.EnterPhase2Trigger = EnterPhase2Trigger
 	inst:AddComponent("groundpounder")
 	inst.components.groundpounder.destroyer = true
 	inst.components.groundpounder.damageRings = 2
     inst.components.groundpounder.destructionRings = 2
     inst.components.groundpounder.platformPushingRings = 2
     inst.components.groundpounder.numRings = 3
+	
+	--
+	inst.MakeEnrageable = MakeEnrageable
+	inst.MakeIcey = MakeIcey
+	inst.MakeStrong = MakeStrong
+	--
+	
+	
 	inst:DoTaskInTime(0.1,ChooseUpgrades(inst))	--Incase we need to specify an upgrade because this deerclops despawned.
 
 end)

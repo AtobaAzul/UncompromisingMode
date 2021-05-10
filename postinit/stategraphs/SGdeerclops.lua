@@ -122,8 +122,8 @@ local function SpawnLaser_Blue(inst)
     fx:Trigger((delay + 2) * FRAMES, targets, skiptoss)
 end
 
-local BASE_NUM_ANGULAR_STEPS = 60
-local SWEEP_ANGULAR_LENGTH = 400
+local BASE_NUM_ANGULAR_STEPS = 75
+local SWEEP_ANGULAR_LENGTH = 360
 local MIN_SWEEP_DISTANCE = 1
 local function SpawnSweep(inst, target_pos,BASE_SWEEP_DISTANCE)
     local gx, gy, gz = inst.Transform:GetWorldPosition()
@@ -162,9 +162,10 @@ local function SpawnSweep(inst, target_pos,BASE_SWEEP_DISTANCE)
         angle = angle + (angle_step_dir * angle_step)
 
         fx = SpawnPrefab(i > 0 and "deerclops_laser_blue" or "deerclops_laserempty_blue")
-		if BASE_SWEEP_DISTANCE == 11 then
+		if BASE_SWEEP_DISTANCE == 10 then
 		fx.deerclops = inst
 		end
+		fx.ice = false
         fx.caster = inst
         fx.Transform:SetPosition(x1, 0, z1)
         fx:Trigger(delay * FRAMES, targets, skiptoss)
@@ -173,22 +174,20 @@ local function SpawnSweep(inst, target_pos,BASE_SWEEP_DISTANCE)
         end
     end
 
-	if inst.components.health:GetPercent() <= 0.5 then
 		fx = SpawnPrefab(i > 0 and "deerclops_laser_blue" or "deerclops_laserempty_blue")
-		if BASE_SWEEP_DISTANCE == 11 then
+		fx.ice = false
+		if BASE_SWEEP_DISTANCE == 10 then
 		fx.deerclops = inst
 		end
-	end
-    fx.Transform:SetPosition(x1, 0, z1)
-		if BASE_SWEEP_DISTANCE == 11 then
-		fx.deerclops = inst
-		end
+		fx.Transform:SetPosition(x1, 0, z1)
+	
     fx:Trigger(math.max(1, i) * FRAMES, targets, skiptoss)
 
 
 	if inst.components.health:GetPercent() <= 0.5 then
 		fx = SpawnPrefab(i > 0 and "deerclops_laser_blue" or "deerclops_laserempty_blue")
-		if BASE_SWEEP_DISTANCE == 11 then
+		fx.ice = false
+		if BASE_SWEEP_DISTANCE == 10 then
 		fx.deerclops = inst
 		end
 	end
@@ -230,7 +229,11 @@ local function EnrageAttackBank(inst,data)
                     end
                 end
                 if inst.components.health:GetPercent() <= 0.5 and (isfrozen or not (shouldfreeze or inst.components.timer:TimerExists("laserbeam_cd"))) then
+					if inst.enraged == true then
 					inst.sg:GoToState("laserbeam_blue", target)
+					else
+					inst.EnterPhase2Trigger(inst)
+					end
                 else
                     inst.sg:GoToState("attack")
                 end
@@ -586,8 +589,13 @@ local states = {
                 end
                 inst.sg.statemem.target = target
             end
+			inst.oldtime = inst.components.combat.laststartattacktime
         end,
 
+        onupdate = function(inst)
+		inst.components.combat.laststartattacktime = inst.components.combat.laststartattacktime + 0.1
+        end,
+		
         timeline =
         {
             TimeEvent(0 * FRAMES, function(inst)
@@ -598,11 +606,9 @@ local states = {
                 end
 				local target_pos = inst.sg.statemem.target_pos
 				SpawnSweep(inst, target_pos,1)
-				SpawnSweep(inst, target_pos,3)
-				SpawnSweep(inst, target_pos,5)
+				SpawnSweep(inst, target_pos,4)
 				SpawnSweep(inst, target_pos,7)
-				SpawnSweep(inst, target_pos,9)
-				SpawnSweep(inst, target_pos,11)
+				SpawnSweep(inst, target_pos,10)
 					--SpawnLaser_Blue(inst)
                 
                 --SpawnLaser_Blue(inst)
@@ -642,7 +648,7 @@ local states = {
                 SetLightColour(inst, 1)
             end),
             TimeEvent(75 * FRAMES, function(inst)
-				inst.sg:GoToState("idle")
+				inst.sg:GoToState("taunt")
             end),
         },
 
@@ -655,6 +661,7 @@ local states = {
         },]]
 
         onexit = function(inst)
+			inst.components.combat.laststartattacktime = 3
             SetLightValueAndOverride(inst, 1, 0)
             SetLightColour(inst, 1)
 			inst.components.timer:StartTimer("spinattack",10+math.random(1,5))
@@ -664,6 +671,7 @@ local states = {
             if not inst.sg.statemem.keepfacing then
                 DisableEightFaced(inst)
             end
+			
         end,
     },
 	State{

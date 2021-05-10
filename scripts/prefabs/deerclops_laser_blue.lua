@@ -41,22 +41,6 @@ local function DoSpawnIceSpike(inst, x, z)
     SpawnPrefab("icespike_fx_"..tostring(math.random(1, 4))).Transform:SetPosition(x, 0, z)
 end
 
-local function SpawnIceFx(inst)
-    local numFX = math.random(1, 2)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local x1, y1, z1 = inst.Transform:GetWorldPosition()
-    local dx, dz = x1 - x, z1 - z
-    local dist = dx * dx + dz * dz
-    if dist > 0 then
-        dist = math.sqrt(dist)
-        dx, dz = dx / dist, dz / dist
-    end
-    for i = 1, numFX do
-        local offset = GetRandomMinMax(dist * .25, dist)
-        inst:DoTaskInTime(math.random() * .25, DoSpawnIceSpike, x + dx * offset + GetRandomWithVariance(0, 1), z + dz * offset + GetRandomWithVariance(0, 1))
-    end
-end
-
 local function DoDamage(inst, targets, skiptoss)
     inst.task = nil
 	if inst.deerclops ~= nil then
@@ -74,10 +58,12 @@ local function DoDamage(inst, targets, skiptoss)
 		
 		--SpawnIceFx(inst)
         --SpawnPrefab("deerclops_laserscorch_blue").Transform:SetPosition(x, 0, z)
+		--if inst.ice == nil or inst.deerclops ~= nil then
         local fx = SpawnPrefab("deerclops_lasertrail_blue")
 		
         fx.Transform:SetPosition(x, 0, z)
         fx:FastForward(GetRandomMinMax(.3, .7))
+		--end
     else
         inst:DoTaskInTime(2 * FRAMES, inst.Remove)
     end
