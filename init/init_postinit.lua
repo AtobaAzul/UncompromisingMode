@@ -133,6 +133,7 @@ local prefab_post = {
 	"birds",
 	"seedpouch",
 	"tonichandlers",
+	"houndwarning",
 }
 
 local stategraph_post = {

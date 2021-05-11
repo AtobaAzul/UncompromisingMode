@@ -16,7 +16,7 @@ local function OnHitFire(inst, attacker, target)
 	end
 	
 	local x, y, z = inst.Transform:GetWorldPosition() 
-	local ents = TheSim:FindEntities(x, y, z, 3, nil, { "shadow", "hound", "INLIMBO" })
+	local ents = TheSim:FindEntities(x, y, z, 3, nil, { "shadow", "hound", "houndfriend", "INLIMBO" })
 	if #ents > 0 then
 		for i, v in ipairs(ents) do
 			if v ~= inst and v:IsValid() and not v:IsInLimbo() then

@@ -9,7 +9,7 @@ local prefabs =
     "sporecloud_toad_overlay",
 }
 
-local AURA_EXCLUDE_TAGS = { "epic", "hound", "bird", "toad", "frog", "toadstool", "playerghost", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "invisible", "toadling", "has_gasmask" }
+local AURA_EXCLUDE_TAGS = { "epic", "hound", "houndfriend", "bird", "toad", "frog", "toadstool", "playerghost", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "invisible", "toadling", "has_gasmask" }
 
 local FADE_FRAMES = 5
 local FADE_INTENSITY = .8
