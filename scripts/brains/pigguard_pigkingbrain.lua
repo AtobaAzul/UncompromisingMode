@@ -92,13 +92,11 @@ local function FindFoodAction(inst)
 end
 
 local function GetFaceTargetFn(inst)
-print("getface")
     local target = FindClosestPlayerToInst(inst, START_FACE_DIST, true)
     return target ~= nil and not target:HasTag("notarget") and target or nil
 end
 
 local function KeepFaceTargetFn(inst, target)
-print("keepface")
     return not target:HasTag("notarget") and inst:IsNear(target, KEEP_FACE_DIST)
 end
 
@@ -151,13 +149,10 @@ local function ShouldRunFromPlayerFn(inst)
 
 		inst.reset_annoyance_task = inst:DoTaskInTime(10, resetfn)
 
-		--print(string.format("%2.0f/%2.0f", inst.annoyance, ANNOYANCE_THRESHOLD))
-
 		if inst.annoyance >= ANNOYANCE_THRESHOLD then
 			GetAnnoyedFn(inst, target)
 			--return false
 		end
-		print("fak of")
 	end
     return not target:HasTag("notarget") and inst:IsNear(target, KEEP_FACE_DIST)
 end
