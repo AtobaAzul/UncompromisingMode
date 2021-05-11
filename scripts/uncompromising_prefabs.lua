@@ -223,4 +223,5 @@ return {
 	"drink_with_the_living_dead",
 	"hoodedturfchanger",
 	"wargwarning",
+	"deerclops_easyspawners",
 }
