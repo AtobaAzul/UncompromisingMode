@@ -9,9 +9,9 @@ local function oneatenfn(inst, eater)
 					for i,v in ipairs(combatents) do
 						if v.components.combat ~= nil and v.components.combat.target ~= nil then
 							count = count + 1
-						end
-						if v:HasTag("epic") then
+							if v:HasTag("epic") then
 							count = count + 5
+							end
 						end
 					end
 				if count > 0 and count <= 5 then
