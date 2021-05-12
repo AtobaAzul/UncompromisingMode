@@ -234,15 +234,6 @@ local function NormalRetargetFn(inst)
 								and inst.components.combat:CanTarget(guy)
 						end
 					end
-					
-					if TheWorld.state.isnight then
-						for i,v in ipairs({"player"}) do --Have to emulate the oneof_tags effect
-							if guy:HasTag(v) and not guy:HasTag("playerghost") then
-							return (inst.components.follower.leader == nil and guy.LightWatcher == nil or guy.LightWatcher:IsInLight())
-									and inst.components.combat:CanTarget(guy)
-							end
-						end
-					end
                 end,
                 RETARGET_MUST_TAGS, -- see entityreplica.lua
                 exclude_tags

@@ -182,14 +182,9 @@ function FireRain:SpawnMeteor(mod)
         nil
 
     if fan_offset ~= nil and offset2 ~= nil then
-        local met = SpawnPrefab("antlion_sinkhole_lava")
-	--if math.random(1,10) <= 1 then
-		--met = SpawnPrefab("klaus_fire_meteorp")
-	--else
-		--met = SpawnPrefab("firemeteor")
-	--end
-        met.Transform:SetPosition(x + fan_offset.x, y + fan_offset.y, z + fan_offset.z)
-		met:PushEvent("startcollapse")
+        local met = nil --SpawnPrefab("antlion_sinkhole_lava")
+        --met.Transform:SetPosition(x + fan_offset.x, y + fan_offset.y, z + fan_offset.z)
+		--met:PushEvent("startcollapse")
         if mod == nil then
             mod = 1
         end

@@ -73,6 +73,13 @@ AddComponentPostInit("hounded", function(self)
 		if inst.components.combat ~= nil and player ~= nil then	
 			inst.components.combat:SuggestTarget(player)	
 		end
+		
+		local findwarg = TheSim:FindEntities(pt.x,pt.y,pt.z, 50, {"warg"})
+		local warg = playerlist[math.random(#playerlist)]
+		
+		if not inst:HasTag("warg") and inst.components.follower ~= nil and warg ~= nil then
+			inst.components.follower:SetLeader(warg)
+		end
 	end
 	
     local function SpawnHounded(prefab, pt, spawn_pt)

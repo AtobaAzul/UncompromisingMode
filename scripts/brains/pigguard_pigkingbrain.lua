@@ -7,6 +7,7 @@ require "behaviours/chattynode"
 local BrainCommon = require "brains/braincommon"
 
 local START_FACE_DIST = 6
+local START_FACE_DIST_NIGHT = 12
 local KEEP_FACE_DIST = 8
 local GO_HOME_DIST = 10
 local MAX_WANDER_DIST = 8
@@ -16,6 +17,9 @@ local RUN_AWAY_DIST = 5
 local STOP_RUN_AWAY_DIST = 6
 local KEEP_CHOPPING_DIST = 15
 local SEE_TREE_DIST = 15
+
+local ANNOYANCE_THRESHOLD = 30
+
 local function IsDeciduousTreeMonster(guy)
     return guy.monster and guy.prefab == "deciduoustree"
 end
@@ -114,6 +118,45 @@ end
 local function RescueLeaderAction(inst)
     return BufferedAction(inst, GetLeader(inst), ACTIONS.UNPIN)
 end
+
+local function GetAnnoyedFn(inst, target)
+    inst.annoyance = 0
+    if inst.reset_annoyance_task then
+        inst.reset_annoyance_task:Cancel()
+    end
+
+    if inst.components.combat then
+        inst.components.combat:SuggestTarget(target)
+    end
+end
+
+local function ShouldRunFromPlayerFn(inst)
+    local target = FindClosestPlayerToInst(inst, START_FACE_DIST_NIGHT, true)
+	if target ~= nil and not (inst.components.follower.leader and target ~= inst.components.follower.leader) then
+		if inst.annoyance == nil then
+			inst.annoyance = 0
+		end
+		
+		inst.annoyance = inst.annoyance + 1
+
+		local resetfn = function()
+			inst.annoyance = 0
+		end
+
+		if inst.reset_annoyance_task then
+			inst.reset_annoyance_task:Cancel()
+		end
+
+		inst.reset_annoyance_task = inst:DoTaskInTime(10, resetfn)
+
+		if inst.annoyance >= ANNOYANCE_THRESHOLD then
+			GetAnnoyedFn(inst, target)
+			--return false
+		end
+	end
+    return not target:HasTag("notarget") and inst:IsNear(target, KEEP_FACE_DIST)
+end
+
 function PigGuard_pigkingBrain:OnStart()
     local root = PriorityNode(
     {
@@ -151,7 +194,11 @@ function PigGuard_pigkingBrain:OnStart()
 		IfNode(function() return not GetLeader(self.inst) end, "has leader",
         ChattyNode(self.inst, "PIG_GUARD_TALK_TORCH",
             DoAction(self.inst, AddFuelAction, "Add Fuel", true))),
-		IfNode(function() return TheWorld.state.isdusk and not GetLeader(self.inst) end, "has leader",	
+			
+		IfNode(function() return TheWorld.state.isnight and not GetLeader(self.inst) end, "IsNight",	
+            ChattyNode(self.inst, "PIG_GUARD_PIGKING_TALK_LOOKATWILSON_NIGHT",
+				FaceEntity(self.inst, GetFaceTargetFn, ShouldRunFromPlayerFn))),
+		IfNode(function() return TheWorld.state.isdusk and not GetLeader(self.inst) end, "IsDusk",	
         ChattyNode(self.inst, "PIG_GUARD_PIGKING_TALK_LOOKATWILSON_EVENING",
             FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn))),
 		IfNode(function() return not GetLeader(self.inst) end, "has leader",
