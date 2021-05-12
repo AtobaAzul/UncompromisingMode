@@ -142,8 +142,8 @@ local states = {
 				local target = inst.components.combat.target
                 
 				if target ~= nil then
-					local range = inst.prefab == "little_walrus" and TUNING.LITTLE_WALRUS_ATTACK_DIST or 5
-					local physrange = target ~= nil and target:GetPhysicsRadius(0) + range or range
+					local range = inst.prefab == "little_walrus" and 4 or 5
+					local physrange = target ~= nil and target:GetPhysicsRadius(0) + range or 0
 					local finalrange = physrange * physrange
 					if distsq(target:GetPosition(), inst:GetPosition()) <= finalrange then
 						target:PushEvent("attacked", { attacker = inst, damage = inst.components.combat.defaultdamage / 1.5 })
