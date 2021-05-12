@@ -201,6 +201,43 @@ end
 local function hypercourage_detach(inst,target)
 target.components.sanity.neg_aura_modifiers:RemoveModifier(inst)
 end
+
+
+local function OnTickAmuse(inst, target)
+    if target.components.sanity ~= nil and
+        not target:HasTag("playerghost") then
+		local amount = 0
+		if inst.tier ~= nil then
+			amount = inst.tier
+		end
+        target.components.sanity:DoDelta(amount, nil, "amusementcorn")
+    end
+end
+
+local function OnAmuseAttach(inst, target)
+if target.tempamusetier ~= nil then
+	inst.tier = target.tempamusetier+1
+end
+inst.task = inst:DoPeriodicTask(1, OnTickAmuse, nil, target)
+end
+
+local function OnAmuseDone(inst, data)
+if inst.tier ~= nil then
+    inst.tier = nil
+end
+	inst.task:Cancel()
+end
+
+local function OnAmuseExtended(inst, target)
+if inst.tier ~= nil then
+    inst.tier = nil
+end
+	inst.task:Cancel()
+	if target.tempamusetier ~= nil then
+		inst.tier = target.tempamusetier+1
+	end
+    inst.task = inst:DoPeriodicTask(1, OnTickAmuse, nil, target)
+end
 -------------------------------------------------------------------------
 ----------------------- Prefab building functions -----------------------
 -------------------------------------------------------------------------
@@ -288,4 +325,5 @@ MakeBuff("knockbackimmune", kbimmune_attach, kbimmune_extend, kbimmune_detach, T
 MakeBuff("californiaking", californiaking_attach, californiaking_extend, californiaking_detach, TUNING.BUFF_ATTACK_DURATION*8, 2),
 MakeBuff("largehungerslow", largehungerslow_attach, largehungerslow_extend, largehungerslow_detach, TUNING.BUFF_ATTACK_DURATION*8, 2),
 MakeBuff("stantonslumber", stantonslumber_attach, stantonslumber_attach, stantonslumber_detach, TUNING.BUFF_ATTACK_DURATION, 2,true),
-MakeBuff("hypercourage", hypercourage_attach, hypercourage_extend, hypercourage_detach, 30, 2,true)
+MakeBuff("hypercourage", hypercourage_attach, hypercourage_extend, hypercourage_detach, 30, 2,true),
+MakeBuff("amusementcorn", OnAmuseAttach, OnAmuseExtended, OnAmuseDone, 15, 2,true)

@@ -257,3 +257,5 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.STANTON_SHADOW_TONIC = "Bottoms up!"
 	DESCRIBE.STANTON = "Drinking game, huh?"
 	--StantonStuff
+	
+	DESCRIBE.THEATERCORN = "A runny mess, but it's good for a show."

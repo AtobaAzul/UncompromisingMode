@@ -1,16 +1,3 @@
-local assets =
-{
-    Asset("ANIM", "anim/largefern.zip"),
-}
-
-
-
-local prefabs =
-{
-    "foliage",
-}
-
-
 local function onregenfn(inst)
     inst.AnimState:PlayAnimation("grow")
     inst.AnimState:PushAnimation("idle", true)
@@ -50,7 +37,7 @@ local function onpickedfn(inst, picker)
  
 end
 local function dig_up(inst, worker)
-	inst.components.lootdropper:SpawnLootPrefab("foliage")
+	inst.components.lootdropper:SpawnLootPrefab("greenfoliage")
 	
 	if math.random() > 0.5 then
 		inst.components.lootdropper:SpawnLootPrefab("cutgrass")
@@ -151,7 +138,7 @@ local function grass(name, stage)
         return inst
     end
 
-    return Prefab(name, fn, assets, prefabs)
+    return Prefab(name, fn)
 end
 
 

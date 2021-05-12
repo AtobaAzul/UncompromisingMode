@@ -256,3 +256,5 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.STANTON_SHADOW_TONIC = "Is this mortal food?"
 	DESCRIBE.STANTON = "What souls inhabits you."
 	--StantonStuff
+	
+	DESCRIBE.THEATERCORN = "Food designed for a show!"

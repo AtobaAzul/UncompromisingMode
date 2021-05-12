@@ -326,3 +326,4 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Science no longer comforts me."
 	--StantonStuff
 	
+	DESCRIBE.THEATERCORN = "I wonder if there's anything interesting to watch while I eat this."

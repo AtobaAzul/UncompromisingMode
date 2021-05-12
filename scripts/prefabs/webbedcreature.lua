@@ -492,6 +492,11 @@ local x,y,z = inst.Transform:GetWorldPosition()
 	end
 end
 local function Regen(inst, attacker)
+if not attacker:HasTag("player") then
+	if attacker.components.combat ~= nil and attacker.components.combat.target ~= nil then
+	attacker.components.combat:DropTarget()
+	end
+end
     if not inst.components.health:IsDead() then
 	local widowweb = FindEntity(inst,50,function(guy) return guy:HasTag("widowweb") end)
 	if widowweb ~= nil then

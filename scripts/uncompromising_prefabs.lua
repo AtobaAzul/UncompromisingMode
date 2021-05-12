@@ -223,4 +223,5 @@ return {
 	"drink_with_the_living_dead",
 	"hoodedturfchanger",
 	"deerclops_easyspawners",
+	--"psuedofiredebuff",
 }

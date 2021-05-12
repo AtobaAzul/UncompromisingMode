@@ -256,3 +256,5 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.STANTON_SHADOW_TONIC = "It wouldn't be the weirdest thing I ate..."
 	DESCRIBE.STANTON = "State your business, hoser!"
 	--StantonStuff
+	
+	DESCRIBE.THEATERCORN = "Would be nice to eat it with some entertainment."

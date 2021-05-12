@@ -257,3 +257,5 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "We're feeling much more comfortable."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Everything's getting scary again."
 	--StantonStuff
+	
+	DESCRIBE.THEATERCORN = "We like to watch things fight when we eat it."

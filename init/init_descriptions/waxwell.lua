@@ -263,3 +263,5 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "A comforting effect as well, almost like eggnog."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "I would desire more."
 	--StantonStuff
+	
+	DESCRIBE.THEATERCORN = "Brings back old memories."
