@@ -224,4 +224,5 @@ return {
 	"hoodedturfchanger",
 	"wargwarning",
 	"deerclops_easyspawners",
+	--"psuedofiredebuff",
 }

@@ -256,3 +256,5 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "Such a comforting taste."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Oh well, that's over now."
 	--StantonStuff
+	
+	DESCRIBE.THEATERCORN = "Theater food always improves any experience."

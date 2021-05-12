@@ -256,3 +256,5 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.STANTON_SHADOW_TONIC = "Is spooky drink."
 	DESCRIBE.STANTON = "Creepy skeleton only want drink?"
 	--StantonStuff
+	
+	DESCRIBE.THEATERCORN = "Remember others eating it at show, long ago."

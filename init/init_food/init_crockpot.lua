@@ -581,17 +581,18 @@ AddCookerRecipe("portablecookpot", snotroast)
 local theatercorn =
 {
     name = "theatercorn",
-    test = function(cooker, names, tags) return (names.corn_cooked and names.corn_cooked >= 2) and (names.butter) end,
+    test = function(cooker, names, tags) return ((names.corn_cooked and names.corn_cooked >= 2) or (names.corn and names.corn >= 2) or (names.corn and names.corn_cooked)) and (names.butter) end,
 
     priority = 30,
     weight = 1,
     foodtype = "VEGGIE",
     health = 3,
-    hunger = 62.5,
-	oneat_desc = "Great with something to watch",
-	sanity = 5,
+    hunger = 37.5,
+	oneat_desc = "Great with some amusement.",
+	sanity = 0,
     perishtime = 10*TUNING.PERISH_TWO_DAY,
     cooktime = 1.8,
+	stacksize = 3,
 }
---AddCookerRecipe("cookpot", theatercorn)
---AddCookerRecipe("portablecookpot", theatercorn)
+AddCookerRecipe("cookpot", theatercorn)
+AddCookerRecipe("portablecookpot", theatercorn)

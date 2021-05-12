@@ -266,3 +266,5 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.STANTON_SHADOW_TONIC = "ECK GROSS!"
 	DESCRIBE.STANTON = "Cool skeleton! What does he want?"
 	--StantonStuff
+	
+	DESCRIBE.THEATERCORN = "I would prefer it burnt, or at least I could watch things burn while I eat it."

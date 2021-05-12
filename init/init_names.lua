@@ -207,6 +207,7 @@ UI = GLOBAL.STRINGS.UI
 	STRINGS.SKULLFLASK_EMPTY = "Empty Skull Flask"
 	--Stanton's Stash
 	
+	STRINGS.THEATERCORN = "Theater Corn"
 	
 	-- Blowgun stuff
 	STRINGS.UNCOMPROMISING_BLOWGUN = "Blowpipe" --Lol

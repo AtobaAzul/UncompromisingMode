@@ -252,9 +252,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.CORNCAN = "Where come from? Pigfolk?"
 	DESCRIBE.SKULLCHEST_CHILD = "Box for things, but is weird."
 	
-		--StantonStuff
+	--StantonStuff
 	DESCRIBE.SKULLFLASK = "Funny drink."
 	DESCRIBE.SKULLFLASK_EMPTY = "Empty."
 	DESCRIBE.STANTON_SHADOW_TONIC = "Should drink?"
 	DESCRIBE.STANTON = "You not dead?"
 	--StantonStuff
+	
+	DESCRIBE.THEATERCORN = "Like watch mermfolk fight pigfolk when eat it."
