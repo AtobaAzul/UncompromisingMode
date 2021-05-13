@@ -103,7 +103,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	ANNOUNCE.STANTON_POET4 = { "Go ahead… drink with the living dead." }
 	ANNOUNCE.STANTON_POET5 = { "Drink with the living dead." }
 
-	ANNOUNCE.STANTON_IMPATIENT = {"I'm getting tired of waiting here.","Your inaction irks me."}
+	ANNOUNCE.STANTON_IMPATIENT = {"I'm getting tired of waiting here.","I ain't got all night!"}
 	ANNOUNCE.STANTON_SUPERIMPATIENT = {"I'm done waiting.","That's it! You've incurred my wrath!"}
 	
 	ANNOUNCE.SHADOW_CROWN_CHALLENGE = "DEFEAT THIS CREATURE AND CLAIM YOUR PRIZE"

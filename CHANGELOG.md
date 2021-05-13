@@ -21,6 +21,8 @@
 
 * [x]  Most small monsters drop monster morsels instead of monster meat.
 
+* [x]  [Fight or Flight] Healing items and sanity items now restore over time instead of immediately, effects from different items stack, but not using the same item again. THIS IS A TOGGLEABLE OPTION.
+
 --Misc
 * [x]  [Totally Normal Livingtree root attack](https://imgur.com/8gC0cdv.gif)
 
@@ -40,6 +42,9 @@
 
 * [x]  Werepigs prefer attacking over eating.
 
+* [x]  [Fight or Flight] Special guard pigs watch over pigman's village, they will punish anyone who tries to damage the buildings or wake the king. Perhaps you can recruit some of them by feeding the king some heavy dishes.
+
+
 --Spiders
 
 * [x]  Regular spiders now have a leap attack, but can be interrupted if you strike them mid-air. (Try it it's surprisingly fun.)
@@ -49,6 +54,24 @@
 --Frogs
 
 * [x]  [Fear the Dark!] Frogs eat food nearby. Better not drop any berries!
+
+--Gobblers [TOGGLEABLE]
+
+* [x] [Fight or Flight] Gobblers now spawn in as "starving gobblers" they have more health, run to eat berries, and won't go back into bushes at dusk or night. 
+
+* [x] [Fight or Flight] Starving gobblers will attempt to steal any berries in player's inventories nearby, and will flee when harmed.
+
+* [x] [Fight or Flight] After eating 5 berries, the gobbler will become full and return to relatively normal behavior.
+
+--Mactusk
+
+* [x] [Fight or Flight] Performs a knockback attack after being hit a certain number of times.
+
+* [x] [Fight or Flight] Actively places and throws beartraps.
+
+--Merm
+
+* [x] [Fight or Flight] Performs a triple hit counter attack, similar to the wrestler pigs.
 
 --Catcoons
 
@@ -70,9 +93,13 @@
 
 * [x] [STALKING STUFFERS] Added two new Hounds to hound waves: Lightning Hounds in Spring, and Magma Hounds in summer
 
+* [x]  [Fight or Flight] Added two new hounds to hound waves: Glacial Hounds to Winter and Spore Hounds to Autumn
+
 * [x]  Fire and ice hounds have fire and ice attacks on their bite.
 
 * [x]  Mutated Hounds attack faster and move faster.
+
+* [x]  [Fight or Flight] Vargs will spawn in later hound waves.
 
 --Bats
 
@@ -140,15 +167,13 @@
 
 --Antlion
 
-* [x] [Fear the Dark!] Antlion's craters can cause some fires to erupt from the earth.
-
 * [x] [Fear the Dark!] Antlion sinkholes will now cause ruptures in boats.
 
 --Deerclops
 
-* [x]  Deerclops "enrages" at half health.
+* [x]  Deerclops "enrages" at half health. [Fight or Flight] Unique to the freezing laser mutation.
 
-* [x]  [STALKING STUFFERS] Added a Blue variant of the Deerclops to replace the default half health Enraged > Yule Deerclops
+* [x]  [STALKING STUFFERS] Added a Blue variant of the Deerclops to replace the default half health Enraged > Yule Deerclops [Fight or Flight] (This is now the freezing laser mutation)
 
 * [x]  [STALKING STUFFERS] Blue Deerclops fires Blue icy lasers that freeze the player and reduce their temperature
 
@@ -156,15 +181,33 @@
 
 * [x] [THE HOODED FOREST] Cursed Antler Vetcurse item.
 
+* [x]  [Fight or Flight] Added "Deerclops Mutations": there are now three different versions of deerclops. One Based on strength, the freezing laser, and an icy aura.
+
 --Dragonfly
 
 * [x]  Raidfly's Lavae will now drop explosive slime on death, destroying structures and settings things on fire.
 
 * [x]  [FEAR THE DARK!] Raidfly leaves her area if a boss is nearby, and will also leave in summer to fly overhead, searching for bases to burn as the "Wilting Dragonfly".
 
+--Wilting Dragonfly
+
+* [x]  [Fight or Flight] Can perform a fiery charge attack.
+
 --G/Moose
 
 * [x] Moose range increased, now does aoe damage to non-mossling units.
+
+* [x]  [Fight or Flight] New attacks: can perform a leap attack and groundpound at the player, can summon mosslings midfight to help her.
+
+--Mother G/Moose
+
+* [x]  [Fight or Flight] New attacks: performs all the new attacks of a regular g/moose, AND can perform tornado attacks. Also has health buffed to 8000 over regular m/geese.
+
+--Bearger
+
+* [x]  [Fight or Flight] Performs new attacks, including throwing boulders and opening the ground up beneath the player.
+
+* [x]  [Fight or Flight] Sinkholes from bearger repair VERY fast.
 
 --Spiderqueen
 
@@ -175,6 +218,8 @@
 * [x] Full rework with stunning mechanics and new attacks.
 
 * [x] Ruins Pillars can now be destroyed by the Ancient Guardian, though they do stun him.
+
+* [x]  [Fight or Flight] Drops the Skull Chest blueprint.
 
 --Klaus
 
@@ -200,13 +245,17 @@
 
 --Armor
 
-* [x] [STALKING STUFFERS] Night Armor now prevents hit s tun when worn.
-
 * [x]  Marble armor ignores our knockback mechanic.
 
 * [x]  Thulecite Armor has knockback resistance.
 
-* [x]  [Fear the Dark!] Theulicite suit and dapper vest reduces insanity auras from monsters by 40%.
+* [x]  [Fear the Dark!] Theulicite suit reduces insanity auras from monsters by 40%.
+
+* [x]  [Fight or Flight] Dapper Vest reduces insanity auras from monsters by 60%.
+
+* [x] [STALKING STUFFERS] The Beekeeper Hat prevents player from taking hayfever "damage" from bees, mosquitos, etc.
+
+--Clothing
 
 * [x]  [THE HOODED FOREST] The Breezy Vest now has 6 inventory slots, along with having 120 insulation (from 60.) Also has 30% Wetness resistance (from 20%.)
 
@@ -214,15 +263,11 @@
 
 * [x]  [THE HOODED FOREST] The Summer Frest now has 4 backpack slots.
 
---Clothing
-
 * [x] [STALKING STUFFERS] The Top Hat now reduces sanity loss from certain sanity draining equipment.
-
-* [x] [STALKING STUFFERS] The Beekeeper Hat prevents player from taking hayfever "damage" from bees, mosquitos, etc.
 
 * [x]  Weather protective clothing will become less effective at lower percents (75%-50%-25%) (can be toggled in options).
 
-* [x]  Sewing Kits repair 50% less, but have DOUBLE THE USES. (Makes it easier to keep clothing in acceptable durability levels).
+* [x]  Sewing Kits repair 50% less, but have DOUBLE THE USES. (Makes it easier to keep clothing in acceptable durability levels, only available if the clothing degradation option is enabled).
 
 * [x] Fashion and Desert Goggles are now a UNIVERSAL CRAFTING RECIPE! No more rng oasis fishing. (You can craft at alch instead).
 
@@ -231,6 +276,8 @@
 * [x] [FEAR THE DARK!] Eyebrella has less summer insulation to promote use of other summer insulation items.
 
 * [x] [FEAR THE DARK!] Cookie cutter cap now reflects 75% of the attackers base attack back at them, along with 5 damage spikes, similar to the Bramble Husk.
+
+* [x] [Combat Update] Seed-pack-it requires wax paper, but also insulates seeds like a fridge.
 
 --Amulets
 
@@ -353,6 +400,7 @@ NERFS:
 
 * [x] [THE HOODED FOREST] Maxwell can now summon his classic Shadows (with infinite duration and health regen) by reading the Codex Umbra.
 
+* [x]  [Fight or Flight] Takes maximum health damage when hurt, use tents or booster shots to heal.
 
 --Wigfrid
 
@@ -362,11 +410,15 @@ NERFS:
 
 * [x]  Only winona can use her generators.
 
+* [x]  [Fight or Flight] Her hunger now influences a lot more than just her crafting speed, now when she's full she will also pick much faster and chop/mine faster using less durability.
+
+* [x]  [Fight or Flight] Her hunger being low also influences her performance
+
 --Wortox
 
 * [x] [THE HOODED FOREST] Bees, Killer Bees, and Butterflies no longer drop souls
 
-* [x] [GOODIES GALORE!] Wortox health changed to 120 from 200 (Poor wortox, let's hope we can get soul fragments in soon).
+* [x]  [Fight or Flight] Wortox health changed to 150 from 200.
 
 --Wormwood
 
@@ -384,17 +436,12 @@ NERFS:
 
 * [x] [FEAR THE DARK!] Wormwood now takes an additional -5 sanity from digging up plants, no more infinite sanity gain from sapling digging/planting, its not equal loss and gain
 
-* [x] [FEAR THE DARK!] Wormwood's compost wrap now heals him by 3 health, and an additional 48 health over 2 minutes.
-
-
 --Warly
 
 * [x] [HOODED FOREST] Warly now gains +20% Hunger/Health/Sanity from eating dishes, however his penalties for repeat dishes are more severe, and his food memory is increased to 3 days. This more closely mirrors his unique singleplayer perk.
 
 
 --Walter and Woby
-
-* [x] [FEAR THE DARK!] Woby can now die, though she regenerates health like chester and can respawn like chester. She also can hold aggro of targets like chester.
 
 * [x] [FEAR THE DARK!] Walter now has firecracker rounds made out of nitre, they can do heavy damage if the target is sitting still, they also hitstun some.
 
@@ -418,8 +465,6 @@ NERFS:
 * [x]  [FEAR THE DARK!] Bird takes less damage from monster jerky than cooked monster meat.
 
 * [x]  [FEAR THE DARK!] Bird will regenerate a whole cooked monstermeat or two monster jerky every day.
-
-* [x]  Cooked Bird egg loop removed, this means you can no longer refresh eggs by feeding the bird cooked eggs to get fresh ones.
 
 --Fishing
 
@@ -459,13 +504,13 @@ NERFS:
 
 --Farmplot-Based Crockpot Dish Buff section--
 
-* [x]  Farmplot based crockpot dishes have mostly been buffed across the board to incentivize non-warly/wormwood/wicker players to use farms!
+* [x]  Farmplot based crockpot dishes have mostly been buffed across the board to incentivize non-warly/wormwood/wicker players to use farms! (Note that most of these balance changes were pre-RWYS)
 
 * [x]  They have been buffed on account of the rarity of their ingredients, the amount of farmplot foods used, the value of their ingredients raw, and the general complexity of the dish.
 
 --Rare
 
-* [x]  Creamy Potato Puree 37.5 Hunger -> 75 Hunger! (Seems extreme, but dish requires garlic, which is a rare product, and two potatos.)
+* [x]  [Fight or Flight] Creamy Potato Puree 37.5 Hunger -> 100 Hunger 33 Sanity -> 15 Sanity
 
 * [x]  Salsa fresca 33 Sanity -> 50 Sanity!
 
@@ -475,15 +520,15 @@ NERFS:
 
 * [x]  Pumpkin Cookies 37.5 Hunger -> 40 Hunger and 15 Sanity -> 33 Sanity and 0 Health -> 15 Health!
 
-* [x]  Stuffed Eggplant 37.5 Hunger -> 45 Hunger and 3 Health -> 15 Health!
+* [x]  [Fight or Flight] Stuffed Eggplant 37.5 Hunger -> 50 Hunger and 3 Health -> 15 Health!
 
 * [x]  Asparagus Soup 18.8 Hunger -> 25 Hunger 20 Health -> 30 Health and 5 Sanity -> 20 Sanity!
 
 --Common
 
-* [x] Fish Tacos now restores 37.5 Hunger -> 62.5 Hunger 20 Health -> 15 Health!
+* [x]  [Fight or Flight] Fish Tacos now restores 37.5 Hunger -> 75 Hunger 20 Health -> 15 Health!
 
-* [x] Vegetable Stinger now restores 3 Health -> 10 Health! (Not buffed as heavily because of hayfever usage.)
+* [x] Vegetable Stinger now restores 3 Health -> 10 Health! (Not buffed as heavily because of hayfever usage, and prevalence as a sanity item.)
 
 * [x] Butterfly Muffins now restore 20 Health -> 30 Health, and 5 Sanity -> 10 sanity!
 
@@ -505,7 +550,7 @@ NERFS:
 
 * [x]  Monster morsels are added, they are typically not a good idea to use in the crockpot, but they do have some uses. Each form has a monster value 0.5 greater than monster meat.
 
-* [x]  As one final note, most typical crockpot recipes are actually hardly changed by the monster meat changes, but recipes like meatballs and pierogi that use only one meat are the most effected.
+* [x]  As one final note, most typical crockpot recipes are actually hardly changed by the monster meat changes, but recipes like meatballs and pierogi that use only one meat are the most affected.
 
 * [x]  If you are confused by any recipes, Anomen put together some example recipes with monster meat here https://uncompromising-mode.fandom.com/wiki/Crock_Pot (Not that not every page on the wiki is up to date, the CHANGELOG.md is the most up to date compendium of info).
 
@@ -526,7 +571,7 @@ NERFS:
 
 * [x]  Tweaked sanity ranges for shadow creature appearance.
 
-* [x]  More shadows spawns on insane players.
+* [x]  More shadows spawns on insane players, but still enough for you to fight your way out of insanity, just don't go TOO insane.
 
 --Sleeping
 
@@ -564,6 +609,7 @@ NERFS:
 * [x] [GOODIES GALORE!] When disguised, Dread Eye's will now spawn mini shadow eyes near the player, which sap sanity when sane, and health when insane. They despawn after a set time.
 
 * [x] Creeping Fear will not spawn if you or a companion is engaged with a boss.
+
 
 --[We are the Rats!]--
  
@@ -603,8 +649,6 @@ NERFS:
 
 * [x] Certain new dishes provide long periods of hayfever immunity.
 
-* [x] Mandrake soup prevents hayfever for a whole season.
-
 --Pollen Mites
 
 * [x] [FEAR THE DARK!] New mob: Pollen mites, nasty buggers that appear during spring, they are very similar to gnats in that they will infest different targets. If they infest a mob, it will become super hostile to players. If they infest a player, it will make the player sneeze faster and take health. They can be killed through melee combat, but a Bug Zapper is the recommended method.
@@ -636,7 +680,11 @@ NERFS:
 
 * [x] Standing near a fire, walls, many trees, using a torch, staff lights, or either variation of goggles will protect against snowstorms.
 
-* [x] [GOODIES GALORE!] New Item: Salt Shaker 3000, Salt spitting backpack that prevents snowstorm effects, destroys snow and snow based enemies, provides a small amount of insulation, and increases speed in winter, as long as it is fueled.
+* [x] [GOODIES GALORE!] New Item: Salt Shaker 3000, Salt spitting backpack that prevents snowstorm effects, destroys snow and snow based enemies, as long as it is fueled.
+
+* [x] [Fight or Flight] The saltpack also now places salt crystals on the ground while it's in use, these salt crystals won't go away for a long time and will prevent any snowpile buildup near it.
+
+* [x] [Fight or Flight] Salt pack refueled with salt and not wood.
 
 --Snowpiles and Abominamoles
 
@@ -661,7 +709,7 @@ NERFS:
 
 * [x] Zaspberries: berry drops from depth eels that give the player the chaud-froid effect for about 30 seconds and make the player glow.
 
-* [x] [FEAR THE DARK!] New Warly exclusive dish: Zaspberry Parfait, electricutes entities nearby when player is attacked with a violent shockstun, delaying their next attack. Crafted with a zaspberry, dairy, and sweetener.
+* [x] [FEAR THE DARK!] New dish: Zaspberry Parfait, electricutes entities nearby when player is attacked with a violent shockstun, delaying their next attack. Crafted with a zaspberry, dairy, and sweetener.
 
 
 --[Depths Vipers and Gloomberries--
@@ -725,6 +773,7 @@ NERFS:
 
 * [x] Raindrops will now splash into green puddles, and will play a sizzle sound effect, indicating when Acid Rain is active.
 
+* [x]  [Fight or Flight] Acid rain is currently inactive, but will make a return with the Refresh Update.
 
 --Toadlings
 
@@ -768,6 +817,8 @@ NERFS:
 * [x] [FEAR THE DARK!] New mob: Stumplings, small piney stumps that have been awakened by a treeguard or an RNE.
 
 * [x] [FEAR THE DARK!] New mob: Wilson? (swilson), appears because of RNEs, this shadowy doppleganger of wilson wants nothing more than your head, he'll disappear during day.
+
+* [x] [Fight or Flight] Drink with the living dead.
 
 --Rewards for particular RNEs
 
@@ -819,6 +870,8 @@ Opal's will increase the effects of all other gems slotted
 
 * [x] [HOODED FOREST] Hooded forest is covered by a canopy which halts smoldering, even in summer.
 
+* [x] [Fight or Flight] Turf art redux by Wacky.
+
 --[Giant Redwoods]--
 
 * [x] [HOODED FOREST] Added giant redwoods, these huge trees can be chopped to make items drop from the canopy.
@@ -827,11 +880,17 @@ Opal's will increase the effects of all other gems slotted
 
 * [x] [HOODED FOREST] Can be infested by aphids.
 
+* [x] [Fight or Flight] Art redone by Variant.
+
 --[Large Ferns]--
 
 * [x] [HOODED FOREST] Added large ferns, they are basically harvestable ferns, they give 2 ferns and a 20% chance for either a grass or twig.
 
 * [x] [HOODED FOREST] Large Ferns are not relocatable, and are sometimes used as hiding spots for aphids.
+
+* [x] [Fight or Flight] Art redone by Wacky.
+
+* [x] [Fight or Flight] Gives hooded foliage instead of the usual kind.
 
 --[Boomberries]--
 
@@ -844,6 +903,10 @@ Opal's will increase the effects of all other gems slotted
 * [x] [HOODED FOREST] The giant berries can be eaten for a hefty 20 hunger and 3 health, but cause 10 wetness, which can be a good or bad thing.
 
 * [x] [HOODED FOREST] Digging up a root after the plant has exploded or has been harvested destroys the root.
+
+* [x] [Fight or Flight] Art Redux by Variant
+
+* [x] [Fight or Flight] Freezing in winter is visual now as well, mine them for ice, they will not explode when frozen.
 
 --[New (or old) Hooded Forest Crockpot Dishes]--
 
@@ -866,6 +929,8 @@ Opal's will increase the effects of all other gems slotted
 * [x] [HOODED FOREST] Infested redwood trees become spawners for more aphids, but can be cured if you trigger the tree's defence mechanisms by chopping it.
 
 * [x] [HOODED FOREST] Some redwood trees in the hooded forest spawn in infested.
+
+* [x] [Fight or Flight] Art redux by variant
 
 --[Snapdragons, snapbuddies, and whisper pods]--
 
@@ -893,6 +958,8 @@ Opal's will increase the effects of all other gems slotted
 
 * [x] [HOODED FOREST] Pitcher plants cannot be destroyed, fruit bats may pester any bee box system the player sets up.
 
+* [x] [Fight or Flight] Art redux by Cephlopod
+
 --[Hooded Widow and her Cocoons]--
 
 * [x] [STALKING STUFFERS] Added a brand new music track for the Hooded Widow boss fight!
@@ -909,12 +976,53 @@ Opal's will increase the effects of all other gems slotted
 
 * [x] [HOODED FOREST] The loot pool for the mobs is quite large, the sizes of the mobs tend to match the sizes of the cocoons as well.
 
+* [x] [Fight or Flight] Complete overhaul to the arena's elements visually by Wacky.
 
+* [x] [Fight or Flight] Fight mechanical overhaul by Axe.
 
+* [x]  [Fight or Flight] Addition of naming system to cocoons, memorization of sizes and names will help the player better understand what may be in a specific cocoon, and prioritize opening the valuable ones such as mactusk or volt goats.
+
+* [x]  [Fight or Flight] Widow's claw has 9 uses, but usage scales up based the size of cocoons opened. Small uses 1, medium uses 2, large uses 3.
+
+--[Rusted Beartraps]--
+
+* [x]  [Fight or Flight] Old beartraps have started to appear in the hooded forest, could the mactusk be getting smarter?
+
+--[Woodpeckers]--
+
+* [x]  [Fight or Flight] Woodpeckers now inhabit the hooded forest, they behave like any other bird, but drop both jet and crimson feathers.
 
 --[skldfJDAvva]--
 
 * [x] [HOODED FOREST] Added :Waldo:
+
+--[In the ruins, something stirs.]--
+
+* [x] [Fight or Flight] Added trepidations, these massive shadows prey on any who wanders the ruins with less than 1/2 sanity, otherwise they'll quietly watch.
+
+* [x] [Fight or Flight] Added clockwork pawns, these crablike clockworks are very akin to landmines, and will either trap the player or explode based on which type it is. Undamaged ones can be commonly found in the wilds, damaged ones can be found in the labrynth.
+
+* [x] [Fight or Flight] Added Mechanical Amalgams, these 3 clockwork combos will dig out of the ground after the player is trapped, or may waken if the player mistakes it for a clockwork pile.
+
+--[New Dishes]--
+
+* [x] [Fight or Flight] Added Snot roast, the most filling dish in the game! This dish can be crafted with a koalefant trunk, an onion, a carrot, and a potato. Fills for 150 hunger and halves hunger drain for 4 days. This one's for you Warly.
+
+* [x] [Fight or Flight] Added Theater corn, a dish made with 2 corn items and a butter, gives 3 bags. Gives a scaling sanity regen buff based on the amount of things fighting nearby when you eat it, bosses count for more.
+
+--[Skull Chest]--
+
+* [x] [Fight or Flight] Skull chest added, blueprint dropped from ancient guardian, requires 2 fossils, nightmare fuel, and boards.
+
+* [x] [Fight or Flight] Skull chest shares an inventory with all other skull chests in the same shard, such as caves or forest.
+
+* [x] [Fight or Flight] Suggest using skull chests in conjunction with other players to transfer an absurd amount of items.
+
+--[Lazy Chester]--
+
+* [x] [Stalking Stuffers] New morph triggered by placing 9 desert stones (townportalismans) inside chester on a full moon.
+
+* [x] [Stalking Stuffers] Lazy chester will teleport items into his inventory automatically, as long as he has 1 of the items already in him, good for log harvesting, rock harvesting, grass gekko pens, etc.
 
 --[Add any future changes past this line, I'll sort them when we're about to ship an update. -Axe]--
 

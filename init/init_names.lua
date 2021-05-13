@@ -202,7 +202,7 @@ UI = GLOBAL.STRINGS.UI
 	
 	--Stanton's Stash
 	STRINGS.STANTON_SHADOW_TONIC = "Shadow Tonic"
-	STRINGS.STANTON = "Stanton Cree"
+	STRINGS.STANTON = "Skelton Cree"
 	STRINGS.SKULLFLASK = "Skull Flask"
 	STRINGS.SKULLFLASK_EMPTY = "Empty Skull Flask"
 	--Stanton's Stash
