@@ -414,6 +414,10 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/turf_hoodedmoss.xml"),
 	Asset("IMAGE", "images/inventoryimages/turf_ancienthoodedturf.tex"),
 	Asset("ATLAS", "images/inventoryimages/turf_ancienthoodedturf.xml"),
+	
+	Asset("IMAGE", "images/dragonflycontainerborder.tex"),
+	Asset("ATLAS", "images/dragonflycontainerborder.xml"),
+	
 	Asset("ANIM", "anim/haul_pigman.zip"),
 	Asset("ANIM", "anim/wackycocoons.zip"),
 	Asset("ANIM", "anim/cocoondecor.zip"),
