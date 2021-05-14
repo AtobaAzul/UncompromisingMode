@@ -762,7 +762,7 @@ local states=
 				end
 			
 				inst.Physics:Stop()
-				inst.AnimState:PlayAnimation("charge_pre")
+				inst.AnimState:PlayAnimation("dash_pre")
 				inst.numSpins = 0
 			end,
 
@@ -789,7 +789,7 @@ local states=
 				end
 			
 				inst.Physics:Stop()
-				inst.AnimState:PlayAnimation("charge_pre")
+				inst.AnimState:PlayAnimation("dash_pre")
 			end,
 
 			events =

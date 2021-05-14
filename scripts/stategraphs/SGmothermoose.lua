@@ -422,9 +422,10 @@ local states =
 
 		onenter = function(inst)
 			inst.Physics:Stop()
-			inst.AnimState:PlayAnimation("taunt_pre")
-			inst.AnimState:PushAnimation("taunt")
-			inst.AnimState:PushAnimation("taunt_pst", false)
+			inst.AnimState:PlayAnimation("takeoff_pre_diagonal")
+			inst.AnimState:PushAnimation("tornadoattack",false)
+			inst.AnimState:PushAnimation("tornadoattack",false)
+			inst.AnimState:PushAnimation("tornadoattack",false)
 			inst.TornadoAttack = false
 			
 			if math.random() > .5 then

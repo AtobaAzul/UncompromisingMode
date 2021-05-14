@@ -417,6 +417,9 @@ Assets = {
 	
 	Asset("IMAGE", "images/dragonflycontainerborder.tex"),
 	Asset("ATLAS", "images/dragonflycontainerborder.xml"),
+	Asset("ANIM", "anim/uncompromising_dragonflyactions.zip"),
+	Asset("ANIM", "anim/uncompromising_goosemooseactions.zip"),
+	
 	
 	Asset("ANIM", "anim/haul_pigman.zip"),
 	Asset("ANIM", "anim/wackycocoons.zip"),
