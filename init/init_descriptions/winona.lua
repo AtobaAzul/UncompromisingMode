@@ -251,6 +251,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.CORNCAN = "An ear of corn waiting for conversation."
 	DESCRIBE.SKULLCHEST_CHILD = "With proper coordination, I could get anything from anywhere."
 	
+	DESCRIBE.SLOBBERLOBBER = "I've hocked a few in my time, really grossed Charlie out."
+	DESCRIBE.GORE_HORN_HAT = "Demolision crew comin' in!"
+	DESCRIBE.BEARGERCLAW = "I prefer man made tools, to be honest."
+	DESCRIBE.FEATHER_FROCK = "Still too fancy for my liking."
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "Keeps me at ease."
 	DESCRIBE.SKULLFLASK_EMPTY = "Nothin' left."

@@ -255,6 +255,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.CORNCAN = "Preserved corn."
 	DESCRIBE.SKULLCHEST_CHILD = "The items inside fade into blackness."
 	
+	DESCRIBE.SLOBBERLOBBER = " Nature is disgusting."
+	DESCRIBE.GORE_HORN_HAT = "Natures knife."
+	DESCRIBE.BEARGERCLAW = "The hand of the Meles meles, designed for digging."
+	DESCRIBE.FEATHER_FROCK = "It's not an effective piece of clothing."
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "It keeps me alert, but without care."
 	DESCRIBE.SKULLFLASK_EMPTY = "I can see the liquid slowly returning."

@@ -255,6 +255,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.CORNCAN = "Corn is presumably contained inside."
 	DESCRIBE.SKULLCHEST_CHILD = "It keeps items inside the local pocket dimension."
 	
+	DESCRIBE.SLOBBERLOBBER = "It's gross power is back in my hands."
+	DESCRIBE.GORE_HORN_HAT = "I feel slightly bad wearing this."
+	DESCRIBE.BEARGERCLAW = "I'll gladly get someone elses hands dirty."
+	DESCRIBE.FEATHER_FROCK = "Feather grease will get all over my suit."
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "His mixture is actually quite impressive."
 	DESCRIBE.SKULLFLASK_EMPTY = "The flask appears to be enchanted as well, brilliant."

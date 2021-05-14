@@ -250,6 +250,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.CORNCAN = "Corn is trapped inside. Will save with bare hands!"
 	DESCRIBE.SKULLCHEST_CHILD = "Wolfgang don't like chest that look like skull."
 	
+	DESCRIBE.SLOBBERLOBBER = "Wolfgang mean no disrespect."
+	DESCRIBE.GORE_HORN_HAT = "Wolfgang head is even thicker now!"
+	DESCRIBE.BEARGERCLAW = "Now Wolfgang is like the mighty bear!"
+	DESCRIBE.FEATHER_FROCK = "Weighs nothing at all."
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "Drink makes mind mighty!"
 	DESCRIBE.SKULLFLASK_EMPTY = "Drink come back later."

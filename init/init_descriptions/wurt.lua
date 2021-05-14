@@ -252,6 +252,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.CORNCAN = "Where come from? Pigfolk?"
 	DESCRIBE.SKULLCHEST_CHILD = "Box for things, but is weird."
 	
+	DESCRIBE.SLOBBERLOBBER = "Hot blegh."
+	DESCRIBE.GORE_HORN_HAT = "Glurp, jealous..."
+	DESCRIBE.BEARGERCLAW = "Bear claw, badger paw!"
+	DESCRIBE.FEATHER_FROCK = "Feathers gross, scales much better!"
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "Funny drink."
 	DESCRIBE.SKULLFLASK_EMPTY = "Empty."
