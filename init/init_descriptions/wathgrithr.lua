@@ -249,6 +249,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.CORNCAN = "Food that can survive a voyage!"
 	DESCRIBE.SKULLCHEST_CHILD = "The gods keep my spoils safe."
 	
+	DESCRIBE.SLOBBERLOBBER = "I spite on mine enemies."
+	DESCRIBE.GORE_HORN_HAT = "Brute force beats all!"
+	DESCRIBE.BEARGERCLAW = "The mighty beasts power is now mine."
+	DESCRIBE.FEATHER_FROCK = "A foul feathered frock!"
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "I drink for before or during battle!"
 	DESCRIBE.SKULLFLASK_EMPTY = "An empty flask, it will be refilled!"

@@ -189,9 +189,13 @@
 
 * [x]  [FEAR THE DARK!] Raidfly leaves her area if a boss is nearby, and will also leave in summer to fly overhead, searching for bases to burn as the "Wilting Dragonfly".
 
+* [x]  [Fight or Flight] (VETERANS CURSE) - Drops the "Slobber Lobber", a Veterans Curse exclusive weapon that lets you launch fire spit projectiles that leave a lava pool on the ground.
+
 --Wilting Dragonfly
 
 * [x]  [Fight or Flight] Can perform a fiery charge attack.
+
+* [x]  [Fight or Flight] (VETERANS CURSE) - Drops the "Slobber Lobber", a Veterans Curse exclusive weapon that lets you launch fire spit projectiles that leave a lava pool on the ground.
 
 --G/Moose
 
@@ -203,11 +207,15 @@
 
 * [x]  [Fight or Flight] New attacks: performs all the new attacks of a regular g/moose, AND can perform tornado attacks. Also has health buffed to 8000 over regular m/geese.
 
+* [x]  [Fight or Flight] (VETERANS CURSE) - Drops the "Feather Frock", a Veterans Curse exclusive body item that, when slotted with feathers, can be activated (consuming 1 feather) for a movement speed boost, and various effects based on the feather inside.
+
 --Bearger
 
 * [x]  [Fight or Flight] Performs new attacks, including throwing boulders and opening the ground up beneath the player.
 
 * [x]  [Fight or Flight] Sinkholes from bearger repair VERY fast.
+
+* [x]  [Fight or Flight] (VETERANS CURSE) - Drops the "Bearger Claw", a Veterans Curse exclusive weapon that lets you launch boulders at enemies.
 
 --Spiderqueen
 
@@ -220,6 +228,8 @@
 * [x] Ruins Pillars can now be destroyed by the Ancient Guardian, though they do stun him.
 
 * [x]  [Fight or Flight] Drops the Skull Chest blueprint.
+
+* [x]  [Fight or Flight] (VETERANS CURSE) - Drops the "Gore Horn", a Veterans Curse exclusive hat that lets you charge like a rook.
 
 --Klaus
 

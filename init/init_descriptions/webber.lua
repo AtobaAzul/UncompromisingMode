@@ -249,6 +249,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.CORNCAN = "We left our can opener at home."
 	DESCRIBE.SKULLCHEST_CHILD = "We can give things to others far away."
 	
+	DESCRIBE.SLOBBERLOBBER = "Spitting is rather rude."
+	DESCRIBE.GORE_HORN_HAT = "Don't touch the pointy end."
+	DESCRIBE.BEARGERCLAW = "Pawsome."
+	DESCRIBE.FEATHER_FROCK = "Feathers and fur are a bad combination."
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "This drink calms our mind."
 	DESCRIBE.SKULLFLASK_EMPTY = "I wonder where we can get more."

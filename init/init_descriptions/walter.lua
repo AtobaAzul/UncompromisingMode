@@ -248,6 +248,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.CORNCAN = "Oh boy! Corn!"
 	DESCRIBE.SKULLCHEST_CHILD = "Wortox once popped out of this thing. Almost gave me a heart attack!"
 	
+	DESCRIBE.SLOBBERLOBBER = "No spitting in camp!"
+	DESCRIBE.GORE_HORN_HAT = "Think like a rhino, smash into things like a rhino!"
+	DESCRIBE.BEARGERCLAW = "Natures design."
+	DESCRIBE.FEATHER_FROCK = "I've always wondered how it would feel to be a bird!"
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "That's a spooky cup."
 	DESCRIBE.SKULLFLASK_EMPTY = "It's empty, for now."

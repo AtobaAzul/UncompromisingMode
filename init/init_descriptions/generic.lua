@@ -316,6 +316,13 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Someone left this here."
 	DESCRIBE.CORNCAN = "Where did this can come from?"
 	DESCRIBE.SKULLCHEST_CHILD = "If only I could fit inside."
+	
+	DESCRIBE.SLOBBERLOBBER = "A portable loogie launcher."
+	DESCRIBE.GORE_HORN_HAT = "Now my head is truly the greatest weapon!"
+	DESCRIBE.BEARGERCLAW = "Sticks and stones can break some bones."
+	DESCRIBE.FEATHER_FROCK = "All the comfort of a bed, in wearable form!"
+	
+	DESCRIBE.HEAT_SCALES_ARMOR = "If only I could fit inside."
 
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "The science within keeps me calm."

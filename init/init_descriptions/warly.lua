@@ -247,6 +247,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP = "I'll keep my distance."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "I'll keep my distance."
 	DESCRIBE.SKULLCHEST_CHILD = "Now I can get fresh produce from far away!"
+	
+	DESCRIBE.SLOBBERLOBBER = "Not in the food!."
+	DESCRIBE.GORE_HORN_HAT = "Shiskabob time!"
+	DESCRIBE.BEARGERCLAW = "Atleast MY hands will be clean."
+	DESCRIBE.FEATHER_FROCK = "De-feathering birds isn't really necissary when preparing poultry."
 
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "It was nice of him to give me his recipe."

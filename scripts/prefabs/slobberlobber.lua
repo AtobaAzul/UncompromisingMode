@@ -107,7 +107,7 @@ local function createlight(staff, target, pos)
 	end
 	
 	if staff.task == nil then
-		staff.task = staff:DoPeriodicTask(0.5, fuelme)
+		staff.task = staff:DoPeriodicTask(0.75, fuelme)
 	end
 end
 
@@ -147,7 +147,7 @@ local function onequip(inst, owner)
 		owner.AnimState:Hide("ARM_normal")
 	end
 	if inst.task == nil then
-		inst.task = inst:DoPeriodicTask(0.5, fuelme)
+		inst.task = inst:DoPeriodicTask(0.75, fuelme)
 	end
 end
 
@@ -156,7 +156,7 @@ local function onunequip(inst, owner)
     owner.AnimState:Show("ARM_normal")
 	
 	if inst.task == nil then
-		inst.task = inst:DoPeriodicTask(0.5, fuelme)
+		inst.task = inst:DoPeriodicTask(0.75, fuelme)
 	end
 end
 
@@ -223,7 +223,7 @@ local function staff_fn()
 	inst.components.fueled.accepting = false
 	
 	if inst.task == nil then
-		inst.task = inst:DoPeriodicTask(0.5, fuelme)
+		inst.task = inst:DoPeriodicTask(0.75, fuelme)
 	end
 
     MakeHauntableLaunch(inst)

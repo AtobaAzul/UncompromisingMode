@@ -249,6 +249,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.CORNCAN = "It seems like it's corn."
 	DESCRIBE.SKULLCHEST_CHILD = "I'm able to reach another plane, but I still cannot reach Abigail..."
 	
+	DESCRIBE.SLOBBERLOBBER = "Nature is disgusting."
+	DESCRIBE.GORE_HORN_HAT = "Natures knife."
+	DESCRIBE.BEARGERCLAW = "I've got dirt in my eye. For real this time."
+	DESCRIBE.FEATHER_FROCK = "Ew! Gross! I don't want to wear it!"
+
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "Keeps my mind calm, for a moment."
 	DESCRIBE.SKULLFLASK_EMPTY = "I doubt it will return."

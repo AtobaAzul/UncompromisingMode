@@ -250,6 +250,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.CORNCAN = "I'll get at 'cha with lucy."
 	DESCRIBE.SKULLCHEST_CHILD = "Who knew wood and magic made such a great pair!"
 	
+	DESCRIBE.SLOBBERLOBBER = "I'll never lose another spitting contest!"
+	DESCRIBE.GORE_HORN_HAT = "Ain't got nothing on a rampaging moose."
+	DESCRIBE.BEARGERCLAW = "Makes a nice trophy, eh?"
+	DESCRIBE.FEATHER_FROCK = "Disgusting."
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "Keeps your mind at ease."
 	DESCRIBE.SKULLFLASK_EMPTY = "Well, it's gone now."

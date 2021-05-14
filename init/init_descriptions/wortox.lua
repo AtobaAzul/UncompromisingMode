@@ -250,6 +250,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.CORNCAN = "Go to corny jail."
 	DESCRIBE.SKULLCHEST_CHILD = "Now this is an item that I find amusing."
 	
+	DESCRIBE.SLOBBERLOBBER = "Now I can spit REAL fire!"
+	DESCRIBE.GORE_HORN_HAT = "The more horns the better, I say!"
+	DESCRIBE.BEARGERCLAW = "Is it good luck, or bad luch? I just don't remember!"
+	DESCRIBE.FEATHER_FROCK = "Feathered foolishness!"
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "I'm still not sure if this is mortal food."
 	DESCRIBE.SKULLFLASK_EMPTY = "I gobbled it up!"
