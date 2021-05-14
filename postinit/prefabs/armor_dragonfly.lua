@@ -2,19 +2,6 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 
---FOR THE FUTURE: Grab OnBlocked using the UpValueHacker... somehow.
-local function OnBlocked(owner, data)
-    owner.SoundEmitter:PlaySound("dontstarve/wilson/hit_scalemail")
-    if data.attacker ~= nil and
-        not (data.attacker.components.health ~= nil and data.attacker.components.health:IsDead()) and
-        (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) and
-        data.attacker.components.burnable ~= nil and
-        not data.redirected and
-        not data.attacker:HasTag("thorny") then
-        data.attacker.components.burnable:Ignite()
-    end
-end
--------------------------------------------------------------------
 
 
 local function OnSave(inst, data)
@@ -70,9 +57,19 @@ end
 
 
 local function newonequip(inst, owner)
-inst.owner = owner
-inst:RemoveEventCallback("blocked", OnBlocked, owner) --effectively removes the fire on hit
-inst:RemoveEventCallback("attacked", OnBlocked, owner)
+
+    local skin_build = inst:GetSkinBuild()
+    if skin_build ~= nil then
+        owner:PushEvent("equipskinneditem", inst:GetSkinName())
+        owner.AnimState:OverrideItemSkinSymbol("swap_body", skin_build, "swap_body", inst.GUID, "torso_dragonfly")
+    else
+        owner.AnimState:OverrideSymbol("swap_body", "torso_dragonfly", "swap_body")
+    end
+
+    if owner.components.health ~= nil then
+        owner.components.health.externalfiredamagemultipliers:SetModifier(inst, 1 - TUNING.ARMORDRAGONFLY_FIRE_RESIST)
+    end
+	
 InitializeLavae(inst,owner)
 local x,y,z = owner.Transform:GetWorldPosition()
 if inst.lavaecond1 == "alive" then
@@ -111,9 +108,18 @@ end
 end
 
 local function newonunequip(inst, owner)
-if inst.owner ~= nil then
-inst.owner = nil
-end
+
+    owner.AnimState:ClearOverrideSymbol("swap_body")
+
+    if owner.components.health ~= nil then
+        owner.components.health.externalfiredamagemultipliers:RemoveModifier(inst)
+    end
+
+    local skin_build = inst:GetSkinBuild()
+    if skin_build ~= nil then
+        owner:PushEvent("unequipskinneditem", inst:GetSkinName())
+    end
+	
 if inst.lavae1 ~= nil then
 local x,y,z = inst.lavae1.Transform:GetWorldPosition()
 SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x,y,z)
@@ -190,21 +196,10 @@ env.AddPrefabPostInit("armordragonfly", function(inst)
 	
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
-	local oldequipfn = inst.components.equippable.onequipfn
-	local oldunequipfn = inst.components.equippable.onunequipfn
 	
-	local function CombinedEquip(inst,owner)
-	oldequipfn(inst,owner)
-	newonequip(inst, owner)
-	end
-	
-	local function CombinedUnequip(inst,owner)
-	newonunequip(inst, owner)
-	oldunequipfn(inst,owner)
-	end
-	
-    inst.components.equippable:SetOnEquip(CombinedEquip)
-    inst.components.equippable:SetOnUnequip(CombinedUnequip)
+
+    inst.components.equippable:SetOnEquip(newonequip)
+    inst.components.equippable:SetOnUnequip(newonunequip) --Afraid removing the event callback did not prevent the armor from setting things on fire, so I'm going to have to override the onequips for now
 	
 	inst.components.armor:InitCondition(1500, 0.6)
 	

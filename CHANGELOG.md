@@ -42,7 +42,7 @@
 
 * [x]  Werepigs prefer attacking over eating.
 
-* [x]  [Fight or Flight] Special guard pigs watch over pigman's village, they will punish anyone who tries to damage the buildings or wake the king. Perhaps you can recruit some of them by feeding the king some heavy dishes.
+* [x]  [Fight or Flight] Special guard pigs watch over pigking's village, they will punish anyone who tries to damage the buildings or wake the king. Perhaps you can recruit some of them by feeding the king some heavy dishes.
 
 
 --Spiders
@@ -124,15 +124,13 @@
 
 * [x] [STALKING STUFFERS] Terror Beaks will now ocassionally teleport around the player to reposition themselves, and are more aggresive in general.
 
-* [x] [GOODIES GALORE!] Crawling Horror's now drop shadow bombs around itself when hit, inking the player and dealing damage.
+* [x] [GOODIES GALORE!] Crawling Horrors now drop shadow bombs around itself when hit, inking the player and dealing damage.
 
 * [x] Killing shadows regains 10 sanity instead of 15, but depending on the creature may restore more.
 
 --Clockworks
 
 * [x] Clockworks are immune to fire! They cannot be stunlocked with a torch anymore!
-
-* [x] NOTE! Bishop fleeing was Removed!
 
 --[ Vanilla Boss changes]--
 
@@ -190,6 +188,12 @@
 * [x]  [FEAR THE DARK!] Raidfly leaves her area if a boss is nearby, and will also leave in summer to fly overhead, searching for bases to burn as the "Wilting Dragonfly".
 
 * [x]  [Fight or Flight] (VETERANS CURSE) - Drops the "Slobber Lobber", a Veterans Curse exclusive weapon that lets you launch fire spit projectiles that leave a lava pool on the ground.
+
+<"More incentive to kill Raidfly">
+
+* [x]  [Fight or Flight] Removed "Scale grinding", which means to knock dfly out, get a scale, flee, then repeat. In other words, dragonfly no longer drops scales after being knocked out.
+
+* [x]  [Fight or Flight] As compensation (and incentive to actually finish raidfly's fight in UM), Dragonfly now drops 3 scales on death instead, as well as a buff to the scaled chest and scalemail.
 
 --Wilting Dragonfly
 
@@ -265,6 +269,8 @@
 
 * [x] [STALKING STUFFERS] The Beekeeper Hat prevents player from taking hayfever "damage" from bees, mosquitos, etc.
 
+* [x]  [Fight or Flight] As part of the "incentive to kill raidfly" scalemail was reworked to summon "Dimvae" (Dim lavae) which attack what you attack while it's worn, the scalemail no longer sets attackers on fire, however. The durability was also increased, while the absorption decreased.
+
 --Clothing
 
 * [x]  [THE HOODED FOREST] The Breezy Vest now has 6 inventory slots, along with having 120 insulation (from 60.) Also has 30% Wetness resistance (from 20%.)
@@ -320,6 +326,8 @@
 * [x] [FEAR THE DARK!] Flowers will temporarily turn into Evil Flowers on full moons.
 
 * [x] [FEAR THE DARK!] Overworld Mushrooms will temporarily turn into Mushtrees on full moons.
+
+* [x] [Fight or Flight] As part of the "incentive to kill raidfly" scaled chest's container space is now boosted from 12 to a whopping 25 slots, so that the structure is more worth the expense.
 
 --[ Character changes]--
 

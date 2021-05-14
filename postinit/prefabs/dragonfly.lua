@@ -56,4 +56,8 @@ env.AddPrefabPostInit("dragonfly", function (inst)
 	
 	inst:AddComponent("vetcurselootdropper")
 	inst.components.vetcurselootdropper.loot = "slobberlobber"
+	
+	inst.components.damagetracker.damage_threshold_fn = nil
+	inst.components.lootdropper:AddChanceLoot("dragon_scales",    1.00)
+	inst.components.lootdropper:AddChanceLoot("dragon_scales",    1.00)
 end)
