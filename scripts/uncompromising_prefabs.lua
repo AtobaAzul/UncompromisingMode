@@ -225,4 +225,5 @@ return {
 	"wargwarning",
 	"deerclops_easyspawners",
 	--"psuedofiredebuff",
+	"armorlavae",
 }

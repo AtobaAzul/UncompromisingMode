@@ -712,7 +712,7 @@ NERFS:
 * [x] [FEAR THE DARK!] New dish: Zaspberry Parfait, electricutes entities nearby when player is attacked with a violent shockstun, delaying their next attack. Crafted with a zaspberry, dairy, and sweetener.
 
 
---[Depths Vipers and Gloomberries--
+--[Depths Vipers and Gloomberries]--
 
 * [x] New mob: The terrifying Depths Viper, added to Depth Worm attacks.
 
@@ -751,9 +751,9 @@ NERFS:
 
 * [x] [FEAR THE DARK] New food: Rice, a new vegetable that cannot be eaten without cooking, used for 2 dishes. Cannot spoil.
 
-* [x] [FEAR THE DARK] New dish: R(L)iceloaf, hunger restoring dish that uses 2 rice. Takes a very long time to spoil. Noticably bland though, so it doesn't provide many other benefits.
+* [x] [FEAR THE DARK] New dish: R(L)iceloaf, hunger restoring dish that uses 2 rice. Takes a very long time to spoil. Provides 1.5 days of hayfever protection.
 
-* [x] [FEAR THE DARK] New dish: Seafood paella, dish restores hunger and provides 1.5 days of hayfever protection. Uses a Wobster, rice, and vegetables.
+* [x] [FEAR THE DARK] New dish: Seafood paella, dish restores hunger and provides 3 days of hayfever protection. Uses a Wobster, rice, and vegetables.
 
 * [x] [HOODED FOREST] Added marsh bushes to the swamp biome, they are currently asthetic, but may possibly have a function in the future.
 
@@ -795,9 +795,9 @@ NERFS:
 
 * [x] [FEAR THE DARK] Wormwood gains 80% less healing from the Air Conditioners Blue Caps and Spores.
 
-* [x] [GOODIES GALORE!] New Item, Spore Pack, New backpack with 14 slots without slowness, but rots foods incredibly fast if it's inside.
+* [x] [GOODIES GALORE!] New Item, Spore Pack, New backpack with krampus sack slots, but rots foods incredibly fast if it's inside.
 
-* [x] [STALKING STUFFERS] The Spore Pack now periodically rots valid things in an area around the player when worn.
+* [x] [STALKING STUFFERS] The Spore Pack also periodically rots things in an area around the player when worn. Including the player's inventory, much slower than the spoilage inside the pack.
 
 
 
@@ -840,7 +840,6 @@ NERFS:
 * [x] [HOODED FOREST] Added cursed antler veteran's curse item, it does heavy aoe damage and freezes on hit, has infinite durability, requires a few moments to recharge before it's effective again.
 
 * [x] [STALKING STUFFERS] - Added the Naught Lock, a Veterans Curse item dropped by Klaus. When equipped, it will make the player deal a fast second attack after every attack, which deals 50% less damage.
-
 
 * [x] [STALKING STUFFERS] - Added the Crab Claw, a Veterans Curse item dropped by the Crab King. Can be slotted with up to 4 gems, which will modify the effects of the Crab Claw.
 
@@ -1000,7 +999,7 @@ Opal's will increase the effects of all other gems slotted
 
 * [x] [Fight or Flight] Added trepidations, these massive shadows prey on any who wanders the ruins with less than 1/2 sanity, otherwise they'll quietly watch.
 
-* [x] [Fight or Flight] Added clockwork pawns, these crablike clockworks are very akin to landmines, and will either trap the player or explode based on which type it is. Undamaged ones can be commonly found in the wilds, damaged ones can be found in the labrynth.
+* [x] [Fight or Flight] Added clockwork pawns, these crablike clockworks are very akin to mobile landmines, and will either trap the player or explode based on which type it is. Undamaged ones can be commonly found in the wilds, damaged ones can be found in the labrynth.
 
 * [x] [Fight or Flight] Added Mechanical Amalgams, these 3 clockwork combos will dig out of the ground after the player is trapped, or may waken if the player mistakes it for a clockwork pile.
 
@@ -1008,7 +1007,7 @@ Opal's will increase the effects of all other gems slotted
 
 * [x] [Fight or Flight] Added Snot roast, the most filling dish in the game! This dish can be crafted with a koalefant trunk, an onion, a carrot, and a potato. Fills for 150 hunger and halves hunger drain for 4 days. This one's for you Warly.
 
-* [x] [Fight or Flight] Added Theater corn, a dish made with 2 corn items and a butter, gives 3 bags. Gives a scaling sanity regen buff based on the amount of things fighting nearby when you eat it, bosses count for more.
+* [x] [Fight or Flight] Added Theater corn, a dish made with 2 corn items and a butter, gives 3 bags. Gives a scaling sanity regen buff based on the amount of things fighting nearby when you eat it, bosses count for more. Art by 202db.
 
 --[Skull Chest]--
 

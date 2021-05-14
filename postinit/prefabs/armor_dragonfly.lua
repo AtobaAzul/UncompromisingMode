@@ -2,198 +2,189 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local function OnSave(inst, data)
-    if inst.highTemp ~= nil then
-        data.highTemp = math.ceil(inst.highTemp)
-    elseif inst.lowTemp ~= nil then
-        data.lowTemp = math.floor(inst.lowTemp)
-    end
+data.lavaecond1 = inst.lavaecond1
+data.lavaecond2 = inst.lavaecond2
+data.lavaecond3 = inst.lavaecond3
+data.owner = inst.owner
 end
 
 local function OnLoad(inst, data)
-    if data ~= nil then
-        if data.highTemp ~= nil then
-            inst.highTemp = data.highTemp
-            inst.lowTemp = nil
-        elseif data.lowTemp ~= nil then
-            inst.lowTemp = data.lowTemp
-            inst.highTemp = nil
-        end
-    end
+if data ~= nil then
+	if data.lavaecond1 ~= nil then
+	inst.lavaecond1 = data.lavaecond1
+	end
+	if data.lavaecond2 ~= nil then
+	inst.lavaecond2 = data.lavaecond2
+	end
+	if data.lavaecond3 ~= nil then
+	inst.lavaecond3 = data.lavaecond3
+	end
+	if data.owner ~= nil then
+	inst.owner = data.owner
+	end
+end
 end
 
-local function OnRemove(inst)
-    inst._light:Remove()
+local function InitializeLavae(inst,owner)
+if inst.lavaecond1 == nil then
+inst.lavaecond1 = "alive"
+end
+if inst.lavaecond2 == nil then
+inst.lavaecond2 = "alive"
+end
+if inst.lavaecond3 == nil then
+inst.lavaecond3 = "alive"
+end
 end
 
-local relative_temperature_thresholds = { -30, -10, 10, 30 }
-
-local function GetRangeForTemperature(temp, ambient)
-    local range = 1
-    for i,v in ipairs(relative_temperature_thresholds) do
-        if temp > ambient + v then
-            range = range + 1
-        end
-    end
-    return range
+local function OneDead(inst)
+inst.lavaecond1 = "dead"
+inst.lavae1 = nil
+inst.components.timer:StartTimer("1revive", 10)
+end
+local function TwoDead(inst)
+inst.lavaecond2 = "dead"
+inst.lavae2 = nil
+inst.components.timer:StartTimer("2revive", 10)
+end
+local function ThreeDead(inst)
+inst.lavaecond3 = "dead"
+inst.lavae3 = nil
+inst.components.timer:StartTimer("3revive", 10)
 end
 
--- Heatrock emits constant temperatures depending on the temperature range it's in
-local emitted_temperatures = { -10, 10, 25, 40, 60 }
 
-local function HeatFn(inst, observer)
-    local range = GetRangeForTemperature(inst.components.temperature:GetCurrent(), TheWorld.state.temperature)
-    if range <= 2 then
-        inst.components.heater:SetThermics(false, true)
-    elseif range >= 4 then
-        inst.components.heater:SetThermics(true, false)
-    else
-        inst.components.heater:SetThermics(false, false)
-    end
-    return emitted_temperatures[range]
+local function newonequip(inst, owner)
+inst.owner = owner
+
+InitializeLavae(inst,owner)
+local x,y,z = owner.Transform:GetWorldPosition()
+if inst.lavaecond1 == "alive" then
+local lavae1 = SpawnPrefab("armorlavae")
+lavae1.number = 1
+lavae1.Transform:SetPosition(x,y,z)
+inst.lavae1 = lavae1
+owner.components.leader:AddFollower(lavae1)
+lavae1.components.follower.leader = owner
+else
+
+end
+if inst.lavaecond2 == "alive" then
+local lavae2 = SpawnPrefab("armorlavae")
+lavae2.number = 2
+lavae2.Transform:SetPosition(x,y,z)
+inst.lavae2 = lavae2
+owner.components.leader:AddFollower(lavae2)
+lavae2.components.follower.leader = owner
+else
+
+end
+if inst.lavaecond3 == "alive" then
+local lavae3 = SpawnPrefab("armorlavae")
+lavae3.number = 3
+lavae3.Transform:SetPosition(x,y,z)
+inst.lavae3 = lavae3
+owner.components.leader:AddFollower(lavae3)
+lavae3.components.follower.leader = owner
+else
+
+end
 end
 
-local function AdjustLighting(inst, range, ambient)
-    if range == 5 then
-		print("light should spawn now")
-        local relativetemp = inst.components.temperature:GetCurrent() - ambient
-        local baseline = relativetemp - relative_temperature_thresholds[4]
-        local brightline = relative_temperature_thresholds[4] + 20
-        inst._light.Light:SetIntensity( math.clamp(0.5 * baseline/brightline, 0, 0.5 ) )
-    else
-        inst._light.Light:SetIntensity(0)
-    end
+local function newonunequip(inst, owner)
+if inst.owner ~= nil then
+inst.owner = nil
+end
+if inst.lavae1 ~= nil then
+inst.lavae1:Remove()
+inst.lavae1 = nil
+end
+if inst.lavae2 ~= nil then
+inst.lavae2:Remove()
+inst.lavae2 = nil
+end
+if inst.lavae3 ~= nil then
+inst.lavae3:Remove()
+inst.lavae3 = nil
 end
 
-local function TemperatureChange(inst, data)
-    local ambient_temp = TheWorld.state.temperature
-    local cur_temp = inst.components.temperature:GetCurrent()
-    local range = GetRangeForTemperature(cur_temp, ambient_temp)
-
-	print(ambient_temp)
-	print(cur_temp)
-	print(range)
-	
-    AdjustLighting(inst, range, ambient_temp)
-
-    if range <= 1 then
-        if inst.lowTemp == nil or inst.lowTemp > cur_temp then
-            inst.lowTemp = math.floor(cur_temp)
-        end
-        inst.highTemp = nil
-    elseif range >= 5 then
-        if inst.highTemp == nil or inst.highTemp < cur_temp then
-            inst.highTemp = math.ceil(cur_temp)
-        end
-        inst.lowTemp = nil
-    elseif inst.lowTemp ~= nil then
-        if GetRangeForTemperature(inst.lowTemp, ambient_temp) >= 3 then
-            inst.lowTemp = nil
-        end
-    elseif inst.highTemp ~= nil and GetRangeForTemperature(inst.highTemp, ambient_temp) <= 3 then
-        inst.highTemp = nil
-    end
-
-    if range ~= inst.currentTempRange then
-        --UpdateImages(inst, range)
-
-        if (inst.lowTemp ~= nil and range >= 3) or
-            (inst.highTemp ~= nil and range <= 3) then
-            inst.lowTemp = nil
-            inst.highTemp = nil
-        end
-    end
 end
 
-local function OnOwnerChange(inst)
-    local newowners = {}
-    local owner = inst
-    while owner.components.inventoryitem ~= nil do
-        newowners[owner] = true
-
-        if inst._owners[owner] then
-            inst._owners[owner] = nil
-        else
-            inst:ListenForEvent("equipped", inst._onownerchange, owner)
-            inst:ListenForEvent("unequipped", inst._onownerchange, owner)
-            inst:ListenForEvent("onputininventory", inst._onownerchange, owner)
-            inst:ListenForEvent("ondropped", inst._onownerchange, owner)
-        end
-
-        local nextowner = owner.components.inventoryitem.owner
-        if nextowner == nil then
-            break
-        end
-
-        owner = nextowner
-    end
-
-    inst._light.entity:SetParent(owner.entity)
-
-    for k, v in pairs(inst._owners) do
-        if k:IsValid() then
-            inst:ListenForEvent("equipped", inst._onownerchange, k)
-            inst:ListenForEvent("unequipped", inst._onownerchange, k)
-            inst:RemoveEventCallback("onputininventory", inst._onownerchange, k)
-            inst:RemoveEventCallback("ondropped", inst._onownerchange, k)
-        end
-    end
-
-    inst._owners = newowners
+local function OnTimerDone(inst,data)
+if data ~= nil then
+	if data.name == "1revive" then
+	inst.lavae1 = "alive"
+		if inst.owner ~= nil then
+			local owner = inst.owner
+			local x,y,z = owner.Transform:GetWorldPosition()
+			local lavae1 = SpawnPrefab("armorlavae")
+			lavae1.number = 1
+			lavae1.Transform:SetPosition(x,y,z)
+			inst.lavae1 = lavae1
+			owner.components.leader:AddFollower(lavae1)
+			lavae1.components.follower.leader = owner
+		end
+	end
+	if data.name == "2revive" then
+	inst.lavae2 = "alive"
+		if inst.owner ~= nil then
+			local owner = inst.owner
+			local x,y,z = owner.Transform:GetWorldPosition()
+			local lavae2 = SpawnPrefab("armorlavae")
+			lavae2.number = 2
+			lavae2.Transform:SetPosition(x,y,z)
+			inst.lavae2 = lavae2
+			owner.components.leader:AddFollower(lavae2)
+			lavae2.components.follower.leader = owner
+		end	
+	end
+	if data.name == "3revive" then
+	inst.lavae3 = "alive"
+		if inst.owner ~= nil then
+			local owner = inst.owner
+			local x,y,z = owner.Transform:GetWorldPosition()
+			local lavae3 = SpawnPrefab("armorlavae")
+			lavae3.number = 1
+			lavae3.Transform:SetPosition(x,y,z)
+			inst.lavae3 = lavae3
+			owner.components.leader:AddFollower(lavae3)
+			lavae3.components.follower.leader = owner
+		end	
+	end
 end
-
-local function onequip(inst, owner) 
 end
-
-local function onunequip(inst, owner) 
-end
-
 env.AddPrefabPostInit("armordragonfly", function(inst)
 
-	inst:AddTag("heatrock")
 
-    inst:AddTag("HASHEATER")
-	
 	if not TheWorld.ismastersim then
 		return
 	end
-	--[[
-	local _SetOnEquip = inst.components.equippable.onequipfn
-
-	inst.components.equippable.onequipfn = function(inst, owner)
-		if _SetOnEquip ~= nil then
-		   _SetOnEquip(inst, owner)
-		end
-	end
 	
-	local _SetOnUnequip = inst.components.equippable.onunequipfn
-
-	inst.components.equippable.onunequipfn = function(inst, owner)
-		if _SetOnUnequip ~= nil then
-		   _SetOnUnequip(inst, owner)
-		end
-	end
-	]]
-    inst:AddComponent("temperature")
-    inst.components.temperature.current = TheWorld.state.temperature
-    inst.components.temperature.inherentinsulation = TUNING.INSULATION_MED
-    inst.components.temperature.inherentsummerinsulation = TUNING.INSULATION_MED
-    inst.components.temperature:IgnoreTags("heatrock")
-	
-    inst:AddComponent("heater")
-    inst.components.heater.heatfn = HeatFn
-    inst.components.heater.carriedheatfn = HeatFn
-    inst.components.heater.carriedheatmultiplier = TUNING.HEAT_ROCK_CARRIED_BONUS_HEAT_FACTOR
-    inst.components.heater:SetThermics(false, false)
-	
-    inst:ListenForEvent("temperaturedelta", TemperatureChange)
-    inst.currentTempRange = 0
-	
-    inst._light = SpawnPrefab("armor_dragonfly_light")
-    inst._owners = {}
-    inst._onownerchange = function() OnOwnerChange(inst) end
-	
-    OnOwnerChange(inst)
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
-    inst.OnRemoveEntity = OnRemove
+	local oldequipfn = inst.components.equippable.onequipfn
+	local oldunequipfn = inst.components.equippable.onunequipfn
+	
+	local function CombinedEquip(inst,owner)
+	newonequip(inst, owner)
+	oldequipfn(inst,owner)
+	end
+	
+	local function CombinedUnequip(inst,owner)
+	newonunequip(inst, owner)
+	oldunequipfn(inst,owner)
+	end
+	
+    inst.components.equippable:SetOnEquip(CombinedEquip)
+    inst.components.equippable:SetOnUnequip(CombinedUnequip)
+	
+	inst.components.armor:InitCondition(1500, 0.6)
+	
+	inst.OneDead = OneDead
+	inst.TwoDead = TwoDead
+	inst.ThreeDead = ThreeDead
+	
+	inst:AddComponent("timer")
+	inst:ListenForEvent("timerdone", OnTimerDone)
+	
 end)
