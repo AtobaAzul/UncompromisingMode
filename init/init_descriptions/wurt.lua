@@ -259,4 +259,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.STANTON = "You not dead?"
 	--StantonStuff
 	
+	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
+	
 	DESCRIBE.THEATERCORN = "Like watch mermfolk fight pigfolk when eat it."

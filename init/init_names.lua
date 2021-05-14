@@ -208,6 +208,7 @@ UI = GLOBAL.STRINGS.UI
 	--Stanton's Stash
 	
 	STRINGS.THEATERCORN = "Theater Corn"
+	STRINGS.ARMORLAVAE = "Dimvae"
 	
 	-- Blowgun stuff
 	STRINGS.UNCOMPROMISING_BLOWGUN = "Blowpipe" --Lol

@@ -267,4 +267,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.STANTON = "Cool skeleton! What does he want?"
 	--StantonStuff
 	
+	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
+	
 	DESCRIBE.THEATERCORN = "I would prefer it burnt, or at least I could watch things burn while I eat it."
