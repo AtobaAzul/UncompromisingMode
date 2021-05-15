@@ -426,6 +426,9 @@ local states =
 			inst.AnimState:PushAnimation("tornadoattack",false)
 			inst.AnimState:PushAnimation("tornadoattack",false)
 			inst.AnimState:PushAnimation("tornadoattack",false)
+			inst.AnimState:PushAnimation("tornadoattack",false)
+			inst.AnimState:PushAnimation("tornadoattack",false)
+			inst.AnimState:PushAnimation("tornadoattack",false)
 			inst.TornadoAttack = false
 			
 			if math.random() > .5 then
