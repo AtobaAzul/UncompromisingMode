@@ -56,6 +56,24 @@ local function SpawnIceFx(inst, target)
     end
 end
 
+local function SpawnAttackAuras(inst)
+for sweep = -30,30,15 do
+	local x, y, z = inst.Transform:GetWorldPosition()
+    local angle = (inst.Transform:GetRotation() + 90+sweep) * DEGREES
+    local dist = 10
+    local ground = TheWorld.Map
+    local aura, x1, z1
+    x1 = x + dist * math.sin(angle)
+    z1 = z + dist * math.cos(angle)
+	if ground:IsPassableAtPoint(x1, 0, z1) then
+		aura = SpawnPrefab("deer_ice_circle")
+		aura.Transform:SetPosition(x1,0,z1)
+		aura:DoTaskInTime(6, function(aura) aura:TriggerFX() end)
+		aura:DoTaskInTime(9, aura.KillFX)
+	end	
+end
+end
+
 local function SpawnLaser_Blue(inst)
     local numsteps = 10
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -375,7 +393,7 @@ if inst.components.timer ~= nil and not inst.components.timer:TimerExists("aurat
 inst.sg:GoToState("aurafreeze_pre")
 inst:DoTaskInTime(7,function(inst) inst.sg:GoToState("aurafreeze_pst") end)
 else
-inst.sg:GoToState("attack")
+inst.sg:GoToState("aurattack")
 end
 end
 end
@@ -721,7 +739,7 @@ local states = {
             inst.Physics:Stop()
 			inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE)
 			inst.AnimState:PlayAnimation("fortresscast_pst")
-			inst.components.timer:StartTimer("auratime", 15)
+			inst.components.timer:StartTimer("auratime", 24+math.random(1,11))
         end,
 
 
@@ -965,6 +983,54 @@ local states = {
 			inst.components.locomotor.walkspeed = 3 end),
         },
     },
+	State{
+        name = "aurattack",
+        tags = { "attack","busy", },
+
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("atk")
+			inst.components.combat:StartAttack()
+        end,
+
+
+        timeline =
+        {
+        TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/attack") end),
+        TimeEvent(29 * FRAMES, function(inst) SpawnIceFx(inst, inst.components.combat.target) end),
+        TimeEvent(35 * FRAMES, function(inst)
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe")
+			if inst.attacktime == nil then
+			inst.attacktime = 0
+			end
+			inst.attacktime = inst.attacktime+1+math.random(0,1)
+			if inst.attacktime > 4 or (inst.components.health ~= nil and inst.components.health:GetPercent() < 0.33 and inst.attacktime > 2)  then
+			SpawnAttackAuras(inst)
+			inst.attacktime = 0
+			end
+            inst.components.combat:DoAttack(inst.sg.statemem.target)
+            if inst.bufferedaction ~= nil and inst.bufferedaction.action == ACTIONS.HAMMER then
+                local target = inst.bufferedaction.target
+                inst:ClearBufferedAction()
+                if target ~= nil and
+                    target:IsValid() and
+                    target.components.workable ~= nil and
+                    target.components.workable:CanBeWorked() and
+                    target.components.workable:GetWorkAction() == ACTIONS.HAMMER then
+                    target.components.workable:Destroy(inst)
+                end
+            end
+            ShakeAllCameras(CAMERASHAKE.FULL, .5, .025, 1.25, inst, SHAKE_DIST)
+        end),
+        TimeEvent(36 * FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
+        },
+
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
+
+    },
 }
 
 for k, v in pairs(events) do
@@ -976,12 +1042,6 @@ for k, v in pairs(states) do
     assert(v:is_a(State), "Non-state added in mod state table!")
     inst.states[v.name] = v
 end
-
-
-
-
-
-
 
 
 
@@ -997,6 +1057,12 @@ CommonStates.AddCombatStates(states,
         TimeEvent(29 * FRAMES, function(inst) SpawnIceFx(inst, inst.components.combat.target) end),
         TimeEvent(35 * FRAMES, function(inst)
             inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe")
+			print("thiscoderan")
+			print(inst.upgrade)
+			if inst.upgrade == "ice_mutation" then
+			print("triedtoattack")
+			SpawnAttackAuras(inst)
+			end
             inst.components.combat:DoAttack(inst.sg.statemem.target)
             if inst.bufferedaction ~= nil and inst.bufferedaction.action == ACTIONS.HAMMER then
                 local target = inst.bufferedaction.target

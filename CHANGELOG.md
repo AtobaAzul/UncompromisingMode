@@ -269,7 +269,7 @@
 
 * [x] [STALKING STUFFERS] The Beekeeper Hat prevents player from taking hayfever "damage" from bees, mosquitos, etc.
 
-* [x]  [Fight or Flight] As part of the "incentive to kill raidfly" scalemail was reworked to summon "Dimvae" (Dim lavae) which attack what you attack while it's worn, the scalemail no longer sets attackers on fire, however. The durability was also increased, while the absorption decreased.
+* [x]  [Fight or Flight] As part of the "incentive to kill raidfly" scalemail was reworked to summon "Dimvae" (Dim lavae) which attack what you attack while it's worn, the scalemail no longer sets attackers on fire, however. The durability was also increased, while the absorption decreased. It still protects the user from all fire damage.
 
 --Clothing
 
@@ -321,13 +321,13 @@
 
 * [x] Moggles now act as sandstorm/snowstorm goggles.
 
-* [x] [FEAR THE DARK!] The Lazy Deserter will now pick up and deliver all nearby items to the player when used, including berry bushes, grass, etc. Costs sanity to channel as usual.
+* [x] [FEAR THE DARK!] The Lazy Deserter will now pick up and deliver all nearby items to the player when used, including berry bushes, grass, and a myriad of other items. Costs sanity to channel as usual.
 
 * [x] [FEAR THE DARK!] Flowers will temporarily turn into Evil Flowers on full moons.
 
 * [x] [FEAR THE DARK!] Overworld Mushrooms will temporarily turn into Mushtrees on full moons.
 
-* [x] [Fight or Flight] As part of the "incentive to kill raidfly" scaled chest's container space is now boosted from 12 to a whopping 25 slots, so that the structure is more worth the expense.
+* [x] [Fight or Flight] As part of the "incentive to kill raidfly" scaled chest's container space is now boosted from 12 to a whopping 25 slots, so that the structure is somewhat more worth the expense.
 
 --[ Character changes]--
 

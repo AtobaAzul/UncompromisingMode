@@ -265,3 +265,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
 	DESCRIBE.THEATERCORN = "Theater food always improves any experience."
+	DESCRIBE.DEERCLOPS_BARRIER = "I must find a weak point in this barrier." 

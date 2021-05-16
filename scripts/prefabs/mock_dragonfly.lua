@@ -152,7 +152,7 @@ local function OnEntitySleep(inst)
         --Get back in there Dragonfly! You still have work to do.--]]
 		
 		if PlayerPosition ~= nil and not inst:NearPlayerBase() and not inst.SeenBase then
-			print("Porting Dragonfly to Player!")
+			--print("Porting Dragonfly to Player!")
 			local init_pos = inst:GetPosition()
 			local player_pos = PlayerPosition:GetPosition()
 				if player_pos then
@@ -355,32 +355,27 @@ local function RockThrowTimer(inst, data)
     end
 end
 
-local function LaunchProjectile(inst, target)
+local function LaunchProjectile(inst)
+   local target = inst.components.combat.target
 	if target ~= nil then
-	
-		inst.rockthrow = false
-		
-		local x, y, z = inst.Transform:GetWorldPosition()
-		local a, b, c = target.Transform:GetWorldPosition()
-		local targetpos = target:GetPosition()
-		--[[local theta = inst.Transform:GetRotation()
-		
-		theta = theta*DEGREES
-		
-		local variableanglex = math.random(0, 30)
-		local variableanglez = math.random(0, 30)
-		targetpos.x = targetpos.x + variableanglex*math.cos(theta)
-		targetpos.z = targetpos.z - variableanglez*math.sin(theta)]]
-		
-		local rangesq = ((a-x)^2) + ((c-z)^2)
-		local maxrange = 15
-		local bigNum = 10
-		local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
-		
-		local projectile = SpawnPrefab("dragonfly_egg_projectile")
-		projectile.Transform:SetPosition(x, y, z)
-		projectile.components.complexprojectile:SetHorizontalSpeed(speed)
-		projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local projectile = SpawnPrefab("fireball_throwable")
+    projectile.Transform:SetPosition(x, y, z)
+    local a, b, c = target.Transform:GetWorldPosition()
+	local targetpos = target:GetPosition()
+	targetpos.x = targetpos.x + math.random(-1,1)
+	targetpos.z = targetpos.z + math.random(-1,1)
+    local dx = a - x
+    local dz = c - z
+    local rangesq = dx * dx + dz * dz
+    local maxrange = 20
+    local bigNum = 15
+    local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange * 2)
+	projectile:AddTag("canthit")
+	--projectile.components.wateryprotection.addwetness = TUNING.WATERBALLOON_ADD_WETNESS/2
+    projectile.components.complexprojectile:SetHorizontalSpeed(speed+math.random(4,9))
+    --projectile.components.complexprojectile:SetGravity(-25)
+    projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 	end
 end
 

@@ -272,3 +272,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
 	DESCRIBE.THEATERCORN = "I wonder where the bag came from."
+	DESCRIBE.DEERCLOPS_BARRIER = "The monster's proficiency in ice magic seems to have improved." 

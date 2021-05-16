@@ -266,3 +266,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
 	DESCRIBE.THEATERCORN = "We like to watch things fight when we eat it."
+	DESCRIBE.DEERCLOPS_BARRIER = "We think we should mine through the weak areas." 

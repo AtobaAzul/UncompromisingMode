@@ -275,3 +275,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
 	DESCRIBE.THEATERCORN = "I would prefer it burnt, or at least I could watch things burn while I eat it."
+	DESCRIBE.DEERCLOPS_BARRIER = "Why won't you BURN!" 

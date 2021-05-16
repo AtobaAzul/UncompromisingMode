@@ -336,3 +336,4 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
 	DESCRIBE.THEATERCORN = "I wonder if there's anything interesting to watch while I eat this."
+	DESCRIBE.DEERCLOPS_BARRIER = "I need to mine my way out." 

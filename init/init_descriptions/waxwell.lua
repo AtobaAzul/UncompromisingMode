@@ -272,3 +272,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
 	DESCRIBE.THEATERCORN = "Brings back old memories."
+	DESCRIBE.DEERCLOPS_BARRIER = "His proficiency in ice magic is improving... Why is everything changing?" 

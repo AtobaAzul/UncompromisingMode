@@ -267,3 +267,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
 	DESCRIBE.THEATERCORN = "Like watch mermfolk fight pigfolk when eat it."
+	DESCRIBE.DEERCLOPS_BARRIER = "Must break out. Don't like being trapped." 
