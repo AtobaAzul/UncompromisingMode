@@ -264,6 +264,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.SKULLFLASK = "His mixture is actually quite impressive."
 	DESCRIBE.SKULLFLASK_EMPTY = "The flask appears to be enchanted as well, brilliant."
 	DESCRIBE.STANTON_SHADOW_TONIC = "A fuel drink? I could do this all day."
+	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 	DESCRIBE.STANTON = "Who are you? Did I kill you?"
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "A comforting effect as well, almost like eggnog."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "I would desire more."

@@ -54,7 +54,7 @@ local function fn_tonic()
 		if stanton ~= nil then
 			stanton.TellThemRules(stanton)
 		end			
-		inst:Remove() 
+		--inst:Remove() 
 	end)
 		
 	inst:WatchWorldState("isday", function(inst)
@@ -64,6 +64,59 @@ local function fn_tonic()
     return inst
 end
 
+local function fn_tonic_fancy()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+
+    MakeInventoryPhysics(inst)
+
+    inst.AnimState:SetBank("stanton_shadow_tonic_fancy")
+    inst.AnimState:SetBuild("stanton_shadow_tonic")
+    inst.AnimState:PlayAnimation("idle")
+	inst:AddTag("stantondrink")
+    MakeInventoryFloatable(inst)
+	
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst:AddComponent("stackable")
+    inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
+
+    inst:AddComponent("inspectable")
+
+    inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/stanton_shadow_tonic_fancy.xml"
+	--inst.components.inventoryitem.cangoincontainer = false
+    MakeHauntableLaunch(inst)
+	inst.oneatenfn = oneatenfn
+    inst:AddComponent("edible")
+    inst.components.edible.healthvalue = 0
+    inst.components.edible.hungervalue = 0
+    inst.components.edible.sanityvalue = -3
+    inst.components.edible.foodtype = FOODTYPE.GOODIES
+	inst.components.edible:SetOnEatenFn(inst.oneatenfn)
+	inst:AddTag("preparedfood")
+	
+	inst:ListenForEvent("ondropped",function(inst) 
+		local stanton = TheSim:FindFirstEntityWithTag("stanton")
+		if stanton ~= nil then
+			stanton.TellThemRules(stanton)
+		end			
+		--inst:Remove() 
+	end)
+		
+	inst:WatchWorldState("isday", function(inst)
+		inst:Remove()
+	end)
+	
+    return inst
+end
 
 local function OnDoneTalking(inst)
     if inst.talktask ~= nil then
@@ -122,7 +175,12 @@ if inst:GetDistanceSqToInst(inst.contestent) < 5 then
 	inst.AnimState:PushAnimation("give_pst", false)
 	inst.AnimState:PushAnimation("idle_loop", true)
 	if target.components.inventory ~= nil then
-		local tonic = SpawnPrefab("stanton_shadow_tonic")
+		local tonic
+		if math.random() > 0.5 then
+		tonic = SpawnPrefab("stanton_shadow_tonic")
+		else
+		tonic = SpawnPrefab("stanton_shadow_tonic_fancy")
+		end
 		target.components.inventory:GiveItem(tonic, nil)
 		inst.tonicout = true
 	end
@@ -404,9 +462,9 @@ local function fn_flask_empty()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("skullflask_empty")
-    inst.AnimState:SetBuild("skullflask_empty")
-    inst.AnimState:PlayAnimation("idle")
+    inst.AnimState:SetBank("skullflask")
+    inst.AnimState:SetBuild("skullflask")
+    inst.AnimState:PlayAnimation("empty")
 	
     MakeInventoryFloatable(inst)
 	
@@ -434,4 +492,5 @@ end
 return Prefab("skullflask", fn_flask),
 Prefab("skullflask_empty", fn_flask_empty),
 Prefab("stanton_shadow_tonic", fn_tonic),
+Prefab("stanton_shadow_tonic_fancy", fn_tonic_fancy),
 Prefab("stanton", fn_stanton)

@@ -299,8 +299,8 @@ Assets = {
 	Asset("ANIM", "anim/hat_widowshead.zip"),
 	Asset("IMAGE", "images/inventoryimages/widowshead.tex"),
 	Asset("ATLAS", "images/inventoryimages/widowshead.xml"),
-
-
+	Asset("ANIM", "anim/widowwebgoop.zip"),
+	
 	Asset("ANIM", "anim/purplesteamedhams.zip"),
 	Asset("ATLAS", "images/inventoryimages/purplesteamedhams.xml"),
 	Asset("IMAGE", "images/inventoryimages/purplesteamedhams.tex"),
@@ -452,6 +452,8 @@ Assets = {
 	Asset("ANIM", "anim/stanton_shadow_tonic.zip"),
 	Asset("IMAGE", "images/inventoryimages/stanton_shadow_tonic.tex"),
 	Asset("ATLAS", "images/inventoryimages/stanton_shadow_tonic.xml"),
+	Asset("IMAGE", "images/inventoryimages/stanton_shadow_tonic_fancy.tex"),
+	Asset("ATLAS", "images/inventoryimages/stanton_shadow_tonic_fancy.xml"),
 	Asset("ANIM", "anim/skullflask.zip"),
 	Asset("IMAGE", "images/inventoryimages/skullflask.tex"),
 	Asset("ATLAS", "images/inventoryimages/skullflask.xml"),	
