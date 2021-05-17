@@ -193,4 +193,19 @@ env.AddPrefabPostInit("bearger", function(inst)
 			end
 		end]]
 	end)
+		local function OnHitOther(inst, other)
+			if other:HasTag("creatureknockbackable") then
+			other:PushEvent("knockback", {knocker = inst, radius = 125, strengthmult = 1})
+			else
+			if other ~= nil and other.components.inventory ~= nil and not other:HasTag("fat_gang") and not other:HasTag("foodknockbackimmune") and not (other.components.rider ~= nil and other.components.rider:IsRiding()) and 
+			--Don't knockback if you wear marble
+			(other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ==nil or not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
+				other:PushEvent("knockback", {knocker = inst, radius = 125, strengthmult = 1})
+			end
+			end
+		end
+	
+		if inst.components.combat ~= nil then
+			inst.components.combat.onhitotherfn = OnHitOther
+		end
 end)

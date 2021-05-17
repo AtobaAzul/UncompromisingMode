@@ -133,8 +133,11 @@ env.AddPrefabPostInit("forest", function(inst)
 	inst:AddComponent("firefallwarning")
 	
 	inst:RemoveComponent("deerclopsspawner")
+
+	
 	inst:AddComponent("mock_dragonflyspawner")
-	inst:AddComponent("gmoosespawner")
+	
+	
 	inst:AddComponent("uncompromising_deerclopsspawner")
 	inst:AddComponent("pollenmitedenspawner")
 	--inst:ListenForEvent("seasontick", OnSeasonTick)
@@ -147,6 +150,24 @@ env.AddPrefabPostInit("forest", function(inst)
 	
 	inst.OnLoad = OnLoad
 end)
+
+if GetModConfigData("mother_goose") == true then
+env.AddPrefabPostInit("forest", function(inst)
+    if not TheWorld.ismastersim then
+        return
+    end
+	inst:AddComponent("gmoosespawner")
+end)
+end
+
+if GetModConfigData("wiltfly") == true then
+env.AddPrefabPostInit("forest", function(inst)
+    if not TheWorld.ismastersim then
+        return
+    end
+	inst:AddComponent("mock_dragonflyspawner")
+end)
+end
 
 env.AddPrefabPostInit("cave", function(inst)
     if not TheWorld.ismastersim then

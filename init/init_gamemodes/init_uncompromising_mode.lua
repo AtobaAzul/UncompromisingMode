@@ -96,10 +96,7 @@ local require = GLOBAL.require
 		modimport("init/init_ratraid")
 	end
 
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_bosses") == true) then
-		modimport("init/init_creatures/init_knockback")
-	end
+	modimport("init/init_creatures/init_knockback")
 
 	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("harder_shadows") == true or
 	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_shadows") == true) then

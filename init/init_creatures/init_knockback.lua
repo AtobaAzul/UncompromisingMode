@@ -20,22 +20,22 @@ local EQUIPSLOTS = _G.EQUIPSLOTS
 
 local GIANTS = 
 {
-	["bearger"] =
+	--[[["bearger"] =
     {
         radius = 125,
 		power = 1,
-    },
-	["dragonfly"] =
+    },]]
+	--[[["dragonfly"] =
     {
         radius = 75,
 		power = 1.25,
-    },
+    },]]
 	--[[["mock_dragonfly"] =
     {
         radius = 75,
 		power = 1.25,
     },]]
-	["leif"] =
+	--[[["leif"] =
     {
         radius = 75,
 		power = 1,
@@ -44,12 +44,12 @@ local GIANTS =
     {
         radius = 75,
 		power = 1,
-    },
-	["minotaur"] =
+    },]]
+	--[[["minotaur"] =
     {
         radius = 200,
 		power = 1.5,
-    },
+    },]]
 	--[[["rook"] =
     {
         radius = 150,
@@ -60,11 +60,11 @@ local GIANTS =
         radius = 150,
 		power = 1.5,
     },]]
-	["moose"] =
+	--[[["moose"] =
     {
         radius = 200,
 		power = 1,
-	},
+	},]]
 	["mothergoose"] =
     {
         radius = 200,
@@ -91,4 +91,17 @@ for k, v in pairs(GIANTS) do
 			inst.components.combat.onhitotherfn = OnHitOther
 		end
 	end)
+end
+
+if GetModConfigData("harder_beequeen") == true then
+AddPrefabPostInit("beequeen", function(inst)
+    if inst.components.combat ~= nil then
+		local function isnotbee(ent)
+			if ent ~= nil and not ent:HasTag("bee") and not ent:HasTag("hive") then -- fix to friendly AOE: refer for later AOE mobs -Axe
+				return true
+			end
+		end
+        inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE/2, TUNING.DEERCLOPS_AOE_SCALE, isnotbee) -- you can edit these values to your liking -Axe
+	end   
+end)	
 end
