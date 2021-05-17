@@ -135,7 +135,6 @@ env.AddPrefabPostInit("forest", function(inst)
 	inst:RemoveComponent("deerclopsspawner")
 
 	
-	inst:AddComponent("mock_dragonflyspawner")
 	
 	
 	inst:AddComponent("uncompromising_deerclopsspawner")
