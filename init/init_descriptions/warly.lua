@@ -257,9 +257,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.SKULLFLASK = "It was nice of him to give me his recipe."
 	DESCRIBE.SKULLFLASK_EMPTY = "I wonder when I'll have more."
 	DESCRIBE.STANTON_SHADOW_TONIC = "Maybe it contains a new desired taste?"
+	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 	DESCRIBE.STANTON = "He's interrupting my cooking."
+	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "Such a comforting taste."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Oh well, that's over now."
 	--StantonStuff
 	
+	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
+	
 	DESCRIBE.THEATERCORN = "Theater food always improves any experience."
+	DESCRIBE.DEERCLOPS_BARRIER = "I must find a weak point in this barrier." 

@@ -284,7 +284,7 @@ env.AddPrefabPostInit("deerclops", function(inst)
     inst.components.groundpounder.destructionRings = 2
     inst.components.groundpounder.platformPushingRings = 2
     inst.components.groundpounder.numRings = 3
-	
+	inst:AddTag("deergemresistance")
 	--
 	inst.MakeEnrageable = MakeEnrageable
 	inst.MakeIcey = MakeIcey

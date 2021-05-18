@@ -264,9 +264,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.SKULLFLASK = "It keeps me alert, but without care."
 	DESCRIBE.SKULLFLASK_EMPTY = "I can see the liquid slowly returning."
 	DESCRIBE.STANTON_SHADOW_TONIC = "Fall asleep? Why I never."
+	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 	DESCRIBE.STANTON = "Hold still, I simply must study your anatomy."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "I can study, unwavered."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Science no longer comforts me."
 	--StantonStuff
 	
+	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
+	
 	DESCRIBE.THEATERCORN = "I wonder where the bag came from."
+	DESCRIBE.DEERCLOPS_BARRIER = "The monster's proficiency in ice magic seems to have improved." 

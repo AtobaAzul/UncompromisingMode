@@ -51,7 +51,7 @@ local function fn()
         return inst
     end
 
-
+	inst:AddTag("scarytoprey")
     inst:AddComponent("combat")
     inst:AddComponent("inspectable")
     inst:AddComponent("locomotor")
@@ -69,8 +69,8 @@ local function fn()
 	inst:AddComponent("follower")
 	inst:AddComponent("lootdropper")
     MakeHauntablePanic(inst)
-	inst.persists = false
-	--inst:DoTaskInTime(0,function(inst) if inst.components.follower.leader == nil then inst:Remove() end end)
+	--inst.persists = false
+	inst:DoTaskInTime(0,function(inst) if inst.components.follower.leader == nil then inst:Remove() end end)
 	
 	inst:ListenForEvent("onattackother", OnAttackOther)
     return inst

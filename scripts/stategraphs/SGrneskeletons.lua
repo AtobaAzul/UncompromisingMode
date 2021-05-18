@@ -71,7 +71,7 @@ local states=
     },    
     State{
         name = "grounded",
-        tags = {"busy"},
+        tags = {"busy","no_stun"},
         
         onenter = function(inst)
 			inst.Physics:Stop()
@@ -86,10 +86,11 @@ local states=
         },
         events=
         {
-            EventHandler("animover", function(inst) inst:Remove()
+            EventHandler("animover", function(inst) 
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local despawnfx = SpawnPrefab("maxwell_smoke")
 		despawnfx.Transform:SetPosition(x, y, z)
+		inst:Remove()
 		end),
        },
 },

@@ -243,7 +243,7 @@ local states =
 			end
 
             local elapsed = GetTime() - (inst.sg.mem.lastspawnmovefx or 0)
-            --inst.sg.statemem.task = inst:DoPeriodicTask(MOVE_FX_INTERVAL, SpawnMoveFx, math.max(0, MOVE_FX_INTERVAL - elapsed))
+            inst.sg.statemem.task = inst:DoPeriodicTask(MOVE_FX_INTERVAL, SpawnMoveFx, math.max(0, MOVE_FX_INTERVAL - elapsed))
 		end,
 
         events =
@@ -252,7 +252,7 @@ local states =
         },
 
         onexit = function(inst)
-            --inst.sg.statemem.task:Cancel()
+            inst.sg.statemem.task:Cancel()
         end,
     },
 

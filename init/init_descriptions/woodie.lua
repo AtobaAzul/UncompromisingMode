@@ -259,7 +259,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.SKULLFLASK = "Keeps your mind at ease."
 	DESCRIBE.SKULLFLASK_EMPTY = "Well, it's gone now."
 	DESCRIBE.STANTON_SHADOW_TONIC = "It wouldn't be the weirdest thing I ate..."
+	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 	DESCRIBE.STANTON = "State your business, hoser!"
 	--StantonStuff
 	
+	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
+	
 	DESCRIBE.THEATERCORN = "Would be nice to eat it with some entertainment."
+	DESCRIBE.DEERCLOPS_BARRIER = "It's tryin' to box us in." 

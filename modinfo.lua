@@ -93,40 +93,6 @@ configuration_options =
     BinaryConfig("rat_raids", "Rat Raids", "Rats will periodically be attracted to your base.", true),
     BinaryConfig("durability", "Clothing Degradation", "Certain clothing items become less effective when their durability drops.", true),
 	BinaryConfig("hangyperds", "Starving Gobblers", "Gobblers are now more agressive and will attempt to take berries out of the player's inventory.", true),
-    {
-		name = "toadstool health",
-		label = "Toadstool Health",
-		hover = "Killing Toadstool stops acid rain from occuring. His health can be lowered to make a solo player's life easier.",
-		options =
-		{
-			{description = "Default[52500]", data = 52500},
-			{description = "Lowered[25000]", data = 25000},
-		},
-		default = 52500,
-	},
-	{
-		name = "bee queen health",
-		label = "Bee Queen Health",
-		hover = "Killing Bee Queen stops Hay Fever from occuring. Her health can be lowered to make a solo player's life easier.",
-		options =
-		{
-			{description = "Default[22500]", data = 22500},
-			{description = "Lowered[15000]", data = 15000},
-		},
-		default = 22500,
-	},
-	{
-		name = "widow health",
-		label = "Hooded Widow Health",
-		hover = "Hooded Widow's health can be lowered to closer match a singleplayer experience.",
-		options =
-		{
-			{description = "Default[8000]", data = 8000},
-			{description = "Lowered[6000]", data = 6000},
-		},
-		default = 8000,
-	},
-
 	BinaryConfig("lifeamulet", "Life Giving Amulet Changes", "The Life Giving Amulet acts like vanilla Don't Starve, only reviving when worn upon death. \nIts hunger > health conversion ticks much faster.", true),
     
 ------------------------------
@@ -160,7 +126,7 @@ configuration_options =
     BinaryConfig("hayfever", "Hayfever", "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.", true),
     --BinaryConfig("acidrain", "Acid Rain", "After the First Year, Toadstool will grow poisionous mushtrees aboveground and pollute the world, making the rain acidic.", true),
 	
-	Header("Gamemode"),
+	--[[Header("Gamemode"),
 	{
 		name = "gamemode",
 		label = "Mode",
@@ -171,14 +137,74 @@ configuration_options =
 			--{description = "Custom", data = 2}, --TODO: On custom, enable editing the below settings
 		},
 		default = 0,
+	},]]
+	
+------------------------------
+-- Bosses --
+-----------------------------
+	Header(""),
+	Header("Boss Config"),
+	Header(""),
+	Header("Additional Seasonal Giants"),
+	BinaryConfig("mother_goose", "Mother Goose", "Mother Goose will now attack the player in spring, similar to the Reign of Giant's Moose.", true),
+	BinaryConfig("wiltfly", "Wilting Dragonfly", "Dragonfly will now leave her arena during summer and attack the player, similar to Reign of Giant's Dragonfly.", true),
+	Header(""),
+	
+	Header("Harder Bosses"),
+	BinaryConfig("harder_deerclops", "Deerclops Mutations", "Three different harder versions of deerclops spawn instead of the vanilla variant.", true),
+	BinaryConfig("harder_moose", "Harder Goose", "Goose fight has more mechanics and is harder. This also disables Moose AOE. Does not apply to Mother Goose.", true),
+	BinaryConfig("harder_bearger", "Harder Bearger", "Enabling this option makes bearger's fight contain more attacks, and will make bearger more actively seek out you.", true),
+	BinaryConfig("harder_leifs", "Harder Treeguards", "Enabling this option makes treeguards perform root attacks, inflict knockback, and summon pinelings.", true),
+	Header(""),
+	
+	Header("Harder Raid Bosses"),
+	BinaryConfig("harder_dragonfly", "Harder Dragonfly", "Dragonfly now has knockback on hit.", true),
+	BinaryConfig("harder_lavae", "Exploding Lavae", "Lavae will now leave exploding paste upon death, knocks holes in walls.", true),
+	Header(""),
+	
+	BinaryConfig("harder_beequeen", "Harder Bee Queen", "Bee Queen now has AOE attached to her main attack.", true),
+	BinaryConfig("rework_minotaur", "Ancient Guardian Rework", "The Ancient Guardian's fight is reworked, includes more attacks and a stunning mechanic.", true),
+	Header(""),
+	
+	Header("Boss Quality of Life"),
+    {
+		name = "toadstool health",
+		label = "Toadstool Health",
+		hover = "Killing Toadstool stops acid rain from occuring. His health can be lowered to make a solo player's life easier.",
+		options =
+		{
+			{description = "Default[52500]", data = 52500},
+			{description = "Lowered[25000]", data = 25000},
+		},
+		default = 52500,
 	},
-	
-	
+	{
+		name = "bee queen health",
+		label = "Bee Queen Health",
+		hover = "Killing Bee Queen stops Hay Fever from occuring. Her health can be lowered to make a solo player's life easier.",
+		options =
+		{
+			{description = "Default[22500]", data = 22500},
+			{description = "Lowered[15000]", data = 15000},
+		},
+		default = 22500,
+	},
+	{
+		name = "widow health",
+		label = "Hooded Widow Health",
+		hover = "Hooded Widow's health can be lowered to closer match a singleplayer experience.",
+		options =
+		{
+			{description = "Default[8000]", data = 8000},
+			{description = "Lowered[6000]", data = 6000},
+		},
+		default = 8000,
+	},
+	BinaryConfig("crabking_claws", "Crabking Fight Adjustment", "The Crabkings imposing claws now deal 500 damage to the king when killed.", false),
 ------------------------------
 -- Secret --
 ------------------------------
-    Header("Secret"),
+    --Header("Secret"),
 ------------------------------
-BinaryConfig("crabking_claws", "Crabking Fight Adjustment", "The Crabkings imposing claws now deal 500 damage to the king when killed", false),
     
 }

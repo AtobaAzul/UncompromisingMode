@@ -104,12 +104,16 @@ local events=
 		if inst.rockthrow == true and not inst.components.health:IsDead() and inst.fire_build ~= nil and inst.fire_build == true then
 			inst.sg:GoToState("charge_warning")
 			--[[if math.random() >= 0.5 then
-				inst.sg:GoToState("charge_warning")
+				inst.sg:GoToState("flamethrower")
 			else
-				inst.sg:GoToState("shoot", data.target)
+				inst.sg:GoToState("flamethrower")
 			end]]
 		else
-			onattackfn(inst)
+			if math.random() > 0.75 then
+				inst.sg:GoToState("flamethrower")
+			else
+				onattackfn(inst)
+			end
 		end
 	end),
     CommonHandlers.OnDeath(),
@@ -317,9 +321,13 @@ local states=
             EventHandler("animover", function(inst) 
 				if inst.rockthrow == true and not inst.components.health:IsDead() and inst.fire_build ~= nil and inst.fire_build == true then
 					inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/distant")
-					inst.sg:GoToState("spin_pre")
+					inst.sg:GoToState("charge_warning")
 				else
-					inst.sg:GoToState("idle") 
+					if math.random() > 0.75 then
+						inst.sg:GoToState("flamethrower")
+					else
+						inst.sg:GoToState("idle")
+					end
 				end
 			end),
         },
@@ -670,7 +678,7 @@ local states=
 		},
 		
 		State{
-			name = "shoot",
+			name = "flamethrower",
 			tags = { "attack", "canrotate", "busy" },
 
 			onenter = function(inst)
@@ -679,44 +687,128 @@ local states=
 				if target ~= nil and target.Transform ~= nil then
 					inst:ForceFacePoint(target.Transform:GetWorldPosition())
 				end
-				
+				if not target then
+                target = inst.components.combat.target
+				end
+			
+				if target then
+					inst.sg.statemem.target = target
+				else
+					inst.sg:GoToState("idle")
+				end
 				inst.Physics:Stop()
 
 				inst.AnimState:PlayAnimation("vomit")
-
+				if inst.foogley ~= nil then
+					inst.foogley = inst.foogley + 1
+				else
+					inst.foogley = 0
+				end
 			end,
 
 			timeline =
 			{   
-				TimeEvent(7*FRAMES, function(inst) 
-					local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
-				
-					if target ~= nil and target.Transform ~= nil then
-						inst:ForceFacePoint(target.Transform:GetWorldPosition())
-					end
+            TimeEvent(60*FRAMES, function(inst) 
+				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                end
+			
+				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
+					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
+					inst:LaunchProjectile(inst.sg.statemem.target)
 					
-					inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/taunt", "taunt") 
-				end),
-				TimeEvent(50*FRAMES, function(inst)
-					if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
-					local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
-				
-						if target ~= nil and target.Transform ~= nil then
-							inst:ForceFacePoint(target.Transform:GetWorldPosition())
-						end
-						
-						inst.LaunchProjectile(inst, inst.components.combat.target)
-						
-						inst.components.timer:StopTimer("RockThrow")
-						inst.components.timer:StartTimer("RockThrow", TUNING.BEARGER_NORMAL_GROUNDPOUND_COOLDOWN * 1.25)
+				end
+			end),
+            TimeEvent(63*FRAMES, function(inst)
+				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                end
+			
+				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
+					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
+					inst:LaunchProjectile(inst.sg.statemem.target)
 					
-					end
-				end),
+				end
+			end),
+            TimeEvent(66*FRAMES, function(inst) 
+				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                end
+			
+				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
+					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
+					inst:LaunchProjectile(inst.sg.statemem.target)
+					
+				end
+			end),
+            TimeEvent(69*FRAMES, function(inst) 
+				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                end
+			
+				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
+					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
+					inst:LaunchProjectile(inst.sg.statemem.target)
+					
+				end
+			end),
+            TimeEvent(72*FRAMES, function(inst) 
+				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                end
+			
+				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
+					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
+					inst:LaunchProjectile(inst.sg.statemem.target)
+					
+				end
+			end),
+            TimeEvent(75*FRAMES, function(inst)
+				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                end
+			
+				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
+					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
+					inst:LaunchProjectile(inst.sg.statemem.target)
+					
+				end
+			end),
+            TimeEvent(78*FRAMES, function(inst) 
+				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                end
+			
+				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
+					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
+					inst:LaunchProjectile(inst.sg.statemem.target)
+					
+				end
+			end),
+            TimeEvent(81*FRAMES, function(inst) 
+				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                end
+			
+				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
+					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
+					inst:LaunchProjectile(inst.sg.statemem.target)
+					
+				end
+			end),
 			},
 
 			events =
 			{
-				EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+            EventHandler("animover", function(inst)
+				local randomness = math.random(0,1)
+				if inst.foogley < randomness then
+					inst.sg:GoToState("flamethrower")
+				else
+					inst.foogley = 0
+					inst.sg:GoToState("idle")
+				end
+			 end),
 			},
 		},
 
@@ -762,7 +854,7 @@ local states=
 				end
 			
 				inst.Physics:Stop()
-				inst.AnimState:PlayAnimation("charge_pre")
+				inst.AnimState:PlayAnimation("dash_pre")
 				inst.numSpins = 0
 			end,
 
@@ -789,7 +881,7 @@ local states=
 				end
 			
 				inst.Physics:Stop()
-				inst.AnimState:PlayAnimation("charge_pre")
+				inst.AnimState:PlayAnimation("dash_pre")
 			end,
 
 			events =

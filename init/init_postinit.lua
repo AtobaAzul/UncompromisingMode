@@ -30,18 +30,13 @@ local prefab_post = {
     "amulet",
     "trap_teeth",
 	"beequeen",
-	"dragonfly",
-	"deerclops",
 	"spiderqueen",
-	"bearger",
 	"cave_entrance_open",
 	"catcoon",
 	"icehound",
 	"firehound",
 	"walrus",
 	--"forest",
-	"leif",
-	"leif_sparse",
 	"world",
 	"antlion",
 	"minifan",
@@ -52,13 +47,10 @@ local prefab_post = {
 	"ash",
 	"pigman",
 	"bunnyman",
-	"moose",
 	"walls",
 	"infestables",
 	"foodbuffs",
 	"mutatedhound",
-	"pillar_ruins",
-	"minotaur",
 	--"ground_chunks_breaking",
 	"skeleton",
 	--"shadowcreature",
@@ -67,7 +59,6 @@ local prefab_post = {
 	"sporecloud",
 	"bat",
 	"featherhat",
-	"lavae",
 	--"malbatross",
 	"mushrooms",
 	"rock_ice",
@@ -139,10 +130,7 @@ local prefab_post = {
 local stategraph_post = {
     --example:
     --"wilson",
-	"deerclops",
 	"wilson",
-	"Leif",
-	"minotaur",
 	"spider",
 	"frog",
 	"walrus",
@@ -152,9 +140,7 @@ local stategraph_post = {
 	"Beefalo",
 	"stalker_minion",
 	"koalefant",
-	"bearger",
 	"krampus",
-	"moose",
 	"spiderqueen",
 	"merm",
 }
@@ -177,15 +163,49 @@ local brain_post = {
 	"frog",
 	"spiderqueen",
 	"chester",
-	"bearger",
 	"mossling",
-	"moose",
 }
 
 if GetModConfigData("hangyperds") == true then
 table.insert(stategraph_post,"perd")
 table.insert(brain_post,"perd")
 table.insert(prefab_post,"perd")
+end
+
+if GetModConfigData("harder_deerclops") == true then
+table.insert(stategraph_post,"deerclops")
+table.insert(prefab_post,"deerclops")
+end
+
+if GetModConfigData("harder_moose") == true then
+table.insert(stategraph_post,"moose")
+table.insert(prefab_post,"moose")
+table.insert(brain_post,"moose")
+end
+
+if GetModConfigData("harder_bearger") == true then
+table.insert(stategraph_post,"bearger")
+table.insert(prefab_post,"bearger")
+table.insert(brain_post,"bearger")
+end
+
+if GetModConfigData("harder_leifs") == true then
+table.insert(stategraph_post,"Leif")
+table.insert(prefab_post,"leif")
+table.insert(prefab_post,"leif_sparse")
+end
+
+if GetModConfigData("rework_minotaur") == true then
+table.insert(stategraph_post,"minotaur")
+table.insert(prefab_post,"minotaur")
+table.insert(prefab_post,"pillar_ruins")
+end
+
+if GetModConfigData("harder_dragonfly") == true then 
+table.insert(prefab_post,"dragonfly")
+end
+if GetModConfigData("harder_lavae") == true then
+table.insert(prefab_post,"lavae")
 end
 
 modimport("postinit/sim")

@@ -328,9 +328,13 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.SKULLFLASK = "The science within keeps me calm."
 	DESCRIBE.SKULLFLASK_EMPTY = "The science will make it refill later."
 	DESCRIBE.STANTON_SHADOW_TONIC = "For science!"
+	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 	DESCRIBE.STANTON = "I wonder what he wants?"
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "Science keeps my mind at peace!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Science no longer comforts me."
 	--StantonStuff
 	
+	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
+	
 	DESCRIBE.THEATERCORN = "I wonder if there's anything interesting to watch while I eat this."
+	DESCRIBE.DEERCLOPS_BARRIER = "I need to mine my way out." 

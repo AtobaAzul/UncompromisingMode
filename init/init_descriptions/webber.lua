@@ -258,9 +258,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.SKULLFLASK = "This drink calms our mind."
 	DESCRIBE.SKULLFLASK_EMPTY = "I wonder where we can get more."
 	DESCRIBE.STANTON_SHADOW_TONIC = "Should we drink?"
+	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 	DESCRIBE.STANTON = "He's a bit creepy."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "We're feeling much more comfortable."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Everything's getting scary again."
 	--StantonStuff
 	
+	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
+	
 	DESCRIBE.THEATERCORN = "We like to watch things fight when we eat it."
+	DESCRIBE.DEERCLOPS_BARRIER = "We think we should mine through the weak areas." 

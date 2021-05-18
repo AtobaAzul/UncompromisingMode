@@ -1466,8 +1466,19 @@ local function IsEligible(player)
 	local hounding = TheWorld.components.hounded:GetWarning()
 	local deerclopsed = TheWorld.components.uncompromising_deerclopsspawner:GetWarning()
 	--local beargered = TheWorld.components.beargerspawner:GetWarning()
-	local gmoosed = TheWorld.components.gmoosespawner:GetWarning()
-	local dragonflied = TheWorld.components.mock_dragonflyspawner:GetWarning()
+	
+	local gmoosed, dragonflied
+	if TheWorld.components.gmoosespawner ~= nil then
+		gmoosed = TheWorld.components.gmoosespawner:GetWarning()
+	else
+		gmoosed = false
+	end
+	if TheWorld.components.mock_dragonflyspawner ~= nil then
+		dragonflied = TheWorld.components.mock_dragonflyspawner:GetWarning()
+	else
+		dragonflied = false
+	end
+	
 	local area = player.components.areaaware
 	
 	return not TheWorld:HasTag("snowstormstart") and not TheWorld.net:HasTag("snowstormstart") and not 

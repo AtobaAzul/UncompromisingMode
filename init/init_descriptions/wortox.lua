@@ -259,7 +259,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.SKULLFLASK = "I'm still not sure if this is mortal food."
 	DESCRIBE.SKULLFLASK_EMPTY = "I gobbled it up!"
 	DESCRIBE.STANTON_SHADOW_TONIC = "Is this mortal food?"
+	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 	DESCRIBE.STANTON = "What souls inhabits you."
 	--StantonStuff
 	
+	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
+	
 	DESCRIBE.THEATERCORN = "Food designed for a show!"
+	DESCRIBE.DEERCLOPS_BARRIER = "A foolish attempt to contain this imp!" 

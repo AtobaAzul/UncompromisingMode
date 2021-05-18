@@ -269,7 +269,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.SKULLFLASK = "This would be better if it were hotter."
 	DESCRIBE.SKULLFLASK_EMPTY = "Not a drop left."
 	DESCRIBE.STANTON_SHADOW_TONIC = "ECK GROSS!"
+	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 	DESCRIBE.STANTON = "Cool skeleton! What does he want?"
 	--StantonStuff
 	
+	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
+	
 	DESCRIBE.THEATERCORN = "I would prefer it burnt, or at least I could watch things burn while I eat it."
+	DESCRIBE.DEERCLOPS_BARRIER = "Why won't you BURN!" 
