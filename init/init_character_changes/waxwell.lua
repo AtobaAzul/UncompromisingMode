@@ -71,28 +71,14 @@ local function onread(inst, reader)
 
     reader.components.inventory:ConsumeByName("nightmarefuel", TUNING.SHADOWWAXWELL_FUEL_COST + 1)
 
-    --Ok you had everything. Make the image.
-    local theta = math.random() * 2 * PI
-    local pt = inst:GetPosition()
-    local radius = math.random(3, 6)
-    --local offset = FindWalkableOffset(pt, theta, radius, 12, true)
 	local readx, ready, readz = reader.Transform:GetWorldPosition()
-    --[[if offset then
-		pt.x = pt.x + offset.x
-		pt.z = pt.z + offset.z
-		local shadowmax = reader.components.petleash:SpawnPetAt(boatx, 0, boatz, "old_shadowwaxwell")
-		shadowmax.sg:GoToState("jumpout")
-        reader.components.sanity:RecalculatePenalty()
-        inst.SoundEmitter:PlaySound("dontstarve/maxwell/shadowmax_appear")
-        return true
-	else]]
-		local shadowmax = reader.components.petleash:SpawnPetAt(readx, ready, readz, "old_shadowwaxwell")
-		shadowmax.sg:GoToState("jumpout")
-        reader.components.health:DoDelta(TUNING.SHADOWWAXWELL_HEALTH_COST)
-        reader.components.sanity:RecalculatePenalty()
-        inst.SoundEmitter:PlaySound("dontstarve/maxwell/shadowmax_appear")
-        return true
-    --end
+	local shadowmax = reader.components.petleash:SpawnPetAt(readx, ready, readz, "old_shadowwaxwell")
+	
+	shadowmax:DoTaskInTime(0, function(shadowmax) shadowmax.sg:GoToState("jumpout") end)
+	reader.components.health:DoDelta(TUNING.SHADOWWAXWELL_HEALTH_COST)
+	reader.components.sanity:RecalculatePenalty()
+	inst.SoundEmitter:PlaySound("dontstarve/maxwell/shadowmax_appear")
+	return true
 end
 
 env.AddPrefabPostInit("waxwelljournal", function(inst)

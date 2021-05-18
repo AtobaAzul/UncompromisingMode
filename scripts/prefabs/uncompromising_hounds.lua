@@ -708,7 +708,7 @@ end
 
 local function onhit(inst, attacker, target)
 
-    if not target:IsValid() then
+    if not target:IsValid() or target:HasTag("hound") or target:HasTag("warg") then
         --target killed or removed in combat damage phase
         return
     end

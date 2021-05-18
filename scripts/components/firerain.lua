@@ -155,22 +155,19 @@ function FireRain:SpawnMeteor(mod)
     local map = TheWorld.Map
     local fan_offset = FindValidPositionByFan(theta, radius, 30,
         function(offset)
-            return map:IsPassableAtPoint(x + offset.x, y + offset.y, z + offset.z)
+            return not map:IsPassableAtPoint(x + offset.x, y + offset.y, z + offset.z)
         end)
 		
 	local function IsValidSinkholePosition(offset2)
         local x1, z1 = x + offset2.x, z + offset2.z
-        if #TheSim:FindEntities(x1, 0, z1, TUNING.ANTLION_SINKHOLE.RADIUS * 3, { "antlion_sinkhole_blocker" }) > 0 then
-            return false
-        end
         for dx = -1, 1 do
             for dz = -1, 1 do
                 if not TheWorld.Map:IsPassableAtPoint(x1 + dx * TUNING.ANTLION_SINKHOLE.RADIUS, 0, z1 + dz * TUNING.ANTLION_SINKHOLE.RADIUS) then
-                    return false
+                    return true
                 end
             end
         end
-        return true
+        return false
     end
 
     local offset2 = Vector3(0, 0, 0)
@@ -182,20 +179,6 @@ function FireRain:SpawnMeteor(mod)
         nil
 
     if fan_offset ~= nil and offset2 ~= nil then
-        local met = nil --SpawnPrefab("antlion_sinkhole_lava")
-        --met.Transform:SetPosition(x + fan_offset.x, y + fan_offset.y, z + fan_offset.z)
-		--met:PushEvent("startcollapse")
-        if mod == nil then
-            mod = 1
-        end
-
-        --Randomize size, but only spawn small meteors on the periphery
-        local peripheral = radius > TUNING.METEOR_SHOWER_SPAWN_RADIUS - TUNING.METEOR_SHOWER_CLEANUP_BUFFER
-        local rand = not peripheral and math.random() or 1
-        local cost = math.floor(1 / mod + .5)
-        
-        return met
-	else
 		local xrandom = x + math.random(-5, 5)
 		local zrandom = z + math.random(-5, 5)
 		

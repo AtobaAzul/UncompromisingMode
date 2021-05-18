@@ -261,7 +261,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.SKULLCHEST_CHILD = "Too bad burning one doesn't burn the others."
 	
 	DESCRIBE.SLOBBERLOBBER = "My two favorite things, combined into one!"
-	DESCRIBE.GORE_HORN_HAT = "I am a train of pure pain!"
+	DESCRIBE.GORE_HORN_HAT = "Choo Choo!"
 	DESCRIBE.BEARGERCLAW = "Maybe I could dig to the center of the earth with this."
 	DESCRIBE.FEATHER_FROCK = "I am a pheonix! Hear me squawk!"
 	
