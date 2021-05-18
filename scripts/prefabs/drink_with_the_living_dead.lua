@@ -31,9 +31,6 @@ local function fn_tonic()
         return inst
     end
 
-    inst:AddComponent("stackable")
-    inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
-
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
@@ -85,8 +82,6 @@ local function fn_tonic_fancy()
         return inst
     end
 
-    inst:AddComponent("stackable")
-    inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
     inst:AddComponent("inspectable")
 
@@ -418,7 +413,6 @@ local function fn_flask()
         return inst
     end
 
-    inst:AddComponent("stackable")
 
     inst:AddComponent("inspectable")
 
@@ -474,7 +468,6 @@ local function fn_flask_empty()
         return inst
     end
 
-    inst:AddComponent("stackable")
 
     inst:AddComponent("inspectable")
 
