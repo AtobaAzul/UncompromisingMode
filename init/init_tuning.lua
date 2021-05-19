@@ -150,6 +150,17 @@ TUNING.DSTU =
 	--Worm inclusion
 	DEPTHSEELS = GetModConfigData("depthseels"),
 	DEPTHSVIPERS = GetModConfigData("depthsvipers"),
+	
+	--Bats
+	ADULTBATILISKS = GetModConfigData("adultbatilisks"),
+	BATSPOOKING = GetModConfigData("batspooking"),
+	
+	--Scorpions
+	DESERTSCORPIONS = GetModConfigData("desertscorpions"),
+	
+	--Pinelings
+	PINELINGS = GetModConfigData("pinelings"),
+	
     ----------------------------------------------------------------------------
     --Player changes
     ----------------------------------------------------------------------------

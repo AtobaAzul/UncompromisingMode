@@ -52,11 +52,15 @@ env.AddPrefabPostInit("cave_entrance_open", function(inst)
 		return
 	end
 	if inst.components.childspawner ~= nil then
-		inst.components.childspawner:SetRegenPeriod(60/TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
-		inst.components.childspawner:SetSpawnPeriod(.1/TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
+	
+		if TUNING.DSTU.BATSPOOKING == true then
+			inst.components.childspawner:SetRegenPeriod(60/TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
+			inst.components.childspawner:SetSpawnPeriod(.1/TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
+		end
 		--inst.components.childspawner:SetMaxChildren(6*TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
-		inst.components.childspawner.rarechild = "vampirebat"
-		
+		if TUNING.DSTU.ADULTBATILISKS == true then
+			inst.components.childspawner.rarechild = "vampirebat"
+		end
 		
 		--[[inst:AddComponent("playerprox")
 		inst.components.playerprox:SetDist(11, 14) --set specific values

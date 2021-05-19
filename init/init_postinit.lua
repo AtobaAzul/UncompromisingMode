@@ -57,7 +57,6 @@ local prefab_post = {
 	"berrybush",
 	--"papyrus",
 	"sporecloud",
-	"bat",
 	"featherhat",
 	--"malbatross",
 	"mushrooms",
@@ -118,7 +117,6 @@ local prefab_post = {
 	"reviver",
 	"krampus_sack",
 	"armor_dragonfly",
-	"evergreen_stump",
 	--"bundle",
 	"eyebrella",
 	"birds",
@@ -206,6 +204,14 @@ table.insert(prefab_post,"dragonfly")
 end
 if GetModConfigData("harder_lavae") == true then
 table.insert(prefab_post,"lavae")
+end
+
+if GetModConfigData("hardbatilisks") == true then
+table.insert(prefab_post,"bat")
+end
+
+if GetModConfigData("pinelings") == true then
+table.insert(prefab_post,"evergreen_stump")
 end
 
 modimport("postinit/sim")

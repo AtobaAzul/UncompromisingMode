@@ -141,26 +141,38 @@ configuration_options =
 -----------------------------
 -- Monsters --
 -----------------------------
-	Header(""),
+	SkipSpace(),
 	Header("Monsters"),
 	Header("--------------------"),
+	
 	Header("New Hounds"),
 	BinaryConfig("lightninghounds", "Lightning Hounds", "Lightning Hounds are part of hound waves.", true),
 	BinaryConfig("magmahounds", "Magma Hounds", "Magma Hounds are part of hound waves.", true),
 	BinaryConfig("sporehounds", "Spore Hounds", "Spore Hounds are part of hound waves.", true),
 	BinaryConfig("glacialhounds", "Glacial Hounds", "Glacial Hounds are part of hound waves.", true),
-	Header(""),
+	SkipSpace(),
 	Header("Harder Hounds"),
 	BinaryConfig("firebitehounds", "Fiery Bite", "Red Hounds set players on fire when they attack.", true),
 	BinaryConfig("frostbitehounds", "Frozen Bite", "Blue Hounds freeze players when they attack.", true),
 	BinaryConfig("vargwaves", "Vargs in Hound Waves", "In the lategame, vargs will accompany hounds in houndwaves.", true),
-	Header(""),
-	Header(""),
+	
+	SkipSpace(),
 	Header("New Depths Worms"),
 	BinaryConfig("depthseels", "Depths Eels", "Electrified depths eels join the worm pack in Winter and Spring.", true),
 	BinaryConfig("depthsvipers", "Depths Vipers", "Mysterious depths vipers join the worm pack in Summer and Autumn", true),
-	Header(""),
+	
+	SkipSpace(),
+	Header("Bats"),
+	BinaryConfig("hardbatilisks", "Harder Batilisks", "Batilisk's health is increased from 50 to 75, drop wings less often than vanilla, drop monster morsels.", true),
+	BinaryConfig("adultbatilisks", "Adult Batilisks", "Adult Batilisks spawn under certain conditions instead of regular ones. They are harder, but have better loot on average.", true),
+	BinaryConfig("batspooking", "Bat Sinkhole Evacuation", "Sinkholes will spawn all of their bats as soon as they are regenerated, instead of slowly trickling out.", true),
+	
+	SkipSpace(),
+	Header("Misc Monsters"),
+	BinaryConfig("desertscorpions", "Scorpions", "Scorpions plague the desert lands. They will spawn from desert turf within the desert during the day.", true),
+	BinaryConfig("pinelings", "Pinelings", "Stumps will become pinelings if awoken by a treeguard, or if enough time passes and you're lucky.", true),
 	Header("--------------------"),
+	
 -----------------------------
 -- Bosses --
 -----------------------------

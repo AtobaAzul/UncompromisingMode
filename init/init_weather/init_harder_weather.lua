@@ -48,7 +48,7 @@ end)
 
 local function OnSeasonTick(inst)
 	if TheWorld.state.isspring then
-		if not TheWorld.components.mock_dragonflyspawner then
+		if not TheWorld.components.mock_dragonflyspawner and TUNING.DSTU.SPAWNWILTINGFLY == true then
 			inst:AddComponent("mock_dragonflyspawner")
 		end
 	end
@@ -106,7 +106,11 @@ env.AddPrefabPostInit("forest", function(inst)
 	inst:AddComponent("pollenmitedenspawner")
 	--inst:ListenForEvent("seasontick", OnSeasonTick)
 	inst:AddComponent("snowstorminitiator")
+	
+	if TUNING.DSTU.DESERTSCORPIONS == true then	
 	inst:AddComponent("scorpionspawner")
+	end
+	
 	inst:AddComponent("randomnightevents")
 	
 	

@@ -21,7 +21,7 @@ local events=
             if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
                     if inst.rootready == true then
 							local stump = FindEntity(inst, TUNING.LEIF_MAXSPAWNDIST, nil, {"stump","evergreen"}, { "leif","burnt","deciduoustree" })
-							if stump ~= nil then
+							if stump ~= nil and TUNING.DSTU.PINELINGS == true then
 							inst.sg:GoToState("summon", data.target)
 							else
                             inst.sg:GoToState("snare", data.target)

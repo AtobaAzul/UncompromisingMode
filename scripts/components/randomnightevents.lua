@@ -528,7 +528,7 @@ local function SpawnBats(player)
 			local num_bats = math.min(3 + math.floor(day/35), 6)
 			for i = 1, num_bats do
 				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
-					local bat = SpawnPrefab("vampirebat")
+					local bat = TUNING.DSTU.ADULTBATILISKS and SpawnPrefab("vampirebat") or SpawnPrefab("bat")
 					bat.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
 					bat:PushEvent("fly_back")
 					bat:DoTaskInTime(0, function(bat) DayBreak(bat) end)
@@ -566,7 +566,7 @@ local function SpawnBaseBats(player)
 			local num_bats = math.min(3 + math.floor(day/35), 6) + level
 			for i = 1 * level, num_bats do
 				player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
-					local bat = SpawnPrefab("vampirebat")
+					local bat = TUNING.DSTU.ADULTBATILISKS and SpawnPrefab("vampirebat") or SpawnPrefab("bat")
 					bat.Transform:SetPosition(x + math.random(-12,12), y, z + math.random(-12,12))
 					bat:PushEvent("fly_back")
 					bat:DoTaskInTime(0, function(bat) DayBreak(bat) end)
