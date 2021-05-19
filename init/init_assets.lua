@@ -107,7 +107,16 @@ Assets = {
 	Asset("ANIM", "anim/walrus_baby_build_summer.zip"),
 	Asset("ANIM", "anim/hat_sunglasses.zip"),
 	Asset("ANIM", "anim/walrus_house_summer.zip"),
-	Asset("ANIM", "anim/cookiespikes.zip"),
+	
+	Asset("ANIM", "anim/um_spikes.zip"),
+	Asset("ANIM", "anim/spikes_cookie.zip"),
+	Asset("ANIM", "anim/spikes_crow.zip"),
+	Asset("ANIM", "anim/spikes_goose.zip"),
+	Asset("ANIM", "anim/spikes_malbatross.zip"),
+	Asset("ANIM", "anim/spikes_robin.zip"),
+	Asset("ANIM", "anim/spikes_robinwinter.zip"),
+	Asset("ANIM", "anim/spikes_canary.zip"),
+	
 	Asset("ANIM", "anim/gnat_cocoon.zip"),
 	Asset("ANIM", "anim/slingshotammo_firecracker.zip"),
 	Asset("ANIM", "anim/phonograph.zip"),

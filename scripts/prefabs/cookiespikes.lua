@@ -1,6 +1,12 @@
 local assets =
 {
-    Asset("ANIM", "anim/cookiespikes.zip"),
+    Asset("ANIM", "anim/um_spikes.zip"),
+    Asset("ANIM", "anim/spikes_cookie.zip"),
+    Asset("ANIM", "anim/spikes_robin.zip"),
+    Asset("ANIM", "anim/spikes_robinwinter.zip"),
+    Asset("ANIM", "anim/spikes_crow.zip"),
+    Asset("ANIM", "anim/spikes_goose.zip"),
+    Asset("ANIM", "anim/spikes_malbatross.zip"),
 }
 
 --DSV uses 4 but ignores physics radius
@@ -52,7 +58,6 @@ local function SetFXOwner(inst, owner)
     inst.ignore[owner] = true
 end
 
-
 local function fn()
         local inst = CreateEntity()
 
@@ -66,8 +71,8 @@ local function fn()
         inst.Transform:SetFourFaced()
 		inst.Transform:SetScale(0.8, 0.8, 0.8)
 
-        inst.AnimState:SetBank("cactus_volcano")
-        inst.AnimState:SetBuild("cookiespikes")
+        inst.AnimState:SetBank("um_spikes")
+        inst.AnimState:SetBuild("spikes_cookie")
         inst.AnimState:PlayAnimation("attack")
 
         inst.entity:SetPristine()
@@ -91,4 +96,98 @@ local function fn()
         return inst
 end
 
-return Prefab("cookiespikes", fn, assets)
+local function feather(feathertype)
+        local inst = CreateEntity()
+
+        inst.entity:AddTransform()
+        inst.entity:AddAnimState()
+        inst.entity:AddNetwork()
+
+        inst:AddTag("FX")
+
+        inst.Transform:SetFourFaced()
+		inst.Transform:SetScale(0.8, 0.8, 0.8)
+
+        inst.AnimState:SetBank("um_spikes")
+        inst.AnimState:SetBuild(feathertype)
+        inst.AnimState:PlayAnimation("attack")
+
+        inst.entity:SetPristine()
+		
+        if not TheWorld.ismastersim then
+            return inst
+        end
+
+        inst:ListenForEvent("animover", inst.Remove)
+
+        return inst
+end
+
+
+local function robinfn()
+    local inst = feather("spikes_robin")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    return inst
+end
+
+local function robinwinterfn()
+    local inst = feather("spikes_robinwinter")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    return inst
+end
+
+local function crowfn()
+    local inst = feather("spikes_crow")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    return inst
+end
+
+local function canaryfn()
+    local inst = feather("spikes_canary")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    return inst
+end
+
+local function goosefn()
+    local inst = feather("spikes_goose")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    return inst
+end
+
+local function malbatrossfn()
+    local inst = feather("spikes_malbatross")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    return inst
+end
+
+return Prefab("cookiespikes", fn, assets),
+		Prefab("spikes_robin", robinfn, assets),
+		Prefab("spikes_robinwinter", robinwinterfn, assets),
+		Prefab("spikes_crow", crowfn, assets),
+		Prefab("spikes_canary", canaryfn, assets),
+		Prefab("spikes_goose", goosefn, assets),
+		Prefab("spikes_malbatross", malbatrossfn, assets)
