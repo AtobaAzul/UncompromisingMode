@@ -137,39 +137,33 @@ local function OnBlocked(owner, data, inst)
 			if robin then
 				inst.components.container:ConsumeByName("feather_robin", 1)
 				SpawnThorns(inst, "robin", owner)
-				for i = 1, 3 do 
-					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
-				end
+				SpawnPrefab("spikes_robin").entity:SetParent(owner.entity)
+				inst.SoundEmitter:PlaySound("dontstarve/birds/takeoff_robin")
 			elseif robin_winter then
 				inst.components.container:ConsumeByName("feather_robin_winter", 1)
 				SpawnThorns(inst, "robin_winter", owner)
-				for i = 1, 3 do 
-					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
-				end
+				SpawnPrefab("spikes_robinwinter").entity:SetParent(owner.entity)
+				inst.SoundEmitter:PlaySound("dontstarve/birds/takeoff_junco")
 			elseif crow then
 				inst.components.container:ConsumeByName("feather_crow", 1)
 				SpawnThorns(inst, "crow", owner)
-				for i = 1, 3 do 
-					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
-				end
+				SpawnPrefab("spikes_crow").entity:SetParent(owner.entity)
+				inst.SoundEmitter:PlaySound("dontstarve/birds/takeoff_crow")
 			elseif canary then
 				inst.components.container:ConsumeByName("feather_canary", 1)
 				SpawnThorns(inst, "canary", owner)
-				for i = 1, 3 do 
-					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
-				end
+				SpawnPrefab("spikes_canary").entity:SetParent(owner.entity)
+				inst.SoundEmitter:PlaySound("dontstarve/birds/takeoff_canary")
 			elseif goose then
 				inst.components.container:ConsumeByName("goose_feather", 1)
 				SpawnThorns(inst, "goose", owner)
-				for i = 1, 3 do 
-					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
-				end
+				SpawnPrefab("spikes_goose").entity:SetParent(owner.entity)
+				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/mossling/honk")
 			elseif malbatross then
 				inst.components.container:ConsumeByName("malbatross_feather", 1)
 				SpawnThorns(inst, "malbatross", owner)
-				for i = 1, 3 do 
-					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
-				end
+				SpawnPrefab("spikes_malbatross").entity:SetParent(owner.entity)
+				inst.SoundEmitter:PlaySound("saltydog/creatures/boss/malbatross/attack_call")
 			end
 			
 			if owner.SoundEmitter ~= nil then
@@ -199,39 +193,33 @@ local function OnUse(inst)
 			if robin then
 				inst.components.container:ConsumeByName("feather_robin", 1)
 				SpawnThorns(inst, "robin", owner)
-				for i = 1, 3 do 
-					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
-				end
+				SpawnPrefab("spikes_robin").entity:SetParent(owner.entity)
+				inst.SoundEmitter:PlaySound("dontstarve/birds/takeoff_robin")
 			elseif robin_winter then
 				inst.components.container:ConsumeByName("feather_robin_winter", 1)
 				SpawnThorns(inst, "robin_winter", owner)
-				for i = 1, 3 do 
-					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
-				end
+				SpawnPrefab("spikes_robinwinter").entity:SetParent(owner.entity)
+				inst.SoundEmitter:PlaySound("dontstarve/birds/takeoff_junco")
 			elseif crow then
 				inst.components.container:ConsumeByName("feather_crow", 1)
 				SpawnThorns(inst, "crow", owner)
-				for i = 1, 3 do 
-					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
-				end
+				SpawnPrefab("spikes_crow").entity:SetParent(owner.entity)
+				inst.SoundEmitter:PlaySound("dontstarve/birds/takeoff_crow")
 			elseif canary then
 				inst.components.container:ConsumeByName("feather_canary", 1)
 				SpawnThorns(inst, "canary", owner)
-				for i = 1, 3 do 
-					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
-				end
+				SpawnPrefab("spikes_canary").entity:SetParent(owner.entity)
+				inst.SoundEmitter:PlaySound("dontstarve/birds/takeoff_canary")
 			elseif goose then
 				inst.components.container:ConsumeByName("goose_feather", 1)
 				SpawnThorns(inst, "goose", owner)
-				for i = 1, 3 do 
-					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
-				end
+				SpawnPrefab("spikes_goose").entity:SetParent(owner.entity)
+				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/mossling/honk")
 			elseif malbatross then
 				inst.components.container:ConsumeByName("malbatross_feather", 1)
 				SpawnThorns(inst, "malbatross", owner)
-				for i = 1, 3 do 
-					SpawnPrefab("weregoose_feathers"..i).entity:SetParent(owner.entity)
-				end
+				SpawnPrefab("spikes_malbatross").entity:SetParent(owner.entity)
+				inst.SoundEmitter:PlaySound("saltydog/creatures/boss/malbatross/attack_call")
 			end
 			
 			if owner.SoundEmitter ~= nil then
@@ -270,6 +258,7 @@ local function frockfn()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
     MakeInventoryPhysics(inst)

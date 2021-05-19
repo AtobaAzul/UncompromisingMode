@@ -352,22 +352,22 @@ local states =
 
         onenter = function(inst)
 			inst.x = math.random(-4, 4)
-			inst.y = math.random(-4, 4)
+			inst.z = math.random(-4, 4)
             inst.components.locomotor:Stop()
             inst.AnimState:PlayAnimation("jumpout")
-            inst.Physics:SetMotorVel(inst.x, inst.y, 0)
+            inst.Physics:SetMotorVel(inst.x, 0, inst.z)
         end,
 
         timeline =
         {
             TimeEvent(10 * FRAMES, function(inst)
-                inst.Physics:SetMotorVel(inst.x * 0.75, inst.y * 0.75, 0)
+                inst.Physics:SetMotorVel(inst.x * 0.75, 0, inst.z * 0.75)
             end),
             TimeEvent(15 * FRAMES, function(inst)
-                inst.Physics:SetMotorVel(inst.x * 0.5, inst.y * 0.5, 0)
+                inst.Physics:SetMotorVel(inst.x * 0.5, 0, inst.z * 0.5)
             end),
             TimeEvent(17 * FRAMES, function(inst)
-                inst.Physics:SetMotorVel(inst.x * 0.25, inst.y * 0.25, 0)
+                inst.Physics:SetMotorVel(inst.x * 0.25, 0, inst.z * 0.25)
             end),
             TimeEvent(18 * FRAMES, function(inst)
                 inst.Physics:Stop()
