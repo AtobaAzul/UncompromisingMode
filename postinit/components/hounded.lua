@@ -24,12 +24,28 @@ AddComponentPostInit("hounded", function(self)
         ["summer"] = {},
     }
     --seasonal hound variants will be chosen randomly from their respective season tables
+    --seasonal hound variants will be chosen randomly from their respective season tables
     self.seasonal_prefabs = {
-        ["autumn"] = {"sporehound"},
-        ["winter"] = {"glacialhound"},
-        ["spring"] = {"lightninghound"},
-        ["summer"] = {"magmahound"},
+        ["autumn"] = {""},
+        ["winter"] = {""},
+        ["spring"] = {""},
+        ["summer"] = {""},
     }
+	if TUNING.DSTU.SPOREHOUNDS == true then
+	self.seasonal_prefabs["autumn"] = {"sporehound"}
+	end
+	
+	if TUNING.DSTU.GLACIALHOUNDS == true then
+	self.seasonal_prefabs["winter"] = {"glacialhound"}
+	end
+	
+	if TUNING.DSTU.LIGHTNINGHOUNDS == true then
+	self.seasonal_prefabs["spring"] = {"lightninghound"}
+	end
+	
+	if TUNING.DSTU.MAGMAHOUNDS == true then
+	self.seasonal_prefabs["summer"] = {"magmahound"}
+	end    
 	
 	self.spawnlimit = 0
 
@@ -127,7 +143,7 @@ AddComponentPostInit("hounded", function(self)
 		local SpawnLimit = CalcSpawnLimit()
 
         --replaces the first hound in a wave with a random boss hound
-        if pt and self.spawn_boss and magmaspawn_pt ~= nil then
+        if pt and self.spawn_boss and magmaspawn_pt ~= nil and TUNING.DSTU.VARGWAVES == true then
             self.spawn_boss = false
             prefab_list = self.seasonal_boss_prefabs[season]
             prefab = --[[math.random() < self.seasonal_boss_chance and #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or]] self.default_boss_prefab
@@ -137,9 +153,9 @@ AddComponentPostInit("hounded", function(self)
         end
         --spawn a random seasonal hound
         if pt and chance < self.seasonal_chance and self.spawnamount <= SpawnLimit and GLOBAL.TheWorld.state.cycles >= 22 then
-            print(CalcSpawnLimit)
+            --print(CalcSpawnLimit)
 			self.spawnamount = self.spawnamount + 1
-			print(self.spawnamount)
+			--print(self.spawnamount)
 			
 			prefab_list = self.seasonal_prefabs[season]
             prefab = #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or nil

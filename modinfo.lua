@@ -72,7 +72,7 @@ configuration_options =
 -- Core Gameplay --
 ------------------------------
     Header("Core Gameplay"),
-	BinaryConfig("foodregen", "Over Time Food Stats", "Health and Sanity from foods is applied over time, each food acting as a unique stackable buff.", true),
+	BinaryConfig("foodregen", "Over Time Food Stats", "Health and Sanity from foods is applied over time, each food acting as a seperate stackable health or sanity regen buff.", true),
     BinaryConfig("caved", "[IMPORTANT] Cave Config", "Switches some things around so players who can't run Caves can still enjoy the game. ENABLE IF CAVES ARE ENABLED!", true),
 	{
 		name = "rne chance",
@@ -138,8 +138,23 @@ configuration_options =
 		},
 		default = 0,
 	},]]
-	
-------------------------------
+-----------------------------
+-- Monsters --
+-----------------------------
+	Header(""),
+	Header("Monsters"),
+	Header(""),
+	Header("New Hounds"),
+	BinaryConfig("lightninghounds", "Lightning Hounds", "Lightning Hounds are part of hound waves.", true),
+	BinaryConfig("magmahounds", "Magma Hounds", "Magma Hounds are part of hound waves.", true),
+	BinaryConfig("sporehounds", "Spore Hounds", "Spore Hounds are part of hound waves.", true),
+	BinaryConfig("glacialhounds", "Glacial Hounds", "Glacial Hounds are part of hound waves.", true),
+	Header(""),
+	Header("Harder Hounds"),
+	BinaryConfig("firebitehounds", "Fiery Bite", "Red Hounds set players on fire when they attack.", true),
+	BinaryConfig("frostbitehounds", "Frozen Bite", "Blue Hounds freeze players when they attack.", true),
+	BinaryConfig("vargwaves", "Vargs in Hound Waves", "In the lategame, vargs will accompany hounds in houndwaves.", true),
+-----------------------------
 -- Bosses --
 -----------------------------
 	Header(""),

@@ -68,7 +68,7 @@ local function CanLeapNow(inst)
 end
 local function CanRangeNow(inst)
     local target = inst.components.combat.target
-    return target ~= nil and target.components.pinnable and target.components.pinnable:IsValidPinTarget() and inst.WebReady == true and not inst.sg:HasStateTag("noweb")
+    return target ~= nil and target.components.pinnable and target.components.pinnable:IsValidPinTarget() and inst:GetDistanceSqToInst(target) > 3
 end
 
 local function EquipRange(inst)
@@ -149,7 +149,7 @@ function HoodedWidowBrain:OnStart()
             SequenceNode({
                 ActionNode(function() EquipMeleeAndResetCooldown(self.inst) end, "Equip melee"),
                 ChaseAndAttack(self.inst) })),
-        WhileNode(function() return TargetLeavingArena(self.inst) end, "AttackMomentarily",
+        WhileNode(function() return TargetLeavingArena(self.inst) and CanRangeNow(self.inst) end, "AttackMomentarily",
             SequenceNode({
                 ActionNode(function() EquipRange(self.inst) end, "Equip phlegm"),
                 ChaseAndAttack(self.inst) })),

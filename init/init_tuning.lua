@@ -132,6 +132,18 @@ TUNING.DSTU =
 	
 	--Hooded Widow
 	WIDOW_HEALTH = GetModConfigData("widow health"),
+	
+	
+	
+	--Hound inclusion
+	SPOREHOUNDS = GetModConfigData("sporehounds"),
+	GLACIALHOUNDS = GetModConfigData("glacialhounds"),
+	LIGHTNINGHOUNDS = GetModConfigData("lightninghounds"),
+	MAGMAHOUNDS = GetModConfigData("magmahounds"),
+	
+	FIREBITEHOUNDS = GetModConfigData("firebitehounds"),
+	FROSTBITEHOUNDS = GetModConfigData("frostbitehounds"),
+	VARGWAVES = GetModConfigData("vargwaves"),
     ----------------------------------------------------------------------------
     --Player changes
     ----------------------------------------------------------------------------

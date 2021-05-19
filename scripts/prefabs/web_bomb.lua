@@ -31,6 +31,7 @@ local function doprojectilehit(inst, attacker, other)
 			
            other.components.pinnable:Stick("web_net_trap",splashprefabs)
 				local widow = TheSim:FindFirstEntityWithTag("hoodedwidow")
+				if widow ~= nil then
 				widow.sg:GoToState("tossplayer")
 				other:DoTaskInTime(1.3, function(other)
 				other.components.pinnable:Unstick()
@@ -67,6 +68,7 @@ local function doprojectilehit(inst, attacker, other)
 					end
 			other:DoTaskInTime(0.6,function(other) other.Physics:SetMotorVel(0, 0, 0) end)
 			end)
+			end
        end
     end
 

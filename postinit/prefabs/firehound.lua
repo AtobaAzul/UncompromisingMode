@@ -17,9 +17,12 @@ env.AddPrefabPostInit("firehound", function (inst)
 		return
 	end
 	
+	if TUNING.DSTU.FIREBITEHOUNDS == true then
     if inst.components.combat ~= nil then
         inst:ListenForEvent("onhitother", OnHitOtherBurn)
     end
+	end
+	
 end)
 
 env.AddPrefabPostInit("magmahound", function (inst)
