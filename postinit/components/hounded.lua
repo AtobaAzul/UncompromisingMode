@@ -83,7 +83,7 @@ AddComponentPostInit("hounded", function(self)
     local _GetSpawnPoint = UpvalueHacker.GetUpvalue(self.SummonSpawn, "SummonSpawn", "GetSpawnPoint")
 
 	local function FindNearbyPlayer(inst,pt)
-		local playerlist = TheSim:FindEntities(pt.x,pt.y,pt.z, 25, {"player", "_health"},{"dead", "playerghost"})
+		local playerlist = TheSim:FindEntities(pt.x,pt.y,pt.z, 50, {"player", "_health"},{"dead", "playerghost"})
 		local player = playerlist[math.random(#playerlist)]
 		
 		if inst.components.combat ~= nil and player ~= nil then	
@@ -263,7 +263,7 @@ AddComponentPostInit("hounded", function(self) --We can see if we can copy korea
     local _GetSpawnPoint = UpvalueHacker.GetUpvalue(self.SummonSpawn, "SummonSpawn", "GetSpawnPoint")
 
 	local function FindNearbyPlayer(inst,pt)
-		local playerlist = TheSim:FindEntities(pt.x,pt.y,pt.z, 25, {"player", "_health"},{"dead", "playerghost"})
+		local playerlist = TheSim:FindEntities(pt.x,pt.y,pt.z, 50, {"player", "_health"},{"dead", "playerghost"})
 		local player = playerlist[math.random(#playerlist)]
 		
 		if inst.components.combat ~= nil and player ~= nil then	
