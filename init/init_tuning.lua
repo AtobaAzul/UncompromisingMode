@@ -133,7 +133,9 @@ TUNING.DSTU =
 	--Hooded Widow
 	WIDOW_HEALTH = GetModConfigData("widow health"),
 	
-	
+	--Hound inclusion
+	SPAWNMOTHERGOOSE = GetModConfigData("mother_goose"),
+	SPAWNWILTINGFLY = GetModConfigData("wiltfly"),
 	
 	--Hound inclusion
 	SPOREHOUNDS = GetModConfigData("sporehounds"),

@@ -115,7 +115,7 @@ env.AddPrefabPostInit("forest", function(inst)
 	inst.OnLoad = OnLoad
 end)
 
-if GetModConfigData("mother_goose") == true then
+if TUNING.DSTU.SPAWNMOTHERGOOSE == true then
 env.AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then
         return
@@ -124,7 +124,7 @@ env.AddPrefabPostInit("forest", function(inst)
 end)
 end
 
-if GetModConfigData("wiltfly") == true then
+if TUNING.DSTU.SPAWNWILTINGFLY == true then
 env.AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then
         return

@@ -64,88 +64,72 @@ local require = GLOBAL.require
 	
 --	[ 				Features			]	--
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS) then
-		GLOBAL.TUNING.DSTU.MONSTER_HOUNDS_PER_WAVE_INCREASE = GetModConfigData("hound_increase")
-		--GLOBAL.TUNING.DSTU.WEATHERHAZARD_START_DATE = GetModConfigData("weather start date")
-	end
 
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_monsters") == true) then
+
+	--if GetModConfigData("harder_monsters") == true then
 		modimport("init/init_creatures/init_treebuffs")
 		modimport("init/init_creatures/init_harder_monsters")
-	end
+	--end
 
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("rare_food") == true) then
-		modimport("init/init_food/init_food_changes")
-		modimport("init/init_food/init_bird_changes")
-		modimport("init/init_food/init_rare_foods")
-		modimport("init/init_food/init_disableregrowth")
-	end
 
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_recipes") == true) then
+	modimport("init/init_food/init_food_changes")
+	modimport("init/init_food/init_bird_changes")
+	modimport("init/init_food/init_rare_foods")
+	modimport("init/init_food/init_disableregrowth")
+
+
+	--if  GetModConfigData("harder_recipes") == true then <-- This isn't even a config change, yet.
 		modimport("init/init_recipes")
 		modimport("init/init_food/init_crockpot")
 		modimport("init/init_food/monsterfoods")
-	end
+	--end
 
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("rat_raids") == true or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("rat_raids") == true) then
+	if GetModConfigData("rat_raids") == true then
 		modimport("init/init_ratraid")
 	end
 
 	modimport("init/init_creatures/init_knockback")
 
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("harder_shadows") == true or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_shadows") == true) then
+	if GetModConfigData("harder_shadows") == true then
 		modimport("init/init_creatures/init_harder_shadows")
 		--modimport("init/init_creatures/init_shadowspawner")
 		modimport("postinit/prefabs/shadowcreature")
 		modimport("postinit/stategraphs/SGshadowcreature")
 	end
 
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_weather") == true) then
+	--if  GetModConfigData("harder_weather") == true then <-- This isn't even a config change, yet.
 		--modimport("init/init_weather/init_acidmushroom_networking")
 		modimport("init/init_weather/init_acid_rain_effects")
 		modimport("init/init_weather/init_acid_rain_disease")
 		modimport("init/init_weather/init_harder_weather")
 		--modimport("init/init_weather/init_snowstorm")
 		modimport("init/init_weather/init_snowstorm_structures")
-	end
+	--end
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("acidrain") == true or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("acidrain") == true) then
+	if GetModConfigData("acidrain") == true then
 		--modimport("init/init_uncompromisingshardrpc")
 		modimport("init/init_weather/init_acidmushroom_networking")
 		modimport("postinit/prefabs/toadstool_cap")
 	end
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("snowstorms") == true or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("snowstorms") == true) then
+	if GetModConfigData("snowstorms") == true then
 		modimport("init/init_weather/init_snowstorm")
 	end
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("hayfever") == true or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("hayfever") == true) then
+	if GetModConfigData("hayfever") == true then
 		modimport("init/init_weather/init_hayfever")
 		modimport("init/init_creatures/init_sneeze_hitters")
 	end
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("durability") == true or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("durability") == true) then
+	if GetModConfigData("durability") == true then
 		modimport("init/init_durability")
 	end
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("willow") == true or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("willow") == true) then
+	if GetModConfigData("willow") == true then
 		modimport("init/init_character_changes/willow")
 	end
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("bernie") == false or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("bernie") == false) then
+	if  GetModConfigData("bernie") == false then
 		modimport("init/init_character_changes/willow_bernie")
 	end
 	
@@ -154,39 +138,32 @@ local require = GLOBAL.require
 		modimport("init/init_character_changes/waxwell")
 	end]]
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("warly") == true or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("warly") == true) then
+	if GetModConfigData("warly") == true  then
 		modimport("init/init_character_changes/warly")
 	end
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("wolfgang") == true or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("wolfgang") == true) then
+	if GetModConfigData("wolfgang") == true then
 		modimport("init/init_character_changes/wolfgang")
 	end
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("lifeamulet") == true or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("lifeamulet") == true) then
+	if GetModConfigData("lifeamulet") == true then
 		modimport("init/init_lifeamulet")
 	end
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("caved") == false and GetModConfigData("acidrain") == true or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("caved") == false and GetModConfigData("acidrain") == true) then
+	if GetModConfigData("caved") == false and GetModConfigData("acidrain") == true then
 		modimport("init/init_weather/init_overworld_toadstool")
 	end
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("crabking_claws") == true or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("crabking_claws") == true) then
+	if  GetModConfigData("crabking_claws") == true then
 		modimport("postinit/prefabs/crabking_claw")
 	end
 	
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("foodregen") == true or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("foodregen") == true) then
+	if GetModConfigData("foodregen") == true  then
 		modimport("init/init_food/init_foodregen")
 	end
 
 	--TODO: Add settings for each individual character after we add many changes
-	if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("character_changes")) then
+	--if GetModConfigData("character_changes") then <-- This isn't even a config option.
 		modimport("init/init_character_changes/generic")
 		modimport("init/init_character_changes/wendy")
 		modimport("init/init_character_changes/wx78")
@@ -199,7 +176,7 @@ local require = GLOBAL.require
 		modimport("init/init_character_changes/wortox")
 		modimport("init/init_character_changes/wormwood")
 		modimport("init/init_character_changes/waxwell")
-	end
+	--end
 
 	if GetModConfigData("hardcore") then
 		modimport("init/init_gamemodes/init_hardcore")

@@ -1,5 +1,3 @@
-if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("rare_food")) then
     -----------------------------------------------------------------
     -- Carrots, mushroos and berry bushs are rare now
     -- Relevant: regrowthmanager.lua, map\rooms
@@ -84,4 +82,3 @@ if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
             ChangeSpawnRates(room)
         end)
     end
-end
