@@ -144,6 +144,10 @@ TUNING.DSTU =
 	FIREBITEHOUNDS = GetModConfigData("firebitehounds"),
 	FROSTBITEHOUNDS = GetModConfigData("frostbitehounds"),
 	VARGWAVES = GetModConfigData("vargwaves"),
+	
+	--Worm inclusion
+	DEPTHSEELS = GetModConfigData("depthseels"),
+	DEPTHSVIPERS = GetModConfigData("depthsvipers"),
     ----------------------------------------------------------------------------
     --Player changes
     ----------------------------------------------------------------------------

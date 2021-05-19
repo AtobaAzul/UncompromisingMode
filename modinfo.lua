@@ -143,7 +143,7 @@ configuration_options =
 -----------------------------
 	Header(""),
 	Header("Monsters"),
-	Header(""),
+	Header("--------------------"),
 	Header("New Hounds"),
 	BinaryConfig("lightninghounds", "Lightning Hounds", "Lightning Hounds are part of hound waves.", true),
 	BinaryConfig("magmahounds", "Magma Hounds", "Magma Hounds are part of hound waves.", true),
@@ -154,12 +154,19 @@ configuration_options =
 	BinaryConfig("firebitehounds", "Fiery Bite", "Red Hounds set players on fire when they attack.", true),
 	BinaryConfig("frostbitehounds", "Frozen Bite", "Blue Hounds freeze players when they attack.", true),
 	BinaryConfig("vargwaves", "Vargs in Hound Waves", "In the lategame, vargs will accompany hounds in houndwaves.", true),
+	Header(""),
+	Header(""),
+	Header("New Depths Worms"),
+	BinaryConfig("depthseels", "Depths Eels", "Electrified depths eels join the worm pack in Winter and Spring.", true),
+	BinaryConfig("depthsvipers", "Depths Vipers", "Mysterious depths vipers join the worm pack in Summer and Autumn", true),
+	Header(""),
+	Header("--------------------"),
 -----------------------------
 -- Bosses --
 -----------------------------
 	Header(""),
 	Header("Boss Config"),
-	Header(""),
+	Header("--------------------"),
 	Header("Additional Seasonal Giants"),
 	BinaryConfig("mother_goose", "Mother Goose", "Mother Goose will now attack the player in spring, similar to the Reign of Giant's Moose.", true),
 	BinaryConfig("wiltfly", "Wilting Dragonfly", "Dragonfly will now leave her arena during summer and attack the player, similar to Reign of Giant's Dragonfly.", true),
