@@ -358,4 +358,31 @@ end
 inst.components.pickable.onpickedfn = OnPickNew
 
 end)
+
+env.AddPrefabPostInit("purpleamulet", function(inst)
+    if not TheWorld.ismastersim then
+        return
+    end
+    if inst.components.equippable ~= nil then
+	local onequip_ = inst.components.equippable.onequipfn
+	local onunequip_ = inst.components.equippable.onunequipfn
+	
+	local function OnNewEquip(inst,owner)
+	if not owner:HasTag("fuelfarming") then
+	owner:AddTag("fuelfarming")
+	end
+	onequip_(inst,owner)
+	end
+	local function OnNewUnEquip(inst,owner)
+	if owner:HasTag("fuelfarming") then
+	owner:RemoveTag("fuelfarming")
+	end	
+	onunequip_(inst,owner)
+	end
+	
+    inst.components.equippable:SetOnEquip(OnNewEquip)
+	inst.components.equippable:SetOnUnequip(OnNewUnEquip)
+    end
+
+end)
    

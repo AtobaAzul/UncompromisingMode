@@ -110,7 +110,7 @@ UpdateSpawn = function(player, params)
             end
         end
 		
-		if player:HasTag("shadowdominant") or bossesnearby > 0 then
+		if player:HasTag("shadowdominant") or player:HasTag("fuelfarming") or bossesnearby > 0 then
 			spawndrifter = false
 		end
 

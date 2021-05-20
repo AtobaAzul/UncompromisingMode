@@ -24,6 +24,11 @@ function CheckGem(container, item, slot)
     return not item:HasTag("irreplaceable") and item:HasTag("gem")
 end
 
+function CheckFish(container, item, slot)
+    return item:HasTag("smalloceancreature")
+end
+
+
 function CheckDart(container, item, slot)
     return item:HasTag("um_dart")
 end
@@ -145,6 +150,27 @@ modparams.um_blowgun =
     type = "hand_inv",
 }
 
+modparams.frigginbirdpail =
+{
+    widget =
+    {
+        slotpos =
+        {
+            --Vector3(0,   32 + 4,  0),
+        },
+        --[[slotbg =
+        {
+            { image = "slingshot_ammo_slot.tex" },
+        },]]
+        animbank = "ui_lamp_1x4",
+        animbuild = "ui_lamp_1x4",
+        pos = Vector3(0, 125, 0),
+    },
+	itemtestfn = CheckFish,
+    --acceptsstacks = true,
+    type = "hand_inv",
+}
+
 modparams.wingsuit =
 {
     widget =
@@ -174,6 +200,9 @@ for y = 0, 3 do
 end
 for y = 0, 3 do
     table.insert(modparams.crabclaw.widget.slotpos, Vector3(-1, -75 * y + 110, 0))	
+end
+for y = 0, 3 do
+    table.insert(modparams.frigginbirdpail.widget.slotpos, Vector3(-1, -75 * y + 110, 0))	
 end
 
 for k, v in pairs(modparams) do

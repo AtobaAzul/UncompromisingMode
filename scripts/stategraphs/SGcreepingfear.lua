@@ -69,9 +69,9 @@ local states =
                 if t > inst.components.combat:GetLastAttackedTime() + 5 then
                     local target = inst.components.combat.target
                     if target == nil or
-                        target.components.combat == nil or
-                        not target.components.combat:IsRecentTarget(inst) or
-                        t > target.components.combat.laststartattacktime + 5 then
+                        target.components.combat == nil or					--Apparently this can be nil? got a crash once.
+                        not target.components.combat:IsRecentTarget(inst) or (target.components.combat.laststartattacktime~= nil and
+                        t > target.components.combat.laststartattacktime + 5) then
                         inst.sg:GoToState("disappear")
                         return
                     end

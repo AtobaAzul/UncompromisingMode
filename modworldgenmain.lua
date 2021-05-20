@@ -299,9 +299,9 @@ task.room_choices["ricepatch"] = 1      --Comment to test task based rice worldg
 
 --table.insert(task.keys_given,KEYS.RICE)   Uncomment to test task based rice worldgen
 end)
-GLOBAL.require("map/tasks/newswamp")
+--GLOBAL.require("map/tasks/newswamp")
 GLOBAL.require("map/tasks/gianttrees")
-GLOBAL.require("map/tasks/sunkendecid")
+--GLOBAL.require("map/tasks/sunkendecid")
 --[[AddTaskPreInit("RedForest",function(task)
 
 table.insert(task.keys_given,KEYS.HF)  

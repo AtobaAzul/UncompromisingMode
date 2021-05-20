@@ -156,6 +156,68 @@ env.AddPrefabPostInit("reflectivevest", function(inst)
 	inst:ListenForEvent("itemget", Folded)
 --return inst
 end)
+
+env.AddPrefabPostInit("premiumwateringcan", function(inst)
+
+	if not TheWorld.ismastersim then
+		inst.OnEntityReplicated = function(inst) 
+			inst.replica.container:WidgetSetup("frigginbirdpail") 
+		end
+        return inst
+    end
+    inst:AddComponent("container")
+    inst.components.container:WidgetSetup("frigginbirdpail")
+	
+	--inst.components.inventoryitem.cangoincontainer = false
+	if inst.components.equippable ~= nil then
+		local onequip_ = inst.components.equippable.onequipfn
+		local onunequip_=inst.components.equippable.onunequipfn
+	local function OnEquipMalb(inst, owner)
+		if inst.components.container ~= nil then
+			inst.components.container:Open(owner)
+		end
+		onequip_(inst,owner)
+	end
+
+	local function OnUnequipMalb(inst, owner)
+		if inst.components.container ~= nil then
+			inst.components.container:Close()
+		end
+		onunequip_(inst,owner)
+	end		
+		
+		inst.components.equippable:SetOnEquip(OnEquipMalb)
+		inst.components.equippable:SetOnUnequip(OnUnequipMalb)
+	end
+
+
+	if inst.components.fillable ~= nil then
+    local OnFill_ = inst.components.fillable.overrideonfillfn
+	
+	local function NewOnFill(inst, from_object)
+		if inst.components.preserver == nil then
+			inst:AddComponent("preserver")
+		end
+		inst.components.preserver:SetPerishRateMultiplier(TUNING.FISH_BOX_PRESERVER_RATE)	
+		OnFill_(inst, from_object)
+	end
+	
+	inst.components.fillable.overrideonfillfn =NewOnFill
+	end
+	
+	if inst.components.wateringcan ~= nil then
+	local OnDeplete_ = inst.components.wateringcan.ondepletefn
+	
+	local function NewOnDeplete(inst)
+		if inst.components.finiteuses ~= nil and inst.components.finiteuses:GetPercent() == 0 and inst.components.preserver ~= nil then
+			inst:RemoveComponent("preserver")
+		end
+	OnDeplete_(inst)
+	end
+	inst.components.wateringcan.ondepletefn = NewOnDeplete(inst)
+	end
+	
+end)
 --[[env.AddPrefabPostInit("steel_sweater", function(inst)
 	if not TheWorld.ismastersim then
 		inst.OnEntityReplicated = function(inst) 

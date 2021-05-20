@@ -148,7 +148,27 @@ AddPrefabPostInit("terrorbeak", terrorbeak_postinit)
 AddPrefabPostInit("crawlingnightmare", crawlingnightmare_postinit)
 AddPrefabPostInit("nightmarebeak", nightmarebeak_postinit)
 
+local function inducedcheck(inst)
+local x,y,z = inst.Transform:GetWorldPosition()
+local inducedplayers = TheSim:FindEntities(x,y,z,60,{"fuelfarming"},{"ghost"})
+for i,v in ipairs(inducedplayers) do
+	if inst.components.lootdropper ~= nil then
+		inst.components.lootdropper:AddChanceLoot("nightmarefuel",    1.00)
+		if math.random() > 0.5 then
+			inst.components.lootdropper:AddChanceLoot("nightmarefuel",    1.00)
+		end
+	end
+end
+end
 
+local function purplepostinit(inst)
+inst:DoTaskInTime(0.1,inducedcheck) --0.1... sometimes it seems certain nm creatures don't actualy see the fuel farmer upon spawn if we use 0 instead.
+end
+AddPrefabPostInit("crawlinghorror", purplepostinit)
+AddPrefabPostInit("terrorbeak", purplepostinit)
+
+AddPrefabPostInit("creepingfear", purplepostinit)
+AddPrefabPostInit("dreadeye", purplepostinit)
 
 -------------------------------------------------- StategraphState
 

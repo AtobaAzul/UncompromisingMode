@@ -170,7 +170,7 @@ configuration_options =
 	SkipSpace(),
 	Header("Misc Monsters"),
 	BinaryConfig("desertscorpions", "Scorpions", "Scorpions plague the desert lands. They will spawn from desert turf within the desert during the day.", true),
-	BinaryConfig("pinelings", "Pinelings", "Stumps will become pinelings if awoken by a treeguard, or if enough time passes and you're lucky.", true),
+	BinaryConfig("pinelings", "Pinelings", "Stumps will become pinelings if awoken by a treeguard, or can happen naturally to existing old stumps.", true),
 	Header("--------------------"),
 	
 -----------------------------
