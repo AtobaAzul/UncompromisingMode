@@ -91,7 +91,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
         "CURSE TOO TOUGH? THERE IS ONLY ONE WAY OUT...",
 	}
 	
-	ANNOUNCE.STANTON_GREET = {"Care to drink with the dead?", "How's about a drink?", "Come and drink with me."}
+	ANNOUNCE.STANTON_GREET = {"Care to drink with the dead?", "How's about a drink?", "Come and drink with me.","I pick the drinks, you knock 'em back" }
 	ANNOUNCE.STANTON_GIVE = {"You seem willing, I'll drink with you.", "It'll be you then."}
 	ANNOUNCE.STANTON_RESTOCK = {"Still awake? Come closer and we'll drink again.", "Come closer and I'll give you another."}
 	ANNOUNCE.STANTON_RULES = {"I only drink with one at a time."}
