@@ -36,27 +36,31 @@ env.AddPrefabPostInit("flower", function(inst)
 	
 --return inst
 end)
-local function onsaveevil(inst, data)
-    data.anim = inst.animname
-	if inst:HasTag("transformed") then
-	data.transformed = true
-	end
-end
-local function onloadevil(inst, data)
-    if data and data.anim then
-        inst.animname = data.anim
-        inst.AnimState:PlayAnimation(inst.animname)
-    end
-	if data and data.anim and data.transformed == true then
-	inst:DoTaskInTime(0.1,Revert)
-	end
-end
+
 env.AddPrefabPostInit("flower_evil", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-    inst.OnLoad = onloadevil
+	
+	local _OnSave = inst.OnSave
+	local _OnLoad = inst.OnLoad
+
+	local function onsaveevil(inst, data)
+		data.anim = inst.animname
+		
+		_OnSave(inst, data)
+	end
+
+	local function onloadevil(inst, data)
+		if data and data.anim and data.transformed == true then
+			inst:DoTaskInTime(0.1,Revert)
+		end
+
+		_OnLoad(inst, data)
+	end
+	
 	inst.OnSave = onsaveevil
+    inst.OnLoad = onloadevil
 --return inst
 end)
 env.AddPrefabPostInit("flower_planted", function(inst)

@@ -29,17 +29,30 @@ local RETARGET_ONEOF_TAGS = { "companion", "player" }
         or nil
 end]]
 
+local function AliveWall(wall, targetter)
+    if wall ~= nil and wall.components.health ~= nil then
+        return not wall.components.health:IsDead()
+    end 
+    return nil
+end
+
 local function NormalRetargetFn(inst)
+	local wall = FindEntity(inst, 4, AliveWall, {"wall"}, { "INLIMBO" })
+	
+	if wall ~= nil then
+		target = wall
+		return target
+	end
+	
     return not inst:IsInLimbo()
         and FindEntity(
                 inst,
                 30,
                 function(guy)
                     return inst.components.combat:CanTarget(guy)
-                        and (guy:HasTag("monster")
-                            or (guy.components.inventory ~= nil and
+                        and (guy.components.inventory ~= nil and
                                 guy:IsNear(inst, TUNING.BUNNYMAN_SEE_MEAT_DIST) and
-                                guy.components.inventory:FindItem(is_berry) ~= nil))
+                                guy.components.inventory:FindItem(is_berry) ~= nil)
                 end,
                 RETARGET_MUST_TAGS, -- see entityreplica.lua
                 nil,
@@ -77,23 +90,6 @@ local function OnHitOther(inst, other, damage)
 	end
 end
 
-local function OnSave(inst, data)
-    if inst.mehungy ~= nil then
-		data.mehungy = inst.mehungy
-	end
-end
-
-local function OnLoad(inst, data)
-	if data then
-		if data.mehungy ~= nil then
-			inst.mehungy = data.mehungy
-			if inst.mehungy >= 5 then
-				inst.components.named:SetName("Gobbler")
-			end
-		end
-	end
-end
-
 local function hungycounter(inst)
 	inst.mehungy = inst.mehungy + 1
 	if inst.mehungy >= 5 then
@@ -123,6 +119,30 @@ end
 env.AddPrefabPostInit("perd", function(inst)
 	if not TheWorld.ismastersim then
 		return
+	end
+	
+	local _OnSave = inst.OnSave
+	local _OnLoad = inst.OnLoad
+
+	local function OnSave(inst, data)
+		if inst.mehungy ~= nil then
+			data.mehungy = inst.mehungy
+		end
+		
+		_OnSave(inst, data)
+	end
+
+	local function OnLoad(inst, data)
+		if data then
+			if data.mehungy ~= nil then
+				inst.mehungy = data.mehungy
+				if inst.mehungy >= 5 then
+					inst.components.named:SetName("Gobbler")
+				end
+			end
+		end
+
+		_OnLoad(inst, data)
 	end
 
 	inst.mehungy = 0

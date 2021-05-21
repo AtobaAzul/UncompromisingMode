@@ -71,6 +71,7 @@ local function UpdateLevelIce(inst) --Save For Tier2
         inst.components.health:SetAbsorptionAmount(.8)
     end
 end
+
 local function OnWork(inst, worker, workleft) --Save for Tier 2
     if workleft <= 0 then
         inst:RemoveComponent("workable")
@@ -78,6 +79,7 @@ local function OnWork(inst, worker, workleft) --Save for Tier 2
         inst.components.timer:StartTimer("freezearmor", 30 + math.random(0, 10))
     end
 end
+
 local function FreezeArmor(inst, data) --Save For Tier 2
     if data ~= nil then
         if data.name == "freezearmor" then
@@ -109,9 +111,6 @@ local function IceyCheck(inst, data)
         AuraFreezeEnemies(inst)
     end
 end
----------
-
----------
 
 local function MakeEnrageable(inst)
     inst:AddComponent("healthtrigger")
@@ -190,6 +189,7 @@ local function OnPreLoad(inst, data)
         end
     end
 end
+
 local function OnLoad(inst, data)
     if data then
         if data.upgrade == nil then
@@ -210,6 +210,7 @@ local function OnLoad(inst, data)
         end
     end
 end
+
 local function oncollapse(inst, other)
     if other:IsValid() and other.components.workable ~= nil and other.components.workable:CanBeWorked() then
         SpawnPrefab("collapse_small").Transform:SetPosition(other.Transform:GetWorldPosition())
@@ -267,8 +268,47 @@ env.AddPrefabPostInit("deerclops", function(inst)
     end
 
     inst.Physics:SetCollisionCallback(oncollide)
-
-    inst.OnSave = OnSave
+	
+	local _OnSave = inst.OnSave
+	local _OnLoad = inst.OnLoad
+	
+	local function OnSave(inst, data)
+		data.enraged = inst.enraged or nil
+		data.upgrade = inst.upgrade
+		if inst.components.health ~= nil then
+			data.healthUM = inst.components.health.currenthealth
+		end
+		
+		_OnSave(inst, data)
+	end
+	
+	local function OnLoad(inst, data)
+		if data then
+			if data.upgrade == nil then
+				ChooseUpgrades(inst)
+			else	
+				if data.upgrade == "enrage_mutation" then
+					MakeEnrageable(inst)
+				end
+				
+				if data.upgrade == "strength_mutation" then
+					MakeStrong(inst)
+				end
+				
+				if data.upgrade == "ice_mutation" then
+					MakeIcey(inst)
+				end
+			end
+			
+			if data.healthUM ~= nil then
+				inst.components.health.currenthealth = data.healthUM
+			end
+		end
+		
+		_OnLoad(inst, data)
+	end
+	
+	inst.OnSave = OnSave
     inst.OnPreLoad = OnPreLoad
     inst.OnLoad = OnLoad
     inst:RemoveComponent("freezable")
@@ -285,12 +325,10 @@ env.AddPrefabPostInit("deerclops", function(inst)
     inst.components.groundpounder.platformPushingRings = 2
     inst.components.groundpounder.numRings = 3
     inst:AddTag("deergemresistance")
-    --
+
     inst.MakeEnrageable = MakeEnrageable
     inst.MakeIcey = MakeIcey
     inst.MakeStrong = MakeStrong
-    --
-
 
     inst:DoTaskInTime(0.1, ChooseUpgrades(inst)) --Incase we need to specify an upgrade because this deerclops despawned.
 

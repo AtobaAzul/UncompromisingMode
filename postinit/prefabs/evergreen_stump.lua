@@ -33,21 +33,28 @@ local function OnTimerDone(inst, data)
     end
 end
 
-local function OnSave(inst, data)
-	if inst.stumplingambush ~= nil then
-		data.stumplingambush = inst.stumplingambush
-	end
-end
-
-local function OnLoad(inst, data)
-    if data ~= nil and data.stumplingambush ~= nil then
-		inst.stumplingambush = data.stumplingambush
-    end
-end
-
 env.AddPrefabPostInit("evergreen_stump", function(inst)
 	if not TheWorld.ismastersim then
 		return
+	end
+	
+	local _OnSave = inst.OnSave
+	local _OnLoad = inst.OnLoad
+
+	local function OnSave(inst, data)
+		if inst.stumplingambush ~= nil then
+			data.stumplingambush = inst.stumplingambush
+		end
+		
+		_OnSave(inst, data)
+	end
+
+	local function OnLoad(inst, data)
+		if data ~= nil and data.stumplingambush ~= nil then
+			inst.stumplingambush = data.stumplingambush
+		end
+
+		_OnLoad(inst, data)
 	end
 	
 	inst.stumplingambush = false
