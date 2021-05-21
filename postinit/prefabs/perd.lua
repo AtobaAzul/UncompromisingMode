@@ -29,21 +29,7 @@ local RETARGET_ONEOF_TAGS = { "companion", "player" }
         or nil
 end]]
 
-local function AliveWall(wall, targetter)
-    if wall ~= nil and wall.components.health ~= nil then
-        return not wall.components.health:IsDead()
-    end 
-    return nil
-end
-
 local function NormalRetargetFn(inst)
-	local wall = FindEntity(inst, 4, AliveWall, {"wall"}, { "INLIMBO" })
-	
-	if wall ~= nil then
-		target = wall
-		return target
-	end
-	
     return not inst:IsInLimbo()
         and FindEntity(
                 inst,
@@ -58,7 +44,17 @@ local function NormalRetargetFn(inst)
                 nil,
                 RETARGET_ONEOF_TAGS
             )
-        or nil
+        or FindEntity(
+                inst,
+                5,
+                function(guy)
+                    return inst.components.combat:CanTarget(guy)
+                        and (guy.components.health ~= nil and
+						not guy.components.health:IsDead())
+                end,
+                { "wall" }
+            )
+		or nil
 end
 
 local function NormalKeepTargetFn(inst, target)
