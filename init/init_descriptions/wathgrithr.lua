@@ -254,6 +254,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.BEARGERCLAW = "The mighty beasts power is now mine."
 	DESCRIBE.FEATHER_FROCK = "A foul feathered frock!"
 	
+	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nShaped only for battle!"
+	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nShaped only for battle!"
+	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\nShaped only for battle!"
+	DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM.."\nShaped only for battle!"
+	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\nShaped only for battle!"
+	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nShaped only for battle!"
+	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nShaped only for battle!"
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "I drink for before or during battle!"
 	DESCRIBE.SKULLFLASK_EMPTY = "An empty flask, it will be refilled!"

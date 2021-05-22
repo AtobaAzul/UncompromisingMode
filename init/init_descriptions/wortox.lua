@@ -255,6 +255,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.BEARGERCLAW = "Is it good luck, or bad luch? I just don't remember!"
 	DESCRIBE.FEATHER_FROCK = "Feathered foolishness!"
 	
+	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nIt's changed shape, it will only flow through the crabs claw now!"
+	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nIt's changed shape, it will only flow through the crabs claw now!"
+	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\nIt's changed shape, it will only flow through the crabs claw now!"
+	DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM.."\nIt's changed shape, it will only flow through the crabs claw now!"
+	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\nIt's changed shape, it will only flow through the crabs claw now!"
+	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nIt's changed shape, it will only flow through the crabs claw now!"
+	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nIt's changed shape, it will only flow through the crabs claw now!"
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "I'm still not sure if this is mortal food."
 	DESCRIBE.SKULLFLASK_EMPTY = "I gobbled it up!"

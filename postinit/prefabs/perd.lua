@@ -118,7 +118,6 @@ env.AddPrefabPostInit("perd", function(inst)
 	end
 	
 	local _OnSave = inst.OnSave
-	local _OnLoad = inst.OnLoad
 
 	local function OnSave(inst, data)
 		if inst.mehungy ~= nil then
@@ -137,8 +136,6 @@ env.AddPrefabPostInit("perd", function(inst)
 				end
 			end
 		end
-
-		_OnLoad(inst, data)
 	end
 
 	inst.mehungy = 0

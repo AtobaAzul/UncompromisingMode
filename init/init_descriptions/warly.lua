@@ -252,6 +252,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.GORE_HORN_HAT = "Shiskabob time!"
 	DESCRIBE.BEARGERCLAW = "Atleast MY hands will be clean."
 	DESCRIBE.FEATHER_FROCK = "De-feathering birds isn't really necissary when preparing poultry."
+	
+	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\n...It's useless outside of the crabs claw!"
+	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\n...It's useless outside of the crabs claw!"
+	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\n...It's useless outside of the crabs claw!"
+	DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM.."\n...It's useless outside of the crabs claw!"
+	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\n...It's useless outside of the crabs claw!"
+	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\n...It's useless outside of the crabs claw!"
+	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\n...It's useless outside of the crabs claw!"
 
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "It was nice of him to give me his recipe."

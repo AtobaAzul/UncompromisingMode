@@ -256,6 +256,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.BEARGERCLAW = "I prefer man made tools, to be honest."
 	DESCRIBE.FEATHER_FROCK = "Still too fancy for my liking."
 	
+	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nIt won't work in my generators anymore."
+	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nIt won't work in my generators anymore."
+	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\nIt won't work in my generators anymore."
+	DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM.."\nIt won't work in my generators anymore."
+	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\nIt won't work in my generators anymore."
+	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nIt won't work in my generators anymore."
+	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nIt won't work in my generators anymore."
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "Keeps me at ease."
 	DESCRIBE.SKULLFLASK_EMPTY = "Nothin' left."

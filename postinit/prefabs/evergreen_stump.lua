@@ -10,6 +10,16 @@ local function onnear(inst, target)
 			if target ~= nil then
 				stumpling.components.combat:SuggestTarget(target)
 			end
+			
+			local ents2 = TheSim:FindEntities(x, y, z, 12, { "stump" })
+			for i = 1, 3 do
+				for i, v in ipairs(ents2) do
+					if not v.prefab == "deciduoustree_stump" then
+						v.stumplingambush = true
+						v:onnear(inst, target)
+					end
+				end
+			end
 
 			local x, y, z = inst.Transform:GetWorldPosition()
 			inst:Remove()
@@ -19,7 +29,7 @@ local function onnear(inst, target)
 			stumpling.sg:GoToState("hit")
 		else
 			if inst.components.timer:GetTimeLeft("stumptime") == nil then
-				inst.components.timer:StartTimer("stumptime", math.random(480, 960))
+				inst.components.timer:StartTimer("stumptime", math.random(240, 960))
 			end
 		end
 	end
@@ -27,7 +37,7 @@ end
 
 local function OnTimerDone(inst, data)
     if data.name == "stumptime" then
-		if math.random() > 0.6 then
+		if math.random() > 0.2 then
 			inst.stumplingambush = true
 		end
     end

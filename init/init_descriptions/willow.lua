@@ -265,6 +265,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.BEARGERCLAW = "Maybe I could dig to the center of the earth with this."
 	DESCRIBE.FEATHER_FROCK = "I am a pheonix! Hear me squawk!"
 	
+	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nI didn't break it! I made it better!"
+	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nI didn't break it! I made it better!"
+	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\nI didn't break it! I made it better!"
+	DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM.."\nI didn't break it! I made it better!"
+	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\nI didn't break it! I made it better!"
+	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nI didn't break it! I made it better!"
+	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nI didn't break it! I made it better!"
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "This would be better if it were hotter."
 	DESCRIBE.SKULLFLASK_EMPTY = "Not a drop left."
