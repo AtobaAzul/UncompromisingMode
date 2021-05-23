@@ -126,6 +126,11 @@ local function workcallback(inst, worker, workleft)
     end
 end
 
+local function Init(inst)
+if TUNING.DSTU.TRAPDOORSPIDERS == false then
+inst:Remove()
+end
+end
 local function fn1()
     local inst = CreateEntity()
 
@@ -222,6 +227,7 @@ local function fn1()
 	--inst.AnimState:SetSortOrder(1)
 	
 	MakeMediumPropagator(inst)
+	inst:DoTaskInTime(0,Init)
     return inst
 end
 
@@ -318,6 +324,7 @@ local function fn2()
 	--inst.AnimState:SetSortOrder(1)
 	
 	MakeMediumPropagator(inst)
+	inst:DoTaskInTime(0,Init)	
     return inst
 end
 

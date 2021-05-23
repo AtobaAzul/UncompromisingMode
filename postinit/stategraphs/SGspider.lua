@@ -24,7 +24,7 @@ local events =
         if not inst.components.health:IsDead() then
             if inst:HasTag("spider_warrior") or inst:HasTag("spider_spitter") or inst:HasTag("spider_moon") then
                 if not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("evade") then -- don't interrupt attack or exit shield
-					if inst:HasTag("spider_warrior") and not inst:HasTag("trapdoorspider") and inst.components.combat.target ~= nil then
+					if inst:HasTag("spider_warrior") and not inst:HasTag("trapdoorspider") and inst.components.combat.target ~= nil and TUNING.DSTU.SPIDERWARRIORCOUNTER == true then
 					inst.sg:GoToState("evade_loop")
 					else
                     inst.sg:GoToState("hit") -- can still attack
@@ -41,7 +41,7 @@ local events =
             if inst:HasTag("spider_warrior") or inst:HasTag("spider_regular") then
                 inst.sg:GoToState(
                     data.target:IsValid()
-                    and not inst:IsNear(data.target, TUNING.SPIDER_WARRIOR_MELEE_RANGE)
+                    and not (inst:IsNear(data.target, TUNING.SPIDER_WARRIOR_MELEE_RANGE) or (TUNING.DSTU.REGSPIDERJUMP == false and inst:HasTag("spider_regular")))
                     and "warrior_attack" --Do leap attack
                     or "attack",
                     data.target

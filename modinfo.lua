@@ -166,6 +166,12 @@ configuration_options =
 	BinaryConfig("hardbatilisks", "Harder Batilisks", "Batilisk's health is increased from 50 to 75, drop wings less often than vanilla, drop monster morsels.", true),
 	BinaryConfig("adultbatilisks", "Adult Batilisks", "Adult Batilisks spawn under certain conditions instead of regular ones. They are harder, but have better loot on average.", true),
 	BinaryConfig("batspooking", "Bat Sinkhole Evacuation", "Sinkholes will spawn all of their bats as soon as they are regenerated, instead of slowly trickling out.", true),
+
+	SkipSpace(),
+	Header("Spiders"),
+	BinaryConfig("alljumperspiders", "Regular Spiders Jump", "Normal spiders leap, just like spider warriors.", true),
+	BinaryConfig("spiderwarriorcounter", "Warrior Counter", "Warrior spiders (and depth dwellers) perform a counter-attack when attacked (also lowers health to 300).", true),
+	BinaryConfig("trapdoorspiders", "Trapdoor Spiders", "Enables the spawn of trapdoor spider mounds on worldgen. Their dens are usually covered in a resource rich grass.", true),
 	
 	SkipSpace(),
 	Header("Misc Monsters"),

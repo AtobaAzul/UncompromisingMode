@@ -300,12 +300,12 @@ env.AddPrefabPostInit("spider", function(inst)
 	--]]
 	inst:AddTag("spider_regular")
 	
-	if inst.components.combat ~= nil then
+	if inst.components.combat ~= nil and TUNING.DSTU.REGSPIDERJUMP == true then
     inst.components.combat:SetRange(TUNING.SPIDER_WARRIOR_ATTACK_RANGE, TUNING.SPIDER_WARRIOR_HIT_RANGE)
 		--inst.components.combat:SetRetargetFunction(2, WarriorRetarget)
 	end
 	
-	if inst.components.locomotor ~= nil then
+	if inst.components.locomotor ~= nil and TUNING.DSTU.REGSPIDERJUMP == true then --I don't know if this actually does anything, I'm just adding config in JIC -AXE
 		inst.components.locomotor.walkspeed = TUNING.SPIDER_WARRIOR_WALK_SPEED
 		inst.components.locomotor.runspeed = TUNING.SPIDER_WARRIOR_RUN_SPEED
 	end
@@ -341,7 +341,7 @@ env.AddPrefabPostInit("spider_warrior", function(inst)
 		inst.components.combat:SetRange(TUNING.SPIDER_WARRIOR_ATTACK_RANGE, TUNING.SPIDER_WARRIOR_HIT_RANGE * 1.05)
 	end
 	
-	if inst.components.health ~= nil then
+	if inst.components.health ~= nil and TUNING.DSTU.SPIDERWARRIORCOUNTER == true then
 		inst.components.health:SetMaxHealth(300)
 	end
 	

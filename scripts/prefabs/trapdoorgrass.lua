@@ -80,6 +80,12 @@ local function dig_up(inst, worker)
     inst:Remove()
 end
 
+local function Init(inst)
+if TUNING.DSTU.TRAPDOORSPIDERS == false then
+inst:Remove()
+end
+end
+
 local function grass(name, stage)
     local function fn()
         local inst = CreateEntity()
@@ -146,40 +152,11 @@ local function grass(name, stage)
         MakeHauntableIgnite(inst)
 		
         ---------------------
-
+		inst:DoTaskInTime(0,Init)
         return inst
     end
 
     return Prefab(name, fn, assets, prefabs)
-end
-
-local function grasspart_fn()
-    local inst = CreateEntity()
-
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-
-    inst.AnimState:SetBank("grass")
-    inst.AnimState:SetBuild("grass1")
-    inst.AnimState:PlayAnimation("grass_part")
-    inst.AnimState:SetFinalOffset(1)
-
-    inst:AddTag("FX")
-    inst:AddTag("NOCLICK")
-
-    inst.SoundEmitter:PlaySound("dontstarve/wilson/pickup_reeds")
-	--inst.Transform:SetScale(2,1.5,2)
-    inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:ListenForEvent("animover", inst.Remove)
-	
-    return inst
 end
 
 return grass("trapdoorgrass", 0),

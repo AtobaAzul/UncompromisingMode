@@ -161,6 +161,11 @@ TUNING.DSTU =
 	--Pinelings
 	PINELINGS = GetModConfigData("pinelings"),
 	
+	--Spiders
+	REGSPIDERJUMP = GetModConfigData("alljumperspiders"),
+	SPIDERWARRIORCOUNTER = GetModConfigData("spiderwarriorcounter"),
+	TRAPDOORSPIDERS = GetModConfigData("trapdoorspiders"),
+	
     ----------------------------------------------------------------------------
     --Player changes
     ----------------------------------------------------------------------------
