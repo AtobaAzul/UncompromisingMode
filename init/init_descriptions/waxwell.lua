@@ -260,6 +260,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.BEARGERCLAW = "I'll gladly get someone elses hands dirty."
 	DESCRIBE.FEATHER_FROCK = "Feather grease will get all over my suit."
 	
+	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nIt won't conduct properly now."
+	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nIt won't conduct properly now."
+	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\nIt won't conduct properly now."
+	DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM.."\nIt won't conduct properly now."
+	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\nIt won't conduct properly now."
+	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nIt won't conduct properly now."
+	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nIt won't conduct properly now."
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "His mixture is actually quite impressive."
 	DESCRIBE.SKULLFLASK_EMPTY = "The flask appears to be enchanted as well, brilliant."

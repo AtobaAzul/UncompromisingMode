@@ -253,6 +253,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.GORE_HORN_HAT = "Natures knife."
 	DESCRIBE.BEARGERCLAW = "I've got dirt in my eye. For real this time."
 	DESCRIBE.FEATHER_FROCK = "Ew! Gross! I don't want to wear it!"
+	
+	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nI've ruined the magic."
+	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nI've ruined the magic."
+	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\nI've ruined the magic."
+	DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM.."\nI've ruined the magic."
+	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\nI've ruined the magic."
+	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nI've ruined the magic."
+	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nI've ruined the magic."
 
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "Keeps my mind calm, for a moment."

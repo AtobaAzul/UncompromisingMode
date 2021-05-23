@@ -36,16 +36,25 @@ local function NormalRetargetFn(inst)
                 30,
                 function(guy)
                     return inst.components.combat:CanTarget(guy)
-                        and (guy:HasTag("monster")
-                            or (guy.components.inventory ~= nil and
+                        and (guy.components.inventory ~= nil and
                                 guy:IsNear(inst, TUNING.BUNNYMAN_SEE_MEAT_DIST) and
-                                guy.components.inventory:FindItem(is_berry) ~= nil))
+                                guy.components.inventory:FindItem(is_berry) ~= nil)
                 end,
                 RETARGET_MUST_TAGS, -- see entityreplica.lua
                 nil,
                 RETARGET_ONEOF_TAGS
             )
-        or nil
+        or FindEntity(
+                inst,
+                5,
+                function(guy)
+                    return inst.components.combat:CanTarget(guy)
+                        and (guy.components.health ~= nil and
+						not guy.components.health:IsDead())
+                end,
+                { "wall" }
+            )
+		or nil
 end
 
 local function NormalKeepTargetFn(inst, target)
@@ -74,23 +83,6 @@ local function OnHitOther(inst, other, damage)
 		end
 
 		berries = FindBerries(other)
-	end
-end
-
-local function OnSave(inst, data)
-    if inst.mehungy ~= nil then
-		data.mehungy = inst.mehungy
-	end
-end
-
-local function OnLoad(inst, data)
-	if data then
-		if data.mehungy ~= nil then
-			inst.mehungy = data.mehungy
-			if inst.mehungy >= 5 then
-				inst.components.named:SetName("Gobbler")
-			end
-		end
 	end
 end
 
@@ -123,6 +115,27 @@ end
 env.AddPrefabPostInit("perd", function(inst)
 	if not TheWorld.ismastersim then
 		return
+	end
+	
+	local _OnSave = inst.OnSave
+
+	local function OnSave(inst, data)
+		if inst.mehungy ~= nil then
+			data.mehungy = inst.mehungy
+		end
+		
+		_OnSave(inst, data)
+	end
+
+	local function OnLoad(inst, data)
+		if data then
+			if data.mehungy ~= nil then
+				inst.mehungy = data.mehungy
+				if inst.mehungy >= 5 then
+					inst.components.named:SetName("Gobbler")
+				end
+			end
+		end
 	end
 
 	inst.mehungy = 0

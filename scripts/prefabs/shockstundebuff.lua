@@ -6,7 +6,7 @@ local function OhCrap(inst, target)
 		if target.brain ~= nil then
             target.brain:Stop()
         end
-		if target.sg:GoToState("hit") ~= nil then
+		if target.sg and target.sg:GoToState("hit") ~= nil then
 		target.sg:GoToState("hit")
 		end
 		if target.components.combat ~= nil then

@@ -255,6 +255,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.BEARGERCLAW = "Now Wolfgang is like the mighty bear!"
 	DESCRIBE.FEATHER_FROCK = "Weighs nothing at all."
 	
+	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nWolfgang push too hard, gem broke."
+	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nWolfgang push too hard, gem broke."
+	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\nWolfgang push too hard, gem broke."
+	DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM.."\nWolfgang push too hard, gem broke."
+	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\nWolfgang push too hard, gem broke."
+	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nWolfgang push too hard, gem broke."
+	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nWolfgang push too hard, gem broke."
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "Drink makes mind mighty!"
 	DESCRIBE.SKULLFLASK_EMPTY = "Drink come back later."

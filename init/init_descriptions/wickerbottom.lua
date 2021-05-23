@@ -260,6 +260,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.BEARGERCLAW = "The hand of the Meles meles, designed for digging."
 	DESCRIBE.FEATHER_FROCK = "It's not an effective piece of clothing."
 	
+	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nIt's conductive pathways have been irreparably changed."
+	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nIt's conductive pathways have been irreparably changed."
+	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\nIt's conductive pathways have been irreparably changed."
+	DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM.."\nIt's conductive pathways have been irreparably changed."
+	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\nIt's conductive pathways have been irreparably changed."
+	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nIt's conductive pathways have been irreparably changed."
+	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nIt's conductive pathways have been irreparably changed."
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "It keeps me alert, but without care."
 	DESCRIBE.SKULLFLASK_EMPTY = "I can see the liquid slowly returning."

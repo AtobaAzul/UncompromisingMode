@@ -255,6 +255,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.BEARGERCLAW = "Makes a nice trophy, eh?"
 	DESCRIBE.FEATHER_FROCK = "Disgusting."
 	
+	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nI don't think it will work outside of the claw."
+	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nI don't think it will work outside of the claw."
+	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\nI don't think it will work outside of the claw."
+	DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM.."\nI don't think it will work outside of the claw."
+	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\nI don't think it will work outside of the claw."
+	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nI don't think it will work outside of the claw."
+	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nI don't think it will work outside of the claw."
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "Keeps your mind at ease."
 	DESCRIBE.SKULLFLASK_EMPTY = "Well, it's gone now."

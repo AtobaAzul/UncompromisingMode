@@ -170,25 +170,25 @@ local function MorphChesterUM(inst)
     DoMorph(inst, (canShadow and MorphShadowChester) or (canSnow and MorphSnowChester) or (canLazy and MorphLazyChester))
 end
 
-local function OnPreLoad2(inst, data)
-    if data == nil then
-        return
-    elseif data.ChesterState == "SHADOW" then
-        DoMorph(inst, MorphShadowChester)
-    elseif data.ChesterState == "SNOW" then
-        DoMorph(inst, MorphSnowChester)
-    elseif data.ChesterState == "LAZY" then
-        DoMorph(inst, MorphLazyChester)
-    end
-end
-
 env.AddPrefabPostInit("chester", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
 	
+	local _OnPreLoad = inst.OnPreLoad
+
+	local function OnPreLoad(inst, data)
+		if data == nil then
+			return
+		elseif data.ChesterState == "LAZY" then
+			DoMorph(inst, MorphLazyChester)
+		end
+
+		_OnPreLoad(inst, data)
+	end
+	
     inst.MorphChester = MorphChesterUM
-	inst.OnPreLoad = OnPreLoad2
+	inst.OnPreLoad = OnPreLoad
     inst:WatchWorldState("isfullmoon", CheckForMorph)	
 end)
 ----------------------------------------------------------------
@@ -265,31 +265,20 @@ local function MorphSnowEyebone(inst)
 
     inst.EyeboneState = "SNOW"
 end
-
-local function OnLoadBoneUM(inst, data)
-    if data == nil then
-        return
-    end
-
-    if data.respawntimeremaining ~= nil then
-        inst.respawntime = data.respawntimeremaining + GetTime()
-    else
-        OpenEye(inst)
-    end
 	
-	if data.EyeboneState ~= nil then
-	inst.EyeboneState = data.EyeboneState
+	local _OnLoad = inst.OnLoad
+	
+	local function OnLoadBoneUM(inst, data)
+		if data == nil then
+			return
+		end
+		
+		if data.EyeboneState == "LAZY" then
+			MorphLazyEyebone(inst)
+		end
+
+		_OnLoad(inst, data)
 	end
-    if data.EyeboneState == "SHADOW" then
-        MorphShadowEyebone(inst)
-    elseif data.EyeboneState == "SNOW" then
-        MorphSnowEyebone(inst)
-	elseif data.EyeboneState == "LAZY" then
-        MorphLazyEyebone(inst)
-    end
-
-
-end
 
 	inst.MorphLazyEyebone = MorphLazyEyebone
     inst.OnLoad = OnLoadBoneUM

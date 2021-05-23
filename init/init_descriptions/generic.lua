@@ -322,6 +322,14 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.BEARGERCLAW = "Sticks and stones can break some bones."
 	DESCRIBE.FEATHER_FROCK = "All the comfort of a bed, in wearable form!"
 	
+	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\n...It's nigh unusable in this form."
+	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\n...It's nigh unusable in this form."
+	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\n...It's nigh unusable in this form."
+	DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM.."\n...It's nigh unusable in this form."
+	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\n...It's nigh unusable in this form."
+	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\n...It's nigh unusable in this form."
+	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\n...It's nigh unusable in this form."
+	
 	DESCRIBE.HEAT_SCALES_ARMOR = "If only I could fit inside."
 
 	--StantonStuff
