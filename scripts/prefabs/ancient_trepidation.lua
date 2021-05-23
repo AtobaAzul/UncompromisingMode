@@ -279,7 +279,7 @@ local function fn(Sim)
     end
 	
     inst.AnimState:SetBank("ancient_trepidation")
-    inst.AnimState:SetBuild("ancient_trepidation_nomouth")
+    inst.AnimState:SetBuild("ancient_trepidation")
     inst.AnimState:PlayAnimation("give_life",true)
     
 	inst.AnimState:SetMultColour(0, 0, 0, 0.8)
