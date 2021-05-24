@@ -246,7 +246,7 @@ local function onthrown(inst)
     inst.Physics:SetDamping(5)
     inst.Physics:SetCollisionGroup(COLLISION.OBSTACLES)
     inst.Physics:ClearCollisionMask()
-    inst.Physics:CollidesWith(COLLISION.WORLD)
+    --inst.Physics:CollidesWith(COLLISION.WORLD)
 	
 	if not inst.LaunchMorePhys then
 		inst.Physics:CollidesWith(COLLISION.GIANTS)

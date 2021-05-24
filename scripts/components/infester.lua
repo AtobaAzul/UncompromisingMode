@@ -11,25 +11,30 @@ local Infester = Class(function(self, inst)
 end)
 
 function Infester:Uninfest()
-	self.inst:ClearBufferedAction()
-	self.infesting = false
-	if self.target then
-		local pos =Vector3(self.target.Transform:GetWorldPosition())
-		self.target:RemoveChild(self.inst)
-		self.inst.Physics:Teleport(pos.x,pos.y,pos.z) 
+	if self == nil then
+		self.inst:ClearBufferedAction()
+		self.infesting = false
 		
-		self.target.components.infestable:uninfest(self.inst)
-		self.target:RemoveTag("infested")
-		self.target = nil
-		if self.inst.components.combat ~= nil then
-		self.inst.components.combat.target = nil
+		if self.target then
+			local pos =Vector3(self.target.Transform:GetWorldPosition())
+			self.target:RemoveChild(self.inst)
+			self.inst.Physics:Teleport(pos.x,pos.y,pos.z) 
+			
+			self.target.components.infestable:uninfest(self.inst)
+			self.target:RemoveTag("infested")
+			self.target = nil
+			if self.inst.components.combat ~= nil then
+			self.inst.components.combat.target = nil
+			end
 		end
+		
+		if self.inst.bitetask then
+			self.inst.bitetask:Cancel()
+			self.inst.bitetask = nil
+		end
+		
+		self.inst:StopUpdatingComponent(self)
 	end
-	if self.inst.bitetask then
-		self.inst.bitetask:Cancel()
-		self.inst.bitetask = nil
-	end
-	self.inst:StopUpdatingComponent(self)
 end
 
 function Infester:bite()
@@ -49,7 +54,8 @@ function Infester:Infest(target)
 		self.target = target
 		self.inst.bitetask = self.inst:DoTaskInTime(self.basetime+(math.random()*self.randtime),function() self:bite() end)
 		self.inst.AnimState:SetFinalOffset(-1)
-		self.inst.Physics:Teleport(0,0,0)	
+		self.inst.Physics:Teleport(0,0,0)
+		self.inst:PushEvent("oninfest")
 		target:AddChild(self.inst)
 		
 		target.components.infestable:infest(self.inst)

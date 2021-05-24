@@ -95,34 +95,67 @@ local function TryPuff(player, inst)
 			return
 		end
 	end
+	
+	local sporepuff = SpawnPrefab("air_conditioner_smoke")
+	sporepuff.Transform:SetPosition(x, 4, z)
+	if bluecaps ~= nil or redcaps ~= nil or greencaps ~= nil then
+		sporepuff.AnimState:SetMultColour(redcaps * 0.10 or 0.05, greencaps * 0.10 or 0.05, bluecaps * 0.10 or 0.05, 0.5)
+	elseif bluecaps == 0 and redcaps == 0 and greencaps == 0 then
+		sporepuff.AnimState:SetMultColour(0, 0, 0, 0)
+	end
     
 end
 
 local function SmokePuff(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	if inst.components.container ~= nil then
-		local bluecaps = #inst.components.container:FindItems( function(item) return item:HasTag("blue_mushroom_fuel") end )
-		local redcaps = #inst.components.container:FindItems( function(item) return item:HasTag("red_mushroom_fuel") end )
-		local greencaps = #inst.components.container:FindItems( function(item) return item:HasTag("green_mushroom_fuel") end )
+		local bluecaps = inst.components.container:FindItems( function(item) return item:HasTag("blue_mushroom_fuel") end )
+		local redcaps = inst.components.container:FindItems( function(item) return item:HasTag("red_mushroom_fuel") end )
+		local greencaps = inst.components.container:FindItems( function(item) return item:HasTag("green_mushroom_fuel") end )
 		
+		local numbluecaps = #bluecaps
+		local numredcaps = #redcaps
+		local numgreencaps = #greencaps
 		
+		local blue = numbluecaps * 0.15 or 0.05
+		local red = numredcaps * 0.15 or 0.05
+		local green = numgreencaps * 0.15 or 0.05
 		
-		if inst.AnimState:IsCurrentAnimation("idle_fueled") then
-			inst:DoTaskInTime(FRAMES, function(inst)
+		if red > 0 or blue > 0 or green > 0 then
 			local sporepuff = SpawnPrefab("air_conditioner_smoke")
-				sporepuff.Transform:SetPosition(x, 4, z)
-				if bluecaps ~= nil or redcaps ~= nil or greencaps ~= nil then
-					sporepuff.AnimState:SetMultColour(redcaps * 0.10 or 0.05, greencaps * 0.10 or 0.05, bluecaps * 0.10 or 0.05, 0.5)
-				elseif bluecaps == 0 and redcaps == 0 and greencaps == 0 then
-					sporepuff.AnimState:SetMultColour(0, 0, 0, 0)
-				end
-			end)
+			sporepuff.Transform:SetPosition(x, 4, z)
+			sporepuff.AnimState:SetMultColour(red, green, blue, 0.2)
+			
+			local air_conditioner_cloud = SpawnPrefab("air_conditioner_cloud")
+			air_conditioner_cloud.Transform:SetPosition(x + math.random(-10, 10), 0, z + math.random(-10, 10))
+			air_conditioner_cloud.AnimState:SetMultColour(red, green, blue, 0.2)
+			air_conditioner_cloud.red = red
+			air_conditioner_cloud.blue = blue
+			air_conditioner_cloud.green = green
+		end
+		for i, v in ipairs(bluecaps) do
+			v.components.perishable:ReducePercent(TUNING.TOADSTOOL_SPORECLOUD_ROT)
+		end
+		
+		for i, v in ipairs(redcaps) do
+			v.components.perishable:ReducePercent(TUNING.TOADSTOOL_SPORECLOUD_ROT)
+		end
+		
+		for i, v in ipairs(greencaps) do
+			v.components.perishable:ReducePercent(TUNING.TOADSTOOL_SPORECLOUD_ROT)
 		end
 	end
 end
 
-local function DoPuff(inst)
-    local x, y, z = inst.Transform:GetWorldPosition()
+local function DoPuff(inst, channeler)
+	inst.channeler = channeler
+	
+	SmokePuff(inst)
+
+	--[[local x, y, z = inst.Transform:GetWorldPosition()
+	
+	SpawnPrefab("pollenmites").Transform:SetPosition((x + math.random(-10, 10)), y, (z + math.random(-10, 10)))
+	
     local ents = TheSim:FindEntities(x, y, z, 20, nil, nil, { "player" })
     for i, v in ipairs(ents) do
         TryPuff(v, inst)
@@ -131,53 +164,11 @@ local function DoPuff(inst)
 	local ents2 = TheSim:FindEntities(x, y, z, 1, nil, nil, { "mushroom_fuel" })
     for i, k in ipairs(ents2) do
         TryPerish(k)
-    end
-end
-
-local function CheckForItems(inst)
-	if inst.components.container ~= nil then
-		local perishables = #inst.components.container:FindItems( function(item) return item:HasTag("mushroom_fuel") end )
-
-		if perishables > 0 then
-
-			if not inst:HasTag("burnt") then
-				if not inst:HasTag("airconditioneropen") then
-					if inst.AnimState:IsCurrentAnimation("idle_fueled") or
-						inst.AnimState:IsCurrentAnimation("place") then
-						--NOTE: push again even if already playing, in case an idle was also pushed
-						inst:_PushAnimation("idle_fueled", true)
-						
-						if not inst.SoundEmitter:PlayingSound("loop") then
-							inst.SoundEmitter:KillSound("idlesound")
-							inst.SoundEmitter:PlaySound("dontstarve/common/research_machine_gift_active_LP", "loop")
-						end
-						
-					else
-						inst:_PlayAnimation("idle_fueled", true)
-						
-						if not inst.SoundEmitter:PlayingSound("loop") then
-							inst.SoundEmitter:KillSound("idlesound")
-							inst.SoundEmitter:PlaySound("dontstarve/common/research_machine_gift_active_LP", "loop")
-						end
-					end
-				end
-			end
-
-			if inst.rottask == nil then
-				inst.rottask = inst:DoPeriodicTask(2, DoPuff)
-			end
-		else
-			if not inst:HasTag("airconditioneropen") then
-				inst:_PushAnimation("idle", true)
-			end
-			if inst.rottask ~= nil then
-				inst.rottask:Cancel()
-			end
-			inst.rottask = nil
-			
-			inst.SoundEmitter:KillSound("loop")
-		end
-	end
+    end]]
+	
+	inst:_PlayAnimation("idle_fueled")
+	
+	inst.components.channelable:StopChanneling(true)
 end
 
 local function onhammered(inst, worker)
@@ -200,16 +191,21 @@ local function onhit(inst)
 		inst.components.container:DropEverything()
 		inst.components.container:Close()
 	end
-	
-	CheckForItems(inst)
 end
 
 local function onload(inst, data)
     if data ~= nil and data.burnt then
         inst.components.burnable.onburnt(inst)
     end
-	inst:DoTaskInTime(0, CheckForItems)
 end
+
+local function OnStopChanneling(inst)
+	if inst.channeler ~= nil then
+		--inst.channeler.sg:GoToState("idle")
+	end
+	inst.channeler = nil
+end
+	
 
 local function fn()
     local inst = CreateEntity()
@@ -248,6 +244,7 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("lootdropper")
+	
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
     inst.components.workable:SetWorkLeft(4)
@@ -260,11 +257,14 @@ local function fn()
     inst.components.container.onopenfn = onopen
     inst.components.container.onclosefn = onclose
 
-	inst:AddComponent("preserver")
-	inst.components.preserver:SetPerishRateMultiplier(10)
-		
+    inst:AddComponent("channelable")
+    inst.components.channelable:SetChannelingFn(DoPuff, OnStopChanneling)
+    inst.components.channelable.use_channel_longaction = true
+    inst.components.channelable.skip_state_stopchanneling = true
+    inst.components.channelable.skip_state_channeling = true
+    inst.components.channelable.ignore_prechannel = true
+	
     inst:ListenForEvent("onbuilt", onbuilt)
-    inst:ListenForEvent("animover", CheckForItems)
 
     MakeMediumBurnable(inst, nil, nil, true)
     MakeSmallPropagator(inst)
@@ -272,12 +272,7 @@ local function fn()
     inst.OnLoad = onload
     inst:ListenForEvent("burntup", makeburnt)
 	
-	inst:ListenForEvent("itemget", CheckForItems)
-	inst:ListenForEvent("itemlose", CheckForItems)
-	
     MakeHauntableWork(inst)
-	
-	inst:ListenForEvent("animover", SmokePuff)
 
 	inst._PlayAnimation = Default_PlayAnimation
 	inst._PushAnimation = Default_PushAnimation

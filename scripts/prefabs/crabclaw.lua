@@ -419,7 +419,7 @@ local function fn()
 	inst.slot4_inserted = false
 
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(40)
+    inst.components.weapon:SetDamage(30)
     inst.components.weapon:SetOnAttack(onattack)
 
     -------
