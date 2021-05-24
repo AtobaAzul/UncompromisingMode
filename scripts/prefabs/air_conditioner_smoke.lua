@@ -103,7 +103,11 @@ local function stopinfesttest(inst)
 end
 
 local function ResetTimer(inst)
-	inst.components.timer:SetTimeLeft("die", 30)
+	inst.components.timer:SetTimeLeft("die", 31.1)
+end
+
+local function TimeToDie(inst)
+	inst.components.health:Kill()
 end
 
 local function fn2()
@@ -175,7 +179,7 @@ local function fn2()
 	inst.components.timer:StartTimer("die", 30)
 	inst:ListenForEvent("oninfest", ResetTimer)
 
-	inst:ListenForEvent("timerdone", function(inst) inst.components.health:Kill() end)
+	inst:ListenForEvent("timerdone", TimeToDie)
 	
     inst.persists = false
 
