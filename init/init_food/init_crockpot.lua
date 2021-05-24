@@ -22,14 +22,14 @@ recipes.baconeggs.priority = 9 --No more casino 50/50 baconeggs / monsterlasagna
 -----------------------------------------------------------------
 -- Filler changes - Limit twigs and/or Ice to all recipes
 -----------------------------------------------------------------
-
+local TUNING = GLOBAL.TUNING
 local RECIPE_ICE_LIMIT = GLOBAL.TUNING.DSTU.CROCKPOT_RECIPE_ICE_LIMIT
 local RECIPE_TWIG_LIMIT = GLOBAL.TUNING.DSTU.CROCKPOT_RECIPE_TWIG_LIMIT
 local RECIPE_ICE_PLUS_TWIG_LIMIT = GLOBAL.TUNING.DSTU.CROCKPOT_RECIPE_ICE_PLUS_TWIG_LIMIT
 
 local function LimitIceTestFn(tags, ice_limit)
-    if tags~=nil and tags.frozen ~= nil then
-        return not tags.frozen or (tags.frozen + (tags.foliage ~= nil and tags.foliage or 0) <= ice_limit)
+    if tags~=nil and tags.frozen ~= nil and TUNING.DSTU.GENERALCROCKBLOCKER == true  then
+        return (not tags.frozen or (tags.frozen + (tags.foliage ~= nil and tags.foliage or 0) <= ice_limit))
     end
     return true
 end
@@ -53,7 +53,7 @@ local function UncompromisingFillerCustomTestFn(tags, ice_limit, twig_limit, ice
 end
 
 local function UncompromisingFillers(tags)
-    return UncompromisingFillerCustomTestFn(tags, RECIPE_ICE_LIMIT, RECIPE_TWIG_LIMIT, RECIPE_ICE_PLUS_TWIG_LIMIT)
+    return (UncompromisingFillerCustomTestFn(tags, RECIPE_ICE_LIMIT, RECIPE_TWIG_LIMIT, RECIPE_ICE_PLUS_TWIG_LIMIT) and TUNING.DSTU.GENERALCROCKBLOCKER == true) or TUNING.DSTU.GENERALCROCKBLOCKER == false
 end
 
 
@@ -62,7 +62,15 @@ end
 -- Relevant: AddIngredientValues
 -------------------------------------------------------------------------------
 --TODO: Fix smart crocpot mods from this, if possible (currently not showing predicted recipes correctly)
+AddIngredientValues({"butterflywings"}, {decoration=2, insectoid=0.5})
+AddIngredientValues({"acorn"}, {seed=1})
+--Substract the meat value from the monster value, since it dillutes it
+
 local meat_reduction_factor = GLOBAL.TUNING.DSTU.MONSTER_MEAT_MEAT_REDUCTION_PER_MEAT;
+local function MonsterMeatSupport(tags)
+    return ((tags~=nil and not tags.monster or tags.monster < 2 or (tags.meat and (tags.monster - tags.meat*meat_reduction_factor) < 2)) and TUNING.DSTU.CROCKPOTMONSTMEAT == true) or TUNING.DSTU.CROCKPOTMONSTMEAT == false
+end
+if TUNING.DSTU.CROCKPOTMONSTMEAT == true then
 AddIngredientValues({"monstermeat"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_RAW_MONSTER_VALUE + meat_reduction_factor}, true, true) --2.5 monster total, Will be calculated with -1 meat
 AddIngredientValues({"monstermeat_cooked"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE + meat_reduction_factor}, true, true) --2 monster total, Will be calculated with -1 meat
 AddIngredientValues({"monstermeat_dried"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_DRIED_MONSTER_VALUE + meat_reduction_factor}, true, true) --1 monster total, Will be calculated with -1 meat
@@ -71,14 +79,16 @@ AddIngredientValues({"cookedmonstersmallmeat"}, {meat=0.5, monster=GLOBAL.TUNING
 AddIngredientValues({"monstersmallmeat_dried"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_DRIED_MONSTER_VALUE + meat_reduction_factor}, true, true) --2 monster total, Will be calculated with -1 meat
 AddIngredientValues({"scorpioncarapace"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_RAW_MONSTER_VALUE + meat_reduction_factor, insectoid=0.5}, true, true)
 AddIngredientValues({"scorpioncarapacecooked"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE + meat_reduction_factor, insectoid=0.5}, true, true)
-AddIngredientValues({"butterflywings"}, {decoration=2, insectoid=0.5})
-AddIngredientValues({"acorn"}, {seed=1})
---Substract the meat value from the monster value, since it dillutes it
-local function MonsterMeatSupport(tags)
-    return tags~=nil and not tags.monster or tags.monster < 2 or (tags.meat and (tags.monster - tags.meat*meat_reduction_factor) < 2)
+else
+AddIngredientValues({"monstersmallmeat"}, {meat=0.5, monster=1}, true, true) --2 monster total, Will be calculated with -1 meat
+AddIngredientValues({"cookedmonstersmallmeat"}, {meat=0.5, monster=1}, true, true) --2.5 monster total, Will be calculated with -1 meat
+AddIngredientValues({"monstersmallmeat_dried"}, {meat=0.5, monster=1}, true, true) --2 monster total, Will be calculated with -1 meat
+AddIngredientValues({"scorpioncarapace"}, {meat=0.5, monster=1, insectoid=0.5}, true, true)
+AddIngredientValues({"scorpioncarapacecooked"}, {meat=0.5, monster=1, insectoid=0.5}, true, true)
 end
 
-local function MonsterMeat(tags)
+
+local function MonsterMeat(tags) -- Pretty sure this function is depricated --AXE
     return tags~=nil and tags.monster and tags.monster >=2 and (tags.meat and (tags.monster - tags.meat*meat_reduction_factor) >= 2)
 end
 
@@ -541,9 +551,11 @@ local snowcone =
     sanity = 5,
     cooktime = 0.5,
 }
+
+if TUNING.DSTU.ICECROCKBLOCKER == true then
 AddCookerRecipe("cookpot", snowcone)
 AddCookerRecipe("portablecookpot", snowcone)
-
+end
 local viperjam =
 {
     name = "viperjam",

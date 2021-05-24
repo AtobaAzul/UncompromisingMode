@@ -111,6 +111,14 @@ TUNING.DSTU =
     RECIPE_CELESTIAL_UPGRADE_GLASS_COST = 20,
 
     ----------------------------------------------------------------------------
+    --Food Changes Config
+    ----------------------------------------------------------------------------
+	
+	CROCKPOTMONSTMEAT = GetModConfigData("crockpotmonstmeat"),
+	GENERALCROCKBLOCKER = GetModConfigData("generalcrockblocker"),
+	ICECROCKBLOCKER = GetModConfigData("icecrockblocker"),
+	
+    ----------------------------------------------------------------------------
     --Mob changes
     ----------------------------------------------------------------------------
     --Generics

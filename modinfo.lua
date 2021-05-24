@@ -139,6 +139,17 @@ configuration_options =
 		default = 0,
 	},]]
 -----------------------------
+-- Food --
+-----------------------------
+	SkipSpace(),
+	Header("Food"),
+	Header("--------------------"),
+	Header("Crockpot Changes"),
+	BinaryConfig("crockpotmonstmeat", "Harder Monster Meat", "Enables the monster meat dilution system, where regular monster meat must be diluted or dried to make certain dishes.", true),
+	BinaryConfig("generalcrockblocker", "Trash Filler Blocker", "Heavy use of certain low quality crockpot ingredients, such as twigs, ice, buttefly wings, and other inedibles results in wet goop.", true),
+	BinaryConfig("icecrockblocker", "Snowcones", "Snowcones prevent heavy use of ice specifically in crockpot dishes that don't call for it.", true),
+	Header("--------------------"),
+-----------------------------
 -- Monsters --
 -----------------------------
 	SkipSpace(),
