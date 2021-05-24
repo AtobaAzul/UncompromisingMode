@@ -144,10 +144,10 @@ local function fn()
 	RemovePhysicsColliders(inst)
     inst.Physics:SetCollisionGroup(COLLISION.FLYERS)
 	
-	inst.AnimState:SetBuild("gnat")
+	
 
 	------------
-	
+	inst.AnimState:SetBuild("pollenmites")
 	inst.AnimState:SetBank("gnat")
 	inst.AnimState:PlayAnimation("idle_loop")
 	--inst.AnimState:SetRayTestOnBB(true);

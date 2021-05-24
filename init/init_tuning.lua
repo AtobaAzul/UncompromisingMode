@@ -111,6 +111,22 @@ TUNING.DSTU =
     RECIPE_CELESTIAL_UPGRADE_GLASS_COST = 20,
 
     ----------------------------------------------------------------------------
+    --Food Changes Config
+    ----------------------------------------------------------------------------
+	
+	--Crockpot Recipes
+	CROCKPOTMONSTMEAT = GetModConfigData("crockpotmonstmeat"),
+	GENERALCROCKBLOCKER = GetModConfigData("generalcrockblocker"),
+	ICECROCKBLOCKER = GetModConfigData("icecrockblocker"),
+	
+	--Crockpot Dish Changes
+	
+	MEATBALL = GetModConfigData("meatball"),
+	PIEROGI = GetModConfigData("pierogi"),
+	FARMFOODREDUX = GetModConfigData("farmfoodredux"),
+	ICECREAMBUFF = GetModConfigData("icecreambuff"),
+	BUTTMUFFIN = GetModConfigData("buttmuffin"),
+    ----------------------------------------------------------------------------
     --Mob changes
     ----------------------------------------------------------------------------
     --Generics
@@ -160,6 +176,11 @@ TUNING.DSTU =
 	
 	--Pinelings
 	PINELINGS = GetModConfigData("pinelings"),
+	
+	--Spiders
+	REGSPIDERJUMP = GetModConfigData("alljumperspiders"),
+	SPIDERWARRIORCOUNTER = GetModConfigData("spiderwarriorcounter"),
+	TRAPDOORSPIDERS = GetModConfigData("trapdoorspiders"),
 	
     ----------------------------------------------------------------------------
     --Player changes

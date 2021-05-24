@@ -24,16 +24,27 @@ local ApplyIcecreamBuff = function(inst, eater)
                 eater.components.debuffable:AddDebuff("icecreamsanityregenbuff", "icecreamsanityregenbuff")
             end
         end
+
+if TUNING.DSTU.PIEROGI == true then
 recipes.perogies.perishtime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_PEROGI_PERISH -- Changed to 10 days, down from 20
+end
+
+if TUNING.DSTU.MEATBALL == true then
 recipes.meatballs.hunger = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_MEATBALL_HUNGER -- Changed to 50, down from 62.5
+end
+
+if TUNING.DSTU.BUTTMUFFIN == true then
 recipes.butterflymuffin.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERMUFFIN_HEALTH -- Changed to 50, down from 62.5
+end
+
+if TUNING.DSTU.ICECREAMBUFF == true then
 recipes.icecream.sanity = 0
 recipes.icecream.oneatenfn = ApplyIcecreamBuff
+end
 
 
 
-
-
+if TUNING.DSTU.FARMFOODREDUX == true then
 ------Rare Farmplot Crockpot Foods Change
 recipes.mashedpotatoes.hunger = 100
 recipes.mashedpotatoes.sanity = 15
@@ -83,6 +94,7 @@ warly_recipes.potatosouffle.sanity = 5
 recipes.leafymeatburger.hunger = 100
 recipes.leafymeatburger.sanity = 5
 recipes.leafymeatburger.health = 3
+end
 -----------------------------------------------------------------
 -- Prevent cooked eggs birdcage infinite loop
 -----------------------------------------------------------------
@@ -130,6 +142,8 @@ AddPrefabPostInit("cookedmonstermeat", function (inst)
     end
 end)
 
+
+
 AddPrefabPostInit("potato_cooked", function (inst)
     if inst ~= nil and inst.components.edible ~= nil then
         inst.components.edible.healthvalue = 8
@@ -155,6 +169,7 @@ AddPrefabPostInit("eggplant_cooked", function (inst)
 		inst.components.edible.healthvalue = 12
     end
 end)
+
 
 local ANTIHISTAMINES = 
 {

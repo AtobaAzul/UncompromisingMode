@@ -56,6 +56,8 @@ function Infester:Infest(target)
 		self.inst.AnimState:SetFinalOffset(-1)
 		self.inst.Physics:Teleport(0,0,0)
 		self.inst:PushEvent("oninfest")
+		self.inst.AnimState:SetFinalOffset(1)
+		self.inst.Physics:Teleport(0,0,0)	
 		target:AddChild(self.inst)
 		
 		target.components.infestable:infest(self.inst)

@@ -185,8 +185,8 @@ AddRoom("SnapDragons",
 }})
 AddRoom("MoonBaseGiantTrees", {
 					colour={r=.8,g=0.5,b=.6,a=.50},
-					value = GROUND.FOREST,
-					tags = { "RoadPoison",},
+					value = GROUND.HOODEDFOREST,
+					tags = { "RoadPoison","hoodedcanopy"},
 					contents =  {
 									countprefabs = {
 										giant_tree = function () return 3 + math.random(0,1) end,

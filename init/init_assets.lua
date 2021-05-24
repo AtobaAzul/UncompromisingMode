@@ -119,6 +119,8 @@ Assets = {
 	Asset("ANIM", "anim/spikes_canary.zip"),
 	
 	Asset("ANIM", "anim/gnat_cocoon.zip"),
+	Asset("ANIM", "anim/pollenmites.zip"),
+	Asset("ANIM", "anim/acsporecloud.zip"),
 	Asset("ANIM", "anim/slingshotammo_firecracker.zip"),
 	Asset("ANIM", "anim/phonograph.zip"),
 	Asset("ANIM", "anim/moontear.zip"),
