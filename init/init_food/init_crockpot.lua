@@ -28,7 +28,7 @@ local RECIPE_TWIG_LIMIT = GLOBAL.TUNING.DSTU.CROCKPOT_RECIPE_TWIG_LIMIT
 local RECIPE_ICE_PLUS_TWIG_LIMIT = GLOBAL.TUNING.DSTU.CROCKPOT_RECIPE_ICE_PLUS_TWIG_LIMIT
 
 local function LimitIceTestFn(tags, ice_limit)
-    if tags~=nil and tags.frozen ~= nil and TUNING.DSTU.GENERALCROCKBLOCKER == true  then
+    if tags~=nil and tags.frozen ~= nil and TUNING.DSTU.GENERALCROCKBLOCKER == true then
         return (not tags.frozen or (tags.frozen + (tags.foliage ~= nil and tags.foliage or 0) <= ice_limit))
     end
     return true

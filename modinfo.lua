@@ -144,10 +144,19 @@ configuration_options =
 	SkipSpace(),
 	Header("Food"),
 	Header("--------------------"),
-	Header("Crockpot Changes"),
+	Header("Crockpot Recipe Changes"),
 	BinaryConfig("crockpotmonstmeat", "Harder Monster Meat", "Enables the monster meat dilution system, where regular monster meat must be diluted or dried to make certain dishes.", true),
 	BinaryConfig("generalcrockblocker", "Trash Filler Blocker", "Heavy use of certain low quality crockpot ingredients, such as twigs, ice, buttefly wings, and other inedibles results in wet goop.", true),
 	BinaryConfig("icecrockblocker", "Snowcones", "Snowcones prevent heavy use of ice specifically in crockpot dishes that don't call for it.", true),
+	
+	SkipSpace(),
+	Header("Crockpot Food Tweaks"),
+	BinaryConfig("meatball", "Meatball Nerf", "Meatballs restore 50 hunger instead of 62.5.", true),
+	BinaryConfig("pierogi", "Pierogi Nerf", "Pierogis only last 10 days.", true),
+	BinaryConfig("buttmuffin", "Butter Muffin Buff", "Butter muffin restores 30 health 10 sanity instead of 20 health 5 sanity.", true),
+	BinaryConfig("icecreambuff", "Ice Cream Buff", "Ice Cream now restores 100 sanity, but does it slowly.", true),
+	BinaryConfig("farmfoodredux", "Farmpot Food Redux", "Reallocates most dishes that involve crockpot foods. Typically a buff, but may exchange some stats.", true),
+	
 	Header("--------------------"),
 -----------------------------
 -- Monsters --
