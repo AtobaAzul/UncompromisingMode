@@ -48,7 +48,7 @@ function Infester:Infest(target)
 		self.infesting = true
 		self.target = target
 		self.inst.bitetask = self.inst:DoTaskInTime(self.basetime+(math.random()*self.randtime),function() self:bite() end)
-		self.inst.AnimState:SetFinalOffset(-1)
+		self.inst.AnimState:SetFinalOffset(1)
 		self.inst.Physics:Teleport(0,0,0)	
 		target:AddChild(self.inst)
 		

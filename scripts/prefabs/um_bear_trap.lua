@@ -55,10 +55,9 @@ local function OnExplode(inst, target)
 		
 		inst.latchedtarget = target
 		
-		inst.AnimState:SetFinalOffset(-1)
+		inst.AnimState:SetFinalOffset(1)
 		inst.Physics:Teleport(0,0,0)	
 		target:AddChild(inst)
-		inst.AnimState:SetFinalOffset(-1)
         --inst.entity:AddFollower():FollowSymbol(target.GUID, target.components.combat.hiteffectsymbol or "body", 0, --[[-50]]0, 0)
 		
 		local debuffkey = inst.prefab
@@ -173,7 +172,7 @@ local function common_fn()
     inst.AnimState:SetBank("um_bear_trap")
     inst.AnimState:SetBuild("um_bear_trap")
     inst.AnimState:PlayAnimation("idle")
-
+	inst:AddTag("soulless")
     inst:AddTag("hound")
     inst:AddTag("trap")
     inst:AddTag("bear_trap")
@@ -245,7 +244,7 @@ local function old_fn(build)
     inst.AnimState:SetBank("um_bear_trap")
     inst.AnimState:SetBuild("um_bear_trap_old")
     inst.AnimState:PlayAnimation("idle")
-
+	inst:AddTag("soulless")
     inst:AddTag("hound")
     inst:AddTag("trap")
     inst:AddTag("bear_trap")
