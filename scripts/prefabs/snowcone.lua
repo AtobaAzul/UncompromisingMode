@@ -24,7 +24,8 @@ local function fn()
     if not TheWorld.ismastersim then
         return inst
     end
-
+	inst:AddTag("frozen")
+    inst:AddTag("watersource")
     inst:AddComponent("stackable")
 
     inst:AddComponent("inspectable")
