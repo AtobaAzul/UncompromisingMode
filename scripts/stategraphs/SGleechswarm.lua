@@ -87,8 +87,10 @@ local states=
         tags = {"busy"},
 
         onenter = function(inst)
-            --inst.SoundEmitter:KillSound("move")
-            inst.SoundEmitter:PlaySound("UCSounds/pollenmite/die")           
+			if not inst:HasTag("fx") then
+				inst.SoundEmitter:PlaySound("UCSounds/pollenmite/die")        
+			end
+
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)

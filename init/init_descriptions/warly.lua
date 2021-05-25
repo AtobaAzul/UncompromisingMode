@@ -260,6 +260,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\n...It's useless outside of the crabs claw!"
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\n...It's useless outside of the crabs claw!"
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\n...It's useless outside of the crabs claw!"
+	
+	DESCRIBE.RED_MUSHED_ROOM = "Too thick for a glaze."
+	DESCRIBE.GREEN_MUSHED_ROOM = "Too thick for a glaze."
+	DESCRIBE.BLUE_MUSHED_ROOM = "Too thick for a glaze."
 
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "It was nice of him to give me his recipe."

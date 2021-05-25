@@ -240,6 +240,13 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/pale_vomit.tex"),
 	Asset("ATLAS", "images/inventoryimages/pale_vomit.xml"),
 	
+	Asset("IMAGE", "images/inventoryimages/red_mushed_room.tex"),
+	Asset("ATLAS", "images/inventoryimages/red_mushed_room.xml"),
+	Asset("IMAGE", "images/inventoryimages/blue_mushed_room.tex"),
+	Asset("ATLAS", "images/inventoryimages/blue_mushed_room.xml"),
+	Asset("IMAGE", "images/inventoryimages/green_mushed_room.tex"),
+	Asset("ATLAS", "images/inventoryimages/green_mushed_room.xml"),
+	
 	Asset("ANIM", "anim/scorpion_basic.zip"),
 	Asset("ANIM", "anim/scorpion_build.zip"),
 	Asset("ANIM", "anim/scorpion_new.zip"),

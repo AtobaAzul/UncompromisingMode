@@ -229,14 +229,30 @@ local function OnUse(inst)
 	end
 end
 
-local function onequip(inst, owner) 
-    if inst.components.container ~= nil then
-        inst.components.container:Open(owner)
-    end
-    owner.AnimState:OverrideSymbol("swap_body", "armor_grass", "swap_body")
-	
-    inst:ListenForEvent("blocked", inst._onblocked, owner)
-    inst:ListenForEvent("attacked", inst._onblocked, owner)
+local function onequip(inst, owner)
+	if not owner:HasTag("vetcurse") then
+		inst:DoTaskInTime(0, function(inst, owner)
+			local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner
+			local tool = owner ~= nil and owner.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+			if tool ~= nil and owner ~= nil then
+				owner.components.inventory:Unequip(EQUIPSLOTS.BODY)
+				owner.components.inventory:DropItem(tool)
+				owner.components.inventory:GiveItem(inst)
+				owner.components.talker:Say(GetString(owner, "CURSED_ITEM_EQUIP"))
+				inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/HUD_hot_level1")
+				
+				owner.components.combat:GetAttacked(inst, 0.1, nil)
+			end
+		end)
+	else
+		if inst.components.container ~= nil then
+			inst.components.container:Open(owner)
+		end
+		owner.AnimState:OverrideSymbol("swap_body", "armor_grass", "swap_body")
+		
+		inst:ListenForEvent("blocked", inst._onblocked, owner)
+		inst:ListenForEvent("attacked", inst._onblocked, owner)
+	end
 end
 
 local function onunequip(inst, owner) 

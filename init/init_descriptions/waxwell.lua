@@ -268,6 +268,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nIt won't conduct properly now."
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nIt won't conduct properly now."
 	
+	DESCRIBE.RED_MUSHED_ROOM = "I've mushed it into a paste."
+	DESCRIBE.GREEN_MUSHED_ROOM = "I've mushed it into a paste."
+	DESCRIBE.BLUE_MUSHED_ROOM = "I've mushed it into a paste."
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "His mixture is actually quite impressive."
 	DESCRIBE.SKULLFLASK_EMPTY = "The flask appears to be enchanted as well, brilliant."

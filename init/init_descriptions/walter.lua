@@ -261,6 +261,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nIt's all carved up!"
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nIt's all carved up!"
 	
+	DESCRIBE.RED_MUSHED_ROOM = "I'm not sure it's any better mushed."
+	DESCRIBE.GREEN_MUSHED_ROOM = "I'm not sure it's any better mushed."
+	DESCRIBE.BLUE_MUSHED_ROOM = "I'm not sure it's any better mushed."
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "That's a spooky cup."
 	DESCRIBE.SKULLFLASK_EMPTY = "It's empty, for now."

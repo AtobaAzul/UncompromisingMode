@@ -261,6 +261,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\nI've ruined the magic."
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nI've ruined the magic."
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nI've ruined the magic."
+	
+	DESCRIBE.RED_MUSHED_ROOM = "It's hopes and dreams have been crushed."
+	DESCRIBE.GREEN_MUSHED_ROOM = "It's hopes and dreams have been crushed."
+	DESCRIBE.BLUE_MUSHED_ROOM = "It's hopes and dreams have been crushed."
 
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "Keeps my mind calm, for a moment."

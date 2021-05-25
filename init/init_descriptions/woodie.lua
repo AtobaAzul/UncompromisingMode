@@ -263,6 +263,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nI don't think it will work outside of the claw."
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nI don't think it will work outside of the claw."
 	
+	DESCRIBE.RED_MUSHED_ROOM = "Poor things all mushed now."
+	DESCRIBE.GREEN_MUSHED_ROOM = "Poor things all mushed now."
+	DESCRIBE.BLUE_MUSHED_ROOM = "Poor things all mushed now."
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "Keeps your mind at ease."
 	DESCRIBE.SKULLFLASK_EMPTY = "Well, it's gone now."

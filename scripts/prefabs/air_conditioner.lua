@@ -129,46 +129,85 @@ local function SmokePuff(inst)
 			local air_conditioner_cloud = SpawnPrefab("air_conditioner_cloud")
 			air_conditioner_cloud.Transform:SetPosition(x + math.random(-10, 10), 0, z + math.random(-10, 10))
 			air_conditioner_cloud.AnimState:SetMultColour(red, green, blue, 0.2)
-			air_conditioner_cloud.red = red
-			air_conditioner_cloud.blue = blue
-			air_conditioner_cloud.green = green
+			air_conditioner_cloud.red = numredcaps
+			air_conditioner_cloud.blue = numbluecaps
+			air_conditioner_cloud.green = numgreencaps
 		end
 		for i, v in ipairs(bluecaps) do
-			v.components.perishable:ReducePercent(TUNING.TOADSTOOL_SPORECLOUD_ROT)
+			if v.components.perishable:GetPercent() <= 0.2 then
+				v.components.perishable:Perish()
+			else
+				v.components.perishable:ReducePercent(0.2)
+			end
 		end
 		
 		for i, v in ipairs(redcaps) do
-			v.components.perishable:ReducePercent(TUNING.TOADSTOOL_SPORECLOUD_ROT)
+			if v.components.perishable:GetPercent() <= 0.2 then
+				v.components.perishable:Perish()
+			else
+				v.components.perishable:ReducePercent(0.2)
+			end
 		end
 		
 		for i, v in ipairs(greencaps) do
-			v.components.perishable:ReducePercent(TUNING.TOADSTOOL_SPORECLOUD_ROT)
+			if v.components.perishable:GetPercent() <= 0.2 then
+				v.components.perishable:Perish()
+			else
+				v.components.perishable:ReducePercent(0.2)
+			end
 		end
 	end
 end
 
-local function DoPuff(inst, channeler)
-	inst.channeler = channeler
-	
-	SmokePuff(inst)
+local function OnCooldown(inst)
+    inst._cdtask = nil
+end
 
-	--[[local x, y, z = inst.Transform:GetWorldPosition()
-	
-	SpawnPrefab("pollenmites").Transform:SetPosition((x + math.random(-10, 10)), y, (z + math.random(-10, 10)))
-	
-    local ents = TheSim:FindEntities(x, y, z, 20, nil, nil, { "player" })
-    for i, v in ipairs(ents) do
-        TryPuff(v, inst)
-    end
-	
-	local ents2 = TheSim:FindEntities(x, y, z, 1, nil, nil, { "mushroom_fuel" })
-    for i, k in ipairs(ents2) do
-        TryPerish(k)
-    end]]
-	
-	inst:_PlayAnimation("idle_fueled")
-	
-	inst.components.channelable:StopChanneling(true)
+local function DoPuff(inst, channeler)
+	if inst._cdtask == nil then
+        inst._cdtask = inst:DoTaskInTime(1, OnCooldown)
+		
+		inst.channeler = channeler
+		
+		local bluecaps = inst.components.container:FindItems( function(item) return item:HasTag("blue_mushroom_fuel") and not item:HasTag("mushed_room") end )
+		local redcaps = inst.components.container:FindItems( function(item) return item:HasTag("red_mushroom_fuel") and not item:HasTag("mushed_room") end )
+		local greencaps = inst.components.container:FindItems( function(item) return item:HasTag("green_mushroom_fuel") and not item:HasTag("mushed_room") end )
+
+		for i, v in ipairs(bluecaps) do
+			v.components.perishable.onperishreplacement = "blue_mushed_room"
+			v:DoTaskInTime(0, function(v) v.components.perishable:Perish() end)
+		end
+		
+		for i, v in ipairs(redcaps) do
+			v.components.perishable.onperishreplacement = "red_mushed_room"
+			v:DoTaskInTime(0, function(v) v.components.perishable:Perish() end)
+		end
+		
+		for i, v in ipairs(greencaps) do
+			v.components.perishable.onperishreplacement = "green_mushed_room"
+			v:DoTaskInTime(0, function(v) v.components.perishable:Perish() end)
+		end
+		
+		inst:DoTaskInTime(0.2, SmokePuff)
+
+		--[[local x, y, z = inst.Transform:GetWorldPosition()
+		
+		SpawnPrefab("pollenmites").Transform:SetPosition((x + math.random(-10, 10)), y, (z + math.random(-10, 10)))
+		
+		local ents = TheSim:FindEntities(x, y, z, 20, nil, nil, { "player" })
+		for i, v in ipairs(ents) do
+			TryPuff(v, inst)
+		end
+		
+		local ents2 = TheSim:FindEntities(x, y, z, 1, nil, nil, { "mushroom_fuel" })
+		for i, k in ipairs(ents2) do
+			TryPerish(k)
+		end]]
+		
+		inst:_PlayAnimation("idle_fueled")
+	end
+		
+		inst.components.channelable:StopChanneling(true)
 end
 
 local function onhammered(inst, worker)
@@ -280,5 +319,58 @@ local function fn()
     return inst
 end
 
+local function perishfn(inst)
+	inst:Remove()
+end
+
+local function MakeMushy(name, color)
+	local function shrumfn()
+		local inst = CreateEntity()
+
+		inst.entity:AddTransform()
+		inst.entity:AddAnimState()
+		inst.entity:AddNetwork()
+
+		MakeInventoryPhysics(inst)
+		
+		local truecolor = (color == "purple" and "blue" or color)
+		
+		inst:AddTag("mushed_room")
+		inst:AddTag("mushroom_fuel")
+		inst:AddTag(truecolor.."_mushroom_fuel")
+		inst:AddTag("show_spoilage")
+
+		inst.AnimState:SetBank("snapdragon_fertilizer")
+		inst.AnimState:SetBuild("snapdragon_fertilizer")
+		
+		inst.AnimState:PlayAnimation("idle_"..truecolor)
+
+		MakeInventoryFloatable(inst)
+		inst.entity:SetPristine()
+
+		if not TheWorld.ismastersim then
+			return inst
+		end
+
+		inst:AddComponent("inspectable")
+		inst:AddComponent("inventoryitem")
+		inst.components.inventoryitem.atlasname = "images/inventoryimages/"..truecolor.."_mushed_room.xml"
+	
+		inst:AddComponent("perishable")
+		inst.components.perishable:SetPerishTime(TUNING.PERISH_MED)
+		inst.components.perishable:StartPerishing()
+		inst.components.perishable.perishfn = perishfn
+
+		MakeHauntableLaunchAndPerish(inst)
+		
+		return inst
+	end
+
+    return Prefab(name, shrumfn, assets, prefabs)
+end
+
 return Prefab("air_conditioner", fn, assets, prefabs),
-    MakePlacer("air_conditioner_placer", "airconditioner", "airconditioner", "idle")
+    MakePlacer("air_conditioner_placer", "airconditioner", "airconditioner", "idle"),
+	MakeMushy("blue_mushed_room", "blue"),
+	MakeMushy("red_mushed_room", "red"),
+	MakeMushy("green_mushed_room", "green")

@@ -11,7 +11,7 @@ local Infester = Class(function(self, inst)
 end)
 
 function Infester:Uninfest()
-	if self == nil then
+	if self ~= nil then
 		self.inst:ClearBufferedAction()
 		self.infesting = false
 		

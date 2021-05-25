@@ -163,7 +163,6 @@ local function fn2()
 	
 	inst:AddComponent("health")
 	inst.components.health:SetMaxHealth(500)
-	inst.components.health:SetInvincible(true)
 
 	inst:AddComponent("infester")
 	inst.components.infester.basetime = 1
