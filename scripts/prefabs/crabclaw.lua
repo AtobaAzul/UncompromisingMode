@@ -88,7 +88,7 @@ local function AddGem(inst)
 		if not item1.components.finiteuses then
 			item1:AddComponent("perishable")
 			item1.components.perishable.onperishreplacement = item1.prefab.."_cracked"
-			item1.components.perishable:Perish()
+			item1:DoTaskInTime(0, function(item1) item1.components.perishable:Perish() end)
 		else
 			inst.SoundEmitter:PlaySound("hookline_2/creatures/boss/crabking/gem_place")
 			
@@ -114,7 +114,7 @@ local function AddGem(inst)
 		if not item2.components.finiteuses then
 			item2:AddComponent("perishable")
 			item2.components.perishable.onperishreplacement = item2.prefab.."_cracked"
-			item2.components.perishable:Perish()
+			item2:DoTaskInTime(0, function(item2) item2.components.perishable:Perish() end)
 		else
 			inst.SoundEmitter:PlaySound("hookline_2/creatures/boss/crabking/gem_place")
 			
@@ -140,7 +140,7 @@ local function AddGem(inst)
 		if not item3.components.finiteuses then
 			item3:AddComponent("perishable")
 			item3.components.perishable.onperishreplacement = item3.prefab.."_cracked"
-			item3.components.perishable:Perish()
+			item3:DoTaskInTime(0, function(item3) item3.components.perishable:Perish() end)
 		else
 			inst.SoundEmitter:PlaySound("hookline_2/creatures/boss/crabking/gem_place")
 
@@ -167,7 +167,7 @@ local function AddGem(inst)
 		if not item4.components.finiteuses then
 			item4:AddComponent("perishable")
 			item4.components.perishable.onperishreplacement = item4.prefab.."_cracked"
-			item4.components.perishable:Perish()
+			item4:DoTaskInTime(0, function(item4) item4.components.perishable:Perish() end)
 		else
 			inst.SoundEmitter:PlaySound("hookline_2/creatures/boss/crabking/gem_place")
 

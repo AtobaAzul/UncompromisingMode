@@ -44,8 +44,6 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/snowball_throwable.tex"),
 	Asset("ATLAS", "images/inventoryimages/skeletonmeat.xml"),
 	Asset("IMAGE", "images/inventoryimages/skeletonmeat.tex"),
-	Asset("ATLAS", "images/mushroom_slot.xml"),
-	Asset("IMAGE", "images/mushroom_slot.tex"),
 	Asset("ATLAS", "images/inventoryimages/critterlab_real.xml"),
 	Asset("IMAGE", "images/inventoryimages/critterlab_real.tex"),
 	Asset("ATLAS", "images/inventoryimages/screecher_trinket.xml"),
@@ -54,6 +52,13 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/watermelon_lantern.tex"),
 	Asset("ATLAS", "images/inventoryimages/crabclaw.xml"),
 	Asset("IMAGE", "images/inventoryimages/crabclaw.tex"),
+	
+	Asset("ATLAS", "images/mushroom_slot.xml"),
+	Asset("IMAGE", "images/mushroom_slot.tex"),
+	Asset("ATLAS", "images/gem_slot.xml"),
+	Asset("IMAGE", "images/gem_slot.tex"),
+	Asset("ATLAS", "images/feather_slot.xml"),
+	Asset("IMAGE", "images/feather_slot.tex"),
 	
 	Asset("ANIM", "anim/geyser.zip"),
 	Asset("ANIM", "anim/lava_vomit.zip"),
