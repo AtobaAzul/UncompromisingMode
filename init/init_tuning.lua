@@ -149,6 +149,12 @@ TUNING.DSTU =
 	--Hooded Widow
 	WIDOW_HEALTH = GetModConfigData("widow health"),
 	
+	--Mother Goose
+	MOTHER_GOOSE_HEALTH = GetModConfigData("mother goose health"),
+	
+	--Wiltfly Health
+	WILTFLY_HEALTH = GetModConfigData("wiltfly health"),
+	
 	--Hound inclusion
 	SPAWNMOTHERGOOSE = GetModConfigData("mother_goose"),
 	SPAWNWILTINGFLY = GetModConfigData("wiltfly"),
@@ -187,7 +193,7 @@ TUNING.DSTU =
     ----------------------------------------------------------------------------
 	
 	
-    --Tripover chance on walking with 100 wetness
+    --Tripover chance on walking with 100 wetness (depricated)
     TRIPOVER_HEALTH_DAMAGE = 10,
     TRIPOVER_ONMAXWET_CHANCE_PER_SEC = 0.10,
     TRIPOVER_KNOCKABCK_RADIUS = 2,

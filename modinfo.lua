@@ -260,6 +260,28 @@ configuration_options =
 		},
 		default = 8000,
 	},
+	{
+		name = "mother goose health",
+		label = "Mother Goose Health",
+		hover = "Mother Goose's health can be lowered to closer match a singleplayer experience.",
+		options =
+		{
+			{description = "Default[8000]", data = 8000},
+			{description = "Lowered[5000]", data = 5000}, --Slightly lower than widow, not a raid boss.
+		},
+		default = 8000,
+	},
+	{
+		name = "wiltfly health",
+		label = "Wilting Dragonfly Health",
+		hover = "Wilting Dragonfly's health can be lowered to closer match a singleplayer experience.",
+		options =
+		{
+			{description = "Default[4000]", data = 4000},
+			{description = "Lowered[3000]", data = 3000},
+		},
+		default = 8000,
+	},
 	BinaryConfig("crabking_claws", "Crabking Fight Adjustment", "The Crabkings imposing claws now deal 500 damage to the king when killed.", false),
 ------------------------------
 -- Secret --
