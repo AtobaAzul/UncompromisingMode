@@ -273,7 +273,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nI didn't break it! I made it better!"
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nI didn't break it! I made it better!"
 	
-	DESCRIBE.RED_MUSHED_ROOM = "Pretty... Pretty mushed!!!"
+	DESCRIBE.RED_MUSHED_ROOM = "Pretty... Pretty mushed!!"
 	DESCRIBE.GREEN_MUSHED_ROOM = "I didn't like it, so I squished it."
 	DESCRIBE.BLUE_MUSHED_ROOM = "I didn't like it, so I squished it."
 	
