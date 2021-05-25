@@ -39,7 +39,7 @@ local function TrySlowdown(inst, target)
 
 	target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.4)
 	
-	if inst.components.propagator ~= nil and target.components.combat ~= nil and target.components.health ~= nil and not target.components.health:IsDead() then
+	if inst.components.propagator ~= nil and target.components.combat ~= nil and target.components.health ~= nil and not target:HasTag("dragonfly") and not target:HasTag("lavae") then
 		target.components.health:DoDelta(-2)
 		if inst.lobber ~= nil then
 			target.components.combat:SuggestTarget(inst.lobber)
@@ -246,7 +246,7 @@ local function onthrown(inst)
     inst.Physics:SetDamping(5)
     inst.Physics:SetCollisionGroup(COLLISION.OBSTACLES)
     inst.Physics:ClearCollisionMask()
-    inst.Physics:CollidesWith(COLLISION.WORLD)
+    --inst.Physics:CollidesWith(COLLISION.WORLD)
 	
 	if not inst.LaunchMorePhys then
 		inst.Physics:CollidesWith(COLLISION.GIANTS)

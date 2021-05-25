@@ -120,6 +120,13 @@ modparams.crabclaw =
         {
             { image = "slingshot_ammo_slot.tex" },
         },]]
+        slotbg =
+        {
+			{ image = "gem_slot.tex", atlas = "images/gem_slot.xml" },
+			{ image = "gem_slot.tex", atlas = "images/gem_slot.xml" },
+			{ image = "gem_slot.tex", atlas = "images/gem_slot.xml" },
+			{ image = "gem_slot.tex", atlas = "images/gem_slot.xml" },
+        },
         animbank = "ui_lamp_1x4",
         animbuild = "ui_lamp_1x4",
         pos = Vector3(0, 125, 0),
@@ -181,7 +188,7 @@ modparams.wingsuit =
         },
         slotbg =
         {
-            { image = "slingshot_ammo_slot.tex" },
+            { image = "feather_slot.tex", atlas = "images/feather_slot.xml" },
         },
         animbank = "ui_cookpot_1x2",
         animbuild = "ui_cookpot_1x2",

@@ -263,6 +263,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nWolfgang push too hard, gem broke."
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nWolfgang push too hard, gem broke."
 	
+	DESCRIBE.RED_MUSHED_ROOM = "Mushroom was no challenge."
+	DESCRIBE.GREEN_MUSHED_ROOM = "Mushroom was no challenge."
+	DESCRIBE.BLUE_MUSHED_ROOM = "Mushroom was no challenge."
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "Drink makes mind mighty!"
 	DESCRIBE.SKULLFLASK_EMPTY = "Drink come back later."

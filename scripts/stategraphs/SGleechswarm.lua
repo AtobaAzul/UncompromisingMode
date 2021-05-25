@@ -87,12 +87,17 @@ local states=
         tags = {"busy"},
 
         onenter = function(inst)
-            --inst.SoundEmitter:KillSound("move")
-            inst.SoundEmitter:PlaySound("UCSounds/pollenmite/die")           
+			if not inst:HasTag("fx") then
+				inst.SoundEmitter:PlaySound("UCSounds/pollenmite/die")        
+			end
+
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
-            RemovePhysicsColliders(inst)            
-            inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition())) 
+            RemovePhysicsColliders(inst)
+			
+			if inst.components.lootdropper ~= nil then
+				inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
+			end
         end,
     },    
 
@@ -173,7 +178,7 @@ local states=
                 inst.chasingtargettask = nil
             end
             --inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("spawn")
+            --inst.AnimState:PlayAnimation("attack_pst", false)
             --inst.AnimState:PushAnimation("attack_pst",false)
             inst:PerformBufferedAction()
         end,

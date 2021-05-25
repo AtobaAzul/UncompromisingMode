@@ -268,6 +268,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nIt's conductive pathways have been irreparably changed."
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nIt's conductive pathways have been irreparably changed."
 	
+	DESCRIBE.RED_MUSHED_ROOM = "Perhaps the paste like consistency will help serve a purpose."
+	DESCRIBE.GREEN_MUSHED_ROOM = "Perhaps the paste like consistency will help serve a purpose."
+	DESCRIBE.BLUE_MUSHED_ROOM = "Perhaps the paste like consistency will help serve a purpose."
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "It keeps me alert, but without care."
 	DESCRIBE.SKULLFLASK_EMPTY = "I can see the liquid slowly returning."

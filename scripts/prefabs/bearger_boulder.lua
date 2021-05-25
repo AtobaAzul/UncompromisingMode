@@ -74,7 +74,7 @@ local function onthrown(inst)
     inst.Physics:SetCollisionGroup(COLLISION.OBSTACLES)
     inst.Physics:ClearCollisionMask()
     inst:SetPhysicsRadiusOverride(3)
-    inst.Physics:CollidesWith(COLLISION.WORLD)
+	--inst.Physics:CollidesWith(COLLISION.WORLD)
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
     inst.Physics:SetCapsule(1.5, 1.5)
 	
@@ -132,7 +132,7 @@ local function OnHitInk_claw(inst, attacker, target)
                 and not v:HasTag("player")
                 and not v.components.health:IsDead() then
                 if v.components.combat:CanBeAttacked() then
-                    v.components.combat:GetAttacked(inst.clawer, 10, inst)
+                    v.components.combat:GetAttacked(inst.clawer, 15, inst)
                 end
             end
         end
@@ -182,7 +182,7 @@ local function onthrown_claw(inst)
     inst.Physics:SetDamping(5)
     inst.Physics:SetCollisionGroup(COLLISION.OBSTACLES)
     inst.Physics:ClearCollisionMask()
-    inst.Physics:CollidesWith(COLLISION.WORLD)
+	--inst.Physics:CollidesWith(COLLISION.WORLD)
     inst.Physics:CollidesWith(COLLISION.GIANTS)
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
     inst.Physics:SetCapsule(0.15, 0.15)

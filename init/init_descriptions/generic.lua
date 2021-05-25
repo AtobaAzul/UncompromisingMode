@@ -330,6 +330,10 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\n...It's nigh unusable in this form."
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\n...It's nigh unusable in this form."
 	
+	DESCRIBE.RED_MUSHED_ROOM = "It's all mushed up now."
+	DESCRIBE.GREEN_MUSHED_ROOM = "It's all mushed up now."
+	DESCRIBE.BLUE_MUSHED_ROOM = "It's all mushed up now."
+	
 	DESCRIBE.HEAT_SCALES_ARMOR = "If only I could fit inside."
 
 	--StantonStuff

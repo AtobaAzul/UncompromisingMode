@@ -263,6 +263,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nIt's changed shape, it will only flow through the crabs claw now!"
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nIt's changed shape, it will only flow through the crabs claw now!"
 	
+	DESCRIBE.RED_MUSHED_ROOM = "Weird and gooey, mushed and chewy!"
+	DESCRIBE.GREEN_MUSHED_ROOM = "Weird and gooey, mushed and chewy!"
+	DESCRIBE.BLUE_MUSHED_ROOM = "Weird and gooey, mushed and chewy!"
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "I'm still not sure if this is mortal food."
 	DESCRIBE.SKULLFLASK_EMPTY = "I gobbled it up!"

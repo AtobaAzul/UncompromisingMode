@@ -262,6 +262,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nShaped only for battle!"
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nShaped only for battle!"
 	
+	DESCRIBE.RED_MUSHED_ROOM = "Mushed and crushed!"
+	DESCRIBE.GREEN_MUSHED_ROOM = "Mushed and crushed!"
+	DESCRIBE.BLUE_MUSHED_ROOM = "Mushed and crushed!"
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "I drink for before or during battle!"
 	DESCRIBE.SKULLFLASK_EMPTY = "An empty flask, it will be refilled!"

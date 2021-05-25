@@ -264,6 +264,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nIt won't work in my generators anymore."
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nIt won't work in my generators anymore."
 	
+	DESCRIBE.RED_MUSHED_ROOM = "It's been ground down for some purpose."
+	DESCRIBE.GREEN_MUSHED_ROOM = "It's been ground down for some purpose."
+	DESCRIBE.BLUE_MUSHED_ROOM = "It's been ground down for some purpose."
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "Keeps me at ease."
 	DESCRIBE.SKULLFLASK_EMPTY = "Nothin' left."
