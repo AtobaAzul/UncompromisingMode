@@ -157,6 +157,22 @@ configuration_options =
 	BinaryConfig("icecreambuff", "Ice Cream Buff", "Ice Cream now restores 100 sanity, but does it slowly.", true),
 	BinaryConfig("farmfoodredux", "Farmpot Food Redux", "Reallocates most dishes that involve crockpot foods. Typically a buff, but may exchange some stats.", true),
 	
+	SkipSpace(),
+	Header("General Food Tweaks"),
+	{
+		name = "more perishing",
+		label = "Increased Food Spoilage",
+		hover = "Food spoils faster. It's as simple as that.",
+		options =
+		{
+			{description = "Default", data = 1},
+			{description = "Double", data = 2},
+			{description = "Triple", data = 3},
+			{description = "Quadruple", data = 4},
+		},
+		default = 1,
+	},
+	
 	Header("--------------------"),
 -----------------------------
 -- Monsters --
@@ -280,7 +296,7 @@ configuration_options =
 			{description = "Default[4000]", data = 4000},
 			{description = "Lowered[3000]", data = 3000},
 		},
-		default = 8000,
+		default = 4000,
 	},
 	BinaryConfig("crabking_claws", "Crabking Fight Adjustment", "The Crabkings imposing claws now deal 500 damage to the king when killed.", false),
 ------------------------------

@@ -19,6 +19,7 @@ local component_post = {
 	"dynamicmusic",
 	"sleeper",
 	"fueled",
+	"perishable",
 }
 
 local prefab_post = {
