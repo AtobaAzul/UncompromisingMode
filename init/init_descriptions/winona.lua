@@ -246,6 +246,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.BLOWGUNAMMO_SLEEP = DESCRIBE.BLOWDART_SLEEP
 	DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
 	
+	DESCRIBE.ANCIENT_AMULET_RED = "I hope theres a practical purpose here."
 	DESCRIBE.UM_BEAR_TRAP = "The handiwork is nice. I wonder how they got the materials to make it."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "The handiwork is nice, although a bit rusted."
 	DESCRIBE.CORNCAN = "An ear of corn waiting for conversation."

@@ -131,6 +131,7 @@ TUNING.DSTU =
     ----------------------------------------------------------------------------
     --Generics
     MONSTER_BAT_CAVE_NR_INCREASE = 3,
+    CAVE_ENTRANCE_BATS_SPAWN_PERIOD_UM = 0.3
     MONSTER_CATCOON_HEALTH_CHANGE = TUNING.CATCOON_LIFE * 2.5,
     
     --Mctusk

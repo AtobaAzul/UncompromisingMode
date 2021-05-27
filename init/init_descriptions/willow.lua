@@ -260,6 +260,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.CORNCAN = "Probably one of the most boring objects I've ever seen."
 	DESCRIBE.SKULLCHEST_CHILD = "Too bad burning one doesn't burn the others."
 	
+	DESCRIBE.ANCIENT_AMULET_RED = "I would prefer my soul stay in my body, thanks."
 	DESCRIBE.SLOBBERLOBBER = "My two favorite things, combined into one!"
 	DESCRIBE.GORE_HORN_HAT = "Choo Choo!"
 	DESCRIBE.BEARGERCLAW = "Maybe I could dig to the center of the earth with this."

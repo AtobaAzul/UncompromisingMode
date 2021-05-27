@@ -245,6 +245,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.BLOWGUNAMMO_SLEEP = DESCRIBE.BLOWDART_SLEEP
 	DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
 
+	DESCRIBE.ANCIENT_AMULET_RED = "Ohoho, how many souls are in here? Quite a few, I think!"
 	DESCRIBE.UM_BEAR_TRAP = "You gotta be a dope to fall for this joke!"
 	DESCRIBE.UM_BEAR_TRAP_OLD = "You gotta be a dope to fall for this joke!"
 	DESCRIBE.CORNCAN = "Go to corny jail."

@@ -244,6 +244,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.BLOWGUNAMMO_SLEEP = DESCRIBE.BLOWDART_SLEEP
 	DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
 	
+	DESCRIBE.ANCIENT_AMULET_RED = "It will keep whatevers left of my soul together."
 	DESCRIBE.UM_BEAR_TRAP = "Would lead to a slow and gruesome death in the right circumstances."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Would lead to a slow and gruesome death in the right circumstances."
 	DESCRIBE.CORNCAN = "It seems like it's corn."

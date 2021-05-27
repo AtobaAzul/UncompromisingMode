@@ -95,7 +95,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.DISEASECUREBOMB = "Babushka used to make soup for Wolfgang when sick."
 	DESCRIBE.SHROOM_SKIN_FRAGMENT = "Ripped skin? Ow."
 	DESCRIBE.AIR_CONDITIONER = "Keeps Wolfgang's lungs mighty!"
-	DESCRIBE.SPOREPACK = "Did Wolfgang fart?"
+	DESCRIBE.SPOREPACK = "Mushroom bag stinks."
 	DESCRIBE.SALTPACK = "Wolfgang is stronger than snow!"
 	
 	DESCRIBE.SCORPION = "Stay away from Wolfgang!"
@@ -245,6 +245,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.BLOWGUNAMMO_SLEEP = DESCRIBE.BLOWDART_SLEEP
 	DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
 	
+	DESCRIBE.ANCIENT_AMULET_RED = "Wolfgang without soul is Wolfgang without strength."
 	DESCRIBE.UM_BEAR_TRAP = "Wolfgang too smart to step on trap!"
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Wolfgang too smart to step on trap!"
 	DESCRIBE.CORNCAN = "Corn is trapped inside. Will save with bare hands!"
