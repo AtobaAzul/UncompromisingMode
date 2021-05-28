@@ -209,5 +209,6 @@ inst.ThreeDead = ThreeDead
 
 inst:AddComponent("timer")
 inst:ListenForEvent("timerdone", OnTimerDone)
+inst.components.equippable.dapperness = 0 --No more dapperness
 
 end)

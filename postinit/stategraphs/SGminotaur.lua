@@ -386,12 +386,12 @@ local states = {
 		if ents ~= nil then
 			fallingpianogag(inst)
 		end
+		end,
 		
         onexit = function(inst)
 			inst.components.combat:SetRange(3, 4)
         end,
 			
-        end,
 
         events=
         {
