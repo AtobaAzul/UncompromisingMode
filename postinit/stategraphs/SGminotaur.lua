@@ -249,13 +249,6 @@ local events=
     CommonHandlers.OnAttacked(),
     CommonHandlers.OnDeath(),
 
-    EventHandler("doattack", function(inst,data)
-        if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) then
-			inst.components.combat:SetRange(3, 4)
-			inst.sg:GoToState(inst.sg:HasStateTag("running") and "runningattack" or "attack")
-        end
-    end),
-
     EventHandler("locomote", function(inst,data)
         if inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("attack") or inst.sg:HasStateTag("runningattack") then
             return
@@ -394,6 +387,9 @@ local states = {
 			fallingpianogag(inst)
 		end
 		
+        onexit = function(inst)
+			inst.components.combat:SetRange(3, 4)
+        end,
 			
         end,
 
