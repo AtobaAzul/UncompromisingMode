@@ -42,7 +42,8 @@ recipes.icecream.sanity = 0
 recipes.icecream.oneatenfn = ApplyIcecreamBuff
 end
 
-
+recipes.baconeggs.perishtime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BACONEGG_PERISH
+recipes.baconeggs.priority = 9 --No more casino 50/50 baconeggs / monsterlasagna
 
 if TUNING.DSTU.FARMFOODREDUX == true then
 ------Rare Farmplot Crockpot Foods Change

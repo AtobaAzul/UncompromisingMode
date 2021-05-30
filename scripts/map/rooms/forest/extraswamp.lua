@@ -1,38 +1,42 @@
+
 AddRoom("ricepatch", 
 {
 	colour={r=.6,g=.2,b=.8,a=.50},
-	value = GROUND.OCEAN_ROUGH,
-	tags = {"RoadPoison","ForceConnected"}, --"ForceDisconnected"
-	type = NODE_TYPE.SeparatedRoom,
-	contents =  
-	{	
-		
---[[		countprefabs =	
-		{
-			riceplantspawner = function () return 3 + math.random(2,3) end,
-			--seastack = 1,
-			
-		}]]
-			distributepercent = 0.5,
-			distributeprefabs =
-			{
-				riceplantspawner = 1,
-			},
-}})
+	value = GROUND.MARSH,
+	tags = {"RoadPoison"}, --"ForceDisconnected",
+					contents =  {
+									distributepercent = 0.1,
+									distributeprefabs =
+									{
+										marsh_bush = 0.25,
+										marsh_tree = 0.75,
+										reeds = .7,
+									},
+									countprefabs =
+									{
+										marshmist = function() return math.random(4,6) end,
+									},
+					            }
+})
 AddRoom("densericepatch", 
 {
-	colour = {r=1,g=1,b=1,a=.50}, 
-	value = GROUND.OCEAN_COASTAL_SHORE,
-	tags = {"RoadPoison"}, --"ForceDisconnected"
-	type = NODE_TYPE.SeparatedRoom,
-	contents =  
-	{
-		countprefabs =	
-		{
-			riceplantspawner = function () return 5 + math.random(4,5) end,
-			
-	}
-}})
+	colour={r=.6,g=.2,b=.8,a=.50},
+	value = GROUND.MARSH,
+	tags = {"RoadPoison"}, --"ForceDisconnected",
+					contents =  {
+									distributepercent = 0.1,
+									distributeprefabs =
+									{
+										marsh_bush = 0.25,
+										marsh_tree = 0.75,
+										reeds = .7,
+									},
+									countprefabs =
+									{
+										marshmist = function() return math.random(4,6) end,
+									},
+					            }
+})
 AddRoom("sparsericepatch", 
 {
 	colour = {r=1,g=1,b=1,a=.50}, 

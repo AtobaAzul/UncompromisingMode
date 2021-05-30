@@ -224,6 +224,6 @@ return {
 	"hoodedturfchanger",
 	"wargwarning",
 	"deerclops_easyspawners",
-	--"psuedofiredebuff",
 	"armorlavae",
+	"marshmist",
 }
