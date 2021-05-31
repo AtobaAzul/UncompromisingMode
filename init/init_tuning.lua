@@ -233,6 +233,12 @@ TUNING.DSTU =
     WARLY_SAME_OLD_COOLDOWN = total_day_time * 3,
 	WARLY_SAME_OLD_MULTIPLIERS = { .6, .5, .35, .2, .1 },
 	
+	--Maxwellwinonaworker
+	MAX_HEALTH_WELL = GetModConfigData("maxhealthwell"),
+	
+	--Winona
+	WINONA_WORKER = GetModConfigData("winonaworker"),
+	
     --Growth time increase for stone fruits
     STONE_FRUIT_GROWTH_INCREASE = 3,
 	

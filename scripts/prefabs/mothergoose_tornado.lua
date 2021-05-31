@@ -40,13 +40,13 @@ local function destroystuff(inst)
                         v.components.follower:GetLeader() == inst.WINDSTAFF_CASTER) then
                     v.components.combat:SuggestTarget(inst.WINDSTAFF_CASTER)
                 end
-            elseif v.components.workable ~= nil and
+            --[[elseif v.components.workable ~= nil and
                 v.components.workable:CanBeWorked() and
                 v.components.workable:GetWorkAction() and
                 WORK_ACTIONS[v.components.workable:GetWorkAction().id] then
                 SpawnPrefab("collapse_small").Transform:SetPosition(v.Transform:GetWorldPosition())
                 v.components.workable:WorkedBy(inst, 2)
-                --v.components.workable:Destroy(inst)
+                --v.components.workable:Destroy(inst)]]
             end
         end
     end

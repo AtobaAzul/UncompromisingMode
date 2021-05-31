@@ -248,7 +248,7 @@ local function onequip(inst, owner)
 		if inst.components.container ~= nil then
 			inst.components.container:Open(owner)
 		end
-		owner.AnimState:OverrideSymbol("swap_body", "armor_grass", "swap_body")
+		owner.AnimState:OverrideSymbol("swap_body", "armor_featherfrock", "swap_body")
 		
 		inst:ListenForEvent("blocked", inst._onblocked, owner)
 		inst:ListenForEvent("attacked", inst._onblocked, owner)
@@ -279,8 +279,8 @@ local function frockfn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("armor_grass")
-    inst.AnimState:SetBuild("armor_grass")
+    inst.AnimState:SetBank("armor_featherfrock")
+    inst.AnimState:SetBuild("armor_featherfrock")
     inst.AnimState:PlayAnimation("anim")
 	
 	--inst:AddTag("wingsuit")

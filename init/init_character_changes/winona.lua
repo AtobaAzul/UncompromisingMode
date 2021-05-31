@@ -206,7 +206,7 @@ local function ActionHungerDrain(inst, data)
 						snap.Transform:SetScale(0.8, 0.8, 0.8)
 					end
 					
-					inst.components.hunger:DoDelta(-0.30, true)
+					inst.components.hunger:DoDelta(-0.333, true)
 				elseif data.action.action == ACTIONS.MINE or
 				data.action.action == ACTIONS.HAMMER then
 					if data.action.target ~= nil then
@@ -219,7 +219,7 @@ local function ActionHungerDrain(inst, data)
 						snap.Transform:SetScale(0.8, 0.8, 0.8)
 					end
 					
-					inst.components.hunger:DoDelta(-0.40, true)
+					inst.components.hunger:DoDelta(-0.5, true)
 				elseif data.action.action == ACTIONS.DIG then
 					inst.components.hunger:DoDelta(-0.5, true)
 				else
@@ -257,29 +257,29 @@ local function onhungerchange(inst, data)
 	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
 
 	if fast then
-		inst.components.workmultiplier:AddMultiplier(ACTIONS.CHOP,   1.433, "ohungy")
-		inst.components.workmultiplier:AddMultiplier(ACTIONS.MINE,   1.333, "ohungy")
-		inst.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, 1.333, "ohungy")
-		inst.components.workmultiplier:AddMultiplier(ACTIONS.ROW, 1.333, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.CHOP,   0.75, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.MINE,   0.75, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.HAMMER, 0.75, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.DIG, 0.75, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.ATTACK, 0.75, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.TILL,   0.75, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.CHOP,   1.5, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.MINE,   1.5, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, 1.5, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.ROW, 1.5, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.CHOP,   0.5, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.MINE,   0.5, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.HAMMER, 0.5, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.DIG, 0.5, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.ATTACK, 0.5, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.TILL,   0.5, "ohungy")
 		inst.multiplierapplied = true
 	elseif slow then
 		inst.components.workmultiplier:AddMultiplier(ACTIONS.CHOP,   0.666, "ohungy")
 		inst.components.workmultiplier:AddMultiplier(ACTIONS.MINE,   0.666, "ohungy")
 		inst.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, 0.666, "ohungy")
 		inst.components.workmultiplier:AddMultiplier(ACTIONS.ROW, 0.666, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.CHOP,   1.25, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.MINE,   1.25, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.HAMMER, 1.25, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.DIG, 1.25, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.ATTACK, 1.25, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.ROW,   1.25, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.TILL,   1.25, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.CHOP,   1.333, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.MINE,   1.333, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.HAMMER, 1.333, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.DIG, 1.333, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.ATTACK, 1.333, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.ROW,   1.333, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.TILL,   1.333, "ohungy")
 		inst.multiplierapplied = true
 	else
 		if inst.multiplierapplied then
@@ -315,43 +315,45 @@ env.AddPrefabPostInit("winona", function(inst)
 		return
 	end
 	
-	inst.multiplierapplied = false
-	
-    inst:ListenForEvent("performaction", ActionHungerDrain)
-	inst:ListenForEvent("hungerdelta", onhungerchange)
-	
-    inst:ListenForEvent("ms_respawnedfromghost", onbecamehuman)
-    inst:ListenForEvent("ms_becameghost", onbecameghost)
-	
-	if inst.components.efficientuser == nil then
-		inst:AddComponent("efficientuser")
-	end
-	
-	local _PickActionOld = inst.sg.sg.actionhandlers[ACTIONS.PICK].deststate
-	inst.sg.sg.actionhandlers[ACTIONS.PICK].deststate = function(inst, action)
-	local fast = inst.components.hunger:GetPercent() >= HUNGRY_THRESH_HIGH
-	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
-		if inst:HasTag("hungrybuilder") then
-            return (inst.components.rider ~= nil and inst.components.rider:IsRiding() and "dolongaction")
-                or (action.target ~= nil
-                and action.target.components.pickable ~= nil
-                and (   (action.target.components.pickable.jostlepick and "dojostleaction") or
-                        (action.target.components.pickable.quickpick and "doshortaction") or
-                        (inst:HasTag("fastpicker") and "doshortaction") or
-                        (inst:HasTag("quagmire_fasthands") or fast and "domediumaction") or
-						(slow and "dohungrybuild") or
-                        "dolongaction"  ))
-                or nil
-		else
-            return (inst.components.rider ~= nil and inst.components.rider:IsRiding() and "dolongaction")
-                or (action.target ~= nil
-                and action.target.components.pickable ~= nil
-                and (   (action.target.components.pickable.jostlepick and "dojostleaction") or
-                        (action.target.components.pickable.quickpick and "doshortaction") or
-                        (inst:HasTag("fastpicker") and "doshortaction") or
-                        (inst:HasTag("quagmire_fasthands") and "domediumaction") or
-                        "dolongaction"  ))
-                or nil
+	if TUNING.DSTU.WINONA_WORKER == true then
+		inst.multiplierapplied = false
+		
+		inst:ListenForEvent("performaction", ActionHungerDrain)
+		inst:ListenForEvent("hungerdelta", onhungerchange)
+		
+		inst:ListenForEvent("ms_respawnedfromghost", onbecamehuman)
+		inst:ListenForEvent("ms_becameghost", onbecameghost)
+		
+		if inst.components.efficientuser == nil then
+			inst:AddComponent("efficientuser")
+		end
+		
+		local _PickActionOld = inst.sg.sg.actionhandlers[ACTIONS.PICK].deststate
+		inst.sg.sg.actionhandlers[ACTIONS.PICK].deststate = function(inst, action)
+		local fast = inst.components.hunger:GetPercent() >= HUNGRY_THRESH_HIGH
+		local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
+			if inst:HasTag("hungrybuilder") then
+				return (inst.components.rider ~= nil and inst.components.rider:IsRiding() and "dolongaction")
+					or (action.target ~= nil
+					and action.target.components.pickable ~= nil
+					and (   (action.target.components.pickable.jostlepick and "dojostleaction") or
+							(action.target.components.pickable.quickpick and "doshortaction") or
+							(inst:HasTag("fastpicker") and "doshortaction") or
+							(inst:HasTag("quagmire_fasthands") or fast and "domediumaction") or
+							(slow and "dohungrybuild") or
+							"dolongaction"  ))
+					or nil
+			else
+				return (inst.components.rider ~= nil and inst.components.rider:IsRiding() and "dolongaction")
+					or (action.target ~= nil
+					and action.target.components.pickable ~= nil
+					and (   (action.target.components.pickable.jostlepick and "dojostleaction") or
+							(action.target.components.pickable.quickpick and "doshortaction") or
+							(inst:HasTag("fastpicker") and "doshortaction") or
+							(inst:HasTag("quagmire_fasthands") and "domediumaction") or
+							"dolongaction"  ))
+					or nil
+			end
 		end
 	end
 end)

@@ -30,8 +30,9 @@ env.AddPrefabPostInit("waxwell", function(inst)
 	
 	inst:AddTag("codexumbrareader")
 	
-	inst:ListenForEvent("attacked", CalculateMaxHealthLoss)
-
+	if TUNING.DSTU.MAX_HEALTH_WELL == true then
+		inst:ListenForEvent("attacked", CalculateMaxHealthLoss)
+	end
 end)
 
 local function doeffects(inst, pos)
