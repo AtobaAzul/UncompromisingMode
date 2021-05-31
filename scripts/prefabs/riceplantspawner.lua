@@ -88,11 +88,38 @@ local function GetSpawnPoint(pt)
     end
 end
 
+local function CheckPoint(pt)
+local moved = false
+if TheWorld.Map:IsAboveGroundAtPoint(pt.x+4,pt.y,pt.z) then
+moved = true
+pt.x = pt.x-math.random(2,4)
+end 
+if TheWorld.Map:IsAboveGroundAtPoint(pt.x-4,pt.y,pt.z) then
+moved = true
+pt.x = pt.x+math.random(2,4)
+end 
+if TheWorld.Map:IsAboveGroundAtPoint(pt.x,pt.y,pt.z+4) then
+moved = true
+pt.z = pt.z-math.random(2,4)
+end 
+if TheWorld.Map:IsAboveGroundAtPoint(pt.x,pt.y,pt.z-4) then
+moved = true
+pt.z = pt.z+math.random(2,4)
+end
+if moved == false then
+return pt
+else
+return CheckPoint(pt)
+end
+end
+
+
 local function SpawnRicePre(inst)
 		local pt = inst:GetPosition()
 		local spawn_point = GetSpawnPoint(pt)
 		if spawn_point ~= nil then
-			local plant = SpawnRice(spawn_point)
+			local checkedpoint = CheckPoint(spawn_point)
+			local plant = SpawnRice(checkedpoint)
 			inst:Remove()
 		else
 		inst:DoTaskInTime(1,SpawnRicePre)
@@ -123,4 +150,5 @@ local function fn()
     return inst
 end
 
-return Prefab("riceplantspawner", fn, assets, prefabs)
+return Prefab("riceplantspawner", fn, assets, prefabs),
+ Prefab("riceplantspawnerlarge", fn, assets, prefabs)

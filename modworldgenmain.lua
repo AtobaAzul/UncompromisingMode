@@ -131,42 +131,35 @@ room.contents.countprefabs=
 end)
 end
 
---Swamp Mist
-local swamps = { "BGMarsh", "Marsh", "SpiderMarsh", "SlightlyMermySwamp"}
-
---Add "scorpions" room tag to all desert rooms
-for k, v in pairs(swamps) do
-    AddRoomPreInit(v, function(room)
-        if not room.tags then
-            room.tags = {"Mist"}
-        elseif room.tags then
-            table.insert(room.tags, "Mist")
-        end
-    end)
-end
------KoreanWaffle's Spawner Limiter Tag Adding Code
-
 -----------Marsh Grass
 AddRoomPreInit("BGMarsh", function(room)					
 room.contents.countprefabs=
 									{
-										marsh_grass = function() return math.random(2,6) end,}
+										marsh_grass = function() return math.random(2,6) end,
+										marshmist = function() return math.random(4,6) end,
+										}
 end)
 AddRoomPreInit("Marsh", function(room)						
 room.contents.countprefabs=
 									{
-										marsh_grass = function() return math.random(2,6) end,} 
+										marsh_grass = function() return math.random(2,6) end,
+										marshmist = function() return math.random(4,6) end,
+										} 
 end)
 
 AddRoomPreInit("SpiderMarsh", function(room)				
 room.contents.countprefabs=
 									{
-										marsh_grass = function() return math.random(4,8) end,}
+										marsh_grass = function() return math.random(4,8) end,
+										marshmist = function() return math.random(4,6) end,
+										}
 end)
 AddRoomPreInit("SlightlyMermySwamp", function(room)					
 room.contents.countprefabs=
 									{
-										marsh_grass = function() return math.random(4,8) end,} 
+										marsh_grass = function() return math.random(4,8) end,
+										marshmist = function() return math.random(4,6) end,
+										} 
 end)
 
 
@@ -237,7 +230,7 @@ end)
 
 -----KoreanWaffle's Spawner Limiter Tag Adding Code
 --Add new map tags to storygen
-local MapTags = {"scorpions", "hoodedcanopy"}
+local MapTags = {"scorpions", "hoodedcanopy","MarshMist"}
 
 AddGlobalClassPostConstruct("map/storygen", "Story", function(self)
     for k, v in pairs(MapTags) do
@@ -259,6 +252,21 @@ for k, v in pairs(deserts) do
         end
     end)
 end
+
+--Swamp Mist
+local swamps = { "BGMarsh", "Marsh", "SpiderMarsh", "SlightlyMermySwamp"}
+
+--Add "scorpions" room tag to all desert rooms
+for k, v in pairs(swamps) do
+    AddRoomPreInit(v, function(room)
+        if not room.tags then
+            room.tags = {"MarshMist"}
+        elseif room.tags then
+            table.insert(room.tags, "MarshMist")
+        end
+    end)
+end
+-----KoreanWaffle's Spawner Limiter Tag Adding Code
 -----KoreanWaffle's Spawner Limiter Tag Adding Code 
 GLOBAL.require("map/rooms/forest/challengespawner")
 GLOBAL.require("map/rooms/forest/extraswamp")
@@ -296,7 +304,8 @@ LOCKS_KEYS[LOCKS.RICE] = {KEYS.RICE}
 LOCKS_KEYS[LOCKS.HF] = {KEYS.HF}
 
 AddTaskPreInit("Squeltch",function(task)
-task.room_choices["ricepatch"] = 1      --Comment to test task based rice worldgen
+task.room_choices["ricepatch"] = 1 --Comment to test task based rice worldgen
+task.room_choices["densericepatch"] = 1      --Comment to test task based rice worldgen
 
 --table.insert(task.keys_given,KEYS.RICE)   Uncomment to test task based rice worldgen
 end)
@@ -329,6 +338,8 @@ AddTaskSetPreInitAny(function(tasksetdata)
         return
     end
 table.insert(tasksetdata.tasks,"GiantTrees")
+table.insert(tasksetdata.required_prefabs,"riceplantspawnerlarge")
+table.insert(tasksetdata.required_prefabs,"riceplantspawner")
 --table.insert(tasksetdata.tasks,"DarkGiantTrees")
 
 end)
@@ -374,6 +385,39 @@ AddRoomPreInit("HFHolidays", function(room)
 	room.contents.countstaticlayouts["hf_holidays"] = 1
 end)
 
+AddLevelPreInitAny(function(level)
+    if level.location == "forest" then
+        level.overrides.keep_disconnected_tiles = true
+    end
+end)
+
+for i = 1,4 do
+Layouts["ricepatchsmall"..i] = StaticLayout.Get("map/static_layouts/ricepatchsmall"..i)
+end
+for i = 1,1 do
+Layouts["ricepatchlarge"..i] = StaticLayout.Get("map/static_layouts/ricepatchlarge"..i)
+end
+
+AddRoomPreInit("ricepatch", function(room)
+	if not room.contents.countstaticlayouts then
+		room.contents.countstaticlayouts = {}
+	end
+	local roomchoice = math.random(1,4)
+	local roomchoice2 = roomchoice
+	while roomchoice2 == roomchoice do
+		roomchoice2 = math.random(1,4)
+	end
+	room.contents.countstaticlayouts["ricepatchsmall"..roomchoice] = 1
+	if math.random() > 0.5 then
+	room.contents.countstaticlayouts["ricepatchsmall"..roomchoice2] = 1
+	end
+end)
+AddRoomPreInit("densericepatch", function(room)
+	if not room.contents.countstaticlayouts then
+		room.contents.countstaticlayouts = {}
+	end
+	room.contents.countstaticlayouts["ricepatchlarge1"] = 1
+end)
 AddLevel(GLOBAL.LEVELTYPE.SURVIVAL, {
 	id = "UNCOMPROMISING",
 	name = GLOBAL.STRINGS.UI.CUSTOMIZATIONSCREEN.PRESETLEVELS.UNCOMPROMISING,

@@ -499,7 +499,9 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/skullflask.xml"),	
 	Asset("ANIM", "anim/skullflask_empty.zip"),
 	Asset("IMAGE", "images/inventoryimages/skullflask_empty.tex"),
-	Asset("ATLAS", "images/inventoryimages/skullflask_empty.xml"),	
+	Asset("ATLAS", "images/inventoryimages/skullflask_empty.xml"),
+	
+	Asset("ANIM", "anim/marshmist.zip"),
 	
 	--Map Icons Start--
 	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),

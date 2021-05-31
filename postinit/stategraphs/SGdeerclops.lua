@@ -898,6 +898,12 @@ local states = {
         TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/attack") end),
         --TimeEvent(29 * FRAMES, function(inst) SpawnIceFx(inst, inst.components.combat.target) end),
         TimeEvent(35 * FRAMES, function(inst)
+			if inst.components.combat.target ~= nil then
+			local target = inst.components.combat.target
+			inst:ForceFacePoint(target.Transform:GetWorldPosition())
+			end
+			inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE*2/3)
+			inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE*2/3, TUNING.DEERCLOPS_AOE_SCALE*2/3)
             inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe")
 			inst.components.combat:DoAttack(inst.sg.statemem.target)
 			inst.components.combat:SetDefaultDamage(TUNING.DEERCLOPS_DAMAGE)
@@ -934,6 +940,10 @@ local states = {
             inst.components.timer:StopTimer("uppercuttime")
             inst.components.timer:StartTimer("uppercuttime", TUNING.DEERCLOPS_ATTACK_PERIOD * (math.random(2,5)))
 			inst.components.combat:SetDefaultDamage(1.5*TUNING.DEERCLOPS_DAMAGE)
+		if inst.components.combat.target ~= nil then
+		local target = inst.components.combat.target
+		inst:ForceFacePoint(target.Transform:GetWorldPosition())
+		end
         end,
 
 
@@ -942,9 +952,15 @@ local states = {
         TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/attack") end),
         --TimeEvent(29 * FRAMES, function(inst) SpawnIceFx(inst, inst.components.combat.target) end),
         TimeEvent(35 * FRAMES, function(inst)
+		if inst.components.combat.target ~= nil then
+		local target = inst.components.combat.target
+		inst:ForceFacePoint(target.Transform:GetWorldPosition())
+		end
+		inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE*2/3)
+		inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE*2/3, TUNING.DEERCLOPS_AOE_SCALE*2/3)
             inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe")
-			inst.components.combat:SetDefaultDamage(2*TUNING.DEERCLOPS_DAMAGE)
 			inst.components.combat:DoAttack(inst.sg.statemem.target)
+			inst.components.combat:SetDefaultDamage(2*TUNING.DEERCLOPS_DAMAGE)
             if inst.bufferedaction ~= nil and inst.bufferedaction.action == ACTIONS.HAMMER then
                 local target = inst.bufferedaction.target
                 inst:ClearBufferedAction()
