@@ -1,12 +1,3 @@
-local assets =
-{
-    Asset("ANIM", "anim/snapperturtle.zip"),
-    Asset("ANIM", "anim/snapperturtle_water.zip"),
-    Asset("SOUND", "sound/hound.fsb"),
-}
-
-
-
 local brain = require("brains/snapperturtlebrain")
 
 local sounds =
@@ -259,4 +250,4 @@ local function fndefault()
     return inst
 end
 
-return Prefab("snapperturtle", fndefault, assets, prefabs)
+return Prefab("snapperturtle", fndefault)
