@@ -906,6 +906,8 @@ local states = {
 			inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE*2/3, TUNING.DEERCLOPS_AOE_SCALE*2/3)
             inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe")
 			inst.components.combat:DoAttack(inst.sg.statemem.target)
+			inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE)
+			inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE, TUNING.DEERCLOPS_AOE_SCALE)
 			inst.components.combat:SetDefaultDamage(TUNING.DEERCLOPS_DAMAGE)
             if inst.bufferedaction ~= nil and inst.bufferedaction.action == ACTIONS.HAMMER then
                 local target = inst.bufferedaction.target
