@@ -32,7 +32,9 @@ local function onfinished_normal(inst)
 end
 
 local function debuffremoval(inst)
-	inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "um_bear_trap") 
+	if inst.latchedtarget ~= nil then
+		inst.components.locomotor:RemoveExternalSpeedMultiplier(inst.latchedtarget, "um_bear_trap")
+	end
 	inst._bear_trap_speedmulttask = nil
 end
 
@@ -60,24 +62,24 @@ local function OnExplode(inst, target)
 		target:AddChild(inst)
         --inst.entity:AddFollower():FollowSymbol(target.GUID, target.components.combat.hiteffectsymbol or "body", 0, --[[-50]]0, 0)
 		
-		local debuffkey = inst.prefab
-		
-		target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.3)
-		
-		inst:ListenForEvent("death", onfinished_normal, target)
-		inst:ListenForEvent("onremoved", onfinished_normal, target)
-		
-		target._bear_trap_speedmulttask = target:DoTaskInTime(10, function(i) 
-			i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) 
-			i._bear_trap_speedmulttask = nil
-		end)
-		
-		inst:DoTaskInTime(10, function(inst) inst.components.health:Kill() end)
-		
-		inst.persists = false
-		
 		if target ~= nil and target.components.health:IsDead() then
 			inst.components.health:Kill()
+		else
+			local debuffkey = inst.prefab
+			
+			target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.3)
+			
+			inst:ListenForEvent("death", onfinished_normal, target)
+			inst:ListenForEvent("onremoved", onfinished_normal, target)
+			
+			target._bear_trap_speedmulttask = target:DoTaskInTime(10, function(i) 
+				i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) 
+				i._bear_trap_speedmulttask = nil
+			end)
+			
+			inst:DoTaskInTime(10, function(inst) inst.components.health:Kill() end)
+			
+			inst.persists = false
 		end
     end
 	

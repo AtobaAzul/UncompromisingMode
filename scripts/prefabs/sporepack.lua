@@ -22,24 +22,23 @@ end
 
 local function DoAreaSpoil(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
+	
     local ents = TheSim:FindEntities(x, y, z, 3, nil, { "small_livestock" }, { "fresh", "stale", "spoiled" })
 	for i, v in ipairs(ents) do
         TryPerish(v)
     end
 end
 
-local function CreateBase(isnew)
+local function CreateBase()
     local inst = CreateEntity()
-
-    inst:AddTag("FX")
-    inst:AddTag("NOCLICK")
-    --[[Non-networked entity]]
-    inst.entity:SetCanSleep(false)
-    inst.persists = false
-
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+
+    inst:AddTag("FX")
+    inst:AddTag("NOCLICK")
+    inst.persists = false
 
     inst.AnimState:SetBank("sporecloud_base")
     inst.AnimState:SetBuild("sporecloud_base")
@@ -48,24 +47,28 @@ local function CreateBase(isnew)
     inst.AnimState:SetSortOrder(3)
     inst.AnimState:SetFinalOffset(-1)
 
-    inst.AnimState:PlayAnimation("sporecloud_base_pre")
-    inst.AnimState:PlayAnimation("sporecloud_base_pst")
+	inst.AnimState:PlayAnimation("sporecloud_base_pst")
+	--inst.AnimState:PlayAnimation("sporecloud_base_pre")
+	--inst.AnimState:PushAnimation("sporecloud_base_pst", false)
 	
 	inst.Transform:SetScale(0.6, 0.6, 0.6)
 	inst.AnimState:SetMultColour(1, 1, 1, 0.7)
 	
-    if TheWorld.ismastersim then
-        inst.SoundEmitter:PlaySound("dontstarve/creatures/together/toad_stool/infection_post", nil, 0.5)
+    if not TheWorld.ismastersim then
+        return inst
     end
 	
-	inst:ListenForEvent("animqueueover", function() inst:Remove() end)
+	inst.SoundEmitter:PlaySound("dontstarve/creatures/together/toad_stool/infection_post", nil, 0.5)
+	--inst:ListenForEvent("animqueueover", function(inst) inst:Remove() end)
+	inst:ListenForEvent("animover", function(inst) inst:Remove() end)
 
     return inst
 end
 
 local function InitFX(inst)
-	inst._basefx = CreateBase(true)
-	inst._basefx.entity:SetParent(inst.entity)
+	local cloud = SpawnPrefab("sporepack_circle")
+	--cloud.Transform:SetPosition(inst.Transform:GetWorldPosition())
+	cloud.entity:SetParent(inst.entity)
 end
 
 local function onequip(inst, owner)
@@ -162,4 +165,5 @@ local function fn()
     return inst
 end
 
-return Prefab("sporepack", fn, assets)
+return Prefab("sporepack", fn, assets),
+		Prefab("sporepack_circle", CreateBase, assets)
