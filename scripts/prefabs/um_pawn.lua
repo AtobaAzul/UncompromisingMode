@@ -28,12 +28,13 @@ SetSharedLootTable('um_pawn',
 })
 
 local PAWN_DIVINING_DISTANCES = 
-		{
-		    {maxdist=12, describe="hot", pingtime=1},
-		    {maxdist=24, describe="warmer", pingtime=2},
-		    {maxdist=48, describe="warm", pingtime=4},
-		    {maxdist=98, describe="cold", pingtime=8},
-		}
+{
+	{maxdist=12, describe="hot", pingtime=1},
+	{maxdist=24, describe="warmer", pingtime=2},
+	{maxdist=48, describe="warm", pingtime=4},
+	{maxdist=98, describe="cold", pingtime=8},
+}
+		
 local PAWN_DIVINING_MAXDIST = 72
 local PAWN_DIVINING_DEFAULTPING = 1.8
 local function FindClosestPart(inst)
@@ -88,7 +89,7 @@ local function CheckTargetPiece(inst)
             end
         end
 
-        if fxname ~= nil then
+        if fxname ~= nil and not inst.components.freezable:IsFrozen() then
             inst.fx = SpawnPrefab(fxname)
             inst.fx.entity:AddFollower()
             inst.fx.Follower:FollowSymbol(inst.GUID, "body", 0, -40, 0)
@@ -120,19 +121,7 @@ local function StartDusk(inst)
 end
 
 local function OnAttacked(inst, data)
-    local x,y,z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x,y,z, 30, {'uncompromising_pawn'})
-    
-    local num_friends = 0
-    local maxnum = 5
-    for k,v in pairs(ents) do
-        v:PushEvent("gohome")
-        num_friends = num_friends + 1
-        
-        if num_friends > maxnum then
-            break
-        end
-    end
+	inst.sg:GoToState("hide_pre")
 end
 
 local function DisplayName(inst)
@@ -281,8 +270,27 @@ local function SpawnAmalgams(inst)
 end
 
 local function onnear(inst, target)
-	SpawnSpikes(target)
-	SpawnAmalgams(target)
+	if inst.neartask ~= nil then
+		inst.neartask:Cancel()
+		inst.neartask = nil
+	end
+	
+	inst.target = target
+	
+	inst.neartask = inst:DoPeriodicTask(0.1, function(inst) 
+		if not inst.components.freezable:IsFrozen() and inst.target ~= nil then
+			inst.neartask:Cancel()
+			SpawnSpikes(inst.target)
+			SpawnAmalgams(inst.target)
+		end
+	end)
+end
+
+local function onfar(inst)
+	if inst.neartask ~= nil then
+		inst.neartask:Cancel()
+		inst.neartask = nil
+	end
 end
 
 local function FindTarget(inst, radius)
@@ -291,7 +299,7 @@ local function FindTarget(inst, radius)
         radius,
         function(guy)
             return guy:HasTag("player")
-                and inst.components.combat:CanTarget(guy)
+                and inst.components.combat:CanTarget(guy) and not inst.components.freezable:IsFrozen()
         end,
         "player",
         "playerghost"
@@ -380,7 +388,9 @@ local function pawn_common(pawntype)
     local brain = require "brains/uncompromising_pawnbrain"
     inst:SetBrain(brain)
 
-    inst:ListenForEvent("attacked", OnAttacked)
+    --inst:ListenForEvent("attacked", OnAttacked)
+	--inst:ListenForEvent("freeze", OnPause)
+	--inst:ListenForEvent("unfreeze", TryUnpause)
 	
 	if inst.task == nil then
         inst.task = inst:DoTaskInTime(1, CheckTargetPiece)
@@ -403,6 +413,7 @@ local function pawn()
 	inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(7, 13) --set specific values
     inst.components.playerprox:SetOnPlayerNear(onnear)
+    inst.components.playerprox:SetOnPlayerFar(onfar)
     inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
 	
     return inst

@@ -54,7 +54,7 @@ function Uncompromising_PawnBrain:OnStart()
             --RunAway(self.inst, "player", SEE_PLAYER_DIST, STOP_RUN_DIST),
             SequenceNode
             {
-                IfNode(function() return IsDangerClose(self.inst) end, "DangerClose", DoAction(self.inst, TryHide, "Hide")),
+                IfNode(function() return IsDangerClose(self.inst) and not self.inst.components.freezable:IsFrozen() end, "DangerClose", DoAction(self.inst, TryHide, "Hide")),
             },
         },
 		

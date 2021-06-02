@@ -47,6 +47,24 @@ local function onnear(inst, target)
     end
 end
 
+local function OnSleep(inst)
+	if inst.spawnupdatetask ~= nil then
+		inst.spawnupdatetask:Cancel()
+		inst.spawnupdatetask = nil
+	end
+	
+    inst.components.childspawner:SetSpawnPeriod(TUNING.CAVE_ENTRANCE_BATS_SPAWN_PERIOD)
+end
+
+local function OnWake(inst)
+	if inst.spawnupdatetask ~= nil then
+		inst.spawnupdatetask:Cancel()
+		inst.spawnupdatetask = nil
+	end
+
+    inst.spawnupdatetask = inst:DoTaskInTime(5, function(inst) inst.components.childspawner:SetSpawnPeriod(TUNING.DSTU.CAVE_ENTRANCE_BATS_SPAWN_PERIOD_UM) end)
+end
+
 env.AddPrefabPostInit("cave_entrance_open", function(inst)
 	if not TheWorld.ismastersim then
 		return
@@ -55,7 +73,10 @@ env.AddPrefabPostInit("cave_entrance_open", function(inst)
 	
 		if TUNING.DSTU.BATSPOOKING == true then
 			inst.components.childspawner:SetRegenPeriod(60/TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
-			inst.components.childspawner:SetSpawnPeriod(.1/TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
+			--inst.components.childspawner:SetSpawnPeriod(TUNING.DSTU.CAVE_ENTRANCE_BATS_SPAWN_PERIOD_UM)
+			
+			inst:ListenForEvent("entitysleep", OnSleep)
+			inst:ListenForEvent("entitywake", OnWake)
 		end
 		--inst.components.childspawner:SetMaxChildren(6*TUNING.DSTU.MONSTER_BAT_CAVE_NR_INCREASE)
 		if TUNING.DSTU.ADULTBATILISKS == true then
