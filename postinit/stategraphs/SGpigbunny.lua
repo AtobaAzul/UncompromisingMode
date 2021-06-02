@@ -6,10 +6,7 @@ env.AddStategraphPostInit("pig", function(inst)
 local events =
 {	
     EventHandler("doattack", function(inst, data) 
-        if inst:HasTag("pigattacker") and data.target:HasTag("pig") and not data.target:HasTag("werepig") then
-            inst.sg:GoToState("refuse", data.target)
-            inst.components.combat:SetTarget(nil)
-		elseif inst:HasTag("bunnyattacker") and data.target:HasTag("manrabbit") then
+        if (inst:HasTag("pig") or inst:HasTag("pigguard")) and not data.target:HasTag("werepig") then
             inst.sg:GoToState("refuse", data.target)
             inst.components.combat:SetTarget(nil)
 		else
@@ -28,7 +25,7 @@ local events =
 	
 	EventHandler("attacked", function(inst)
 		
-		if --[[inst:HasTag("pigattacker") and]] (inst:HasTag("pig") or inst:HasTag("pigguard")) and not inst:HasTag("werepig") and inst.components.health ~= nil and not inst.components.health:IsDead() then
+		if not inst:HasTag("manrabbit") (inst:HasTag("pig") or inst:HasTag("pigguard")) and not inst:HasTag("werepig") and inst.components.health ~= nil and not inst.components.health:IsDead() then
 			if inst.counter ~= nil and inst.counter >= 3 then
 				inst.counter = 0
 				inst.sg:GoToState("counterattack_pre")
