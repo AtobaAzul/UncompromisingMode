@@ -330,7 +330,7 @@ local function oncollide(inst, other)
 	end
 end
 
-local function onthrown(inst)
+local function onthrown_player(inst)
     inst:AddTag("NOCLICK")
     inst.persists = false
     inst.AnimState:SetBank("um_bear_trap")
@@ -373,7 +373,7 @@ local function projectilefn()
 
     inst:AddComponent("complexprojectile")
     inst.components.complexprojectile:SetOnHit(OnHitInk)
-    inst.components.complexprojectile:SetOnLaunch(onthrown)
+    inst.components.complexprojectile:SetOnLaunch(onthrown_player)
     inst.components.complexprojectile:SetHorizontalSpeed(30)
     inst.components.complexprojectile:SetLaunchOffset(Vector3(2, 2, 0))
     inst.components.complexprojectile.usehigharc = false
@@ -433,8 +433,188 @@ local function ghost_walrusfn() --ghost walrus
     return inst
 end
 
+
+
+
+local function OnHitInk(inst, target)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	
+    MakeInventoryPhysics(inst)
+	
+    inst.components.mine:Reset()
+	--inst.trap = SpawnPrefab("um_bear_trap")
+	--inst.trap.Transform:SetPosition(x, 0, z)
+	
+    --inst:Remove()
+end
+
+local function OnHitTarget_player(inst, target)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	
+    MakeInventoryPhysics(inst)
+	
+    inst.components.mine:Reset()
+	--inst.trap = SpawnPrefab("um_bear_trap")
+	--inst.trap.Transform:SetPosition(x, 0, z)
+	if target ~= nil then
+		--inst.trap.components.mine:Explode(target)
+		inst.components.mine:Explode(target)
+	end
+	
+    --inst:Remove()
+end
+
+local function oncollide_player(inst, other)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	
+	if other ~= nil and not other:HasTag("player")
+	and not other:HasTag("notraptrigger")
+	and not other:HasTag("player")
+	and not other:HasTag("flying")
+	and not other:HasTag("ghost")
+	and not other:HasTag("playerghost")
+	and not other:HasTag("spawnprotection")
+	and other:IsValid() and other:HasTag("_combat") then
+		OnHitTarget_player(inst, other)
+	elseif y <= inst:GetPhysicsRadius() + 0.001 then
+		OnHitInk(inst, other)
+	end
+end
+
+local function onequip(inst, owner)
+    owner.AnimState:OverrideSymbol("swap_object", "swap_snowball_throwable", "swap_snowball_throwable")
+    owner.AnimState:Show("ARM_carry")
+    owner.AnimState:Hide("ARM_normal")
+end
+
+local function onunequip(inst, owner)
+    owner.AnimState:Hide("ARM_carry")
+    owner.AnimState:Show("ARM_normal")
+end
+
+local function onthrown_player(inst)
+    inst:AddTag("NOCLICK")
+    inst.persists = false
+
+    inst.AnimState:SetBank("um_bear_trap")
+    inst.AnimState:SetBuild("um_bear_trap")
+    inst.AnimState:PlayAnimation("spin_loop", true)
+
+    inst.Physics:SetMass(1)
+    inst.Physics:SetFriction(10)
+    inst.Physics:SetDamping(5)
+    inst.Physics:SetCollisionGroup(COLLISION.OBSTACLES)
+    inst.Physics:ClearCollisionMask()
+    inst:SetPhysicsRadiusOverride(3)
+    inst.Physics:CollidesWith(COLLISION.WORLD)
+	inst.Physics:CollidesWith(COLLISION.GIANTS)
+    inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+    inst.Physics:SetCapsule(1.5, 1.5)
+	
+    inst.Physics:SetCollisionCallback(oncollide_player)
+end
+
+local function ReticuleTargetFn()
+    local player = ThePlayer
+    local ground = TheWorld.Map
+    local pos = Vector3()
+    --Attack range is 8, leave room for error
+    --Min range was chosen to not hit yourself (2 is the hit range)
+    for r = 6.5, 3.5, -.25 do
+        pos.x, pos.y, pos.z = player.entity:LocalToWorldSpace(r, 0, 0)
+        if ground:IsPassableAtPoint(pos:Get()) and not ground:IsGroundTargetBlocked(pos) then
+            return pos
+        end
+    end
+    return pos
+end
+
+local function equipfn()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+	
+	local shadow = inst.entity:AddDynamicShadow()
+    shadow:SetSize( 1.5, 1 )
+
+    MakeInventoryPhysics(inst)
+
+    --projectile (from complexprojectile component) added to pristine state for optimization
+	
+    inst.AnimState:SetBank("um_bear_trap")
+    inst.AnimState:SetBuild("um_bear_trap")
+    inst.AnimState:PlayAnimation("idle_active")
+	
+    inst:AddTag("projectile")
+	inst:AddTag("weapon")
+	
+    MakeInventoryFloatable(inst, "med", 0.05, 0.65)
+
+    inst.entity:SetPristine()
+	
+	inst:AddComponent("reticule")
+    inst.components.reticule.targetfn = ReticuleTargetFn
+    inst.components.reticule.ease = true
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst:AddComponent("locomotor")
+	
+    inst:AddComponent("mine")
+    inst.components.mine:SetRadius(TUNING.TRAP_TEETH_RADIUS * 1.3)
+    inst.components.mine:SetAlignment("player")
+    inst.components.mine:SetOnExplodeFn(OnExplode)
+    inst.components.mine:SetOnResetFn(OnReset)
+    inst.components.mine:SetOnSprungFn(SetSprung)
+    inst.components.mine:SetOnDeactivateFn(SetInactive)
+    inst.components.mine:SetTestTimeFn(calculate_mine_test_time)
+
+    inst:AddComponent("complexprojectile")
+    inst.components.complexprojectile:SetHorizontalSpeed(15)
+    inst.components.complexprojectile:SetGravity(-35)
+    inst.components.complexprojectile:SetLaunchOffset(Vector3(2, 2, 0))
+    inst.components.complexprojectile:SetOnLaunch(onthrown_player)
+    inst.components.complexprojectile:SetOnHit(OnHitInk)
+	
+    inst:AddComponent("weapon")
+    inst.components.weapon:SetDamage(0)
+    inst.components.weapon:SetRange(20, 10)
+	
+    inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/snowball_throwable.xml"
+	
+    inst:AddComponent("inspectable")
+	
+    inst:AddComponent("stackable")
+	
+	inst:AddComponent("equippable")
+    inst.components.equippable:SetOnEquip(onequip)
+    inst.components.equippable:SetOnUnequip(onunequip)
+    inst.components.equippable.equipstack = true
+	
+	inst:AddComponent("health")
+    inst.components.health:SetMaxHealth(TUNING.WALRUS_HEALTH)
+    inst:ListenForEvent("death", onfinished_normal)
+
+    inst:AddComponent("combat")
+    inst:ListenForEvent("attacked", OnAttacked)
+
+    inst:AddComponent("hauntable")
+    inst.components.hauntable:SetOnHauntFn(OnHaunt)
+
+    MakeHauntableLaunch(inst)
+
+    return inst
+end
+
 return Prefab("um_bear_trap", common_fn),
     Prefab("um_bear_trap_old", old_fn),
     MakePlacer("um_bear_trap_placer", "trap_teeth", "trap_teeth", "idle"),
     Prefab("um_bear_trap_projectile", projectilefn),
-	Prefab("ghost_walrus",ghost_walrusfn)
+	Prefab("ghost_walrus", ghost_walrusfn),
+	Prefab("um_bear_trap_equippable", equipfn)
