@@ -19,8 +19,8 @@ local function oneat(inst, data)
 	inst.components.eater:SetAbsorptionModifiers(0, inst.hungerabsorption or 1, 0)
 		
 	local strongstomach = inst.components.eater.strongstomach and data.food:HasTag("monstermeat")
-	local wurtfoodshealth = data.food.components.edible:GetHealth() < 0 and inst:HasTag("playermerm") and (data.food.prefab == ("kelp" or "kelp_cooked" or "durian" or "durian_cooked"))
-	local wurtfoodssanity = data.food.components.edible:GetSanity() < 0 and inst:HasTag("playermerm") and (data.food.prefab == ("kelp" or "kelp_cooked" or "durian" or "durian_cooked"))
+	local wurtfoodshealth = data.food.components.edible:GetHealth() < 0 and inst:HasTag("playermerm") and (data.food.prefab == "kelp" or data.food.prefab == "kelp_cooked" or data.food.prefab == "durian" or data.food.prefab == "durian_cooked")
+	local wurtfoodssanity = data.food.components.edible:GetSanity() < 0 and inst:HasTag("playermerm") and (data.food.prefab == "kelp" or data.food.prefab == "kelp_cooked" or data.food.prefab == "durian" or data.food.prefab == "durian_cooked")
 		
 	local foodmemorybuff = inst.components.foodmemory ~= nil and inst.components.foodmemory:GetFoodMultiplier(data.food.prefab) or 1
 	local warlybuff = inst:HasTag("warlybuffed") and 1.2 or 1
