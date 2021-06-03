@@ -4,16 +4,16 @@ GLOBAL.setfenv(1, GLOBAL)
 env.AddStategraphPostInit("beefalo", function(inst)
 local events={
 EventHandler("doattack", function(inst)
-								if not inst.sg:HasStateTag("precharging") then
                                 local nstate = "attack"
+								print("chargeattack2")
                                 if inst.sg:HasStateTag("charging") or inst:HasTag("chargespeed") then
+									print("chargeattack1")
                                     nstate = "chargeattack"
                                 end
                                 if inst.components.health and not inst.components.health:IsDead()
                                    and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
                                     inst.sg:GoToState(nstate)
                                 end
-								end
                             end),
 							    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("charging") then inst.sg:GoToState("hit") end end),
 
@@ -61,12 +61,12 @@ local states = {
     },
 	
     State{  name = "charge_start",
-            tags = {"moving", "running", "charging", "precharging", "busy", "atk_pre", "canrotate"},
+            tags = {"moving", "running", "charging", "busy", "atk_pre", "canrotate"},
             
             onenter = function(inst)
                 inst.Physics:Stop()
 				inst.components.locomotor:StopMoving()
-				inst.components.combat:ResetCooldown()
+				
 				inst.AnimState:PlayAnimation("mating_taunt1")
 				inst.SoundEmitter:PlaySound(inst.sounds.angry)
 				--	inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT*2.29  --should be equal to rook
@@ -152,10 +152,7 @@ local states = {
             },
             
 			onexit = function(inst)
-				if inst:HasTag("chargespeed") then
 					inst.components.locomotor.runspeed = TUNING.BEEFALO_RUN_SPEED.DEFAULT
-					inst:RemoveTag("chargespeed")
-				end
 			end,
 		
             {   
@@ -165,7 +162,7 @@ local states = {
         },
     
     State{  name = "charge_stop",
-            tags = {"canrotate", "busy", "idle"},
+            tags = {"canrotate", "busy", "idle","charging"},
             
             onenter = function(inst) 
                 --inst.SoundEmitter:KillSound("charge")
@@ -187,10 +184,10 @@ local states = {
         },    
 
     State{  name = "chargeattack",
-            tags = {"busy", "runningattack"},
+            tags = {"busy", "runningattack","charging","nointerrupt"},
             
             onenter = function(inst)
-				--print("chargeattack")
+				print("chargeattack")
                 --inst.SoundEmitter:KillSound("charge")
                 inst.components.combat:StartAttack()
                 inst.components.locomotor:StopMoving()

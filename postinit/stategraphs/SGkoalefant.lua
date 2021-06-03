@@ -18,7 +18,7 @@ EventHandler("doattack", function(inst)
 EventHandler("attacked", function(inst, data) 
 if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("charging") then
 
-if (math.random() > 0.9) and inst.components.combat.target ~= nil and (2 > inst:GetDistanceSqToInst(inst.components.combat.target)) then
+if (math.random() > 0.9) and inst.components.combat.target ~= nil and (2 > inst:GetDistanceSqToInst(inst.components.combat.target)) and inst.counterattack == true then
 inst.sg:GoToState("stomp") 
 else
 inst.sg:GoToState("hit")
@@ -56,6 +56,8 @@ local states = {
 
         onenter = function(inst, target)
             inst.sg.statemem.target = target
+			inst.counterattack = false
+			inst:DoTaskInTime(2,function(inst) inst.counterattack = true end) --2 second grace period (pretty graceful if I do say so myself)
             inst.SoundEmitter:PlaySound("dontstarve/creatures/koalefant/angry")
             inst.components.combat:StartAttack()
             inst.components.locomotor:StopMoving()
@@ -84,7 +86,7 @@ local states = {
 			if chance < 0.33 then
 				inst.sg:GoToState("charge_start")
 			else
-				if chance > 0.77 then
+				if chance > 0.77 and inst.disarmattack == true then
 				inst.sg:GoToState("disarm")
 				else
 				inst.sg:GoToState("idle")
@@ -118,10 +120,7 @@ local states = {
 
 			events =
             {
-                EventHandler("animover", function(inst) 		
-				if inst.components.rideable and inst.components.rideable:GetRider() ~= nil then
-				inst:ApplyBuildOverrides(inst.components.rideable:GetRider().AnimState)
-				end
+                EventHandler("animover", function(inst) 
                 inst.sg:GoToState("charge")
                 inst:PushEvent("attackstart")
 				if inst.components.combat ~= nil then
@@ -249,6 +248,8 @@ local states = {
 		onenter = function(inst)
 			inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("scare")
+			inst.disarmattack = false
+			inst:DoTaskInTime(20,function(inst) inst.disarmattack = true end)
 		end,
 
 		timeline =

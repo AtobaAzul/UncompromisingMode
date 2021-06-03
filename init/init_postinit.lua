@@ -160,7 +160,7 @@ local brain_post = {
 	"pig",
 	"werepig",
 	"frog",
-	"spiderqueen",
+	"nofirepanic",
 	"chester",
 	"mossling",
 }
