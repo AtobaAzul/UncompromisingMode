@@ -35,12 +35,13 @@ local function doprojectilehit(inst, attacker, other)
 				widow.sg:GoToState("tossplayer")
 				other:DoTaskInTime(1.3, function(other)
 				other.components.pinnable:Unstick()
-				local widowhome = TheSim:FindFirstEntityWithTag("widowweb")
-				if other:HasTag("wereplayer") then
-				other.sg:GoToState("hit")
-				else
-				other.sg:GoToState("knockback")
-				end
+				local widow = TheSim:FindFirstEntityWithTag("hoodedwidow")
+				if widow ~= nil then
+					if other:HasTag("wereplayer") then
+						other.sg:GoToState("hit")
+					else
+						other.sg:GoToState("knockback")
+					end	
                     local x, y, z = widow.Transform:GetWorldPosition() --Ripped knockback code, but it's rigged to go backwards.
                     local distsq = other:GetDistanceSqToPoint(x, y, z)
                     local rot = other.Transform:GetRotation()
@@ -59,20 +60,20 @@ local function doprojectilehit(inst, attacker, other)
 					local strings = TheSim:FindEntities(x,y,z,20,{"webchord"})
 					for i, v in ipairs(strings) do
 					    if drot > 90 then
-                        v.Transform:SetRotation(rot1 + 180)
-                        v.Physics:SetMotorVel(-30, 0, 0)
-                    else
-                        v.Transform:SetRotation(rot1)
-                        v.Physics:SetMotorVel(30, 0, 0)
-                    end
+							v.Transform:SetRotation(rot1 + 180)
+							v.Physics:SetMotorVel(-30, 0, 0)
+						else
+							v.Transform:SetRotation(rot1)
+							v.Physics:SetMotorVel(30, 0, 0)
+						end
 					end
-			other:DoTaskInTime(0.6,function(other) other.Physics:SetMotorVel(0, 0, 0) end)
+					other:DoTaskInTime(0.6,function(other) other.Physics:SetMotorVel(0, 0, 0) end)
+				end
 			end)
 			end
        end
     end
-
-    return other
+return other
 end
 
 local function OnProjectileHit(inst, attacker, other)

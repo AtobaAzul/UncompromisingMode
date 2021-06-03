@@ -145,7 +145,7 @@ local function fncommon(n, build, morphlist, custombrain, tag, data)
     inst.AnimState:SetBank("snapperturtle")
     inst.AnimState:SetBuild("snapperturtle")
     inst.AnimState:PlayAnimation("idle")
-	inst.Transform:SetScale(1.5,1.5,1.5)
+	inst.Transform:SetScale(1,1,1)
 
     inst:AddComponent("spawnfader")
 
