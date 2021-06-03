@@ -118,7 +118,8 @@ local function SetInactive(inst)
 end
 
 local function OnDropped(inst)
-    inst.components.mine:Deactivate()
+    inst.components.mine:Reset()
+    --inst.components.mine:Deactivate()
 end
 
 local function ondeploy(inst, pt, deployer)
@@ -437,31 +438,47 @@ end
 
 
 local function OnHitInk(inst, target)
-	local x, y, z = inst.Transform:GetWorldPosition()
 	
-    MakeInventoryPhysics(inst)
+    inst:RemoveTag("NOCLICK")
+    inst:RemoveTag("projectile")
 	
-    inst.components.mine:Reset()
-	--inst.trap = SpawnPrefab("um_bear_trap")
-	--inst.trap.Transform:SetPosition(x, 0, z)
-	
-    --inst:Remove()
+	if inst.components.mine ~= nil then
+		local x, y, z = inst.Transform:GetWorldPosition()
+		
+		MakeInventoryPhysics(inst)
+		
+		inst.components.mine:Reset()
+		
+		inst.Transform:SetPosition(x, y, z)
+		--inst.trap = SpawnPrefab("um_bear_trap")
+		--inst.trap.Transform:SetPosition(x, 0, z)
+		
+		--inst:Remove()
+	end
 end
 
 local function OnHitTarget_player(inst, target)
-	local x, y, z = inst.Transform:GetWorldPosition()
 	
-    MakeInventoryPhysics(inst)
-	
-    inst.components.mine:Reset()
-	--inst.trap = SpawnPrefab("um_bear_trap")
-	--inst.trap.Transform:SetPosition(x, 0, z)
-	if target ~= nil then
-		--inst.trap.components.mine:Explode(target)
-		inst.components.mine:Explode(target)
+    inst:RemoveTag("NOCLICK")
+    inst:RemoveTag("projectile")
+
+	if inst.components.mine ~= nil then
+		local x, y, z = inst.Transform:GetWorldPosition()
+		
+		MakeInventoryPhysics(inst)
+		
+		inst.components.mine:Reset()
+		
+		inst.Transform:SetPosition(x, y, z)
+		--inst.trap = SpawnPrefab("um_bear_trap")
+		--inst.trap.Transform:SetPosition(x, 0, z)
+		if target ~= nil then
+			--inst.trap.components.mine:Explode(target)
+			inst.components.mine:Explode(target)
+		end
+		
+		--inst:Remove()
 	end
-	
-    --inst:Remove()
 end
 
 local function oncollide_player(inst, other)
@@ -494,6 +511,8 @@ end
 
 local function onthrown_player(inst)
     inst:AddTag("NOCLICK")
+    inst:AddTag("projectile")
+	
     inst.persists = false
 
     inst.AnimState:SetBank("um_bear_trap")
@@ -548,7 +567,6 @@ local function equipfn()
     inst.AnimState:SetBuild("um_bear_trap")
     inst.AnimState:PlayAnimation("idle_active")
 	
-    inst:AddTag("projectile")
 	inst:AddTag("weapon")
 	
     MakeInventoryFloatable(inst, "med", 0.05, 0.65)
@@ -585,20 +603,18 @@ local function equipfn()
     inst.components.weapon:SetDamage(0)
     inst.components.weapon:SetRange(20, 10)
 	
-    inst:AddComponent("inventoryitem")
+	inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/snowball_throwable.xml"
 	
     inst:AddComponent("inspectable")
 	
-    inst:AddComponent("stackable")
-	
 	inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
-    inst.components.equippable.equipstack = true
 	
 	inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(TUNING.WALRUS_HEALTH)
+    inst.components.health:SetMaxHealth(TUNING.WALRUS_HEALTH / 2)
     inst:ListenForEvent("death", onfinished_normal)
 
     inst:AddComponent("combat")
