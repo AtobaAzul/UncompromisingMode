@@ -81,7 +81,7 @@ local function grass(name, stage)
 
         inst:AddTag("plant")
         inst:AddTag("renewable")
-
+		inst:AddTag("walrus_trap_spot")
         --witherable (from witherable component) added to pristine state for optimization
 
 		--MakeObstaclePhysics(inst, 2, 0)

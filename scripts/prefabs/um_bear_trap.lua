@@ -388,10 +388,59 @@ local function projectilefn()
     return inst
 end
 
+local function SpawnNearVacantSpot(x,y,z)
+
+local spots = TheSim:FindEntities(x,y,z,14,{"walrus_trap_spot"})
+local spotfound = false
+for i,v in ipairs(spots) do
+	if spotfound == false then
+	local x1,y1,z1 = v.Transform:GetWorldPosition()
+		if #TheSim:FindEntities(x1,y1,z1,2,{"bear_trap"}) == 0 then
+			spotfound = true
+			local trap = SpawnPrefab("um_bear_trap_old")
+			local offset1,offset2
+			if math.random() > 0.5 then
+				offset1 = math.random(25,50)/100
+			else
+				offset1 = -math.random(25,50)/100
+			end
+			if math.random() > 0.5 then
+				offset2 = math.random(25,50)/100
+			else
+				offset2 = -math.random(25,50)/100
+			end
+			trap.Transform:SetPosition(x1+offset1,y1,z1+offset2)
+			
+		end
+	end
+end
+end
+
+local function VacantSpotNearby(x,y,z)
+
+local spots = TheSim:FindEntities(x,y,z,14,{"walrus_trap_spot"})
+local spotfound = false
+for i,v in ipairs(spots) do
+	local x1,y1,z1 = v.Transform:GetWorldPosition()
+	if #TheSim:FindEntities(x1,y1,z1,2,{"bear_trap"}) == 0 then
+		spotfound = true
+	end
+end
+
+if spotfound == true then
+return true
+end
+end
+
 local function DoSpawnTrap(x,y,z)
+local spawned = false
+if VacantSpotNearby(x,y,z) then --For spawning behind certain prefabs
+print("boutaruncode")
+SpawnNearVacantSpot(x,y,z)
+end
 local xi = x+math.random(-7,7)
 local zi = z+math.random(-7,7)															--Prevent traps from being placed inside things. Add more things to list as you please
-if TheWorld.Map:IsAboveGroundAtPoint(xi, 0, zi) and #TheSim:FindEntities(xi,y,zi,1.5,{"giant_tree"}) and #TheSim:FindEntities(xi,y,zi,1.5,{"bear_trap"}) == 0 and #TheSim:FindEntities(xi,y,zi,5,{"bear_trap"}) < 2 then
+if spawned == false and TheWorld.Map:IsAboveGroundAtPoint(xi, 0, zi) and #TheSim:FindEntities(xi,y,zi,1.5,{"giant_tree"}) and #TheSim:FindEntities(xi,y,zi,1.5,{"bear_trap"}) == 0 and #TheSim:FindEntities(xi,y,zi,5,{"bear_trap"}) < 2 then
 local trap = SpawnPrefab("um_bear_trap_old")
 trap.Transform:SetPosition(xi,y,zi)
 else
