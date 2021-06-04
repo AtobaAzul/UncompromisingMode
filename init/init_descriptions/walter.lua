@@ -123,6 +123,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.SUNGLASSES = "Nice!"
 	
 	DESCRIBE.STUMPLING = "Woah! Do you see that, Woby?"
+	DESCRIBE.BIRCHLING = DESCRIBE.STUMPLING
 	DESCRIBE.MOON_TEAR = "Far away from home, huh? Woby and I will keep you company!"
 	DESCRIBE.SHADOW_CROWN = "A crown? A Pinetree Pioneer must stay humble!"
 	DESCRIBE.POLLENMITEDEN = "These little guys are spreading fast!"

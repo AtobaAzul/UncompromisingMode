@@ -121,7 +121,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.SEAFOODPAELLA = "This should clear my nasal cavity so I can get back to reading."
 	DESCRIBE.LICELOAF = "Simple, but effective rations."
 	
-	DESCRIBE.STUMPLING = "I must observe these creatures."
+	DESCRIBE.STUMPLING = "The flora continues to grow more violent."
+	DESCRIBE.BIRCHLING = DESCRIBE.STUMPLING
 	DESCRIBE.MOON_TEAR = "Could hold some arcane purpose, in the future."
 	DESCRIBE.SHADOW_TELEPORTER = "It seems interested in that gem, perhaps this warrants a closer look."
 	DESCRIBE.POLLENMITEDEN = "Obviously the work of a eusocial insect."

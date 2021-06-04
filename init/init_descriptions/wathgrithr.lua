@@ -120,6 +120,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.SEAFOODPAELLA = "A mire-warrior's reward!"
 	
 	DESCRIBE.STUMPLING = "A small, angry woodland sprite!"
+	DESCRIBE.BIRCHLING = DESCRIBE.STUMPLING
 	DESCRIBE.MOON_TEAR = "Theres great power here! Of a mysterious kind..."
 	DESCRIBE.SHADOW_TELEPORTER = "Let us strike it down, and take it's treasure!"
 	DESCRIBE.POLLENMITEDEN = "The Valhalla of bugs."

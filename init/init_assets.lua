@@ -282,6 +282,7 @@ Assets = {
 	--Asset("ANIM", "anim/gatorsnake.zip"),
 	Asset("ANIM", "anim/swilson.zip"),
 	Asset("ANIM", "anim/stumpling.zip"),
+	Asset("ANIM", "anim/birchling.zip"),
 	Asset("IMAGE", "images/vetskull.tex"),
 	Asset("ATLAS", "images/vetskull.xml"),
 	--Asset("IMAGE", "images/inventoryimages/liceloaf.tex"),

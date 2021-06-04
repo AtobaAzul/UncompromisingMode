@@ -170,6 +170,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.SEAFOODPAELLA = "Clears the sinuses."
 	
 	DESCRIBE.STUMPLING = "He's small, but he's angry!"
+	DESCRIBE.BIRCHLING = DESCRIBE.STUMPLING
 	DESCRIBE.BUGZAPPER = "Now I'll show those pesky pests!"
 	DESCRIBE.MOON_TEAR = "I think the moon is upset at it's missing piece. Let's keep this safe."
 	DESCRIBE.SHADOW_TELEPORTER = "Hey! Let go of that gem!"

@@ -6,22 +6,18 @@ local actionhandlers =
 }
 
 local function IsSpeenDone(inst,data)
-if data ~= nil and data.name == "speendone" then
+if data ~= nil and data.name == "speendone" and inst.sg:HasStateTag("speen") then
 inst.sg:GoToState("speen_pst")
 end
 end
 
-local function GetHomeLocation(inst)
-    local home = GetHome(inst)
-    return home ~= nil and home:GetPosition() or nil
+local function GetHome(inst)
+    return inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
 end
 
 local events =
 {
     EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),
-	
-	
-	
 	
     EventHandler("death", function(inst) inst.sg:GoToState("death", inst.sg.statemem.dead) end),
     EventHandler("doattack", function(inst, data) 
@@ -117,11 +113,16 @@ local states =
 
     State{
         name = "speen_loop",
-        tags = { "attack", "busy" ,"speen","canrotate"},
+        tags = { "attack", "busy" ,"speen"},
 
         onenter = function(inst, target)
             inst.sg.statemem.target = target
             inst.AnimState:PlayAnimation("spin_loop",true)
+				if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
+					inst.Transform:SetRotation(0)
+				else
+					inst.sg:GoToState("speen_pst")
+				end
         end,
 
         timeline =
@@ -133,14 +134,30 @@ local states =
 		onupdate = function(inst)
 			--if inst.sg.statemem.move then
 				if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
-			    inst:ForceFacePoint(inst.components.combat.target:GetPosition())
-				elseif GetHome(inst) ~= nil then
-				inst:ForceFacePoint(GetHome(inst))
+					local oldvelx, oldvelz
+					if inst.velx ~= nil then
+						oldvelx = inst.velx
+					else
+						oldvelx = 0
+					end
+					if inst.velz ~= nil then
+						oldvelz = inst.velz
+					else
+						oldvelz = 0
+					end
+					local dv = 1
+					local x,y,z = inst.Transform:GetWorldPosition()
+					local targetpos = inst.components.combat.target:GetPosition()
+					local theta2 = math.atan(((targetpos.x-x)/(targetpos.z-z))
+					local theta = (theta2)
+					local newvelx = oldvelx + dv*math.cos(theta)
+					inst.velx = newvelx
+					local newvelz = oldvelz + dv*math.sin(theta)
+					inst.velz = newvelz
+					inst.Physics:SetMotorVel(newvelx,0,newvelz)
+				else
+					inst.sg:GoToState("speen_pst")
 				end
-				inst.components.locomotor:WalkForward()
-			--else
-				--inst.components.locomotor:StopMoving()
-			--end
 		end,
     },
 State{
@@ -184,7 +201,7 @@ State{
 
         events =
         {
-            EventHandler("animqueueover", function(inst) if inst:PerformBufferedAction() then inst.components.combat:SetTarget(nil) inst.sg:GoToState("taunt") else inst.sg:GoToState("idle", "atk_pst") end end),
+            EventHandler("animqueueover", function(inst) if inst:PerformBufferedAction() then inst.components.combat:SetTarget(nil) inst.sg:GoToState("idle") else inst.sg:GoToState("idle", "atk_pst") end end),
         },
     },
 

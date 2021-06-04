@@ -1,15 +1,3 @@
-local assets =
-{
-}
-
-local inkassets = 
-{
-}
-
-local prefabs =
-{
-}
-
 local brain = require("brains/stumplingbrain")
 local easing = require("easing")
 
@@ -142,7 +130,7 @@ local function fncommon()
     inst:AddTag("stumpling")
     inst:AddTag("likewateroffducksback")
 
-    inst.AnimState:SetBank("stumpling")--"stumpling")--"squiderp")
+    inst.AnimState:SetBank("stumpling")
     inst.AnimState:SetBuild("stumpling")
     inst.AnimState:PlayAnimation("idle")
     inst:AddComponent("spawnfader")
@@ -242,8 +230,126 @@ local function fncommon()
     return inst
 end
 
+local function fnbirchling()
+
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddDynamicShadow()
+    inst.entity:AddNetwork()
+
+    MakeCharacterPhysics(inst, 10, .5)
+
+    inst.DynamicShadow:SetSize(2.5, 1.5)
+    inst.Transform:SetSixFaced()
+
+    inst:AddTag("scarytooceanprey")
+    inst:AddTag("monster")
+    inst:AddTag("stumpling")
+    inst:AddTag("likewateroffducksback")
+
+    inst.AnimState:SetBank("birchling")
+    inst.AnimState:SetBuild("birchling")
+    inst.AnimState:PlayAnimation("idle")
+    inst:AddComponent("spawnfader")
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst.sounds = sounds
+
+    inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
+    inst.components.locomotor.runspeed = TUNING.SQUID_RUNSPEED
+    inst.components.locomotor.walkspeed = TUNING.SQUID_WALKSPEED
+    inst.components.locomotor.skipHoldWhenFarFromHome = true
+
+    inst:SetStateGraph("SGstumpling")
+
+	inst:AddComponent("embarker")
+	inst.components.embarker.embark_speed = inst.components.locomotor.runspeed
+
+    inst.components.locomotor:SetAllowPlatformHopping(true)
+
+	
+
+
+    inst:SetBrain(brain)
+
+    inst:AddComponent("follower")
+    inst:AddComponent("entitytracker")
+
+    inst:AddComponent("health")
+    inst.components.health:SetMaxHealth(TUNING.SQUID_HEALTH)
+
+    inst:AddComponent("sanityaura")
+    inst.components.sanityaura.aura = -TUNING.SANITYAURA_MED
+
+    inst:AddComponent("combat")
+    inst.components.combat:SetDefaultDamage(TUNING.SQUID_DAMAGE)
+    inst.components.combat:SetAttackPeriod(TUNING.SQUID_ATTACK_PERIOD)
+    inst.components.combat:SetRetargetFunction(3, retargetfn)
+    inst.components.combat:SetKeepTargetFunction(KeepTarget)
+    --inst.components.combat:SetHurtSound(inst.sounds.hurt)
+    inst.components.combat:SetRange(TUNING.SQUID_TARGET_RANGE, TUNING.SQUID_ATTACK_RANGE)
+    inst.components.combat:EnableAreaDamage(true)
+    inst.components.combat:SetAreaDamage(TUNING.SQUID_ATTACK_RANGE, 1, function(ent, inst) 
+        if not (ent:HasTag("stumpling") or ent:HasTag("leif")) then
+            return true
+        else  
+            if ent:IsValid() then   
+                ent.SoundEmitter:PlaySound("hookline/creatures/squid/slap")         
+                local x,y,z = ent.Transform:GetWorldPosition()
+                local angle = inst:GetAngleToPoint(x,y,z) 
+                ent.Transform:SetRotation(angle)
+                ent.sg:GoToState("fling")
+            end
+        end
+    end)
+
+    inst.components.combat.battlecryenabled = false
+
+    inst:AddComponent("lootdropper")
+    inst.components.lootdropper:SetChanceLootTable('stumpling')
+
+    inst:AddComponent("inspectable")
+
+
+    --inst:AddComponent("sleeper")
+    --inst.components.sleeper:SetResistance(3)
+    --inst.components.sleeper.testperiod = GetRandomWithVariance(6, 2)
+    --inst.components.sleeper:SetSleepTest(ShouldSleep)
+    --inst.components.sleeper:SetWakeTest(ShouldWakeUp)
+    inst:ListenForEvent("newcombattarget", OnNewTarget)
+
+    inst:AddComponent("knownlocations")
+    
+    inst:AddComponent("timer")
 
 
 
+    MakeHauntablePanic(inst)
+    MakeMediumFreezableCharacter(inst, "squid_body")
+    MakeMediumBurnableCharacter(inst, "squid_body")
 
-return Prefab("stumpling", fncommon, assets, prefabs)
+    inst.OnEntitySleep = OnEntitySleep
+
+    inst.LaunchProjectile = LaunchProjectile
+    inst.OnSave = OnSave
+    inst.OnLoad = OnLoad
+
+    inst:ListenForEvent("attacked", OnAttacked)
+    inst:ListenForEvent("onattackother", OnAttackOther)
+
+  
+
+    return inst
+end
+
+
+return Prefab("stumpling", fncommon),
+Prefab("birchling",fnbirchling)

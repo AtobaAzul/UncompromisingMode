@@ -121,6 +121,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.LICELOAF = "It has a lack of taste."
 	
 	DESCRIBE.STUMPLING = "A wooden gremlin."
+	DESCRIBE.BIRCHLING = DESCRIBE.STUMPLING
 	DESCRIBE.MOON_TEAR = "It seems the moon too knows sorrow."
 	DESCRIBE.SHADOW_TELEPORTER = "You can't hold onto that thing forever."
 	DESCRIBE.POLLENMITEDEN = "They're building their own doom."

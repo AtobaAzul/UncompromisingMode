@@ -120,6 +120,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.SEAFOODPAELLA = "It helps drain our nostrils."
 
 	DESCRIBE.STUMPLING = "What is this thing?"
+	DESCRIBE.BIRCHLING = DESCRIBE.STUMPLING
 	DESCRIBE.MOON_TEAR = "It makes our fur wet, lets keep it stored somewhere safe."
 	DESCRIBE.SHADOW_TELEPORTER = "Are you giving me a present?"
 	DESCRIBE.POLLENMITEDEN = "Arachnids aren't bugs!"
