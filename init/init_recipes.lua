@@ -134,6 +134,7 @@ AddRecipe("turf_hoodedmoss", {Ingredient("twigs", 1), Ingredient("foliage", 1), 
 AddRecipe("turf_ancienthoodedturf", {Ingredient("turf_hoodedmoss", 1,"images/inventoryimages/turf_hoodedmoss.xml"), Ingredient("moonrocknugget", 1), Ingredient("thulecite_pieces", 1)}, RECIPETABS.TURFCRAFTING, TECH.TURFCRAFTING_ONE, nil, nil, nil, nil, nil, "images/inventoryimages/turf_ancienthoodedturf.xml", "turf_ancienthoodedturf.tex")
 
 AddRecipe("um_trap_snare", {Ingredient("livinglog", 1),Ingredient("rope", 1),Ingredient("pinecone", 1)}, RECIPETABS.WAR,  TECH.SCIENCE_TWO)
+AddRecipe("um_bear_trap_equippable", {Ingredient("cutstone", 1), Ingredient("houndstooth", 4), Ingredient("rope", 1)}, RECIPETABS.WAR, TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/um_bear_trap_equippable.xml", "um_bear_trap_equippable.tex")
 
 
 --Seedpackitchange
@@ -162,3 +163,4 @@ STRINGS.RECIPE_DESC.RAT_WHIP = "A long rat tail on a stick."
 STRINGS.RECIPE_DESC.TURF_HOODEDMOSS = "Mossy ground with a hint of lunar magic."
 STRINGS.RECIPE_DESC.TURF_ANCIENTHOODEDTURF = "The hooded forest's younger years."
 STRINGS.RECIPE_DESC.SKULLCHEST_CHILD = "Interdimensional item storage."
+STRINGS.RECIPE_DESC.UM_BEAR_TRAP_EQUIPPABLE = "These jaws need to get a grip!"

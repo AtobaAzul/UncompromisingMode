@@ -200,6 +200,7 @@ UI = GLOBAL.STRINGS.UI
 	STRINGS.SKULLCHEST_CHILD = "Skull Chest"
 	STRINGS.GREENFOLIAGE = "Hooded Foliage" --Well, I guess I did this then...
 	STRINGS.FEATHER_FROCK = "Feather Frock"
+	STRINGS.UM_BEAR_TRAP_EQUIPPABLE = "Snap-Trap"
 	
 	STRINGS.REDGEM_CRACKED = "Shaped Red Gem"
 	STRINGS.BLUEGEM_CRACKED = "Shaped Blue Gem"

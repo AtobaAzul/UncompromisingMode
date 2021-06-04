@@ -249,6 +249,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.ANCIENT_AMULET_RED = "Wolfgang without soul is Wolfgang without strength."
 	DESCRIBE.UM_BEAR_TRAP = "Wolfgang too smart to step on trap!"
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Wolfgang too smart to step on trap!"
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE = "Large metal teeth, with very strong grip."
 	DESCRIBE.CORNCAN = "Corn is trapped inside. Will save with bare hands!"
 	DESCRIBE.SKULLCHEST_CHILD = "Wolfgang don't like chest that look like skull."
 	

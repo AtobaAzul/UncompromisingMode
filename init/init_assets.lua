@@ -406,6 +406,11 @@ Assets = {
 	Asset("ANIM", "anim/hat_gore_horn.zip"),
 	Asset("ANIM", "anim/hat_gore_horn_swap_on.zip"),
 	Asset("ANIM", "anim/hat_gore_horn_swap_off.zip"),
+	Asset("ANIM", "anim/swap_um_beartrap.zip"),
+	
+	
+	Asset("ANIM", "anim/carnival_host_death.zip"),
+	Asset("ANIM", "anim/hat_corvus.zip"),
 	
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_closed_lazy"),
 	Asset("INV_IMAGE", "images/inventoryimages/chester_eyebone_lazy"),
@@ -420,6 +425,8 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/beargerclaw.xml"),
 	Asset("IMAGE", "images/inventoryimages/slobberlobber.tex"),
 	Asset("ATLAS", "images/inventoryimages/slobberlobber.xml"),
+	Asset("IMAGE", "images/inventoryimages/um_bear_trap_equippable.tex"),
+	Asset("ATLAS", "images/inventoryimages/um_bear_trap_equippable.xml"),
 	
 	Asset("ANIM", "anim/armor_steelsweater.zip"),
 	Asset("ANIM", "anim/steelsweater.zip"),

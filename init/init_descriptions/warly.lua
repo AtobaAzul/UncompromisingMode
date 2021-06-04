@@ -248,6 +248,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.ANCIENT_AMULET_RED = "It stirs my very soul. Like a stew."
 	DESCRIBE.UM_BEAR_TRAP = "I'll keep my distance."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "I'll keep my distance."
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE = "Time to capture some fresh ingredients."
 	DESCRIBE.SKULLCHEST_CHILD = "Now I can get fresh produce from far away!"
 	
 	DESCRIBE.SLOBBERLOBBER = "Not in the food!."

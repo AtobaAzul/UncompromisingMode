@@ -66,6 +66,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	
 	DESCRIBE.UM_BEAR_TRAP = "You won't fool me!"
 	DESCRIBE.UM_BEAR_TRAP_OLD = "What jerk left this here?"
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE = "Look! Shark teeth!"
 	ANNOUNCE.ANNOUNCE_OVER_EAT =
 	{
 		STUFFED = "Seconds were too tempting.",

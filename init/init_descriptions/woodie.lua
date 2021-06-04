@@ -249,6 +249,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.ANCIENT_AMULET_RED = "I can keep myself together if I get chopped to bits."
 	DESCRIBE.UM_BEAR_TRAP = "Surprised they can lay em that fast."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Someone left their kit out."
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE = "Dangerous game."
 	DESCRIBE.CORNCAN = "I'll get at 'cha with lucy."
 	DESCRIBE.SKULLCHEST_CHILD = "Who knew wood and magic made such a great pair!"
 	

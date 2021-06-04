@@ -249,6 +249,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.ANCIENT_AMULET_RED = "Ohoho, how many souls are in here? Quite a few, I think!"
 	DESCRIBE.UM_BEAR_TRAP = "You gotta be a dope to fall for this joke!"
 	DESCRIBE.UM_BEAR_TRAP_OLD = "You gotta be a dope to fall for this joke!"
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE = "My, what large teeth you have!"
 	DESCRIBE.CORNCAN = "Go to corny jail."
 	DESCRIBE.SKULLCHEST_CHILD = "Now this is an item that I find amusing."
 	
