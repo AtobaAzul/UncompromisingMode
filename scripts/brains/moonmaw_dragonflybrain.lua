@@ -122,7 +122,6 @@ end
 
 local function FlameOffAction(inst)
     if inst.fire_build and inst.components.combat and not inst.components.combat.target and inst.last_kill_time and ((GetTime() - inst.last_kill_time) > 3) then
-        inst:SetFlameOn(false)
         inst.last_kill_time = nil
     end
 end
