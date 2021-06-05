@@ -91,10 +91,12 @@ AddComponentPostInit("hounded", function(self)
 		end
 		
 		local warglist = TheSim:FindEntities(pt.x,pt.y,pt.z, 50, {"warg"},{"dead"})
-		local warg = warglist[math.random(#warglist)]
-		
-		if not inst:HasTag("warg") and inst.components.follower ~= nil and warg ~= nil then
-			inst.components.follower:SetLeader(warg)
+		if warglist ~= nil and warglist > 0 then
+			local warg = warglist[math.random(#warglist)]
+			
+			if not inst:HasTag("warg") and inst.components.follower ~= nil and warg ~= nil then
+				inst.components.follower:SetLeader(warg)
+			end
 		end
 	end
 	

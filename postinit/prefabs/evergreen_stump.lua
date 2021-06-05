@@ -23,7 +23,7 @@ local function spawn_stumpling(inst)
 end
 
 local function onnear(inst, target, nodupe)
-	if not inst:HasTag("burnt") and inst:HasTag("stump") and target ~= nil then
+	if not inst:HasTag("burnt") and inst:HasTag("stump") and target ~= nil and not target:HasTag("plantkin") then
 	
 		if inst.stumplingambush then
 			local stumpling = SpawnPrefab(inst.stumpling)
@@ -39,12 +39,22 @@ local function onnear(inst, target, nodupe)
 			end
 			
 			for k = 1, 3 do 
-				local stump = FindEntity(inst, 15, find_stumpling_spawn_target, {"stump"}, { "leif","burnt" })
-				if stump ~= nil then
-					stump.noleif = true
-					stump.chopper = target
-					stump.stumpling = stumpling
-					stump:DoTaskInTime(0, spawn_stumpling)
+				if inst.stumpling == "stumpling" then
+					local stump = FindEntity(inst, 15, nil, {"stump", "evergreen"}, { "leif","burnt" })
+					if stump ~= nil then
+						stump.noleif = true
+						stump.chopper = target
+						stump.stumpling = inst.stumpling
+						stump:DoTaskInTime(0, spawn_stumpling)
+					end
+				else
+					local stump = FindEntity(inst, 15, nil, {"stump", "deciduoustree"}, { "leif","burnt" })
+					if stump ~= nil then
+						stump.noleif = true
+						stump.chopper = target
+						stump.stumpling = inst.stumpling
+						stump:DoTaskInTime(0, spawn_stumpling)
+					end
 				end
 			end
 
