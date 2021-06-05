@@ -228,4 +228,5 @@ return {
 	"deerclops_easyspawners",
 	"armorlavae",
 	"marshmist",
+	"corvushat",
 }

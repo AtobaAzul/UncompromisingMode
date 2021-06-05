@@ -119,7 +119,7 @@ end
 
 local function OnDropped(inst)
     inst.components.mine:Reset()
-    --inst.components.mine:Deactivate()
+	inst.SoundEmitter:PlaySound("dontstarve/common/trap_teeth_reset")
 end
 
 local function ondeploy(inst, pt, deployer)
@@ -548,7 +548,7 @@ local function oncollide_player(inst, other)
 end
 
 local function onequip(inst, owner)
-    owner.AnimState:OverrideSymbol("swap_object", "swap_snowball_throwable", "swap_snowball_throwable")
+    owner.AnimState:OverrideSymbol("swap_object", "swap_um_beartrap", "swap_um_beartrap")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 end
@@ -573,7 +573,7 @@ local function onthrown_player(inst)
     inst.Physics:SetDamping(5)
     inst.Physics:SetCollisionGroup(COLLISION.OBSTACLES)
     inst.Physics:ClearCollisionMask()
-    inst:SetPhysicsRadiusOverride(3)
+    --inst:SetPhysicsRadiusOverride(3)
     inst.Physics:CollidesWith(COLLISION.WORLD)
 	inst.Physics:CollidesWith(COLLISION.GIANTS)
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
@@ -617,6 +617,11 @@ local function equipfn()
     inst.AnimState:PlayAnimation("idle_active")
 	
 	inst:AddTag("weapon")
+	inst:AddTag("soulless")
+    inst:AddTag("trap")
+    inst:AddTag("bear_trap")
+    inst:AddTag("smallcreature")
+    inst:AddTag("mech")
 	
     MakeInventoryFloatable(inst, "med", 0.05, 0.65)
 
@@ -629,6 +634,9 @@ local function equipfn()
     if not TheWorld.ismastersim then
         return inst
     end
+	
+	inst.latchedtarget = nil
+	inst.Snapped = false
 
     inst:AddComponent("locomotor")
 	
@@ -650,11 +658,11 @@ local function equipfn()
 	
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(0)
-    inst.components.weapon:SetRange(20, 10)
+    inst.components.weapon:SetRange(20, 0.5)
 	
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/snowball_throwable.xml"
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/um_bear_trap_equippable.xml"
 	
     inst:AddComponent("inspectable")
 	
@@ -663,6 +671,7 @@ local function equipfn()
     inst.components.equippable:SetOnUnequip(onunequip)
 	
 	inst:AddComponent("health")
+	inst.components.health.canmurder = false
     inst.components.health:SetMaxHealth(TUNING.WALRUS_HEALTH / 2)
     inst:ListenForEvent("death", onfinished_normal)
 

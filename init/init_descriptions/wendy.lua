@@ -250,6 +250,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.ANCIENT_AMULET_RED = "It will keep whatevers left of my soul together."
 	DESCRIBE.UM_BEAR_TRAP = "Would lead to a slow and gruesome death in the right circumstances."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Would lead to a slow and gruesome death in the right circumstances."
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE = "A cruel, inhumane tool."
 	DESCRIBE.CORNCAN = "It seems like it's corn."
 	DESCRIBE.SKULLCHEST_CHILD = "I'm able to reach another plane, but I still cannot reach Abigail..."
 	

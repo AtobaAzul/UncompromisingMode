@@ -256,6 +256,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.ANCIENT_AMULET_RED = "I don't think they need their souls anymore."
 	DESCRIBE.UM_BEAR_TRAP = "I never taught them to do that."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Someone is hunting us. Walrus perhaps?"
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE = "Pain and entrapment, sounds familiar"
 	DESCRIBE.CORNCAN = "Corn is presumably contained inside."
 	DESCRIBE.SKULLCHEST_CHILD = "It keeps items inside the local pocket dimension."
 	

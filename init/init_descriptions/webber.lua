@@ -250,6 +250,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.ANCIENT_AMULET_RED = "Does it have room for both of our souls?"
 	DESCRIBE.UM_BEAR_TRAP = "A fanged metal web!"
 	DESCRIBE.UM_BEAR_TRAP_OLD = "A fanged metal web!"
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE = "Ouch, thats going to hurt..."
 	DESCRIBE.CORNCAN = "We left our can opener at home."
 	DESCRIBE.SKULLCHEST_CHILD = "We can give things to others far away."
 	

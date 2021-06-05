@@ -247,8 +247,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
 	
 	DESCRIBE.ANCIENT_AMULET_RED = "I would still like to avoid being hurt."
-	DESCRIBE.UM_BEAR_TRAP = "Wow! I wish I could place a bear trap that fast!"
+	DESCRIBE.UM_BEAR_TRAP = "Thats not very humane!"
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Who left their gear out like this?"
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE = "I don't feel good about this..."
 	DESCRIBE.CORNCAN = "Oh boy! Corn!"
 	DESCRIBE.SKULLCHEST_CHILD = "Wortox once popped out of this thing. Almost gave me a heart attack!"
 	

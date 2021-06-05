@@ -124,6 +124,7 @@ local prefab_post = {
 	"seedpouch",
 	"tonichandlers",
 	"houndwarning",
+	--"carnival_host",
 }
 
 local stategraph_post = {
@@ -142,6 +143,7 @@ local stategraph_post = {
 	"krampus",
 	"spiderqueen",
 	"merm",
+	"carnival_host",
 }
 
 local class_post = {

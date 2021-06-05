@@ -90,11 +90,13 @@ AddComponentPostInit("hounded", function(self)
 			inst.components.combat:SuggestTarget(player)	
 		end
 		
-		local findwarg = TheSim:FindEntities(pt.x,pt.y,pt.z, 50, {"warg"})
-		local warg = playerlist[math.random(#playerlist)]
-		
-		if not inst:HasTag("warg") and inst.components.follower ~= nil and warg ~= nil then
-			inst.components.follower:SetLeader(warg)
+		local warglist = TheSim:FindEntities(pt.x,pt.y,pt.z, 50, {"warg"},{"dead"})
+		if warglist ~= nil and #warglist > 0 then
+			local warg = warglist[math.random(#warglist)]
+			
+			if not inst:HasTag("warg") and inst.components.follower ~= nil and warg ~= nil then
+				inst.components.follower:SetLeader(warg)
+			end
 		end
 	end
 	

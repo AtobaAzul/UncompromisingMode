@@ -161,22 +161,37 @@ local function find_leif_spawn_target(item)
         and item.components.growable.stage <= 3
 end
 local function spawn_stumpling(target)
-    local stumpling = SpawnPrefab("stumpling")
+	if target:HasTag("deciduous") then
+		local stumpling = SpawnPrefab("birchling")
+	
+		if target.chopper ~= nil then
+			stumpling.components.combat:SuggestTarget(target.chopper)
+		end
 
-    if target.chopper ~= nil then
-        stumpling.components.combat:SuggestTarget(target.chopper)
-    end
+		local x, y, z = target.Transform:GetWorldPosition()
+		target:Remove()
+		local effect = SpawnPrefab("round_puff_fx_hi")
+		effect.Transform:SetPosition(x, y, z)
+		stumpling.Transform:SetPosition(x, y, z)
+		stumpling.sg:GoToState("hit")
+	else
+		local stumpling = SpawnPrefab("stumpling")
+	
+		if target.chopper ~= nil then
+			stumpling.components.combat:SuggestTarget(target.chopper)
+		end
 
-    local x, y, z = target.Transform:GetWorldPosition()
-    target:Remove()
-	local effect = SpawnPrefab("round_puff_fx_hi")
-	effect.Transform:SetPosition(x, y, z)
-    stumpling.Transform:SetPosition(x, y, z)
-    stumpling.sg:GoToState("hit")
+		local x, y, z = target.Transform:GetWorldPosition()
+		target:Remove()
+		local effect = SpawnPrefab("round_puff_fx_hi")
+		effect.Transform:SetPosition(x, y, z)
+		stumpling.Transform:SetPosition(x, y, z)
+		stumpling.sg:GoToState("hit")
+	end
 end
 local function SummonStumplings(target)
 	for k = 1, 3 do 
-    local stump = FindEntity(target, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, {"stump","evergreen"}, { "leif","burnt","deciduoustree" })
+    local stump = FindEntity(target, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, {"stump"--[[,"evergreen"]]}, { "leif","burnt"--[[,"deciduoustree"]] })
 		if stump ~= nil then
 			stump.noleif = true
 			if inst.components.combat.target ~= nil then

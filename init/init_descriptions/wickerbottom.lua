@@ -255,6 +255,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	
 	DESCRIBE.UM_BEAR_TRAP = "A mundane trap, I best stay clear of it."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "A mundane trap, I best stay clear of it."
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE = "Quite ingeneous, yet cruel."
 	DESCRIBE.CORNCAN = "Preserved corn."
 	DESCRIBE.SKULLCHEST_CHILD = "The items inside fade into blackness."
 	

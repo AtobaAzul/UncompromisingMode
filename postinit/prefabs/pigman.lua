@@ -19,3 +19,12 @@ env.AddPrefabPostInit("pigguard", function(inst)
 	inst:AddTag("pigattacker")
 
 end)
+
+env.AddPrefabPostInit("pigking_pigguard", function(inst)
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+	inst:AddTag("pigattacker")
+
+end)
