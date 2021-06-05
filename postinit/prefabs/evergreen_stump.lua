@@ -72,7 +72,15 @@ local function onnear(inst, target, nodupe)
 	end
 end
 
-local function OnTimerDone(inst, data)
+local function onfar(inst)
+	if not inst:HasTag("burnt") and inst:HasTag("stump") then
+		if inst.components.timer:GetTimeLeft("stumptime") == nil then
+			inst.components.timer:StartTimer("stumptime", math.random(240, 960))
+		end
+	end
+end
+
+local function OnTimerDone2(inst, data)
     if data.name == "stumptime" then
 		if math.random() > 0.333 then
 			inst.stumplingambush = true
@@ -80,7 +88,7 @@ local function OnTimerDone(inst, data)
     end
 end
 
-env.AddPrefabPostInit("evergreen_stump", function(inst)
+env.AddPrefabPostInit("evergreen", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
@@ -99,6 +107,10 @@ env.AddPrefabPostInit("evergreen_stump", function(inst)
 	local function OnLoad(inst, data)
 		if data ~= nil and data.stumplingambush ~= nil then
 			inst.stumplingambush = data.stumplingambush
+		end
+		
+		if inst.components.timer:GetTimeLeft("stumptime") == nil and inst:HasTag("stump") then
+			inst.components.timer:StartTimer("stumptime", math.random(240, 960))
 		end
 
 		_OnLoad(inst, data)
@@ -111,22 +123,17 @@ env.AddPrefabPostInit("evergreen_stump", function(inst)
     inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(12, 14) --set specific values
     inst.components.playerprox:SetOnPlayerNear(onnear)
+    inst.components.playerprox:SetOnPlayerNear(onfar)
     inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
 	
 	inst:AddComponent("timer")
-    inst:ListenForEvent("timerdone", OnTimerDone)
-	
-	if inst.components.timer:GetTimeLeft("stumptime") == nil then
-		inst.components.timer:StartTimer("stumptime", math.random(240, 960))
-	end
-	
-	inst.OnNear = onnear
+    inst:ListenForEvent("timerdone", OnTimerDone2)
 	
 	inst.OnSave = OnSave
 	inst.OnLoad = OnLoad
 end)
 
-env.AddPrefabPostInit("deciduoustree_stump", function(inst)
+env.AddPrefabPostInit("deciduoustree", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
@@ -143,8 +150,12 @@ env.AddPrefabPostInit("deciduoustree_stump", function(inst)
 	end
 
 	local function OnLoad(inst, data)
-		if data ~= nil and data.stumplingambush ~= nil then
+		if data ~= nil and data.stumplingambush ~= nil and inst:HasTag("stump") then
 			inst.stumplingambush = data.stumplingambush
+		end
+		
+		if inst.components.timer:GetTimeLeft("stumptime") == nil and inst:HasTag("stump") then
+			inst.components.timer:StartTimer("stumptime", math.random(240, 960))
 		end
 
 		_OnLoad(inst, data)
@@ -157,16 +168,11 @@ env.AddPrefabPostInit("deciduoustree_stump", function(inst)
     inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(12, 14) --set specific values
     inst.components.playerprox:SetOnPlayerNear(onnear)
+    inst.components.playerprox:SetOnPlayerNear(onfar)
     inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
 	
 	inst:AddComponent("timer")
-    inst:ListenForEvent("timerdone", OnTimerDone)
-	
-	if inst.components.timer:GetTimeLeft("stumptime") == nil then
-		inst.components.timer:StartTimer("stumptime", math.random(240, 960))
-	end
-	
-	inst.OnNear = onnear
+    inst:ListenForEvent("timerdone", OnTimerDone2)
 	
 	inst.OnSave = OnSave
 	inst.OnLoad = OnLoad
