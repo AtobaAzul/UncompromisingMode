@@ -8,7 +8,7 @@ local function find_stumpling_spawn_target(inst)
 end
 
 local function spawn_stumpling(inst)
-    local stumpling = SpawnPrefab("stumpling")
+    local stumpling = SpawnPrefab(inst.stumpling)
 
     if inst.chopper ~= nil then
         stumpling.components.combat:SuggestTarget(inst.chopper)
@@ -43,6 +43,7 @@ local function onnear(inst, target, nodupe)
 				if stump ~= nil then
 					stump.noleif = true
 					stump.chopper = target
+					stump.stumpling = stumpling
 					stump:DoTaskInTime(0, spawn_stumpling)
 				end
 			end
