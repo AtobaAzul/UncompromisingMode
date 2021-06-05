@@ -11,3 +11,23 @@ env.AddPrefabPostInit("molehat", function(inst)
 	end
 	
 end)
+
+env.AddPrefabPostInit("spiderhat", function(inst)
+
+	inst:AddTag("goggles")
+
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+end)
+
+env.AddPrefabPostInit("widowshead", function(inst)
+
+	inst:AddTag("goggles")
+
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+end)

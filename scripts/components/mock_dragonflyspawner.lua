@@ -172,7 +172,11 @@ local function ReleaseHassler(targetPlayer)
             hassler = SpawnSaveRecord(_storedhassler, {})
             _storedhassler = nil
         else
-            hassler = SpawnPrefab("mock_dragonfly")
+			if (TheWorld.state.cycles >= 70 and TheWorld.state.isfullmoon) then --or () then
+				hassler = SpawnPrefab("moonmaw_dragonfly")
+			else
+				hassler = SpawnPrefab("mock_dragonfly")
+			end
         end
 
         if hassler ~= nil then

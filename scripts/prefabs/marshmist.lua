@@ -99,7 +99,7 @@ local function fnmist()
 	inst:WatchWorldState("isnight", TrySwap)
 	inst:WatchWorldState("isday", TrySwap)
 	inst:AddComponent("areaaware")
-	inst:DoTaskInTime(0,WaterCheck)
+	inst:DoTaskInTime(0.1,WaterCheck)
     return inst
 end
 

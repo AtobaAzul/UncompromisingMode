@@ -16,6 +16,8 @@ return {
 	"lavae2",
 	"mock_monsterwarningsounds",
 	"mock_dragonfly",
+	"moonmaw_dragonfly",
+	"moonmaw_glass",
 	"lavaspit",
 	--"sandhill",
 	"snowpile",
