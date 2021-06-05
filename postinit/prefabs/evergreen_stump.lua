@@ -123,7 +123,7 @@ env.AddPrefabPostInit("evergreen", function(inst)
     inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(12, 14) --set specific values
     inst.components.playerprox:SetOnPlayerNear(onnear)
-    inst.components.playerprox:SetOnPlayerNear(onfar)
+    inst.components.playerprox:SetOnPlayerFar(onfar)
     inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
 	
 	inst:AddComponent("timer")
@@ -168,7 +168,7 @@ env.AddPrefabPostInit("deciduoustree", function(inst)
     inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(12, 14) --set specific values
     inst.components.playerprox:SetOnPlayerNear(onnear)
-    inst.components.playerprox:SetOnPlayerNear(onfar)
+    inst.components.playerprox:SetOnPlayerFar(onfar)
     inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
 	
 	inst:AddComponent("timer")
