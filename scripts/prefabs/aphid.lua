@@ -40,7 +40,7 @@ end
 
 local function retargetfn(inst)
     local dist = 8
-    local notags = {"FX", "NOCLICK","INLIMBO", "wall", "aphid", "structure", "aquatic"}
+    local notags = {"FX", "NOCLICK","INLIMBO", "wall", "aphid", "structure", "aquatic", "smallcreature"}
     return FindEntity(inst, dist, function(guy)
         return  inst.components.combat:CanTarget(guy)
     end, nil, notags)

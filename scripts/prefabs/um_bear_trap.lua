@@ -119,7 +119,7 @@ end
 
 local function OnDropped(inst)
     inst.components.mine:Reset()
-    --inst.components.mine:Deactivate()
+	inst.SoundEmitter:PlaySound("dontstarve/common/trap_teeth_reset")
 end
 
 local function ondeploy(inst, pt, deployer)
