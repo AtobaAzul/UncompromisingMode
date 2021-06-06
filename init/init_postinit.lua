@@ -20,6 +20,7 @@ local component_post = {
 	"sleeper",
 	"fueled",
 	"perishable",
+	--"carnivalevent",
 }
 
 local prefab_post = {
