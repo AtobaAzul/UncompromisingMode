@@ -24,18 +24,20 @@ local function onfinished_normal(inst)
 	
 	if inst.latchedtarget ~= nil then
 		local pos = Vector3(inst.latchedtarget.Transform:GetWorldPosition())
-		inst.latchedtarget.components.locomotor:RemoveExternalSpeedMultiplier(inst.latchedtarget, "um_bear_trap") 
-		inst.latchedtarget._bear_trap_speedmulttask = nil
+		if inst.latchedtarget.components.locomotor ~= nil then
+			inst.latchedtarget.components.locomotor:RemoveExternalSpeedMultiplier(inst.latchedtarget, "um_bear_trap") 
+			inst.latchedtarget._bear_trap_speedmulttask = nil
+		end
 		inst.latchedtarget:RemoveChild(inst)
 		inst.Physics:Teleport(pos.x,pos.y,pos.z) 
 	end
 end
 
 local function debuffremoval(inst)
-	if inst.latchedtarget ~= nil then
+	if inst.latchedtarget ~= nil and inst.components.locomotor ~= nil then
 		inst.components.locomotor:RemoveExternalSpeedMultiplier(inst.latchedtarget, "um_bear_trap")
+		inst._bear_trap_speedmulttask = nil
 	end
-	inst._bear_trap_speedmulttask = nil
 end
 
 local function OnExplode(inst, target)
@@ -67,16 +69,16 @@ local function OnExplode(inst, target)
 		else
 			local debuffkey = inst.prefab
 			
-			target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.3)
 			
 			inst:ListenForEvent("death", onfinished_normal, target)
 			inst:ListenForEvent("onremoved", onfinished_normal, target)
-			
-			target._bear_trap_speedmulttask = target:DoTaskInTime(10, function(i) 
-				i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) 
-				i._bear_trap_speedmulttask = nil
-			end)
-			
+			if target.components.locomotor ~= nil then
+				target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.3)
+				target._bear_trap_speedmulttask = target:DoTaskInTime(10, function(i) 
+					i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) 
+					i._bear_trap_speedmulttask = nil
+				end)
+			end
 			inst:DoTaskInTime(10, function(inst) inst.components.health:Kill() end)
 			
 			inst.persists = false
