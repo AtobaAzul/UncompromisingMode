@@ -15,6 +15,15 @@ local function GetHome(inst)
     return inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
 end
 
+local function Splash(inst)
+local x,y,z = inst.Transform:GetWorldPosition()
+if not TheWorld.Map:IsAboveGroundAtPoint(x,y,z) then
+	local splash = SpawnPrefab("splash")
+	splash.Transform:SetPosition(x,y,z)
+	splash.Transform:SetScale(2,1.5,2)
+end
+end
+
 local events =
 {
     EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),
@@ -25,7 +34,7 @@ local events =
 		if not (inst.components.timer == nil or inst.components.timer:TimerExists("dospin")) then
         inst.sg:GoToState("speen_pre", data.target)
 		else
-		inst.sg:GoToState("attack", data.target) 
+		inst.sg:GoToState("speen_pre",data.target)--"attack", data.target) 
 		end
 	end
 	end),
@@ -94,8 +103,14 @@ local states =
             inst.Physics:Stop()
             inst.components.combat:StartAttack()
             inst.AnimState:PlayAnimation("spin_pre")
+			if inst.components.timer == nil then
+				inst:AddComponent("timer")
+			end
 			inst.components.timer:StartTimer("speendone", TUNING.DEERCLOPS_ATTACK_PERIOD)
 			inst.components.locomotor.walkspeed = TUNING.HOUND_SPEED
+			local x,y,z = inst.Transform:GetWorldPosition()
+			MakeGhostPhysics(inst, .5, .5)
+			inst.Transform:SetPosition(x,y,z)
         end,
 
         timeline =
@@ -118,6 +133,8 @@ local states =
         onenter = function(inst, target)
             inst.sg.statemem.target = target
             inst.AnimState:PlayAnimation("spin_loop",true)
+			inst.velx = 0
+			inst.velz = 0
 				if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
 					inst.Transform:SetRotation(0)
 				else
@@ -134,6 +151,9 @@ local states =
 		onupdate = function(inst)
 			--if inst.sg.statemem.move then
 				if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
+					inst:ForceFacePoint(inst.components.combat.target.Transform:GetWorldPosition())
+					local theta = (inst.Transform:GetRotation()+90)*DEGREES
+					inst.Transform:SetRotation(0)
 					local oldvelx, oldvelz
 					if inst.velx ~= nil then
 						oldvelx = inst.velx
@@ -145,16 +165,23 @@ local states =
 					else
 						oldvelz = 0
 					end
-					local dv = 1
-					local x,y,z = inst.Transform:GetWorldPosition()
-					local targetpos = inst.components.combat.target:GetPosition()
-					local theta2 = math.atan(((targetpos.x-x)/(targetpos.z-z))
-					local theta = (theta2)
-					local newvelx = oldvelx + dv*math.cos(theta)
+					local dv = 0.75					
+					local newvelx = oldvelx + dv * math.sin(theta)
+					local newvelz = oldvelz + dv * math.cos(theta)
 					inst.velx = newvelx
-					local newvelz = oldvelz + dv*math.sin(theta)
 					inst.velz = newvelz
+					
 					inst.Physics:SetMotorVel(newvelx,0,newvelz)
+					
+					if inst.countersplash == nil then
+						inst.countersplash = 1
+					else
+						inst.countersplash = inst.countersplash - 0.1
+					end
+					if inst.countersplash < 0 then
+						Splash(inst)
+						inst.countersplash = 1
+					end
 				else
 					inst.sg:GoToState("speen_pst")
 				end
@@ -166,6 +193,9 @@ State{
 
         onenter = function(inst)
             inst.Physics:Stop()
+			local x,y,z = inst.Transform:GetWorldPosition()
+			MakeCharacterPhysics(inst, 10, .5)
+			inst.Transform:SetPosition(x,y,z)
             inst.AnimState:PlayAnimation("spin_pst")
 			inst.components.timer:StartTimer("dospin", TUNING.DEERCLOPS_ATTACK_PERIOD*2)
 			inst.components.locomotor.walkspeed = TUNING.HOUND_SPEED/6
