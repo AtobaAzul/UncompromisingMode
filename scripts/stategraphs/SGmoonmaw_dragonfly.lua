@@ -1,10 +1,10 @@
 require("stategraphs/commonstates")
 
 local function SpawnMoonGlass(inst)
-    local numsteps = 10
+    local numsteps = 4
     local x, y, z = inst.Transform:GetWorldPosition()
     local angle = (inst.Transform:GetRotation() + 90) * DEGREES
-    local step = .75
+    local step = 3
     local offset = 2 - step --should still hit players right up against us
     local ground = TheWorld.Map
     local targets, skiptoss = {}, {}
@@ -24,14 +24,10 @@ local function SpawnMoonGlass(inst)
             noground = true
         end
 			
-        fx = SpawnPrefab(i > 0 and "moonmaw_glass" or "moonmaw_glass")
-		
-		if inst.components.health:GetPercent() <= 0.5 then
-			fx = SpawnPrefab(i > 0 and "moonmaw_glass" or "moonmaw_glass")
-		end
-		
+        fx = SpawnPrefab("moonmaw_glass")
         fx.caster = inst
         fx.Transform:SetPosition(x1, 0, z1)
+		fx.spawnin(fx,delay/10)
         if i == 0 then
             ShakeAllCameras(CAMERASHAKE.FULL, .7, .02, .6, fx, 30)
         end
@@ -39,28 +35,6 @@ local function SpawnMoonGlass(inst)
             break
         end
     end
-
-    if i < numsteps then
-        dist = (i + .5) * step + offset
-        x1 = x + dist * math.sin(angle)
-        z1 = z + dist * math.cos(angle)
-    end
-	
-    fx = SpawnPrefab("moonmaw_glass")
-	
-	if inst.components.health:GetPercent() <= 0.5 then
-		fx = SpawnPrefab(i > 0 and "moonmaw_glass" or "moonmaw_glass")
-	end
-		
-    fx.Transform:SetPosition(x1, 0, z1)
-
-    fx = SpawnPrefab("moonmaw_glass")
-	
-	if inst.components.health:GetPercent() <= 0.5 then
-		fx = SpawnPrefab(i > 0 and "moonmaw_glass" or "moonmaw_glass")
-	end
-	
-    fx.Transform:SetPosition(x1, 0, z1)
 end
 
 local function onattackedfn(inst, data)
@@ -88,7 +62,7 @@ end
 local actionhandlers = 
 {
     --ActionHandler(ACTIONS.GOHOME, "taunt"),     
-    --ActionHandler(ACTIONS.LAVASPIT, "spit"),
+    ActionHandler(ACTIONS.LAVASPIT, "spit"),
 }
 
 local events=
@@ -119,43 +93,6 @@ local states=
     },
 
     State{
-        name = "eat",
-        tags = {"idle", "busy", "eat"},
-        
-        onenter = function(inst)
-            if inst.ashes then 
-                inst.Physics:Stop()
-                inst.AnimState:PlayAnimation("eat")
-                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/suckup")
-                inst.last_spit_time = GetTime() -- treat this as a spit so he doesn't go directly to a spit
-                if inst.ashes then 
-                    inst.num_ashes_eaten = inst.num_ashes_eaten + (inst.ashes.components.stackable and inst.ashes.components.stackable:StackSize() or 1)
-                    inst.ashes:VacuumUp()
-                end
-            else
-                inst.sg:GoToState("idle")
-            end
-        end,
-
-        onexit = function(inst)
-            inst:ClearBufferedAction()
-        end,
-
-        events=
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
-        },
-
-        timeline=
-        {
-            TimeEvent(16*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/chew") end),
-            TimeEvent(22*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/chew") end),
-            TimeEvent(31*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/chew") end),
-            TimeEvent(34*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end),
-        },
-    },
-
-    State{
         name = "spit",
         tags = {"busy"},
         
@@ -165,14 +102,13 @@ local states=
                 if inst.components.locomotor then
                     inst.components.locomotor:StopMoving()
                 end
-                inst.AnimState:PlayAnimation("vomit")
-                inst.vomitfx = SpawnPrefab("vomitfire_fx")
-                inst.vomitfx.Transform:SetPosition(inst.Transform:GetWorldPosition())
-                inst.vomitfx.Transform:SetRotation(inst.Transform:GetRotation())
-				inst:DoTaskInTime(2.2, function(inst)
-				inst.spittle = SpawnPrefab("lavaspit")
-                inst.spittle.Transform:SetPosition(inst.Transform:GetWorldPosition())
-                inst.spittle.Transform:SetRotation(inst.Transform:GetRotation())
+                inst.AnimState:PlayAnimation("spit")
+				inst:DoTaskInTime(0.5, function(inst)
+				local fx = SpawnPrefab("moonmaw_glass")
+				fx.caster = inst
+				fx.spawnin(fx,2)
+                fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+                fx.Transform:SetRotation(inst.Transform:GetRotation())
 				end)
                 inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/vomitrumble", "vomitrumble")
             else
@@ -240,8 +176,6 @@ local states=
             TimeEvent(2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end),
             TimeEvent(6*FRAMES, function(inst)
                 --inst.AnimState:SetBuild("dragonfly_fire_build")
-                inst.SoundEmitter:KillSound("fireflying")
-                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/firedup", "fireflying")
                 ---inst.AnimState:SetBloomEffectHandle( "shaders/anim.ksh" )
                 --inst.Light:Enable(true)
                 inst.fire_build = true
@@ -316,38 +250,6 @@ local states=
     },
 
     State{
-        name = "flameoff",
-        tags = {"busy"},
-        
-        onenter = function(inst)
-            inst.components.locomotor:StopMoving()
-            inst.Physics:Stop()
-            --inst.AnimState:PlayAnimation("flame_off")
-            inst.last_target_spit_time = GetTime() -- Fake this as a target spit to make him not re-aggro immediately
-            inst.last_spit_time = GetTime() -- Fake this as a target spit to make him not re-aggro immediately
-        end,
-        
-        events=
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
-        },
-
-        timeline=
-        {
-            TimeEvent(2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end),
-            TimeEvent(5*FRAMES, function(inst)
-                local firefx = SpawnPrefab("firesplash_fx")
-                firefx.Transform:SetPosition(inst.Transform:GetWorldPosition())
-                inst.flame_on = false
-                --inst.Light:Enable(false)
-                --inst.AnimState:ClearBloomEffectHandle()
-                --inst.AnimState:SetBuild("dragonfly_build")
-                inst.fire_build = false
-            end),
-        },
-    },
-
-    State{
         name = "hit",
         tags = {"hit", "busy"},
         
@@ -363,11 +265,7 @@ local states=
         events =
         {
             EventHandler("animover", function(inst) 
-                if inst.flame_on and not inst.fire_build then
-                    inst.sg:GoToState("idle") 
-                else
-                    inst.sg:GoToState("taunt_pre")
-                end
+                inst.sg:GoToState("taunt_pre")
             end),
         },
     },
@@ -426,8 +324,6 @@ local states=
         {
             TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end),
             TimeEvent(26*FRAMES, function(inst) 
-                inst.SoundEmitter:KillSound("flying") 
-                inst.SoundEmitter:KillSound("fireflying")
             end),
             TimeEvent(28*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/land") end),
             TimeEvent(29*FRAMES, function(inst)
@@ -471,12 +367,9 @@ local states=
             
             onenter = function(inst) 
                 inst.components.locomotor:WalkForward()
-                if inst.fire_build then
-                    inst.AnimState:PlayAnimation("walk_angry")
-                    if math.random() < .5 then inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/angry") end
-                else
-                    inst.AnimState:PlayAnimation("walk")
-                end
+
+                inst.AnimState:PlayAnimation("walk")
+
             end,
             events=
             {   
@@ -532,9 +425,6 @@ local states=
                 end
                 inst.last_target_spit_time = nil -- Unset spit timers so he doesn't aggro while sleeping
                 inst.last_spit_time = nil -- Unset spit timers so he doesn't aggro while sleeping
-                inst.AnimState:PlayAnimation("land")
-                inst.AnimState:PushAnimation("land_idle", false)
-                inst.AnimState:PushAnimation("takeoff", false)
                 inst.AnimState:PushAnimation("sleep_pre", false)
             end,
 
@@ -547,20 +437,6 @@ local states=
             timeline=
             {
                 TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:KillSound("flying") end),
-                TimeEvent(16*FRAMES, function(inst) 
-                    inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") 
-                    inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/land")
-                    if inst.fire_build then
-                        inst.SoundEmitter:KillSound("fireflying")
-                        local firefx = SpawnPrefab("firesplash_fx")
-                        firefx.Transform:SetPosition(inst.Transform:GetWorldPosition())
-                        inst.flame_on = false
-                        --inst.Light:Enable(false)
-                        --inst.AnimState:ClearBloomEffectHandle()
-                        --inst.AnimState:SetBuild("dragonfly_build")
-                        inst.fire_build = false
-                    end
-                end),
                 TimeEvent(74*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end),
                 TimeEvent(78*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/fly", "flying") end),
                 TimeEvent(91*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end),

@@ -1,5 +1,25 @@
 require("worldsettingsutil")
 
+
+local function AreaAttack(inst)
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local ents = TheSim:FindEntities(x, y, z, 4)
+        for i, v in ipairs(ents) do
+            if v ~= inst and v:IsValid() and not v:IsInLimbo() then
+                if v.components.workable ~= nil and v.components.workable:CanBeWorked() then
+                    v.components.workable:WorkedBy(inst, 3)
+                end
+                --Recheck valid after work
+                if v:IsValid() and not v:IsInLimbo() then
+                    if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) and not v:HasTag("moonglasscreature") then
+                        local dmg = 50
+                        v.components.combat:GetAttacked(inst, dmg, nil)
+                    end
+                end
+            end
+        end
+end
+
 local function explode(inst)
     inst.AnimState:PlayAnimation("crack")
     inst:ListenForEvent("animover", function()
@@ -7,40 +27,13 @@ local function explode(inst)
         inst.AnimState:SetBloomEffectHandle("")
         inst.defused = true
         inst.components.named:SetName(STRINGS.NAMES.MOONSTORM_GLASS_DEFUSED)
+		AreaAttack(inst)
 
-        local buildingdamage =1
-        local combatdamage = 50
-
-        local x, y, z = inst.Transform:GetWorldPosition()
-        local ents = TheSim:FindEntities(x, y, z, 4)
 
         SpawnPrefab("moonstorm_glass_ground_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
         SpawnPrefab("moonstorm_glass_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
 
         inst.SoundEmitter:PlaySound("moonstorm/common/moonstorm/glass_break")
-
-        for i, v in ipairs(ents) do
-            if v ~= inst and v:IsValid() and not v:IsInLimbo() then
-                --[[
-                if v.components.workable ~= nil and v.components.workable:CanBeWorked() then
-                    v.components.workable:WorkedBy(inst, buildingdamage)
-                end
-                ]]
-
-                --Recheck valid after work
-                if v:IsValid() and not v:IsInLimbo() then
-                    if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) and not v:HasTag("moonglasscreature") then
-                        local dmg = combatdamage
-                        v.components.combat:GetAttacked(inst, dmg, nil)
-                    end
-                end
-				if v.components.workable ~= nil then
-					v.components.workable:WorkedBy(inst,100)
-				end
-            end
-        end
-
-
         inst:Remove()
     end)
 end
@@ -69,9 +62,16 @@ local function getstatus(inst)
     end
 end
 
-local function spawnin(inst)
+local function spawnin(inst,time)
+inst:Hide()
+inst:DoTaskInTime(time,function(inst)
+	AreaAttack(inst)
+	inst:Show()
     inst.AnimState:PlayAnimation("spawn")
     inst.AnimState:PushAnimation("idle1",true)
+	
+	inst.components.timer:StartTimer("defusetime", 0.25)
+end)
 end
 
 local function fn(pondtype)
@@ -119,7 +119,7 @@ local function fn(pondtype)
     local TIME = 1.5
 
     inst:AddComponent("timer")
-    inst.components.timer:StartTimer("defusetime", TIME)
+    --inst.components.timer:StartTimer("defusetime", TIME)
     inst:ListenForEvent("timerdone", ontimedone)
 
     inst:AddComponent("updatelooper")
@@ -146,7 +146,7 @@ local function fn(pondtype)
     inst.OnSave = on_save
     inst.OnLoad = on_load
     inst.spawnin = spawnin
-
+	inst:DoTaskInTime(0.1, function(inst) if inst.caster == nil then inst:Remove() end end)
     return inst
 end
 

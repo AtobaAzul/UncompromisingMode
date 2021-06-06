@@ -186,7 +186,9 @@ local function OnCollide(inst, other)
         inst:DoTaskInTime(2*FRAMES, function()
             if other and other.components.workable and other.components.workable.workleft > 0 then
                 SpawnPrefab("collapse_small").Transform:SetPosition(other:GetPosition():Get())
-                other.components.lootdropper:SetLoot({})
+				if other.components.lootdropper ~= nil then
+					other.components.lootdropper:SetLoot({})
+				end
                 other.components.workable:Destroy(inst)
             end
         end)
@@ -266,7 +268,7 @@ local function fn(Sim)
     --MakeFlyingGiantCharacterPhysics(inst, 500, 1.4)
 	
 	
-    inst.Physics:SetCollisionCallback(OnCollide)
+    --inst.Physics:SetCollisionCallback(OnCollide)
 
     inst.OnEntitySleep = OnSleep 
     inst.OnRemoveEntity = OnRemove
