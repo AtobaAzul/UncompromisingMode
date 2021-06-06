@@ -107,15 +107,6 @@ local function RetargetFn(inst)
 	end
 end
 
-local function AuraTest(inst)
-if inst.sg:HasStateTag("speen") then
-return true
-else
-return false
-end
-end
-
-
 
 local function fncommon(n, build, morphlist, custombrain, tag, data)
 	data = data or {}
@@ -205,13 +196,14 @@ local function fncommon(n, build, morphlist, custombrain, tag, data)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
     inst.components.combat:SetHurtSound(inst.sounds.hurt)
 	inst.components.combat:SetRetargetFunction(1, RetargetFn)
+	inst.components.combat:SetRange(2)
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetChanceLootTable("snapperturtle")
 
     inst:AddComponent("inspectable")
     inst:AddComponent("eater")
-    inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
+    inst.components.eater:SetDiet({ FOODGROUP.MEAT }, { FOODGROUP.VEGGIE })
     inst.components.eater:SetCanEatHorrible()
     inst.components.eater.strongstomach = true -- can eat monster meat!
 
@@ -224,10 +216,6 @@ local function fncommon(n, build, morphlist, custombrain, tag, data)
 
 	inst:AddComponent("knownlocations")
 	
-    inst:AddComponent("aura")
-    inst.components.aura.radius = TUNING.GHOST_RADIUS
-    inst.components.aura.tickperiod = TUNING.GHOST_DMG_PERIOD
-    inst.components.aura.auratestfn = AuraTest
 	
     MakeHauntablePanic(inst)
 
