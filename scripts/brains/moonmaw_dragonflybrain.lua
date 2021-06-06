@@ -138,11 +138,11 @@ function MoonMaw_DragonflyBrain:OnStart()
     local root =
         PriorityNode(
         {
-            DoAction(self.inst, FlameOffAction),
+           -- DoAction(self.inst, FlameOffAction),
             DoAction(self.inst, SleepAction),
             --DoAction(self.inst, EatAshAction),
-            --[[WhileNode(function() return ShouldSpitFn(self.inst) end, "Spit",
-                DoAction(self.inst, LavaSpitAction)),]]
+            WhileNode(function() return ShouldSpitFn(self.inst) end, "Spit",
+                DoAction(self.inst, LavaSpitAction)),
             ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST),
             DoAction(self.inst, FindLavaSpitTargetAction),
             WhileNode(function() return ShouldFollowFn(self.inst) end, "Follow To Base",

@@ -1,4 +1,4 @@
-local brain = require "brains/mock_dragonflybrain"
+local brain = require "brains/moonmaw_dragonflybrain"
 
 local easing = require("easing")
 
@@ -189,6 +189,9 @@ local function OnCollide(inst, other)
 				if other.components.lootdropper ~= nil then
 					other.components.lootdropper:SetLoot({})
 				end
+				if other.components.lootdropper ~= nil then
+					other.components.lootdropper:SetLoot({})
+				end
                 other.components.workable:Destroy(inst)
             end
         end)
@@ -268,7 +271,7 @@ local function fn(Sim)
     --MakeFlyingGiantCharacterPhysics(inst, 500, 1.4)
 	
 	
-    --inst.Physics:SetCollisionCallback(OnCollide)
+    inst.Physics:SetCollisionCallback(OnCollide)
 
     inst.OnEntitySleep = OnSleep 
     inst.OnRemoveEntity = OnRemove
