@@ -35,7 +35,7 @@ local function GetSandstormLevel(inst)
 	end
 end
 
-local function SetInstanceFunctions(inst)
+local function SetInstanceFunctions2(inst)
         inst.GetSandstormLevel = GetSandstormLevel
 end
 
@@ -53,7 +53,35 @@ AddPlayerPostInit(function(inst)
 		inst:AddComponent("snowstormwatcher")
 	end
 	
-	SetInstanceFunctions(inst)
+	local _OldOnSave = inst.OnSave
+	local _OldOnLoad = inst.OnLoad
+
+	local function OnSave(inst, data)
+		if inst.vetcurse ~= nil then
+			data.vetscurse = inst.vetcurse
+		end
+		
+		_OldOnSave(inst, data)
+	end
+
+	local function OnLoad(inst, data)
+		if data ~= nil then
+			if data.vetscurse then
+				inst:ListenForEvent("respawnfromghost", function()
+					inst:DoTaskInTime(3, function(inst) 
+						inst.components.debuffable:AddDebuff("buff_vetcurse", "buff_vetcurse")
+					end)
+				end, inst)
+			end
+		end
+	
+		_OldOnLoad(inst, data)
+	end
+	
+	SetInstanceFunctions2(inst)
+	
+	inst.OnSave = OnSave
+	inst.OnLoad = OnLoad
 	
 	--inst:ListenForEvent("death", checkrevive)
 end)

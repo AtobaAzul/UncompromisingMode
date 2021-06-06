@@ -114,9 +114,9 @@ env.AddPrefabPostInit("forest", function(inst)
 	inst:AddComponent("randomnightevents")
 	
 	
-	inst.OnSave = OnSave
+	--inst.OnSave = OnSave
 	
-	inst.OnLoad = OnLoad
+	--inst.OnLoad = OnLoad
 end)
 
 if TUNING.DSTU.SPAWNMOTHERGOOSE == true then
@@ -142,5 +142,5 @@ env.AddPrefabPostInit("cave", function(inst)
         return
     end
 	
-	inst.OnLoad = OnLoad
+	--inst.OnLoad = OnLoad
 end)

@@ -140,7 +140,7 @@ end
 local function DetachCurse(inst, target)
     if target.components.combat ~= nil then
         --target.components.combat.externaldamagemultipliers:RemoveModifier(inst)
-		target.vetcurse = false
+		--target.vetcurse = false
 		ForceToTakeUsualDamage(target)
 		ForceToTakeUsualHunger(target)
 		target:RemoveTag("vetcurse")
