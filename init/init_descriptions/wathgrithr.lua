@@ -250,7 +250,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.ANCIENT_AMULET_RED = "My soul belongs to war!"
 	DESCRIBE.UM_BEAR_TRAP = "Disarming it would be easy."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Disarming it would be easy."
-	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE = "A dubious weapon!"
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "A devious weapon!"
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "A devious weapon!"
 	DESCRIBE.CORNCAN = "Food that can survive a voyage!"
 	DESCRIBE.SKULLCHEST_CHILD = "The gods keep my spoils safe."
 	

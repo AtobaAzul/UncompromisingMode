@@ -393,6 +393,8 @@ Assets = {
 	Asset("ANIM", "anim/um_trap_snare.zip"),
 	Asset("ANIM", "anim/um_bear_trap.zip"),
 	Asset("ANIM", "anim/um_bear_trap_old.zip"),
+	Asset("ANIM", "anim/um_bear_trap_tooth.zip"),
+	Asset("ANIM", "anim/um_bear_trap_gold.zip"),
 	Asset("ANIM", "anim/swap_slobberlobber.zip"),
 	Asset("ANIM", "anim/swap_beargerclaw.zip"),
 	Asset("ANIM", "anim/slobberlobber.zip"),
@@ -407,6 +409,8 @@ Assets = {
 	Asset("ANIM", "anim/hat_gore_horn_swap_on.zip"),
 	Asset("ANIM", "anim/hat_gore_horn_swap_off.zip"),
 	Asset("ANIM", "anim/swap_um_beartrap.zip"),
+	Asset("ANIM", "anim/swap_um_beartrap_tooth.zip"),
+	Asset("ANIM", "anim/swap_um_beartrap_gold.zip"),
 	
 	
 	Asset("ANIM", "anim/carnival_host_death.zip"),
@@ -427,6 +431,10 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/slobberlobber.xml"),
 	Asset("IMAGE", "images/inventoryimages/um_bear_trap_equippable.tex"),
 	Asset("ATLAS", "images/inventoryimages/um_bear_trap_equippable.xml"),
+	Asset("IMAGE", "images/inventoryimages/um_bear_trap_equippable_tooth.tex"),
+	Asset("ATLAS", "images/inventoryimages/um_bear_trap_equippable_tooth.xml"),
+	Asset("IMAGE", "images/inventoryimages/um_bear_trap_equippable_gold.tex"),
+	Asset("ATLAS", "images/inventoryimages/um_bear_trap_equippable_gold.xml"),
 	
 	Asset("ANIM", "anim/armor_steelsweater.zip"),
 	Asset("ANIM", "anim/steelsweater.zip"),

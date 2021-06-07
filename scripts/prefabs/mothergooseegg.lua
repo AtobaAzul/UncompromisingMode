@@ -87,7 +87,9 @@ local function MakeWorkable(inst, bool)
             end
         end)
     else
-        inst:RemoveComponent("bloomer")
+		if inst.components.bloomer then
+			inst.components.bloomer:PopBloom(inst)
+		end
         inst:RemoveComponent("workable")
     end
 end
