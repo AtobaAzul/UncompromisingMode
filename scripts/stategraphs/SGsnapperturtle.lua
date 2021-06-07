@@ -34,7 +34,7 @@ local events =
 		if not (inst.components.timer == nil or inst.components.timer:TimerExists("dospin")) then
         inst.sg:GoToState("speen_pre", data.target)
 		else
-		inst.sg:GoToState("speen_pre",data.target)--"attack", data.target) 
+		inst.sg:GoToState("attack", data.target) 
 		end
 	end
 	end),
@@ -85,8 +85,8 @@ local states =
         timeline =
         {
 
-            TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.attack) end),
-            TimeEvent(16*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+            TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.attack) end),
+            TimeEvent(8*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
 
         events =
@@ -122,7 +122,9 @@ local states =
 
         events =
         {
-            EventHandler("animqueueover", function(inst) inst.sg:GoToState("speen_loop") end),
+            EventHandler("animqueueover", function(inst) 
+			inst:AddTag("speen")
+			inst.sg:GoToState("speen_loop") end),
         },
     },
 
@@ -132,6 +134,7 @@ local states =
 
         onenter = function(inst, target)
             inst.sg.statemem.target = target
+			inst:AddTag("speen")
             inst.AnimState:PlayAnimation("spin_loop",true)
 			inst.velx = 0
 			inst.velz = 0
@@ -141,13 +144,6 @@ local states =
 					inst.sg:GoToState("speen_pst")
 				end
         end,
-
-        timeline =
-        {
-
-            TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.attack) end),
-            TimeEvent(16*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
-        },
 		onupdate = function(inst)
 			--if inst.sg.statemem.move then
 				if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
@@ -174,12 +170,13 @@ local states =
 					inst.Physics:SetMotorVel(newvelx,0,newvelz)
 					
 					if inst.countersplash == nil then
-						inst.countersplash = 1
+						inst.countersplash = 0.5
 					else
 						inst.countersplash = inst.countersplash - 0.1
 					end
 					if inst.countersplash < 0 then
 						Splash(inst)
+						inst.components.combat:DoAreaAttack(inst, 3, nil, nil, {"_combat"}, { "snappingturtle", "ghost" })
 						inst.countersplash = 1
 					end
 				else
@@ -189,9 +186,10 @@ local states =
     },
 State{
         name = "speen_pst",
-        tags = {"busy" },
+        tags = {"busy"},
 
         onenter = function(inst)
+			inst:RemoveTag("speen")
             inst.Physics:Stop()
 			local x,y,z = inst.Transform:GetWorldPosition()
 			MakeCharacterPhysics(inst, 10, .5)
