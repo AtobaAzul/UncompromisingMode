@@ -5,9 +5,9 @@ env.AddStategraphPostInit("beefalo", function(inst)
 local events={
 EventHandler("doattack", function(inst)
                                 local nstate = "attack"
-								print("chargeattack2")
+								--print("chargeattack2")
                                 if inst.sg:HasStateTag("charging") or inst:HasTag("chargespeed") then
-									print("chargeattack1")
+									--print("chargeattack1")
                                     nstate = "chargeattack"
                                 end
                                 if inst.components.health and not inst.components.health:IsDead()
@@ -91,7 +91,8 @@ local states = {
                 inst:PushEvent("attackstart")
 				if inst.components.combat ~= nil then
 				inst.components.combat:ResetCooldown()
-				end 
+				end
+				inst:DoTaskInTime(2,function(inst) if inst:HasTag("chargespeed") then inst:RemoveTag("chargespeed") end end)
 				end),
             },
         },
