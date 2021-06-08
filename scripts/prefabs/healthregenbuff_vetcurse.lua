@@ -20,7 +20,7 @@ local function OnAttached(inst, target, followsymbol, followoffset, data)
 	
 	--local warlybuff = target:HasTag("warlybuffed") and 2 or target:HasTag("vetcurse") and 0.5 or 1
 	local warlybuff = (target:HasTag("warlybuffed") and (target:HasTag("vetcurse") and 1.8 or 2)) or target:HasTag("vetcurse") and 0.8 or 1
-	print(warlybuff)
+	--print(warlybuff)
 	duration = duration / warlybuff
 
     inst.entity:SetParent(target.entity)
@@ -43,7 +43,7 @@ local function OnExtended(inst, target, data)
 	
 	--local warlybuff = target:HasTag("warlybuffed") and 2 or target:HasTag("vetcurse") and 0.5 or 1
 	local warlybuff = (target:HasTag("warlybuffed") and (target:HasTag("vetcurse") and 1.8 or 2)) or target:HasTag("vetcurse") and 0.8 or 1
-	print(warlybuff)
+	--print(warlybuff)
 	duration = duration / warlybuff
 	
 
@@ -112,7 +112,7 @@ local function OnAttached2(inst, target, followsymbol, followoffset, data)
 	
 	--local warlybuff = target:HasTag("warlybuffed") and 2 or target:HasTag("vetcurse") and 0.5 or 1
 	local warlybuff = (target:HasTag("warlybuffed") and (target:HasTag("vetcurse") and 1.8 or 2)) or target:HasTag("vetcurse") and 0.8 or 1
-	print(warlybuff)
+	--print(warlybuff)
 	duration = duration / warlybuff
 
     inst.entity:SetParent(target.entity)
@@ -136,7 +136,7 @@ local function OnExtended2(inst, target, data)
 	
 	--local warlybuff = target:HasTag("warlybuffed") and 2 or target:HasTag("vetcurse") and 0.5 or 1
 	local warlybuff = (target:HasTag("warlybuffed") and (target:HasTag("vetcurse") and 1.8 or 2)) or target:HasTag("vetcurse") and 0.8 or 1
-	print(warlybuff)
+	--print(warlybuff)
 	duration = duration / warlybuff
 
     local time_remaining = inst.components.timer:GetTimeLeft("regenover")
