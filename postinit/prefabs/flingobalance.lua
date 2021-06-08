@@ -4,6 +4,8 @@ GLOBAL.setfenv(1, GLOBAL)
 require "prefabutil"
 local easing = require("easing")
 -----------------------------------------------------------------
+
+if TUNING.DSTU.FLINGO_SETTING == "Fuelmuncher" then
 local function LaunchProjectile2(inst, targetpos)
     local x, y, z = inst.Transform:GetWorldPosition()
 
@@ -36,3 +38,13 @@ env.AddPrefabPostInit("firesuppressor", function (inst)
 	inst.LaunchProjectile = LaunchProjectile2
 
 end)
+end
+
+if TUNING.DSTU.FLINGO_SETTING == "Waterballs" then
+env.AddPrefabPostInit("snowball", function (inst)
+    if not TheWorld.ismastersim then
+		return
+	end
+	inst.components.wateryprotection.addcoldness = 0
+end)
+end

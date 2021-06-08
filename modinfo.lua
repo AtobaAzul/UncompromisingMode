@@ -95,6 +95,20 @@ configuration_options =
 	BinaryConfig("hangyperds", "Starving Gobblers", "Gobblers are now more agressive and will attempt to take berries out of the player's inventory.", true),
 	BinaryConfig("lifeamulet", "Life Giving Amulet Changes", "The Life Giving Amulet acts like vanilla Don't Starve, only reviving when worn upon death. \nIts hunger > health conversion ticks much faster.", true),
     
+	{
+		name = "flingo_setting",
+		label = "Flingomatic Nerf",
+		hover = "Select the ",
+		options =
+		{
+			{description = "Fuel loss in use", data = "Fuelmuncher"},
+			{description = "No longer freezes", data = "Waterballs"},
+			{description = "None", data = "Newb"},
+		},
+		default = "Fuelmuncher",
+	},
+	
+	SkipSpace(),
 ------------------------------
 -- Character Reworks --
 ------------------------------
@@ -106,7 +120,8 @@ configuration_options =
 	BinaryConfig("wolfgang", "Improved/Balanced Wolfgang", "Wolfgang gains new perks and downsides. Read the patch notes included in the mod folder or workshop for details.", true),
 	BinaryConfig("maxhealthwell", "New Maxwell Downside", "Maxwell's max health is reduced by 20% of the damage he takes.", true),
 	BinaryConfig("winonaworker", "Improved Winona", "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.", true),
-
+	
+	SkipSpace(),
 ------------------------------
 -- Weather --
 ------------------------------

@@ -24,6 +24,7 @@ local component_post = {
 }
 
 local prefab_post = {
+	"flingobalance",
 	"chester",
 	"mushlight",
 	"flower",
@@ -78,7 +79,6 @@ local prefab_post = {
 	--"rock_avocado_fruit_sprout_sapling",
 	"icepack",
 	"heatrock",
-	"firesuppressor",
 	"dragonfly_spawner",
 	"rneghostfire",
 	"frog", -- also toad
