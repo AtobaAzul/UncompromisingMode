@@ -98,7 +98,7 @@ configuration_options =
 	{
 		name = "flingo_setting",
 		label = "Flingomatic Nerf",
-		hover = "Select the ",
+		hover = "Pick the flingomatic nerf you would like to play around.",
 		options =
 		{
 			{description = "Fuel loss in use", data = "Fuelmuncher"},
