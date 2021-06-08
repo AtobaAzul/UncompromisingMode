@@ -231,7 +231,7 @@ local function OnExplodeFn(inst)
     inst.SoundEmitter:KillSound("pawn_hiss")
     local explosive = SpawnPrefab("explode_small")
 	explosive.Transform:SetPosition(inst.Transform:GetWorldPosition())
-	explosive.Transform:SetScale(2, 2, 2)
+	explosive.Transform:SetScale(3, 3, 3)
 end
 
 local function SpawnAmalgams(inst)

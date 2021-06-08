@@ -279,9 +279,9 @@ local function frockfn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("armor_featherfrock")
-    inst.AnimState:SetBuild("armor_featherfrock")
-    inst.AnimState:PlayAnimation("anim")
+    inst.AnimState:SetBank("armor_featherfrock_ground")
+    inst.AnimState:SetBuild("armor_featherfrock_ground")
+    inst.AnimState:PlayAnimation("idle")
 	
 	--inst:AddTag("wingsuit")
     --inst:AddTag("backpack")
