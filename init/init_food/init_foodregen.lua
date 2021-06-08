@@ -14,7 +14,7 @@ local function oneat(inst, data)
 		inst.sanityabsorption = inst.components.eater.sanityabsorption
 	end
 	
-	print(inst.healthabsorption, inst.hungerabsorption, inst.sanityabsorption)
+	--print(inst.healthabsorption, inst.hungerabsorption, inst.sanityabsorption)
 
 	inst.components.eater:SetAbsorptionModifiers(0, inst.hungerabsorption or 1, 0)
 		

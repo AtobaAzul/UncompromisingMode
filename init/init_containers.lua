@@ -247,32 +247,24 @@ local function addItemSlotNetvarsInContainer(inst)
   end
   AddPrefabPostInit("container_classified", addItemSlotNetvarsInContainer)
   
-  local widgetsetup_Base = containers.widgetsetup or function() return true end
-  function containers.widgetsetup(container, prefab, data, ...)
-  	local updated = false
-	local tempPrefab = prefab or container.inst.prefab
-  	local result = widgetsetup_Base(container, prefab, data, ...)
-	
-	if tempPrefab == "dragonflychest" then
-  		container.widget.slotpos = {}
-  
-		for y = 2.5, -1.5, -1 do
-			for x = 0, 4 do
-  				table.insert(container.widget.slotpos, Vector3(80*x-80*2, 80*y-80*2+120,0))
-  			end
-  		end
-  
-  		container.widget.animbank = nil
-  		container.widget.animbuild = nil
-  		container.widget.bgatlas = "images/dragonflycontainerborder.xml"
-  		container.widget.bgimage = "dragonflycontainerborder.tex"
-  		container.widget.bgimagetint = {r=.82,g=.77,b=.7,a=1}
-		
-  		updated = true
+containers.params.dragonflychest =
+{
+    widget =
+    {
+        slotpos = {},
+  		animbank = nil,
+  		animbuild = nil,
+        bgatlas = "images/dragonflycontainerborder.xml",
+        bgimage = "dragonflycontainerborder.tex",
+		bgimagetint = {r=.82,g=.77,b=.7,a=1},
+        pos = Vector3(0, 220, 0),
+        side_align_tip = 160,
+    },
+    type = "chest",
+}
+
+for y = 2.5, -1.5, -1 do
+	for x = 0, 4 do
+		table.insert(containers.params.dragonflychest.widget.slotpos, Vector3(80*x-80*2, 80*y-80*2+120,0))
   	end
-  	if updated then
-  		container:SetNumSlots(container.widget.slotpos ~= nil and #container.widget.slotpos or 0)
-  	end
-	
-	return result
 end
