@@ -59,7 +59,7 @@ local states =
         name = "idle",
         tags = { "idle", "canrotate" },
         onenter = function(inst, playanim)
-            inst.SoundEmitter:PlaySound(inst.sounds.pant)
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/slurtle/idle")
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("idle_loop", true)
             inst.sg:SetTimeout(2*math.random()+.5)
@@ -85,7 +85,7 @@ local states =
         timeline =
         {
 
-            TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.attack) end),
+            TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/slurtle/bite") end),
             TimeEvent(8*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
 
@@ -116,7 +116,7 @@ local states =
         timeline =
         {
 
-            TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.attack) end),
+            TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/slurtle/bite") end),
             TimeEvent(16*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
 
@@ -202,7 +202,7 @@ State{
         timeline =
         {
 
-            TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.attack) end),
+            TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/slurtle/bite") end),
             TimeEvent(16*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
 
@@ -224,7 +224,7 @@ State{
 
         timeline =
         {
-            TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.bite) end),
+            TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/slurtle/bite") end),
         },
 
         events =
@@ -265,8 +265,8 @@ State{
 
         timeline =
         {
-            TimeEvent(13 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.bark) end),
-            TimeEvent(24 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.bark) end),
+            TimeEvent(13 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/slurtle/taunt") end),
+            TimeEvent(24 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/slurtle/taunt") end),
         },
 
         events =
@@ -292,7 +292,7 @@ State{
             end
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
-            inst.SoundEmitter:PlaySound(inst.sounds.death)
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/slurtle/emerge")
             inst.components.lootdropper:DropLoot(inst:GetPosition())
         end,
 
@@ -423,7 +423,7 @@ CommonStates.AddSleepStates(states,
 {
     sleeptimeline =
     {
-        TimeEvent(30 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.sleep) end),
+        TimeEvent(30 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/slurtle/idle") end),
     },
 })
 

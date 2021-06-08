@@ -303,6 +303,7 @@ Assets = {
 	Asset("ANIM", "anim/trapdoorgrass.zip"),
 	Asset("ANIM", "anim/lureplague_rat.zip"),
 	Asset("ANIM", "anim/snapperturtle.zip"),
+	Asset("ANIM", "anim/snapperturtlebaby.zip"),
 	Asset("ANIM", "anim/bush_marsh.zip"),
     Asset("ANIM", "anim/cursed_antler.zip"),
     Asset("ANIM", "anim/swap_cursed_antler.zip"),

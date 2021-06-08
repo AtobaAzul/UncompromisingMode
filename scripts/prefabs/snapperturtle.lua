@@ -1,18 +1,5 @@
 local brain = require("brains/snapperturtlebrain")
 
-local sounds =
-{
-    pant = "dontstarve/creatures/hound/pant",
-    attack = "dontstarve/creatures/hound/attack",
-    bite = "dontstarve/creatures/hound/bite",
-    bark = "dontstarve/creatures/hound/bark",
-    death = "dontstarve/creatures/hound/death",
-    sleep = "dontstarve/creatures/hound/sleep",
-    growl = "dontstarve/creatures/hound/growl",
-    howl = "dontstarve/creatures/together/clayhound/howl",
-    hurt = "dontstarve/creatures/hound/hurt",
-}
-
 SetSharedLootTable('snapperturtle',
 {
     {'meat', 1.000},
@@ -108,9 +95,7 @@ local function RetargetFn(inst)
 end
 
 
-local function fncommon(n, build, morphlist, custombrain, tag, data)
-	data = data or {}
-
+local function fncommon(build)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -128,13 +113,9 @@ local function fncommon(n, build, morphlist, custombrain, tag, data)
     inst:AddTag("scarytooceanprey")
 	inst:AddTag("snappingturtle")
 	inst:AddTag("creatureknockbackable")
-    if tag ~= nil then
-        inst:AddTag(tag)
-
-    end
-
+	
     inst.AnimState:SetBank("snapperturtle")
-    inst.AnimState:SetBuild("snapperturtle")
+    inst.AnimState:SetBuild(build)
     inst.AnimState:PlayAnimation("idle")
 	inst.Transform:SetScale(1,1,1)
 
@@ -146,7 +127,6 @@ local function fncommon(n, build, morphlist, custombrain, tag, data)
         return inst
     end
 
-    inst.sounds = sounds
 
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
 	inst.components.locomotor.walkspeed = TUNING.HOUND_SPEED/6
@@ -194,7 +174,7 @@ local function fncommon(n, build, morphlist, custombrain, tag, data)
     inst.components.combat:SetDefaultDamage(40)
     inst.components.combat:SetAttackPeriod(TUNING.HOUND_ATTACK_PERIOD)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
-    inst.components.combat:SetHurtSound(inst.sounds.hurt)
+    --inst.components.combat:SetHurtSound(inst.sounds.hurt)
 	inst.components.combat:SetRetargetFunction(1, RetargetFn)
 	inst.components.combat:SetRange(2)
 
@@ -226,7 +206,7 @@ local function fncommon(n, build, morphlist, custombrain, tag, data)
 end
 
 local function fndefault()
-    local inst = fncommon(nil, nil, nil, nil, nil, {amphibious = true, nil})
+    local inst = fncommon("snapperturtle")
 
     if not TheWorld.ismastersim then
         return inst
@@ -238,4 +218,18 @@ local function fndefault()
     return inst
 end
 
-return Prefab("snapperturtle", fndefault)
+local function fnbaby()
+    local inst = fncommon("snapperturtlebaby")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    MakeMediumFreezableCharacter(inst, "shelldown")
+    MakeMediumBurnableCharacter(inst, "shelldown")
+	inst.Transform:SetScale(0.6,0.6,0.6)
+    return inst
+end
+
+return Prefab("snapperturtle", fndefault),
+Prefab("snapperturtlebaby",fnbaby)
