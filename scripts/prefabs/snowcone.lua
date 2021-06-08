@@ -43,7 +43,7 @@ local function fn()
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime((2*TUNING.PERISH_TWO_DAY))
     inst.components.perishable:StartPerishing()
-    inst.components.perishable.onperishreplacement = nil
+	inst.components.perishable:SetOnPerishFn(function(inst) inst:Remove() end)
 
     MakeHauntableLaunchAndPerish(inst)
 	inst.components.edible:SetOnEatenFn(oneatenfn)
