@@ -54,8 +54,12 @@ local function OnExplode(inst, target)
 			inst.deathtask:Cancel()
 		end
 		inst.deathtask = nil
-	
-        target.components.combat:GetAttacked(inst, TUNING.TRAP_TEETH_DAMAGE)
+		
+		if inst.traptype == "gold" then
+			target.components.combat:GetAttacked(inst, TUNING.TRAP_TEETH_DAMAGE * 1.5)
+		else
+			target.components.combat:GetAttacked(inst, TUNING.TRAP_TEETH_DAMAGE)
+		end
 		
 		inst.latchedtarget = target
 		
@@ -73,7 +77,11 @@ local function OnExplode(inst, target)
 			inst:ListenForEvent("death", onfinished_normal, target)
 			inst:ListenForEvent("onremoved", onfinished_normal, target)
 			if target.components.locomotor ~= nil then
-				target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.3)
+				if inst.traptype ~= nil then
+					target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.3 + 0.15)
+				else
+					target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.3)
+				end
 				target._bear_trap_speedmulttask = target:DoTaskInTime(10, function(i) 
 					i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) 
 					i._bear_trap_speedmulttask = nil
@@ -550,7 +558,7 @@ local function oncollide_player(inst, other)
 end
 
 local function onequip(inst, owner)
-    owner.AnimState:OverrideSymbol("swap_object", "swap_um_beartrap", "swap_um_beartrap")
+    owner.AnimState:OverrideSymbol("swap_object", "swap_um_beartrap_"..inst.traptype, "swap_um_beartrap")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 end
@@ -567,7 +575,7 @@ local function onthrown_player(inst)
     inst.persists = false
 
     inst.AnimState:SetBank("um_bear_trap")
-    inst.AnimState:SetBuild("um_bear_trap")
+	--inst.AnimState:SetBuild("um_bear_trap")
     inst.AnimState:PlayAnimation("spin_loop", true)
 
     inst.Physics:SetMass(1)
@@ -599,7 +607,7 @@ local function ReticuleTargetFn()
     return pos
 end
 
-local function equipfn()
+local function equiptoothfn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -615,7 +623,7 @@ local function equipfn()
     --projectile (from complexprojectile component) added to pristine state for optimization
 	
     inst.AnimState:SetBank("um_bear_trap")
-    inst.AnimState:SetBuild("um_bear_trap")
+    inst.AnimState:SetBuild("um_bear_trap_tooth")
     inst.AnimState:PlayAnimation("idle_active")
 	
 	inst:AddTag("weapon")
@@ -664,9 +672,11 @@ local function equipfn()
 	
 	inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/um_bear_trap_equippable.xml"
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/um_bear_trap_equippable_tooth.xml"
 	
     inst:AddComponent("inspectable")
+	
+	inst.traptype = "tooth"
 	
 	inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)
@@ -688,9 +698,104 @@ local function equipfn()
     return inst
 end
 
+local function equipgoldfn()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+	
+	local shadow = inst.entity:AddDynamicShadow()
+    shadow:SetSize( 1.5, 1 )
+
+    MakeInventoryPhysics(inst)
+
+    --projectile (from complexprojectile component) added to pristine state for optimization
+	
+    inst.AnimState:SetBank("um_bear_trap")
+    inst.AnimState:SetBuild("um_bear_trap_gold")
+    inst.AnimState:PlayAnimation("idle_active")
+	
+	inst:AddTag("weapon")
+	inst:AddTag("soulless")
+    inst:AddTag("trap")
+    inst:AddTag("bear_trap")
+    inst:AddTag("smallcreature")
+    inst:AddTag("mech")
+	
+    MakeInventoryFloatable(inst, "med", 0.05, 0.65)
+
+    inst.entity:SetPristine()
+	
+	inst:AddComponent("reticule")
+    inst.components.reticule.targetfn = ReticuleTargetFn
+    inst.components.reticule.ease = true
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+	inst:AddComponent("bloomer")
+	inst.components.bloomer:PushBloom(inst, "shaders/anim.ksh", 1)
+
+	inst.latchedtarget = nil
+	inst.Snapped = false
+
+    inst:AddComponent("locomotor")
+	
+    inst:AddComponent("mine")
+    inst.components.mine:SetRadius(TUNING.TRAP_TEETH_RADIUS * 1.3)
+    inst.components.mine:SetAlignment("player")
+    inst.components.mine:SetOnExplodeFn(OnExplode)
+    inst.components.mine:SetOnResetFn(OnReset)
+    inst.components.mine:SetOnSprungFn(SetSprung)
+    inst.components.mine:SetOnDeactivateFn(SetInactive)
+    inst.components.mine:SetTestTimeFn(calculate_mine_test_time)
+
+    inst:AddComponent("complexprojectile")
+    inst.components.complexprojectile:SetHorizontalSpeed(15)
+    inst.components.complexprojectile:SetGravity(-35)
+    inst.components.complexprojectile:SetLaunchOffset(Vector3(2, 2, 0))
+    inst.components.complexprojectile:SetOnLaunch(onthrown_player)
+    inst.components.complexprojectile:SetOnHit(OnHitInk)
+	
+    inst:AddComponent("weapon")
+    inst.components.weapon:SetDamage(0)
+    inst.components.weapon:SetRange(20, 0.5)
+	
+	inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/um_bear_trap_equippable_gold.xml"
+	
+    inst:AddComponent("inspectable")
+	
+	inst.traptype = "gold"
+	
+	inst:AddComponent("equippable")
+    inst.components.equippable:SetOnEquip(onequip)
+    inst.components.equippable:SetOnUnequip(onunequip)
+	
+	inst:AddComponent("health")
+	inst.components.health.canmurder = false
+    inst.components.health:SetMaxHealth(TUNING.WALRUS_HEALTH / 1.5)
+    inst:ListenForEvent("death", onfinished_normal)
+
+    inst:AddComponent("combat")
+    inst:ListenForEvent("attacked", OnAttacked)
+
+    inst:AddComponent("hauntable")
+    inst.components.hauntable:SetOnHauntFn(OnHaunt)
+
+    MakeHauntableLaunch(inst)
+
+    return inst
+end
+
 return Prefab("um_bear_trap", common_fn),
     Prefab("um_bear_trap_old", old_fn),
     MakePlacer("um_bear_trap_placer", "trap_teeth", "trap_teeth", "idle"),
     Prefab("um_bear_trap_projectile", projectilefn),
 	Prefab("ghost_walrus", ghost_walrusfn),
-	Prefab("um_bear_trap_equippable", equipfn)
+	Prefab("um_bear_trap_equippable_tooth", equiptoothfn),
+	Prefab("um_bear_trap_equippable_gold", equipgoldfn)

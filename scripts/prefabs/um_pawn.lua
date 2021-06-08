@@ -346,7 +346,7 @@ local function pawn_common(pawntype)
     inst:AddTag("cavedweller") 
     inst:AddTag("uncompromising_pawn") 
     inst:AddTag("smallcreature")
-    inst:AddTag("chess")
+    --inst:AddTag("chess")
 
     inst.entity:SetPristine()
 

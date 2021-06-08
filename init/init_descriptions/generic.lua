@@ -318,7 +318,8 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.ANCIENT_AMULET_RED = "It's tugging at my heart strings!"
 	DESCRIBE.UM_BEAR_TRAP = "Best not step on that."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Someone left this here."
-	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE = "Don't get snappy with me!"
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "Don't get snappy with me!"
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Don't get snappy with me!"
 	DESCRIBE.CORNCAN = "Where did this can come from?"
 	DESCRIBE.SKULLCHEST_CHILD = "If only I could fit inside."
 	

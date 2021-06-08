@@ -252,7 +252,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.ANCIENT_AMULET_RED = "How magic rock have soul?"
 	DESCRIBE.UM_BEAR_TRAP = "Ice house people have mean things."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Ice house people have mean things."
-	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE = "Snappy trappy."
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "Snappy trappy."
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Snappy trappy."
 	DESCRIBE.CORNCAN = "Where come from? Pigfolk?"
 	DESCRIBE.SKULLCHEST_CHILD = "Box for things, but is weird."
 	
