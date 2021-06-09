@@ -38,7 +38,7 @@ local function OnTimerDone(inst, data)
     end
 end
 
-local function OnExtended(inst, target, data)
+local function OnExtended(inst, target, followsymbol, followoffset, data)
 	local duration = data ~= nil and data.duration and (data.duration / 2) or 1
 	
 	--local warlybuff = target:HasTag("warlybuffed") and 2 or target:HasTag("vetcurse") and 0.5 or 1
@@ -130,7 +130,7 @@ local function OnTimerDone2(inst, data)
     end
 end
 
-local function OnExtended2(inst, target, data)
+local function OnExtended2(inst, target, followsymbol, followoffset, data)
 	
 	local duration = data ~= nil and data.duration and (data.duration / 2) or 1
 	
