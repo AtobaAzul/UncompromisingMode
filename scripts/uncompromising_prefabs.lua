@@ -18,6 +18,7 @@ return {
 	"mock_dragonfly",
 	"moonmaw_dragonfly",
 	"moonmaw_glass",
+	"moonmaw_lavae",
 	"lavaspit",
 	--"sandhill",
 	"snowpile",

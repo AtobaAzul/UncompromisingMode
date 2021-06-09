@@ -74,6 +74,15 @@ inst:DoTaskInTime(time,function(inst)
 end)
 end
 
+local function spawnlong(inst,time)
+	AreaAttack(inst)
+	inst:Show()
+    inst.AnimState:PlayAnimation("spawn")
+    inst.AnimState:PushAnimation("idle1",true)
+	
+	inst.components.timer:StartTimer("defusetime", time)
+end
+
 local function fn(pondtype)
     local inst = CreateEntity()
 
@@ -146,6 +155,7 @@ local function fn(pondtype)
     inst.OnSave = on_save
     inst.OnLoad = on_load
     inst.spawnin = spawnin
+	inst.spawnlong = spawnlong
 	inst:DoTaskInTime(0.1, function(inst) if inst.caster == nil then inst:Remove() end end)
     return inst
 end

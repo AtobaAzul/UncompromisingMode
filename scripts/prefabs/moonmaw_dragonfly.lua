@@ -261,7 +261,6 @@ local function fn(Sim)
     inst.DynamicShadow:SetSize(6, 3.5)
     
     inst.Transform:SetSixFaced()
-    inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/fly", "flying")
 
     inst.Transform:SetScale(1.3,1.3,1.3)
     

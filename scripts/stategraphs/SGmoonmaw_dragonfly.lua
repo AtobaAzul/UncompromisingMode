@@ -106,7 +106,7 @@ local states=
 				inst:DoTaskInTime(0.5, function(inst)
 				local fx = SpawnPrefab("moonmaw_glass")
 				fx.caster = inst
-				fx.spawnin(fx,0)
+				fx.spawnlong(fx,10+math.random(1,10))
                 fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
                 fx.Transform:SetRotation(inst.Transform:GetRotation())
 				end)

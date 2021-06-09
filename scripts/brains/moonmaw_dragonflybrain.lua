@@ -43,8 +43,13 @@ local function EatAshAction(inst)
     end
 end
 
+local function GlassNearby(inst)
+if FindEntity(inst,5,nil,{"moonglass"}) then
+return
+end
+end
 local function ShouldSpitFn(inst)
-    if inst.sg:HasStateTag("sleeping") or inst.num_targets_vomited >= TUNING.DRAGONFLY_VOMIT_TARGETS_FOR_SATISFIED or inst.hassleepdestination then return false end
+    if inst.sg:HasStateTag("sleeping") or inst.num_targets_vomited >= TUNING.DRAGONFLY_VOMIT_TARGETS_FOR_SATISFIED or inst.hassleepdestination or GlassNearby(inst) then return false end
     if not inst.recently_frozen and not inst.flame_on then
         if not inst.last_spit_time then 
             if inst:GetTimeAlive() > 5 then return true end
