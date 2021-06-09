@@ -12,6 +12,10 @@ local LinearCircler = Class(function(self, inst)
 
     self.distance = 1
     self.distance_mod = 1
+    self.distance_limit = 18
+    self.distance_max = 15
+    self.distance_max_clockwise = 17
+    self.slowextend_range = 3
 
     self.onaccelerate = nil
     self.numAccelerates = 0
@@ -87,11 +91,11 @@ function LinearCircler:OnUpdate(dt)
 	
 	if self.retract and self.distance > 1 and self.clockwise then
 		self.distance = self.distance - 0.3
-	elseif self.distance < (18 / self.distance_mod) and not self.retract then
-		if self.distance >= (self.clockwise and (17 / self.distance_mod) or (15 / self.distance_mod)) then
+	elseif self.distance < (self.distance_limit / self.distance_mod) and not self.retract then
+		if self.distance >= (self.clockwise and (self.distance_max_clockwise / self.distance_mod) or (self.distance_max / self.distance_mod)) then
 			self.retract = true
 		end
-		if self.distance < 3 then
+		if self.distance < self.slowextend_range then
 			self.distance = self.distance + 0.05
 		else
 			self.distance = self.distance + 0.2
