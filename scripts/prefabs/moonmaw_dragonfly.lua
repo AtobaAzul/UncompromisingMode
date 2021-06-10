@@ -244,6 +244,21 @@ local function OnRemove(inst)
     TheWorld:PushEvent("mockflyremoved", inst)
 end
 
+local function SpawnLavae(inst)
+	local x,y,z = inst.Transform:GetWorldPosition()
+	local LIMIT = 4
+	inst.lavae = {}
+	for i = 1,8 do
+		inst.lavae[i] = SpawnPrefab("moonmaw_lavae_ring")
+		inst.lavae[i].WINDSTAFF_CASTER = inst
+		inst.lavae[i].components.linearcircler:SetCircleTarget(inst)
+		inst.lavae[i].components.linearcircler:Start()
+		inst.lavae[i].components.linearcircler.randAng = i*0.125
+		inst.lavae[i].components.linearcircler.clockwise = false
+		inst.lavae[i].components.linearcircler.distance_limit = LIMIT
+	end
+end
+
 local function fn(Sim)
     local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
@@ -398,7 +413,8 @@ local function fn(Sim)
     inst:ListenForEvent("death", OnDead)
 
     --inst:ListenForEvent("timerdone", RockThrowTimer)
-
+	SpawnLavae(inst)
+	
     return inst
 end
 

@@ -19,7 +19,7 @@ local function destroystuff(inst)
     local ents = TheSim:FindEntities(x, y, z, sizecheck, nil, TARGET_IGNORE_TAGS, TARGET_TAGS)
     for i, v in ipairs(ents) do
         --stuff might become invalid as we work or damage during iteration
-        if v ~= inst.WINDSTAFF_CASTER and v:IsValid() then
+        if v ~= inst.WINDSTAFF_CASTER and v:IsValid() and inst.destroy == true then
             if v.components.health ~= nil and
                 not v.components.health:IsDead() and
                 v.components.combat ~= nil and
@@ -74,7 +74,14 @@ local function grow(inst, time, startsize, endsize)
 	inst.components.sizetweener:StartTween(2, 1.5, shrinktask)
 end
 
-local function lavae_fn()
+local function Reposition(inst)
+if inst.WINDSTAFF_CASTER ~= nil then
+	local x,y,z = inst.WINDSTAFF_CASTER.Transform:GetWorldPosition()
+	inst.Transform:SetPosition(x,y,z)
+end
+end
+
+local function lavaering_fn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -134,12 +141,14 @@ local function lavae_fn()
     --inst.SetDuration = SetDuration
     --inst:SetDuration(3000)
 	
+	inst.Destroy = false
+	
 	inst:DoTaskInTime(1, function(inst)
 		inst:DoPeriodicTask(.4, destroystuff)
 	end)
-
+	inst:DoTaskInTime(0.1,Reposition)
     return inst
 end
 
 
-return Prefab("moonmaw_lavae", lavae_fn)
+return Prefab("moonmaw_lavae_ring", lavaering_fn)
