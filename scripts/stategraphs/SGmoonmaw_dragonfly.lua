@@ -49,8 +49,18 @@ local function onattackfn(inst)
     if inst.components.health ~= nil and
         not inst.components.health:IsDead() and
         (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
+		local lavae = false
+		for i = 1,8 do
+			if inst.lavae[i] ~= nil then
+			lavae = true
+			end
+		end
 		
-        inst.sg:GoToState("attack")
+		if lavae == true then
+			inst.sg:GoToState("lavaeattack")
+		else
+			inst.sg:GoToState("attack")
+		end
     end
 end
 
@@ -270,6 +280,47 @@ local states=
         },
     },
 
+    State{
+        name = "lavaeattack",
+        tags = {"attack", "busy", "canrotate"},
+        
+        onenter = function(inst)
+		inst.Physics:Stop()
+        inst.components.combat:StartAttack()
+        inst.AnimState:PlayAnimation("spit")
+		for i = 1,8 do
+			if inst.lavae[i] ~= nil then
+				inst.lavae[i].destroy = true
+				inst.lavae[i].components.linearcircler.speed = 10
+			end
+		end
+			
+        end,
+
+        timeline=
+        {
+            TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/swipe") end),
+            TimeEvent(25*FRAMES, function(inst) 
+                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/punchimpact")
+                inst.components.combat:DoAttack()
+				SpawnMoonGlass(inst)
+            end),
+        },
+        
+        
+        events=
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle")
+			for i = 1,8 do
+				if inst.lavae[i] ~= nil then
+					inst.lavae[i].destroy = false
+					inst.lavae[i].components.linearcircler.speed = 10
+				end
+			end
+		end),
+        },
+    },
+	
     State{
         name = "attack",
         tags = {"attack", "busy", "canrotate"},

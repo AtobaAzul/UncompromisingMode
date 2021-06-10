@@ -256,6 +256,7 @@ local function SpawnLavae(inst)
 		inst.lavae[i].components.linearcircler.randAng = i*0.125
 		inst.lavae[i].components.linearcircler.clockwise = false
 		inst.lavae[i].components.linearcircler.distance_limit = LIMIT
+		inst.lavae[i].components.linearcircler.speed = 400
 	end
 end
 

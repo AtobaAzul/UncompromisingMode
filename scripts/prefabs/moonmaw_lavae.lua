@@ -96,6 +96,11 @@ local function lavaering_fn()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 	inst.entity:AddLight()
+	inst.entity:AddDynamicShadow()
+	
+	inst.DynamicShadow:SetSize(2, 2)
+	
+	
 	inst.AnimState:SetFinalOffset(2)
     inst.AnimState:SetBank("moonmaw_lavae")
     inst.AnimState:SetBuild("moonmaw_lavae")
