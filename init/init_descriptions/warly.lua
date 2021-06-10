@@ -46,8 +46,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	
     DESCRIBE.GASMASK = "I could use this in the smoke house."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	DESCRIBE.MOONMAW_DRAGONFLY = "Why does this world keep assailing me, I just want to cook!"
-	DESCRIBE.MOONMAW_GLASS = DESCRIBE.MOONSTORM_GLASS
 	DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
 	DESCRIBE.SPIDERQUEENCORPSE = "Mon dieu! That must get rid of!"
 	ANNOUNCE.ANNOUNCE_SNEEZE = "Atchoum!"
@@ -285,4 +283,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
 	DESCRIBE.THEATERCORN = "Theater food always improves any experience."
-	DESCRIBE.DEERCLOPS_BARRIER = "I must find a weak point in this barrier." 
+	DESCRIBE.DEERCLOPS_BARRIER = "I must find a weak point in this barrier."
+	
+
+	--Stuff for Canis to check
+	DESCRIBE.MOONMAW_DRAGONFLY = "Why does this world keep assailing me? I simply wish to cook!"
+	DESCRIBE.MOONMAW_LAVAE = ""
+	DESCRIBE.SNAPPERTURTLE = ""
+	DESCRIBE.SNAPPERTURTLEBABY = ""
+	DESCRIBE.SNAPPERTURTLENEST = ""
+	--Stuff for Canis to check	

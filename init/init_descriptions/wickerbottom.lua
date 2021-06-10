@@ -47,8 +47,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	
     DESCRIBE.GASMASK = "I can alleviate these dreadful allergies now."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
-	DESCRIBE.MOONMAW_DRAGONFLY = "If the species couldn't get any more strange."
-	DESCRIBE.MOONMAW_GLASS = DESCRIBE.MOONSTORM_GLASS
 	DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
 	DESCRIBE.SPIDERQUEENCORPSE = "A Royal Arachnic, posthumous."
 	ANNOUNCE.ANNOUNCE_SNEEZE = "Ahh... CHOOOOOOOOO!"
@@ -291,4 +289,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
 	DESCRIBE.THEATERCORN = "I wonder where the bag came from."
-	DESCRIBE.DEERCLOPS_BARRIER = "The monster's proficiency in ice magic seems to have improved." 
+	DESCRIBE.DEERCLOPS_BARRIER = "The monster's proficiency in ice magic seems to have improved."
+
+	--Stuff for Canis to check
+	DESCRIBE.MOONMAW_DRAGONFLY = "If this species couldn't get any more strange."
+	DESCRIBE.MOONMAW_LAVAE = ""
+	DESCRIBE.SNAPPERTURTLE = ""
+	DESCRIBE.SNAPPERTURTLEBABY = ""
+	DESCRIBE.SNAPPERTURTLENEST = ""
+	--Stuff for Canis to check	
