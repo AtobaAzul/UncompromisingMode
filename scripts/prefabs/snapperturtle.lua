@@ -32,7 +32,7 @@ local function OnNewTarget(inst, data)
     end
 end
 
-
+--From hound, needs updating
 local function KeepTarget(inst, target)
     local leader = inst.components.follower.leader
     local playerleader = leader ~= nil and leader:HasTag("player")
@@ -47,6 +47,11 @@ end
 
 
 local function OnAttacked(inst, data)
+if inst.sg:HasStateTag("hiding") and not data.attacker:HasTag("player") then
+	if data.attacker.components.combat ~= nil and data.attacker.components.combat.target ~= nil and data.attacker.components.combat.target == inst then
+	data.attacker.components.combat:DropTarget()
+	end
+else
     inst.components.combat:SetTarget(data.attacker)
     inst.components.combat:ShareTarget(data.attacker, SHARE_TARGET_DIST,
         function(dude)
@@ -54,6 +59,7 @@ local function OnAttacked(inst, data)
 				and dude:HasTag("snappingturtle")
                 and data.attacker ~= (dude.components.follower ~= nil and dude.components.follower.leader or nil)
         end, 5)
+end
 end
 
 local function OnAttackOther(inst, data)
@@ -168,7 +174,7 @@ local function fncommon(build)
     inst:AddComponent("entitytracker")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(400)
+    inst.components.health:SetMaxHealth(900)
 
     inst:AddComponent("combat")
     inst.components.combat:SetDefaultDamage(40)

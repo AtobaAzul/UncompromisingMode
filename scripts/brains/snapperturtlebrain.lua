@@ -7,6 +7,13 @@ require "behaviours/leash"
 require "behaviours/faceentity"
 require "behaviours/doaction"
 require "behaviours/standstill"
+require "behaviours/useshield"
+
+
+local DAMAGE_UNTIL_SHIELD = TUNING.SLURTLE_DAMAGE_UNTIL_SHIELD
+local AVOID_PROJECTILE_ATTACKS = true
+local HIDE_WHEN_SCARED = false
+local SHIELD_TIME = 10
 
 local SnapperturtleBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
@@ -82,6 +89,7 @@ function SnapperturtleBrain:OnStart()
         {
             WhileNode(function() return not self.inst.sg:HasStateTag("jumping") end, "NotJumpingBehaviour",
                 PriorityNode({
+					UseShield(self.inst, DAMAGE_UNTIL_SHIELD, SHIELD_TIME, AVOID_PROJECTILE_ATTACKS, HIDE_WHEN_SCARED),
                     WhileNode(function() return self.inst.components.hauntable and self.inst.components.hauntable.panic end, "PanicHaunted", Panic(self.inst)),
                     WhileNode(function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
                     WhileNode(function() return GetLeader(self.inst) == nil end, "NoLeader", AttackWall(self.inst)),

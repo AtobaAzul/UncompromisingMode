@@ -24,9 +24,18 @@ if not TheWorld.Map:IsAboveGroundAtPoint(x,y,z) then
 end
 end
 
+
 local events =
 {
-    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),
+    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then
+			local statename = inst.sg.currentstate.name
+			if statename == "shield" then
+				inst.AnimState:PlayAnimation("hide_hit")
+				inst.AnimState:PushAnimation("hide_idle")
+			else
+				inst.sg:GoToState("hit")	
+			end
+			end end),
 	
     EventHandler("death", function(inst) inst.sg:GoToState("death", inst.sg.statemem.dead) end),
     EventHandler("doattack", function(inst, data) 
@@ -48,6 +57,8 @@ local events =
            
         end
     end),
+    EventHandler("entershield", function(inst) inst.sg:GoToState("shield") end),
+    EventHandler("exitshield", function(inst) inst.sg:GoToState("shield_end") end),
 
 }
 
@@ -387,6 +398,48 @@ State{
                 inst.Physics:Stop()
             end
         end,
+    },
+    State{
+    	name = "shield",
+    	tags = {"busy","hiding"},
+
+    	onenter = function(inst)
+            --If taking fire damage, spawn fire effect. 
+
+    		inst.components.health:SetAbsorptionAmount(TUNING.SLURTLE_SHELL_ABSORB)
+    		inst.Physics:Stop()
+    		inst.AnimState:PlayAnimation("hide_pre")
+    		inst.AnimState:PushAnimation("hide_idle")
+            inst:AddTag("shell")
+    	end,
+
+        onexit = function(inst)
+            inst:RemoveTag("shell")
+            inst.components.health:SetAbsorptionAmount(0)
+        end,
+
+        timeline = 
+        {
+            TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/slurtle/hide") end ),
+        },
+	},
+    State{
+        name = "shield_end",
+        tags = {"busy"},
+
+        onenter = function(inst)
+            inst.AnimState:PlayAnimation("hide_pst")
+        end,
+
+        timeline = 
+        {
+            TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/slurtle/emerge") end ),
+        },
+
+        events=
+        {
+            EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end ),
+        },
     },
 }
 CommonStates.AddAmphibiousCreatureHopStates(states, 
