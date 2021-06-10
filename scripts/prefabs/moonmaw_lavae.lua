@@ -12,6 +12,9 @@ end
 local TARGET_IGNORE_TAGS = { "INLIMBO", "moonglasscreature" }
 
 local function destroystuff(inst)
+	if inst.WINDSTAFF_CASTER == nil then
+		inst:Remove()
+	end
     local x, y, z = inst.Transform:GetWorldPosition()
 	
 	local sizecheck = 1 + (inst.Transform:GetScale() * 2) or 0
@@ -77,7 +80,11 @@ end
 local function Reposition(inst)
 if inst.WINDSTAFF_CASTER ~= nil then
 	local x,y,z = inst.WINDSTAFF_CASTER.Transform:GetWorldPosition()
-	inst.Transform:SetPosition(x,y,z)
+	if x ~= nil and y ~= nil and z ~= nil then
+		inst.Transform:SetPosition(x,y,z)
+	else
+		inst:Remove()
+	end
 end
 end
 
