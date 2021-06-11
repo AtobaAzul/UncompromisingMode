@@ -51,7 +51,7 @@ local function RetargetFn(inst)
 end
 
 local function KeepTargetFn(inst, target)
-    return inst.components.combat:CanTarget(target)
+    return inst.components.combat:CanTarget(target) and not target:HasTag("moonglasscreature")
 end
 
 local function OnEntitySleep(inst)
@@ -134,17 +134,58 @@ local function OnSave(inst, data)
     data.vomits = inst.num_targets_vomited
     data.KilledPlayer = inst.KilledPlayer
     data.shouldGoAway = inst.shouldGoAway
+	if inst.lavae ~= nil then
+		data.lavae = {}
+		for i = 1,8 do
+			if inst.lavae[i] ~= nil then
+				data.lavae[i] = "alive"
+			end
+		end
+	end
+end
+
+local function LoadLavae(inst)
+	local x,y,z = inst.Transform:GetWorldPosition()
+	local LIMIT = 4
+	inst.lavae = {}
+	for i = 1,8 do
+	local test = inst.lavae[i]
+		inst.lavae[i] = SpawnPrefab("moonmaw_lavae_ring")
+		inst.lavae[i].WINDSTAFF_CASTER = inst
+		inst.lavae[i].components.linearcircler:SetCircleTarget(inst)
+		inst.lavae[i].components.linearcircler:Start()
+		inst.lavae[i].components.linearcircler.randAng = i*0.125
+		inst.lavae[i].components.linearcircler.clockwise = false
+		inst.lavae[i].components.linearcircler.distance_limit = LIMIT
+		inst.lavae[i].components.linearcircler.speed = 400
+		if inst.lavae[i] == "alive" then
+			inst.lavae[i].hidden = false
+			inst.lavae[i]:Show()
+		else
+			inst.lavae[i].hidden = true
+			inst.lavae[i]:Hide()
+		end
+	end
 end
         
 local function OnLoad(inst, data)
-    if data then
-        inst.SeenBase = data.SeenBase
-        inst.num_targets_vomited = data.vomits
-        inst.KilledPlayer = data.KilledPlayer or false
-        inst.shouldGoAway = data.shouldGoAway or false
+if data then
+    inst.SeenBase = data.SeenBase
+    inst.num_targets_vomited = data.vomits
+    inst.KilledPlayer = data.KilledPlayer or false
+    inst.shouldGoAway = data.shouldGoAway or false
 		
-		inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/fly", "flying")
-    end
+	inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/fly", "flying")
+	if data.lavae ~= nil then
+		inst.lavae = {}
+		for i = 1,8 do
+			if data.lavae[i] ~= nil and data.lavae[i] == "alive" then
+			inst.lavae[i] = "alive"
+			end
+		end
+		inst:DoTaskInTime(0,LoadLavae)
+	end
+end
 end
 
 local function OnSeasonChange(inst, data)
@@ -257,7 +298,62 @@ local function SpawnLavae(inst)
 		inst.lavae[i].components.linearcircler.clockwise = false
 		inst.lavae[i].components.linearcircler.distance_limit = LIMIT
 		inst.lavae[i].components.linearcircler.speed = 400
+		inst.lavae[i].hidden = false
 	end
+end
+
+local function NoLavae(inst)
+	for i = 1,8 do
+		if inst.lavae[i] ~= nil then
+			return false
+		end
+	end
+	return true
+end
+
+local function EjectLavae(inst,choice)
+local lavae = SpawnPrefab("moonmaw_lavae")
+local x,y,z = inst.lavae[choice].Transform:GetWorldPosition()
+if x == nil then
+x,y,z = inst.Transform:GetWorldPosition() --Fallback
+end
+lavae.Transform:SetPosition(x,y,z)
+inst.lavae[choice]:Hide()
+inst.lavae[choice].hidden = true
+lavae.number = choice
+if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
+lavae.components.combat:SuggestTarget(inst.components.combat.target)
+end
+inst.components.leader:AddFollower(lavae)
+end
+
+local function TryEjectLavae(inst)
+if NoLavae(inst) == false and inst.components.leader:CountFollowers() == 0 then
+	if math.random() > 0.5 then
+		local choice = math.random(1,8)
+		if inst.lavae[choice] ~= nil then
+			EjectLavae(inst,choice)
+		else
+			TryEjectLavae(inst)
+		end
+	else
+		local choice = math.random(1,8)
+		local choice2 = math.random(1,8)
+		if inst.lavae[choice] ~= nil and inst.lavae[choice2] ~= nil and choice ~= choice2 then
+			EjectLavae(inst,choice)
+			EjectLavae(inst,choice2)
+		else
+			TryEjectLavae(inst)
+		end
+	end
+end
+end
+
+
+local function TimerDone(inst)
+if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
+	TryEjectLavae(inst)
+end
 end
 
 local function fn(Sim)
@@ -412,10 +508,14 @@ local function fn(Sim)
     
     inst:ListenForEvent("onremove", OnRemove)
     inst:ListenForEvent("death", OnDead)
+	inst:AddComponent("leader")
 
     --inst:ListenForEvent("timerdone", RockThrowTimer)
-	SpawnLavae(inst)
+	inst.SpawnLavae = SpawnLavae
+	inst:DoTaskInTime(0,SpawnLavae)
+	inst.TryEjectLavae = TryEjectLavae
 	
+	inst:DoPeriodicTask(10,TimerDone)
     return inst
 end
 

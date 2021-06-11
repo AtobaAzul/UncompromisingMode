@@ -51,7 +51,7 @@ local function onattackfn(inst)
         (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
 		local lavae = false
 		for i = 1,8 do
-			if inst.lavae[i] ~= nil then
+			if inst.lavae[i].hidden ~= true then
 			lavae = true
 			end
 		end
@@ -274,8 +274,10 @@ local states=
         
         events =
         {
-            EventHandler("animover", function(inst) 
+            EventHandler("animover", function(inst)
+			if math.random() > 0.1 then
                 inst.sg:GoToState("taunt_pre")
+			end
             end),
         },
     },
@@ -288,35 +290,26 @@ local states=
 		inst.Physics:Stop()
         inst.components.combat:StartAttack()
         inst.AnimState:PlayAnimation("spit")
+		--inst.TryEjectLavae(inst)
 		for i = 1,8 do
 			if inst.lavae[i] ~= nil then
 				inst.lavae[i].destroy = true
-				inst.lavae[i].components.linearcircler.speed = 10
+				inst.lavae[i].components.linearcircler.speed = 4000
 			end
 		end
 			
-        end,
-
-        timeline=
-        {
-            TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/swipe") end),
-            TimeEvent(25*FRAMES, function(inst) 
-                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/punchimpact")
-                inst.components.combat:DoAttack()
-				SpawnMoonGlass(inst)
-            end),
-        },
-        
+        end,   
         
         events=
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle")
+            EventHandler("animover", function(inst)
 			for i = 1,8 do
 				if inst.lavae[i] ~= nil then
 					inst.lavae[i].destroy = false
 					inst.lavae[i].components.linearcircler.speed = 10
 				end
 			end
+			inst.sg:GoToState("idle")
 		end),
         },
     },
@@ -328,7 +321,6 @@ local states=
         onenter = function(inst)
 			inst.Physics:Stop()
             if not inst.flame_on or not inst.fire_build then
-                inst.flame_on = true
                 inst.sg:GoToState("taunt_pre")
             else
                 inst.components.combat:StartAttack()
@@ -470,7 +462,13 @@ local states=
             name = "sleep",
             tags = {"busy", "sleeping"},
             
-            onenter = function(inst) 
+            onenter = function(inst)
+				--inst.SpawnLavae(inst) --Remove this after testing.
+				
+				
+				
+				
+				
                 if inst.components.locomotor then
                     inst.components.locomotor:StopMoving()
                 end

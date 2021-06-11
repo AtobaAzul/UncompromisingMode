@@ -24,7 +24,7 @@ local events=
         end 
     end),
     EventHandler("death", function(inst) 
-		if inst.sg:HasStateTag("grounded") then
+		if inst.sg:HasStateTag("grounded") and not inst.sg:HasStateTag("dead") then
 			inst.sg:GoToState("deathground") 
 		else
 			inst.sg:GoToState("death") 
@@ -56,23 +56,23 @@ local states=
     
     State{
         name = "death",
-        tags = {"busy"},
+        tags = {"busy","dead"},
         
         onenter = function(inst)
 			inst.Physics:Stop()
 			RemovePhysicsColliders(inst) 
             inst.AnimState:PlayAnimation("drop")
-			inst.AnimState:PushAnimation("deathground")
+			inst.AnimState:PushAnimation("deathground",false)
 		end,
     },    
     State{
         name = "deathground",
-        tags = {"busy"},
+        tags = {"busy","dead"},
         
         onenter = function(inst)
 			inst.Physics:Stop()
 			RemovePhysicsColliders(inst) 
-            inst.AnimState:PlayAnimation("deathground")
+            inst.AnimState:PlayAnimation("deathground",false)
 		end,
     },       
     State{
@@ -161,8 +161,8 @@ local states=
         
         timeline=
         {
-            TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
-            TimeEvent(13*FRAMES, function(inst) 
+            TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
+            TimeEvent(11*FRAMES, function(inst) 
 				inst.components.combat:DoAreaAttack(inst, 2, nil, nil, nil, { "moonglasscreature" })
 				inst.Physics:Stop()
 			end),

@@ -94,13 +94,13 @@ end
 local function GetLeader(inst)
     return inst.components.follower ~= nil and inst.components.follower.leader or nil
 end
+
 function ViperlingBrain:OnStart()
     local root = PriorityNode(
     {
 
-
+		Follow(self.inst, GetLeader, MIN_FOLLOW_LEADER, TARGET_FOLLOW_LEADER, MAX_FOLLOW_LEADER),
         ChaseAndAttack(self.inst, TUNING.WORM_CHASE_TIME, TUNING.WORM_CHASE_DIST),
-        Follow(self.inst, GetLeader, MIN_FOLLOW_LEADER, TARGET_FOLLOW_LEADER, MAX_FOLLOW_LEADER),
         Wander(self.inst, function() return self.inst:GetPosition() end, TUNING.WORM_WANDER_DIST),
         StandStill(self.inst),
 

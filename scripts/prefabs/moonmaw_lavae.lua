@@ -6,9 +6,9 @@ local function destroystuff(inst)
 	end
     local x, y, z = inst.Transform:GetWorldPosition()
 	
-    local ents = TheSim:FindEntities(x, y, z, 3, nil, TARGET_IGNORE_TAGS, TARGET_TAGS)
+    local ents = TheSim:FindEntities(x, y, z, 3, nil, TARGET_IGNORE_TAGS, {"_combat"})
     for i, v in ipairs(ents) do
-        if v ~= inst.WINDSTAFF_CASTER and v:IsValid() and inst.destroy == true then
+        if v ~= inst.WINDSTAFF_CASTER and v:IsValid() and inst.destroy == true and inst.hidden ~= true then
             if v.components.health ~= nil and
                 not v.components.health:IsDead() and
                 v.components.combat ~= nil and
@@ -41,7 +41,6 @@ local function lavaering_fn()
 	inst.entity:AddLight()
 	inst.entity:AddDynamicShadow()
 	
-	inst.DynamicShadow:SetSize(2, 2)
 	
 	
 	inst.AnimState:SetFinalOffset(2)
@@ -68,6 +67,7 @@ local function lavaering_fn()
     inst.Light:SetColour(121/255,235/255,12/255)	
 
 	inst:AddComponent("linearcircler")
+	inst:AddComponent("leader")
 
     inst.WINDSTAFF_CASTER = nil
 	inst:AddComponent("inspectable")
@@ -100,6 +100,24 @@ local function NormalRetarget(inst)
 end
 
 local brain = require "brains/moonmaw_lavaebrain"
+local function GetLeader(inst)
+    return inst.components.follower ~= nil and inst.components.follower.leader or nil
+end
+
+local function CheckIfShouldGoBack(inst)
+if inst.components.follower ~= nil and inst.components.follower.leader ~= nil and inst.number ~= nil then
+	local leader = inst.components.follower.leader
+	if leader.components.combat ~= nil and leader.components.combat.target == nil then --No Target, return home
+		local number = inst.number 
+		leader.lavae[number]:Show()
+		leader.lavae[number].hidden = false
+		inst:Remove()
+	end	
+else
+	inst:Remove()
+end
+end
+
 local function lavae_fn()
     local inst = CreateEntity()
 
@@ -140,7 +158,6 @@ local function lavae_fn()
 	inst:AddComponent("inspectable")
 	inst:AddTag("moonglasscreature")
 
-
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(350)
     inst.components.health.destroytime = 5
@@ -151,19 +168,19 @@ local function lavae_fn()
     inst.components.combat.playerdamagepercent = .5
     inst.components.combat:SetRange(2)
     inst.components.combat:SetAttackPeriod(1)
-    inst.components.combat:SetRetargetFunction(3, NormalRetarget)
+    --inst.components.combat:SetRetargetFunction(3, NormalRetarget)
     inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
     inst.components.combat.battlecryenabled = false
     inst.components.combat:SetHurtSound("dontstarve_DLC001/creatures/dragonfly/hurt")
 	
-
+	inst:AddComponent("follower")
     inst:AddComponent("locomotor")
-    inst.components.locomotor.walkspeed = 6
-    inst.components.locomotor.runspeed = 8
+    inst.components.locomotor.walkspeed = 10
+    inst.components.locomotor.runspeed = 10
 
     inst:SetStateGraph("SGmoonmaw_lavae")
     inst:SetBrain(brain)
-
+	inst:DoPeriodicTask(8,CheckIfShouldGoBack)
 	
     return inst
 end
