@@ -357,9 +357,9 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	
 
 	--Stuff for Canis to check
-	DESCRIBE.MOONMAW_DRAGONFLY = "They look kinda different."
-	DESCRIBE.MOONMAW_LAVAE = ""
-	DESCRIBE.SNAPPERTURTLE = "Sus"
-	DESCRIBE.SNAPPERTURTLEBABY = ""
-	DESCRIBE.SNAPPERTURTLENEST = ""
+	DESCRIBE.MOONMAW_DRAGONFLY = "Crys-terrifying!"
+	DESCRIBE.MOONMAW_LAVAE = "How in the name of science is that even remotely possible?"
+	DESCRIBE.SNAPPERTURTLE = "These are the kind that don't bite your hand off, right?"
+	DESCRIBE.SNAPPERTURTLEBABY = "I'd like one as a pet, but it would probably take my fingers."
+	DESCRIBE.SNAPPERTURTLENEST = "Yup, that's a nest."
 	--Stuff for Canis to check	
