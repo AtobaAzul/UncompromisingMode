@@ -11,8 +11,8 @@ TUNING.DRAGONFLY_VOMIT_TARGETS_FOR_SATISFIED = 40
 TUNING.DRAGONFLY_ASH_EATEN_FOR_SATISFIED = 20
 
 
-local MAX_CHASE_TIME = 20
-local MAX_CHASE_DIST = 32
+local MAX_CHASE_TIME = 60
+local MAX_CHASE_DIST = 50
 local SEE_STRUCTURE_DIST = 30
 local SEE_BAIT_DIST = 15
 
@@ -49,7 +49,9 @@ return
 end
 end
 local function ShouldSpitFn(inst)
-    if inst.sg:HasStateTag("sleeping") or inst.num_targets_vomited >= TUNING.DRAGONFLY_VOMIT_TARGETS_FOR_SATISFIED or inst.hassleepdestination or GlassNearby(inst) then return false end
+    if inst.sg:HasStateTag("sleeping") or inst.sg:HasStateTag("busy") or (inst.components.combat ~= nil and inst.components.combat.target ~= nil) or inst.num_targets_vomited >= TUNING.DRAGONFLY_VOMIT_TARGETS_FOR_SATISFIED or inst.hassleepdestination or GlassNearby(inst) then 
+	return false 
+	end
     if not inst.recently_frozen and not inst.flame_on then
         if not inst.last_spit_time then 
             if inst:GetTimeAlive() > 5 then return true end

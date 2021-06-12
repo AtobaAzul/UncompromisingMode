@@ -26,7 +26,35 @@ local function NearPlayerBase(inst)
 end
 
 local function CalcSanityAura(inst)
-    return inst.components.combat.target ~= nil and -TUNING.SANITYAURA_HUGE or -TUNING.SANITYAURA_LARGE
+    return inst.components.combat.target ~= nil and TUNING.SANITYAURA_HUGE or TUNING.SANITYAURA_LARGE
+end
+
+local function UpdateLavaeDamageTick(inst)
+local count = 0
+for i = 1,8 do
+	if inst.lavae[i].hidden ~= true then
+		count = count+1
+	end
+end
+local damagetime = 0.5
+if count < 5 then
+damagetime = 0.05
+end
+if count < 3 then
+damagetime = 0.01
+end
+if count < 2 then
+damagetime = 0.005
+end
+if count < 1 then
+damagetime = 0.001
+end
+print(count)
+for i = 1,8 do
+	if inst.lavae[i].hidden ~= true then
+		inst.lavae[i].damagetime = damagetime
+	end
+end
 end
 
 local function RetargetFn(inst)
@@ -157,7 +185,7 @@ local function LoadLavae(inst)
 		inst.lavae[i].components.linearcircler.randAng = i*0.125
 		inst.lavae[i].components.linearcircler.clockwise = false
 		inst.lavae[i].components.linearcircler.distance_limit = LIMIT
-		inst.lavae[i].components.linearcircler.speed = 400
+		inst.lavae[i].components.linearcircler.setspeed = 0.2
 		if inst.lavae[i] == "alive" then
 			inst.lavae[i].hidden = false
 			inst.lavae[i]:Show()
@@ -297,14 +325,14 @@ local function SpawnLavae(inst)
 		inst.lavae[i].components.linearcircler.randAng = i*0.125
 		inst.lavae[i].components.linearcircler.clockwise = false
 		inst.lavae[i].components.linearcircler.distance_limit = LIMIT
-		inst.lavae[i].components.linearcircler.speed = 400
+		inst.lavae[i].components.linearcircler.setspeed = 0.2
 		inst.lavae[i].hidden = false
 	end
 end
 
 local function NoLavae(inst)
 	for i = 1,8 do
-		if inst.lavae[i] ~= nil then
+		if inst.lavae[i].hidden ~= true then
 			return false
 		end
 	end
@@ -325,13 +353,14 @@ if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
 lavae.components.combat:SuggestTarget(inst.components.combat.target)
 end
 inst.components.leader:AddFollower(lavae)
+UpdateLavaeDamageTick(inst)
 end
 
 local function TryEjectLavae(inst)
 if NoLavae(inst) == false and inst.components.leader:CountFollowers() == 0 then
 	if math.random() > 0.5 then
 		local choice = math.random(1,8)
-		if inst.lavae[choice] ~= nil then
+		if inst.lavae[choice].hidden ~= true then
 			EjectLavae(inst,choice)
 		else
 			TryEjectLavae(inst)
@@ -339,7 +368,7 @@ if NoLavae(inst) == false and inst.components.leader:CountFollowers() == 0 then
 	else
 		local choice = math.random(1,8)
 		local choice2 = math.random(1,8)
-		if inst.lavae[choice] ~= nil and inst.lavae[choice2] ~= nil and choice ~= choice2 then
+		if inst.lavae[choice].hidden ~= true and inst.lavae[choice2].hidden ~= true and choice ~= choice2 then
 			EjectLavae(inst,choice)
 			EjectLavae(inst,choice2)
 		else
@@ -412,12 +441,12 @@ local function fn(Sim)
     inst.components.sanityaura.aurafn = CalcSanityAura
     
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(TUNING.DSTU.WILTFLY_HEALTH*1.25)
+    inst.components.health:SetMaxHealth(TUNING.DSTU.WILTFLY_HEALTH*0.75)
     inst.components.health.destroytime = 5
     inst.components.health.fire_damage_scale = 0
 
 	local function isnottree(ent)
-		if ent ~= nil and not ent:HasTag("mock_dragonfly") and not ent:HasTag("dragonfly") and not ent:HasTag("lavae") then -- fix to friendly AOE: refer for later AOE mobs -Axe
+		if ent ~= nil and not ent:HasTag("moonglasscreature") then -- fix to friendly AOE: refer for later AOE mobs -Axe
 			return true
 		end
 	end
@@ -427,7 +456,7 @@ local function fn(Sim)
     inst.components.groundpounder.groundpoundfx = "moonstorm_glass_ground_fx"
     inst.components.groundpounder.groundpounddamagemult = .5
     inst.components.groundpounder.groundpoundringfx = "moonstorm_glass_ground_fx"
-    inst.components.groundpounder.noTags = { "FX", "NOCLICK", "DECOR", "INLIMBO", "dragonfly", "lavae" }
+    inst.components.groundpounder.noTags = { "FX", "NOCLICK", "DECOR", "INLIMBO", "moonglasscreature" }
     
     inst:AddComponent("combat")
     inst.components.combat:SetDefaultDamage(100)

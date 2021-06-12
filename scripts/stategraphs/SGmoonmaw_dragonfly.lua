@@ -1,5 +1,10 @@
 require("stategraphs/commonstates")
 
+local function NotDeerclopsFootstep(inst)
+    inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/step")
+    ShakeAllCameras(CAMERASHAKE.FULL, .7, .02, .8, inst, 40)
+end
+
 local function SpawnMoonGlass(inst)
     local numsteps = 4
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -57,7 +62,7 @@ local function onattackfn(inst)
 		end
 		
 		if lavae == true then
-			inst.sg:GoToState("lavaeattack")
+			inst.sg:GoToState("lavaeattack_pre")
 		else
 			inst.sg:GoToState("attack")
 		end
@@ -275,13 +280,38 @@ local states=
         events =
         {
             EventHandler("animover", function(inst)
-			if math.random() > 0.1 then
+			if math.random() < 0.1 then
                 inst.sg:GoToState("taunt_pre")
+			else
+				inst.sg:GoToState("idle")
 			end
             end),
         },
     },
 
+    State{
+        name = "lavaeattack_pre",
+        tags = {"attack", "busy", "canrotate"},
+        
+        onenter = function(inst)
+		inst.Physics:Stop()
+        inst.components.combat:StartAttack()
+        inst.AnimState:PlayAnimation("spin_pre")
+			for i = 1,8 do
+				if inst.lavae[i] ~= nil then
+					inst.lavae[i].components.linearcircler.setspeed = 1
+				end
+			end		
+        end,   
+        
+        events=
+        {
+            EventHandler("animover", function(inst)
+			inst.sg:GoToState("lavaeattack")
+		end),
+        },
+    },
+	
     State{
         name = "lavaeattack",
         tags = {"attack", "busy", "canrotate"},
@@ -289,24 +319,33 @@ local states=
         onenter = function(inst)
 		inst.Physics:Stop()
         inst.components.combat:StartAttack()
-        inst.AnimState:PlayAnimation("spit")
+        inst.AnimState:PlayAnimation("spin")
 		--inst.TryEjectLavae(inst)
 		for i = 1,8 do
 			if inst.lavae[i] ~= nil then
 				inst.lavae[i].destroy = true
-				inst.lavae[i].components.linearcircler.speed = 4000
+				inst.lavae[i].components.linearcircler.setspeed = 3
 			end
 		end
 			
-        end,   
-        
+        end,
+		
+            onexit = function(inst)
+			for i = 1,8 do
+				if inst.lavae[i] ~= nil then
+					inst.lavae[i].destroy = false
+					inst.lavae[i].components.linearcircler.setspeed = 0.2
+				end
+			end		
+            end,
+			
         events=
         {
             EventHandler("animover", function(inst)
 			for i = 1,8 do
 				if inst.lavae[i] ~= nil then
 					inst.lavae[i].destroy = false
-					inst.lavae[i].components.linearcircler.speed = 10
+					inst.lavae[i].components.linearcircler.setspeed = 0.2
 				end
 			end
 			inst.sg:GoToState("idle")
@@ -320,14 +359,11 @@ local states=
         
         onenter = function(inst)
 			inst.Physics:Stop()
-            if not inst.flame_on or not inst.fire_build then
-                inst.sg:GoToState("taunt_pre")
-            else
                 inst.components.combat:StartAttack()
                 inst.AnimState:PlayAnimation("atk")
 				--attackfx.AnimState:SetMultColour(0.5,1,0.5,1)
                 --inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/swipe")
-            end
+            
         end,
 
         timeline=
@@ -414,6 +450,11 @@ local states=
                 inst.AnimState:PlayAnimation("walk")
 
             end,
+            timeline=
+            {
+                TimeEvent(4*FRAMES, NotDeerclopsFootstep),
+                TimeEvent(10*FRAMES, NotDeerclopsFootstep),
+            },
             events=
             {   
                 EventHandler("animover", function(inst) inst.sg:GoToState("walk") end ),        
@@ -508,9 +549,6 @@ local states=
                 if inst.playsleepsound then
                     inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/sleep", "sleep")
                 end
-            end,
-
-            onexit = function(inst)
             end,
 
             events=

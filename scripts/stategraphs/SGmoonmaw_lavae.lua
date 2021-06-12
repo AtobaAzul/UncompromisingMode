@@ -19,7 +19,7 @@ local events=
         end 
     end),
     EventHandler("doattack", function(inst, data) 
-        if not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("evade")  and data and data.target  then 
+        if not inst.components.health:IsDead()  then 
         inst.sg:GoToState("attack", data.target) 
         end 
     end),
@@ -161,9 +161,12 @@ local states=
         
         timeline=
         {
-            TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
+            TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("mining_moonglass_fx") end),
             TimeEvent(11*FRAMES, function(inst) 
-				inst.components.combat:DoAreaAttack(inst, 2, nil, nil, nil, { "moonglasscreature" })
+				inst.components.combat:DoAreaAttack(inst, 2, nil, nil,nil, { "moonglasscreature" })
+				local fx = SpawnPrefab("moonstorm_glass_ground_fx")
+				local x,y,z = inst.Transform:GetWorldPosition()
+				fx.Transform:SetPosition(x,y,z)
 				inst.Physics:Stop()
 			end),
         },

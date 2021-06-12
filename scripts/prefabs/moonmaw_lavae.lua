@@ -1,23 +1,37 @@
 local TARGET_IGNORE_TAGS = { "INLIMBO", "moonglasscreature" }
 
 local function destroystuff(inst)
+	
 	if inst.WINDSTAFF_CASTER == nil then
 		inst:Remove()
 	end
+	if inst.destroy == true and inst.hidden ~= true then
     local x, y, z = inst.Transform:GetWorldPosition()
 	
-    local ents = TheSim:FindEntities(x, y, z, 3, nil, TARGET_IGNORE_TAGS, {"_combat"})
+    local ents = TheSim:FindEntities(x, y, z, 2, nil, TARGET_IGNORE_TAGS, {"_combat"})
     for i, v in ipairs(ents) do
-        if v ~= inst.WINDSTAFF_CASTER and v:IsValid() and inst.destroy == true and inst.hidden ~= true then
+        if v ~= inst.WINDSTAFF_CASTER and v:IsValid() then
             if v.components.health ~= nil and
                 not v.components.health:IsDead() and
                 v.components.combat ~= nil and
                 v.components.combat:CanBeAttacked() then
-                local damage = TUNING.TORNADO_DAMAGE
+                local damage = 40
                 v.components.combat:GetAttacked(inst, damage, nil, "glass")
+				
+				if v:HasTag("player") and not (v.components.rider ~= nil and v.components.rider:IsRiding())then
+					if v.moonmaw_lavae_stun == nil then
+						v.moonmaw_lavae_stun = 0
+					end
+					v.moonmaw_lavae_stun = v.moonmaw_lavae_stun+1
+					if v.moonmaw_lavae_stun > 4 then
+					v:PushEvent("knockback", {knocker = inst.WINDSTAFF_CASTER, radius = 1, strengthmult = 1})
+					v.moonmaw_lavae_stun = 0
+					end
+				end
             end
         end
     end
+	end
 end
 
 local function Reposition(inst)
@@ -76,9 +90,10 @@ local function lavaering_fn()
 	inst.Destroy = false
 	
 	inst:DoTaskInTime(1, function(inst)
-		inst:DoPeriodicTask(.4, destroystuff)
+		inst:DoPeriodicTask(.2, destroystuff)
 	end)
-	inst:DoTaskInTime(0.1,Reposition)
+	inst.damagetime = 0.1
+	inst:DoTaskInTime(inst.damagetime,Reposition)
     return inst
 end
 
@@ -100,22 +115,44 @@ local function NormalRetarget(inst)
 end
 
 local brain = require "brains/moonmaw_lavaebrain"
-local function GetLeader(inst)
-    return inst.components.follower ~= nil and inst.components.follower.leader or nil
-end
-
-local function CheckIfShouldGoBack(inst)
-if inst.components.follower ~= nil and inst.components.follower.leader ~= nil and inst.number ~= nil then
-	local leader = inst.components.follower.leader
-	if leader.components.combat ~= nil and leader.components.combat.target == nil then --No Target, return home
+local function AnimOver(inst)
+	if inst.number ~= nil then
+		local leader = inst.components.follower.leader
 		local number = inst.number 
 		leader.lavae[number]:Show()
 		leader.lavae[number].hidden = false
-		inst:Remove()
-	end	
-else
+		leader.lavae[number].AnimState:PlayAnimation("descend")
+	end
 	inst:Remove()
 end
+
+local function CheckIfShouldGoBack(inst)
+if inst.components.health ~= nil and not inst.components.health:IsDead() then
+	if inst.components.follower ~= nil and inst.components.follower.leader ~= nil and inst.number ~= nil then
+		local leader = inst.components.follower.leader
+		if leader.components.combat ~= nil and leader.components.combat.target == nil then --No Target, return home
+			local number = inst.number 
+			leader.lavae[number]:Show()
+			leader.lavae[number].hidden = false
+			inst.AnimState:PlayAnimation("ascend")
+			inst:ListenForEvent("animover", AnimOver)
+		end	
+	else
+		inst.AnimState:PlayAnimation("ascend")
+		inst:ListenForEvent("animover", AnimOver)
+	end
+end
+end
+
+local function OnAttacked(inst, data)
+inst:ClearBufferedAction()
+inst.components.combat:SetTarget(data.attacker)
+	if inst.components.follower ~= nil and inst.components.follower.leader ~= nil then
+		local leader = inst.components.follower.leader
+		if leader.components.combat ~= nil and leader.components.combat.target == nil then
+			leader.components.combat:SetTarget(data.attacker)
+		end
+	end
 end
 
 local function lavae_fn()
@@ -171,13 +208,13 @@ local function lavae_fn()
     --inst.components.combat:SetRetargetFunction(3, NormalRetarget)
     inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
     inst.components.combat.battlecryenabled = false
-    inst.components.combat:SetHurtSound("dontstarve_DLC001/creatures/dragonfly/hurt")
+    inst.components.combat:SetHurtSound("turnoftides/common/together/moon_glass/mine")
 	
 	inst:AddComponent("follower")
     inst:AddComponent("locomotor")
     inst.components.locomotor.walkspeed = 10
     inst.components.locomotor.runspeed = 10
-
+	inst:ListenForEvent("attacked", OnAttacked)
     inst:SetStateGraph("SGmoonmaw_lavae")
     inst:SetBrain(brain)
 	inst:DoPeriodicTask(8,CheckIfShouldGoBack)

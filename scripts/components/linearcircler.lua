@@ -2,8 +2,8 @@
 
 local LinearCircler = Class(function(self, inst)
     self.inst = inst
-
-    self.speed = 0.2 
+	self.setspeed = 0.2
+    self.speed = self.setspeed 
     self.circleTarget = nil
 
     self.minSpeed = 5
@@ -34,7 +34,7 @@ function LinearCircler:Start()
         return
     end
 
-    self.speed = 0.2-- * .01
+    self.speed = self.setspeed-- * .01
 	
     self.angleRad = self.randAng * 2 * PI
     self.offset = Vector3(self.distance * math.cos(self.angleRad), 0, -self.distance * math.sin(self.angleRad))
@@ -86,7 +86,7 @@ function LinearCircler:OnUpdate(dt)
     --self.speed = easing.inExpo(self.sine, self:GetMinSpeed(), self:GetMaxSpeed() - self:GetMinSpeed() , 1)
 	--self.speed = Lerp(self:GetMinSpeed() - .003, self:GetMaxSpeed() + .003, self.sine)
     --self.speed = math.clamp(self.speed, self:GetMinSpeed(), self:GetMaxSpeed()) 
-	self.speed = 0.2-- * .01
+	self.speed = self.setspeed-- * .01
     self.angleRad = self.angleRad + self:GetSpeed(dt)
 	
 	if self.retract and self.distance > 1 and self.clockwise then
