@@ -54,9 +54,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "There's the source of the pestilence!"
     DESCRIBE.TOADLING = "It sure likes those weird trees."
-	DESCRIBE.UNCOMPROMISING_TOAD = "That toads looking rather sick."
+	DESCRIBE.UNCOMPROMISING_TOAD = "That toads looking pretty sick."
 	
-    DESCRIBE.GASMASK = "Now I can breath anywhere."
+    DESCRIBE.GASMASK = "Now I can breathe anywhere."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
 	DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
 	DESCRIBE.SPIDERQUEENCORPSE = "That's really gross."
@@ -299,7 +299,7 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.KNOOK = "I don't like that maw!"
 	DESCRIBE.ROSHIP = "What a horror!"
 	
-	DESCRIBE.UM_PAWN = "I should keep my distance."
+	DESCRIBE.UM_PAWN = "It gets louder when I get closer."
 	DESCRIBE.UM_PAWN_NIGHTMARE = "I should keep my distance."
 	
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
@@ -314,15 +314,15 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
 	
 	DESCRIBE.ANCIENT_AMULET_RED = "It's tugging at my heart strings!"
-	DESCRIBE.UM_BEAR_TRAP = "Best not step on that."
-	DESCRIBE.UM_BEAR_TRAP_OLD = "Someone left this here."
+	DESCRIBE.UM_BEAR_TRAP = "I need to watch my step."
+	DESCRIBE.UM_BEAR_TRAP_OLD = "Woah! I need to watch my step!"
 	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "Don't get snappy with me!"
 	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Don't get snappy with me!"
 	DESCRIBE.CORNCAN = "Where did this can come from?"
 	DESCRIBE.SKULLCHEST_CHILD = "If only I could fit inside."
 	
 	DESCRIBE.SLOBBERLOBBER = "A portable loogie launcher."
-	DESCRIBE.GORE_HORN_HAT = "Now my head is truly the greatest weapon!"
+	DESCRIBE.GORE_HORN_HAT = "My mind was always the greatest weapon but... yeah, you get the idea."
 	DESCRIBE.BEARGERCLAW = "Sticks and stones can break some bones."
 	DESCRIBE.FEATHER_FROCK = "All the comfort of a bed, in wearable form!"
 	
@@ -341,24 +341,24 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.HEAT_SCALES_ARMOR = "If only I could fit inside."
 
 	--StantonStuff
-	DESCRIBE.SKULLFLASK = "The science within keeps me calm."
-	DESCRIBE.SKULLFLASK_EMPTY = "The science will make it refill later."
+	DESCRIBE.SKULLFLASK = "This is DEFINITELY a good idea."
+	DESCRIBE.SKULLFLASK_EMPTY = "I'll get a refill later."
 	DESCRIBE.STANTON_SHADOW_TONIC = "For science!"
 	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 	DESCRIBE.STANTON = "I wonder what he wants?"
-	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "Science keeps my mind at peace!"
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Science no longer comforts me."
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "What's so scary?"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "I..."
 	--StantonStuff
 	
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
 	DESCRIBE.THEATERCORN = "I wonder if there's anything interesting to watch while I eat this."
-	DESCRIBE.DEERCLOPS_BARRIER = "I need to mine my way out."
+	DESCRIBE.DEERCLOPS_BARRIER = "I need to mine my way out of here!"
 	
 
 	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_DRAGONFLY = "Crys-terrifying!"
-	DESCRIBE.MOONMAW_LAVAE = "How in the name of science is that even remotely possible?"
+	DESCRIBE.MOONMAW_LAVAE = "They're protecting it's mom!"
 	DESCRIBE.SNAPPERTURTLE = "These are the kind that don't bite your hand off, right?"
 	DESCRIBE.SNAPPERTURTLEBABY = "I'd like one as a pet, but it would probably take my fingers."
 	DESCRIBE.SNAPPERTURTLENEST = "Yup, that's a nest."
