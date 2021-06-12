@@ -20,7 +20,7 @@ local function SpawnThorns(inst, feather, owner)
 	inst.speedboost = 0
 
     local x, y, z = inst.Transform:GetWorldPosition()
-    for i, v in ipairs(TheSim:FindEntities(x, y, z, 4, COMBAT_TARGET_TAGS, NO_TAGS_NO_PLAYERS)) do
+    for i, v in ipairs(TheSim:FindEntities(x, y, z, 5, COMBAT_TARGET_TAGS, NO_TAGS_NO_PLAYERS)) do
         if v:IsValid() and
             v.entity:IsVisible() and
             v.components.combat ~= nil then

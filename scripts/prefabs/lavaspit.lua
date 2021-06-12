@@ -37,10 +37,10 @@ local function TrySlowdown(inst, target)
 	end
 	target._lavavomit_speedmulttask = target:DoTaskInTime(0.6, function(i) i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) i._lavavomit_speedmulttask = nil end)
 
-	target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.4)
+	target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.5)
 	
 	if inst.components.propagator ~= nil and target.components.combat ~= nil and target.components.health ~= nil and not target:HasTag("dragonfly") and not target:HasTag("lavae") then
-		target.components.health:DoDelta(-2)
+		target.components.health:DoDelta(-3)
 		if inst.lobber ~= nil then
 			target.components.combat:SuggestTarget(inst.lobber)
 		end

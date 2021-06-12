@@ -38,7 +38,7 @@ local function LaunchSpit(caster, target)
 	local boat = TheWorld.Map:GetPlatformAtPoint(pt.x, pt.z)
 	
 	if #ents == 0 and not boat then
-		for i = 1, 3 do 
+		for i = 1, 4 do 
 			local targetpos = target:GetPosition()
 
 			local projectile = SpawnPrefab("beargerclaw_boulder")
@@ -182,6 +182,11 @@ local function staff_fn()
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 
+    inst:AddComponent("tool")
+    inst.components.tool:SetAction(ACTIONS.DIG)
+	
+    inst:AddInherentAction(ACTIONS.DIG)
+	
     inst:AddComponent("spellcaster")
     inst.components.spellcaster:SetSpellFn(createlight)
     inst.components.spellcaster.canuseontargets = true

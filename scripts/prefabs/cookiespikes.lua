@@ -69,7 +69,7 @@ local function fn()
         inst:AddTag("thorny")
 
         inst.Transform:SetFourFaced()
-		inst.Transform:SetScale(0.8, 0.8, 0.8)
+		inst.Transform:SetScale(1.2, 1.2, 1.2)
 
         inst.AnimState:SetBank("um_spikes")
         inst.AnimState:SetBuild("spikes_cookie")
