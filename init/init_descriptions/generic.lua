@@ -341,11 +341,11 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.HEAT_SCALES_ARMOR = "If only I could fit inside."
 
 	--StantonStuff
-	DESCRIBE.SKULLFLASK = "This is DEFINITELY a good idea."
+	DESCRIBE.SKULLFLASK = "We got that guy's lucky flask."
 	DESCRIBE.SKULLFLASK_EMPTY = "I'll get a refill later."
-	DESCRIBE.STANTON_SHADOW_TONIC = "For science!"
+	DESCRIBE.STANTON_SHADOW_TONIC = "I shouldn't do this..."
 	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
-	DESCRIBE.STANTON = "I wonder what he wants?"
+	DESCRIBE.STANTON = "You want a drinking partner? Uh..."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "What's so scary?"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "I..."
 	--StantonStuff
