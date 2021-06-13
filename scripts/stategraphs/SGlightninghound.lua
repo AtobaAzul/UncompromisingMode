@@ -11,7 +11,7 @@ local events =
     EventHandler("death", function(inst) inst.sg:GoToState("death", inst.sg.statemem.dead) end),
     EventHandler("doattack", function(inst, data) 
 		if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then 
-			if inst.lightningshot then
+			if data.target:IsValid() and not (data.target:HasTag("hive") or data.target:HasTag("structure")) and inst.lightningshot then
 				inst.sg:GoToState("charging_pre", data.target) 
 			elseif data.target:IsValid() and inst:IsNear(data.target, 3) then
 				inst.sg:GoToState("attack", data.target)
