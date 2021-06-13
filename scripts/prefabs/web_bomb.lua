@@ -6,7 +6,7 @@ local splashprefabs =
     "web_splash_fx_full",
 }
 local function doprojectilehit(inst, attacker, other)
-    inst.SoundEmitter:PlaySound("dontstarve/creatures/spat/spit_hit")
+	inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spider_egg_sack")
     local x, y, z = inst.Transform:GetWorldPosition()
     SpawnPrefab("web_net_splat_fx").Transform:SetPosition(x, 0, z)
 
@@ -35,17 +35,17 @@ local function doprojectilehit(inst, attacker, other)
 				widow.sg:GoToState("tossplayer")
 				other:DoTaskInTime(1.3, function(other)
 				other.components.pinnable:Unstick()
-				local widow = TheSim:FindFirstEntityWithTag("hoodedwidow")
-				if widow ~= nil then
+				local widowweb = TheSim:FindFirstEntityWithTag("widowweb")
+				if widowweb ~= nil then
 					if other:HasTag("wereplayer") then
 						other.sg:GoToState("hit")
 					else
 						other.sg:GoToState("knockback")
 					end	
-                    local x, y, z = widow.Transform:GetWorldPosition() --Ripped knockback code, but it's rigged to go backwards.
+                    local x, y, z = widowweb.Transform:GetWorldPosition() --Ripped knockback code, but it's rigged to go backwards.
                     local distsq = other:GetDistanceSqToPoint(x, y, z)
                     local rot = other.Transform:GetRotation()
-                    local rot1 = distsq > 0 and other:GetAngleToPoint(x, y, z) or widow.Transform:GetRotation() + 180
+                    local rot1 = distsq > 0 and other:GetAngleToPoint(x, y, z) or widowweb.Transform:GetRotation() + 180
                     local drot = math.abs(rot - rot1)
                     while drot > 180 do
                         drot = math.abs(drot - 360)

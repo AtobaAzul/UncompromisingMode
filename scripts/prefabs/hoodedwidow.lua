@@ -120,7 +120,7 @@ end
 
 local function OnLoad(inst)
 --inst.WebReady = true
-inst.investigated = true
+inst.investigated = false
 end
 
 local function DoLeap(inst)
@@ -243,9 +243,7 @@ local function fn()
     inst.components.combat:SetAttackPeriod(TUNING.SPIDERQUEEN_ATTACKPERIOD)
     inst.components.combat:SetRetargetFunction(1, Retarget)
 	inst:AddComponent("groundpounder")
-    --inst.components.groundpounder.destroyer = true
     inst.components.groundpounder.damageRings = 2
-    --inst.components.groundpounder.destructionRings = 2
     inst.components.groundpounder.platformPushingRings = 2
     inst.components.groundpounder.numRings = 3
 
@@ -289,7 +287,7 @@ local function fn()
     inst.components.groundpounder.platformPushingRings = 2
     inst.components.groundpounder.numRings = 3
     ------------------
-	inst.investigated = true
+	inst.investigated = false
 	inst.Reset = Reset
     inst.DoDespawn = DoDespawn
 	inst:AddComponent("inventory")

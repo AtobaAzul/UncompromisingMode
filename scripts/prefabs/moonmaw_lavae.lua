@@ -8,7 +8,7 @@ local function destroystuff(inst)
 	if inst.destroy == true and inst.hidden ~= true then
     local x, y, z = inst.Transform:GetWorldPosition()
 	
-    local ents = TheSim:FindEntities(x, y, z, 2, nil, TARGET_IGNORE_TAGS, {"_combat"})
+    local ents = TheSim:FindEntities(x, y, z, 2, nil, TARGET_IGNORE_TAGS, {"_health"})
     for i, v in ipairs(ents) do
         if v ~= inst.WINDSTAFF_CASTER and v:IsValid() then
             if v.components.health ~= nil and
@@ -25,7 +25,7 @@ local function destroystuff(inst)
 					v.moonmaw_lavae_stun = v.moonmaw_lavae_stun+1
 					if v.moonmaw_lavae_stun > 4 then
 					v:PushEvent("knockback", {knocker = inst.WINDSTAFF_CASTER, radius = 1, strengthmult = 1})
-					v.moonmaw_lavae_stun = 0
+					v:DoTaskInTime(1.5,function(v) v.moonmaw_lavae_stun = 0 end)
 					end
 				end
             end
@@ -42,6 +42,17 @@ if inst.WINDSTAFF_CASTER ~= nil then
 	else
 		inst:Remove()
 	end
+end
+end
+
+local function CheckDist(inst)
+if inst.WINDSTAFF_CASTER ~= nil then
+	if inst:GetDistanceSqToInst(inst.WINDSTAFF_CASTER) > 15 then
+		local x,y,z = inst.WINDSTAFF_CASTER.Transform:GetWorldPosition()
+		inst.Transform:SetPosition(x,y,z)
+	end
+else
+	inst:Remove()
 end
 end
 
@@ -91,6 +102,7 @@ local function lavaering_fn()
 	
 	inst:DoTaskInTime(1, function(inst)
 		inst:DoPeriodicTask(.2, destroystuff)
+		inst:DoPeriodicTask(10,CheckDist)
 	end)
 	inst.damagetime = 0.1
 	inst:DoTaskInTime(inst.damagetime,Reposition)
@@ -117,11 +129,13 @@ end
 local brain = require "brains/moonmaw_lavaebrain"
 local function AnimOver(inst)
 	if inst.number ~= nil then
-		local leader = inst.components.follower.leader
-		local number = inst.number 
-		leader.lavae[number]:Show()
-		leader.lavae[number].hidden = false
-		leader.lavae[number].AnimState:PlayAnimation("descend")
+		if inst.components.follower.leader ~= nil then
+			local leader = inst.components.follower.leader
+			local number = inst.number 
+			leader.lavae[number]:Show()
+			leader.lavae[number].hidden = false
+			leader.lavae[number].AnimState:PlayAnimation("descend")
+		end
 	end
 	inst:Remove()
 end

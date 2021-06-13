@@ -323,20 +323,25 @@ env.AddPrefabPostInit("spider", function(inst)
 	inst.DoSpikeAttack = DoSpikeAttack
 end)
 
+SetSharedLootTable( 'spider_warrior',
+{
+    {'monstermeat',  1.00},
+})
+
 env.AddPrefabPostInit("spider_warrior", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	--[[
+	
 	inst:RemoveComponent("lootdropper")
 	
-	inst:AddComponent("lootdropper")
-    inst.components.lootdropper:AddRandomLoot("monstermorsel", 1)
-    inst.components.lootdropper:AddRandomLoot("silk", .5)
-    inst.components.lootdropper:AddRandomLoot("spidergland", .5)
+    inst:AddComponent("lootdropper")
+    inst.components.lootdropper:AddRandomLoot("silk", 1)
+    inst.components.lootdropper:AddRandomLoot("spidergland", 1)
     inst.components.lootdropper:AddRandomHauntedLoot("spidergland", 1)
     inst.components.lootdropper.numrandomloot = 1
-	--]]
+	inst.components.lootdropper:SetChanceLootTable('spider_trapdoor')
+	
 	if inst.components.combat ~= nil then
 		inst.components.combat:SetRange(TUNING.SPIDER_WARRIOR_ATTACK_RANGE, TUNING.SPIDER_WARRIOR_HIT_RANGE * 1.05)
 	end

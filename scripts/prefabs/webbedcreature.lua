@@ -497,7 +497,7 @@ if not attacker:HasTag("player") then
 	attacker.components.combat:DropTarget()
 	end
 end
-    if not inst.components.health:IsDead() then
+    if not inst.components.health:IsDead() and not attacker:HasTag("hoodedwidow") then
 	local widowweb = FindEntity(inst,50,function(guy) return guy:HasTag("widowweb") end)
 	if widowweb ~= nil then
 	widowweb.SpawnInvestigators(widowweb,attacker)

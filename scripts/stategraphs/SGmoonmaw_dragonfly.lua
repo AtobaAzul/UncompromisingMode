@@ -51,9 +51,13 @@ local function onattackedfn(inst, data)
 end
 
 local function onattackfn(inst)
-    if inst.components.health ~= nil and
+if inst.components.health ~= nil and
         not inst.components.health:IsDead() and
         (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
+		
+	if inst.components.combat.target ~= nil and inst.components.combat.target:HasTag("structure") then
+		inst.sg:GoToState("attack")
+	else
 		local lavae = false
 		for i = 1,8 do
 			if inst.lavae[i].hidden ~= true then
@@ -66,17 +70,16 @@ local function onattackfn(inst)
 		else
 			inst.sg:GoToState("attack")
 		end
-    end
+	end
+end
 end
 
---local SHAKE_DIST = 40
 local function ShakeIfClose(inst)
     ShakeAllCameras(CAMERASHAKE.FULL, .7, .02, .8, inst, 40)
 end
 
 local actionhandlers = 
-{
-    --ActionHandler(ACTIONS.GOHOME, "taunt"),     
+{   
     ActionHandler(ACTIONS.LAVASPIT, "spit"),
 }
 
@@ -84,12 +87,8 @@ local events=
 {
     CommonHandlers.OnLocomote(false,true),
     CommonHandlers.OnSleep(),
-    --CommonHandlers.OnFreeze(),
-    --CommonHandlers.OnAttack(),
 	EventHandler("doattack", function(inst, data)
-
 	onattackfn(inst)
-
 	end),
     CommonHandlers.OnDeath(),
     EventHandler("attacked", onattackedfn),
@@ -300,6 +299,7 @@ local states=
 			for i = 1,8 do
 				if inst.lavae[i] ~= nil then
 					inst.lavae[i].components.linearcircler.setspeed = 1
+					inst.lavae[i].components.linearcircler.distance_limit = 3
 				end
 			end		
         end,   
@@ -335,6 +335,7 @@ local states=
 				if inst.lavae[i] ~= nil then
 					inst.lavae[i].destroy = false
 					inst.lavae[i].components.linearcircler.setspeed = 0.2
+					inst.lavae[i].components.linearcircler.distance_limit = 4
 				end
 			end		
             end,
@@ -342,12 +343,6 @@ local states=
         events=
         {
             EventHandler("animover", function(inst)
-			for i = 1,8 do
-				if inst.lavae[i] ~= nil then
-					inst.lavae[i].destroy = false
-					inst.lavae[i].components.linearcircler.setspeed = 0.2
-				end
-			end
 			inst.sg:GoToState("idle")
 		end),
         },
@@ -391,12 +386,15 @@ local states=
             if inst.components.locomotor then
                 inst.components.locomotor:StopMoving()
             end
-            --inst.Light:Enable(false)
-            --inst.AnimState:ClearBloomEffectHandle()
-            -- inst.AnimState:SetBuild("dragonfly_build")
             inst.AnimState:PlayAnimation("death")
             inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/death")
             inst.Physics:ClearCollisionMask()
+			inst.Light:Enable(false)
+			for i = 1,8 do
+				if inst.lavae[i] ~= nil then
+					inst.lavae[i]:Remove()
+				end
+			end	
         end,
 
         timeline=
@@ -407,7 +405,7 @@ local states=
             TimeEvent(28*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/land") end),
             TimeEvent(29*FRAMES, function(inst)
                 ShakeIfClose(inst)
-                inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))            
+                inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))				
             end),
         },
 
@@ -424,7 +422,6 @@ local states=
                 else
                     inst.AnimState:PlayAnimation("walk_pre")
                 end
-                --inst.components.locomotor:WalkForward()
             end,
 
             events =
@@ -504,11 +501,6 @@ local states=
             tags = {"busy", "sleeping"},
             
             onenter = function(inst)
-				--inst.SpawnLavae(inst) --Remove this after testing.
-				
-				
-				
-				
 				
                 if inst.components.locomotor then
                     inst.components.locomotor:StopMoving()

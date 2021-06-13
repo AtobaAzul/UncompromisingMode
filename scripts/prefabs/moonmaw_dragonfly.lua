@@ -297,7 +297,7 @@ local function OnKill(inst, data)
     end--]]
 end
 
-local loot = {"meat", "meat", "meat", "meat", "meat", "meat", "meat", "meat", "dragon_scales"}
+local loot = {"meat", "meat", "meat", "meat", "meat", "meat", "meat", "meat", "glass_scales","glass_scales","glass_scales", "moonglass_geode","moonglass_geode","moonglass_geode"}
 
 local function OnDead(inst)
     TheWorld:PushEvent("mockflykilled", inst)
@@ -406,7 +406,7 @@ local function fn(Sim)
     inst.Transform:SetScale(1.3,1.3,1.3)
     
     --MakePoisonableCharacter(inst)
-	MakeCharacterPhysics(inst, 500, 1.4)
+	MakeCharacterPhysics(inst, 500, 2.5)
 	
     --MakeFlyingGiantCharacterPhysics(inst, 500, 1.4)
 	
