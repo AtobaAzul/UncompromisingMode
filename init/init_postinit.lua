@@ -21,6 +21,7 @@ local component_post = {
 	"fueled",
 	"perishable",
 	--"carnivalevent",
+	"lootdropper",
 }
 
 local prefab_post = {
