@@ -5,7 +5,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 --	[ 		Wigfrid Descriptions		]   --
 
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "You need my help! And your body..."
-    ANNOUNCE.ANNOUNCE_WINONAGEN = "I haven't gotten my *putting rocks in machines* badge yet."
+    ANNOUNCE.ANNOUNCE_WINONAGEN = "I haven't gotten my \"putting rocks in machines\" badge yet."
     ANNOUNCE.ANNOUNCE_RATRAID = "Sounds like a rat raid!"
     ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Everyone, tuck your pants into your socks! Quick!"
     ANNOUNCE.ANNOUNCE_RATRAID_OVER = "They're taking our gear away!"
@@ -204,8 +204,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.LIGHTNINGHOUND = "This isn't normal lightning, this is ADVANCED lightning!"
 	DESCRIBE.SPOREHOUND = "Get away Woby! He might be contagious!"
 	DESCRIBE.GLACIALHOUND = "Cool friend, Woby!"
-	DESCRIBE.RNESKELETON = "Wanna dance?"
-	DESCRIBE.RAT_WHIP = "Nature never intended for this."
+	DESCRIBE.RNESKELETON = "Hello! What story led you to be like that?"
+	DESCRIBE.RAT_WHIP = "Resourceful!... Bleh."
 	DESCRIBE.KLAUS_AMULET = "Goat power!"
 	DESCRIBE.CRABCLAW = "He left his claw behind!" --Generic line for now, this is unimplemented
 	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
@@ -245,16 +245,16 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
 	
 	DESCRIBE.ANCIENT_AMULET_RED = "I would still like to avoid being hurt."
-	DESCRIBE.UM_BEAR_TRAP = "Thats not very humane!"
+	DESCRIBE.UM_BEAR_TRAP = "Normally these are meant for, uh, bears."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Who left their gear out like this?"
-	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "I don't feel good about this..."
-	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "I don't feel good about this..."
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "Normally these are meant for, uh, bears."
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Normally these are meant for, uh, bears."
 	DESCRIBE.CORNCAN = "Oh boy! Corn!"
-	DESCRIBE.SKULLCHEST_CHILD = "Wortox once popped out of this thing. Almost gave me a heart attack!"
+	DESCRIBE.SKULLCHEST_CHILD = "Wortox popped out of it once!"
 	
 	DESCRIBE.SLOBBERLOBBER = "No spitting in camp!"
 	DESCRIBE.GORE_HORN_HAT = "Think like a rhino, smash into things like a rhino!"
-	DESCRIBE.BEARGERCLAW = "Natures design."
+	DESCRIBE.BEARGERCLAW = "Nature's design."
 	DESCRIBE.FEATHER_FROCK = "I've always wondered how it would feel to be a bird!"
 	
 	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nIt's all carved up!"
@@ -270,11 +270,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.BLUE_MUSHED_ROOM = "I'm not sure it's any better mushed."
 	
 	--StantonStuff
-	DESCRIBE.SKULLFLASK = "That's a spooky cup."
-	DESCRIBE.SKULLFLASK_EMPTY = "It's empty, for now."
-	DESCRIBE.STANTON_SHADOW_TONIC = "I don't like the look of this."
+	DESCRIBE.SKULLFLASK = "Cool!"
+	DESCRIBE.SKULLFLASK_EMPTY = "No more!"
+	DESCRIBE.STANTON_SHADOW_TONIC = "I shouldn't..."
 	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
-	DESCRIBE.STANTON = "I don't think I should drink with him."
+	DESCRIBE.STANTON = "Oh, I'm sorry sir, but I am not allowed to drink!"
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "Huh, it didn't do anything."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = ""
 	--StantonStuff
@@ -286,9 +286,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	
 
 	--Stuff for Canis to check
-	DESCRIBE.MOONMAW_DRAGONFLY = "Uh. We'd better get out'a here, Woby."
-	DESCRIBE.MOONMAW_LAVAE = ""
-	DESCRIBE.SNAPPERTURTLE = ""
-	DESCRIBE.SNAPPERTURTLEBABY = ""
-	DESCRIBE.SNAPPERTURTLENEST = ""
+	DESCRIBE.MOONMAW_DRAGONFLY = "Look at all of those sharp edges!"
+	DESCRIBE.MOONMAW_LAVAE = "Very sharp, and very fast!"
+	DESCRIBE.SNAPPERTURTLE = "Look! A snapping turtle! These guy's can easily snap your finger off!"
+	DESCRIBE.SNAPPERTURTLEBABY = "Don't underestimate those jaw- WOBY NO!"
+	DESCRIBE.SNAPPERTURTLENEST = "Looks like they nest here!"
 	--Stuff for Canis to check	
