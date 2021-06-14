@@ -325,6 +325,7 @@ local states=
 			if inst.lavae[i] ~= nil then
 				inst.lavae[i].destroy = true
 				inst.lavae[i].components.linearcircler.setspeed = 3
+				inst.AnimState:SetFinalOffset(1)
 			end
 		end
 			
@@ -336,6 +337,7 @@ local states=
 					inst.lavae[i].destroy = false
 					inst.lavae[i].components.linearcircler.setspeed = 0.2
 					inst.lavae[i].components.linearcircler.distance_limit = 4
+					inst.AnimState:SetFinalOffset(2)
 				end
 			end		
             end,

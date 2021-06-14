@@ -22,6 +22,7 @@ return {
 	"moonmaw_lavae",
 	"glass_scales",
 	"armor_glassmail",
+	"armor_glassmail_shards",
 	
 	"lavaspit",
 	--"sandhill",
