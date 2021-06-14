@@ -35,7 +35,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_RNEFOG = "This fog makes it hard to view my surroundings."
     DESCRIBE.UNCOMPROMISING_RAT = "Rodentia kleptomanis, and quite the large specimen!"
     DESCRIBE.UNCOMPROMISING_RATHOLD = "One entrance to a no doubt vast tunnel system!"
-    DESCRIBE.RATPOISONBOTTLE = "The toxic elemnts of the fungus have been fully activated."
+    DESCRIBE.RATPOISONBOTTLE = "The toxic elements of the fungus have been fully activated."
     DESCRIBE.RATPOISON = "A minor chemical odor emanating from the mixture attracts rodents."
 
     DESCRIBE.MONSTERSMALLMEAT = "A small quantity of dubiously sourced meat."
@@ -209,7 +209,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 
 	DESCRIBE.MAGMAHOUND = "A hound that projectile vomits magma."
 	DESCRIBE.LIGHTNINGHOUND = "I must watch my step, they electrify the earth."
-	DESCRIBE.SPOREHOUND = "I wonder how the toad transmitted the mushrooms."
+	DESCRIBE.SPOREHOUND = "I wonder how the toad transmitted the mushrooms?"
 	DESCRIBE.GLACIALHOUND = "This one throws frozen spikes."
 	DESCRIBE.RNESKELETON = "A living human skeleton."
 	DESCRIBE.RAT_WHIP = "A makeshift whip fashioned from rat appendages. Lovely."
@@ -259,7 +259,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.SKULLCHEST_CHILD = "The items inside fade into blackness."
 	
 	DESCRIBE.ANCIENT_AMULET_RED = "Souls? I used to not believe in such nonsense..."
-	DESCRIBE.SLOBBERLOBBER = " Nature is disgusting."
+	DESCRIBE.SLOBBERLOBBER = " Everything salivates, dear."
 	DESCRIBE.GORE_HORN_HAT = "Natures knife."
 	DESCRIBE.BEARGERCLAW = "The hand of the Meles meles, designed for digging."
 	DESCRIBE.FEATHER_FROCK = "It's not an effective piece of clothing."
@@ -279,9 +279,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "It keeps me alert, but without care."
 	DESCRIBE.SKULLFLASK_EMPTY = "I can see the liquid slowly returning."
-	DESCRIBE.STANTON_SHADOW_TONIC = "Fall asleep? Why I never."
+	DESCRIBE.STANTON_SHADOW_TONIC = "Fall asleep? I'd hope so."
 	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
-	DESCRIBE.STANTON = "Hold still, I simply must study your anatomy."
+	DESCRIBE.STANTON = "Someone of actual conversation? Hello."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "I can study, unwavered."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Science no longer comforts me."
 	--StantonStuff
@@ -292,9 +292,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.DEERCLOPS_BARRIER = "The monster's proficiency in ice magic seems to have improved."
 
 	--Stuff for Canis to check
-	DESCRIBE.MOONMAW_DRAGONFLY = "If this species couldn't get any more strange."
-	DESCRIBE.MOONMAW_LAVAE = ""
-	DESCRIBE.SNAPPERTURTLE = ""
-	DESCRIBE.SNAPPERTURTLEBABY = ""
-	DESCRIBE.SNAPPERTURTLENEST = ""
+	DESCRIBE.MOONMAW_DRAGONFLY = "I am not sure where I'd begin on describing that."
+	DESCRIBE.MOONMAW_LAVAE = "I see a fetus inside. Quaint."
+	DESCRIBE.SNAPPERTURTLE = "Chelydra serpentina! Not safe for the children!"
+	DESCRIBE.SNAPPERTURTLEBABY = "Their jaws are still a danger during their infantile state."
+	DESCRIBE.SNAPPERTURTLENEST = "The animal's nesting grounds."
 	--Stuff for Canis to check	
