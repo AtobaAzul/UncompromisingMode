@@ -5,9 +5,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 --	[ 		Maxwell Descriptions		]	--
 
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "I'll have to impart this heart to their rotting corpse."
-    ANNOUNCE.ANNOUNCE_WINONAGEN = "I'm more of a magic and dark arts kind of guy."
-    ANNOUNCE.ANNOUNCE_RATRAID = "Oh heavens no."
-    ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "...come now Charlie, is this really nessecary?"
+    ANNOUNCE.ANNOUNCE_WINONAGEN = "I'm more of a \"magic and dark arts\" man."
+    ANNOUNCE.ANNOUNCE_RATRAID = "Oh, no."
+    ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "...Come now Charlie, is this really nessecary?"
     -- Yes. Enjoy.
     ANNOUNCE.ANNOUNCE_RATRAID_OVER = "How dare you? Get back here!"
     ANNOUNCE.ANNOUNCE_ACIDRAIN = {
@@ -210,7 +210,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.MAGMAHOUND = "I'm jealous, I shouldve made red hounds do that."
 	DESCRIBE.LIGHTNINGHOUND = "Why didn't I think of that? Tsk."
 	DESCRIBE.SPOREHOUND = "Hrmmph, it seems like that sickly toad improved them."
-	DESCRIBE.GLACIALHOUND = "Blue hounds too. Is Charlie pulling your strings?"
+	DESCRIBE.GLACIALHOUND = "I should've made blue hounds do that!"
 	DESCRIBE.RNESKELETON = "Back for revenge? I'll kill you again if I have to."
 	DESCRIBE.RAT_WHIP = "What a way to go."
 	DESCRIBE.KLAUS_AMULET = "A powerful, wonderful enchantment!"
@@ -237,8 +237,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.KNOOK = "He's even more of a jerk in motion!"
 	DESCRIBE.ROSHIP = "Your face looks even worse now!"
 	
-	DESCRIBE.UM_PAWN = "The miniature work took me a while."
-	DESCRIBE.UM_PAWN_NIGHTMARE = "These are the ones I based them off of."
+	DESCRIBE.UM_PAWN = "How are these walking? I thought I discarded them?"
+	DESCRIBE.UM_PAWN_NIGHTMARE = "Those were the initial designs..."
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
@@ -253,9 +253,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	
 	DESCRIBE.ANCIENT_AMULET_RED = "I don't think they need their souls anymore."
 	DESCRIBE.UM_BEAR_TRAP = "I never taught them to do that."
-	DESCRIBE.UM_BEAR_TRAP_OLD = "Someone is hunting us. Walrus perhaps?"
-	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "Pain and entrapment, sounds familiar."
-	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Pain and entrapment, sounds familiar."
+	DESCRIBE.UM_BEAR_TRAP_OLD = "Fantastic, they're getting smarter."
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "It's better than a tooth trap."
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "It's better than a tooth trap."
 	DESCRIBE.CORNCAN = "Corn is presumably contained inside."
 	DESCRIBE.SKULLCHEST_CHILD = "It keeps items inside the local pocket dimension."
 	
@@ -279,7 +279,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "His mixture is actually quite impressive."
 	DESCRIBE.SKULLFLASK_EMPTY = "The flask appears to be enchanted as well, brilliant."
-	DESCRIBE.STANTON_SHADOW_TONIC = "A fuel drink? I could do this all day."
+	DESCRIBE.STANTON_SHADOW_TONIC = "A fuel cocktail? Please, I could do this all night!"
 	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 	DESCRIBE.STANTON = "Who are you? Did I kill you?"
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "A comforting effect as well, almost like eggnog."
@@ -289,13 +289,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
 	DESCRIBE.THEATERCORN = "Brings back old memories."
-	DESCRIBE.DEERCLOPS_BARRIER = "His proficiency in ice magic is improving... Why is everything changing?"
+	DESCRIBE.DEERCLOPS_BARRIER = "She's becoming more efficient in her use of magic! I'm so proud!"
 	
 
 	--Stuff for Canis to check
-	DESCRIBE.MOONMAW_DRAGONFLY = "They're forcing their way into her."
-	DESCRIBE.MOONMAW_LAVAE = ""
-	DESCRIBE.SNAPPERTURTLE = ""
-	DESCRIBE.SNAPPERTURTLEBABY = ""
-	DESCRIBE.SNAPPERTURTLENEST = ""
+	DESCRIBE.MOONMAW_DRAGONFLY = "Oh! I can't even look at you!"
+	DESCRIBE.MOONMAW_LAVAE = "My favorite: A spike that's the size of my entire body."
+	DESCRIBE.SNAPPERTURTLE = "Snap at me and I'll kill you."
+	DESCRIBE.SNAPPERTURTLEBABY = "Don't think your age excuses your actions, mister."
+	DESCRIBE.SNAPPERTURTLENEST = "Must've been from the ocean. I've never seen them on the island before."
 	--Stuff for Canis to check	

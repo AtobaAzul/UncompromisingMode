@@ -48,7 +48,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
 	DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
 	DESCRIBE.SPIDERQUEENCORPSE = "An inevitable end."
-	ANNOUNCE.ANNOUNCE_SNEEZE = "achoo! achoo! sniff."
+	ANNOUNCE.ANNOUNCE_SNEEZE = "Achoo! Achoo! Sniff."
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Ugh. Even my sinuses are suffering."
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "My sinuses are clear, but suffering continues."
 	ANNOUNCE.ANNOUNCE_FIREFALL = {
@@ -201,9 +201,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.SCREECHER_TRINKET = "The stench of death lingers here."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "It's waiting for nightfall."}
 
-	DESCRIBE.MAGMAHOUND = "It rains hell on the unfortunate."
+	DESCRIBE.MAGMAHOUND = "It rains hell upon the damned."
 	DESCRIBE.LIGHTNINGHOUND = "Death from above!"
-	DESCRIBE.SPOREHOUND = "An ill fated beast."
+	DESCRIBE.SPOREHOUND = "An ill-fated beast."
 	DESCRIBE.GLACIALHOUND = "Its frozen heart still beats."
 	DESCRIBE.RNESKELETON = "Has the reaper come to take me? What took you so long?"
 	DESCRIBE.RAT_WHIP = "How degrading."
@@ -246,15 +246,15 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
 	
 	DESCRIBE.ANCIENT_AMULET_RED = "It will keep whatevers left of my soul together."
-	DESCRIBE.UM_BEAR_TRAP = "Would lead to a slow and gruesome death in the right circumstances."
-	DESCRIBE.UM_BEAR_TRAP_OLD = "Would lead to a slow and gruesome death in the right circumstances."
+	DESCRIBE.UM_BEAR_TRAP = "The jaws of a beast wait to strike at every corner."
+	DESCRIBE.UM_BEAR_TRAP_OLD = "The jaws of a beast wait to strike at every corner."
 	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "A cruel, inhumane tool."
 	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "A cruel, inhumane tool."
 	DESCRIBE.CORNCAN = "It seems like it's corn."
 	DESCRIBE.SKULLCHEST_CHILD = "I'm able to reach another plane, but I still cannot reach Abigail..."
 	
 	DESCRIBE.SLOBBERLOBBER = "Nature is disgusting."
-	DESCRIBE.GORE_HORN_HAT = "Natures knife."
+	DESCRIBE.GORE_HORN_HAT = "Nature's knife."
 	DESCRIBE.BEARGERCLAW = "I've got dirt in my eye. For real this time."
 	DESCRIBE.FEATHER_FROCK = "Ew! Gross! I don't want to wear it!"
 	
@@ -271,13 +271,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.BLUE_MUSHED_ROOM = "It's hopes and dreams have been crushed."
 
 	--StantonStuff
-	DESCRIBE.SKULLFLASK = "Keeps my mind calm, for a moment."
-	DESCRIBE.SKULLFLASK_EMPTY = "I doubt it will return."
-	DESCRIBE.STANTON_SHADOW_TONIC = "Gross blackness."
+	DESCRIBE.SKULLFLASK = "It helps me cope."
+	DESCRIBE.SKULLFLASK_EMPTY = "Please come back..."
+	DESCRIBE.STANTON_SHADOW_TONIC = "Icky blackness."
 	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 	DESCRIBE.STANTON = "I have no interest in you."
-	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "The tonic clouds my mind."
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "My mind is clearing."
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "Everything is... better..."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "My mind is clearing. Ugh."
 	--StantonStuff
 
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
@@ -286,9 +286,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.DEERCLOPS_BARRIER = "A few of these have cracks."
 	
 	--Stuff for Canis to check
-	DESCRIBE.MOONMAW_DRAGONFLY = "Covered in glass."
-	DESCRIBE.MOONMAW_LAVAE = ""
-	DESCRIBE.SNAPPERTURTLE = ""
-	DESCRIBE.SNAPPERTURTLEBABY = ""
-	DESCRIBE.SNAPPERTURTLENEST = ""
+	DESCRIBE.MOONMAW_DRAGONFLY = "I see myself in it.. The reflection, I can see my reflection."
+	DESCRIBE.MOONMAW_LAVAE = "Daggers trained at my heart!"
+	DESCRIBE.SNAPPERTURTLE = "I wish I could hide in a shell, sometimes."
+	DESCRIBE.SNAPPERTURTLEBABY = "I could set you on your back and you'd die."
+	DESCRIBE.SNAPPERTURTLENEST = "Oh, joy."
 	--Stuff for Canis to check	

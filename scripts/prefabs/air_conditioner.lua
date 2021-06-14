@@ -174,16 +174,19 @@ local function DoPuff(inst, channeler)
 		local greencaps = inst.components.container:FindItems( function(item) return item:HasTag("green_mushroom_fuel") and not item:HasTag("mushed_room") end )
 
 		for i, v in ipairs(bluecaps) do
+			v.components.perishable:SetOnPerishFn(nil)
 			v.components.perishable.onperishreplacement = "blue_mushed_room"
 			v:DoTaskInTime(0, function(v) v.components.perishable:Perish() end)
 		end
 		
 		for i, v in ipairs(redcaps) do
+			v.components.perishable:SetOnPerishFn(nil)
 			v.components.perishable.onperishreplacement = "red_mushed_room"
 			v:DoTaskInTime(0, function(v) v.components.perishable:Perish() end)
 		end
 		
 		for i, v in ipairs(greencaps) do
+			v.components.perishable:SetOnPerishFn(nil)
 			v.components.perishable.onperishreplacement = "green_mushed_room"
 			v:DoTaskInTime(0, function(v) v.components.perishable:Perish() end)
 		end

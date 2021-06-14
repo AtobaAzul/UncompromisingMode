@@ -204,7 +204,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.MAGMAHOUND = "Eep, he spits!"
 	DESCRIBE.LIGHTNINGHOUND = "Ouch ouch ouch! Our feetsies!"
 	DESCRIBE.SPOREHOUND = "A sick angry puppy!"
-	DESCRIBE.GLACIALHOUND = "Its frozen glare frightens us."
+	DESCRIBE.GLACIALHOUND = "It freezes us up just by looking at us!!"
 	DESCRIBE.RNESKELETON = "Oh, hello there! Would you like something?"
 	DESCRIBE.RAT_WHIP = "It's pretty stinky. We'd rather use something else."
 	DESCRIBE.KLAUS_AMULET = "We've been naughty..."
@@ -230,8 +230,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.KNOOK = "We think we should keep a distance."
 	DESCRIBE.ROSHIP = "You're our least favorite!"
 	
-	DESCRIBE.UM_PAWN = "We never liked alarms."
-	DESCRIBE.UM_PAWN_NIGHTMARE = "We never liked alarms."
+	DESCRIBE.UM_PAWN = "Sounds like my old alarm clock!"
+	DESCRIBE.UM_PAWN_NIGHTMARE = "Sounds like my old alarm clock!"
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
@@ -245,18 +245,18 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.BLOWGUNAMMO_SLEEP = DESCRIBE.BLOWDART_SLEEP
 	DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
 	
-	DESCRIBE.ANCIENT_AMULET_RED = "Does it have room for both of our souls?"
-	DESCRIBE.UM_BEAR_TRAP = "A fanged metal web!"
-	DESCRIBE.UM_BEAR_TRAP_OLD = "A fanged metal web!"
-	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "Ouch, that's going to hurt..."
-	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Ouch, that's going to hurt..."
-	DESCRIBE.CORNCAN = "We left our can opener at home."
-	DESCRIBE.SKULLCHEST_CHILD = "We can give things to others far away."
+	DESCRIBE.ANCIENT_AMULET_RED = "Does it have room for both of us?"
+	DESCRIBE.UM_BEAR_TRAP = "Eep!"
+	DESCRIBE.UM_BEAR_TRAP_OLD = "Eep!"
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "Ouch. We prefer webbing."
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Ouch. We prefer webbing. "
+	DESCRIBE.CORNCAN = "I was never allowed to touch a can opener. Mom said I'd cut my finger open."
+	DESCRIBE.SKULLCHEST_CHILD = "Can we reach our arms in there and hug someone on the other side?"
 	
-	DESCRIBE.SLOBBERLOBBER = "Spitting is rather rude."
-	DESCRIBE.GORE_HORN_HAT = "Don't touch the pointy end."
-	DESCRIBE.BEARGERCLAW = "Pawsome."
-	DESCRIBE.FEATHER_FROCK = "Feathers and fur are a bad combination."
+	DESCRIBE.SLOBBERLOBBER = "Spitting is rude!"
+	DESCRIBE.GORE_HORN_HAT = "Ow! Don't touch the pointy end! Ow..."
+	DESCRIBE.BEARGERCLAW = "Pawsome! Haha!"
+	DESCRIBE.FEATHER_FROCK = "I feel like a prince! No, a king!"
 	
 	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nI think I broke it."
 	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nI think I broke it."
@@ -271,13 +271,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.BLUE_MUSHED_ROOM = "Squish!"
 	
 	--StantonStuff
-	DESCRIBE.SKULLFLASK = "This drink calms our mind."
-	DESCRIBE.SKULLFLASK_EMPTY = "I wonder where we can get more."
-	DESCRIBE.STANTON_SHADOW_TONIC = "Should we drink?"
+	DESCRIBE.SKULLFLASK = "I don't think I'm allowed to have this..."
+	DESCRIBE.SKULLFLASK_EMPTY = "All gone."
+	DESCRIBE.STANTON_SHADOW_TONIC = "Mom would kill me if she saw me doing this..."
 	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
-	DESCRIBE.STANTON = "He's a bit creepy."
-	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "We're feeling much more comfortable."
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Everything's getting scary again."
+	DESCRIBE.STANTON = "You're a bit... creepy..."
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "We're feeling more comfortable in our skin and fur!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Everything's getting scary again!!"
 	--StantonStuff
 	
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
@@ -287,9 +287,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	
 
 	--Stuff for Canis to check
-	DESCRIBE.MOONMAW_DRAGONFLY = "Not really a dragon-fly any more, huh."
-	DESCRIBE.MOONMAW_LAVAE = ""
-	DESCRIBE.SNAPPERTURTLE = ""
-	DESCRIBE.SNAPPERTURTLEBABY = ""
-	DESCRIBE.SNAPPERTURTLENEST = ""
+	DESCRIBE.MOONMAW_DRAGONFLY = "Eep! They look mad!!"
+	DESCRIBE.MOONMAW_LAVAE = "We don't need another point going into us!"
+	DESCRIBE.SNAPPERTURTLE = "He's cute! Kinda!"
+	DESCRIBE.SNAPPERTURTLEBABY = "A single kick could knock it over."
+	DESCRIBE.SNAPPERTURTLENEST = "Something sleeps here, right?"
 	--Stuff for Canis to check	
