@@ -202,9 +202,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	ACTIONFAIL.GIVE = {NOTNIGHT = "Some dishes are best served in the evening."}
 	
 	DESCRIBE.MAGMAHOUND = "A walking furnace. If only they could be domesticated..."
-	DESCRIBE.LIGHTNINGHOUND = "It's definitely from the tropics."
+	DESCRIBE.LIGHTNINGHOUND = "Definitely from the tropics."
 	DESCRIBE.SPOREHOUND = "This chein's sick."
-	DESCRIBE.GLACIALHOUND = "I don't like its cold stare."
+	DESCRIBE.GLACIALHOUND = "I don't like it's cold stare."
 	DESCRIBE.RNESKELETON = "No more stomach? Sorry ami, I can't help you!"
 	DESCRIBE.RAT_WHIP = "This is a bad idea."
 	DESCRIBE.KLAUS_AMULET = "The steel is chilling."
@@ -228,7 +228,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH
 	
 	DESCRIBE.BIGHT = "What a monstrous concoction!"
-	DESCRIBE.KNOOK = "The horse is baked into the inside."
+	DESCRIBE.KNOOK = "The horse is baked to it's core."
 	DESCRIBE.ROSHIP = "It cooks up a shocker!"
 	
 	DESCRIBE.UM_PAWN = "I'll watch my step."
@@ -248,11 +248,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.ANCIENT_AMULET_RED = "It stirs my very soul. Like a stew."
 	DESCRIBE.UM_BEAR_TRAP = "I'll keep my distance."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "I'll keep my distance."
-	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "Time to capture some fresh ingredients."
-	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Time to capture some fresh ingredients."
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "What works, works."
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "What works, works."
 	DESCRIBE.SKULLCHEST_CHILD = "Now I can get fresh produce from far away!"
 	
-	DESCRIBE.SLOBBERLOBBER = "Not in the food!."
+	DESCRIBE.SLOBBERLOBBER = "No! Not in the food! Or anywhere near the food! \nOn second thought, get it out of here!"
 	DESCRIBE.GORE_HORN_HAT = "Shiskabob time!"
 	DESCRIBE.BEARGERCLAW = "Atleast MY hands will be clean."
 	DESCRIBE.FEATHER_FROCK = "De-feathering birds isn't really necissary when preparing poultry."
@@ -270,26 +270,26 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.BLUE_MUSHED_ROOM = "Too thick for a glaze."
 
 	--StantonStuff
-	DESCRIBE.SKULLFLASK = "It was nice of him to give me his recipe."
-	DESCRIBE.SKULLFLASK_EMPTY = "I wonder when I'll have more."
-	DESCRIBE.STANTON_SHADOW_TONIC = "Maybe it contains a new desired taste?"
+	DESCRIBE.SKULLFLASK = "He wagered his recipe. I'm still not sure if this is wine."
+	DESCRIBE.SKULLFLASK_EMPTY = "That's all she wrote."
+	DESCRIBE.STANTON_SHADOW_TONIC = "Hm, what kind of liquor is this? Tastes... Off."
 	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
-	DESCRIBE.STANTON = "He's interrupting my cooking."
+	DESCRIBE.STANTON = "A drink? I haven't had wine for a long time!"
 	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "Such a comforting taste."
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Oh well, that's over now."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Oh..."
 	--StantonStuff
 	
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
 	DESCRIBE.THEATERCORN = "Theater food always improves any experience."
-	DESCRIBE.DEERCLOPS_BARRIER = "I must find a weak point in this barrier."
+	DESCRIBE.DEERCLOPS_BARRIER = "We need to break through the barrier!"
 	
 
 	--Stuff for Canis to check
-	DESCRIBE.MOONMAW_DRAGONFLY = "Why does this world keep assailing me? I simply wish to cook!"
-	DESCRIBE.MOONMAW_LAVAE = ""
-	DESCRIBE.SNAPPERTURTLE = ""
-	DESCRIBE.SNAPPERTURTLEBABY = ""
-	DESCRIBE.SNAPPERTURTLENEST = ""
+	DESCRIBE.MOONMAW_DRAGONFLY = "I won't able to use ANY part of THAT animal!"
+	DESCRIBE.MOONMAW_LAVAE = "Sharper than knives, flying straight at my face!"
+	DESCRIBE.SNAPPERTURTLE = "I've seen plenty of you before! I'm not forgiving you for my toe!"
+	DESCRIBE.SNAPPERTURTLEBABY = "Near helpless as a baby."
+	DESCRIBE.SNAPPERTURTLENEST = "They nest here, it seems."
 	--Stuff for Canis to check	
