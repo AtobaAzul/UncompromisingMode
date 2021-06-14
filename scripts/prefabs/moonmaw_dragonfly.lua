@@ -327,6 +327,8 @@ local function SpawnLavae(inst)
 		inst.lavae[i].components.linearcircler.distance_limit = LIMIT
 		inst.lavae[i].components.linearcircler.setspeed = 0.2
 		inst.lavae[i].hidden = false
+		inst.lavae[i].AnimState:PlayAnimation("hover")
+		--inst.lavae[i].AnimState:PushAnimation("hover",true)
 	end
 end
 
@@ -418,7 +420,7 @@ local function fn(Sim)
 
     anim:SetBank("moonmaw_dragonfly")
     anim:SetBuild("moonmaw_dragonfly")
-    anim:PlayAnimation("idle", true)
+    --anim:PlayAnimation("idle", true)
 	
 	
 	inst.entity:SetPristine()
@@ -541,7 +543,7 @@ local function fn(Sim)
 
     --inst:ListenForEvent("timerdone", RockThrowTimer)
 	inst.SpawnLavae = SpawnLavae
-	inst:DoTaskInTime(0,SpawnLavae)
+	inst:DoTaskInTime(0,function(inst) inst.sg:GoToState("skyfall") end)
 	inst.TryEjectLavae = TryEjectLavae
 	
 	inst:DoPeriodicTask(10,TimerDone)

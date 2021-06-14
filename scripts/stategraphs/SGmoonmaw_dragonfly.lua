@@ -46,7 +46,10 @@ local function onattackedfn(inst, data)
     if inst.components.health and not inst.components.health:IsDead()
     and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("frozen")) then
         if inst.components.combat and data and data.attacker then inst.components.combat:SuggestTarget(data.target) end
-        inst.sg:GoToState("hit")
+			inst.sg:GoToState("hit")
+		elseif inst.sg:HasStateTag("crashed") then
+			inst.sg:GoToState("getup")
+
     end
 end
 
@@ -392,11 +395,13 @@ local states=
             inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/death")
             inst.Physics:ClearCollisionMask()
 			inst.Light:Enable(false)
+			if inst.lavae ~= nil then
 			for i = 1,8 do
 				if inst.lavae[i] ~= nil then
 					inst.lavae[i]:Remove()
 				end
-			end	
+			end
+			end
         end,
 
         timeline=
@@ -579,6 +584,61 @@ local states=
                 TimeEvent(26*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/fly", "flying") end),
             },
         },
+    State{
+        name = "skyfall",
+        tags = {"busy", "canrotate"},
+        
+        onenter = function(inst)
+		inst.Physics:Stop()
+        inst.AnimState:PlayAnimation("skyfall")
+        end,			
+        events=
+        {
+            EventHandler("animover", function(inst)
+			inst.components.groundpounder:GroundPound()
+			inst.sg:GoToState("crashed")
+		end),
+        },
+    },
+    State{
+        name = "crashed",
+        tags = {"busy", "canrotate","crashed"},
+        
+        onenter = function(inst)
+		inst.Physics:Stop()
+        inst.AnimState:PlayAnimation("crashed_loop")
+		end,
+        events=
+        {
+            EventHandler("animover", function(inst)
+			if inst.count == nil then
+				inst.count = 0
+			end
+			inst.count = inst.count+1
+			if inst.count > 10 then
+				inst.sg:GoToState("getup")
+			else
+				inst.sg:GoToState("crashed")
+			end
+		end),
+        },
+    },
+    State{
+        name = "getup",
+        tags = {"busy", "canrotate"},
+        
+        onenter = function(inst)
+		inst.Physics:Stop()
+        inst.AnimState:PlayAnimation("getup")
+		inst.SpawnLavae(inst)
+		end,
+        events=
+        {
+            EventHandler("animover", function(inst)
+			inst.sg:GoToState("idle")
+		end),
+        },
+    },
 }
 
 
