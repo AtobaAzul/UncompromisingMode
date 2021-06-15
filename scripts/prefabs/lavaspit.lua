@@ -33,13 +33,15 @@ end
 
 local function TrySlowdown(inst, target)
 	local debuffkey = inst.prefab
-		
-	if target._lavavomit_speedmulttask ~= nil then
-		target._lavavomit_speedmulttask:Cancel()
-	end
-	target._lavavomit_speedmulttask = target:DoTaskInTime(0.6, function(i) i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) i._lavavomit_speedmulttask = nil end)
+	
+	if not target:HasTag("player") then
+		if target._lavavomit_speedmulttask ~= nil then
+			target._lavavomit_speedmulttask:Cancel()
+		end
+		target._lavavomit_speedmulttask = target:DoTaskInTime(0.6, function(i) i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) i._lavavomit_speedmulttask = nil end)
 
-	target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.5)
+		target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.5)
+	end
 	
 	if inst.components.propagator ~= nil and target.components.combat ~= nil and target.components.health ~= nil and not target:HasTag("dragonfly") and not target:HasTag("lavae") then
 		target.components.health:DoDelta(-3)

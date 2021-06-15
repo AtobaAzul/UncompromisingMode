@@ -55,8 +55,7 @@ local function fnhiss()
         return inst
     end
 	
-    inst.SoundEmitter:PlaySound("UCSounds/AcidBurn/AcidBurn", "acidhiss")
-    inst.SoundEmitter:SetVolume("acidhiss", .2)
+    inst.SoundEmitter:PlaySound("UCSounds/AcidBurn/AcidBurn", nil, 0.25)
 	
 	inst:ListenForEvent("animover", inst.Remove)
 	
