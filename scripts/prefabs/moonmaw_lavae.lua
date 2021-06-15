@@ -71,7 +71,7 @@ local function lavaering_fn()
 	inst.AnimState:SetFinalOffset(2)
     inst.AnimState:SetBank("moonmaw_lavae")
     inst.AnimState:SetBuild("moonmaw_lavae")
-    inst.AnimState:PlayAnimation("hover", true)
+    --inst.AnimState:PlayAnimation("hover", true)
 
     --inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/tornado", "spinLoop")
 	inst.Transform:SetFourFaced()
@@ -135,6 +135,7 @@ local function AnimOver(inst)
 			leader.lavae[number]:Show()
 			leader.lavae[number].hidden = false
 			leader.lavae[number].AnimState:PlayAnimation("descend")
+			leader.lavae[number].AnimState:PushAnimation("hover")
 		end
 	end
 	inst:Remove()
@@ -145,9 +146,6 @@ if inst.components.health ~= nil and not inst.components.health:IsDead() then
 	if inst.components.follower ~= nil and inst.components.follower.leader ~= nil and inst.number ~= nil then
 		local leader = inst.components.follower.leader
 		if leader.components.combat ~= nil and leader.components.combat.target == nil then --No Target, return home
-			local number = inst.number 
-			leader.lavae[number]:Show()
-			leader.lavae[number].hidden = false
 			inst.AnimState:PlayAnimation("ascend")
 			inst:ListenForEvent("animover", AnimOver)
 		end	

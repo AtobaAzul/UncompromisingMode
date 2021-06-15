@@ -125,9 +125,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.SHADOW_TELEPORTER = "Let us strike it down, and take it's treasure!"
 	DESCRIBE.POLLENMITEDEN = "The Valhalla of bugs."
     DESCRIBE.POLLENMITES = "Infest not me, bugs!"
-    DESCRIBE.SHADOW_CROWN = "I shall dodge with great switfness, or perish quickly while trying!"
+    DESCRIBE.SHADOW_CROWN = "I shall dodge with great swiftness!"
     DESCRIBE.RNEGHOST = DESCRIBE.GHOST
-	DESCRIBE.LICELOAF = "Toss it out!"
+	DESCRIBE.LICELOAF = "Toss it back to the swampwater!"
 	DESCRIBE.SUNGLASSES = "No longer can foes use the sunlight against me!"
 	DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
 	DESCRIBE.LUREPLAGUE_RAT = "A new plague arrives!"
@@ -205,7 +205,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.LIGHTNINGHOUND = "Thor's minion? What hath I done to gain his ire?"
 	DESCRIBE.SPOREHOUND = "Fenrir's spawn, twisted beyond recognition."
 	DESCRIBE.GLACIALHOUND = "A frozen hide!"	
-	DESCRIBE.RNESKELETON = "Fallen warriors!"
+	DESCRIBE.RNESKELETON = "A fallen warrior! Raise your weapon if you wish to fall again!"
 	DESCRIBE.RAT_WHIP = "Thy lashes sting, a feared weapon!"
 	DESCRIBE.KLAUS_AMULET = "The lock of a warrior!"
 	DESCRIBE.CRABCLAW = "A magnificent weapon to be adorned with jewels!" --Generic line for now, this is unimplemented
@@ -230,8 +230,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.KNOOK = "Two warriors mashed together!"
 	DESCRIBE.ROSHIP = "They fight a coward's way."
 	
-	DESCRIBE.UM_PAWN = "A coward who hides behind his comrades."
-	DESCRIBE.UM_PAWN_NIGHTMARE = "This one's different, are you a coward as well!"
+	DESCRIBE.UM_PAWN = "A coward who hides behind their comrades."
+	DESCRIBE.UM_PAWN_NIGHTMARE = "A corward who hides behind their comrades."
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
@@ -271,11 +271,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.BLUE_MUSHED_ROOM = "Mushed and crushed!"
 	
 	--StantonStuff
-	DESCRIBE.SKULLFLASK = "I drink for before or during battle!"
+	DESCRIBE.SKULLFLASK = "An honorary mead before battle! To great strength!"
 	DESCRIBE.SKULLFLASK_EMPTY = "An empty flask, it will be refilled!"
-	DESCRIBE.STANTON_SHADOW_TONIC = "To our health!"
+	DESCRIBE.STANTON_SHADOW_TONIC = "This is strange mead..."
 	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
-	DESCRIBE.STANTON = "A drinking contest!? You're bound to lose."
+	DESCRIBE.STANTON = "Hah! You don't know who you're wagering with!"
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "I fear NOTHING!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "A valkyrie never backs down."
 	--StantonStuff
@@ -287,9 +287,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 
 
 	--Stuff for Canis to check
-	DESCRIBE.MOONMAW_DRAGONFLY = "Ready for a rematch, dragon?"
-	DESCRIBE.MOONMAW_LAVAE = ""
-	DESCRIBE.SNAPPERTURTLE = ""
-	DESCRIBE.SNAPPERTURTLEBABY = ""
-	DESCRIBE.SNAPPERTURTLENEST = ""
+	DESCRIBE.MOONMAW_DRAGONFLY = "A rematch!"
+	DESCRIBE.MOONMAW_LAVAE = "The finnese of their movements nearly match mine!"
+	DESCRIBE.SNAPPERTURTLE = "Watch who you aggrovate, or thy shield shall be mine!"
+	DESCRIBE.SNAPPERTURTLEBABY = "It does not have the spirit of war, not yet."
+	DESCRIBE.SNAPPERTURTLENEST = "The territory of beast."
 	--Stuff for Canis to check	

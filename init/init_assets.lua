@@ -491,6 +491,7 @@ Assets = {
 	Asset("ANIM", "anim/armor_glassmail.zip"),
 	Asset("IMAGE", "images/inventoryimages/armor_glassmail.tex"),
 	Asset("ATLAS", "images/inventoryimages/armor_glassmail.xml"),
+	Asset("ANIM", "anim/armor_glassmail_shards.zip"),
 	
 	Asset("ANIM", "anim/haul_pigman.zip"),
 	Asset("ANIM", "anim/wackycocoons.zip"),
