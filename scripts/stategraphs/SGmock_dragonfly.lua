@@ -19,7 +19,7 @@ local function FireTrail(inst, x, y, z)
 	inst.firedrop.Transform:SetPosition(x, y, z)
 	inst.firedrop:DoTaskInTime(1.5, function(inst) inst.components.burnable:Extinguish() end)
 	inst.firedrop.persists = false
-    inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo", .5)
+    inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo", nil, .5)
     --inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
     local ents = TheSim:FindEntities(x, y, z, 3.5, nil, { "INLIMBO" })
 
