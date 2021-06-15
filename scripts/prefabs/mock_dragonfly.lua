@@ -369,13 +369,16 @@ local function LaunchProjectile(inst)
     local dz = c - z
     local rangesq = dx * dx + dz * dz
     local maxrange = 20
-    local bigNum = 15
-    local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange * 2)
+    local bigNum = 12
+    local speed = easing.linear(rangesq, bigNum, 2, maxrange * maxrange * 2)
 	projectile:AddTag("canthit")
+	
+    projectile.components.complexprojectile:SetLaunchOffset(Vector3(5, 4, 0))
 	--projectile.components.wateryprotection.addwetness = TUNING.WATERBALLOON_ADD_WETNESS/2
     projectile.components.complexprojectile:SetHorizontalSpeed(speed+math.random(4,9))
-    --projectile.components.complexprojectile:SetGravity(-25)
+    projectile.components.complexprojectile:SetGravity(-25)
     projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+    projectile.dragonflyspit = true
 	end
 end
 

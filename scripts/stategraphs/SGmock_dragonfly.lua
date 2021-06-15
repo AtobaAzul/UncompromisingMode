@@ -18,7 +18,8 @@ local function FireTrail(inst, x, y, z)
 	inst.firedrop = SpawnPrefab("firedrop")
 	inst.firedrop.Transform:SetPosition(x, y, z)
 	inst.firedrop:DoTaskInTime(1.5, function(inst) inst.components.burnable:Extinguish() end)
-    inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
+	inst.firedrop.persists = false
+    inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo", .5)
     --inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
     local ents = TheSim:FindEntities(x, y, z, 3.5, nil, { "INLIMBO" })
 
@@ -187,6 +188,7 @@ local states=
 				inst.spittle = SpawnPrefab("lavaspit")
                 inst.spittle.Transform:SetPosition(inst.Transform:GetWorldPosition())
                 inst.spittle.Transform:SetRotation(inst.Transform:GetRotation())
+                inst.spittle.dragonflyspit = true
 				end)
                 inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/vomitrumble", "vomitrumble")
             else
@@ -698,7 +700,7 @@ local states=
 				end
 				inst.Physics:Stop()
 
-				inst.AnimState:PlayAnimation("vomit")
+				inst.AnimState:PlayAnimation("vomit_atk")
 				if inst.foogley ~= nil then
 					inst.foogley = inst.foogley + 1
 				else
@@ -708,6 +710,28 @@ local states=
 
 			timeline =
 			{   
+            TimeEvent(56*FRAMES, function(inst) 
+				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                end
+			
+				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
+					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
+					inst:LaunchProjectile(inst.sg.statemem.target)
+					
+				end
+			end),
+            TimeEvent(58*FRAMES, function(inst)
+				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
+                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
+                end
+			
+				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
+					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
+					inst:LaunchProjectile(inst.sg.statemem.target)
+					
+				end
+			end),
             TimeEvent(60*FRAMES, function(inst) 
 				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
                     --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
@@ -719,7 +743,7 @@ local states=
 					
 				end
 			end),
-            TimeEvent(63*FRAMES, function(inst)
+            TimeEvent(62*FRAMES, function(inst) 
 				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
                     --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
                 end
@@ -730,7 +754,7 @@ local states=
 					
 				end
 			end),
-            TimeEvent(66*FRAMES, function(inst) 
+            TimeEvent(64*FRAMES, function(inst) 
 				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
                     --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
                 end
@@ -740,62 +764,7 @@ local states=
 					inst:LaunchProjectile(inst.sg.statemem.target)
 					
 				end
-			end),
-            TimeEvent(69*FRAMES, function(inst) 
-				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
-                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
-                end
-			
-				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
-					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
-					inst:LaunchProjectile(inst.sg.statemem.target)
-					
-				end
-			end),
-            TimeEvent(72*FRAMES, function(inst) 
-				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
-                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
-                end
-			
-				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
-					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
-					inst:LaunchProjectile(inst.sg.statemem.target)
-					
-				end
-			end),
-            TimeEvent(75*FRAMES, function(inst)
-				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
-                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
-                end
-			
-				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
-					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
-					inst:LaunchProjectile(inst.sg.statemem.target)
-					
-				end
-			end),
-            TimeEvent(78*FRAMES, function(inst) 
-				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
-                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
-                end
-			
-				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
-					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
-					inst:LaunchProjectile(inst.sg.statemem.target)
-					
-				end
-			end),
-            TimeEvent(81*FRAMES, function(inst) 
-				if inst.sg.statemem.target ~= nil and inst.sg.statemem.target:IsValid() then
-                    --inst:FacePoint(inst.sg.statemem.target.Transform:GetWorldPosition())
-                end
-			
-				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
-					inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())
-					inst:LaunchProjectile(inst.sg.statemem.target)
-					
-				end
-			end),
+			end)
 			},
 
 			events =

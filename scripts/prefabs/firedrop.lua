@@ -92,7 +92,8 @@ local function smallfn()
     MakeSmallPropagator(inst)
 
     --Remove the default handlers that toggle persists flag
-    inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
+    inst.components.burnable:SetOnIgniteFn(nil)
+    --inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
     inst.components.burnable:SetOnExtinguishFn(inst.Remove)
     inst.components.burnable:Ignite()
     inst.components.burnable:SetOnBurntFn(inst.Remove)

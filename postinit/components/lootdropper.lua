@@ -9,14 +9,7 @@ env.AddComponentPostInit("lootdropper", function(self)
 	local _GenerateLoot = self.GenerateLoot
 	
 	function self:DropLoot(pt)
-	
-				--local prefabs = _GenerateLoot(self)
-				local prefabs = self:GenerateLoot(self)
-		
-		
-		
-		
-		
+		local prefabs = self:GenerateLoot(self)
 		local isstructure = self.inst:HasTag("structure")
 			
 		if self.inst.components.burnable ~= nil and

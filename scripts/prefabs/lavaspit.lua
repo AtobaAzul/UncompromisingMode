@@ -5,7 +5,9 @@ local assets=
 
 local easing = require("easing")
 
-local AURA_EXCLUDE_TAGS = { "player", "playerghost", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "invisible" }
+local AURA_EXCLUDE_TAGS = { "player", "playerghost", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "flying", "dragonfly", "lavae", "invisible" }
+
+local AURA_EXCLUDE_TAGS_DRAGONFLY = { "playerghost", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "flying", "dragonfly", "lavae", "invisible" }
 
 local function OnLoad(inst, data)
 	inst:Remove()
@@ -50,12 +52,21 @@ end
 
 local function DoAreaSlow(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, inst.components.aura.radius, nil, AURA_EXCLUDE_TAGS)
-    for i, v in ipairs(ents) do
-		if v.components ~= nil and v.components.locomotor ~= nil then
-			TrySlowdown(inst, v)
+	if inst.dragonflyspit then
+		local ents = TheSim:FindEntities(x, y, z, inst.components.aura.radius, nil, AURA_EXCLUDE_TAGS_DRAGONFLY)
+		for i, v in ipairs(ents) do
+			if v.components ~= nil and v.components.locomotor ~= nil then
+				TrySlowdown(inst, v)
+			end
 		end
-    end
+	else
+		local ents = TheSim:FindEntities(x, y, z, inst.components.aura.radius, nil, AURA_EXCLUDE_TAGS)
+		for i, v in ipairs(ents) do
+			if v.components ~= nil and v.components.locomotor ~= nil then
+				TrySlowdown(inst, v)
+			end
+		end
+	end
 end
 
 local function fn(Sim)--Sim
@@ -159,6 +170,8 @@ local function fn(Sim)--Sim
     inst._spoiltask = inst:DoPeriodicTask(inst.components.aura.tickperiod, DoAreaSlow, inst.components.aura.tickperiod * .5)
 
     inst.cooled = false
+	
+	inst.dragonflyspit = false
 
     inst.OnLoad = OnLoad
 

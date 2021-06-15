@@ -33,7 +33,7 @@ local function EquipWeapons(inst)
         snotbomb:AddComponent("weapon")
         snotbomb.components.weapon:SetDamage(TUNING.SPAT_PHLEGM_DAMAGE)
         snotbomb.components.weapon:SetRange(TUNING.SPAT_PHLEGM_ATTACKRANGE)
-        snotbomb.components.weapon:SetProjectile("web_bomb")
+        snotbomb.components.weapon:SetProjectile("queen_web_bomb")
         snotbomb:AddComponent("inventoryitem")
         snotbomb.persists = false
         snotbomb.components.inventoryitem:SetOnDroppedFn(snotbomb.Remove)
@@ -64,11 +64,11 @@ end
 local function SpitCooldown(inst, data)
 	local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 	
-	if data.name == "SpitCooldown" and target ~= nil and target.components.pinnable ~= nil and inst:GetDistanceSqToInst(target) <= 300 and inst:GetDistanceSqToInst(target) >= 25 then
-		if not inst.sg:HasStateTag("busy") then
+	if data.name == "SpitCooldown" and target ~= nil and target.components.pinnable ~= nil then
+		if not inst.sg:HasStateTag("busy") and inst:GetDistanceSqToInst(target) <= 300 and inst:GetDistanceSqToInst(target) >= 25  then
+			inst.components.timer:StopTimer("SpitCooldown")
 			inst.sg:GoToState("give_off_cob_web")
 			inst.spitweb = true
-			inst.components.timer:StopTimer("SpitCooldown")
 		else
 			inst.components.timer:StopTimer("SpitCooldown")
 			inst.components.timer:StartTimer("SpitCooldown", 3)
@@ -80,7 +80,7 @@ end
 local function LaunchWeb(inst, target)
 	if target ~= nil then
 		local x, y, z = inst.Transform:GetWorldPosition()
-		local projectile = SpawnPrefab("web_bomb")
+		local projectile = SpawnPrefab("queen_web_bomb")
 		local a, b, c = target.Transform:GetWorldPosition()
 		local targetpos = target:GetPosition()
 		local dx = a - x

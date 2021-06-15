@@ -27,6 +27,7 @@ local states = {
         tags = { "attack", "busy"},
 
         onenter = function(inst, cb)
+			inst.components.timer:StopTimer("SpitCooldown")
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("taunt")
             inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/scream")
