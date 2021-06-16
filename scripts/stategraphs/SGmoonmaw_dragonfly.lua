@@ -591,11 +591,16 @@ local states=
         onenter = function(inst)
 		inst.Physics:Stop()
         inst.AnimState:PlayAnimation("skyfall")
-        end,			
+        end,
+        timeline=
+        {
+            TimeEvent(5*FRAMES, function(inst) inst.components.groundpounder:GroundPound()
+			inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/land") end),
+        },
+		
         events=
         {
             EventHandler("animover", function(inst)
-			inst.components.groundpounder:GroundPound()
 			inst.sg:GoToState("crashed")
 		end),
         },

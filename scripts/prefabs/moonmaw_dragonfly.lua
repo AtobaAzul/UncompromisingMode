@@ -454,7 +454,7 @@ local function fn(Sim)
 	end
 
     inst:AddComponent("groundpounder")
-    inst.components.groundpounder.numRings = 3
+    inst.components.groundpounder.numRings = 1
     inst.components.groundpounder.groundpoundfx = "moonstorm_glass_ground_fx"
     inst.components.groundpounder.groundpounddamagemult = .5
     inst.components.groundpounder.groundpoundringfx = "moonstorm_glass_ground_fx"
