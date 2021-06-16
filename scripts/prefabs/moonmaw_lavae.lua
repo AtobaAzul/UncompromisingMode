@@ -220,7 +220,7 @@ local function lavae_fn()
     --inst.components.combat:SetRetargetFunction(3, NormalRetarget)
     inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
     inst.components.combat.battlecryenabled = false
-    inst.components.combat:SetHurtSound("turnoftides/common/together/moon_glass/mine")
+    inst.components.combat:SetHurtSound("turnoftides/common/together/moon_glass/mine",nil,0.5)
 	
 	inst:AddComponent("follower")
     inst:AddComponent("locomotor")

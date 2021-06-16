@@ -382,7 +382,7 @@ end
 
 
 local function TimerDone(inst)
-if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
+if inst.components.combat ~= nil and inst.components.combat.target ~= nil and (inst.components.health ~= nil and not inst.components.health:IsDead())then
 	TryEjectLavae(inst)
 end
 end

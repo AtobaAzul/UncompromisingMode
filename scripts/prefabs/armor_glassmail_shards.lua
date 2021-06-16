@@ -17,7 +17,7 @@ local function destroystuff(inst)
                 v.components.combat:CanBeAttacked() then
                 local damage = 10
                 v.components.combat:GetAttacked(inst, damage, nil, "glass")
-				v.SoundEmitter:PlaySound("turnoftides/common/together/moon_glass/mine")
+				v.SoundEmitter:PlaySound("turnoftides/common/together/moon_glass/mine",nil,0.5)
 				if v:HasTag("player") and not (v.components.rider ~= nil and v.components.rider:IsRiding())then
 					if v.moonmaw_lavae_stun == nil then
 						v.moonmaw_lavae_stun = 0
