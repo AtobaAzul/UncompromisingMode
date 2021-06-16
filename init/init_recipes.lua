@@ -138,7 +138,7 @@ AddRecipe("um_trap_snare", {Ingredient("livinglog", 1),Ingredient("rope", 1),Ing
 AddRecipe("um_bear_trap_equippable_tooth", {Ingredient("cutstone", 2), Ingredient("houndstooth", 3), Ingredient("rope", 1)}, RECIPETABS.WAR, TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/um_bear_trap_equippable_tooth.xml", "um_bear_trap_equippable_tooth.tex")
 AddRecipe("um_bear_trap_equippable_gold", {Ingredient("goldnugget", 2), Ingredient("houndstooth", 3), Ingredient("rope", 1)}, RECIPETABS.WAR, TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/um_bear_trap_equippable_gold.xml", "um_bear_trap_equippable_gold.tex")
 
-
+AddRecipe("armor_glassmail", {Ingredient("glass_scales", 1,"images/inventoryimages/glass_scales.xml"), Ingredient("moonglass_charged", 10)}, RECIPETABS.CELESTIAL, TECH.CELESTIAL_THREE, nil, nil, nil, nil, nil, "images/inventoryimages/armor_glassmail.xml", "armor_glassmail.tex")
 --Seedpackitchange
 AllRecipes["seedpouch"].ingredients = {Ingredient("slurtle_shellpieces", 2), Ingredient("waxpaper",1), Ingredient("seeds", 2)}
 
@@ -167,3 +167,4 @@ STRINGS.RECIPE_DESC.TURF_ANCIENTHOODEDTURF = "The hooded forest's younger years.
 STRINGS.RECIPE_DESC.SKULLCHEST_CHILD = "Interdimensional item storage."
 STRINGS.RECIPE_DESC.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "These jaws need to get a grip!"
 STRINGS.RECIPE_DESC.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "My shiny teeth and me!"
+STRINGS.RECIPE_DESC.ARMOR_GLASSMAIL = "Surround yourself with broken glass."

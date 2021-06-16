@@ -393,7 +393,7 @@ local states=
             end
             inst.AnimState:PlayAnimation("death")
             inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/death")
-            inst.Physics:ClearCollisionMask()
+            --inst.Physics:ClearCollisionMask()
 			inst.Light:Enable(false)
 			if inst.lavae ~= nil then
 			for i = 1,8 do
