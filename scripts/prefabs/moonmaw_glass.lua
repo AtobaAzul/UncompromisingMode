@@ -3,9 +3,9 @@ require("worldsettingsutil")
 
 local function AreaAttack(inst)
         local x, y, z = inst.Transform:GetWorldPosition()
-        local ents = TheSim:FindEntities(x, y, z, 4)
+        local ents = TheSim:FindEntities(x, y, z, 3)
         for i, v in ipairs(ents) do
-            if v ~= inst and v:IsValid() and not v:IsInLimbo() then
+            if v ~= inst and v:IsValid() and not v:IsInLimbo() and not v:HasTag("moonglass") then
                 if v.components.workable ~= nil and v.components.workable:CanBeWorked() then
                     v.components.workable:WorkedBy(inst, 3)
                 end

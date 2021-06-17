@@ -414,9 +414,21 @@ end
 end
 
 
-local function TimerDone(inst)
+local function PerEjectCheck(inst)
 if inst.components.combat ~= nil and inst.components.combat.target ~= nil and (inst.components.health ~= nil and not inst.components.health:IsDead())then
 	TryEjectLavae(inst)
+end
+end
+
+local function CheckTimer(inst,data)
+if data.name == "summoncrystals" then
+	if NoLavae(inst) == true then
+		inst.sg:GoToState("summoncrystals")
+		inst.components.timer:StartTimer("summoncrystals",30+math.random(0,15))
+	else
+		inst.components.timer:StartTimer("summoncrystals",15)
+	end
+
 end
 end
 
@@ -497,7 +509,7 @@ local function fn(Sim)
 	end
 
     inst:AddComponent("groundpounder")
-    inst.components.groundpounder.numRings = 1
+    inst.components.groundpounder.numRings = 2
     inst.components.groundpounder.groundpoundfx = "moonstorm_glass_ground_fx"
     inst.components.groundpounder.groundpounddamagemult = .5
     inst.components.groundpounder.groundpoundringfx = "moonstorm_glass_ground_fx"
@@ -583,13 +595,16 @@ local function fn(Sim)
     inst:ListenForEvent("onremove", OnRemove)
     inst:ListenForEvent("death", OnDead)
 	inst:AddComponent("leader")
-
-    --inst:ListenForEvent("timerdone", RockThrowTimer)
+	
+	inst:AddComponent("timer")
+    inst:ListenForEvent("timerdone", CheckTimer)
+	inst.components.timer:StartTimer("summoncrystals",60)
+	
 	inst.SpawnLavae = SpawnLavae
-	inst:DoTaskInTime(0,function(inst) inst.sg:GoToState("skyfall") end)
+	inst.sg:GoToState("skyfall")
 	inst.TryEjectLavae = TryEjectLavae
 	
-	inst:DoPeriodicTask(10,TimerDone)
+	inst:DoPeriodicTask(10,PerEjectCheck)
     return inst
 end
 

@@ -23,6 +23,7 @@ return {
 	"glass_scales",
 	"armor_glassmail",
 	"armor_glassmail_shards",
+	"moonmaw_trap",
 	
 	"lavaspit",
 	--"sandhill",
