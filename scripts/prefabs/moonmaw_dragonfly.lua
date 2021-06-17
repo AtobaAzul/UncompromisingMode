@@ -2,6 +2,39 @@ local brain = require "brains/moonmaw_dragonflybrain"
 
 local easing = require("easing")
 
+--MUSIC------------------------------------------------------------------------
+local function PushMusic(inst)
+    if ThePlayer == nil or inst:HasTag("nomusic") then
+        inst._playingmusic = false
+    elseif ThePlayer:IsNear(inst, inst._playingmusic and 40 or 20) then
+        inst._playingmusic = true
+        ThePlayer:PushEvent("triggeredevent", { name = "alterguardian_phase1", duration = 2 })
+    elseif inst._playingmusic and not ThePlayer:IsNear(inst, 50) then
+        inst._playingmusic = false
+    end
+end
+
+local function OnMusicDirty(inst)
+    if not TheNet:IsDedicated() then
+        if inst._musictask ~= nil then
+            inst._musictask:Cancel()
+        end
+        inst._musictask = inst:DoPeriodicTask(1, PushMusic)
+        PushMusic(inst)
+    end
+end
+
+local function SetNoMusic(inst, val)
+    if val then
+        inst:AddTag("nomusic")
+    else
+        inst:RemoveTag("nomusic")
+    end
+    inst._musicdirty:push()
+    OnMusicDirty(inst)
+end
+--MUSIC------------------------------------------------------------------------
+
 TUNING.DRAGONFLY_SLEEP_WHEN_SATISFIED_TIME = 240
 TUNING.DRAGONFLY_VOMIT_TARGETS_FOR_SATISFIED = 40
 TUNING.DRAGONFLY_ASH_EATEN_FOR_SATISFIED = 20
@@ -203,7 +236,7 @@ if data then
     inst.KilledPlayer = data.KilledPlayer or false
     inst.shouldGoAway = data.shouldGoAway or false
 		
-	inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/fly", "flying")
+	inst.SoundEmitter:PlaySound("UMSounds/moonmaw/flap", "flying")
 	if data.lavae ~= nil then
 		inst.lavae = {}
 		for i = 1,8 do
@@ -422,14 +455,8 @@ local function fn(Sim)
     anim:SetBuild("moonmaw_dragonfly")
     --anim:PlayAnimation("idle", true)
 	
-	
-	inst.entity:SetPristine()
-
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
 	inst:AddTag("epic")
+    inst:AddTag("mech")
     inst:AddTag("monster")
     inst:AddTag("hostile")
     inst:AddTag("mock_dragonfly")
@@ -438,6 +465,22 @@ local function fn(Sim)
 	inst:AddTag("ignorewalkableplatformdrowning")
 	--inst:AddTag("insect")
 	inst:AddTag("moonglasscreature")
+    inst:AddTag("noepicmusic")
+
+    inst._musicdirty = net_event(inst.GUID, "alterguardian_phase1._musicdirty", "musicdirty")
+    inst._playingmusic = false
+    --inst._musictask = nil
+    OnMusicDirty(inst)
+	
+	
+	inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        inst:ListenForEvent("musicdirty", OnMusicDirty)
+        return inst
+    end
+
+    inst.SetNoMusic = SetNoMusic
 
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aurafn = CalcSanityAura
@@ -471,7 +514,7 @@ local function fn(Sim)
     inst.components.combat:SetRetargetFunction(3, RetargetFn)
     inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
     inst.components.combat.battlecryenabled = false
-    inst.components.combat:SetHurtSound("dontstarve_DLC001/creatures/dragonfly/hurt")
+    inst.components.combat:SetHurtSound("UCSounds/moonmaw/hurt")
 	
     inst:AddComponent("explosiveresist")
 	

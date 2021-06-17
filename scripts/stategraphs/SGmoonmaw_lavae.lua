@@ -64,6 +64,29 @@ local states=
             inst.AnimState:PlayAnimation("drop")
 			inst.AnimState:PushAnimation("deathground",false)
 		end,
+		
+		timeline=
+        {
+			TimeEvent(11*FRAMES, function(inst) 
+				inst.components.combat:DoAreaAttack(inst, 2, nil, nil,nil, { "moonglasscreature" })
+				local fx = SpawnPrefab("moonstorm_glass_ground_fx")
+				local x,y,z = inst.Transform:GetWorldPosition()
+				fx.Transform:SetPosition(x,y,z)
+				inst.Physics:Stop()
+			end),
+            TimeEvent(10*FRAMES, function(inst) 
+				SpawnPrefab("mining_moonglass_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+				inst.SoundEmitter:PlaySound("turnoftides/common/together/moon_glass/mine", nil, 0.5) 
+			end),
+            TimeEvent(30*FRAMES, function(inst) 
+				SpawnPrefab("mining_moonglass_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+				inst.SoundEmitter:PlaySound("turnoftides/common/together/moon_glass/mine", nil, 0.5) 
+			end),
+            TimeEvent(50*FRAMES, function(inst) 
+				SpawnPrefab("mining_moonglass_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+				inst.SoundEmitter:PlaySound("turnoftides/common/together/moon_glass/mine", nil, 0.5) 
+			end),
+        },
     },    
     State{
         name = "deathground",
@@ -74,6 +97,22 @@ local states=
 			RemovePhysicsColliders(inst) 
             inst.AnimState:PlayAnimation("deathground",false)
 		end,
+		
+		timeline=
+        {
+            TimeEvent(10*FRAMES, function(inst) 
+				SpawnPrefab("mining_moonglass_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+				inst.SoundEmitter:PlaySound("turnoftides/common/together/moon_glass/mine", nil, 0.5) 
+			end),
+            TimeEvent(30*FRAMES, function(inst) 
+				SpawnPrefab("mining_moonglass_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+				inst.SoundEmitter:PlaySound("turnoftides/common/together/moon_glass/mine", nil, 0.5) 
+			end),
+            TimeEvent(50*FRAMES, function(inst) 
+				SpawnPrefab("mining_moonglass_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+				inst.SoundEmitter:PlaySound("turnoftides/common/together/moon_glass/mine", nil, 0.5) 
+			end),
+        },
     },       
     State{
         name = "premoving",
@@ -161,7 +200,12 @@ local states=
         
         timeline=
         {
-            TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("mining_moonglass_fx") end),
+            TimeEvent(5*FRAMES, function(inst) 
+				inst.SoundEmitter:PlaySound("dontstarve/creatures/together/lavae/attack")
+			end),
+            TimeEvent(9*FRAMES, function(inst) 
+				inst.SoundEmitter:PlaySound("turnoftides/common/together/moon_glass/mine", nil, 0.5) 
+			end),
             TimeEvent(11*FRAMES, function(inst) 
 				inst.components.combat:DoAreaAttack(inst, 2, nil, nil,nil, { "moonglasscreature" })
 				local fx = SpawnPrefab("moonstorm_glass_ground_fx")
@@ -213,6 +257,8 @@ local states=
         
         onenter = function(inst)
             inst.AnimState:PlayAnimation("hit")
+				SpawnPrefab("mining_moonglass_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+				inst.SoundEmitter:PlaySound("turnoftides/common/together/moon_glass/mine", nil, 0.5) 
             inst.Physics:Stop()            
         end,
         

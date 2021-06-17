@@ -2,7 +2,9 @@ require("stategraphs/commonstates")
 
 local function NotDeerclopsFootstep(inst)
     inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/step")
-    ShakeAllCameras(CAMERASHAKE.FULL, .7, .02, .8, inst, 40)
+    --ShakeAllCameras(CAMERASHAKE.VERTICAL, .5, .03, 1, inst, SHAKE_DIST)
+    --ShakeAllCameras(CAMERASHAKE.FULL, .7, .02, .8, inst, 40)
+    ShakeAllCameras(CAMERASHAKE.VERTICAL, .7, .02, .8, inst, 40)
 end
 
 local function SpawnMoonGlass(inst)
@@ -127,7 +129,7 @@ local states=
                 fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
                 fx.Transform:SetRotation(inst.Transform:GetRotation())
 				end)
-                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/vomitrumble", "vomitrumble")
+                inst.SoundEmitter:PlaySound("UCSounds/moonmaw/vomitrumble", "vomitrumble")
             else
                 inst:ClearBufferedAction()
                 inst.sg:GoToState("idle")
@@ -156,10 +158,10 @@ local states=
 
         timeline=
         {
-            TimeEvent(2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end),
+            TimeEvent(2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
             TimeEvent(55*FRAMES, function(inst) 
                 inst.SoundEmitter:KillSound("vomitrumble")
-                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/vomit")
+                inst.SoundEmitter:PlaySound("UCSounds/moonmaw/vomit")
             end),
             TimeEvent(59*FRAMES, function(inst) 
                 inst:PerformBufferedAction()
@@ -190,7 +192,7 @@ local states=
 
         timeline=
         {
-            TimeEvent(2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end),
+            TimeEvent(2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
             TimeEvent(6*FRAMES, function(inst)
                 --inst.AnimState:SetBuild("dragonfly_fire_build")
                 ---inst.AnimState:SetBloomEffectHandle( "shaders/anim.ksh" )
@@ -224,21 +226,21 @@ local states=
             TimeEvent(2*FRAMES, function(inst) 
                 inst.components.groundpounder:GroundPound()
                 inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/buttstomp")
-                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/buttstomp_voice")
+                inst.SoundEmitter:PlaySound("UCSounds/moonmaw/buttstomp_voice")
                 -- local fire = SpawnPrefab("firesplash_fx")
                 -- fire.Transform:SetPosition(inst.Transform:GetWorldPosition())
             end),
             TimeEvent(9*FRAMES, function(inst) 
                 inst.components.groundpounder:GroundPound()
                 inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/buttstomp")
-                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/buttstomp_voice")
+                inst.SoundEmitter:PlaySound("UCSounds/moonmaw/buttstomp_voice")
                 -- local fire = SpawnPrefab("firesplash_fx")
                 -- fire.Transform:SetPosition(inst.Transform:GetWorldPosition())
             end),
             TimeEvent(20*FRAMES, function(inst) 
                 inst.components.groundpounder:GroundPound()
                 inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/buttstomp")
-                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/buttstomp_voice")
+                inst.SoundEmitter:PlaySound("UCSounds/moonmaw/buttstomp_voice")
                 -- local fire = SpawnPrefab("firesplash_fx")
                 -- fire.Transform:SetPosition(inst.Transform:GetWorldPosition())
             end),
@@ -262,7 +264,7 @@ local states=
 
         timeline=
         {
-            TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end),
+            TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
         },
     },
 
@@ -276,7 +278,7 @@ local states=
             end
 
             inst.AnimState:PlayAnimation("hit")
-            inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink")
+            inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink")
         end,
         
         events =
@@ -299,6 +301,7 @@ local states=
 		inst.Physics:Stop()
         inst.components.combat:StartAttack()
         inst.AnimState:PlayAnimation("spin_pre")
+			inst.SoundEmitter:PlaySound("UCSounds/moonmaw/anger")
 			for i = 1,8 do
 				if inst.lavae[i] ~= nil then
 					inst.lavae[i].components.linearcircler.setspeed = 1
@@ -307,6 +310,10 @@ local states=
 			end		
         end,   
         
+		TimeEvent(5*FRAMES, function(inst)
+			inst.SoundEmitter:PlaySound("moonstorm/creatures/boss/alterguardian2/atk_spin_pre")
+		end),
+		
         events=
         {
             EventHandler("animover", function(inst)
@@ -323,6 +330,9 @@ local states=
 		inst.Physics:Stop()
         inst.components.combat:StartAttack()
         inst.AnimState:PlayAnimation("spin")
+		
+        inst.SoundEmitter:PlaySound("moonstorm/creatures/boss/alterguardian2/atk_spin_LP","spin_loop")
+		
 		--inst.TryEjectLavae(inst)
 		for i = 1,8 do
 			if inst.lavae[i] ~= nil then
@@ -348,8 +358,9 @@ local states=
         events=
         {
             EventHandler("animover", function(inst)
-			inst.sg:GoToState("idle")
-		end),
+				inst.SoundEmitter:KillSound("spin_loop")
+				inst.sg:GoToState("idle")
+			end),
         },
     },
 	
@@ -368,9 +379,9 @@ local states=
 
         timeline=
         {
-            TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/swipe") end),
+            TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/swipe") end),
             TimeEvent(25*FRAMES, function(inst) 
-                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/punchimpact")
+                inst.SoundEmitter:PlaySound("UCSounds/moonmaw/punchimpact")
                 inst.components.combat:DoAttack()
 				SpawnMoonGlass(inst)
             end),
@@ -392,7 +403,7 @@ local states=
                 inst.components.locomotor:StopMoving()
             end
             inst.AnimState:PlayAnimation("death")
-            inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/death")
+            inst.SoundEmitter:PlaySound("UCSounds/moonmaw/death")
             --inst.Physics:ClearCollisionMask()
 			inst.Light:Enable(false)
 			if inst.lavae ~= nil then
@@ -406,10 +417,10 @@ local states=
 
         timeline=
         {
-            TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end),
+            TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
             TimeEvent(26*FRAMES, function(inst) 
             end),
-            TimeEvent(28*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/land") end),
+            TimeEvent(28*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/land") end),
             TimeEvent(29*FRAMES, function(inst)
                 ShakeIfClose(inst)
                 inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))				
@@ -425,7 +436,7 @@ local states=
             onenter = function(inst)
                 if inst.fire_build then
                     inst.AnimState:PlayAnimation("walk_pre")
-                    inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/angry")
+                    inst.SoundEmitter:PlaySound("UCSounds/moonmaw/anger")
                 else
                     inst.AnimState:PlayAnimation("walk_pre")
                 end
@@ -438,8 +449,8 @@ local states=
 
             timeline=
             {
-                TimeEvent(1*FRAMES, function(inst) if not inst.fire_build then inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end end),
-                TimeEvent(2*FRAMES, function(inst) if inst.fire_build then inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end end)
+                TimeEvent(1*FRAMES, function(inst) if not inst.fire_build then inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end end),
+                TimeEvent(2*FRAMES, function(inst) if inst.fire_build then inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end end)
             },
         },
         
@@ -498,8 +509,8 @@ local states=
 
             timeline=
             {
-                TimeEvent(1*FRAMES, function(inst) if not inst.fire_build then inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end end),
-                TimeEvent(2*FRAMES, function(inst) if inst.fire_build then inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end end)
+                TimeEvent(1*FRAMES, function(inst) if not inst.fire_build then inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end end),
+                TimeEvent(2*FRAMES, function(inst) if inst.fire_build then inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end end)
             },
         },
 
@@ -526,15 +537,15 @@ local states=
             timeline=
             {
                 TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:KillSound("flying") end),
-                TimeEvent(74*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end),
-                TimeEvent(78*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/fly", "flying") end),
-                TimeEvent(91*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end),
-                TimeEvent(111*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/sleep_pre") end),
+                TimeEvent(74*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
+                TimeEvent(78*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/flap", "flying") end),
+                TimeEvent(91*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
+                TimeEvent(111*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/sleep_pre") end),
                 TimeEvent(202*FRAMES, function(inst) 
                     inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") 
                     inst.SoundEmitter:KillSound("flying")
                 end),
-                TimeEvent(203*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/land") end),
+                TimeEvent(203*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/land") end),
             },
         },
         
@@ -546,7 +557,7 @@ local states=
                 inst.AnimState:PlayAnimation("sleep_loop")
                 inst.playsleepsound = not inst.playsleepsound
                 if inst.playsleepsound then
-                    inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/sleep", "sleep")
+                    inst.SoundEmitter:PlaySound("UCSounds/moonmaw/sleep", "sleep")
                 end
             end,
 
@@ -565,7 +576,7 @@ local states=
                 inst.SoundEmitter:KillSound("sleep")
                 inst.components.locomotor:StopMoving()
                 inst.AnimState:PlayAnimation("sleep_pst")
-                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/wake")
+                inst.SoundEmitter:PlaySound("UCSounds/moonmaw/wake")
                 inst.last_spit_time = GetTime() -- Fake this as a spit to make him not re-aggro immediately
                 inst.last_target_spit_time = GetTime() -- Fake this as a target spit to make him not re-aggro immediately
                 if inst.components.sleeper and inst.components.sleeper:IsAsleep() then
@@ -580,8 +591,8 @@ local states=
 
             timeline=
             {
-                TimeEvent(16*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") end),
-                TimeEvent(26*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/fly", "flying") end),
+                TimeEvent(16*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
+                TimeEvent(26*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/flap", "flying") end),
             },
         },
     State{
@@ -595,7 +606,7 @@ local states=
         timeline=
         {
             TimeEvent(5*FRAMES, function(inst) inst.components.groundpounder:GroundPound()
-			inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/land") end),
+			inst.SoundEmitter:PlaySound("UCSounds/moonmaw/land") end),
         },
 		
         events=
