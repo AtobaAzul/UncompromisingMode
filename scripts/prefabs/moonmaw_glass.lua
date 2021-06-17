@@ -121,6 +121,7 @@ local function fn(pondtype)
     inst:AddComponent("named")
 
 
+    inst.SoundEmitter:PlaySound("moonstorm/creatures/boss/alterguardian3/atk_traps")
 
     inst:AddComponent("inspectable")
     inst.components.inspectable.getstatus = getstatus

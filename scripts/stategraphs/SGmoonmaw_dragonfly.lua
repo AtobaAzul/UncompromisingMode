@@ -158,7 +158,7 @@ local states=
 
         timeline=
         {
-            TimeEvent(2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
+            TimeEvent(2*FRAMES, function(inst) --inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
             TimeEvent(55*FRAMES, function(inst) 
                 inst.SoundEmitter:KillSound("vomitrumble")
                 inst.SoundEmitter:PlaySound("UCSounds/moonmaw/vomit")
@@ -192,7 +192,7 @@ local states=
 
         timeline=
         {
-            TimeEvent(2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
+            TimeEvent(2*FRAMES, function(inst) --inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
             TimeEvent(6*FRAMES, function(inst)
                 --inst.AnimState:SetBuild("dragonfly_fire_build")
                 ---inst.AnimState:SetBloomEffectHandle( "shaders/anim.ksh" )
@@ -264,7 +264,7 @@ local states=
 
         timeline=
         {
-            TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
+            TimeEvent(1*FRAMES, function(inst) --inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
         },
     },
 
@@ -278,7 +278,7 @@ local states=
             end
 
             inst.AnimState:PlayAnimation("hit")
-            inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink")
+            --inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink")
         end,
         
         events =
@@ -372,6 +372,7 @@ local states=
 			inst.Physics:Stop()
                 inst.components.combat:StartAttack()
                 inst.AnimState:PlayAnimation("atk")
+				inst.SoundEmitter:PlaySound("UCSounds/moonmaw/anger")
 				--attackfx.AnimState:SetMultColour(0.5,1,0.5,1)
                 --inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/swipe")
             
@@ -417,7 +418,7 @@ local states=
 
         timeline=
         {
-            TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
+            TimeEvent(12*FRAMES, function(inst) --inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
             TimeEvent(26*FRAMES, function(inst) 
             end),
             TimeEvent(28*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/land") end),
@@ -449,8 +450,8 @@ local states=
 
             timeline=
             {
-                TimeEvent(1*FRAMES, function(inst) if not inst.fire_build then inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end end),
-                TimeEvent(2*FRAMES, function(inst) if inst.fire_build then inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end end)
+                TimeEvent(1*FRAMES, function(inst) if not inst.fire_build then --inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end end),
+                TimeEvent(2*FRAMES, function(inst) if inst.fire_build then --inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end end)
             },
         },
         
@@ -509,8 +510,8 @@ local states=
 
             timeline=
             {
-                TimeEvent(1*FRAMES, function(inst) if not inst.fire_build then inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end end),
-                TimeEvent(2*FRAMES, function(inst) if inst.fire_build then inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end end)
+                TimeEvent(1*FRAMES, function(inst) if not inst.fire_build then --inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end end),
+                TimeEvent(2*FRAMES, function(inst) if inst.fire_build then --inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end end)
             },
         },
 
@@ -537,9 +538,9 @@ local states=
             timeline=
             {
                 TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:KillSound("flying") end),
-                TimeEvent(74*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
+                TimeEvent(74*FRAMES, function(inst) --inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
                 TimeEvent(78*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/flap", "flying") end),
-                TimeEvent(91*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
+                TimeEvent(91*FRAMES, function(inst) --inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
                 TimeEvent(111*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/sleep_pre") end),
                 TimeEvent(202*FRAMES, function(inst) 
                     inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/blink") 
@@ -591,7 +592,7 @@ local states=
 
             timeline=
             {
-                TimeEvent(16*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
+                TimeEvent(16*FRAMES, function(inst) --inst.SoundEmitter:PlaySound("UCSounds/moonmaw/blink") end),
                 TimeEvent(26*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/flap", "flying") end),
             },
         },
