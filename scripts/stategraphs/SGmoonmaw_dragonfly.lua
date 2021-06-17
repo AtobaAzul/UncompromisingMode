@@ -366,6 +366,7 @@ local states=
         end,
 		
             onexit = function(inst)
+			inst.SoundEmitter:KillSound("spin_loop")
 			for i = 1,8 do
 				if inst.lavae[i] ~= nil then
 					inst.lavae[i].destroy = false
@@ -379,7 +380,6 @@ local states=
         events=
         {
             EventHandler("animover", function(inst)
-				inst.SoundEmitter:KillSound("spin_loop")
 				inst.sg:GoToState("idle")
 			end),
         },
