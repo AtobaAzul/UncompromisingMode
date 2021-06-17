@@ -199,6 +199,28 @@ modparams.wingsuit =
     type = "hand_inv",
 }
 
+modparams.corvushat =
+{
+    widget =
+    {
+        slotpos =
+        {
+            Vector3(0,   32 + 4,  0),
+        },
+        slotbg =
+        {
+            { image = "feather_slot.tex", atlas = "images/feather_slot.xml" },
+        },
+        animbank = "ui_cookpot_1x2",
+        animbuild = "ui_cookpot_1x2",
+        pos = Vector3(106, 15, 0),
+    },
+    acceptsstacks = false,
+	itemtestfn = CheckFeather,
+    usespecificslotsforitems = true,
+    type = "hand_inv",
+}
+
 for y = 0, 3 do
     table.insert(modparams.puffvest.widget.slotpos, Vector3(-1, -75 * y + 110, 0))	
 end
