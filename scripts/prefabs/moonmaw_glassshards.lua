@@ -129,9 +129,7 @@ local function onhit(inst, attacker, target)
         target.components.combat:SuggestTarget(attacker)
     end
 
-    if target.sg ~= nil and not target.sg:HasStateTag("frozen") then
-        target:PushEvent("attacked", { attacker = attacker, damage = 50, weapon = inst })
-    end
+	target.components.combat:GetAttacked(attacker, 50, inst)
 
 	inst:Remove()
 end
@@ -150,6 +148,12 @@ local function shard_fn()
 	inst.AnimState:SetFinalOffset(0.5)
     inst.AnimState:SetBank("armor_glassmail_shards")
     inst.AnimState:SetBuild("armor_glassmail_shards")
+    local light = inst.entity:AddLight()
+    inst.Light:Enable(true)
+    inst.Light:SetRadius(2)
+    inst.Light:SetFalloff(0.5)
+    inst.Light:SetIntensity(.75)
+    inst.Light:SetColour(121/255,235/255,12/255)	
 
 	
     inst:AddTag("NOCLICK")
