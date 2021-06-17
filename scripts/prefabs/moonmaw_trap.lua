@@ -109,7 +109,7 @@ local function projectile_fn()
 
     inst.SetGuardian = set_guardian
 
-    inst:DoTaskInTime(31*FRAMES, do_landed)
+    inst:DoTaskInTime(90*FRAMES, do_landed)
     inst:ListenForEvent("animover", spawn_trap)
 
     inst.persists = false

@@ -208,7 +208,7 @@ local function lavae_fn()
 	inst:AddTag("moonglasscreature")
 
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(350)
+    inst.components.health:SetMaxHealth(250)
     inst.components.health.destroytime = 5
     inst.components.health.fire_damage_scale = 0
 

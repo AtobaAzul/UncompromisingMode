@@ -380,10 +380,11 @@ local function SpawnShards(inst)
 		inst.shards[i].components.linearcircler.setspeed = 0.2
 		inst.shards[i].hidden = false
 		inst.shards[i].destroy = true
+		inst.shards[i].timetill = i*0.25+2
 	end
 end
 
-local function ShardsSpawnAttack(inst)
+--[[local function ShardsSpawnAttack(inst)
 if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
 	local target = inst.components.combat.target
 	for i = 1,8 do
@@ -395,7 +396,7 @@ if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
 		inst.shards[i]:Remove()
 	end
 end
-end
+end]]
 
 local function NoLavae(inst)
 	for i = 1,8 do
@@ -424,8 +425,8 @@ UpdateLavaeDamageTick(inst)
 end
 
 local function TryEjectLavae(inst)
-if NoLavae(inst) == false and inst.components.leader:CountFollowers() == 0 then
-	if math.random() > 0.5 then
+if inst.components.health ~= nil and not inst.components.health:IsDead() and NoLavae(inst) == false and inst.components.leader:CountFollowers() == 0 then
+	if inst.components.health:GetPercent() > 0.5 then
 		local choice = math.random(1,8)
 		if inst.lavae[choice].hidden ~= true then
 			EjectLavae(inst,choice)
@@ -453,33 +454,42 @@ end
 end
 
 local function CheckTimer(inst,data)
-if data.name == "summoncrystals" then
-	if NoLavae(inst) == true then
-		if inst.sg:HasStateTag("shards") then
-			inst.components.timer:StartTimer("summoncrystals",5)
-		else
+if inst.components.health ~= nil and not inst.components.health:IsDead() then
+	if data.name == "summoncrystals" then
+		if NoLavae(inst) == true then
+			if inst.sg:HasStateTag("shards") then
+				inst.components.timer:StartTimer("summoncrystals",5)
+			else
+				inst.sg:GoToState("summoncrystals")
+				inst.components.timer:StartTimer("summoncrystals",30+math.random(0,15))
+			end
 			inst.sg:GoToState("summoncrystals")
-			inst.components.timer:StartTimer("summoncrystals",30+math.random(0,15))
-		end
-		inst.sg:GoToState("summoncrystals")
-		inst.components.timer:StartTimer("summoncrystals",30+math.random(0,15))
-	else
-		inst.sg:GoToState("summoncrystals")
-		inst.components.timer:StartTimer("summoncrystals",60)
-	end
-end
-if data.name == "glassshards" then
-	if NoLavae(inst) == true then
-		if inst.sg:HasStateTag("crystals") then
-			inst.components.timer:StartTimer("glassshards",5)
 		else
-			inst.sg:GoToState("shards_pre")
-			inst.components.timer:StartTimer("glassshards",30+math.random(0,15))
+			--inst.sg:GoToState("summoncrystals")
+			inst.components.timer:StartTimer("summoncrystals",60)
 		end
-	else
-		inst.components.timer:StartTimer("glassshards",15)
+	end
+	if data.name == "glassshards" then
+		if NoLavae(inst) == true then
+			if inst.sg:HasStateTag("crystals") then
+				inst.components.timer:StartTimer("glassshards",5)
+			else
+				inst.sg:GoToState("shards_pre")
+				inst.components.timer:StartTimer("glassshards",30+math.random(0,15))
+			end
+		else
+			inst.components.timer:StartTimer("glassshards",15)
+		end
 	end
 end
+end
+
+local function RedoLavae(inst)
+print("1")
+inst.components.timer:StopTimer("summoncrystals")
+inst.components.timer:StartTimer("summoncrystals",30+math.random(0,15))
+inst.redolavae = true
+inst.sg:GoToState("summoncrystals")
 end
 
 local function fn(Sim)
@@ -551,7 +561,10 @@ local function fn(Sim)
     inst.components.health:SetMaxHealth(TUNING.DSTU.WILTFLY_HEALTH)
     inst.components.health.destroytime = 5
     inst.components.health.fire_damage_scale = 0
-
+	
+	inst:AddComponent("healthtrigger")
+	inst.components.healthtrigger:AddTrigger(0.5, RedoLavae)
+	
 	local function isnottree(ent)
 		if ent ~= nil and not ent:HasTag("moonglasscreature") then -- fix to friendly AOE: refer for later AOE mobs -Axe
 			return true
@@ -646,6 +659,10 @@ local function fn(Sim)
     inst:ListenForEvent("death", OnDead)
 	inst:AddComponent("leader")
 	
+	inst:AddComponent("explosiveresist")
+	inst.components.explosiveresist:SetResistance(0.65)
+	inst.components.explosiveresist.decayremaining = 999999999999999999999
+	
 	inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", CheckTimer)
 	inst.components.timer:StartTimer("summoncrystals",25)
@@ -653,7 +670,7 @@ local function fn(Sim)
 	
 	inst.SpawnLavae = SpawnLavae
 	inst.SpawnShards = SpawnShards
-	inst.ShardsSpawnAttack = ShardsSpawnAttack
+	--inst.ShardsSpawnAttack = ShardsSpawnAttack
 	
 	inst.sg:GoToState("skyfall")
 	inst.TryEjectLavae = TryEjectLavae

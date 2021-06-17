@@ -56,6 +56,20 @@ else
 end
 end
 
+local function RangeAttack(inst)
+if inst.WINDSTAFF_CASTER ~= nil and inst.WINDSTAFF_CASTER.components.combat ~= nil and inst.WINDSTAFF_CASTER.components.combat.target ~= nil then
+	local x,y,z = inst.Transform:GetWorldPosition()
+	local shardattack = SpawnPrefab("moonmaw_glassshards")
+	shardattack.Transform:SetPosition(x,y,z)
+	shardattack.anim = inst.anim
+	shardattack.components.projectile:Throw(inst.WINDSTAFF_CASTER, inst.WINDSTAFF_CASTER.components.combat.target, inst.WINDSTAFF_CASTER)	
+end
+inst:Remove()
+end
+
+local function SetTimeForDamage(inst)
+	inst:DoTaskInTime(inst.timetill,function(inst) inst.RangeAttack(inst) end)
+end
 local function shardring_fn()
     local inst = CreateEntity()
 
@@ -102,7 +116,10 @@ local function shardring_fn()
 		inst:DoPeriodicTask(10,CheckDist)
 	end)
 	inst.damagetime = 0.1
+	inst.timetill = 5 --Moonmaw will change this
 	inst:DoTaskInTime(inst.damagetime,Reposition)
+	inst.RangeAttack = RangeAttack
+	inst:DoTaskInTime(0,SetTimeForDamage)
     return inst
 end
 

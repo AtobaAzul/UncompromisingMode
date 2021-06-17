@@ -358,11 +358,11 @@ local states=
         end,
 
 
-		TimeEvent(15*FRAMES, function(inst) inst.ShardsSpawnAttack(inst) end),
+		--TimeEvent(15*FRAMES, function(inst) inst.ShardsSpawnAttack(inst) end),
 		
         onexit = function(inst)
 			inst.SoundEmitter:KillSound("spin_loop")
-			inst.ShardsSpawnAttack(inst)			
+			--inst.ShardsSpawnAttack(inst)			
             end,
 			
         events=
@@ -759,7 +759,13 @@ local states=
 			inst.components.groundpounder.numRings = 3
 			inst.components.groundpounder:GroundPound()
 			inst.components.groundpounder.numRings = 2
-			inst.SoundEmitter:PlaySound("UCSounds/moonmaw/land") 
+			inst.SoundEmitter:PlaySound("UCSounds/moonmaw/land")
+			print("preran")
+			if inst.redolavae == true then
+				print("2")
+				inst.SpawnLavae(inst)
+				inst.redolavae = nil
+			end
 			end),
         },
 		
