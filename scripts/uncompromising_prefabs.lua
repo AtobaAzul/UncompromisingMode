@@ -24,6 +24,7 @@ return {
 	"armor_glassmail",
 	"armor_glassmail_shards",
 	"moonmaw_trap",
+	"moonmaw_glassshards",
 	
 	"lavaspit",
 	--"sandhill",

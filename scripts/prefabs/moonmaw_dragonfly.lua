@@ -365,6 +365,38 @@ local function SpawnLavae(inst)
 	end
 end
 
+local function SpawnShards(inst)
+	local x,y,z = inst.Transform:GetWorldPosition()
+	local LIMIT = 4
+	inst.shards = {}
+	for i = 1,8 do
+		inst.shards[i] = SpawnPrefab("moonmaw_glassshards_ring")
+		inst.shards[i].WINDSTAFF_CASTER = inst
+		inst.shards[i].components.linearcircler:SetCircleTarget(inst)
+		inst.shards[i].components.linearcircler:Start()
+		inst.shards[i].components.linearcircler.randAng = i*0.125
+		inst.shards[i].components.linearcircler.clockwise = false
+		inst.shards[i].components.linearcircler.distance_limit = LIMIT
+		inst.shards[i].components.linearcircler.setspeed = 0.2
+		inst.shards[i].hidden = false
+		inst.shards[i].destroy = true
+	end
+end
+
+local function ShardsSpawnAttack(inst)
+if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
+	local target = inst.components.combat.target
+	for i = 1,8 do
+		local x,y,z = inst.shards[i].Transform:GetWorldPosition()
+		local shardattack = SpawnPrefab("moonmaw_glassshards")
+		shardattack.Transform:SetPosition(x,y,z)
+		shardattack.anim = inst.shards[i].anim
+		shardattack.components.projectile:Throw(inst, target, inst)
+		inst.shards[i]:Remove()
+	end
+end
+end
+
 local function NoLavae(inst)
 	for i = 1,8 do
 		if inst.lavae[i].hidden ~= true then
@@ -423,12 +455,30 @@ end
 local function CheckTimer(inst,data)
 if data.name == "summoncrystals" then
 	if NoLavae(inst) == true then
+		if inst.sg:HasStateTag("shards") then
+			inst.components.timer:StartTimer("summoncrystals",5)
+		else
+			inst.sg:GoToState("summoncrystals")
+			inst.components.timer:StartTimer("summoncrystals",30+math.random(0,15))
+		end
 		inst.sg:GoToState("summoncrystals")
 		inst.components.timer:StartTimer("summoncrystals",30+math.random(0,15))
 	else
-		inst.components.timer:StartTimer("summoncrystals",15)
+		inst.sg:GoToState("summoncrystals")
+		inst.components.timer:StartTimer("summoncrystals",60)
 	end
-
+end
+if data.name == "glassshards" then
+	if NoLavae(inst) == true then
+		if inst.sg:HasStateTag("crystals") then
+			inst.components.timer:StartTimer("glassshards",5)
+		else
+			inst.sg:GoToState("shards_pre")
+			inst.components.timer:StartTimer("glassshards",30+math.random(0,15))
+		end
+	else
+		inst.components.timer:StartTimer("glassshards",15)
+	end
 end
 end
 
@@ -498,7 +548,7 @@ local function fn(Sim)
     inst.components.sanityaura.aurafn = CalcSanityAura
     
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(TUNING.DSTU.WILTFLY_HEALTH*0.75)
+    inst.components.health:SetMaxHealth(TUNING.DSTU.WILTFLY_HEALTH)
     inst.components.health.destroytime = 5
     inst.components.health.fire_damage_scale = 0
 
@@ -598,9 +648,13 @@ local function fn(Sim)
 	
 	inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", CheckTimer)
-	inst.components.timer:StartTimer("summoncrystals",60)
+	inst.components.timer:StartTimer("summoncrystals",25)
+	inst.components.timer:StartTimer("glassshards",90)
 	
 	inst.SpawnLavae = SpawnLavae
+	inst.SpawnShards = SpawnShards
+	inst.ShardsSpawnAttack = ShardsSpawnAttack
+	
 	inst.sg:GoToState("skyfall")
 	inst.TryEjectLavae = TryEjectLavae
 	

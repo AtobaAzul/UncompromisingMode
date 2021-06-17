@@ -315,6 +315,65 @@ local states=
     },
 
     State{
+        name = "shards_pre",
+        tags = {"attack", "busy", "canrotate","shards"},
+        
+        onenter = function(inst)
+		inst.Physics:Stop()
+        inst.components.combat:StartAttack()
+        inst.AnimState:PlayAnimation("spin_pre")
+			inst.SoundEmitter:PlaySound("UCSounds/moonmaw/anger")
+		
+		inst.SpawnShards(inst)
+        end,
+		
+		TimeEvent(5*FRAMES, function(inst)
+			inst.SoundEmitter:PlaySound("moonstorm/creatures/boss/alterguardian2/atk_spin_pre")
+		end),
+		
+        events=
+        {
+            EventHandler("animover", function(inst)
+			inst.sg:GoToState("shards")
+		end),
+        },
+    },
+    State{
+        name = "shards",
+        tags = {"attack", "busy", "canrotate","shards"},
+        
+        onenter = function(inst)
+		inst.Physics:Stop()
+        inst.components.combat:StartAttack()
+        inst.AnimState:PlayAnimation("spin")
+		
+        inst.SoundEmitter:PlaySound("moonstorm/creatures/boss/alterguardian2/atk_spin_LP","spin_loop")
+		for i = 1,8 do
+			if inst.shards[i] ~= nil then
+				inst.shards[i].components.linearcircler.setspeed = 3
+			end
+		end
+
+			
+        end,
+
+
+		TimeEvent(15*FRAMES, function(inst) inst.ShardsSpawnAttack(inst) end),
+		
+        onexit = function(inst)
+			inst.SoundEmitter:KillSound("spin_loop")
+			inst.ShardsSpawnAttack(inst)			
+            end,
+			
+        events=
+        {
+            EventHandler("animover", function(inst)
+				inst.sg:GoToState("idle")
+			end),
+        },
+    },
+	
+    State{
         name = "lavaeattack_pre",
         tags = {"attack", "busy", "canrotate"},
         
@@ -633,7 +692,7 @@ local states=
         end,
         timeline=
         {
-            TimeEvent(7*FRAMES, function(inst) inst.components.groundpounder:GroundPound()
+            TimeEvent(6*FRAMES, function(inst) inst.components.groundpounder:GroundPound()
 			inst.SoundEmitter:PlaySound("UCSounds/moonmaw/land") end),
         },
 		
@@ -685,7 +744,7 @@ local states=
     },
     State{
         name = "summoncrystals",
-        tags = {"busy", "canrotate","attack"},
+        tags = {"busy", "canrotate","attack","crystals"},
         
         onenter = function(inst)
 		inst.Physics:Stop()
