@@ -5,14 +5,23 @@ GLOBAL.setfenv(1, GLOBAL)
 ------------------------Fire spread is less efficient in winter-----------------------------------------
 env.AddComponentPostInit("carnivalevent", function(self)
 
-	local _OldOnSave = self.OnSave
-	local _OldOnLoad = self.OnLoad
 	local _OldSpawnCarnivalHost = self.SpawnCarnivalHost
 
-	function self:OnSave(data)
-		data.corvusisdead = self.corvusisdead
-		
-		_OldOnSave()
+	--[[local _OldOnSave = self.OnSave
+	local _OldOnLoad = self.OnLoad
+	function self:OnSave()
+		local data =
+		{
+		corvusisdead = self.corvusisdead
+		}
+
+		local ents = {}
+		if _carnival_host ~= nil then
+			data.carnival_host = _carnival_host.GUID
+			table.insert(ents, _carnival_host.GUID)
+		end
+
+		return data, ents
 	end
 
 	function self:OnLoad(data)
@@ -21,14 +30,16 @@ env.AddComponentPostInit("carnivalevent", function(self)
 		end
 	
 		_OldOnLoad(data)
-	end
+	end]]
 
 	local SpawnCarnivalHost
 
-	SpawnCarnivalHost = function(carnival_host, loading)
+	seld:SpawnCarnivalHost(carnival_host, loading)
 		--if self.corvusisdead then
-			return
+			--return
 		--end
+		
+		print("spawn")
 		
 		_OldSpawnCarnivalHost(carnival_host, loading)
 	end

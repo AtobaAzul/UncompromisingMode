@@ -440,6 +440,8 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/um_bear_trap_equippable_gold.xml"),
 	Asset("IMAGE", "images/inventoryimages/gore_horn_hat.tex"),
 	Asset("ATLAS", "images/inventoryimages/gore_horn_hat.xml"),
+	Asset("IMAGE", "images/inventoryimages/corvushat.tex"),
+	Asset("ATLAS", "images/inventoryimages/corvushat.xml"),
 	
 	
 	Asset("ANIM", "anim/armor_steelsweater.zip"),
