@@ -287,7 +287,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	
 
 	--Stuff for Canis to check
-	DESCRIBE.MOONMAW_DRAGONFLY = "I won't able to use ANY part of THAT animal!"
+	DESCRIBE.MOONMAW_DRAGONFLY = "I won't be able to use ANY part of THAT animal!"
 	DESCRIBE.MOONMAW_LAVAE = "Sharper than knives, flying straight at my face!"
 	DESCRIBE.SNAPPERTURTLE = "I've seen plenty of you before! I'm not forgiving you for my toe!"
 	DESCRIBE.SNAPPERTURTLEBABY = "Near helpless as a baby."
