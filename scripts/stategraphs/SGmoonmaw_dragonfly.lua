@@ -48,7 +48,9 @@ local function onattackedfn(inst, data)
     if inst.components.health and not inst.components.health:IsDead()
     and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("frozen")) then
         if inst.components.combat and data and data.attacker then inst.components.combat:SuggestTarget(data.target) end
-			inst.sg:GoToState("hit")
+			if inst:GetDistanceSqToInst(data.attacker) < 4 then
+				inst.sg:GoToState("hit")
+			end
 		elseif inst.sg:HasStateTag("crashed") then
 			inst.sg:GoToState("getup")
 

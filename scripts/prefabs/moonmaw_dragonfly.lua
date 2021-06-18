@@ -380,7 +380,7 @@ local function SpawnShards(inst)
 		inst.shards[i].components.linearcircler.setspeed = 0.2
 		inst.shards[i].hidden = false
 		inst.shards[i].destroy = true
-		inst.shards[i].timetill = i*0.25+2
+		inst.shards[i].timetill = i*0.25+2.5
 	end
 end
 
@@ -407,7 +407,7 @@ local function NoLavae(inst)
 	return true
 end
 
-local function EjectLavae(inst,choice)
+local function EjectLavae(inst,choice,severed)
 local lavae = SpawnPrefab("moonmaw_lavae")
 local x,y,z = inst.lavae[choice].Transform:GetWorldPosition()
 if x == nil then
@@ -418,29 +418,32 @@ inst.lavae[choice]:Hide()
 inst.lavae[choice].hidden = true
 lavae.number = choice
 if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
-lavae.components.combat:SuggestTarget(inst.components.combat.target)
+	lavae.components.combat:SuggestTarget(inst.components.combat.target)
+end
+if severed ~= nil and severed == true then
+	lavae.severed = true
 end
 inst.components.leader:AddFollower(lavae)
 UpdateLavaeDamageTick(inst)
 end
 
-local function TryEjectLavae(inst)
+local function TryEjectLavae(inst,severed)
 if inst.components.health ~= nil and not inst.components.health:IsDead() and NoLavae(inst) == false and inst.components.leader:CountFollowers() == 0 then
 	if inst.components.health:GetPercent() > 0.5 then
 		local choice = math.random(1,8)
 		if inst.lavae[choice].hidden ~= true then
-			EjectLavae(inst,choice)
+			EjectLavae(inst,choice,severed)
 		else
-			TryEjectLavae(inst)
+			TryEjectLavae(inst,severed)
 		end
 	else
 		local choice = math.random(1,8)
 		local choice2 = math.random(1,8)
 		if inst.lavae[choice].hidden ~= true and inst.lavae[choice2].hidden ~= true and choice ~= choice2 then
-			EjectLavae(inst,choice)
+			EjectLavae(inst,choice,severed)
 			EjectLavae(inst,choice2)
 		else
-			TryEjectLavae(inst)
+			TryEjectLavae(inst,severed)
 		end
 	end
 end
@@ -449,7 +452,7 @@ end
 
 local function PerEjectCheck(inst)
 if inst.components.combat ~= nil and inst.components.combat.target ~= nil and (inst.components.health ~= nil and not inst.components.health:IsDead())then
-	TryEjectLavae(inst)
+	TryEjectLavae(inst,false)
 end
 end
 
@@ -485,7 +488,11 @@ end
 end
 
 local function RedoLavae(inst)
-print("1")
+	for i = 1,8 do
+		if inst.lavae[i].hidden ~= true then
+			EjectLavae(inst,i,true)
+		end
+	end
 inst.components.timer:StopTimer("summoncrystals")
 inst.components.timer:StartTimer("summoncrystals",30+math.random(0,15))
 inst.redolavae = true
@@ -660,8 +667,8 @@ local function fn(Sim)
 	inst:AddComponent("leader")
 	
 	inst:AddComponent("explosiveresist")
-	inst.components.explosiveresist:SetResistance(0.65)
-	inst.components.explosiveresist.decayremaining = 999999999999999999999
+	inst.components.explosiveresist:SetResistance(0.8)
+	inst.components.explosiveresist.decay = true
 	
 	inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", CheckTimer)

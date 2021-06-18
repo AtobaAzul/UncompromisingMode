@@ -42,7 +42,7 @@ local function fngeode()
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/moonglass_geode.xml"
 	
     inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
+    inst.components.workable:SetWorkAction(ACTIONS.MINE)
     inst.components.workable:SetWorkLeft(1)
     inst.components.workable:SetOnFinishCallback(onhammered)
 	

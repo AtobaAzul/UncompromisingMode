@@ -128,6 +128,7 @@ end
 
 local brain = require "brains/moonmaw_lavaebrain"
 local function AnimOver(inst)
+if not inst.severed then
 	if inst.number ~= nil then
 		if inst.components.follower.leader ~= nil then
 			local leader = inst.components.follower.leader
@@ -140,9 +141,10 @@ local function AnimOver(inst)
 	end
 	inst:Remove()
 end
+end
 
 local function CheckIfShouldGoBack(inst)
-if inst.components.health ~= nil and not inst.components.health:IsDead() then
+if inst.components.health ~= nil and not inst.components.health:IsDead() and not inst.severed == true then
 	if inst.components.follower ~= nil and inst.components.follower.leader ~= nil and inst.number ~= nil then
 		local leader = inst.components.follower.leader
 		if leader.components.combat ~= nil and leader.components.combat.target == nil then --No Target, return home
@@ -158,6 +160,7 @@ end
 
 local function OnAttacked(inst, data)
 inst:ClearBufferedAction()
+if not data.attacker:HasTag("moonglasscreature") then
 inst.components.combat:SetTarget(data.attacker)
 	if inst.components.follower ~= nil and inst.components.follower.leader ~= nil then
 		local leader = inst.components.follower.leader
@@ -165,6 +168,7 @@ inst.components.combat:SetTarget(data.attacker)
 			leader.components.combat:SetTarget(data.attacker)
 		end
 	end
+end
 end
 
 local function lavae_fn()
@@ -230,6 +234,7 @@ local function lavae_fn()
     inst:SetStateGraph("SGmoonmaw_lavae")
     inst:SetBrain(brain)
 	inst:DoPeriodicTask(8,CheckIfShouldGoBack)
+	inst.severed = false
 	
     return inst
 end
