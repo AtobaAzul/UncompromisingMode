@@ -367,7 +367,7 @@ end
 
 local function SpawnShards(inst)
 	local x,y,z = inst.Transform:GetWorldPosition()
-	local LIMIT = 4
+	local LIMIT = 5
 	inst.shards = {}
 	for i = 1,8 do
 		inst.shards[i] = SpawnPrefab("moonmaw_glassshards_ring")

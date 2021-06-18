@@ -8,7 +8,7 @@ local function destroystuff(inst)
 	if inst.destroy == true and inst.hidden ~= true then
     local x, y, z = inst.Transform:GetWorldPosition()
 	
-    local ents = TheSim:FindEntities(x, y, z, 2, nil, TARGET_IGNORE_TAGS, {"_health"})
+    local ents = TheSim:FindEntities(x, y, z, 1.5, nil, TARGET_IGNORE_TAGS, {"_health"})
     for i, v in ipairs(ents) do
         if v ~= inst.WINDSTAFF_CASTER and v:IsValid() then
             if v.components.health ~= nil and

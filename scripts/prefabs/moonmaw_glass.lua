@@ -70,7 +70,7 @@ inst:DoTaskInTime(time,function(inst)
     inst.AnimState:PlayAnimation("spawn")
     inst.AnimState:PushAnimation("idle1",true)
 	
-	inst.components.timer:StartTimer("defusetime", 0.25)
+	inst.components.timer:StartTimer("defusetime", 0.14)
 end)
 end
 
@@ -120,9 +120,8 @@ local function fn(pondtype)
 
     inst:AddComponent("named")
 
-
-    inst.SoundEmitter:PlaySound("moonstorm/creatures/boss/alterguardian3/atk_traps")
-
+	inst.SoundEmitter:PlaySound("moonstorm/creatures/boss/alterguardian3/atk_traps")
+		
     inst:AddComponent("inspectable")
     inst.components.inspectable.getstatus = getstatus
 
