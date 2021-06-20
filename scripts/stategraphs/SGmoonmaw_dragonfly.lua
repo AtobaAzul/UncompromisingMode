@@ -67,12 +67,13 @@ if inst.components.health ~= nil and
 	end
 	
 	local lavae = false
-	for i = 1,8 do
-		if inst.lavae[i].hidden ~= true then
-		lavae = true
-		end
-	end	
-	
+	if inst.lavae ~= nil then
+		for i = 1,8 do
+			if inst.lavae[i].hidden ~= true then
+			lavae = true
+			end
+		end	
+	end
 	if inst.components.combat.target ~= nil and inst.components.combat.target:HasTag("structure") or math.random() < (inst.randattack*0.05) or lavae ~= true then
 		if lavae == true then
 			inst.resetcooldown = true
@@ -690,6 +691,7 @@ local states=
         
         onenter = function(inst)
 		inst.Physics:Stop()
+		inst.fell = true
         inst.AnimState:PlayAnimation("skyfall")
         end,
         timeline=

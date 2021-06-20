@@ -203,30 +203,14 @@ local function OnSave(inst, data)
 			end
 		end
 	end
+	data.fell = inst.fell
 end
 
 local function LoadLavae(inst)
-	local x,y,z = inst.Transform:GetWorldPosition()
-	local LIMIT = 4
-	inst.lavae = {}
-	for i = 1,8 do
-	local test = inst.lavae[i]
-		inst.lavae[i] = SpawnPrefab("moonmaw_lavae_ring")
-		inst.lavae[i].WINDSTAFF_CASTER = inst
-		inst.lavae[i].components.linearcircler:SetCircleTarget(inst)
-		inst.lavae[i].components.linearcircler:Start()
-		inst.lavae[i].components.linearcircler.randAng = i*0.125
-		inst.lavae[i].components.linearcircler.clockwise = false
-		inst.lavae[i].components.linearcircler.distance_limit = LIMIT
-		inst.lavae[i].components.linearcircler.setspeed = 0.2
-		if inst.lavae[i] == "alive" then
-			inst.lavae[i].hidden = false
-			inst.lavae[i]:Show()
-		else
-			inst.lavae[i].hidden = true
-			inst.lavae[i]:Hide()
-		end
-	end
+if inst.fell == true then
+	inst.SpawnLavae(inst)
+	inst.sg:GoToState("idle")
+end
 end
         
 local function OnLoad(inst, data)
@@ -235,16 +219,10 @@ if data then
     inst.num_targets_vomited = data.vomits
     inst.KilledPlayer = data.KilledPlayer or false
     inst.shouldGoAway = data.shouldGoAway or false
-		
-	inst.SoundEmitter:PlaySound("UMSounds/moonmaw/flap", "flying")
-	if data.lavae ~= nil then
-		inst.lavae = {}
-		for i = 1,8 do
-			if data.lavae[i] ~= nil and data.lavae[i] == "alive" then
-			inst.lavae[i] = "alive"
-			end
-		end
-		inst:DoTaskInTime(0,LoadLavae)
+
+	inst:DoTaskInTime(0,LoadLavae)
+	if data.fell ~= nil then
+		inst.fell = data.fell
 	end
 end
 end
@@ -603,8 +581,8 @@ local function fn(Sim)
 	
     inst:AddComponent("explosiveresist")
 	
-    inst.flame_on = false
     inst.KilledPlayer = false
+	inst.fell = false
     inst:ListenForEvent("killed", OnKill)
 
 
