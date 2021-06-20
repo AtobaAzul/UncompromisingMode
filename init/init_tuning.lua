@@ -195,6 +195,9 @@ TUNING.DSTU =
 	--Perishable Increase
 	PERISHABLETIME = GetModConfigData("more perishing"),
 	
+	--Fire Loot Rework
+	FIRELOOT = GetModConfigData("fireloot"),
+	
     ----------------------------------------------------------------------------
     --Player changes
     ----------------------------------------------------------------------------

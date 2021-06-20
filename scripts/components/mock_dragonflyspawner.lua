@@ -146,9 +146,27 @@ local function TargetLost()
     end
 end
 
+
+local function FindNearbyLandFullMoon(position, range)
+    local finaloffset = FindValidPositionByFan(math.random() * PI / 2, range or 8, 8, function(offset)
+        local x, z = position.x + offset.x, position.z + offset.z
+        return TheWorld.Map:IsAboveGroundAtPoint(x, 0, z)
+            and not TheWorld.Map:IsPointNearHole(Vector3(x, 0, z))
+    end)
+    if finaloffset ~= nil then
+        finaloffset.x = finaloffset.x + position.x
+        finaloffset.z = finaloffset.z + position.z
+        return finaloffset
+    end
+end
+
 local function GetSpawnPoint(pt)
     if not TheWorld.Map:IsAboveGroundAtPoint(pt:Get()) then
-        pt = FindNearbyLand(pt, 1) or pt
+		if TheWorld.state.isfullmoon then
+			pt = FindNearbyLandFullMoon(pt, 1) or pt
+		else
+			pt = FindNearbyLand(pt, 1) or pt
+		end
     end
     local offset = FindWalkableOffset(pt, math.random() * 2 * PI, HASSLER_SPAWN_DIST, 12, true)
     if offset ~= nil then
@@ -168,7 +186,9 @@ local function ReleaseHassler(targetPlayer)
 
     local spawn_pt = GetSpawnPoint(targetPlayer:GetPosition())
     if spawn_pt ~= nil then
-        if _storedhassler ~= nil then
+		if TheWorld.state.isfullmoon then 
+			hassler = SpawnPrefab("moonmaw_dragonfly")
+        elseif _storedhassler ~= nil then
             hassler = SpawnSaveRecord(_storedhassler, {})
             _storedhassler = nil
         else
@@ -273,13 +293,24 @@ end
 function self:DoWarningSound(_targetplayer)
     --Players near _targetplayer will hear the warning sound from the
     --same direction and volume offset from their own local positions
-    SpawnPrefab("dragonflywarning_lvl"..
-        (((_timetoattack == nil or
-        _timetoattack < 30) and "4") or
-        (_timetoattack < 60 and "3") or
-        (_timetoattack < 90 and "2") or
-                                "1")
-    ).Transform:SetPosition(_targetplayer.Transform:GetWorldPosition())
+	
+	if TheWorld.state.isfullmoon then
+		SpawnPrefab("moonmaw_dragonflywarning_lvl"..
+			(((_timetoattack == nil or
+			_timetoattack < 30) and "4") or
+			(_timetoattack < 60 and "3") or
+			(_timetoattack < 90 and "2") or
+									"1")
+		).Transform:SetPosition(_targetplayer.Transform:GetWorldPosition())
+	else
+		SpawnPrefab("dragonflywarning_lvl"..
+			(((_timetoattack == nil or
+			_timetoattack < 30) and "4") or
+			(_timetoattack < 60 and "3") or
+			(_timetoattack < 90 and "2") or
+									"1")
+		).Transform:SetPosition(_targetplayer.Transform:GetWorldPosition())
+	end
 end
 
 function self:OnUpdate(dt)
@@ -400,6 +431,13 @@ function self:SummonMonster(player)
 	self.inst:StartUpdatingComponent(self)
 end
 
+local function SummonMonsterFullMoon(player)
+	if TheWorld.state.isfullmoon then
+		_timetoattack = 60
+		self.inst:StartUpdatingComponent(self)
+	end
+end
+
 function self:GetWarning()
 	return _warning
 end
@@ -411,6 +449,7 @@ for i, v in ipairs(AllPlayers) do
     table.insert(_activeplayers, v)
 end
 
+self.inst:WatchWorldState("isfullmoon", SummonMonsterFullMoon)
 self.inst:ListenForEvent("ms_playerjoined", OnPlayerJoined, TheWorld)
 self.inst:ListenForEvent("ms_playerleft", OnPlayerLeft, TheWorld)
 self:WatchWorldState("season", OnSeasonChange)

@@ -52,6 +52,29 @@ local monster_params =
         },
     },
     
+    moonmaw_dragonfly =
+    {
+        range = 40, --beargerspawner.lua::HASSLER_SPAWN_DIST
+        levels =
+        {
+            {
+                sound = "UCSounds/moonmaw/distant",
+                distance = 25,
+            },
+            {
+                sound = "UCSounds/moonmaw/distant",
+                distance = 20,
+            },
+            {
+                sound = "UCSounds/moonmaw/distant",
+                distance = 15,
+            },
+            {
+                sound = "UCSounds/moonmaw/distant",
+                distance = 5,
+            },
+        },
+    },
 }
 
 local function PlayWarningSound(proxy, sound, range, theta, radius)

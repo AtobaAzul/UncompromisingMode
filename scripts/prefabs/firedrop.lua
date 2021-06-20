@@ -93,7 +93,13 @@ local function smallfn()
 
     --Remove the default handlers that toggle persists flag
     inst.components.burnable:SetOnIgniteFn(nil)
-    --inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
+	
+	if TUNING.DSTU.FIRELOOT ~= nil and TUNING.DSTU.FIRELOOT == 3 then
+		inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
+	else
+		inst.components.burnable:SetOnIgniteFn(nil)
+	end
+	
     inst.components.burnable:SetOnExtinguishFn(inst.Remove)
     inst.components.burnable:Ignite()
     inst.components.burnable:SetOnBurntFn(inst.Remove)

@@ -38,7 +38,15 @@ end
 
 local function FrogFindFood(self)
 
-    local avoidthenoid = RunAway(self.inst, "epic", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP , function() return true end )
+    local avoidthenoid = RunAway(self.inst, "epic", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP , function() 
+	local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
+	
+	if target ~= nil and target:HasTag("epic") then
+		inst.components.combat:DropTarget()
+	end
+	
+	return true 
+	end)
 	
     table.insert(self.bt.root.children, 2, avoidthenoid)
 
