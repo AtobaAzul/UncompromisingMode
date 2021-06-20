@@ -206,11 +206,13 @@ local states=
             TimeEvent(9*FRAMES, function(inst) 
 				inst.SoundEmitter:PlaySound("turnoftides/common/together/moon_glass/mine", nil, 0.5) 
 			end),
-            TimeEvent(11*FRAMES, function(inst) 
+            TimeEvent(11*FRAMES, function(inst)
+			if inst.components.health ~= nil and not inst.components.health:IsDead() then
 				inst.components.combat:DoAreaAttack(inst, 2, nil, nil,nil, { "moonglasscreature" })
 				local fx = SpawnPrefab("moonstorm_glass_ground_fx")
 				local x,y,z = inst.Transform:GetWorldPosition()
 				fx.Transform:SetPosition(x,y,z)
+			end
 				inst.Physics:Stop()
 			end),
         },

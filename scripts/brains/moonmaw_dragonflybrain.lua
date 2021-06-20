@@ -25,27 +25,9 @@ local function GoHome(inst)
     end
 end
 
-local function EatAshAction(inst)
-    if inst.sg:HasStateTag("sleeping") or inst.num_targets_vomited >= TUNING.DRAGONFLY_VOMIT_TARGETS_FOR_SATISFIED or inst.hassleepdestination then return false end
-    if inst.sg:HasStateTag("busy") or inst.flame_on then return false end
-    if (inst.components.combat and inst.components.combat.target) or inst.fire_build or inst.flame_on then return false end
-    --if inst.last_spit_time and ((GetTime() - inst.last_spit_time) < 10) then return false end
-
-    local action = nil
-
-    local pt = inst:GetPosition()
-    local target = FindEntity(inst, SEE_BAIT_DIST, nil, {"ashes"}, {"fire", "FX", "NOCLICK", "DECOR", "INLIMBO"})
-    
-    if target then
-        inst.ashes = target
-        return BufferedAction(inst, inst.ashes, ACTIONS.PICKUP)
-            or nil
-    end
-end
-
 local function GlassNearby(inst)
 if FindEntity(inst,5,nil,{"moonglass"}) then
-return
+return true
 end
 end
 local function ShouldSpitFn(inst)
@@ -109,7 +91,7 @@ local function FindLavaSpitTargetAction(inst)
         prio = prio + 1
     end
 
-    if target and not target:HasTag("fire") then
+    if target and not target:HasTag("fire") and not GlassNearby(target) then
         inst.target = target
         return BufferedAction(inst, inst.target, ACTIONS.LAVASPIT)
     end
@@ -127,12 +109,6 @@ local function SleepAction(inst)
     end
 end
 
-local function FlameOffAction(inst)
-    if inst.fire_build and inst.components.combat and not inst.components.combat.target and inst.last_kill_time and ((GetTime() - inst.last_kill_time) > 3) then
-        inst.last_kill_time = nil
-    end
-end
-
 local function ShouldFollowFn(inst)
     return not inst.NearPlayerBase(inst) and not inst.SeenBase
 end
@@ -145,9 +121,7 @@ function MoonMaw_DragonflyBrain:OnStart()
     local root =
         PriorityNode(
         {
-           -- DoAction(self.inst, FlameOffAction),
             DoAction(self.inst, SleepAction),
-            --DoAction(self.inst, EatAshAction),
             WhileNode(function() return ShouldSpitFn(self.inst) end, "Spit",
                 DoAction(self.inst, LavaSpitAction)),
             ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST),
