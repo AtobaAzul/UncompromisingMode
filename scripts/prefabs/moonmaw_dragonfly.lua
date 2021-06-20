@@ -102,7 +102,7 @@ local function RetargetFn(inst)
                and not guy:HasTag("antlion")
         end)
     else
-        return FindEntity(inst, TARGET_DIST, function(guy) 
+        return FindEntity(inst, 4*TARGET_DIST, function(guy) 
             return inst.components.combat:CanTarget(guy)
                and not guy:HasTag("prey")
                and not guy:HasTag("smallcreature")
@@ -399,6 +399,9 @@ end
 end]]
 
 local function NoLavae(inst)
+	if inst.lavae == nil then
+	return true
+	end
 	for i = 1,8 do
 		if inst.lavae[i].hidden ~= true then
 			return false
