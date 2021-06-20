@@ -146,9 +146,27 @@ local function TargetLost()
     end
 end
 
+
+local function FindNearbyLandFullMoon(position, range)
+    local finaloffset = FindValidPositionByFan(math.random() * PI / 2, range or 8, 8, function(offset)
+        local x, z = position.x + offset.x, position.z + offset.z
+        return TheWorld.Map:IsAboveGroundAtPoint(x, 0, z)
+            and not TheWorld.Map:IsPointNearHole(Vector3(x, 0, z))
+    end)
+    if finaloffset ~= nil then
+        finaloffset.x = finaloffset.x + position.x
+        finaloffset.z = finaloffset.z + position.z
+        return finaloffset
+    end
+end
+
 local function GetSpawnPoint(pt)
     if not TheWorld.Map:IsAboveGroundAtPoint(pt:Get()) then
-        pt = FindNearbyLand(pt, 1) or pt
+		if TheWorld.state.isfullmoon then
+			pt = FindNearbyLandFullMoon(pt, 1) or pt
+		else
+			pt = FindNearbyLand(pt, 1) or pt
+		end
     end
     local offset = FindWalkableOffset(pt, math.random() * 2 * PI, HASSLER_SPAWN_DIST, 12, true)
     if offset ~= nil then
@@ -415,7 +433,7 @@ end
 
 local function SummonMonsterFullMoon(player)
 	if TheWorld.state.isfullmoon then
-		_timetoattack = 90
+		_timetoattack = 60
 		self.inst:StartUpdatingComponent(self)
 	end
 end
