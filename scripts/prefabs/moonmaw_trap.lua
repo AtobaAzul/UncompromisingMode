@@ -32,7 +32,7 @@ local function do_landed(inst)
 
     local x, y, z = inst.Transform:GetWorldPosition()
     local potential_targets = TheSim:FindEntities(
-        x, y, z, 2.5, nil, LANDEDAOE_CANT_TAGS, LANDEDAOE_ONEOF_TAGS
+        x, y, z, 3, nil, LANDEDAOE_CANT_TAGS, LANDEDAOE_ONEOF_TAGS
     )
     for _, target in ipairs(potential_targets) do
         if target ~= inst and target:IsValid() then
@@ -95,7 +95,7 @@ local function projectile_fn()
 
     inst.AnimState:SetBank("alterguardian_meteor")
     inst.AnimState:SetBuild("alterguardian_meteor")
-    inst.AnimState:PlayAnimation("meteor_pre")
+    --inst.AnimState:PlayAnimation("meteor_pre")
 
     inst.SoundEmitter:PlaySound("moonstorm/creatures/boss/alterguardian3/atk_traps")
 
@@ -106,12 +106,17 @@ local function projectile_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-
-    inst.SetGuardian = set_guardian
-
-    inst:DoTaskInTime(90*FRAMES, do_landed)
-    inst:ListenForEvent("animover", spawn_trap)
-
+	inst.Light:Enable(false)
+	inst:Hide()
+	local random = math.random(1,5)
+	inst:DoTaskInTime(random,function(inst) 
+		inst:Show()
+		inst.Light:Enable(true)
+		inst.AnimState:PlayAnimation("meteor_pre") 
+		inst:DoTaskInTime(32*FRAMES, do_landed)
+		inst:ListenForEvent("animover", spawn_trap)
+	end)
+	inst.SetGuardian = set_guardian
     inst.persists = false
 
     return inst
