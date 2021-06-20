@@ -237,4 +237,5 @@ return {
 	"armorlavae",
 	"marshmist",
 	"corvushat",
+	"woomerang",
 }

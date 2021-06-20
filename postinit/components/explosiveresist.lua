@@ -5,10 +5,12 @@ env.AddComponentPostInit("explosiveresist", function(self)
 	
 	self.decay = nil
 	
+	local _OldSetResistance = self.SetResistance
+	
 	function self:SetResistance(resistance)
 		self.resistance = math.clamp(resistance, 0, 1)
 		if self.resistance > 0 and not self.decay then
-			self.inst:StartUpdatingComponent(self)
+			return _OldSetResistance(self, resistance)
 		else
 			self.inst:StopUpdatingComponent(self)
 			self.delayremaining = 0

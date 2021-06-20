@@ -108,6 +108,19 @@ configuration_options =
 		default = "Fuelmuncher",
 	},
 	
+	{
+		name = "fireloot",
+		label = "Burning Loot Drop Rework",
+		hover = "Loot no longer gets destroyed when a mob is burnt to death. Mobs will explode on death, dealing damage and lightning things on fire, based on loot dropped.",
+		options =
+		{
+			{description = "Off", data = 1},
+			{description = "Explosion Off", data = 2},
+			{description = "Explosion On", data = 3},
+		},
+		default = 3,
+	},
+	
 	SkipSpace(),
 ------------------------------
 -- Character Reworks --
