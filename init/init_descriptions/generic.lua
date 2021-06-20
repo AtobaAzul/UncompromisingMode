@@ -79,6 +79,18 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
         "NOTHING BUT DARKNESS",
         "IT'S A NEVER ENDING CYCLE",
         "HOW MANY TIMES HAVE I DIED HERE?",
+		"WHEN WAS THE LAST TIME I'VE FELT JOY?",
+		"WHAT DID I DO TO DESERVE THIS?",
+		"I'M GOING TO DIE HERE. OVER, AND OVER, AND OVER AGAIN.",
+		"PLEASE, LET ME DIE.",
+		"CAN I REALLY TRUST THEM?",
+		"WHY BOTHER? I'M GOING TO DIE ANYWAY",
+		"WHO AM I?",
+		"I AM SCARED",
+		"SHUT UP!",
+		"WHAT IF THIS WAS ALL A DREAM?",
+		"I WANT OUT",
+		"I DON'T CARE ANYMORE",
     }
 	ANNOUNCE.VETERANCURSETAUNT = {
 		"COME CLOSER IF ADVERSITY IS WHAT YOU DESIRE",
@@ -91,9 +103,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
         "CURSE TOO TOUGH? THERE IS ONLY ONE WAY OUT...",
 	}
 	
-	ANNOUNCE.STANTON_GREET = {"Care to drink with the dead?", "How's about a drink?", "Come and drink with me.","I pick the drinks, you knock 'em back" }
+	ANNOUNCE.STANTON_GREET = {"Care to drink with the dead?", "Let's play a little game, how's about a drink?", "Come and drink with me.","I pick the drinks, you knock 'em back." }
 	ANNOUNCE.STANTON_GIVE = {"You seem willing, I'll drink with you.", "It'll be you then."}
-	ANNOUNCE.STANTON_RESTOCK = {"Still awake? Come closer and we'll drink again.", "Come closer and I'll give you another."}
+	ANNOUNCE.STANTON_RESTOCK = {"Still awake? We can drink again.", "I can give you another."}
 	ANNOUNCE.STANTON_RULES = {"I only drink with one at a time."}
 	ANNOUNCE.STANTON_GLOAT = {"Ha! I knew you were soft.", "Ha! You lose!"}
 
@@ -104,7 +116,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	ANNOUNCE.STANTON_POET5 = { "Drink with the living dead." }
 
 	ANNOUNCE.STANTON_IMPATIENT = {"I'm getting tired of waiting here.","I ain't got all night!"}
-	ANNOUNCE.STANTON_SUPERIMPATIENT = {"I'm done waiting.","That's it! You've incurred my wrath!"}
+	ANNOUNCE.STANTON_SUPERIMPATIENT = {"I'm done waiting."}
 	
 	ANNOUNCE.SHADOW_CROWN_CHALLENGE = "DEFEAT THIS CREATURE AND CLAIM YOUR PRIZE"
 	ANNOUNCE.ANNOUNCE_OVER_EAT =
