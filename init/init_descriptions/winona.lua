@@ -291,10 +291,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.SNAPPERTURTLE = "Gotta slap a \"Keep hands away from moving parts\" sticker on it's shell!"
 	DESCRIBE.SNAPPERTURTLEBABY = "It's gonna get bigger!"
 	DESCRIBE.SNAPPERTURTLENEST = "Their hangout spot."
-	DESCRIBE.GLASS_SCALES = ""
-	DESCRIBE.MOONGLASS_GEODE = ""
-	DESCRIBE.ARMOR_GLASSMAIL = ""
-	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = ""
+	DESCRIBE.GLASS_SCALES = "It's light sure is pretty!"
+	DESCRIBE.MOONGLASS_GEODE = "Imagine chuckin' that at something, hah. Probably shouldn't."
+	DESCRIBE.ARMOR_GLASSMAIL = "We're really movin' up in the world, huh?"
+	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "They move in sync, as part of a greater machine."
 	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
