@@ -97,7 +97,7 @@ local function projectile_fn()
     inst.AnimState:SetBuild("alterguardian_meteor")
     --inst.AnimState:PlayAnimation("meteor_pre")
 
-    inst.SoundEmitter:PlaySound("moonstorm/creatures/boss/alterguardian3/atk_traps")
+   
 
     inst:AddTag("FX")
     inst:AddTag("NOCLICK")
@@ -115,6 +115,7 @@ local function projectile_fn()
 		inst.AnimState:PlayAnimation("meteor_pre") 
 		inst:DoTaskInTime(32*FRAMES, do_landed)
 		inst:ListenForEvent("animover", spawn_trap)
+		inst.SoundEmitter:PlaySound("moonstorm/creatures/boss/alterguardian3/atk_traps")
 	end)
 	inst.SetGuardian = set_guardian
     inst.persists = false

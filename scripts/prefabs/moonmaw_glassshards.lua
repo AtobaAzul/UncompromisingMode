@@ -195,7 +195,7 @@ local function shard_fn()
     inst.components.projectile:SetOnHitFn(onhit)
     inst.components.projectile:SetOnMissFn(inst.Remove)
     inst.components.projectile:SetLaunchOffset(Vector3(0, 0.5, 0))
-	
+	inst:DoTaskInTime(5,function(inst) inst:Remove() end)
     inst.persists = false
 
     return inst
