@@ -6,7 +6,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "You need my help! And your body..."
     ANNOUNCE.ANNOUNCE_WINONAGEN = "I haven't gotten my \"putting rocks in machines\" badge yet."
-    ANNOUNCE.ANNOUNCE_RATRAID = "Sounds like a rat raid!"
+    ANNOUNCE.ANNOUNCE_RATRAID = "Sounds like rats!"
     ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Everyone, tuck your pants into your socks! Quick!"
     ANNOUNCE.ANNOUNCE_RATRAID_OVER = "They're taking our gear away!"
     ANNOUNCE.ANNOUNCE_ACIDRAIN = {
@@ -62,6 +62,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
         "I MUST PROTECT HER",
         "I SHOULDN'T HAVE DONE IT",
         "I CAN'T GIVE UP",
+		"I AM AFRAID",
     }
 	ANNOUNCE.ANNOUNCE_OVER_EAT =
 	{
@@ -291,10 +292,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.SNAPPERTURTLE = "Look! A snapping turtle! These guy's can easily snap your finger off!"
 	DESCRIBE.SNAPPERTURTLEBABY = "Don't underestimate those jaw- WOBY NO!"
 	DESCRIBE.SNAPPERTURTLENEST = "Looks like they nest here!"
-	DESCRIBE.GLASS_SCALES = ""
-	DESCRIBE.MOONGLASS_GEODE = ""
-	DESCRIBE.ARMOR_GLASSMAIL = ""
-	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = ""
+	DESCRIBE.GLASS_SCALES = "I've never seen anything like it!"
+	DESCRIBE.MOONGLASS_GEODE = "It's not as reflective as glass. It must be a rock!"
+	DESCRIBE.ARMOR_GLASSMAIL = "I'm untouchable!"
+	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "No Woby, stay back!"
 	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
