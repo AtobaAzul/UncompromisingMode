@@ -146,11 +146,11 @@ end
 local function CheckIfShouldGoBack(inst)
 if inst.components.health ~= nil and not inst.components.health:IsDead() and not inst.severed == true then
 	if inst.components.follower ~= nil and inst.components.follower.leader ~= nil and inst.number ~= nil then
-		local leader = inst.components.follower.leader
+		--[[local leader = inst.components.follower.leader
 		if leader.components.combat ~= nil and leader.components.combat.target == nil then --No Target, return home
 			inst.AnimState:PlayAnimation("ascend")
 			inst:ListenForEvent("animover", AnimOver)
-		end	
+		end	]]
 	else
 		inst.AnimState:PlayAnimation("ascend")
 		inst:ListenForEvent("animover", AnimOver)
@@ -233,7 +233,9 @@ local function lavae_fn()
 	inst:ListenForEvent("attacked", OnAttacked)
     inst:SetStateGraph("SGmoonmaw_lavae")
     inst:SetBrain(brain)
-	inst:DoPeriodicTask(8,CheckIfShouldGoBack)
+	inst:DoTaskInTime(0,CheckIfShouldGoBack)
+	inst:DoPeriodicTask(8,CheckIfShouldGoBack) 
+
 	inst.severed = false
 	
     return inst
