@@ -298,10 +298,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.SNAPPERTURTLE = "Snap at me and I'll kill you."
 	DESCRIBE.SNAPPERTURTLEBABY = "Don't think your age excuses your actions, mister."
 	DESCRIBE.SNAPPERTURTLENEST = "Must've been from the ocean. I've never seen them on the island before."
-	DESCRIBE.GLASS_SCALES = ""
-	DESCRIBE.MOONGLASS_GEODE = ""
-	DESCRIBE.ARMOR_GLASSMAIL = ""
-	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = ""
+	DESCRIBE.GLASS_SCALES = "I'm still not used to lunar-type magic."
+	DESCRIBE.MOONGLASS_GEODE = "A concentrated mass of lunar energy. I could use this."
+	DESCRIBE.ARMOR_GLASSMAIL = "I'm not dying anytime soon!"
+	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "Come closer if you don't value your life."
 	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
