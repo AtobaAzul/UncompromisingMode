@@ -273,9 +273,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.BLUE_MUSHED_ROOM = "It's been ground down for some purpose."
 	
 	--StantonStuff
-	DESCRIBE.SKULLFLASK = "Keeps me at ease."
+	DESCRIBE.SKULLFLASK = "Don't take a swig in the workplace and I'm fine with it!"
 	DESCRIBE.SKULLFLASK_EMPTY = "Nothin' left."
-	DESCRIBE.STANTON_SHADOW_TONIC = "Bottoms up!"
+	DESCRIBE.STANTON_SHADOW_TONIC = "I can't do this, I'm on the clock!"
 	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 	DESCRIBE.STANTON = "Drinking game, huh?"
 	--StantonStuff
@@ -283,14 +283,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
 	DESCRIBE.THEATERCORN = "A runny mess, but it's good for a show."
-	DESCRIBE.DEERCLOPS_BARRIER = "Gotta bust out."
+	DESCRIBE.DEERCLOPS_BARRIER = "Gotta bust outta here!"
 	
 	--Stuff for Canis to check
-	DESCRIBE.MOONMAW_DRAGONFLY = "Nope"
-	DESCRIBE.MOONMAW_LAVAE = ""
-	DESCRIBE.SNAPPERTURTLE = ""
-	DESCRIBE.SNAPPERTURTLEBABY = ""
-	DESCRIBE.SNAPPERTURTLENEST = ""
+	DESCRIBE.MOONMAW_DRAGONFLY = "Nope."
+	DESCRIBE.MOONMAW_LAVAE = "That's probably generating a whole lotta kinetic power!"
+	DESCRIBE.SNAPPERTURTLE = "Gotta slap a \"Keep hands away from moving parts\" sticker on it's shell!"
+	DESCRIBE.SNAPPERTURTLEBABY = "It's gonna get bigger!"
+	DESCRIBE.SNAPPERTURTLENEST = "Their hangout spot."
 	DESCRIBE.GLASS_SCALES = ""
 	DESCRIBE.MOONGLASS_GEODE = ""
 	DESCRIBE.ARMOR_GLASSMAIL = ""
