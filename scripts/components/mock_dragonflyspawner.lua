@@ -162,7 +162,7 @@ end
 
 local function GetSpawnPoint(pt)
     if not TheWorld.Map:IsAboveGroundAtPoint(pt:Get()) then
-		if TheWorld.state.isfullmoon then
+		if TheWorld.state.isfullmoon or TheWorld.state.isalterawake then
 			pt = FindNearbyLandFullMoon(pt, 1) or pt
 		else
 			pt = FindNearbyLand(pt, 1) or pt
@@ -186,7 +186,7 @@ local function ReleaseHassler(targetPlayer)
 
     local spawn_pt = GetSpawnPoint(targetPlayer:GetPosition())
     if spawn_pt ~= nil then
-		if TheWorld.state.isfullmoon then 
+		if TheWorld.state.isfullmoon or TheWorld.state.isalterawake then 
 			hassler = SpawnPrefab("moonmaw_dragonfly")
         elseif _storedhassler ~= nil then
             hassler = SpawnSaveRecord(_storedhassler, {})
@@ -294,7 +294,7 @@ function self:DoWarningSound(_targetplayer)
     --Players near _targetplayer will hear the warning sound from the
     --same direction and volume offset from their own local positions
 	
-	if TheWorld.state.isfullmoon then
+	if TheWorld.state.isfullmoon or TheWorld.state.isalterawake then
 		SpawnPrefab("moonmaw_dragonflywarning_lvl"..
 			(((_timetoattack == nil or
 			_timetoattack < 30) and "4") or
@@ -432,7 +432,7 @@ function self:SummonMonster(player)
 end
 
 local function SummonMonsterFullMoon(player)
-	if TheWorld.state.isfullmoon then
+	if TheWorld.state.isfullmoon or TheWorld.state.isalterawake then
 		_timetoattack = 60
 		self.inst:StartUpdatingComponent(self)
 	end
