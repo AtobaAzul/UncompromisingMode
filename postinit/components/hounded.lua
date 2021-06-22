@@ -81,24 +81,6 @@ AddComponentPostInit("hounded", function(self)
 
     local _SummonSpawn = UpvalueHacker.GetUpvalue(self.SummonSpawn, "SummonSpawn")
     local _GetSpawnPoint = UpvalueHacker.GetUpvalue(self.SummonSpawn, "SummonSpawn", "GetSpawnPoint")
-
-	local function FindNearbyPlayer(inst,pt)
-		local playerlist = TheSim:FindEntities(pt.x,pt.y,pt.z, 50, {"player", "_health"},{"dead", "playerghost"})
-		local player = playerlist[math.random(#playerlist)]
-		
-		if inst.components.combat ~= nil and player ~= nil then	
-			inst.components.combat:SuggestTarget(player)	
-		end
-		
-		local warglist = TheSim:FindEntities(pt.x,pt.y,pt.z, 50, {"warg"},{"dead"})
-		if warglist ~= nil and #warglist > 0 then
-			local warg = warglist[math.random(#warglist)]
-			
-			if not inst:HasTag("warg") and inst.components.follower ~= nil and warg ~= nil then
-				inst.components.follower:SetLeader(warg)
-			end
-		end
-	end
 	
     local function SpawnHounded(prefab, pt, spawn_pt)
         if not prefab then
@@ -108,7 +90,6 @@ AddComponentPostInit("hounded", function(self)
             if spawn then
                 spawn.Physics:Teleport(spawn_pt:Get())
                 spawn:FacePoint(pt)
-				FindNearbyPlayer(spawn,pt)
                 if spawn.components.spawnfader then
                     spawn.components.spawnfader:FadeIn()
                 end
@@ -150,8 +131,7 @@ AddComponentPostInit("hounded", function(self)
             prefab_list = self.seasonal_boss_prefabs[season]
             prefab = --[[math.random() < self.seasonal_boss_chance and #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or]] self.default_boss_prefab
             
-			SpawnHounded(prefab, pt, magmaspawn_pt)
-			return
+			return SpawnHounded(prefab, pt, magmaspawn_pt)			
         end
         --spawn a random seasonal hound
         if pt and chance < self.seasonal_chance and self.spawnamount <= SpawnLimit and GLOBAL.TheWorld.state.cycles >= 22 then
@@ -163,13 +143,13 @@ AddComponentPostInit("hounded", function(self)
             prefab = #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or nil
 			if prefab == "magmahound" then
 				if magmaspawn_pt ~= nil then
-					SpawnHounded(prefab, pt, magmaspawn_pt)
+					return SpawnHounded(prefab, pt, magmaspawn_pt)
 				else
 					prefab = "hound"
-					SpawnHounded(prefab, pt, spawn_pt)
+					return SpawnHounded(prefab, pt, spawn_pt)
 				end
 			else
-				SpawnHounded(prefab, pt, spawn_pt)
+				return SpawnHounded(prefab, pt, spawn_pt)
 			end
         else
             return _SummonSpawn(pt)
@@ -264,22 +244,6 @@ AddComponentPostInit("hounded", function(self) --We can see if we can copy korea
     local _SummonSpawn = UpvalueHacker.GetUpvalue(self.SummonSpawn, "SummonSpawn")
     local _GetSpawnPoint = UpvalueHacker.GetUpvalue(self.SummonSpawn, "SummonSpawn", "GetSpawnPoint")
 
-	local function FindNearbyPlayer(inst,pt)
-		local playerlist = TheSim:FindEntities(pt.x,pt.y,pt.z, 50, {"player", "_health"},{"dead", "playerghost"})
-		local player = playerlist[math.random(#playerlist)]
-		
-		if inst.components.combat ~= nil and player ~= nil then	
-			inst.components.combat:SuggestTarget(player)	
-		end
-		
-		local findwarg = TheSim:FindEntities(pt.x,pt.y,pt.z, 50, {"warg"})
-		local warg = playerlist[math.random(#playerlist)]
-		
-		if not inst:HasTag("warg") and inst.components.follower ~= nil and warg ~= nil then
-			inst.components.follower:SetLeader(warg)
-		end
-	end
-	
     local function SpawnHounded(prefab, pt, spawn_pt)
         if not prefab then
             return _SummonSpawn(pt)
@@ -288,7 +252,6 @@ AddComponentPostInit("hounded", function(self) --We can see if we can copy korea
             if spawn then
                 spawn.Physics:Teleport(spawn_pt:Get())
                 spawn:FacePoint(pt)
-				FindNearbyPlayer(spawn,pt)
                 if spawn.components.spawnfader then
                     spawn.components.spawnfader:FadeIn()
                 end
@@ -330,8 +293,8 @@ AddComponentPostInit("hounded", function(self) --We can see if we can copy korea
             prefab_list = self.seasonal_boss_prefabs[season]
             prefab = --[[math.random() < self.seasonal_boss_chance and #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or]] self.default_boss_prefab
             
-			SpawnHounded(prefab, pt, magmaspawn_pt)
-			return
+			return SpawnHounded(prefab, pt, magmaspawn_pt)
+			
         end
         --spawn a random seasonal hound
         if pt and chance < self.seasonal_chance and self.spawnamount <= SpawnLimit and GLOBAL.TheWorld.state.cycles >= 22 then
@@ -343,13 +306,13 @@ AddComponentPostInit("hounded", function(self) --We can see if we can copy korea
             prefab = #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or nil
 			if prefab == "magmahound" then
 				if magmaspawn_pt ~= nil then
-					SpawnHounded(prefab, pt, magmaspawn_pt)
+					return SpawnHounded(prefab, pt, magmaspawn_pt)
 				else
 					prefab = "hound"
-					SpawnHounded(prefab, pt, spawn_pt)
+					return SpawnHounded(prefab, pt, spawn_pt)
 				end
 			else
-				SpawnHounded(prefab, pt, spawn_pt)
+				return SpawnHounded(prefab, pt, spawn_pt)
 			end
         else
             return _SummonSpawn(pt)
