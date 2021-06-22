@@ -172,7 +172,7 @@ AddComponentPostInit("hounded", function(self)
 				SpawnHounded(prefab, pt, spawn_pt)
 			end
         else
-            _SummonSpawn(pt)
+            return _SummonSpawn(pt)
         end
     end
 
@@ -352,7 +352,7 @@ AddComponentPostInit("hounded", function(self) --We can see if we can copy korea
 				SpawnHounded(prefab, pt, spawn_pt)
 			end
         else
-            _SummonSpawn(pt)
+            return _SummonSpawn(pt)
         end
     end
 
