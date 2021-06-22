@@ -56,9 +56,17 @@ local function OnExplode(inst, target)
 		inst.deathtask = nil
 		
 		if inst.traptype == "gold" then
-			target.components.combat:GetAttacked(inst, TUNING.TRAP_TEETH_DAMAGE * 1.5)
+			if target.components.combat.target ~= nil then
+				target.components.combat:GetAttacked(target.components.combat.target, TUNING.TRAP_TEETH_DAMAGE * 1.5)
+			else
+				target.components.combat:GetAttacked(inst, TUNING.TRAP_TEETH_DAMAGE * 1.5)
+			end
 		else
-			target.components.combat:GetAttacked(inst, TUNING.TRAP_TEETH_DAMAGE)
+			if target.components.combat.target ~= nil then
+				target.components.combat:GetAttacked(target.components.combat.target, TUNING.TRAP_TEETH_DAMAGE)
+			else
+				target.components.combat:GetAttacked(inst, TUNING.TRAP_TEETH_DAMAGE)
+			end
 		end
 		
 		inst.latchedtarget = target
@@ -78,9 +86,9 @@ local function OnExplode(inst, target)
 			inst:ListenForEvent("onremoved", onfinished_normal, target)
 			if target.components.locomotor ~= nil then
 				if inst.traptype ~= nil then
-					target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.3 + 0.15)
+					target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.5 + 0.15)
 				else
-					target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.3)
+					target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.5)
 				end
 				target._bear_trap_speedmulttask = target:DoTaskInTime(10, function(i) 
 					i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) 
