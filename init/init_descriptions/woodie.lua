@@ -135,7 +135,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.MARSH_GRASS = "It's a bush, eh."
 	DESCRIBE.CURSED_ANTLER = "This'll last us forever!"
 	DESCRIBE.BERNIEBOX = "I'm not one for stuffed things."
-	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODED_FERN = "I love the outdoors."
 	DESCRIBE.HOODEDWIDOW = "You can have the trees!!"
 	DESCRIBE.GIANT_TREE = "That's a real beaut."
 	DESCRIBE.WIDOWSGRASP = "Maybe this could rip open those cocoons, eh?"
@@ -285,15 +285,15 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.DEERCLOPS_BARRIER = "It's tryin' to box us in."
 
 	--Stuff for Canis to check
-	DESCRIBE.MOONMAW_DRAGONFLY = "Don't like you one bit."
-	DESCRIBE.MOONMAW_LAVAE = ""
-	DESCRIBE.SNAPPERTURTLE = ""
-	DESCRIBE.SNAPPERTURTLEBABY = ""
+	DESCRIBE.MOONMAW_DRAGONFLY = "Maybe my curse isn't so bad."
+	DESCRIBE.MOONMAW_LAVAE = "Look out!"
+	DESCRIBE.SNAPPERTURTLE = "I know better than to pet 'em."
+	DESCRIBE.SNAPPERTURTLEBABY = "They'll still snap at'cha."
 	DESCRIBE.SNAPPERTURTLENEST = ""
-	DESCRIBE.GLASS_SCALES = ""
-	DESCRIBE.MOONGLASS_GEODE = ""
-	DESCRIBE.ARMOR_GLASSMAIL = ""
-	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = ""
+	DESCRIBE.GLASS_SCALES = "Well, would you look at that, Luce'!"
+	DESCRIBE.MOONGLASS_GEODE = "Don't want to hold onto it for too long, it might turn me, eh?"
+	DESCRIBE.ARMOR_GLASSMAIL = "Is it worth the risk of having the moon so close to my body?"
+	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "I'd hate to be on the receiving end."
 	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS

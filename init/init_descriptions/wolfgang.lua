@@ -135,7 +135,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.MARSH_GRASS = "Is mighty bush!"
 	DESCRIBE.CURSED_ANTLER = "Ha! Stick is MIGHTY!"
 	DESCRIBE.BERNIEBOX = "Wolfgang get turnip as child."
-	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODED_FERN = "They are different in cave."
 	DESCRIBE.HOODEDWIDOW = "AAAAH! AAAAAAAAAAHH!!"
 	DESCRIBE.GIANT_TREE = "Mightiest tree!"
 	DESCRIBE.WIDOWSGRASP = "Monster leg!"
@@ -255,9 +255,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.SKULLCHEST_CHILD = "Wolfgang don't like chest that look like skull."
 	
 	DESCRIBE.SLOBBERLOBBER = "Wolfgang mean no disrespect."
-	DESCRIBE.GORE_HORN_HAT = "Wolfgang head is even thicker now!"
-	DESCRIBE.BEARGERCLAW = "Now Wolfgang is like the mighty bear!"
-	DESCRIBE.FEATHER_FROCK = "Weighs nothing at all."
+	DESCRIBE.GORE_HORN_HAT = "Wolfgang head even thicker now!"
+	DESCRIBE.BEARGERCLAW = "Now Wolfgang like mighty bear!"
+	DESCRIBE.FEATHER_FROCK = "Weigh nothing at all."
 	
 	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nWolfgang push too hard, gem broke."
 	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nWolfgang push too hard, gem broke."
@@ -272,27 +272,27 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.BLUE_MUSHED_ROOM = "Mushroom was no challenge."
 	
 	--StantonStuff
-	DESCRIBE.SKULLFLASK = "Drink makes mind mighty!"
+	DESCRIBE.SKULLFLASK = "Dead man's drink?"
 	DESCRIBE.SKULLFLASK_EMPTY = "Drink come back later."
-	DESCRIBE.STANTON_SHADOW_TONIC = "Is spooky drink."
+	DESCRIBE.STANTON_SHADOW_TONIC = "Hah... Hah...?"
 	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
-	DESCRIBE.STANTON = "Creepy skeleton only want drink?"
+	DESCRIBE.STANTON = "N-not evil?"
 	--StantonStuff
 	
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
-	DESCRIBE.THEATERCORN = "Remember others eating it at show, long ago."
-	DESCRIBE.DEERCLOPS_BARRIER = "Don't like feel trapped." 
+	DESCRIBE.THEATERCORN = "Remember others eating it... Long ago..."
+	DESCRIBE.DEERCLOPS_BARRIER = "W-WOLFGANG NOT TRAPPED IN HERE WITH MONSTER!" 
 
 	--Stuff for Canis to check
-	DESCRIBE.MOONMAW_DRAGONFLY = "Dragon is not flying." 
-	DESCRIBE.MOONMAW_LAVAE = ""
-	DESCRIBE.SNAPPERTURTLE = ""
-	DESCRIBE.SNAPPERTURTLEBABY = ""
-	DESCRIBE.SNAPPERTURTLENEST = ""
-	DESCRIBE.GLASS_SCALES = ""
-	DESCRIBE.MOONGLASS_GEODE = ""
-	DESCRIBE.ARMOR_GLASSMAIL = ""
+	DESCRIBE.MOONMAW_DRAGONFLY = "If Dragon-Fly trapped in moon, we can be trapped?" 
+	DESCRIBE.MOONMAW_LAVAE = "AGH! Points pierce Wolfgang's muscles!"
+	DESCRIBE.SNAPPERTURTLE = "Haha. Is funny animal."
+	DESCRIBE.SNAPPERTURTLEBABY = "Little baby animal."
+	DESCRIBE.SNAPPERTURTLENEST = "Is home."
+	DESCRIBE.GLASS_SCALES = "Is nice glow."
+	DESCRIBE.MOONGLASS_GEODE = "Is moon glow!"
+	DESCRIBE.ARMOR_GLASSMAIL = "No one is mightier!"
 	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = ""
 	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS

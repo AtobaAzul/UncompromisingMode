@@ -62,7 +62,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	ANNOUNCE.SHADOWTALKER = {
         "SLEEP... SLEEP...",
         "JUST REST...",
-        "SHE KNOWS TOO MUCH",
+        "I KNOW TOO MUCH",
+		"MY BODY IS FAILING ME",
+		"AM I TOO OLD TO SURVIVE?",
     }
 	ANNOUNCE.ANNOUNCE_OVER_EAT =
 	{
@@ -135,7 +137,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.MARSH_GRASS = "A nondescript bush."
 	DESCRIBE.CURSED_ANTLER = "It seems to be extraordinarily durable as a weapon."
 	DESCRIBE.BERNIEBOX = "Toys never came in packaging like this when I was a kid."
-	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODED_FERN = "Shade is its prefect environment for ferns to prosper."
 	DESCRIBE.HOODEDWIDOW = "A solidary predator. It appears to be near the top of the food chain."
 	DESCRIBE.GIANT_TREE = "Sequoioideae, the redwood tree."
 	DESCRIBE.WIDOWSGRASP = "The limb of the predator arachnid."
@@ -297,10 +299,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.SNAPPERTURTLE = "Chelydra serpentina! Not safe for the children!"
 	DESCRIBE.SNAPPERTURTLEBABY = "Their jaws are still a danger during their infantile state."
 	DESCRIBE.SNAPPERTURTLENEST = "The animal's nesting grounds."
-	DESCRIBE.GLASS_SCALES = ""
-	DESCRIBE.MOONGLASS_GEODE = ""
-	DESCRIBE.ARMOR_GLASSMAIL = ""
-	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = ""
+	DESCRIBE.GLASS_SCALES = "They brightly glow a distinct blue."
+	DESCRIBE.MOONGLASS_GEODE = "A Moonglass geode. It is pulsing with energy."
+	DESCRIBE.ARMOR_GLASSMAIL = "Utterly fascinating..."
+	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "Anything caught in the ring of shards will suffer major lacerations."
 	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS

@@ -135,7 +135,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.MARSH_GRASS = "A bush."
 	DESCRIBE.CURSED_ANTLER = "Hard to miss with something this large!"
 	DESCRIBE.BERNIEBOX = "I'm curious to see whats inside, I hope she opens it soon."
-	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODED_FERN = "They didn't always grow that big."
 	DESCRIBE.HOODEDWIDOW = "The soul guardian!"
 	DESCRIBE.GIANT_TREE = "The bigger they are... Hyuyu!"
 	DESCRIBE.WIDOWSGRASP = "It costed it an arm and a leg! Hyuyu!"
@@ -285,15 +285,15 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.DEERCLOPS_BARRIER = "A foolish attempt to contain this imp!"
 	
 	--Stuff for Canis to check
-	DESCRIBE.MOONMAW_DRAGONFLY = "Yes"
-	DESCRIBE.MOONMAW_LAVAE = ""
-	DESCRIBE.SNAPPERTURTLE = ""
-	DESCRIBE.SNAPPERTURTLEBABY = ""
-	DESCRIBE.SNAPPERTURTLENEST = ""
-	DESCRIBE.GLASS_SCALES = ""
-	DESCRIBE.MOONGLASS_GEODE = ""
-	DESCRIBE.ARMOR_GLASSMAIL = ""
-	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = ""
+	DESCRIBE.MOONMAW_DRAGONFLY = "Looks like you flew too close to the moon!"
+	DESCRIBE.MOONMAW_LAVAE = "Hyuyu! How lethal!"
+	DESCRIBE.SNAPPERTURTLE = "Shall I tip you over?"
+	DESCRIBE.SNAPPERTURTLEBABY = "Stick close to your momma, little one."
+	DESCRIBE.SNAPPERTURTLENEST = "Their place to sleep, a place to reap!"
+	DESCRIBE.GLASS_SCALES = "How quaint!"
+	DESCRIBE.MOONGLASS_GEODE = "Lighter than it looks!"
+	DESCRIBE.ARMOR_GLASSMAIL = "Hyuyu! I can get used to this!"
+	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "It might scrape or amputate!"
 	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS

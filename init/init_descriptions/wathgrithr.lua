@@ -67,6 +67,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
         "SHE IS NO MORE",
         "THIS IS WHERE I BELONG",
         "I DON'T WANT TO GO BACK",
+		"MY NAME IS NOT WIGFRID",
     }
 	DESCRIBE.SAND = "You are a very clean dirt."
 	DESCRIBE.SANDHILL = "I will not make a mountain out of a sandhill."
@@ -134,7 +135,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.MARSH_GRASS = "It's a bush!"
 	DESCRIBE.CURSED_ANTLER = "A magnificent weapon!"
 	DESCRIBE.BERNIEBOX = "I've no need for toys!"
-	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODED_FERN = "A beast cöuld be lurking in the underbrush!"
 	DESCRIBE.HOODEDWIDOW = "I... I am not fearful!"
 	DESCRIBE.GIANT_TREE = "Surely I stand before Yggdrasil!"
 	DESCRIBE.WIDOWSGRASP = "A key to my spoils!"
@@ -292,10 +293,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.SNAPPERTURTLE = "Watch who you aggrovate, or thy shield shall be mine!"
 	DESCRIBE.SNAPPERTURTLEBABY = "It does not have the spirit of war, not yet."
 	DESCRIBE.SNAPPERTURTLENEST = "The territory of beast."
-	DESCRIBE.GLASS_SCALES = ""
-	DESCRIBE.MOONGLASS_GEODE = ""
-	DESCRIBE.ARMOR_GLASSMAIL = ""
-	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = ""
+	DESCRIBE.GLASS_SCALES = "I am the true warrior of these lands."
+	DESCRIBE.MOONGLASS_GEODE = "A throne to sit utop, above my bountiful loot!"
+	DESCRIBE.ARMOR_GLASSMAIL = "Immense power, may thee lay upon my chest."
+	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "Thy gods favor me!"
 	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS

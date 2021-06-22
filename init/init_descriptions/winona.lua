@@ -135,7 +135,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.MARSH_GRASS = "Look, a bush!"
 	DESCRIBE.CURSED_ANTLER = "It'll never punch out on 'ya."
 	DESCRIBE.BERNIEBOX = "If it ain't tools, I ain't interested."
-	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODED_FERN = "Did something rustle in that roughage? "
 	DESCRIBE.HOODEDWIDOW = "I'll, uh, stay over here."
 	DESCRIBE.GIANT_TREE = "We're not chopping that one down any time soon."
 	DESCRIBE.WIDOWSGRASP = "We could bash open those cocoons now!"
@@ -273,9 +273,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.BLUE_MUSHED_ROOM = "It's been ground down for some purpose."
 	
 	--StantonStuff
-	DESCRIBE.SKULLFLASK = "Keeps me at ease."
+	DESCRIBE.SKULLFLASK = "Don't take a swig in the workplace and I'm fine with it!"
 	DESCRIBE.SKULLFLASK_EMPTY = "Nothin' left."
-	DESCRIBE.STANTON_SHADOW_TONIC = "Bottoms up!"
+	DESCRIBE.STANTON_SHADOW_TONIC = "I can't do this, I'm on the clock!"
 	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 	DESCRIBE.STANTON = "Drinking game, huh?"
 	--StantonStuff
@@ -283,18 +283,18 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
 	DESCRIBE.THEATERCORN = "A runny mess, but it's good for a show."
-	DESCRIBE.DEERCLOPS_BARRIER = "Gotta bust out."
+	DESCRIBE.DEERCLOPS_BARRIER = "Gotta bust outta here!"
 	
 	--Stuff for Canis to check
-	DESCRIBE.MOONMAW_DRAGONFLY = "Nope"
-	DESCRIBE.MOONMAW_LAVAE = ""
-	DESCRIBE.SNAPPERTURTLE = ""
-	DESCRIBE.SNAPPERTURTLEBABY = ""
-	DESCRIBE.SNAPPERTURTLENEST = ""
-	DESCRIBE.GLASS_SCALES = ""
-	DESCRIBE.MOONGLASS_GEODE = ""
-	DESCRIBE.ARMOR_GLASSMAIL = ""
-	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = ""
+	DESCRIBE.MOONMAW_DRAGONFLY = "Nope."
+	DESCRIBE.MOONMAW_LAVAE = "That's probably generating a whole lotta kinetic power!"
+	DESCRIBE.SNAPPERTURTLE = "Gotta slap a \"Keep hands away from moving parts\" sticker on it's shell!"
+	DESCRIBE.SNAPPERTURTLEBABY = "It's gonna get bigger!"
+	DESCRIBE.SNAPPERTURTLENEST = "Their hangout spot."
+	DESCRIBE.GLASS_SCALES = "It's light sure is pretty!"
+	DESCRIBE.MOONGLASS_GEODE = "Imagine chuckin' that at something, hah. Probably shouldn't."
+	DESCRIBE.ARMOR_GLASSMAIL = "We're really movin' up in the world, huh?"
+	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "They move in sync, as part of a greater machine."
 	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS

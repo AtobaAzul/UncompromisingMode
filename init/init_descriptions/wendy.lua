@@ -134,7 +134,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.MARSH_GRASS = "I have nothing to say about this."
 	DESCRIBE.CURSED_ANTLER = "Life doesn't wear it down. I envy it."
 	DESCRIBE.BERNIEBOX = "Toys are for kids."
-	DESCRIBE.HOODED_FERN = DESCRIBE.CAVE_FERN
+	DESCRIBE.HOODED_FERN = "Green and boring, like most plants."
 	DESCRIBE.HOODEDWIDOW = "She could eat me in a single bite."
 	DESCRIBE.GIANT_TREE = "Ancient, and full of life."
 	DESCRIBE.WIDOWSGRASP = "It could've impaled my chest with ease. I wish it did."
@@ -254,7 +254,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.SKULLCHEST_CHILD = "I'm able to reach another plane, but I still cannot reach Abigail..."
 	
 	DESCRIBE.SLOBBERLOBBER = "Nature is disgusting."
-	DESCRIBE.GORE_HORN_HAT = "Nature's knife."
+	DESCRIBE.GORE_HORN_HAT = "Nature's dagger."
 	DESCRIBE.BEARGERCLAW = "I've got dirt in my eye. For real this time."
 	DESCRIBE.FEATHER_FROCK = "Ew! Gross! I don't want to wear it!"
 	
@@ -291,10 +291,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.SNAPPERTURTLE = "I wish I could hide in a shell, sometimes."
 	DESCRIBE.SNAPPERTURTLEBABY = "I could set you on your back and you'd die."
 	DESCRIBE.SNAPPERTURTLENEST = "Oh, joy."
-	DESCRIBE.GLASS_SCALES = ""
-	DESCRIBE.MOONGLASS_GEODE = ""
-	DESCRIBE.ARMOR_GLASSMAIL = ""
-	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = ""
+	DESCRIBE.GLASS_SCALES = "Scales of corruption."
+	DESCRIBE.MOONGLASS_GEODE = "What can corrupt a foul beast, can surely corrupt a human being?"
+	DESCRIBE.ARMOR_GLASSMAIL = "Everything around me dies."
+	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "One mishap and I can lose a limb of my own."
 	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS	
