@@ -1041,6 +1041,33 @@ Opal's will increase the effects of all other gems slotted
 
 * [x] [Stalking Stuffers] Lazy chester will teleport items into his inventory automatically, as long as he has 1 of the items already in him, good for log harvesting, rock harvesting, grass gekko pens, etc.
 
+--[Snap Teeth]--
+
+* [x] [Fight or Flight] Players can craft and hurle their own teeth beartraps at their foes. Comes in default and shiny varieties!
+
+
+---[Moonmaw Dragonfly, and her spoils]---
+
+--[Moonmaw]--
+
+* [x] [Fight or Flight] Added moonmaw dragonfly, spawns in on full moons in summer, spews unstable glass all over everything.
+
+--[Glass Lavae]--
+
+* [x] [Fight or Flight] Glass Lavae defend moonmaw with their lives.
+
+--[Enlightened Scales and Inert Infused Moon Chunk]--
+
+* [x] [Fight or Flight] Added englightened scales, used in shard-scale armor.
+
+* [x] [Fight or Flight] Added inert-infused moon chunks, contain infused moon shards within.
+
+--[Shard-Scale Mail]--
+
+* [x] [Fight or Flight] Armor which summons glass shards which deal damage as long as the player is landing hits and not getting hit. Turns the user into a beyblade.
+
+
+
 --[Add any future changes past this line, I'll sort them when we're about to ship an update. -Axe]--
 
 
