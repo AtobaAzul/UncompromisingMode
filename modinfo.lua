@@ -216,10 +216,15 @@ configuration_options =
 	BinaryConfig("sporehounds", "Spore Hounds", "Spore Hounds are part of hound waves.", true),
 	BinaryConfig("glacialhounds", "Glacial Hounds", "Glacial Hounds are part of hound waves.", true),
 	SkipSpace(),
+	
 	Header("Harder Hounds"),
 	BinaryConfig("firebitehounds", "Fiery Bite", "Red Hounds set players on fire when they attack.", true),
 	BinaryConfig("frostbitehounds", "Frozen Bite", "Blue Hounds freeze players when they attack.", true),
-	BinaryConfig("vargwaves", "Vargs in Hound Waves", "In the lategame, vargs will accompany hounds in houndwaves.", true),
+	BinaryConfig("vargwaves", "Vargs in Hound Waves", "In the lategame, vargs will accompany hounds in houndwaves.", true),	
+	SkipSpace(),
+	
+	Header("Wave Changes"),
+	BinaryConfig("lategamehoundspread", "Descreased Lategame Frequency", "Enabling this decreases the frequency in the lategame so hounds are still a threat, but not annoying.", true),	
 	
 	SkipSpace(),
 	Header("New Depths Worms"),
