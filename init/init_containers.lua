@@ -258,8 +258,9 @@ function containers.widgetsetup(container, prefab, data, ...)
         --containers_widgetsetup_base(container, prefab, data, ...)
 	end
 end
-
+if containers.MAXITEMSLOTS == nil or containers.MAXITEMSLOTS < 25 then
 containers.MAXITEMSLOTS = 25
+end
 local function addItemSlotNetvarsInContainer(inst)
      if(#inst._itemspool < containers.MAXITEMSLOTS) then
         for i = #inst._itemspool+1, containers.MAXITEMSLOTS do
