@@ -134,7 +134,7 @@ AddComponentPostInit("hounded", function(self)
 			
 			self.varggraceperiod = GLOBAL.TheWorld.state.cycles
 			
-			if self.varggraceperiod > (self.varggraceperiod_old + TUNING.DSTU.VARGWAVES_DELAY_PERIOD) then
+			if self.varggraceperiod_old == nil or varggraceperiod_old ~= nil and self.varggraceperiod > (self.varggraceperiod_old + TUNING.DSTU.VARGWAVES_DELAY_PERIOD) then
 				print(self.varggraceperiod_old)
 				print(self.varggraceperiod)
 				
