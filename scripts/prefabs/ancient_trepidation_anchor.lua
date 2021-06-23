@@ -29,7 +29,7 @@ inst:Remove()
 end
 end
 
-    local function fn()
+local function fn()
         local inst = CreateEntity()
 
         inst.entity:AddTransform()
@@ -58,8 +58,10 @@ end
 		inst:AddComponent("timer")
         inst:AddComponent("childspawner")
         inst.components.childspawner.childname = "ancient_trepidation"
-
+		
+		if TUNING.DSTU.TREPIDATIONS == true then
         inst.components.childspawner:StartSpawning()
+		end
 		
 		inst.components.childspawner:SetMaxChildren(1)
 		inst.components.childspawner:SetSpawnPeriod(TUNING.DRAGONFLY_SPAWN_TIME/4, 0)
@@ -70,7 +72,7 @@ end
 		MakeLargePropagator(inst)
 		
         return inst
-    end
+end
 
 return Prefab("ancient_trepidation_anchor", fn)
 

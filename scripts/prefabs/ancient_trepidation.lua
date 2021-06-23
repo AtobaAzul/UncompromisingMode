@@ -184,22 +184,24 @@ local bozo =FindEntity(inst, 40,
             end
     end)
 if bozo ~= nil and bozo.components.sanity ~= nil and bozo.components.sanity:GetPercent() < 0.5 and inst.enraged == false then
-inst.sg:GoToState("anger")
-if inst.components.combat ~= nil then
-inst.components.combat:SuggestTarget(bozo)
-end
+	inst.sg:GoToState("anger")
+	if inst.components.combat ~= nil then
+		inst.components.combat:SuggestTarget(bozo)
+	end
 elseif inst.enraged == true and inst.components.combat ~= nil and inst.components.combat.target == nil then
-inst.sg:GoToState("calm")
+	inst.sg:GoToState("calm")
+	end
 end
-end
+
 local function OnSave(inst,data)
-data.enraged = inst.enraged
+	data.enraged = inst.enraged
 end
+
 local function OnLoad(inst,data)
 if data ~= nil and data.enraged ~= nil then
-inst.enraged = data.enraged
+	inst.enraged = data.enraged
 if inst.enraged == true then
-inst.AnimState:SetBuild("ancient_trepidation")
+	inst.AnimState:SetBuild("ancient_trepidation")
 end
 end
 end
@@ -233,7 +235,6 @@ local function FindTargetOfInterest(inst)
             local randomtarget = math.random(#targets)
             local target = targets[randomtarget]
             table.remove(targets, randomtarget)
-            --Higher chance to follow if he has bananas
 				local x, y, z = target.Transform:GetWorldPosition()
 				if #TheSim:FindEntities(x,y,z,60,{"trepidation"}) <= 1 and target.components.areaaware:CurrentlyInTag("Nightmare") then
 					if not target:HasTag("playerghost") then
@@ -346,6 +347,12 @@ local function fn(Sim)
 	inst:DoPeriodicTask(3,CheckIfInsaners)
 	inst:DoPeriodicTask(6,CheckIfTargetIsFrigginAlive)
 	inst.FindTargetOfInterestTask = inst:DoPeriodicTask(5, FindTargetOfInterest) --Find something to be interested in!
+	
+	inst:DoTaskInTime(0, function(inst)
+		if TUNING.DSTU.TREPIDATIONS == false then
+			inst:Remove()
+		end
+	end)
     return inst
 end
 

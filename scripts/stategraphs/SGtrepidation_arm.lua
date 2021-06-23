@@ -91,10 +91,11 @@ local states=
         end,
 
         onupdate = function(inst)
-            if inst.sg.timeinstate > .3 and inst.components.combat:TryAttack() then
+            if inst.components.combat:TryAttack() then
                 inst.sg:GoToState("attack_pre")
-            elseif inst.components.combat.target == nil then
-                inst.AnimState:PlayAnimation("idle_1")
+            --[[elseif inst.components.combat.target == nil then
+                inst.AnimState:PlayAnimation("idle_1")]]
+			else
                 inst.sg:GoToState("idle")
             end
 
@@ -150,7 +151,7 @@ local states=
             EventHandler("animqueueover", function(inst) 
                 inst.sg.statemem.keeprumblesound = true
                 if inst.components.combat.target then
-                    inst.sg:GoToState("attack")
+                    inst.sg:GoToState("attack_pre")
 					
                 else
                     inst.sg:GoToState("attack_post") 
@@ -203,7 +204,7 @@ local states=
         
         events=
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("attack") end),
+            EventHandler("animover", function(inst) inst.sg:GoToState("attack_pre") end),
         },
         
     },    
