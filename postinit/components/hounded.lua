@@ -14,6 +14,7 @@ AddComponentPostInit("hounded", function(self)
     self.spawnamount = 0
     self.seasonal_boss_chance = 0.5 --chance to spawn a seasonal boss hound instead of the default boss (defined on the line below)
     self.default_boss_prefab = "warg"
+	self.varggraceperiod = nil
 
     --framework for future spawn additions
     --seasonal boss hounds will be chosen randomly from their respective season tables
@@ -127,11 +128,26 @@ AddComponentPostInit("hounded", function(self)
 
         --replaces the first hound in a wave with a random boss hound
         if pt and self.spawn_boss and magmaspawn_pt ~= nil and TUNING.DSTU.VARGWAVES == true then
-            self.spawn_boss = false
-            prefab_list = self.seasonal_boss_prefabs[season]
-            prefab = --[[math.random() < self.seasonal_boss_chance and #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or]] self.default_boss_prefab
-            
-			return SpawnHounded(prefab, pt, magmaspawn_pt)			
+            if self.varggraceperiod ~= nil then
+				self.varggraceperiod_old = self.varggraceperiod
+			end
+			
+			self.varggraceperiod = GLOBAL.TheWorld.state.cycles
+			
+			if self.varggraceperiod > (self.varggraceperiod_old + 15) then
+				print(self.varggraceperiod_old)
+				print(self.varggraceperiod)
+				
+				self.spawn_boss = false
+				prefab_list = self.seasonal_boss_prefabs[season]
+				prefab = --[[math.random() < self.seasonal_boss_chance and #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or]] self.default_boss_prefab
+				
+				return SpawnHounded(prefab, pt, magmaspawn_pt)	
+			else
+				if self.varggraceperiod_old ~= nil then
+					self.varggraceperiod = self.varggraceperiod_old
+				end
+			end
         end
         --spawn a random seasonal hound
         if pt and chance < self.seasonal_chance and self.spawnamount <= SpawnLimit and GLOBAL.TheWorld.state.cycles >= 22 then
@@ -157,7 +173,31 @@ AddComponentPostInit("hounded", function(self)
     end
 
     UpvalueHacker.SetUpvalue(self.SummonSpawn, SummonSpawn, "SummonSpawn")
-
+	
+	local _OnSave = self.OnSave
+    self.OnSave = function(self)
+        local _houndedData = _OnSave(self)
+        local houndedData = {
+			varggraceperiod = self.varggraceperiod,
+			varggraceperiod_old = self.varggraceperiod_old,
+		}
+        for k, v in pairs(_houndedData) do
+            houndedData[k] = v
+        end
+        -- code for new variables
+        return houndedData
+    end
+	
+	local _OnLoad = self.OnLoad
+    self.OnLoad = function(self, data)
+        
+		if data.varggraceperiod ~= nil then
+			self.varggraceperiod = data.varggraceperiod
+		end
+		
+        return _OnLoad(self, data)
+    end
+	
     --override the global SummonSpawn with the old local SummonSpawn function because Vargs use this to summon hounds
     self.SummonSpawn = function(self, pt)
         return pt ~= nil and _SummonSpawn(pt) or nil
