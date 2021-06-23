@@ -169,7 +169,7 @@ local function doprojectilehit_queen(inst, attacker, other)
 
     if other ~= nil and other:IsValid() then
         if attacker ~= nil then
-            attacker.components.combat:DoAttack(other, inst.components.complexprojectile.owningweapon, inst)
+            attacker.components.combat:DoAttack(other, nil, inst)
         end
         if other.components.pinnable ~= nil then
             other.components.pinnable:Stick("web_net_trap",splashprefabs)

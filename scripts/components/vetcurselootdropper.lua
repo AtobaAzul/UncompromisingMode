@@ -1,9 +1,9 @@
 local function OnDeath(inst, data)
-    if inst.components.vetcurselootdropper.vetrate > 0.15 then
+    --if inst.components.vetcurselootdropper.vetrate > 0.15 then
 		if inst.components.lootdropper ~= nil then
 		inst.components.lootdropper:AddChanceLoot(inst.components.vetcurselootdropper.loot,1)
 		end
-    end
+    --end
 end
 
 local function OnAttacked(inst, data)

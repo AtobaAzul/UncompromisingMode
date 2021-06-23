@@ -8,7 +8,6 @@ local function BoatBreaker(inst)
 		
 	local pt = inst:GetPosition()
 	local boat = TheWorld.Map:GetPlatformAtPoint(pt.x, pt.z)
-	local water = TheWorld.Map:IsOceanAtPoint(pt.x, pt.z)
 	
 	if boat ~= nil and boat.components.hullhealth then
 		boat.components.health:DoDelta(-5, false, nil)
@@ -20,7 +19,7 @@ local function BoatBreaker(inst)
 		elseif chance < 0.7 and chance >= 0.5 then
 			boat:PushEvent("spawnnewboatleak", {pt = pt, leak_size = "small_leak", playsoundfx = true})
 		end
-	elseif water ~= nil and water then
+	elseif TheWorld.Map:IsOceanAtPoint(pt.x, 0, pt.z) then
 		local splash = SpawnPrefab("splash_green")
 		splash.Transform:SetPosition(x, y, z)
     end

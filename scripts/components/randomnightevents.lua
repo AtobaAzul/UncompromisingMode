@@ -237,12 +237,12 @@ local function SpawnEyePlants(player)
 					
 			local x1 = x + math.random(-10, 10)
 			local z1 = z + math.random(-10, 10)
-			local eyeplant = SpawnPrefab("eyeplant")
+			local eyeplant = SpawnPrefab("mini_dreadeye")
 			if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 				eyeplant.Transform:SetPosition(x1, y, z1)
 				eyeplant:DoTaskInTime(0, function(eyeplant) DayBreak(eyeplant) end)
-				eyeplant.sg:GoToState("spawn")
-				eyeplant:AddTag("planted")
+				--eyeplant.sg:GoToState("spawn")
+				--eyeplant:AddTag("planted")
 			else
 				player:DoTaskInTime(0.1, function(player) SpawnEyePlants(player) end)
 			end
