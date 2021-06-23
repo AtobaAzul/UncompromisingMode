@@ -8,7 +8,7 @@ AddComponentPostInit("hounded", function(self)
 -- THE IMPORTANT STUFF --
 --------------------------------------------------
     self.spawn_boss = false
-    self.boss_grace = 100 --grace period in days before boss hounds can spawn
+    self.boss_grace = TUNING.DSTU.VARGWAVES_BOSS_GRACE --grace period in days before boss hounds can spawn
 
     self.seasonal_chance = 0.33 --chance for seasonal hounds to spawn in their respective seasons
     self.spawnamount = 0
@@ -134,7 +134,7 @@ AddComponentPostInit("hounded", function(self)
 			
 			self.varggraceperiod = GLOBAL.TheWorld.state.cycles
 			
-			if self.varggraceperiod > (self.varggraceperiod_old + 15) then
+			if self.varggraceperiod > (self.varggraceperiod_old + TUNING.DSTU.VARGWAVES_DELAY_PERIOD) then
 				print(self.varggraceperiod_old)
 				print(self.varggraceperiod)
 				
