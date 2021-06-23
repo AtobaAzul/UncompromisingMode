@@ -220,12 +220,50 @@ configuration_options =
 	Header("Harder Hounds"),
 	BinaryConfig("firebitehounds", "Fiery Bite", "Red Hounds set players on fire when they attack.", true),
 	BinaryConfig("frostbitehounds", "Frozen Bite", "Blue Hounds freeze players when they attack.", true),
-	BinaryConfig("vargwaves", "Vargs in Hound Waves", "In the lategame, vargs will accompany hounds in houndwaves.", true),	
 	SkipSpace(),
 	
 	Header("Wave Changes"),
 	BinaryConfig("lategamehoundspread", "Descreased Lategame Frequency", "Enabling this decreases the frequency in the lategame so hounds are still a threat, but not annoying.", true),	
 	
+	BinaryConfig("vargwaves", "Vargs in Hound Waves", "In the lategame, vargs will accompany hounds in houndwaves.", true),
+	{
+		name = "vargwaves grace",
+		label = "Varg Grace Period.",
+		hover = "Vargs cannot spawn in hound waves until this amount of days have passed.",
+		options =
+		{
+			{description = "No grace period.", data = 0},
+			{description = "20 days", data = 20},
+			{description = "40 days", data = 40},
+			{description = "60 days", data = 60},
+			{description = "70 days", data = 70},
+			{description = "80 days", data = 80},
+			{description = "100 days", data = 100},
+			{description = "120 days", data = 120},
+			{description = "140 days", data = 140},
+			{description = "160 days", data = 160},
+			{description = "180 days", data = 180},
+			{description = "200 days", data = 200},
+		},
+		default = 100,
+	},
+	{
+		name = "vargwaves delay",
+		label = "Delay Between Varg Spawns.",
+		hover = "Vargs cannot spawn before this amount days have passed since the last Varg spawn.",
+		options =
+		{
+			{description = "No grace period.", data = 0},
+			{description = "5 days", data = 5},
+			{description = "10 days", data = 10},
+			{description = "15 days", data = 15},
+			{description = "20 days", data = 20},
+			{description = "25 days", data = 25},
+			{description = "30 days", data = 30},
+		},
+		default = 15,
+	},
+
 	SkipSpace(),
 	Header("New Depths Worms"),
 	BinaryConfig("depthseels", "Depths Eels", "Electrified depths eels join the worm pack in Winter and Spring.", true),
