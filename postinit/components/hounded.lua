@@ -202,6 +202,18 @@ AddComponentPostInit("hounded", function(self)
     self.SummonSpawn = function(self, pt)
         return pt ~= nil and _SummonSpawn(pt) or nil
     end
+	
+	
+	if TUNING.DSTU.LATEGAMEHOUNDSPREAD == true then
+		local __spawndata = UpvalueHacker.GetUpvalue(self.SetSpawnData, "_spawndata")
+		__spawndata.attack_delays =
+		{
+			rare 		= function() return TUNING.TOTAL_DAY_TIME * 6, math.random() * TUNING.TOTAL_DAY_TIME * 7 end, -- (
+			occasional 	= function() return TUNING.TOTAL_DAY_TIME * 7, math.random() * TUNING.TOTAL_DAY_TIME * 6 end, -- 
+			frequent 	= function() return TUNING.TOTAL_DAY_TIME * 7, math.random() * TUNING.TOTAL_DAY_TIME * 3 end, -- (7 to 13
+		}
+	end
+	
 end)
 
 AddComponentPostInit("hounded", function(self) --We can see if we can copy korean's stuff for worms

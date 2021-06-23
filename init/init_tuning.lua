@@ -159,7 +159,7 @@ TUNING.DSTU =
 	--Wiltfly Health
 	WILTFLY_HEALTH = GetModConfigData("wiltfly health"),
 	
-	--Hound inclusion
+	--Spawn New Bosses
 	SPAWNMOTHERGOOSE = GetModConfigData("mother_goose"),
 	SPAWNWILTINGFLY = GetModConfigData("wiltfly"),
 	
@@ -175,6 +175,7 @@ TUNING.DSTU =
 	VARGWAVES_BOSS_GRACE = GetModConfigData("vargwaves grace"),
 	VARGWAVES_DELAY_PERIOD = GetModConfigData("vargwaves delay"),
 	
+	LATEGAMEHOUNDSPREAD = GetModConfigData("lategamehoundspread"),
 	--Worm inclusion
 	DEPTHSEELS = GetModConfigData("depthseels"),
 	DEPTHSVIPERS = GetModConfigData("depthsvipers"),
