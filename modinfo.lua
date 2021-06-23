@@ -284,6 +284,7 @@ configuration_options =
 	
 	Header("New Ruins Monsters"),
 	BinaryConfig("trepidations", "Ancient Trepidations", "Enabling this allows trepidations to roam the halls of the ruins, seeking out the weak of mind.", true),
+	BinaryConfig("pawns", "Clockwork Pawns", "Enabling this allows pawns to patrol the depths of the caves, drawing unwanted attention to the foolish and lost.", true),
 	SkipSpace(),
 	
 	

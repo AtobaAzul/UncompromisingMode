@@ -399,7 +399,11 @@ local function pawn_common(pawntype)
 	end
 	
 	inst.sg:GoToState("hide_post")
-
+	inst:DoTaskInTime(0, function(inst)
+		if TUNING.DSTU.PAWNS == false then
+			inst:Remove()
+		end
+	end)		
     return inst
 end
 
