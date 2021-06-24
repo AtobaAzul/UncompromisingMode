@@ -87,9 +87,9 @@ local function speedcheck(inst)
 				inst.runspeed = 1
 			elseif inst.runspeed ~= nil and inst.runspeed < 1.8 then
 				if inst.facing_angle ~= nil and inst.facing_angle_old ~= nil and (inst.facing_angle >= inst.facing_angle_old + inst.angleadjustment2 - 3 and inst.facing_angle <= inst.facing_angle_old + inst.angleadjustment1 + 3) then
-					inst.runspeed = inst.runspeed + 0.02
+					inst.runspeed = inst.runspeed + 0.05
 				elseif inst.runspeed > 1 then
-					inst.runspeed = inst.runspeed - 0.02
+					inst.runspeed = inst.runspeed - 0.05
 				end
 			end
 			
