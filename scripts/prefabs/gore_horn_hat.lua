@@ -223,6 +223,8 @@ end
 			owner.SoundEmitter:KillSound("gorehorncharge")
 		end
 		
+		inst.runspeed = 1
+		
 		owner.components.locomotor:RemoveExternalSpeedMultiplier(owner, "gore_horn") 
 		
 		if inst.fuelmetask == nil then
@@ -340,7 +342,12 @@ end
 			inst.recentlycharged[other] = true
 			inst:DoTaskInTime(3, ClearRecentlyCharged, other)
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
-            other.components.combat:GetAttacked(owner, 150, nil)
+			
+			if other.components.combat ~= nil then
+				other.components.combat:GetAttacked(owner, 150, nil)
+			elseif other.components.health ~= nil then
+				other.components.health:DoDelta(-150)
+			end
 			
 			ShakeAllCameras(CAMERASHAKE.SIDE, .5, .05, .1, inst, 40)
 			
