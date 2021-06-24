@@ -9,3 +9,4 @@
 *  uncompromising_rat_burrow by @Maradyne
 *  monster morsels by KoreanWaffles
 *  Base for lureplague rat by -Variant and Leonardo Coxington
+*  Anims/Build for Snaptrap by Leonardo Coxington

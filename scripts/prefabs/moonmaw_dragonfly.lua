@@ -469,11 +469,13 @@ end
 end
 
 local function RedoLavae(inst)
+if inst.lavae ~= nil then
 	for i = 1,8 do
 		if inst.lavae[i].hidden ~= true then
 			EjectLavae(inst,i,true)
 		end
 	end
+end
 inst.components.timer:StopTimer("summoncrystals")
 inst.components.timer:StartTimer("summoncrystals",30+math.random(0,15))
 inst.redolavae = true

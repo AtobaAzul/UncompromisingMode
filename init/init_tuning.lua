@@ -189,6 +189,12 @@ TUNING.DSTU =
 	
 	--Pinelings
 	PINELINGS = GetModConfigData("pinelings"),
+
+	--Ancient Trepidations
+	TREPIDATIONS = GetModConfigData("trepidations"),
+	
+	--Ancient Trepidations
+	PAWNS = GetModConfigData("pawns"),	
 	
 	--Spiders
 	REGSPIDERJUMP = GetModConfigData("alljumperspiders"),

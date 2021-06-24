@@ -52,8 +52,9 @@ local function create_common(pawntype)
     inst.components.childspawner:SetRegenPeriod(TUNING.CATCOONDEN_REGEN_TIME)
     inst.components.childspawner:SetSpawnPeriod(1)
     inst.components.childspawner:SetMaxChildren(1)
+	if TUNING.DSTU.PAWNS == true then
     inst.components.childspawner:StartSpawning()
-
+	end
     return inst
 end
 

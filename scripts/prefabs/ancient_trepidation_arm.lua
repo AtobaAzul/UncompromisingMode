@@ -1,5 +1,3 @@
-
-
 local RETARGET_MUST_TAGS = { "_combat", "_health", "player" }
 local RETARGET_CANT_TAGS = { "prey" }
 local function retargetfn(inst)
