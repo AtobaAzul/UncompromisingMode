@@ -288,7 +288,7 @@ local function create_common(build, tag)
     ------------------
 
     inst:AddComponent("inspectable")
-
+	inst:AddComponent("debuffable")
     ------------------
 
     inst:AddComponent("trader")
