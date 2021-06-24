@@ -87,9 +87,9 @@ local function speedcheck(inst)
 				inst.runspeed = 1
 			elseif inst.runspeed ~= nil and inst.runspeed < 1.8 then
 				if inst.facing_angle ~= nil and inst.facing_angle_old ~= nil and (inst.facing_angle >= inst.facing_angle_old + inst.angleadjustment2 - 3 and inst.facing_angle <= inst.facing_angle_old + inst.angleadjustment1 + 3) then
-					inst.runspeed = inst.runspeed + 0.02
+					inst.runspeed = inst.runspeed + 0.05
 				elseif inst.runspeed > 1 then
-					inst.runspeed = inst.runspeed - 0.02
+					inst.runspeed = inst.runspeed - 0.05
 				end
 			end
 			
@@ -223,6 +223,8 @@ end
 			owner.SoundEmitter:KillSound("gorehorncharge")
 		end
 		
+		inst.runspeed = 1
+		
 		owner.components.locomotor:RemoveExternalSpeedMultiplier(owner, "gore_horn") 
 		
 		if inst.fuelmetask == nil then
@@ -340,7 +342,12 @@ end
 			inst.recentlycharged[other] = true
 			inst:DoTaskInTime(3, ClearRecentlyCharged, other)
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
-            other.components.combat:GetAttacked(owner, 150, nil)
+			
+			if other.components.combat ~= nil then
+				other.components.combat:GetAttacked(owner, 150, nil)
+			elseif other.components.health ~= nil then
+				other.components.health:DoDelta(-150)
+			end
 			
 			ShakeAllCameras(CAMERASHAKE.SIDE, .5, .05, .1, inst, 40)
 			
