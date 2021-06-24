@@ -218,8 +218,8 @@ local function fndefault()
         return inst
     end
 
-    MakeMediumFreezableCharacter(inst, "shelldown")
-    MakeMediumBurnableCharacter(inst, "shelldown")
+    MakeMediumFreezableCharacter(inst, "shell")
+    MakeMediumBurnableCharacter(inst, "shell")
 
     return inst
 end
@@ -231,8 +231,8 @@ local function fnbaby()
         return inst
     end
 
-    MakeMediumFreezableCharacter(inst, "shelldown")
-    MakeMediumBurnableCharacter(inst, "shelldown")
+    MakeMediumFreezableCharacter(inst, "shell")
+    MakeMediumBurnableCharacter(inst, "shell")
 	inst.Transform:SetScale(0.6,0.6,0.6)
     return inst
 end

@@ -397,7 +397,7 @@ local function pawn_common(pawntype)
 	if inst.task == nil then
         inst.task = inst:DoTaskInTime(1, CheckTargetPiece)
 	end
-	
+	inst:AddTag("soulless")
 	inst.sg:GoToState("hide_post")
 	inst:DoTaskInTime(0, function(inst)
 		if TUNING.DSTU.PAWNS == false then
