@@ -258,6 +258,9 @@ function containers.widgetsetup(container, prefab, data, ...)
         --containers_widgetsetup_base(container, prefab, data, ...)
 	end
 end
+
+if GetModConfigData("scaledchestbuff") == true then
+
 if containers.MAXITEMSLOTS == nil or containers.MAXITEMSLOTS < 25 then
 containers.MAXITEMSLOTS = 25
 end
@@ -269,7 +272,7 @@ local function addItemSlotNetvarsInContainer(inst)
      end
   end
   AddPrefabPostInit("container_classified", addItemSlotNetvarsInContainer)
-  
+
 containers.params.dragonflychest =
 {
     widget =
@@ -290,4 +293,6 @@ for y = 2.5, -1.5, -1 do
 	for x = 0, 4 do
 		table.insert(containers.params.dragonflychest.widget.slotpos, Vector3(80*x-80*2, 80*y-80*2+120,0))
   	end
+end
+
 end

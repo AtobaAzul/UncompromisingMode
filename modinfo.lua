@@ -168,6 +168,13 @@ configuration_options =
 		default = 0,
 	},]]
 -----------------------------
+-- Items and Structures--
+-----------------------------
+	SkipSpace(),
+	Header("Items and Structures"),
+	Header("--------------------"),
+	BinaryConfig("scaledchestbuff", "Scaled Chest Buff", "Scaled chest is not worth the resources required. Enabling this buffs it to 25 slots. Toggling with scaled chests in existing world may cause crash.", true),
+-----------------------------
 -- Food --
 -----------------------------
 	SkipSpace(),
