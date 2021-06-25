@@ -1,19 +1,3 @@
-
-local trapdoor_assets =
-{
-    Asset("ANIM", "anim/ds_spider_basic.zip"),
-    Asset("ANIM", "anim/ds_spider_warrior.zip"),
-    Asset("ANIM", "anim/spider_trapdoor.zip"),
-    Asset("SOUND", "sound/spider.fsb"),
-}
-
-local prefabs =
-{
-    "spidergland",
-    "monstermeat",
-    "silk",
-}
-
 local brain = require "brains/spiderbrain_trapdoor"
 
 SetSharedLootTable( 'spider_trapdoor',
@@ -21,8 +5,47 @@ SetSharedLootTable( 'spider_trapdoor',
     {'monstermeat',  1.00},
 })
 local function ShouldAcceptItem(inst, item, giver)
-    return giver:HasTag("spiderwhisperer") and inst.components.eater:CanEat(item)
+
+    local in_inventory = inst.components.inventoryitem.owner ~= nil
+    if in_inventory then
+        return false, "BUSY"
+    end
+
+    return (giver:HasTag("spiderwhisperer") and inst.components.eater:CanEat(item)) or
+           (item.components.equippable ~= nil and item.components.equippable.equipslot == EQUIPSLOTS.HEAD)
 end
+local function HasFriendlyLeader(inst, target)
+    local leader = inst.components.follower.leader
+    local target_leader = (target.components.follower ~= nil) and target.components.follower.leader or nil
+    
+    if leader ~= nil and target_leader ~= nil then
+
+        if target_leader.components.inventoryitem then
+            target_leader = target_leader.components.inventoryitem:GetGrandOwner()
+            -- Don't attack followers if their follow object has no owner
+            if target_leader == nil then
+                return true
+            end
+        end
+
+        local PVP_enabled = TheNet:GetPVPEnabled()
+        return leader == target or (target_leader ~= nil 
+                and (target_leader == leader or (target_leader:HasTag("player") 
+                and not PVP_enabled))) or
+                (target.components.domesticatable and target.components.domesticatable:IsDomesticated() 
+                and not PVP_enabled) or
+                (target.components.saltlicker and target.components.saltlicker.salted
+                and not PVP_enabled)
+    
+    elseif target_leader ~= nil and target_leader.components.inventoryitem then
+        -- Don't attack webber's chester
+        target_leader = target_leader.components.inventoryitem:GetGrandOwner()
+        return target_leader ~= nil and target_leader:HasTag("spiderwhisperer")
+    end
+
+    return false
+end
+
 
 function GetOtherSpiders(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -84,18 +107,23 @@ local function OnRefuseItem(inst, item)
     end
 end
 
+local TARGET_MUST_TAGS = { "_combat", "character" }
+local TARGET_CANT_TAGS = { "spiderwhisperer", "spiderdisguise", "INLIMBO" }
 local function FindTarget(inst, radius)
-    return FindEntity(
-        inst,
-        SpringCombatMod(radius),
-        function(guy)
-            return (not guy:HasTag("monster") or guy:HasTag("player"))
-                and inst.components.combat:CanTarget(guy)
-                and not (inst.components.follower ~= nil and inst.components.follower.leader == guy)
-        end,
-        { "_combat", "character" },
-        { "spiderwhisperer", "spiderdisguise", "INLIMBO" }
-    )
+    if not inst.no_targeting then
+        return FindEntity(
+            inst,
+            SpringCombatMod(radius),
+            function(guy)
+                return (not inst.bedazzled and (not guy:HasTag("monster") or guy:HasTag("player")))
+                    and inst.components.combat:CanTarget(guy)
+                    and not (inst.components.follower ~= nil and inst.components.follower.leader == guy)
+                    and not HasFriendlyLeader(inst, guy)
+            end,
+            TARGET_MUST_TAGS,
+            TARGET_CANT_TAGS
+        )
+    end
 end
 
 local function NormalRetarget(inst)
@@ -194,8 +222,17 @@ local function HalloweenMoonMutate(inst, new_inst)
 		)
 	end
 end
+local function OnTrapped(inst, data)
+    inst.components.inventory:DropEverything()
+end
+local function OnGoToSleep(inst)
+    inst.components.inventoryitem.canbepickedup = true
+end
 
-local function create_common(build, tag)
+local function OnWakeUp(inst)
+    inst.components.inventoryitem.canbepickedup = false
+end
+local function create_common(build)
     local inst = CreateEntity()
     
     inst.entity:AddTransform()
@@ -217,10 +254,10 @@ local function create_common(build, tag)
     inst:AddTag("canbetrapped")
     inst:AddTag("smallcreature")
     inst:AddTag("spider")
-    if tag ~= nil then
-        inst:AddTag(tag)
-    end
-
+    inst:AddTag("drop_inventory_pickup")
+    inst:AddTag("drop_inventory_murder")
+	inst:AddTag("spider_warrior")
+	
     --trader (from trader component) added to pristine state for optimization
     inst:AddTag("trader")
 
@@ -289,6 +326,16 @@ local function create_common(build, tag)
 
     inst:AddComponent("inspectable")
 	inst:AddComponent("debuffable")
+    inst:AddComponent("inventory")
+	-----------------
+	inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/spider_trapdoor.xml"
+    inst.components.inventoryitem.nobounce = true
+    inst.components.inventoryitem.canbepickedup = false
+    inst.components.inventoryitem.canbepickedupalive = true	
+	
+    inst:ListenForEvent("gotosleep", OnGoToSleep)
+    inst:ListenForEvent("onwakeup", OnWakeUp)
     ------------------
 
     inst:AddComponent("trader")
@@ -306,7 +353,8 @@ local function create_common(build, tag)
 	inst:AddComponent("halloweenmoonmutable")
 	inst.components.halloweenmoonmutable:SetPrefabMutated("spider_moon")
 	inst.components.halloweenmoonmutable:SetOnMutateFn(HalloweenMoonMutate)
-
+	
+	MakeFeedableSmallLivestock(inst, TUNING.SPIDER_PERISH_TIME)
     MakeHauntablePanic(inst)
 
     inst:SetBrain(brain)
@@ -315,12 +363,13 @@ local function create_common(build, tag)
 
     inst:WatchWorldState("iscaveday", OnIsCaveDay)
     OnIsCaveDay(inst, TheWorld.state.iscaveday)
+    inst:ListenForEvent("ontrapped", OnTrapped)
 
     return inst
 end
 
 local function create_trapdoor()
-    local inst = create_common("spider_trapdoor", "spider_warrior")
+    local inst = create_common("spider_trapdoor")
 
     if not TheWorld.ismastersim then
         return inst
@@ -340,4 +389,4 @@ local function create_trapdoor()
     return inst
 end
 
-return Prefab("spider_trapdoor", create_trapdoor, trapdoor_assets)
+return Prefab("spider_trapdoor", create_trapdoor)

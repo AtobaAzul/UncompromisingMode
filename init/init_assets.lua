@@ -92,7 +92,11 @@ Assets = {
 	Asset("ANIM", "anim/sporepack.zip"),
 	Asset("ANIM", "anim/swap_saltpack.zip"),
 	Asset("ANIM", "anim/veteranshrine.zip"),
+	
 	Asset("ANIM", "anim/spider_trapdoor.zip"),
+	Asset("IMAGE", "images/inventoryimages/spider_trapdoor.tex"),
+	Asset("ATLAS", "images/inventoryimages/spider_trapdoor.xml"),	
+	
 	Asset("ANIM", "anim/trapdoor.zip"),
 	Asset("ANIM", "anim/rock_flipping.zip"),
 	Asset("ANIM", "anim/rock_flipping_moss.zip"),
