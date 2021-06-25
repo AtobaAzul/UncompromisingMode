@@ -14,7 +14,7 @@ AddPrefabPostInit("heatrock", function(inst)
 	end
     
     local function CalculateInsulation()
-        local owner = inst.components.inventoryitem.owner
+        local owner = inst.components.inventoryitem:GetGrandOwner()
         if owner and owner.components.temperature then
             local winter_insulation, summer_insulation = owner.components.temperature:GetInsulation()
             inst.components.temperature.inherentinsulation = base_insulation + winter_insulation / 2
