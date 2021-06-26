@@ -20,7 +20,6 @@ end
 
 local _OldAttackEvent = inst.events["doattack"].fn
 	inst.events["doattack"].fn = function(inst, data)
-		print("big bumpin")
 		if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) and inst:HasTag("spider_regular") then
 			inst.sg:GoToState(
 				data.target:IsValid()
@@ -36,7 +35,6 @@ local _OldAttackEvent = inst.events["doattack"].fn
 
 local _OldAttackedEvent = inst.events["attacked"].fn
 	inst.events["attacked"].fn = function(inst)
-		print("big bumpin")
         if not inst.components.health:IsDead() and inst:HasTag("spider_warrior") then
 			if not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("evade") then -- don't interrupt attack or exit shield
 				if inst:HasTag("spider_warrior") and not inst:HasTag("trapdoorspider") and inst.components.combat.target ~= nil and TUNING.DSTU.SPIDERWARRIORCOUNTER == true then
