@@ -232,6 +232,26 @@ end
 local function OnWakeUp(inst)
     inst.components.inventoryitem.canbepickedup = false
 end
+
+local function OnStartLeashing(inst, data)
+    --inst:SetHappyFace(true)
+
+    if inst.recipe then
+        local leader = inst.components.follower.leader
+        if leader.components.builder and not leader.components.builder:KnowsRecipe(inst.recipe) and leader.components.builder:CanLearn(inst.recipe) then
+            leader.components.builder:UnlockRecipe(inst.recipe)
+        end
+    end
+end
+local function OnStopLeashing(inst, data)
+    inst.defensive = false
+    inst.no_targeting = false
+
+    --[[if not inst.bedazzled then
+        inst:SetHappyFace(false)
+    end]]
+end
+
 local function create_common(build)
     local inst = CreateEntity()
     
@@ -364,7 +384,12 @@ local function create_common(build)
     inst:WatchWorldState("iscaveday", OnIsCaveDay)
     OnIsCaveDay(inst, TheWorld.state.iscaveday)
     inst:ListenForEvent("ontrapped", OnTrapped)
-
+	
+	inst.recipe = "mutator_trapdoor"
+	
+    inst:ListenForEvent("startleashing", OnStartLeashing)
+    inst:ListenForEvent("stopleashing", OnStopLeashing)
+	
     return inst
 end
 

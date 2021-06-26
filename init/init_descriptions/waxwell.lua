@@ -292,7 +292,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.DEERCLOPS_BARRIER = "She's becoming more efficient in her use of magic! I'm so proud!"
 	
 
-	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_DRAGONFLY = "Oh! I can't even look at you!"
 	DESCRIBE.MOONMAW_LAVAE = "My favorite: A spike that's the size of my entire body."
 	DESCRIBE.SNAPPERTURTLE = "Snap at me and I'll kill you."
@@ -302,7 +301,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.MOONGLASS_GEODE = "A concentrated mass of lunar energy. I could use this."
 	DESCRIBE.ARMOR_GLASSMAIL = "I'm not dying anytime soon!"
 	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "Come closer if you don't value your life."
-	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_LAVAE_RING = DESCRIBE.MOONMAW_LAVAE
+
+	DESCRIBE.MUTATOR_TRAPDOOR = DESCRIBE.MUTATOR_WARRIOR

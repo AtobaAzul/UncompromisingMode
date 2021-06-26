@@ -285,7 +285,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.THEATERCORN = "I wish I could share it with Abigail."
 	DESCRIBE.DEERCLOPS_BARRIER = "A few of these have cracks."
 	
-	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_DRAGONFLY = "I see myself in it.. The reflection, I can see my reflection."
 	DESCRIBE.MOONMAW_LAVAE = "Daggers trained at my heart!"
 	DESCRIBE.SNAPPERTURTLE = "I wish I could hide in a shell, sometimes."
@@ -295,7 +294,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.MOONGLASS_GEODE = "What can corrupt a foul beast, can surely corrupt a human being?"
 	DESCRIBE.ARMOR_GLASSMAIL = "Everything around me dies."
 	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "One mishap and I can lose a limb of my own."
-	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS	
 	DESCRIBE.MOONMAW_LAVAE_RING = DESCRIBE.MOONMAW_LAVAE
+
+	DESCRIBE.MUTATOR_TRAPDOOR = DESCRIBE.MUTATOR_WARRIOR

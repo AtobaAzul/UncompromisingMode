@@ -362,8 +362,7 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.THEATERCORN = "I should find something interesting to watch."
 	DESCRIBE.DEERCLOPS_BARRIER = "I need to mine my way out of here!"
 	
-
-	--Stuff for Canis to check
+	
 	DESCRIBE.MOONMAW_DRAGONFLY = "Crys-terrifying!"
 	DESCRIBE.MOONMAW_LAVAE = "They're protecting it's mom!"
 	DESCRIBE.SNAPPERTURTLE = "These are the kind that don't bite your hand off, right?"
@@ -373,7 +372,8 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.MOONGLASS_GEODE = "It's not quite glass. Pretty hefty, too."
 	DESCRIBE.ARMOR_GLASSMAIL = "Anything within arm's reach will get shredded!"
 	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "Thankfully I'm the one in control!"
-	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_LAVAE_RING = DESCRIBE.MOONMAW_LAVAE
+
+	DESCRIBE.MUTATOR_TRAPDOOR = DESCRIBE.MUTATOR_WARRIOR

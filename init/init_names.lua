@@ -59,6 +59,7 @@ UI = GLOBAL.STRINGS.UI
 	STRINGS.PLAGUEMASK = "Plague Mask"
 	STRINGS.TRAPDOOR = "Inconspicuous Mound"
 	STRINGS.SPIDER_TRAPDOOR = "Trapdoor Spider"
+	STRINGS.MUTATOR_TRAPDOOR = "Trapdoor Switcherdoodle"
 	STRINGS.DECIDUOUS_ROOT = "Living Tree Root"
 	STRINGS.LAVAESLIME = "Lavae Slime"
 	STRINGS.SALTPACK = "Salt Shaker 3000"

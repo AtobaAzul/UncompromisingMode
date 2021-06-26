@@ -351,6 +351,11 @@ local function webbingfn()
 		inst:AddTag("soulless")
 		inst:AddComponent("combat")
 		inst:ListenForEvent("death", function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_destroy") end)
+		inst:DoTaskInTime(0,function(inst)
+		if not TheWorld.Map:IsPassableAtPoint(inst.Transform:GetWorldPosition()) then
+			inst:Remove()
+		end
+		end)
 		return inst
 end
 

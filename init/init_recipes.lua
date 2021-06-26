@@ -142,6 +142,8 @@ AddRecipe("armor_glassmail", {Ingredient("glass_scales", 1,"images/inventoryimag
 --Seedpackitchange
 AllRecipes["seedpouch"].ingredients = {Ingredient("slurtle_shellpieces", 2), Ingredient("waxpaper",1), Ingredient("seeds", 2)}
 
+AddRecipe("mutator_trapdoor", { Ingredient("monstermeat", 2), Ingredient("spidergland", 3), Ingredient("cutgrass", 5)   	   }, CUSTOM_RECIPETABS.SPIDERCRAFT, TECH.SPIDERCRAFT_ONE, nil, nil, nil, nil, "spiderwhisperer","images/inventoryimages/mutator_trapdoor.xml", "mutator_trapdoor.tex")
+
 STRINGS.RECIPE_DESC.SLINGSHOTAMMO_FIRECRACKERS = "For the aspiring young menace."
 STRINGS.RECIPE_DESC.WATERMELON_LANTERN = "Juicy illumination."
 STRINGS.RECIPE_DESC.CRITTERLAB_REAL = "Cute pals to ruin the mood."
@@ -168,3 +170,4 @@ STRINGS.RECIPE_DESC.SKULLCHEST_CHILD = "Interdimensional item storage."
 STRINGS.RECIPE_DESC.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "These jaws need to get a grip!"
 STRINGS.RECIPE_DESC.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "My shiny teeth and me!"
 STRINGS.RECIPE_DESC.ARMOR_GLASSMAIL = "Surround yourself with broken glass."
+STRINGS.RECIPE_DESC.MUTATOR_TRAPDOOR = "They're smart, allegedly."

@@ -293,7 +293,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.THEATERCORN = "I wonder where the bag came from."
 	DESCRIBE.DEERCLOPS_BARRIER = "The monster's proficiency in ice magic seems to have improved."
 
-	--Stuff for Canis to check
+
 	DESCRIBE.MOONMAW_DRAGONFLY = "I am not sure where I'd begin on describing that."
 	DESCRIBE.MOONMAW_LAVAE = "I see a fetus inside. Quaint."
 	DESCRIBE.SNAPPERTURTLE = "Chelydra serpentina! Not safe for the children!"
@@ -303,7 +303,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.MOONGLASS_GEODE = "A Moonglass geode. It is pulsing with energy."
 	DESCRIBE.ARMOR_GLASSMAIL = "Utterly fascinating..."
 	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "Anything caught in the ring of shards will suffer major lacerations."
-	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_LAVAE_RING = DESCRIBE.MOONMAW_LAVAE
+
+	DESCRIBE.MUTATOR_TRAPDOOR = DESCRIBE.MUTATOR_WARRIOR

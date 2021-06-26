@@ -284,7 +284,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.THEATERCORN = "Would be nice to eat it with some entertainment."
 	DESCRIBE.DEERCLOPS_BARRIER = "It's tryin' to box us in."
 
-	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_DRAGONFLY = "Maybe my curse isn't so bad."
 	DESCRIBE.MOONMAW_LAVAE = "Look out!"
 	DESCRIBE.SNAPPERTURTLE = "I know better than to pet 'em."
@@ -294,7 +293,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.MOONGLASS_GEODE = "Don't want to hold onto it for too long, it might turn me, eh?"
 	DESCRIBE.ARMOR_GLASSMAIL = "Is it worth the risk of having the moon so close to my body?"
 	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "I'd hate to be on the receiving end."
-	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_LAVAE_RING = DESCRIBE.MOONMAW_LAVAE
+
+	DESCRIBE.MUTATOR_TRAPDOOR = DESCRIBE.MUTATOR_WARRIOR

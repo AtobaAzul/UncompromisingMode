@@ -238,4 +238,5 @@ return {
 	"marshmist",
 	"corvushat",
 	"woomerang",
+	"um_spider_mutators",
 }

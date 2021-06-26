@@ -289,7 +289,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.DEERCLOPS_BARRIER = "We think we should mine through the weak areas."
 	
 
-	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_DRAGONFLY = "Eep! They look mad!!"
 	DESCRIBE.MOONMAW_LAVAE = "We don't need another point going into us!"
 	DESCRIBE.SNAPPERTURTLE = "He's cute! Kinda!"
@@ -299,7 +298,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.MOONGLASS_GEODE = "Can we have it as a nightlight?"
 	DESCRIBE.ARMOR_GLASSMAIL = "Look at me, big scary moon dragon! Raaaawr!"
 	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "This scares us a little bit!"
-	--Stuff for Canis to check
 	DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_LAVAE_RING = DESCRIBE.MOONMAW_LAVAE
+
+	DESCRIBE.MUTATOR_TRAPDOOR = "I tried something different this time!"
