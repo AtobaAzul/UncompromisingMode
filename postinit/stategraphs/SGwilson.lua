@@ -51,9 +51,10 @@ local actionhandlers =
 
 local _OldIdleState = inst.states["idle"].onenter
 	inst.states["idle"].onenter = function(inst, pushanim)
-		_OldIdleState(inst, pushanim)
 		if inst.wantstosneeze then
 			inst.sg:GoToState("sneeze")
+		else
+			_OldIdleState(inst, pushanim)
 		end
     end
 

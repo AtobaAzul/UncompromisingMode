@@ -18,7 +18,39 @@ local function SoundPath(inst, event)
     return "dontstarve/creatures/" .. creature .. "/" .. event
 end
 
-local events =
+local _OldAttackEvent = inst.events["doattack"].fn
+	inst.events["doattack"].fn = function(inst, data)
+		print("big bumpin")
+		if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) and inst:HasTag("spider_regular") then
+			inst.sg:GoToState(
+				data.target:IsValid()
+				and not (inst:IsNear(data.target, TUNING.SPIDER_WARRIOR_MELEE_RANGE) or (TUNING.DSTU.REGSPIDERJUMP == false and inst:HasTag("spider_regular")))
+				and "warrior_attack" --Do leap attack
+				or "attack",
+				data.target
+			)
+		else
+			_OldAttackEvent(inst, data)
+		end
+    end
+
+local _OldAttackedEvent = inst.events["attacked"].fn
+	inst.events["attacked"].fn = function(inst)
+		print("big bumpin")
+        if not inst.components.health:IsDead() and inst:HasTag("spider_warrior") then
+			if not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("evade") then -- don't interrupt attack or exit shield
+				if inst:HasTag("spider_warrior") and not inst:HasTag("trapdoorspider") and inst.components.combat.target ~= nil and TUNING.DSTU.SPIDERWARRIORCOUNTER == true then
+					inst.sg:GoToState("evade_loop")
+				else
+					_OldAttackedEvent(inst)
+				end
+			end
+		else
+			_OldAttackedEvent(inst)
+        end
+    end
+
+--[[local events =
 {	
 	EventHandler("attacked", function(inst)
         if not inst.components.health:IsDead() then
@@ -68,11 +100,11 @@ local events =
         end
     end),
     
-}
+}]]
 
 local states = {
 
-    State{
+    --[[State{
         name = "warrior_attack",
         tags = {"attack", "canrotate", "busy", "jumping"},
 
@@ -128,7 +160,7 @@ local states = {
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
-    },
+    },]]
     State{
         name = "shield",
         tags = {"busy", "shield"},
@@ -258,10 +290,10 @@ local states = {
     },
 }
 
-for k, v in pairs(events) do
+--[[for k, v in pairs(events) do
     assert(v:is_a(EventHandler), "Non-event added in mod events table!")
     inst.events[v.name] = v
-end
+end]]
 
 for k, v in pairs(states) do
     assert(v:is_a(State), "Non-state added in mod state table!")
