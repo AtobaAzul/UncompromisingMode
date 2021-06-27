@@ -59,6 +59,8 @@ Assets = {
 	Asset("IMAGE", "images/gem_slot.tex"),
 	Asset("ATLAS", "images/feather_slot.xml"),
 	Asset("IMAGE", "images/feather_slot.tex"),
+	Asset("ATLAS", "images/fish_slot.xml"),
+	Asset("IMAGE", "images/fish_slot.tex"),
 	
 	Asset("ANIM", "anim/geyser.zip"),
 	Asset("ANIM", "anim/lava_vomit.zip"),

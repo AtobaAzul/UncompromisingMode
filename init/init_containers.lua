@@ -144,10 +144,6 @@ modparams.um_blowgun =
         {
             Vector3(0,   32 + 4,  0),
         },
-        --[[slotbg =
-        {
-            { image = "slingshot_ammo_slot.tex" },
-        },]]
         animbank = "ui_cookpot_1x2",
         animbuild = "ui_cookpot_1x2",
         pos = Vector3(0, 15, 0),
@@ -165,10 +161,13 @@ modparams.frigginbirdpail =
         {
             --Vector3(0,   32 + 4,  0),
         },
-        --[[slotbg =
+        slotbg =
         {
-            { image = "slingshot_ammo_slot.tex" },
-        },]]
+			{ image = "fish_slot.tex", atlas = "images/fish_slot.xml" },
+			{ image = "fish_slot.tex", atlas = "images/fish_slot.xml" },
+			{ image = "fish_slot.tex", atlas = "images/fish_slot.xml" },
+			{ image = "fish_slot.tex", atlas = "images/fish_slot.xml" },
+        },
         animbank = "ui_lamp_1x4",
         animbuild = "ui_lamp_1x4",
         pos = Vector3(0, 125, 0),

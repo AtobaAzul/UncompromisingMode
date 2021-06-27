@@ -111,7 +111,7 @@ local function terrorbeak_postinit(inst)
     end
     inst.components.lootdropper:SetLoot({ "nightmarefuel" })
     inst.components.lootdropper:SetChanceLootTable(nil)
-    inst.sanityreward = TUNING.SANITY_LARGE * 0.8
+    inst.sanityreward = SANITY_MEDLARGE
 end
 
 local function daytime(inst)

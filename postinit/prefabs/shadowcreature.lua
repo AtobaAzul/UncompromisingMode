@@ -2,11 +2,35 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 
+local function onkilledbyother(inst, attacker)
+    if attacker ~= nil and attacker.components.sanity ~= nil then
+		print(inst.sanityreward)
+		
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local ents = TheSim:FindEntities(x, y, z, 15, { "player" }, { "playerghost" } )
+		
+		for i, v in ipairs(ents) do
+			if v ~= attacker and v.components.sanity ~= nil and v.components.sanity:IsInsane() then
+				v.components.sanity:DoDelta(inst.sanityreward / 2 or TUNING.SANITY_SMALL / 2)
+			end
+		end
+    end
+	
+	return inst.Oldonkilledbyother(inst, attacker)
+end
+
 env.AddPrefabPostInit("terrorbeak", function(inst)
 	inst:AddTag("terrorbeak")
 
 	if not TheWorld.ismastersim then
 		return
+	end
+	
+    --inst.sanityreward = TUNING.SANITY_LARGE * 0.8
+	
+	if inst.components.combat ~= nil then
+        inst.Oldonkilledbyother = inst.components.combat.onkilledbyother
+		inst.components.combat.onkilledbyother = onkilledbyother
 	end
 end)
 
@@ -40,6 +64,13 @@ env.AddPrefabPostInit("crawlinghorror", function(inst)
 
 	if not TheWorld.ismastersim then
 		return
+	end
+	
+    --inst.sanityreward = TUNING.SANITY_SMALL
+	
+	if inst.components.combat ~= nil then
+        inst.Oldonkilledbyother = inst.components.combat.onkilledbyother
+		inst.components.combat.onkilledbyother = onkilledbyother
 	end
 	
     inst.LaunchProjectile = LaunchProjectile

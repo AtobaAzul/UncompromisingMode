@@ -98,7 +98,7 @@ else
         self.level2 = math.min(1,math.max(0.001,self.level2 + ((math.random()*.05) - 0.025) ))
     end
 
-    if self.level > 0 or  self.level2 > 0  then
+    if self.level > 0 or self.level2 > 0  then
         self:Show()
         --self.bg:SetTint(1,1,1,self.level)
         self.bg2:SetTint(1,1,1,self.level2)

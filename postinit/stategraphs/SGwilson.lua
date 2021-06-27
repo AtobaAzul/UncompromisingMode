@@ -57,7 +57,16 @@ local _OldIdleState = inst.states["idle"].onenter
 			_OldIdleState(inst, pushanim)
 		end
     end
-
+	
+local _OldEatState = inst.states["eat"].onenter
+	inst.states["eat"].onenter = function(inst, foodinfo)
+		if inst.wantstosneeze then
+			inst.sg:GoToState("sneeze")
+		else
+			_OldEatState(inst, foodinfo)
+		end
+    end
+	
 local states = {
 
 	State{

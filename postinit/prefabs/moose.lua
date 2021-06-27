@@ -3,6 +3,21 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local PHASE2_HEALTH = .6
 
+local function oncollapse(inst, other)
+    if other:IsValid() and other.components.workable ~= nil and other.components.workable:CanBeWorked() then
+        SpawnPrefab("collapse_small").Transform:SetPosition(other.Transform:GetWorldPosition())
+        other.components.workable:Destroy(inst)
+    end
+end
+
+local function OnCollide(inst, other)
+    if other ~= nil and
+        (other:HasTag("tree") or other:HasTag("boulder")) and --HasTag implies IsValid
+        Vector3(inst.Physics:GetVelocity()):LengthSq() >= 1 then
+        inst:DoTaskInTime(2 * FRAMES, oncollapse, other)
+    end
+end
+
 local function SuperHop(inst, data)
     if data.name == "SuperHop" then
         inst.superhop = true
@@ -35,6 +50,8 @@ local function EnterPhase2TriggerMoose(inst)
 end
 
 env.AddPrefabPostInit("moose", function(inst)
+
+    inst.Physics:SetCollisionCallback(OnCollide)
 
 	if not TheWorld.ismastersim then
 		return
@@ -139,6 +156,8 @@ local function EnterPhase2TriggerMother(inst)
 end
 
 env.AddPrefabPostInit("mothergoose", function(inst)
+
+    inst.Physics:SetCollisionCallback(OnCollide)
 
 	if not TheWorld.ismastersim then
 		return
