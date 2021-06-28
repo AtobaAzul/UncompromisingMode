@@ -87,9 +87,9 @@ local function speedcheck(inst)
 				inst.runspeed = 1
 			elseif inst.runspeed ~= nil and inst.runspeed < 1.8 then
 				if inst.facing_angle ~= nil and inst.facing_angle_old ~= nil and (inst.facing_angle >= inst.facing_angle_old + inst.angleadjustment2 - 3 and inst.facing_angle <= inst.facing_angle_old + inst.angleadjustment1 + 3) then
-					inst.runspeed = inst.runspeed + 0.05
+					inst.runspeed = inst.runspeed + 0.04
 				elseif inst.runspeed > 1 then
-					inst.runspeed = inst.runspeed - 0.05
+					inst.runspeed = inst.runspeed - 0.04
 				end
 			end
 			
@@ -209,6 +209,7 @@ end
         end
 
 		owner:RemoveEventCallback("locomote", speedcheck)
+		owner.runspeed = 1
 		
 		if owner.physbox ~= nil then
 			owner.physbox.AnimState:PlayAnimation("close")
@@ -222,8 +223,6 @@ end
 			owner.task = nil
 			owner.SoundEmitter:KillSound("gorehorncharge")
 		end
-		
-		inst.runspeed = 1
 		
 		owner.components.locomotor:RemoveExternalSpeedMultiplier(owner, "gore_horn") 
 		
