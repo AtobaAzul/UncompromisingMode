@@ -71,9 +71,10 @@ inst:Remove()
 end]]
 local x,y,z = inst.Transform:GetWorldPosition()
 if not (TheWorld.Map:IsAboveGroundAtPoint(x,y,z) and TheWorld.Map:IsAboveGroundAtPoint(x+14,y,z) and TheWorld.Map:IsAboveGroundAtPoint(x-14,y,z) and TheWorld.Map:IsAboveGroundAtPoint(x,y,z+7) and TheWorld.Map:IsAboveGroundAtPoint(x,y,z-7)) then
-inst:Remove()
+	inst:Remove()
+else
+	TrySwap(inst)
 end
-TrySwap(inst)
 end
 
 local function fnmist()
