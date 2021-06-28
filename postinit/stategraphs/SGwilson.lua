@@ -23,7 +23,11 @@ inst.actionhandlers[ACTIONS.CASTSPELL].deststate =
 				if action.invobject:HasTag("lighter") then
 					return "castspelllighter"
 				elseif action.invobject:HasTag("beargerclaw") then
-					return "bearclaw_dig_start"
+					if inst.components.rider and inst.components.rider:IsRiding() then
+						inst.components.rider:Dismount()
+					else
+						return "bearclaw_dig_start"
+					end
 				end
             end
 			return _OldSpellCast(inst, action, ...)
