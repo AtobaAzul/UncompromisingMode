@@ -36,8 +36,8 @@ local function fnspawner()
 end
 
 local function Shade(inst,shade)
-if not TheWorld.state.isdusk and inst.AnimState ~= nil then
-inst.AnimState:SetMultColour(shade, shade, shade, shade)
+if not TheWorld.state.isdusk and inst ~= nil and inst.AnimState ~= nil and shade ~= nil then
+	inst.AnimState:SetMultColour(shade, shade, shade, shade)
 end
 end
 

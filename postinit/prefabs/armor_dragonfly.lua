@@ -56,90 +56,7 @@ local function ThreeDead(inst)
 end
 
 
-local function newonequip(inst, owner)
 
-    local skin_build = inst:GetSkinBuild()
-    if skin_build ~= nil then
-        owner:PushEvent("equipskinneditem", inst:GetSkinName())
-        owner.AnimState:OverrideItemSkinSymbol("swap_body", skin_build, "swap_body", inst.GUID, "torso_dragonfly")
-    else
-        owner.AnimState:OverrideSymbol("swap_body", "torso_dragonfly", "swap_body")
-    end
-
-    if owner.components.health ~= nil then
-        owner.components.health.externalfiredamagemultipliers:SetModifier(inst, 1 - TUNING.ARMORDRAGONFLY_FIRE_RESIST)
-    end
-
-    InitializeLavae(inst, owner)
-    local x, y, z = owner.Transform:GetWorldPosition()
-    if inst.lavaecond1 == "alive" then
-        local lavae1 = SpawnPrefab("armorlavae")
-        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
-        lavae1.number = 1
-        lavae1.Transform:SetPosition(x, y, z)
-        inst.lavae1 = lavae1
-        owner.components.leader:AddFollower(lavae1)
-        lavae1.components.follower.leader = owner
-    else
-
-    end
-    if inst.lavaecond2 == "alive" then
-        local lavae2 = SpawnPrefab("armorlavae")
-        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
-        lavae2.number = 2
-        lavae2.Transform:SetPosition(x, y, z)
-        inst.lavae2 = lavae2
-        owner.components.leader:AddFollower(lavae2)
-        lavae2.components.follower.leader = owner
-    else
-
-    end
-    if inst.lavaecond3 == "alive" then
-        local lavae3 = SpawnPrefab("armorlavae")
-        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
-        lavae3.number = 3
-        lavae3.Transform:SetPosition(x, y, z)
-        inst.lavae3 = lavae3
-        owner.components.leader:AddFollower(lavae3)
-        lavae3.components.follower.leader = owner
-    else
-
-    end
-end
-
-local function newonunequip(inst, owner)
-
-    owner.AnimState:ClearOverrideSymbol("swap_body")
-
-    if owner.components.health ~= nil then
-        owner.components.health.externalfiredamagemultipliers:RemoveModifier(inst)
-    end
-
-    local skin_build = inst:GetSkinBuild()
-    if skin_build ~= nil then
-        owner:PushEvent("unequipskinneditem", inst:GetSkinName())
-    end
-
-    if inst.lavae1 ~= nil then
-        local x, y, z = inst.lavae1.Transform:GetWorldPosition()
-        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
-        inst.lavae1:Remove()
-        inst.lavae1 = nil
-    end
-    if inst.lavae2 ~= nil then
-        local x, y, z = inst.lavae2.Transform:GetWorldPosition()
-        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
-        inst.lavae2:Remove()
-        inst.lavae2 = nil
-    end
-    if inst.lavae3 ~= nil then
-        local x, y, z = inst.lavae3.Transform:GetWorldPosition()
-        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
-        inst.lavae3:Remove()
-        inst.lavae3 = nil
-    end
-
-end
 
 local function OnTimerDone(inst, data)
     if data ~= nil then
@@ -197,9 +114,67 @@ end
 inst.OnSave = OnSave
 inst.OnLoad = OnLoad
 
+local _onequip = inst.components.equippable.onequipfn
+local _onunequip = inst.components.equippable.onunequipfn
+
+
+local function newonequip(inst, owner)
+    InitializeLavae(inst, owner)
+    local x, y, z = owner.Transform:GetWorldPosition()
+    if inst.lavaecond1 == "alive" then
+        local lavae1 = SpawnPrefab("armorlavae")
+        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
+        lavae1.number = 1
+        lavae1.Transform:SetPosition(x, y, z)
+        inst.lavae1 = lavae1
+        owner.components.leader:AddFollower(lavae1)
+        lavae1.components.follower.leader = owner
+    end
+    if inst.lavaecond2 == "alive" then
+        local lavae2 = SpawnPrefab("armorlavae")
+        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
+        lavae2.number = 2
+        lavae2.Transform:SetPosition(x, y, z)
+        inst.lavae2 = lavae2
+        owner.components.leader:AddFollower(lavae2)
+        lavae2.components.follower.leader = owner
+    end
+    if inst.lavaecond3 == "alive" then
+        local lavae3 = SpawnPrefab("armorlavae")
+        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
+        lavae3.number = 3
+        lavae3.Transform:SetPosition(x, y, z)
+        inst.lavae3 = lavae3
+        owner.components.leader:AddFollower(lavae3)
+        lavae3.components.follower.leader = owner
+    end
+_onequip(inst,owner)
+end
+
+local function newonunequip(inst, owner)
+    if inst.lavae1 ~= nil then
+        local x, y, z = inst.lavae1.Transform:GetWorldPosition()
+        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
+        inst.lavae1:Remove()
+        inst.lavae1 = nil
+    end
+    if inst.lavae2 ~= nil then
+        local x, y, z = inst.lavae2.Transform:GetWorldPosition()
+        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
+        inst.lavae2:Remove()
+        inst.lavae2 = nil
+    end
+    if inst.lavae3 ~= nil then
+        local x, y, z = inst.lavae3.Transform:GetWorldPosition()
+        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
+        inst.lavae3:Remove()
+        inst.lavae3 = nil
+    end
+_onunequip(inst,owner)
+end
 
 inst.components.equippable:SetOnEquip(newonequip)
-inst.components.equippable:SetOnUnequip(newonunequip) --Afraid removing the event callback did not prevent the armor from setting things on fire, so I'm going to have to override the onequips for now
+inst.components.equippable:SetOnUnequip(newonunequip)
 
 inst.components.armor:InitCondition(1500, 0.6)
 
