@@ -36,8 +36,8 @@ local function fnspawner()
 end
 
 local function Shade(inst,shade)
-if not TheWorld.state.isdusk and inst.AnimState ~= nil then
-inst.AnimState:SetMultColour(shade, shade, shade, shade)
+if not TheWorld.state.isdusk and inst ~= nil and inst.AnimState ~= nil and shade ~= nil then
+	inst.AnimState:SetMultColour(shade, shade, shade, shade)
 end
 end
 
@@ -71,9 +71,10 @@ inst:Remove()
 end]]
 local x,y,z = inst.Transform:GetWorldPosition()
 if not (TheWorld.Map:IsAboveGroundAtPoint(x,y,z) and TheWorld.Map:IsAboveGroundAtPoint(x+14,y,z) and TheWorld.Map:IsAboveGroundAtPoint(x-14,y,z) and TheWorld.Map:IsAboveGroundAtPoint(x,y,z+7) and TheWorld.Map:IsAboveGroundAtPoint(x,y,z-7)) then
-inst:Remove()
+	inst:Remove()
+else
+	TrySwap(inst)
 end
-TrySwap(inst)
 end
 
 local function fnmist()

@@ -134,7 +134,7 @@ return {
 	"widowweb",
 	"widowwebspawner",
 	"webbedcreaturespawner",
-	"hoodedwidow",
+	"venice", --hoodedwidow
 	"willowfire",
 	"berniebox",
 	"chomper",

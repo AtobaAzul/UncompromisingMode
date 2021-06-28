@@ -56,13 +56,15 @@ local function fn()
     inst:AddComponent("inspectable")
     inst:AddComponent("locomotor")
     inst:SetStateGraph("SGarmorlavae")
+	
+	inst:AddTag("shadow") --Prevent enemies from trying to target it
     inst:SetBrain(brain)
 	inst.Transform:SetScale(0.6,0.6,0.6)
 
 
-    inst.components.combat:SetDefaultDamage(37.5)
+    inst.components.combat:SetDefaultDamage(20)
     inst.components.combat:SetRange(TUNING.LAVAE_ATTACK_RANGE*0.6, TUNING.LAVAE_HIT_RANGE*0.6)
-    inst.components.combat:SetAttackPeriod(1.5)
+    inst.components.combat:SetAttackPeriod(4)
 
     inst.components.locomotor.walkspeed = 11
 
