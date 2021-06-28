@@ -23,6 +23,10 @@ local ApplyIcecreamBuff = function(inst, eater)
                 not eater:HasTag("playerghost") then
                 eater.components.debuffable:AddDebuff("icecreamsanityregenbuff", "icecreamsanityregenbuff")
             end
+			
+			if inst.OldOnEat ~= nil then
+				return inst.OldOnEat(inst, eater)
+			end
         end
 
 if TUNING.DSTU.PIEROGI == true then
@@ -39,6 +43,7 @@ end
 
 if TUNING.DSTU.ICECREAMBUFF == true then
 recipes.icecream.sanity = 0
+recipes.icecream.OldOnEat = recipes.icecream.oneatenfn
 recipes.icecream.oneatenfn = ApplyIcecreamBuff
 end
 
@@ -181,18 +186,21 @@ local ANTIHISTAMINES =
 	"red_cap_cooked",
 }
 
-local function item_oneatenlow(inst, eater)
-	if eater.components.hayfever and eater.components.hayfever.enabled then
-		eater.components.hayfever:SetNextSneezeTime(60)			
-	end	
-end
-
 local function AddAntihistamine(prefab)
     AddPrefabPostInit(prefab, function (inst)
 		inst:AddTag("antihistamine")
 	
 		if inst.components.edible ~= nil then
-			inst.components.edible:SetOnEatenFn(item_oneatenlow)
+			inst.oldeater = inst.components.edible.oneatenfn
+			inst.components.edible.oneatenfn = function(inst, eater)
+				if eater.components.hayfever and eater.components.hayfever.enabled then
+					eater.components.hayfever:SetNextSneezeTime(60)
+				end	
+				
+				if inst.oldeater ~= nil then
+					return inst.oldeater(inst, eater)
+				end
+			end
 		end
     end)
 end
@@ -244,20 +252,24 @@ local ANTIHISTAMINES_HIGH =
 	"sweettea",
 }
 
-local function item_oneatenhigh(inst, eater)
-	local SugarBuff = inst:HasTag("antihistamine_sugar") and 60 or 0
-
-	if eater.components.hayfever and eater.components.hayfever.enabled then
-		eater.components.hayfever:SetNextSneezeTime(300 + SugarBuff)			
-	end	
-end
-
 local function AddAntihistamineHigh(prefab)
     AddPrefabPostInit(prefab, function (inst)
 		inst:AddTag("antihistamine")
 	
 		if inst.components.edible ~= nil then
-			inst.components.edible:SetOnEatenFn(item_oneatenhigh)
+			inst.oldeater = inst.components.edible.oneatenfn
+			
+			inst.components.edible.oneatenfn = function(inst, eater)
+				local SugarBuff = inst:HasTag("antihistamine_sugar") and 60 or 0
+				
+				if eater.components.hayfever and eater.components.hayfever.enabled then
+					eater.components.hayfever:SetNextSneezeTime(300 + SugarBuff)
+				end	
+				
+				if inst.oldeater ~= nil then
+					return inst.oldeater(inst, eater)
+				end
+			end
 		end
     end)
 end
@@ -268,7 +280,19 @@ local function AddAntihistamineHighSugar(prefab)
 		inst:AddTag("antihistamine_sugar")
 	
 		if inst.components.edible ~= nil then
-			inst.components.edible:SetOnEatenFn(item_oneatenhigh)
+			inst.oldeater = inst.components.edible.oneatenfn
+			
+			inst.components.edible.oneatenfn = function(inst, eater)
+				local SugarBuff = inst:HasTag("antihistamine_sugar") and 60 or 0
+				
+				if eater.components.hayfever and eater.components.hayfever.enabled then
+					eater.components.hayfever:SetNextSneezeTime(300 + SugarBuff)
+				end	
+				
+				if inst.oldeater ~= nil then
+					return inst.oldeater(inst, eater)
+				end
+			end
 		end
     end)
 end
@@ -288,20 +312,24 @@ local ANTIHISTAMINES_SUPER =
     "mandrakesoup",
 }
 
-local function item_oneatensuper(inst, eater)
-	local SugarBuff = inst:HasTag("antihistamine_sugar") and 60 or 0
-	
-	if eater.components.hayfever and eater.components.hayfever.enabled then
-		eater.components.hayfever:SetNextSneezeTime(800 + SugarBuff)	
-	end	
-end
-
 local function AddAntihistamineSuper(prefab)
     AddPrefabPostInit(prefab, function (inst)
 		inst:AddTag("antihistamine")
 	
 		if inst.components.edible ~= nil then
-			inst.components.edible:SetOnEatenFn(item_oneatensuper)
+			inst.oldeater = inst.components.edible.oneatenfn
+			
+			inst.components.edible.oneatenfn = function(inst, eater)
+				local SugarBuff = inst:HasTag("antihistamine_sugar") and 60 or 0
+				
+				if eater.components.hayfever and eater.components.hayfever.enabled then
+					eater.components.hayfever:SetNextSneezeTime(800 + SugarBuff)	
+				end	
+				
+				if inst.oldeater ~= nil then
+					return inst.oldeater(inst, eater)
+				end
+			end
 		end
     end)
 end
@@ -312,7 +340,20 @@ local function AddAntihistamineSuper(prefab)
 		inst:AddTag("antihistamine_sugar")
 	
 		if inst.components.edible ~= nil then
-			inst.components.edible:SetOnEatenFn(item_oneatensuper)
+			inst.oldeater = inst.components.edible.oneatenfn
+			
+			inst.components.edible.oneatenfn = function(inst, eater)
+				local SugarBuff = inst:HasTag("antihistamine_sugar") and 60 or 0
+				
+				if eater.components.hayfever and eater.components.hayfever.enabled then
+					eater.components.hayfever:SetNextSneezeTime(800 + SugarBuff)	
+				end	
+				
+				if inst.oldeater ~= nil then
+					return inst.oldeater(inst, eater)
+				end
+			end
+			--inst.components.edible:SetOnEatenFn(item_oneatensuper)
 		end
     end)
 end
