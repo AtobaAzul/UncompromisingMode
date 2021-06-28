@@ -41,7 +41,9 @@ if TUNING.DSTU.PIEROGI == true then
 
 	for k, v in pairs(PIEROGI) do
 		AddPrefabPostInit(v, function (inst)
-			inst.components.perishable.perishtime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_PEROGI_PERISH -- Changed to 10 days, down from 20
+			if inst ~= nil and inst.components.perishable ~= nil then
+				inst.components.perishable:SetPerishTime(GLOBAL.TUNING.DSTU.RECIPE_CHANGE_PEROGI_PERISH) -- Changed to 10 days, down from 20
+			end
 		end)
 	end
 end
@@ -58,7 +60,9 @@ if TUNING.DSTU.MEATBALL == true then
 
 	for k, v in pairs(MEATBALLS) do
 		AddPrefabPostInit(v, function (inst)
-			inst.components.edible.hungervalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_MEATBALL_HUNGER
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.hungervalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_MEATBALL_HUNGER
+			end
 		end)
 	end
 end
@@ -75,7 +79,9 @@ if TUNING.DSTU.ICECREAMBUFF == true then
 
 	for k, v in pairs(ICECREAM) do
 		AddPrefabPostInit(v, function (inst)
-			inst.components.edible.sanityvalue = 0
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.sanityvalue = 0
+			end
 		end)
 	end
 
@@ -94,7 +100,9 @@ local BACONEGGS =
 
 for k, v in pairs(BACONEGGS) do
 	AddPrefabPostInit(v, function (inst)
-		inst.components.perishable.perishtime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BACONEGG_PERISH
+		if inst ~= nil and inst.components.perishable ~= nil then
+			inst.components.perishable:SetPerishTime(GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BACONEGG_PERISH)
+		end
 	end)
 end
 
@@ -112,8 +120,10 @@ if TUNING.DSTU.FARMFOODREDUX == true then
 
 	for k, v in pairs(MASHEDPOTATOES) do
 		AddPrefabPostInit(v, function (inst)
-			inst.components.edible.hungervalue  = 100
-			inst.components.edible.sanityvalue = 15
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.hungervalue = 100
+				inst.components.edible.sanityvalue = 15
+			end
 		end)
 	end
 
@@ -128,7 +138,9 @@ if TUNING.DSTU.FARMFOODREDUX == true then
 
 	for k, v in pairs(SALSA) do
 		AddPrefabPostInit(v, function (inst)
-			inst.components.edible.sanityvalue = 50
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.sanityvalue = 50
+			end
 		end)
 	end
 
@@ -143,8 +155,10 @@ if TUNING.DSTU.FARMFOODREDUX == true then
 
 	for k, v in pairs(PEPPERPOPPER) do
 		AddPrefabPostInit(v, function (inst)
-			inst.components.edible.hungervalue = 50
-			inst.components.edible.healthvalue  = 60
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.hungervalue = 50
+				inst.components.edible.healthvalue  = 60
+			end
 		end)
 	end
 
@@ -159,9 +173,11 @@ if TUNING.DSTU.FARMFOODREDUX == true then
 
 	for k, v in pairs(PUMPKINCOOKIE) do
 		AddPrefabPostInit(v, function (inst)
-			inst.components.edible.hungervalue = 50
-			inst.components.edible.sanityvalue  = 33
-			inst.components.edible.healthvalue  = 15
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.hungervalue = 50
+				inst.components.edible.sanityvalue  = 33
+				inst.components.edible.healthvalue  = 15
+			end
 		end)
 	end
 
@@ -176,8 +192,10 @@ if TUNING.DSTU.FARMFOODREDUX == true then
 
 	for k, v in pairs(STUFFEDEGGPLANT) do
 		AddPrefabPostInit(v, function (inst)
-			inst.components.edible.hungervalue = 50
-			inst.components.edible.healthvalue  = 20
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.hungervalue = 50
+				inst.components.edible.healthvalue  = 20
+			end
 		end)
 	end
 
@@ -192,9 +210,11 @@ if TUNING.DSTU.FARMFOODREDUX == true then
 
 	for k, v in pairs(ASPARAGUSSOUP) do
 		AddPrefabPostInit(v, function (inst)
-			inst.components.edible.hungervalue = 25
-			inst.components.edible.healthvalue  = 30
-			inst.components.edible.sanityvalue  = 20
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.hungervalue = 25
+				inst.components.edible.healthvalue  = 30
+				inst.components.edible.sanityvalue  = 20
+			end
 		end)
 	end
 
@@ -209,13 +229,15 @@ if TUNING.DSTU.FARMFOODREDUX == true then
 
 	for k, v in pairs(BUTTERFLYMUFFIN) do
 		AddPrefabPostInit(v, function (inst)
-			inst.components.edible.hungervalue = 30
-			
-			if TUNING.DSTU.BUTTMUFFIN == true then
-				inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERMUFFIN_HEALTH -- Changed to 50, down from 62.5
-			end
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.hungervalue = 30
+				
+				if TUNING.DSTU.BUTTMUFFIN == true then
+					inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERMUFFIN_HEALTH -- Changed to 50, down from 62.5
+				end
 
-			inst.components.edible.sanityvalue  = 10
+				inst.components.edible.sanityvalue  = 10
+			end
 		end)
 	end
 
@@ -230,9 +252,11 @@ if TUNING.DSTU.FARMFOODREDUX == true then
 
 	for k, v in pairs(FISHTACOS) do
 		AddPrefabPostInit(v, function (inst)
-			inst.components.edible.hungervalue = 75
-			inst.components.edible.healthvalue = 15
-			inst.components.edible.sanityvalue  = 5
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.hungervalue = 75
+				inst.components.edible.healthvalue = 15
+				inst.components.edible.sanityvalue  = 5
+			end
 		end)
 	end
 
@@ -247,8 +271,10 @@ if TUNING.DSTU.FARMFOODREDUX == true then
 
 	for k, v in pairs(VEGSTINGER) do
 		AddPrefabPostInit(v, function (inst)
-			inst.components.edible.hungervalue = 30
-			inst.components.edible.healthvalue = 10
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.hungervalue = 30
+				inst.components.edible.healthvalue = 10
+			end
 		end)
 	end
 
@@ -263,9 +289,11 @@ if TUNING.DSTU.FARMFOODREDUX == true then
 
 	for k, v in pairs(POTATOSOUFFLE) do
 		AddPrefabPostInit(v, function (inst)
-			inst.components.edible.hungervalue = 50
-			inst.components.edible.healthvalue = 60
-			inst.components.edible.sanityvalue  = 5
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.hungervalue = 50
+				inst.components.edible.healthvalue = 60
+				inst.components.edible.sanityvalue = 5
+			end
 		end)
 	end
 
@@ -280,9 +308,11 @@ if TUNING.DSTU.FARMFOODREDUX == true then
 
 	for k, v in pairs(LEAFYMEATBURGER) do
 		AddPrefabPostInit(v, function (inst)
-			inst.components.edible.hungervalue = 100
-			inst.components.edible.healthvalue = 3
-			inst.components.edible.sanityvalue  = 5
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.hungervalue = 100
+				inst.components.edible.healthvalue = 3
+				inst.components.edible.sanityvalue  = 5
+			end
 		end)
 	end
 end

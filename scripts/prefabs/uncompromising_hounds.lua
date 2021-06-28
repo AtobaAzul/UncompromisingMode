@@ -193,7 +193,7 @@ end
 
 local RETARGET_CANT_TAGS = { "wall", "houndmound", "hound", "houndfriend" }
 local function retargetfn(inst)
-    if inst.sg:HasStateTag("statue") then
+    if inst.sg ~= nil and inst.sg:HasStateTag("statue") then
         return
     end
     local leader = inst.components.follower.leader
@@ -218,7 +218,7 @@ local function retargetfn(inst)
 end
 
 local function KeepTarget(inst, target)
-    if inst.sg:HasStateTag("statue") then
+    if inst.sg ~= nil and inst.sg:HasStateTag("statue") then
         return false
     end
     local leader = inst.components.follower.leader
@@ -259,12 +259,12 @@ local function moon_keeptargetfn(inst, target)
 end
 
 local function OnAttacked(inst, data)
-	if inst.sg:HasStateTag("charging") and data ~= nil and data.attacker ~= nil then
+	if inst.sg ~= nil and inst.sg:HasStateTag("charging") and data ~= nil and data.attacker ~= nil then
 		if data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead() and
 			(data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) then
 		
 			data.attacker.components.health:DoDelta(-5, nil, inst.prefab, nil, inst)
-			if data.attacker:HasTag("player") and not (data.attacker.components.inventory ~= nil and data.attacker.components.inventory:IsInsulated()) then
+			if data.attacker.sg ~= nil and data.attacker:HasTag("player") and not (data.attacker.components.inventory ~= nil and data.attacker.components.inventory:IsInsulated()) then
 				data.attacker.sg:GoToState("electrocute")
 			end
         end
@@ -287,7 +287,7 @@ local function OnAttackOther(inst, data)
 
                 data.target.components.health:DoDelta(-5, nil, inst.prefab, nil, inst)
                 if data.target:HasTag("player") then
-					local shockvictim = data.target.sg:GoToState("electrocute")
+					local shockvictim = data.target.sg ~= nil and data.target.sg:GoToState("electrocute")
 					inst:DoTaskInTime(2, shockvictim)
                 end
             end
@@ -357,7 +357,7 @@ local function OnLoad(inst, data)
 end
 
 local function GetStatus(inst)
-    return (inst.sg:HasStateTag("statue") and "STATUE")
+    return (inst.sg ~= nil and inst.sg:HasStateTag("statue") and "STATUE")
         or nil
 end
 
@@ -733,7 +733,7 @@ local function onhit(inst, attacker, target)
         target:PushEvent("attacked", { attacker = attacker, damage = 25, weapon = inst })
     end
 
-    if target.components.freezable ~= nil and not target.sg:HasStateTag("frozen") then
+    if target.components.freezable ~= nil and target.sg ~= nil and not target.sg:HasStateTag("frozen") then
         target.components.freezable:AddColdness(1)
         target.components.freezable:SpawnShatterFX()
     end
@@ -851,7 +851,7 @@ local function MagmaCharge(inst)
 end
 
 local function OnMagmaAttacked(inst, data)
-	if inst.sg:HasStateTag("charging") and data ~= nil and data.attacker ~= nil then
+	if inst.sg ~= nil and inst.sg:HasStateTag("charging") and data ~= nil and data.attacker ~= nil then
 		if data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead() and
 			(data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) then
 		
@@ -879,7 +879,9 @@ local function fnmagma()
     end
 	
     inst:SetStateGraph("SGmagmahound")
-	inst.sg:GoToState("taunt")
+	if inst.sg ~= nil then
+		inst.sg:GoToState("taunt")
+	end
     --MakeMediumFreezableCharacter(inst, "hound_body") No freeze bc haha FIRE
 	inst.Transform:SetScale(1.2,1.2,1.2)
     inst:AddComponent("timer")

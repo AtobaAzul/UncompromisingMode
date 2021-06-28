@@ -151,9 +151,9 @@ env.AddPrefabPostInit("perd", function(inst)
 	end
 	
 	if inst.components.combat ~= nil then
-		inst.components.combat:SetRange(3)
+		inst.components.combat:SetRange(2.5, 3)
 		inst.components.combat:SetDefaultDamage(20)
-		inst.components.combat:SetAttackPeriod(TUNING.BEARDLORD_ATTACK_PERIOD)
+		inst.components.combat:SetAttackPeriod(TUNING.BUNNYMAN_ATTACK_PERIOD)
 		inst.components.combat:SetRetargetFunction(2, NormalRetargetFn)
 		inst.components.combat:SetKeepTargetFunction(NormalKeepTargetFn)
 		inst.components.combat.onhitotherfn = OnHitOther
