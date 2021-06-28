@@ -85,6 +85,7 @@ AddIngredientValues({"scorpioncarapace"}, {meat=0.5, monster=1, insectoid=0.5}, 
 AddIngredientValues({"scorpioncarapacecooked"}, {meat=0.5, monster=1, insectoid=0.5}, true, true)
 end
 
+AddIngredientValues({"forgetmelots"}, {decoration=1, foliage=1})
 
 local function MonsterMeat(tags) -- Pretty sure this function is depricated --AXE
     return tags~=nil and tags.monster and tags.monster >=2 and (tags.meat and (tags.monster - tags.meat*meat_reduction_factor) >= 2)
@@ -452,7 +453,7 @@ AddCookerRecipe("portablecookpot", californiaking)
 local purplesteamedhams =
 {
     name = "purplesteamedhams",
-    test = function(cooker, names, tags) return names.foliage and tags.veggie and tags.veggie >= 1 and (names.meat or names.meatcooked) and not (tags.monster or tags.inedible or names.smallmeat or names.smallmeatcooked) end,
+    test = function(cooker, names, tags) return (names.foliage or names.forgetmelots) and tags.veggie and tags.veggie >= 1 and (names.meat or names.cookedmeat) and not (tags.monster or tags.inedible or names.smallmeat or names.cookedsmallmeat) end,
 
     priority = 30,
     weight = 30,
@@ -470,7 +471,7 @@ AddCookerRecipe("portablecookpot", purplesteamedhams)
 local greensteamedhams =
 {
     name = "greensteamedhams",
-    test = function(cooker, names, tags) return names.greenfoliage and tags.veggie and tags.veggie >= 1 and (names.meat or names.meatcooked) and not (tags.monster or tags.inedible or names.smallmeat or names.smallmeatcooked) end,
+    test = function(cooker, names, tags) return names.greenfoliage and tags.veggie and tags.veggie >= 1 and (names.meat or names.cookedmeat) and not (tags.monster or tags.inedible or names.smallmeat or names.cookedsmallmeat) end,
 
     priority = 30,
     weight = 30,
@@ -488,7 +489,7 @@ AddCookerRecipe("portablecookpot", greensteamedhams)
 local simpsalad =
 {
     name = "simpsalad",
-    test = function(cooker, names, tags) return tags.foliage and tags.foliage > 1 end,
+    test = function(cooker, names, tags) return tags.foliage and tags.foliage > 1 and not (tags.frozen and tags.frozen >= 1 and tags.sweetener and tags.sweetener >= 1) end,
 
     priority = 20,
     weight = 20,
