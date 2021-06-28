@@ -248,8 +248,12 @@ TUNING.DSTU =
     WARLY_SAME_OLD_COOLDOWN = total_day_time * 3,
 	WARLY_SAME_OLD_MULTIPLIERS = { .6, .5, .35, .2, .1 },
 	
-	--Maxwellwinonaworker
+	--Maxwell
 	MAX_HEALTH_WELL = GetModConfigData("maxhealthwell"),
+	SHADOWWAXWELL_FUEL_COST = 3,
+	SHADOWWAXWELL_HEALTH_COST = 15,
+	OLD_SHADOWWAXWELL_SANITY_COST = 55,
+	OLD_SHADOWWAXWELL_SANITY_PENALTY = .275,
 	
 	--Winona
 	WINONA_WORKER = GetModConfigData("winonaworker"),

@@ -115,6 +115,7 @@ local function fn()
 	inst:AddTag("shadowminion")
     inst:AddTag("scarytoprey")
     inst:AddTag("NOBLOCK")
+    inst:AddTag("classicshadow")
     --inst:AddTag("NOCLICK")
 
     inst.entity:SetPristine()
