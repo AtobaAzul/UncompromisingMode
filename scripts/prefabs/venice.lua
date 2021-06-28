@@ -309,4 +309,4 @@ local function fn()
 
     return inst
 end
-return Prefab("hoodedwidow", fn)
+return Prefab("venice", fn)
