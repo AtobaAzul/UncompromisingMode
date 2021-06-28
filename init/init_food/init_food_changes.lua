@@ -30,76 +30,261 @@ local ApplyIcecreamBuff = function(inst, eater)
         end
 
 if TUNING.DSTU.PIEROGI == true then
-recipes.perogies.perishtime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_PEROGI_PERISH -- Changed to 10 days, down from 20
+	local PIEROGI = 
+	{
+		"perogies",
+		"perogies_spice_chili",
+		"perogies_spice_garlic",
+		"perogies_spice_salt",
+		"perogies_spice_sugar",
+	}
+
+	for k, v in pairs(PIEROGI) do
+		AddPrefabPostInit(v, function (inst)
+			inst.components.perishable.perishtime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_PEROGI_PERISH -- Changed to 10 days, down from 20
+		end)
+	end
 end
 
 if TUNING.DSTU.MEATBALL == true then
-recipes.meatballs.hunger = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_MEATBALL_HUNGER -- Changed to 50, down from 62.5
-end
+	local MEATBALLS = 
+	{
+		"meatballs",
+		"meatballs_spice_chili",
+		"meatballs_spice_garlic",
+		"meatballs_spice_salt",
+		"meatballs_spice_sugar",
+	}
 
-if TUNING.DSTU.BUTTMUFFIN == true then
-recipes.butterflymuffin.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERMUFFIN_HEALTH -- Changed to 50, down from 62.5
+	for k, v in pairs(MEATBALLS) do
+		AddPrefabPostInit(v, function (inst)
+			inst.components.edible.hungervalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_MEATBALL_HUNGER
+		end)
+	end
 end
 
 if TUNING.DSTU.ICECREAMBUFF == true then
-recipes.icecream.sanity = 0
-recipes.icecream.OldOnEat = recipes.icecream.oneatenfn
-recipes.icecream.oneatenfn = ApplyIcecreamBuff
+	local ICECREAM = 
+	{
+		"icecream",
+		"icecream_spice_chili",
+		"icecream_spice_garlic",
+		"icecream_spice_salt",
+		"icecream_spice_sugar",
+	}
+
+	for k, v in pairs(ICECREAM) do
+		AddPrefabPostInit(v, function (inst)
+			inst.components.edible.sanityvalue = 0
+		end)
+	end
+
+	recipes.icecream.OldOnEat = recipes.icecream.oneatenfn
+	recipes.icecream.oneatenfn = ApplyIcecreamBuff
 end
 
-recipes.baconeggs.perishtime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BACONEGG_PERISH
+local BACONEGGS = 
+{
+	"baconeggs",
+	"baconeggs_spice_chili",
+	"baconeggs_spice_garlic",
+	"baconeggs_spice_salt",
+	"baconeggs_spice_sugar",
+}
+
+for k, v in pairs(BACONEGGS) do
+	AddPrefabPostInit(v, function (inst)
+		inst.components.perishable.perishtime = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BACONEGG_PERISH
+	end)
+end
+
 recipes.baconeggs.priority = 9 --No more casino 50/50 baconeggs / monsterlasagna
 
 if TUNING.DSTU.FARMFOODREDUX == true then
-------Rare Farmplot Crockpot Foods Change
-recipes.mashedpotatoes.hunger = 100
-recipes.mashedpotatoes.sanity = 15
+	local MASHEDPOTATOES = 
+	{
+		"mashedpotatoes",
+		"mashedpotatoes_spice_chili",
+		"mashedpotatoes_spice_garlic",
+		"mashedpotatoes_spice_salt",
+		"mashedpotatoes_spice_sugar",
+	}
 
-recipes.salsa.hunger = 25
-recipes.salsa.sanity = 50
+	for k, v in pairs(MASHEDPOTATOES) do
+		AddPrefabPostInit(v, function (inst)
+			inst.components.edible.hungervalue  = 100
+			inst.components.edible.sanityvalue = 15
+		end)
+	end
 
-recipes.pepperpopper.health = 60
-recipes.pepperpopper.hunger = 50
-------
+	local SALSA = 
+	{
+		"salsa",
+		"salsa_spice_chili",
+		"salsa_spice_garlic",
+		"salsa_spice_salt",
+		"salsa_spice_sugar",
+	}
 
-------Uncommon Farmplot Crockpot Foods Change
-recipes.pumpkincookie.hunger = 40
-recipes.pumpkincookie.sanity = 33
-recipes.pumpkincookie.health = 15
+	for k, v in pairs(SALSA) do
+		AddPrefabPostInit(v, function (inst)
+			inst.components.edible.sanityvalue = 50
+		end)
+	end
 
-recipes.stuffedeggplant.hunger = 50
-recipes.stuffedeggplant.health = 20
+	local PEPPERPOPPER = 
+	{
+		"pepperpopper",
+		"pepperpopper_spice_chili",
+		"pepperpopper_spice_garlic",
+		"pepperpopper_spice_salt",
+		"pepperpopper_spice_sugar",
+	}
 
-recipes.asparagussoup.hunger = 25
-recipes.asparagussoup.health = 30
-recipes.asparagussoup.sanity = 20
+	for k, v in pairs(PEPPERPOPPER) do
+		AddPrefabPostInit(v, function (inst)
+			inst.components.edible.hungervalue = 50
+			inst.components.edible.healthvalue  = 60
+		end)
+	end
 
-recipes.butterflymuffin.health = 30
-recipes.butterflymuffin.sanity = 10
+	local PUMPKINCOOKIE = 
+	{
+		"pumpkincookie",
+		"pumpkincookie_spice_chili",
+		"pumpkincookie_spice_garlic",
+		"pumpkincookie_spice_salt",
+		"pumpkincookie_spice_sugar",
+	}
 
---recipes.watermelonicle.health = number
---recipes.watermelonicle.sanity = number
---recipes.watermelonicle.hunger = number
-------
+	for k, v in pairs(PUMPKINCOOKIE) do
+		AddPrefabPostInit(v, function (inst)
+			inst.components.edible.hungervalue = 50
+			inst.components.edible.sanityvalue  = 33
+			inst.components.edible.healthvalue  = 15
+		end)
+	end
 
-------Common Farmplot Crockpot Foods Change
-recipes.fishtacos.hunger = 75
-recipes.fishtacos.health = 15
-recipes.fishtacos.sanity = 5
-------
+	local STUFFEDEGGPLANT = 
+	{
+		"stuffedeggplant",
+		"stuffedeggplant_spice_chili",
+		"stuffedeggplant_spice_garlic",
+		"stuffedeggplant_spice_salt",
+		"stuffedeggplant_spice_sugar",
+	}
 
-recipes.vegstinger.hunger = 30
-recipes.vegstinger.health = 10
+	for k, v in pairs(STUFFEDEGGPLANT) do
+		AddPrefabPostInit(v, function (inst)
+			inst.components.edible.hungervalue = 50
+			inst.components.edible.healthvalue  = 20
+		end)
+	end
 
-------Puffed Potato Souffle Buff
-warly_recipes.potatosouffle.hunger = 50
-warly_recipes.potatosouffle.health = 60
-warly_recipes.potatosouffle.sanity = 5
+	local ASPARAGUSSOUP = 
+	{
+		"asparagussoup",
+		"asparagussoup_spice_chili",
+		"asparagussoup_spice_garlic",
+		"asparagussoup_spice_salt",
+		"asparagussoup_spice_sugar",
+	}
 
-------Veggie burger Reallocation
-recipes.leafymeatburger.hunger = 100
-recipes.leafymeatburger.sanity = 5
-recipes.leafymeatburger.health = 3
+	for k, v in pairs(ASPARAGUSSOUP) do
+		AddPrefabPostInit(v, function (inst)
+			inst.components.edible.hungervalue = 25
+			inst.components.edible.healthvalue  = 30
+			inst.components.edible.sanityvalue  = 20
+		end)
+	end
+
+	local BUTTERFLYMUFFIN = 
+	{
+		"butterflymuffin",
+		"butterflymuffin_spice_chili",
+		"butterflymuffin_spice_garlic",
+		"butterflymuffin_spice_salt",
+		"butterflymuffin_spice_sugar",
+	}
+
+	for k, v in pairs(BUTTERFLYMUFFIN) do
+		AddPrefabPostInit(v, function (inst)
+			inst.components.edible.hungervalue = 30
+			
+			if TUNING.DSTU.BUTTMUFFIN == true then
+				inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERMUFFIN_HEALTH -- Changed to 50, down from 62.5
+			end
+
+			inst.components.edible.sanityvalue  = 10
+		end)
+	end
+
+	local FISHTACOS = 
+	{
+		"fishtacos",
+		"fishtacos_spice_chili",
+		"fishtacos_spice_garlic",
+		"fishtacos_spice_salt",
+		"fishtacos_spice_sugar",
+	}
+
+	for k, v in pairs(FISHTACOS) do
+		AddPrefabPostInit(v, function (inst)
+			inst.components.edible.hungervalue = 75
+			inst.components.edible.healthvalue = 15
+			inst.components.edible.sanityvalue  = 5
+		end)
+	end
+
+	local VEGSTINGER = 
+	{
+		"vegstinger",
+		"vegstinger_spice_chili",
+		"vegstinger_spice_garlic",
+		"vegstinger_spice_salt",
+		"vegstinger_spice_sugar",
+	}
+
+	for k, v in pairs(VEGSTINGER) do
+		AddPrefabPostInit(v, function (inst)
+			inst.components.edible.hungervalue = 30
+			inst.components.edible.healthvalue = 10
+		end)
+	end
+
+	local POTATOSOUFFLE = 
+	{
+		"potatosouffle",
+		"potatosouffle_spice_chili",
+		"potatosouffle_spice_garlic",
+		"potatosouffle_spice_salt",
+		"potatosouffle_spice_sugar",
+	}
+
+	for k, v in pairs(POTATOSOUFFLE) do
+		AddPrefabPostInit(v, function (inst)
+			inst.components.edible.hungervalue = 50
+			inst.components.edible.healthvalue = 60
+			inst.components.edible.sanityvalue  = 5
+		end)
+	end
+
+	local LEAFYMEATBURGER = 
+	{
+		"leafymeatburger",
+		"leafymeatburger_spice_chili",
+		"leafymeatburger_spice_garlic",
+		"leafymeatburger_spice_salt",
+		"leafymeatburger_spice_sugar",
+	}
+
+	for k, v in pairs(LEAFYMEATBURGER) do
+		AddPrefabPostInit(v, function (inst)
+			inst.components.edible.hungervalue = 100
+			inst.components.edible.healthvalue = 3
+			inst.components.edible.sanityvalue  = 5
+		end)
+	end
 end
 -----------------------------------------------------------------
 -- Prevent cooked eggs birdcage infinite loop
@@ -147,8 +332,6 @@ AddPrefabPostInit("cookedmonstermeat", function (inst)
         inst.components.edible.healthvalue = -8
     end
 end)
-
-
 
 AddPrefabPostInit("potato_cooked", function (inst)
     if inst ~= nil and inst.components.edible ~= nil then

@@ -536,9 +536,9 @@ NERFS:
 
 --Uncommon
 
-* [x]  Pumpkin Cookies 37.5 Hunger -> 40 Hunger and 15 Sanity -> 33 Sanity and 0 Health -> 15 Health!
+* [x]  Pumpkin Cookies 37.5 Hunger -> 50 Hunger and 15 Sanity -> 33 Sanity and 0 Health -> 15 Health!
 
-* [x]  [Fight or Flight] Stuffed Eggplant 37.5 Hunger -> 50 Hunger and 3 Health -> 15 Health!
+* [x]  [Fight or Flight] Stuffed Eggplant 37.5 Hunger -> 50 Hunger and 3 Health -> 20 Health!
 
 * [x]  Asparagus Soup 18.8 Hunger -> 25 Hunger 20 Health -> 30 Health and 5 Sanity -> 20 Sanity!
 
