@@ -133,7 +133,7 @@ GLOBAL.AllRecipes["ancient_amulet_red"].sortkey = GLOBAL.AllRecipes["orangeamule
 AddRecipe("turf_hoodedmoss", {Ingredient("twigs", 1), Ingredient("foliage", 1), Ingredient("moonrocknugget", 1)}, RECIPETABS.TURFCRAFTING, TECH.TURFCRAFTING_ONE, nil, nil, nil, nil, nil, "images/inventoryimages/turf_hoodedmoss.xml", "turf_hoodedmoss.tex")
 AddRecipe("turf_ancienthoodedturf", {Ingredient("turf_hoodedmoss", 1,"images/inventoryimages/turf_hoodedmoss.xml"), Ingredient("moonrocknugget", 1), Ingredient("thulecite_pieces", 1)}, RECIPETABS.TURFCRAFTING, TECH.TURFCRAFTING_ONE, nil, nil, nil, nil, nil, "images/inventoryimages/turf_ancienthoodedturf.xml", "turf_ancienthoodedturf.tex")
 
-AddRecipe("um_trap_snare", {Ingredient("livinglog", 1),Ingredient("rope", 1),Ingredient("pinecone", 1)}, RECIPETABS.WAR,  TECH.SCIENCE_TWO)
+--AddRecipe("um_trap_snare", {Ingredient("livinglog", 1),Ingredient("rope", 1),Ingredient("pinecone", 1)}, RECIPETABS.WAR,  TECH.SCIENCE_TWO)
 
 AddRecipe("um_bear_trap_equippable_tooth", {Ingredient("cutstone", 2), Ingredient("houndstooth", 3), Ingredient("rope", 1)}, RECIPETABS.WAR, TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/um_bear_trap_equippable_tooth.xml", "um_bear_trap_equippable_tooth.tex")
 AddRecipe("um_bear_trap_equippable_gold", {Ingredient("goldnugget", 2), Ingredient("houndstooth", 3), Ingredient("rope", 1)}, RECIPETABS.WAR, TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/um_bear_trap_equippable_gold.xml", "um_bear_trap_equippable_gold.tex")
