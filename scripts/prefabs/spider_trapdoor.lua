@@ -54,7 +54,14 @@ end
 
 local function OnGetItemFromPlayer(inst, giver, item)
     if inst.components.eater:CanEat(item) then  
-        inst.sg:GoToState("eat", true)
+        inst.components.eater:Eat(item)
+
+        local state = "eat"
+        if inst.components.inventoryitem.owner ~= nil then
+            state = "idle"
+        end
+
+        inst.sg:GoToState(state)
 
         local playedfriendsfx = false
         if inst.components.combat.target == giver then
@@ -374,7 +381,7 @@ local function create_common(build)
 	inst.components.halloweenmoonmutable:SetPrefabMutated("spider_moon")
 	inst.components.halloweenmoonmutable:SetOnMutateFn(HalloweenMoonMutate)
 	
-	MakeFeedableSmallLivestock(inst, TUNING.SPIDER_PERISH_TIME)
+    MakeFeedableSmallLivestock(inst, TUNING.SPIDER_PERISH_TIME)
     MakeHauntablePanic(inst)
 
     inst:SetBrain(brain)

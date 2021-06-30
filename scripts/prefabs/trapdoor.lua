@@ -127,10 +127,27 @@ local function workcallback(inst, worker, workleft)
 end
 
 local function Init(inst)
-if TUNING.DSTU.TRAPDOORSPIDERS == false then
-inst:Remove()
+	if TUNING.DSTU.TRAPDOORSPIDERS == false then
+		inst:Remove()
+	end
 end
+
+local function SummonChildren(inst)
+	if inst.components.childspawner ~= nil then
+            
+		inst.components.childspawner:ReleaseAllChildren(nil, "spider_trapdoor")
+
+		inst:AddTag("trapdooreviction")
+			
+		if inst.vacancytask ~= nil then
+			inst.vacancytask:Cancel()
+			inst.vacancytask = nil
+		end
+			
+		inst.vacancytask = inst:DoTaskInTime(8, function(inst) inst:RemoveTag("trapdooreviction") end)
+	end
 end
+
 local function fn1()
     local inst = CreateEntity()
 
@@ -224,6 +241,8 @@ local function fn1()
 		end)	
 	end]]
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+	inst.SummonChildren = SummonChildren
+	
 	--inst.AnimState:SetSortOrder(1)
 	
 	MakeMediumPropagator(inst)
@@ -321,6 +340,8 @@ local function fn2()
 		end)	
 	end]]
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
+	
+	inst.SummonChildren = SummonChildren
 	--inst.AnimState:SetSortOrder(1)
 	
 	MakeMediumPropagator(inst)
