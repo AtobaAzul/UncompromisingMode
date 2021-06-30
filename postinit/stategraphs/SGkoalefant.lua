@@ -19,7 +19,7 @@ EventHandler("attacked", function(inst, data)
 if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("charging") then
 
 if (math.random() > 0.9) and inst.components.combat.target ~= nil and (2 > inst:GetDistanceSqToInst(inst.components.combat.target)) and inst.counterattack == true then
-inst.sg:GoToState("stomp") 
+inst.sg:GoToState("stomp_pre") 
 else
 inst.sg:GoToState("hit")
 end
@@ -271,7 +271,27 @@ local states = {
 		},
 
 	},
-	State{
+
+State{  
+	name = "stomp_pre",
+            tags = {"busy", "atk_pre",  "nointerrupt"},
+            
+            onenter = function(inst)
+                inst.Physics:Stop()
+				inst.components.locomotor:StopMoving()
+				inst.components.combat:ResetCooldown()
+				inst.AnimState:PlayAnimation("stomp_pre")
+				inst.SoundEmitter:PlaySound("dontstarve/creatures/koalefant/angry")
+            end,
+			events =
+            {
+                EventHandler("animover", function(inst) 
+                inst.sg:GoToState("stomp")
+				end),
+            },
+},
+		
+State{
         name = "stomp",
         tags = {"attack", "busy", "nointerrupt"},
 
