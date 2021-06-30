@@ -14,6 +14,7 @@ local function Transform(inst)
 		local x, y, z = inst.Transform:GetWorldPosition()
 			obj.Transform:SetPosition(x,y,z)
 			obj:AddTag("transformed")
+			obj.transformed = true
 			obj:DoTaskInTime(math.random()*100+480, function(inst) Revert(inst) end)
 			inst:Remove()
 end
@@ -47,12 +48,14 @@ env.AddPrefabPostInit("flower_evil", function(inst)
 
 	local function onsaveevil(inst, data)
 		data.anim = inst.animname
-		
+		if inst.transformed ~= nil then
+		data.transformed = inst.transformed
+		end
 		_OnSave(inst, data)
 	end
 
 	local function onloadevil(inst, data)
-		if data and data.anim and data.transformed == true then
+		if data and data.transformed and data.transformed == true then
 			inst:DoTaskInTime(0.1,Revert)
 		end
 
