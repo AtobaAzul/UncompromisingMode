@@ -225,7 +225,7 @@ local function fn()
     inst.Physics:CollidesWith(COLLISION.GROUND)
     --inst.Physics:CollidesWith(COLLISION.WORLD)
 
-    inst.Transform:SetScale(1.25, 1.25, 1.25)
+    inst.Transform:SetScale(1.5, 1.5, 1.5)
 
     inst:AddTag("shadowcreature")
     inst:AddTag("monster")
@@ -272,7 +272,7 @@ local function fn()
 
     inst:AddComponent("combat")
     inst.components.combat:SetAttackPeriod(TUNING.DSTU.CREEPINGFEAR_ATTACK_PERIOD)
-    inst.components.combat:SetRange(TUNING.DSTU.CREEPINGFEAR_RANGE_1, TUNING.DSTU.CREEPINGFEAR_RANGE_2)
+    inst.components.combat:SetRange(TUNING.DSTU.CREEPINGFEAR_RANGE_1*1.15, TUNING.DSTU.CREEPINGFEAR_RANGE_2*1.15)
     inst.components.combat.onkilledbyother = onkilledbyother
     inst.components.combat:SetRetargetFunction(3, retargetfn)
 
