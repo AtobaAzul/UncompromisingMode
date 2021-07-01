@@ -239,4 +239,5 @@ return {
 	"corvushat",
 	"woomerang",
 	"um_spider_mutators",
+	"voorhams",
 }

@@ -546,6 +546,8 @@ Assets = {
 	
 	Asset("ANIM", "anim/marshmist.zip"),
 	
+	Asset("ANIM", "anim/voorhams.zip"),
+	
 	--Map Icons Start--
 	Asset( "IMAGE", "images/map_icons/riceplant.tex" ),
 	Asset( "ATLAS", "images/map_icons/riceplant.xml" ),

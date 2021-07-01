@@ -1,32 +1,35 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
+local function isplayer(ent)
+	if ent ~= nil and ent:HasTag("player") then-- fix to friendly AOE: refer for later AOE mobs -Axe
+		return true
+	end
+end
+	
 env.AddStategraphPostInit("koalefant", function(inst)
 local events= {
 EventHandler("doattack", function(inst)
-								if not inst.sg:HasStateTag("precharging") then
-                                local nstate = "attack"
-                                if inst.sg:HasStateTag("charging") or inst:HasTag("chargespeed") then
-                                    nstate = "chargeattack"
-                                end
-                                if inst.components.health and not inst.components.health:IsDead()
-                                   and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
-                                    inst.sg:GoToState(nstate)
-                                end
-								end
-                            end),
-EventHandler("attacked", function(inst, data) 
-if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("charging") then
-
-if (math.random() > 0.9) and inst.components.combat.target ~= nil and (2 > inst:GetDistanceSqToInst(inst.components.combat.target)) and inst.counterattack == true then
-inst.sg:GoToState("stomp") 
-else
-inst.sg:GoToState("hit")
-end
-end
+	if not inst.sg:HasStateTag("precharging") then
+        local nstate = "attack"
+        if inst.sg:HasStateTag("charging") or inst:HasTag("chargespeed") then
+            nstate = "chargeattack"
+        end
+        if inst.components.health and not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
+            inst.sg:GoToState(nstate)
+        end
+	end
 end),
-
-	}
+EventHandler("attacked", function(inst, data) 
+	if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("charging") then
+		if (math.random() > 0.66) and inst.components.combat.target ~= nil and (4 > inst:GetDistanceSqToInst(inst.components.combat.target)) and inst.counterattack == true then
+			inst.sg:GoToState("stomp_pre") 
+		else
+			inst.sg:GoToState("hit")
+		end
+	end
+end),
+}
 	
 	
 local function DisarmTarget(inst, target)
@@ -57,41 +60,39 @@ local states = {
         onenter = function(inst, target)
             inst.sg.statemem.target = target
 			inst.counterattack = false
-			inst:DoTaskInTime(2,function(inst) inst.counterattack = true end) --2 second grace period (pretty graceful if I do say so myself)
+			inst:DoTaskInTime(1.5,function(inst) inst.counterattack = true end) --1 second grace period (pretty graceful if I do say so myself)
             inst.SoundEmitter:PlaySound("dontstarve/creatures/koalefant/angry")
             inst.components.combat:StartAttack()
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("atk_pre")
             inst.AnimState:PushAnimation("atk", false)
 			if inst:HasTag("chargespeed") then
-			inst.components.locomotor.runspeed = 7
-			inst:RemoveTag("chargespeed")
+				inst.components.locomotor.runspeed = 7
+				inst:RemoveTag("chargespeed")
 			end
-			inst.sg:SetTimeout(4)
         end,
 
         timeline=
         {
             TimeEvent(15*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
-        ontimeout = function(inst)
-            inst.sg:GoToState("disarm")
-        end,
         events=
         {
             EventHandler("animqueueover", function(inst)
 			if inst.components.combat.target ~= nil then
-			local distance = inst:GetDistanceSqToInst(inst ~= nil and inst.components.combat.target ~= nil and inst.components.combat.target )
-			local chance = math.random()
-			if chance < 0.33 then
-				inst.sg:GoToState("charge_start")
-			else
-				if chance > 0.77 and inst.disarmattack == true then
-				inst.sg:GoToState("disarm")
+				local distance = inst:GetDistanceSqToInst(inst ~= nil and inst.components.combat.target ~= nil and inst.components.combat.target )
+				local chance = math.random()
+				if chance < 0.33 then
+					inst.sg:GoToState("charge_start")
 				else
-				inst.sg:GoToState("idle")
+					if chance > 0.77 and inst.disarmattack == true then
+						inst.sg:GoToState("disarm")
+					else
+						inst.sg:GoToState("idle")
+					end
 				end
-			end
+			else
+				inst.sg:GoToState("idle")
 			end
 			end),
         },
@@ -107,25 +108,26 @@ local states = {
 				inst.AnimState:PlayAnimation("paw")
 				inst.SoundEmitter:PlaySound("dontstarve/creatures/koalefant/angry")
 				inst.components.locomotor.runspeed = 7*2.29  --should be equal to rook
-				inst:AddTag("chargespeed")
+				
             end,
             
 
             
             timeline=
             {
-			TimeEvent(5*FRAMES, PlayFootstep),
-			TimeEvent(10*FRAMES, PlayFootstep),
+				TimeEvent(5*FRAMES, PlayFootstep),
+				TimeEvent(10*FRAMES, PlayFootstep),
             },        
 
 			events =
             {
                 EventHandler("animover", function(inst) 
-                inst.sg:GoToState("charge")
+				inst:AddTag("chargespeed")
                 inst:PushEvent("attackstart")
 				if inst.components.combat ~= nil then
 				inst.components.combat:ResetCooldown()
-				end 
+				end
+				inst.sg:GoToState("charge")
 				end),
             },
         },
@@ -271,7 +273,27 @@ local states = {
 		},
 
 	},
-	State{
+
+State{  
+	name = "stomp_pre",
+            tags = {"busy", "atk_pre",  "nointerrupt"},
+            
+            onenter = function(inst)
+                inst.Physics:Stop()
+				inst.components.locomotor:StopMoving()
+				inst.components.combat:ResetCooldown()
+				inst.AnimState:PlayAnimation("stomp_pre")
+				inst.SoundEmitter:PlaySound("dontstarve/creatures/koalefant/angry")
+            end,
+			events =
+            {
+                EventHandler("animover", function(inst) 
+                inst.sg:GoToState("stomp")
+				end),
+            },
+},
+		
+State{
         name = "stomp",
         tags = {"attack", "busy", "nointerrupt"},
 
@@ -283,15 +305,10 @@ local states = {
             inst.AnimState:PlayAnimation("atk_pre")
             inst.AnimState:PushAnimation("surprise", false)
 			if inst:HasTag("chargespeed") then
-			inst.components.locomotor.runspeed = 7
-			inst:RemoveTag("chargespeed")
+				inst.components.locomotor.runspeed = 7
+				inst:RemoveTag("chargespeed")
 			end
-			local function isplayer(ent)
-			if ent ~= nil and ent:HasTag("player") then-- fix to friendly AOE: refer for later AOE mobs -Axe
-				return true
-			end
-			end
-			inst.components.combat:SetAreaDamage(1, 1, isplayer)
+			inst.components.combat:SetAreaDamage(4, 4, isplayer)
 			
         end,
 
@@ -302,7 +319,11 @@ local states = {
 			SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
 			SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
 			SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
-			inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+			inst.components.combat:DoAttack(inst.sg.statemem.target) 
+			local ring = SpawnPrefab("groundpoundring_fx")
+			ring.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			ring.Transform:SetScale(0.7, 0.7, 0.7)
+			end),
         },
 
         events=
@@ -331,4 +352,3 @@ for k, v in pairs(states) do
     inst.states[v.name] = v
 end
 end)
-
