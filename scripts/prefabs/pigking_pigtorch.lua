@@ -223,6 +223,16 @@ local function NormalRetargetFn(inst)
                 function(guy)
 					for i,v in ipairs(inst.hitlist) do
 						if guy.userid ~= nil and v == guy.userid then
+						
+						local taskid = guy.userid
+						
+						if inst.taskid ~= nil then
+							inst.taskid:Cancel()
+							inst.taskid = nil
+						end
+						
+						inst.taskid = inst:DoTaskInTime(60, function(inst) table.removetablevalue(inst.hitlist, taskid) end)
+						
 						return (guy.LightWatcher == nil or guy.LightWatcher:IsInLight())
 								and inst.components.combat:CanTarget(guy)
 						end
@@ -517,7 +527,10 @@ local function OnNewTarget(inst, data)
 		inst.components.combat.target = nil
 		end
 		if data.target.userid ~= nil and not table.contains(inst.hitlist,data.target.userid) then
-		table.insert(inst.hitlist,data.target.userid)
+			table.insert(inst.hitlist,data.target.userid)
+			
+			local taskid = data.target.userid
+			inst.taskid = inst:DoTaskInTime(60, function(inst) table.removetablevalue(inst.hitlist, taskid) end)
 		end
 		if data.target.userid ~= nil then
 		local x,y,z = inst.Transform:GetWorldPosition()
@@ -526,6 +539,9 @@ local function OnNewTarget(inst, data)
 			if v ~= inst and not v.components.health:IsDead() then
 				if data.target.userid ~= nil and not table.contains(v.hitlist,data.target.userid) then
 				table.insert(v.hitlist,data.target.userid)
+				
+					local taskid = data.target.userid
+					v.taskid = v:DoTaskInTime(60, function(v) table.removetablevalue(v.hitlist, taskid) end)
 				end
 			end
 		end
