@@ -22,6 +22,7 @@ local component_post = {
 	"perishable",
 	--"carnivalevent",
 	"lootdropper",
+	"ambientsound",
 }
 
 local prefab_post = {
