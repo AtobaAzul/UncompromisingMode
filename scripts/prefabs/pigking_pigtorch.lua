@@ -231,7 +231,7 @@ local function NormalRetargetFn(inst)
 							inst.taskid = nil
 						end
 						
-						inst.taskid = inst:DoTaskInTime(60, function(inst) table.removetablevalue(inst.hitlist, taskid) end)
+						--inst.taskid = inst:DoTaskInTime(60, function(inst) table.removetablevalue(inst.hitlist, taskid) end)
 						
 						return (guy.LightWatcher == nil or guy.LightWatcher:IsInLight())
 								and inst.components.combat:CanTarget(guy)
@@ -530,7 +530,7 @@ local function OnNewTarget(inst, data)
 			table.insert(inst.hitlist,data.target.userid)
 			
 			local taskid = data.target.userid
-			inst.taskid = inst:DoTaskInTime(60, function(inst) table.removetablevalue(inst.hitlist, taskid) end)
+			--inst.taskid = inst:DoTaskInTime(60, function(inst) table.removetablevalue(inst.hitlist, taskid) end)
 		end
 		if data.target.userid ~= nil then
 		local x,y,z = inst.Transform:GetWorldPosition()
@@ -541,7 +541,7 @@ local function OnNewTarget(inst, data)
 				table.insert(v.hitlist,data.target.userid)
 				
 					local taskid = data.target.userid
-					v.taskid = v:DoTaskInTime(60, function(v) table.removetablevalue(v.hitlist, taskid) end)
+					--v.taskid = v:DoTaskInTime(60, function(v) table.removetablevalue(v.hitlist, taskid) end)
 				end
 			end
 		end
