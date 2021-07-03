@@ -9,9 +9,15 @@ local function onkilledbyother(inst, attacker)
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local ents = TheSim:FindEntities(x, y, z, 15, { "player" }, { "playerghost" } )
 		
+		inst.halfreward =  TUNING.SANITY_SMALL / 2
+		
+		if inst.sanityreward ~= nil then
+			inst.halfreward = inst.sanityreward / 2
+		end
+		
 		for i, v in ipairs(ents) do
 			if v ~= attacker and v.components.sanity ~= nil and v.components.sanity:IsInsane() then
-				v.components.sanity:DoDelta(inst.sanityreward / 2 or TUNING.SANITY_SMALL / 2)
+				v.components.sanity:DoDelta(inst.halfreward)
 			end
 		end
     end
