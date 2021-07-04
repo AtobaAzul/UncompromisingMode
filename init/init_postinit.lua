@@ -129,6 +129,7 @@ local prefab_post = {
 	"houndwarning",
 	--"carnival_host",
 	"spider_whistle",
+	"spider_healer",
 }
 
 local stategraph_post = {
