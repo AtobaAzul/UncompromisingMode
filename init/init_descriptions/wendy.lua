@@ -33,7 +33,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "Death peers at me from the darkness."
     DESCRIBE.UNCOMPROMISING_RAT = "Wreched daemons wrought to topple the pillars of vanity."
-    DESCRIBE.UNCOMPROMISING_RATHOLD = "But one mouth of a den of thieves."
+    DESCRIBE.UNCOMPROMISING_RATHERD = "But one mouth of a den of thieves."
+    DESCRIBE.UNCOMPROMISING_RATBURROW = "But one mouth of a den of thieves."
     DESCRIBE.RATPOISONBOTTLE = "There's a thought..."
     DESCRIBE.RATPOISON = "Even if I were to partake, this world would drag me back..."
 

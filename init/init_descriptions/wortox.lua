@@ -33,7 +33,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "I love tempting fate! Hyuyu!"
     DESCRIBE.UNCOMPROMISING_RAT = "You won't run off with my flute again, hm?"
-    DESCRIBE.UNCOMPROMISING_RATHOLD = "A portal to the little pranksters' den."
+    DESCRIBE.UNCOMPROMISING_RATHERD = "A portal to the little pranksters' den."
+    DESCRIBE.UNCOMPROMISING_RATBURROW = "A portal to the little pranksters' den."
     DESCRIBE.RATPOISONBOTTLE = "My oh my, what a way to die!"
     DESCRIBE.RATPOISON = "A deadly slick! That should do the trick!"
 

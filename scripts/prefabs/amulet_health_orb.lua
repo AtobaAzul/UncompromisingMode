@@ -68,7 +68,7 @@ local function fn()
 	
     inst.OnEntityWake = OnEntityWake
 	
-	inst:DoTaskInTime(5, KillSoul)
+	inst:DoTaskInTime(8, KillSoul)
 	
     inst.persists = false
 	

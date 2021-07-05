@@ -22,6 +22,7 @@ local component_post = {
 	"perishable",
 	--"carnivalevent",
 	"lootdropper",
+	"ambientsound",
 }
 
 local prefab_post = {
@@ -128,6 +129,7 @@ local prefab_post = {
 	"houndwarning",
 	--"carnival_host",
 	"spider_whistle",
+	"spider_healer",
 }
 
 local stategraph_post = {

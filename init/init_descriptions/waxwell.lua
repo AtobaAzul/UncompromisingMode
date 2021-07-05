@@ -34,7 +34,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "It's not just Charlie out there, is it?"
     DESCRIBE.UNCOMPROMISING_RAT = "Filthy vermin!"
-    DESCRIBE.UNCOMPROMISING_RATHOLD = "I don't recall granting you vermin permission to settle in my world."
+    DESCRIBE.UNCOMPROMISING_RATHERD = "I don't recall granting you vermin permission to settle in my world."
+    DESCRIBE.UNCOMPROMISING_RATBURROW = "I don't recall granting you vermin permission to settle in my world."
     DESCRIBE.RATPOISONBOTTLE = "Hmhm...I remember what the red ones were for now."
     DESCRIBE.RATPOISON = "A little something to keep the vermin at bay."
 

@@ -243,7 +243,7 @@ modparams.skullchest_child = containers.params.shadowchester
 local old_wsetup = containers.widgetsetup
 
 function containers.widgetsetup(container, prefab, data, ...)
-    local t = modparams[prefab or container.inst.prefab or inst.widgetsetup]
+    local t = modparams[prefab or container.inst.prefab--[[ or inst.widgetsetup]]]
     if t ~= nil then
 	--if modparams[prefab or container.inst.prefab] and not data then
         for k, v in pairs(t) do

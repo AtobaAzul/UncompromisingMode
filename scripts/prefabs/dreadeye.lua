@@ -103,6 +103,15 @@ end
 local function onkilledbyother(inst, attacker)
     if attacker ~= nil and attacker.components.sanity ~= nil then
         attacker.components.sanity:DoDelta(20)
+		
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local ents = TheSim:FindEntities(x, y, z, 15, { "player" }, { "playerghost" } )
+		
+		for i, v in ipairs(ents) do
+			if v ~= attacker and v.components.sanity ~= nil and v.components.sanity:IsInsane() then
+				v.components.sanity:DoDelta(10)
+			end
+		end
     end
 end
 

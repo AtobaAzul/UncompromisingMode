@@ -33,7 +33,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "W-what's that sound? We're scared!"
     DESCRIBE.UNCOMPROMISING_RAT = "Nice fur!"
-    DESCRIBE.UNCOMPROMISING_RATHOLD = "It's looking at us! Hey there little guy!"
+    DESCRIBE.UNCOMPROMISING_RATHERD = "It's looking at us! Hey there little guy!"
+    DESCRIBE.UNCOMPROMISING_RATBURROW = "It's looking at us! Hey there little guy!"
     DESCRIBE.RATPOISONBOTTLE = "Wendy really likes this stuff! Wonder what it tastes like..."
     DESCRIBE.RATPOISON = "Whoops! It's all spilled!"
 

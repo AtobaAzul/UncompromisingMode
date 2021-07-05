@@ -165,7 +165,6 @@ room.contents.countprefabs=
 										marshmist = function() return math.random(4,6) end,
 										} 
 end)
-----------------
 
 --Waffle's Specific Task Remover Code
 AddTaskSetPreInitAny(function(tasksetdata)
@@ -237,12 +236,15 @@ for k, v in pairs(deserts) do
     end)
 end
 
------KoreanWaffle's Spawner Limiter Tag Adding Code 
+
+-----KoreanWaffle's Spawner Limiter Tag Adding Code
 GLOBAL.require("map/rooms/forest/challengespawner")
 GLOBAL.require("map/rooms/forest/extraswamp")
 AddTaskPreInit("Make a pick",function(task)
 	task.room_choices["veteranshrine"] = 1
 end)
+
+
 
 ---- KoreanWaffle's LOCK/KEY initialization code  --Inactive atm 
 local LOCKS = GLOBAL.LOCKS
@@ -276,9 +278,15 @@ end)
 GLOBAL.require("map/tasks/gianttrees")
 GLOBAL.require("map/tasks/ratacombs")
 GLOBAL.require("map/rooms/caves/ratacombsrooms")
-
+GLOBAL.require("map/rooms/forest/ratking")
 AddTaskPreInit("Dig that rock",function(task)
 	task.room_choices["RattySinkhole"] = 1
+end)
+
+AddTaskPreInit("Dig that rock",function(task)
+
+task.room_choices["RatKingdom"] = 1
+
 end)
 
 AddTaskPreInit("Forest hunters",function(task) --Leave Forest Hunters in incase someone adds something to its setpieces.

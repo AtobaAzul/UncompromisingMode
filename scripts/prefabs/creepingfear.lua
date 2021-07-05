@@ -154,7 +154,21 @@ end
 
 local function onkilledbyother(inst, attacker)
     if attacker ~= nil and attacker.components.sanity ~= nil then
-        attacker.components.sanity:DoDelta(attacker.components.sanity.max * 0.25 + 10)
+	
+		inst.sanityreward = (attacker.components.sanity.max * 0.25) + 10
+	
+        attacker.components.sanity:DoDelta(inst.sanityreward)
+		
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local ents = TheSim:FindEntities(x, y, z, 15, { "player" }, { "playerghost" } )
+		
+		for i, v in ipairs(ents) do
+			if v ~= attacker and v.components.sanity ~= nil and v.components.sanity:IsInsane() then
+				inst.halfreward = ((v.components.sanity.max * 0.25) + 10) / 2
+				
+				v.components.sanity:DoDelta(inst.halfreward)
+			end
+		end
     end
 end
 
