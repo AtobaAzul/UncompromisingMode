@@ -1,23 +1,12 @@
 local assets =
 {
     Asset("ANIM", "anim/glommer_fuel.zip"),
-	Asset("SCRIPT", "scripts/prefabs/fertilizer_nutrient_defs.lua"),
 }
 
 local prefabs =
 {
     "gridplacer_farmablesoil",
 }
-
-local FERTILIZER_DEFS = require("prefabs/fertilizer_nutrient_defs").FERTILIZER_DEFS
-
-local function GetFertilizerKey(inst)
-    return inst.prefab
-end
-
-local function fertilizerresearchfn(inst)
-    return inst:GetFertilizerKey()
-end
 
 local function MakeVomit(name, color, x, y, z)
 		
@@ -37,10 +26,6 @@ local function MakeVomit(name, color, x, y, z)
 		MakeInventoryFloatable(inst)
 		MakeDeployableFertilizerPristine(inst)
 
-		inst:AddTag("fertilizerresearchable")
-
-		inst.GetFertilizerKey = GetFertilizerKey
-
 		inst.entity:SetPristine()
 
 		if not TheWorld.ismastersim then
@@ -52,9 +37,6 @@ local function MakeVomit(name, color, x, y, z)
 		inst.components.inventoryitem.atlasname = "images/inventoryimages/"..color.."_vomit.xml"
 		
 		inst:AddComponent("stackable")
-
-		inst:AddComponent("fertilizerresearchable")
-		inst.components.fertilizerresearchable:SetResearchFn(fertilizerresearchfn)
 
 		inst:AddComponent("fuel")
 		inst.components.fuel.fuelvalue = TUNING.MED_FUEL

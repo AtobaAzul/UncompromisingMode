@@ -82,7 +82,7 @@ end
 
 local function OnTimerDone2(inst, data)
     if data.name == "stumptime" then
-		if math.random() > 0.333 then
+		if math.random() > 0.5 then
 			inst.stumplingambush = true
 		end
     end

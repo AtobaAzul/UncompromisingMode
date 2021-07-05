@@ -68,9 +68,20 @@ local function OnNewTarget(inst, data)
     --end
 end
 
+local RETARGET_MUST_TAGS = { "character" }
+local RETARGET_CANT_TAGS = { "stumpling", "monster", "leif" }
 local function retargetfn(inst)
-
-    return nil
+    return not (inst.sg:HasStateTag("hidden"))
+        and FindEntity(
+                inst,
+                15,
+                function(guy)
+                    return inst.components.combat:CanTarget(guy)
+                end,
+				RETARGET_MUST_TAGS,
+                RETARGET_CANT_TAGS
+            )
+        or nil
 end
 
 local function KeepTarget(inst, target)
@@ -125,7 +136,6 @@ local function fncommon()
     inst.DynamicShadow:SetSize(2.5, 1.5)
     inst.Transform:SetSixFaced()
 
-    inst:AddTag("scarytooceanprey")
     inst:AddTag("monster")
     inst:AddTag("stumpling")
     inst:AddTag("likewateroffducksback")
@@ -245,7 +255,6 @@ local function fnbirchling()
     inst.DynamicShadow:SetSize(2.5, 1.5)
     inst.Transform:SetSixFaced()
 
-    inst:AddTag("scarytooceanprey")
     inst:AddTag("monster")
     inst:AddTag("stumpling")
     inst:AddTag("likewateroffducksback")
