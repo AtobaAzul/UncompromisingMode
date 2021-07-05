@@ -240,4 +240,5 @@ return {
 	"woomerang",
 	"um_spider_mutators",
 	"voorhams",
+	"ratking",
 }

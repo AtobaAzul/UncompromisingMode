@@ -162,14 +162,6 @@ room.contents.countprefabs=
 										} 
 end)
 
-AddRoomPreInit("BGNoise", function(room)					
-room.contents.countprefabs=
-									{
-										uncompromising_ratburrow = function() return math.random(8, 12) end,
-										} 
-end)
-
-
 --[[
 GLOBAL.require("map/rooms/caves/mushroomtoadstool")
 AddTaskPreInit("Redforest",function(task)
@@ -274,14 +266,22 @@ for k, v in pairs(swamps) do
     end)
 end
 -----KoreanWaffle's Spawner Limiter Tag Adding Code
------KoreanWaffle's Spawner Limiter Tag Adding Code 
 GLOBAL.require("map/rooms/forest/challengespawner")
 GLOBAL.require("map/rooms/forest/extraswamp")
+GLOBAL.require("map/rooms/forest/ratking")
+
 AddTaskPreInit("Make a pick",function(task)
 
 task.room_choices["veteranshrine"] = 1
 
 end)
+
+AddTaskPreInit("Dig that rock",function(task)
+
+task.room_choices["RatKingdom"] = 1
+
+end)
+
 --[[AddTaskPreInit("RedForest",function(task)
 task.room_choices["veteranshrine"] = 1
 end)]]

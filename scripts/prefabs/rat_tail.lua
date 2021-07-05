@@ -17,15 +17,17 @@ local function fn()
     inst.AnimState:PlayAnimation("idle")
 
     MakeInventoryFloatable(inst)
-
-    inst.entity:SetPristine()
 	
     inst:AddTag("show_spoilage")
+
+    inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
 
+    inst:AddComponent("tradable")
+	
     inst:AddComponent("stackable")
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
 
