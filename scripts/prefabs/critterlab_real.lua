@@ -107,7 +107,6 @@ local function brokenfn()
 
     inst:AddTag("critterlab")
     inst:AddTag("antlion_sinkhole_blocker")
-    inst:AddTag("structure")
     inst:AddTag("stone")
 
     inst.entity:SetPristine()

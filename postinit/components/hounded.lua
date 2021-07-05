@@ -301,7 +301,7 @@ AddComponentPostInit("hounded", function(self) --We can see if we can copy korea
             return _SummonSpawn(pt)
         else
             local spawn = GLOBAL.SpawnPrefab(prefab)
-            if spawn then
+            if spawn and spawn_pt ~= nil then
                 spawn.Physics:Teleport(spawn_pt:Get())
                 spawn:FacePoint(pt)
                 if spawn.components.spawnfader then
