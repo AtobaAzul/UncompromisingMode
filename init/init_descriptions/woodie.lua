@@ -33,7 +33,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "I'm not sure aboot this..."
     DESCRIBE.UNCOMPROMISING_RAT = "More vermin come to steal my kit!"
-    DESCRIBE.UNCOMPROMISING_RATHOLD = "That's where the varments are shackin' up!"
+    DESCRIBE.UNCOMPROMISING_RATHERD = "That's where the varments are shackin' up!"
+    DESCRIBE.UNCOMPROMISING_RATBURROW = "That's where the varments are shackin' up!"
     DESCRIBE.RATPOISONBOTTLE = "Feast your eyes on the deep woods gut bomb!"
     DESCRIBE.RATPOISON = "A little somethin' for the moochers' next visit..."
 

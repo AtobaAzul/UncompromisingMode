@@ -34,7 +34,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "This fog makes it hard to view my surroundings."
     DESCRIBE.UNCOMPROMISING_RAT = "Rodentia kleptomanis, and quite the large specimen!"
-    DESCRIBE.UNCOMPROMISING_RATHOLD = "One entrance to a no doubt vast tunnel system!"
+    DESCRIBE.UNCOMPROMISING_RATHERD = "One entrance to a no doubt vast tunnel system!"
+    DESCRIBE.UNCOMPROMISING_RATBURROW = "One entrance to a no doubt vast tunnel system!"
     DESCRIBE.RATPOISONBOTTLE = "The toxic elements of the fungus have been fully activated."
     DESCRIBE.RATPOISON = "A minor chemical odor emanating from the mixture attracts rodents."
 

@@ -33,7 +33,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	--CaliforniaKing
 	
     DESCRIBE.UNCOMPROMISING_RAT = "Don't let the filthy little pestes near my kitchen!"
-    DESCRIBE.UNCOMPROMISING_RATHOLD = "A trouble trou!"
+    DESCRIBE.UNCOMPROMISING_RATHERD = "A trouble trou!"
+    DESCRIBE.UNCOMPROMISING_RATBURROW = "A trouble trou!"
     DESCRIBE.RATPOISONBOTTLE = "Peace of mind in a bottle."
     DESCRIBE.RATPOISON = "Dinner is served..."
 

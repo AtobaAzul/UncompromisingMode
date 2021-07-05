@@ -342,6 +342,10 @@ local function EndRaid(inst)
 		inst:AddComponent("workable")
 	end
 		
+	if inst.components.inspectable == nil then
+		inst:AddComponent("inspectable")
+	end
+	
 	if inst.components.workable ~= nil then
 		inst.components.workable:SetOnFinishCallback(onfinishcallback)
 		inst.components.workable:SetOnWorkCallback(onworked)
@@ -452,5 +456,60 @@ local function fn_herd()
 	return inst
 end
 
+local function fn_burrow()
+	local inst = CreateEntity()
+	
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddNetwork()
+	
+	inst.AnimState:SetBank("uncompromising_rat_burrow")
+	inst.AnimState:SetBuild("uncompromising_rat_burrow")
+	inst.AnimState:PushAnimation("idle", true)
+	
+	inst:AddTag("herd")
+	
+	inst.entity:SetPristine()
+	
+	if not TheWorld.ismastersim then
+		return inst
+	end
+	
+	inst:AddComponent("herd")
+	inst.components.herd:SetGatherRange(40)
+	inst.components.herd:SetUpdateRange(nil)
+	inst.components.herd:SetOnEmptyFn(inst.Remove)
+	inst.components.herd.maxsize = 8
+	inst.components.herd.nomerging = true
+    inst.components.herd.updateposincombat = true
+	inst.components.herd:SetOnEmptyFn(BurrowKilled)
+	inst.components.herd.updatepos = false
+	inst.components.herd.updateposincombat = false
+	
+	inst:AddComponent("periodicspawner")
+	inst.components.periodicspawner:SetRandomTimes(5, 7)
+	inst.components.periodicspawner:SetPrefab("uncompromising_rat")
+	inst.components.periodicspawner:SetOnSpawnFn(OnSpawned)
+	inst.components.periodicspawner:SetDensityInRange(30, 8)
+	inst.components.periodicspawner:Start()
+	
+	inst:AddComponent("combat")
+	inst:AddComponent("inventory")
+	inst:AddComponent("lootdropper")
+	inst:AddComponent("inspectable")
+	
+	inst:AddComponent("workable")
+	inst.components.workable:SetOnFinishCallback(onfinishcallback)
+	inst.components.workable:SetOnWorkCallback(onworked)
+	inst.components.workable:SetWorkAction(ACTIONS.DIG)
+	inst.components.workable:SetWorkLeft(math.random(2, 5))
+	
+	inst:DoTaskInTime(1, BurrowAnim)
+	
+	return inst
+end
+
 return Prefab("uncompromising_rat", fn, assets, prefabs),
-	Prefab("uncompromising_ratherd", fn_herd, assets, prefabs)
+	Prefab("uncompromising_ratherd", fn_herd, assets, prefabs),
+	Prefab("uncompromising_ratburrow", fn_burrow, assets, prefabs)

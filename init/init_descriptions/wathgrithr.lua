@@ -33,7 +33,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "A warrior needs to stay alert!"
     DESCRIBE.UNCOMPROMISING_RAT = "And thus cometh a plague upon both our houses!"
-    DESCRIBE.UNCOMPROMISING_RATHOLD = "Den of the little beasts!"
+    DESCRIBE.UNCOMPROMISING_RATHERD = "Den of the little beasts!"
+    DESCRIBE.UNCOMPROMISING_RATBURROW = "Den of the little beasts!"
     DESCRIBE.RATPOISONBOTTLE = "My treasures, the bait. Mine fury, the trap."
     DESCRIBE.RATPOISON = "Emerge little plunderers, and face the end of days!"
 

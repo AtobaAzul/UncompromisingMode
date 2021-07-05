@@ -33,7 +33,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "ooOOOOoo, it's getting VERY spooky now!"
     DESCRIBE.UNCOMPROMISING_RAT = "I'd share, but they seem more interested in just TAKING our stuff."
-    DESCRIBE.UNCOMPROMISING_RATHOLD = "A Pine Tree Pioneer never enters a rat den head first!"
+    DESCRIBE.UNCOMPROMISING_RATHERD = "A Pine Tree Pioneer never enters a rat den head first!"
+    DESCRIBE.UNCOMPROMISING_RATBURROW = "A Pine Tree Pioneer never enters a rat den head first!"
     DESCRIBE.RATPOISONBOTTLE = "If theres no other option..."
     DESCRIBE.RATPOISON = "I hope nothing friendly gets into it..."
 

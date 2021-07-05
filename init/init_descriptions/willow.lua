@@ -33,7 +33,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "H-hello?"
     DESCRIBE.UNCOMPROMISING_RAT = "Stay away from Bernie!"
-    DESCRIBE.UNCOMPROMISING_RATHOLD = "Eugh. Can we just smash it shut?"
+    DESCRIBE.UNCOMPROMISING_RATHERD = "Eugh. Can we just smash it shut?"
+    DESCRIBE.UNCOMPROMISING_RATBURROW = "Eugh. Can we just smash it shut?"
     DESCRIBE.RATPOISONBOTTLE = "Yea, this'll take care of those gross little jerks!"
     DESCRIBE.RATPOISON = "Cooome and get iiiiit..."
 

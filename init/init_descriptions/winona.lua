@@ -33,7 +33,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "The fog's rollin' in. What are you up to, Charlie?"
     DESCRIBE.UNCOMPROMISING_RAT = "That's one part of home I was hoping NOT to see again."
-    DESCRIBE.UNCOMPROMISING_RATHOLD = "Seems you've been ratted out!"
+    DESCRIBE.UNCOMPROMISING_RATHERD = "Seems you've been ratted out!"
+    DESCRIBE.UNCOMPROMISING_RATBURROW = "Seems you've been ratted out!"
     DESCRIBE.RATPOISONBOTTLE = "Darn, this stuff woulda put Red Squill to shame."
     DESCRIBE.RATPOISON = "Nice not having to worry about rat presents all over our stuff."
 

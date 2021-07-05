@@ -162,6 +162,13 @@ room.contents.countprefabs=
 										} 
 end)
 
+AddRoomPreInit("BGNoise", function(room)					
+room.contents.countprefabs=
+									{
+										uncompromising_ratburrow = function() return math.random(8, 12) end,
+										} 
+end)
+
 
 --[[
 GLOBAL.require("map/rooms/caves/mushroomtoadstool")

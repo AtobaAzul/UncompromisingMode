@@ -33,7 +33,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "Stop looking!!"
     DESCRIBE.UNCOMPROMISING_RAT = "Spiderfolk family? Have hair."
-    DESCRIBE.UNCOMPROMISING_RATHOLD = "Little eyes in hole! Hello!"
+    DESCRIBE.UNCOMPROMISING_RATHERD = "Little eyes in hole! Hello!"
+    DESCRIBE.UNCOMPROMISING_RATBURROW = "Little eyes in hole! Hello!"
     DESCRIBE.RATPOISONBOTTLE = "Veggies but taste really bad."
     DESCRIBE.RATPOISON = "Spill! Wasn't good anyway."
 

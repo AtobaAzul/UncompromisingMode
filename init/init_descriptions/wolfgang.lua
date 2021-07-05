@@ -33,7 +33,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "S-STOP STARING AT WOLFGANG!!"
     DESCRIBE.UNCOMPROMISING_RAT = "Is greedy little hair puff!"
-    DESCRIBE.UNCOMPROMISING_RATHOLD = "Beady eye hole make Wolfgang uncomfortable."
+    DESCRIBE.UNCOMPROMISING_RATHERD = "Beady eye hole make Wolfgang uncomfortable."
+    DESCRIBE.UNCOMPROMISING_RATBURROW = "Beady eye hole make Wolfgang uncomfortable."
     DESCRIBE.RATPOISONBOTTLE = "Icky death soup."
     DESCRIBE.RATPOISON = "Wolfgang not have to catch rat if rat dead! Hah hah!"
 
