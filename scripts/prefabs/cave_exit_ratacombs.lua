@@ -61,7 +61,7 @@ local function fn()
     inst.components.inspectable.getstatus = GetStatus
 
     inst:AddComponent("worldmigrator")
-	inst.components.worldmigrator:SetID(777)
+	inst.components.worldmigrator:SetID(771)
     inst:ListenForEvent("migration_available", open)
     inst:ListenForEvent("migration_unavailable", close)
     inst:ListenForEvent("migration_full", full)
@@ -70,4 +70,4 @@ local function fn()
     return inst
 end
 
-return Prefab("cave_exit_sunkdecid", fn)
+return Prefab("cave_exit_ratacombs", fn)

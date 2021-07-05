@@ -39,7 +39,7 @@ local function OnWork(inst, worker, workleft)
         if worker ~= nil then
 	        AwardPlayerAchievement("cave_entrance_opened", worker)
 	    end
-        local openinst = SpawnPrefab("cave_entrance_open_sunkdecid")
+        local openinst = SpawnPrefab("cave_entrance_open_ratacombs")
         openinst.Transform:SetPosition(pt:Get())
         openinst.components.worldmigrator.id = inst.components.worldmigrator.id
         openinst.components.worldmigrator.linkedWorld = inst.components.worldmigrator.linkedWorld
@@ -126,7 +126,7 @@ local function closed_fn()
     inst.components.workable:SetOnWorkCallback(OnWork)
 
     inst.components.worldmigrator:SetEnabled(false)
-	inst.components.worldmigrator:SetID(777)
+	inst.components.worldmigrator:SetID(771)
     inst:ListenForEvent("migration_activate_other", activatebyother)
 
     inst:AddComponent("lootdropper")
@@ -167,5 +167,5 @@ local function open_fn()
     return inst
 end
 
-return Prefab("cave_entrance_sunkdecid", closed_fn),
-    Prefab("cave_entrance_open_sunkdecid", open_fn)
+return Prefab("cave_entrance_ratacombs", closed_fn),
+    Prefab("cave_entrance_open_ratacombs", open_fn)

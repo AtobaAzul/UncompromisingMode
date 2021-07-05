@@ -377,17 +377,21 @@ local function OnInitHerd(inst)
 end
 
 local function onsave_burrow(inst, data)
-
+if inst.raiding ~= nil then
 	data.raiding = inst.raiding
+end
 end
 
 local function onpreload_burrow(inst, data)
+if data ~= nil and data.raiding ~= nil then
 	inst.raiding = data.raiding
+end
 end
 
 local function onload_burrow(inst, data)
+if data ~= nil and data.raiding ~= nil then
 	inst.raiding = data.raiding
-	
+end	
 	if not inst.raiding then
 		inst.AnimState:PushAnimation("idle", true)
 		

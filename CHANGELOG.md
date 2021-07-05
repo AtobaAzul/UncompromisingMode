@@ -45,7 +45,7 @@
 * [x]  [Fight or Flight] Special guard pigs watch over pigking's village, they will punish anyone who tries to damage the buildings or wake the king. Perhaps you can recruit some of them by feeding the king some heavy dishes.
 
 
---Spiders
+--Spiders [TOGGLEABLE]
 
 * [x]  Regular spiders now have a leap attack, but can be interrupted if you strike them mid-air. (Try it it's surprisingly fun.)
 
@@ -89,7 +89,7 @@
 
 * [x] [THE HOODED FOREST] Koalefants will occasionally honk their nose with extreme volume, knocking the player's weapon out of their hand.
 
---Hounds
+--Hounds [TOGGLEABLE]
 
 * [x] [STALKING STUFFERS] Added two new Hounds to hound waves: Lightning Hounds in Spring, and Magma Hounds in summer
 
@@ -101,7 +101,7 @@
 
 * [x]  [Fight or Flight] Vargs will spawn in later hound waves.
 
---Bats
+--Bats [TOGGLEABLE]
 
 * [x]  Cave entrances spawn multiple bats when approached, increased regen and reduced spawn time.
 
@@ -134,23 +134,21 @@
 
 --[ Vanilla Boss changes]--
 
---General
+--General [TOGGLEABLE]
 
-* [x]  Knockback mechanic on some bosses.
+* [x]  Knockback mechanic on some bosses. 
 
 * [x] "Wilting Dragonfly" and "Mother Goose" will search out your base during spring and summer similar to ROG.
 
-* [x] [STALKING STUFFERS] The Wilting Dragonfly will no longer enrage until she is half health.
-
 * [x] Added options to reduce the Bee Queen and Toadstool's health, due to their raised importance. (Decent for solo play.)
 
---Treeguards (Leif)
+--Treeguards (Leif) [TOGGLEABLE]
 
 * [x]  Treeguard's regular attacks have AOE tied to them that ignore other treeguards or [Fear the Dark!] Stumplings.
 
 * [x]  Treeguard Stomp Attack, does melee damage and may trap the player in a root cage or since [Fear the Dark!] will summon Stumplings from stumps nearby.
 
---Bee Queen
+--Bee Queen [TOGGLEABLE]
 
 * [x]  Bee Queen's regular attacks have AOE tied to them that ignore hives and bees.
 
@@ -167,7 +165,7 @@
 
 * [x] [Fear the Dark!] Antlion sinkholes will now cause ruptures in boats.
 
---Deerclops
+--Deerclops [TOGGLEABLE]
 
 * [x]  Deerclops "enrages" at half health. [Fight or Flight] Unique to the freezing laser mutation.
 
@@ -181,7 +179,7 @@
 
 * [x]  [Fight or Flight] Added "Deerclops Mutations": there are now three different versions of deerclops. One Based on strength, the freezing laser, and an icy aura.
 
---Dragonfly
+--Dragonfly [TOGGLEABLE]
 
 * [x]  Raidfly's Lavae will now drop explosive slime on death, destroying structures and settings things on fire.
 
@@ -195,25 +193,25 @@
 
 * [x]  [Fight or Flight] As compensation (and incentive to actually finish raidfly's fight in UM), Dragonfly now drops 3 scales on death instead, as well as a buff to the scaled chest and scalemail.
 
---Wilting Dragonfly
+--Wilting Dragonfly [TOGGLEABLE]
 
 * [x]  [Fight or Flight] Can perform a fiery charge attack.
 
 * [x]  [Fight or Flight] (VETERANS CURSE) - Drops the "Slobber Lobber", a Veterans Curse exclusive weapon that lets you launch fire spit projectiles that leave a lava pool on the ground.
 
---G/Moose
+--G/Moose [TOGGLEABLE]
 
 * [x] Moose range increased, now does aoe damage to non-mossling units.
 
 * [x]  [Fight or Flight] New attacks: can perform a leap attack and groundpound at the player, can summon mosslings midfight to help her.
 
---Mother G/Moose
+--Mother G/Moose [TOGGLEABLE]
 
 * [x]  [Fight or Flight] New attacks: performs all the new attacks of a regular g/moose, AND can perform tornado attacks. Also has health buffed to 8000 over regular m/geese.
 
 * [x]  [Fight or Flight] (VETERANS CURSE) - Drops the "Feather Frock", a Veterans Curse exclusive body item that, when slotted with feathers, can be activated (consuming 1 feather) for a movement speed boost, and various effects based on the feather inside.
 
---Bearger
+--Bearger [TOGGLEABLE]
 
 * [x]  [Fight or Flight] Performs new attacks, including throwing boulders and opening the ground up beneath the player.
 
@@ -225,7 +223,7 @@
 
 * [x] Spiderqueen leaves a corpse on death, on a full moon it will turn into a shattered spider nest.
 
---Ancient Guardian
+--Ancient Guardian [TOGGLEABLE]
 
 * [x] Full rework with stunning mechanics and new attacks.
 
