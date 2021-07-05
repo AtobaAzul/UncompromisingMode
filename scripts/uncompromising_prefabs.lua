@@ -209,8 +209,12 @@ return {
 	"deerclops_barrier",
 	"roship_projectile",
 	"electric_ring",
+	
 	"cave_entrance_sunkdecid",
 	"cave_exit_sunkdecid",
+	"cave_entrance_ratacombs",
+	"cave_exit_ratacombs",
+	
 	"um_pawn",
 	"pawn_spawn",
 	"pigking_pigtorch",

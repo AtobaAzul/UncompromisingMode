@@ -9,6 +9,7 @@ local GROUND_OCEAN_COLOR = -- Color for the main island ground tiles
     secondary_color_dusk =  { 0,  20,  33,  80 }, 
     minimap_color =         { 46,  32,  18,  64 },
 }
+
 AddTile(
 	"HOODEDFOREST",
 	102,
@@ -57,16 +58,16 @@ AddTile(
 
 
 -- <<Cave Update WIP: Toggle at your own risk you buffoons! (That means you atoba, don't leak it please eh?)>>
---[[
---Ruins Split
+
+--Ruins Split, using this for ratacombs too.
 AddLevelPreInitAny(function(level)
     if level.location == "cave" then
         level.overrides.keep_disconnected_tiles = true
 		level.overrides.no_joining_islands = true
-		level.overrides.has_ocean = true
     end
 end)
 
+--[[
 AddTaskPreInit("LichenLand",function(task) --This is the new "starting task" for the island (at least trying to make it that)
 task.region_id = "RuinsIsland"
 task.locks = {}
@@ -118,6 +119,7 @@ tasksetdata.set_pieces["ToadstoolArena"] = { 1, tasks={"Guarded Squeltch","Merms
 end)
 
 end
+
 if GetModConfigData("trapdoorspiders") == true then
 AddRoomPreInit("BGSavanna", function(room)					--This effects the outer areas of the Triple Mac and The Major Beefalo Plains
 room.contents.countprefabs=
@@ -139,6 +141,7 @@ room.contents.countprefabs=
 										marshmist = function() return math.random(4,6) end,
 										}
 end)
+
 AddRoomPreInit("Marsh", function(room)						
 room.contents.countprefabs=
 									{
@@ -154,6 +157,7 @@ room.contents.countprefabs=
 										marshmist = function() return math.random(4,6) end,
 										}
 end)
+
 AddRoomPreInit("SlightlyMermySwamp", function(room)					
 room.contents.countprefabs=
 									{
@@ -161,25 +165,6 @@ room.contents.countprefabs=
 										marshmist = function() return math.random(4,6) end,
 										} 
 end)
-
---[[
-GLOBAL.require("map/rooms/caves/mushroomtoadstool")
-AddTaskPreInit("Redforest",function(task)
---table.insert(task.room_choices,"ToadstoolArenaRed") --It seems AddTaskPreInit doesn't function in the caves....
---task.room_choices["ToadstoolArenaRed"] = 1
-task.room_choices["veteranshrine"] = 1
-end)
-AddTaskPreInit("Greenforest",function(task)
---table.insert(task.room_choices,"ToadstoolArenaGreen")
---task.room_choices["ToadstoolArenaGreen"] = 1
-task.room_choices["veteranshrine"] = 1
-end)
-AddTaskPreInit("Blueforest",function(task)
---table.insert(task.room_choices,"ToadstoolArenaBlue")
---task.room_choices["ToadstoolArenaBlue"] = 1
-task.room_choices["veteranshrine"] = 1
-end)]]
---Toadstool moved to the mushroom biomes.
 
 --Waffle's Specific Task Remover Code
 AddTaskSetPreInitAny(function(tasksetdata)
@@ -189,7 +174,7 @@ AddTaskSetPreInitAny(function(tasksetdata)
     end
   end
 end)
---Waffle's Specific Task Remover Code
+
 --Waffle's Specific Task Remover Code
 AddTaskSetPreInitAny(function(tasksetdata)
   for _, task in pairs(tasksetdata.tasks) do
@@ -198,7 +183,7 @@ AddTaskSetPreInitAny(function(tasksetdata)
     end
   end
 end)
---Waffle's Specific Task Remover Code
+
 --Waffle's Specific Task Remover Code
 AddTaskSetPreInitAny(function(tasksetdata)
   for _, task in pairs(tasksetdata.tasks) do
@@ -229,8 +214,7 @@ end)
 
 -----KoreanWaffle's Spawner Limiter Tag Adding Code
 --Add new map tags to storygen
-local MapTags = {"scorpions", "hoodedcanopy","MarshMist"}
-
+local MapTags = {"scorpions", "hoodedcanopy"}
 AddGlobalClassPostConstruct("map/storygen", "Story", function(self)
     for k, v in pairs(MapTags) do
         self.map_tags.Tag[v] = function(tagdata) return "TAG", v end
@@ -252,39 +236,15 @@ for k, v in pairs(deserts) do
     end)
 end
 
---Swamp Mist
-local swamps = { "BGMarsh", "Marsh", "SpiderMarsh", "SlightlyMermySwamp"}
 
---Add "scorpions" room tag to all desert rooms
-for k, v in pairs(swamps) do
-    AddRoomPreInit(v, function(room)
-        if not room.tags then
-            room.tags = {"MarshMist"}
-        elseif room.tags then
-            table.insert(room.tags, "MarshMist")
-        end
-    end)
-end
 -----KoreanWaffle's Spawner Limiter Tag Adding Code
 GLOBAL.require("map/rooms/forest/challengespawner")
 GLOBAL.require("map/rooms/forest/extraswamp")
-GLOBAL.require("map/rooms/forest/ratking")
-
 AddTaskPreInit("Make a pick",function(task)
-
-task.room_choices["veteranshrine"] = 1
-
+	task.room_choices["veteranshrine"] = 1
 end)
 
-AddTaskPreInit("Dig that rock",function(task)
 
-task.room_choices["RatKingdom"] = 1
-
-end)
-
---[[AddTaskPreInit("RedForest",function(task)
-task.room_choices["veteranshrine"] = 1
-end)]]
 
 ---- KoreanWaffle's LOCK/KEY initialization code  --Inactive atm 
 local LOCKS = GLOBAL.LOCKS
@@ -311,58 +271,50 @@ LOCKS_KEYS[LOCKS.RICE] = {KEYS.RICE}
 LOCKS_KEYS[LOCKS.HF] = {KEYS.HF}
 
 AddTaskPreInit("Squeltch",function(task)
-task.room_choices["ricepatch"] = 1 --Comment to test task based rice worldgen
-task.room_choices["densericepatch"] = 1      --Comment to test task based rice worldgen
-
---table.insert(task.keys_given,KEYS.RICE)   Uncomment to test task based rice worldgen
+	task.room_choices["ricepatch"] = 1 --Comment to test task based rice worldgen
+	task.room_choices["densericepatch"] = 1      --Comment to test task based rice worldgen
 end)
---GLOBAL.require("map/tasks/newswamp")
-GLOBAL.require("map/tasks/gianttrees")
---GLOBAL.require("map/tasks/sunkendecid")
---[[AddTaskPreInit("RedForest",function(task)
 
-table.insert(task.keys_given,KEYS.HF)  
-end)]]
---[[Waffle's Specific Task Remover Code (Archived)
-AddTaskSetPreInitAny(function(tasksetdata)
-  for _, task in pairs(tasksetdata.tasks) do
-    if task == "Forest hunters" then
-      table.remove(tasksetdata.tasks, _)
-    end
-  end
-end)]]
+GLOBAL.require("map/tasks/gianttrees")
+GLOBAL.require("map/tasks/ratacombs")
+GLOBAL.require("map/rooms/caves/ratacombsrooms")
+GLOBAL.require("map/rooms/forest/ratking")
+AddTaskPreInit("Dig that rock",function(task)
+	task.room_choices["RattySinkhole"] = 1
+end)
+
+AddTaskPreInit("Dig that rock",function(task)
+
+task.room_choices["RatKingdom"] = 1
+
+end)
 
 AddTaskPreInit("Forest hunters",function(task) --Leave Forest Hunters in incase someone adds something to its setpieces.
-task.room_choices={
-["Forest"] = 1,
-["Clearing"] = 1,
+	task.room_choices={
+		["Forest"] = 1,
+		["Clearing"] = 1,
 }
 end)
-
 
 AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "forest" then
         return
     end
-table.insert(tasksetdata.tasks,"GiantTrees")
-table.insert(tasksetdata.required_prefabs,"riceplantspawnerlarge")
-table.insert(tasksetdata.required_prefabs,"riceplantspawner")
---table.insert(tasksetdata.tasks,"DarkGiantTrees")
-
+	table.insert(tasksetdata.tasks,"GiantTrees")
+	table.insert(tasksetdata.required_prefabs,"riceplantspawnerlarge")
+	table.insert(tasksetdata.required_prefabs,"riceplantspawner")
 end)
+
 AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "cave" then
         return
     end
---table.insert(tasksetdata.tasks,"SunkDecid")
---table.insert(tasksetdata.tasks,"RiceSqueltch")
+	table.insert(tasksetdata.tasks,"Ratty_Entrance")
+	table.insert(tasksetdata.tasks,"Ratty_Link")
+	table.insert(tasksetdata.tasks,"Ratty_Maze")
+	table.insert(tasksetdata.tasks,"Ratty_Maze2")
+	table.insert(tasksetdata.tasks,"Ratty_Maze3")
 end)
---[[AddTaskSetPreInitAny(function(tasksetdata)
-    if tasksetdata.location ~= "cave" then
-        return
-    end
-table.insert(tasksetdata.tasks,"DarkGiantTrees")  -- Uncomment to test task based rice worldgen
-end)]]
 
 local Layouts = GLOBAL.require("map/layouts").Layouts
 local StaticLayout = GLOBAL.require("map/static_layout")
@@ -419,12 +371,14 @@ AddRoomPreInit("ricepatch", function(room)
 	room.contents.countstaticlayouts["ricepatchsmall"..roomchoice2] = 1
 	end
 end)
+
 AddRoomPreInit("densericepatch", function(room)
 	if not room.contents.countstaticlayouts then
 		room.contents.countstaticlayouts = {}
 	end
 	room.contents.countstaticlayouts["ricepatchlarge1"] = 1
 end)
+
 AddLevel(GLOBAL.LEVELTYPE.SURVIVAL, {
 	id = "UNCOMPROMISING",
 	name = GLOBAL.STRINGS.UI.CUSTOMIZATIONSCREEN.PRESETLEVELS.UNCOMPROMISING,
@@ -436,67 +390,29 @@ AddLevel(GLOBAL.LEVELTYPE.SURVIVAL, {
 		antliontribute = "more", --unnecessary
 	},
 })
---GLOBAL.require("map/static_layouts/licepatch")
---[[local Layouts = GLOBAL.require("map/layouts").Layouts
-local StaticLayout = GLOBAL.require("map/static_layout")
 
-Layouts["licepatch"] = StaticLayout.Get("map/static_layouts/licepatch")
-AddTaskSetPreInitAny(function(tasksetdata)
-    if tasksetdata.location ~= "forest" then
-        return
-    end
-tasksetdata.set_pieces["licepatch"] = {count = 1, tasks = {"Squeltch"}}
-end)]]
---[[
-("BarePlain", function(room)						If you want it to effect the desert area, uncomment this
-room.contents.countprefabs=
-									{
-										trapdoor = function() return math.random(2,4) end,} --returned number for whole area should be multiplied between 2-4 due to multiple rooms
-end)
---]]
---[[
-	if GLOBAL.terrain.rooms.LightningBluffAntlion then
-		GLOBAL.terrain.rooms.LightningBluffAntlion.contents.distributeprefabs.sandhill = 0.4
-	end
-	
-	if GLOBAL.terrain.rooms.LightningBluffOasis then
-	GLOBAL.terrain.rooms.LightningBluffOasis.contents.distributeprefabs.sandhill = 0.6
-	end
-
-	if GLOBAL.terrain.rooms.LightningBluffLightning then
-		GLOBAL.terrain.rooms.LightningBluffLightning.contents.distributeprefabs.sandhill = 0.4
-	end
-	
-	if GLOBAL.terrain.rooms.BGLightningBluff then
-		GLOBAL.terrain.rooms.BGLightningBluff.contents.distributeprefabs.sandhill = 0.4
-	end
-
-
-	GLOBAL.terrain.filter.sandhill = {GLOBAL.GROUND.WOODFLOOR, GLOBAL.GROUND.CARPET, GLOBAL.GROUND.CHECKER, GLOBAL.GROUND.ROAD}
---]]
-
-	if GLOBAL.terrain.rooms.RuinedCity then
+if GLOBAL.terrain.rooms.RuinedCity then
 	GLOBAL.terrain.rooms.RuinedCity.contents.distributeprefabs.pawn_hopper = 0.2
-	end
+end
 
-	if GLOBAL.terrain.rooms.Vacant then
-		GLOBAL.terrain.rooms.Vacant.contents.distributeprefabs.pawn_hopper = 0.2
-	end
+if GLOBAL.terrain.rooms.Vacant then
+	GLOBAL.terrain.rooms.Vacant.contents.distributeprefabs.pawn_hopper = 0.2
+end
 	
-	if GLOBAL.terrain.rooms.Barracks then
-		GLOBAL.terrain.rooms.Barracks.contents.distributeprefabs.pawn_hopper = 0.2
-	end
+if GLOBAL.terrain.rooms.Barracks then
+	GLOBAL.terrain.rooms.Barracks.contents.distributeprefabs.pawn_hopper = 0.2
+end
 	
-	if GLOBAL.terrain.rooms.LabyrinthEntrance then
-		GLOBAL.terrain.rooms.LabyrinthEntrance.contents.distributeprefabs.pawn_hopper = 0.2
-	end
+if GLOBAL.terrain.rooms.LabyrinthEntrance then
+	GLOBAL.terrain.rooms.LabyrinthEntrance.contents.distributeprefabs.pawn_hopper = 0.2
+end
 	
-	if GLOBAL.terrain.rooms.Labyrinth then
-		GLOBAL.terrain.rooms.Labyrinth.contents.distributeprefabs.pawn_hopper_nightmare = 0.2
-	end
+if GLOBAL.terrain.rooms.Labyrinth then
+	GLOBAL.terrain.rooms.Labyrinth.contents.distributeprefabs.pawn_hopper_nightmare = 0.2
+end
 	
-	if GLOBAL.terrain.rooms.AtriumMazeEntrance then
-		GLOBAL.terrain.rooms.AtriumMazeEntrance.contents.distributeprefabs.pawn_hopper_nightmare = 0.2
-	end
+if GLOBAL.terrain.rooms.AtriumMazeEntrance then
+	GLOBAL.terrain.rooms.AtriumMazeEntrance.contents.distributeprefabs.pawn_hopper_nightmare = 0.2
+end
 
 modimport("init/init_food/init_food_worldgen")
