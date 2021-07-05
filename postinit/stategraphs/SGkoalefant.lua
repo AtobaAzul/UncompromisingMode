@@ -107,7 +107,6 @@ local states = {
 				inst.components.combat:ResetCooldown()
 				inst.AnimState:PlayAnimation("paw")
 				inst.SoundEmitter:PlaySound("dontstarve/creatures/koalefant/angry")
-				inst.components.locomotor.runspeed = 7*2.29  --should be equal to rook
 				
             end,
             
@@ -136,6 +135,7 @@ local states = {
             tags = {"moving", "charging", "busy", "running", "nointerrupt"},
             
             onenter = function(inst) 
+				inst.components.locomotor.runspeed = 7*2.29  --should be equal to rook
 				inst.components.combat:ResetCooldown()
                 inst.components.locomotor:RunForward()
                 if inst.components.combat.target and inst.components.combat.target:IsValid() then
@@ -186,6 +186,11 @@ local states = {
                     end
 									end ),
             },
+			
+
+			onexit = function(inst)
+				inst.components.locomotor.runspeed = 7
+			end,
             
             {   
                 EventHandler("animover", function(inst) 
