@@ -20,6 +20,11 @@ TUNING = GLOBAL.TUNING
 
 -- [              DSTU Related Overrides                  ]
 
+--moved outside of tuning.dstu
+if GetModConfigData("wortox") == true then
+TUNING.WORTOX_HEALTH = 150
+end
+	
 TUNING.DSTU = 
 {
 	----------------------------------------------------------------------------
@@ -93,7 +98,7 @@ TUNING.DSTU =
     RECIPE_CHANGE_PEROGI_PERISH = TUNING.PERISH_MED, --in days (from 20 to 10)
     RECIPE_CHANGE_BACONEGG_PERISH = TUNING.PERISH_MED,
     RECIPE_CHANGE_MEATBALL_HUNGER = TUNING.CALORIES_SMALL*4, -- (12.5 * 4) = 50, from 62.5
-    RECIPE_CHANGE_BUTTERMUFFIN_HEALTH = TUNING.HEALING_MED/2,
+    RECIPE_CHANGE_BUTTERMUFFIN_HEALTH = TUNING.HEALING_MED*1.5,
     
     --Limits to fillers
     CROCKPOT_RECIPE_TWIG_LIMIT = 1,
@@ -241,9 +246,6 @@ TUNING.DSTU =
     WORMWOOD_BURN_TIME = 6.66, --orig 4.3
     WORMWOOD_FIRE_DAMAGE = 1.50, -- orig 1.25
 	
-	--Wortox
-    WORTOX_HEALTH = 150,
-	
 	--Warly
     WARLY_SAME_OLD_COOLDOWN = total_day_time * 3,
 	WARLY_SAME_OLD_MULTIPLIERS = { .6, .5, .35, .2, .1 },
@@ -345,7 +347,6 @@ TUNING.AFFINITY_15_CALORIES_SUPERHUGE = 1.034
 
 TUNING.ARMORBRAMBLE_DMG = 10
 
-TUNING.WORTOX_HEALTH = 150
 
 TUNING.SLEEP_TICK_PERIOD = TUNING.SLEEP_TICK_PERIOD / 2
 
