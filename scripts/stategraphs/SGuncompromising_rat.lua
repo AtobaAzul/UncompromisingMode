@@ -16,6 +16,7 @@ local events =
 	CommonHandlers.OnDeath(),
 	CommonHandlers.OnLocomote(true, true),
 	EventHandler("trapped", function(inst) inst.sg:GoToState("trapped") end),
+	CommonHandlers.OnHop(),
 }
 
 local function play_carrat_scream(inst)
@@ -367,6 +368,37 @@ CommonStates.AddRunStates(states,
 	{
 		TimeEvent(0, PlayFootstep),
 	},
+})
+
+
+CommonStates.AddAmphibiousCreatureHopStates(states, 
+{ -- config
+	swimming_clear_collision_frame = 9 * FRAMES,
+},
+{ -- anims
+},
+{ -- timeline
+	hop_pre =
+	{
+		TimeEvent(0, function(inst) 
+			if inst:HasTag("swimming") then 
+				SpawnPrefab("splash_green").Transform:SetPosition(inst.Transform:GetWorldPosition()) 
+			end
+		end),
+	},
+	hop_pst = {
+		TimeEvent(4 * FRAMES, function(inst) 
+			if inst:HasTag("swimming") then 
+				inst.components.locomotor:Stop()
+				SpawnPrefab("splash_green").Transform:SetPosition(inst.Transform:GetWorldPosition()) 
+			end
+		end),
+		TimeEvent(6 * FRAMES, function(inst) 
+			if not inst:HasTag("swimming") then 
+                inst.components.locomotor:StopMoving()
+			end
+		end),
+	}
 })
 
 return StateGraph("uncompromising_rat", states, events, "emerge_fast", actionhandlers)

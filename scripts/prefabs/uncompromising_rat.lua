@@ -2,7 +2,7 @@ local assets =
 {
 	Asset("ANIM", "anim/uncompromising_rat.zip"),
 	Asset("ANIM", "anim/carrat_basic.zip"),
-	
+	Asset("ANIM", "anim/uncompromising_rat_water.zip"),
 	Asset("ANIM", "anim/uncompromising_rat_burrow.zip"),
 }
 
@@ -180,13 +180,13 @@ local function fn()
             inst.gooserippletask = inst:DoPeriodicTask(.25, DoRipple, FRAMES)
         end
 	
-	inst.Physics:ClearCollisionMask()
+	--[[inst.Physics:ClearCollisionMask()
     inst.Physics:CollidesWith(COLLISION.GROUND)
     --inst.Physics:CollidesWith(COLLISION.OBSTACLES)
     --inst.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
     inst.Physics:CollidesWith(COLLISION.GIANTS)
-    inst.Physics:Teleport(inst.Transform:GetWorldPosition())
+    inst.Physics:Teleport(inst.Transform:GetWorldPosition())]]
 	
 	inst.sounds = carratsounds
 	
@@ -199,6 +199,38 @@ local function fn()
 	
 	inst:SetBrain(brain)
 	
+	
+	
+	----------------------------
+		inst:AddComponent("embarker")
+		inst.components.embarker.embark_speed = inst.components.locomotor.walkspeed
+        inst.components.embarker.antic = true
+
+	    inst.components.locomotor:SetAllowPlatformHopping(true)
+		inst:AddComponent("amphibiouscreature")
+		inst.components.amphibiouscreature:SetBanks("carrat", "uncompromising_rat_water")
+        inst.components.amphibiouscreature:SetEnterWaterFn(
+            function(inst)
+				inst.AnimState:SetBuild("uncompromising_rat_water")
+                inst.landspeed = inst.components.locomotor.runspeed
+                inst.components.locomotor.runspeed = TUNING.HOUND_SWIM_SPEED
+                inst.hop_distance = inst.components.locomotor.hop_distance
+                inst.components.locomotor.hop_distance = 4
+            end)            
+        inst.components.amphibiouscreature:SetExitWaterFn(
+            function(inst)
+				inst.AnimState:SetBuild("uncompromising_rat")
+                if inst.landspeed then
+                    inst.components.locomotor.runspeed = inst.landspeed 
+                end
+                if inst.hop_distance then
+                    inst.components.locomotor.hop_distance = inst.hop_distance
+                end
+            end)
+	-------------------------
+	
+		inst.components.locomotor.pathcaps = { allowocean = true }
+		
 	inst:AddComponent("eater")
 	inst.components.eater:SetDiet({ FOODTYPE.HORRIBLE }, { FOODTYPE.HORRIBLE })
 	inst.components.eater.strongstomach = true
@@ -254,7 +286,7 @@ local function fn()
 	
 	MakeHauntablePanic(inst)
 	
-	MakeFeedableSmallLivestock(inst, TUNING.CARRAT.PERISH_TIME, nil, on_dropped)
+	--MakeFeedableSmallLivestock(inst, TUNING.CARRAT.PERISH_TIME, nil, on_dropped)
 	
 	MakeSmallBurnableCharacter(inst, "carrat_body")
 	MakeSmallFreezableCharacter(inst, "carrat_body")

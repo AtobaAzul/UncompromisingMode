@@ -135,12 +135,17 @@ end
 function CarratBrain:OnStart()
 	local stealnode = PriorityNode(
 	{
+		WhileNode(function() return not self.inst.sg:HasStateTag("jumping") end, "NotJumpingBehaviour",
+                PriorityNode({
 		DoAction(self.inst, function() return StealAction(self.inst) end, "steal", true ),
 		DoAction(self.inst, eat_food_action),
 		DoAction(self.inst, function() return EmptyChest(self.inst) end, "emptychest", true )
+		}, .25))
 	}, 0.25)
 	local root = PriorityNode(
-	{
+	{	
+		WhileNode(function() return not self.inst.sg:HasStateTag("jumping") end, "NotJumpingBehaviour",
+                PriorityNode({
 		WhileNode( function()
 			return self.inst.components.hauntable and self.inst.components.hauntable.panic
 		end, "PanicHaunted", Panic(self.inst)),
@@ -158,7 +163,8 @@ function CarratBrain:OnStart()
 		DoAction(self.inst, eat_food_action),
 		
 		Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("herd") end, MAX_WANDER_DIST),
-	}, 0.25)
+		}, 0.25))
+	}, .25)
 	self.bt = BT(self.inst, root)
 end
 
