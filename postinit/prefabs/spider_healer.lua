@@ -3,6 +3,16 @@ GLOBAL.setfenv(1, GLOBAL)
 
 ------------------------------------------------------------------
 
+local function SpawnHealFx(inst, fx_prefab, scale)
+    local x,y,z = inst.Transform:GetWorldPosition()
+    local fx = SpawnPrefab(fx_prefab)
+    fx.Transform:SetNoFaced()
+    fx.Transform:SetPosition(x,y,z)
+
+    scale = scale or 1
+    fx.Transform:SetScale(scale, scale, scale)
+end
+
 local function DoHeal(inst)
     local scale = 1.35
     SpawnHealFx(inst, "spider_heal_ground_fx", scale)

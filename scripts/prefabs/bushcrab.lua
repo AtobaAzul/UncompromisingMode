@@ -120,7 +120,7 @@ local function fn()
     inst:AddTag("canbetrapped")
     inst:AddTag("smallcreature")
     --inst:AddTag("spider")
-	--inst:AddTag("spider_hider")
+	inst:AddTag("spider_hider")
 	inst:AddTag("bushcrab")
 
     inst.AnimState:SetBank("spider_hider")
