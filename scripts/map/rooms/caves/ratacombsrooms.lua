@@ -5,14 +5,13 @@ require "map/room_functions"
 ----
 AddRoom("RattyStairs", {
 					colour={r=0,g=.9,b=0,a=.50},
-					value = GROUND.FOREST,
+					value = GROUND.GROUND_NOISE,
 					type = NODE_TYPE.Room,
 					contents =  {
 					                distributepercent = .3,
 					                distributeprefabs=
 					                {
                                         fireflies = 0.1,
-					                    molehill=.7,
 					                    grass = .05,
 					                    sapling=.5,
 					                    twiggytree=0.2,
@@ -20,9 +19,6 @@ AddRoom("RattyStairs", {
 					                    flint=.03,
 					                    berrybush=.02,
 					                    berrybush_juicy = 0.01,
-					                    mushtree_medium = 0.3,
-					                    mushtree_tall = 0.3,
-					                    mushtree_small = 0.3,
 										cavelight = 0.5,
 										cavelight_small = 0.5,
 										cavelight_tiny = 0.5,
@@ -39,7 +35,7 @@ AddRoom("RattyStairs", {
 
 AddRoom("RattySinkhole", {
 					colour={r=0,g=.9,b=0,a=.50},
-					value = GROUND.FOREST,
+					value = GROUND.GROUND_NOISE,
 					tags = {"RoadPoison"},
 					contents =  {
 					                distributepercent = .3,
@@ -54,9 +50,6 @@ AddRoom("RattySinkhole", {
 					                    flint=.03,
 					                    berrybush=.02,
 					                    berrybush_juicy = 0.01,
-					                    red_mushroom = 0.3,
-					                    blue_mushroom = 0.3,
-					                    green_mushroom = 0.3,
 										
 					                },
 					countprefabs = {
@@ -81,7 +74,7 @@ AddRoom("RattyWilds", {
             rock_flintless_med = 1.0,
             rock_flintless_low = 1.0,
             pillar_cave_flintless = 0.2,
-
+			ratgas_spawner = 3,
             uncompromising_ratherd = 1,
             goldnugget=.05,
             rocks=.1,
@@ -93,24 +86,59 @@ AddRoom("RattyWilds", {
 -- Rocky Plains
 AddRoom("RattyLink", {
     colour={r=0.7,g=0.7,b=0.7,a=0.9},
-    value = GROUND.FOREST,
+    value = GROUND.GROUND_NOISE,
     tags = {"Hutch_Fishbowl"},
-    contents =  {
-        distributepercent = .10,
-        distributeprefabs=
-        {
-            rock_flintless = 1.0,
-            rock_flintless_med = 1.0,
-            rock_flintless_low = 1.0,
-            pillar_cave_flintless = 0.2,
-
-            uncompromising_ratherd = 1,
-            goldnugget=.05,
-            rocks=.1,
-            flint=0.05,
-        },
-    }
+					contents =  {
+									countprefabs = {
+											uncompromising_ratburrow = function() return math.random(8, 12) end,
+    									},
+					                distributepercent = .5,
+					                distributeprefabs =
+					                {
+										rock1 = .8,
+										rock2 = .1,
+										goldnugget = .1,
+										flint = .1,
+                                        fireflies = 0.2,
+					                    --[[red_mushroom = .03,
+					                    green_mushroom = .02,
+					                    blue_mushroom = .002,]]
+										trees = {weight = 6, prefabs = {"evergreen", "evergreen_sparse"}},
+										cavelight = 0.05,
+										cavelight_small = 0.05,
+										cavelight_tiny = 0.05,
+					                },
+					            }
 })
+
+AddRoom("RatKingdomCaves", {
+					colour={r=.5,g=0.6,b=.080,a=.10},
+					value = GROUND.GROUND_NOISE,
+					--tags = {"Chester_Eyebone"},
+					contents =  {
+									countprefabs = {
+    										ratking = 1,
+											uncompromising_ratburrow = function() return math.random(8, 12) end,
+    									},
+					                distributepercent = .5,
+					                distributeprefabs =
+					                {
+										--rock1 = .8,
+										--rock2 = .1,
+										--goldnugget = .1,
+										flint = .1,
+                                        fireflies = 0.2,
+					                    red_mushroom = .03,
+					                    green_mushroom = .02,
+					                    blue_mushroom = .002,
+										trees = {weight = 6, prefabs = {"evergreen", "evergreen_sparse"}},
+										cavelight = 0.3,
+										cavelight_small = 0.1,
+										cavelight_tiny = 0.1,
+					                },
+					            }
+})
+
 local bgratty = {
     colour={r=0.7,g=0.7,b=0.7,a=0.9},
     value = GROUND.FOREST,
@@ -123,6 +151,7 @@ local bgratty = {
             rock_flintless_med = 1.0,
             rock_flintless_low = 1.0,
             pillar_cave_flintless = 0.2,
+			ratgas_spawner = 3,
         },
     }
 }

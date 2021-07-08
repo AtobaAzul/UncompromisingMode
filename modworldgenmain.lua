@@ -214,7 +214,7 @@ end)
 
 -----KoreanWaffle's Spawner Limiter Tag Adding Code
 --Add new map tags to storygen
-local MapTags = {"scorpions", "hoodedcanopy"}
+local MapTags = {"scorpions", "hoodedcanopy","rattygas"}
 AddGlobalClassPostConstruct("map/storygen", "Story", function(self)
     for k, v in pairs(MapTags) do
         self.map_tags.Tag[v] = function(tagdata) return "TAG", v end
@@ -279,15 +279,23 @@ GLOBAL.require("map/tasks/gianttrees")
 GLOBAL.require("map/tasks/ratacombs")
 GLOBAL.require("map/rooms/caves/ratacombsrooms")
 GLOBAL.require("map/rooms/forest/ratking")
-AddTaskPreInit("Dig that rock",function(task)
-	task.room_choices["RattySinkhole"] = 1
-end)
 
-AddTaskPreInit("Dig that rock",function(task)
+if GetModConfigData("caved") == false then
 
-task.room_choices["RatKingdom"] = 1
+    AddTaskSetPreInitAny(function(tasksetdata)
+		if tasksetdata.location ~= "forest" then
+			return
+		end
+		AddTaskPreInit("Dig that rock",function(task)
+			task.room_choices["RatKingdom"] = 1
+		end)
+	end)
+else
+	AddTaskPreInit("Dig that rock",function(task)
+		task.room_choices["RattySinkhole"] = 1
+	end)
+end
 
-end)
 
 AddTaskPreInit("Forest hunters",function(task) --Leave Forest Hunters in incase someone adds something to its setpieces.
 	task.room_choices={

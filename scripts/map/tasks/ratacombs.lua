@@ -20,8 +20,9 @@ AddTask("Ratty_Link", {
 		level_set_piece_blocker = true,
 		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland"},
 		room_choices={
-			["RattyLink"] = 2,
+			["RatKingdomCaves"] = 1,
 		},
+		background_room="RattyLink",
 		room_bg=GROUND.FOREST,
 		colour={r=.1,g=.1,b=.1,a=1},
 })
@@ -31,7 +32,7 @@ AddTask("Ratty_Maze", {
 		keys_given={KEYS.TIER2},
 		region_id = "ratacombs",
 		level_set_piece_blocker = true,
-		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland"},
+		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland","rattygas"},
 		room_choices={
 			["RattyWilds"] = function() return 3 + math.random(4) end,
 		},
@@ -44,7 +45,7 @@ AddTask("Ratty_Maze2", {
 		keys_given={},
 		region_id = "ratacombs",
 		level_set_piece_blocker = true,
-		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland"},
+		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland","rattygas"},
 		room_choices={
 			["RattyWilds"] = 5,
 		},
@@ -57,7 +58,7 @@ AddTask("Ratty_Maze3", {
 		keys_given={},
 		region_id = "ratacombs",
 		level_set_piece_blocker = true,
-		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland"},
+		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland","rattygas"},
 		room_choices={
 			["RattyWilds"] = 5,
 		},

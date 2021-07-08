@@ -245,4 +245,5 @@ return {
 	"um_spider_mutators",
 	"voorhams",
 	"ratking",
+	"ratgas",
 }
