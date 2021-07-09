@@ -19,11 +19,26 @@ local function DoHeal(inst)
     SpawnHealFx(inst, "spider_heal_fx", scale)
 
     local other_spiders = GetOtherSpiders(inst, TUNING.SPIDER_HEALING_RADIUS, {"spider", "spiderwhisperer", "spiderqueen"})
-    for i, spider in ipairs(other_spiders) do
+    local leader = inst.components.follower.leader
 
-        local heal_amount = spider:HasTag("spiderwhisperer") and 5 or TUNING.SPIDER_HEALING_AMOUNT
-        spider.components.health:DoDelta(heal_amount, false, inst.prefab)
-        SpawnHealFx(spider, "spider_heal_target_fx")
+    for i, spider in ipairs(other_spiders) do
+        local target = inst.components.combat.target
+
+        -- Don't heal the spider if it's targetting us, our leader or our leader's other followers
+        local targetting_us = target ~= nil and 
+                             (target == inst or (leader ~= nil and 
+                             (target == leader or leader.components.leader:IsFollower(target))))
+
+        -- Don't heal the spider if we're targetting it, or our leader is targetting it or our leader's other followers
+        local targetted_by_us = inst.components.combat.target == spider or (leader ~= nil and
+                                (leader.components.combat:TargetIs(spider) or
+                                leader.components.leader:IsTargetedByFollowers(spider)))
+
+        if not (targetting_us or targetted_by_us) then
+            local heal_amount = spider:HasTag("spiderwhisperer") and TUNING.HEALING_MEDSMALL or TUNING.SPIDER_HEALING_AMOUNT
+            spider.components.health:DoDelta(heal_amount, false, inst.prefab)
+            SpawnHealFx(spider, "spider_heal_target_fx")
+        end
     end
 
     inst.healtime = GetTime()

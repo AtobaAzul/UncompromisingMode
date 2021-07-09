@@ -7,13 +7,14 @@ SetSharedLootTable( 'spider_trapdoor',
 local function ShouldAcceptItem(inst, item, giver)
 
     local in_inventory = inst.components.inventoryitem.owner ~= nil
-    if in_inventory then
-        return false, "BUSY"
+    if in_inventory and not inst.components.eater:CanEat(item) then
+        return false, "SPIDERNOHAT"
     end
 
     return (giver:HasTag("spiderwhisperer") and inst.components.eater:CanEat(item)) or
            (item.components.equippable ~= nil and item.components.equippable.equipslot == EQUIPSLOTS.HEAD)
 end
+
 local function HasFriendlyLeader(inst, target)
     local leader = inst.components.follower.leader
     local target_leader = (target.components.follower ~= nil) and target.components.follower.leader or nil
@@ -53,57 +54,73 @@ function GetOtherSpiders(inst)
 end
 
 local function OnGetItemFromPlayer(inst, giver, item)
-    if inst.components.eater:CanEat(item) then  
+
+    if inst.components.eater:CanEat(item) then
         inst.components.eater:Eat(item)
 
-        local state = "eat"
         if inst.components.inventoryitem.owner ~= nil then
-            state = "idle"
+            inst.sg:GoToState("idle")
+        else
+            inst.sg:GoToState("eat", true)
         end
-
-        inst.sg:GoToState(state)
 
         local playedfriendsfx = false
         if inst.components.combat.target == giver then
             inst.components.combat:SetTarget(nil)
         elseif giver.components.leader ~= nil and
             inst.components.follower ~= nil then
-			if giver.components.minigame_participator == nil then
-	            giver:PushEvent("makefriend")
-				giver.components.leader:AddFollower(inst)
-			end
-            playedfriendsfx = true
-            inst.components.follower:AddLoyaltyTime(item.components.edible:GetHunger() * TUNING.SPIDER_LOYALTY_PER_HUNGER)
+            
+            if giver.components.minigame_participator == nil then
+                giver:PushEvent("makefriend")
+                giver.components.leader:AddFollower(inst)
+                playedfriendsfx = true
+            end
         end
 
         if giver.components.leader ~= nil then
-            local spiders = GetOtherSpiders(inst)
-            local maxSpiders = 3
+            local spiders = GetOtherSpiders(inst, 15) --note: also returns the calling instance of the spider in the list
+            local maxSpiders = TUNING.SPIDER_FOLLOWER_COUNT
 
             for i, v in ipairs(spiders) do
-                if maxSpiders <= 0 then
-                    break
-                end
-
-                if v.components.combat.target == giver then
-                    v.components.combat:SetTarget(nil)
-                elseif giver.components.leader ~= nil and
-                    v.components.follower ~= nil and
-                    v.components.follower.leader == nil then
-                    if not playedfriendsfx then
-                        giver:PushEvent("makefriend")
-                        playedfriendsfx = true
+                if v ~= inst then
+                    if maxSpiders <= 0 then
+                        break
                     end
-                    giver.components.leader:AddFollower(v)
-                    v.components.follower:AddLoyaltyTime(item.components.edible:GetHunger() * TUNING.SPIDER_LOYALTY_PER_HUNGER)
-                end
-                maxSpiders = maxSpiders - 1
 
-                if v.components.sleeper:IsAsleep() then
-                    v.components.sleeper:WakeUp()
+                    local effectdone = true
+
+                    if v.components.combat.target == giver then
+                        v.components.combat:SetTarget(nil)
+                    elseif giver.components.leader ~= nil and
+                        v.components.follower ~= nil and
+                        v.components.follower.leader == nil then
+                        if not playedfriendsfx then
+                            giver:PushEvent("makefriend")
+                            playedfriendsfx = true
+                        end
+                        giver.components.leader:AddFollower(v)
+                    else
+                        effectdone = false
+                    end
+
+                    if effectdone then
+                        maxSpiders = maxSpiders - 1
+    
+                        if v.components.sleeper:IsAsleep() then
+                            v.components.sleeper:WakeUp()
+                        end
+                    end
                 end
             end
         end
+    -- I also wear hats
+    elseif item.components.equippable ~= nil and item.components.equippable.equipslot == EQUIPSLOTS.HEAD then
+        local current = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+        if current ~= nil then
+            inst.components.inventory:DropItem(current)
+        end
+        inst.components.inventory:Equip(item)
+        inst.AnimState:Show("hat")
     end
 end
 
@@ -242,6 +259,7 @@ end
 
 local function OnStartLeashing(inst, data)
     --inst:SetHappyFace(true)
+    inst.components.inventoryitem.canbepickedup = true
 
     if inst.recipe then
         local leader = inst.components.follower.leader
@@ -253,6 +271,7 @@ end
 local function OnStopLeashing(inst, data)
     inst.defensive = false
     inst.no_targeting = false
+    inst.components.inventoryitem.canbepickedup = false
 
     --[[if not inst.bedazzled then
         inst:SetHappyFace(false)
@@ -367,8 +386,10 @@ local function create_common(build)
 
     inst:AddComponent("trader")
     inst.components.trader:SetAcceptTest(ShouldAcceptItem)
+    inst.components.trader:SetAbleToAcceptTest(ShouldAcceptItem)
     inst.components.trader.onaccept = OnGetItemFromPlayer
     inst.components.trader.onrefuse = OnRefuseItem
+    inst.components.trader.deleteitemonaccept = false
 
     ------------------
 
