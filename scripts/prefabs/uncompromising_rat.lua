@@ -202,6 +202,7 @@ local function fn()
 	
 	
 	----------------------------
+	if TheWorld ~= nil and TheWorld.ismastershard then
 		inst:AddComponent("embarker")
 		inst.components.embarker.embark_speed = inst.components.locomotor.walkspeed
         inst.components.embarker.antic = true
@@ -230,6 +231,7 @@ local function fn()
 	-------------------------
 	
 		inst.components.locomotor.pathcaps = { allowocean = true }
+	end
 		
 	inst:AddComponent("eater")
 	inst.components.eater:SetDiet({ FOODTYPE.HORRIBLE }, { FOODTYPE.HORRIBLE })
