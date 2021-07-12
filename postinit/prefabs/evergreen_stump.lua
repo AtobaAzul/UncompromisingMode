@@ -82,7 +82,9 @@ end
 
 local function OnTimerDone2(inst, data)
     if data.name == "stumptime" then
-		if math.random() > 0.5 then
+		local scaling = TheWorld.state.cycles / 100
+		
+		if math.random() < (0.15 + scaling) then
 			inst.stumplingambush = true
 		end
     end
