@@ -131,7 +131,7 @@ local function OnEat_Electric(inst, data)
 		if data.food.prefab == "goatmilk" or data.food.prefab == "zaspberry" then
 			inst.components.talker:Say(GetString(inst, "ANNOUNCE_CHARGE"))
 			SpawnPrefab("electricchargedfx"):SetTarget(inst)
-            inst.components.sanity:DoDelta(-TUNING.SANITY_SMALL)
+            inst.components.sanity:DoDelta(-TUNING.SANITY_MEDLARGE)
 			startovercharge(inst, CalcDiminishingReturns(inst.charge_time, TUNING.TOTAL_DAY_TIME / 4))
 		elseif data.food.prefab == "zaspberryparfait" or 
 		data.food.prefab == "voltgoatjelly" or
@@ -141,7 +141,7 @@ local function OnEat_Electric(inst, data)
 		data.food.prefab == "voltgoatjelly_spice_sugar" then
 			inst.components.talker:Say(GetString(inst, "ANNOUNCE_CHARGE"))
 			SpawnPrefab("electricchargedfx"):SetTarget(inst)
-            inst.components.sanity:DoDelta(-TUNING.SANITY_MEDLARGE)
+            inst.components.sanity:DoDelta(-TUNING.SANITY_LARGE)
 			startovercharge(inst, CalcDiminishingReturns(inst.charge_time, TUNING.TOTAL_DAY_TIME / 2))
 		end
     end
