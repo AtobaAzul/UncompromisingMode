@@ -13,6 +13,24 @@ local function SpawnHealFx(inst, fx_prefab, scale)
     fx.Transform:SetScale(scale, scale, scale)
 end
 
+local SPIDER_TAGS = { "spider" }
+local SPIDER_IGNORE_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
+local function GetOtherSpiders(inst, radius, tags)
+    tags = tags or SPIDER_TAGS
+    local x, y, z = inst.Transform:GetWorldPosition()
+    
+    local spiders = TheSim:FindEntities(x, y, z, radius, nil, SPIDER_IGNORE_TAGS, tags)
+    local valid_spiders = {}
+
+    for _, spider in ipairs(spiders) do
+        if spider:IsValid() and not spider.components.health:IsDead() and not spider:HasTag("playerghost") then
+            table.insert(valid_spiders, spider)
+        end
+    end
+
+    return valid_spiders
+end
+
 local function DoHeal(inst)
     local scale = 1.35
     SpawnHealFx(inst, "spider_heal_ground_fx", scale)
