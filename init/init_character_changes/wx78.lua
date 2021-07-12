@@ -125,6 +125,28 @@ local function OnMoistureDelta(inst)
     end
 end
 
+
+local function OnEat_Electric(inst, data)
+    if data.food ~= nil then
+		if data.food.prefab == "goatmilk" or data.food.prefab == "zaspberry" then
+			inst.components.talker:Say(GetString(inst, "ANNOUNCE_CHARGE"))
+			SpawnPrefab("electricchargedfx"):SetTarget(inst)
+            inst.components.sanity:DoDelta(-TUNING.SANITY_SMALL)
+			startovercharge(inst, CalcDiminishingReturns(inst.charge_time, TUNING.TOTAL_DAY_TIME / 4))
+		elseif data.food.prefab == "zaspberryparfait" or 
+		data.food.prefab == "voltgoatjelly" or
+		data.food.prefab == "voltgoatjelly_spice_chili" or
+		data.food.prefab == "voltgoatjelly_spice_garlic" or
+		data.food.prefab == "voltgoatjelly_spice_salt" or
+		data.food.prefab == "voltgoatjelly_spice_sugar" then
+			inst.components.talker:Say(GetString(inst, "ANNOUNCE_CHARGE"))
+			SpawnPrefab("electricchargedfx"):SetTarget(inst)
+            inst.components.sanity:DoDelta(-TUNING.SANITY_MEDLARGE)
+			startovercharge(inst, CalcDiminishingReturns(inst.charge_time, TUNING.TOTAL_DAY_TIME / 2))
+		end
+    end
+end
+
 env.AddPrefabPostInit("wx78", function(inst)
 	if not TheWorld.ismastersim then
 		return
@@ -139,4 +161,5 @@ env.AddPrefabPostInit("wx78", function(inst)
 	end
 	
 	inst:ListenForEvent("moisturedelta", OnMoistureDelta)
+    inst:ListenForEvent("oneat", OnEat_Electric)
 end)
