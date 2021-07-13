@@ -6,7 +6,7 @@ env.AddStategraphPostInit("pig", function(inst)
 local events =
 {	
     EventHandler("doattack", function(inst, data) 
-        if inst:HasTag("pigattacker") and (data.target:HasTag("pigattacker") and not data.target:HasTag("werepig") or inst:HasTag("manrabbit") and data.target:HasTag("manrabbit") then
+        if inst:HasTag("pigattacker") and data.target:HasTag("pigattacker") and not data.target:HasTag("werepig") or inst:HasTag("manrabbit") and data.target:HasTag("manrabbit") then
             inst.sg:GoToState("refuse", data.target)
             inst.components.combat:SetTarget(nil)
 		else

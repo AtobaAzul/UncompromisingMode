@@ -36,7 +36,12 @@ local function fnspawner()
         return inst
 end
 
-
+local function DensityCheck(inst)
+	local x,y,z = inst.Transform:GetWorldPosition()
+	if #TheSim:FindEntities(x,y,z,4,{"ratgas"}) > 2 then
+		inst:Remove()
+	end
+end
 local function fnmist()
 	local inst = CreateEntity()
 	inst.entity:AddTransform()
@@ -45,7 +50,7 @@ local function fnmist()
 	
 	inst:AddTag("FX")
 	inst:AddTag("NOCLICK")
-	inst:AddTag("marshmist")
+	inst:AddTag("ratgas")
     inst.AnimState:SetBuild("marshmist")
     inst.AnimState:SetBank("marshmist")
     inst.AnimState:PlayAnimation("idle", true)
@@ -55,10 +60,11 @@ local function fnmist()
     inst.AnimState:SetSortOrder(1)
 	inst.AnimState:SetScale(10, 8, 5)
 	inst:AddComponent("areaaware")
-	inst:DoTaskInTime(0.1,function(inst)
+	inst:DoTaskInTime(0.1*math.random(1,10),function(inst)
 		if not inst.components.areaaware:CurrentlyInTag("rattygas") then
 			inst:Remove()
 		end
+		DensityCheck(inst)
 	end)
 	inst.AnimState:SetMultColour(0, 0, 0, 0.15)
 

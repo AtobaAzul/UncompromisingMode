@@ -74,8 +74,8 @@ AddRoom("RattyWilds", {
             rock_flintless_med = 1.0,
             rock_flintless_low = 1.0,
             pillar_cave_flintless = 0.2,
-			ratgas_spawner = 3,
-            uncompromising_ratherd = 1,
+			ratgas_spawner = 2.5,
+            --uncompromising_ratherd = 1,
             goldnugget=.05,
             rocks=.1,
             flint=0.05,
@@ -89,9 +89,9 @@ AddRoom("RattyLink", {
     value = GROUND.GROUND_NOISE,
     tags = {"Hutch_Fishbowl"},
 					contents =  {
-									countprefabs = {
-											uncompromising_ratburrow = function() return math.random(8, 12) end,
-    									},
+									--countprefabs = {
+											--uncompromising_ratburrow = function() return math.random(8, 12) end,
+    									--},
 					                distributepercent = .5,
 					                distributeprefabs =
 					                {
@@ -118,7 +118,7 @@ AddRoom("RatKingdomCaves", {
 					contents =  {
 									countprefabs = {
     										ratking = 1,
-											uncompromising_ratburrow = function() return math.random(8, 12) end,
+											--uncompromising_ratburrow = function() return math.random(8, 12) end,
     									},
 					                distributepercent = .5,
 					                distributeprefabs =
@@ -151,7 +151,7 @@ local bgratty = {
             rock_flintless_med = 1.0,
             rock_flintless_low = 1.0,
             pillar_cave_flintless = 0.2,
-			ratgas_spawner = 3,
+			ratgas_spawner = 2.5,
         },
     }
 }
