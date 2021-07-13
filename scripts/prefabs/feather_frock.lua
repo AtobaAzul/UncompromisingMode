@@ -18,6 +18,10 @@ local function SpawnThorns(inst, feather, owner)
 	local impactfx = SpawnPrefab("impact")
 	inst.fxscale = 1
 	inst.speedboost = 0
+	
+	if feather == "malbatross" then
+		inst.speedboost = 1
+	end
 
     local x, y, z = inst.Transform:GetWorldPosition()
     for i, v in ipairs(TheSim:FindEntities(x, y, z, 5, COMBAT_TARGET_TAGS, NO_TAGS_NO_PLAYERS)) do
@@ -43,7 +47,7 @@ local function SpawnThorns(inst, feather, owner)
 						v.components.combat:GetAttacked(owner, 40)
 						
 						inst.fxscale = 1.5
-					elseif feather == "crow" and v.components.burnable ~= nil then
+					elseif feather == "crow" and v.components.locomotor ~= nil then
 						local debuffkey = inst.prefab
 	
 						if v._wingsuit_speedmulttask ~= nil then
@@ -60,7 +64,6 @@ local function SpawnThorns(inst, feather, owner)
 						SpawnPrefab("shockotherfx"):SetFXOwner(owner)
 						v.components.combat:GetAttacked(owner, 10)
 					elseif feather == "malbatross" then
-						inst.speedboost = 1
 						v.components.combat:GetAttacked(owner, 20)
 					end
 				end
