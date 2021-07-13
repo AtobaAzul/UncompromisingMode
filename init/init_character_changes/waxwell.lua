@@ -87,15 +87,18 @@ local function onread(inst, reader)
         end
     end
 
-    reader.components.inventory:ConsumeByName("nightmarefuel", TUNING.DSTU.SHADOWWAXWELL_FUEL_COST)
 
 	local readx, ready, readz = reader.Transform:GetWorldPosition()
 	local shadowmax = reader.components.petleash:SpawnPetAt(readx, ready, readz, "old_shadowwaxwell")
 	
-	shadowmax:DoTaskInTime(0, function(shadowmax) shadowmax.sg:GoToState("jumpout") end)
-	reader.components.health:DoDelta(-TUNING.DSTU.SHADOWWAXWELL_HEALTH_COST)
-	reader.components.sanity:RecalculatePenalty()
-	inst.SoundEmitter:PlaySound("dontstarve/maxwell/shadowmax_appear")
+	if shadowmax ~= nil then
+		reader.components.inventory:ConsumeByName("nightmarefuel", TUNING.DSTU.SHADOWWAXWELL_FUEL_COST)
+		shadowmax:DoTaskInTime(0, function(shadowmax) shadowmax.sg:GoToState("jumpout") end)
+		reader.components.health:DoDelta(-TUNING.DSTU.SHADOWWAXWELL_HEALTH_COST)
+		reader.components.sanity:RecalculatePenalty()
+		inst.SoundEmitter:PlaySound("dontstarve/maxwell/shadowmax_appear")
+	end
+	
 	return true
 end
 
