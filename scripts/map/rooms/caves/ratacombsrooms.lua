@@ -1,13 +1,22 @@
 require "map/room_functions"
 
+local Layouts = require ("map/layouts").Layouts
+local StaticLayout = require ("map/static_layout")
+
+Layouts["cave_exit_ratacombs"] = StaticLayout.Get("map/static_layouts/cave_exit_ratacombs")
+Layouts["cave_entrance_ratacombs"] = StaticLayout.Get("map/static_layouts/cave_entrance_ratacombs")
+Layouts["ratking"] = StaticLayout.Get("map/static_layouts/ratking")
 ----
---Ratacombss
+--Ratacombs
 ----
 AddRoom("RattyStairs", {
 					colour={r=0,g=.9,b=0,a=.50},
 					value = GROUND.GROUND_NOISE,
 					type = NODE_TYPE.Room,
 					contents =  {
+							        countstaticlayouts = {
+										["cave_exit_ratacombs"] = 1,
+									},
 					                distributepercent = .3,
 					                distributeprefabs=
 					                {
@@ -25,10 +34,7 @@ AddRoom("RattyStairs", {
 										flower_cave = 0.1,
 										flower_cave_double = 0.05,
 										flower_cave_triple = 0.05,	
-					                },
-							countprefabs = {
-										cave_exit_ratacombs = 1,
-    									},									
+					                },								
 					            }
 
 })
@@ -38,6 +44,9 @@ AddRoom("RattySinkhole", {
 					value = GROUND.GROUND_NOISE,
 					tags = {"RoadPoison"},
 					contents =  {
+									countstaticlayouts = {
+										["cave_entrance_ratacombs"] = 1,
+									},
 					                distributepercent = .3,
 					                distributeprefabs=
 					                {
@@ -52,9 +61,6 @@ AddRoom("RattySinkhole", {
 					                    berrybush_juicy = 0.01,
 										
 					                },
-					countprefabs = {
-										cave_entrance_ratacombs = 1,
-    								},
 					            }
 
 })
@@ -116,10 +122,9 @@ AddRoom("RatKingdomCaves", {
 					value = GROUND.GROUND_NOISE,
 					--tags = {"Chester_Eyebone"},
 					contents =  {
-									countprefabs = {
-    										ratking = 1,
-											--uncompromising_ratburrow = function() return math.random(8, 12) end,
-    									},
+									countstaticlayouts = {
+										["ratking"] = 1,
+									},
 					                distributepercent = .5,
 					                distributeprefabs =
 					                {

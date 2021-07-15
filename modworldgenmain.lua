@@ -322,6 +322,12 @@ AddTaskSetPreInitAny(function(tasksetdata)
 	table.insert(tasksetdata.tasks,"Ratty_Maze")
 	table.insert(tasksetdata.tasks,"Ratty_Maze2")
 	table.insert(tasksetdata.tasks,"Ratty_Maze3")
+	
+	if tasksetdata.required_prefabs ~= nil then
+		table.insert(tasksetdata.required_prefabs,"ratking")
+	else
+		tasksetdata.required_prefabs = {"ratking"}
+	end
 end)
 
 local Layouts = GLOBAL.require("map/layouts").Layouts
