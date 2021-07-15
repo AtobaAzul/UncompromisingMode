@@ -3,7 +3,7 @@ local easing = require("easing")
 local brain = require "brains/snowmongbrain"
 local assets =
 {
-	Asset("ANIM", "anim/giant_grub.zip")
+	Asset("ANIM", "anim/snowmong.zip"),
 }
 
 local prefabs =
@@ -195,8 +195,8 @@ local function fn(Sim)
 	
 	--inst.components.freezable:SetResistance(999)
 
-	inst.AnimState:SetBank("giant_grub")
-	inst.AnimState:SetBuild("giant_grub")
+	inst.AnimState:SetBank("snowmong")
+	inst.AnimState:SetBuild("snowmong")
 	inst.AnimState:PlayAnimation("idle", true)
 
 	inst:AddTag("scarytoprey")

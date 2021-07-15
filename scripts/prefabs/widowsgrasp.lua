@@ -7,37 +7,35 @@ local assets =
 }
 
 
-local function onequip(inst, owner)
-    
-    owner.AnimState:OverrideSymbol("swap_object", "swap_widowsgrasp", "swap_widowsgrasp")
-	
+local function onequip(inst, owner)  
+    owner.AnimState:OverrideSymbol("swap_object", "swap_widowsgrasp", "swap_widowsgrasp")	
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 	owner:AddTag("widowsgrasp")
-	
 end
 
 local function onunequip(inst, owner)
-
     owner.AnimState:Hide("ARM_carry")
     owner.AnimState:Show("ARM_normal")
 	owner:RemoveTag("widowsgrasp")
-
 end
 
 
 -------------------------------------------------------------------------- Less usage on small cocoons, more on larger cocoons
 local function onattack(inst,attaker,target)
-if inst.components.finiteuses.current > 0 and inst.components.finiteuses.current ~= nil then
-if target:HasTag("mediumcocoon") then
-inst.components.finiteuses:Use(1)
-end
-if target:HasTag("largecocoon") then
-inst.components.finiteuses:Use(2)
-end
-else
-inst.components.finiteuses.onfinished(inst)
-end
+	if target:HasTag("webbedcreature") then
+		target.components.health:Kill()
+	end
+	if inst.components.finiteuses.current > 0 and inst.components.finiteuses.current ~= nil then
+		if target:HasTag("mediumcocoon") then
+			inst.components.finiteuses:Use(1)
+		end
+		if target:HasTag("largecocoon") then
+			inst.components.finiteuses:Use(2)
+		end
+	else
+		inst.components.finiteuses.onfinished(inst)
+	end
 end
 --------------------------------------------------------------------------
 local function fn()
