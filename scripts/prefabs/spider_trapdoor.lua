@@ -325,7 +325,8 @@ local function create_common(build)
     inst.components.locomotor:SetSlowMultiplier( 1 )
     inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = true }
-
+	inst.components.locomotor:SetAllowPlatformHopping(true)
+	
     inst:SetStateGraph("SGspider")
 
     inst:AddComponent("lootdropper")
@@ -404,7 +405,9 @@ local function create_common(build)
 	
     MakeFeedableSmallLivestock(inst, TUNING.SPIDER_PERISH_TIME)
     MakeHauntablePanic(inst)
-
+	
+	inst:AddComponent("embarker")
+	inst:AddComponent("drownable")
     inst:SetBrain(brain)
 
     inst:ListenForEvent("attacked", OnAttacked)
