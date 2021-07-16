@@ -16,7 +16,7 @@ local events =
 	end),
 	
     EventHandler("doleapattack", function(inst,data)
-                                if inst.components.health and not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") then
+                                if not inst.components.amphibiouscreature.in_water and inst.components.health and not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") then
                                     --inst.sg:GoToState("leap_attack_pre", data.target)
 									inst.sg:GoToState("leap_attack", data.target)
                                 end
@@ -230,6 +230,12 @@ local states =
         end,
 
         onupdate = function(inst)
+		
+			if inst.components.amphibiouscreature.in_water then
+				inst.sg:GoToState("idle")
+				return
+			end
+			
             local percent = inst.AnimState:GetCurrentAnimationTime () / inst.AnimState:GetCurrentAnimationLength()
             local xdiff = inst.sg.statemem.targetpos.x - inst.sg.statemem.startpos.x
             local zdiff = inst.sg.statemem.targetpos.z - inst.sg.statemem.startpos.z

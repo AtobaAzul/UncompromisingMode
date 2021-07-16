@@ -910,7 +910,7 @@ local function fnmagma()
 end
 
 local function fnspore()
-    local inst = fncommon("hound", "hound_spore", nil, nil, nil, {amphibious = true})
+    local inst = fncommon("hound", "hound_spore_ocean", nil, nil, nil, {amphibious = true})
 
     if not TheWorld.ismastersim then
         return inst
