@@ -18,33 +18,36 @@ local function OnBlocked(owner, data, inst)
     end
 end
 
-local function SpikeAttack(owner, inst)
-
-	local x, y, z = owner.Transform:GetWorldPosition()
-    local nearbymonster = TheSim:FindEntities(x, y, z, 4.5, { "_combat" }, { "player", "companion", "abigail", "shadow" }, { "largecreature", "monster", "hostile", "scarytoprey", "epic" })
+local function SpikeAttack(inst)
 	
-    if #nearbymonster > 0 then
-        --V2C: tiny CD to limit chain reactions
-
-        SpawnPrefab("bramblefx_armor"):SetFXOwner(owner)
-
-        if owner.SoundEmitter ~= nil then
-            owner.SoundEmitter:PlaySound("dontstarve/common/together/armor/cactus")
-        end
-		
-		inst.components.armor:TakeDamage(5)
-		
-    end
-	
-	if owner.spiketask ~= nil then
-		owner.spiketask:Cancel()
-		owner.spiketask = nil
+	if inst.spiketask ~= nil then
+		inst.spiketask:Cancel()
+		inst.spiketask = nil
 	end
 	
-	if owner.spikeattack == nil then
-		owner.spiketask = owner:DoTaskInTime(2, function(owner) SpikeAttack(owner, inst) end)
-	end
+	local owner = inst.components.inventoryitem.owner
 	
+	if owner ~= nil then
+		local x, y, z = owner.Transform:GetWorldPosition()
+		local nearbymonster = TheSim:FindEntities(x, y, z, 4.5, { "_combat" }, { "player", "companion", "abigail", "shadow" }, { "largecreature", "monster", "hostile", "scarytoprey", "epic" })
+		
+		if #nearbymonster > 0 then
+			--V2C: tiny CD to limit chain reactions
+
+			SpawnPrefab("bramblefx_armor"):SetFXOwner(owner)
+
+			if inst.SoundEmitter ~= nil then
+				inst.SoundEmitter:PlaySound("dontstarve/common/together/armor/cactus")
+			end
+			
+			inst.components.armor:TakeDamage(5)
+			
+		end
+		
+		if inst.spikeattack == nil then
+			inst.spiketask = inst:DoTaskInTime(2, function(inst) SpikeAttack(inst) end)
+		end
+	end
 end
 
 local function onequip(inst, owner) 
@@ -81,23 +84,27 @@ env.AddPrefabPostInit("armor_bramble", function(inst)
 		if _SetOnEquip ~= nil then
 		   _SetOnEquip(inst, owner)
 		end
-	
-		if owner.spiketask == nil then
-			owner.spiketask = owner:DoTaskInTime(2, function(owner) SpikeAttack(owner, inst) end)
+		
+		if inst.spiketask ~= nil then
+			inst.spiketask:Cancel()
+			inst.spiketask = nil
 		end
-
+	
+		if inst.spiketask == nil then
+			inst.spiketask = inst:DoTaskInTime(2, function(inst) SpikeAttack(inst) end)
+		end
 	end
 	
 	local _SetOnUnequip = inst.components.equippable.onunequipfn
 
 	inst.components.equippable.onunequipfn = function(inst, owner)
+		if inst.spiketask ~= nil then
+			inst.spiketask:Cancel()
+			inst.spiketask = nil
+		end
+		
 		if _SetOnUnequip ~= nil then
 		   _SetOnUnequip(inst, owner)
-		end
-	
-		if owner.spiketask ~= nil then
-			owner.spiketask:Cancel()
-			owner.spiketask = nil
 		end
 
 	end
