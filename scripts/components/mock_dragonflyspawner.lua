@@ -433,7 +433,7 @@ end
 
 local function SummonMonsterFullMoon(player)
 	if TheWorld.state.cycles > 50 and TheWorld.state.issummer and TheWorld.state.isfullmoon and not TheWorld.state.isalterawake then
-		_timetoattack = 60
+		_timetoattack = 50
 		self.inst:StartUpdatingComponent(self)
 	end
 end

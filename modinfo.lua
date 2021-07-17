@@ -206,7 +206,7 @@ configuration_options =
 			{description = "Triple", data = 3},
 			{description = "Quadruple", data = 4},
 		},
-		default = 1,
+		default = 2,
 	},
 	
 	Header("--------------------"),
