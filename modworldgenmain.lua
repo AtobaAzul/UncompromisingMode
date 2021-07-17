@@ -337,6 +337,30 @@ Layouts["hooded_town"] = StaticLayout.Get("map/static_layouts/hooded_town")
 Layouts["rose_garden"] = StaticLayout.Get("map/static_layouts/rose_garden")
 Layouts["hf_holidays"] = StaticLayout.Get("map/static_layouts/hf_holidays")
 
+--[[Layouts["RatLockBlocker1"] = 						
+						{
+							type = LAYOUT.CIRCLE_EDGE,
+							start_mask = PLACE_MASK.NORMAL,
+							fill_mask = PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+							layout_position = LAYOUT_POSITION.CENTER,
+							ground_types = {GROUND.ROCKY},
+							defs =
+								{
+								 	rocks = { "rock"},
+								},
+							count =
+								{
+									rocks = 55,
+								},
+							scale = 4.0,
+						}]]
+
+
+
+
+
+
+
 AddRoomPreInit("HoodedTown", function(room)
 	if not room.contents.countstaticlayouts then
 		room.contents.countstaticlayouts = {}

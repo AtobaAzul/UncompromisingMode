@@ -163,3 +163,5 @@ local bgratty = {
 
 AddRoom("BGRattyCave", bgratty)
 AddRoom("BGRattyCaveRoom", Roomify(bgratty))
+
+--AddRoom("RattyWall", MakeSetpieceBlockerRoom("RatLockBlocker1"))
