@@ -19,7 +19,7 @@ AddTask("Ratty_Link", {
 		region_id = "ratacombs",
 		level_set_piece_blocker = true,
 		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland"},
-		--entrance_room= "RattyWall",
+		entrance_room= "RattyWall",
 		room_choices={
 			["RatKingdomCaves"] = 1,
 		},

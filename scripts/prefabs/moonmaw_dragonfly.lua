@@ -263,6 +263,7 @@ local function ShouldWake(inst)
 end
 
 local function OnCollide(inst, other)
+	if not other:HasTag("giant_tree") then
         inst:DoTaskInTime(2*FRAMES, function()
             if other and other.components.workable and other.components.workable.workleft > 0 then
                 SpawnPrefab("collapse_small").Transform:SetPosition(other:GetPosition():Get())
@@ -275,6 +276,7 @@ local function OnCollide(inst, other)
                 other.components.workable:Destroy(inst)
             end
         end)
+	end
 end
 
 local function OnSleep(inst)

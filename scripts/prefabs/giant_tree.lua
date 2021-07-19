@@ -1,3 +1,21 @@
+require "prefabutil"
+
+
+local function InitializePathFinding(inst)
+	print("I'm initializing pathfinding")
+    local x, _, z = inst.Transform:GetWorldPosition()
+	TheWorld.Pathfinder:AddWall(x, 0, z)
+	for i = 0.25,10,0.25 do
+		for j = 0.25,10,0.25 do
+			TheWorld.Pathfinder:AddWall(x - i, 0, z - j)
+			TheWorld.Pathfinder:AddWall(x - i, 0, z + j)
+			TheWorld.Pathfinder:AddWall(x + i, 0, z - j)
+			TheWorld.Pathfinder:AddWall(x + i, 0, z + j)
+		end
+    end
+end
+
+
 local assets =
 {
 Asset("ANIM", "anim/giant_tree.zip"),
@@ -444,7 +462,7 @@ end
 local function Deletus(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 
-	local tree = TheSim:FindEntities(x, y, z, 6, { "giant_tree" })
+	local tree = TheSim:FindEntities(x, y, z, 8, { "giant_tree" })
 	
 		for i, v in ipairs(tree) do
 			if v ~= inst and v:IsValid() and not v:IsInLimbo() then
@@ -473,11 +491,17 @@ local function makefn()
         inst.AnimState:SetBuild("giant_tree")
         inst.AnimState:PlayAnimation("damaged-0", true)
 
-        inst.entity:SetPristine()
+
+
+		-----------------------
+        inst:DoTaskInTime(0, InitializePathFinding)
+		-----------------------
+		inst.entity:SetPristine()
 		
         if not TheWorld.ismastersim then
             return inst
         end
+
 		
 		inst:AddComponent("workable")
 		inst.components.workable:SetWorkAction(ACTIONS.CHOP)
@@ -530,6 +554,7 @@ local function makeinfested()
 		inst.entity:AddSoundEmitter()
 		inst.entity:AddMiniMapEntity()
 		inst.entity:AddDynamicShadow()
+		
 		inst:AddTag("tree")
 		inst:AddTag("giant_tree")
 		inst.MiniMapEntity:SetIcon("giant_tree.tex")
@@ -542,11 +567,15 @@ local function makeinfested()
         inst.AnimState:SetBuild("giant_tree_infested")
         inst.AnimState:PlayAnimation("damaged-0", true)
 
+		-----------------------	
+        inst:DoTaskInTime(0, InitializePathFinding)
+		-----------------------
         inst.entity:SetPristine()
 		
         if not TheWorld.ismastersim then
             return inst
         end
+		
         inst:DoTaskInTime(0, OnInit)		
 		inst:AddComponent("workable")
 		inst.components.workable:SetWorkAction(ACTIONS.CHOP)
