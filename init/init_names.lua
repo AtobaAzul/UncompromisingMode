@@ -3,7 +3,8 @@ STRINGS = GLOBAL.STRINGS.NAMES
 UI = GLOBAL.STRINGS.UI
 
 	STRINGS.UNCOMPROMISING_RAT = "Rat" -- Maybe change the name with a pun with Robber or Raider, any idea ?
-	STRINGS.UNCOMPROMISING_PACKRAT = "Pack Rat"
+	STRINGS.UNCOMPROMISING_CAVERAT = "Cave Rat" -- The aggressive cousin
+	STRINGS.UNCOMPROMISING_PACKRAT = "Pack Rat" -- The hoarding cousin
 	STRINGS.UNCOMPROMISING_RATHERD = "Rat Burrow"
 	STRINGS.UNCOMPROMISING_RATBURROW = "Rat Burrow"
 	STRINGS.GASMASK = "Goose Mask"

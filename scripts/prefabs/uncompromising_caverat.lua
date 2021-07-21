@@ -1,10 +1,7 @@
 local assets =
 {
-	Asset("ANIM", "anim/uncompromising_rat.zip"),
 	Asset("ANIM", "anim/uncompromising_caverat.zip"),
 	Asset("ANIM", "anim/carrat_basic.zip"),
-	Asset("ANIM", "anim/uncompromising_rat_water.zip"),
-	Asset("ANIM", "anim/uncompromising_rat_burrow.zip"),
 }
 
 local prefabs =
@@ -85,8 +82,8 @@ local function OnPickup(inst, data)
 			inst._item:AddComponent("pickable")
 			inst._item.components.pickable.quickpick = true
 			inst._item.components.pickable.canbepicked = true
-			inst._item.components.pickable.onpickedfn = function(inst, picker)
-				--inst.components.inventory:DropEverything()
+			inst._item.components.pickable.onpickedfn = function()
+				inst.components.inventory:DropEverything()
 				inst:RemoveTag("carrying")
 				inst._item:Remove()
 			end
@@ -247,151 +244,6 @@ local function fn()
 	inst.components.combat:SetAttackPeriod(TUNING.DSTU.RAIDRAT_ATTACK_PERIOD)
 	inst.components.combat:SetRange(TUNING.DSTU.RAIDRAT_ATTACK_RANGE)
 	inst.components.combat.hiteffectsymbol = "carrat_body"
-	
-	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(TUNING.DSTU.RAIDRAT_HEALTH)
-	
-	inst:AddComponent("lootdropper")
-	inst.components.lootdropper:AddRandomLoot("monstersmallmeat", 0.34)
-	inst.components.lootdropper:AddRandomLoot("disease_puff", 0.34)
-	inst.components.lootdropper:AddRandomLoot("rat_tail", 0.34)
-	inst.components.lootdropper.numrandomloot = 1
-	
-	inst:AddComponent("sleeper")
-    inst.components.sleeper:SetSleepTest(ShouldSleep)
-    inst.components.sleeper:SetWakeTest(ShouldWake)
-	inst.components.sleeper:SetResistance(1)
-	
-	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.nobounce = true
-	inst.components.inventoryitem.canbepickedup = false
-	inst.components.inventoryitem.cangoincontainer = false
-	inst.components.inventoryitem:SetSinks(true)
-	
-	inst:AddComponent("herdmember")
-	
-	inst:AddComponent("knownlocations")
-	
-	inst:AddComponent("cookable")
-	inst.components.cookable.product = "cookedmonstersmallmeat"
-	inst.components.cookable:SetOnCookedFn(on_cooked_fn)
-	
-	inst:AddComponent("inventory")
-	inst.components.inventory.maxslots = 1
-	
-	inst:AddComponent("inspectable")
-	
-	inst:ListenForEvent("onattackother", OnAttackOther)
-	inst:ListenForEvent("attacked", OnAttacked)
-	inst:ListenForEvent("death", OnDeath)
-	inst:ListenForEvent("onpickupitem", OnPickup)
-	inst:ListenForEvent("trapped", Trapped)
-	
-	MakeHauntablePanic(inst)
-	
-	--MakeFeedableSmallLivestock(inst, TUNING.CARRAT.PERISH_TIME, nil, on_dropped)
-	
-	MakeSmallBurnableCharacter(inst, "carrat_body")
-	MakeSmallFreezableCharacter(inst, "carrat_body")
-	
-	inst.OnSave = onsave_rat
-	inst.OnLoad = onload_rat
-	
-	return inst
-end
-
-local RETARGET_CANT_TAGS = { "wall", "raidrat"}
-local function retargetfn(inst)
-    return FindEntity(
-                inst, TUNING.HOUND_TARGET_DIST,
-                function(guy)
-                    return inst.components.combat:CanTarget(guy)
-                end,
-                nil,
-                RETARGET_CANT_TAGS
-            )
-        or nil
-end
-
-local function KeepTarget(inst, target)
-return inst:IsNear(target, TUNING.HOUND_FOLLOWER_TARGET_KEEP)
-end
-
-
-local function cavefn()
-	local inst = CreateEntity()
-	
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddDynamicShadow()
-	inst.entity:AddNetwork()
-	
-	MakeCharacterPhysics(inst, 1, 0.5)
-	
-	inst.DynamicShadow:SetSize(1, .75)
-	inst.DynamicShadow:Enable(false)
-	inst.Transform:SetSixFaced()
-	
-	inst.AnimState:SetBank("carrat")
-	inst.AnimState:SetBuild("uncompromising_caverat")
-	inst.AnimState:PlayAnimation("planted")
-	
-	inst:AddTag("raidrat")
-	inst:AddTag("animal")
-	inst:AddTag("hostile")
-	inst:AddTag("herdmember")
-	inst:AddTag("smallcreature")
-	--inst:AddTag("canbetrapped")
-	inst:AddTag("cattoy")
-	inst:AddTag("catfood")
-	inst:AddTag("cookable")
-	
-	inst.entity:SetPristine()
-	
-	if not TheWorld.ismastersim then
-		return inst
-	end
-	
-	inst:AddComponent("drownable")
-	inst.components.drownable.enabled = false
-
-	
-	--[[inst.Physics:ClearCollisionMask()
-    inst.Physics:CollidesWith(COLLISION.GROUND)
-    --inst.Physics:CollidesWith(COLLISION.OBSTACLES)
-    --inst.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
-    inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-    inst.Physics:CollidesWith(COLLISION.GIANTS)
-    inst.Physics:Teleport(inst.Transform:GetWorldPosition())]]
-	
-	inst.sounds = carratsounds
-	
-	inst:AddComponent("locomotor")
-	inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_WALKSPEED
-	inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_RUNSPEED
-	inst.components.locomotor:EnableGroundSpeedMultiplier(false)
-	inst.components.locomotor:SetTriggersCreep(false)
-	inst:SetStateGraph("SGuncompromising_rat")
-	
-	inst:SetBrain(brain)
-	
-	inst:AddComponent("eater")
-	inst.components.eater:SetDiet({ FOODTYPE.HORRIBLE }, { FOODTYPE.HORRIBLE })
-	inst.components.eater.strongstomach = true
-	inst.components.eater:SetCanEatRaw()
-	
-	inst:AddComponent("workmultiplier")
-	inst.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, -0.8, inst)
-	
-	inst:AddComponent("combat")
-	inst.components.combat:SetDefaultDamage(TUNING.DSTU.RAIDRAT_DAMAGE)
-	inst.components.combat:SetAttackPeriod(TUNING.DSTU.RAIDRAT_ATTACK_PERIOD)
-	inst.components.combat:SetRange(TUNING.DSTU.RAIDRAT_ATTACK_RANGE)
-	inst.components.combat.hiteffectsymbol = "carrat_body"
-	
-	inst.components.combat:SetRetargetFunction(3, retargetfn)
-    inst.components.combat:SetKeepTargetFunction(KeepTarget)
 	
 	inst:AddComponent("health")
 	inst.components.health:SetMaxHealth(TUNING.DSTU.RAIDRAT_HEALTH)
@@ -855,8 +707,4 @@ local function fn_burrow()
 	return inst
 end
 
-return Prefab("uncompromising_rat", fn, assets, prefabs),
-	Prefab("uncompromising_caverat", cavefn),
-	Prefab("uncompromising_packrat", packfn, assets, prefabs),
-	Prefab("uncompromising_ratherd", fn_herd, assets, prefabs),
-	Prefab("uncompromising_ratburrow", fn_burrow, assets, prefabs)
+return Prefab("uncompromising_caverat", fn)

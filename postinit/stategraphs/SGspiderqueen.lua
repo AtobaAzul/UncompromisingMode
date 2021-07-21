@@ -6,11 +6,12 @@ env.AddStategraphPostInit("spiderqueen", function(inst)
 local events =
 {
 	EventHandler("doattack", function(inst) 
-		if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then 
-			if not inst.components.timer:TimerExists("SpitCooldown") then
-				inst.components.timer:StartTimer("SpitCooldown", 10)
-			end
-				
+		if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
+			if inst.prefab ~= "spiderking" then --CTC compat
+				if not inst.components.timer:TimerExists("SpitCooldown") then
+					inst.components.timer:StartTimer("SpitCooldown", 10)
+				end
+			end	
 			--if inst.spitweb then
 				--inst.sg:GoToState("give_off_cob_web")
 			--else

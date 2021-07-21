@@ -267,7 +267,7 @@
 
 * [x] [STALKING STUFFERS] The Beekeeper Hat prevents player from taking hayfever "damage" from bees, mosquitos, etc.
 
-* [x]  [Fight or Flight] As part of the "incentive to kill raidfly" scalemail was reworked to summon "Dimvae" (Dim lavae) which attack what you attack while it's worn, the scalemail no longer sets attackers on fire, however. The durability was also increased, while the absorption decreased. It still protects the user from all fire damage.
+* [x]  [Fight or Flight] As part of the "incentive to kill raidfly" scalemail was reworked to summon "Dimvae" (Dim lavae) which attack what you attack while it's worn. The durability was also increased, while the absorption decreased.
 
 --Clothing
 
@@ -379,7 +379,7 @@ NERFS:
 
 * [x] Wendy's healing tonic recipe changed to use 50 health instead of a telltale heart, since telltale hearts are rare now because of human meat.
 
-* [x] Wendy gains the same amount of extra damage from attacking the same creature as Abigail as all other characters, not more like in vanilla  (very minor, very hard to tell it's even there).
+* [x] Wendy gains the same amount of extra damage from attacking the same creature as Abigail as all other characters, not more like in vanilla.
 
 --WX-78
 
@@ -416,7 +416,7 @@ NERFS:
 
 * [x] [THE HOODED FOREST] Maxwell can now summon his classic Shadows (with infinite duration and health regen) by reading the Codex Umbra.
 
-* [x]  [Fight or Flight] Takes maximum health damage when hurt, use tents or booster shots to heal.
+* [x]  [Fight or Flight] Option to take maximum health damage when hurt, use tents or booster shots to heal. Toggled "Off" by default. For sadists, I guess.
 
 --Wigfrid
 
@@ -428,7 +428,7 @@ NERFS:
 
 * [x]  [Fight or Flight] Her hunger now influences a lot more than just her crafting speed, now when she's full she will also pick much faster and chop/mine faster using less durability.
 
-* [x]  [Fight or Flight] Her hunger being low also influences her performance
+* [x]  [Fight or Flight] Her hunger being low also influences her performance.
 
 --Wortox
 
@@ -480,7 +480,7 @@ NERFS:
 
 * [x]  [FEAR THE DARK!] Bird takes less damage from monster jerky than cooked monster meat.
 
-* [x]  [FEAR THE DARK!] Bird will regenerate a whole cooked monstermeat or two monster jerky every day.
+* [x]  [FEAR THE DARK!] Bird will regenerate a whole cooked monstermeat or two monster jerky worth of damage every day.
 
 --Fishing
 
@@ -488,35 +488,33 @@ NERFS:
 
 --Bee Box
 
-* [x]  Bee box honey yield is 1,2,4 instead of 1,3,6. (Barely noticable in actual play).
+* [x]  Bee box honey yield is 1,2,4 instead of 1,3,6.
 
 --Rot
 
-* [x]  [THE HOODED FOREST] Rot now deals health and sanity damage.
+* [x]  [THE HOODED FOREST] Rot now deals health and sanity damage. (Added back when overstuffing was a component of vetcurse, left-in incase fullness ever returns as a mechanic)
 
 --[ Vanilla Food changes]--
 
 --Non-Crockpot
 
-* [x]  Butterfly wing nerf - Health restored to 1 (down from 8), hunger significantly reduced.
+* [x]  Butterfly wing nerf - Health restored to 1 (down from 8), hunger significantly reduced. Make them into muffins instead.
 
 * [x] Seeds give less hunger.
 
-* [x] Cactus Flesh, Cooked Cactus Flesh, and Cooked Green Caps now deal slightly more damage when eaten. (A lot of other sanity foods like pumpkin cookies have been buffed! Seek them out!).
+* [x] Cactus Flesh, Cooked Cactus Flesh, and Cooked Green Caps now deal slightly more damage when eaten. Consider using other sanity dishes.
 
 --Crockpot
 
-* [x]  [STALKING STUFFERS] - Uncooked Birchnuts can be used in crockpots.
+* [x]  [STALKING STUFFERS] - Uncooked Birchnuts can be used in crockpots. QOL.
 
-* [x]  Meatballs nerf - Hunger restored to 50 (down from 62.5).
+* [x]  Meatballs nerf - Hunger restored to 50 (down from 62.5). Note that this is toggleable.
 
-* [x]  Pierogi spoils in 10 days instead of 20.
+* [x]  Pierogi spoils in 10 days instead of 20. Makes it harder to stockpile pre-bundlingwrap.
 
-* [x]  Bacon and eggs spoils in 10 days instead of 20.
+* [x]  Bacon and eggs spoils in 10 days instead of 20. Makes it harder to stockpile.
 
-* [x]  Ice Cream now regens 1 sanity per second for 100 seconds, similar to jellybeans (This means icecream restores 100 sanity!) (It does not have the initial 50 sanity).
-
-* [x]  Mandrake soup prevents hayfever for a whole season.
+* [x]  Ice Cream now regens 1 sanity per second for 100 seconds, similar to jellybeans. Does not restore the initial 50, this is most likley up for removal if milk becomes easier to obtain.
 
 --Farmplot-Based Crockpot Dish Buff section--
 
@@ -528,25 +526,25 @@ NERFS:
 
 * [x]  [Fight or Flight] Creamy Potato Puree 37.5 Hunger -> 100 Hunger 33 Sanity -> 15 Sanity
 
-* [x]  Salsa fresca 33 Sanity -> 50 Sanity!
+* [x]  Salsa fresca 33 Sanity -> 50 Sanity
 
-* [x]  Stuffed Pepper Poppers 37.5 Hunger -> 50 Hunger and 30 Health -> 60 Health!
+* [x]  Stuffed Pepper Poppers 37.5 Hunger -> 50 Hunger and 30 Health -> 60 Health
 
 --Uncommon
 
-* [x]  Pumpkin Cookies 37.5 Hunger -> 50 Hunger and 15 Sanity -> 33 Sanity and 0 Health -> 15 Health!
+* [x]  Pumpkin Cookies 37.5 Hunger -> 50 Hunger and 15 Sanity -> 33 Sanity and 0 Health -> 15 Health
 
-* [x]  [Fight or Flight] Stuffed Eggplant 37.5 Hunger -> 50 Hunger and 3 Health -> 20 Health!
+* [x]  [Fight or Flight] Stuffed Eggplant 37.5 Hunger -> 50 Hunger and 3 Health -> 20 Health
 
-* [x]  Asparagus Soup 18.8 Hunger -> 25 Hunger 20 Health -> 30 Health and 5 Sanity -> 20 Sanity!
+* [x]  Asparagus Soup 18.8 Hunger -> 25 Hunger 20 Health -> 30 Health and 5 Sanity -> 20 Sanity
 
 --Common
 
-* [x]  [Fight or Flight] Fish Tacos now restores 37.5 Hunger -> 75 Hunger 20 Health -> 15 Health!
+* [x]  [Fight or Flight] Fish Tacos now restores 37.5 Hunger -> 75 Hunger 20 Health -> 15 Health
 
-* [x] Vegetable Stinger now restores 3 Health -> 10 Health! (Not buffed as heavily because of hayfever usage, and prevalence as a sanity item.)
+* [x] Vegetable Stinger now restores 3 Health -> 10 Health (Not buffed as heavily because of hayfever usage, and ease of access as a sanity item.)
 
-* [x] Butterfly Muffins now restore 20 Health -> 30 Health, and 5 Sanity -> 10 sanity!
+* [x] Butterfly Muffins now restore 20 Health -> 30 Health, and 5 Sanity -> 10 sanity. More recommended to use since butterfly wings were nerfed.
 
 
 
@@ -554,15 +552,15 @@ NERFS:
 
 * [x]  Ice and twigs cannot be more than 1 inside crockpot recipes (With the exception of foods that REQUIRE ice AND twigs).
 
-* [x]  Bacon and eggs has a lower cooking priority than monster lasagna.
+* [x]  Bacon and eggs has a lower cooking priority than monster lasagna. Prevents 50/50 game with monstermeat.
 
 * [x]  New Monstermeat system! Monstermeat has a value of 2.5 when raw, cooked reduces this and drying reduces the most.
 
 * [x]  Cooked Monstermeat has a value of 2.
 
-* [x]  Monster Jerky has a value of 1, this means it can be used alone to make meatballs! This does not go for monster morsel jerky though...
+* [x]  Monster Jerky has a value of 1, this means it can be used alone to make meatballs and pierogi. This does not go for monster morsel jerky though...
 
-* [x]  Bug based ingredients have an "insectiod" value! Aside from specialty dishes, using two insectiod ingredients can make wet goop! Currently the only two insectiod ingredients are butterfly wings and scorpion carapaces.
+* [x]  Bug based ingredients have an "insectiod" value. Aside from specialty dishes, using two insectiod ingredients can make wet goop. Currently the only two insectiod ingredients are butterfly wings and scorpion carapaces.
 
 * [x]  Monster morsels are added, they are typically not a good idea to use in the crockpot, but they do have some uses. Each form has a monster value 0.5 greater than monster meat.
 
