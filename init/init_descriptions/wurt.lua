@@ -28,7 +28,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	--CaliforniaKing
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING = "Help, I ate something that I am unable to eat."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "Help, I ate something that I am unable to eat."
-	DESCRIBE.CALIFORNIAKING = "No"
+	DESCRIBE.CALIFORNIAKING = "This not food! Glorph, is murder!"
 	--CaliforniaKing
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "Stop looking!!"

@@ -41,9 +41,9 @@ local states =
 		end,
 
 		ontimeout= function(inst)
-			if ((inst.sg.mem.emerge_time or 0) + TUNING.CARRAT.EMERGED_TIME_LIMIT / 2.5) < GetTime() then
+			--[[if ((inst.sg.mem.emerge_time or 0) + TUNING.CARRAT.EMERGED_TIME_LIMIT / 2.5) < GetTime() then
 				inst.sg:GoToState("submerge")
-			elseif math.random() > 0.55 then
+			else]]if math.random() > 0.55 then
 				inst.sg:GoToState("idle2")
 			else
 				inst.sg:GoToState("idle")

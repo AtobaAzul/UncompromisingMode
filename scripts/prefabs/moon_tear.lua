@@ -146,11 +146,15 @@ local function topocket(inst, owner)
 end
 
 local function startcrying(inst)
-    local owner = inst.components.inventoryitem.owner
+    inst.owner = inst.components.inventoryitem.owner
 	
-    if owner ~= nil then
-		if owner.components.moisture ~= nil and owner.components.moisture:GetMoisture() < 48 then
-			owner.components.moisture:DoDelta(3)
+	if inst.owner ~= nil and inst.owner.components.inventoryitem ~= nil then
+		inst.owner = inst.owner.components.inventoryitem.owner
+	end
+	
+    if inst.owner ~= nil then
+		if inst.owner.components.moisture ~= nil and inst.owner.components.moisture:GetMoisture() < 48 then
+			inst.owner.components.moisture:DoDelta(3)
 		end
 	else
 		inst.task:Cancel()

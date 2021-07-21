@@ -41,6 +41,7 @@ local function onbuilt(inst)
 end
 
 local function makeburnt(inst)
+	inst:RemoveComponent("channelable")
 end
 
 local function onsave(inst, data)
@@ -164,7 +165,7 @@ local function OnCooldown(inst)
 end
 
 local function DoPuff(inst, channeler)
-	if inst._cdtask == nil then
+	if inst._cdtask == nil and inst.components.container ~= nil then
         inst._cdtask = inst:DoTaskInTime(1, OnCooldown)
 		
 		inst.channeler = channeler
