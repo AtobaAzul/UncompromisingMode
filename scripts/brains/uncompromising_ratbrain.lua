@@ -25,6 +25,7 @@ local function CanSteal(item)
 		and item.components.inventoryitem.canbepickedup
 		and item:IsOnValidGround()
 		and not item:IsNearPlayer(TOOCLOSE)
+		and not item:HasTag("raidrat")
 end
 
 local function StealAction(inst)
@@ -32,7 +33,7 @@ local function StealAction(inst)
 		local targetpriority = FindEntity(inst, SEE_DIST,
 		CanSteal,
 		{ "_inventoryitem", "_equippable" },
-		{ "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
+		{ "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
 		if targetpriority ~= nil then
 			return targetpriority ~= nil
 				and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
@@ -41,7 +42,7 @@ local function StealAction(inst)
 			local target = FindEntity(inst, SEE_DIST,
 				CanSteal,
 				{ "_inventoryitem" },
-				{ "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
+				{ "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
 			return target ~= nil
 				and BufferedAction(inst, target, ACTIONS.PICKUP)
 				or nil
@@ -137,8 +138,8 @@ function CarratBrain:OnStart()
 	{
 		WhileNode(function() return not self.inst.sg:HasStateTag("jumping") and self.inst.prefab ~= "uncompromising_caverat" end, "NotJumpingBehaviour",
                 PriorityNode({
-		DoAction(self.inst, function() return StealAction(self.inst) end, "steal", true ),
 		DoAction(self.inst, eat_food_action),
+		DoAction(self.inst, function() return StealAction(self.inst) end, "steal", true ),
 		DoAction(self.inst, function() return EmptyChest(self.inst) end, "emptychest", true )
 		}, .25))
 	}, 0.25)

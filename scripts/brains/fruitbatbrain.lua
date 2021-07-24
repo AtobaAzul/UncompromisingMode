@@ -7,8 +7,8 @@ require "behaviours/chaseandattack"
 
 local MAX_CHASE_TIME = 60
 local MAX_CHASE_DIST = 40
-local SEE_FOOD_DIST = 40
-local MAX_WANDER_DIST = 40
+local SEE_FOOD_DIST = 20
+local MAX_WANDER_DIST = 30
 local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
 
 local VampireBatBrain = Class(Brain, function(self, inst)
@@ -39,7 +39,8 @@ local function EscapeAction(inst)
         or nil
 end
 local function EatFoodAction(inst)
-    if inst.sg:HasStateTag("busy") then
+	if inst.sg:HasStateTag("busy") or inst:GetTimeAlive() < 5 or
+        (inst.components.eater:TimeSinceLastEating() ~= nil and inst.components.eater:TimeSinceLastEating() < 5) then
         return
     elseif inst.components.inventory ~= nil and inst.components.eater ~= nil then
         local target = inst.components.inventory:FindItem(function(item)

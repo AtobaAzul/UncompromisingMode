@@ -85,8 +85,8 @@ local function OnPickup(inst, data)
 			inst._item:AddComponent("pickable")
 			inst._item.components.pickable.quickpick = true
 			inst._item.components.pickable.canbepicked = true
-			inst._item.components.pickable.onpickedfn = function()
-				inst.components.inventory:DropEverything()
+			inst._item.components.pickable.onpickedfn = function(inst, picker)
+				--inst.components.inventory:DropEverything()
 				inst:RemoveTag("carrying")
 				inst._item:Remove()
 			end
