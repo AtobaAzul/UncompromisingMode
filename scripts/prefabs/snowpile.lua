@@ -46,7 +46,7 @@ local function onregen(inst)
 				local x1, y1, z1 = inst.Transform:GetWorldPosition()
 				local ents2 = TheSim:FindEntities(x1, y1, z1, 45, { "player" })
 				if #ents2 > 0 then
-					print("Snowball Fight!")
+					--print("Snowball Fight!")
 					inst.nospawning = true
 					local snowattack = SpawnPrefab("snowmong")
 					local spawnpoint = inst.Transform:GetWorldPosition()
