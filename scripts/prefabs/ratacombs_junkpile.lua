@@ -6,6 +6,11 @@ local loots =
 "spoiled_food",
 "pigskin",
 "rottenegg",
+"spoiled_fish_small",
+"spoiled_fish",
+"boneshard",
+"rope",
+"papyrus",
 }
 
 local chestloots =
@@ -13,6 +18,13 @@ local chestloots =
 "spoiled_food",
 "pigskin",
 "rottenegg",
+"umbrella",
+"feather_crow",
+"feather_robin",
+"feather_robin_winter",
+"feather_canary",
+"goose_feather",
+"gears",
 }
 
 local function GetChestLootTable(loottable)
@@ -71,10 +83,10 @@ end
 local function onload(inst, data)
 	if data then
 		if data.cycles_left then
-		inst.components.pickable.cycles_left = data.cycles_left
+			inst.components.pickable.cycles_left = data.cycles_left
 		end
 		if data.keyloot then
-		inst.keyloot = data.keyloot
+			inst.keyloot = data.keyloot
 		end
 	end
 end
@@ -119,22 +131,17 @@ local function InitializeKeyloot(inst)
 	end
 end	
 
-local function junkpilefn(Sim)
+local function junkpilefn()
 	local inst = CreateEntity()
-	inst.OnSave = onsave
-	inst.OnLoad = onload
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	local sound = inst.entity:AddSoundEmitter()
 	inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-	anim:SetBuild("snow_dune")
-	anim:SetBank("snow_dune")
-	anim:PlayAnimation("full")
+	inst.AnimState:SetBuild("snow_dune")
+	inst.AnimState:SetBank("snow_dune")
+	inst.AnimState:PlayAnimation("full")
 	
 	inst.entity:SetPristine()
 	
@@ -149,11 +156,7 @@ local function junkpilefn(Sim)
     end
 	
     RemovePhysicsColliders(inst)
-	
 
-	--inst:AddComponent("unevenground")
-    --inst.components.unevenground.radius = 2
-	
 	----------------------
 	inst:AddComponent("inspectable")
 	----------------------
@@ -175,7 +178,14 @@ local function junkpilefn(Sim)
 	inst:ListenForEvent("animover", on_anim_over)
 	
 	inst:DoTaskInTime(0, InitializeKeyloot)
+	----------------------
+	inst:AddComponent("areaaware")
+	----------------------
+	
+	inst.OnSave = onsave
+	inst.OnLoad = onload
+	
 	return inst
 end
 
-return Prefab( "ratacombs_junkpile", junkpilefn)
+return Prefab("ratacombs_junkpile", junkpilefn)
