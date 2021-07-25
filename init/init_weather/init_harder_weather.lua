@@ -44,6 +44,7 @@ env.AddPrefabPostInit("cave", function(inst)
     
     inst:AddComponent("cavedeerclopsspawner")
     inst:AddComponent("randomnighteventscaves")
+	inst:AddComponent("ratacombs_junk_manager")
 end)
 
 local function OnSeasonTick(inst)

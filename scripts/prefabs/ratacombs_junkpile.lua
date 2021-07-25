@@ -1,36 +1,40 @@
 -- these should match the animation names to the workleft
 local anims = {"low", "med", "full"}
 
-local loots =
+local loots = 
 {
-"spoiled_food",
-"pigskin",
-"rottenegg",
-"spoiled_fish_small",
-"spoiled_fish",
-"boneshard",
-"rope",
-"papyrus",
+spoiled_food = 1,
+rottenegg = 1,
+spoiled_fish_small = 1,
+spoiled_fish = 1,
+
+pigskin = 0.5,
+boneshard = 0.5,
+rope = 0.5,
+papyrus = 0.5,
 }
 
 local chestloots =
 {
-"spoiled_food",
-"pigskin",
-"rottenegg",
-"umbrella",
-"feather_crow",
-"feather_robin",
-"feather_robin_winter",
-"feather_canary",
-"goose_feather",
-"gears",
+pigskin = 1,
+
+feather_crow = 0.75,
+feather_robin = 0.75,
+feather_robin_winter = 0.75,
+feather_canary = 0.75,
+goose_feather = 0.75,
+
+spoiled_food = 0.5,
+rottenegg = 0.5,
+umbrella = 0.5,
+
+gears = 0.25,
 }
 
 local function GetChestLootTable(loottable)
 	local chestloottable = {}
 	for i = 1, math.random(5,8) do
-		table.insert(chestloottable, loottable[math.random(#loottable)])
+		table.insert(chestloottable, weighted_random_choice(chestloots))
 	end
 	--print(chestloottable)
 	return chestloottable
@@ -44,10 +48,6 @@ local function RevealChest(inst)
 		local pickloot = inst.components.lootdropper:SpawnLootPrefab(v)
 		chest.components.container:GiveItem(pickloot, i, nil, nil, true)
 	end
-end
-
-local function GetLoot(loottable)
-	return loottable[math.random(#loottable)]
 end
 
 local function on_anim_over(inst)
@@ -68,7 +68,7 @@ local function on_anim_over_now(inst)
 end
 
 local function TryLoot(inst,picker)
-	local loot = GetLoot(loots)
+	local loot = weighted_random_choice(loots)
 	local pickloot = inst.components.lootdropper:SpawnLootPrefab(loot)
 	picker:PushEvent("picksomething", { object = inst, loot = pickloot })
 	picker.components.inventory:GiveItem(pickloot, nil, inst:GetPosition())
@@ -102,11 +102,13 @@ local function onpickedfn(inst, picker)
 	TryLoot(inst,picker)
 	if inst.components.pickable.cycles_left > 0 then
 		if inst.Transform:GetWorldPosition() ~= nil then
-			SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+			local debris = SpawnPrefab("splash_snow_fx")
+			debris.Transform:SetPosition(inst.Transform:GetWorldPosition())
 		end
 	else
 		if inst.Transform:GetWorldPosition() ~= nil then
-			SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+			local debris = SpawnPrefab("splash_snow_fx")
+			debris.Transform:SetPosition(inst.Transform:GetWorldPosition())
 		end
 		if math.random() > 0.75 then
 			RevealChest(inst)
@@ -142,6 +144,7 @@ local function junkpilefn()
 	inst.AnimState:SetBuild("snow_dune")
 	inst.AnimState:SetBank("snow_dune")
 	inst.AnimState:PlayAnimation("full")
+	inst.AnimState:SetMultColour(0.25, 1, 0.5, 1)
 	
 	inst.entity:SetPristine()
 	

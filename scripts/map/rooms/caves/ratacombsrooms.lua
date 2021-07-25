@@ -125,6 +125,9 @@ AddRoom("RatKingdomCaves", {
 									countstaticlayouts = {
 										["ratking"] = 1,
 									},
+									countprefabs = {
+										ratacombs_junkpile_trigger = 1,
+    								},
 					                distributepercent = .5,
 					                distributeprefabs =
 					                {
