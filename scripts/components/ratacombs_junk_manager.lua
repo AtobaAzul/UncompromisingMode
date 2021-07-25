@@ -7,7 +7,8 @@ function self:MakeSpawnersSpawn()
 	end
 end
 
-function self:OnSave(data)
+function self:OnSave()
+local data = {}
 data.spawnerlist = inst.spawnerlist
 end
 

@@ -4,41 +4,44 @@ local x, y, z = inst.Transform:GetWorldPosition()
 x = x - 44
 z = z - 44
 for i = 1, 5 do
-for k = 1, 5 do
-local shadow = SpawnPrefab("ratgas")
-local x1,z1
-x1 = x+math.random(-5,5)
-z1 = z+math.random(-5,5)
-shadow.Transform:SetPosition(x1, y, z1)
-x = x + 22 + math.random(-0.75,0.75)
-end
-x = x - 110
-z = z + 22 + math.random(-0.75,0.75)
+	for k = 1, 5 do
+		local shadow = SpawnPrefab("ratgas")
+		local x1,z1
+		x1 = x+math.random(-5,5)
+		z1 = z+math.random(-5,5)
+		shadow.Transform:SetPosition(x1, y, z1)
+		x = x + 22 + math.random(-0.75,0.75)
+		end
+	x = x - 110
+	z = z + 22 + math.random(-0.75,0.75)
 end
 inst:Remove()
 end
 
 local function fnspawner()
-    	local inst = CreateEntity()
+    local inst = CreateEntity()
 
-    	inst.entity:AddTransform()
-    	inst.entity:AddAnimState()
-        inst.entity:AddNetwork()
-		inst.entity:AddSoundEmitter()
-		inst.entity:AddMiniMapEntity()
-		inst.entity:AddDynamicShadow()
-        inst.entity:SetPristine()
+	inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddMiniMapEntity()
+	inst.entity:AddDynamicShadow()
+	
+    inst.entity:SetPristine()
 		
-        if not TheWorld.ismastersim then
-            return inst
-        end
-		inst:DoTaskInTime(0,SpawnMist)
+    if not TheWorld.ismastersim then
         return inst
+    end
+	
+	inst:DoTaskInTime(0,SpawnMist)
+	
+    return inst
 end
 
 local function DensityCheck(inst)
 	local x,y,z = inst.Transform:GetWorldPosition()
-	if #TheSim:FindEntities(x,y,z,4,{"ratgas"}) > 2 then
+	if #TheSim:FindEntities(x,y,z,4,{"ratgas"}) > 1 then
 		inst:Remove()
 	end
 end
@@ -59,6 +62,13 @@ local function fnmist()
 	inst.AnimState:SetLayer(LAYER_WORLD)
     inst.AnimState:SetSortOrder(1)
 	inst.AnimState:SetScale(10, 8, 5)
+
+    inst.entity:SetPristine()
+		
+    if not TheWorld.ismastersim then
+       return inst
+    end	
+	
 	inst:AddComponent("areaaware")
 	inst:DoTaskInTime(0.1*math.random(1,10),function(inst)
 		if not inst.components.areaaware:CurrentlyInTag("rattygas") then
@@ -66,8 +76,7 @@ local function fnmist()
 		end
 		DensityCheck(inst)
 	end)
-	inst.AnimState:SetMultColour(0, 0, 0, 0.15)
-
+	inst.AnimState:SetMultColour(0, 0, 0, 0.2)
     return inst
 end
 

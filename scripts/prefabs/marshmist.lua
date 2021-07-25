@@ -18,21 +18,24 @@ end
 inst:Remove()
 end
 local function fnspawner()
-    	local inst = CreateEntity()
+    local inst = CreateEntity()
 
-    	inst.entity:AddTransform()
-    	inst.entity:AddAnimState()
-        inst.entity:AddNetwork()
-		inst.entity:AddSoundEmitter()
-		inst.entity:AddMiniMapEntity()
-		inst.entity:AddDynamicShadow()
-        inst.entity:SetPristine()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddMiniMapEntity()
+	inst.entity:AddDynamicShadow()
+    
+	inst.entity:SetPristine()
 		
-        if not TheWorld.ismastersim then
-            return inst
-        end
-		inst:DoTaskInTime(0,SpawnMist)
+    if not TheWorld.ismastersim then
         return inst
+    end
+	
+	inst:DoTaskInTime(0,SpawnMist)
+        
+	return inst
 end
 
 local function Shade(inst,shade)
@@ -97,6 +100,12 @@ local function fnmist()
 	
 	inst.AnimState:SetMultColour(0.15, 0.15, 0.15, 0.15)
 
+    inst.entity:SetPristine()
+		
+    if not TheWorld.ismastersim then
+        return inst
+    end
+		
 	inst:WatchWorldState("isnight", TrySwap)
 	inst:WatchWorldState("isday", TrySwap)
 	inst:AddComponent("areaaware")
