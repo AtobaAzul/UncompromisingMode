@@ -262,7 +262,8 @@ TUNING.DSTU =
 	
 	--Wickerbottom
 	WICKERNERF = GetModConfigData("wickerbottom"),
-	WICKERNERF_TENTACLES = GetModConfigData("ohmyachingtentacles"),
+	WICKERNERF_TENTACLES = GetModConfigData("on tentacles"),
+	WICKERNERF_HORTICULTURE = GetModConfigData("applied horticulture"),
 	
     --Growth time increase for stone fruits
     STONE_FRUIT_GROWTH_INCREASE = 3,

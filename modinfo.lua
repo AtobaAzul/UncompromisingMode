@@ -135,7 +135,8 @@ configuration_options =
 	BinaryConfig("winonaworker", "Improved Winona", "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.", true),
 	BinaryConfig("wortox", "Rebalanced Wortox", "Wortox has 150 health instead of 200. A few enemies no longer drop souls.", true),
 	BinaryConfig("wickerbottom", "Wickerbottom Balance", "Wickerbottom/Maxwell can no longer read books while insane.", true),
-	BinaryConfig("wickerbottomtentacles", "On Tentacles Re-Balance", "On Tentacles now spawns FOUR sickly tentacles that die over time, and do not drop tentacle spots.", true),
+	BinaryConfig("on tentacles", "On Tentacles Re-Balance", "On Tentacles now spawns FOUR sickly tentacles that die over time, and do not drop tentacle spots.", true),
+	BinaryConfig("applied horticulture", "Horticulture, Abridged recipe Re-Balance", "Horticulture, Abridged now takes 1 Leafy Meat instead of 5 seeds, to better balance it from being too easily spammable early game.", true),
 	SkipSpace(),
 ------------------------------
 -- Weather --

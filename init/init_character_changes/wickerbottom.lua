@@ -11,6 +11,8 @@ CUSTOM_RECIPETABS = GLOBAL.CUSTOM_RECIPETABS
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
+-- Leafy meat and bucket cost for applied horticulture
+-----------------------------------------------------------------
 
 if TUNING.DSTU.WICKERNERF == true then
 	local BOOKS = 
@@ -96,15 +98,7 @@ if TUNING.DSTU.WICKERNERF_TENTACLES == true then
 		end
 	end)
 end
------------------------------------------------------------------
--- Leafy meat and bucket cost for applied horticulture
------------------------------------------------------------------
-if GetModConfigData("harder_recipes") then
-	-- Also use fertilizer instead of poop
-		Recipe("book_horticulture", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("fertilizer", 1)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
-		--Recipe("book_gardening", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("fertilizer", 1)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
-else
-	-- Use poop as normal	
-	Recipe("book_horticulture", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("poop", 1)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
-	--Recipe("book_gardening", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("poop", 1)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
+
+if TUNING.DSTU.WICKERNERF_HORTICULTURE == true then
+	Recipe("book_horticulture", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("poop", 5)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
 end
