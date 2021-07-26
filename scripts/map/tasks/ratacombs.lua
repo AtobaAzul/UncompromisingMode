@@ -33,7 +33,7 @@ AddTask("Ratty_Maze", {
 		keys_given={KEYS.TIER2},
 		region_id = "ratacombs",
 		level_set_piece_blocker = true,
-		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland","rattygas"},
+		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland","rattygas", "ratkey1"},
 		room_choices={
 			["RattyWilds"] = function() return 3 + math.random(4) end,
 		},

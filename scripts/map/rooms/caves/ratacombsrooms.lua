@@ -33,7 +33,7 @@ AddRoom("RattyStairs", {
 										cavelight_tiny = 0.5,
 										flower_cave = 0.1,
 										flower_cave_double = 0.05,
-										flower_cave_triple = 0.05,	
+										flower_cave_triple = 0.05,
 					                },								
 					            }
 
@@ -70,7 +70,6 @@ AddRoom("RattySinkhole", {
 AddRoom("RattyWilds", {
     colour={r=0.7,g=0.7,b=0.7,a=0.9},
     value = GROUND.CAVE_NOISE,
-    tags = {"Hutch_Fishbowl"},
     type = NODE_TYPE.Room,
     contents =  {
         distributepercent = .10,
@@ -85,6 +84,7 @@ AddRoom("RattyWilds", {
             goldnugget=.05,
             rocks=.1,
             flint=0.05,
+			ratacombs_junkpile_spawner = 3,
         },
     }
 })
@@ -93,7 +93,6 @@ AddRoom("RattyWilds", {
 AddRoom("RattyLink", {
     colour={r=0.7,g=0.7,b=0.7,a=0.9},
     value = GROUND.GROUND_NOISE,
-    tags = {"Hutch_Fishbowl"},
 					contents =  {
 									--countprefabs = {
 											--uncompromising_ratburrow = function() return math.random(8, 12) end,
@@ -113,6 +112,7 @@ AddRoom("RattyLink", {
 										cavelight = 0.05,
 										cavelight_small = 0.05,
 										cavelight_tiny = 0.05,
+										ratacombs_junkpile_spawner = 3,
 					                },
 					            }
 })
@@ -125,6 +125,9 @@ AddRoom("RatKingdomCaves", {
 									countstaticlayouts = {
 										["ratking"] = 1,
 									},
+									countprefabs = {
+										ratacombs_junkpile_trigger = 1,
+    								},
 					                distributepercent = .5,
 					                distributeprefabs =
 					                {
@@ -157,6 +160,7 @@ local bgratty = {
             rock_flintless_low = 1.0,
             pillar_cave_flintless = 0.2,
 			ratgas_spawner = 2.5,
+			ratacombs_junkpile_spawner = 3,
         },
     }
 }

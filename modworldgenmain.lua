@@ -214,7 +214,7 @@ end)
 
 -----KoreanWaffle's Spawner Limiter Tag Adding Code
 --Add new map tags to storygen
-local MapTags = {"scorpions", "hoodedcanopy","rattygas"}
+local MapTags = {"scorpions", "hoodedcanopy","rattygas","ratkey1"}
 AddGlobalClassPostConstruct("map/storygen", "Story", function(self)
     for k, v in pairs(MapTags) do
         self.map_tags.Tag[v] = function(tagdata) return "TAG", v end

@@ -246,4 +246,6 @@ return {
 	"voorhams",
 	"ratking",
 	"ratgas",
+	"ratacombs_junkpile",
+	"ratacombs_junkpile_spawner",
 }
