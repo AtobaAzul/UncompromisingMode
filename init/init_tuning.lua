@@ -260,6 +260,10 @@ TUNING.DSTU =
 	--Winona
 	WINONA_WORKER = GetModConfigData("winonaworker"),
 	
+	--Wickerbottom
+	WICKERNERF = GetModConfigData("wickerbottom"),
+	WICKERNERF_TENTACLES = GetModConfigData("ohmyachingtentacles"),
+	
     --Growth time increase for stone fruits
     STONE_FRUIT_GROWTH_INCREASE = 3,
 	

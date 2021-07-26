@@ -134,6 +134,8 @@ configuration_options =
 	BinaryConfig("maxhealthwell", "New Maxwell Downside", "Maxwell's max health is reduced by 20% of the damage he takes.", false),
 	BinaryConfig("winonaworker", "Improved Winona", "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.", true),
 	BinaryConfig("wortox", "Rebalanced Wortox", "Wortox has 150 health instead of 200. A few enemies no longer drop souls.", true),
+	BinaryConfig("wickerbottom", "Wickerbottom Balance", "Wickerbottom/Maxwell can no longer read books while insane.", true),
+	BinaryConfig("wickerbottomtentacles", "On Tentacles Re-Balance", "On Tentacles now spawns FOUR sickly tentacles that die over time, and do not drop tentacle spots.", true),
 	SkipSpace(),
 ------------------------------
 -- Weather --

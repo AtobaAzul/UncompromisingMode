@@ -52,10 +52,14 @@ local function OnAttackOther(inst, data)
 end
 
 local function OnAttacked(inst, data)
-	inst.components.combat:SetTarget(data.attacker)
+	if not inst:HasTag("packrat") then
+		inst.components.combat:SetTarget(data.attacker)
+	end
+	
 	inst.components.combat:ShareTarget(data.attacker, 30, function(dude)
 		return dude:HasTag("raidrat")
 			and not dude.components.health:IsDead()
+			and not dude:HasTag("packrat")
 	end, 10)
 end
 
@@ -465,6 +469,7 @@ local function packfn()
 	inst.AnimState:PlayAnimation("planted")
 	
 	inst:AddTag("raidrat")
+	inst:AddTag("packrat")
 	inst:AddTag("animal")
 	inst:AddTag("hostile")
 	inst:AddTag("herdmember")
@@ -516,10 +521,10 @@ local function packfn()
 
 	    inst.components.locomotor:SetAllowPlatformHopping(true)
 		inst:AddComponent("amphibiouscreature")
-		inst.components.amphibiouscreature:SetBanks("packrat", "uncompromising_rat_water")
+		inst.components.amphibiouscreature:SetBanks("packrat", "packrat_water")
         inst.components.amphibiouscreature:SetEnterWaterFn(
             function(inst)
-				inst.AnimState:SetBuild("uncompromising_rat_water")
+				inst.AnimState:SetBuild("uncompromising_packrat_water")
                 inst.landspeed = inst.components.locomotor.runspeed
                 inst.components.locomotor.runspeed = TUNING.HOUND_SWIM_SPEED
                 inst.hop_distance = inst.components.locomotor.hop_distance
@@ -619,6 +624,7 @@ local function onworked(inst, worker, workleft)
 	inst.components.combat:ShareTarget(worker, 30, function(dude)
 		return dude:HasTag("raidrat")
 			and not dude.components.health:IsDead()
+			and not dude:HasTag("packrat")
 	end, 10)
 	end
 end

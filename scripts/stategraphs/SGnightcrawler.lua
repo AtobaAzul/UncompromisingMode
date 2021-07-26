@@ -517,4 +517,4 @@ CommonStates.AddSleepStates(states,
 })
 CommonStates.AddFrozenStates(states)
 
-return StateGraph("spider", states, events, "idle", actionhandlers)
+return StateGraph("nightcrawler", states, events, "idle", actionhandlers)

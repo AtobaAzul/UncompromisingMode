@@ -72,7 +72,6 @@ local prefab_post = {
 	"lureplant",
 	"spiderden",
 	"stafflights",
-	"books",
 	"armor_ruins",
 	"sweatervest",
 	"penguin_ice",

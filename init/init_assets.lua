@@ -103,6 +103,7 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/mutator_trapdoor.xml"),	
 	
 	Asset("ANIM", "anim/uncompromising_packrat.zip"),
+	Asset("ANIM", "anim/uncompromising_packrat_water.zip"),
 	Asset("ANIM", "anim/trapdoor.zip"),
 	Asset("ANIM", "anim/rock_flipping.zip"),
 	Asset("ANIM", "anim/rock_flipping_moss.zip"),
