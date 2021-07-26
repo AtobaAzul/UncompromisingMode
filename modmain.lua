@@ -9,6 +9,8 @@ GLOBAL.FUELTYPE.BATTERYPOWER = "BATTERYPOWER"
 GLOBAL.FUELTYPE.BATTERYPOWER = "BATTERYPOWER"
 GLOBAL.FUELTYPE.SALT = "SALT"
 
+RemapSoundEvent( "dontstarve/together_FE/DST_theme_portaled", "UMMusic/music/uncomp_char_select" )
+
 AddShardModRPCHandler("UncompromisingSurvival", "Hayfever_Stop", function(...)
 	--print("RPC Hayfever_Stop")
 	GLOBAL.TheWorld:PushEvent("beequeenkilled")
