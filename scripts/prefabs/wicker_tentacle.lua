@@ -10,8 +10,7 @@ local prefabs =
 
 SetSharedLootTable( 'wicker_tentacle',
 {
-    {'monstermeat',   0.5},
-    {'tentaclespike', 0.25},
+	{"diseaseflies",		1.00},
 })
 
 local function retargetfn(inst)
