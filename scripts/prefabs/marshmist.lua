@@ -1,4 +1,3 @@
-
 local function SpawnMist(inst)
 local x, y, z = inst.Transform:GetWorldPosition()
 x = x - 44

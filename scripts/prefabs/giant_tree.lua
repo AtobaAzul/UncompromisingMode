@@ -2,7 +2,7 @@ require "prefabutil"
 
 
 local function InitializePathFinding(inst)
-	print("I'm initializing pathfinding")
+	--print("I'm initializing pathfinding")
     local x, _, z = inst.Transform:GetWorldPosition()
 	TheWorld.Pathfinder:AddWall(x, 0, z)
 	for i = 0.25,10,0.25 do
