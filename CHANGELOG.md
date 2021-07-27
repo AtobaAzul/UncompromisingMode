@@ -395,8 +395,6 @@ NERFS:
 
 * [x] [FEAR THE DARK!] On Tentacles will now summon sickly tentacles, which die over time, but do not target players and do not drop any more tentacle spots, you can still harvest them from giant tentacles underground.
 
-* [x] [FEAR THE DARK!] Applied horticulture boosts farmplot crop growth by 66% instead of 100%, and 44% for Wormwood's crops.
-
 * [x] Wickerbottom cannot read books while insane.
 
 
