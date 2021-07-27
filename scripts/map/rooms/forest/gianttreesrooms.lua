@@ -43,7 +43,7 @@ AddRoom("AphidLand",
 		blueberryplantbuncher = 0.05,
 		hooded_mushtree_tall = 0.05,
 		hoodedtrapdoor = 0.05,
-		lightrays_canopy = 0.05,
+		lightrays_canopy = 0.2,
 		},
 		
 			countprefabs =	
@@ -73,7 +73,7 @@ AddRoom("ShroomInfestedGiantTrees",
 		ghost_walrus = 0.015,
 		hoodedtrapdoor = 0.015,
 		giant_tree_infested = 0.005,
-		lightrays_canopy = 0.05,
+		lightrays_canopy = 0.25,
 		},
 		
 			countprefabs =	
@@ -102,6 +102,7 @@ AddRoom("SpideryGiantTrees",
 				hooded_fern = 0.5,
 				--giant_tree_infested = 0.006,
 				--webbedcreature = 0.2,
+				lightrays_canopy = 0.25,
 			},
 			countprefabs =	
 			{
@@ -228,6 +229,7 @@ AddRoom("HoodedTown", {
 									ghost_walrus = 0.02,
 									blueberryplantbuncher = 0.001,
 									pitcherplant = 0.0001,
+									lightrays_canopy = 0.25,
 					                },
 					            }
 					})
@@ -249,6 +251,7 @@ AddRoom("RoseGarden", {
 									hooded_fern = 0.3,
 									ghost_walrus = 0.005,
 									blueberryplantbuncher = 0.001,
+									lightrays_canopy = 0.25,
 					                },
 					            }
 					})
@@ -271,6 +274,7 @@ AddRoom("HFHolidays", {
 									evergreen_sparse = 0.4,
 									hooded_fern = 0.3,
 									blueberryplantbuncher = 0.001,
+									lightrays_canopy = 0.25,
 					                },
 					            }
 					})

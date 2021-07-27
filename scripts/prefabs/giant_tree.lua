@@ -1,5 +1,98 @@
 require "prefabutil"
+local CANOPY_SHADOW_DATA = require("prefabs/canopyshadows")
 
+-----------------Nabbed canopy code
+local MIN = TUNING.SHADE_CANOPY_RANGE_SMALL
+local MAX = MIN + TUNING.WATERTREE_PILLAR_CANOPY_BUFFER
+local function OnFar(inst)
+    if inst.players then
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local testset = {}
+        for player,i in pairs(inst.players)do
+            testset[player] = true        
+        end
+
+        for i,player in ipairs(FindPlayersInRangeSq(x, y, z, MAX*MAX))do
+            if testset[player] then
+                testset[player] = false
+            end
+        end
+
+        for player,i in pairs(testset)do
+            if i == true then
+                if player.canopytrees then
+                   player.canopytrees = player.canopytrees - 1
+                   if player.canopytrees == 0 then
+                       player:PushEvent("onchangecanopyzone", false)
+                   end
+                end
+                inst.players[player] = nil
+            end
+        end
+    end
+end
+
+local function OnNear(inst,player)
+    if not inst.players then
+        inst.players = {}
+    end
+
+    inst.players[player] = true
+
+    if not player.canopytrees then
+        player.canopytrees = 0
+    end
+    player.canopytrees = player.canopytrees + 1
+    if player.canopytrees == 1 then
+        player:PushEvent("onchangecanopyzone", true)
+    end
+end
+
+local function removecanopyshadow(inst)
+    if inst.canopy_data ~= nil then
+        for _, shadetile_key in ipairs(inst.canopy_data.shadetile_keys) do
+            if TheWorld.shadetiles[shadetile_key] ~= nil then
+                TheWorld.shadetiles[shadetile_key] = TheWorld.shadetiles[shadetile_key] - 1
+
+                if TheWorld.shadetiles[shadetile_key] <= 0 then
+                    if TheWorld.shadetile_key_to_leaf_canopy_id[shadetile_key] ~= nil then
+                        DespawnLeafCanopy(TheWorld.shadetile_key_to_leaf_canopy_id[shadetile_key])
+                        TheWorld.shadetile_key_to_leaf_canopy_id[shadetile_key] = nil
+                    end
+                end
+            end
+        end
+
+        for _, ray in ipairs(inst.canopy_data.lightrays) do
+            ray:Remove()
+        end
+    end
+end
+
+local function removecanopy(inst)
+    print("REMOVING CANOPU")
+    if inst.roots then
+        inst.roots:Remove()
+    end
+    if inst._ripples then
+        inst._ripples:Remove()
+    end
+
+    if inst.players ~= nil then
+        for k, v in pairs(inst.players) do
+            if k:IsValid() then
+                if k.canopytrees ~= nil then
+                    k.canopytrees = k.canopytrees - 1
+                    if k.canopytrees <= 0 then
+                        k:PushEvent("onchangecanopyzone", false)
+                    end
+                end
+            end
+        end
+    end
+    inst._hascanopy:set(false)    
+end
+--------------------------
 
 local function InitializePathFinding(inst)
 	--print("I'm initializing pathfinding")
@@ -215,6 +308,7 @@ local function _GroundDetectionUpdate(debris, override_density)
     end
 	
 end
+
 local function GetDebris(loottable)
 local loot = loottable[math.random(#loottable)]
 if loot == "feather" then
@@ -234,6 +328,7 @@ if loot == "feather" then
 end
 return loot
 end
+
 local function SpawnDebris(inst,chopper,loottable)
 	local x,y,z = inst.Transform:GetWorldPosition()
 	if math.random() < 0.5 then
@@ -365,6 +460,7 @@ inst:DoTaskInTime(math.random(1,2),SpawnDebris(inst,chopper,felloot))
 inst:DoTaskInTime(math.random(4,5),SpawnDebris(inst,chopper,felloot))
 end
 end
+
 local function on_chopped_down(inst, chopper)
 	if chopper:HasTag("epic") or chopper:HasTag("antlion_sinkhole") then
 	inst:AddComponent("workable")
@@ -496,12 +592,25 @@ local function makefn()
 		-----------------------
         inst:DoTaskInTime(0, InitializePathFinding)
 		-----------------------
-		inst.entity:SetPristine()
-		
-        if not TheWorld.ismastersim then
-            return inst
-        end
+	inst:AddTag("shadecanopysmall")
+    if not TheNet:IsDedicated() then
+        inst:AddComponent("distancefade")
+        inst.components.distancefade:Setup(15,25)
+    end
+    
+    inst._hascanopy = net_bool(inst.GUID, "oceantree_pillar._hascanopy", "hascanopydirty")
+    inst._hascanopy:set(true)    
+    inst:DoTaskInTime(0, function()    
+        inst.canopy_data = CANOPY_SHADOW_DATA.spawnshadow(inst, math.floor(TUNING.SHADE_CANOPY_RANGE_SMALL/4), true)
+    end)
 
+    inst:ListenForEvent("hascanopydirty", function()
+                if not inst._hascanopy:value() then 
+                    removecanopyshadow(inst) 
+                end
+        end)
+		
+		inst:AddTag("shadecanopysmall")
 		
 		inst:AddComponent("workable")
 		inst.components.workable:SetWorkAction(ACTIONS.CHOP)
@@ -519,6 +628,12 @@ local function makefn()
 		inst.partchops = 0
 		inst.OnSave = onsave
 		inst.OnLoad = onload
+		
+	--[[inst:AddComponent("playerprox")
+    inst.components.playerprox:SetDist(MIN, MAX)
+    inst.components.playerprox:SetOnPlayerFar(OnFar)
+    inst.components.playerprox:SetOnPlayerNear(OnNear)]]
+	
         return inst
 end
 local function StartSpawning(inst)
@@ -570,11 +685,25 @@ local function makeinfested()
 		-----------------------	
         inst:DoTaskInTime(0, InitializePathFinding)
 		-----------------------
-        inst.entity:SetPristine()
+	inst:AddTag("shadecanopysmall")
+    if not TheNet:IsDedicated() then
+        inst:AddComponent("distancefade")
+        inst.components.distancefade:Setup(15,25)
+    end
+    
+    inst._hascanopy = net_bool(inst.GUID, "oceantree_pillar._hascanopy", "hascanopydirty")
+    inst._hascanopy:set(true)    
+    inst:DoTaskInTime(0, function()    
+        inst.canopy_data = CANOPY_SHADOW_DATA.spawnshadow(inst, math.floor(TUNING.SHADE_CANOPY_RANGE_SMALL/4), true)
+    end)
+
+    inst:ListenForEvent("hascanopydirty", function()
+                if not inst._hascanopy:value() then 
+                    removecanopyshadow(inst) 
+                end
+        end)
 		
-        if not TheWorld.ismastersim then
-            return inst
-        end
+		inst:AddTag("shadecanopysmall")
 		
         inst:DoTaskInTime(0, OnInit)		
 		inst:AddComponent("workable")
@@ -599,6 +728,13 @@ local function makeinfested()
 		inst:DoTaskInTime(0,SpawnTreeShadows)
 		inst.OnSave = onsave
 		inst.OnLoad = onload
+		
+		
+	--[[inst:AddComponent("playerprox")
+    inst.components.playerprox:SetDist(MIN, MAX)
+    inst.components.playerprox:SetOnPlayerFar(OnFar)
+    inst.components.playerprox:SetOnPlayerNear(OnNear)]]
+	
         return inst
 end
 return Prefab("giant_tree", makefn, assets),
