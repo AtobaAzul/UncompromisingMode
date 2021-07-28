@@ -348,4 +348,4 @@ CommonStates.AddRunStates(states,
 	},
 })
 
-return StateGraph("uncompromising_rat", states, events, "emerge_fast", actionhandlers)
+return StateGraph("uncompromising_lureplaguerat", states, events, "emerge_fast", actionhandlers)

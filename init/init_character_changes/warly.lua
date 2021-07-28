@@ -14,11 +14,11 @@ local function oneat(inst, data)
 		end
 			
 		if not inst:HasTag("vetcurse") and not inst:HasTag("UM_foodregen") and inst.components.sanity and sanitybonus > 0 then
-			inst.components.sanity:DoDelta(hungerbonus)
+			inst.components.sanity:DoDelta(sanitybonus)
 		end
 			
 		if not inst:HasTag("vetcurse") and not inst:HasTag("UM_foodregen") and inst.components.health and healthbonus > 0 then
-			inst.components.health:DoDelta(hungerbonus, food.prefab)
+			inst.components.health:DoDelta(healthbonus, food.prefab)
 		end
 	end
 end
