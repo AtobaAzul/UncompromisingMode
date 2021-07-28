@@ -2,8 +2,25 @@ require "prefabutil"
 local CANOPY_SHADOW_DATA = require("prefabs/canopyshadows")
 
 -----------------Nabbed canopy code
+local LEAF_FALL_FX_OFFSET_MIN = 3.5
+local LEAF_FALL_FX_OFFSET_VARIANCE = 2
+
 local MIN = TUNING.SHADE_CANOPY_RANGE_SMALL
 local MAX = MIN + TUNING.WATERTREE_PILLAR_CANOPY_BUFFER
+
+local DROP_ITEMS_DIST_MIN = 6
+local DROP_ITEMS_DIST_VARIANCE = 10
+
+local NUM_DROP_SMALL_ITEMS_MIN = 20
+local NUM_DROP_SMALL_ITEMS_MAX = 35
+
+local NUM_DROP_SMALL_ITEMS_MIN_RAM = 10
+local NUM_DROP_SMALL_ITEMS_MAX_RAM = 14
+
+local NUM_DROP_SMALL_ITEMS_MIN_LIGHTNING = 3
+local NUM_DROP_SMALL_ITEMS_MAX_LIGHTNING = 5
+
+local DROPPED_ITEMS_SPAWN_HEIGHT = 10
 local function OnFar(inst)
     if inst.players then
         local x, y, z = inst.Transform:GetWorldPosition()
@@ -69,6 +86,18 @@ local function removecanopyshadow(inst)
     end
 end
 
+local small_ram_products =
+{
+    "twigs",
+    "cutgrass",
+    "oceantree_leaf_fx_fall",
+    "oceantree_leaf_fx_fall",
+    "oceantree_leaf_fx_fall",
+    "oceantree_leaf_fx_fall",    
+    "oceantree_leaf_fx_fall",
+    "oceantree_leaf_fx_fall",      
+}
+
 local function removecanopy(inst)
     print("REMOVING CANOPU")
     if inst.roots then
@@ -91,6 +120,41 @@ local function removecanopy(inst)
         end
     end
     inst._hascanopy:set(false)    
+end
+
+local function DropLightningItems(inst, items)
+    local x, _, z = inst.Transform:GetWorldPosition()
+    local num_items = #items
+
+    for i, item_prefab in ipairs(items) do
+        local dist = DROP_ITEMS_DIST_MIN + DROP_ITEMS_DIST_VARIANCE * math.random()
+        local theta = 2 * PI * math.random()
+
+        inst:DoTaskInTime(i * 5 * FRAMES, function(inst2)
+            local item = SpawnPrefab(item_prefab)
+            item.Transform:SetPosition(x + dist * math.cos(theta), 20, z + dist * math.sin(theta))
+
+            if i == num_items then
+                inst._lightning_drop_task:Cancel()
+                inst._lightning_drop_task = nil
+            end 
+        end)
+    end
+end
+
+local function OnLightningStrike(inst)
+    if inst._lightning_drop_task ~= nil then
+        return
+    end
+
+    local num_small_items = math.random(NUM_DROP_SMALL_ITEMS_MIN_LIGHTNING, NUM_DROP_SMALL_ITEMS_MAX_LIGHTNING)
+    local items_to_drop = {}
+
+    for i = 1, num_small_items do
+        table.insert(items_to_drop, small_ram_products[math.random(1, #small_ram_products)])
+    end
+
+    inst._lightning_drop_task = inst:DoTaskInTime(20*FRAMES, DropLightningItems, items_to_drop)
 end
 --------------------------
 
@@ -140,24 +204,24 @@ local choploot =
 	"bird_egg",
 	"feather",
 	"spider",
-	"nothinglol",
-	"nothinglol",
-	"nothinglol",
-	"nothinglol",
-	"nothinglol",
-	"nothinglol",
-	"nothinglol",
-	"nothinglol",
-	"nothinglol",
-	"nothinglol",
-	"nothinglol",
-	"nothinglol",
-	"nothinglol",
-	"nothinglol",
-	"nothinglol",
-	"nothinglol",
-	"nothinglol",
-	"nothinglol",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
 }
 
 local infestedloot =
@@ -175,9 +239,9 @@ local infestedloot =
 	"aphid",
 	"aphid",
 	"aphid",
-	"nothinglol",
-	"nothinglol",
-	"nothinglol",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
+	"oceantree_leaf_fx_fall",
 }
 --Code From quaker
 local function _BreakDebris(debris)
@@ -347,7 +411,7 @@ local function SpawnDebris(inst,chopper,loottable)
 		x = x + math.random(-5,5)
 	end
 	local prefab = GetDebris(loottable)
-    if prefab ~= nil or "nothinglol" then
+    if prefab ~= nil and prefab ~= "oceantree_leaf_fx_fall" then
         local debris = SpawnPrefab(prefab)
         if debris ~= nil then
             debris.entity:SetCanSleep(false)
@@ -395,6 +459,15 @@ local function SpawnDebris(inst,chopper,loottable)
 		end																				
        
     end
+	if prefab == "oceantree_leaf_fx_fall" then
+	    local dist = DROP_ITEMS_DIST_MIN + DROP_ITEMS_DIST_VARIANCE * math.random()
+        local theta = 2 * PI * math.random()
+
+        inst:DoTaskInTime(5 * FRAMES, function(inst2)
+            local item = SpawnPrefab("oceantree_leaf_fx_fall")
+            item.Transform:SetPosition(x + dist * math.cos(theta), 20, z + dist * math.sin(theta))
+		end)
+	end
 end
 --Code From Quaker^
 
@@ -567,6 +640,8 @@ local function Deletus(inst)
 		end
 end
 
+
+
 local function makefn()
     	local inst = CreateEntity()
 
@@ -629,6 +704,10 @@ local function makefn()
 		inst.OnSave = onsave
 		inst.OnLoad = onload
 		
+		
+	    inst:AddComponent("lightningblocker")
+		inst.components.lightningblocker:SetBlockRange(TUNING.SHADE_CANOPY_RANGE_SMALL)
+		inst.components.lightningblocker:SetOnLightningStrike(OnLightningStrike)	
 	--[[inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(MIN, MAX)
     inst.components.playerprox:SetOnPlayerFar(OnFar)
@@ -729,7 +808,9 @@ local function makeinfested()
 		inst.OnSave = onsave
 		inst.OnLoad = onload
 		
-		
+		inst:AddComponent("lightningblocker")
+		inst.components.lightningblocker:SetBlockRange(TUNING.SHADE_CANOPY_RANGE_SMALL)
+		inst.components.lightningblocker:SetOnLightningStrike(OnLightningStrike)
 	--[[inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(MIN, MAX)
     inst.components.playerprox:SetOnPlayerFar(OnFar)
