@@ -89,8 +89,8 @@ local function OnPickup(inst, data)
 			inst._item:AddComponent("pickable")
 			inst._item.components.pickable.quickpick = true
 			inst._item.components.pickable.canbepicked = true
-			inst._item.components.pickable.onpickedfn = function(inst, picker)
-				--inst.components.inventory:DropEverything()
+			inst._item.components.pickable.onpickedfn = function()
+				inst.components.inventory:DropEverything()
 				inst:RemoveTag("carrying")
 				inst._item:Remove()
 			end
@@ -700,6 +700,7 @@ local function EndRaid(inst)
 		inst.components.workable:SetWorkLeft(math.random(2, 5))
 	end
 		
+	inst.components.periodicspawner:Start()
 	inst.components.herd:SetOnEmptyFn(BurrowKilled)
 	inst.components.herd.updatepos = false
     inst.components.herd.updateposincombat = false
@@ -713,36 +714,49 @@ local function OnInitHerd(inst)
 	end
 
 	if inst.raiding then
-		local steps = math.random(3, 5)
-		for i = 1, steps do
-			local x, y, z = inst.Transform:GetWorldPosition()
-			local angle = math.random() * 8 * PI
-			local rat = SpawnPrefab("uncompromising_rat")
-			rat.Transform:SetPosition(x + math.cos(angle), 0, z + math.sin(angle))
-			inst.components.herd:AddMember(rat)
+		for i = 1, 4 do
+			inst:DoTaskInTime((i - 1) * 15, function(inst)
+				for i = 1, (math.random(3, 5) / i) do
+					local x, y, z = inst.Transform:GetWorldPosition()
+					local angle = math.random() * 8 * PI
+					local rat = SpawnPrefab("uncompromising_rat")
+					rat.Transform:SetPosition(x + math.cos(angle), 0, z + math.sin(angle))
+					inst.components.herd:AddMember(rat)
+				end
+				
+				if i < 4 then
+					local x, y, z = inst.Transform:GetWorldPosition()
+					local angle = math.random() * 8 * PI
+					local packrat = SpawnPrefab("uncompromising_packrat")
+					packrat.Transform:SetPosition(x + math.cos(angle), 0, z + math.sin(angle))
+					inst.components.herd:AddMember(packrat)
+				end
+				
+			end)
 		end
 		inst.components.herd:SetUpdateRange(20)
-		inst:DoTaskInTime(math.random(30, 60), EndRaid)
+		inst:DoTaskInTime(61, EndRaid)
 		inst:AddTag("raiding")
 	end
 end
 
 local function onsave_burrow(inst, data)
-if inst.raiding ~= nil then
-	data.raiding = inst.raiding
-end
+	if inst.raiding ~= nil then
+		data.raiding = inst.raiding
+	end
 end
 
 local function onpreload_burrow(inst, data)
-if data ~= nil and data.raiding ~= nil then
-	inst.raiding = data.raiding
-end
+	if data ~= nil and data.raiding ~= nil then
+		inst.raiding = data.raiding
+	end
 end
 
 local function onload_burrow(inst, data)
-if data ~= nil and data.raiding ~= nil then
-	inst.raiding = data.raiding
-end	
+	if data ~= nil and data.raiding ~= nil then
+		inst.raiding = data.raiding
+	end	
+	
 	if not inst.raiding then
 		inst.AnimState:PushAnimation("idle", true)
 		
@@ -788,11 +802,11 @@ local function fn_herd()
 	inst.components.periodicspawner:SetPrefab("uncompromising_rat")
 	inst.components.periodicspawner:SetOnSpawnFn(OnSpawned)
 	inst.components.periodicspawner:SetDensityInRange(30, 8)
-	inst.components.periodicspawner:Start()
 	
 	inst:AddComponent("combat")
 	
 	inst:AddComponent("inventory")
+	inst.components.inventory.maxslots = 100
 	
 	inst:AddComponent("lootdropper")
 	
