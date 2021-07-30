@@ -248,4 +248,7 @@ return {
 	"ratgas",
 	"ratacombs_junkpile",
 	"ratacombs_junkpile_spawner",
+	"ratacombslock",
+	"ratacombskey",
+	"ratacombslock_rock",
 }

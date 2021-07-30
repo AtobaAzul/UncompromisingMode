@@ -1,6 +1,14 @@
 return Class(function(self, inst)
 self.inst = inst
 
+function self:UnLockFirstArea()
+if self.areaoneblockers ~= nil then
+	for i, v in ipairs(self.areaoneblockers) do
+		v.dotransition(v)
+	end
+end
+end
+
 function self:MakeSpawnersSpawn()
 	for i, v in ipairs(self.spawnerlist) do
 		v.SpawnMoreJunk(v)
