@@ -109,21 +109,6 @@ AddComponentAction("SCENE", "repairable", function(inst, doer, actions, right)
 	end
 end)
 
-AddComponentAction("SCENE", "heavyobstacleusetarget", function(inst, doer, actions, right)
-    if right and
-		doer.replica.inventory ~= nil then 
-		
-		local item = doer.replica.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BODY)
-		
-		if item ~= nil and
-			item:HasTag("washeavy") then
-			if inst:HasTag("winch_ready") then
-				table.insert(actions, GLOBAL.ACTIONS.USE_HEAVY_OBSTACLE)
-			end
-		end
-	end
-end)
-
 if not TheNet:GetIsServer() then return end
 
 --Credit to Rezecib's Rebalance for Wolfgang being able to cancel the animation code.
