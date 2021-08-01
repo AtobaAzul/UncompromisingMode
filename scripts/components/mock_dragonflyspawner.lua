@@ -278,6 +278,10 @@ function self:OverrideAttackDuringOffSeason(name, bool)
 	end
 end
 
+function self:OnPostInit()
+    TryStartAttacks()
+end
+
 local function _DoWarningSpeech(player)
     player.components.talker:Say(GetString(player, "ANNOUNCE_DEERCLOPS"))
 end
@@ -455,9 +459,6 @@ self.inst:ListenForEvent("ms_playerleft", OnPlayerLeft, TheWorld)
 self:WatchWorldState("season", OnSeasonChange)
 self.inst:ListenForEvent("mockflyremoved", OnHasslerRemoved, TheWorld)
 self.inst:ListenForEvent("mockflykilled", OnHasslerKilled, TheWorld)
-
-function self:OnPostInit()
-    TryStartAttacks()
-end
+self.inst:ListenForEvent("storehasslermockdragonfly", OnStoreHassler, TheWorld)
 
 end)

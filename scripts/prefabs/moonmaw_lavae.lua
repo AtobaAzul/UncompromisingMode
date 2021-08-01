@@ -46,13 +46,15 @@ end
 end
 
 local function CheckDist(inst)
-if inst ~= nil and inst.WINDSTAFF_CASTER ~= nil and inst.WINDSTAFF_CASTER.components.health ~= nil and not inst.WINDSTAFF_CASTER.components.health:IsDead() then
-	if inst:GetDistanceSqToInst(inst.WINDSTAFF_CASTER) > 15 then
-		Reposition(inst)
+	if inst ~= nil and inst.WINDSTAFF_CASTER ~= nil and inst.WINDSTAFF_CASTER.components.health ~= nil and not inst.WINDSTAFF_CASTER.components.health:IsDead() then
+		local distance = inst ~= nil and inst.WINDSTAFF_CASTER ~= nil and inst:GetDistanceSqToInst(inst.WINDSTAFF_CASTER)
+		
+		if distance ~= nil and distance > 15 then
+			Reposition(inst)
+		end
+	else
+		inst:Remove()
 	end
-else
-	inst:Remove()
-end
 end
 
 local function lavaering_fn()

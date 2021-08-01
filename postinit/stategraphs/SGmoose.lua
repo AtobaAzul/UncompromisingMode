@@ -18,23 +18,18 @@ local events=
 {
     EventHandler("locomote",
 	function(inst)
-		print("chumba1")
 		if (not inst.sg:HasStateTag("idle") and not inst.sg:HasStateTag("moving") or inst.sg:HasStateTag("superhop")) then return end
 
-		print("chumba2")
 		if not inst.components.locomotor:WantsToMoveForward() then
 			if not inst.sg:HasStateTag("idle") then
-		print("chumba5")
 				inst.sg:GoToState("idle", {softstop = true})
 			end
 		else
 			local target = inst.components.combat ~= nil and inst.components.combat.target or nil
 		
 			if not inst.sg:HasStateTag("hopping") and inst.superhop == true and target ~= nil and math.random() < 0.5 then
-		print("chumba3")
 				inst.sg:GoToState("hopatk")
 			elseif not inst.sg:HasStateTag("hopping") then
-		print("chumba4")
 				inst.sg:GoToState("hop")
 			end
 		end
@@ -188,23 +183,18 @@ local events=
 {
     EventHandler("locomote",
 	function(inst)
-		print("chumba1")
 		if (not inst.sg:HasStateTag("idle") and not inst.sg:HasStateTag("moving") or inst.sg:HasStateTag("superhop")) then return end
 
-		print("chumba2")
 		if not inst.components.locomotor:WantsToMoveForward() then
 			if not inst.sg:HasStateTag("idle") then
-		print("chumba5")
 				inst.sg:GoToState("idle", {softstop = true})
 			end
 		else
 			local target = inst.components.combat ~= nil and inst.components.combat.target or nil
 		
 			if not inst.sg:HasStateTag("hopping") and inst.superhop == true and target ~= nil and math.random() < 0.5 then
-		print("chumba3")
 				inst.sg:GoToState("hopatk")
 			elseif not inst.sg:HasStateTag("hopping") then
-		print("chumba4")
 				inst.sg:GoToState("hop")
 			end
 		end

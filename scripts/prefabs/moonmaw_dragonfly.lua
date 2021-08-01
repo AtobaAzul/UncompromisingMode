@@ -45,7 +45,7 @@ local SEE_STRUCTURE_DIST = 20
 local TARGET_DIST = 3
 
 local function LeaveWorld(inst)
-	TheWorld:PushEvent("storehasslermockdragonfly", inst)
+	--TheWorld:PushEvent("storehasslermockdragonfly", inst)
     inst:Remove()
 end
 
@@ -128,7 +128,7 @@ local function OnEntitySleep(inst)
 		local PlayerPosition = inst:GetNearestPlayer()
 		
 		if inst.shouldGoAway then
-        LeaveWorld(inst)
+			LeaveWorld(inst)
 		else
    --[[ elseif (not inst:NearPlayerBase() and not inst.SeenBase) and ThePlayer ~= nil 
         or (inst.components.combat:TargetIs(ThePlayer) and not inst.KilledPlayer) then
