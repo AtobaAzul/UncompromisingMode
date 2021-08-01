@@ -35,9 +35,9 @@ local function TalkShit(inst, taunts)
     end
 end
 
-local function RetaliateAttacker(inst,attacker,taunts) 
-    if inst ~= nil and inst.components.combat ~= nil then
-        inst.components.combat:SetTarget(attacker) 
+local function RetaliateAttacker(inst,attacker,taunts)
+    if inst ~= nil and attacker ~= nil and inst.components.combat ~= nil then
+        inst.components.combat:SuggestTarget(attacker) 
     end
     if taunts ~= nil then TalkShit(inst,taunts) end
 end
