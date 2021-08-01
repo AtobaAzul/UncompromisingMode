@@ -180,34 +180,32 @@ local function fn()
     shadow:SetSize( 1.5, .75 )
     inst.entity:AddNetwork()
     inst.entity:AddLightWatcher()
+	
+    MakeGhostPhysics(inst, 1, .5)
 
-    --inst.DynamicShadow:SetSize(1, .75)
-    inst.Transform:SetFourFaced()
+    inst.DynamicShadow:SetSize(1.5, .75)
 
-	--shadow:SetSize(1, 0.75)
 	inst.Transform:SetFourFaced()
 	inst.Transform:SetScale(0.9, 0.9, 0.9)
-	MakeFlyingCharacterPhysics(inst, 1, .5)
-	--MakePoisonableCharacter(inst)
+
+    inst.AnimState:SetBank("bat")
+    inst.AnimState:SetBuild("bat_vamp_build")
+
+    inst:AddTag("cavedweller")
+    inst:AddTag("monster")
+    inst:AddTag("hostile")
+    inst:AddTag("bat")
+    inst:AddTag("scarytoprey")
+    inst:AddTag("flying")
+    inst:AddTag("ignorewalkableplatformdrowning")
+
+    MakeInventoryFloatable(inst)
 
 	inst.entity:SetPristine()
 	
 	if not TheWorld.ismastersim then
         return inst
     end
-    --MakeAmphibiousCharacterPhysics(inst, 1, .5)
-   -- inst.Physics:SetCollisionGroup(COLLISION.FLYERS)
-    --inst.Physics:CollidesWith(COLLISION.FLYERS) 
-    --inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-
-    inst:AddTag("bat")
-    inst:AddTag("scarytoprey")
-    inst:AddTag("monster")
-    inst:AddTag("hostile")
-    inst:AddTag("flying")
-
-    inst.AnimState:SetBank("bat")
-    inst.AnimState:SetBuild("bat_vamp_build")
     inst:AddComponent("locomotor")
     inst.components.locomotor:SetSlowMultiplier( 1 )
     inst.components.locomotor:SetTriggersCreep(false)

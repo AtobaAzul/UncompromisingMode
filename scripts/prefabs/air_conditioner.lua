@@ -337,7 +337,7 @@ local function MakeMushy(name, color)
 
 		MakeInventoryPhysics(inst)
 		
-		local truecolor = (color == "purple" and "blue" or color)
+		local truecolor = (color == "blue" and "purple" or color)
 		
 		inst:AddTag("mushed_room")
 		inst:AddTag("mushroom_fuel")

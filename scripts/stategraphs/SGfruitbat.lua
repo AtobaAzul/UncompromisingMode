@@ -3,7 +3,7 @@ require("stategraphs/commonstates")
 local actionhandlers =
 {
     ActionHandler(ACTIONS.GOHOME, "flybackup"),
-    ActionHandler(ACTIONS.EAT, "eat_loop"),
+    ActionHandler(ACTIONS.EAT, "eat_enter"),
     ActionHandler(ACTIONS.PICKUP, "eat_enter")
 }
 

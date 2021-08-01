@@ -11,7 +11,7 @@ local SEE_FOOD_DIST = 20
 local MAX_WANDER_DIST = 30
 local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
 
-local VampireBatBrain = Class(Brain, function(self, inst)
+local FruitBatBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
 
@@ -38,6 +38,7 @@ local function EscapeAction(inst)
         and BufferedAction(inst, exit, ACTIONS.GOHOME)
         or nil
 end
+
 local function EatFoodAction(inst)
 	if inst.sg:HasStateTag("busy") or inst:GetTimeAlive() < 5 or
         (inst.components.eater:TimeSinceLastEating() ~= nil and inst.components.eater:TimeSinceLastEating() < 5) then
@@ -63,9 +64,10 @@ local function EatFoodAction(inst)
         NO_TAGS,
         inst.components.eater:GetEdibleTags()
     )
-    return target ~= nil and BufferedAction(inst, target, ACTIONS.PICKUP) or nil
+    return target ~= nil and BufferedAction(inst, target, ACTIONS.EAT) or nil
 end
-function VampireBatBrain:OnStart()
+
+function FruitBatBrain:OnStart()
     local root = PriorityNode({
         WhileNode(function() return self.inst.components.health.takingfiredamage or self.inst.components.hauntable.panic end, "Panic", Panic(self.inst)),
         ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST),
@@ -80,8 +82,9 @@ function VampireBatBrain:OnStart()
 
     self.bt = BT(self.inst, root)
 end
-function VampireBatBrain:OnInitializationComplete()
+
+function FruitBatBrain:OnInitializationComplete()
     self.inst.components.knownlocations:RememberLocation("home", self.inst:GetPosition(), true)
 end
 
-return VampireBatBrain
+return FruitBatBrain
