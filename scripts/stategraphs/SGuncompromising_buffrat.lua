@@ -296,8 +296,8 @@ local states=
         
         timeline=
         {
-            TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
-            TimeEvent(10*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target)
+            TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
+            TimeEvent(7*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target)
 					if inst.components.combat.target ~= nil and inst.components.combat:CanHitTarget(inst.components.combat.target) then--distsq(target:GetPosition(), inst:GetPosition()) <= 10 then
 					--Don't knockback if you wear marble
 						local target = inst.components.combat.target
@@ -387,7 +387,9 @@ local states=
         {
             EventHandler("animqueueover", function(inst)
 				inst.components.health:SetAbsorptionAmount(0)
-				inst.sg:GoToState("taunt2")
+				if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
+					inst.sg:GoToState("taunt2")
+				end
 			end),
         },
     },

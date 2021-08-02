@@ -45,7 +45,7 @@ local function OnAttacked(inst, data)
     inst.components.combat:SetTarget(data.attacker)
 	if data ~= nil and data.damage ~= nil then
 		inst.damage = data.damage + inst.damage
-		if inst.damage > 100 and inst.mode ~= "offense" then
+		if inst.damage > 100 and inst.mode ~= "offense" and not inst.sg:HasStateTag("jumping") then
 			inst.mode = "offense"
 			inst.sg:GoToState("offense_pre")
 		end
