@@ -177,6 +177,7 @@ configuration_options =
 	Header("Items and Structures"),
 	Header("--------------------"),
 	BinaryConfig("scaledchestbuff", "Scaled Chest Buff", "Scaled chest is not worth the resources required. Enabling this buffs it to 25 slots. Toggling with scaled chests in existing world may cause crash.", true),
+	BinaryConfig("canedurability", "Cane Durability (Off by default)", "Cane loses durability similarly to a whirly fan, note that UM walruses drop tusks 100% of the time.", false),
 -----------------------------
 -- Food --
 -----------------------------
