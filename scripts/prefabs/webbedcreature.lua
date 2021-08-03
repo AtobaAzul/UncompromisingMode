@@ -118,6 +118,7 @@ SetSharedLootTable('webbedcreature_walrus',
 {
     {"meat",    1.00},
     {"meat",    1.00},
+	{"walrus_tusk",    0.50},
     {"blowdart_pipe",    0.5},
 })
 

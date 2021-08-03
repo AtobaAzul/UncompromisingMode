@@ -12,6 +12,7 @@ SetSharedLootTable( 'walrus_summer',
     {'hawaiianshirt',     0.05},
 })
 
+
 local function SpitCooldown(inst, data)
 	local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 
@@ -100,7 +101,6 @@ env.AddPrefabPostInit("walrus", function (inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	
 	inst:AddComponent("timer")
 	if not inst.components.timer:TimerExists("SpitCooldown") then
 		inst.components.timer:StartTimer("SpitCooldown", 15)

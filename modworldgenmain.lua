@@ -133,6 +133,35 @@ room.contents.countprefabs=
 end)
 end
 
+-----------Ghost Walrus
+
+AddRoomPreInit("WalrusHut_Plains", function(room)					
+room.contents.countprefabs=
+									{
+										um_bear_trap_old = function() return math.random(6,8) end,
+										ghost_walrus = function() return math.random(2,4) end,
+										walrus_camp = 1,
+										}
+end)
+
+AddRoomPreInit("WalrusHut_Grassy", function(room)					
+room.contents.countprefabs=
+									{
+										um_bear_trap_old = function() return math.random(6,8) end,
+										ghost_walrus = function() return math.random(2,4) end,
+										walrus_camp = 1,
+										}
+end)
+
+AddRoomPreInit("WalrusHut_Rocky", function(room)					
+room.contents.countprefabs=
+									{
+										um_bear_trap_old = function() return math.random(6,8) end,
+										ghost_walrus = function() return math.random(2,4) end,
+										walrus_camp = 1,
+										}
+end)
+
 -----------Marsh Grass
 AddRoomPreInit("BGMarsh", function(room)					
 room.contents.countprefabs=

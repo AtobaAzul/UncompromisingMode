@@ -1,5 +1,5 @@
 -- these should match the animation names to the workleft
-local anims = {"low", "med", "full"}
+local anims = {"idle_low", "idle_med", "idle_full"}
 
 local loots = 
 {
@@ -62,7 +62,7 @@ local function on_anim_over_now(inst)
 --print(inst.components.pickable.cycles_left)
 	if inst.components.pickable ~= nil and inst.components.pickable.cycles_left ~= 0 then
 		--if inst.keyloot == false then
-			inst.AnimState:PlayAnimation(anims[inst.components.pickable.cycles_left])
+			inst.AnimState:PushAnimation(anims[inst.components.pickable.cycles_left])
 		--end
 	end
 end
@@ -101,19 +101,20 @@ local function onpickedfn(inst, picker)
 	TrySanityLoss(picker)
 	TryLoot(inst,picker)
 	if inst.components.pickable.cycles_left > 0 then
-		if inst.Transform:GetWorldPosition() ~= nil then
-			local debris = SpawnPrefab("splash_snow_fx")
-			debris.Transform:SetPosition(inst.Transform:GetWorldPosition())
-		end
 	else
-		if inst.Transform:GetWorldPosition() ~= nil then
-			local debris = SpawnPrefab("splash_snow_fx")
-			debris.Transform:SetPosition(inst.Transform:GetWorldPosition())
-		end
 		if math.random() > 0.75 then
 			RevealChest(inst)
 		end
 		inst:Remove()
+	end
+	if inst.components.pickable.cycles_left == 2 then
+		inst.AnimState:PlayAnimation("dig_full")
+	end
+	if inst.components.pickable.cycles_left == 1 then
+		inst.AnimState:PlayAnimation("dig_med")
+	end
+	if inst.components.pickable.cycles_left == 0 then
+		inst.AnimState:PlayAnimation("dig_low")
 	end
 end
 
@@ -141,16 +142,14 @@ local function junkpilefn()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-	inst.AnimState:SetBuild("snow_dune")
-	inst.AnimState:SetBank("snow_dune")
-	inst.AnimState:PlayAnimation("full")
-	inst.AnimState:SetMultColour(0.25, 1, 0.5, 1)
+	inst.AnimState:SetBuild("garbage_pile")
+	inst.AnimState:SetBank("garbage_pile")
+	inst.AnimState:PlayAnimation("idle_full")
 	
 	inst.entity:SetPristine()
 	
 	MakeObstaclePhysics(inst, 2.5, 0)
 	
-	inst.Transform:SetScale(1.5, 1.5, 1.5)
 	
 	inst:AddTag("ratjunk")
 	

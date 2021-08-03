@@ -221,6 +221,10 @@ if GetModConfigData("pinelings") == true then
 table.insert(prefab_post,"evergreen_stump")
 end
 
+if GetModConfigData("canedurability") == true then
+table.insert(prefab_post,"cane")
+end
+
 modimport("postinit/sim")
 modimport("postinit/any")
 modimport("postinit/player")
