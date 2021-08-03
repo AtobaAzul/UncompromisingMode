@@ -668,7 +668,8 @@ local function EndRaid(inst)
 		x = x + math.random(-200, 200)
 		z = z + math.random(-200, 200)
 	end
-	if TheWorld.Map:IsPassableAtPoint(x, 0, z) then
+
+	if TheWorld.Map:IsPassableAtPoint(x, 0, z) and #TheSim:FindEntities(x, y, z, 50, { "player" }) == 0 then
 		inst.Transform:SetPosition(x, 0, z)
 	else
 		inst:DoTaskInTime(0, EndRaid)
@@ -697,7 +698,7 @@ local function EndRaid(inst)
 		inst.components.workable:SetOnFinishCallback(onfinishcallback)
 		inst.components.workable:SetOnWorkCallback(onworked)
 		inst.components.workable:SetWorkAction(ACTIONS.DIG)
-		inst.components.workable:SetWorkLeft(math.random(2, 5))
+		inst.components.workable:SetWorkLeft(3)
 	end
 		
 	inst.components.periodicspawner:Start()
@@ -798,7 +799,7 @@ local function fn_herd()
     inst.components.herd.updateposincombat = true
 	
 	inst:AddComponent("periodicspawner")
-	inst.components.periodicspawner:SetRandomTimes(5, 7)
+	inst.components.periodicspawner:SetRandomTimes(10, 13)
 	inst.components.periodicspawner:SetPrefab("uncompromising_rat")
 	inst.components.periodicspawner:SetOnSpawnFn(OnSpawned)
 	inst.components.periodicspawner:SetDensityInRange(30, 8)
@@ -853,7 +854,7 @@ local function fn_burrow()
 	inst.components.herd.updateposincombat = false
 	
 	inst:AddComponent("periodicspawner")
-	inst.components.periodicspawner:SetRandomTimes(5, 7)
+	inst.components.periodicspawner:SetRandomTimes(10, 13)
 	inst.components.periodicspawner:SetPrefab("uncompromising_rat")
 	inst.components.periodicspawner:SetOnSpawnFn(OnSpawned)
 	inst.components.periodicspawner:SetDensityInRange(30, 8)
