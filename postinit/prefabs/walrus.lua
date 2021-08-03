@@ -12,13 +12,6 @@ SetSharedLootTable( 'walrus_summer',
     {'hawaiianshirt',     0.05},
 })
 
-SetSharedLootTable( 'um_walrus',
-{
-    {'meat',            1.00},
-    {'blowdart_pipe',   1.00},
-    {'walrushat',       0.50},
-    {'walrus_tusk',     1.00},
-})
 
 local function SpitCooldown(inst, data)
 	local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
@@ -100,7 +93,7 @@ local function OnIsSummer(inst, issummer)
     else
 		inst.AnimState:SetBank("walrus")
         inst.AnimState:SetBuild("walrus_build")
-		inst.components.lootdropper:SetChanceLootTable('um_walrus')
+		inst.components.lootdropper:SetChanceLootTable('walrus')
     end
 end
 
@@ -108,7 +101,6 @@ env.AddPrefabPostInit("walrus", function (inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	inst.components.lootdropper:SetChanceLootTable('um_walrus')
 	inst:AddComponent("timer")
 	if not inst.components.timer:TimerExists("SpitCooldown") then
 		inst.components.timer:StartTimer("SpitCooldown", 15)
