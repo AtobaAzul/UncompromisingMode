@@ -241,7 +241,7 @@ end
 
 local function ShouldSleep(inst)
     if ((inst.num_targets_vomited >= TUNING.DRAGONFLY_VOMIT_TARGETS_FOR_SATISFIED) or (inst.num_ashes_eaten >= TUNING.DRAGONFLY_ASH_EATEN_FOR_SATISFIED))
-    and inst.arrivedatsleepdestination then
+    and inst.arrivedatsleepdestination and not inst.sg:HasStateTag("crashed") then
         inst.num_targets_vomited = 0
         inst.num_ashes_eaten = 0
         inst.sleep_time = GetTime()

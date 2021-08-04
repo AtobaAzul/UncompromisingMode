@@ -22,9 +22,25 @@ local function GetSpawnPoint(inst)
 	return x,y,z
 end
 
+local function TryRatInfest(junk)
+	local x,y,z = junk.Transform:GetWorldPosition()
+	local infestedjunk1 = TheSim:FindEntities(x,y,z,10,{"ratinfested"})
+	local infestedjunk2 = TheSim:FindEntities(x,y,z,20,{"ratinfested"})
+	if #infestedjunk2 < 6 then
+		junk.inhabited = true
+		junk.BecomeSpawner(junk)
+	end
+	if #infestedjunk1 < 3 then
+		junk.inhabited = true
+		junk.BecomeSpawner(junk)
+	end
+end
+
 local function SpawnMoreJunk(inst)
 	for i = 1,math.random(3,5) do
-		SpawnPrefab("ratacombs_junkpile").Transform:SetPosition(GetSpawnPoint(inst))
+		local junk = SpawnPrefab("ratacombs_junkpile")
+		junk.Transform:SetPosition(GetSpawnPoint(inst))
+		TryRatInfest(junk)
 	end
 	
 	inst:Remove() --Final version will not remove itself.... because it should respawn junk for the player.

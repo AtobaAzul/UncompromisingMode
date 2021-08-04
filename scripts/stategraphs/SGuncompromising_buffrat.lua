@@ -3,7 +3,6 @@ require("stategraphs/commonstates")
 local actionhandlers = 
 {
     ActionHandler(ACTIONS.EAT, "eat"),
-    ActionHandler(ACTIONS.GOHOME, "eat"),
     ActionHandler(ACTIONS.INVESTIGATE, "investigate"),
 }
 
@@ -493,6 +492,14 @@ local states=
 }
 
 CommonStates.AddFrozenStates(states)
+
+CommonStates.AddSleepStates(states,
+{
+	sleeptimeline =
+	{
+		TimeEvent(30 * FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.sleep) end),
+	},
+})
 
 return StateGraph("SGuncompromising_buffrat", states, events, "idle", actionhandlers)
 

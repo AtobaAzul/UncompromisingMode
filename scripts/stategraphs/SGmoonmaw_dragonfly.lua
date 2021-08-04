@@ -116,6 +116,7 @@ local events=
 {
     CommonHandlers.OnLocomote(false,true),
     CommonHandlers.OnSleep(),
+	
 	EventHandler("doattack", function(inst, data)
 	onattackfn(inst)
 	end),
@@ -687,7 +688,7 @@ local states=
         },
     State{
         name = "skyfall",
-        tags = {"busy", "canrotate"},
+        tags = {"busy", "canrotate","crashed","nosleep"},
         
         onenter = function(inst)
 		inst.Physics:Stop()
@@ -709,7 +710,7 @@ local states=
     },
     State{
         name = "crashed",
-        tags = {"busy", "canrotate","crashed"},
+        tags = {"busy", "canrotate","crashed","nosleep"},
         
         onenter = function(inst)
 		inst.Physics:Stop()
@@ -732,7 +733,7 @@ local states=
     },
     State{
         name = "getup",
-        tags = {"busy", "canrotate"},
+        tags = {"busy", "canrotate","crashed","nosleep"},
         
         onenter = function(inst)
 		inst.Physics:Stop()

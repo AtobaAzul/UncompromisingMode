@@ -75,9 +75,27 @@ local function TryLoot(inst,picker)
 	on_anim_over_now(inst)
 end
 
+local function BecomeSpawner(inst)
+print("becamespawner")
+    inst:AddComponent("childspawner")
+    inst.components.childspawner.childname = "uncompromsing_junkrat"
+    inst.components.childspawner:SetRareChild("uncompromsing_junkrat", TUNING.SLURTLEHOLE_RARECHILD_CHANCE)
+    inst.components.childspawner:SetMaxChildren(1)
+    inst.components.childspawner:SetSpawnPeriod(10)
+	inst.components.childspawner:SetRegenPeriod(48)
+	inst.components.childspawner.childreninside = 1
+	inst.components.childspawner:StartRegen()
+	inst.components.childspawner:StartSpawning()
+	inst.components.childspawner:SpawnChild()
+	
+end
+
 local function onsave(inst, data)
 	data.cycles_left = inst.components.pickable.cycles_left
 	data.keyloot = inst.keyloot
+	if inst.inhabited ~= nil then
+		data.inhabited = inst.inhabited
+	end
 end
 
 local function onload(inst, data)
@@ -87,6 +105,10 @@ local function onload(inst, data)
 		end
 		if data.keyloot then
 			inst.keyloot = data.keyloot
+		end
+		if data.inhabited then
+			inst.inhabited = data.inhabited
+			BecomeSpawner(inst)
 		end
 	end
 end
@@ -133,6 +155,18 @@ local function InitializeKeyloot(inst)
 		inst.keyloot = false
 	end
 end	
+
+local function Shake(inst)
+	if inst.components.pickable.cycles_left == 3 then
+		inst.AnimState:PlayAnimation("twitch_full")
+	end
+	if inst.components.pickable.cycles_left == 2 then
+		inst.AnimState:PlayAnimation("twitch_med")
+	end
+	if inst.components.pickable.cycles_left == 1 then
+		inst.AnimState:PlayAnimation("twitch_low")
+	end
+end
 
 local function junkpilefn()
 	local inst = CreateEntity()
@@ -183,9 +217,12 @@ local function junkpilefn()
 	----------------------
 	inst:AddComponent("areaaware")
 	----------------------
+	inst.Shake = Shake
 	
 	inst.OnSave = onsave
 	inst.OnLoad = onload
+	
+	inst.BecomeSpawner = BecomeSpawner
 	
 	return inst
 end
