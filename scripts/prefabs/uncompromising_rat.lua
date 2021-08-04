@@ -256,6 +256,7 @@ local function fn()
 	inst.components.combat:SetRange(TUNING.DSTU.RAIDRAT_ATTACK_RANGE)
 	inst.components.combat.hiteffectsymbol = "carrat_body"
     inst.components.combat.onhitotherfn = OnHitOther
+	inst.components.combat:SetRetargetFunction(3, rattargetfn)
 
     inst:AddComponent("thief")
 	
@@ -312,14 +313,27 @@ local function fn()
 end
 
 local RETARGET_CANT_TAGS = { "wall", "raidrat"}
+local function rattargetfn(inst)
+    return FindEntity(
+                inst, 5,
+                function(guy)
+					local validitem = guy.components.inventory ~= nil and guy.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
+                    return inst:GetTimeAlive() > 5 and not 
+					inst:HasTag("carrying") and
+					guy.components.inventory ~= nil and
+					validitem ~= nil and
+					inst.components.combat:CanTarget(guy)
+                end,
+                nil,
+                RETARGET_CANT_TAGS
+            )
+        or nil
+end
+
 local function retargetfn(inst)
     return FindEntity(
                 inst, TUNING.HOUND_TARGET_DIST,
                 function(guy)
-					local validitem = guy.components.inventory ~= nil and guy.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
-                    return not inst:HasTag("carrying") and
-					guy.components.inventory ~= nil and
-					validitem ~= nil and
 					inst.components.combat:CanTarget(guy)
                 end,
                 nil,
