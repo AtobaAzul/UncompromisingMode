@@ -12,7 +12,7 @@ local GROUND_OCEAN_COLOR = -- Color for the main island ground tiles
 
 AddTile(
 	"HOODEDFOREST",
-	102,
+	102.5,
 	"hoodedmoss",
 	{
 		noise_texture = "levels/textures/noise_hoodedmoss.tex",
@@ -26,7 +26,7 @@ AddTile(
 )
 AddTile(
 	"ANCIENTHOODEDFOREST",
-	110,
+	110.5,
 	"ancienthoodedturf",
 	{
 		noise_texture = "levels/textures/noise_jungle.tex",

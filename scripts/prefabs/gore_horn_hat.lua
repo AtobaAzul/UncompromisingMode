@@ -294,7 +294,6 @@ end
         inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
         inst.components.equippable:SetOnEquip(onequip)
         inst.components.equippable:SetOnUnequip(onunequip)
-        inst.components.equippable.dapperness = TUNING.DAPPERNESS_MED
 
         MakeHauntableLaunch(inst)
 
