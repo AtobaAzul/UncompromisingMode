@@ -143,6 +143,10 @@ local function Trapped(inst)
 	end
 end
 
+local function OnHitOther(inst, other, damage)
+    inst.components.thief:StealItem(other)
+end
+
 local function fn()
 	local inst = CreateEntity()
 	
@@ -251,6 +255,9 @@ local function fn()
 	inst.components.combat:SetAttackPeriod(TUNING.DSTU.RAIDRAT_ATTACK_PERIOD)
 	inst.components.combat:SetRange(TUNING.DSTU.RAIDRAT_ATTACK_RANGE)
 	inst.components.combat.hiteffectsymbol = "carrat_body"
+    inst.components.combat.onhitotherfn = OnHitOther
+
+    inst:AddComponent("thief")
 	
 	inst:AddComponent("health")
 	inst.components.health:SetMaxHealth(TUNING.DSTU.RAIDRAT_HEALTH)
@@ -309,7 +316,11 @@ local function retargetfn(inst)
     return FindEntity(
                 inst, TUNING.HOUND_TARGET_DIST,
                 function(guy)
-                    return inst.components.combat:CanTarget(guy)
+					local validitem = guy.components.inventory ~= nil and guy.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
+                    return not inst:HasTag("carrying") and
+					guy.components.inventory ~= nil and
+					validitem ~= nil and
+					inst.components.combat:CanTarget(guy)
                 end,
                 nil,
                 RETARGET_CANT_TAGS
@@ -657,6 +668,37 @@ local function BurrowAnim(inst)
 	inst:DoTaskInTime(3 + math.random(), BurrowAnim)
 end
 
+local function MakeRatBurrow(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+
+    local function IsValidRatBurrowPosition(x, z)
+        if #TheSim:FindEntities(x, 0, z, TUNING.ANTLION_SINKHOLE.RADIUS, { "antlion_sinkhole_blocker" }) > 0 then
+            return false
+        end
+        if #TheSim:FindEntities(x, 0, z, 50, { "player", "playerghost" }) > 0 then
+            return false
+        end
+		
+        for dx = -1, 1 do
+            for dz = -1, 1 do
+                if not TheWorld.Map:IsPassableAtPoint(x + dx * TUNING.ANTLION_SINKHOLE.RADIUS, 0, z + dz * TUNING.ANTLION_SINKHOLE.RADIUS, false, true) then
+                    return false
+                end
+            end
+        end
+        return true
+    end
+	
+	for i = 1, 4 do
+		inst.x1, inst.z1 = x + math.random(-200, 200), z + math.random(-200, 200)
+		
+		if IsValidRatBurrowPosition(inst.x1, inst.z1) then
+			inst.Transform:SetPosition(inst.x1, 0, inst.z1)
+			break
+		end
+	end
+end
+
 local function EndRaid(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local players = FindPlayersInRange(x, y, z, 50)
@@ -665,16 +707,9 @@ local function EndRaid(inst)
 		end
 		
 	if inst.raiding	then
-		x = x + math.random(-200, 200)
-		z = z + math.random(-200, 200)
+		MakeRatBurrow(inst)
 	end
 
-	if TheWorld.Map:IsPassableAtPoint(x, 0, z) and #TheSim:FindEntities(x, y, z, 50, { "player" }) == 0 then
-		inst.Transform:SetPosition(x, 0, z)
-	else
-		inst:DoTaskInTime(0, EndRaid)
-	end
-	
 	for rats,_ in pairs(inst.components.herd.members) do
 		
 	end
@@ -716,8 +751,8 @@ local function OnInitHerd(inst)
 
 	if inst.raiding then
 		for i = 1, 4 do
-			inst:DoTaskInTime((i - 1) * 15, function(inst)
-				for i = 1, (math.random(3, 5) / i) do
+			inst:DoTaskInTime((i - 1) * 12, function(inst)
+				for i = 1, (math.random(4, 5) / i) do
 					local x, y, z = inst.Transform:GetWorldPosition()
 					local angle = math.random() * 8 * PI
 					local rat = SpawnPrefab("uncompromising_rat")
@@ -736,7 +771,7 @@ local function OnInitHerd(inst)
 			end)
 		end
 		inst.components.herd:SetUpdateRange(20)
-		inst:DoTaskInTime(61, EndRaid)
+		inst:DoTaskInTime(45, EndRaid)
 		inst:AddTag("raiding")
 	end
 end

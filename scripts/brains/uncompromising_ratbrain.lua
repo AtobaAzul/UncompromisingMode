@@ -16,7 +16,7 @@ local TOOCLOSE = 3
 local SEE_BAIT_DIST = 15
 local MAX_WANDER_DIST = 5
 
-local CarratBrain = Class(Brain, function(self, inst)
+local Uncompromising_RatBrain = Class(Brain, function(self, inst)
 	Brain._ctor(self, inst)
 end)
 
@@ -133,7 +133,7 @@ local function eat_food_action(inst)
 	end
 end
 
-function CarratBrain:OnStart()
+function Uncompromising_RatBrain:OnStart()
 	local stealnode = PriorityNode(
 	{
 		WhileNode(function() return not self.inst.sg:HasStateTag("jumping") and self.inst.prefab ~= "uncompromising_caverat" end, "NotJumpingBehaviour",
@@ -169,4 +169,4 @@ function CarratBrain:OnStart()
 	self.bt = BT(self.inst, root)
 end
 
-return CarratBrain
+return Uncompromising_RatBrain
