@@ -147,6 +147,24 @@ local function OnHitOther(inst, other, damage)
     inst.components.thief:StealItem(other)
 end
 
+local RETARGET_CANT_TAGS = { "wall", "raidrat"}
+local function rattargetfn(inst)
+    return FindEntity(
+                inst, 5,
+                function(guy)
+					local validitem = guy.components.inventory ~= nil and guy.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
+                    return inst:GetTimeAlive() > 5 and not 
+					inst:HasTag("carrying") and
+					guy.components.inventory ~= nil and
+					validitem ~= nil and
+					inst.components.combat:CanTarget(guy)
+                end,
+                nil,
+                RETARGET_CANT_TAGS
+            )
+        or nil
+end
+
 local function fn()
 	local inst = CreateEntity()
 	
@@ -310,24 +328,6 @@ local function fn()
 	inst.OnLoad = onload_rat
 	
 	return inst
-end
-
-local RETARGET_CANT_TAGS = { "wall", "raidrat"}
-local function rattargetfn(inst)
-    return FindEntity(
-                inst, 5,
-                function(guy)
-					local validitem = guy.components.inventory ~= nil and guy.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
-                    return inst:GetTimeAlive() > 5 and not 
-					inst:HasTag("carrying") and
-					guy.components.inventory ~= nil and
-					validitem ~= nil and
-					inst.components.combat:CanTarget(guy)
-                end,
-                nil,
-                RETARGET_CANT_TAGS
-            )
-        or nil
 end
 
 local function retargetfn(inst)
