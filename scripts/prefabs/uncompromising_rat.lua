@@ -143,8 +143,8 @@ local function Trapped(inst)
 	end
 end
 
-local function OnHitOther(inst, other, damage)
-    inst.components.thief:StealItem(other)
+local function OnHitOther(inst, other)
+	inst.components.thief:StealItem(other)
 end
 
 local RETARGET_CANT_TAGS = { "wall", "raidrat"}
@@ -155,7 +155,7 @@ local function rattargetfn(inst)
 					local validitem = guy.components.inventory ~= nil and guy.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
                     return inst:GetTimeAlive() > 5 and not 
 					inst:HasTag("carrying") and
-					guy.components.inventory ~= nil and
+					guy:HasTag("player") and
 					validitem ~= nil and
 					inst.components.combat:CanTarget(guy)
                 end,
@@ -163,6 +163,19 @@ local function rattargetfn(inst)
                 RETARGET_CANT_TAGS
             )
         or nil
+end
+
+local function KeepTargetFn(inst, target)
+	local validitem = target.components.inventory ~= nil and target.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
+
+    return not inst:HasTag("carrying") and
+		validitem ~= nil and
+		inst.components.combat:CanTarget(target) and inst:IsNear(target, TUNING.HOUND_TARGET_DIST)
+end
+
+local function StealItem(inst, victim, stolenitem)
+	inst:PushEvent("onpickupitem", { item = stolenitem })
+	inst.components.combat:DropTarget()
 end
 
 local function fn()
@@ -226,8 +239,6 @@ local function fn()
 	
 	inst:SetBrain(brain)
 	
-	
-	
 	----------------------------
 	if TheWorld ~= nil and TheWorld.ismastershard then
 		inst:AddComponent("embarker")
@@ -275,8 +286,10 @@ local function fn()
 	inst.components.combat.hiteffectsymbol = "carrat_body"
     inst.components.combat.onhitotherfn = OnHitOther
 	inst.components.combat:SetRetargetFunction(3, rattargetfn)
+    --inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
 
     inst:AddComponent("thief")
+	--inst.components.thief:SetOnStolenFn(StealItem)
 	
 	inst:AddComponent("health")
 	inst.components.health:SetMaxHealth(TUNING.DSTU.RAIDRAT_HEALTH)
