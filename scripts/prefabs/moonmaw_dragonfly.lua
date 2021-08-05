@@ -100,6 +100,7 @@ local function RetargetFn(inst)
                and not guy:HasTag("prey")
                and not guy:HasTag("smallcreature")
                and not guy:HasTag("antlion")
+			   and not guy:HasTag("moonglasscreature")
         end)
     else
         return FindEntity(inst, 4*TARGET_DIST, function(guy) 
@@ -107,6 +108,7 @@ local function RetargetFn(inst)
                and not guy:HasTag("prey")
                and not guy:HasTag("smallcreature")
                and not guy:HasTag("antlion")
+			   and not guy:HasTag("moonglasscreature")
         end)
     end
 end
@@ -236,8 +238,10 @@ end
 
 local function OnAttacked(inst, data)
     inst:ClearBufferedAction()
-    inst.components.combat:SetTarget(data.attacker)
-end
+	if not data.attacker:HasTag("moonglasscreature") then
+		inst.components.combat:SetTarget(data.attacker)
+	end
+end	
 
 local function ShouldSleep(inst)
     if ((inst.num_targets_vomited >= TUNING.DRAGONFLY_VOMIT_TARGETS_FOR_SATISFIED) or (inst.num_ashes_eaten >= TUNING.DRAGONFLY_ASH_EATEN_FOR_SATISFIED))
