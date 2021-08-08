@@ -65,6 +65,14 @@ local function UpdateMode(inst)
 	inst.damage = 0
 end
 
+local function ShouldSleep(inst)
+    return false
+end
+
+local function ShouldWake(inst)
+    return true
+end
+
 local function fn(Sim)
 	local inst = CreateEntity()
 
@@ -86,7 +94,7 @@ local function fn(Sim)
 	if not TheWorld.ismastersim then
         return inst
     end
-	inst:AddTag("ratraid")
+	inst:AddTag("raidrat")
     inst.AnimState:SetBank("beetletaur")
     inst.AnimState:SetBuild("uncompromising_buffrat")
     inst.AnimState:PlayAnimation("idle_loop",true)
@@ -119,7 +127,10 @@ local function fn(Sim)
     inst.components.combat:SetHurtSound("dontstarve/sanity/creature1/death")
     inst.components.combat:SetRange(4, 4)
     ------------------
-    
+ 	inst:AddComponent("sleeper")
+    inst.components.sleeper:SetSleepTest(ShouldSleep)
+    inst.components.sleeper:SetWakeTest(ShouldWake)
+	inst.components.sleeper:SetResistance(5)   
     ------------------
     
     inst:AddComponent("knownlocations")

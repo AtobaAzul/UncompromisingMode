@@ -31,6 +31,7 @@ SetSharedLootTable("raidrat",
 })
 
 local brain = require "brains/uncompromising_ratbrain"
+local junkbrain = require "brains/uncompromising_junkratbrain"
 
 local function on_cooked_fn(inst, cooker, chef)
 	inst.SoundEmitter:PlaySound(inst.sounds.hit)
@@ -115,8 +116,7 @@ local function onsave_rat(inst, data)
 end
 
 local function onload_rat(inst, data)
-	local is_carrying = data.carrying or inst:HasTag("carrying")
-	if is_carrying then
+	if data ~= nil and data.carrying ~= nil then
 		inst.components.inventory:DropEverything()
 	end
 end
@@ -344,23 +344,125 @@ local function fn()
 end
 
 local function retargetfn(inst)
-    return FindEntity(
-                inst, TUNING.HOUND_TARGET_DIST,
-                function(guy)
-					inst.components.combat:CanTarget(guy)
-                end,
-                nil,
-                RETARGET_CANT_TAGS
-            )
-        or nil
+	local x,y,z = inst.Transform:GetWorldPosition()
+	if inst.shouldhide == false then
+		local rats = TheSim:FindEntities(x,y,z,10,{"raidrat"})
+		if #rats > 5 then --Only try and target the player this way if there's a bunch of rats nearby
+			local victim = FindEntity(
+					inst, TUNING.HOUND_TARGET_DIST,
+					function(guy)
+						return inst.components.combat:CanTarget(guy)
+					end,
+					nil,
+					RETARGET_CANT_TAGS
+				)
+		
+			if victim ~= nil then
+				for i,v in ipairs(rats) do
+					if v.components.combat ~= nil and v.components.combat.target == nil then
+						v.components.combat:SuggestTarget(victim)
+					end
+				end
+				return victim
+			else
+				return nil
+			end
+		end
+	else
+		local victim = FindEntity(
+				inst, 6,
+				function(guy)
+					return inst.components.combat:CanTarget(guy)
+				end,
+				nil,
+				RETARGET_CANT_TAGS
+			)	
+		if victim ~= nil then
+			inst.shouldhide = false
+			return victim
+		else
+			return nil
+		end
+	
+	end
 end
 
 local function KeepTarget(inst, target)
 return inst:IsNear(target, TUNING.HOUND_FOLLOWER_TARGET_KEEP)
 end
 
+local function SetHarassPlayer(inst, player)
+    if inst.harassplayer ~= player then
+        if inst._harassovertask ~= nil then
+            inst._harassovertask:Cancel()
+            inst._harassovertask = nil
+        end
+        if inst.harassplayer ~= nil then
+            inst:RemoveEventCallback("onremove", inst._onharassplayerremoved, inst.harassplayer)
+            inst.harassplayer = nil
+        end
+        if player ~= nil then
+            inst:ListenForEvent("onremove", inst._onharassplayerremoved, player)
+            inst.harassplayer = player
+            inst._harassovertask = inst:DoTaskInTime(120, SetHarassPlayer, nil)
+        end
+    end
+end
 
-local function cavefn()
+
+local function _ForgetTarget(inst)
+    inst.components.combat:SetTarget(nil)
+end
+
+
+local function OnJunkAttacked(inst, data)
+    inst.components.combat:SetTarget(data.attacker)
+    SetHarassPlayer(inst, nil)
+    if inst.task ~= nil then
+        inst.task:Cancel()
+    end
+    inst.task = inst:DoTaskInTime(math.random(55, 65), _ForgetTarget) --Forget about target after a minute
+
+	inst.components.combat:ShareTarget(data.attacker, 30, function(dude)
+		return dude:HasTag("raidrat")
+			and not dude.components.health:IsDead()
+			and not dude:HasTag("packrat")
+	end, 10)
+end
+
+local function FindTargetOfInterest(inst)
+    --[[if not inst.curious then
+        return
+    end]]
+	if inst.shouldhide == false then
+		if inst.harassplayer == nil and inst.components.combat.target == nil then
+			local x, y, z = inst.Transform:GetWorldPosition()
+			-- Get all players in range
+			local targets = FindPlayersInRange(x, y, z, 25)
+			-- randomly iterate over all players until we find one we're interested in.
+			for i = 1, #targets do
+				local randomtarget = math.random(#targets)
+				local target = targets[randomtarget]
+				table.remove(targets, randomtarget)
+				--Higher chance to follow if he has bananas
+				if target.components.inventory ~= nil and math.random() < (1) then
+					SetHarassPlayer(inst, target)
+					return
+				end
+			end
+		end
+		if math.random() > 0.25 then 
+			inst.shouldhide = true
+		end
+	else
+		if math.random() > 0.75 then 
+			inst.shouldhide = false
+			inst.sg:GoToState("idle")
+		end
+	end
+end
+
+local function junkfn()
 	local inst = CreateEntity()
 	
 	inst.entity:AddTransform()
@@ -376,7 +478,7 @@ local function cavefn()
 	inst.Transform:SetSixFaced()
 	
 	inst.AnimState:SetBank("carrat")
-	inst.AnimState:SetBuild("uncompromising_caverat")
+	inst.AnimState:SetBuild("uncompromising_rat")
 	inst.AnimState:PlayAnimation("planted")
 	
 	inst:AddTag("raidrat")
@@ -399,14 +501,6 @@ local function cavefn()
 	inst.components.drownable.enabled = false
 
 	
-	--[[inst.Physics:ClearCollisionMask()
-    inst.Physics:CollidesWith(COLLISION.GROUND)
-    --inst.Physics:CollidesWith(COLLISION.OBSTACLES)
-    --inst.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
-    inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-    inst.Physics:CollidesWith(COLLISION.GIANTS)
-    inst.Physics:Teleport(inst.Transform:GetWorldPosition())]]
-	
 	inst.sounds = carratsounds
 	
 	inst:AddComponent("locomotor")
@@ -414,9 +508,11 @@ local function cavefn()
 	inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_RUNSPEED
 	inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 	inst.components.locomotor:SetTriggersCreep(false)
-	inst:SetStateGraph("SGuncompromising_rat")
+	inst:SetStateGraph("SGuncompromising_junkrat")
 	
-	inst:SetBrain(brain)
+	inst:SetBrain(junkbrain)
+	
+	inst.Transform:SetScale(1.5,1.5,1.5)
 	
 	inst:AddComponent("eater")
 	inst.components.eater:SetDiet({ FOODTYPE.HORRIBLE }, { FOODTYPE.HORRIBLE })
@@ -436,7 +532,7 @@ local function cavefn()
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
 	
 	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(TUNING.DSTU.RAIDRAT_HEALTH)
+	inst.components.health:SetMaxHealth(1.5*TUNING.DSTU.RAIDRAT_HEALTH)
 	
 	inst:AddComponent("lootdropper")
 	inst.components.lootdropper:AddRandomLoot("monstersmallmeat", 0.34)
@@ -449,31 +545,15 @@ local function cavefn()
     inst.components.sleeper:SetWakeTest(ShouldWake)
 	inst.components.sleeper:SetResistance(1)
 	
-	inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.nobounce = true
-	inst.components.inventoryitem.canbepickedup = false
-	inst.components.inventoryitem.cangoincontainer = false
-	inst.components.inventoryitem:SetSinks(true)
-	
 	inst:AddComponent("herdmember")
 	
 	inst:AddComponent("knownlocations")
 	
-	inst:AddComponent("cookable")
-	inst.components.cookable.product = "cookedmonstersmallmeat"
-	inst.components.cookable:SetOnCookedFn(on_cooked_fn)
-	
-	inst:AddComponent("inventory")
-	inst.components.inventory.maxslots = 1
-	
 	inst:AddComponent("inspectable")
 	
 	inst:ListenForEvent("onattackother", OnAttackOther)
-	inst:ListenForEvent("attacked", OnAttacked)
+	inst:ListenForEvent("attacked", OnJunkAttacked)
 	inst:ListenForEvent("death", OnDeath)
-	inst:ListenForEvent("onpickupitem", OnPickup)
-	inst:ListenForEvent("trapped", Trapped)
-	
 	MakeHauntablePanic(inst)
 	
 	--MakeFeedableSmallLivestock(inst, TUNING.CARRAT.PERISH_TIME, nil, on_dropped)
@@ -481,9 +561,15 @@ local function cavefn()
 	MakeSmallBurnableCharacter(inst, "carrat_body")
 	MakeSmallFreezableCharacter(inst, "carrat_body")
 	
+	inst.FindTargetOfInterestTask = inst:DoPeriodicTask(10, FindTargetOfInterest) --Find something to be interested in!
+
+    inst.harassplayer = nil
+    inst._onharassplayerremoved = function() SetHarassPlayer(inst, nil) end
+	
 	inst.OnSave = onsave_rat
 	inst.OnLoad = onload_rat
 	
+	inst.shouldhide = false
 	return inst
 end
 
@@ -939,7 +1025,7 @@ local function fn_burrow()
 end
 
 return Prefab("uncompromising_rat", fn, assets, prefabs),
-	Prefab("uncompromising_caverat", cavefn),
+	Prefab("uncompromising_junkrat", junkfn),
 	Prefab("uncompromising_packrat", packfn, assets, prefabs),
 	Prefab("uncompromising_ratherd", fn_herd, assets, prefabs),
 	Prefab("uncompromising_ratburrow", fn_burrow, assets, prefabs)

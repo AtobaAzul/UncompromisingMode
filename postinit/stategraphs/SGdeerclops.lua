@@ -600,7 +600,7 @@ local states = {
     },	
 	State{
         name = "spinbeam",
-        tags = { "busy","attack" },
+        tags = { "busy","attack","nosleep" },
 
         onenter = function(inst, target)
 		EnableEightFaced(inst)

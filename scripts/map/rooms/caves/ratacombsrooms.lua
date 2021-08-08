@@ -85,6 +85,7 @@ AddRoom("RattyWilds", {
             rocks=.1,
             flint=0.05,
 			ratacombs_junkpile_spawner = 3,
+			uncompromising_junkrat = 1,
         },
     }
 })
@@ -161,6 +162,7 @@ local bgratty = {
             pillar_cave_flintless = 0.2,
 			ratgas_spawner = 2.5,
 			ratacombs_junkpile_spawner = 3,
+			uncompromising_junkrat = 1,
         },
     }
 }
