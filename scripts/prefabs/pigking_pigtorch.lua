@@ -484,6 +484,10 @@ end
 local function IsGuardPig(dude)
     return dude:HasTag("guard") and dude:HasTag("pig")
 end
+
+local SUGGESTTARGET_MUST_TAGS = { "_combat", "_health", "pig" }
+local SUGGESTTARGET_CANT_TAGS = { "werepig", "guard", "INLIMBO" }
+
 local function OnAttackedByDecidRoot(inst, attacker)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, SpringCombatMod(SHARE_TARGET_DIST) * .5, SUGGESTTARGET_MUST_TAGS, SUGGESTTARGET_CANT_TAGS)

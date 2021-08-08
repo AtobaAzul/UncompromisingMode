@@ -20,7 +20,7 @@ local VetcurseLootdropper = Class(function(self, inst)
     self.inst = inst
 
     self.vetrate = 0
-	self.loot = "hound"
+	self.loot = nil
 
     self.inst:ListenForEvent("death", OnDeath)
     self.inst:ListenForEvent("attacked", OnAttacked)

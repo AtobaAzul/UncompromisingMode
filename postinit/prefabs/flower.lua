@@ -10,13 +10,11 @@ env.AddPrefabPostInit("flower", function(inst)
 		return
 	end
 	
-	inst:AddComponent("transformer")
-    inst.components.transformer:SetTransformWorldEvent("isfullmoon", true)
-    inst.components.transformer:SetRevertWorldEvent("isfullmoon", false)
-    inst.components.transformer:SetOnLoadCheck(testfortransformonload)
-    inst.components.transformer.transformPrefab = "flower_evil"
-	
---return inst
+	inst:AddComponent("uncompromising_transformer")
+    inst.components.uncompromising_transformer:SetTransformWorldEvent("isfullmoon", true)
+    inst.components.uncompromising_transformer:SetRevertWorldEvent("isfullmoon", false)
+    inst.components.uncompromising_transformer:SetOnLoadCheck(testfortransformonload)
+    inst.components.uncompromising_transformer.transformPrefab = "flower_evil"
 end)
 
 env.AddPrefabPostInit("flower_evil", function(inst)
@@ -24,11 +22,5 @@ env.AddPrefabPostInit("flower_evil", function(inst)
 		return
 	end
 	
-	inst:AddComponent("transformer")
-end)
-env.AddPrefabPostInit("flower_planted", function(inst)
-	if not TheWorld.ismastersim then
-		return
-	end
---return inst
+	inst:AddComponent("uncompromising_transformer")
 end)
