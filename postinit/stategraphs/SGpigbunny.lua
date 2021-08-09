@@ -65,7 +65,7 @@ local states = {
             inst.SoundEmitter:PlaySound("dontstarve/pig/attack")
             inst.components.combat:StartAttack()
             inst.Physics:Stop()
-            inst.sg:SetTimeout(0.4)
+            inst.sg:SetTimeout(0.5)
             inst.AnimState:PlayAnimation("idle_angry")
         end,
 

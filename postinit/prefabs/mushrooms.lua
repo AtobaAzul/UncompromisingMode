@@ -69,7 +69,7 @@ env.AddPrefabPostInit("spore_tall", function(inst)
 end)
 
 local function testfortransformonload(inst)
-    return TheWorld.state.isfullmoon
+	return TheWorld.state.isfullmoon
 end
 
 env.AddPrefabPostInit("red_mushroom", function(inst)
@@ -77,32 +77,57 @@ env.AddPrefabPostInit("red_mushroom", function(inst)
 		return
 	end
 	
-	inst:AddComponent("transformer")
-    inst.components.transformer:SetTransformWorldEvent("isfullmoon", true)
-    inst.components.transformer:SetRevertWorldEvent("isfullmoon", false)
-    inst.components.transformer:SetOnLoadCheck(testfortransformonload)
-    inst.components.transformer.transformPrefab = "mushtree_medium"
+	inst:AddComponent("uncompromising_transformer")
+    inst.components.uncompromising_transformer:SetTransformWorldEvent("isfullmoon", true)
+    inst.components.uncompromising_transformer:SetRevertWorldEvent("isfullmoon", false)
+    inst.components.uncompromising_transformer:SetOnLoadCheck(testfortransformonload)
+    inst.components.uncompromising_transformer.transformPrefab = "mushtree_medium"
 	
-end)
+end)				
 env.AddPrefabPostInit("green_mushroom", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	inst:AddComponent("transformer")
-    inst.components.transformer:SetTransformWorldEvent("isfullmoon", true)
-    inst.components.transformer:SetRevertWorldEvent("isfullmoon", false)
-    inst.components.transformer:SetOnLoadCheck(testfortransformonload)
-    inst.components.transformer.transformPrefab = "mushtree_small"
+	
+	inst:AddComponent("uncompromising_transformer")
+    inst.components.uncompromising_transformer:SetTransformWorldEvent("isfullmoon", true)
+    inst.components.uncompromising_transformer:SetRevertWorldEvent("isfullmoon", false)
+    inst.components.uncompromising_transformer:SetOnLoadCheck(testfortransformonload)
+    inst.components.uncompromising_transformer.transformPrefab = "mushtree_small"
 end)
 
 env.AddPrefabPostInit("blue_mushroom", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	inst:AddComponent("transformer")
-    inst.components.transformer:SetTransformWorldEvent("isfullmoon", true)
-    inst.components.transformer:SetRevertWorldEvent("isfullmoon", false)
-    inst.components.transformer:SetOnLoadCheck(testfortransformonload)
-    inst.components.transformer.transformPrefab = "mushtree_tall"
+	
+	inst:AddComponent("uncompromising_transformer")
+    inst.components.uncompromising_transformer:SetTransformWorldEvent("isfullmoon", true)
+    inst.components.uncompromising_transformer:SetRevertWorldEvent("isfullmoon", false)
+    inst.components.uncompromising_transformer:SetOnLoadCheck(testfortransformonload)
+    inst.components.uncompromising_transformer.transformPrefab = "mushtree_tall"
 end)
 
+env.AddPrefabPostInit("mushtree_medium", function(inst)
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+	inst:AddComponent("uncompromising_transformer")
+end)
+
+env.AddPrefabPostInit("mushtree_small", function(inst)
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+	inst:AddComponent("uncompromising_transformer")
+end)
+
+env.AddPrefabPostInit("mushtree_tall", function(inst)
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+	inst:AddComponent("uncompromising_transformer")
+end)
