@@ -192,7 +192,20 @@ configuration_options =
 	SkipSpace(),
 	Header("Crockpot Food Tweaks"),
 	BinaryConfig("meatball", "Meatball Nerf", "Meatballs restore 50 hunger instead of 62.5.", true),
-	BinaryConfig("pierogi", "Pierogi Nerf", "Pierogis only last 10 days.", true),
+	BinaryConfig("pierogi", "Pierogi Nerf", "Pierogis require a certain veggie value to cook.", true),
+	{
+		name = "pierogi",
+		label = "Pierogi Recipe Nerf",
+		hover = "Pierogis require more veggies to cook",
+		options =
+		{
+			{description = "1.5 Veggie Value", data = 1.5},
+			{description = "2 Veggie Value", data = 2},
+			{description = "1 Veggie Value", data = 1},
+			{description = "Vanilla Value", data = 0.5},
+		},
+		default = 1.5,
+	},
 	BinaryConfig("buttmuffin", "Butter Muffin Buff", "Butter muffin restores 30 health 10 sanity instead of 20 health 5 sanity.", true),
 	BinaryConfig("icecreambuff", "Ice Cream Buff", "Ice Cream now restores 100 sanity, but does it slowly.", true),
 	BinaryConfig("farmfoodredux", "Farmpot Food Redux", "Reallocates most dishes that involve crockpot foods. Typically a buff, but may exchange some stats.", true),

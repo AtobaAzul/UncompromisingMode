@@ -143,7 +143,7 @@ recipes.meatballs.test = function(cooker, names, tags) return tags.meat and not 
 recipes.bonestew.test = function(cooker, names, tags) return tags.meat and tags.meat >= 3 and not tags.inedible and not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) and MonsterMeatSupport(tags) end 
 -- Original:     test = function(cooker, names, tags) return tags.meat and tags.meat >= 3 and not tags.inedible end,
 
-recipes.perogies.test = function(cooker, names, tags) return tags.egg and tags.meat and tags.veggie and not tags.inedible and not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) and MonsterMeatSupport(tags) end 
+recipes.perogies.test = function(cooker, names, tags) return tags.egg and tags.meat and (tags.veggie and tags.veggie >= TUNING.DSTU.PIEROGI) and not tags.inedible and not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) and MonsterMeatSupport(tags) end 
 -- Original:     test = function(cooker, names, tags) return tags.egg and tags.meat and tags.veggie and not tags.inedible end,
 
 recipes.turkeydinner.test = function(cooker, names, tags) return names.drumstick and names.drumstick > 1 and tags.meat and tags.meat > 1 and (tags.veggie or tags.fruit) and UncompromisingFillers(tags) and MonsterMeatSupport(tags) end 

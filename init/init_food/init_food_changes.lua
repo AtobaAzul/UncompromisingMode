@@ -29,24 +29,6 @@ local ApplyIcecreamBuff = function(inst, eater)
 			end
         end
 
-if TUNING.DSTU.PIEROGI == true then
-	local PIEROGI = 
-	{
-		"perogies",
-		"perogies_spice_chili",
-		"perogies_spice_garlic",
-		"perogies_spice_salt",
-		"perogies_spice_sugar",
-	}
-
-	for k, v in pairs(PIEROGI) do
-		AddPrefabPostInit(v, function (inst)
-			if inst ~= nil and inst.components.perishable ~= nil then
-				inst.components.perishable:SetPerishTime(GLOBAL.TUNING.DSTU.RECIPE_CHANGE_PEROGI_PERISH) -- Changed to 10 days, down from 20
-			end
-		end)
-	end
-end
 
 if TUNING.DSTU.MEATBALL == true then
 	local MEATBALLS = 
