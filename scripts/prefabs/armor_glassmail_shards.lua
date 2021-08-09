@@ -1,4 +1,4 @@
-local TARGET_IGNORE_TAGS = { "INLIMBO", "moonglasscreature","companion","player" }
+local TARGET_IGNORE_TAGS = { "INLIMBO", "moonglasscreature","player" }
 
 local function destroystuff(inst)
 	
