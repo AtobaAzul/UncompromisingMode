@@ -8,6 +8,17 @@ local function HasFilter(inst)
 	end
 end
 
+local function CleanAir(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local cleanair =  TheSim:FindEntities(x, y, z, 5, nil, nil, { "cleanair" })
+
+	if cleanair ~= nil and cleanair > 0 then
+		return false
+	else
+		return true
+	end
+end
+
 local function IsInGassyRatty(inst)
 	if inst.components.areaaware ~= nil and inst.components.areaaware:CurrentlyInTag("rattygas") then
 		return true
@@ -25,7 +36,7 @@ local function PlagueGasDamage(inst)
 end
 
 local function Breathe(inst)
-	if not HasFilter(inst) and IsInGassyRatty(inst) then
+	if not HasFilter(inst) and IsInGassyRatty(inst) and CleanAir(inst) then
 		PlagueGasDamage(inst)
 	end
 end
