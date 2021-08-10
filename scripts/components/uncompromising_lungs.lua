@@ -36,7 +36,7 @@ local function PlagueGasDamage(inst)
 end
 
 local function Breathe(inst)
-	if not HasFilter(inst) and IsInGassyRatty(inst) and CleanAir(inst) then
+	if not HasFilter(inst) and IsInGassyRatty(inst) and not CleanAir(inst) then
 		PlagueGasDamage(inst)
 	end
 end
