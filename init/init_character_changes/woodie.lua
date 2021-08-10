@@ -34,9 +34,11 @@ local function IsWereMode(mode)
 end
 
 local function onworked(inst, data)
-    if data.target ~= nil and data.target.components.workable ~= nil then
-        if IsWereMode(inst.weremode:value()) and not inst.components.wereeater then
+    if inst.components.wereeater and data.target ~= nil and data.target.components.workable ~= nil then
+        if IsWereMode(inst.weremode:value()) then
             inst.components.wereness:DoDelta(-3, true)
+		elseif data.target.components.workable.action == ACTIONS.CHOP then
+            inst.components.wereness:DoDelta(1.5, true)
         end
     end
 end

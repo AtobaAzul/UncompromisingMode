@@ -4,7 +4,13 @@ GLOBAL.setfenv(1, GLOBAL)
 
 local function DoEffects(pet)
     local x, y, z = pet.Transform:GetWorldPosition()
+	
     SpawnPrefab("statue_transition_2").Transform:SetPosition(x, y, z)
+	
+	if pet.components.follower.leader ~= nil then
+		local x1, y1, z1 = pet.components.follower.leader.Transform:GetWorldPosition()
+		SpawnPrefab("statue_transition").Transform:SetPosition(x1, y1, z1)
+	end
 end
 
 --[[local function doeffects(inst, pos)
