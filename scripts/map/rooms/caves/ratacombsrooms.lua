@@ -86,6 +86,8 @@ AddRoom("RattyWilds", {
             flint=0.05,
 			ratacombs_junkpile_spawner = 3,
 			uncompromising_junkrat = 1,
+            cavelight_small = 0.1,
+            cavelight_tiny = 0.5,
         },
     }
 })
@@ -114,6 +116,8 @@ AddRoom("RattyLink", {
 										cavelight_small = 0.05,
 										cavelight_tiny = 0.05,
 										ratacombs_junkpile_spawner = 3,
+										cavelight_small = 0.5,
+										cavelight_tiny = 0.5,
 					                },
 					            }
 })
@@ -163,6 +167,8 @@ local bgratty = {
 			ratgas_spawner = 2.5,
 			ratacombs_junkpile_spawner = 3,
 			uncompromising_junkrat = 1,
+			cavelight_small = 0.5,
+            cavelight_tiny = 0.5,
         },
     }
 }

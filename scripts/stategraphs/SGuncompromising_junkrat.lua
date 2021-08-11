@@ -25,7 +25,7 @@ local function play_carrat_scream(inst)
 end
 
 local function Shake(inst)
-	if inst.trashhome ~= nil then
+	if inst.trashhome ~= nil and inst.sg:HasStateTag("hiding") then
 		local trash = inst.trashhome 
 		trash.Shake(trash)
 	end
@@ -59,11 +59,13 @@ local states =
 
 	State {
 		name = "hiding",
-		tags = { "idle", "canrotate" },
+		tags = { "hiding", "canrotate" },
 		onenter = function(inst,data)
 			inst:Hide()
 			inst.Physics:SetActive(true)
-			inst.shaketask = inst:DoPeriodicTask(3,Shake)
+			if inst.shaketask == nil then
+				inst.shaketask = inst:DoPeriodicTask(3,Shake)
+			end
 		end,
 
 		onexit = function(inst)
