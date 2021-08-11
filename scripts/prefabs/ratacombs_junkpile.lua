@@ -182,7 +182,7 @@ local function junkpilefn()
 	
 	inst.entity:SetPristine()
 	
-	MakeObstaclePhysics(inst, 2.5, 0)
+	MakeObstaclePhysics(inst, 1, 0)
 	
 	
 	inst:AddTag("ratjunk")
@@ -196,7 +196,7 @@ local function junkpilefn()
 	----------------------
 	inst:AddComponent("inspectable")
 	----------------------
-
+	inst.Transform:SetScale(1.2,1.2,1.2)
 	--full, med, low
 	inst:AddComponent("lootdropper")
 	

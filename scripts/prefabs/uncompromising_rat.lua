@@ -5,6 +5,7 @@ local assets =
 	Asset("ANIM", "anim/carrat_basic.zip"),
 	Asset("ANIM", "anim/uncompromising_rat_water.zip"),
 	Asset("ANIM", "anim/uncompromising_rat_burrow.zip"),
+	Asset("ANIM", "anim/uncompromising_junkrat.zip"),
 }
 
 local prefabs =
@@ -343,7 +344,7 @@ local function fn()
 	return inst
 end
 
-local function retargetfn(inst)
+local function junkretargetfn(inst)
 	local x,y,z = inst.Transform:GetWorldPosition()
 	if inst.shouldhide == false then
 		local rats = TheSim:FindEntities(x,y,z,10,{"raidrat"})
@@ -368,9 +369,9 @@ local function retargetfn(inst)
 				return nil
 			end
 		end
-	else
+	elseif inst.sg:HasStateTag("hiding") then
 		local victim = FindEntity(
-				inst, 6,
+				inst, 12,
 				function(guy)
 					return inst.components.combat:CanTarget(guy)
 				end,
@@ -379,6 +380,7 @@ local function retargetfn(inst)
 			)	
 		if victim ~= nil then
 			inst.shouldhide = false
+			inst.trashhome = nil
 			return victim
 		else
 			return nil
@@ -423,11 +425,11 @@ local function OnJunkAttacked(inst, data)
     end
     inst.task = inst:DoTaskInTime(math.random(55, 65), _ForgetTarget) --Forget about target after a minute
 
-	inst.components.combat:ShareTarget(data.attacker, 30, function(dude)
+	--[[inst.components.combat:ShareTarget(data.attacker, 30, function(dude) --Don't Share Target
 		return dude:HasTag("raidrat")
 			and not dude.components.health:IsDead()
 			and not dude:HasTag("packrat")
-	end, 10)
+	end, 10)]] 
 end
 
 local function FindTargetOfInterest(inst)
@@ -478,8 +480,8 @@ local function junkfn()
 	inst.Transform:SetSixFaced()
 	
 	inst.AnimState:SetBank("carrat")
-	inst.AnimState:SetBuild("uncompromising_rat")
-	inst.AnimState:PlayAnimation("planted")
+	inst.AnimState:SetBuild("uncompromising_junkrat")
+	inst.AnimState:PlayAnimation("idle")
 	
 	inst:AddTag("raidrat")
 	inst:AddTag("animal")
@@ -504,8 +506,8 @@ local function junkfn()
 	inst.sounds = carratsounds
 	
 	inst:AddComponent("locomotor")
-	inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_WALKSPEED
-	inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_RUNSPEED
+	inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_WALKSPEED/1.5
+	inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_RUNSPEED/1.5
 	inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 	inst.components.locomotor:SetTriggersCreep(false)
 	inst:SetStateGraph("SGuncompromising_junkrat")
@@ -528,7 +530,7 @@ local function junkfn()
 	inst.components.combat:SetRange(TUNING.DSTU.RAIDRAT_ATTACK_RANGE)
 	inst.components.combat.hiteffectsymbol = "carrat_body"
 	
-	inst.components.combat:SetRetargetFunction(3, retargetfn)
+	inst.components.combat:SetRetargetFunction(3, junkretargetfn)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
 	
 	inst:AddComponent("health")
