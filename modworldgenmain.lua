@@ -385,11 +385,6 @@ Layouts["RatLockBlocker1"] =
 }
 
 
-
-
-
-
-
 AddRoomPreInit("HoodedTown", function(room)
 	if not room.contents.countstaticlayouts then
 		room.contents.countstaticlayouts = {}

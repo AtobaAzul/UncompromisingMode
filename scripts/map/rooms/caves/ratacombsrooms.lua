@@ -6,6 +6,7 @@ local StaticLayout = require ("map/static_layout")
 Layouts["cave_exit_ratacombs"] = StaticLayout.Get("map/static_layouts/cave_exit_ratacombs")
 Layouts["cave_entrance_ratacombs"] = StaticLayout.Get("map/static_layouts/cave_entrance_ratacombs")
 Layouts["ratking"] = StaticLayout.Get("map/static_layouts/ratking")
+Layouts["ratacombs_airpocket_1"] = StaticLayout.Get("map/static_layouts/ratacombs_airpocket_1")
 ----
 --Ratacombs
 ----
@@ -72,6 +73,9 @@ AddRoom("RattyWilds", {
     value = GROUND.CAVE_NOISE,
     type = NODE_TYPE.Room,
     contents =  {
+		countstaticlayouts = {
+			["ratacombs_airpocket_1"] = function() return math.random(0,1) end,
+		},
         distributepercent = .10,
         distributeprefabs=
         {

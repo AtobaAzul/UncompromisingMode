@@ -10,12 +10,12 @@ end
 
 local function CleanAir(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
-	local cleanair =  #TheSim:FindEntities(x, y, z, 5, nil, nil, { "cleanair" })
+	local cleanair =  #TheSim:FindEntities(x, y, z, 20, nil, nil, { "cleanair" })
 
 	if cleanair ~= nil and cleanair > 0 then
-		return false
-	else
 		return true
+	else
+		return false
 	end
 end
 

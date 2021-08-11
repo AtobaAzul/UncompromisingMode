@@ -255,4 +255,5 @@ return {
 	"uncompromising_buffrat",
 	"garbagespring",
 	"uncompromising_bundles",
+	"ratacombs_cleanair",
 }
