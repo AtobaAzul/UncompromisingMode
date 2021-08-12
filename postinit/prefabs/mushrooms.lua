@@ -35,6 +35,78 @@ env.AddPrefabPostInit("blue_cap", function(inst)
 
 end)
 
+---------------------------------------------------------
+--FEAST AND FAMINE COMPATABILITY--
+---------------------------------------------------------
+env.AddPrefabPostInit("green_chunk", function(inst)
+
+	inst:AddTag("mushroom_fuel")
+	inst:AddTag("green_mushroom_fuel")
+	
+	if not TheWorld.ismastersim then
+		return
+	end
+
+end)
+
+env.AddPrefabPostInit("red_chunk", function(inst)
+
+	inst:AddTag("mushroom_fuel")
+	inst:AddTag("red_mushroom_fuel")
+	
+	if not TheWorld.ismastersim then
+		return
+	end
+
+end)
+
+env.AddPrefabPostInit("blue_chunk", function(inst)
+
+	inst:AddTag("mushroom_fuel")
+	inst:AddTag("blue_mushroom_fuel")
+	
+	if not TheWorld.ismastersim then
+		return
+	end
+
+end)
+
+env.AddPrefabPostInit("green_chunk_bloom", function(inst)
+
+	inst:AddTag("mushroom_fuel")
+	inst:AddTag("green_mushroom_fuel")
+	
+	if not TheWorld.ismastersim then
+		return
+	end
+
+end)
+
+env.AddPrefabPostInit("red_chunk_bloom", function(inst)
+
+	inst:AddTag("mushroom_fuel")
+	inst:AddTag("red_mushroom_fuel")
+	
+	if not TheWorld.ismastersim then
+		return
+	end
+
+end)
+
+env.AddPrefabPostInit("blue_chunk_bloom", function(inst)
+
+	inst:AddTag("mushroom_fuel")
+	inst:AddTag("blue_mushroom_fuel")
+	
+	if not TheWorld.ismastersim then
+		return
+	end
+
+end)
+---------------------------------------------------------
+-- --
+---------------------------------------------------------
+
 env.AddPrefabPostInit("spore_small", function(inst)
 
 	inst:AddTag("mushroom_fuel")
