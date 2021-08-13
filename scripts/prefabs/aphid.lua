@@ -97,6 +97,7 @@ if inst.components.combat ~= nil then
 	end
 end
 end
+
 local function fn()
     local inst = CreateEntity()
     

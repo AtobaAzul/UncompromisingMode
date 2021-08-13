@@ -471,7 +471,6 @@ local function SpawnDebris(inst,chopper,loottable)
 end
 --Code From Quaker^
 
-
 --Workable Stuff
 local function on_chop(inst, chopper, remaining_chops)
     if not (chopper ~= nil and chopper:HasTag("playerghost")) then
@@ -685,6 +684,12 @@ local function makefn()
                 end
         end)
 		
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then        
+        return inst
+    end
+	
 		inst:AddTag("shadecanopysmall")
 		
 		inst:AddComponent("workable")
@@ -708,13 +713,9 @@ local function makefn()
 	    inst:AddComponent("lightningblocker")
 		inst.components.lightningblocker:SetBlockRange(TUNING.SHADE_CANOPY_RANGE_SMALL)
 		inst.components.lightningblocker:SetOnLightningStrike(OnLightningStrike)	
-	--[[inst:AddComponent("playerprox")
-    inst.components.playerprox:SetDist(MIN, MAX)
-    inst.components.playerprox:SetOnPlayerFar(OnFar)
-    inst.components.playerprox:SetOnPlayerNear(OnNear)]]
-	
-        return inst
+	return inst
 end
+
 local function StartSpawning(inst)
     if inst.components.childspawner ~= nil and
         not (inst.components.freezable ~= nil and
@@ -723,11 +724,13 @@ local function StartSpawning(inst)
         inst.components.childspawner:StartSpawning()
     end
 end
+
 local function StopSpawning(inst)
     if inst.components.childspawner ~= nil then
         inst.components.childspawner:StopSpawning()
     end
 end
+
 local function OnIsNight(inst, isnight)
     if isnight then
         StopSpawning(inst)
@@ -735,10 +738,12 @@ local function OnIsNight(inst, isnight)
         StartSpawning(inst)
     end
 end
+
 local function OnInit(inst)
     inst:WatchWorldState("isnight", OnIsNight)
     OnIsNight(inst, TheWorld.state.isnight)
 end
+
 local function makeinfested()
     	local inst = CreateEntity()
 
@@ -764,24 +769,30 @@ local function makeinfested()
 		-----------------------	
         inst:DoTaskInTime(0, InitializePathFinding)
 		-----------------------
-	inst:AddTag("shadecanopysmall")
-    if not TheNet:IsDedicated() then
-        inst:AddComponent("distancefade")
-        inst.components.distancefade:Setup(15,25)
-    end
+		inst:AddTag("shadecanopysmall")
+		if not TheNet:IsDedicated() then
+			inst:AddComponent("distancefade")
+			inst.components.distancefade:Setup(15,25)
+		end
     
-    inst._hascanopy = net_bool(inst.GUID, "oceantree_pillar._hascanopy", "hascanopydirty")
-    inst._hascanopy:set(true)    
-    inst:DoTaskInTime(0, function()    
-        inst.canopy_data = CANOPY_SHADOW_DATA.spawnshadow(inst, math.floor(TUNING.SHADE_CANOPY_RANGE_SMALL/4), true)
-    end)
+		inst._hascanopy = net_bool(inst.GUID, "oceantree_pillar._hascanopy", "hascanopydirty")
+		inst._hascanopy:set(true)    
+		inst:DoTaskInTime(0, function()    
+			inst.canopy_data = CANOPY_SHADOW_DATA.spawnshadow(inst, math.floor(TUNING.SHADE_CANOPY_RANGE_SMALL/4), true)
+		end)
 
-    inst:ListenForEvent("hascanopydirty", function()
+		inst:ListenForEvent("hascanopydirty", function()
                 if not inst._hascanopy:value() then 
                     removecanopyshadow(inst) 
                 end
         end)
-		
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then        
+        return inst
+    end
+	
 		inst:AddTag("shadecanopysmall")
 		
         inst:DoTaskInTime(0, OnInit)		
@@ -811,13 +822,10 @@ local function makeinfested()
 		inst:AddComponent("lightningblocker")
 		inst.components.lightningblocker:SetBlockRange(TUNING.SHADE_CANOPY_RANGE_SMALL)
 		inst.components.lightningblocker:SetOnLightningStrike(OnLightningStrike)
-	--[[inst:AddComponent("playerprox")
-    inst.components.playerprox:SetDist(MIN, MAX)
-    inst.components.playerprox:SetOnPlayerFar(OnFar)
-    inst.components.playerprox:SetOnPlayerNear(OnNear)]]
 	
-        return inst
+    return inst
 end
+
 return Prefab("giant_tree", makefn, assets),
-Prefab("giant_tree_infested", makeinfested, assets)
+	Prefab("giant_tree_infested", makeinfested, assets)
 
