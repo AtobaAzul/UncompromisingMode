@@ -91,6 +91,11 @@ TUNING.DSTU =
     ----------------------------------------------------------------------------
 	FLINGO_SETTING = GetModConfigData("flingo_setting"),
     ----------------------------------------------------------------------------
+    --Sleeping Change
+    ----------------------------------------------------------------------------
+	GOTOBED = GetModConfigData("gotobed"),
+	SLEEPINGBUFF = GetModConfigData("sleepingbuff"),
+    ----------------------------------------------------------------------------
     --Cooking recipe changes
     ----------------------------------------------------------------------------
     --Recipe stat changes
@@ -130,7 +135,7 @@ TUNING.DSTU =
 	--Crockpot Dish Changes
 	
 	MEATBALL = GetModConfigData("meatball"),
-	PIEROGI = GetModConfigData("pierogi"),
+	PIEROGI = GetModConfigData("perogi"),
 	FARMFOODREDUX = GetModConfigData("farmfoodredux"),
 	ICECREAMBUFF = GetModConfigData("icecreambuff"),
 	BUTTMUFFIN = GetModConfigData("buttmuffin"),
@@ -353,6 +358,6 @@ TUNING.AFFINITY_15_CALORIES_SUPERHUGE = 1.034
 TUNING.ARMORBRAMBLE_DMG = 10
 
 
-TUNING.SLEEP_TICK_PERIOD = TUNING.SLEEP_TICK_PERIOD / 2
+TUNING.SLEEP_TICK_PERIOD = TUNING.SLEEP_TICK_PERIOD / TUNING.DSTU.SLEEPINGBUFF
 
 -- [              DST Related Overrides                  ]

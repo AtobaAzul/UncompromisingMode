@@ -178,6 +178,19 @@ configuration_options =
 	Header("--------------------"),
 	BinaryConfig("scaledchestbuff", "Scaled Chest Buff", "Scaled chest is not worth the resources required. Enabling this buffs it to 25 slots. Toggling with scaled chests in existing world may cause crash.", true),
 	BinaryConfig("canedurability", "Cane Durability (Off by default)", "Cane loses durability similarly to a whirly fan, note that UM walruses drop tusks 100% of the time with this on.", false),
+	BinaryConfig("gotobed", "Sleeping Buff", "Sleeping gives stats at a faster rate, and can heal max health loss. Siesta Lean-to hunger drain is now 50% of a Tent, instead of 33%.", true),
+	{
+		name = "sleepingbuff",
+		label = "Sleeping Stat Speed.",
+		hover = "Increases the speed at which sleeping gives stats/drains hunger. Default 1.5x",
+		options =
+		{
+			{description = "2x Faster", data = 2},
+			{description = "1.5x Faster", data = 1.5},
+			{description = "Vanilla", data = 1},
+		},
+		default = 1.5,
+	},
 -----------------------------
 -- Food --
 -----------------------------
@@ -194,7 +207,7 @@ configuration_options =
 	BinaryConfig("meatball", "Meatball Nerf", "Meatballs restore 50 hunger instead of 62.5.", true),
 	--BinaryConfig("pierogi", "Pierogi Nerf", "Pierogis require a certain veggie value to cook.", true),
 	{
-		name = "pierogi",
+		name = "perogi",
 		label = "Pierogi Recipe Nerf",
 		hover = "Pierogis require more veggies to cook",
 		options =

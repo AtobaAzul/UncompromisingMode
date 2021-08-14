@@ -98,7 +98,7 @@ end
 -- But made to be easily customised below for future changes
 -----------------------------------------------------------------
 
-recipes.monsterlasagna.test = function(cooker, names, tags) return not tags.inedible and not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) and MonsterMeat(tags) end 
+recipes.monsterlasagna.test = function(cooker, names, tags) return tags.monster and tags.monster >= 2 and not tags.inedible and not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) and MonsterMeatSupport(tags) end 
 -- Original:           test = function(cooker, names, tags) return tags.monster and tags.monster >= 2 and not tags.inedible end,    
 
 recipes.butterflymuffin.test = function(cooker, names, tags) return (names.butterflywings or names.moonbutterflywings) and not tags.meat and tags.veggie and UncompromisingFillers(tags) end 
