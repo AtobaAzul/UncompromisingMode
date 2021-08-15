@@ -52,7 +52,8 @@ local easing = require("easing")
 --Mighty form changes
 TUNING.WOLFGANG_HEALTH_MIGHTY = 200
 TUNING.WOLFGANG_HUNGER_RATE_MULT_MIGHTY = 2
-TUNING.WOLFGANG_ROW_MULT = 10
+TUNING.WOLFGANG_ROW_MULT = 3
+TUNING.WOLFGANG_ROW_SPEED_OFFSET = 1.5
 
 --Normal form changes
 TUNING.WOLFGANG_ATTACKMULT_NORMAL = 1.25
@@ -146,12 +147,23 @@ local function CheckInsane(inst)
 	
 end
 
+local function OarImprove(inst)
+	inst:AddTag("strongoar")
+	inst.components.oar.force = inst.components.oar.force * TUNING.WOLFGANG_ROW_MULT
+	inst.components.oar.max_velocity = inst.components.oar.max_velocity + TUNING.WOLFGANG_ROW_SPEED_OFFSET
+end
+
+local function OarRestore(inst)
+	inst:RemoveTag("strongoar")
+	inst.components.oar.force = inst.components.oar.force / TUNING.WOLFGANG_ROW_MULT
+	inst.components.oar.max_velocity = inst.components.oar.max_velocity - TUNING.WOLFGANG_ROW_SPEED_OFFSET
+end
+
 local function FixItem(inst, data)
 	local thing = data.item
 	if thing ~= nil then
 		if thing.components.oar ~= nil and thing:HasTag("strongoar") then
-			thing:RemoveTag("strongoar")
-			thing.components.oar.force = thing.components.oar.force / TUNING.WOLFGANG_ROW_MULT
+			OarRestore(thing)
 		end
 	end
 end
@@ -192,11 +204,9 @@ local function StrongmanPickup(inst)
 	if itemhand ~= nil then
 		if itemhand.components.oar ~= nil then
 			if inst.strength == "mighty" and not itemhand:HasTag("strongoar") then
-				itemhand:AddTag("strongoar")
-				itemhand.components.oar.force = itemhand.components.oar.force * TUNING.WOLFGANG_ROW_MULT
+				OarImprove(itemhand)
 			elseif inst.strength ~= "mighty" and itemhand:HasTag("strongoar") then
-				itemhand:RemoveTag("strongoar")
-				itemhand.components.oar.force = itemhand.components.oar.force / TUNING.WOLFGANG_ROW_MULT
+				OarRestore(itemhand)
 			end
 		end
 	end
