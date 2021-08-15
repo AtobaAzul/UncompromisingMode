@@ -87,17 +87,13 @@ end
 
 AddIngredientValues({"forgetmelots"}, {decoration=1, foliage=1})
 
-local function MonsterMeat(tags) -- Pretty sure this function is depricated --AXE
-    return tags~=nil and tags.monster and tags.monster >=2 and (tags.meat and (tags.monster - tags.meat*meat_reduction_factor) >= 1.5)
-end
-
 --not tags.inedible and not (tags.insectoid and tags.insectoid >= 1)
 
 -----------------------------------------------------------------
 -- Recipe changes (mostly added above filler changes)
 -- But made to be easily customised below for future changes
 -----------------------------------------------------------------
-recipes.monsterlasagna.test = function(cooker, names, tags) return tags.monster and (TUNING.DSTU.CROCKPOTMONSTMEAT and tags.meat and (tags.monster >= 3 or tags.monster >= tags.meat) or not TUNING.DSTU.CROCKPOTMONSTMEAT and tags.monster >= 2) and not tags.inedible and not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) end 
+recipes.monsterlasagna.test = function(cooker, names, tags) return tags.monster and (TUNING.DSTU.CROCKPOTMONSTMEAT and tags.meat and (tags.monster >= 3 or tags.monster > tags.meat) or not TUNING.DSTU.CROCKPOTMONSTMEAT and tags.monster >= 2) and not tags.inedible and not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) end 
 -- Original:           test = function(cooker, names, tags) return tags.monster and tags.monster >= 2 and not tags.inedible end,    
 
 recipes.butterflymuffin.test = function(cooker, names, tags) return (names.butterflywings or names.moonbutterflywings) and not tags.meat and tags.veggie and UncompromisingFillers(tags) end 
