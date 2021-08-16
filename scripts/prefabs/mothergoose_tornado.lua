@@ -19,7 +19,7 @@ local TARGET_IGNORE_TAGS = { "gmooseegg", "INLIMBO", "mothergoose", "mossling", 
 local function destroystuff(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
 	
-	local sizecheck = 1 + (inst.Transform:GetScale() * 1.8) or 0
+	local sizecheck = 1 + (inst.Transform:GetScale() * 1.9) or 0
 	print(sizecheck)
     local ents = TheSim:FindEntities(x, y, z, sizecheck, nil, TARGET_IGNORE_TAGS, TARGET_TAGS)
     for i, v in ipairs(ents) do
