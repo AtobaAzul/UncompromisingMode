@@ -237,6 +237,8 @@ recipes.barnaclestuffedfishhead.test = function(cooker, names, tags) return (nam
 recipes.barnaclepita.test = function(cooker, names, tags) return (names.barnacle or names.barnacle_cooked) and tags.veggie and tags.veggie >= 0.5 and UncompromisingFillers(tags) end
 -- Original: 		 test = function(cooker, names, tags) return (names.barnacle or names.barnacle_cooked) and tags.veggie and tags.veggie >= 0.5 end
 
+recipes.frognewton.test =  function(cooker, names, tags) return (names.fig or names.fig_cooked) and (names.froglegs or names.froglegs_cooked) and tags.sweetener and not tags.inedible end
+recipes.frognewton.priority = 20
 
 -- WARLY recipes
 

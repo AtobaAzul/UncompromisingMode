@@ -21,49 +21,6 @@ local NUM_DROP_SMALL_ITEMS_MIN_LIGHTNING = 3
 local NUM_DROP_SMALL_ITEMS_MAX_LIGHTNING = 5
 
 local DROPPED_ITEMS_SPAWN_HEIGHT = 10
-local function OnFar(inst)
-    if inst.players then
-        local x, y, z = inst.Transform:GetWorldPosition()
-        local testset = {}
-        for player,i in pairs(inst.players)do
-            testset[player] = true        
-        end
-
-        for i,player in ipairs(FindPlayersInRangeSq(x, y, z, MAX*MAX))do
-            if testset[player] then
-                testset[player] = false
-            end
-        end
-
-        for player,i in pairs(testset)do
-            if i == true then
-                if player.canopytrees then
-                   player.canopytrees = player.canopytrees - 1
-                   if player.canopytrees == 0 then
-                       player:PushEvent("onchangecanopyzone", false)
-                   end
-                end
-                inst.players[player] = nil
-            end
-        end
-    end
-end
-
-local function OnNear(inst,player)
-    if not inst.players then
-        inst.players = {}
-    end
-
-    inst.players[player] = true
-
-    if not player.canopytrees then
-        player.canopytrees = 0
-    end
-    player.canopytrees = player.canopytrees + 1
-    if player.canopytrees == 1 then
-        player:PushEvent("onchangecanopyzone", true)
-    end
-end
 
 local function removecanopyshadow(inst)
     if inst.canopy_data ~= nil then
@@ -662,10 +619,6 @@ local function makefn()
         inst.AnimState:PlayAnimation("damaged-0", true)
 
 
-
-		-----------------------
-        inst:DoTaskInTime(0, InitializePathFinding)
-		-----------------------
 	inst:AddTag("shadecanopysmall")
     if not TheNet:IsDedicated() then
         inst:AddComponent("distancefade")
@@ -766,8 +719,6 @@ local function makeinfested()
         inst.AnimState:SetBuild("giant_tree_infested")
         inst.AnimState:PlayAnimation("damaged-0", true)
 
-		-----------------------	
-        inst:DoTaskInTime(0, InitializePathFinding)
 		-----------------------
 		inst:AddTag("shadecanopysmall")
 		if not TheNet:IsDedicated() then
@@ -793,7 +744,6 @@ local function makeinfested()
         return inst
     end
 	
-		inst:AddTag("shadecanopysmall")
 		
         inst:DoTaskInTime(0, OnInit)		
 		inst:AddComponent("workable")
