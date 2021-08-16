@@ -49,6 +49,27 @@ if TUNING.DSTU.MEATBALL == true then
 	end
 end
 
+
+	local FROGNEWTONS = 
+	{
+		"frognewton",
+		"frognewton_spice_chili",
+		"frognewton_spice_garlic",
+		"frognewton_spice_salt",
+		"frognewton_spice_sugar",
+	}
+
+	for k, v in pairs(FROGNEWTONS) do
+		AddPrefabPostInit(v, function (inst)
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.hungervalue = 37.5
+				inst.components.edible.sanityvalue = 33
+				inst.components.edible.healthvalue = 3
+			end
+		end)
+	end
+	
+	
 if TUNING.DSTU.ICECREAMBUFF == true then
 	local ICECREAM = 
 	{
