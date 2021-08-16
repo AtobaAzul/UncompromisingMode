@@ -137,7 +137,9 @@ local states = {
 		timeline=
 		{
 			TimeEvent(2*FRAMES, function(inst) 
+			
 				inst.components.groundpounder:GroundPound()
+				inst.components.combat:DoAreaAttack(inst, TUNING.MOOSE_ATTACK_RANGE * 1.3, nil, nil, nil, { "moose", "mossling" }) --GroundPound Is purely visual
 				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/land") 
 			end)
 		},
@@ -298,7 +300,7 @@ local states = {
 		{
 			TimeEvent(2*FRAMES, function(inst) 
 				inst.components.groundpounder:GroundPound()
-				inst.components.combat:DoAreaAttack(inst, TUNING.MOOSE_ATTACK_RANGE * 1.1, nil, nil, nil, { "moose", "mossling" }) --GroundPound Is purely visual
+				inst.components.combat:DoAreaAttack(inst, TUNING.MOOSE_ATTACK_RANGE * 1.3, nil, nil, nil, { "moose", "mossling" }) --GroundPound Is purely visual
 				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/land") 
 			end)
 		},

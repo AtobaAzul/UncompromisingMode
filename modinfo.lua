@@ -398,10 +398,11 @@ configuration_options =
 		hover = "Mother Goose's health can be lowered to closer match a singleplayer experience.",
 		options =
 		{
-			{description = "Default[8000]", data = 8000},
-			{description = "Lowered[5000]", data = 5000}, --Slightly lower than widow, not a raid boss.
+			{description = "Pre-Nerf[8000]", data = 8000},
+			{description = "Default[7000]", data = 7000},
+			{description = "Lowered[6000]", data = 6000}, --Slightly lower than widow, not a raid boss.
 		},
-		default = 8000,
+		default = 7000,
 	},
 	{
 		name = "wiltfly health",
