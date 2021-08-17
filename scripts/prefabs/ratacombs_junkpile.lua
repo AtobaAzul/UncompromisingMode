@@ -47,20 +47,13 @@ local function RevealChest(inst)
 	for i, v in ipairs(GetChestLootTable(chestloots)) do
 		local pickloot = inst.components.lootdropper:SpawnLootPrefab(v)
 		chest.components.container:GiveItem(pickloot, i, nil, nil, true)
+		chest.AnimState:SetLayer(LAYER_BACKGROUND)
+		chest:DoTaskInTime(4,function(chest) chest.AnimState:SetLayer(LAYER_WORLD) end)
 	end
 end
 
 local function on_anim_over(inst)
-	if inst.components.pickable ~= nil and inst.components.pickable.cycles_left ~= 0 then
-		--if inst.keyloot == false then
-			inst.AnimState:PushAnimation(anims[inst.components.pickable.cycles_left])
-		--end
-	end
-end
-
-local function on_anim_over_now(inst)
---print(inst.components.pickable.cycles_left)
-	if inst.components.pickable ~= nil and inst.components.pickable.cycles_left ~= 0 then
+	if inst.components.pickable ~= nil and inst.components.pickable.cycles_left ~= 0 and inst.components.health == nil then
 		--if inst.keyloot == false then
 			inst.AnimState:PushAnimation(anims[inst.components.pickable.cycles_left])
 		--end
@@ -72,11 +65,11 @@ local function TryLoot(inst,picker)
 	local pickloot = inst.components.lootdropper:SpawnLootPrefab(loot)
 	picker:PushEvent("picksomething", { object = inst, loot = pickloot })
 	picker.components.inventory:GiveItem(pickloot, nil, inst:GetPosition())
-	on_anim_over_now(inst)
+	on_anim_over(inst)
 end
 
 local function BecomeSpawner(inst)
-print("becamespawner")
+--print("becamespawner")
     inst:AddComponent("childspawner")
     inst.components.childspawner.childname = "uncompromsing_junkrat"
     inst.components.childspawner:SetRareChild("uncompromsing_junkrat", TUNING.SLURTLEHOLE_RARECHILD_CHANCE)
@@ -119,24 +112,40 @@ local function TrySanityLoss(picker)
 	end
 end
 
+local function KillPile(inst,full)
+	if full == true then
+		inst.AnimState:PlayAnimation("idle_to_dead")
+		inst.AnimState:PushAnimation("dead",true)
+	else
+		inst.AnimState:PlayAnimation("dig_low",false)
+		inst.AnimState:PushAnimation("dead",true)
+	end
+	inst:AddComponent("health")
+	inst.components.health:Kill()
+end
+
+local function TrySpawnChest(inst,picker)
+	if math.random() > 0.75 then
+		RevealChest(inst)
+		KillPile(inst,true)
+	else
+		inst.AnimState:PlayAnimation("dig_full")
+		TryLoot(inst,picker)
+	end
+end
+
 local function onpickedfn(inst, picker)
 	TrySanityLoss(picker)
-	TryLoot(inst,picker)
-	if inst.components.pickable.cycles_left > 0 then
-	else
-		if math.random() > 0.75 then
-			RevealChest(inst)
-		end
-		inst:Remove()
+	if inst.components.pickable.cycles_left == 0 then
+		KillPile(inst,false)
+		TryLoot(inst,picker)
 	end
 	if inst.components.pickable.cycles_left == 2 then
-		inst.AnimState:PlayAnimation("dig_full")
+		TrySpawnChest(inst,picker)
 	end
 	if inst.components.pickable.cycles_left == 1 then
 		inst.AnimState:PlayAnimation("dig_med")
-	end
-	if inst.components.pickable.cycles_left == 0 then
-		inst.AnimState:PlayAnimation("dig_low")
+		TryLoot(inst,picker)
 	end
 end
 
@@ -196,7 +205,7 @@ local function junkpilefn()
 	----------------------
 	inst:AddComponent("inspectable")
 	----------------------
-	inst.Transform:SetScale(1.2,1.2,1.2)
+	inst.Transform:SetScale(1.1,1.1,1.1)
 	--full, med, low
 	inst:AddComponent("lootdropper")
 	
