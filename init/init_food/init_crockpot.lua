@@ -100,6 +100,7 @@ recipes.butterflymuffin.test = function(cooker, names, tags) return (names.butte
 -- Original: 		    test = function(cooker, names, tags) return (names.butterflywings or names.moonbutterflywings) and not tags.meat and tags.veggie end,
 
 recipes.frogglebunwich.test = function(cooker, names, tags) return (names.froglegs or names.froglegs_cooked) and tags.veggie and UncompromisingFillers(tags) --[[and MonsterMeatSupport(tags)]] end
+recipes.frogglebunwich.priority = 6 --Kabobs is 5... putting this just above kabobs
 -- Original:           test = function(cooker, names, tags) return (names.froglegs or names.froglegs_cooked) and tags.veggie end,
 
 recipes.taffy.test = function(cooker, names, tags) return tags.sweetener and tags.sweetener >= 3 and not tags.meat and UncompromisingFillers(tags) end
