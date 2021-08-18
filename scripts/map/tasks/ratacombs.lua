@@ -48,7 +48,7 @@ AddTask("Ratty_Maze2", {
 		level_set_piece_blocker = true,
 		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland","rattygas"},
 		room_choices={
-			["RattyWilds"] = 5,
+			["DeepRattyWilds"] = 5,
 		},
 		room_bg=GROUND.FOREST,
 		background_room="BGRattyCaveRoom",
@@ -61,7 +61,7 @@ AddTask("Ratty_Maze3", {
 		level_set_piece_blocker = true,
 		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland","rattygas"},
 		room_choices={
-			["RattyWilds"] = 5,
+			["DeepRattyWilds"] = 5,
 		},
 		room_bg=GROUND.FOREST,
 		background_room="BGRattyCaveRoom",
