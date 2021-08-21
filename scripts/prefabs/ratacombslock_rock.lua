@@ -78,33 +78,25 @@ local function updatephysics(inst)
 end
 
 local function OnActiveStateChanged(inst)
-	inst.active = inst.active_queue
-	inst._ispathfinding:set(inst.active_queue and not inst.conceal)
 	updatephysics(inst)
 end
 
 local function OnConcealStateChanged(inst)
-	inst.conceal = inst.conceal_queued
-	if not inst.conceal then
-		LaunchAndClearArea(inst, COLLISION_SIZE, 0.5, 0.5, .2, COLLISION_SIZE)
-	end
-
 	OnActiveStateChanged(inst)
 end
 
-local function dotransition(inst)
-	inst.transition_task = nil
-	if inst.conceal ~= inst.conceal_queued then
-		if not inst.sg:HasStateTag("busy") then
-			if inst.conceal_queued then
-				inst.sg:GoToState("conceal", inst.active)
-			else
-				inst.sg:GoToState("reveal")
-			end
-		end
-	elseif inst.active ~= inst.active_queue and not inst.conceal_queued then
-		inst.sg:GoToState(inst.active_queue and "raise" or "lower")
-	end
+
+local function Raise(inst)
+inst.conceal = nil
+inst.active = true
+OnConcealStateChanged(inst)
+inst.sg:GoToState("raise")
+end
+
+local function Lower(inst)
+inst.active = false
+OnConcealStateChanged(inst)
+inst.sg:GoToState("lower")
 end
 
 local function getstatus(inst)
@@ -174,12 +166,14 @@ local function commonfn(tags)
 
     inst:SetStateGraph("SGnightmarerock")
 
-
+	inst.lower = Lower
+	inst.raise = Raise
+	
 	inst.OnActiveStateChanged = OnActiveStateChanged
 	inst.OnConcealStateChanged = OnConcealStateChanged
-	inst.dotransition = dotransition
 	
 	inst:DoTaskInTime(0,Initialize)
+	inst:DoTaskInTime(0,Raise)
     return inst
 end
 

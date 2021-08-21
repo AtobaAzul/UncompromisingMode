@@ -3,8 +3,9 @@ self.inst = inst
 
 function self:UnLockFirstArea()
 if self.areaoneblockers ~= nil then
+print("unlocking...")
 	for i, v in ipairs(self.areaoneblockers) do
-		v.dotransition(v)
+		v.lower(v)
 	end
 end
 end

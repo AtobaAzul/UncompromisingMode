@@ -7,6 +7,7 @@ Layouts["cave_exit_ratacombs"] = StaticLayout.Get("map/static_layouts/cave_exit_
 Layouts["cave_entrance_ratacombs"] = StaticLayout.Get("map/static_layouts/cave_entrance_ratacombs")
 Layouts["ratking"] = StaticLayout.Get("map/static_layouts/ratking")
 Layouts["ratacombs_airpocket_1"] = StaticLayout.Get("map/static_layouts/ratacombs_airpocket_1")
+Layouts["ratacombs_lock1"] = StaticLayout.Get("map/static_layouts/ratacombs_lock1")
 ----
 --Ratacombs
 ----
@@ -92,6 +93,32 @@ AddRoom("RattyWilds", {
 			uncompromising_junkrat = 1,
             cavelight_small = 0.1,
             cavelight_tiny = 0.5,
+        },
+    }
+})
+
+AddRoom("RattyLock1", {
+    colour={r=0.7,g=0.7,b=0.7,a=0.9},
+    value = GROUND.CAVE_NOISE,
+    type = NODE_TYPE.Room,
+    contents =  {
+		countstaticlayouts = {
+			["ratacombs_lock1"] = function() return math.random(0,1) end,
+		},
+        distributepercent = .10,
+        distributeprefabs=
+        {
+            rock_flintless = 1.0,
+            rock_flintless_med = 1.0,
+            rock_flintless_low = 1.0,
+            pillar_cave_flintless = 0.2,
+			ratgas_spawner = 2.5,
+            --uncompromising_ratherd = 1,
+            goldnugget=.05,
+            rocks=.1,
+            flint=0.05,
+			ratacombs_junkpile_spawner = 3,
+			uncompromising_junkrat = 1,
         },
     }
 })

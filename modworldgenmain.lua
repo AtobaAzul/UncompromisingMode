@@ -354,8 +354,9 @@ AddTaskSetPreInitAny(function(tasksetdata)
 	
 	if tasksetdata.required_prefabs ~= nil then
 		table.insert(tasksetdata.required_prefabs,"ratking")
+		table.insert(tasksetdata.required_prefabs,"ratacombslock")
 	else
-		tasksetdata.required_prefabs = {"ratking"}
+		tasksetdata.required_prefabs = {"ratking","ratacombslock"}
 	end
 end)
 
@@ -375,7 +376,7 @@ Layouts["RatLockBlocker1"] =
 							ground_types = {GLOBAL.GROUND.ROCKY},
 							defs =
 								{
-								 	rocks = { "rock1"},
+								 	rocks = { "ratacombslock_rock"},
 								},
 							count =
 								{
