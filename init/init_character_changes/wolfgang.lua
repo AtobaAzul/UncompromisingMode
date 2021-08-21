@@ -193,13 +193,23 @@ local function NewItem(inst, data)
 	end
 end
 
+local function AdjustSlowdown(inst, item, tag)
+	if item ~= nil then
+		local itemspeed = item.components.equippable.walkspeedmult
+
+		if itemspeed and itemspeed <= 1 then
+			inst.components.locomotor:SetExternalSpeedMultiplier(inst, tag, (1/itemspeed))
+		end
+	else 
+		inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, tag)
+	end
+end
 
 local function StrongmanPickup(inst)
 	local itemhead = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HEAD)
 	local itembody = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BODY)
 	local itemhand = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
-	
-
+	local itemback = inst.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BACK)
 	
 	if itemhand ~= nil then
 		if itemhand.components.oar ~= nil then
@@ -214,41 +224,22 @@ local function StrongmanPickup(inst)
 	if inst.strength ~= "wimpy" and not inst.components.rider.riding then
 	
 		--counteracts head slowdown
-		if itemhead ~= nil then 	
-			local itemheadspeed = itemhead.components.equippable.walkspeedmult
-
-			if itemheadspeed and itemheadspeed <= 1 then
-				inst.components.locomotor:SetExternalSpeedMultiplier(inst, "strongmanhead", (1/itemheadspeed))
-			end
-		else 
-			inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanhead")
-		end
+		AdjustSlowdown(inst, itemhead, "strongmanhead")
 		
 		--counteracts body slowdown
-		if itembody ~= nil then 	
-			local itembodyspeed = itembody.components.equippable.walkspeedmult
-
-			if itembodyspeed and itembodyspeed <= 1 then
-				inst.components.locomotor:SetExternalSpeedMultiplier(inst, "strongmanbody", (1/itembodyspeed))
-			end
-		else 
-			inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanbody")
-		end
+		AdjustSlowdown(inst, itembody, "strongmanbody")
 		
 		--counteracts hand slowdown (currently only for mod compatibility)
-		if itemhand ~= nil then 	
-			local itemhandspeed = itemhand.components.equippable.walkspeedmult
-
-			if itemhandspeed and itemhandspeed <= 1 then
-				inst.components.locomotor:SetExternalSpeedMultiplier(inst, "strongmanhand", (1/itemhandspeed))
-			end
-		else 
-			inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanhand")
-		end		
+		AdjustSlowdown(inst, itemhand, "strongmanhand")
+		
+		--counteracts back slowdown (currently only for mod compatibility)
+		AdjustSlowdown(inst, itemback, "strongmanback")
+		
 	else --inst.strength == "wimpy"
 		inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanhead")
 		inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanbody")
 		inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanhand")
+		inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmanback")
 	end
 	
 	if inst.strength == "normal" and itembody ~= nil then
@@ -263,6 +254,7 @@ local function StrongmanPickup(inst)
 	else
 		inst.components.locomotor:RemoveExternalSpeedMultiplier(inst, "strongmancarry")
 	end
+	
 end
 
 AddPrefabPostInit("world", function(inst)

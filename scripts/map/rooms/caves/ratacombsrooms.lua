@@ -96,6 +96,28 @@ AddRoom("RattyWilds", {
     }
 })
 
+AddRoom("DeepRattyWilds", {
+    colour={r=0.7,g=0.7,b=0.7,a=0.9},
+    value = GROUND.CAVE_NOISE,
+    type = NODE_TYPE.Room,
+    contents =  {
+        distributepercent = .10,
+        distributeprefabs=
+        {
+            rock_flintless = 1.0,
+            rock_flintless_med = 1.0,
+            rock_flintless_low = 1.0,
+            pillar_cave_flintless = 0.2,
+			ratgas_spawner = 2.5,
+            --uncompromising_ratherd = 1,
+            goldnugget=.05,
+            rocks=.1,
+            flint=0.05,
+			ratacombs_junkpile_spawner = 3,
+			uncompromising_junkrat = 1,
+        },
+    }
+})
 -- Rocky Plains
 AddRoom("RattyLink", {
     colour={r=0.7,g=0.7,b=0.7,a=0.9},

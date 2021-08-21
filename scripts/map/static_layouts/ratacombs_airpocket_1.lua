@@ -103,7 +103,29 @@ return {
         },
         {
           name = "",
+          type = "ratacombs_cleanair",
+          shape = "rectangle",
+          x = 295,
+          y = 235,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
           type = "cavelight",
+          shape = "rectangle",
+          x = 87,
+          y = 240,
+          width = 0,
+          height = 0,
+          visible = true,
+          properties = {}
+        },
+        {
+          name = "",
+          type = "ratacombs_cleanair",
           shape = "rectangle",
           x = 87,
           y = 240,
