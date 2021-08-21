@@ -70,7 +70,7 @@ local function MonsterMeatSupport(tags)
 end
 if TUNING.DSTU.CROCKPOTMONSTMEAT then
 AddIngredientValues({"monstermeat"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_RAW_MONSTER_VALUE--[[ + meat_reduction_factor]]}, true, true) --2.5 monster total, Will be calculated with -1 meat
-AddIngredientValues({"cookedmonstermeat"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE}, true, true) --2 monster total, Will be calculated with -1 meat
+AddIngredientValues({"monstermeat_cooked"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE}, true, true) --2 monster total, Will be calculated with -1 meat
 AddIngredientValues({"monstermeat_dried"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_DRIED_MONSTER_VALUE}, true, true) --1 monster total, Will be calculated with -1 meat
 AddIngredientValues({"monstersmallmeat"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_RAW_MONSTER_VALUE}, true, true) --2 monster total, Will be calculated with -1 meat
 AddIngredientValues({"cookedmonstersmallmeat"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE}, true, true) --2.5 monster total, Will be calculated with -1 meat
@@ -93,9 +93,11 @@ AddIngredientValues({"forgetmelots"}, {decoration=1, foliage=1})
 -- Recipe changes (mostly added above filler changes)
 -- But made to be easily customised below for future changes
 -----------------------------------------------------------------
-recipes.monsterlasagna.test = function(cooker, names, tags) return tags.monster and (TUNING.DSTU.CROCKPOTMONSTMEAT and tags.meat and (tags.monster >= 3 or tags.monster > tags.meat) or not TUNING.DSTU.CROCKPOTMONSTMEAT and tags.monster >= 2) and not tags.inedible and not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) end 
--- Original:           test = function(cooker, names, tags) return tags.monster and tags.monster >= 2 and not tags.inedible end,    
 
+if TUNING.DSTU.CROCKPOTMONSTMEAT then
+recipes.monsterlasagna.test = function(cooker, names, tags) return tags.monster and tags.meat and (tags.monster > tags.meat or tags.monster >= 3) and not tags.inedible and not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) end 
+-- Original:           test = function(cooker, names, tags) return tags.monster and tags.monster >= 2 and not tags.inedible end,    
+end
 recipes.butterflymuffin.test = function(cooker, names, tags) return (names.butterflywings or names.moonbutterflywings) and not tags.meat and tags.veggie and UncompromisingFillers(tags) end 
 -- Original: 		    test = function(cooker, names, tags) return (names.butterflywings or names.moonbutterflywings) and not tags.meat and tags.veggie end,
 

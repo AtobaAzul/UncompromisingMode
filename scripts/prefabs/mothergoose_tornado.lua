@@ -85,7 +85,7 @@ end
 		
 local function grow(inst, time, startsize, endsize)
 	inst.Transform:SetScale(0.1, 0.1, 0.1)
-	inst.components.sizetweener:StartTween(2, 1.4, shrinktask)
+	inst.components.sizetweener:StartTween(2, 1.35, shrinktask)
 end
 
 local function tornado_fn()

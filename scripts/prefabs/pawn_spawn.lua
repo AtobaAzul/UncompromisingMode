@@ -52,9 +52,22 @@ local function create_common(pawntype)
     inst.components.childspawner:SetRegenPeriod(TUNING.CATCOONDEN_REGEN_TIME)
     inst.components.childspawner:SetSpawnPeriod(1)
     inst.components.childspawner:SetMaxChildren(1)
+	
+	inst:AddComponent("playerprox")
+    inst.components.playerprox:SetDist(14,15)
+	
 	if TUNING.DSTU.PAWNS == true then
-    inst.components.childspawner:StartSpawning()
+		inst.components.childspawner:StartSpawning()
+
+		inst.components.playerprox:SetOnPlayerNear(function()
+			inst.components.childspawner:StopSpawning()
+		end)
+		
+		inst.components.playerprox:SetOnPlayerFar(function()
+			inst.components.childspawner:StartSpawning()
+		end)
 	end
+
     return inst
 end
 
