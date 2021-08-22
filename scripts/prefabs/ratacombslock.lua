@@ -16,11 +16,11 @@ local function OnLock(inst)
 	inst.components.trader:Enable()
 end
 
-local function OnSave(inst)
+local function OnSave(inst,data)
 	data.unlocked = inst.unlocked
 end
 
-local function OnLoad(inst)
+local function OnLoad(inst,data)
 	if data ~= nil and data.unlocked ~= nil then
 		if data.unlocked == true then
 			inst.unlocked = true

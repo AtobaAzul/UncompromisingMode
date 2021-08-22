@@ -36,6 +36,7 @@ AddTask("Ratty_Maze", {
 		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland","rattygas", "ratkey1"},
 		room_choices={
 			["RattyWilds"] = function() return 3 + math.random(4) end,
+			["RattyLock1"] = 1,
 		},
 		room_bg=GROUND.FOREST,
 		background_room="BGRattyCaveRoom",

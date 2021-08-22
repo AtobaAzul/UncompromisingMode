@@ -270,8 +270,8 @@ local function fn(Sim)
     inst.Transform:SetScale(2, 2, 2)
         MakeCharacterPhysics(inst, 10, 1.5)
         RemovePhysicsColliders(inst)
-        inst.Physics:SetCollisionGroup(COLLISION.SANITY)
-        inst.Physics:CollidesWith(COLLISION.SANITY)   
+        --inst.Physics:SetCollisionGroup(COLLISION.SANITY)
+        --inst.Physics:CollidesWith(COLLISION.SANITY)   
 
 	inst.entity:SetPristine()
 	
