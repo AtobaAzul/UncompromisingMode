@@ -103,7 +103,7 @@ local require = GLOBAL.require
 		modimport("init/init_weather/init_acid_rain_disease")
 		modimport("init/init_weather/init_harder_weather")
 		--modimport("init/init_weather/init_snowstorm")
-		modimport("init/init_weather/init_snowstorm_structures")
+		--modimport("init/init_weather/init_snowstorm_structures")
 	--end
 	
 	if GetModConfigData("acidrain") == true then

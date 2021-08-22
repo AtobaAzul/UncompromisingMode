@@ -236,7 +236,7 @@ local function TryColdness(v)
 	end--]]
 end
 
-local NOTAGS = { "playerghost", "INLIMBO" }
+local NOTAGS = { "playerghost", "INLIMBO", "wall" }
 local function DoAreaColdness(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, inst.components.aura.radius, nil, NOTAGS, { "_health" })
@@ -246,8 +246,18 @@ local function DoAreaColdness(inst)
 	
 	if inst.components.workable.workleft and inst.components.workable.workleft > 1 then
 		inst:AddTag("snowpile")
+		
+		local structures = TheSim:FindEntities(x, y, z, inst.components.aura.radius, { "structure" }, NOTAGS)
+		for i, v1 in ipairs(structures) do
+			v1:AddTag("INLIMBO")
+		end
 	else
 		inst:RemoveTag("snowpile")
+		
+		local inlimbostructures = TheSim:FindEntities(x, y, z, inst.components.aura.radius, { "structure", "INLIMBO" }, { "wall" })
+		for i, v2 in ipairs(inlimbostructures) do
+			v2:RemoveTag("INLIMBO")
+		end
 	end
 	
 end
@@ -412,6 +422,17 @@ local function snowpilefn(Sim)
 	
 	SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	inst:ListenForEvent("animover", on_anim_over)
+	
+    inst:ListenForEvent("onremove", function()
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local inlimbostructures = TheSim:FindEntities(x, y, z, inst.components.aura.radius, { "structure", "INLIMBO" }, { "wall" })
+		for i, v in ipairs(inlimbostructures) do
+			v:RemoveTag("INLIMBO")
+		end
+    end)
+	
+	
+		
 	startregen(inst)
 	inst:DoTaskInTime(0,Init)
 	
