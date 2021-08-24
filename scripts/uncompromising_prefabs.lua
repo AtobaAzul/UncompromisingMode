@@ -243,6 +243,7 @@ return {
 	"corvushat",
 	"woomerang",
 	"um_spider_mutators",
+	--"uncompromising_alterguardianspawner",
 	
 	"voorhams",
 	"ratking",
@@ -256,4 +257,5 @@ return {
 	"garbagespring",
 	"uncompromising_bundles",
 	"ratacombs_cleanair",
+	"driftwoodfishingrod",
 }
