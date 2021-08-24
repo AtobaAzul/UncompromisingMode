@@ -121,9 +121,7 @@ local require = GLOBAL.require
 		modimport("init/init_creatures/init_sneeze_hitters")
 	end
 	
-	if GetModConfigData("durability") == true then
-		modimport("init/init_durability")
-	end
+	modimport("init/init_durability")
 	
 	if GetModConfigData("willow") == true then
 		modimport("init/init_character_changes/willow")
