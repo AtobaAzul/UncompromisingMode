@@ -87,6 +87,11 @@ TUNING.DSTU =
         WARNING_DELAY_VARIANCE = .3,
     },
     ----------------------------------------------------------------------------
+    --Clothing Degredation and Sewing Kit Changes
+    ----------------------------------------------------------------------------
+	CLOTHINGDEGREDATION = GetModConfigData("durability"),
+	SEWING_KIT = GetModConfigData("sewingkit"),
+    ----------------------------------------------------------------------------
     --Flingo Change
     ----------------------------------------------------------------------------
 	FLINGO_SETTING = GetModConfigData("flingo_setting"),

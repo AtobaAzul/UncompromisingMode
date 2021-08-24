@@ -1,173 +1,162 @@
-AddPrefabPostInit("sewing_kit", function (inst)
+if TUNING.DSTU.SEWING_KIT then
+	AddPrefabPostInit("sewing_kit", function (inst)
 		if inst ~= nil and inst.components ~= nil and inst.components.finiteuses ~= nil and inst.components.sewing ~= nil then
-		inst.components.finiteuses:SetMaxUses(10)
-    	inst.components.finiteuses:SetUses(10)
-		inst.components.sewing.repair_value = 1200
+			inst.components.finiteuses:SetMaxUses(10)
+			inst.components.finiteuses:SetUses(10)
+			inst.components.sewing.repair_value = 1200
 		end
-end)
-
+	end)
+end
 
 local function onfuelchangehigh(newsection, oldsection, inst, doer)
-    if newsection <= 0 then
-        
-    elseif newsection <= 1 then
-	inst.components.waterproofer:SetEffectiveness(0.3)
+    if newsection <= 1 then
+		inst.components.waterproofer:SetEffectiveness(0.3)
     elseif newsection <= 2 then
-	inst.components.waterproofer:SetEffectiveness(0.5)
+		inst.components.waterproofer:SetEffectiveness(0.5)
     elseif newsection <= 3 then
-	inst.components.waterproofer:SetEffectiveness(0.7)
+		inst.components.waterproofer:SetEffectiveness(0.7)
     elseif newsection <= 4 then
-	inst.components.waterproofer:SetEffectiveness(0.9)
+		inst.components.waterproofer:SetEffectiveness(0.9)
     end
 end
 
 local function onfuelchangeabsolute(newsection, oldsection, inst, doer)
-    if newsection <= 0 then
-        
-    elseif newsection <= 1 then
-	inst.components.waterproofer:SetEffectiveness(0.4)
+    if newsection <= 1 then
+		inst.components.waterproofer:SetEffectiveness(0.4)
     elseif newsection <= 2 then
-	inst.components.waterproofer:SetEffectiveness(0.6)
+		inst.components.waterproofer:SetEffectiveness(0.6)
     elseif newsection <= 3 then
-	inst.components.waterproofer:SetEffectiveness(0.8)
+		inst.components.waterproofer:SetEffectiveness(0.8)
     elseif newsection <= 4 then
-	inst.components.waterproofer:SetEffectiveness(1)
+		inst.components.waterproofer:SetEffectiveness(1)
     end
 end
 
 local function onfuelchangemedium(newsection, oldsection, inst, doer)
-    if newsection <= 0 then
-        
-    elseif newsection <= 1 then
-	inst.components.waterproofer:SetEffectiveness(0.15)
+    if newsection <= 1 then
+		inst.components.waterproofer:SetEffectiveness(0.15)
     elseif newsection <= 2 then
-	inst.components.waterproofer:SetEffectiveness(0.3)
+		inst.components.waterproofer:SetEffectiveness(0.3)
     elseif newsection <= 3 then
-	inst.components.waterproofer:SetEffectiveness(0.5)
+		inst.components.waterproofer:SetEffectiveness(0.5)
     elseif newsection <= 4 then
-	inst.components.waterproofer:SetEffectiveness(0.7)
+		inst.components.waterproofer:SetEffectiveness(0.7)
     end
 end
 
-AddPrefabPostInit("rainhat", function (inst)
-    if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
-		inst.components.fueled:SetSections(4)
-    		inst.components.fueled:SetSectionCallback(onfuelchangemedium)
-    end
-end)
-
-AddPrefabPostInit("umbrella", function (inst)
-    if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
-		inst.components.fueled:SetSections(4)
-    		inst.components.fueled:SetSectionCallback(onfuelchangehigh)
-    end
-end)
-
-AddPrefabPostInit("eyebrellahat", function (inst)
-    if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
-		inst.components.fueled:SetSections(4)
-    		inst.components.fueled:SetSectionCallback(onfuelchangeabsolute)
-    end
-end)
-
-AddPrefabPostInit("raincoat", function (inst)
-    if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
-		inst.components.fueled:SetSections(4)
-    		inst.components.fueled:SetSectionCallback(onfuelchangeabsolute)
-    end
-end)
-
-
-
-
+--
 
 local function onfuelchangeinsulationmedium(newsection, oldsection, inst, doer)
-    if newsection <= 0 then
-        
-    elseif newsection <= 1 then
-	inst.components.insulator:SetInsulation(30*1.4)
+    if newsection <= 1 then
+		inst.components.insulator:SetInsulation(45)
     elseif newsection <= 2 then
-	inst.components.insulator:SetInsulation(30*1.6)
+		inst.components.insulator:SetInsulation(50)
     elseif newsection <= 3 then
-	inst.components.insulator:SetInsulation(30*1.8)
+		inst.components.insulator:SetInsulation(55)
     elseif newsection <= 4 then
-	inst.components.insulator:SetInsulation(30*2)
+		inst.components.insulator:SetInsulation(60)
     end
 end
 
 local function onfuelchangeinsulationmedhigh(newsection, oldsection, inst, doer)
-    if newsection <= 0 then
-        
-    elseif newsection <= 1 then
-	inst.components.insulator:SetInsulation(30*3.25)
+    if newsection <= 1 then
+		inst.components.insulator:SetInsulation(90)
     elseif newsection <= 2 then
-	inst.components.insulator:SetInsulation(30*3.5)
+		inst.components.insulator:SetInsulation(100)
     elseif newsection <= 3 then
-	inst.components.insulator:SetInsulation(30*3.75)
+		inst.components.insulator:SetInsulation(110)
     elseif newsection <= 4 then
-	inst.components.insulator:SetInsulation(30*4)
+		inst.components.insulator:SetInsulation(120)
     end
 end
 
 local function onfuelchangeinsulationhigh(newsection, oldsection, inst, doer)
-    if newsection <= 0 then
-        
-    elseif newsection <= 1 then
-	inst.components.insulator:SetInsulation(30*7.1)
+    if newsection <= 1 then
+		inst.components.insulator:SetInsulation(150)
     elseif newsection <= 2 then
-	inst.components.insulator:SetInsulation(30*7.4)
+		inst.components.insulator:SetInsulation(180)
     elseif newsection <= 3 then
-	inst.components.insulator:SetInsulation(30*7.7)
+		inst.components.insulator:SetInsulation(210)
     elseif newsection <= 4 then
-	inst.components.insulator:SetInsulation(30*8)
+		inst.components.insulator:SetInsulation(240)
     end
 end
 
-AddPrefabPostInit("walrushat", function (inst)
-    if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
-		inst.components.fueled:SetSections(4)
-    		inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedhigh)
-    end
-end)
+if TUNING.DSTU.CLOTHINGDEGREDATION then
+	AddPrefabPostInit("rainhat", function (inst)
+		if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
+			inst.components.fueled:SetSections(4)
+				inst.components.fueled:SetSectionCallback(onfuelchangemedium)
+		end
+	end)
 
-AddPrefabPostInit("winterhat", function (inst)
-    if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
-		inst.components.fueled:SetSections(4)
-    		inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedhigh)
-    end
-end)
+	AddPrefabPostInit("umbrella", function (inst)
+		if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
+			inst.components.fueled:SetSections(4)
+				inst.components.fueled:SetSectionCallback(onfuelchangehigh)
+		end
+	end)
 
-AddPrefabPostInit("wintergoggles", function (inst)
-    if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
-		inst.components.fueled:SetSections(4)
-    		inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedhigh)
-    end
-end)
+	AddPrefabPostInit("eyebrellahat", function (inst)
+		if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
+			inst.components.fueled:SetSections(4)
+				inst.components.fueled:SetSectionCallback(onfuelchangeabsolute)
+		end
+	end)
 
-AddPrefabPostInit("trunkvest_summer", function (inst)
-    if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
-		inst.components.fueled:SetSections(4)
-    		inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedhigh)
-    end
-end)
+	AddPrefabPostInit("raincoat", function (inst)
+		if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
+			inst.components.fueled:SetSections(4)
+				inst.components.fueled:SetSectionCallback(onfuelchangeabsolute)
+		end
+	end)
 
-AddPrefabPostInit("trunkvest_winter", function (inst)
-    if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
-		inst.components.fueled:SetSections(4)
-    		inst.components.fueled:SetSectionCallback(onfuelchangeinsulationhigh)
-    end
-end)
+	AddPrefabPostInit("walrushat", function (inst)
+		if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
+			inst.components.fueled:SetSections(4)
+				inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedhigh)
+		end
+	end)
 
-AddPrefabPostInit("beargervest", function (inst)
-    if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
-		inst.components.fueled:SetSections(4)
-    		inst.components.fueled:SetSectionCallback(onfuelchangeinsulationhigh)
-    end
-end)
+	AddPrefabPostInit("winterhat", function (inst)
+		if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
+			inst.components.fueled:SetSections(4)
+				inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedhigh)
+		end
+	end)
 
-AddPrefabPostInit("beefalohat", function (inst)
-    if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
-		inst.components.fueled:SetSections(4)
-    		inst.components.fueled:SetSectionCallback(onfuelchangeinsulationhigh)
-    end
-end)
+	AddPrefabPostInit("wintergoggles", function (inst)
+		if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
+			inst.components.fueled:SetSections(4)
+				inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedhigh)
+		end
+	end)
+
+	AddPrefabPostInit("trunkvest_summer", function (inst)
+		if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
+			inst.components.fueled:SetSections(4)
+				inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedhigh)
+		end
+	end)
+
+	AddPrefabPostInit("trunkvest_winter", function (inst)
+		if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
+			inst.components.fueled:SetSections(4)
+				inst.components.fueled:SetSectionCallback(onfuelchangeinsulationhigh)
+		end
+	end)
+
+	AddPrefabPostInit("beargervest", function (inst)
+		if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
+			inst.components.fueled:SetSections(4)
+				inst.components.fueled:SetSectionCallback(onfuelchangeinsulationhigh)
+		end
+	end)
+
+	AddPrefabPostInit("beefalohat", function (inst)
+		if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
+			inst.components.fueled:SetSections(4)
+				inst.components.fueled:SetSectionCallback(onfuelchangeinsulationhigh)
+		end
+	end)
+end

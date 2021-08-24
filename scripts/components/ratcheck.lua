@@ -16,20 +16,12 @@ local ratwarning = nil
 
 local function CooldownRaid()
 	_respawntime = nil
-
-	if TheWorld.net ~= nil then
-		TheWorld.net:RemoveTag("raided")
-	end
-	TheWorld:RemoveTag("raided")
-	print("Rat Raid Cooldown is over.")
+	_raided = false
 end
 
 local function Print()
 	print(_respawntime)
-	if TheWorld.net ~= nil then
-		TheWorld.net:AddTag("raided")
-	end
-	TheWorld:AddTag("raided")
+	print(_raided)
 end
 
 local function StartTimer()
@@ -41,10 +33,6 @@ local function StartTimer()
 end
 
 function self:OnSave()
-	
-	if (TheWorld.net ~= nil and TheWorld.net:HasTag("raided")) or TheWorld:HasTag("raided") then
-		_raided = true
-	end
 
 	if _respawntime ~= nil then
         local _time = GetTime()
@@ -63,6 +51,9 @@ function self:OnSave()
 end
 
 function self:OnLoad(data)
+    if data.raided ~= nil then
+		_raided = data.raided
+	end
 		
     if data.respawntimeremaining ~= nil then
         _respawntime = data.respawntimeremaining + GetTime()
@@ -83,15 +74,6 @@ local function ChangeRatTimer(data)
 		print(_respawntime)
 		TheWorld:DoTaskInTime(0, Print)
     end
-end
-
-local function CooldownRaid(inst)
-	if TheWorld.net ~= nil then
-		TheWorld.net:RemoveTag("raided")
-	end
-
-	TheWorld:RemoveTag("raided")
-	--print("Rat Raid Cooldown is over.")
 end
 
 local function SpawnRaid(inst)
@@ -186,16 +168,13 @@ local function ActiveRaid(src, data)
 		local ents = TheSim:FindEntities(x, y, z, 20, nil, nil, {"_inventoryitem"})
 		if playerage >= 50 and math.random() > 0.05 and IsEligible(data.doer) and
 			not TheWorld:HasTag("cave") and
-			not (TheWorld.net ~= nil and TheWorld.net:HasTag("raided")) and
+			not (_raided ~= nil and _raided) and
 			not data.container.components.container:IsEmpty() and
 			#ents >= 20 then
 			print(playerage.." day's have passed! Go!")
-			if TheWorld.net ~= nil then
-				TheWorld.net:AddTag("raided")
-			end
 			
-			TheWorld:AddTag("raided")
-			--print("Rat Raid Triggered !")
+			_raided = true
+			
 			data.container:DoTaskInTime(3, StartRaid, data.doer)
 		else
 			print("But only "..playerage.." day's have passed, needs to be 50+!")
