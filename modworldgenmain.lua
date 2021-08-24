@@ -455,27 +455,27 @@ AddLevel(GLOBAL.LEVELTYPE.SURVIVAL, {
 })
 
 if GLOBAL.terrain.rooms.RuinedCity then
-	GLOBAL.terrain.rooms.RuinedCity.contents.distributeprefabs.pawn_hopper = 0.2
+	GLOBAL.terrain.rooms.RuinedCity.contents.distributeprefabs.pawn_hopper = 0.25
 end
 
 if GLOBAL.terrain.rooms.Vacant then
-	GLOBAL.terrain.rooms.Vacant.contents.distributeprefabs.pawn_hopper = 0.2
+	GLOBAL.terrain.rooms.Vacant.contents.distributeprefabs.pawn_hopper = 0.25
 end
 	
 if GLOBAL.terrain.rooms.Barracks then
-	GLOBAL.terrain.rooms.Barracks.contents.distributeprefabs.pawn_hopper = 0.2
+	GLOBAL.terrain.rooms.Barracks.contents.distributeprefabs.pawn_hopper = 0.25
 end
 	
 if GLOBAL.terrain.rooms.LabyrinthEntrance then
-	GLOBAL.terrain.rooms.LabyrinthEntrance.contents.distributeprefabs.pawn_hopper = 0.2
+	GLOBAL.terrain.rooms.LabyrinthEntrance.contents.distributeprefabs.pawn_hopper = 0.25
 end
 	
 if GLOBAL.terrain.rooms.Labyrinth then
-	GLOBAL.terrain.rooms.Labyrinth.contents.distributeprefabs.pawn_hopper_nightmare = 0.2
+	GLOBAL.terrain.rooms.Labyrinth.contents.distributeprefabs.pawn_hopper_nightmare = 0.25
 end
 	
 if GLOBAL.terrain.rooms.AtriumMazeEntrance then
-	GLOBAL.terrain.rooms.AtriumMazeEntrance.contents.distributeprefabs.pawn_hopper_nightmare = 0.2
+	GLOBAL.terrain.rooms.AtriumMazeEntrance.contents.distributeprefabs.pawn_hopper_nightmare = 0.25
 end
 
 modimport("init/init_food/init_food_worldgen")

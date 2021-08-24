@@ -244,6 +244,7 @@ return {
 	"woomerang",
 	"um_spider_mutators",
 	--"uncompromising_alterguardianspawner",
+	"driftwoodfishingrod",
 	
 	"voorhams",
 	"ratking",
@@ -257,5 +258,5 @@ return {
 	"garbagespring",
 	"uncompromising_bundles",
 	"ratacombs_cleanair",
-	"driftwoodfishingrod",
+	"ratacombs_totem",
 }

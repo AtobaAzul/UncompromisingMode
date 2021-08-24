@@ -4,7 +4,15 @@ return Class(function(self, inst)
 
 --assert(TheWorld.ismastersim, "Ratcheck should not exist on client")
 
+--------------------------------------------------------------------------
+--[[ Public Member Variables ]]
+--------------------------------------------------------------------------
+
 self.inst = inst
+
+--------------------------------------------------------------------------
+--[[ Private Member Variables ]]
+--------------------------------------------------------------------------
 
 local _ratraid = nil
 local _cooldown = nil
@@ -13,6 +21,13 @@ local _time = nil
 local _raided = nil
 local _respawntimeremaining = nil
 local ratwarning = nil
+
+local _worldsettingstimer = TheWorld.components.worldsettingstimer
+local RATRAID_TIMERNAME = "rat_raid"
+
+--------------------------------------------------------------------------
+--[[ Private member functions ]]
+--------------------------------------------------------------------------
 
 local function CooldownRaid()
 	_respawntime = nil
@@ -27,9 +42,7 @@ end
 local function StartTimer()
 	--local _time = 20 + math.random(20)
 	local _time = 9600 + math.random(4800)
-	_cooldown = TheWorld:DoTaskInTime(_time, CooldownRaid)
-    _respawntime = _time
-	print(_respawntime)
+	_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _time)
 end
 
 function self:OnSave()
