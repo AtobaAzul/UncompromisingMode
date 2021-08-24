@@ -23,7 +23,7 @@ end),
 EventHandler("attacked", function(inst, data) 
 	if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("charging") then
 		if (math.random() > 0.66) and inst.components.combat.target ~= nil and (4 > inst:GetDistanceSqToInst(inst.components.combat.target)) and inst.counterattack == true then
-			inst.sg:GoToState("stomp_pre") 
+			inst.sg:GoToState("stomp") 
 		else
 			inst.sg:GoToState("hit")
 		end
@@ -307,8 +307,7 @@ State{
             inst.SoundEmitter:PlaySound("dontstarve/creatures/koalefant/angry")
             inst.components.combat:StartAttack()
             inst.components.locomotor:StopMoving()
-            inst.AnimState:PlayAnimation("atk_pre")
-            inst.AnimState:PushAnimation("surprise", false)
+            inst.AnimState:PlayAnimation("stompatk", false)
 			if inst:HasTag("chargespeed") then
 				inst.components.locomotor.runspeed = 7
 				inst:RemoveTag("chargespeed")
@@ -319,7 +318,7 @@ State{
 
         timeline=
         {
-            TimeEvent(30*FRAMES, function(inst) 
+            TimeEvent(32*FRAMES, function(inst) 
 			SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
 			SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
 			SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())

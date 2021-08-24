@@ -380,6 +380,7 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/snowcone.tex"),
 	Asset("ANIM", "anim/koalefant_scare.zip"),
 	Asset("ANIM", "anim/koalefant_paw.zip"),
+	Asset("ANIM", "anim/koalefant_stomp.zip"),
 	Asset("ANIM", "anim/magmaanims.zip"),
 	Asset("ANIM", "anim/ancient_trepidation.zip"),
 	Asset("ANIM", "anim/ancient_trepidation_arm.zip"),	
