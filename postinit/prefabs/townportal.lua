@@ -7,7 +7,7 @@ local function StartSoundLoop(inst)
     end
 end
 ---ORANGE
-local ORANGE_PICKUP_MUST_TAGS = { "_inventoryitem", "plant","witherable", "kelp", "structure", "lureplant","mush-room", "waterplant"}
+local ORANGE_PICKUP_MUST_TAGS = { "_inventoryitem", "plant","witherable", "kelp", "structure", "lureplant","mush-room", "waterplant","oceanvine"}
 local ORANGE_PICKUP_CANT_TAGS = { "INLIMBO", "NOCLICK", "knockbackdelayinteraction", "catchable", "fire", "minesprung", "mineactive" }
 local function pickup(inst, channeler)
     if channeler == nil or channeler.components.inventory == nil then

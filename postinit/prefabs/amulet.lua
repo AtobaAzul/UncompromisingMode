@@ -138,7 +138,7 @@ end)
 -------Orange
 
 
-local ORANGE_PICKUP_MUST_TAGS = { "_inventoryitem", "plant","witherable", "kelp","lureplant","waterplant"}
+local ORANGE_PICKUP_MUST_TAGS = { "_inventoryitem", "plant","witherable", "kelp","lureplant","waterplant","oceanvine"}
 local ORANGE_PICKUP_CANT_TAGS = { "INLIMBO", "NOCLICK", "knockbackdelayinteraction", "catchable", "fire", "minesprung", "mineactive" }
 local function pickup_UM(inst, owner)
     if owner == nil or owner.components.inventory == nil then
