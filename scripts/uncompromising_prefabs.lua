@@ -245,6 +245,7 @@ return {
 	"um_spider_mutators",
 	--"uncompromising_alterguardianspawner",
 	"driftwoodfishingrod",
+	"nightlightfuel",
 	
 	"voorhams",
 	"ratking",

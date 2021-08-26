@@ -44,6 +44,11 @@ local function StartTimer()
 	local _time = 9600 + math.random(4800)
 	_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _time)
 end
+local function StartTimerShort()
+	--local _time = 20 + math.random(20)
+	local _time = 3,840 + math.random(960)
+	_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _time)
+end
 
 function self:OnSave()
 
@@ -87,6 +92,38 @@ local function ChangeRatTimer(data)
 		print(_respawntime)
 		TheWorld:DoTaskInTime(0, Print)
     end
+end
+
+local function MakeRatBurrow(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+
+    local function IsValidRatBurrowPosition(x, z)
+        if #TheSim:FindEntities(x, 0, z, TUNING.ANTLION_SINKHOLE.RADIUS, { "antlion_sinkhole_blocker" }) > 0 then
+            return false
+        end
+        if #TheSim:FindEntities(x, 0, z, 50, { "player", "playerghost" }) > 0 then
+            return false
+        end
+		
+        for dx = -1, 1 do
+            for dz = -1, 1 do
+                if not TheWorld.Map:IsPassableAtPoint(x + dx * TUNING.ANTLION_SINKHOLE.RADIUS, 0, z + dz * TUNING.ANTLION_SINKHOLE.RADIUS, false, true) then
+                    return false
+                end
+            end
+        end
+        return true
+    end
+	
+	for i = 1, 4 do
+		inst.x1, inst.z1 = x + math.random(-200, 200), z + math.random(-200, 200)
+		
+		if IsValidRatBurrowPosition(inst.x1, inst.z1) then
+			local ratburrow = SpawnPrefab("uncompromising_ratburrow")
+			ratburrow.Transform:SetPosition(inst.x1, 0, inst.z1)
+			break
+		end
+	end
 end
 
 local function SpawnRaid(inst)
@@ -136,26 +173,35 @@ end
 local function StartRaid(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local players = FindPlayersInRange(x, y, z, 50)
-	if ratwarning == nil then
-		ratwarning = 0
-	else
-		ratwarning = ratwarning + 1
-	end
-	if ratwarning == 1 then
-		inst:DoTaskInTime(0, SoundRaid)
-	end
-	if ratwarning == 3 then
-		for i, v in ipairs(players) do
-			if not IsEligible(v) then
-				v.components.talker:Say(GetString(v, "ANNOUNCE_RATRAID"))
+	
+	local ratburrow = TheSim:FindFirstEntityWithTag("ratburrow")
+	
+	if ratburrow ~= nil then
+		if ratwarning == nil then
+			ratwarning = 0
+		else
+			ratwarning = ratwarning + 1
+		end
+		if ratwarning == 1 then
+			inst:DoTaskInTime(0, SoundRaid)
+		end
+		if ratwarning == 3 then
+			for i, v in ipairs(players) do
+				if not IsEligible(v) then
+					v.components.talker:Say(GetString(v, "ANNOUNCE_RATRAID"))
+				end
 			end
 		end
-	end
-	if ratwarning == 10 then
-		inst:DoTaskInTime(1, SpawnRaid)
-		ratwarning = nil
+		if ratwarning == 10 then
+			inst:DoTaskInTime(1, SpawnRaid)
+			ratwarning = nil
+		else
+			inst:DoTaskInTime(math.random(3, 6), StartRaid)
+		end
 	else
-		inst:DoTaskInTime(math.random(3, 6), StartRaid)
+		print("No burrow, so make one ya dink!")
+		MakeRatBurrow(inst)
+		TheWorld:PushEvent("ratcooldownshort", inst)
 	end
 	
 	--print("Rat Raid Warning :", ratwarning)
@@ -198,6 +244,7 @@ local function ActiveRaid(src, data)
 end
 
 self.inst:ListenForEvent("ratcooldown", StartTimer, TheWorld)
+self.inst:ListenForEvent("ratcooldownshort", StartTimerShort, TheWorld)
 self.inst:ListenForEvent("activeraid", ActiveRaid, TheWorld)
 self.inst:ListenForEvent("ms_oncroprotted", ChangeRatTimer, TheWorld)
 
