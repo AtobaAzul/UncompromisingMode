@@ -259,4 +259,5 @@ return {
 	"uncompromising_bundles",
 	"ratacombs_cleanair",
 	"ratacombs_totem",
+	"ratgashole",
 }

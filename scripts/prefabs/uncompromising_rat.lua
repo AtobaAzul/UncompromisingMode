@@ -514,7 +514,7 @@ local function junkfn()
 	
 	inst:SetBrain(junkbrain)
 	
-	inst.Transform:SetScale(1.5,1.5,1.5)
+	inst.Transform:SetScale(1.25,1.25,1.25)
 	
 	inst:AddComponent("eater")
 	inst.components.eater:SetDiet({ FOODTYPE.HORRIBLE }, { FOODTYPE.HORRIBLE })
