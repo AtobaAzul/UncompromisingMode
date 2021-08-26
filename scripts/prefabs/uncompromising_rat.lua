@@ -743,6 +743,9 @@ local function onfinishcallback(inst)
 end
 
 local function onworked(inst, worker, workleft)
+    inst.components.thief:StealItem(inst)
+    inst.components.thief:StealItem(inst)
+    inst.components.thief:StealItem(inst)
 	inst.components.lootdropper:SpawnLootPrefab("rocks", inst:GetPosition())
 	inst.AnimState:PlayAnimation("dig")
 	inst.AnimState:PushAnimation("idle")
@@ -814,6 +817,8 @@ local function MakeRatBurrow(inst)
 	end
 end
 
+--GetClosestInstWithTag(tag, inst, radius or 1000)
+
 local function EndRaid(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local players = FindPlayersInRange(x, y, z, 50)
@@ -835,6 +840,7 @@ local function EndRaid(inst)
 	inst:RemoveTag("NOBLOCK")
 	inst:RemoveTag("NOCLICK")
 	inst:RemoveTag("raiding")
+	inst:AddTag("ratburrow")
 	
 	if inst.components.workable == nil then
 		inst:AddComponent("workable")
@@ -940,6 +946,8 @@ local function fn_herd()
 		return inst
 	end
 	
+	inst:AddComponent("theif")
+	
 	inst:AddComponent("herd")
 	inst.components.herd:SetGatherRange(40)
 	inst.components.herd:SetUpdateRange(nil)
@@ -984,6 +992,7 @@ local function fn_burrow()
 	inst.AnimState:SetBuild("uncompromising_rat_burrow")
 	inst.AnimState:PushAnimation("idle", true)
 	
+	inst:AddTag("ratburrow")
 	inst:AddTag("herd")
 	
 	inst.entity:SetPristine()
@@ -991,6 +1000,8 @@ local function fn_burrow()
 	if not TheWorld.ismastersim then
 		return inst
 	end
+	
+	inst:AddComponent("theif")
 	
 	inst:AddComponent("herd")
 	inst.components.herd:SetGatherRange(40)
