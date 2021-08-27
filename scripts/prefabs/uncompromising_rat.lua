@@ -6,6 +6,7 @@ local assets =
 	Asset("ANIM", "anim/uncompromising_rat_water.zip"),
 	Asset("ANIM", "anim/uncompromising_rat_burrow.zip"),
 	Asset("ANIM", "anim/uncompromising_junkrat.zip"),
+	Asset("ANIM", "anim/ratdroppings.zip"),
 }
 
 local prefabs =
@@ -553,6 +554,13 @@ local function junkfn()
 	
 	inst:AddComponent("inspectable")
 	
+    inst:AddComponent("periodicspawner")
+    inst.components.periodicspawner:SetPrefab("ratdroppings")
+    inst.components.periodicspawner:SetRandomTimes(5, 15)
+    inst.components.periodicspawner:SetDensityInRange(20, 2)
+    inst.components.periodicspawner:SetMinimumSpacing(12)
+    inst.components.periodicspawner:Start()
+	
 	inst:ListenForEvent("onattackother", OnAttackOther)
 	inst:ListenForEvent("attacked", OnJunkAttacked)
 	inst:ListenForEvent("death", OnDeath)
@@ -717,6 +725,13 @@ local function packfn()
 	inst.components.inventory.maxslots = 10
 	
 	inst:AddComponent("inspectable")
+	
+    inst:AddComponent("periodicspawner")
+    inst.components.periodicspawner:SetPrefab("ratdroppings")
+    inst.components.periodicspawner:SetRandomTimes(5, 15)
+    inst.components.periodicspawner:SetDensityInRange(20, 2)
+    inst.components.periodicspawner:SetMinimumSpacing(12)
+    inst.components.periodicspawner:Start()
 	
 	inst:ListenForEvent("onattackother", OnAttackOther)
 	inst:ListenForEvent("attacked", OnAttacked)
@@ -946,7 +961,7 @@ local function fn_herd()
 		return inst
 	end
 	
-	inst:AddComponent("theif")
+    inst:AddComponent("thief")
 	
 	inst:AddComponent("herd")
 	inst.components.herd:SetGatherRange(40)
@@ -1001,7 +1016,7 @@ local function fn_burrow()
 		return inst
 	end
 	
-	inst:AddComponent("theif")
+    inst:AddComponent("thief")
 	
 	inst:AddComponent("herd")
 	inst.components.herd:SetGatherRange(40)
@@ -1037,8 +1052,46 @@ local function fn_burrow()
 	return inst
 end
 
+local function fn_droppings()
+    local inst = CreateEntity()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+	
+    inst.AnimState:SetLayer(LAYER_BACKGROUND)
+    inst.AnimState:SetSortOrder(3)
+	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+    inst.AnimState:SetBank("ratdroppings")
+    inst.AnimState:SetBuild("ratdroppings")
+    inst.AnimState:PlayAnimation("idle"..math.random(4))
+	
+    MakeInventoryPhysics(inst)
+
+	--inst:AddTag("fx")
+	
+	MakeInventoryFloatable(inst)
+	
+	inst.entity:SetPristine()
+	
+	if not TheWorld.ismastersim then 
+		return inst
+	end
+	
+	inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.nobounce = true
+	inst.components.inventoryitem:SetOnPutInInventoryFn(inst.Remove)
+
+	inst:AddComponent("perishable")
+	inst.components.perishable:SetPerishTime(TUNING.PERISH_MED)
+	inst.components.perishable.onperishreplacement = "disease_puff"
+	
+    return inst
+end
+
 return Prefab("uncompromising_rat", fn, assets, prefabs),
 	Prefab("uncompromising_junkrat", junkfn),
 	Prefab("uncompromising_packrat", packfn, assets, prefabs),
 	Prefab("uncompromising_ratherd", fn_herd, assets, prefabs),
-	Prefab("uncompromising_ratburrow", fn_burrow, assets, prefabs)
+	Prefab("uncompromising_ratburrow", fn_burrow, assets, prefabs),
+	Prefab("ratdroppings", fn_droppings, assets)
