@@ -84,6 +84,7 @@ local IMPASSABLES_STATUES = {
 	["chesspiece_crabking"] = true,
 	["sunkenchest"] = true,
 	["oceantreenut"] = true,
+	["shell_cluster"] = true,
 }
 env.AddPrefabPostInitAny(function(inst)
     if IMPASSABLES[inst.prefab] and inst.Physics ~= nil then

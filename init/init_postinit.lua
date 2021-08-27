@@ -130,6 +130,7 @@ local prefab_post = {
 	"spider_whistle",
 	"spider_healer",
 	"siestahut",
+	"bees",
 }
 
 local stategraph_post = {
