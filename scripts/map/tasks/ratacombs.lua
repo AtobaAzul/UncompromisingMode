@@ -14,8 +14,8 @@ AddTask("Ratty_Entrance", {
 })
 
 AddTask("Ratty_Link", {
-		locks={LOCKS.TIER2},
-		keys_given={KEYS.TIER3},
+		locks={LOCKS.TIER4},
+		keys_given={KEYS.TIER5},
 		region_id = "ratacombs",
 		level_set_piece_blocker = true,
 		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland"},
@@ -42,8 +42,47 @@ AddTask("Ratty_Maze", {
 		background_room="BGRattyCaveRoom",
 		colour={r=.1,g=.1,b=.1,a=1},
 })
-AddTask("Ratty_Maze2", {
+AddTask("Ratty_Shallow_1", {
+		locks={LOCKS.TIER2},
+		keys_given={KEYS.TIER3},
+		region_id = "ratacombs",
+		level_set_piece_blocker = true,
+		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland","rattygas", "ratkey1"},
+		room_choices={
+			["RattyWilds"] = function() return 3 + math.random(4) end,
+		},
+		room_bg=GROUND.FOREST,
+		background_room="BGRattyCaveRoom",
+		colour={r=.1,g=.1,b=.1,a=1},
+})
+AddTask("Ratty_Shallow_2", {
 		locks={LOCKS.TIER3},
+		keys_given={KEYS.TIER4},
+		region_id = "ratacombs",
+		level_set_piece_blocker = true,
+		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland","rattygas", "ratkey1"},
+		room_choices={
+			["RattyWilds"] = function() return 3 + math.random(4) end,
+		},
+		room_bg=GROUND.FOREST,
+		background_room="BGRattyCaveRoom",
+		colour={r=.1,g=.1,b=.1,a=1},
+})
+AddTask("Ratty_Shallow_3", {
+		locks={LOCKS.TIER1},
+		keys_given={KEYS.TIER2},
+		region_id = "ratacombs",
+		level_set_piece_blocker = true,
+		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland","rattygas", "ratkey1"},
+		room_choices={
+			["RattyWilds"] = function() return 3 + math.random(4) end,
+		},
+		room_bg=GROUND.FOREST,
+		background_room="BGRattyCaveRoom",
+		colour={r=.1,g=.1,b=.1,a=1},
+})
+AddTask("Ratty_Maze2", {
+		locks={LOCKS.TIER5},
 		keys_given={},
 		region_id = "ratacombs",
 		level_set_piece_blocker = true,
@@ -56,7 +95,7 @@ AddTask("Ratty_Maze2", {
 		colour={r=.1,g=.1,b=.1,a=1},
 })
 AddTask("Ratty_Maze3", {
-		locks={LOCKS.TIER3},
+		locks={LOCKS.TIER5},
 		keys_given={},
 		region_id = "ratacombs",
 		level_set_piece_blocker = true,
