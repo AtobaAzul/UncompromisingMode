@@ -52,6 +52,10 @@ local function OnAttackOther(inst, data)
 	if data.target ~= nil and data.target:HasTag("player") and not data.target:HasTag("hasplaguemask") then
 		data.target.components.health:DeltaPenalty(0.01)
 	end
+	
+	if inst.components.thief ~= nil then
+		inst.components.thief:StealItem(other)
+	end
 end
 
 local function OnAttacked(inst, data)
@@ -1069,6 +1073,7 @@ local function fn_droppings()
     MakeInventoryPhysics(inst)
 
 	--inst:AddTag("fx")
+	inst:AddTag("raidrat")
 	
 	MakeInventoryFloatable(inst)
 	
