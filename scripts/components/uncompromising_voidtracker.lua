@@ -5,10 +5,16 @@ self.inst = inst
 local function Consume(inst)
 if ((inst.sg ~= nil) and not (inst.sg.currentstate.name == "teleportato_teleport" or inst.sg.currentstate.name == "death")) then
 	inst.sg:GoToState("teleportato_teleport")
-	inst:DoTaskInTime(82*FRAMES,function(inst)
-		local deathpoint = TheSim:FindFirstEntityWithTag("tentacle_pillar")
-		if deathpoint ~= nil then
-			local x,y,z = deathpoint.Transform:GetWorldPosition()
+	inst:DoTaskInTime(84*FRAMES,function(inst)
+		local tentapillars = {}
+		for k, v in pairs(Ents) do 
+			if v.prefab == "tentacle_pillar" then
+				table.insert(tentapillars, v)
+			end
+		end
+		local random_tentapillar = tentapillars[math.random(#tentapillars)]
+		if random_tentapillar ~= nil then
+			local x, y, z = random_tentapillar.Transform:GetWorldPosition()
 			inst.Transform:SetPosition(x+1,y,z+1)
 			inst:PushEvent("death")
 			inst:RemoveTag("VoidDoomed")
