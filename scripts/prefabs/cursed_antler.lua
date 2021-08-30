@@ -122,6 +122,19 @@ local function onattack(inst, attacker, target)
 		]]
     end
 	
+	
+	local x1, y1, z1 = inst.Transform:GetWorldPosition()
+
+	for i, v in pairs(TheSim:FindEntities(x1, y1, z1, 3, { "cursedantler" })) do
+		if v ~= inst then
+			v.components.fueled:MakeEmpty()
+			
+			if v.task == nil then
+				v.task = v:DoPeriodicTask(0.5, fuelme)
+			end
+		end
+	end
+	
 	inst.components.fueled:MakeEmpty()
 	
 	if inst.task == nil then
@@ -142,6 +155,8 @@ local function fn()
     inst.AnimState:SetBank("cursed_antler")
     inst.AnimState:SetBuild("cursed_antler")
     inst.AnimState:PlayAnimation("idle")
+	
+	inst:AddTag("cursedantler")
 
     MakeInventoryFloatable(inst, "med", 0.2, 0.65)
 

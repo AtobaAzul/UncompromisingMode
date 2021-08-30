@@ -53,8 +53,8 @@ local function OnAttackOther(inst, data)
 		data.target.components.health:DeltaPenalty(0.01)
 	end
 	
-	if inst.components.thief ~= nil then
-		inst.components.thief:StealItem(other)
+	if data.target ~= nil and data.target:HasTag("player") and inst.components.thief ~= nil then
+		inst.components.thief:StealItem(data.target)
 	end
 end
 
@@ -102,6 +102,8 @@ local function OnPickup(inst, data)
 				inst._item:Remove()
 			end
 		end
+		
+		inst.components.combat:DropTarget()
 	else
 		data.item.components.explosive:OnBurnt()
 	end
@@ -156,7 +158,7 @@ end
 local RETARGET_CANT_TAGS = { "wall", "raidrat"}
 local function rattargetfn(inst)
     return FindEntity(
-                inst, 5,
+                inst, 3,
                 function(guy)
 					local validitem = guy.components.inventory ~= nil and guy.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
                     return inst:GetTimeAlive() > 5 and not 
@@ -560,9 +562,9 @@ local function junkfn()
 	
     inst:AddComponent("periodicspawner")
     inst.components.periodicspawner:SetPrefab("ratdroppings")
-    inst.components.periodicspawner:SetRandomTimes(5, 15)
-    inst.components.periodicspawner:SetDensityInRange(20, 2)
-    inst.components.periodicspawner:SetMinimumSpacing(12)
+    inst.components.periodicspawner:SetRandomTimes(5,10)
+    inst.components.periodicspawner:SetDensityInRange(30, 2)
+    inst.components.periodicspawner:SetMinimumSpacing(8)
     inst.components.periodicspawner:Start()
 	
 	inst:ListenForEvent("onattackother", OnAttackOther)

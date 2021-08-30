@@ -10,7 +10,10 @@ end
 
 local function fuelme(inst)
 	if inst.components.fueled:GetPercent() < 1 then
-		inst.components.fueled:DoDelta(1)
+		
+		if inst.pausedfuel then
+			inst.components.fueled:DoDelta(1)
+		end
 			
 		if inst.components.fueled:GetPercent() >= 1 then
 			if inst.fueltask ~= nil then
@@ -31,7 +34,7 @@ local function DoubleSlap(owner)
 	local equip = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 	--owner.components.combat:SetTarget(target)
 	
-	if not owner.components.rider:IsRiding() and equip ~= nil and equip.components.weapon ~= nil and not (equip.components.projectile ~= nil or equip:HasTag("rangedweapon")) and target ~= nil then
+	if not owner.components.rider:IsRiding() and equip ~= nil and equip.components.weapon ~= nil and not (equip.components.projectile ~= nil or equip:HasTag("rangedweapon")) and target ~= nil and not equip.pausedfuel then
 		local damage = equip.components.weapon ~= nil and equip.components.weapon:GetDamage(owner, target)
 		local damagemult = owner.components.combat.damagemultiplier ~= nil and owner.components.combat.damagemultiplier or 1
 		local damagemultex = owner.components.combat.externaldamagemultipliers ~= nil and owner.components.combat.externaldamagemultipliers:Get() or 1
@@ -112,9 +115,27 @@ end
 
 local function onfuelchange(newsection, oldsection, inst)
     if newsection <= 0 then
-		inst.SoundEmitter:PlaySound("dontstarve/creatures/together/klaus/lock_break")
-        inst:Remove()
+		inst.SoundEmitter:PlaySound("dontstarve/creatures/together/klaus/breath_out")
     end
+end
+
+local function unpausefueled(inst)
+	inst.SoundEmitter:PlaySound("dontstarve/creatures/together/klaus/breath_in")
+	
+	inst.pausedfuel = true
+	if inst.fuelmetask == nil then
+		inst.fuelmetask = inst:DoPeriodicTask(1, fuelme)
+	end
+end
+
+local function PauseFueled(inst)
+	inst.pausedfuel = false
+
+	if inst.unpausefueledtask ~= nil then
+		inst.unpausefueledtask:Cancel()
+		inst.unpausefueledtask = nil
+	end
+	inst.unpausefueledtask = inst:DoTaskInTime(10, unpausefueled)
 end
 
 local function fn()
@@ -140,6 +161,8 @@ local function fn()
     if not TheWorld.ismastersim then
         return inst
     end
+	
+	inst.pausedfuel = nil
 
     inst:AddComponent("inspectable")
 
@@ -149,7 +172,7 @@ local function fn()
     inst:AddComponent("fueled")
     inst.components.fueled:SetSectionCallback(onfuelchange)
     inst.components.fueled:InitializeFuelLevel(100)
-    inst.components.fueled:SetDepletedFn(inst.Remove)
+    inst.components.fueled:SetDepletedFn(PauseFueled)
 	inst.components.fueled.accepting = false
 
     inst:AddComponent("inventoryitem")

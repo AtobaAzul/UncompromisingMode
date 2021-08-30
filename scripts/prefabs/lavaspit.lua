@@ -194,7 +194,12 @@ local function slobberfn()
     return inst
 end
 
-local function LaunchMore(inst, xpos, zpos)
+local function LaunchMore(inst, xpos, zpos, sound)
+
+	if sound then
+		inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/vomit")
+	end
+	
     local x, y, z = inst.Transform:GetWorldPosition()
 	local targetpos = inst:GetPosition()
 
@@ -228,11 +233,14 @@ local function OnHitInk(inst, attacker, target)
 	lavaspit.Transform:SetPosition(x, 0, z)
 	lavaspit.lobber = inst.lobber
 	
+	
 	if inst.LaunchMoreSpit then
-		inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/vomit")
-		LaunchMore(inst, -2.5, 0)
+		LaunchMore(inst, -2.5, 0, true)
 		LaunchMore(inst, 2.5, -2.5)
 		LaunchMore(inst, 2.5, 2.5)
+	else
+		inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
+		
 	end
 	
     inst:DoTaskInTime(0, inst.Remove)

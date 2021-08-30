@@ -101,6 +101,18 @@ local function createlight(staff, target, pos)
 			LaunchSpit(caster, target)
 		end
 		
+		local x1, y1, z1 = staff.Transform:GetWorldPosition()
+
+		for i, v in pairs(TheSim:FindEntities(x1, y1, z1, 3, { "slobberlobber" })) do
+			if v ~= staff then
+				v.components.fueled:MakeEmpty()
+				
+				if v.task == nil then
+					v.task = v:DoPeriodicTask(0.75, fuelme)
+				end
+			end
+		end
+		
 		staff.components.fueled:MakeEmpty()
 	else
 		staff.SoundEmitter:PlaySound("dontstarve/common/teleportworm/sick_cough")
@@ -175,6 +187,7 @@ local function staff_fn()
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("nopunch")
+    inst:AddTag("slobberlobber")
 
     --Sneak these into pristine state for optimization
     inst:AddTag("quickcast")
