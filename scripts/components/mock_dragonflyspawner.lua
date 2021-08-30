@@ -31,6 +31,7 @@ self.inst = inst
 --------------------------------------------------------------------------
 local _warning = false
 local _timetoattack = nil
+local _moonmawdelay = nil
 local _warnduration = 60
 local _timetonextwarningsound = 0
 local _announcewarningsoundinterval = 4
@@ -115,6 +116,7 @@ local function TryStartAttacks(killed)
             local attackdelay = (TheWorld.state.summerlength - 1) * TUNING.TOTAL_DAY_TIME / (_attackspersummer + 1) 
             if killed == true then
                 attackdelay = attackdelay * HASSLER_KILLED_DELAY_MULT
+				_moonmawdelay = attackdelay / 2
             end
             -- Remove randomization in case that shifts it too far
             --local attackrandom = 0.1*attackdelay
@@ -162,7 +164,7 @@ end
 
 local function GetSpawnPoint(pt)
     if not TheWorld.Map:IsAboveGroundAtPoint(pt:Get()) then
-		if TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake then
+		if _moonmawdelay = nil and TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake then
 			pt = FindNearbyLandFullMoon(pt, 1) or pt
 		else
 			pt = FindNearbyLand(pt, 1) or pt
@@ -186,7 +188,7 @@ local function ReleaseHassler(targetPlayer)
 
     local spawn_pt = GetSpawnPoint(targetPlayer:GetPosition())
     if spawn_pt ~= nil then
-		if TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake then 
+		if _moonmawdelay = nil and TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake then 
 			hassler = SpawnPrefab("moonmaw_dragonfly")
         elseif _storedhassler ~= nil then
             hassler = SpawnSaveRecord(_storedhassler, {})
@@ -298,7 +300,7 @@ function self:DoWarningSound(_targetplayer)
     --Players near _targetplayer will hear the warning sound from the
     --same direction and volume offset from their own local positions
 	
-	if TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake then
+	if _moonmawdelay = nil and TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake then
 		SpawnPrefab("moonmaw_dragonflywarning_lvl"..
 			(((_timetoattack == nil or
 			_timetoattack < 30) and "4") or
@@ -324,6 +326,15 @@ function self:OnUpdate(dt)
         return
     end
 	_timetoattack = _timetoattack - dt
+
+	if _moonmawdelay ~= nil then
+		_moonmawdelay = _moonmawdelay - dt
+		
+		if _moonmawdelay <= 0 then
+			_moonmawdelay = nil
+		end
+	end
+	
 	if _timetoattack <= 0 then
 		_warning = false
 		_timetoattack = nil
@@ -386,6 +397,7 @@ function self:OnSave()
 		warning = _warning,
 		timetoattack = _timetoattack,
 		storedhassler = _storedhassler,
+		moonmawdelay = _moonmawdelay
 	}
 
 	local ents = {}
@@ -401,6 +413,7 @@ function self:OnLoad(data)
 	_warning = data.warning or false
 	_timetoattack = data.timetoattack
 	_storedhassler = data.storedhassler
+	_moonmawdelay = data.moonmawdelay
 end
 
 function self:LoadPostPass(newents, savedata)
@@ -436,7 +449,7 @@ function self:SummonMonster(player)
 end
 
 local function SummonMonsterFullMoon(player)
-	if TheWorld.state.cycles > 50 and TheWorld.state.issummer and TheWorld.state.isfullmoon and not TheWorld.state.isalterawake then
+	if _moonmawdelay = nil and TheWorld.state.cycles > 50 and TheWorld.state.issummer and TheWorld.state.isfullmoon and not TheWorld.state.isalterawake then
 		_timetoattack = 50
 		self.inst:StartUpdatingComponent(self)
 	end
