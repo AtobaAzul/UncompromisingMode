@@ -68,7 +68,7 @@ local function OnHaunt(inst)
     return true
 end
 
-local function fn()
+local function fn(size)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -78,8 +78,8 @@ local function fn()
 
     MakeObstaclePhysics(inst, 0.33)
 
-    inst.AnimState:SetBank("pigtorch")
-    inst.AnimState:SetBuild("pig_torch")
+    inst.AnimState:SetBuild("rattotem")
+    
     inst.AnimState:PlayAnimation("idle", true)
 
     inst:AddTag("structure")
@@ -94,31 +94,23 @@ local function fn()
     end
 
     inst:AddComponent("inspectable")
---[[
+
     inst:AddComponent("burnable")
     inst.components.burnable.canlight = true
-	inst.components.burnable:SetBurnTime(240)
-    inst.components.burnable:SetOnIgniteFn(function(inst)
-		inst.components.burnable:SetFXLevel(1)
-		inst:DoTaskInTime(140, function(inst) inst.components.burnable:SetFXLevel(2) end)
-		inst:DoTaskInTime(60, function(inst) inst.components.burnable:SetFXLevel(3) end)
+	
+	if size == "short" then
+		inst.AnimState:SetBank("rattotem_short")
+		inst.components.burnable:AddBurnFX("ratacombs_totemfire", Vector3(0, 0, 0), "fire_marker_short")
+	end
+	if size == "medium" then
+		inst.AnimState:SetBank("rattotem_medium")
+		inst.components.burnable:AddBurnFX("ratacombs_totemfire", Vector3(5, -20, 0), "fire_marker")
+	end
+	if size == "tall" then
+		inst.AnimState:SetBank("rattotem_tall")
+		inst.components.burnable:AddBurnFX("ratacombs_totemfire", Vector3(0, -5, 0), "fire_marker_tall")
+	end
 		
-		inst.components.burnable.canlight = false
-	end)
-	
-    inst.components.burnable:SetOnExtinguishFn(function(inst)
-		inst.components.burnable.canlight = true
-	end)
-	
-	inst.components.burnable:SetOnBurntFn(inst.components.burnable:Extinguish())
-    inst.components.burnable:AddBurnFX("pigtorch_flame", Vector3(-5, 40, 0), "fire_marker")
-    --inst:ListenForEvent("onextinguish", onextinguish) --in case of creepy hands
-]]
-
-
-    inst:AddComponent("burnable")
-    inst.components.burnable.canlight = false
-    inst.components.burnable:AddBurnFX("ratacombs_totemfire", Vector3(-5, 40, 0), "fire_marker")
     inst:ListenForEvent("onextinguish", onextinguish) --in case of creepy hands
 
     inst:AddComponent("fueled")
@@ -136,8 +128,22 @@ local function fn()
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_SMALL)
     inst.components.hauntable:SetOnHauntFn(OnHaunt)
+	
 
+	inst.components.fueled:SetPercent(1) -- This is temporary
     return inst
+end
+
+local function shortfn()
+return fn("short")
+end
+
+local function mediumfn()
+return fn("medium")
+end
+
+local function tallfn()
+return fn("tall")
 end
 
 local function firefn()
@@ -168,5 +174,7 @@ local function firefn()
     return inst
 end
 
-return Prefab("ratacombs_totem", fn, assets, prefabs),
-	Prefab("ratacombs_totemfire", firefn, assets, prefabs)
+return Prefab("ratacombs_totem_short", shortfn),
+	Prefab("ratacombs_totem_medium", mediumfn),
+	Prefab("ratacombs_totem_tall", tallfn),
+	Prefab("ratacombs_totemfire", firefn)

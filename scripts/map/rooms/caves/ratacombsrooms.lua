@@ -93,7 +93,7 @@ AddRoom("RattyWilds", {
 			uncompromising_junkrat = 1,
             cavelight_small = 0.1,
             cavelight_tiny = 0.5,
-            ratacombs_totem = 1,
+            ratacombs_totem_tall = 1,
 			ratgashole = 3,
         },
     }
@@ -121,7 +121,7 @@ AddRoom("RattyLock1", {
             flint=0.05,
 			ratacombs_junkpile_spawner = 1.5,
 			uncompromising_junkrat = 1,
-            ratacombs_totem = 1,
+            ratacombs_totem_tall = 1,
 			ratgashole = 3,
         },
     }
@@ -146,7 +146,7 @@ AddRoom("DeepRattyWilds", {
             flint=0.05,
 			ratacombs_junkpile_spawner = 1.5,
 			uncompromising_junkrat = 1,
-            ratacombs_totem = 1,
+            ratacombs_totem_tall = 1,
 			ratgashole = 3,
         },
     }
@@ -177,7 +177,7 @@ AddRoom("RattyLink", {
 										ratacombs_junkpile_spawner = 3,
 										cavelight_small = 0.5,
 										cavelight_tiny = 0.5,
-										ratacombs_totem = 1,
+										ratacombs_totem_tall = 1,
 					                },
 					            }
 })
@@ -229,7 +229,7 @@ local bgratty = {
 			uncompromising_junkrat = 1,
 			cavelight_small = 0.5,
             cavelight_tiny = 0.5,
-            ratacombs_totem = 1,
+            ratacombs_totem_tall = 1,
         },
     }
 }
