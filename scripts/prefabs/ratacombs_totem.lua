@@ -96,7 +96,7 @@ local function fn(size)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("burnable")
-    inst.components.burnable.canlight = true
+    inst.components.burnable.canlight = false
 	
 	if size == "short" then
 		inst.AnimState:SetBank("rattotem_short")
