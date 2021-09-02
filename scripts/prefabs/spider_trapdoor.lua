@@ -278,6 +278,10 @@ local function OnStopLeashing(inst, data)
     end]]
 end
 
+local function SetHappyFace(inst, is_happy)
+    --No, the smile animations are awful, fuck off :0
+end
+
 local function create_common(build)
     local inst = CreateEntity()
     
@@ -417,6 +421,8 @@ local function create_common(build)
     inst:ListenForEvent("ontrapped", OnTrapped)
 	
 	inst.recipe = "mutator_trapdoor"
+	
+    inst.SetHappyFace = SetHappyFace
 	
     inst:ListenForEvent("startleashing", OnStartLeashing)
     inst:ListenForEvent("stopleashing", OnStopLeashing)

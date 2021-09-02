@@ -47,7 +47,7 @@ end
 
 local function CheckDist(inst)
 	if inst ~= nil and inst.WINDSTAFF_CASTER ~= nil and inst.WINDSTAFF_CASTER.components.health ~= nil and not inst.WINDSTAFF_CASTER.components.health:IsDead() then
-		local distance = inst ~= nil and inst.WINDSTAFF_CASTER ~= nil and inst:GetDistanceSqToInst(inst.WINDSTAFF_CASTER)
+		local distance = inst ~= nil and inst.WINDSTAFF_CASTER ~= nil and inst.WINDSTAFF_CASTER:IsValid() and inst:GetDistanceSqToInst(inst.WINDSTAFF_CASTER)
 		
 		if distance ~= nil and distance > 15 then
 			Reposition(inst)

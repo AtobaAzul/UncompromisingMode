@@ -94,6 +94,9 @@ local function fn_glassshards()
 	
     MakeInventoryPhysics(inst)
     RemovePhysicsColliders(inst)
+	
+	inst:AddTag("fx")
+	inst:AddTag("NOCLICK")
 
     inst.entity:SetPristine()
 
