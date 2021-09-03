@@ -41,7 +41,7 @@ local function Print()
 	print(_raided)
 end
 
-local function StartTimer()
+local function StartRatTimer()
 	--local _time = 20 + math.random(20)
 	local _time = 9600 + math.random(4800)
 	_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _time)
@@ -52,11 +52,11 @@ local function StartTimerShort()
 	local _time = 3840 + math.random(960)
 	_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _time)
 end
-
-function self:OnPostInit()										    --VVVV-- INPUT CONFIG BOOL HERE
-    _worldsettingstimer:AddTimer(RATRAID_TIMERNAME, _initialrattimer, true, CooldownRaid)
-	_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _initialrattimer)
-end
+--[[
+function self:OnPostInit()										--VVVV-- INPUT CONFIG BOOL HERE
+	if _worldsettingstimer ~= nil then									
+	end
+end]]
 
 local function ChangeRatTimer(data)
 
@@ -285,10 +285,16 @@ function self:OnLoad(data)
     end]]
 end
 
-self.inst:ListenForEvent("ratcooldown", StartTimer, TheWorld)
+local function OnPlayerJoined()
+	_worldsettingstimer:AddTimer(RATRAID_TIMERNAME, _initialrattimer, true, CooldownRaid)
+	_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _initialrattimer)
+end
+
+self.inst:ListenForEvent("ratcooldown", StartRatTimer, TheWorld)
 self.inst:ListenForEvent("ratcooldownshort", StartTimerShort, TheWorld)
 self.inst:ListenForEvent("activeraid", ActiveRaid, TheWorld)
 self.inst:ListenForEvent("ms_oncroprotted", ChangeRatTimer, TheWorld)
 self.inst:ListenForEvent("reducerattimer", ChangeRatTimer, TheWorld)
+self.inst:ListenForEvent("ms_playerjoined", OnPlayerJoined, TheWorld)
 
 end)

@@ -6,7 +6,7 @@ env.AddPrefabPostInit("forest", function(inst)
 end)
 
 env.AddPrefabPostInit("cave", function(inst)
-    inst:AddComponent("ratcheck")
+    --inst:AddComponent("ratcheck")
 end)
 --[[
 local PLANT_DEFS = require("prefabs/farm_plant_defs").PLANT_DEFS
