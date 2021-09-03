@@ -18,9 +18,10 @@ local _ratraid = nil
 local _cooldown = nil
 local _respawntime = nil
 local _time = nil
-local _raided = nil
+local _raided = true
 local _respawntimeremaining = nil
 local ratwarning = nil
+local _initialrattimer = 24000
 
 local _worldsettingstimer = TheWorld.components.worldsettingstimer
 local RATRAID_TIMERNAME = "rat_raid"
@@ -29,9 +30,10 @@ local RATRAID_TIMERNAME = "rat_raid"
 --[[ Private member functions ]]
 --------------------------------------------------------------------------
 
-local function CooldownRaid()
-	_respawntime = nil
-	_raided = false
+local function CooldownRaid(src, data)
+		_respawntime = nil
+		_raided = false
+		print("cooldown raid")
 end
 
 local function Print()
@@ -44,54 +46,47 @@ local function StartTimer()
 	local _time = 9600 + math.random(4800)
 	_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _time)
 end
+
 local function StartTimerShort()
 	--local _time = 20 + math.random(20)
-	local _time = 3,840 + math.random(960)
+	local _time = 3840 + math.random(960)
 	_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _time)
 end
 
-function self:OnSave()
-
-	if _respawntime ~= nil then
-        local _time = GetTime()
-        if _respawntime > _time then
-            _respawntimeremaining = _respawntime - _time
-        end
-    end
-	
-	local data =
-	{
-		raided = _raided,
-		respawntimeremaining = _respawntimeremaining,
-	}
-	
-	return data
-end
-
-function self:OnLoad(data)
-    if data.raided ~= nil then
-		_raided = data.raided
-	end
-		
-    if data.respawntimeremaining ~= nil then
-        _respawntime = data.respawntimeremaining + GetTime()
-		_cooldown = TheWorld:DoTaskInTime(_respawntime, CooldownRaid)
-		print(_respawntime)
-		TheWorld:DoTaskInTime(0, Print)
-    end
+function self:OnPostInit()										    --VVVV-- INPUT CONFIG BOOL HERE
+    _worldsettingstimer:AddTimer(RATRAID_TIMERNAME, _initialrattimer, true, CooldownRaid)
+	_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _initialrattimer)
 end
 
 local function ChangeRatTimer(data)
 
 	local value = data ~= nil and data.value ~= nil and data.value or 240
 
+	
+	if _worldsettingstimer:GetTimeLeft(RATRAID_TIMERNAME) ~= nil then
+		local currenttime = _worldsettingstimer:GetTimeLeft(RATRAID_TIMERNAME)
+		local timeleft = (currenttime - value)
+		
+		print(currenttime)
+		print(timeleft)
+		
+		if timeleft <= 0 then
+			_worldsettingstimer:SetTimeLeft(RATRAID_TIMERNAME, 1)
+		else
+			_worldsettingstimer:SetTimeLeft(RATRAID_TIMERNAME, timeleft)
+		end
+	end
+		
+			
+
+--[[
     if _respawntime ~= nil and value ~= nil then
         _respawntime = _respawntime - value
 		_cooldown = TheWorld:DoTaskInTime(_respawntime, CooldownRaid)
 		print(value)
 		print(_respawntime)
 		TheWorld:DoTaskInTime(0, Print)
-    end
+    end]]
 end
 
 local function MakeRatBurrow(inst)
@@ -223,29 +218,77 @@ local function ActiveRaid(src, data)
 		print("Doer is valid!")
 		
 		local x, y, z = data.doer.Transform:GetWorldPosition()
-		local playerage = data.doer.components.age ~= nil and data.doer.components.age:GetAgeInDays()
 		local ents = TheSim:FindEntities(x, y, z, 20, nil, nil, {"_inventoryitem"})
-		if playerage >= 50 and math.random() > 0.05 and IsEligible(data.doer) and
+		if IsEligible(data.doer) and
 			not TheWorld:HasTag("cave") and
 			not (_raided ~= nil and _raided) and
 			not data.container.components.container:IsEmpty() and
 			#ents >= 20 then
-			print(playerage.." day's have passed! Go!")
+			print("GOGO NINJA RATORIO")
 			
 			_raided = true
 			
 			data.container:DoTaskInTime(3, StartRaid, data.doer)
 		else
-			print("But only "..playerage.." day's have passed, needs to be 50+!")
-			print("...or, there aren't enough inventory items around.")
+			local currenttime = _worldsettingstimer:GetTimeLeft(RATRAID_TIMERNAME)
+			print(currenttime)
+			
+			if #ents <= 20 then
+				print("CAN'T SPAWN RATS! There aren't enough items around!")
+			end
+			
+			if data.container.components.container:IsEmpty() then
+				print("CAN'T SPAWN RATS! This container is empty!")
+			end
+			
+			if not IsEligible(data.doer) then
+				print("CAN'T SPAWN RATS! Player is in a 'safe' zone!")
+			end
+			
+			if (_raided ~= nil and _raided) then
+				print("CAN'T SPAWN RATS! They are on break!")
+			end
+			
 			return
 		end
     end
+end
+
+function self:OnSave()
+
+	--[[if _respawntime ~= nil then
+        local _time = GetTime()
+        if _respawntime > _time then
+            _respawntimeremaining = _respawntime - _time
+        end
+    end]]
+	
+	local data =
+	{
+		raided = _raided,
+		--respawntimeremaining = _respawntimeremaining,
+	}
+	
+	return data
+end
+
+function self:OnLoad(data)
+    if data.raided ~= nil then
+		_raided = data.raided
+	end
+		
+    --[[if data.respawntimeremaining ~= nil then
+        _respawntime = data.respawntimeremaining + GetTime()
+		_cooldown = TheWorld:DoTaskInTime(_respawntime, CooldownRaid)
+		print(_respawntime)
+		TheWorld:DoTaskInTime(0, Print)
+    end]]
 end
 
 self.inst:ListenForEvent("ratcooldown", StartTimer, TheWorld)
 self.inst:ListenForEvent("ratcooldownshort", StartTimerShort, TheWorld)
 self.inst:ListenForEvent("activeraid", ActiveRaid, TheWorld)
 self.inst:ListenForEvent("ms_oncroprotted", ChangeRatTimer, TheWorld)
+self.inst:ListenForEvent("reducerattimer", ChangeRatTimer, TheWorld)
 
 end)

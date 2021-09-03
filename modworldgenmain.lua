@@ -459,16 +459,16 @@ AddLevel(GLOBAL.LEVELTYPE.SURVIVAL, {
 
 local pawnrooms =
 {
-"RuinedCity",
-"Vacant",
-"Barracks",
-"LabyrinthEntrance",
+	"RuinedCity",
+	"Vacant",
+	"Barracks",
+	"LabyrinthEntrance",
 }
 
 local damagedpawnrooms =
 {
-"Labyrinth",
-"AtriumMazeEntrance",
+	"Labyrinth",
+	"AtriumMazeEntrance",
 }
 
 for i, room in ipairs(pawnrooms) do
