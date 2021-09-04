@@ -338,6 +338,7 @@ local function fn()
     --inst.components.periodicspawner:SetDensityInRange(20, 2)
     inst.components.periodicspawner:SetMinimumSpacing(10)
     inst.components.periodicspawner:Start()
+	inst.components.periodicspawner.spawnoffscreen = true
 	
 	inst:ListenForEvent("onattackother", OnAttackOther)
 	inst:ListenForEvent("attacked", OnAttacked)
@@ -573,6 +574,7 @@ local function junkfn()
     --inst.components.periodicspawner:SetDensityInRange(20, 2)
     inst.components.periodicspawner:SetMinimumSpacing(10)
     inst.components.periodicspawner:Start()
+	inst.components.periodicspawner.spawnoffscreen = true
 	
 	inst:ListenForEvent("onattackother", OnAttackOther)
 	inst:ListenForEvent("attacked", OnJunkAttacked)
@@ -745,6 +747,7 @@ local function packfn()
     --inst.components.periodicspawner:SetDensityInRange(20, 2)
     inst.components.periodicspawner:SetMinimumSpacing(10)
     inst.components.periodicspawner:Start()
+	inst.components.periodicspawner.spawnoffscreen = true
 	
 	inst:ListenForEvent("onattackother", OnAttackOther)
 	inst:ListenForEvent("attacked", OnAttacked)
@@ -1107,6 +1110,7 @@ local function fn_herd()
 	inst.components.periodicspawner:SetPrefab("uncompromising_rat")
 	inst.components.periodicspawner:SetOnSpawnFn(OnSpawned)
 	inst.components.periodicspawner:SetDensityInRange(30, 8)
+	inst.components.periodicspawner.spawnoffscreen = true
 	
 	inst:AddComponent("combat")
 	
@@ -1170,6 +1174,7 @@ local function fn_burrow()
 	inst.components.periodicspawner:SetOnSpawnFn(OnSpawned)
 	inst.components.periodicspawner:SetDensityInRange(30, 8)
 	inst.components.periodicspawner:Start()
+	inst.components.periodicspawner.spawnoffscreen = true
 	
 	inst:AddComponent("combat")
 	inst:AddComponent("inventory")
@@ -1440,6 +1445,7 @@ local function scoutratfn()
     --inst.components.periodicspawner:SetDensityInRange(20, 2)
     inst.components.periodicspawner:SetMinimumSpacing(10)
     inst.components.periodicspawner:Start()
+	inst.components.periodicspawner.spawnoffscreen = true
 	
 	inst:ListenForEvent("onattackother", OnAttackOther)
 	inst:ListenForEvent("attacked", OnAttacked)
