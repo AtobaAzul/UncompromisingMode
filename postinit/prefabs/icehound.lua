@@ -1,12 +1,21 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
+local function RemoveFreezeProtection(inst)
+	inst:RemoveTag("um_freezeprotection")
+end
+
 local function OnHitOtherFreeze(inst, data)
     local other = data.target
     if other ~= nil then
         if not (other.components.health ~= nil and other.components.health:IsDead()) then
-            if other.components.freezable ~= nil and other:HasTag("player") and not other.components.freezable:IsFrozen() and not other.sg:HasStateTag("frozen") then
+            if not other:HasTag("um_freezeprotection") and other.components.freezable ~= nil and other:HasTag("player") and not other.components.freezable:IsFrozen() and not other.sg:HasStateTag("frozen") then
                 other.components.freezable:AddColdness(2)
+				
+				if other.components.freezable:IsFrozen() then
+					other:AddTag("um_freezeprotection")
+					other:DoTaskInTime(3, RemoveFreezeProtection)
+				end
             end
             if other.components.temperature ~= nil then
                 local mintemp = math.max(other.components.temperature.mintemp, 0)
