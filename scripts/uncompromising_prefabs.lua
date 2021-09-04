@@ -261,4 +261,6 @@ return {
 	"ratacombs_cleanair",
 	"ratacombs_totem",
 	"ratgashole",
+	
+	--"moon_deerclops",
 }

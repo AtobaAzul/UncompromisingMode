@@ -349,8 +349,6 @@ AddTaskSetPreInitAny(function(tasksetdata)
 	table.insert(tasksetdata.tasks,"Ratty_Entrance")
 	table.insert(tasksetdata.tasks,"Ratty_Link")
 	table.insert(tasksetdata.tasks,"Ratty_Maze")
-	table.insert(tasksetdata.tasks,"Ratty_Shallow_1")
-	table.insert(tasksetdata.tasks,"Ratty_Shallow_2")
 	table.insert(tasksetdata.tasks,"Ratty_Maze")
 	table.insert(tasksetdata.tasks,"Ratty_Maze2")
 	table.insert(tasksetdata.tasks,"Ratty_Maze3")
@@ -379,13 +377,13 @@ Layouts["RatLockBlocker1"] =
 							ground_types = {GLOBAL.GROUND.ROCKY},
 							defs =
 								{
-								 	rocks = { "ratacombslock_rock"},
+								 	rocks = { "ratacombslock_rock_spawner"},
 								},
 							count =
 								{
-									rocks = 100,
+									rocks = 1,
 								},
-							scale = 3.0,
+							scale = 0.1,
 }
 
 
