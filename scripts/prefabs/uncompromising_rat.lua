@@ -778,17 +778,30 @@ local function onworked(inst, worker, workleft)
 	inst.AnimState:PlayAnimation("dig")
 	inst.AnimState:PushAnimation("idle")
 	for rats,_ in pairs(inst.components.herd.members) do
-	inst.components.combat:ShareTarget(worker, 30, function(dude)
-		return dude:HasTag("raidrat")
-			and not dude.components.health:IsDead()
-			and not dude:HasTag("packrat")
-	end, 10)
+		inst.components.combat:ShareTarget(worker, 30, function(dude)
+			return dude:HasTag("raidrat")
+				and not dude.components.health:IsDead()
+				and not dude:HasTag("packrat")
+		end, 10)
 	end
 end
 
 local function OnSpawned(inst, newent)
 	if inst.components.herd ~= nil then
 		inst.components.herd:AddMember(newent)
+	end
+	
+	if TheWorld.state.cycles > 50 then
+		local x, y, z = inst.Transform:GetWorldPosition()
+		
+		local ents = #TheSim:FindEntities(x, y, z, 40, {"player"})
+		
+		if ents ~= nil and ents == 0 then
+			if inst.ratguard then
+				inst.ratguard = false
+				inst.components.periodicspawner:TrySpawn("uncompromising_buffrat")
+			end
+		end
 	end
 end
 
@@ -946,17 +959,29 @@ local function onsave_burrow(inst, data)
 	if inst.raiding ~= nil then
 		data.raiding = inst.raiding
 	end
+	
+	if inst.ratguard ~= nil then
+		data.ratguard = inst.ratguard
+	end
 end
 
 local function onpreload_burrow(inst, data)
-	if data ~= nil and data.raiding ~= nil then
-		inst.raiding = data.raiding
+	if data ~= nil then
+		if data.raiding ~= nil then
+			inst.raiding = data.raiding
+		end
 	end
 end
 
 local function onload_burrow(inst, data)
-	if data ~= nil and data.raiding ~= nil then
-		inst.raiding = data.raiding
+	if data ~= nil then
+		if data.raiding ~= nil then
+			inst.raiding = data.raiding
+		end
+		
+		if data.ratguard ~= nil then
+			inst.ratguard = data.ratguard
+		end
 	end	
 	
 	if not inst.raiding then
@@ -1064,6 +1089,8 @@ local function fn_herd()
 	
     inst:AddComponent("thief")
 	
+	inst.ratguard = true
+	
 	inst:AddComponent("herd")
 	inst.components.herd:SetGatherRange(40)
 	inst.components.herd:SetUpdateRange(nil)
@@ -1136,7 +1163,6 @@ local function fn_burrow()
 	inst:AddComponent("timer")
     inst.components.timer:StartTimer("scoutingparty", 1920 + math.random(480))
 	inst:ListenForEvent("timerdone", OnTimerDone)
-	
 	
 	inst:AddComponent("periodicspawner")
 	inst.components.periodicspawner:SetRandomTimes(10, 13)
