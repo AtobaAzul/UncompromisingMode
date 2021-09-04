@@ -14,8 +14,8 @@ AddTask("Ratty_Entrance", {
 })
 
 AddTask("Ratty_Link", {
-		locks={LOCKS.TIER4},
-		keys_given={KEYS.TIER5},
+		locks={LOCKS.TIER2},
+		keys_given={KEYS.TIER3},
 		region_id = "ratacombs",
 		level_set_piece_blocker = true,
 		room_tags = {"RoadPoison", "nohunt", "nohasslers","not_mainland"},
@@ -42,7 +42,7 @@ AddTask("Ratty_Maze", {
 		background_room="BGRattyCaveRoom",
 		colour={r=.1,g=.1,b=.1,a=1},
 })
-AddTask("Ratty_Shallow_1", {
+--[[AddTask("Ratty_Shallow_1", {
 		locks={LOCKS.TIER2},
 		keys_given={KEYS.TIER3},
 		region_id = "ratacombs",
@@ -80,9 +80,9 @@ AddTask("Ratty_Shallow_3", {
 		room_bg=GROUND.FOREST,
 		background_room="BGRattyCaveRoom",
 		colour={r=.1,g=.1,b=.1,a=1},
-})
+})]]
 AddTask("Ratty_Maze2", {
-		locks={LOCKS.TIER5},
+		locks={LOCKS.TIER3},
 		keys_given={},
 		region_id = "ratacombs",
 		level_set_piece_blocker = true,
@@ -95,7 +95,7 @@ AddTask("Ratty_Maze2", {
 		colour={r=.1,g=.1,b=.1,a=1},
 })
 AddTask("Ratty_Maze3", {
-		locks={LOCKS.TIER5},
+		locks={LOCKS.TIER3},
 		keys_given={},
 		region_id = "ratacombs",
 		level_set_piece_blocker = true,

@@ -181,5 +181,74 @@ local function insanityrock()
     local inst = commonfn({"insanityrock"})
     return inst
 end
+---------------------------------------------
+local function IsAvoveGround(x,y,z)
+return TheWorld.Map:IsVisualGroundAtPoint(x,y,z)
+end
 
-return Prefab("ratacombslock_rock", insanityrock)
+
+local function SpawnBarriersFromCoordsZ(inst,x,y,z)
+	local voidfound = false
+	local i = 1
+	while voidfound == false do
+		if not IsAvoveGround(x,y,z-i) then
+			voidfound = true
+			inst:Remove()
+		else
+			SpawnPrefab("ratacombslock_rock").Transform:SetPosition(x,y,z-i)
+			i = i + 1
+		end
+	end
+end
+
+local function SpawnBarriersFromCoordsX(inst,x,y,z)
+	SpawnPrefab("ratacombslock_rock").Transform:SetPosition(x,y,z)
+	local voidfound = false
+	local i = 1
+	while voidfound == false do
+		if not IsAvoveGround(x-i,y,z) then
+			voidfound = true
+		else
+			SpawnPrefab("ratacombslock_rock").Transform:SetPosition(x-i,y,z)
+			i = i + 1
+		end
+	end
+end
+
+local function Init(inst)
+	local voidfound = false
+	local i = 1
+	while voidfound == false do
+		local x,y,z = inst.Transform:GetWorldPosition()
+		if not IsAvoveGround(x+i,y,z) then
+			voidfound = true
+			SpawnBarriersFromCoordsX(inst,x+i,y,z)
+		else
+			if not IsAvoveGround(x,y,z+i) then
+				voidfound = true
+				SpawnBarriersFromCoordsZ(inst,x,y,z+i)
+			else
+				i = i + 1
+			end
+		end
+	end
+end
+
+local function spawnerfn() -- The blocker code from adv mode is unreliable, let's just spawn it ourselves.
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddMiniMapEntity()
+    inst.entity:AddNetwork()
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	inst:DoTaskInTime(0,Init)
+	return inst
+end
+return Prefab("ratacombslock_rock", insanityrock),
+	Prefab("ratacombslock_rock_spawner",spawnerfn)
