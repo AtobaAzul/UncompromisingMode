@@ -9,7 +9,7 @@ local function OnPlayerNear(inst)
 			
 				for i, v in ipairs(FindPlayersInRangeSq(x, y, z, 150, true)) do
 					if v.components.sanity ~= nil and v.components.sanity:IsSane() then
-						v.components.sanity:DoDelta(-1)
+						v.components.sanity:DoDelta(-2)
 					
 						local proj = SpawnPrefab("nightlightfuel")
 						local x1, y1, z1 = v.Transform:GetWorldPosition()

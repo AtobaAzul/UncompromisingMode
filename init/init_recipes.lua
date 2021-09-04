@@ -138,7 +138,7 @@ AddRecipe("turf_ancienthoodedturf", {Ingredient("turf_hoodedmoss", 1,"images/inv
 AddRecipe("um_bear_trap_equippable_tooth", {Ingredient("cutstone", 2), Ingredient("houndstooth", 3), Ingredient("rope", 1)}, RECIPETABS.WAR, TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/um_bear_trap_equippable_tooth.xml", "um_bear_trap_equippable_tooth.tex")
 AddRecipe("um_bear_trap_equippable_gold", {Ingredient("goldnugget", 4), Ingredient("houndstooth", 3), Ingredient("rope", 1)}, RECIPETABS.WAR, TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/um_bear_trap_equippable_gold.xml", "um_bear_trap_equippable_gold.tex")
 
-AddRecipe("armor_glassmail", {Ingredient("glass_scales", 1,"images/inventoryimages/glass_scales.xml"), Ingredient("moonglass_charged", 10)}, RECIPETABS.CELESTIAL, TECH.CELESTIAL_THREE, nil, nil, nil, nil, nil, "images/inventoryimages/armor_glassmail.xml", "armor_glassmail.tex")
+AddRecipe("armor_glassmail", {Ingredient("glass_scales", 1,"images/inventoryimages/glass_scales.xml"), Ingredient("moonglass_charged", 10)}, RECIPETABS.CELESTIAL, TECH.CELESTIAL_THREE, nil, nil, true, nil, nil, "images/inventoryimages/armor_glassmail.xml", "armor_glassmail.tex")
 --Seedpackitchange
 AllRecipes["seedpouch"].ingredients = {Ingredient("slurtle_shellpieces", 2), Ingredient("waxpaper",1), Ingredient("seeds", 2)}
 

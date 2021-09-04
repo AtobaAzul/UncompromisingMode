@@ -55,7 +55,7 @@ local function fn()
 	
     inst:AddComponent("fuel")
     inst.components.fuel.fueltype = FUELTYPE.NIGHTMARE
-    inst.components.fuel.fuelvalue = TUNING.MED_LARGE_FUEL
+    inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
 
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(0)

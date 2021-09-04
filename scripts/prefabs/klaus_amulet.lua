@@ -10,11 +10,9 @@ end
 
 local function fuelme(inst)
 	if inst.components.fueled:GetPercent() < 1 then
-		
 		if inst.pausedfuel then
 			inst.components.fueled:DoDelta(1)
 		end
-			
 		if inst.components.fueled:GetPercent() >= 1 then
 			if inst.fueltask ~= nil then
 				inst.fueltask:Cancel()
@@ -117,6 +115,10 @@ local function onfuelchange(newsection, oldsection, inst)
     if newsection <= 0 then
 		inst.SoundEmitter:PlaySound("dontstarve/creatures/together/klaus/breath_out")
     end
+	
+	if inst.fueltask == nil then
+		inst.fueltask = inst:DoPeriodicTask(1, fuelme)
+	end
 end
 
 local function unpausefueled(inst)

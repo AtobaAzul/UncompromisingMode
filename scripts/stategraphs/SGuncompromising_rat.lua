@@ -41,7 +41,9 @@ local states =
 		end,
 
 		ontimeout= function(inst)
-			if (inst.components.inventory:NumItems() ~= 0 or inst.prefab == "uncompromising_packrat" or inst.components.health:GetPercent() < 1) and inst.components.herdmember and inst.components.herdmember:GetHerd() and ((inst.sg.mem.emerge_time or 0) + TUNING.CARRAT.EMERGED_TIME_LIMIT / 2.5) < GetTime() then
+			local scoutratvalue = inst.prefab == "uncompromising_scoutrat" and 120 or 0
+		
+			if (inst.components.inventory:NumItems() ~= 0 or inst.prefab == "uncompromising_packrat" or inst.components.health:GetPercent() < 1) and inst.components.herdmember and inst.components.herdmember:GetHerd() and ((inst.sg.mem.emerge_time or 0) + (TUNING.CARRAT.EMERGED_TIME_LIMIT + scoutratvalue) / 2.5) < GetTime() then
 				inst.sg:GoToState("submerge")
 			elseif math.random() > 0.55 then
 				inst.sg:GoToState("idle2")

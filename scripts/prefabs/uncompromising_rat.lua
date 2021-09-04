@@ -53,9 +53,9 @@ local function OnAttackOther(inst, data)
 		data.target.components.health:DeltaPenalty(0.01)
 	end
 	
-	if data.target ~= nil and data.target:HasTag("player") and inst.components.thief ~= nil then
+	--[[if data.target ~= nil and data.target:HasTag("player") and inst.components.thief ~= nil then
 		inst.components.thief:StealItem(data.target)
-	end
+	end]]
 end
 
 local function OnAttacked(inst, data)
@@ -332,6 +332,13 @@ local function fn()
 	
 	inst:AddComponent("inspectable")
 	
+    inst:AddComponent("periodicspawner")
+    inst.components.periodicspawner:SetPrefab("ratdroppings")
+    inst.components.periodicspawner:SetRandomTimes(5, 15)
+    --inst.components.periodicspawner:SetDensityInRange(20, 2)
+    inst.components.periodicspawner:SetMinimumSpacing(10)
+    inst.components.periodicspawner:Start()
+	
 	inst:ListenForEvent("onattackother", OnAttackOther)
 	inst:ListenForEvent("attacked", OnAttacked)
 	inst:ListenForEvent("death", OnDeath)
@@ -562,9 +569,9 @@ local function junkfn()
 	
     inst:AddComponent("periodicspawner")
     inst.components.periodicspawner:SetPrefab("ratdroppings")
-    inst.components.periodicspawner:SetRandomTimes(5,10)
-    inst.components.periodicspawner:SetDensityInRange(30, 2)
-    inst.components.periodicspawner:SetMinimumSpacing(8)
+    inst.components.periodicspawner:SetRandomTimes(5, 15)
+    --inst.components.periodicspawner:SetDensityInRange(20, 2)
+    inst.components.periodicspawner:SetMinimumSpacing(10)
     inst.components.periodicspawner:Start()
 	
 	inst:ListenForEvent("onattackother", OnAttackOther)
@@ -735,8 +742,8 @@ local function packfn()
     inst:AddComponent("periodicspawner")
     inst.components.periodicspawner:SetPrefab("ratdroppings")
     inst.components.periodicspawner:SetRandomTimes(5, 15)
-    inst.components.periodicspawner:SetDensityInRange(20, 2)
-    inst.components.periodicspawner:SetMinimumSpacing(12)
+    --inst.components.periodicspawner:SetDensityInRange(20, 2)
+    inst.components.periodicspawner:SetMinimumSpacing(10)
     inst.components.periodicspawner:Start()
 	
 	inst:ListenForEvent("onattackother", OnAttackOther)
@@ -802,6 +809,14 @@ local function BurrowAnim(inst)
 				inst.AnimState:PlayAnimation("idle_eyes_pst")
 				inst.AnimState:PushAnimation("idle", true)
 			end
+			
+			local scouttimer = inst.components.timer:GetTimeLeft("scoutingparty")
+			
+			if scouttimer ~= nil and scouttimer < 960 then
+				inst.AnimState:PlayAnimation("dig")
+                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/mole/move", "shuffle")
+				inst:DoTaskInTime(1, function(inst) inst.SoundEmitter:KillSound("shuffle") end)
+			end
 		end
 	end
 	inst:DoTaskInTime(3 + math.random(), BurrowAnim)
@@ -814,7 +829,12 @@ local function MakeRatBurrow(inst)
         if #TheSim:FindEntities(x, 0, z, TUNING.ANTLION_SINKHOLE.RADIUS, { "antlion_sinkhole_blocker" }) > 0 then
             return false
         end
-        if #TheSim:FindEntities(x, 0, z, 50, { "player", "playerghost" }) > 0 then
+		
+        if #TheSim:FindEntities(x, 0, z, 80, { "player", "playerghost" }) > 0 then
+            return false
+        end
+		
+        if #TheSim:FindEntities(x, 0, z, 80, { "ratburrow"} ) > 0 then
             return false
         end
 		
@@ -828,7 +848,7 @@ local function MakeRatBurrow(inst)
         return true
     end
 	
-	for i = 1, 4 do
+	for i = 1, 8 do
 		inst.x1, inst.z1 = x + math.random(-200, 200), z + math.random(-200, 200)
 		
 		if IsValidRatBurrowPosition(inst.x1, inst.z1) then
@@ -869,6 +889,10 @@ local function EndRaid(inst)
 		
 	if inst.components.inspectable == nil then
 		inst:AddComponent("inspectable")
+	end
+	
+	if not inst.components.timer:TimerExists("scoutingparty") then
+		inst.components.timer:StartTimer("scoutingparty", 1920 + math.random(480))
 	end
 	
 	if inst.components.workable ~= nil then
@@ -946,6 +970,77 @@ local function onload_burrow(inst, data)
 	end
 end
 
+local function MakeScoutBurrow(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+
+    local function IsValidRatBurrowPosition(x, z)
+        if #TheSim:FindEntities(x, 0, z, TUNING.ANTLION_SINKHOLE.RADIUS, { "antlion_sinkhole_blocker" }) > 0 then
+            return false
+        end
+		
+        if #TheSim:FindEntities(x, 0, z, 80, { "player", "playerghost" }) > 0 then
+            return false
+        end
+		
+        if #TheSim:FindEntities(x, 0, z, 80, { "ratburrow" }) > 0 then
+            return false
+        end
+		
+        for dx = -1, 1 do
+            for dz = -1, 1 do
+                if not TheWorld.Map:IsPassableAtPoint(x + dx * TUNING.ANTLION_SINKHOLE.RADIUS, 0, z + dz * TUNING.ANTLION_SINKHOLE.RADIUS, false, true) then
+                    return false
+                end
+            end
+        end
+        return true
+    end
+	
+	for i = 1, 8 do
+		inst.x1, inst.z1 = x + math.random(-200, 200), z + math.random(-200, 200)
+		
+		if IsValidRatBurrowPosition(inst.x1, inst.z1) then
+			local ratcrew = SpawnPrefab("uncompromising_scoutrat")
+			ratcrew.Transform:SetPosition(x, 0, z)
+			local ratcrew2 = SpawnPrefab("uncompromising_scoutrat")
+			ratcrew2.Transform:SetPosition(x, 0, z)
+			local ratcrew3 = SpawnPrefab("uncompromising_scoutrat")
+			ratcrew3.Transform:SetPosition(x, 0, z)
+			
+			local burrow = SpawnPrefab("uncompromising_scoutburrow")
+			burrow.Transform:SetPosition(inst.x1, 0, inst.z1)
+			burrow.components.herd:AddMember(ratcrew)
+			burrow.components.herd:AddMember(ratcrew2)
+			burrow.components.herd:AddMember(ratcrew3)
+			print("make a den!")
+			break
+		end
+		
+		if i >= 8 then
+			print("NO FUCKING SPACE SHITBOI")
+			inst.components.timer:StartTimer("scoutingparty", 40)
+		end
+	end
+end
+
+local function OnTimerDone(inst, data)
+	print("timer")
+	if data.name == "scoutingparty" then
+	
+		local x, y, z = inst.Transform:GetWorldPosition()
+		
+        if #TheSim:FindEntities(x, 0, z, 1000, { "ratburrow" }) >= 10 then
+			print("Reduce Timer Too Many Burrows")
+            TheWorld:PushEvent("reducerattimer", {value = 480})
+			inst.components.timer:StartTimer("scoutingparty", 1920 + math.random(480))
+            return
+        end
+	
+		print("scouts go!")
+		MakeScoutBurrow(inst)
+	end
+end
+
 local function fn_herd()
 	local inst = CreateEntity()
 	
@@ -976,6 +1071,9 @@ local function fn_herd()
 	inst.components.herd.maxsize = 8
 	inst.components.herd.nomerging = true
     inst.components.herd.updateposincombat = true
+	
+	inst:AddComponent("timer")
+	inst:ListenForEvent("timerdone", OnTimerDone)
 	
 	inst:AddComponent("periodicspawner")
 	inst.components.periodicspawner:SetRandomTimes(10, 13)
@@ -1035,6 +1133,11 @@ local function fn_burrow()
 	inst.components.herd.updatepos = false
 	inst.components.herd.updateposincombat = false
 	
+	inst:AddComponent("timer")
+    inst.components.timer:StartTimer("scoutingparty", 1920 + math.random(480))
+	inst:ListenForEvent("timerdone", OnTimerDone)
+	
+	
 	inst:AddComponent("periodicspawner")
 	inst.components.periodicspawner:SetRandomTimes(10, 13)
 	inst.components.periodicspawner:SetPrefab("uncompromising_rat")
@@ -1054,6 +1157,62 @@ local function fn_burrow()
 	inst.components.workable:SetWorkLeft(math.random(2, 5))
 	
 	inst:DoTaskInTime(1, BurrowAnim)
+	
+	return inst
+end
+
+local function SlumberParty(inst)
+	if inst.components.herd.members ~= nil then
+		local x, y, z = inst.Transform:GetWorldPosition()
+		
+		local ents = #TheSim:FindEntities(x, y, z, 8, { "ratscout" })
+		if ents ~= nil and ents > 0 then
+			print("The girls are here, commencing pillowfort construction...")
+			local burrow = SpawnPrefab("uncompromising_ratburrow")
+			burrow.Transform:SetPosition(x, 0, z)
+			for i, b in ipairs(inst.components.herd.members) do
+				b:RemoveTag("ratscout")
+				burrow:AddMember(b)
+			end
+			
+            TheWorld:PushEvent("reducerattimer", {value = 480})
+			
+			inst:Remove()
+		end
+	else
+		inst:Remove()
+	end
+end
+
+local function fn_scoutburrow()
+	local inst = CreateEntity()
+	
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddNetwork()
+	
+	inst:AddTag("ratburrow")
+	inst:AddTag("herd")
+	
+	inst.entity:SetPristine()
+	
+	if not TheWorld.ismastersim then
+		return inst
+	end
+	
+	inst:AddComponent("herd")
+	inst.components.herd:SetGatherRange(40)
+	inst.components.herd:SetUpdateRange(nil)
+	inst.components.herd:SetOnEmptyFn(inst.Remove)
+	inst.components.herd.maxsize = 8
+	inst.components.herd.nomerging = true
+    inst.components.herd.updateposincombat = true
+	inst.components.herd:SetOnEmptyFn(BurrowKilled)
+	inst.components.herd.updatepos = false
+	inst.components.herd.updateposincombat = false
+	
+	inst:DoPeriodicTask(5, SlumberParty) -- !!!
 	
 	return inst
 end
@@ -1087,7 +1246,11 @@ local function fn_droppings()
 	
 	inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.nobounce = true
-	inst.components.inventoryitem:SetOnPutInInventoryFn(inst.Remove)
+	inst.components.inventoryitem:SetOnPutInInventoryFn(
+		function(inst)
+			inst:DoTaskInTime(.5, inst.Remove) 
+		end
+	)
 
 	inst:AddComponent("perishable")
 	inst.components.perishable:SetPerishTime(TUNING.PERISH_MED)
@@ -1096,9 +1259,186 @@ local function fn_droppings()
     return inst
 end
 
+local function scoutratfn()
+	local inst = CreateEntity()
+	
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddDynamicShadow()
+	inst.entity:AddNetwork()
+	
+	MakeCharacterPhysics(inst, 1, 0.5)
+	
+	inst.DynamicShadow:SetSize(1, .75)
+	inst.DynamicShadow:Enable(false)
+	inst.Transform:SetSixFaced()
+	
+	inst.AnimState:SetBank("carrat")
+	inst.AnimState:SetBuild("uncompromising_rat")
+	inst.AnimState:PlayAnimation("planted")
+	
+	inst.AnimState:SetMultColour(0.2, 0.2, 1, 1)
+	
+	inst:AddTag("raidrat")
+	inst:AddTag("ratscout")
+	inst:AddTag("animal")
+	inst:AddTag("hostile")
+	inst:AddTag("herdmember")
+	inst:AddTag("smallcreature")
+	--inst:AddTag("canbetrapped")
+	inst:AddTag("cattoy")
+	inst:AddTag("catfood")
+	inst:AddTag("cookable")
+	
+	inst.entity:SetPristine()
+	
+	if not TheWorld.ismastersim then
+		return inst
+	end
+	
+	inst:AddComponent("drownable")
+	inst.components.drownable.enabled = false
+	
+	if inst.gooserippletask == nil then
+            inst.gooserippletask = inst:DoPeriodicTask(.25, DoRipple, FRAMES)
+        end
+	
+	--[[inst.Physics:ClearCollisionMask()
+    inst.Physics:CollidesWith(COLLISION.GROUND)
+    --inst.Physics:CollidesWith(COLLISION.OBSTACLES)
+    --inst.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
+    inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+    inst.Physics:CollidesWith(COLLISION.GIANTS)
+    inst.Physics:Teleport(inst.Transform:GetWorldPosition())]]
+	
+	inst.sounds = carratsounds
+	
+	inst:AddComponent("locomotor")
+	inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_WALKSPEED
+	inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_RUNSPEED
+	inst.components.locomotor:EnableGroundSpeedMultiplier(false)
+	inst.components.locomotor:SetTriggersCreep(false)
+	inst:SetStateGraph("SGuncompromising_rat")
+	
+	inst:SetBrain(brain)
+	
+	----------------------------
+	if TheWorld ~= nil and TheWorld.ismastershard then
+		inst:AddComponent("embarker")
+		inst.components.embarker.embark_speed = inst.components.locomotor.walkspeed
+        inst.components.embarker.antic = true
+
+	    inst.components.locomotor:SetAllowPlatformHopping(true)
+		inst:AddComponent("amphibiouscreature")
+		inst.components.amphibiouscreature:SetBanks("carrat", "uncompromising_rat_water")
+        inst.components.amphibiouscreature:SetEnterWaterFn(
+            function(inst)
+				inst.AnimState:SetBuild("uncompromising_rat_water")
+                inst.landspeed = inst.components.locomotor.runspeed
+                inst.components.locomotor.runspeed = TUNING.HOUND_SWIM_SPEED
+                inst.hop_distance = inst.components.locomotor.hop_distance
+                inst.components.locomotor.hop_distance = 4
+            end)            
+        inst.components.amphibiouscreature:SetExitWaterFn(
+            function(inst)
+				inst.AnimState:SetBuild("uncompromising_rat")
+                if inst.landspeed then
+                    inst.components.locomotor.runspeed = inst.landspeed 
+                end
+                if inst.hop_distance then
+                    inst.components.locomotor.hop_distance = inst.hop_distance
+                end
+            end)
+	-------------------------
+	
+		inst.components.locomotor.pathcaps = { allowocean = true }
+	end
+		
+	inst:AddComponent("eater")
+	inst.components.eater:SetDiet({ FOODTYPE.HORRIBLE }, { FOODTYPE.HORRIBLE })
+	inst.components.eater.strongstomach = true
+	inst.components.eater:SetCanEatRaw()
+	
+	inst:AddComponent("workmultiplier")
+	inst.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, -0.8, inst)
+	
+	inst:AddComponent("combat")
+	inst.components.combat:SetDefaultDamage(TUNING.DSTU.RAIDRAT_DAMAGE)
+	inst.components.combat:SetAttackPeriod(TUNING.DSTU.RAIDRAT_ATTACK_PERIOD)
+	inst.components.combat:SetRange(TUNING.DSTU.RAIDRAT_ATTACK_RANGE)
+	inst.components.combat.hiteffectsymbol = "carrat_body"
+    inst.components.combat.onhitotherfn = OnHitOther
+	inst.components.combat:SetRetargetFunction(3, rattargetfn)
+    --inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
+
+    inst:AddComponent("thief")
+	--inst.components.thief:SetOnStolenFn(StealItem)
+	
+	inst:AddComponent("health")
+	inst.components.health:SetMaxHealth(TUNING.DSTU.RAIDRAT_HEALTH)
+	
+	inst:AddComponent("lootdropper")
+	inst.components.lootdropper:AddRandomLoot("monstersmallmeat", 0.34)
+	inst.components.lootdropper:AddRandomLoot("disease_puff", 0.34)
+	inst.components.lootdropper:AddRandomLoot("rat_tail", 0.34)
+	inst.components.lootdropper.numrandomloot = 1
+	
+	inst:AddComponent("sleeper")
+    inst.components.sleeper:SetSleepTest(ShouldSleep)
+    inst.components.sleeper:SetWakeTest(ShouldWake)
+	inst.components.sleeper:SetResistance(1)
+	
+	inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.nobounce = true
+	inst.components.inventoryitem.canbepickedup = false
+	inst.components.inventoryitem.cangoincontainer = false
+	inst.components.inventoryitem:SetSinks(true)
+	
+	inst:AddComponent("herdmember")
+	
+	inst:AddComponent("knownlocations")
+	
+	inst:AddComponent("cookable")
+	inst.components.cookable.product = "cookedmonstersmallmeat"
+	inst.components.cookable:SetOnCookedFn(on_cooked_fn)
+	
+	inst:AddComponent("inventory")
+	inst.components.inventory.maxslots = 1
+	
+	inst:AddComponent("inspectable")
+	
+    inst:AddComponent("periodicspawner")
+    inst.components.periodicspawner:SetPrefab("ratdroppings")
+    inst.components.periodicspawner:SetRandomTimes(5, 10) --they cant stop shitting!!!!!!!
+    --inst.components.periodicspawner:SetDensityInRange(20, 2)
+    inst.components.periodicspawner:SetMinimumSpacing(10)
+    inst.components.periodicspawner:Start()
+	
+	inst:ListenForEvent("onattackother", OnAttackOther)
+	inst:ListenForEvent("attacked", OnAttacked)
+	inst:ListenForEvent("death", OnDeath)
+	inst:ListenForEvent("onpickupitem", OnPickup)
+	inst:ListenForEvent("trapped", Trapped)
+	
+	MakeHauntablePanic(inst)
+	
+	--MakeFeedableSmallLivestock(inst, TUNING.CARRAT.PERISH_TIME, nil, on_dropped)
+	
+	MakeSmallBurnableCharacter(inst, "carrat_body")
+	MakeSmallFreezableCharacter(inst, "carrat_body")
+	
+	inst.OnSave = onsave_rat
+	inst.OnLoad = onload_rat
+	
+	return inst
+end
+
 return Prefab("uncompromising_rat", fn, assets, prefabs),
+	Prefab("uncompromising_scoutrat", scoutratfn, assets, prefabs),
 	Prefab("uncompromising_junkrat", junkfn),
 	Prefab("uncompromising_packrat", packfn, assets, prefabs),
 	Prefab("uncompromising_ratherd", fn_herd, assets, prefabs),
 	Prefab("uncompromising_ratburrow", fn_burrow, assets, prefabs),
+	Prefab("uncompromising_scoutburrow", fn_scoutburrow, assets, prefabs),
 	Prefab("ratdroppings", fn_droppings, assets)
