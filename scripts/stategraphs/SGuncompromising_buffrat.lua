@@ -47,6 +47,22 @@ local events=
 local states=
 {
     
+
+    State{
+        name = "enter",
+        tags = {"busy", "jumping"},
+ 
+		
+		onenter = function(inst)
+            inst.components.locomotor:Stop()
+			inst.AnimState:PlayAnimation("bellyflop")
+        end,
+
+        events=
+        {
+            EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
+        },
+    },	
     
     State{
         name = "death",
@@ -238,7 +254,7 @@ local states=
 			if not inst.components.health:IsDead() and inst.components.health:GetPercent() < 0.5 and inst.components.combat.target ~= nil and inst.components.combat:CanHitTarget(inst.components.combat.target) then
 				inst.sg:GoToState("attack2")
 			else
-				if inst:GetDistanceSqToInst(inst.components.combat.target) > 5 and inst:GetDistanceSqToInst(inst.components.combat.target) < 40 and inst.components.health:GetPercent() < 0.5 and math.random() < 1 then
+				if inst.components.combat.target ~= nil and inst.components.combat.target:IsValid() and inst:GetDistanceSqToInst(inst.components.combat.target) > 5 and inst:GetDistanceSqToInst(inst.components.combat.target) < 40 and inst.components.health:GetPercent() < 0.5 and math.random() < 1 then
 					inst.sg:GoToState("leap_attack")
 				else
 					inst.sg:GoToState("attack1pst")
