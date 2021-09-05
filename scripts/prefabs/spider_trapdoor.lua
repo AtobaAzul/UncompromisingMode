@@ -257,6 +257,9 @@ local function OnWakeUp(inst)
     inst.components.inventoryitem.canbepickedup = false
 end
 
+local function SetHappyFace(cond) --Trapdoor spiders don't smile
+end
+
 local function OnStartLeashing(inst, data)
     --inst:SetHappyFace(true)
     inst.components.inventoryitem.canbepickedup = true
