@@ -1094,6 +1094,7 @@ local function fn_herd()
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
+    inst.entity:AddMiniMapEntity()
 	inst.entity:AddNetwork()
 	
 	inst.AnimState:SetBank("uncompromising_rat_burrow")
@@ -1102,6 +1103,8 @@ local function fn_herd()
 	inst:AddTag("herd")
 	inst:AddTag("NOBLOCK")
 	inst:AddTag("NOCLICK")
+	
+    inst.MiniMapEntity:SetIcon("uncompromising_ratburrow.tex")
 	
 	inst.entity:SetPristine()
 	
@@ -1155,6 +1158,7 @@ local function fn_burrow()
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
+    inst.entity:AddMiniMapEntity()
 	inst.entity:AddNetwork()
 	
 	inst.AnimState:SetBank("uncompromising_rat_burrow")
@@ -1163,6 +1167,8 @@ local function fn_burrow()
 	
 	inst:AddTag("ratburrow")
 	inst:AddTag("herd")
+	
+    inst.MiniMapEntity:SetIcon("uncompromising_ratburrow.tex")
 	
 	inst.entity:SetPristine()
 	
