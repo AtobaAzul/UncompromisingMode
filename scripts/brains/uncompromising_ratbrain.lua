@@ -29,25 +29,22 @@ local function CanSteal(item)
 end
 
 local function StealAction(inst)
-	if not inst.components.inventory:IsFull() then
-		local targetpriority = FindEntity(inst, SEE_DIST,
+	local targetpriority = FindEntity(inst, SEE_DIST,
+	CanSteal,
+	{ "_inventoryitem", "_equippable" },
+	{ "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
+	if targetpriority ~= nil and (not inst.components.inventory:IsFull() or not inst:HasTag("packrat") and inst._item ~= nil and not inst._item:HasTag("equippable")) then
+		return targetpriority ~= nil
+			and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
+			or nil
+	elseif not inst.components.inventory:IsFull() then
+		local target = FindEntity(inst, SEE_DIST,
 		CanSteal,
-		{ "_inventoryitem", "_equippable" },
+		{ "_inventoryitem" },
 		{ "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
-		if targetpriority ~= nil then
-			return targetpriority ~= nil
-				and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
-				or nil
-		else
-			local target = FindEntity(inst, SEE_DIST,
-				CanSteal,
-				{ "_inventoryitem" },
-				{ "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
-			return target ~= nil
-				and BufferedAction(inst, target, ACTIONS.PICKUP)
-				or nil
-		end
-	
+		return target ~= nil
+			and BufferedAction(inst, target, ACTIONS.PICKUP)
+			or nil
 	end
 end
 

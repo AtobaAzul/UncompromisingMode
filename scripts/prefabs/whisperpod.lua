@@ -34,6 +34,7 @@ local function fn()
     MakeInventoryFloatable(inst)
 	
     inst:AddTag("deployedplant")
+	inst:AddTag("plant")
 
     inst.entity:SetPristine()
 

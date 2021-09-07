@@ -77,6 +77,10 @@ local function OnDeath(inst)
 end
 
 local function OnPickup(inst, data)
+	if inst._item ~= nil then
+		inst._item:Remove()
+	end
+	
 	if data.item.components.explosive == nil then
 		inst:AddTag("carrying")
 		data.item:AddTag("raided")

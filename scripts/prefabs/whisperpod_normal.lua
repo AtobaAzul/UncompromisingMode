@@ -188,6 +188,7 @@ local function fn()
 	inst:AddTag("whisperpod")
 	inst:AddTag("NPC_workable")
 	inst:AddTag("trader")
+	inst:AddTag("plant")
 
 	inst.entity:SetPristine()
 

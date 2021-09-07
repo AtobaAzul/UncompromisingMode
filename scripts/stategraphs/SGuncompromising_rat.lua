@@ -256,7 +256,13 @@ local states =
 		timeline=
 		{
 			
-			TimeEvent(3*FRAMES, function(inst) inst:PerformBufferedAction() end),
+			TimeEvent(3*FRAMES, function(inst)
+				if not inst:HasTag("packrat") then
+					inst.components.inventory:DropEverything()
+				end
+
+				inst:PerformBufferedAction() 
+			end),
 			TimeEvent(3*FRAMES, function(inst)
 				inst.SoundEmitter:PlaySound(inst.sounds.eat)
 			end)
