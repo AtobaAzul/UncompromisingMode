@@ -24,6 +24,18 @@ local function ForceToTakeMoreHunger(inst)
 		return _DoDelta(self, delta, overtime, ignore_invincible)
 	end
 end
+--[[
+local function ForceToTakeMoreTime(inst)
+	local self = inst.components.wanda
+	local _DoDelta = self.DoDelta
+	self.DoDelta = function(self, delta, overtime, ignore_invincible)
+	if delta and overtime and delta < 0 then
+		-- Take extra time
+		delta = delta * 1.2
+		end
+		return _DoDelta(self, delta, overtime, ignore_invincible)
+	end
+end]]
 
 local function ForceToTakeUsualDamage(inst)
 	local self = inst.components.combat
@@ -48,6 +60,18 @@ local function ForceToTakeUsualHunger(inst)
 		return _DoDelta(self, delta, overtime, ignore_invincible)
 	end
 end
+
+--[[local function ForceToTakeUsualTime(inst)
+	local self = inst.components.wanda
+	local _DoDelta = self.DoDelta
+	self.DoDelta = function(self, delta, overtime, ignore_invincible)
+	if delta and overtime and delta < 0 then
+		-- Take normal time
+		delta = delta / 1.2
+		end
+		return _DoDelta(self, delta, overtime, ignore_invincible)
+	end
+end]]
 
 local function oneat(inst, data)
 	if inst.healthabsorption == nil then
@@ -125,7 +149,13 @@ local function AttachCurse(inst, target)
     if target.components.combat ~= nil then
         --target.components.combat.externaldamagemultipliers:SetModifier(inst, .75)    Effect Removed
 		target.vetcurse = true
-		ForceToTakeMoreDamage(target)
+		
+		if inst:HasTag("clockmaker") then --taking a guess thats what her tag is, I swear, I actually don't know
+			--ForceToTakeMoreTime(target)
+		else
+			ForceToTakeMoreDamage(target)
+		end
+		
 		ForceToTakeMoreHunger(target)
 		ForceOvertimeFoodEffects(target)
 		target:AddTag("vetcurse")
@@ -141,7 +171,13 @@ local function DetachCurse(inst, target)
     if target.components.combat ~= nil then
         --target.components.combat.externaldamagemultipliers:RemoveModifier(inst)
 		--target.vetcurse = false
-		ForceToTakeUsualDamage(target)
+		
+		if inst:HasTag("clockmaker") then --taking a guess thats what her tag is, I swear, I actually don't know
+			--ForceToTakeUsualTime(target)
+		else
+			ForceToTakeUsualDamage(target)
+		end
+		
 		ForceToTakeUsualHunger(target)
 		target:RemoveTag("vetcurse")
     end

@@ -7,6 +7,10 @@ local AVOID_PLAYER_DIST = 3
 local AVOID_PLAYER_DIST_SQ = AVOID_PLAYER_DIST * AVOID_PLAYER_DIST
 local AVOID_PLAYER_STOP = 8
 
+local AVOID_PLAYER_DIST_COMBAT = 6
+local AVOID_PLAYER_DIST_SQ_COMBAT  = AVOID_PLAYER_DIST_COMBAT  * AVOID_PLAYER_DIST_COMBAT 
+local AVOID_PLAYER_STOP_COMBAT  = 10
+
 local MAX_CHASE_TIME = 10
 local MAX_CHASE_DIST = 30
 
@@ -155,7 +159,7 @@ function Uncompromising_RatBrain:OnStart()
 		WhileNode( function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
 			ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST)),
 		WhileNode( function() return self.inst.components.combat.target and self.inst.components.combat:InCooldown() end, "Dodge",
-			RunAway(self.inst, function() return self.inst.components.combat.target end, AVOID_PLAYER_DIST, AVOID_PLAYER_STOP)),
+			RunAway(self.inst, function() return self.inst.components.combat.target end, AVOID_PLAYER_DIST_COMBAT, AVOID_PLAYER_STOP_COMBAT)),
 		RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
 
 		DoAction(self.inst, eat_food_action),

@@ -35,6 +35,7 @@ local require = GLOBAL.require
 	modimport("init/init_descriptions/warly")
 	modimport("init/init_descriptions/wurt")
 	modimport("init/init_descriptions/walter")
+	modimport("init/init_descriptions/wanda")
 	
 --	[ 		Number Tuning and PostInits		]	--
 
