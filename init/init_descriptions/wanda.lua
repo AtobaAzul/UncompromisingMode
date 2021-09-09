@@ -1,8 +1,8 @@
-ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.WARLY
-DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WARLY.DESCRIBE
-ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
+ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.WANDA
+DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WANDA.DESCRIBE
+ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 
---	[ 		Warly Descriptions		]   --
+--	[ 		Wanda Descriptions		]   --
 
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "what."
     ANNOUNCE.ANNOUNCE_WINONAGEN = "Haven't had time to learn this stuff yet."
@@ -137,7 +137,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.CURSED_ANTLER = "This will clean their clocks!"
 	DESCRIBE.BERNIEBOX = "That's one mystery I'll leave to Willow." --unused, unedited
 	DESCRIBE.HOODED_FERN = "More plants. Neat."
-	DESCRIBE.VENICE = "She's grown too fast!"
+	DESCRIBE.VENICE = "She's grown so quickly!"
 	DESCRIBE.GIANT_TREE = "These trees must be ancient, but how long have they been here?"
 	DESCRIBE.WIDOWSGRASP = "Might loosen up those cocoons."
 	DESCRIBE.WEBBEDCREATURE = "Preserved for later, I presume."

@@ -1,6 +1,7 @@
 -------------------------------------------------------------------------
 ---------------------- Attach and dettach functions ---------------------
 -------------------------------------------------------------------------
+----------------------------------ATTACH---------------------------------
 local function ForceToTakeMoreDamage(inst)
 	local self = inst.components.combat
 	local _GetAttacked = self.GetAttacked
@@ -24,18 +25,20 @@ local function ForceToTakeMoreHunger(inst)
 		return _DoDelta(self, delta, overtime, ignore_invincible)
 	end
 end
---[[
+
 local function ForceToTakeMoreTime(inst)
-	local self = inst.components.wanda
-	local _DoDelta = self.DoDelta
-	self.DoDelta = function(self, delta, overtime, ignore_invincible)
-	if delta and overtime and delta < 0 then
+	local self = inst.components.oldager
+	local _OnTakeDamage = self.OnTakeDamage
+	self.OnTakeDamage = function(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb)
+	if amount and overtime and amount < 0 then
 		-- Take extra time
-		delta = delta * 1.2
+		amount = amount * 1.2
 		end
-		return _DoDelta(self, delta, overtime, ignore_invincible)
+		return _OnTakeDamage(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb)
 	end
-end]]
+end
+
+----------------------------------DETACH---------------------------------
 
 local function ForceToTakeUsualDamage(inst)
 	local self = inst.components.combat
@@ -61,17 +64,19 @@ local function ForceToTakeUsualHunger(inst)
 	end
 end
 
---[[local function ForceToTakeUsualTime(inst)
-	local self = inst.components.wanda
-	local _DoDelta = self.DoDelta
-	self.DoDelta = function(self, delta, overtime, ignore_invincible)
-	if delta and overtime and delta < 0 then
-		-- Take normal time
-		delta = delta / 1.2
+local function ForceToTakeUsualTime(inst)
+	local self = inst.components.oldager
+	local _OnTakeDamage = self.OnTakeDamage
+	self.OnTakeDamage = function(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb)
+	if amount and overtime and amount < 0 then
+		-- Take extra time
+		amount = amount / 1.2
 		end
-		return _DoDelta(self, delta, overtime, ignore_invincible)
+		return _OnTakeDamage(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb)
 	end
-end]]
+end
+
+--------------------------------------------------------------------------
 
 local function oneat(inst, data)
 	if inst.healthabsorption == nil then
@@ -150,8 +155,8 @@ local function AttachCurse(inst, target)
         --target.components.combat.externaldamagemultipliers:SetModifier(inst, .75)    Effect Removed
 		target.vetcurse = true
 		
-		if inst:HasTag("clockmaker") then --taking a guess thats what her tag is, I swear, I actually don't know
-			--ForceToTakeMoreTime(target)
+		if inst:HasTag("clockmaker") then
+			ForceToTakeMoreTime(target)
 		else
 			ForceToTakeMoreDamage(target)
 		end
@@ -173,7 +178,7 @@ local function DetachCurse(inst, target)
 		--target.vetcurse = false
 		
 		if inst:HasTag("clockmaker") then --taking a guess thats what her tag is, I swear, I actually don't know
-			--ForceToTakeUsualTime(target)
+			ForceToTakeUsualTime(target)
 		else
 			ForceToTakeUsualDamage(target)
 		end
