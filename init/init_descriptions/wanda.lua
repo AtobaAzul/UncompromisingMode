@@ -11,7 +11,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
     ANNOUNCE.ANNOUNCE_RATRAID_OVER = "Those were important materials! I think..."
     ANNOUNCE.ANNOUNCE_ACIDRAIN = {
         "Timefall!",
-        "Rain rain go away!",
+        "Ow! That stings!",
         "This rain is doing bad things to my timeline...",
     }
     ANNOUNCE.ANNOUNCE_TOADSTOOLED = "Something ominous stirs."
