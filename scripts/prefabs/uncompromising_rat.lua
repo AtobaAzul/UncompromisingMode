@@ -1304,7 +1304,7 @@ local function TimeForACheckUp(inst)
 				if not inst:HasTag("frozen") then
 					if inst:HasTag("stale") then
 						inst.ratscore = inst.ratscore + 5
-					or inst:HasTag("spoiled")
+					elseif inst:HasTag("spoiled") then
 						inst.ratscore = inst.ratscore + 15
 					end
 				elseif v.prefab == "spoiledfood" then
@@ -1314,9 +1314,9 @@ local function TimeForACheckUp(inst)
 				if not inst:HasTag("frozen") then
 					if inst:HasTag("fresh") then
 						inst.ratscore = inst.ratscore + 10
-					if inst:HasTag("stale") then
+					elseif inst:HasTag("stale") then
 						inst.ratscore = inst.ratscore + 20
-					or inst:HasTag("spoiled")
+					elseif inst:HasTag("spoiled") then
 						inst.ratscore = inst.ratscore + 30
 					end
 				elseif v.prefab == "spoiledfood" then

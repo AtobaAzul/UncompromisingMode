@@ -237,7 +237,7 @@ local function SpawnEyePlants(player)
 					
 			local x1 = x + math.random(-10, 10)
 			local z1 = z + math.random(-10, 10)
-			local eyeplant = SpawnPrefab("mini_dreadeye")
+			local eyeplant = SpawnPrefab("rneshadowskittish")
 			if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 				eyeplant.Transform:SetPosition(x1, y, z1)
 				eyeplant:DoTaskInTime(0, function(eyeplant) DayBreak(eyeplant) end)
@@ -253,11 +253,11 @@ end
 local function LeifAttack(player)
 print("leifattack")
 local leiftime = 8 + math.random() * 3
-MultiFogAuto(player,leiftime)
 
-local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
+	local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
     local target = FindEntity(player, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, { "evergreens", "tree" }, { "leif", "stump", "burnt" })
     if target ~= nil and days_survived >= 30 then
+		MultiFogAuto(player,leiftime)
 		for k = 1, (days_survived <= 50 and 1) or math.random(days_survived <= 80 and 2 or 3) do
 			--print("targetfound")
 			target.noleif = true

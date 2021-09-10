@@ -59,7 +59,7 @@ local function fn()
     inst.SpawnInvestigators = SpawnInvestigators
 	inst:AddTag("widowweb")
     inst:AddComponent("childspawner")
-    inst.components.childspawner.childname = "venice"
+    inst.components.childspawner.childname = "hoodedwidow"
     inst.components.childspawner:SetMaxChildren(1)
     inst.components.childspawner:SetSpawnPeriod(TUNING.DRAGONFLY_SPAWN_TIME, 0)
     inst.components.childspawner.onchildkilledfn = OnKilled
