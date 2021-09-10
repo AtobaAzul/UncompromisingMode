@@ -115,6 +115,8 @@ local function HungryPerd(self)
 					PriorityNode({
 						DoAction(self.inst, EatFoodAnytime, "Eat Food", true),
 						DoAction(self.inst, PickBerriesActionHungry, "Pick Berries", true),
+						WhileNode( function() return self.inst.components.combat.target and self.inst.components.combat:InCooldown() end, "Dodge",
+							RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST)),
 						ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME)),
 						RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST),
 						Wander(self.inst, HomePos, MAX_WANDER_DIST),

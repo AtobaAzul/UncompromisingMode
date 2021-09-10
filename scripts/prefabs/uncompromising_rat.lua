@@ -292,11 +292,12 @@ local function fn()
 	
 		inst.components.locomotor.pathcaps = { allowocean = true }
 	end
-		
+
 	inst:AddComponent("eater")
-	inst.components.eater:SetDiet({ FOODTYPE.HORRIBLE }, { FOODTYPE.HORRIBLE })
-	inst.components.eater.strongstomach = true
+	inst.components.eater:SetDiet({ FOODTYPE.OMNI }, { FOODTYPE.OMNI })
+	inst.components.eater:SetCanEatHorrible()
 	inst.components.eater:SetCanEatRaw()
+	inst.components.eater:SetStrongStomach(true) -- can eat monster meat!
 	
 	inst:AddComponent("workmultiplier")
 	inst.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, -0.8, inst)
@@ -546,9 +547,10 @@ local function junkfn()
 	inst.Transform:SetScale(1.25,1.25,1.25)
 	
 	inst:AddComponent("eater")
-	inst.components.eater:SetDiet({ FOODTYPE.HORRIBLE }, { FOODTYPE.HORRIBLE })
-	inst.components.eater.strongstomach = true
+	inst.components.eater:SetDiet({ FOODTYPE.OMNI }, { FOODTYPE.OMNI })
+	inst.components.eater:SetCanEatHorrible()
 	inst.components.eater:SetCanEatRaw()
+	inst.components.eater:SetStrongStomach(true) -- can eat monster meat!
 	
 	inst:AddComponent("workmultiplier")
 	inst.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, -0.8, inst)
@@ -707,11 +709,12 @@ local function packfn()
 	
 		inst.components.locomotor.pathcaps = { allowocean = true }
 	end
-		
+
 	inst:AddComponent("eater")
-	inst.components.eater:SetDiet({ FOODTYPE.HORRIBLE }, { FOODTYPE.HORRIBLE })
-	inst.components.eater.strongstomach = true
+	inst.components.eater:SetDiet({ FOODTYPE.OMNI }, { FOODTYPE.OMNI })
+	inst.components.eater:SetCanEatHorrible()
 	inst.components.eater:SetCanEatRaw()
+	inst.components.eater:SetStrongStomach(true) -- can eat monster meat!
 	
 	inst:AddComponent("workmultiplier")
 	inst.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, -0.8, inst)
@@ -1077,12 +1080,11 @@ end
 local function OnTimerDone(inst, data)
 	print("timer")
 	if data.name == "scoutingparty" then
-	
 		local x, y, z = inst.Transform:GetWorldPosition()
 		
         if #TheSim:FindEntities(x, 0, z, 1000, { "ratburrow" }) >= 10 then
 			print("Reduce Timer Too Many Burrows")
-            TheWorld:PushEvent("reducerattimer", {value = 480})
+            TheWorld:PushEvent("rat_sniffer")
 			inst.components.timer:StartTimer("scoutingparty", 1920 + math.random(480))
             return
         end
@@ -1228,6 +1230,7 @@ local function SlumberParty(inst)
 		
 		local ents = #TheSim:FindEntities(x, y, z, 8, { "ratscout" })
 		if ents ~= nil and ents > 0 then
+            TheWorld:PushEvent("rat_sniffer")
 			print("The girls are here, commencing pillowfort construction...")
 			local burrow = SpawnPrefab("uncompromising_ratburrow")
 			burrow.Transform:SetPosition(x, 0, z)
@@ -1237,8 +1240,6 @@ local function SlumberParty(inst)
 				b:RemoveTag("ratscout")
 				burrow:AddMember(b)
 			end
-			
-            TheWorld:PushEvent("reducerattimer", {value = 480})
 			
 			inst:Remove()
 		end
@@ -1280,6 +1281,91 @@ local function fn_scoutburrow()
 	inst.components.herd.updateposincombat = false
 	
 	inst:DoPeriodicTask(5, SlumberParty) -- !!!
+	
+	return inst
+end
+
+local function TimeForACheckUp(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+
+	local ents = TheSim:FindEntities(x, y, z, 30, {"_inventoryitem"})
+	print("THE RAT SNIFFS")
+	print("                o")
+	print("    =========B  *sniff* *sniff*")
+	print("---========vv")
+	print("   ========")
+	print("    V V    V V")
+	
+	inst.ratscore = 0
+	
+	if ents ~= nil then
+		for i, v in ipairs(ents) do
+			if v.components.inventoryitem:IsHeld() then
+				if not inst:HasTag("frozen") then
+					if inst:HasTag("stale") then
+						inst.ratscore = inst.ratscore + 5
+					or inst:HasTag("spoiled")
+						inst.ratscore = inst.ratscore + 15
+					end
+				elseif v.prefab == "spoiledfood" then
+					inst.ratscore = inst.ratscore + 25
+				end
+			else
+				if not inst:HasTag("frozen") then
+					if inst:HasTag("fresh") then
+						inst.ratscore = inst.ratscore + 10
+					if inst:HasTag("stale") then
+						inst.ratscore = inst.ratscore + 20
+					or inst:HasTag("spoiled")
+						inst.ratscore = inst.ratscore + 30
+					end
+				elseif v.prefab == "spoiledfood" then
+					inst.ratscore = inst.ratscore + 45
+				end
+				
+				if inst:HasTag("cattoy") or inst:HasTag("molebait") then
+					if inst.prefab == "twigs" then
+						inst.ratscore = inst.ratscore + 0.5 -- Give them a break, Twiggy Trees may be the cause
+					else
+						if inst:HasTag("molebait") then
+							inst.ratscore = inst.ratscore + 3
+						else
+							inst.ratscore = inst.ratscore + 1
+						end
+					end
+				else
+					if inst:HasTag("_equippable") then
+						inst.ratscore = inst.ratscore + 20 -- Oooh, wants wants! We steal!
+					else
+						inst.ratscore = inst.ratscore + 10
+					end
+				end
+			end
+		end
+	end
+	
+	print(inst.ratscore)
+	print("THATS THE NORMAL RAT SCORE")
+	TheWorld:PushEvent("reducerattimer", {value = inst.ratscore})
+end
+
+local function fn_sniffer()
+	local inst = CreateEntity()
+	
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddNetwork()
+	
+	inst:AddTag("rat_sniffer")
+	
+	inst.entity:SetPristine()
+	
+	if not TheWorld.ismastersim then
+		return inst
+	end
+	
+	inst:ListenForEvent("rat_sniffer", TimeForACheckUp, TheWorld)
 	
 	return inst
 end
@@ -1332,4 +1418,5 @@ return Prefab("uncompromising_rat", fn, assets, prefabs),
 	Prefab("uncompromising_ratherd", fn_herd, assets, prefabs),
 	Prefab("uncompromising_ratburrow", fn_burrow, assets, prefabs),
 	Prefab("uncompromising_scoutburrow", fn_scoutburrow, assets, prefabs),
+	Prefab("uncompromising_ratsniffer", fn_sniffer, assets, prefabs),
 	Prefab("ratdroppings", fn_droppings, assets)

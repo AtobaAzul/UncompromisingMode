@@ -91,6 +91,8 @@ local function hungycounter(inst)
 	if inst.mehungy >= 5 then
 		inst.components.named:SetName("Gobbler")
 	end
+
+	inst.components.combat:DropTarget()
 end
 
 local function OnAttacked(inst, data)
@@ -153,7 +155,7 @@ env.AddPrefabPostInit("perd", function(inst)
 	if inst.components.combat ~= nil then
 		inst.components.combat:SetRange(2, 2)
 		inst.components.combat:SetDefaultDamage(20)
-		inst.components.combat:SetAttackPeriod(TUNING.BUNNYMAN_ATTACK_PERIOD)
+		inst.components.combat:SetAttackPeriod(5)
 		inst.components.combat:SetRetargetFunction(2, NormalRetargetFn)
 		inst.components.combat:SetKeepTargetFunction(NormalKeepTargetFn)
 		inst.components.combat.onhitotherfn = OnHitOther

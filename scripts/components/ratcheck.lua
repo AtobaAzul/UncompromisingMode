@@ -115,6 +115,7 @@ local function MakeRatBurrow(inst)
 		
 		if IsValidRatBurrowPosition(inst.x1, inst.z1) then
 			local ratburrow = SpawnPrefab("uncompromising_ratburrow")
+            TheWorld:PushEvent("rat_sniffer")
 			ratburrow.Transform:SetPosition(inst.x1, 0, inst.z1)
 			break
 		end
@@ -209,6 +210,8 @@ local function ActiveRaid(src, data)
 		data.doer = data.container:GetNearestPlayer(true)
 	end
 	
+	local x, y, z = data.doer.Transform:GetWorldPosition()
+	
     if data ~= nil and data.doer ~= nil and data.container ~= nil then
 		print("Found a Doer!")
 		if not data.doer or not data.doer:IsValid() or not data.doer.Transform or not IsEligible(data.doer) then
@@ -217,12 +220,11 @@ local function ActiveRaid(src, data)
 		
 		print("Doer is valid!")
 		
-		local x, y, z = data.doer.Transform:GetWorldPosition()
-		local ents = TheSim:FindEntities(x, y, z, 20, nil, nil, {"_inventoryitem"})
+		local ents = TheSim:FindEntities(x, y, z, 30, nil, {"cattoy"}, {"_inventoryitem"})
 		if IsEligible(data.doer) and
 			not TheWorld:HasTag("cave") and
 			not (_raided ~= nil and _raided) and
-			not data.container.components.container:IsEmpty() and
+			--[[not data.container.components.container:IsEmpty() and]]
 			#ents >= 20 then
 			print("GOGO NINJA RATORIO")
 			
@@ -248,8 +250,15 @@ local function ActiveRaid(src, data)
 			if (_raided ~= nil and _raided) then
 				print("CAN'T SPAWN RATS! They are on break!")
 			end
-			
-			return
+		end
+		
+		if #TheSim:FindEntities(x, y, z, 30, { "structure" }) >= 3 then
+			local ratchecker = TheSim:FindFirstEntityWithTag("rat_sniffer")
+			if ratchecker ~= nil then
+				ratchecker.Transform:SetPosition(x, y, z)
+			else
+				SpawnPrefab("uncompromising_ratsniffer").Transform:SetPosition(x, y, z)
+			end
 		end
     end
 end

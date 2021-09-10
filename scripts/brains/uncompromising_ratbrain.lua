@@ -37,9 +37,19 @@ local function StealAction(inst)
 	CanSteal,
 	{ "_inventoryitem", "_equippable" },
 	{ "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
+	
+	local targetpriority_secondary = FindEntity(inst, SEE_DIST,
+	CanSteal,
+	{ "_inventoryitem", "preparedfood" },
+	{ "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
+	
 	if targetpriority ~= nil and (not inst.components.inventory:IsFull() or not inst:HasTag("packrat") and inst._item ~= nil and not inst._item:HasTag("equippable")) then
 		return targetpriority ~= nil
 			and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
+			or nil
+	elseif targetpriority_secondary ~= nil and (not inst.components.inventory:IsFull() or not inst:HasTag("packrat") and inst._item ~= nil and not inst._item:HasTag("equippable") and not inst._item:HasTag("preparedfood")) then
+		return targetpriority_secondary ~= nil
+			and BufferedAction(inst, targetpriority_secondary, ACTIONS.PICKUP)
 			or nil
 	elseif not inst.components.inventory:IsFull() then
 		local target = FindEntity(inst, SEE_DIST,
@@ -70,7 +80,7 @@ local function EmptyChest(inst)
 end
 
 local function edible(inst, item)
-	return inst.components.eater:CanEat(item) and item.components.bait and not item:HasTag("planted") and
+	return inst.components.eater:CanEat(item) --[[and item.components.bait]] and not item:HasTag("planted") and
 			not (item.components.inventoryitem and item.components.inventoryitem:IsHeld()) and
 			item:IsOnPassablePoint() and
 			item:GetCurrentPlatform() == inst:GetCurrentPlatform()
