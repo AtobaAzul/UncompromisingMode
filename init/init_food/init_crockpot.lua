@@ -96,6 +96,7 @@ AddIngredientValues({"forgetmelots"}, {decoration=1, foliage=1})
 
 if TUNING.DSTU.CROCKPOTMONSTMEAT then
 recipes.monsterlasagna.test = function(cooker, names, tags) return tags.monster and tags.meat and (tags.monster > tags.meat or tags.monster >= 3) and not tags.inedible and not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) end 
+recipes.monsterlasagna.priority = 51
 -- Original:           test = function(cooker, names, tags) return tags.monster and tags.monster >= 2 and not tags.inedible end,    
 end
 recipes.butterflymuffin.test = function(cooker, names, tags) return (names.butterflywings or names.moonbutterflywings) and not tags.meat and tags.veggie and UncompromisingFillers(tags) end 
@@ -166,6 +167,7 @@ recipes.powcake.test = function(cooker, names, tags) return names.twigs and name
 -- Original:    test = function(cooker, names, tags) return names.twigs and names.honey and (names.corn or names.corn_cooked) end,
 
 --recipes.unagi.test = function(cooker, names, tags) return names.cutlichen and (names.eel or names.eel_cooked) and UncompromisingFillers(tags and MonsterMeatSupport(tags)) end 
+recipes.unagi.priority = 53
 -- Original:  test = function(cooker, names, tags) return names.cutlichen and (names.eel or names.eel_cooked) end,
 
 --recipes.wetgoop.test = function(cooker, names, tags) return true end 
@@ -246,6 +248,7 @@ recipes.frognewton.priority = 20
 -- WARLY recipes
 
 warly_recipes.monstertartare.test = function(cooker, names, tags) return tags.monster and tags.monster >= 4 and not tags.inedible and not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) end
+warly_recipes.monstertartare.priority = 52
 -- Original:                 test = function(cooker, names, tags) return tags.monster and tags.monster >= 2 and not tags.inedible end,
 
 warly_recipes.nightmarepie.test = function(cooker, names, tags) return names.nightmarefuel and names.nightmarefuel == 2 and (names.potato or names.potato_cooked) and (names.onion or names.onion_cooked) end
