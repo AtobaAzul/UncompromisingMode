@@ -20,13 +20,16 @@ local function OnAttached(inst, target, followsymbol, followoffset, data)
 	
 	--local warlybuff = target:HasTag("warlybuffed") and 2 or target:HasTag("vetcurse") and 0.5 or 1
 	local warlybuff = (target:HasTag("warlybuffed") and (target:HasTag("vetcurse") and 1.8 or 2)) or target:HasTag("vetcurse") and 0.8 or 1
-	--print(warlybuff)
+	
 	duration = duration / warlybuff
 
     inst.entity:SetParent(target.entity)
     inst.Transform:SetPosition(0, 0, 0) --in case of loading
     inst.task = inst:DoPeriodicTask(data ~= nil and duration or 1, OnTick, nil, target, data)
-	inst.components.timer:StartTimer("regenover", data ~= nil and ((duration * 10) + 0.01) or 1)
+	
+	local newduration = ((duration * 10) + 0.01)
+	inst.components.timer:StartTimer("regenover", newduration or 1)
+	
     inst:ListenForEvent("death", function()
         inst.components.debuff:Stop()
     end, target)
@@ -43,14 +46,20 @@ local function OnExtended(inst, target, followsymbol, followoffset, data)
 	
 	--local warlybuff = target:HasTag("warlybuffed") and 2 or target:HasTag("vetcurse") and 0.5 or 1
 	local warlybuff = (target:HasTag("warlybuffed") and (target:HasTag("vetcurse") and 1.8 or 2)) or target:HasTag("vetcurse") and 0.8 or 1
-	--print(warlybuff)
+	
 	duration = duration / warlybuff
 	
 
     local time_remaining = inst.components.timer:GetTimeLeft("regenover")
 	if time_remaining ~= nil then
-		if (duration * 10) > time_remaining then
-			inst.components.timer:SetTimeLeft("regenover", duration * 10)
+		local oldduration = (duration * 10)
+		local newduration = time_remaining + oldduration
+			
+		if newduration < oldduration * 4 then
+			local finalduration = time_remaining + oldduration
+			inst.components.timer:SetTimeLeft("regenover", finalduration)
+		else
+			inst.components.timer:SetTimeLeft("regenover", oldduration * 4)
 		end
 	else
 		inst.components.timer:StartTimer("regenover", duration * 10)
@@ -107,18 +116,21 @@ local function OnTick2(inst, target, data)
 end
 
 local function OnAttached2(inst, target, followsymbol, followoffset, data)
-
+	
 	local duration = data ~= nil and data.duration and (data.duration / 2) or 1
 	
 	--local warlybuff = target:HasTag("warlybuffed") and 2 or target:HasTag("vetcurse") and 0.5 or 1
 	local warlybuff = (target:HasTag("warlybuffed") and (target:HasTag("vetcurse") and 1.8 or 2)) or target:HasTag("vetcurse") and 0.8 or 1
-	--print(warlybuff)
+	
 	duration = duration / warlybuff
 
     inst.entity:SetParent(target.entity)
     inst.Transform:SetPosition(0, 0, 0) --in case of loading
     inst.task = inst:DoPeriodicTask(data ~= nil and duration or 1, OnTick2, nil, target, data)
-	inst.components.timer:StartTimer("regenover", data ~= nil and ((duration * 10) + 0.01) or 1)
+	
+	local newduration = ((duration * 10) + 0.01)
+	inst.components.timer:StartTimer("regenover", newduration or 1)
+	
     inst:ListenForEvent("death", function()
         inst.components.debuff:Stop()
     end, target)
@@ -131,18 +143,23 @@ local function OnTimerDone2(inst, data)
 end
 
 local function OnExtended2(inst, target, followsymbol, followoffset, data)
-	
 	local duration = data ~= nil and data.duration and (data.duration / 2) or 1
 	
 	--local warlybuff = target:HasTag("warlybuffed") and 2 or target:HasTag("vetcurse") and 0.5 or 1
 	local warlybuff = (target:HasTag("warlybuffed") and (target:HasTag("vetcurse") and 1.8 or 2)) or target:HasTag("vetcurse") and 0.8 or 1
-	--print(warlybuff)
 	duration = duration / warlybuff
+	
 
     local time_remaining = inst.components.timer:GetTimeLeft("regenover")
 	if time_remaining ~= nil then
-		if (duration * 10) > time_remaining then
-			inst.components.timer:SetTimeLeft("regenover", duration * 10)
+		local oldduration = (duration * 10)
+		local newduration = time_remaining + oldduration
+			
+		if newduration < oldduration * 4 then
+			local finalduration = time_remaining + oldduration
+			inst.components.timer:SetTimeLeft("regenover", finalduration)
+		else
+			inst.components.timer:SetTimeLeft("regenover", oldduration * 4)
 		end
 	else
 		inst.components.timer:StartTimer("regenover", duration * 10)
