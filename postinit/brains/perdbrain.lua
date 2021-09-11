@@ -99,6 +99,11 @@ local function HomePos(inst)
     return bush ~= nil and bush:GetPosition() or nil
 end
 
+local function GoHomeAction(inst)
+    local bush = FindNearestBush(inst)
+    return bush ~= nil and BufferedAction(inst, bush, ACTIONS.GOHOME, nil, bush:GetPosition()) or nil
+end
+
 local function HungryPerd(self)
 	--[[local MeHungy = WhileNode(function() return self.inst.mehungy < 5 end, "Still Hungry",
 				PriorityNode({
@@ -117,6 +122,8 @@ local function HungryPerd(self)
 						DoAction(self.inst, PickBerriesActionHungry, "Pick Berries", true),
 						WhileNode( function() return self.inst.components.combat.target and self.inst.components.combat:InCooldown() end, "Dodge",
 							RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST)),
+						WhileNode(function() return TheWorld.state.isnight end, "IsNight",
+							DoAction(self.inst, GoHomeAction, "Go Home", true)),
 						ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME)),
 						RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST),
 						Wander(self.inst, HomePos, MAX_WANDER_DIST),
