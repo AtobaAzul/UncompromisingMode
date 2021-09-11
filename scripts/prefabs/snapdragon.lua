@@ -347,6 +347,7 @@ local function common_fn(scale)
     inst:AddTag("veggie")
     inst:AddTag("largecreature")
     inst:AddTag("trader")
+    inst:AddTag("companion")
 	
     if not TheWorld.ismastersim then
         return inst

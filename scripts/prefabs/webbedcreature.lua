@@ -530,8 +530,8 @@ local function fn()
 		inst.AnimState:SetBank("wackycocoons")
 		inst.AnimState:SetBuild("wackycocoons")
 		inst.AnimState:PlayAnimation("idle_small", true)
-		
 
+		inst:AddTag("noepicmusic")
 		inst:AddTag("webbedcreature")
 		inst:AddTag("structure")
 		inst:AddTag("noauradamage")
