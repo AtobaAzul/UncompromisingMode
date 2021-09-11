@@ -1,22 +1,6 @@
 require "prefabutil"
 local CANOPY_SHADOW_DATA = require("prefabs/canopyshadows")
 
---Shadow Spawning Function, for now
-local function SpawnTreeShadows(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
-	x = x - 22
-	z = z - 22
-	for i = 1, 5 do
-		for k = 1, 5 do
-		local shadow = SpawnPrefab("hoodedcanopy")
-			shadow.Transform:SetPosition(x, y, z)
-			x = x + 11 + math.random(-0.75,0.75)
-		end
-		x = x - 55
-		z = z + 11 + math.random(-0.75,0.75)
-	end
-end
-
 local function removecanopyshadow(inst)
     if inst.canopy_data ~= nil then
         for _, shadetile_key in ipairs(inst.canopy_data.shadetile_keys) do
@@ -70,7 +54,6 @@ local function makefn()
     if not TheWorld.ismastersim then
         return inst
     end
-	inst:DoTaskInTime(0,SpawnTreeShadows)
     return inst
 end
 

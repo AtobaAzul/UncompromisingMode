@@ -3,32 +3,32 @@ local anims = {"idle_low", "idle_med", "idle_full"}
 
 local loots = 
 {
-spoiled_food = 1,
-rottenegg = 1,
-spoiled_fish_small = 1,
-spoiled_fish = 1,
+	spoiled_food = 1,
+	rottenegg = 1,
+	spoiled_fish_small = 1,
+	spoiled_fish = 1,
 
-pigskin = 0.5,
-boneshard = 0.5,
-rope = 0.5,
-papyrus = 0.5,
+	pigskin = 0.5,
+	boneshard = 0.5,
+	rope = 0.5,
+	papyrus = 0.5,
 }
 
 local chestloots =
 {
-pigskin = 1,
+	pigskin = 1,
 
-feather_crow = 0.75,
-feather_robin = 0.75,
-feather_robin_winter = 0.75,
-feather_canary = 0.75,
-goose_feather = 0.75,
+	feather_crow = 0.75,
+	feather_robin = 0.75,
+	feather_robin_winter = 0.75,
+	feather_canary = 0.75,
+	goose_feather = 0.75,
 
-spoiled_food = 0.5,
-rottenegg = 0.5,
-umbrella = 0.5,
+	spoiled_food = 0.5,
+	rottenegg = 0.5,
+	umbrella = 0.5,
 
-gears = 0.25,
+	gears = 0.25,
 }
 
 local function GetChestLootTable(loottable)

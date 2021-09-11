@@ -15,7 +15,7 @@ AddRoom("GiantTrees",
 		hooded_mushtree_medium = 0.05,
 		hoodedtrapdoor = 0.05,
 		giant_tree_infested = 0.01,
-		lightrays_canopy = 0.5,
+		lightrays_canopy = 0.25,
 		},
 		
 			countprefabs =	
@@ -129,7 +129,7 @@ AddRoom("WalrusGiantTrees",
 		hooded_mushtree_small = 0.05,
 		hoodedtrapdoor = 0.2,
 		giant_tree_infested = 0.005,
-		lightrays_canopy = 0.5,
+		lightrays_canopy = 0.25,
 		},
 		
 			countprefabs =	
@@ -157,7 +157,7 @@ AddRoom("BGGiantTrees",
 		blueberryplantbuncher = 0.035,
 		hooded_mushtree_tall = 0.05,
 		giant_tree_infested = 0.005,
-		lightrays_canopy = 0.5,
+		lightrays_canopy = 0.25,
 		},
 			countprefabs =	
 		{

@@ -124,7 +124,6 @@ return {
 	"marsh_grass",
 	"web_net_splat_fx",
 	"web_bomb",
-	"hoodedcanopy",
 	"hoodedforestturf",
 	"poopregenbuff",
 	"giant_tree",

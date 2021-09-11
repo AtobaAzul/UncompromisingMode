@@ -26,8 +26,6 @@ Assets = {
 	Asset("IMAGE", "images/fx5.tex"),
 	Asset("ATLAS", "images/californiakingoverlay.xml"),
 	Asset("IMAGE", "images/californiakingoverlay.tex"),
-	Asset("ATLAS", "images/hoodedcanopyoverlay.xml"),
-	Asset("IMAGE", "images/hoodedcanopyoverlay.tex"),
 	Asset("ATLAS", "images/inventoryimages/gasmask.xml"),
 	Asset("IMAGE", "images/inventoryimages/gasmask.tex"),
 	Asset("ATLAS", "images/inventoryimages/sand.xml"),
