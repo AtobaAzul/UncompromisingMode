@@ -12,10 +12,33 @@ GLOBAL.GetDescription = function(inst, item, ...)
 	local ret = _GetDescription(inst, item, ...)
 	local prefab = item and item.prefab
 	if prefab and item and item:HasTag("antihistamine") and character ~= nil and character ~= "WES" then
-		if not inst.prefab == "wilson" and GLOBAL.STRINGS.CHARACTERS[character].DESCRIBE.ANTIHISTAMINE ~= nil then
-			ret = ret .."\n".. GLOBAL.STRINGS.CHARACTERS[character].DESCRIBE.ANTIHISTAMINE--(GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTIHISTAMINE or "")--
-		else
-			ret = ret .."\n".. "It's useful for ailing a stuffy nose!"
+			if character ~= "WILSON" and GLOBAL.STRINGS.CHARACTERS[character].DESCRIBE.ANTIHISTAMINE ~= nil then
+				ret = ret .."\n".. GLOBAL.STRINGS.CHARACTERS[character].DESCRIBE.ANTIHISTAMINE--(GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTIHISTAMINE or "")--
+			else
+				ret = ret .."\n".. GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.ANTIHISTAMINE
+			end
+	end
+	
+	if prefab and item and item:HasTag("um_durability") and character ~= nil and character ~= "WES" then
+			
+		item.durabilitystring = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.DURABILITY_LEVEL
+				
+		if not inst.prefab == "wilson" and GLOBAL.STRINGS.CHARACTERS[character].DESCRIBE.DURABILITY_LEVEL ~= nil then
+			item.durabilitystring = GLOBAL.STRINGS.CHARACTERS[character].DESCRIBE.DURABILITY_LEVEL
+		end
+				
+		local newsection = item.components.fueled ~= nil and item.components.fueled:GetCurrentSection()
+		
+		if item.components.fueled ~= nil then
+			if newsection <= 1 then
+				ret = ret .."\n".. item.durabilitystring.QUARTER
+			elseif newsection <= 2 then
+				ret = ret .."\n".. item.durabilitystring.HALF
+			elseif newsection <= 3 then
+				ret = ret .."\n".. item.durabilitystring.THREEQUARTER
+			elseif newsection <= 4 then
+				ret = ret .."\n".. item.durabilitystring.FULL
+			end
 		end
 	end
 	

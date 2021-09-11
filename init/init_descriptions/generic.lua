@@ -266,6 +266,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 		HUGE = "It's perfectly protected against the elements!",
 	}
 
+	DESCRIBE.DURABILITY_LEVEL = 
+	{
+		QUARTER = "It's practically falling apart!",
+		HALF = "It has some nasty holes in it.",
+		THREEQUARTER = "Could use some stiching up.",
+		FULL = "It's in perfect condition.",
+	}
+
 	ACTIONFAIL.READ =
         {
             GENERIC = "It seems the magic is inert in this state.",

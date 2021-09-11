@@ -49,7 +49,7 @@ local function create_common(pawntype)
     -------------------
     inst:AddComponent("childspawner")
     inst.components.childspawner.childname = "um_pawn"..pawntype
-    inst.components.childspawner:SetRegenPeriod(TUNING.CATCOONDEN_REGEN_TIME)
+    inst.components.childspawner:SetRegenPeriod(TUNING.TOTAL_DAY_TIME * 3)
     inst.components.childspawner:SetSpawnPeriod(1)
     inst.components.childspawner:SetMaxChildren(1)
 	

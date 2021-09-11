@@ -477,7 +477,7 @@ for i, room in ipairs(pawnrooms) do
 		if room.contents.distributeprefabs == nil then
 			room.contents.distributeprefabs = {}
 		end
-		room.contents.distributeprefabs.pawn_hopper = 0.25
+		room.contents.distributeprefabs.pawn_hopper = 0.20
 	end)
 end
 
@@ -489,7 +489,7 @@ for i, room in ipairs(damagedpawnrooms) do
 		if room.contents.distributeprefabs == nil then
 			room.contents.distributeprefabs = {}
 		end
-		room.contents.distributeprefabs.pawn_hopper_nightmare = 0.25
+		room.contents.distributeprefabs.pawn_hopper_nightmare = 0.20
 	end)
 end
 modimport("init/init_food/init_food_worldgen")

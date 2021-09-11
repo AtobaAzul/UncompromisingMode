@@ -83,80 +83,90 @@ local function onfuelchangeinsulationhigh(newsection, oldsection, inst, doer)
 end
 
 if TUNING.DSTU.CLOTHINGDEGREDATION then
+
+---------------------------MED / HIGH WATERPROOF---------------------------
 	AddPrefabPostInit("rainhat", function (inst)
+		inst:AddTag("um_durability")
+		
 		if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
 			inst.components.fueled:SetSections(4)
-				inst.components.fueled:SetSectionCallback(onfuelchangemedium)
+			inst.components.fueled:SetSectionCallback(onfuelchangemedium)
 		end
 	end)
 
 	AddPrefabPostInit("umbrella", function (inst)
+		inst:AddTag("um_durability")
+		
 		if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
 			inst.components.fueled:SetSections(4)
-				inst.components.fueled:SetSectionCallback(onfuelchangehigh)
+			inst.components.fueled:SetSectionCallback(onfuelchangehigh)
 		end
 	end)
+---------------------------MED / HIGH WATERPROOF---------------------------
 
-	AddPrefabPostInit("eyebrellahat", function (inst)
-		if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
-			inst.components.fueled:SetSections(4)
+
+
+---------------------------ABSOLUTE WATERPROOF---------------------------
+	local WATERPROOFERABSOLUTE = 
+	{
+		"eyebrellahat",
+		"raincoat",
+	}
+
+	for k, v in pairs(WATERPROOFERABSOLUTE) do
+		AddPrefabPostInit(v, function (inst)
+			inst:AddTag("um_durability")
+			
+			if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
+				inst.components.fueled:SetSections(4)
 				inst.components.fueled:SetSectionCallback(onfuelchangeabsolute)
-		end
-	end)
+			end
+		end)
+	end
+---------------------------ABSOLUTE WATERPROOF---------------------------
 
-	AddPrefabPostInit("raincoat", function (inst)
-		if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
-			inst.components.fueled:SetSections(4)
-				inst.components.fueled:SetSectionCallback(onfuelchangeabsolute)
-		end
-	end)
 
-	AddPrefabPostInit("walrushat", function (inst)
-		if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
-			inst.components.fueled:SetSections(4)
-				inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedhigh)
-		end
-	end)
 
-	AddPrefabPostInit("winterhat", function (inst)
-		if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
-			inst.components.fueled:SetSections(4)
-				inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedhigh)
-		end
-	end)
+---------------------------MEDIUM HIGH INSULATION ITEMS---------------------------
+	local INSULATIONMEDHIGH = 
+	{
+		"walrushat",
+		"winterhat",
+		"wintergoggles",
+		"trunkvest_summer",
+	}
 
-	AddPrefabPostInit("wintergoggles", function (inst)
-		if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
-			inst.components.fueled:SetSections(4)
-				inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedhigh)
-		end
-	end)
+	for k, v in pairs(INSULATIONMEDHIGH) do
+		AddPrefabPostInit(v, function (inst)
+			inst:AddTag("um_durability")
+		
+			if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
+				inst.components.fueled:SetSections(4)
+					inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedhigh)
+			end
+		end)
+	end
+---------------------------MEDIUM HIGH INSULATION ITEMS---------------------------
 
-	AddPrefabPostInit("trunkvest_summer", function (inst)
-		if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
-			inst.components.fueled:SetSections(4)
-				inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedhigh)
-		end
-	end)
 
-	AddPrefabPostInit("trunkvest_winter", function (inst)
-		if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
-			inst.components.fueled:SetSections(4)
-				inst.components.fueled:SetSectionCallback(onfuelchangeinsulationhigh)
-		end
-	end)
+	
+---------------------------HIGH INSULATION ITEMS---------------------------
+	local INSULATIONHIGH = 
+	{
+		"trunkvest_winter",
+		"beargervest",
+		"beefalohat",
+	}
 
-	AddPrefabPostInit("beargervest", function (inst)
-		if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
-			inst.components.fueled:SetSections(4)
-				inst.components.fueled:SetSectionCallback(onfuelchangeinsulationhigh)
-		end
-	end)
-
-	AddPrefabPostInit("beefalohat", function (inst)
-		if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
-			inst.components.fueled:SetSections(4)
-				inst.components.fueled:SetSectionCallback(onfuelchangeinsulationhigh)
-		end
-	end)
+	for k, v in pairs(INSULATIONHIGH) do
+		AddPrefabPostInit(v, function (inst)
+			inst:AddTag("um_durability")
+		
+			if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
+				inst.components.fueled:SetSections(4)
+					inst.components.fueled:SetSectionCallback(onfuelchangeinsulationhigh)
+			end
+		end)
+	end
+---------------------------HIGH INSULATION ITEMS---------------------------
 end

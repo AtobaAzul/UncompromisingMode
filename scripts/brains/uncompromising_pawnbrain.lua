@@ -7,10 +7,12 @@ require "behaviours/panic"
 local STOP_RUN_DIST = 10
 local SEE_PLAYER_DIST = 7
 
+local SEE_PLAYER_DIST_NIGHTMARE = 2
+
 local SEE_PLAYER_STOP_DIST = 12
 
 local SEE_BAIT_DIST = 20
-local MAX_WANDER_DIST = 40
+local MAX_WANDER_DIST = 30
 
 
 local Uncompromising_PawnBrain = Class(Brain, function(self, inst)
@@ -31,9 +33,9 @@ end
 
 local function IsDangerClose(inst)
 	if inst:HasTag("landmine") then
-		return FindEntity(inst, 2, nil, {"player"}) ~= nil
+		return FindEntity(inst, SEE_PLAYER_DIST_NIGHTMARE, nil, {"player"}) ~= nil
 	else
-		return FindEntity(inst, 7, nil, {"player"}) ~= nil
+		return FindEntity(inst, SEE_PLAYER_DIST, nil, {"player"}) ~= nil
 	end
 end
 
