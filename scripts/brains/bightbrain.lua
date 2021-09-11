@@ -10,7 +10,7 @@ require "behaviours/useshield"
 local BrainCommon = require "brains/braincommon"
 
 
-local MAX_CHASE_TIME = 99
+local MAX_CHASE_TIME = 20--99
 local MAX_WANDER_DIST = 32
 
 
