@@ -94,6 +94,8 @@ local function fn(Sim)
     inst.Transform:SetFourFaced()
 
 	MakeCharacterPhysics(inst, 10, .5)
+	
+	inst:AddTag("plant")
 
 	inst.entity:SetPristine()
 	

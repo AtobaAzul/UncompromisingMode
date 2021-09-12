@@ -138,6 +138,7 @@ local function fncommon()
 
     inst:AddTag("monster")
     inst:AddTag("stumpling")
+	inst:AddTag("plant")
     inst:AddTag("likewateroffducksback")
 
     inst.AnimState:SetBank("stumpling")
@@ -257,6 +258,7 @@ local function fnbirchling()
 
     inst:AddTag("monster")
     inst:AddTag("stumpling")
+	inst:AddTag("plant")
     inst:AddTag("likewateroffducksback")
 
     inst.AnimState:SetBank("birchling")

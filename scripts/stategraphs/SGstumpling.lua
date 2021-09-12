@@ -235,7 +235,7 @@ local states =
                 inst.components.combat:DoAttack(inst.sg.statemem.target) 
                 inst.SoundEmitter:PlaySound(inst.sounds.attack)
                 inst.components.locomotor:EnableGroundSpeedMultiplier(false)            
-                inst.Physics:SetMotorVelOverride(3,0,0)
+                inst.Physics:SetMotorVelOverride(8,0,0)
             end),
 
             TimeEvent(18*FRAMES, function(inst)

@@ -88,7 +88,7 @@ end
 
 local function hungycounter(inst)
 	inst.mehungy = inst.mehungy + 1
-	if inst.mehungy >= 5 then
+	if inst.mehungy >= 3 then
 		inst.components.named:SetName("Gobbler")
 	end
 
