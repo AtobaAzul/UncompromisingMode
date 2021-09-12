@@ -13,129 +13,6 @@ local assets =
 	Asset("SOUND", "sound/spider.fsb"),
 }
 
-SetSharedLootTable('webbedcreature_deer',
-{
-    {"meat",    1.00},
-    {"meat",    0.5},
-    {"boneshard",    1.00},
-    {"boneshard",    0.5},
-    {"bluegem",    0.5},
-    {"redgem",    0.5},
-})
-
-SetSharedLootTable('webbedcreature_beefalo',
-{
-    {"meat",    1.00},
-    {"meat",    1.00},
-    {"beefalowool",    1.00},
-    {"beefalowool",    1.00},
-    {"beefalowool",    0.5},
-    {"horn",    0.5},
-    {"poop",    0.5},
-    {"poop",    0.5},
-    {"poop",    0.5},
-})
-
-SetSharedLootTable('webbedcreature_mossling',
-{
-    {"meat",    1.00},
-    {"drumstick",    1.00},
-    {"goose_feather",    1.00},
-    {"goose_feather",    1.00},
-})
-
-SetSharedLootTable('webbedcreature_pigman',
-{
-    {"meat",    1.00},
-    {"pigskin",    1.00},
-    {"tophat",    1.00},
-})
-
-SetSharedLootTable('webbedcreature_bunnyman',
-{
-    {"meat",    1.00},
-    {"meat",    0.5},
-    {"carrot",    1.00},
-    {"carrot",    1.00},
-    {"manrabbit_tail",    1.00},
-    {"manrabbit_tail",    0.5},
-})
-
-SetSharedLootTable('webbedcreature_koalefant_summer',
-{
-    {"meat",    1.00},
-    {"meat",    1.00},
-    {"meat",    1.00},
-    {"meat",    1.00},
-    {"poop",    1.00},
-    {"poop",    0.5},
-    {"phlegm",    0.5},
-})
-
-SetSharedLootTable('webbedcreature_little_walrus',
-{
-    {"meat",    1.00},
-    {"earmuffshat",    1.00},
-    {"bluegem",    1.00},
-})
-
-SetSharedLootTable('webbedcreature_tallbird',
-{
-    {"meat",    1.00},
-    {"smallmeat",    0.5},
-    {"tallbirdegg",    1.00},
-    {"cutgrass",    1.00},
-    {"cutgrass",    0.5},
-    {"twigs",    1.00},
-    {"twigs",    0.5},
-})
-
-SetSharedLootTable('webbedcreature_warg',
-{
-    {"monstermeat",    1.00},
-    {"monstersmallmeat",    0.5},
-    {"houndstooth",    1.00},
-    {"houndstooth",    0.5},
-    {"boneshard",    1.00},
-    {"boneshard",    0.5},
-    {"bluegem",    0.5},
-    {"redgem",    0.5},
-})
-
-SetSharedLootTable('webbedcreature_krampus',
-{
-    {"monstermeat",    1.00},
-    {"monstersmallmeat",    0.5},
-    {"charcoal",    1.00},
-    {"charcoal",    0.5},
-    {"boneshard",    1.00},
-    {"krampus_sack",    0.05},
-    {"bluegem",    0.5},
-    {"redgem",    0.5},
-})
-
-SetSharedLootTable('webbedcreature_walrus',
-{
-    {"meat",    1.00},
-    {"meat",    1.00},
-	{"walrus_tusk",    0.50},
-    {"blowdart_pipe",    0.5},
-})
-
-SetSharedLootTable('webbedcreature_bishop',
-{
-    {"trinket_6",    1.00},
-})
-
-SetSharedLootTable('webbedcreature_spat',
-{
-    {"meat",    1.00},
-    {"meat",    0.5},
-    {"steelwool",    1.00},
-    {"steelwool",    0.5},
-    {"phlegm",    1.00},
-})
-
 local function SetStage(inst, stage)
 	if stage <= 3 then
 
@@ -322,6 +199,7 @@ local function OnKilled(inst)
 		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
 		inst.components.lootdropper:AddChanceLoot("meat",   0.5)
 		inst.components.lootdropper:AddChanceLoot("blowdart_pipe",    0.5)
+		inst.components.lootdropper:AddChanceLoot("walrus_tusk", 1.0)
 		end
 		if inst.size == 13 then
 		creature = "bishop"

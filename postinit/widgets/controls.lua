@@ -17,9 +17,6 @@ AddClassPostConstruct( "widgets/controls", function(self, inst)
 	local californiakingoverlay = require "widgets/californiakingoverlay"
 	self.californiakingoverlay = self:AddChild( californiakingoverlay(ownr) )
 	self.californiakingoverlay:MoveToBack() 
-	--[[local hoodedcanopyoverlay = require "widgets/hoodedcanopyoverlay" --Depricated
-	self.hoodedcanopyoverlay = self:AddChild( hoodedcanopyoverlay(ownr) )
-	self.hoodedcanopyoverlay:MoveToBack()]]
 end)
 --[[
 AddClassPostConstruct("screens/playerhud",function(inst)
