@@ -7,18 +7,11 @@ local actionhandlers =
 local events =
 {
     CommonHandlers.OnSleep(),
-    --CommonHandlers.OnFreeze(),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
-    EventHandler("attacked",
-    	function(inst)
-    		if inst.components.health:GetPercent() > 0 and not inst.sg:HasStateTag("busy") then
-    			inst.sg:GoToState("hit")
-    		end
-    	end),
     EventHandler("doattack",
     	function(inst, data)
     		if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
-    			if inst.State == "above" then
+    			if inst.State == false then
     				inst.sg:GoToState("attack", data.target)
     			else
     				inst.sg:GoToState("enter", "attack")
@@ -30,7 +23,7 @@ local events =
             if not inst.sg:HasStateTag("idle") and not inst.sg:HasStateTag("moving") then return end
 
             if inst.components.locomotor:WantsToMoveForward() then
-                if inst.State == "under" then
+                if inst.State == true then
                     if not inst.sg:HasStateTag("moving") then
                         inst.sg:GoToState("walk_pre")
                     end
@@ -56,8 +49,7 @@ local states =
         	inst.attackUponSurfacing = (nextState == "attack")
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("enter")
-            ---inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/giant_grub/emerge")
-            inst:SetState("above")
+            inst:SetAbove(inst)
             inst.SoundEmitter:KillSound("walkloop")
         end,
 
@@ -93,9 +85,9 @@ local states =
 
         events =
         {
-            EventHandler("animover", function(inst) 
-                inst:SetState("under")
-                inst.last_above_time = GetTime()
+            EventHandler("animover", function(inst)
+				print("thiscoderan")
+                inst:SetUnder(inst)
                 inst.sg:GoToState("idle") 
             end)
         },
@@ -115,9 +107,6 @@ local states =
 			end),
             
             TimeEvent(20* FRAMES, function(inst) 
-                --[[if inst.components.burnable:IsBurning() then
-                    inst.components.burnable:Extinguish()
-                end]]
                 inst.SoundEmitter:PlaySound("UCSounds/Grub/submerge") 
             end),
 
@@ -140,15 +129,15 @@ local states =
             if playanim then
                 inst.AnimState:PlayAnimation(playanim)
 
-                if inst.State == "above" then
+                if inst.State == false then
                     inst.AnimState:PushAnimation("idle", true)
-                elseif inst.State == "under" then
+                elseif inst.State == true then
                     inst.AnimState:PushAnimation("idle_under", true)
                 end
             else
-                if inst.State == "above" then
+                if inst.State == false then
                     inst.AnimState:PlayAnimation("idle", true)
-                elseif inst.State == "under" then
+                elseif inst.State == true then
                     inst.AnimState:PlayAnimation("idle_under", true)
                 end
             end       
@@ -218,8 +207,6 @@ local states =
 			inst.Physics:Stop()
 			inst.components.combat:StartAttack()
 			inst.AnimState:PlayAnimation("action")
-			--inst:DoSnowballBelch(inst)   --Add to special state later
-
 		end,
 
 		timeline =
@@ -233,7 +220,6 @@ local states =
 			inst.SoundEmitter:PlaySound("UCSounds/Grub/emerge")
 			end
 			end),
-			-- TODO: Put in a custom sound for the GIANT GRUB attack later.
 			TimeEvent(2 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Grub/attack") end),
 		},
 
@@ -242,24 +228,6 @@ local states =
 			EventHandler("animover", function(inst, data) inst.sg:GoToState("idle") end),
 		}
 	},
-
-	State
-	{
-		name = "hit",
-		tags = {"busy", "hit"},
-
-		onenter = function(inst)
-			--inst.AnimState:PlayAnimation("hit")
-            inst.SoundEmitter:PlaySound("UCSounds/Grub/hit")
-			--inst.Physics:Stop()
-		end,
-
-		events =
-		{
-			--EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
-		},
-	},
-
     State
     {
         name = "sleep",
@@ -267,7 +235,7 @@ local states =
 
         onenter = function(inst) 
             inst.components.locomotor:StopMoving()
-            if inst.State == "under" then
+            if inst.State == true then
                 inst.AnimState:PlayAnimation("enter")
                 inst.SoundEmitter:PlaySound("UCSounds/Grub/emerge")
                 inst.AnimState:PushAnimation("sleep_pre", false)
@@ -285,7 +253,7 @@ local states =
         timeline =
         {
             TimeEvent(FRAMES, function(inst)
-                inst:SetState("above")
+                inst:SetAbove(inst)
                 inst.SoundEmitter:KillSound("sniff")
                 inst.SoundEmitter:KillSound("stunned")
             end)
@@ -312,15 +280,6 @@ local states =
 
             TimeEvent(11 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Grub/sleepin") end),
             TimeEvent(37 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Grub/sleepout") end),
-
-            --TimeEvent(27*FRAMES, function(inst)
-               -- if not inst.SoundEmitter:PlayingSound("sleep") then
-               --     inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/mole/sleep", "sleep")
-               -- end
-           --end),
-           -- TimeEvent(42*FRAMES, function(inst)
-                --inst.SoundEmitter:KillSound("sleep")
-            --end),
         },
     },        
 

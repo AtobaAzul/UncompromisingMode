@@ -6,19 +6,6 @@ local assets =
 	Asset("ANIM", "anim/snowmong.zip"),
 }
 
-local prefabs =
-{
-"ice",
-"charcoal",
-"iceboomerang",
-"snowball_throwable",
-}
-
-local giantgrubsounds =
-{
-	-- TODO: Put related audio here.
-}
-
 SetSharedLootTable( 'snowmong',
 {
     {'charcoal',            1.00},
@@ -45,51 +32,27 @@ SetSharedLootTable( 'snowmong_melting',
 
 local SEE_VICTIM_DIST = 25
 
---local function IsCompleteDisguise(target)
---   return target:HasTag("has_antmask") and target:HasTag("has_antsuit")
---end
-
---local function IsPreferedTarget(target)
---	return IsCompleteDisguise(target) or (target.prefab == "antman")
---end
-
-local function SetUnderPhysics(inst)
-    if inst.isunder ~= true then
-        inst.isunder = true
+local function SetUnder(inst)
+	print("under")
+		inst.State = true
 		inst:AddTag("notdrawable")
 		inst:AddTag("INLIMBO")
         inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
         inst.Physics:ClearCollisionMask()
         inst.Physics:CollidesWith(COLLISION.WORLD)
         inst.Physics:CollidesWith(COLLISION.OBSTACLES)
-    end
 end
 
-local function SetAbovePhysics(inst)
-    if inst.isunder ~= false then
-        inst.isunder = false
+local function SetAbove(inst)
+	print("above")
+		inst.State = false
 		inst:RemoveTag("INLIMBO")
 		inst:RemoveTag("notdrawable")
         ChangeToCharacterPhysics(inst)
-    end
-end
-
-local function SetState(inst, state)
-	--"under" or "above"
-    inst.State = string.lower(state)
-    if inst.State == "under" then
-    SetUnderPhysics(inst)
-    elseif inst.State == "above" then
-    SetAbovePhysics(inst)
-    end
-end
-
-local function IsState(inst, state)
-    return inst.State == string.lower(state)
 end
 
 local function CanBeAttacked(inst, attacker)
-	return inst.State == "above"
+	return inst.State == false
 end
 
 local function Retarget(inst)
@@ -133,7 +96,6 @@ local function SnowballBelch(inst, target)
     local bigNum = 10
     local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
 	projectile:AddTag("canthit")
-	--projectile.components.wateryprotection.addwetness = TUNING.WATERBALLOON_ADD_WETNESS/2
     projectile.components.complexprojectile:SetHorizontalSpeed(speed+math.random(4,9))
     projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 	end
@@ -167,37 +129,25 @@ local function fn(Sim)
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
-    --inst.entity:AddDynamicShadow()
     inst.entity:AddNetwork()
     inst.entity:AddLightWatcher()
 
-    --inst.DynamicShadow:SetSize(1, .75)
     inst.Transform:SetFourFaced()
 
-	--shadow:SetSize(1, 0.75)
-	inst.Transform:SetFourFaced()
 	inst.Transform:SetScale(3, 3, 3)
 
 	MakeCharacterPhysics(inst, 99999, 0.5)
-	--MakePoisonableCharacter(inst)
-
 	inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
-        inst.isunder = nil --this flag is not valid on clients
-
+        inst.isunder = nil 
         return inst
     end
 	
-	
-	--MakeSmallBurnableCharacter(inst, "chest")
-	--MakeTinyFreezableCharacter(inst, "chest")
-	
-	--inst.components.freezable:SetResistance(999)
+
 
 	inst.AnimState:SetBank("snowmong")
 	inst.AnimState:SetBuild("snowmong")
-	inst.AnimState:PlayAnimation("idle", true)
 
 	inst:AddTag("scarytoprey")
     inst:AddTag("monster")
@@ -243,22 +193,22 @@ local function fn(Sim)
 	inst:SetStateGraph("SGsnowmong")
 	inst:SetBrain(brain)
 	inst.data = {}
-
-	inst.sounds = giantgrubsounds
 	
 	inst.seasontask = inst:DoPeriodicTask(3, melting)
 
 	inst.attackUponSurfacing = false
-    inst.SetUnderPhysics = SetUnderPhysics
-    inst.SetAbovePhysics = SetAbovePhysics
+	
 	inst.DoSnowballBelch = DoSnowballBelch
 	inst.OnEntitySleep = OnSleep
     inst.OnRemoveEntity = OnRemove
     inst:ListenForEvent("enterlimbo", OnRemove)
-	SetState(inst, "under")
-    inst.SetState = SetState
-    inst.IsState = IsState
+	
+	SetUnder(inst)
+	
+    inst.SetUnder = SetUnder
+	inst.SetAbove = SetAbove
+	
 	return inst
 end
 
-return Prefab("snowmong", fn, assets, prefabs)
+return Prefab("snowmong", fn, assets)
