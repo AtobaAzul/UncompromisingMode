@@ -17,6 +17,11 @@ AddClassPostConstruct( "widgets/controls", function(self, inst)
 	local californiakingoverlay = require "widgets/californiakingoverlay"
 	self.californiakingoverlay = self:AddChild( californiakingoverlay(ownr) )
 	self.californiakingoverlay:MoveToBack() 
+	local uncompromising_tooltip = require "widgets/uncompromising_tooltip"
+	self.uncompromising_tooltip = self:AddChild( uncompromising_tooltip(ownr) )
+	self.uncompromising_tooltip:MoveToBack() 
+	
+	
 end)
 --[[
 AddClassPostConstruct("screens/playerhud",function(inst)

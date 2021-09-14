@@ -9,7 +9,7 @@ local MAX_CHASE_TIME = 60
 local MAX_CHASE_DIST = 40
 local SEE_FOOD_DIST = 20
 local MAX_WANDER_DIST = 30
-local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO" }
+local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO", "planted" }
 
 local FruitBatBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
@@ -47,7 +47,7 @@ local function EatFoodAction(inst)
         local target = inst.components.inventory:FindItem(function(item)
             return inst.components.eater:CanEat(item)
         end)
-        if target ~= nil then
+        if target ~= nil and not target:HasTag("planted") then
             return BufferedAction(inst, target, ACTIONS.EAT)
         end
     end

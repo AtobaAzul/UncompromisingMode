@@ -22,7 +22,7 @@ local function healowner(inst, owner)
 	
     if (owner.components.health and owner.components.health:IsHurt())
     and (owner.components.hunger and owner.components.hunger.current > 5 )then
-        owner.components.health:DoDelta(3,false,"redamulet")
+        owner.components.health:DoDelta(TUNING.REDAMULET_CONVERSION,false,"redamulet")
         owner.components.hunger:DoDelta(-TUNING.REDAMULET_CONVERSION)
         inst.components.fueled:DoDelta(-36)
 	

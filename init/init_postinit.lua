@@ -33,7 +33,6 @@ local prefab_post = {
 	"butterfly",
     --"toadstool_cap", Moved to init_uncompromising_mod.lua
     "amulet",
-    "trap_teeth",
 	"beequeen",
 	"spiderqueen",
 	"cave_entrance_open",
@@ -160,6 +159,7 @@ local class_post = {
 	--"widgets/hoverer",
 	"widgets/moisturemeter",
 	"widgets/controls",
+	"widgets/craftslot",
 }
 
 local brain_post = {
