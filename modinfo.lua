@@ -93,7 +93,7 @@ configuration_options =
     BinaryConfig("rat_raids", "Rat Raids", "Rats will periodically be attracted to your base.", true),
     BinaryConfig("durability", "Clothing Degradation", "Winter and Rain protection clothing items become less effective when their durability drops.", true),
 	BinaryConfig("sewingkit", "Sewing Kit Tweaks", "Sewing Kit has DOUBLE uses, but repairs HALF value. Pairs very well with Clothing Degredation, lets you keep clothing in top shape more easily.", true),
-	BinaryConfig("hangyperds", "Starving Gobblers", "Gobblers are now more agressive and will attempt to take berries out of the player's inventory.", true),
+	BinaryConfig("hangyperds", "Starving Gobblers", "Gobblers are now more agressive and will attempt to take berries out of the player's inventory.", false),
 	BinaryConfig("lifeamulet", "Life Giving Amulet Changes", "The Life Giving Amulet acts like vanilla Don't Starve, only reviving when worn upon death. \nIts hunger > health conversion ticks much faster.", true),
     
 	{

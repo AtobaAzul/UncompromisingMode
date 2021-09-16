@@ -53,87 +53,14 @@ local function EatFoodAction(inst, checksafety)
     return act
 end
 
-local function EatFoodAnytime(inst)
-    return EatFoodAction(inst, false)
-end
-
 local function EatFoodWhenSafe(inst)
     return EatFoodAction(inst, true)
 end
 
-local function HasBerry(item)
-    return item.components.pickable ~= nil and (item.components.pickable.product == "berries" or item.components.pickable.product == "berries_juicy")
-end
-
-local PICKBERRIES_MUST_TAGS = { "pickable" }
-local function PickBerriesActionHungry(inst)
-    local target = FindEntity(inst, SEE_FOOD_DIST, HasBerry, PICKBERRIES_MUST_TAGS)
-    --check for scary things near the bush
-    return target ~= nil
-        and BufferedAction(inst, target, ACTIONS.PICK)
-        or nil
-end
-
-local BUSH_TAGS = { "bush" }
-local function FindNearestBush(inst)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, SEE_BUSH_DIST, BUSH_TAGS)
-    local emptybush = nil
-    for i, v in ipairs(ents) do
-        if v ~= inst and v.entity:IsVisible() and v.components.pickable ~= nil then
-            -- NOTE: if a bush that can be in the ocean gets made, we should test for that here (unless perds learn to swim!)
-            if v.components.pickable:CanBePicked() then
-                return v
-            elseif emptybush == nil then
-                emptybush = v
-            end
-        end
-    end
-    return emptybush
-        or (inst.components.homeseeker ~= nil and inst.components.homeseeker.home)
-        or nil
-end
-
-local function HomePos(inst)
-    local bush = FindNearestBush(inst)
-    return bush ~= nil and bush:GetPosition() or nil
-end
-
-local function GoHomeAction(inst)
-    local bush = FindNearestBush(inst)
-    return bush ~= nil and BufferedAction(inst, bush, ACTIONS.GOHOME, nil, bush:GetPosition()) or nil
-end
-
 local function HungryPerd(self)
-	--[[local MeHungy = WhileNode(function() return self.inst.mehungy < 5 end, "Still Hungry",
-				PriorityNode({
-					DoAction(self.inst, EatFoodAnytime, "Eat Food"),
-					DoAction(self.inst, PickBerriesActionHungry, "Pick Berries", true),
-					ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME)),
-					Wander(self.inst, HomePos, MAX_WANDER_DIST),
-					StandStill(self.inst),
-                }, .25))]]
-	local DontTouchMe = WhileNode(function() return self.inst.mehungy <= 5 and self.inst.attacked end, "don't touch me",
-							RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST))
-				
-	local MeHungy = WhileNode(function() return self.inst.mehungy <= 5 end, "Still Hungry",
-					PriorityNode({
-						DoAction(self.inst, EatFoodAnytime, "Eat Food", true),
-						DoAction(self.inst, PickBerriesActionHungry, "Pick Berries", true),
-						WhileNode( function() return self.inst.components.combat.target and self.inst.components.combat:InCooldown() end, "Dodge",
-							RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST)),
-						WhileNode(function() return TheWorld.state.isnight end, "IsNight",
-							DoAction(self.inst, GoHomeAction, "Go Home", true)),
-						ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME)),
-						RunAway(self.inst, "scarytoprey", SEE_PLAYER_DIST, STOP_RUN_DIST),
-						Wander(self.inst, HomePos, MAX_WANDER_DIST),
-					}, .25))
-					
 	local RunAtFood = DoAction(self.inst, EatFoodWhenSafe, "Eat Food", true)
-					
-    table.insert(self.bt.root.children, 2, DontTouchMe)
-    table.insert(self.bt.root.children, 3, MeHungy)
-    table.insert(self.bt.root.children, 6, RunAtFood)
+
+    table.insert(self.bt.root.children, 4, RunAtFood)
 end
 
 

@@ -33,6 +33,7 @@ local function makefn()
 	inst.entity:AddDynamicShadow()
     inst.entity:SetPristine()
 
+	inst:AddTag("NOBLOCK")
 	inst:AddTag("shadecanopysmall")
 	if not TheNet:IsDedicated() then
 		inst:AddComponent("distancefade")

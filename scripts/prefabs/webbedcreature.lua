@@ -154,10 +154,10 @@ local function OnKilled(inst)
 		inst.components.lootdropper:AddChanceLoot("phlegm",    0.5)
 		end
 		if inst.size == 7 then
-		creature = "little_walrus"
-		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
-		inst.components.lootdropper:AddChanceLoot("earmuffshat",    1.00)
-		inst.components.lootdropper:AddChanceLoot("bluegem",    1.00)
+		creature = "grassgator"
+		inst.components.lootdropper:AddChanceLoot("plantmeat",    1.00)
+		inst.components.lootdropper:AddChanceLoot("cutgrass",    1.00)
+		inst.components.lootdropper:AddChanceLoot("twigs",    1.00)
 		end
 		if inst.size == 8 then
 		creature = "tallbird"
@@ -228,6 +228,7 @@ local function OnKilled(inst)
 		inst.components.lootdropper:AddChanceLoot("livinglog",    1.00)
 		inst.components.lootdropper:AddChanceLoot("livinglog",    1.00)
 		inst.components.lootdropper:AddChanceLoot("livinglog",    0.50)
+		inst.components.lootdropper:AddChanceLoot("whisperpod",    1.0)
 		end	
 		if inst.size == 17 then
 		creature = "catcoon"
@@ -313,8 +314,8 @@ local function SetSize(inst)
 	end
 	
 	if inst.size == 7 then   --wee mactusk
-		SetSmall(inst)
-		inst.components.named:SetName("Leathery Cocoon")
+		SetMedium(inst)
+		inst.components.named:SetName("Leafy Cocoon")
 	end
 	
 	if inst.size == 8 then   --Tallbird

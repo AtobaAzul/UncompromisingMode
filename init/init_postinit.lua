@@ -171,12 +171,13 @@ local brain_post = {
 	"nofirepanic",
 	"chester",
 	"mossling",
+	"perd",
 }
 
 if GetModConfigData("hangyperds") == true then
-table.insert(stategraph_post,"perd")
-table.insert(brain_post,"perd")
-table.insert(prefab_post,"perd")
+	table.insert(stategraph_post,"perd")
+	table.insert(brain_post,"perdhungry")
+	table.insert(prefab_post,"perd")
 end
 
 if GetModConfigData("harder_deerclops") == true then

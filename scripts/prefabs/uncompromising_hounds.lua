@@ -914,6 +914,12 @@ local function fnmagma()
     return inst
 end
 
+local function OnAttackOther_Spore(inst, data)
+	if data.target ~= nil and data.target:HasTag("player") and not data.target:HasTag("hasplaguemask") then
+		data.target.components.health:DeltaPenalty(0.05)
+	end
+end
+
 local function fnspore()
     local inst = fncommon("hound", "hound_spore_ocean", nil, nil, nil, {amphibious = true})
 
@@ -931,6 +937,8 @@ local function fnspore()
     inst:ListenForEvent("timerdone", ontimerdone)
 
     inst.components.lootdropper:SetChanceLootTable('hound_spore')
+	
+	inst:ListenForEvent("onattackother", OnAttackOther_Spore)
 
     return inst
 end
