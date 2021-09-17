@@ -10,8 +10,9 @@ env.AddClassPostConstruct("widgets/craftslot", function(self)
 	function self:ShowRecipe(...)
 		self.uncomptip = self:AddChild(UncompTooltip())
 		
-		if self.uncomptip ~= nil and self.recipe ~= nil and self.recipe.name and STRINGS.UNCOMP_TOOLTIP[string.upper(self.recipe.name)] ~= nil then
+		if self.uncomptip ~= nil and self.recipe ~= nil and self.recipepopup ~= nil and self.recipe.name and STRINGS.UNCOMP_TOOLTIP[string.upper(self.recipe.name)] ~= nil then
 			self.uncomptip.item_tip = self.recipe.name
+			self.uncomptip.skins_spinner = self.recipepopup.skins_spinner or nil
 			self.uncomptip:ShowTip()
 		end
 		
@@ -21,6 +22,7 @@ env.AddClassPostConstruct("widgets/craftslot", function(self)
 	function self:HideRecipe(...)
 		if self.uncomptip ~= nil then
 			self.uncomptip.item_tip = nil
+			self.uncomptip.skins_spinner = nil
 			self.uncomptip:HideTip()
 		end
 		
