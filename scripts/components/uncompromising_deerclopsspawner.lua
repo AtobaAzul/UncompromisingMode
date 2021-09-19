@@ -108,6 +108,12 @@ local function ResetAttacks()
 end
 
 local function TryStartAttacks(killed)
+	if killed == true and #_activeplayers == 0 then
+		local attackdelay = (TheWorld.state.winterlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperwinter + 1) 
+		attackdelay = attackdelay * HASSLER_KILLED_DELAY_MULT
+		_timetoattack = GetRandomWithVariance(attackdelay, 0)
+	end
+	
     if AllowedToAttack() then
         if _activehassler == nil and _attacksperwinter > 0 and _timetoattack == nil then
             -- Shorten the time used for winter to account for the time deerclops spends stomping around

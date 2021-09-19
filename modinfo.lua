@@ -72,6 +72,17 @@ configuration_options =
 -- Core Gameplay --
 ------------------------------
     Header("Core Gameplay"),
+    {
+		name = "rattimer",
+		label = "Rat Timer",
+		hover = "Time until rats can spawn!",
+		options =
+		{
+			{description = "Lowered[1 second]", data = 1},
+			{description = "Default[50 days]", data = 24000},
+		},
+		default = 1,
+	},
 	BinaryConfig("foodregen", "Over Time Food Stats", "Health and Sanity from foods is applied over time, each food acting as a seperate stackable health or sanity regen buff.", true),
     BinaryConfig("caved", "[IMPORTANT] Cave Config", "Switches some things around so players who can't run Caves can still enjoy the game. ENABLE IF CAVES ARE ENABLED!", true),
 	{

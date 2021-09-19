@@ -147,6 +147,9 @@ TUNING.DSTU =
     ----------------------------------------------------------------------------
     --Mob changes
     ----------------------------------------------------------------------------
+	--ratraid
+	RATRAID_TIMERSTART = GetModConfigData("rattimer"),
+	
     --Generics
     MONSTER_BAT_CAVE_NR_INCREASE = 3,
     CAVE_ENTRANCE_BATS_SPAWN_PERIOD_UM = 0.8,

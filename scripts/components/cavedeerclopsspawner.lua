@@ -108,12 +108,21 @@ local function ResetAttacks()
 end
 
 local function TryStartAttacks(killed)
+	if killed == true and #_activeplayers == 0 then
+		local attackdelay = (TheWorld.state.winterlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperwinter + 1) 
+		attackdelay = attackdelay * HASSLER_KILLED_DELAY_MULT
+		_timetoattack = GetRandomWithVariance(attackdelay, 0)
+	end
+			
     if AllowedToAttack() then
         if _activehassler == nil and _attacksperwinter > 0 and _timetoattack == nil then
             -- Shorten the time used for winter to account for the time deerclops spends stomping around
             -- Then add one to _attacksperwinter to shift the attacks so the last attack isn't right when the season changes to spring
-            local attackdelay = (TheWorld.state.winterlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperwinter + 1) 
-            if killed == true then
+            
+			
+			local attackdelay = (TheWorld.state.winterlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperwinter + 1) 
+            
+			if killed == true then
                 attackdelay = attackdelay * HASSLER_KILLED_DELAY_MULT
             end
             -- Remove randomization in case that shifts it too far
@@ -250,6 +259,7 @@ local function OnStoreHassler(src, hassler)
 end
 
 local function OnHasslerKilled(src, hassler)
+	print("he die")
 	_activehassler = nil
 	TryStartAttacks(true)
 end

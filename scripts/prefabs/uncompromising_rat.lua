@@ -1072,7 +1072,7 @@ local function MakeScoutBurrow(inst)
 		
 		if i >= 8 then
 			print("NO FUCKING SPACE SHITBOI")
-			inst.components.timer:StartTimer("scoutingparty", 40)
+			inst.components.timer:StartTimer("scoutingparty", 1920 + math.random(480))
 		end
 	end
 end
@@ -1196,8 +1196,7 @@ local function fn_burrow()
 	inst.components.herd.updateposincombat = false
 	
 	inst:AddComponent("timer")
-    inst.components.timer:StartTimer("scoutingparty", 40)
-    --inst.components.timer:StartTimer("scoutingparty", 1920 + math.random(480))
+    inst.components.timer:StartTimer("scoutingparty", 1920 + math.random(480))
 	inst:ListenForEvent("timerdone", OnTimerDone)
 	
 	inst:AddComponent("periodicspawner")

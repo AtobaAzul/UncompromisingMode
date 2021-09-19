@@ -165,8 +165,15 @@ local function onkilledbyother(inst, attacker)
 		for i, v in ipairs(ents) do
 			if v ~= attacker and v.components.sanity ~= nil and v.components.sanity:IsInsane() then
 				inst.halfreward = ((v.components.sanity.max * 0.25) + 10) / 2
+				inst.quarterreward = ((v.components.sanity.max * 0.25) + 10) / 4
 				
 				v.components.sanity:DoDelta(inst.halfreward)
+				
+				if v.components.sanity:IsInsane() then
+					v.components.sanity:DoDelta(inst.halfreward)
+				else
+					v.components.sanity:DoDelta(inst.quarterreward)
+				end
 			end
 		end
     end

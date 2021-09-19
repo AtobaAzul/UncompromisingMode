@@ -2,7 +2,8 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local function DeerclopsDeathRPC(inst)
-	if inst.deerdeathtask then
+	if inst.deerdeathtask == nil or inst.deerdeathtask then
+		print("FOREST DEATH")
 		inst.deerdeathtask = false
 			inst:DoTaskInTime(5, function(inst)
 				inst.deerdeathtask = true
@@ -12,7 +13,8 @@ local function DeerclopsDeathRPC(inst)
 end
 
 local function DeerclopsRemovedRPC(inst)
-	if inst.deerremovedtask then
+	if inst.deerremovedtask == nil or inst.deerremovedtask then
+		print("FOREST REMOVED")
 		inst.deerremovedtask = false
 			inst:DoTaskInTime(5, function(inst)
 				inst.deerremovedtask = true
@@ -22,7 +24,8 @@ local function DeerclopsRemovedRPC(inst)
 end
 
 local function DeerclopsStoredRPC(inst)
-	if inst.deerstoredtask then
+	if inst.deerstoredtask == nil or inst.deerstoredtask then
+		print("FOREST STORED")
 		inst.deerstoredtask = false
 			inst:DoTaskInTime(5, function(inst)
 				inst.deerstoredtask = true
@@ -44,7 +47,8 @@ env.AddPrefabPostInit("forest", function(inst)
 end)
 
 local function DeerclopsDeathRPC_caves(inst)
-	if inst.deerdeathtask then
+	if inst.deerdeathtask == nil or inst.deerdeathtask then
+		print("CAVE DEATH")
 		inst.deerdeathtask = false
 			inst:DoTaskInTime(5, function(inst)
 				inst.deerdeathtask = true
@@ -54,7 +58,8 @@ local function DeerclopsDeathRPC_caves(inst)
 end
 
 local function DeerclopsRemovedRPC_caves(inst)
-	if inst.deerremovedtask then
+	if inst.deerremovedtask == nil or inst.deerremovedtask then
+		print("CAVE REMOVED")
 		inst.deerremovedtask = false
 			inst:DoTaskInTime(5, function(inst)
 				inst.deerremovedtask = true
@@ -64,7 +69,8 @@ local function DeerclopsRemovedRPC_caves(inst)
 end
 
 local function DeerclopsStoredRPC_caves(inst)
-	if inst.deerstoredtask then
+	if inst.deerstoredtask == nil or inst.deerstoredtask then
+		print("CAVE STORED")
 		inst.deerstoredtask = false
 			inst:DoTaskInTime(5, function(inst)
 				inst.deerstoredtask = true

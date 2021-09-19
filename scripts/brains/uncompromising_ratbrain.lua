@@ -43,22 +43,39 @@ local function StealAction(inst)
 	{ "_inventoryitem", "preparedfood" },
 	{ "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
 	
-	if targetpriority ~= nil and (not inst.components.inventory:IsFull() or not inst:HasTag("packrat") and inst._item ~= nil and not inst._item:HasTag("equippable")) then
-		return targetpriority ~= nil
-			and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
-			or nil
-	elseif targetpriority_secondary ~= nil and (not inst.components.inventory:IsFull() or not inst:HasTag("packrat") and inst._item ~= nil and not inst._item:HasTag("equippable") and not inst._item:HasTag("preparedfood")) then
-		return targetpriority_secondary ~= nil
-			and BufferedAction(inst, targetpriority_secondary, ACTIONS.PICKUP)
-			or nil
-	elseif not inst.components.inventory:IsFull() then
-		local target = FindEntity(inst, SEE_DIST,
-		CanSteal,
-		{ "_inventoryitem" },
-		{ "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
-		return target ~= nil
-			and BufferedAction(inst, target, ACTIONS.PICKUP)
-			or nil
+	local target = FindEntity(inst, SEE_DIST,
+	CanSteal,
+	{ "_inventoryitem" },
+	{ "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
+			
+	if inst:HasTag("packrat") and not inst.components.inventory:IsFull() then
+		if targetpriority ~= nil then
+			return targetpriority ~= nil
+				and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
+				or nil
+		elseif targetpriority_secondary ~= nil then
+			return targetpriority_secondary ~= nil
+				and BufferedAction(inst, targetpriority_secondary, ACTIONS.PICKUP)
+				or nil
+		else
+			return target ~= nil
+				and BufferedAction(inst, target, ACTIONS.PICKUP)
+				or nil
+		end
+	else
+		if targetpriority ~= nil and inst._item ~= nil and not inst._item:HasTag("_equippable") then
+			return targetpriority ~= nil
+				and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
+				or nil
+		elseif targetpriority_secondary ~= nil and inst._item ~= nil and not inst._item:HasTag("_equippable") and not inst._item:HasTag("preparedfood") then
+			return targetpriority_secondary ~= nil
+				and BufferedAction(inst, targetpriority_secondary, ACTIONS.PICKUP)
+				or nil
+		elseif not inst.components.inventory:IsFull() then
+			return target ~= nil
+				and BufferedAction(inst, target, ACTIONS.PICKUP)
+				or nil
+		end
 	end
 end
 
