@@ -40,7 +40,7 @@ env.AddPrefabPostInit("terrorbeak", function(inst)
 		return
 	end
 	
-    --inst.sanityreward = TUNING.SANITY_LARGE * 0.8
+    inst.sanityreward = TUNING.SANITY_MEDLARGE
 	
 	if inst.components.combat ~= nil then
         inst.Oldonkilledbyother = inst.components.combat.onkilledbyother
@@ -73,6 +73,37 @@ local function LaunchProjectile(inst)
 end
 
 
+local function onkilledbyother_crawlinghorror(inst, attacker)
+    if attacker ~= nil and attacker.components.sanity ~= nil then
+		print(inst.sanityreward)
+		
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local ents = TheSim:FindEntities(x, y, z, 15, { "player" }, { "playerghost" } )
+		
+		inst.halfreward =  TUNING.SANITY_SMALL / 2
+		
+		if inst.sanityreward ~= nil then
+			inst.halfreward = inst.sanityreward / 2
+		end
+		
+		if inst.sanityreward ~= nil then
+			inst.quarterreward = inst.sanityreward / 4
+		end
+		
+		for i, v in ipairs(ents) do
+			if v ~= attacker and v.components.sanity ~= nil then
+				if v.components.sanity:IsInsane() then
+					v.components.sanity:DoDelta(inst.halfreward)
+				else
+					v.components.sanity:DoDelta(inst.quarterreward)
+				end
+			end
+		end
+    end
+	
+	return inst.Oldonkilledbyother_crawlinghorror(inst, attacker)
+end
+
 env.AddPrefabPostInit("crawlinghorror", function(inst)
 	inst:AddTag("crawlinghorror")
 
@@ -80,11 +111,11 @@ env.AddPrefabPostInit("crawlinghorror", function(inst)
 		return
 	end
 	
-    --inst.sanityreward = TUNING.SANITY_SMALL
+    inst.sanityreward = TUNING.SANITY_SMALL
 	
 	if inst.components.combat ~= nil then
-        inst.Oldonkilledbyother = inst.components.combat.onkilledbyother
-		inst.components.combat.onkilledbyother = onkilledbyother
+        inst.Oldonkilledbyother_crawlinghorror = inst.components.combat.onkilledbyother
+		inst.components.combat.onkilledbyother = onkilledbyother_crawlinghorror
 	end
 	
     inst.LaunchProjectile = LaunchProjectile
