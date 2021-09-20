@@ -23,6 +23,9 @@ local component_post = {
 	--"carnivalevent",
 	"lootdropper",
 	"ambientsound",
+	"foodaffinity",
+	"eater",
+	"edible",
 }
 
 local prefab_post = {
