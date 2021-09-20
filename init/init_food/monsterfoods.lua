@@ -1,6 +1,7 @@
 --local variables
 local SpawnPrefab = GLOBAL.SpawnPrefab
 local TUNING = GLOBAL.TUNING
+local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
 
 --------------------------------------------------
 
@@ -24,6 +25,28 @@ for k, v in pairs(spiders) do
         v.components.lootdropper.numrandomloot = 1
     end)
 end
+
+AddPrefabPostInit("rabbit", function(inst)
+    local _rabbitloot = UpvalueHacker.GetUpvalue(GLOBAL.Prefabs.rabbit.fn, "LootSetupFunction", "SetRabbitLoot", "rabbitloot")
+    local _IsCrazyGuy = UpvalueHacker.GetUpvalue(GLOBAL.Prefabs.rabbit.fn, "LootSetupFunction", "IsCrazyGuy")
+        
+    local function SetBeardlingLoot(lootdropper)
+        if lootdropper.loot == _rabbitloot and not lootdropper.inst._fixedloot then
+            lootdropper:SetLoot(nil)
+            lootdropper:AddRandomLoot("beardhair", .5)
+            lootdropper:AddRandomLoot("monstersmallmeat", 1)
+            lootdropper:AddRandomLoot("nightmarefuel", 1)
+            lootdropper.numrandomloot = 1
+        end
+    end
+
+    local function GetCookProductFn(inst, cooker, chef)
+        return _IsCrazyGuy(chef) and "cookedmonstersmallmeat" or "cookedsmallmeat"
+    end
+
+    UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.rabbit.fn, SetBeardlingLoot, "LootSetupFunction", "SetBeardlingLoot")
+    UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.rabbit.fn, GetCookProductFn, "GetCookProductFn")
+end)
 
 --------------------------------------------------
 --Haunting Morsels and Small Jerkies will transform them into Monster Morsels and Small Monster Jerkies
