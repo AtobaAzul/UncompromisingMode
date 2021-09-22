@@ -428,6 +428,8 @@ Assets = {
 	Asset("ANIM", "anim/swap_um_beartrap_tooth.zip"),
 	Asset("ANIM", "anim/swap_um_beartrap_gold.zip"),
 	
+	Asset("ANIM", "anim/shadowvortex.zip"),
+	
 	
 	Asset("ANIM", "anim/carnival_host_death.zip"),
 	Asset("ANIM", "anim/hat_corvus.zip"),

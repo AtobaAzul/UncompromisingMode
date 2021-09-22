@@ -261,5 +261,7 @@ return {
 	"ratacombs_totem",
 	"ratgashole",
 	
+	"shadowvortex",
+	
 	--"moon_deerclops",
 }
