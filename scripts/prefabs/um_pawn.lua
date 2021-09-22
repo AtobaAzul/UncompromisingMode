@@ -363,7 +363,7 @@ local function pawn_common(pawntype)
     inst.components.combat.hiteffectsymbol = "chest"
 	
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(150)
+    inst.components.health:SetMaxHealth(100)
 
     MakeTinyFreezableCharacter(inst, "chest")
 
