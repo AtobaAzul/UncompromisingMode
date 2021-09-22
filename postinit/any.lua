@@ -40,6 +40,7 @@ local IMPASSABLES = {
 	["spiderden"] = true,
 	["spiderden_2"] = true,
 	["spiderden_3"] = true,
+	["klaus_sack"] = true,
 }
 local IMPASSABLES_STATUES = {
 	["carrot_oversized"] = true,
