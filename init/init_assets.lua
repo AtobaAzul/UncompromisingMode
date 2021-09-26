@@ -429,6 +429,23 @@ Assets = {
 	Asset("ANIM", "anim/swap_um_beartrap_gold.zip"),
 	
 	Asset("ANIM", "anim/shadowvortex.zip"),
+	Asset("ANIM", "anim/nervoustick.zip"),
+	Asset("IMAGE", "images/inventoryimages/nervoustick_1.tex"),
+	Asset("ATLAS", "images/inventoryimages/nervoustick_1.xml"),
+	Asset("IMAGE", "images/inventoryimages/nervoustick_2.tex"),
+	Asset("ATLAS", "images/inventoryimages/nervoustick_2.xml"),
+	Asset("IMAGE", "images/inventoryimages/nervoustick_3.tex"),
+	Asset("ATLAS", "images/inventoryimages/nervoustick_3.xml"),
+	Asset("IMAGE", "images/inventoryimages/nervoustick_4.tex"),
+	Asset("ATLAS", "images/inventoryimages/nervoustick_4.xml"),
+	Asset("IMAGE", "images/inventoryimages/nervoustick_5.tex"),
+	Asset("ATLAS", "images/inventoryimages/nervoustick_5.xml"),
+	Asset("IMAGE", "images/inventoryimages/nervoustick_6.tex"),
+	Asset("ATLAS", "images/inventoryimages/nervoustick_6.xml"),
+	Asset("IMAGE", "images/inventoryimages/nervoustick_7.tex"),
+	Asset("ATLAS", "images/inventoryimages/nervoustick_7.xml"),
+	Asset("IMAGE", "images/inventoryimages/nervoustick_8.tex"),
+	Asset("ATLAS", "images/inventoryimages/nervoustick_8.xml"),
 	
 	
 	Asset("ANIM", "anim/carnival_host_death.zip"),

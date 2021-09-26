@@ -11,58 +11,6 @@ local prefabs =
     "nightlight_flame",
 }
 
-local function Disappear(inst)
-    if inst.lighttask ~= nil then
-        inst.lighttask:Cancel()
-        inst.lighttask = nil
-    end
-	
-    inst:Remove()
-end
-
-local function OnInit(inst)
-    if inst.LightWatcher:IsInLight() then
-        inst:Remove()
-    else
-        inst.entity:Show()
-    end
-end
---[[
-STRINGS.CHARACTERS.SHADOWTALKER.SHADOWTALKER = {
-        "MY EXPERIMENTS ARE ALL FAILURES",
-        "THE THRONE WAS NO ESCAPE",
-        "THERE HAS TO BE A SCIENTIFIC SOLUTION HERE",
-    }
-]]
-local function SetPlayer(inst)
-	if inst.speech ~= nil and math.random() >= 0.5 then
-		if inst.speech:HasTag("bearded") and not inst.speech:HasTag("spiderwhisperer") and not inst.speech:HasTag("polite") then
-			local speechchance = math.random()
-			if speechchance >= 0.66 then
-				inst.components.talker:Say("MY EXPERIMENTS ARE ALL FAILURES")
-			elseif speechchance < 0.66 and speechchance >= 0.33 then
-				inst.components.talker:Say("THE THRONE WAS NO ESCAPE")
-			elseif speechchance < 0.33 then
-				inst.components.talker:Say("THERE HAS TO BE A SCIENTIFIC SOLUTION HERE")
-			end
-		else
-			inst.components.talker:Say(GetString(inst.speech, "SHADOWTALKER"))
-		end
-		inst:DoTaskInTime(8, SetPlayer)
-	else
-		--inst.components.npc_talker:Say(GetString(inst, "TAUNT_PLAYER_GENERIC"))
-		--inst.components.talker:Say(GetString(TheWorld, "TAUNT_PLAYER_GENERIC"))
-		--inst.components.talker:Say(STRINGS.TAUNT_PLAYER_GENERIC[math.random(3)])
-		--if math.random() <= 0.01 then
-			--inst.components.talker:Say("zarklord is epic")
-		--else
-			inst.components.talker:Say(GetString(inst, "SHADOWTALKER"))
-		--end
-		inst:DoTaskInTime(8, SetPlayer)
-		--print(STRINGS.SHADOWTALKER_TAUNT_PLAYER_GENERIC)
-	end
-end
-
 local function Beat(inst)
     inst.SoundEmitter:PlaySound("dontstarve/sanity/shadow_heart")
 end
@@ -72,7 +20,18 @@ local function Vac(inst)
 	local theta = inst.Transform:GetRotation()
 	local TheAngle = 360 * DEGREES
 	
-	local ents = TheSim:FindEntities(x, y, z, 10 * inst.Transform:GetScale(), { "player" })
+	
+	
+	
+	local damageents = TheSim:FindEntities(x, y, z, 2.75 * inst.Transform:GetScale(), { "player" }, { "playerghost" })
+	local ents = TheSim:FindEntities(x, y, z, 15 * inst.Transform:GetScale(), { "player" }, { "playerghost" })
+	local items = TheSim:FindEntities(x, y, z, 15 * inst.Transform:GetScale(), { "_inventoryitem" }, { "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach"--[[, "_container"]] } )
+	
+	for i, v in ipairs(damageents) do
+		if v.components.health ~= nil then
+			v.components.health:DoDelta(-0.1 * inst.Transform:GetScale())
+		end
+	end
 	
 	for i, v in ipairs(ents) do
 		local px, py, pz = v.Transform:GetWorldPosition()
@@ -81,14 +40,49 @@ local function Vac(inst)
 		local velx = math.cos(rad) --* 4.5
 		local velz = -math.sin(rad) --* 4.5
 		
-		local dx, dy, dz = px + ((FRAMES * 1.5) * velx * inst.Transform:GetScale()), 0, pz + ((FRAMES * 1.5) * velz * inst.Transform:GetScale())
+		local multiplierplayer = inst:GetDistanceSqToPoint(px, py, pz)
+		print("Multiplier")
+		print(multiplierplayer)
+		
+		multiplierplayer = (multiplierplayer * inst.Transform:GetScale()) / 50
+		print("Divide by 10")
+		print(multiplierplayer)
+		
+		if multiplierplayer > 10 then
+			multiplierplayer = 10
+		print("Too Far")
+		print(multiplierplayer)
+		elseif multiplierplayer < 1.5 then
+			multiplierplayer = 1.5
+		print("Too Close")
+		print(multiplierplayer)
+		end
+		
+		local dx, dy, dz = px + (((FRAMES * 4) * velx) / multiplierplayer) * inst.Transform:GetScale(), 0, pz + (((FRAMES * 4) * velz) / multiplierplayer) * inst.Transform:GetScale()
 			
-		if dx ~= nil then
-			--print(displacement)
-			--v.Transform:SetPosition(displacement.x, py, displacement.z)
+		local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
+		local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
+		if dx ~= nil and (ground or boat) then
 			v.Transform:SetPosition(dx, dy, dz)
-			--v.Transform:SetPosition(telex, py, telez)
-			--v.Transform:SetPosition(targetpos.x, py, targetpos.z)
+		end
+	end
+	
+	for i, k in ipairs(items) do
+		local gx, gy, gz = k.Transform:GetWorldPosition()
+			
+		local rad = math.rad(k:GetAngleToPoint(x, y, z))
+		local velx = math.cos(rad) --* 4.5
+		local velz = -math.sin(rad) --* 4.5
+		
+		local multiplieritem = inst:GetDistanceSqToPoint(gx, gy, gz)
+		print(multiplieritem)
+		
+		local nx, ny, nz = gx + (FRAMES * velx * inst.Transform:GetScale()) / 2, 0, gz + (FRAMES * velz * inst.Transform:GetScale()) / 2
+			
+		local ground = TheWorld.Map:IsPassableAtPoint(nx, ny, nz)
+		local boat = TheWorld.Map:GetPlatformAtPoint(nx, nz)
+		if nx ~= nil and (ground or boat) then
+			k.Transform:SetPosition(nx, ny, nz)
 		end
 	end
 end
@@ -99,16 +93,16 @@ end
 
 local function shrink_mini(inst)
 	--inst.sg:GoToState("run")
-	inst.components.sizetweener:StartTween(0.1, 3, Disappear_mini)
+	inst.components.sizetweener:StartTween(0.1, 8, Disappear_mini)
 end
 
 local function shrinktask_mini(inst)
-	inst:DoTaskInTime(8, shrink_mini)
+	inst:DoTaskInTime(10, shrink_mini)
 end
 		
 local function grow_mini(inst, time, startsize, endsize)
 	inst.Transform:SetScale(0.1, 0.1, 0.1)
-	inst.components.sizetweener:StartTween(1.5, 8, shrinktask_mini)
+	inst.components.sizetweener:StartTween(1.8, 15, shrinktask_mini)
 end
 
 
@@ -136,8 +130,10 @@ local function fn()
     inst.LightWatcher:SetLightThresh(.2)
     inst.LightWatcher:SetDarkThresh(.19)
 	--inst:ListenForEvent("enterlight", Disappear)
+	inst.AnimState:SetMultColour(1, 1, 1, .8)
 	
     inst.entity:SetPristine()
+	
     if not TheWorld.ismastersim then
         return inst
     end
@@ -146,11 +142,6 @@ local function fn()
 	
 	inst.grow_mini = grow_mini
 	inst:grow_mini()
-	--inst.entity:Hide()
-
-	--inst:DoTaskInTime(0, OnInit)
-
-    --inst:ListenForEvent("enterlight", Disappear)
 	
 	inst:DoPeriodicTask(FRAMES, Vac)
 	inst:DoPeriodicTask(1.5, Beat)

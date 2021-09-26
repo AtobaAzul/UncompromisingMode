@@ -262,6 +262,7 @@ return {
 	"ratgashole",
 	
 	"shadowvortex",
+	"nervoustick",
 	
 	--"moon_deerclops",
 }
