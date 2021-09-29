@@ -130,6 +130,7 @@ inst.sg:GoToState("preleapattack")
 end
 end
 end
+
 local function DoMortar(inst)
 if inst.components.combat ~= nil and inst.components.combat.target and not inst.components.health:IsDead() then
 if math.random()>0 then
@@ -137,6 +138,7 @@ inst.sg:GoToState("lobprojectile")
 end
 end
 end
+
 local function TryPowerMove(inst,data)
 if not inst.sg:HasStateTag("busy") and (inst.components.health ~= nil and not inst.components.health:IsDead()) and (inst.components.combat ~= nil and inst.components.combat.target ~= nil) and not inst.sg:HasStateTag("attack") then
 	if data ~= nil and data.name == "pounce" then
