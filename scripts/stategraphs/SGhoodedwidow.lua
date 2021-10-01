@@ -351,8 +351,11 @@ local states=
 			inst:ForceFacePoint(inst.components.combat.target:GetPosition())
 			end
             inst.components.locomotor:Stop()
+			if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
+				inst.oldtarget = inst.components.combat.target
+			end
 			if inst.brain then
-			inst.brain:Stop()
+				inst.brain:Stop()
 			end
 			inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
 			inst.AnimState:PlayAnimation("leap", true)
@@ -382,6 +385,9 @@ local states=
 			
 			if inst.brain then
 			inst.brain:Start()
+			end
+			if inst.oldtarget ~= nil and inst.components.combat ~= nil and inst.oldtarget:IsValid() then
+				inst.components.combat:SuggestTarget(inst.oldtarget)
 			end
 			inst.sg:GoToState("idle") end),
         },       
