@@ -11,21 +11,47 @@ local prefabs =
     "nightlight_flame",
 }
 
-local function Disappear(inst)
-    if inst.lighttask ~= nil then
-        inst.lighttask:Cancel()
-        inst.lighttask = nil
-    end
+local function CheckForLight(inst, doanim)
+	if inst.LightWatcher:IsInLight() then
+		inst.entity:Hide()
+		inst.components.talker:ShutUp()
+	else
+		inst.entity:Show()
+		
+		if doanim ~= nil and doanim then
+			inst.AnimState:PlayAnimation("appear_"..inst.animname)
+			inst.AnimState:PushAnimation("idle_"..inst.animname, true)
+		end
+	end
+end
+
+local function RepositionToDarkness(inst)
+	if TheWorld.state.isnight then
+		if inst.speech ~= nil then
+			local x, y, z = inst.speech.Transform:GetWorldPosition()
+			local x1 = x + math.random(-15, 15)
+			local z1 = z + math.random(-15, 15)
+			--local light = TheSim:GetLightAtPoint(x1, 0, z1)
+			if inst.LightWatcher:IsInLight() or TheSim:FindEntities(x1, 0, z1, 20, {"player"}) == 0 then
+				inst.Transform:SetPosition(x1, 0, z1)
+				if not inst.LightWatcher:IsInLight() then
+					inst.AnimState:PlayAnimation("appear_"..inst.animname)
+					inst.AnimState:PushAnimation("idle_"..inst.animname, true)
+				end
+			end
+		else
+			print("speech nil")
+			inst.speech = GetClosestInstWithTag({"player"}, inst, 50)
+		end
+	else
+		inst:Remove()
+	end
 	
-    inst:Remove()
+	CheckForLight(inst)
 end
 
 local function OnInit(inst)
-    if inst.LightWatcher:IsInLight() then
-        inst:Remove()
-    else
-        inst.entity:Show()
-    end
+	CheckForLight(inst, true)
 end
 --[[
 STRINGS.CHARACTERS.SHADOWTALKER.SHADOWTALKER = {
@@ -34,33 +60,30 @@ STRINGS.CHARACTERS.SHADOWTALKER.SHADOWTALKER = {
         "THERE HAS TO BE A SCIENTIFIC SOLUTION HERE",
     }
 ]]
-local function SetPlayer(inst)
-	if inst.speech ~= nil and math.random() >= 0.5 then
-		if inst.speech:HasTag("bearded") and not inst.speech:HasTag("spiderwhisperer") and not inst.speech:HasTag("polite") then
-			local speechchance = math.random()
-			if speechchance >= 0.66 then
-				inst.components.talker:Say("MY EXPERIMENTS ARE ALL FAILURES")
-			elseif speechchance < 0.66 and speechchance >= 0.33 then
-				inst.components.talker:Say("THE THRONE WAS NO ESCAPE")
-			elseif speechchance < 0.33 then
-				inst.components.talker:Say("THERE HAS TO BE A SCIENTIFIC SOLUTION HERE")
+local function Talk(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	
+	if not inst.LightWatcher:IsInLight() then
+		if inst.speech ~= nil and math.random() >= 0.5  then
+			if inst.speech:HasTag("bearded") and not inst.speech:HasTag("spiderwhisperer") and not inst.speech:HasTag("polite") then
+				local speechchance = math.random()
+				
+				if speechchance >= 0.66 then
+					inst.components.talker:Say("MY EXPERIMENTS ARE ALL FAILURES")
+				elseif speechchance < 0.66 and speechchance >= 0.33 then
+					inst.components.talker:Say("THE THRONE WAS NO ESCAPE")
+				elseif speechchance < 0.33 then
+					inst.components.talker:Say("THERE HAS TO BE A SCIENTIFIC SOLUTION HERE")
+				end
+			else
+				inst.components.talker:Say(GetString(inst.speech, "SHADOWTALKER"))
 			end
 		else
-			inst.components.talker:Say(GetString(inst.speech, "SHADOWTALKER"))
-		end
-		inst:DoTaskInTime(8, SetPlayer)
-	else
-		--inst.components.npc_talker:Say(GetString(inst, "TAUNT_PLAYER_GENERIC"))
-		--inst.components.talker:Say(GetString(TheWorld, "TAUNT_PLAYER_GENERIC"))
-		--inst.components.talker:Say(STRINGS.TAUNT_PLAYER_GENERIC[math.random(3)])
-		--if math.random() <= 0.01 then
-			--inst.components.talker:Say("zarklord is epic")
-		--else
 			inst.components.talker:Say(GetString(inst, "SHADOWTALKER"))
-		--end
-		inst:DoTaskInTime(8, SetPlayer)
-		--print(STRINGS.SHADOWTALKER_TAUNT_PLAYER_GENERIC)
+		end
 	end
+	
+	inst:DoTaskInTime(8, Talk)
 end
 
 local function fn()
@@ -80,7 +103,6 @@ local function fn()
 
     inst.LightWatcher:SetLightThresh(.2)
     inst.LightWatcher:SetDarkThresh(.19)
-    inst:ListenForEvent("enterlight", Disappear)
 	
     inst.entity:SetPristine()
 	
@@ -115,13 +137,14 @@ local function fn()
 
 	inst:DoTaskInTime(0, OnInit)
 
-    inst:ListenForEvent("enterlight", Disappear)
+    inst:ListenForEvent("enterlight", RepositionToDarkness)
 	
     inst:AddComponent("playerprox")
     inst.components.playerprox:SetDist(5, 8)
-    inst.components.playerprox:SetOnPlayerNear(Disappear)
+    inst.components.playerprox:SetOnPlayerNear(RepositionToDarkness)
 	
-	inst:DoTaskInTime(0, SetPlayer)
+	inst:DoPeriodicTask(8, Talk)
+	inst:DoPeriodicTask(1, RepositionToDarkness)
 	
     inst.persists = false
 	

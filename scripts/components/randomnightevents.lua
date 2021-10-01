@@ -12,6 +12,8 @@ assert(TheWorld.ismastersim, "RandomNightEvents should not exist on client")
 self.inst = inst
 local _targetplayer = nil
 local _activeplayers = {}
+self.storedrne = {}
+self.storedwildrne = {}
 local STRUCTURE_DIST = 20
 self.wildevents = nil
 self.baseevents = nil
@@ -630,7 +632,7 @@ local function SpawnFissuresFunction(player)
 	local x2 = x + math.random(-10, 10)
 	local z2 = z + math.random(-10, 10)
 	
-	if TheWorld.isnight then
+	if TheWorld.state.isnight then
 		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
 			SpawnPrefab("rnefissure").Transform:SetPosition(x2, 0, z2)
 		else
@@ -1019,23 +1021,10 @@ end
 
 local function SpawnShadowTalker(player, mathmin, mathmax)
 	if TheWorld.state.isnight then
-		local randommin = mathmin or 5
-		local randommax = mathmax or 10
-		player:DoTaskInTime(1+math.random(randommin, randommax), function()
-			local radius = 5 + math.random() * 10
-			local theta = math.random() * 2 * PI
-			local x, y, z = player.Transform:GetWorldPosition()
-			local x1 = x + radius * math.cos(theta)
-			local z1 = z - radius * math.sin(theta)
-			local light = TheSim:GetLightAtPoint(x1, 0, z1)
-			
-			if light <= .1 and #TheSim:FindEntities(x1, 0, z1, 50, {"shadowtalker"}) < 1 then
-				local ent = SpawnPrefab("shadowtalker")
-				ent.Transform:SetPosition(x1, 0, z1)
-				ent.speech = player
-			end
-			
-			player:DoTaskInTime(0.1, function(player) SpawnShadowTalker(player, 1, 1) end)
+		player:DoTaskInTime(1+math.random(5, 10), function()
+			local ent = SpawnPrefab("shadowtalker")
+			ent.Transform:SetPosition(player.Transform:GetWorldPosition())
+			ent.speech = player
 		end)
 	end
 end
@@ -1095,17 +1084,59 @@ local function SpawnGingerDeadPig(player)
 		end)
 	end)
 end
+
+local function SpawnMushbooms(player)
+	print("SpawnSkitts")
+	local skitttime = 10 * math.random() * 2
+	if TheWorld.state.isnight then
+		player:DoTaskInTime(skitttime, function()
+			local x, y, z = player.Transform:GetWorldPosition()
+			local num_bombs = 20
+			for i = 1, num_bombs do
+				player:DoTaskInTime(i / 1.5, function()
+					local skitts = SpawnPrefab("mushroombomb")
+					skitts.Transform:SetPosition(x + math.random(-10,10), y, z + math.random(-10,10))
+				end)
+			end
+		end)
+	end
+end
+
+
 ---------------------------------------------------
 ---RNE list above
 ---------------------------------------------------
+
 local function AddWildEvent(name, weight)
     if not self.wildevents then
         self.wildevents = {}
         self.totalrandomwildweight = 0
     end
 
-    table.insert(self.wildevents, { name = name, weight = weight })
-    self.totalrandomwildweight = self.totalrandomwildweight + weight
+	if not table.contains(self.wildevents, name) then
+		table.insert(self.wildevents, { name = name, weight = weight })
+		self.totalrandomwildweight = self.totalrandomwildweight + weight
+	else	
+		print("dupe event")
+	end
+end
+
+local function RemoveWildEvent(name, weight)
+    if not self.wildevents then
+        self.wildevents = {}
+        self.totalrandomwildweight = 0
+    end
+	
+	for k, v in pairs(self.wildevents) do
+		if name == v.name then
+	print(name)
+			table.remove(self.wildevents, k)
+			print(k)
+			self.totalrandomwildweight = self.totalrandomwildweight - weight
+			print("reduce rneweight"..weight)
+			print(self.totalrandomwildweight)
+		end
+	end
 end
 
 local function AddSecondaryWildEvent(name, weight)
@@ -1123,9 +1154,33 @@ local function AddBaseEvent(name, weight)
         self.baseevents = {}
         self.totalrandombaseweight = 0
     end
+	print(name)
+	if not table.contains(self.baseevents, name) then
+		table.insert(self.baseevents, { name = name, weight = weight })
+		self.totalrandombaseweight = self.totalrandombaseweight + weight
+		print("rneweight"..weight)
+			print(self.totalrandombaseweight)
+	else	
+		print("dupe event")
+	end
+end
 
-    table.insert(self.baseevents, { name = name, weight = weight })
-    self.totalrandombaseweight = self.totalrandombaseweight + weight
+local function RemoveBaseEvent(name, weight)
+    if not self.baseevents then
+        self.baseevents = {}
+        self.totalrandombaseweight = 0
+    end
+	
+	for k, v in pairs(self.baseevents) do
+		if name == v.name then
+	print(name)
+			table.remove(self.baseevents, k)
+			print(k)
+			self.totalrandombaseweight = self.totalrandombaseweight - weight
+			print("reduce rneweight"..weight)
+			print(self.totalrandombaseweight)
+		end
+	end
 end
 
 local function AddCaveEvent(name, weight)
@@ -1136,36 +1191,6 @@ local function AddCaveEvent(name, weight)
 
     table.insert(self.caveevents, { name = name, weight = weight })
     self.totalrandomcaveweight = self.totalrandomcaveweight + weight
-end
-
-local function AddWinterEvent(name, weight)
-    if not self.winterevents then
-        self.winterevents = {}
-        self.totalrandomwinterweight = 0
-    end
-
-    table.insert(self.winterevents, { name = name, weight = weight })
-    self.totalrandomwinterweight = self.totalrandomwinterweight + weight
-end
-
-local function AddSpringEvent(name, weight)
-    if not self.springevents then
-        self.springevents = {}
-        self.totalrandomspringweight = 0
-    end
-
-    table.insert(self.springevents, { name = name, weight = weight })
-    self.totalrandomspringweight = self.totalrandomspringweight + weight
-end
-
-local function AddSummerEvent(name, weight)
-    if not self.summerevents then
-        self.summerevents = {}
-        self.totalrandomsummerweight = 0
-    end
-
-    table.insert(self.summerevents, { name = name, weight = weight })
-    self.totalrandomsummerweight = self.totalrandomsummerweight + weight
 end
 
 local function AddOceanEvent(name, weight)
@@ -1201,120 +1226,182 @@ end
 ------------------------
 --Inclusion and Tuning
 ------------------------
---Wild
-AddWildEvent(SpawnBats,.2)
-AddWildEvent(SpawnLightFlowersNFerns,.3)
-AddWildEvent(SpawnSkitts,.6)
-AddWildEvent(SpawnMonkeys,.2)
-AddWildEvent(LeifAttack,.2)
-AddWildEvent(SpawnPhonograph,.2)
-AddWildEvent(SpawnShadowTeleporter,.3)
-AddWildEvent(StumpsAttack,.3)
-AddWildEvent(SpawnShadowTalker,.7)
-AddWildEvent(SpawnShadowBoomer,.2)
-AddWildEvent(SkeleBros,0.3)
-AddWildEvent(Stanton,0.4)
---Secondary Wild
-AddSecondaryWildEvent(SpawnBats,.2)
-AddSecondaryWildEvent(SpawnLightFlowersNFerns,.3)
-AddSecondaryWildEvent(SpawnSkitts,.5)
-AddSecondaryWildEvent(StumpsAttack,.2)
-AddSecondaryWildEvent(SpawnShadowTalker,.6)
-AddSecondaryWildEvent(SpawnShadowBoomer,.1)
---Base
-AddBaseEvent(SpawnBaseBats,.3)
-AddBaseEvent(SpawnFissures,.3)
-AddBaseEvent(SpawnSkitts,.5)
-AddBaseEvent(FireHungryGhostAttack,.2)
-AddBaseEvent(SpawnShadowChars,.3)
-AddBaseEvent(SpawnMonkeys,.1)
-AddBaseEvent(LeifAttack,.1)
-AddBaseEvent(SpawnPhonograph,.2)
-AddBaseEvent(SpawnShadowTeleporter,.2)
-AddBaseEvent(StumpsAttack,.3)
-AddBaseEvent(SpawnShadowTalker,.6)
-AddBaseEvent(SpawnShadowBoomer,.2)
-AddBaseEvent(SpawnGnomes,.4)
-AddBaseEvent(SkeleBros,.4)
-AddBaseEvent(Stanton,0.2)
---Cave
-AddCaveEvent(SpawnBats,.5)
-AddCaveEvent(SpawnFissures,.2)
-AddCaveEvent(SpawnDroppers,.6)
-AddCaveEvent(SpawnShadowTalker,.4)
-AddCaveEvent(SpawnPhonograph,.1)
-AddCaveEvent(SpawnLightFlowersNFerns,.3)
-AddCaveEvent(SpawnShadowBoomer,.2)
---Winter
-AddWinterEvent(SpawnKrampus,.5)
-AddWinterEvent(SpawnGingerDeadPig,12.5)
---AddWinterEvent(SpawnWalrusHunt,.5)
---Spring
-AddSpringEvent(SpawnThunderFar,1)
-AddSpringEvent(SpawnLureplagueRat,.1)
---Summer
-AddSummerEvent(SpawnWalrusHunt,1)
---Full Moon
-AddFullMoonEvent(MoonTear,.5)
---AddFullMoonEvent(SpawnWerePigs,.5)
---New Moon
-AddNewMoonEvent(ChessPiece,.5)
-AddNewMoonEvent(SpawnPhonograph,.2)
---Ocean
-AddOceanEvent(SpawnSquids,.6)
-AddOceanEvent(SpawnBats,.4)
---AddOceanEvent(FireHungryGhostAttack,.2)
-AddOceanEvent(SpawnSkitts,.4)
-AddOceanEvent(SpawnShadowTalker,.5)
---AddOceanEvent(SpawnGnarwail,.5)
 
+local AUTUMN = 
+{
+	SpawnMushbooms = { name = SpawnMushbooms, weight = 1, },
+}
+
+local WINTER = 
+{
+	SpawnKrampus = { name = SpawnKrampus, weight = .5, },
+	SpawnGingerDeadPig = { name = SpawnGingerDeadPig, weight = 1, },
+}
+
+local SPRING = 
+{
+	SpawnThunderFar = { name = SpawnThunderFar, weight = 1, },
+	SpawnLureplagueRat = { name = SpawnLureplagueRat, weight = 0.1, },
+}
+
+local SUMMER = 
+{
+	SpawnWalrusHunt = { name = SpawnWalrusHunt, weight = 1, },
+}
+
+local BASE = 
+{
+	SpawnBaseBats = { name = SpawnBaseBats, weight = .3, },
+	SpawnFissures = { name = SpawnFissures, weight = .3, },
+	SpawnSkitts = { name = SpawnSkitts, weight = .5, },
+	FireHungryGhostAttack = { name = FireHungryGhostAttack, weight = .2, },
+	SpawnShadowChars = { name = SpawnShadowChars, weight = .3, },
+	SpawnMonkeys = { name = SpawnMonkeys, weight = .1, },
+	LeifAttack = { name = LeifAttack, weight = .1, },
+	SpawnShadowTeleporter = { name = SpawnShadowTeleporter, weight = .2, },
+	StumpsAttack = { name = StumpsAttack, weight = .3, },
+	SpawnShadowTalker = { name = SpawnShadowTalker, weight = .6, },
+	SpawnShadowBoomer = { name = SpawnShadowBoomer, weight = .2, },
+	SpawnGnomes = { name = SpawnGnomes, weight = .4, },
+	SkeleBros = { name = SkeleBros, weight = .4, },
+	Stanton = { name = Stanton, weight = .2, },
+}
+
+for k, v in pairs(BASE) do
+	AddBaseEvent(v.name, v.weight)
+end
+
+local WILD = 
+{
+	SpawnBats = { name = SpawnBats, weight = .2, },
+	SpawnLightFlowersNFerns = { name = SpawnLightFlowersNFerns, weight = .3, },
+	SpawnSkitts = { name = SpawnSkitts, weight = .6, },
+	SpawnMonkeys = { name = SpawnMonkeys, weight = .2, },
+	LeifAttack = { name = LeifAttack, weight = .2, },
+	SpawnShadowTeleporter = { name = SpawnShadowTeleporter, weight = .3, },
+	StumpsAttack = { name = StumpsAttack, weight = .3, },
+	SpawnShadowTalker = { name = SpawnShadowTalker, weight = .7, },
+	SpawnShadowBoomer = { name = SpawnShadowBoomer, weight = .2, },
+	SkeleBros = { name = SkeleBros, weight = .3, },
+	Stanton = { name = Stanton, weight = .4, },
+}
+
+for k, v in pairs(WILD) do
+	AddWildEvent(v.name, v.weight)
+end
+
+local SECONDARYWILD = 
+{
+	SpawnBaseBats = { name = SpawnBaseBats, weight = .3, },
+	SpawnSkitts = { name = SpawnSkitts, weight = .5, },
+	SpawnLightFlowersNFerns = { name = SpawnLightFlowersNFerns, weight = .2, },
+	StumpsAttack = { name = StumpsAttack, weight = .3, },
+	SpawnShadowTalker = { name = SpawnShadowTalker, weight = .6, },
+	SpawnShadowBoomer = { name = SpawnShadowBoomer, weight = .2, },
+}
+
+for k, v in pairs(SECONDARYWILD) do
+	AddSecondaryWildEvent(v.name, v.weight)
+end
+
+local FULLMOON = 
+{
+	MoonTear = { name = MoonTear, weight = 1, },
+}
+
+for k, v in pairs(FULLMOON) do
+	AddFullMoonEvent(v.name, v.weight)
+end
+
+local NEWMOON = 
+{
+	--ChessPiece = { name = ChessPiece, weight = .5, },
+	SpawnPhonograph = { name = SpawnPhonograph, weight = .2, },
+}
+
+for k, v in pairs(NEWMOON) do
+	AddNewMoonEvent(v.name, v.weight)
+end
+
+local OCEAN = 
+{
+	SpawnSquids = { name = SpawnSquids, weight = .6, },
+	SpawnBats = { name = SpawnBats, weight = .3, },
+	SpawnSkitts = { name = SpawnSkitts, weight = .4, },
+	SpawnShadowTalker = { name = SpawnShadowTalker, weight = .5, },
+}
+
+for k, v in pairs(OCEAN) do
+	AddOceanEvent(v.name, v.weight)
+end
+
+local function OnSeasonTick(src, data)
+	for ak, av in pairs(AUTUMN) do
+		RemoveBaseEvent(av.name, av.weight)
+		RemoveWildEvent(av.name, av.weight)
+	end
+	
+	for wk, wv in pairs(WINTER) do
+		RemoveBaseEvent(wv.name, wv.weight)
+		RemoveWildEvent(wv.name, wv.weight)
+	end
+	
+	for spk, spv in pairs(SPRING) do
+		RemoveBaseEvent(spv.name, spv.weight)
+		RemoveWildEvent(spv.name, spv.weight)
+	end
+	
+	for suk, suv in pairs(SUMMER) do
+		RemoveBaseEvent(suv.name, suv.weight)
+		RemoveWildEvent(suv.name, suv.weight)
+	end
+
+	if TheWorld.state.isautumn or (data ~= nil and data.season == "autumn") then
+		for k, v in pairs(AUTUMN) do
+			AddBaseEvent(v.name, v.weight)
+			AddWildEvent(v.name, v.weight)
+			print("autumn")
+		end
+	elseif TheWorld.state.iswinter or (data ~= nil and data.season == "winter") then
+		for k, v in pairs(WINTER) do
+			AddBaseEvent(v.name, v.weight)
+			AddWildEvent(v.name, v.weight)
+			print("winter")
+		end
+	elseif TheWorld.state.spring or (data ~= nil and data.season == "spring") then
+		for k, v in pairs(SPRING) do
+			AddBaseEvent(v.name, v.weight)
+			AddWildEvent(v.name, v.weight)
+			print("spring")
+		end
+	elseif TheWorld.state.summer or (data ~= nil and data.season == "summer") then
+		for k, v in pairs(SUMMER) do
+			AddBaseEvent(v.name, v.weight)
+			AddWildEvent(v.name, v.weight)
+			print("summer")
+		end
+	end
+end
 ------------------------
 --Inclusion and Tuning
 ------------------------
 
 local function DoBaseRNE(player)
---print("done")
-	if math.random() >= .7 and TheWorld.state.iswinter and TheWorld.state.isnight then
-		if self.totalrandomwinterweight and self.totalrandomwinterweight > 0 and self.winterevents then
-			local rnd = math.random()*self.totalrandomwinterweight
-			for k,v in pairs(self.winterevents) do
-				rnd = rnd - v.weight
-				if rnd <= 0 then
-				v.name(player)
-				return
-				end
-			end
-		end
-	elseif math.random() >= .7 and TheWorld.state.isspring and TheWorld.state.isnight then
-		if self.totalrandomspringweight and self.totalrandomspringweight > 0 and self.springevents then
-			local rnd = math.random()*self.totalrandomspringweight
-			for k,v in pairs(self.springevents) do
-				rnd = rnd - v.weight
-				if rnd <= 0 then
-				v.name(player)
-				return
-				end
-			end
-		end
-	elseif math.random() >= .7 and TheWorld.state.issummer and TheWorld.state.isnight then
-		if self.totalrandomsummerweight and self.totalrandomsummerweight > 0 and self.summerevents then
-			local rnd = math.random()*self.totalrandomsummerweight
-			for k,v in pairs(self.summerevents) do
-				rnd = rnd - v.weight
-				if rnd <= 0 then
-				v.name(player)
-				return
-				end
-			end
-		end
-	elseif TheWorld.state.isnight then
+	if TheWorld.state.isnight then
 		if self.totalrandombaseweight and self.totalrandombaseweight > 0 and self.baseevents then
 			local rnd = math.random()*self.totalrandombaseweight
 			for k,v in pairs(self.baseevents) do
 				rnd = rnd - v.weight
-				if rnd <= 0 then
-				v.name(player)
-				return
+				if rnd <= 0 and not table.contains(self.storedrne, v.name) then
+					if #self.storedrne >= 6 then
+						table.remove(self.storedrne, 1)
+					end
+					
+					
+					
+					table.insert(self.storedrne, v.name)
+					v.name(player)
+					return
 				end
 			end
 		end
@@ -1322,47 +1409,19 @@ local function DoBaseRNE(player)
 end
 
 local function DoWildRNE(player)
-	if math.random() >= .7 and TheWorld.state.iswinter and TheWorld.state.isnight then
-		if self.totalrandomwinterweight and self.totalrandomwinterweight > 0 and self.winterevents then
-			local rnd = math.random()*self.totalrandomwinterweight
-			for k,v in pairs(self.winterevents) do
-				rnd = rnd - v.weight
-				if rnd <= 0 then
-				v.name(player)
-				return
-				end
-			end
-		end
-	elseif math.random() >= .7 and TheWorld.state.isspring and TheWorld.state.isnight then
-		if self.totalrandomspringweight and self.totalrandomspringweight > 0 and self.springevents then
-			local rnd = math.random()*self.totalrandomspringweight
-			for k,v in pairs(self.springevents) do
-				rnd = rnd - v.weight
-				if rnd <= 0 then
-				v.name(player)
-				return
-				end
-			end
-		end
-	elseif math.random() >= .7 and TheWorld.state.issummer and TheWorld.state.isnight then
-		if self.totalrandomsummerweight and self.totalrandomsummerweight > 0 and self.summerevents then
-			local rnd = math.random()*self.totalrandomsummerweight
-			for k,v in pairs(self.summerevents) do
-				rnd = rnd - v.weight
-				if rnd <= 0 then
-				v.name(player)
-				return
-				end
-			end
-		end
-	elseif TheWorld.state.isnight then
+	if TheWorld.state.isnight then
 		if self.totalrandomwildweight and self.totalrandomwildweight > 0 and self.wildevents then
 			local rnd = math.random()*self.totalrandomwildweight
 			for k,v in pairs(self.wildevents) do
 				rnd = rnd - v.weight
-				if rnd <= 0 then
-				v.name(player)
-				return
+				if rnd <= 0 and not table.contains(self.storedwildrne, v.name) then
+					if #self.storedwildrne >= 6 then
+						table.remove(self.storedwildrne, 1)
+					end
+				
+					v.name(player)
+					table.insert(self.storedwildrne, v.name)
+					return
 				end
 			end
 		end
@@ -1581,13 +1640,6 @@ local function CheckPlayers()
 				end
 			end
 		end
-		
-		
-		
-		
-		
-		
-		
 	end
 end
 
@@ -1619,8 +1671,35 @@ local function OnPlayerLeft(src,player)
         end
     end
 end
+
+--function RandomNightEvents:OnSave()
+local function OnSave()
+	return {
+		storedrne = self.storedrne,
+		storedwildrne = self.storedwildrne
+	}
+end
+
+--function RandomNightEvents:OnLoad(data)
+local function OnLoad(data)
+	if data ~= nil then
+		if data.storedrne ~= nil then
+			self.storedrne = data.storedrne
+		end
+		
+		if data.storedwildrne ~= nil then
+			self.storedwildrne = data.storedwildrne
+		end
+	end
+end
+
+function self:OnPostInit()
+	OnSeasonTick()
+end
+
 inst:ListenForEvent("ms_playerjoined", OnPlayerJoined)
 inst:ListenForEvent("ms_playerleft", OnPlayerLeft)
+inst:ListenForEvent("seasontick", OnSeasonTick, TheWorld)
 
 self:WatchWorldState("isnight", function() self.inst:DoTaskInTime(10, TryRandomNightEvent) end)
 self:WatchWorldState("cycleschanged", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end)
