@@ -245,6 +245,7 @@ return {
 	--"uncompromising_alterguardianspawner",
 	"driftwoodfishingrod",
 	"nightlightfuel",
+	"rneearthquake",
 	
 	"voorhams",
 	"ratking",

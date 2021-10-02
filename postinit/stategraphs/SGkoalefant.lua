@@ -312,7 +312,7 @@ State{
 				inst.components.locomotor.runspeed = 7
 				inst:RemoveTag("chargespeed")
 			end
-			inst.components.combat:SetAreaDamage(4, 4, isplayer)
+			inst.components.combat:SetAreaDamage(4, 1, isplayer)
 			
         end,
 

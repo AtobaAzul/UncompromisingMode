@@ -23,8 +23,7 @@ STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_EVENING = { "KING BED TIME SOON, YOU
 STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_FRIEND = { "KING SAY PROTECT", "PROTECT YOU", "WHERE MONSTERS?", "PROTECT!", "PROTECT KING!", "PROTECT FRIEND!" }
 
 STRINGS.UNCOMP_TOOLTIP = {
-	AMULET = "- Only revives the player upon death, while worn.\n- Heals you while worn, works much better when close to death.\n- Never breaks, can be refueled with Nightmare Fuel.",
-	FIRESUPPRESSOR = "- Drains fuel on each throw.\n- Increased maximum fuel.",
+	AMULET = "- Only revives the player upon death while worn.\n- Increased heal rate at lower health.\n- Never breaks, can be refueled with Nightmare Fuel.",
 	MINIFAN = "- Staves off heat, and hayfever.",
 	WALL_HAY_ITEM = "- Provides protection from Snow Storms.",
 	WALL_WOOD_ITEM = "- Provides protection from Snow Storms.",
@@ -33,7 +32,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	WALL_MOONROCK_ITEM = "- Provides protection from Snow Storms.",
 	YELLOWSTAFF = "- Dwarf stars provide protection from Snow Storms.",
     OPALSTAFF = "- Dwarf stars provide protection from Snow Storms.",
-	ARMORRUINS = "- Prevents knockback damage.\n- Reduces insanity aura effects by 40%.",
+	ARMORRUINS = "- Prevents knockback effects.\n- Reduces insanity aura effects by 40%.",
 	SWEATERVEST = "- Reduces insanity aura effects by 70%.",
 	FEATHERFAN = "- Grants large amounts of Hayfever protection when blown.",
 	PERDFAN = "- Grants large amounts of Hayfever protection when blown.",
@@ -54,7 +53,6 @@ STRINGS.UNCOMP_TOOLTIP = {
 	ARMORDRAGONFLY = "- Summons mini Lavae allies when worn.",
 	EYEBRELLAHAT = "- Reduced heat protection.",
 	SEEDPOUCH = "- Keeps seeds refridgerated.",
-	SIESTAHUT = "- A bit less efficient, balanced for\nUncompromising Modes Sleeping Changes.",
 	GLASSCUTTER = "- Deals slightly more damage to Shadows.",
 	FEATHERHAT = "- Provides saftey from territorial Pengulls.",
 	YELLOWAMULET = "- No longer breaks when empty.\n- Can be fueled with Nightmare Fuel.",
@@ -66,6 +64,19 @@ STRINGS.UNCOMP_TOOLTIP = {
 	TRUNKVEST_WINTER = "- Now has pockets!",
 	REFLECTIVEVEST = "- Now has pockets!",
 	PREMIUMWATERINGCAN = "- Can contain and preserve ocean fish.",
+	
+	MARBLEARMOR = "- Prevents knockback effects.",
+	FIRESUPPRESSOR = "- Drains fuel on each throw.\n- Increased maximum fuel.",
+	SEWINGKIT = "- Increased storage capacity.\n- May hurt would be thieves.",
+	TURF_DRAGONFLY = "- Prevents snowpile build-up.",
+	GASMASK = "- Prevents Hayfever while worn.",
+	PLAGUEMASK = "- Prevents Hayfever while worn.",
+	BEDROLL_STRAW = "- May restore maximum health.",
+	BEDROLL_FURRY = "- May restore maximum health.",
+	TENT = "- May restore maximum health.",
+	SIESTAHUT = "- A bit less efficient.\n- May restore maximum health.",
+	
+	
 	
 	AIR_CONDITIONER = "- Can crush up Mushrooms for helpful stat clouds.",
 	ANCIENT_AMULET_RED = "- Drops soul orbs when attacked, which will replenish lost health when picked up.",

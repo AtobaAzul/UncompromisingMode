@@ -1102,6 +1102,14 @@ local function SpawnMushbooms(player)
 	end
 end
 
+local function Earthquake(player)
+	print("Quake")
+	player:DoTaskInTime(15,function(player)
+		if TheWorld.state.isnight then
+			SpawnPrefab("rneearthquake").Transform:SetPosition(player.Transform:GetWorldPosition())
+		end
+	end)
+end
 
 ---------------------------------------------------
 ---RNE list above
@@ -1265,6 +1273,7 @@ local BASE =
 	SpawnGnomes = { name = SpawnGnomes, weight = .4, },
 	SkeleBros = { name = SkeleBros, weight = .4, },
 	Stanton = { name = Stanton, weight = .2, },
+	Earthquake = { name = Earthquake, weight = .1, },
 }
 
 for k, v in pairs(BASE) do
