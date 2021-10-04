@@ -240,15 +240,34 @@ local function giantfallingpianogag(inst)
 	end
 end
 
+local _OldLocomoteEvent = inst.events["locomote"].fn
+	inst.events["locomote"].fn = function(inst, data)
+        if inst:HasTag("minotaur") then
+			if inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("attack") or inst.sg:HasStateTag("runningattack") then
+				return
+			end
+
+			local is_moving = inst.sg:HasStateTag("moving")
+			local is_running = inst.sg:HasStateTag("running") or inst.sg:HasStateTag("runningattack")
+			local should_move = inst.components.locomotor:WantsToMoveForward()
+			local should_run = inst.components.locomotor:WantsToRun()
+
+			if is_moving and not should_move then
+				inst.sg:GoToState(is_running and "run_stop" or "walk_stop")
+			elseif (not is_moving and should_move) or (is_moving and should_move and is_running ~= should_run) then
+				if inst.jumpready == true then
+					inst.sg:GoToState("leap_attack_pre", data.target)
+				else
+					inst.sg:GoToState(should_run and "run_start" or "walk_start")
+				end
+			end
+		else
+			_OldLocomoteEvent(inst, data)
+        end
+    end
+	--[[
 local events=
 {
-    CommonHandlers.OnLocomote(true, true),
-    CommonHandlers.OnSleep(),
-    CommonHandlers.OnFreeze(),
-    CommonHandlers.OnAttack(),
-    CommonHandlers.OnAttacked(),
-    CommonHandlers.OnDeath(),
-
     EventHandler("locomote", function(inst,data)
         if inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("attack") or inst.sg:HasStateTag("runningattack") then
             return
@@ -270,7 +289,7 @@ local events=
         end
     end),
 }
-
+]]
 local states = {
 
     State{
@@ -481,10 +500,10 @@ local states = {
 	}
 }
 
-for k, v in pairs(events) do
+--[[for k, v in pairs(events) do
     assert(v:is_a(EventHandler), "Non-event added in mod events table!")
     inst.events[v.name] = v
-end
+end]]
 
 for k, v in pairs(states) do
     assert(v:is_a(State), "Non-state added in mod state table!")

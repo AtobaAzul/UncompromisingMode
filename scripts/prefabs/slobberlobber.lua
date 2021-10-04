@@ -102,13 +102,21 @@ local function createlight(staff, target, pos)
 		end
 		
 		local x1, y1, z1 = staff.Transform:GetWorldPosition()
+	
+		local owner = staff.components.inventoryitem.owner
 
 		for i, v in pairs(TheSim:FindEntities(x1, y1, z1, 3, { "slobberlobber" })) do
 			if v ~= staff then
-				v.components.fueled:MakeEmpty()
+				local vowner = v.components.inventoryitem.owner
 				
-				if v.task == nil then
-					v.task = v:DoPeriodicTask(0.75, fuelme)
+				if vowner ~= nil then
+					if vowner == owner or vowner.components.inventoryitem ~= nil and vowner.components.inventoryitem.owner ~= nil and vowner.components.inventoryitem.owner == owner then
+						v.components.fueled:MakeEmpty()
+						
+						if v.task == nil then
+							v.task = v:DoPeriodicTask(0.6, fuelme)
+						end
+					end
 				end
 			end
 		end
@@ -119,7 +127,7 @@ local function createlight(staff, target, pos)
 	end
 	
 	if staff.task == nil then
-		staff.task = staff:DoPeriodicTask(0.75, fuelme)
+		staff.task = staff:DoPeriodicTask(0.6, fuelme)
 	end
 end
 
@@ -159,7 +167,7 @@ local function onequip(inst, owner)
 		owner.AnimState:Hide("ARM_normal")
 	end
 	if inst.task == nil then
-		inst.task = inst:DoPeriodicTask(0.75, fuelme)
+		inst.task = inst:DoPeriodicTask(0.6, fuelme)
 	end
 end
 
@@ -168,7 +176,7 @@ local function onunequip(inst, owner)
     owner.AnimState:Show("ARM_normal")
 	
 	if inst.task == nil then
-		inst.task = inst:DoPeriodicTask(0.75, fuelme)
+		inst.task = inst:DoPeriodicTask(0.6, fuelme)
 	end
 end
 
@@ -236,7 +244,7 @@ local function staff_fn()
 	inst.components.fueled.accepting = false
 	
 	if inst.task == nil then
-		inst.task = inst:DoPeriodicTask(0.75, fuelme)
+		inst.task = inst:DoPeriodicTask(0.6, fuelme)
 	end
 
     MakeHauntableLaunch(inst)

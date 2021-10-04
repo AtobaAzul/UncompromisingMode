@@ -124,13 +124,20 @@ local function onattack(inst, attacker, target)
 	
 	
 	local x1, y1, z1 = inst.Transform:GetWorldPosition()
+	
+	local owner = inst.components.inventoryitem.owner
 
 	for i, v in pairs(TheSim:FindEntities(x1, y1, z1, 3, { "cursedantler" })) do
 		if v ~= inst then
-			v.components.fueled:MakeEmpty()
-			
-			if v.task == nil then
-				v.task = v:DoPeriodicTask(0.5, fuelme)
+			local vowner = v.components.inventoryitem.owner
+			if vowner ~= nil then
+				if vowner == owner or vowner.components.inventoryitem ~= nil and vowner.components.inventoryitem.owner ~= nil and vowner.components.inventoryitem.owner == owner then
+					v.components.fueled:MakeEmpty()
+					
+					if v.task == nil then
+						v.task = v:DoPeriodicTask(0.5, fuelme)
+					end
+				end
 			end
 		end
 	end

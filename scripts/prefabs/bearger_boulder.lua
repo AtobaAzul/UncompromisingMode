@@ -132,7 +132,7 @@ local function OnHitInk_claw(inst, attacker, target)
                 and not v:HasTag("player")
                 and not v.components.health:IsDead() then
                 if v.components.combat:CanBeAttacked() then
-                    v.components.combat:GetAttacked(inst.clawer, 15, inst)
+                    v.components.combat:GetAttacked(inst.clawer, 20, inst)
                 end
             end
         end
