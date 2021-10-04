@@ -16,7 +16,7 @@ local function BoatBreaker(inst)
 		
 		if chance >= 0.8 then
 			boat:PushEvent("spawnnewboatleak", {pt = pt, leak_size = "med_leak", playsoundfx = true})
-		elseif chance < 0.7 and chance >= 0.5 then
+		elseif chance < 0.8 and chance >= 0.5 then
 			boat:PushEvent("spawnnewboatleak", {pt = pt, leak_size = "small_leak", playsoundfx = true})
 		end
 	elseif TheWorld.Map:IsOceanAtPoint(pt.x, 0, pt.z) then

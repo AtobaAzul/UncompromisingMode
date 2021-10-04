@@ -446,6 +446,7 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/nervoustick_7.xml"),
 	Asset("IMAGE", "images/inventoryimages/nervoustick_8.tex"),
 	Asset("ATLAS", "images/inventoryimages/nervoustick_8.xml"),
+	Asset("ANIM", "anim/graspingfear.zip"),
 	
 	
 	Asset("ANIM", "anim/carnival_host_death.zip"),

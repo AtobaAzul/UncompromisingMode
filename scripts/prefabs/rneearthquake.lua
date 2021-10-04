@@ -33,6 +33,10 @@ local function startquaking(inst)
     inst.SoundEmitter:SetParameter("earthquake", "intensity", 1)
 end
 
+local function winddown(inst)
+    inst.SoundEmitter:SetParameter("earthquake", "intensity", 0.5)
+end
+
 local function OnIsDay(inst)
 	if TheWorld.state.isday then
 		inst:Remove()
@@ -67,6 +71,7 @@ local function fn()
 	
 	inst:DoPeriodicTask(0.5, Fx1)
 	inst:DoTaskInTime(15, startquaking)
+	inst:DoTaskInTime(100, winddown)
 	inst:DoTaskInTime(120, inst.Remove)
     inst:WatchWorldState("isday", OnIsDay)
     OnIsDay(inst, TheWorld.state.isday)
@@ -76,31 +81,91 @@ local function fn()
 
 	return inst
 end
+
+local function Teleport(inst)
+	local max_tries = 5
+	for k = 1, max_tries do
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local offset = 30
+		x = x + math.random(2 * offset) - offset
+		z = z + math.random(2 * offset) - offset
+		
+		
+		
+		if TheWorld.Map:IsPassableAtPoint(x, y, z) and TheSim:GetLightAtPoint(x, y, z) < 0.05 then
+			inst.Physics:Teleport(x, y, z)
+			break
+		end
+	end
+end
+
 local AREAATTACK_EXCLUDETAGS = { "INLIMBO", "notarget", "noattack", "flight", "invisible", "playerghost" }
 local function Fx2(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	
+	local pt = inst:GetPosition()
+	local boat = TheWorld.Map:GetPlatformAtPoint(x, z)
+	
 	ShakeAllCameras(CAMERASHAKE.FULL, 5, 0.05, 0.2, inst, 10)
-	SpawnPrefab("groundpound_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
-	SpawnPrefab("slide_puff").Transform:SetPosition(inst.Transform:GetWorldPosition())
-		
+
+	if inst:IsOnOcean() then
+		SpawnPrefab("malbatross_ripple").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	else
+		SpawnPrefab("groundpound_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		SpawnPrefab("slide_puff").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	end
+	
 	local chance = math.random()
 		
 	if chance > 0.66 then
-		SpawnPrefab("round_puff_fx_sm").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		if boat then
+			boat:PushEvent("spawnnewboatleak", {pt = pt, leak_size = "small_leak", playsoundfx = true})
+		elseif inst:IsOnOcean() then
+			SpawnPrefab("splash_green").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		else
+			SpawnPrefab("round_puff_fx_sm").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		end
+		
 		inst.components.combat:SetDefaultDamage(5)
 		inst.components.combat:DoAreaAttack(inst, 2, nil, nil, nil, AREAATTACK_EXCLUDETAGS)
 	elseif chance <= 0.66 and chance > 0.33 then
+		if boat then
+			boat:PushEvent("spawnnewboatleak", {pt = pt, leak_size = "med_leak", playsoundfx = true})
+		elseif inst:IsOnOcean() then
+			SpawnPrefab("splash_green_large").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		else
+			SpawnPrefab("round_puff_fx_lg").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		end
+		
 		inst.components.combat:SetDefaultDamage(10)
-		SpawnPrefab("round_puff_fx_lg").Transform:SetPosition(inst.Transform:GetWorldPosition())
 		inst.components.combat:DoAreaAttack(inst, 3.5, nil, nil, nil, AREAATTACK_EXCLUDETAGS)
+	end
+	
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local ents = TheSim:FindEntities(x, y, z, 5, {"player"})
+	
+	for i, v in ipairs(ents) do
+        v.Physics:Stop()
+		v.sg:GoToState("changeoutsidewardrobe")
+		v:DoTaskInTime(62 * FRAMES, Teleport)
 	end
 	
 	inst:Remove()
 end
 
 local function Init(inst)
-	SpawnPrefab("sinkhole_warn_fx_1").Transform:SetPosition(inst.Transform:GetWorldPosition())
-	SpawnPrefab("sinkhole_warn_fx_2").Transform:SetPosition(inst.Transform:GetWorldPosition())
-	SpawnPrefab("sinkhole_warn_fx_3").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	local x, y, z = inst.Transform:GetWorldPosition()
+	
+	local boat = TheWorld.Map:GetPlatformAtPoint(x, z)
+	if boat then
+		SpawnPrefab("malbatross_ripple").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	elseif inst:IsOnOcean() then
+		SpawnPrefab("ocean_splash_ripple2").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	else
+		SpawnPrefab("sinkhole_warn_fx_1").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		SpawnPrefab("sinkhole_warn_fx_2").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		SpawnPrefab("sinkhole_warn_fx_3").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	end
 end
 
 local function burstfn()

@@ -246,6 +246,7 @@ return {
 	"driftwoodfishingrod",
 	"nightlightfuel",
 	"rneearthquake",
+	"graspingfear",
 	
 	"voorhams",
 	"ratking",

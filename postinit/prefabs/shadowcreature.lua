@@ -20,7 +20,7 @@ local function onkilledbyother(inst, attacker)
 		end
 		
 		for i, v in ipairs(ents) do
-			if v ~= attacker and v.components.sanity ~= nil then
+			if v ~= attacker and v.components.sanity ~= nil and inst.sanityreward ~= nil then
 				if v.components.sanity:IsInsane() then
 					v.components.sanity:DoDelta(inst.halfreward)
 				else
