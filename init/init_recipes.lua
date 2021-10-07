@@ -142,10 +142,17 @@ AddRecipe("armor_glassmail", {Ingredient("glass_scales", 1,"images/inventoryimag
 --Seedpackitchange
 AllRecipes["seedpouch"].ingredients = {Ingredient("slurtle_shellpieces", 2), Ingredient("waxpaper",1), Ingredient("seeds", 2)}
 
-AddRecipe("mutator_trapdoor", { Ingredient("monstermeat", 2), Ingredient("spidergland", 3), Ingredient("cutgrass", 5)   	   }, CUSTOM_RECIPETABS.SPIDERCRAFT, TECH.SPIDERCRAFT_ONE, nil, nil, nil, nil, "spiderwhisperer","images/inventoryimages/mutator_trapdoor.xml", "mutator_trapdoor.tex")
+AddRecipe("mutator_trapdoor", { Ingredient("monstermeat", 2), Ingredient("spidergland", 3), Ingredient("cutgrass", 5)}, CUSTOM_RECIPETABS.SPIDERCRAFT, TECH.SPIDERCRAFT_ONE, nil, nil, nil, nil, "spiderwhisperer","images/inventoryimages/mutator_trapdoor.xml", "mutator_trapdoor.tex")
+
+AddRecipe("book_rain", { Ingredient("papyrus", 2), Ingredient("moon_tear", 1,"images/inventoryimages/moon_tear.xml"), Ingredient("waterballoon", 4)   	   }, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_THREE, nil, nil, nil, nil, "bookbuilder","images/inventoryimages/book_rain.xml", "book_rain.tex")
 
 AddRecipe("driftwoodfishingrod", 	 {Ingredient("driftwood_log", 3), 		  Ingredient("silk", 3),    Ingredient("rope", 2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO)
+
+AddRecipe("hermitshop_rain_horn", {Ingredient("dormant_rain_horn",1,"images/inventoryimages/dormant_rain_horn.xml"), Ingredient("oceanfish_small_9_inv",3), Ingredient("messagebottleempty", 2)}, RECIPETABS.HERMITCRABSHOP, TECH.LOST, nil, nil, true, nil, nil,"images/inventoryimages/rain_horn.xml", "rain_horn.tex", nil,"rain_horn")
 GLOBAL.AllRecipes["driftwoodfishingrod"].sortkey = GLOBAL.AllRecipes["fishingrod"].sortkey + .1
+
+AddRecipe("floral_bandage", {Ingredient("bandage", 1), Ingredient("cactus_flower", 2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, true, nil, nil, "images/inventoryimages/floral_bandage.xml", "floral_bandage.tex" )
+GLOBAL.AllRecipes["floral_bandage"].sortkey = GLOBAL.AllRecipes["bandage"].sortkey + .1
 
 STRINGS.RECIPE_DESC.SLINGSHOTAMMO_FIRECRACKERS = "For the aspiring young menace."
 STRINGS.RECIPE_DESC.WATERMELON_LANTERN = "Juicy illumination."
@@ -175,3 +182,6 @@ STRINGS.RECIPE_DESC.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "My shiny teeth and me!"
 STRINGS.RECIPE_DESC.ARMOR_GLASSMAIL = "Surround yourself with broken glass."
 STRINGS.RECIPE_DESC.MUTATOR_TRAPDOOR = "They're smart, allegedly."
 STRINGS.RECIPE_DESC.SLINGSHOTAMMO_FIRECRACKERS = "Go Fancy Fishing. For Fancy Fish."
+STRINGS.RECIPE_DESC.BOOK_RAIN = "A catalogue of weather effects."
+STRINGS.RECIPE_DESC.RAIN_HORN = "Drown the world."
+STRINGS.RECIPE_DESC.FLORAL_BANDAGE = "A flower and honey mess on a bandage."

@@ -30,6 +30,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "I have regained my senses."
 	DESCRIBE.CALIFORNIAKING = "A challenge in a glass?"
 	--CaliforniaKing
+	DESCRIBE.FLORAL_BANDAGE = "The flowers and honey bring vitality to the broken!"
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "A warrior needs to stay alert!"
     DESCRIBE.UNCOMPROMISING_RAT = "And thus cometh a plague upon both our houses!"
@@ -307,3 +308,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.SNOTROAST = "A waste of the spoils of war."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "I feel unwell..."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
+	DESCRIBE.BOOK_RAIN = "A tome to dampen the battleground."
+	DESCRIBE.DORMANT_RAIN_HORN = "A strange boon from the king of the sea."
+	DESCRIBE.RAIN_HORN = "I horn to call forth a downpour."

@@ -8,4 +8,5 @@ env.AddPrefabPostInit("crabking", function(inst)
 	
 	inst:AddComponent("vetcurselootdropper")
 	inst.components.vetcurselootdropper.loot = "crabclaw"
+	inst.components.lootdropper:AddChanceLoot("dormant_rain_horn",1.00)
 end)

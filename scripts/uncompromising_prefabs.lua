@@ -266,5 +266,9 @@ return {
 	"shadowvortex",
 	"nervoustick",
 	
+	"backupcatcoonden",
 	--"moon_deerclops",
+	"um_books",
+	"rain_horn",
+	"floral_bandage",
 }

@@ -533,7 +533,7 @@ local function OnNewTarget(inst, data)
 		if data.target.userid ~= nil and not table.contains(inst.hitlist,data.target.userid) then
 			table.insert(inst.hitlist,data.target.userid)
 			
-			local taskid = data.target.userid
+			--local taskid = data.target.userid
 			--inst.taskid = inst:DoTaskInTime(60, function(inst) table.removetablevalue(inst.hitlist, taskid) end)
 		end
 		if data.target.userid ~= nil then
@@ -544,7 +544,7 @@ local function OnNewTarget(inst, data)
 				if data.target.userid ~= nil and not table.contains(v.hitlist,data.target.userid) then
 				table.insert(v.hitlist,data.target.userid)
 				
-					local taskid = data.target.userid
+					--local taskid = data.target.userid
 					--v.taskid = v:DoTaskInTime(60, function(v) table.removetablevalue(v.hitlist, taskid) end)
 				end
 			end

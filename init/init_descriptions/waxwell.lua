@@ -312,3 +312,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.SNOTROAST = "You can't be serious."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "We will never speak of this."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
+	DESCRIBE.BOOK_RAIN = "Tampering with lunar magic too, are we?"
+	DESCRIBE.FLORAL_BANDAGE = "Sweet bandage."
+	DESCRIBE.DORMANT_RAIN_HORN = "A shell capable of channeling some magical energy."
+	DESCRIBE.RAIN_HORN = "That hold carapace knows more about magic than she leads on..."

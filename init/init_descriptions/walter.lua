@@ -30,6 +30,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "Wo.. Woby? Is that you?"
 	DESCRIBE.CALIFORNIAKING = "I'd dare Wortox to finish the whole thing!"
 	--CaliforniaKing
+	DESCRIBE.FLORAL_BANDAGE = "This stuff's potent!"
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "ooOOOOoo, it's getting VERY spooky now!"
     DESCRIBE.UNCOMPROMISING_RAT = "I'd share, but they seem more interested in just TAKING our stuff."
@@ -307,3 +308,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.SNOTROAST = "Do you want this one, Woby?"
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "I think I'm gonna be sick..."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
+	DESCRIBE.BOOK_RAIN = "Reminds me of a past camping trip."
+	DESCRIBE.DORMANT_RAIN_HORN = "Nice, a conch shell. I desire a BADGE for this! GIVE ME A BADGE! AAAAAAAAAAAA!"
+	DESCRIBE.RAIN_HORN = "This might be useful for when it gets hot."

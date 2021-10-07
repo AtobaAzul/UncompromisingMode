@@ -307,3 +307,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.SNOTROAST = "Now THAT's a loogie!"
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "Mighty fillin', that was!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
+	DESCRIBE.BOOK_RAIN = "I ain't scared of no rain!"
+	DESCRIBE.FLORAL_BANDAGE = "I like the sweet smell, covers up the factory must."
+	
+	DESCRIBE.DORMANT_RAIN_HORN = "Just a conch shell."
+	DESCRIBE.RAIN_HORN = "It lets you blow the horn on the summer heat."
