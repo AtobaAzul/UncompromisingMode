@@ -152,6 +152,7 @@ local stategraph_post = {
 	"spiderqueen",
 	"merm",
 	"carnival_host",
+	"catcoon",
 }
 
 local class_post = {
@@ -175,6 +176,7 @@ local brain_post = {
 	"chester",
 	"mossling",
 	"perd",
+	"catcoon",
 }
 
 if GetModConfigData("hangyperds") == true then

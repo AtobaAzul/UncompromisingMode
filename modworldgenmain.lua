@@ -239,7 +239,9 @@ room.contents.countstaticlayouts = {
         }
 end)
 
-
+AddRoomPreInit("DeepDeciduous", function(room)
+	room.contents.countprefabs.backupcatcoonden = 1
+end)
 
 -----KoreanWaffle's Spawner Limiter Tag Adding Code
 --Add new map tags to storygen

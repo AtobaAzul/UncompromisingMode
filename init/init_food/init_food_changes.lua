@@ -50,6 +50,23 @@ if TUNING.DSTU.MEATBALL == true then
 end
 
 
+	local FLOWERSALADS = 
+	{
+		"flowersalad",
+		"flowersalad_spice_chili",
+		"flowersalad_spice_garlic",
+		"flowersalad_spice_salt",
+		"flowersalad_spice_sugar",
+	}
+
+	for k, v in pairs(FLOWERSALADS) do
+		AddPrefabPostInit(v, function (inst)
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.healthvalue = 60
+			end
+		end)
+	end
+	
 	local FROGNEWTONS = 
 	{
 		"frognewton",

@@ -307,3 +307,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 	DESCRIBE.SNOTROAST = "Close your eyes and pretend it doesn't takes like snot."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "I think my appetite has slowed."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = "I think my stomach is returning to it's normal pace."
+	DESCRIBE.BOOK_RAIN = "It tampers with the timestream of the local clouds."
+	DESCRIBE.FLORAL_BANDAGE = "I don't have the time to mess with that."
+	DESCRIBE.DORMANT_RAIN_HORN = "How did that crab bring this here?"
+	DESCRIBE.RAIN_HORN = "It was warped when it was pulled across the timestream."

@@ -314,3 +314,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.SNOTROAST = "It must be full of diseases."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "I've never tasted something so disgusting."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
+	DESCRIBE.BOOK_RAIN = "Good for a rainy day."
+	DESCRIBE.FLORAL_BANDAGE = "The cactus flowers' medicinal properties pair well with the poultice."
+
+	DESCRIBE.DORMANT_RAIN_HORN = "An inconspicious conch shell. Like most things here, it must have some hidden purpose."
+	DESCRIBE.RAIN_HORN = "Interesting, I should add an entry to \"Rainy Days\" about this."

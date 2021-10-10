@@ -188,7 +188,7 @@ local states = {
             tags = {"busy", "runningattack","charging","nointerrupt"},
             
             onenter = function(inst)
-				print("chargeattack")
+				--print("chargeattack")
                 --inst.SoundEmitter:KillSound("charge")
                 inst.components.combat:StartAttack()
                 inst.components.locomotor:StopMoving()

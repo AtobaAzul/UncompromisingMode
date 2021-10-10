@@ -309,3 +309,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.SNOTROAST = "Whoa! So many boogies!"
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "Boogies aren't good for eating.."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
+	DESCRIBE.BOOK_RAIN = "We would like to play in the rain, not read about it."
+	DESCRIBE.FLORAL_BANDAGE = "We like to lick it sometimes."
+	
+	DESCRIBE.DORMANT_RAIN_HORN = "This is familiar to us."
+	DESCRIBE.RAIN_HORN = "Our memory must be mixed up, we thought this did something different."
