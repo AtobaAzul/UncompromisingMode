@@ -447,7 +447,12 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/nervoustick_8.tex"),
 	Asset("ATLAS", "images/inventoryimages/nervoustick_8.xml"),
 	Asset("ANIM", "anim/graspingfear.zip"),
-	
+	Asset("ANIM", "anim/player_boat_death.zip"),
+	Asset("ANIM", "anim/rnegrabby.zip"),
+	Asset("ANIM", "anim/rne_grabbylarge.zip"),
+	Asset("ANIM", "anim/boat_death_shadows.zip"),
+	Asset("ANIM", "anim/rnesushadow.zip"),
+	Asset("ANIM", "anim/mindweaver.zip"),
 	
 	Asset("ANIM", "anim/carnival_host_death.zip"),
 	Asset("ANIM", "anim/hat_corvus.zip"),

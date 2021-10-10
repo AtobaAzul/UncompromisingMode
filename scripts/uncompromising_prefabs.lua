@@ -265,6 +265,8 @@ return {
 	
 	"shadowvortex",
 	"nervoustick",
+	"mindweaver",
+	"rneshadows",
 	
 	--"moon_deerclops",
 }

@@ -23,13 +23,13 @@ local function Vac(inst)
 	
 	
 	
-	local damageents = TheSim:FindEntities(x, y, z, 2.75 * inst.Transform:GetScale(), { "player" }, { "playerghost" })
+	local damageents = TheSim:FindEntities(x, y, z, 1 * inst.Transform:GetScale(), { "player" }, { "playerghost" })
 	local ents = TheSim:FindEntities(x, y, z, 15 * inst.Transform:GetScale(), { "player" }, { "playerghost" })
 	local items = TheSim:FindEntities(x, y, z, 15 * inst.Transform:GetScale(), { "_inventoryitem" }, { "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach"--[[, "_container"]] } )
 	
 	for i, v in ipairs(damageents) do
 		if v.components.health ~= nil then
-			v.components.health:DoDelta(-0.1 * inst.Transform:GetScale())
+			v.components.health:DoDelta(-5 * inst.Transform:GetScale(), false, inst.prefab)
 		end
 	end
 	
@@ -48,8 +48,8 @@ local function Vac(inst)
 		print("Divide by 10")
 		print(multiplierplayer)
 		
-		if multiplierplayer > 10 then
-			multiplierplayer = 10
+		if multiplierplayer > 20 then
+			multiplierplayer = 20
 		print("Too Far")
 		print(multiplierplayer)
 		elseif multiplierplayer < 1.5 then

@@ -82,23 +82,6 @@ local function fn()
 	return inst
 end
 
-local function Teleport(inst)
-	local max_tries = 5
-	for k = 1, max_tries do
-		local x, y, z = inst.Transform:GetWorldPosition()
-		local offset = 30
-		x = x + math.random(2 * offset) - offset
-		z = z + math.random(2 * offset) - offset
-		
-		
-		
-		if TheWorld.Map:IsPassableAtPoint(x, y, z) and TheSim:GetLightAtPoint(x, y, z) < 0.05 then
-			inst.Physics:Teleport(x, y, z)
-			break
-		end
-	end
-end
-
 local AREAATTACK_EXCLUDETAGS = { "INLIMBO", "notarget", "noattack", "flight", "invisible", "playerghost" }
 local function Fx2(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
@@ -139,15 +122,6 @@ local function Fx2(inst)
 		
 		inst.components.combat:SetDefaultDamage(10)
 		inst.components.combat:DoAreaAttack(inst, 3.5, nil, nil, nil, AREAATTACK_EXCLUDETAGS)
-	end
-	
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local ents = TheSim:FindEntities(x, y, z, 5, {"player"})
-	
-	for i, v in ipairs(ents) do
-        v.Physics:Stop()
-		v.sg:GoToState("changeoutsidewardrobe")
-		v:DoTaskInTime(62 * FRAMES, Teleport)
 	end
 	
 	inst:Remove()

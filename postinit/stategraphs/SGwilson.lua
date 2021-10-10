@@ -3,6 +3,25 @@ GLOBAL.setfenv(1, GLOBAL)
 
 env.AddStategraphPostInit("wilson", function(inst)
 
+local function ClearStatusAilments(inst)
+    if inst.components.freezable ~= nil and inst.components.freezable:IsFrozen() then
+        inst.components.freezable:Unfreeze()
+    end
+    if inst.components.pinnable ~= nil and inst.components.pinnable:IsStuck() then
+        inst.components.pinnable:Unstick()
+    end
+end
+
+local function ForceStopHeavyLifting(inst)
+    if inst.components.inventory:IsHeavyLifting() then
+        inst.components.inventory:DropItem(
+            inst.components.inventory:Unequip(EQUIPSLOTS.BODY),
+            true,
+            true
+        )
+    end
+end
+
 local events =
 {
 EventHandler("sneeze", function(inst, data)
@@ -33,6 +52,16 @@ inst.actionhandlers[ACTIONS.CASTSPELL].deststate =
 			return _OldSpellCast(inst, action, ...)
         end
 		
+
+local _OldDeathEvent = inst.events["death"].fn
+	inst.events["death"].fn = function(inst, data)
+        if data ~= nil and data.cause == "shadowvortex" then
+            inst.sg:GoToState("blackpuddle_death")
+        else
+			_OldDeathEvent(inst, data)
+		end
+    end
+
 local actionhandlers =
 {
 	--[[ActionHandler(ACTIONS.CASTSPELL,
@@ -507,15 +536,121 @@ State{
     },
 	
 	
+	State{
+        name = "blackpuddle_death",
+        tags = { "busy", "dead", "pausepredict", "nomorph" },
+
+        onenter = function(inst)
+            assert(inst.deathcause ~= nil, "Entered death state without cause.")
+			
+            ClearStatusAilments(inst)
+            ForceStopHeavyLifting(inst)
+			
+            inst.components.locomotor:Stop()
+            inst.components.locomotor:Clear()
+            inst:ClearBufferedAction()
+			
+            inst.AnimState:Hide("swap_arm_carry")
+            inst.AnimState:PlayAnimation("boat_death")
+
+            local death_fx = SpawnPrefab("rne_grabbyshadows")
+            death_fx.Transform:SetPosition(inst:GetPosition():Get())
+			
+			if inst.components.rider:IsRiding() then
+                inst.sg:AddStateTag("dismounting")
+            end
+				
+            inst.SoundEmitter:PlaySound("dontstarve/characters/"..(inst.soundsname or inst.prefab).."/sinking")
+            inst.SoundEmitter:PlaySound("dontstarve_DLC001/characters/"..(inst.soundsname or inst.prefab).."/sinking")
+
+            inst.components.burnable:Extinguish()
+            inst.sg:ClearBufferedEvents()
+        end,
+		
+		events =
+        {
+            EventHandler("animover", function(inst)
+                if inst.AnimState:AnimDone() then
+					inst:PushEvent(inst.ghostenabled and "makeplayerghost" or "playerdied", { skeleton = nil }) -- if we are not on valid ground then don't drop a skeleton
+                end
+            end),
+        },
+		
+        onexit= function(inst) 
+			inst.DynamicShadow:Enable(true)
+        end,
+
+        timeline=
+        {
+            TimeEvent(50*FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/boat_sinking_shadow")
+            end),
+            TimeEvent(70*FRAMES, function(inst)
+                inst.DynamicShadow:Enable(false)
+            end),
+        },
+    },
 	
-	
-	
-	
-	
-	
-	
-	
-	
+	State{
+        name = "grabby_teleport",
+        tags = { "busy", "pausepredict", "nomorph", "nodangle", "gotgrabbed" },
+
+        onenter = function(inst, cb)
+            inst.sg.statemem.cb = cb
+
+            --This state is only valid as a substate of openwardrobe
+            inst.AnimState:OverrideSymbol("shadow_hands", "shadow_skinchangefx", "shadow_hands")
+            inst.AnimState:OverrideSymbol("shadow_ball", "shadow_skinchangefx", "shadow_ball")
+            inst.AnimState:OverrideSymbol("splode", "shadow_skinchangefx", "splode")
+
+            inst.AnimState:PlayAnimation("gift_pst", false)
+            inst.AnimState:PushAnimation("skin_change", false)
+
+            if inst.components.playercontroller ~= nil then
+                inst.components.playercontroller:RemotePausePrediction()
+            end
+        end,
+
+        timeline =
+        {
+            -- gift_pst plays first and it is 20 frames long
+            TimeEvent(20 * FRAMES, function(inst)
+                inst.SoundEmitter:PlaySound("dontstarve/common/together/skin_change")
+            end),
+            -- frame 42 of skin_change is where the character is completely hidden
+            TimeEvent(62 * FRAMES, function(inst)
+                if inst.sg.statemem.cb ~= nil then
+                    inst.sg.statemem.cb()
+                    inst.sg.statemem.cb = nil
+                end
+            end),
+        },
+
+        events =
+        {
+            EventHandler("animqueueover", function(inst)
+                if inst.AnimState:AnimDone() then
+                    inst.sg:GoToState("idle")
+                end
+            end),
+        },
+
+        onexit = function(inst)
+            if inst.sg.statemem.cb ~= nil then
+                -- in case of interruption
+                inst.sg.statemem.cb()
+                inst.sg.statemem.cb = nil
+            end
+            inst.AnimState:OverrideSymbol("shadow_hands", "shadow_hands", "shadow_hands")
+            --Cleanup from openwardobe state
+            if inst.components.playercontroller ~= nil then
+                inst.components.playercontroller:EnableMapControls(true)
+                inst.components.playercontroller:Enable(true)
+            end
+            inst.components.inventory:Show()
+            inst:ShowActions(true)
+        end,
+    },
 	
 }
 
