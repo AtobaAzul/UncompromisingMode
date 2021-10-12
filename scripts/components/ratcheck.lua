@@ -294,9 +294,20 @@ function self:OnLoad(data)
     end]]
 end
 
+local function StartRespawnTimer()
+    if not _worldsettingstimer:ActiveTimerExists(RATRAID_TIMERNAME) then
+		_worldsettingstimer:AddTimer(RATRAID_TIMERNAME, _initialrattimer, true, CooldownRaid)
+		_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _initialrattimer)
+    end
+end
+
+--_worldsettingstimer:AddTimer(RATRAID_TIMERNAME, _initialrattimer, true, CooldownRaid)
+StartRespawnTimer()
+
 local function OnPlayerJoined()
-	_worldsettingstimer:AddTimer(RATRAID_TIMERNAME, _initialrattimer, true, CooldownRaid)
-	_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _initialrattimer)
+	if not _worldsettingstimer:ActiveTimerExists(RATRAID_TIMERNAME) then
+		_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _initialrattimer)
+	end
 end
 
 self.inst:ListenForEvent("ratcooldown", StartRatTimer, TheWorld)
@@ -304,6 +315,6 @@ self.inst:ListenForEvent("ratcooldownshort", StartTimerShort, TheWorld)
 self.inst:ListenForEvent("activeraid", ActiveRaid, TheWorld)
 self.inst:ListenForEvent("ms_oncroprotted", ChangeRatTimer, TheWorld)
 self.inst:ListenForEvent("reducerattimer", ChangeRatTimer, TheWorld)
-self.inst:ListenForEvent("ms_playerjoined", OnPlayerJoined, TheWorld)
+--self.inst:ListenForEvent("ms_playerjoined", OnPlayerJoined, TheWorld)
 
 end)

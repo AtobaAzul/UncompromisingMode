@@ -603,8 +603,8 @@ State{
             inst.AnimState:OverrideSymbol("shadow_ball", "shadow_skinchangefx", "shadow_ball")
             inst.AnimState:OverrideSymbol("splode", "shadow_skinchangefx", "splode")
 
-            inst.AnimState:PlayAnimation("gift_pst", false)
-            inst.AnimState:PushAnimation("skin_change", false)
+            --inst.AnimState:PlayAnimation("gift_pst", false)
+            inst.AnimState:PlayAnimation("skin_change", false)
 
             if inst.components.playercontroller ~= nil then
                 inst.components.playercontroller:RemotePausePrediction()
@@ -614,11 +614,11 @@ State{
         timeline =
         {
             -- gift_pst plays first and it is 20 frames long
-            TimeEvent(20 * FRAMES, function(inst)
+            TimeEvent(0, function(inst)
                 inst.SoundEmitter:PlaySound("dontstarve/common/together/skin_change")
             end),
             -- frame 42 of skin_change is where the character is completely hidden
-            TimeEvent(62 * FRAMES, function(inst)
+            TimeEvent(42 * FRAMES, function(inst)
                 if inst.sg.statemem.cb ~= nil then
                     inst.sg.statemem.cb()
                     inst.sg.statemem.cb = nil

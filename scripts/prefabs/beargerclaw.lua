@@ -105,7 +105,7 @@ local function light_reticuletargetfn()
     for r = 6.5, 3.5, -.25 do
         pos.x, pos.y, pos.z = player.entity:LocalToWorldSpace(r, 0, 0)
         if ground:IsPassableAtPoint(pos:Get()) and not ground:IsGroundTargetBlocked(pos) then
-            return posf
+            return pos
         end
     end
     return pos

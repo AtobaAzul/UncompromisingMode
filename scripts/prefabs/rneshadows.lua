@@ -86,11 +86,18 @@ local function Grab(inst)
 	
 	for i, v in ipairs(ents) do
 		if v.LightWatcher:IsInLight() and not v.sg:HasStateTag("gotgrabbed") then
-			v.Physics:Stop()
-			v.sg:GoToState("grabby_teleport")
-			v:DoTaskInTime(62 * FRAMES, Teleport)
-			SpawnPrefab("rnesus_grab").Transform:SetPosition(v.Transform:GetWorldPosition())
-			inst.sg:GoToState("run_stop")
+			local fx = SpawnPrefab("rnesus_grab")
+			fx.entity:SetParent(inst.entity)
+				
+			if v.components.rider:IsRiding() then
+				v.components.rider:Buck(false)
+			else
+				v.Physics:Stop()
+				v.sg:GoToState("grabby_teleport")
+				v:DoTaskInTime(42 * FRAMES, Teleport)
+				--SpawnPrefab("rnesus_grab").Transform:SetPosition(v.Transform:GetWorldPosition())
+				inst.sg:GoToState("run_stop")
+			end
 		end
 	end
 end
@@ -201,10 +208,10 @@ local function shrinktask_mini(inst)
 	for i, v in ipairs(ents) do
 		v.Physics:Stop()
 		v.sg:GoToState("changeoutsidewardrobe")
-		v:DoTaskInTime(62 * FRAMES, Teleport)
+		v:DoTaskInTime(42 * FRAMES, Teleport)
 	end
 	
-	inst:DoTaskInTime(62 * FRAMES, shrink_mini)
+	inst:DoTaskInTime(42 * FRAMES, shrink_mini)
 end
 
 local function GrabSomeone(inst)
@@ -214,9 +221,9 @@ local function GrabSomeone(inst)
 end
 		
 local function grow_mini(inst, time, startsize, endsize)
-	inst:DoTaskInTime(62 * FRAMES, GrabSomeone)
+	inst:DoTaskInTime(42 * FRAMES, GrabSomeone)
 	inst.Transform:SetScale(0.1, 0.1, 0.1)
-	inst.components.sizetweener:StartTween(2, 62 * FRAMES, shrinktask_mini)
+	inst.components.sizetweener:StartTween(2, 42 * FRAMES, shrinktask_mini)
 end
 
 local function susfn()
