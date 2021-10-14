@@ -453,6 +453,7 @@ Assets = {
 	Asset("ANIM", "anim/boat_death_shadows.zip"),
 	Asset("ANIM", "anim/rnesushadow.zip"),
 	Asset("ANIM", "anim/mindweaver.zip"),
+	Asset("ANIM", "anim/rne_player_grabbed.zip"),
 	
 	Asset("ANIM", "anim/carnival_host_death.zip"),
 	Asset("ANIM", "anim/hat_corvus.zip"),

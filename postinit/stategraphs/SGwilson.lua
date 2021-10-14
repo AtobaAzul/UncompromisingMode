@@ -57,7 +57,9 @@ local _OldDeathEvent = inst.events["death"].fn
 	inst.events["death"].fn = function(inst, data)
         if data ~= nil and data.cause == "shadowvortex" then
             inst.sg:GoToState("blackpuddle_death")
-        else
+        elseif data ~= nil and data.cause == "mindweaver" then
+            inst.sg:GoToState("rne_player_grabbed")
+		else
 			_OldDeathEvent(inst, data)
 		end
     end
@@ -586,6 +588,60 @@ State{
                 inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/boat_sinking_shadow")
             end),
             TimeEvent(70*FRAMES, function(inst)
+                inst.DynamicShadow:Enable(false)
+            end),
+        },
+    },
+	
+	
+	State{
+        name = "rne_player_grabbed",
+        tags = { "busy", "dead", "pausepredict", "nomorph" },
+
+        onenter = function(inst)
+            assert(inst.deathcause ~= nil, "Entered death state without cause.")
+			
+            ClearStatusAilments(inst)
+            ForceStopHeavyLifting(inst)
+			
+            inst.components.locomotor:Stop()
+            inst.components.locomotor:Clear()
+            inst:ClearBufferedAction()
+			
+            inst.AnimState:Hide("swap_arm_carry")
+            inst.AnimState:PlayAnimation("grabbedbytheghoulie")
+
+			if inst.components.rider:IsRiding() then
+                inst.sg:AddStateTag("dismounting")
+            end
+				
+			if inst.deathsoundoverride ~= nil then
+				inst.SoundEmitter:PlaySound(inst.deathsoundoverride)
+			elseif not inst:HasTag("mime") then
+				inst.SoundEmitter:PlaySound((inst.talker_path_override or "dontstarve/characters/")..(inst.soundsname or inst.prefab).."/death_voice")
+			end
+			
+            inst.components.burnable:Extinguish()
+            inst.sg:ClearBufferedEvents()
+        end,
+		
+		events =
+        {
+            EventHandler("animover", function(inst)
+                if inst.AnimState:AnimDone() then
+					inst:PushEvent(inst.ghostenabled and "makeplayerghost" or "playerdied", { skeleton = nil }) -- if we are not on valid ground then don't drop a skeleton
+                end
+            end),
+        },
+		
+        onexit= function(inst) 
+			inst.DynamicShadow:Enable(true)
+        end,
+
+        timeline=
+        {
+            TimeEvent(547*FRAMES, function(inst)
+				inst.components.inventory:DropEverything(true)
                 inst.DynamicShadow:Enable(false)
             end),
         },

@@ -1126,9 +1126,12 @@ local function SpawnShadowGrabby(player)
 						local z1 = z - radius * math.sin(theta)
 						local light = TheSim:GetLightAtPoint(x1, 0, z1)
 						
-						if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
-							local ent = SpawnPrefab("rne_grabbyshadows")
-							ent.Transform:SetPosition(x1, 0, z1)
+						for i = 1, 3 do
+							if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+								local ent = SpawnPrefab("rne_grabbyshadows")
+								ent.Transform:SetPosition(x1, 0, z1)
+								break
+							end
 						end
 						
 						print("spawn grabby")
@@ -1148,12 +1151,35 @@ local function SpawnShadowVortex(player)
 		local z1 = z - radius * math.sin(theta)
 		local light = TheSim:GetLightAtPoint(x1, 0, z1)
 		
-		for i = 1, 3 do
+		for i = 1, 4 do
 			if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 				local ent = SpawnPrefab("shadowvortex")
 				ent.Transform:SetPosition(x1, 0, z1)
 				break
 			end
+		end
+	end
+end
+
+local function SpawnMindWeavers(player)
+	if TheWorld.state.isnight then
+		local radius = 15 + math.random() * 15
+		local theta = math.random() * 2 * PI
+		local x, y, z = player.Transform:GetWorldPosition()
+		local x1 = x + radius * math.cos(theta)
+		local z1 = z - radius * math.sin(theta)
+		local light = TheSim:GetLightAtPoint(x1, 0, z1)
+		
+		for i = 1, 3 do
+			player:DoTaskInTime(i * 20, function()
+				for i = 1, 4 do
+					if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+						local ent = SpawnPrefab("mindweaver")
+						ent.Transform:SetPosition(x1, 0, z1)
+						break
+					end
+				end
+			end)
 		end
 	end
 end
@@ -1323,6 +1349,7 @@ local BASE =
 	Earthquake = { name = Earthquake, weight = .1, },
 	SpawnShadowGrabby = { name = SpawnShadowGrabby, weight = .3, },
 	SpawnShadowVortex = { name = SpawnShadowVortex, weight = .2, },
+	SpawnMindWeavers = { name = SpawnMindWeavers, weight = .2, },
 }
 
 for k, v in pairs(BASE) do
@@ -1344,6 +1371,7 @@ local WILD =
 	Stanton = { name = Stanton, weight = .4, },
 	Earthquake = { name = Earthquake, weight = .1, },
 	SpawnShadowGrabby = { name = SpawnShadowGrabby, weight = .3, },
+	SpawnMindWeavers = { name = SpawnMindWeavers, weight = .2, },
 }
 
 for k, v in pairs(WILD) do

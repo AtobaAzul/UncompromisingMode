@@ -295,7 +295,7 @@ function self:OnLoad(data)
 end
 
 local function StartRespawnTimer()
-    if not _worldsettingstimer:ActiveTimerExists(RATRAID_TIMERNAME) then
+    if _worldsettingstimer ~= nil and not _worldsettingstimer:ActiveTimerExists(RATRAID_TIMERNAME) then
 		_worldsettingstimer:AddTimer(RATRAID_TIMERNAME, _initialrattimer, true, CooldownRaid)
 		_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _initialrattimer)
     end
