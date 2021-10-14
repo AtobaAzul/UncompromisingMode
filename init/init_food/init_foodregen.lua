@@ -36,24 +36,25 @@ local function oneat(inst, data)
 		else
 			inst.components.health:DoDelta(wxhealthvalue)
 		end
-			
-		if wxsanityvalue > 3 then
-			inst.components.debuffable:AddDebuff("sanityregenbuff_vetcurse_"..data.food.prefab, "sanityregenbuff_vetcurse", {duration = ((wxsanityvalue + foodaffinitysanitybuff) * 0.1)})
-		else
-			if wxsanityvalue < 0 then
-				if not hasaffinity and not strongstomach then
-					inst.components.sanity:DoDelta(wxsanityvalue)
-				elseif hasaffinity then
-					inst.components.debuffable:AddDebuff("sanityregenbuff_vetcurse_"..data.food.prefab, "sanityregenbuff_vetcurse", {duration = (foodaffinitysanitybuff * 0.1)})
-				end
+		if inst.components.sanity ~= nil then		
+			if wxsanityvalue > 3 then
+				inst.components.debuffable:AddDebuff("sanityregenbuff_vetcurse_"..data.food.prefab, "sanityregenbuff_vetcurse", {duration = ((wxsanityvalue + foodaffinitysanitybuff) * 0.1)})
 			else
-				inst.components.sanity:DoDelta(wxsanityvalue)
+				if wxsanityvalue < 0 then
+					if not hasaffinity and not strongstomach then
+						inst.components.sanity:DoDelta(wxsanityvalue)
+					elseif hasaffinity then
+						inst.components.debuffable:AddDebuff("sanityregenbuff_vetcurse_"..data.food.prefab, "sanityregenbuff_vetcurse", {duration = (foodaffinitysanitybuff * 0.1)})
+					end
+				else
+					inst.components.sanity:DoDelta(wxsanityvalue)
+				end
 			end
 		end
 	else
 		local healthvalue = data.food.components.edible:GetHealth() ~= nil and (((data.food.components.edible:GetHealth() * foodmemorybuff) * warlybuff) * inst.healthabsorption)
 		local sanityvalue = data.food.components.edible.sanityvalue < 0 and (((data.food.components.edible.sanityvalue * foodmemorybuff) * warlybuff) * inst.sanityabsorption) - (data.food.components.perishable ~= nil and data.food.components.perishable:IsSpoiled() and TUNING.SANITY_SMALL or 0) or data.food.components.edible:GetSanity() ~= nil and (((data.food.components.edible:GetSanity() * foodmemorybuff) * warlybuff) * inst.sanityabsorption)
-		print(sanityvalue)
+		--print(sanityvalue)
 		if not inst:HasTag("plantkin") then
 			if healthvalue > 3 then
 				inst.components.debuffable:AddDebuff("healthregenbuff_vetcurse_"..data.food.prefab, "healthregenbuff_vetcurse", {duration = (healthvalue * 0.1)})
@@ -69,18 +70,19 @@ local function oneat(inst, data)
 				end
 			end
 		end
-		
-		if sanityvalue > 3 then
-			inst.components.debuffable:AddDebuff("sanityregenbuff_vetcurse_"..data.food.prefab, "sanityregenbuff_vetcurse", {duration = ((sanityvalue + foodaffinitysanitybuff) * 0.1)})
-		else
-			if sanityvalue < 0 then
-				if not hasaffinity and not strongstomach then
-					inst.components.sanity:DoDelta(sanityvalue)
-				elseif hasaffinity then
-					inst.components.debuffable:AddDebuff("sanityregenbuff_vetcurse_"..data.food.prefab, "sanityregenbuff_vetcurse", {duration = (foodaffinitysanitybuff * 0.1)})
-				end
+		if inst.components.sanity ~= nil then
+			if sanityvalue > 3 then
+				inst.components.debuffable:AddDebuff("sanityregenbuff_vetcurse_"..data.food.prefab, "sanityregenbuff_vetcurse", {duration = ((sanityvalue + foodaffinitysanitybuff) * 0.1)})
 			else
-				inst.components.sanity:DoDelta(sanityvalue)
+				if sanityvalue < 0 then
+					if not hasaffinity and not strongstomach then
+						inst.components.sanity:DoDelta(sanityvalue)
+					elseif hasaffinity then
+						inst.components.debuffable:AddDebuff("sanityregenbuff_vetcurse_"..data.food.prefab, "sanityregenbuff_vetcurse", {duration = (foodaffinitysanitybuff * 0.1)})
+					end
+				else
+					inst.components.sanity:DoDelta(sanityvalue)
+				end
 			end
 		end
 	end
