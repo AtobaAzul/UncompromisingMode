@@ -221,6 +221,8 @@ local function fn()
     inst:ListenForEvent("ondropped", toground)
 	
 	inst:ListenForEvent("onattackother", Invade)
+	
+	inst:WatchWorldState("isday", inst.Remove)
 
     inst.persists = true
 
@@ -261,6 +263,8 @@ local function denfn()
     inst.components.childspawner.childreninside = 0
 	
     inst.beattask = inst:DoTaskInTime(.75 + math.random() * .75, beat)
+	
+	inst:WatchWorldState("isday", inst.Remove)
 
 	return inst
 end

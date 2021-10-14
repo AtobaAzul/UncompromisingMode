@@ -158,6 +158,8 @@ local function grabfn()
 	
 	inst.StartGrabbing = StartGrabbing
 	inst.StopGrabbing = StopGrabbing
+	
+	inst:WatchWorldState("isday", inst.Remove)
 
 	return inst
 end
@@ -256,6 +258,7 @@ local function susfn()
 	inst.grow_mini = grow_mini
 	inst:grow_mini()
 	--inst:DoPeriodicTask(0.2, spawnfx)
+	inst:WatchWorldState("isday", inst.Remove)
 	
     inst.persists = false
 
