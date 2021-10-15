@@ -295,7 +295,7 @@ local states = {
     State{
 
         name = "leap_attack_pre",
-        tags = {"busy", "moving", "canrotate", "hopping"},
+        tags = {"busy", "moving", "canrotate", "hopping", "nointerrupt"},
         
         onenter = function(inst, target)
 		
@@ -330,7 +330,7 @@ local states = {
 	State{
 
         name = "leap_attack",
-        tags = {"busy", "moving", "canrotate", "hopping"},
+        tags = {"busy", "moving", "canrotate", "hopping", "nointerrupt"},
         
         onenter = function(inst, target)
 		
@@ -359,7 +359,7 @@ local states = {
 	State{
 
         name = "leap_attack2",
-        tags = {"busy", "moving", "canrotate", "hopping"},
+        tags = {"busy", "moving", "canrotate", "hopping", "nointerrupt"},
         
         onenter = function(inst, target)
 		
@@ -387,7 +387,7 @@ local states = {
 	State{
 
         name = "leap_attack_pst",
-        tags = {"busy", "moving", "canrotate", "hopping"},
+        tags = {"busy", "moving", "canrotate", "hopping", "nointerrupt"},
         
         onenter = function(inst, target)
 		
