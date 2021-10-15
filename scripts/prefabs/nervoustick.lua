@@ -23,7 +23,8 @@ local brain = require("brains/nervoustickbrain") -------------------------------
 
 
 local function retargetfn(inst)
-	return FindEntity(
+	local target = 
+	FindEntity(
 				inst,
                 8,
                 function(guy)
@@ -32,7 +33,18 @@ local function retargetfn(inst)
                 { "player" },
                 { "playerghost" }
             )
+        or FindEntity(
+				inst,
+                15,
+                function(guy)
+                    return inst.components.combat:CanTarget(guy) and not guy:IsInLight()
+                end,
+                { "player" },
+                { "playerghost" }
+            )
         or nil
+	
+	return target
 end
 
 local function NotifyBrainOfTarget(inst, target)

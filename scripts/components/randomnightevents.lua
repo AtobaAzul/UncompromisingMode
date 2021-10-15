@@ -1365,7 +1365,7 @@ local BASE =
 	SpawnShadowGrabby = { name = SpawnShadowGrabby, weight = .3, },
 	SpawnShadowVortex = { name = SpawnShadowVortex, weight = .2, },
 	SpawnMindWeavers = { name = SpawnMindWeavers, weight = .2, },
-	SpawnMindWeavers = { name = SpawnMindWeavers, weight = .2, },
+	SpawnNervousTicks = { name = SpawnNervousTicks, weight = .2, },
 }
 
 for k, v in pairs(BASE) do
@@ -1388,7 +1388,7 @@ local WILD =
 	Earthquake = { name = Earthquake, weight = .1, },
 	SpawnShadowGrabby = { name = SpawnShadowGrabby, weight = .3, },
 	SpawnMindWeavers = { name = SpawnMindWeavers, weight = .2, },
-	SpawnMindWeavers = { name = SpawnMindWeavers, weight = .2, },
+	SpawnNervousTicks = { name = SpawnNervousTicks, weight = .2, },
 }
 
 for k, v in pairs(WILD) do

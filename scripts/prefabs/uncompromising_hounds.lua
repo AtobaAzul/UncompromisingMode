@@ -89,6 +89,8 @@ SetSharedLootTable('hound_glacial',
 {
     {'monstermeat', 1.0},
     {'houndstooth', 1.0},
+    {'ice', 1.0},
+    {'ice', 0.5},
     --{'deer_ice_circle', 1.0},
     {'bluegem',     0.3},
 })
