@@ -45,7 +45,7 @@ local function Grabby(inst)
 	local ents = TheSim:FindEntities(x, y, z, 3.5, {"player"})
 	
 	for i, v in ipairs(ents) do
-		v.components.health:DoDelta(-50, false, inst.prefab)
+		v.components.health:DoDelta(-50, false, inst.prefab, false, nil, inst, false)
 			
 		if v.components.health:IsDead() then
 			v.Physics:Teleport(inst.Transform:GetWorldPosition())
