@@ -1,18 +1,3 @@
-local prefabs =
-{
-	"spider",
-    "spider_warrior",
-    "silk",
-    "spidereggsack",
-    "spiderqueen",
-}
-
-local assets =
-{
-    Asset("ANIM", "anim/spider_cocoon.zip"),
-	Asset("SOUND", "sound/spider.fsb"),
-}
-
 local function SetStage(inst, stage)
 	if stage <= 3 then
 
@@ -107,8 +92,7 @@ local function OnKilled(inst)
 		creature = "deer"
 		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
 		inst.components.lootdropper:AddChanceLoot("meat",    0.5)
-		inst.components.lootdropper:AddChanceLoot("boneshard",    1.00)
-		inst.components.lootdropper:AddChanceLoot("boneshard",    0.5)
+		inst.components.lootdropper:AddChanceLoot("deer_antler",    1.00)
 		inst.components.lootdropper:AddChanceLoot("bluegem",    0.5)
 		inst.components.lootdropper:AddChanceLoot("redgem",    0.5)
 		end
@@ -244,7 +228,7 @@ local function OnKilled(inst)
     local deadcreature = SpawnPrefab(creature)
 	deadcreature.Transform:SetPosition(x, y, z)
 	if creature == "spiderqueen" then
-	deadcreature:AddTag("nodecomposepls")
+		deadcreature:AddTag("nodecomposepls")
 	end
 	deadcreature.components.health:Kill()
 	if creature == "mossling" then --Fix funny mossling glitch
@@ -313,8 +297,8 @@ local function SetSize(inst)
 		inst.components.named:SetName("Leathery Cocoon")
 	end
 	
-	if inst.size == 7 then   --wee mactusk
-		SetMedium(inst)
+	if inst.size == 7 then   --grass gator
+		SetLarge(inst)
 		inst.components.named:SetName("Leafy Cocoon")
 	end
 	
@@ -360,7 +344,7 @@ local function SetSize(inst)
 		SetMedium(inst)
 		inst.components.named:SetName("Leafy Cocoon")
 	end
-	if inst.size == 17 then   --Snapdragon
+	if inst.size == 17 then   --Catcoon
 		SetSmall(inst)
 		inst.components.named:SetName("Fuzzy Cocoon")
 	end
