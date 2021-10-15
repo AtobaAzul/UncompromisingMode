@@ -42,7 +42,7 @@ local events=
 
 local function Grabby(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
-	local ents = TheSim:FindEntities(x, y, z, 3.5, {"player"})
+	local ents = TheSim:FindEntities(x, y, z, 3, {"player"}, {"playerghost"})
 	
 	for i, v in ipairs(ents) do
 		v.components.health:DoDelta(-50, false, inst.prefab, false, nil, inst, false)
@@ -50,7 +50,8 @@ local function Grabby(inst)
 		if v.components.health:IsDead() then
 			v.Physics:Teleport(inst.Transform:GetWorldPosition())
 		else
-			v.sg:GoToState("hit_darkness")
+			--v.AnimState:PlayAnimation("lighthit_back")
+			v.sg:GoToState("hit_weaver", inst)
 		end
 	end
 	
@@ -217,7 +218,7 @@ local states=
 				if Grabby(inst) then
 					inst.sg:GoToState("retreat") 
 				else
-					inst.sg:GoToState("idle_miss")
+					inst.sg:GoToState("idle_miss_yoinkey")
 				end
 			end),
         },
@@ -246,13 +247,30 @@ local states=
     },
 
     State{
+        name = "idle_miss_yoinkey",
+        tags = {"idle", "canrotate", "grabbing"},
+        
+        onenter = function(inst, start_anim)
+			inst:RemoveTag("INLIMBO")
+			inst.AnimState:PlayAnimation("idle_miss_yoinkey")
+        end,
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+                inst.sg:GoToState("idle_miss")
+            end),
+        },
+    },
+
+    State{
         name = "idle_miss",
         tags = {"idle", "canrotate", "grabbing"},
         
         onenter = function(inst, start_anim)
 			inst:RemoveTag("INLIMBO")
 			inst.AnimState:PlayAnimation("idle_miss", true)
-            inst.sg:SetTimeout(3)
+            inst.sg:SetTimeout(2)
         end,
 		
         ontimeout = function(inst)
@@ -347,8 +365,6 @@ local states=
     },
     
 }
-
-CommonStates.AddFrozenStates(states)
 
 return StateGraph("mindweaver", states, events, "appear")--, actionhandlers)
 

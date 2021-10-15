@@ -1165,20 +1165,9 @@ local function SpawnMindWeavers(player)
 		for i = 1, 3 do
 			player:DoTaskInTime((i * 20) + 10, function()
 				if TheWorld.state.isnight then
-					for i = 1, 4 do
-						local radius = 15 + math.random() * 15
-						local theta = math.random() * 2 * PI
-						local x, y, z = player.Transform:GetWorldPosition()
-						local x1 = x + radius * math.cos(theta)
-						local z1 = z - radius * math.sin(theta)
-						local light = TheSim:GetLightAtPoint(x1, 0, z1)
-						
-						if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
-							local ent = SpawnPrefab("mindweaver")
-							ent.Transform:SetPosition(x1, 0, z1)
-							break
-						end
-					end
+					local x, y, z = player.Transform:GetWorldPosition()
+					local ent = SpawnPrefab("mindweaver")
+					ent.Transform:SetPosition(x, y, z)
 				end
 			end)
 		end

@@ -68,7 +68,7 @@ local function ScanForPlayer(inst)
 		elseif #ents > 0 and inst.components.follower.leader ~= nil then
 			if inst.shadowsize < 5 then
 				inst.shadowsize = inst.shadowsize + 0.1
-				inst.DynamicShadow:SetSize(inst.shadowsize, inst.shadowsize)
+				inst.DynamicShadow:SetSize(inst.shadowsize, inst.shadowsize / 2)
 			else
 				if not inst.sg:HasStateTag("grabbing") and not inst.components.health:IsDead() then
 					if inst.shadowtask ~= nil then
@@ -83,11 +83,11 @@ local function ScanForPlayer(inst)
 			end
 		elseif inst.shadowsize > 0--[[1.1]] then
 			inst.shadowsize = inst.shadowsize - 0.1
-			inst.DynamicShadow:SetSize(inst.shadowsize, inst.shadowsize)
+			inst.DynamicShadow:SetSize(inst.shadowsize, inst.shadowsize / 2)
 		end
 	elseif inst.shadowsize > 0--[[1.1]] then
 		inst.shadowsize = inst.shadowsize - 0.1
-		inst.DynamicShadow:SetSize(inst.shadowsize, inst.shadowsize)
+		inst.DynamicShadow:SetSize(inst.shadowsize, inst.shadowsize / 2)
 	end
 end
 
@@ -119,6 +119,8 @@ local function fn(Sim)
     inst.AnimState:SetBank("mindweaver")
     inst.AnimState:SetBuild("mindweaver")
     inst.AnimState:PlayAnimation("appear")
+	inst.AnimState:SetFinalOffset(2)
+	
 	inst.Transform:SetScale(1.6, 1.6, 1.6)
 
 	inst.entity:SetPristine()
@@ -161,7 +163,7 @@ local function fn(Sim)
 	
 	inst:DoPeriodicTask(0.1, ScanForPlayer)
 	
-	inst.ResetShadow = ResetShadow
+	--inst.ResetShadow = ResetShadow
 
     return inst
 end
