@@ -20,8 +20,6 @@ local events=
         end 
     end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
-    CommonHandlers.OnSleep(),
-    CommonHandlers.OnFreeze(),
     
     
     EventHandler("locomote", function(inst) 
