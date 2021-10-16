@@ -97,9 +97,9 @@ local function fn(Sim)
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
     inst.entity:AddLightWatcher()
     inst.entity:AddDynamicShadow()
+    inst.entity:AddNetwork()
 
 	MakeCharacterPhysics(inst, 10, 1.5)
 	RemovePhysicsColliders(inst)
@@ -133,6 +133,8 @@ local function fn(Sim)
     inst.components.health:SetMaxHealth(300)
 	
     inst:AddComponent("locomotor")
+    inst.components.locomotor:SetTriggersCreep(false)
+    inst.components.locomotor.pathcaps = { ignorecreep = true }
     inst.components.locomotor.walkspeed = 8
     inst.components.locomotor.runspeed = 8
 	

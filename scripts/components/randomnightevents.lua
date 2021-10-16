@@ -1117,7 +1117,7 @@ local function SpawnShadowGrabby(player)
 		for i = 1, num_grabby do
 			player:DoTaskInTime((3 * i) + math.random(), function()
 				if TheWorld.state.isnight then
-					local dupes = i / 3
+					local dupes = i / 4
 					for i = 1, dupes do
 						local radius = 10 + math.random() * 10
 						local theta = math.random() * 2 * PI
@@ -1198,6 +1198,32 @@ local function SpawnNervousTicks(player)
 		end
 	end
 end
+
+local function SpawnNightCrawlers(player)
+	if TheWorld.state.isnight then
+		for i = 1, 10 do
+			player:DoTaskInTime(i + math.random(), function()
+				if TheWorld.state.isnight then
+					for i = 1, 4 do
+						local radius = 15 + math.random() * 15
+						local theta = math.random() * 2 * PI
+						local x, y, z = player.Transform:GetWorldPosition()
+						local x1 = x + radius * math.cos(theta)
+						local z1 = z - radius * math.sin(theta)
+						local light = TheSim:GetLightAtPoint(x1, 0, z1)
+			
+						if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+							local ent = SpawnPrefab("nightcrawler")
+							ent.Transform:SetPosition(x1, 0, z1)
+							break
+						end
+					end
+				end
+			end)
+		end
+	end
+end
+
 
 ---------------------------------------------------
 ---RNE list above
@@ -1366,6 +1392,7 @@ local BASE =
 	SpawnShadowVortex = { name = SpawnShadowVortex, weight = .2, },
 	SpawnMindWeavers = { name = SpawnMindWeavers, weight = .2, },
 	SpawnNervousTicks = { name = SpawnNervousTicks, weight = .2, },
+	SpawnNightCrawlers = { name = SpawnNightCrawlers, weight = .2, },
 }
 
 for k, v in pairs(BASE) do
@@ -1389,6 +1416,7 @@ local WILD =
 	SpawnShadowGrabby = { name = SpawnShadowGrabby, weight = .3, },
 	SpawnMindWeavers = { name = SpawnMindWeavers, weight = .2, },
 	SpawnNervousTicks = { name = SpawnNervousTicks, weight = .2, },
+	SpawnNightCrawlers = { name = SpawnNightCrawlers, weight = .2, },
 }
 
 for k, v in pairs(WILD) do

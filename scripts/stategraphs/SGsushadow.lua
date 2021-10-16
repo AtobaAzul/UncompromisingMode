@@ -69,6 +69,12 @@ local states=
         name = "idle",
         tags = {"idle", "canrotate"},
         onenter = function(inst)
+			if inst.despawntick == nil then
+				inst.despawntick = 0
+			elseif inst.despawntick ~= nil then
+				inst.despawntick = inst.despawntick + 1
+			end
+		
             inst.components.locomotor:StopMoving()
 			inst.AnimState:PlayAnimation("hand_in_loop", true)
         end,
@@ -76,7 +82,7 @@ local states=
         events=
         {
             EventHandler("animover", function(inst)
-				if not TheWorld.state.isnight then
+				if inst.despawntick ~= nil and inst.despawntick > 5 or not TheWorld.state.isnight then
 					inst.sg:GoToState("run_stop")
 				elseif inst.components.combat:HasTarget() then
 					inst.sg:GoToState("charge_pre")
