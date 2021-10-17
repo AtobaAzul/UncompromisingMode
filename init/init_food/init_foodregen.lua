@@ -20,7 +20,7 @@ local function oneat(inst, data)
 		
 	local strongstomach = inst.components.eater.strongstomach and data.food:HasTag("monstermeat")
 
-	local hasaffinity = inst.components.foodaffinity:HasAffinity(data.food)
+	local hasaffinity = inst.components.foodaffinity:HasPrefabAffinity(data.food)
 	
 	local foodmemorybuff = inst.components.foodmemory ~= nil and inst.components.foodmemory:GetFoodMultiplier(data.food.prefab) or 1
 	local foodaffinitysanitybuff = inst:HasTag("playermerm") and (data.food.prefab == "kelp" or data.food.prefab == "kelp_cooked") and 0 or inst.components.foodaffinity:HasAffinity(data.food) and 15 or 0
