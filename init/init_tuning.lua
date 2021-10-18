@@ -105,7 +105,7 @@ TUNING.DSTU =
     ----------------------------------------------------------------------------
     --Recipe stat changes
     RECIPE_CHANGE_STEW_COOKTIME = 180, --in seconds
-    RECIPE_CHANGE_PEROGI_PERISH = TUNING.PERISH_MED, --in days (from 20 to 10)
+    --RECIPE_CHANGE_PEROGI_PERISH = TUNING.PERISH_MED, --in days (from 20 to 10)
     RECIPE_CHANGE_BACONEGG_PERISH = TUNING.PERISH_MED,
     RECIPE_CHANGE_MEATBALL_HUNGER = TUNING.CALORIES_SMALL*4, -- (12.5 * 4) = 50, from 62.5
     RECIPE_CHANGE_BUTTERMUFFIN_HEALTH = TUNING.HEALING_MED*1.5,

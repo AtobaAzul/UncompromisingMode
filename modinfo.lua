@@ -217,7 +217,6 @@ configuration_options =
 	SkipSpace(),
 	Header("Crockpot Food Tweaks"),
 	BinaryConfig("meatball", "Meatball Nerf", "Meatballs restore 50 hunger instead of 62.5.", true),
-	--BinaryConfig("pierogi", "Pierogi Nerf", "Pierogis require a certain veggie value to cook.", true),
 	{
 		name = "perogi",
 		label = "Pierogi Recipe Nerf",

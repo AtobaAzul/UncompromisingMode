@@ -109,7 +109,7 @@ if TUNING.DSTU.ICECREAMBUFF == true then
 	recipes.icecream.oneatenfn = ApplyIcecreamBuff
 end
 
-local BACONEGGS = 
+--[[local BACONEGGS = 
 {
 	"baconeggs",
 	"baconeggs_spice_chili",
@@ -124,7 +124,7 @@ for k, v in pairs(BACONEGGS) do
 			inst.components.perishable:SetPerishTime(GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BACONEGG_PERISH)
 		end
 	end)
-end
+end]]
 
 recipes.baconeggs.priority = 9 --No more casino 50/50 baconeggs / monsterlasagna
 
