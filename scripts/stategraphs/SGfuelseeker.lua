@@ -14,9 +14,8 @@ local events=
     end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     
-    
     EventHandler("locomote", function(inst) 
-        if not inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("grabbing") and not inst.sg:HasStateTag("evade")  then
+        if not inst.sg:HasStateTag("disappearing") and not inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("grabbing") and not inst.sg:HasStateTag("evade")  then
             
             local is_moving = inst.sg:HasStateTag("moving")
             local wants_to_move = inst.components.locomotor:WantsToMoveForward()
@@ -60,12 +59,62 @@ local function OnAnimOverRemoveAfterSounds(inst)
     end
 end
 
-
 local function LightStealTarget(inst)
-	local target = 
+	local target = FindEntity(
+				inst,
+                6,
+                function(guy)
+                    return guy.components.burnable ~= nil and 
+					guy.components.fueled ~= nil and 
+					guy.components.fueled.consuming
+                end--[[,
+                { "player" },
+                { "playerghost" }]]
+            )
+        or FindEntity(
+				inst,
+                6,
+                function(guy)
+                    return guy._light ~= nil and 
+					guy.components.fueled ~= nil and 
+					guy.components.fueled.consuming
+                end--[[,
+                { "player" },
+                { "playerghost" }]]
+            )
+		or FindEntity(
+				inst,
+                6,
+                function(guy)
+                    return guy._light ~= nil and 
+					guy.components.fueled ~= nil and 
+					guy.components.fueled.consuming
+                end,
+                { "INLIMBO" }--[[,
+                { "playerghost" }]]
+            )
+		or FindEntity(
+				inst,
+                6,
+                function(guy)
+                    return guy._light ~= nil and 
+					guy.components.fueled ~= nil and 
+					guy.components.fueled.consuming
+                end,
+                { "INLIMBO" }--[[,
+                { "playerghost" }]]
+            )
+		or nil
+	
+	return target
+end
+
+
+local function ConsumeLight(inst)
+	local target1 = 
 	FindEntity(
 				inst,
-                8,
+                6,
                 function(guy)
                     return guy.components.burnable ~= nil and 
 					guy.components.fueled ~= nil and 
@@ -75,8 +124,71 @@ local function LightStealTarget(inst)
                 { "playerghost" }]]
             )
         or nil
+	local target2 = FindEntity(
+				inst,
+                6,
+                function(guy)
+                    return guy._light ~= nil and 
+					guy.components.fueled ~= nil and 
+					guy.components.fueled.consuming
+                end--[[,
+                { "player" },
+                { "playerghost" }]]
+            )
+		or nil
+		
+	local target3 = FindEntity(
+				inst,
+                6,
+                function(guy)
+                    return guy._light ~= nil and 
+					guy.components.fueled ~= nil and 
+					guy.components.fueled.consuming
+                end,
+                { "INLIMBO" }--[[,
+                { "playerghost" }]]
+            )
+		or nil
+		
+	local target4 = FindEntity(
+				inst,
+                6,
+                function(guy)
+                    return guy._light ~= nil and 
+					guy.components.fueled ~= nil and 
+					guy.components.fueled.consuming
+                end,
+                { "INLIMBO" }--[[,
+                { "playerghost" }]]
+            )
+		or nil
 	
-	return target and true or false
+	
+	if target1 ~= nil then
+		for i, v in ipairs(target1) do
+			v.components.fueled:DoDelta(-1)
+		end
+	end
+	
+	if target2 ~= nil then
+		for i, v in ipairs(target2) do
+			v.components.fueled:DoDelta(-1)
+		end
+	end
+	
+	if target3 ~= nil then
+		for i, v in ipairs(target3) do
+			v.components.fueled:DoDelta(-1)
+		end
+	end
+	
+	if target4 ~= nil then
+		for i, v in ipairs(target4) do
+			v.components.fueled:DoDelta(-1)
+		end
+	end
+	
+	
 end
 
 local states=
@@ -110,7 +222,7 @@ local states=
 
     State{
         name = "appear",
-        tags = {"idle", "canrotate"},
+        tags = {"idle", "canrotate", "disappearing"},
 		
         onenter = function(inst)
 			inst.AnimState:PlayAnimation("appear")
@@ -175,6 +287,9 @@ local states=
         tags = {"idle", "canrotate", "stealing"},
         
         onenter = function(inst, start_anim)
+		
+			inst.consumetask = inst:DoPeriodicTask(0.5, ConsumeLight)
+			
             PlayExtendedSound(inst, "idle")
             
 			inst.AnimState:PlayAnimation("idle_stealing", true)
@@ -198,6 +313,11 @@ local states=
         tags = {"idle", "canrotate", "stealing"},
         
         onenter = function(inst, start_anim)
+			if inst.consumetask ~= nil then
+				inst.consumetask:Cancel()
+				inst.consumetask = nil
+			end
+		
             PlayExtendedSound(inst, "idle")
             
 			inst.AnimState:PlayAnimation("idle_stealing_pst")
@@ -248,7 +368,7 @@ local states=
 
     State{
         name = "disappear",
-        tags = {"busy"},
+        tags = {"busy", "disappearing"},
         
         onenter = function(inst)
 			inst:AddTag("INLIMBO")
