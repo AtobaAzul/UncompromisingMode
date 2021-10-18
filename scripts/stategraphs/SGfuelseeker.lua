@@ -207,7 +207,7 @@ local states=
             RemovePhysicsColliders(inst)
             inst:AddTag("NOCLICK")
             inst.persists = false
-			inst.DynamicShadow:Enable(false)
+			--inst.DynamicShadow:Enable(false)
         end,
 
         events=
