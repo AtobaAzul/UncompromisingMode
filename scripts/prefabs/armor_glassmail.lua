@@ -69,15 +69,17 @@ end
 return val
 end
 
-local function UpdateGlass(inst)
-TempDamage(inst)
-if inst.armormeleehits == nil then
-inst.armormeleehits = 0
-end
-inst.armormeleehits = inst.armormeleehits + 1
-if inst.armormeleehits >= 2 and NoCrystalsLeftToSpawn(inst) == false then
-	TryAddCrystal(inst)
-	inst.armormeleehits = 0
+local function UpdateGlass(inst,data)
+if data ~= nil and data.target ~= nil and data.target.components.combat ~= nil and data.target.components.combat.defaultdamage > 0  then
+	TempDamage(inst)
+	if inst.armormeleehits == nil then
+		inst.armormeleehits = 0
+	end
+	inst.armormeleehits = inst.armormeleehits + 1
+	if inst.armormeleehits >= 2 and NoCrystalsLeftToSpawn(inst) == false then
+		TryAddCrystal(inst)
+		inst.armormeleehits = 0
+	end
 end
 end
 
