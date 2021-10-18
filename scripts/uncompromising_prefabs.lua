@@ -267,6 +267,7 @@ return {
 	"nervoustick",
 	"mindweaver",
 	"rneshadows",
+	"fuelseeker",
 	
 	"backupcatcoonden",
 	--"moon_deerclops",
