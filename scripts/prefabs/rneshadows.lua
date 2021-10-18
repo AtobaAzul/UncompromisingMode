@@ -90,14 +90,16 @@ local function Grab(inst)
 			fx.entity:SetParent(inst.entity)
 				
 			if v.components.rider:IsRiding() then
-				v.components.rider:Buck(false)
-			else
-				v.Physics:Stop()
-				v.sg:GoToState("grabby_teleport")
-				v:DoTaskInTime(42 * FRAMES, Teleport)
-				--SpawnPrefab("rnesus_grab").Transform:SetPosition(v.Transform:GetWorldPosition())
-				inst.sg:GoToState("run_stop")
+				v.sg:GoToState("knockback")
+				--v.components.rider:Dismount()
 			end
+			
+			v.Physics:Stop()
+			v.sg:GoToState("grabby_teleport")
+			v:DoTaskInTime(42 * FRAMES, Teleport)
+			--SpawnPrefab("rnesus_grab").Transform:SetPosition(v.Transform:GetWorldPosition())
+			
+			inst.sg:GoToState("run_stop")
 		end
 	end
 end

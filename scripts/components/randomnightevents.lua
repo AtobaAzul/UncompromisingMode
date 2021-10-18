@@ -1022,11 +1022,9 @@ end
 local function SpawnShadowTalker(player, mathmin, mathmax)
 	if TheWorld.state.isnight then
 		player:DoTaskInTime(1+math.random(5, 10), function()
-			if player ~= nil then
-				local ent = SpawnPrefab("shadowtalker")
-				ent.Transform:SetPosition(player.Transform:GetWorldPosition())
-				ent.speech = player
-			end
+			local ent = SpawnPrefab("shadowtalker")
+			ent.Transform:SetPosition(player.Transform:GetWorldPosition())
+			ent.speech = player
 		end)
 	end
 end

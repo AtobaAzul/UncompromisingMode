@@ -26,17 +26,19 @@ local function CheckForLight(inst, doanim)
 end
 
 local function RepositionToDarkness(inst)
-	if TheWorld.state.isnight then
+	if TheWorld.state.isnight or TheWorld.state.iscavenight then
 		if inst.speech ~= nil then
 			local x, y, z = inst.speech.Transform:GetWorldPosition()
-			local x1 = x + math.random(-15, 15)
-			local z1 = z + math.random(-15, 15)
-			--local light = TheSim:GetLightAtPoint(x1, 0, z1)
-			if inst.LightWatcher:IsInLight() or TheSim:FindEntities(x1, 0, z1, 20, {"player"}) == 0 then
-				inst.Transform:SetPosition(x1, 0, z1)
-				if not inst.LightWatcher:IsInLight() then
-					inst.AnimState:PlayAnimation("appear_"..inst.animname)
-					inst.AnimState:PushAnimation("idle_"..inst.animname, true)
+			if x ~= nil then
+				local x1 = x + math.random(-15, 15)
+				local z1 = z + math.random(-15, 15)
+				--local light = TheSim:GetLightAtPoint(x1, 0, z1)
+				if inst.LightWatcher:IsInLight() or TheSim:FindEntities(x1, 0, z1, 20, {"player"}) == 0 then
+					inst.Transform:SetPosition(x1, 0, z1)
+					if not inst.LightWatcher:IsInLight() then
+						inst.AnimState:PlayAnimation("appear_"..inst.animname)
+						inst.AnimState:PushAnimation("idle_"..inst.animname, true)
+					end
 				end
 			end
 		else

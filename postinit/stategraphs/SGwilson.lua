@@ -618,10 +618,6 @@ State{
 			
             inst.AnimState:Hide("swap_arm_carry")
             inst.AnimState:PlayAnimation("grabbedbytheghoulie")
-
-			if inst.components.rider:IsRiding() then
-                inst.sg:AddStateTag("dismounting")
-            end
 				
 			if inst.deathsoundoverride ~= nil then
 				inst.SoundEmitter:PlaySound(inst.deathsoundoverride)
