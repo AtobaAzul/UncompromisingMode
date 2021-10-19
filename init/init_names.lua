@@ -254,6 +254,16 @@ UI = GLOBAL.STRINGS.UI
 	STRINGS.RAIN_HORN = "Drowning Conch"
 	STRINGS.FLORAL_BANDAGE = "Sweetflower Wrap"
 	STRINGS.DORMANT_RAIN_HORN = "Dormant Conch" 
+	
+	
+	STRINGS.NIGHTCRAWLER = "Night Crawler" 
+	STRINGS.RNE_GRABBYSHADOWS = "Grasping Fear" 
+	STRINGS.NERVOUSTICK = "Nervous Tick Den" 
+	STRINGS.NERVOUSTICKDEN = "Heart of the Swarm" 
+	STRINGS.FUELSEEKER = "Fuel Seeker" 
+	STRINGS.MINDWEAVER = "Mind Weaver" 
+	
+	
 		--[[UI.CUSTOMIZATIONSCREEN = {
 			PRESETLEVELS = 
 			{
