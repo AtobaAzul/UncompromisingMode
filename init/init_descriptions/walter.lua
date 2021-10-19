@@ -272,6 +272,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.GREEN_MUSHED_ROOM = "I'm not sure it's any better mushed."
 	DESCRIBE.BLUE_MUSHED_ROOM = "I'm not sure it's any better mushed."
 	
+	DESCRIBE.SHADOW_TELEPORTER = "Curious!"
+	
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "Cool!"
 	DESCRIBE.SKULLFLASK_EMPTY = "No more!"

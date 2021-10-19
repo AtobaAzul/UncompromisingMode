@@ -69,7 +69,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
         "SHE IS NO MORE",
         "THIS IS WHERE I BELONG",
         "I DON'T WANT TO GO BACK",
-		"MY NAME IS NOT WIGFRID",
     }
 	DESCRIBE.SAND = "You are a very clean dirt."
 	DESCRIBE.SANDHILL = "I will not make a mountain out of a sandhill."
