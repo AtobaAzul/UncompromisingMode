@@ -24,71 +24,13 @@ local sounds =
 
 local brain = require "brains/fuelseekerbrain"
 
---local function Disappear(inst)
-	--if not inst.sg:HasStateTag("grabbing") and not inst.components.health:IsDead() then
-		--inst.sg:GoToState("grab")
-	--end
---end
-
-local function ResetShadow(inst)
-	if inst.shadowsize ~= nil and inst.shadowsize > 0 then
-		inst.shadowsize = inst.shadowsize - 0.25
-		inst.DynamicShadow:SetSize(inst.shadowsize, inst.shadowsize)
-		
-		inst.shadowtask = inst:DoPeriodicTask(0.1, ResetShadow)
-	else
-		inst.DynamicShadow:SetSize(0, 0)
-		
-		if inst.shadowtask ~= nil then
-			inst.shadowtask:Cancel()
-			inst.shadowtask = nil
-		end
-	end
-end
-
-local function Cooldown(inst)
-	inst.shadowsize = 0
-	inst.DynamicShadow:SetSize(inst.shadowsize, inst.shadowsize)
-	inst.cooldown = false
-end
-
-local function ScanForPlayer(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
+local function Init(inst)
+	local fx = SpawnPrefab("fuelseeker_darkfire")
+	fx.entity:SetParent(inst.entity)
+	fx.entity:AddFollower()
+	fx.Follower:FollowSymbol(inst.GUID, "p3_moon_base", 0, 0, 0)
 	
-	if not inst.cooldown and inst:GetTimeAlive() >= 5 then
-		local ents = TheSim:FindEntities(x, y, z, 10, { "player" }, { "playerghost" })
-	
-		if inst.components.follower.leader == nil then
-			for i, v in ipairs(ents) do
-				inst.Physics:Teleport(v.Transform:GetWorldPosition())
-				--inst.Transform:SetPosition(v.Transform:GetWorldPosition())
-				inst.components.follower:SetLeader(v)
-				break
-			end
-		elseif #ents > 0 and inst.components.follower.leader ~= nil then
-			if inst.shadowsize < 5 then
-				inst.shadowsize = inst.shadowsize + 0.1
-				inst.DynamicShadow:SetSize(inst.shadowsize, inst.shadowsize / 2)
-			else
-				if not inst.sg:HasStateTag("grabbing") and not inst.components.health:IsDead() then
-					if inst.shadowtask ~= nil then
-						inst.shadowtask:Cancel()
-						inst.shadowtask = nil
-					end
-					inst.components.follower.leader = nil
-					inst.sg:GoToState("grab")
-					inst.cooldown = true
-					inst:DoTaskInTime(10, Cooldown)
-				end
-			end
-		elseif inst.shadowsize > 0--[[1.1]] then
-			inst.shadowsize = inst.shadowsize - 0.1
-			inst.DynamicShadow:SetSize(inst.shadowsize, inst.shadowsize / 2)
-		end
-	elseif inst.shadowsize > 0--[[1.1]] then
-		inst.shadowsize = inst.shadowsize - 0.1
-		inst.DynamicShadow:SetSize(inst.shadowsize, inst.shadowsize / 2)
-	end
+	inst.fire = fx
 end
 
 local function fn(Sim)
@@ -129,8 +71,8 @@ local function fn(Sim)
     inst:AddComponent("locomotor")
     inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = true }
-    inst.components.locomotor.walkspeed = 4
-    inst.components.locomotor.runspeed = 4
+    inst.components.locomotor.walkspeed = 6
+    inst.components.locomotor.runspeed = 6
 	
     inst:AddComponent("follower")
 	
@@ -138,6 +80,7 @@ local function fn(Sim)
 	inst.components.lootdropper:SetChanceLootTable('shadow_creature')
 	
     inst:AddComponent("combat")
+	
     inst.sounds = sounds 
 	inst.cooldown = false
 	
@@ -148,11 +91,89 @@ local function fn(Sim)
 		inst:Remove()
 	end)
 	
-	--inst:DoPeriodicTask(0.1, ScanForPlayer)
-	
-	--inst.ResetShadow = ResetShadow
+	inst:DoTaskInTime(0, Init)
 
     return inst
 end
 
-return Prefab( "fuelseeker", fn, assets, prefabs)
+local function circlefn()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+
+    inst:AddTag("FX")
+    inst:AddTag("NOCLICK")
+
+    inst.AnimState:SetBank("sporecloud")
+    inst.AnimState:SetBuild("sporecloud")
+	inst.AnimState:SetMultColour(0, 0, 0, 1)
+	inst.Transform:SetScale(.44, .44, .44)
+
+    inst.AnimState:PlayAnimation("sporecloud_pst")
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst:ListenForEvent("animover", inst.Remove)
+
+    inst.persists = false
+
+    return inst
+end
+
+local function LevelUp(inst)
+	inst.level = inst.level + 0.2
+	inst.SoundEmitter:SetParameter("shadowfire", "intensity", inst.level / 3)
+	inst.Transform:SetScale(inst.level / 2, inst.level / 2, inst.level / 2)
+end
+
+local function Reset(inst)
+	inst.level = 0
+	inst.SoundEmitter:SetParameter("shadowfire", "intensity", inst.level / 3)
+	inst.Transform:SetScale(inst.level / 2, inst.level / 2, inst.level / 2)
+end
+
+local function darkfirefn()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+
+    inst:AddTag("FX")
+    inst:AddTag("NOCLICK")
+
+    inst.AnimState:SetBank("fire")
+    inst.AnimState:SetBuild("fire")
+    inst.AnimState:PlayAnimation("level4", true)
+	inst.AnimState:SetMultColour(0, 0, 0, 1)
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.SoundEmitter:PlaySound("dontstarve/common/nightlight", "shadowfire")
+	
+	inst.level = 0
+	inst.Transform:SetScale(inst.level / 2, inst.level / 2, inst.level / 2)
+	
+	inst.LevelUp = LevelUp
+	inst.Reset = Reset
+
+    inst.persists = false
+
+    return inst
+end
+
+return Prefab( "fuelseeker", fn, assets, prefabs),
+		Prefab( "fuelseeker_circle", circlefn, assets, prefabs),
+		Prefab( "fuelseeker_darkfire", darkfirefn, assets, prefabs)

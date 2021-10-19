@@ -3,7 +3,7 @@ require("stategraphs/commonstates")
 local events=
 {
 	EventHandler("attacked", function(inst) 
-        if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then 
+        if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("disappearing") then 
             inst.sg:GoToState("hit")  -- can't attack during hit reaction
         end 
     end),
@@ -60,135 +60,47 @@ local function OnAnimOverRemoveAfterSounds(inst)
 end
 
 local function LightStealTarget(inst)
-	local target = FindEntity(
-				inst,
-                6,
-                function(guy)
-                    return guy.components.burnable ~= nil and 
-					guy.components.fueled ~= nil and 
-					guy.components.fueled.consuming
-                end--[[,
-                { "player" },
-                { "playerghost" }]]
-            )
-        or FindEntity(
-				inst,
-                6,
-                function(guy)
-                    return guy._light ~= nil and 
-					guy.components.fueled ~= nil and 
-					guy.components.fueled.consuming
-                end--[[,
-                { "player" },
-                { "playerghost" }]]
-            )
-		or FindEntity(
-				inst,
-                6,
-                function(guy)
-                    return guy._light ~= nil and 
-					guy.components.fueled ~= nil and 
-					guy.components.fueled.consuming
-                end,
-                { "INLIMBO" }--[[,
-                { "playerghost" }]]
-            )
-		or FindEntity(
-				inst,
-                6,
-                function(guy)
-                    return guy._light ~= nil and 
-					guy.components.fueled ~= nil and 
-					guy.components.fueled.consuming
-                end,
-                { "INLIMBO" }--[[,
-                { "playerghost" }]]
-            )
-		or nil
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local ents = TheSim:FindEntities(x, y, z, 7)
+
+	for i, v in ipairs(ents) do
+		if v.components.burnable ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
+			print("firefound")
+			return true
+		elseif v._light ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
+			print("lightfound")
+			return true
+		end
+	end
 	
-	return target
+	return false
 end
 
-
 local function ConsumeLight(inst)
-	local target1 = 
-	FindEntity(
-				inst,
-                6,
-                function(guy)
-                    return guy.components.burnable ~= nil and 
-					guy.components.fueled ~= nil and 
-					guy.components.fueled.consuming
-                end--[[,
-                { "player" },
-                { "playerghost" }]]
-            )
-        or nil
-	local target2 = FindEntity(
-				inst,
-                6,
-                function(guy)
-                    return guy._light ~= nil and 
-					guy.components.fueled ~= nil and 
-					guy.components.fueled.consuming
-                end--[[,
-                { "player" },
-                { "playerghost" }]]
-            )
-		or nil
-		
-	local target3 = FindEntity(
-				inst,
-                6,
-                function(guy)
-                    return guy._light ~= nil and 
-					guy.components.fueled ~= nil and 
-					guy.components.fueled.consuming
-                end,
-                { "INLIMBO" }--[[,
-                { "playerghost" }]]
-            )
-		or nil
-		
-	local target4 = FindEntity(
-				inst,
-                6,
-                function(guy)
-                    return guy._light ~= nil and 
-					guy.components.fueled ~= nil and 
-					guy.components.fueled.consuming
-                end,
-                { "INLIMBO" }--[[,
-                { "playerghost" }]]
-            )
-		or nil
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local ents = TheSim:FindEntities(x, y, z, 8)
 	
-	
-	if target1 ~= nil then
-		for i, v in ipairs(target1) do
-			v.components.fueled:DoDelta(-1)
+	for i, v in ipairs(ents) do
+		if v.components.burnable ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
+			v.components.fueled:DoDelta(-7)
+			print("fire")
+			
+			SpawnPrefab("fuelseeker_circle").Transform:SetPosition(v.Transform:GetWorldPosition())
+			
+			if inst.fire ~= nil then
+				inst.fire:LevelUp()
+			end
+		elseif v._light ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
+			v.components.fueled:DoDelta(-7)
+			print("light")
+			
+			SpawnPrefab("fuelseeker_circle").Transform:SetPosition(v.Transform:GetWorldPosition())
+			
+			if inst.fire ~= nil then
+				inst.fire:LevelUp()
+			end
 		end
 	end
-	
-	if target2 ~= nil then
-		for i, v in ipairs(target2) do
-			v.components.fueled:DoDelta(-1)
-		end
-	end
-	
-	if target3 ~= nil then
-		for i, v in ipairs(target3) do
-			v.components.fueled:DoDelta(-1)
-		end
-	end
-	
-	if target4 ~= nil then
-		for i, v in ipairs(target4) do
-			v.components.fueled:DoDelta(-1)
-		end
-	end
-	
-	
 end
 
 local states=
@@ -198,6 +110,9 @@ local states=
         tags = { "busy" },
 
         onenter = function(inst)
+			if inst.fire ~= nil then
+				inst.fire:Hide()
+			end
 			inst:AddTag("INLIMBO")
             PlayExtendedSound(inst, "death")
             inst.AnimState:PlayAnimation("disappear")
@@ -207,7 +122,6 @@ local states=
             RemovePhysicsColliders(inst)
             inst:AddTag("NOCLICK")
             inst.persists = false
-			--inst.DynamicShadow:Enable(false)
         end,
 
         events=
@@ -225,6 +139,10 @@ local states=
         tags = {"idle", "canrotate", "disappearing"},
 		
         onenter = function(inst)
+			if inst.fire ~= nil then
+				inst.fire:Show()
+			end
+			inst:RemoveTag("INLIMBO")
 			inst.AnimState:PlayAnimation("appear")
             PlayExtendedSound(inst, "appear")
         end,
@@ -264,6 +182,7 @@ local states=
         tags = {"idle", "canrotate", "stealing"},
         
         onenter = function(inst, start_anim)
+			
             PlayExtendedSound(inst, "idle")
             
 			inst.AnimState:PlayAnimation("idle_stealing_pre")
@@ -287,8 +206,9 @@ local states=
         tags = {"idle", "canrotate", "stealing"},
         
         onenter = function(inst, start_anim)
-		
-			inst.consumetask = inst:DoPeriodicTask(0.5, ConsumeLight)
+			if inst.consumetask == nil then
+				inst.consumetask = inst:DoPeriodicTask(0.5, ConsumeLight)
+			end
 			
             PlayExtendedSound(inst, "idle")
             
@@ -296,10 +216,19 @@ local states=
             --inst.sg:SetTimeout(5)
         end,
         
+        onexit = function(inst)
+			if inst.consumetask ~= nil then
+				inst.consumetask:Cancel()
+				inst.consumetask = nil
+			end
+		end,
+		
         events=
         {
             EventHandler("animover", function(inst)
-				if LightStealTarget(inst) then
+				if inst.fire ~= nil and inst.fire.level >= 3 then
+					inst.sg:GoToState("burst")
+				elseif LightStealTarget(inst) then
 					inst.sg:GoToState("stealing")
 				else
 					inst.sg:GoToState("stealing_pst")
@@ -309,14 +238,46 @@ local states=
     },
 	
     State{
+        name = "burst",
+        tags = {"idle", "canrotate", "attack", "stealing"},
+        
+        onenter = function(inst, start_anim)
+		
+            PlayExtendedSound(inst, "attack")
+            
+			inst.AnimState:PlayAnimation("burst")
+            --inst.sg:SetTimeout(5)
+        end,
+        
+        events=
+        {
+            EventHandler("animover", function(inst)
+				
+				local x, y, z = inst.Transform:GetWorldPosition()
+				local ents = TheSim:FindEntities(x, y, z, 6, {"player"}, {"playerghost"})
+				local explosive = SpawnPrefab("shadow_puff_solid")
+				explosive.Transform:SetPosition(x, y, z)
+				explosive.Transform:SetScale(4, 4, 4)
+				
+				for i, v in ipairs(ents) do
+					v.components.combat:GetAttacked(inst, 50, nil)
+				end
+				
+				
+				if inst.fire ~= nil then
+					inst.fire:Reset()
+				end
+				
+				inst.sg:GoToState("idle")
+			end),
+        },
+    },
+	
+    State{
         name = "stealing_pst",
         tags = {"idle", "canrotate", "stealing"},
         
         onenter = function(inst, start_anim)
-			if inst.consumetask ~= nil then
-				inst.consumetask:Cancel()
-				inst.consumetask = nil
-			end
 		
             PlayExtendedSound(inst, "idle")
             
@@ -338,9 +299,14 @@ local states=
 	
     State{
         name = "hit",
-        tags = { "busy", "hit" },
+        tags = { "busy", "hit", "disappearing" },
 
         onenter = function(inst)
+			if inst.fire ~= nil then
+				inst.fire:Hide()
+			end
+		
+			inst:AddTag("INLIMBO")
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("disappear")
         end,
@@ -371,11 +337,12 @@ local states=
         tags = {"busy", "disappearing"},
         
         onenter = function(inst)
+			if inst.fire ~= nil then
+				inst.fire:Hide()
+			end
 			inst:AddTag("INLIMBO")
             inst.AnimState:PlayAnimation("disappear")
 			PlayExtendedSound(inst, "attack_grunt")
-			
-			inst.DynamicShadow:SetSize(0, 0)
 			
 			--[[if inst.shadowtask ~= nil then
 				inst.shadowtask:Cancel()
@@ -435,5 +402,5 @@ local states=
     },
 }
 
-return StateGraph("mindweaver", states, events, "appear")--, actionhandlers)
+return StateGraph("fuelseeker", states, events, "appear")--, actionhandlers)
 
