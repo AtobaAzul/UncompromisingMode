@@ -162,6 +162,11 @@ local function fn(Sim)
 			inst:Remove()
 		end
 	end)
+	inst:WatchWorldState("iscaveday", function() 
+		if not inst.sg:HasStateTag("grabbing") then
+			inst:Remove()
+		end
+	end)
 	
 	inst:DoPeriodicTask(0.1, ScanForPlayer)
 	

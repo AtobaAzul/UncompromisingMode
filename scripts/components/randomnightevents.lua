@@ -1113,13 +1113,13 @@ end
 
 local function SpawnShadowGrabby(player)
 	if TheWorld.state.isnight then
-		local num_grabby = 15
+		local num_grabby = 20
 		for i = 1, num_grabby do
 			player:DoTaskInTime((3 * i) + math.random(), function()
 				if TheWorld.state.isnight then
 					local dupes = i / 4
 					for i = 1, dupes do
-						local radius = 10 + math.random() * 10
+						local radius = 15 + math.random() * 15
 						local theta = math.random() * 2 * PI
 						local x, y, z = player.Transform:GetWorldPosition()
 						local x1 = x + radius * math.cos(theta)
@@ -1176,7 +1176,7 @@ end
 
 local function SpawnNervousTicks(player)
 	if TheWorld.state.isnight then
-		for i = 1, 2 do
+		for i = 1, 3 do
 			player:DoTaskInTime((i + 1) * 3, function()
 				if TheWorld.state.isnight then
 					for i = 1, 4 do
@@ -1214,6 +1214,31 @@ local function SpawnNightCrawlers(player)
 			
 						if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 							local ent = SpawnPrefab("nightcrawler")
+							ent.Transform:SetPosition(x1, 0, z1)
+							break
+						end
+					end
+				end
+			end)
+		end
+	end
+end
+
+local function SpawnFuelSeekers(player)
+	if TheWorld.state.isnight then
+		for i = 1, 3 do
+			player:DoTaskInTime((i * 3) + i, function()
+				if TheWorld.state.isnight then
+					for i = 1, 4 do
+						local radius = 15 + math.random() * 15
+						local theta = math.random() * 2 * PI
+						local x, y, z = player.Transform:GetWorldPosition()
+						local x1 = x + radius * math.cos(theta)
+						local z1 = z - radius * math.sin(theta)
+						local light = TheSim:GetLightAtPoint(x1, 0, z1)
+			
+						if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+							local ent = SpawnPrefab("fuelseeker")
 							ent.Transform:SetPosition(x1, 0, z1)
 							break
 						end
@@ -1305,16 +1330,6 @@ local function RemoveBaseEvent(name, weight)
 	end
 end
 
-local function AddCaveEvent(name, weight)
-    if not self.caveevents then
-        self.caveevents = {}
-        self.totalrandomcaveweight = 0
-    end
-
-    table.insert(self.caveevents, { name = name, weight = weight })
-    self.totalrandomcaveweight = self.totalrandomcaveweight + weight
-end
-
 local function AddOceanEvent(name, weight)
     if not self.oceanevents then
         self.oceanevents = {}
@@ -1376,23 +1391,24 @@ local BASE =
 	SpawnBaseBats = { name = SpawnBaseBats, weight = .3, },
 	SpawnFissures = { name = SpawnFissures, weight = .3, },
 	SpawnSkitts = { name = SpawnSkitts, weight = .5, },
-	FireHungryGhostAttack = { name = FireHungryGhostAttack, weight = .2, },
+	--FireHungryGhostAttack = { name = FireHungryGhostAttack, weight = .2, },
 	SpawnShadowChars = { name = SpawnShadowChars, weight = .3, },
 	SpawnMonkeys = { name = SpawnMonkeys, weight = .1, },
 	LeifAttack = { name = LeifAttack, weight = .1, },
-	SpawnShadowTeleporter = { name = SpawnShadowTeleporter, weight = .2, },
-	StumpsAttack = { name = StumpsAttack, weight = .3, },
+	SpawnShadowTeleporter = { name = SpawnShadowTeleporter, weight = .1, },
+	--StumpsAttack = { name = StumpsAttack, weight = .2, },
 	SpawnShadowTalker = { name = SpawnShadowTalker, weight = .6, },
-	SpawnShadowBoomer = { name = SpawnShadowBoomer, weight = .2, },
-	SpawnGnomes = { name = SpawnGnomes, weight = .4, },
-	SkeleBros = { name = SkeleBros, weight = .4, },
-	Stanton = { name = Stanton, weight = .2, },
+	SpawnShadowBoomer = { name = SpawnShadowBoomer, weight = .3, },
+	SpawnGnomes = { name = SpawnGnomes, weight = .1, },
+	SkeleBros = { name = SkeleBros, weight = .3, },
+	Stanton = { name = Stanton, weight = .1, },
 	Earthquake = { name = Earthquake, weight = .1, },
-	SpawnShadowGrabby = { name = SpawnShadowGrabby, weight = .3, },
-	SpawnShadowVortex = { name = SpawnShadowVortex, weight = .2, },
-	SpawnMindWeavers = { name = SpawnMindWeavers, weight = .2, },
-	SpawnNervousTicks = { name = SpawnNervousTicks, weight = .2, },
-	SpawnNightCrawlers = { name = SpawnNightCrawlers, weight = .2, },
+	SpawnShadowGrabby = { name = SpawnShadowGrabby, weight = .5, },
+	SpawnShadowVortex = { name = SpawnShadowVortex, weight = .5, },
+	SpawnMindWeavers = { name = SpawnMindWeavers, weight = .5, },
+	SpawnNervousTicks = { name = SpawnNervousTicks, weight = .5, },
+	SpawnNightCrawlers = { name = SpawnNightCrawlers, weight = .5, },
+	SpawnFuelSeekers = { name = SpawnFuelSeekers, weight = .5, },
 }
 
 for k, v in pairs(BASE) do
@@ -1401,22 +1417,23 @@ end
 
 local WILD = 
 {
-	SpawnBats = { name = SpawnBats, weight = .2, },
+	SpawnBats = { name = SpawnBats, weight = .3, },
 	SpawnLightFlowersNFerns = { name = SpawnLightFlowersNFerns, weight = .3, },
-	SpawnSkitts = { name = SpawnSkitts, weight = .6, },
-	SpawnMonkeys = { name = SpawnMonkeys, weight = .2, },
-	LeifAttack = { name = LeifAttack, weight = .2, },
-	SpawnShadowTeleporter = { name = SpawnShadowTeleporter, weight = .3, },
-	StumpsAttack = { name = StumpsAttack, weight = .3, },
-	SpawnShadowTalker = { name = SpawnShadowTalker, weight = .7, },
-	SpawnShadowBoomer = { name = SpawnShadowBoomer, weight = .2, },
+	SpawnSkitts = { name = SpawnSkitts, weight = .5, },
+	SpawnMonkeys = { name = SpawnMonkeys, weight = .1, },
+	LeifAttack = { name = LeifAttack, weight = .1, },
+	SpawnShadowTeleporter = { name = SpawnShadowTeleporter, weight = .1, },
+	--StumpsAttack = { name = StumpsAttack, weight = .2, },
+	SpawnShadowTalker = { name = SpawnShadowTalker, weight = .6, },
+	SpawnShadowBoomer = { name = SpawnShadowBoomer, weight = .3, },
 	SkeleBros = { name = SkeleBros, weight = .3, },
-	Stanton = { name = Stanton, weight = .4, },
+	Stanton = { name = Stanton, weight = .1, },
 	Earthquake = { name = Earthquake, weight = .1, },
-	SpawnShadowGrabby = { name = SpawnShadowGrabby, weight = .3, },
-	SpawnMindWeavers = { name = SpawnMindWeavers, weight = .2, },
-	SpawnNervousTicks = { name = SpawnNervousTicks, weight = .2, },
-	SpawnNightCrawlers = { name = SpawnNightCrawlers, weight = .2, },
+	SpawnShadowGrabby = { name = SpawnShadowGrabby, weight = .5, },
+	SpawnMindWeavers = { name = SpawnMindWeavers, weight = .5, },
+	SpawnNervousTicks = { name = SpawnNervousTicks, weight = .5, },
+	SpawnNightCrawlers = { name = SpawnNightCrawlers, weight = .5, },
+	SpawnFuelSeekers = { name = SpawnFuelSeekers, weight = .5, },
 }
 
 for k, v in pairs(WILD) do
@@ -1428,7 +1445,7 @@ local SECONDARYWILD =
 	SpawnBaseBats = { name = SpawnBaseBats, weight = .3, },
 	SpawnSkitts = { name = SpawnSkitts, weight = .5, },
 	SpawnLightFlowersNFerns = { name = SpawnLightFlowersNFerns, weight = .2, },
-	StumpsAttack = { name = StumpsAttack, weight = .3, },
+	--StumpsAttack = { name = StumpsAttack, weight = .3, },
 	SpawnShadowTalker = { name = SpawnShadowTalker, weight = .6, },
 	SpawnShadowBoomer = { name = SpawnShadowBoomer, weight = .2, },
 }

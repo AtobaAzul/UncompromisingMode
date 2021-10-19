@@ -210,7 +210,7 @@ local states=
 				inst.consumetask = inst:DoPeriodicTask(0.5, ConsumeLight)
 			end
 			
-            PlayExtendedSound(inst, "idle")
+            PlayExtendedSound(inst, "attack_grunt")
             
 			inst.AnimState:PlayAnimation("idle_stealing", true)
             --inst.sg:SetTimeout(5)
@@ -309,6 +309,7 @@ local states=
 			inst:AddTag("INLIMBO")
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("disappear")
+			PlayExtendedSound(inst, "disappear")
         end,
 
         events =
@@ -342,7 +343,7 @@ local states=
 			end
 			inst:AddTag("INLIMBO")
             inst.AnimState:PlayAnimation("disappear")
-			PlayExtendedSound(inst, "attack_grunt")
+			PlayExtendedSound(inst, "disappear")
 			
 			--[[if inst.shadowtask ~= nil then
 				inst.shadowtask:Cancel()

@@ -146,6 +146,9 @@ local function fn()
 	inst:DoPeriodicTask(FRAMES, Vac)
 	inst:DoPeriodicTask(1.5, Beat)
 	
+	inst:WatchWorldState("isday", inst.Remove)
+	inst:WatchWorldState("iscaveday", inst.Remove)
+	
     inst.persists = false
 	
     return inst

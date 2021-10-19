@@ -245,8 +245,6 @@ return {
 	--"uncompromising_alterguardianspawner",
 	"driftwoodfishingrod",
 	"nightlightfuel",
-	"rneearthquake",
-	"graspingfear",
 	
 	"voorhams",
 	"ratking",
@@ -263,6 +261,7 @@ return {
 	"ratacombs_totem",
 	"ratgashole",
 	
+	"rneearthquake",
 	"shadowvortex",
 	"nervoustick",
 	"mindweaver",

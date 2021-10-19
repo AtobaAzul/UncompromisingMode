@@ -235,6 +235,7 @@ local function fn()
 	inst:ListenForEvent("onattackother", Invade)
 	
 	inst:WatchWorldState("isday", inst.Remove)
+	inst:WatchWorldState("iscaveday", inst.Remove)
 
     inst.persists = true
 
@@ -245,6 +246,11 @@ local function beat(inst)
     inst.AnimState:PlayAnimation("idle")
     inst.SoundEmitter:PlaySound("dontstarve/sanity/shadow_heart")
     inst.beattask = inst:DoTaskInTime(.75 + math.random() * .75, beat)
+end
+
+local function OnKilled(inst)
+	SpawnPrefab("shadow_despawn").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	inst:Remove()
 end
 
 local function denfn()
@@ -264,6 +270,9 @@ local function denfn()
         return inst
     end
 
+	inst:AddComponent("health")
+	inst.components.health:SetMaxHealth(300)
+		
 	inst:AddComponent("childspawner")
 	inst.components.childspawner:SetRegenPeriod(3)
 	inst.components.childspawner:SetSpawnPeriod(3)
@@ -274,9 +283,13 @@ local function denfn()
     -- initialize with no children
     inst.components.childspawner.childreninside = 0
 	
+	inst:AddComponent("combat")
+	inst:ListenForEvent("death", OnKilled)
+	
     inst.beattask = inst:DoTaskInTime(.75 + math.random() * .75, beat)
 	
 	inst:WatchWorldState("isday", inst.Remove)
+	inst:WatchWorldState("iscaveday", inst.Remove)
 
 	return inst
 end

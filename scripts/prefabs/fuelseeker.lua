@@ -87,9 +87,8 @@ local function fn(Sim)
     inst:SetStateGraph("SGfuelseeker")
     inst:SetBrain(brain)
 	
-	inst:WatchWorldState("isday", function() 
-		inst:Remove()
-	end)
+	inst:WatchWorldState("isday", inst.Remove)
+	inst:WatchWorldState("iscaveday", inst.Remove)
 	
 	inst:DoTaskInTime(0, Init)
 
