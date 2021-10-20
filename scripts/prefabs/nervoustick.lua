@@ -174,7 +174,9 @@ local function fn()
     inst:AddTag("shadowcreature")
     inst:AddTag("monster")
     inst:AddTag("hostile")
-    inst:AddTag("shadow")
+    inst:AddTag("swilson") 
+	inst:AddTag("nightmarecreature")
+	inst:AddTag("shadow")
     inst:AddTag("nervoustick")
     inst:AddTag("notraptrigger")
     inst:AddTag("nosteal")
@@ -265,6 +267,10 @@ local function denfn()
     inst.AnimState:SetBuild("shadowheart")
     inst.AnimState:PlayAnimation("idle")
     inst.AnimState:SetMultColour(0, 0, 0, .5)
+	
+    inst:AddTag("swilson") 
+	inst:AddTag("nightmarecreature")
+	inst:AddTag("shadow")
 
     if not TheWorld.ismastersim then
         return inst

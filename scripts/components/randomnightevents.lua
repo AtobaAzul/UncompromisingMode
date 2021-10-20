@@ -520,6 +520,7 @@ local function SpawnBats(player)
 					bat.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
 					bat:PushEvent("fly_back")
 					bat:DoTaskInTime(0, function(bat) DayBreak(bat) end)
+					bat:AddTag("shadow")
 				end)
 			end
 		else
@@ -534,6 +535,7 @@ local function SpawnBats(player)
 					bat.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
 					bat:PushEvent("fly_back")
 					bat:DoTaskInTime(0, function(bat) DayBreak(bat) end)
+					bat:AddTag("shadow")
 				end)
 			end
 		end
@@ -895,8 +897,8 @@ local function DropRneFuel(piece)
 end
 
 local function ChessPiece(player)
-	MultiFogAuto(player,10)
 	if TheWorld.state.isnewmoon and TheWorld.state.cycles > 10 then
+		MultiFogAuto(player,10)
 		print("Shadows...")
 		local x, y, z = player.Transform:GetWorldPosition()
 		local chesscheck = math.random()
@@ -1035,6 +1037,7 @@ end
 
 local function SpawnShadowBoomer(player)
 	if TheWorld.state.isnight then
+		MultiFogAuto(player,10)
 		player:DoTaskInTime(0.1 + math.random(), function()
 			local radius = 10 + math.random() * 10
 			local theta = math.random() * 2 * PI
@@ -1087,9 +1090,8 @@ end
 
 local function SpawnMushbooms(player)
 	print("SpawnSkitts")
-	local skitttime = 10 * math.random() * 2
 	if TheWorld.state.isnight then
-		player:DoTaskInTime(skitttime, function()
+		player:DoTaskInTime(15, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local num_bombs = 20
 			for i = 1, num_bombs do
@@ -1113,9 +1115,10 @@ end
 
 local function SpawnShadowGrabby(player)
 	if TheWorld.state.isnight then
+		MultiFogAuto(player,10)
 		local num_grabby = 20
 		for i = 1, num_grabby do
-			player:DoTaskInTime((3 * i) + math.random(), function()
+			player:DoTaskInTime(15 + (3 * i) + math.random(), function()
 				if TheWorld.state.isnight then
 					local dupes = i / 4
 					for i = 1, dupes do
@@ -1144,26 +1147,34 @@ end
 
 local function SpawnShadowVortex(player)
 	if TheWorld.state.isnight then
-		for i = 1, 4 do
-			local radius = 15 + math.random() * 15
-			local theta = math.random() * 2 * PI
-			local x, y, z = player.Transform:GetWorldPosition()
-			local x1 = x + radius * math.cos(theta)
-			local z1 = z - radius * math.sin(theta)
-			local light = TheSim:GetLightAtPoint(x1, 0, z1)
-			if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
-				local ent = SpawnPrefab("shadowvortex")
-				ent.Transform:SetPosition(x1, 0, z1)
-				break
-			end
+		MultiFogAuto(player,10)
+		for i = 1, 3 do
+			player:DoTaskInTime(15 + (i * 30), function()
+				if TheWorld.state.isnight then
+					for i = 1, 4 do
+						local radius = 15 + math.random() * 15
+						local theta = math.random() * 2 * PI
+						local x, y, z = player.Transform:GetWorldPosition()
+						local x1 = x + radius * math.cos(theta)
+						local z1 = z - radius * math.sin(theta)
+						local light = TheSim:GetLightAtPoint(x1, 0, z1)
+						if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+							local ent = SpawnPrefab("shadowvortex")
+							ent.Transform:SetPosition(x1, 0, z1)
+							break
+						end
+					end
+				end
+			end)
 		end
 	end
 end
 
 local function SpawnMindWeavers(player)
 	if TheWorld.state.isnight then
+		MultiFogAuto(player,10)
 		for i = 1, 3 do
-			player:DoTaskInTime((i * 20) + 10, function()
+			player:DoTaskInTime(15 + (i * 20), function()
 				if TheWorld.state.isnight then
 					local x, y, z = player.Transform:GetWorldPosition()
 					local ent = SpawnPrefab("mindweaver")
@@ -1176,11 +1187,12 @@ end
 
 local function SpawnNervousTicks(player)
 	if TheWorld.state.isnight then
+		MultiFogAuto(player,10)
 		for i = 1, 3 do
-			player:DoTaskInTime((i + 1) * 3, function()
+			player:DoTaskInTime(15 + (i + 1) * 3, function()
 				if TheWorld.state.isnight then
 					for i = 1, 4 do
-						local radius = 15 + math.random() * 15
+						local radius = 10 + math.random() * 10
 						local theta = math.random() * 2 * PI
 						local x, y, z = player.Transform:GetWorldPosition()
 						local x1 = x + radius * math.cos(theta)
@@ -1201,8 +1213,9 @@ end
 
 local function SpawnNightCrawlers(player)
 	if TheWorld.state.isnight then
+		MultiFogAuto(player,10)
 		for i = 1, 10 do
-			player:DoTaskInTime(i + math.random(), function()
+			player:DoTaskInTime(15 + i + math.random(), function()
 				if TheWorld.state.isnight then
 					for i = 1, 4 do
 						local radius = 15 + math.random() * 15
@@ -1226,8 +1239,9 @@ end
 
 local function SpawnFuelSeekers(player)
 	if TheWorld.state.isnight then
+		MultiFogAuto(player,10)
 		for i = 1, 3 do
-			player:DoTaskInTime((i * 3) + i, function()
+			player:DoTaskInTime(15 + (i * 4) + i, function()
 				if TheWorld.state.isnight then
 					for i = 1, 4 do
 						local radius = 15 + math.random() * 15
@@ -1851,6 +1865,6 @@ inst:ListenForEvent("ms_playerjoined", OnPlayerJoined)
 inst:ListenForEvent("ms_playerleft", OnPlayerLeft)
 inst:ListenForEvent("seasontick", OnSeasonTick, TheWorld)
 
-self:WatchWorldState("isnight", function() self.inst:DoTaskInTime(10, TryRandomNightEvent) end)
+self:WatchWorldState("isnight", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end)
 self:WatchWorldState("cycleschanged", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end)
 end)

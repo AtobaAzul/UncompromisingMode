@@ -12,16 +12,19 @@ local prefabs =
 }
 
 local function Beat(inst)
-    inst.SoundEmitter:PlaySound("dontstarve/sanity/shadow_heart")
+	inst.SoundEmitter:SetParameter("shadowvortex", "intensity", inst.Transform:GetScale() / 1.8)
+	print(inst.Transform:GetScale())
+end
+
+local function Init(inst)
+	inst.SoundEmitter:PlaySound("dontstarve/common/teleportworm/idle", "shadowvortex")
+	inst:DoPeriodicTask(0.5, Beat)
 end
 
 local function Vac(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local theta = inst.Transform:GetRotation()
 	local TheAngle = 360 * DEGREES
-	
-	
-	
 	
 	local damageents = TheSim:FindEntities(x, y, z, 1 * inst.Transform:GetScale(), { "player" }, { "playerghost" })
 	local ents = TheSim:FindEntities(x, y, z, 15 * inst.Transform:GetScale(), { "player" }, { "playerghost" })
@@ -144,7 +147,8 @@ local function fn()
 	inst:grow_mini()
 	
 	inst:DoPeriodicTask(FRAMES, Vac)
-	inst:DoPeriodicTask(1.5, Beat)
+	
+	inst:DoTaskInTime(0, Init)
 	
 	inst:WatchWorldState("isday", inst.Remove)
 	inst:WatchWorldState("iscaveday", inst.Remove)

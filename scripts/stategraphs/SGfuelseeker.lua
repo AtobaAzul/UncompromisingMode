@@ -309,7 +309,7 @@ local states=
 			inst:AddTag("INLIMBO")
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("disappear")
-			PlayExtendedSound(inst, "disappear")
+			PlayExtendedSound(inst, "death")
         end,
 
         events =
@@ -343,7 +343,7 @@ local states=
 			end
 			inst:AddTag("INLIMBO")
             inst.AnimState:PlayAnimation("disappear")
-			PlayExtendedSound(inst, "disappear")
+			PlayExtendedSound(inst, "death")
 			
 			--[[if inst.shadowtask ~= nil then
 				inst.shadowtask:Cancel()

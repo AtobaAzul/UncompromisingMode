@@ -23,6 +23,9 @@ local FogOver = Class(Widget, function(self, owner)
     self:Hide()
 	--self:Show()
 	--self.bg2:SetTint(1, 1, 1, 0.6)
+	
+	self.inst:WatchWorldState("isday", function() TheFocalPoint.SoundEmitter:KillSound("fogfear") end, TheWorld)
+	self.inst:WatchWorldState("iscaveday", function() TheFocalPoint.SoundEmitter:KillSound("fogfear") end, TheWorld)
 end)
 
 function FogOver:UpdateAlpha(dt)
@@ -42,14 +45,15 @@ function FogOver:OnUpdate(dt)
 	self.bg2:SetTint(1, 1, 1, self.alpha)
 	if self.alpha == 0 then
 		self:Hide()
-		TheFocalPoint.SoundEmitter:KillSound("fogfear")
+		--TheFocalPoint.SoundEmitter:KillSound("fogfear")
 	end
 	if self.owner:HasTag("infog") then
 	self:Show()
         self.time = self.transitiontime
         self.alphagoal = 0.6
 		
-		TheFocalPoint.SoundEmitter:PlaySound("UCSounds/screecher/feer", "fogfear")
+		TheFocalPoint.SoundEmitter:PlaySound("UMMusic/music/night_terrors", "fogfear")
+		--TheFocalPoint.SoundEmitter:PlaySound("UCSounds/screecher/feer", "fogfear")
 	else
         self.time = self.transitiontime
         self.alphagoal = 0
