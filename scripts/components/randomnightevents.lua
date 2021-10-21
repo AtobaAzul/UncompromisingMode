@@ -1263,6 +1263,25 @@ local function SpawnFuelSeekers(player)
 	end
 end
 
+local function MaskMan(player)
+	player:DoTaskInTime(15, function()
+		if TheWorld.state.isnight then
+			for i = 1, 4 do
+				local radius = 5 + math.random() * 5
+				local theta = math.random() * 2 * PI
+				local x, y, z = player.Transform:GetWorldPosition()
+				local x1 = x + radius * math.cos(theta)
+				local z1 = z - radius * math.sin(theta)
+				
+				if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+					local ent = SpawnPrefab("fuelseeker")
+					ent.Transform:SetPosition(x1, 0, z1)
+					break
+				end
+			end
+		end
+	end)
+end
 
 ---------------------------------------------------
 ---RNE list above
@@ -1402,6 +1421,7 @@ local SUMMER =
 
 local BASE = 
 {
+	MaskMan = { name = MaskMan, weight = .8, },
 	SpawnBaseBats = { name = SpawnBaseBats, weight = .3, },
 	SpawnFissures = { name = SpawnFissures, weight = .3, },
 	SpawnSkitts = { name = SpawnSkitts, weight = .5, },

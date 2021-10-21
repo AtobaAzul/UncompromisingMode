@@ -1,8 +1,8 @@
 local assets =
 {
-	Asset("ANIM", "anim/hat_snowgoggles.zip"),
-	Asset("ATLAS", "images/inventoryimages/gasmask.xml"),
-	Asset("IMAGE", "images/inventoryimages/gasmask.tex"),
+	Asset("ANIM", "anim/hat_shadowcrown.zip"),
+	Asset("ATLAS", "images/inventoryimages/shadow_crown.xml"),
+	Asset("IMAGE", "images/inventoryimages/shadow_crown.tex"),
 }
 
 local function OnBlocked(owner) 

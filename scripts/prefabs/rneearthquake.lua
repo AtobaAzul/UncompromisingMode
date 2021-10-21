@@ -1,6 +1,6 @@
 local assets =
 {
-    Asset("ANIM", "anim/shroom_skin_fragment.zip"),
+	--Asset("ANIM", "anim/shroom_skin_fragment.zip"),
 }
 
 local function SpawnBurst(inst)

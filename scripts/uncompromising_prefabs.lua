@@ -268,6 +268,10 @@ return {
 	"rneshadows",
 	"fuelseeker",
 	
+	"wackymask",
+	"tiddlestranger_rne",
+	"rne_goodiebag",
+	
 	"backupcatcoonden",
 	--"moon_deerclops",
 	"um_books",

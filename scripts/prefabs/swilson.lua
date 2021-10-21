@@ -1,5 +1,3 @@
-require "stategraphs/SGscorpion"
-
 local brain = require "brains/swilsonbrain"
 local assets =
 {

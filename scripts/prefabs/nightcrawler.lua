@@ -2,7 +2,7 @@ require "stategraphs/SGnightcrawler"
 
 local assets =
 {
-    Asset("ANIM", "anim/aphid.zip"),
+    --Asset("ANIM", "anim/aphid.zip"),
 }
 
 local prefabs =
