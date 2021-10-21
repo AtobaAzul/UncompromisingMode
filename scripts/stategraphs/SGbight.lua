@@ -7,7 +7,7 @@ local actionhandlers =
 local events=
 {
     EventHandler("attacked", function(inst) 
-        if not inst.components.health:IsDead() and not inst.sg.HasStateTag('busy') and not inst.sg:HasStateTag("no_stun") and not inst.sg:HasStateTag("attack") then 
+        if not inst.components.health:IsDead() and not inst.sg:HasStateTag('busy') and not inst.sg:HasStateTag("no_stun") and not inst.sg:HasStateTag("attack") then 
             inst.sg:GoToState("hit")  -- can't attack during hit reaction
         end 
     end),
