@@ -1477,7 +1477,7 @@ local function MaskMan(player)
 				local z1 = z - radius * math.sin(theta)
 				
 				if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
-					local ent = SpawnPrefab("fuelseeker")
+					local ent = SpawnPrefab("tiddlestranger_rne")
 					ent.Transform:SetPosition(x1, 0, z1)
 					break
 				end
@@ -1669,6 +1669,7 @@ local WILD =
 	Stanton = { name = Stanton, weight = .1, },
 	Earthquake = { name = Earthquake, weight = .1, },
 	SpawnShadowGrabby = { name = SpawnShadowGrabby, weight = .5, },
+	SpawnShadowVortex = { name = SpawnShadowVortex, weight = .4, },
 	SpawnMindWeavers = { name = SpawnMindWeavers, weight = .5, },
 	SpawnNervousTicks = { name = SpawnNervousTicks, weight = .5, },
 	SpawnNightCrawlers = { name = SpawnNightCrawlers, weight = .5, },
