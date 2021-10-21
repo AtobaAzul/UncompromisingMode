@@ -1264,17 +1264,17 @@ local function DoLesserThreat(player)
 	if TheWorld.state.isnight then
 		local weightheodds = math.random()
 		
-		if weighttheodds >= 8.3 then
+		if weightheodds >= 8.3 then
 			SpawnLesserShadowVortex(player)
-		elseif weighttheodds < 8.3 and weighttheodds >= 6.64 then
+		elseif weightheodds < 8.3 and weightheodds >= 6.64 then
 			SpawnLesserShadowGrabby(player)
-		elseif weighttheodds < 6.64 and weighttheodds >= 4.98 then
+		elseif weightheodds < 6.64 and weightheodds >= 4.98 then
 			SpawnLesserMindWeavers(player)
-		elseif weighttheodds < 4.98 and weighttheodds >= 3.32 then
+		elseif weightheodds < 4.98 and weightheodds >= 3.32 then
 			SpawnLesserNervousTicks(player)
-		elseif weighttheodds < 3.32 and weighttheodds >= 1.66 then
+		elseif weightheodds < 3.32 and weightheodds >= 1.66 then
 			SpawnLesserNightCrawlers(player)
-		elseif weighttheodds < 1.66 then
+		elseif weightheodds < 1.66 then
 			SpawnLesserFuelSeekers(player)
 		end
 	end

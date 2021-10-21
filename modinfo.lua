@@ -87,8 +87,8 @@ configuration_options =
     BinaryConfig("caved", "[IMPORTANT] Cave Config", "Switches some things around so players who can't run Caves can still enjoy the game. ENABLE IF CAVES ARE ENABLED!", true),
 	{
 		name = "rne chance",
-		label = "RNE Chance",
-		hover = "Random Night Events have a default 40% chance to occur each night. RNEs are disabled before Day 5.",
+		label = "Night Terrors Chance",
+		hover = "Night Terrors have a default 60% chance to occur each night. Night Terrors are disabled before Day 5.",
 		options =
 		{
 			{description = "None", data = 100},
