@@ -114,12 +114,35 @@ local function FinishScenario(inst, player, text, string, exit)
     end
 end
 
+local function launchitem(item, angle)
+    local speed = math.random() * 4 + 2
+    angle = (angle + math.random() * 60 - 30) * DEGREES
+    item.Physics:SetVel(speed * math.cos(angle), math.random() * 2 + 8, speed * math.sin(angle))
+end
+
 -- He snaps his fingers, he snaps your neck
 local function PerformScenario(inst, player)
     inst.AnimState:PlayAnimation("snap")
     inst:DoTaskInTime(20 * FRAMES, function() 
 		inst.SoundEmitter:PlaySound("dangerous_sea/creatures/wavey_jones/attack")
-		SpawnPrefab("rne_goodiebag").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		
+		local x, y, z = inst.Transform:GetWorldPosition()
+		
+		local players = TheSim:FindEntities(x, y, z, 15, { "player" }, { "playerghost" })
+		
+		for i, v in ipairs(players) do
+			local gift = SpawnPrefab("rne_goodiebag")
+		
+			local angle
+			if v ~= nil and v:IsValid() then
+				angle = 180 - v:GetAngleToPoint(x, 0, z)
+				gift.Transform:SetPosition(x, 3, z)
+				
+                launchitem(gift, angle)
+			else
+				gift.Transform:SetPosition(x, y, z)
+			end
+		end
 	end)
     inst.AnimState:PushAnimation("idle", true)
 
