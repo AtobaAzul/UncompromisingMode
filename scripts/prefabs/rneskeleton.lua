@@ -94,6 +94,9 @@ local function fn(Sim)
 	MakeCharacterPhysics(inst, 10, .5)
 	
 	inst:AddTag("plant")
+    inst:AddTag("swilson") 
+	inst:AddTag("nightmarecreature")
+	inst:AddTag("shadow")
 
 	inst.entity:SetPristine()
 	

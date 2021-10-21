@@ -110,6 +110,9 @@ local function DayBreak(mob)
 	mob.persists = false
 	
 	mob:AddTag("soulless")
+    mob:AddTag("swilson") 
+	mob:AddTag("nightmarecreature")
+	mob:AddTag("shadow")
 	
 	mob:WatchWorldState("isday", function() 
 		local x, y, z = mob.Transform:GetWorldPosition()
@@ -1037,7 +1040,7 @@ end
 
 local function SpawnShadowBoomer(player)
 	if TheWorld.state.isnight then
-		MultiFogAuto(player,10)
+		--MultiFogAuto(player,10)
 		player:DoTaskInTime(0.1 + math.random(), function()
 			local radius = 10 + math.random() * 10
 			local theta = math.random() * 2 * PI
@@ -1113,14 +1116,39 @@ local function Earthquake(player)
 	end)
 end
 
-local function SpawnShadowGrabby(player)
+
+
+local function SpawnLesserShadowVortex(player)
 	if TheWorld.state.isnight then
-		MultiFogAuto(player,10)
-		local num_grabby = 20
-		for i = 1, num_grabby do
-			player:DoTaskInTime(15 + (3 * i) + math.random(), function()
+		for i = 1, 2 do
+			player:DoTaskInTime(15 + (i * 40), function()
 				if TheWorld.state.isnight then
-					local dupes = i / 4
+					for i = 1, 4 do
+						local radius = 15 + math.random() * 15
+						local theta = math.random() * 2 * PI
+						local x, y, z = player.Transform:GetWorldPosition()
+						local x1 = x + radius * math.cos(theta)
+						local z1 = z - radius * math.sin(theta)
+						local light = TheSim:GetLightAtPoint(x1, 0, z1)
+						if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+							local ent = SpawnPrefab("shadowvortex")
+							ent.Transform:SetPosition(x1, 0, z1)
+							break
+						end
+					end
+				end
+			end)
+		end
+	end
+end
+
+local function SpawnLesserShadowGrabby(player)
+	if TheWorld.state.isnight then
+		local num_grabby = 10
+		for i = 1, num_grabby do
+			player:DoTaskInTime(15 + (6 * i) + math.random(), function()
+				if TheWorld.state.isnight then
+					local dupes = i / 3
 					for i = 1, dupes do
 						local radius = 15 + math.random() * 15
 						local theta = math.random() * 2 * PI
@@ -1136,11 +1164,118 @@ local function SpawnShadowGrabby(player)
 								break
 							end
 						end
-						
-						print("spawn grabby")
 					end
 				end
 			end)
+		end
+	end
+end
+
+local function SpawnLesserMindWeavers(player)
+	if TheWorld.state.isnight then
+		for i = 1, 2 do
+			player:DoTaskInTime(15 + (i * 30), function()
+				if TheWorld.state.isnight then
+					local x, y, z = player.Transform:GetWorldPosition()
+					local ent = SpawnPrefab("mindweaver")
+					ent.Transform:SetPosition(x, y, z)
+				end
+			end)
+		end
+	end
+end
+
+local function SpawnLesserNervousTicks(player)
+	if TheWorld.state.isnight then
+		for i = 1, 2 do
+			player:DoTaskInTime(15 + (i * 8), function()
+				if TheWorld.state.isnight then
+					for i = 1, 4 do
+						local radius = 10 + math.random() * 10
+						local theta = math.random() * 2 * PI
+						local x, y, z = player.Transform:GetWorldPosition()
+						local x1 = x + radius * math.cos(theta)
+						local z1 = z - radius * math.sin(theta)
+						local light = TheSim:GetLightAtPoint(x1, 0, z1)
+			
+						if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+							local ent = SpawnPrefab("nervoustickden")
+							ent.Transform:SetPosition(x1, 0, z1)
+							break
+						end
+					end
+				end
+			end)
+		end
+	end
+end
+
+local function SpawnLesserNightCrawlers(player)
+	if TheWorld.state.isnight then
+		for i = 1, 8 do
+			player:DoTaskInTime((15 + i) * 2, function()
+				if TheWorld.state.isnight then
+					for i = 1, 4 do
+						local radius = 15 + math.random() * 15
+						local theta = math.random() * 2 * PI
+						local x, y, z = player.Transform:GetWorldPosition()
+						local x1 = x + radius * math.cos(theta)
+						local z1 = z - radius * math.sin(theta)
+						local light = TheSim:GetLightAtPoint(x1, 0, z1)
+			
+						if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+							local ent = SpawnPrefab("nightcrawler")
+							ent.Transform:SetPosition(x1, 0, z1)
+							break
+						end
+					end
+				end
+			end)
+		end
+	end
+end
+
+local function SpawnLesserFuelSeekers(player)
+	if TheWorld.state.isnight then
+		for i = 1, 2 do
+			player:DoTaskInTime(15 + (i * 8) + i, function()
+				if TheWorld.state.isnight then
+					for i = 1, 4 do
+						local radius = 15 + math.random() * 15
+						local theta = math.random() * 2 * PI
+						local x, y, z = player.Transform:GetWorldPosition()
+						local x1 = x + radius * math.cos(theta)
+						local z1 = z - radius * math.sin(theta)
+						local light = TheSim:GetLightAtPoint(x1, 0, z1)
+			
+						if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+							local ent = SpawnPrefab("fuelseeker")
+							ent.Transform:SetPosition(x1, 0, z1)
+							break
+						end
+					end
+				end
+			end)
+		end
+	end
+end
+
+local function DoLesserThreat(player)
+	if TheWorld.state.isnight then
+		local weightheodds = math.random()
+		
+		if weighttheodds >= 8.3 then
+			SpawnLesserShadowVortex(player)
+		elseif weighttheodds < 8.3 and weighttheodds >= 6.64 then
+			SpawnLesserShadowGrabby(player)
+		elseif weighttheodds < 6.64 and weighttheodds >= 4.98 then
+			SpawnLesserMindWeavers(player)
+		elseif weighttheodds < 4.98 and weighttheodds >= 3.32 then
+			SpawnLesserNervousTicks(player)
+		elseif weighttheodds < 3.32 and weighttheodds >= 1.66 then
+			SpawnLesserNightCrawlers(player)
+		elseif weighttheodds < 1.66 then
+			SpawnLesserFuelSeekers(player)
 		end
 	end
 end
@@ -1167,6 +1302,50 @@ local function SpawnShadowVortex(player)
 				end
 			end)
 		end
+		
+		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
+		
+		if days_survived >= 30 then
+			DoLesserThreat(player)
+		end
+	end
+end
+
+local function SpawnShadowGrabby(player)
+	if TheWorld.state.isnight then
+		MultiFogAuto(player,10)
+		local num_grabby = 20
+		for i = 1, num_grabby do
+			player:DoTaskInTime(15 + (3 * i) + math.random(), function()
+				if TheWorld.state.isnight then
+					local dupes = i / 3
+					for i = 1, dupes do
+						local radius = 15 + math.random() * 15
+						local theta = math.random() * 2 * PI
+						local x, y, z = player.Transform:GetWorldPosition()
+						local x1 = x + radius * math.cos(theta)
+						local z1 = z - radius * math.sin(theta)
+						local light = TheSim:GetLightAtPoint(x1, 0, z1)
+						
+						for i = 1, 3 do
+							if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
+								local ent = SpawnPrefab("rne_grabbyshadows")
+								ent.Transform:SetPosition(x1, 0, z1)
+								break
+							end
+						end
+						
+						print("spawn grabby")
+					end
+				end
+			end)
+		end
+		
+		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
+		
+		if days_survived >= 30 then
+			DoLesserThreat(player)
+		end
 	end
 end
 
@@ -1181,6 +1360,12 @@ local function SpawnMindWeavers(player)
 					ent.Transform:SetPosition(x, y, z)
 				end
 			end)
+		end
+		
+		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
+		
+		if days_survived >= 30 then
+			DoLesserThreat(player)
 		end
 	end
 end
@@ -1208,6 +1393,12 @@ local function SpawnNervousTicks(player)
 				end
 			end)
 		end
+		
+		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
+		
+		if days_survived >= 30 then
+			DoLesserThreat(player)
+		end
 	end
 end
 
@@ -1234,6 +1425,12 @@ local function SpawnNightCrawlers(player)
 				end
 			end)
 		end
+		
+		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
+		
+		if days_survived >= 30 then
+			DoLesserThreat(player)
+		end
 	end
 end
 
@@ -1259,6 +1456,12 @@ local function SpawnFuelSeekers(player)
 					end
 				end
 			end)
+		end
+		
+		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
+		
+		if days_survived >= 30 then
+			DoLesserThreat(player)
 		end
 	end
 end
@@ -1419,9 +1622,11 @@ local SUMMER =
 	--SpawnWalrusHunt = { name = SpawnWalrusHunt, weight = 1, },
 }
 
+local _maskmanchance = IsSpecialEventActive(SPECIAL_EVENTS.HALLOWED_NIGHTS) and .8 or 0.1
+
 local BASE = 
 {
-	MaskMan = { name = MaskMan, weight = .8, },
+	MaskMan = { name = MaskMan, weight = _maskmanchance, },
 	SpawnBaseBats = { name = SpawnBaseBats, weight = .3, },
 	SpawnFissures = { name = SpawnFissures, weight = .3, },
 	SpawnSkitts = { name = SpawnSkitts, weight = .5, },
