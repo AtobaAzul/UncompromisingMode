@@ -47,7 +47,7 @@ local function LookNearby(inst,data)
 		else
 			chessjunk.SpawnClockwork(chessjunk,nil)
 		end
-	elseif (math.random()-(clockworks^1.5)*0.1) > 0.5 and TheWorld:HasTag("cave") then --Not quite as likely if there's no chessjunk nearby, but still have a very rare case where a zombie may come out of the ground, damaged pawns can come too
+	elseif (math.random()-(clockworks^1.5)*0.1) > 0.6 and TheWorld:HasTag("cave") then --Not quite as likely if there's no chessjunk nearby, but still have a very rare case where a zombie may come out of the ground, damaged pawns can come too
 		if data.afflicter ~= nil then
 			ZombieClockwork(inst,data.afflicter)
 		else
