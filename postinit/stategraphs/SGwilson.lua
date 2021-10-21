@@ -63,9 +63,9 @@ inst.actionhandlers[ACTIONS.CASTSPELL].deststate =
 
 local _OldDeathEvent = inst.events["death"].fn
 	inst.events["death"].fn = function(inst, data)
-        if data ~= nil and data.cause == "shadowvortex" then
+        if data ~= nil and data.cause == "shadowvortex" and not inst:HasTag("wereplayer") then
             inst.sg:GoToState("blackpuddle_death")
-        elseif data ~= nil and data.cause == "mindweaver" then
+        elseif data ~= nil and data.cause == "mindweaver" and not inst:HasTag("wereplayer") then
             inst.sg:GoToState("rne_player_grabbed")
 		else
 			_OldDeathEvent(inst, data)

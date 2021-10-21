@@ -43,14 +43,19 @@ local function Grabby(inst)
 	local ents = TheSim:FindEntities(x, y, z, 3, {"player"}, {"playerghost"})
 	
 	for i, v in ipairs(ents) do
+	
 		v.components.health:DoDelta(-50, false, inst.prefab, false, nil, inst, false)
 			
 		if v.components.health:IsDead() then
 			v.Physics:Teleport(inst.Transform:GetWorldPosition())
-		else
-			--v.AnimState:PlayAnimation("lighthit_back")
-			v.sg:GoToState("hit_weaver", inst)
+		else 
+			if not v:HasTag("wereplayer") then
+				v.sg:GoToState("hit_weaver", inst)
+			else
+				v.sg:GoToState("hit", inst)
+			end
 		end
+		
 	end
 	
 	if #ents > 0 then
