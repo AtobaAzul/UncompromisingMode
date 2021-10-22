@@ -51,8 +51,8 @@ local function Vac(inst)
 		print("Divide by 10")
 		print(multiplierplayer)
 		
-		if multiplierplayer > 20 then
-			multiplierplayer = 20
+		if multiplierplayer > 15 then
+			multiplierplayer = 15
 		print("Too Far")
 		print(multiplierplayer)
 		elseif multiplierplayer < 1.5 then
@@ -61,7 +61,7 @@ local function Vac(inst)
 		print(multiplierplayer)
 		end
 		
-		local dx, dy, dz = px + (((FRAMES * 4) * velx) / multiplierplayer) * inst.Transform:GetScale(), 0, pz + (((FRAMES * 4) * velz) / multiplierplayer) * inst.Transform:GetScale()
+		local dx, dy, dz = px + (((FRAMES * 5) * velx) / multiplierplayer) * inst.Transform:GetScale(), 0, pz + (((FRAMES * 5) * velz) / multiplierplayer) * inst.Transform:GetScale()
 			
 		local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
 		local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)

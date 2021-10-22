@@ -1264,17 +1264,17 @@ local function DoLesserThreat(player)
 	if TheWorld.state.isnight then
 		local weightheodds = math.random()
 		
-		if weighttheodds >= 8.3 then
+		if weightheodds >= 8.3 then
 			SpawnLesserShadowVortex(player)
-		elseif weighttheodds < 8.3 and weighttheodds >= 6.64 then
+		elseif weightheodds < 8.3 and weightheodds >= 6.64 then
 			SpawnLesserShadowGrabby(player)
-		elseif weighttheodds < 6.64 and weighttheodds >= 4.98 then
+		elseif weightheodds < 6.64 and weightheodds >= 4.98 then
 			SpawnLesserMindWeavers(player)
-		elseif weighttheodds < 4.98 and weighttheodds >= 3.32 then
+		elseif weightheodds < 4.98 and weightheodds >= 3.32 then
 			SpawnLesserNervousTicks(player)
-		elseif weighttheodds < 3.32 and weighttheodds >= 1.66 then
+		elseif weightheodds < 3.32 and weightheodds >= 1.66 then
 			SpawnLesserNightCrawlers(player)
-		elseif weighttheodds < 1.66 then
+		elseif weightheodds < 1.66 then
 			SpawnLesserFuelSeekers(player)
 		end
 	end
@@ -1477,7 +1477,7 @@ local function MaskMan(player)
 				local z1 = z - radius * math.sin(theta)
 				
 				if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
-					local ent = SpawnPrefab("fuelseeker")
+					local ent = SpawnPrefab("tiddlestranger_rne")
 					ent.Transform:SetPosition(x1, 0, z1)
 					break
 				end
@@ -1669,6 +1669,7 @@ local WILD =
 	Stanton = { name = Stanton, weight = .1, },
 	Earthquake = { name = Earthquake, weight = .1, },
 	SpawnShadowGrabby = { name = SpawnShadowGrabby, weight = .5, },
+	SpawnShadowVortex = { name = SpawnShadowVortex, weight = .4, },
 	SpawnMindWeavers = { name = SpawnMindWeavers, weight = .5, },
 	SpawnNervousTicks = { name = SpawnNervousTicks, weight = .5, },
 	SpawnNightCrawlers = { name = SpawnNightCrawlers, weight = .5, },
