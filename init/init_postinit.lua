@@ -234,6 +234,10 @@ if GetModConfigData("canedurability") == true then
 table.insert(prefab_post,"cane")
 end
 
+if GetModConfigData("honeybandbuff") == true then
+table.insert(prefab_post,"bandage")
+end
+
 modimport("postinit/sim")
 modimport("postinit/any")
 modimport("postinit/player")
