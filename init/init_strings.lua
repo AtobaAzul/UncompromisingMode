@@ -128,8 +128,26 @@ end
 	STRINGS.CHARACTERS.WOODIE.DESCRIBE.TIDDLESTRANGER_RNE = "I like your funny words, magic man."
 
 	STRINGS.TIDDLESTRANGER_RNE_GREETING = {"Hey there, friend!", "Oh, hello there!", "Hey, friend!"}
-	STRINGS.TIDDLESTRANGER_RNE_FAREWELL = {"Don't go losing it.", "I'll be back with more, eventually.", "Keep it safe, okay?!"}
-	STRINGS.TIDDLESTRANGER_RNE_ENDSPEECH = {"Try it on, and find out.", "I think it would look nice on you, so try it on!", "No strings attached, just wear it!"}
+	STRINGS.TIDDLESTRANGER_RNE_FAREWELL = {
+	    {
+        	"I spent a lot of time making these.",
+        	"Finding all the materials wasn't easy.",
+        	"...",
+        	"So don't go losing it.",
+	    },
+	    {
+        	"I'd suggest you keep a high flame going.",
+        	"There's some dangerous stuff lurking in the dark.",
+        	"...",
+        	"Not sure where it all came from, to be honest.",
+	    },
+	    {
+        	"Nights ain't as comfy as they used to be.",
+        	"Strange occurances, creatures in the dark...",
+        	"I'd keep my eyes and ears open, and a light by my side if I were you.",
+	    },
+	}
+	STRINGS.TIDDLESTRANGER_RNE_ENDSPEECH = {"Try it on, and find out.", "I think it would look nice on you, so just try it on!", "No strings attached, just wear it!"}
 
 	STRINGS.TIDDLESTRANGER_RNE_SCENARIO = {
 	    METEOR = {
@@ -162,17 +180,20 @@ end
         	"I've been practicing arts and crafts lately.",
         	"I thought I'd make ya something...Nice.",
         	"What do they do?",
+        	"...",
 	    },
 	    {
         	"You look like you could use a new face!",
         	"Lucky for you, I have several!",
         	"...Masks, that is.",
         	"Whats their purpose?",
+        	"...",
     	    },
 	    {
 		"Ever wanted to start a collection?", 
         	"Well I have just the thing!",
        	 	"Hand crafted masks! No curses, I promise.",
+        	"...",
     	    },
 	}
 

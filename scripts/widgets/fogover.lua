@@ -24,8 +24,12 @@ local FogOver = Class(Widget, function(self, owner)
 	--self:Show()
 	--self.bg2:SetTint(1, 1, 1, 0.6)
 	
-	self.inst:WatchWorldState("isday", function() TheFocalPoint.SoundEmitter:KillSound("fogfear") end, TheWorld)
-	self.inst:WatchWorldState("iscaveday", function() TheFocalPoint.SoundEmitter:KillSound("fogfear") end, TheWorld)
+	self.inst:WatchWorldState("isday", function() 
+		TheFocalPoint.SoundEmitter:KillSound("fogfear")
+	end, TheWorld)
+	self.inst:WatchWorldState("iscaveday", function() 
+		TheFocalPoint.SoundEmitter:KillSound("fogfear")
+	end, TheWorld)
 end)
 
 function FogOver:UpdateAlpha(dt)
@@ -39,6 +43,9 @@ function FogOver:UpdateAlpha(dt)
             end
         end
     end
+end
+
+function FogOver:StrangerMusic(d)
 end
 
 function FogOver:OnUpdate(dt)
@@ -65,6 +72,15 @@ function FogOver:OnUpdate(dt)
 	if self.alphagoal < self.alpha then
 	self.alpha = self.alpha - 0.005
 	end
+	
+	local x, y, z = self.owner.Transform:GetWorldPosition()
+	
+	if #TheSim:FindEntities(x, y, z, 15, { "tiddlestranger" }) > 0 then
+		TheFocalPoint.SoundEmitter:PlaySound("UMMusic/music/tiddlestranger", "tiddlestranger")
+	else
+		TheFocalPoint.SoundEmitter:KillSound("tiddlestranger")	
+	end
+
 end
 
 return FogOver
