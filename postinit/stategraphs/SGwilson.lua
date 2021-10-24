@@ -30,6 +30,23 @@ local function DoHurtSound(inst)
     end
 end
 
+local function StopTalkSound(inst, instant)
+    if not instant and inst.endtalksound ~= nil and inst.SoundEmitter:PlayingSound("talk") then
+        inst.SoundEmitter:PlaySound(inst.endtalksound)
+    end
+    inst.SoundEmitter:KillSound("talk")
+end
+
+local function DoTalkSound(inst)
+    if inst.talksoundoverride ~= nil then
+        inst.SoundEmitter:PlaySound(inst.talksoundoverride, "talk")
+        return true
+    elseif not inst:HasTag("mime") then
+        inst.SoundEmitter:PlaySound((inst.talker_path_override or "dontstarve/characters/")..(inst.soundsname or inst.prefab).."/talk_LP", "talk")
+        return true
+    end
+end
+
 local events =
 {
 	EventHandler("sneeze", function(inst, data)
@@ -760,6 +777,70 @@ State{
                 end
             end),
         },
+    },
+	
+    State{
+        name = "opossum_death",
+        tags = { "hiding", "notalking", "nomorph", "busy", "nopredict", "nodangle" },
+
+        onenter = function(inst)
+            inst.components.locomotor:Stop()
+			
+			inst.SoundEmitter:PlaySound("dontstarve/wilson/hit")
+            inst.AnimState:PlayAnimation("death2_idle")
+			
+			--inst.SoundEmitter:PlaySound("dontstarve/wilson/death")
+            --inst.AnimState:PlayAnimation("death")
+        end,
+
+        timeline =
+        {
+            TimeEvent(24 * FRAMES, function(inst)
+                inst.sg:RemoveStateTag("busy")
+                inst.sg:RemoveStateTag("nopredict")
+                inst.sg:AddStateTag("idle")
+            end),
+        },
+
+        events =
+        {
+            EventHandler("ontalk", function(inst)
+                if inst.sg.statemem.talktask ~= nil then
+                    inst.sg.statemem.talktask:Cancel()
+                    inst.sg.statemem.talktask = nil
+                    StopTalkSound(inst, true)
+                end
+                if DoTalkSound(inst) then
+                    inst.sg.statemem.talktask =
+                        inst:DoTaskInTime(1.5 + math.random() * .5,
+                            function()
+                                inst.sg.statemem.talktask = nil
+                                StopTalkSound(inst)
+                            end)
+                end
+            end),
+            EventHandler("donetalking", function(inst)
+                if inst.sg.statemem.talktalk ~= nil then
+                    inst.sg.statemem.talktask:Cancel()
+                    inst.sg.statemem.talktask = nil
+                    StopTalkSound(inst)
+                end
+            end),
+            EventHandler("unequip", function(inst, data)
+                -- We need to handle this during the initial "busy" frames
+                if not inst.sg:HasStateTag("idle") then
+                    inst.sg:GoToState(GetUnequipState(inst, data))
+                end
+            end),
+        },
+
+        onexit = function(inst)
+            if inst.sg.statemem.talktask ~= nil then
+                inst.sg.statemem.talktask:Cancel()
+                inst.sg.statemem.talktask = nil
+                StopTalkSound(inst)
+            end
+        end,
     },
 }
 

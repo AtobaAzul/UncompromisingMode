@@ -13,7 +13,6 @@ self.inst = inst
 local _targetplayer = nil
 local _activeplayers = {}
 self.storedcaverne = {}
-self.storedsecondarycaverne = {}
 local STRUCTURE_DIST = 20
 self.caveevents = nil
 self.secondarycaveevents = nil
@@ -701,7 +700,6 @@ local SECONDARYCAVE =
 {
 	SpawnBats = { name = SpawnBats, weight = .3, },
 	SpawnSkitts = { name = SpawnSkitts, weight = .5, },
-	SpawnShadowChars = { name = SpawnShadowChars, weight = .3, },
 	SpawnShadowTalker = { name = SpawnShadowTalker, weight = .6, },
 	SkeleBros = { name = SkeleBros, weight = .3, },
 	--SpawnShadowGrabby = { name = SpawnShadowGrabby, weight = .5, },
@@ -746,14 +744,14 @@ local function DoSecondaryCaveRNE(player)
 			local rnd = math.random()*self.totalrandomsecondarycaveweight
 			for k,v in pairs(self.secondarycaveevents) do
 				rnd = rnd - v.weight
-				if rnd <= 0 and not table.contains(self.storedsecondarycaverne, v.name) then
+				if rnd <= 0 and not table.contains(self.storedcaverne, v.name) then
 					if #self.storedcaverne >= 6 then
-						table.remove(self.storedsecondarycaverne, 1)
+						table.remove(self.storedcaverne, 1)
 					end
 					
 					
 					
-					table.insert(self.storedsecondarycaverne, v.name)
+					table.insert(self.storedcaverne, v.name)
 					v.name(player)
 					return
 				end
@@ -859,7 +857,6 @@ end
 local function OnSave()
 	return {
 		storedcaverne = self.storedcaverne,
-		storedsecondarycaverne = self.storedsecondarycaverne
 	}
 end
 
@@ -868,10 +865,6 @@ local function OnLoad(data)
 	if data ~= nil then
 		if data.storedcaverne ~= nil then
 			self.storedcaverne = data.storedcaverne
-		end
-		
-		if data.storedsecondarycaverne ~= nil then
-			self.storedsecondarycaverne = data.storedsecondarycaverne
 		end
 	end
 end

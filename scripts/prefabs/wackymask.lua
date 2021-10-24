@@ -226,6 +226,110 @@ local function joy_disable(inst)
 	end
 end
 
+local function TechnoSpark(inst)
+	local owner = inst.components.inventoryitem and inst.components.inventoryitem.owner
+	if owner then
+		local x, y, z = owner.Transform:GetWorldPosition()
+		SpawnPrefab("sparks").Transform:SetPosition(x, y + 1 + math.random() * 1.5, z)
+	end
+end
+
+local function TechnoTask(inst)
+	inst:DoTaskInTime(math.random(), TechnoSpark)
+end
+
+local function techno_disable(inst)
+	if inst.technospark then
+		inst.technospark:Cancel()
+		inst.technospark = nil
+	end
+end
+	
+local function techno_enable(inst)
+	local owner = inst.components.inventoryitem and inst.components.inventoryitem.owner
+	if owner then
+		owner.SoundEmitter:PlaySound("dontstarve/characters/wx78/levelup")
+	end
+	
+	inst.technospark = inst:DoPeriodicTask(1, TechnoTask)
+end
+
+local SLEEPTARGETS_CANT_TAGS = { "playerghost", "FX", "DECOR", "INLIMBO" }
+local SLEEPTARGETS_ONEOF_TAGS = { "sleeper", "player" }
+
+local function MandrakeScream(inst)
+	inst:DoTaskInTime(0.5, function(inst)
+		inst.SoundEmitter:PlaySound("dontstarve/creatures/mandrake/death")
+		
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local ents = TheSim:FindEntities(x, y, z, TUNING.MANDRAKE_SLEEP_RANGE, nil, SLEEPTARGETS_CANT_TAGS, SLEEPTARGETS_ONEOF_TAGS)
+		local canpvp = not inst:HasTag("player") or TheNet:GetPVPEnabled()
+		for i, v in ipairs(ents) do
+			if (v == inst or canpvp or not v:HasTag("player")) and
+				not (v.components.freezable ~= nil and v.components.freezable:IsFrozen()) and
+				not (v.components.pinnable ~= nil and v.components.pinnable:IsStuck()) and
+				not (v.components.fossilizable ~= nil and v.components.fossilizable:IsFossilized()) then
+				local mount = v.components.rider ~= nil and v.components.rider:GetMount() or nil
+				if mount ~= nil then
+					mount:PushEvent("ridersleep", { sleepiness = 7, sleeptime = TUNING.MANDRAKE_SLEEP_TIME + math.random() })
+				end
+				if v:HasTag("player") then
+					v:PushEvent("yawn", { grogginess = 4, knockoutduration = TUNING.MANDRAKE_SLEEP_TIME + math.random() })
+				elseif v.components.sleeper ~= nil then
+					v.components.sleeper:AddSleepiness(7, TUNING.MANDRAKE_SLEEP_TIME + math.random())
+				elseif v.components.grogginess ~= nil then
+					v.components.grogginess:AddGrogginess(4, TUNING.MANDRAKE_SLEEP_TIME + math.random())
+				else
+					v:PushEvent("knockedout")
+				end
+			end
+		end
+	end)
+end
+	
+local function mandrake_enable(inst)
+	local owner = inst.components.inventoryitem and inst.components.inventoryitem.owner
+	if owner then
+		owner.SoundEmitter:PlaySound("dontstarve/creatures/mandrake/pop")
+		owner:ListenForEvent("attacked", MandrakeScream)
+	end
+end
+	
+local function mandrake_disable(inst)
+	local owner = inst.components.inventoryitem and inst.components.inventoryitem.owner
+	if owner then
+		owner:RemoveEventCallback("attacked", MandrakeScream)
+	end
+end
+
+local function stopusingopossum(inst, data)
+	local hat = inst.components.inventory ~= nil and inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) or nil
+	if hat ~= nil and data.statename ~= "hide" then
+		hat.components.useableitem:StopUsingItem()
+	end
+end
+	
+local function opossum_enable(inst)
+	local owner = inst.components.inventoryitem.owner
+	if owner then
+		inst:ListenForEvent("newstate", stopusingopossum, owner)
+	end
+end
+
+local function opossum_disable(inst)
+	local owner = inst.components.inventoryitem.owner
+	if owner then
+		inst:RemoveEventCallback("newstate", stopusingopossum, owner)
+	end
+end
+
+local function opossum_onuse(inst)
+	local owner = inst.components.inventoryitem.owner
+	if owner then
+		owner.sg:GoToState("opossum_death")
+	end
+end
+
 local function Hack(inst, data)
 	print("hack")
 	print("hack owner")
@@ -416,7 +520,7 @@ local function devilfn()
 	inst.customequip = demon_enable
 	inst.customunequip = demon_disable
 	
-	inst.components.equippable.dapperness = TUNING.DAPPERNESS_MED
+	inst.components.equippable.dapperness = TUNING.DAPPERNESS_MEDLARGE
 	
     return inst
 end
@@ -430,7 +534,7 @@ local function fiendfn()
 	inst.customequip = demon_enable
 	inst.customunequip = demon_disable
 	
-	inst.components.equippable.dapperness = TUNING.DAPPERNESS_MED
+	inst.components.equippable.dapperness = TUNING.DAPPERNESS_MEDLARGE
 	
     return inst
 end
@@ -646,6 +750,61 @@ local function whitecatfn()
     return inst
 end
 
+local function technofn()
+    local inst = fncommon("hat_technomask", "hat_technomask")
+	
+	inst.foleysound = "dontstarve/movement/foley/wx78"
+		
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.customequip = techno_enable
+	inst.customunequip = techno_disable
+	
+	inst.components.equippable.dapperness = TUNING.DAPPERNESS_SMALL
+	inst.components.equippable.insulated = true
+	
+    return inst
+end
+
+local function mandrakefn()
+    local inst = fncommon("hat_mandrakemask", "hat_mandrakemask")
+
+	inst.foleysound = "dontstarve/creatures/mandrake/walk"
+		
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.customequip = mandrake_enable
+	inst.customunequip = mandrake_disable
+	
+	inst.components.equippable.dapperness = TUNING.DAPPERNESS_MED_LARGE
+	
+    return inst
+end
+
+local function opossumfn()
+    local inst = fncommon("hat_opossummask", "hat_opossummask")
+
+	inst:AddTag("hide")
+		
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.customequip = opossum_enable
+	inst.customunequip = opossum_disable
+
+	inst:AddComponent("useableitem")
+	inst.components.useableitem:SetOnUseFn(opossum_onuse)
+	
+	inst.components.equippable.dapperness = TUNING.DAPPERNESS_MED
+	
+    return inst
+end
+
 return Prefab("hat_bagmask", bagfn, assets),
 		Prefab("hat_blackcatmask", blackcatfn, assets),
 		Prefab("hat_clownmask", clownfn, assets),
@@ -665,4 +824,7 @@ return Prefab("hat_bagmask", bagfn, assets),
 		Prefab("hat_redskullmask", redskullfn, assets),
 		Prefab("hat_skullmask", skullfn, assets),
 		Prefab("hat_spectremask", spectrefn, assets),
-		Prefab("hat_whitecatmask", whitecatfn, assets)
+		Prefab("hat_whitecatmask", whitecatfn, assets),
+		Prefab("hat_technomask", technofn, assets),
+		Prefab("hat_mandrakemask", mandrakefn, assets),
+		Prefab("hat_opossummask", opossumfn, assets)

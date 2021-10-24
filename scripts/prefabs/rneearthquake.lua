@@ -8,8 +8,8 @@ local function SpawnBurst(inst)
 	
 	local ents = TheSim:FindEntities(x, y, z, 30, { "player" })
 
-	inst.x1 = x + (#ents > 0 and math.random(-30, 30) or math.random(-50, 50))
-	inst.z1 = z + (#ents > 0 and math.random(-30, 30) or math.random(-50, 50))
+	inst.x1 = x + (#ents > 0 and math.random(-30, 30) or math.random(-80, 80))
+	inst.z1 = z + (#ents > 0 and math.random(-30, 30) or math.random(-80, 80))
 
 	if inst.x1 ~= nil and inst.z1 ~= nil then
 		SpawnPrefab("rneearthquake_burst").Transform:SetPosition(inst.x1, 0, inst.z1)

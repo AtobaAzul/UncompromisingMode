@@ -16,33 +16,32 @@ local BATTERY =
 {
 	["potato"] =
     {
-		power = TUNING.MED_FUEL * 2,
+		power = TUNING.MED_FUEL / 2,-- 6%
     },
 	["transistor"] =
     {
-		power = TUNING.MED_LARGE_FUEL * 2,
+		power = TUNING.MED_FUEL,-- 12%
     },
 	["feather_canary"] =
     {
-		power = TUNING.MED_LARGE_FUEL * 3,
-    },
-	["lightninggoathorn"] =
-    {
-		power = TUNING.LARGE_FUEL * 3,
-    },
-	["goatmilk"] =
-    {
-		power = TUNING.LARGE_FUEL * 3,
+		power = TUNING.MED_FUEL,--12%
     },
 	["trinket_6"] =
     {
-		power = TUNING.LARGE_FUEL * 3,
+		power = TUNING.MED_LARGE_FUEL,--24%
+    },
+	["lightninggoathorn"] =
+    {
+		power = TUNING.LARGE_FUEL,--50%
+    },
+	["goatmilk"] =
+    {
+		power = TUNING.LARGE_FUEL,--50%
     },
 	["zaspberry"] =
     {
-		power = TUNING.LARGE_FUEL * 5,
+		power = TUNING.LARGE_FUEL * 2,--100%
     },
-	--No klaus, since he does double attacks and has deer 
 }
 
 for k, v in pairs(BATTERY) do

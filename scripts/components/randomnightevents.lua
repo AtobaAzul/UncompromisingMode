@@ -13,7 +13,6 @@ self.inst = inst
 local _targetplayer = nil
 local _activeplayers = {}
 self.storedrne = {}
-self.storedwildrne = {}
 local STRUCTURE_DIST = 20
 self.wildevents = nil
 self.baseevents = nil
@@ -1804,13 +1803,13 @@ local function DoWildRNE(player)
 			local rnd = math.random()*self.totalrandomwildweight
 			for k,v in pairs(self.wildevents) do
 				rnd = rnd - v.weight
-				if rnd <= 0 and not table.contains(self.storedwildrne, v.name) then
-					if #self.storedwildrne >= 6 then
-						table.remove(self.storedwildrne, 1)
+				if rnd <= 0 and not table.contains(self.storedrne, v.name) then
+					if #self.storedrne >= 6 then
+						table.remove(self.storedrne, 1)
 					end
 				
 					v.name(player)
-					table.insert(self.storedwildrne, v.name)
+					table.insert(self.storedrne, v.name)
 					return
 				end
 			end
@@ -2066,7 +2065,6 @@ end
 local function OnSave()
 	return {
 		storedrne = self.storedrne,
-		storedwildrne = self.storedwildrne
 	}
 end
 
@@ -2075,10 +2073,6 @@ local function OnLoad(data)
 	if data ~= nil then
 		if data.storedrne ~= nil then
 			self.storedrne = data.storedrne
-		end
-		
-		if data.storedwildrne ~= nil then
-			self.storedwildrne = data.storedwildrne
 		end
 	end
 end

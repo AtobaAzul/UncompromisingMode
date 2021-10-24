@@ -522,6 +522,15 @@ Assets = {
 	Asset("ANIM", "anim/hat_whitecatmask.zip"),
 	Asset("IMAGE", "images/inventoryimages/hat_whitecatmask.tex"),
 	Asset("ATLAS", "images/inventoryimages/hat_whitecatmask.xml"),
+	Asset("ANIM", "anim/hat_mandrakemask.zip"),
+	Asset("IMAGE", "images/inventoryimages/hat_mandrakemask.tex"),
+	Asset("ATLAS", "images/inventoryimages/hat_mandrakemask.xml"),
+	Asset("ANIM", "anim/hat_technomask.zip"),
+	Asset("IMAGE", "images/inventoryimages/hat_technomask.tex"),
+	Asset("ATLAS", "images/inventoryimages/hat_technomask.xml"),
+	Asset("ANIM", "anim/hat_opossummask.zip"),
+	Asset("IMAGE", "images/inventoryimages/hat_opossummask.tex"),
+	Asset("ATLAS", "images/inventoryimages/hat_opossummask.xml"),
 	
 	
 	Asset("ANIM", "anim/carnival_host_death.zip"),

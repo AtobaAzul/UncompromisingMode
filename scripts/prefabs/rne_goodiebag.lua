@@ -105,7 +105,27 @@ local function OnUnwrapped(inst)
 			inst.components.lootdropper:AddChanceLoot("hat_whitecatmask",    1.00)
 		inst.components.lootdropper:AddChanceLoot("halloweencandy_6",    1.00)
 		inst.components.lootdropper:AddChanceLoot("halloweencandy_3",    1.00)
+		end
+			
+		if inst.size == 21 then
+			inst.components.lootdropper:AddChanceLoot("hat_technomask",    1.00)
+		inst.components.lootdropper:AddChanceLoot("potato",    1.00)
+		inst.components.lootdropper:AddChanceLoot("trinket_6",    1.00)
 		end			
+			
+		if inst.size == 22 then
+			inst.components.lootdropper:AddChanceLoot("hat_mandrakemask",    1.00)
+		inst.components.lootdropper:AddChanceLoot("halloweencandy_7",    1.00)
+		inst.components.lootdropper:AddChanceLoot("halloweencandy_1",    1.00)
+		end			
+			
+		if inst.size == 23 then
+			inst.components.lootdropper:AddChanceLoot("hat_opossummask",    1.00)
+		inst.components.lootdropper:AddChanceLoot("bananapop",    1.00)
+		end
+		
+		
+		
 		
 		inst.components.lootdropper:DropLoot()
 	end
@@ -133,7 +153,7 @@ local function fn()
 		return inst
 	end
 	
-	inst.size = math.random(1,20)
+	inst.size = math.random(1,23)
 
 	inst:AddComponent("inspectable")
 	inst:AddComponent("inventoryitem")
