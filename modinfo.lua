@@ -427,6 +427,10 @@ configuration_options =
 		default = 4000,
 	},
 	BinaryConfig("crabking_claws", "Crabking Fight Adjustment", "The Crabkings imposing claws now deal 500 damage to the king when killed.", false),
+	SkipSpace(),
+	Header("Experimental"),
+	BinaryConfig("honeybandbuff", "Honey Poultice Buff", "[Experimental] Crafting honey poultice gives 2, healing with it gives 10 health overtime as well as 30 health.", false),
+	
 ------------------------------
 -- Secret --
 ------------------------------

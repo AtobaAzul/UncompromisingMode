@@ -277,4 +277,5 @@ return {
 	"um_books",
 	"rain_horn",
 	"floral_bandage",
+	"confighealbuff",
 }

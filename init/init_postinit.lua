@@ -134,6 +134,7 @@ local prefab_post = {
 	"spider_healer",
 	"siestahut",
 	"bees",
+	"farmplants",
 }
 
 local stategraph_post = {
@@ -232,6 +233,10 @@ end
 
 if GetModConfigData("canedurability") == true then
 table.insert(prefab_post,"cane")
+end
+
+if GetModConfigData("honeybandbuff") == true then
+table.insert(prefab_post,"bandage")
 end
 
 modimport("postinit/sim")

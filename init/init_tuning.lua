@@ -339,8 +339,12 @@ TUNING.DSTU =
 	RED_VOMIT_NUTRIENTS		= { 0, 24, 0 },
 	GREEN_VOMIT_NUTRIENTS	= { 0, 0, 24 },
 	PINK_VOMIT_NUTRIENTS	= { 24, 0, 0 },
-	PALE_VOMIT_NUTRIENTS	= { 8, 8, 8 }
+	PALE_VOMIT_NUTRIENTS	= { 8, 8, 8 },
 
+
+--Experimental
+
+	HONEYBANDBUFF = GetModConfigData("honeybandbuff"),
 }
 
 TUNING.NO_BOSS_TIME = 24
@@ -367,5 +371,8 @@ TUNING.ARMORBRAMBLE_DMG = 10
 
 
 TUNING.SLEEP_TICK_PERIOD = TUNING.SLEEP_TICK_PERIOD / TUNING.DSTU.SLEEPINGBUFF
+
+
+
 
 -- [              DST Related Overrides                  ]
