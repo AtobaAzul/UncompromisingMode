@@ -40,6 +40,7 @@ function NightCrawlerBrain:OnStart()
     local root = PriorityNode(
 			{
                 WhileNode( function() return (self.inst:IsInLight() or self.inst.components.combat.target and self.inst.components.combat:InCooldown()) and not self.inst.sg:HasStateTag("attack") and not self.inst.sg:HasStateTag("busy") end, "Dodge",
+					RunAway(self.inst, "lightsource", AVOID_PLAYER_DIST_COMBAT, AVOID_PLAYER_STOP_COMBAT),
 					RunAway(self.inst, "player", AVOID_PLAYER_DIST_COMBAT, AVOID_PLAYER_STOP_COMBAT)),
 				ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST),
 				WhileNode( function() return self.inst:IsInLight() and not self.inst.sg:HasStateTag("attack") end, "Light",

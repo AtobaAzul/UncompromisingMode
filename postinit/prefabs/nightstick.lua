@@ -30,6 +30,8 @@ local function turnon(inst)
 			end
 		end
 		
+		inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/morningstar", "torch")
+		
         if inst._fire == nil and not inst.components.fueled:IsEmpty() then
 			inst._fire = SpawnPrefab("nightstickfire")
 			inst._fire.nightstick = inst
@@ -50,6 +52,7 @@ local function turnoff(inst)
 		end
 	end
 	
+    inst.SoundEmitter:KillSound("torch")
 	inst.SoundEmitter:PlaySound("dontstarve/wilson/lantern_on")
     if inst.components.fueled ~= nil then
         inst.components.fueled:StopConsuming()
@@ -89,12 +92,12 @@ local function onequip(inst, owner)
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 
-    inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/morningstar", "torch")
     --inst.SoundEmitter:SetParameter("torch", "intensity", 1)
 
 	if inst.components.fueled:IsEmpty() then
 		owner.AnimState:OverrideSymbol("swap_object", "swap_nightstick_off", "swap_nightstick_off")
     else
+		inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/morningstar", "torch")
 		owner.AnimState:OverrideSymbol("swap_object", "swap_nightstick", "swap_nightstick")
         turnon(inst)
     end
@@ -157,9 +160,10 @@ env.AddPrefabPostInit("nightstick", function(inst)
 	
 	if inst.components.fueled ~= nil then
 		inst.components.fueled:SetSectionCallback(onfuelchange)
-		--inst.components.fueled:InitializeFuelLevel(TUNING.NIGHTSTICK_FUEL / 1.5)
-		inst.components.fueled:InitializeFuelLevel(TUNING.LANTERN_LIGHTTIME / 1.25)
-		--inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION / 1.5, TUNING.TURNON_FULL_FUELED_CONSUMPTION / 1.5)
+		inst.components.fueled.maxfuel = TUNING.NIGHTSTICK_FUEL / 2
+		inst.components.fueled:InitializeFuelLevel(TUNING.NIGHTSTICK_FUEL / 2)
+		--inst.components.fueled:InitializeFuelLevel(TUNING.LANTERN_LIGHTTIME / 1.25)
+		--inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION * 2, TUNING.TURNON_FULL_FUELED_CONSUMPTION * 2)
 
 		inst.components.fueled:SetDepletedFn(nofuel)
 		inst.components.fueled:SetTakeFuelFn(ontakefuel)
