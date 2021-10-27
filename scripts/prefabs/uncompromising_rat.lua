@@ -35,6 +35,14 @@ SetSharedLootTable("raidrat",
 local brain = require "brains/uncompromising_ratbrain"
 local junkbrain = require "brains/uncompromising_junkratbrain"
 
+local function OnInit(inst)
+	TheWorld:PushEvent("DenSpawned")
+end
+
+local function OnRemoved(inst)
+	TheWorld:PushEvent("DenRemoved")
+end
+
 local function on_cooked_fn(inst, cooker, chef)
 	inst.SoundEmitter:PlaySound(inst.sounds.hit)
 end
@@ -892,6 +900,8 @@ local function MakeRatBurrow(inst)
 			break
 		end
 	end
+	
+    inst:DoTaskInTime(0, OnInit)
 end
 
 --GetClosestInstWithTag(tag, inst, radius or 1000)
@@ -1084,7 +1094,6 @@ local function OnTimerDone(inst, data)
 		
         if #TheSim:FindEntities(x, 0, z, 1000, { "ratburrow" }) >= 10 then
 			print("Reduce Timer Too Many Burrows")
-            TheWorld:PushEvent("rat_sniffer")
 			inst.components.timer:StartTimer("scoutingparty", 1920 + math.random(480))
             return
         end
@@ -1220,6 +1229,8 @@ local function fn_burrow()
 	
 	inst:DoTaskInTime(1, BurrowAnim)
 	
+    inst:ListenForEvent("onremove", OnRemove)
+	
 	return inst
 end
 
@@ -1229,7 +1240,6 @@ local function SlumberParty(inst)
 		
 		local ents = #TheSim:FindEntities(x, y, z, 8, { "ratscout" })
 		if ents ~= nil and ents > 0 then
-            TheWorld:PushEvent("rat_sniffer")
 			print("The girls are here, commencing pillowfort construction...")
 			local burrow = SpawnPrefab("uncompromising_ratburrow")
 			burrow.Transform:SetPosition(x, 0, z)
@@ -1373,7 +1383,7 @@ local function fn_droppings()
     local inst = CreateEntity()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
+    --inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 	
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
@@ -1411,6 +1421,33 @@ local function fn_droppings()
     return inst
 end
 
+local function PlayWarningSound(inst)
+
+    inst.entity:SetParent(TheFocalPoint.entity)
+
+    inst.SoundEmitter:PlaySound("dontstarve/creatures/hound/distant")
+    inst:Remove()
+end
+
+local function fn_warning()
+    local inst = CreateEntity()
+    inst.entity:AddTransform()
+    inst.entity:AddSoundEmitter()
+	
+	inst:AddTag("FX")
+	
+	inst.entity:SetPristine()
+	
+	inst:DoTaskInTime(0, function()
+		PlayWarningSound(inst)
+	end)
+
+	inst.entity:SetCanSleep(false)
+	inst.persists = false
+	
+    return inst
+end
+
 return Prefab("uncompromising_rat", fn, assets, prefabs),
 	Prefab("uncompromising_junkrat", junkfn),
 	Prefab("uncompromising_packrat", packfn, assets, prefabs),
@@ -1418,4 +1455,5 @@ return Prefab("uncompromising_rat", fn, assets, prefabs),
 	Prefab("uncompromising_ratburrow", fn_burrow, assets, prefabs),
 	Prefab("uncompromising_scoutburrow", fn_scoutburrow, assets, prefabs),
 	Prefab("uncompromising_ratsniffer", fn_sniffer, assets, prefabs),
-	Prefab("ratdroppings", fn_droppings, assets)
+	Prefab("ratdroppings", fn_droppings, assets),
+	Prefab("uncompromising_warning", fn_warning)

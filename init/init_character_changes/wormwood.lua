@@ -100,6 +100,8 @@ env.AddPrefabPostInit("wormwood", function(inst)
 		return
 	end
 	
+	inst:AddTag("hayfever_immune")
+	
     MakeSmallPropagator(inst)
 	inst.components.burnable:SetOnBurntFn(OnBurnt)
 	

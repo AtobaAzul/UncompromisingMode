@@ -54,7 +54,7 @@ function Hayfever:CanSneezeQueen()
     local cancan = true
 	
 	local queenkilled = TheWorld.components.hayfever_tracker:CheckQueen() or nil
-	if queenkilled or self.inst:HasTag("plantkin") or self.inst:HasTag("hayfever_immune") then
+	if queenkilled--[[ or self.inst:HasTag("plantkin")]] or self.inst:HasTag("hayfever_immune") then
 		cancan = false
 	end
 	
