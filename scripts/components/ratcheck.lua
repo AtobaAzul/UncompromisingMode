@@ -279,7 +279,7 @@ local function DecreaseDens(data)
 end
 
 function self:OnUpdate(dt)
-	if _worldsettingstimer:GetTimeLeft(RATRAID_TIMERNAME) ~= nil then
+	if _worldsettingstimer ~= nil and _worldsettingstimer:GetTimeLeft(RATRAID_TIMERNAME) ~= nil then
 		print(_worldsettingstimer:GetTimeLeft(RATRAID_TIMERNAME))
 	end
 	
