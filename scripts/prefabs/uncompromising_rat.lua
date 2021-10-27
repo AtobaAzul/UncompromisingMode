@@ -1367,7 +1367,7 @@ local function fn_sniffer()
 	inst.entity:AddNetwork()
 	
 	inst:AddTag("rat_sniffer")
-	
+	inst:AddTag("CLASSIFIED")	
 	inst.entity:SetPristine()
 	
 	if not TheWorld.ismastersim then

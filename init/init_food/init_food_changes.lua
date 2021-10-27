@@ -141,12 +141,29 @@ if TUNING.DSTU.FARMFOODREDUX == true then
 	for k, v in pairs(MASHEDPOTATOES) do
 		AddPrefabPostInit(v, function (inst)
 			if inst ~= nil and inst.components.edible ~= nil then
-				inst.components.edible.hungervalue = 100
+				inst.components.edible.hungervalue = 75
 				inst.components.edible.sanityvalue = 15
 			end
 		end)
 	end
+	
+	local POTATOTORNADO = 
+	{
+		"potatotornado",
+		"potatotornado_spice_chili",
+		"potatotornado_spice_garlic",
+		"potatotornado_spice_salt",
+		"potatotornado_spice_sugar",
+	}
 
+	for k, v in pairs(POTATOTORNADO) do
+		AddPrefabPostInit(v, function (inst)
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.hungervalue = 25
+			end
+		end)
+	end
+	
 	local SALSA = 
 	{
 		"salsa",
@@ -176,7 +193,6 @@ if TUNING.DSTU.FARMFOODREDUX == true then
 	for k, v in pairs(PEPPERPOPPER) do
 		AddPrefabPostInit(v, function (inst)
 			if inst ~= nil and inst.components.edible ~= nil then
-				inst.components.edible.hungervalue = 50
 				inst.components.edible.healthvalue  = 60
 			end
 		end)
@@ -274,26 +290,8 @@ if TUNING.DSTU.FARMFOODREDUX == true then
 		AddPrefabPostInit(v, function (inst)
 			if inst ~= nil and inst.components.edible ~= nil then
 				inst.components.edible.hungervalue = 75
-				inst.components.edible.healthvalue = 15
+				inst.components.edible.healthvalue = 20
 				inst.components.edible.sanityvalue  = 5
-			end
-		end)
-	end
-
-	local VEGSTINGER = 
-	{
-		"vegstinger",
-		"vegstinger_spice_chili",
-		"vegstinger_spice_garlic",
-		"vegstinger_spice_salt",
-		"vegstinger_spice_sugar",
-	}
-
-	for k, v in pairs(VEGSTINGER) do
-		AddPrefabPostInit(v, function (inst)
-			if inst ~= nil and inst.components.edible ~= nil then
-				inst.components.edible.hungervalue = 30
-				inst.components.edible.healthvalue = 10
 			end
 		end)
 	end
