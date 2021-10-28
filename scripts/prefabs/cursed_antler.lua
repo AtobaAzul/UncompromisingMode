@@ -46,7 +46,6 @@ end
 local function onunequip(inst, owner)
     owner.AnimState:Hide("ARM_carry")
     owner.AnimState:Show("ARM_normal")
-	inst.components.weapon:SetDamage(34)
 	
 	if inst.task == nil then
 		inst.task = inst:DoPeriodicTask(0.5, fuelme)
@@ -65,7 +64,7 @@ local function onequip(inst, owner)
 				owner.components.talker:Say(GetString(owner, "CURSED_ITEM_EQUIP"))
 				inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/HUD_hot_level1")
 				
-				owner.components.combat:GetAttacked(inst, 0.1, nil)
+				owner.components.combat:GetAttacked(inst, 0, nil)
 			end
 		end)
 	else
@@ -98,13 +97,13 @@ local function onattack(inst, attacker, target)
         end
 		
 		if not target.components.health:IsDead() then
-			target.components.health:DoDelta(-60, false, attacker)
+			target.components.health:DoDelta(-66, false, attacker)
 		end
 		
 		local ents = TheSim:FindEntities(x, y, z, 2, nil, { "INLIMBO", "player", "abigail" })
 
 		for i, v in ipairs(ents) do
-			if v ~= inst and v:IsValid() and not v:IsInLimbo() then
+			if v ~= inst and v ~= target and v:IsValid() and not v:IsInLimbo() then
 				if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
 					v.components.combat:GetAttacked(attacker, 34, nil)
 						

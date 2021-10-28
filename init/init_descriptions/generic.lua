@@ -390,3 +390,12 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.FLORAL_BANDAGE = "Heals open wounds and keeps them smelling good."
 	DESCRIBE.DORMANT_RAIN_HORN = "Looking at it gives me flashes of a tropical setting."
 	DESCRIBE.RAIN_HORN = "This'll be useful for when wildfires start up again."
+	
+	
+    ANNOUNCE.ANNOUNCE_RATSNIFFER = {
+        LEVEL_1 = "Did you hear something?",
+        LEVEL_2 = "Sounds like rats. I should clean up.",
+        LEVEL_3 = "Sounds like some rats are interested in this area.",
+        LEVEL_4 = "This place is a bit of a mess.",
+        LEVEL_5 = "I'd better clean up all this mess!",
+    }

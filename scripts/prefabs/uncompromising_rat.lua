@@ -902,6 +902,7 @@ local function MakeRatBurrow(inst)
 	end
 	
     inst:DoTaskInTime(0, OnInit)
+    inst:ListenForEvent("onremove", OnRemoved)
 end
 
 --GetClosestInstWithTag(tag, inst, radius or 1000)
@@ -1229,6 +1230,7 @@ local function fn_burrow()
 	
 	inst:DoTaskInTime(1, BurrowAnim)
 	
+    inst:DoTaskInTime(0, OnInit)
     inst:ListenForEvent("onremove", OnRemoved)
 	
 	return inst
@@ -1297,7 +1299,7 @@ end
 local function TimeForACheckUp(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 
-	local ents = TheSim:FindEntities(x, y, z, 30, {"_inventoryitem"})
+	local ents = TheSim:FindEntities(x, 0, z, 40, {"_inventoryitem"})
 	print("THE RAT SNIFFS")
 	print("                o")
 	print("    =========B  *sniff* *sniff*")
@@ -1306,56 +1308,96 @@ local function TimeForACheckUp(inst)
 	print("    V V    V V")
 	
 	inst.ratscore = 0
+	print(#ents)
+	
 	
 	if ents ~= nil then
 		for i, v in ipairs(ents) do
-			if v.components.inventoryitem:IsHeld() then
-				if not inst:HasTag("frozen") then
-					if inst:HasTag("stale") then
-						inst.ratscore = inst.ratscore + 5
-					elseif inst:HasTag("spoiled") then
-						inst.ratscore = inst.ratscore + 15
-					end
-				elseif v.prefab == "spoiledfood" then
-					inst.ratscore = inst.ratscore + 25
-				end
-			else
-				if not inst:HasTag("frozen") then
-					if inst:HasTag("fresh") then
-						inst.ratscore = inst.ratscore + 10
-					elseif inst:HasTag("stale") then
-						inst.ratscore = inst.ratscore + 20
-					elseif inst:HasTag("spoiled") then
-						inst.ratscore = inst.ratscore + 30
-					end
-				elseif v.prefab == "spoiledfood" then
-					inst.ratscore = inst.ratscore + 45
-				end
-				
-				if inst:HasTag("cattoy") or inst:HasTag("molebait") then
-					if inst.prefab == "twigs" then
-						inst.ratscore = inst.ratscore + 0.5 -- Give them a break, Twiggy Trees may be the cause
-					else
-						if inst:HasTag("molebait") then
-							inst.ratscore = inst.ratscore + 3
-						else
-							inst.ratscore = inst.ratscore + 1
+				if v.components.inventoryitem:IsHeld() then
+					if not v:HasTag("frozen") then
+						if v:HasTag("stale") then
+							inst.ratscore = inst.ratscore + 5
+						elseif v:HasTag("spoiled") then
+							inst.ratscore = inst.ratscore + 15
 						end
+					elseif v.prefab == "spoiledfood" then
+						inst.ratscore = inst.ratscore + 25
 					end
 				else
-					if inst:HasTag("_equippable") then
-						inst.ratscore = inst.ratscore + 20 -- Oooh, wants wants! We steal!
+					if not v:HasTag("frozen") then
+						if v:HasTag("fresh") then
+							inst.ratscore = inst.ratscore + 10
+						elseif v:HasTag("stale") then
+							inst.ratscore = inst.ratscore + 20
+						elseif v:HasTag("spoiled") then
+							inst.ratscore = inst.ratscore + 30
+						end
+					elseif v.prefab == "spoiledfood" then
+						inst.ratscore = inst.ratscore + 45
+					end
+					
+					if v:HasTag("cattoy") or v:HasTag("molebait") then
+						if v.prefab == "twigs" then
+							inst.ratscore = inst.ratscore + 0.5 -- Give them a break, Twiggy Trees may be the cause
+						else
+							if v:HasTag("molebait") then
+								inst.ratscore = inst.ratscore + 3
+							else
+								inst.ratscore = inst.ratscore + 1
+							end
+						end
 					else
-						inst.ratscore = inst.ratscore + 10
+						if v:HasTag("_equippable") then
+							inst.ratscore = inst.ratscore + 20 -- Oooh, wants wants! We steal!
+						else
+							--inst.ratscore = inst.ratscore + 10
+						end
 					end
 				end
-			end
 		end
 	end
 	
 	print(inst.ratscore)
 	print("THATS THE NORMAL RAT SCORE")
 	TheWorld:PushEvent("reducerattimer", {value = inst.ratscore})
+	
+	
+	inst.ratwarning = inst.ratscore / 50
+	
+	
+		--[[
+		for c = 1, (inst.ratwarning) do
+			inst:DoTaskInTime((c/4), function(inst)
+				local warning = SpawnPrefab("uncompromising_ratwarning")
+				warning.Transform:SetPosition(inst.Transform:GetWorldPosition())
+				--warning.entity:SetParent(b)
+				--b.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
+				--warning.entity:SetParent(TheFocalPoint.b.entity)
+			end)
+		end
+	end]]
+	if inst.ratwarning >= 1 then
+		if inst.ratwarning > 5 then
+			inst.ratwarning = 5
+		end
+		
+			for c = 1, (inst.ratwarning) do
+				inst:DoTaskInTime((c/5), function(inst)
+					local warning = SpawnPrefab("uncompromising_ratwarning")
+					warning.Transform:SetPosition(inst.Transform:GetWorldPosition())
+					--warning.entity:SetParent(b)
+					--b.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
+					--warning.entity:SetParent(TheFocalPoint.b.entity)
+				end)
+			end
+			
+		local players = TheSim:FindEntities(x, y, z, 40, {"player"})
+		for a, b in ipairs(players) do
+			b:DoTaskInTime(2+math.random(), function(b)
+				b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER", "LEVEL_"..tostring(RoundToNearest(inst.ratwarning, 1))))
+			end)
+		end
+	end
 end
 
 local function fn_sniffer()
@@ -1374,7 +1416,7 @@ local function fn_sniffer()
 		return inst
 	end
 	
-	inst:ListenForEvent("rat_sniffer", TimeForACheckUp, TheWorld)
+	inst:ListenForEvent("rat_sniffer", TimeForACheckUp)
 	
 	return inst
 end
@@ -1423,29 +1465,43 @@ end
 
 local function PlayWarningSound(inst)
 
-    inst.entity:SetParent(TheFocalPoint.entity)
+    --inst.entity:SetParent(TheFocalPoint.entity)
+	--print(TheFocalPoint.entity)
+    local theta = math.random() * 2 * PI
 
-    inst.SoundEmitter:PlaySound("dontstarve/creatures/hound/distant")
+	local x, y, z = inst.Transform:GetWorldPosition()
+    inst.Transform:SetPosition(x + (20 * math.cos(theta)), 0, z + 20 * (math.sin(theta)))
+
+	local x, y, z = inst.Transform:GetWorldPosition()
+	print(x, y, z)
+	--TheFocalPoint.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
+    inst.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
     inst:Remove()
 end
 
 local function fn_warning()
-    local inst = CreateEntity()
-    inst.entity:AddTransform()
-    inst.entity:AddSoundEmitter()
-	
-	inst:AddTag("FX")
+	local inst = CreateEntity()
+
+	inst.entity:AddTransform()
+	inst.entity:AddSoundEmitter()
+    inst.entity:AddNetwork()
+
+	inst:AddTag("FX")		
 	
 	inst.entity:SetPristine()
 	
-	inst:DoTaskInTime(0, function()
+	if not TheWorld.ismastersim then 
+		return inst
+	end
+
+	inst:DoTaskInTime(0, function() 
 		PlayWarningSound(inst)
 	end)
 
 	inst.entity:SetCanSleep(false)
 	inst.persists = false
-	
-    return inst
+
+	return inst
 end
 
 return Prefab("uncompromising_rat", fn, assets, prefabs),
@@ -1456,4 +1512,4 @@ return Prefab("uncompromising_rat", fn, assets, prefabs),
 	Prefab("uncompromising_scoutburrow", fn_scoutburrow, assets, prefabs),
 	Prefab("uncompromising_ratsniffer", fn_sniffer, assets, prefabs),
 	Prefab("ratdroppings", fn_droppings, assets),
-	Prefab("uncompromising_warning", fn_warning)
+	Prefab("uncompromising_ratwarning", fn_warning)

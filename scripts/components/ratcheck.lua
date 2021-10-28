@@ -23,7 +23,7 @@ local _respawntimeremaining = nil
 local ratwarning = nil
 --local _initialrattimer = 24000
 local _initialrattimer = 33600
-local _ratsnifftimer = 480
+local _ratsnifftimer = 4800
 local _ratburrows = 1
 
 local _worldsettingstimer = TheWorld.components.worldsettingstimer
@@ -260,9 +260,9 @@ local function ActiveRaid(src, data)
 		if #TheSim:FindEntities(x, y, z, 30, { "structure" }) >= 3 then
 			local ratchecker = TheSim:FindFirstEntityWithTag("rat_sniffer")
 			if ratchecker ~= nil then
-				ratchecker.Transform:SetPosition(x, y, z)
+				ratchecker.Transform:SetPosition(x, 0, z)
 			else
-				SpawnPrefab("uncompromising_ratsniffer").Transform:SetPosition(x, y, z)
+				SpawnPrefab("uncompromising_ratsniffer").Transform:SetPosition(x, 0, z)
 			end
 		end
     end
@@ -280,17 +280,22 @@ end
 
 function self:OnUpdate(dt)
 	if _worldsettingstimer ~= nil and _worldsettingstimer:GetTimeLeft(RATRAID_TIMERNAME) ~= nil then
-		print(_worldsettingstimer:GetTimeLeft(RATRAID_TIMERNAME))
+		--print(_worldsettingstimer:GetTimeLeft(RATRAID_TIMERNAME))
 	end
 	
 	if _ratsnifftimer then
 		if _ratsnifftimer > 0 then
 			_ratsnifftimer = _ratsnifftimer - (dt * _ratburrows)
-			print(_ratsnifftimer)
-			print(_ratburrows)
+			--print(_ratsnifftimer)
+			--print(_ratburrows)
 		else
-			_ratsnifftimer = 480
-            TheWorld:PushEvent("rat_sniffer")
+			_ratsnifftimer = 960
+            --TheWorld:PushEvent("rat_sniffer")
+			local ratchecker = TheSim:FindFirstEntityWithTag("rat_sniffer")
+			
+			if ratchecker ~= nil then
+				ratchecker:PushEvent("rat_sniffer")
+			end
 		end
 	end
 end
