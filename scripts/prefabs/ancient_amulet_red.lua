@@ -1,6 +1,6 @@
 local assets =
 {
-    Asset("ANIM", "anim/amulets.zip"),
+    Asset("ANIM", "anim/amulet_red_ground.zip"),
     Asset("ANIM", "anim/torso_amulets.zip"),
 }
 
@@ -104,6 +104,30 @@ local function OnHaunt(inst, haunter)
 	inst:DoTaskInTime(3, function(inst) inst:Remove() end)
 end
 
+local function onfar(inst) --doesn't have the player part for some reason....
+	local x,y,z = inst.Transform:GetWorldPosition()
+	local players = FindPlayersInRange(x, y, z, 6)
+	local ghostplayers = false
+	for i, v in ipairs(players) do
+		if v:HasTag("playerghost") then
+			local ghostplayers = true
+		end
+	end
+    if inst.floating == true and ghostplayers == false then
+		inst.floating = false
+		inst.AnimState:PlayAnimation("Hover_pst")
+		inst.AnimState:PushAnimation("Idle",true)
+    end
+end
+
+local function onnear(inst,player)
+    if player ~= nil and player:HasTag("playerghost") and inst.floating == false then
+		inst.floating = true
+		inst.AnimState:PlayAnimation("Idle_pre")
+		inst.AnimState:PushAnimation("Hover",true)
+    end
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -113,9 +137,9 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("amulets")
-    inst.AnimState:SetBuild("amulets_ancient")
-    inst.AnimState:PlayAnimation("redamulet")
+    inst.AnimState:SetBank("amulet_red_ground")
+    inst.AnimState:SetBuild("amulet_red_ground")
+    inst.AnimState:PlayAnimation("Idle")
 	
 	inst.Transform:SetScale(1.1, 1.1, 1.1)
 	
@@ -155,6 +179,11 @@ local function fn()
 	inst.components.hauntable:SetOnHauntFn(OnHaunt)
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_INSTANT_REZ)
 
+	inst:AddComponent("playerprox")
+    inst.components.playerprox:SetDist(4, 6)
+    inst.components.playerprox:SetOnPlayerNear(onnear)
+    inst.components.playerprox:SetOnPlayerFar(onfar)
+	inst.floating = false
     return inst
 end
 
