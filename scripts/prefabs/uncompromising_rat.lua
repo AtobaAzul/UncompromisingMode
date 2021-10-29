@@ -85,6 +85,11 @@ local function OnDeath(inst)
 end
 
 local function OnPickup(inst, data)
+	if data.item:HasTag("trap") then
+		inst.components.inventory:DropItem(data.item)
+		return
+	end
+
 	if inst._item ~= nil then
 		inst._item:Remove()
 	end
@@ -232,7 +237,7 @@ local function fn()
 	inst:AddTag("hostile")
 	inst:AddTag("herdmember")
 	inst:AddTag("smallcreature")
-	--inst:AddTag("canbetrapped")
+	inst:AddTag("canbetrapped")
 	inst:AddTag("cattoy")
 	inst:AddTag("catfood")
 	inst:AddTag("cookable")
@@ -302,7 +307,7 @@ local function fn()
 	end
 
 	inst:AddComponent("eater")
-	inst.components.eater:SetDiet({ FOODTYPE.OMNI }, { FOODTYPE.OMNI })
+	inst.components.eater:SetDiet({ FOODTYPE.MEAT, FOODTYPE.VEGGIE }, { FOODTYPE.MEAT, FOODTYPE.VEGGIE })
 	inst.components.eater:SetCanEatHorrible()
 	inst.components.eater:SetCanEatRaw()
 	inst.components.eater:SetStrongStomach(true) -- can eat monster meat!
@@ -367,7 +372,7 @@ local function fn()
 	inst:ListenForEvent("attacked", OnAttacked)
 	inst:ListenForEvent("death", OnDeath)
 	inst:ListenForEvent("onpickupitem", OnPickup)
-	inst:ListenForEvent("trapped", Trapped)
+	--inst:ListenForEvent("trapped", Trapped)
 	
 	MakeHauntablePanic(inst)
 	
@@ -526,7 +531,7 @@ local function junkfn()
 	inst:AddTag("hostile")
 	inst:AddTag("herdmember")
 	inst:AddTag("smallcreature")
-	--inst:AddTag("canbetrapped")
+	inst:AddTag("canbetrapped")
 	inst:AddTag("cattoy")
 	inst:AddTag("catfood")
 	inst:AddTag("cookable")
@@ -555,7 +560,7 @@ local function junkfn()
 	inst.Transform:SetScale(1.25,1.25,1.25)
 	
 	inst:AddComponent("eater")
-	inst.components.eater:SetDiet({ FOODTYPE.OMNI }, { FOODTYPE.OMNI })
+	inst.components.eater:SetDiet({ FOODTYPE.MEAT, FOODTYPE.VEGGIE }, { FOODTYPE.MEAT, FOODTYPE.VEGGIE })
 	inst.components.eater:SetCanEatHorrible()
 	inst.components.eater:SetCanEatRaw()
 	inst.components.eater:SetStrongStomach(true) -- can eat monster meat!
@@ -622,6 +627,12 @@ local function junkfn()
 	return inst
 end
 
+local function OnPackPickup(inst, data)
+	if data.item:HasTag("trap") then
+		inst.components.inventory:DropItem(data.item)
+	end
+end
+
 local function packfn()
 	local inst = CreateEntity()
 	
@@ -647,7 +658,7 @@ local function packfn()
 	inst:AddTag("hostile")
 	inst:AddTag("herdmember")
 	inst:AddTag("smallcreature")
-	--inst:AddTag("canbetrapped")
+	inst:AddTag("canbetrapped")
 	inst:AddTag("cattoy")
 	inst:AddTag("catfood")
 	inst:AddTag("cookable")
@@ -719,7 +730,7 @@ local function packfn()
 	end
 
 	inst:AddComponent("eater")
-	inst.components.eater:SetDiet({ FOODTYPE.OMNI }, { FOODTYPE.OMNI })
+	inst.components.eater:SetDiet({ FOODTYPE.MEAT, FOODTYPE.VEGGIE }, { FOODTYPE.MEAT, FOODTYPE.VEGGIE })
 	inst.components.eater:SetCanEatHorrible()
 	inst.components.eater:SetCanEatRaw()
 	inst.components.eater:SetStrongStomach(true) -- can eat monster meat!
@@ -777,8 +788,8 @@ local function packfn()
 	inst:ListenForEvent("onattackother", OnAttackOther)
 	inst:ListenForEvent("attacked", OnAttacked)
 	inst:ListenForEvent("death", OnDeath)
-	--inst:ListenForEvent("onpickupitem", OnPickup)
-	inst:ListenForEvent("trapped", Trapped)
+	inst:ListenForEvent("onpickupitem", OnPackPickup)
+	--inst:ListenForEvent("trapped", Trapped)
 	
 	MakeHauntablePanic(inst)
 	

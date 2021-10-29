@@ -3,6 +3,9 @@ require "behaviours/runaway"
 require "behaviours/doaction"
 require "behaviours/panic"
 
+local SEE_PLAYER_DIST = 8
+local SEE_FOOD_DIST = 20
+
 local AVOID_PLAYER_DIST = 3
 local AVOID_PLAYER_DIST_SQ = AVOID_PLAYER_DIST * AVOID_PLAYER_DIST
 local AVOID_PLAYER_STOP = 8
@@ -24,6 +27,21 @@ local Uncompromising_RatBrain = Class(Brain, function(self, inst)
 	Brain._ctor(self, inst)
 end)
 
+local function CanSpringTrap(item)
+	return item:IsOnValidGround()
+		and not item:IsNearPlayer(TOOCLOSE)
+		and item.components.trap
+		and item.components.trap.issprung
+end
+
+local function SpringTrap(inst)
+	local target = FindEntity(inst, SEE_DIST, CanSpringTrap,{ "trap" })
+			
+	return target ~= nil
+		and BufferedAction(inst, target, ACTIONS.CHECKTRAP)
+		or nil
+end
+
 local function CanSteal(item)
 	return item.components.inventoryitem ~= nil
 		and item.components.inventoryitem.canbepickedup
@@ -36,17 +54,17 @@ local function StealAction(inst)
 	local targetpriority = FindEntity(inst, SEE_DIST,
 	CanSteal,
 	{ "_inventoryitem", "_equippable" },
-	{ "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
+	{ "trap", "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
 	
 	local targetpriority_secondary = FindEntity(inst, SEE_DIST,
 	CanSteal,
 	{ "_inventoryitem", "preparedfood" },
-	{ "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
+	{ "trap", "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
 	
 	local target = FindEntity(inst, SEE_DIST,
 	CanSteal,
 	{ "_inventoryitem" },
-	{ "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
+	{ "trap", "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
 			
 	if inst:HasTag("packrat") and not inst.components.inventory:IsFull() then
 		if targetpriority ~= nil then
@@ -102,7 +120,7 @@ local function edible(inst, item)
 			item:IsOnPassablePoint() and
 			item:GetCurrentPlatform() == inst:GetCurrentPlatform()
 end
-
+--[[
 local function eat_food_action(inst)
 	if inst == nil or not inst:IsValid() then
 		return nil
@@ -159,6 +177,36 @@ local function eat_food_action(inst)
 		act.validfn = function() return not (target.components.inventoryitem and target.components.inventoryitem:IsHeld()) end
 		return act
 	end
+end]]
+
+local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO", "planted" }
+
+local function eat_food_action(inst)
+	if inst.sg:HasStateTag("busy") or inst:GetTimeAlive() < 5 or
+        (inst.components.eater:TimeSinceLastEating() ~= nil and inst.components.eater:TimeSinceLastEating() < 5) then
+        return
+    elseif inst.components.inventory ~= nil and inst.components.eater ~= nil then
+        local target = inst.components.inventory:FindItem(function(item)
+            return inst.components.eater:CanEat(item)
+        end)
+        if target ~= nil and not target:HasTag("planted") then
+            return BufferedAction(inst, target, ACTIONS.EAT)
+        end
+    end
+
+    local target = FindEntity(
+        inst,
+        SEE_FOOD_DIST,
+        function(item)
+            return item:GetTimeAlive() >= 8
+                and item:IsOnPassablePoint(true)
+                and inst.components.eater:CanEat(item) and not GetClosestInstWithTag("scarytoprey", target, SEE_PLAYER_DIST)-- ~= nil
+        end,
+        nil,
+        NO_TAGS,
+        inst.components.eater:GetEdibleTags()
+    )
+    return target ~= nil and BufferedAction(inst, target, ACTIONS.EAT) or nil
 end
 
 function Uncompromising_RatBrain:OnStart()
@@ -166,7 +214,8 @@ function Uncompromising_RatBrain:OnStart()
 	{
 		WhileNode(function() return not self.inst.sg:HasStateTag("jumping") and self.inst.prefab ~= "uncompromising_caverat" end, "NotJumpingBehaviour",
                 PriorityNode({
-		DoAction(self.inst, eat_food_action),
+		DoAction(self.inst, function() return SpringTrap(self.inst) end, "checktrap", true ),
+		DoAction(self.inst, eat_food_action, "Eat Food"),
 		DoAction(self.inst, function() return StealAction(self.inst) end, "steal", true ),
 		DoAction(self.inst, function() return EmptyChest(self.inst) end, "emptychest", true )
 		}, .25))
