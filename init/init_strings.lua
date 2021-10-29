@@ -30,15 +30,15 @@ STRINGS.UNCOMP_TOOLTIP = {
 	WALL_STONE_ITEM = "- Provides protection from Snow Storms.",
 	WALL_RUINS_ITEM = "- Provides protection from Snow Storms.",
 	WALL_MOONROCK_ITEM = "- Provides protection from Snow Storms.",
-	YELLOWSTAFF = "- Dwarf stars provide protection from Snow Storms.",
-    OPALSTAFF = "- Dwarf stars provide protection from Snow Storms.",
+	YELLOWSTAFF = "- Dwarf Stars provide protection from Snow Storms.",
+    OPALSTAFF = "- Dwarf Stars provide protection from Snow Storms.",
 	ARMORRUINS = "- Prevents knockback effects.\n- Reduces insanity aura effects by 40%.",
 	SWEATERVEST = "- Reduces insanity aura effects by 70%.",
 	FEATHERFAN = "- Grants large amounts of Hayfever protection when blown.",
 	PERDFAN = "- Grants large amounts of Hayfever protection when blown.",
 	SKELETONHAT = "- Will not spawn the Creeping Fear when worn.",
 	ICEPACK = "- Will not burn.",
-	HEATROCK = "- Reduced insulation.\n- Increases insulation based on player insulation.",
+	HEATROCK = "- Reduced inherent insulation.\n- Inherits part of players insulation.",
 	MOLEHAT = "- Grants protection against Snow Storms / Sand Storms when worn.",
 	ARMOR_BRAMBLE = "- Automatically launches spikes at nearby threats.",
 	COOKIECUTTERHAT = "- Reflects 75% of damage taken back at attacker.",
@@ -57,8 +57,8 @@ STRINGS.UNCOMP_TOOLTIP = {
 	FEATHERHAT = "- Provides saftey from territorial Pengulls.",
 	YELLOWAMULET = "- No longer breaks when empty.\n- Can be fueled with Nightmare Fuel.",
 	ORANGEAMULET = "- No longer breaks when empty.\n- Can be fueled with Nightmare Fuel.\n- Will pick certain plants too!",
-	PURPLEAMULET = "- No longer breaks when empty.\n- Can be fueled with Nightmare Fuel.\n- Grants bonus Nightmare Fuel from defeated Shadows.",
-	PIGGYBACK = "- Decreases Player speed by 1% per item held.",
+	PURPLEAMULET = "- No longer breaks when empty.\n- Can be fueled with Nightmare Fuel.\n- Grants bonus Nightmare Fuel from slain Shadows.",
+	PIGGYBACK = "- No Passive -10% movement speed while worn.\n- Decreases Player speed by 1% per item held.",
 	
 	TRUNKVEST_SUMMER = "- Now has pockets!",
 	TRUNKVEST_WINTER = "- Now has pockets!",
@@ -66,7 +66,6 @@ STRINGS.UNCOMP_TOOLTIP = {
 	PREMIUMWATERINGCAN = "- Can contain and preserve ocean fish.",
 	
 	MARBLEARMOR = "- Prevents knockback effects.",
-	FIRESUPPRESSOR = "- Drains fuel on each throw.\n- Increased maximum fuel.",
 	SEWINGKIT = "- Increased storage capacity.\n- May hurt would be thieves.",
 	TURF_DRAGONFLY = "- Prevents snowpile build-up.",
 	GASMASK = "- Prevents Hayfever while worn.",
@@ -75,8 +74,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	BEDROLL_FURRY = "- May restore maximum health.",
 	TENT = "- May restore maximum health.",
 	SIESTAHUT = "- A bit less efficient.\n- May restore maximum health.",
-	
-	
+	BEEBOX = "- Reduced yield per stage.",
 	
 	AIR_CONDITIONER = "- Can crush up Mushrooms for helpful stat clouds.",
 	ANCIENT_AMULET_RED = "- Drops soul orbs when attacked, which will replenish lost health when picked up.",
@@ -91,6 +89,12 @@ STRINGS.UNCOMP_TOOLTIP = {
     UM_BEAR_TRAP_EQUIPPABLE_GOLD = "- Slows down anything it's attached to. Deployable and throwable.",
 	WATERMELON_LANTERN = "- Has a positive sanity aura.",
 }
+
+if TUNING.DSTU.FLINGO_SETTING == "Fuelmuncher" then
+	STRINGS.UNCOMP_TOOLTIP.FIRESUPPRESSOR = "- Drains fuel on each throw.\n- Increased maximum fuel."
+elseif TUNING.DSTU.FLINGO_SETTING == "Waterballs" then
+	STRINGS.UNCOMP_TOOLTIP.FIRESUPPRESSOR = "- No longer freezes on hit."
+end
 
 
 STRINGS.STANTON_GREET = {"Care to drink with the dead?", "How's about a drink?", "C'mon and drink with me."}
