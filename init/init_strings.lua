@@ -95,7 +95,7 @@ if TUNING.DSTU.FLINGO_SETTING == "Fuelmuncher" then
 elseif TUNING.DSTU.FLINGO_SETTING == "Waterballs" then
 	STRINGS.UNCOMP_TOOLTIP.FIRESUPPRESSOR = "- No longer freezes on hit."
 end
-s
+
 
 STRINGS.STANTON_GREET = {"Care to drink with the dead?", "How's about a drink?", "C'mon and drink with me."}
 STRINGS.STANTON_GIVE = {"There ya go.", "The finest."}
