@@ -5,6 +5,7 @@ local actionhandlers =
 	ActionHandler(ACTIONS.EAT, "eat"),
 	ActionHandler(ACTIONS.PICKUP, "steal"),
 	ActionHandler(ACTIONS.HAMMER, "steal"),
+    ActionHandler(ACTIONS.CHECKTRAP, "eat"),
 }
 
 local events =
@@ -208,39 +209,32 @@ local states =
 			inst.Physics:SetActive(true)
 		end,
 	},
-
-	State {
+	
+	State{
 		name = "eat",
+		tags = {"busy"},
 
 		onenter = function(inst)
 			inst:PerformBufferedAction()
-			inst.Physics:SetActive(false)
 			inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("eat_pre", false)
 			inst.AnimState:PushAnimation("eat_loop", false)
 			inst.AnimState:PushAnimation("eat_pst", false)
 		end,
-
-		events =
-		{
-			EventHandler("animqueueover", function(inst)
-				if inst.AnimState:AnimDone() then
-					inst.sg:GoToState("submerge")
-				end
-			end),
-		},
-
-		timeline =
+		
+		timeline=
 		{
 			TimeEvent(3*FRAMES, function(inst)
 				inst.SoundEmitter:PlaySound(inst.sounds.eat)
 			end)
 		},
-
-		onexit = function(inst)
-			inst.Physics:SetActive(true)
-		end,
-	},
+		
+		
+		events=
+		{
+			EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
+		}, 		
+	}, 
 
 	State{
 		name = "steal",
