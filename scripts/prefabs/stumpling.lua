@@ -16,7 +16,18 @@ local sounds =
 
 SetSharedLootTable('stumpling',
 {
-    {'twigs', 2.000},
+    {'log', 1.0},
+    {'twigs', 1.0},
+    {'twigs', .5},
+    {'pinecone', .25},
+})
+
+SetSharedLootTable('pineling',
+{
+    {'log', 1.0},
+    {'twigs', 1.0},
+    {'twigs', .5},
+    {'acorn', .25},
 })
 
 local WAKE_TO_FOLLOW_DISTANCE = 8
@@ -325,7 +336,7 @@ local function fnbirchling()
     inst.components.combat.battlecryenabled = false
 
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetChanceLootTable('stumpling')
+    inst.components.lootdropper:SetChanceLootTable('pineling')
 
     inst:AddComponent("inspectable")
 
