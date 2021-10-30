@@ -1,5 +1,5 @@
 name = "[DEV] 󰀕 Uncompromising Mode"
-description = "yawn scratches chin and ponders"
+description =
 [[
 󰀔 [ Version 1.1.5 : "The Hooded Forest" ]
 
