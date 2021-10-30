@@ -10,11 +10,11 @@ end
 
 local function onfuelchangehigh(newsection, oldsection, inst, doer)
     if newsection <= 1 then
-		inst.components.waterproofer:SetEffectiveness(0.3)
+		inst.components.waterproofer:SetEffectiveness(0.4)
     elseif newsection <= 2 then
-		inst.components.waterproofer:SetEffectiveness(0.5)
+		inst.components.waterproofer:SetEffectiveness(0.6)
     elseif newsection <= 3 then
-		inst.components.waterproofer:SetEffectiveness(0.7)
+		inst.components.waterproofer:SetEffectiveness(0.75)
     elseif newsection <= 4 then
 		inst.components.waterproofer:SetEffectiveness(0.9)
     end
@@ -34,13 +34,13 @@ end
 
 local function onfuelchangemedium(newsection, oldsection, inst, doer)
     if newsection <= 1 then
-		inst.components.waterproofer:SetEffectiveness(0.15)
-    elseif newsection <= 2 then
 		inst.components.waterproofer:SetEffectiveness(0.3)
-    elseif newsection <= 3 then
+    elseif newsection <= 2 then
 		inst.components.waterproofer:SetEffectiveness(0.5)
+    elseif newsection <= 3 then
+		inst.components.waterproofer:SetEffectiveness(0.65)
     elseif newsection <= 4 then
-		inst.components.waterproofer:SetEffectiveness(0.7)
+		inst.components.waterproofer:SetEffectiveness(0.8)
     end
 end
 
