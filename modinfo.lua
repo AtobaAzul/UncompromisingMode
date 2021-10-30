@@ -1,5 +1,5 @@
-name = "[DEV] 󰀕 Uncompromising Mode"
-description = 
+name = [DEV] 󰀕 Uncompromising Mode
+description = The Dev build
 [[
 󰀔 [ Version 1.1.5 : "The Hooded Forest" ]
 
