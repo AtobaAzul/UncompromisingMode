@@ -14,7 +14,7 @@ local function onattackedfn(inst, data)
     if not (inst.sg:HasStateTag("busy") or
             inst.sg:HasStateTag("invisible") or
             inst.sg:HasStateTag("nohit") or
-            inst.components.health:IsDead()) then
+            (inst.components.health ~= nil and inst.components.health:IsDead())) then
         --Will handle the playing of the "hit" animation
         inst.sg:GoToState("hit")
     end

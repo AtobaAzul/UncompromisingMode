@@ -75,8 +75,7 @@ end
 
 local function chop_down_tree(inst, data)
 	if TheWorld.state.cycles >= 4 then
-		--inst.components.timer:StartTimer("stumptime", math.random(240, 960))
-		inst.components.timer:StartTimer("stumptime", 10)
+		inst.components.timer:StartTimer("stumptime", math.random(240, 960))
 	end
 	
 	return inst._OldOnFinish(inst, data)

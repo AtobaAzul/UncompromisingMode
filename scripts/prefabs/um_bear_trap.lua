@@ -1,7 +1,9 @@
 require "prefabutil"
 
 local function onfinished_normal(inst)
-	inst.DynamicShadow:Enable(false)
+	if inst.DynamicShadow ~= nil then
+		inst.DynamicShadow:Enable(false)
+	end
 	
 	if inst.deathtask ~= nil then
 		inst.deathtask:Cancel()
