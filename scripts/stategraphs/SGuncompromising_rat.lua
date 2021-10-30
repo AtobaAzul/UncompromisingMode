@@ -5,7 +5,7 @@ local actionhandlers =
 	ActionHandler(ACTIONS.EAT, "eat"),
 	ActionHandler(ACTIONS.PICKUP, "steal"),
 	ActionHandler(ACTIONS.HAMMER, "steal"),
-    ActionHandler(ACTIONS.CHECKTRAP, "eat"),
+    ActionHandler(ACTIONS.CHECKTRAP, "destroy"),
 }
 
 local events =
@@ -104,6 +104,45 @@ local states =
 		},
 	},
 
+	State{
+		name = "destroy",
+		tags = { "attack", "busy" },
+
+		onenter = function(inst)
+			inst.SoundEmitter:PlaySound(inst.sounds.eat)
+			inst.components.combat:StartAttack()
+			inst.Physics:Stop()
+			inst.AnimState:PlayAnimation("atk")
+		end,
+
+		timeline =
+		{
+			TimeEvent(7 * FRAMES, function(inst)
+				local buffaction = inst:GetBufferedAction()
+				local target = buffaction ~= nil and buffaction.target or nil
+				
+				if target ~= nil and target:HasTag("trap") then
+					--target:Remove()
+					SpawnPrefab("yellow_leaves_chop").Transform:SetPosition(target.Transform:GetWorldPosition())
+					target.components.trap:Harvest()
+					inst.SoundEmitter:PlaySound("dontstarve/common/trap_rustle")
+					target:Remove()
+				end
+			
+				inst.sg:RemoveStateTag("attack")
+				inst.sg:RemoveStateTag("busy")
+			end),
+		},
+
+		events =
+		{
+			EventHandler("animover", function(inst)
+				inst:ClearBufferedAction()
+				inst.sg:GoToState("idle")
+			end),
+		},
+	},
+	
 	State {
 		name = "submerge",
 		tags = { "busy", "noattack" },
@@ -215,7 +254,7 @@ local states =
 		tags = {"busy"},
 
 		onenter = function(inst)
-			inst:PerformBufferedAction()
+			inst:PerformBufferedAction() 
 			inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("eat_pre", false)
 			inst.AnimState:PushAnimation("eat_loop", false)

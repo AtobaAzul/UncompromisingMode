@@ -46,6 +46,7 @@ local function CanSteal(item)
 	return item.components.inventoryitem ~= nil
 		and item.components.inventoryitem.canbepickedup
 		and item:IsOnValidGround()
+		and not item.components.edible
 		and not item:IsNearPlayer(TOOCLOSE)
 		and not item:HasTag("raidrat")
 end
@@ -198,9 +199,8 @@ local function eat_food_action(inst)
         inst,
         SEE_FOOD_DIST,
         function(item)
-            return item:GetTimeAlive() >= 8
-                and item:IsOnPassablePoint(true)
-                and inst.components.eater:CanEat(item) and not GetClosestInstWithTag("scarytoprey", target, SEE_PLAYER_DIST)-- ~= nil
+            return item:IsOnPassablePoint(true)
+                and inst.components.eater:CanEat(item) and not GetClosestInstWithTag("scarytoprey", item, TOOCLOSE)-- ~= nil
         end,
         nil,
         NO_TAGS,
@@ -215,8 +215,8 @@ function Uncompromising_RatBrain:OnStart()
 		WhileNode(function() return not self.inst.sg:HasStateTag("jumping") and self.inst.prefab ~= "uncompromising_caverat" end, "NotJumpingBehaviour",
                 PriorityNode({
 		DoAction(self.inst, function() return SpringTrap(self.inst) end, "checktrap", true ),
-		DoAction(self.inst, eat_food_action, "Eat Food"),
 		DoAction(self.inst, function() return StealAction(self.inst) end, "steal", true ),
+		DoAction(self.inst, eat_food_action, "Eat Food", true),
 		DoAction(self.inst, function() return EmptyChest(self.inst) end, "emptychest", true )
 		}, .25))
 	}, 0.25)

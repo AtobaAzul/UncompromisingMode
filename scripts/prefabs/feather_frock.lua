@@ -111,9 +111,30 @@ local function SpawnThorns(inst, feather, owner)
 
 end
 
+local function charged(inst)
+	local fx = SpawnPrefab("dr_warm_loop_2")
+	
+	local owner = inst.components.inventoryitem.owner
+	
+	if inst.components.equippable:IsEquipped() and owner ~= nil then
+		fx.entity:SetParent(owner.entity)
+		fx.entity:AddFollower()
+		fx.Follower:FollowSymbol(owner.GUID, "swap_body", 0, -275, 0)
+		fx.Transform:SetScale(1.22, 1.22, 1.22)
+	else
+		fx.entity:SetParent(inst.entity)
+        fx.Transform:SetPosition(0, 2.35, 0)
+		fx.Transform:SetScale(1.22, 1.22, 1.22)
+	end
+end
+
 local function OnCooldown(inst)
     inst._cdtask = nil
 	inst.components.useableitem.inuse = false
+	
+	charged(inst)
+	inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/charge")
+	inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/attack", nil, .7)
 end
 
 local function OnBlocked(owner, data, inst)

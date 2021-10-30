@@ -85,11 +85,6 @@ local function OnDeath(inst)
 end
 
 local function OnPickup(inst, data)
-	if data.item:HasTag("trap") then
-		inst.components.inventory:DropItem(data.item)
-		return
-	end
-
 	if inst._item ~= nil then
 		inst._item:Remove()
 	end
@@ -627,12 +622,6 @@ local function junkfn()
 	return inst
 end
 
-local function OnPackPickup(inst, data)
-	if data.item:HasTag("trap") then
-		inst.components.inventory:DropItem(data.item)
-	end
-end
-
 local function packfn()
 	local inst = CreateEntity()
 	
@@ -788,7 +777,6 @@ local function packfn()
 	inst:ListenForEvent("onattackother", OnAttackOther)
 	inst:ListenForEvent("attacked", OnAttacked)
 	inst:ListenForEvent("death", OnDeath)
-	inst:ListenForEvent("onpickupitem", OnPackPickup)
 	--inst:ListenForEvent("trapped", Trapped)
 	
 	MakeHauntablePanic(inst)

@@ -60,10 +60,11 @@ STRINGS.UNCOMP_TOOLTIP = {
 	PURPLEAMULET = "- No longer breaks when empty.\n- Can be fueled with Nightmare Fuel.\n- Grants bonus Nightmare Fuel from slain Shadows.",
 	PIGGYBACK = "- No Passive -10% movement speed while worn.\n- Decreases Player speed by 1% per item held.",
 	
-	TRUNKVEST_SUMMER = "- Now has pockets!",
+	TRUNKVEST_SUMMER = "- Now has pockets!\n- Slightly increased rain protection.",
 	TRUNKVEST_WINTER = "- Now has pockets!",
 	REFLECTIVEVEST = "- Now has pockets!",
 	PREMIUMWATERINGCAN = "- Can contain and preserve ocean fish.",
+	RAINHAT = "- Slightly increased rain protection.",
 	
 	MARBLEARMOR = "- Prevents knockback effects.",
 	SEWINGKIT = "- Increased storage capacity.\n- May hurt would be thieves.",
