@@ -531,6 +531,9 @@ Assets = {
 	Asset("ANIM", "anim/hat_opossummask.zip"),
 	Asset("IMAGE", "images/inventoryimages/hat_opossummask.tex"),
 	Asset("ATLAS", "images/inventoryimages/hat_opossummask.xml"),
+	Asset("ANIM", "anim/hat_ratmask.zip"),
+	Asset("IMAGE", "images/inventoryimages/hat_ratmask.tex"),
+	Asset("ATLAS", "images/inventoryimages/hat_ratmask.xml"),
 	
 	
 	Asset("ANIM", "anim/carnival_host_death.zip"),

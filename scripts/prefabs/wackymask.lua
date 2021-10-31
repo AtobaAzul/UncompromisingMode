@@ -308,7 +308,7 @@ local function stopusingopossum(inst, data)
 		hat.components.useableitem:StopUsingItem()
 	end
 end
-	
+
 local function opossum_enable(inst)
 	local owner = inst.components.inventoryitem.owner
 	if owner then
@@ -328,6 +328,170 @@ local function opossum_onuse(inst)
 	if owner then
 		owner.sg:GoToState("opossum_death")
 	end
+end
+
+
+
+
+
+local EFFECTS =
+{
+    hot = "dr_hot_loop",
+    warmer = "dr_warmer_loop",
+    warm = "dr_warm_loop_2",
+    cold = "dr_warm_loop_1",
+}
+
+local function FindClosestPart(inst)
+
+    if inst.tracking_parts == nil then
+        inst.tracking_parts = {}
+        for k,v in pairs(Ents) do
+            if v:HasTag("ratburrow") then
+                table.insert(inst.tracking_parts, v)
+            end
+        end
+    end
+
+    if inst.tracking_parts then
+        local closest = nil
+        local closest_dist = nil
+        for k,v in pairs(inst.tracking_parts) do
+            if v:IsValid() and not v:IsInLimbo() then
+                local dist = v:GetDistanceSqToInst(inst)
+                if not closest_dist or dist < closest_dist then
+                    closest = v
+                    closest_dist = dist
+                end
+            end
+        end
+
+        return closest
+    end
+
+end
+
+local RATPING_DISTANCES =
+{
+	{maxdist=50, describe="hotter", pingtime=2},
+	{maxdist=80, describe="hot", pingtime=3},
+	{maxdist=120, describe="warmer", pingtime=4},
+	{maxdist=200, describe="warm", pingtime=5},
+	{maxdist=300, describe="cold", pingtime=6},
+}
+
+local function CheckTargetPiece(inst)
+    if inst.components.equippable:IsEquipped() and inst.components.inventoryitem.owner then
+        local intensity = 0
+        local closeness = nil
+        local fxname = nil
+        local target = FindClosestPart(inst)
+        local nextpingtime = TUNING.DIVINING_DEFAULTPING
+        if target ~= nil then
+            local distsq = inst.components.inventoryitem.owner:GetDistanceSqToInst(target)
+            intensity = math.max(0, 1 - (distsq/(200*200) ))
+            for k,v in ipairs(RATPING_DISTANCES) do
+                closeness = v
+                fxname = v.describe
+
+                if v.maxdist and distsq <= v.maxdist*v.maxdist then
+                    nextpingtime = closeness.pingtime
+                    break
+                end
+            end
+        end
+
+        if closeness ~= inst.closeness then
+            inst.closeness = closeness
+            local desc = inst.components.inspectable:GetDescription(inst.components.inventoryitem.owner)
+            if desc then
+                inst.components.inventoryitem.owner.components.talker:Say(desc)
+            end
+        end
+
+        if fxname ~= nil then
+            --Don't care if there is still a reference to previous fx...
+            --just let it finish on its own and remove itself
+            --inst.fx = SpawnPrefab(fxname)
+            inst.fx = SpawnPrefab("ratring_fx")
+            inst.fx.entity:AddFollower()
+            --inst.fx.Follower:FollowSymbol(inst.components.inventoryitem.owner.GUID, "swap_hat", 0, -320, 0)
+            inst.fx.Follower:FollowSymbol(inst.components.inventoryitem.owner.GUID, "swap_hat", 0, 0, 0)
+			
+			inst.fx.Transform:SetScale(intensity / 1.5, intensity / 1.5, intensity / 1.5)
+        end
+
+		
+		print(intensity)
+		--inst.SoundEmitter:KillSound("sniff")
+		--for i = 1, (intensity * 5) do
+			--inst:DoTaskInTime(((i * intensity) / 2), function(inst)]
+			print(fxname)
+			inst.SoundEmitter:KillSound("ratping")
+			inst.SoundEmitter:PlaySound("UCSounds/ratping/ping_"..fxname, "ratping", intensity)
+			--end)
+		--end
+		
+		
+		--inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/mole/sniff", "sniff", intensity)
+		--inst.SoundEmitter:PlaySound("dontstarve/characters/walter/woby/big/sniff", nil, intensity)
+        inst.task = inst:DoTaskInTime(nextpingtime or 1, CheckTargetPiece)
+    end 
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local function rat_enable(inst)
+    inst.components.fueled:StartConsuming()
+	
+	inst.closeness = nil 
+	inst.tracking_parts = nil       
+	inst.task = inst:DoTaskInTime(1, CheckTargetPiece)
+	
+	local owner = inst.components.inventoryitem.owner
+	if owner then
+		owner.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/emerge")
+	end
+end
+
+local function rat_disable(inst)
+    if inst.task ~= nil then
+        inst.task:Cancel()
+        inst.task = nil
+    end
+    if inst.fx ~= nil then
+        if inst.fx:IsValid() then
+            inst.fx:Remove()
+        end
+        inst.fx = nil
+    end
+    inst.closeness = nil
+	
+    inst.components.fueled:StopConsuming()
 end
 
 local function Hack(inst, data)
@@ -805,6 +969,82 @@ local function opossumfn()
     return inst
 end
 
+local function ratfn()
+    local inst = fncommon("hat_ratmask", "hat_ratmask")
+	
+    inst.entity:AddSoundEmitter()     
+
+	inst:AddTag("ratfriend")
+		
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.customequip = rat_enable
+	inst.customunequip = rat_disable
+	
+	inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL
+	
+	inst:AddComponent("fueled")
+	inst.components.fueled.fueltype = FUELTYPE.USAGE
+	inst.components.fueled:InitializeFuelLevel(TUNING.MOLEHAT_PERISHTIME)
+	inst.components.fueled:SetDepletedFn(--[[generic_perish]]inst.Remove)
+	
+    return inst
+end
+
+local function PlayRingAnim(proxy)
+    local inst = CreateEntity()
+
+    inst:AddTag("FX")
+    --[[Non-networked entity]]
+    inst.entity:SetCanSleep(false)
+    inst.persists = false
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+
+    inst.Transform:SetFromProxy(proxy.GUID)
+
+    inst.AnimState:SetBank("bearger_ring_fx")
+    inst.AnimState:SetBuild("bearger_ring_fx")
+    inst.AnimState:PlayAnimation("idle")
+    inst.AnimState:SetFinalOffset(3)
+
+    inst.AnimState:SetOrientation( ANIM_ORIENTATION.OnGround )
+    inst.AnimState:SetLayer( LAYER_BACKGROUND )
+    inst.AnimState:SetSortOrder( 3 )
+
+    inst:ListenForEvent("animover", inst.Remove)
+end
+
+local function ratringfn()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddNetwork()
+
+    inst:AddTag("FX")
+
+    --Dedicated server does not need to spawn the local fx
+    if not TheNet:IsDedicated() then
+        --Delay one frame so that we are positioned properly before starting the effect
+        --or in case we are about to be removed
+        inst:DoTaskInTime(0, PlayRingAnim)
+    end
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst.persists = false
+    inst:DoTaskInTime(3, inst.Remove)
+
+    return inst
+end
+
 return Prefab("hat_bagmask", bagfn, assets),
 		Prefab("hat_blackcatmask", blackcatfn, assets),
 		Prefab("hat_clownmask", clownfn, assets),
@@ -827,4 +1067,6 @@ return Prefab("hat_bagmask", bagfn, assets),
 		Prefab("hat_whitecatmask", whitecatfn, assets),
 		Prefab("hat_technomask", technofn, assets),
 		Prefab("hat_mandrakemask", mandrakefn, assets),
-		Prefab("hat_opossummask", opossumfn, assets)
+		Prefab("hat_opossummask", opossumfn, assets),
+		Prefab("hat_ratmask", ratfn, assets),
+		Prefab("ratring_fx", ratringfn, assets)

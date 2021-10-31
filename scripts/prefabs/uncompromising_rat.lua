@@ -185,7 +185,8 @@ local function rattargetfn(inst)
 					local validitem = guy.components.inventory ~= nil and guy.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
                     return inst:GetTimeAlive() > 5 and not 
 					inst:HasTag("carrying") and
-					guy:HasTag("player") and
+					guy:HasTag("player") and not
+					guy:HasTag("ratfriend") and
 					validitem ~= nil and
 					inst.components.combat:CanTarget(guy)
                 end,
