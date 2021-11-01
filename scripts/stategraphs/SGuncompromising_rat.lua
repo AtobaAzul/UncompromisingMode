@@ -6,6 +6,7 @@ local actionhandlers =
 	ActionHandler(ACTIONS.PICKUP, "steal"),
 	ActionHandler(ACTIONS.HAMMER, "steal"),
     ActionHandler(ACTIONS.CHECKTRAP, "destroy"),
+    ActionHandler(ACTIONS.STORE, "deposit"),
 }
 
 local events =
@@ -213,6 +214,47 @@ local states =
 			inst.Transform:SetSixFaced()
 		end,
 	},
+	
+	State{
+		name = "deposit",
+		tags = {"busy"},
+
+		onenter = function(inst)
+			inst.Physics:Stop()
+			inst.AnimState:PlayAnimation("eat_pre", false)
+			
+			if inst.components.inventory:NumItems() ~= 0 then
+				
+				local herd = inst.components.herdmember and inst.components.herdmember:GetHerd()
+				if herd ~= nil and not herd.components.inventory:IsFull() then
+					if inst._item ~= nil then
+						inst._item:Remove()
+					end
+					
+					for k,v in pairs(inst.components.inventory.itemslots) do
+						herd.components.inventory:GiveItem(inst.components.inventory:RemoveItemBySlot(k))
+					end
+				end
+			end
+		end,
+		
+		timeline=
+		{
+			
+			TimeEvent(3*FRAMES, function(inst)
+				inst:ClearBufferedAction() 
+			end),
+			TimeEvent(3*FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound(inst.sounds.eat)
+			end)
+		},
+		
+		
+		events=
+		{
+			EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
+		}, 		
+	}, 
 
 	State {
 		name = "emerge_fast",
@@ -282,7 +324,6 @@ local states =
 		onenter = function(inst)
 			inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("eat_pre", false)
-			inst.AnimState:PushAnimation("eat_loop", false)
 			inst.AnimState:PushAnimation("eat_pst", false)
 		end,
 		

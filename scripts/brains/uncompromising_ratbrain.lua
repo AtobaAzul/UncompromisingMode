@@ -34,6 +34,16 @@ local function CanSpringTrap(item)
 		and item.components.trap.issprung
 end
 
+local function CanDeposit(inst)
+	local target = inst.components.herdmember:GetHerd()
+	
+	return inst.components.inventory:NumItems() ~= 0 and target ~= nil
+		and inst:GetDistanceSqToInst(target) <= 100
+		and not target.components.inventory:IsFull()
+		and BufferedAction(inst, target, ACTIONS.STORE)
+		or nil
+end
+
 local function SpringTrap(inst)
 	local target = FindEntity(inst, SEE_DIST, CanSpringTrap,{ "trap" })
 			
@@ -51,21 +61,23 @@ local function CanSteal(item)
 		and not item:HasTag("raidrat")
 end
 
+local NO_TAGS = { "ratimmune", "FX", "NOCLICK", "DECOR", "INLIMBO", "planted", "trap", "raidrat", "spider", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" }
+
 local function StealAction(inst)
 	local targetpriority = FindEntity(inst, SEE_DIST,
 	CanSteal,
 	{ "_inventoryitem", "_equippable" },
-	{ "trap", "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
+	NO_TAGS)
 	
 	local targetpriority_secondary = FindEntity(inst, SEE_DIST,
 	CanSteal,
 	{ "_inventoryitem", "preparedfood" },
-	{ "trap", "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
+	NO_TAGS)
 	
 	local target = FindEntity(inst, SEE_DIST,
 	CanSteal,
 	{ "_inventoryitem" },
-	{ "trap", "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
+	NO_TAGS)
 			
 	if inst:HasTag("packrat") and not inst.components.inventory:IsFull() then
 		if targetpriority ~= nil then
@@ -180,8 +192,6 @@ local function eat_food_action(inst)
 	end
 end]]
 
-local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO", "planted" }
-
 local function eat_food_action(inst)
 	if inst.sg:HasStateTag("busy") or inst:GetTimeAlive() < 5 or
         (inst.components.eater:TimeSinceLastEating() ~= nil and inst.components.eater:TimeSinceLastEating() < 5) then
@@ -214,6 +224,7 @@ function Uncompromising_RatBrain:OnStart()
 	{
 		WhileNode(function() return not self.inst.sg:HasStateTag("jumping") and self.inst.prefab ~= "uncompromising_caverat" end, "NotJumpingBehaviour",
                 PriorityNode({
+		DoAction(self.inst, function() return CanDeposit(self.inst) end, "depositloot", true ),
 		DoAction(self.inst, function() return SpringTrap(self.inst) end, "checktrap", true ),
 		DoAction(self.inst, function() return StealAction(self.inst) end, "steal", true ),
 		DoAction(self.inst, eat_food_action, "Eat Food", true),

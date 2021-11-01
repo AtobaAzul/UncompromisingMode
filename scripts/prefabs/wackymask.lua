@@ -429,6 +429,7 @@ local function CheckTargetPiece(inst)
 			print(fxname)
 			inst.SoundEmitter:KillSound("ratping")
 			inst.SoundEmitter:PlaySound("UCSounds/ratping/ping_"..fxname, "ratping", intensity)
+			inst.SoundEmitter:SetParameter("ratping", "intensity", intensity)
 			--end)
 		--end
 		
@@ -474,6 +475,7 @@ local function rat_enable(inst)
 	
 	local owner = inst.components.inventoryitem.owner
 	if owner then
+		owner:AddTag("ratfriend")
 		owner.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/emerge")
 	end
 end
@@ -490,6 +492,11 @@ local function rat_disable(inst)
         inst.fx = nil
     end
     inst.closeness = nil
+	
+	local owner = inst.components.inventoryitem.owner
+	if owner then
+		owner:RemoveTag("ratfriend")
+	end
 	
     inst.components.fueled:StopConsuming()
 end
@@ -973,8 +980,6 @@ local function ratfn()
     local inst = fncommon("hat_ratmask", "hat_ratmask")
 	
     inst.entity:AddSoundEmitter()     
-
-	inst:AddTag("ratfriend")
 		
     if not TheWorld.ismastersim then
         return inst

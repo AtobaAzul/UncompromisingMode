@@ -907,6 +907,69 @@ end
 
 --GetClosestInstWithTag(tag, inst, radius or 1000)
 
+
+
+
+
+local function AbleToAcceptTest(inst, item, giver)
+	return true
+end
+
+local function AcceptTest(inst, item, giver)
+    return item.components and item.components.edible
+end
+
+local function OnGetItemFromPlayer(inst, giver, item)
+	if item.components.edible:GetHunger() >= 75 then
+		for k = 1, 5 do
+			local v = inst.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
+			if v ~= nil then
+				inst.components.inventory:DropItem(v, true, true)
+				v:AddTag("ratimmune")
+				v:DoTaskInTime(10, function(v) v:RemoveTag("ratimmune") end)
+			end
+		end
+	elseif item.components.edible:GetHunger() >= 50 then
+		for k = 1, 3 do
+			--local v = inst.components.inventory.itemslots[k]
+			local v = inst.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
+			if v ~= nil then
+				inst.components.inventory:DropItem(v, true, true)
+				v:AddTag("ratimmune")
+				v:DoTaskInTime(10, function(v) v:RemoveTag("ratimmune") end)
+			end
+		end
+	elseif item.components.edible:GetHunger() >= 15 then
+		for k = 1, 1 do
+			--local v = inst.components.inventory.itemslots[k]
+			local v = inst.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
+			if v ~= nil then
+				inst.components.inventory:DropItem(v, true, true)
+				v:AddTag("ratimmune")
+				v:DoTaskInTime(10, function(v) v:RemoveTag("ratimmune") end)
+			end
+		end
+	elseif item.components.edible:GetHunger() >= 5 and math.random() > 0.5 then
+		for k = 1, 1 do
+			--local v = inst.components.inventory.itemslots[k]
+			local v = inst.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
+			if v ~= nil then
+				inst.components.inventory:DropItem(v, true, true)
+				v:AddTag("ratimmune")
+				v:DoTaskInTime(10, function(v) v:RemoveTag("ratimmune") end)
+			end
+		end
+	end
+	
+	inst.AnimState:PlayAnimation("dig")
+	inst.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/submerge")
+end
+
+local function OnRefuseItem(inst, giver, item)
+	inst.AnimState:PlayAnimation("dig")
+	inst.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/submerge")
+end
+
 local function EndRaid(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local players = FindPlayersInRange(x, y, z, 50)
@@ -953,6 +1016,14 @@ local function EndRaid(inst)
 	inst.components.herd:SetOnEmptyFn(BurrowKilled)
 	inst.components.herd.updatepos = false
     inst.components.herd.updateposincombat = false
+	
+    inst:AddTag("trader")
+	
+    inst:AddComponent("trader")
+    inst.components.trader:SetAbleToAcceptTest(AbleToAcceptTest)
+    inst.components.trader:SetAcceptTest(AcceptTest)
+    inst.components.trader.onaccept = OnGetItemFromPlayer
+    inst.components.trader.onrefuse = OnRefuseItem
 	
 	inst.raiding = false
 end
@@ -1183,6 +1254,7 @@ local function fn_burrow()
 	
 	inst:AddTag("ratburrow")
 	inst:AddTag("herd")
+    inst:AddTag("trader")
 	
     inst.MiniMapEntity:SetIcon("uncompromising_ratburrow.tex")
 	
@@ -1227,6 +1299,12 @@ local function fn_burrow()
 	inst.components.workable:SetOnWorkCallback(onworked)
 	inst.components.workable:SetWorkAction(ACTIONS.DIG)
 	inst.components.workable:SetWorkLeft(3)
+	
+    inst:AddComponent("trader")
+    inst.components.trader:SetAbleToAcceptTest(AbleToAcceptTest)
+    inst.components.trader:SetAcceptTest(AcceptTest)
+    inst.components.trader.onaccept = OnGetItemFromPlayer
+    inst.components.trader.onrefuse = OnRefuseItem
 	
 	inst:DoTaskInTime(1, BurrowAnim)
 	
