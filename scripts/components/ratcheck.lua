@@ -22,8 +22,8 @@ local _raided = true
 local _respawntimeremaining = nil
 local ratwarning = nil
 --local _initialrattimer = 24000
-local _initialrattimer = 33600
-local _ratsnifftimer = 4800
+local _initialrattimer = TUNING.DSTU.RATRAID_TIMERSTART --33600
+local _ratsnifftimer = TUNING.DSTU.RATSNIFFER_TIMER --4800
 local _ratburrows = 1
 
 local _worldsettingstimer = TheWorld.components.worldsettingstimer

@@ -38,7 +38,9 @@ local function CanDeposit(inst)
 	local target = inst.components.herdmember:GetHerd()
 	
 	return inst.components.inventory:NumItems() ~= 0 and target ~= nil
+		and target:HasTag("ratburrow")
 		and inst:GetDistanceSqToInst(target) <= 100
+		and target.components.inventory ~= nil
 		and not target.components.inventory:IsFull()
 		and BufferedAction(inst, target, ACTIONS.STORE)
 		or nil

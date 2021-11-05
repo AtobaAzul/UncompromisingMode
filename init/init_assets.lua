@@ -106,7 +106,11 @@ Assets = {
 	Asset("ANIM", "anim/trapdoor.zip"),
 	Asset("ANIM", "anim/rock_flipping.zip"),
 	Asset("ANIM", "anim/rock_flipping_moss.zip"),
+	
 	Asset("ANIM", "anim/plaguemask.zip"),
+	Asset("ANIM", "anim/hat_plaguemask_formal.zip"),
+	
+	
 	Asset("ANIM", "anim/rat_tail.zip"),
 	Asset("ANIM", "anim/rat_fur.zip"),
 	Asset("ANIM", "anim/shroom_skin_fragment.zip"),
@@ -199,8 +203,14 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/monstersmallmeat.xml"),
    	Asset("IMAGE", "images/inventoryimages/monstersmallmeat_dried.tex"),
 	Asset("ATLAS", "images/inventoryimages/monstersmallmeat_dried.xml"),
+	
    	Asset("IMAGE", "images/inventoryimages/plaguemask.tex"),
 	Asset("ATLAS", "images/inventoryimages/plaguemask.xml"),
+   	Asset("IMAGE", "images/inventoryimages/plaguemask_formal.tex"),
+	Asset("ATLAS", "images/inventoryimages/plaguemask_formal.xml"),
+	
+	
+	
    	Asset("IMAGE", "images/inventoryimages/shroom_skin_fragment.tex"),
 	Asset("ATLAS", "images/inventoryimages/shroom_skin_fragment.xml"),
 	Asset("IMAGE", "images/inventoryimages/sporepack.tex"),
