@@ -36,7 +36,7 @@ local function onequip_blue(inst, owner)
 				inst._cdtask = inst:DoTaskInTime(1, OnCooldown)
 				
 				inst.healthvalue = data.damage
-				inst.components.finiteuses:Use(inst.healthvalue)
+				inst.components.finiteuses:Use(inst.healthvalue < 50 and inst.healthvalue or 50)
 				
 				LaunchProjectile(owner, data.damage)
 			end
