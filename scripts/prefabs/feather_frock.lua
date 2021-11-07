@@ -38,13 +38,13 @@ local function SpawnThorns(inst, feather, owner)
 						not v.components.burnable:IsBurning() and
 						not v:HasTag("burnt") then
 						v.components.burnable:Ignite()
-						v.components.combat:GetAttacked(owner, 10)
+						v.components.combat:GetAttacked(owner, 40)
 						
 						if v.components.freezable then
 							v.components.freezable:Unfreeze()
 						end
 					elseif feather == "robin_winter" then
-						v.components.combat:GetAttacked(owner, 40)
+						v.components.combat:GetAttacked(owner, 80)
 						
 						inst.fxscale = 1.5
 					elseif feather == "crow" and v.components.locomotor ~= nil then
@@ -58,13 +58,13 @@ local function SpawnThorns(inst, feather, owner)
 						local slowamount = 0.7
 						
 						v.components.locomotor:SetExternalSpeedMultiplier(v, debuffkey, slowamount)
-						v.components.combat:GetAttacked(owner, 10)
+						v.components.combat:GetAttacked(owner, 30)
 					elseif feather == "canary" then
 						SpawnPrefab("electricchargedfx"):SetTarget(v)
 						SpawnPrefab("shockotherfx"):SetFXOwner(owner)
 						v.components.combat:GetAttacked(owner, 10)
 					elseif feather == "malbatross" then
-						v.components.combat:GetAttacked(owner, 20)
+						v.components.combat:GetAttacked(owner, 80)
 					end
 				end
 
@@ -279,6 +279,8 @@ local function onequip(inst, owner)
 			owner.AnimState:OverrideSymbol("swap_body", "featherfrock", "swap_body")	
 		end
 		
+		inst:Hide()
+		
 		inst:ListenForEvent("blocked", inst._onblocked, owner)
 		inst:ListenForEvent("attacked", inst._onblocked, owner)
 	end
@@ -293,6 +295,8 @@ local function onunequip(inst, owner)
 
     inst:RemoveEventCallback("blocked", inst._onblocked, owner)
     inst:RemoveEventCallback("attacked", inst._onblocked, owner)
+		
+	inst:Show()
 end
 
 local function onstopuse()
@@ -308,8 +312,8 @@ local function frockfn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("featherfrock")
-    inst.AnimState:SetBuild("featherfrock")
+    inst.AnimState:SetBank("featherfrock_ground")
+    inst.AnimState:SetBuild("featherfrock_ground")
     inst.AnimState:PlayAnimation("anim")
 	
 	--inst:AddTag("wingsuit")
@@ -355,8 +359,8 @@ end
 local function featherfrock_skin()
 	local inst = frockfn()
 	
-    inst.AnimState:SetBank("featherfrock_fancy")
-    inst.AnimState:SetBuild("featherfrock_fancy")
+    inst.AnimState:SetBank("featherfrock_fancy_ground")
+    inst.AnimState:SetBuild("featherfrock_fancy_ground")
 	
 	inst.skinname = "armor_featherfrock_fancy"
 	
@@ -371,14 +375,14 @@ return Prefab("feather_frock", frockfn),
 	CreateModPrefabSkin("feather_frock_fancy",
 	{
 		assets = {
-			Asset("ANIM", "anim/featherfrock_fancy.zip"),
+			Asset("ANIM", "anim/featherfrock_fancy_ground.zip"),
 		},
 		base_prefab = "feather_frock",
 		fn = featherfrock_skin, -- This is our constructor!
 		rarity = "Timeless",
 		reskinable = true,
 		
-		build_name_override = "featherfrock_fancy",
+		build_name_override = "featherfrock_fancy_ground",
 		
 		type = "item",
 		skin_tags = { },
