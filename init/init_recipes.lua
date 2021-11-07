@@ -111,10 +111,30 @@ MadeRecipeSkinnable("plaguemask", {
 		image = "plaguemask_formal.tex",
 	},
 })
-GLOBAL.STRINGS.SKIN_NAMES.plaguemask_formal = "Plague Masquerade"
 
+AddRecipe("cursed_antler", {Ingredient("twisted_antler", 1, "images/inventoryimages/twisted_antler.xml")}, GLOBAL.RECIPETABS.MAGIC, GLOBAL.TECH.NONE, nil, nil, nil, nil, "vetcurse", "images/inventoryimages/cursed_antler.xml", "cursed_antler.tex" )
+GLOBAL.AllRecipes["cursed_antler"].sortkey = GLOBAL.AllRecipes["reskin_tool"].sortkey + .1
+MadeRecipeSkinnable("cursed_antler", {
+	twisted_antler = {
+		atlas = "images/inventoryimages/twisted_antler.xml",
+		image = "twisted_antler.tex",
+	},
+})
 
+AddRecipe("twisted_antler", {Ingredient("cursed_antler", 1, "images/inventoryimages/cursed_antler.xml")}, GLOBAL.RECIPETABS.MAGIC, GLOBAL.TECH.NONE, nil, nil, nil, nil, "vetcurse", "images/inventoryimages/twisted_antler.xml", "twisted_antler.tex" )
+GLOBAL.AllRecipes["twisted_antler"].sortkey = GLOBAL.AllRecipes["cursed_antler"].sortkey + .1
 
+AddRecipe("feather_frock", {Ingredient("feather_frock_fancy", 1, "images/inventoryimages/feather_frock_fancy.xml")}, GLOBAL.RECIPETABS.MAGIC, GLOBAL.TECH.NONE, nil, nil, nil, nil, "vetcurse", "images/inventoryimages/feather_frock.xml", "feather_frock.tex" )
+GLOBAL.AllRecipes["feather_frock"].sortkey = GLOBAL.AllRecipes["twisted_antler"].sortkey + .1
+MadeRecipeSkinnable("feather_frock", {
+	feather_frock_fancy = {
+		atlas = "images/inventoryimages/feather_frock_fancy.xml",
+		image = "feather_frock_fancy.tex",
+	},
+})
+
+AddRecipe("feather_frock_fancy", {Ingredient("feather_frock", 1, "images/inventoryimages/feather_frock.xml")}, GLOBAL.RECIPETABS.MAGIC, GLOBAL.TECH.NONE, nil, nil, nil, nil, "vetcurse", "images/inventoryimages/feather_frock_fancy.xml", "feather_frock_fancy.tex" )
+GLOBAL.AllRecipes["feather_frock_fancy"].sortkey = GLOBAL.AllRecipes["feather_frock"].sortkey + .1
 
 AddRecipe("shroom_skin", {Ingredient("shroom_skin_fragment",4, "images/inventoryimages/shroom_skin_fragment.xml"),Ingredient("froglegs",2)}, GLOBAL.RECIPETABS.REFINE, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil)--, "images/inventoryimages/plaguemask.xml", "plaguemask.tex" )
 GLOBAL.AllRecipes["shroom_skin"].sortkey = GLOBAL.AllRecipes["bearger_fur"].sortkey + .1
@@ -205,4 +225,10 @@ STRINGS.RECIPE_DESC.SLINGSHOTAMMO_FIRECRACKERS = "Go Fancy Fishing. For Fancy Fi
 STRINGS.RECIPE_DESC.BOOK_RAIN = "A catalogue of weather effects."
 STRINGS.RECIPE_DESC.RAIN_HORN = "Drown the world."
 STRINGS.RECIPE_DESC.HAT_RATMASK = "Track down some varmints."
+STRINGS.RECIPE_DESC.CURSED_ANTLER = "A brand new look!"
+STRINGS.RECIPE_DESC.TWISTED_ANTLER = "The classic!"
+STRINGS.RECIPE_DESC.twisted_antler = "The classic!"
+STRINGS.RECIPE_DESC.FEATHER_FROCK = "A brand new look!"
+STRINGS.RECIPE_DESC.FEATHER_FROCK_FANCY = "The classic!"
+STRINGS.RECIPE_DESC.feather_frock_fancy = "The classic!"
 --STRINGS.RECIPE_DESC.FLORAL_BANDAGE = "A flower and honey mess on a bandage."

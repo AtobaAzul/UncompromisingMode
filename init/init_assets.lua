@@ -327,10 +327,17 @@ Assets = {
 	Asset("ANIM", "anim/snapperturtle.zip"),
 	Asset("ANIM", "anim/snapperturtlebaby.zip"),
 	Asset("ANIM", "anim/bush_marsh.zip"),
+	
     Asset("ANIM", "anim/cursed_antler.zip"),
+    Asset("ANIM", "anim/twisted_antler.zip"),
     Asset("ANIM", "anim/swap_cursed_antler.zip"),
+    Asset("ANIM", "anim/swap_twisted_antler.zip"),
+	
 	Asset("IMAGE", "images/inventoryimages/cursed_antler.tex"),
 	Asset("ATLAS", "images/inventoryimages/cursed_antler.xml"),
+	Asset("IMAGE", "images/inventoryimages/twisted_antler.tex"),
+	Asset("ATLAS", "images/inventoryimages/twisted_antler.xml"),
+	
 	Asset("ANIM", "anim/web_net_splat.zip"),
 	Asset("ANIM", "anim/web_net_splash.zip"),
 	Asset("ANIM", "anim/web_net_shot.zip"),
