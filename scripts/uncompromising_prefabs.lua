@@ -267,6 +267,7 @@ return {
 	"mindweaver",
 	"rneshadows",
 	"fuelseeker",
+	"rnemushroombomb",
 	
 	"wackymask",
 	"tiddlestranger_rne",
