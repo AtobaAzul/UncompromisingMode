@@ -119,6 +119,7 @@ UI = GLOBAL.STRINGS.UI
 	STRINGS.SNAPPERTURTLEBABY = "Whippersnapper Turtle"
 	STRINGS.SNAPPERTURTLENEST = "Nest"
 	STRINGS.CURSED_ANTLER = "Cursed Antler"
+	SKINS.plaguemask_formal = "Plague Masquerade"
 	STRINGS.MARSH_GRASS = "Marsh Bush"
 	STRINGS.GIANT_TREE = "Giant Redwood"
 	STRINGS.WEBBEDCREATURE = "Silky Cocoon"

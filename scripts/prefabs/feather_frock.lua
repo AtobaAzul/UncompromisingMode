@@ -272,7 +272,12 @@ local function onequip(inst, owner)
 		if inst.components.container ~= nil then
 			inst.components.container:Open(owner)
 		end
-		owner.AnimState:OverrideSymbol("swap_body", "armor_featherfrock", "swap_body")
+		
+		if inst.skinname ~= nil then
+			owner.AnimState:OverrideSymbol("swap_body", "featherfrock_fancy", "swap_body")	
+		else
+			owner.AnimState:OverrideSymbol("swap_body", "featherfrock", "swap_body")	
+		end
 		
 		inst:ListenForEvent("blocked", inst._onblocked, owner)
 		inst:ListenForEvent("attacked", inst._onblocked, owner)
@@ -303,9 +308,9 @@ local function frockfn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("armor_featherfrock_ground")
-    inst.AnimState:SetBuild("armor_featherfrock_ground")
-    inst.AnimState:PlayAnimation("idle")
+    inst.AnimState:SetBank("featherfrock")
+    inst.AnimState:SetBuild("featherfrock")
+    inst.AnimState:PlayAnimation("anim")
 	
 	--inst:AddTag("wingsuit")
     --inst:AddTag("backpack")
@@ -347,4 +352,35 @@ local function frockfn()
     return inst
 end
 
-return Prefab("feather_frock", frockfn)--, assets, prefabs)
+local function featherfrock_skin()
+	local inst = frockfn()
+	
+    inst.AnimState:SetBank("featherfrock_fancy")
+    inst.AnimState:SetBuild("featherfrock_fancy")
+	
+	inst.skinname = "armor_featherfrock_fancy"
+	
+	if inst.components.inventoryitem ~= nil then
+		inst.components.inventoryitem.atlasname = "images/inventoryimages/feather_frock_fancy.xml"
+	end
+
+	return inst
+end
+
+return Prefab("feather_frock", frockfn),
+	CreateModPrefabSkin("feather_frock_fancy",
+	{
+		assets = {
+			Asset("ANIM", "anim/featherfrock_fancy.zip"),
+		},
+		base_prefab = "feather_frock",
+		fn = featherfrock_skin, -- This is our constructor!
+		rarity = "Timeless",
+		reskinable = true,
+		
+		build_name_override = "featherfrock_fancy",
+		
+		type = "item",
+		skin_tags = { },
+		release_group = 0,
+	})

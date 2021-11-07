@@ -293,8 +293,11 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/berniebox.xml"),
 	Asset("IMAGE", "images/inventoryimages/whisperpod.tex"),
 	Asset("ATLAS", "images/inventoryimages/whisperpod.xml"),
+	
 	Asset("IMAGE", "images/inventoryimages/feather_frock.tex"),
 	Asset("ATLAS", "images/inventoryimages/feather_frock.xml"),
+	Asset("IMAGE", "images/inventoryimages/feather_frock_fancy.tex"),
+	Asset("ATLAS", "images/inventoryimages/feather_frock_fancy.xml"),
 	
 	--Asset("ANIM", "anim/gatorsnake.zip"),
 	Asset("ANIM", "anim/swilson.zip"),
@@ -421,8 +424,11 @@ Assets = {
 	Asset("ANIM", "anim/swap_beargerclaw.zip"),
 	Asset("ANIM", "anim/slobberlobber.zip"),
 	Asset("ANIM", "anim/beargerclaw.zip"),
-	Asset("ANIM", "anim/armor_featherfrock.zip"),
-	Asset("ANIM", "anim/armor_featherfrock_ground.zip"),
+	
+	Asset("ANIM", "anim/featherfrock.zip"),
+	Asset("ANIM", "anim/featherfrock_fancy.zip"),
+	
+	
 	Asset("ANIM", "anim/lava_spitball.zip"),
 	Asset("ANIM", "anim/shambler.zip"),
 	Asset("ANIM", "anim/corncan.zip"),
