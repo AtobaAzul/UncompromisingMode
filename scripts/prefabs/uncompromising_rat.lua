@@ -57,7 +57,7 @@ local function on_burnt(inst)
 end
 
 local function OnAttackOther(inst, data)
-	if data.target ~= nil and data.target:HasTag("player") and not data.target:HasTag("hasplaguemask") then
+	if data.target ~= nil and data.target:HasTag("player") and not data.target:HasTag("hasplaguemask") and not data.target.prefab == "wx78" then
 		data.target.components.health:DeltaPenalty(0.01)
 	end
 	

@@ -278,4 +278,5 @@ return {
 	"rain_horn",
 	"floral_bandage",
 	"confighealbuff",
+	"shockstundebuffimmunity",
 }

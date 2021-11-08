@@ -153,29 +153,30 @@ if FindEntity(inst, 20,
             if inst.components.combat:CanTarget(guy) then
                 return guy:HasTag("character")
             end
-    end) == nil then
+			end) == nil then
 
-inst.sg:GoToState("spawn")
-local x, y, z = inst.Transform:GetWorldPosition()
-local Despawn = SpawnPrefab("shadow_despawn")
-inst:DespawnChannelers()
-if inst.components.health ~= nil then
-inst.components.health:SetCurrentHealth(3000)
-end
-Despawn.Transform:SetPosition(x, 0, z)
-local bozo =FindEntity(inst, 40, 
-        function(guy) 
-            if inst.components.combat:CanTarget(guy) then
-                return guy:HasTag("character")
-            end
+	inst.sg:GoToState("spawn")
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local Despawn = SpawnPrefab("shadow_despawn")
+	inst:DespawnChannelers()
+	if inst.components.health ~= nil then
+		inst.components.health:SetCurrentHealth(3000)
+	end
+	Despawn.Transform:SetPosition(x, 0, z)
+	local bozo =	FindEntity(inst, 40, 
+			function(guy) 
+				if inst.components.combat:CanTarget(guy) then
+					return guy:HasTag("character")
+				end
     end)
-if bozo ~= nil then
-inst.components.combat:SuggestTarget(bozo)
-local x, y, z = bozo.Transform:GetWorldPosition()
-inst.Transform:SetPosition(x, 0, z)
+	if bozo ~= nil then
+		inst.components.combat:SuggestTarget(bozo)
+		local x, y, z = bozo.Transform:GetWorldPosition()
+		inst.Transform:SetPosition(x, 0, z)
+	end
 end
 end
-end
+
 local function CheckIfInsaners(inst)  --Actually just checks if anyone is below half sanity, rather than completely insane.
 local bozo =FindEntity(inst, 40, 
         function(guy) 
@@ -297,7 +298,7 @@ local function fn(Sim)
 	--inst:AddTag("monster")
      
 	--inst:AddTag("shadowcreature")
-    inst:AddTag("shadow")
+    --inst:AddTag("shadow")
 	inst:AddTag("trepidation")
     ------------------
     inst:AddComponent("health")

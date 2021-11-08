@@ -73,6 +73,18 @@ local function onlightingstrike(inst)
     end
 end
 
+local function onlessercharge(inst)
+    if inst.components.inventory:IsInsulated() then
+        inst:PushEvent("lightningdamageavoided")
+    else
+        inst.components.sanity:DoDelta(-10)
+        inst.components.talker:Say(GetString(inst, "ANNOUNCE_CHARGE"))
+		if inst.charge_time < TUNING.TOTAL_DAY_TIME/2 then
+			startovercharge(inst, CalcDiminishingReturns(inst.charge_time, TUNING.TOTAL_DAY_TIME/8))
+		end
+    end
+end
+
 local function dowetsparks(inst, dt)
     if inst.components.moisture ~= nil and inst.components.moisture:GetMoisture() > 0 then
         local t = GetTime()
@@ -159,7 +171,7 @@ env.AddPrefabPostInit("wx78", function(inst)
 	if inst.components.playerlightningtarget ~= nil then
 		inst.components.playerlightningtarget:SetOnStrikeFn(onlightingstrike)
 	end
-	
+	inst.OnLesserCharge = onlessercharge
 	inst:ListenForEvent("moisturedelta", OnMoistureDelta)
     inst:ListenForEvent("oneat", OnEat_Electric)
 end)
