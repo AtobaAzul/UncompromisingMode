@@ -285,7 +285,7 @@ function self:OnUpdate(dt)
 	
 	if _ratsnifftimer then
 		if _ratsnifftimer > 0 then
-			_ratsnifftimer = _ratsnifftimer - (dt * _ratburrows)
+			_ratsnifftimer = _ratsnifftimer - dt --(dt * _ratburrows)
 			--print(_ratsnifftimer)
 			--print(_ratburrows)
 		else
