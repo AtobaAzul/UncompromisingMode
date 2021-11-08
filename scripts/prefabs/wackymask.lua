@@ -358,7 +358,17 @@ local function FindClosestPart(inst)
         local closest_dist = nil
         for k,v in pairs(inst.tracking_parts) do
             if v:IsValid() and not v:IsInLimbo() then
+			
+			
+			
                 local dist = v:GetDistanceSqToInst(inst)
+				
+				if v.SoundEmitter ~= nil then
+					v:DoTaskInTime((1 * dist) / dist, function(v)
+						v.SoundEmitter:PlaySound("UCSounds/ratsniffer/burrowping")
+					end)
+				end
+				
                 if not closest_dist or dist < closest_dist then
                     closest = v
                     closest_dist = dist
@@ -380,15 +390,26 @@ local RATPING_DISTANCES =
 	{maxdist=300, describe="cold", pingtime=6},
 }
 
+local function OnCooldown(inst)
+    inst._cdtask = nil
+	inst.components.useableitem.inuse = false
+	
+	inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/charge", nil, .2)
+end
+
 local function CheckTargetPiece(inst)
-    if inst.components.equippable:IsEquipped() and inst.components.inventoryitem.owner then
+	local owner = inst.components.inventoryitem and inst.components.inventoryitem.owner
+
+
+
+    if owner ~= nil then
         local intensity = 0
         local closeness = nil
         local fxname = nil
         local target = FindClosestPart(inst)
         local nextpingtime = TUNING.DIVINING_DEFAULTPING
         if target ~= nil then
-            local distsq = inst.components.inventoryitem.owner:GetDistanceSqToInst(target)
+            local distsq = owner:GetDistanceSqToInst(target)
             intensity = math.max(0, 1 - (distsq/(200*200) ))
             for k,v in ipairs(RATPING_DISTANCES) do
                 closeness = v
@@ -400,14 +421,14 @@ local function CheckTargetPiece(inst)
                 end
             end
         end
-
+--[[
         if closeness ~= inst.closeness then
             inst.closeness = closeness
-            local desc = inst.components.inspectable:GetDescription(inst.components.inventoryitem.owner)
+            local desc = inst.components.inspectable:GetDescription(owner)
             if desc then
-                inst.components.inventoryitem.owner.components.talker:Say(desc)
+                owner.components.talker:Say(desc)
             end
-        end
+        end]]
 
         if fxname ~= nil then
             --Don't care if there is still a reference to previous fx...
@@ -416,28 +437,25 @@ local function CheckTargetPiece(inst)
             inst.fx = SpawnPrefab("ratring_fx")
             inst.fx.entity:AddFollower()
             --inst.fx.Follower:FollowSymbol(inst.components.inventoryitem.owner.GUID, "swap_hat", 0, -320, 0)
-            inst.fx.Follower:FollowSymbol(inst.components.inventoryitem.owner.GUID, "swap_hat", 0, 0, 0)
+            inst.fx.Follower:FollowSymbol(owner.GUID, "swap_hat", 0, 0, 0)
 			
-			inst.fx.Transform:SetScale(intensity / 1.5, intensity / 1.5, intensity / 1.5)
-        end
-
-		
 		print(intensity)
-		--inst.SoundEmitter:KillSound("sniff")
-		--for i = 1, (intensity * 5) do
-			--inst:DoTaskInTime(((i * intensity) / 2), function(inst)]
+			inst.fx.Transform:SetScale(intensity / 1.5, intensity / 1.5, intensity / 1.5)
 			print(fxname)
 			inst.SoundEmitter:KillSound("ratping")
 			inst.SoundEmitter:PlaySound("UCSounds/ratping/ping_"..fxname, "ratping", intensity)
 			inst.SoundEmitter:SetParameter("ratping", "intensity", intensity)
-			--end)
-		--end
+        end
+
 		
-		
-		--inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/mole/sniff", "sniff", intensity)
-		--inst.SoundEmitter:PlaySound("dontstarve/characters/walter/woby/big/sniff", nil, intensity)
-        inst.task = inst:DoTaskInTime(nextpingtime or 1, CheckTargetPiece)
+		--inst.SoundEmitter:KillSound("sniff")
+		--for i = 1, (intensity * 5) do
+			--inst:DoTaskInTime(((i * intensity) / 2), function(inst)]
+			
     end 
+	
+	
+	inst._cdtask = inst:DoTaskInTime(3, OnCooldown)
 end
 
 
@@ -469,9 +487,12 @@ end
 local function rat_enable(inst)
     inst.components.fueled:StartConsuming()
 	
-	inst.closeness = nil 
-	inst.tracking_parts = nil       
-	inst.task = inst:DoTaskInTime(1, CheckTargetPiece)
+	if inst._cdtask ~= nil then
+		inst._cdtask:Cancel()
+		inst._cdtask = nil
+	end
+	
+	inst._cdtask = inst:DoTaskInTime(3, OnCooldown)
 	
 	local owner = inst.components.inventoryitem.owner
 	if owner then
@@ -481,24 +502,19 @@ local function rat_enable(inst)
 end
 
 local function rat_disable(inst)
-    if inst.task ~= nil then
-        inst.task:Cancel()
-        inst.task = nil
-    end
-    if inst.fx ~= nil then
-        if inst.fx:IsValid() then
-            inst.fx:Remove()
-        end
-        inst.fx = nil
-    end
-    inst.closeness = nil
+    inst.components.fueled:StopConsuming()
+	
+	if inst._cdtask ~= nil then
+		inst._cdtask:Cancel()
+		inst._cdtask = nil
+	end
+	
+	inst._cdtask = inst:DoTaskInTime(3, OnCooldown)
 	
 	local owner = inst.components.inventoryitem.owner
 	if owner then
 		owner:RemoveTag("ratfriend")
 	end
-	
-    inst.components.fueled:StopConsuming()
 end
 
 local function Hack(inst, data)
@@ -989,6 +1005,9 @@ local function ratfn()
 	inst.customunequip = rat_disable
 	
 	inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL
+	
+	inst:AddComponent("useableitem")
+	inst.components.useableitem:SetOnUseFn(CheckTargetPiece)
 	
 	inst:AddComponent("fueled")
 	inst.components.fueled.fueltype = FUELTYPE.USAGE

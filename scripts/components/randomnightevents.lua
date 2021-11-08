@@ -1098,7 +1098,7 @@ local function SpawnMushbooms(player)
 			local num_bombs = 20
 			for i = 1, num_bombs do
 				player:DoTaskInTime(i / 1.5, function()
-					local skitts = SpawnPrefab("mushroombomb")
+					local skitts = SpawnPrefab("rnemushroombomb")
 					skitts.Transform:SetPosition(x + math.random(-10,10), y, z + math.random(-10,10))
 				end)
 			end

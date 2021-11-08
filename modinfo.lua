@@ -79,9 +79,20 @@ configuration_options =
 		options =
 		{
 			{description = "Lowered[1 second]", data = 1},
-			{description = "Default[50 days]", data = 24000},
+			{description = "Default[50 days]", data = 33600},
 		},
-		default = 1,
+		default = 33600,
+	},
+	{
+		name = "ratsnifftimer",
+		label = "Rat Sniff Timer",
+		hover = "Time until rats can spawn!",
+		options =
+		{
+			{description = "Lowered[1 second]", data = 30},
+			{description = "Default[50 days]", data = 4800},
+		},
+		default = 4800,
 	},
 	BinaryConfig("foodregen", "Over Time Food Stats", "Health and Sanity from foods is applied over time, each food acting as a seperate stackable health or sanity regen buff.", true),
     BinaryConfig("caved", "[IMPORTANT] Cave Config", "Switches some things around so players who can't run Caves can still enjoy the game. ENABLE IF CAVES ARE ENABLED!", true),

@@ -113,9 +113,21 @@ local function OnPickup(inst, data)
 				inst:RemoveTag("carrying")
 				inst._item:Remove()
 			end
+			
+			local function DeleteBackItem(inst)
+				if inst._item ~= nil then
+					for i = 1, inst.components.inventory.maxslots do
+					local v = inst.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
+						if v ~= nil then
+							inst.components.inventory:DropItem(v, true, true)
+							v:Remove()
+						end
+					end
+				end
+			end
+			
+			inst:ListenForEvent("onremove", DeleteBackItem, inst._item)
 		end
-		
-		inst.components.combat:DropTarget()
 	else
 		data.item.components.explosive:OnBurnt()
 	end
@@ -177,7 +189,7 @@ local function OnHitOther(inst, other)
 	inst.components.thief:StealItem(other)
 end
 
-local RETARGET_CANT_TAGS = { "wall", "raidrat"}
+local RETARGET_CANT_TAGS = { "wall", "raidrat", "ratfriend"}
 local function rattargetfn(inst)
     return FindEntity(
                 inst, 3,
@@ -185,8 +197,7 @@ local function rattargetfn(inst)
 					local validitem = guy.components.inventory ~= nil and guy.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
                     return inst:GetTimeAlive() > 5 and not 
 					inst:HasTag("carrying") and
-					guy:HasTag("player") and not
-					guy:HasTag("ratfriend") and
+					guy:HasTag("player") and
 					validitem ~= nil and
 					inst.components.combat:CanTarget(guy)
                 end,
@@ -206,7 +217,6 @@ end
 
 local function StealItem(inst, victim, stolenitem)
 	inst:PushEvent("onpickupitem", { item = stolenitem })
-	inst.components.combat:DropTarget()
 end
 
 local function fn()
@@ -429,7 +439,7 @@ local function junkretargetfn(inst)
 end
 
 local function KeepTarget(inst, target)
-return inst:IsNear(target, TUNING.HOUND_FOLLOWER_TARGET_KEEP)
+	return inst:IsNear(target, TUNING.HOUND_FOLLOWER_TARGET_KEEP)
 end
 
 local function SetHarassPlayer(inst, player)
@@ -1025,6 +1035,8 @@ local function EndRaid(inst)
     inst.components.trader.onaccept = OnGetItemFromPlayer
     inst.components.trader.onrefuse = OnRefuseItem
 	
+	inst.entity:SetCanSleep(false)
+	
 	inst.raiding = false
 end
 
@@ -1351,6 +1363,7 @@ local function fn_scoutburrow()
 	
 	inst:AddTag("ratburrow")
 	inst:AddTag("herd")
+	inst.entity:SetCanSleep(false)
 	
 	inst.entity:SetPristine()
 	
