@@ -44,8 +44,8 @@ local function Grabby(inst)
 	
 	for i, v in ipairs(ents) do
 	
-		v.components.health:DoDelta(-50, false, inst.prefab, false, nil, inst, false)
-			
+		v.components.health:DoDelta(-40, false, inst.prefab, false, nil, inst, false)
+		
 		if v.components.health:IsDead() then
 			v.Physics:Teleport(inst.Transform:GetWorldPosition())
 		else 
@@ -180,10 +180,18 @@ local states=
 			inst.AnimState:PlayAnimation("idle_above", true)
             --inst.sg:SetTimeout(5)
         end,
-        
-        ontimeout = function(inst)
-			inst.sg:GoToState("idle")
-        end,
+		
+		events =
+        {
+            EventHandler("animover", function(inst)
+				if TheWorld.state.isday then
+					OnAnimOverRemoveAfterSounds(inst)
+					--inst:Remove()
+				else
+					inst.sg:GoToState("idle")
+				end
+			end),
+        },
     },
 
     State{

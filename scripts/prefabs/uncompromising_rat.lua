@@ -1045,10 +1045,12 @@ local function OnInitHerd(inst)
 		inst.raiding = true
 	end
 
+	inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck._ratburrows
+	
 	if inst.raiding then
 		for i = 1, 4 do
 			inst:DoTaskInTime((i - 1) * 12, function(inst)
-				for i = 1, (math.random(4, 5) / i) do
+				for i = 1, ((3 + inst.ratburrows) / i) do
 					local x, y, z = inst.Transform:GetWorldPosition()
 					local angle = math.random() * 8 * PI
 					local rat = SpawnPrefab("uncompromising_rat")
@@ -1401,7 +1403,6 @@ local function TimeForACheckUp(inst)
 	inst.ratscore = 0
 	print(#ents)
 	
-	
 	if ents ~= nil then
 		for i, v in ipairs(ents) do
 				if v.components.inventoryitem:IsHeld() then
@@ -1434,14 +1435,12 @@ local function TimeForACheckUp(inst)
 							if v:HasTag("molebait") then
 								inst.ratscore = inst.ratscore + 3
 							else
-								inst.ratscore = inst.ratscore + 1
+								inst.ratscore = inst.ratscore + 2
 							end
 						end
 					else
 						if v:HasTag("_equippable") then
 							inst.ratscore = inst.ratscore + 20 -- Oooh, wants wants! We steal!
-						else
-							--inst.ratscore = inst.ratscore + 10
 						end
 					end
 				end
@@ -1453,7 +1452,7 @@ local function TimeForACheckUp(inst)
 	TheWorld:PushEvent("reducerattimer", {value = inst.ratscore})
 	
 	
-	inst.ratwarning = inst.ratscore / 50
+	inst.ratwarning = inst.ratscore / 100
 	
 	
 		--[[
@@ -1561,13 +1560,14 @@ local function PlayWarningSound(inst)
     local theta = math.random() * 2 * PI
 
 	local x, y, z = inst.Transform:GetWorldPosition()
-    inst.Transform:SetPosition(x + (20 * math.cos(theta)), 0, z + 20 * (math.sin(theta)))
+    inst.Transform:SetPosition(x + (15 * math.cos(theta)), 0, z + 15 * (math.sin(theta)))
 
 	local x, y, z = inst.Transform:GetWorldPosition()
 	print(x, y, z)
 	--TheFocalPoint.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
     inst.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
-    inst:Remove()
+    
+	inst:DoTaskInTime(3, inst.Remove)
 end
 
 local function fn_warning()
@@ -1589,7 +1589,6 @@ local function fn_warning()
 		PlayWarningSound(inst)
 	end)
 
-	inst.entity:SetCanSleep(false)
 	inst.persists = false
 
 	return inst
