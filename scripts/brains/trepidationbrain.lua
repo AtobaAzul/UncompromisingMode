@@ -1,14 +1,9 @@
 require "behaviours/wander"
-require "behaviours/chaseandattack"
 require "behaviours/follow"
+require "behaviours/chaseandattack"
+--require "behaviours/choptree"
 
-local MIN_FOLLOW = 5
-local MED_FOLLOW = 15
-local MAX_FOLLOW = 30
-
-local HARASS_MIN = 0
-local HARASS_MED = 4
-local HARASS_MAX = 5
+local BrainCommon = require("brains/braincommon")
 
 
 local function IsDefensive(self)
@@ -49,24 +44,34 @@ end)
 local function GetHome(inst)
     return inst.components.homeseeker and inst.components.homeseeker.home
 end
-local TARGET_FOLLOW_DIST = 7
-local MAX_FOLLOW_DIST = 10
+
+
 local function WithinDomain(inst)
-local x, y, z = inst.Transform:GetWorldPosition()
-local nearestspawner = FindEntity(inst, 50, nil,{"trepidationspawner"})
-local home = GetHome(inst)
-if nearestspawner ~= nil and home ~= nil then
-local dist1 = inst:GetDistanceSqToInst(nearestspawner)
-local dist2 = inst:GetDistanceSqToInst(home)
-	if dist1-4 > dist2 then
-	return false
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local nearestspawner = FindEntity(inst, 50, nil,{"trepidationspawner"})
+	local home = GetHome(inst)
+	if nearestspawner ~= nil and home ~= nil then
+		local dist1 = inst:GetDistanceSqToInst(nearestspawner)
+		local dist2 = inst:GetDistanceSqToInst(home)
+		if dist1-4 > dist2 then
+			return false
+		else
+			return true
+		end
 	else
 	return true
 	end
-else
-return true
+end
+
+local function GetTargetfn(inst)
+if inst.harassplayer ~= nil then
+	return inst.harassplayer
 end
 end
+local MIN_FOLLOW_DIST = 2
+local TARGET_FOLLOW_DIST = 10
+local MAX_FOLLOW_DIST = 7
+
 function TrepidationBrain:OnStart()
     local root = PriorityNode(
     {	
@@ -78,11 +83,11 @@ function TrepidationBrain:OnStart()
                 end)),
         WhileNode(function() return ShouldAttack(self) end, "Attack", ChaseAndAttack(self.inst, 40)),
 		
-		--WhileNode(function() return WithinDomain(self.inst) end, "Follow",
-		Follow(self.inst, function() return self.inst.harassplayer end, 0, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST),--),
-		
+
+		Follow(self.inst, GetTargetfn(self.inst), MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST),--),
+
         WhileNode(function() return self.inst.harassplayer == nil end, "Home",
-		Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, 20)),
+			Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, 20)),
     }, .25)
 
     self.bt = BT(self.inst, root)

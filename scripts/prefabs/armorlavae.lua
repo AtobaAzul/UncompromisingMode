@@ -5,6 +5,7 @@ if data.target ~= nil and data.target.components.combat ~= nil and data.target.c
 	if inst.components.follower.leader ~= nil then
 		data.target.components.combat:SuggestTarget(inst.components.follower.leader)
 	end
+	inst.ocmponents.combat.target = nil
 end
 end
 local function fn()

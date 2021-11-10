@@ -280,4 +280,5 @@ return {
 	"floral_bandage",
 	"confighealbuff",
 	"shockstundebuffimmunity",
+	"pied_rat",
 }

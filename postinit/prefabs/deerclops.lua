@@ -51,11 +51,11 @@ local function EnterPhase2Trigger(inst)
         inst.Light:SetColour(0, 0, 1)
         inst.Light:Enable(true)
 
-        inst:DoTaskInTime(0.1, function(inst)
+        --[[inst:DoTaskInTime(0.1, function(inst)
             inst:AddComponent("timer")
             inst:ListenForEvent("timerdone", SpinCheck)
             inst.components.timer:StartTimer("spinattack", 10 + math.random(1, 5))
-        end)
+        end)]] --Temporarily remove spin attack till it can be reworked to not kill PCs
         inst:ListenForEvent("newstate", OnNewState)
 
         --end
@@ -113,9 +113,8 @@ local function IceyCheck(inst, data)
 end
 
 local function MakeEnrageable(inst)
-    inst:AddComponent("healthtrigger")
     inst.components.health:SetMaxHealth(4000)
-    inst.components.healthtrigger:AddTrigger(PHASE2_HEALTH, EnterPhase2Trigger)
+    EnterPhase2Trigger(inst) --Removing the trigger, only ice laser
     inst.upgrade = "enrage_mutation"
 end
 
