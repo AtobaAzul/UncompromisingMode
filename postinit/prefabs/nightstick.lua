@@ -160,8 +160,9 @@ env.AddPrefabPostInit("nightstick", function(inst)
 	
 	if inst.components.fueled ~= nil then
 		inst.components.fueled:SetSectionCallback(onfuelchange)
-		inst.components.fueled.maxfuel = TUNING.NIGHTSTICK_FUEL / 2
-		inst.components.fueled:InitializeFuelLevel(TUNING.NIGHTSTICK_FUEL / 2)
+		--inst.components.fueled.maxfuel = TUNING.NIGHTSTICK_FUEL / 2
+		--inst.components.fueled:InitializeFuelLevel(TUNING.NIGHTSTICK_FUEL / 2)
+		inst.components.fueled.rate = 2
 		--inst.components.fueled:InitializeFuelLevel(TUNING.LANTERN_LIGHTTIME / 1.25)
 		--inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION * 2, TUNING.TURNON_FULL_FUELED_CONSUMPTION * 2)
 
