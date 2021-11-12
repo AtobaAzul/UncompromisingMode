@@ -116,6 +116,8 @@ local function MakeEnrageable(inst)
     inst.components.health:SetMaxHealth(4000)
     EnterPhase2Trigger(inst) --Removing the trigger, only ice laser
     inst.upgrade = "enrage_mutation"
+	inst:AddComponent("timer")
+	inst.components.timer:StartTimer("laserbeam_cd", TUNING.DEERCLOPS_ATTACK_PERIOD * (math.random(3) - .5))
 end
 
 local function MakeStrong(inst)
@@ -330,5 +332,5 @@ env.AddPrefabPostInit("deerclops", function(inst)
     inst.MakeStrong = MakeStrong
 
     inst:DoTaskInTime(0.1, ChooseUpgrades(inst)) --Incase we need to specify an upgrade because this deerclops despawned.
-
+	print(inst.upgrade)
 end)
