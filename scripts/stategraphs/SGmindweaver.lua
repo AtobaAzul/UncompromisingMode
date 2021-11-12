@@ -184,7 +184,7 @@ local states=
 		events =
         {
             EventHandler("animover", function(inst)
-				if TheWorld.state.isday then
+				if TheWorld.state.isday or TheWorld.state.iscaveday then
 					OnAnimOverRemoveAfterSounds(inst)
 					--inst:Remove()
 				else
@@ -320,7 +320,7 @@ local states=
         events=
         {
             EventHandler("animover", function(inst)
-				if TheWorld.state.isday then
+				if TheWorld.state.isday or TheWorld.state.iscaveday then
 					OnAnimOverRemoveAfterSounds(inst)
 					--inst:Remove()
 				else
