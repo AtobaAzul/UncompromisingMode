@@ -488,6 +488,24 @@ inst.redolavae = true
 inst.sg:GoToState("summoncrystals")
 end
 
+
+local function MoonMawCheck(player)
+	local moonmaw = FindEntity(player, 40, function(guy) return guy:HasTag("moonmaw") end)
+	if moonmaw == nil then
+		player.components.sanity:EnableLunacy(false, "moonmaw")
+		player.moonmaw = nil
+		player.moonmawcheck = nil
+	end
+end
+
+local function OnNear(inst,player)
+	if player.components.sanity ~= nil then
+		player.components.sanity:EnableLunacy(true, "moonmaw")
+		player.moonmaw = inst
+		player:DoTaskInTime(3,MoonMawCheck)
+	end
+end
+
 local function fn(Sim)
     local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
@@ -528,6 +546,7 @@ local function fn(Sim)
     inst:AddTag("monster")
     inst:AddTag("hostile")
     inst:AddTag("mock_dragonfly")
+	inst:AddTag("moonmaw")
     inst:AddTag("scarytoprey")
     inst:AddTag("largecreature")
 	inst:AddTag("ignorewalkableplatformdrowning")
@@ -670,7 +689,11 @@ local function fn(Sim)
 	
 	inst.sg:GoToState("skyfall")
 	inst.TryEjectLavae = TryEjectLavae
-	
+	--
+	inst:AddComponent("playerprox")
+	inst.components.playerprox:SetDist(35, 40)
+	inst.components.playerprox:SetOnPlayerNear(OnNear)
+	--
 	inst:DoPeriodicTask(10,PerEjectCheck)
     return inst
 end

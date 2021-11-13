@@ -79,7 +79,7 @@ configuration_options =
 		options =
 		{
 			{description = "Lowered[1 second]", data = 1},
-			{description = "Default[50 days]", data = 33600},
+			{description = "Default[70 days]", data = 33600},
 		},
 		default = 33600,
 	},
