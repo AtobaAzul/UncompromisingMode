@@ -317,6 +317,19 @@ end
 local loot = {"meat", "meat", "meat", "meat", "meat", "meat", "meat", "meat", "glass_scales","glass_scales","glass_scales", "moonglass_geode","moonglass_geode","moonglass_geode"}
 
 local function OnDead(inst)
+	local x,y,z = inst.Transform:GetWorldPosition()
+	local ents = TheSim:FindEntities(x, y, z, 50, { "player" })
+	for i,v in ipairs(ents) do
+		if v.components.sanity ~= nil then
+			v.components.sanity:EnableLunacy(false, "moonmaw")
+			if v.moonmaw ~= nil then
+				v.moonmaw = nil
+			end
+			if v.moonmawcheck ~= nil then
+				v.moonmawcheck = nil
+			end
+		end
+	end
     TheWorld:PushEvent("mockflykilled", inst)
 end
 
@@ -491,10 +504,13 @@ end
 
 local function MoonMawCheck(player)
 	local moonmaw = FindEntity(player, 40, function(guy) return guy:HasTag("moonmaw") end)
+	print("checking")
 	if moonmaw == nil then
 		player.components.sanity:EnableLunacy(false, "moonmaw")
 		player.moonmaw = nil
 		player.moonmawcheck = nil
+	else
+		print("moonmawisalive")
 	end
 end
 
