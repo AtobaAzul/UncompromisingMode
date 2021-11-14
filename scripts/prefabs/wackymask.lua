@@ -593,6 +593,7 @@ end
  
 local function onunequip(inst, owner)
 	--owner.AnimState:Show("HAIR_NOHAT")
+	owner.AnimState:Show("HAIR")
     owner.AnimState:ClearOverrideSymbol("swap_hat")
 	owner.AnimState:ClearOverrideSymbol("face")
     owner.AnimState:Hide("HAT")

@@ -219,6 +219,36 @@ local function StealItem(inst, victim, stolenitem)
 	inst:PushEvent("onpickupitem", { item = stolenitem })
 end
 
+
+local function PiedPiperBuff(inst)
+	if inst.note == nil then
+		print("note")
+	
+		local fx = SpawnPrefab("rat_note")
+		fx.entity:SetParent(inst.entity)
+		fx.entity:AddFollower()
+		fx.Follower:FollowSymbol(inst.GUID, "carrat_body", 0, -180, 0)
+	
+		inst.note = fx
+		
+		inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_BUFFED_WALKSPEED
+		inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_BUFFED_RUNSPEED
+		inst.components.combat:SetAttackPeriod(TUNING.DSTU.RAIDRAT_BUFFED_ATTACK_PERIOD)
+		
+		inst:DoTaskInTime(8, PiedPiperBuff)
+    else
+		print("nooooote")
+		inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_WALKSPEED
+		inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_RUNSPEED
+		inst.components.combat:SetAttackPeriod(TUNING.DSTU.RAIDRAT_ATTACK_PERIOD)
+		
+		if inst.note ~= nil then
+			inst.note:Remove()
+			inst.note = nil
+		end
+	end
+end
+
 local function fn()
 	local inst = CreateEntity()
 	
@@ -353,6 +383,7 @@ local function fn()
 	inst.components.inventoryitem.cangoincontainer = false
 	inst.components.inventoryitem:SetSinks(true)
 	
+	inst:AddComponent("follower")
 	inst:AddComponent("herdmember")
 	
 	inst:AddComponent("knownlocations")
@@ -386,6 +417,8 @@ local function fn()
 	
 	MakeSmallBurnableCharacter(inst, "carrat_body")
 	MakeSmallFreezableCharacter(inst, "carrat_body")
+	
+    inst.PiedPiperBuff = PiedPiperBuff
 	
 	inst.OnSave = onsave_rat
 	inst.OnLoad = onload_rat
