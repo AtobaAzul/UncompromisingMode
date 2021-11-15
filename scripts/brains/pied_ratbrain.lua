@@ -30,7 +30,6 @@ end)
 local function CanSpawnChild(inst)
     return inst:GetTimeAlive() > 5
         --and inst:NumHoundsToSpawn() > 0
-        and inst.components.combat:HasTarget()
 end
 
 function Pied_RatBrain:OnStart()
