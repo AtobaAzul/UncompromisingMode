@@ -103,30 +103,50 @@ local states=
 			inst.AnimState:PlayAnimation("play")
             inst.sg.statemem.count = count
 			
+            inst.SoundEmitter:PlaySound("UCSounds/piedpiper/toot")
+			
 			GatherFollowers(inst)
 		end,
 
 		timeline =
 		{
+			TimeEvent(0.5, function(inst)
+				DoBuff(inst)
+				inst.SoundEmitter:PlaySound("UCSounds/piedpiper/play")
+			end),
 			TimeEvent(1, function(inst)
 				DoBuff(inst)
-				inst.SoundEmitter:PlaySound("UCSounds/piedpiper/toot")
+				inst.SoundEmitter:PlaySound("UCSounds/piedpiper/play")
+			end),
+			TimeEvent(1.5, function(inst)
+				DoBuff(inst)
+				inst.SoundEmitter:PlaySound("UCSounds/piedpiper/play")
 			end),
 			TimeEvent(2, function(inst)
+				
 				DoBuff(inst)
-				inst.SoundEmitter:PlaySound("UCSounds/piedpiper/toot")
+				inst.SoundEmitter:PlaySound("UCSounds/piedpiper/play")
+			end),
+			TimeEvent(2.5, function(inst)
+				inst.SoundEmitter:PlaySound("UCSounds/piedpiper/play")
+			end),
+			TimeEvent(2.75, function(inst)
+				inst.SoundEmitter:PlaySound("UCSounds/piedpiper/play")
 			end),
 			TimeEvent(3, function(inst)
-				DoBuff(inst)
-				inst.SoundEmitter:PlaySound("UCSounds/piedpiper/toot")
+				inst.SoundEmitter:PlaySound("UCSounds/piedpiper/play")
 			end),
-			TimeEvent(4, function(inst)
+			TimeEvent(3.25, function(inst)
+				inst.SoundEmitter:PlaySound("UCSounds/piedpiper/play")
+			end),
+			TimeEvent(3.5, function(inst)
                 if inst.sg.statemem.count == nil then
                     SpawnRat(inst)
                 end
 				
 				DoBuff(inst)
-				inst.SoundEmitter:PlaySound("UCSounds/piedpiper/toot")
+				
+				inst.SoundEmitter:PlaySound("UCSounds/piedpiper/play")
 			end),
 		},
 
@@ -165,12 +185,17 @@ local states=
 			inst.components.combat:StartAttack()
 			inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("playatk")
-            inst.SoundEmitter:PlaySound("UCSounds/piedpiper/attack")
+            inst.SoundEmitter:PlaySound("UCSounds/piedpiper/toot")
 		end,
 
 		timeline =
 		{
-			TimeEvent(8 * FRAMES, function(inst)
+			TimeEvent(10 * FRAMES, function(inst)
+				for i = 1, 3 do
+					DoBuff(inst)
+				end
+				
+				inst.SoundEmitter:PlaySound("UCSounds/piedpiper/play")
 				inst.components.combat:DoAttack()
 				inst.sg:RemoveStateTag("attack")
 				inst.sg:RemoveStateTag("busy")
@@ -198,7 +223,7 @@ local states=
 
 		timeline =
 		{
-			TimeEvent(8 * FRAMES, function(inst)
+			TimeEvent(18 * FRAMES, function(inst)
 			
 			
 				local target = inst.components.combat.target

@@ -52,6 +52,18 @@ local function NumHoundsToSpawn(inst)
     return num - numFollowers
 end
 
+local function OnAttackOther(inst, data)
+	if not inst:HasTag("packrat") then
+		inst.components.combat:SetTarget(data.target)
+	end
+	
+	inst.components.combat:ShareTarget(data.target, 25, function(dude)
+		return dude:HasTag("raidrat")
+			and not dude.components.health:IsDead()
+			and not dude:HasTag("packrat")
+	end, 10)
+end
+
 local function fn()
     local inst = CreateEntity()
     
@@ -108,7 +120,7 @@ local function fn()
 	inst.components.health:SetMaxHealth(300)
 	
     inst:AddComponent("combat")
-	inst.components.combat:SetDefaultDamage(30)
+	inst.components.combat:SetDefaultDamage(1)
 	inst.components.combat:SetAttackPeriod(5)
 	inst.components.combat:SetRange(12)
 	inst.components.combat.hiteffectsymbol = "body"
@@ -122,6 +134,8 @@ local function fn()
 
 
     inst:AddComponent("inspectable")
+	
+	inst:ListenForEvent("onattackother", OnAttackOther)
 
     ------------------
 

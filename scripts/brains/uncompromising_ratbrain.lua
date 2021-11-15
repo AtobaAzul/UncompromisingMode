@@ -248,11 +248,18 @@ function Uncompromising_RatBrain:OnStart()
 		WhileNode( function()
 			return self.inst.components.hauntable and self.inst.components.hauntable.panic
 		end, "PanicHaunted", Panic(self.inst)),
-		MinPeriod(self.inst, 2, true,
-            stealnode),
+		
+		WhileNode( function()
+			return self.inst.note == nil
+		end, "CanSteal", 
+			MinPeriod(self.inst, 2, true,
+				stealnode)),
 		WhileNode( function()
 			return self.inst.components.health.takingfiredamage or self.inst.components.burnable:IsBurning()
 		end, "OnFire", Panic(self.inst)),
+		
+		DoAction(self.inst, function() return SpringTrap(self.inst) end, "checktrap", true ),
+		
 		WhileNode( function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
 			ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST)),
 		WhileNode( function() return self.inst.components.combat.target and self.inst.components.combat:InCooldown() end, "Dodge",

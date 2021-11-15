@@ -29,7 +29,7 @@ end)
 
 local function CanSpawnChild(inst)
     return inst:GetTimeAlive() > 5
-        and inst:NumHoundsToSpawn() > 0
+        --and inst:NumHoundsToSpawn() > 0
         and inst.components.combat:HasTarget()
 end
 
@@ -48,8 +48,6 @@ function Pied_RatBrain:OnStart()
 			
 			
 			
-			WhileNode( function() return self.inst.components.combat.target and self.inst.components.combat:InCooldown() end, "Dodge",
-				RunAway(self.inst, function() return self.inst.components.combat.target end, AVOID_PLAYER_DIST_COMBAT, AVOID_PLAYER_STOP_COMBAT)),
 			WhileNode( function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
 				ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST)),
 			--RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
