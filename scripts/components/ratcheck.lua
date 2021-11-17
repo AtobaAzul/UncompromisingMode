@@ -122,6 +122,18 @@ local function MakeRatBurrow(inst)
 			local ratburrow = SpawnPrefab("uncompromising_ratburrow")
             TheWorld:PushEvent("rat_sniffer")
 			ratburrow.Transform:SetPosition(inst.x1, 0, inst.z1)
+			
+			local x, y, z = inst.Transform:GetWorldPosition()
+	
+			local players = #TheSim:FindEntities(x, y, z, 30, { "player" })
+					
+			if players < 1 then
+				local piper = SpawnPrefab("pied_rat")
+					
+				piper.Transform:SetPosition(inst.Transform:GetWorldPosition())
+				ratburrow.components.herd:AddMember(piper)
+			end
+			
 			break
 		end
 	end

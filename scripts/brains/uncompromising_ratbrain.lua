@@ -14,6 +14,10 @@ local AVOID_PLAYER_DIST_COMBAT = 6
 local AVOID_PLAYER_DIST_SQ_COMBAT  = AVOID_PLAYER_DIST_COMBAT  * AVOID_PLAYER_DIST_COMBAT 
 local AVOID_PLAYER_STOP_COMBAT  = 10
 
+local MIN_FOLLOW_LEADER = 2
+local MAX_FOLLOW_LEADER = 8
+local TARGET_FOLLOW_LEADER = (MAX_FOLLOW_LEADER + MIN_FOLLOW_LEADER) / 2
+
 local MAX_CHASE_TIME = 10
 local MAX_CHASE_DIST = 30
 
@@ -26,6 +30,10 @@ local MAX_WANDER_DIST = 5
 local Uncompromising_RatBrain = Class(Brain, function(self, inst)
 	Brain._ctor(self, inst)
 end)
+
+local function GetLeader(inst)
+    return inst.components.follower ~= nil and inst.components.follower.leader or nil
+end
 
 local function CanSpringTrap(item)
 	return item:IsOnValidGround()
@@ -250,6 +258,9 @@ function Uncompromising_RatBrain:OnStart()
 		WhileNode( function() return self.inst.components.combat.target and self.inst.components.combat:InCooldown() end, "Dodge",
 			RunAway(self.inst, function() return self.inst.components.combat.target end, AVOID_PLAYER_DIST_COMBAT, AVOID_PLAYER_STOP_COMBAT)),
 		RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
+		
+		Follow(self.inst, GetLeader, MIN_FOLLOW_LEADER, TARGET_FOLLOW_LEADER, MAX_FOLLOW_LEADER),
+            FaceEntity(self.inst, GetLeader, GetLeader),
 
 		DoAction(self.inst, eat_food_action),
 		

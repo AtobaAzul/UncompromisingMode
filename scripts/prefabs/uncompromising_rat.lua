@@ -219,6 +219,36 @@ local function StealItem(inst, victim, stolenitem)
 	inst:PushEvent("onpickupitem", { item = stolenitem })
 end
 
+
+local function PiedPiperBuff(inst)
+	if inst.note == nil then
+		print("note")
+	
+		local fx = SpawnPrefab("rat_note")
+		fx.entity:SetParent(inst.entity)
+		fx.entity:AddFollower()
+		fx.Follower:FollowSymbol(inst.GUID, "carrat_body", 0, -180, 0)
+	
+		inst.note = fx
+		
+		inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_BUFFED_WALKSPEED
+		inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_BUFFED_RUNSPEED
+		inst.components.combat:SetAttackPeriod(TUNING.DSTU.RAIDRAT_BUFFED_ATTACK_PERIOD)
+		
+		inst:DoTaskInTime(8, PiedPiperBuff)
+    else
+		print("nooooote")
+		inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_WALKSPEED
+		inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_RUNSPEED
+		inst.components.combat:SetAttackPeriod(TUNING.DSTU.RAIDRAT_ATTACK_PERIOD)
+		
+		if inst.note ~= nil then
+			inst.note:Remove()
+			inst.note = nil
+		end
+	end
+end
+
 local function fn()
 	local inst = CreateEntity()
 	
@@ -353,6 +383,7 @@ local function fn()
 	inst.components.inventoryitem.cangoincontainer = false
 	inst.components.inventoryitem:SetSinks(true)
 	
+	inst:AddComponent("follower")
 	inst:AddComponent("herdmember")
 	
 	inst:AddComponent("knownlocations")
@@ -386,6 +417,8 @@ local function fn()
 	
 	MakeSmallBurnableCharacter(inst, "carrat_body")
 	MakeSmallFreezableCharacter(inst, "carrat_body")
+	
+    inst.PiedPiperBuff = PiedPiperBuff
 	
 	inst.OnSave = onsave_rat
 	inst.OnLoad = onload_rat
@@ -907,6 +940,18 @@ local function MakeRatBurrow(inst)
 		
 		if IsValidRatBurrowPosition(inst.x1, inst.z1) then
 			inst.Transform:SetPosition(inst.x1, 0, inst.z1)
+			
+			local x, y, z = inst.Transform:GetWorldPosition()
+	
+			local players = #TheSim:FindEntities(x, y, z, 30, { "player" })
+					
+			if players < 1 then
+				local piper = SpawnPrefab("pied_rat")
+					
+				piper.Transform:SetPosition(inst.Transform:GetWorldPosition())
+				inst.components.herd:AddMember(piper)
+			end
+			
 			break
 		end
 	end
@@ -1045,11 +1090,11 @@ local function OnInitHerd(inst)
 		inst.raiding = true
 	end
 
-	inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck._ratburrows
+	inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck._ratburrows or 0
 	
 	if inst.raiding then
-		for i = 1, 4 do
-			inst:DoTaskInTime((i - 1) * 12, function(inst)
+		for i = 1, 3 do
+			inst:DoTaskInTime((i - 1) * 15, function(inst)
 				for i = 1, ((3 + inst.ratburrows) / i) do
 					local x, y, z = inst.Transform:GetWorldPosition()
 					local angle = math.random() * 8 * PI
@@ -1058,7 +1103,7 @@ local function OnInitHerd(inst)
 					inst.components.herd:AddMember(rat)
 				end
 				
-				if i < 4 then
+				if i < 3 then
 					local x, y, z = inst.Transform:GetWorldPosition()
 					local angle = math.random() * 8 * PI
 					local packrat = SpawnPrefab("uncompromising_packrat")
@@ -1339,9 +1384,18 @@ local function SlumberParty(inst)
 			burrow.Transform:SetPosition(x, 0, z)
 			burrow.AnimState:PlayAnimation("spawn")
 			
+			local players = #TheSim:FindEntities(x, y, z, 30, { "player" })
+			
+			if players < 1 then
+				local piper = SpawnPrefab("pied_rat")
+			
+				piper.Transform:SetPosition(inst.Transform:GetWorldPosition())
+				burrow.components.herd:AddMember(piper)
+			end
+			
 			for i, b in ipairs(inst.components.herd.members) do
 				b:RemoveTag("ratscout")
-				burrow:AddMember(b)
+				burrow.components.herd:AddMember(b)
 			end
 			
 			inst:Remove()
