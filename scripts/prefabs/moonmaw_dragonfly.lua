@@ -504,13 +504,13 @@ end
 
 local function MoonMawCheck(player)
 	local moonmaw = FindEntity(player, 40, function(guy) return guy:HasTag("moonmaw") end)
-	print("checking")
+	--print("checking")
 	if moonmaw == nil then
 		player.components.sanity:EnableLunacy(false, "moonmaw")
 		player.moonmaw = nil
 		player.moonmawcheck = nil
 	else
-		print("moonmawisalive")
+		--print("moonmawisalive")
 	end
 end
 
