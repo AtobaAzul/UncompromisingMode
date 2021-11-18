@@ -143,6 +143,13 @@ local function edible(inst, item)
 			item:IsOnPassablePoint() and
 			item:GetCurrentPlatform() == inst:GetCurrentPlatform()
 end
+
+local function GetFollowPos(inst)
+    if inst.components.knownlocations then
+        return inst.components.knownlocations:GetLocation("herd") or inst:GetPosition()
+    end
+    return inst:GetPosition()
+end
 --[[
 local function eat_food_action(inst)
 	if inst == nil or not inst:IsValid() then
@@ -229,6 +236,19 @@ local function eat_food_action(inst)
     return target ~= nil and BufferedAction(inst, target, ACTIONS.EAT) or nil
 end
 
+local FARMPLANT_MUSTTAGS = { "farmplantstress" }
+local FARMPLANT_NOTAGS = { "farm_plant_killjoy" }
+
+local function ShouldTargetPlant(inst, plant)
+	local target = FindEntity(inst, SEE_DIST, function(plant)
+        if (plant.components.growable == nil or plant.components.growable:GetCurrentStageData().tendable) and plant.components.workable then
+            return plant.components.farmplantstress
+        end
+    end, FARMPLANT_MUSTTAGS, FARMPLANT_NOTAGS)
+
+    return target ~= nil and BufferedAction(inst, target, ACTIONS.DIG) or nil
+end
+
 function Uncompromising_RatBrain:OnStart()
 	local stealnode = PriorityNode(
 	{
@@ -238,7 +258,8 @@ function Uncompromising_RatBrain:OnStart()
 		DoAction(self.inst, function() return SpringTrap(self.inst) end, "checktrap", true ),
 		DoAction(self.inst, function() return StealAction(self.inst) end, "steal", true ),
 		DoAction(self.inst, eat_food_action, "Eat Food", true),
-		DoAction(self.inst, function() return EmptyChest(self.inst) end, "emptychest", true )
+		DoAction(self.inst, function() return EmptyChest(self.inst) end, "emptychest", true),
+		DoAction(self.inst, function() return ShouldTargetPlant(self.inst) end, "attackplant", true)
 		}, .25))
 	}, 0.25)
 	local root = PriorityNode(

@@ -6,6 +6,7 @@ local actionhandlers =
 	ActionHandler(ACTIONS.PICKUP, "steal"),
 	ActionHandler(ACTIONS.HAMMER, "steal"),
     ActionHandler(ACTIONS.CHECKTRAP, "destroy"),
+    ActionHandler(ACTIONS.DIG, "plant_attack"),
     ActionHandler(ACTIONS.STORE, "deposit"),
 }
 
@@ -113,21 +114,26 @@ local states =
 			inst.SoundEmitter:PlaySound(inst.sounds.eat)
 			inst.components.combat:StartAttack()
 			inst.Physics:Stop()
-			inst.AnimState:PlayAnimation("atk")
+			inst.AnimState:PlayAnimation("eat_pre")
 		end,
 
 		timeline =
 		{
-			TimeEvent(7 * FRAMES, function(inst)
+			TimeEvent(3 * FRAMES, function(inst)
 				local buffaction = inst:GetBufferedAction()
 				local target = buffaction ~= nil and buffaction.target or nil
 				
 				if target ~= nil and target:HasTag("trap") then
-					--target:Remove()
-					SpawnPrefab("yellow_leaves_chop").Transform:SetPosition(target.Transform:GetWorldPosition())
-					target.components.trap:Harvest()
-					inst.SoundEmitter:PlaySound("dontstarve/common/trap_rustle")
-					target:Remove()
+					if target.components.finiteuses ~= nil then
+						target.components.finiteuses:Use(1)
+						SpawnPrefab("yellow_leaves_chop").Transform:SetPosition(target.Transform:GetWorldPosition())
+						inst.SoundEmitter:PlaySound("dontstarve/common/trap_rustle")
+					else
+						SpawnPrefab("yellow_leaves_chop").Transform:SetPosition(target.Transform:GetWorldPosition())
+						target.components.trap:Harvest()
+						inst.SoundEmitter:PlaySound("dontstarve/common/trap_rustle")
+						target:Remove()
+					end
 				end
 			
 				inst.sg:RemoveStateTag("attack")
@@ -143,6 +149,58 @@ local states =
 			end),
 		},
 	},
+	
+    State{
+        name = "plant_attack",
+        tags = {"busy"},
+
+		onenter = function(inst)
+			inst.Physics:SetActive(false)
+            inst.sg.statemem.action = inst:GetBufferedAction()
+			inst.Physics:Stop()
+			inst.AnimState:PlayAnimation("eat_pre")
+			inst.AnimState:PushAnimation("eat_pst", false)
+			
+			inst.sg:SetTimeout(GetRandomWithVariance(5, 2))
+			
+			inst:DoTaskInTime(0.5, function(inst)
+				if inst.sg.statemem.action ~= nil and inst.sg.statemem.action.target ~= nil then
+					inst.SoundEmitter:PlaySound(inst.sounds.eat)
+					local dirt = SpawnPrefab("shovel_dirt")
+					dirt.Transform:SetScale(0.8, 0.8, 0.8)
+					dirt.Transform:SetPosition(inst.sg.statemem.action.target.Transform:GetWorldPosition())
+				end
+			end)
+		end,
+		
+		ontimeout = function(inst)
+			inst:PerformBufferedAction()
+			inst.sg:GoToState("idle")
+		end,
+		
+		onexit = function(inst)
+			inst.Physics:SetActive(true)
+		end,
+		
+		events=
+		{
+			EventHandler("animqueueover", function(inst)
+                if inst.AnimState:AnimDone() then
+					inst.AnimState:PlayAnimation("eat_pre")
+					inst.AnimState:PushAnimation("eat_pst", false)
+					
+					inst:DoTaskInTime(0.5, function(inst)
+						if inst.sg.statemem.action ~= nil and inst.sg.statemem.action.target ~= nil then
+							inst.SoundEmitter:PlaySound(inst.sounds.eat)
+							local dirt = SpawnPrefab("shovel_dirt")
+							dirt.Transform:SetScale(0.8, 0.8, 0.8)
+							dirt.Transform:SetPosition(inst.sg.statemem.action.target.Transform:GetWorldPosition())
+						end
+					end)
+                end
+			end),
+		}, 		
+	}, 
 	
 	State {
 		name = "submerge",

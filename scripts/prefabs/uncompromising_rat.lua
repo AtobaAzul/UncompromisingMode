@@ -199,7 +199,8 @@ local function rattargetfn(inst)
 					inst:HasTag("carrying") and
 					guy:HasTag("player") and
 					validitem ~= nil and
-					inst.components.combat:CanTarget(guy)
+					inst.components.combat:CanTarget(guy) and not 
+					(inst.components.follower ~= nil and inst.components.follower.leader == guy)
                 end,
                 nil,
                 RETARGET_CANT_TAGS
@@ -227,7 +228,7 @@ local function PiedPiperBuff(inst)
 		local fx = SpawnPrefab("rat_note")
 		fx.entity:SetParent(inst.entity)
 		fx.entity:AddFollower()
-		fx.Follower:FollowSymbol(inst.GUID, "carrat_body", 0, -180, 0)
+		fx.Follower:FollowSymbol(inst.GUID, "carrat_head", 0, -180, 0)
 	
 		inst.note = fx
 		
@@ -688,7 +689,7 @@ local function packfn()
 	inst:AddTag("raidrat")
 	inst:AddTag("packrat")
 	inst:AddTag("animal")
-	inst:AddTag("hostile")
+	--inst:AddTag("hostile")
 	inst:AddTag("herdmember")
 	inst:AddTag("smallcreature")
 	inst:AddTag("canbetrapped")
@@ -942,14 +943,16 @@ local function MakeRatBurrow(inst)
 			inst.Transform:SetPosition(inst.x1, 0, inst.z1)
 			
 			local x, y, z = inst.Transform:GetWorldPosition()
-	
-			local players = #TheSim:FindEntities(x, y, z, 30, { "player" })
-					
-			if players < 1 then
-				local piper = SpawnPrefab("pied_rat")
-					
-				piper.Transform:SetPosition(inst.Transform:GetWorldPosition())
-				inst.components.herd:AddMember(piper)
+			
+			if math.random() >= 0.7 then
+				local players = #TheSim:FindEntities(x, y, z, 30, { "player" })
+						
+				if players < 1 then
+					local piper = SpawnPrefab("pied_rat")
+						
+					piper.Transform:SetPosition(inst.Transform:GetWorldPosition())
+					inst.components.herd:AddMember(piper)
+				end
 			end
 			
 			break
@@ -1386,11 +1389,13 @@ local function SlumberParty(inst)
 			
 			local players = #TheSim:FindEntities(x, y, z, 30, { "player" })
 			
-			if players < 1 then
-				local piper = SpawnPrefab("pied_rat")
-			
-				piper.Transform:SetPosition(inst.Transform:GetWorldPosition())
-				burrow.components.herd:AddMember(piper)
+			if math.random() >= 0.7 then
+				if players < 1 then
+					local piper = SpawnPrefab("pied_rat")
+				
+					piper.Transform:SetPosition(inst.Transform:GetWorldPosition())
+					burrow.components.herd:AddMember(piper)
+				end
 			end
 			
 			for i, b in ipairs(inst.components.herd.members) do

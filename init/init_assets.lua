@@ -102,6 +102,9 @@ Assets = {
 	
 	Asset("ANIM", "anim/pied_piper.zip"),
 	Asset("ANIM", "anim/rat_note.zip"),
+	Asset("ANIM", "anim/pied_piper_flute.zip"),
+	Asset("IMAGE", "images/inventoryimages/pied_piper_flute.tex"),
+	Asset("ATLAS", "images/inventoryimages/pied_piper_flute.xml"),	
 	Asset("ANIM", "anim/uncompromising_packrat_water.zip"),
 	Asset("ANIM", "anim/uncompromising_packrat.zip"),
 	Asset("ANIM", "anim/uncompromising_packrat_water.zip"),

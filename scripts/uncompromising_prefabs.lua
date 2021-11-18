@@ -281,4 +281,5 @@ return {
 	"confighealbuff",
 	"shockstundebuffimmunity",
 	"pied_rat",
+	"pied_piper_flute",
 }

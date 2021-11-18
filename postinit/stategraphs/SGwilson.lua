@@ -76,6 +76,17 @@ inst.actionhandlers[ACTIONS.CASTSPELL].deststate =
             end
 			return _OldSpellCast(inst, action, ...)
         end
+
+local _OldPlay = inst.actionhandlers[ACTIONS.PLAY].deststate
+inst.actionhandlers[ACTIONS.PLAY].deststate = 
+        function(inst, action, ...)
+			if action.invobject ~= nil then
+				if action.invobject:HasTag("pied_piper_flute") then
+                    return "play_pied_piper_flute"
+				end
+			end
+			return _OldPlay(inst, action, ...)
+        end
 		
 
 local _OldDeathEvent = inst.events["death"].fn
@@ -349,6 +360,47 @@ State{
                
     },
 	
+	State{
+        name = "play_pied_piper_flute",
+        tags = { "doing", "playing" },
+
+        onenter = function(inst)
+            inst.components.locomotor:Stop()
+            inst.AnimState:PlayAnimation("action_uniqueitem_pre")
+            inst.AnimState:PushAnimation("whistle", false)
+            inst.AnimState:OverrideSymbol("hound_whistle01", "pied_piper_flute", "hound_whistle01")
+            --inst.AnimState:Hide("ARM_carry")
+            inst.AnimState:Show("ARM_normal")
+            inst.components.inventory:ReturnActiveActionItem(inst.bufferedaction ~= nil and inst.bufferedaction.invobject or nil)
+        end,
+
+        timeline =
+        {
+            TimeEvent(20 * FRAMES, function(inst)
+                if inst:PerformBufferedAction() then
+                    inst.SoundEmitter:PlaySound("UCSounds/piedpiper/play")
+                else
+                    inst.AnimState:SetTime(34 * FRAMES)
+                end
+            end),
+        },
+
+        events =
+        {
+            EventHandler("animqueueover", function(inst)
+                if inst.AnimState:AnimDone() then
+                    inst.sg:GoToState("idle")
+                end
+            end),
+        },
+
+        onexit = function(inst)
+            if inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) then
+                inst.AnimState:Show("ARM_carry")
+                inst.AnimState:Hide("ARM_normal")
+            end
+        end,
+    },
 	
 	State{
         name = "force_klaus_attack",

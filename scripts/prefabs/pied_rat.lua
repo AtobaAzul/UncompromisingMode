@@ -6,6 +6,16 @@ local assets =
 }
 local brain = require "brains/pied_ratbrain"
 
+
+SetSharedLootTable("pied_rat",
+{
+	{"monstermeat",		1.00},
+	{"monstermeat",		1.00},
+	{"pied_piper_flute",		0.75},
+	{"rat_tail",		1.00},
+	{"disease_puff",		1.00},
+})
+
 local function OnAttacked(inst, data)
 	if not inst:HasTag("packrat") then
 		inst.components.combat:SetTarget(data.attacker)
@@ -25,10 +35,14 @@ local function rattargetfn(inst)
                 function(guy)
 					inst.components.combat:CanTarget(guy)
                 end,
-                nil,
+                { "player" },
                 RETARGET_CANT_TAGS
             )
         or nil
+end
+
+local function KeepTarget(inst, target)
+    return target ~= nil and inst:IsNear(target, 30)
 end
 
 local TARGETS_MUST_TAGS = {"player"}
@@ -108,7 +122,7 @@ local function fn()
     inst:SetStateGraph("SGpied_rat")
 
     inst:AddComponent("lootdropper")	--must be initialized so it doesn't crash
-
+	inst.components.lootdropper:SetChanceLootTable('pied_rat')
 
     ---------------------        
     MakeMediumBurnableCharacter(inst, "body")
@@ -117,7 +131,7 @@ local function fn()
     ---------------------       
 
     inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(300)
+	inst.components.health:SetMaxHealth(600)
 	
     inst:AddComponent("combat")
 	inst.components.combat:SetDefaultDamage(1)
@@ -125,6 +139,7 @@ local function fn()
 	inst.components.combat:SetRange(12)
 	inst.components.combat.hiteffectsymbol = "body"
 	inst.components.combat:SetRetargetFunction(3, rattargetfn)
+    inst.components.combat:SetKeepTargetFunction(KeepTarget)
 	
 	inst:ListenForEvent("attacked", OnAttacked)
 	

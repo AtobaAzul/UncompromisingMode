@@ -128,11 +128,11 @@ local function workcallback(inst, worker, workleft)
 		worker.components.health:DoDelta(-2)
 	end
 	
-	if inst.components.workable.workleft == 0.5 then
+	if inst.components.workable.workleft > 0 and inst.components.workable.workleft < 1 then
 		inst.components.workable.workleft = 0
-	elseif inst.components.workable.workleft == 1.5 then
+	elseif inst.components.workable.workleft > 1 and inst.components.workable.workleft < 2 then
 		inst.components.workable.workleft = 1
-	elseif inst.components.workable.workleft == 2.5 then
+	elseif inst.components.workable.workleft > 2 and inst.components.workable.workleft < 3 then
 		inst.components.workable.workleft = 2
 	end
 

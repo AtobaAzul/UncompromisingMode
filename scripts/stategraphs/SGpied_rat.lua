@@ -55,7 +55,7 @@ end
 local function GatherFollowers(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	
-	local ents = TheSim:FindEntities(x, y, z, TUNING.DSTU.PIEDPIPER_TOOT_RANGE, { "raidrat" })
+	local ents = TheSim:FindEntities(x, y, z, TUNING.DSTU.PIEDPIPER_TOOT_RANGE, { "raidrat", "hostile" })
     
 	for i, v in ipairs(ents) do
         if v.prefab == "uncompromising_rat" and v.components.follower ~= nil then
@@ -282,7 +282,7 @@ local states=
         onenter = function(inst)
             inst.AnimState:PlayAnimation("death")
             inst.Physics:Stop()
-            --inst.components.lootdropper:DropLoot(inst:GetPosition())
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
             
             RemovePhysicsColliders(inst)
             inst.persists = false
