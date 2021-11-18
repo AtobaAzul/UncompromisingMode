@@ -212,7 +212,7 @@ TUNING.DSTU =
 	--Ancient Trepidations
 	TREPIDATIONS = GetModConfigData("trepidations"),
 	
-	--Ancient Trepidations
+	--Pawns
 	PAWNS = GetModConfigData("pawns"),	
 	
 	--Spiders
