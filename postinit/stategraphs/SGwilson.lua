@@ -424,6 +424,7 @@ State{
                 if equip ~= nil and (equip.components.projectile ~= nil or equip:HasTag("rangedweapon")) then
                     inst.AnimState:PlayAnimation("player_atk_pre")
                     inst.AnimState:PushAnimation("player_atk", false)
+
                     if (equip.projectiledelay or 0) > 0 then
                         --V2C: Projectiles don't show in the initial delayed frames so that
                         --     when they do appear, they're already in front of the player.
@@ -453,12 +454,37 @@ State{
                     DoMountSound(inst, inst.components.rider:GetMount(), "angry", true)
                     cooldown = math.max(cooldown, 16 * FRAMES)
                 end
+            elseif equip ~= nil and equip:HasTag("toolpunch") then
+
+                -- **** ANIMATION WARNING ****
+                -- **** ANIMATION WARNING ****
+                -- **** ANIMATION WARNING ****
+
+                --  THIS ANIMATION LAYERS THE LANTERN GLOW UNDER THE ARM IN THE UP POSITION SO CANNOT BE USED IN STANDARD LANTERN GLOW ANIMATIONS.
+                
+                inst.AnimState:PlayAnimation("toolpunch")
+                inst.sg.statemem.istoolpunch = true
+                inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_whoosh", nil, inst.sg.statemem.attackvol, true)
+                cooldown = math.max(cooldown, 13 * FRAMES)
             elseif equip ~= nil and equip:HasTag("whip") then
                 inst.AnimState:PlayAnimation("whip_pre")
                 inst.AnimState:PushAnimation("whip", false)
                 inst.sg.statemem.iswhip = true
-                inst.SoundEmitter:PlaySound("dontstarve/common/whip_large", nil, nil, true)
+                inst.SoundEmitter:PlaySound("dontstarve/common/whip_pre", nil, nil, true)
                 cooldown = math.max(cooldown, 17 * FRAMES)
+			elseif equip ~= nil and equip:HasTag("pocketwatch") then
+				inst.AnimState:PlayAnimation(inst.sg.statemem.chained and "pocketwatch_atk_pre_2" or "pocketwatch_atk_pre" )
+				inst.AnimState:PushAnimation("pocketwatch_atk", false)
+				inst.sg.statemem.ispocketwatch = true
+				cooldown = math.max(cooldown, 15 * FRAMES)
+                if equip:HasTag("shadow_item") then
+	                inst.SoundEmitter:PlaySound("wanda2/characters/wanda/watch/weapon/pre_shadow", nil, nil, true)
+					inst.AnimState:Show("pocketwatch_weapon_fx")
+					inst.sg.statemem.ispocketwatch_fueled = true
+                else
+	                inst.SoundEmitter:PlaySound("wanda2/characters/wanda/watch/weapon/pre", nil, nil, true)
+					inst.AnimState:Hide("pocketwatch_weapon_fx")
+                end
             elseif equip ~= nil and equip:HasTag("book") then
                 inst.AnimState:PlayAnimation("attack_book")
                 inst.sg.statemem.isbook = true

@@ -28,7 +28,7 @@ local function OnAttacked(inst, data)
 	end, 10)
 end
 
-local RETARGET_CANT_TAGS = { "wall", "raidrat"}
+local RETARGET_CANT_TAGS = { "wall", "raidrat", "INLIMBO"}
 local function rattargetfn(inst)
     return FindEntity(
                 inst, 15,
@@ -138,7 +138,7 @@ local function fn()
 	inst.components.combat:SetAttackPeriod(5)
 	inst.components.combat:SetRange(12)
 	inst.components.combat.hiteffectsymbol = "body"
-	inst.components.combat:SetRetargetFunction(3, rattargetfn)
+	inst.components.combat:SetRetargetFunction(1, rattargetfn)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
 	
 	inst:ListenForEvent("attacked", OnAttacked)

@@ -1,7 +1,6 @@
 local assets =
 {
     Asset("ANIM", "anim/deerclops_laser_hit_sparks_fx.zip"),
-    Asset("ANIM", "anim/deerclops_laser_hit_sparks_fx_blue.zip"),
 }
 
 local assets_scorch =
@@ -16,9 +15,9 @@ local assets_trail =
 
 local prefabs =
 {
-    "deerclops_laserscorch",
-    "deerclops_lasertrail",
-    "deerclops_laserhit",
+    "eyeofterror_laserscorch",
+    "eyeofterror_lasertrail",
+    "eyeofterror_laserhit",
 }
 
 local LAUNCH_SPEED = .2
@@ -37,15 +36,9 @@ local DAMAGE_ONEOF_TAGS = { "_combat", "pickable", "NPC_workable", "CHOP_workabl
 local LAUNCH_MUST_TAGS = { "_inventoryitem" }
 local LAUNCH_CANT_TAGS = { "locomotor", "INLIMBO" }
 
-local function DoSpawnIceSpike(inst, x, z)
-    SpawnPrefab("icespike_fx_"..tostring(math.random(1, 4))).Transform:SetPosition(x, 0, z)
-end
-
 local function DoDamage(inst, targets, skiptoss)
     inst.task = nil
-	if inst.deerclops ~= nil then
-	inst.deerclops:ForceFacePoint(inst.Transform:GetWorldPosition())
-	end
+
     local x, y, z = inst.Transform:GetWorldPosition()
     if inst.AnimState ~= nil then
         inst.AnimState:PlayAnimation("hit_"..tostring(math.random(5)))
@@ -55,17 +48,11 @@ local function DoDamage(inst, targets, skiptoss)
         inst.Light:Enable(true)
         inst:DoTaskInTime(4 * FRAMES, SetLightRadius, .5)
         inst:DoTaskInTime(5 * FRAMES, DisableLight)
-		
-		--SpawnIceFx(inst)
-        --SpawnPrefab("deerclops_laserscorch_blue").Transform:SetPosition(x, 0, z)
-		
-        local fx = SpawnPrefab("deerclops_lasertrail_blue")
-		if inst.ice ~= nil then
-		fx.nosound = true
-		end
+
+        SpawnPrefab("eyeofterror_laserscorch").Transform:SetPosition(x, 0, z)
+        local fx = SpawnPrefab("eyeofterror_lasertrail")
         fx.Transform:SetPosition(x, 0, z)
         fx:FastForward(GetRandomMinMax(.3, .7))
-		
     else
         inst:DoTaskInTime(2 * FRAMES, inst.Remove)
     end
@@ -120,38 +107,35 @@ local function DoDamage(inst, targets, skiptoss)
                     targets[v] = true
                     if inst.caster ~= nil and inst.caster:IsValid() then
                         inst.caster.components.combat.ignorehitrange = true
-						if not v:HasTag("deerclops") then
+						
+						if not v:HasTag("eyeofterror") then
 							inst.caster.components.combat:DoAttack(v)
 						end
+						
                         inst.caster.components.combat.ignorehitrange = false
                     else
-						if not v:HasTag("deerclops") then
+						if not v:HasTag("eyeofterror") then
 							inst.components.combat:DoAttack(v)
 						end
                     end
                     if v:IsValid() then
-                        SpawnPrefab("deerclops_laserhit_blue"):SetTarget(v)
+                        SpawnPrefab("eyeofterror_laserhit"):SetTarget(v)
                         if not v.components.health:IsDead() then
-							if v.components.freezable ~= nil then
-								if v.components.freezable:IsFrozen() then
-									v:AddTag("deerclops_freezepass")
-									v:DoTaskInTime(0.5,function(v) v:RemoveTag("deerclops_freezepass") end)
-								end
-								if not v:HasTag("deerclops_freezepass") then
-									--v.components.freezable:AddColdness(1.1)	
-								end
-							end
+                            if v.components.freezable ~= nil then
+                                if v.components.freezable:IsFrozen() then
+                                    v.components.freezable:Unfreeze()
+                                elseif v.components.freezable.coldness > 0 then
+                                    v.components.freezable:AddColdness(-2)
+                                end
+                            end
                             if v.components.temperature ~= nil then
-								local mintemp = math.max(v.components.temperature.mintemp, 0)
-								local curtemp = v.components.temperature:GetCurrent()
-								if mintemp < curtemp then
-									v.components.temperature:DoDelta(math.max(-5, mintemp - curtemp))
+                                local maxtemp = math.min(v.components.temperature:GetMax(), 10)
+                                local curtemp = v.components.temperature:GetCurrent()
+                                if maxtemp > curtemp then
+                                    v.components.temperature:DoDelta(math.min(10, maxtemp - curtemp))
                                 end
                             end
                         end
-						if v.components.freezable ~= nil then
-							v.components.freezable:SpawnShatterFX()
-						end
                     end
                 end
             end
@@ -201,7 +185,7 @@ local function common_fn(isempty)
     if not isempty then
         inst.entity:AddAnimState()
         inst.AnimState:SetBank("deerclops_laser_hits_sparks")
-        inst.AnimState:SetBuild("deerclops_laser_hit_sparks_fx_blue")
+        inst.AnimState:SetBuild("deerclops_laser_hit_sparks_fx")
         inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
         inst.AnimState:SetLightOverride(1)
 
@@ -209,7 +193,7 @@ local function common_fn(isempty)
         inst.Light:SetIntensity(.6)
         inst.Light:SetRadius(1)
         inst.Light:SetFalloff(.7)
-        inst.Light:SetColour(0, .2, 1)
+        inst.Light:SetColour(1, .2, .3)
         inst.Light:Enable(false)
     end
 
@@ -218,7 +202,7 @@ local function common_fn(isempty)
     inst:AddTag("notarget")
     inst:AddTag("hostile")
 
-    inst:SetPrefabNameOverride("deerclops")
+    inst:SetPrefabNameOverride("eyeofterror1")
 
     inst.entity:SetPristine()
 
@@ -255,7 +239,7 @@ local function Scorch_OnFadeDirty(inst)
     if inst._fade:value() > SCORCH_FADE_FRAMES + SCORCH_DELAY_FRAMES then
         local k = (inst._fade:value() - SCORCH_FADE_FRAMES - SCORCH_DELAY_FRAMES) / SCORCH_RED_FRAMES
         inst.AnimState:OverrideMultColour(1, 1, 1, 1)
-        inst.AnimState:SetHighlightColour(0, 0, k, 0)
+        inst.AnimState:SetHighlightColour(k, 0, 0, 0)
     elseif inst._fade:value() >= SCORCH_FADE_FRAMES then
         inst.AnimState:OverrideMultColour(1, 1, 1, 1)
         inst.AnimState:SetHighlightColour()
@@ -296,7 +280,7 @@ local function scorchfn()
     inst:AddTag("NOCLICK")
     inst:AddTag("FX")
 
-    inst._fade = net_byte(inst.GUID, "deerclops_laserscorch._fade", "fadedirty")
+    inst._fade = net_byte(inst.GUID, "eyeofterror_laserscorch._fade", "fadedirty")
     inst._fade:set(SCORCH_RED_FRAMES + SCORCH_DELAY_FRAMES + SCORCH_FADE_FRAMES)
 
     inst:DoPeriodicTask(0, Scorch_OnUpdateFade)
@@ -331,27 +315,23 @@ local function trailfn()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
     inst:AddTag("FX")
     inst:AddTag("NOCLICK")
-	
-    inst.AnimState:SetBank("deerclops_icespike")
-    inst.AnimState:SetBuild("deerclops_icespike")
-    inst.AnimState:PlayAnimation("spike"..math.random(1,4))
+
+    inst.AnimState:SetBank("lavaarena_staff_smoke_fx")
+    inst.AnimState:SetBuild("lavaarena_staff_smoke_fx")
+    inst.AnimState:PlayAnimation("idle")
+    inst.AnimState:SetAddColour(1, 0, 0, 0)
+    inst.AnimState:SetMultColour(1, 0, 0, 1)
+    inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
 
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-	
-	inst:DoTaskInTime(0,function(inst) 
-	if inst.nosound == nil then
-		inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/ice_small")
-	end 
-	end)
 
     inst.persists = false
     inst._task = inst:DoTaskInTime(inst.AnimState:GetCurrentAnimationLength() + 2 * FRAMES, inst.Remove)
@@ -383,9 +363,9 @@ local function UpdateHit(inst, target)
         if inst.flash > 0 then
             local c = math.min(1, inst.flash)
             if target.components.colouradder ~= nil then
-                target.components.colouradder:PushColour(inst, 0, 0, c, 0)
+                target.components.colouradder:PushColour(inst, c, 0, 0, 0)
             else
-                target.AnimState:SetAddColour(0, 0, c, 0)
+                target.AnimState:SetAddColour(c, 0, 0, 0)
             end
             if inst.flash < .3 and oldflash >= .3 then
                 if target.components.bloomer ~= nil then
@@ -414,8 +394,8 @@ local function SetTarget(inst, target)
             target.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
         end
         inst.flash = .8 + math.random() * .4
-        --inst:DoPeriodicTask(0, UpdateHit, nil, target)
-        --UpdateHit(inst, target)
+        inst:DoPeriodicTask(0, UpdateHit, nil, target)
+        UpdateHit(inst, target)
     end
 end
 
@@ -432,8 +412,8 @@ local function hitfn()
     return inst
 end
 
-return Prefab("deerclops_laser_blue", fn, assets, prefabs),
-    Prefab("deerclops_laserempty_blue", emptyfn, assets, prefabs),
-    Prefab("deerclops_laserscorch_blue", scorchfn, assets_scorch),
-    Prefab("deerclops_lasertrail_blue", trailfn, assets_trail),
-    Prefab("deerclops_laserhit_blue", hitfn)
+return Prefab("eyeofterror_laser", fn, assets, prefabs),
+    Prefab("eyeofterror_laserempty", emptyfn, assets, prefabs),
+    Prefab("eyeofterror_laserscorch", scorchfn, assets_scorch),
+    Prefab("eyeofterror_lasertrail", trailfn, assets_trail),
+    Prefab("eyeofterror_laserhit", hitfn)

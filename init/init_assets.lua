@@ -9,6 +9,8 @@ Assets = {
 	--Asset("IMAGE", "images/inventoryimages/turf_jungle.tex"),
 	----Turf
 
+    Asset("ANIM", "anim/eyeofterror_UM.zip"),
+    --Asset("ANIM", "anim/eyeofterror_shooting.zip"),
 
     -- Livingtree root attack custom art by @Advent (modded from poison birchnut roots)
     Asset("ANIM", "anim/tree_leaf_spike_lt.zip"),

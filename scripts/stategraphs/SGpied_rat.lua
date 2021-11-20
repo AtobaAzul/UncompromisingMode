@@ -60,6 +60,14 @@ local function GatherFollowers(inst)
 	for i, v in ipairs(ents) do
         if v.prefab == "uncompromising_rat" and v.components.follower ~= nil then
 			v.components.follower:SetLeader(inst)
+			
+			if v.components.combat.target ~= nil and v.components.combat.target == inst then
+				v.components.combat:GiveUp()
+			end
+			
+			if inst.components.combat.target ~= nil and inst.components.combat.target == v then
+				inst.components.combat:GiveUp()
+			end
         end
     end
 end
@@ -72,6 +80,14 @@ local function DoBuff(inst, number)
         if v.prefab == "uncompromising_rat" and v.note == nil then
 			v:PiedPiperBuff()
 			
+			if v.components.combat.target ~= nil and v.components.combat.target == inst then
+				v.components.combat:GiveUp()
+			end
+			
+			if inst.components.combat.target ~= nil and inst.components.combat.target == v then
+				inst.components.combat:GiveUp()
+			end
+
 			break
         end
     end

@@ -282,4 +282,6 @@ return {
 	"shockstundebuffimmunity",
 	"pied_rat",
 	"pied_piper_flute",
+	"eyeofterror_laser",
+	"eyeofterror_fireball",
 }

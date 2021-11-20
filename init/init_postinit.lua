@@ -157,6 +157,7 @@ local stategraph_post = {
 	"merm",
 	"carnival_host",
 	"catcoon",
+	"eyeofterror",
 }
 
 local class_post = {
