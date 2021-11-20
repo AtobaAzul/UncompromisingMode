@@ -280,7 +280,7 @@ local function onnear(inst, target)
 	inst.target = target
 	
 	inst.neartask = inst:DoPeriodicTask(0.1, function(inst) 
-		if not inst.components.freezable:IsFrozen() and inst.target ~= nil and inst.components.health ~= nil and not inst.components.health:IsDead() and not inst.sg.currentstate.name == "hit" then
+		if not inst.components.freezable:IsFrozen() and inst.target ~= nil and inst.components.health ~= nil and not inst.components.health:IsDead() then
 			inst.neartask:Cancel()
 			SpawnSpikes(inst.target)
 			SpawnAmalgams(inst.target)
