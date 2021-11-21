@@ -230,6 +230,17 @@ local states = {
             -- All users of this SG share this sound.
             inst.SoundEmitter:PlaySound("terraria1/eyeofterror/charge_pre_sfx")
             inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/charge")
+			
+			local x, y, z = inst.Transform:GetWorldPosition()
+			local chargepulse = SpawnPrefab("eyeofterror_chargepulse")
+			chargepulse.Transform:SetPosition(x, 0, z)
+			
+			if inst.prefab == "twinofterror1" then
+				chargepulse.AnimState:SetMultColour(1, 0.3, 0.3, 1)
+			elseif inst.prefab == "twinofterror2" then
+				chargepulse.AnimState:SetMultColour(0.6, 1, 0.6, 1)
+			end
+			
         end,
 
         onupdate = function(inst)
@@ -263,7 +274,7 @@ local states = {
 
             inst.AnimState:PlayAnimation("charge_loop")--, true)
             inst.SoundEmitter:PlaySound(inst._soundpath .. "charge_eye")
-
+			
             --inst.Physics:SetMotorVelOverride(inst._chargedata.eyechargespeed, 0, 0)
 
             --inst.sg:SetTimeout(inst._chargedata.eyechargetimeout)

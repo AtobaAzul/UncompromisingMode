@@ -265,6 +265,42 @@ local function cursedfirespawnfn()
     return inst
 end
 
+local function chargepulsefn()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    --inst.entity:AddLight()
+    inst.entity:AddNetwork()
+	--[[
+    inst.Light:Enable(true)
+    inst.Light:SetRadius(3)
+    inst.Light:SetFalloff(.25)
+    inst.Light:SetIntensity(.8)
+    inst.Light:SetColour(0/255, 255/255, 0/255)]]
+
+    --inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+    inst.AnimState:SetBank("moon_altar_geyser")
+    inst.AnimState:SetBuild("moon_geyser")
+    inst.AnimState:PlayAnimation("moonpulse")
+	inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+
+    inst:AddTag("FX")
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst:ListenForEvent("animover", inst.Remove)
+	
+	inst.persists = false
+
+    return inst
+end
+
 local COLLAPSIBLE_TAGS = { "_combat", "NPC_workable" }
 local NON_COLLAPSIBLE_TAGS = { "eyeofterror", "shadow", "playerghost", "FX", "NOCLICK", "DECOR", "INLIMBO" }
 
@@ -381,4 +417,5 @@ return Prefab("eyeofterror_fireball", fn, assets, prefabs),
 		Prefab("cursed_fire", cursedfirefn, assets, prefabs),
 		Prefab("cursed_firesplash", cursedfiresplashfn, assets, prefabs),
 		Prefab("cursed_firespawn", cursedfirespawnfn, assets, prefabs),
+		Prefab("eyeofterror_chargepulse", chargepulsefn, assets, prefabs),
 		Prefab("eyeofterror_minieye_projectile", fneye_proj, assets, prefabs)
