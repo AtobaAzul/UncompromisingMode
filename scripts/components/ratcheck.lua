@@ -61,24 +61,25 @@ function self:OnPostInit()										--VVVV-- INPUT CONFIG BOOL HERE
 	end
 end]]
 
-local function ChangeRatTimer(data)
+local function ChangeRatTimer(src, data)
 
 	local value = data ~= nil and data.value ~= nil and data.value or 240
 
-	
-	if _worldsettingstimer:GetTimeLeft(RATRAID_TIMERNAME) ~= nil then
+	print(value)
+	--if _worldsettingstimer:GetTimeLeft(RATRAID_TIMERNAME) ~= nil then
+		print("raid timer exists")
 		local currenttime = _worldsettingstimer:GetTimeLeft(RATRAID_TIMERNAME)
 		local timeleft = (currenttime - value)
 		
 		print(currenttime)
 		print(timeleft)
 		
-		if timeleft <= 0 then
-			_worldsettingstimer:SetTimeLeft(RATRAID_TIMERNAME, 1)
-		else
+		--if timeleft <= 0 then
+		--	_worldsettingstimer:SetTimeLeft(RATRAID_TIMERNAME, 1)
+		--else
 			_worldsettingstimer:SetTimeLeft(RATRAID_TIMERNAME, timeleft)
-		end
-	end
+		--end
+	--end
 		
 			
 
@@ -361,7 +362,7 @@ local function StartRespawnTimer()
 	
     if _worldsettingstimer ~= nil and not _worldsettingstimer:ActiveTimerExists(RATRAID_TIMERNAME) then
 		_worldsettingstimer:AddTimer(RATRAID_TIMERNAME, _initialrattimer, true, CooldownRaid)
-		--_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _initialrattimer)
+		_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _initialrattimer)
     end
 end
 
@@ -370,7 +371,7 @@ StartRespawnTimer()
 
 local function OnPlayerJoined()
 	if not _worldsettingstimer:ActiveTimerExists(RATRAID_TIMERNAME) then
-		--_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _initialrattimer)
+		_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _initialrattimer)
 	end
 end
 
