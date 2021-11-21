@@ -726,6 +726,8 @@ Assets = {
 
 	Asset("ANIM", "anim/oculet.zip"),
 	Asset("ANIM", "anim/oculet_ground.zip"),
+	Asset("IMAGE", "images/inventoryimages/oculet.tex"),
+	Asset("ATLAS", "images/inventoryimages/oculet.xml"),
 	
 
 	Asset( "IMAGE", "bigportraits/willow.tex" ),
