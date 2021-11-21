@@ -724,6 +724,8 @@ Assets = {
 	Asset( "ATLAS", "images/map_icons/uncompromising_ratburrow.xml"),
 	--Map Icons End--
 
+	Asset("ANIM", "anim/oculet.zip"),
+	Asset("ANIM", "anim/oculet_ground.zip"),
 	
 
 	Asset( "IMAGE", "bigportraits/willow.tex" ),

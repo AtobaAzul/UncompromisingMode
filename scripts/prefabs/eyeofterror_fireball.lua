@@ -41,6 +41,8 @@ local function OnHitFire(inst, attacker, target)
 end
 
 local function onthrown(inst)
+	local fx = SpawnPrefab("cursed_firespawn")
+	fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
     inst:AddTag("NOCLICK")
     inst.persists = false
 end
@@ -214,6 +216,48 @@ local function cursedfiresplashfn()
         return inst
     end
 	
+	inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
+	
+	inst:ListenForEvent("animover", inst.Remove)
+	
+	inst.persists = false
+
+    return inst
+end
+
+local function cursedfirespawnfn()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    --inst.entity:AddLight()
+    inst.entity:AddNetwork()
+	--[[
+    inst.Light:Enable(true)
+    inst.Light:SetRadius(3)
+    inst.Light:SetFalloff(.25)
+    inst.Light:SetIntensity(.8)
+    inst.Light:SetColour(0/255, 255/255, 0/255)]]
+
+    --inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+    inst.AnimState:SetBank("halloween_embers")
+    inst.AnimState:SetBuild("halloween_embers")
+    inst.AnimState:PlayAnimation("puff_"..math.random(3))
+    inst.AnimState:SetRayTestOnBB(true)
+    inst.AnimState:SetFinalOffset(FINALOFFSET_MAX)
+	inst.AnimState:SetMultColour(0, 1, 0, 0.5)
+
+    inst:AddTag("FX")
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
+	
 	inst:ListenForEvent("animover", inst.Remove)
 	
 	inst.persists = false
@@ -336,4 +380,5 @@ end
 return Prefab("eyeofterror_fireball", fn, assets, prefabs),
 		Prefab("cursed_fire", cursedfirefn, assets, prefabs),
 		Prefab("cursed_firesplash", cursedfiresplashfn, assets, prefabs),
+		Prefab("cursed_firespawn", cursedfirespawnfn, assets, prefabs),
 		Prefab("eyeofterror_minieye_projectile", fneye_proj, assets, prefabs)

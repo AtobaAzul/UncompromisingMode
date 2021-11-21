@@ -23,7 +23,7 @@ local _respawntimeremaining = nil
 local ratwarning = nil
 --local _initialrattimer = 24000
 local _initialrattimer = TUNING.DSTU.RATRAID_TIMERSTART --33600
-local _ratsnifftimer = TUNING.DSTU.RATSNIFFER_TIMER --4800
+local _ratsnifftimer = 4800
 local _ratburrows = 1
 
 local _worldsettingstimer = TheWorld.components.worldsettingstimer
@@ -120,7 +120,6 @@ local function MakeRatBurrow(inst)
 			TheFocalPoint.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/reaction")
 		
 			local ratburrow = SpawnPrefab("uncompromising_ratburrow")
-            TheWorld:PushEvent("rat_sniffer")
 			ratburrow.Transform:SetPosition(inst.x1, 0, inst.z1)
 			
 			local x, y, z = inst.Transform:GetWorldPosition()
@@ -256,7 +255,17 @@ local function ActiveRaid(src, data)
 			
 			if #ents <= 20 then
 				print("CAN'T SPAWN RATS! There aren't enough items around!")
+			else
+				if #TheSim:FindEntities(x, y, z, 30, { "structure" }) > 3 then
+					local ratchecker = TheSim:FindFirstEntityWithTag("rat_sniffer")
+					if ratchecker ~= nil then
+						ratchecker.Transform:SetPosition(x, 0, z)
+					else
+						SpawnPrefab("uncompromising_ratsniffer").Transform:SetPosition(x, 0, z)
+					end
+				end
 			end
+			
 			
 			if data.container.components.container:IsEmpty() then
 				print("CAN'T SPAWN RATS! This container is empty!")
@@ -271,14 +280,7 @@ local function ActiveRaid(src, data)
 			end
 		end
 		
-		if #TheSim:FindEntities(x, y, z, 30, { "structure" }) >= 3 then
-			local ratchecker = TheSim:FindFirstEntityWithTag("rat_sniffer")
-			if ratchecker ~= nil then
-				ratchecker.Transform:SetPosition(x, 0, z)
-			else
-				SpawnPrefab("uncompromising_ratsniffer").Transform:SetPosition(x, 0, z)
-			end
-		end
+		
     end
 end
 
@@ -303,7 +305,7 @@ function self:OnUpdate(dt)
 			--print(_ratsnifftimer)
 			--print(_ratburrows)
 		else
-			_ratsnifftimer = 960
+			_ratsnifftimer = TUNING.DSTU.RATSNIFFER_TIMER
             --TheWorld:PushEvent("rat_sniffer")
 			local ratchecker = TheSim:FindFirstEntityWithTag("rat_sniffer")
 			
@@ -359,7 +361,7 @@ local function StartRespawnTimer()
 	
     if _worldsettingstimer ~= nil and not _worldsettingstimer:ActiveTimerExists(RATRAID_TIMERNAME) then
 		_worldsettingstimer:AddTimer(RATRAID_TIMERNAME, _initialrattimer, true, CooldownRaid)
-		_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _initialrattimer)
+		--_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _initialrattimer)
     end
 end
 
@@ -368,7 +370,7 @@ StartRespawnTimer()
 
 local function OnPlayerJoined()
 	if not _worldsettingstimer:ActiveTimerExists(RATRAID_TIMERNAME) then
-		_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _initialrattimer)
+		--_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _initialrattimer)
 	end
 end
 

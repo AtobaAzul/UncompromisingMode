@@ -1506,6 +1506,8 @@ local function TimeForACheckUp(inst)
 		end
 	end
 	
+	inst.ratscore = inst.ratscore / 2
+	
 	print(inst.ratscore)
 	print("THATS THE NORMAL RAT SCORE")
 	TheWorld:PushEvent("reducerattimer", {value = inst.ratscore})

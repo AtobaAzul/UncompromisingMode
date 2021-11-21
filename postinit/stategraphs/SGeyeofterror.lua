@@ -179,15 +179,15 @@ local function SpawnLaser(inst)
     fx:Trigger((delay + 2) * FRAMES, targets, skiptoss)
 end
 
-local function ShootProjectile(inst)
-	local target = inst.components.combat.target
+local function ShootProjectile(inst, target)
+	local finaltarget = target or inst.components.combat.target
 	
-	if target ~= nil then
+	if finaltarget ~= nil then
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local projectile = SpawnPrefab("eyeofterror_fireball")
 		projectile.Transform:SetPosition(x, y, z)
-		local a, b, c = target.Transform:GetWorldPosition()
-		local targetpos = target:GetPosition()
+		local a, b, c = finaltarget.Transform:GetWorldPosition()
+		local targetpos = finaltarget:GetPosition()
 		targetpos.x = targetpos.x + math.random(-1,1)
 		targetpos.z = targetpos.z + math.random(-1,1)
 		local dx = a - x
@@ -281,17 +281,17 @@ local states = {
 					inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/laser")
 					SpawnLaser(inst)
 				elseif inst.prefab == "twinofterror2" then
-					ShootProjectile(inst)
+					ShootProjectile(inst, inst.sg.statemem.target)
 				end
 			end),
 			TimeEvent(3*FRAMES, function(inst)
 				if inst.prefab == "twinofterror2" then
-					ShootProjectile(inst)
+					ShootProjectile(inst, inst.sg.statemem.target)
 				end
 			end),
 			TimeEvent(6*FRAMES, function(inst)
 				if inst.prefab == "twinofterror2" then
-					ShootProjectile(inst)
+					ShootProjectile(inst, inst.sg.statemem.target)
 				end
 			end),
 			TimeEvent(8*FRAMES, function(inst)
@@ -302,7 +302,7 @@ local states = {
 			end),
 			TimeEvent(9*FRAMES, function(inst)
 				if inst.prefab == "twinofterror2" then
-					ShootProjectile(inst)
+					ShootProjectile(inst, inst.sg.statemem.target)
 				end
 			end),
         },
@@ -347,12 +347,12 @@ local states = {
 					inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/laser")
 					SpawnLaser(inst)
 				elseif inst.prefab == "twinofterror2" then
-					ShootProjectile(inst)
+					ShootProjectile(inst, inst.sg.statemem.target)
 				end
 			end),
 			TimeEvent(3*FRAMES, function(inst)
 				if inst.prefab == "twinofterror2" then
-					ShootProjectile(inst)
+					ShootProjectile(inst, inst.sg.statemem.target)
 				end
 			end),
 			TimeEvent(6*FRAMES, function(inst)
@@ -360,12 +360,12 @@ local states = {
 					inst.SoundEmitter:PlaySound(inst._soundpath .. "charge")
 					ShootEye(inst, inst.sg.statemem.target)
 				elseif inst.prefab == "twinofterror2" then
-					ShootProjectile(inst)
+					ShootProjectile(inst, inst.sg.statemem.target)
 				end
 			end),
 			TimeEvent(9*FRAMES, function(inst)
 				if inst.prefab == "twinofterror2" then
-					ShootProjectile(inst)
+					ShootProjectile(inst, inst.sg.statemem.target)
 				end
 			end),
         },

@@ -1929,10 +1929,17 @@ local function IsEligible(player)
 	
 	local area = player.components.areaaware
 	
+	
+	local terrarium = TheSim:FindFirstEntityWithTag("terrarium")
+	
+	local eyeofterror = terrarium ~= nil and (terrarium.eyeofterror or terrarium._summoning_fx) and true or false
+	
+	
 	return not TheWorld:HasTag("snowstormstart") and not TheWorld.net:HasTag("snowstormstart") and not 
 		player:HasTag("playerghost") and theent == 0 and not (hounding or deerclopsed --[[or beargered]] 
 		or gmoosed or dragonflied) and
 		area:GetCurrentArea() ~= nil
+		and not eyeofterror
 		and not area:CurrentlyInTag("nohasslers")
 end
 
@@ -2085,6 +2092,6 @@ inst:ListenForEvent("ms_playerjoined", OnPlayerJoined)
 inst:ListenForEvent("ms_playerleft", OnPlayerLeft)
 inst:ListenForEvent("seasontick", OnSeasonTick, TheWorld)
 
-self:WatchWorldState("isnight", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end)
-self:WatchWorldState("cycleschanged", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end)
+self:WatchWorldState("isnight", function() self.inst:DoTaskInTime(6, TryRandomNightEvent) end)
+self:WatchWorldState("cycleschanged", function() self.inst:DoTaskInTime(6, TryRandomNightEvent) end)
 end)

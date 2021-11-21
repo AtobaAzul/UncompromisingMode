@@ -284,4 +284,7 @@ return {
 	"pied_piper_flute",
 	"eyeofterror_laser",
 	"eyeofterror_fireball",
+	"oculet",
+	"oculet_pets",
+	"terrarium",
 }

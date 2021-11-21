@@ -137,6 +137,8 @@ local prefab_post = {
 	"farmplants",
 	"rainhat",
 	"darts",
+	"eyeofterror",
+	"terrarium",
 }
 
 local stategraph_post = {
