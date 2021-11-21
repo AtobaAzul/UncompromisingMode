@@ -21,35 +21,29 @@ local function charged(inst)
 	end
 end
 
-local function fuelme(inst)
-	if inst.components.fueled:GetPercent() < 1 then
-		inst.components.fueled:DoDelta(10)
-		if inst.components.fueled:GetPercent() >= 1 then
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/charge")
-			inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/taunt_howl", nil, .4)
-
-			charged(inst)
-			
-			if inst.task ~= nil then
-				inst.task:Cancel()
-				inst.task = nil
-			end
-		end
-	else
-		if inst.task ~= nil then
-			inst.task:Cancel()
-			inst.task = nil
-		end
-	end
+local function OnCharged(inst)
+  local fx = SpawnPrefab("dr_warm_loop_1")
+  
+  local owner = inst.components.inventoryitem.owner
+  
+  if inst.components.equippable:IsEquipped() and owner ~= nil then
+    fx.entity:SetParent(owner.entity)
+    fx.entity:AddFollower()
+    fx.Follower:FollowSymbol(owner.GUID, "swap_object", 0, -275, 0)
+    fx.Transform:SetScale(1.33, 1.33, 1.33)
+  else
+    fx.entity:SetParent(inst.entity)
+        fx.Transform:SetPosition(0, 2.35, 0)
+    fx.Transform:SetScale(1.33, 1.33, 1.33)
+  end
+      inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/charge")
+      inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/taunt_howl", nil, .4)    
 end
 
 local function onunequip(inst, owner)
     owner.AnimState:Hide("ARM_carry")
     owner.AnimState:Show("ARM_normal")
-	
-	if inst.task == nil then
-		inst.task = inst:DoPeriodicTask(0.5, fuelme)
-	end
+
 end
 
 local function onequip(inst, owner)
@@ -71,20 +65,19 @@ local function onequip(inst, owner)
 		if inst.skinname ~= nil then
 			owner.AnimState:OverrideSymbol("swap_object", "swap_twisted_antler", "swap_twisted_antler")
 		else
+
 			owner.AnimState:OverrideSymbol("swap_object", "swap_cursed_antler", "swap_cursed_antler")
 		end
 		
 		owner.AnimState:Show("ARM_carry")
 		owner.AnimState:Hide("ARM_normal")
     end
-	
-	if inst.task == nil then
-		inst.task = inst:DoPeriodicTask(0.5, fuelme)
-	end
+
 end
 
+
 local function onattack(inst, attacker, target)
-    if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and attacker:HasTag("vetcurse") and inst.components.fueled:GetPercent() >= 1 then
+    if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and attacker:HasTag("vetcurse") and inst.components.rechargeable:IsCharged() then
         local x, y, z = target.Transform:GetWorldPosition()
 		local impactfx1 = SpawnPrefab("icespike_fx_1")
 		local impactfx2 = SpawnPrefab("icespike_fx_2")
@@ -118,11 +111,7 @@ local function onattack(inst, attacker, target)
 				end
 			end
 		end
-		--[[
-		if attacker.components.freezable ~= nil then
-			attacker.components.freezable:AddColdness(2)
-		end
-		]]
+
     end
 	
 	
@@ -135,21 +124,16 @@ local function onattack(inst, attacker, target)
 			local vowner = v.components.inventoryitem.owner
 			if vowner ~= nil then
 				if vowner == owner or vowner.components.inventoryitem ~= nil and vowner.components.inventoryitem.owner ~= nil and vowner.components.inventoryitem.owner == owner then
-					v.components.fueled:MakeEmpty()
+					v.components.rechargeable:Discharge(5)
 					
-					if v.task == nil then
-						v.task = v:DoPeriodicTask(0.5, fuelme)
-					end
+
 				end
 			end
 		end
 	end
 	
-	inst.components.fueled:MakeEmpty()
-	
-	if inst.task == nil then
-		inst.task = inst:DoPeriodicTask(0.5, fuelme)
-	end
+    inst.components.rechargeable:Discharge(5)
+
 end
 
 local function fn()
@@ -189,14 +173,9 @@ local function fn()
 	inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 	
-    inst:AddComponent("fueled")
-    inst.components.fueled:InitializeFuelLevel(100)
-	inst.components.fueled.accepting = false
-	
-	if inst.task == nil then
-		inst.task = inst:DoPeriodicTask(0.5, fuelme)
-	end
-	
+    inst:AddComponent("rechargeable")
+    inst.components.rechargeable:SetOnChargedFn(OnCharged)
+
     MakeHauntableLaunch(inst)
 
     return inst
