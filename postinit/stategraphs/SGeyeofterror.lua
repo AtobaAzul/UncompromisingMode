@@ -237,8 +237,10 @@ local states = {
 			
 			if inst.prefab == "twinofterror1" then
 				chargepulse.AnimState:SetMultColour(1, 0.3, 0.3, 1)
+				chargepulse.Light:SetColour(76.5/255, 255/255, 76.5/255)
 			elseif inst.prefab == "twinofterror2" then
-				chargepulse.AnimState:SetMultColour(0.6, 1, 0.6, 1)
+				chargepulse.AnimState:SetMultColour(0.3, 1, 0.3, 1)
+				chargepulse.Light:SetColour(30/255, 255/255, 30/255)
 			end
 			
         end,

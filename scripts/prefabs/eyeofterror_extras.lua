@@ -271,20 +271,21 @@ local function chargepulsefn()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
-    --inst.entity:AddLight()
+    inst.entity:AddLight()
     inst.entity:AddNetwork()
-	--[[
+	
     inst.Light:Enable(true)
     inst.Light:SetRadius(3)
     inst.Light:SetFalloff(.25)
     inst.Light:SetIntensity(.8)
-    inst.Light:SetColour(0/255, 255/255, 0/255)]]
+    inst.Light:SetColour(255/255, 255/255, 255/255)
 
-    --inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+    inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
     inst.AnimState:SetBank("moon_altar_geyser")
     inst.AnimState:SetBuild("moon_geyser")
     inst.AnimState:PlayAnimation("moonpulse")
 	inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+	inst.Transform:SetScale(0.8, 0.8, 0.8)
 
     inst:AddTag("FX")
 

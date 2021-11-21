@@ -1528,25 +1528,27 @@ local function TimeForACheckUp(inst)
 		end
 	end]]
 	if inst.ratwarning >= 1 then
-		if inst.ratwarning > 5 then
-			inst.ratwarning = 5
-		end
-		
-			for c = 1, (inst.ratwarning) do
-				inst:DoTaskInTime((c/5), function(inst)
-					local warning = SpawnPrefab("uncompromising_ratwarning")
-					warning.Transform:SetPosition(inst.Transform:GetWorldPosition())
-					--warning.entity:SetParent(b)
-					--b.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
-					--warning.entity:SetParent(TheFocalPoint.b.entity)
-				end)
+		if math.random() > 0.2 then
+			if inst.ratwarning > 5 then
+				inst.ratwarning = 5
 			end
 			
-		local players = TheSim:FindEntities(x, y, z, 40, {"player"})
-		for a, b in ipairs(players) do
-			b:DoTaskInTime(2+math.random(), function(b)
-				b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER", "LEVEL_"..tostring(RoundToNearest(inst.ratwarning, 1))))
-			end)
+				for c = 1, (inst.ratwarning) do
+					inst:DoTaskInTime((c/5), function(inst)
+						local warning = SpawnPrefab("uncompromising_ratwarning")
+						warning.Transform:SetPosition(inst.Transform:GetWorldPosition())
+						--warning.entity:SetParent(b)
+						--b.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
+						--warning.entity:SetParent(TheFocalPoint.b.entity)
+					end)
+				end
+				
+			local players = TheSim:FindEntities(x, y, z, 40, {"player"})
+			for a, b in ipairs(players) do
+				b:DoTaskInTime(2+math.random(), function(b)
+					b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER", "LEVEL_"..tostring(RoundToNearest(inst.ratwarning, 1))))
+				end)
+			end
 		end
 	end
 end

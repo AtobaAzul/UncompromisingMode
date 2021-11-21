@@ -47,7 +47,7 @@ local function OnIgniteFn(inst)
 	inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo", 0.5)
 		
 	local x, y, z = inst.Transform:GetWorldPosition()
-	local ents = TheSim:FindEntities(x, y, z, 1.5, nil, { "INLIMBO", "shadow", "ghost" })
+	local ents = TheSim:FindEntities(x, y, z, 1.5, { "combat" }, { "INLIMBO", "shadow", "ghost" })
 
 	for i, v in ipairs(ents) do
 		if v ~= inst and v:IsValid() and not v:IsInLimbo() then
