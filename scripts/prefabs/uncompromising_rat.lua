@@ -1093,12 +1093,10 @@ local function OnInitHerd(inst)
 		inst.raiding = true
 	end
 
-	inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck._ratburrows or 0
-	
 	if inst.raiding then
 		for i = 1, 3 do
 			inst:DoTaskInTime((i - 1) * 15, function(inst)
-				for i = 1, ((3 + inst.ratburrows) / i) do
+				for i = 1, ((3) / i) do
 					local x, y, z = inst.Transform:GetWorldPosition()
 					local angle = math.random() * 8 * PI
 					local rat = SpawnPrefab("uncompromising_rat")
@@ -1506,7 +1504,11 @@ local function TimeForACheckUp(inst)
 		end
 	end
 	
-	inst.ratscore = inst.ratscore / 2
+	inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck._ratburrows or 0
+	inst.burrowbonus = 15 * inst.ratburrows
+	
+	
+	inst.ratscore = (inst.ratscore / 2) + inst.burrowbonus
 	
 	print(inst.ratscore)
 	print("THATS THE NORMAL RAT SCORE")
