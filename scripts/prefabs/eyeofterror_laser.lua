@@ -37,6 +37,13 @@ local LAUNCH_MUST_TAGS = { "_inventoryitem" }
 local LAUNCH_CANT_TAGS = { "locomotor", "INLIMBO" }
 
 local function DoDamage(inst, targets, skiptoss)
+	local function ResetLaserCount(inst)
+		inst.terrorlasercount = 1
+		inst.terrorlasertask:Cancel()
+		inst.terrorlasertask = nil
+	end
+
+
     inst.task = nil
 
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -109,13 +116,41 @@ local function DoDamage(inst, targets, skiptoss)
                         inst.caster.components.combat.ignorehitrange = true
 						
 						if not v:HasTag("eyeofterror") then
-							inst.caster.components.combat:DoAttack(v)
+							if v.terrorlasertask ~= nil then
+								v.terrorlasercount = v.terrorlasercount + 1
+								v.terrorlasertask:Cancel()
+								v.terrorlasertask = nil
+								v.terrorlasertask = v:DoTaskInTime(3, ResetLaserCount)
+							else
+								v.terrorlasercount = 1
+								v.terrorlasertask = v:DoTaskInTime(3, ResetLaserCount)
+							end
+							
+							local dmg = 100 / v.terrorlasercount
+							print("Damage = ")
+							print(dmg)
+							
+							v.components.combat:GetAttacked(inst, dmg, nil)
 						end
 						
                         inst.caster.components.combat.ignorehitrange = false
                     else
 						if not v:HasTag("eyeofterror") then
-							inst.components.combat:DoAttack(v)
+							if v.terrorlasertask ~= nil then
+								v.terrorlasercount = v.terrorlasercount + 1
+								v.terrorlasertask:Cancel()
+								v.terrorlasertask = nil
+								v.terrorlasertask = v:DoTaskInTime(3, ResetLaserCount)
+							else
+								v.terrorlasercount = 1
+								v.terrorlasertask = v:DoTaskInTime(3, ResetLaserCount)
+							end
+							
+							local dmg = 150 / v.terrorlasercount
+							print("Damage = ")
+							print(dmg)
+							
+							v.components.combat:GetAttacked(inst, dmg, nil)
 						end
                     end
                     if v:IsValid() then
