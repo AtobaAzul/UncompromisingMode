@@ -245,11 +245,7 @@ local states = {
 		timeline =
         {
 			TimeEvent(0, function(inst) 
-				
-				if inst.prefab == "eyeofterror" then
-					ShootEye(inst, inst.sg.statemem.target)
-					inst.SoundEmitter:PlaySound(inst._soundpath .. "charge_eye")
-				elseif inst.prefab == "twinofterror1" then
+				if inst.prefab == "twinofterror1" then
 					inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/laser")
 					SpawnLaser(inst)
 				elseif inst.prefab == "twinofterror2" then
@@ -262,14 +258,11 @@ local states = {
 				end
 			end),
 			TimeEvent(6*FRAMES, function(inst)
-				if inst.prefab == "twinofterror2" then
-					ShootProjectile(inst, inst.sg.statemem.target)
-				end
-			end),
-			TimeEvent(8*FRAMES, function(inst)
 				if inst.prefab == "eyeofterror" then
 					ShootEye(inst, inst.sg.statemem.target)
 					inst.SoundEmitter:PlaySound(inst._soundpath .. "charge_eye")
+				elseif inst.prefab == "twinofterror2" then
+					ShootProjectile(inst, inst.sg.statemem.target)
 				end
 			end),
 			TimeEvent(9*FRAMES, function(inst)

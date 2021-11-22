@@ -863,7 +863,7 @@ local function OnSpawned(inst, newent)
 		inst.components.herd:AddMember(newent)
 	end
 	
-	if TheWorld.state.cycles > 50 then
+	--[[if TheWorld.state.cycles > 50 then
 		local x, y, z = inst.Transform:GetWorldPosition()
 		
 		local ents = #TheSim:FindEntities(x, y, z, 40, {"player"})
@@ -874,7 +874,7 @@ local function OnSpawned(inst, newent)
 				inst.components.periodicspawner:TrySpawn("uncompromising_buffrat")
 			end
 		end
-	end
+	end]]
 end
 
 local function BurrowKilled(inst)

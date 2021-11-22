@@ -182,7 +182,6 @@ local function cursedfirefn()
         return inst
     end
 	
-	
 	inst:AddComponent("sizetweener")
 	inst.startshrinking = startshrinking
 	inst:startshrinking()
@@ -360,7 +359,10 @@ local function oncollide(inst, other)
 	end
 end
 
-local function onthrown(inst)
+local function onthrown_eye(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	SpawnPrefab("treegrowthsolution_use_fx").Transform:SetPosition(x, 0, z)
+
     inst:AddTag("NOCLICK")
     inst.persists = false
     inst.AnimState:SetBank("eyeofterror_mini")
@@ -407,7 +409,7 @@ local function fneye_proj()
     inst.components.linearprojectile:SetHorizontalSpeed(15)
     inst.components.linearprojectile:SetGravity(-0.1)
     inst.components.linearprojectile:SetLaunchOffset(Vector3(2, 1, 0))
-    inst.components.linearprojectile:SetOnLaunch(onthrown)
+    inst.components.linearprojectile:SetOnLaunch(onthrown_eye)
     inst.components.linearprojectile:SetOnHit(OnHitInk)
     inst.components.linearprojectile.usehigharc = false
 
