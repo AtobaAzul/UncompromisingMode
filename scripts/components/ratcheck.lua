@@ -22,7 +22,7 @@ local _raided = true
 local _respawntimeremaining = nil
 local ratwarning = nil
 --local _initialrattimer = 24000
-local _initialrattimer = TUNING.DSTU.RATRAID_TIMERSTART --33600
+local _initialrattimer = TUNING.DSTU.RATRAID_TIMERSTART --24000
 local _ratsnifftimer = 4800
 local _ratburrows = 1
 

@@ -1505,7 +1505,7 @@ local function TimeForACheckUp(inst)
 	end
 	
 	inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck._ratburrows or 0
-	inst.burrowbonus = 15 * inst.ratburrows
+	inst.burrowbonus = 10 * inst.ratburrows
 	
 	
 	inst.ratscore = (inst.ratscore / 2) + inst.burrowbonus
