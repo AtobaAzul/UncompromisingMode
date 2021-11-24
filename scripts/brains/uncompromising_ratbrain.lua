@@ -40,6 +40,7 @@ local function CanSpringTrap(item)
 		and not item:IsNearPlayer(TOOCLOSE)
 		and item.components.trap
 		and item.components.trap.issprung
+		and item.prefab == "trap"
 end
 
 local function CanDeposit(inst)
@@ -79,11 +80,6 @@ local function StealAction(inst)
 	{ "_inventoryitem", "_equippable" },
 	NO_TAGS)
 	
-	local targetpriority_secondary = FindEntity(inst, SEE_DIST,
-	CanSteal,
-	{ "_inventoryitem", "preparedfood" },
-	NO_TAGS)
-	
 	local target = FindEntity(inst, SEE_DIST,
 	CanSteal,
 	{ "_inventoryitem" },
@@ -94,10 +90,6 @@ local function StealAction(inst)
 			return targetpriority ~= nil
 				and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
 				or nil
-		elseif targetpriority_secondary ~= nil then
-			return targetpriority_secondary ~= nil
-				and BufferedAction(inst, targetpriority_secondary, ACTIONS.PICKUP)
-				or nil
 		else
 			return target ~= nil
 				and BufferedAction(inst, target, ACTIONS.PICKUP)
@@ -107,10 +99,6 @@ local function StealAction(inst)
 		if targetpriority ~= nil and inst._item ~= nil and not inst._item:HasTag("_equippable") then
 			return targetpriority ~= nil
 				and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
-				or nil
-		elseif targetpriority_secondary ~= nil and inst._item ~= nil and not inst._item:HasTag("_equippable") and not inst._item:HasTag("preparedfood") then
-			return targetpriority_secondary ~= nil
-				and BufferedAction(inst, targetpriority_secondary, ACTIONS.PICKUP)
 				or nil
 		elseif not inst.components.inventory:IsFull() then
 			return target ~= nil
@@ -226,8 +214,10 @@ local function eat_food_action(inst)
         inst,
         SEE_FOOD_DIST,
         function(item)
-            return item:IsOnPassablePoint(true)
-                and inst.components.eater:CanEat(item) and not GetClosestInstWithTag("scarytoprey", item, TOOCLOSE)-- ~= nil
+            return not (item.prefab == "mandrake" or item.prefab == "cookedmandrake")
+				and item:IsOnPassablePoint(true)
+                and inst.components.eater:CanEat(item) 
+				and not GetClosestInstWithTag("scarytoprey", item, TOOCLOSE)-- ~= nil
         end,
         nil,
         NO_TAGS,

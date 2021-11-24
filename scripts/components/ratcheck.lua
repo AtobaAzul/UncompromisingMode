@@ -166,6 +166,8 @@ local function StartRaid(inst)
 	local ratburrow = TheSim:FindFirstEntityWithTag("ratburrow")
 	
 	if ratburrow ~= nil then
+		TheWorld:PushEvent("ratcooldown", inst)
+		
 		if ratwarning == nil then
 			ratwarning = 0
 		else
@@ -188,11 +190,10 @@ local function StartRaid(inst)
 			inst:DoTaskInTime(math.random(3, 6), StartRaid)
 		end
 		
-		TheWorld:PushEvent("ratcooldown", inst)
 	else
+		TheWorld:PushEvent("ratcooldownshort", inst)
 		print("No burrow, so make one ya dink!")
 		MakeRatBurrow(inst)
-		TheWorld:PushEvent("ratcooldownshort", inst)
 	end
 	
 	--print("Rat Raid Warning :", ratwarning)
@@ -225,7 +226,7 @@ local function ActiveRaid(src, data)
 			
 			_raided = true
 			
-			data.container:DoTaskInTime(3, StartRaid, data.doer)
+			data.container:DoTaskInTime(0, StartRaid, data.doer)
 		else
 			print(_initialrattimer)
 			

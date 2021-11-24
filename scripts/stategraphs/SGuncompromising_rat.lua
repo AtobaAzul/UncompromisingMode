@@ -190,7 +190,7 @@ local states =
 					inst.AnimState:PushAnimation("eat_pst", false)
 					
 					inst:DoTaskInTime(0.5, function(inst)
-						if inst.sg.statemem.action ~= nil and inst.sg.statemem.action.target ~= nil then
+						if inst.sg.statemem.action ~= nil and inst.sg.statemem.action.target ~= nil and inst.sg.statemem.action.target.Transform:GetWorldPosition() ~= nil then
 							inst.SoundEmitter:PlaySound(inst.sounds.eat)
 							local dirt = SpawnPrefab("shovel_dirt")
 							dirt.Transform:SetScale(0.8, 0.8, 0.8)

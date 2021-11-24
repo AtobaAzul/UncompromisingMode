@@ -129,8 +129,10 @@ end
 --------------------------------------------------------------------------
 
 local function onattack(inst, attacker, target)
-    if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and inst.components.weapon.stimuli == "electric" then
-        if target:HasTag("insect") and not target.components.health:IsDead() then
+    if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and not inst.components.fueled:IsEmpty() then
+        spark(inst)
+		
+		if target:HasTag("insect") and not target.components.health:IsDead() then
 			target.components.health:DoDelta(-30, false, attacker)
 			
 			SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
@@ -220,7 +222,7 @@ local function fn()
 	inst.components.fueled.secondaryfueltype = FUELTYPE.CHEMICAL
     --inst.components.fueled:InitializeFuelLevel(120)
 	--inst.components.fueled.maxfuel = TUNING.NIGHTSTICK_FUEL / 2
-	inst.components.fueled:InitializeFuelLevel(TUNING.NIGHTSTICK_FUEL / 1.5)
+	inst.components.fueled:InitializeFuelLevel(TUNING.NIGHTSTICK_FUEL)
 	inst.components.fueled.rate = 2
     inst.components.fueled:SetDepletedFn(nofuel)
     inst.components.fueled:SetTakeFuelFn(ontakefuel)

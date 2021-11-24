@@ -345,7 +345,7 @@ local function fn()
 
 	inst:AddComponent("eater")
 	inst.components.eater:SetDiet({ FOODTYPE.MEAT, FOODTYPE.VEGGIE }, { FOODTYPE.MEAT, FOODTYPE.VEGGIE })
-	inst.components.eater:SetCanEatHorrible()
+	--inst.components.eater:SetCanEatHorrible()
 	inst.components.eater:SetCanEatRaw()
 	inst.components.eater:SetStrongStomach(true) -- can eat monster meat!
 	
@@ -1462,6 +1462,7 @@ local function TimeForACheckUp(inst)
 	
 	if ents ~= nil then
 		for i, v in ipairs(ents) do
+			if not v.prefab == "seeds" and not v:HasTag("_container") and not v:HasTag("_health") then
 				if v.components.inventoryitem:IsHeld() then
 					if not v:HasTag("frozen") then
 						if v:HasTag("stale") then
@@ -1501,6 +1502,7 @@ local function TimeForACheckUp(inst)
 						end
 					end
 				end
+			end
 		end
 	end
 	
@@ -1530,7 +1532,7 @@ local function TimeForACheckUp(inst)
 		end
 	end]]
 	if inst.ratwarning >= 1 then
-		if math.random() > 0.2 then
+		if math.random() > 0.85 then
 			if inst.ratwarning > 5 then
 				inst.ratwarning = 5
 			end
