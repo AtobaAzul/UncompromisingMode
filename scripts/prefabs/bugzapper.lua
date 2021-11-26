@@ -130,8 +130,6 @@ end
 
 local function onattack(inst, attacker, target)
     if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and not inst.components.fueled:IsEmpty() then
-        spark(inst)
-		
 		if target:HasTag("insect") and not target.components.health:IsDead() then
 			target.components.health:DoDelta(-30, false, attacker)
 			
