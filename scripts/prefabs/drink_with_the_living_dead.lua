@@ -57,6 +57,9 @@ local function fn_tonic()
 	inst:WatchWorldState("isday", function(inst)
 		inst:Remove()
 	end)
+	inst:WatchWorldState("iscaveday", function(inst)
+		inst:Remove()
+	end)
 	
     return inst
 end
@@ -107,6 +110,9 @@ local function fn_tonic_fancy()
 	end)
 		
 	inst:WatchWorldState("isday", function(inst)
+		inst:Remove()
+	end)
+	inst:WatchWorldState("iscaveday", function(inst)
 		inst:Remove()
 	end)
 	
@@ -335,6 +341,12 @@ local function fn_stanton(Sim)
 	
 	
 	inst:WatchWorldState("isday", function(inst)
+		if not inst:HasTag("dying") then
+			inst.AnimState:PlayAnimation("jump")
+			inst:DoTaskInTime(0.5,function(inst) inst:Remove() end)
+		end
+	end)
+	inst:WatchWorldState("iscaveday", function(inst)
 		if not inst:HasTag("dying") then
 			inst.AnimState:PlayAnimation("jump")
 			inst:DoTaskInTime(0.5,function(inst) inst:Remove() end)

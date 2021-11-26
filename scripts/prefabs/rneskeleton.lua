@@ -169,6 +169,9 @@ local function fn(Sim)
 	inst:WatchWorldState("isday", function() 
 		inst.sg:GoToState("grounded")
 	end)
+	inst:WatchWorldState("iscaveday", function() 
+		inst.sg:GoToState("grounded")
+	end)
 	
 	inst.sg:GoToState("enter")
 	
