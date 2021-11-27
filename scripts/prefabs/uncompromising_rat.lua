@@ -1566,6 +1566,7 @@ local function fn_sniffer()
 	inst.entity:AddNetwork()
 	
 	inst:AddTag("rat_sniffer")
+	inst:AddTag("NOBLOCK")
 	
 	inst.entity:SetPristine()
 	

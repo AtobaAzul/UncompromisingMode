@@ -310,7 +310,7 @@ env.AddPrefabPostInit("deerclops", function(inst)
 	end
 	
 	inst.OnSave = OnSave
-    inst.OnPreLoad = OnPreLoad
+    --inst.OnPreLoad = OnPreLoad
     inst.OnLoad = OnLoad
     inst:RemoveComponent("freezable")
 
