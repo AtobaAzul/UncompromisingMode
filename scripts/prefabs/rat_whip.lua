@@ -83,7 +83,7 @@ local function fn()
     end
 
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(TUNING.WHIP_DAMAGE)
+    inst.components.weapon:SetDamage(TUNING.WHIP_DAMAGE*1.25)
     inst.components.weapon:SetRange(TUNING.WHIP_RANGE)
     inst.components.weapon:SetOnAttack(onattack)
 
