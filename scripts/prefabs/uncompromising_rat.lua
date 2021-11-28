@@ -1457,12 +1457,12 @@ local function TimeForACheckUp(inst)
 	print("   ========")
 	print("    V V    V V")
 	
-	inst.ratscore = 0
+	inst.ratscore = -60
 	print(#ents)
 	
 	if ents ~= nil then
 		for i, v in ipairs(ents) do
-			if not v.prefab == "seeds" and not v:HasTag("_container") and not v:HasTag("_health") then
+			if not v:HasTag("_container") and not v:HasTag("smallcreature") then
 				if v.components.inventoryitem:IsHeld() then
 					if not v:HasTag("frozen") then
 						if v:HasTag("stale") then
@@ -1483,23 +1483,11 @@ local function TimeForACheckUp(inst)
 							inst.ratscore = inst.ratscore + 30
 						end
 					elseif v.prefab == "spoiledfood" then
-						inst.ratscore = inst.ratscore + 45
+						inst.ratscore = inst.ratscore + 30
 					end
 					
-					if v:HasTag("cattoy") or v:HasTag("molebait") then
-						if v.prefab == "twigs" then
-							inst.ratscore = inst.ratscore + 0.5 -- Give them a break, Twiggy Trees may be the cause
-						else
-							if v:HasTag("molebait") then
-								inst.ratscore = inst.ratscore + 3
-							else
-								inst.ratscore = inst.ratscore + 2
-							end
-						end
-					else
-						if v:HasTag("_equippable") then
-							inst.ratscore = inst.ratscore + 20 -- Oooh, wants wants! We steal!
-						end
+					if v:HasTag("_equippable") or v:HasTag("gem") then
+						inst.ratscore = inst.ratscore + 20 -- Oooh, wants wants! We steal!
 					end
 				end
 			end

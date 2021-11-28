@@ -80,6 +80,11 @@ local function StealAction(inst)
 	{ "_inventoryitem", "_equippable" },
 	NO_TAGS)
 	
+	local targetpriority_secondary = FindEntity(inst, SEE_DIST,
+	CanSteal,
+	{ "_inventoryitem", "gem" },
+	NO_TAGS)
+	
 	local target = FindEntity(inst, SEE_DIST,
 	CanSteal,
 	{ "_inventoryitem" },
@@ -90,6 +95,10 @@ local function StealAction(inst)
 			return targetpriority ~= nil
 				and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
 				or nil
+		elseif targetpriority_secondary ~= nil then
+			return targetpriority_secondary ~= nil
+				and BufferedAction(inst, targetpriority_secondary, ACTIONS.PICKUP)
+				or nil
 		else
 			return target ~= nil
 				and BufferedAction(inst, target, ACTIONS.PICKUP)
@@ -99,6 +108,10 @@ local function StealAction(inst)
 		if targetpriority ~= nil and inst._item ~= nil and not inst._item:HasTag("_equippable") then
 			return targetpriority ~= nil
 				and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
+				or nil
+		elseif targetpriority_secondary ~= nil and inst._item ~= nil and not inst._item:HasTag("_equippable") and not inst._item:HasTag("gem") then
+			return targetpriority_secondary ~= nil
+				and BufferedAction(inst, targetpriority_secondary, ACTIONS.PICKUP)
 				or nil
 		elseif not inst.components.inventory:IsFull() then
 			return target ~= nil

@@ -58,10 +58,17 @@ local function StartTimerShort()
 end
 
 local function ChangeRatTimer(src, data)
-	local value = data ~= nil and data.value ~= nil and data.value or 30
+	local value = data ~= nil and data.value ~= nil and data.value or 60
 	if _initialrattimer > 0 then
-		_initialrattimer = _initialrattimer - value
-		print(_initialrattimer)
+		if value ~= nil and value < 0 and _initialrattimer < 14400 then
+			_initialrattimer = _initialrattimer - value
+			print("increase timer")
+			print(_initialrattimer)
+		elseif value ~= nil and value > 0 then
+			_initialrattimer = _initialrattimer - value
+			print("reduce timer")
+			print(_initialrattimer)
+		end
 	else
 		print("Rats are ready :)")
 	end
