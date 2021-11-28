@@ -881,6 +881,8 @@ local function BurrowKilled(inst)
 	if inst.components.periodicspawner ~= nil then
 		inst.components.periodicspawner:Stop()
 	end
+	
+	inst:Remove()
 end
 
 local function BurrowAnim(inst)
@@ -1457,7 +1459,7 @@ local function TimeForACheckUp(inst)
 	print("   ========")
 	print("    V V    V V")
 	
-	inst.ratscore = -60
+	inst.ratscore = -30
 	print(#ents)
 	
 	if ents ~= nil then
@@ -1486,8 +1488,10 @@ local function TimeForACheckUp(inst)
 						inst.ratscore = inst.ratscore + 30
 					end
 					
-					if v:HasTag("_equippable") or v:HasTag("gem") then
-						inst.ratscore = inst.ratscore + 20 -- Oooh, wants wants! We steal!
+					if v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool") then
+						inst.ratscore = inst.ratscore + 30 -- Oooh, wants wants! We steal!
+					elseif v:HasTag("molebait") then
+						inst.ratscore = inst.ratscore + 1 -- Oooh, wants wants! We steal!
 					end
 				end
 			end
@@ -1498,7 +1502,7 @@ local function TimeForACheckUp(inst)
 	inst.burrowbonus = 10 * inst.ratburrows
 	
 	
-	inst.ratscore = (inst.ratscore / 2) + inst.burrowbonus
+	inst.ratscore = inst.ratscore + inst.burrowbonus
 	
 	print(inst.ratscore)
 	print("THATS THE NORMAL RAT SCORE")
