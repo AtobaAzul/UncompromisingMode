@@ -238,7 +238,7 @@ local function fn()
 				return true
 			end
 		end
-        inst.components.combat:SetAreaDamage(4, TUNING.DEERCLOPS_AOE_SCALE, queensstuff) -- you can edit these values to your liking -Axe
+        inst.components.combat:SetAreaDamage(TUNING.SPIDERQUEEN_ATTACKRANGE, TUNING.DEERCLOPS_AOE_SCALE, queensstuff) -- you can edit these values to your liking -Axe
     end
     inst.components.combat:SetDefaultDamage(TUNING.SPIDERQUEEN_DAMAGE * 2)
     inst.components.combat.playerdamagepercent = TUNING.DEERCLOPS_DAMAGE_PLAYER_PERCENT

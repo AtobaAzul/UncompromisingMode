@@ -345,7 +345,7 @@ local function fn()
 
 	inst:AddComponent("eater")
 	inst.components.eater:SetDiet({ FOODTYPE.MEAT, FOODTYPE.VEGGIE }, { FOODTYPE.MEAT, FOODTYPE.VEGGIE })
-	inst.components.eater:SetCanEatHorrible()
+	--inst.components.eater:SetCanEatHorrible()
 	inst.components.eater:SetCanEatRaw()
 	inst.components.eater:SetStrongStomach(true) -- can eat monster meat!
 	
@@ -863,7 +863,7 @@ local function OnSpawned(inst, newent)
 		inst.components.herd:AddMember(newent)
 	end
 	
-	if TheWorld.state.cycles > 50 then
+	--[[if TheWorld.state.cycles > 50 then
 		local x, y, z = inst.Transform:GetWorldPosition()
 		
 		local ents = #TheSim:FindEntities(x, y, z, 40, {"player"})
@@ -874,13 +874,15 @@ local function OnSpawned(inst, newent)
 				inst.components.periodicspawner:TrySpawn("uncompromising_buffrat")
 			end
 		end
-	end
+	end]]
 end
 
 local function BurrowKilled(inst)
 	if inst.components.periodicspawner ~= nil then
 		inst.components.periodicspawner:Stop()
 	end
+	
+	inst:Remove()
 end
 
 local function BurrowAnim(inst)
@@ -1093,12 +1095,10 @@ local function OnInitHerd(inst)
 		inst.raiding = true
 	end
 
-	inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck._ratburrows or 0
-	
 	if inst.raiding then
 		for i = 1, 3 do
 			inst:DoTaskInTime((i - 1) * 15, function(inst)
-				for i = 1, ((3 + inst.ratburrows) / i) do
+				for i = 1, ((3) / i) do
 					local x, y, z = inst.Transform:GetWorldPosition()
 					local angle = math.random() * 8 * PI
 					local rat = SpawnPrefab("uncompromising_rat")
@@ -1459,11 +1459,12 @@ local function TimeForACheckUp(inst)
 	print("   ========")
 	print("    V V    V V")
 	
-	inst.ratscore = 0
+	inst.ratscore = -30
 	print(#ents)
 	
 	if ents ~= nil then
 		for i, v in ipairs(ents) do
+			if not v:HasTag("_container") and not v:HasTag("smallcreature") then
 				if v.components.inventoryitem:IsHeld() then
 					if not v:HasTag("frozen") then
 						if v:HasTag("stale") then
@@ -1484,29 +1485,24 @@ local function TimeForACheckUp(inst)
 							inst.ratscore = inst.ratscore + 30
 						end
 					elseif v.prefab == "spoiledfood" then
-						inst.ratscore = inst.ratscore + 45
+						inst.ratscore = inst.ratscore + 30
 					end
 					
-					if v:HasTag("cattoy") or v:HasTag("molebait") then
-						if v.prefab == "twigs" then
-							inst.ratscore = inst.ratscore + 0.5 -- Give them a break, Twiggy Trees may be the cause
-						else
-							if v:HasTag("molebait") then
-								inst.ratscore = inst.ratscore + 3
-							else
-								inst.ratscore = inst.ratscore + 2
-							end
-						end
-					else
-						if v:HasTag("_equippable") then
-							inst.ratscore = inst.ratscore + 20 -- Oooh, wants wants! We steal!
-						end
+					if v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool") then
+						inst.ratscore = inst.ratscore + 30 -- Oooh, wants wants! We steal!
+					elseif v:HasTag("molebait") then
+						inst.ratscore = inst.ratscore + 1 -- Oooh, wants wants! We steal!
 					end
 				end
+			end
 		end
 	end
 	
-	inst.ratscore = inst.ratscore / 2
+	inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck._ratburrows or 0
+	inst.burrowbonus = 10 * inst.ratburrows
+	
+	
+	inst.ratscore = inst.ratscore + inst.burrowbonus
 	
 	print(inst.ratscore)
 	print("THATS THE NORMAL RAT SCORE")
@@ -1528,25 +1524,27 @@ local function TimeForACheckUp(inst)
 		end
 	end]]
 	if inst.ratwarning >= 1 then
-		if inst.ratwarning > 5 then
-			inst.ratwarning = 5
-		end
-		
-			for c = 1, (inst.ratwarning) do
-				inst:DoTaskInTime((c/5), function(inst)
-					local warning = SpawnPrefab("uncompromising_ratwarning")
-					warning.Transform:SetPosition(inst.Transform:GetWorldPosition())
-					--warning.entity:SetParent(b)
-					--b.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
-					--warning.entity:SetParent(TheFocalPoint.b.entity)
-				end)
+		if math.random() > 0.85 then
+			if inst.ratwarning > 5 then
+				inst.ratwarning = 5
 			end
 			
-		local players = TheSim:FindEntities(x, y, z, 40, {"player"})
-		for a, b in ipairs(players) do
-			b:DoTaskInTime(2+math.random(), function(b)
-				b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER", "LEVEL_"..tostring(RoundToNearest(inst.ratwarning, 1))))
-			end)
+				for c = 1, (inst.ratwarning) do
+					inst:DoTaskInTime((c/5), function(inst)
+						local warning = SpawnPrefab("uncompromising_ratwarning")
+						warning.Transform:SetPosition(inst.Transform:GetWorldPosition())
+						--warning.entity:SetParent(b)
+						--b.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
+						--warning.entity:SetParent(TheFocalPoint.b.entity)
+					end)
+				end
+				
+			local players = TheSim:FindEntities(x, y, z, 40, {"player"})
+			for a, b in ipairs(players) do
+				b:DoTaskInTime(2+math.random(), function(b)
+					b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER", "LEVEL_"..tostring(RoundToNearest(inst.ratwarning, 1))))
+				end)
+			end
 		end
 	end
 end
@@ -1560,6 +1558,7 @@ local function fn_sniffer()
 	inst.entity:AddNetwork()
 	
 	inst:AddTag("rat_sniffer")
+	inst:AddTag("NOBLOCK")
 	
 	inst.entity:SetPristine()
 	

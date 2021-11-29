@@ -22,11 +22,10 @@ local _raided = true
 local _respawntimeremaining = nil
 local ratwarning = nil
 --local _initialrattimer = 24000
-local _initialrattimer = TUNING.DSTU.RATRAID_TIMERSTART --33600
-local _ratsnifftimer = 4800
+local _initialrattimer = TUNING.DSTU.RATRAID_TIMERSTART --24000
+local _ratsnifftimer = TUNING.DSTU.RATSNIFFER_TIMER
 local _ratburrows = 1
 
-local _worldsettingstimer = TheWorld.components.worldsettingstimer
 local RATRAID_TIMERNAME = "rat_raid"
 
 --------------------------------------------------------------------------
@@ -47,50 +46,32 @@ end
 local function StartRatTimer()
 	--local _time = 20 + math.random(20)
 	local _time = 9600 + math.random(4800)
-	_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _time)
+	
+	_initialrattimer = _time
 end
 
 local function StartTimerShort()
 	--local _time = 20 + math.random(20)
 	local _time = 3840 + math.random(960)
-	_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _time)
+	
+	_initialrattimer = _time
 end
---[[
-function self:OnPostInit()										--VVVV-- INPUT CONFIG BOOL HERE
-	if _worldsettingstimer ~= nil then									
-	end
-end]]
 
 local function ChangeRatTimer(src, data)
-
-	local value = data ~= nil and data.value ~= nil and data.value or 240
-
-	print(value)
-	--if _worldsettingstimer:GetTimeLeft(RATRAID_TIMERNAME) ~= nil then
-		print("raid timer exists")
-		local currenttime = _worldsettingstimer:GetTimeLeft(RATRAID_TIMERNAME)
-		local timeleft = (currenttime - value)
-		
-		print(currenttime)
-		print(timeleft)
-		
-		--if timeleft <= 0 then
-		--	_worldsettingstimer:SetTimeLeft(RATRAID_TIMERNAME, 1)
-		--else
-			_worldsettingstimer:SetTimeLeft(RATRAID_TIMERNAME, timeleft)
-		--end
-	--end
-		
-			
-
---[[
-    if _respawntime ~= nil and value ~= nil then
-        _respawntime = _respawntime - value
-		_cooldown = TheWorld:DoTaskInTime(_respawntime, CooldownRaid)
-		print(value)
-		print(_respawntime)
-		TheWorld:DoTaskInTime(0, Print)
-    end]]
+	local value = data ~= nil and data.value ~= nil and data.value or 60
+	if _initialrattimer > 0 then
+		if value ~= nil and value < 0 and _initialrattimer < 14400 then
+			_initialrattimer = _initialrattimer - value
+			print("increase timer")
+			print(_initialrattimer)
+		elseif value ~= nil and value > 0 then
+			_initialrattimer = _initialrattimer - value
+			print("reduce timer")
+			print(_initialrattimer)
+		end
+	else
+		print("Rats are ready :)")
+	end
 end
 
 local function MakeRatBurrow(inst)
@@ -152,7 +133,7 @@ local function SpawnRaid(inst)
 			if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
 				raid.Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
 				--TheWorld:DoTaskInTime(9600 + math.random(4800), CooldownRaid)
-				TheWorld:PushEvent("ratcooldown", inst)
+				--TheWorld:PushEvent("ratcooldown", inst)
 				--TheWorld.components.ratcheck:StartTimer()
 			end
 		end
@@ -163,7 +144,7 @@ local function SpawnRaid(inst)
 		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
 			raid.Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
 			--TheWorld:DoTaskInTime(9600 + math.random(4800), CooldownRaid)
-			TheWorld:PushEvent("ratcooldown", inst)
+			--TheWorld:PushEvent("ratcooldown", inst)
 			--TheWorld.components.ratcheck:StartTimer()
 		end
 	end
@@ -192,6 +173,8 @@ local function StartRaid(inst)
 	local ratburrow = TheSim:FindFirstEntityWithTag("ratburrow")
 	
 	if ratburrow ~= nil then
+		TheWorld:PushEvent("ratcooldown", inst)
+		
 		if ratwarning == nil then
 			ratwarning = 0
 		else
@@ -213,10 +196,11 @@ local function StartRaid(inst)
 		else
 			inst:DoTaskInTime(math.random(3, 6), StartRaid)
 		end
+		
 	else
+		TheWorld:PushEvent("ratcooldownshort", inst)
 		print("No burrow, so make one ya dink!")
 		MakeRatBurrow(inst)
-		TheWorld:PushEvent("ratcooldownshort", inst)
 	end
 	
 	--print("Rat Raid Warning :", ratwarning)
@@ -249,10 +233,9 @@ local function ActiveRaid(src, data)
 			
 			_raided = true
 			
-			data.container:DoTaskInTime(3, StartRaid, data.doer)
+			data.container:DoTaskInTime(0, StartRaid, data.doer)
 		else
-			local currenttime = _worldsettingstimer:GetTimeLeft(RATRAID_TIMERNAME)
-			print(currenttime)
+			print(_initialrattimer)
 			
 			if #ents <= 20 then
 				print("CAN'T SPAWN RATS! There aren't enough items around!")
@@ -296,10 +279,6 @@ local function DecreaseDens(data)
 end
 
 function self:OnUpdate(dt)
-	if _worldsettingstimer ~= nil and _worldsettingstimer:GetTimeLeft(RATRAID_TIMERNAME) ~= nil then
-		--print(_worldsettingstimer:GetTimeLeft(RATRAID_TIMERNAME))
-	end
-	
 	if _ratsnifftimer then
 		if _ratsnifftimer > 0 then
 			_ratsnifftimer = _ratsnifftimer - dt --(dt * _ratburrows)
@@ -315,6 +294,10 @@ function self:OnUpdate(dt)
 			end
 		end
 	end
+	
+	if _initialrattimer <= 0 and _raided then
+		TheWorld:PushEvent("cooldownraid")
+	end
 end
 
 function self:LongUpdate(dt)
@@ -322,19 +305,11 @@ function self:LongUpdate(dt)
 end
 
 function self:OnSave()
-
-	--[[if _respawntime ~= nil then
-        local _time = GetTime()
-        if _respawntime > _time then
-            _respawntimeremaining = _respawntime - _time
-        end
-    end]]
-	
 	local data =
 	{
 		raided = _raided,
 		ratsnifftimer = _ratsnifftimer,
-		--respawntimeremaining = _respawntimeremaining,
+		initialrattimer = _initialrattimer,
 	}
 	
 	return data
@@ -348,32 +323,17 @@ function self:OnLoad(data)
     if data.ratsnifftimer ~= nil then
 		_ratsnifftimer = data.ratsnifftimer
 	end
-    --[[if data.respawntimeremaining ~= nil then
-        _respawntime = data.respawntimeremaining + GetTime()
-		_cooldown = TheWorld:DoTaskInTime(_respawntime, CooldownRaid)
-		print(_respawntime)
-		TheWorld:DoTaskInTime(0, Print)
-    end]]
+		
+    if data.initialrattimer ~= nil then
+		_initialrattimer = data.initialrattimer
+	end
 end
 
 local function StartRespawnTimer()
-
 	self.inst:StartUpdatingComponent(self)
-	
-    if _worldsettingstimer ~= nil and not _worldsettingstimer:ActiveTimerExists(RATRAID_TIMERNAME) then
-		_worldsettingstimer:AddTimer(RATRAID_TIMERNAME, _initialrattimer, true, CooldownRaid)
-		_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _initialrattimer)
-    end
 end
 
---_worldsettingstimer:AddTimer(RATRAID_TIMERNAME, _initialrattimer, true, CooldownRaid)
 StartRespawnTimer()
-
-local function OnPlayerJoined()
-	if not _worldsettingstimer:ActiveTimerExists(RATRAID_TIMERNAME) then
-		_worldsettingstimer:StartTimer(RATRAID_TIMERNAME, _initialrattimer)
-	end
-end
 
 self.inst:ListenForEvent("ratcooldown", StartRatTimer, TheWorld)
 self.inst:ListenForEvent("ratcooldownshort", StartTimerShort, TheWorld)
@@ -382,6 +342,6 @@ self.inst:ListenForEvent("ms_oncroprotted", ChangeRatTimer, TheWorld)
 self.inst:ListenForEvent("reducerattimer", ChangeRatTimer, TheWorld)
 self.inst:ListenForEvent("DenSpawned", IncreaseDens, TheWorld)
 self.inst:ListenForEvent("DenRemoved", DecreaseDens, TheWorld)
---self.inst:ListenForEvent("ms_playerjoined", OnPlayerJoined, TheWorld)
+self.inst:ListenForEvent("cooldownraid", CooldownRaid, TheWorld)
 
 end)

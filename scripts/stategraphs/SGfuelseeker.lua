@@ -165,14 +165,20 @@ local states=
 			inst.AnimState:PlayAnimation("idle", true)
         end,
         
+		onupdate = function(inst)
+			if LightStealTarget(inst) then
+				inst.sg:GoToState("stealing_pre")
+			end
+		end,
+        
         events=
         {
             EventHandler("animover", function(inst)
-				if LightStealTarget(inst) then
-					inst.sg:GoToState("stealing_pre")
-				else
+				--if LightStealTarget(inst) then
+				--	inst.sg:GoToState("stealing_pre")
+				--else
 					inst.sg:GoToState("idle")
-				end
+				--end
 			end),
         },
     },
@@ -285,14 +291,20 @@ local states=
             --inst.sg:SetTimeout(5)
         end,
         
+		onupdate = function(inst)
+			if LightStealTarget(inst) then
+				inst.sg:GoToState("stealing_pre")
+			end
+		end,
+			
         events=
         {
             EventHandler("animover", function(inst)
-				if LightStealTarget(inst) then
-					inst.sg:GoToState("stealing_pre")
-				else
+				--if LightStealTarget(inst) then
+				--	inst.sg:GoToState("stealing_pre")
+			--	else
 					inst.sg:GoToState("idle")
-				end
+				--end
 			end),
         },
     },
@@ -389,15 +401,21 @@ local states=
             inst.components.locomotor:WalkForward()
 			inst.AnimState:PlayAnimation("walk_loop", true)
         end,
+        
+		onupdate = function(inst)
+			if LightStealTarget(inst) then
+				inst.sg:GoToState("stealing_pre")
+			end
+		end,
 
         events =
         {
             EventHandler("animover", function(inst)
-				if LightStealTarget(inst) then
-					inst.sg:GoToState("stealing_pre")
-				else
+				--if LightStealTarget(inst) then
+				--	inst.sg:GoToState("stealing_pre")
+				--else
 					inst.sg:GoToState("idle")
-				end
+				--end
             end),
         },
     },

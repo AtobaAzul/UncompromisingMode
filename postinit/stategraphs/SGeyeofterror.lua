@@ -75,59 +75,13 @@ local function ShootEye(inst, target)
 	local finaltarget = target or inst.components.combat.target
 	
 	if finaltarget ~= nil then
-	--[[inst.rockthrow = false
-		
-		local a, b, c = finaltarget.Transform:GetWorldPosition()
-		local targetpos = finaltarget:GetPosition()
-		local theta = inst.Transform:GetRotation()
-		
-		theta = theta*DEGREES
-		
-		local variableanglex = math.random(14, 16)
-		local variableanglez = math.random(14, 16)
-		targetpos.x = targetpos.x + variableanglex*math.cos(theta)
-		targetpos.z = targetpos.z - variableanglez*math.sin(theta)
-		
-		local rangesq = ((a-x)^2) + ((c-z)^2)
-		local maxrange = 15
-		local bigNum = 10
-		local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
-		
-		local projectile = SpawnPrefab("eyeofterror_minieye_projectile")
-		projectile.Transform:SetPosition(x, y, z)
-		projectile.components.complexprojectile:SetHorizontalSpeed(speed + math.random(4, 6))
-		projectile.components.complexprojectile:Launch(targetpos, inst, inst)
-		]]
-		
 		local targetpos = finaltarget:GetPosition()
 		
 		local projectile = SpawnPrefab("eyeofterror_minieye_projectile")
 		projectile.Transform:SetPosition(x, y, z)
 		projectile.components.linearprojectile:SetHorizontalSpeed(20)
 		projectile.components.linearprojectile:Launch(targetpos, inst, inst)
-		
-		
 	end
-	
-	
-	
-	
-	
-	
-	
-	
-	--[[
-		print("shoot")
-	local finaltarget = target or inst.components.combat.target
-	
-	if finaltarget ~= nil then
-		print("finaltarget ~= nil")
-		local proj = SpawnPrefab("eyeofterror_minieye_projectile")
-		local x, y, z = inst.Transform:GetWorldPosition()
-		proj.Transform:SetPosition(x, y, z)
-		proj.components.projectile:Throw(inst, finaltarget, inst)'
-		proj.shooter = inst
-	end]]
 end
 	
 local function SpawnLaser(inst)
@@ -195,7 +149,7 @@ local function ShootProjectile(inst, target)
 		local rangesq = dx * dx + dz * dz
 		local maxrange = 20
 		local bigNum = 15
-		local speed = easing.linear(rangesq / 1.3, bigNum, 3, maxrange * maxrange * 2)
+		local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange * 2)
 		projectile:AddTag("canthit")
 		
 		projectile.components.complexprojectile:SetLaunchOffset(Vector3(3, 2.5, 0))
@@ -237,8 +191,10 @@ local states = {
 			
 			if inst.prefab == "twinofterror1" then
 				chargepulse.AnimState:SetMultColour(1, 0.3, 0.3, 1)
+				chargepulse.Light:SetColour(76.5/255, 255/255, 76.5/255)
 			elseif inst.prefab == "twinofterror2" then
-				chargepulse.AnimState:SetMultColour(0.6, 1, 0.6, 1)
+				chargepulse.AnimState:SetMultColour(0.3, 1, 0.3, 1)
+				chargepulse.Light:SetColour(30/255, 255/255, 30/255)
 			end
 			
         end,
@@ -254,7 +210,12 @@ local states = {
         {
             EventHandler("animover", function(inst)
                 if inst.sg.mem.transformed then
-                    inst.sg.mem.mouthcharge_count = math.random(3, 5)
+					if inst.prefab == "eyeofterror" then
+						inst.sg.mem.mouthcharge_count = 2
+					else
+						inst.sg.mem.mouthcharge_count = math.random(3, 5)
+					end
+					
                     inst.sg:GoToState("mouthshoot_loop", inst.sg.statemem.target)
                 else
                     inst.sg:GoToState("shoot_loop", inst.sg.statemem.target)
@@ -284,11 +245,7 @@ local states = {
 		timeline =
         {
 			TimeEvent(0, function(inst) 
-				
-				if inst.prefab == "eyeofterror" then
-					ShootEye(inst, inst.sg.statemem.target)
-					inst.SoundEmitter:PlaySound(inst._soundpath .. "charge_eye")
-				elseif inst.prefab == "twinofterror1" then
+				if inst.prefab == "twinofterror1" then
 					inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/laser")
 					SpawnLaser(inst)
 				elseif inst.prefab == "twinofterror2" then
@@ -301,14 +258,11 @@ local states = {
 				end
 			end),
 			TimeEvent(6*FRAMES, function(inst)
-				if inst.prefab == "twinofterror2" then
-					ShootProjectile(inst, inst.sg.statemem.target)
-				end
-			end),
-			TimeEvent(8*FRAMES, function(inst)
 				if inst.prefab == "eyeofterror" then
 					ShootEye(inst, inst.sg.statemem.target)
 					inst.SoundEmitter:PlaySound(inst._soundpath .. "charge_eye")
+				elseif inst.prefab == "twinofterror2" then
+					ShootProjectile(inst, inst.sg.statemem.target)
 				end
 			end),
 			TimeEvent(9*FRAMES, function(inst)

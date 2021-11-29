@@ -156,7 +156,7 @@ local stategraph_post = {
 	"koalefant",
 	"krampus",
 	"spiderqueen",
-	"merm",
+	--"merm",
 	"carnival_host",
 	"catcoon",
 	"eyeofterror",

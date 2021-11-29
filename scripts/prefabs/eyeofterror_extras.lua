@@ -13,16 +13,20 @@ local function OnHitFire(inst, attacker, target)
     firesplash.Transform:SetPosition(inst.Transform:GetWorldPosition())
 	
 	local x, y, z = inst.Transform:GetWorldPosition() 
-	local ents = TheSim:FindEntities(x, y, z, 3, nil, { "shadow", "eyeofterror", "INLIMBO" })
+	local ents = TheSim:FindEntities(x, y, z, 4, { "_combat" }, { "shadow", "eyeofterror", "INLIMBO" })
 	if #ents > 0 then
 		for i, v in ipairs(ents) do
 			if v ~= inst and v:IsValid() and not v:IsInLimbo() then
 				if v:IsValid() and not v:IsInLimbo() then
 					if v.components.health ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
-						local dmg = -20
+						local dmg = -5
 						
-						if v:HasTag("pyromaniac") then
-							dmg = dmg / 2
+						if v.components.health.fire_damage_scale > 0 then
+							dmg = dmg * v.components.health.fire_damage_scale
+						end
+						
+						if v:HasTag("pyromaniac") or dmg > -1 then
+							dmg = -1
 						end
 						
 						v.components.health:DoDelta(dmg, false, "twinofterror2")
@@ -75,6 +79,7 @@ local function fn()
     inst.AnimState:SetRayTestOnBB(true)
     inst.AnimState:SetFinalOffset(FINALOFFSET_MAX)
 	inst.AnimState:SetMultColour(0, 1, 0, 0.5)
+	inst.Transform:SetScale(1.2, 1.2, 1.2)
 	
     inst.entity:SetPristine()
 	
@@ -110,16 +115,20 @@ local firelevels =
 
 local function Burning(inst)
 	local x, y, z = inst.Transform:GetWorldPosition() 
-	local ents = TheSim:FindEntities(x, y, z, 3 * inst.Transform:GetScale(), nil, { "shadow", "eyeofterror", "INLIMBO" })
+	local ents = TheSim:FindEntities(x, y, z, 4 * inst.Transform:GetScale(), nil, { "shadow", "eyeofterror", "INLIMBO" })
 	if #ents > 0 then
 		for i, v in ipairs(ents) do
 			if v ~= inst and v:IsValid() and not v:IsInLimbo() then
 				if v:IsValid() and not v:IsInLimbo() then
 					if v.components.health ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
-						local dmg = -6
+						local dmg = -5
 						
-						if v:HasTag("pyromaniac") then
-							dmg = dmg / 2
+						if v.components.health.fire_damage_scale > 0 then
+							dmg = dmg * v.components.health.fire_damage_scale
+						end
+						
+						if v:HasTag("pyromaniac") or dmg > -1 then
+							dmg = -1
 						end
 						
 						v.components.health:DoDelta(dmg, false, "twinofterror2")
@@ -131,7 +140,7 @@ local function Burning(inst)
 end
 
 local function StartBurning(inst)
-	inst:DoPeriodicTask(0.3, Burning)
+	inst:DoPeriodicTask(0.5, Burning)
 end
 
 local function shrinktask_mini(inst)
@@ -172,7 +181,6 @@ local function cursedfirefn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
 	
 	inst:AddComponent("sizetweener")
 	inst.startshrinking = startshrinking
@@ -271,20 +279,21 @@ local function chargepulsefn()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
-    --inst.entity:AddLight()
+    inst.entity:AddLight()
     inst.entity:AddNetwork()
-	--[[
+	
     inst.Light:Enable(true)
     inst.Light:SetRadius(3)
     inst.Light:SetFalloff(.25)
     inst.Light:SetIntensity(.8)
-    inst.Light:SetColour(0/255, 255/255, 0/255)]]
+    inst.Light:SetColour(255/255, 255/255, 255/255)
 
-    --inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+    inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
     inst.AnimState:SetBank("moon_altar_geyser")
     inst.AnimState:SetBuild("moon_geyser")
     inst.AnimState:PlayAnimation("moonpulse")
 	inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+	inst.Transform:SetScale(0.8, 0.8, 0.8)
 
     inst:AddTag("FX")
 
@@ -318,29 +327,26 @@ local function OnHitInk(inst, target)
                 if target.components.combat:CanBeAttacked() then
                     target.components.combat:GetAttacked(inst, 30)
 					
-					local minieye = SpawnPrefab("eyeofterror_mini")
-					minieye.Transform:SetPosition(inst.Transform:GetWorldPosition())
-					minieye:ForceFacePoint(target.Transform:GetWorldPosition())
-					minieye.sg:GoToState("attack")
-					
+					local eye_position = target:GetPosition()
+
+					local minion_egg = SpawnPrefab("eyeofterror_mini_projectile")
+					minion_egg.Transform:SetPosition(eye_position.x, eye_position.y--[[ + 1.5]], eye_position.z)
+
+					local angle = 360 * math.random()
+					minion_egg.Transform:SetRotation(angle)
+
+					angle = -angle * DEGREES
+					local radius = minion_egg:GetPhysicsRadius(0) + 5.0
+					local angle_vector = Vector3(radius * math.cos(angle), 0, radius * math.sin(angle))
+
+					minion_egg.components.complexprojectile:Launch(eye_position + angle_vector, target)
+
 					if inst.shooter ~= nil then
-						minieye.components.commander:AddSoldier(inst.shooter)
+						inst.shooter.components.commander:AddSoldier(minion_egg)
 					end
-					
-					target.components.combat:SuggestTarget(minieye)
                 end
             end
         end
-	else
-		local minion_egg = SpawnPrefab("eyeofterror_mini_grounded")
-		minion_egg.Transform:SetPosition(inst.Transform:GetWorldPosition())
-
-		local angle = 360 * math.random()
-		minion_egg.Transform:SetRotation(angle)
-
-		minion_egg:PushEvent("on_landed")
-
-		inst.components.commander:AddSoldier(minion_egg)
     end
 	
     inst:Remove()
@@ -353,7 +359,10 @@ local function oncollide(inst, other)
 	end
 end
 
-local function onthrown(inst)
+local function onthrown_eye(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	SpawnPrefab("treegrowthsolution_use_fx").Transform:SetPosition(x, 0, z)
+
     inst:AddTag("NOCLICK")
     inst.persists = false
     inst.AnimState:SetBank("eyeofterror_mini")
@@ -400,7 +409,7 @@ local function fneye_proj()
     inst.components.linearprojectile:SetHorizontalSpeed(15)
     inst.components.linearprojectile:SetGravity(-0.1)
     inst.components.linearprojectile:SetLaunchOffset(Vector3(2, 1, 0))
-    inst.components.linearprojectile:SetOnLaunch(onthrown)
+    inst.components.linearprojectile:SetOnLaunch(onthrown_eye)
     inst.components.linearprojectile:SetOnHit(OnHitInk)
     inst.components.linearprojectile.usehigharc = false
 

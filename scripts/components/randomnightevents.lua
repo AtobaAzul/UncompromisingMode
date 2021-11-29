@@ -20,6 +20,7 @@ self.caveevents = nil
 self.totalrandomwildweight = nil
 self.totalrandombaseweight = nil
 self.totalrandomcaveweight = nil
+self.moontear_available = true
 
 
 --------------------------------
@@ -1986,13 +1987,14 @@ local function CheckPlayers()
 					if TheWorld:HasTag("cave") then
 						DoCaveRNE(player)
 					else
-						if TheWorld.state.isfullmoon then
-							--print("fullmoon")
+						if TheWorld.state.isfullmoon and self.moontear_available then
+							self.moontear_available = false
 							DoFullMoonRNE(player)--DoFullMoonRNE(v)
 						elseif TheWorld.state.isnewmoon then
 							--print("newmoon")
 							DoNewMoonRNE(player)--DoNewMoonRNE(v)
 						else
+							self.moontear_available = true
 							DoBaseRNE(player)--DoBaseRNE(v)
 						end
 					end
@@ -2001,13 +2003,14 @@ local function CheckPlayers()
 					if TheWorld:HasTag("cave") then
 						DoCaveRNE(player)
 					else
-						if TheWorld.state.isfullmoon then
-							--print("fullmoon")
+						if TheWorld.state.isfullmoon and self.moontear_available then
+							self.moontear_available = false
 							DoFullMoonRNE(player)--DoFullMoonRNE(v)
 						elseif TheWorld.state.isnewmoon then
 							--print("newmoon")
 							DoNewMoonRNE(player)--DoNewMoonRNE(v)
 						else
+							self.moontear_available = true
 							DoWildRNE(player)--DoWildRNE(v)
 						end
 					end

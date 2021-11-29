@@ -67,20 +67,18 @@ end
 
 local function OnTimerDone2(inst, data)
     if data.name == "stumptime" then
-		--local scaling = TheWorld.state.cycles / 200
+		local scaling = TheWorld.state.cycles / 200
 		
-		--if math.random() < (0.15 + scaling) then
+		if math.random() < (0.1 + scaling) then
 			inst.stumplingambush = true
-		--end
+		end
     end
 end
 
 local function chop_down_tree(inst, data)
 	if TheWorld.state.cycles >= 4 then
-		--inst.components.timer:StartTimer("stumptime", math.random(240, 960))
+		inst.components.timer:StartTimer("stumptime", math.random(240, 960))
 	end
-	
-		inst.components.timer:StartTimer("stumptime", 1)
 	
 	return inst._OldOnFinish(inst, data)
 end

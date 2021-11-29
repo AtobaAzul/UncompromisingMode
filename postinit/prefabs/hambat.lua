@@ -10,49 +10,47 @@ local function UpdateDamage(inst)
     end
 end
 
-local function onequip(inst, owner)
-    UpdateDamage(inst)
-    local skin_build = inst:GetSkinBuild()
-    if skin_build ~= nil then
-        owner:PushEvent("equipskinneditem", inst:GetSkinName())
-        owner.AnimState:OverrideItemSkinSymbol("swap_object", skin_build, "swap_ham_bat", inst.GUID, "swap_ham_bat")
-    else
-        owner.AnimState:OverrideSymbol("swap_object", "swap_ham_bat", "swap_ham_bat")
-    end
-    
-    owner.AnimState:Show("ARM_carry")
-    owner.AnimState:Hide("ARM_normal")
-end
-
-local function onunequip(inst, owner)
-    UpdateDamage(inst)
-    owner.AnimState:Hide("ARM_carry")
-    owner.AnimState:Show("ARM_normal")
-    local skin_build = inst:GetSkinBuild()
-    if skin_build ~= nil then
-        owner:PushEvent("unequipskinneditem", inst:GetSkinName())
-    end
-end
-
 env.AddPrefabPostInit("hambat", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	
-    inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.HORRIBLE
-    inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
 	
 	if inst.components.perishable ~= nil then
 		inst.components.perishable:SetPerishTime(TUNING.PERISH_FASTISH)
 	end
 	
 	if inst.components.weapon ~= nil then
-		inst.components.weapon:SetOnAttack(UpdateDamage)
+		local _OldOnAttack = inst.components.equippable.onattack
+		
+		inst.components.equippable.onunequipfn = function(inst)
+			
+			if _OldOnAttack ~= nil then
+			   _OldOnAttack(inst)
+			end
+			
+			UpdateDamage(inst)
+		end
 	end
 	
 	if inst.components.equippable ~= nil then
-		inst.components.equippable:SetOnEquip(onequip)
-		inst.components.equippable:SetOnUnequip(onunequip)
+		local _OldOnEquip = inst.components.equippable.onequipfn
+
+		inst.components.equippable.onequipfn = function(inst, owner)
+			if _OldOnEquip ~= nil then
+			   _OldOnEquip(inst, owner)
+			end
+			
+			UpdateDamage(inst)
+		end
+	
+		local _OldOnUnequip = inst.components.equippable.onunequipfn
+	
+		inst.components.equippable.onunequipfn = function(inst, owner)
+			if _OldOnUnequip ~= nil then
+			   _OldOnUnequip(inst, owner)
+			end
+			
+			UpdateDamage(inst)
+		end
 	end
 end)
