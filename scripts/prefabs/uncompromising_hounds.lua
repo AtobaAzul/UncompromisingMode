@@ -100,7 +100,7 @@ SetSharedLootTable('hound_spore',
     {'monstermeat', 1.0},
     {'houndstooth', 1.0},
     {'sporecloud_toad', 1.0},
-    {'greengem',      0.05},
+    {'shroom_skin_fragment',      0.25},
 })
 
 local WAKE_TO_FOLLOW_DISTANCE = 8
