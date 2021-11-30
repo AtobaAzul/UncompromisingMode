@@ -128,7 +128,7 @@ configuration_options =
 			{description = "No longer freezes", data = "Waterballs"},
 			{description = "None", data = "Newb"},
 		},
-		default = "Fuelmuncher",
+		default = "Waterballs",
 	},
 	
 	{

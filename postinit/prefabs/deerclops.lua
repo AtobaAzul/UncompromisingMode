@@ -61,8 +61,6 @@ local function EnterPhase2Trigger(inst)
         --end
 
         inst.sg:GoToState("taunt")
-        inst.enraged = true
-
     end
 end
 
@@ -183,14 +181,6 @@ local function OnSave(inst, data)
     end
 end
 
-local function OnPreLoad(inst, data)
-    if data ~= nil then
-        if data.enraged then
-            EnterPhase2Trigger(inst)
-        end
-    end
-end
-
 local function OnLoad(inst, data)
     if data then
         if data.upgrade == nil then
@@ -274,7 +264,6 @@ env.AddPrefabPostInit("deerclops", function(inst)
 	local _OnLoad = inst.OnLoad
 	
 	local function OnSave(inst, data)
-		data.enraged = inst.enraged or nil
 		data.upgrade = inst.upgrade
 		if inst.components.health ~= nil then
 			data.healthUM = inst.components.health.currenthealth
@@ -289,14 +278,17 @@ env.AddPrefabPostInit("deerclops", function(inst)
 				ChooseUpgrades(inst)
 			else	
 				if data.upgrade == "enrage_mutation" then
+					inst.upgrade = "enrage_mutation"
 					MakeEnrageable(inst)
 				end
 				
 				if data.upgrade == "strength_mutation" then
+					inst.upgrade = "strength_mutation"
 					MakeStrong(inst)
 				end
 				
 				if data.upgrade == "ice_mutation" then
+					inst.upgrade = "ice_mutation"
 					MakeIcey(inst)
 				end
 			end
@@ -305,12 +297,11 @@ env.AddPrefabPostInit("deerclops", function(inst)
 				inst.components.health.currenthealth = data.healthUM
 			end
 		end
-		
+		print("My upgrade is: "..inst.upgrade)
 		_OnLoad(inst, data)
 	end
 	
 	inst.OnSave = OnSave
-    --inst.OnPreLoad = OnPreLoad
     inst.OnLoad = OnLoad
     inst:RemoveComponent("freezable")
 
@@ -332,5 +323,4 @@ env.AddPrefabPostInit("deerclops", function(inst)
     inst.MakeStrong = MakeStrong
 
     inst:DoTaskInTime(0.1, ChooseUpgrades(inst)) --Incase we need to specify an upgrade because this deerclops despawned.
-	print(inst.upgrade)
 end)
