@@ -51,8 +51,8 @@ end
 
 local function turnoff(inst)
 
-    inst.components.weapon:RemoveElectric()
 	if inst.components.fueled ~= nil then
+		inst.components.weapon:RemoveElectric()
 		inst.components.fueled:StopConsuming()
 	end
 	inst.SoundEmitter:PlaySound("dontstarve/wilson/lantern_off")
@@ -239,7 +239,8 @@ local function fn()
 	else
 		inst:AddComponent("finiteuses")
 		inst.components.finiteuses:SetMaxUses(75)
-		inst.components.finiteuses:SetUses(75)	
+		inst.components.finiteuses:SetUses(75)
+		inst.components.weapon:SetElectric()
 	end
 
     inst._light = nil
