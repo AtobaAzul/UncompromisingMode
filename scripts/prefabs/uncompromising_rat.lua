@@ -25,11 +25,43 @@ local carratsounds =
 	eat = "turnoftides/creatures/together/carrat/eat",
 	stunned = "turnoftides/creatures/together/carrat/stunned",
 }
-
+--[[
 SetSharedLootTable("raidrat",
 {
-	{"monstermeat",		1.00},
-	{"goldnugget",		0.33},
+})]]
+
+SetSharedLootTable("ratburrow",
+{
+	{"redgem",		0.10},
+	{"bluegem",		0.10},
+	{"goldnugget",		1.00},
+	{"goldnugget",		0.25},
+	{"goldnugget",		0.10},
+	{"boneshard",		1.00},
+	{"boneshard",		0.25},
+	{"boneshard",		0.10},
+})
+
+SetSharedLootTable("ratburrow_small",
+{
+	{"redgem",		0.10},
+	{"bluegem",		0.10},
+	{"goldnugget",		1.00},
+	{"goldnugget",		0.25},
+	{"boneshard",		1.00},
+	{"boneshard",		0.25},
+})
+
+SetSharedLootTable("packrat",
+{
+	{"redgem",		0.10},
+	{"bluegem",		0.10},
+	{"goldnugget",		1.00},
+	{"goldnugget",		0.25},
+	{"goldnugget",		0.10},
+	{"boneshard",		1.00},
+	{"boneshard",		0.25},
+	{"boneshard",		0.10},
 })
 
 local brain = require "brains/uncompromising_ratbrain"
@@ -278,6 +310,7 @@ local function fn()
 	inst:AddTag("cattoy")
 	inst:AddTag("catfood")
 	inst:AddTag("cookable")
+	inst:AddTag("noauradamage")
 	
 	inst.entity:SetPristine()
 	
@@ -357,8 +390,8 @@ local function fn()
 	inst.components.combat:SetAttackPeriod(TUNING.DSTU.RAIDRAT_ATTACK_PERIOD)
 	inst.components.combat:SetRange(TUNING.DSTU.RAIDRAT_ATTACK_RANGE)
 	inst.components.combat.hiteffectsymbol = "carrat_body"
-    inst.components.combat.onhitotherfn = OnHitOther
-	inst.components.combat:SetRetargetFunction(3, rattargetfn)
+    --inst.components.combat.onhitotherfn = OnHitOther
+	--inst.components.combat:SetRetargetFunction(3, rattargetfn)
     --inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
 
     inst:AddComponent("thief")
@@ -575,6 +608,7 @@ local function junkfn()
 	inst:AddTag("cattoy")
 	inst:AddTag("catfood")
 	inst:AddTag("cookable")
+	inst:AddTag("noauradamage")
 	
 	inst.entity:SetPristine()
 	
@@ -696,6 +730,7 @@ local function packfn()
 	inst:AddTag("cattoy")
 	inst:AddTag("catfood")
 	inst:AddTag("cookable")
+	inst:AddTag("noauradamage")
 	
 	inst.entity:SetPristine()
 	
@@ -721,8 +756,8 @@ local function packfn()
 	inst.sounds = carratsounds
 	
 	inst:AddComponent("locomotor")
-	inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_WALKSPEED
-	inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_RUNSPEED
+	inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_WALKSPEED / 1.25
+	inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_RUNSPEED / 1.25
 	inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 	inst.components.locomotor:SetTriggersCreep(false)
 	inst:SetStateGraph("SGuncompromising_rat")
@@ -779,9 +814,10 @@ local function packfn()
 	inst.components.combat.hiteffectsymbol = "carrat_body"
 	
 	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(TUNING.DSTU.RAIDRAT_HEALTH)
+	inst.components.health:SetMaxHealth(TUNING.DSTU.RAIDRAT_HEALTH * 1.5)
 	
 	inst:AddComponent("lootdropper")
+	inst.components.lootdropper:SetChanceLootTable('packrat')
 	inst.components.lootdropper:AddRandomLoot("monstersmallmeat", 0.34)
 	inst.components.lootdropper:AddRandomLoot("disease_puff", 0.34)
 	inst.components.lootdropper:AddRandomLoot("rat_tail", 0.34)
@@ -807,7 +843,7 @@ local function packfn()
 	inst.components.cookable:SetOnCookedFn(on_cooked_fn)
 	
 	inst:AddComponent("inventory")
-	inst.components.inventory.maxslots = 10
+	inst.components.inventory.maxslots = 5
 	
 	inst:AddComponent("inspectable")
 	
@@ -838,6 +874,7 @@ local function packfn()
 end
 
 local function onfinishcallback(inst)
+	inst.components.lootdropper:DropLoot()
 	inst.components.inventory:DropEverything()
 	inst:Remove()
 end
@@ -1289,6 +1326,7 @@ local function fn_herd()
 	inst.components.inventory.maxslots = 100
 	
 	inst:AddComponent("lootdropper")
+	inst.components.lootdropper:SetChanceLootTable('ratburrow')
 	
 	inst.OnSave = onsave_burrow
 	inst.OnPreLoad = onpreload_burrow
@@ -1354,6 +1392,7 @@ local function fn_burrow()
 	inst:AddComponent("combat")
 	inst:AddComponent("inventory")
 	inst:AddComponent("lootdropper")
+	inst.components.lootdropper:SetChanceLootTable('ratburrow_small')
 	inst:AddComponent("inspectable")
 	
 	inst:AddComponent("workable")
@@ -1459,7 +1498,9 @@ local function TimeForACheckUp(inst)
 	print("   ========")
 	print("    V V    V V")
 	
-	inst.ratscore = -30
+	inst.ratscore = -60
+	inst.itemscore = 0
+	inst.foodscore = 0
 	print(#ents)
 	
 	if ents ~= nil then
@@ -1468,30 +1509,30 @@ local function TimeForACheckUp(inst)
 				if v.components.inventoryitem:IsHeld() then
 					if not v:HasTag("frozen") then
 						if v:HasTag("stale") then
-							inst.ratscore = inst.ratscore + 5
+							inst.foodscore = inst.foodscore + 5
 						elseif v:HasTag("spoiled") then
-							inst.ratscore = inst.ratscore + 15
+							inst.foodscore = inst.foodscore + 15
 						end
 					elseif v.prefab == "spoiledfood" then
-						inst.ratscore = inst.ratscore + 25
+						inst.foodscore = inst.foodscore + 25
 					end
 				else
 					if not v:HasTag("frozen") then
 						if v:HasTag("fresh") then
-							inst.ratscore = inst.ratscore + 10
+							inst.foodscore = inst.foodscore + 10
 						elseif v:HasTag("stale") then
-							inst.ratscore = inst.ratscore + 20
+							inst.foodscore = inst.foodscore + 20
 						elseif v:HasTag("spoiled") then
-							inst.ratscore = inst.ratscore + 30
+							inst.foodscore = inst.foodscore + 30
 						end
 					elseif v.prefab == "spoiledfood" then
-						inst.ratscore = inst.ratscore + 30
+						inst.foodscore = inst.foodscore + 30
 					end
 					
 					if v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool") then
-						inst.ratscore = inst.ratscore + 30 -- Oooh, wants wants! We steal!
+						inst.itemscore = inst.itemscore + 30 -- Oooh, wants wants! We steal!
 					elseif v:HasTag("molebait") then
-						inst.ratscore = inst.ratscore + 1 -- Oooh, wants wants! We steal!
+						inst.itemscore = inst.itemscore + 2 -- Oooh, wants wants! We steal!
 					end
 				end
 			end
@@ -1502,7 +1543,7 @@ local function TimeForACheckUp(inst)
 	inst.burrowbonus = 10 * inst.ratburrows
 	
 	
-	inst.ratscore = inst.ratscore + inst.burrowbonus
+	inst.ratscore = inst.ratscore + inst.itemscore + inst.foodscore + inst.burrowbonus
 	
 	print(inst.ratscore)
 	print("THATS THE NORMAL RAT SCORE")
@@ -1529,21 +1570,36 @@ local function TimeForACheckUp(inst)
 				inst.ratwarning = 5
 			end
 			
-				for c = 1, (inst.ratwarning) do
-					inst:DoTaskInTime((c/5), function(inst)
-						local warning = SpawnPrefab("uncompromising_ratwarning")
-						warning.Transform:SetPosition(inst.Transform:GetWorldPosition())
-						--warning.entity:SetParent(b)
-						--b.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
-						--warning.entity:SetParent(TheFocalPoint.b.entity)
-					end)
-				end
+			for c = 1, (inst.ratwarning) do
+				inst:DoTaskInTime((c/5), function(inst)
+					local warning = SpawnPrefab("uncompromising_ratwarning")
+					warning.Transform:SetPosition(inst.Transform:GetWorldPosition())
+					--warning.entity:SetParent(b)
+					--b.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
+					--warning.entity:SetParent(TheFocalPoint.b.entity)
+				end)
+			end
 				
+			
+			
 			local players = TheSim:FindEntities(x, y, z, 40, {"player"})
 			for a, b in ipairs(players) do
-				b:DoTaskInTime(2+math.random(), function(b)
-					b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER", "LEVEL_"..tostring(RoundToNearest(inst.ratwarning, 1))))
-				end)
+				
+				if math.random() > 0.85 then
+					if inst.burrowbonus > inst.itemscore and inst.burrowbonus > inst.foodscore then
+						b:DoTaskInTime(2+math.random(), function(b)
+							b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER", "LEVEL_"..tostring(RoundToNearest(inst.ratwarning, 1))))
+						end)
+					elseif inst.itemscore > inst.burrowbonus and inst.itemscore > inst.foodscore then
+						b:DoTaskInTime(2+math.random(), function(b)
+							b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER", "LEVEL_"..tostring(RoundToNearest(inst.ratwarning, 1))))
+						end)
+					elseif inst.foodscore > inst.burrowbonus and inst.foodscore > inst.itemscore then
+						b:DoTaskInTime(2+math.random(), function(b)
+							b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER", "LEVEL_"..tostring(RoundToNearest(inst.ratwarning, 1))))
+						end)
+					end
+				end
 			end
 		end
 	end

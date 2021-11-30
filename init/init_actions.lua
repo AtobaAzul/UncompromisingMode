@@ -51,6 +51,27 @@ AddAction(
 )
 
 AddAction(
+	"RAT_STEAL_EQUIPPABLE",
+	"RAT_STEAL_EQUIPPABLE",
+	function(act)
+		if act.target.components.container then
+			act.target.components.container:DropEverythingWithTag("_equippable")
+			return true
+		end
+	end
+)
+AddAction(
+	"RAT_STEAL_GEM",
+	"RAT_STEAL_GEM",
+	function(act)
+		if act.target.components.container then
+			act.target.components.container:DropEverythingWithTag("gem")
+			return true
+		end
+	end
+)
+
+AddAction(
 	"CASTLIGHTER",
 	"CASTLIGHTER",
 	function(act)

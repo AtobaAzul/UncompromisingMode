@@ -368,6 +368,7 @@ local function snowpilefn(Sim)
 	inst.entity:SetPristine()
 	
 	MakeObstaclePhysics(inst, 2.5, 0)
+    RemovePhysicsColliders(inst)
 	
 	inst.Transform:SetScale(1.5, 1.5, 1.5)
 	
@@ -380,7 +381,6 @@ local function snowpilefn(Sim)
         return inst
     end
 	
-    RemovePhysicsColliders(inst)
 	--local xscale = 0 + math.random(0.3,0.5)
 	--local yscale = 0 + math.random(0.1,0.3)
 	
