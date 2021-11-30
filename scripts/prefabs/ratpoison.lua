@@ -14,9 +14,7 @@ local itemprefabs=
 }
 
 local function oneaten(inst, eater)
-	if eater and eater:HasTag("raidrat") then
-		eater.components.health:Kill()
-	end
+	eater:AddDebuff("ratpoison_debuff", "ratpoison_debuff")
 end
 
 local function OnSave(inst,data)
@@ -73,8 +71,8 @@ local function fn()
 	inst:AddComponent("inspectable")
 	
 	inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.HORRIBLE --Horrible is generally unedible
-	inst.components.edible.healthvalue = -20
+    inst.components.edible.foodtype = FOODTYPE.VEGGIE --Horrible is generally unedible
+	inst.components.edible.healthvalue = -15
 	inst.components.edible:SetOnEatenFn(oneaten)
 	
 	inst:AddComponent("perishable")

@@ -4,7 +4,8 @@ local actionhandlers =
 {
 	ActionHandler(ACTIONS.EAT, "eat"),
 	ActionHandler(ACTIONS.PICKUP, "steal"),
-	ActionHandler(ACTIONS.HAMMER, "steal"),
+	ActionHandler(ACTIONS.RAT_STEAL_EQUIPPABLE, "chest_steal"),
+	ActionHandler(ACTIONS.RAT_STEAL_GEM, "chest_steal"),
     ActionHandler(ACTIONS.CHECKTRAP, "destroy"),
     ActionHandler(ACTIONS.DIG, "plant_attack"),
     ActionHandler(ACTIONS.STORE, "deposit"),
@@ -224,7 +225,7 @@ local states =
 			inst.AnimState:PlayAnimation("submerge")
 			if inst.components.inventory:NumItems() ~= 0 then
 				local herd = inst.components.herdmember and inst.components.herdmember:GetHerd()
-				if herd ~= nil then
+				if herd ~= nil and herd.components.inventory ~= nil then
 					for k,v in pairs(inst.components.inventory.itemslots) do
 						herd.components.inventory:GiveItem(inst.components.inventory:RemoveItemBySlot(k))
 					end
@@ -393,6 +394,34 @@ local states =
 					inst.components.inventory:DropEverything()
 				end
 
+				inst:PerformBufferedAction() 
+			end),
+			TimeEvent(3*FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound(inst.sounds.eat)
+			end)
+		},
+		
+		
+		events=
+		{
+			EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
+		}, 		
+	}, 
+
+	State{
+		name = "chest_steal",
+		tags = {"busy"},
+
+		onenter = function(inst)
+			inst.Physics:Stop()
+			inst.AnimState:PlayAnimation("eat_pre", false)
+			inst.AnimState:PushAnimation("eat_pst", false)
+		end,
+		
+		timeline=
+		{
+			
+			TimeEvent(3*FRAMES, function(inst)
 				inst:PerformBufferedAction() 
 			end),
 			TimeEvent(3*FRAMES, function(inst)
