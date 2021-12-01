@@ -289,4 +289,5 @@ return {
 	"oculet",
 	"oculet_pets",
 	"terrarium",
+	"reedbuncher",
 }

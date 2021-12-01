@@ -29,6 +29,7 @@ local component_post = {
 }
 
 local prefab_post = {
+	"shieldofcthulu",
 	"clockworks",
 	"flingobalance",
 	"chester",

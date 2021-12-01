@@ -441,7 +441,7 @@ configuration_options =
 	SkipSpace(),
 	Header("Experimental"),
 	BinaryConfig("honeybandbuff", "Honey Poultice Buff", "[Experimental] Crafting honey poultice gives 2, healing with it gives 10 health overtime as well as 30 health.", false),
-	
+	BinaryConfig("electricalmishap", "Electrical Weapon Retune", "[Experimental] Changes the bug zapper and morning star with the suggestions from Shynuke and Lux.", false),
 ------------------------------
 -- Secret --
 ------------------------------

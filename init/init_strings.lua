@@ -42,7 +42,6 @@ STRINGS.UNCOMP_TOOLTIP = {
 	MOLEHAT = "- Grants protection against Snow Storms / Sand Storms when worn.",
 	ARMOR_BRAMBLE = "- Automatically launches spikes at nearby threats.",
 	COOKIECUTTERHAT = "- Reflects 75% of damage taken back at attacker.",
-	NIGHTSTICK = "- No longer breaks when empty.\n- Can be fueled by various electrical items, and potatoes.",
 	HAMBAT = "- Rots faster.\n- Can be eaten by certain mobs.",
 	TOWNPORTAL = "- Gathers nearby items when channeling.",
 	PUMPKIN_LANTERN = "- Has a positive sanity aura.",
@@ -80,7 +79,6 @@ STRINGS.UNCOMP_TOOLTIP = {
 	AIR_CONDITIONER = "- Can crush up Mushrooms for helpful stat clouds.",
 	ANCIENT_AMULET_RED = "- Drops soul orbs when attacked, which will replenish lost health when picked up.",
 	ARMOR_GLASSMAIL = "- Summons spinning Glass Shards when attacking enemies.\n- Loses shards when damage is taken.",
-	BUGZAPPER = "- Deals bonus damage, and area damage to Insects.\n- Deals electrical damage.\n- Can be fueled by various electrical items, and potatoes.",
 	--DRIFTWOODFISHINGROD = "test",
 	HONEY_LOG = "- Provides protection from Hayfever. Mostly useful for other allies.",
 	RAT_WHIP = "- Critical chance!",
@@ -90,6 +88,14 @@ STRINGS.UNCOMP_TOOLTIP = {
     UM_BEAR_TRAP_EQUIPPABLE_GOLD = "- Slows down anything it's attached to. Deployable and throwable.",
 	WATERMELON_LANTERN = "- Has a positive sanity aura.",
 }
+
+if TUNING.DSTU.ELECTRICALMISHAP == false then
+	STRINGS.UNCOMP_TOOLTIP.NIGHTSTICK = "- No longer breaks when empty.\n- Can be fueled by various electrical items, and potatoes."
+	STRINGS.UNCOMP_TOOLTIPBUGZAPPER = "- Deals bonus damage, and area damage to Insects.\n- Deals electrical damage.\n- Can be fueled by various electrical items, and potatoes."
+else
+	STRINGS.UNCOMP_TOOLTIP.NIGHTSTICK = "- No longer breaks when empty.\n- Functions as a portable lightning rod.\n- Regains fuel when struck by lightning."
+	STRINGS.UNCOMP_TOOLTIP.BUGZAPPER = "- Deals bonus damage, and area damage to Insects.\n- Deals electrical damage."
+end
 
 if TUNING.DSTU.FLINGO_SETTING == "Fuelmuncher" then
 	STRINGS.UNCOMP_TOOLTIP.FIRESUPPRESSOR = "- Drains fuel on each throw.\n- Increased maximum fuel."

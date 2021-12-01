@@ -44,7 +44,9 @@ end
 
 
 local function OnAttacked(inst, data)
+if data.attacker ~= nil and data.attacker:HasTag("player") then
     inst.components.combat:SetTarget(data.attacker)
+end
 end
 
     local sounds =

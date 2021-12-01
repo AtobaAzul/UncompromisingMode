@@ -351,6 +351,7 @@ TUNING.DSTU =
 --Experimental
 
 	HONEYBANDBUFF = GetModConfigData("honeybandbuff"),
+	ELECTRICALMISHAP = GetModConfigData("electricalmishap"),
 }
 
 TUNING.NO_BOSS_TIME = 24
