@@ -67,7 +67,7 @@ local function CanSteal(item)
 	return item.components.inventoryitem ~= nil
 		and item.components.inventoryitem.canbepickedup
 		and item:IsOnValidGround()
-		and not item.components.edible
+		and not inst.components.eater:CanEat(item)
 		and not item:IsNearPlayer(TOOCLOSE)
 		and not item:HasTag("raidrat")
 end
@@ -76,17 +76,40 @@ local NO_TAGS = { "ratimmune", "FX", "NOCLICK", "DECOR", "INLIMBO", "planted", "
 
 local function StealAction(inst)
 	local targetpriority = FindEntity(inst, SEE_DIST,
-	CanSteal,
+	function(item)
+		return item.components.inventoryitem ~= nil
+			and item.components.inventoryitem.canbepickedup
+			and item:IsOnValidGround()
+			and not inst.components.eater:CanEat(item)
+			and not item:IsNearPlayer(TOOCLOSE)
+			and not item:HasTag("raidrat") 
+		end,
 	{ "_inventoryitem", "_equippable" },
 	NO_TAGS)
 	
 	local targetpriority_secondary = FindEntity(inst, SEE_DIST,
-	CanSteal,
+	
+	function(item)
+		return item.components.inventoryitem ~= nil
+			and item.components.inventoryitem.canbepickedup
+			and item:IsOnValidGround()
+			and not inst.components.eater:CanEat(item)
+			and not item:IsNearPlayer(TOOCLOSE)
+			and not item:HasTag("raidrat") 
+		end,
 	{ "_inventoryitem", "gem" },
 	NO_TAGS)
 	
 	local target = FindEntity(inst, SEE_DIST,
-	CanSteal,
+	
+	function(item)
+		return item.components.inventoryitem ~= nil
+			and item.components.inventoryitem.canbepickedup
+			and item:IsOnValidGround()
+			and not inst.components.eater:CanEat(item)
+			and not item:IsNearPlayer(TOOCLOSE)
+			and not item:HasTag("raidrat") 
+		end,
 	{ "_inventoryitem" },
 	NO_TAGS)
 			
@@ -105,19 +128,10 @@ local function StealAction(inst)
 				or nil
 		end
 	else
-		if targetpriority ~= nil and inst._item ~= nil and not inst._item:HasTag("_equippable") then
-			return targetpriority ~= nil
-				and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
-				or nil
-		elseif targetpriority_secondary ~= nil and inst._item ~= nil and not inst._item:HasTag("_equippable") and not inst._item:HasTag("gem") then
-			return targetpriority_secondary ~= nil
-				and BufferedAction(inst, targetpriority_secondary, ACTIONS.PICKUP)
-				or nil
-		elseif not inst.components.inventory:IsFull() then
-			return target ~= nil
-				and BufferedAction(inst, target, ACTIONS.PICKUP)
-				or nil
-		end
+		return targetpriority ~= nil and (inst._item ~= nil and not inst._item:HasTag("_equippable") or inst._item == nil) and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
+			or targetpriority_secondary ~= nil and (inst._item ~= nil and not inst._item:HasTag("_equippable") and not inst._item:HasTag("gem") or inst._item == nil) and BufferedAction(inst, targetpriority_secondary, ACTIONS.PICKUP)
+			or target ~= nil and inst._item == nil and BufferedAction(inst, target, ACTIONS.PICKUP) 
+			or nil
 	end
 end
 

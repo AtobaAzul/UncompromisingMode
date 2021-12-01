@@ -915,11 +915,11 @@ local function OnSpawned(inst, newent)
 end
 
 local function BurrowKilled(inst)
-	if inst.components.periodicspawner ~= nil then
+	--[[if inst.components.periodicspawner ~= nil then
 		inst.components.periodicspawner:Stop()
 	end
 	
-	inst:Remove()
+	inst:Remove()]]
 end
 
 local function BurrowAnim(inst)
@@ -1369,7 +1369,6 @@ local function fn_burrow()
 	inst:AddComponent("herd")
 	inst.components.herd:SetGatherRange(40)
 	inst.components.herd:SetUpdateRange(nil)
-	inst.components.herd:SetOnEmptyFn(inst.Remove)
 	inst.components.herd.maxsize = 8
 	inst.components.herd.nomerging = true
     inst.components.herd.updateposincombat = true
@@ -1478,7 +1477,6 @@ local function fn_scoutburrow()
 	inst.components.herd.maxsize = 8
 	inst.components.herd.nomerging = true
     inst.components.herd.updateposincombat = true
-	inst.components.herd:SetOnEmptyFn(BurrowKilled)
 	inst.components.herd.updatepos = false
 	inst.components.herd.updateposincombat = false
 	
