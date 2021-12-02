@@ -22,11 +22,11 @@ local function DoubleSlap(owner)
 
 		
 		target:DoTaskInTime(0.3, function(target, owner, equip) 
-			if target ~= nil and owner.sg:HasStateTag("attack") and owner:IsNear(target, (range + 0.5)) then
+			if target ~= nil and owner.sg:HasStateTag("attack") and owner:IsNear(target, (range + 0.75)) then
 				
 				local equip = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 				if equip ~= nil then
-					equip.components.weapon:OnAttack(owner, target)
+					equip.components.weapon:OnAttack_NoDurabilityLoss(owner, target)
 				end
 				
 				target.components.combat:GetAttacked(owner, damagecalc, equip) 

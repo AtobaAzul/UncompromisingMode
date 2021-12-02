@@ -51,8 +51,10 @@ end
 
 local function turnoff(inst)
 
-    inst.components.weapon:RemoveElectric()
-    inst.components.fueled:StopConsuming()
+	if inst.components.fueled ~= nil then
+		inst.components.weapon:RemoveElectric()
+		inst.components.fueled:StopConsuming()
+	end
 	inst.SoundEmitter:PlaySound("dontstarve/wilson/lantern_off")
 	
 	if inst.sparktask ~= nil then
@@ -74,7 +76,7 @@ local function ondropped(inst)
 	if inst.sparktask ~= nil then
 		inst.sparktask:Cancel()
 	end
-
+	
     turnoff(inst)
 end
 
@@ -89,7 +91,7 @@ local function onequip(inst, owner)
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 
-    if not inst.components.fueled:IsEmpty() then
+    if inst.components.fueled ~= nil and not inst.components.fueled:IsEmpty() then
         turnon(inst)
     end
 	
@@ -129,7 +131,7 @@ end
 --------------------------------------------------------------------------
 
 local function onattack(inst, attacker, target)
-    if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and not inst.components.fueled:IsEmpty() then
+    if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and ((TUNING.DSTU.ELECTRICALMISHAP == false and not inst.components.fueled:IsEmpty()) or TUNING.DSTU.ELECTRICALMISHAP == true) then
 		if target:HasTag("insect") and not target.components.health:IsDead() then
 			target.components.health:DoDelta(-30, false, attacker)
 			
@@ -213,19 +215,33 @@ local function fn()
     inst.components.inventoryitem:SetOnPutInInventoryFn(turnoff)
 
     inst:AddComponent("equippable")
-
-    inst:AddComponent("fueled")
-
-	inst.components.fueled.fueltype = FUELTYPE.BATTERYPOWER
-	inst.components.fueled.secondaryfueltype = FUELTYPE.CHEMICAL
-    --inst.components.fueled:InitializeFuelLevel(120)
-	--inst.components.fueled.maxfuel = TUNING.NIGHTSTICK_FUEL / 2
-	inst.components.fueled:InitializeFuelLevel(TUNING.NIGHTSTICK_FUEL)
-	inst.components.fueled.rate = 2
-    inst.components.fueled:SetDepletedFn(nofuel)
-    inst.components.fueled:SetTakeFuelFn(ontakefuel)
-    inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION, TUNING.TURNON_FULL_FUELED_CONSUMPTION)
-    inst.components.fueled.accepting = true
+	
+	if TUNING.DSTU.ELECTRICALMISHAP == false then
+		inst:AddComponent("fueled")
+		inst.components.fueled.fueltype = FUELTYPE.BATTERYPOWER
+		inst.components.fueled.secondaryfueltype = FUELTYPE.CHEMICAL
+		--inst.components.fueled:InitializeFuelLevel(120)
+		--inst.components.fueled.maxfuel = TUNING.NIGHTSTICK_FUEL / 2
+		inst.components.fueled:InitializeFuelLevel(TUNING.NIGHTSTICK_FUEL)
+		inst.components.fueled.rate = 2
+		inst.components.fueled:SetDepletedFn(nofuel)
+		inst.components.fueled:SetTakeFuelFn(ontakefuel)
+		inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION, TUNING.TURNON_FULL_FUELED_CONSUMPTION)
+		inst.components.fueled.accepting = true
+		inst._onownerequip = function(owner, data)
+			if data.item ~= inst and
+				(   data.eslot == EQUIPSLOTS.HANDS or
+					(data.eslot == EQUIPSLOTS.BODY and data.item:HasTag("heavy"))
+				) then
+				turnoff(inst)
+			end
+		end
+	else
+		inst:AddComponent("finiteuses")
+		inst.components.finiteuses:SetMaxUses(75)
+		inst.components.finiteuses:SetUses(75)
+		inst.components.weapon:SetElectric()
+	end
 
     inst._light = nil
 
@@ -236,14 +252,7 @@ local function fn()
 
     inst.OnRemoveEntity = OnRemove
 
-    inst._onownerequip = function(owner, data)
-        if data.item ~= inst and
-            (   data.eslot == EQUIPSLOTS.HANDS or
-                (data.eslot == EQUIPSLOTS.BODY and data.item:HasTag("heavy"))
-            ) then
-            turnoff(inst)
-        end
-    end
+
 
     return inst
 end

@@ -1,9 +1,21 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
+
+local function onlightningground(inst)
+	local percent = inst.components.fueled:GetPercent()
+	local refuelnumber = 0
+	if percent + 0.33 > 1 then
+		refuelnumber = 1
+	else
+		refuelnumber = percent + 0.33
+	end
+	inst.components.fueled:SetPercent(refuelnumber)
+end
+
 local function Strike(owner)
 local fx = SpawnPrefab("electrichitsparks")
-	
+onlightningground(inst)	
 	if owner ~= nil then
 		fx.entity:SetParent(owner.entity)
 		fx.entity:AddFollower()
@@ -152,6 +164,17 @@ local function onattack(inst, attacker, target)
     end
 end
 
+local function setcharged(inst, charges)
+    if not inst.charged then
+        inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+        inst.Light:Enable(true)
+        inst:WatchWorldState("cycles", ondaycomplete)
+        inst.charged = true
+    end
+    inst.chargeleft = math.max(inst.chargeleft or 0, charges)
+    dozap(inst)
+end
+
 env.AddPrefabPostInit("nightstick", function(inst)
 	
 	if not TheWorld.ismastersim then
@@ -170,7 +193,13 @@ env.AddPrefabPostInit("nightstick", function(inst)
 		inst.components.fueled:SetTakeFuelFn(ontakefuel)
 		inst.components.fueled.fueltype = FUELTYPE.BATTERYPOWER
 		inst.components.fueled.secondaryfueltype = FUELTYPE.CHEMICAL
-		inst.components.fueled.accepting = true
+		if TUNING.DSTU.ELECTRICALMISHAP == false then
+			inst.components.fueled.accepting = true
+		else
+			inst.components.fueled.rate = 1
+			inst:AddTag("lightningrod")
+			inst:ListenForEvent("lightningstrike", onlightningground)
+		end
 	end
 
 	if inst.components.equippable ~= nil then
@@ -182,5 +211,5 @@ env.AddPrefabPostInit("nightstick", function(inst)
 		inst.components.weapon:RemoveElectric()
 		inst.components.weapon:SetOnAttack(onattack)
 	end
-
+	
 end)

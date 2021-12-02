@@ -32,7 +32,7 @@ local function DamageCalculation(inst, isattack)
 	
 	local orangegem = #inst.components.container:FindItems( function(item) return item.prefab == "orangegem_cracked" end )
 	
-    local dmg = 40 + (10 * opalgem) + (5 * (redgem + bluegem + yellowgem + greengem + orangegem + purplegem))
+    local dmg = 40 + (5 * opalgem) + (5 * (redgem + bluegem + yellowgem + greengem + orangegem + purplegem))
 		
 	inst.components.weapon:SetDamage(dmg)
 	

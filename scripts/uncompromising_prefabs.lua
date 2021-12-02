@@ -7,6 +7,7 @@ return {
 	"root_spike",
 	"uncompromising_rat",
 	"ratpoison",
+	"ratpoison_debuff",
 	--"ratpoisonbottle",
 	"firemeteorwarning",
 	"antlionwarning",
@@ -288,4 +289,5 @@ return {
 	"oculet",
 	"oculet_pets",
 	"terrarium",
+	"reedbuncher",
 }
