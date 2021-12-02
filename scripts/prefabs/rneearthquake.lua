@@ -92,7 +92,7 @@ local function Fx2(inst)
 	ShakeAllCameras(CAMERASHAKE.FULL, 5, 0.05, 0.2, inst, 10)
 
 	if inst:IsOnOcean() then
-		SpawnPrefab("malbatross_ripple").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		SpawnPrefab("antlion_sinkhole_ripple").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	else
 		SpawnPrefab("groundpound_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
 		SpawnPrefab("slide_puff").Transform:SetPosition(inst.Transform:GetWorldPosition())
@@ -132,7 +132,7 @@ local function Init(inst)
 	
 	local boat = TheWorld.Map:GetPlatformAtPoint(x, z)
 	if boat then
-		SpawnPrefab("malbatross_ripple").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		SpawnPrefab("antlion_sinkhole_ripple").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	elseif inst:IsOnOcean() then
 		SpawnPrefab("ocean_splash_ripple2").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	else

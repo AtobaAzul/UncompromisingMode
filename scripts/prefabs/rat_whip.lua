@@ -30,28 +30,51 @@ local function onattack(inst, attacker, target)
 
         --impact sounds normally play through comabt component on the target
         --whip has additional impact sounds logic, which we'll just add here
-
-        if math.random() < chance then
-            snap.Transform:SetScale(3, 3, 3)
+		
+		if attacker ~= nil and attacker.components.hunger ~= nil then
+			local value = attacker.components.hunger:GetPercent()
+			local hunger = 4
+			
+			if value < 0.25 then
+				value = 0.25
+			end
+			
+			local scalingvalue = hunger * value
+			
+			local damage = -8.5 * scalingvalue
+			
             if target.SoundEmitter ~= nil then
 				target.SoundEmitter:PlaySound("dontstarve/common/whip_small")
             end
 			
 			if target ~= nil and target.components.health ~= nil then
-				target.components.health:DoDelta(-30, false, attacker)
+				target.components.health:DoDelta(damage, false, attacker)
 			end
 			
-			if attacker ~= nil then
-				if attacker.components.hunger ~= nil and attacker.components.hunger:GetPercent() > 0 then
-					attacker.components.hunger:DoDelta(-3)
-				end
-				
-				if attacker.SoundEmitter ~= nil then
-					attacker.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/death")
-				end
+			if attacker.components.hunger ~= nil and attacker.components.hunger:GetPercent() > 0 then
+				attacker.components.hunger:DoDelta(-scalingvalue)
 			end
-        elseif target.SoundEmitter ~= nil then
-            target.SoundEmitter:PlaySound("dontstarve/common/whip_small")
+			local uses1 = 1
+			local uses2 = 1
+			if attacker ~= nil and attacker:IsValid() and attacker.components.efficientuser ~= nil then
+				uses1 = 1 * (attacker.components.efficientuser:GetMultiplier(ACTIONS.ATTACK) or 1) * value
+			end
+			
+			uses2 = 1 * value
+			
+			local uses = uses1 + uses2
+			
+			print("=======================")
+			print("Value = "..value)
+			print("Hunger = "..hunger)
+			print("Scalingvalue = "..scalingvalue)
+			print("Damage = "..damage)
+			print("Base Damage Uses = "..uses1)
+			print("Bonus Damage Uses = "..uses2)
+			print("Final Uses = "..uses)
+			print("=======================")
+			
+			inst.components.fueled:DoDelta(-uses)
         end
     end
 end
@@ -83,14 +106,21 @@ local function fn()
     end
 
     inst:AddComponent("weapon")
-    inst.components.weapon:SetDamage(TUNING.WHIP_DAMAGE*1.25)
+    inst.components.weapon:SetDamage(34)
     inst.components.weapon:SetRange(TUNING.WHIP_RANGE)
     inst.components.weapon:SetOnAttack(onattack)
-
-    inst:AddComponent("finiteuses")
+	
+    --[[inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetMaxUses(TUNING.WHIP_USES)
     inst.components.finiteuses:SetUses(TUNING.WHIP_USES)
-    inst.components.finiteuses:SetOnFinished(inst.Remove)
+    inst.components.finiteuses:SetOnFinished(inst.Remove)]]
+	
+    inst:AddComponent("fueled")
+    --inst.components.fueled:SetSectionCallback(onfuelchange)
+    inst.components.fueled:InitializeFuelLevel(300)
+    inst.components.fueled:SetDepletedFn(inst.Remove)
+	inst.components.fueled.accepting = false
+    --inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION, TUNING.TURNON_FULL_FUELED_CONSUMPTION)
 
     inst:AddComponent("inspectable")
 
