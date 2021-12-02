@@ -589,6 +589,8 @@ local function onequip(inst, owner)
 	if inst.customequip ~= nil then
 		inst.customequip(inst)
 	end
+	
+	inst.components.fueled:StartConsuming()
 end
  
 local function onunequip(inst, owner)
@@ -602,6 +604,8 @@ local function onunequip(inst, owner)
 	if inst.customunequip ~= nil then
 		inst.customunequip(inst)
 	end
+
+	inst.components.fueled:StopConsuming()
 end
 
 local function fncommon(bank, build)
@@ -633,6 +637,11 @@ local function fncommon(bank, build)
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
+	
+	inst:AddComponent("fueled")
+	inst.components.fueled.fueltype = FUELTYPE.USAGE
+	inst.components.fueled:InitializeFuelLevel(480)
+	inst.components.fueled:SetDepletedFn(--[[generic_perish]]inst.Remove)
 	
     inst.components.equippable:SetOnEquip( onequip )
     inst.components.equippable:SetOnUnequip( onunequip )

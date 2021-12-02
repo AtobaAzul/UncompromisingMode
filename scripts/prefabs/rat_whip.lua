@@ -33,7 +33,7 @@ local function onattack(inst, attacker, target)
 		
 		if attacker ~= nil and attacker.components.hunger ~= nil then
 			local value = attacker.components.hunger:GetPercent()
-			local hunger = 4
+			local hunger = 3
 			
 			if value < 0.25 then
 				value = 0.25
@@ -41,7 +41,8 @@ local function onattack(inst, attacker, target)
 			
 			local scalingvalue = hunger * value
 			
-			local damage = -8.5 * scalingvalue
+			snap.Transform:SetScale(scalingvalue / 1.25, scalingvalue / 1.25, scalingvalue / 1.25)
+			local damage = (-34 / 3) * scalingvalue
 			
             if target.SoundEmitter ~= nil then
 				target.SoundEmitter:PlaySound("dontstarve/common/whip_small")
@@ -52,7 +53,8 @@ local function onattack(inst, attacker, target)
 			end
 			
 			if attacker.components.hunger ~= nil and attacker.components.hunger:GetPercent() > 0 then
-				attacker.components.hunger:DoDelta(-scalingvalue)
+				local burnrate = attacker.components.hunger.burnratemodifiers:Get()
+				attacker.components.hunger:DoDelta(-scalingvalue * burnrate)
 			end
 			local uses1 = 1
 			local uses2 = 1
@@ -77,6 +79,14 @@ local function onattack(inst, attacker, target)
 			inst.components.fueled:DoDelta(-uses)
         end
     end
+end
+
+local function on_uses_finished(inst)
+    if inst.components.inventoryitem.owner ~= nil then
+        inst.components.inventoryitem.owner:PushEvent("toolbroke", { tool = inst })
+    end
+
+    inst:Remove()
 end
 
 local function fn()
@@ -117,8 +127,8 @@ local function fn()
 	
     inst:AddComponent("fueled")
     --inst.components.fueled:SetSectionCallback(onfuelchange)
-    inst.components.fueled:InitializeFuelLevel(300)
-    inst.components.fueled:SetDepletedFn(inst.Remove)
+    inst.components.fueled:InitializeFuelLevel(200)
+    inst.components.fueled:SetDepletedFn(on_uses_finished)
 	inst.components.fueled.accepting = false
     --inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION, TUNING.TURNON_FULL_FUELED_CONSUMPTION)
 
