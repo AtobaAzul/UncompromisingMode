@@ -25,11 +25,7 @@ end
 
 local function SetLightColour(inst, val)
 	if inst.Light ~= nil then
-		if inst.components.health ~= nil and (inst.components.health:GetPercent() <= 0.5 or inst.components.health:IsDead()) then
-			inst.Light:SetColour(0, 0, val)
-		else
-			inst.Light:SetColour(val, 0, 0)
-		end
+		inst.Light:SetColour(0, 0, val)
 	end
 end
 
