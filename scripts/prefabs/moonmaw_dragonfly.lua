@@ -515,10 +515,18 @@ local function MoonMawCheck(player)
 end
 
 local function OnNear(inst,player)
-	if player.components.sanity ~= nil then
+	if player.components.sanity ~= nil and player.components.sanity.mode == SANITY_MODE_INSANITY then
 		player.components.sanity:EnableLunacy(true, "moonmaw")
 		player.moonmaw = inst
 		player:DoTaskInTime(3,MoonMawCheck)
+	end
+end
+
+local function CheckPlayers(inst)
+	local x,y,z = inst.Transform:GetWorldPosition()
+	local players = TheSim:FindEntities(x,y,z,35,{"player"},{"playerghost"})
+	for i,v in ipairs(players) do
+		OnNear(inst,v)
 	end
 end
 
@@ -705,11 +713,9 @@ local function fn(Sim)
 	
 	inst.sg:GoToState("skyfall")
 	inst.TryEjectLavae = TryEjectLavae
+
 	--
-	inst:AddComponent("playerprox")
-	inst.components.playerprox:SetDist(35, 40)
-	inst.components.playerprox:SetOnPlayerNear(OnNear)
-	--
+	inst:DoPeriodicTask(3,CheckPlayers)
 	inst:DoPeriodicTask(10,PerEjectCheck)
     return inst
 end
