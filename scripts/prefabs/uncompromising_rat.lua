@@ -1542,9 +1542,10 @@ local function TimeForACheckUp(inst)
 	
 	
 	inst.ratscore = inst.ratscore + inst.itemscore + inst.foodscore + inst.burrowbonus
-	
-	print(inst.ratscore)
-	print("THATS THE NORMAL RAT SCORE")
+	print("Itemscore = "inst.itemscore)
+	print("Foodscore = "inst.foodscore)
+	print("Burrowbonus = "inst.burrowbonus)
+	print("Ratscore = "inst.ratscore)
 	TheWorld:PushEvent("reducerattimer", {value = inst.ratscore})
 	
 	
