@@ -109,8 +109,11 @@ local function Fx2(inst)
 			SpawnPrefab("round_puff_fx_sm").Transform:SetPosition(inst.Transform:GetWorldPosition())
 		end
 		
-		inst.components.combat:SetDefaultDamage(5)
-		inst.components.combat:DoAreaAttack(inst, 2, nil, nil, nil, AREAATTACK_EXCLUDETAGS)
+		local ents = TheSim:FindEntities(x, y, z, 2, nil, { "INLIMBO", "player", "abigail" })
+		
+		if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
+			v.components.combat:GetAttacked(inst, 5, nil)
+		end
 	elseif chance <= 0.66 and chance > 0.33 then
 		if boat then
 			boat:PushEvent("spawnnewboatleak", {pt = pt, leak_size = "med_leak", playsoundfx = true})
@@ -120,8 +123,11 @@ local function Fx2(inst)
 			SpawnPrefab("round_puff_fx_lg").Transform:SetPosition(inst.Transform:GetWorldPosition())
 		end
 		
-		inst.components.combat:SetDefaultDamage(10)
-		inst.components.combat:DoAreaAttack(inst, 3.5, nil, nil, nil, AREAATTACK_EXCLUDETAGS)
+		local ents = TheSim:FindEntities(x, y, z, 3.5, nil, { "INLIMBO", "player", "abigail" })
+		
+		if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
+			v.components.combat:GetAttacked(inst, 10, nil)
+		end
 	end
 	
 	inst:Remove()

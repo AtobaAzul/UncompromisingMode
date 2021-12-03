@@ -1505,26 +1505,38 @@ local function TimeForACheckUp(inst)
 		for i, v in ipairs(ents) do
 			if not v:HasTag("_container") and not v:HasTag("smallcreature") then
 				if v.components.inventoryitem:IsHeld() then
-					if not v:HasTag("frozen") then
-						if v:HasTag("stale") then
-							inst.foodscore = inst.foodscore + 5
-						elseif v:HasTag("spoiled") then
-							inst.foodscore = inst.foodscore + 15
+				
+				
+					if v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" then
+						print("lureplant is holding!")
+					else
+						if not v:HasTag("frozen") then
+							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+						
+							if v:HasTag("stale") then
+								inst.foodscore = inst.foodscore + (5 * inst.multiplier)
+							elseif v:HasTag("spoiled") then
+								inst.foodscore = inst.foodscore + (10 * inst.multiplier)
+							elseif v.prefab == "spoiled_food" then
+								inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+								inst.foodscore = inst.foodscore + (15 * inst.multiplier)
+							end
 						end
-					elseif v.prefab == "spoiled_food" then
-						inst.foodscore = inst.foodscore + 25
 					end
 				else
 					if not v:HasTag("frozen") then
+						inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+						
 						if v:HasTag("fresh") then
-							inst.foodscore = inst.foodscore + 10
+							inst.foodscore = inst.foodscore + (10 * inst.multiplier)
 						elseif v:HasTag("stale") then
-							inst.foodscore = inst.foodscore + 20
+							inst.foodscore = inst.foodscore + (20 * inst.multiplier)
 						elseif v:HasTag("spoiled") then
-							inst.foodscore = inst.foodscore + 30
+							inst.foodscore = inst.foodscore + (30 * inst.multiplier)
+						elseif v.prefab == "spoiled_food" then
+							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+							inst.foodscore = inst.foodscore + (35 * inst.multiplier)
 						end
-					elseif v.prefab == "spoiled_food" then
-						inst.foodscore = inst.foodscore + 30
 					end
 					
 					if v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool") then

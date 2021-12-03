@@ -113,19 +113,21 @@ local function StealAction(inst)
 	{ "_inventoryitem" },
 	NO_TAGS)
 			
-	if inst:HasTag("packrat") and not inst.components.inventory:IsFull() then
-		if targetpriority ~= nil then
-			return targetpriority ~= nil
-				and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
-				or nil
-		elseif targetpriority_secondary ~= nil then
-			return targetpriority_secondary ~= nil
-				and BufferedAction(inst, targetpriority_secondary, ACTIONS.PICKUP)
-				or nil
-		else
-			return target ~= nil
-				and BufferedAction(inst, target, ACTIONS.PICKUP)
-				or nil
+	if inst:HasTag("packrat") then
+		if not inst.components.inventory:IsFull() then
+			if targetpriority ~= nil then
+				return targetpriority ~= nil
+					and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
+					or nil
+			elseif targetpriority_secondary ~= nil then
+				return targetpriority_secondary ~= nil
+					and BufferedAction(inst, targetpriority_secondary, ACTIONS.PICKUP)
+					or nil
+			else
+				return target ~= nil
+					and BufferedAction(inst, target, ACTIONS.PICKUP)
+					or nil
+			end
 		end
 	else
 		return targetpriority ~= nil and (inst._item ~= nil and not inst._item:HasTag("_equippable") or inst._item == nil) and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
