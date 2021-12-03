@@ -1511,7 +1511,7 @@ local function TimeForACheckUp(inst)
 						elseif v:HasTag("spoiled") then
 							inst.foodscore = inst.foodscore + 15
 						end
-					elseif v.prefab == "spoiledfood" then
+					elseif v.prefab == "spoiled_food" then
 						inst.foodscore = inst.foodscore + 25
 					end
 				else
@@ -1523,7 +1523,7 @@ local function TimeForACheckUp(inst)
 						elseif v:HasTag("spoiled") then
 							inst.foodscore = inst.foodscore + 30
 						end
-					elseif v.prefab == "spoiledfood" then
+					elseif v.prefab == "spoiled_food" then
 						inst.foodscore = inst.foodscore + 30
 					end
 					
