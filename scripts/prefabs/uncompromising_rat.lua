@@ -1542,10 +1542,17 @@ local function TimeForACheckUp(inst)
 	
 	
 	inst.ratscore = inst.ratscore + inst.itemscore + inst.foodscore + inst.burrowbonus
-	print("Itemscore = "inst.itemscore)
-	print("Foodscore = "inst.foodscore)
-	print("Burrowbonus = "inst.burrowbonus)
-	print("Ratscore = "inst.ratscore)
+	print("Itemscore = "..inst.itemscore)
+	print("Foodscore = "..inst.foodscore)
+	print("Burrowbonus = "..inst.burrowbonus)
+	print("Ratscore = "..inst.ratscore)
+	print("------------------------")
+	TheNet:SystemMessage("Itemscore = "..inst.itemscore)
+	TheNet:SystemMessage("Foodscore = "..inst.foodscore)
+	TheNet:SystemMessage("Burrowbonus = "..inst.burrowbonus)
+	TheNet:SystemMessage("Ratscore = "..inst.ratscore)
+	TheNet:SystemMessage("-------------------------")
+	
 	TheWorld:PushEvent("reducerattimer", {value = inst.ratscore})
 	
 	
