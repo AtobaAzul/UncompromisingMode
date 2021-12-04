@@ -1560,13 +1560,17 @@ local function TimeForACheckUp(inst)
 	print("Burrowbonus = "..inst.burrowbonus)
 	print("Ratscore = "..inst.ratscore)
 	print("------------------------")
-	TheNet:SystemMessage("-------------------------")
-	TheNet:SystemMessage("Itemscore = "..inst.itemscore)
-	TheNet:SystemMessage("Foodscore = "..inst.foodscore)
-	TheNet:SystemMessage("Burrowbonus = "..inst.burrowbonus)
-	TheNet:SystemMessage("Ratscore = "..inst.ratscore)
-	TheNet:SystemMessage("-------------------------")
-	
+	if TUNING.DSTU.ANNOUNCE_BASESTATUS == true then
+		TheNet:SystemMessage("-------------------------")
+		TheNet:SystemMessage("Itemscore = "..inst.itemscore)
+		TheNet:SystemMessage("Foodscore = "..inst.foodscore)
+		TheNet:SystemMessage("Burrowbonus = "..inst.burrowbonus)
+		TheNet:SystemMessage("Ratscore = "..inst.ratscore)
+		TheNet:SystemMessage("-------------------------")
+	end
+	if inst.ratscore > 240 then
+		inst.ratscore = 240
+	end
 	TheWorld:PushEvent("reducerattimer", {value = inst.ratscore})
 	
 	
@@ -1585,38 +1589,27 @@ local function TimeForACheckUp(inst)
 		end
 	end]]
 	if inst.ratwarning >= 1 then
-		if math.random() > 0.85 then
+		if math.random() > 0 then
 			if inst.ratwarning > 5 then
 				inst.ratwarning = 5
 			end
 			
-			for c = 1, (inst.ratwarning) do
-				inst:DoTaskInTime((c/5), function(inst)
-					local warning = SpawnPrefab("uncompromising_ratwarning")
-					warning.Transform:SetPosition(inst.Transform:GetWorldPosition())
-					--warning.entity:SetParent(b)
-					--b.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
-					--warning.entity:SetParent(TheFocalPoint.b.entity)
-				end)
-			end
-				
-			
-			
-			local players = TheSim:FindEntities(x, y, z, 40, {"player"})
+
+			local players = TheSim:FindEntities(x, y, z, 40, {"player"},{"playerghost"})
 			for a, b in ipairs(players) do
 				
-				if math.random() > 0.85 then
+				if math.random() > 0.5 then
 					if inst.burrowbonus > inst.itemscore and inst.burrowbonus > inst.foodscore then
 						b:DoTaskInTime(2+math.random(), function(b)
-							b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER", "LEVEL_"..tostring(RoundToNearest(inst.ratwarning, 1))))
+							b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_BURROWS", "LEVEL_1"))
 						end)
 					elseif inst.itemscore > inst.burrowbonus and inst.itemscore > inst.foodscore then
 						b:DoTaskInTime(2+math.random(), function(b)
-							b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER", "LEVEL_"..tostring(RoundToNearest(inst.ratwarning, 1))))
+							b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_ITEMS", "LEVEL_1"))
 						end)
 					elseif inst.foodscore > inst.burrowbonus and inst.foodscore > inst.itemscore then
 						b:DoTaskInTime(2+math.random(), function(b)
-							b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER", "LEVEL_"..tostring(RoundToNearest(inst.ratwarning, 1))))
+							b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_FOOD", "LEVEL_1"))
 						end)
 					end
 				end

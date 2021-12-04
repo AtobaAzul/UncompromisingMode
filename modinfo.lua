@@ -72,28 +72,6 @@ configuration_options =
 -- Core Gameplay --
 ------------------------------
     Header("Core Gameplay"),
-    {
-		name = "rattimer",
-		label = "Rat Timer",
-		hover = "Time until rats can spawn!",
-		options =
-		{
-			{description = "Lowered[1 second]", data = 1},
-			{description = "Default[50 days]", data = 24000},
-		},
-		default = 24000,
-	},
-	{
-		name = "ratsnifftimer",
-		label = "Rat Sniff Timer",
-		hover = "Delay between rat sniffs (cannot sniff until atleast 10 days have passed)",
-		options =
-		{
-			{description = "Default[60 seconds]", data = 60},
-			{description = "Doubled[120 seconds]", data = 120},
-		},
-		default = 60,
-	},
 	BinaryConfig("foodregen", "Over Time Food Stats", "Health and Sanity from foods is applied over time, each food acting as a seperate stackable health or sanity regen buff.", true),
     BinaryConfig("caved", "[IMPORTANT] Cave Config", "Switches some things around so players who can't run Caves can still enjoy the game. ENABLE IF CAVES ARE ENABLED!", true),
 	{
@@ -193,6 +171,36 @@ configuration_options =
 		},
 		default = 0,
 	},]]
+	
+	SkipSpace(),
+------------------------------
+-- Character Reworks --
+------------------------------
+    Header("Rats"),
+------------------------------
+    {
+		name = "rattimer",
+		label = "Rat Timer",
+		hover = "Time until rats can spawn!",
+		options =
+		{
+			{description = "Lowered[1 second]", data = 1},
+			{description = "Default[50 days]", data = 24000},
+		},
+		default = 24000,
+	},
+	{
+		name = "ratsnifftimer",
+		label = "Rat Sniff Timer",
+		hover = "Delay between rat sniffs (cannot sniff until atleast 10 days have passed)",
+		options =
+		{
+			{description = "Default[60 seconds]", data = 60},
+			{description = "Doubled[120 seconds]", data = 120},
+		},
+		default = 60,
+	},
+	
 -----------------------------
 -- Items and Structures--
 -----------------------------
@@ -442,6 +450,7 @@ configuration_options =
 	Header("Experimental"),
 	BinaryConfig("honeybandbuff", "Honey Poultice Buff", "[Experimental] Crafting honey poultice gives 2, healing with it gives 10 health overtime as well as 30 health.", false),
 	BinaryConfig("electricalmishap", "Electrical Weapon Retune", "[Experimental] Changes the bug zapper and morning star with the suggestions from Shynuke and Lux.", false),
+	BinaryConfig("announce_basestatus", "[DEV] Announce Ratsniffer","[Developer Tool] Prints the exact rat sniff values to chat to be viewed in real time.",false),
 ------------------------------
 -- Secret --
 ------------------------------

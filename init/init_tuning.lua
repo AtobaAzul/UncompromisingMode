@@ -348,10 +348,11 @@ TUNING.DSTU =
 	PALE_VOMIT_NUTRIENTS	= { 8, 8, 8 },
 
 
---Experimental
+--Experimental and DEV
 
 	HONEYBANDBUFF = GetModConfigData("honeybandbuff"),
 	ELECTRICALMISHAP = GetModConfigData("electricalmishap"),
+	ANNOUNCE_BASESTATUS = GetModConfigData("announce_basestatus"),
 }
 
 TUNING.NO_BOSS_TIME = 24

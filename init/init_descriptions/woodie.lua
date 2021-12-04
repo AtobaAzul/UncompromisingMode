@@ -310,3 +310,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "I'll keep this for dire circumstances."
 	DESCRIBE.DORMANT_RAIN_HORN = "This is pretty nice, ain't it lucy?"
 	DESCRIBE.RAIN_HORN = "How did that old crab do this?"
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+        LEVEL_1 = "Don't want no vermin carrying away our kit.",
+    }
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
+        LEVEL_1 = "Best clean up our foodstuffs, might attract bears, or worse.",
+    }
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
+        LEVEL_1 = "They've been very busy out there in the woods, eh?",
+    }

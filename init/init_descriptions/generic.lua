@@ -393,23 +393,11 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	
 	
     ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
-        LEVEL_1 = "Did you hear something?",
-        LEVEL_2 = "This place is a bit of a mess. I could tidy up a bit.",
-        LEVEL_3 = "Sounds like rats. I don't want them stealing anything left out.",
-        LEVEL_4 = "We need to clean up quick, or we may have some unwelcome visitors!",
-        LEVEL_5 = "I should pack up any loose gear, otherwise rats might steal it!",
+        LEVEL_1 = "The camp is looking like rat's nest.",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
-        LEVEL_1 = "Did you hear something?",
-        LEVEL_2 = "Theres a bit of a stale food smell in the area, could attract animals.",
-        LEVEL_3 = "Sounds like rats. Maybe they smell some food?",
-        LEVEL_4 = "Were going to attract rats with all this food smell!",
-        LEVEL_5 = "We need to get our food stored away, and throw out spoiled food quickly!",
+        LEVEL_1 = "The state of our rations may attract unwanted attention to the camp.",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
-        LEVEL_1 = "Did you hear something?",
-        LEVEL_2 = "I've seen a lot of rats nearby, they must be multiplying.",
-        LEVEL_3 = "Sounds like rats. We should probably take care of their hiding places.",
-        LEVEL_4 = "Lots of rats around, I need to get rid of their burrows!",
-        LEVEL_5 = "Rats are multiplying at an alarming rate, I need to track down their dens!",
+        LEVEL_1 = "The rats seem to be multiplying out in the wilderness, where is their source?",
     }
