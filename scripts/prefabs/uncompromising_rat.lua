@@ -1507,7 +1507,7 @@ local function TimeForACheckUp(inst)
 				if v.components.inventoryitem:IsHeld() then
 				
 				
-					if v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" then
+					if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" then
 						print("lureplant is holding!")
 					else
 						if not v:HasTag("frozen") then
@@ -1549,8 +1549,8 @@ local function TimeForACheckUp(inst)
 		end
 	end
 	
-	inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck._ratburrows or 0
-	inst.burrowbonus = 10 * inst.ratburrows
+	inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck:GetBurrows() or 0
+	inst.burrowbonus = 15 * inst.ratburrows
 	
 	
 	inst.ratscore = inst.ratscore + inst.itemscore + inst.foodscore + inst.burrowbonus
@@ -1574,7 +1574,7 @@ local function TimeForACheckUp(inst)
 	TheWorld:PushEvent("reducerattimer", {value = inst.ratscore})
 	
 	
-	inst.ratwarning = inst.ratscore / 100
+	inst.ratwarning = inst.ratscore / 48
 	
 	
 		--[[
@@ -1588,13 +1588,22 @@ local function TimeForACheckUp(inst)
 			end)
 		end
 	end]]
-	if inst.ratwarning >= 1 then
-		if math.random() > 0 then
+	if inst.ratscore >= 60 then
+		if math.random() > 0.85 then
 			if inst.ratwarning > 5 then
 				inst.ratwarning = 5
 			end
 			
-
+			for c = 1, (inst.ratwarning) do
+				inst:DoTaskInTime((c/5), function(inst)
+					local warning = SpawnPrefab("uncompromising_ratwarning")
+					warning.Transform:SetPosition(inst.Transform:GetWorldPosition())
+					--warning.entity:SetParent(b)
+					--b.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
+					--warning.entity:SetParent(TheFocalPoint.b.entity)
+				end)
+			end
+			
 			local players = TheSim:FindEntities(x, y, z, 40, {"player"},{"playerghost"})
 			for a, b in ipairs(players) do
 				

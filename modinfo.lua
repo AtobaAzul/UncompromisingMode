@@ -181,22 +181,25 @@ configuration_options =
     {
 		name = "rattimer",
 		label = "Rat Timer",
-		hover = "Time until rats can spawn!",
+		hover = "Time until the first rats can spawn!",
 		options =
 		{
-			{description = "Lowered[1 second]", data = 1},
+			{description = "As soon as possible.", data = 1},
+			{description = "Lowered[30 days]", data = 14400},
 			{description = "Default[50 days]", data = 24000},
+			{description = "Raised[70 days]", data = 33600},
 		},
 		default = 24000,
 	},
 	{
 		name = "ratsnifftimer",
 		label = "Rat Sniff Timer",
-		hover = "Delay between rat sniffs (cannot sniff until atleast 10 days have passed)",
+		hover = "The rate at which your base is checked for messiness.",
 		options =
 		{
+			{description = "Lowered[30 seconds]", data = 30},
 			{description = "Default[60 seconds]", data = 60},
-			{description = "Doubled[120 seconds]", data = 120},
+			{description = "Raised[120 seconds]", data = 120},
 		},
 		default = 60,
 	},
