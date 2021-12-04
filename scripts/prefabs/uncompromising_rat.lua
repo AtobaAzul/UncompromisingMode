@@ -1507,7 +1507,7 @@ local function TimeForACheckUp(inst)
 				if v.components.inventoryitem:IsHeld() then
 				
 				
-					if v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" then
+					if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" then
 						print("lureplant is holding!")
 					else
 						if not v:HasTag("frozen") then
