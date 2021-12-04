@@ -278,6 +278,10 @@ local function DecreaseDens(data)
 	print(_ratburrows)
 end
 
+function self:GetBurrows()
+    return _ratburrows
+end
+
 function self:OnUpdate(dt)
 	if _ratsnifftimer then
 		if _ratsnifftimer > 0 then
