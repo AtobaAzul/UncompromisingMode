@@ -23,10 +23,10 @@ STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_EVENING = { "KING BED TIME SOON, YOU
 STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_FRIEND = { "KING SAY PROTECT", "PROTECT YOU", "WHERE MONSTERS?", "PROTECT!", "PROTECT KING!", "PROTECT FRIEND!" }
 
 -- Hey look! I actually did something! -Canis
-STRINGS.CHARACTER_DESCRIPTIONS.willow = "*Has a fondness for fire, but hates the cold\n*Protected by her cuddly bear, Bernie\n\n󰀕Tinkered with her lighter to be more volatile\n󰀕Can set her own skin on fire."
+STRINGS.CHARACTER_DESCRIPTIONS.willow = "*Has a fondness for fire, but hates the cold\n*Protected by her cuddly bear, Bernie\n\n󰀕Tinkered with her lighter to be more volatile\n󰀕Can set her own skin on fire"
 STRINGS.CHARACTER_DESCRIPTIONS.wolfgang = "*Gets stronger with a full belly\n\n󰀕Even more afraid of monsters and the dark\n󰀕Mightiness doesn't drain as much hunger\nbut doesn't increase max health\n󰀕Packs a harder punch than others\n󰀕Isn't as affected by weight"
 STRINGS.CHARACTER_DESCRIPTIONS.wx78 = "*Not a picky eater\n*Charged by lightning, damaged by water\n*Can upgrade with Gears\n\n󰀕Water is more lethal"
-STRINGS.CHARACTER_DESCRIPTIONS.wickerbottom = "*Knows many things\n*Self-publishes books\n*Can't sleep, hates food spoilage\n\n󰀕Reading books require brainpower."
+STRINGS.CHARACTER_DESCRIPTIONS.wickerbottom = "*Knows many things\n*Self-publishes books\n*Can't sleep, hates food spoilage\n\n󰀕Reading books require brainpower"
 STRINGS.CHARACTER_DESCRIPTIONS.wes = "*Can't Talk\n*Practices Balloonomancy\n*Is not a skilled fighter or worker\n\n󰀕Expanded inner dialogue"
 STRINGS.CHARACTER_DESCRIPTIONS.waxwell = "*Is dapper, but frail\n*Can split his mind into pieces\n*Was once king of the world\n\n󰀕Can summon his old puppets"
 STRINGS.CHARACTER_DESCRIPTIONS.warly = "*Has his own line of custom portable cookware\n*Can spice things up\n*Has an insatiable appetite\n\n󰀕Remembers food for longer, but gets bonus stats"
