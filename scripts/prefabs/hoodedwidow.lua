@@ -240,7 +240,7 @@ local function fn()
 		end
         inst.components.combat:SetAreaDamage(TUNING.SPIDERQUEEN_ATTACKRANGE, TUNING.DEERCLOPS_AOE_SCALE, queensstuff) -- you can edit these values to your liking -Axe
     end
-    inst.components.combat:SetDefaultDamage(TUNING.SPIDERQUEEN_DAMAGE * 2)
+    inst.components.combat:SetDefaultDamage(160)
     inst.components.combat.playerdamagepercent = TUNING.DEERCLOPS_DAMAGE_PLAYER_PERCENT
     inst.components.combat:SetAttackPeriod(TUNING.SPIDERQUEEN_ATTACKPERIOD)
     inst.components.combat:SetRetargetFunction(1, Retarget)
