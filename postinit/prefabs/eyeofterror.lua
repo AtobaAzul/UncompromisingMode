@@ -1,27 +1,44 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
-local function UpdateCooldown(inst)
+local function UpdateCooldown1(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	
-	local playercount = #TheSim:FindEntities(x, y, z, 40, {"player"}, {"playerghost"}) or 1
-	local playerscaling = 10 * (playercount or 1)
-
-	inst._cooldowns.spawn = 50 - playerscaling
+	local playercount = #TheSim:FindEntities(x, y, z, 50, {"player"}, {"playerghost"}) or 1
 	
-	if inst._cooldowns.spawn <= 20 then
-		inst._cooldowns.spawn = 18
+	if playercount <= 1 then
+		playercount = 1
 	end
 	
+	if playercount > 6 then
+		inst._cooldowns.charge = 3.5
+		inst._cooldowns.mouthcharge = 7
+		inst._cooldowns.spawn = 5.4
+	else
+		inst._cooldowns.charge = 3.5 + (3.5 / playercount)
+		inst._cooldowns.mouthcharge = 7 + (7 / playercount)
+		inst._cooldowns.spawn = 5.4 + (5.4 / playercount)
+	end
+	
+	print(inst._cooldowns.charge)
+	print(inst._cooldowns.mouthcharge)
 	print(inst._cooldowns.spawn)
 end
 
-local function OnAttackedTwin1(inst, data)
+local function OnAttacked(inst, data)
     if data.attacker and not inst.components.commander:IsSoldier(data.attacker) then
 		inst.components.combat:ShareTarget(data.attacker, 50, function(dude)
-			local should_share = dude:HasTag("eyeofterror")
-				and dude.prefab == "eyeofterror2"
+			local should_share = dude:HasTag("twinofterror")
+				--and dude.prefab == "eyeofterror2"
 				and not dude.components.health:IsDead()
+				
+				if should_share and dude.components.sleeper ~= nil then
+					dude.components.sleeper:WakeUp()
+				end
+				
+				if should_share and dude.components.combat.target == nil then
+					dude.components.combat:SetTarget(data.attacker)
+				end
 				
 			return should_share
 		end, 5)
@@ -29,32 +46,47 @@ local function OnAttackedTwin1(inst, data)
 end
 
 env.AddPrefabPostInit("twinofterror1", function(inst)
+
+	inst:AddTag("twinofterror")
+	
 	if not TheWorld.ismastersim then
 		return
 	end
 	
-    inst:ListenForEvent("attacked", OnAttackedTwin1)
+    inst:ListenForEvent("attacked", OnAttacked)
 	
-	inst:DoPeriodicTask(5, UpdateCooldown)
+	inst:DoPeriodicTask(5, UpdateCooldown1)
 end)
 
-local function OnAttackedTwin2(inst, data)
-    if data.attacker and not inst.components.commander:IsSoldier(data.attacker) then
-		inst.components.combat:ShareTarget(data.attacker, 50, function(dude)
-			local should_share = dude:HasTag("eyeofterror")
-				and dude.prefab == "eyeofterror1"
-				and not dude.components.health:IsDead()
-				
-			return should_share
-		end, 5)
-    end
+local function UpdateCooldown2(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	
+	local playercount = #TheSim:FindEntities(x, y, z, 50, {"player"}, {"playerghost"}) or 1
+	
+	if playercount <= 1 then
+		playercount = 1
+	elseif playercount >= 6 then
+		playercount = 6
+	end
+	
+	inst._cooldowns.charge = 1.75 + (1.75 / playercount)
+	inst._cooldowns.mouthcharge = 3.75 + (3.75 / playercount)
+	inst._cooldowns.spawn = 18 + (18 / playercount)
+	
+	print(inst._cooldowns.charge)
+	print(inst._cooldowns.mouthcharge)
+	print(inst._cooldowns.spawn)
 end
+
 env.AddPrefabPostInit("twinofterror2", function(inst)
+
+	inst:AddTag("twinofterror")
+
 	if not TheWorld.ismastersim then
 		return
 	end
 	
-    inst:ListenForEvent("attacked", OnAttackedTwin2)
+    inst:ListenForEvent("attacked", OnAttacked)
 	
-	inst:DoPeriodicTask(5, UpdateCooldown)
+	inst:DoPeriodicTask(5, UpdateCooldown2)
 end)
