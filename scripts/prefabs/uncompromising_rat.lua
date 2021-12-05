@@ -310,7 +310,6 @@ local function fn()
 	inst:AddTag("cattoy")
 	inst:AddTag("catfood")
 	inst:AddTag("cookable")
-	inst:AddTag("noauradamage")
 	
 	inst.entity:SetPristine()
 	
@@ -608,7 +607,6 @@ local function junkfn()
 	inst:AddTag("cattoy")
 	inst:AddTag("catfood")
 	inst:AddTag("cookable")
-	inst:AddTag("noauradamage")
 	
 	inst.entity:SetPristine()
 	
@@ -730,7 +728,6 @@ local function packfn()
 	inst:AddTag("cattoy")
 	inst:AddTag("catfood")
 	inst:AddTag("cookable")
-	inst:AddTag("noauradamage")
 	
 	inst.entity:SetPristine()
 	
