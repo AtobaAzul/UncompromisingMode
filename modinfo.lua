@@ -455,7 +455,8 @@ configuration_options =
 		options =
 		{
 			{description = "Default[10000]", data = 10000},
-			{description = "Lowered[5000]", data = 5000},
+			{description = "Lowered [7500]", data = 7500},
+			{description = "Lowest[5000]", data = 5000},
 		},
 		default = 10000,
 	},	
