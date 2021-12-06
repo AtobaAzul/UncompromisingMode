@@ -178,6 +178,9 @@ TUNING.DSTU =
 	--Wiltfly Health
 	WILTFLY_HEALTH = GetModConfigData("wiltfly health"),
 	
+    --Twins health
+    TWIN1_HEALTH = GetModConfigData("twins health"),
+    TWIN2_HEALTH = GetModConfigData("twins health"),
 	--Spawn New Bosses
 	SPAWNMOTHERGOOSE = GetModConfigData("mother_goose"),
 	SPAWNWILTINGFLY = GetModConfigData("wiltfly"),

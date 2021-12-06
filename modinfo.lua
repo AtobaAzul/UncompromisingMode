@@ -448,6 +448,17 @@ configuration_options =
 		},
 		default = 4000,
 	},
+	{
+		name = "twins health",
+		label = "Twins of Terror Health",
+		hover = "Twins of Terror's health can be lowered to closer match a singleplayer experience.",
+		options =
+		{
+			{description = "Default[10000]", data = 10000},
+			{description = "Lowered[5000]", data = 5000},
+		},
+		default = 10000,
+	},	
 	BinaryConfig("crabking_claws", "Crabking Fight Adjustment", "The Crabkings imposing claws now deal 500 damage to the king when killed.", false),
 	SkipSpace(),
 	Header("Experimental"),
