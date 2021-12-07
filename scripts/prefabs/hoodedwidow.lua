@@ -104,7 +104,7 @@ local function EquipWeapons(inst)
         --[[Non-networked entity]]
         meleeweapon.entity:AddTransform()
         meleeweapon:AddComponent("weapon")
-        meleeweapon.components.weapon:SetDamage(TUNING.SPIDERQUEEN_DAMAGE)
+        meleeweapon.components.weapon:SetDamage(160)
         meleeweapon.components.weapon:SetRange(TUNING.SPAT_MELEE_ATTACKRANGE/4)
         meleeweapon:AddComponent("inventoryitem")
         meleeweapon.persists = false
@@ -238,10 +238,16 @@ local function fn()
 				return true
 			end
 		end
-        inst.components.combat:SetAreaDamage(TUNING.SPIDERQUEEN_ATTACKRANGE, TUNING.DEERCLOPS_AOE_SCALE, queensstuff) -- you can edit these values to your liking -Axe
+        inst.components.combat:SetAreaDamage(TUNING.SPIDERQUEEN_ATTACKRANGE, 1, queensstuff) -- you can edit these values to your liking -Axe
     end
     inst.components.combat:SetDefaultDamage(160)
-    inst.components.combat.playerdamagepercent = TUNING.DEERCLOPS_DAMAGE_PLAYER_PERCENT
+	inst.components.combat.customdamagemultfn = function(inst,target) 
+		if target:HasTag("player") then 
+			return 0.5 
+		else 
+			return 1
+		end
+	end
     inst.components.combat:SetAttackPeriod(TUNING.SPIDERQUEEN_ATTACKPERIOD)
     inst.components.combat:SetRetargetFunction(1, Retarget)
 	inst:AddComponent("groundpounder")
