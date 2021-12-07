@@ -15,7 +15,7 @@ end
 
 local function Strike(owner)
 local fx = SpawnPrefab("electrichitsparks")
-onlightningground(inst)	
+--onlightningground(inst)	
 	if owner ~= nil then
 		fx.entity:SetParent(owner.entity)
 		fx.entity:AddFollower()
