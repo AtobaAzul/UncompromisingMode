@@ -133,7 +133,11 @@ end
 local function onattack(inst, attacker, target)
     if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and ((TUNING.DSTU.ELECTRICALMISHAP == false and not inst.components.fueled:IsEmpty()) or TUNING.DSTU.ELECTRICALMISHAP == true) then
 		if target:HasTag("insect") and not target.components.health:IsDead() then
-			target.components.health:DoDelta(-30, false, attacker)
+			if TUNING.DSTU.ELECTRICALMISHAP == false then
+				target.components.health:DoDelta(-30, false, attacker)
+			else
+				target.components.health:DoDelta(-40, false, attacker)
+			end
 			
 			SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
 			
@@ -153,8 +157,11 @@ local function onattack(inst, attacker, target)
 		end
 		
 		if (target:HasTag("spider") or target:HasTag("hoodedwidow")) and not target.components.health:IsDead() then
-			target.components.health:DoDelta(-15, false, attacker)
-			
+			if TUNING.DSTU.ELECTRICALMISHAP == false then
+				target.components.health:DoDelta(-15, false, attacker)
+			else
+				target.components.health:DoDelta(-25, false, attacker)
+			end
 			SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
 			
 			local x, y, z = target.Transform:GetWorldPosition()
@@ -238,9 +245,10 @@ local function fn()
 		end
 	else
 		inst:AddComponent("finiteuses")
-		inst.components.finiteuses:SetMaxUses(75)
-		inst.components.finiteuses:SetUses(75)
+		inst.components.finiteuses:SetMaxUses(80)
+		inst.components.finiteuses:SetUses(80)
 		inst.components.weapon:SetElectric()
+		inst.components.finiteuses:SetOnFinished(inst.Remove)
 	end
 
     inst._light = nil
