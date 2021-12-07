@@ -356,6 +356,7 @@ TUNING.DSTU =
 	HONEYBANDBUFF = GetModConfigData("honeybandbuff"),
 	ELECTRICALMISHAP = GetModConfigData("electricalmishap"),
 	ANNOUNCE_BASESTATUS = GetModConfigData("announce_basestatus"),
+	EYEBRELLAREWORK = GetModConfigData("eyebrellarework"),
 }
 
 TUNING.NO_BOSS_TIME = 24
