@@ -264,10 +264,11 @@ configuration_options =
 		hover = "Food spoils faster. It's as simple as that.",
 		options =
 		{
-			{description = "Default", data = 1},
-			{description = "Double", data = 2},
-			{description = "Triple", data = 3},
-			{description = "Quadruple", data = 4},
+			{description = "Default(1x)", data = 1},
+			{description = "1.5x", data = 1.5},
+			{description = "2x", data = 2},
+			{description = "2.5x", data = 2.5},
+			{description = "3x", data = 3},
 		},
 		default = 2,
 	},
