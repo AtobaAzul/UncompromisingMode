@@ -17,7 +17,7 @@ local function UpdateCooldown1(inst)
 	else
 		inst._cooldowns.charge = 3.5 + (3.5 / playercount)
 		inst._cooldowns.mouthcharge = 7 + (7 / playercount)
-		inst._cooldowns.spawn = 5.4 + (5.4 / playercount)
+		inst._cooldowns.spawn = 5.4 + (10.8 / playercount)
 	end
 	
 	print(inst._cooldowns.charge)
@@ -71,7 +71,7 @@ local function UpdateCooldown2(inst)
 	
 	inst._cooldowns.charge = 1.75 + (1.75 / playercount)
 	inst._cooldowns.mouthcharge = 3.75 + (3.75 / playercount)
-	inst._cooldowns.spawn = 18 + (18 / playercount)
+	inst._cooldowns.spawn = 18 + (36 / playercount)
 	
 	print(inst._cooldowns.charge)
 	print(inst._cooldowns.mouthcharge)
