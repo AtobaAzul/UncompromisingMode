@@ -178,6 +178,25 @@ local function GettingBullied(inst)
 	end
 end
 
+local function OnHitOther(inst, data)
+	inst.combo = inst.combo/10
+	local other = data.target
+	if other ~= nil and other.components.inventory ~= nil and inst.armorcrunch == true then
+		local helm = other.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+		local chest = other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+		local hand = other.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+		if helm ~= nil and helm.components.armor ~= nil then
+			helm.components.armor:TakeDamage(350)
+		end
+		if chest ~= nil and chest.components.armor ~= nil then
+			chest.components.armor:TakeDamage(350)
+		end
+		if hand ~= nil and hand.components.armor ~= nil then
+			hand.components.armor:TakeDamage(350)
+		end
+	end
+	inst.armorcrunch = false
+end
 
 local function fn()
     local inst = CreateEntity()
@@ -312,8 +331,9 @@ local function fn()
 	inst.components.timer:StartTimer("mortar",20+math.random(-1,5))
 	inst:DoPeriodicTask(3, GettingBullied)
 	inst.bullier = nil
+	inst.armorcrunch = false
 	inst:ListenForEvent("killed", OnKilledOther)
-	
+	inst:ListenForEvent("onhitother", OnHitOther)
 
     return inst
 end

@@ -136,7 +136,7 @@ local states=
             TimeEvent(28*FRAMES, function(inst) inst:PerformBufferedAction() inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/swipe") end),
             TimeEvent(28*FRAMES, function(inst) 
 			inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
-			inst.components.combat:DoAttack() 
+			inst.components.combat:DoAttack()
 			end),
         },
 
@@ -257,6 +257,7 @@ local states=
 					target.components.pinnable:Stick("web_net_trap",splashprefabs)
 					target:DoTaskInTime(1, function(target) target.components.pinnable:Unstick() end)
 				end
+				inst.armorcrunch = true --!
 				inst.sg:GoToState("attack")
 			end
 			WebMortar(inst,-15)
