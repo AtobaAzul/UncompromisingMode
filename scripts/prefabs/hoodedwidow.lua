@@ -186,13 +186,13 @@ local function OnHitOther(inst, data)
 		local chest = other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
 		local hand = other.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 		if helm ~= nil and helm.components.armor ~= nil then
-			helm.components.armor:TakeDamage(350)
+			helm.components.armor:TakeDamage(200)
 		end
 		if chest ~= nil and chest.components.armor ~= nil then
-			chest.components.armor:TakeDamage(350)
+			chest.components.armor:TakeDamage(200)
 		end
 		if hand ~= nil and hand.components.armor ~= nil then
-			hand.components.armor:TakeDamage(350)
+			hand.components.armor:TakeDamage(200)
 		end
 	end
 	inst.armorcrunch = false
