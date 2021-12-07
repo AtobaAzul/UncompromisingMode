@@ -349,12 +349,7 @@ local function SetSize(inst)
 		inst.components.named:SetName("Fuzzy Cocoon")
 	end
 end
-local function LandCheck(inst)
-local x,y,z = inst.Transform:GetWorldPosition()
-	if not TheWorld.Map:IsPassableAtPoint(x, 0, z) then
-	inst.GroundCreepEntity:SetRadius(0)
-	end
-end
+
 local function Regen(inst, attacker)
 if not attacker:HasTag("player") then
 	if attacker.components.combat ~= nil and attacker.components.combat.target ~= nil then
@@ -385,7 +380,6 @@ local function fn()
 		inst.entity:AddNetwork()
 		inst.entity:AddDynamicShadow()
 		inst.entity:AddSoundEmitter()
-		inst.entity:AddGroundCreepEntity()
 
 		--MakeObstaclePhysics(inst, .5)
 
@@ -399,7 +393,6 @@ local function fn()
 		inst:AddTag("structure")
 		inst:AddTag("noauradamage")
 		--inst:AddTag("notarget")
-		inst.GroundCreepEntity:SetRadius(3)
 		inst:AddTag("houndfriend")
 		inst:AddTag("antlion_sinkhole_blocker")
 		inst:AddTag("queensstuff")
@@ -429,7 +422,6 @@ local function fn()
 
 		inst:AddComponent("inspectable")
 		inst:DoTaskInTime(0,SetSize)
-		inst:DoTaskInTime(0,LandCheck)
 		MakeSnowCovered(inst)
 		inst.OnSave = onsave
 		inst.OnLoad = onload
