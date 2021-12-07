@@ -154,6 +154,11 @@ local function OnEntitySleep(inst)
 						end
 						inst:DoTaskInTime(.1, function() 
 							inst.Transform:SetPosition(pos:Get())
+							if inst.components.leader ~= nil and inst.components.leader.followers ~= nil then
+								for i,v in ipairs(inst.components.leader.followers) do
+									v.Transform:SetPosition(pos:Get())
+								end
+							end
 						end)
 						
 					end
@@ -169,6 +174,11 @@ local function OnEntitySleep(inst)
 							end
 							inst:DoTaskInTime(.1, function() 
 								inst.Transform:SetPosition(pos:Get())
+								if inst.components.leader ~= nil and inst.components.leader.followers ~= nil then
+									for i,v in ipairs(inst.components.leader.followers) do
+										v.Transform:SetPosition(pos:Get())
+									end
+								end						
 							end)
 							
 						end
@@ -518,7 +528,7 @@ local function OnNear(inst,player)
 	if player.components.sanity ~= nil and player.components.sanity.mode == SANITY_MODE_INSANITY then
 		player.components.sanity:EnableLunacy(true, "moonmaw")
 		player.moonmaw = inst
-		player:DoTaskInTime(3,MoonMawCheck)
+		player:DoPeriodicTask(3,MoonMawCheck)
 	end
 end
 
