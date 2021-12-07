@@ -73,6 +73,7 @@ local function commonfn(build)
     ------------------
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(TUNING.EYEOFTERROR_MINI_HEALTH)
+	inst.components.health:SetInvincible(true)
 
     ------------------
     inst:AddComponent("combat")

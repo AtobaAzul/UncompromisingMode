@@ -70,6 +70,9 @@ local function LightStealTarget(inst)
 		elseif v._light ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
 			print("lightfound")
 			return true
+		elseif v._lastpulsesync ~= nil and v.components.timer and v.components.timer:GetTimeLeft("extinguish") then
+			print("starfound")
+			return true
 		end
 	end
 	
@@ -98,6 +101,17 @@ local function ConsumeLight(inst)
 			
 			if inst.fire ~= nil then
 				inst.fire:LevelUp()
+			end
+		elseif v._lastpulsesync ~= nil and v.components.timer then
+			if v.components.timer:GetTimeLeft("extinguish") ~= nil then
+				v.components.timer:SetTimeLeft("extinguish", v.components.timer:GetTimeLeft("extinguish") - 25)
+				print("star")
+				
+				SpawnPrefab("fuelseeker_circle").Transform:SetPosition(v.Transform:GetWorldPosition())
+				
+				if inst.fire ~= nil then
+					inst.fire:LevelUp()
+				end
 			end
 		end
 	end
@@ -185,9 +199,10 @@ local states=
 
     State{
         name = "stealing_pre",
-        tags = {"idle", "canrotate", "stealing"},
+        tags = {"idle", "canrotate", "stealing", "busy"},
         
         onenter = function(inst, start_anim)
+            inst.components.locomotor:StopMoving()
 			
             PlayExtendedSound(inst, "idle")
             
@@ -209,9 +224,10 @@ local states=
 
     State{
         name = "stealing",
-        tags = {"idle", "canrotate", "stealing"},
+        tags = {"idle", "canrotate", "stealing", "busy"},
         
         onenter = function(inst, start_anim)
+            inst.components.locomotor:StopMoving()
 			if inst.consumetask == nil then
 				inst.consumetask = inst:DoPeriodicTask(0.5, ConsumeLight)
 			end
@@ -245,9 +261,10 @@ local states=
 	
     State{
         name = "burst",
-        tags = {"idle", "canrotate", "attack", "stealing"},
+        tags = {"idle", "canrotate", "attack", "stealing", "busy"},
         
         onenter = function(inst, start_anim)
+            inst.components.locomotor:StopMoving()
 		
             PlayExtendedSound(inst, "attack")
             
@@ -281,9 +298,10 @@ local states=
 	
     State{
         name = "stealing_pst",
-        tags = {"idle", "canrotate", "stealing"},
+        tags = {"idle", "canrotate", "stealing", "busy"},
         
         onenter = function(inst, start_anim)
+            inst.components.locomotor:StopMoving()
 		
             PlayExtendedSound(inst, "idle")
             

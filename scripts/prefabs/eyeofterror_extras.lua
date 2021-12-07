@@ -143,12 +143,12 @@ local function StartBurning(inst)
 	inst:DoPeriodicTask(0.5, Burning)
 end
 
-local function shrinktask_mini(inst)
-	inst:DoTaskInTime(1.5, shrink_mini)
+local function KillIt(inst)
+	inst.SoundEmitter:KillSound("cursedfire")
+	inst:Remove()
 end
-		
 local function startshrinking(inst, time, startsize, endsize)
-	inst.components.sizetweener:StartTween(0.05, 5, inst.Remove)
+	inst.components.sizetweener:StartTween(0.05, 5, KillIt)
 end
 
 local function cursedfirefn()
@@ -186,7 +186,7 @@ local function cursedfirefn()
 	inst.startshrinking = startshrinking
 	inst:startshrinking()
 	
-	inst.SoundEmitter:PlaySound("dontstarve/common/forestfire")
+	inst.SoundEmitter:PlaySound("dontstarve/common/forestfire", "cursedfire")
 	
 	inst:DoTaskInTime(0.5, StartBurning)
 

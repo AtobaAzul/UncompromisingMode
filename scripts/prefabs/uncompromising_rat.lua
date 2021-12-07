@@ -89,7 +89,7 @@ local function on_burnt(inst)
 end
 
 local function OnAttackOther(inst, data)
-	if data.target ~= nil and data.target:HasTag("player") and not data.target:HasTag("hasplaguemask") and not data.target.prefab == "wx78" then
+	if data.target ~= nil and data.target:HasTag("player") and not data.target:HasTag("hasplaguemask") and not data.target:HasTag("ratfriend") and not data.target.prefab == "wx78" then
 		data.target.components.health:DeltaPenalty(0.01)
 	end
 	
@@ -994,9 +994,6 @@ local function MakeRatBurrow(inst)
 			break
 		end
 	end
-	
-    inst:DoTaskInTime(0, OnInit)
-    inst:ListenForEvent("onremove", OnRemoved)
 end
 
 --GetClosestInstWithTag(tag, inst, radius or 1000)
@@ -1122,6 +1119,9 @@ local function EndRaid(inst)
 	inst.entity:SetCanSleep(false)
 	
 	inst.raiding = false
+	
+    inst:DoTaskInTime(0, OnInit)
+    inst:ListenForEvent("onremove", OnRemoved)
 end
 
 local function OnInitHerd(inst)

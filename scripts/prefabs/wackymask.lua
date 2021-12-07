@@ -330,169 +330,68 @@ local function opossum_onuse(inst)
 	end
 end
 
+local function FindClosestPart(owner)
+	local ix, iy, iz = owner.Transform:GetWorldPosition()
 
-
-
-
-local EFFECTS =
-{
-    hot = "dr_hot_loop",
-    warmer = "dr_warmer_loop",
-    warm = "dr_warm_loop_2",
-    cold = "dr_warm_loop_1",
-}
-
-local function FindClosestPart(inst)
-
-    if inst.tracking_parts == nil then
-        inst.tracking_parts = {}
-        for k,v in pairs(Ents) do
-            if v:HasTag("ratburrow") then
-                table.insert(inst.tracking_parts, v)
-            end
-        end
-    end
-
-    if inst.tracking_parts then
-        local closest = nil
-        local closest_dist = nil
-        for k,v in pairs(inst.tracking_parts) do
-            if v:IsValid() and not v:IsInLimbo() then
-			
-			
-			
-                local dist = v:GetDistanceSqToInst(inst)
-				
-				if v.SoundEmitter ~= nil then
-					v:DoTaskInTime((1 * dist) / dist, function(v)
-						v.SoundEmitter:PlaySound("UCSounds/ratsniffer/burrowping")
-					end)
-				end
-				
-                if not closest_dist or dist < closest_dist then
-                    closest = v
-                    closest_dist = dist
-                end
-            end
-        end
-
-        return closest
-    end
-
+	local burrows = TheSim:FindEntities(ix, iy, iz, 2000, {"ratburrow"})
+	if burrows ~= nil then
+		for i, v in ipairs(burrows) do
+			if owner.SoundEmitter ~= nil then
+				owner:DoTaskInTime(i, function(owner)
+					for i = 1,5 do
+						local delay = i / 10
+					
+						owner:DoTaskInTime(FRAMES * i * 1.5 + delay, function()
+							if v ~= nil then
+								local x, y, z = owner.Transform:GetWorldPosition()
+								local px, py, pz = v.Transform:GetWorldPosition()
+								local rad = math.rad(owner:GetAngleToPoint(px, py, pz))
+								local velx = math.cos(rad) * 4.5
+								local velz = -math.sin(rad) * 4.5
+							
+								local dx, dy, dz = x + ((i/2) * velx), 0, z + ((i/2) * velz)
+								
+								local fx1 = SpawnPrefab("ratring_fx")
+								fx1.Transform:SetPosition(dx, dy, dz)
+								fx1.Transform:SetScale(0.6 - delay, 0.6 - delay, 0.6 - delay)
+								fx1.SoundEmitter:PlaySound("UCSounds/ratsniffer/burrowping", nil, 1 - delay)
+							end
+						end)
+					end
+				end)
+			end
+		end
+	elseif burrows == nil or burrows <= 0 then
+		inst.components.talker:Say(GetString(owner, "ANNOUNCE_NORATBURROWS"))
+	end
 end
 
-local RATPING_DISTANCES =
-{
-	{maxdist=50, describe="hotter", pingtime=2},
-	{maxdist=80, describe="hot", pingtime=3},
-	{maxdist=120, describe="warmer", pingtime=4},
-	{maxdist=200, describe="warm", pingtime=5},
-	{maxdist=300, describe="cold", pingtime=6},
-}
-
 local function OnCooldown(inst)
-    inst._cdtask = nil
 	inst.components.useableitem.inuse = false
-	
-	inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/charge", nil, .2)
 end
 
 local function CheckTargetPiece(inst)
-	local owner = inst.components.inventoryitem and inst.components.inventoryitem.owner
-
-
-
-    if owner ~= nil then
-        local intensity = 0
-        local closeness = nil
-        local fxname = nil
-        local target = FindClosestPart(inst)
-        local nextpingtime = TUNING.DIVINING_DEFAULTPING
-        if target ~= nil then
-            local distsq = owner:GetDistanceSqToInst(target)
-            intensity = math.max(0, 1 - (distsq/(200*200) ))
-            for k,v in ipairs(RATPING_DISTANCES) do
-                closeness = v
-                fxname = v.describe
-
-                if v.maxdist and distsq <= v.maxdist*v.maxdist then
-                    nextpingtime = closeness.pingtime
-                    break
-                end
-            end
-        end
---[[
-        if closeness ~= inst.closeness then
-            inst.closeness = closeness
-            local desc = inst.components.inspectable:GetDescription(owner)
-            if desc then
-                owner.components.talker:Say(desc)
-            end
-        end]]
-
-        if fxname ~= nil then
-            --Don't care if there is still a reference to previous fx...
-            --just let it finish on its own and remove itself
-            --inst.fx = SpawnPrefab(fxname)
-            inst.fx = SpawnPrefab("ratring_fx")
-            inst.fx.entity:AddFollower()
-            --inst.fx.Follower:FollowSymbol(inst.components.inventoryitem.owner.GUID, "swap_hat", 0, -320, 0)
-            inst.fx.Follower:FollowSymbol(owner.GUID, "swap_hat", 0, 0, 0)
-			
-		print(intensity)
-			inst.fx.Transform:SetScale(intensity / 1.5, intensity / 1.5, intensity / 1.5)
-			print(fxname)
-			inst.SoundEmitter:KillSound("ratping")
-			inst.SoundEmitter:PlaySound("UCSounds/ratping/ping_"..fxname, "ratping", intensity)
-			inst.SoundEmitter:SetParameter("ratping", "intensity", intensity)
-        end
-
+	local owner = inst.components.inventoryitem.owner
+	print("owner")
+	print(owner)
 		
-		--inst.SoundEmitter:KillSound("sniff")
-		--for i = 1, (intensity * 5) do
-			--inst:DoTaskInTime(((i * intensity) / 2), function(inst)]
-			
-    end 
+    if owner ~= nil then
+		FindClosestPart(owner)
+		inst.fx = SpawnPrefab("ratring_fx")
+		inst.fx.entity:AddFollower()
+		inst.fx.Follower:FollowSymbol(owner.GUID, "swap_hat", 0, 0, 0)
+		inst.fx.Transform:SetScale(0.5, 0.5, 0.5)
+				
+		inst.SoundEmitter:KillSound("ratping")
+		inst.SoundEmitter:PlaySound("UCSounds/ratping/ping_hotter", "ratping")
+	end
 	
 	
-	inst._cdtask = inst:DoTaskInTime(3, OnCooldown)
+    inst.components.rechargeable:Discharge(8)
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 local function rat_enable(inst)
     inst.components.fueled:StartConsuming()
-	
-	if inst._cdtask ~= nil then
-		inst._cdtask:Cancel()
-		inst._cdtask = nil
-	end
-	
-	inst._cdtask = inst:DoTaskInTime(3, OnCooldown)
 	
 	local owner = inst.components.inventoryitem.owner
 	if owner then
@@ -503,13 +402,6 @@ end
 
 local function rat_disable(inst)
     inst.components.fueled:StopConsuming()
-	
-	if inst._cdtask ~= nil then
-		inst._cdtask:Cancel()
-		inst._cdtask = nil
-	end
-	
-	inst._cdtask = inst:DoTaskInTime(3, OnCooldown)
 	
 	local owner = inst.components.inventoryitem.owner
 	if owner then
@@ -1019,6 +911,10 @@ local function ratfn()
 	inst:AddComponent("useableitem")
 	inst.components.useableitem:SetOnUseFn(CheckTargetPiece)
 	
+    inst:AddComponent("rechargeable")
+    inst.components.rechargeable:SetOnChargedFn(OnCooldown)
+	inst.components.rechargeable:SetCharge(1011111)
+	
 	inst:AddComponent("fueled")
 	inst.components.fueled.fueltype = FUELTYPE.USAGE
 	inst.components.fueled:InitializeFuelLevel(TUNING.MOLEHAT_PERISHTIME)
@@ -1056,6 +952,7 @@ local function ratringfn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
+    inst.entity:AddSoundEmitter()     
     inst.entity:AddNetwork()
 
     inst:AddTag("FX")

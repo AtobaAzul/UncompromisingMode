@@ -391,6 +391,8 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.DORMANT_RAIN_HORN = "Looking at it gives me flashes of a tropical setting."
 	DESCRIBE.RAIN_HORN = "This'll be useful for when wildfires start up again."
 	
+	ANNOUNCE.ANNOUNCE_NORATBURROWS = "Sounds like theres no rat dens nearby."
+	
 	
     ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "The camp is looking like rat's nest.",

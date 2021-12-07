@@ -24,7 +24,7 @@ local ratwarning = nil
 --local _initialrattimer = 24000
 local _initialrattimer = TUNING.DSTU.RATRAID_TIMERSTART --24000
 local _ratsnifftimer = TUNING.DSTU.RATSNIFFER_TIMER
-local _ratburrows = 1
+local _ratburrows = 0
 
 local RATRAID_TIMERNAME = "rat_raid"
 
@@ -270,12 +270,12 @@ end
 
 local function IncreaseDens(data)
 	_ratburrows = _ratburrows + 1
-	print(_ratburrows)
+	print("INCREASED RAT BURROWS TO ".._ratburrows)
 end
 
 local function DecreaseDens(data)
 	_ratburrows = _ratburrows - 1
-	print(_ratburrows)
+	print("DECREASED RAT BURROWS TO ".._ratburrows)
 end
 
 function self:GetBurrows()

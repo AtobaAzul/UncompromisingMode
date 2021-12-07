@@ -22303,7 +22303,7 @@
 <ignoregeometry>Yes</ignoregeometry>
 <rolloff>Linear</rolloff>
 <mindistance>3</mindistance>
-<maxdistance>100000</maxdistance>
+<maxdistance>30</maxdistance>
 <auto_distance_filtering>Off</auto_distance_filtering>
 <distance_filter_centre_freq>1500</distance_filter_centre_freq>
 <headrelative>World_relative</headrelative>
