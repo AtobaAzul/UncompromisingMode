@@ -69,7 +69,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	FEATHERHAT = "- Provides saftey from territorial Pengulls.",
 	YELLOWAMULET = "- No longer breaks when empty.\n- Can be fueled with Nightmare Fuel.",
 	ORANGEAMULET = "- No longer breaks when empty.\n- Can be fueled with Nightmare Fuel.\n- Will pick certain plants too!",
-	PURPLEAMULET = "- No longer breaks when empty.\n- Can be fueled with Nightmare Fuel.\n- Grants bonus Nightmare Fuel from slain Shadows.",
+	PURPLEAMULET = "- Grants bonus Nightmare Fuel from slain Shadows.",
 	PIGGYBACK = "- No Passive -10% movement speed while worn.\n- Decreases Player speed by 1% per item held.",
 	
 	TRUNKVEST_SUMMER = "- Now has pockets!\n- Slightly increased rain protection.",
