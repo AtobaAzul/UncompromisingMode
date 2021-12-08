@@ -77,3 +77,24 @@ for k, v in pairs(SALT) do
 		end
 	end)
 end
+
+local EYE = 
+{
+	["milkywhites"] =
+    {
+		power = TUNING.MED_FUEL * 13,
+    },
+}
+
+for k, v in pairs(EYE) do
+	AddPrefabPostInit(k, function(inst)
+		if inst.components.fuel == nil then
+			inst:AddComponent("fuel")
+		end
+		
+		if inst.components.fuel ~= nil then
+			inst.components.fuel.fuelvalue = v.power
+			inst.components.fuel.fueltype = GLOBAL.FUELTYPE.EYE
+		end
+	end)
+end
