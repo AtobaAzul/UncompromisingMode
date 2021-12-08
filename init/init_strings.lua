@@ -93,10 +93,10 @@ STRINGS.UNCOMP_TOOLTIP = {
 	RAT_WHIP = "- Stronger when well fed.",	
 	DRAGONFLY_CHEST "- Has even more item slots."
 	BLOWDART_YELLOW "- Stuns certain mechanical enemies."
+	CAMPFIRE = "- Provides protection from Snow Storms.",
+	TORCH = "- Provides protection from Snow Storms.",
+	FIREPIT = "- Provides protection from Snow Storms.",
 
-
-
-	
 	AIR_CONDITIONER = "- Can crush up Mushrooms for helpful stat clouds.",
 	ANCIENT_AMULET_RED = "- Drops soul orbs when attacked, which will replenish lost health when picked up.",
 	ARMOR_GLASSMAIL = "- Summons spinning Glass Shards when attacking enemies.\n- Loses shards when damage is taken.",
