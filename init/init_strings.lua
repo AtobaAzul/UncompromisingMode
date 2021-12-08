@@ -36,6 +36,7 @@ STRINGS.CHARACTER_DESCRIPTIONS.wortox = "*Is an imp\n*Can hop through time and s
 STRINGS.CHARACTER_DESCRIPTIONS.walter = "* Not afraid of anything, except getting hurt\n*Good with a slingshot\n*Has a four-legged friend\n*Allergic to Bees\n*Has no interest in fashion\n\n󰀕Can craft firecracker rounds"
 
 STRINGS.UNCOMP_TOOLTIP = {
+	REVIVER = "- Requires flesh from a dead survivor.",
 	AMULET = "- Only revives the player upon death while worn.\n- Increased heal rate at lower health.\n- Never breaks, can be refueled with Nightmare Fuel.",
 	MINIFAN = "- Staves off heat, and hayfever.",
 	WALL_HAY_ITEM = "- Provides protection from Snow Storms.",
@@ -78,7 +79,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	PREMIUMWATERINGCAN = "- Can contain and preserve ocean fish.",
 	RAINHAT = "- Slightly increased rain protection.",
 	
-	MARBLEARMOR = "- Prevents knockback effects.",
+	ARMORMARBLE = "- Prevents knockback effects.",
 	SEWINGKIT = "- Increased storage capacity.\n- May hurt would be thieves.",
 	TURF_DRAGONFLY = "- Prevents snowpile build-up.",
 	GASMASK = "- Prevents Hayfever while worn.",
@@ -88,6 +89,13 @@ STRINGS.UNCOMP_TOOLTIP = {
 	TENT = "- May restore maximum health.",
 	SIESTAHUT = "- A bit less efficient.\n- May restore maximum health.",
 	BEEBOX = "- Reduced yield per stage.",
+	
+	RAT_WHIP = "- Stronger when well fed.",	
+	DRAGONFLY_CHEST "- Has even more item slots."
+	BLOWDART_YELLOW "- Stuns certain mechanical enemies."
+
+
+
 	
 	AIR_CONDITIONER = "- Can crush up Mushrooms for helpful stat clouds.",
 	ANCIENT_AMULET_RED = "- Drops soul orbs when attacked, which will replenish lost health when picked up.",
