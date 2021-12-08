@@ -91,8 +91,8 @@ STRINGS.UNCOMP_TOOLTIP = {
 	BEEBOX = "- Reduced yield per stage.",
 	
 	RAT_WHIP = "- Stronger when well fed.",	
-	DRAGONFLY_CHEST "- Has even more item slots."
-	BLOWDART_YELLOW "- Stuns certain mechanical enemies."
+	DRAGONFLYCHEST = "- Has even more item slots.",
+	BLOWDART_YELLOW = "- Stuns certain mechanical enemies.",
 	CAMPFIRE = "- Provides protection from Snow Storms.",
 	TORCH = "- Provides protection from Snow Storms.",
 	FIREPIT = "- Provides protection from Snow Storms.",
