@@ -179,8 +179,16 @@ local function GettingBullied(inst)
 end
 
 local function OnHitOther(inst, data)
-	inst.combo = inst.combo/10
 	local other = data.target
+	if other ~= nil and not other:HasTag("webbedcreature") then
+		if inst.combosucceed == false then
+			--TheNet:SystemMessage("Combo Succeed!")
+			inst.combosucceed = true
+		end
+		if inst.combo ~= 1 or inst.docombo == true then
+			inst.combo = inst.combo/10
+		end
+	end
 	if other ~= nil and other.components.inventory ~= nil and inst.armorcrunch == true then
 		local helm = other.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
 		local chest = other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
@@ -332,8 +340,11 @@ local function fn()
 	inst:DoPeriodicTask(3, GettingBullied)
 	inst.bullier = nil
 	inst.armorcrunch = false
+	inst.combosucceed = true
+	inst.docombo = false
 	inst:ListenForEvent("killed", OnKilledOther)
 	inst:ListenForEvent("onhitother", OnHitOther)
+
 
     return inst
 end

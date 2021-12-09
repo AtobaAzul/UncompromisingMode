@@ -65,7 +65,7 @@ local function fn()
     inst.components.childspawner:SetSpawnPeriod(TUNING.DRAGONFLY_SPAWN_TIME, 0)
     inst.components.childspawner.onchildkilledfn = OnKilled
     inst.components.childspawner:StopRegen()
-	inst.GroundCreepEntity:SetRadius(10)
+	inst.GroundCreepEntity:SetRadius(8)
     inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", ontimerdone)
     return inst
