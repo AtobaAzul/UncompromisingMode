@@ -109,10 +109,11 @@ local function Fx2(inst)
 			SpawnPrefab("round_puff_fx_sm").Transform:SetPosition(inst.Transform:GetWorldPosition())
 		end
 		
-		local ents = TheSim:FindEntities(x, y, z, 2, nil, { "INLIMBO", "player", "abigail" })
-		
-		if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
-			v.components.combat:GetAttacked(inst, 5, nil)
+		local ents = TheSim:FindEntities(x, y, z, 2, nil, { "INLIMBO", "playerghost" }, { "player", "abigail" })
+		for i, v in ipairs(ents) do
+			if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
+				v.components.combat:GetAttacked(inst, 5, nil)
+			end
 		end
 	elseif chance <= 0.66 and chance > 0.33 then
 		if boat then
@@ -123,10 +124,11 @@ local function Fx2(inst)
 			SpawnPrefab("round_puff_fx_lg").Transform:SetPosition(inst.Transform:GetWorldPosition())
 		end
 		
-		local ents = TheSim:FindEntities(x, y, z, 3.5, nil, { "INLIMBO", "player", "abigail" })
-		
-		if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
-			v.components.combat:GetAttacked(inst, 10, nil)
+		local ents = TheSim:FindEntities(x, y, z, 3.5, nil, { "INLIMBO", "playerghost" }, { "player", "abigail" })
+		for i, v in ipairs(ents) do
+			if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
+				v.components.combat:GetAttacked(inst, 10, nil)
+			end
 		end
 	end
 	

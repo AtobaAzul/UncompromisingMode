@@ -21,6 +21,7 @@ self.totalrandomwildweight = nil
 self.totalrandombaseweight = nil
 self.totalrandomcaveweight = nil
 self.moontear_available = true
+self.weightheodds = math.random()
 
 
 --------------------------------
@@ -1262,19 +1263,19 @@ end
 
 local function DoLesserThreat(player)
 	if TheWorld.state.isnight then
-		local weightheodds = math.random()
+		self.weightheodds = math.random()
 		
-		if weightheodds >= 0.83 then
+		if self.weightheodds >= 0.83 then
 			SpawnLesserShadowVortex(player)
-		elseif weightheodds < 0.83 and weightheodds >= 0.664 then
+		elseif self.weightheodds < 0.83 and self.weightheodds >= 0.664 then
 			SpawnLesserShadowGrabby(player)
-		elseif weightheodds < 0.664 and weightheodds >= 0.498 then
+		elseif self.weightheodds < 0.664 and self.weightheodds >= 0.498 then
 			SpawnLesserMindWeavers(player)
-		elseif weightheodds < 0.498 and weightheodds >= 0.332 then
+		elseif self.weightheodds < 0.498 and self.weightheodds >= 0.332 then
 			SpawnLesserNervousTicks(player)
-		elseif weightheodds < 0.332 and weightheodds >= 0.166 then
+		elseif self.weightheodds < 0.332 and self.weightheodds >= 0.166 then
 			SpawnLesserNightCrawlers(player)
-		elseif weightheodds < 0.166 then
+		elseif self.weightheodds < 0.166 then
 			SpawnLesserFuelSeekers(player)
 		end
 	end

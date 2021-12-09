@@ -11,7 +11,7 @@ env.AddPrefabPostInit("blowdart_yellow", function(inst)
 	local _attackfn = inst.components.weapon.onattack
 	
 	local function yellowattack(inst, attacker, target)
-	    if target:IsValid() and (target:HasTag("chess") or target:HasTag("uncompromising_pawn")) then
+	    if target:IsValid() and (target:HasTag("chess") or target:HasTag("uncompromising_pawn") or target:HasTag("twinofterror")) then
 			if not target.components.debuffable then
 				target:AddComponent("debuffable")
 			end
