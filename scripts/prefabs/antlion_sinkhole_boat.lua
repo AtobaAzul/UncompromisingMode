@@ -57,14 +57,13 @@ local function ripplefn()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
 
     inst.AnimState:SetBank("malbatross_ripple")
     inst.AnimState:SetBuild("malbatross_ripple")
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("fx")
-
-    inst:ListenForEvent("animover", inst.Remove)
 
     inst.AnimState:SetLayer(LAYER_BELOW_GROUND)
     inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.BOAT_TRAIL)
@@ -73,6 +72,8 @@ local function ripplefn()
     if not TheWorld.ismastersim then
         return inst
     end
+
+    inst:ListenForEvent("animover", inst.Remove)
 
     return inst
 end

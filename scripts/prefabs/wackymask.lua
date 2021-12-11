@@ -609,7 +609,7 @@ local function devilfn()
 	inst.customequip = demon_enable
 	inst.customunequip = demon_disable
 	
-	inst.components.equippable.dapperness = TUNING.DAPPERNESS_MEDLARGE
+	inst.components.equippable.dapperness = TUNING.DAPPERNESS_MED_LARGE
 	
     return inst
 end
@@ -623,7 +623,7 @@ local function fiendfn()
 	inst.customequip = demon_enable
 	inst.customunequip = demon_disable
 	
-	inst.components.equippable.dapperness = TUNING.DAPPERNESS_MEDLARGE
+	inst.components.equippable.dapperness = TUNING.DAPPERNESS_MED_LARGE
 	
     return inst
 end
