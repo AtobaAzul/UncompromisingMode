@@ -23,6 +23,12 @@ local function UpdateCooldown1(inst)
 	print(inst._cooldowns.charge)
 	print(inst._cooldowns.mouthcharge)
 	print(inst._cooldowns.spawn)
+	
+	local bosscount = TheSim:FindEntities(x, y, z, 20, {"epic"}, {"twinofterror"})
+	
+	if bosscount ~= nil and #bosscount > 0 then
+		inst:PushEvent("leave")
+	end
 end
 
 local function OnAttacked(inst, data)
@@ -76,6 +82,12 @@ local function UpdateCooldown2(inst)
 	print(inst._cooldowns.charge)
 	print(inst._cooldowns.mouthcharge)
 	print(inst._cooldowns.spawn)
+	
+	local bosscount = TheSim:FindEntities(x, y, z, 20, {"epic"}, {"twinofterror"})
+	
+	if bosscount ~= nil and #bosscount > 0 then
+		inst:PushEvent("leave")
+	end
 end
 
 env.AddPrefabPostInit("twinofterror2", function(inst)
@@ -89,4 +101,25 @@ env.AddPrefabPostInit("twinofterror2", function(inst)
     inst:ListenForEvent("attacked", OnAttacked)
 	
 	inst:DoPeriodicTask(5, UpdateCooldown2)
+end)
+
+local function UpdateCooldown(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	
+	local bosscount = TheSim:FindEntities(x, y, z, 20, {"epic"}, {"twinofterror"})
+	
+	if bosscount ~= nil and #bosscount > 0 then
+		inst:PushEvent("leave")
+	end
+end
+
+env.AddPrefabPostInit("eyeofterror", function(inst)
+
+	inst:AddTag("twinofterror")
+
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+	inst:DoPeriodicTask(5, UpdateCooldown)
 end)

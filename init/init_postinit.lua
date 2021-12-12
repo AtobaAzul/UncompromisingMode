@@ -185,6 +185,7 @@ local brain_post = {
 	"mossling",
 	"perd",
 	"catcoon",
+	"deer",
 }
 
 if GetModConfigData("hangyperds") == true then
