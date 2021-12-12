@@ -23,17 +23,17 @@ STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_EVENING = { "KING BED TIME SOON, YOU
 STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_FRIEND = { "KING SAY PROTECT", "PROTECT YOU", "WHERE MONSTERS?", "PROTECT!", "PROTECT KING!", "PROTECT FRIEND!" }
 
 -- Hey look! I actually did something! -Canis
-STRINGS.CHARACTER_DESCRIPTIONS.willow = "*Has a fondness for fire, but hates the cold\n*Protected by her cuddly bear, Bernie\n\n󰀕Tinkered with her lighter to be more volatile\n󰀕Can set her own skin on fire"
-STRINGS.CHARACTER_DESCRIPTIONS.wolfgang = "*Gets stronger with a full belly\n\n󰀕Even more afraid of monsters and the dark\n󰀕Mightiness doesn't drain as much hunger\nbut doesn't increase max health\n󰀕Packs a harder punch than others\n󰀕Isn't as affected by weight"
-STRINGS.CHARACTER_DESCRIPTIONS.wx78 = "*Not a picky eater\n*Charged by lightning, damaged by water\n*Can upgrade with Gears\n\n󰀕Water is more lethal"
-STRINGS.CHARACTER_DESCRIPTIONS.wickerbottom = "*Knows many things\n*Self-publishes books\n*Can't sleep, hates food spoilage\n\n󰀕Reading books require brainpower"
-STRINGS.CHARACTER_DESCRIPTIONS.wes = "*Can't Talk\n*Practices Balloonomancy\n*Is not a skilled fighter or worker\n\n󰀕Expanded inner dialogue"
-STRINGS.CHARACTER_DESCRIPTIONS.waxwell = "*Is dapper, but frail\n*Can split his mind into pieces\n*Was once king of the world\n\n󰀕Can summon his old puppets"
-STRINGS.CHARACTER_DESCRIPTIONS.warly = "*Has his own line of custom portable cookware\n*Can spice things up\n*Has an insatiable appetite\n\n󰀕Remembers food for longer, but gets bonus stats"
-STRINGS.CHARACTER_DESCRIPTIONS.wormwood = "*Plants relate to his green thumb\n*Saddened when plants are killed\n*Food fills his stomach, but not his heart\n\n󰀕Is dangerously flammable"
-STRINGS.CHARACTER_DESCRIPTIONS.winona = "*Invents her own gadgets\n*Gets one free hit from the dark\n\n󰀕Works faster when full, slower when hungry\n󰀕Others can't refuel generators"
-STRINGS.CHARACTER_DESCRIPTIONS.wortox = "*Is an imp\n*Can hop through time and space\n*Less nourished by physical food\n\n󰀕Is less durable\n󰀕Tiny insects don't have souls"
-STRINGS.CHARACTER_DESCRIPTIONS.walter = "* Not afraid of anything, except getting hurt\n*Good with a slingshot\n*Has a four-legged friend\n*Allergic to Bees\n*Has no interest in fashion\n\n󰀕Can craft firecracker rounds"
+STRINGS.CHARACTER_DESCRIPTIONS.willow = STRINGS.CHARACTER_DESCRIPTIONS.willow.."\n󰀕Tinkered with her lighter to be more volatile\n󰀕Can set her own skin on fire"
+STRINGS.CHARACTER_DESCRIPTIONS.wolfgang = STRINGS.CHARACTER_DESCRIPTIONS.wolfgang.."\n󰀕Isn't as affected by weight"
+STRINGS.CHARACTER_DESCRIPTIONS.wx78 = STRINGS.CHARACTER_DESCRIPTIONS.wx78.."\n󰀕Water is more lethal"
+STRINGS.CHARACTER_DESCRIPTIONS.wickerbottom = STRINGS.CHARACTER_DESCRIPTIONS.wickerbottom.."\n󰀕Reading books require brainpower"
+STRINGS.CHARACTER_DESCRIPTIONS.wes = STRINGS.CHARACTER_DESCRIPTIONS.wes.."\n󰀕Expanded inner dialogue"
+STRINGS.CHARACTER_DESCRIPTIONS.waxwell = STRINGS.CHARACTER_DESCRIPTIONS.waxwell.."\n󰀕Can summon his old puppets"
+STRINGS.CHARACTER_DESCRIPTIONS.warly = STRINGS.CHARACTER_DESCRIPTIONS.warly.."\n󰀕Remembers food for longer, but gets bonus stats"
+STRINGS.CHARACTER_DESCRIPTIONS.wormwood = STRINGS.CHARACTER_DESCRIPTIONS.wormwood.."\n󰀕Is dangerously flammable"
+STRINGS.CHARACTER_DESCRIPTIONS.winona = STRINGS.CHARACTER_DESCRIPTIONS.winona.."\n󰀕Works faster when full, slower when hungry\n󰀕Others can't refuel generators"
+STRINGS.CHARACTER_DESCRIPTIONS.wortox = STRINGS.CHARACTER_DESCRIPTIONS.wortox.."\n󰀕Is less durable\n󰀕Tiny insects don't have souls"
+STRINGS.CHARACTER_DESCRIPTIONS.walter = STRINGS.CHARACTER_DESCRIPTIONS.walter.."\n󰀕Can craft firecracker rounds"
 
 STRINGS.UNCOMP_TOOLTIP = {
 	REVIVER = "- Requires flesh from a dead survivor.",
