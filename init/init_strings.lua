@@ -64,7 +64,6 @@ STRINGS.UNCOMP_TOOLTIP = {
 	TOPHAT = "- Reduces sanity loss from various magic items.",
 	MOONDIAL = "- Can become a source of water when a certain item is placed inside...",
 	ARMORDRAGONFLY = "- Summons mini Lavae allies when worn.",
-	EYEBRELLAHAT = "- Reduced heat protection.",
 	SEEDPOUCH = "- Keeps seeds refridgerated.",
 	GLASSCUTTER = "- Deals slightly more damage to Shadows.",
 	FEATHERHAT = "- Provides saftey from territorial Pengulls.",
@@ -91,7 +90,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	BEEBOX = "- Reduced yield per stage.",
 	
 	RAT_WHIP = "- Stronger when well fed.",	
-	DRAGONFLYCHEST = "- Has even more item slots.",
+	DRAGONFLYCHEST = "- Has even more item slots.\n- May hurt would be thieves.",
 	BLOWDART_YELLOW = "- Stuns certain mechanical enemies.",
 	CAMPFIRE = "- Provides protection from Snow Storms.",
 	TORCH = "- Provides protection from Snow Storms.",
@@ -102,7 +101,6 @@ STRINGS.UNCOMP_TOOLTIP = {
 	ARMOR_GLASSMAIL = "- Summons spinning Glass Shards when attacking enemies.\n- Loses shards when damage is taken.",
 	--DRIFTWOODFISHINGROD = "test",
 	HONEY_LOG = "- Provides protection from Hayfever. Mostly useful for other allies.",
-	RAT_WHIP = "- Critical chance!",
 	SALTPACK = "- Drops piles of salt, prevents buildup of Snow Piles.",
 	SPOREPACK = "- Provides lots of storage space.\n- Rots food.",
 	UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "- Slows down anything it's attached to. Deployable and throwable.",
@@ -124,6 +122,11 @@ elseif TUNING.DSTU.FLINGO_SETTING == "Waterballs" then
 	STRINGS.UNCOMP_TOOLTIP.FIRESUPPRESSOR = "- No longer freezes on hit."
 end
 
+if TUNING.DSTU.EYEBRELLAREWORK == false then
+	STRINGS.UNCOMP_TOOLTIP.EYEBRELLAHAT = "- Reduced heat protection.",
+else
+	STRINGS.UNCOMP_TOOLTIP.EYEBRELLAHAT = "- Reduced heat protection.\n- Can't be sewn, but may be repaired.",
+end
 
 STRINGS.STANTON_GREET = {"Care to drink with the dead?", "How's about a drink?", "C'mon and drink with me."}
 STRINGS.STANTON_GIVE = {"There ya go.", "The finest."}
