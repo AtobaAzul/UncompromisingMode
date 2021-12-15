@@ -157,7 +157,7 @@ local states=
 					inst.sg:GoToState("lobprojectile")
 				else
    					if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.5 and inst.docombo == true then
-						inst.docombo == false
+						inst.docombo = false
 						--TheNet:SystemMessage(inst.combo)
 						inst.combo = inst.combo+2
 						inst.sg:GoToState("attack")

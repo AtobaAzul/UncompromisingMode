@@ -187,11 +187,13 @@ local bozo =FindEntity(inst, 40,
             end
     end)
 if bozo ~= nil and bozo.components.sanity ~= nil and bozo.components.sanity:GetPercent() < 0.5 and inst.enraged == false then
+	inst.enraged = true
 	inst.sg:GoToState("anger")
 	if inst.components.combat ~= nil then
 		inst.components.combat:SuggestTarget(bozo)
 	end
 elseif inst.enraged == true and inst.components.combat ~= nil and inst.components.combat.target == nil then
+	inst.enraged = false
 	inst.sg:GoToState("calm")
 	end
 end
@@ -259,6 +261,28 @@ local player = inst.harassplayer
 end
 end
 
+local function CheckWhereTheHeckIAm(inst)
+if not inst.components.areaaware:CurrentlyInTag("Nightmare") then
+	if inst.components.combat.target ~= nil then
+		inst.components.combat.target = nil
+	end
+    inst.brain:Stop()
+	inst.Physics:Stop()
+	inst.AnimState:PlayAnimation("channel_pre")	
+	inst:DoTaskInTime(0.6,function(inst)
+		local x,y,z = inst.Transform:GetWorldPosition()
+		local Despawn = SpawnPrefab("shadow_despawn").Transform:SetPosition(x,y,z)
+		inst.brain:Start()
+		local x,y,z = inst.components.homeseeker.home.Transform:GetWorldPosition()
+		inst.Transform:SetPosition(x,y,z)
+		if inst.components.combat.target ~= nil then
+			inst.components.combat.target = nil
+		end	
+	end)
+end
+end
+
+
 local function fn(Sim)
 	local inst = CreateEntity()
 
@@ -317,7 +341,7 @@ local function fn(Sim)
     --inst.components.combat:SetHurtSound("dontstarve/creatures/spider/hit_response")
     inst.components.combat:SetRange(3, 3)
     ------------------
-    
+    inst:AddComponent("areaaware")
     ------------------
     inst.sounds = sounds   
     inst:AddComponent("knownlocations")
@@ -349,6 +373,7 @@ local function fn(Sim)
 	inst.onload = OnLoad
 	inst:DoPeriodicTask(3,CheckIfInsaners)
 	inst:DoPeriodicTask(6,CheckIfTargetIsFrigginAlive)
+	inst:DoPeriodicTask(10,CheckWhereTheHeckIAm)
 	inst.FindTargetOfInterestTask = inst:DoPeriodicTask(5, FindTargetOfInterest) --Find something to be interested in!
 	
 	inst:DoTaskInTime(0, function(inst)
