@@ -123,9 +123,9 @@ elseif TUNING.DSTU.FLINGO_SETTING == "Waterballs" then
 end
 
 if TUNING.DSTU.EYEBRELLAREWORK == false then
-	STRINGS.UNCOMP_TOOLTIP.EYEBRELLAHAT = "- Reduced heat protection.",
+	STRINGS.UNCOMP_TOOLTIP.EYEBRELLAHAT = "- Reduced heat protection."
 else
-	STRINGS.UNCOMP_TOOLTIP.EYEBRELLAHAT = "- Reduced heat protection.\n- Can't be sewn, but may be repaired.",
+	STRINGS.UNCOMP_TOOLTIP.EYEBRELLAHAT = "- Reduced heat protection.\n- Can't be sewn, but may be repaired."
 end
 
 STRINGS.STANTON_GREET = {"Care to drink with the dead?", "How's about a drink?", "C'mon and drink with me."}
