@@ -167,7 +167,7 @@ env.AddPrefabPostInit("wx78", function(inst)
     inst.wet_task = nil
     inst.wet_spark_time = 0
     inst.wet_spark_time_offset = 3
-	
+	inst:AddTag("automaton")
 	if inst.components.playerlightningtarget ~= nil then
 		inst.components.playerlightningtarget:SetOnStrikeFn(onlightingstrike)
 	end
