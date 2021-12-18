@@ -1516,7 +1516,7 @@ local function TimeForACheckUp(inst)
 								inst.foodscore = inst.foodscore + (10 * inst.multiplier)
 							elseif v.prefab == "spoiled_food" then
 								inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
-								inst.foodscore = inst.foodscore + (15 * inst.multiplier)
+								inst.foodscore = inst.foodscore + (10 * inst.multiplier)
 							end
 						end
 					end
@@ -1729,6 +1729,161 @@ local function fn_warning()
 	return inst
 end
 
+local function TimeForACheckUpDev(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+
+	local ents = TheSim:FindEntities(x, 0, z, 40, {"_inventoryitem"})
+	print("THE RAT SNIFFS")
+	print("                o")
+	print("    =========B  *sniff* *sniff*")
+	print("---========vv")
+	print("   ========")
+	print("    V V    V V")
+	
+	inst.ratscore = -60
+	inst.itemscore = 0
+	inst.foodscore = 0
+	print(#ents)
+	
+	if ents ~= nil then
+		for i, v in ipairs(ents) do
+			if not v:HasTag("_container") and not v:HasTag("smallcreature") then
+				if v.components.inventoryitem:IsHeld() then
+				
+				
+					if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" then
+						print("lureplant is holding!")
+					else
+						if not v:HasTag("frozen") then
+							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+						
+							if v:HasTag("stale") then
+								inst.foodscore = inst.foodscore + (5 * inst.multiplier)
+							elseif v:HasTag("spoiled") then
+								inst.foodscore = inst.foodscore + (10 * inst.multiplier)
+							elseif v.prefab == "spoiled_food" then
+								inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+								inst.foodscore = inst.foodscore + (15 * inst.multiplier)
+							end
+						end
+					end
+				else
+					if not v:HasTag("frozen") then
+						inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+						
+						if v:HasTag("fresh") then
+							inst.foodscore = inst.foodscore + (10 * inst.multiplier)
+						elseif v:HasTag("stale") then
+							inst.foodscore = inst.foodscore + (20 * inst.multiplier)
+						elseif v:HasTag("spoiled") then
+							inst.foodscore = inst.foodscore + (30 * inst.multiplier)
+						elseif v.prefab == "spoiled_food" then
+							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+							inst.foodscore = inst.foodscore + (35 * inst.multiplier)
+						end
+					end
+					
+					if v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool") then
+						inst.itemscore = inst.itemscore + 30 -- Oooh, wants wants! We steal!
+					elseif v:HasTag("molebait") then
+						inst.itemscore = inst.itemscore + 2 -- Oooh, wants wants! We steal!
+					end
+				end
+			end
+		end
+	end
+	
+	inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck:GetBurrows() or 0
+	inst.burrowbonus = 15 * inst.ratburrows
+	
+	
+	inst.ratscore = inst.ratscore + inst.itemscore + inst.foodscore + inst.burrowbonus
+	print("------------------------")
+	print("Itemscore = "..inst.itemscore)
+	print("Foodscore = "..inst.foodscore)
+	print("Burrowbonus = "..inst.burrowbonus)
+	print("Ratscore = "..inst.ratscore)
+	print("------------------------")
+	if TUNING.DSTU.ANNOUNCE_BASESTATUS == true then
+		TheNet:SystemMessage("-------------------------")
+		TheNet:SystemMessage("Itemscore = "..inst.itemscore)
+		TheNet:SystemMessage("Foodscore = "..inst.foodscore)
+		TheNet:SystemMessage("Burrowbonus = "..inst.burrowbonus)
+		TheNet:SystemMessage("Ratscore = "..inst.ratscore)
+		TheNet:SystemMessage("-------------------------")
+	end
+	if inst.ratscore > 240 then
+		inst.ratscore = 240
+	end
+	TheWorld:PushEvent("reducerattimer", {value = inst.ratscore})
+	
+	
+	inst.ratwarning = inst.ratscore / 48
+	
+	if inst.ratscore >= 60 then
+		--if math.random() > 0.85 then
+			if inst.ratwarning > 5 then
+				inst.ratwarning = 5
+			end
+			
+			for c = 1, (inst.ratwarning) do
+				inst:DoTaskInTime((c/5), function(inst)
+					local warning = SpawnPrefab("uncompromising_ratwarning")
+					warning.Transform:SetPosition(inst.Transform:GetWorldPosition())
+					--warning.entity:SetParent(b)
+					--b.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
+					--warning.entity:SetParent(TheFocalPoint.b.entity)
+				end)
+			end
+			
+			local players = TheSim:FindEntities(x, y, z, 40, {"player"},{"playerghost"})
+			for a, b in ipairs(players) do
+				if b.prefab == "wilson" then
+					--if math.random() > 0.5 then
+						if inst.burrowbonus > inst.itemscore and inst.burrowbonus > inst.foodscore then
+							b:DoTaskInTime(2+math.random(), function(b)
+								b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_BURROWS", "LEVEL_1"))
+							end)
+						elseif inst.itemscore > inst.burrowbonus and inst.itemscore > inst.foodscore then
+							b:DoTaskInTime(2+math.random(), function(b)
+								b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_ITEMS", "LEVEL_1"))
+							end)
+						elseif inst.foodscore > inst.burrowbonus and inst.foodscore > inst.itemscore then
+							b:DoTaskInTime(2+math.random(), function(b)
+								b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_FOOD", "LEVEL_1"))
+							end)
+						end
+					--end
+				end
+			end
+		--end
+	end
+	
+	inst:Remove()
+end
+
+local function fn_devwarning()
+	local inst = CreateEntity()
+	
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddNetwork()
+	
+	inst:AddTag("rat_sniffer")
+	inst:AddTag("NOBLOCK")
+	
+	inst.entity:SetPristine()
+	
+	if not TheWorld.ismastersim then
+		return inst
+	end
+	
+	inst:DoTaskInTime(5, TimeForACheckUpDev)
+	
+	return inst
+end
+
 return Prefab("uncompromising_rat", fn, assets, prefabs),
 	Prefab("uncompromising_junkrat", junkfn),
 	Prefab("uncompromising_packrat", packfn, assets, prefabs),
@@ -1737,4 +1892,5 @@ return Prefab("uncompromising_rat", fn, assets, prefabs),
 	Prefab("uncompromising_scoutburrow", fn_scoutburrow, assets, prefabs),
 	Prefab("uncompromising_ratsniffer", fn_sniffer, assets, prefabs),
 	Prefab("ratdroppings", fn_droppings, assets),
-	Prefab("uncompromising_ratwarning", fn_warning)
+	Prefab("uncompromising_ratwarning", fn_warning),
+	Prefab("devtestratwarning", fn_devwarning)

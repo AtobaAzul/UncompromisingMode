@@ -281,7 +281,7 @@ end
 
 local function eat_food_action(inst)
 	if inst.sg:HasStateTag("busy") or inst:GetTimeAlive() < 5 or
-        (inst.components.eater:TimeSinceLastEating() ~= nil and inst.components.eater:TimeSinceLastEating() < 5) then
+        (inst.components.eater:TimeSinceLastEating() ~= nil and inst.components.eater:TimeSinceLastEating() < 10) then
         return
     elseif inst.components.inventory ~= nil and inst.components.eater ~= nil then
         local target = inst.components.inventory:FindItem(function(item)
@@ -315,6 +315,7 @@ local function ShouldTargetPlant(inst, plant)
 	local target = FindEntity(inst, SEE_DIST, function(plant)
         if (plant.components.growable == nil or plant.components.growable:GetCurrentStageData().tendable) and plant.components.workable then
             return plant.components.farmplantstress
+				and not GetClosestInstWithTag("scarytoprey", plant, TOOCLOSE)-- ~= nil
         end
     end, FARMPLANT_MUSTTAGS, FARMPLANT_NOTAGS)
 
@@ -322,16 +323,22 @@ local function ShouldTargetPlant(inst, plant)
 end
 
 function Uncompromising_RatBrain:OnStart()
-	local stealnode = PriorityNode(
+	local neutralbehaviour = PriorityNode(
 	{
 		WhileNode(function() return not self.inst.sg:HasStateTag("jumping") and self.inst.prefab ~= "uncompromising_caverat" end, "NotJumpingBehaviour",
                 PriorityNode({
 		DoAction(self.inst, eat_poison_action, "Eat Poison", true),
 		DoAction(self.inst, function() return CanDeposit(self.inst) end, "depositloot", true ),
 		DoAction(self.inst, function() return SpringTrap(self.inst) end, "checktrap", true ),
+		}, .25))
+	}, 0.25)
+	local stealnode = PriorityNode(
+	{
+		WhileNode(function() return not self.inst.sg:HasStateTag("jumping") and self.inst.prefab ~= "uncompromising_caverat" end, "NotJumpingBehaviour",
+                PriorityNode({
 		DoAction(self.inst, function() return StealAction(self.inst) end, "steal", true ),
-		DoAction(self.inst, eat_food_action, "Eat Food", true),
 		DoAction(self.inst, function() return EmptyChest(self.inst) end, "emptychest", true),
+		DoAction(self.inst, eat_food_action, "Eat Food", true),
 		DoAction(self.inst, function() return ShouldTargetPlant(self.inst) end, "attackplant", true)
 		}, .25))
 	}, 0.25)
@@ -342,23 +349,29 @@ function Uncompromising_RatBrain:OnStart()
 		WhileNode( function()
 			return self.inst.components.hauntable and self.inst.components.hauntable.panic
 		end, "PanicHaunted", Panic(self.inst)),
-		MinPeriod(self.inst, 2, true,
-            stealnode),
 		WhileNode( function()
 			return self.inst.components.health.takingfiredamage or self.inst.components.burnable:IsBurning()
 		end, "OnFire", Panic(self.inst)),
+		RunAway(self.inst, "ghost", 8, 12),
+		RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
+		
 		WhileNode( function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
 			ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST)),
-
-		RunAway(self.inst, "ghost", 8, 12),
+			
+		Follow(self.inst, GetLeader, MIN_FOLLOW_LEADER, TARGET_FOLLOW_LEADER, MAX_FOLLOW_LEADER),
+            FaceEntity(self.inst, GetLeader, GetLeader),
+			
+		MinPeriod(self.inst, 2, true,
+            neutralbehaviour),
+			
+		--Leash(self.inst, self.inst.components.knownlocations:GetLocation("herd"), 40, 3),
+		
+		MinPeriod(self.inst, 2, true,
+            stealnode),
 			
 		WhileNode( function() return self.inst.components.combat.target and self.inst.components.combat:InCooldown() end, "Dodge",
 			RunAway(self.inst, function() return self.inst.components.combat.target end, AVOID_PLAYER_DIST_COMBAT, AVOID_PLAYER_STOP_COMBAT)),
-		RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
 		
-		Follow(self.inst, GetLeader, MIN_FOLLOW_LEADER, TARGET_FOLLOW_LEADER, MAX_FOLLOW_LEADER),
-            FaceEntity(self.inst, GetLeader, GetLeader),
-
 		DoAction(self.inst, eat_food_action),
 		
 		Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("herd") end, MAX_WANDER_DIST),

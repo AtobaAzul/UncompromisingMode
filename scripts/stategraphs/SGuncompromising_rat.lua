@@ -162,7 +162,11 @@ local states =
 			inst.AnimState:PlayAnimation("eat_pre")
 			inst.AnimState:PushAnimation("eat_pst", false)
 			
-			inst.sg:SetTimeout(GetRandomWithVariance(5, 2))
+			if inst.plantdig ~= nil then
+				inst.plantdig = inst.plantdig + 1
+			else
+				inst.plantdig = 1
+			end
 			
 			inst:DoTaskInTime(0.5, function(inst)
 				if inst.sg.statemem.action ~= nil and inst.sg.statemem.action.target ~= nil and inst.sg.statemem.action.target.Transform ~= nil and inst.sg.statemem.action.target.Transform:GetWorldPosition() ~= nil then
@@ -170,13 +174,12 @@ local states =
 					local dirt = SpawnPrefab("shovel_dirt")
 					dirt.Transform:SetScale(0.8, 0.8, 0.8)
 					dirt.Transform:SetPosition(inst.sg.statemem.action.target.Transform:GetWorldPosition())
+						
+					if inst.plantdig ~= nil and inst.plantdig > 4 then
+						inst:PerformBufferedAction()
+					end
 				end
 			end)
-		end,
-		
-		ontimeout = function(inst)
-			inst:PerformBufferedAction()
-			inst.sg:GoToState("idle")
 		end,
 		
 		onexit = function(inst)
@@ -186,18 +189,16 @@ local states =
 		events=
 		{
 			EventHandler("animqueueover", function(inst)
-                if inst.AnimState:AnimDone() then
-					inst.AnimState:PlayAnimation("eat_pre")
-					inst.AnimState:PushAnimation("eat_pst", false)
-					
-					inst:DoTaskInTime(0.5, function(inst)
-						if inst.sg.statemem.action ~= nil and inst.sg.statemem.action.target ~= nil and inst.sg.statemem.action.target.Transform:GetWorldPosition() ~= nil then
-							inst.SoundEmitter:PlaySound(inst.sounds.eat)
-							local dirt = SpawnPrefab("shovel_dirt")
-							dirt.Transform:SetScale(0.8, 0.8, 0.8)
-							dirt.Transform:SetPosition(inst.sg.statemem.action.target.Transform:GetWorldPosition())
-						end
-					end)
+                if inst.AnimState:AnimDone() and inst.sg.statemem.action ~= nil and inst.sg.statemem.action.target ~= nil and not GetClosestInstWithTag("scarytoprey", inst, 3) then
+					if inst.plantdig ~= nil and inst.plantdig > 4 then
+						inst.plantdig = 1
+						inst.sg:GoToState("idle")
+					else
+						inst.sg:GoToState("plant_attack")
+					end
+				else
+					inst.plantdig = 1
+					inst.sg:GoToState("idle")
                 end
 			end),
 		}, 		
