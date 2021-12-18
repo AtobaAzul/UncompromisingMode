@@ -177,7 +177,7 @@ local function GettingBullied(inst)
 	inst.bullier = false
 	end
 end
-
+-----HE:LP [ASME] MEE 
 local function OnHitOther(inst, data)
 	local other = data.target
 	if other ~= nil and not other:HasTag("webbedcreature") then

@@ -4,6 +4,8 @@ local actionhandlers =
 {
 ActionHandler(ACTIONS.GOHOME, "jumphome"),
 }
+
+--sdfqocipqowiecjAAAAAAASSDFFASDFASDFQWCQWCQWE
 local events=
 {
     EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("nointerrupt") and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),
