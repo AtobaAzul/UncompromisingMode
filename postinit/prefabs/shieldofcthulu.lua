@@ -18,7 +18,7 @@ env.AddPrefabPostInit("shieldofterror", function(inst)
 				local health = food.components.edible:GetHealth(inst) * inst.components.eater.healthabsorption
 				local hunger = food.components.edible:GetHunger(inst) * inst.components.eater.hungerabsorption
 				
-				if (health + hunger) > 0 then
+				if (health + hunger) < 0 then
 					health = 0
 					hunger = 0
 				end
@@ -70,7 +70,7 @@ env.AddPrefabPostInit("eyemaskhat", function(inst)
 					hunger = 0
 				end]]
 				
-				if (health + hunger) > 0 then
+				if (health + hunger) < 0 then
 					health = 0
 					hunger = 0
 				end
