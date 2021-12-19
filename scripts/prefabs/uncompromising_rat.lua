@@ -25,11 +25,43 @@ local carratsounds =
 	eat = "turnoftides/creatures/together/carrat/eat",
 	stunned = "turnoftides/creatures/together/carrat/stunned",
 }
-
+--[[
 SetSharedLootTable("raidrat",
 {
-	{"monstermeat",		1.00},
-	{"goldnugget",		0.33},
+})]]
+
+SetSharedLootTable("ratburrow",
+{
+	{"redgem",		0.10},
+	{"bluegem",		0.10},
+	{"goldnugget",		1.00},
+	{"goldnugget",		0.25},
+	{"goldnugget",		0.10},
+	{"boneshard",		1.00},
+	{"boneshard",		0.25},
+	{"boneshard",		0.10},
+})
+
+SetSharedLootTable("ratburrow_small",
+{
+	{"redgem",		0.10},
+	{"bluegem",		0.10},
+	{"goldnugget",		1.00},
+	{"goldnugget",		0.25},
+	{"boneshard",		1.00},
+	{"boneshard",		0.25},
+})
+
+SetSharedLootTable("packrat",
+{
+	{"redgem",		0.10},
+	{"bluegem",		0.10},
+	{"goldnugget",		1.00},
+	{"goldnugget",		0.25},
+	{"goldnugget",		0.10},
+	{"boneshard",		1.00},
+	{"boneshard",		0.25},
+	{"boneshard",		0.10},
 })
 
 local brain = require "brains/uncompromising_ratbrain"
@@ -57,7 +89,7 @@ local function on_burnt(inst)
 end
 
 local function OnAttackOther(inst, data)
-	if data.target ~= nil and data.target:HasTag("player") and not data.target:HasTag("hasplaguemask") then
+	if data.target ~= nil and data.target:HasTag("player") and not data.target:HasTag("hasplaguemask") and not data.target:HasTag("ratfriend") and not data.target:HasTag("automaton") then
 		data.target.components.health:DeltaPenalty(0.01)
 	end
 	
@@ -113,9 +145,21 @@ local function OnPickup(inst, data)
 				inst:RemoveTag("carrying")
 				inst._item:Remove()
 			end
+			
+			local function DeleteBackItem(inst)
+				if inst._item ~= nil then
+					for i = 1, inst.components.inventory.maxslots do
+					local v = inst.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
+						if v ~= nil then
+							inst.components.inventory:DropItem(v, true, true)
+							v:Remove()
+						end
+					end
+				end
+			end
+			
+			inst:ListenForEvent("onremove", DeleteBackItem, inst._item)
 		end
-		
-		inst.components.combat:DropTarget()
 	else
 		data.item.components.explosive:OnBurnt()
 	end
@@ -177,7 +221,7 @@ local function OnHitOther(inst, other)
 	inst.components.thief:StealItem(other)
 end
 
-local RETARGET_CANT_TAGS = { "wall", "raidrat"}
+local RETARGET_CANT_TAGS = { "wall", "raidrat", "ratfriend"}
 local function rattargetfn(inst)
     return FindEntity(
                 inst, 3,
@@ -187,7 +231,8 @@ local function rattargetfn(inst)
 					inst:HasTag("carrying") and
 					guy:HasTag("player") and
 					validitem ~= nil and
-					inst.components.combat:CanTarget(guy)
+					inst.components.combat:CanTarget(guy) and not 
+					(inst.components.follower ~= nil and inst.components.follower.leader == guy)
                 end,
                 nil,
                 RETARGET_CANT_TAGS
@@ -205,7 +250,36 @@ end
 
 local function StealItem(inst, victim, stolenitem)
 	inst:PushEvent("onpickupitem", { item = stolenitem })
-	inst.components.combat:DropTarget()
+end
+
+
+local function PiedPiperBuff(inst)
+	if inst.note == nil then
+		print("note")
+	
+		local fx = SpawnPrefab("rat_note")
+		fx.entity:SetParent(inst.entity)
+		fx.entity:AddFollower()
+		fx.Follower:FollowSymbol(inst.GUID, "carrat_head", 0, -180, 0)
+	
+		inst.note = fx
+		
+		inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_BUFFED_WALKSPEED
+		inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_BUFFED_RUNSPEED
+		inst.components.combat:SetAttackPeriod(TUNING.DSTU.RAIDRAT_BUFFED_ATTACK_PERIOD)
+		
+		inst:DoTaskInTime(8, PiedPiperBuff)
+    else
+		print("nooooote")
+		inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_WALKSPEED
+		inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_RUNSPEED
+		inst.components.combat:SetAttackPeriod(TUNING.DSTU.RAIDRAT_ATTACK_PERIOD)
+		
+		if inst.note ~= nil then
+			inst.note:Remove()
+			inst.note = nil
+		end
+	end
 end
 
 local function fn()
@@ -303,7 +377,7 @@ local function fn()
 
 	inst:AddComponent("eater")
 	inst.components.eater:SetDiet({ FOODTYPE.MEAT, FOODTYPE.VEGGIE }, { FOODTYPE.MEAT, FOODTYPE.VEGGIE })
-	inst.components.eater:SetCanEatHorrible()
+	--inst.components.eater:SetCanEatHorrible()
 	inst.components.eater:SetCanEatRaw()
 	inst.components.eater:SetStrongStomach(true) -- can eat monster meat!
 	
@@ -315,8 +389,8 @@ local function fn()
 	inst.components.combat:SetAttackPeriod(TUNING.DSTU.RAIDRAT_ATTACK_PERIOD)
 	inst.components.combat:SetRange(TUNING.DSTU.RAIDRAT_ATTACK_RANGE)
 	inst.components.combat.hiteffectsymbol = "carrat_body"
-    inst.components.combat.onhitotherfn = OnHitOther
-	inst.components.combat:SetRetargetFunction(3, rattargetfn)
+    --inst.components.combat.onhitotherfn = OnHitOther
+	--inst.components.combat:SetRetargetFunction(3, rattargetfn)
     --inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
 
     inst:AddComponent("thief")
@@ -342,6 +416,7 @@ local function fn()
 	inst.components.inventoryitem.cangoincontainer = false
 	inst.components.inventoryitem:SetSinks(true)
 	
+	inst:AddComponent("follower")
 	inst:AddComponent("herdmember")
 	
 	inst:AddComponent("knownlocations")
@@ -375,6 +450,8 @@ local function fn()
 	
 	MakeSmallBurnableCharacter(inst, "carrat_body")
 	MakeSmallFreezableCharacter(inst, "carrat_body")
+	
+    inst.PiedPiperBuff = PiedPiperBuff
 	
 	inst.OnSave = onsave_rat
 	inst.OnLoad = onload_rat
@@ -428,7 +505,7 @@ local function junkretargetfn(inst)
 end
 
 local function KeepTarget(inst, target)
-return inst:IsNear(target, TUNING.HOUND_FOLLOWER_TARGET_KEEP)
+	return inst:IsNear(target, TUNING.HOUND_FOLLOWER_TARGET_KEEP)
 end
 
 local function SetHarassPlayer(inst, player)
@@ -644,7 +721,7 @@ local function packfn()
 	inst:AddTag("raidrat")
 	inst:AddTag("packrat")
 	inst:AddTag("animal")
-	inst:AddTag("hostile")
+	--inst:AddTag("hostile")
 	inst:AddTag("herdmember")
 	inst:AddTag("smallcreature")
 	inst:AddTag("canbetrapped")
@@ -676,8 +753,8 @@ local function packfn()
 	inst.sounds = carratsounds
 	
 	inst:AddComponent("locomotor")
-	inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_WALKSPEED
-	inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_RUNSPEED
+	inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_WALKSPEED / 1.25
+	inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_RUNSPEED / 1.25
 	inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 	inst.components.locomotor:SetTriggersCreep(false)
 	inst:SetStateGraph("SGuncompromising_rat")
@@ -734,9 +811,10 @@ local function packfn()
 	inst.components.combat.hiteffectsymbol = "carrat_body"
 	
 	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(TUNING.DSTU.RAIDRAT_HEALTH)
+	inst.components.health:SetMaxHealth(TUNING.DSTU.RAIDRAT_HEALTH * 1.5)
 	
 	inst:AddComponent("lootdropper")
+	inst.components.lootdropper:SetChanceLootTable('packrat')
 	inst.components.lootdropper:AddRandomLoot("monstersmallmeat", 0.34)
 	inst.components.lootdropper:AddRandomLoot("disease_puff", 0.34)
 	inst.components.lootdropper:AddRandomLoot("rat_tail", 0.34)
@@ -762,7 +840,7 @@ local function packfn()
 	inst.components.cookable:SetOnCookedFn(on_cooked_fn)
 	
 	inst:AddComponent("inventory")
-	inst.components.inventory.maxslots = 10
+	inst.components.inventory.maxslots = 5
 	
 	inst:AddComponent("inspectable")
 	
@@ -793,6 +871,7 @@ local function packfn()
 end
 
 local function onfinishcallback(inst)
+	inst.components.lootdropper:DropLoot()
 	inst.components.inventory:DropEverything()
 	inst:Remove()
 end
@@ -818,7 +897,7 @@ local function OnSpawned(inst, newent)
 		inst.components.herd:AddMember(newent)
 	end
 	
-	if TheWorld.state.cycles > 50 then
+	--[[if TheWorld.state.cycles > 50 then
 		local x, y, z = inst.Transform:GetWorldPosition()
 		
 		local ents = #TheSim:FindEntities(x, y, z, 40, {"player"})
@@ -829,13 +908,15 @@ local function OnSpawned(inst, newent)
 				inst.components.periodicspawner:TrySpawn("uncompromising_buffrat")
 			end
 		end
-	end
+	end]]
 end
 
 local function BurrowKilled(inst)
-	if inst.components.periodicspawner ~= nil then
+	--[[if inst.components.periodicspawner ~= nil then
 		inst.components.periodicspawner:Stop()
 	end
+	
+	inst:Remove()]]
 end
 
 local function BurrowAnim(inst)
@@ -896,15 +977,89 @@ local function MakeRatBurrow(inst)
 		
 		if IsValidRatBurrowPosition(inst.x1, inst.z1) then
 			inst.Transform:SetPosition(inst.x1, 0, inst.z1)
+			
+			local x, y, z = inst.Transform:GetWorldPosition()
+			
+			if math.random() >= 0.7 then
+				local players = #TheSim:FindEntities(x, y, z, 30, { "player" })
+						
+				if players < 1 then
+					local piper = SpawnPrefab("pied_rat")
+						
+					piper.Transform:SetPosition(inst.Transform:GetWorldPosition())
+					inst.components.herd:AddMember(piper)
+				end
+			end
+			
 			break
 		end
 	end
-	
-    inst:DoTaskInTime(0, OnInit)
-    inst:ListenForEvent("onremove", OnRemoved)
 end
 
 --GetClosestInstWithTag(tag, inst, radius or 1000)
+
+
+
+
+
+local function AbleToAcceptTest(inst, item, giver)
+	return true
+end
+
+local function AcceptTest(inst, item, giver)
+    return item.components and item.components.edible
+end
+
+local function OnGetItemFromPlayer(inst, giver, item)
+	if item.components.edible:GetHunger() >= 75 then
+		for k = 1, 5 do
+			local v = inst.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
+			if v ~= nil then
+				inst.components.inventory:DropItem(v, true, true)
+				v:AddTag("ratimmune")
+				v:DoTaskInTime(10, function(v) v:RemoveTag("ratimmune") end)
+			end
+		end
+	elseif item.components.edible:GetHunger() >= 50 then
+		for k = 1, 3 do
+			--local v = inst.components.inventory.itemslots[k]
+			local v = inst.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
+			if v ~= nil then
+				inst.components.inventory:DropItem(v, true, true)
+				v:AddTag("ratimmune")
+				v:DoTaskInTime(10, function(v) v:RemoveTag("ratimmune") end)
+			end
+		end
+	elseif item.components.edible:GetHunger() >= 15 then
+		for k = 1, 1 do
+			--local v = inst.components.inventory.itemslots[k]
+			local v = inst.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
+			if v ~= nil then
+				inst.components.inventory:DropItem(v, true, true)
+				v:AddTag("ratimmune")
+				v:DoTaskInTime(10, function(v) v:RemoveTag("ratimmune") end)
+			end
+		end
+	elseif item.components.edible:GetHunger() >= 5 and math.random() > 0.5 then
+		for k = 1, 1 do
+			--local v = inst.components.inventory.itemslots[k]
+			local v = inst.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
+			if v ~= nil then
+				inst.components.inventory:DropItem(v, true, true)
+				v:AddTag("ratimmune")
+				v:DoTaskInTime(10, function(v) v:RemoveTag("ratimmune") end)
+			end
+		end
+	end
+	
+	inst.AnimState:PlayAnimation("dig")
+	inst.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/submerge")
+end
+
+local function OnRefuseItem(inst, giver, item)
+	inst.AnimState:PlayAnimation("dig")
+	inst.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/submerge")
+end
 
 local function EndRaid(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
@@ -953,7 +1108,20 @@ local function EndRaid(inst)
 	inst.components.herd.updatepos = false
     inst.components.herd.updateposincombat = false
 	
+    inst:AddTag("trader")
+	
+    inst:AddComponent("trader")
+    inst.components.trader:SetAbleToAcceptTest(AbleToAcceptTest)
+    inst.components.trader:SetAcceptTest(AcceptTest)
+    inst.components.trader.onaccept = OnGetItemFromPlayer
+    inst.components.trader.onrefuse = OnRefuseItem
+	
+	inst.entity:SetCanSleep(false)
+	
 	inst.raiding = false
+	
+    inst:DoTaskInTime(0, OnInit)
+    inst:ListenForEvent("onremove", OnRemoved)
 end
 
 local function OnInitHerd(inst)
@@ -962,9 +1130,9 @@ local function OnInitHerd(inst)
 	end
 
 	if inst.raiding then
-		for i = 1, 4 do
-			inst:DoTaskInTime((i - 1) * 12, function(inst)
-				for i = 1, (math.random(4, 5) / i) do
+		for i = 1, 3 do
+			inst:DoTaskInTime((i - 1) * 15, function(inst)
+				for i = 1, ((3) / i) do
 					local x, y, z = inst.Transform:GetWorldPosition()
 					local angle = math.random() * 8 * PI
 					local rat = SpawnPrefab("uncompromising_rat")
@@ -972,7 +1140,7 @@ local function OnInitHerd(inst)
 					inst.components.herd:AddMember(rat)
 				end
 				
-				if i < 4 then
+				if i < 3 then
 					local x, y, z = inst.Transform:GetWorldPosition()
 					local angle = math.random() * 8 * PI
 					local packrat = SpawnPrefab("uncompromising_packrat")
@@ -1155,6 +1323,7 @@ local function fn_herd()
 	inst.components.inventory.maxslots = 100
 	
 	inst:AddComponent("lootdropper")
+	inst.components.lootdropper:SetChanceLootTable('ratburrow')
 	
 	inst.OnSave = onsave_burrow
 	inst.OnPreLoad = onpreload_burrow
@@ -1182,6 +1351,7 @@ local function fn_burrow()
 	
 	inst:AddTag("ratburrow")
 	inst:AddTag("herd")
+    inst:AddTag("trader")
 	
     inst.MiniMapEntity:SetIcon("uncompromising_ratburrow.tex")
 	
@@ -1196,7 +1366,6 @@ local function fn_burrow()
 	inst:AddComponent("herd")
 	inst.components.herd:SetGatherRange(40)
 	inst.components.herd:SetUpdateRange(nil)
-	inst.components.herd:SetOnEmptyFn(inst.Remove)
 	inst.components.herd.maxsize = 8
 	inst.components.herd.nomerging = true
     inst.components.herd.updateposincombat = true
@@ -1219,6 +1388,7 @@ local function fn_burrow()
 	inst:AddComponent("combat")
 	inst:AddComponent("inventory")
 	inst:AddComponent("lootdropper")
+	inst.components.lootdropper:SetChanceLootTable('ratburrow_small')
 	inst:AddComponent("inspectable")
 	
 	inst:AddComponent("workable")
@@ -1226,6 +1396,12 @@ local function fn_burrow()
 	inst.components.workable:SetOnWorkCallback(onworked)
 	inst.components.workable:SetWorkAction(ACTIONS.DIG)
 	inst.components.workable:SetWorkLeft(3)
+	
+    inst:AddComponent("trader")
+    inst.components.trader:SetAbleToAcceptTest(AbleToAcceptTest)
+    inst.components.trader:SetAcceptTest(AcceptTest)
+    inst.components.trader.onaccept = OnGetItemFromPlayer
+    inst.components.trader.onrefuse = OnRefuseItem
 	
 	inst:DoTaskInTime(1, BurrowAnim)
 	
@@ -1246,9 +1422,20 @@ local function SlumberParty(inst)
 			burrow.Transform:SetPosition(x, 0, z)
 			burrow.AnimState:PlayAnimation("spawn")
 			
+			local players = #TheSim:FindEntities(x, y, z, 30, { "player" })
+			
+			if math.random() >= 0.7 then
+				if players < 1 then
+					local piper = SpawnPrefab("pied_rat")
+				
+					piper.Transform:SetPosition(inst.Transform:GetWorldPosition())
+					burrow.components.herd:AddMember(piper)
+				end
+			end
+			
 			for i, b in ipairs(inst.components.herd.members) do
 				b:RemoveTag("ratscout")
-				burrow:AddMember(b)
+				burrow.components.herd:AddMember(b)
 			end
 			
 			inst:Remove()
@@ -1272,6 +1459,7 @@ local function fn_scoutburrow()
 	
 	inst:AddTag("ratburrow")
 	inst:AddTag("herd")
+	inst.entity:SetCanSleep(false)
 	
 	inst.entity:SetPristine()
 	
@@ -1286,7 +1474,6 @@ local function fn_scoutburrow()
 	inst.components.herd.maxsize = 8
 	inst.components.herd.nomerging = true
     inst.components.herd.updateposincombat = true
-	inst.components.herd:SetOnEmptyFn(BurrowKilled)
 	inst.components.herd.updatepos = false
 	inst.components.herd.updateposincombat = false
 	
@@ -1306,62 +1493,85 @@ local function TimeForACheckUp(inst)
 	print("   ========")
 	print("    V V    V V")
 	
-	inst.ratscore = 0
+	inst.ratscore = -60
+	inst.itemscore = 0
+	inst.foodscore = 0
 	print(#ents)
-	
 	
 	if ents ~= nil then
 		for i, v in ipairs(ents) do
+			if not v:HasTag("_container") and not v:HasTag("smallcreature") then
 				if v.components.inventoryitem:IsHeld() then
-					if not v:HasTag("frozen") then
-						if v:HasTag("stale") then
-							inst.ratscore = inst.ratscore + 5
-						elseif v:HasTag("spoiled") then
-							inst.ratscore = inst.ratscore + 15
+				
+				
+					if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" then
+						print("lureplant is holding!")
+					else
+						if not v:HasTag("frozen") then
+							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+						
+							if v:HasTag("stale") then
+								inst.foodscore = inst.foodscore + (5 * inst.multiplier)
+							elseif v:HasTag("spoiled") then
+								inst.foodscore = inst.foodscore + (10 * inst.multiplier)
+							elseif v.prefab == "spoiled_food" then
+								inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+								inst.foodscore = inst.foodscore + (10 * inst.multiplier)
+							end
 						end
-					elseif v.prefab == "spoiledfood" then
-						inst.ratscore = inst.ratscore + 25
 					end
 				else
 					if not v:HasTag("frozen") then
+						inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+						
 						if v:HasTag("fresh") then
-							inst.ratscore = inst.ratscore + 10
+							inst.foodscore = inst.foodscore + (10 * inst.multiplier)
 						elseif v:HasTag("stale") then
-							inst.ratscore = inst.ratscore + 20
+							inst.foodscore = inst.foodscore + (20 * inst.multiplier)
 						elseif v:HasTag("spoiled") then
-							inst.ratscore = inst.ratscore + 30
+							inst.foodscore = inst.foodscore + (30 * inst.multiplier)
+						elseif v.prefab == "spoiled_food" then
+							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+							inst.foodscore = inst.foodscore + (35 * inst.multiplier)
 						end
-					elseif v.prefab == "spoiledfood" then
-						inst.ratscore = inst.ratscore + 45
 					end
 					
-					if v:HasTag("cattoy") or v:HasTag("molebait") then
-						if v.prefab == "twigs" then
-							inst.ratscore = inst.ratscore + 0.5 -- Give them a break, Twiggy Trees may be the cause
-						else
-							if v:HasTag("molebait") then
-								inst.ratscore = inst.ratscore + 3
-							else
-								inst.ratscore = inst.ratscore + 1
-							end
-						end
-					else
-						if v:HasTag("_equippable") then
-							inst.ratscore = inst.ratscore + 20 -- Oooh, wants wants! We steal!
-						else
-							--inst.ratscore = inst.ratscore + 10
-						end
+					if (v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool")) and not v:HasTag("balloon") then
+						inst.itemscore = inst.itemscore + 30 -- Oooh, wants wants! We steal!
+					elseif v:HasTag("molebait") then
+						inst.itemscore = inst.itemscore + 2 -- Oooh, wants wants! We steal!
 					end
 				end
+			end
 		end
 	end
 	
-	print(inst.ratscore)
-	print("THATS THE NORMAL RAT SCORE")
+	inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck:GetBurrows() or 0
+	inst.burrowbonus = 15 * inst.ratburrows
+	
+	
+	inst.ratscore = inst.ratscore + inst.itemscore + inst.foodscore + inst.burrowbonus
+	print("------------------------")
+	print("Itemscore = "..inst.itemscore)
+	print("Foodscore = "..inst.foodscore)
+	print("Burrowbonus = "..inst.burrowbonus)
+	print("Ratscore = "..inst.ratscore)
+	print("------------------------")
+	if TUNING.DSTU.ANNOUNCE_BASESTATUS == true then
+		TheNet:SystemMessage("-------------------------")
+		TheNet:SystemMessage("Itemscore = "..inst.itemscore)
+		TheNet:SystemMessage("Foodscore = "..inst.foodscore)
+		TheNet:SystemMessage("Burrowbonus = "..inst.burrowbonus)
+		TheNet:SystemMessage("Ratscore = "..inst.ratscore)
+		TheNet:SystemMessage("-------------------------")
+	end
+	if inst.ratscore > 240 then
+		inst.ratscore = 240
+	end
 	TheWorld:PushEvent("reducerattimer", {value = inst.ratscore})
 	
 	
-	inst.ratwarning = inst.ratscore / 50
+	inst.ratwarning = inst.ratscore / 48
 	
 	
 		--[[
@@ -1375,11 +1585,12 @@ local function TimeForACheckUp(inst)
 			end)
 		end
 	end]]
-	if inst.ratwarning >= 1 then
-		if inst.ratwarning > 5 then
-			inst.ratwarning = 5
-		end
-		
+	if inst.ratscore >= 60 then
+		if math.random() > 0.85 then
+			if inst.ratwarning > 5 then
+				inst.ratwarning = 5
+			end
+			
 			for c = 1, (inst.ratwarning) do
 				inst:DoTaskInTime((c/5), function(inst)
 					local warning = SpawnPrefab("uncompromising_ratwarning")
@@ -1390,11 +1601,25 @@ local function TimeForACheckUp(inst)
 				end)
 			end
 			
-		local players = TheSim:FindEntities(x, y, z, 40, {"player"})
-		for a, b in ipairs(players) do
-			b:DoTaskInTime(2+math.random(), function(b)
-				b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER", "LEVEL_"..tostring(RoundToNearest(inst.ratwarning, 1))))
-			end)
+			local players = TheSim:FindEntities(x, y, z, 40, {"player"},{"playerghost"})
+			for a, b in ipairs(players) do
+				
+				if math.random() > 0.5 then
+					if inst.burrowbonus > inst.itemscore and inst.burrowbonus > inst.foodscore then
+						b:DoTaskInTime(2+math.random(), function(b)
+							b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_BURROWS", "LEVEL_1"))
+						end)
+					elseif inst.itemscore > inst.burrowbonus and inst.itemscore > inst.foodscore then
+						b:DoTaskInTime(2+math.random(), function(b)
+							b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_ITEMS", "LEVEL_1"))
+						end)
+					elseif inst.foodscore > inst.burrowbonus and inst.foodscore > inst.itemscore then
+						b:DoTaskInTime(2+math.random(), function(b)
+							b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_FOOD", "LEVEL_1"))
+						end)
+					end
+				end
+			end
 		end
 	end
 end
@@ -1408,6 +1633,7 @@ local function fn_sniffer()
 	inst.entity:AddNetwork()
 	
 	inst:AddTag("rat_sniffer")
+	inst:AddTag("NOBLOCK")
 	
 	inst.entity:SetPristine()
 	
@@ -1469,13 +1695,14 @@ local function PlayWarningSound(inst)
     local theta = math.random() * 2 * PI
 
 	local x, y, z = inst.Transform:GetWorldPosition()
-    inst.Transform:SetPosition(x + (20 * math.cos(theta)), 0, z + 20 * (math.sin(theta)))
+    inst.Transform:SetPosition(x + (15 * math.cos(theta)), 0, z + 15 * (math.sin(theta)))
 
 	local x, y, z = inst.Transform:GetWorldPosition()
 	print(x, y, z)
 	--TheFocalPoint.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
     inst.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
-    inst:Remove()
+    
+	inst:DoTaskInTime(3, inst.Remove)
 end
 
 local function fn_warning()
@@ -1497,9 +1724,163 @@ local function fn_warning()
 		PlayWarningSound(inst)
 	end)
 
-	inst.entity:SetCanSleep(false)
 	inst.persists = false
 
+	return inst
+end
+
+local function TimeForACheckUpDev(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+
+	local ents = TheSim:FindEntities(x, 0, z, 40, {"_inventoryitem"})
+	print("THE RAT SNIFFS")
+	print("                o")
+	print("    =========B  *sniff* *sniff*")
+	print("---========vv")
+	print("   ========")
+	print("    V V    V V")
+	
+	inst.ratscore = -60
+	inst.itemscore = 0
+	inst.foodscore = 0
+	print(#ents)
+	
+	if ents ~= nil then
+		for i, v in ipairs(ents) do
+			if not v:HasTag("_container") and not v:HasTag("smallcreature") then
+				if v.components.inventoryitem:IsHeld() then
+				
+				
+					if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" then
+						print("lureplant is holding!")
+					else
+						if not v:HasTag("frozen") then
+							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+						
+							if v:HasTag("stale") then
+								inst.foodscore = inst.foodscore + (5 * inst.multiplier)
+							elseif v:HasTag("spoiled") then
+								inst.foodscore = inst.foodscore + (10 * inst.multiplier)
+							elseif v.prefab == "spoiled_food" then
+								inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+								inst.foodscore = inst.foodscore + (15 * inst.multiplier)
+							end
+						end
+					end
+				else
+					if not v:HasTag("frozen") then
+						inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+						
+						if v:HasTag("fresh") then
+							inst.foodscore = inst.foodscore + (10 * inst.multiplier)
+						elseif v:HasTag("stale") then
+							inst.foodscore = inst.foodscore + (20 * inst.multiplier)
+						elseif v:HasTag("spoiled") then
+							inst.foodscore = inst.foodscore + (30 * inst.multiplier)
+						elseif v.prefab == "spoiled_food" then
+							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+							inst.foodscore = inst.foodscore + (35 * inst.multiplier)
+						end
+					end
+					
+					if v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool") then
+						inst.itemscore = inst.itemscore + 30 -- Oooh, wants wants! We steal!
+					elseif v:HasTag("molebait") then
+						inst.itemscore = inst.itemscore + 2 -- Oooh, wants wants! We steal!
+					end
+				end
+			end
+		end
+	end
+	
+	inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck:GetBurrows() or 0
+	inst.burrowbonus = 15 * inst.ratburrows
+	
+	
+	inst.ratscore = inst.ratscore + inst.itemscore + inst.foodscore + inst.burrowbonus
+	print("------------------------")
+	print("Itemscore = "..inst.itemscore)
+	print("Foodscore = "..inst.foodscore)
+	print("Burrowbonus = "..inst.burrowbonus)
+	print("Ratscore = "..inst.ratscore)
+	print("------------------------")
+	if TUNING.DSTU.ANNOUNCE_BASESTATUS == true then
+		TheNet:SystemMessage("-------------------------")
+		TheNet:SystemMessage("Itemscore = "..inst.itemscore)
+		TheNet:SystemMessage("Foodscore = "..inst.foodscore)
+		TheNet:SystemMessage("Burrowbonus = "..inst.burrowbonus)
+		TheNet:SystemMessage("Ratscore = "..inst.ratscore)
+		TheNet:SystemMessage("-------------------------")
+	end
+	if inst.ratscore > 240 then
+		inst.ratscore = 240
+	end
+	TheWorld:PushEvent("reducerattimer", {value = inst.ratscore})
+	
+	
+	inst.ratwarning = inst.ratscore / 48
+	
+	if inst.ratscore >= 60 then
+		--if math.random() > 0.85 then
+			if inst.ratwarning > 5 then
+				inst.ratwarning = 5
+			end
+			
+			for c = 1, (inst.ratwarning) do
+				inst:DoTaskInTime((c/5), function(inst)
+					local warning = SpawnPrefab("uncompromising_ratwarning")
+					warning.Transform:SetPosition(inst.Transform:GetWorldPosition())
+					--warning.entity:SetParent(b)
+					--b.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
+					--warning.entity:SetParent(TheFocalPoint.b.entity)
+				end)
+			end
+			
+			local players = TheSim:FindEntities(x, y, z, 40, {"player"},{"playerghost"})
+			for a, b in ipairs(players) do
+				if b.prefab == "wilson" then
+					--if math.random() > 0.5 then
+						if inst.burrowbonus > inst.itemscore and inst.burrowbonus > inst.foodscore then
+							b:DoTaskInTime(2+math.random(), function(b)
+								b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_BURROWS", "LEVEL_1"))
+							end)
+						elseif inst.itemscore > inst.burrowbonus and inst.itemscore > inst.foodscore then
+							b:DoTaskInTime(2+math.random(), function(b)
+								b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_ITEMS", "LEVEL_1"))
+							end)
+						elseif inst.foodscore > inst.burrowbonus and inst.foodscore > inst.itemscore then
+							b:DoTaskInTime(2+math.random(), function(b)
+								b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_FOOD", "LEVEL_1"))
+							end)
+						end
+					--end
+				end
+			end
+		--end
+	end
+	
+	inst:Remove()
+end
+
+local function fn_devwarning()
+	local inst = CreateEntity()
+	
+	inst.entity:AddTransform()
+	inst.entity:AddAnimState()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddNetwork()
+	
+	inst:AddTag("rat_sniffer")
+	inst:AddTag("NOBLOCK")
+	
+	inst.entity:SetPristine()
+	
+	if not TheWorld.ismastersim then
+		return inst
+	end
+	
+	inst:DoTaskInTime(5, TimeForACheckUpDev)
+	
 	return inst
 end
 
@@ -1511,4 +1892,5 @@ return Prefab("uncompromising_rat", fn, assets, prefabs),
 	Prefab("uncompromising_scoutburrow", fn_scoutburrow, assets, prefabs),
 	Prefab("uncompromising_ratsniffer", fn_sniffer, assets, prefabs),
 	Prefab("ratdroppings", fn_droppings, assets),
-	Prefab("uncompromising_ratwarning", fn_warning)
+	Prefab("uncompromising_ratwarning", fn_warning),
+	Prefab("devtestratwarning", fn_devwarning)

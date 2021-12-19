@@ -317,3 +317,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 
 	DESCRIBE.DORMANT_RAIN_HORN = "An inconspicious conch shell. Like most things here, it must have some hidden purpose."
 	DESCRIBE.RAIN_HORN = "Interesting, I should add an entry to \"Rainy Days\" about this."
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+        LEVEL_1 = "I dislike our disorganized workspace as much as the rats like it.",
+    }
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
+        LEVEL_1 = "The state of our rations is questionable.",
+    }
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
+        LEVEL_1 = "Those vermin must be planning something out there.",
+    }

@@ -391,11 +391,15 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.DORMANT_RAIN_HORN = "Looking at it gives me flashes of a tropical setting."
 	DESCRIBE.RAIN_HORN = "This'll be useful for when wildfires start up again."
 	
+	ANNOUNCE.ANNOUNCE_NORATBURROWS = "Sounds like theres no rat dens nearby."
 	
-    ANNOUNCE.ANNOUNCE_RATSNIFFER = {
-        LEVEL_1 = "Did you hear something?",
-        LEVEL_2 = "Sounds like rats. I should clean up.",
-        LEVEL_3 = "Sounds like some rats are interested in this area.",
-        LEVEL_4 = "This place is a bit of a mess.",
-        LEVEL_5 = "I'd better clean up all this mess!",
+	
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+        LEVEL_1 = "The camp is looking like rat's nest.",
+    }
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
+        LEVEL_1 = "The state of our rations may attract unwanted attention to the camp.",
+    }
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
+        LEVEL_1 = "The rats seem to be multiplying out in the wilderness, where is their source?",
     }

@@ -59,19 +59,20 @@ end
 local events=
 {
     EventHandler("attacked", function(inst, data)
-        if not inst.components.health:IsDead() then
+    if not inst.components.health:IsDead() then
 		if inst.enraged == false then
-		inst.sg:GoToState("anger")
-		end
+			inst.sg:GoToState("anger")
+		else
             if inst.hasshield then
                 local shieldtype = PickShield(inst)
                 if shieldtype ~= nil then
                     local fx = SpawnPrefab("stalker_shield"..tostring(shieldtype))
                     fx.entity:SetParent(inst.entity)
-                        fx.AnimState:SetScale(-1.3, 1, 1)
+                    fx.AnimState:SetScale(-1.3, 1, 1)
                 end
             end
 		end
+	end
     end),
     EventHandler("doattack", function(inst, data) 
         if not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") and data and data.target  then 

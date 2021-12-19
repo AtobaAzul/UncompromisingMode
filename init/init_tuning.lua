@@ -149,6 +149,7 @@ TUNING.DSTU =
     ----------------------------------------------------------------------------
 	--ratraid
 	RATRAID_TIMERSTART = GetModConfigData("rattimer"),
+	RATSNIFFER_TIMER = GetModConfigData("ratsnifftimer"),
 	
     --Generics
     MONSTER_BAT_CAVE_NR_INCREASE = 3,
@@ -177,6 +178,9 @@ TUNING.DSTU =
 	--Wiltfly Health
 	WILTFLY_HEALTH = GetModConfigData("wiltfly health"),
 	
+    --Twins health
+    TWIN1_HEALTH = GetModConfigData("twins health"),
+    TWIN2_HEALTH = GetModConfigData("twins health"),
 	--Spawn New Bosses
 	SPAWNMOTHERGOOSE = GetModConfigData("mother_goose"),
 	SPAWNWILTINGFLY = GetModConfigData("wiltfly"),
@@ -211,7 +215,7 @@ TUNING.DSTU =
 	--Ancient Trepidations
 	TREPIDATIONS = GetModConfigData("trepidations"),
 	
-	--Ancient Trepidations
+	--Pawns
 	PAWNS = GetModConfigData("pawns"),	
 	
 	--Spiders
@@ -284,12 +288,17 @@ TUNING.DSTU =
 	--Mobs
 	RAIDRAT_HEALTH = 100,
 	RAIDRAT_DAMAGE = 20,
-	RAIDRAT_ATTACK_PERIOD = 2,
+	RAIDRAT_ATTACK_PERIOD = 2.5,
+	RAIDRAT_BUFFED_ATTACK_PERIOD = 1.5,
 	RAIDRAT_ATTACK_RANGE = 1,
 	RAIDRAT_RUNSPEED = 8,
+	RAIDRAT_BUFFED_RUNSPEED = 10,
 	RAIDRAT_WALKSPEED = 4,
+	RAIDRAT_BUFFED_WALKSPEED = 6,
 	RAIDRAT_SPAWNRATE = seg_time / 5,
 	RAIDRAT_SPAWNRATE_VARIANCE = (seg_time / 5) * 0.5,
+	
+	PIEDPIPER_TOOT_RANGE = 25,
 	
 	--Weather Start Date
     WEATHERHAZARD_START_DATE = GetModConfigData("weather start date"),
@@ -342,9 +351,12 @@ TUNING.DSTU =
 	PALE_VOMIT_NUTRIENTS	= { 8, 8, 8 },
 
 
---Experimental
+--Experimental and DEV
 
 	HONEYBANDBUFF = GetModConfigData("honeybandbuff"),
+	ELECTRICALMISHAP = GetModConfigData("electricalmishap"),
+	ANNOUNCE_BASESTATUS = GetModConfigData("announce_basestatus"),
+	EYEBRELLAREWORK = GetModConfigData("eyebrellarework"),
 }
 
 TUNING.NO_BOSS_TIME = 24

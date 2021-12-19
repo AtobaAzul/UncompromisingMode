@@ -18,7 +18,7 @@ local function oneat(inst, data)
 		end
 			
 		if not inst:HasTag("vetcurse") and not inst:HasTag("UM_foodregen") and inst.components.health and healthbonus > 0 then
-			inst.components.health:DoDelta(healthbonus, food.prefab)
+			inst.components.health:DoDelta(healthbonus, true, food.prefab)
 		end
 	end
 end

@@ -312,3 +312,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "Very good for boo boos."
 	DESCRIBE.DORMANT_RAIN_HORN = "Is nice shell."
 	DESCRIBE.RAIN_HORN = "Blow shell and make water fall from sky!"
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+        LEVEL_1 = "Ground is full of things!",
+    }
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
+        LEVEL_1 = "Food must be put away, don't want to see rat.",
+    }
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
+        LEVEL_1 = "Squeaking out there getting louder.",
+    }

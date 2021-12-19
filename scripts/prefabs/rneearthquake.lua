@@ -92,7 +92,7 @@ local function Fx2(inst)
 	ShakeAllCameras(CAMERASHAKE.FULL, 5, 0.05, 0.2, inst, 10)
 
 	if inst:IsOnOcean() then
-		SpawnPrefab("malbatross_ripple").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		SpawnPrefab("antlion_sinkhole_ripple").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	else
 		SpawnPrefab("groundpound_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
 		SpawnPrefab("slide_puff").Transform:SetPosition(inst.Transform:GetWorldPosition())
@@ -109,8 +109,12 @@ local function Fx2(inst)
 			SpawnPrefab("round_puff_fx_sm").Transform:SetPosition(inst.Transform:GetWorldPosition())
 		end
 		
-		inst.components.combat:SetDefaultDamage(5)
-		inst.components.combat:DoAreaAttack(inst, 2, nil, nil, nil, AREAATTACK_EXCLUDETAGS)
+		local ents = TheSim:FindEntities(x, y, z, 2, nil, { "INLIMBO", "playerghost" }, { "player", "abigail" })
+		for i, v in ipairs(ents) do
+			if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
+				v.components.combat:GetAttacked(inst, 5, nil)
+			end
+		end
 	elseif chance <= 0.66 and chance > 0.33 then
 		if boat then
 			boat:PushEvent("spawnnewboatleak", {pt = pt, leak_size = "med_leak", playsoundfx = true})
@@ -120,8 +124,12 @@ local function Fx2(inst)
 			SpawnPrefab("round_puff_fx_lg").Transform:SetPosition(inst.Transform:GetWorldPosition())
 		end
 		
-		inst.components.combat:SetDefaultDamage(10)
-		inst.components.combat:DoAreaAttack(inst, 3.5, nil, nil, nil, AREAATTACK_EXCLUDETAGS)
+		local ents = TheSim:FindEntities(x, y, z, 3.5, nil, { "INLIMBO", "playerghost" }, { "player", "abigail" })
+		for i, v in ipairs(ents) do
+			if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
+				v.components.combat:GetAttacked(inst, 10, nil)
+			end
+		end
 	end
 	
 	inst:Remove()
@@ -132,7 +140,7 @@ local function Init(inst)
 	
 	local boat = TheWorld.Map:GetPlatformAtPoint(x, z)
 	if boat then
-		SpawnPrefab("malbatross_ripple").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		SpawnPrefab("antlion_sinkhole_ripple").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	elseif inst:IsOnOcean() then
 		SpawnPrefab("ocean_splash_ripple2").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	else

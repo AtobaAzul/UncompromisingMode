@@ -231,6 +231,10 @@ function Uncompromising_Transformer:StartRevert()
 end
 
 function Uncompromising_Transformer:OnSave()
+	if not self.transformed then
+		return nil
+	end
+
 	local data = {}
 	local refs = {}
 

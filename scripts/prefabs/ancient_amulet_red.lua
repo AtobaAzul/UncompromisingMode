@@ -36,7 +36,7 @@ local function onequip_blue(inst, owner)
 				inst._cdtask = inst:DoTaskInTime(1, OnCooldown)
 				
 				inst.healthvalue = data.damage
-				inst.components.finiteuses:Use(1)
+				inst.components.finiteuses:Use(inst.healthvalue < 50 and inst.healthvalue or 50)
 				
 				LaunchProjectile(owner, data.damage)
 			end
@@ -172,8 +172,8 @@ local function fn()
 
     inst:AddComponent("finiteuses")
     inst.components.finiteuses:SetOnFinished(inst.Remove)
-    inst.components.finiteuses:SetMaxUses(30)
-    inst.components.finiteuses:SetUses(30)
+    inst.components.finiteuses:SetMaxUses(1000)
+    inst.components.finiteuses:SetUses(1000)
 
     inst:AddComponent("hauntable")
 	inst.components.hauntable:SetOnHauntFn(OnHaunt)

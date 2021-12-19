@@ -311,3 +311,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	
 	DESCRIBE.DORMANT_RAIN_HORN = "This is familiar to us."
 	DESCRIBE.RAIN_HORN = "Our memory must be mixed up, we thought this did something different."
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+        LEVEL_1 = "We should probably clean up our toys.",
+    }
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
+        LEVEL_1 = "Our food is in a pretty stinky state.",
+    }
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
+        LEVEL_1 = "Something's squeaking out there.",
+    }

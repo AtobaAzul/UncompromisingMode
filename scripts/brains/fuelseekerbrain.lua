@@ -69,7 +69,9 @@ function FuelSeekerBrain:OnStart()
 			WhileNode(function() return GetNearestLightPos(self.inst) ~= nil end, "FindLight",
 				Leash(self.inst, GetNearestLightPos, MAX_SHRINE_WANDER_DIST, MIN_SHRINE_WANDER_DIST)
 			),
+			WhileNode(function() return not self.inst.sg:HasStateTag("busy") end, "NotEating",
 			Follow(self.inst, function() return self.inst:GetNearestPlayer(true) end, MIN_SHRINE_WANDER_DIST, 15, MAX_SHRINE_WANDER_DIST)
+			),
         }, 0.25)
 
     self.bt = BT(self.inst, root)

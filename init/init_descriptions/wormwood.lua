@@ -309,3 +309,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORMWOOD.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "Buzzers and friends work together good."
 	DESCRIBE.DORMANT_RAIN_HORN = "Nice shell."
 	DESCRIBE.RAIN_HORN = "Wet Shell."
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+        LEVEL_1 = "Too much stuff on ground, stuff stealer coming.",
+    }
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
+        LEVEL_1 = "Food too smelly, stuff stealer coming.",
+    }
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
+        LEVEL_1 = "Stuff stealers out there somewhere.",
+    }
