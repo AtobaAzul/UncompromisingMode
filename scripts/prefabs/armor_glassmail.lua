@@ -1,8 +1,3 @@
-local assets =
-{
-    Asset("ANIM", "anim/torso_dragonfly.zip"),
-}
-
 local function OnBlocked(owner, data)
     owner.SoundEmitter:PlaySound("dontstarve/wilson/hit_scalemail")
 	--local lavaetaken = false
