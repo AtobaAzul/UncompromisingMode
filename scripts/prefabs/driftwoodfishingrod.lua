@@ -38,7 +38,7 @@ local function fn()
 
     inst.AnimState:SetBank("driftwood_rod_ground")
     inst.AnimState:SetBuild("driftwood_rod_ground")
-    inst.AnimState:PlayAnimation("idle_90s")
+    inst.AnimState:PlayAnimation("idle")
 
     --fishingrod (from fishingrod component) added to pristine state for optimization
     inst:AddTag("fishingrod")
