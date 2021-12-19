@@ -6,6 +6,7 @@ if data.target ~= nil and data.target.components.combat ~= nil and data.target.c
 		data.target.components.combat:SuggestTarget(inst.components.follower.leader)
 	end
 end
+inst:DoTaskInTime(1,function(inst) inst.components.combat.target = nil end)
 end
 local function fn()
     local inst = CreateEntity()

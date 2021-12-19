@@ -15,8 +15,8 @@ require "behaviours/beargeroffscreen"
 local OFFSCREEN_RANGE = 64
 
 local function OutsidePlayerRange(inst)
-    local x,y,z = inst.Transform:GetWorldPosition()
-    return TheWorld.state.isautumn and (not IsAnyPlayerInRange(x, y, z, OFFSCREEN_RANGE)) -- only run offscreen behaviour in autumn
+    local x, y, z = inst.Transform:GetWorldPosition()
+    return TheWorld.state.isautumn-- and (not IsAnyPlayerInRange(x, y, z, OFFSCREEN_RANGE)) -- only run offscreen behaviour in autumn
 end
 
 local function FindNewFood(inst)

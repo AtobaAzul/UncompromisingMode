@@ -35,6 +35,9 @@ local function OnAttackedExplo(inst, data)
 end
 
 env.AddPrefabPostInit("antlion", function(inst)
+	
+	inst:AddTag("insect")
+
 	if not TheWorld.ismastersim then
 		return
 	end

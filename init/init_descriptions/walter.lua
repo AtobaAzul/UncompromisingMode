@@ -313,3 +313,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.BOOK_RAIN = "Reminds me of a past camping trip."
 	DESCRIBE.DORMANT_RAIN_HORN = "Nice, a conch shell. I desire a BADGE for this! GIVE ME A BADGE! AAAAAAAAAAAA!"
 	DESCRIBE.RAIN_HORN = "This might be useful for when it gets hot."
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+        LEVEL_1 = "All our items might get stolen if left on the ground!",
+    }
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
+        LEVEL_1 = "A pinetree pioneer should keep his food fresh and put away!",
+    }
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
+        LEVEL_1 = "Smell that Woby? There's a bunch of rats out there somewhere!",
+    }

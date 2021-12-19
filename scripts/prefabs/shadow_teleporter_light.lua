@@ -155,6 +155,13 @@ local function fn()
 		
 		inst:Remove()
 	end)
+	inst:WatchWorldState("iscaveday", function() 
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local despawnfx = SpawnPrefab("shadow_despawn")
+		despawnfx.Transform:SetPosition(x, y, z)
+		
+		inst:Remove()
+	end)
 	
     inst:ListenForEvent("ontalk", OnTalk)
     inst:ListenForEvent("donetalking", OnDoneTalking)

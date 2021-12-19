@@ -9,7 +9,6 @@ Assets = {
 	--Asset("IMAGE", "images/inventoryimages/turf_jungle.tex"),
 	----Turf
 
-
     -- Livingtree root attack custom art by @Advent (modded from poison birchnut roots)
     Asset("ANIM", "anim/tree_leaf_spike_lt.zip"),
     Asset("ANIM", "anim/frog_yellow_build.zip"),
@@ -100,13 +99,23 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/mutator_trapdoor.tex"),
 	Asset("ATLAS", "images/inventoryimages/mutator_trapdoor.xml"),	
 	
+	Asset("ANIM", "anim/pied_piper.zip"),
+	Asset("ANIM", "anim/rat_note.zip"),
+	Asset("ANIM", "anim/pied_piper_flute.zip"),
+	Asset("IMAGE", "images/inventoryimages/pied_piper_flute.tex"),
+	Asset("ATLAS", "images/inventoryimages/pied_piper_flute.xml"),	
+	Asset("ANIM", "anim/uncompromising_packrat_water.zip"),
 	Asset("ANIM", "anim/uncompromising_packrat.zip"),
 	Asset("ANIM", "anim/uncompromising_packrat_water.zip"),
 	Asset("ANIM", "anim/ratdroppings.zip"),
 	Asset("ANIM", "anim/trapdoor.zip"),
 	Asset("ANIM", "anim/rock_flipping.zip"),
 	Asset("ANIM", "anim/rock_flipping_moss.zip"),
+	
 	Asset("ANIM", "anim/plaguemask.zip"),
+	Asset("ANIM", "anim/hat_plaguemask_formal.zip"),
+	
+	
 	Asset("ANIM", "anim/rat_tail.zip"),
 	Asset("ANIM", "anim/rat_fur.zip"),
 	Asset("ANIM", "anim/shroom_skin_fragment.zip"),
@@ -199,8 +208,14 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/monstersmallmeat.xml"),
    	Asset("IMAGE", "images/inventoryimages/monstersmallmeat_dried.tex"),
 	Asset("ATLAS", "images/inventoryimages/monstersmallmeat_dried.xml"),
+	
    	Asset("IMAGE", "images/inventoryimages/plaguemask.tex"),
 	Asset("ATLAS", "images/inventoryimages/plaguemask.xml"),
+   	Asset("IMAGE", "images/inventoryimages/plaguemask_formal.tex"),
+	Asset("ATLAS", "images/inventoryimages/plaguemask_formal.xml"),
+	
+	
+	
    	Asset("IMAGE", "images/inventoryimages/shroom_skin_fragment.tex"),
 	Asset("ATLAS", "images/inventoryimages/shroom_skin_fragment.xml"),
 	Asset("IMAGE", "images/inventoryimages/sporepack.tex"),
@@ -283,8 +298,11 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/berniebox.xml"),
 	Asset("IMAGE", "images/inventoryimages/whisperpod.tex"),
 	Asset("ATLAS", "images/inventoryimages/whisperpod.xml"),
+	
 	Asset("IMAGE", "images/inventoryimages/feather_frock.tex"),
 	Asset("ATLAS", "images/inventoryimages/feather_frock.xml"),
+	Asset("IMAGE", "images/inventoryimages/feather_frock_fancy.tex"),
+	Asset("ATLAS", "images/inventoryimages/feather_frock_fancy.xml"),
 	
 	--Asset("ANIM", "anim/gatorsnake.zip"),
 	Asset("ANIM", "anim/swilson.zip"),
@@ -314,10 +332,17 @@ Assets = {
 	Asset("ANIM", "anim/snapperturtle.zip"),
 	Asset("ANIM", "anim/snapperturtlebaby.zip"),
 	Asset("ANIM", "anim/bush_marsh.zip"),
+	
     Asset("ANIM", "anim/cursed_antler.zip"),
+    Asset("ANIM", "anim/twisted_antler.zip"),
     Asset("ANIM", "anim/swap_cursed_antler.zip"),
+    Asset("ANIM", "anim/swap_twisted_antler.zip"),
+	
 	Asset("IMAGE", "images/inventoryimages/cursed_antler.tex"),
 	Asset("ATLAS", "images/inventoryimages/cursed_antler.xml"),
+	Asset("IMAGE", "images/inventoryimages/twisted_antler.tex"),
+	Asset("ATLAS", "images/inventoryimages/twisted_antler.xml"),
+	
 	Asset("ANIM", "anim/web_net_splat.zip"),
 	Asset("ANIM", "anim/web_net_splash.zip"),
 	Asset("ANIM", "anim/web_net_shot.zip"),
@@ -411,8 +436,13 @@ Assets = {
 	Asset("ANIM", "anim/swap_beargerclaw.zip"),
 	Asset("ANIM", "anim/slobberlobber.zip"),
 	Asset("ANIM", "anim/beargerclaw.zip"),
-	Asset("ANIM", "anim/armor_featherfrock.zip"),
-	Asset("ANIM", "anim/armor_featherfrock_ground.zip"),
+	
+	Asset("ANIM", "anim/featherfrock.zip"),
+	Asset("ANIM", "anim/featherfrock_ground.zip"),
+	Asset("ANIM", "anim/featherfrock_fancy.zip"),
+	Asset("ANIM", "anim/featherfrock_fancy_ground.zip"),
+	
+	
 	Asset("ANIM", "anim/lava_spitball.zip"),
 	Asset("ANIM", "anim/shambler.zip"),
 	Asset("ANIM", "anim/corncan.zip"),
@@ -531,6 +561,9 @@ Assets = {
 	Asset("ANIM", "anim/hat_opossummask.zip"),
 	Asset("IMAGE", "images/inventoryimages/hat_opossummask.tex"),
 	Asset("ATLAS", "images/inventoryimages/hat_opossummask.xml"),
+	Asset("ANIM", "anim/hat_ratmask.zip"),
+	Asset("IMAGE", "images/inventoryimages/hat_ratmask.tex"),
+	Asset("ATLAS", "images/inventoryimages/hat_ratmask.xml"),
 	
 	
 	Asset("ANIM", "anim/carnival_host_death.zip"),
@@ -690,6 +723,10 @@ Assets = {
 	Asset( "ATLAS", "images/map_icons/uncompromising_ratburrow.xml"),
 	--Map Icons End--
 
+	Asset("ANIM", "anim/oculet.zip"),
+	Asset("ANIM", "anim/oculet_ground.zip"),
+	Asset("IMAGE", "images/inventoryimages/oculet.tex"),
+	Asset("ATLAS", "images/inventoryimages/oculet.xml"),
 	
 
 	Asset( "IMAGE", "bigportraits/willow.tex" ),

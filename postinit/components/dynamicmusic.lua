@@ -85,34 +85,36 @@ AddComponentPostInit("dynamicmusic", function(self)
 
         -- Note: We only have references to the private variables
         -- In order to modify the actual variables, we have to use debug.setupvalue
-		if IsInHoodedForest(player) then
-			if _dangertask ~= nil then
-				local extendtime = GLOBAL.GetTime() + 10
-				UpvalueHacker.SetUpvalue(_StartDanger, extendtime, "_extendtime")
-			elseif _isenabled then
-				_StopBusy()
-				local x, y, z = player.Transform:GetWorldPosition()
-				_soundemitter:PlaySound(
-					TheSim ~= nil and #TheSim:FindEntities(x, y, z, 30, EPIC_TAGS, NO_EPIC_TAGS) > 0
-					and ((_IsInRuins(player) and "dontstarve/music/music_epicfight_ruins") or
-						(_iscave and "dontstarve/music/music_epicfight_cave") or
-						(IsInHoodedForest(player) and "UMMusic/music/hoodedforest_efs") or
-						(SEASON_EPICFIGHT_MUSIC[inst.state.season]))
-					or ((_IsInRuins(player) and "dontstarve/music/music_danger_ruins") or
-						(_iscave and "dontstarve/music/music_danger_cave") or
-						(SEASON_DANGER_MUSIC[inst.state.season])),
-					"danger")
-				local dangertask = inst:DoTaskInTime(10, _StopDanger, true)
-				UpvalueHacker.SetUpvalue(_StartDanger, dangertask, "_dangertask")
-				UpvalueHacker.SetUpvalue(_StartDanger, nil, "_triggeredlevel")
-				UpvalueHacker.SetUpvalue(_StartDanger, 0, "_extendtime")
+		if not _soundemitter:PlayingSound("fogfear") and not _soundemitter:PlayingSound("tiddlestranger") then
+			if IsInHoodedForest(player) then
+				if _dangertask ~= nil then
+					local extendtime = GLOBAL.GetTime() + 10
+					UpvalueHacker.SetUpvalue(_StartDanger, extendtime, "_extendtime")
+				elseif _isenabled then
+					_StopBusy()
+					local x, y, z = player.Transform:GetWorldPosition()
+					_soundemitter:PlaySound(
+						TheSim ~= nil and #TheSim:FindEntities(x, y, z, 30, EPIC_TAGS, NO_EPIC_TAGS) > 0
+						and ((_IsInRuins(player) and "dontstarve/music/music_epicfight_ruins") or
+							(_iscave and "dontstarve/music/music_epicfight_cave") or
+							(IsInHoodedForest(player) and "UMMusic/music/hoodedforest_efs") or
+							(SEASON_EPICFIGHT_MUSIC[inst.state.season]))
+						or ((_IsInRuins(player) and "dontstarve/music/music_danger_ruins") or
+							(_iscave and "dontstarve/music/music_danger_cave") or
+							(SEASON_DANGER_MUSIC[inst.state.season])),
+						"danger")
+					local dangertask = inst:DoTaskInTime(10, _StopDanger, true)
+					UpvalueHacker.SetUpvalue(_StartDanger, dangertask, "_dangertask")
+					UpvalueHacker.SetUpvalue(_StartDanger, nil, "_triggeredlevel")
+					UpvalueHacker.SetUpvalue(_StartDanger, 0, "_extendtime")
 
-				if _hasinspirationbuff then
-					_soundemitter:SetParameter("danger", "wathgrithr_intensity", _hasinspirationbuff)
+					if _hasinspirationbuff then
+						_soundemitter:SetParameter("danger", "wathgrithr_intensity", _hasinspirationbuff)
+					end
 				end
+			else
+				_StartDanger(player)
 			end
-		else
-			_StartDanger(player)
 		end
     end
 	

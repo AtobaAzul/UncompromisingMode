@@ -308,7 +308,7 @@ local function stopusingopossum(inst, data)
 		hat.components.useableitem:StopUsingItem()
 	end
 end
-	
+
 local function opossum_enable(inst)
 	local owner = inst.components.inventoryitem.owner
 	if owner then
@@ -327,6 +327,85 @@ local function opossum_onuse(inst)
 	local owner = inst.components.inventoryitem.owner
 	if owner then
 		owner.sg:GoToState("opossum_death")
+	end
+end
+
+local function FindClosestPart(owner)
+	local ix, iy, iz = owner.Transform:GetWorldPosition()
+
+	local burrows = TheSim:FindEntities(ix, iy, iz, 2000, {"ratburrow"})
+	if burrows ~= nil then
+		for i, v in ipairs(burrows) do
+			if owner.SoundEmitter ~= nil then
+				owner:DoTaskInTime(i, function(owner)
+					for i = 1,5 do
+						local delay = i / 10
+					
+						owner:DoTaskInTime(FRAMES * i * 1.5 + delay, function()
+							if v ~= nil then
+								local x, y, z = owner.Transform:GetWorldPosition()
+								local px, py, pz = v.Transform:GetWorldPosition()
+								local rad = math.rad(owner:GetAngleToPoint(px, py, pz))
+								local velx = math.cos(rad) * 4.5
+								local velz = -math.sin(rad) * 4.5
+							
+								local dx, dy, dz = x + ((i/2) * velx), 0, z + ((i/2) * velz)
+								
+								local fx1 = SpawnPrefab("ratring_fx")
+								fx1.Transform:SetPosition(dx, dy, dz)
+								fx1.Transform:SetScale(0.6 - delay, 0.6 - delay, 0.6 - delay)
+								fx1.SoundEmitter:PlaySound("UCSounds/ratsniffer/burrowping", nil, 1 - delay)
+							end
+						end)
+					end
+				end)
+			end
+		end
+	elseif burrows == nil or burrows <= 0 then
+		inst.components.talker:Say(GetString(owner, "ANNOUNCE_NORATBURROWS"))
+	end
+end
+
+local function OnCooldown(inst)
+	inst.components.useableitem.inuse = false
+end
+
+local function CheckTargetPiece(inst)
+	local owner = inst.components.inventoryitem.owner
+	print("owner")
+	print(owner)
+		
+    if owner ~= nil then
+		FindClosestPart(owner)
+		inst.fx = SpawnPrefab("ratring_fx")
+		inst.fx.entity:AddFollower()
+		inst.fx.Follower:FollowSymbol(owner.GUID, "swap_hat", 0, 0, 0)
+		inst.fx.Transform:SetScale(0.5, 0.5, 0.5)
+				
+		inst.SoundEmitter:KillSound("ratping")
+		inst.SoundEmitter:PlaySound("UCSounds/ratping/ping_hotter", "ratping")
+	end
+	
+	
+    inst.components.rechargeable:Discharge(8)
+end
+
+local function rat_enable(inst)
+    inst.components.fueled:StartConsuming()
+	
+	local owner = inst.components.inventoryitem.owner
+	if owner then
+		owner:AddTag("ratfriend")
+		owner.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/emerge")
+	end
+end
+
+local function rat_disable(inst)
+    inst.components.fueled:StopConsuming()
+	
+	local owner = inst.components.inventoryitem.owner
+	if owner then
+		owner:RemoveTag("ratfriend")
 	end
 end
 
@@ -402,10 +481,13 @@ local function onequip(inst, owner)
 	if inst.customequip ~= nil then
 		inst.customequip(inst)
 	end
+	
+	inst.components.fueled:StartConsuming()
 end
  
 local function onunequip(inst, owner)
 	--owner.AnimState:Show("HAIR_NOHAT")
+	owner.AnimState:Show("HAIR")
     owner.AnimState:ClearOverrideSymbol("swap_hat")
 	owner.AnimState:ClearOverrideSymbol("face")
     owner.AnimState:Hide("HAT")
@@ -414,6 +496,8 @@ local function onunequip(inst, owner)
 	if inst.customunequip ~= nil then
 		inst.customunequip(inst)
 	end
+
+	inst.components.fueled:StopConsuming()
 end
 
 local function fncommon(bank, build)
@@ -445,6 +529,11 @@ local function fncommon(bank, build)
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
+	
+	inst:AddComponent("fueled")
+	inst.components.fueled.fueltype = FUELTYPE.USAGE
+	inst.components.fueled:InitializeFuelLevel(480)
+	inst.components.fueled:SetDepletedFn(--[[generic_perish]]inst.Remove)
 	
     inst.components.equippable:SetOnEquip( onequip )
     inst.components.equippable:SetOnUnequip( onunequip )
@@ -520,7 +609,7 @@ local function devilfn()
 	inst.customequip = demon_enable
 	inst.customunequip = demon_disable
 	
-	inst.components.equippable.dapperness = TUNING.DAPPERNESS_MEDLARGE
+	inst.components.equippable.dapperness = TUNING.DAPPERNESS_MED_LARGE
 	
     return inst
 end
@@ -534,7 +623,7 @@ local function fiendfn()
 	inst.customequip = demon_enable
 	inst.customunequip = demon_disable
 	
-	inst.components.equippable.dapperness = TUNING.DAPPERNESS_MEDLARGE
+	inst.components.equippable.dapperness = TUNING.DAPPERNESS_MED_LARGE
 	
     return inst
 end
@@ -805,6 +894,88 @@ local function opossumfn()
     return inst
 end
 
+local function ratfn()
+    local inst = fncommon("hat_ratmask", "hat_ratmask")
+	
+    inst.entity:AddSoundEmitter()     
+		
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.customequip = rat_enable
+	inst.customunequip = rat_disable
+	
+	inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL
+	
+	inst:AddComponent("useableitem")
+	inst.components.useableitem:SetOnUseFn(CheckTargetPiece)
+	
+    inst:AddComponent("rechargeable")
+    inst.components.rechargeable:SetOnChargedFn(OnCooldown)
+	inst.components.rechargeable:SetCharge(1011111)
+	
+	inst:AddComponent("fueled")
+	inst.components.fueled.fueltype = FUELTYPE.USAGE
+	inst.components.fueled:InitializeFuelLevel(TUNING.MOLEHAT_PERISHTIME)
+	inst.components.fueled:SetDepletedFn(--[[generic_perish]]inst.Remove)
+	
+    return inst
+end
+
+local function PlayRingAnim(proxy)
+    local inst = CreateEntity()
+
+    inst:AddTag("FX")
+    --[[Non-networked entity]]
+    inst.entity:SetCanSleep(false)
+    inst.persists = false
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+
+    inst.Transform:SetFromProxy(proxy.GUID)
+
+    inst.AnimState:SetBank("bearger_ring_fx")
+    inst.AnimState:SetBuild("bearger_ring_fx")
+    inst.AnimState:PlayAnimation("idle")
+    inst.AnimState:SetFinalOffset(3)
+
+    inst.AnimState:SetOrientation( ANIM_ORIENTATION.OnGround )
+    inst.AnimState:SetLayer( LAYER_BACKGROUND )
+    inst.AnimState:SetSortOrder( 3 )
+
+    inst:ListenForEvent("animover", inst.Remove)
+end
+
+local function ratringfn()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddSoundEmitter()     
+    inst.entity:AddNetwork()
+
+    inst:AddTag("FX")
+
+    --Dedicated server does not need to spawn the local fx
+    if not TheNet:IsDedicated() then
+        --Delay one frame so that we are positioned properly before starting the effect
+        --or in case we are about to be removed
+        inst:DoTaskInTime(0, PlayRingAnim)
+    end
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst.persists = false
+    inst:DoTaskInTime(3, inst.Remove)
+
+    return inst
+end
+
 return Prefab("hat_bagmask", bagfn, assets),
 		Prefab("hat_blackcatmask", blackcatfn, assets),
 		Prefab("hat_clownmask", clownfn, assets),
@@ -827,4 +998,6 @@ return Prefab("hat_bagmask", bagfn, assets),
 		Prefab("hat_whitecatmask", whitecatfn, assets),
 		Prefab("hat_technomask", technofn, assets),
 		Prefab("hat_mandrakemask", mandrakefn, assets),
-		Prefab("hat_opossummask", opossumfn, assets)
+		Prefab("hat_opossummask", opossumfn, assets),
+		Prefab("hat_ratmask", ratfn, assets),
+		Prefab("ratring_fx", ratringfn, assets)

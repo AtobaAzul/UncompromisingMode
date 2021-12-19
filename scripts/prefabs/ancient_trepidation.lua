@@ -44,7 +44,9 @@ end
 
 
 local function OnAttacked(inst, data)
+if data.attacker ~= nil and data.attacker:HasTag("player") then
     inst.components.combat:SetTarget(data.attacker)
+end
 end
 
     local sounds =
@@ -153,29 +155,30 @@ if FindEntity(inst, 20,
             if inst.components.combat:CanTarget(guy) then
                 return guy:HasTag("character")
             end
-    end) == nil then
+			end) == nil then
 
-inst.sg:GoToState("spawn")
-local x, y, z = inst.Transform:GetWorldPosition()
-local Despawn = SpawnPrefab("shadow_despawn")
-inst:DespawnChannelers()
-if inst.components.health ~= nil then
-inst.components.health:SetCurrentHealth(3000)
-end
-Despawn.Transform:SetPosition(x, 0, z)
-local bozo =FindEntity(inst, 40, 
-        function(guy) 
-            if inst.components.combat:CanTarget(guy) then
-                return guy:HasTag("character")
-            end
+	inst.sg:GoToState("spawn")
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local Despawn = SpawnPrefab("shadow_despawn")
+	inst:DespawnChannelers()
+	if inst.components.health ~= nil then
+		inst.components.health:SetCurrentHealth(3000)
+	end
+	Despawn.Transform:SetPosition(x, 0, z)
+	local bozo =	FindEntity(inst, 40, 
+			function(guy) 
+				if inst.components.combat:CanTarget(guy) then
+					return guy:HasTag("character")
+				end
     end)
-if bozo ~= nil then
-inst.components.combat:SuggestTarget(bozo)
-local x, y, z = bozo.Transform:GetWorldPosition()
-inst.Transform:SetPosition(x, 0, z)
+	if bozo ~= nil then
+		inst.components.combat:SuggestTarget(bozo)
+		local x, y, z = bozo.Transform:GetWorldPosition()
+		inst.Transform:SetPosition(x, 0, z)
+	end
 end
 end
-end
+
 local function CheckIfInsaners(inst)  --Actually just checks if anyone is below half sanity, rather than completely insane.
 local bozo =FindEntity(inst, 40, 
         function(guy) 
@@ -184,11 +187,13 @@ local bozo =FindEntity(inst, 40,
             end
     end)
 if bozo ~= nil and bozo.components.sanity ~= nil and bozo.components.sanity:GetPercent() < 0.5 and inst.enraged == false then
+	inst.enraged = true
 	inst.sg:GoToState("anger")
 	if inst.components.combat ~= nil then
 		inst.components.combat:SuggestTarget(bozo)
 	end
 elseif inst.enraged == true and inst.components.combat ~= nil and inst.components.combat.target == nil then
+	inst.enraged = false
 	inst.sg:GoToState("calm")
 	end
 end
@@ -256,6 +261,28 @@ local player = inst.harassplayer
 end
 end
 
+local function CheckWhereTheHeckIAm(inst)
+if not inst.components.areaaware:CurrentlyInTag("Nightmare") then
+	if inst.components.combat.target ~= nil then
+		inst.components.combat.target = nil
+	end
+    inst.brain:Stop()
+	inst.Physics:Stop()
+	inst.AnimState:PlayAnimation("channel_pre")	
+	inst:DoTaskInTime(0.6,function(inst)
+		local x,y,z = inst.Transform:GetWorldPosition()
+		local Despawn = SpawnPrefab("shadow_despawn").Transform:SetPosition(x,y,z)
+		inst.brain:Start()
+		local x,y,z = inst.components.homeseeker.home.Transform:GetWorldPosition()
+		inst.Transform:SetPosition(x,y,z)
+		if inst.components.combat.target ~= nil then
+			inst.components.combat.target = nil
+		end	
+	end)
+end
+end
+
+
 local function fn(Sim)
 	local inst = CreateEntity()
 
@@ -297,7 +324,7 @@ local function fn(Sim)
 	--inst:AddTag("monster")
      
 	--inst:AddTag("shadowcreature")
-    inst:AddTag("shadow")
+    --inst:AddTag("shadow")
 	inst:AddTag("trepidation")
     ------------------
     inst:AddComponent("health")
@@ -314,7 +341,7 @@ local function fn(Sim)
     --inst.components.combat:SetHurtSound("dontstarve/creatures/spider/hit_response")
     inst.components.combat:SetRange(3, 3)
     ------------------
-    
+    inst:AddComponent("areaaware")
     ------------------
     inst.sounds = sounds   
     inst:AddComponent("knownlocations")
@@ -346,6 +373,7 @@ local function fn(Sim)
 	inst.onload = OnLoad
 	inst:DoPeriodicTask(3,CheckIfInsaners)
 	inst:DoPeriodicTask(6,CheckIfTargetIsFrigginAlive)
+	inst:DoPeriodicTask(10,CheckWhereTheHeckIAm)
 	inst.FindTargetOfInterestTask = inst:DoPeriodicTask(5, FindTargetOfInterest) --Find something to be interested in!
 	
 	inst:DoTaskInTime(0, function(inst)

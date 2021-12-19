@@ -10,6 +10,7 @@
 	AllRecipes = GLOBAL.AllRecipes
 	STRINGS = GLOBAL.STRINGS
 	CUSTOM_RECIPETABS = GLOBAL.CUSTOM_RECIPETABS
+	modimport("skins_api.lua")
 
 --	[ 				Recipes				]	--
 	
@@ -104,6 +105,36 @@ GLOBAL.AllRecipes["gasmask"].sortkey = GLOBAL.AllRecipes["beehat"].sortkey + .1
 
 AddRecipe("plaguemask", {Ingredient("gasmask", 1, "images/inventoryimages/gasmask.xml"),Ingredient("red_cap", 2),Ingredient("rat_tail",4, "images/inventoryimages/rat_tail.xml")}, GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/plaguemask.xml", "plaguemask.tex" )
 GLOBAL.AllRecipes["plaguemask"].sortkey = GLOBAL.AllRecipes["gasmask"].sortkey + .1
+MadeRecipeSkinnable("plaguemask", {
+	plaguemask_formal = {
+		atlas = "images/inventoryimages/plaguemask_formal.xml",
+		image = "plaguemask_formal.tex",
+	},
+})
+
+AddRecipe("cursed_antler", {Ingredient("twisted_antler", 1, "images/inventoryimages/twisted_antler.xml")}, GLOBAL.RECIPETABS.MAGIC, GLOBAL.TECH.NONE, nil, nil, nil, nil, "vetcurse", "images/inventoryimages/cursed_antler.xml", "cursed_antler.tex" )
+GLOBAL.AllRecipes["cursed_antler"].sortkey = GLOBAL.AllRecipes["reskin_tool"].sortkey + .1
+MadeRecipeSkinnable("cursed_antler", {
+	twisted_antler = {
+		atlas = "images/inventoryimages/twisted_antler.xml",
+		image = "twisted_antler.tex",
+	},
+})
+
+AddRecipe("twisted_antler", {Ingredient("cursed_antler", 1, "images/inventoryimages/cursed_antler.xml")}, GLOBAL.RECIPETABS.MAGIC, GLOBAL.TECH.NONE, nil, nil, nil, nil, "vetcurse", "images/inventoryimages/twisted_antler.xml", "twisted_antler.tex" )
+GLOBAL.AllRecipes["twisted_antler"].sortkey = GLOBAL.AllRecipes["cursed_antler"].sortkey + .1
+
+AddRecipe("feather_frock", {Ingredient("feather_frock_fancy", 1, "images/inventoryimages/feather_frock_fancy.xml")}, GLOBAL.RECIPETABS.MAGIC, GLOBAL.TECH.NONE, nil, nil, nil, nil, "vetcurse", "images/inventoryimages/feather_frock.xml", "feather_frock.tex" )
+GLOBAL.AllRecipes["feather_frock"].sortkey = GLOBAL.AllRecipes["twisted_antler"].sortkey + .1
+MadeRecipeSkinnable("feather_frock", {
+	feather_frock_fancy = {
+		atlas = "images/inventoryimages/feather_frock_fancy.xml",
+		image = "feather_frock_fancy.tex",
+	},
+})
+
+AddRecipe("feather_frock_fancy", {Ingredient("feather_frock", 1, "images/inventoryimages/feather_frock.xml")}, GLOBAL.RECIPETABS.MAGIC, GLOBAL.TECH.NONE, nil, nil, nil, nil, "vetcurse", "images/inventoryimages/feather_frock_fancy.xml", "feather_frock_fancy.tex" )
+GLOBAL.AllRecipes["feather_frock_fancy"].sortkey = GLOBAL.AllRecipes["feather_frock"].sortkey + .1
 
 AddRecipe("shroom_skin", {Ingredient("shroom_skin_fragment",4, "images/inventoryimages/shroom_skin_fragment.xml"),Ingredient("froglegs",2)}, GLOBAL.RECIPETABS.REFINE, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil)--, "images/inventoryimages/plaguemask.xml", "plaguemask.tex" )
 GLOBAL.AllRecipes["shroom_skin"].sortkey = GLOBAL.AllRecipes["bearger_fur"].sortkey + .1
@@ -122,7 +153,7 @@ AddRecipe("skullchest_child", {Ingredient("fossil_piece", 2), Ingredient("nightm
 
 AddRecipe("honey_log",   {Ingredient("livinglog", 1), Ingredient("honey", 2)}, CUSTOM_RECIPETABS.NATURE, TECH.NONE, nil, nil, nil, nil, "plantkin", "images/inventoryimages/honey_log.xml", "honey_log.tex" )
 
-AddRecipe("bugzapper",   {Ingredient("torch", 1), Ingredient("transistor", 2), Ingredient("feather_robin", 2)}, GLOBAL.RECIPETABS.WAR, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/bugzapper.xml", "bugzapper.tex" )
+AddRecipe("bugzapper",   {Ingredient("spear", 1), Ingredient("transistor", 2), Ingredient("feather_canary", 2)}, GLOBAL.RECIPETABS.WAR, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/bugzapper.xml", "bugzapper.tex" )
 GLOBAL.AllRecipes["bugzapper"].sortkey = GLOBAL.AllRecipes["nightstick"].sortkey + .1
 
 AddRecipe("slingshotammo_firecrackers",	{Ingredient("nitre", 1)},	CUSTOM_RECIPETABS.SLINGSHOTAMMO, TECH.SCIENCE_TWO,		{no_deconstruction = true}, nil, nil, 10, "pebblemaker", "images/inventoryimages/slingshotammo_firecrackers.xml", "slingshotammo_firecrackers.tex" )
@@ -136,8 +167,8 @@ GLOBAL.AllRecipes["rat_whip"].sortkey = GLOBAL.AllRecipes["whip"].sortkey + .1
 
 AddRecipe("ancient_amulet_red", 	 {Ingredient("thulecite", 2), 		  Ingredient("nightmarefuel", 3),    Ingredient("redgem", 2)}, GLOBAL.RECIPETABS.ANCIENT, GLOBAL.TECH.ANCIENT_FOUR, nil, nil, true, nil, nil, "images/inventoryimages/ancient_amulet_red.xml", "ancient_amulet_red.tex" )
 GLOBAL.AllRecipes["ancient_amulet_red"].sortkey = GLOBAL.AllRecipes["orangeamulet"].sortkey - .1
-AddRecipe("turf_hoodedmoss", {Ingredient("twigs", 1), Ingredient("foliage", 1), Ingredient("moonrocknugget", 1)}, RECIPETABS.TURFCRAFTING, TECH.TURFCRAFTING_ONE, nil, nil, nil, nil, nil, "images/inventoryimages/turf_hoodedmoss.xml", "turf_hoodedmoss.tex")
-AddRecipe("turf_ancienthoodedturf", {Ingredient("turf_hoodedmoss", 1,"images/inventoryimages/turf_hoodedmoss.xml"), Ingredient("moonrocknugget", 1), Ingredient("thulecite_pieces", 1)}, RECIPETABS.TURFCRAFTING, TECH.TURFCRAFTING_ONE, nil, nil, nil, nil, nil, "images/inventoryimages/turf_ancienthoodedturf.xml", "turf_ancienthoodedturf.tex")
+AddRecipe("turf_hoodedmoss", {Ingredient("twigs", 1), Ingredient("foliage", 1), Ingredient("moonrocknugget", 1)}, RECIPETABS.TURFCRAFTING, TECH.TURFCRAFTING_ONE, nil, nil, true, nil, nil, "images/inventoryimages/turf_hoodedmoss.xml", "turf_hoodedmoss.tex")
+AddRecipe("turf_ancienthoodedturf", {Ingredient("turf_hoodedmoss", 1,"images/inventoryimages/turf_hoodedmoss.xml"), Ingredient("moonrocknugget", 1), Ingredient("thulecite_pieces", 1)}, RECIPETABS.TURFCRAFTING, TECH.TURFCRAFTING_ONE, nil, nil, true, nil, nil, "images/inventoryimages/turf_ancienthoodedturf.xml", "turf_ancienthoodedturf.tex")
 
 --AddRecipe("um_trap_snare", {Ingredient("livinglog", 1),Ingredient("rope", 1),Ingredient("pinecone", 1)}, RECIPETABS.WAR,  TECH.SCIENCE_TWO)
 
@@ -154,8 +185,11 @@ AddRecipe("book_rain", { Ingredient("papyrus", 2), Ingredient("moon_tear", 1,"im
 
 AddRecipe("driftwoodfishingrod", 	 {Ingredient("driftwood_log", 3), 		  Ingredient("silk", 3),    Ingredient("rope", 2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO)
 
-AddRecipe("hermitshop_rain_horn", {Ingredient("dormant_rain_horn",1,"images/inventoryimages/dormant_rain_horn.xml"), Ingredient("oceanfish_small_9_inv",3), Ingredient("messagebottleempty", 2)}, RECIPETABS.HERMITCRABSHOP, TECH.LOST, nil, nil, true, nil, nil,"images/inventoryimages/rain_horn.xml", "rain_horn.tex", nil,"rain_horn")
+AddRecipe("hermitshop_rain_horn", {Ingredient("dormant_rain_horn",1,"images/inventoryimages/dormant_rain_horn.xml"), Ingredient("oceanfish_small_9_inv",3), Ingredient("messagebottleempty", 2)}, RECIPETABS.HERMITCRABSHOP, TECH.HERMITCRABSHOP_SEVEN, nil, nil, true, nil, nil,"images/inventoryimages/rain_horn.xml", "rain_horn.tex", nil,"rain_horn")
 GLOBAL.AllRecipes["driftwoodfishingrod"].sortkey = GLOBAL.AllRecipes["fishingrod"].sortkey + .1
+
+AddRecipe("hat_ratmask", {Ingredient("rope",2), Ingredient("rat_tail", 3, "images/inventoryimages/rat_tail.xml"), Ingredient("sewing_kit", 1)}, GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil,"images/inventoryimages/hat_ratmask.xml", "hat_ratmask.tex")
+GLOBAL.AllRecipes["hat_ratmask"].sortkey = GLOBAL.AllRecipes["plaguemask"].sortkey + .1
 
 --[[AddRecipe("floral_bandage", {Ingredient("bandage", 1), Ingredient("cactus_flower", 2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, true, nil, nil, "images/inventoryimages/floral_bandage.xml", "floral_bandage.tex" )
 GLOBAL.AllRecipes["floral_bandage"].sortkey = GLOBAL.AllRecipes["bandage"].sortkey + .1]]
@@ -179,7 +213,7 @@ STRINGS.RECIPE_DESC.REVIVER = "Dead flesh revived to revive a dead friend."
 STRINGS.RECIPE_DESC.HONEY_LOG = "A log a day keeps the sickness at bay."
 STRINGS.RECIPE_DESC.BUGZAPPER = "Bite back with electricity!"
 STRINGS.RECIPE_DESC.ANCIENT_AMULET_RED = "Recalls your lost soul."
-STRINGS.RECIPE_DESC.RAT_WHIP = "A long rat tail on a stick."
+STRINGS.RECIPE_DESC.RAT_WHIP = "Hunger strike!"
 STRINGS.RECIPE_DESC.TURF_HOODEDMOSS = "Mossy ground with a hint of lunar magic."
 STRINGS.RECIPE_DESC.TURF_ANCIENTHOODEDTURF = "The hooded forest's younger years."
 STRINGS.RECIPE_DESC.SKULLCHEST_CHILD = "Interdimensional item storage."
@@ -187,7 +221,14 @@ STRINGS.RECIPE_DESC.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "These jaws need to get a gr
 STRINGS.RECIPE_DESC.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "My shiny teeth and me!"
 STRINGS.RECIPE_DESC.ARMOR_GLASSMAIL = "Surround yourself with broken glass."
 STRINGS.RECIPE_DESC.MUTATOR_TRAPDOOR = "They're smart, allegedly."
-STRINGS.RECIPE_DESC.SLINGSHOTAMMO_FIRECRACKERS = "Go Fancy Fishing. For Fancy Fish."
+STRINGS.RECIPE_DESC.DRIFTWOODFISHINGROD = "Go Fancy Fishing. For Fancy Fish."
 STRINGS.RECIPE_DESC.BOOK_RAIN = "A catalogue of weather effects."
 STRINGS.RECIPE_DESC.RAIN_HORN = "Drown the world."
+STRINGS.RECIPE_DESC.HAT_RATMASK = "Sniff out some vermin!"
+STRINGS.RECIPE_DESC.CURSED_ANTLER = "A brand new look!"
+STRINGS.RECIPE_DESC.TWISTED_ANTLER = "The classic!"
+STRINGS.RECIPE_DESC.twisted_antler = "The classic!"
+STRINGS.RECIPE_DESC.FEATHER_FROCK = "A brand new look!"
+STRINGS.RECIPE_DESC.FEATHER_FROCK_FANCY = "The classic!"
+STRINGS.RECIPE_DESC.feather_frock_fancy = "The classic!"
 --STRINGS.RECIPE_DESC.FLORAL_BANDAGE = "A flower and honey mess on a bandage."

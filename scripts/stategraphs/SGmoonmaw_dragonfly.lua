@@ -465,7 +465,7 @@ local states=
         timeline=
         {
             TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/moonmaw/swipe") end),
-            TimeEvent(23*FRAMES, function(inst) 
+            TimeEvent(25*FRAMES, function(inst) 
                 inst.SoundEmitter:PlaySound("UCSounds/moonmaw/punchimpact")
                 inst.components.combat:DoAttack()
 

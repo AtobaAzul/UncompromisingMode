@@ -310,3 +310,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "I'm not sure if this is first aid or a new kind of dish."
 	DESCRIBE.DORMANT_RAIN_HORN = "Strange, I remember seeing this just before I arrived."
 	DESCRIBE.RAIN_HORN = "My memory must be fuzzy. I thought this did something else."
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+        LEVEL_1 = "Our items rest on the ground, who knows what may take them away.",
+    }
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
+        LEVEL_1 = "It is shameful seeing this much old food.",
+    }
+    ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
+        LEVEL_1 = "I hear squeaking coming from the wilderness.",
+    }

@@ -159,9 +159,9 @@ local function donextcollapse(inst)
                 and v.components.health ~= nil
                 and not v:HasTag("bearger")
                 and not v.components.health:IsDead() then
-                if isfinalstage and v.components.locomotor == nil then
-                    v.components.health:Kill()
-                elseif v.components.combat:CanBeAttacked() then
+                --[[if isfinalstage and v.components.locomotor == nil then
+                    --v.components.health:Kill()
+                else]]if v.components.combat:CanBeAttacked() then
                     v.components.combat:GetAttacked(inst, TUNING.ANTLION_SINKHOLE.DAMAGE)
                 end
             end
