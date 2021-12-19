@@ -560,7 +560,7 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/corvushat.tex"),
 	Asset("ATLAS", "images/inventoryimages/corvushat.xml"),
 	
-	
+	Asset("ANIM", "driftwood_rod_ground.zip"),
 	Asset("ANIM", "anim/armor_steelsweater.zip"),
 	Asset("ANIM", "anim/steelsweater.zip"),
 	Asset("ANIM", "anim/wilton.zip"),

@@ -1,6 +1,6 @@
 local assets =
 {
-    Asset("ANIM", "anim/fishingrod.zip"),
+    Asset("ANIM", "anim/driftwood_rod_ground.zip"),
     Asset("ANIM", "anim/swap_fishingrod.zip"),
     Asset("ANIM", "anim/floating_items.zip"),
 }
@@ -36,9 +36,9 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("fishingrod")
-    inst.AnimState:SetBuild("fishingrod")
-    inst.AnimState:PlayAnimation("idle")
+    inst.AnimState:SetBank("driftwood_rod_ground")
+    inst.AnimState:SetBuild("driftwood_rod_ground")
+    inst.AnimState:PlayAnimation("idle_90s")
 
     --fishingrod (from fishingrod component) added to pristine state for optimization
     inst:AddTag("fishingrod")
