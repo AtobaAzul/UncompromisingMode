@@ -7,7 +7,6 @@ return {
 	"root_spike",
 	"uncompromising_rat",
 	"ratpoison",
-	"ratpoison_debuff",
 	--"ratpoisonbottle",
 	"firemeteorwarning",
 	"antlionwarning",
@@ -187,6 +186,7 @@ return {
 	"nightcrawler",
 	"ancient_trepidation_arm",
 	--"steel_sweater",
+	"rat_hat",
 	"rat_whip",
 	"bearger_mask",
 	"rneskeleton",
@@ -267,7 +267,6 @@ return {
 	"mindweaver",
 	"rneshadows",
 	"fuelseeker",
-	"rnemushroombomb",
 	
 	"wackymask",
 	"tiddlestranger_rne",
@@ -279,14 +278,4 @@ return {
 	"rain_horn",
 	"floral_bandage",
 	"confighealbuff",
-	"shockstundebuffimmunity",
-	"pied_rat",
-	"pied_piper_flute",
-	
-	"eyeofterror_laser",
-	"eyeofterror_extras",
-	"oculet",
-	"oculet_pets",
-	"terrarium",
-	"reedbuncher",
 }

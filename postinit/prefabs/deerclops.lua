@@ -36,7 +36,7 @@ local function EnterPhase2Trigger(inst)
 
         inst.Transform:SetScale(1.85, 1.85, 1.85)
         inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE * 1.1)
-        inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE * 1.1, TUNING.DEERCLOPS_AOE_SCALE)
+        inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE * 1.1, TUNING.DEERCLOPS_AOE_SCALE * 1.1)
         inst.components.combat:SetAttackPeriod(TUNING.DEERCLOPS_ATTACK_PERIOD * 0.9)
 
 
@@ -51,16 +51,18 @@ local function EnterPhase2Trigger(inst)
         inst.Light:SetColour(0, 0, 1)
         inst.Light:Enable(true)
 
-        --[[inst:DoTaskInTime(0.1, function(inst)
+        inst:DoTaskInTime(0.1, function(inst)
             inst:AddComponent("timer")
             inst:ListenForEvent("timerdone", SpinCheck)
             inst.components.timer:StartTimer("spinattack", 10 + math.random(1, 5))
-        end)]] --Temporarily remove spin attack till it can be reworked to not kill PCs
+        end)
         inst:ListenForEvent("newstate", OnNewState)
 
         --end
 
         inst.sg:GoToState("taunt")
+        inst.enraged = true
+
     end
 end
 
@@ -111,11 +113,10 @@ local function IceyCheck(inst, data)
 end
 
 local function MakeEnrageable(inst)
+    inst:AddComponent("healthtrigger")
     inst.components.health:SetMaxHealth(4000)
-    EnterPhase2Trigger(inst) --Removing the trigger, only ice laser
+    inst.components.healthtrigger:AddTrigger(PHASE2_HEALTH, EnterPhase2Trigger)
     inst.upgrade = "enrage_mutation"
-	inst:AddComponent("timer")
-	inst.components.timer:StartTimer("laserbeam_cd", TUNING.DEERCLOPS_ATTACK_PERIOD * (math.random(3) - .5))
 end
 
 local function MakeStrong(inst)
@@ -178,6 +179,14 @@ local function OnSave(inst, data)
     data.upgrade = inst.upgrade
     if inst.components.health ~= nil then
         data.healthUM = inst.components.health.currenthealth
+    end
+end
+
+local function OnPreLoad(inst, data)
+    if data ~= nil then
+        if data.enraged then
+            EnterPhase2Trigger(inst)
+        end
     end
 end
 
@@ -264,6 +273,7 @@ env.AddPrefabPostInit("deerclops", function(inst)
 	local _OnLoad = inst.OnLoad
 	
 	local function OnSave(inst, data)
+		data.enraged = inst.enraged or nil
 		data.upgrade = inst.upgrade
 		if inst.components.health ~= nil then
 			data.healthUM = inst.components.health.currenthealth
@@ -278,17 +288,14 @@ env.AddPrefabPostInit("deerclops", function(inst)
 				ChooseUpgrades(inst)
 			else	
 				if data.upgrade == "enrage_mutation" then
-					inst.upgrade = "enrage_mutation"
 					MakeEnrageable(inst)
 				end
 				
 				if data.upgrade == "strength_mutation" then
-					inst.upgrade = "strength_mutation"
 					MakeStrong(inst)
 				end
 				
 				if data.upgrade == "ice_mutation" then
-					inst.upgrade = "ice_mutation"
 					MakeIcey(inst)
 				end
 			end
@@ -297,11 +304,12 @@ env.AddPrefabPostInit("deerclops", function(inst)
 				inst.components.health.currenthealth = data.healthUM
 			end
 		end
-		print("My upgrade is: "..inst.upgrade)
+		
 		_OnLoad(inst, data)
 	end
 	
 	inst.OnSave = OnSave
+    inst.OnPreLoad = OnPreLoad
     inst.OnLoad = OnLoad
     inst:RemoveComponent("freezable")
 
@@ -323,4 +331,5 @@ env.AddPrefabPostInit("deerclops", function(inst)
     inst.MakeStrong = MakeStrong
 
     inst:DoTaskInTime(0.1, ChooseUpgrades(inst)) --Incase we need to specify an upgrade because this deerclops despawned.
+
 end)

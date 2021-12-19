@@ -352,11 +352,10 @@ local function webbingfn()
 		inst:AddComponent("combat")
 		inst:ListenForEvent("death", function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_destroy") end)
 		inst:DoTaskInTime(0,function(inst)
-			if not TheWorld.Map:IsPassableAtPoint(inst.Transform:GetWorldPosition()) then
-				inst:Remove()
-			end
+		if not TheWorld.Map:IsPassableAtPoint(inst.Transform:GetWorldPosition()) then
+			inst:Remove()
+		end
 		end)
-		inst:DoPeriodicTask(3,function(inst) if inst.components.health ~= nil then inst.components.health:DoDelta(-5) end end)
 		return inst
 end
 

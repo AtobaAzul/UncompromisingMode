@@ -20,8 +20,6 @@ self.caveevents = nil
 self.totalrandomwildweight = nil
 self.totalrandombaseweight = nil
 self.totalrandomcaveweight = nil
-self.moontear_available = true
-self.weightheodds = math.random()
 
 
 --------------------------------
@@ -1100,7 +1098,7 @@ local function SpawnMushbooms(player)
 			local num_bombs = 20
 			for i = 1, num_bombs do
 				player:DoTaskInTime(i / 1.5, function()
-					local skitts = SpawnPrefab("rnemushroombomb")
+					local skitts = SpawnPrefab("mushroombomb")
 					skitts.Transform:SetPosition(x + math.random(-10,10), y, z + math.random(-10,10))
 				end)
 			end
@@ -1263,19 +1261,19 @@ end
 
 local function DoLesserThreat(player)
 	if TheWorld.state.isnight then
-		self.weightheodds = math.random()
+		local weightheodds = math.random()
 		
-		if self.weightheodds >= 0.83 then
+		if weightheodds >= 8.3 then
 			SpawnLesserShadowVortex(player)
-		elseif self.weightheodds < 0.83 and self.weightheodds >= 0.664 then
+		elseif weightheodds < 8.3 and weightheodds >= 6.64 then
 			SpawnLesserShadowGrabby(player)
-		elseif self.weightheodds < 0.664 and self.weightheodds >= 0.498 then
+		elseif weightheodds < 6.64 and weightheodds >= 4.98 then
 			SpawnLesserMindWeavers(player)
-		elseif self.weightheodds < 0.498 and self.weightheodds >= 0.332 then
+		elseif weightheodds < 4.98 and weightheodds >= 3.32 then
 			SpawnLesserNervousTicks(player)
-		elseif self.weightheodds < 0.332 and self.weightheodds >= 0.166 then
+		elseif weightheodds < 3.32 and weightheodds >= 1.66 then
 			SpawnLesserNightCrawlers(player)
-		elseif self.weightheodds < 0.166 then
+		elseif weightheodds < 1.66 then
 			SpawnLesserFuelSeekers(player)
 		end
 	end
@@ -1931,17 +1929,10 @@ local function IsEligible(player)
 	
 	local area = player.components.areaaware
 	
-	
-	local terrarium = TheSim:FindFirstEntityWithTag("terrarium")
-	
-	local eyeofterror = terrarium ~= nil and (terrarium.eyeofterror or terrarium._summoning_fx) and true or false
-	
-	
 	return not TheWorld:HasTag("snowstormstart") and not TheWorld.net:HasTag("snowstormstart") and not 
 		player:HasTag("playerghost") and theent == 0 and not (hounding or deerclopsed --[[or beargered]] 
 		or gmoosed or dragonflied) and
 		area:GetCurrentArea() ~= nil
-		and not eyeofterror
 		and not area:CurrentlyInTag("nohasslers")
 end
 
@@ -1988,14 +1979,13 @@ local function CheckPlayers()
 					if TheWorld:HasTag("cave") then
 						DoCaveRNE(player)
 					else
-						if TheWorld.state.isfullmoon and self.moontear_available then
-							self.moontear_available = false
+						if TheWorld.state.isfullmoon then
+							--print("fullmoon")
 							DoFullMoonRNE(player)--DoFullMoonRNE(v)
 						elseif TheWorld.state.isnewmoon then
 							--print("newmoon")
 							DoNewMoonRNE(player)--DoNewMoonRNE(v)
 						else
-							self.moontear_available = true
 							DoBaseRNE(player)--DoBaseRNE(v)
 						end
 					end
@@ -2004,14 +1994,13 @@ local function CheckPlayers()
 					if TheWorld:HasTag("cave") then
 						DoCaveRNE(player)
 					else
-						if TheWorld.state.isfullmoon and self.moontear_available then
-							self.moontear_available = false
+						if TheWorld.state.isfullmoon then
+							--print("fullmoon")
 							DoFullMoonRNE(player)--DoFullMoonRNE(v)
 						elseif TheWorld.state.isnewmoon then
 							--print("newmoon")
 							DoNewMoonRNE(player)--DoNewMoonRNE(v)
 						else
-							self.moontear_available = true
 							DoWildRNE(player)--DoWildRNE(v)
 						end
 					end
@@ -2096,6 +2085,6 @@ inst:ListenForEvent("ms_playerjoined", OnPlayerJoined)
 inst:ListenForEvent("ms_playerleft", OnPlayerLeft)
 inst:ListenForEvent("seasontick", OnSeasonTick, TheWorld)
 
-self:WatchWorldState("isnight", function() self.inst:DoTaskInTime(6, TryRandomNightEvent) end)
-self:WatchWorldState("cycleschanged", function() self.inst:DoTaskInTime(6, TryRandomNightEvent) end)
+self:WatchWorldState("isnight", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end)
+self:WatchWorldState("cycleschanged", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end)
 end)

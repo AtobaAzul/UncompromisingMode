@@ -4,8 +4,6 @@ local actionhandlers =
 {
 ActionHandler(ACTIONS.GOHOME, "jumphome"),
 }
-
---sdfqocipqowiecjAAAAAAASSDFFASDFASDFQWCQWCQWE
 local events=
 {
     EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("nointerrupt") and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),
@@ -122,13 +120,6 @@ local states=
 		inst.components.combat:SuggestTarget(target)
 		end
             inst.Physics:Stop()
-			if math.random() < 0.5/inst.combo and inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.5 then
-				inst.docombo = true
-				if inst.combo == 1 then
-					--TheNet:SystemMessage("Starting Attack/Combo!")
-					inst.combosucceed = false
-				end
-			end
 			local weapon = inst.components.combat and inst.components.combat:GetWeapon()
             if weapon ~= nil and weapon:HasTag("snotbomb") then
 			inst.sg:GoToState("launchprojectile",target)
@@ -145,32 +136,25 @@ local states=
             TimeEvent(28*FRAMES, function(inst) inst:PerformBufferedAction() inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/swipe") end),
             TimeEvent(28*FRAMES, function(inst) 
 			inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
-			inst.components.combat:DoAttack()
+			inst.components.combat:DoAttack() 
 			end),
         },
 
         events=
         {
             EventHandler("animover", function(inst)
-			if inst.components.timer ~= nil and not inst.components.timer:TimerExists("pounce") and not inst.combosucceed == false and not inst.docombo == true then
-				inst.sg:GoToState("preleapattack")
+			if inst.components.timer ~= nil and not inst.components.timer:TimerExists("pounce") then
+			inst.sg:GoToState("preleapattack")
 			else
-				if inst.components.timer ~= nil and not inst.components.timer:TimerExists("mortar") and not inst.combosucceed == false and not inst.docombo == true then
-					inst.sg:GoToState("lobprojectile")
+				if inst.components.timer ~= nil and not inst.components.timer:TimerExists("mortar") then
+				inst.sg:GoToState("lobprojectile")
 				else
-   					if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.5 and inst.docombo == true then
-						inst.docombo = false
-						--TheNet:SystemMessage(inst.combo)
-						inst.combo = inst.combo+2
-						inst.sg:GoToState("attack")
+   					if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.5 and math.random() < 0.5/inst.combo then
+					inst.sg:GoToState("attack")
+					inst.combo = inst.combo+2
 					else
-						if inst.combosucceed == false and inst.combo > 1 then
-							inst.combosucceed = true
-							--TheNet:SystemMessage("Combo Failed!")
-							inst.components.combat.laststartattacktime = inst.components.combat.laststartattacktime + 2
-						end
-						inst.combo = 1
-						inst.sg:GoToState("idle") 
+					inst.combo = 1
+					inst.sg:GoToState("idle") 
 					end 
 				end
 			end
@@ -273,7 +257,6 @@ local states=
 					target.components.pinnable:Stick("web_net_trap",splashprefabs)
 					target:DoTaskInTime(1, function(target) target.components.pinnable:Unstick() end)
 				end
-				inst.armorcrunch = true --!
 				inst.sg:GoToState("attack")
 			end
 			WebMortar(inst,-15)

@@ -310,12 +310,3 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.BOOK_RAIN = "A tome to dampen the battleground."
 	DESCRIBE.DORMANT_RAIN_HORN = "A strange boon from the king of the sea."
 	DESCRIBE.RAIN_HORN = "I horn to call forth a downpour."
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
-        LEVEL_1 = "Spoils left unguarded attract thieves!",
-    }
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
-        LEVEL_1 = "There is a stench coming from our home.",
-    }
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
-        LEVEL_1 = "A legion of vile villanous vermin gather!",
-    }

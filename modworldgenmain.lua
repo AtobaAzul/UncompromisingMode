@@ -60,12 +60,12 @@ AddTile(
 -- <<Cave Update WIP: Toggle at your own risk you buffoons! (That means you atoba, don't leak it please eh?)>>
 
 --Ruins Split, using this for ratacombs too.
---[[AddLevelPreInitAny(function(level)
+AddLevelPreInitAny(function(level)
     if level.location == "cave" then
         level.overrides.keep_disconnected_tiles = true
 		level.overrides.no_joining_islands = true
     end
-end)]]
+end)
 
 --[[
 AddTaskPreInit("LichenLand",function(task) --This is the new "starting task" for the island (at least trying to make it that)
@@ -307,7 +307,7 @@ AddTaskPreInit("Squeltch",function(task)
 end)
 
 GLOBAL.require("map/tasks/gianttrees")
---[[GLOBAL.require("map/tasks/ratacombs")
+GLOBAL.require("map/tasks/ratacombs")
 GLOBAL.require("map/rooms/caves/ratacombsrooms")
 GLOBAL.require("map/rooms/forest/ratking")
 
@@ -325,7 +325,7 @@ else
 	AddTaskPreInit("Dig that rock",function(task)
 		task.room_choices["RattySinkhole"] = 1
 	end)
-end]]
+end
 
 
 AddTaskPreInit("Forest hunters",function(task) --Leave Forest Hunters in incase someone adds something to its setpieces.
@@ -343,7 +343,7 @@ AddTaskSetPreInitAny(function(tasksetdata)
 	table.insert(tasksetdata.required_prefabs,"riceplantspawnerlarge")
 	table.insert(tasksetdata.required_prefabs,"riceplantspawner")
 end)
---[[
+
 AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "cave" then
         return
@@ -361,7 +361,7 @@ AddTaskSetPreInitAny(function(tasksetdata)
 	else
 		tasksetdata.required_prefabs = {"ratking","ratacombslock"}
 	end
-end)]]
+end)
 
 local Layouts = GLOBAL.require("map/layouts").Layouts
 local StaticLayout = GLOBAL.require("map/static_layout")

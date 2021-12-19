@@ -76,9 +76,6 @@ local function fn()
 	inst:WatchWorldState("isday", function() 
 		inst.sg:GoToState("death")
 	end)
-	inst:WatchWorldState("iscaveday", function() 
-		inst.sg:GoToState("death")
-	end)
 	
 	inst.OnSpawnedBy = OnSpawnedBy
 		

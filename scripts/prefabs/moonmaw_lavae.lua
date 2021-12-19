@@ -102,7 +102,7 @@ local function lavaering_fn()
 	inst.Destroy = false
 	
 	inst:DoTaskInTime(1, function(inst)
-		inst:DoPeriodicTask(.15, destroystuff)
+		inst:DoPeriodicTask(.2, destroystuff)
 		inst:DoPeriodicTask(10,CheckDist)
 	end)
 	inst.damagetime = 0.1

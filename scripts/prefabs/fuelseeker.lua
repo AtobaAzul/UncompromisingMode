@@ -10,11 +10,6 @@ local prefabs =
 {
 }
 
-SetSharedLootTable("fuelseeker",
-{
-    { "nightmarefuel",  0.5 },
-})
-
 local sounds =
 {
     attack = "dontstarve/sanity/creature1/attack",
@@ -71,18 +66,18 @@ local function fn(Sim)
     end
 	
     inst:AddComponent("health")
-    inst.components.health:SetMaxHealth(400)
+    inst.components.health:SetMaxHealth(300)
 	
     inst:AddComponent("locomotor")
     inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = true }
-    inst.components.locomotor.walkspeed = 8
-    inst.components.locomotor.runspeed = 8
+    inst.components.locomotor.walkspeed = 6
+    inst.components.locomotor.runspeed = 6
 	
     inst:AddComponent("follower")
 	
 	inst:AddComponent("lootdropper")
-	inst.components.lootdropper:SetChanceLootTable('fuelseeker')
+	inst.components.lootdropper:SetChanceLootTable('shadow_creature')
 	
     inst:AddComponent("combat")
 	

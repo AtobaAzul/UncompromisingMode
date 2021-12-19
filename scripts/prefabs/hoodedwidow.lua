@@ -104,7 +104,7 @@ local function EquipWeapons(inst)
         --[[Non-networked entity]]
         meleeweapon.entity:AddTransform()
         meleeweapon:AddComponent("weapon")
-        meleeweapon.components.weapon:SetDamage(160)
+        meleeweapon.components.weapon:SetDamage(TUNING.SPIDERQUEEN_DAMAGE)
         meleeweapon.components.weapon:SetRange(TUNING.SPAT_MELEE_ATTACKRANGE/4)
         meleeweapon:AddComponent("inventoryitem")
         meleeweapon.persists = false
@@ -177,34 +177,7 @@ local function GettingBullied(inst)
 	inst.bullier = false
 	end
 end
------HE:LP [ASME] MEE 
-local function OnHitOther(inst, data)
-	local other = data.target
-	if other ~= nil and not other:HasTag("webbedcreature") then
-		if inst.combosucceed == false then
-			--TheNet:SystemMessage("Combo Succeed!")
-			inst.combosucceed = true
-		end
-		if inst.combo ~= 1 or inst.docombo == true then
-			inst.combo = inst.combo/10
-		end
-	end
-	if other ~= nil and other.components.inventory ~= nil and inst.armorcrunch == true then
-		local helm = other.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-		local chest = other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
-		local hand = other.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-		if helm ~= nil and helm.components.armor ~= nil then
-			helm.components.armor:TakeDamage(200)
-		end
-		if chest ~= nil and chest.components.armor ~= nil then
-			chest.components.armor:TakeDamage(200)
-		end
-		if hand ~= nil and hand.components.armor ~= nil then
-			hand.components.armor:TakeDamage(200)
-		end
-	end
-	inst.armorcrunch = false
-end
+
 
 local function fn()
     local inst = CreateEntity()
@@ -265,16 +238,10 @@ local function fn()
 				return true
 			end
 		end
-        inst.components.combat:SetAreaDamage(TUNING.SPIDERQUEEN_ATTACKRANGE, 1, queensstuff) -- you can edit these values to your liking -Axe
+        inst.components.combat:SetAreaDamage(4, TUNING.DEERCLOPS_AOE_SCALE, queensstuff) -- you can edit these values to your liking -Axe
     end
-    inst.components.combat:SetDefaultDamage(160)
-	inst.components.combat.customdamagemultfn = function(inst,target) 
-		if target:HasTag("player") then 
-			return 0.5 
-		else 
-			return 1
-		end
-	end
+    inst.components.combat:SetDefaultDamage(TUNING.SPIDERQUEEN_DAMAGE * 2)
+    inst.components.combat.playerdamagepercent = TUNING.DEERCLOPS_DAMAGE_PLAYER_PERCENT
     inst.components.combat:SetAttackPeriod(TUNING.SPIDERQUEEN_ATTACKPERIOD)
     inst.components.combat:SetRetargetFunction(1, Retarget)
 	inst:AddComponent("groundpounder")
@@ -339,12 +306,8 @@ local function fn()
 	inst.components.timer:StartTimer("mortar",20+math.random(-1,5))
 	inst:DoPeriodicTask(3, GettingBullied)
 	inst.bullier = nil
-	inst.armorcrunch = false
-	inst.combosucceed = true
-	inst.docombo = false
 	inst:ListenForEvent("killed", OnKilledOther)
-	inst:ListenForEvent("onhitother", OnHitOther)
-
+	
 
     return inst
 end

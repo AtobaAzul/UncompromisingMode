@@ -23,6 +23,8 @@ end
 
 local function Vac(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
+	local theta = inst.Transform:GetRotation()
+	local TheAngle = 360 * DEGREES
 	
 	local damageents = TheSim:FindEntities(x, y, z, 1 * inst.Transform:GetScale(), { "player" }, { "playerghost" })
 	local ents = TheSim:FindEntities(x, y, z, 15 * inst.Transform:GetScale(), { "player" }, { "playerghost" })

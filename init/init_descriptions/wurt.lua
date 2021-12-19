@@ -32,7 +32,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	--CaliforniaKing
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "Stop looking!!"
-    DESCRIBE.UNCOMPROMISING_RAT = "Hairy. Is spiderfolk family? Will call little hairy."
+    DESCRIBE.UNCOMPROMISING_RAT = "Spiderfolk family? Have hair."
     DESCRIBE.UNCOMPROMISING_RATHERD = "Little eyes in hole! Hello!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "Little eyes in hole! Hello!"
     DESCRIBE.RATPOISONBOTTLE = "Veggies but taste really bad."
@@ -311,12 +311,3 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "Flower and honey are good team to fight boo boos."
 	DESCRIBE.DORMANT_RAIN_HORN = "Funny looking shell."
 	DESCRIBE.RAIN_HORN = "Me like drowning, florpt!"
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
-        LEVEL_1 = "Little hairy wants our stuff.",
-    }
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
-        LEVEL_1 = "Little hairy wants our food.",
-    }
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
-        LEVEL_1 = "Little hairy is coming together out there.",
-    }

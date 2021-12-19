@@ -1,17 +1,12 @@
 local function oneatenfn(inst, eater)
-	if eater:HasTag("player") then
-		if eater.components.debuffable ~= nil and eater.components.debuffable:IsEnabled() and
-			not (eater.components.health ~= nil and eater.components.health:IsDead()) and
-			not eater:HasTag("playerghost") then
-			eater.components.debuffable:AddDebuff("buff_stantonslumber", "buff_stantonslumber")
-			local stanton = FindEntity(eater,10,nil,{"stanton"})
-			
-			if stanton ~= nil then
-				stanton.DrinkUp(stanton)
-			end
-		end
-	else
-		SpawnPrefab(inst.prefab).Transform:SetPosition(eater.Transform:GetWorldPosition())
+	if eater.components.debuffable ~= nil and eater.components.debuffable:IsEnabled() and
+                not (eater.components.health ~= nil and eater.components.health:IsDead()) and
+                not eater:HasTag("playerghost") then
+                eater.components.debuffable:AddDebuff("buff_stantonslumber", "buff_stantonslumber")
+				local stanton = FindEntity(eater,10,nil,{"stanton"})
+				if stanton ~= nil then
+					stanton.DrinkUp(stanton)
+				end			
 	end
 end
 
@@ -60,9 +55,6 @@ local function fn_tonic()
 	end)
 		
 	inst:WatchWorldState("isday", function(inst)
-		inst:Remove()
-	end)
-	inst:WatchWorldState("iscaveday", function(inst)
 		inst:Remove()
 	end)
 	
@@ -115,9 +107,6 @@ local function fn_tonic_fancy()
 	end)
 		
 	inst:WatchWorldState("isday", function(inst)
-		inst:Remove()
-	end)
-	inst:WatchWorldState("iscaveday", function(inst)
 		inst:Remove()
 	end)
 	
@@ -351,12 +340,6 @@ local function fn_stanton(Sim)
 			inst:DoTaskInTime(0.5,function(inst) inst:Remove() end)
 		end
 	end)
-	inst:WatchWorldState("iscaveday", function(inst)
-		if not inst:HasTag("dying") then
-			inst.AnimState:PlayAnimation("jump")
-			inst:DoTaskInTime(0.5,function(inst) inst:Remove() end)
-		end
-	end)
 	
 	inst:DoPeriodicTask(0.5,function(inst)
 		if inst.contestent ~= nil then
@@ -400,16 +383,12 @@ local function fn_stanton(Sim)
 end
 
 local function oneatenfnflask(inst, eater)
-	if eater:HasTag("player") then
-		if eater.components.debuffable ~= nil and eater.components.debuffable:IsEnabled() and
-					not (eater.components.health ~= nil and eater.components.health:IsDead()) and
-					not eater:HasTag("playerghost") then
-					local empty = SpawnPrefab("skullflask_empty")
-					eater.components.inventory:GiveItem(empty, nil)
-					eater.components.debuffable:AddDebuff("buff_hypercourage", "buff_hypercourage")	
-		end
-	else
-		SpawnPrefab("skullflask_empty").Transform:SetPosition(eater.Transform:GetWorldPosition())
+	if eater.components.debuffable ~= nil and eater.components.debuffable:IsEnabled() and
+                not (eater.components.health ~= nil and eater.components.health:IsDead()) and
+                not eater:HasTag("playerghost") then
+				local empty = SpawnPrefab("skullflask_empty")
+				eater.components.inventory:GiveItem(empty, nil)
+                eater.components.debuffable:AddDebuff("buff_hypercourage", "buff_hypercourage")	
 	end
 end
 

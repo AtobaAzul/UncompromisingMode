@@ -121,26 +121,22 @@ local function DoDamage(inst, targets, skiptoss)
                     if inst.caster ~= nil and inst.caster:IsValid() then
                         inst.caster.components.combat.ignorehitrange = true
 						if not v:HasTag("deerclops") then
-							inst.caster.components.combat:DoAttack(v)
+                        inst.caster.components.combat:DoAttack(v)
 						end
                         inst.caster.components.combat.ignorehitrange = false
                     else
-						if not v:HasTag("deerclops") then
-							inst.components.combat:DoAttack(v)
-						end
+					if not v:HasTag("deerclops") then
+                        inst.components.combat:DoAttack(v)
+					end
                     end
                     if v:IsValid() then
                         SpawnPrefab("deerclops_laserhit_blue"):SetTarget(v)
                         if not v.components.health:IsDead() then
-							if v.components.freezable ~= nil then
-								if v.components.freezable:IsFrozen() then
-									v:AddTag("deerclops_freezepass")
-									v:DoTaskInTime(0.5,function(v) v:RemoveTag("deerclops_freezepass") end)
+                            if v.components.freezable ~= nil and not v.components.freezable:IsFrozen() then
+								if v.components.freezable ~= nil then
+									v.components.freezable:AddColdness(1.1)
 								end
-								if not v:HasTag("deerclops_freezepass") then
-									--v.components.freezable:AddColdness(1.1)	
-								end
-							end
+                            end
                             if v.components.temperature ~= nil then
 								local mintemp = math.max(v.components.temperature.mintemp, 0)
 								local curtemp = v.components.temperature:GetCurrent()
@@ -414,8 +410,8 @@ local function SetTarget(inst, target)
             target.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
         end
         inst.flash = .8 + math.random() * .4
-        --inst:DoPeriodicTask(0, UpdateHit, nil, target)
-        --UpdateHit(inst, target)
+        inst:DoPeriodicTask(0, UpdateHit, nil, target)
+        UpdateHit(inst, target)
     end
 end
 

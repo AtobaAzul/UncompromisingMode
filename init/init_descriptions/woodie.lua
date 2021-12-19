@@ -122,7 +122,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
-	DESCRIBE.BUGZAPPER = "I'll show those pesky bugs!"
+	DESCRIBE.BUGZAPPER = "I once met a bugzapper named Darrel. Or was that the brand?"
 	DESCRIBE.STUMPLING = "The forest cry out!"
 	DESCRIBE.BIRCHLING = DESCRIBE.STUMPLING
 	DESCRIBE.MOON_TEAR = "Cheer up, eh? Let's keep it company."
@@ -310,12 +310,3 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "I'll keep this for dire circumstances."
 	DESCRIBE.DORMANT_RAIN_HORN = "This is pretty nice, ain't it lucy?"
 	DESCRIBE.RAIN_HORN = "How did that old crab do this?"
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
-        LEVEL_1 = "Don't want no vermin carrying away our kit.",
-    }
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
-        LEVEL_1 = "Best clean up our foodstuffs, might attract bears, or worse.",
-    }
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
-        LEVEL_1 = "They've been very busy out there in the woods, eh?",
-    }

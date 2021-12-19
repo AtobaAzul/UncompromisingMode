@@ -324,12 +324,3 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	
 	DESCRIBE.DORMANT_RAIN_HORN = "It doesn't burn, I'm not interested."
 	DESCRIBE.RAIN_HORN = "I want a refund."
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
-        LEVEL_1 = "There's a lot of trash on the ground.",
-    }
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
-        LEVEL_1 = "The smell of foodstuffs fills the air.",
-    }
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
-        LEVEL_1 = "There's a ton of disguising rats out there.",
-    }

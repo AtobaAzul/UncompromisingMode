@@ -22,21 +22,7 @@ STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_NIGHT = { "KING SLEEPING, YOU GO NOW
 STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_EVENING = { "KING BED TIME SOON, YOU GO NOW", "NO DISTURB KING SLEEP", "KING NEEDS BEAUTY SLEEP, GO", "NIGHT SOON, YOU LEAVE NOW" }
 STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_FRIEND = { "KING SAY PROTECT", "PROTECT YOU", "WHERE MONSTERS?", "PROTECT!", "PROTECT KING!", "PROTECT FRIEND!" }
 
--- Hey look! I actually did something! -Canis
-STRINGS.CHARACTER_DESCRIPTIONS.willow = STRINGS.CHARACTER_DESCRIPTIONS.willow.."\n󰀕Tinkered with her lighter to be more volatile\n󰀕Can set her own skin on fire"
-STRINGS.CHARACTER_DESCRIPTIONS.wolfgang = STRINGS.CHARACTER_DESCRIPTIONS.wolfgang.."\n󰀕Isn't as affected by weight"
-STRINGS.CHARACTER_DESCRIPTIONS.wx78 = STRINGS.CHARACTER_DESCRIPTIONS.wx78.."\n󰀕Water is more lethal"
-STRINGS.CHARACTER_DESCRIPTIONS.wickerbottom = STRINGS.CHARACTER_DESCRIPTIONS.wickerbottom.."\n󰀕Reading books require brainpower"
-STRINGS.CHARACTER_DESCRIPTIONS.wes = STRINGS.CHARACTER_DESCRIPTIONS.wes.."\n󰀕Expanded inner dialogue"
-STRINGS.CHARACTER_DESCRIPTIONS.waxwell = STRINGS.CHARACTER_DESCRIPTIONS.waxwell.."\n󰀕Can summon his old puppets"
-STRINGS.CHARACTER_DESCRIPTIONS.warly = STRINGS.CHARACTER_DESCRIPTIONS.warly.."\n󰀕Remembers food for longer, but gets bonus stats"
-STRINGS.CHARACTER_DESCRIPTIONS.wormwood = STRINGS.CHARACTER_DESCRIPTIONS.wormwood.."\n󰀕Is dangerously flammable"
-STRINGS.CHARACTER_DESCRIPTIONS.winona = STRINGS.CHARACTER_DESCRIPTIONS.winona.."\n󰀕Works faster when full, slower when hungry\n󰀕Others can't refuel generators"
-STRINGS.CHARACTER_DESCRIPTIONS.wortox = STRINGS.CHARACTER_DESCRIPTIONS.wortox.."\n󰀕Is less durable\n󰀕Tiny insects don't have souls"
-STRINGS.CHARACTER_DESCRIPTIONS.walter = STRINGS.CHARACTER_DESCRIPTIONS.walter.."\n󰀕Can craft firecracker rounds"
-
 STRINGS.UNCOMP_TOOLTIP = {
-	REVIVER = "- Requires flesh from a dead survivor.",
 	AMULET = "- Only revives the player upon death while worn.\n- Increased heal rate at lower health.\n- Never breaks, can be refueled with Nightmare Fuel.",
 	MINIFAN = "- Staves off heat, and hayfever.",
 	WALL_HAY_ITEM = "- Provides protection from Snow Storms.",
@@ -56,6 +42,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	MOLEHAT = "- Grants protection against Snow Storms / Sand Storms when worn.",
 	ARMOR_BRAMBLE = "- Automatically launches spikes at nearby threats.",
 	COOKIECUTTERHAT = "- Reflects 75% of damage taken back at attacker.",
+	NIGHTSTICK = "- No longer breaks when empty.\n- Can be fueled by various electrical items, and potatoes.",
 	HAMBAT = "- Rots faster.\n- Can be eaten by certain mobs.",
 	TOWNPORTAL = "- Gathers nearby items when channeling.",
 	PUMPKIN_LANTERN = "- Has a positive sanity aura.",
@@ -64,12 +51,13 @@ STRINGS.UNCOMP_TOOLTIP = {
 	TOPHAT = "- Reduces sanity loss from various magic items.",
 	MOONDIAL = "- Can become a source of water when a certain item is placed inside...",
 	ARMORDRAGONFLY = "- Summons mini Lavae allies when worn.",
+	EYEBRELLAHAT = "- Reduced heat protection.",
 	SEEDPOUCH = "- Keeps seeds refridgerated.",
 	GLASSCUTTER = "- Deals slightly more damage to Shadows.",
 	FEATHERHAT = "- Provides saftey from territorial Pengulls.",
 	YELLOWAMULET = "- No longer breaks when empty.\n- Can be fueled with Nightmare Fuel.",
 	ORANGEAMULET = "- No longer breaks when empty.\n- Can be fueled with Nightmare Fuel.\n- Will pick certain plants too!",
-	PURPLEAMULET = "- Grants bonus Nightmare Fuel from slain Shadows.",
+	PURPLEAMULET = "- No longer breaks when empty.\n- Can be fueled with Nightmare Fuel.\n- Grants bonus Nightmare Fuel from slain Shadows.",
 	PIGGYBACK = "- No Passive -10% movement speed while worn.\n- Decreases Player speed by 1% per item held.",
 	
 	TRUNKVEST_SUMMER = "- Now has pockets!\n- Slightly increased rain protection.",
@@ -78,7 +66,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	PREMIUMWATERINGCAN = "- Can contain and preserve ocean fish.",
 	RAINHAT = "- Slightly increased rain protection.",
 	
-	ARMORMARBLE = "- Prevents knockback effects.",
+	MARBLEARMOR = "- Prevents knockback effects.",
 	SEWINGKIT = "- Increased storage capacity.\n- May hurt would be thieves.",
 	TURF_DRAGONFLY = "- Prevents snowpile build-up.",
 	GASMASK = "- Prevents Hayfever while worn.",
@@ -89,18 +77,13 @@ STRINGS.UNCOMP_TOOLTIP = {
 	SIESTAHUT = "- A bit less efficient.\n- May restore maximum health.",
 	BEEBOX = "- Reduced yield per stage.",
 	
-	RAT_WHIP = "- Stronger when well fed.",	
-	DRAGONFLYCHEST = "- Has even more item slots.\n- May hurt would be thieves.",
-	BLOWDART_YELLOW = "- Stuns certain mechanical enemies.",
-	CAMPFIRE = "- Provides protection from Snow Storms.",
-	TORCH = "- Provides protection from Snow Storms.",
-	FIREPIT = "- Provides protection from Snow Storms.",
-
 	AIR_CONDITIONER = "- Can crush up Mushrooms for helpful stat clouds.",
 	ANCIENT_AMULET_RED = "- Drops soul orbs when attacked, which will replenish lost health when picked up.",
 	ARMOR_GLASSMAIL = "- Summons spinning Glass Shards when attacking enemies.\n- Loses shards when damage is taken.",
+	BUGZAPPER = "- Deals bonus damage, and area damage to Insects.\n- Deals electrical damage.\n- Can be fueled by various electrical items, and potatoes.",
 	--DRIFTWOODFISHINGROD = "test",
 	HONEY_LOG = "- Provides protection from Hayfever. Mostly useful for other allies.",
+	RAT_WHIP = "- Critical chance!",
 	SALTPACK = "- Drops piles of salt, prevents buildup of Snow Piles.",
 	SPOREPACK = "- Provides lots of storage space.\n- Rots food.",
 	UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "- Slows down anything it's attached to. Deployable and throwable.",
@@ -108,25 +91,12 @@ STRINGS.UNCOMP_TOOLTIP = {
 	WATERMELON_LANTERN = "- Has a positive sanity aura.",
 }
 
-if TUNING.DSTU.ELECTRICALMISHAP == false then
-	STRINGS.UNCOMP_TOOLTIP.NIGHTSTICK = "- No longer breaks when empty.\n- Can be fueled by various electrical items, and potatoes."
-	STRINGS.UNCOMP_TOOLTIPBUGZAPPER = "- Deals bonus damage, and area damage to Insects.\n- Deals electrical damage.\n- Can be fueled by various electrical items, and potatoes."
-else
-	STRINGS.UNCOMP_TOOLTIP.NIGHTSTICK = "- No longer breaks when empty.\n- Functions as a portable lightning rod.\n- Regains fuel when struck by lightning."
-	STRINGS.UNCOMP_TOOLTIP.BUGZAPPER = "- Deals bonus damage, and area damage to Insects.\n- Deals electrical damage."
-end
-
 if TUNING.DSTU.FLINGO_SETTING == "Fuelmuncher" then
 	STRINGS.UNCOMP_TOOLTIP.FIRESUPPRESSOR = "- Drains fuel on each throw.\n- Increased maximum fuel."
 elseif TUNING.DSTU.FLINGO_SETTING == "Waterballs" then
 	STRINGS.UNCOMP_TOOLTIP.FIRESUPPRESSOR = "- No longer freezes on hit."
 end
 
-if TUNING.DSTU.EYEBRELLAREWORK == false then
-	STRINGS.UNCOMP_TOOLTIP.EYEBRELLAHAT = "- Reduced heat protection."
-else
-	STRINGS.UNCOMP_TOOLTIP.EYEBRELLAHAT = "- Reduced heat protection.\n- Can't be sewn, but may be repaired."
-end
 
 STRINGS.STANTON_GREET = {"Care to drink with the dead?", "How's about a drink?", "C'mon and drink with me."}
 STRINGS.STANTON_GIVE = {"There ya go.", "The finest."}

@@ -52,10 +52,6 @@ local function OnExplode(inst, target)
 
     inst.AnimState:PlayAnimation("activate")
     if target then
-		if target.SoundEmitter ~= nil then
-			target.SoundEmitter:PlaySound("dontstarve/common/trap_teeth_trigger")
-		end
-	
 		if inst.deathtask ~= nil then
 			inst.deathtask:Cancel()
 		end
@@ -100,13 +96,6 @@ local function OnExplode(inst, target)
 					i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) 
 					i._bear_trap_speedmulttask = nil
 				end)
-				
-				local function RemoveSpeed(inst)
-					inst.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) 
-					inst._bear_trap_speedmulttask = nil
-				end
-				
-				target:ListenForEvent("onremoved", RemoveSpeed, inst)
 			end
 			inst:DoTaskInTime(10, function(inst) inst.components.health:Kill() end)
 			

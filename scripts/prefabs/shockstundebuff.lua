@@ -9,7 +9,7 @@ local function OhCrap(inst, target)
 		if target.sg and target.sg:GoToState("hit") ~= nil then
 		target.sg:GoToState("hit")
 		end
-		if target.components.combat ~= nil and target.components.combat.laststartattacktime ~= nil then
+		if target.components.combat ~= nil then
 		target.components.combat.laststartattacktime = target.components.combat.laststartattacktime + 0.2 --This apparently resets the targets attack timer making it a true "stun"
 		end
     else
@@ -18,18 +18,14 @@ local function OhCrap(inst, target)
 end
 
 local function OnAttached(inst, target)
-	if not target:HasTag("electricstunimmune") then
-		target.components.debuffable:AddDebuff("shockstundebuffimmunity", "shockstundebuffimmunity")
-		inst.entity:SetParent(target.entity)
-		inst.Transform:SetPosition(0, 0, 0) --in case of loading
-		inst.task = inst:DoPeriodicTask(0.2, OhCrap, nil, target)
-		inst:ListenForEvent("death", function()
-			inst.components.debuff:Stop()
-		end, target)
-		SpawnPrefab("electricchargedfx"):SetTarget(target)
-	else
-		inst.components.debuff:Stop()
-	end
+    inst.entity:SetParent(target.entity)
+    inst.Transform:SetPosition(0, 0, 0) --in case of loading
+    inst.task = inst:DoPeriodicTask(0.2, OhCrap, nil, target)
+    inst:ListenForEvent("death", function()
+        inst.components.debuff:Stop()
+    end, target)
+	
+	SpawnPrefab("electricchargedfx"):SetTarget(target)
 end
 
 local function OnRemoved(inst,target)
@@ -40,19 +36,15 @@ end
 local function OnTimerDone(inst, data)
     if data.name == "stunover" then
         inst.components.debuff:Stop()
-		if inst.task ~= nil then
-			inst.task:Cancel()
-		end
+		inst.task:Cancel()
     end
 end
 
 local function OnExtended(inst, target)
-	--[[if not target:HasTag("electricstunimmune") then
     inst.components.timer:StopTimer("stunover")
     inst.components.timer:StartTimer("stunover", 1.2)
     inst.task:Cancel()
     inst.task = inst:DoPeriodicTask(0.2, OhCrap, nil, target)
-	end]]
 end
 
 local function fn()

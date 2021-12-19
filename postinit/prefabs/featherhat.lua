@@ -49,6 +49,7 @@ local function onequip(inst, owner)
 local function feather_equip(inst, owner)
 	onequip(inst, owner)
 		
+	owner:AddTag("penguin_protection")
     local attractor = owner.components.birdattractor
     if attractor then
 		attractor.spawnmodifier:SetModifier(inst, TUNING.BIRD_SPAWN_MAXDELTA_FEATHERHAT, "maxbirds")
@@ -64,6 +65,7 @@ end
 
 local function feather_unequip(inst, owner)
 	onunequip(inst, owner)
+	owner:RemoveTag("penguin_protection")
 
 	local attractor = owner.components.birdattractor
 	if attractor then
@@ -82,24 +84,7 @@ env.AddPrefabPostInit("featherhat", function(inst)
 	end
 	
 	if inst.components.equippable ~= nil then
-		local _OldOnEquip = inst.components.equippable.onequipfn
-
-		inst.components.equippable.onequipfn = function(inst, owner)
-			owner:AddTag("penguin_protection")
-			
-			if _OldOnEquip ~= nil then
-			   _OldOnEquip(inst, owner)
-			end
-		end
-		
-		local _OldOnUnequip = inst.components.equippable.onunequipfn
-		
-		inst.components.equippable.onunequipfn = function(inst, owner)
-			owner:RemoveTag("penguin_protection")
-			
-			if _OldOnUnequip ~= nil then
-			   _OldOnUnequip(inst, owner)
-			end
-		end
+        inst.components.equippable:SetOnEquip(feather_equip)
+        inst.components.equippable:SetOnUnequip(feather_unequip)
 	end
 end)

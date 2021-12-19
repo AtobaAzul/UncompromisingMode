@@ -6,8 +6,8 @@ PrefabFiles = require("uncompromising_prefabs")
 modimport("init/init_gamemodes/init_uncompromising_mode")
 
 GLOBAL.FUELTYPE.BATTERYPOWER = "BATTERYPOWER"
+GLOBAL.FUELTYPE.BATTERYPOWER = "BATTERYPOWER"
 GLOBAL.FUELTYPE.SALT = "SALT"
-GLOBAL.FUELTYPE.EYE = "EYE"
 
 RemapSoundEvent( "dontstarve/together_FE/DST_theme_portaled", "UMMusic/music/uncomp_char_select" )
 

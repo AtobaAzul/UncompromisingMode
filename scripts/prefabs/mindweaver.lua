@@ -22,11 +22,6 @@ local sounds =
     disappear = "dontstarve/sanity/creature2/dissappear",
 }
 
-SetSharedLootTable("mindweaver",
-{
-    { "nightmarefuel",  0.5 },
-})
-
 local brain = require "brains/mindweaverbrain"
 
 --local function Disappear(inst)
@@ -146,7 +141,7 @@ local function fn(Sim)
     inst:AddComponent("follower")
 	
 	inst:AddComponent("lootdropper")
-	inst.components.lootdropper:SetChanceLootTable('mindweaver')
+	inst.components.lootdropper:SetChanceLootTable('shadow_creature')
 	
     inst:AddComponent("knownlocations")
 	

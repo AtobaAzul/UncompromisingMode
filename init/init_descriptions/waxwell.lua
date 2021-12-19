@@ -316,12 +316,3 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "Sweet bandage."
 	DESCRIBE.DORMANT_RAIN_HORN = "A shell capable of channeling some magical energy."
 	DESCRIBE.RAIN_HORN = "That hold carapace knows more about magic than she leads on..."
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
-        LEVEL_1 = "Hmph. The rats must be after our items.",
-    }
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
-        LEVEL_1 = "Those rats will be attracted by our unwise handling of food.",
-    }
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
-        LEVEL_1 = "Insidious vermin, they gather to lay siege to our little hamlet.",
-    }

@@ -310,12 +310,3 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "I should fill it with redcaps for a good laugh."
 	DESCRIBE.DORMANT_RAIN_HORN = "For now, it's just a shell."
 	DESCRIBE.RAIN_HORN = "Give it a blow and some rain will show."
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
-        LEVEL_1 = "Those theives are after my things!",
-    }
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
-        LEVEL_1 = "Another downside of mortal food, small hairy mortals desire it.",
-    }
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
-        LEVEL_1 = "A gathering of theives on the horizon I see!",
-    }

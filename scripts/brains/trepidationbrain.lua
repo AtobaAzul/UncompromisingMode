@@ -79,7 +79,7 @@ function TrepidationBrain:OnStart()
         WhileNode(function() return ShouldAttack(self) end, "Attack", ChaseAndAttack(self.inst, 40)),
 		
 		--WhileNode(function() return WithinDomain(self.inst) end, "Follow",
-		Follow(self.inst, function() return self.inst.harassplayer end, 1, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST),--),
+		Follow(self.inst, function() return self.inst.harassplayer end, 0, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST),--),
 		
         WhileNode(function() return self.inst.harassplayer == nil end, "Home",
 		Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, 20)),

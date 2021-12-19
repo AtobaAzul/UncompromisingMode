@@ -204,7 +204,7 @@ end
 					inst.components.combat:DropTarget()
 				end
 				
-				if data.attacker.components.combat:HasTarget() and not data.attacker.components.combat:TargetIs(inst) then
+				if data.attacker.components.combat:HasTarget() and not data.attacker.components.combat.TargetIs(inst) then
 					print("flimbo")
 					data.attacker.components.combat:DropTarget()
 				end

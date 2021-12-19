@@ -262,7 +262,6 @@ local function susfn()
 	inst:grow_mini()
 	--inst:DoPeriodicTask(0.2, spawnfx)
 	inst:WatchWorldState("isday", inst.Remove)
-	inst:WatchWorldState("iscaveday", inst.Remove)
 	
     inst.persists = false
 

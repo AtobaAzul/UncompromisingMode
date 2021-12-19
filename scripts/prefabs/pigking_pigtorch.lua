@@ -10,6 +10,19 @@ local function OnVacate(inst)
     SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
 end
 
+local function ReBuild(inst)
+inst:Show()
+local fx = SpawnPrefab("collapse_small")
+fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+inst:Show()
+MakeObstaclePhysics(inst, 0.33)
+
+    inst:AddComponent("spawner")
+    inst.components.spawner:Configure("pigking_pigguard", TUNING.TOTAL_DAY_TIME * 4)
+    inst.components.spawner:SetOnlySpawnOffscreen(true)
+    inst.components.spawner:SetOnVacateFn(OnVacate)
+inst.demolished = false
+end
 
 local function onhammered(inst)
     inst.components.lootdropper:DropLoot()
@@ -106,27 +119,6 @@ if inst.demolished ~= nil then
 data.demolished = inst.demolished
 end
 end
-
-local function ReBuild(inst)
-inst:Show()
-local fx = SpawnPrefab("collapse_small")
-fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
-inst:Show()
-MakeObstaclePhysics(inst, 0.33)
-
-    inst:AddComponent("spawner")
-    inst.components.spawner:Configure("pigking_pigguard", TUNING.TOTAL_DAY_TIME * 4)
-    inst.components.spawner:SetOnlySpawnOffscreen(true)
-    inst.components.spawner:SetOnVacateFn(OnVacate)
-    inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
-    inst.components.workable:SetWorkLeft(4)
-    inst.components.workable:SetOnFinishCallback(onhammered)
-    inst.components.workable:SetOnWorkCallback(onhit)
-
-inst.demolished = false
-end
-
 
 local function fn()
     local inst = CreateEntity()

@@ -52,42 +52,6 @@ local function destroystuff(inst)
     end
 end
 
-local function destroystuff_mini(inst)
-    local x, y, z = inst.Transform:GetWorldPosition()
-	
-	local sizecheck = 1 + (inst.Transform:GetScale() * 1.9) or 0
-	print(sizecheck)
-    local ents = TheSim:FindEntities(x, y, z, sizecheck, nil, TARGET_IGNORE_TAGS, TARGET_TAGS)
-    for i, v in ipairs(ents) do
-        --stuff might become invalid as we work or damage during iteration
-        if v ~= inst.WINDSTAFF_CASTER and v:IsValid() then
-            if v.components.health ~= nil and
-                not v.components.health:IsDead() and
-                v.components.combat ~= nil and
-                v.components.combat:CanBeAttacked() then
-                local damage = TUNING.TORNADO_DAMAGE
-                v.components.combat:GetAttacked(inst, damage, nil, "wind")
-                if v:IsValid() and
-                    inst.WINDSTAFF_CASTER ~= nil and inst.WINDSTAFF_CASTER:IsValid() and
-                    v.components.combat ~= nil and
-                    not (v.components.health ~= nil and v.components.health:IsDead()) and
-                    not (v.components.follower ~= nil and
-                        v.components.follower.keepleaderonattacked and
-                        v.components.follower:GetLeader() == inst.WINDSTAFF_CASTER) then
-                    v.components.combat:SuggestTarget(inst.WINDSTAFF_CASTER)
-                end
-            elseif v.components.workable ~= nil and
-                v.components.workable:CanBeWorked() and
-                v.components.workable:GetWorkAction() and
-                WORK_ACTIONS[v.components.workable:GetWorkAction().id] then
-                SpawnPrefab("collapse_small").Transform:SetPosition(v.Transform:GetWorldPosition())
-                v.components.workable:WorkedBy(inst, 2)
-                --v.components.workable:Destroy(inst)
-            end
-        end
-    end
-end
-
 local function ontornadolifetime(inst)
     inst.task = nil
     inst.sg:GoToState("despawn")
@@ -260,7 +224,7 @@ local function minitornado_fn()
     inst:SetDuration(3000)
 	
 	inst:DoTaskInTime(0.2, function(inst)
-		inst:DoPeriodicTask(.4, destroystuff_mini)
+		inst:DoPeriodicTask(.4, destroystuff)
 	end)
 
     return inst

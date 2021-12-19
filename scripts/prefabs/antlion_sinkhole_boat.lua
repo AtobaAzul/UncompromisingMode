@@ -1,12 +1,9 @@
-local rippleassets =
-{
-    Asset("ANIM", "anim/malbatross_ripple.zip"),
-}
-
 local function BoatBreaker(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
 		
-	local ripple = SpawnPrefab("antlion_sinkhole_ripple")
+	
+		
+	local ripple = SpawnPrefab("malbatross_ripple")
     ripple.Transform:SetPosition(x, y, z)
 		
 	local pt = inst:GetPosition()
@@ -52,32 +49,5 @@ local function fn()
     return inst
 end
 
-local function ripplefn()
-    local inst = CreateEntity()
 
-    inst.entity:AddTransform()
-    inst.entity:AddAnimState()
-    inst.entity:AddNetwork()
-
-    inst.AnimState:SetBank("malbatross_ripple")
-    inst.AnimState:SetBuild("malbatross_ripple")
-    inst.AnimState:PlayAnimation("idle")
-
-    inst:AddTag("fx")
-
-    inst.AnimState:SetLayer(LAYER_BELOW_GROUND)
-    inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.BOAT_TRAIL)
-
-    inst.entity:SetPristine()
-    if not TheWorld.ismastersim then
-        return inst
-    end
-
-    inst:ListenForEvent("animover", inst.Remove)
-
-    return inst
-end
-
-
-return Prefab("antlion_sinkhole_boat", fn),
-       Prefab("antlion_sinkhole_ripple", ripplefn, rippleassets )
+return Prefab("antlion_sinkhole_boat", fn)

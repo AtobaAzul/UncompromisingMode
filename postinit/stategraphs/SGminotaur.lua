@@ -1,7 +1,7 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
-env.AddStategraphPostInit("minotaur", function(inst)
+env.AddStategraphPostInit("rook", function(inst)
 
 local function GetDebrisFn()
 	return "minotaur_boulder", 0
@@ -242,7 +242,7 @@ end
 
 local _OldLocomoteEvent = inst.events["locomote"].fn
 	inst.events["locomote"].fn = function(inst, data)
-       -- if inst:HasTag("minotaur") then
+        if inst:HasTag("minotaur") then
 			if inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("attack") or inst.sg:HasStateTag("runningattack") then
 				return
 			end
@@ -261,9 +261,9 @@ local _OldLocomoteEvent = inst.events["locomote"].fn
 					inst.sg:GoToState(should_run and "run_start" or "walk_start")
 				end
 			end
-		--else
-		--	_OldLocomoteEvent(inst, data)
-       -- end
+		else
+			_OldLocomoteEvent(inst, data)
+        end
     end
 	--[[
 local events=

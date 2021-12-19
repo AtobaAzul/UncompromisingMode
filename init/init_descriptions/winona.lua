@@ -314,12 +314,3 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	
 	DESCRIBE.DORMANT_RAIN_HORN = "Just a conch shell."
 	DESCRIBE.RAIN_HORN = "It lets you blow the horn on the summer heat."
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
-        LEVEL_1 = "Messy work conditions, boss wouldn't be happy.",
-    }
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
-        LEVEL_1 = "Better throw out the old food and put the good stuff away.",
-    }
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
-        LEVEL_1 = "Where's that squeaking noise coming from?",
-    }

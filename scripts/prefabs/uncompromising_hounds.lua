@@ -100,7 +100,7 @@ SetSharedLootTable('hound_spore',
     {'monstermeat', 1.0},
     {'houndstooth', 1.0},
     {'sporecloud_toad', 1.0},
-    {'shroom_skin_fragment',      0.25},
+    {'greengem',      0.05},
 })
 
 local WAKE_TO_FOLLOW_DISTANCE = 8
@@ -917,7 +917,7 @@ local function fnmagma()
 end
 
 local function OnAttackOther_Spore(inst, data)
-	if data.target ~= nil and data.target:HasTag("player") and not data.target:HasTag("hasplaguemask") and not data.target:HasTag("automaton") then
+	if data.target ~= nil and data.target:HasTag("player") and not data.target:HasTag("hasplaguemask") then
 		data.target.components.health:DeltaPenalty(0.05)
 	end
 end

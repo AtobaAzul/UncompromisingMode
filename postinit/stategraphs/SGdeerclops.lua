@@ -25,7 +25,11 @@ end
 
 local function SetLightColour(inst, val)
 	if inst.Light ~= nil then
-		inst.Light:SetColour(0, 0, val)
+		if inst.components.health ~= nil and (inst.components.health:GetPercent() <= 0.5 or inst.components.health:IsDead()) then
+			inst.Light:SetColour(0, 0, val)
+		else
+			inst.Light:SetColour(val, 0, 0)
+		end
 	end
 end
 
@@ -94,7 +98,7 @@ local function SpawnLaser_Blue(inst)
             noground = true
         end
 			
-        fx = SpawnPrefab(i > 0 and "deerclops_laser_blue" or "deerclops_laserempty")
+        fx = SpawnPrefab(i > 0 and "deerclops_laser" or "deerclops_laserempty")
 		
 		if inst.components.health:GetPercent() <= 0.5 then
 			fx = SpawnPrefab(i > 0 and "deerclops_laser_blue" or "deerclops_laserempty_blue")
@@ -117,7 +121,7 @@ local function SpawnLaser_Blue(inst)
         z1 = z + dist * math.cos(angle)
     end
 	
-    fx = SpawnPrefab("deerclops_laser_blue")
+    fx = SpawnPrefab("deerclops_laser")
 	
 	if inst.components.health:GetPercent() <= 0.5 then
 		fx = SpawnPrefab(i > 0 and "deerclops_laser_blue" or "deerclops_laserempty_blue")
@@ -126,7 +130,7 @@ local function SpawnLaser_Blue(inst)
     fx.Transform:SetPosition(x1, 0, z1)
     fx:Trigger((delay + 1) * FRAMES, targets, skiptoss)
 
-    fx = SpawnPrefab("deerclops_laser_blue")
+    fx = SpawnPrefab("deerclops_laser")
 	
 	if inst.components.health:GetPercent() <= 0.5 then
 		fx = SpawnPrefab(i > 0 and "deerclops_laser_blue" or "deerclops_laserempty_blue")
@@ -227,17 +231,38 @@ local function DisableEightFaced(inst)
         inst.Transform:SetFourFaced()
     end
 end
-
 local function EnrageAttackBank(inst,data)
-    if inst.components.health ~= nil and not inst.components.health:IsDead() then
-        if (inst.components.timer ~= nil and not inst.components.timer:TimerExists("laserbeam_cd")) then
-			inst.sg:GoToState("laserbeam_blue", inst.components.combat.target)
-        else
-            inst.sg:GoToState("attack")
-        end   
-    end
+        if inst.components.health ~= nil and not inst.components.health:IsDead()
+            and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("hit")) then
+            if inst.components.timer == nil then
+                --normal deerclops has no laserbeam
+                inst.sg:GoToState("attack")
+            else
+                local target = data ~= nil and data.target or inst.components.combat.target
+                local isfrozen, shouldfreeze = false, false
+                if target ~= nil then
+                    if not target:IsValid() then
+                        target = nil
+                    elseif target.components.freezable ~= nil then
+                        if target.components.freezable:IsFrozen() then
+                            isfrozen = true
+                        elseif target.components.freezable:ResolveResistance() - target.components.freezable.coldness <= 2 then
+                            shouldfreeze = true
+                        end
+                    end
+                end
+                if inst.components.health:GetPercent() <= 0.5 and (isfrozen or not (shouldfreeze or inst.components.timer:TimerExists("laserbeam_cd"))) then
+					if inst.enraged == true then
+					inst.sg:GoToState("laserbeam_blue", target)
+					else
+					inst.EnterPhase2Trigger(inst)
+					end
+                else
+                    inst.sg:GoToState("attack")
+                end
+            end
+        end
 end
-
 local function CanSpawnSpikeAt(pos, size)
     local radius = 1.1
     for i, v in ipairs(TheSim:FindEntities(pos.x, 0, pos.z, radius + 1.5, nil, { "antlion_sinkhole" }, { "groundspike" })) do
@@ -251,7 +276,6 @@ local function CanSpawnSpikeAt(pos, size)
     end
     return true
 end
-
 local function SpawnBlock(inst, x, z, cracked)
 	local blockade = SpawnPrefab("deerclops_barrier")
 	if cracked == true then
@@ -362,31 +386,30 @@ local function StrongAttackBank(inst,data)
             end
 
 end
-
 local function IceAttackBank(inst,data)
-	if inst.components.health ~= nil and not inst.components.health:IsDead() and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("hit")) then
-		if inst.components.timer ~= nil and not inst.components.timer:TimerExists("auratime") then
-			inst.sg:GoToState("aurafreeze_pre")
-			inst:DoTaskInTime(7,function(inst) inst.sg:GoToState("aurafreeze_pst") end)
-		else
-			inst.sg:GoToState("aurattack")
-		end
-	end
+if inst.components.health ~= nil and not inst.components.health:IsDead()
+            and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("hit")) then
+if inst.components.timer ~= nil and not inst.components.timer:TimerExists("auratime") then
+inst.sg:GoToState("aurafreeze_pre")
+inst:DoTaskInTime(7,function(inst) inst.sg:GoToState("aurafreeze_pst") end)
+else
+inst.sg:GoToState("aurattack")
+end
+end
 end
 
 local events =
 {	
     EventHandler("doattack", function(inst, data)
-		if inst.upgrade == "enrage_mutation" then
-			print("enragebank")
-			EnrageAttackBank(inst,data)
-		end
-		if inst.upgrade == "strength_mutation" then
-			StrongAttackBank(inst,data)
-		end
-		if inst.upgrade == "ice_mutation" then
-			IceAttackBank(inst,data)
-		end
+	if inst.upgrade == "enrage_mutation" then
+	EnrageAttackBank(inst,data)
+	end
+	if inst.upgrade == "strength_mutation" then
+	StrongAttackBank(inst,data)
+	end
+	if inst.upgrade == "ice_mutation" then
+	IceAttackBank(inst,data)
+	end
     end),
 	EventHandler("attacked", function(inst, data)
     if inst.components.health ~= nil and
@@ -422,7 +445,7 @@ local states = {
             end
             inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/charge")
             inst.components.timer:StopTimer("laserbeam_cd")
-            inst.components.timer:StartTimer("laserbeam_cd", TUNING.DEERCLOPS_ATTACK_PERIOD * (math.random(0.8,1.7)))
+            inst.components.timer:StartTimer("laserbeam_cd", TUNING.DEERCLOPS_ATTACK_PERIOD * (math.random(3) - .5))
         end,
 
         onupdate = function(inst)
@@ -495,7 +518,9 @@ local states = {
             TimeEvent(32 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/taunt_grrr", nil, .5)
                 inst.sg.statemem.lightval = 1.035
+                SetLightColour(inst, .9)
             end),
+            TimeEvent(33 * FRAMES, function(inst) SetLightColour(inst, .8) end),
             TimeEvent(41 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/step", nil, .7) end),
             TimeEvent(43 * FRAMES, function(inst)
                 ShakeAllCameras(CAMERASHAKE.VERTICAL, .3, .02, .7, inst, SHAKE_DIST)
@@ -503,10 +528,12 @@ local states = {
             TimeEvent(47 * FRAMES, function(inst)
                 inst.sg.statemem.lightval = nil
                 SetLightValueAndOverride(inst, .9, 0)
+                SetLightColour(inst, .9)
             end),
             TimeEvent(48 * FRAMES, function(inst)
                 inst.sg:RemoveStateTag("busy")
                 SetLightValue(inst, 1)
+                SetLightColour(inst, 1)
             end),
         },
 

@@ -29,7 +29,6 @@ local component_post = {
 }
 
 local prefab_post = {
-	"shieldofcthulu",
 	"clockworks",
 	"flingobalance",
 	"chester",
@@ -136,10 +135,6 @@ local prefab_post = {
 	"siestahut",
 	"bees",
 	"farmplants",
-	"rainhat",
-	"darts",
-	"eyeofterror",
-	"terrarium",
 }
 
 local stategraph_post = {
@@ -157,10 +152,9 @@ local stategraph_post = {
 	"koalefant",
 	"krampus",
 	"spiderqueen",
-	--"merm",
+	"merm",
 	"carnival_host",
 	"catcoon",
-	"eyeofterror",
 }
 
 local class_post = {
@@ -185,7 +179,6 @@ local brain_post = {
 	"mossling",
 	"perd",
 	"catcoon",
-	"deer",
 }
 
 if GetModConfigData("hangyperds") == true then

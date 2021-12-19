@@ -16,31 +16,31 @@ local BATTERY =
 {
 	["potato"] =
     {
-		power = TUNING.MED_FUEL / 3,
-    },
-	["feather_canary"] =
-    {
-		power = TUNING.MED_FUEL / 1.5,
+		power = TUNING.MED_FUEL / 4,-- 6% 10~ sec NightLight 6.6~ sec Zapper
     },
 	["transistor"] =
     {
-		power = TUNING.MED_FUEL,
+		power = TUNING.MED_FUEL / 2,-- 12.5% 21~ sec NightLight 14~ sec Zapper
+    },
+	["feather_canary"] =
+    {
+		power = TUNING.MED_FUEL / 2,--12.5% 21~ sec NightLight 10~ sec Zapper
     },
 	["trinket_6"] =
     {
-		power = TUNING.MED_FUEL,
+		power = TUNING.MED_LARGE_FUEL / 2,--25% 43~ sec NightLight 28~ sec Zapper
     },
 	["lightninggoathorn"] =
     {
-		power = TUNING.LARGE_FUEL,
+		power = TUNING.LARGE_FUEL / 2,--50% 90~ sec NightLight 60~ sec Zapper
     },
 	["goatmilk"] =
     {
-		power = TUNING.LARGE_FUEL,
+		power = TUNING.LARGE_FUEL / 2,--50% 90~ sec NightLight 60~ sec Zapper
     },
 	["zaspberry"] =
     {
-		power = TUNING.LARGE_FUEL,
+		power = TUNING.LARGE_FUEL * 2,--100% 180~ sec NightLight 120~ sec Zapper
     },
 }
 
@@ -74,40 +74,6 @@ for k, v in pairs(SALT) do
 		if inst.components.fuel ~= nil then
 			inst.components.fuel.fuelvalue = v.power
 			inst.components.fuel.fueltype = GLOBAL.FUELTYPE.SALT
-		end
-	end)
-end
-
-	--I'm blaming Zark for this not uploading properly ::::::ASDFAFSDFASDAZCQWECQWEFCCQWEFQWFCQ --Scrimbles
-	
-				---------	                           -----------
-									
-												-----------------------------------------
-																					------
-												----------------------------------------
-							---------------
-	
-	
-	
-	-------------------------------------------------------------------------------------------
-	
-local EYE = 
-{
-	["milkywhites"] =
-    {
-		power = TUNING.MED_FUEL * 13,
-    },
-}
-
-for k, v in pairs(EYE) do
-	AddPrefabPostInit(k, function(inst)
-		if inst.components.fuel == nil then
-			inst:AddComponent("fuel")
-		end
-		
-		if inst.components.fuel ~= nil then
-			inst.components.fuel.fuelvalue = v.power
-			inst.components.fuel.fueltype = GLOBAL.FUELTYPE.EYE
 		end
 	end)
 end

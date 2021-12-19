@@ -32,7 +32,7 @@ local function DamageCalculation(inst, isattack)
 	
 	local orangegem = #inst.components.container:FindItems( function(item) return item.prefab == "orangegem_cracked" end )
 	
-    local dmg = 40 + (5 * opalgem) + (5 * (redgem + bluegem + yellowgem + greengem + orangegem + purplegem))
+    local dmg = 30 + (10 * opalgem) + (5 * (redgem + bluegem + yellowgem + greengem + orangegem + purplegem))
 		
 	inst.components.weapon:SetDamage(dmg)
 	
@@ -493,7 +493,7 @@ local FLOATER_PROPERTIES =
     ["opal"]    = {0.10, 0.87},
 }
 
-local function buildgem_cracked(colour, precious, multiplier)
+local function buildgem_cracked(colour, precious)
 	
 	local function Shatter(inst)
         local fx = SpawnPrefab("winona_battery_high_shatterfx")
@@ -537,8 +537,8 @@ local function buildgem_cracked(colour, precious, multiplier)
         inst.components.edible.hungervalue = 2.5
 
 		inst:AddComponent("finiteuses")
-		inst.components.finiteuses:SetMaxUses(80 * multiplier)
-		inst.components.finiteuses:SetUses(80 * multiplier)
+		inst.components.finiteuses:SetMaxUses(80)
+		inst.components.finiteuses:SetUses(80)
 		inst.components.finiteuses:SetOnFinished(Shatter)
 
         inst:AddComponent("bait")
@@ -565,10 +565,10 @@ return Prefab("crabclaw", fn, assets, prefabs),
     buildgem("yellow"),
     buildgem("green"),
     buildgem("opalprecious"),
-	buildgem_cracked("purple", false, 1.25),
-    buildgem_cracked("blue", false, 1),
-    buildgem_cracked("red", false, 1),
-    buildgem_cracked("orange", false, 2),
-    buildgem_cracked("yellow", false, 2),
-    buildgem_cracked("green", false, 2),
-    buildgem_cracked("opal", true, 2)
+	buildgem_cracked("purple"),
+    buildgem_cracked("blue"),
+    buildgem_cracked("red"),
+    buildgem_cracked("orange"),
+    buildgem_cracked("yellow"),
+    buildgem_cracked("green"),
+    buildgem_cracked("opal", true)

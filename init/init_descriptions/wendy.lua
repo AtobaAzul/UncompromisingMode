@@ -310,12 +310,3 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	
 	DESCRIBE.DORMANT_RAIN_HORN = "I remember this."
 	DESCRIBE.RAIN_HORN = "It makes the world around me reflect my perspective."
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
-        LEVEL_1 = "If we don't care for our possessions they will slip away.",
-    }
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
-        LEVEL_1 = "Our camp stinks of food and trash, the vermin are noticing.",
-    }
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
-        LEVEL_1 = "The rodents are gathering for an attack, somewhere out there.",
-    }

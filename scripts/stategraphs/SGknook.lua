@@ -131,7 +131,7 @@ local states=
 		TimeEvent(15*FRAMES, function(inst) inst.Physics:Stop() 
 		if inst.components.combat.target ~= nil then
 		local cooldown = inst.components.combat.laststartattacktime
-		inst.components.combat:DoAreaAttack(inst, 2, nil, nil, nil, { "trepidation","INLIMBO", "notarget", "invisible", "noattack", "chess", "playerghost", "shadow", "shadowchesspiece", "shadowcreature", "shadowminion" })
+		inst.components.combat:DoAreaAttack(inst, 2, nil, nil, nil, { "INLIMBO", "notarget", "invisible", "noattack", "chess", "playerghost", "shadow", "shadowchesspiece", "shadowcreature", "shadowminion" })
 		--SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
 		--SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
 		inst:DoTaskInTime(0.3,function(inst, cooldown) inst.components.combat.laststartattacktime = cooldown end)

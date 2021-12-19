@@ -154,11 +154,6 @@ local function OnEntitySleep(inst)
 						end
 						inst:DoTaskInTime(.1, function() 
 							inst.Transform:SetPosition(pos:Get())
-							if inst.components.leader ~= nil and inst.components.leader.followers ~= nil then
-								for i,v in ipairs(inst.components.leader.followers) do
-									v.Transform:SetPosition(pos:Get())
-								end
-							end
 						end)
 						
 					end
@@ -174,11 +169,6 @@ local function OnEntitySleep(inst)
 							end
 							inst:DoTaskInTime(.1, function() 
 								inst.Transform:SetPosition(pos:Get())
-								if inst.components.leader ~= nil and inst.components.leader.followers ~= nil then
-									for i,v in ipairs(inst.components.leader.followers) do
-										v.Transform:SetPosition(pos:Get())
-									end
-								end						
 							end)
 							
 						end
@@ -327,19 +317,6 @@ end
 local loot = {"meat", "meat", "meat", "meat", "meat", "meat", "meat", "meat", "glass_scales","glass_scales","glass_scales", "moonglass_geode","moonglass_geode","moonglass_geode"}
 
 local function OnDead(inst)
-	local x,y,z = inst.Transform:GetWorldPosition()
-	local ents = TheSim:FindEntities(x, y, z, 50, { "player" })
-	for i,v in ipairs(ents) do
-		if v.components.sanity ~= nil then
-			v.components.sanity:EnableLunacy(false, "moonmaw")
-			if v.moonmaw ~= nil then
-				v.moonmaw = nil
-			end
-			if v.moonmawcheck ~= nil then
-				v.moonmawcheck = nil
-			end
-		end
-	end
     TheWorld:PushEvent("mockflykilled", inst)
 end
 
@@ -511,35 +488,6 @@ inst.redolavae = true
 inst.sg:GoToState("summoncrystals")
 end
 
-
-local function MoonMawCheck(player)
-	local moonmaw = FindEntity(player, 40, function(guy) return guy:HasTag("moonmaw") end)
-	--print("checking")
-	if moonmaw == nil then
-		player.components.sanity:EnableLunacy(false, "moonmaw")
-		player.moonmaw = nil
-		player.moonmawcheck = nil
-	else
-		--print("moonmawisalive")
-	end
-end
-
-local function OnNear(inst,player)
-	if player.components.sanity ~= nil and player.components.sanity.mode == SANITY_MODE_INSANITY then
-		player.components.sanity:EnableLunacy(true, "moonmaw")
-		player.moonmaw = inst
-		player:DoPeriodicTask(3,MoonMawCheck)
-	end
-end
-
-local function CheckPlayers(inst)
-	local x,y,z = inst.Transform:GetWorldPosition()
-	local players = TheSim:FindEntities(x,y,z,35,{"player"},{"playerghost"})
-	for i,v in ipairs(players) do
-		OnNear(inst,v)
-	end
-end
-
 local function fn(Sim)
     local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
@@ -580,7 +528,6 @@ local function fn(Sim)
     inst:AddTag("monster")
     inst:AddTag("hostile")
     inst:AddTag("mock_dragonfly")
-	inst:AddTag("moonmaw")
     inst:AddTag("scarytoprey")
     inst:AddTag("largecreature")
 	inst:AddTag("ignorewalkableplatformdrowning")
@@ -723,9 +670,7 @@ local function fn(Sim)
 	
 	inst.sg:GoToState("skyfall")
 	inst.TryEjectLavae = TryEjectLavae
-
-	--
-	inst:DoPeriodicTask(3,CheckPlayers)
+	
 	inst:DoPeriodicTask(10,PerEjectCheck)
     return inst
 end

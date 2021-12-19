@@ -174,12 +174,7 @@ env.AddPrefabPostInit("bearger", function(inst)
 	
     inst.LaunchProjectile = LaunchProjectile
 	
-    --inst.TeleportToFood = TeleportToFood
-	
-	if inst.components.combat ~= nil then
-		--inst.components.combat:SetRange(TUNING.BEARGER_ATTACK_RANGE, TUNING.BEARGER_MELEE_RANGE + 0.5)
-		inst.components.combat:SetAreaDamage(6 + 0.5, 0.8)
-	end
+    inst.TeleportToFood = TeleportToFood
 	
 	
 	inst:AddComponent("vetcurselootdropper")

@@ -4,11 +4,8 @@ local actionhandlers =
 {
 	ActionHandler(ACTIONS.EAT, "eat"),
 	ActionHandler(ACTIONS.PICKUP, "steal"),
-	ActionHandler(ACTIONS.RAT_STEAL_EQUIPPABLE, "chest_steal"),
-	ActionHandler(ACTIONS.RAT_STEAL_GEM, "chest_steal"),
+	ActionHandler(ACTIONS.HAMMER, "steal"),
     ActionHandler(ACTIONS.CHECKTRAP, "destroy"),
-    ActionHandler(ACTIONS.DIG, "plant_attack"),
-    ActionHandler(ACTIONS.STORE, "deposit"),
 }
 
 local events =
@@ -47,7 +44,7 @@ local states =
 		ontimeout= function(inst)
 			local scoutratvalue = inst.prefab == "uncompromising_scoutrat" and 120 or 0
 		
-			if (inst.components.inventory:NumItems() ~= 0 or inst.prefab == "uncompromising_packrat" or inst.components.health:GetPercent() < 1) and inst.components.herdmember and inst.components.herdmember:GetHerd() and inst.components.herdmember:GetHerd():HasTag("ratburrow") and ((inst.sg.mem.emerge_time or 0) + (TUNING.CARRAT.EMERGED_TIME_LIMIT + scoutratvalue) / 2.5) < GetTime() then
+			if (inst.components.inventory:NumItems() ~= 0 or inst.prefab == "uncompromising_packrat" or inst.components.health:GetPercent() < 1) and inst.components.herdmember and inst.components.herdmember:GetHerd() and ((inst.sg.mem.emerge_time or 0) + (TUNING.CARRAT.EMERGED_TIME_LIMIT + scoutratvalue) / 2.5) < GetTime() then
 				inst.sg:GoToState("submerge")
 			elseif math.random() > 0.55 then
 				inst.sg:GoToState("idle2")
@@ -115,26 +112,21 @@ local states =
 			inst.SoundEmitter:PlaySound(inst.sounds.eat)
 			inst.components.combat:StartAttack()
 			inst.Physics:Stop()
-			inst.AnimState:PlayAnimation("eat_pre")
+			inst.AnimState:PlayAnimation("atk")
 		end,
 
 		timeline =
 		{
-			TimeEvent(3 * FRAMES, function(inst)
+			TimeEvent(7 * FRAMES, function(inst)
 				local buffaction = inst:GetBufferedAction()
 				local target = buffaction ~= nil and buffaction.target or nil
 				
 				if target ~= nil and target:HasTag("trap") then
-					if target.components.finiteuses ~= nil then
-						target.components.finiteuses:Use(1)
-						SpawnPrefab("yellow_leaves_chop").Transform:SetPosition(target.Transform:GetWorldPosition())
-						inst.SoundEmitter:PlaySound("dontstarve/common/trap_rustle")
-					else
-						SpawnPrefab("yellow_leaves_chop").Transform:SetPosition(target.Transform:GetWorldPosition())
-						target.components.trap:Harvest()
-						inst.SoundEmitter:PlaySound("dontstarve/common/trap_rustle")
-						target:Remove()
-					end
+					--target:Remove()
+					SpawnPrefab("yellow_leaves_chop").Transform:SetPosition(target.Transform:GetWorldPosition())
+					target.components.trap:Harvest()
+					inst.SoundEmitter:PlaySound("dontstarve/common/trap_rustle")
+					target:Remove()
 				end
 			
 				inst.sg:RemoveStateTag("attack")
@@ -150,59 +142,6 @@ local states =
 			end),
 		},
 	},
-	
-    State{
-        name = "plant_attack",
-        tags = {"busy"},
-
-		onenter = function(inst)
-			inst.Physics:SetActive(false)
-            inst.sg.statemem.action = inst:GetBufferedAction()
-			inst.Physics:Stop()
-			inst.AnimState:PlayAnimation("eat_pre")
-			inst.AnimState:PushAnimation("eat_pst", false)
-			
-			if inst.plantdig ~= nil then
-				inst.plantdig = inst.plantdig + 1
-			else
-				inst.plantdig = 1
-			end
-			
-			inst:DoTaskInTime(0.5, function(inst)
-				if inst.sg.statemem.action ~= nil and inst.sg.statemem.action.target ~= nil and inst.sg.statemem.action.target.Transform ~= nil and inst.sg.statemem.action.target.Transform:GetWorldPosition() ~= nil then
-					inst.SoundEmitter:PlaySound(inst.sounds.eat)
-					local dirt = SpawnPrefab("shovel_dirt")
-					dirt.Transform:SetScale(0.8, 0.8, 0.8)
-					dirt.Transform:SetPosition(inst.sg.statemem.action.target.Transform:GetWorldPosition())
-						
-					if inst.plantdig ~= nil and inst.plantdig > 4 then
-						inst:PerformBufferedAction()
-					end
-				end
-			end)
-		end,
-		
-		onexit = function(inst)
-			inst.Physics:SetActive(true)
-		end,
-		
-		events=
-		{
-			EventHandler("animqueueover", function(inst)
-                if inst.AnimState:AnimDone() and inst.sg.statemem.action ~= nil and inst.sg.statemem.action.target ~= nil and not GetClosestInstWithTag("scarytoprey", inst, 3) then
-					if inst.plantdig ~= nil and inst.plantdig > 4 then
-						inst.plantdig = 1
-						inst.sg:GoToState("idle")
-					else
-						inst.sg:GoToState("plant_attack")
-					end
-				else
-					inst.plantdig = 1
-					inst.sg:GoToState("idle")
-                end
-			end),
-		}, 		
-	}, 
 	
 	State {
 		name = "submerge",
@@ -226,7 +165,7 @@ local states =
 			inst.AnimState:PlayAnimation("submerge")
 			if inst.components.inventory:NumItems() ~= 0 then
 				local herd = inst.components.herdmember and inst.components.herdmember:GetHerd()
-				if herd ~= nil and herd.components.inventory ~= nil then
+				if herd ~= nil then
 					for k,v in pairs(inst.components.inventory.itemslots) do
 						herd.components.inventory:GiveItem(inst.components.inventory:RemoveItemBySlot(k))
 					end
@@ -274,47 +213,6 @@ local states =
 			inst.Transform:SetSixFaced()
 		end,
 	},
-	
-	State{
-		name = "deposit",
-		tags = {"busy"},
-
-		onenter = function(inst)
-			inst.Physics:Stop()
-			inst.AnimState:PlayAnimation("eat_pre", false)
-			
-			if inst.components.inventory:NumItems() ~= 0 then
-				
-				local herd = inst.components.herdmember and inst.components.herdmember:GetHerd()
-				if herd ~= nil and not herd.components.inventory:IsFull() then
-					if inst._item ~= nil then
-						inst._item:Remove()
-					end
-					
-					for k,v in pairs(inst.components.inventory.itemslots) do
-						herd.components.inventory:GiveItem(inst.components.inventory:RemoveItemBySlot(k))
-					end
-				end
-			end
-		end,
-		
-		timeline=
-		{
-			
-			TimeEvent(3*FRAMES, function(inst)
-				inst:ClearBufferedAction() 
-			end),
-			TimeEvent(3*FRAMES, function(inst)
-				inst.SoundEmitter:PlaySound(inst.sounds.eat)
-			end)
-		},
-		
-		
-		events=
-		{
-			EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
-		}, 		
-	}, 
 
 	State {
 		name = "emerge_fast",
@@ -384,6 +282,7 @@ local states =
 		onenter = function(inst)
 			inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("eat_pre", false)
+			inst.AnimState:PushAnimation("eat_loop", false)
 			inst.AnimState:PushAnimation("eat_pst", false)
 		end,
 		
@@ -395,34 +294,6 @@ local states =
 					inst.components.inventory:DropEverything()
 				end
 
-				inst:PerformBufferedAction() 
-			end),
-			TimeEvent(3*FRAMES, function(inst)
-				inst.SoundEmitter:PlaySound(inst.sounds.eat)
-			end)
-		},
-		
-		
-		events=
-		{
-			EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
-		}, 		
-	}, 
-
-	State{
-		name = "chest_steal",
-		tags = {"busy"},
-
-		onenter = function(inst)
-			inst.Physics:Stop()
-			inst.AnimState:PlayAnimation("eat_pre", false)
-			inst.AnimState:PushAnimation("eat_pst", false)
-		end,
-		
-		timeline=
-		{
-			
-			TimeEvent(3*FRAMES, function(inst)
 				inst:PerformBufferedAction() 
 			end),
 			TimeEvent(3*FRAMES, function(inst)

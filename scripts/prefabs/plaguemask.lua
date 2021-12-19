@@ -5,26 +5,24 @@ local assets=
 	Asset("IMAGE", "images/inventoryimages/plaguemask.tex"),
 }
 
+
+
 local function onequip(inst, owner)
-	if inst.skinname ~= nil then
-		owner.AnimState:OverrideSymbol("swap_hat", "hat_plaguemask_formal", "swap_hat")	
-	else
-		owner.AnimState:OverrideSymbol("swap_hat", "hat_plaguemask", "swap_hat")	
-	end
+    owner.AnimState:OverrideSymbol("swap_hat", "hat_plaguemask", "swap_hat")	
 	
-	owner.AnimState:Show("HAT")
-	owner.AnimState:Hide("HAIR_HAT")
-	owner.AnimState:Show("HAIR_NOHAT")
-	owner.AnimState:Show("HAIR")
-	owner.AnimState:Show("HAIRFRONT")
+		owner.AnimState:Show("HAT")
+		owner.AnimState:Hide("HAIR_HAT")
+		owner.AnimState:Show("HAIR_NOHAT")
+		owner.AnimState:Show("HAIR")
+		owner.AnimState:Show("HAIRFRONT")
 	owner:AddTag("goggles")
-	
 	if not owner:HasTag("scp049") then
-		owner:AddTag("has_gasmask")
-		owner:AddTag("hasplaguemask")
+	owner:AddTag("has_gasmask")
+	owner:AddTag("hasplaguemask")
 	end
-	
 	inst.components.fueled:StartConsuming()
+	
+	
 end
  
 local function onunequip(inst, owner)
@@ -33,10 +31,9 @@ local function onunequip(inst, owner)
     owner.AnimState:Hide("HAT")
 	
 	owner:RemoveTag("goggles")
-	
 	if not owner:HasTag("scp049") then
-		owner:RemoveTag("has_gasmask")
-		owner:RemoveTag("hasplaguemask")
+	owner:RemoveTag("has_gasmask")
+	owner:RemoveTag("hasplaguemask")
 	end
 	
 	inst.components.fueled:StopConsuming()
@@ -89,36 +86,5 @@ local function fn()
 	MakeHauntableLaunch(inst)
     return inst
 end
-
-local function plaguemask_skin()
-	local inst = fn()
-	
-    inst.AnimState:SetBank("hat_plaguemask_formal")
-    inst.AnimState:SetBuild("hat_plaguemask_formal")
-	
-	inst.skinname = "hat_plaguemask_formal"
-	
-	if inst.components.inventoryitem ~= nil then
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/plaguemask_formal.xml"
-	end
-
-	return inst
-end
-
-return Prefab("plaguemask", fn, assets),
-	CreateModPrefabSkin("plaguemask_formal",
-	{
-		assets = {
-			Asset("ANIM", "anim/hat_plaguemask_formal.zip"),
-		},
-		base_prefab = "plaguemask",
-		fn = plaguemask_skin, -- This is our constructor!
-		rarity = "Timeless",
-		reskinable = true,
-		
-		build_name_override = "hat_plaguemask_formal",
-		
-		type = "item",
-		skin_tags = { },
-		release_group = 0,
-	})
+ 
+return Prefab("plaguemask", fn, assets)

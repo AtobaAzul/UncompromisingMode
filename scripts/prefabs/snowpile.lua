@@ -128,11 +128,11 @@ local function workcallback(inst, worker, workleft)
 		worker.components.health:DoDelta(-2)
 	end
 	
-	if inst.components.workable.workleft > 0 and inst.components.workable.workleft < 1 then
+	if inst.components.workable.workleft == 0.5 then
 		inst.components.workable.workleft = 0
-	elseif inst.components.workable.workleft > 1 and inst.components.workable.workleft < 2 then
+	elseif inst.components.workable.workleft == 1.5 then
 		inst.components.workable.workleft = 1
-	elseif inst.components.workable.workleft > 2 and inst.components.workable.workleft < 3 then
+	elseif inst.components.workable.workleft == 2.5 then
 		inst.components.workable.workleft = 2
 	end
 
@@ -368,7 +368,6 @@ local function snowpilefn(Sim)
 	inst.entity:SetPristine()
 	
 	MakeObstaclePhysics(inst, 2.5, 0)
-    RemovePhysicsColliders(inst)
 	
 	inst.Transform:SetScale(1.5, 1.5, 1.5)
 	
@@ -381,6 +380,7 @@ local function snowpilefn(Sim)
         return inst
     end
 	
+    RemovePhysicsColliders(inst)
 	--local xscale = 0 + math.random(0.3,0.5)
 	--local yscale = 0 + math.random(0.1,0.3)
 	

@@ -109,6 +109,7 @@ if TUNING.DSTU.CLOTHINGDEGREDATION then
 ---------------------------ABSOLUTE WATERPROOF---------------------------
 	local WATERPROOFERABSOLUTE = 
 	{
+		"eyebrellahat",
 		"raincoat",
 	}
 
@@ -123,23 +124,7 @@ if TUNING.DSTU.CLOTHINGDEGREDATION then
 		end)
 	end
 ---------------------------ABSOLUTE WATERPROOF---------------------------
-if TUNING.DSTU.EYEBRELLAREWORK == false then
-	local WATERPROOFEREYEBRELLA = 
-	{
-		"eyebrellahat",
-	}
-	
-	for k, v in pairs(WATERPROOFEREYEBRELLA) do
-		AddPrefabPostInit(v, function (inst)
-			inst:AddTag("um_durability")
-			
-			if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
-				inst.components.fueled:SetSections(4)
-				inst.components.fueled:SetSectionCallback(onfuelchangeabsolute)
-			end
-		end)
-	end
-end
+
 
 
 ---------------------------MEDIUM HIGH INSULATION ITEMS---------------------------

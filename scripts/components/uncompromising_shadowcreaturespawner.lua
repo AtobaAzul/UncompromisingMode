@@ -124,9 +124,9 @@ UpdateSpawn = function(player, params)
             if spawndrifter == true and sanity <= TUNING.DSTU.CREEPINGFEAR_SPAWN_THRESH then
                 ent = SpawnPrefab("creepingfear")
             elseif sanity < TUNING.DSTU.DREADEYE_SPAWN_THRESH then
-                if math.random() < 0.2 then
+                if math.random() < 0.33 then
                     ent = SpawnPrefab("crawlinghorror")
-                elseif math.random() < 0.6 then
+                elseif math.random() < 0.5 then
                     ent = SpawnPrefab("dreadeye")
                 else
                     ent = SpawnPrefab("terrorbeak")

@@ -41,11 +41,7 @@ local function Zap(inst)
 					v.components.health:DoDelta(-25, nil, inst.prefab, nil, inst)
 					v.sg:GoToState("electrocute")
 				else
-					if not v:HasTag("automaton") then
-						v.components.combat:GetAttacked(inst, -10)
-					else
-						v.OnLesserCharge(v)
-					end
+					v.components.combat:GetAttacked(inst, -10)
 				end
 			elseif v.components.combat ~= nil then
 				v.components.combat:GetAttacked(inst, -25)

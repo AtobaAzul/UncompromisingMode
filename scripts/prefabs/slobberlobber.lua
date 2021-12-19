@@ -13,23 +13,23 @@ local prefabs =
 
 local easing = require("easing")
 
-local function OnCharged(inst)
-  local fx = SpawnPrefab("dr_warmer_loop")
-  
-  local owner = inst.components.inventoryitem.owner
-  
-  if inst.components.equippable:IsEquipped() and owner ~= nil then
-    fx.entity:SetParent(owner.entity)
-    fx.entity:AddFollower()
-    fx.Follower:FollowSymbol(owner.GUID, "swap_object", 0, -275, 0)
-    fx.Transform:SetScale(1.11, 1.11, 1.11)
-  else
-    fx.entity:SetParent(inst.entity)
+local function charged(inst)
+	local fx = SpawnPrefab("dr_warmer_loop")
+	
+	local owner = inst.components.inventoryitem.owner
+	
+	if inst.components.equippable:IsEquipped() and owner ~= nil then
+		fx.entity:SetParent(owner.entity)
+		fx.entity:AddFollower()
+		fx.Follower:FollowSymbol(owner.GUID, "swap_object", 0, -275, 0)
+		fx.Transform:SetScale(1.11, 1.11, 1.11)
+	else
+		fx.entity:SetParent(inst.entity)
         fx.Transform:SetPosition(0, 2.35, 0)
-    fx.Transform:SetScale(1.11, 1.11, 1.11)
-  end
+		fx.Transform:SetScale(1.11, 1.11, 1.11)
+	end
 end
---[[
+
 local function fuelme(inst)
 	if inst.components.fueled:GetPercent() < 1 then
 		inst.components.fueled:DoDelta(5)
@@ -50,7 +50,7 @@ local function fuelme(inst)
 		end
 	end
 end
-]]
+
 local function LaunchSpit(caster, target)
     local x, y, z = caster.Transform:GetWorldPosition()
 	local targetpos = target:GetPosition()
@@ -86,7 +86,7 @@ local function getspawnlocation(inst, target)
 end
 
 local function createlight(staff, target, pos)
-	if staff.components.rechargeable:IsCharged() then
+	if staff.components.fueled:GetPercent() >= 1 then
 		staff.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/vomit")
 		local spittarget = SpawnPrefab("lavaspit_target")
 		local caster = staff.components.inventoryitem.owner
@@ -111,21 +111,24 @@ local function createlight(staff, target, pos)
 				
 				if vowner ~= nil then
 					if vowner == owner or vowner.components.inventoryitem ~= nil and vowner.components.inventoryitem.owner ~= nil and vowner.components.inventoryitem.owner == owner then
-						v.components.rechargeable:Discharge(13)
+						v.components.fueled:MakeEmpty()
 						
+						if v.task == nil then
+							v.task = v:DoPeriodicTask(0.6, fuelme)
+						end
 					end
 				end
 			end
 		end
 		
-		staff.components.rechargeable:Discharge(13)	--whatever, do what you want with that number
-	
-		else
-	
+		staff.components.fueled:MakeEmpty()
+	else
 		staff.SoundEmitter:PlaySound("dontstarve/common/teleportworm/sick_cough")
 	end
 	
-
+	if staff.task == nil then
+		staff.task = staff:DoPeriodicTask(0.6, fuelme)
+	end
 end
 
 local function light_reticuletargetfn()
@@ -163,13 +166,18 @@ local function onequip(inst, owner)
 		owner.AnimState:Show("ARM_carry")
 		owner.AnimState:Hide("ARM_normal")
 	end
-
+	if inst.task == nil then
+		inst.task = inst:DoPeriodicTask(0.6, fuelme)
+	end
 end
 
 local function onunequip(inst, owner)
     owner.AnimState:Hide("ARM_carry")
     owner.AnimState:Show("ARM_normal")
 	
+	if inst.task == nil then
+		inst.task = inst:DoPeriodicTask(0.6, fuelme)
+	end
 end
 
 local function staff_fn()
@@ -208,6 +216,10 @@ local function staff_fn()
     end
 
     -------
+    inst:AddComponent("finiteuses")
+    inst.components.finiteuses:SetMaxUses(TUNING.TORNADOSTAFF_USES)
+    inst.components.finiteuses:SetUses(TUNING.TORNADOSTAFF_USES)
+    inst.components.finiteuses:SetOnFinished(inst.Remove)
 
     inst:AddComponent("inspectable")
 
@@ -226,10 +238,15 @@ local function staff_fn()
     inst.components.spellcaster.canuseonpoint = true
     inst.components.spellcaster.canuseonpoint_water = false
     inst.components.spellcaster.quickcast = true
-    
-	  inst:AddComponent("rechargeable")
-    inst.components.rechargeable:SetOnChargedFn(OnCharged)
-    
+	
+    inst:AddComponent("fueled")
+    inst.components.fueled:InitializeFuelLevel(100)
+	inst.components.fueled.accepting = false
+	
+	if inst.task == nil then
+		inst.task = inst:DoPeriodicTask(0.6, fuelme)
+	end
+
     MakeHauntableLaunch(inst)
 
     return inst

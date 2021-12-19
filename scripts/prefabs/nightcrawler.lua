@@ -106,10 +106,6 @@ local function fn()
 	inst:WatchWorldState("isday", function() 
 		inst:Remove()
 	end)
-	
-	inst:WatchWorldState("iscaveday", function() 
-		inst:Remove()
-	end)
 
     inst:SetStateGraph("SGnightcrawler")
     inst:SetBrain(brain)

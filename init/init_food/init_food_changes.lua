@@ -193,7 +193,7 @@ if TUNING.DSTU.FARMFOODREDUX == true then
 	for k, v in pairs(PEPPERPOPPER) do
 		AddPrefabPostInit(v, function (inst)
 			if inst ~= nil and inst.components.edible ~= nil then
-				inst.components.edible.healthvalue  = 40
+				inst.components.edible.healthvalue  = 60
 			end
 		end)
 	end

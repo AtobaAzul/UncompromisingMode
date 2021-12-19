@@ -14,10 +14,6 @@ local AVOID_PLAYER_DIST_COMBAT = 6
 local AVOID_PLAYER_DIST_SQ_COMBAT  = AVOID_PLAYER_DIST_COMBAT  * AVOID_PLAYER_DIST_COMBAT 
 local AVOID_PLAYER_STOP_COMBAT  = 10
 
-local MIN_FOLLOW_LEADER = 2
-local MAX_FOLLOW_LEADER = 8
-local TARGET_FOLLOW_LEADER = (MAX_FOLLOW_LEADER + MIN_FOLLOW_LEADER) / 2
-
 local MAX_CHASE_TIME = 10
 local MAX_CHASE_DIST = 30
 
@@ -31,28 +27,11 @@ local Uncompromising_RatBrain = Class(Brain, function(self, inst)
 	Brain._ctor(self, inst)
 end)
 
-local function GetLeader(inst)
-    return inst.components.follower ~= nil and inst.components.follower.leader or nil
-end
-
 local function CanSpringTrap(item)
 	return item:IsOnValidGround()
 		and not item:IsNearPlayer(TOOCLOSE)
 		and item.components.trap
 		and item.components.trap.issprung
-		and item.prefab == "trap"
-end
-
-local function CanDeposit(inst)
-	local target = inst.components.herdmember:GetHerd()
-	
-	return inst.components.inventory:NumItems() ~= 0 and target ~= nil
-		and target:HasTag("ratburrow")
-		and inst:GetDistanceSqToInst(target) <= 100
-		and target.components.inventory ~= nil
-		and not target.components.inventory:IsFull()
-		and BufferedAction(inst, target, ACTIONS.STORE)
-		or nil
 end
 
 local function SpringTrap(inst)
@@ -67,73 +46,55 @@ local function CanSteal(item)
 	return item.components.inventoryitem ~= nil
 		and item.components.inventoryitem.canbepickedup
 		and item:IsOnValidGround()
-		and not inst.components.eater:CanEat(item)
+		and not item.components.edible
 		and not item:IsNearPlayer(TOOCLOSE)
 		and not item:HasTag("raidrat")
 end
 
-local NO_TAGS = { "ratimmune", "FX", "NOCLICK", "DECOR", "INLIMBO", "planted", "trap", "raidrat", "spider", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" }
-
 local function StealAction(inst)
 	local targetpriority = FindEntity(inst, SEE_DIST,
-	function(item)
-		return item.components.inventoryitem ~= nil
-			and item.components.inventoryitem.canbepickedup
-			and item:IsOnValidGround()
-			and not inst.components.eater:CanEat(item)
-			and not item:IsNearPlayer(TOOCLOSE)
-			and not item:HasTag("raidrat") 
-		end,
+	CanSteal,
 	{ "_inventoryitem", "_equippable" },
-	NO_TAGS)
+	{ "trap", "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
 	
 	local targetpriority_secondary = FindEntity(inst, SEE_DIST,
-	
-	function(item)
-		return item.components.inventoryitem ~= nil
-			and item.components.inventoryitem.canbepickedup
-			and item:IsOnValidGround()
-			and not inst.components.eater:CanEat(item)
-			and not item:IsNearPlayer(TOOCLOSE)
-			and not item:HasTag("raidrat") 
-		end,
-	{ "_inventoryitem", "gem" },
-	NO_TAGS)
+	CanSteal,
+	{ "_inventoryitem", "preparedfood" },
+	{ "trap", "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
 	
 	local target = FindEntity(inst, SEE_DIST,
-	
-	function(item)
-		return item.components.inventoryitem ~= nil
-			and item.components.inventoryitem.canbepickedup
-			and item:IsOnValidGround()
-			and not inst.components.eater:CanEat(item)
-			and not item:IsNearPlayer(TOOCLOSE)
-			and not item:HasTag("raidrat") 
-		end,
+	CanSteal,
 	{ "_inventoryitem" },
-	NO_TAGS)
+	{ "trap", "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" })
 			
-	if inst:HasTag("packrat") then
-		if not inst.components.inventory:IsFull() then
-			if targetpriority ~= nil then
-				return targetpriority ~= nil
-					and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
-					or nil
-			elseif targetpriority_secondary ~= nil then
-				return targetpriority_secondary ~= nil
-					and BufferedAction(inst, targetpriority_secondary, ACTIONS.PICKUP)
-					or nil
-			else
-				return target ~= nil
-					and BufferedAction(inst, target, ACTIONS.PICKUP)
-					or nil
-			end
+	if inst:HasTag("packrat") and not inst.components.inventory:IsFull() then
+		if targetpriority ~= nil then
+			return targetpriority ~= nil
+				and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
+				or nil
+		elseif targetpriority_secondary ~= nil then
+			return targetpriority_secondary ~= nil
+				and BufferedAction(inst, targetpriority_secondary, ACTIONS.PICKUP)
+				or nil
+		else
+			return target ~= nil
+				and BufferedAction(inst, target, ACTIONS.PICKUP)
+				or nil
 		end
 	else
-		return targetpriority ~= nil and (inst._item ~= nil and not inst._item:HasTag("_equippable") or inst._item == nil) and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
-			or targetpriority_secondary ~= nil and (inst._item ~= nil and not inst._item:HasTag("_equippable") and not inst._item:HasTag("gem") or inst._item == nil) and BufferedAction(inst, targetpriority_secondary, ACTIONS.PICKUP)
-			or target ~= nil and inst._item == nil and BufferedAction(inst, target, ACTIONS.PICKUP) 
-			or nil
+		if targetpriority ~= nil and inst._item ~= nil and not inst._item:HasTag("_equippable") then
+			return targetpriority ~= nil
+				and BufferedAction(inst, targetpriority, ACTIONS.PICKUP)
+				or nil
+		elseif targetpriority_secondary ~= nil and inst._item ~= nil and not inst._item:HasTag("_equippable") and not inst._item:HasTag("preparedfood") then
+			return targetpriority_secondary ~= nil
+				and BufferedAction(inst, targetpriority_secondary, ACTIONS.PICKUP)
+				or nil
+		elseif not inst.components.inventory:IsFull() then
+			return target ~= nil
+				and BufferedAction(inst, target, ACTIONS.PICKUP)
+				or nil
+		end
 	end
 end
 
@@ -145,47 +106,13 @@ local function CanHammer(item)
 		and item:IsOnValidGround()
 end
 
-local function CanHammer_Equip(item)
-	return item.components.container ~= nil
-		and item.components.workable ~= nil
-		and not item.components.container:IsEmpty()
-		and item.components.container:HasItemWithTag("_equippable", 1)
-		and not item:IsNearPlayer(TOOCLOSE)
-		and item:IsOnValidGround()
-end
-
-local function CanHammer_Gem(item)
-	return item.components.container ~= nil
-		and item.components.workable ~= nil
-		and not item.components.container:IsEmpty()
-		and item.components.container:HasItemWithTag("gem", 1)
-		and not item:IsNearPlayer(TOOCLOSE)
-		and item:IsOnValidGround()
-end
-
 local function EmptyChest(inst)
-
-	local target_primary = FindEntity(inst, SEE_DIST, CanHammer_Equip, { "structure", "_container", "HAMMER_workable" })
-	local target_secondary = FindEntity(inst, SEE_DIST, CanHammer_Gem, { "structure", "_container", "HAMMER_workable" })
-		
-	--local target_fallback = FindEntity(inst, SEE_DIST, CanHammer, { "structure", "_container", "HAMMER_workable" })
-		
-	if (inst._item == nil or inst._item ~= nil and not inst._item:HasTag("_equippable")) and target_primary ~= nil then
-		return target_primary ~= nil
-			and BufferedAction(inst, target_primary, ACTIONS.RAT_STEAL_EQUIPPABLE)
-			or nil
-	elseif (inst._item == nil or inst._item ~= nil and not inst._item:HasTag("_equippable") and not inst._item:HasTag("gem")) and target_secondary ~= nil then
-		return target_secondary ~= nil
-			and BufferedAction(inst, target_secondary, ACTIONS.RAT_STEAL_GEM)
+	if not inst.components.inventory:IsFull() then
+		local target = FindEntity(inst, SEE_DIST, CanHammer, { "structure", "_container", "HAMMER_workable" })
+		return target ~= nil
+			and BufferedAction(inst, target, ACTIONS.HAMMER)
 			or nil
 	end
-	
-	--[[elseif not inst.components.inventory:IsFull() then
-		return target ~= nil
-			and BufferedAction(inst, target, ACTIONS.RAT_STEAL)
-			or nil]]
-	
-	return nil
 end
 
 local function edible(inst, item)
@@ -193,13 +120,6 @@ local function edible(inst, item)
 			not (item.components.inventoryitem and item.components.inventoryitem:IsHeld()) and
 			item:IsOnPassablePoint() and
 			item:GetCurrentPlatform() == inst:GetCurrentPlatform()
-end
-
-local function GetFollowPos(inst)
-    if inst.components.knownlocations then
-        return inst.components.knownlocations:GetLocation("herd") or inst:GetPosition()
-    end
-    return inst:GetPosition()
 end
 --[[
 local function eat_food_action(inst)
@@ -260,28 +180,11 @@ local function eat_food_action(inst)
 	end
 end]]
 
-local function eat_poison_action(inst)
-	if inst:HasTag("ratpoisoned") then
-		return
-	end
-
-    local target = FindEntity(
-        inst,
-        SEE_FOOD_DIST,
-        function(item)
-            return item.prefab == "ratpoison"
-				and item:IsOnPassablePoint(true)
-				and not GetClosestInstWithTag("scarytoprey", item, TOOCLOSE)-- ~= nil
-        end,
-        nil,
-        NO_TAGS
-    )
-    return target ~= nil and BufferedAction(inst, target, ACTIONS.EAT) or nil
-end
+local NO_TAGS = { "FX", "NOCLICK", "DECOR", "INLIMBO", "planted" }
 
 local function eat_food_action(inst)
 	if inst.sg:HasStateTag("busy") or inst:GetTimeAlive() < 5 or
-        (inst.components.eater:TimeSinceLastEating() ~= nil and inst.components.eater:TimeSinceLastEating() < 10) then
+        (inst.components.eater:TimeSinceLastEating() ~= nil and inst.components.eater:TimeSinceLastEating() < 5) then
         return
     elseif inst.components.inventory ~= nil and inst.components.eater ~= nil then
         local target = inst.components.inventory:FindItem(function(item)
@@ -296,10 +199,8 @@ local function eat_food_action(inst)
         inst,
         SEE_FOOD_DIST,
         function(item)
-            return not (item.prefab == "mandrake" or item.prefab == "cookedmandrake")
-				and item:IsOnPassablePoint(true)
-                and inst.components.eater:CanEat(item) 
-				and not GetClosestInstWithTag("scarytoprey", item, TOOCLOSE)-- ~= nil
+            return item:IsOnPassablePoint(true)
+                and inst.components.eater:CanEat(item) and not GetClosestInstWithTag("scarytoprey", item, TOOCLOSE)-- ~= nil
         end,
         nil,
         NO_TAGS,
@@ -308,38 +209,15 @@ local function eat_food_action(inst)
     return target ~= nil and BufferedAction(inst, target, ACTIONS.EAT) or nil
 end
 
-local FARMPLANT_MUSTTAGS = { "farmplantstress" }
-local FARMPLANT_NOTAGS = { "farm_plant_killjoy" }
-
-local function ShouldTargetPlant(inst, plant)
-	local target = FindEntity(inst, SEE_DIST, function(plant)
-        if (plant.components.growable == nil or plant.components.growable:GetCurrentStageData().tendable) and plant.components.workable then
-            return plant.components.farmplantstress
-				and not GetClosestInstWithTag("scarytoprey", plant, TOOCLOSE)-- ~= nil
-        end
-    end, FARMPLANT_MUSTTAGS, FARMPLANT_NOTAGS)
-
-    return target ~= nil and BufferedAction(inst, target, ACTIONS.DIG) or nil
-end
-
 function Uncompromising_RatBrain:OnStart()
-	local neutralbehaviour = PriorityNode(
-	{
-		WhileNode(function() return not self.inst.sg:HasStateTag("jumping") and self.inst.prefab ~= "uncompromising_caverat" end, "NotJumpingBehaviour",
-                PriorityNode({
-		DoAction(self.inst, eat_poison_action, "Eat Poison", true),
-		DoAction(self.inst, function() return CanDeposit(self.inst) end, "depositloot", true ),
-		DoAction(self.inst, function() return SpringTrap(self.inst) end, "checktrap", true ),
-		}, .25))
-	}, 0.25)
 	local stealnode = PriorityNode(
 	{
 		WhileNode(function() return not self.inst.sg:HasStateTag("jumping") and self.inst.prefab ~= "uncompromising_caverat" end, "NotJumpingBehaviour",
                 PriorityNode({
+		DoAction(self.inst, function() return SpringTrap(self.inst) end, "checktrap", true ),
 		DoAction(self.inst, function() return StealAction(self.inst) end, "steal", true ),
-		DoAction(self.inst, function() return EmptyChest(self.inst) end, "emptychest", true),
 		DoAction(self.inst, eat_food_action, "Eat Food", true),
-		DoAction(self.inst, function() return ShouldTargetPlant(self.inst) end, "attackplant", true)
+		DoAction(self.inst, function() return EmptyChest(self.inst) end, "emptychest", true )
 		}, .25))
 	}, 0.25)
 	local root = PriorityNode(
@@ -349,29 +227,17 @@ function Uncompromising_RatBrain:OnStart()
 		WhileNode( function()
 			return self.inst.components.hauntable and self.inst.components.hauntable.panic
 		end, "PanicHaunted", Panic(self.inst)),
+		MinPeriod(self.inst, 2, true,
+            stealnode),
 		WhileNode( function()
 			return self.inst.components.health.takingfiredamage or self.inst.components.burnable:IsBurning()
 		end, "OnFire", Panic(self.inst)),
-		RunAway(self.inst, "ghost", 8, 12),
-		RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
-		
 		WhileNode( function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
 			ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST)),
-			
-		Follow(self.inst, GetLeader, MIN_FOLLOW_LEADER, TARGET_FOLLOW_LEADER, MAX_FOLLOW_LEADER),
-            FaceEntity(self.inst, GetLeader, GetLeader),
-			
-		MinPeriod(self.inst, 2, true,
-            neutralbehaviour),
-			
-		--Leash(self.inst, self.inst.components.knownlocations:GetLocation("herd"), 40, 3),
-		
-		MinPeriod(self.inst, 2, true,
-            stealnode),
-			
 		WhileNode( function() return self.inst.components.combat.target and self.inst.components.combat:InCooldown() end, "Dodge",
 			RunAway(self.inst, function() return self.inst.components.combat.target end, AVOID_PLAYER_DIST_COMBAT, AVOID_PLAYER_STOP_COMBAT)),
-		
+		RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
+
 		DoAction(self.inst, eat_food_action),
 		
 		Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("herd") end, MAX_WANDER_DIST),
