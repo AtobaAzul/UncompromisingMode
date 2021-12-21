@@ -43,6 +43,10 @@ local function fn()
 	
     inst:AddComponent("edible")
     inst.components.edible.foodtype = FOODTYPE.HORRIBLE
+    inst.components.edible.healthvalue = 0
+    inst.components.edible.hungervalue = 5
+	
+	
 	
     MakeHauntableLaunchAndPerish(inst)
 

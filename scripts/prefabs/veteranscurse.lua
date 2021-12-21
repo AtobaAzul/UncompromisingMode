@@ -117,7 +117,7 @@ local function oneat(inst, data)
 		if wxsanityvalue > 3 then
 			inst.components.debuffable:AddDebuff("sanityregenbuff_vetcurse_"..data.food.prefab, "sanityregenbuff_vetcurse", {duration = ((wxsanityvalue + foodaffinitysanitybuff) * 0.1)})
 		else
-			if wxsanityvalue < 0 then
+			if wxsanityvalue <= 0 then
 				if not hasaffinity and not strongstomach then
 					inst.components.sanity:DoDelta(wxsanityvalue)
 				elseif hasaffinity then
@@ -151,7 +151,7 @@ local function oneat(inst, data)
 			inst.components.debuffable:AddDebuff("sanityregenbuff_vetcurse_"..data.food.prefab, "sanityregenbuff_vetcurse", {duration = ((sanityvalue + foodaffinitysanitybuff) * 0.1)})
 		else
 			print("sanity below 3")
-			if sanityvalue < 0 then
+			if sanityvalue <= 0 then
 				if not hasaffinity and not strongstomach then
 					print("sanity damage")
 					inst.components.sanity:DoDelta(sanityvalue)

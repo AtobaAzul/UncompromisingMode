@@ -171,6 +171,8 @@ local function fn()
 	
     inst:AddComponent("edible")
     inst.components.edible.foodtype = "HORRIBLE"
+    inst.components.edible.healthvalue = 0
+    inst.components.edible.hungervalue = 1
 	
     inst:AddComponent("perishable")
     inst.components.perishable:SetPerishTime(TUNING.PERISH_TWO_DAY)

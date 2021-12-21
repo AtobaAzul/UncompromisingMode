@@ -20,10 +20,9 @@ env.AddPrefabPostInit("hambat", function(inst)
 	end
 	
 	if inst.components.weapon ~= nil then
-		local _OldOnAttack = inst.components.equippable.onattack
+		local _OldOnAttack = inst.components.weapon.onattack
 		
-		inst.components.equippable.onunequipfn = function(inst)
-			
+		inst.components.weapon.onattack = function(inst)
 			if _OldOnAttack ~= nil then
 			   _OldOnAttack(inst)
 			end
