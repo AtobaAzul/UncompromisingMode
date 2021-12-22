@@ -352,11 +352,12 @@ function Uncompromising_RatBrain:OnStart()
 		WhileNode( function()
 			return self.inst.components.health.takingfiredamage or self.inst.components.burnable:IsBurning()
 		end, "OnFire", Panic(self.inst)),
-		RunAway(self.inst, "ghost", 8, 12),
-		RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
 		
 		WhileNode( function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
 			ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST)),
+			
+		RunAway(self.inst, "ghost", 8, 12),
+		RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
 			
 		Follow(self.inst, GetLeader, MIN_FOLLOW_LEADER, TARGET_FOLLOW_LEADER, MAX_FOLLOW_LEADER),
             FaceEntity(self.inst, GetLeader, GetLeader),
