@@ -83,6 +83,7 @@ AddRecipe("deserthat", {Ingredient("goggleshat", 1), Ingredient("pigskin", 1)}, 
 ]]
 AddRecipe("ghostlyelixir_fastregen", {Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 50), Ingredient("ghostflower", 4)}, CUSTOM_RECIPETABS.ELIXIRBREWING, TECH.NONE, nil, nil, nil, nil, "elixirbrewer")
 
+AddRecipe("pocketwatch_revive", {Ingredient("pocketwatch_parts", 2), Ingredient("livinglog", 2), Ingredient("boneshard", 4)}, CUSTOM_RECIPETABS.CLOCKMAKER, TECH.MAGIC_TWO)
 
 AllRecipes["reviver"].ingredients = {Ingredient("skeletonmeat", 1, "images/inventoryimages/skeletonmeat.xml"), Ingredient("spidergland", 1)}
 --AllRecipes["ghostlyelixir_fastregen"].ingredients = {Ingredient("spidergland", 2), Ingredient("ghostflower", 4)}
@@ -190,6 +191,10 @@ GLOBAL.AllRecipes["driftwoodfishingrod"].sortkey = GLOBAL.AllRecipes["fishingrod
 
 AddRecipe("hat_ratmask", {Ingredient("rope",2), Ingredient("rat_tail", 3, "images/inventoryimages/rat_tail.xml"), Ingredient("sewing_kit", 1)}, GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil,"images/inventoryimages/hat_ratmask.xml", "hat_ratmask.tex")
 GLOBAL.AllRecipes["hat_ratmask"].sortkey = GLOBAL.AllRecipes["plaguemask"].sortkey + .1
+
+if TUNING.DSTU.WANDA_NERF == true then
+	AddRecipe("pocketwatch_revive",		{Ingredient("pocketwatch_parts", 2), Ingredient("livinglog", 2), Ingredient("boneshard", 4)},		CUSTOM_RECIPETABS.CLOCKMAKER, TECH.MAGIC_TWO)
+end
 
 --[[AddRecipe("floral_bandage", {Ingredient("bandage", 1), Ingredient("cactus_flower", 2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, true, nil, nil, "images/inventoryimages/floral_bandage.xml", "floral_bandage.tex" )
 GLOBAL.AllRecipes["floral_bandage"].sortkey = GLOBAL.AllRecipes["bandage"].sortkey + .1]]
