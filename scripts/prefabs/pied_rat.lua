@@ -95,7 +95,7 @@ local function fn()
 
     inst.AnimState:SetBank("pied_piper")
     inst.AnimState:SetBuild("pied_piper")
-    inst.AnimState:PlayAnimation("idle")
+    inst.AnimState:PlayAnimation("idle_loop")
 
 	inst:AddTag("raidrat")
 	inst:AddTag("animal")
@@ -125,8 +125,8 @@ local function fn()
 	inst.components.lootdropper:SetChanceLootTable('pied_rat')
 
     ---------------------        
-    MakeMediumBurnableCharacter(inst, "body")
-    MakeMediumFreezableCharacter(inst, "body")
+    MakeMediumBurnableCharacter(inst, "fire")
+    MakeMediumFreezableCharacter(inst, "fire")
     inst.components.burnable.flammability = TUNING.SPIDER_FLAMMABILITY
     ---------------------       
 
@@ -137,7 +137,7 @@ local function fn()
 	inst.components.combat:SetDefaultDamage(1)
 	inst.components.combat:SetAttackPeriod(5)
 	inst.components.combat:SetRange(12)
-	inst.components.combat.hiteffectsymbol = "body"
+	inst.components.combat.hiteffectsymbol = "fire"
 	inst.components.combat:SetRetargetFunction(1, rattargetfn)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
 	

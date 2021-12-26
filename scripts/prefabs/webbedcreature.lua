@@ -1,11 +1,11 @@
 local function SetStage(inst, stage)
 	if stage <= 3 then
 
-		
+
 		inst.AnimState:PlayAnimation(inst.anims.init)
 		inst.AnimState:PushAnimation(inst.anims.idle, true)
 		inst:DoTaskInTime(3,function(inst) inst.AnimState:SetTime(math.random() * 2) end)
-	end  
+	end
 end
 
 local function SetSmall(inst)
@@ -14,17 +14,17 @@ local function SetSmall(inst)
 	end
 	if inst:HasTag("largecocoon") then
 	inst:RemoveTag("largecocoon")
-	end	
+	end
 	inst:AddTag("smallcocoon")
-	
+
 	inst.AnimState:SetBank("wackycocoonsmall")
 	inst.AnimState:SetBuild("wackycocoonsmall")
 	inst.DynamicShadow:SetSize(3.5, 2.5)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
     inst.anims = {
-    	hit="hit_small", 
-    	idle="idle_small", 
+    	hit="hit_small",
+    	idle="idle_small",
     	kill="break_small",
 		init = "appear_small",
     }
@@ -38,17 +38,17 @@ local function SetMedium(inst)
 	end
 	if inst:HasTag("largecocoon") then
 	inst:RemoveTag("largecocoon")
-	end	
+	end
 	inst:AddTag("mediumcocoon")
-	
+
 	inst.DynamicShadow:SetSize(4, 3.5)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
     inst.anims = {
-    	hit="hit_medium", 
-    	idle="idle_medium", 
+    	hit="hit_medium",
+    	idle="idle_medium",
     	kill="break_medium",
 		init = "appear_medium",
     }
@@ -61,9 +61,9 @@ local function SetLarge(inst)
 	end
 	if inst:HasTag("mediumcocoon") then
 	inst:RemoveTag("mediumcocoon")
-	end	
+	end
 	inst:AddTag("largecocoon")
-	
+
 	inst.DynamicShadow:SetSize(5, 4)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
@@ -72,8 +72,8 @@ local function SetLarge(inst)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
 	inst.components.lootdropper:AddChanceLoot("silk",    1.00)
     inst.anims = {
-    	hit="hit_large", 
-    	idle="idle_large", 
+    	hit="hit_large",
+    	idle="idle_large",
     	kill="break_large",
 		init = "appear_large",
     }
@@ -203,7 +203,7 @@ local function OnKilled(inst)
 		inst.components.lootdropper:AddChanceLoot("meat",    0.5)
 		inst.components.lootdropper:AddChanceLoot("lightninggoathorn",    1.00)
 		inst.components.lootdropper:AddChanceLoot("lightninggoathorn",    1.00)
-		end	
+		end
 		if inst.size == 16 then
 		creature = "snapdragon"
 		inst.components.lootdropper:AddChanceLoot("plantmeat",    1.00)
@@ -213,18 +213,26 @@ local function OnKilled(inst)
 		inst.components.lootdropper:AddChanceLoot("livinglog",    1.00)
 		inst.components.lootdropper:AddChanceLoot("livinglog",    0.50)
 		inst.components.lootdropper:AddChanceLoot("whisperpod",    1.0)
-		end	
+		end
 		if inst.size == 17 then
 		creature = "catcoon"
 		inst.components.lootdropper:AddChanceLoot("meat",    1.00)
 		inst.components.lootdropper:AddChanceLoot("coontail",    1.00)
 		inst.components.lootdropper:AddChanceLoot("coontail",    1.00)
-		end			
+		end
+		if inst.size == 18 then
+		creature  = "eyeofterror_mini"
+		inst.components.lootdropper:AddChanceLoot("milkywhites",		1.00)
+		inst.components.lootdropper:AddChanceLoot("milkywhites",		1.00)
+		inst.components.lootdropper:AddChanceLoot("milkywhites",		0.50)
+		inst.components.lootdropper:AddChanceLoot("monstermeat", 	1.00)
+		inst.components.lootdropper:AddChanceLoot("monstermeat", 	5.00)
+		end
 		inst.components.lootdropper:DropLoot()
 	--[[if creature ~= nil and not creature == "spiderqueen" then
 		inst.components.lootdropper:SetChanceLootTable('webbedcreature_'..creature)
 	end]]
-	
+
     local deadcreature = SpawnPrefab(creature)
 	deadcreature.Transform:SetPosition(x, y, z)
 	if creature == "spiderqueen" then
@@ -255,14 +263,14 @@ local function onsave(inst,data)
 if inst.size ~= nil then
 data.size = inst.size
 else
-data.size = math.random(1,17)
+data.size = math.random(1,18)
 end
 end
 local function onload(inst,data)
 if data and data.size ~= nil then
 inst.size = data.size
 else
-inst.size = math.random(1,17)
+inst.size = math.random(1, 18)
 end
 end
 
@@ -271,67 +279,67 @@ local function SetSize(inst)
 		SetMedium(inst)
 		inst.components.named:SetName("Fuzzy Cocoon")
 	end
-	
+
 	if inst.size == 2 then   --Beefalo
 		SetLarge(inst)
 		inst.components.named:SetName("Hairy Cocoon")
 	end
-	
+
 	if inst.size == 3 then   --Mossling
 		SetMedium(inst)
 		inst.components.named:SetName("Feathery Cocoon")
 	end
-	
+
 	if inst.size == 4 then   --Pigman
 		SetSmall(inst)
 		inst.components.named:SetName("Leathery Cocoon")
 	end
-	
+
 	if inst.size == 5 then   --Bunnyman
 		SetSmall(inst)
 		inst.components.named:SetName("Fuzzy Cocoon")
 	end
-	
+
 	if inst.size == 6 then   --koalefant
 		SetLarge(inst)
 		inst.components.named:SetName("Leathery Cocoon")
 	end
-	
+
 	if inst.size == 7 then   --grass gator
 		SetLarge(inst)
 		inst.components.named:SetName("Leafy Cocoon")
 	end
-	
+
 	if inst.size == 8 then   --Tallbird
 		SetMedium(inst)
 		inst.components.named:SetName("Feathery Cocoon")
 	end
-	
+
 	if inst.size == 9 then   --SpiderQueen
 		SetLarge(inst)
 		inst.components.named:SetName("Grotesque Cocoon")
 	end
-	
+
 	if inst.size == 10 then   --Varg
 		SetLarge(inst)
 		inst.components.named:SetName("Hairy Cocoon")
 	end
-	
+
 	if inst.size == 11 then   --Krampus
 		SetMedium(inst)
 		inst.components.named:SetName("Grotesque Cocoon")
 	end
-	
+
 	if inst.size == 12 then   --Mactusk
 		SetMedium(inst)
 		inst.components.named:SetName("Leathery Cocoon")
 	end
-	
+
 	if inst.size == 13 then   --Clockwork Knight
 		SetSmall(inst)
 		inst.components.named:SetName("Hardened Cocoon")
 	end
-	
+
 	if inst.size == 14 then   --Ewecus
 		SetLarge(inst)
 		inst.components.named:SetName("Hardened Cocoon")
@@ -348,6 +356,10 @@ local function SetSize(inst)
 		SetSmall(inst)
 		inst.components.named:SetName("Fuzzy Cocoon")
 	end
+	if inst.size == 18 then   --Sussy peeper
+		SetSmall(inst)
+		inst.components.named:SetName("Grotesque Cocoon")
+	end
 end
 
 local function Regen(inst, attacker)
@@ -361,14 +373,14 @@ end
 	if widowweb ~= nil then
 	widowweb.SpawnInvestigators(widowweb,attacker)
 	end
-	
+
         inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_hit")
         inst.AnimState:PlayAnimation(inst.anims.hit)
         inst.AnimState:PushAnimation(inst.anims.idle)
 		if attacker:HasTag("widowsgrasp") and not (attacker.components.rider ~= nil and attacker.components.rider:IsRiding()) then
 			--inst.components.health:Kill()
 			elseif attacker:HasTag("player") and not attacker:HasTag("mime") and not attacker:HasTag("widowsgrasp") then
-			attacker.components.talker:Say(GetString(attacker.prefab, "WEBBEDCREATURE"))  
+			attacker.components.talker:Say(GetString(attacker.prefab, "WEBBEDCREATURE"))
 		end
 	end
 end
@@ -397,9 +409,9 @@ local function fn()
 		inst:AddTag("antlion_sinkhole_blocker")
 		inst:AddTag("queensstuff")
 		inst:AddTag("companion")
-		inst:AddTag("flying") --Atoba: Hope this doesn't cause any unintended side effects. 
+		inst:AddTag("flying") --Atoba: Hope this doesn't cause any unintended side effects.
 		inst:AddTag("ignorewalkableplatformdrowning")
-		
+
 		inst.entity:SetPristine()
 
 		if not TheWorld.ismastersim then
@@ -411,13 +423,13 @@ local function fn()
 		inst.components.health:SetMaxHealth(1000000)
 		inst.components.health.absorb = 1
 		--inst.components.health.invincible = true
-		inst:AddComponent("combat")       
+		inst:AddComponent("combat")
         inst.components.combat:SetOnHit(Regen)
 		inst:ListenForEvent("death", OnKilled)
-		
+
 		inst:AddComponent("lootdropper")
 		inst:AddComponent("named")
-		
+
 		MakeLargePropagator(inst)
 
 		inst:AddComponent("inspectable")
@@ -427,7 +439,7 @@ local function fn()
 		inst.OnLoad = onload
 		inst.OnEntitySleep = OnEntitySleep
 		inst.OnEntityWake = OnEntityWake
-		inst.size = math.random(1,17)
+		inst.size = math.random(1,18)
 		return inst
 end
 
@@ -457,7 +469,7 @@ local function on_anim_over(inst)
     end
 	end
 
-	
+
 end
 
 local function on_anim_over(inst)
@@ -498,7 +510,7 @@ local function fndecor()
 		inst.OnLoad = decorload
 		return inst
 end
-	
+
 
 return Prefab("webbedcreature", fn),
 Prefab("widowdecor", fndecor)
