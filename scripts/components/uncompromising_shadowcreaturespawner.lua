@@ -155,9 +155,11 @@ UpdateSpawn = function(player, params)
             end
         end
         for i = #toremove, params.targetpop + 1, -1 do
-            local ent = table.remove(toremove, math.random(i))
-            ent.persists = false
-            ent.wantstodespawn = true
+			if i ~= nil then
+				local ent = table.remove(toremove, math.random(i))
+				ent.persists = false
+				ent.wantstodespawn = true
+			end
         end
 
         --Don't reschedule spawning

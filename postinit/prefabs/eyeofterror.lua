@@ -28,6 +28,15 @@ local function UpdateCooldown1(inst)
 	
 	if bosscount ~= nil and #bosscount > 0 then
 		inst:PushEvent("leave")
+		inst:PushEvent("turnoff_terrarium")
+		
+		local terrarium = TheSim:FindFirstEntityWithTag("terrarium")
+		
+		if terrarium ~= nil then
+			terrarium.components.activatable.inactive = TUNING.SPAWN_EYEOFTERROR
+			terrarium.AnimState:Show("terrarium_tree")
+			terrarium.components.inventoryitem:ChangeImageName(nil) -- back to default
+		end
 	end
 end
 
@@ -87,6 +96,15 @@ local function UpdateCooldown2(inst)
 	
 	if bosscount ~= nil and #bosscount > 0 then
 		inst:PushEvent("leave")
+		inst:PushEvent("turnoff_terrarium")
+		
+		local terrarium = TheSim:FindFirstEntityWithTag("terrarium")
+		
+		if terrarium ~= nil then
+			terrarium.components.activatable.inactive = TUNING.SPAWN_EYEOFTERROR
+			terrarium.AnimState:Show("terrarium_tree")
+			terrarium.components.inventoryitem:ChangeImageName(nil) -- back to default
+		end
 	end
 end
 
@@ -110,6 +128,15 @@ local function UpdateCooldown(inst)
 	
 	if bosscount ~= nil and #bosscount > 0 then
 		inst:PushEvent("leave")
+		inst:PushEvent("turnoff_terrarium")
+		
+		local terrarium = TheSim:FindFirstEntityWithTag("terrarium")
+		
+		if terrarium ~= nil then
+			terrarium.components.activatable.inactive = TUNING.SPAWN_EYEOFTERROR
+			terrarium.AnimState:Show("terrarium_tree")
+			terrarium.components.inventoryitem:ChangeImageName(nil) -- back to default
+		end
 	end
 end
 
