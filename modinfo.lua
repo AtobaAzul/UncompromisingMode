@@ -363,6 +363,13 @@ configuration_options =
 	Header("Misc Monsters"),
 	BinaryConfig("desertscorpions", "Scorpions", "Scorpions plague the desert lands. They will spawn from desert turf within the desert during the day.", true),
 	BinaryConfig("pinelings", "Pinelings", "Stumps will become pinelings if awoken by a treeguard, or can happen naturally to existing old stumps.", true),
+	Header("Standard Creatures"),
+	
+	BinaryConfig("angrypenguins", "Territorial Penguins","Penguins will aggresively defend their land.", true), 
+	BinaryConfig("harder_pigs", "Harder Pigs","Pigs have  a new counter and charge attack.", true),
+	BinaryConfig("harder_walrus","Harder MacTusk","Mactusk has a counter attack and can throw traps.", true),
+	BinaryConfig("harder_beefalo","Harder Beefalo","Beefalo ocasionally charge after a telegraph.", true),
+	
 	SkipSpace(),
 	Header("--------------------"),
 	
@@ -378,6 +385,7 @@ configuration_options =
 	Header(""),
 	
 	Header("Harder Bosses"),
+	BinaryConfig("harder_spiderqueen","Harder Spider Queen", "Spider Queen ocasionally spits web balls that trap players.", true),
 	BinaryConfig("harder_deerclops", "Deerclops Mutations", "Three different harder versions of deerclops spawn instead of the vanilla variant.", true),
 	BinaryConfig("harder_moose", "Harder Goose", "Goose fight has more mechanics and is harder. This also disables Moose AOE. Does not apply to Mother Goose.", true),
 	BinaryConfig("harder_bearger", "Harder Bearger", "Enabling this option makes bearger's fight contain more attacks, and will make bearger more actively seek out you.", true),
@@ -392,7 +400,11 @@ configuration_options =
 	BinaryConfig("harder_beequeen", "Harder Bee Queen", "Bee Queen now has AOE attached to her main attack.", true),
 	BinaryConfig("rework_minotaur", "Ancient Guardian Rework", "The Ancient Guardian's fight is reworked, includes more attacks and a stunning mechanic.", true),
 	Header(""),
-	
+
+
+
+
+
 	Header("Boss Quality of Life"),
     {
 		name = "toadstool health",
