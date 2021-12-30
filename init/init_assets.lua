@@ -722,7 +722,18 @@ Assets = {
 	Asset( "IMAGE", "images/map_icons/uncompromising_ratburrow.tex"),
 	Asset( "ATLAS", "images/map_icons/uncompromising_ratburrow.xml"),
 	--Map Icons End--
+	
+	--skins--
+	Asset("IMAGE", "images/inventoryimages/skin_ancient_amulet_demoneye.tex"),
+	Asset("ATLAS", "images/inventoryimages/skin_ancient_amulet_demoneye.xml"),
 
+--squeakyclean--
+    Asset("IMAGE", "images/inventoryimages/driftwoodfishingrod.tex"),
+	Asset("ATLAS", "images/inventoryimages/driftwoodfishingrod.xml"),
+	 Asset("IMAGE", "images/inventoryimages/ancient_soul_amulet.tex"),
+	Asset("ATLAS", "images/inventoryimages/ancient_soul_amulet.xml"),
+	Asset("ANIM", "anim/swap_driftwood_fishingrod.zip"),
+	Asset("ANIM", "anim/driftwood_rod_ground.zip"),
 	Asset("ANIM", "anim/oculet.zip"),
 	Asset("ANIM", "anim/oculet_ground.zip"),
 	Asset("IMAGE", "images/inventoryimages/oculet.tex"),
