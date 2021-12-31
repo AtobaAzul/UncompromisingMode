@@ -658,8 +658,8 @@ State{
             inst.AnimState:Hide("swap_arm_carry")
             inst.AnimState:PlayAnimation("boat_death")
 
-            local death_fx = SpawnPrefab("rne_grabbyshadows")
-            death_fx.Transform:SetPosition(inst:GetPosition():Get())
+            --local death_fx = SpawnPrefab("rne_grabbyshadows")
+            --death_fx.Transform:SetPosition(inst:GetPosition():Get())
 			
 			if inst.components.rider:IsRiding() then
                 inst.sg:AddStateTag("dismounting")
