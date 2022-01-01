@@ -73,7 +73,7 @@ local function fn()
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/driftwoodfishingrod.tex"
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/driftwoodfishingrod.xml"
 
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)
