@@ -211,7 +211,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.RAT_WHIP = "That's not something I want to keep on me."
 	DESCRIBE.KLAUS_AMULET = "The chains are comin' off now!"
 	DESCRIBE.CRABCLAW = "Use every part of the animal, I suppose." --Generic line for now, this is unimplemented
-	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+	DESCRIBE.HAT_RATMASK = "Did a real fine job, eh Lucy?"
 
 	DESCRIBE.ORANGE_VOMIT = "Hoo-wee..."
 	DESCRIBE.GREEN_VOMIT = "Hoo-wee..."
@@ -308,9 +308,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
 	DESCRIBE.BOOK_RAIN = "I'd rather be chopping lumber than reading this."
 	DESCRIBE.FLORAL_BANDAGE = "I'll keep this for dire circumstances."
-	DESCRIBE.DORMANT_RAIN_HORN = "This is pretty nice, ain't it lucy?"
+	DESCRIBE.DORMANT_RAIN_HORN = "This is pretty nice, ain't it, Lucy?"
 	DESCRIBE.RAIN_HORN = "How did that old crab do this?"
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+
+	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "Don't want no vermin carrying away our kit.",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
@@ -319,3 +320,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
     ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
         LEVEL_1 = "They've been very busy out there in the woods, eh?",
     }
+
+	DESCRIBE.PIED_RAT = "He's leading all those dang varmints!"
+	DESCRIBE.PIED_PIPER_FLUTE = "Those varmints will have to listen to me!"
+	DESCRIBE.UNCOMPROMISING_PACKRAT = "Darn varmints!"

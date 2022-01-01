@@ -52,7 +52,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_SNEEZE = "Achoo!!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "My sinuses are burning."
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Sniff! I feel better now!"
-	ANNOUNCE.ANNOUNCE_SNOWSTORM = "I think a storms coming. I hate winter."
+	ANNOUNCE.ANNOUNCE_SNOWSTORM = "I think a storm is coming. I hate winter."
 	ANNOUNCE.ANNOUNCE_FIREFALL = {
 		"YES! BURN!",
 		"I WANT TO SET THE WORLD ON FIRE!",
@@ -226,7 +226,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.RAT_WHIP = "It's so tiring to swing this around..."
 	DESCRIBE.KLAUS_AMULET = "Guh, it's so heavy! I'm supposed to wear this?!"
 	DESCRIBE.CRABCLAW = "Haha. Whack." --Generic line for now, this is unimplemented
-	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+	DESCRIBE.HAT_RATMASK = "Ewww, I can smell all of them!" --Generic line for now, this is unimplemented
 
 	DESCRIBE.ORANGE_VOMIT = "Ewwwww!"
 	DESCRIBE.GREEN_VOMIT = "Ewwwww!"
@@ -324,12 +324,17 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	
 	DESCRIBE.DORMANT_RAIN_HORN = "It doesn't burn, I'm not interested."
 	DESCRIBE.RAIN_HORN = "I want a refund."
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
-        LEVEL_1 = "There's a lot of trash on the ground.",
+
+	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+        LEVEL_1 = "Our base is too messy, can we burn some of it?",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
-        LEVEL_1 = "The smell of foodstuffs fills the air.",
+        LEVEL_1 = "Our food smells awful!",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
         LEVEL_1 = "There's a ton of disguising rats out there.",
     }
+
+	DESCRIBE.PIED_RAT = "Bleh! He reeks!"
+	DESCRIBE.PIED_PIPER_FLUTE = "I'm holding this over the fire first."
+	DESCRIBE.UNCOMPROMISING_PACKRAT = "Keep Bernie out of that backpack!"

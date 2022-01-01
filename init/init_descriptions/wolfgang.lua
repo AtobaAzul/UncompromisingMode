@@ -211,7 +211,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.RAT_WHIP = "Whap!"
 	DESCRIBE.KLAUS_AMULET = "Wolfgang mightiest man in world!"
 	DESCRIBE.CRABCLAW = "Little holes for little rocks!" --Generic line for now, this is unimplemented
-	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+	DESCRIBE.HAT_RATMASK = "Does Wolfgang have to find rats alone?" 
 
 	DESCRIBE.ORANGE_VOMIT = "Is face poop."
 	DESCRIBE.GREEN_VOMIT = "Is face poop."
@@ -312,12 +312,17 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "Very good for boo boos."
 	DESCRIBE.DORMANT_RAIN_HORN = "Is nice shell."
 	DESCRIBE.RAIN_HORN = "Blow shell and make water fall from sky!"
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+
+	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "Ground is full of things!",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
-        LEVEL_1 = "Food must be put away, don't want to see rat.",
+        LEVEL_1 = "Food must be put away, don't want to see rats!",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
-        LEVEL_1 = "Squeaking out there getting louder.",
+        LEVEL_1 = "Scary rats are out in forest!",
     }
+
+	DESCRIBE.PIED_RAT = "Aaaah! Biggest rat!"
+	DESCRIBE.PIED_PIPER_FLUTE = "At least rat is dead."
+	DESCRIBE.UNCOMPROMISING_PACKRAT = "Little rat has backpack!"

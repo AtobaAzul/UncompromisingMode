@@ -23,7 +23,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_VETCURSE = "I could perish at any moment!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LESSERELECTRICATTACK = ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICRETALIATION = ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now."
 	--FoodBuffs
 	
 	--CaliforniaKing
@@ -111,7 +111,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.SWILSON = "I... I thought I killed you!"
 	DESCRIBE.VAMPIREBAT = "I remember you being... different."
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
-	DESCRIBE.CRITTERLAB_REAL_BROKEN = "With moon rocks I could foster some filthy creatures."
+	DESCRIBE.CRITTERLAB_REAL_BROKEN = "With moon rocks, I could foster some filthy creatures."
 	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
@@ -216,7 +216,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.RAT_WHIP = "What a way to go."
 	DESCRIBE.KLAUS_AMULET = "A powerful, wonderful enchantment!"
 	DESCRIBE.CRABCLAW = "I know gem-holes when I see them." --Generic line for now, this is unimplemented
-	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+	DESCRIBE.HAT_RATMASK = "Must I be the one to do this filthy work?" --Generic line for now, this is unimplemented
 
 	DESCRIBE.ORANGE_VOMIT = "That's life!"
 	DESCRIBE.GREEN_VOMIT = "That's life!"
@@ -316,7 +316,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "Sweet bandage."
 	DESCRIBE.DORMANT_RAIN_HORN = "A shell capable of channeling some magical energy."
 	DESCRIBE.RAIN_HORN = "That hold carapace knows more about magic than she leads on..."
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+
+	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "Hmph. The rats must be after our items.",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
@@ -325,3 +326,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
     ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
         LEVEL_1 = "Insidious vermin, they gather to lay siege to our little hamlet.",
     }
+
+	DESCRIBE.PIED_RAT = "That poor suit, ruined!"
+	DESCRIBE.PIED_PIPER_FLUTE = "I am NOT touching that, let alone putting it on my mouth."
+	DESCRIBE.UNCOMPROMISING_PACKRAT = "Think you're clever, do you?"
+

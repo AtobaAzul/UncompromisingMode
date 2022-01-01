@@ -210,7 +210,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.RAT_WHIP = "It's pretty stinky. We'd rather use something else."
 	DESCRIBE.KLAUS_AMULET = "We've been naughty..."
 	DESCRIBE.CRABCLAW = "It's so fun to swing around! Wooosh! Fwooosh!" --Generic line for now, this is unimplemented
-	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+	DESCRIBE.HAT_RATMASK = "We love treasure hunting!" 
 
 	DESCRIBE.ORANGE_VOMIT = "Haha, ew."
 	DESCRIBE.GREEN_VOMIT = "Haha, ew."
@@ -311,7 +311,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	
 	DESCRIBE.DORMANT_RAIN_HORN = "This is familiar to us."
 	DESCRIBE.RAIN_HORN = "Our memory must be mixed up, we thought this did something different."
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+
+	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "We should probably clean up our toys.",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
@@ -320,3 +321,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
     ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
         LEVEL_1 = "Something's squeaking out there.",
     }
+
+	DESCRIBE.PIED_RAT = "Can we have your hat?"
+	DESCRIBE.PIED_PIPER_FLUTE = "We always wanted to learn how to play."
+	DESCRIBE.UNCOMPROMISING_PACKRAT = "Nice backpack!"
+

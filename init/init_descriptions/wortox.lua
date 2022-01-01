@@ -211,7 +211,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.RAT_WHIP = "Equally as cruel as it's kitty-cousin!"
 	DESCRIBE.KLAUS_AMULET = "Do you have the key to my heart?"
 	DESCRIBE.CRABCLAW = "Magic is fun! Hyuyu!" 
-	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" 
+	DESCRIBE.HAT_RATMASK = "Let us hope for a fruitful search, hyuyu!" 
 
 	DESCRIBE.ORANGE_VOMIT = "Hyuyu! Gross!"
 	DESCRIBE.GREEN_VOMIT = "Hyuyu! Gross!"
@@ -310,12 +310,17 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "I should fill it with redcaps for a good laugh."
 	DESCRIBE.DORMANT_RAIN_HORN = "For now, it's just a shell."
 	DESCRIBE.RAIN_HORN = "Give it a blow and some rain will show."
+
     ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
-        LEVEL_1 = "Those theives are after my things!",
+	        LEVEL_1 = "So unclean, we must make our base sheen!",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
         LEVEL_1 = "Another downside of mortal food, small hairy mortals desire it.",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
-        LEVEL_1 = "A gathering of theives on the horizon I see!",
+        LEVEL_1 = "A gathering of theives on the horizon, I see!",
     }
+
+	DESCRIBE.PIED_RAT = "His song shall make them strong!"
+	DESCRIBE.PIED_PIPER_FLUTE = "Let us sing, and they'll come under our wing!"
+	DESCRIBE.UNCOMPROMISING_PACKRAT = "He'll take all our stuff with that pack, get it back!"

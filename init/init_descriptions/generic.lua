@@ -46,7 +46,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "They're rataliating!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "It must lead to their labo-rat-ory."
     DESCRIBE.UNCOMPROMISING_RATBURROW = "It must lead to their labo-rat-ory."
-    DESCRIBE.RATPOISONBOTTLE = "It's labeled \"Do not drink. That means you Webber.\""
+    DESCRIBE.RATPOISONBOTTLE = "It's labeled \"Do not drink. That means you, Webber.\""
     DESCRIBE.RATPOISON = "It's all murdery."
 
     DESCRIBE.MONSTERSMALLMEAT = "Small, angry meat."
@@ -91,7 +91,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	ANNOUNCE.VETERANCURSED = {
 		"YOU'VE MADE YOUR CHOICE",
         "TOO DIFFICULT FOR YOU?",
-        "CURSE TOO TOUGH? THERE IS ONLY ONE WAY OUT...",
+        "CURSE TOO TOUGH? THERE IS ONLY ONE WAY OUT...", --should this still be here?
 	}
 	
 	ANNOUNCE.STANTON_GREET = {"Care to drink with the dead?", "Let's play a little game, how's about a drink?", "Come and drink with me.","I pick the drinks, you knock 'em back." }
@@ -288,7 +288,7 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.RAT_WHIP = "I make all the rules."
 	DESCRIBE.KLAUS_AMULET = "It's chains contain the King of Winter!"
 	DESCRIBE.CRABCLAW = "Hey, these are gem holes!" --Generic line for now, this is unimplemented
-	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+	DESCRIBE.HAT_RATMASK = "I'll sniff out those dens myself!" 
 
 	DESCRIBE.ORANGE_VOMIT = "Oh, how nice of you..."
 	DESCRIBE.GREEN_VOMIT = "Oh, how nice of you..."
@@ -403,3 +403,7 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
     ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
         LEVEL_1 = "The rats seem to be multiplying out in the wilderness, where is their source?",
     }
+
+	DESCRIBE.PIED_RAT = "He must be leading the vermin!"
+	DESCRIBE.PIED_PIPER_FLUTE = "Maybe I could lead some of the rats myself?"
+	DESCRIBE.UNCOMPROMISING_PACKRAT = "Hey! It's carrying off all of our valuables!"

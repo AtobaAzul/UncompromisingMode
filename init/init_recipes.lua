@@ -113,30 +113,6 @@ MadeRecipeSkinnable("plaguemask", {
 	},
 })
 
-AddRecipe("cursed_antler", {Ingredient("twisted_antler", 1, "images/inventoryimages/twisted_antler.xml")}, GLOBAL.RECIPETABS.MAGIC, GLOBAL.TECH.NONE, nil, nil, nil, nil, "vetcurse", "images/inventoryimages/cursed_antler.xml", "cursed_antler.tex" )
-GLOBAL.AllRecipes["cursed_antler"].sortkey = GLOBAL.AllRecipes["reskin_tool"].sortkey + .1
-MadeRecipeSkinnable("cursed_antler", {
-	twisted_antler = {
-		atlas = "images/inventoryimages/twisted_antler.xml",
-		image = "twisted_antler.tex",
-	},
-})
-
-AddRecipe("twisted_antler", {Ingredient("cursed_antler", 1, "images/inventoryimages/cursed_antler.xml")}, GLOBAL.RECIPETABS.MAGIC, GLOBAL.TECH.NONE, nil, nil, nil, nil, "vetcurse", "images/inventoryimages/twisted_antler.xml", "twisted_antler.tex" )
-GLOBAL.AllRecipes["twisted_antler"].sortkey = GLOBAL.AllRecipes["cursed_antler"].sortkey + .1
-
-AddRecipe("feather_frock", {Ingredient("feather_frock_fancy", 1, "images/inventoryimages/feather_frock_fancy.xml")}, GLOBAL.RECIPETABS.MAGIC, GLOBAL.TECH.NONE, nil, nil, nil, nil, "vetcurse", "images/inventoryimages/feather_frock.xml", "feather_frock.tex" )
-GLOBAL.AllRecipes["feather_frock"].sortkey = GLOBAL.AllRecipes["twisted_antler"].sortkey + .1
-MadeRecipeSkinnable("feather_frock", {
-	feather_frock_fancy = {
-		atlas = "images/inventoryimages/feather_frock_fancy.xml",
-		image = "feather_frock_fancy.tex",
-	},
-})
-
-AddRecipe("feather_frock_fancy", {Ingredient("feather_frock", 1, "images/inventoryimages/feather_frock.xml")}, GLOBAL.RECIPETABS.MAGIC, GLOBAL.TECH.NONE, nil, nil, nil, nil, "vetcurse", "images/inventoryimages/feather_frock_fancy.xml", "feather_frock_fancy.tex" )
-GLOBAL.AllRecipes["feather_frock_fancy"].sortkey = GLOBAL.AllRecipes["feather_frock"].sortkey + .1
-
 AddRecipe("shroom_skin", {Ingredient("shroom_skin_fragment",4, "images/inventoryimages/shroom_skin_fragment.xml"),Ingredient("froglegs",2)}, GLOBAL.RECIPETABS.REFINE, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil)--, "images/inventoryimages/plaguemask.xml", "plaguemask.tex" )
 GLOBAL.AllRecipes["shroom_skin"].sortkey = GLOBAL.AllRecipes["bearger_fur"].sortkey + .1
 
@@ -168,6 +144,8 @@ GLOBAL.AllRecipes["rat_whip"].sortkey = GLOBAL.AllRecipes["whip"].sortkey + .1
 
 AddRecipe("ancient_amulet_red", 	 {Ingredient("thulecite", 2), 		  Ingredient("nightmarefuel", 3),    Ingredient("redgem", 2)}, GLOBAL.RECIPETABS.ANCIENT, GLOBAL.TECH.ANCIENT_FOUR, nil, nil, true, nil, nil, "images/inventoryimages/ancient_amulet_red.xml", "ancient_amulet_red.tex" )
 GLOBAL.AllRecipes["ancient_amulet_red"].sortkey = GLOBAL.AllRecipes["orangeamulet"].sortkey - .1
+
+
 AddRecipe("turf_hoodedmoss", {Ingredient("twigs", 1), Ingredient("foliage", 1), Ingredient("moonrocknugget", 1)}, RECIPETABS.TURFCRAFTING, TECH.TURFCRAFTING_ONE, nil, nil, true, nil, nil, "images/inventoryimages/turf_hoodedmoss.xml", "turf_hoodedmoss.tex")
 AddRecipe("turf_ancienthoodedturf", {Ingredient("turf_hoodedmoss", 1,"images/inventoryimages/turf_hoodedmoss.xml"), Ingredient("moonrocknugget", 1), Ingredient("thulecite_pieces", 1)}, RECIPETABS.TURFCRAFTING, TECH.TURFCRAFTING_ONE, nil, nil, true, nil, nil, "images/inventoryimages/turf_ancienthoodedturf.xml", "turf_ancienthoodedturf.tex")
 

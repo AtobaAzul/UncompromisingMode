@@ -210,7 +210,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.RAT_WHIP = "How degrading."
 	DESCRIBE.KLAUS_AMULET = "Another lock to be behind."
 	DESCRIBE.CRABCLAW = "One small snip will sever a limb." --Generic line for now, this is unimplemented
-	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+	DESCRIBE.HAT_RATMASK = "I can smell the vermin from miles away." --Generic line for now, this is unimplemented
 
 	DESCRIBE.ORANGE_VOMIT = "Such as life."
 	DESCRIBE.GREEN_VOMIT = "Such as life."
@@ -310,12 +310,17 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	
 	DESCRIBE.DORMANT_RAIN_HORN = "I remember this."
 	DESCRIBE.RAIN_HORN = "It makes the world around me reflect my perspective."
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
-        LEVEL_1 = "If we don't care for our possessions they will slip away.",
+
+	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+        LEVEL_1 = "If we don't care for our possessions, they will slip away.",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
-        LEVEL_1 = "Our camp stinks of food and trash, the vermin are noticing.",
+        LEVEL_1 = "Our camp reeks of death, and the vermin take heed.",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
         LEVEL_1 = "The rodents are gathering for an attack, somewhere out there.",
     }
+
+	DESCRIBE.PIED_RAT = "What a horrible sound."
+	DESCRIBE.PIED_PIPER_FLUTE = "Filled with the spit of that beast."
+	DESCRIBE.UNCOMPROMISING_PACKRAT = "Your pack will not help you carry the burden of the world."

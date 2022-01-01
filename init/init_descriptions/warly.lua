@@ -210,7 +210,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.RAT_WHIP = "This is a bad idea."
 	DESCRIBE.KLAUS_AMULET = "The steel is chilling."
 	DESCRIBE.CRABCLAW = "Theres not a whole lot of meat on this claw." --Generic line for now, this is unimplemented
-	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+	DESCRIBE.HAT_RATMASK = "Goodness gracious, what an awful smell!" --Generic line for now, this is unimplemented
 
 	DESCRIBE.ORANGE_VOMIT = "The last thing a chef wishes to see!"
 	DESCRIBE.GREEN_VOMIT = "The last thing a chef wishes to see!"
@@ -310,12 +310,17 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "I'm not sure if this is first aid or a new kind of dish."
 	DESCRIBE.DORMANT_RAIN_HORN = "Strange, I remember seeing this just before I arrived."
 	DESCRIBE.RAIN_HORN = "My memory must be fuzzy. I thought this did something else."
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
-        LEVEL_1 = "Our items rest on the ground, who knows what may take them away.",
+    
+	ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+	        LEVEL_1 = "Our items rest on the ground, who knows what may take them away.",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
         LEVEL_1 = "It is shameful seeing this much old food.",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
-        LEVEL_1 = "I hear squeaking coming from the wilderness.",
+        LEVEL_1 = "Those vile rats are out in the wilderness somewhere!",
     }
+
+	DESCRIBE.PIED_RAT = "How greasy!"
+	DESCRIBE.PIED_PIPER_FLUTE = "Must I really touch it?"
+	DESCRIBE.UNCOMPROMISING_PACKRAT = "Hands off the goods!"

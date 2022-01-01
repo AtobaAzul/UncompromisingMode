@@ -211,7 +211,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 	DESCRIBE.RAT_WHIP = "Crack the whip!"
 	DESCRIBE.KLAUS_AMULET = "Double time!"
 	DESCRIBE.CRABCLAW = "You're about to get clocked!"
-	DESCRIBE.RAT_MASK = "funni rat"
+	DESCRIBE.HAT_RATMASK = "Woodie did a good job with this one."
 
 	DESCRIBE.ORANGE_VOMIT = "Gross!"
 	DESCRIBE.GREEN_VOMIT = "Gross!"
@@ -310,9 +310,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 	DESCRIBE.BOOK_RAIN = "It tampers with the timestream of the local clouds."
 	DESCRIBE.FLORAL_BANDAGE = "I don't have the time to mess with that."
 	DESCRIBE.DORMANT_RAIN_HORN = "How did that crab bring this here?"
-	DESCRIBE.RAIN_HORN = "It was warped when it was pulled across the timestream."
+	DESCRIBE.RAIN_HORN = "It was warped when it was pulled across the timestream."	
+
     ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
-        LEVEL_1 = "I forsee something coming if we don't pick our items up.",
+        LEVEL_1 = "I think it's time to clean up!",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
         LEVEL_1 = "Our poor ration handling may lead to a vermin-infested timeline.",
@@ -320,3 +321,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
     ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
         LEVEL_1 = "There's a bunch of rats out there. It'll only be so long before they venture here!",
     }
+
+	DESCRIBE.PIED_RAT = "How did we let it get this bad?"
+	DESCRIBE.PIED_PIPER_FLUTE = "Maybe it'd be worth the time to play."
+	DESCRIBE.UNCOMPROMISING_PACKRAT = "We must focus on that one!"
