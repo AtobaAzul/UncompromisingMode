@@ -7,8 +7,8 @@ local assets =
 
 local function onequip (inst, owner)
     owner.AnimState:OverrideSymbol("swap_object", "swap_driftwood_fishingrod", "swap_driftwood_fishingrod")
-    owner.AnimState:OverrideSymbol("fishingline", "swap_driftwood_fishingrod", "fishingline")
-    owner.AnimState:OverrideSymbol("FX_fishing", "swap_driftwood_fishingrod", "FX_fishing")
+    owner.AnimState:OverrideSymbol("fishingline", "swap__fishingrod", "fishingline")
+    owner.AnimState:OverrideSymbol("FX_fishing", "swap_fishingrod", "FX_fishing")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 end
