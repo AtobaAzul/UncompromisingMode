@@ -724,8 +724,10 @@ Assets = {
 	--Map Icons End--
 	
 	--skins--
-	--Asset("IMAGE", "images/inventoryimages/skin_ancient_amulet_demoneye.tex"),
-	--Asset("ATLAS", "images/inventoryimages/skin_ancient_amulet_demoneye.xml"),
+	Asset("ANIM", "anim/ancient_amulet_red_demoneye.zip"),
+	Asset("ANIM", "anim/torso_ancient_amulet_red_demoneye.zip"),
+	Asset("IMAGE", "images/inventoryimages/ancient_amulet_red_demoneye.tex"),
+	Asset("ATLAS", "images/inventoryimages/ancient_amulet_red_demoneye.xml"),
 
 --squeakyclean--
     Asset("IMAGE", "images/inventoryimages/driftwoodfishingrod.tex"),

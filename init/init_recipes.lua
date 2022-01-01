@@ -144,7 +144,12 @@ GLOBAL.AllRecipes["rat_whip"].sortkey = GLOBAL.AllRecipes["whip"].sortkey + .1
 
 AddRecipe("ancient_amulet_red", 	 {Ingredient("thulecite", 2), 		  Ingredient("nightmarefuel", 3),    Ingredient("redgem", 2)}, GLOBAL.RECIPETABS.ANCIENT, GLOBAL.TECH.ANCIENT_FOUR, nil, nil, true, nil, nil, "images/inventoryimages/ancient_amulet_red.xml", "ancient_amulet_red.tex" )
 GLOBAL.AllRecipes["ancient_amulet_red"].sortkey = GLOBAL.AllRecipes["orangeamulet"].sortkey - .1
-
+MadeRecipeSkinnable("ancient_amulet_red", {
+	ancient_amulet_red_demoneye = {
+		atlas = "images/inventoryimages/ancient_amulet_red_demoneye.xml",
+		image = "ancient_amulet_red_demoneye.tex",
+	},
+})
 
 AddRecipe("turf_hoodedmoss", {Ingredient("twigs", 1), Ingredient("foliage", 1), Ingredient("moonrocknugget", 1)}, RECIPETABS.TURFCRAFTING, TECH.TURFCRAFTING_ONE, nil, nil, true, nil, nil, "images/inventoryimages/turf_hoodedmoss.xml", "turf_hoodedmoss.tex")
 AddRecipe("turf_ancienthoodedturf", {Ingredient("turf_hoodedmoss", 1,"images/inventoryimages/turf_hoodedmoss.xml"), Ingredient("moonrocknugget", 1), Ingredient("thulecite_pieces", 1)}, RECIPETABS.TURFCRAFTING, TECH.TURFCRAFTING_ONE, nil, nil, true, nil, nil, "images/inventoryimages/turf_ancienthoodedturf.xml", "turf_ancienthoodedturf.tex")

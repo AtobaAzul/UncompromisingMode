@@ -28,7 +28,12 @@ local function OnCooldown(inst)
 end
 
 local function onequip_blue(inst, owner)
-    owner.AnimState:OverrideSymbol("swap_body", "torso_amulets_ancient", "redamulet")
+	
+	if inst.skinname ~= nil then
+		owner.AnimState:OverrideSymbol("swap_body", "torso_ancient_amulet_red_demoneye", "redamulet")
+	else
+		owner.AnimState:OverrideSymbol("swap_body", "torso_amulets_ancient", "redamulet")
+	end
 
     inst.orbfn = function(attacked, data)
         if data and data.attacker and data.damage then
@@ -187,4 +192,35 @@ local function fn()
     return inst
 end
 
-return Prefab("ancient_amulet_red", fn, assets)
+local function amulet_skin()
+	local inst = fn()
+	
+    inst.AnimState:SetBank("ancient_amulet_red_demoneye")
+    inst.AnimState:SetBuild("ancient_amulet_red_demoneye")
+	
+	inst.skinname = "twisted_antler"
+	
+	if inst.components.inventoryitem ~= nil then
+		inst.components.inventoryitem.atlasname = "images/inventoryimages/ancient_amulet_red_demoneye.xml"
+	end
+
+	return inst
+end
+
+return Prefab("ancient_amulet_red", fn, assets),
+	CreateModPrefabSkin("ancient_amulet_red_demoneye",
+	{
+		assets = {
+			Asset("ANIM", "anim/ancient_amulet_red_demoneye.zip"),
+		},
+		base_prefab = "ancient_amulet_red",
+		fn = amulet_skin, -- This is our constructor!
+		rarity = "Timeless",
+		reskinable = true,
+		
+		build_name_override = "ancient_amulet_red_demoneye",
+		
+		type = "item",
+		skin_tags = { },
+		release_group = 0,
+	})
