@@ -52,12 +52,14 @@ local function destroystuff(inst)
     end
 end
 
+local TARGET_IGNORE_TAGS_MINI = { "player", "INLIMBO", "companion", "abigail" }
+
 local function destroystuff_mini(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
 	
 	local sizecheck = 1 + (inst.Transform:GetScale() * 1.9) or 0
 	print(sizecheck)
-    local ents = TheSim:FindEntities(x, y, z, sizecheck, nil, TARGET_IGNORE_TAGS, TARGET_TAGS)
+    local ents = TheSim:FindEntities(x, y, z, sizecheck, nil, TARGET_IGNORE_TAGS_MINI, TARGET_TAGS)
     for i, v in ipairs(ents) do
         --stuff might become invalid as we work or damage during iteration
         if v ~= inst.WINDSTAFF_CASTER and v:IsValid() then

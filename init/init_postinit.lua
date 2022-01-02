@@ -31,6 +31,7 @@ local component_post = {
 local prefab_post = {
 	"hayfever_foods",
 	"pollenstuff",
+	"pocketwatch_weapon",
 	"shieldofcthulu",
 	"clockworks",
 	"flingobalance",
@@ -41,22 +42,17 @@ local prefab_post = {
     --"toadstool_cap", Moved to init_uncompromising_mod.lua
     "amulet",
 	"beequeen",
-	"spiderqueen",
 	"cave_entrance_open",
 	"catcoon",
 	"icehound",
 	"firehound",
-	"walrus",
 	--"forest",
 	"world",
 	"antlion",
 	"minifan",
 	"spider",
-	"spiderqueen",
 	"hound",
-	"penguin",
 	"ash",
-	"pigman",
 	"bunnyman",
 	"walls",
 	"infestables",
@@ -80,7 +76,6 @@ local prefab_post = {
 	"stafflights",
 	"armor_ruins",
 	"sweatervest",
-	"penguin_ice",
 	"fans",
 	"skeletonhat",
 	--"rock_avocado_fruit_sprout_sapling",
@@ -88,7 +83,6 @@ local prefab_post = {
 	"heatrock",
 	"dragonfly_spawner",
 	"rneghostfire",
-	"frog", -- also toad
 	"monkey",
 	"batcave",
 	"rain",
@@ -108,7 +102,6 @@ local prefab_post = {
 	"trinkets", --This is for the grave mound cc trinkets
 	"moonbase",
 	"koalas",
-	"pocket_powertrip",
 	"pumpkin_lantern",
 	"piggyback",
 	"nightlight",
@@ -140,7 +133,6 @@ local prefab_post = {
 	"farmplants",
 	"rainhat",
 	"darts",
-	"eyeofterror",
 	"terrarium",
 }
 
@@ -150,19 +142,13 @@ local stategraph_post = {
 	"wilson",
 	"spider",
 	"frog",
-	"walrus",
 	--"wobysmall",
-	"pigbunny",
 	--"shadowcreature",
-	"Beefalo",
 	"stalker_minion",
-	"koalefant",
 	"krampus",
-	"spiderqueen",
 	--"merm",
 	"carnival_host",
 	"catcoon",
-	"eyeofterror",
 }
 
 local class_post = {
@@ -179,8 +165,6 @@ local class_post = {
 local brain_post = {
     --example:
     --"hound",
-	"pig",
-	"werepig",
 	"frog",
 	"nofirepanic",
 	"chester",
@@ -246,6 +230,50 @@ end
 
 if GetModConfigData("honeybandbuff") == true then
 table.insert(prefab_post,"bandage")
+end
+
+if GetModConfigData("angrypenguins") == true then
+table.insert(prefab_post,"penguin")
+table.insert(prefab_post,"penguin_ice") --I think that should go too?  idk right here
+end
+
+if GetModConfigData("harder_pigs") == true then
+table.insert(prefab_post,"pigman")
+table.insert(brain_post,"pig")
+table.insert(brain_post,"werepig")
+table.insert(stategraph_post,"pigbunny")
+end
+
+if GetModConfigData("harder_walrus") == true then
+table.insert(prefab_post,"walrus")
+table.insert(stategraph_post,"walrus")
+end
+if GetModConfigData("harder_beefalo") == true then
+table.insert(stategraph_post,"Beefalo")
+end
+
+if GetModConfigData("harder_spiderqueen") == true then
+table.insert(prefab_post,"spiderqueen")
+table.insert(stategraph_post,"spiderqueen")
+end
+
+if GetModConfigData("pocket_powertrip") == 1 or 2 then
+table.insert(prefab_post,"pocket_powertrip")
+end
+
+if GetModConfigData("harder_koalefants") == true then
+table.insert(stategraph_post,"koalefant")
+end
+
+if GetModConfigData("reworked_eyes") == true then
+	table.insert(prefab_post,"eyeofterror")
+	table.insert(stategraph_post,"eyeofterror")
+end
+
+if GetModConfigData("hungry_frogs") == true then
+	table.insert(prefab_post,"frog")
+	table.insert(stategraph_post,"frog")
+	table.insert(brain_post,"frog")
 end
 
 modimport("postinit/sim")

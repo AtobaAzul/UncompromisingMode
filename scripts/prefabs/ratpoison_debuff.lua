@@ -9,9 +9,25 @@ local function OnTick(inst, target)
 			damage = -5
 		end
 		
-        target.components.health:DoDelta(damage, nil, "ratpoison")
 		
-		SpawnPrefab("crab_king_bubble"..math.random(3)).Transform:SetPosition(target.Transform:GetWorldPosition())
+		if inst.attackcount ~= nil then
+			if target.components.combat ~= nil then
+				inst.attackcount = inst.attackcount + 1
+				if inst.attackcount >= 5 then
+					inst.attackcount = 1
+					target.components.combat:GetAttacked(inst, -damage, nil)
+				else
+					target.components.health:DoDelta(damage, nil, "ratpoison")
+				end
+			else
+				target.components.health:DoDelta(damage, nil, "ratpoison")
+			end
+		else
+			inst.attackcount = 1
+		end
+				
+		
+		--SpawnPrefab("crab_king_bubble"..math.random(3)).Transform:SetPosition(target.Transform:GetWorldPosition())
 	else
         inst.components.debuff:Stop()
     end

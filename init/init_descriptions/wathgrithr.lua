@@ -211,7 +211,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.RAT_WHIP = "Thy lashes sting, a feared weapon!"
 	DESCRIBE.KLAUS_AMULET = "The lock of a warrior!"
 	DESCRIBE.CRABCLAW = "A magnificent weapon to be adorned with jewels!" --Generic line for now, this is unimplemented
-	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+	DESCRIBE.HAT_RATMASK = "Reminds me of the masks back in the theatre." 
 
 	DESCRIBE.ORANGE_VOMIT = "... No."
 	DESCRIBE.GREEN_VOMIT = "... No."
@@ -310,12 +310,17 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.BOOK_RAIN = "A tome to dampen the battleground."
 	DESCRIBE.DORMANT_RAIN_HORN = "A strange boon from the king of the sea."
 	DESCRIBE.RAIN_HORN = "I horn to call forth a downpour."
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+
+	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "Spoils left unguarded attract thieves!",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
         LEVEL_1 = "There is a stench coming from our home.",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
-        LEVEL_1 = "A legion of vile villanous vermin gather!",
+        LEVEL_1 = "A legion of vile, villanous vermin gather!",
     }
+
+	DESCRIBE.PIED_RAT = "I will fell you, commander!"
+	DESCRIBE.PIED_PIPER_FLUTE = "The songs I could play!"
+	DESCRIBE.UNCOMPROMISING_PACKRAT = "Coward, stop running off!"

@@ -226,7 +226,7 @@ local function fn()
 	if TUNING.DSTU.ELECTRICALMISHAP == false then
 		inst:AddComponent("fueled")
 		inst.components.fueled.fueltype = FUELTYPE.BATTERYPOWER
-		inst.components.fueled.secondaryfueltype = FUELTYPE.CHEMICAL
+		--inst.components.fueled.secondaryfueltype = FUELTYPE.CHEMICAL
 		--inst.components.fueled:InitializeFuelLevel(120)
 		--inst.components.fueled.maxfuel = TUNING.NIGHTSTICK_FUEL / 2
 		inst.components.fueled:InitializeFuelLevel(TUNING.NIGHTSTICK_FUEL)

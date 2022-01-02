@@ -954,11 +954,11 @@ local function MakeRatBurrow(inst)
             return false
         end
 		
-        if #TheSim:FindEntities(x, 0, z, 80, { "player", "playerghost" }) > 0 then
+        if #TheSim:FindEntities(x, 0, z, 60, { "player", "playerghost" }) > 0 then
             return false
         end
 		
-        if #TheSim:FindEntities(x, 0, z, 80, { "ratburrow"} ) > 0 then
+        if #TheSim:FindEntities(x, 0, z, 60, { "ratburrow"} ) > 0 then
             return false
         end
 		
@@ -973,7 +973,7 @@ local function MakeRatBurrow(inst)
     end
 	
 	for i = 1, 8 do
-		inst.x1, inst.z1 = x + math.random(-200, 200), z + math.random(-200, 200)
+		inst.x1, inst.z1 = x + math.random(-250, 250), z + math.random(-250, 250)
 		
 		if IsValidRatBurrowPosition(inst.x1, inst.z1) then
 			inst.Transform:SetPosition(inst.x1, 0, inst.z1)
@@ -1132,7 +1132,8 @@ local function OnInitHerd(inst)
 	if inst.raiding then
 		for i = 1, 3 do
 			inst:DoTaskInTime((i - 1) * 15, function(inst)
-				for i = 1, ((3) / i) do
+			print("i = "..i)
+				for n = 1, (i + 2) do
 					local x, y, z = inst.Transform:GetWorldPosition()
 					local angle = math.random() * 8 * PI
 					local rat = SpawnPrefab("uncompromising_rat")
@@ -1140,7 +1141,7 @@ local function OnInitHerd(inst)
 					inst.components.herd:AddMember(rat)
 				end
 				
-				if i < 3 then
+				if i > 1 then
 					local x, y, z = inst.Transform:GetWorldPosition()
 					local angle = math.random() * 8 * PI
 					local packrat = SpawnPrefab("uncompromising_packrat")

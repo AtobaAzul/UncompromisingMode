@@ -187,6 +187,8 @@ UI = GLOBAL.STRINGS.UI
 	STRINGS.STEEL_SWEATER = "Steel Sweater"
 	STRINGS.RNESKELETON = "Skeleton"
 	STRINGS.ANCIENT_AMULET_RED = "Ancient Soul Amulet"
+	STRINGS.ANCIENT_AMULET_RED_DEMONEYE = "Ancient Demon-eyed Amulet"
+	STRINGS.ancient_amulet_red_demoneye = "Ancient Demon-eyed Amulet"
 	STRINGS.RAT_WHIP = "Tail o' Twined Rats"
 	STRINGS.KLAUS_AMULET = "Naught Lock"
 	STRINGS.LIGHTNINGHOUND = "Lightning Hound"
@@ -267,7 +269,7 @@ UI = GLOBAL.STRINGS.UI
 	
 	STRINGS.NIGHTCRAWLER = "Night Crawler" 
 	STRINGS.RNE_GRABBYSHADOWS = "Grasping Fear" 
-	STRINGS.NERVOUSTICK = "Nervous Tick Den" 
+	STRINGS.NERVOUSTICK = "Nervous Tick" 
 	STRINGS.NERVOUSTICKDEN = "Heart of the Swarm" 
 	STRINGS.FUELSEEKER = "Fuel Seeker" 
 	STRINGS.MINDWEAVER = "Mind Weaver" 

@@ -36,7 +36,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "I'd share, but they seem more interested in just TAKING our stuff."
     DESCRIBE.UNCOMPROMISING_RATHERD = "A Pine Tree Pioneer never enters a rat den head first!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "A Pine Tree Pioneer never enters a rat den head first!"
-    DESCRIBE.RATPOISONBOTTLE = "If theres no other option..."
+    DESCRIBE.RATPOISONBOTTLE = "If there's no other option..."
     DESCRIBE.RATPOISON = "I hope nothing friendly gets into it..."
 
     DESCRIBE.MONSTERSMALLMEAT = "Sorry Woby, looks like scraps for dinner..."
@@ -51,7 +51,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
 	DESCRIBE.SPIDERQUEENCORPSE = "I think the spiders will manage fine without a queen."
 	ANNOUNCE.ANNOUNCE_SNEEZE = "ooAaaAGH-CHU"
-	ANNOUNCE.ANNOUNCE_HAYFEVER = "My Allergies are acting up again!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER = "My allergies are acting up again!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Back to my regular level of allergies."
 	ANNOUNCE.ANNOUNCE_FIREFALL = {
 		"I get the feeling we should all review fire safety again!",
@@ -59,7 +59,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 		"Just keep calm!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Creeping vines! I can chop them!"
-	ANNOUNCE.ANNOUNCE_SNOWSTORM = "My instincts tell me theres a storm coming!"
+	ANNOUNCE.ANNOUNCE_SNOWSTORM = "My instincts tell me there's a storm coming!"
 	ANNOUNCE.SHADOWTALKER = {
         "I MUST PROTECT HER",
         "I SHOULDN'T HAVE DONE IT",
@@ -211,7 +211,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.RAT_WHIP = "Resourceful!... Bleh."
 	DESCRIBE.KLAUS_AMULET = "Goat power!"
 	DESCRIBE.CRABCLAW = "He left his claw behind!" --Generic line for now, this is unimplemented
-	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+	DESCRIBE.HAT_RATMASK = "Look out, here comes the Rat Man!" --Generic line for now, this is unimplemented
 
 	DESCRIBE.ORANGE_VOMIT = "Thanks for sharing your digestive juices?"
 	DESCRIBE.GREEN_VOMIT = "Thanks for sharing your digestive juices?"
@@ -311,14 +311,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "I think I'm gonna be sick..."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
 	DESCRIBE.BOOK_RAIN = "Reminds me of a past camping trip."
-	DESCRIBE.DORMANT_RAIN_HORN = "Nice, a conch shell. I desire a BADGE for this! GIVE ME A BADGE! AAAAAAAAAAAA!"
-	DESCRIBE.RAIN_HORN = "This might be useful for when it gets hot."
+	DESCRIBE.DORMANT_RAIN_HORN = "You can hear the ocean if you put it to your ear!"
+	DESCRIBE.RAIN_HORN = "This might be useful for when it gets hot."	
+	
     ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
-        LEVEL_1 = "All our items might get stolen if left on the ground!",
+        LEVEL_1 = "All our items might get stolen if they're left on the ground!",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
         LEVEL_1 = "A pinetree pioneer should keep his food fresh and put away!",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
-        LEVEL_1 = "Smell that Woby? There's a bunch of rats out there somewhere!",
+        LEVEL_1 = "Smell that, Woby? There's a bunch of rats out there somewhere!",
     }
+
+	DESCRIBE.PIED_RAT = "Keep it down, you might hurt Woby's ears!"
+	DESCRIBE.PIED_PIPER_FLUTE = "Woby doesn't want me to play it."
+	DESCRIBE.UNCOMPROMISING_PACKRAT = "Whoa, he could be a great Pinetree Pioneer!"

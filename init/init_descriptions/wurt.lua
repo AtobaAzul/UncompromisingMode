@@ -32,7 +32,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	--CaliforniaKing
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "Stop looking!!"
-    DESCRIBE.UNCOMPROMISING_RAT = "Hairy. Is spiderfolk family? Will call little hairy."
+    DESCRIBE.UNCOMPROMISING_RAT = "Spiderfolk family? Have hair."
     DESCRIBE.UNCOMPROMISING_RATHERD = "Little eyes in hole! Hello!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "Little eyes in hole! Hello!"
     DESCRIBE.RATPOISONBOTTLE = "Veggies but taste really bad."
@@ -212,7 +212,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.RAT_WHIP = "Fun to play with! ... OUCH!"
 	DESCRIBE.KLAUS_AMULET = "Cold! Brr!"
 	DESCRIBE.CRABCLAW = "Is big, it hurt!" --Generic line for now, this is unimplemented
-	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+	DESCRIBE.HAT_RATMASK = "So many smells!!" --Generic line for now, this is unimplemented
 
 	DESCRIBE.ORANGE_VOMIT = "Flurgh..."
 	DESCRIBE.GREEN_VOMIT = "Flurgh..."
@@ -311,12 +311,17 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "Flower and honey are good team to fight boo boos."
 	DESCRIBE.DORMANT_RAIN_HORN = "Funny looking shell."
 	DESCRIBE.RAIN_HORN = "Me like drowning, florpt!"
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
-        LEVEL_1 = "Little hairy wants our stuff.",
+
+	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+        LEVEL_1 = "Little hairy wants our stuff!",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
-        LEVEL_1 = "Little hairy wants our food.",
+        LEVEL_1 = "Little hairy wants our food!",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
-        LEVEL_1 = "Little hairy is coming together out there.",
+        LEVEL_1 = "Little hairy is coming together out there!",
     }
+
+	DESCRIBE.PIED_RAT = "Definitely not spiderfolk!"
+	DESCRIBE.PIED_PIPER_FLUTE = "Not spiderfolk could join Merm kingdom?"
+	DESCRIBE.UNCOMPROMISING_PACKRAT = "Don't like him!"

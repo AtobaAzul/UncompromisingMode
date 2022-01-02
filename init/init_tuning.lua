@@ -281,6 +281,9 @@ TUNING.DSTU =
 	WICKERNERF = GetModConfigData("wickerbottom"),
 	WICKERNERF_TENTACLES = GetModConfigData("on tentacles"),
 	WICKERNERF_HORTICULTURE = GetModConfigData("applied horticulture"),
+
+    --Wanda
+    WANDA_NERF = GetModConfigData("wandanerf"),
 	
     --Growth time increase for stone fruits
     STONE_FRUIT_GROWTH_INCREASE = 3,
@@ -357,6 +360,9 @@ TUNING.DSTU =
 	ELECTRICALMISHAP = GetModConfigData("electricalmishap"),
 	ANNOUNCE_BASESTATUS = GetModConfigData("announce_basestatus"),
 	EYEBRELLAREWORK = GetModConfigData("eyebrellarework"),
+
+--More Config
+    POCKET_POWERTRIP = GetModConfigData("pocket_powertrip"),
 }
 
 TUNING.NO_BOSS_TIME = 24
@@ -381,6 +387,10 @@ TUNING.AFFINITY_15_CALORIES_SUPERHUGE = 1.034
 
 TUNING.ARMORBRAMBLE_DMG = 10
 
+if GetModConfigData("wanda_nerf") == true then
+    TUNING.POCKETWATCH_SHADOW_DAMAGE = 34*1.5 --reduced damage to 51 base
+    TUNING.POCKETWATCH_REVIVE_COOLDOWN = TUNING.POCKETWATCH_REVIVE_COOLDOWN * 2 --doubled cooldown
+end
 
 TUNING.SLEEP_TICK_PERIOD = TUNING.SLEEP_TICK_PERIOD / TUNING.DSTU.SLEEPINGBUFF
 

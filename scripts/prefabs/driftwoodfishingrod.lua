@@ -1,7 +1,7 @@
 local assets =
 {
     Asset("ANIM", "anim/driftwood_rod_ground.zip"),
-    Asset("ANIM", "anim/swap_fishingrod.zip"),
+    Asset("ANIM", "anim/swap_driftwood_fishingrod.zip"),
     Asset("ANIM", "anim/floating_items.zip"),
 }
 
@@ -73,6 +73,7 @@ local function fn()
 
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem.atlasname = "images/inventoryimages/driftwoodfishingrod.xml"
 
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)

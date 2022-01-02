@@ -212,7 +212,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.RAT_WHIP = "The smell alone should scare someone away."
 	DESCRIBE.KLAUS_AMULET = "Time to overclock!"
 	DESCRIBE.CRABCLAW = "I have a knack for stickin' gems into things, don't I?" --Generic line for now, this is unimplemented
-	DESCRIBE.RAT_MASK = "Who knew treasure was so smelly?" --Generic line for now, this is unimplemented
+	DESCRIBE.HAT_RATMASK = "Let's go find their base of operations." 
 
 	DESCRIBE.ORANGE_VOMIT = "Thanks."
 	DESCRIBE.GREEN_VOMIT = "Thanks."
@@ -314,7 +314,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	
 	DESCRIBE.DORMANT_RAIN_HORN = "Just a conch shell."
 	DESCRIBE.RAIN_HORN = "It lets you blow the horn on the summer heat."
-    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
+
+	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "Messy work conditions, boss wouldn't be happy.",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
@@ -323,3 +324,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
     ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
         LEVEL_1 = "Where's that squeaking noise coming from?",
     }
+
+	DESCRIBE.PIED_RAT = "Must be the boss of those rats."
+	DESCRIBE.PIED_PIPER_FLUTE = "I never was the best leader."
+	DESCRIBE.UNCOMPROMISING_PACKRAT = "I think we've found ourselves a target."

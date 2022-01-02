@@ -142,7 +142,7 @@ local require = GLOBAL.require
 	end
 	
 	if GetModConfigData("wolfgang") == true then
-		modimport("init/init_character_changes/wolfgang")
+		--modimport("init/init_character_changes/wolfgang")
 	end
 	
 	if GetModConfigData("lifeamulet") == true then
@@ -172,6 +172,7 @@ local require = GLOBAL.require
 		modimport("init/init_character_changes/wathgrithr")
 		modimport("init/init_character_changes/webber")
 		modimport("init/init_character_changes/winona")
+		modimport("init/init_character_changes/wanda")
 		
 	if GetModConfigData("wortox") == true then
 		modimport("init/init_character_changes/wortox")
