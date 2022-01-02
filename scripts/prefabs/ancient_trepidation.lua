@@ -266,13 +266,17 @@ if not inst.components.areaaware:CurrentlyInTag("Nightmare") then
 	if inst.components.combat.target ~= nil then
 		inst.components.combat.target = nil
 	end
-    inst.brain:Stop()
+	if inst.brain ~= nil then
+		inst.brain:Stop()
+	end
 	inst.Physics:Stop()
 	inst.AnimState:PlayAnimation("channel_pre")	
 	inst:DoTaskInTime(0.6,function(inst)
 		local x,y,z = inst.Transform:GetWorldPosition()
 		local Despawn = SpawnPrefab("shadow_despawn").Transform:SetPosition(x,y,z)
-		inst.brain:Start()
+		if inst.brain ~= nil then
+			inst.brain:Start()
+		end
 		local x,y,z = inst.components.homeseeker.home.Transform:GetWorldPosition()
 		inst.Transform:SetPosition(x,y,z)
 		if inst.components.combat.target ~= nil then
