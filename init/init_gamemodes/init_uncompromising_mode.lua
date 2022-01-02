@@ -118,8 +118,8 @@ local require = GLOBAL.require
 	end
 	
 	if GetModConfigData("hayfever") == true then
-		modimport("init/init_weather/init_hayfever")
-		modimport("init/init_creatures/init_sneeze_hitters")
+		modimport("init/init_weather/init_springweather")
+		--modimport("init/init_creatures/init_sneeze_hitters")
 	end
 	
 	modimport("init/init_durability")

@@ -29,6 +29,8 @@ local component_post = {
 }
 
 local prefab_post = {
+	"hayfever_foods",
+	"pollenstuff",
 	"shieldofcthulu",
 	"clockworks",
 	"flingobalance",

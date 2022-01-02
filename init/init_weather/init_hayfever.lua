@@ -25,7 +25,7 @@ env.AddPrefabPostInit("forest", function(inst)
         return
     end
 	
-	inst:AddComponent("hayfever_tracker")
+	inst:AddComponent("UM_springweather")
 	--inst:AddComponent("monsoons")
 	--inst:WatchWorldState("isspring", RandomThreatSpring)
 	--inst:WatchWorldState("issummer", UndoRandomThreatSpring)
@@ -36,7 +36,7 @@ env.AddPrefabPostInit("cave", function(inst)
         return
     end
 	
-	inst:AddComponent("hayfever_tracker")
+	inst:AddComponent("UM_springweather")
 	
 end)
 

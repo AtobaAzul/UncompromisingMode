@@ -654,8 +654,10 @@ Assets = {
 	Asset("ANIM", "anim/skull_chest.zip"),
 	Asset("IMAGE", "images/inventoryimages/skullchest_child.tex"),
 	Asset("ATLAS", "images/inventoryimages/skullchest_child.xml"),
-
 	
+	Asset("ANIM", "anim/lush_grass.zip"),
+	Asset("ANIM", "anim/lush_trapdoorgrass.zip"),
+	Asset("ANIM", "anim/swap_driftwood_fishingrod.zip"),
 	
 	--Dart Stuff
 	Asset("ANIM", "anim/um_blowguns.zip"),

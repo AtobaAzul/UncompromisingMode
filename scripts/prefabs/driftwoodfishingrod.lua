@@ -6,7 +6,7 @@ local assets =
 }
 
 local function onequip (inst, owner)
-    owner.AnimState:OverrideSymbol("swap_object", "swap_fishingrod", "swap_fishingrod")
+    owner.AnimState:OverrideSymbol("swap_object", "swap_driftwood_fishingrod", "swap_driftwood_fishingrod")
     owner.AnimState:OverrideSymbol("fishingline", "swap_fishingrod", "fishingline")
     owner.AnimState:OverrideSymbol("FX_fishing", "swap_fishingrod", "FX_fishing")
     owner.AnimState:Show("ARM_carry")
@@ -47,7 +47,7 @@ local function fn()
 
 	inst:AddTag("weapon")
 
-    local floater_swap_data = {sym_build = "swap_fishingrod"}
+    local floater_swap_data = {sym_build = "swap_driftwood_fishingrod"}
     MakeInventoryFloatable(inst, "med", 0.05, {0.8, 0.4, 0.8}, true, -12, floater_swap_data)
 
     inst.entity:SetPristine()
