@@ -81,7 +81,6 @@ local prefab_post = {
 	"heatrock",
 	"dragonfly_spawner",
 	"rneghostfire",
-	"frog", -- also toad
 	"monkey",
 	"batcave",
 	"rain",
@@ -101,7 +100,6 @@ local prefab_post = {
 	"trinkets", --This is for the grave mound cc trinkets
 	"moonbase",
 	"koalas",
-	"pocket_powertrip",
 	"pumpkin_lantern",
 	"piggyback",
 	"nightlight",
@@ -133,7 +131,6 @@ local prefab_post = {
 	"farmplants",
 	"rainhat",
 	"darts",
-	"eyeofterror",
 	"terrarium",
 }
 
@@ -146,12 +143,10 @@ local stategraph_post = {
 	--"wobysmall",
 	--"shadowcreature",
 	"stalker_minion",
-	"koalefant",
 	"krampus",
 	--"merm",
 	"carnival_host",
 	"catcoon",
-	"eyeofterror",
 }
 
 local class_post = {
@@ -258,6 +253,25 @@ end
 if GetModConfigData("harder_spiderqueen") == true then
 table.insert(prefab_post,"spiderqueen")
 table.insert(stategraph_post,"spiderqueen")
+end
+
+if GetModConfigData("pocket_powertrip") == 1 or 2 then
+table.insert(prefab_post,"pocket_powertrip")
+end
+
+if GetModConfigData("harder_koalefants") == true then
+table.insert(stategraph_post,"koalefant")
+end
+
+if GetModConfigData("reworked_eyes") == true then
+	table.insert(prefab_post,"eyeofterror")
+	table.insert(stategraph_post,"eyeofterror")
+end
+
+if GetModConfigData("hungry_frogs") == true then
+	table.insert(prefab_post,"frog")
+	table.insert(stategraph_post,"frog")
+	table.insert(brain_post,"frog")
 end
 
 modimport("postinit/sim")

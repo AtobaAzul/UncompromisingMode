@@ -56,11 +56,13 @@ local function Folded(inst)
 			
 			if not inst.components.equippable:IsEquipped() and owner ~= nil then
 				if #inst.components.container:FindItems( function(item) return item.components.inventoryitem ~= nil end ) > 0 then
-					if owner.SoundEmitter ~= nil then
+					if owner.SoundEmitter ~= nil and TUNING.DSTU.POCKET_POWERTRIP == 1 then
 						owner.SoundEmitter:PlaySound("dontstarve/common/tool_slip")
 					end
 				end
-				inst.components.container:DropEverything() 
+				if GLOBAL.TUNING.DSTU.POCKET_POWERTRIP == 1 then
+					inst.components.container:DropEverything() 
+				end
 			end
 		end)
 	end
@@ -76,8 +78,11 @@ env.AddPrefabPostInit("trunkvest_summer", function(inst)
 	
     inst:AddComponent("container")
     inst.components.container:WidgetSetup("puffvest_big")
-	
-	--inst.components.inventoryitem.cangoincontainer = false
+
+	if TUNING.DSTU.POCKET_POWERTRIP == 2 then
+		inst.components.inventoryitem.cangoincontainer = false
+	end
+
 	if inst.components.equippable ~= nil then
 		inst.components.equippable:SetOnEquip(onequipsummer)
 		inst.components.equippable:SetOnUnequip(onunequip)
@@ -113,8 +118,11 @@ env.AddPrefabPostInit("trunkvest_winter", function(inst)
     inst:AddComponent("container")
     inst.components.container:WidgetSetup("puffvest")
 	
-	--inst.components.inventoryitem.cangoincontainer = false
-	if inst.components.equippable ~= nil then
+	if TUNING.DSTU.POCKET_POWERTRIP == 2 then
+		inst.components.inventoryitem.cangoincontainer = false
+	end
+	
+		if inst.components.equippable ~= nil then
 		inst.components.equippable:SetOnEquip(onequipwinter)
 		inst.components.equippable:SetOnUnequip(onunequip)
 	end
@@ -140,8 +148,11 @@ env.AddPrefabPostInit("reflectivevest", function(inst)
     inst:AddComponent("container")
     inst.components.container:WidgetSetup("reflvest")
 	
-	--inst.components.inventoryitem.cangoincontainer = false
-	if inst.components.equippable ~= nil then
+	if TUNING.DSTU.POCKET_POWERTRIP == 2 then
+		inst.components.inventoryitem.cangoincontainer = false
+	end
+	
+		if inst.components.equippable ~= nil then
 		inst.components.equippable:SetOnEquip(onequipreflect)
 		inst.components.equippable:SetOnUnequip(onunequip)
 	end

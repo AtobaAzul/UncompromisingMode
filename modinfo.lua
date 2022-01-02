@@ -95,7 +95,7 @@ configuration_options =
 	BinaryConfig("sewingkit", "Sewing Kit Tweaks", "Sewing Kit has DOUBLE uses, but repairs HALF value. Pairs very well with Clothing Degredation, lets you keep clothing in top shape more easily.", true),
 	BinaryConfig("hangyperds", "Starving Gobblers", "Gobblers are now more agressive and will attempt to take berries out of the player's inventory.", false),
 	BinaryConfig("lifeamulet", "Life Giving Amulet Changes", "The Life Giving Amulet acts like vanilla Don't Starve, only reviving when worn upon death. \nIts hunger > health conversion ticks much faster.", true),
-    
+
 	{
 		name = "flingo_setting",
 		label = "Flingomatic Nerf",
@@ -108,7 +108,7 @@ configuration_options =
 		},
 		default = "Waterballs",
 	},
-	
+
 	{
 		name = "fireloot",
 		label = "Burning Loot Drop Rework",
@@ -121,7 +121,7 @@ configuration_options =
 		},
 		default = 3,
 	},
-	
+
 	SkipSpace(),
 ------------------------------
 -- Character Reworks --
@@ -159,7 +159,7 @@ configuration_options =
     BinaryConfig("snowstorms", "Snowstorms", "Snowtorms impede on players' speed and vision if they are not wearing eye protection. Snowstorms also causes snow to build up on structures.", true),
     BinaryConfig("hayfever", "Hayfever", "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.", true),
     --BinaryConfig("acidrain", "Acid Rain", "After the First Year, Toadstool will grow poisionous mushtrees aboveground and pollute the world, making the rain acidic.", true),
-	
+
 	--[[Header("Gamemode"),
 	{
 		name = "gamemode",
@@ -172,7 +172,7 @@ configuration_options =
 		},
 		default = 0,
 	},]]
-	
+
 	SkipSpace(),
 ------------------------------
 -- Character Reworks --
@@ -204,7 +204,7 @@ configuration_options =
 		},
 		default = 60,
 	},
-	
+
 -----------------------------
 -- Items and Structures--
 -----------------------------
@@ -226,6 +226,18 @@ configuration_options =
 		},
 		default = 1.5,
 	},
+	{
+		name = "pocket_powertrip",
+		label = "Clothing Pockets",
+		hover = "Gives some underused dress items pockets.",
+		options =
+		{
+			{description = "On", data = 1},
+			{description = "On (No Drop)", data = 2},
+			{description = "Off", data = 0},
+		},
+		default = 1,
+	},
 -----------------------------
 -- Food --
 -----------------------------
@@ -236,7 +248,7 @@ configuration_options =
 	BinaryConfig("crockpotmonstmeat", "Harder Monster Meat", "Enables the monster meat dilution system, where regular monster meat must be diluted or dried to make certain dishes.", true),
 	BinaryConfig("generalcrockblocker", "Trash Filler Blocker", "Heavy use of certain low quality crockpot ingredients, such as twigs, ice, buttefly wings, and other inedibles results in wet goop.", true),
 	BinaryConfig("icecrockblocker", "Snowcones", "Snowcones prevent heavy use of ice specifically in crockpot dishes that don't call for it.", true),
-	
+
 	SkipSpace(),
 	Header("Crockpot Food Tweaks"),
 	BinaryConfig("meatball", "Meatball Nerf", "Meatballs restore 50 hunger instead of 62.5.", true),
@@ -256,7 +268,7 @@ configuration_options =
 	BinaryConfig("buttmuffin", "Butter Muffin Buff", "Butter muffin restores 30 health 10 sanity instead of 20 health 5 sanity.", true),
 	BinaryConfig("icecreambuff", "Ice Cream Buff", "Ice Cream now restores 100 sanity, but does it slowly.", true),
 	BinaryConfig("farmfoodredux", "Farmpot Food Redux", "Reallocates most dishes that involve crockpot foods. Typically a buff, but may exchange some stats.", true),
-	
+
 	SkipSpace(),
 	Header("General Food Tweaks"),
 	{
@@ -273,7 +285,7 @@ configuration_options =
 		},
 		default = 2,
 	},
-	
+
 	Header("--------------------"),
 -----------------------------
 -- Monsters --
@@ -281,22 +293,22 @@ configuration_options =
 	SkipSpace(),
 	Header("Monsters"),
 	Header("--------------------"),
-	
+
 	Header("New Hounds"),
 	BinaryConfig("lightninghounds", "Lightning Hounds", "Lightning Hounds are part of hound waves.", true),
 	BinaryConfig("magmahounds", "Magma Hounds", "Magma Hounds are part of hound waves.", true),
 	BinaryConfig("sporehounds", "Spore Hounds", "Spore Hounds are part of hound waves.", true),
 	BinaryConfig("glacialhounds", "Glacial Hounds", "Glacial Hounds are part of hound waves.", true),
 	SkipSpace(),
-	
+
 	Header("Harder Hounds"),
 	BinaryConfig("firebitehounds", "Fiery Bite", "Red Hounds set players on fire when they attack.", true),
 	BinaryConfig("frostbitehounds", "Frozen Bite", "Blue Hounds freeze players when they attack.", true),
 	SkipSpace(),
-	
+
 	Header("Wave Changes"),
-	BinaryConfig("lategamehoundspread", "Descreased Lategame Frequency", "Enabling this decreases the frequency in the lategame so hounds are still a threat, but not annoying.", true),	
-	
+	BinaryConfig("lategamehoundspread", "Descreased Lategame Frequency", "Enabling this decreases the frequency in the lategame so hounds are still a threat, but not annoying.", true),
+
 	BinaryConfig("vargwaves", "Vargs in Hound Waves", "In the lategame, vargs will accompany hounds in houndwaves.", true),
 	{
 		name = "vargwaves grace",
@@ -340,39 +352,41 @@ configuration_options =
 	Header("New Depths Worms"),
 	BinaryConfig("depthseels", "Depths Eels", "Electrified depths eels join the worm pack in Winter and Spring.", true),
 	BinaryConfig("depthsvipers", "Depths Vipers", "Mysterious depths vipers join the worm pack in Summer and Autumn", true),
-	
+
 	SkipSpace(),
 	Header("Bats"),
 	BinaryConfig("hardbatilisks", "Harder Batilisks", "Batilisk's health is increased from 50 to 75, drop wings less often than vanilla, drop monster morsels.", true),
 	BinaryConfig("adultbatilisks", "Adult Batilisks", "Adult Batilisks spawn under certain conditions instead of regular ones. They are harder, but have better loot on average.", true),
 	BinaryConfig("batspooking", "Bat Sinkhole Evacuation", "Sinkholes will spawn all of their bats as soon as they are regenerated, instead of slowly trickling out.", true),
 	SkipSpace(),
-	
+
 	Header("Spiders"),
 	BinaryConfig("alljumperspiders", "Regular Spiders Jump", "Normal spiders leap, just like spider warriors.", true),
 	BinaryConfig("spiderwarriorcounter", "Warrior Counter", "Warrior spiders (and depth dwellers) perform a counter-attack when attacked (also lowers health to 300).", true),
 	BinaryConfig("trapdoorspiders", "Trapdoor Spiders", "Enables the spawn of trapdoor spider mounds on worldgen. Their dens are usually covered in a resource rich grass.", true),
 	SkipSpace(),
-	
+
 	Header("New Ruins Monsters"),
 	BinaryConfig("trepidations", "Ancient Trepidations", "Enabling this allows trepidations to roam the halls of the ruins, seeking out the weak of mind.", true),
 	BinaryConfig("pawns", "Clockwork Pawns", "Enabling this allows pawns to patrol the depths of the caves, drawing unwanted attention to the foolish and lost.", true),
 	SkipSpace(),
-	
-	
+
+
 	Header("Misc Monsters"),
 	BinaryConfig("desertscorpions", "Scorpions", "Scorpions plague the desert lands. They will spawn from desert turf within the desert during the day.", true),
 	BinaryConfig("pinelings", "Pinelings", "Stumps will become pinelings if awoken by a treeguard, or can happen naturally to existing old stumps.", true),
 	Header("Standard Creatures"),
-	
-	BinaryConfig("angrypenguins", "Territorial Penguins","Penguins will aggresively defend their land.", true), 
+
+	BinaryConfig("angrypenguins", "Territorial Penguins","Penguins will aggresively defend their land.", true),
 	BinaryConfig("harder_pigs", "Harder Pigs","Pigs have  a new counter and charge attack.", true),
 	BinaryConfig("harder_walrus","Harder MacTusk","Mactusk has a counter attack and can throw traps.", true),
 	BinaryConfig("harder_beefalo","Harder Beefalo","Beefalo ocasionally charge after a telegraph.", true),
-	
+	BinaryConfig("harder_koalefants", "Harder Koalefants", "Koalefants have brand new attacks and doubled health", true),
+	BinaryConfig("hungry_frogs", "Hungry Frogs", "Frogs eat anything left on the floor.", true),
+
 	SkipSpace(),
 	Header("--------------------"),
-	
+
 -----------------------------
 -- Bosses --
 -----------------------------
@@ -383,7 +397,7 @@ configuration_options =
 	BinaryConfig("mother_goose", "Mother Goose", "Mother Goose will now attack the player in spring, similar to the Reign of Giant's Moose.", true),
 	BinaryConfig("wiltfly", "Wilting Dragonfly", "Dragonfly will now leave her arena during summer and attack the player, similar to Reign of Giant's Dragonfly.", true),
 	Header(""),
-	
+
 	Header("Harder Bosses"),
 	BinaryConfig("harder_spiderqueen","Harder Spider Queen", "Spider Queen ocasionally spits web balls that trap players.", true),
 	BinaryConfig("harder_deerclops", "Deerclops Mutations", "Three different harder versions of deerclops spawn instead of the vanilla variant.", true),
@@ -391,14 +405,15 @@ configuration_options =
 	BinaryConfig("harder_bearger", "Harder Bearger", "Enabling this option makes bearger's fight contain more attacks, and will make bearger more actively seek out you.", true),
 	BinaryConfig("harder_leifs", "Harder Treeguards", "Enabling this option makes treeguards perform root attacks, inflict knockback, and summon pinelings.", true),
 	Header(""),
-	
+
 	Header("Harder Raid Bosses"),
 	BinaryConfig("harder_dragonfly", "Harder Dragonfly", "Dragonfly now has knockback on hit.", true),
 	BinaryConfig("harder_lavae", "Exploding Lavae", "Lavae will now leave exploding paste upon death, knocks holes in walls.", true),
 	Header(""),
-	
+
 	BinaryConfig("harder_beequeen", "Harder Bee Queen", "Bee Queen now has AOE attached to her main attack.", true),
 	BinaryConfig("rework_minotaur", "Ancient Guardian Rework", "The Ancient Guardian's fight is reworked, includes more attacks and a stunning mechanic.", true),
+	BinaryConfig("reworked_eyes", "Reworked Eyes of Terror", "Eye of Terror and the Twins have new attacks, inspired by their Terraria counterparts.", true),
 	Header(""),
 
 
@@ -473,7 +488,7 @@ configuration_options =
 			{description = "Lowest[5000]", data = 5000},
 		},
 		default = 10000,
-	},	
+	},
 	BinaryConfig("crabking_claws", "Crabking Fight Adjustment", "The Crabkings imposing claws now deal 500 damage to the king when killed.", false),
 	SkipSpace(),
 	Header("Experimental"),
@@ -486,5 +501,5 @@ configuration_options =
 ------------------------------
     --Header("Secret"),
 ------------------------------
-    
+
 }

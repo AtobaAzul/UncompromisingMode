@@ -360,6 +360,9 @@ TUNING.DSTU =
 	ELECTRICALMISHAP = GetModConfigData("electricalmishap"),
 	ANNOUNCE_BASESTATUS = GetModConfigData("announce_basestatus"),
 	EYEBRELLAREWORK = GetModConfigData("eyebrellarework"),
+
+--More Config
+    POCKET_POWERTRIP = GetModConfigData("pocket_powertrip"),
 }
 
 TUNING.NO_BOSS_TIME = 24
