@@ -60,7 +60,7 @@ local function Folded(inst)
 						owner.SoundEmitter:PlaySound("dontstarve/common/tool_slip")
 					end
 				end
-				if GLOBAL.TUNING.DSTU.POCKET_POWERTRIP == 1 then
+				if TUNING.DSTU.POCKET_POWERTRIP == 1 then
 					inst.components.container:DropEverything() 
 				end
 			end
