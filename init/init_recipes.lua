@@ -167,7 +167,7 @@ AddRecipe("mutator_trapdoor", { Ingredient("monstermeat", 2), Ingredient("spider
 
 AddRecipe("book_rain", { Ingredient("papyrus", 2), Ingredient("moon_tear", 1,"images/inventoryimages/moon_tear.xml"), Ingredient("waterballoon", 4)   	   }, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_THREE, nil, nil, nil, nil, "bookbuilder","images/inventoryimages/book_rain.xml", "book_rain.tex")
 
-AddRecipe("driftwoodfishingrod", 	 {Ingredient("driftwood_log", 3), 		  Ingredient("silk", 3),    Ingredient("rope", 2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO)
+AddRecipe("driftwoodfishingrod", 	 {Ingredient("driftwood_log", 3), 		  Ingredient("silk", 3),    Ingredient("rope", 2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, false, nil, nil, "images/inventoryimages/driftwoodfishingrod.xml", "driftwoodfishingrod.tex")
 
 AddRecipe("hermitshop_rain_horn", {Ingredient("dormant_rain_horn",1,"images/inventoryimages/dormant_rain_horn.xml"), Ingredient("oceanfish_small_9_inv",3), Ingredient("messagebottleempty", 2)}, RECIPETABS.HERMITCRABSHOP, TECH.HERMITCRABSHOP_SEVEN, nil, nil, true, nil, nil,"images/inventoryimages/rain_horn.xml", "rain_horn.tex", nil,"rain_horn")
 GLOBAL.AllRecipes["driftwoodfishingrod"].sortkey = GLOBAL.AllRecipes["fishingrod"].sortkey + .1
