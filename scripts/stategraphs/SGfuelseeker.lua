@@ -65,13 +65,13 @@ local function LightStealTarget(inst)
 
 	for i, v in ipairs(ents) do
 		if v.components.burnable ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
-			print("firefound")
+			--print("firefound")
 			return true
 		elseif v._light ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
-			print("lightfound")
+			--print("lightfound")
 			return true
 		elseif v._lastpulsesync ~= nil and v.components.timer and v.components.timer:GetTimeLeft("extinguish") then
-			print("starfound")
+			--print("starfound")
 			return true
 		end
 	end
