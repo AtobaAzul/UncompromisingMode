@@ -32,7 +32,7 @@ local function healowner(inst, owner)
 			healtime = 1 + (10 * owner.components.health:GetPercent())
 		end
 				
-		print(healtime)
+		--print(healtime)
 		
 		inst.task = inst:DoTaskInTime(healtime, healowner, owner)
     end
@@ -54,7 +54,7 @@ local function onequip_red(inst, owner)
 		healtime = 1 + (10 * owner.components.health:GetPercent())
 	end
 			
-	print(healtime)
+	--print(healtime)
     
     inst.task = inst:DoTaskInTime(healtime, healowner, nil, owner)
     --inst.task = inst:DoPeriodicTask(10, healowner, nil, owner)
@@ -95,7 +95,7 @@ local function ontakefuel_red(inst)
 				healtime = 1 + (10 * owner.components.health:GetPercent())
 			end
 					
-			print(healtime)
+			--print(healtime)
 		
 		
 			inst.task = inst:DoTaskInTime(healtime, healowner, owner)

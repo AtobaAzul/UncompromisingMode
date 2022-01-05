@@ -366,6 +366,42 @@ local states=
             --inst:PerformBufferedAction()
             ChangeToInventoryPhysics(inst)
             inst.components.health:SetInvincible(true)
+			
+			local x, y, z = inst.Transform:GetWorldPosition()
+			local ents = TheSim:FindEntities(x, y, z, 20, { "uncompromising_pawn" }, { "uncompromising_nightmarepawn" })
+			
+			if ents ~= nil then
+				for k,v in pairs(ents) do
+					if not v.sg:HasStateTag("busy") and v ~= inst then
+						v:AddTag("removingpawn")
+						v.sg:GoToState("hide_disarm")
+					end
+				end
+			end
+        end,
+
+        onexit = function(inst)
+            ChangeToCharacterPhysics(inst)
+            inst.components.health:SetInvincible(false)
+        end,
+
+        events=
+        {
+            EventHandler("animover", function(inst) inst:Remove() end ),
+        },
+    },
+
+    State{
+        name = "hide_disarm",
+        tags = {"busy", "invisible"},
+
+        onenter = function(inst)
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/knight/hurt")
+            inst.AnimState:PlayAnimation("hide")
+            inst.Physics:Stop()
+            --inst:PerformBufferedAction()
+            ChangeToInventoryPhysics(inst)
+            inst.components.health:SetInvincible(true)
         end,
 
         onexit = function(inst)

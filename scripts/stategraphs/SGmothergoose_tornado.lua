@@ -43,7 +43,7 @@ local function destroystuff(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
 	
 	local sizecheck = 1 + (inst.Transform:GetScale() * 2) or 0
-	print(sizecheck)
+	--print(sizecheck)
     local ents = TheSim:FindEntities(x, y, z, sizecheck, nil, TARGET_IGNORE_TAGS, TARGET_TAGS)
     for i, v in ipairs(ents) do
         --stuff might become invalid as we work or damage during iteration
@@ -217,7 +217,7 @@ local states =
 
         onenter = function(inst)
             inst.components.locomotor:RunForward()
-			print(" RUN RUN ROOOO ")
+			--print(" RUN RUN ROOOO ")
 			if inst.rotation == nil then
 				inst.rotation = 90
 			else

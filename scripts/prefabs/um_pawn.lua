@@ -39,14 +39,20 @@ local PAWN_DIVINING_MAXDIST = 72
 local PAWN_DIVINING_DEFAULTPING = 1.8
 local function FindClosestPart(inst)
 
-    if inst.tracking_parts == nil then
+	local x, y, z = inst.Transform:GetWorldPosition()
+	
+	local ents = TheSim:FindEntities(x, y, z, 80, { "player" }, { "playerghost" })
+	inst.tracking_parts = nil
+	if ents ~= nil then
+    --if inst.tracking_parts == nil then
         inst.tracking_parts = {}
-        for k,v in pairs(Ents) do
+        for k,v in pairs(ents) do
             if v:HasTag("player") then
                 table.insert(inst.tracking_parts, v)
             end
         end
-    end
+    --end
+	end
 
     if inst.tracking_parts then
         local closest = nil
@@ -67,6 +73,11 @@ end
 
 local function CheckTargetPiece(inst)
 	--inst.SoundEmitter:KillSound("ping")
+	if inst.pingnum ~= nil then
+		inst.pingnum = inst.pingnum + 1
+	else
+		inst.pingnum = 1
+	end
 		
 	if not inst.components.health:IsDead() then
         local intensity = 0
@@ -97,13 +108,15 @@ local function CheckTargetPiece(inst)
             inst.fxlight = SpawnPrefab(fxname.."_light"..inst.pawntype)
             inst.fxlight.entity:AddFollower()
             inst.fxlight.Follower:FollowSymbol(inst.GUID, "body", 0, -40, 0)
+			
+			local px, py, pz = inst.fx.Transform:GetWorldPosition()
         end
 		
 		if inst.task ~= nil then
 			inst.task:Cancel()
+			inst.task = nil
 		end
 		
-		inst.task = nil
         inst.task = inst:DoTaskInTime(nextpingtime or PAWN_DIVINING_DEFAULTPING, CheckTargetPiece)
 	end
 end
@@ -115,6 +128,10 @@ local function OnWake(inst)
 end
 
 local function OnSleep(inst)
+	if inst.task ~= nil then
+		inst.task:Cancel()
+		inst.task = nil
+	end
 end
 
 local function StartDusk(inst)
@@ -280,7 +297,7 @@ local function onnear(inst, target)
 	inst.target = target
 	
 	inst.neartask = inst:DoPeriodicTask(0.1, function(inst) 
-		if not inst.components.freezable:IsFrozen() and inst.target ~= nil and inst.components.health ~= nil and not inst.components.health:IsDead() then
+		if not inst.components.freezable:IsFrozen() and inst.target ~= nil and inst.components.health ~= nil and not inst.components.health:IsDead() and not inst:HasTag("removingpawn") then
 			inst.neartask:Cancel()
 			SpawnSpikes(inst.target)
 			SpawnAmalgams(inst.target)
@@ -374,6 +391,7 @@ local function pawn_common(pawntype)
     inst.components.inspectable.getstatus = getstatus
 	
 	if inst.pawntype == "_nightmare" then
+		inst:AddTag("uncompromising_nightmarepawn") 
 		inst.components.combat:SetRetargetFunction(1, NormalRetarget)
 		inst:AddComponent("explosive")
 		inst.components.explosive:SetOnExplodeFn(OnExplodeFn)
@@ -395,8 +413,9 @@ local function pawn_common(pawntype)
 	--inst:ListenForEvent("unfreeze", TryUnpause)
 	
 	if inst.task == nil then
-        inst.task = inst:DoTaskInTime(1, CheckTargetPiece)
+        inst.task = inst:DoTaskInTime(5, CheckTargetPiece)
 	end
+	
 	inst:AddTag("soulless")
 	inst.sg:GoToState("hide_post")
 	inst:DoTaskInTime(0, function(inst)

@@ -372,8 +372,8 @@ end
 
 local function CheckTargetPiece(inst)
 	local owner = inst.components.inventoryitem.owner
-	print("owner")
-	print(owner)
+	--print("owner")
+	--print(owner)
 		
     if owner ~= nil then
 		FindClosestPart(owner)
@@ -410,8 +410,8 @@ local function rat_disable(inst)
 end
 
 local function Hack(inst, data)
-	print("hack")
-	print("hack owner")
+	--print("hack")
+	--print("hack owner")
 	local snap = SpawnPrefab("impact")
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local x1, y1, z1 = data.target.Transform:GetWorldPosition()
