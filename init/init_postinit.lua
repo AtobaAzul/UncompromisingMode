@@ -118,7 +118,6 @@ local prefab_post = {
 	"marblebean",
 	"reviver",
 	"krampus_sack",
-	"armor_dragonfly",
 	--"bundle",
 	"eyebrella",
 	"birds",
@@ -274,6 +273,10 @@ if GetModConfigData("hungry_frogs") == true then
 	table.insert(prefab_post,"frog")
 	table.insert(stategraph_post,"frog")
 	table.insert(brain_post,"frog")
+end
+
+if GetModConfigData("scalemailbuff") == true then
+	table.insert(prefab_post,"armor_dragonfly")
 end
 
 modimport("postinit/sim")

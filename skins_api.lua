@@ -122,9 +122,12 @@ end
 local function BuilderSkinPostInit(self)
     local _MakeRecipeFromMenu = self.MakeRecipeFromMenu
     self.MakeRecipeFromMenu = function(self, recipe, skin, ...)
-        if IsOfficial(recipe.product) then
+		if IsOfficial(recipe.product) or not skin then
+		  return _MakeRecipeFromMenu(self, recipe, skin, ...)
+		end
+        --[[if IsOfficial(recipe.product) then
             return _MakeRecipeFromMenu(self, recipe, skin, ...)
-        end
+        end]]
 		
 		if not recipe.placer then
 			if self:KnowsRecipe(recipe.name) then

@@ -765,9 +765,9 @@ local states=
 			inst.components.groundpounder:GroundPound()
 			inst.components.groundpounder.numRings = 2
 			inst.SoundEmitter:PlaySound("UCSounds/moonmaw/land")
-			print("preran")
+			--print("preran")
 			if inst.redolavae == true then
-				print("2")
+				--print("2")
 				inst.SpawnLavae(inst)
 				inst.redolavae = nil
 			end

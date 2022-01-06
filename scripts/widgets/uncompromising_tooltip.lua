@@ -41,10 +41,10 @@ end
 
 function Uncompromising_Tooltip:RefreshTooltips()
 	if self.skins_spinner ~= nil then
-		print("skin_spinner")
+		--print("skin_spinner")
 		self.bg2:SetPosition(300, 300, 0)
 	else
-		print("no skin_spinner")
+		--print("no skin_spinner")
 		self.bg2:SetPosition(300, 245, 0)
 	end
 		

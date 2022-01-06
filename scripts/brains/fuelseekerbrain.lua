@@ -22,10 +22,10 @@ local function GetNearestLightPos(inst)
 
 	for i, v in ipairs(ents) do
 		if v.components.burnable ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
-			print("firefound")
+			--print("firefound")
 			return Vector3(v.Transform:GetWorldPosition())
 		elseif v._light ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
-			print("lightfound")
+			--print("lightfound")
 			return Vector3(v.Transform:GetWorldPosition())
 		end
 	end
@@ -72,7 +72,7 @@ function FuelSeekerBrain:OnStart()
 			WhileNode(function() return not self.inst.sg:HasStateTag("busy") end, "NotEating",
 			Follow(self.inst, function() return self.inst:GetNearestPlayer(true) end, MIN_SHRINE_WANDER_DIST, 15, MAX_SHRINE_WANDER_DIST)
 			),
-        }, 0.25)
+        }, 0.5)
 
     self.bt = BT(self.inst, root)
 end

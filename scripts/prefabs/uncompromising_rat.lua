@@ -255,7 +255,7 @@ end
 
 local function PiedPiperBuff(inst)
 	if inst.note == nil then
-		print("note")
+		--print("note")
 	
 		local fx = SpawnPrefab("rat_note")
 		fx.entity:SetParent(inst.entity)
@@ -270,7 +270,7 @@ local function PiedPiperBuff(inst)
 		
 		inst:DoTaskInTime(8, PiedPiperBuff)
     else
-		print("nooooote")
+		--print("nooooote")
 		inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_WALKSPEED
 		inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_RUNSPEED
 		inst.components.combat:SetAttackPeriod(TUNING.DSTU.RAIDRAT_ATTACK_PERIOD)
@@ -1132,7 +1132,7 @@ local function OnInitHerd(inst)
 	if inst.raiding then
 		for i = 1, 3 do
 			inst:DoTaskInTime((i - 1) * 15, function(inst)
-			print("i = "..i)
+			--print("i = "..i)
 				for n = 1, (i + 2) do
 					local x, y, z = inst.Transform:GetWorldPosition()
 					local angle = math.random() * 8 * PI
@@ -1705,7 +1705,7 @@ local function PlayWarningSound(inst)
     inst.Transform:SetPosition(x + (15 * math.cos(theta)), 0, z + 15 * (math.sin(theta)))
 
 	local x, y, z = inst.Transform:GetWorldPosition()
-	print(x, y, z)
+	--print(x, y, z)
 	--TheFocalPoint.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
     inst.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
     
@@ -1752,7 +1752,7 @@ local function TimeForACheckUpDev(inst)
 	inst.ratscore = -60
 	inst.itemscore = 0
 	inst.foodscore = 0
-	print(#ents)
+	--print(#ents)
 	
 	if ents ~= nil then
 		for i, v in ipairs(ents) do
@@ -1761,7 +1761,7 @@ local function TimeForACheckUpDev(inst)
 				
 				
 					if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" then
-						print("lureplant is holding!")
+						--print("lureplant is holding!")
 					else
 						if not v:HasTag("frozen") then
 							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
