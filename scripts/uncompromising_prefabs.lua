@@ -289,4 +289,5 @@ return {
 	"oculet_pets",
 	"terrarium",
 	"reedbuncher",
+	"uncompromising_pollen_fx",
 }
