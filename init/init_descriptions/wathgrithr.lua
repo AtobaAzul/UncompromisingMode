@@ -136,7 +136,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.MARSH_GRASS = "It's a bush!"
 	DESCRIBE.CURSED_ANTLER = "A magnificent weapon!"
 	DESCRIBE.BERNIEBOX = "I've no need for toys!"
-	DESCRIBE.HOODED_FERN = "A beast cöuld be lurking in the underbrush!"
+	DESCRIBE.HOODED_FERN = "A beast could be lurking in the underbrush!"
 	DESCRIBE.HOODEDWIDOW = "I... I am not fearful!"
 	DESCRIBE.GIANT_TREE = "Surely I stand before Yggdrasil!"
 	DESCRIBE.WIDOWSGRASP = "A key to my spoils!"
@@ -169,9 +169,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.WATERMELON_LANTERN = "Do you wish to fight, melon head?"
 	
 		--Viperstuff Quotes
-	DESCRIBE.VIPERWORM = "A serpent whö fights a cöward's way!"
-	DESCRIBE.VIPERFRUIT = "A fruit fröm Löki himself!"
-	DESCRIBE.VIPERJAM = "Still sticky and gröss, but cöntained."
+	DESCRIBE.VIPERWORM = "A serpent who fights a coward's way!"
+	DESCRIBE.VIPERFRUIT = "A fruit from Loki himself!"
+	DESCRIBE.VIPERJAM = "Still sticky and gross, but contained."
 	
 	
 	DESCRIBE.BLUEBERRYPLANT =         
@@ -210,7 +210,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.RNESKELETON = "A fallen warrior! Raise your weapon if you wish to fall again!"
 	DESCRIBE.RAT_WHIP = "Thy lashes sting, a feared weapon!"
 	DESCRIBE.KLAUS_AMULET = "The lock of a warrior!"
-	DESCRIBE.CRABCLAW = "A magnificent weapon to be adorned with jewels!" --Generic line for now, this is unimplemented
+	DESCRIBE.CRABCLAW = "A magnificent weapon to be adorned with jewels!" 
 	DESCRIBE.HAT_RATMASK = "Reminds me of the masks back in the theatre." 
 
 	DESCRIBE.ORANGE_VOMIT = "... No."
@@ -310,6 +310,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.BOOK_RAIN = "A tome to dampen the battleground."
 	DESCRIBE.DORMANT_RAIN_HORN = "A strange boon from the king of the sea."
 	DESCRIBE.RAIN_HORN = "I horn to call forth a downpour."
+	DESCRIBE.DRIFTWOODFISHINGROD = "Fish fear me."
 
 	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "Spoils left unguarded attract thieves!",

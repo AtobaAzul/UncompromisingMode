@@ -133,7 +133,7 @@ AddRecipe("honey_log",   {Ingredient("livinglog", 1), Ingredient("honey", 2)}, C
 AddRecipe("bugzapper",   {Ingredient("spear", 1), Ingredient("transistor", 2), Ingredient("feather_canary", 2)}, GLOBAL.RECIPETABS.WAR, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/bugzapper.xml", "bugzapper.tex" )
 GLOBAL.AllRecipes["bugzapper"].sortkey = GLOBAL.AllRecipes["nightstick"].sortkey + .1
 
-AddRecipe("slingshotammo_firecrackers",	{Ingredient("nitre", 1)},	CUSTOM_RECIPETABS.SLINGSHOTAMMO, TECH.SCIENCE_TWO,		{no_deconstruction = true}, nil, nil, 10, "pebblemaker", "images/inventoryimages/slingshotammo_firecrackers.xml", "slingshotammo_firecrackers.tex" )
+AddRecipe("slingshotammo_firecrackers",	{Ingredient("nitre", 2), Ingredient("cutgrass", 1)},	CUSTOM_RECIPETABS.SLINGSHOTAMMO, TECH.SCIENCE_TWO,		{no_deconstruction = true}, nil, nil, 10, "pebblemaker", "images/inventoryimages/slingshotammo_firecrackers.xml", "slingshotammo_firecrackers.tex" )
 GLOBAL.AllRecipes["slingshotammo_firecrackers"].sortkey = GLOBAL.AllRecipes["slingshotammo_poop"].sortkey - 0.1
 
 AddRecipe("watermelon_lantern", {Ingredient("watermelon", 1), Ingredient("fireflies", 1)}, RECIPETABS.LIGHT, TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/watermelon_lantern.xml", "watermelon_lantern.tex" )
@@ -165,7 +165,7 @@ AllRecipes["seedpouch"].ingredients = {Ingredient("slurtle_shellpieces", 2), Ing
 
 AddRecipe("mutator_trapdoor", { Ingredient("monstermeat", 2), Ingredient("spidergland", 3), Ingredient("cutgrass", 5)}, CUSTOM_RECIPETABS.SPIDERCRAFT, TECH.SPIDERCRAFT_ONE, nil, nil, nil, nil, "spiderwhisperer","images/inventoryimages/mutator_trapdoor.xml", "mutator_trapdoor.tex")
 
-AddRecipe("book_rain", { Ingredient("papyrus", 2), Ingredient("moon_tear", 1,"images/inventoryimages/moon_tear.xml"), Ingredient("waterballoon", 4)   	   }, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_THREE, nil, nil, nil, nil, "bookbuilder","images/inventoryimages/book_rain.xml", "book_rain.tex")
+AddRecipe("book_rain", { Ingredient("papyrus", 2), Ingredient("moon_tear", 1,"images/inventoryimages/moon_tear.xml"), Ingredient("waterballoon", 4)   	   }, CUSTOM_RECIPETABS.BOOKS, TECH.MAGIC_THREE, nil, nil, nil, nil, "bookbuilder","images/inventoryimages/book_rain.xml", "book_rain.tex")
 
 AddRecipe("driftwoodfishingrod", 	 {Ingredient("driftwood_log", 3), 		  Ingredient("silk", 3),    Ingredient("rope", 2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, false, nil, nil, "images/inventoryimages/driftwoodfishingrod.xml", "driftwoodfishingrod.tex")
 

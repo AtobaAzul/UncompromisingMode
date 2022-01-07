@@ -210,7 +210,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.RNESKELETON = "W-WOLFGANG WILL SMASH YOU! STAY BACK!"
 	DESCRIBE.RAT_WHIP = "Whap!"
 	DESCRIBE.KLAUS_AMULET = "Wolfgang mightiest man in world!"
-	DESCRIBE.CRABCLAW = "Little holes for little rocks!" --Generic line for now, this is unimplemented
+	DESCRIBE.CRABCLAW = "Little holes for little rocks!" 
 	DESCRIBE.HAT_RATMASK = "Does Wolfgang have to find rats alone?" 
 
 	DESCRIBE.ORANGE_VOMIT = "Is face poop."
@@ -312,6 +312,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "Very good for boo boos."
 	DESCRIBE.DORMANT_RAIN_HORN = "Is nice shell."
 	DESCRIBE.RAIN_HORN = "Blow shell and make water fall from sky!"
+	DESCRIBE.DRIFTWOODFISHINGROD = "Is still for little pond place, just look different now."
 
 	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "Ground is full of things!",

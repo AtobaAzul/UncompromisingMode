@@ -287,7 +287,7 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.RNESKELETON = "They are spooky AND scary!"
 	DESCRIBE.RAT_WHIP = "I make all the rules."
 	DESCRIBE.KLAUS_AMULET = "It's chains contain the King of Winter!"
-	DESCRIBE.CRABCLAW = "Hey, these are gem holes!" --Generic line for now, this is unimplemented
+	DESCRIBE.CRABCLAW = "Hey, these are gem holes!" 
 	DESCRIBE.HAT_RATMASK = "I'll sniff out those dens myself!" 
 
 	DESCRIBE.ORANGE_VOMIT = "Oh, how nice of you..."
@@ -390,6 +390,7 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.FLORAL_BANDAGE = "Heals open wounds and keeps them smelling good."
 	DESCRIBE.DORMANT_RAIN_HORN = "Looking at it gives me flashes of a tropical setting."
 	DESCRIBE.RAIN_HORN = "This'll be useful for when wildfires start up again."
+	DESCRIBE.DRIFTWOODFISHINGROD = "It's attuned to the ocean."
 	
 	ANNOUNCE.ANNOUNCE_NORATBURROWS = "Sounds like theres no rat dens nearby."
 	

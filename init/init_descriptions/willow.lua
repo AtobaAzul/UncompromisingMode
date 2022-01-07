@@ -225,8 +225,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.RNESKELETON = "Holy crap, a skeleton!!"
 	DESCRIBE.RAT_WHIP = "It's so tiring to swing this around..."
 	DESCRIBE.KLAUS_AMULET = "Guh, it's so heavy! I'm supposed to wear this?!"
-	DESCRIBE.CRABCLAW = "Haha. Whack." --Generic line for now, this is unimplemented
-	DESCRIBE.HAT_RATMASK = "Ewww, I can smell all of them!" --Generic line for now, this is unimplemented
+	DESCRIBE.CRABCLAW = "Haha. Whack." 
+	DESCRIBE.HAT_RATMASK = "Ewww, I can smell all of them!" 
 
 	DESCRIBE.ORANGE_VOMIT = "Ewwwww!"
 	DESCRIBE.GREEN_VOMIT = "Ewwwww!"
@@ -321,9 +321,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
 	DESCRIBE.BOOK_RAIN = "I hate this book."
 	DESCRIBE.FLORAL_BANDAGE = "This is disgusting."
-	
 	DESCRIBE.DORMANT_RAIN_HORN = "It doesn't burn, I'm not interested."
 	DESCRIBE.RAIN_HORN = "I want a refund."
+	DESCRIBE.DRIFTWOODFISHINGROD = "How is this any better than the other one?"
 
 	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "Our base is too messy, can we burn some of it?",

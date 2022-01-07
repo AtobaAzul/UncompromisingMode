@@ -211,7 +211,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.RNESKELETON = "Someone's back on the clock."
 	DESCRIBE.RAT_WHIP = "The smell alone should scare someone away."
 	DESCRIBE.KLAUS_AMULET = "Time to overclock!"
-	DESCRIBE.CRABCLAW = "I have a knack for stickin' gems into things, don't I?" --Generic line for now, this is unimplemented
+	DESCRIBE.CRABCLAW = "I have a knack for stickin' gems into things, don't I?" 
 	DESCRIBE.HAT_RATMASK = "Let's go find their base of operations." 
 
 	DESCRIBE.ORANGE_VOMIT = "Thanks."
@@ -311,9 +311,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
 	DESCRIBE.BOOK_RAIN = "I ain't scared of no rain!"
 	DESCRIBE.FLORAL_BANDAGE = "I like the sweet smell, covers up the factory must."
-	
 	DESCRIBE.DORMANT_RAIN_HORN = "Just a conch shell."
 	DESCRIBE.RAIN_HORN = "It lets you blow the horn on the summer heat."
+	DESCRIBE.DRIFTWOODFISHINGROD = "Nothing better than making a job easier."
 
 	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "Messy work conditions, boss wouldn't be happy.",
