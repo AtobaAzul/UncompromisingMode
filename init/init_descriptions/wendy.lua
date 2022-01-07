@@ -209,8 +209,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.RNESKELETON = "Has the reaper come to take me? What took you so long?"
 	DESCRIBE.RAT_WHIP = "How degrading."
 	DESCRIBE.KLAUS_AMULET = "Another lock to be behind."
-	DESCRIBE.CRABCLAW = "One small snip will sever a limb." --Generic line for now, this is unimplemented
-	DESCRIBE.HAT_RATMASK = "I can smell the vermin from miles away." --Generic line for now, this is unimplemented
+	DESCRIBE.CRABCLAW = "One small snip will sever a limb."
+	DESCRIBE.HAT_RATMASK = "I can smell the vermin from miles away." 
 
 	DESCRIBE.ORANGE_VOMIT = "Such as life."
 	DESCRIBE.GREEN_VOMIT = "Such as life."
@@ -307,9 +307,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
 	DESCRIBE.BOOK_RAIN = "It makes the world around me reflect my perspective."
 	DESCRIBE.FLORAL_BANDAGE = "Can heal a broken heart, but not a broken mind."
-	
 	DESCRIBE.DORMANT_RAIN_HORN = "I remember this."
 	DESCRIBE.RAIN_HORN = "It makes the world around me reflect my perspective."
+	DESCRIBE.DRIFTWOODFISHINGROD = "The sea only made it better, it want's the fish gone."
 
 	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "If we don't care for our possessions, they will slip away.",

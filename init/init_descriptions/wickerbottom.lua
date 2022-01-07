@@ -215,8 +215,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.RNESKELETON = "A living human skeleton."
 	DESCRIBE.RAT_WHIP = "A makeshift whip fashioned from rat appendages. Lovely."
 	DESCRIBE.KLAUS_AMULET = "My old bones are invigorated!"
-	DESCRIBE.CRABCLAW = "The appendage has distinct engravings. For gemstones, I presume." --Generic line for now, this is unimplemented
-	DESCRIBE.HAT_RATMASK = "Amplifies the abilities of our noses." --Generic line for now, this is unimplemented
+	DESCRIBE.CRABCLAW = "The appendage has distinct engravings. For gemstones, I presume." 
+	DESCRIBE.HAT_RATMASK = "Amplifies the abilities of our noses." 
 
 	DESCRIBE.ORANGE_VOMIT = "Delightful."
 	DESCRIBE.GREEN_VOMIT = "Delightful."
@@ -314,9 +314,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
 	DESCRIBE.BOOK_RAIN = "Good for a rainy day."
 	DESCRIBE.FLORAL_BANDAGE = "The cactus flowers' medicinal properties pair well with the poultice."
-
 	DESCRIBE.DORMANT_RAIN_HORN = "An inconspicious conch shell. Like most things here, it must have some hidden purpose."
 	DESCRIBE.RAIN_HORN = "Interesting, I should add an entry to \"Rainy Days\" about this."
+	DESCRIBE.DRIFTWOODFISHINGROD = "It appears the fish are much more interested in this material, intriguing."
 
 	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "I dislike our disorganized workspace as much as the rats like it.",

@@ -215,8 +215,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.RNESKELETON = "Back for revenge? I'll kill you again if I have to."
 	DESCRIBE.RAT_WHIP = "What a way to go."
 	DESCRIBE.KLAUS_AMULET = "A powerful, wonderful enchantment!"
-	DESCRIBE.CRABCLAW = "I know gem-holes when I see them." --Generic line for now, this is unimplemented
-	DESCRIBE.HAT_RATMASK = "Must I be the one to do this filthy work?" --Generic line for now, this is unimplemented
+	DESCRIBE.CRABCLAW = "I know gem-holes when I see them." 
+	DESCRIBE.HAT_RATMASK = "Must I be the one to do this filthy work?" 
 
 	DESCRIBE.ORANGE_VOMIT = "That's life!"
 	DESCRIBE.GREEN_VOMIT = "That's life!"
@@ -316,6 +316,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "Sweet bandage."
 	DESCRIBE.DORMANT_RAIN_HORN = "A shell capable of channeling some magical energy."
 	DESCRIBE.RAIN_HORN = "That hold carapace knows more about magic than she leads on..."
+	DESCRIBE.DRIFTWOODFISHINGROD = "The driftwood must have made it fishier."
 
 	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "Hmph. The rats must be after our items.",

@@ -210,7 +210,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORMWOOD.ACTIONFAIL
 	DESCRIBE.RNESKELETON = "Alive. Friend?"
 	DESCRIBE.RAT_WHIP = "Chewy"
 	DESCRIBE.KLAUS_AMULET = "Feel strong"
-	DESCRIBE.CRABCLAW = "Snip snip snip" --Generic line for now, this is unimplemented
+	DESCRIBE.CRABCLAW = "Snip snip snip" 
 	DESCRIBE.HAT_RATMASK = "Smelly Squeakers"
 
 	DESCRIBE.ORANGE_VOMIT = "Taste funny"
@@ -309,6 +309,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORMWOOD.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "Buzzers and friends work together good"
 	DESCRIBE.DORMANT_RAIN_HORN = "Nice shell"
 	DESCRIBE.RAIN_HORN = "Wet shell"
+	DESCRIBE.DRIFTWOODFISHINGROD = "Glub Glubs like Friend Stick"
 
 	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "Too much stuff on ground!",

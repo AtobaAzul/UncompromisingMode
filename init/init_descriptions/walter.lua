@@ -210,8 +210,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.RNESKELETON = "Hello! What story led you to be like that?"
 	DESCRIBE.RAT_WHIP = "Resourceful!... Bleh."
 	DESCRIBE.KLAUS_AMULET = "Goat power!"
-	DESCRIBE.CRABCLAW = "He left his claw behind!" --Generic line for now, this is unimplemented
-	DESCRIBE.HAT_RATMASK = "Look out, here comes the Rat Man!" --Generic line for now, this is unimplemented
+	DESCRIBE.CRABCLAW = "He left his claw behind!" 
+	DESCRIBE.HAT_RATMASK = "Look out, here comes the Rat Man!" 
 
 	DESCRIBE.ORANGE_VOMIT = "Thanks for sharing your digestive juices?"
 	DESCRIBE.GREEN_VOMIT = "Thanks for sharing your digestive juices?"
@@ -312,7 +312,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
 	DESCRIBE.BOOK_RAIN = "Reminds me of a past camping trip."
 	DESCRIBE.DORMANT_RAIN_HORN = "You can hear the ocean if you put it to your ear!"
-	DESCRIBE.RAIN_HORN = "This might be useful for when it gets hot."	
+	DESCRIBE.RAIN_HORN = "This might be useful for when it gets hot."
+    DESCRIBE.DRIFTWOODFISHINGROD = "The fish seem to like it."	
 	
     ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "All our items might get stolen if they're left on the ground!",

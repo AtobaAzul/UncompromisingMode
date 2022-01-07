@@ -311,6 +311,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "I don't have the time to mess with that."
 	DESCRIBE.DORMANT_RAIN_HORN = "How did that crab bring this here?"
 	DESCRIBE.RAIN_HORN = "It was warped when it was pulled across the timestream."	
+	DESCRIBE.DRIFTWOODFISHINGROD = "Something that saves time. Much better."
 
     ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "I think it's time to clean up!",

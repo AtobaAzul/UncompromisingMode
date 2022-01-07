@@ -211,8 +211,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.RNESKELETON = "It not dead!!"
 	DESCRIBE.RAT_WHIP = "Fun to play with! ... OUCH!"
 	DESCRIBE.KLAUS_AMULET = "Cold! Brr!"
-	DESCRIBE.CRABCLAW = "Is big, it hurt!" --Generic line for now, this is unimplemented
-	DESCRIBE.HAT_RATMASK = "So many smells!!" --Generic line for now, this is unimplemented
+	DESCRIBE.CRABCLAW = "Is big, it hurt!" 
+	DESCRIBE.HAT_RATMASK = "So many smells!!" 
 
 	DESCRIBE.ORANGE_VOMIT = "Flurgh..."
 	DESCRIBE.GREEN_VOMIT = "Flurgh..."
@@ -311,6 +311,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "Flower and honey are good team to fight boo boos."
 	DESCRIBE.DORMANT_RAIN_HORN = "Funny looking shell."
 	DESCRIBE.RAIN_HORN = "Me like drowning, florpt!"
+	DESCRIBE.DRIFTWOODFISHINGROD = "Catch a lot of fishes with salty catcher."
 
 	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "Little hairy wants our stuff!",

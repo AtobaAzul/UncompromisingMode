@@ -210,7 +210,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.RNESKELETON = "He's seen better days."
 	DESCRIBE.RAT_WHIP = "That's not something I want to keep on me."
 	DESCRIBE.KLAUS_AMULET = "The chains are comin' off now!"
-	DESCRIBE.CRABCLAW = "Use every part of the animal, I suppose." --Generic line for now, this is unimplemented
+	DESCRIBE.CRABCLAW = "Use every part of the animal, I suppose." 
 	DESCRIBE.HAT_RATMASK = "Did a real fine job, eh Lucy?"
 
 	DESCRIBE.ORANGE_VOMIT = "Hoo-wee..."
@@ -310,6 +310,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.FLORAL_BANDAGE = "I'll keep this for dire circumstances."
 	DESCRIBE.DORMANT_RAIN_HORN = "This is pretty nice, ain't it, Lucy?"
 	DESCRIBE.RAIN_HORN = "How did that old crab do this?"
+	DESCRIBE.DRIFTWOODFISHINGROD = "I like relaxing at the lake, there's no rush."
 
 	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "Don't want no vermin carrying away our kit.",
