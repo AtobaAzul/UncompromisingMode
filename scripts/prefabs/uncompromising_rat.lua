@@ -1483,6 +1483,12 @@ local function fn_scoutburrow()
 	return inst
 end
 
+local function IsAVersionOfRot(v)
+	if v.prefab == "spoiled_food" or v.prefab == "rottenegg" or v.prefab == "spoiled_fish" or v.prefab == "spoiled_fish_small" then
+		return true
+	end
+end
+
 local function TimeForACheckUp(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 
@@ -1515,7 +1521,7 @@ local function TimeForACheckUp(inst)
 								inst.foodscore = inst.foodscore + (5 * inst.multiplier)
 							elseif v:HasTag("spoiled") then
 								inst.foodscore = inst.foodscore + (10 * inst.multiplier)
-							elseif v.prefab == "spoiled_food" then
+							elseif IsAVersionOfRot(v) then
 								inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
 								inst.foodscore = inst.foodscore + (10 * inst.multiplier)
 							end
@@ -1531,7 +1537,7 @@ local function TimeForACheckUp(inst)
 							inst.foodscore = inst.foodscore + (20 * inst.multiplier)
 						elseif v:HasTag("spoiled") then
 							inst.foodscore = inst.foodscore + (30 * inst.multiplier)
-						elseif v.prefab == "spoiled_food" then
+						elseif IsAVersionOfRot(v) then
 							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
 							inst.foodscore = inst.foodscore + (35 * inst.multiplier)
 						end
@@ -1730,6 +1736,8 @@ local function fn_warning()
 	return inst
 end
 
+
+
 local function TimeForACheckUpDev(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 
@@ -1762,7 +1770,7 @@ local function TimeForACheckUpDev(inst)
 								inst.foodscore = inst.foodscore + (5 * inst.multiplier)
 							elseif v:HasTag("spoiled") then
 								inst.foodscore = inst.foodscore + (10 * inst.multiplier)
-							elseif v.prefab == "spoiled_food" then
+							elseif IsAVersionOfRot(v)  then
 								inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
 								inst.foodscore = inst.foodscore + (15 * inst.multiplier)
 							end
@@ -1778,7 +1786,7 @@ local function TimeForACheckUpDev(inst)
 							inst.foodscore = inst.foodscore + (20 * inst.multiplier)
 						elseif v:HasTag("spoiled") then
 							inst.foodscore = inst.foodscore + (30 * inst.multiplier)
-						elseif v.prefab == "spoiled_food" then
+						elseif IsAVersionOfRot(v) then
 							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
 							inst.foodscore = inst.foodscore + (35 * inst.multiplier)
 						end

@@ -149,6 +149,7 @@ TUNING.DSTU =
     ----------------------------------------------------------------------------
 	--ratraid
 	RATRAID_TIMERSTART = GetModConfigData("rattimer"),
+	RATRAID_GRACE = GetModConfigData("ratgrace"),
 	RATSNIFFER_TIMER = GetModConfigData("ratsnifftimer"),
 	
     --Generics

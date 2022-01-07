@@ -180,17 +180,31 @@ configuration_options =
     Header("Rats"),
 ------------------------------
     {
-		name = "rattimer",
-		label = "Rat Timer",
-		hover = "Time until the first rats can spawn!",
+		name = "ratgrace",
+		label = "Rat Raid Grace Period",
+		hover = "Minimum grace period that makes rats unable to invade!",
 		options =
 		{
 			{description = "As soon as possible.", data = 1},
-			{description = "Lowered[30 days]", data = 14400},
-			{description = "Default[50 days]", data = 24000},
-			{description = "Raised[70 days]", data = 33600},
+			{description = "Low[15 days]", data = 15},
+			{description = "Default[30 days]", data = 30},
+			{description = "Medium[45 days]", data = 45},
+			{description = "High[60 days]", data = 60},
 		},
-		default = 24000,
+		default = 30,
+	},
+    {
+		name = "rattimer",
+		label = "Rat Timer",
+		hover = "The cooldown between rat raids!",
+		options =
+		{
+			{description = "As soon as possible.", data = 1},
+			{description = "Half", data = 4800},
+			{description = "Default", data = 9600},
+			{description = "Double", data = 14400},
+		},
+		default = 9600,
 	},
 	{
 		name = "ratsnifftimer",

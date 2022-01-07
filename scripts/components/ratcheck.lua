@@ -23,7 +23,10 @@ local _respawntimeremaining = nil
 local ratwarning = nil
 --local _initialrattimer = 24000
 local _initialrattimer = TUNING.DSTU.RATRAID_TIMERSTART --24000
+local _rattimer = TUNING.DSTU.RATRAID_TIMERSTART --24000
+local _rattimer_short = TUNING.DSTU.RATRAID_TIMERSTART / 3 --24000
 local _ratsnifftimer = TUNING.DSTU.RATSNIFFER_TIMER
+local _ratgrace = TUNING.DSTU.RATRAID_GRACE
 local _ratburrows = 0
 
 local RATRAID_TIMERNAME = "rat_raid"
@@ -45,14 +48,14 @@ end
 
 local function StartRatTimer()
 	--local _time = 20 + math.random(20)
-	local _time = 9600 + math.random(4800)
+	local _time = _rattimer + math.random(_rattimer / 2)
 	
 	_initialrattimer = _time
 end
 
 local function StartTimerShort()
 	--local _time = 20 + math.random(20)
-	local _time = 3840 + math.random(960)
+	local _time = _rattimer_short + math.random(_rattimer_short / 3)
 	
 	_initialrattimer = _time
 end
@@ -60,7 +63,7 @@ end
 local function ChangeRatTimer(src, data)
 	local value = data ~= nil and data.value ~= nil and data.value or 60
 	if _initialrattimer > 0 then
-		if value ~= nil and value < 0 and _initialrattimer < 14400 then
+		if value ~= nil and value < 0 and _initialrattimer < _rattimer then
 			_initialrattimer = _initialrattimer - value
 			print("increase timer")
 			print(_initialrattimer)
@@ -305,7 +308,9 @@ function self:OnUpdate(dt)
 end
 
 function self:LongUpdate(dt)
-	self:OnUpdate(dt)
+	if TheWorld.state.cycles > _ratgrace then
+		self:OnUpdate(dt)
+	end
 end
 
 function self:OnSave()
@@ -334,11 +339,13 @@ function self:OnLoad(data)
 end
 
 local function StartRespawnTimer()
-	self.inst:StartUpdatingComponent(self)
+	if TheWorld.state.cycles > _ratgrace then
+		self.inst:StartUpdatingComponent(self)
+	end
 end
 
 StartRespawnTimer()
-
+self.inst:WatchWorldState("cycles", StartRespawnTimer)
 self.inst:ListenForEvent("ratcooldown", StartRatTimer, TheWorld)
 self.inst:ListenForEvent("ratcooldownshort", StartTimerShort, TheWorld)
 self.inst:ListenForEvent("activeraid", ActiveRaid, TheWorld)
