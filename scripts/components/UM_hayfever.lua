@@ -121,7 +121,7 @@ function UM_hayfever:PollenCount(dt)
 				medaddition = 0
 			end			
 			--Large
-			if v:HasTag("pollenlarge") then
+			if v:HasTag("pollenhigh") then
 				highaddition = 1/5*dt
 				highpollencount = highpollencount + highaddition
 				highaddition = 0

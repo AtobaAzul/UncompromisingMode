@@ -109,6 +109,55 @@ local function LushBuildInit(inst)
 	SpringCheck(inst)
 end
 
+local function SummonPollen(inst,range) --Makes the plant generate pollen if it's in lush season.
+	local x,y,z = inst.Transform:GetWorldPosition()
+	x = x + math.random(-range,range)
+	z = z + math.random(-range,range)
+	y = y + math.random(0, math.sqrt(range))
+	local pollen = SpawnPrefab("uncompromising_pollen_fx")
+	pollen.Transform:SetPosition(x,y,z)
+end
+
+local function PollenTask(inst) --Decides if a plant should release pollen, consider doing a search for number of pollen nearby
+	if ((inst:HasTag("pollenlow") and math.random() > 0.6) or (inst:HasTag("pollenmed") and math.random() > 0.25) or (inst:HasTag("pollenhigh"))) and TheWorld.state.isspring then
+		if inst:HasTag("pollenlow") then
+			SummonPollen(inst,4)
+		end
+		if inst:HasTag("pollenmed") then
+			SummonPollen(inst,5)
+		end
+		if inst:HasTag("pollenhigh") then
+			SummonPollen(inst,10)
+		end		
+	end
+end
+
+local function PollenInit(inst) --inserts pollen generation into onwake for each of the plants, to prevent lag
+	if inst.OnEntityWake ~= nil then
+		inst._OnEntityWake = inst.OnEntityWake
+	end
+	local function OnEntityWakeNew(inst)
+		inst.PollenTask = inst:DoPeriodicTask(2+math.random(2,5), PollenTask)
+		--[[if inst._OnEntityWake ~= nil then
+			inst._OnEntityWake(inst)
+		end]]
+	end
+	inst.OnEntityWake = OnEntityWakeNew
+	
+	
+	if inst.OnEntitySleep ~= nil then
+		inst._OnEntitySleep = inst.OnEntitySleep
+	end
+	local function OnEntitySleepNew(inst)
+		inst.PollenTask = nil
+		--[[if inst._OnEntitySleep ~= nil then
+			inst._OnEntitySleep(inst)
+		end]]
+	end
+	inst.OnEntitySleep = OnEntitySleepNew
+end
+
+
 --Loops items in lowfever category, gives them their tags and makes them watch for build swaps.
 for i, v in ipairs(lowfever) do
 	env.AddPrefabPostInit(v, function(inst)	
@@ -123,6 +172,7 @@ for i, v in ipairs(lowfever) do
 		end
 	
 		inst.OnLoad = NewOnLoad
+		PollenInit(inst)
 		LushBuildInit(inst)
 		inst:WatchWorldState("isspring", SpringCheck)
 	end)
@@ -142,6 +192,26 @@ for i, v in ipairs(mediumfever) do
 		end
 	
 		inst.OnLoad = NewOnLoad
+		PollenInit(inst)
+		LushBuildInit(inst)
+		inst:WatchWorldState("isspring", SpringCheck)
+	end)
+end
+
+for i, v in ipairs(highfever) do
+	env.AddPrefabPostInit(v, function(inst)	
+		inst:AddTag("UM_pollen")
+		inst:AddTag("pollenhigh")
+		local _OnLoad = inst.OnLoad
+		local function NewOnLoad(inst,data)
+			LushBuildInit(inst)
+			if _OnLoad then
+				_OnLoad(inst,data)
+			end
+		end
+	
+		inst.OnLoad = NewOnLoad
+		PollenInit(inst)
 		LushBuildInit(inst)
 		inst:WatchWorldState("isspring", SpringCheck)
 	end)
