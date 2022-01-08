@@ -180,7 +180,7 @@ if TUNING.DSTU.WANDA_NERF == true then
 end
 
 AddRecipe("floral_bandage", {Ingredient("bandage", 1), Ingredient("cactus_flower", 2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, true, nil, nil, "images/inventoryimages/floral_bandage.xml", "floral_bandage.tex" )
-GLOBAL.AllRecipes["floral_bandage"].sortkey = GLOBAL.AllRecipes["bandage"].sortkey + .1]]
+GLOBAL.AllRecipes["floral_bandage"].sortkey = GLOBAL.AllRecipes["bandage"].sortkey + .1
 
 STRINGS.RECIPE_DESC.SLINGSHOTAMMO_FIRECRACKERS = "For the aspiring young menace."
 STRINGS.RECIPE_DESC.WATERMELON_LANTERN = "Juicy illumination."
