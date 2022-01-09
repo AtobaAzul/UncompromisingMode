@@ -53,6 +53,7 @@ local function fn()
 
     --inst:AddTag("CLASSIFIED")
 	inst:AddTag("snowpileblocker")
+	inst:AddTag("NOBLOCK")
 	inst.entity:SetPristine()
 	
 	if not TheWorld.ismastersim then 
