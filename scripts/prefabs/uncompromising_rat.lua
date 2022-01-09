@@ -1489,67 +1489,192 @@ local function IsAVersionOfRot(v)
 	end
 end
 
-local function TimeForACheckUp(inst)
+local NOTAGS =
+{
+	"smallcreature",
+	"_container",
+}
+
+local function IsHeavyObject(v)
+	if v:HasTag("heavy") or v:HasTag("heavyobject") then
+		return true
+	end
+end
+
+local function SmellProtection(v,container)
+	local x,y,z = v.Transform:GetWorldPosition()
+	local flowers = #TheSim:FindEntities(x,y,z,5,{"flower"})
+	local potted_ = TheSim:FindEntities(x,y,z,6,{"cavedweller"})
+	local potted = 0 -- both potted plants have the cavedweller tag for some reason I have no idea
+	local forget_me_lots = 0 -- The end-all-beat-all, forget-me-lots's ability to make those who smell or eat them forgetful is the perfect insulator for rats
+	local item_forget_me_lots = TheSim:FindEntities(x,y,z,3,{"vasedecoration"}) 
+	local mod = 1
+	local vases = TheSim:FindEntities(x,y,z,10,{"vase"}) -- Best Range!
+	
+	--- Forget-me-lots (and flowers)
+	for i,j in ipairs(vases) do
+		if j.prefab == "endtable" then
+			if j.flowerid == 1 or j.flowerid == 2 or j.flowerid == 3 or j.flowerid == 4 or j.flowerid == 6 or j.flowerid == 10 or j.flowerid == 11 or j.flowerid == 12 or j.flowerid == 15 then --Moon tree blossoms might as well count towards flowers
+				flowers = flowers + 1
+			end
+			if j.flowerid == 13 or j.flowerid == 14 then
+				forget_me_lots = forget_me_lots + 1
+			end
+		end
+	end
+	for i,j in ipairs(item_forget_me_lots) do
+		if j.prefab == "forgetmelots" then
+			forget_me_lots = forget_me_lots + 1
+		end
+	end
+	--- Forget-me-lots
+	
+	--- Potted
+	for i,j in ipairs(potted_) do
+		if j.prefab == "pottedfern" then
+			potted = potted + 1
+		end
+		if j.prefab == "succulent_potted" then
+			potted = potted + 1
+		end
+	end
+	--- Potted
+	
+	
+	local total_weighted_score = flowers + potted + 2 * forget_me_lots
+	if container ~= true then
+		-- There's not much we can do for things on the ground, not even forget-me-lots
+		if total_weighted_score > 0 then
+			mod = 0.8
+		end
+		if total_weighted_score > 3 then
+			mod = 0.7
+		end
+	else
+		if v:HasTag("stale") then
+			if total_weighted_score > 0 then
+				mod = 0.6
+			end
+			if total_weighted_score > 2 then
+				mod = 0.3
+			end
+			if total_weighted_score > 4 then
+				mod = 0 --Stale foods can actually reduce the mod to zero with just flowers and potted plants
+			end
+			if forget_me_lots > 0 then
+				mod = 0 -- But Forget-me-lots are better
+			end
+		end
+		if v:HasTag("spoiled") then
+			if total_weighted_score > 0 then
+				mod = 0.8
+			end
+			if total_weighted_score > 2 then
+				mod = 0.6
+			end
+			if total_weighted_score > 4 then
+				mod = 0.3 --Spoiled foods have been left for too long to fully negate without forget-me-lots
+			end
+			if forget_me_lots > 3 then --Forget-me-lots are capable of fully negating spoiled food issue if enough are used
+				mod = 0
+			end
+		end
+		if IsAVersionOfRot(v) then
+			if total_weighted_score > 0 then
+				mod = 0.9
+			end
+			if total_weighted_score > 2 then
+				mod = 0.8
+			end
+			if total_weighted_score > 4 then
+				mod = 0.7 --Rot is nearly hopeless to reduce all the way, not without strong forget-me-lots
+			end
+			if forget_me_lots > 3 then
+				mod = 0.7
+			end
+			if forget_me_lots > 5 then
+				mod = 0.5
+			end
+			if forget_me_lots > 10 then
+				mod = 0.3 -- This is as much as we can do... enough rot will eventually break through the guise of the forget-me-lots, with just 40 you'll end up with a decently large foodscore
+			end
+		end
+	end
+	if v.prefab == "forgetmelots" then --Forget-me-lots conceal themselves as long has they have not fully rotted!
+		mod = 0
+	end
+	return mod
+end
+
+local function FoodScoreCalculations(inst,container,v)
+	local delta = 0
+	inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+	if container == true then
+		if v:HasTag("stale") then
+			delta = 5 * inst.multiplier * SmellProtection(v,container)
+		end
+		if v:HasTag("spoiled") then
+			delta = 10 * inst.multiplier * SmellProtection(v,container)
+		end
+		if IsAVersionOfRot(v) then
+			delta = 10 * inst.multiplier * SmellProtection(v,container)
+		end
+	else
+		if v:HasTag("fresh") then
+			delta = 10 * inst.multiplier * SmellProtection(v,container)
+		end
+		if v:HasTag("stale") then
+			delta = 20 * inst.multiplier * SmellProtection(v,container)
+		end
+		if v:HasTag("spoiled") then
+			delta = 30 * inst.multiplier * SmellProtection(v,container)
+		end
+		if IsAVersionOfRot(v) then
+			delta = 35 * inst.multiplier * SmellProtection(v,container)
+		end
+	end
+	inst.foodscore = inst.foodscore + delta
+end
+
+local function TimeForACheckUp(inst,dev)
 	local x, y, z = inst.Transform:GetWorldPosition()
 
-	local ents = TheSim:FindEntities(x, 0, z, 40, {"_inventoryitem"})
-	print("THE RAT SNIFFS")
+	local ents = TheSim:FindEntities(x, 0, z, 40, {"_inventoryitem"},NOTAGS)
+	--[[print("THE RAT SNIFFS")
 	print("                o")
 	print("    =========B  *sniff* *sniff*")
 	print("---========vv")
 	print("   ========")
-	print("    V V    V V")
+	print("    V V    V V")]]
 	
 	inst.ratscore = -60
 	inst.itemscore = 0
 	inst.foodscore = 0
-	print(#ents)
+	--print(#ents)
 	
 	if ents ~= nil then
 		for i, v in ipairs(ents) do
-			if not v:HasTag("_container") and not v:HasTag("smallcreature") then
+			--if ShouldCountTowardsCheck(v) then
 				if v.components.inventoryitem:IsHeld() then
-				
-				
 					if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" then
-						print("lureplant is holding!")
+						--print("lureplant is holding!")
 					else
-						if not v:HasTag("frozen") then
-							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
-						
-							if v:HasTag("stale") then
-								inst.foodscore = inst.foodscore + (5 * inst.multiplier)
-							elseif v:HasTag("spoiled") then
-								inst.foodscore = inst.foodscore + (10 * inst.multiplier)
-							elseif IsAVersionOfRot(v) then
-								inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
-								inst.foodscore = inst.foodscore + (10 * inst.multiplier)
-							end
+						if not v:HasTag("frozen") and v.components.farmplantable == nil then
+							FoodScoreCalculations(inst,true,v)
 						end
 					end
 				else
-					if not v:HasTag("frozen") then
-						inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
-						
-						if v:HasTag("fresh") then
-							inst.foodscore = inst.foodscore + (10 * inst.multiplier)
-						elseif v:HasTag("stale") then
-							inst.foodscore = inst.foodscore + (20 * inst.multiplier)
-						elseif v:HasTag("spoiled") then
-							inst.foodscore = inst.foodscore + (30 * inst.multiplier)
-						elseif IsAVersionOfRot(v) then
-							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
-							inst.foodscore = inst.foodscore + (35 * inst.multiplier)
-						end
+					if not v:HasTag("frozen") and v.components.farmplantable == nil then
+						FoodScoreCalculations(inst,false,v)
 					end
 					
-					if (v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool")) and not v:HasTag("balloon") then
+					if (v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool")) and not v:HasTag("balloon") and not IsHeavyObject(v) then
 						inst.itemscore = inst.itemscore + 30 -- Oooh, wants wants! We steal!
-					elseif v:HasTag("molebait") then
+					elseif v:HasTag("molebait") and not IsHeavyObject(v) then
 						inst.itemscore = inst.itemscore + 2 -- Oooh, wants wants! We steal!
 					end
 				end
-			end
+			--end
 		end
 	end
 	
@@ -1737,7 +1862,7 @@ local function fn_warning()
 end
 
 
-
+--[[
 local function TimeForACheckUpDev(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 
@@ -1869,7 +1994,7 @@ local function TimeForACheckUpDev(inst)
 	end
 	
 	inst:Remove()
-end
+end]] --This does nothing different than the other one
 
 local function fn_devwarning()
 	local inst = CreateEntity()
@@ -1888,7 +2013,7 @@ local function fn_devwarning()
 		return inst
 	end
 	
-	inst:DoTaskInTime(5, TimeForACheckUpDev)
+	inst:DoTaskInTime(5, function(inst) TimeForACheckUp(inst,true) end)
 	
 	return inst
 end
