@@ -1539,8 +1539,19 @@ local function SmellProtection(v,container)
 		end
 	end
 	--- Potted
+	flowers = flowers / 50
+	print(flowers)
+	potted = potted / 20
+	print(potted)
+	forget_me_lots = forget_me_lots / 10
+	print(forget_me_lots)
 	
+	mod = 1 - flowers - potted - forget_me_lots
 	
+	if mod < 0.5 then
+		mod = 0.5
+	end
+	--[[
 	local total_weighted_score = flowers + potted + 2 * forget_me_lots
 	if container ~= true then
 		-- There's not much we can do for things on the ground, not even forget-me-lots
@@ -1599,7 +1610,7 @@ local function SmellProtection(v,container)
 				mod = 0.3 -- This is as much as we can do... enough rot will eventually break through the guise of the forget-me-lots, with just 40 you'll end up with a decently large foodscore
 			end
 		end
-	end
+	end]]
 	if v.prefab == "forgetmelots" then --Forget-me-lots conceal themselves as long has they have not fully rotted!
 		mod = 0
 	end
@@ -1609,28 +1620,30 @@ end
 local function FoodScoreCalculations(inst,container,v)
 	local delta = 0
 	inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+	inst.preparedmultiplier = v:HasTag("preparedfood") and 2 or 1
+	
 	if container == true then
 		if v:HasTag("stale") then
-			delta = 5 * inst.multiplier * SmellProtection(v,container)
+			delta = ((2.5 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
 		end
 		if v:HasTag("spoiled") then
-			delta = 10 * inst.multiplier * SmellProtection(v,container)
+			delta = ((5 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
 		end
 		if IsAVersionOfRot(v) then
-			delta = 10 * inst.multiplier * SmellProtection(v,container)
+			delta = ((5 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
 		end
 	else
 		if v:HasTag("fresh") then
-			delta = 10 * inst.multiplier * SmellProtection(v,container)
+			delta = ((5 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
 		end
 		if v:HasTag("stale") then
-			delta = 20 * inst.multiplier * SmellProtection(v,container)
+			delta = ((10 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
 		end
 		if v:HasTag("spoiled") then
-			delta = 30 * inst.multiplier * SmellProtection(v,container)
+			delta = ((15 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
 		end
 		if IsAVersionOfRot(v) then
-			delta = 35 * inst.multiplier * SmellProtection(v,container)
+			delta = ((15 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
 		end
 	end
 	inst.foodscore = inst.foodscore + delta
@@ -1668,13 +1681,49 @@ local function TimeForACheckUp(inst,dev)
 						FoodScoreCalculations(inst,false,v)
 					end
 					
-					if (v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool")) and not v:HasTag("balloon") and not IsHeavyObject(v) then
-						inst.itemscore = inst.itemscore + 30 -- Oooh, wants wants! We steal!
-					elseif v:HasTag("molebait") and not IsHeavyObject(v) then
-						inst.itemscore = inst.itemscore + 2 -- Oooh, wants wants! We steal!
+	--[[
+					if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and (v.components.inventoryitem:GetGrandOwner():HasTag("_container") or v.components.inventoryitem:GetGrandOwner():HasTag("player")) then
+						print("uncheckable entity is holding!")
+					else
+						if not v:HasTag("frozen") then
+							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+							inst.preparedmultiplier = v:HasTag("preparedfood") and 2 or 1
+							
+							if v:HasTag("stale") then
+								inst.foodscore = inst.foodscore + ((2.5 * inst.preparedmultiplier) * inst.multiplier)
+							elseif v:HasTag("spoiled") then
+								inst.foodscore = inst.foodscore + ((5 * inst.preparedmultiplier) * inst.multiplier)
+							elseif IsAVersionOfRot(v) then
+								inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+								inst.foodscore = inst.foodscore + ((5 * inst.preparedmultiplier) * inst.multiplier)
+							end
+						end
+					end
+				else
+					if not v:HasTag("frozen") then
+						inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+						inst.preparedmultiplier = v:HasTag("preparedfood") and 2 or 1
+							
+						if v:HasTag("fresh") then
+							inst.foodscore = inst.foodscore + ((5 * inst.preparedmultiplier) * inst.multiplier)
+						elseif v:HasTag("stale") then
+							inst.foodscore = inst.foodscore + ((10 * inst.preparedmultiplier) * inst.multiplier)
+						elseif v:HasTag("spoiled") then
+							inst.foodscore = inst.foodscore + ((15 * inst.preparedmultiplier) * inst.multiplier)
+						elseif IsAVersionOfRot(v) then
+							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
+							inst.foodscore = inst.foodscore + ((15 * inst.preparedmultiplier) * inst.multiplier)
+						end
+					end
+	]]
+					if not (v:HasTag("balloon") or v:HasTag("heavy")) then
+						if (v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool"))  then
+							inst.itemscore = inst.itemscore + 30 -- Oooh, wants wants! We steal!
+						elseif v:HasTag("molebait") then
+							inst.itemscore = inst.itemscore + 2 -- Oooh, wants wants! We steal!
+						end
 					end
 				end
-			--end
 		end
 	end
 	
@@ -1695,10 +1744,13 @@ local function TimeForACheckUp(inst,dev)
 		TheNet:SystemMessage("Foodscore = "..inst.foodscore)
 		TheNet:SystemMessage("Burrowbonus = "..inst.burrowbonus)
 		TheNet:SystemMessage("Ratscore = "..inst.ratscore)
-		TheNet:SystemMessage("-------------------------")
 	end
 	if inst.ratscore > 240 then
 		inst.ratscore = 240
+	end
+	if TUNING.DSTU.ANNOUNCE_BASESTATUS == true then
+		TheNet:SystemMessage("True Ratscore = "..inst.ratscore)
+		TheNet:SystemMessage("-------------------------")
 	end
 	TheWorld:PushEvent("reducerattimer", {value = inst.ratscore})
 	

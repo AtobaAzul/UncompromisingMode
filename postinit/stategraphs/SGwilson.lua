@@ -92,8 +92,10 @@ inst.actionhandlers[ACTIONS.PLAY].deststate =
 local _OldDeathEvent = inst.events["death"].fn
 	inst.events["death"].fn = function(inst, data)
         if data ~= nil and data.cause == "shadowvortex" and not inst:HasTag("wereplayer") then
+			inst.components.rider:ActualDismount()
             inst.sg:GoToState("blackpuddle_death")
         elseif data ~= nil and data.cause == "mindweaver" and not inst:HasTag("wereplayer") then
+			inst.components.rider:ActualDismount()
             inst.sg:GoToState("rne_player_grabbed")
 		else
 			_OldDeathEvent(inst, data)
@@ -676,6 +678,7 @@ State{
         {
             EventHandler("animover", function(inst)
                 if inst.AnimState:AnimDone() then
+					inst.components.inventory:DropEverything(true)
 					inst:PushEvent(inst.ghostenabled and "makeplayerghost" or "playerdied", { skeleton = nil }) -- if we are not on valid ground then don't drop a skeleton
                 end
             end),
@@ -728,6 +731,7 @@ State{
         {
             EventHandler("animover", function(inst)
                 if inst.AnimState:AnimDone() then
+					inst.components.inventory:DropEverything(true)
 					inst:PushEvent(inst.ghostenabled and "makeplayerghost" or "playerdied", { skeleton = nil }) -- if we are not on valid ground then don't drop a skeleton
                 end
             end),
@@ -740,7 +744,6 @@ State{
         timeline=
         {
             TimeEvent(547*FRAMES, function(inst)
-				inst.components.inventory:DropEverything(true)
                 inst.DynamicShadow:Enable(false)
             end),
         },

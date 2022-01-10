@@ -313,6 +313,12 @@ function self:LongUpdate(dt)
 	end
 end
 
+local function StartRespawnTimer()
+	if TheWorld.state.cycles > _ratgrace then
+		self.inst:StartUpdatingComponent(self)
+	end
+end
+
 function self:OnSave()
 	local data =
 	{
@@ -336,13 +342,10 @@ function self:OnLoad(data)
     if data.initialrattimer ~= nil then
 		_initialrattimer = data.initialrattimer
 	end
+	
+	StartRespawnTimer()
 end
 
-local function StartRespawnTimer()
-	if TheWorld.state.cycles > _ratgrace then
-		self.inst:StartUpdatingComponent(self)
-	end
-end
 
 StartRespawnTimer()
 self.inst:WatchWorldState("cycles", StartRespawnTimer)

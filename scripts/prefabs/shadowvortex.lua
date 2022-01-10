@@ -26,7 +26,7 @@ local function Vac(inst)
 	
 	local damageents = TheSim:FindEntities(x, y, z, 1 * inst.Transform:GetScale(), { "player" }, { "playerghost" })
 	local ents = TheSim:FindEntities(x, y, z, 15 * inst.Transform:GetScale(), { "player" }, { "playerghost" })
-	local items = TheSim:FindEntities(x, y, z, 15 * inst.Transform:GetScale(), { "_inventoryitem" }, { "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach"--[[, "_container"]] } )
+	local items = TheSim:FindEntities(x, y, z, 15 * inst.Transform:GetScale(), { "_inventoryitem" }, { "trap", "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach"--[[, "_container"]] } )
 	
 	for i, v in ipairs(damageents) do
 		if v.components.health ~= nil then
@@ -35,36 +35,38 @@ local function Vac(inst)
 	end
 	
 	for i, v in ipairs(ents) do
-		local px, py, pz = v.Transform:GetWorldPosition()
+		if v.sg ~= nil and not v.sg:HasStateTag("gotgrabbed") then
+			local px, py, pz = v.Transform:GetWorldPosition()
+				
+			local rad = math.rad(v:GetAngleToPoint(x, y, z))
+			local velx = math.cos(rad) --* 4.5
+			local velz = -math.sin(rad) --* 4.5
 			
-		local rad = math.rad(v:GetAngleToPoint(x, y, z))
-		local velx = math.cos(rad) --* 4.5
-		local velz = -math.sin(rad) --* 4.5
-		
-		local multiplierplayer = inst:GetDistanceSqToPoint(px, py, pz)
-		print("Multiplier")
-		print(multiplierplayer)
-		
-		multiplierplayer = (multiplierplayer * inst.Transform:GetScale()) / 50
-		print("Divide by 10")
-		print(multiplierplayer)
-		
-		if multiplierplayer > 15 then
-			multiplierplayer = 15
-		print("Too Far")
-		print(multiplierplayer)
-		elseif multiplierplayer < 1.5 then
-			multiplierplayer = 1.5
-		print("Too Close")
-		print(multiplierplayer)
-		end
-		
-		local dx, dy, dz = px + (((FRAMES * 5) * velx) / multiplierplayer) * inst.Transform:GetScale(), 0, pz + (((FRAMES * 5) * velz) / multiplierplayer) * inst.Transform:GetScale()
+			local multiplierplayer = inst:GetDistanceSqToPoint(px, py, pz)
+			print("Multiplier")
+			print(multiplierplayer)
 			
-		local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
-		local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
-		if dx ~= nil and (ground or boat) then
-			v.Transform:SetPosition(dx, dy, dz)
+			multiplierplayer = (multiplierplayer * inst.Transform:GetScale()) / 50
+			print("Divide by 10")
+			print(multiplierplayer)
+			
+			if multiplierplayer > 15 then
+				multiplierplayer = 15
+			print("Too Far")
+			print(multiplierplayer)
+			elseif multiplierplayer < 1.5 then
+				multiplierplayer = 1.5
+			print("Too Close")
+			print(multiplierplayer)
+			end
+			
+			local dx, dy, dz = px + (((FRAMES * 5) * velx) / multiplierplayer) * inst.Transform:GetScale(), 0, pz + (((FRAMES * 5) * velz) / multiplierplayer) * inst.Transform:GetScale()
+				
+			local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
+			local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
+			if dx ~= nil and (ground or boat) then
+				v.Transform:SetPosition(dx, dy, dz)
+			end
 		end
 	end
 	

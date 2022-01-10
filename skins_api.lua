@@ -5,13 +5,13 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
 local OFFICIAL_PREFABS = {}
-if not rawget(_G, "MODDED_SKINS") then
-	global("MODDED_SKINS")
-	MODDED_SKINS = {}
+if not rawget(_G, "UNCOMP_SKINS") then
+	global("UNCOMP_SKINS")
+	UNCOMP_SKINS = {}
 end
 
 local function IsSkinModded(skin)
-	for _, skins in pairs(MODDED_SKINS) do
+	for _, skins in pairs(UNCOMP_SKINS) do
 		for name, _ in pairs(skins) do
 			if name == skin then
 				return true
@@ -22,7 +22,7 @@ local function IsSkinModded(skin)
 end
 
 local function HasSkins(item)
-	return item and MODDED_SKINS[item.base_prefab or item.prefab] or false
+	return item and UNCOMP_SKINS[item.base_prefab or item.prefab] or false
 end
 
 local _RegisterPrefabs = ModManager.RegisterPrefabs
@@ -42,7 +42,7 @@ end
 local function RecipePopupPostConstruct(self)
     local _GetSkinsList = self.GetSkinsList
     self.GetSkinsList = function(self, ...)
-        if IsOfficial(self.recipe.product) then
+        if IsOfficial(self.recipe.product) and UNCOMP_SKINS[self.recipe.product] then
             return _GetSkinsList(self, ...)
         end
         
@@ -63,7 +63,7 @@ local function RecipePopupPostConstruct(self)
     
     local _GetSkinOptions = self.GetSkinOptions
     self.GetSkinOptions = function(self, ...)
-        if IsOfficial(self.recipe.product) then
+        if IsOfficial(self.recipe.product) or not UNCOMP_SKINS[self.recipe.product] then
             return _GetSkinOptions(self, ...)
         end
 		
@@ -122,12 +122,9 @@ end
 local function BuilderSkinPostInit(self)
     local _MakeRecipeFromMenu = self.MakeRecipeFromMenu
     self.MakeRecipeFromMenu = function(self, recipe, skin, ...)
-		if IsOfficial(recipe.product) or not skin then
+		if IsOfficial(recipe.product) or not UNCOMP_SKINS[recipe.product] then
 		  return _MakeRecipeFromMenu(self, recipe, skin, ...)
 		end
-        --[[if IsOfficial(recipe.product) then
-            return _MakeRecipeFromMenu(self, recipe, skin, ...)
-        end]]
 		
 		if not recipe.placer then
 			if self:KnowsRecipe(recipe.name) then
@@ -150,7 +147,7 @@ local function BuilderSkinPostInit(self)
 	-- Change the product of the prefab to a skin, call Build fn, revert changes.
     self.DoBuild = function(self, recname, pt, rotation, skin, ...)
 		local rec = GetValidRecipe(recname)
-        if rec and not IsOfficial(rec.product) then
+        if rec and not IsOfficial(rec.product) and UNCOMP_SKINS[rec.product] then
             if skin then
                 if not AllRecipes[recname]._product then
                     AllRecipes[recname]._product = AllRecipes[recname].product
@@ -262,7 +259,7 @@ env.AddPrefabPostInit("reskin_tool", function(inst)
 		end
 		
 		while inst._cached_reskinname[prefab] == skin do
-			for item_type, _ in pairs(MODDED_SKINS[prefab]) do
+			for item_type, _ in pairs(UNCOMP_SKINS[prefab]) do
 				if item_type ~= skin then
 					inst._cached_reskinname[prefab] = item_type
 					break
@@ -301,12 +298,12 @@ function CreateModPrefabSkin(item, info)
 		return inst
 	end
 	
-	if not MODDED_SKINS[info.base_prefab] then
-		MODDED_SKINS[info.base_prefab] = {
+	if not UNCOMP_SKINS[info.base_prefab] then
+		UNCOMP_SKINS[info.base_prefab] = {
 			[info.base_prefab] = true, -- Base prefab counts as a skin!
 		}
 	end
-	MODDED_SKINS[info.base_prefab][item] = true
+	UNCOMP_SKINS[info.base_prefab][item] = true
 	
 	PREFAB_SKINS_IDS = {}
 	for prefab, skins in pairs(PREFAB_SKINS) do

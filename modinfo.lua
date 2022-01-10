@@ -195,7 +195,7 @@ configuration_options =
 	},
     {
 		name = "rattimer",
-		label = "Rat Timer",
+		label = "Rat Raid Cooldown",
 		hover = "The cooldown between rat raids!",
 		options =
 		{
