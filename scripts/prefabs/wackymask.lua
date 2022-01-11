@@ -135,7 +135,7 @@ local function demon_disable(inst)
 	local owner = inst.components.inventoryitem and inst.components.inventoryitem.owner
 	if owner then
 		if owner.components.health ~= nil then
-			owner.components.health.externalfiredamagemultipliers:SetModifier(inst, 1 - 0.95)
+			owner.components.health.externalfiredamagemultipliers:RemoveModifier(inst)
 		end
 	end
 end
@@ -144,7 +144,7 @@ local function demon_enable(inst)
 	local owner = inst.components.inventoryitem and inst.components.inventoryitem.owner
 	if owner then
 		if owner.components.health ~= nil then
-			owner.components.health.externalfiredamagemultipliers:RemoveModifier(inst)
+			owner.components.health.externalfiredamagemultipliers:SetModifier(inst, 1 - 0.75)
 		end
 	end
 end
@@ -420,7 +420,7 @@ local function Hack(inst, data)
 	snap.Transform:SetRotation(angle * RADIANS)
 	snap.Transform:SetScale(0.8, 0.8, 0.8)
 		
-	if data.target.components.heatlh ~= nil and not data.target.components.health:IsDead() then
+	if data.target.components.health ~= nil and not data.target.components.health:IsDead() then
 		data.target.components.health:DoDelta(-5, false, inst)
 	end
 		

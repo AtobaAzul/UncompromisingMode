@@ -26,11 +26,11 @@ local function Vac(inst)
 	
 	local damageents = TheSim:FindEntities(x, y, z, 1 * inst.Transform:GetScale(), { "player" }, { "playerghost" })
 	local ents = TheSim:FindEntities(x, y, z, 15 * inst.Transform:GetScale(), { "player" }, { "playerghost" })
-	local items = TheSim:FindEntities(x, y, z, 15 * inst.Transform:GetScale(), { "_inventoryitem" }, { "trap", "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach"--[[, "_container"]] } )
+	local items = TheSim:FindEntities(x, y, z, 20 * inst.Transform:GetScale(), { "_inventoryitem" }, { "_health", "smallcreature", "trap", "raidrat", "spider", "INLIMBO", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach"--[[, "_container"]] } )
 	
 	for i, v in ipairs(damageents) do
 		if v.components.health ~= nil then
-			v.components.health:DoDelta(-5 * inst.Transform:GetScale(), false, inst.prefab)
+			v.components.health:DoDelta((-1 * inst.Transform:GetScale()) * inst.Transform:GetScale(), false, inst.prefab)
 		end
 	end
 	
@@ -70,7 +70,7 @@ local function Vac(inst)
 		end
 	end
 	
-	for i, k in ipairs(items) do
+	--[[for i, k in ipairs(items) do
 		local gx, gy, gz = k.Transform:GetWorldPosition()
 			
 		local rad = math.rad(k:GetAngleToPoint(x, y, z))
@@ -87,7 +87,7 @@ local function Vac(inst)
 		if nx ~= nil and (ground or boat) then
 			k.Transform:SetPosition(nx, ny, nz)
 		end
-	end
+	end]]
 end
 
 local function Disappear_mini(inst)

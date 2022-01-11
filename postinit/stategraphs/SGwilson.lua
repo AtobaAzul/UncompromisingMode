@@ -910,7 +910,7 @@ State{
             EventHandler("unequip", function(inst, data)
                 -- We need to handle this during the initial "busy" frames
                 if not inst.sg:HasStateTag("idle") then
-                    inst.sg:GoToState(GetUnequipState(inst, data))
+                    inst.sg:GoToState("idle")
                 end
             end),
         },
