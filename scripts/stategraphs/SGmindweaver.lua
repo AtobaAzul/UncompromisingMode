@@ -48,8 +48,10 @@ local function Grabby(inst)
 		
 		if v.components.health:IsDead() then
 			v.Physics:Teleport(inst.Transform:GetWorldPosition())
-		else 
-			inst.components.rider:ActualDismount()
+		else
+			if v.components.rider ~= nil then
+				v.components.rider:ActualDismount()
+			end
 			v.sg:GoToState("hit", inst)
 		end
 		
