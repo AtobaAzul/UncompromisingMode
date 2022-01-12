@@ -49,11 +49,8 @@ local function Grabby(inst)
 		if v.components.health:IsDead() then
 			v.Physics:Teleport(inst.Transform:GetWorldPosition())
 		else 
-			if not v:HasTag("wereplayer") then
-				v.sg:GoToState("hit_weaver", inst)
-			else
-				v.sg:GoToState("hit", inst)
-			end
+			inst.components.rider:ActualDismount()
+			v.sg:GoToState("hit", inst)
 		end
 		
 	end

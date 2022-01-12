@@ -10,7 +10,7 @@
 	AllRecipes = GLOBAL.AllRecipes
 	STRINGS = GLOBAL.STRINGS
 	CUSTOM_RECIPETABS = GLOBAL.CUSTOM_RECIPETABS
-	modimport("skins_api.lua")
+	modimport("uncompskins_api.lua")
 
 --	[ 				Recipes				]	--
 	
