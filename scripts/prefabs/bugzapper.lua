@@ -134,9 +134,11 @@ local function onattack(inst, attacker, target)
     if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and ((TUNING.DSTU.ELECTRICALMISHAP == false and not inst.components.fueled:IsEmpty()) or TUNING.DSTU.ELECTRICALMISHAP == true) then
 		if target:HasTag("insect") and not target.components.health:IsDead() then
 			if TUNING.DSTU.ELECTRICALMISHAP == false then
-				target.components.health:DoDelta(-30, false, attacker)
+				target.components.combat:GetAttacked(attacker, 30, nil)
+				--target.components.health:DoDelta(-30, false, attacker)
 			else
-				target.components.health:DoDelta(-40, false, attacker)
+				target.components.combat:GetAttacked(attacker, 40, nil)
+				--target.components.health:DoDelta(-40, false, attacker)
 			end
 			
 			SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
@@ -158,9 +160,11 @@ local function onattack(inst, attacker, target)
 		
 		if (target:HasTag("spider") or target:HasTag("hoodedwidow")) and not target.components.health:IsDead() then
 			if TUNING.DSTU.ELECTRICALMISHAP == false then
-				target.components.health:DoDelta(-15, false, attacker)
+				target.components.combat:GetAttacked(attacker, 15, nil)
+				--target.components.health:DoDelta(-15, false, attacker)
 			else
-				target.components.health:DoDelta(-25, false, attacker)
+				target.components.combat:GetAttacked(attacker, 25, nil)
+				--target.components.health:DoDelta(-25, false, attacker)
 			end
 			SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
 			
