@@ -256,6 +256,7 @@ TUNING.DSTU =
 
     --Wolfgang
     WOLFGANG_SANITY_MULTIPLIER = 1.3, --prev was 1.1
+	WOLFGANG_HUNGERMIGHTY = GetModConfigData("wolfgang"),
 
     --WX78
     WX78_MOISTURE_DAMAGE_INCREASE = 3,

@@ -179,6 +179,12 @@ if TUNING.DSTU.WANDA_NERF == true then
 	AddRecipe("pocketwatch_revive",		{Ingredient("pocketwatch_parts", 2), Ingredient("livinglog", 2), Ingredient("boneshard", 4)},		CUSTOM_RECIPETABS.CLOCKMAKER, TECH.MAGIC_TWO)
 end
 
+if TUNING.DSTU.WOLFGANG_HUNGERMIGHTY == true then
+	AddRecipe("mighty_gym",      {Ingredient("boards",     4), Ingredient("cutstone", 2), Ingredient("rope", 3)},  CUSTOM_RECIPETABS.STRONGMAN, TECH.SCIENCE_ONE, "mighty_gym_placer", nil, nil, nil, "stinkman")
+	AddRecipe("dumbbell",        {Ingredient("rocks",      4), Ingredient("twigs", 1  )},                          CUSTOM_RECIPETABS.STRONGMAN, TECH.NONE, nil, nil, nil, nil, "stinkman")
+	AddRecipe("dumbbell_golden", {Ingredient("goldnugget", 2), Ingredient("cutstone", 2), Ingredient("twigs", 2)}, CUSTOM_RECIPETABS.STRONGMAN, TECH.SCIENCE_ONE, nil, nil, nil, nil, "stinkman")
+	AddRecipe("dumbbell_gem",    {Ingredient("purplegem",  1), Ingredient("cutstone", 2), Ingredient("twigs", 2)}, CUSTOM_RECIPETABS.STRONGMAN, TECH.MAGIC_TWO, nil, nil, nil, nil, "stinkman")
+end
 AddRecipe("floral_bandage", {Ingredient("bandage", 1), Ingredient("cactus_flower", 2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, true, nil, nil, "images/inventoryimages/floral_bandage.xml", "floral_bandage.tex" )
 GLOBAL.AllRecipes["floral_bandage"].sortkey = GLOBAL.AllRecipes["bandage"].sortkey + .1
 

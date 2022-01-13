@@ -8,19 +8,26 @@ AddClassPostConstruct( "widgets/controls", function(self, inst)
 	self.pollenover:MoveToBack()
 	self.inst:ListenForEvent("updatepollen", function(inst, data) return self.pollenover:UpdateState(data.sneezetime) end, self.owner)
 	self.owner:ListenForEvent("seasontick", function() return self:SeasonHide() end, self.owner)
+
 	local FogOver = require "widgets/fogover"
 	self.fogover = self:AddChild( FogOver(ownr) )
 	self.fogover:MoveToBack()
+
 	local Vetcursewidget = require "widgets/vetcursewidget"
 	self.vetcursewidget = self:AddChild( Vetcursewidget(ownr) )
 	self.vetcursewidget:MoveToBack()
+
 	local californiakingoverlay = require "widgets/californiakingoverlay"
 	self.californiakingoverlay = self:AddChild( californiakingoverlay(ownr) )
 	self.californiakingoverlay:MoveToBack() 
+
 	local uncompromising_tooltip = require "widgets/uncompromising_tooltip"
 	self.uncompromising_tooltip = self:AddChild( uncompromising_tooltip(ownr) )
 	self.uncompromising_tooltip:MoveToBack() 
 	
+	local Wolfdrain = require "widgets/wolfdrain"
+	self.wolfdrain = self:AddChild( Wolfdrain(ownr) )
+	self.wolfdrain:MoveToBack()
 	
 end)
 --[[

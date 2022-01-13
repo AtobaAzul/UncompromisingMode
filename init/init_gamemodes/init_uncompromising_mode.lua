@@ -143,6 +143,7 @@ local require = GLOBAL.require
 	
 	if GetModConfigData("wolfgang") == true then
 		--modimport("init/init_character_changes/wolfgang")
+		modimport("init/init_character_changes/wolfgang2")
 	end
 	
 	if GetModConfigData("lifeamulet") == true then
