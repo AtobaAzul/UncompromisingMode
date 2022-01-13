@@ -94,7 +94,8 @@ local function onattack(inst, attacker, target)
         end
 		
 		if not target.components.health:IsDead() then
-			target.components.health:DoDelta(-66, false, attacker)
+			--target.components.health:DoDelta(-66 * 200, false, attacker, false, attacker)
+			target.components.combat:GetAttacked(attacker, 66, nil)
 		end
 		
 		local ents = TheSim:FindEntities(x, y, z, 2, nil, { "INLIMBO", "player", "abigail" })

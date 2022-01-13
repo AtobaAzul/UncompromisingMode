@@ -42,14 +42,15 @@ local function onattack(inst, attacker, target)
 			local scalingvalue = hunger * value
 			
 			snap.Transform:SetScale(scalingvalue / 1.25, scalingvalue / 1.25, scalingvalue / 1.25)
-			local damage = (-34 / 3) * scalingvalue
+			local damage = (34 / 3) * scalingvalue
 			
             if target.SoundEmitter ~= nil then
 				target.SoundEmitter:PlaySound("dontstarve/common/whip_small")
             end
 			
-			if target ~= nil and target.components.health ~= nil then
-				target.components.health:DoDelta(damage, false, attacker)
+			if target ~= nil and target.components.combat ~= nil then
+				target.components.combat:GetAttacked(attacker, damage, nil)
+				--target.components.health:DoDelta(damage * 200, false, inst, false, attacker)
 			end
 			
 			if attacker.components.hunger ~= nil and attacker.components.hunger:GetPercent() > 0 then
