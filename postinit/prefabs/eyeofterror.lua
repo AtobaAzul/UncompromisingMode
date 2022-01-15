@@ -143,6 +143,7 @@ end
 env.AddPrefabPostInit("eyeofterror", function(inst)
 
 	inst:AddTag("twinofterror")
+	inst:AddTag("fleshyeye")
 
 	if not TheWorld.ismastersim then
 		return
