@@ -20,6 +20,10 @@ function CheckItem(container, item, slot)
     return item:HasTag("mushroom_fuel")
 end
 
+function CheckEquipItem(container, item, slot)
+    return item:HasTag("_equippable")
+end
+
 function CheckGem(container, item, slot)
     return not item:HasTag("irreplaceable") and item:HasTag("gem")
 end
@@ -27,7 +31,6 @@ end
 function CheckFish(container, item, slot)
     return item:HasTag("smalloceancreature")
 end
-
 
 function CheckDart(container, item, slot)
     return item:HasTag("um_dart")
@@ -65,6 +68,35 @@ modparams.air_conditioner =
     acceptsstacks = false,
     type = "cooker",
 }
+
+modparams.itemscrapper =
+{
+    widget =
+    {
+        slotpos =
+        {
+            Vector3(-37.5, 32 + 4, 0), 
+            Vector3(37.5, 32 + 4, 0),
+            Vector3(-37.5, -(32 + 4), 0), 
+            Vector3(37.5, -(32 + 4), 0),
+        },
+        slotbg =
+        {
+			{ image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
+			{ image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
+			{ image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
+			{ image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
+        },
+        animbank = "ui_chest_2x2",
+        animbuild = "ui_chest_2x2",
+        pos = Vector3(200, 0, 0),
+        side_align_tip = 120,
+    },
+	itemtestfn = CheckEquipItem,
+    acceptsstacks = false,
+    type = "cooker",
+}
+
 modparams.puffvest =
 {
     widget =

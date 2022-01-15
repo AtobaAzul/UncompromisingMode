@@ -5,7 +5,7 @@ local function UpdateHungerDrain(inst)
 	local hunger = inst.components.hunger:GetPercent()
 
 	if hunger >= 0.75 then
-		if inst.hungerpercent < 5.95 then
+		if inst.hungerpercent < 7.95 then
 			inst.hungerpercent = inst.hungerpercent + 0.05
 			inst.hungerrate = inst.standardrate * inst.hungerpercent
 		else
@@ -60,7 +60,7 @@ env.AddPrefabPostInit("wolfgang", function(inst)
 		inst.components.mightiness.rate = 0
 		inst:ListenForEvent("hungerdelta", UpdateMightiness)
         inst.components.hunger.current = TUNING.WOLFGANG_START_HUNGER
-		inst:DoPeriodicTask(0.5, UpdateHungerDrain)
+		inst:DoPeriodicTask(1, UpdateHungerDrain)
 	end
 	
 end)

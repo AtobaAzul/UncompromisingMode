@@ -290,4 +290,5 @@ return {
 	"terrarium",
 	"reedbuncher",
 	"uncompromising_pollen_fx",
+	"itemscrapper",
 }

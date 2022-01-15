@@ -5,9 +5,9 @@ local Image = require "widgets/image"
 local UIAnim = require "widgets/uianim"
 local easing = require "easing"
 
-local Vetcursewidget = Class(Widget, function(self, owner)
+local Wolfdrain = Class(Widget, function(self, owner)
     self.owner = owner
-    Widget._ctor(self, "Vetcursewidget")
+    Widget._ctor(self, "Wolfdrain")
     --self:SetClickable(false)
 
     self.bg2 = self:AddChild(Image("images/vetskull.xml", "vetskull.tex"))
@@ -23,14 +23,14 @@ local Vetcursewidget = Class(Widget, function(self, owner)
 	self:RefreshTooltips()
 end)
 
-function Vetcursewidget:RefreshTooltips()
+function Wolfdrain:RefreshTooltips()
 	if self.owner.hungerpercent ~= nil then
 		self.bg2:SetTooltip(self.owner.hungerpercent.."x")
 	end
 end
 
 
-function Vetcursewidget:OnUpdate(dt)
+function Wolfdrain:OnUpdate(dt)
 	if self.owner:HasTag("strongman") then
 		if self.owner.hungerpercent ~= nil then
 			self.bg2:SetTooltip(self.owner.hungerpercent.."x")
@@ -41,4 +41,4 @@ function Vetcursewidget:OnUpdate(dt)
 	end
 end
 
-return Vetcursewidget
+return Wolfdrain
