@@ -14,8 +14,7 @@ AddComponentPostInit("hounded", function(self)
     self.spawnamount = 0
     self.seasonal_boss_chance = 0.5 --chance to spawn a seasonal boss hound instead of the default boss (defined on the line below)
     self.default_boss_prefab = "warg"
-	self.varggraceperiod = TUNING.DSTU.VARGWAVES_BOSS_GRACE
-	self.varggraceperiod_old = nil
+	self.varggraceperiod = TUNING.DSTU.VARGWAVES_BOSS_GRACE - TUNING.DSTU.VARGWAVES_DELAY_PERIOD
 
     --framework for future spawn additions
     --seasonal boss hounds will be chosen randomly from their respective season tables
@@ -127,32 +126,26 @@ AddComponentPostInit("hounded", function(self)
         local prefab = nil
 		local SpawnLimit = CalcSpawnLimit()
 		
-		if self.varggraceperiod_old == nil and GLOBAL.TheWorld.state.cycles >= self.varggraceperiod or varggraceperiod_old ~= nil and self.varggraceperiod ~= nil and self.varggraceperiod > (self.varggraceperiod_old + TUNING.DSTU.VARGWAVES_DELAY_PERIOD) then
+		if self.varggraceperiod ~= nil and GLOBAL.TheWorld.state.cycles > (self.varggraceperiod + TUNING.DSTU.VARGWAVES_DELAY_PERIOD) then
 			self.spawn_boss = true
+			print("cd boss")
+			
 		end
+		
+		print(GLOBAL.TheWorld.state.cycles)
+		print(self.varggraceperiod)
+		print(TUNING.DSTU.VARGWAVES_DELAY_PERIOD)
+		print(self.varggraceperiod ~= nil and self.varggraceperiod + TUNING.DSTU.VARGWAVES_DELAY_PERIOD or "nil")
 		
         --replaces the first hound in a wave with a random boss hound
         if pt and self.spawn_boss and magmaspawn_pt ~= nil and TUNING.DSTU.VARGWAVES == true then
-            if self.varggraceperiod ~= nil then
-				self.varggraceperiod_old = self.varggraceperiod
-			end
-			
-			self.varggraceperiod = GLOBAL.TheWorld.state.cycles
-			
-			--if self.varggraceperiod_old == nil or varggraceperiod_old ~= nil and self.varggraceperiod > (self.varggraceperiod_old + TUNING.DSTU.VARGWAVES_DELAY_PERIOD) then
-				print(self.varggraceperiod_old)
-				print(self.varggraceperiod)
+            self.varggraceperiod = GLOBAL.TheWorld.state.cycles
 				
 				self.spawn_boss = false
 				prefab_list = self.seasonal_boss_prefabs[season]
 				prefab = --[[math.random() < self.seasonal_boss_chance and #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or]] self.default_boss_prefab
 				
-				return SpawnHounded(prefab, pt, magmaspawn_pt)	
-			--[[else
-				if self.varggraceperiod_old ~= nil then
-					self.varggraceperiod = self.varggraceperiod_old
-				end
-			end]]
+				return SpawnHounded(prefab, pt, magmaspawn_pt)
         end
         --spawn a random seasonal hound
         if pt and chance < self.seasonal_chance and self.spawnamount <= SpawnLimit and GLOBAL.TheWorld.state.cycles >= 22 then
@@ -184,7 +177,6 @@ AddComponentPostInit("hounded", function(self)
         local _houndedData = _OnSave(self)
         local houndedData = {
 			varggraceperiod = self.varggraceperiod,
-			varggraceperiod_old = self.varggraceperiod_old,
 		}
         for k, v in pairs(_houndedData) do
             houndedData[k] = v

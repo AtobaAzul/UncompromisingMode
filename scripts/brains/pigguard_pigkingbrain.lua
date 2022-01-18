@@ -154,7 +154,7 @@ local function ShouldRunFromPlayerFn(inst)
 			--return false
 		end
 	end
-    return not target:HasTag("notarget") and inst:IsNear(target, KEEP_FACE_DIST)
+    return target ~= nil and not target:HasTag("notarget") and inst:IsNear(target, KEEP_FACE_DIST)
 end
 
 function PigGuard_pigkingBrain:OnStart()

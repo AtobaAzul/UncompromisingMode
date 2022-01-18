@@ -141,10 +141,10 @@ local require = GLOBAL.require
 		modimport("init/init_character_changes/warly")
 	end
 	
-	if GetModConfigData("wolfgang") == true then
+	--if GetModConfigData("wolfgang") == true then
 		--modimport("init/init_character_changes/wolfgang")
 		modimport("init/init_character_changes/wolfgang2")
-	end
+	--end
 	
 	if GetModConfigData("lifeamulet") == true then
 		modimport("init/init_lifeamulet")

@@ -24,7 +24,9 @@ local ratwarning = nil
 --local _initialrattimer = 24000
 local _initialrattimer = TUNING.DSTU.RATRAID_TIMERSTART --24000
 local _rattimer = TUNING.DSTU.RATRAID_TIMERSTART --24000
+local _rattimer_variance = _rattimer / 3 --24000
 local _rattimer_short = TUNING.DSTU.RATRAID_TIMERSTART / 3 --24000
+local _rattimer_short_variance = _rattimer_short / 3 --24000
 local _ratsnifftimer = TUNING.DSTU.RATSNIFFER_TIMER
 local _ratgrace = TUNING.DSTU.RATRAID_GRACE
 local _ratburrows = 0
@@ -48,14 +50,14 @@ end
 
 local function StartRatTimer()
 	--local _time = 20 + math.random(20)
-	local _time = _rattimer + math.random(_rattimer / 2)
+	local _time = _rattimer + math.random(_rattimer_variance)
 	
 	_initialrattimer = _time
 end
 
 local function StartTimerShort()
 	--local _time = 20 + math.random(20)
-	local _time = _rattimer_short + math.random(_rattimer_short / 3)
+	local _time = _rattimer_short + math.random(_rattimer_short_variance)
 	
 	_initialrattimer = _time
 end
