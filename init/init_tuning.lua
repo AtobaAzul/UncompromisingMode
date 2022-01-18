@@ -230,6 +230,7 @@ TUNING.DSTU =
 	--Fire Loot Rework
 	FIRELOOT = GetModConfigData("fireloot"),
 	
+    POLLENMITES = GetModConfigData("pollenmites"),
     ----------------------------------------------------------------------------
     --Player changes
     ----------------------------------------------------------------------------
@@ -365,6 +366,7 @@ TUNING.DSTU =
 
 --More Config
     POCKET_POWERTRIP = GetModConfigData("pocket_powertrip"),
+
 }
 
 TUNING.NO_BOSS_TIME = 24

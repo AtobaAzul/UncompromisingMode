@@ -373,6 +373,12 @@ local function OnSeasonTick(inst)
 	end
 end
 
+local function Init(inst)
+if TUNING.DSTU.POLLENMITES == false then
+inst:Remove()
+end
+
+
 local function MakePollenmiteDenFn(den_level)
     return function()
         local inst = CreateEntity()
@@ -485,6 +491,7 @@ local function MakePollenmiteDenFn(den_level)
 			inst:DoTaskInTime(0, OnLoadPostPass)
 		end
 
+        inst:DoTaskInTime(0, Init)
         return inst
     end
 end

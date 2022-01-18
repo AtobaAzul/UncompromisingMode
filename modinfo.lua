@@ -390,6 +390,7 @@ configuration_options =
 	Header("Misc Monsters"),
 	BinaryConfig("desertscorpions", "Scorpions", "Scorpions plague the desert lands. They will spawn from desert turf within the desert during the day.", true),
 	BinaryConfig("pinelings", "Pinelings", "Stumps will become pinelings if awoken by a treeguard, or can happen naturally to existing old stumps.", true),
+	BinaryConfig("pollenmites", "Pollen Mites", "Pollen mites spawn in spring and quickly infest the nearby area.", true),
 	Header("Standard Creatures"),
 
 	BinaryConfig("angrypenguins", "Territorial Penguins","Penguins will aggresively defend their land.", true),
