@@ -374,10 +374,10 @@ local function OnSeasonTick(inst)
 end
 
 local function Init(inst)
-if TUNING.DSTU.POLLENMITES == false then
-inst:Remove()
+    if TUNING.DSTU.POLLENMITES == false then
+    inst:Remove()
+    end
 end
-
 
 local function MakePollenmiteDenFn(den_level)
     return function()
