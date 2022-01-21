@@ -248,8 +248,10 @@ end
 
 local function OnAttacked(inst, data)
     inst:ClearBufferedAction()
-	if not data.attacker:HasTag("moonglasscreature") then
-		inst.components.combat:SetTarget(data.attacker)
+	if data and data.attacker then
+		if not data.attacker:HasTag("moonglasscreature") then
+			inst.components.combat:SetTarget(data.attacker)
+		end
 	end
 end	
 
