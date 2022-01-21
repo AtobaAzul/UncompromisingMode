@@ -73,8 +73,11 @@ AddIngredientValues({"monstermeat"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER
 AddIngredientValues({"monstermeat_cooked"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE}, true, true) --2 monster total, Will be calculated with -1 meat
 AddIngredientValues({"monstermeat_dried"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_DRIED_MONSTER_VALUE}, true, true) --1 monster total, Will be calculated with -1 meat
 AddIngredientValues({"monstersmallmeat"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_RAW_MONSTER_VALUE}, true, true) --2 monster total, Will be calculated with -1 meat
+RegisterInventoryItemAtlas("images/inventoryimages/monstersmallmeat.xml", "monstersmallmeat.tex")
 AddIngredientValues({"cookedmonstersmallmeat"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE}, true, true) --2.5 monster total, Will be calculated with -1 meat
+RegisterInventoryItemAtlas("images/inventoryimages/cookedmonstersmallmeat.xml", "cookedmonstersmallmeat.tex")
 AddIngredientValues({"monstersmallmeat_dried"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_DRIED_MONSTER_VALUE}, true, true) --2 monster total, Will be calculated with -1 meat
+RegisterInventoryItemAtlas("images/inventoryimages/monstersmallmeat_dried.xml", "monstersmallmeat_dried.tex")
 AddIngredientValues({"scorpioncarapace"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_RAW_MONSTER_VALUE, insectoid=0.5}, true, true)
 AddIngredientValues({"scorpioncarapacecooked"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE, insectoid=0.5}, true, true)
 else
@@ -82,7 +85,9 @@ AddIngredientValues({"monstersmallmeat"}, {meat=0.5, monster=1}, true, true) --2
 AddIngredientValues({"cookedmonstersmallmeat"}, {meat=0.5, monster=1}, true, true) --2.5 monster total, Will be calculated with -1 meat
 AddIngredientValues({"monstersmallmeat_dried"}, {meat=0.5, monster=1}, true, true) --2 monster total, Will be calculated with -1 meat
 AddIngredientValues({"scorpioncarapace"}, {meat=0.5, monster=1, insectoid=0.5}, true, true)
+RegisterInventoryItemAtlas("images/inventoryimages/scorpioncarapace.xml", "scorpioncarapace.tex")
 AddIngredientValues({"scorpioncarapacecooked"}, {meat=0.5, monster=1, insectoid=0.5}, true, true)
+RegisterInventoryItemAtlas("images/inventoryimages/scorpioncarapacecooked.xml", "scorpioncarapacecooked.tex")
 end
 
 AddIngredientValues({"forgetmelots"}, {decoration=1, foliage=1})
@@ -341,13 +346,20 @@ function InsertIngredientValues(names, tags, cancook, candry, keepoldvalues) -- 
 end
 
 InsertIngredientValues({"zaspberry"},{fruit=1},true,false,false)
+RegisterInventoryItemAtlas("images/inventoryimages/zaspberry.xml", "zaspberry.tex")
 InsertIngredientValues({"viperfruit"},{fruit=1},true,false,false)
+RegisterInventoryItemAtlas("images/inventoryimages/viperfruit.xml", "viperfruit.tex")
 InsertIngredientValues({"giant_blueberry"},{fruit=1},true,false,false)
+RegisterInventoryItemAtlas("images/inventoryimages/giant_blueberry.xml", "giant_blueberry.tex")
 InsertIngredientValues({"iceboomerang"},{ice=1},true,false,false)
+RegisterInventoryItemAtlas("images/inventoryimages/iceboomerang.xml", "iceboomerang.tex")
 InsertIngredientValues({"rice"},{veggie=1,rice=1},true,false,false)
+RegisterInventoryItemAtlas("images/inventoryimages/rice.xml", "rice.tex")
 InsertIngredientValues({"rice_cooked"},{veggie=1},true,false,false)
+RegisterInventoryItemAtlas("images/inventoryimages/rice_cooked.xml", "rice_cooked.tex")
 InsertIngredientValues({"foliage"},{foliage=1},true,false,false)
 InsertIngredientValues({"greenfoliage"},{foliage=1},true,false,false)
+RegisterInventoryItemAtlas("images/inventoryimages/greenfoliage.xml", "greenfoliage.tex")
 InsertIngredientValues({"horn"},{meat=1},true,false,false)
 InsertIngredientValues({"trunk_summer"},{meat=2},true,false,false)
 InsertIngredientValues({"trunk_winter"},{meat=2},true,false,false)
@@ -370,6 +382,9 @@ local zaspberryparfait =
 }
 AddCookerRecipe("cookpot", zaspberryparfait)
 AddCookerRecipe("portablecookpot", zaspberryparfait)
+AddCookerRecipe("archive_cookpot", zaspberryparfait)
+RegisterInventoryItemAtlas("images/inventoryimages/zaspberryparfait.xml", "zaspberryparfait.tex")
+
 local carapacecooler =
 {
     name = "carapacecooler",
@@ -385,6 +400,8 @@ local carapacecooler =
     cooktime = 0.5,
 }
 --AddCookerRecipe("portablecookpot", carapacecooler)
+--inventory icon file not found
+
 local seafoodpaella =
 {
     name = "seafoodpaella",
@@ -402,6 +419,9 @@ local seafoodpaella =
 }
 AddCookerRecipe("cookpot", seafoodpaella)
 AddCookerRecipe("portablecookpot", seafoodpaella)
+AddCookerRecipe("archive_cookpot", seafoodpaella)
+RegisterInventoryItemAtlas("images/inventoryimages/seafoodpaella.xml", "seafoodpaella.tex")
+
 local liceloaf =
 {
     name = "liceloaf",
@@ -419,6 +439,9 @@ local liceloaf =
 }
 AddCookerRecipe("cookpot", liceloaf)
 AddCookerRecipe("portablecookpot", liceloaf)
+AddCookerRecipe("archive_cookpot", liceloaf)
+RegisterInventoryItemAtlas("images/inventoryimages/liceloaf.xml", "liceloaf.tex")
+
 local hardshelltacos =
 {
     name = "hardshelltacos",
@@ -435,6 +458,9 @@ local hardshelltacos =
 }
 AddCookerRecipe("cookpot", hardshelltacos)
 AddCookerRecipe("portablecookpot", hardshelltacos)
+AddCookerRecipe("archive_cookpot", hardshelltacos)
+RegisterInventoryItemAtlas("images/inventoryimages/hardshelltacos.xml", "hardshelltacos.tex")
+
 local californiaking =
 {
     name = "californiaking",
@@ -452,6 +478,8 @@ local californiaking =
 }
 AddCookerRecipe("cookpot", californiaking)
 AddCookerRecipe("portablecookpot", californiaking)
+AddCookerRecipe("archive_cookpot", californiaking)
+RegisterInventoryItemAtlas("images/inventoryimages/californiaking.xml", "californiaking.tex")
 
 local purplesteamedhams =
 {
@@ -470,6 +498,8 @@ local purplesteamedhams =
 }
 AddCookerRecipe("cookpot", purplesteamedhams)
 AddCookerRecipe("portablecookpot", purplesteamedhams)
+AddCookerRecipe("archive_cookpot", purplesteamedhams)
+RegisterInventoryItemAtlas("images/inventoryimages/purplesteamedhams.xml", "purplesteamedhams.tex")
 
 local greensteamedhams =
 {
@@ -488,6 +518,8 @@ local greensteamedhams =
 }
 AddCookerRecipe("cookpot", greensteamedhams)
 AddCookerRecipe("portablecookpot", greensteamedhams)
+AddCookerRecipe("archive_cookpot", greensteamedhams)
+RegisterInventoryItemAtlas("images/inventoryimages/greensteamedhams.xml", "greensteamedhams.tex")
 
 local simpsalad =
 {
@@ -505,6 +537,9 @@ local simpsalad =
 }
 AddCookerRecipe("cookpot", simpsalad)
 AddCookerRecipe("portablecookpot", simpsalad)
+AddCookerRecipe("archive_cookpot", simpsalad)
+RegisterInventoryItemAtlas("images/inventoryimages/simpsalad.xml", "simpsalad.tex")
+
 local blueberrypancakes =
 {
     name = "blueberrypancakes",
@@ -521,6 +556,9 @@ local blueberrypancakes =
 }
 AddCookerRecipe("cookpot", blueberrypancakes)
 AddCookerRecipe("portablecookpot", blueberrypancakes)
+AddCookerRecipe("archive_cookpot", blueberrypancakes)
+RegisterInventoryItemAtlas("images/inventoryimages/blueberrypancakes.xml", "blueberrypancakes.tex")
+
 local beefalowings =
 {
     name = "beefalowings",
@@ -538,6 +576,9 @@ local beefalowings =
 }
 AddCookerRecipe("cookpot", beefalowings)
 AddCookerRecipe("portablecookpot", beefalowings)
+AddCookerRecipe("archive_cookpot", beefalowings)
+RegisterInventoryItemAtlas("images/inventoryimages/beefalowings.xml", "beefalowings.tex")
+
 local snowcone =
 {
     name = "snowcone",
@@ -557,7 +598,10 @@ local snowcone =
 if TUNING.DSTU.ICECROCKBLOCKER == true then
 AddCookerRecipe("cookpot", snowcone)
 AddCookerRecipe("portablecookpot", snowcone)
+AddCookerRecipe("archive_cookpot", snowcone)
+RegisterInventoryItemAtlas("images/inventoryimages/snowcone.xml", "snowcone.tex")
 end
+
 local viperjam =
 {
     name = "viperjam",
@@ -575,6 +619,9 @@ local viperjam =
 }
 AddCookerRecipe("cookpot", viperjam)
 AddCookerRecipe("portablecookpot", viperjam)
+AddCookerRecipe("archive_cookpot", viperjam)
+RegisterInventoryItemAtlas("images/inventoryimages/viperjam.xml", "viperjam.tex")
+
 local snotroast =
 {
     name = "snotroast",
@@ -592,6 +639,9 @@ local snotroast =
 }
 AddCookerRecipe("cookpot", snotroast)
 AddCookerRecipe("portablecookpot", snotroast)
+AddCookerRecipe("archive_cookpot", snotroast)
+RegisterInventoryItemAtlas("images/inventoryimages/snotroast.xml", "snotroast.tex")
+
 local theatercorn =
 {
     name = "theatercorn",
@@ -610,3 +660,5 @@ local theatercorn =
 }
 AddCookerRecipe("cookpot", theatercorn)
 AddCookerRecipe("portablecookpot", theatercorn)
+AddCookerRecipe("archive_cookpot", theatercorn)
+RegisterInventoryItemAtlas("images/inventoryimages/theatercorn.xml", "theatercorn.tex")
