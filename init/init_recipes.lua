@@ -83,7 +83,9 @@ AddRecipe("deserthat", {Ingredient("goggleshat", 1), Ingredient("pigskin", 1)}, 
 ]]
 AddRecipe("ghostlyelixir_fastregen", {Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 50), Ingredient("ghostflower", 4)}, CUSTOM_RECIPETABS.ELIXIRBREWING, TECH.NONE, nil, nil, nil, nil, "elixirbrewer")
 
-AddRecipe("pocketwatch_revive", {Ingredient("pocketwatch_parts", 2), Ingredient("livinglog", 2), Ingredient("boneshard", 4)}, CUSTOM_RECIPETABS.CLOCKMAKER, TECH.MAGIC_TWO)
+if GetModConfigData("wanda_nerf") == true then
+	AddRecipe("pocketwatch_revive", {Ingredient("pocketwatch_parts", 2), Ingredient("livinglog", 2), Ingredient("boneshard", 4)}, CUSTOM_RECIPETABS.CLOCKMAKER, TECH.MAGIC_TWO)
+end
 
 AllRecipes["reviver"].ingredients = {Ingredient("skeletonmeat", 1, "images/inventoryimages/skeletonmeat.xml"), Ingredient("spidergland", 1)}
 --AllRecipes["ghostlyelixir_fastregen"].ingredients = {Ingredient("spidergland", 2), Ingredient("ghostflower", 4)}
