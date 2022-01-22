@@ -1716,7 +1716,7 @@ local function TimeForACheckUp(inst,dev)
 						end
 					end
 	]]
-					if not (v:HasTag("balloon") or v:HasTag("heavy")) then
+					if not (v:HasTag("balloon") or v:HasTag("heavy") or v:HasTag("projectile")) then
 						if (v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool"))  then
 							inst.itemscore = inst.itemscore + 30 -- Oooh, wants wants! We steal!
 						elseif v:HasTag("molebait") then
