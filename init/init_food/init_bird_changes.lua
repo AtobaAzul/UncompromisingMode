@@ -126,7 +126,7 @@ local function OnGetItem(inst, giver, item)
     end
 	
 		if item.components.edible.foodtype == FOODTYPE.MEAT then
-				if  item.components.edible:GetHealth(inst) < 0 then --monster meat is currently the only negative health meat item
+				if  item.components.edible:GetHealth(inst) < 0 and bird ~nil then --monster meat is currently the only negative health meat item
 					if bird.monsterbelly ~= nil and bird.monsterbelly ~= 0 then 
 						bird.monsterbelly = bird.monsterbelly + 1
 						if item.components.edible:GetSanity(inst) > -7 then --test to see if an item is actually monsterjerky
