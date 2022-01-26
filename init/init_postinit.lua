@@ -133,6 +133,7 @@ local prefab_post = {
 	"rainhat",
 	"darts",
 	"terrarium",
+	"bandage",
 }
 
 local stategraph_post = {
@@ -225,10 +226,6 @@ end
 
 if GetModConfigData("canedurability") == true then
 table.insert(prefab_post,"cane")
-end
-
-if GetModConfigData("honeybandbuff") == true then
-table.insert(prefab_post,"bandage")
 end
 
 if GetModConfigData("angrypenguins") == true then

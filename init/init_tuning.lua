@@ -359,7 +359,7 @@ TUNING.DSTU =
 
 --Experimental and DEV
 
-	HONEYBANDBUFF = GetModConfigData("honeybandbuff"),
+	--HONEYBANDBUFF = GetModConfigData("honeybandbuff"),
 	ELECTRICALMISHAP = GetModConfigData("electricalmishap"),
 	ANNOUNCE_BASESTATUS = GetModConfigData("announce_basestatus"),
 	EYEBRELLAREWORK = GetModConfigData("eyebrellarework"),
