@@ -97,13 +97,13 @@ local states =
         
         onenter = function(inst)
 			inst.AnimState:PlayAnimation("walk")
-			inst.components.locomotor:RunForward()
+			inst.components.locomotor:WalkForward()
         end,
         
         
         events=
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("moving") end),
+            EventHandler("animover", function(inst) inst.sg:GoToState("move") end),
         },
         
     },   

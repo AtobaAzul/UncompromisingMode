@@ -44,7 +44,7 @@ local function fn()
 
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
     inst.components.locomotor.pathcaps = { allowocean = true, ignoreLand = true }
-    inst.components.locomotor.walkspeed = TUNING.OCEANHORROR.SPEED
+    inst.components.locomotor.walkspeed = 2
     inst.sounds = sounds
     inst:SetStateGraph("SGspider_crabbit")
 
