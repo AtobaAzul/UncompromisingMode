@@ -10,6 +10,8 @@ local GROUND_OCEAN_COLOR = -- Color for the main island ground tiles
     minimap_color =         { 46,  32,  18,  64 },
 }
 
+
+
 AddTile(
 	"HOODEDFOREST",
 	102,
@@ -335,6 +337,25 @@ AddTaskPreInit("Forest hunters",function(task) --Leave Forest Hunters in incase 
 }
 end)
 
+local Layouts = GLOBAL.require("map/layouts").Layouts
+local StaticLayout = GLOBAL.require("map/static_layout")
+Layouts["specter_sea"] = StaticLayout.Get("map/static_layouts/specter_sea",{
+	min_dist_from_land = 0})
+
+AddRoomPreInit("OceanRough", function(room)
+	if not room.contents.countstaticlayouts then
+		room.contents.countstaticlayouts = {}
+	end
+	room.contents.countstaticlayouts["specter_sea"] = 1
+end)
+
+AddRoomPreInit("OceanHazardous", function(room)
+	if not room.contents.countstaticlayouts then
+		room.contents.countstaticlayouts = {}
+	end
+	room.contents.countstaticlayouts["rose_garden"] = 1
+end)
+
 AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "forest" then
         return
@@ -342,6 +363,8 @@ AddTaskSetPreInitAny(function(tasksetdata)
 	table.insert(tasksetdata.tasks,"GiantTrees")
 	table.insert(tasksetdata.required_prefabs,"riceplantspawnerlarge")
 	table.insert(tasksetdata.required_prefabs,"riceplantspawner")
+	table.insert(tasksetdata.required_prefabs,"researchlab")
+	--tasksetdata.ocean_prefill_setpieces["specter_sea"] = {count = 1}
 end)
 --[[
 AddTaskSetPreInitAny(function(tasksetdata)
@@ -363,8 +386,6 @@ AddTaskSetPreInitAny(function(tasksetdata)
 	end
 end)]]
 
-local Layouts = GLOBAL.require("map/layouts").Layouts
-local StaticLayout = GLOBAL.require("map/static_layout")
 
 Layouts["hooded_town"] = StaticLayout.Get("map/static_layouts/hooded_town")
 Layouts["rose_garden"] = StaticLayout.Get("map/static_layouts/rose_garden")

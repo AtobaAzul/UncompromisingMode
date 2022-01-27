@@ -15,7 +15,7 @@ env.AddPrefabPostInit("cave", function(inst)
         return
     end
 	
-	inst:AddComponent("UM_springweather")
+	--inst:AddComponent("UM_springweather")
 	
 end)
 

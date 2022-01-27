@@ -291,4 +291,9 @@ return {
 	"reedbuncher",
 	"uncompromising_pollen_fx",
 	"itemscrapper",
+	"um_spectersea_areahandler",
+	"specter_shipwreck",
+	"proto_william",
+	"phantom",
+	"spider_crabbit",
 }

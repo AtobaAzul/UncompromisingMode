@@ -88,8 +88,22 @@ local highfever = -- Similar intensity to mediumfever, large radius
 
 --Function that checks to see if it's spring and changes the build if it should.
 --If it's not spring, it will change the build back.
-local function SpringCheck(inst,isspring) --"isspring" can only be called from the event listener, the other areas do not have access to this value. Saving it for an fx for anim call when the world becomes spring.
-	if TheWorld.state.isspring and inst.LushBuild then
+
+local function LushCheck(inst) --Checks to see if it's lush season.
+	if TheWorld.components.UM_springweather ~= nil then --Forest
+		if TheWorld.state.isspring and TheWorld.components.UM_springweather.threat == "lush" then
+			return true
+		end
+	end
+	if TheWorld.components.UM_springweather_receiver ~= nil then --Caves
+		if TheWorld.state.isspring and TheWorld.components.UM_springweather_receiver.threat == "lush" then
+			return true
+		end	
+	end
+end
+
+local function SpringCheck(inst) --Checks to see if it should do something on each spring.
+	if LushCheck(inst) and inst.LushBuild then
 		inst.AnimState:SetBuild(inst.LushBuild)
 	elseif inst.OldBuild then
 		inst.AnimState:SetBuild(inst.OldBuild)
@@ -119,7 +133,7 @@ local function SummonPollen(inst,range) --Makes the plant generate pollen if it'
 end
 
 local function PollenTask(inst) --Decides if a plant should release pollen, consider doing a search for number of pollen nearby
-	if ((inst:HasTag("pollenlow") and math.random() > 0.6) or (inst:HasTag("pollenmed") and math.random() > 0.25) or (inst:HasTag("pollenhigh"))) and TheWorld.state.isspring then
+	if ((inst:HasTag("pollenlow") and math.random() > 0.6) or (inst:HasTag("pollenmed") and math.random() > 0.25) or (inst:HasTag("pollenhigh"))) and LushCheck(inst) then
 		if inst:HasTag("pollenlow") then
 			SummonPollen(inst,4)
 		end
