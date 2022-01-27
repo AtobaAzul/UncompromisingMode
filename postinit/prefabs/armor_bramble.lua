@@ -77,7 +77,7 @@ env.AddPrefabPostInit("armor_bramble", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	
+	--[[
 	local _SetOnEquip = inst.components.equippable.onequipfn
 
 	inst.components.equippable.onequipfn = function(inst, owner)
@@ -108,16 +108,9 @@ env.AddPrefabPostInit("armor_bramble", function(inst)
 		end
 
 	end
-	--[[
-	if inst.components.equippable ~= nil then
-		inst.components.equippable:SetOnEquip(onequip)
-		inst.components.equippable:SetOnUnequip(onunequip)
-	end]]
 	
 	if inst.components.armor ~= nil then
 		inst.components.armor:InitCondition(TUNING.ARMORBRAMBLE * 2, TUNING.ARMORBRAMBLE_ABSORPTION)
-	end
-	
-	--inst._onblocked = function(owner, data) OnBlocked(owner, data, inst) end
+	end]]
 	
 end)

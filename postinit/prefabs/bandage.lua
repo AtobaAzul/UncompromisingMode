@@ -13,6 +13,5 @@ env.AddPrefabPostInit("bandage", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	
 	inst.components.healer.onhealfn = OnUse
 end)

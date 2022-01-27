@@ -66,11 +66,9 @@ GLOBAL.AllRecipes["ratpoisonbottle"].sortkey = GLOBAL.AllRecipes["fertilizer"].s
 AddRecipe("diseasecurebomb", {Ingredient("cactus_flower", 2), Ingredient("moonrocknugget", 2), Ingredient("spidergland", 3)}, RECIPETABS.SURVIVAL,  TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/diseasecurebomb.xml", "diseasecurebomb.tex" )
 GLOBAL.AllRecipes["diseasecurebomb"].sortkey = GLOBAL.AllRecipes["lifeinjector"].sortkey + .1
 
-if GLOBAL.TUNING.DSTU.HONEYBANDBUFF == true then
-AddRecipe("bandage", {Ingredient("papyrus", 1), Ingredient("honey", 2)}, RECIPETABS.SURVIVAL, TECH.SCIENCE_TWO, nil, nil, nil, 2)
-
+AddRecipe("bandage", {Ingredient("papyrus", 1), Ingredient("honey", 2)}, RECIPETABS.SURVIVAL, TECH.SCIENCE_TWO, nil, nil, nil, 1)
+GLOBAL.AllRecipes["bandage"].sortkey = GLOBAL.AllRecipes["healingsalve"].sortkey + .1
 GLOBAL.AllRecipes["tillweedsalve"].sortkey = GLOBAL.AllRecipes["healingsalve"].sortkey + .1
-end
 
 
 --[[
@@ -187,7 +185,8 @@ if TUNING.DSTU.WOLFGANG_HUNGERMIGHTY == true then
 	AddRecipe("dumbbell_golden", {Ingredient("goldnugget", 2), Ingredient("cutstone", 2), Ingredient("twigs", 2)}, CUSTOM_RECIPETABS.STRONGMAN, TECH.SCIENCE_ONE, nil, nil, nil, nil, "stinkman")
 	AddRecipe("dumbbell_gem",    {Ingredient("purplegem",  1), Ingredient("cutstone", 2), Ingredient("twigs", 2)}, CUSTOM_RECIPETABS.STRONGMAN, TECH.MAGIC_TWO, nil, nil, nil, nil, "stinkman")
 end
-AddRecipe("floral_bandage", {Ingredient("bandage", 1), Ingredient("cactus_flower", 2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, true, nil, nil, "images/inventoryimages/floral_bandage.xml", "floral_bandage.tex" )
+AddRecipe("floral_bandage", {Ingredient("bandage", 1), Ingredient("cactus_flower", 2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, false, 1, nil, "images/inventoryimages/floral_bandage.xml", "floral_bandage.tex" )
+
 GLOBAL.AllRecipes["floral_bandage"].sortkey = GLOBAL.AllRecipes["bandage"].sortkey + .1
 
 STRINGS.RECIPE_DESC.SLINGSHOTAMMO_FIRECRACKERS = "For the aspiring young menace."
@@ -221,10 +220,4 @@ STRINGS.RECIPE_DESC.DRIFTWOODFISHINGROD = "Go Fancy Fishing. For Fancy Fish."
 STRINGS.RECIPE_DESC.BOOK_RAIN = "A catalogue of weather effects."
 STRINGS.RECIPE_DESC.RAIN_HORN = "Drown the world."
 STRINGS.RECIPE_DESC.HAT_RATMASK = "Sniff out some vermin!"
-STRINGS.RECIPE_DESC.CURSED_ANTLER = "A brand new look!"
-STRINGS.RECIPE_DESC.TWISTED_ANTLER = "The classic!"
-STRINGS.RECIPE_DESC.twisted_antler = "The classic!"
-STRINGS.RECIPE_DESC.FEATHER_FROCK = "A brand new look!"
-STRINGS.RECIPE_DESC.FEATHER_FROCK_FANCY = "The classic!"
-STRINGS.RECIPE_DESC.feather_frock_fancy = "The classic!"
---STRINGS.RECIPE_DESC.FLORAL_BANDAGE = "A flower and honey mess on a bandage."
+STRINGS.RECIPE_DESC.FLORAL_BANDAGE = "Sweetened Healing!"

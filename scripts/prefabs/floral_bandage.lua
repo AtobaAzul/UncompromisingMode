@@ -5,6 +5,12 @@ local assets =
 	Asset("IMAGE", "images/inventoryimages/floral_bandage.tex"),	
 }
 
+local function OnUse(inst, target)
+	if target.components.debuffable ~= nil and target.components.health ~= nil and not target.components.health:IsDead() then
+		target.configheal = 15
+		target.components.debuffable:AddDebuff("confighealbuff", "confighealbuff")
+	end
+end
 local function fn()                     --Y Add This Item?       --Cactus flower's "bonus" is supposedly flower salad, which has a super quick spoil time with a baseline
 	local inst = CreateEntity()                                  --healing value. This is terrible, especially whenever this is a summer exclusive resource. [Which is also kinda lacking]
                                                                  --So here's the proposition, buff flower salad, add alternative healing item that does 40 health and is nonperishable,
@@ -35,7 +41,8 @@ local function fn()                     --Y Add This Item?       --Cactus flower
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/floral_bandage.xml"
 	
     inst:AddComponent("healer")
-    inst.components.healer:SetHealthAmount(40)
+    inst.components.healer:SetHealthAmount(45)
+	inst.components.healer.onhealfn = OnUse
 
     MakeHauntableLaunch(inst)
 
