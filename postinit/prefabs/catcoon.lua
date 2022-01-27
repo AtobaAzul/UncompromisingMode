@@ -83,8 +83,6 @@ env.AddPrefabPostInit("catcoon", function(inst)
 	end
 	inst.components.combat:SetRetargetFunction(3, RetargetFn)
 	
-    inst:AddComponent("inventory")
-    inst.components.inventory.ignorescangoincontainer = true
 	
     inst:ListenForEvent("onattackother", OnAttackOther)
 	inst:ListenForEvent("attacked", OnAttacked)
