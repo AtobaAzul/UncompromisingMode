@@ -134,6 +134,7 @@ local prefab_post = {
 	"darts",
 	"terrarium",
 	"bandage",
+	"grassgekko",
 }
 
 local stategraph_post = {
