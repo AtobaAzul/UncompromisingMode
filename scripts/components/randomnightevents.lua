@@ -143,7 +143,7 @@ local CHANNELER_SPAWN_RADIUS = 30
     local angle = math.random() * 2 * PI
     x = x + CHANNELER_SPAWN_RADIUS * math.cos(angle)
     z = z + CHANNELER_SPAWN_RADIUS * math.sin(angle)
-    if TheWorld.Map:IsAboveGroundAtPoint(x, 0, z) then
+	if TheWorld.Map:IsPassableAtPoint(x, 0, z) then
         local skele = SpawnPrefab("rneskeleton")
 		if skele.components.combat ~= nil then
 		skele.components.combat:SuggestTarget(player)
@@ -160,7 +160,7 @@ local function TrySpawnStanton(player)
 local x,y,z = player.Transform:GetWorldPosition()
 x = x+math.random(-4,4)
 z = z+math.random(-4,4)
-if TheWorld.Map:IsAboveGroundAtPoint(x,y,z) then 
+if TheWorld.Map:IsPassableAtPoint(x, 0, z) then
 	SpawnPrefab("stanton").Transform:SetPosition(x,y,z)
 else
 	TrySpawnStanton(player)
@@ -1784,7 +1784,7 @@ local function DoBaseRNE(player)
 			for k,v in pairs(self.baseevents) do
 				rnd = rnd - v.weight
 				if rnd <= 0 and not table.contains(self.storedrne, v.name) then
-					if #self.storedrne >= 6 then
+					if #self.storedrne >= 10 then
 						table.remove(self.storedrne, 1)
 					end
 					
@@ -1806,7 +1806,7 @@ local function DoWildRNE(player)
 			for k,v in pairs(self.wildevents) do
 				rnd = rnd - v.weight
 				if rnd <= 0 and not table.contains(self.storedrne, v.name) then
-					if #self.storedrne >= 6 then
+					if #self.storedrne >= 10 then
 						table.remove(self.storedrne, 1)
 					end
 				

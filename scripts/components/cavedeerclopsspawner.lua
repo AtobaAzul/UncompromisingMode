@@ -59,7 +59,8 @@ local function IsEligible(player)
 	local area = player.components.areaaware
 	return TheWorld.Map:IsVisualGroundAtPoint(player.Transform:GetWorldPosition())
 			and area:GetCurrentArea() ~= nil 
-			and not area:CurrentlyInTag("nohasslers")
+			and not area:CurrentlyInTag("Nightmare")
+			and not area:CurrentlyInTag("Atrium")
 end
 
 local function PickAttackTarget()

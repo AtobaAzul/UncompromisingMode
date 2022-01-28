@@ -14,20 +14,21 @@ local prefabs =
 local easing = require("easing")
 
 local function OnCharged(inst)
-  local fx = SpawnPrefab("dr_warmer_loop")
+	local fx = SpawnPrefab("dr_warmer_loop")
   
-  local owner = inst.components.inventoryitem.owner
+	local owner = inst.components.inventoryitem.owner
+	inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/angry", nil, 0.6)
   
-  if inst.components.equippable:IsEquipped() and owner ~= nil then
-    fx.entity:SetParent(owner.entity)
-    fx.entity:AddFollower()
-    fx.Follower:FollowSymbol(owner.GUID, "swap_object", 0, -275, 0)
-    fx.Transform:SetScale(1.11, 1.11, 1.11)
-  else
-    fx.entity:SetParent(inst.entity)
-        fx.Transform:SetPosition(0, 2.35, 0)
-    fx.Transform:SetScale(1.11, 1.11, 1.11)
-  end
+	if inst.components.equippable:IsEquipped() and owner ~= nil then
+		fx.entity:SetParent(owner.entity)
+		fx.entity:AddFollower()
+		fx.Follower:FollowSymbol(owner.GUID, "swap_object", 0, -275, 0)
+		fx.Transform:SetScale(1.11, 1.11, 1.11)
+	else
+		fx.entity:SetParent(inst.entity)
+		fx.Transform:SetPosition(0, 2.35, 0)
+		fx.Transform:SetScale(1.11, 1.11, 1.11)
+	end
 end
 --[[
 local function fuelme(inst)

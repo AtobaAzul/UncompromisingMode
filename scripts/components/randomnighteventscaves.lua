@@ -723,7 +723,7 @@ local function DoCaveRNE(player)
 			for k,v in pairs(self.caveevents) do
 				rnd = rnd - v.weight
 				if rnd <= 0 and not table.contains(self.storedcaverne, v.name) then
-					if #self.storedcaverne >= 6 then
+					if #self.storedcaverne >= 9 then
 						table.remove(self.storedcaverne, 1)
 					end
 					
@@ -745,7 +745,7 @@ local function DoSecondaryCaveRNE(player)
 			for k,v in pairs(self.secondarycaveevents) do
 				rnd = rnd - v.weight
 				if rnd <= 0 and not table.contains(self.storedcaverne, v.name) then
-					if #self.storedcaverne >= 6 then
+					if #self.storedcaverne >= 9 then
 						table.remove(self.storedcaverne, 1)
 					end
 					

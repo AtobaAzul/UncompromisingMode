@@ -113,7 +113,9 @@ local function startdamaging(inst, data)
 			inst.owner.components.health:DoDelta(-1)
 		end
 	else
-		inst.task:Cancel()
+		if inst.task ~= nil then
+			inst.task:Cancel()
+		end
 		inst.task = nil
 	end
 end
