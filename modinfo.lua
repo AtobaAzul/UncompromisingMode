@@ -140,6 +140,7 @@ configuration_options =
 	BinaryConfig("on tentacles", "On Tentacles Re-Balance", "On Tentacles now spawns friendly tentacles that die over time, and do not drop tentacle spots.", true),
 	BinaryConfig("applied horticulture", "Horticulture, Abridged recipe Re-Balance", "Horticulture, Abridged now takes 1 Leafy Meat instead of 5 seeds, to better balance it from being too easily spammable early game.", true),
 	BinaryConfig("wanda_nerf", "Wanda Tweaks.", "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", false),
+	BinaryConfig("wormwood", "Extra Flamable Wormwood", "Wormwood is highly flameable, like in Hamlet.", true),
 	SkipSpace(),
 ------------------------------
 -- Weather --
