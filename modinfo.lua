@@ -509,11 +509,15 @@ configuration_options =
 	},
 	BinaryConfig("crabking_claws", "Crabking Fight Adjustment", "The Crabkings imposing claws now deal 500 damage to the king when killed.", false),
 	SkipSpace(),
+	Header("Mod Compatibility"),
+	BinaryConfig("um_music", "Official Soundtrack", "Disable this if you are crashing when using client music mods.", true),
+	SkipSpace(),
 	Header("Experimental"),
 	--BinaryConfig("honeybandbuff", "Honey Poultice Buff", "[Experimental] Crafting honey poultice gives 2, healing with it gives 10 health overtime as well as 30 health.", false),
 	BinaryConfig("electricalmishap", "Electrical Weapon Retune", "[Experimental] Changes the bug zapper and morning star with the suggestions from Shynuke and Lux.", false),
 	BinaryConfig("announce_basestatus", "[DEV] Announce Ratsniffer","[Developer Tool] Prints the exact rat sniff values to chat to be viewed in real time.",false),
 	BinaryConfig("eyebrellarework", "Eyebrella Rework","Eyebrella stats restored to vanilla value, can't be repaired, 12 day durability.",false),
+
 ------------------------------
 -- Secret --
 ------------------------------

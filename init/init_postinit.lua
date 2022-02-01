@@ -16,7 +16,6 @@ local component_post = {
 	"workable",
 	"sleepingbaguser",
 	"hounded",
-	"dynamicmusic",
 	"sleeper",
 	"fueled",
 	"perishable",
@@ -275,6 +274,10 @@ end
 
 if GetModConfigData("scalemailbuff") == true then
 	table.insert(prefab_post,"armor_dragonfly")
+end
+
+if GetModConfigData("um_music") == true then
+	table.insert(component_post,"dynamicmusic")
 end
 
 modimport("postinit/sim")
