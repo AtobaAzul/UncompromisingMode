@@ -3,9 +3,8 @@ return Class(function(self, inst)
 self.inst = inst
 
 local function Consume(inst)
-
-	if ((inst.sg ~= nil) and not (inst.sg.currentstate.name == "teleportato_teleport" or inst.sg.currentstate.name == "death") and (inst.components.ropebridgewalker ~= nil and inst.components.ropebridgewalker.ison_rope_bridge == false)) then --rope bridge for compat with gleenus' mod
-		inst.sg:GoToState("teleportato_teleport")
+if ((inst.sg ~= nil) and not (inst.sg.currentstate.name == "teleportato_teleport" or inst.sg.currentstate.name == "death")) then
+	inst.sg:GoToState("teleportato_teleport")
 	inst:DoTaskInTime(84*FRAMES,function(inst)
 		local tentapillars = {}
 		for k, v in pairs(Ents) do 
