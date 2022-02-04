@@ -47,10 +47,9 @@ local states = {
 		tags = { "attack", "moving", "hopping", --[["canrotate",]] "busy", "superhop"},
 
 		onenter = function(inst)
-			--inst.Physics:Stop()
+            inst.components.locomotor:Stop()
 			inst.AnimState:PlayAnimation("hopatk")
 			PlayFootstep(inst)
-			--inst.components.locomotor:WalkForward()
 			if inst.doublesuperhop ~= nil then
 				inst.doublesuperhop = inst.doublesuperhop + 1
 			else
@@ -77,10 +76,10 @@ local states = {
 		{
 			TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/preen") end),
 			TimeEvent(30*FRAMES, function(inst)
-				inst.components.locomotor:WalkForward()
+				inst.Physics:SetMotorVelOverride(15,0,0)
 			end),
 		},
-
+		
 		events=
 		{
 			EventHandler("animover", function(inst) 
@@ -95,18 +94,23 @@ local states = {
 		tags = { "attack", "moving", "hopping", "busy", "superhop"},
 
 		onenter = function(inst)
+			inst.Physics:ClearCollisionMask()
+			inst.Physics:CollidesWith(COLLISION.WORLD)
 			inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/attack")
 			inst.AnimState:PlayAnimation("hopatk_loop", true)
-			inst.components.locomotor:WalkForward()
+			inst.Physics:SetMotorVelOverride(15,0,0)
 			inst.flapySound = inst:DoPeriodicTask(6*FRAMES,
 				function(inst)
-			inst.components.locomotor:WalkForward()
 					inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/flap")
 				end)
 			--inst.sg:SetTimeout(.5)
 		end,
 
 		onexit = function(inst)
+			inst.Physics:CollidesWith(COLLISION.OBSTACLES)
+			inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+			inst.Physics:CollidesWith(COLLISION.GIANTS)
+			
 			if inst.flapySound then
 				inst.flapySound:Cancel()
 				inst.flapySound = nil
@@ -128,7 +132,7 @@ local states = {
 		tags = { "attack", "moving", "hopping", "busy", "superhop"},
 
 		onenter = function(inst)
-			inst.Physics:Stop()
+            inst.components.locomotor:Stop()
 			inst.AnimState:PlayAnimation("land")
 			PlayFootstep(inst)
 			ShakeIfClose(inst)
@@ -209,10 +213,9 @@ local states = {
 		tags = { "attack", "moving", "hopping", --[["canrotate",]] "busy", "superhop"},
 
 		onenter = function(inst)
-			--inst.Physics:Stop()
+            inst.components.locomotor:Stop()
 			inst.AnimState:PlayAnimation("hopatk")
 			PlayFootstep(inst)
-			--inst.components.locomotor:WalkForward()
 			if inst.doublesuperhop ~= nil then
 				inst.doublesuperhop = inst.doublesuperhop + 1
 			else
@@ -239,10 +242,10 @@ local states = {
 		{
 			TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/preen") end),
 			TimeEvent(30*FRAMES, function(inst)
-				inst.components.locomotor:WalkForward()
+				inst.Physics:SetMotorVelOverride(15,0,0)
 			end),
 		},
-
+		
 		events=
 		{
 			EventHandler("animover", function(inst) 
@@ -257,18 +260,23 @@ local states = {
 		tags = { "attack", "moving", "hopping", "busy", "superhop"},
 
 		onenter = function(inst)
+			inst.Physics:ClearCollisionMask()
+			inst.Physics:CollidesWith(COLLISION.WORLD)
 			inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/attack")
 			inst.AnimState:PlayAnimation("hopatk_loop", true)
-			inst.components.locomotor:WalkForward()
+			inst.Physics:SetMotorVelOverride(15,0,0)
 			inst.flapySound = inst:DoPeriodicTask(6*FRAMES,
 				function(inst)
-			inst.components.locomotor:WalkForward()
 					inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/flap")
 				end)
 			--inst.sg:SetTimeout(.5)
 		end,
 
 		onexit = function(inst)
+			inst.Physics:CollidesWith(COLLISION.OBSTACLES)
+			inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+			inst.Physics:CollidesWith(COLLISION.GIANTS)
+	
 			if inst.flapySound then
 				inst.flapySound:Cancel()
 				inst.flapySound = nil
@@ -290,7 +298,7 @@ local states = {
 		tags = { "attack", "moving", "hopping", "busy", "superhop"},
 
 		onenter = function(inst)
-			inst.Physics:Stop()
+            inst.components.locomotor:Stop()
 			inst.AnimState:PlayAnimation("land")
 			PlayFootstep(inst)
 			ShakeIfClose(inst)
