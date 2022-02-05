@@ -71,6 +71,9 @@ configuration_options =
 ------------------------------
 -- Core Gameplay --
 ------------------------------
+	Header("Mod Compatibility"),
+	BinaryConfig("um_music", "Official Soundtrack", "Disable this if you are crashing when using client music mods.", true),
+	SkipSpace(),
     Header("Core Gameplay"),
 	BinaryConfig("foodregen", "Over Time Food Stats", "Health and Sanity from foods is applied over time, each food acting as a seperate stackable health or sanity regen buff.", true),
     BinaryConfig("caved", "[IMPORTANT] Cave Config", "Switches some things around so players who can't run Caves can still enjoy the game. ENABLE IF CAVES ARE ENABLED!", true),
@@ -508,9 +511,6 @@ configuration_options =
 		default = 10000,
 	},
 	BinaryConfig("crabking_claws", "Crabking Fight Adjustment", "The Crabkings imposing claws now deal 500 damage to the king when killed.", false),
-	SkipSpace(),
-	Header("Mod Compatibility"),
-	BinaryConfig("um_music", "Official Soundtrack", "Disable this if you are crashing when using client music mods.", true),
 	SkipSpace(),
 	Header("Experimental"),
 	--BinaryConfig("honeybandbuff", "Honey Poultice Buff", "[Experimental] Crafting honey poultice gives 2, healing with it gives 10 health overtime as well as 30 health.", false),
