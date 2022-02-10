@@ -384,7 +384,7 @@ local states=
             TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/attack_grunt") end),
 			TimeEvent(17*FRAMES, function(inst) inst.components.locomotor:Stop()
 			
-			inst.components.combat:DoAreaAttack(inst, TUNING.SPIDERQUEEN_ATTACKRANGE * 1.2) --GroundPound Is purely visual
+			inst.components.combat:DoAreaAttack(inst, TUNING.SPIDERQUEEN_ATTACKRANGE) --GroundPound Is purely visual
 			inst.components.groundpounder:GroundPound()
 			
 			local x,y,z = inst.Transform:GetWorldPosition()

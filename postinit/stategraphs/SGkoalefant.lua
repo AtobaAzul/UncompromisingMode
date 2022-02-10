@@ -121,17 +121,18 @@ local states = {
 			events =
             {
                 EventHandler("animover", function(inst) 
-				inst:AddTag("chargespeed")
-                inst:PushEvent("attackstart")
-				if inst.components.combat ~= nil then
-				inst.components.combat:ResetCooldown()
-				end
-				inst.sg:GoToState("charge")
+					inst:AddTag("chargespeed")
+					inst:PushEvent("attackstart")
+					if inst.components.combat ~= nil then
+						inst.components.combat:ResetCooldown()
+					end
+					inst.sg:GoToState("charge")
 				end),
             },
         },
 
-    State{  name = "charge",
+    State{  
+			name = "charge",
             tags = {"moving", "charging", "busy", "running", "nointerrupt"},
             
             onenter = function(inst) 

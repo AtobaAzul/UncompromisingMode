@@ -54,6 +54,28 @@ env.AddPrefabPostInit("treasurechest", function(inst)
 	inst.components.container.onclosefn = onclose_raid
 end)
 
+env.AddPrefabPostInit("wardrobe", function(inst)
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+	local function onclose_raid(inst, doer)
+		if not inst:HasTag("burnt") then
+			inst.AnimState:PlayAnimation("close")
+			inst.AnimState:PushAnimation("closed", false)
+			inst.SoundEmitter:PlaySound("dontstarve/wilson/chest_close")
+			
+			--Rat Raid
+			if doer ~= nil and doer:HasTag("player") then
+				--inst:DoTaskInTime(0, ActiveRaid, doer)
+				TheWorld:PushEvent("activeraid", {container = inst, doer = doer, amount = 1})
+			end
+		end
+	end
+	
+	inst.components.container.onclosefn = onclose_raid
+end)
+
 env.AddPrefabPostInit("icebox", function(inst)
 	if not TheWorld.ismastersim then
 		return

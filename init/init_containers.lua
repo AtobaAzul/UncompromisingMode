@@ -290,7 +290,7 @@ function containers.widgetsetup(container, prefab, data, ...)
 	end
 end
 
-if GetModConfigData("scaledchestbuff") == true then
+
 
 if containers.MAXITEMSLOTS == nil or containers.MAXITEMSLOTS < 25 then
 containers.MAXITEMSLOTS = 25
@@ -302,8 +302,9 @@ local function addItemSlotNetvarsInContainer(inst)
         end
      end
   end
-  AddPrefabPostInit("container_classified", addItemSlotNetvarsInContainer)
+AddPrefabPostInit("container_classified", addItemSlotNetvarsInContainer)
 
+if GetModConfigData("scaledchestbuff") == true then
 containers.params.dragonflychest =
 {
     widget =
@@ -325,5 +326,28 @@ for y = 2.5, -1.5, -1 do
 		table.insert(containers.params.dragonflychest.widget.slotpos, Vector3(80*x-80*2, 80*y-80*2+120,0))
   	end
 end
+end
 
+containers.params.wardrobe =
+{
+    widget =
+    {
+        slotpos = {},
+  		animbank = nil,
+  		animbuild = nil,
+        bgatlas = "images/dragonflycontainerborder.xml",
+        bgimage = "dragonflycontainerborder.tex",
+		bgimagetint = {r=.82,g=.77,b=.7,a=1},
+        pos = Vector3(0, 220, 0),
+        side_align_tip = 160,
+    },
+    type = "chest",
+	itemtestfn = CheckEquipItem,
+	right = true,
+}
+
+for y = 2.5, -1.5, -1 do
+	for x = 0, 4 do
+		table.insert(containers.params.wardrobe.widget.slotpos, Vector3(80*x-80*2, 80*y-80*2+120,0))
+  	end
 end

@@ -29,6 +29,7 @@ local component_post = {
 }
 
 local prefab_post = {
+	"wardrobe",
 	"hayfever_foods",
 	"pollenstuff",
 	"pocketwatch_weapon",
@@ -149,6 +150,7 @@ local stategraph_post = {
 	--"merm",
 	"carnival_host",
 	"catcoon",
+	"beequeen",
 }
 
 local class_post = {

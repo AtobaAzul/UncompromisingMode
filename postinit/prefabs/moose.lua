@@ -188,9 +188,7 @@ env.AddPrefabPostInit("mothergoose", function(inst)
 			inst.components.combat.onhitotherfn = OnHitOther
 		end
 		
-	if inst.components.combat ~= nil then
-		inst.components.combat:SetRange(TUNING.MOOSE_ATTACK_RANGE * 1.1)
-	end
+
 	
     inst:AddComponent("groundpounder")
     inst.components.groundpounder.destroyer = false

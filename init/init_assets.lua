@@ -658,6 +658,8 @@ Assets = {
 	Asset("ANIM", "anim/lush_grass.zip"),
 	Asset("ANIM", "anim/lush_trapdoorgrass.zip"),
 	Asset("ANIM", "anim/swap_driftwood_fishingrod.zip"),
+	Asset("ANIM", "anim/um_bq_actions.zip"),
+	Asset("ANIM", "anim/close_wardrobe.zip"),
 	
 	--Dart Stuff
 	Asset("ANIM", "anim/um_blowguns.zip"),

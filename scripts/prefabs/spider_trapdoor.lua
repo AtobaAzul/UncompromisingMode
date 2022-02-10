@@ -440,7 +440,7 @@ local function create_trapdoor()
         return inst
     end
 	inst:AddTag("tauntless")
-    inst.components.health:SetMaxHealth(TUNING.SPIDER_WARRIOR_HEALTH)
+    inst.components.health:SetMaxHealth(250)
 
     inst.components.combat:SetDefaultDamage(33)
     inst.components.combat:SetAttackPeriod(TUNING.SPIDER_WARRIOR_ATTACK_PERIOD + math.random() * 2)
