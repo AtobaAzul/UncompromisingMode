@@ -3,7 +3,8 @@ local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
 GLOBAL.setfenv(1, GLOBAL)
 
 ------------------------Fire spread is less efficient in winter-----------------------------------------
-env.AddComponentPostInit("carnivalevent", function(self)
+--fully comented out so the IDE stops yelling at me
+--env.AddComponentPostInit("carnivalevent", function(self)
 
 	local _OldSpawnCarnivalHost = self.SpawnCarnivalHost
 
@@ -30,7 +31,7 @@ env.AddComponentPostInit("carnivalevent", function(self)
 		end
 	
 		_OldOnLoad(data)
-	end]]
+	end
 
 	local SpawnCarnivalHost
 
@@ -43,4 +44,4 @@ env.AddComponentPostInit("carnivalevent", function(self)
 		
 		_OldSpawnCarnivalHost(carnival_host, loading)
 	end
-end)
+end)]]

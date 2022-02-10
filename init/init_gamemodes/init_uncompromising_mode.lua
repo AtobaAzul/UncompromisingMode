@@ -179,9 +179,11 @@ local require = GLOBAL.require
 		modimport("init/init_character_changes/wortox")
 	end
 	
+	if GetModConfigData("wormwood") then
 		modimport("init/init_character_changes/wormwood")
+	end
+	
 		modimport("init/init_character_changes/waxwell")
-	--end
 
 	if GetModConfigData("hardcore") then
 		modimport("init/init_gamemodes/init_hardcore")

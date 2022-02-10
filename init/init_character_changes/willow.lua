@@ -84,7 +84,7 @@ end
 
 local function onattacked(inst, data)
     if data.attacker ~= nil and inst.components.health ~= nil and not inst.components.health:IsDead() and inst.components.sanity ~= nil and not inst.components.sanity:IsSane() and (data.attacker:HasTag("shadow") or data.attacker:HasTag("shadowchesspiece") or data.attacker:HasTag("stalker")) then
-        inst.components.burnable:Ignite(true, inst)
+        OnIgniteFn(inst)
 	end
 end
 
@@ -108,19 +108,18 @@ env.AddPrefabPostInit("willow", function(inst)
 		return
 	end
 
-	inst.proptask = nil
+	--[[inst.proptask = nil
 	
-	--if inst.components.burnable ~= nil then
-		--propegation(inst)
+	if inst.components.burnable ~= nil then
 		MakeSmallPropagator(inst)
 		inst.components.burnable:SetBurnTime(TUNING.WORMWOOD_BURN_TIME * 2)
 		inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
 		inst.components.burnable:SetOnBurntFn(OnBurnt)
-	--end
+	end]]
 	
     inst:ListenForEvent("attacked", onattacked)
-    inst:ListenForEvent("ms_respawnedfromghost", OnRespawnedFromGhost2)
-    inst:ListenForEvent("moisturedelta", OnMoistureDelta)
+    --inst:ListenForEvent("ms_respawnedfromghost", OnRespawnedFromGhost2)
+    --inst:ListenForEvent("moisturedelta", OnMoistureDelta)
 	
 end)
 
@@ -184,57 +183,6 @@ local function createlight(inst)
 	
 end
 
-local function onequip(inst, owner)
-    inst.components.burnable:Ignite()
-
-    local skin_build = inst:GetSkinBuild()
-    if skin_build ~= nil then
-        owner:PushEvent("equipskinneditem", inst:GetSkinName())
-        owner.AnimState:OverrideItemSkinSymbol("swap_object", skin_build, "swap_lighter", inst.GUID, "swap_lighter")
-    else
-        owner.AnimState:OverrideSymbol("swap_object", "swap_lighter", "swap_lighter")
-    end
-
-    owner.AnimState:Show("ARM_carry")
-    owner.AnimState:Hide("ARM_normal")
-
-    owner.SoundEmitter:PlaySound("dontstarve/wilson/lighter_on")
-
-
-    if inst.fires == nil then
-        inst.fires = {}
-
-        for i, fx_prefab in ipairs(inst:GetSkinName() == nil and { "lighterfire" } or SKIN_FX_PREFAB[inst:GetSkinName()] or {}) do
-            local fx = SpawnPrefab(fx_prefab)
-            fx.entity:SetParent(owner.entity)
-            fx.entity:AddFollower()
-            fx.Follower:FollowSymbol(owner.GUID, "swap_object", fx.fx_offset_x, fx.fx_offset_y, 0)
-            fx:AttachLightTo(owner)
-
-            table.insert(inst.fires, fx)
-        end
-    end
-
-	if owner:HasTag("pyromaniac") then
-		if inst.components.spellcaster == nil then
-			inst:AddComponent("spellcaster")
-			inst.components.spellcaster:SetSpellFn(createlight)
-			inst.components.spellcaster.canusefrominventory = true
-		end
-		inst.components.fueled:StopConsuming()
-	else
-		inst:RemoveComponent("spellcaster")
-	end
-
-
-    --[[if inst.fire == nil then
-        inst.fire = SpawnPrefab("lighterfire")
-        --inst.fire.Transform:SetScale(.125, .125, .125)
-        inst.fire.entity:AddFollower()
-        inst.fire.Follower:FollowSymbol(owner.GUID, "swap_object", 56, -40, 0)
-    end]]
-end
-
 env.AddPrefabPostInit("lighter", function(inst)
 	if not TheWorld.ismastersim then
 		return 
@@ -243,12 +191,18 @@ env.AddPrefabPostInit("lighter", function(inst)
 	inst:AddTag("lighter")
 	
 	if inst.components.equippable ~= nil then
-		inst.components.equippable:SetOnEquip(onequip)
+		local _SetOnEquip = inst.components.equippable.onequipfn
+
+		inst.components.equippable.onequipfn = function(inst, owner)
+			if _SetOnEquip ~= nil then
+				_SetOnEquip(inst, owner)
+			end
+				
+			if owner:HasTag("pyromaniac") then
+				inst.components.fueled:StopConsuming()
+			end
+		end
 	end
-	
-	inst:AddComponent("spellcaster")
-    inst.components.spellcaster:SetSpellFn(createlight)
-    inst.components.spellcaster.canusefrominventory = true
 	
 end)
 

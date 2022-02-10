@@ -19,7 +19,7 @@ local TARGET_IGNORE_TAGS = { "gmooseegg", "INLIMBO", "mothergoose", "mossling", 
 local function destroystuff(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
 	
-	local sizecheck = 1 + (inst.Transform:GetScale() * 1.9) or 0
+	local sizecheck = 1 + (inst.Transform:GetScale() * 1.7) or 0
 	--print(sizecheck)
     local ents = TheSim:FindEntities(x, y, z, sizecheck, nil, TARGET_IGNORE_TAGS, TARGET_TAGS)
     for i, v in ipairs(ents) do
@@ -157,12 +157,13 @@ local function tornado_fn()
 	inst:AddComponent("sizetweener")
 	
 	inst:AddComponent("linearcircler")
+	inst.components.linearcircler.distance_max = 20
+	inst.components.linearcircler.distance_max_clockwise = 22
 	--[[inst.components.circler.scale = 1
 	inst.components.circler.speed = 6
 	inst.components.circler.minSpeed = 6
 	inst.components.circler.maxSpeed = 6
 	inst.components.circler.minDist = 1
-	inst.components.circler.maxDist = 1
 	inst.components.circler.minScale = 1
 	inst.components.circler.maxScale = 1]]
 

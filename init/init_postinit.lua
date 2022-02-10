@@ -4,7 +4,6 @@ local component_post = {
     --"container",
 	"groundpounder",
 	"propagator",
-	"burnable",
 	--"moisture",
 	"weapon",
 	--"hunter",
@@ -16,7 +15,6 @@ local component_post = {
 	"workable",
 	"sleepingbaguser",
 	"hounded",
-	"dynamicmusic",
 	"sleeper",
 	"fueled",
 	"perishable",
@@ -135,6 +133,7 @@ local prefab_post = {
 	"darts",
 	"terrarium",
 	"bandage",
+	"grassgekko",
 }
 
 local stategraph_post = {
@@ -278,6 +277,13 @@ if GetModConfigData("scalemailbuff") == true then
 	table.insert(prefab_post,"armor_dragonfly")
 end
 
+if GetModConfigData("um_music") == true then
+	table.insert(component_post,"dynamicmusic")
+end
+
+if GetModConfigData("winter_burning") == true then
+	table.insert(component_post,"burnable")
+end
 modimport("postinit/sim")
 modimport("postinit/any")
 modimport("postinit/player")

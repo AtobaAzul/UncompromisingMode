@@ -78,8 +78,8 @@ env.AddPrefabPostInit("moose", function(inst)
     inst.components.groundpounder.numRings = 3
     inst.components.groundpounder.noTags = { "FX", "NOCLICK", "DECOR", "INLIMBO", "mossling", "moose" }
 	
-	inst:AddComponent("healthtrigger")
-	inst.components.healthtrigger:AddTrigger(PHASE2_HEALTH, EnterPhase2TriggerMoose)
+	--[[inst:AddComponent("healthtrigger")
+	inst.components.healthtrigger:AddTrigger(PHASE2_HEALTH, EnterPhase2TriggerMoose)]]
 	
 	inst.superhop = true
 	
@@ -126,27 +126,6 @@ end)
 
 local function EnterPhase2TriggerMother(inst)
 	inst.sg:GoToState("taunt")
-
-	for i = 1, 2 do
-		if not inst.components.health:IsDead() then
-			local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
-			local upgradeburst = SpawnPrefab("mothermossling")
-			upgradeburst.Transform:SetPosition(inst.Transform:GetWorldPosition())
-			upgradeburst.components.herdmember.herdprefab = "lightning"
-			upgradeburst.persists = false
-			upgradeburst.mother_dead = true
-			upgradeburst:AddComponent("follower")
-			upgradeburst.components.follower:SetLeader(inst)
-			upgradeburst.sg:GoToState("hatch")
-			upgradeburst.components.combat:SuggestTarget(target)
-			--[[if target ~= nil then
-				upgradeburst.components.locomotor:GoToEntity(target)
-				upgradeburst:DoTaskInTime(0, function(inst)
-					upgradeburst.sg:GoToState("spin_pre")
-				end)
-			end]]
-		end
-	end
 	
 	if not inst.components.timer:TimerExists("TornadoAttack") then
 		inst.components.timer:StartTimer("TornadoAttack", 10)

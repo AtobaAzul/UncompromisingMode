@@ -71,7 +71,12 @@ configuration_options =
 ------------------------------
 -- Core Gameplay --
 ------------------------------
-    Header("Core Gameplay"),
+	Header("Mod Compatibility"),
+	BinaryConfig("um_music", "Official Soundtrack", "Disable this if you are crashing when using client music mods.", true),
+	BinaryConfig("hungry_void", "Anti-Voidwalk", "Disable this if you are using any mods that allow flight or traversal over the cave void.", true),
+	SkipSpace(),
+    
+	Header("Core Gameplay"),
 	BinaryConfig("foodregen", "Over Time Food Stats", "Health and Sanity from foods is applied over time, each food acting as a seperate stackable health or sanity regen buff.", true),
     BinaryConfig("caved", "[IMPORTANT] Cave Config", "Switches some things around so players who can't run Caves can still enjoy the game. ENABLE IF CAVES ARE ENABLED!", true),
 	{
@@ -95,7 +100,7 @@ configuration_options =
 	BinaryConfig("sewingkit", "Sewing Kit Tweaks", "Sewing Kit has DOUBLE uses, but repairs HALF value. Pairs very well with Clothing Degredation, lets you keep clothing in top shape more easily.", true),
 	BinaryConfig("hangyperds", "Starving Gobblers", "Gobblers are now more agressive and will attempt to take berries out of the player's inventory.", false),
 	BinaryConfig("lifeamulet", "Life Giving Amulet Changes", "The Life Giving Amulet acts like vanilla Don't Starve, only reviving when worn upon death. \nIts hunger > health conversion ticks much faster.", true),
-
+	BinaryConfig("longpig", "Long Pig", "Skeletons drop Long Pig to prevent telltale heart spam.", true),
 	{
 		name = "flingo_setting",
 		label = "Flingomatic Nerf",
@@ -140,6 +145,8 @@ configuration_options =
 	BinaryConfig("on tentacles", "On Tentacles Re-Balance", "On Tentacles now spawns friendly tentacles that die over time, and do not drop tentacle spots.", true),
 	BinaryConfig("applied horticulture", "Horticulture, Abridged recipe Re-Balance", "Horticulture, Abridged now takes 1 Leafy Meat instead of 5 seeds, to better balance it from being too easily spammable early game.", true),
 	BinaryConfig("wanda_nerf", "Wanda Tweaks.", "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", false),
+	BinaryConfig("wormwood", "Extra Flamable Wormwood", "Wormwood is highly flameable, like in Hamlet.", false),
+	BinaryConfig("wendy", "Nerfed Wendy", "Abigail was nerfed to not increase Wendy's maximum damage above average.", true),
 	SkipSpace(),
 ------------------------------
 -- Weather --
@@ -159,7 +166,8 @@ configuration_options =
 	},
     BinaryConfig("snowstorms", "Snowstorms", "Snowtorms impede on players' speed and vision if they are not wearing eye protection. Snowstorms also causes snow to build up on structures.", true),
     BinaryConfig("hayfever", "Hayfever", "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.", true),
-    --BinaryConfig("acidrain", "Acid Rain", "After the First Year, Toadstool will grow poisionous mushtrees aboveground and pollute the world, making the rain acidic.", true),
+    BinaryConfig("winter_burning", "Harder Burning", "Winter makes it so setting stuff alight takes more time, and also finish burning faster.", true),
+	--BinaryConfig("acidrain", "Acid Rain", "After the First Year, Toadstool will grow poisionous mushtrees aboveground and pollute the world, making the rain acidic.", true),
 
 	--[[Header("Gamemode"),
 	{
@@ -301,7 +309,8 @@ configuration_options =
 		},
 		default = 2,
 	},
-
+	BinaryConfig("butterflywings_nerf", "Weaker Butterfly Wings", "Butterfly wings have been nerfed to not be cheap healing", true),
+	BinaryConfig("rawcropsnerf", "Raw Crops Nerf", "Farm crops are nerfed in their base value when raw/cooked to incentivize using crockpot recipes.", true),
 	Header("--------------------"),
 -----------------------------
 -- Monsters --
@@ -446,6 +455,7 @@ configuration_options =
 		{
 			{description = "Default[52500]", data = 52500},
 			{description = "Lowered[25000]", data = 25000},
+			{description = "Lowest [17500]", data = 17500},
 		},
 		default = 52500,
 	},
@@ -457,6 +467,7 @@ configuration_options =
 		{
 			{description = "Default[22500]", data = 22500},
 			{description = "Lowered[15000]", data = 15000},
+			{description = "Lowest[10000]", data = 10000},
 		},
 		default = 22500,
 	},
@@ -468,6 +479,7 @@ configuration_options =
 		{
 			{description = "Default[8000]", data = 8000},
 			{description = "Lowered[6000]", data = 6000},
+			{description = "Lowest[4000]", data = 4000},
 		},
 		default = 8000,
 	},
@@ -479,7 +491,8 @@ configuration_options =
 		{
 			{description = "Pre-Nerf[8000]", data = 8000},
 			{description = "Default[7000]", data = 7000},
-			{description = "Lowered[6000]", data = 6000}, --Slightly lower than widow, not a raid boss.
+			{description = "Lowered[6000]", data = 6000}, --Slightly lower than widow, not a raid boss
+			{description = "Lowest[4000]", data = 4000},
 		},
 		default = 7000,
 	},
@@ -513,6 +526,7 @@ configuration_options =
 	BinaryConfig("electricalmishap", "Electrical Weapon Retune", "[Experimental] Changes the bug zapper and morning star with the suggestions from Shynuke and Lux.", false),
 	BinaryConfig("announce_basestatus", "[DEV] Announce Ratsniffer","[Developer Tool] Prints the exact rat sniff values to chat to be viewed in real time.",false),
 	BinaryConfig("eyebrellarework", "Eyebrella Rework","Eyebrella stats restored to vanilla value, can't be repaired, 12 day durability.",false),
+
 ------------------------------
 -- Secret --
 ------------------------------

@@ -1,21 +1,21 @@
 --	[ 			Required stuff			]	--
 -- The global objects needed for recipe changes
 -- Find the default recipes in recipes.lua
-	GLOBAL.require("recipe")
-	TechTree = GLOBAL.require("techtree")
-	TECH = GLOBAL.TECH
-	Recipe = GLOBAL.Recipe
-	RECIPETABS = GLOBAL.RECIPETABS
-	Ingredient = GLOBAL.Ingredient
-	AllRecipes = GLOBAL.AllRecipes
-	STRINGS = GLOBAL.STRINGS
-	CUSTOM_RECIPETABS = GLOBAL.CUSTOM_RECIPETABS
-	modimport("uncompskins_api.lua")
+GLOBAL.require("recipe")
+TechTree = GLOBAL.require("techtree")
+TECH = GLOBAL.TECH
+Recipe = GLOBAL.Recipe
+RECIPETABS = GLOBAL.RECIPETABS
+Ingredient = GLOBAL.Ingredient
+AllRecipes = GLOBAL.AllRecipes
+STRINGS = GLOBAL.STRINGS
+CUSTOM_RECIPETABS = GLOBAL.CUSTOM_RECIPETABS
+modimport("uncompskins_api.lua")
 
 --	[ 				Recipes				]	--
-	
+
 --	Tool
-	
+
 --	Light
 
 --	Survival
@@ -27,28 +27,28 @@
 --	Fight
 
 --	Structures
-	
+
 --	Refine
-	
+
 --	Magic
-	
+
 --	Dress
-	
+
 --	Ancient
-	
+
 -- Celestial
 
 -- Celestial portal upgrade change
 -- TODO: Fix it, not working (wait for Wurt upgrade, maybe they change the construction site code to be better for modding)
 CONSTRUCTION_PLANS =
 {
-	["multiplayer_portal_moonrock_constr"] = { Ingredient("purplemooneye", 1), Ingredient("moonrocknugget", 20), Ingredient("moonglass", GLOBAL.TUNING.DSTU.RECIPE_MOONROCK_IDOL_STONE_COST) },
+["multiplayer_portal_moonrock_constr"] = { Ingredient("purplemooneye", 1), Ingredient("moonrocknugget", 20), Ingredient("moonglass", GLOBAL.TUNING.DSTU.RECIPE_MOONROCK_IDOL_STONE_COST) },
 }
 
 AddComponentPostInit("ConstructionSite", function (self)
-	function self:GetIngredients()
-		return CONSTRUCTION_PLANS[self.inst.prefab] or {}
-	end
+function self:GetIngredients()
+	return CONSTRUCTION_PLANS[self.inst.prefab] or {}
+end
 end)
 
 -- Moonrock idol change
@@ -82,10 +82,12 @@ AddRecipe("deserthat", {Ingredient("goggleshat", 1), Ingredient("pigskin", 1)}, 
 AddRecipe("ghostlyelixir_fastregen", {Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 50), Ingredient("ghostflower", 4)}, CUSTOM_RECIPETABS.ELIXIRBREWING, TECH.NONE, nil, nil, nil, nil, "elixirbrewer")
 
 if GetModConfigData("wanda_nerf") == true then
-	AddRecipe("pocketwatch_revive", {Ingredient("pocketwatch_parts", 2), Ingredient("livinglog", 2), Ingredient("boneshard", 4)}, CUSTOM_RECIPETABS.CLOCKMAKER, TECH.MAGIC_TWO)
+AddRecipe("pocketwatch_revive", {Ingredient("pocketwatch_parts", 2), Ingredient("livinglog", 2), Ingredient("boneshard", 4)}, CUSTOM_RECIPETABS.CLOCKMAKER, TECH.MAGIC_TWO)
 end
 
+if GetModConfigData("longpig") == true then
 AllRecipes["reviver"].ingredients = {Ingredient("skeletonmeat", 1, "images/inventoryimages/skeletonmeat.xml"), Ingredient("spidergland", 1)}
+end
 --AllRecipes["ghostlyelixir_fastregen"].ingredients = {Ingredient("spidergland", 2), Ingredient("ghostflower", 4)}
 --AllRecipes["bernie_inactive"].ingredients = {Ingredient("berniebox", 1, "images/inventoryimages/berniebox.xml")}
 AllRecipes["moonrockidol"].ingredients = {Ingredient("moonrocknugget", GLOBAL.TUNING.DSTU.RECIPE_MOONROCK_IDOL_MOONSTONE_COST), Ingredient("purplegem", 1)}
@@ -107,10 +109,10 @@ GLOBAL.AllRecipes["gasmask"].sortkey = GLOBAL.AllRecipes["beehat"].sortkey + .1
 AddRecipe("plaguemask", {Ingredient("gasmask", 1, "images/inventoryimages/gasmask.xml"),Ingredient("red_cap", 2),Ingredient("rat_tail",4, "images/inventoryimages/rat_tail.xml")}, GLOBAL.RECIPETABS.DRESS, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil, "images/inventoryimages/plaguemask.xml", "plaguemask.tex" )
 GLOBAL.AllRecipes["plaguemask"].sortkey = GLOBAL.AllRecipes["gasmask"].sortkey + .1
 MadeRecipeSkinnable("plaguemask", {
-	plaguemask_formal = {
-		atlas = "images/inventoryimages/plaguemask_formal.xml",
-		image = "plaguemask_formal.tex",
-	},
+plaguemask_formal = {
+	atlas = "images/inventoryimages/plaguemask_formal.xml",
+	image = "plaguemask_formal.tex",
+},
 })
 
 AddRecipe("shroom_skin", {Ingredient("shroom_skin_fragment",4, "images/inventoryimages/shroom_skin_fragment.xml"),Ingredient("froglegs",2)}, GLOBAL.RECIPETABS.REFINE, GLOBAL.TECH.SCIENCE_TWO, nil, nil, nil, nil, nil)--, "images/inventoryimages/plaguemask.xml", "plaguemask.tex" )
@@ -145,10 +147,10 @@ GLOBAL.AllRecipes["rat_whip"].sortkey = GLOBAL.AllRecipes["whip"].sortkey + .1
 AddRecipe("ancient_amulet_red", 	 {Ingredient("thulecite", 2), 		  Ingredient("nightmarefuel", 3),    Ingredient("redgem", 2)}, GLOBAL.RECIPETABS.ANCIENT, GLOBAL.TECH.ANCIENT_FOUR, nil, nil, true, nil, nil, "images/inventoryimages/ancient_amulet_red.xml", "ancient_amulet_red.tex" )
 GLOBAL.AllRecipes["ancient_amulet_red"].sortkey = GLOBAL.AllRecipes["orangeamulet"].sortkey - .1
 MadeRecipeSkinnable("ancient_amulet_red", {
-	ancient_amulet_red_demoneye = {
-		atlas = "images/inventoryimages/ancient_amulet_red_demoneye.xml",
-		image = "ancient_amulet_red_demoneye.tex",
-	},
+ancient_amulet_red_demoneye = {
+	atlas = "images/inventoryimages/ancient_amulet_red_demoneye.xml",
+	image = "ancient_amulet_red_demoneye.tex",
+},
 })
 
 AddRecipe("turf_hoodedmoss", {Ingredient("twigs", 1), Ingredient("foliage", 1), Ingredient("moonrocknugget", 1)}, RECIPETABS.TURFCRAFTING, TECH.TURFCRAFTING_ONE, nil, nil, true, nil, nil, "images/inventoryimages/turf_hoodedmoss.xml", "turf_hoodedmoss.tex")
@@ -176,14 +178,14 @@ AddRecipe("hat_ratmask", {Ingredient("rope",2), Ingredient("rat_tail", 3, "image
 GLOBAL.AllRecipes["hat_ratmask"].sortkey = GLOBAL.AllRecipes["plaguemask"].sortkey + .1
 
 if TUNING.DSTU.WANDA_NERF == true then
-	AddRecipe("pocketwatch_revive",		{Ingredient("pocketwatch_parts", 2), Ingredient("livinglog", 2), Ingredient("boneshard", 4)},		CUSTOM_RECIPETABS.CLOCKMAKER, TECH.MAGIC_TWO)
+AddRecipe("pocketwatch_revive",		{Ingredient("pocketwatch_parts", 2), Ingredient("livinglog", 2), Ingredient("boneshard", 4)},		CUSTOM_RECIPETABS.CLOCKMAKER, TECH.MAGIC_TWO)
 end
 
 if TUNING.DSTU.WOLFGANG_HUNGERMIGHTY == true then
-	AddRecipe("mighty_gym",      {Ingredient("boards",     4), Ingredient("cutstone", 2), Ingredient("rope", 3)},  CUSTOM_RECIPETABS.STRONGMAN, TECH.SCIENCE_ONE, "mighty_gym_placer", nil, nil, nil, "stinkman")
-	AddRecipe("dumbbell",        {Ingredient("rocks",      4), Ingredient("twigs", 1  )},                          CUSTOM_RECIPETABS.STRONGMAN, TECH.NONE, nil, nil, nil, nil, "stinkman")
-	AddRecipe("dumbbell_golden", {Ingredient("goldnugget", 2), Ingredient("cutstone", 2), Ingredient("twigs", 2)}, CUSTOM_RECIPETABS.STRONGMAN, TECH.SCIENCE_ONE, nil, nil, nil, nil, "stinkman")
-	AddRecipe("dumbbell_gem",    {Ingredient("purplegem",  1), Ingredient("cutstone", 2), Ingredient("twigs", 2)}, CUSTOM_RECIPETABS.STRONGMAN, TECH.MAGIC_TWO, nil, nil, nil, nil, "stinkman")
+AddRecipe("mighty_gym",      {Ingredient("boards",     4), Ingredient("cutstone", 2), Ingredient("rope", 3)},  CUSTOM_RECIPETABS.STRONGMAN, TECH.SCIENCE_ONE, "mighty_gym_placer", nil, nil, nil, "stinkman")
+AddRecipe("dumbbell",        {Ingredient("rocks",      4), Ingredient("twigs", 1  )},                          CUSTOM_RECIPETABS.STRONGMAN, TECH.NONE, nil, nil, nil, nil, "stinkman")
+AddRecipe("dumbbell_golden", {Ingredient("goldnugget", 2), Ingredient("cutstone", 2), Ingredient("twigs", 2)}, CUSTOM_RECIPETABS.STRONGMAN, TECH.SCIENCE_ONE, nil, nil, nil, nil, "stinkman")
+AddRecipe("dumbbell_gem",    {Ingredient("purplegem",  1), Ingredient("cutstone", 2), Ingredient("twigs", 2)}, CUSTOM_RECIPETABS.STRONGMAN, TECH.MAGIC_TWO, nil, nil, nil, nil, "stinkman")
 end
 AddRecipe("floral_bandage", {Ingredient("bandage", 1), Ingredient("cactus_flower", 2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, false, 1, nil, "images/inventoryimages/floral_bandage.xml", "floral_bandage.tex" )
 
@@ -204,7 +206,9 @@ STRINGS.RECIPE_DESC.RATPOISON = "A most deadly feast."
 STRINGS.RECIPE_DESC.SHROOM_SKIN = "Stitched skins."
 STRINGS.RECIPE_DESC.SPOREPACK = "Unhygenic storage."
 STRINGS.RECIPE_DESC.AIR_CONDITIONER = "Condition the air."
+if GetModConfigData("longpig") == true then
 STRINGS.RECIPE_DESC.REVIVER = "Dead flesh revived to revive a dead friend."
+end
 STRINGS.RECIPE_DESC.HONEY_LOG = "A log a day keeps the sickness at bay."
 STRINGS.RECIPE_DESC.BUGZAPPER = "Bite back with electricity!"
 STRINGS.RECIPE_DESC.ANCIENT_AMULET_RED = "Recalls your lost soul."
