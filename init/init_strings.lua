@@ -35,7 +35,6 @@ STRINGS.CHARACTER_DESCRIPTIONS.wortox = STRINGS.CHARACTER_DESCRIPTIONS.wortox.."
 STRINGS.CHARACTER_DESCRIPTIONS.walter = STRINGS.CHARACTER_DESCRIPTIONS.walter.."\n󰀕Can craft firecracker rounds"
 
 STRINGS.UNCOMP_TOOLTIP = {
-	REVIVER = "- Requires flesh from a dead survivor.",
 	AMULET = "- Only revives the player upon death while worn.\n- Increased heal rate at lower health.\n- Never breaks, can be refueled with Nightmare Fuel.",
 	MINIFAN = "- Staves off heat, and hayfever.",
 	WALL_HAY_ITEM = "- Provides protection from Snow Storms.",
@@ -120,7 +119,9 @@ if TUNING.DSTU.FLINGO_SETTING == "Fuelmuncher" then
 elseif TUNING.DSTU.FLINGO_SETTING == "Waterballs" then
 	STRINGS.UNCOMP_TOOLTIP.FIRESUPPRESSOR = "- No longer freezes on hit."
 end
-
+if TUNING.DSTU.LONGPIG == true then
+	STRINGS.UNCOMP_TOOLTIP.REVIVER = "- Requires flesh from a dead survivor."
+end
 if TUNING.DSTU.EYEBRELLAREWORK == false then
 	STRINGS.UNCOMP_TOOLTIP.EYEBRELLAHAT = "- Reduced heat protection."
 else

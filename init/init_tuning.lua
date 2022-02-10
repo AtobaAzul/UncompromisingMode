@@ -366,7 +366,12 @@ TUNING.DSTU =
 
 --More Config
     POCKET_POWERTRIP = GetModConfigData("pocket_powertrip"),
-
+    WINTER_BURNING = GetModConfigData("winter_burning"),
+    HUNGRY_VOID = GetModConfigData("hungry_void"),
+    BUTTERFLYWINGS_NERF = GetModConfigData("butterflywings_nerf"),
+    LONGPIG = GetModConfigData("longpig"),
+    RAW_CROPS_NERF = GetModConfigData("rawcropsnerf"),
+    WENDY_NERF = GetModConfigData("wendy"),
 }
 
 TUNING.NO_BOSS_TIME = 24

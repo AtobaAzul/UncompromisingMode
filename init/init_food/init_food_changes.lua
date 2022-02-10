@@ -345,7 +345,7 @@ end
 AddPrefabPostInit("butterflywings", function (inst)
 	inst:AddTag("snapdragons_cant_eat")
 
-    if inst ~= nil and inst.components.edible ~= nil then
+    if inst ~= nil and inst.components.edible ~= nil and TUNING.DSTU.BUTTERFLYWINGS_NERF == true then
         inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.FOOD_BUTTERFLY_WING_HEALTH
         inst.components.edible.hungervalue = GLOBAL.TUNING.DSTU.FOOD_BUTTERFLY_WING_HUNGER
         inst.components.edible.perishtime = GLOBAL.TUNING.DSTU.FOOD_BUTTERFLY_WING_HUNGER
@@ -381,32 +381,33 @@ AddPrefabPostInit("cookedmonstermeat", function (inst)
     end
 end)
 
-AddPrefabPostInit("potato_cooked", function (inst)
-    if inst ~= nil and inst.components.edible ~= nil then
-        inst.components.edible.healthvalue = 8
-		inst.components.edible.hungervalue = 18.75
-    end
-end)
+if GetModConfigData("rawcropsnerf") == true then
+	AddPrefabPostInit("potato_cooked", function (inst)
+    	if inst ~= nil and inst.components.edible ~= nil then
+        	inst.components.edible.healthvalue = 8
+			inst.components.edible.hungervalue = 18.75
+    	end
+	end)
 
-AddPrefabPostInit("tomato_cooked", function (inst)
-    if inst ~= nil and inst.components.edible ~= nil then
-        inst.components.edible.healthvalue = 8
-    end
-end)
+	AddPrefabPostInit("tomato_cooked", function (inst)
+    	if inst ~= nil and inst.components.edible ~= nil then
+        	inst.components.edible.healthvalue = 8
+    	end
+	end)
 
-AddPrefabPostInit("eggplant", function (inst)
-    if inst ~= nil and inst.components.edible ~= nil then
-        inst.components.edible.hungervalue = 18.75
-    end
-end)
+	AddPrefabPostInit("eggplant", function (inst)
+    	if inst ~= nil and inst.components.edible ~= nil then
+        	inst.components.edible.hungervalue = 18.75
+    	end
+	end)
 
-AddPrefabPostInit("eggplant_cooked", function (inst)
-    if inst ~= nil and inst.components.edible ~= nil then
-        inst.components.edible.hungervalue = 18.75
-		inst.components.edible.healthvalue = 12
-    end
-end)
-
+	AddPrefabPostInit("eggplant_cooked", function (inst)
+    	if inst ~= nil and inst.components.edible ~= nil then
+        	inst.components.edible.hungervalue = 18.75
+			inst.components.edible.healthvalue = 12
+    	end
+	end)
+end
 -----------------------------------------------------------------
 -- Reduce seeds hunger
 -----------------------------------------------------------------

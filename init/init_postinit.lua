@@ -4,7 +4,6 @@ local component_post = {
     --"container",
 	"groundpounder",
 	"propagator",
-	"burnable",
 	--"moisture",
 	"weapon",
 	--"hunter",
@@ -280,6 +279,9 @@ if GetModConfigData("um_music") == true then
 	table.insert(component_post,"dynamicmusic")
 end
 
+if GetModConfigData("winter_burning") == true then
+	table.insert(component_post,"burnable")
+end
 modimport("postinit/sim")
 modimport("postinit/any")
 modimport("postinit/player")
