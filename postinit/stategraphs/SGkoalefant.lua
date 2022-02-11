@@ -82,9 +82,13 @@ local states = {
 			if inst.components.combat.target ~= nil then
 				local distance = inst:GetDistanceSqToInst(inst ~= nil and inst.components.combat.target ~= nil and inst.components.combat.target )
 				local chance = math.random()
-				if chance < 0.33 then
+				if chance < 0.33 and not inst.justcharged then
+					inst.justcharged = true
 					inst.sg:GoToState("charge_start")
 				else
+					if inst.justcharged then
+						inst.justcharged = nil
+					end
 					if chance > 0.77 and inst.disarmattack == true then
 						inst.sg:GoToState("disarm")
 					else

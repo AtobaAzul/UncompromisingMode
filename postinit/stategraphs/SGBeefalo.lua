@@ -3,21 +3,17 @@ GLOBAL.setfenv(1, GLOBAL)
 
 env.AddStategraphPostInit("beefalo", function(inst)
 local events={
-EventHandler("doattack", function(inst)
-                                local nstate = "attack"
-								--print("chargeattack2")
-                                if inst.sg:HasStateTag("charging") or inst:HasTag("chargespeed") then
-									--print("chargeattack1")
-                                    nstate = "chargeattack"
-                                end
-                                if inst.components.health and not inst.components.health:IsDead()
-                                   and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
-                                    inst.sg:GoToState(nstate)
-                                end
-                            end),
-							    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("charging") then inst.sg:GoToState("hit") end end),
-
-	}
+	EventHandler("doattack", function(inst)
+        local nstate = "attack"
+			if inst.sg:HasStateTag("charging") or inst:HasTag("chargespeed") then
+				nstate = "chargeattack"
+			end
+			if inst.components.health and not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
+				inst.sg:GoToState(nstate)
+            end
+    end),
+	EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("charging") then inst.sg:GoToState("hit") end end),
+}
 
 
 local states = {
@@ -48,14 +44,19 @@ local states = {
         {
             EventHandler("animqueueover", function(inst)
 			if inst.components.combat.target ~= nil then
-			if math.random() < 0.33 and not inst.components.domesticatable:IsDomesticated() then
-				inst.sg:GoToState("charge_start")
+			
+				if math.random() < 0.33 and not inst.justcharged then
+					inst.justcharged = true
+					inst.sg:GoToState("charge_start")
 				else
-				inst.sg:GoToState("idle")
+					if inst.justcharged then
+						inst.justcharged = nil
+					end
+					inst.sg:GoToState("idle")
+					end
+				else
+					inst.sg:GoToState("idle")
 				end
-			else
-			inst.sg:GoToState("idle")
-			end
 			end),
         },
     },
@@ -92,7 +93,7 @@ local states = {
 				if inst.components.combat ~= nil then
 				inst.components.combat:ResetCooldown()
 				end
-				inst:DoTaskInTime(2,function(inst) if inst:HasTag("chargespeed") then inst:RemoveTag("chargespeed") end end)
+				inst:DoTaskInTime(1.25,function(inst) if inst:HasTag("chargespeed") then inst:RemoveTag("chargespeed") end end)
 				end),
             },
         },

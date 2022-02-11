@@ -94,18 +94,13 @@ local function fn()
 end
 
 local function OnDeploy(inst, pt)
-	local rotation = math.random(-180,180)
-	local scalex = math.random(0.7,0.9)
-	local scalez = math.random(0.8,1.1)
 	for i = 1,4 do 
-	local poison = SpawnPrefab("ratpoison")
-	poison.rotation = rotation
-	poison.scalex = scalex
-	poison.scalez = scalez
-	poison.Transform:SetPosition(pt.x, 0, pt.z)
-	poison.Transform:SetRotation(poison.rotation)
-	poison.Transform:SetScale(poison.scalex,1,poison.scalez)
-    inst:Remove()
+		local poison = SpawnPrefab("ratpoison")
+		poison.rotation = rotation
+		poison.scalex = scalex
+		poison.scalez = scalez
+		poison.Transform:SetPosition(pt.x, 0, pt.z)
+		inst:Remove()
 	end
 end
 
