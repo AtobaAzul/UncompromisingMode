@@ -52,6 +52,12 @@ Assets = {
 	
 	Asset("ATLAS", "images/mushroom_slot.xml"),
 	Asset("IMAGE", "images/mushroom_slot.tex"),
+	Asset("ATLAS", "images/wardrobe_tool_slot.xml"),
+	Asset("IMAGE", "images/wardrobe_tool_slot.tex"),
+	Asset("ATLAS", "images/wardrobe_hat_slot.xml"),
+	Asset("IMAGE", "images/wardrobe_hat_slot.tex"),
+	Asset("ATLAS", "images/wardrobe_chest_slot.xml"),
+	Asset("IMAGE", "images/wardrobe_chest_slot.tex"),
 	Asset("ATLAS", "images/gem_slot.xml"),
 	Asset("IMAGE", "images/gem_slot.tex"),
 	Asset("ATLAS", "images/feather_slot.xml"),

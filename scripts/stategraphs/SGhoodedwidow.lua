@@ -363,9 +363,10 @@ local states=
         tags = {"busy", "noweb","superbusy","nointerrupt"},
         onenter = function(inst, data)
 			inst.Physics:ClearCollisionMask()
+			inst.Physics:CollidesWith(COLLISION.WORLD)
 			local speed = 10
 			if inst.components.combat.target ~= nil then
-			inst:ForceFacePoint(inst.components.combat.target:GetPosition())
+				inst:ForceFacePoint(inst.components.combat.target:GetPosition())
 			end
             inst.components.locomotor:Stop()
 			if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
@@ -401,7 +402,7 @@ local states=
 			inst.components.timer:StartTimer("pounce",10+math.random(-3,5))
 			
 			if inst.brain then
-			inst.brain:Start()
+				inst.brain:Start()
 			end
 			if inst.oldtarget ~= nil and inst.components.combat ~= nil and inst.oldtarget:IsValid() then
 				inst.components.combat:SuggestTarget(inst.oldtarget)
