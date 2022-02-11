@@ -46,10 +46,14 @@ env.AddPrefabPostInit("wardrobe", function(inst)
 	
 	inst.GetActivateVerb = GetActivateVerb
 end)
---[[
-ACTIONS.CHANGEIN.rmb = true 
-env.AddComponentAction("SCENE", "wardrobe", function(inst, doer, actions, right)
-    if inst:HasTag("wardrobe") and not inst:HasTag("fire") and (right) then
-        table.insert(actions, ACTIONS.CHANGEIN)
+
+STRINGS.ACTIONS.STARTCHANNELING.WARDROBE = "Use"
+
+ACTIONS.STARTCHANNELING.strfn = function(act)
+    if act.target and act.target:HasTag("pump")
+    then return "PUMP"
+    elseif act.target and act.target:HasTag("wardrobe")
+    then return "WARDROBE"
+    else return nil
     end
-end)]]
+end
