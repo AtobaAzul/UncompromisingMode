@@ -383,7 +383,7 @@ local states=
         {
 			TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/scream_short") end),
             TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/attack_grunt") end),
-			TimeEvent(17*FRAMES, function(inst) inst.components.locomotor:Stop()
+			TimeEvent(20*FRAMES, function(inst) inst.components.locomotor:Stop()
 			
 			inst.components.combat:DoAreaAttack(inst, TUNING.SPIDERQUEEN_ATTACKRANGE) --GroundPound Is purely visual
 			inst.components.groundpounder:GroundPound()
