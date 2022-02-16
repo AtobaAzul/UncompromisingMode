@@ -158,20 +158,21 @@ local function OnEat_Electric(inst, data)
 		end
     end
 end
+if GetModConfigData("wx78") then
+    env.AddPrefabPostInit("wx78", function(inst)
+	    if not TheWorld.ismastersim then
+		    return
+	    end
 
-env.AddPrefabPostInit("wx78", function(inst)
-	if not TheWorld.ismastersim then
-		return
-	end
-
-    inst.wet_task = nil
-    inst.wet_spark_time = 0
-    inst.wet_spark_time_offset = 3
-	inst:AddTag("automaton")
-	if inst.components.playerlightningtarget ~= nil then
-		inst.components.playerlightningtarget:SetOnStrikeFn(onlightingstrike)
-	end
-	inst.OnLesserCharge = onlessercharge
-	inst:ListenForEvent("moisturedelta", OnMoistureDelta)
-    inst:ListenForEvent("oneat", OnEat_Electric)
-end)
+        inst.wet_task = nil
+        inst.wet_spark_time = 0
+        inst.wet_spark_time_offset = 3
+	    inst:AddTag("automaton")
+	    if inst.components.playerlightningtarget ~= nil then
+		    inst.components.playerlightningtarget:SetOnStrikeFn(onlightingstrike)
+	    end
+	    inst.OnLesserCharge = onlessercharge
+	    inst:ListenForEvent("moisturedelta", OnMoistureDelta)
+        inst:ListenForEvent("oneat", OnEat_Electric)
+    end)
+end
