@@ -96,9 +96,6 @@ end
 local function OnDeploy(inst, pt)
 	for i = 1,4 do 
 		local poison = SpawnPrefab("ratpoison")
-		poison.rotation = rotation
-		poison.scalex = scalex
-		poison.scalez = scalez
 		poison.Transform:SetPosition(pt.x, 0, pt.z)
 		inst:Remove()
 	end
