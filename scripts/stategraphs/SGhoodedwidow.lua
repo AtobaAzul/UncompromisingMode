@@ -322,7 +322,7 @@ local states=
         tags = {"busy","noweb"},
         onenter = function(inst, data)
 			if inst:HasTag("notarget") then
-			inst:RemoveTag("notarget")
+				inst:RemoveTag("notarget")
 			end
 			inst.AnimState:PlayAnimation("fall")	
         end,

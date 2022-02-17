@@ -33,13 +33,12 @@ local function SpawnInvestigators(inst, target)
 	test = false
 	end
     if inst.components.childspawner ~= nil and not test == true and target ~= nil then
-            local spider = inst.components.childspawner:SpawnChild(target, nil, 3)
-            if spider ~= nil then
+        local spider = inst.components.childspawner:SpawnChild(target, nil, 3)
+        if spider ~= nil then
 			local x,y,z = inst.Transform:GetWorldPosition()
             spider.sg:GoToState("fall")
-			spider:AddTag("justcame")
-			spider:DoTaskInTime(1,function(spider) inst:RemoveTag("justcame") end)
-            end
+			spider:DoTaskInTime(0.5,function(spider) spider.components.combat:SuggestTarget(target) end)
+        end
     end
 end
 local function fn()
