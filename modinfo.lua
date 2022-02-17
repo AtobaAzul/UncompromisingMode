@@ -147,6 +147,7 @@ configuration_options =
 	BinaryConfig("wanda_nerf", "Wanda Tweaks.", "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", false),
 	BinaryConfig("wormwood", "Extra Flamable Wormwood", "Wormwood is highly flameable, like in Hamlet.", false),
 	BinaryConfig("wendy", "Nerfed Wendy", "Abigail was nerfed to not increase Wendy's maximum damage above average.", true),
+	BinaryConfig("wx", "Tweaked WX-78", "WX now takes damage when wet and no longer heals from lightning.", true),
 	SkipSpace(),
 ------------------------------
 -- Weather --
@@ -526,7 +527,7 @@ configuration_options =
 	BinaryConfig("electricalmishap", "Electrical Weapon Retune", "[Experimental] Changes the bug zapper and morning star with the suggestions from Shynuke and Lux.", false),
 	BinaryConfig("announce_basestatus", "[DEV] Announce Ratsniffer","[Developer Tool] Prints the exact rat sniff values to chat to be viewed in real time.",false),
 	BinaryConfig("eyebrellarework", "Eyebrella Rework","Eyebrella stats restored to vanilla value, can't be repaired, 12 day durability.",false),
-
+	BinaryConfig("cooldown_orangestaff", "Cooldown Based Lazy Explorer", "Lazy explorer no longer has durabilty, but instead has cooldown, like Wanda's watches.\nSuggested by Lux.", false),
 ------------------------------
 -- Secret --
 ------------------------------

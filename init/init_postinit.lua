@@ -284,6 +284,11 @@ end
 if GetModConfigData("winter_burning") == true then
 	table.insert(component_post,"burnable")
 end
+
+if GetModConfigData("cooldown_orangestaff") == true then
+	table.insert(prefab_post, "orangestaff")
+end
+
 modimport("postinit/sim")
 modimport("postinit/any")
 modimport("postinit/player")
