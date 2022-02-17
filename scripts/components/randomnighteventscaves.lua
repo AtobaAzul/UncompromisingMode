@@ -92,22 +92,7 @@ end
 ----------------------------------------------------
 
 local function DayBreak(mob)
-	
-	--[[if not mob:HasTag("shadow") and not mob:HasTag("shadowchesspiece") and not mob:HasTag("shadowteleporter") then
-		local smoke = SpawnPrefab("thurible_smoke")
-		if smoke ~= nil then
-			smoke.entity:SetParent(mob.entity)
-		end
-	end]]
-	
-	mob.AnimState:SetHaunted(true)
-	
-	mob.AnimState:SetMultColour(0, 0, 0, 0.6)
-	
 	mob.persists = false
-	
-	mob:AddTag("soulless")
-	
 	mob:WatchWorldState("isday", function() 
 		local x, y, z = mob.Transform:GetWorldPosition()
 		local despawnfx = SpawnPrefab("shadow_despawn")
