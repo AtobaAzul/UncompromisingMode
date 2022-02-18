@@ -19,7 +19,7 @@ AddComponentPostInit("sewing", DoSewing)
 --]]
 -------------Torches only smolder objects now---------------
 local _OldLightAction = GLOBAL.ACTIONS.LIGHT.fn
-if TUNING.DSTU.WINTER_BURNING == true then
+if TUNING.DSTU.WINTER_BURNING then
 	GLOBAL.ACTIONS.LIGHT.fn = function(act)
     	if act.invobject ~= nil and act.invobject.components.lighter ~= nil then
 			if GLOBAL.TheWorld.state.season == "winter" and not act.doer:HasTag("pyromaniac") and act.target.components.burnable then
@@ -49,7 +49,7 @@ end)
 
 local function OnSeasonTick(inst)
 	if TheWorld.state.isspring then
-		if not TheWorld.components.mock_dragonflyspawner and TUNING.DSTU.SPAWNWILTINGFLY == true then
+		if not TheWorld.components.mock_dragonflyspawner and TUNING.DSTU.SPAWNWILTINGFLY then
 			inst:AddComponent("mock_dragonflyspawner")
 		end
 	end
@@ -108,7 +108,7 @@ env.AddPrefabPostInit("forest", function(inst)
 	--inst:ListenForEvent("seasontick", OnSeasonTick)
 	inst:AddComponent("snowstorminitiator")
 	
-	if TUNING.DSTU.DESERTSCORPIONS == true then	
+	if TUNING.DSTU.DESERTSCORPIONS then	
 	inst:AddComponent("scorpionspawner")
 	end
 	
@@ -120,7 +120,7 @@ env.AddPrefabPostInit("forest", function(inst)
 	--inst.OnLoad = OnLoad
 end)
 
-if TUNING.DSTU.SPAWNMOTHERGOOSE == true then
+if TUNING.DSTU.SPAWNMOTHERGOOSE then
 env.AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then
         return
@@ -129,7 +129,7 @@ env.AddPrefabPostInit("forest", function(inst)
 end)
 end
 
-if TUNING.DSTU.SPAWNWILTINGFLY == true then
+if TUNING.DSTU.SPAWNWILTINGFLY then
 env.AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then
         return

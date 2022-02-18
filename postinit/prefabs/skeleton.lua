@@ -2,7 +2,7 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 
-if TUNING.DSTU.LONGPIG == true then
+if TUNING.DSTU.LONGPIG then
 	env.AddPrefabPostInit("skeleton", function(inst)
 		if not TheWorld.ismastersim then
 			return

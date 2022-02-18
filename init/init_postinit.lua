@@ -175,81 +175,81 @@ local brain_post = {
 	"deer",
 }
 
-if GetModConfigData("hangyperds") == true then
+if GetModConfigData("hangyperds") then
 	table.insert(stategraph_post,"perd")
 	table.insert(brain_post,"perdhungry")
 	table.insert(prefab_post,"perd")
 end
 
-if GetModConfigData("harder_deerclops") == true then
+if GetModConfigData("harder_deerclops") then
 table.insert(stategraph_post,"deerclops")
 table.insert(prefab_post,"deerclops")
 end
 
-if GetModConfigData("harder_moose") == true then
+if GetModConfigData("harder_moose") then
 table.insert(stategraph_post,"moose")
 table.insert(prefab_post,"moose")
 table.insert(brain_post,"moose")
 end
 
-if GetModConfigData("harder_bearger") == true then
+if GetModConfigData("harder_bearger") then
 table.insert(stategraph_post,"bearger")
 table.insert(prefab_post,"bearger")
 table.insert(brain_post,"bearger")
 end
 
-if GetModConfigData("harder_leifs") == true then
+if GetModConfigData("harder_leifs") then
 table.insert(stategraph_post,"Leif")
 table.insert(prefab_post,"leif")
 table.insert(prefab_post,"leif_sparse")
 end
 
-if GetModConfigData("rework_minotaur") == true then
+if GetModConfigData("rework_minotaur") then
 table.insert(stategraph_post,"minotaur")
 table.insert(prefab_post,"minotaur")
 table.insert(prefab_post,"pillar_ruins")
 end
 
-if GetModConfigData("harder_dragonfly") == true then 
+if GetModConfigData("harder_dragonfly") then 
 table.insert(prefab_post,"dragonfly")
 end
-if GetModConfigData("harder_lavae") == true then
+if GetModConfigData("harder_lavae") then
 table.insert(prefab_post,"lavae")
 end
 
-if GetModConfigData("hardbatilisks") == true then
+if GetModConfigData("hardbatilisks") then
 table.insert(prefab_post,"bat")
 end
 
-if GetModConfigData("pinelings") == true then
+if GetModConfigData("pinelings") then
 table.insert(prefab_post,"evergreen_stump")
 end
 
-if GetModConfigData("canedurability") == true then
+if GetModConfigData("canedurability") then
 table.insert(prefab_post,"cane")
 end
 
-if GetModConfigData("angrypenguins") == true then
+if GetModConfigData("angrypenguins") then
 table.insert(prefab_post,"penguin")
 table.insert(prefab_post,"penguin_ice") --I think that should go too?  idk right here
 end
 
-if GetModConfigData("harder_pigs") == true then
+if GetModConfigData("harder_pigs") then
 table.insert(prefab_post,"pigman")
 table.insert(brain_post,"pig")
 table.insert(brain_post,"werepig")
 table.insert(stategraph_post,"pigbunny")
 end
 
-if GetModConfigData("harder_walrus") == true then
+if GetModConfigData("harder_walrus") then
 table.insert(prefab_post,"walrus")
 table.insert(stategraph_post,"walrus")
 end
-if GetModConfigData("harder_beefalo") == true then
+if GetModConfigData("harder_beefalo") then
 table.insert(stategraph_post,"Beefalo")
 end
 
-if GetModConfigData("harder_spiderqueen") == true then
+if GetModConfigData("harder_spiderqueen") then
 table.insert(prefab_post,"spiderqueen")
 table.insert(stategraph_post,"spiderqueen")
 end
@@ -258,34 +258,34 @@ if GetModConfigData("pocket_powertrip") == 1 or 2 then
 table.insert(prefab_post,"pocket_powertrip")
 end
 
-if GetModConfigData("harder_koalefants") == true then
+if GetModConfigData("harder_koalefants") then
 table.insert(stategraph_post,"koalefant")
 end
 
-if GetModConfigData("reworked_eyes") == true then
+if GetModConfigData("reworked_eyes") then
 	table.insert(prefab_post,"eyeofterror")
 	table.insert(stategraph_post,"eyeofterror")
 end
 
-if GetModConfigData("hungry_frogs") == true then
+if GetModConfigData("hungry_frogs") then
 	table.insert(prefab_post,"frog")
 	table.insert(stategraph_post,"frog")
 	table.insert(brain_post,"frog")
 end
 
-if GetModConfigData("scalemailbuff") == true then
+if GetModConfigData("scalemailbuff") then
 	table.insert(prefab_post,"armor_dragonfly")
 end
 
-if GetModConfigData("um_music") == true then
+if GetModConfigData("um_music") then
 	table.insert(component_post,"dynamicmusic")
 end
 
-if GetModConfigData("winter_burning") == true then
+if GetModConfigData("winter_burning") then
 	table.insert(component_post,"burnable")
 end
 
-if GetModConfigData("cooldown_orangestaff") == true then
+if GetModConfigData("cooldown_orangestaff") then
 	table.insert(prefab_post, "orangestaff")
 end
 

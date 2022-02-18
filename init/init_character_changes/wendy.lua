@@ -1,6 +1,6 @@
 -- Wendy now only gets the 10% bonus from Abigail, not 40%
 
-if TUNING.DSTU.WENDY_NERF == true then
+if TUNING.DSTU.WENDY_NERF then
 	local function CustomCombatDamage(inst, target)
 		return (target == inst.components.ghostlybond.ghost and target:HasTag("abigail")) and 0
 			or nil

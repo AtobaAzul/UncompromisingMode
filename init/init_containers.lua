@@ -304,7 +304,7 @@ local function addItemSlotNetvarsInContainer(inst)
   end
 AddPrefabPostInit("container_classified", addItemSlotNetvarsInContainer)
 
-if GetModConfigData("scaledchestbuff") == true then
+if GetModConfigData("scaledchestbuff") then
 containers.params.dragonflychest =
 {
     widget =

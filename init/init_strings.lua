@@ -119,7 +119,7 @@ if TUNING.DSTU.FLINGO_SETTING == "Fuelmuncher" then
 elseif TUNING.DSTU.FLINGO_SETTING == "Waterballs" then
 	STRINGS.UNCOMP_TOOLTIP.FIRESUPPRESSOR = "- No longer freezes on hit."
 end
-if TUNING.DSTU.LONGPIG == true then
+if TUNING.DSTU.LONGPIG then
 	STRINGS.UNCOMP_TOOLTIP.REVIVER = "- Requires flesh from a dead survivor."
 end
 if TUNING.DSTU.EYEBRELLAREWORK == false then

@@ -4,7 +4,7 @@ return Class(function(self, inst)
 	
 	local function Consume(inst)
 	
-		if ((inst.sg ~= nil) and not (inst.sg.currentstate.name == "teleportato_teleport" or inst.sg.currentstate.name == "death") and TUNING.DSTU.HUNGRY_VOID == true) then
+		if ((inst.sg ~= nil) and not (inst.sg.currentstate.name == "teleportato_teleport" or inst.sg.currentstate.name == "death") and TUNING.DSTU.HUNGRY_VOID) then
 			inst.sg:GoToState("teleportato_teleport")
 		inst:DoTaskInTime(84*FRAMES,function(inst)
 			local tentapillars = {}
