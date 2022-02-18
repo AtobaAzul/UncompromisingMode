@@ -172,7 +172,7 @@ local function fn(Sim)
     inst:AddTag("hostile")
     inst:AddTag("chess")
     inst:AddTag("bight")
-
+	inst:AddTag("electricdamageimmune")
     ------------------
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(900)

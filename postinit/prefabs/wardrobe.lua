@@ -45,6 +45,25 @@ env.AddPrefabPostInit("wardrobe", function(inst)
     inst.components.channelable.ignore_prechannel = true
 	
 	inst.GetActivateVerb = GetActivateVerb
+	
+	local _OnHit = inst.components.workable.onwork
+	local _OnFinish = inst.components.workable.onfinish
+	local function onhit(inst, worker)
+        if inst.components.container ~= nil then
+            inst.components.container:DropEverything()
+            inst.components.container:Close()
+        end		
+		_OnHit(inst,worker)
+	end
+	local function onhammered(inst, worker)
+        if inst.components.container ~= nil then
+            inst.components.container:DropEverything()
+        end		
+		_OnFinish(inst,worker)
+	end
+
+	inst.components.workable:SetOnWorkCallback(onhit)
+	inst.components.workable:SetOnFinishCallback(onhammered)
 end)
 
 STRINGS.ACTIONS.STARTCHANNELING.WARDROBE = "Use"

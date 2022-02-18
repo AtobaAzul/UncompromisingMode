@@ -626,6 +626,7 @@ local function fnlightning()
     inst.LaunchProjectile = LaunchProjectile
     inst.CancelCharge = CancelCharge
     inst.Charge = Charge
+	inst:AddTag("electricdamageimmune")
 	
 	inst:ListenForEvent("attacked", OnAttacked)
 	inst:ListenForEvent("onattackother", OnAttackOther)
