@@ -99,15 +99,6 @@ local states = {
 			inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/attack")
 			inst.AnimState:PlayAnimation("hopatk_loop", true)
 			inst.Physics:SetMotorVelOverride(15,0,0)
-			if inst.brain then
-				inst.brain:Stop()
-			end
-			if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
-				inst.oldtarget = inst.components.combat.target
-			end
-			if inst.components.combat.target ~= nil then
-				inst:ForceFacePoint(inst.components.combat.target:GetPosition())
-			end
 			inst.flapySound = inst:DoPeriodicTask(6*FRAMES,
 				function(inst)
 					inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/flap")
@@ -119,12 +110,7 @@ local states = {
 			inst.Physics:CollidesWith(COLLISION.OBSTACLES)
 			inst.Physics:CollidesWith(COLLISION.CHARACTERS)
 			inst.Physics:CollidesWith(COLLISION.GIANTS)
-			if inst.brain then
-				inst.brain:Start()
-			end		
-			if inst.oldtarget ~= nil and inst.components.combat ~= nil and inst.oldtarget:IsValid() then
-				inst.components.combat:SuggestTarget(inst.oldtarget)
-			end
+			
 			if inst.flapySound then
 				inst.flapySound:Cancel()
 				inst.flapySound = nil
