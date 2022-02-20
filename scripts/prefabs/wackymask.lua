@@ -1,6 +1,7 @@
 local assets=
 {
     Asset("ANIM", "anim/hat_whitecatmask.zip"),
+	Asset("ANIM", "anim/ratmask_icon.zip"),
 	--Asset("ATLAS", "images/inventoryimages/gasmask.xml"),
 	--Asset("IMAGE", "images/inventoryimages/gasmask.tex"),
 }
@@ -370,6 +371,86 @@ local function OnCooldown(inst)
 	inst.components.useableitem.inuse = false
 end
 
+local NOTAGS =
+{
+	"smallcreature",
+	"_container",
+}
+local function IsAVersionOfRot(v)
+	if v.prefab == "spoiled_food" or v.prefab == "rottenegg" or v.prefab == "spoiled_fish" or v.prefab == "spoiled_fish_small" then
+		return true
+	end
+end
+
+local function TrySpawnIcon(v,intensity)
+	local nearbyicon = FindEntity(v,2,nil,{"ratmask_icon"})
+	if nearbyicon ~= nil then
+		nearbyicon.Resize(nearbyicon,intensity)
+	else	
+		local icon = SpawnPrefab("ratmask_icon")
+		local x,y,z = v.Transform:GetWorldPosition()
+		icon.Transform:SetPosition(x,y,z)
+		icon.Resize(icon,intensity)
+	end
+end
+
+local function FoodScoreCalculations(container,v)
+	if container == true then
+		if v:HasTag("stale") then
+			TrySpawnIcon(v,1.5)
+		end
+		if v:HasTag("spoiled") then
+			TrySpawnIcon(v,1.75)
+		end
+		if IsAVersionOfRot(v) then
+			TrySpawnIcon(v,2)
+		end
+	else
+		if v:HasTag("fresh") then
+			TrySpawnIcon(v,1.5)
+		end
+		if v:HasTag("stale") then
+			TrySpawnIcon(v,1.75)
+		end
+		if v:HasTag("spoiled") then
+			TrySpawnIcon(v,1.8)
+		end
+		if IsAVersionOfRot(v) then
+			TrySpawnIcon(v,2)
+		end
+	end
+end
+
+local function Sniffertime(owner)
+	local x, y, z = owner.Transform:GetWorldPosition()
+
+	local ents = TheSim:FindEntities(x, 0, z, 20, {"_inventoryitem"},NOTAGS)
+	if ents ~= nil then
+		for i, v in ipairs(ents) do
+			if v.components.inventoryitem:IsHeld() then
+				if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" then
+					--print("lureplant is holding!")
+				else
+					if not v:HasTag("frozen") and v.components.farmplantable == nil then
+						FoodScoreCalculations(true,v)
+					end
+				end
+			else
+				if not v:HasTag("frozen") and v.components.farmplantable == nil then
+					FoodScoreCalculations(false,v)
+				end
+				if not (v:HasTag("balloon") or v:HasTag("heavy") or v:HasTag("projectile")) then
+					if (v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool"))  then
+						TrySpawnIcon(v,1.5)
+					elseif v:HasTag("molebait") then
+						TrySpawnIcon(v,1.5)
+					end
+				end
+			end
+		end
+	end
+end
+
 local function CheckTargetPiece(inst)
 	local owner = inst.components.inventoryitem.owner
 	--print("owner")
@@ -385,7 +466,9 @@ local function CheckTargetPiece(inst)
 		inst.SoundEmitter:KillSound("ratping")
 		inst.SoundEmitter:PlaySound("UCSounds/ratping/ping_hotter", "ratping")
 	end
-	
+    if owner ~= nil and FindEntity(owner,40,nil,{"rat_sniffer"}) ~= nil then
+		Sniffertime(owner)
+	end	
 	
     inst.components.rechargeable:Discharge(8)
 end
@@ -894,6 +977,42 @@ local function opossumfn()
     return inst
 end
 
+local function Icon_Resize(inst,intensity)
+	inst.intensity = intensity + inst.intensity
+	if inst.intensity > 2 then
+		inst.intensity = inst.intensity/1.2
+	end
+	if inst.intensity > 4 then
+		inst.intensity = inst.intensity/1.5
+	end
+	inst.Transform:SetScale(inst.intensity,inst.intensity,inst.intensity)
+end
+
+local function ratmask_iconfn()
+    local inst = CreateEntity()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+	
+
+    inst.AnimState:SetBank("ratmask_icon")
+    inst.AnimState:SetBuild("ratmask_icon")
+     
+	inst:AddTag("INLIMBO")
+	inst:AddTag("ratmask_icon")
+	
+    inst.entity:SetPristine()
+	
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	inst.intensity = 1.5
+	inst.Resize = Icon_Resize
+	inst.AnimState:PlayAnimation("anim"..math.random(0,2)) 
+	inst:ListenForEvent("animover",function(inst) inst:Remove() end)
+	return inst
+end
+
 local function ratfn()
     local inst = fncommon("hat_ratmask", "hat_ratmask")
 	
@@ -1000,4 +1119,5 @@ return Prefab("hat_bagmask", bagfn, assets),
 		Prefab("hat_mandrakemask", mandrakefn, assets),
 		Prefab("hat_opossummask", opossumfn, assets),
 		Prefab("hat_ratmask", ratfn, assets),
-		Prefab("ratring_fx", ratringfn, assets)
+		Prefab("ratring_fx", ratringfn, assets),
+		Prefab("ratmask_icon", ratmask_iconfn, assets)
