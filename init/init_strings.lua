@@ -33,6 +33,7 @@ STRINGS.CHARACTER_DESCRIPTIONS.wormwood = STRINGS.CHARACTER_DESCRIPTIONS.wormwoo
 STRINGS.CHARACTER_DESCRIPTIONS.winona = STRINGS.CHARACTER_DESCRIPTIONS.winona.."\n󰀕Works faster when full, slower when hungry\n󰀕Others can't refuel generators"
 STRINGS.CHARACTER_DESCRIPTIONS.wortox = STRINGS.CHARACTER_DESCRIPTIONS.wortox.."\n󰀕Is less durable\n󰀕Tiny insects don't have souls"
 STRINGS.CHARACTER_DESCRIPTIONS.walter = STRINGS.CHARACTER_DESCRIPTIONS.walter.."\n󰀕Can craft firecracker rounds"
+STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr = STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr.."\n󰀕Reduced lifesteal" --someone, do something more creative than this.
 
 STRINGS.UNCOMP_TOOLTIP = {
 	AMULET = "- Only revives the player upon death while worn.\n- Increased heal rate at lower health.\n- Never breaks, can be refueled with Nightmare Fuel.",
