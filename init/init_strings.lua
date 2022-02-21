@@ -104,6 +104,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "- Slows down anything it's attached to. Deployable and throwable.",
     UM_BEAR_TRAP_EQUIPPABLE_GOLD = "- Slows down anything it's attached to. Deployable and throwable.",
 	WATERMELON_LANTERN = "- Has a positive sanity aura.",
+	WARDROBE = "- Can store a lot of equipment.",
 }
 
 if TUNING.DSTU.ELECTRICALMISHAP == false then
