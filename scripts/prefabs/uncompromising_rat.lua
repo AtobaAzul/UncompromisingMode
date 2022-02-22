@@ -1539,6 +1539,11 @@ local function SmellProtection(v,container)
 		end
 	end
 	--- Potted
+
+	if FindEntity(v,8,function(guy) if guy.components.bloomness and guy.components.bloomness.level and guy.components.bloomness.level > 2 then return true end end,{"plantkin"}) ~= nil then
+		flowers = flowers + 10
+	end
+	
 	flowers = flowers / 50
 	print(flowers)
 	potted = potted / 20
