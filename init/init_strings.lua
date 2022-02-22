@@ -33,6 +33,7 @@ STRINGS.CHARACTER_DESCRIPTIONS.wormwood = STRINGS.CHARACTER_DESCRIPTIONS.wormwoo
 STRINGS.CHARACTER_DESCRIPTIONS.winona = STRINGS.CHARACTER_DESCRIPTIONS.winona.."\n󰀕Works faster when full, slower when hungry\n󰀕Others can't refuel generators"
 STRINGS.CHARACTER_DESCRIPTIONS.wortox = STRINGS.CHARACTER_DESCRIPTIONS.wortox.."\n󰀕Is less durable\n󰀕Tiny insects don't have souls"
 STRINGS.CHARACTER_DESCRIPTIONS.walter = STRINGS.CHARACTER_DESCRIPTIONS.walter.."\n󰀕Can craft firecracker rounds"
+STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr = STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr.."\n󰀕Reduced lifesteal" --someone, do something more creative than this.
 
 STRINGS.UNCOMP_TOOLTIP = {
 	AMULET = "- Only revives the player upon death while worn.\n- Increased heal rate at lower health.\n- Never breaks, can be refueled with Nightmare Fuel.",
@@ -65,7 +66,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	SEEDPOUCH = "- Keeps seeds refridgerated.",
 	GLASSCUTTER = "- Deals slightly more damage to Shadows.",
 	FEATHERHAT = "- Provides saftey from territorial Pengulls.",
-	YELLOWAMULET = "- No longer breaks when empty.\n- Can be fueled with Nightmare Fuel.",
+	YELLOWAMULET = "- No longer breaks when empty.",
 	ORANGEAMULET = "- No longer breaks when empty.\n- Can be fueled with Nightmare Fuel.\n- Will pick certain plants too!",
 	PURPLEAMULET = "- Grants bonus Nightmare Fuel from slain Shadows.",
 	PIGGYBACK = "- No Passive -10% movement speed while worn.\n- Decreases Player speed by 1% per item held.",
@@ -104,6 +105,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "- Slows down anything it's attached to. Deployable and throwable.",
     UM_BEAR_TRAP_EQUIPPABLE_GOLD = "- Slows down anything it's attached to. Deployable and throwable.",
 	WATERMELON_LANTERN = "- Has a positive sanity aura.",
+	WARDROBE = "- Can store a lot of equipment.",
 }
 
 if TUNING.DSTU.ELECTRICALMISHAP == false then
