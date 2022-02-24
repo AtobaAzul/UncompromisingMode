@@ -158,7 +158,7 @@ local function OnEat_Electric(inst, data)
 		end
     end
 end
---if GetModConfigData("wx78") then
+if GLOBAL.TUNING.DSTU.WX78_CONFIG then
     env.AddPrefabPostInit("wx78", function(inst)
 	    if not TheWorld.ismastersim then
 		    return
@@ -175,4 +175,4 @@ end
 	    inst:ListenForEvent("moisturedelta", OnMoistureDelta)
         inst:ListenForEvent("oneat", OnEat_Electric)
     end)
---end
+end

@@ -147,7 +147,7 @@ configuration_options =
 	BinaryConfig("wanda_nerf", "Wanda Tweaks.", "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", false),
 	BinaryConfig("wormwood", "Extra Flamable Wormwood", "Wormwood is highly flameable, like in Hamlet.", false),
 	BinaryConfig("wendy", "Nerfed Wendy", "Abigail was nerfed to not increase Wendy's maximum damage above average.", true),
-	BinaryConfig("wx", "Tweaked WX-78", "WX now takes damage when wet and no longer heals from lightning.", true),
+	BinaryConfig("wx78", "Tweaked WX-78", "WX now takes damage when wet and no longer heals from lightning.", true),
 	SkipSpace(),
 ------------------------------
 -- Weather --

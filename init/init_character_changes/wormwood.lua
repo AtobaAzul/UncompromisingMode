@@ -95,7 +95,8 @@ local function OnMoistureDelta(inst)
 	end)
 end
 
-env.AddPrefabPostInit("wormwood", function(inst)
+if GLOBAL.TUNING.DSTU.WORMWOOD then
+	env.AddPrefabPostInit("wormwood", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
@@ -110,4 +111,5 @@ env.AddPrefabPostInit("wormwood", function(inst)
     inst:ListenForEvent("ms_respawnedfromghost", OnRespawnedFromGhost2)
     inst:ListenForEvent("moisturedelta", OnMoistureDelta)
 	
-end)
+	end)
+end

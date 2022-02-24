@@ -261,10 +261,12 @@ TUNING.DSTU =
 
     --WX78
     WX78_MOISTURE_DAMAGE_INCREASE = 3,
+    WX78_CONFIG = GetModConfigData("wx78")
 
     --Wormwood
     WORMWOOD_BURN_TIME = 6.66, --orig 4.3
     WORMWOOD_FIRE_DAMAGE = 1.50, -- orig 1.25
+    WORMWOOD_CONFIG = GetModConfigData("wormwood"),
 	
 	--Warly
     WARLY_SAME_OLD_COOLDOWN = total_day_time * 3,
