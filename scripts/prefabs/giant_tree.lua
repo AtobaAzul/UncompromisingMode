@@ -3,6 +3,7 @@ require "prefabutil"
 local assets =
 {
 	Asset("ANIM", "anim/giant_tree.zip"),
+	Asset("ANIM", "anim/giant_tree2.zip"),
 	Asset("ANIM", "anim/giant_tree_infested.zip"),
 }
 local CANOPY_SHADOW_DATA = require("prefabs/canopyshadows")
@@ -486,7 +487,11 @@ local function makefn(infested)
 	if infested == true then
 		bank = "giant_tree_infested"
 	else
-		bank = "giant_tree"
+		if math.random() > 0.5 then --Temp
+			bank = "giant_tree"
+		else
+			bank = "giant_tree2"
+		end
 	end
 	
     inst.AnimState:SetBank(bank)
