@@ -158,7 +158,7 @@ local function OnEat_Electric(inst, data)
 		end
     end
 end
-if GLOBAL.TUNING.DSTU.WX78_CONFIG then
+if TUNING.DSTU.WX78_CONFIG then
     env.AddPrefabPostInit("wx78", function(inst)
 	    if not TheWorld.ismastersim then
 		    return
