@@ -21,6 +21,8 @@ local function onfinished_normal(inst)
 		inst.AnimState:PushAnimation("death", false)
 	end
 	
+	print("prefab = "..inst.prefab)
+
     inst.SoundEmitter:PlaySound("dontstarve/common/destroy_stone")
     inst:DoTaskInTime(3, inst.Remove)
 	
@@ -88,8 +90,12 @@ local function OnExplode(inst, target)
 			local debuffkey = inst.prefab
 			
 			
-			inst:ListenForEvent("death", onfinished_normal, target)
-			inst:ListenForEvent("onremoved", onfinished_normal, target)
+			inst:ListenForEvent("death", function(player)
+					onfinished_normal(inst)
+				end, target)
+			inst:ListenForEvent("onremoved", function(player)
+					onfinished_normal(inst)
+				end, target)
 			if target.components.locomotor ~= nil then
 				if inst.traptype ~= nil then
 					target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.5 + 0.15)
