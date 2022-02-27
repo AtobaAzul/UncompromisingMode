@@ -103,11 +103,15 @@ env.AddPrefabPostinit("wormwood", function(inst)
 	inst:AddTag("hayfever_immune")
 end)
 
---if TUNING.DSTU.WORMWOOD_CONFIG_PLANTS then
+if TUNING.DSTU.WORMWOOD_CONFIG_PLANTS then
     env.AddPrefabPostInit("wormwood", function(inst)
+		if not TheWorld.ismastersim then
+			return
+		end
 	    WatchWorldPlants2(inst)
+		inst:ListenForEvent("ms_becameghost", OnBecameGhost2)
 	end)
---end
+end
 
 if TUNING.DSTU.WORMWOOD_CONFIG_FIRE then
 	env.AddPrefabPostInit("wormwood", function(inst)
@@ -117,10 +121,8 @@ if TUNING.DSTU.WORMWOOD_CONFIG_FIRE then
 	
     MakeSmallPropagator(inst)
 	inst.components.burnable:SetOnBurntFn(OnBurnt)
-    inst:ListenForEvent("ms_becameghost", OnBecameGhost2)
-    inst:ListenForEvent("ms_respawnedfromghost", OnRespawnedFromGhost2)
-
     inst:ListenForEvent("moisturedelta", OnMoistureDelta)
+	inst:ListenForEvent("ms_respawnedfromghost", OnRespawnedFromGhost2)
 	
 	end)
 end
