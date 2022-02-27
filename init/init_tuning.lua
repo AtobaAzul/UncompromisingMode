@@ -267,7 +267,7 @@ TUNING.DSTU =
     WORMWOOD_BURN_TIME = 6.66, --orig 4.3
     WORMWOOD_FIRE_DAMAGE = 1.50, -- orig 1.25
     WORMWOOD_CONFIG_FIRE = GetModConfigData("wormwood_fire"),
-    WORMWOOD_CONFIG_PLANTS GetModConfigData("wormwood_plants"),
+    WORMWOOD_CONFIG_PLANTS = GetModConfigData("wormwood_plants"),
 	
 	--Warly
     WARLY_SAME_OLD_COOLDOWN = total_day_time * 3,
