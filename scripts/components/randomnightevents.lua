@@ -22,6 +22,7 @@ self.totalrandombaseweight = nil
 self.totalrandomcaveweight = nil
 self.moontear_available = true
 self.weightheodds = math.random()
+self.LastNewMoonRNE = nil
 
 
 --------------------------------
@@ -1616,7 +1617,7 @@ local BASE =
 	SpawnShadowChars = { name = SpawnShadowChars, weight = .3, },
 	SpawnMonkeys = { name = SpawnMonkeys, weight = .1, },
 	LeifAttack = { name = LeifAttack, weight = .1, },
-	SpawnShadowTeleporter = { name = SpawnShadowTeleporter, weight = .1, },
+	--SpawnShadowTeleporter = { name = SpawnShadowTeleporter, weight = .1, },
 	--StumpsAttack = { name = StumpsAttack, weight = .2, },
 	SpawnShadowTalker = { name = SpawnShadowTalker, weight = .6, },
 	SpawnShadowBoomer = { name = SpawnShadowBoomer, weight = .3, },
@@ -1643,7 +1644,7 @@ local WILD =
 	SpawnSkitts = { name = SpawnSkitts, weight = .5, },
 	SpawnMonkeys = { name = SpawnMonkeys, weight = .1, },
 	LeifAttack = { name = LeifAttack, weight = .1, },
-	SpawnShadowTeleporter = { name = SpawnShadowTeleporter, weight = .1, },
+	--SpawnShadowTeleporter = { name = SpawnShadowTeleporter, weight = .1, },
 	--StumpsAttack = { name = StumpsAttack, weight = .2, },
 	SpawnShadowTalker = { name = SpawnShadowTalker, weight = .6, },
 	SpawnShadowBoomer = { name = SpawnShadowBoomer, weight = .3, },
@@ -1687,8 +1688,8 @@ end
 
 local NEWMOON = 
 {
-	--ChessPiece = { name = ChessPiece, weight = .5, },
-	SpawnPhonograph = { name = SpawnPhonograph, weight = .2, },
+	SpawnPhonograph = { name = SpawnPhonograph, weight = 1, },
+	SpawnShadowTeleporter = { name = SpawnShadowTeleporter, weight = 1, },
 }
 
 for k, v in pairs(NEWMOON) do
@@ -1862,9 +1863,10 @@ local function DoNewMoonRNE(player)
 			local rnd = math.random()*self.totalrandomnewmoonweight
 			for k,v in pairs(self.newmoonevents) do
 				rnd = rnd - v.weight
-				if rnd <= 0 then
-				v.name(player)
-				return
+				if rnd <= 0 and not v.name ~= self.LastNewMoonRNE then
+					self.LastNewMoonRNE = v.name
+					v.name(player)
+					return
 				end
 			end
 		end
@@ -2057,6 +2059,7 @@ end
 local function OnSave()
 	return {
 		storedrne = self.storedrne,
+		LastNewMoonRNE = self.LastNewMoonRNE,
 	}
 end
 
@@ -2065,6 +2068,10 @@ local function OnLoad(data)
 	if data ~= nil then
 		if data.storedrne ~= nil then
 			self.storedrne = data.storedrne
+		end
+
+		if data.LastNewMoonRNE ~= nil then
+			self.LastNewMoonRNE = data.LastNewMoonRNE
 		end
 	end
 end

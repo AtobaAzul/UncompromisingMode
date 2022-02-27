@@ -95,7 +95,7 @@ local function OnMoistureDelta(inst)
 	end)
 end
 
-if GLOBAL.TUNING.DSTU.WORMWOOD then
+if TUNING.DSTU.WORMWOOD then
 	env.AddPrefabPostInit("wormwood", function(inst)
 	if not TheWorld.ismastersim then
 		return
