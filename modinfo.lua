@@ -448,7 +448,7 @@ configuration_options =
 	BinaryConfig("harder_beefalo","Harder Beefalo","Beefalo ocasionally charge after a telegraph.", true),
 	BinaryConfig("harder_koalefants", "Harder Koalefants", "Koalefants have brand new attacks and doubled health", true),
 	BinaryConfig("hungry_frogs", "Hungry Frogs", "Frogs eat anything left on the floor.", true),
-	BinaryConfig("toads", "Toads", "Toads replace frogs in the second autumn and release poisonous clouds on death."),
+	BinaryConfig("toads", "Toads", "Toads replace frogs in the second autumn and release poisonous clouds on death.", true),
 
 	SkipSpace(),
 	Header("--------------------"),
