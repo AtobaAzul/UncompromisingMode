@@ -86,7 +86,7 @@ AddRecipe("pocketwatch_revive", {Ingredient("pocketwatch_parts", 2), Ingredient(
 end
 
 if GetModConfigData("longpig") then
-AllRecipes["reviver"].ingredients = {Ingredient("skeletonmeat", 1, "images/inventoryimages/skeletonmeat.xml"), Ingredient("spidergland", 1)}
+	AllRecipes["reviver"].ingredients = {Ingredient("skeletonmeat", 1, "images/inventoryimages/skeletonmeat.xml"), Ingredient("spidergland", 1)}
 end
 --AllRecipes["ghostlyelixir_fastregen"].ingredients = {Ingredient("spidergland", 2), Ingredient("ghostflower", 4)}
 --AllRecipes["bernie_inactive"].ingredients = {Ingredient("berniebox", 1, "images/inventoryimages/berniebox.xml")}
@@ -190,6 +190,16 @@ end
 AddRecipe("floral_bandage", {Ingredient("bandage", 1), Ingredient("cactus_flower", 2)}, GLOBAL.RECIPETABS.SURVIVAL, GLOBAL.TECH.SCIENCE_TWO, nil, nil, false, 1, nil, "images/inventoryimages/floral_bandage.xml", "floral_bandage.tex" )
 
 GLOBAL.AllRecipes["floral_bandage"].sortkey = GLOBAL.AllRecipes["bandage"].sortkey + .1
+
+--recipes so they can be scappred/deconstructed
+AddRecipe("cursed_antler", {Ingredient("boneshard", 8), Ingredient("nightmarefuel", 2)}, nil, GLOBAL.TECH.LOST)
+AddRecipe("beargerclaw", {Ingredient("boneshard", 2), Ingredient("furturft", 2)}, nil, GLOBAL.TECH.LOST)
+AddRecipe("klaus_amulet", {Ingredient("cutstone", 1), Ingredient("nightmarefuel", 6)}, nil, GLOBAL.TECH.LOST)
+AddRecipe("feather_frock", {Ingredient("goose_feather", 6)}, nil, GLOBAL.TECH.LOST)
+AddRecipe("gore_horn_hat", {Ingredient("meat", 2), Ingredient("nightmarefuel", 4)}, nil, GLOBAL.TECH.LOST)
+AddRecipe("crabclaw", {Ingredient("rocks", 4), Ingredient("cutstone", 1)}, nil, GLOBAL.TECH.LOST)
+AddRecipe("slobberlobber", {Ingredient("dragon_scales", 1), Ingredient("meat", 2)}, nil, GLOBAL.TECH.LOST)
+
 
 STRINGS.RECIPE_DESC.SLINGSHOTAMMO_FIRECRACKERS = "For the aspiring young menace."
 STRINGS.RECIPE_DESC.WATERMELON_LANTERN = "Juicy illumination."
