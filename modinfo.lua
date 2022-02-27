@@ -31,7 +31,7 @@ hamlet_compatible = false
 
 forge_compatible = false
 
-all_clients_require_mod = true 
+all_clients_require_mod = true
 
 icon_atlas = "modicon.xml"
 icon = "modicon.tex"
@@ -75,7 +75,7 @@ configuration_options =
 	BinaryConfig("um_music", "Official Soundtrack", "Disable this if you are crashing when using client music mods.", true),
 	BinaryConfig("hungry_void", "Anti-Voidwalk", "Disable this if you are using any mods that allow flight or traversal over the cave void.", true),
 	SkipSpace(),
-    
+
 	Header("Core Gameplay"),
 	BinaryConfig("foodregen", "Over Time Food Stats", "Health and Sanity from foods is applied over time, each food acting as a seperate stackable health or sanity regen buff.", true),
     BinaryConfig("caved", "[IMPORTANT] Cave Config", "Switches some things around so players who can't run Caves can still enjoy the game. ENABLE IF CAVES ARE ENABLED!", true),
@@ -156,16 +156,53 @@ configuration_options =
     Header("Weather"),
 ------------------------------
 	{
-		name = "weather start date",
-		label = "Start Date for New Weather.",
-		hover = "The new weather events will easily topple players who aren't prepared. They occur on the first year by default.",
+		name = "weatherhazard_autumn",
+		label = "Start Date for Autumn weather.",
+		hover = "New autumn weather occurs in the second year by default.\nThis currently only includes poisonous frogs.",
 		options =
 		{
-			{description = "First Year", data = 22},
-			{description = "Second Year", data = 55},
+			{description = "First Year", data = 5}, --lowered in case someone has a diff starting season, or wants to suffer.
+			{description = "Second Year", data = 70},
+			{description = "Third Year", data = 120}, --idk math yell at me if wrong
 		},
-		default = 22,
+		default = 70,
 	},
+	{
+		name = "weatherhazard_winter",
+		label = "Start Date for Winter weather.",
+		hover = "New winter weather occurs in the first year by default",
+		options =
+		{
+			{description = "First Year", data = 5},
+			{description = "Second Year", data = 70},
+			{description = "Third Year", data = 120},
+		},
+		default = 5,
+	},
+	{
+		name = "weatherhazard_spring",
+		label = "Start Date for Spring weather",
+		hover = "New spring weather occurs in the first year, by default.",
+		options =
+		{
+			{description = "First Year", data = 5},
+			{description = "Second Year", data = 70},
+			{description = "Third Year", data = 120},
+		},
+		default = 5,
+	},
+--[[{
+	name = "weatherhazard_summer",
+	label = "Start Date for new Spring weather.",
+	hover = "New spring weather occurs in the first year, by default.",
+	options =
+	{
+		{description = "First Year", data = 22},
+		{description = "Second Year", data = 70},
+		{description = "Third Year", data = 120},
+	},
+	default = 22,
+	},]]
     BinaryConfig("snowstorms", "Snowstorms", "Snowtorms impede on players' speed and vision if they are not wearing eye protection. Snowstorms also causes snow to build up on structures.", true),
     BinaryConfig("hayfever", "Hayfever", "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.", true),
     BinaryConfig("winter_burning", "Harder Burning", "Winter makes it so setting stuff alight takes more time, and also finish burning faster.", true),

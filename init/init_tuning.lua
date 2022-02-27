@@ -310,8 +310,10 @@ TUNING.DSTU =
 	PIEDPIPER_TOOT_RANGE = 25,
 	
 	--Weather Start Date
-    WEATHERHAZARD_START_DATE = GetModConfigData("weather start date"),
-	
+    WEATHERHAZARD_START_DATE_AUTUMN = GetModConfigData("weatherhazard_autumn"),
+	WEATHERHAZARD_START_DATE_WINTER = GetModConfigData("weatherhazard_winter"),
+    WEATHERHAZARD_START_DATE_SPRING = GetModConfigData("weatherhazard_spring"),
+    --WEATHERHAZARD_START_DATE_SUMMER = GetModConfigData("weatherhazard_summer"),
     RNE_CHANCE = GetModConfigData("rne chance"),
 
 	HARDER_SHADOWS = GetModConfigData("harder_shadows"),

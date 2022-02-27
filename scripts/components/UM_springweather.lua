@@ -87,7 +87,7 @@ local function OnSeasonTick(src, data)
 	end
 	
 	for i, v in ipairs(AllPlayers) do
-		if TheWorld.state.isspring and TheWorld.state.remainingdaysinseason <= TUNING.SPRING_LENGTH - 1 and self.threat == "lush" and not v.components.UM_hayfever.enabled and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
+		if TheWorld.state.isspring and TheWorld.state.remainingdaysinseason <= TUNING.SPRING_LENGTH - 1 and self.threat == "lush" and not v.components.UM_hayfever.enabled and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE_SPRING then
 				v.components.UM_hayfever:Enable()
 		elseif not TheWorld.state.isspring or not self.threat == "lush" then
 				v.components.UM_hayfever:Disable()

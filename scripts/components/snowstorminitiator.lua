@@ -52,7 +52,7 @@ local function SpawnPollenmiteDenForPlayer(reschedule)
 		_storming = true
 		
 		for i, v in ipairs(AllPlayers) do
-			if v.components ~= nil and v.components.talker ~= nil and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
+			if v.components ~= nil and v.components.talker ~= nil and TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE_WINTER then
 				v.components.talker:Say(GetString(v, "ANNOUNCE_SNOWSTORM"))
 			end
 		end
@@ -60,7 +60,7 @@ local function SpawnPollenmiteDenForPlayer(reschedule)
 		TheWorld:PushEvent("ms_forceprecipitation", true)
 		
 		TheWorld:DoTaskInTime(60, function()
-			if TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
+			if TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE_WINTER then
 				TheWorld:AddTag("snowstormstart")
 				if TheWorld.net ~= nil then
 					TheWorld.net:AddTag("snowstormstartnet")
@@ -184,7 +184,7 @@ function self:OnLoad(data)
 	
 	self.inst:DoTaskInTime(1, function(self) 
 		if _storming then
-			if TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
+			if TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE_WINTER then
 				TheWorld:AddTag("snowstormstart")
 				if TheWorld.net ~= nil then
 					TheWorld.net:AddTag("snowstormstartnet")

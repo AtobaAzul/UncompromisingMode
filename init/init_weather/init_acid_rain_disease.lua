@@ -26,7 +26,7 @@ local function RandomDiseaseChance(inst)
 end
 
 local function onnear(inst, target)
-	if GLOBAL.TheWorld.state.isautumn and GLOBAL.TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE then
+	if GLOBAL.TheWorld.state.isautumn and GLOBAL.TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE_AUTUMN then
 		inst.randomdisease_task = inst:DoTaskInTime(math.random(5,10), RandomDiseaseChance)
 	end
 end
