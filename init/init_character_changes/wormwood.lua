@@ -95,20 +95,31 @@ local function OnMoistureDelta(inst)
 	end)
 end
 
-if TUNING.DSTU.WORMWOOD then
+env.AddPrefabPostinit("wormwood", function(inst)
+    if not TheWorld.ismastersim then
+	    return
+	end
+
+	inst:AddTag("hayfever_immune")
+end)
+
+--if TUNING.DSTU.WORMWOOD_CONFIG_PLANTS then
+    env.AddPrefabPostInit("wormwood", function(inst)
+	    WatchWorldPlants2(inst)
+	end)
+--end
+
+if TUNING.DSTU.WORMWOOD_CONFIG_FIRE then
 	env.AddPrefabPostInit("wormwood", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
 	
-	inst:AddTag("hayfever_immune")
-	
     MakeSmallPropagator(inst)
 	inst.components.burnable:SetOnBurntFn(OnBurnt)
-	
-    WatchWorldPlants2(inst)
     inst:ListenForEvent("ms_becameghost", OnBecameGhost2)
     inst:ListenForEvent("ms_respawnedfromghost", OnRespawnedFromGhost2)
+
     inst:ListenForEvent("moisturedelta", OnMoistureDelta)
 	
 	end)
