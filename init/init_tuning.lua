@@ -163,13 +163,7 @@ TUNING.DSTU =
 
     --Hounds
     MONSTER_HOUNDS_PER_WAVE_INCREASE = 1.5, --Controlled by player settings
-	
-	--Toadstool
-	TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),
-	
-	--Bee Queen
-	BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
-	
+		
 	--Hooded Widow
 	WIDOW_HEALTH = GetModConfigData("widow health"),
 	
@@ -179,9 +173,7 @@ TUNING.DSTU =
 	--Wiltfly Health
 	WILTFLY_HEALTH = GetModConfigData("wiltfly health"),
 	
-    --Twins health
-    TWIN1_HEALTH = GetModConfigData("twins health"),
-    TWIN2_HEALTH = GetModConfigData("twins health"),
+
 	--Spawn New Bosses
 	SPAWNMOTHERGOOSE = GetModConfigData("mother_goose"),
 	SPAWNWILTINGFLY = GetModConfigData("wiltfly"),
@@ -377,6 +369,7 @@ TUNING.DSTU =
     LONGPIG = GetModConfigData("longpig"),
     RAW_CROPS_NERF = GetModConfigData("rawcropsnerf"),
     WENDY_NERF = GetModConfigData("wendy"),
+    TOADS = GetModConfigData("toads"),
 }
 
 TUNING.NO_BOSS_TIME = 24
@@ -408,7 +401,14 @@ end
 
 TUNING.SLEEP_TICK_PERIOD = TUNING.SLEEP_TICK_PERIOD / TUNING.DSTU.SLEEPINGBUFF
 
+--Twins health
+TUNING.TWIN1_HEALTH = GetModConfigData("twins health")
+TUNING.TWIN2_HEALTH = GetModConfigData("twins health")
 
-
+--Toadstool
+TUNING.TOADSTOOL_HEALTH = GetModConfigData("toadstool health")
+	
+--Bee Queen
+TUNING.BEEQUEEN_HEALTH = GetModConfigData("bee queen health")
 
 -- [              DST Related Overrides                  ]
