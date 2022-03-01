@@ -204,7 +204,7 @@ configuration_options =
 	default = 22,
 	},]]
     BinaryConfig("snowstorms", "Snowstorms", "Snowtorms impede on players' speed and vision if they are not wearing eye protection. Snowstorms also causes snow to build up on structures.", true),
-    BinaryConfig("hayfever", "Hayfever", "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.", true),
+    BinaryConfig("hayfever", "Hayfever", "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.", false),
     BinaryConfig("winter_burning", "Harder Burning", "Winter makes it so setting stuff alight takes more time, and also finish burning faster.", true),
 	--BinaryConfig("acidrain", "Acid Rain", "After the First Year, Toadstool will grow poisionous mushtrees aboveground and pollute the world, making the rain acidic.", true),
 
@@ -373,7 +373,7 @@ configuration_options =
 	Header("Wave Changes"),
 	BinaryConfig("lategamehoundspread", "Descreased Lategame Frequency", "Enabling this decreases the frequency in the lategame so hounds are still a threat, but not annoying.", true),
 
-	BinaryConfig("vargwaves", "Vargs in Hound Waves", "In the lategame, vargs will accompany hounds in houndwaves.", true),
+	BinaryConfig("vargwaves", "Vargs in Hound Waves", "In the lategame, vargs will accompany hounds in houndwaves.", false),
 	{
 		name = "vargwaves grace",
 		label = "Varg Grace Period.",
@@ -439,7 +439,7 @@ configuration_options =
 	Header("Misc Monsters"),
 	BinaryConfig("desertscorpions", "Scorpions", "Scorpions plague the desert lands. They will spawn from desert turf within the desert during the day.", true),
 	BinaryConfig("pinelings", "Pinelings", "Stumps will become pinelings if awoken by a treeguard, or can happen naturally to existing old stumps.", true),
-	BinaryConfig("pollenmites", "Pollen Mites", "Pollen mites spawn in spring and quickly infest the nearby area.", true),
+	BinaryConfig("pollenmites", "Pollen Mites", "Pollen mites spawn in spring and quickly infest the nearby area.", false),
 	Header("Standard Creatures"),
 
 	BinaryConfig("angrypenguins", "Territorial Penguins","Penguins will aggresively defend their land.", true),
