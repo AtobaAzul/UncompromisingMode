@@ -1493,6 +1493,7 @@ local NOTAGS =
 {
 	"smallcreature",
 	"_container",
+	"spore",
 }
 
 local function IsHeavyObject(v)

@@ -375,6 +375,7 @@ local NOTAGS =
 {
 	"smallcreature",
 	"_container",
+	"spore",
 }
 local function IsAVersionOfRot(v)
 	if v.prefab == "spoiled_food" or v.prefab == "rottenegg" or v.prefab == "spoiled_fish" or v.prefab == "spoiled_fish_small" then
