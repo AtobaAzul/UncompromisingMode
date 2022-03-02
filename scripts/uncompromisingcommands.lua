@@ -54,11 +54,12 @@ end
 function dstu_vetcurse()
     local player = ConsoleCommandPlayer()
     if player ~= nil and player.components.health ~= nil and not player:HasTag("playerghost") then
-        if player:HasTag("vetcurse") == false then
-            player:AddTag("vetcurse")
+        if not player:HasTag("vetcurse") then
+			player.components.debuffable:AddDebuff("buff_vetcurse", "buff_vetcurse")
+			player:PushEvent("foodbuffattached", { buff = "ANNOUNCE_ATTACH_BUFF_VETCURSE", 1 })
             print("added vetcurse")
         elseif player:HasTag("vetcurse") then
-            player:RemoveTag("vetcurse")
+			player.components.debuffable:RemoveDebuff("buff_vetcurse")
             print("removed vetcurse")
         end
     end

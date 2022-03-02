@@ -134,6 +134,7 @@ local prefab_post = {
 	"terrarium",
 	"bandage",
 	"grassgekko",
+	"minotaur_drops",
 }
 
 local stategraph_post = {
@@ -204,7 +205,7 @@ table.insert(prefab_post,"leif")
 table.insert(prefab_post,"leif_sparse")
 end
 
-if GetModConfigData("rework_minotaur") then
+if GetModConfigData("rework_minotaur") and not GetModConfigData("beta_compatibility") then
 table.insert(stategraph_post,"minotaur")
 table.insert(prefab_post,"minotaur")
 table.insert(prefab_post,"pillar_ruins")

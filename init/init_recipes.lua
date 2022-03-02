@@ -193,7 +193,7 @@ GLOBAL.AllRecipes["floral_bandage"].sortkey = GLOBAL.AllRecipes["bandage"].sortk
 
 --recipes so they can be scappred/deconstructed
 AddRecipe("cursed_antler", {Ingredient("boneshard", 8), Ingredient("nightmarefuel", 2)}, nil, GLOBAL.TECH.LOST)
-AddRecipe("beargerclaw", {Ingredient("boneshard", 2), Ingredient("furturft", 2)}, nil, GLOBAL.TECH.LOST)
+AddRecipe("beargerclaw", {Ingredient("boneshard", 2), Ingredient("furtuft", 2)}, nil, GLOBAL.TECH.LOST)
 AddRecipe("klaus_amulet", {Ingredient("cutstone", 1), Ingredient("nightmarefuel", 6)}, nil, GLOBAL.TECH.LOST)
 AddRecipe("feather_frock", {Ingredient("goose_feather", 6)}, nil, GLOBAL.TECH.LOST)
 AddRecipe("gore_horn_hat", {Ingredient("meat", 2), Ingredient("nightmarefuel", 4)}, nil, GLOBAL.TECH.LOST)
