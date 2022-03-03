@@ -371,6 +371,11 @@ TUNING.DSTU =
     RAW_CROPS_NERF = GetModConfigData("rawcropsnerf"),
     WENDY_NERF = GetModConfigData("wendy"),
     TOADS = GetModConfigData("toads"),
+--boss hp qol
+    BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
+    TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),
+    TWIN1_HEALTH = GetModConfigData("twins health"),
+    TWIN2_HEALTH = GetModConfigData("twins health"),
 }
 
 TUNING.NO_BOSS_TIME = 24
@@ -401,15 +406,5 @@ if GetModConfigData("wanda_nerf") == true then
 end
 
 TUNING.SLEEP_TICK_PERIOD = TUNING.SLEEP_TICK_PERIOD / TUNING.DSTU.SLEEPINGBUFF
-
---Twins health
-TUNING.TWIN1_HEALTH = GetModConfigData("twins health")
-TUNING.TWIN2_HEALTH = GetModConfigData("twins health")
-
---Toadstool
-TUNING.TOADSTOOL_HEALTH = GetModConfigData("toadstool health")
-	
---Bee Queen
-TUNING.BEEQUEEN_HEALTH = GetModConfigData("bee queen health")
 
 -- [              DST Related Overrides                  ]

@@ -120,7 +120,6 @@ local prefab_post = {
 	--"bundle",
 	"eyebrella",
 	"birds",
-	"seedpouch",
 	"tonichandlers",
 	"houndwarning",
 	--"carnival_host",
@@ -209,6 +208,11 @@ if GetModConfigData("rework_minotaur") and not GetModConfigData("beta_compatibil
 table.insert(stategraph_post,"minotaur")
 table.insert(prefab_post,"minotaur")
 table.insert(prefab_post,"pillar_ruins")
+end
+
+--klei added the spoilage slowdown themselves, recipe remains changed though.
+if GetModConfigData("beta_compatibility") then
+	table.insert(prefab_post, "seedpouch")
 end
 
 if GetModConfigData("harder_dragonfly") then 
