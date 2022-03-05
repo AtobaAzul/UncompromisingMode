@@ -23,7 +23,6 @@ local lowmed =		--Low-Medium items are things like stinger, chili, and soups. Sl
 	"lobsterbisque", -- -18
 	"seafoodgumbo", -- -18
 	"hotchili", -- -18
-	"bonestew", -- -18
 }
 
 local med =		--Medium is reserved for special-case items like stuffed pepper poppers, and any other dish that is fit to be above the lowmed group
