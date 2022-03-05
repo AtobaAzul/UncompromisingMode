@@ -301,6 +301,16 @@ TUNING.DSTU =
 	
 	PIEDPIPER_TOOT_RANGE = 25,
 	
+	--Twins health
+	TWIN1_HEALTH = GetModConfigData("twins health"),
+	TWIN2_HEALTH = GetModConfigData("twins health"),
+
+	--Toadstool
+	TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),
+		
+	--Bee Queen
+	BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
+
 	--Weather Start Date
     WEATHERHAZARD_START_DATE_AUTUMN = GetModConfigData("weatherhazard_autumn"),
 	WEATHERHAZARD_START_DATE_WINTER = GetModConfigData("weatherhazard_winter"),

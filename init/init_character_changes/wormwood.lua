@@ -95,7 +95,7 @@ local function OnMoistureDelta(inst)
 	end)
 end
 
-env.AddPrefabPostinit("wormwood", function(inst)
+env.AddPrefabPostInit("wormwood", function(inst)
     if not TheWorld.ismastersim then
 	    return
 	end
