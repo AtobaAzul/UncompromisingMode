@@ -61,7 +61,7 @@ local function make_turf(tile, data)
 		end
 		
 		inst:AddComponent("stackable")
-		inst.components.stackable.maxsize = TUNING.STACK_SIZE_LARGEITEM
+		inst.components.stackable.maxsize = TUNING.STACK_SIZE_MEDITEM
 		
 		inst:AddComponent("inspectable")
 		

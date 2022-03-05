@@ -58,7 +58,7 @@ env.AddPrefabPostInit("beequeen", function(inst)
     inst.Physics:CollidesWith(COLLISION.FLYERS)
 	
 	if inst.components.health ~= nil then
-		inst.components.health:SetMaxHealth(TUNING.DSTU.BEEQUEEN_HEALTH)
+		inst.components.health:SetMaxHealth(TUNING.BEEQUEEN_HEALTH)
 	end
 	
 	inst:AddComponent("groundpounder") --Groundpounder is visual only
