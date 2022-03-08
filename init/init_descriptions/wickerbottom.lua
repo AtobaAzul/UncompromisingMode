@@ -43,6 +43,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
     DESCRIBE.COOKEDMONSTERSMALLMEAT = "Somewhat prepared, but still not entirely safe for consumption."
     DESCRIBE.MONSTERSMALLMEAT_DRIED = "Salty and strange."
 
+    DESCRIBE.UM_MONSTEREGG = "It is unfertilized. Thankfully."
+    DESCRIBE.UM_MONSTEREGG_COOKED = "No toast will save this meal."
+
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Might that strange vegitation be the cause of the polluted rain?"
     DESCRIBE.TOADLING = "They appear subservient to the nearby fungi."
 	

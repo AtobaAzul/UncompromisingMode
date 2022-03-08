@@ -42,6 +42,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
     DESCRIBE.COOKEDMONSTERSMALLMEAT = "No matter how prepared, it's just not my fare."
     DESCRIBE.MONSTERSMALLMEAT_DRIED = "Ho, most grim."
 
+    DESCRIBE.UM_MONSTEREGG = "I do not like purple eggs and spam."
+    DESCRIBE.UM_MONSTEREGG_COOKED = "I do not like them cooked and mushed."
+
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "It seems the source of that malicious mycelium!"
     DESCRIBE.TOADLING = "Come to hop away...or perhaps to play?"
 	

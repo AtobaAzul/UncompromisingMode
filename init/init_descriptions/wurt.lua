@@ -42,6 +42,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
     DESCRIBE.COOKEDMONSTERSMALLMEAT = "Glurgh! Smell so bad."
     DESCRIBE.MONSTERSMALLMEAT_DRIED = "Even bader now, florpt!"
 
+    DESCRIBE.UM_MONSTEREGG = "Good egg. I like egg."
+    DESCRIBE.UM_MONSTEREGG_COOKED = "Oh, egg gone bad..."
+
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Mushroom? Mad mushroom!"
     DESCRIBE.TOADLING = "Veggie...froggie? Not sure if ok to eat."
 	

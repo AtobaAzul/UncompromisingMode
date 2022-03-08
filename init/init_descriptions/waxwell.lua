@@ -43,6 +43,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
     DESCRIBE.COOKEDMONSTERSMALLMEAT = "What an unpleasant prospect..."
     DESCRIBE.MONSTERSMALLMEAT_DRIED = "My teeth are getting too old for this."
 
+    DESCRIBE.UM_MONSTEREGG = "What evil lies within?"
+    DESCRIBE.UM_MONSTEREGG_COOKED = "Foul yolk and hairy egg whites, apparently."
+
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "It seems to be polluting the air with spores."
     DESCRIBE.TOADLING = "They've been overtaken by some sort of fungal hive-mind."
 	

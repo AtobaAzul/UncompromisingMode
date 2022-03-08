@@ -214,6 +214,10 @@ Assets = {
 	Asset("ATLAS", "images/inventoryimages/monstersmallmeat.xml"),
    	Asset("IMAGE", "images/inventoryimages/monstersmallmeat_dried.tex"),
 	Asset("ATLAS", "images/inventoryimages/monstersmallmeat_dried.xml"),
+   	Asset("IMAGE", "images/inventoryimages/um_monsteregg.tex"),
+	Asset("ATLAS", "images/inventoryimages/um_monsteregg.xml"),
+   	Asset("IMAGE", "images/inventoryimages/um_monsteregg_cooked.tex"),
+	Asset("ATLAS", "images/inventoryimages/um_monsteregg_cooked.xml"),
 	
    	Asset("IMAGE", "images/inventoryimages/plaguemask.tex"),
 	Asset("ATLAS", "images/inventoryimages/plaguemask.xml"),

@@ -42,6 +42,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
     DESCRIBE.COOKEDMONSTERSMALLMEAT = "Still look not good. Wolfgang go find better meat?"
     DESCRIBE.MONSTERSMALLMEAT_DRIED = "Small bad meat is rock now."
 
+    DESCRIBE.UM_MONSTEREGG = "Scary egg."
+    DESCRIBE.UM_MONSTEREGG_COOKED = "Yuck."
+
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Smelly mushroom make rain hurt!"
     DESCRIBE.TOADLING = "Little frog not look right."
 	
