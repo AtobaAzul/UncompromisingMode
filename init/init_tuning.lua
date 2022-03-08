@@ -283,9 +283,6 @@ TUNING.DSTU =
     --Wanda
     WANDA_NERF = GetModConfigData("wandanerf"),
 	
-    --Growth time increase for stone fruits
-    STONE_FRUIT_GROWTH_INCREASE = 3,
-	
 	--Mobs
 	RAIDRAT_HEALTH = 100,
 	RAIDRAT_DAMAGE = 20,
