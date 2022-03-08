@@ -102,7 +102,7 @@ local function monstersmallmeat_fn()
     inst.components.edible.secondaryfoodtype = FOODTYPE.MONSTER
     inst.components.edible.healthvalue = -15 -- -15 health
     inst.components.edible.hungervalue = TUNING.CALORIES_TINY -- 9.375 hunger
-    inst.components.edible.sanityvalue = -15 -- -15 sanity
+    inst.components.edible.sanityvalue = -10 -- -15 sanity
     
     inst.components.inventoryitem.atlasname = "images/inventoryimages/monstersmallmeat.xml"
     
@@ -170,6 +170,109 @@ local function monstersmallmeat_dried_fn()
     return inst
 end
 
+local function commonfn(anim, cookable)
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+
+    MakeInventoryPhysics(inst)
+
+    inst.AnimState:SetBank("extra_monsterfoods")
+    inst.AnimState:SetBuild("extra_monsterfoods")
+    inst.AnimState:PlayAnimation(anim)
+
+    inst:AddTag("catfood")
+
+    if cookable then
+        --cookable (from cookable component) added to pristine state for optimization
+        inst:AddTag("cookable")
+    end
+
+    MakeInventoryFloatable(inst)
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst:AddComponent("edible")
+    inst.components.edible.foodtype = FOODTYPE.MEAT
+    inst.components.edible.secondaryfoodtype = FOODTYPE.MONSTER
+
+    if cookable then
+        inst:AddComponent("cookable")
+        inst.components.cookable.product = "um_monsteregg_cooked"
+    end
+
+    inst:AddComponent("perishable")
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST)
+    inst.components.perishable:StartPerishing()
+    inst.components.perishable.onperishreplacement = "rottenegg"
+
+    MakeHauntableLaunchAndPerish(inst)
+
+    inst:AddComponent("stackable")
+    inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
+
+    inst:AddComponent("bait")
+
+    inst:AddComponent("inspectable")
+
+    inst:AddComponent("inventoryitem")
+
+    inst:AddComponent("tradable")
+    inst.components.tradable.goldvalue = 1
+
+    return inst
+end
+
+local function defaultfn()
+    local inst = commonfn("egg", true)
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/um_monsteregg.xml"
+
+    inst.components.edible.healthvalue = -15 -- -15 health
+    inst.components.edible.hungervalue = TUNING.CALORIES_TINY -- 9.375 hunger
+    inst.components.edible.sanityvalue = -10 -- -15 sanity
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_MED)
+
+	inst.components.tradable.rocktribute = 1
+
+    inst.components.floater:SetScale({0.55, 0.5, 0.55})
+    inst.components.floater:SetVerticalOffset(0.05)
+
+    return inst
+end
+
+local function cookedfn()
+    local inst = commonfn("egg_cooked")
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/um_monsteregg_cooked.xml"
+
+    inst.components.edible.healthvalue = -5 -- -5 health
+    inst.components.edible.hungervalue = TUNING.CALORIES_TINY -- 9.375 hunger
+    inst.components.edible.sanityvalue = -TUNING.SANITY_TINY -- -5 sanity
+    inst.components.perishable.onperishreplacement = "spoiled_food"
+
+    inst.components.floater:SetSize("med")
+    inst.components.floater:SetScale(0.65)
+
+    return inst
+end
+
 return Prefab("monstersmallmeat", monstersmallmeat_fn, assets, monster_prefabs),
         Prefab("cookedmonstersmallmeat", cookedmonstersmallmeat_fn, assets),
-        Prefab("monstersmallmeat_dried", monstersmallmeat_dried_fn, assets)
+        Prefab("monstersmallmeat_dried", monstersmallmeat_dried_fn, assets),
+        Prefab("um_monsteregg", defaultfn, assets),
+        Prefab("um_monsteregg_cooked", cookedfn, assets)
