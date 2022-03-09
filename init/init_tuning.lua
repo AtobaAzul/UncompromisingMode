@@ -368,6 +368,7 @@ TUNING.DSTU =
     RAW_CROPS_NERF = GetModConfigData("rawcropsnerf"),
     WENDY_NERF = GetModConfigData("wendy"),
     TOADS = GetModConfigData("toads"),
+    MONSTER_EGGS = GetModConfigData("monstereggs"),
 --boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
     TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),

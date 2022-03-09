@@ -64,7 +64,7 @@ local function DigestFood(inst, food)
         if inst.components.occupiable and inst.components.occupiable:GetOccupant() and inst.components.occupiable:GetOccupant():HasTag("bird_mutant") then
             inst.components.lootdropper:SpawnLootPrefab("rottenegg")
         else
-			if food.components.edible.secondaryfoodtype ~= nil and food.components.edible.secondaryfoodtype == FOODTYPE.MONSTER then
+			if food.components.edible.secondaryfoodtype ~= nil and food.components.edible.secondaryfoodtype == FOODTYPE.MONSTER and TUNING.DSTU.MONSTER_EGGS then
 				inst.components.lootdropper:SpawnLootPrefab("um_monsteregg")
 			else
 				inst.components.lootdropper:SpawnLootPrefab("bird_egg")
