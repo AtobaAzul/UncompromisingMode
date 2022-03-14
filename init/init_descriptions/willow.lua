@@ -42,6 +42,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
     DESCRIBE.COOKEDMONSTERSMALLMEAT = "I don't think I can burn all the hairs out..."
     DESCRIBE.MONSTERSMALLMEAT_DRIED = "Now it's just gross AND old."
 
+    DESCRIBE.UM_MONSTEREGG = "It smells like death! Rotten bird death!"
+    DESCRIBE.UM_MONSTEREGG_COOKED = "Is the purple stuff moving?!"
+
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Ew! Burn it!"
     DESCRIBE.TOADLING = "Gross! It's all sticky-looking."
 	

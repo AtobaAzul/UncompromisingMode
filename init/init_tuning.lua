@@ -283,9 +283,6 @@ TUNING.DSTU =
     --Wanda
     WANDA_NERF = GetModConfigData("wandanerf"),
 	
-    --Growth time increase for stone fruits
-    STONE_FRUIT_GROWTH_INCREASE = 3,
-	
 	--Mobs
 	RAIDRAT_HEALTH = 100,
 	RAIDRAT_DAMAGE = 20,
@@ -301,16 +298,6 @@ TUNING.DSTU =
 	
 	PIEDPIPER_TOOT_RANGE = 25,
 	
-	--Twins health
-	TWIN1_HEALTH = GetModConfigData("twins health"),
-	TWIN2_HEALTH = GetModConfigData("twins health"),
-
-	--Toadstool
-	TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),
-		
-	--Bee Queen
-	BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
-
 	--Weather Start Date
     WEATHERHAZARD_START_DATE_AUTUMN = GetModConfigData("weatherhazard_autumn"),
 	WEATHERHAZARD_START_DATE_WINTER = GetModConfigData("weatherhazard_winter"),
@@ -381,6 +368,7 @@ TUNING.DSTU =
     RAW_CROPS_NERF = GetModConfigData("rawcropsnerf"),
     WENDY_NERF = GetModConfigData("wendy"),
     TOADS = GetModConfigData("toads"),
+    MONSTER_EGGS = GetModConfigData("monstereggs"),
 --boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
     TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),

@@ -42,6 +42,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
     DESCRIBE.COOKEDMONSTERSMALLMEAT = "Does cooking something like this make it food?"
     DESCRIBE.MONSTERSMALLMEAT_DRIED = "Old, sad anger meat."
 
+    DESCRIBE.UM_MONSTEREGG = "Odd color for an egg..."
+    DESCRIBE.UM_MONSTEREGG_COOKED = "It's got bits of shell in it. And hair."
+
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "That can't be good. We need to cut it off at the source!"
     DESCRIBE.TOADLING = "Well THAT one's got an an attitude."
 	

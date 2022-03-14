@@ -42,6 +42,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
     DESCRIBE.COOKEDMONSTERSMALLMEAT = "Small, filled with pain, and ready to be consumed by this world..."
     DESCRIBE.MONSTERSMALLMEAT_DRIED = "Some weight has lifted from it, but it will never truly escape its nature..."
 
+    DESCRIBE.UM_MONSTEREGG = "I sense evil within it."
+    DESCRIBE.UM_MONSTEREGG_COOKED = "I have destroyed the evil."
+
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "A parasitic existence feeding upon the very earth."
     DESCRIBE.TOADLING = "They're very loyal to their kind..."
 	

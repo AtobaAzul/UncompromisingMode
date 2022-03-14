@@ -42,6 +42,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
     DESCRIBE.COOKEDMONSTERSMALLMEAT = "Mm, how to save this dish...?"
     DESCRIBE.MONSTERSMALLMEAT_DRIED = "I hate to throw away good food, but...this isn't."
 
+    DESCRIBE.UM_MONSTEREGG = "A mockery of perfection!"
+    DESCRIBE.UM_MONSTEREGG_COOKED = "No herbs or spices would save it."
+
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "What an unsavory sprout."
     DESCRIBE.TOADLING = "Seems they don't stray far from that fungi's strange aroma."
 	

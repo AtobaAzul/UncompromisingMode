@@ -53,6 +53,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
     DESCRIBE.COOKEDMONSTERSMALLMEAT = "...it's still purple meat."
     DESCRIBE.MONSTERSMALLMEAT_DRIED = "What a little jerk."
 
+    DESCRIBE.UM_MONSTEREGG = "A small, abnormal egg."
+    DESCRIBE.UM_MONSTEREGG_COOKED = "Runny side yuck."
+
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "There's the source of the pestilence!"
     DESCRIBE.TOADLING = "It sure likes those weird trees."
 	DESCRIBE.UNCOMPROMISING_TOAD = "That toads looking pretty sick."

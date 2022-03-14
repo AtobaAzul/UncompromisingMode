@@ -1,9 +1,5 @@
-local env = env
-GLOBAL.setfenv(1, GLOBAL)
------------------------------------------------------------------
-
-env.AddPrefabPostInit("minotaur", function(inst)
-	if not TheWorld.ismastersim then
+AddPrefabPostInit("minotaur", function(inst)
+	if not GLOBAL.TheWorld.ismastersim then
 		return
 	end
 

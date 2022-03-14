@@ -43,6 +43,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
     DESCRIBE.COOKEDMONSTERSMALLMEAT = "Might I partake of such dark omens?"
     DESCRIBE.MONSTERSMALLMEAT_DRIED = "Mine grim provisions."
 
+    DESCRIBE.UM_MONSTEREGG = "An egg of evil intent!"
+    DESCRIBE.UM_MONSTEREGG_COOKED = "I hath slain the beast."
+
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Let us rip out this affliction by the root!"
     DESCRIBE.TOADLING = "Fel guardians of corruption!"
 	

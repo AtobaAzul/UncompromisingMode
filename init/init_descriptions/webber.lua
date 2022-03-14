@@ -42,6 +42,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
     DESCRIBE.COOKEDMONSTERSMALLMEAT = "It'll tide us over."
     DESCRIBE.MONSTERSMALLMEAT_DRIED = "It's really chewy."
 
+    DESCRIBE.UM_MONSTEREGG = "An egg? Maybe it will hatch a friend."
+    DESCRIBE.UM_MONSTEREGG_COOKED = "Just like papa used to make..."
+
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Is that where the yucky rain came from?"
     DESCRIBE.TOADLING = "That's one weird frog."
 	

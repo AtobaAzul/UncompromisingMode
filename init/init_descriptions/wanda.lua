@@ -42,6 +42,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
     DESCRIBE.COOKEDMONSTERSMALLMEAT = "Yes, it's STILL poisonous."
     DESCRIBE.MONSTERSMALLMEAT_DRIED = "Maybe the poison all blew away in the wind?"
 
+    DESCRIBE.UM_MONSTEREGG = "What might it hatch into?"
+    DESCRIBE.UM_MONSTEREGG_COOKED = "Undercooking or overcooking wouldn't have mattered."
+
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "The worst of the worst."
     DESCRIBE.TOADLING = "Offspring? That's...new."
 	

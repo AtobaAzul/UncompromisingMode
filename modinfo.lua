@@ -85,7 +85,7 @@ configuration_options =
 	{
 		name = "rne chance",
 		label = "Night Terrors Chance",
-		hover = "Night Terrors have a default 60% chance to occur each night. Night Terrors are disabled before Day 5.",
+		hover = "Night Terrors have a default 20% chance to occur each night. Night Terrors are disabled before Day 5.",
 		options =
 		{
 			{description = "None", data = 100},
@@ -353,6 +353,7 @@ configuration_options =
 	},
 	BinaryConfig("butterflywings_nerf", "Weaker Butterfly Wings", "Butterfly wings have been nerfed to not be cheap healing", true),
 	BinaryConfig("rawcropsnerf", "Raw Crops Nerf", "Farm crops are nerfed in their base value when raw/cooked to incentivize using crockpot recipes.", true),
+	BinaryConfig("monstereggs", "Monster Eggs", "Birds now give monster eggs when fed monster meats.\nMonster eggs are like eggs, but have monster value.", true),
 	Header("--------------------"),
 -----------------------------
 -- Monsters --

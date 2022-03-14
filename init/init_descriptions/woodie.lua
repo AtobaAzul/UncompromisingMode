@@ -42,6 +42,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
     DESCRIBE.COOKEDMONSTERSMALLMEAT = "That's no Canadian Kosher."
     DESCRIBE.MONSTERSMALLMEAT_DRIED = "That's no Canadian Kosher."
 
+    DESCRIBE.UM_MONSTEREGG = "No good will come of it.."
+    DESCRIBE.UM_MONSTEREGG_COOKED = "I think it's still alive."
+
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "That cap is killing my trees!"
     DESCRIBE.TOADLING = "Hop off, ya hoser."
 	

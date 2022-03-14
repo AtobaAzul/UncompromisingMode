@@ -43,6 +43,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
     DESCRIBE.COOKEDMONSTERSMALLMEAT = "I'm doing the best with what I've got."
     DESCRIBE.MONSTERSMALLMEAT_DRIED = "Woby's favorite, just in smaller bite size chunks."
 
+    DESCRIBE.UM_MONSTEREGG = "Maybe Woby would eat it? I hope she doesn't mind the shell..."
+    DESCRIBE.UM_MONSTEREGG_COOKED = "I was hoping something cool would hatch."
+
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "I've never seen caps like those before!"
     DESCRIBE.TOADLING = "He could swallow me whole... I think I'll keep my distance."
 	
