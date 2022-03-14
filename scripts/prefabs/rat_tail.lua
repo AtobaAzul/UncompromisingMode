@@ -27,6 +27,7 @@ local function fn()
     end
 
     inst:AddComponent("tradable")
+	inst.components.tradable.goldvalue = 2*TUNING.GOLD_VALUES.MEAT
 	
     inst:AddComponent("stackable")
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
@@ -35,11 +36,6 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/rat_tail.xml"
-
-    inst:AddComponent("perishable")
-    inst.components.perishable:StartPerishing()
-    inst.components.perishable.onperishreplacement = "spoiled_food"
-    inst.components.perishable:SetPerishTime(TUNING.PERISH_PRESERVED)
 	
     inst:AddComponent("edible")
     inst.components.edible.foodtype = FOODTYPE.HORRIBLE

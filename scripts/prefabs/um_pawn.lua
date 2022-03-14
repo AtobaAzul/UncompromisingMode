@@ -398,6 +398,8 @@ local function pawn_common(pawntype)
 		inst.components.explosive.explosiverange = 6
 		inst.components.explosive.buildingdamage = 0
 		inst.components.explosive.explosivedamage = TUNING.GUNPOWDER_DAMAGE
+		inst:AddComponent("burnable")
+		inst.components.burnable:SetOnIgniteFn(function(inst) inst.components.explosive:OnBurnt() end)
 	end
 	
 	inst.OnEntityWake = OnWake

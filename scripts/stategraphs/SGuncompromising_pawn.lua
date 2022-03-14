@@ -423,7 +423,7 @@ local states=
             inst.AnimState:PlayAnimation("frozen_loop_pst", true)
 			inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_fuse_LP", "pawn_hiss")
             inst.Physics:Stop()
-			inst.sg:SetTimeout(1.35)
+			inst.sg:SetTimeout(0.25)
         end,
 		
 		ontimeout = function(inst)

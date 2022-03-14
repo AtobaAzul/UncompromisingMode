@@ -213,7 +213,7 @@ env.AddPrefabPostInit("premiumwateringcan", function(inst)
 		OnFill_(inst, from_object)
 	end
 	
-	inst.components.fillable.overrideonfillfn =NewOnFill
+	inst.components.fillable.overrideonfillfn =	NewOnFill
 	end
 	
 	if inst.components.wateringcan ~= nil then
@@ -223,11 +223,22 @@ env.AddPrefabPostInit("premiumwateringcan", function(inst)
 		if inst.components.finiteuses ~= nil and inst.components.finiteuses:GetPercent() == 0 and inst.components.preserver ~= nil then
 			inst:RemoveComponent("preserver")
 		end
-	OnDeplete_(inst)
+		OnDeplete_(inst)
 	end
-	inst.components.wateringcan.ondepletefn = NewOnDeplete(inst)
+		inst.components.wateringcan.ondepletefn = NewOnDeplete(inst)
 	end
+	local _OnLoad = inst.OnLoad
 	
+	local function OnLoad(inst,data)
+		inst:DoTaskInTime(0,function(inst)
+			if inst.components.finiteuses.current > 0 then
+				inst:AddComponent("preserver")
+				inst.components.preserver:SetPerishRateMultiplier(TUNING.FISH_BOX_PRESERVER_RATE)					
+			end
+		end)
+		_OnLoad(inst,data)
+	end
+	inst.OnLoad = OnLoad
 end)
 --[[env.AddPrefabPostInit("steel_sweater", function(inst)
 	if not TheWorld.ismastersim then

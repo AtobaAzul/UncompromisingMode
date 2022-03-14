@@ -277,7 +277,7 @@ local states=
                         fx.AnimState:SetScale(-1.3, 1, 1)
 					
 				end
-			inst.AnimState:SetBuild("ancient_trepidation")
+			inst.AnimState:SetBuild("ancient_trepidation_nomouth")
 			inst.enraged = false
             inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("anger")

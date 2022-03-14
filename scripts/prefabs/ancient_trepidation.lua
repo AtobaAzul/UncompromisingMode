@@ -205,9 +205,9 @@ end
 local function OnLoad(inst,data)
 if data ~= nil and data.enraged ~= nil then
 	inst.enraged = data.enraged
-if inst.enraged == true then
-	inst.AnimState:SetBuild("ancient_trepidation")
-end
+	if inst.enraged == true then
+		inst.AnimState:SetBuild("ancient_trepidation")
+	end
 end
 end
 
@@ -262,7 +262,7 @@ end
 end
 
 local function CheckWhereTheHeckIAm(inst)
-if not inst.components.areaaware:CurrentlyInTag("Nightmare") then
+if not inst.components.areaaware:CurrentlyInTag("Nightmare") and inst.components.homeseeker then
 	if inst.components.combat.target ~= nil then
 		inst.components.combat.target = nil
 	end
@@ -311,7 +311,7 @@ local function fn(Sim)
     end
 	
     inst.AnimState:SetBank("ancient_trepidation")
-    inst.AnimState:SetBuild("ancient_trepidation")
+    inst.AnimState:SetBuild("ancient_trepidation_nomouth")
     inst.AnimState:PlayAnimation("give_life",true)
     
 	inst.AnimState:SetMultColour(0, 0, 0, 0.8)
@@ -325,10 +325,8 @@ local function fn(Sim)
     inst.components.lootdropper:SetChanceLootTable('ancient_trepidation')
     
 	
-	--inst:AddTag("monster")
-     
-	--inst:AddTag("shadowcreature")
-    --inst:AddTag("shadow")
+	inst:AddTag("notraptrigger")
+    inst:AddTag("shadowchesspiece")
 	inst:AddTag("trepidation")
     ------------------
     inst:AddComponent("health")
@@ -336,13 +334,14 @@ local function fn(Sim)
 	inst.components.health.redirect = nodmgshielded
 	inst.hasshield = false
     ------------------
+	
 	inst:AddComponent("shadowsubmissive")
     inst:AddComponent("combat")
     inst.components.combat:SetKeepTargetFunction(keeptargetfn)    
     inst.components.combat:SetDefaultDamage(75)
     inst.components.combat:SetAttackPeriod(3)
     inst.components.combat:SetRetargetFunction(1, NormalRetarget)
-    --inst.components.combat:SetHurtSound("dontstarve/creatures/spider/hit_response")
+    inst.components.combat:SetHurtSound("dontstarve/sanity/creature"..math.random(1,2).."/attack_grunt")
     inst.components.combat:SetRange(3, 3)
     ------------------
     inst:AddComponent("areaaware")

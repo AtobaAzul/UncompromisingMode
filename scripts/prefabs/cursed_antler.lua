@@ -78,7 +78,26 @@ end
 
 local function onattack(inst, attacker, target)
     if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and attacker:HasTag("vetcurse") and inst.components.rechargeable:IsCharged() then
-        local x, y, z = target.Transform:GetWorldPosition()
+		local x1, y1, z1 = inst.Transform:GetWorldPosition()
+		
+		local owner = inst.components.inventoryitem.owner
+
+		for i, v in pairs(TheSim:FindEntities(x1, y1, z1, 3, { "cursedantler" })) do
+			if v ~= inst then
+				local vowner = v.components.inventoryitem.owner
+				if vowner ~= nil then
+					if vowner == owner or vowner.components.inventoryitem ~= nil and vowner.components.inventoryitem.owner ~= nil and vowner.components.inventoryitem.owner == owner then
+						v.components.rechargeable:Discharge(5)
+						
+
+					end
+				end
+			end
+		end
+		
+		inst.components.rechargeable:Discharge(5)        
+	
+		local x, y, z = target.Transform:GetWorldPosition()
 		local impactfx1 = SpawnPrefab("icespike_fx_1")
 		local impactfx2 = SpawnPrefab("icespike_fx_2")
 		local impactfx3 = SpawnPrefab("icespike_fx_3")
@@ -98,8 +117,7 @@ local function onattack(inst, attacker, target)
 			target.components.combat:GetAttacked(attacker, 66, nil)
 		end
 		
-		local ents = TheSim:FindEntities(x, y, z, 2, nil, { "INLIMBO", "player", "abigail" })
-
+		local ents = TheSim:FindEntities(x, y, z, 2.5, nil, { "INLIMBO", "player", "abigail" })
 		for i, v in ipairs(ents) do
 			if v ~= inst and v ~= target and v:IsValid() and not v:IsInLimbo() then
 				if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
@@ -114,27 +132,6 @@ local function onattack(inst, attacker, target)
 		end
 
     end
-	
-	
-	local x1, y1, z1 = inst.Transform:GetWorldPosition()
-	
-	local owner = inst.components.inventoryitem.owner
-
-	for i, v in pairs(TheSim:FindEntities(x1, y1, z1, 3, { "cursedantler" })) do
-		if v ~= inst then
-			local vowner = v.components.inventoryitem.owner
-			if vowner ~= nil then
-				if vowner == owner or vowner.components.inventoryitem ~= nil and vowner.components.inventoryitem.owner ~= nil and vowner.components.inventoryitem.owner == owner then
-					v.components.rechargeable:Discharge(5)
-					
-
-				end
-			end
-		end
-	end
-	
-    inst.components.rechargeable:Discharge(5)
-
 end
 
 local function fn()

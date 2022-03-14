@@ -1505,6 +1505,7 @@ end
 local function SmellProtection(v,container)
 	local x,y,z = v.Transform:GetWorldPosition()
 	local flowers = #TheSim:FindEntities(x,y,z,5,{"flower"})
+	local decoratedSisturn = FindEntity(v,10,function(inst) return (inst.prefab == "sisturn" and (inst.components.container and inst.components.container:IsFull())) end)
 	local potted_ = TheSim:FindEntities(x,y,z,6,{"cavedweller"})
 	local potted = 0 -- both potted plants have the cavedweller tag for some reason I have no idea
 	local forget_me_lots = 0 -- The end-all-beat-all, forget-me-lots's ability to make those who smell or eat them forgetful is the perfect insulator for rats
@@ -1544,7 +1545,9 @@ local function SmellProtection(v,container)
 	if FindEntity(v,8,function(guy) if guy.components.bloomness and guy.components.bloomness.level and guy.components.bloomness.level > 2 then return true end end,{"plantkin"}) ~= nil then
 		flowers = flowers + 10
 	end
-	
+	if decoratedSisturn ~= nil then
+		flowers = 25
+	end
 	flowers = flowers / 50
 	print(flowers)
 	potted = potted / 20
