@@ -240,7 +240,7 @@ else
 
 	AddRecipe2("floral_bandage", {Ingredient("bandage", 1), Ingredient("cactus_flower", 2)}, TECH.SCIENCE_TWO, nil, {"RESTORATION"})
 
-	AddRecipeToFilter("wardrobe", {"CONTAINERS"})
+	AddRecipeToFilter("wardrobe", "CONTAINERS")
 	
 	--deconstruct recipes
 	AddDeconstructRecipe("cursed_antler", {Ingredient("boneshard", 8), Ingredient("nightmarefuel", 2)})

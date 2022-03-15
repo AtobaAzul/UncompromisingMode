@@ -150,7 +150,8 @@ local function OnBlocked(owner, data, inst)
 			
 			inst.components.useableitem.inuse = true
 			inst._cdtask = inst:DoTaskInTime(3, OnCooldown)
-			
+			inst.components.rechargeable:Discharge(3)
+
 			local robin = inst.components.container:Has("feather_robin", 1)
 			local robin_winter = inst.components.container:Has("feather_robin_winter", 1)
 			local crow = inst.components.container:Has("feather_crow", 1)
@@ -206,6 +207,7 @@ local function OnUse(inst)
 		if feather and inst._cdtask == nil then
 			--V2C: tiny CD to limit chain reactions
 			inst._cdtask = inst:DoTaskInTime(3, OnCooldown)
+			inst.components.rechargeable:Discharge(3)
 			
 			local robin = inst.components.container:Has("feather_robin", 1)
 			local robin_winter = inst.components.container:Has("feather_robin_winter", 1)
@@ -335,7 +337,8 @@ local function frockfn()
     inst:AddComponent("inspectable")
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/feather_frock.xml"
-	
+	inst:AddComponent("rechargeable")
+
 	inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.BODY
 

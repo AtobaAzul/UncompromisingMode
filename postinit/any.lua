@@ -143,17 +143,22 @@ local IMPASSABLES_STATUES = {
 	["glassspike_tall"] = true,
 	["potatosack"] = true,
 }
+if TUNING.DSTU.IMPASSBLES then
+	env.AddPrefabPostInitAny(function(inst)
+		if IMPASSABLES[inst.prefab] and inst.Physics ~= nil then
+			RemovePhysicsColliders(inst)
+		end
+		if IMPASSABLES_STATUES[inst.prefab] and inst.Physics ~= nil and inst.components.heavyobstaclephysics ~= nil then
+		RemovePhysicsColliders(inst)
+		inst.components.heavyobstaclephysics:SetRadius(0)
+		end
+	end)
+end
+
 env.AddPrefabPostInitAny(function(inst)
-    if IMPASSABLES[inst.prefab] and inst.Physics ~= nil then
-        RemovePhysicsColliders(inst)
-    end
-    if IMPASSABLES_STATUES[inst.prefab] and inst.Physics ~= nil and inst.components.heavyobstaclephysics ~= nil then
-	RemovePhysicsColliders(inst)
-	inst.components.heavyobstaclephysics:SetRadius(0)
+	if TheWorld and TheWorld.shard == inst then
+		inst:AddComponent("shard_acidmushrooms")
 	end
-    if TheWorld and TheWorld.shard == inst then
-        inst:AddComponent("shard_acidmushrooms")
-    end
 end)
 
 --hornet; i dont care enough to know where to put this

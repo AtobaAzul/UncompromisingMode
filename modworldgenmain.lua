@@ -271,12 +271,13 @@ end
 
 
 -----KoreanWaffle's Spawner Limiter Tag Adding Code
-GLOBAL.require("map/rooms/forest/challengespawner")
 GLOBAL.require("map/rooms/forest/extraswamp")
-AddTaskPreInit("Make a pick",function(task)
-	task.room_choices["veteranshrine"] = 1
-end)
-
+if GetModConfigData("vetcurse") ~= "off" then
+	AddTaskPreInit("Make a pick",function(task)
+		GLOBAL.require("map/rooms/forest/challengespawner")
+		task.room_choices["veteranshrine"] = 1
+	end)
+end
 
 
 ---- KoreanWaffle's LOCK/KEY initialization code  --Inactive atm 

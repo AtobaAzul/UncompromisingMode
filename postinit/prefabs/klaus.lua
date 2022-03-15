@@ -13,8 +13,9 @@ local function CheckForKrampSack(inst)
 	if inst:IsUnchained() and inst.enraged then
 		inst.components.lootdropper:AddChanceLoot("krampus_sack", 1)
 	end
-	
-	inst.components.vetcurselootdropper.loot = "klaus_amulet"
+	if TUNING.DSTU.VETCURSE ~= "off" then
+		inst.components.vetcurselootdropper.loot = "klaus_amulet"
+	end
 end
 
 env.AddPrefabPostInit("klaus", function(inst)
@@ -25,8 +26,9 @@ env.AddPrefabPostInit("klaus", function(inst)
 	inst._OldEnrage = inst.Enrage
 	inst.Enrage = Enrage2
 	
-
-	inst:AddComponent("vetcurselootdropper")
+    if TUNING.DSTU.VETCURSE ~= "off" then
+		inst:AddComponent("vetcurselootdropper")
+	end
 	
 	inst:ListenForEvent("death", CheckForKrampSack)
 --return inst

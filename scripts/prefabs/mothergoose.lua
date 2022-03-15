@@ -291,9 +291,10 @@ local function fn()
     inst.components.eater.eatwholestack = true
 	
 	
-	inst:AddComponent("vetcurselootdropper")
-	inst.components.vetcurselootdropper.loot = "feather_frock"
-
+    if TUNING.DSTU.VETCURSE ~= "off" then
+        inst:AddComponent("vetcurselootdropper")
+	    inst.components.vetcurselootdropper.loot = "feather_frock"
+    end
     ------------------------------------------
 
     inst:WatchWorldState("isspring", OnSpringChange)

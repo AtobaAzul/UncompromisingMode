@@ -64,6 +64,9 @@ env.AddPrefabPostInit("wardrobe", function(inst)
 
 	inst.components.workable:SetOnWorkCallback(onhit)
 	inst.components.workable:SetOnFinishCallback(onhammered)
+
+    inst:SetPhysicsRadiusOverride(0)
+    MakeObstaclePhysics(inst, 0)
 end)
 
 STRINGS.ACTIONS.STARTCHANNELING.WARDROBE = "Use"

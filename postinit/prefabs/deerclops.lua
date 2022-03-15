@@ -306,9 +306,10 @@ env.AddPrefabPostInit("deerclops", function(inst)
     inst:RemoveComponent("freezable")
 
     inst.count = 0
-
-    inst:AddComponent("vetcurselootdropper")
-    inst.components.vetcurselootdropper.loot = "cursed_antler"
+    if TUNING.DSTU.VETCURSE ~= "off" then
+        inst:AddComponent("vetcurselootdropper")
+        inst.components.vetcurselootdropper.loot = "cursed_antler"
+    end
     inst.EnterPhase2Trigger = EnterPhase2Trigger
     inst:AddComponent("groundpounder")
     inst.components.groundpounder.destroyer = true

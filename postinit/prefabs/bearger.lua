@@ -181,10 +181,10 @@ env.AddPrefabPostInit("bearger", function(inst)
 		inst.components.combat:SetAreaDamage(6 + 0.5, 0.8)
 	end
 	
-	
-	inst:AddComponent("vetcurselootdropper")
-	inst.components.vetcurselootdropper.loot = "beargerclaw"
-	
+	if TUNING.DSTU.VETCURSE ~= "off" then
+		inst:AddComponent("vetcurselootdropper")
+		inst.components.vetcurselootdropper.loot = "beargerclaw"
+	end
 	inst:ListenForEvent("oneat", function(inst, data)
 		--inst.components.timer:StopTimer("FindNewFood")
 		--inst.components.timer:StartTimer("FindNewFood", 10)

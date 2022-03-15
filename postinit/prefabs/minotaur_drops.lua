@@ -3,7 +3,9 @@ AddPrefabPostInit("minotaur", function(inst)
 		return
 	end
 
-	inst:AddComponent("vetcurselootdropper")
-	inst.components.vetcurselootdropper.loot = "gore_horn_hat"
+	if TUNING.DSTU.VETCURSE ~= "off" then
+		inst:AddComponent("vetcurselootdropper")
+		inst.components.vetcurselootdropper.loot = "gore_horn_hat"
+	end
 	inst.components.lootdropper:AddChanceLoot("skullchest_child_blueprint",1.00)
 end)

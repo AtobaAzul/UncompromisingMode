@@ -369,6 +369,8 @@ TUNING.DSTU =
     WENDY_NERF = GetModConfigData("wendy"),
     TOADS = GetModConfigData("toads"),
     MONSTER_EGGS = GetModConfigData("monstereggs"),
+    IMPASSBLES = GetModConfigData("passibleimpassibles"),
+    VETCURSE = GetModConfigData("vetcurse"),
 --boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
     TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),

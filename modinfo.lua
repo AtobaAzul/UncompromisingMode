@@ -129,7 +129,18 @@ configuration_options =
 		},
 		default = 3,
 	},
-
+	{
+		name = "vetcurse",
+		label = "Veteran's Curse.",
+		hover = "Veteran's curse is an optional dificulty mode, which increases risk & reward.",
+		options =
+		{
+			{description = "Default", data = "default"},
+			{description = "Always On", data = "always"},
+			{description = "Off", data = "off"},
+		},
+		default = "default",
+	},
 	SkipSpace(),
 ------------------------------
 -- Character Reworks --
@@ -280,6 +291,7 @@ configuration_options =
 	BinaryConfig("scalemailbuff", "Scalemail Buff", "Scalemail now spawns 3 Dimvaes to help you in combat", true),
 	BinaryConfig("canedurability", "Cane Durability (Off by default)", "Cane loses durability similarly to a whirly fan, note that UM walruses drop tusks 100% of the time with this on.", false),
 	BinaryConfig("gotobed", "Sleeping Buff", "Sleeping gives stats at a faster rate, and can heal max health loss. Siesta Lean-to hunger drain is now 50% of a Tent, instead of 33%.", true),
+	BinaryConfig("passibleimpassibles", "Remove Cheese-able Collisions", "Removes collision from stuff such as statues to prevent cheese.", true),
 	{
 		name = "sleepingbuff",
 		label = "Sleeping Stat Speed.",
