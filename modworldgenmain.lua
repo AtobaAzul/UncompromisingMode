@@ -272,7 +272,7 @@ end
 
 -----KoreanWaffle's Spawner Limiter Tag Adding Code
 GLOBAL.require("map/rooms/forest/extraswamp")
-if GetModConfigData("vetcurse") ~= "off" then
+if GetModConfigData("vetcurse") == "default" then
 	AddTaskPreInit("Make a pick",function(task)
 		GLOBAL.require("map/rooms/forest/challengespawner")
 		task.room_choices["veteranshrine"] = 1

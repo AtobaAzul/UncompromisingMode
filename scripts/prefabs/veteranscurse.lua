@@ -202,7 +202,9 @@ local function AttachCurse(inst, target)
 		target:AddTag("vetcurse")
         target:ListenForEvent("respawnfromghost", function()
 			target:DoTaskInTime(3, function(target) 
-				target.components.debuffable:AddDebuff("buff_vetcurse", "buff_vetcurse")
+				if TUNING.DSTU.VETCURSE ~= "off" then
+					target.components.debuffable:AddDebuff("buff_vetcurse", "buff_vetcurse")
+				end
 			end)
         end, target)
     end
