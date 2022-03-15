@@ -365,7 +365,20 @@ configuration_options =
 	},
 	BinaryConfig("butterflywings_nerf", "Weaker Butterfly Wings", "Butterfly wings have been nerfed to not be cheap healing", true),
 	BinaryConfig("rawcropsnerf", "Raw Crops Nerf", "Farm crops are nerfed in their base value when raw/cooked to incentivize using crockpot recipes.", true),
-	BinaryConfig("monstereggs", "Monster Eggs", "Birds now give monster eggs when fed monster meats.\nMonster eggs are like eggs, but have monster value.", true),
+	{
+		name = "monstereggs",
+		label = "Monster Eggs",
+		hover = "Birds now give monster eggs when fed monster meats.\nMonster eggs are like eggs, but have configurable monster value.",
+		options =
+		{
+			{description = "Off", data = 0},
+			{description = "0.25 Monster", data = 0.25},
+			{description = "0.5 Monster", data = 0.5},
+			{description = "1 Monster", data = 1},
+			{description = "1.5 Monster", data = 1.5},
+		},
+		default = 1,
+	},
 	Header("--------------------"),
 -----------------------------
 -- Monsters --
