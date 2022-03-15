@@ -69,10 +69,10 @@ local function MonsterMeatSupport(tags)
     return ((tags~=nil and not tags.monster or tags.monster < 2 or (tags.meat and (tags.monster - tags.meat*meat_reduction_factor) < 2)) and TUNING.DSTU.CROCKPOTMONSTMEAT == true) or TUNING.DSTU.CROCKPOTMONSTMEAT == false
 end
 if TUNING.DSTU.CROCKPOTMONSTMEAT then
-AddIngredientValues({"monstermeat"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_RAW_MONSTER_VALUE--[[ + meat_reduction_factor]]}, true, true) --2.5 monster total, Will be calculated with -1 meat
+AddIngredientValues({"monstermeat"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE--[[ + meat_reduction_factor]]}, true, true) --2.5 monster total, Will be calculated with -1 meat
 AddIngredientValues({"monstermeat_cooked"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE}, true, true) --2 monster total, Will be calculated with -1 meat
 AddIngredientValues({"monstermeat_dried"}, {meat=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_DRIED_MONSTER_VALUE}, true, true) --1 monster total, Will be calculated with -1 meat
-AddIngredientValues({"monstersmallmeat"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_RAW_MONSTER_VALUE}, true, true) --2 monster total, Will be calculated with -1 meat
+AddIngredientValues({"monstersmallmeat"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE}, true, true) --2 monster total, Will be calculated with -1 meat
 
 RegisterInventoryItemAtlas("images/inventoryimages/monstersmallmeat.xml", "monstersmallmeat.tex")
 AddIngredientValues({"cookedmonstersmallmeat"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE}, true, true) --2.5 monster total, Will be calculated with -1 meat
@@ -80,12 +80,12 @@ RegisterInventoryItemAtlas("images/inventoryimages/cookedmonstersmallmeat.xml", 
 AddIngredientValues({"monstersmallmeat_dried"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_DRIED_MONSTER_VALUE}, true, true) --2 monster total, Will be calculated with -1 meat
 RegisterInventoryItemAtlas("images/inventoryimages/monstersmallmeat_dried.xml", "monstersmallmeat_dried.tex")
 
-AddIngredientValues({"um_monsteregg"}, {egg=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_RAW_MONSTER_VALUE - 1}, true)
+AddIngredientValues({"um_monsteregg"}, {egg=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE - 1}, true)
 RegisterInventoryItemAtlas("images/inventoryimages/um_monsteregg.xml", "um_monsteregg.tex")
 AddIngredientValues({"um_monsteregg_cooked"}, {egg=1, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE - 1}, true)
 RegisterInventoryItemAtlas("images/inventoryimages/um_monsteregg_cooked.xml", "um_monsteregg_cooked.tex")
 
-AddIngredientValues({"scorpioncarapace"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_RAW_MONSTER_VALUE, insectoid=0.5}, true, true)
+AddIngredientValues({"scorpioncarapace"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE, insectoid=0.5}, true, true)
 AddIngredientValues({"scorpioncarapacecooked"}, {meat=0.5, monster=GLOBAL.TUNING.DSTU.MONSTER_MEAT_COOKED_MONSTER_VALUE, insectoid=0.5}, true, true)
 else
 AddIngredientValues({"monstersmallmeat"}, {meat=0.5, monster=1}, true, true) --2 monster total, Will be calculated with -1 meat
