@@ -133,8 +133,9 @@ env.AddPrefabPostInit("spiderqueen", function(inst)
     --inst.weaponitems = {}
 	--EquipWeapons(inst)
 	inst.GroundCreepEntity:SetRadius(2)
-	inst:ListenForEvent("death", OnDead)
-	
+	if TUNING.DSTU.MOON_TRANSFORMATIONS then
+		inst:ListenForEvent("death", OnDead)
+	end
 	inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", SpitCooldown)
 	

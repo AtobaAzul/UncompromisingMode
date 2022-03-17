@@ -142,12 +142,13 @@ env.AddPrefabPostInit("penguin", function(inst)
 	if inst.components.combat ~= nil then
 		inst.components.combat:SetRetargetFunction(2, NewRetarget)
 	end
-	
-	inst:WatchWorldState("isfullmoon", OnFullMoon)
-	OnFullMoon(inst, TheWorld.state.isfullmoon)
-	
-	inst:ListenForEvent("oneat", OnEat)
 
+	if TUNING.DSTU.MOON_TRANSFORMATIONS then
+		inst:WatchWorldState("isfullmoon", OnFullMoon)
+		OnFullMoon(inst, TheWorld.state.isfullmoon)
+	end
+
+	inst:ListenForEvent("oneat", OnEat)
 end)
 
 env.AddPrefabPostInit("mutated_penguin", function(inst)
