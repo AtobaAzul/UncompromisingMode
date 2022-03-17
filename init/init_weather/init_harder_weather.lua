@@ -106,7 +106,9 @@ env.AddPrefabPostInit("forest", function(inst)
 	inst:AddComponent("uncompromising_deerclopsspawner")
 	inst:AddComponent("pollenmitedenspawner")
 	--inst:ListenForEvent("seasontick", OnSeasonTick)
-	inst:AddComponent("snowstorminitiator")
+	if TUNING.DSTU.SNOWSTORMS then
+		inst:AddComponent("snowstorminitiator")
+	end
 	
 	if TUNING.DSTU.DESERTSCORPIONS then	
 	inst:AddComponent("scorpionspawner")
