@@ -109,7 +109,6 @@ local prefab_post = {
 	"tophatreduction",
 	"crabking",
 	"ruinsstatues", 
-	"chessjunk",
 	"moondial",
 	--"deciduoustrees",
 	"pktrades",
@@ -292,6 +291,10 @@ end
 
 if GetModConfigData("cooldown_orangestaff") then
 	table.insert(prefab_post, "orangestaff")
+end
+
+if GetModConfigData("amalgams") then
+	table.insert(prefab_post,"chessjunk")
 end
 
 modimport("postinit/sim")
