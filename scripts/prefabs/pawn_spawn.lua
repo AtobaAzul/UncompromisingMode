@@ -32,7 +32,7 @@ local function create_common(pawntype)
     inst.entity:AddNetwork()
 
     inst:AddTag("cavedweller")
-	
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -44,17 +44,23 @@ local function create_common(pawntype)
     inst.components.workable:SetWorkAction(ACTIONS.DIG)
     inst.components.workable:SetWorkLeft(4)
     inst.components.workable:SetOnFinishCallback(onhammered)
-    inst.components.workable:SetOnWorkCallback(onhit)]]   
+    inst.components.workable:SetOnWorkCallback(onhit)]]
 
     -------------------
     inst:AddComponent("childspawner")
-    inst.components.childspawner.childname = "um_pawn"..pawntype
+    if TUNING.DSTU.AMALGAMS then
+        inst.components.childspawner.childname = "um_pawn"..pawntype
+    else
+        inst.components.childspawner.childname = "um_pawn_nightmare"
+        print("Amalgams disabled, overriding spawn types.")
+    end
+
     inst.components.childspawner:SetRegenPeriod(TUNING.TOTAL_DAY_TIME * 3)
     inst.components.childspawner:SetSpawnPeriod(1)
     inst.components.childspawner:SetMaxChildren(1)
 	inst.components.childspawner.spawnoffscreen = true
-	
-	if TUNING.DSTU.PAWNS == true then
+
+	if TUNING.DSTU.PAWNS then
 		inst.components.childspawner:StartSpawning()
 	end
 

@@ -106,7 +106,7 @@ local function monstersmallmeat_fn()
     
     inst.components.inventoryitem.atlasname = "images/inventoryimages/monstersmallmeat.xml"
     
-    inst.components.perishable:SetPerishTime(TUNING.PERISH_TWO_DAY) -- 2 days
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_FAST) -- 2 days
     
     if inst.components.dryable then
         inst.components.dryable:SetBuildFile("extra_monsterfoods_dried")
@@ -136,7 +136,7 @@ local function cookedmonstersmallmeat_fn()
     inst.components.edible.hungervalue = TUNING.CALORIES_TINY -- 9.375 hunger
     inst.components.edible.sanityvalue = -TUNING.SANITY_SMALL -- -10 sanity
     
-    inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERFAST) -- 3 days
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_SLOW) -- 3 days
 
     inst.components.tradable.goldvalue = 0
     
@@ -163,7 +163,7 @@ local function monstersmallmeat_dried_fn()
 
     inst.components.perishable:SetPerishTime(TUNING.PERISH_FASTISH)
 
-	inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM -- 10 days
+	inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM 
 
     inst.components.inventoryitem.atlasname = "images/inventoryimages/monstersmallmeat_dried.xml"
     

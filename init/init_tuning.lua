@@ -374,6 +374,7 @@ TUNING.DSTU =
     IMPASSBLES = GetModConfigData("passibleimpassibles"),
     VETCURSE = GetModConfigData("vetcurse"),
     MOON_TRANSFORMATIONS = GetModConfigData("moon_transformations"),
+    AMALGAMS = GetModConfigData("amalgams"),
 --boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
     TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),
