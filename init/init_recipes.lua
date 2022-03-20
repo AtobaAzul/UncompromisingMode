@@ -11,7 +11,6 @@ AllRecipes = GLOBAL.AllRecipes
 STRINGS = GLOBAL.STRINGS
 CUSTOM_RECIPETABS = GLOBAL.CUSTOM_RECIPETABS
 CONSTRUCTION_PLANS = GLOBAL.CONSTRUCTION_PLANS
-CRAFTING_FILTERS = GLOBAL.CRAFTING_FILTERS
 modimport("uncompskins_api.lua")
 
 --Registering all item atlas so we don't have to keep doing it on each craft.
