@@ -63,6 +63,12 @@ env.AddPlayerPostInit(function(inst)
 		inst:AddTag("hasplaguemask")
 		inst:AddTag("has_gasmask")
 	end
+	
+	if not TheWorld.ismastersim then
+            return inst
+        end
+		
+	inst:AddComponent("hayfever")
 end)
 
 local ANTIHISTAMINES = 
