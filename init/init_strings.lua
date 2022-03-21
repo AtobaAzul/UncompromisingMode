@@ -23,16 +23,15 @@ STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_EVENING = { "KING BED TIME SOON, YOU
 STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_FRIEND = { "KING SAY PROTECT", "PROTECT YOU", "WHERE MONSTERS?", "PROTECT!", "PROTECT KING!", "PROTECT FRIEND!" }
 
 -- Hey look! I actually did something! -Canis
-STRINGS.CHARACTER_DESCRIPTIONS.willow = STRINGS.CHARACTER_DESCRIPTIONS.willow.."\n󰀕Her lighter won't drain when she's holding it"
-STRINGS.CHARACTER_DESCRIPTIONS.wx78 = STRINGS.CHARACTER_DESCRIPTIONS.wx78.."\n󰀕Water is more lethal"
-STRINGS.CHARACTER_DESCRIPTIONS.wickerbottom = STRINGS.CHARACTER_DESCRIPTIONS.wickerbottom.."\n󰀕Reading books require brainpower"
-STRINGS.CHARACTER_DESCRIPTIONS.wes = STRINGS.CHARACTER_DESCRIPTIONS.wes.."\n󰀕Expanded inner dialogue"
+STRINGS.CHARACTER_DESCRIPTIONS.willow = STRINGS.CHARACTER_DESCRIPTIONS.willow.."\n󰀕Lighter lasts long on the right hands\n󰀕Can ignite things in the cold"
+STRINGS.CHARACTER_DESCRIPTIONS.wx78 = STRINGS.CHARACTER_DESCRIPTIONS.wx78.."\n󰀕Circuits are more adaptable\n󰀕Short-circuits easily"
+STRINGS.CHARACTER_DESCRIPTIONS.wickerbottom = STRINGS.CHARACTER_DESCRIPTIONS.wickerbottom.."\n󰀕Reading requires brainpower"
+STRINGS.CHARACTER_DESCRIPTIONS.wes = STRINGS.CHARACTER_DESCRIPTIONS.wes.."\n󰀕Expanded inner dialogue" 
 STRINGS.CHARACTER_DESCRIPTIONS.waxwell = STRINGS.CHARACTER_DESCRIPTIONS.waxwell.."\n󰀕Can summon his old puppets"
-STRINGS.CHARACTER_DESCRIPTIONS.warly = STRINGS.CHARACTER_DESCRIPTIONS.warly.."\n󰀕Remembers food for longer, but gets bonus stats"
-STRINGS.CHARACTER_DESCRIPTIONS.winona = STRINGS.CHARACTER_DESCRIPTIONS.winona.."\n󰀕Works faster when full, slower when hungry\n󰀕Others can't refuel generators"
-STRINGS.CHARACTER_DESCRIPTIONS.wortox = STRINGS.CHARACTER_DESCRIPTIONS.wortox.."\n󰀕Is less durable\n󰀕Tiny insects don't have souls"
-STRINGS.CHARACTER_DESCRIPTIONS.walter = STRINGS.CHARACTER_DESCRIPTIONS.walter.."\n󰀕Can craft firecracker rounds"
-STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr = STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr.."\n󰀕Reduced lifesteal" --someone, do something more creative than this.
+STRINGS.CHARACTER_DESCRIPTIONS.warly = STRINGS.CHARACTER_DESCRIPTIONS.warly.."\n󰀕Absorbs nutrients better, but prefers more variety"
+STRINGS.CHARACTER_DESCRIPTIONS.winona = STRINGS.CHARACTER_DESCRIPTIONS.winona.."\n󰀕Works hard until lunch\n󰀕Generators are for workers only"
+STRINGS.CHARACTER_DESCRIPTIONS.wortox = STRINGS.CHARACTER_DESCRIPTIONS.wortox.."\n󰀕Insects are souless beings"
+STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr = STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr.."\n󰀕Less passionate in combat"
 
 if TUNING.DSTU.WORMWOOD_CONFIG_FIRE then
 	STRINGS.CHARACTER_DESCRIPTIONS.wormwood = STRINGS.CHARACTER_DESCRIPTIONS.wormwood.."\n󰀕Is dangerously flammable"

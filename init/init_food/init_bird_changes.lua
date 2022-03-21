@@ -142,7 +142,8 @@ local invalid_foods =
     "bird_egg",
     "bird_egg_cooked",
     "rottenegg",
-    "um_monsteregg"
+    "um_monsteregg",
+    "um_monsteregg_cooked",
     -- "monstermeat",
     -- "cookedmonstermeat",
     -- "monstermeat_dried",
