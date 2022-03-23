@@ -24,27 +24,40 @@ local splashfxlist =
 
 local function DoSplatFx(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
-	local goo = SpawnPrefab("shadow_puff")
+	local goo
+	if inst.prefab == "shadow_goo" then -- A special different ground anim for our fancy goo
+		goo = SpawnPrefab("shadow_puff")
+	else
+		goo = SpawnPrefab("guardian_splat")
+	end
 	goo.Transform:SetPosition(x, 0, z)
 end
 
 local function doprojectilehit(inst, other)
     local caster = (inst._caster ~= nil and inst._caster:IsValid()) and inst._caster or nil
-
-	local other = other or FindEntity(inst, TUNING.WARG_GOO_RADIUS * 2, { "_combat", "player" }, { "INLIMBO", "shadow" })
+	local other = other or FindEntity(inst, TUNING.WARG_GOO_RADIUS * 3, { "_combat", "player" }, { "INLIMBO", "shadow" }) --I messed around with the funni goo, its range is actually a bit small, so I bumped it up a tad.
 	if other ~= nil and other ~= caster and other.components.combat ~= nil  then
-        if other.components.sanity ~= nil and other.components.health ~= nil and not other.components.health:IsDead() and other.components.sanity:IsInsane() and other.components.inkable and not other:HasTag("shadowdominant") then
+		if inst.prefab == "shadow_goo" then
+			if other.components.sanity ~= nil and other.components.health ~= nil and not other.components.health:IsDead() and other.components.sanity:IsInsane() and other.components.inkable and not other:HasTag("shadowdominant") then
+				DoSplatFx(other.components.pinnable.stuck and inst or other)
+				other.components.inkable:Ink()
+				other.components.combat:GetAttacked(caster, TUNING.WARG_GOO_DAMAGE/2)
+			elseif other.components.sanity ~= nil and not other:HasTag("shadowdominant") then
+				other.components.sanity:DoDelta(-5)
+				DoSplatFx(inst)
+			end
+		end
+		if inst.prefab == "guardian_goo" then --Guardian goo does the effect even if the player isn't insane, and does meaningful damage.
 			DoSplatFx(other.components.pinnable.stuck and inst or other)
-            other.components.inkable:Ink()
-			other.components.combat:GetAttacked(caster, TUNING.WARG_GOO_DAMAGE/2)
-		elseif other.components.sanity ~= nil and not other:HasTag("shadowdominant") then
+			if other.components.inkable then
+				other.components.inkable:Ink()
+			end
+			other.components.combat:GetAttacked(caster, 50)
 			other.components.sanity:DoDelta(-5)
-			DoSplatFx(inst)
-        end
+		end
 	else
 		DoSplatFx(inst)
 	end
-
     inst:Remove()
 end
 --[[
@@ -78,12 +91,12 @@ local function oncollide(inst, other)
     -- If there is a physics collision, try to do some damage to that thing.
     -- This is so you can't hide forever behind walls etc.
 
-	if other ~= nil and other:IsValid() and other:HasTag("_combat") and not other:HasTag("gingerbread") then
+	if other ~= nil and other:IsValid() and other:HasTag("_combat") and not other:HasTag("shadow") then
 		doprojectilehit(inst, other)
 	end
 end
 
-local function projectilefn()
+local function mainprojectilefn(anim)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -102,21 +115,23 @@ local function projectilefn()
     inst.Physics:CollidesWith(COLLISION.OBSTACLES)
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
     inst.Physics:SetSphere(0.25)
-
-    inst.AnimState:SetBank("warg_gingerbread_bomb")
-    inst.AnimState:SetBuild("warg_gingerbread_bomb")
-    inst.AnimState:PlayAnimation("spin_loop", true)
 	
-	inst.AnimState:SetMultColour(0, 0, 0, 0.4)
-	
-    --inst:AddComponent("transparentonsanity")
-
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-
+	inst.AnimState:SetBank(anim)
+	inst.AnimState:SetBuild(anim)
+	if anim == "warg_gingerbread_bomb" then
+		inst.AnimState:PushAnimation("spin_loop", true)
+		inst.AnimState:SetMultColour(0, 0, 0, 0.4)		
+	end
+	if anim == "squid_watershoot" then
+		inst:Hide()
+		inst:DoTaskInTime(0.2,function(inst) inst:Show() end)
+	end
+	inst.AnimState:PushAnimation("spin_loop", true)
     inst.Physics:SetCollisionCallback(oncollide)
 
     inst.persists = false
@@ -128,4 +143,39 @@ local function projectilefn()
     return inst
 end
 
-return Prefab("shadow_goo", projectilefn, projectile_assets, projectile_prefabs)
+local function shadow_goofn(inst)
+	return mainprojectilefn("warg_gingerbread_bomb")
+end
+
+local function guardian_goo()
+	return mainprojectilefn("squid_watershoot")
+end
+
+local function guardiansplat()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddSoundEmitter()
+    inst.entity:AddPhysics()
+    inst.entity:AddNetwork()
+	inst:AddTag("FX")
+	inst:AddTag("INLIMBO")
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.Transform:SetScale(0.5,0.5,0.5)
+	inst.AnimState:SetBank("guardian_splat")
+	inst.AnimState:SetBuild("guardian_splat")
+	inst.AnimState:PlayAnimation("land")
+	inst.AnimState:PushAnimation("go away",false) --crap, forgot the "_" will fix later :sleep:
+	
+	inst:ListenForEvent("animqueueover",function(inst) inst:Remove() end)
+    return inst
+end
+return Prefab("shadow_goo", shadow_goofn, projectile_assets, projectile_prefabs),
+Prefab("guardian_goo", guardian_goo),
+Prefab("guardian_splat", guardiansplat)
