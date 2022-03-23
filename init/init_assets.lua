@@ -670,6 +670,7 @@ Assets = {
 	Asset("ANIM", "anim/swap_driftwood_fishingrod.zip"),
 	Asset("ANIM", "anim/um_bq_actions.zip"),
 	Asset("ANIM", "anim/close_wardrobe.zip"),
+	Asset("ANIM", "anim/guardian_splat.zip"),
 	
 	--Dart Stuff
 	Asset("ANIM", "anim/um_blowguns.zip"),
@@ -704,6 +705,7 @@ Assets = {
 	
 	Asset("ANIM", "anim/ratking.zip"),
 	Asset("ANIM", "anim/garbage_pile.zip"),
+	Asset("ANIM", "anim/um_minotaur_actions.zip"),
 	
 	Asset("ANIM", "anim/rattotem.zip"),
 	--Map Icons Start--

@@ -1,95 +1,60 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
-local function Bonk(inst)
-	if not inst.components.health:IsDead() then
-		inst.sg:GoToState("AGStunwake")
+
+--Behold the mind of the sleep-deprived college student! (Don't push me till we know that klei doesn't change AG and mess this up, though I did make sure to do everything as compat friendly as possible, more than any other piece of work I've done before, for sure.)
+
+local UpvalueHacker = require("tools/upvaluehacker")
+local function CheckForceJump(inst,data) -- Secondary means to force the leap if for some reason the player isn't in a position for it to happen naturally
+	if data.name == "forceleapattack" and inst.components.combat and inst.components.combat.target and inst.components.health and not inst.components.health:IsDead() then
+		inst.forceleap = true
+	elseif data.name == "forceleapattack" then
+		inst.components.timer:StartTimer("forceleapattack", math.random(30,45))
+	end
+	--This is actually the only way the belch happens
+	if data.name == "forcebelch" and inst.components.combat and inst.components.combat.target and inst.components.health and not inst.components.health:IsDead() and inst.components.health:GetPercent() < 0.6 then
+		inst.forcebelch = true
+	elseif data.name == "forcebelch" then
+		inst.components.timer:StartTimer("forcebelch", math.random(20,30))
 	end
 end
 
-local function ClearRecentlyCharged(inst, other)
-    inst.recentlycharged[other] = nil
-end
+local easing = require("easing")
 
-local function onothercollide(inst, other)
-    if not other:IsValid() or inst.recentlycharged[other] then
-        return
-    elseif other:HasTag("smashable") and other.components.health ~= nil then
-        --other.Physics:SetCollides(false)
-        other.components.health:Kill()
-    elseif other.components.workable ~= nil
-        and other.components.workable:CanBeWorked()
-        and other.components.workable.action ~= ACTIONS.NET then
-        SpawnPrefab("collapse_small").Transform:SetPosition(other.Transform:GetWorldPosition())
-        other.components.workable:Destroy(inst)
-        if other:IsValid() and other.components.workable ~= nil and other.components.workable:CanBeWorked() then
-            inst.recentlycharged[other] = true
-            inst:DoTaskInTime(3, ClearRecentlyCharged, other)
-        end
-		
-		if other:HasTag("guardianbonk") or other:HasTag("megaboulder") then
-			inst.sg:GoToState("AGStun")
-			inst:DoTaskInTime(4.5, Bonk, inst)
-			
-			if other:HasTag("guardianbonk") then
-				other:Smash()
-			end
-		end
-	elseif other:HasTag("guardianbonk") then
-			inst.sg:GoToState("AGStun")
-			inst:DoTaskInTime(4.5, Bonk, inst)
-			other:Smash()
-    elseif other.components.health ~= nil and not other.components.health:IsDead() then
-        inst.recentlycharged[other] = true
-        inst:DoTaskInTime(3, ClearRecentlyCharged, other)
-        SpawnPrefab("collapse_small").Transform:SetPosition(other.Transform:GetWorldPosition())
-        inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
-        inst.components.combat:DoAttack(other)
-    end
-end
-
-local function oncollide(inst, other)
-    if not (other ~= nil and other:IsValid() and inst:IsValid())
-        or inst.recentlycharged[other]
-        or other:HasTag("player")
-        or Vector3(inst.Physics:GetVelocity()):LengthSq() < 42 then
-        return
-    end
-    ShakeAllCameras(CAMERASHAKE.SIDE, .5, .05, .1, inst, 40)
-    inst:DoTaskInTime(2 * FRAMES, onothercollide, other)
+local function LaunchProjectile(inst)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local angle = (inst.Transform:GetRotation() + 90) * DEGREES
+    local x1 = x + .01 * math.sin(angle)
+    local z1 = z + .01 * math.cos(angle)	
+	local goo = SpawnPrefab("guardian_goo")
+    goo.Transform:SetPosition(x1, y+3, z1)
+	goo.Transform:SetRotation(angle / DEGREES)
+	goo._caster = inst
+	
+	Launch2(goo, inst, inst.projectilespeed, 2, 2, 4)
 end
 
 env.AddPrefabPostInit("minotaur", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
+	inst.forceleap = false
+	inst.forcebelch = false
+	inst.combo = 0
+	inst.components.timer:StartTimer("forceleapattack", math.random(30,45))
+	inst.components.timer:StartTimer("forcebelch", math.random(30,45))
+	inst:ListenForEvent("timerdone", CheckForceJump)
 	
-	
-	inst.jumpready = true
-	
-	inst:AddComponent("timer")
-	inst:AddComponent("groundpounder")
-    inst.components.groundpounder.destroyer = true
-    inst.components.groundpounder.damageRings = 3
-    inst.components.groundpounder.destructionRings = 3
-    inst.components.groundpounder.numRings = 3
-	
-    inst.Physics:SetCollisionCallback(oncollide)
-
-		local function OnHitOther(inst, other)
-			if other:HasTag("creatureknockbackable") then
-			other:PushEvent("knockback", {knocker = inst, radius = 200, strengthmult = 1.5})
-			else
-			if other ~= nil and other.components.inventory ~= nil and not other:HasTag("fat_gang") and not other:HasTag("foodknockbackimmune") and not (other.components.rider ~= nil and other.components.rider:IsRiding()) and 
-			--Don't knockback if you wear marble
-			(other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ==nil or not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
-				other:PushEvent("knockback", {knocker = inst, radius = 200, strengthmult = 1.5})
-			end
-			end
+	local _OnAttacked = UpvalueHacker.GetUpvalue(Prefabs.minotaur.fn, "OnAttacked")
+	local function OnAttacked(inst, data)
+		if not inst.sg:HasStateTag("newbuild") then
+			_OnAttacked(inst,data)
 		end
+	end
+	inst:RemoveEventCallback("attacked",_OnAttacked)
+	UpvalueHacker.SetUpvalue(Prefabs.minotaur.fn, OnAttacked,"OnAttacked")
 	
-		if inst.components.combat ~= nil then
-			inst.components.combat.onhitotherfn = OnHitOther
-		end
-
+	inst:ListenForEvent("attacked",OnAttacked)
+	
+	inst.LaunchProjectile = LaunchProjectile
 end)
