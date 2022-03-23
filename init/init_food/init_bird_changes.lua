@@ -142,6 +142,8 @@ local invalid_foods =
     "bird_egg",
     "bird_egg_cooked",
     "rottenegg",
+    "um_monsteregg",
+    "um_monsteregg_cooked",
     -- "monstermeat",
     -- "cookedmonstermeat",
     -- "monstermeat_dried",
@@ -156,7 +158,6 @@ local function ShouldAcceptItem(inst, item)
         or string.match(item.prefab, "_seeds")
         or item.components.edible.foodtype == FOODTYPE.MEAT)
 		or item.prefab == "rice" or item.prefab == "rice_cooked"
-
     if table.contains(invalid_foods, item.prefab) then
         can_accept = false
     end

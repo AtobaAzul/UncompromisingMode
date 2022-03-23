@@ -304,6 +304,8 @@ TUNING.DSTU =
     WEATHERHAZARD_START_DATE_SPRING = GetModConfigData("weatherhazard_spring"),
     --WEATHERHAZARD_START_DATE_SUMMER = GetModConfigData("weatherhazard_summer"),
     RNE_CHANCE = GetModConfigData("rne chance"),
+	
+    SNOWSTORMS = GetModConfigData("snowstorms"),
 
 	HARDER_SHADOWS = GetModConfigData("harder_shadows"),
     MAX_DISTANCE_TO_SHADOWS = 1225, -- 35^2
@@ -371,6 +373,8 @@ TUNING.DSTU =
     MONSTER_EGGS = GetModConfigData("monstereggs"),
     IMPASSBLES = GetModConfigData("passibleimpassibles"),
     VETCURSE = GetModConfigData("vetcurse"),
+    MOON_TRANSFORMATIONS = GetModConfigData("moon_transformations"),
+    AMALGAMS = GetModConfigData("amalgams"),
 --boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
     TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),

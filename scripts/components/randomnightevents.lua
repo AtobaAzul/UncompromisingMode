@@ -1956,7 +1956,7 @@ local function CheckPlayers()
 	
 	local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
 	
-	if --[[TheWorld.state.cycles]]days_survived >= 5 and math.random() >= playerchancescaling or (days_survived >= 5 and TheWorld.state.isfullmoon and math.random() >= 0.5) or (days_survived >= 5 and TheWorld.state.isnewmoon and math.random() >= 0.75) then
+	if --[[TheWorld.state.cycles]]days_survived >= 5 and math.random() >= playerchancescaling or (days_survived >= 5 and TheWorld.state.isfullmoon) or (days_survived >= 5 and TheWorld.state.isnewmoon) then
 		
 		--for i, 1 in ipairs(playerlist) do  --try a base RNE
 		if player ~= nil then

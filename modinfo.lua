@@ -141,6 +141,7 @@ configuration_options =
 		},
 		default = "default",
 	},
+	BinaryConfig("moon_transformations", "Moon Transformations","Certain things transform under the dim light of the full \"Moon\".", true),
 	SkipSpace(),
 ------------------------------
 -- Character Reworks --
@@ -462,6 +463,7 @@ configuration_options =
 	Header("New Ruins Monsters"),
 	BinaryConfig("trepidations", "Ancient Trepidations", "Enabling this allows trepidations to roam the halls of the ruins, seeking out the weak of mind.", true),
 	BinaryConfig("pawns", "Clockwork Pawns", "Enabling this allows pawns to patrol the depths of the caves, drawing unwanted attention to the foolish and lost.", true),
+	BinaryConfig("amalgams", "Clockwork Amalgams", "Enabling this allows pawns and clockwork piles to spawn Comingled Clockworks", true),
 	SkipSpace(),
 
 

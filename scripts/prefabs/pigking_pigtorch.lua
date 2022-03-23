@@ -538,7 +538,7 @@ local function OnNewTarget(inst, data)
 		if data.target:HasTag("pig") then
 		inst.components.combat.target = nil
 		end
-		if data.target.userid ~= nil and not table.contains(inst.hitlist,data.target.userid) then
+		if data.target.userid ~= nil and inst.hitlist ~= nil and not table.contains(inst.hitlist,data.target.userid) then
 			table.insert(inst.hitlist,data.target.userid)
 			
 			--local taskid = data.target.userid
@@ -549,7 +549,7 @@ local function OnNewTarget(inst, data)
 		local ents = TheSim:FindEntities(x, y, z, 40, {"pig","guard"}) --Spread the news, they'll let any new pig guards nearby know that there's a bad man around
 		for i, v in ipairs(ents) do
 			if v ~= inst and not v.components.health:IsDead() then
-				if data.target.userid ~= nil and not table.contains(v.hitlist,data.target.userid) then
+				if data.target.userid ~= nil and v.hitlist ~= nil and not table.contains(v.hitlist,data.target.userid) then
 				table.insert(v.hitlist,data.target.userid)
 				
 					--local taskid = data.target.userid
