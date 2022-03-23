@@ -77,7 +77,7 @@ if TUNING.DSTU.WOLFGANG_HUNGERMIGHTY then
 	AllRecipes["dumbbell_golden"].ingredients ={Ingredient("goldnugget", 2), Ingredient("cutstone", 2), Ingredient("twigs", 2)}
 	AllRecipes["dumbbell_gem"].ingredients ={Ingredient("purplegem",  1), Ingredient("cutstone", 2), Ingredient("twigs", 2)}
 end
-
+--[[
 	AddRecipe2("snowgoggles", {Ingredient("catcoonhat", 1), Ingredient("goggleshat",1), Ingredient("beefalowool",2)}, TECH.SCIENCE_TWO, {nil}, {"WINTER", "CLOTHING"})
 
 	AddRecipe2("ratpoisonbottle", {Ingredient("red_cap", 1), Ingredient("jammypreserves",1), Ingredient("rocks",1)}, TECH.SCIENCE_ONE, {nil})
@@ -133,7 +133,7 @@ end
 	AddRecipe2("hat_ratmask", {Ingredient("rope",2), Ingredient("rat_tail", 3), Ingredient("sewing_kit", 1)}, TECH.SCIENCE_TWO, nil, {"CLOTHING"})
 
 	AddRecipe2("floral_bandage", {Ingredient("bandage", 1), Ingredient("cactus_flower", 2)}, TECH.SCIENCE_TWO, nil, {"RESTORATION"})
-
+]]
 	AddRecipeToFilter("wardrobe", "CONTAINERS")
 	
 	--deconstruct recipes

@@ -47,13 +47,17 @@ local function doprojectilehit(inst, other)
 				DoSplatFx(inst)
 			end
 		end
-		if inst.prefab == "guardian_goo" then --Guardian goo does the effect even if the player isn't insane, and does meaningful damage.
-			DoSplatFx(other.components.pinnable.stuck and inst or other)
+		if inst.prefab == "guardian_goo" and other.components.combat then --Guardian goo does the effect even if the player isn't insane, and does meaningful damage.
+			if other.components.pinnable then
+				DoSplatFx(other.components.pinnable.stuck and inst or other)
+			end
 			if other.components.inkable then
 				other.components.inkable:Ink()
 			end
 			other.components.combat:GetAttacked(caster, 50)
-			other.components.sanity:DoDelta(-5)
+			if other.components.sanity then
+				other.components.sanity:DoDelta(-5)
+			end
 		end
 	else
 		DoSplatFx(inst)
