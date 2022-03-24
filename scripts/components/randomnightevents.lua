@@ -1863,7 +1863,7 @@ local function DoNewMoonRNE(player)
 			local rnd = math.random()*self.totalrandomnewmoonweight
 			for k,v in pairs(self.newmoonevents) do
 				rnd = rnd - v.weight
-				if rnd <= 0 and not v.name ~= self.LastNewMoonRNE then
+				if rnd <= 0 and v.name ~= self.LastNewMoonRNE then
 					self.LastNewMoonRNE = v.name
 					v.name(player)
 					return

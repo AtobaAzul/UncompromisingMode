@@ -9,6 +9,35 @@ Assets = {
 	--Asset("IMAGE", "images/inventoryimages/turf_jungle.tex"),
 	----Turf
 
+	--WINKY!!!
+	
+    Asset( "IMAGE", "images/saveslot_portraits/winky.tex" ),
+    Asset( "ATLAS", "images/saveslot_portraits/winky.xml" ),
+
+    Asset( "IMAGE", "images/selectscreen_portraits/winky.tex" ),
+    Asset( "ATLAS", "images/selectscreen_portraits/winky.xml" ),
+
+    Asset( "IMAGE", "images/selectscreen_portraits/winky_silho.tex" ),
+    Asset( "ATLAS", "images/selectscreen_portraits/winky_silho.xml" ),
+
+    Asset( "IMAGE", "bigportraits/winky.tex" ),
+    Asset( "ATLAS", "bigportraits/winky.xml" ),
+
+	Asset( "IMAGE", "images/map_icons/winky.tex" ),
+	Asset( "ATLAS", "images/map_icons/winky.xml" ),
+
+    Asset( "IMAGE", "images/avatars/avatar_winky.tex" ),
+    Asset( "ATLAS", "images/avatars/avatar_winky.xml" ),
+	
+    Asset( "IMAGE", "images/avatars/avatar_ghost_winky.tex" ),
+    Asset( "ATLAS", "images/avatars/avatar_ghost_winky.xml" ),
+	
+	--
+
+
+
+
+
     -- Livingtree root attack custom art by @Advent (modded from poison birchnut roots)
     Asset("ANIM", "anim/tree_leaf_spike_lt.zip"),
     Asset("ANIM", "anim/frog_yellow_build.zip"),
