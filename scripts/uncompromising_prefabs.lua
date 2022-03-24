@@ -1,4 +1,15 @@
 return {
+    --Characters
+	"winky",
+	--"wixie",
+	--"wathom",
+	--"wickett",
+	--"winslow",
+	--"winky2",
+	--"whoppermeal",
+	--"wackytobackey",
+	--
+	
 	"deathstick",
 	"uncompromising_toad",
 	"mushroomsprout_overworld",
