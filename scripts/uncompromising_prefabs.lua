@@ -307,4 +307,5 @@ return {
 	"proto_william",
 	"phantom",
 	"spider_crabbit",
+	--"resurrectionphonograph",
 }

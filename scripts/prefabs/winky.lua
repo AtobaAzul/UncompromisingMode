@@ -91,6 +91,7 @@ local function master_postinit(inst)
     inst.components.foodaffinity:AddPrefabAffinity("powcake", 20)
 	inst.components.eater:SetCanEatHorrible()
 	inst.components.eater:SetStrongStomach(true) -- can eat monster meat!
+	inst.components.eater:SetCanEatRawMeat(true)
 	inst.components.eater:SetOnEatFn(checkfav)
 	
     inst.components.sanity.night_drain_mult = TUNING.WENDY_SANITY_MULT

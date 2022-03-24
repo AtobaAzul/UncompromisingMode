@@ -119,6 +119,10 @@ local actionhandlers =
         function(inst, action)
             return action.invobject ~= nil
                 and action.invobject:HasTag("wingsuit") and "castspell"
+        end),
+	ActionHandler(ACTIONS.CREATEBURROW,
+        function(inst, action)
+            return "dolongaction"
         end)
 }
 
