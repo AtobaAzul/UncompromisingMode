@@ -15,7 +15,7 @@ local function CheckForceJump(inst,data) -- Secondary means to force the leap if
 	if data.name == "forcebelch" and inst.components.combat and inst.components.combat.target and inst.components.health and not inst.components.health:IsDead() and inst.components.health:GetPercent() < 0.6 then
 		inst.forcebelch = true
 	elseif data.name == "forcebelch" then
-		inst.components.timer:StartTimer("forcebelch", math.random(20,30))
+		inst.components.timer:StartTimer("forcebelch", 10)
 	end
 end
 
@@ -27,11 +27,15 @@ local function LaunchProjectile(inst)
     local x1 = x + .01 * math.sin(angle)
     local z1 = z + .01 * math.cos(angle)	
 	local goo = SpawnPrefab("guardian_goo")
+	if inst.tentbelch == true then
+		inst.tentbelch = false
+		goo.tentacle = true
+	end
     goo.Transform:SetPosition(x1, y+3, z1)
 	goo.Transform:SetRotation(angle / DEGREES)
 	goo._caster = inst
 	
-	Launch2(goo, inst, inst.projectilespeed, 2, 2, 4)
+	Launch2(goo, inst, inst.projectilespeed, 3, 2, 3)--15+inst.projectilespeed^1.2)
 end
 
 env.AddPrefabPostInit("minotaur", function(inst)
@@ -40,6 +44,7 @@ env.AddPrefabPostInit("minotaur", function(inst)
 	end
 	inst.forceleap = false
 	inst.forcebelch = false
+	inst.tentbelch = true
 	inst.combo = 0
 	inst.components.timer:StartTimer("forceleapattack", math.random(30,45))
 	inst.components.timer:StartTimer("forcebelch", math.random(30,45))
