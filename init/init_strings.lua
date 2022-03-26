@@ -20,10 +20,10 @@ STRINGS.DSTU = {
 table.insert(GLOBAL.CHARACTER_GENDERS.FEMALE, "winky")
 
 STRINGS.NAMES.WINKY = "Winky"
-STRINGS.CHARACTER_TITLES.winky = "The Real and Not Fake"
+STRINGS.CHARACTER_TITLES.winky = "The Vile Vermin"
 STRINGS.CHARACTER_NAMES.winky = "winky"
-STRINGS.CHARACTER_DESCRIPTIONS.winky = "*freddie freaker\n*Dancing new sensation\n*sweeping the nation"
-STRINGS.CHARACTER_QUOTES.winky = "\"cheebs.\""
+STRINGS.CHARACTER_DESCRIPTIONS.winky = "*Is a Rat\n*Can dig interconnected burrows\n*'Is weak, but fast'\n*Can eat horrible foods\n*Hates to lose hold of things"
+STRINGS.CHARACTER_QUOTES.winky = "\"Squeak!\""
 
 STRINGS.ACTIONS.CREATE_BURROW = "Make Burrow"
 STRINGS.ACTIONS.ACTIVATE.RECRUITRAT = "Recruit A Rat"

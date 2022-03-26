@@ -1470,8 +1470,8 @@ local function fn_burrow()
 end
 
 local function WinkyInteract(inst, doer)
-	if doer:HasTag("ratwhisperer") and doer.components.hunger and doer.components.hunger.current >= 15 then
-		doer.components.hunger:DoDelta(-15)
+	if doer:HasTag("ratwhisperer") and doer.components.hunger and doer.components.hunger.current >= 20 then
+		doer.components.hunger:DoDelta(-20)
 	
 		local newrat = SpawnPrefab("uncompromising_rat")
 		newrat.Transform:SetPosition(inst.Transform:GetWorldPosition())
