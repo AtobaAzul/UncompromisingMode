@@ -1470,8 +1470,8 @@ local function fn_burrow()
 end
 
 local function WinkyInteract(inst, doer)
-	if doer:HasTag("ratwhisperer") and doer.components.hunger and doer.components.hunger.current >= 15 then
-		doer.components.hunger:DoDelta(-15)
+	if doer:HasTag("ratwhisperer") and doer.components.hunger and doer.components.hunger.current >= 20 then
+		doer.components.hunger:DoDelta(-20)
 	
 		local newrat = SpawnPrefab("uncompromising_rat")
 		newrat.Transform:SetPosition(inst.Transform:GetWorldPosition())
@@ -1531,6 +1531,10 @@ end
 
 local function onclose(inst)
 	inst.AnimState:PlayAnimation("dig")
+end
+
+local function GetActivateVerb(inst)
+	return "OPEN"
 end
 
 local function fn_winkyburrow()
@@ -1596,6 +1600,8 @@ local function fn_winkyburrow()
     inst.components.channelable.skip_state_stopchanneling = true
     inst.components.channelable.skip_state_channeling = true
     inst.components.channelable.ignore_prechannel = true
+	
+	inst.GetActivateVerb = GetActivateVerb
 	
 	inst:DoTaskInTime(1, BurrowAnim)
 	

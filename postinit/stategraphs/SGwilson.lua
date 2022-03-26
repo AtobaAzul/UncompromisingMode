@@ -120,7 +120,7 @@ local actionhandlers =
             return action.invobject ~= nil
                 and action.invobject:HasTag("wingsuit") and "castspell"
         end),
-	ActionHandler(ACTIONS.CREATEBURROW,
+	ActionHandler(ACTIONS.CREATE_BURROW,
         function(inst, action)
             return "dolongaction"
         end)

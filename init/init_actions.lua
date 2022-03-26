@@ -98,8 +98,8 @@ AddAction(
 )
 
 local createburrow = AddAction(
-	"CREATEBURROW",
-	"CREATEBURROW",
+	"CREATE_BURROW",
+	GLOBAL.STRINGS.ACTIONS.CREATE_BURROW,
 	function(act)
 		local act_pos = act:GetActionPoint()
 		if act.doer.components.hunger.current > 20 and not GLOBAL.TheWorld.Map:GetPlatformAtPoint(act_pos.x, act_pos.z) then
