@@ -189,3 +189,4 @@ local require = GLOBAL.require
 		modimport("init/init_gamemodes/init_hardcore")
 	end
 
+	modimport("init/init_loadingtips")
