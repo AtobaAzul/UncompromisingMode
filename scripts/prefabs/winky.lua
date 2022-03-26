@@ -41,7 +41,7 @@ local function GetPointSpecialActions(inst, pos, useitem, right)
     if right and useitem == nil then
         local rider = inst.replica.rider
         if rider == nil or not rider:IsRiding() then
-            return { ACTIONS.CREATEBURROW }
+            return { ACTIONS.CREATE_BURROW }
         end
     end
     return {}
@@ -71,11 +71,32 @@ local start_inv =
 }
 
 local function checkfav(inst, food)
-	if food ~= nil and food.prefab == "powcake" then
-		inst.components.hunger:DoDelta(15)
-		inst.components.health:DoDelta(15)
-		inst.components.sanity:DoDelta(15)
+	if food ~= nil and food.components.edible.foodtype == FOODTYPE.HORRIBLE then
+		local value = food.prefab == "powcake" and 5 or 0
+	
+		inst.components.hunger:DoDelta(10 + value)
+		inst.components.health:DoDelta(10 + value)
+		inst.components.sanity:DoDelta(10 + value)
 	end
+end
+
+local function OnPickSomething(inst, data)
+end
+
+local function OnDropItem(inst)
+	inst.components.sanity:DoDelta(-1)
+end
+
+local function sanityfn(inst)
+	local sanityvalue = -1
+
+	for i = 1, inst.components.inventory.maxslots do
+		if inst.components.inventory:GetItemInSlot(i) ~= nil then
+			sanityvalue = sanityvalue + 0.1
+		end
+	end
+
+    return sanityvalue
 end
 
 local function master_postinit(inst)
@@ -101,6 +122,8 @@ local function master_postinit(inst)
 	inst.components.health:SetMaxHealth(175)
 	inst.components.hunger:SetMax(150)
 	inst.components.sanity:SetMax(125)
+    --inst.components.sanity.custom_rate_fn = sanityfn
+	
 	inst.components.combat.damagemultiplier = TUNING.WENDY_DAMAGE_MULT
 	if TheWorld.state.isnight then
 		inst.components.locomotor:SetExternalSpeedMultiplier(inst, "im_winky_mother_frikker", 1.25) 
@@ -115,6 +138,10 @@ local function master_postinit(inst)
 			inst.components.locomotor:SetExternalSpeedMultiplier(inst, "im_winky_mother_frikker", 1.15)
 		end
 	end)
+	
+    --inst:ListenForEvent("picksomething", OnPickSomething)
+    inst:ListenForEvent("dropitem", OnDropItem)
+    --inst:ListenForEvent("itemlose", OnDropItem)
 end
 
 

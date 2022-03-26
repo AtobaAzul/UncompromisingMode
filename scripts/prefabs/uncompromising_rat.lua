@@ -1533,6 +1533,10 @@ local function onclose(inst)
 	inst.AnimState:PlayAnimation("dig")
 end
 
+local function GetActivateVerb(inst)
+	return "OPEN"
+end
+
 local function fn_winkyburrow()
 	local inst = CreateEntity()
 	
@@ -1596,6 +1600,8 @@ local function fn_winkyburrow()
     inst.components.channelable.skip_state_stopchanneling = true
     inst.components.channelable.skip_state_channeling = true
     inst.components.channelable.ignore_prechannel = true
+	
+	inst.GetActivateVerb = GetActivateVerb
 	
 	inst:DoTaskInTime(1, BurrowAnim)
 	
