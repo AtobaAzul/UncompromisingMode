@@ -29,13 +29,19 @@ local function DoSplatFx(inst)
 		goo = SpawnPrefab("shadow_puff")
 	else
 		goo = SpawnPrefab("guardian_splat")
+		if inst.tentacle == true then
+			local tent = SpawnPrefab("bigshadowtentacle")
+			tent.Transform:SetPosition(x,y,z)
+			tent:PushEvent("arrive")
+			goo:DoTaskInTime(0,function(goo) goo:ListenForEvent("animover",function(goo) goo:Remove() end) end)
+		end
 	end
 	goo.Transform:SetPosition(x, 0, z)
 end
 
 local function doprojectilehit(inst, other)
     local caster = (inst._caster ~= nil and inst._caster:IsValid()) and inst._caster or nil
-	local other = other or FindEntity(inst, TUNING.WARG_GOO_RADIUS * 3, { "_combat", "player" }, { "INLIMBO", "shadow" }) --I messed around with the funni goo, its range is actually a bit small, so I bumped it up a tad.
+	local other = other or FindEntity(inst, TUNING.WARG_GOO_RADIUS * 2, { "_combat", "player" }, { "INLIMBO", "shadow" }) --I messed around with the funni goo, its range is actually a bit small, so I bumped it up a tad.
 	if other ~= nil and other ~= caster and other.components.combat ~= nil  then
 		if inst.prefab == "shadow_goo" then
 			if other.components.sanity ~= nil and other.components.health ~= nil and not other.components.health:IsDead() and other.components.sanity:IsInsane() and other.components.inkable and not other:HasTag("shadowdominant") then
@@ -118,13 +124,18 @@ local function mainprojectilefn(anim)
     inst.Physics:CollidesWith(COLLISION.GROUND)
     inst.Physics:CollidesWith(COLLISION.OBSTACLES)
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-    inst.Physics:SetSphere(0.25)
+	if anim == "warg_gingerbread_bomb" then
+		inst.Physics:SetSphere(0.25)
+	else
+		inst.Physics:SetSphere(2)
+	end
 	
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
+	
 	inst.AnimState:SetBank(anim)
 	inst.AnimState:SetBuild(anim)
 	if anim == "warg_gingerbread_bomb" then
@@ -132,14 +143,14 @@ local function mainprojectilefn(anim)
 		inst.AnimState:SetMultColour(0, 0, 0, 0.4)		
 	end
 	if anim == "squid_watershoot" then
+		inst.tentacle = false
 		inst:Hide()
-		inst:DoTaskInTime(0.2,function(inst) inst:Show() end)
+		inst:DoTaskInTime(0.1,function(inst) inst:Show() end)
 	end
 	inst.AnimState:PushAnimation("spin_loop", true)
     inst.Physics:SetCollisionCallback(oncollide)
 
     inst.persists = false
-
     inst:AddComponent("locomotor")
 
 	inst:DoPeriodicTask(0, TestProjectileLand)
@@ -164,18 +175,20 @@ local function guardiansplat()
     inst.entity:AddPhysics()
     inst.entity:AddNetwork()
 	inst:AddTag("FX")
-	inst:AddTag("INLIMBO")
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
 	
-	inst.Transform:SetScale(0.5,0.5,0.5)
+	inst.Transform:SetScale(0.7,0.7,0.7)
 	inst.AnimState:SetBank("guardian_splat")
 	inst.AnimState:SetBuild("guardian_splat")
 	inst.AnimState:PlayAnimation("land")
 	inst.AnimState:PushAnimation("go away",false) --crap, forgot the "_" will fix later :sleep:
+	
+	inst:AddComponent("sanityaura")
+    inst.components.sanityaura.aura = -TUNING.SANITYAURA_LARGE
 	
 	inst:ListenForEvent("animqueueover",function(inst) inst:Remove() end)
     return inst

@@ -36,7 +36,11 @@ local function BounceStuff(inst) --Possibly upvaluehack this function in the fut
     end
 end
 
-
+local function SetUpProjectiles(inst)
+	for i = 1,5 do
+		inst:LaunchProjectile(inst)
+	end
+end
 
 env.AddStategraphPostInit("minotaur", function(inst)
 	local _OldAttackEvent = inst.events["doattack"].fn --Event handler to force the leap if we haven't done the leap for long enough (brainside leap still independent
@@ -153,6 +157,7 @@ State{ --This state is for the guardian belching a bunch of shadow goo out! It's
 				inst.AnimState:SetBank("um_minotaur_actions")
 				inst.AnimState:SetBuild("um_minotaur_actions")
 				inst.AnimState:PlayAnimation("belch")
+				inst.SoundEmitter:PlaySound("ancientguardian_rework/minotaur2/hurt")
 
 			end,
 			
@@ -165,52 +170,42 @@ State{ --This state is for the guardian belching a bunch of shadow goo out! It's
 			timeline=
 			{ 
 				TimeEvent(36*FRAMES, function(inst)
+					inst.SoundEmitter:PlaySound("ancientguardian_rework/minotaur2/bite")
 					inst.projectilespeed = 2
-					for i = 1,5 do
-						inst:LaunchProjectile(inst)
-					end
+					inst.tentbelch = true
+					SetUpProjectiles(inst)
 				 end), 			
 				TimeEvent(38*FRAMES, function(inst)
 					inst.projectilespeed = 3
-					for i = 1,5 do
-						inst:LaunchProjectile(inst)
-					end
+					SetUpProjectiles(inst)
 				 end), 				
 				TimeEvent(40*FRAMES, function(inst)
 					inst.projectilespeed = 4
-					for i = 1,5 do
-						inst:LaunchProjectile(inst)
-					end
+					inst.tentbelch = true
+					SetUpProjectiles(inst)
 				 end),
 				TimeEvent(42*FRAMES, function(inst)
 					inst.projectilespeed = 5
-					for i = 1,5 do
-						inst:LaunchProjectile(inst)
-					end
+					inst.tentbelch = true
+					SetUpProjectiles(inst)
 				 end), 
 				TimeEvent(44*FRAMES, function(inst)
 					inst.projectilespeed = 6
-					for i = 1,5 do
-						inst:LaunchProjectile(inst)
-					end
+					SetUpProjectiles(inst)
 				 end),
 				TimeEvent(46*FRAMES, function(inst)
 					inst.projectilespeed = 4
-					for i = 1,5 do
-						inst:LaunchProjectile(inst)
-					end
+					inst.tentbelch = true
+					SetUpProjectiles(inst)
 				 end),
 				TimeEvent(48*FRAMES, function(inst)
 					inst.projectilespeed = 5
-					for i = 1,5 do
-						inst:LaunchProjectile(inst)
-					end
+					SetUpProjectiles(inst)
 				 end), 
 				TimeEvent(50*FRAMES, function(inst)
 					inst.projectilespeed = 6
-					for i = 1,5 do
-						inst:LaunchProjectile(inst)
-					end
+					inst.tentbelch = true
+					SetUpProjectiles(inst)
 				 end), 
 			},		
 			

@@ -77,26 +77,26 @@ if TUNING.DSTU.WOLFGANG_HUNGERMIGHTY then
 	AllRecipes["dumbbell_golden"].ingredients ={Ingredient("goldnugget", 2), Ingredient("cutstone", 2), Ingredient("twigs", 2)}
 	AllRecipes["dumbbell_gem"].ingredients ={Ingredient("purplegem",  1), Ingredient("cutstone", 2), Ingredient("twigs", 2)}
 end
---[[
-	AddRecipe2("snowgoggles", {Ingredient("catcoonhat", 1), Ingredient("goggleshat",1), Ingredient("beefalowool",2)}, TECH.SCIENCE_TWO, {nil}, {"WINTER", "CLOTHING"})
 
-	AddRecipe2("ratpoisonbottle", {Ingredient("red_cap", 1), Ingredient("jammypreserves",1), Ingredient("rocks",1)}, TECH.SCIENCE_ONE, {nil})
+	AddRecipe2("snowgoggles", {Ingredient("catcoonhat", 1), Ingredient("goggleshat",1), Ingredient("beefalowool",2)}, TECH.SCIENCE_TWO, {nounlock=false}, {"WINTER", "CLOTHING"})
 
-	AddRecipe2("diseasecurebomb", {Ingredient("cactus_flower", 2), Ingredient("moonrocknugget", 2), Ingredient("spidergland", 3)}, TECH.SCIENCE_TWO, {nil}, {"GARDENING", "TOOLS", "RESTORATION"})
+	AddRecipe2("ratpoisonbottle", {Ingredient("red_cap", 1), Ingredient("jammypreserves",1), Ingredient("rocks",1)}, TECH.SCIENCE_ONE, {nounlock=false})
+
+	AddRecipe2("diseasecurebomb", {Ingredient("cactus_flower", 2), Ingredient("moonrocknugget", 2), Ingredient("spidergland", 3)}, TECH.SCIENCE_TWO, {nounlock=false}, {"GARDENING", "TOOLS", "RESTORATION"})
 
 	AddRecipe2("ghostlyelixir_fastregen", {Ingredient(GLOBAL.CHARACTER_INGREDIENT.HEALTH, 50), Ingredient("ghostflower", 4)},TECH.MAGIC_TWO, {builder_tag = "elixirbrewer"},{"CHARACTER"})
 
-	AddRecipe2("ice", {Ingredient("snowball_throwable", 4)},TECH.SCIENCE_ONE, nil, {"REFINE"})
+	AddRecipe2("ice", {Ingredient("snowball_throwable", 4)},TECH.SCIENCE_ONE, {nounlock=false}, {"REFINE"})
 
-	AddRecipe2("gasmask", {Ingredient("goose_feather", 10),Ingredient("red_cap", 2),Ingredient("pigskin",2)}, TECH.SCIENCE_TWO, nil, {"CLOTHING", "RAIN"})
+	AddRecipe2("gasmask", {Ingredient("goose_feather", 10),Ingredient("red_cap", 2),Ingredient("pigskin",2)}, TECH.SCIENCE_TWO, {nounlock=false}, {"CLOTHING", "RAIN"})
 
-	AddRecipe2("plaguemask", {Ingredient("gasmask", 1),Ingredient("red_cap", 2),Ingredient("rat_tail",4)}, TECH.SCIENCE_TWO, nil, {"CLOTHING", "RAIN"})
+	AddRecipe2("plaguemask", {Ingredient("gasmask", 1),Ingredient("red_cap", 2),Ingredient("rat_tail",4)}, TECH.SCIENCE_TWO, {nounlock=false}, {"CLOTHING", "RAIN"})
 
-	AddRecipe2("shroom_skin", {Ingredient("shroom_skin_fragment",4),Ingredient("froglegs",2)}, TECH.SCIENCE_TWO, nil, {"REFINE"})
+	AddRecipe2("shroom_skin", {Ingredient("shroom_skin_fragment",4),Ingredient("froglegs",2)}, TECH.SCIENCE_TWO, {nounlock=false}, {"REFINE"})
 
-	AddRecipe2("sporepack", {Ingredient("shroom_skin",1),Ingredient("rope", 2),Ingredient("spoiled_food",2)}, TECH.SCIENCE_TWO, nil, {"CLOTHING", "CONTAINERS"})
+	AddRecipe2("sporepack", {Ingredient("shroom_skin",1),Ingredient("rope", 2),Ingredient("spoiled_food",2)}, TECH.SCIENCE_TWO, {nounlock=false}, {"CLOTHING", "CONTAINERS"})
 
-	AddRecipe2("saltpack", {Ingredient("gears", 1),Ingredient("boards", 2),Ingredient("saltrock",8)}, TECH.SCIENCE_TWO, nil, {"TOOLS", "WINTER"})
+	AddRecipe2("saltpack", {Ingredient("gears", 1),Ingredient("boards", 2),Ingredient("saltrock",8)}, TECH.SCIENCE_TWO, {nounlock=false}, {"TOOLS", "WINTER"})
 
 	AddRecipe2("air_conditioner", {Ingredient("shroom_skin",2),Ingredient("gears", 1),Ingredient("cutstone",2)}, TECH.SCIENCE_TWO, {placer = "air_conditioner_placer"}, {"STRUCTURES"})
 
@@ -104,21 +104,21 @@ end
 
 	AddRecipe2("honey_log",   {Ingredient("livinglog", 1), Ingredient("honey", 2)}, TECH.NONE, {builder_tag = "plantkin"}, {"CHARACTER"})
 
-	AddRecipe2("bugzapper",   {Ingredient("spear", 1), Ingredient("transistor", 2), Ingredient("feather_canary", 2)}, TECH.SCIENCE_TWO, nil, {"WEAPONS"})
+	AddRecipe2("bugzapper",   {Ingredient("spear", 1), Ingredient("transistor", 2), Ingredient("feather_canary", 2)}, TECH.SCIENCE_TWO, {nounlock=false}, {"WEAPONS"})
 
 	AddRecipe2("slingshotammo_firecrackers",	{Ingredient("nitre", 2), Ingredient("cutgrass", 1)},TECH.SCIENCE_TWO, {deconstruction = true, num_to_give = 10, buider_tag = "pebblemaker"}, {"CHARACTER"})
 
-	AddRecipe2("watermelon_lantern", {Ingredient("watermelon", 1), Ingredient("fireflies", 1)}, TECH.SCIENCE_TWO, nil, {"LIGHT"} )
+	AddRecipe2("watermelon_lantern", {Ingredient("watermelon", 1), Ingredient("fireflies", 1)}, TECH.SCIENCE_TWO, {nounlock=false}, {"LIGHT"} )
 
-	AddRecipe2("rat_whip",   {Ingredient("twigs", 3), Ingredient("rope", 1), Ingredient("rat_tail", 3)}, TECH.SCIENCE_TWO, {"WEAPONS"})
+	AddRecipe2("rat_whip",   {Ingredient("twigs", 3), Ingredient("rope", 1), Ingredient("rat_tail", 3)}, TECH.SCIENCE_TWO, {nounlock=false}, {"WEAPONS"})
 
 	AddRecipe2("ancient_amulet_red", 	 {Ingredient("thulecite", 2), 		  Ingredient("nightmarefuel", 3),    Ingredient("redgem", 2)}, TECH.ANCIENT_FOUR, {nounlock= true})
 
 	AddRecipe2("turf_hoodedmoss", {Ingredient("twigs", 1), Ingredient("foliage", 1), Ingredient("moonrocknugget", 1)}, TECH.TURFCRAFTING_TWO, {num_to_give = 4}, {"DECOR"})
 	AddRecipe2("turf_ancienthoodedturf", {Ingredient("turf_hoodedmoss", 1), Ingredient("moonrocknugget", 1), Ingredient("thulecite_pieces", 1)}, TECH.TURFCRAFTING_TWO, {num_to_give = 4}, {"DECOR"})
 
-	AddRecipe2("um_bear_trap_equippable_tooth", {Ingredient("cutstone", 2), Ingredient("houndstooth", 3), Ingredient("rope", 1)}, TECH.SCIENCE_TWO, nil, {"WEAPONS"})
-	AddRecipe2("um_bear_trap_equippable_gold", {Ingredient("goldnugget", 4), Ingredient("houndstooth", 3), Ingredient("rope", 1)}, TECH.SCIENCE_TWO, nil, {"WEAPONS"})
+	AddRecipe2("um_bear_trap_equippable_tooth", {Ingredient("cutstone", 2), Ingredient("houndstooth", 3), Ingredient("rope", 1)}, TECH.SCIENCE_TWO, {nounlock= true}, {"WEAPONS"})
+	AddRecipe2("um_bear_trap_equippable_gold", {Ingredient("goldnugget", 4), Ingredient("houndstooth", 3), Ingredient("rope", 1)}, TECH.SCIENCE_TWO, {nounlock= true}, {"WEAPONS"})
 
 	AddRecipe2("armor_glassmail", {Ingredient("glass_scales", 1), Ingredient("moonglass_charged", 10)}, TECH.CELESTIAL_THREE, {nounlock = true})
 
@@ -126,14 +126,14 @@ end
 
 	AddRecipe2("book_rain", { Ingredient("papyrus", 2), Ingredient("moon_tear", 1), Ingredient("waterballoon", 4)}, TECH.MAGIC_THREE, {builder_tag = "bookbuilder"}, {"CHARACTER"})
 
-	AddRecipe2("driftwoodfishingrod", 	 {Ingredient("driftwood_log", 3), 		  Ingredient("silk", 3),    Ingredient("rope", 2)}, TECH.SCIENCE_TWO, nil, {"FISHING", "TOOLS"})
+	AddRecipe2("driftwoodfishingrod", 	 {Ingredient("driftwood_log", 3), 		  Ingredient("silk", 3),    Ingredient("rope", 2)}, TECH.SCIENCE_TWO, {nounlock=false}, {"FISHING", "TOOLS"})
 
 	AddRecipe2("hermitshop_rain_horn", {Ingredient("dormant_rain_horn",1), Ingredient("oceanfish_small_9_inv",3), Ingredient("messagebottleempty", 2)}, TECH.HERMITCRABSHOP_SEVEN, {nounlock = true, product = "rain_horn"})
 
-	AddRecipe2("hat_ratmask", {Ingredient("rope",2), Ingredient("rat_tail", 3), Ingredient("sewing_kit", 1)}, TECH.SCIENCE_TWO, nil, {"CLOTHING"})
+	AddRecipe2("hat_ratmask", {Ingredient("rope",2), Ingredient("rat_tail", 3), Ingredient("sewing_kit", 1)}, TECH.SCIENCE_TWO, {nounlock=false}, {"CLOTHING"})
 
-	AddRecipe2("floral_bandage", {Ingredient("bandage", 1), Ingredient("cactus_flower", 2)}, TECH.SCIENCE_TWO, nil, {"RESTORATION"})
-]]
+	AddRecipe2("floral_bandage", {Ingredient("bandage", 1), Ingredient("cactus_flower", 2)}, TECH.SCIENCE_TWO, {nounlock=false}, {"RESTORATION"})
+
 	AddRecipeToFilter("wardrobe", "CONTAINERS")
 	
 	--deconstruct recipes
