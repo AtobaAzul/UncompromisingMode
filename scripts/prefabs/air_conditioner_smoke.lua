@@ -74,9 +74,9 @@ local function bite(inst)
 		inst.components.infester.target.components.health:DoDelta(inst.blue / 2)
 		inst.components.infester.target.components.sanity:DoDelta(inst.green / 2)
 		
-		--if inst.components.infester.target.components.hayfever.nextsneeze < 240 then
-		--	inst.components.infester.target.components.hayfever:SetNextSneezeTime(inst.components.infester.target.components.hayfever.nextsneeze + inst.red)
-		--end
+		if inst.components.infester.target.components.hayfever ~= nil and inst.components.infester.target.components.hayfever.nextsneeze < 240 then
+			inst.components.infester.target.components.hayfever:SetNextSneezeTime(inst.components.infester.target.components.hayfever.nextsneeze + inst.red)
+		end
 	end
 end
 
