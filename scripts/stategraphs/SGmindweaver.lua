@@ -157,6 +157,7 @@ local states=
 			inst.AnimState:PlayAnimation("appear")
             inst.sg:SetTimeout(5)
             PlayExtendedSound(inst, "appear")
+			PlayExtendedSound(inst, "taunt")
         end,
 		
         events=

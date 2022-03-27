@@ -361,7 +361,7 @@ TUNING.DSTU =
 	EYEBRELLAREWORK = GetModConfigData("eyebrellarework"),
 
 --More Config
-    BETA_COMPATIBILITY = GetModConfigData("beta_compatibility"),
+    BETA_COMPATIBILITY = --[[GetModConfigData("beta_compatibility"),]] true, --I'm too lazy to really bother with the rest of the things
     POCKET_POWERTRIP = GetModConfigData("pocket_powertrip"),
     WINTER_BURNING = GetModConfigData("winter_burning"),
     HUNGRY_VOID = GetModConfigData("hungry_void"),

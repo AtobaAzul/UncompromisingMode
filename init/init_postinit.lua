@@ -39,6 +39,7 @@ local prefab_post = {
 	"butterfly",
     --"toadstool_cap", Moved to init_uncompromising_mod.lua
     "amulet",
+	"beequeen",
 	"cave_entrance_open",
 	"catcoon",
 	"icehound",
@@ -117,7 +118,6 @@ local prefab_post = {
 	--"bundle",
 	"eyebrella",
 	"birds",
-	"seedpouch",
 	"tonichandlers",
 	"houndwarning",
 	--"carnival_host",
@@ -130,6 +130,7 @@ local prefab_post = {
 	"darts",
 	"terrarium",
 	"bandage",
+	"grassgekko",
 	"minotaur_drops",
 }
 
@@ -289,6 +290,9 @@ if GetModConfigData("amalgams") then
 	table.insert(prefab_post,"chessjunk")
 end
 
+if GetModConfigData("moon_transformations") then
+	table.insert(prefab_post,"flower")
+end
 
 modimport("postinit/sim")
 modimport("postinit/any")
