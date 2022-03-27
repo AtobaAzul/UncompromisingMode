@@ -282,54 +282,6 @@ local function PiedPiperBuff(inst)
 	end
 end
 
-local function ShouldAcceptItem_Winky(inst, item, giver)
-    return giver:HasTag("ratwhisperer") and inst.components.eater:CanEat(item)
-end
-
-local function OnGetItemFromPlayer_Winky(inst, giver, item)
-    if inst.components.eater:CanEat(item) then
-		if inst._item ~= nil then
-			inst._item:Remove()
-		end
-
-		for k,v in pairs(inst.components.inventory.itemslots) do
-			giver.components.inventory:GiveItem(inst.components.inventory:RemoveItemBySlot(k))
-		end
-
-        inst.components.eater:Eat(item)
-		inst.sg:GoToState("eat", true)
-		
-        local playedfriendsfx = false
-        if inst.components.combat.target == giver then
-            inst.components.combat:SetTarget(nil)
-        elseif giver.components.leader ~= nil and
-            inst.components.follower ~= nil then
-            
-            if giver.components.minigame_participator == nil then
-                giver:PushEvent("makefriend")
-                giver.components.leader:AddFollower(inst)
-                playedfriendsfx = true
-            end
-        end
-    end
-end
-
-local function OnRefuseItem_Winky(inst, item)
-    inst.sg:GoToState("taunt")
-    if inst.components.sleeper:IsAsleep() then
-        inst.components.sleeper:WakeUp()
-    end
-end
-
-local function CalcSanityAura(inst, observer)
-    if observer:HasTag("ratwhisperer") or 
-    (inst.components.follower.leader ~= nil and inst.components.follower.leader:HasTag("ratwhisperer")) then
-        return 0
-    end
-    
-    return inst.components.sanityaura.aura
-end
-
 local function fn()
 	local inst = CreateEntity()
 	
@@ -485,13 +437,6 @@ local function fn()
     inst.components.periodicspawner:SetMinimumSpacing(10)
     inst.components.periodicspawner:Start()
 	--inst.components.periodicspawner.spawnoffscreen = true
-	
-    inst:AddComponent("trader")
-    inst.components.trader:SetAcceptTest(ShouldAcceptItem_Winky)
-    inst.components.trader:SetAbleToAcceptTest(ShouldAcceptItem_Winky)
-    inst.components.trader.onaccept = OnGetItemFromPlayer_Winky
-    inst.components.trader.onrefuse = OnRefuseItem_Winky
-    inst.components.trader.deleteitemonaccept = false
 	
 	inst:ListenForEvent("onattackother", OnAttackOther)
 	inst:ListenForEvent("attacked", OnAttacked)
@@ -988,15 +933,13 @@ local function BurrowAnim(inst)
 				inst.AnimState:PlayAnimation("idle_eyes_pst")
 				inst.AnimState:PushAnimation("idle", true)
 			end
-
-			if inst.components.timer ~= nil then
-				local scouttimer = inst.components.timer:GetTimeLeft("scoutingparty")
-				
-				if scouttimer ~= nil and scouttimer < 480 then
-					inst.AnimState:PlayAnimation("dig")
-					inst.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/submerge")
-					inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/mole/move", "shuffle")
-				end
+			
+			local scouttimer = inst.components.timer:GetTimeLeft("scoutingparty")
+			
+			if scouttimer ~= nil and scouttimer < 480 then
+				inst.AnimState:PlayAnimation("dig")
+				inst.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/submerge")
+                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/mole/move", "shuffle")
 			end
 		end
 	end
@@ -1465,246 +1408,6 @@ local function fn_burrow()
 	
     inst:DoTaskInTime(0, OnInit)
     inst:ListenForEvent("onremove", OnRemoved)
-	
-	return inst
-end
-
-local function WinkyInteract(inst, doer)
-	if doer:HasTag("ratwhisperer") and doer.components.hunger and doer.components.hunger.current >= 20 then
-		doer.components.hunger:DoDelta(-20)
-	
-		local newrat = SpawnPrefab("uncompromising_rat")
-		newrat.Transform:SetPosition(inst.Transform:GetWorldPosition())
-		doer.components.leader:AddFollower(newrat)
-		
-		inst.ratcount = inst.ratcount + 1
-		
-		if inst.ratcount >= 3 then
-			inst:winkyburrowremove()
-		end
-		
-		inst.AnimState:PlayAnimation("dig")
-		inst.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/submerge")
-	end
-end
-
-local function onsave_winkyburrow(inst, data)
-	if inst.ratcount ~= nil then
-		data.ratcount = inst.ratcount
-	end
-	
-	if inst.myowner ~= nil then
-		data.myowner = inst.myowner
-	end
-end
-
-local function onload_winkyburrow(inst, data)
-	if data ~= nil then
-		if data.ratcount ~= nil then
-			inst.ratcount = data.ratcount
-		end
-		
-		if data.myowner ~= nil then
-			inst.myowner = data.myowner
-		end
-	end
-end
-
-local function winkyburrowremove(inst)
-	inst:AddTag("NOCLICK")
-	inst.components.container:Close()
-	inst.components.sizetweener:StartTween(0.05, 1, inst.Remove)
-end
-
-local function WinkyBurrowDespawn(inst)
-	inst:winkyburrowremove()
-	inst.persists = false
-end
-
-local function OnStopChanneling(inst)
-	inst.channeler = nil
-end
-
-local function onopen(inst) 
-	inst.AnimState:PlayAnimation("dig")
-end
-
-local function onclose(inst)
-	inst.AnimState:PlayAnimation("dig")
-end
-
-local function GetActivateVerb(inst)
-	return "OPEN"
-end
-
-local function fn_winkyburrow()
-	local inst = CreateEntity()
-	
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-    inst.entity:AddMiniMapEntity()
-	inst.entity:AddNetwork()
-	
-	inst.AnimState:SetBank("uncompromising_rat_burrow")
-	inst.AnimState:SetBuild("uncompromising_rat_burrow")
-	inst.AnimState:PushAnimation("idle", true)
-	
-	inst:AddTag("ratburrow")
-	inst:AddTag("herd")
-    inst:AddTag("trader")
-	inst:AddTag("chest")
-	
-    inst.MiniMapEntity:SetIcon("uncompromising_ratburrow.tex")
-	
-	inst.Transform:SetScale(0.8, 0.8, 0.8)
-	
-	inst.entity:SetPristine()
-	
-	if not TheWorld.ismastersim then
-		inst.OnEntityReplicated = function(inst) 
-			if inst.replica.container ~= nil then
-				inst.replica.container:WidgetSetup("winkyburrow") 
-			end
-		end
-        return inst
-	end
-	
-	inst.ratcount = 0
-
-	inst:AddComponent("combat")
-	inst:AddComponent("inspectable")
-	inst:AddComponent("sizetweener")
-	
-	inst:AddComponent("container")
-	inst.components.container:WidgetSetup("winkyburrow")
-	inst.components.container.onopenfn = onopen
-	inst.components.container.onclosefn = onclose
-	inst.components.container.skipclosesnd = true
-	inst.components.container.skipopensnd = true
-	
-	inst:ListenForEvent("onopen", function() if TheWorld.components.winkyburrowinventory then TheWorld.components.winkyburrowinventory:empty(inst) end end)
-	inst:ListenForEvent("onclose", function() if TheWorld.components.winkyburrowinventory then TheWorld.components.winkyburrowinventory:fill(inst) end end)
-		
-	
-	
-	inst:AddComponent("workable")
-	inst.components.workable:SetOnFinishCallback(WinkyBurrowDespawn)
-	inst.components.workable:SetOnWorkCallback(nil)
-	inst.components.workable:SetWorkAction(ACTIONS.DIG)
-	inst.components.workable:SetWorkLeft(1)
-	
-    inst:AddComponent("channelable")
-    inst.components.channelable:SetChannelingFn(WinkyInteract, OnStopChanneling)
-    inst.components.channelable.use_channel_longaction = true
-    inst.components.channelable.skip_state_stopchanneling = true
-    inst.components.channelable.skip_state_channeling = true
-    inst.components.channelable.ignore_prechannel = true
-	
-	inst.GetActivateVerb = GetActivateVerb
-	
-	inst:DoTaskInTime(1, BurrowAnim)
-	
-	inst.winkyburrowremove = winkyburrowremove
-	inst.OnSave = onsave_winkyburrow
-	inst.OnLoad = onload_winkyburrow
-	
-    inst:DoTaskInTime(0, OnInit)
-    inst:DoTaskInTime(60, WinkyBurrowDespawn)
-	
-    inst:ListenForEvent("onremove", OnRemoved)
-	
-	return inst
-end
-
-local function fn_winkyhomeburrow()
-	local inst = CreateEntity()
-	
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-    inst.entity:AddMiniMapEntity()
-	inst.entity:AddNetwork()
-	
-	inst.AnimState:SetBank("uncompromising_rat_burrow")
-	inst.AnimState:SetBuild("uncompromising_rat_burrow")
-	inst.AnimState:PushAnimation("idle", true)
-	
-	inst:AddTag("ratburrow")
-	inst:AddTag("winkyburrow")
-	inst:AddTag("herd")
-    inst:AddTag("trader")
-	inst:AddTag("chest")
-	
-    inst.MiniMapEntity:SetIcon("uncompromising_ratburrow.tex")
-	
-	inst.entity:SetPristine()
-	
-	if not TheWorld.ismastersim then
-		inst.OnEntityReplicated = function(inst) 
-			if inst.replica.container ~= nil then
-				inst.replica.container:WidgetSetup("winkyburrow") 
-			end
-		end
-        return inst
-	end
-	
-	inst.ratcount = 0
-	inst.myowner = nil
-	
-	inst:AddComponent("combat")
-	inst:AddComponent("inspectable")
-	inst:AddComponent("sizetweener")
-	
-	inst:AddComponent("container")
-	inst.components.container:WidgetSetup("winkyburrow")
-	inst.components.container.onopenfn = onopen
-	inst.components.container.onclosefn = onclose
-	inst.components.container.skipclosesnd = true
-	inst.components.container.skipopensnd = true
-	
-	inst:ListenForEvent("onopen", function() if TheWorld.components.winkyburrowinventory then TheWorld.components.winkyburrowinventory:empty(inst) end end)
-	inst:ListenForEvent("onclose", function() if TheWorld.components.winkyburrowinventory then TheWorld.components.winkyburrowinventory:fill(inst) end end)
-		
-	inst:AddComponent("workable")
-	inst.components.workable:SetOnFinishCallback(WinkyBurrowDespawn)
-	inst.components.workable:SetOnWorkCallback(nil)
-	inst.components.workable:SetWorkAction(ACTIONS.DIG)
-	inst.components.workable:SetWorkLeft(1)
-	
-	inst:DoTaskInTime(1, BurrowAnim)
-	
-	inst.winkyburrowremove = winkyburrowremove
-	inst.OnSave = onsave_winkyburrow
-	inst.OnLoad = onload_winkyburrow
-	
-    inst:DoTaskInTime(0, OnInit)
-	
-    inst:ListenForEvent("onremove", OnRemoved)
-	
-	return inst
-end
-
-local function fn_winkyburrow_master()
-	local inst = CreateEntity()
-	
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddNetwork()
-	
-	inst:AddTag("chest")
-	
-	inst.entity:SetPristine()
-	
-	if not TheWorld.ismastersim then
-		return inst
-	end
-	inst:AddComponent("container")
-	inst.components.container:WidgetSetup("skullchest")
-	inst.components.container.onopenfn = onopen
-	inst.components.container.onclosefn = onclose
-	inst.components.container.skipclosesnd = true
-	inst.components.container.skipopensnd = true
 	
 	return inst
 end
@@ -2381,9 +2084,6 @@ return Prefab("uncompromising_rat", fn, assets, prefabs),
 	Prefab("uncompromising_packrat", packfn, assets, prefabs),
 	Prefab("uncompromising_ratherd", fn_herd, assets, prefabs),
 	Prefab("uncompromising_ratburrow", fn_burrow, assets, prefabs),
-	Prefab("uncompromising_winkyburrow", fn_winkyburrow, assets, prefabs),
-	Prefab("uncompromising_winkyhomeburrow", fn_winkyhomeburrow, assets, prefabs),
-	Prefab("uncompromising_winkyburrow_master", fn_winkyburrow_master, assets, prefabs),
 	Prefab("uncompromising_scoutburrow", fn_scoutburrow, assets, prefabs),
 	Prefab("uncompromising_ratsniffer", fn_sniffer, assets, prefabs),
 	Prefab("ratdroppings", fn_droppings, assets),

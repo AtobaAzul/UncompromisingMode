@@ -30,7 +30,7 @@ local ApplyIcecreamBuff = function(inst, eater)
         end
 
 
-if TUNING.DSTU.MEATBALL == true then
+if TUNING.DSTU.MEATBALL then
 	local MEATBALLS = 
 	{
 		"meatballs",
@@ -87,7 +87,7 @@ end
 	end
 	
 	
-if TUNING.DSTU.ICECREAMBUFF == true then
+if TUNING.DSTU.ICECREAMBUFF then
 	local ICECREAM = 
 	{
 		"icecream",
@@ -128,7 +128,7 @@ end]]
 
 recipes.baconeggs.priority = 9 --No more casino 50/50 baconeggs / monsterlasagna
 
-if TUNING.DSTU.FARMFOODREDUX == true then
+if TUNING.DSTU.FARMFOODREDUX then
 	local MASHEDPOTATOES = 
 	{
 		"mashedpotatoes",
@@ -268,7 +268,7 @@ if TUNING.DSTU.FARMFOODREDUX == true then
 			if inst ~= nil and inst.components.edible ~= nil then
 				inst.components.edible.hungervalue = 30
 				
-				if TUNING.DSTU.BUTTMUFFIN == true then
+				if TUNING.DSTU.BUTTMUFFIN then
 					inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERMUFFIN_HEALTH -- Changed to 50, down from 62.5
 				end
 
@@ -345,7 +345,7 @@ end
 AddPrefabPostInit("butterflywings", function (inst)
 	inst:AddTag("snapdragons_cant_eat")
 
-    if inst ~= nil and inst.components.edible ~= nil and TUNING.DSTU.BUTTERFLYWINGS_NERF == true then
+    if inst ~= nil and inst.components.edible ~= nil and TUNING.DSTU.BUTTERFLYWINGS_NERF then
         inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.FOOD_BUTTERFLY_WING_HEALTH
         inst.components.edible.hungervalue = GLOBAL.TUNING.DSTU.FOOD_BUTTERFLY_WING_HUNGER
         inst.components.edible.perishtime = GLOBAL.TUNING.DSTU.FOOD_BUTTERFLY_WING_HUNGER
@@ -381,7 +381,7 @@ AddPrefabPostInit("cookedmonstermeat", function (inst)
     end
 end)
 
-if GetModConfigData("rawcropsnerf") == true then
+if GetModConfigData("rawcropsnerf") then
 	AddPrefabPostInit("potato_cooked", function (inst)
     	if inst ~= nil and inst.components.edible ~= nil then
         	inst.components.edible.healthvalue = 8

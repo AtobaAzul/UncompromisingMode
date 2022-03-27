@@ -562,9 +562,11 @@ local function fn(Sim)
 
     inst.Transform:SetScale(1.3,1.3,1.3)
     
+    --MakePoisonableCharacter(inst)
 	MakeCharacterPhysics(inst, 500, 2.5)
 	
-
+    --MakeFlyingGiantCharacterPhysics(inst, 500, 1.4)
+	
 	
     inst.Physics:SetCollisionCallback(OnCollide)
 
@@ -584,11 +586,13 @@ local function fn(Sim)
     inst:AddTag("scarytoprey")
     inst:AddTag("largecreature")
 	inst:AddTag("ignorewalkableplatformdrowning")
+	--inst:AddTag("insect")
 	inst:AddTag("moonglasscreature")
     inst:AddTag("noepicmusic")
 
     inst._musicdirty = net_event(inst.GUID, "alterguardian_phase1._musicdirty", "musicdirty")
     inst._playingmusic = false
+    --inst._musictask = nil
     OnMusicDirty(inst)
 	
 	
@@ -629,6 +633,7 @@ local function fn(Sim)
     inst.components.combat:SetDefaultDamage(100)
     inst.components.combat.playerdamagepercent = .5
     inst.components.combat:SetRange(4)
+    --inst.components.combat:SetAreaDamage(6, 0.8)
 	inst.components.combat:SetAreaDamage(6, 0.8, isnottree)
     inst.components.combat.hiteffectsymbol = "dragonfly_body"
     inst.components.combat:SetAttackPeriod(TUNING.DRAGONFLY_ATTACK_PERIOD)
@@ -673,8 +678,13 @@ local function fn(Sim)
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("entitysleep", OnEntitySleep)
 
+    --[[MakeHugeFreezableCharacter(inst, "dragonfly_body")
+    inst.components.freezable.wearofftime = 1.5]]
+    --[[inst:ListenForEvent("freeze", OnFreeze)
+    inst:ListenForEvent("unfreeze", OnUnfreeze)]]
+	
 	--inst:AddComponent("vetcurselootdropper")
-	--inst.components.vetcurselootdropper.loot = "slobberlobber" Add a vetcurse drop later
+	--inst.components.vetcurselootdropper.loot = "slobberlobber"
 	
 	inst:DoTaskInTime(10, CheckTarget)
 

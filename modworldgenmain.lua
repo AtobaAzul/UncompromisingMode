@@ -340,22 +340,6 @@ end)
 
 local Layouts = GLOBAL.require("map/layouts").Layouts
 local StaticLayout = GLOBAL.require("map/static_layout")
-Layouts["specter_sea"] = StaticLayout.Get("map/static_layouts/specter_sea",{
-	min_dist_from_land = 0})
-
-AddRoomPreInit("OceanRough", function(room)
-	if not room.contents.countstaticlayouts then
-		room.contents.countstaticlayouts = {}
-	end
-	room.contents.countstaticlayouts["specter_sea"] = 1
-end)
-
-AddRoomPreInit("OceanHazardous", function(room)
-	if not room.contents.countstaticlayouts then
-		room.contents.countstaticlayouts = {}
-	end
-	room.contents.countstaticlayouts["rose_garden"] = 1
-end)
 
 AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "forest" then
@@ -364,52 +348,11 @@ AddTaskSetPreInitAny(function(tasksetdata)
 	table.insert(tasksetdata.tasks,"GiantTrees")
 	table.insert(tasksetdata.required_prefabs,"riceplantspawnerlarge")
 	table.insert(tasksetdata.required_prefabs,"riceplantspawner")
-	table.insert(tasksetdata.required_prefabs,"researchlab")
-	--tasksetdata.ocean_prefill_setpieces["specter_sea"] = {count = 1}
 end)
---[[
-AddTaskSetPreInitAny(function(tasksetdata)
-    if tasksetdata.location ~= "cave" then
-        return
-    end
-	table.insert(tasksetdata.tasks,"Ratty_Entrance")
-	table.insert(tasksetdata.tasks,"Ratty_Link")
-	table.insert(tasksetdata.tasks,"Ratty_Maze")
-	table.insert(tasksetdata.tasks,"Ratty_Maze")
-	table.insert(tasksetdata.tasks,"Ratty_Maze2")
-	table.insert(tasksetdata.tasks,"Ratty_Maze3")
-	
-	if tasksetdata.required_prefabs ~= nil then
-		table.insert(tasksetdata.required_prefabs,"ratking")
-		table.insert(tasksetdata.required_prefabs,"ratacombslock")
-	else
-		tasksetdata.required_prefabs = {"ratking","ratacombslock"}
-	end
-end)]]
-
 
 Layouts["hooded_town"] = StaticLayout.Get("map/static_layouts/hooded_town")
 Layouts["rose_garden"] = StaticLayout.Get("map/static_layouts/rose_garden")
 Layouts["hf_holidays"] = StaticLayout.Get("map/static_layouts/hf_holidays")
-
-Layouts["RatLockBlocker1"] = 						
-						{
-							type = GLOBAL.LAYOUT.CIRCLE_EDGE,
-							start_mask = GLOBAL.PLACE_MASK.NORMAL,
-							fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-							layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-							ground_types = {GLOBAL.GROUND.ROCKY},
-							defs =
-								{
-								 	rocks = { "ratacombslock_rock_spawner"},
-								},
-							count =
-								{
-									rocks = 1,
-								},
-							scale = 0.1,
-}
-
 
 AddRoomPreInit("HoodedTown", function(room)
 	if not room.contents.countstaticlayouts then

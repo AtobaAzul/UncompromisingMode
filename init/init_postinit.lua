@@ -28,18 +28,17 @@ local component_post = {
 
 local prefab_post = {
 	"wardrobe",
-	"hayfever_foods",
-	"pollenstuff",
+	"beequeen",
 	"pocketwatch_weapon",
 	"shieldofcthulu",
 	"clockworks",
 	"flingobalance",
 	"chester",
 	"mushlight",
+	"flower",
 	"butterfly",
     --"toadstool_cap", Moved to init_uncompromising_mod.lua
     "amulet",
-	"beequeen",
 	"cave_entrance_open",
 	"catcoon",
 	"icehound",
@@ -118,6 +117,7 @@ local prefab_post = {
 	--"bundle",
 	"eyebrella",
 	"birds",
+	"seedpouch",
 	"tonichandlers",
 	"houndwarning",
 	--"carnival_host",
@@ -130,7 +130,6 @@ local prefab_post = {
 	"darts",
 	"terrarium",
 	"bandage",
-	"grassgekko",
 	"minotaur_drops",
 }
 
@@ -147,7 +146,6 @@ local stategraph_post = {
 	--"merm",
 	"carnival_host",
 	"catcoon",
-	"beequeen",
 }
 
 local class_post = {
@@ -202,7 +200,7 @@ table.insert(prefab_post,"leif")
 table.insert(prefab_post,"leif_sparse")
 end
 
-if GetModConfigData("rework_minotaur") --[[and not GetModConfigData("beta_compatibility")]] then
+if GetModConfigData("rework_minotaur") then
 table.insert(stategraph_post,"minotaur")
 table.insert(prefab_post,"minotaur")
 table.insert(prefab_post,"pillar_ruins")
@@ -291,9 +289,6 @@ if GetModConfigData("amalgams") then
 	table.insert(prefab_post,"chessjunk")
 end
 
-if GetModConfigData("moon_transformations") then
-	table.insert(prefab_post,"flower")
-end
 
 modimport("postinit/sim")
 modimport("postinit/any")

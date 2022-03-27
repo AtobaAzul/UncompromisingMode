@@ -67,11 +67,7 @@ env.AddPrefabPostInit("twinofterror1", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-
-	if inst.components.health ~= nil then
-		inst.components.health:SetMaxHealth(TUNING.DSTU.TWIN1_HEALTH)
-	end
-
+	
     inst:ListenForEvent("attacked", OnAttacked)
 	
 	inst:DoPeriodicTask(5, UpdateCooldown1)
@@ -119,11 +115,7 @@ env.AddPrefabPostInit("twinofterror2", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-
-	if inst.components.health ~= nil then
-		inst.components.health:SetMaxHealth(TUNING.DSTU.TWIN2_HEALTH)
-	end
-
+	
     inst:ListenForEvent("attacked", OnAttacked)
 	
 	inst:DoPeriodicTask(5, UpdateCooldown2)

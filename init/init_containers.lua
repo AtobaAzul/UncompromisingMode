@@ -271,7 +271,6 @@ end
 
 modparams.skullchest = containers.params.shadowchester
 modparams.skullchest_child = containers.params.shadowchester
-modparams.winkyburrow = containers.params.shadowchester
 
 local old_wsetup = containers.widgetsetup
 

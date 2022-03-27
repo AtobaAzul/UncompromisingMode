@@ -29,25 +29,11 @@ SetSharedLootTable("mindweaver",
 
 local brain = require "brains/mindweaverbrain"
 
-local function FinishExtendedSound(inst, soundid)
-    inst.SoundEmitter:KillSound("sound_"..tostring(soundid))
-    inst.sg.mem.soundcache[soundid] = nil
-    if inst.sg.statemem.readytoremove and next(inst.sg.mem.soundcache) == nil then
-        inst:Remove()
-    end
-end
-
-local function PlayExtendedSound(inst, soundname)
-    if inst.sg.mem.soundcache == nil then
-        inst.sg.mem.soundcache = {}
-        inst.sg.mem.soundid = 0
-    else
-        inst.sg.mem.soundid = inst.sg.mem.soundid + 1
-    end
-    inst.sg.mem.soundcache[inst.sg.mem.soundid] = true
-    inst.SoundEmitter:PlaySound(inst.sounds[soundname], "sound_"..tostring(inst.sg.mem.soundid))
-    inst:DoTaskInTime(5, FinishExtendedSound, inst.sg.mem.soundid)
-end
+--local function Disappear(inst)
+	--if not inst.sg:HasStateTag("grabbing") and not inst.components.health:IsDead() then
+		--inst.sg:GoToState("grab")
+	--end
+--end
 
 local function ResetShadow(inst)
 	if inst.shadowsize ~= nil and inst.shadowsize > 0 then
@@ -81,7 +67,6 @@ local function ScanForPlayer(inst)
 			for i, v in ipairs(ents) do
 				inst.Physics:Teleport(v.Transform:GetWorldPosition())
 				--inst.Transform:SetPosition(v.Transform:GetWorldPosition())
-				PlayExtendedSound(inst, "taunt")
 				inst.components.follower:SetLeader(v)
 				break
 			end
@@ -189,7 +174,7 @@ local function fn(Sim)
 	end)
 	
 	inst:DoPeriodicTask(0.1, ScanForPlayer)
-	inst:DoTaskInTime(0,function(inst) PlayExtendedSound(inst, "taunt") end)
+	
 	--inst.ResetShadow = ResetShadow
 
     return inst

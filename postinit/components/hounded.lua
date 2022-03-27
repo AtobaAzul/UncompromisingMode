@@ -32,19 +32,19 @@ AddComponentPostInit("hounded", function(self)
         ["spring"] = {""},
         ["summer"] = {""},
     }
-	if TUNING.DSTU.SPOREHOUNDS then
+	if TUNING.DSTU.SPOREHOUNDS == true then
 	self.seasonal_prefabs["autumn"] = {"sporehound"}
 	end
 	
-	if TUNING.DSTU.GLACIALHOUNDS then
+	if TUNING.DSTU.GLACIALHOUNDS == true then
 	self.seasonal_prefabs["winter"] = {"glacialhound"}
 	end
 	
-	if TUNING.DSTU.LIGHTNINGHOUNDS then
+	if TUNING.DSTU.LIGHTNINGHOUNDS == true then
 	self.seasonal_prefabs["spring"] = {"lightninghound"}
 	end
 	
-	if TUNING.DSTU.MAGMAHOUNDS then
+	if TUNING.DSTU.MAGMAHOUNDS == true then
 	self.seasonal_prefabs["summer"] = {"magmahound"}
 	end    
 	
@@ -138,7 +138,7 @@ AddComponentPostInit("hounded", function(self)
 		print(self.varggraceperiod ~= nil and self.varggraceperiod + TUNING.DSTU.VARGWAVES_DELAY_PERIOD or "nil")
 		
         --replaces the first hound in a wave with a random boss hound
-        if pt and self.spawn_boss and magmaspawn_pt ~= nil and TUNING.DSTU.VARGWAVES and not TUNING.DSTU.BETA_COMPATIBILITY then
+        if pt and self.spawn_boss and magmaspawn_pt ~= nil and TUNING.DSTU.VARGWAVES == true then
             self.varggraceperiod = GLOBAL.TheWorld.state.cycles
 				
 				self.spawn_boss = false
@@ -337,7 +337,7 @@ AddComponentPostInit("hounded", function(self) --We can see if we can copy korea
 		local SpawnLimit = CalcSpawnLimit()
 
         --replaces the first hound in a wave with a random boss hound
-        if pt and self.spawn_boss and magmaspawn_pt ~= nil and TUNING.DSTU.VARGWAVES and not TUNING.DSTU.BETA_COMPATIBILITY then
+        if pt and self.spawn_boss and magmaspawn_pt ~= nil and TUNING.DSTU.VARGWAVES == true then
             self.spawn_boss = false
             prefab_list = self.seasonal_boss_prefabs[season]
             prefab = --[[math.random() < self.seasonal_boss_chance and #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or]] self.default_boss_prefab

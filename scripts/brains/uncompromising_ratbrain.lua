@@ -75,10 +75,6 @@ end
 local NO_TAGS = { "ratimmune", "FX", "NOCLICK", "DECOR", "INLIMBO", "planted", "trap", "raidrat", "spider", "catchable", "fire", "irreplaceable", "heavy", "prey", "bird", "outofreach", "_container" }
 
 local function StealAction(inst)
-	if inst.components.follower ~= nil and inst.components.follower:GetLeader() ~= nil and inst.components.follower:GetLeader():HasTag("ratwhisperer") then
-		return
-	end
-
 	local targetpriority = FindEntity(inst, SEE_DIST,
 	function(item)
 		return item.components.inventoryitem ~= nil
@@ -361,8 +357,7 @@ function Uncompromising_RatBrain:OnStart()
 			ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST)),
 			
 		RunAway(self.inst, "ghost", 8, 12),
-		RunAway(self.inst, {tags={"scarytoprey"}, notags={"ratwhisperer"}}, AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
-		--RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
+		RunAway(self.inst, "scarytoprey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
 			
 		Follow(self.inst, GetLeader, MIN_FOLLOW_LEADER, TARGET_FOLLOW_LEADER, MAX_FOLLOW_LEADER),
             FaceEntity(self.inst, GetLeader, GetLeader),

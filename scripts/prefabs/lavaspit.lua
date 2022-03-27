@@ -5,7 +5,7 @@ local assets=
 
 local easing = require("easing")
 
-local AURA_EXCLUDE_TAGS = { "player", "playerghost", "companion", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "flying", "dragonfly", "lavae", "invisible" }
+local AURA_EXCLUDE_TAGS = { "player", "playerghost", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "flying", "dragonfly", "lavae", "invisible" }
 
 local AURA_EXCLUDE_TAGS_DRAGONFLY = { "playerghost", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "flying", "dragonfly", "lavae", "invisible" }
 

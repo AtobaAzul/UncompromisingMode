@@ -46,8 +46,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "They're rataliating!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "It must lead to their labo-rat-ory."
     DESCRIBE.UNCOMPROMISING_RATBURROW = "It must lead to their labo-rat-ory."
-    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "It must lead to their labo-rat-ory."
-    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "It must lead to their labo-rat-ory."
     DESCRIBE.RATPOISONBOTTLE = "It's labeled \"Do not drink. That means you, Webber.\""
     DESCRIBE.RATPOISON = "It's all murdery."
 

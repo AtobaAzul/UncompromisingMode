@@ -25,7 +25,7 @@ env.AddPrefabPostInit("forest", function(inst)
         return
     end
 	
-	--inst:AddComponent("UM_springweather")
+	inst:AddComponent("hayfever_tracker")
 	--inst:AddComponent("monsoons")
 	--inst:WatchWorldState("isspring", RandomThreatSpring)
 	--inst:WatchWorldState("issummer", UndoRandomThreatSpring)
@@ -36,7 +36,7 @@ env.AddPrefabPostInit("cave", function(inst)
         return
     end
 	
-	--inst:AddComponent("UM_springweather") --Shouldn't do this, need to add the receiver component instead
+	inst:AddComponent("hayfever_tracker")
 	
 end)
 

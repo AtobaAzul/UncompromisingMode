@@ -1,24 +1,23 @@
-name = "[DEV] 󰀕 Uncompromising Mode"
-description =
+name = "󰀕 Uncompromising Mode"
+description = 
 [[
-󰀔 [ Version 1.1.5 : "The Hooded Forest" ]
+󰀔 [ Version 1.4.4.41 : "Squeaky Clean" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
 Prominent features:
-- Rebalances and tweaks to nearly everything
-- Random Night Events
-- New seasonal weather events
-- A new overworld biome
-- Character tweaks and rebalances
-- More nightmare creatures
-- A bunch of new mobs, items, and bosses
+- Reworked Rat Raids, Reworked Rat AI, New Rats, and Items.
+- New Night Terrors (RNE), with new Shadow Creatures, Music, collectible masks.
+- Tooltips for Character and Item changes.
+- Alternate Skins available for the Cursed Antler, Feather Frock, Plague Mask, and Soul Amulet.
+- Brand New custom attacks for all Eye of Terror bosses.
+- And many more changes, there are too many to list!
 
-󰀏 NEXT UPDATE: The Combat Update, which overhauls day-to-day fighting.]]
+󰀏 NEXT UPDATE: Under the Weather, Part I.]]
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "1.1.5"
+version = "Squeaky Clean v1.4.4.41"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
@@ -31,7 +30,7 @@ hamlet_compatible = false
 
 forge_compatible = false
 
-all_clients_require_mod = true
+all_clients_require_mod = true 
 
 icon_atlas = "modicon.xml"
 icon = "modicon.tex"
@@ -73,7 +72,7 @@ configuration_options =
 ------------------------------
 	--Header("Official Beta Compatibility"),
 	--BinaryConfig("beta_compatibility", "March QoL Beta", "This will enable proper compatibility for the beta Crafting, Ancient Guardian, and Varg Waves features.", false),
-
+	
 	Header("Mod Compatibility"),
 	BinaryConfig("um_music", "Official Soundtrack", "Disable this if you are crashing when using client music mods.", true),
 	BinaryConfig("hungry_void", "Anti-Voidwalk", "Disable this if you are using any mods that allow flight or traversal over the cave void.", true),
@@ -219,7 +218,7 @@ configuration_options =
 	default = 22,
 	},]]
     BinaryConfig("snowstorms", "Snowstorms", "Snowtorms impede on players' speed and vision if they are not wearing eye protection. Snowstorms also causes snow to build up on structures.", true),
-    BinaryConfig("hayfever", "Hayfever", "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.", false),
+    --BinaryConfig("hayfever", "Hayfever", "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.", false),
     BinaryConfig("winter_burning", "Harder Burning", "Winter makes it so setting stuff alight takes more time, and also finish burning faster.", true),
 	--BinaryConfig("acidrain", "Acid Rain", "After the First Year, Toadstool will grow poisionous mushtrees aboveground and pollute the world, making the rain acidic.", true),
 
@@ -600,7 +599,7 @@ configuration_options =
 	BinaryConfig("cooldown_orangestaff", "Cooldown Based Lazy Explorer", "Lazy explorer no longer has durabilty, but instead has cooldown, like Wanda's watches.\nSuggested by Lux.", false),
 ------------------------------
 -- Secret --
-------------------------------
+-------------------------------
     --Header("Secret"),
 ------------------------------
 

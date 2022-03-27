@@ -1,15 +1,4 @@
 return {
-    --Characters
-	"winky",
-	--"wixie",
-	--"wathom",
-	--"wickett",
-	--"winslow",
-	--"winky2",
-	--"whoppermeal",
-	--"wackytobackey",
-	--
-	
 	"deathstick",
 	"uncompromising_toad",
 	"mushroomsprout_overworld",
@@ -300,12 +289,4 @@ return {
 	"oculet_pets",
 	"terrarium",
 	"reedbuncher",
-	"uncompromising_pollen_fx",
-	"itemscrapper",
-	"um_spectersea_areahandler",
-	"specter_shipwreck",
-	"proto_william",
-	"phantom",
-	"spider_crabbit",
-	--"resurrectionphonograph",
 }

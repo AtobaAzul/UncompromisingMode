@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------
---[[ ScorpionSpawner class definition ]]
+--[[ FrogRain class definition ]]
 --------------------------------------------------------------------------
 
 return Class(function(self, inst)

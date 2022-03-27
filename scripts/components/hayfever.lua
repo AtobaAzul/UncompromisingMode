@@ -6,7 +6,7 @@ local Hayfever = Class(function(self, inst)
     self.inst = inst
     self.enabled = false
     self.sneezed = false
-    self.nextsneeze  = self:GetNextSneezTime()    
+    self.nextsneeze  = self:GetNextSneezeTime()
 end,
 nil,
 {
@@ -21,7 +21,7 @@ function Hayfever:DoDelta(amount)
     end
 end
 
-function Hayfever:GetNextSneezTime()
+function Hayfever:GetNextSneezeTime()
 	if self.inst:HasTag("plantkin") then
 		return math.random(80,120)
 	elseif self.inst:HasTag("allergictobees") then

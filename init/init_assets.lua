@@ -9,35 +9,6 @@ Assets = {
 	--Asset("IMAGE", "images/inventoryimages/turf_jungle.tex"),
 	----Turf
 
-	--WINKY!!!
-	
-    Asset( "IMAGE", "images/saveslot_portraits/winky.tex" ),
-    Asset( "ATLAS", "images/saveslot_portraits/winky.xml" ),
-
-    Asset( "IMAGE", "images/selectscreen_portraits/winky.tex" ),
-    Asset( "ATLAS", "images/selectscreen_portraits/winky.xml" ),
-
-    Asset( "IMAGE", "images/selectscreen_portraits/winky_silho.tex" ),
-    Asset( "ATLAS", "images/selectscreen_portraits/winky_silho.xml" ),
-
-    Asset( "IMAGE", "bigportraits/winky.tex" ),
-    Asset( "ATLAS", "bigportraits/winky.xml" ),
-
-	Asset( "IMAGE", "images/map_icons/winky.tex" ),
-	Asset( "ATLAS", "images/map_icons/winky.xml" ),
-
-    Asset( "IMAGE", "images/avatars/avatar_winky.tex" ),
-    Asset( "ATLAS", "images/avatars/avatar_winky.xml" ),
-	
-    Asset( "IMAGE", "images/avatars/avatar_ghost_winky.tex" ),
-    Asset( "ATLAS", "images/avatars/avatar_ghost_winky.xml" ),
-	
-	--
-
-
-
-
-
     -- Livingtree root attack custom art by @Advent (modded from poison birchnut roots)
     Asset("ANIM", "anim/tree_leaf_spike_lt.zip"),
     Asset("ANIM", "anim/frog_yellow_build.zip"),
@@ -694,12 +665,8 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/skullchest_child.tex"),
 	Asset("ATLAS", "images/inventoryimages/skullchest_child.xml"),
 	
-	Asset("ANIM", "anim/lush_grass.zip"),
-	Asset("ANIM", "anim/lush_trapdoorgrass.zip"),
 	Asset("ANIM", "anim/swap_driftwood_fishingrod.zip"),
-	Asset("ANIM", "anim/um_bq_actions.zip"),
 	Asset("ANIM", "anim/close_wardrobe.zip"),
-	Asset("ANIM", "anim/guardian_splat.zip"),
 	
 	--Dart Stuff
 	Asset("ANIM", "anim/um_blowguns.zip"),
@@ -734,7 +701,6 @@ Assets = {
 	
 	Asset("ANIM", "anim/ratking.zip"),
 	Asset("ANIM", "anim/garbage_pile.zip"),
-	Asset("ANIM", "anim/um_minotaur_actions.zip"),
 	
 	Asset("ANIM", "anim/rattotem.zip"),
 	--Map Icons Start--

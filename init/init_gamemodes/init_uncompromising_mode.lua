@@ -116,11 +116,11 @@ local require = GLOBAL.require
 	if GetModConfigData("snowstorms") == true then
 		modimport("init/init_weather/init_snowstorm")
 	end
-	
+	--[[
 	if GetModConfigData("hayfever") == true then
-		modimport("init/init_weather/init_springweather")
-		--modimport("init/init_creatures/init_sneeze_hitters")
-	end
+		modimport("init/init_weather/init_hayfever")
+		modimport("init/init_creatures/init_sneeze_hitters")
+	end]]
 	
 	modimport("init/init_durability")
 	
@@ -179,14 +179,11 @@ local require = GLOBAL.require
 		modimport("init/init_character_changes/wortox")
 	end
 	
-	if GetModConfigData("wormwood") then
 		modimport("init/init_character_changes/wormwood")
-	end
-	
 		modimport("init/init_character_changes/waxwell")
+	--end
 
 	if GetModConfigData("hardcore") then
 		modimport("init/init_gamemodes/init_hardcore")
 	end
 
-	modimport("init/init_loadingtips")
