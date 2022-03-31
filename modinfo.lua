@@ -1,7 +1,7 @@
 name = "󰀕 Uncompromising Mode"
 description = 
 [[
-󰀔 [ Version 1.4.4.55 : "Squeaky Clean" ]
+󰀔 [ Version 1.4.4.56 : "Squeaky Clean" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -17,7 +17,7 @@ Prominent features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Squeaky Clean v1.4.4.55"
+version = "Squeaky Clean v1.4.4.56"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
@@ -398,7 +398,7 @@ configuration_options =
 	BinaryConfig("firebitehounds", "Fiery Bite", "Red Hounds set players on fire when they attack.", true),
 	BinaryConfig("frostbitehounds", "Frozen Bite", "Blue Hounds freeze players when they attack.", true),
 	SkipSpace(),
-
+--[[
 	Header("Wave Changes"),
 	BinaryConfig("lategamehoundspread", "Descreased Lategame Frequency", "Enabling this decreases the frequency in the lategame so hounds are still a threat, but not annoying.", true),
 
@@ -440,7 +440,7 @@ configuration_options =
 		},
 		default = 15,
 	},
-
+]]
 	SkipSpace(),
 	Header("New Depths Worms"),
 	BinaryConfig("depthseels", "Depths Eels", "Electrified depths eels join the worm pack in Winter and Spring.", true),

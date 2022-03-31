@@ -186,11 +186,21 @@ TUNING.DSTU =
 	
 	FIREBITEHOUNDS = GetModConfigData("firebitehounds"),
 	FROSTBITEHOUNDS = GetModConfigData("frostbitehounds"),
-	VARGWAVES = GetModConfigData("vargwaves"),
-	VARGWAVES_BOSS_GRACE = GetModConfigData("vargwaves grace"),
-	VARGWAVES_DELAY_PERIOD = GetModConfigData("vargwaves delay"),
 	
-	LATEGAMEHOUNDSPREAD = GetModConfigData("lategamehoundspread"),
+	--o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-
+	--o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-
+	--Klei made Varg waves official, and reduced late game spread, 
+	--these settings are no longer needed (for now)
+	
+	VARGWAVES = false,--GetModConfigData("vargwaves"),
+	VARGWAVES_BOSS_GRACE = 100,--GetModConfigData("vargwaves grace"),
+	VARGWAVES_DELAY_PERIOD = 100,--GetModConfigData("vargwaves delay"),
+	
+	LATEGAMEHOUNDSPREAD = false,--GetModConfigData("lategamehoundspread"),
+	
+	--o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-
+	--o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-
+	
 	--Worm inclusion
 	DEPTHSEELS = GetModConfigData("depthseels"),
 	DEPTHSVIPERS = GetModConfigData("depthsvipers"),
