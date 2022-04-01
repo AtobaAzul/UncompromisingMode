@@ -36,6 +36,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "Filthy vermin!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "I don't recall granting you vermin permission to settle in my world."
     DESCRIBE.UNCOMPROMISING_RATBURROW = "I don't recall granting you vermin permission to settle in my world."
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "I don't recall granting you vermin permission to settle in my world."
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "I don't recall granting you vermin permission to settle in my world."
+	
+	DESCRIBE.WINKY =
+        {
+            GENERIC = "I didn't bring %s here, and I certainly didn't make her!",
+            ATTACKER = "Get your dirty paws away from me!",
+            MURDERER = "She smells of death.",
+            REVIVER = "Glad to be alive, but try not to touch my suit!",
+            GHOST = "%s died as she lived. As filthy, smelly rat.",
+            FIRESTARTER = "Why must all the creatures here have to cause trouble?",
+        }
+		
     DESCRIBE.RATPOISONBOTTLE = "Hmhm...I remember what the red ones were for now."
     DESCRIBE.RATPOISON = "A little something to keep the vermin at bay."
 
@@ -334,4 +347,5 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "That poor suit, ruined!"
 	DESCRIBE.PIED_PIPER_FLUTE = "I am NOT touching that, let alone putting it on my mouth."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Think you're clever, do you?"
+		DESCRIBE.WINONA_TOOLBOX = ""
 

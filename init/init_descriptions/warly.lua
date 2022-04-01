@@ -35,6 +35,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "Don't let the filthy little pestes near my kitchen!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "A trouble trou!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "A trouble trou!"
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "A trouble trou!"
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "A trouble trou!"
+	
+	DESCRIBE.WINKY =
+        {
+            GENERIC = "Make sure to wear a hair net around the food, %s!",
+            ATTACKER = "Keep that aggression away from my kitchen!",
+            MURDERER = "Murder is not worth a piece of cheese!",
+            REVIVER = "Thank you %s! Perhaps we could cook together some time.",
+            GHOST = "Well, atleast she's not in all the food anymore.",
+            FIRESTARTER = "Turn down the heat, %s! You'll burn all the food!",
+        }
+		
     DESCRIBE.RATPOISONBOTTLE = "Peace of mind in a bottle."
     DESCRIBE.RATPOISON = "Dinner is served..."
 
@@ -328,3 +341,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "How greasy!"
 	DESCRIBE.PIED_PIPER_FLUTE = "Must I really touch it?"
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Hands off the goods!"
+	DESCRIBE.WINONA_TOOLBOX = ""

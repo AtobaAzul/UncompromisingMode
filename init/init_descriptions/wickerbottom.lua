@@ -36,6 +36,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "Rodentia kleptomanis, and quite the large specimen!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "One entrance to a no doubt vast tunnel system!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "One entrance to a no doubt vast tunnel system!"
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "One entrance to a no doubt vast tunnel system!"
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "One entrance to a no doubt vast tunnel system!"
+	
+	DESCRIBE.WINKY =
+        {
+            GENERIC = "You defy classification, %s.",
+            ATTACKER = "Rats aren't typically aggressive unless threatened or starving.",
+            MURDERER = "Stay away from the children, %s!",
+            REVIVER = "You're quite evolved, %s!",
+            GHOST = "The sooner we help her, the sooner we can stop asking questions.",
+            FIRESTARTER = "%s has discovered fire, this is quite unprecedented!",
+        }
+		
     DESCRIBE.RATPOISONBOTTLE = "The toxic elements of the fungus have been fully activated."
     DESCRIBE.RATPOISON = "A minor chemical odor emanating from the mixture attracts rodents."
 
@@ -334,3 +347,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "Drenched in filth."
 	DESCRIBE.PIED_PIPER_FLUTE = "Filled with horrid diseases, I'm sure."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Have they gained intelligence, or did they steal it?"
+	DESCRIBE.WINONA_TOOLBOX = ""

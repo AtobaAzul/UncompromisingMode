@@ -35,6 +35,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORMWOOD.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "Hairy stuff stealer"
     DESCRIBE.UNCOMPROMISING_RATHERD = "Squeaker hole"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "Squeaker hole"
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Squeaker hole"
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Squeaker hole"
+	
+	DESCRIBE.WINKY =
+        {
+            GENERIC = "Hello large squeaker!",
+            ATTACKER = "Squeaker is mean!",
+            MURDERER = "Not friend! Mean Squeaker!",
+            REVIVER = "Big Squeaker have big heart?",
+            GHOST = "Oh, squeaker need help",
+            FIRESTARTER = "Hurt friends!",
+        }
+		
     DESCRIBE.RATPOISONBOTTLE = "Friend hat soup!"
     DESCRIBE.RATPOISON = "Smells good"
 
@@ -327,3 +340,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORMWOOD.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "Really big Squeaker"
 	DESCRIBE.PIED_PIPER_FLUTE = "Toot toot toot!"
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Squeaker carries more"
+	DESCRIBE.WINONA_TOOLBOX = ""

@@ -35,6 +35,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "Get away from my clocks!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "I think they just wanted an escape from the Ratacombs."
     DESCRIBE.UNCOMPROMISING_RATBURROW = "I think they just wanted an escape from the Ratacombs."
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "I think they just wanted an escape from the Ratacombs."
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "I think they just wanted an escape from the Ratacombs."
+	
+	DESCRIBE.WINKY =
+        {
+            GENERIC = "I think something went wrong in the timeline.",
+            ATTACKER = "Careful, %s!",
+            MURDERER = "This is the worst possible timeline!",
+            REVIVER = "Thank you, %s, but I've still got my eye on you.",
+            GHOST = "Maybe it's better this way.",
+            FIRESTARTER = "She's left destruction in her wake!",
+        }
+		
     DESCRIBE.RATPOISONBOTTLE = "Sorry it had to come to this."
     DESCRIBE.RATPOISON = "Your time has come, little ones..."
 
@@ -329,3 +342,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "How did we let it get this bad?"
 	DESCRIBE.PIED_PIPER_FLUTE = "Maybe it'd be worth the time to play."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "We must focus on that one!"
+	DESCRIBE.WINONA_TOOLBOX = ""

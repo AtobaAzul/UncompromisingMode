@@ -36,6 +36,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "I'd share, but they seem more interested in just TAKING our stuff."
     DESCRIBE.UNCOMPROMISING_RATHERD = "A Pine Tree Pioneer never enters a rat den head first!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "A Pine Tree Pioneer never enters a rat den head first!"
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "A Pine Tree Pioneer never enters a rat den head first!"
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "A Pine Tree Pioneer never enters a rat den head first!"
+	
+	DESCRIBE.WINKY =
+        {
+            GENERIC = "Woah! Are you a were-rat, %s?",
+            ATTACKER = "Hey, don't bite people %s!",
+            MURDERER = "Attack of the killer rat woman!",
+            REVIVER = "She's a NICE were-rat! What a twist!",
+            GHOST = "Haunted by the ghost of a were-rat? This would make a great story!",
+            FIRESTARTER = "I wouldn't have thought you knew how to start fires!",
+        }
+	
     DESCRIBE.RATPOISONBOTTLE = "If there's no other option..."
     DESCRIBE.RATPOISON = "I hope nothing friendly gets into it..."
 
@@ -331,3 +344,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "Keep it down, you might hurt Woby's ears!"
 	DESCRIBE.PIED_PIPER_FLUTE = "Woby doesn't want me to play it."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Whoa, he could be a great Pinetree Pioneer!"
+	DESCRIBE.WINONA_TOOLBOX = ""

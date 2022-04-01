@@ -35,6 +35,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "Wreched daemons wrought to topple the pillars of vanity."
     DESCRIBE.UNCOMPROMISING_RATHERD = "But one mouth of a den of thieves."
     DESCRIBE.UNCOMPROMISING_RATBURROW = "But one mouth of a den of thieves."
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "But one mouth of a den of thieves."
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "But one mouth of a den of thieves."
+	
+	DESCRIBE.WINKY =
+        {
+            GENERIC = "Live life while you can, %s.",
+            ATTACKER = "Perhaps it's in her nature to hurt others.",
+            MURDERER = "Another monster, another killer.",
+            REVIVER = "Do you value my life, %s? Or are you acting on instincts?",
+            GHOST = "Her short life has ended.",
+            FIRESTARTER = "Burning things won't rekindle the fire inside.",
+        }
+		
     DESCRIBE.RATPOISONBOTTLE = "There's a thought..."
     DESCRIBE.RATPOISON = "Even if I were to partake, this world would drag me back..."
 
@@ -327,3 +340,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "What a horrible sound."
 	DESCRIBE.PIED_PIPER_FLUTE = "Filled with the spit of that beast."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Your pack will not help you carry the burden of the world."
+	DESCRIBE.WINONA_TOOLBOX = ""

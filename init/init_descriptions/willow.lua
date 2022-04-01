@@ -35,6 +35,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "Stay away from Bernie!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "Eugh. Can we just smash it shut?"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "Eugh. Can we just smash it shut?"
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Eugh. Can we just smash it shut?"
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Eugh. Can we just smash it shut?"
+	
+	DESCRIBE.WINKY =
+        {
+            GENERIC = "Ew! A giant rat!",
+            ATTACKER = "Don't gnaw at my heels!",
+            MURDERER = "You'll never take my stuff, %s!",
+            REVIVER = "If I find any cheese, you're welcome to share it!",
+            GHOST = "I had a pet rat once. I wonder if she became a ghost too?",
+            FIRESTARTER = "You're not so bad for a rat, %s!",
+        }
+		
     DESCRIBE.RATPOISONBOTTLE = "Yea, this'll take care of those gross little jerks!"
     DESCRIBE.RATPOISON = "Cooome and get iiiiit..."
 
@@ -341,3 +354,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "Bleh! He reeks!"
 	DESCRIBE.PIED_PIPER_FLUTE = "I'm holding this over the fire first."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Keep Bernie out of that backpack!"
+	DESCRIBE.WINONA_TOOLBOX = ""

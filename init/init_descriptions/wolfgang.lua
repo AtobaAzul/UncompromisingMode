@@ -35,6 +35,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "Is greedy little hair puff!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "Beady eye hole make Wolfgang uncomfortable."
     DESCRIBE.UNCOMPROMISING_RATBURROW = "Beady eye hole make Wolfgang uncomfortable."
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Beady eye hole make Wolfgang uncomfortable."
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Beady eye hole make Wolfgang uncomfortable."
+	
+	DESCRIBE.WINKY =
+        {
+            GENERIC = "Ah! %s is bigger and scarier!",
+            ATTACKER = "Don't hurt me %s!",
+            MURDERER = "Scary rat is hurting people!",
+            REVIVER = "Thank you %s! But you still scary...",
+            GHOST = "Wolfgang hate rats! Wolfgang HATE ghosts!",
+            FIRESTARTER = "Do not burn things %s!",
+        }
+		
     DESCRIBE.RATPOISONBOTTLE = "Icky death soup."
     DESCRIBE.RATPOISON = "Wolfgang not have to catch rat if rat dead! Hah hah!"
 
@@ -330,3 +343,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "Aaaah! Biggest rat!"
 	DESCRIBE.PIED_PIPER_FLUTE = "At least rat is dead."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Little rat has backpack!"
+	DESCRIBE.WINONA_TOOLBOX = ""

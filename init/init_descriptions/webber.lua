@@ -35,6 +35,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "Nice fur!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "It's looking at us! Hey there little guy!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "It's looking at us! Hey there little guy!"
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "It's looking at us! Hey there little guy!"
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "It's looking at us! Hey there little guy!"
+	
+	DESCRIBE.WINKY =
+        {
+            GENERIC = "%s is kind of like us!",
+            ATTACKER = "You're giving us a bad name, %s!",
+            MURDERER = "I promise, I'm not mean like her!",
+            REVIVER = "Thank you %s! I knew we could be friends!",
+            GHOST = "Oh no! We should help her!",
+            FIRESTARTER = "Careful not to singe your fur, %s! Also, don't burn our stuff...",
+        }
+		
     DESCRIBE.RATPOISONBOTTLE = "Wendy really likes this stuff! Wonder what it tastes like..."
     DESCRIBE.RATPOISON = "Whoops! It's all spilled!"
 
@@ -328,4 +341,5 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "Can we have your hat?"
 	DESCRIBE.PIED_PIPER_FLUTE = "We always wanted to learn how to play."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Nice backpack!"
+	DESCRIBE.WINONA_TOOLBOX = ""
 

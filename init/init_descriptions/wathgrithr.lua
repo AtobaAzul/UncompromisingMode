@@ -36,6 +36,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "And thus cometh a plague upon both our houses!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "Den of the little beasts!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "Den of the little beasts!"
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Den of the little beasts!"
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Den of the little beasts!"
+	
+	DESCRIBE.WINKY =
+        {
+            GENERIC = "A man sized rat! Surely this is an omen!",
+            ATTACKER = "Keep thy teeth to thyself!",
+            MURDERER = "%s will bring a plague upon us!",
+            REVIVER = "Perhaps I judged too quickly!",
+            GHOST = "The beast is slain, but her spirit remains.",
+            FIRESTARTER = "A pox upon our crops and houses!",
+        }
+		
     DESCRIBE.RATPOISONBOTTLE = "My treasures, the bait. Mine fury, the trap."
     DESCRIBE.RATPOISON = "Emerge little plunderers, and face the end of days!"
 
@@ -328,3 +341,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "I will fell you, commander!"
 	DESCRIBE.PIED_PIPER_FLUTE = "The songs I could play!"
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Coward, stop running off!"
+	DESCRIBE.WINONA_TOOLBOX = ""

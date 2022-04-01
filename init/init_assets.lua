@@ -1,3 +1,17 @@
+
+RemapSoundEvent( "dontstarve/characters/winky/death_voice", "winky/characters/winky/death_voice" )
+RemapSoundEvent( "dontstarve/characters/winky/hurt", "winky/characters/winky/hurt" )
+RemapSoundEvent( "dontstarve/characters/winky/talk_LP", "winky/characters/winky/talk_LP" )
+RemapSoundEvent( "dontstarve/characters/winky/ghost_LP", "winky/characters/winky/ghost_LP" )
+RemapSoundEvent( "dontstarve/characters/winky/nightmare_LP", "winky/characters/winky/nightmare_LP" )
+RemapSoundEvent( "dontstarve/characters/winky/yawn", "winky/characters/winky/yawn" )
+RemapSoundEvent( "dontstarve/characters/winky/emote", "winky/characters/winky/emote" )
+RemapSoundEvent( "dontstarve/characters/winky/pose", "winky/characters/winky/pose" )
+RemapSoundEvent( "dontstarve/characters/winky/yawn", "winky/characters/winky/yawn" )
+RemapSoundEvent( "dontstarve/characters/winky/eye_rub_vo", "winky/characters/winky/eye_rub_vo" )
+RemapSoundEvent( "dontstarve/characters/winky/carol", "winky/characters/winky/carol" )
+RemapSoundEvent( "dontstarve/characters/winky/sinking", "winky/characters/winky/sinking" )
+
 Assets = {
 	----Turf
 	Asset( "IMAGE", "levels/textures/noise_hoodedmoss.tex" ),
@@ -9,6 +23,41 @@ Assets = {
 	--Asset("IMAGE", "images/inventoryimages/turf_jungle.tex"),
 	----Turf
 
+
+	--WINKY!!!
+	
+    Asset( "IMAGE", "images/saveslot_portraits/winky.tex" ),
+    Asset( "ATLAS", "images/saveslot_portraits/winky.xml" ),
+
+    Asset( "IMAGE", "images/selectscreen_portraits/winky.tex" ),
+    Asset( "ATLAS", "images/selectscreen_portraits/winky.xml" ),
+
+    Asset( "IMAGE", "images/selectscreen_portraits/winky_silho.tex" ),
+    Asset( "ATLAS", "images/selectscreen_portraits/winky_silho.xml" ),
+
+    Asset( "IMAGE", "bigportraits/winky.tex" ),
+    Asset( "ATLAS", "bigportraits/winky.xml" ),
+
+	Asset( "IMAGE", "images/map_icons/winky.tex" ),
+	Asset( "ATLAS", "images/map_icons/winky.xml" ),
+
+    Asset( "IMAGE", "images/avatars/avatar_winky.tex" ),
+    Asset( "ATLAS", "images/avatars/avatar_winky.xml" ),
+	
+    Asset( "IMAGE", "images/avatars/avatar_ghost_winky.tex" ),
+    Asset( "ATLAS", "images/avatars/avatar_ghost_winky.xml" ),
+	
+    Asset( "IMAGE", "images/names_gold_winky.tex" ),
+    Asset( "ATLAS", "images/names_gold_winky.xml" ),
+	
+    Asset( "IMAGE", "images/names_winky.tex" ),
+    Asset( "ATLAS", "images/names_winky.xml" ),
+
+	Asset("SOUNDPACKAGE", "sound/winky.fev"),
+	Asset("SOUND", "sound/winky.fsb"),
+	
+	
+	
     -- Livingtree root attack custom art by @Advent (modded from poison birchnut roots)
     Asset("ANIM", "anim/tree_leaf_spike_lt.zip"),
     Asset("ANIM", "anim/frog_yellow_build.zip"),

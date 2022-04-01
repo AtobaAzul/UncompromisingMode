@@ -35,6 +35,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "More vermin come to steal my kit!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "That's where the varments are shackin' up!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "That's where the varments are shackin' up!"
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "That's where the varments are shackin' up!"
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "That's where the varments are shackin' up!"
+	
+	DESCRIBE.WINKY =
+        {
+            GENERIC = "Are you cursed like me, %s?",
+            ATTACKER = "The only one who gnaws on logs here is me!",
+            MURDERER = "Keep your teeth to yourself, %s!",
+            REVIVER = "I love these critters!",
+            GHOST = "Save the woodland animals!",
+            FIRESTARTER = "Rats are nothing but trouble!",
+        }
+		
     DESCRIBE.RATPOISONBOTTLE = "Feast your eyes on the deep woods gut bomb!"
     DESCRIBE.RATPOISON = "A little somethin' for the moochers' next visit..."
 
@@ -328,3 +341,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "He's leading all those dang varmints!"
 	DESCRIBE.PIED_PIPER_FLUTE = "Those varmints will have to listen to me!"
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Darn varmints!"
+	DESCRIBE.WINONA_TOOLBOX = ""

@@ -35,6 +35,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "Spiderfolk family? Have hair."
     DESCRIBE.UNCOMPROMISING_RATHERD = "Little eyes in hole! Hello!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "Little eyes in hole! Hello!"
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Little eyes in hole! Hello!"
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Little eyes in hole! Hello!"
+	
+	DESCRIBE.WINKY =
+        {
+            GENERIC = "Hairy squeaky is nice squeaky!",
+            ATTACKER = "Squeaky is not nice!",
+            MURDERER = "%s is on a mean squeak!",
+            REVIVER = "Squeaky is friend to mermfolk!",
+            GHOST = "If help squeaky, then squeaky is friend?",
+            FIRESTARTER = "No burning, squeaky!",
+        }
+		
     DESCRIBE.RATPOISONBOTTLE = "Veggies but taste really bad."
     DESCRIBE.RATPOISON = "Spill! Wasn't good anyway."
 
@@ -329,3 +342,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "Definitely not spiderfolk!"
 	DESCRIBE.PIED_PIPER_FLUTE = "Not spiderfolk could join Merm kingdom?"
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Don't like him!"
+	DESCRIBE.WINONA_TOOLBOX = ""

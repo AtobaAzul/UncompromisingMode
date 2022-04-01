@@ -24,6 +24,12 @@ function CheckEquipItem(container, item, slot)
     return item:HasTag("_equippable")
 end
 
+function CheckHandItem(container, item, slot)
+    if item and item.components.equippable ~= nil then
+        return item.components.equippable.equipslot == EQUIPSLOTS.HANDS
+    end
+end
+
 function CheckGem(container, item, slot)
     return not item:HasTag("irreplaceable") and item:HasTag("gem")
 end
@@ -271,6 +277,7 @@ end
 
 modparams.skullchest = containers.params.shadowchester
 modparams.skullchest_child = containers.params.shadowchester
+modparams.winkyburrow = containers.params.shadowchester
 
 local old_wsetup = containers.widgetsetup
 
@@ -378,4 +385,33 @@ for y = 2.5, -1.5, -1 do
 	for x = 0, 4 do
 		table.insert(containers.params.wardrobe.widget.slotpos, Vector3(80*x-80*2, 80*y-80*2+120,0))
   	end
+end
+
+containers.params.winona_toolbox =
+{
+    widget =
+    {
+        slotpos = {},
+        slotbg = 
+        {
+			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+        },
+        animbank = "ui_tacklecontainer_3x2",
+        animbuild = "ui_tacklecontainer_3x2",
+        pos = Vector3(0, 200, 0),
+        side_align_tip = 160,
+    },
+    type = "chest",
+    itemtestfn = CheckHandItem,
+}
+
+for y = 1, 0, -1 do
+    for x = 0, 2 do
+        table.insert(containers.params.winona_toolbox.widget.slotpos, Vector3(80 * x - 80 * 2 + 80, 80 * y - 80 * 2 + 120, 0))
+    end
 end

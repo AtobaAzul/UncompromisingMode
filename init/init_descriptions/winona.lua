@@ -35,6 +35,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "That's one part of home I was hoping NOT to see again."
     DESCRIBE.UNCOMPROMISING_RATHERD = "Seems you've been ratted out!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "Seems you've been ratted out!"
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Seems you've been ratted out!"
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Seems you've been ratted out!"
+	
+	DESCRIBE.WINKY =
+        {
+            GENERIC = "Stay out of my machines please, %s!",
+            ATTACKER = "Don't let her bite me!",
+            MURDERER = "We need an exterminator to take care of her!",
+            REVIVER = "Thanks for the help, you mischievous thing!",
+            GHOST = "There must be hundreds of rats haunting the old factory back home!",
+            FIRESTARTER = "Were you chewing wires, %s? Did you start an electrical fire?!",
+        }
+		
     DESCRIBE.RATPOISONBOTTLE = "Darn, this stuff woulda put Red Squill to shame."
     DESCRIBE.RATPOISON = "Nice not having to worry about rat presents all over our stuff."
 
@@ -331,3 +344,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "Must be the boss of those rats."
 	DESCRIBE.PIED_PIPER_FLUTE = "I never was the best leader."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "I think we've found ourselves a target."
+	DESCRIBE.WINONA_TOOLBOX = ""
