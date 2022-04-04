@@ -36,10 +36,7 @@ AddComponentPostInit("edible", function(self)
     end
 
     self.GetSanity = function(self, eater)
-        local sanityvalue = _GetSanity(self, eater)
-        --if sanityvalue < 0 then
-        --    sanityvalue = 0
-        --end
+        local sanityvalue = _GetSanity(self, eater) or 0
         local addend = 0
 
         if eater and eater.components.foodaffinity then
