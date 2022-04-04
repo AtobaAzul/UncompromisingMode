@@ -1,7 +1,7 @@
 name = "󰀕 Uncompromising Mode"
 description = 
 [[
-󰀔 [ Version 1.4.4.6 : "Squeaky Clean" ]
+󰀔 [ Version 1.4.4.61 : "Squeaky Clean" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -17,7 +17,7 @@ Prominent features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Squeaky Clean v1.4.4.6"
+version = "Squeaky Clean v1.4.4.61"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
