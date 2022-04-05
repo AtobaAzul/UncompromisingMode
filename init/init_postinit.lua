@@ -201,7 +201,7 @@ table.insert(prefab_post,"leif")
 table.insert(prefab_post,"leif_sparse")
 end
 
-if GetModConfigData("rework_minotaur") then
+if GetModConfigData("rework_minotaur_disabled") then
 table.insert(stategraph_post,"minotaur")
 table.insert(prefab_post,"minotaur")
 table.insert(prefab_post,"pillar_ruins")

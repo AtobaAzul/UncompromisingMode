@@ -1,7 +1,7 @@
 name = "󰀕 Uncompromising Mode"
 description = 
 [[
-󰀔 [ Version 1.4.4.61 : "Squeaky Clean" ]
+󰀔 [ Version 1.4.4.62 : "Squeaky Clean" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -17,7 +17,7 @@ Prominent features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Squeaky Clean v1.4.4.61"
+version = "Squeaky Clean v1.4.4.62"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
@@ -218,7 +218,7 @@ configuration_options =
 	default = 22,
 	},]]
     BinaryConfig("snowstorms", "Snowstorms", "Snowtorms impede on players' speed and vision if they are not wearing eye protection. Snowstorms also causes snow to build up on structures.", true),
-    --BinaryConfig("hayfever", "Hayfever", "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.", false),
+    BinaryConfig("hayfever", "Hayfever", "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.", false),
     BinaryConfig("winter_burning", "Harder Burning", "Winter makes it so setting stuff alight takes more time, and also finish burning faster.", true),
 	--BinaryConfig("acidrain", "Acid Rain", "After the First Year, Toadstool will grow poisionous mushtrees aboveground and pollute the world, making the rain acidic.", true),
 
@@ -508,7 +508,7 @@ configuration_options =
 	Header(""),
 
 	BinaryConfig("harder_beequeen", "Harder Bee Queen", "Bee Queen now has AOE attached to her main attack.", true),
-	BinaryConfig("rework_minotaur", "Ancient Guardian Rework", "The Ancient Guardian's fight is reworked, includes more attacks and a stunning mechanic.", true),
+	BinaryConfig("rework_minotaur_disabled", "Ancient Guardian Rework", "[CURRENTLY BROKEN] The Ancient Guardian's fight is reworked, includes more attacks and a stunning mechanic.", false),
 	BinaryConfig("reworked_eyes", "Reworked Eyes of Terror", "Eye of Terror and the Twins have new attacks, inspired by their Terraria counterparts.", true),
 	Header(""),
 

@@ -116,11 +116,11 @@ local require = GLOBAL.require
 	if GetModConfigData("snowstorms") == true then
 		modimport("init/init_weather/init_snowstorm")
 	end
-	--[[
+	
 	if GetModConfigData("hayfever") == true then
 		modimport("init/init_weather/init_hayfever")
 		modimport("init/init_creatures/init_sneeze_hitters")
-	end]]
+	end
 	
 	modimport("init/init_durability")
 	

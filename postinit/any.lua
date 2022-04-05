@@ -162,7 +162,7 @@ env.AddPrefabPostInitAny(function(inst)
 end)
 
 --hornet; i dont care enough to know where to put this
---env.AddReplicableComponent("hayfever")
+env.AddReplicableComponent("hayfever")
 
 
 
