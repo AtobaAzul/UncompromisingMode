@@ -24,9 +24,6 @@ end
 function SkullChestInventory:LoadPostPass(ents, data)
 	if data.trunk and ents[data.trunk] then
 		self.trunk = ents[data.trunk].entity
-	else 
-		print("ROOT TRUNK WARNING: THERE WAS AN ERROR! THE OLD TRUNK WAS NOT FOUND, MUST CREATE A NEW ONE. ")
-		self.trunk = nil
 	end
 end
 
@@ -38,7 +35,7 @@ function SkullChestInventory:OnUpdate( dt )
 
 end
 
-function SkullChestInventory:empty( target )
+function SkullChestInventory:empty(target)
 	local t_cont = target.components.container
 	local cont = self.trunk.components.container
 	if t_cont and cont then		

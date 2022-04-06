@@ -117,7 +117,7 @@ AddComponentPostInit("hounded", function(self)
 		end
 	end
 
-    local function SummonSpawn(pt)
+    local function SummonSpawn(pt, upgrade)
         local spawn_pt = _GetSpawnPoint(pt)
         local magmaspawn_pt = GetMagmaSpawnPoint(pt)
         local season = GLOBAL.TheWorld.state.season
@@ -166,7 +166,7 @@ AddComponentPostInit("hounded", function(self)
 				return SpawnHounded(prefab, pt, spawn_pt)
 			end
         else
-            return _SummonSpawn(pt)
+            return _SummonSpawn(pt, upgrade)
         end
     end
 
