@@ -7,7 +7,7 @@ env.AddPrefabPostInit("shieldofterror", function(inst)
 	end
 	
 	if inst.components.armor ~= nil then
-		inst.components.armor:InitCondition(2*TUNING.SHIELDOFTERROR_ARMOR, TUNING.SHIELDOFTERROR_ABSORPTION)
+		inst.components.armor:InitCondition(TUNING.SHIELDOFTERROR_ARMOR * 2, TUNING.SHIELDOFTERROR_ABSORPTION)
 	end
 	
 	if inst.components.eater ~= nil then
@@ -17,6 +17,14 @@ env.AddPrefabPostInit("shieldofterror", function(inst)
 			--if food.prefab == "spoiled_food" or food:HasTag("spoiled_fish") then
 				local health = food.components.edible:GetHealth(inst) * inst.components.eater.healthabsorption
 				local hunger = food.components.edible:GetHunger(inst) * inst.components.eater.hungerabsorption
+				
+				if health < 0 then
+					health = food.components.edible:GetHealth(inst)
+				end
+				
+				if hunger < 0 then
+					hunger = food.components.edible:GetHunger(inst)
+				end
 				
 				if (health + hunger) < 0 then
 					health = 0
@@ -62,13 +70,13 @@ env.AddPrefabPostInit("eyemaskhat", function(inst)
 				local health = food.components.edible:GetHealth(inst) * inst.components.eater.healthabsorption
 				local hunger = food.components.edible:GetHunger(inst) * inst.components.eater.hungerabsorption
 				
-				--[[if health < 0 then
-					health = 0
-				end]]
+				if health < 0 then
+					health = food.components.edible:GetHealth(inst)
+				end
 				
-				--[[if hunger < 0 then
-					hunger = 0
-				end]]
+				if hunger < 0 then
+					hunger = food.components.edible:GetHunger(inst)
+				end
 				
 				if (health + hunger) < 0 then
 					health = 0
