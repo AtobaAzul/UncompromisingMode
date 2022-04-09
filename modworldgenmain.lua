@@ -136,34 +136,34 @@ end)
 end
 
 -----------Ghost Walrus
+if GetModConfigData("ghostwalrus") ~= "disabled" then
+	AddRoomPreInit("WalrusHut_Plains", function(room)					
+	room.contents.countprefabs=
+										{
+											um_bear_trap_old = function() return math.random(6,8) end,
+											ghost_walrus = function() return math.random(2,4) end,
+											walrus_camp = 1,
+											}
+	end)
 
-AddRoomPreInit("WalrusHut_Plains", function(room)					
-room.contents.countprefabs=
-									{
-										um_bear_trap_old = function() return math.random(6,8) end,
-										ghost_walrus = function() return math.random(2,4) end,
-										walrus_camp = 1,
-										}
-end)
+	AddRoomPreInit("WalrusHut_Grassy", function(room)					
+	room.contents.countprefabs=
+										{
+											um_bear_trap_old = function() return math.random(6,8) end,
+											ghost_walrus = function() return math.random(2,4) end,
+											walrus_camp = 1,
+											}
+	end)
 
-AddRoomPreInit("WalrusHut_Grassy", function(room)					
-room.contents.countprefabs=
-									{
-										um_bear_trap_old = function() return math.random(6,8) end,
-										ghost_walrus = function() return math.random(2,4) end,
-										walrus_camp = 1,
-										}
-end)
-
-AddRoomPreInit("WalrusHut_Rocky", function(room)					
-room.contents.countprefabs=
-									{
-										um_bear_trap_old = function() return math.random(6,8) end,
-										ghost_walrus = function() return math.random(2,4) end,
-										walrus_camp = 1,
-										}
-end)
-
+	AddRoomPreInit("WalrusHut_Rocky", function(room)					
+	room.contents.countprefabs=
+										{
+											um_bear_trap_old = function() return math.random(6,8) end,
+											ghost_walrus = function() return math.random(2,4) end,
+											walrus_camp = 1,
+											}
+	end)
+end
 -----------Marsh Grass
 AddRoomPreInit("BGMarsh", function(room)					
 room.contents.countprefabs=
@@ -304,12 +304,15 @@ LOCKS["HF"] = lockcount + 1
 LOCKS_KEYS[LOCKS.RICE] = {KEYS.RICE}
 LOCKS_KEYS[LOCKS.HF] = {KEYS.HF}
 
-AddTaskPreInit("Squeltch",function(task)
-	task.room_choices["ricepatch"] = 1 --Comment to test task based rice worldgen
-	task.room_choices["densericepatch"] = 1      --Comment to test task based rice worldgen
-end)
-
+if GetModConfigData("rice") then
+	AddTaskPreInit("Squeltch",function(task)
+		task.room_choices["ricepatch"] = 1 --Comment to test task based rice worldgen
+		task.room_choices["densericepatch"] = 1      --Comment to test task based rice worldgen
+	end)
+end
+if GetModConfigData("hoodedforest") then
 GLOBAL.require("map/tasks/gianttrees")
+end
 --[[GLOBAL.require("map/tasks/ratacombs")
 GLOBAL.require("map/rooms/caves/ratacombsrooms")
 GLOBAL.require("map/rooms/forest/ratking")
@@ -331,12 +334,14 @@ else
 end]]
 
 
-AddTaskPreInit("Forest hunters",function(task) --Leave Forest Hunters in incase someone adds something to its setpieces.
-	task.room_choices={
-		["Forest"] = 1,
-		["Clearing"] = 1,
-}
-end)
+if GetModConfigData("hoodedforest") then
+	AddTaskPreInit("Forest hunters",function(task) --Leave Forest Hunters in incase someone adds something to its setpieces.
+		task.room_choices={
+			["Forest"] = 1,
+			["Clearing"] = 1,
+	}
+	end)
+end
 
 local Layouts = GLOBAL.require("map/layouts").Layouts
 local StaticLayout = GLOBAL.require("map/static_layout")
@@ -345,70 +350,77 @@ AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "forest" then
         return
     end
-	table.insert(tasksetdata.tasks,"GiantTrees")
-	table.insert(tasksetdata.required_prefabs,"riceplantspawnerlarge")
-	table.insert(tasksetdata.required_prefabs,"riceplantspawner")
+	if GetModConfigData("hoodedforest") then
+		table.insert(tasksetdata.tasks,"GiantTrees")
+	end
+	if GetModConfigData("rice") then
+		table.insert(tasksetdata.required_prefabs,"riceplantspawnerlarge")
+		table.insert(tasksetdata.required_prefabs,"riceplantspawner")
+	end
 end)
 
 Layouts["hooded_town"] = StaticLayout.Get("map/static_layouts/hooded_town")
 Layouts["rose_garden"] = StaticLayout.Get("map/static_layouts/rose_garden")
 Layouts["hf_holidays"] = StaticLayout.Get("map/static_layouts/hf_holidays")
 
-AddRoomPreInit("HoodedTown", function(room)
-	if not room.contents.countstaticlayouts then
-		room.contents.countstaticlayouts = {}
-	end
-	room.contents.countstaticlayouts["hooded_town"] = 1
-end)
+if GetModConfigData("hoodedforest") then
+	AddRoomPreInit("HoodedTown", function(room)
+		if not room.contents.countstaticlayouts then
+			room.contents.countstaticlayouts = {}
+		end
+		room.contents.countstaticlayouts["hooded_town"] = 1
+	end)
 
-AddRoomPreInit("RoseGarden", function(room)
-	if not room.contents.countstaticlayouts then
-		room.contents.countstaticlayouts = {}
-	end
-	room.contents.countstaticlayouts["rose_garden"] = 1
-end)
+	AddRoomPreInit("RoseGarden", function(room)
+		if not room.contents.countstaticlayouts then
+			room.contents.countstaticlayouts = {}
+		end
+		room.contents.countstaticlayouts["rose_garden"] = 1
+	end)
 
-AddRoomPreInit("HFHolidays", function(room)
-	if not room.contents.countstaticlayouts then
-		room.contents.countstaticlayouts = {}
-	end
-	room.contents.countstaticlayouts["hf_holidays"] = 1
-end)
+	AddRoomPreInit("HFHolidays", function(room)
+		if not room.contents.countstaticlayouts then
+			room.contents.countstaticlayouts = {}
+		end
+		room.contents.countstaticlayouts["hf_holidays"] = 1
+	end)
+end
 
+if GetModConfigData("rice") then
 AddLevelPreInitAny(function(level)
     if level.location == "forest" then
         level.overrides.keep_disconnected_tiles = true
     end
 end)
+	for i = 1,4 do
+	Layouts["ricepatchsmall"..i] = StaticLayout.Get("map/static_layouts/ricepatchsmall"..i)
+	end
+	for i = 1,1 do
+	Layouts["ricepatchlarge"..i] = StaticLayout.Get("map/static_layouts/ricepatchlarge"..i)
+	end
 
-for i = 1,4 do
-Layouts["ricepatchsmall"..i] = StaticLayout.Get("map/static_layouts/ricepatchsmall"..i)
+	AddRoomPreInit("ricepatch", function(room)
+		if not room.contents.countstaticlayouts then
+			room.contents.countstaticlayouts = {}
+		end
+		local roomchoice = math.random(1,4)
+		local roomchoice2 = roomchoice
+		while roomchoice2 == roomchoice do
+			roomchoice2 = math.random(1,4)
+		end
+		room.contents.countstaticlayouts["ricepatchsmall"..roomchoice] = 1
+		if math.random() > 0.5 then
+		room.contents.countstaticlayouts["ricepatchsmall"..roomchoice2] = 1
+		end
+	end)
+
+	AddRoomPreInit("densericepatch", function(room)
+		if not room.contents.countstaticlayouts then
+			room.contents.countstaticlayouts = {}
+		end
+		room.contents.countstaticlayouts["ricepatchlarge1"] = 1
+	end)
 end
-for i = 1,1 do
-Layouts["ricepatchlarge"..i] = StaticLayout.Get("map/static_layouts/ricepatchlarge"..i)
-end
-
-AddRoomPreInit("ricepatch", function(room)
-	if not room.contents.countstaticlayouts then
-		room.contents.countstaticlayouts = {}
-	end
-	local roomchoice = math.random(1,4)
-	local roomchoice2 = roomchoice
-	while roomchoice2 == roomchoice do
-		roomchoice2 = math.random(1,4)
-	end
-	room.contents.countstaticlayouts["ricepatchsmall"..roomchoice] = 1
-	if math.random() > 0.5 then
-	room.contents.countstaticlayouts["ricepatchsmall"..roomchoice2] = 1
-	end
-end)
-
-AddRoomPreInit("densericepatch", function(room)
-	if not room.contents.countstaticlayouts then
-		room.contents.countstaticlayouts = {}
-	end
-	room.contents.countstaticlayouts["ricepatchlarge1"] = 1
-end)
 
 AddLevel(GLOBAL.LEVELTYPE.SURVIVAL, {
 	id = "UNCOMPROMISING",

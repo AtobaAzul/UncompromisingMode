@@ -2,7 +2,7 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 require "behaviours/runaway"
 -----------------------------------------------------------------
-local SEE_DIST = 20
+local SEE_DIST = 12
 
 local AVOID_PLAYER_DIST = 7
 local AVOID_PLAYER_STOP = 12
@@ -41,18 +41,19 @@ local function FrogFindFood(self)
     local avoidthenoid = RunAway(self.inst, "epic", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP , function(inst) 
 	local target = inst.components.combat.target ~= nil and inst.components.combat.target or nil
 	
-	if target ~= nil and target:HasTag("epic") then
+	if target ~= nil and target:HasTag("epic") and TUNING.DSTU.COWARDFROGS then
 		inst.components.combat:DropTarget()
 	end
 	
 	return true 
 	end)
-	
-    table.insert(self.bt.root.children, 2, avoidthenoid)
-
+	if TUNING.DSTU.COWARDFROGS then
+        table.insert(self.bt.root.children, 2, avoidthenoid)
+    end
     local findfood = DoAction(self.inst, EatFoodAction, "eat food", true)
-	
-    table.insert(self.bt.root.children, 4, findfood)
+	if TUNING.DSTU.HUNGRYFROGS then
+        table.insert(self.bt.root.children, 4, findfood)
+    end
 end
 
 env.AddBrainPostInit("frogbrain", FrogFindFood)
@@ -68,12 +69,13 @@ local function ToadFindFood(self)
 	
 	return true 
 	end)
-	
-    table.insert(self.bt.root.children, 2, avoidthenoid)
-
+    if TUNING.DSTU.COWARDFROGS then
+        table.insert(self.bt.root.children, 2, avoidthenoid)
+    end
     local findfood = DoAction(self.inst, EatFoodAction, "eat food", true)
-	
-    table.insert(self.bt.root.children, 4, findfood)
+    if TUNING.DSTU.HUNGRYFROGS then
+        table.insert(self.bt.root.children, 4, findfood)
+    end
 end
 
 env.AddBrainPostInit("uncompromising_toadbrain", ToadFindFood)

@@ -1525,11 +1525,22 @@ local function OnStopChanneling(inst)
 	inst.channeler = nil
 end
 
-local function onopen(inst) 
+local function onopen(inst, data)
+	if TheWorld.components.winkyburrowinventory.trunk and not TheWorld.components.winkyburrowinventory.trunk.components.container:IsOpen() then
+		TheWorld.components.winkyburrowinventory.trunk.Transform:SetPosition(data.doer.Transform:GetWorldPosition())
+		TheWorld.components.winkyburrowinventory.trunk.components.container:Open(data.doer)
+	else
+		inst.components.container:Close(data.doer)
+	end
+	
 	inst.AnimState:PlayAnimation("dig")
 end
 
-local function onclose(inst)
+local function onclose(inst, data)
+	if TheWorld.components.winkyburrowinventory.trunk then
+		TheWorld.components.winkyburrowinventory.trunk.components.container:Close(data.doer)
+	end
+	
 	inst.AnimState:PlayAnimation("dig")
 end
 
@@ -1550,7 +1561,7 @@ local function fn_winkyburrow()
 	inst.AnimState:SetBuild("uncompromising_rat_burrow")
 	inst.AnimState:PushAnimation("idle", true)
 	
-	inst:AddTag("ratburrow")
+	inst:AddTag("winky_storage")
 	inst:AddTag("herd")
     inst:AddTag("trader")
 	inst:AddTag("chest")
@@ -1564,7 +1575,7 @@ local function fn_winkyburrow()
 	if not TheWorld.ismastersim then
 		inst.OnEntityReplicated = function(inst) 
 			if inst.replica.container ~= nil then
-				inst.replica.container:WidgetSetup("winkyburrow") 
+				inst.replica.container:WidgetSetup("winkyburrow_child") 
 			end
 		end
         return inst
@@ -1577,16 +1588,11 @@ local function fn_winkyburrow()
 	inst:AddComponent("sizetweener")
 	
 	inst:AddComponent("container")
-	inst.components.container:WidgetSetup("winkyburrow")
+	inst.components.container:WidgetSetup("winkyburrow_child")
 	inst.components.container.onopenfn = onopen
 	inst.components.container.onclosefn = onclose
 	inst.components.container.skipclosesnd = true
 	inst.components.container.skipopensnd = true
-	
-	inst:ListenForEvent("onopen", function() if TheWorld.components.winkyburrowinventory then TheWorld.components.winkyburrowinventory:empty(inst) end end)
-	inst:ListenForEvent("onclose", function() if TheWorld.components.winkyburrowinventory then TheWorld.components.winkyburrowinventory:fill(inst) end end)
-		
-	
 	
 	inst:AddComponent("workable")
 	inst.components.workable:SetOnFinishCallback(WinkyBurrowDespawn)
@@ -1630,8 +1636,8 @@ local function fn_winkyhomeburrow()
 	inst.AnimState:SetBuild("uncompromising_rat_burrow")
 	inst.AnimState:PushAnimation("idle", true)
 	
-	inst:AddTag("ratburrow")
 	inst:AddTag("winkyburrow")
+	inst:AddTag("winky_storage")
 	inst:AddTag("herd")
     inst:AddTag("trader")
 	inst:AddTag("chest")
@@ -1643,7 +1649,7 @@ local function fn_winkyhomeburrow()
 	if not TheWorld.ismastersim then
 		inst.OnEntityReplicated = function(inst) 
 			if inst.replica.container ~= nil then
-				inst.replica.container:WidgetSetup("winkyburrow") 
+				inst.replica.container:WidgetSetup("winkyburrow_child") 
 			end
 		end
         return inst
@@ -1657,15 +1663,12 @@ local function fn_winkyhomeburrow()
 	inst:AddComponent("sizetweener")
 
 	inst:AddComponent("container")
-	inst.components.container:WidgetSetup("winkyburrow")
+	inst.components.container:WidgetSetup("winkyburrow_child")
 	inst.components.container.onopenfn = onopen
 	inst.components.container.onclosefn = onclose
 	inst.components.container.skipclosesnd = true
 	inst.components.container.skipopensnd = true
 	
-	inst:ListenForEvent("onopen", function() if TheWorld.components.winkyburrowinventory then TheWorld.components.winkyburrowinventory:empty(inst) end end)
-	inst:ListenForEvent("onclose", function() if TheWorld.components.winkyburrowinventory then TheWorld.components.winkyburrowinventory:fill(inst) end end)
-		
 	inst:AddComponent("workable")
 	inst.components.workable:SetOnFinishCallback(WinkyBurrowDespawn)
 	inst.components.workable:SetOnWorkCallback(nil)
@@ -1697,14 +1700,20 @@ local function fn_winkyburrow_master()
 	inst.entity:SetPristine()
 	
 	if not TheWorld.ismastersim then
-		return inst
+		inst.OnEntityReplicated = function(inst) 
+			if inst.replica.container ~= nil then
+				inst.replica.container:WidgetSetup("winkyburrow") 
+			end
+		end
+        return inst
 	end
+	
 	inst:AddComponent("container")
-	inst.components.container:WidgetSetup("skullchest")
-	inst.components.container.onopenfn = onopen
-	inst.components.container.onclosefn = onclose
-	inst.components.container.skipclosesnd = true
-	inst.components.container.skipopensnd = true
+	inst.components.container:WidgetSetup("winkyburrow")
+	--inst.components.container.onopenfn = onopen
+	--inst.components.container.onclosefn = onclose
+	--inst.components.container.skipclosesnd = true
+	--inst.components.container.skipopensnd = true
 	
 	return inst
 end

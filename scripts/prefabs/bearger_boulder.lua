@@ -120,7 +120,7 @@ local function projectilefn()
 end
 
 local COLLAPSIBLE_TAGS_PLAYER = { "_combat", "pickable", "NPC_workable" }
-local NON_COLLAPSIBLE_TAGS_PLAYER = { "player", "bird", "playerghost", "FX", "NOCLICK", "DECOR", "INLIMBO" }
+local NON_COLLAPSIBLE_TAGS_PLAYER = { "player", "bird", "rabbit", "playerghost", "FX", "NOCLICK", "DECOR", "INLIMBO", "wall", "companion"}
 
 local function OnHitInk_claw(inst, attacker, target)
 	local x, y, z = inst.Transform:GetWorldPosition()

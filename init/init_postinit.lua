@@ -132,6 +132,7 @@ local prefab_post = {
 	"bandage",
 	"grassgekko",
 	"minotaur_drops",
+	"frog",
 }
 
 local stategraph_post = {
@@ -262,12 +263,6 @@ end
 if GetModConfigData("reworked_eyes") then
 	table.insert(prefab_post,"eyeofterror")
 	table.insert(stategraph_post,"eyeofterror")
-end
-
-if GetModConfigData("hungry_frogs") then
-	table.insert(prefab_post,"frog")
-	table.insert(stategraph_post,"frog")
-	table.insert(brain_post,"frog")
 end
 
 if GetModConfigData("scalemailbuff") then

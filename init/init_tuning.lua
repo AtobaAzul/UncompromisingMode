@@ -385,6 +385,11 @@ TUNING.DSTU =
     VETCURSE = GetModConfigData("vetcurse"),
     MOON_TRANSFORMATIONS = GetModConfigData("moon_transformations"),
     AMALGAMS = GetModConfigData("amalgams"),
+    HUNGRYFROGS = GetModConfigData("hungryfrogs"),
+    COWARDFROGS = GetModConfigData("cowardfrogs"),
+    INSUL_THERMALSTONE = GetModConfigData("insul_thermalstone"),
+    HOODEDFOREST = GetModConfigData("hoodedforest"),
+    GHOSTWALRUS = GetModConfigData("ghostwalrus"),
 --boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
     TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),

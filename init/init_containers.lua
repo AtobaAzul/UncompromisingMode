@@ -46,6 +46,10 @@ function CheckFeather(container, item, slot)
     return item:HasTag("wingsuit_feather")
 end
 
+function CheckNOTHING(container, item, slot)
+    return false
+end
+
 local modparams = {}
 modparams.air_conditioner =
 {
@@ -258,6 +262,28 @@ modparams.corvushat =
     type = "hand_inv",
 }
 
+modparams.winkyburrow_child =
+{
+    widget =
+    {
+        slotpos = {},
+        slotbg = {},
+    },
+	itemtestfn = CheckNOTHING,
+    type = "special for shared inventory",
+}
+
+modparams.skullchest_child =
+{
+    widget =
+    {
+        slotpos = {},
+        slotbg = {},
+    },
+	itemtestfn = CheckNOTHING,
+    type = "special for shared inventory",
+}
+
 for y = 0, 3 do
     table.insert(modparams.puffvest.widget.slotpos, Vector3(-1, -75 * y + 110, 0))	
 end
@@ -276,7 +302,6 @@ for k, v in pairs(modparams) do
 end
 
 modparams.skullchest = containers.params.shadowchester
-modparams.skullchest_child = containers.params.shadowchester
 modparams.winkyburrow = containers.params.shadowchester
 
 local old_wsetup = containers.widgetsetup

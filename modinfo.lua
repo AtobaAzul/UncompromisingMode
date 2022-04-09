@@ -1,7 +1,7 @@
 name = "󰀕 Uncompromising Mode"
 description = 
 [[
-󰀔 [ Version 1.4.4.63 : "Squeaky Clean" ]
+󰀔 [ Version 1.4.4.64 : "Squeaky Clean" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -17,7 +17,7 @@ Prominent features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Squeaky Clean v1.4.4.63"
+version = "Squeaky Clean v1.4.4.64"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
@@ -236,6 +236,22 @@ configuration_options =
 	},]]
 
 	SkipSpace(),
+	Header("World Gen"),
+	BinaryConfig("hoodedforest", "Hooded Forest", "Hooded Forest replaces the Moon Base forest, with brand new things to explore, including a new boss!", true),
+	{
+		name = "ghostwalrus",
+		label = "Rusty Traps",
+		hover = "Mac tusk forgot to pick up some traps and left them to rust.",
+		options = 
+		{
+			{description = "Enabled", data = "enabled"},
+			{description = "Enabled (No Respawn)", data = "norespawn"},
+			{description = "Disabled", data = "disabled"},
+		},
+		default = "enabled",
+	},
+	BinaryConfig("rice","Rice","Rice spawns in ponds in the swamp.", true),
+	SkipSpace(),
 ------------------------------
 -- Character Reworks --
 ------------------------------
@@ -316,6 +332,7 @@ configuration_options =
 		},
 		default = 1,
 	},
+	BinaryConfig("insul_thermalstone", "Tweaked Thermal Stone", "Thermal stones now have less insulation, but inherit some insulation from clothing.", true),
 -----------------------------
 -- Food --
 -----------------------------
@@ -477,7 +494,8 @@ configuration_options =
 	BinaryConfig("harder_walrus","Harder MacTusk","Mactusk has a counter attack and can throw traps.", true),
 	BinaryConfig("harder_beefalo","Harder Beefalo","Beefalo ocasionally charge after a telegraph.", true),
 	BinaryConfig("harder_koalefants", "Harder Koalefants", "Koalefants have brand new attacks and doubled health", true),
-	BinaryConfig("hungry_frogs", "Hungry Frogs", "Frogs eat anything left on the floor.", true),
+	BinaryConfig("hungryfrogs", "Hungry Frogs", "Frogs eat anything left on the floor.", true),
+	BinaryConfig("cowardfrogs", "Frog Anti-cheese", "Frogs flee from bosses to prevent cheesing.", true),
 	BinaryConfig("toads", "Toads", "Toads replace frogs in the second autumn and release poisonous clouds on death.", true),
 
 	SkipSpace(),

@@ -41,10 +41,10 @@ AddComponentPostInit("edible", function(self)
 
         if eater and eater.components.foodaffinity then
             local affinity_bonus = eater.components.foodaffinity.prefab_affinites[self.inst.prefab]
-            if sanityvalue < 0 then
-                sanityvalue = 0
-            end
             if affinity_bonus then
+                if sanityvalue < 0 then
+                    sanityvalue = 0
+                end
                 local hungervalue = self.GetHunger(self, eater)
                 local healthvalue = self.GetHealth(self, eater)
                 local favoritefood_sanity = eater.components.foodaffinity.favoritefood_sanity

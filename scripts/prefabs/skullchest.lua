@@ -1,6 +1,11 @@
 require "prefabutil"
-local function onopen(inst) 
+local function onopen(inst, data) 
 	if not inst:HasTag("burnt") then
+		if TheWorld.components.skullchestinventory.trunk and not TheWorld.components.skullchestinventory.trunk.components.container:IsOpen() then
+			TheWorld.components.skullchestinventory.trunk.Transform:SetPosition(data.doer.Transform:GetWorldPosition())
+			TheWorld.components.skullchestinventory.trunk.components.container:Open(data.doer)
+		end
+	
 		inst.AnimState:PlayAnimation("open")
 		local x,y,z = inst.Transform:GetWorldPosition()
 		SpawnPrefab("shadow_despawn").Transform:SetPosition(x,y,z)
@@ -13,8 +18,12 @@ local function onopen(inst)
 	end
 end
 
-local function onclose(inst)
+local function onclose(inst, data)
 	if not inst:HasTag("burnt") then
+		if TheWorld.components.skullchestinventory.trunk then
+			TheWorld.components.skullchestinventory.trunk.components.container:Close(data.doer)
+		end
+	
 		inst.AnimState:PlayAnimation("close")
 	end
 end
@@ -51,14 +60,18 @@ local function MakeChest(name, bank, build, indestructible, master_postinit, pre
         inst.entity:AddMiniMapEntity()
         inst.entity:AddNetwork()
 
-        inst.MiniMapEntity:SetIcon(name..".png")
-
+		if name == "skullchest_child" then
+			inst.MiniMapEntity:SetIcon(name..".png")
+		end
         inst:AddTag("structure")
         inst:AddTag("chest")
 
-        inst.AnimState:SetBank(bank)
-        inst.AnimState:SetBuild(build)
-        inst.AnimState:PlayAnimation("closed")
+		if name == "skullchest_child" then
+			inst:AddTag("skull_storage")
+			inst.AnimState:SetBank(bank)
+			inst.AnimState:SetBuild(build)
+			inst.AnimState:PlayAnimation("closed")
+		end
 
 		MakeSnowCoveredPristine(inst)
 		
@@ -75,8 +88,12 @@ local function MakeChest(name, bank, build, indestructible, master_postinit, pre
         inst:AddComponent("inspectable")
         inst:AddComponent("container")
         inst.components.container:WidgetSetup(name)
-        inst.components.container.onopenfn = onopen
-        inst.components.container.onclosefn = onclose
+		
+		if name == "skullchest_child" then
+			inst.components.container.onopenfn = onopen
+			inst.components.container.onclosefn = onclose
+		end
+		
         inst.components.container.skipclosesnd = true
         inst.components.container.skipopensnd = true
 
@@ -100,10 +117,6 @@ local function MakeChest(name, bank, build, indestructible, master_postinit, pre
 
         inst:ListenForEvent("onbuilt", onbuilt)
         MakeSnowCovered(inst)
-		if name == "skullchest_child" then
-			inst:ListenForEvent("onopen", function() if TheWorld.components.skullchestinventory then TheWorld.components.skullchestinventory:empty(inst) end end)
-			inst:ListenForEvent("onclose", function() if TheWorld.components.skullchestinventory then TheWorld.components.skullchestinventory:fill(inst) end end)
-		end
 
         if master_postinit ~= nil then
             master_postinit(inst)

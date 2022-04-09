@@ -515,8 +515,9 @@ local function ghost_walrusfn() --ghost walrus
 	if not inst.components.timer:TimerExists("spawntrap") then
 	inst.components.timer:StartTimer("spawntrap", 2000+math.random(100,1000)) --ghost walrus leaves bear traps in the player's fridge
 	end
-	inst:ListenForEvent("timerdone", Spawntrap)
-
+    if TUNING.DSTU.GHOSTWALRUS == "enabled" then
+        inst:ListenForEvent("timerdone", Spawntrap)
+    end
     return inst
 end
 

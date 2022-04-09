@@ -64,7 +64,24 @@ function WinkyBurrowInventory:SpawnTrunk()
 		--print("SPAWN TRUNK!!!!!!!!!!!!!!!!!!!!!!!!")
 		self.trunk = SpawnPrefab("uncompromising_winkyburrow_master")
 	end
-	self.trunk:RemoveFromScene()
+	
+    self.trunk.entity:AddTag("NOBLOCK")
+
+    if self.trunk.Physics then
+        self.trunk.Physics:SetActive(false)
+    end
+    if self.trunk.Light and self.trunk.Light:GetDisableOnSceneRemoval() then
+        self.trunk.Light:Enable(false)
+    end
+    if self.trunk.AnimState then
+        self.trunk.AnimState:Pause()
+    end
+    if self.trunk.DynamicShadow then
+        self.trunk.DynamicShadow:Enable(false)
+    end
+    if self.trunk.MiniMapEntity then
+        self.trunk.MiniMapEntity:SetEnabled(false)
+    end
 end
 
 return WinkyBurrowInventory

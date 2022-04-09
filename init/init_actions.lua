@@ -133,3 +133,21 @@ createburrow.priority = HIGH_ACTION_PRIORITY
 createburrow.rmb = true
 createburrow.distance = 2
 createburrow.mount_valid = false
+
+local _RummageFn = GLOBAL.ACTIONS.RUMMAGE.fn
+
+GLOBAL.ACTIONS.RUMMAGE.fn = function(act)
+	local targ = act.target or act.invobject
+	
+	if targ ~= nil and targ:HasTag("winky_storage") then
+		if GLOBAL.TheWorld.components.winkyburrowinventory.trunk and GLOBAL.TheWorld.components.winkyburrowinventory.trunk.components.container:IsOpen() and not GLOBAL.TheWorld.components.winkyburrowinventory.trunk.components.container:IsOpenedBy(act.doer) then
+			return false, "INUSE"
+		end
+	elseif targ ~= nil and targ:HasTag("skull_storage") then
+		if GLOBAL.TheWorld.components.skullchestinventory.trunk and GLOBAL.TheWorld.components.skullchestinventory.trunk.components.container:IsOpen() and not GLOBAL.TheWorld.components.skullchestinventory.trunk.components.container:IsOpenedBy(act.doer) then
+			return false, "INUSE"
+		end
+	end
+
+	return _RummageFn(act)
+end

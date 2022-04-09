@@ -47,7 +47,7 @@
 <sequentialglobal>0</sequentialglobal>
 <spawntime_min>0</spawntime_min>
 <spawntime_max>0</spawntime_max>
-<spawn_max>1</spawn_max>
+<spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
 <pitch_randmethod>1</pitch_randmethod>
@@ -135,8 +135,8 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>0</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>0</spawntime_min>
-<spawntime_max>0</spawntime_max>
+<spawntime_min>1</spawntime_min>
+<spawntime_max>1</spawntime_max>
 <spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
@@ -249,9 +249,9 @@
 <shuffleglobal>0</shuffleglobal>
 <sequentialrememberposition>0</sequentialrememberposition>
 <sequentialglobal>0</sequentialglobal>
-<spawntime_min>0</spawntime_min>
-<spawntime_max>0</spawntime_max>
-<spawn_max>1</spawn_max>
+<spawntime_min>1</spawntime_min>
+<spawntime_max>1</spawntime_max>
+<spawn_max>2</spawn_max>
 <mode>0</mode>
 <pitch>0</pitch>
 <pitch_randmethod>1</pitch_randmethod>
@@ -520,7 +520,7 @@
 <name>/__simpleevent_sounddef__/hurt_16</name>
 <x>0</x>
 <width>1</width>
-<startmode>0</startmode>
+<startmode>1</startmode>
 <loopmode>1</loopmode>
 <loopcount2>-1</loopcount2>
 <autopitchenabled>0</autopitchenabled>
@@ -1336,7 +1336,7 @@
 <name>/__simpleevent_sounddef__/ghost_LP_20</name>
 <x>0</x>
 <width>1</width>
-<startmode>0</startmode>
+<startmode>1</startmode>
 <loopmode>1</loopmode>
 <loopcount2>-1</loopcount2>
 <autopitchenabled>0</autopitchenabled>
@@ -2099,7 +2099,7 @@
 <x>0</x>
 <width>1</width>
 <startmode>0</startmode>
-<loopmode>1</loopmode>
+<loopmode>0</loopmode>
 <loopcount2>-1</loopcount2>
 <autopitchenabled>0</autopitchenabled>
 <autopitchparameter>0</autopitchparameter>

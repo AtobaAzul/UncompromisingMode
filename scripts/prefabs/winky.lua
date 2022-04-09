@@ -217,45 +217,6 @@ ACTIONFAIL = STRINGS.CHARACTERS.WINKY.ACTIONFAIL
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "I'm stuck!"
 	ANNOUNCE.ANNOUNCE_SNOWSTORM = "The winds picking up..."
-	
-	ANNOUNCE.SHADOWTALKER = {
-        "THERES NO ESCAPE",
-        "THEY ARE OUT THERE, WATCHING, ALWAYS",
-        "IT'S ONLY A MATTER OF TIME",
-        "WHAT YEAR IS IT OUT THERE?",
-        "NOTHING BUT DARKNESS",
-        "IT'S A NEVER ENDING CYCLE",
-        "HOW MANY TIMES HAVE I DIED HERE?",
-		"WHAT DID I DO TO DESERVE THIS?",
-		"CAN I REALLY TRUST THEM?",
-    }
-	ANNOUNCE.VETERANCURSETAUNT = {
-		"COME CLOSER IF ADVERSITY IS WHAT YOU DESIRE",
-        "COME, LET THE CURSE WASH OVER YOU",
-        "SURVIVAL TOO EASY FOR YOU? I CAN HELP WITH THAT...",
-	}
-	ANNOUNCE.VETERANCURSED = {
-		"YOU'VE MADE YOUR CHOICE",
-        "TOO DIFFICULT FOR YOU?",
-        "CURSE TOO TOUGH? THERE IS ONLY ONE WAY OUT...", --should this still be here?
-	}
-	
-	ANNOUNCE.STANTON_GREET = {"Care to drink with the dead?", "Let's play a little game, how's about a drink?", "Come and drink with me.","I pick the drinks, you knock 'em back." }
-	ANNOUNCE.STANTON_GIVE = {"You seem willing, I'll drink with you.", "It'll be you then."}
-	ANNOUNCE.STANTON_RESTOCK = {"Still awake? We can drink again.", "I can give you another."}
-	ANNOUNCE.STANTON_RULES = {"I only drink with one at a time."}
-	ANNOUNCE.STANTON_GLOAT = {"Ha! I knew you were soft.", "Ha! You lose!"}
-
-	ANNOUNCE.STANTON_POET1 = { "When it's six to midnight and the boney hand of death is nigh."}
-	ANNOUNCE.STANTON_POET2 = { "You better drink your drink and shut your mouth."}
-	ANNOUNCE.STANTON_POET3 = { "If you draw against his hand, you can never win." }
-	ANNOUNCE.STANTON_POET4 = { "Go ahead… drink with the living dead." }
-	ANNOUNCE.STANTON_POET5 = { "Drink with the living dead." }
-
-	ANNOUNCE.STANTON_IMPATIENT = {"I'm getting tired of waiting here.","I ain't got all night!"}
-	ANNOUNCE.STANTON_SUPERIMPATIENT = {"I'm done waiting."}
-	
-	ANNOUNCE.SHADOW_CROWN_CHALLENGE = "DEFEAT THIS CREATURE AND CLAIM YOUR PRIZE"
 	ANNOUNCE.ANNOUNCE_OVER_EAT =
 	{
 		STUFFED = "I am so big and round!",
