@@ -71,7 +71,7 @@ function Hayfever:OnUpdate(dt)
                 -- large chance to sneeze twice in a row
                 if self.sneezed or math.random() > 0.7 then
                     self.sneezed = false
-                    self.nextsneeze = self:GetNextSneezTime()
+                    self.nextsneeze = self:GetNextSneezeTime()
                 else
                     self.sneezed = true
                     self.nextsneeze = 1
@@ -89,7 +89,7 @@ function Hayfever:OnUpdate(dt)
 				-- large chance to sneeze twice in a row
 				if self.sneezed or math.random() > 0.7 then
 					 self.sneezed = false
-					self.nextsneeze = self:GetNextSneezTime()
+					self.nextsneeze = self:GetNextSneezeTime()
 				else
 					self.sneezed = true
 					self.nextsneeze = 1
