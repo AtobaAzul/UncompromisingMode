@@ -750,7 +750,6 @@ Assets = {
 	
 	Asset("ANIM", "anim/ratking.zip"),
 	Asset("ANIM", "anim/garbage_pile.zip"),
-	Asset("ANIM", "anim/um_minotaur_actions.zip"),
 	
 	Asset("ANIM", "anim/rattotem.zip"),
 	--Map Icons Start--
