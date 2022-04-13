@@ -300,6 +300,4 @@ return {
 	"oculet_pets",
 	"terrarium",
 	"reedbuncher",
-}	"uncompromising_pollen_fx",
-	"winona_toolbox",
 }
