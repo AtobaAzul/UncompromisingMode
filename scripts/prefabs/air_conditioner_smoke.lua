@@ -66,7 +66,7 @@ local function bite(inst)
 	--[[if inst.components.infester.target:HasTag("playerghost") then
 		inst.components.infester.Uninfest()
 	else]]
-	if inst.components.infester.target:HasTag("playerghost") then
+	if inst.components.infester.target == nil or inst.components.infester.target:HasTag("playerghost") or inst:GetDistanceSqToInst(inst.components.infester.target) > 10 then
 		inst.components.health:Kill()
 	end
 	
@@ -91,15 +91,6 @@ local function findlight(inst)
     end, nil, notags)
 
     return light
-end
-
-local function stopinfesttest(inst)
-	if  TheWorld.state.isdusk or TheWorld.state.isnight then
-		local target = findlight(inst)
-		if target and inst:GetDistanceSqToInst(target) > 5*5 then
-			return target
-		end
-	end
 end
 
 local function ResetTimer(inst)
@@ -168,7 +159,6 @@ local function fn2()
 	inst.components.infester.basetime = 1
 	inst.components.infester.randtime = 0
 	inst.components.infester.bitefn = bite
-	inst.components.infester.stopinfesttestfn = stopinfesttest
 	
 	inst:AddComponent("timer")
 	

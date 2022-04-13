@@ -60,6 +60,7 @@ AddTile(
 
 
 -- <<Cave Update WIP: Toggle at your own risk you buffoons! (That means you atoba, don't leak it please eh?)>>
+-- I became a dev :sunglasses: - Atobá
 
 --Ruins Split, using this for ratacombs too.
 --[[AddLevelPreInitAny(function(level)
@@ -333,7 +334,6 @@ else
 	end)
 end]]
 
-
 if GetModConfigData("hoodedforest") then
 	AddTaskPreInit("Forest hunters",function(task) --Leave Forest Hunters in incase someone adds something to its setpieces.
 		task.room_choices={
@@ -342,7 +342,6 @@ if GetModConfigData("hoodedforest") then
 	}
 	end)
 end
-
 local Layouts = GLOBAL.require("map/layouts").Layouts
 local StaticLayout = GLOBAL.require("map/static_layout")
 
@@ -354,14 +353,14 @@ AddTaskSetPreInitAny(function(tasksetdata)
 		table.insert(tasksetdata.tasks,"GiantTrees")
 	end
 	if GetModConfigData("rice") then
-		table.insert(tasksetdata.required_prefabs,"riceplantspawnerlarge")
-		table.insert(tasksetdata.required_prefabs,"riceplantspawner")
+	table.insert(tasksetdata.required_prefabs,"riceplantspawnerlarge")
+	table.insert(tasksetdata.required_prefabs,"riceplantspawner")
 	end
 end)
 
-Layouts["hooded_town"] = StaticLayout.Get("map/static_layouts/hooded_town")
-Layouts["rose_garden"] = StaticLayout.Get("map/static_layouts/rose_garden")
-Layouts["hf_holidays"] = StaticLayout.Get("map/static_layouts/hf_holidays")
+	Layouts["hooded_town"] = StaticLayout.Get("map/static_layouts/hooded_town")
+	Layouts["rose_garden"] = StaticLayout.Get("map/static_layouts/rose_garden")
+	Layouts["hf_holidays"] = StaticLayout.Get("map/static_layouts/hf_holidays")
 
 if GetModConfigData("hoodedforest") then
 	AddRoomPreInit("HoodedTown", function(room)
@@ -421,7 +420,6 @@ end)
 		room.contents.countstaticlayouts["ricepatchlarge1"] = 1
 	end)
 end
-
 AddLevel(GLOBAL.LEVELTYPE.SURVIVAL, {
 	id = "UNCOMPROMISING",
 	name = GLOBAL.STRINGS.UI.CUSTOMIZATIONSCREEN.PRESETLEVELS.UNCOMPROMISING,

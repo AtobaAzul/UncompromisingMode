@@ -81,7 +81,7 @@ local BEAVERVISION_COLOURCUBES =
         inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
         inst.components.equippable:SetOnEquip(onequip)
         inst.components.equippable:SetOnUnequip(onunequip)
-		inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL/10
+		inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL/2
 		
 		inst:AddComponent("edible")
 		inst.components.edible.foodtype = FOODTYPE.HORRIBLE

@@ -85,7 +85,7 @@ local function Grab(inst)
 	local ents = TheSim:FindEntities(x, y, z, 1, RETARGET_CAN_TAGS, RETARGET_CANT_TAGS)
 	
 	for i, v in ipairs(ents) do
-		if v.LightWatcher:IsInLight() and not v.sg:HasStateTag("gotgrabbed") then
+		if v.components.health ~= nil and not v.components.health:IsDead() and v.LightWatcher:IsInLight() and not v.sg:HasStateTag("gotgrabbed") then
 			local fx = SpawnPrefab("rnesus_grab")
 			fx.entity:SetParent(inst.entity)
 				

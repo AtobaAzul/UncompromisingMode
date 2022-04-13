@@ -1243,22 +1243,24 @@ local function SpawnLesserFuelSeekers(player)
 	end
 end
 
-local function DoLesserThreat(player)
+local function DoLesserThreat(player, threat)
 	if TheWorld.state.isnight then
 		self.weightheodds = math.random()
 		
-		if self.weightheodds >= 0.83 then
+		if self.weightheodds >= 0.83 and not threat == "vortex" and not threat == "grabby" then
 			SpawnLesserShadowVortex(player)
-		elseif self.weightheodds < 0.83 and self.weightheodds >= 0.664 then
+		elseif self.weightheodds < 0.83 and self.weightheodds >= 0.664 and not threat == "grabby" and not threat == "vortex" then
 			SpawnLesserShadowGrabby(player)
-		elseif self.weightheodds < 0.664 and self.weightheodds >= 0.498 then
+		elseif self.weightheodds < 0.664 and self.weightheodds >= 0.498 and not threat == "weaver" then
 			SpawnLesserMindWeavers(player)
-		elseif self.weightheodds < 0.498 and self.weightheodds >= 0.332 then
+		elseif self.weightheodds < 0.498 and self.weightheodds >= 0.332 and not threat == "ticks" then
 			SpawnLesserNervousTicks(player)
-		elseif self.weightheodds < 0.332 and self.weightheodds >= 0.166 then
+		elseif self.weightheodds < 0.332 and self.weightheodds >= 0.166 and not threat == "crawlers" then
 			SpawnLesserNightCrawlers(player)
-		elseif self.weightheodds < 0.166 then
+		elseif self.weightheodds < 0.166 and not threat == "seekers" then
 			SpawnLesserFuelSeekers(player)
+		else
+			player:DoTaskInTime(0, function() DoLesserThreat(player, threat) end)
 		end
 	end
 end
@@ -1289,7 +1291,7 @@ local function SpawnShadowVortex(player)
 		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
 		
 		if days_survived >= 30 then
-			DoLesserThreat(player)
+			DoLesserThreat(player, "vortex")
 		end
 	end
 end
@@ -1327,7 +1329,7 @@ local function SpawnShadowGrabby(player)
 		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
 		
 		if days_survived >= 30 then
-			DoLesserThreat(player)
+			DoLesserThreat(player, "grabby")
 		end
 	end
 end
@@ -1348,7 +1350,7 @@ local function SpawnMindWeavers(player)
 		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
 		
 		if days_survived >= 30 then
-			DoLesserThreat(player)
+			DoLesserThreat(player, "weaver")
 		end
 	end
 end
@@ -1380,7 +1382,7 @@ local function SpawnNervousTicks(player)
 		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
 		
 		if days_survived >= 30 then
-			DoLesserThreat(player)
+			DoLesserThreat(player, "ticks")
 		end
 	end
 end
@@ -1412,7 +1414,7 @@ local function SpawnNightCrawlers(player)
 		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
 		
 		if days_survived >= 30 then
-			DoLesserThreat(player)
+			DoLesserThreat(player, "crawlers")
 		end
 	end
 end
@@ -1444,7 +1446,7 @@ local function SpawnFuelSeekers(player)
 		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
 		
 		if days_survived >= 30 then
-			DoLesserThreat(player)
+			DoLesserThreat(player, "seekers")
 		end
 	end
 end
@@ -1929,7 +1931,7 @@ local function IsEligible(player)
 end
 
 
-local function CheckPlayers()
+local function CheckPlayers(forced)
     _targetplayer = nil
     if #_activeplayers == 0 then
         return
@@ -1956,7 +1958,7 @@ local function CheckPlayers()
 	
 	local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
 	
-	if --[[TheWorld.state.cycles]]days_survived >= 5 and math.random() >= playerchancescaling or (days_survived >= 5 and TheWorld.state.isfullmoon) or (days_survived >= 5 and TheWorld.state.isnewmoon) then
+	if --[[TheWorld.state.cycles]]days_survived >= 5 and math.random() >= playerchancescaling or (days_survived >= 5 and TheWorld.state.isfullmoon) or (days_survived >= 5 and TheWorld.state.isnewmoon) or forced then
 		
 		--for i, 1 in ipairs(playerlist) do  --try a base RNE
 		if player ~= nil then
@@ -2027,7 +2029,7 @@ local function CheckPlayers()
 end
 
 local function TryRandomNightEvent(self)      --Canis said 20% chance each night to have a RNE, could possibly include a scaling effect later
-	CheckPlayers()
+	CheckPlayers(false)
 end
 --Keep these incase we need them later (probably)
 local function OnPlayerJoined(src,player)
@@ -2078,6 +2080,12 @@ end
 
 function self:OnPostInit()
 	OnSeasonTick()
+end
+
+function self:ForceRNE(forced)
+	if forced ~= nil and forced then
+		CheckPlayers(true)
+	end
 end
 
 inst:ListenForEvent("ms_playerjoined", OnPlayerJoined)

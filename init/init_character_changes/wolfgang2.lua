@@ -44,8 +44,10 @@ local function UpdateMightiness(inst)
 	if TUNING.DSTU.WOLFGANG_HUNGERMIGHTY == true then
 		inst.components.mightiness:SetPercent(hunger)
 	end
+end
 
-	if hunger >= 0.75 then
+local function UpdateKnockbackResistance(inst)
+	if inst.components.mightiness:IsMighty() then
 		inst:AddTag("fat_gang")
 	else
 		inst:RemoveTag("fat_gang")
@@ -53,7 +55,6 @@ local function UpdateMightiness(inst)
 end
 
 env.AddPrefabPostInit("wolfgang", function(inst)
-    
 	if inst ~= nil and inst.components.mightiness ~= nil then
 		if TUNING.DSTU.WOLFGANG_HUNGERMIGHTY == true then
 			inst.standardrate = TUNING.WILSON_HUNGER_RATE * 1.25
@@ -63,9 +64,9 @@ env.AddPrefabPostInit("wolfgang", function(inst)
 			inst.components.mightiness.rate = 0
 			inst:DoPeriodicTask(1, UpdateHungerDrain)
 			inst.components.hunger.current = TUNING.WOLFGANG_START_HUNGER
+			inst:ListenForEvent("hungerdelta", UpdateMightiness)
 		end
 		
-		inst:ListenForEvent("hungerdelta", UpdateMightiness)
+		inst:ListenForEvent("mightinessdelta", UpdateKnockbackResistance)
 	end
-	
 end)

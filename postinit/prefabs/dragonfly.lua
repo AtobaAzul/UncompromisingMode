@@ -64,14 +64,16 @@ env.AddPrefabPostInit("dragonfly", function (inst)
 	inst.components.lootdropper:AddChanceLoot("dragon_scales",    1.00)
 	
 		local function OnHitOther(inst, other)
-			if other:HasTag("creatureknockbackable") then
-			other:PushEvent("knockback", {knocker = inst, radius = 75, strengthmult = 1.25})
-			else
-			if other ~= nil and other.components.inventory ~= nil and not other:HasTag("fat_gang") and not other:HasTag("foodknockbackimmune") and not (other.components.rider ~= nil and other.components.rider:IsRiding()) and 
-			--Don't knockback if you wear marble
-			(other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ==nil or not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
-				other:PushEvent("knockback", {knocker = inst, radius = 75, strengthmult = 1.25})
-			end
+			if inst.sg.currentstate.name ~= "pound" then
+				if other:HasTag("creatureknockbackable") then
+					other:PushEvent("knockback", {knocker = inst, radius = 75, strengthmult = 1.25})
+				else
+					if other ~= nil and other.components.inventory ~= nil and not other:HasTag("fat_gang") and not other:HasTag("foodknockbackimmune") and not (other.components.rider ~= nil and other.components.rider:IsRiding()) and 
+					--Don't knockback if you wear marble
+					(other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ==nil or not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
+						other:PushEvent("knockback", {knocker = inst, radius = 75, strengthmult = 1.25})
+					end
+				end
 			end
 		end
 	

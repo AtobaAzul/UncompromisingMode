@@ -186,21 +186,11 @@ TUNING.DSTU =
 	
 	FIREBITEHOUNDS = GetModConfigData("firebitehounds"),
 	FROSTBITEHOUNDS = GetModConfigData("frostbitehounds"),
+	VARGWAVES = GetModConfigData("vargwaves"),
+	VARGWAVES_BOSS_GRACE = GetModConfigData("vargwaves grace"),
+	VARGWAVES_DELAY_PERIOD = GetModConfigData("vargwaves delay"),
 	
-	--o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-
-	--o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-
-	--Klei made Varg waves official, and reduced late game spread, 
-	--these settings are no longer needed (for now)
-	
-	VARGWAVES = false,--GetModConfigData("vargwaves"),
-	VARGWAVES_BOSS_GRACE = 100,--GetModConfigData("vargwaves grace"),
-	VARGWAVES_DELAY_PERIOD = 100,--GetModConfigData("vargwaves delay"),
-	
-	LATEGAMEHOUNDSPREAD = false,--GetModConfigData("lategamehoundspread"),
-	
-	--o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-
-	--o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-
-	
+	LATEGAMEHOUNDSPREAD = GetModConfigData("lategamehoundspread"),
 	--Worm inclusion
 	DEPTHSEELS = GetModConfigData("depthseels"),
 	DEPTHSVIPERS = GetModConfigData("depthsvipers"),
@@ -425,5 +415,21 @@ if GetModConfigData("wanda_nerf") == true then
 end
 
 TUNING.SLEEP_TICK_PERIOD = TUNING.SLEEP_TICK_PERIOD / TUNING.DSTU.SLEEPINGBUFF
+
+--Sailing Rebalance related tuning changes
+--trident buff
+TUNING.TRIDENT.DAMAGE = 34 * 1.5
+TUNING.TRIDENT.USES = TUNING.TRIDENT.USES + 50
+TUNING.TRIDENT.SPELL.USE_COUNT = TUNING.TRIDENT.USES
+
+--sea weed changes
+TUNING.WATERPLANT.DAMAGE = TUNING.WATERPLANT.DAMAGE * 0.75
+TUNING.WATERPLANT.ITEM_DAMAGE = TUNING.WATERPLANT.ITEM_DAMAGE * 1.75
+
+--shark nerf
+TUNING.SHARK.DAMAGE = 50 / 3
+
+--more treasures
+TUNING.MESSAGEBOTTLE_NOTE_CHANCE = 0.66
 
 -- [              DST Related Overrides                  ]

@@ -44,18 +44,6 @@ end
 local function onthrown(inst)
     inst:AddTag("NOCLICK")
     inst.persists = false
-	
-	--[[
-    inst.Physics:SetMass(1)
-    inst.Physics:SetCapsule(0.2, 0.2)
-    inst.Physics:SetFriction(0)
-    inst.Physics:SetDamping(0)
-    inst.Physics:SetDamping(0)
-    inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
-    inst.Physics:ClearCollisionMask()
-    inst.Physics:CollidesWith(COLLISION.GROUND)
-    inst.Physics:CollidesWith(COLLISION.OBSTACLES)
-    inst.Physics:CollidesWith(COLLISION.ITEMS)]]
 end
 
 local function fn()

@@ -157,6 +157,7 @@ local function onload(inst, data)
 	end
   end
 end
+
 local function OnPreLoad(inst, data)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	if y > 0 then
@@ -172,18 +173,14 @@ local function fn()
     inst.entity:AddSoundEmitter()
     
 	local shadow = inst.entity:AddDynamicShadow()
-    shadow:SetSize( 1.5, .75 )
+    shadow:SetSize(1.5,.75)
     inst.entity:AddNetwork()
     inst.entity:AddLightWatcher()
-
-    --inst.DynamicShadow:SetSize(1, .75)
     inst.Transform:SetFourFaced()
 
-	--shadow:SetSize(1, 0.75)
 	inst.Transform:SetFourFaced()
 	inst.Transform:SetScale(0.9, 0.9, 0.9)
 	MakeFlyingCharacterPhysics(inst, 1, .5)
-	--MakePoisonableCharacter(inst)
 
     inst:AddTag("bat")
     inst:AddTag("animal")
@@ -198,12 +195,7 @@ local function fn()
 	if not TheWorld.ismastersim then
         return inst
     end
-    --MakeAmphibiousCharacterPhysics(inst, 1, .5)
-   -- inst.Physics:SetCollisionGroup(COLLISION.FLYERS)
-    --inst.Physics:CollidesWith(COLLISION.FLYERS) 
-    --inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-
-
+	
     inst.AnimState:SetBank("bat")
     inst.AnimState:SetBuild("fruitbat")
     inst:AddComponent("locomotor")
@@ -244,11 +236,7 @@ local function fn()
     inst:DoTaskInTime(1*FRAMES, function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()), true) end)
     
     inst:ListenForEvent("wingdown", OnWingDown)
-    inst:ListenForEvent("attacked", OnAttacked)
-    --inst:ListenForEvent("death", OnKilled)
-
-    --inst:AddComponent("tiletracker")
-    --inst.components.tiletracker:SetOnWaterChangeFn(OnWaterChange)    
+    inst:ListenForEvent("attacked", OnAttacked)  
 
     inst:AddComponent("teamattacker")
     inst.components.teamattacker.team_type = "fruitbat"

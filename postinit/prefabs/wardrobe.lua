@@ -39,10 +39,10 @@ env.AddPrefabPostInit("wardrobe", function(inst)
 
     inst:AddComponent("channelable")
     inst.components.channelable:SetChannelingFn(ChangeIn, OnStopChanneling)
-    inst.components.channelable.use_channel_longaction = true
-    inst.components.channelable.skip_state_stopchanneling = true
+    inst.components.channelable.use_channel_longaction_noloop = true
+    --inst.components.channelable.skip_state_stopchanneling = true
     inst.components.channelable.skip_state_channeling = true
-    inst.components.channelable.ignore_prechannel = true
+    --inst.components.channelable.ignore_prechannel = true
 	
 	inst.GetActivateVerb = GetActivateVerb
 	

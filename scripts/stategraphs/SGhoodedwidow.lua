@@ -167,7 +167,9 @@ local states=
 						if inst.combosucceed == false and inst.combo > 1 then
 							inst.combosucceed = true
 							--TheNet:SystemMessage("Combo Failed!")
-							inst.components.combat.laststartattacktime = inst.components.combat.laststartattacktime + 2
+							if inst.components.combat and inst.components.combat.laststartattacktime then
+								inst.components.combat.laststartattacktime = inst.components.combat.laststartattacktime + 2
+							end
 						end
 						inst.combo = 1
 						inst.sg:GoToState("idle") 

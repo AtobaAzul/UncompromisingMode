@@ -30,7 +30,7 @@ hamlet_compatible = false
 
 forge_compatible = false
 
-all_clients_require_mod = true 
+all_clients_require_mod = true
 
 icon_atlas = "modicon.xml"
 icon = "modicon.tex"
@@ -72,7 +72,7 @@ configuration_options =
 ------------------------------
 	--Header("Official Beta Compatibility"),
 	--BinaryConfig("beta_compatibility", "March QoL Beta", "This will enable proper compatibility for the beta Crafting, Ancient Guardian, and Varg Waves features.", false),
-	
+
 	Header("Mod Compatibility"),
 	BinaryConfig("um_music", "Official Soundtrack", "Disable this if you are crashing when using client music mods.", true),
 	BinaryConfig("hungry_void", "Anti-Voidwalk", "Disable this if you are using any mods that allow flight or traversal over the cave void.", true),
@@ -415,7 +415,7 @@ configuration_options =
 	BinaryConfig("firebitehounds", "Fiery Bite", "Red Hounds set players on fire when they attack.", true),
 	BinaryConfig("frostbitehounds", "Frozen Bite", "Blue Hounds freeze players when they attack.", true),
 	SkipSpace(),
---[[
+
 	Header("Wave Changes"),
 	BinaryConfig("lategamehoundspread", "Descreased Lategame Frequency", "Enabling this decreases the frequency in the lategame so hounds are still a threat, but not annoying.", true),
 
@@ -457,7 +457,7 @@ configuration_options =
 		},
 		default = 15,
 	},
-]]
+
 	SkipSpace(),
 	Header("New Depths Worms"),
 	BinaryConfig("depthseels", "Depths Eels", "Electrified depths eels join the worm pack in Winter and Spring.", true),

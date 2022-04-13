@@ -1,7 +1,11 @@
 local require = GLOBAL.require
 
 PrefabFiles = require("uncompromising_prefabs")
-
+PreloadAssets = {
+	Asset( "IMAGE", "images/UM_tip_icon.tex" ),
+	Asset( "ATLAS", "images/UM_tip_icon.xml" ),
+}
+ReloadPreloadAssets()
 --Start the game mode
 modimport("init/init_gamemodes/init_uncompromising_mode")
 

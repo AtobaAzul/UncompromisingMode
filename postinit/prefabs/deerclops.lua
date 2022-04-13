@@ -35,11 +35,7 @@ local function EnterPhase2Trigger(inst)
         upgradeburst.Transform:SetScale(3, 3, 3)
 
         inst.Transform:SetScale(1.85, 1.85, 1.85)
-        inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE * 1.1)
-        inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE * 1.1, TUNING.DEERCLOPS_AOE_SCALE)
         inst.components.combat:SetAttackPeriod(TUNING.DEERCLOPS_ATTACK_PERIOD * 0.9)
-
-
 
         --if not IsSpecialEventActive(SPECIAL_EVENTS.WINTERS_FEAST) then
         inst.AnimState:SetBuild("deerclops_yule_blue")
@@ -149,7 +145,7 @@ inst.components.timer:StartTimer("freezearmor",0.1)]]
 ------------
 
 local function ChooseUpgrades(inst)
-    if inst.upgrades == nil then
+    if inst.upgrade == nil then
         local chance = math.random()
         if chance < 0.33 then
             MakeEnrageable(inst)

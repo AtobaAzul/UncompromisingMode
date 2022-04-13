@@ -84,7 +84,6 @@ local states =
         onupdate= function(inst)
             inst.Physics:SetMotorVel(0,-10+math.random()*2,0)
             local pt = Point(inst.Transform:GetWorldPosition())
-
             if pt.y <= .1 or inst:IsAsleep() then
                 pt.y = 0
                 inst.Physics:Stop()
@@ -110,14 +109,9 @@ local states =
         tags = {"flight", "busy"},
         onenter = function(inst)
             inst.Physics:Stop()
-
             inst.DynamicShadow:Enable(false)
             inst.components.health:SetInvincible(true)
-
             inst.AnimState:PlayAnimation("fly_back_loop",true)
-
-            local x,y,z = inst.Transform:GetWorldPosition()
-
             inst.Physics:SetMotorVel(0,10+math.random()*2,0)
         end,
 

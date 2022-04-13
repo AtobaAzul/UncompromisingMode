@@ -35,7 +35,6 @@ local prefab_post = {
 	"flingobalance",
 	"chester",
 	"mushlight",
-	"flower",
 	"butterfly",
     --"toadstool_cap", Moved to init_uncompromising_mod.lua
     "amulet",
@@ -133,12 +132,18 @@ local prefab_post = {
 	"grassgekko",
 	"minotaur_drops",
 	"frog",
+	"waterplant_bomb",
+	"grassgator",
+	"alterguardian",
+	"boat",
+	"seasonal_shoals",
 }
 
 local stategraph_post = {
     --example:
     --"wilson",
 	"wilson",
+	"wilson_client",
 	"spider",
 	"frog",
 	--"wobysmall",

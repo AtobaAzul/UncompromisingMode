@@ -77,6 +77,7 @@ local require = GLOBAL.require
 	modimport("init/init_food/init_bird_changes")
 	modimport("init/init_food/init_rare_foods")
 	modimport("init/init_food/init_disableregrowth")
+	modimport("init/init_food/init_fishweight")
 
 
 	--if  GetModConfigData("harder_recipes") == true then <-- This isn't even a config change, yet.

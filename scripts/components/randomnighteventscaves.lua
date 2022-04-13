@@ -758,7 +758,7 @@ local function IsEligible(player)
 end
 
 
-local function CheckPlayers()
+local function CheckPlayers(forced)
     _targetplayer = nil
     if #_activeplayers == 0 then
         return
@@ -784,7 +784,7 @@ local function CheckPlayers()
 	
 	local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
 	
-	if days_survived >= 5 and math.random() >= playerchancescaling then
+	if days_survived >= 5 and math.random() >= playerchancescaling or forced then
 		if player ~= nil then
 			local x,y,z = player.Transform:GetWorldPosition()
 			
@@ -810,7 +810,7 @@ local function CheckPlayers()
 end
 
 local function TryRandomNightEvent(self)      --Canis said 20% chance each night to have a RNE, could possibly include a scaling effect later
-	CheckPlayers()
+	CheckPlayers(false)
 end
 --Keep these incase we need them later (probably)
 local function OnPlayerJoined(src,player)
@@ -851,6 +851,12 @@ local function OnLoad(data)
 		if data.storedcaverne ~= nil then
 			self.storedcaverne = data.storedcaverne
 		end
+	end
+end
+
+function self:ForceRNE(forced)
+	if forced ~= nil and forced then
+		CheckPlayers(true)
 	end
 end
 

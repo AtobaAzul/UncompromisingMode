@@ -56,7 +56,7 @@ end)
 
 inst.rootready = true
 if inst.components.combat ~= nil and inst.components.combat.attackrange ~= nil then
-inst.oldrange = inst.components.combat.attackrange
+inst.oldrange = 3
 inst.components.combat:SetRange(3*inst.oldrange)
 end
 

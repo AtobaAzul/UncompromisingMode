@@ -79,10 +79,10 @@ local function pickup(inst, channeler)
 		inst.channeler.components.sanity:DoDelta(-0.25) 
 		return
 		end
-		if v.components.shelf ~= nil and v.components.shelf.itemonshelf ~= nil then  --Lureplants
-		v.components.shelf:TakeItem(channeler)
-		SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
-		inst.channeler.components.sanity:DoDelta(-0.25) 
+		if v.components.shelf ~= nil and v.components.shelf.itemonshelf ~= nil and not TheWorld.state.iswinter then --Lureplants
+		    v.components.shelf:TakeItem(channeler)
+		    SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
+		    inst.channeler.components.sanity:DoDelta(-0.25) 
 		return
 		end
     end

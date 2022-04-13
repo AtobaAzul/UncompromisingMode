@@ -1,7 +1,9 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
-env.AddStategraphPostInit("wilson", function(inst)
+env.AddStategraphPostInit("wilson_client", function(inst)
+
+local TIMEOUT = 2 
 
 local function ClearStatusAilments(inst)
     if inst.components.freezable ~= nil and inst.components.freezable:IsFrozen() then
@@ -98,7 +100,8 @@ inst.actionhandlers[ACTIONS.STARTCHANNELING].deststate =
 				return _OldChannel(inst, action, ...)
 			end
         end
-
+		
+--[[
 local _OldDeathEvent = inst.events["death"].fn
 	inst.events["death"].fn = function(inst, data)
         if data ~= nil and data.cause == "shadowvortex" and not inst:HasTag("wereplayer") then
@@ -111,7 +114,7 @@ local _OldDeathEvent = inst.events["death"].fn
 			_OldDeathEvent(inst, data)
 		end
     end
-
+]]
 local actionhandlers =
 {
 	--[[ActionHandler(ACTIONS.CASTSPELL,
@@ -163,219 +166,108 @@ local states = {
         tags = { "doing", "busy", "canrotate" },
 
         onenter = function(inst)
-            if inst.components.playercontroller ~= nil then
-                inst.components.playercontroller:Enable(false)
-            end
-            inst.AnimState:PlayAnimation("staff_pre")
-            inst.AnimState:PushAnimation("staff", false)
             inst.components.locomotor:Stop()
+            inst.AnimState:PlayAnimation("staff_pre")
+            inst.AnimState:PushAnimation("staff_lag", false)
 
-            --Spawn an effect on the player's location
-            local staff = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-            local colour = staff ~= nil and staff.fxcolour or { 1, 1, 1 }
-			--[[
-            inst.sg.statemem.stafffx = SpawnPrefab(inst.components.rider:IsRiding() and "staffcastfx_mount" or "frog")
-            inst.sg.statemem.stafffx.entity:SetParent(inst.entity)
-            inst.sg.statemem.stafffx.Transform:SetRotation(inst.Transform:GetRotation())
-            inst.sg.statemem.stafffx:SetUp(colour)
-			]]
-            inst.sg.statemem.stafflight = SpawnPrefab("staff_castinglight")
-            inst.sg.statemem.stafflight.Transform:SetPosition(inst.Transform:GetWorldPosition())
-            inst.sg.statemem.stafflight:SetUp(colour, 1.9, .33)
-
-            if staff ~= nil and staff.components.aoetargeting ~= nil and staff.components.aoetargeting.targetprefab ~= nil then
-                local buffaction = inst:GetBufferedAction()
-                if buffaction ~= nil and buffaction.pos ~= nil then
-                    inst.sg.statemem.targetfx = SpawnPrefab(staff.components.aoetargeting.targetprefab)
-                    if inst.sg.statemem.targetfx ~= nil then
-                        inst.sg.statemem.targetfx.Transform:SetPosition(buffaction:GetActionPoint():Get())
-                        inst.sg.statemem.targetfx:ListenForEvent("onremove", OnRemoveCleanupTargetFX, inst)
-                    end
-                end
-            end
-
-            inst.sg.statemem.castsound = staff ~= nil and staff.castsound or "dontstarve/wilson/use_gemstaff"
+            inst:PerformPreviewBufferedAction()
+            inst.sg:SetTimeout(TIMEOUT)
         end,
 
-        timeline =
-        {
-            TimeEvent(13 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound(inst.sg.statemem.castsound)
-            end),
-            TimeEvent(53 * FRAMES, function(inst)
-                if inst.sg.statemem.targetfx ~= nil then
-                    if inst.sg.statemem.targetfx:IsValid() then
-                        OnRemoveCleanupTargetFX(inst)
-                    end
-                    inst.sg.statemem.targetfx = nil
+        onupdate = function(inst)
+            if inst:HasTag("doing") then
+                if inst.entity:FlattenMovementPrediction() then
+                    inst.sg:GoToState("idle", "noanim")
                 end
-                inst.sg.statemem.stafffx = nil --Can't be cancelled anymore
-                inst.sg.statemem.stafflight = nil --Can't be cancelled anymore
-                --V2C: NOTE! if we're teleporting ourself, we may be forced to exit state here!
-                inst:PerformBufferedAction()
-            end),
-        },
+            elseif inst.bufferedaction == nil then
+                inst.sg:GoToState("idle")
+            end
+        end,
 
-        events =
-        {
-            EventHandler("animqueueover", function(inst)
-                if inst.AnimState:AnimDone() then
-                    inst.sg:GoToState("idle")
-                end
-            end),
-        },
-
-        onexit = function(inst)
-            if inst.components.playercontroller ~= nil then
-                inst.components.playercontroller:Enable(true)
-            end
-            if inst.sg.statemem.stafffx ~= nil and inst.sg.statemem.stafffx:IsValid() then
-                inst.sg.statemem.stafffx:Remove()
-            end
-            if inst.sg.statemem.stafflight ~= nil and inst.sg.statemem.stafflight:IsValid() then
-                inst.sg.statemem.stafflight:Remove()
-            end
-            if inst.sg.statemem.targetfx ~= nil and inst.sg.statemem.targetfx:IsValid() then
-                OnRemoveCleanupTargetFX(inst)
-            end
+        ontimeout = function(inst)
+            inst:ClearBufferedAction()
+            inst.sg:GoToState("idle")
         end,
     },
 
     State{
         name = "bearclaw_dig_start",
-        tags = { "predig", "working" },
-
-        onenter = function(inst)
-            inst.components.locomotor:Stop()
-            inst.AnimState:PlayAnimation("shovel_pre")
-        end,
-
-        events =
-        {
-            EventHandler("unequip", function(inst) inst.sg:GoToState("idle") end),
-            EventHandler("animover", function(inst)
-                if inst.AnimState:AnimDone() then
-                    inst.sg:GoToState("bearclaw_dig")
-                end
-            end),
-        },
-    },
-
-    State{
-        name = "bearclaw_dig",
         tags = { "busy", "attack" },
 
         onenter = function(inst)
-            inst.AnimState:PlayAnimation("shovel_loop")
+            inst.AnimState:PlayAnimation("shovel_pre")
+			inst.AnimState:PushAnimation("shovel_loop", false)
+			
+            inst:PerformPreviewBufferedAction()
+            inst.sg:SetTimeout(TIMEOUT)
         end,
 		
-        timeline =
-        {
-            TimeEvent(15 * FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound("dontstarve/wilson/dig")
-                inst:PerformBufferedAction()
-            end),
-        },
-
-        events =
-        {
-            EventHandler("unequip", function(inst) inst.sg:GoToState("idle") end),
-            EventHandler("animover", function(inst)
-                if inst.AnimState:AnimDone() then
-                    inst.AnimState:PlayAnimation("shovel_pst")
-                    inst.sg:GoToState("idle", true)
-                end
-            end),
-        },
+        ontimeout = function(inst)
+            inst.AnimState:PlayAnimation("shovel_pst")
+            inst.sg:GoToState("idle", true)
+        end,
     },
 
-
-    State{
+State{
         name = "curse_controlled",
-        tags = { "busy", "pausepredict", "nomorph", "nodangle" },
-
+        tags = {"busy", "sneeze", "pausepredict" },
+        
         onenter = function(inst)
-            if not inst.AnimState:IsCurrentAnimation("mindcontrol_loop") then
-                inst.AnimState:PlayAnimation("mindcontrol_loop", true)
-            end
-            inst.sg:SetTimeout(2)
+            inst.entity:SetIsPredictingMovement(false)
+            inst.entity:FlattenMovementPrediction()
+			
+			if inst.components.rider ~= nil and not inst.components.rider:IsRiding() then
+				inst.AnimState:PlayAnimation("sneeze")
+			end
+			
+            inst.sg:SetTimeout(TIMEOUT)   
         end,
-
-        events =
-        {
-            EventHandler("mindcontrolled", function(inst)
-                inst.sg.statemem.mindcontrolled = true
-                inst.sg:GoToState("mindcontrolled_loop")
-            end),
-        },
+        
+        onupdate = function(inst)
+            if inst:HasTag("busy") and
+                inst.entity:FlattenMovementPrediction() then
+				inst.sg:GoToState("mindcontrolled_pst")
+            end
+        end,
 
         ontimeout = function(inst)
             inst.sg:GoToState("mindcontrolled_pst")
         end,
 
         onexit = function(inst)
-            if not inst.sg.statemem.mindcontrolled then
-                if inst.components.playercontroller ~= nil then
-                    inst.components.playercontroller:Enable(true)
-                end
-                inst.components.inventory:Show()
-            end
+            inst.entity:SetIsPredictingMovement(true)
         end,
     },
 
 State{
         name = "sneeze",
-        tags = {"busy", "sneeze", "pausepredict" },
+        tags = { "busy", "sneeze" },
         
         onenter = function(inst)
-            local usehit = inst.components.rider:IsRiding() or inst:HasTag("wereplayer")
-            local stun_frames = usehit and 6 or 9
-            inst.wantstosneeze = false
-            inst:ClearBufferedAction()
-            inst.components.locomotor:Stop()
-            inst.SoundEmitter:PlaySound("dontstarve/wilson/hit",nil,.02)
-			
+            inst.entity:SetIsPredictingMovement(false)
+            inst.entity:FlattenMovementPrediction()
 			
 			if inst.components.rider ~= nil and not inst.components.rider:IsRiding() then
 				inst.AnimState:PlayAnimation("sneeze")
 			end
 			
-			if inst.components.playercontroller ~= nil then
-                inst.components.playercontroller:RemotePausePrediction(stun_frames <= 7 and stun_frames or nil)
-            end
-			
-            
-            if inst.prefab ~= "wes" then
-				inst.SoundEmitter:PlaySound("UCSounds/Sneeze/sneeze")
-                local sound_name = inst.soundsname or inst.prefab
-                local path = inst.talker_path_override or "dontstarve/characters/"
-                --local equippedHat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
-                --if equippedHat and equippedHat:HasTag("muffler") then
-                    --inst.SoundEmitter:PlaySound(path..sound_name.."/gasmask_hurt")
-                --else
-                    local sound_event = path..sound_name.."/hurt"
-                    inst.SoundEmitter:PlaySound(inst.hurtsoundoverride or sound_event)
-                --end
-
-				inst.components.talker:Say(GetString(inst.prefab, "ANNOUNCE_SNEEZE"))  
-            end        
+            inst.sg:SetTimeout(2)   
         end,
         
-        events=
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
-        }, 
-        
-        timeline =
-        {
-            TimeEvent(10*FRAMES, function(inst)
-                if inst.components.hayfever then
-                    inst.components.hayfever:DoSneezeEffects()
-                end
-                inst.sg:RemoveStateTag("busy")
-            end),
-        },        
-               
+        onupdate = function(inst)
+            if inst:HasTag("busy") and
+                inst.entity:FlattenMovementPrediction() then
+                inst.sg:GoToState("idle", "noanim")
+            end
+        end,
+
+        ontimeout = function(inst)
+            inst.sg:GoToState("idle", "noanim")
+        end,
+
+        onexit = function(inst)
+            inst.entity:SetIsPredictingMovement(true)
+        end,
     },
 	
 	State{
@@ -387,36 +279,25 @@ State{
             inst.AnimState:PlayAnimation("action_uniqueitem_pre")
             inst.AnimState:PushAnimation("whistle", false)
             inst.AnimState:OverrideSymbol("hound_whistle01", "pied_piper_flute", "hound_whistle01")
-            --inst.AnimState:Hide("ARM_carry")
             inst.AnimState:Show("ARM_normal")
-            inst.components.inventory:ReturnActiveActionItem(inst.bufferedaction ~= nil and inst.bufferedaction.invobject or nil)
+
+            inst:PerformPreviewBufferedAction()
+            inst.sg:SetTimeout(TIMEOUT)
         end,
 
-        timeline =
-        {
-            TimeEvent(20 * FRAMES, function(inst)
-                if inst:PerformBufferedAction() then
-                    inst.SoundEmitter:PlaySound("UCSounds/piedpiper/play")
-                else
-                    inst.AnimState:SetTime(34 * FRAMES)
+        onupdate = function(inst)
+            if inst:HasTag("doing") then
+                if inst.entity:FlattenMovementPrediction() then
+                    inst.sg:GoToState("idle", "noanim")
                 end
-            end),
-        },
-
-        events =
-        {
-            EventHandler("animqueueover", function(inst)
-                if inst.AnimState:AnimDone() then
-                    inst.sg:GoToState("idle")
-                end
-            end),
-        },
-
-        onexit = function(inst)
-            if inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) then
-                inst.AnimState:Show("ARM_carry")
-                inst.AnimState:Hide("ARM_normal")
+            elseif inst.bufferedaction == nil then
+                inst.sg:GoToState("idle")
             end
+        end,
+
+        ontimeout = function(inst)
+            inst:ClearBufferedAction()
+            inst.sg:GoToState("idle")
         end,
     },
 	

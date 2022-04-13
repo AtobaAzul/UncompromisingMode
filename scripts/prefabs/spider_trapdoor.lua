@@ -229,7 +229,12 @@ local function OnIsCaveDay(inst, iscaveday)
 end
 
 local function CalcSanityAura(inst, observer)
-    return observer:HasTag("spiderwhisperer") and 0 or inst.components.sanityaura.aura
+    if observer:HasTag("spiderwhisperer") or inst.bedazzled or 
+    (inst.components.follower.leader ~= nil and inst.components.follower.leader:HasTag("spiderwhisperer")) then
+        return 0
+    end
+    
+    return inst.components.sanityaura.aura
 end
 
 local function HalloweenMoonMutate(inst, new_inst)
