@@ -1,15 +1,6 @@
 local assets =
 {
-    Asset("ANIM", "anim/ds_spider_basic.zip"),
     Asset("ANIM", "anim/bush_crab.zip"),
-    Asset("SOUND", "sound/spider.fsb"),
-}
-
-local prefabs =
-{
-    "berries",
-    "monstermeat",
-    "berrybush",
 }
 
 SetSharedLootTable('bushcrab',
@@ -58,17 +49,7 @@ local function OnAttacked(inst, data)
             and dude.components.follower ~= nil
             and dude.components.follower.leader == inst.components.follower.leader
     end, 10)
-    --[[inst.components.combat:ShareTarget(data.attacker, 30, function(dude)
-        return dude:HasTag("spider")
-            and not dude.components.health:IsDead()
-            and dude.components.follower ~= nil
-            and dude.components.follower.leader == inst.components.follower.leader
-    end, 10)--]]
 end
---[[
-local function SanityAura(inst, observer)
-    return -TUNING.SANITYAURA_SMALL
-end--]]
 
 local function BasicAwakeCheck(inst)
     return not inst.cansleep
@@ -76,7 +57,6 @@ local function BasicAwakeCheck(inst)
         or (inst.components.burnable ~= nil and inst.components.burnable:IsBurning())
         or (inst.components.freezable ~= nil and inst.components.freezable:IsFrozen())
 end
-
 
 local function SleepTest(inst)
     if BasicAwakeCheck(inst) then
@@ -92,11 +72,6 @@ local function WakeTest(inst)
     return homePos ~= nil and inst:GetDistanceSqToPoint(homePos) >= 25--5 * 5
 end
 
-local function OnWorked(inst) 
-	if inst:HasTag("hiding") and not inst.components.health:IsDead() then 
-		inst:PushEvent("exitshield")
-	end
-end
 local function fn()
     local inst = CreateEntity()
 
@@ -205,13 +180,9 @@ local function fn()
 
     inst:ListenForEvent("attacked", OnAttacked)
     inst:ListenForEvent("entitysleep", OnEntitySleep)
-	   inst:AddComponent("workable")
-    inst.components.workable:SetWorkAction(ACTIONS.DIG)
-    inst.components.workable:SetOnFinishCallback(OnWorked)
-    inst.components.workable:SetWorkLeft(0)
 	inst.sg:GoToState("taunt")
 
     return inst
 end
 
-return Prefab("bushcrab", fn, assets, prefabs)
+return Prefab("bushcrab", fn, assets)
