@@ -300,4 +300,5 @@ return {
 	"oculet_pets",
 	"terrarium",
 	"reedbuncher",
+	"royal_sunkenchest",
 }
