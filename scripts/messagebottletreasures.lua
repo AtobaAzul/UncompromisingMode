@@ -272,7 +272,6 @@ royal_sunkenchest =
 			guaranteed_loot =
 			{
 				cane = 1,
-				heatrock = 1,
 				gnarwail_horn = 1,
 				papyrus = {4, 8},
 				featherpencil = {2, 4},
@@ -308,12 +307,10 @@ royal_sunkenchest =
 			{
 				molehat = 1,
 				nightstick = 1,
-				transistor = {1, 2},
-				goldenpickaxe = 1,
 			},
 			randomly_selected_loot =
 			{
-				{slurtleslime = 0.50, wormlight = 0.20 },
+				{wormlight_lesser = 0.50, wormlight = 0.20 },
 			},
 
 		},
@@ -327,7 +324,6 @@ royal_sunkenchest =
 				staff_tornado = 1,
 				papyrus = {3, 5},
 				charcoal = {4, 7},
-				goldenpickaxe = 1,
 				blueprint = {1, 2, 3},
 			},
 			randomly_selected_loot =
@@ -362,7 +358,7 @@ royal_sunkenchest =
 		{
 			moonglass = {15, 20},
 			messagebottleempty = {10, 15},
-			messagebottle = 2,  --These should always have messages from Pearl in them instead of maps, to show that CK knew she was looking for him, and actively chose power over her.
+			messagebottle = 2,
 			alterguardianhatshard = {3,4},
 		},
 		randomly_selected_loot =
@@ -372,8 +368,6 @@ royal_sunkenchest =
 		  {yellowamulet = 0.33, orangeamulet = 0.33, greenamulet = 0.33, purpleamulet = 0.33},
 		  {trinket_26 = 0.1},
 		},
-		}
-		--[[
 		god_slayer =
         {
             preset_weight = 1,
@@ -388,8 +382,9 @@ royal_sunkenchest =
                 {viperjam = 0.33, beefalowings = 0.33, zaspberryparfeit = 0.33},
                 {glass_scales = 0.20, widowshead = 0.20, piedpiperpipe = 0.20, minotaurhorn = 0.20, shieldofterror = 0.20}   --covers some blind spots in Klaus' loot. Also some UM items. Also I have no idea the prefab name for the Pied Piper Pipe
               },
-            } When the time is right.
-		}]]
+            } 
+		}
+		--The Time is right.
 	},
 
 }
@@ -462,10 +457,8 @@ local function GenerateTreasure(pt, overrideprefab, spawn_as_empty, postfn)
 				item.Transform:SetPosition(x, y, z)
 				if treasure.components.container ~= nil then
 					treasure.components.container:GiveItem(item)
-					print("loot inserted into container!")
 				else
 					treasure.components.inventory:GiveItem(item)
-					print("loot inserted into inventory!!")
 				end
 			end
 

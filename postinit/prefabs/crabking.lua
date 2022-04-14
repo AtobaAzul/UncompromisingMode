@@ -17,12 +17,10 @@ env.AddPrefabPostInit("crabking", function(inst)
 		local opalcount = 4 + inst.countgems(inst).opal
 		local opalcount2 = (4 + inst.countgems(inst).opal)/2
 		for i = 1, opalcount do
-			print(opalcount)
 			messagebottletreasures.GenerateTreasure(pos, "royal_sunkenchest")
 			--messagebottletreasures.GenerateTreasure(pos, "royal_sunkenchest").Transform:SetPosition(pos.x + math.random(-2, 2), pos.y, pos.z + math.random(-2, 2)) When I get the chests fixed.
 		end
 		for i = 1, opalcount2 do
-			print(opalcount2)
 			messagebottletreasures.GenerateTreasure(pos, "sunkenchest")
 			--messagebottletreasures.GenerateTreasure(pos, "royal_sunkenchest").Transform:SetPosition(pos.x + math.random(-2, 2), pos.y, pos.z + math.random(-2, 2)) When I get the chests fixed.
 		end
