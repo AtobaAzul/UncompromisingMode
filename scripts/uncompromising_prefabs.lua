@@ -301,4 +301,5 @@ return {
 	"terrarium",
 	"reedbuncher",
 	"royal_sunkenchest",
+	"speaker",
 }

@@ -345,6 +345,13 @@ end
 local Layouts = GLOBAL.require("map/layouts").Layouts
 local StaticLayout = GLOBAL.require("map/static_layout")
 
+AddRoomPreInit("OceanHazardous", function(room)
+	room.contents.countprefabs=
+										{
+											speaker = 1,
+										}
+end)
+
 AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "forest" then
         return
@@ -469,4 +476,5 @@ for i, room in ipairs(damagedpawnrooms) do
 		room.contents.distributeprefabs.pawn_hopper_nightmare = 0.20
 	end)
 end
+
 modimport("init/init_food/init_food_worldgen")
