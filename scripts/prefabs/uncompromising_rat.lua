@@ -462,7 +462,7 @@ local function fn()
 	inst.components.inventoryitem.nobounce = true
 	inst.components.inventoryitem.canbepickedup = false
 	inst.components.inventoryitem.cangoincontainer = false
-	inst.components.inventoryitem:SetSinks(true)
+	inst.components.inventoryitem:SetSinks(false)
 	
 	inst:AddComponent("follower")
 	inst:AddComponent("herdmember")
@@ -884,7 +884,7 @@ local function packfn()
 	inst.components.inventoryitem.nobounce = true
 	inst.components.inventoryitem.canbepickedup = false
 	inst.components.inventoryitem.cangoincontainer = false
-	inst.components.inventoryitem:SetSinks(true)
+	inst.components.inventoryitem:SetSinks(false)
 	
 	inst:AddComponent("herdmember")
 	

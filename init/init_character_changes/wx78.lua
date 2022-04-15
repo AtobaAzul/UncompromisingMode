@@ -73,6 +73,18 @@ local function onlightingstrike(inst)
     end
 end
 
+local function OnLightningStrike(inst)
+    if inst.components.health ~= nil and not (inst.components.health:IsDead() or inst.components.health:IsInvincible()) then
+        if inst.components.inventory:IsInsulated() then
+            inst:PushEvent("lightningdamageavoided")
+        else
+            inst.components.sanity:DoDelta(-TUNING.SANITY_LARGE)
+
+            inst.components.upgrademoduleowner:AddCharge(1)
+        end
+    end
+end
+
 local function onlessercharge(inst)
     if inst.components.inventory:IsInsulated() then
         inst:PushEvent("lightningdamageavoided")
@@ -144,7 +156,12 @@ local function OnEat_Electric(inst, data)
 			inst.components.talker:Say(GetString(inst, "ANNOUNCE_CHARGE"))
 			SpawnPrefab("electricchargedfx"):SetTarget(inst)
             inst.components.sanity:DoDelta(-TUNING.SANITY_MEDLARGE)
-			startovercharge(inst, CalcDiminishingReturns(inst.charge_time, TUNING.TOTAL_DAY_TIME / 6))
+			
+			if inst.components.upgrademoduleowner ~= nil then
+				inst.components.upgrademoduleowner:AddCharge(1)
+			else
+				startovercharge(inst, CalcDiminishingReturns(inst.charge_time, TUNING.TOTAL_DAY_TIME / 6))
+			end
 		elseif data.food.prefab == "zaspberryparfait" or 
 		data.food.prefab == "voltgoatjelly" or
 		data.food.prefab == "voltgoatjelly_spice_chili" or
@@ -154,7 +171,12 @@ local function OnEat_Electric(inst, data)
 			inst.components.talker:Say(GetString(inst, "ANNOUNCE_CHARGE"))
 			SpawnPrefab("electricchargedfx"):SetTarget(inst)
             inst.components.sanity:DoDelta(-TUNING.SANITY_LARGE)
-			startovercharge(inst, CalcDiminishingReturns(inst.charge_time, TUNING.TOTAL_DAY_TIME / 4))
+			
+			if inst.components.upgrademoduleowner ~= nil then
+				inst.components.upgrademoduleowner:AddCharge(1)
+			else
+				startovercharge(inst, CalcDiminishingReturns(inst.charge_time, TUNING.TOTAL_DAY_TIME / 4))
+			end
 		end
     end
 end
@@ -168,11 +190,21 @@ if TUNING.DSTU.WX78_CONFIG then
         inst.wet_spark_time = 0
         inst.wet_spark_time_offset = 3
 	    inst:AddTag("automaton")
-	    if inst.components.playerlightningtarget ~= nil then
-		    inst.components.playerlightningtarget:SetOnStrikeFn(onlightingstrike)
-	    end
+		
 	    inst.OnLesserCharge = onlessercharge
-	    inst:ListenForEvent("moisturedelta", OnMoistureDelta)
+		
+		if inst.components.upgrademoduleowner ~= nil then
+			if inst.components.playerlightningtarget ~= nil then
+				inst.components.playerlightningtarget:SetOnStrikeFn(OnLightningStrike)
+			end
+		else
+			inst:ListenForEvent("moisturedelta", OnMoistureDelta)
+			
+			if inst.components.playerlightningtarget ~= nil then
+				inst.components.playerlightningtarget:SetOnStrikeFn(onlightingstrike)
+			end
+		end
+		
         inst:ListenForEvent("oneat", OnEat_Electric)
     end)
 end
