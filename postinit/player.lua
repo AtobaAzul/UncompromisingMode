@@ -15,16 +15,64 @@ env.AddPlayerPostInit(function(inst)
             inst.components.debuffable:RemoveDebuff("buff_vetcurse")
         end --help I can't get this stupid thing to work!!
     end
-    --[[local function amulet_resurrect(inst)
-        for k, v in pairs(inst.components.inventory.equipslots) do
-            if v.prefab == "amulet" then
-                inst:DoTaskInTime(115/60, function(inst)
-                    inst:PushEvent("respawnfromghost", { source = v })
-                    v:DoTaskInTime(115/60, v.Remove)
-                end)
+
+    local function OnChargeFromBattery(inst, battery)
+        if inst.components.upgrademoduleowner == nil then
+            local item = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+            if item ~= nil and item:HasTag("electricaltool") and item.components.fueled ~= nil then
+                item.components.fueled:DoDelta(50, inst)
+            elseif item ~= nil and item:HasTag("electricaltool") and item.components.finiteuses ~= nil then
+                local currentuses = item.components.finiteuses:GetPercent()
+                item.components.finiteuses:SetPercent(currentuses + 50)
+            elseif item == nil or not item:HasTag("electricaltool")then
+                return false
             end
+                inst.components.health:DoDelta(TUNING.HEALING_SMALL, false, "lightning")
+                inst.components.sanity:DoDelta(-TUNING.SANITY_SMALL)
+
+            if not inst.components.inventory:IsInsulated() then
+                inst.sg:GoToState("electrocute")
+            end
+            return true
+        elseif inst.components.upgrademoduleowner ~= nil and inst.components.upgrademoduleowner:ChargeIsMaxed() then
+            local item = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+            if item ~= nil and item:HasTag("electricaltool") and item.components.fueled ~= nil then
+                item.components.fueled:DoDelta(50, inst)
+            elseif item ~= nil and item:HasTag("electricaltool") and item.components.finiteuses ~= nil then
+                local currentuses = item.components.finiteuses:GetPercent()
+                item.components.finiteuses:SetPercent(currentuses + 50)
+            elseif item == nil or item:HasTag("electricaltool") == false then
+                return false
+            end
+                inst.components.health:DoDelta(TUNING.HEALING_SMALL, false, "lightning")
+                inst.components.sanity:DoDelta(-TUNING.SANITY_SMALL)
+
+            if not inst.components.inventory:IsInsulated() then
+                inst.sg:GoToState("electrocute")
+            end
+            return true
+        elseif inst.components.upgrademoduleowner ~= nil and not inst.components.upgrademoduleowner:ChargeIsMaxed() then
+            local item = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+            if item ~= nil and item:HasTag("electricaltool") and item.components.fueled ~= nil then
+                item.components.fueled:DoDelta(50, inst)
+            elseif item ~= nil and item:HasTag("electricaltool") and item.components.finiteuses ~= nil then
+                local currentuses = item.components.finiteuses:GetPercent()
+                item.components.finiteuses:SetPercent(currentuses + 50)
+            end
+
+            inst.components.health:DoDelta(TUNING.HEALING_SMALL, false, "lightning")
+            inst.components.sanity:DoDelta(-TUNING.SANITY_SMALL)
+        
+            inst.components.upgrademoduleowner:AddCharge(1)
+        
+            if not inst.components.inventory:IsInsulated() then
+                inst.sg:GoToState("electrocute")
+            end
+        
+            return true
         end
     end
-
-    inst:ListenForEvent("death", amulet_resurrect) ]]   
+    inst:AddTag("batteryuser")          -- from batteryuser component
+    inst:AddComponent("batteryuser")
+    inst.components.batteryuser.onbatteryused = OnChargeFromBattery
 end)

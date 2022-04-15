@@ -333,6 +333,18 @@ configuration_options =
 		default = 1,
 	},
 	BinaryConfig("insul_thermalstone", "Tweaked Thermal Stone", "Thermal stones now have less insulation, but inherit some insulation from clothing.", true),
+	{
+		name = "electricalmishap_",
+		label = "Electrical Weapon Retune",
+		hover = "Tweaks electrical weapons based on suggestions from Shynuke and Lux.",
+		options =
+		{
+			{description = "Electrical Mishap", data = 1},
+			{description = "Classic", data = 2},
+			{description = "Off", data = 0},
+		},
+		default = 1,
+	},
 -----------------------------
 -- Food --
 -----------------------------
@@ -611,7 +623,6 @@ configuration_options =
 	SkipSpace(),
 	Header("Experimental"),
 	--BinaryConfig("honeybandbuff", "Honey Poultice Buff", "[Experimental] Crafting honey poultice gives 2, healing with it gives 10 health overtime as well as 30 health.", false),
-	BinaryConfig("electricalmishap", "Electrical Weapon Retune", "[Experimental] Changes the bug zapper and morning star with the suggestions from Shynuke and Lux.", false),
 	BinaryConfig("announce_basestatus", "[DEV] Announce Ratsniffer","[Developer Tool] Prints the exact rat sniff values to chat to be viewed in real time.",false),
 	BinaryConfig("eyebrellarework", "Eyebrella Rework","Eyebrella stats restored to vanilla value, can't be repaired, 12 day durability.",false),
 	BinaryConfig("cooldown_orangestaff", "Cooldown Based Lazy Explorer", "Lazy explorer no longer has durabilty, but instead has cooldown, like Wanda's watches.\nSuggested by Lux.", false),
