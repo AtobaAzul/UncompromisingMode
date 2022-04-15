@@ -200,7 +200,8 @@ local function fn()
     inst.AnimState:PlayAnimation("idle_off")
 
     inst:AddTag("light")
-
+	inst:AddTag("electricaltool")
+	
     MakeInventoryFloatable(inst, "med", 0.2, 0.65)
 
     inst.entity:SetPristine()

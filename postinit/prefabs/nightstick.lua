@@ -115,6 +115,7 @@ local function onequip(inst, owner)
     end
 	
 	owner:AddTag("lightningrod")
+	
 	owner.lightningpriority = 0
 	owner:ListenForEvent("lightningstrike", Strike, owner)
 end
@@ -211,5 +212,5 @@ env.AddPrefabPostInit("nightstick", function(inst)
 		inst.components.weapon:RemoveElectric()
 		inst.components.weapon:SetOnAttack(onattack)
 	end
-	
+	inst:AddTag("electricaltool")
 end)

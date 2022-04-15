@@ -5,16 +5,16 @@
 GLOBAL.TUNING.WX78_MAX_MOISTURE_DAMAGE = (-0.5) * GLOBAL.TUNING.DSTU.WX78_MOISTURE_DAMAGE_INCREASE
 GLOBAL.TUNING.WX78_MOISTURE_DRYING_DAMAGE = (-0.3) * GLOBAL.TUNING.DSTU.WX78_MOISTURE_DAMAGE_INCREASE
 
+if GLOBAL.TUNING.UPDATE_CHECK then
+    local ModuleDefs = require("wx78_moduledefs")
 
-local ModuleDefs = require("wx78_moduledefs")
-
-ModuleDefs.AddCreatureScanDataDefinition("dreadeye", "maxsanity", 3)
-ModuleDefs.AddCreatureScanDataDefinition("creepingfear", "maxsanity", 6)
-ModuleDefs.AddCreatureScanDataDefinition("trepidation", "maxsanity", 6)
-ModuleDefs.AddCreatureScanDataDefinition("mock_dragonfly", "heat", 10)
-ModuleDefs.AddCreatureScanDataDefinition("viperworm", "light", 6)
-ModuleDefs.AddCreatureScanDataDefinition("shockworm", "light", 6)
-
+    ModuleDefs.AddCreatureScanDataDefinition("dreadeye", "maxsanity", 3)
+    ModuleDefs.AddCreatureScanDataDefinition("creepingfear", "maxsanity", 6)
+    ModuleDefs.AddCreatureScanDataDefinition("trepidation", "maxsanity", 6)
+    ModuleDefs.AddCreatureScanDataDefinition("mock_dragonfly", "heat", 10)
+    ModuleDefs.AddCreatureScanDataDefinition("viperworm", "light", 6)
+    ModuleDefs.AddCreatureScanDataDefinition("shockworm", "light", 6)
+end
 
 --TODO, reimplement dorainsparks to do based on wetness from min to max damage
     --add rate too

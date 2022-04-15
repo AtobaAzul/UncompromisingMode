@@ -24,7 +24,7 @@ env.AddPlayerPostInit(function(inst)
             elseif item ~= nil and item:HasTag("electricaltool") and item.components.finiteuses ~= nil then
                 local currentuses = item.components.finiteuses:GetPercent()
                 item.components.finiteuses:SetPercent(currentuses + 50)
-            elseif item == nil or not item:HasTag("electricaltool")then
+            elseif item == nil or item:HasTag("electricaltool") == false then
                 return false
             end
                 inst.components.health:DoDelta(TUNING.HEALING_SMALL, false, "lightning")
@@ -72,7 +72,7 @@ env.AddPlayerPostInit(function(inst)
             return true
         end
     end
-    if WX78_CONFIG then --temp until beta changes releases, as this relies on WX rework stuff.
+    if TUNING.DSTU.UPDATE_CHECK then 
         inst:AddTag("batteryuser")          -- from batteryuser component
         inst:AddComponent("batteryuser")
         inst.components.batteryuser.onbatteryused = OnChargeFromBattery
