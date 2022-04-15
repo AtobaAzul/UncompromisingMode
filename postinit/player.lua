@@ -72,7 +72,9 @@ env.AddPlayerPostInit(function(inst)
             return true
         end
     end
-    inst:AddTag("batteryuser")          -- from batteryuser component
-    inst:AddComponent("batteryuser")
-    inst.components.batteryuser.onbatteryused = OnChargeFromBattery
+    if WX78_CONFIG then --temp until beta changes releases, as this relies on WX rework stuff.
+        inst:AddTag("batteryuser")          -- from batteryuser component
+        inst:AddComponent("batteryuser")
+        inst.components.batteryuser.onbatteryused = OnChargeFromBattery
+    end
 end)
