@@ -56,11 +56,14 @@ local RETARGET_CAN_TAGS = { "player" }
 local RETARGET_CANT_TAGS = { "INLIMBO", "playerghost" }
 
 local function retargetfn(inst)
+
     return FindEntity(
                 inst,
                 30,
                 function(guy)
-                    return inst.components.combat:CanTarget(guy) and guy.LightWatcher:IsInLight()
+					local hat = guy.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+	
+                    return inst.components.combat:CanTarget(guy) and (guy.LightWatcher:IsInLight() or hat ~= nil and hat:HasTag("nightvision"))
                 end,
                 RETARGET_CAN_TAGS,
                 RETARGET_CANT_TAGS
@@ -69,7 +72,9 @@ local function retargetfn(inst)
 end
 
 local function KeepTarget(inst, target)
-    return target ~= nil and target.LightWatcher:IsInLight()
+	local hat = target ~= nil and target.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+
+    return target ~= nil and (target.LightWatcher:IsInLight() or hat ~= nil and hat:HasTag("nightvision"))
 end
   
 local function StopGrabbing(inst)
@@ -85,7 +90,10 @@ local function Grab(inst)
 	local ents = TheSim:FindEntities(x, y, z, 1, RETARGET_CAN_TAGS, RETARGET_CANT_TAGS)
 	
 	for i, v in ipairs(ents) do
-		if v.components.health ~= nil and not v.components.health:IsDead() and v.LightWatcher:IsInLight() and not v.sg:HasStateTag("gotgrabbed") then
+		local hat = v ~= nil and v.components.inventory and v.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+	
+	
+		if v.components.health ~= nil and not v.components.health:IsDead() and (v.LightWatcher:IsInLight() or hat ~= nil and hat:HasTag("nightvision")) and not v.sg:HasStateTag("gotgrabbed") then
 			local fx = SpawnPrefab("rnesus_grab")
 			fx.entity:SetParent(inst.entity)
 				
