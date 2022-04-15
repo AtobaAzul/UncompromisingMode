@@ -797,9 +797,23 @@ State{
             end),
             TimeEvent(41 * FRAMES, function(inst)
 				if inst.components.inventory ~= nil then
-					local item = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-					if item ~= nil then
-						inst.components.inventory:DropItem(item)
+					local hand = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+					if hand ~= nil then
+						inst.components.inventory:DropItem(hand)
+					end
+					
+					local body = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+					if body ~= nil and body._light ~= nil then
+						inst.components.inventory:DropItem(body)
+					end
+					
+					local hat = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+					if hat ~= nil and hat:HasTag("nightvision") then
+						inst.components.inventory:DropItem(hat)
+					end
+					
+					if inst.components.sanity ~= nil then
+						inst.components.sanity:DoDelta(-15)
 					end
 				end
             end),

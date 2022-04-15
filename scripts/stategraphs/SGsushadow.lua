@@ -145,7 +145,11 @@ local states=
 				EventHandler("animover", function(inst) 
 					local x, y, z = inst.Transform:GetWorldPosition()
 					
-					if TheWorld.state.isnight and inst.components.combat:HasTarget() or (inst.running > 5 and TheSim:GetLightAtPoint(x, y, z) == TUNING.DARK_CUTOFF) then
+					local target = inst.components.combat.target
+					local hat = target ~= nil and target:GetDistanceSqToPoint(x, y, z) < 200 and target.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) and target.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD):HasTag("nightvision")
+					
+					
+					if TheWorld.state.isnight and inst.components.combat:HasTarget() or (inst.running > 5 and (TheSim:GetLightAtPoint(x, y, z) == TUNING.DARK_CUTOFF or hat)) then
 						inst.sg:GoToState("run")
 					else
 						inst.sg:GoToState("run_stop")

@@ -10,3 +10,12 @@ env.AddPrefabPostInit("butterfly", function(inst)
 	end
 	
 end)
+
+env.AddPrefabPostInit("moonbutterfly", function(inst)
+	inst:AddTag("noauradamage")
+	
+	if not TheWorld.ismastersim then
+		return
+	end
+	
+end)
