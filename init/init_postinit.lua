@@ -132,11 +132,6 @@ local prefab_post = {
 	"grassgekko",
 	"minotaur_drops",
 	"frog",
-	"waterplant_bomb",
-	"grassgator",
-	"alterguardian",
-	"boat",
-	"seasonal_shoals",
 }
 
 local stategraph_post = {
