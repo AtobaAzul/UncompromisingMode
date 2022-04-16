@@ -114,9 +114,8 @@ env.AddPlayerPostInit(function(inst)
             return true
         end
     end
-    if TUNING.DSTU.UPDATE_CHECK then 
-        inst:AddTag("batteryuser")          -- from batteryuser component
-        inst:AddComponent("batteryuser")
+    if TUNING.DSTU.UPDATE_CHECK --[[and inst:HasTag("batteryuser")]] then
+        inst:AddComponent("batteryuser") --just the component by itself doesn't do anything
         inst.components.batteryuser.onbatteryused = OnChargeFromBattery
     end
 end)

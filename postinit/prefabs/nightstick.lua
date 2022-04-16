@@ -118,6 +118,9 @@ local function onequip(inst, owner)
 	
 	owner.lightningpriority = 0
 	owner:ListenForEvent("lightningstrike", Strike, owner)
+	owner:AddTag("batteryuser")          -- from batteryuser component
+	owner:AddComponent("batteryuser")
+	print("add batteryuser")
 end
 
 local function onunequip(inst, owner)
@@ -131,7 +134,13 @@ local function onunequip(inst, owner)
 	owner:RemoveTag("lightningrod")
 	owner.lightningpriority = nil
 	owner:ListenForEvent("lightningstrike", nil)
-	
+
+	if owner.components.upgrademoduleowner == nil then
+		owner:RemoveTag("batteryuser")          -- from batteryuser component
+		owner:RemoveComponent("batteryuser")
+		print("removed batteryuser")
+	end
+
 end
 
 local function onfuelchange(newsection, oldsection, inst)

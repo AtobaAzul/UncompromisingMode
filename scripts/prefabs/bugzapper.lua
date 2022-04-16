@@ -94,7 +94,8 @@ local function onequip(inst, owner)
     if inst.components.fueled ~= nil and not inst.components.fueled:IsEmpty() then
         turnon(inst)
     end
-	
+	owner:AddTag("batteryuser")          -- from batteryuser component
+
 end
 
 local function onunequip(inst, owner)
@@ -106,6 +107,9 @@ local function onunequip(inst, owner)
 		inst.sparktask:Cancel()
 	end
 	inst.sparktask = nil
+	if owner.components.upgrademoduleowner == nil then
+		owner:RemoveTag("batteryuser")          -- from batteryuser component
+	end
 end
 
 local function nofuel(inst)

@@ -110,6 +110,10 @@ local function projectilefn()
     inst.components.complexprojectile:SetOnHit(OnHitInk)
     inst.components.complexprojectile.usehigharc = false
 
+    inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.canbepickedup = false
+    inst.components.inventoryitem.owner = inst.clawer
+
     inst.persists = false
 
     inst:AddComponent("locomotor")
@@ -121,7 +125,7 @@ end
 
 local COLLAPSIBLE_TAGS_PLAYER = { "_combat", "pickable", "NPC_workable" }
 local NON_COLLAPSIBLE_TAGS_PLAYER = { "player", "bird", "rabbit", "playerghost", "FX", "NOCLICK", "DECOR", "INLIMBO", "wall", "companion"}
-
+                                                --don't use biiiiiirrrddd the stupid moonstorm birds have that, I'll figure this out later.
 local function OnHitInk_claw(inst, attacker, target)
 	local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, 0, z, 3, nil, NON_COLLAPSIBLE_TAGS_PLAYER, COLLAPSIBLE_TAGS_PLAYER)
@@ -220,6 +224,10 @@ local function clawprojectilefn()
     inst.components.complexprojectile:SetOnLaunch(onthrown_claw)
     inst.components.complexprojectile:SetOnHit(OnHitInk_claw)
     inst.components.complexprojectile.usehigharc = true
+
+    inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.canbepickedup = false
+    inst.components.inventoryitem.owner = inst.clawer
 
     inst.persists = false
 
