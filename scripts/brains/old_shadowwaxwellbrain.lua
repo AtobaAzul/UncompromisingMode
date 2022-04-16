@@ -12,7 +12,7 @@ end)
 
 --Images will help chop, mine and fight.
 
-local MIN_FOLLOW_DIST = 2
+local MIN_FOLLOW_DIST = 1
 local TARGET_FOLLOW_DIST = 4
 local MAX_FOLLOW_DIST = 6
 
@@ -128,11 +128,11 @@ function ShadowWaxwellBrain:OnStart()
                  
 		ChaseAndAttack(self.inst, 5),
 		
-        WhileNode(function() return StartWorkingCondition(self.inst, {"chopping", "prechop"}) and 
+        WhileNode(function() return StartWorkingCondition(self.inst, {"chopping"--[[, "prechop"]]}) and 
         KeepWorkingAction(self.inst, {"chopping", "prechop"}) end, "keep chopping",
             DoAction(self.inst, function() return FindObjectToWorkAction(self.inst, ACTIONS.CHOP) end)),
 
-        WhileNode(function() return StartWorkingCondition(self.inst, {"mining", "premine"}) and 
+        WhileNode(function() return StartWorkingCondition(self.inst, {"mining"--[[, "premine"]]}) and 
         KeepWorkingAction(self.inst, {"mining", "premine"}) end, "keep mining",                   
             DoAction(self.inst, function() return FindObjectToWorkAction(self.inst, ACTIONS.MINE) end)),
 
