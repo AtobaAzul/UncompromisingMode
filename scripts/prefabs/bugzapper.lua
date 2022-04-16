@@ -133,7 +133,7 @@ end
 local function onattack(inst, attacker, target)
     if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and ((TUNING.DSTU.ELECTRICALMISHAP == false and not inst.components.fueled:IsEmpty()) or TUNING.DSTU.ELECTRICALMISHAP == true) then
 		if target:HasTag("insect") and not target.components.health:IsDead() then
-			if TUNING.DSTU.ELECTRICALMISHAP == false then
+			if TUNING.DSTU.ELECTRICALMISHAP == 0 or TUNING.DSTU.ELECTRICALMISHAP == 2 then
 				target.components.combat:GetAttacked(attacker, 30, nil)
 				--target.components.health:DoDelta(-30, false, attacker)
 			else
@@ -159,7 +159,7 @@ local function onattack(inst, attacker, target)
 		end
 		
 		if (target:HasTag("spider") or target:HasTag("hoodedwidow")) and not target.components.health:IsDead() then
-			if TUNING.DSTU.ELECTRICALMISHAP == false then
+			if TUNING.DSTU.ELECTRICALMISHAP == 2 or TUNING.DSTU.ELECTRICALMISHAP == 0 then
 				target.components.combat:GetAttacked(attacker, 15, nil)
 				--target.components.health:DoDelta(-15, false, attacker)
 			else

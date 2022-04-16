@@ -194,7 +194,7 @@ env.AddPrefabPostInit("nightstick", function(inst)
 		inst.components.fueled:SetTakeFuelFn(ontakefuel)
 		inst.components.fueled.fueltype = FUELTYPE.BATTERYPOWER
 		--inst.components.fueled.secondaryfueltype = FUELTYPE.CHEMICAL
-		if TUNING.DSTU.ELECTRICALMISHAP == false then
+		if TUNING.DSTU.ELECTRICALMISHAP == 2 then
 			inst.components.fueled.accepting = true
 		else
 			inst.components.fueled.rate = 1

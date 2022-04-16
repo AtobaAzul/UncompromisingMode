@@ -20,10 +20,23 @@ env.AddPlayerPostInit(function(inst)
         if inst.components.upgrademoduleowner == nil then
             local item = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
             if item ~= nil and item:HasTag("electricaltool") and item.components.fueled ~= nil then
-                item.components.fueled:DoDelta(50, inst)
+                local percent = item.components.fueled:GetPercent()
+                local refuelnumber = 0
+                if percent + 0.33 > 1 then
+                    refuelnumber = 1
+                else
+                    refuelnumber = percent + 0.33
+                end
+                item.components.fueled:SetPercent(refuelnumber)
             elseif item ~= nil and item:HasTag("electricaltool") and item.components.finiteuses ~= nil then
-                local currentuses = item.components.finiteuses:GetPercent()
-                item.components.finiteuses:SetPercent(currentuses + 50)
+                local percent = item.components.finiteuses:GetPercent()
+                local refuelnumber = 0
+                if percent + 0.33 > 1 then
+                    refuelnumber = 1
+                else
+                    refuelnumber = percent + 0.33
+                end
+                item.components.finiteuses:SetPercent(refuelnumber)
             elseif item == nil or not item:HasTag("electricaltool") then
                 return false
             end
@@ -37,10 +50,23 @@ env.AddPlayerPostInit(function(inst)
         elseif inst.components.upgrademoduleowner ~= nil and inst.components.upgrademoduleowner:ChargeIsMaxed() then
             local item = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
             if item ~= nil and item:HasTag("electricaltool") and item.components.fueled ~= nil then
-                item.components.fueled:DoDelta(50, inst)
+                local percent = item.components.fueled:GetPercent()
+                local refuelnumber = 0
+                if percent + 0.33 > 1 then
+                    refuelnumber = 1
+                else
+                    refuelnumber = percent + 0.33
+                end
+                item.components.fueled:SetPercent(refuelnumber)
             elseif item ~= nil and item:HasTag("electricaltool") and item.components.finiteuses ~= nil then
-                local currentuses = item.components.finiteuses:GetPercent()
-                item.components.finiteuses:SetPercent(currentuses + 50)
+                local percent = item.components.finiteuses:GetPercent()
+                local refuelnumber = 0
+                if percent + 0.33 > 1 then
+                    refuelnumber = 1
+                else
+                    refuelnumber = percent + 0.33
+                end
+                item.components.finiteuses:SetPercent(refuelnumber)
             elseif item == nil or not item:HasTag("electricaltool") then
                 return false
             end
@@ -54,10 +80,26 @@ env.AddPlayerPostInit(function(inst)
         elseif inst.components.upgrademoduleowner ~= nil and not inst.components.upgrademoduleowner:ChargeIsMaxed() then
             local item = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
             if item ~= nil and item:HasTag("electricaltool") and item.components.fueled ~= nil then
-                item.components.fueled:DoDelta(50, inst)
+                local percent = item.components.fueled:GetPercent()
+                local refuelnumber = 0
+                if percent + 0.33 > 1 then
+                    refuelnumber = 1
+                else
+                    refuelnumber = percent + 0.33
+                end
+                item.components.fueled:SetPercent(refuelnumber)
             elseif item ~= nil and item:HasTag("electricaltool") and item.components.finiteuses ~= nil then
-                local currentuses = item.components.finiteuses:GetPercent()
-                item.components.finiteuses:SetPercent(currentuses + 50)
+                local percent = item.components.finiteuses:GetPercent()
+                local refuelnumber = 0
+                if percent + 0.33 > 1 then
+                    refuelnumber = 1
+                else
+                    refuelnumber = percent + 0.33
+                end
+                item.components.finiteuses:SetPercent(refuelnumber)
+                --what the fuck
+                --https://cdn.discordapp.com/attachments/624240394573447168/964957359111819324/unknown.png
+                --?????????
             end
 
             inst.components.health:DoDelta(TUNING.HEALING_SMALL, false, "lightning")
