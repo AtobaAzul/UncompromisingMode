@@ -1,7 +1,7 @@
 name = "󰀕 Uncompromising Mode"
 description = 
 [[
-󰀔 [ Version 1.4.4.66 : "Squeaky Clean" ]
+󰀔 [ Version 1.4.5 : "Squeaky Clean" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -336,7 +336,7 @@ configuration_options =
 	{
 		name = "electricalmishap",
 		label = "Electrical Weapon Retune",
-		hover = "Electrical weapons can protect and charge from lightning strikes, lightning rods, and Winona Generators. Bug Zapper will drain on hit. Classic enables recharging via electrical items, with slightly different tuning. Bug Zapper will drain over time.",
+		hover = "Electrical weapons protect and charge from lightning strikes/rods, and Generators. Classic enables recharging via electrical items, with slightly different tuning.",
 		options =
 		{
 			{description = "Electrical Mishap", data = 1},
