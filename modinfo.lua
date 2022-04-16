@@ -1,7 +1,7 @@
 name = "󰀕 Uncompromising Mode"
 description = 
 [[
-󰀔 [ Version 1.4.4.65 : "Squeaky Clean" ]
+󰀔 [ Version 1.4.4.66 : "Squeaky Clean" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -17,7 +17,7 @@ Prominent features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Squeaky Clean v1.4.4.65"
+version = "Squeaky Clean v1.4.5"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
@@ -334,9 +334,9 @@ configuration_options =
 	},
 	BinaryConfig("insul_thermalstone", "Tweaked Thermal Stone", "Thermal stones now have less insulation, but inherit some insulation from clothing.", true),
 	{
-		name = "electricalmishap_",
+		name = "electricalmishap",
 		label = "Electrical Weapon Retune",
-		hover = "Tweaks electrical weapons based on suggestions from Shynuke and Lux.",
+		hover = "Electrical weapons can protect and charge from lightning strikes, lightning rods, and Winona Generators. Bug Zapper will drain on hit. Classic enables recharging via electrical items, with slightly different tuning. Bug Zapper will drain over time.",
 		options =
 		{
 			{description = "Electrical Mishap", data = 1},
