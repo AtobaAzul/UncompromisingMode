@@ -97,15 +97,21 @@ local function OnLightningStrike(inst)
 end
 
 local function onlessercharge(inst)
-    if inst.components.inventory:IsInsulated() then
-        inst:PushEvent("lightningdamageavoided")
-    else
-        inst.components.sanity:DoDelta(-10)
-        inst.components.talker:Say(GetString(inst, "ANNOUNCE_CHARGE"))
-		if inst.charge_time < TUNING.TOTAL_DAY_TIME/2 then
-			startovercharge(inst, CalcDiminishingReturns(inst.charge_time, TUNING.TOTAL_DAY_TIME/8))
+	if inst.components.health ~= nil and not (inst.components.health:IsDead() or inst.components.health:IsInvincible()) then
+		if inst.components.inventory:IsInsulated() then
+			inst:PushEvent("lightningdamageavoided")
+		else
+			inst.components.sanity:DoDelta(-10)
+			if inst.components.upgrademoduleowner ~= nil and inst.components.upgrademoduleowner.charge_level < 3 then
+				inst.components.upgrademoduleowner:AddCharge(1)
+			else
+				inst.components.talker:Say(GetString(inst, "ANNOUNCE_CHARGE"))
+				if inst.charge_time < TUNING.TOTAL_DAY_TIME/2 then
+					startovercharge(inst, CalcDiminishingReturns(inst.charge_time, TUNING.TOTAL_DAY_TIME/8))
+				end
+			end
 		end
-    end
+	end
 end
 
 local function dowetsparks(inst, dt)
