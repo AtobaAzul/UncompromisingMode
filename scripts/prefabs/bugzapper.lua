@@ -135,7 +135,7 @@ end
 --------------------------------------------------------------------------
 
 local function onattack(inst, attacker, target)
-    if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and ((TUNING.DSTU.ELECTRICALMISHAP == false and not inst.components.fueled:IsEmpty()) or TUNING.DSTU.ELECTRICALMISHAP == true) then
+    if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and (((TUNING.DSTU.ELECTRICALMISHAP == 2 or TUNING.DSTU.ELECTRICALMISHAP == 0) and not inst.components.fueled:IsEmpty()) or TUNING.DSTU.ELECTRICALMISHAP == 1) then
 		if target:HasTag("insect") and not target.components.health:IsDead() then
 			if TUNING.DSTU.ELECTRICALMISHAP == 0 or TUNING.DSTU.ELECTRICALMISHAP == 2 then
 				target.components.combat:GetAttacked(attacker, 30, nil)
@@ -232,7 +232,7 @@ local function fn()
 
     inst:AddComponent("equippable")
 	
-	if TUNING.DSTU.ELECTRICALMISHAP == false then
+	if TUNING.DSTU.ELECTRICALMISHAP == 2 or TUNING.DSTU.ELECTRICALMISHAP == 0 then
 		inst:AddComponent("fueled")
 		inst.components.fueled.fueltype = FUELTYPE.BATTERYPOWER
 		--inst.components.fueled.secondaryfueltype = FUELTYPE.CHEMICAL
