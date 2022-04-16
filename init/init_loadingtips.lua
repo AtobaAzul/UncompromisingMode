@@ -1,11 +1,11 @@
 
 function setup_custom_loading_tips()
 
-	AddLoadingTip(GLOBAL.STRINGS.UI.LOADING_SCREEN_OTHER_TIPS, "TIP_UM_FIREREWORK", "\"Burning monsters is more fun now that they leave more than ash behind!\" -W")
+	AddLoadingTip(GLOBAL.STRINGS.UI.LOADING_SCREEN_OTHER_TIPS, "TIP_UM_FIREREWORK", "\"Burning monsters is more fun when leave more than ash behind!\" -W")
 	AddLoadingTip(GLOBAL.STRINGS.UI.LOADING_SCREEN_OTHER_TIPS, "TIP_UM_TOPHAT", "\"I had left the top hat behind with my old act, but it's still good for a magic trick or two.\" -M")
-	AddLoadingTip(GLOBAL.STRINGS.UI.LOADING_SCREEN_OTHER_TIPS, "TIP_UM_AMALGAMS", "\"Whoever designed these things clockwork thingamawatzits should have installed a surge protector!\" -W")
-	AddLoadingTip(GLOBAL.STRINGS.UI.LOADING_SCREEN_OTHER_TIPS, "TIP_UM_RNES", "\"Sometimes, I feel like something is us watch us night...\" - W")
-	AddLoadingTip(GLOBAL.STRINGS.UI.LOADING_SCREEN_OTHER_TIPS, "TIP_UM_MOONMAW", "Like a moth to flame, she flew too close too the moon. But unlike Icarus, her story doesn't end there.")
+	AddLoadingTip(GLOBAL.STRINGS.UI.LOADING_SCREEN_OTHER_TIPS, "TIP_UM_AMALGAMS", "\"Whoever designed these clockwork thingamawatzits should have installed a surge protector!\" -W")
+	AddLoadingTip(GLOBAL.STRINGS.UI.LOADING_SCREEN_OTHER_TIPS, "TIP_UM_RNES", "\"Sometimes, I feel like something is watching us night...\" - W")
+	AddLoadingTip(GLOBAL.STRINGS.UI.LOADING_SCREEN_OTHER_TIPS, "TIP_UM_MOONMAW", "Like a moth to flame, she flew too close to the moon. But unlike Icarus, her story doesn't end there.")
 	AddLoadingTip(GLOBAL.STRINGS.UI.LOADING_SCREEN_OTHER_TIPS, "TIP_UM_MUTATIONS", "The King of Winter has invited some extended family over for the season.")
 	AddLoadingTip(GLOBAL.STRINGS.UI.LOADING_SCREEN_OTHER_TIPS, "TIP_UM_RUINS", "The Shadows are stirring, and long buried clock works have resurfaced. Keep your wits about you.")
 	AddLoadingTip(GLOBAL.STRINGS.UI.LOADING_SCREEN_OTHER_TIPS, "TIP_UM_CONFIGS", "Not a fan of some changes? Need a change of pace? Check out Uncompromising Modes configurable options!" )
