@@ -1,7 +1,7 @@
 name = "󰀕 Uncompromising Mode"
 description = 
 [[
-󰀔 [ Version 1.4.5.2 : "Squeaky Clean" ]
+󰀔 [ Version 1.4.5.3 : "Squeaky Clean" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -17,7 +17,7 @@ Prominent features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Squeaky Clean v1.4.5.2"
+version = "Squeaky Clean v1.4.5.3"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
@@ -165,7 +165,7 @@ configuration_options =
 	BinaryConfig("wormwood_plants", "Prevent Infinite Sanity Loop", "Increases the sanity loss from digging plants.", true),
 	BinaryConfig("wendy", "Nerfed Wendy", "Abigail was nerfed to not increase Wendy's maximum damage above average.", true),
 	BinaryConfig("wx78", "Tweaked WX-78", "No longer heals from lightning", true),
-	BinaryConfig("woodie", "Nerfed Weregoose", "Weregoose gains wetness when over water.", false),
+	BinaryConfig("woodie", "Weregoose Wetness", "Weregoose gains wetness when over water.", false),
 	SkipSpace(),
 ------------------------------
 -- Weather --
