@@ -8,46 +8,48 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local HUNGRY_THRESH_HIGH = 0.666
 
-local function ItemTradeTest(inst, item, giver)
-	if giver:HasTag("handyperson") then
-		return inst._OldItemTradeTest(inst, item)
-	else
-		return false, "WINONAGEN"
+if TUNING.DSTU.WINONA_GEN then
+	local function ItemTradeTest(inst, item, giver)
+		if giver:HasTag("handyperson") then
+			return inst._OldItemTradeTest(inst, item)
+		else
+			return false, "WINONAGEN"
+		end
 	end
+
+	env.AddPrefabPostInit("winona_battery_high", function(inst)
+		if not TheWorld.ismastersim then
+			return
+		end
+
+		if inst.components.trader ~= nil then
+			inst._OldItemTradeTest = inst.components.trader.abletoaccepttest
+			inst.components.trader:SetAbleToAcceptTest(ItemTradeTest)
+		end
+	end)
+
+	local function ItemTradeTestLow(inst, item, giver)
+		if giver:HasTag("handyperson") and item.prefab == "nitre" then
+			return true
+		else
+			return false, "WINONAGEN"
+		end
+	end
+
+	local function OnFuelGiven(inst, giver, item)
+		inst.components.fueled:TakeFuelItem(item, giver)
+	end
+
+	env.AddPrefabPostInit("winona_battery_low", function(inst)
+		if not TheWorld.ismastersim then
+			return
+		end
+		inst:AddComponent("trader")
+		inst.components.trader:SetAbleToAcceptTest(ItemTradeTestLow)
+		inst.components.trader.onaccept = OnFuelGiven
+
+	end)
 end
-
-env.AddPrefabPostInit("winona_battery_high", function(inst)
-	if not TheWorld.ismastersim then
-		return
-	end
-	
-	if inst.components.trader ~= nil then
-		inst._OldItemTradeTest = inst.components.trader.abletoaccepttest
-		inst.components.trader:SetAbleToAcceptTest(ItemTradeTest)
-	end
-end)
-
-local function ItemTradeTestLow(inst, item, giver)
-	if giver:HasTag("handyperson") and item.prefab == "nitre" then
-		return true
-	else
-		return false, "WINONAGEN"
-	end
-end
-
-local function OnFuelGiven(inst, giver, item)
-	inst.components.fueled:TakeFuelItem(item, giver)
-end
-
-env.AddPrefabPostInit("winona_battery_low", function(inst)
-	if not TheWorld.ismastersim then
-		return
-	end
-    inst:AddComponent("trader")
-    inst.components.trader:SetAbleToAcceptTest(ItemTradeTestLow)
-    inst.components.trader.onaccept = OnFuelGiven
-	
-end)
 
 local function OnCooldown(inst)
     inst._cdtask = nil
@@ -58,11 +60,11 @@ local function ActionHungerDrain(inst, data)
 	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
 	local t = GetTime()
 
-	if data.action.action == ACTIONS.CHOP or 
-	data.action.action == ACTIONS.MINE or 
-	data.action.action == ACTIONS.HAMMER or 
-	data.action.action == ACTIONS.ROW or 
-	data.action.action == ACTIONS.DIG or 
+	if data.action.action == ACTIONS.CHOP or
+	data.action.action == ACTIONS.MINE or
+	data.action.action == ACTIONS.HAMMER or
+	data.action.action == ACTIONS.ROW or
+	data.action.action == ACTIONS.DIG or
 	data.action.action == ACTIONS.ATTACK or
 	data.action.action == ACTIONS.PICK or
 	data.action.action == ACTIONS.TILL then
@@ -88,7 +90,7 @@ local function ActionHungerDrain(inst, data)
 						snap.Transform:SetRotation(angle * RADIANS)
 						snap.Transform:SetScale(0.8, 0.8, 0.8)
 					end
-					
+
 					inst.components.hunger:DoDelta(-0.333, true)
 				elseif data.action.action == ACTIONS.MINE or
 				data.action.action == ACTIONS.HAMMER then
@@ -101,7 +103,7 @@ local function ActionHungerDrain(inst, data)
 						snap.Transform:SetRotation(angle * RADIANS)
 						snap.Transform:SetScale(0.8, 0.8, 0.8)
 					end
-					
+
 					inst.components.hunger:DoDelta(-0.5, true)
 				elseif data.action.action == ACTIONS.DIG then
 					inst.components.hunger:DoDelta(-0.5, true)
@@ -197,20 +199,20 @@ env.AddPrefabPostInit("winona", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	
+
 	if TUNING.DSTU.WINONA_WORKER == true then
 		inst.multiplierapplied = false
-		
+
 		inst:ListenForEvent("performaction", ActionHungerDrain)
 		inst:ListenForEvent("hungerdelta", onhungerchange)
-		
+
 		inst:ListenForEvent("ms_respawnedfromghost", onbecamehuman)
 		inst:ListenForEvent("ms_becameghost", onbecameghost)
-		
+
 		if inst.components.efficientuser == nil then
 			inst:AddComponent("efficientuser")
 		end
-		
+
 		local _PickActionOld = inst.sg.sg.actionhandlers[ACTIONS.PICK].deststate
 		inst.sg.sg.actionhandlers[ACTIONS.PICK].deststate = function(inst, action)
 		local fast = inst.components.hunger:GetPercent() >= HUNGRY_THRESH_HIGH
@@ -240,7 +242,7 @@ env.AddPrefabPostInit("winona", function(inst)
 		end
 	end
 end)
-    
+
 
 --[[
 
@@ -267,7 +269,7 @@ AddPrefabPostInit("world", function(inst)
                 end
                 inst.SoundEmitter:PlaySound("dontstarve/common/telebase_gemplace")
             end
-        
+
             local delta = inst.components.fueled.maxfuel / GEMSLOTS
             if inst.components.fueled:IsEmpty() then
                 --prevent battery level flicker by subtracting a tiny bit from initial fuel
@@ -282,7 +284,7 @@ AddPrefabPostInit("world", function(inst)
                 end
             end
             inst.components.fueled:DoDelta(delta)
-        
+
             if not inst.components.fueled.consuming then
                 inst.components.fueled:StartConsuming()
                 BroadcastCircuitChanged(inst)
@@ -293,7 +295,7 @@ AddPrefabPostInit("world", function(inst)
                     StartSoundLoop(inst)
                 end
             end
-        
+
             PlayHitAnim(inst)
             inst.SoundEmitter:PlaySound("dontstarve/common/together/battery/up")
         else
@@ -304,7 +306,7 @@ AddPrefabPostInit("world", function(inst)
     end
     --Now replace the function with our modified one
     UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.winona_battery_high.fn, OnGemGiven, "OnGemGiven")
-    
+
     --Get the old functions using upvalue hacker
     local BroadcastCircuitChanged = UpvalueHacker.GetUpvalue(GLOBAL.Prefabs.winona_battery_low.fn, "OnAddFuel", "BroadcastCircuitChanged")
     local StartBattery = UpvalueHacker.GetUpvalue(GLOBAL.Prefabs.winona_battery_low.fn, "OnAddFuel", "StartBattery")
@@ -313,7 +315,7 @@ AddPrefabPostInit("world", function(inst)
 
     local function OnAddFuel(inst)
         local guy = GLOBAL.FindEntity(inst, 40, nil, { "character" })
-        if guy ~= nil and guy:HasTag("handyperson") then 
+        if guy ~= nil and guy:HasTag("handyperson") then
             if inst.components.fueled.accepting and not inst.components.fueled:IsEmpty() then
                 if not inst.components.fueled.consuming then
                     inst.components.fueled:StartConsuming()

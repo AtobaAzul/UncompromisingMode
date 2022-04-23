@@ -29,6 +29,8 @@ local STOP_RUN_AWAY_DIST = 8
 
 local AVOID_EXPLOSIVE_DIST = 5
 
+local SHADOW_MAX_FOLLOW_DSQ = math.pow(TUNING.ABIGAIL_COMBAT_TARGET_DISTANCE + 2, 2)
+
 local function GetLeaderPos(inst)
     return inst.components.follower.leader:GetPosition()
 end
@@ -104,6 +106,19 @@ local function WatchingMinigame(inst)
 	return (inst.components.follower.leader ~= nil and inst.components.follower.leader.components.minigame_participator ~= nil) and inst.components.follower.leader.components.minigame_participator:GetMinigame() or nil
 end
 
+local function CanFight(inst)
+	local leader = GetLeader(inst)
+    local target = inst.components.combat.target
+
+    if leader ~= nil and inst:GetDistanceSqToInst(leader) < SHADOW_MAX_FOLLOW_DSQ then
+        return true
+    elseif leader ~= nil and target ~= nil then
+        inst.components.combat:GiveUp()
+    end
+
+    return false
+end
+
 function ShadowWaxwellBrain:OnStart()
 
 	local watch_game = WhileNode( function() return ShouldWatchMinigame(self.inst) end, "Watching Game",
@@ -125,8 +140,9 @@ function ShadowWaxwellBrain:OnStart()
         }, .25)),
 	
 		RunAway(self.inst, { fn = ShouldAvoidExplosive, tags = { "explosive" }, notags = { "INLIMBO" } }, AVOID_EXPLOSIVE_DIST, AVOID_EXPLOSIVE_DIST),
-                 
-		ChaseAndAttack(self.inst, 5),
+
+		WhileNode(function() return CanFight(self.inst) end, "CanFight",
+			ChaseAndAttack(self.inst, 5)),
 		
         WhileNode(function() return StartWorkingCondition(self.inst, {"chopping"--[[, "prechop"]]}) and 
         KeepWorkingAction(self.inst, {"chopping", "prechop"}) end, "keep chopping",

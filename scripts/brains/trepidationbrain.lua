@@ -52,21 +52,22 @@ end
 local TARGET_FOLLOW_DIST = 7
 local MAX_FOLLOW_DIST = 10
 local function WithinDomain(inst)
-local x, y, z = inst.Transform:GetWorldPosition()
-local nearestspawner = FindEntity(inst, 50, nil,{"trepidationspawner"})
-local home = GetHome(inst)
-if nearestspawner ~= nil and home ~= nil then
-local dist1 = inst:GetDistanceSqToInst(nearestspawner)
-local dist2 = inst:GetDistanceSqToInst(home)
-	if dist1-4 > dist2 then
-	return false
-	else
-	return true
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local nearestspawner = FindEntity(inst, 50, nil,{"trepidationspawner"})
+	local home = GetHome(inst)
+	if nearestspawner ~= nil and home ~= nil then
+		local dist1 = inst:GetDistanceSqToInst(nearestspawner)
+		local dist2 = inst:GetDistanceSqToInst(home)
+			if dist1-4 > dist2 then
+				return false
+			else
+				return true
+			end
+		else
+		return true
 	end
-else
-return true
 end
-end
+
 function TrepidationBrain:OnStart()
     local root = PriorityNode(
     {	
@@ -76,7 +77,7 @@ function TrepidationBrain:OnStart()
                     self.abilityname = nil
                     self.abilitydata = nil
                 end)),
-        WhileNode(function() return ShouldAttack(self) end, "Attack", ChaseAndAttack(self.inst, 40)),
+        WhileNode(function() return ShouldAttack(self) end, "Attack", ChaseAndAttack(self.inst)),
 		
 		--WhileNode(function() return WithinDomain(self.inst) end, "Follow",
 		Follow(self.inst, function() return self.inst.harassplayer end, 1, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST),--),

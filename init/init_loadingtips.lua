@@ -1,7 +1,7 @@
 
 function setup_custom_loading_tips()
 
-	AddLoadingTip(GLOBAL.STRINGS.UI.LOADING_SCREEN_OTHER_TIPS, "TIP_UM_FIREREWORK", "\"Burning monsters is more fun when leave more than ash behind!\" -W")
+	AddLoadingTip(GLOBAL.STRINGS.UI.LOADING_SCREEN_OTHER_TIPS, "TIP_UM_FIREREWORK", "\"Burning monsters is more fun when they leave more than ash behind!\" -W")
 	AddLoadingTip(GLOBAL.STRINGS.UI.LOADING_SCREEN_OTHER_TIPS, "TIP_UM_TOPHAT", "\"I had left the top hat behind with my old act, but it's still good for a magic trick or two.\" -M")
 	AddLoadingTip(GLOBAL.STRINGS.UI.LOADING_SCREEN_OTHER_TIPS, "TIP_UM_AMALGAMS", "\"Whoever designed these clockwork thingamawatzits should have installed a surge protector!\" -W")
 	AddLoadingTip(GLOBAL.STRINGS.UI.LOADING_SCREEN_OTHER_TIPS, "TIP_UM_RNES", "\"Sometimes, I feel like something is watching us night...\" - W")

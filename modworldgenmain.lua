@@ -469,4 +469,21 @@ for i, room in ipairs(damagedpawnrooms) do
 		room.contents.distributeprefabs.pawn_hopper_nightmare = 0.20
 	end)
 end
+
+if GetModConfigData("depthseels")then
+	AddRoomPreInit("WetWilds", function(room)
+			room.contents.countprefabs=
+			{
+				shockworm = function() return math.random(1,2) end
+			}
+	end)
+end
+if GetModConfigData("depthsvipers")then
+	AddRoomPreInit("ThuleciteDebris", function(room)
+		room.contents.countprefabs = 
+		{
+			viperworm =  function() return math.random(1,2) end
+		}
+	end)
+end
 modimport("init/init_food/init_food_worldgen")

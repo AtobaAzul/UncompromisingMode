@@ -6,7 +6,7 @@ local function WhyAreYouRunning(self)
 					
 	local FightMe = ChaseAndAttack(self.inst)
 					
-    table.insert(self.bt.root.children, 2, FightMe)
+    table.insert(self.bt.root.children, 1, FightMe)
 end
 
 

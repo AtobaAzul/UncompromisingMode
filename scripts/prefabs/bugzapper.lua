@@ -135,7 +135,7 @@ end
 --------------------------------------------------------------------------
 
 local function onattack(inst, attacker, target)
-    if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and (((TUNING.DSTU.ELECTRICALMISHAP == 2 or TUNING.DSTU.ELECTRICALMISHAP == 0) and not inst.components.fueled:IsEmpty()) or TUNING.DSTU.ELECTRICALMISHAP == 1) then
+    if (target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid()) or (target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and TUNING.DSTU.ELECTRICALMISHAP == 2 and not inst.components.fueled:IsEmpty())  then
 		if target:HasTag("insect") and not target.components.health:IsDead() then
 			if TUNING.DSTU.ELECTRICALMISHAP == 0 or TUNING.DSTU.ELECTRICALMISHAP == 2 then
 				target.components.combat:GetAttacked(attacker, 30, nil)

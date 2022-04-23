@@ -1,11 +1,6 @@
 require "stategraphs/SGancient_trepidation"
 
 local brain = require "brains/trepidationbrain"
-local assets =
-{
-}
-    
- 
 
 SetSharedLootTable( 'ancient_trepidation',
 {
@@ -44,21 +39,22 @@ end
 
 
 local function OnAttacked(inst, data)
-if data.attacker ~= nil and data.attacker:HasTag("player") then
-    inst.components.combat:SetTarget(data.attacker)
-end
+	if data.attacker and data.attacker:HasTag("player") then
+		inst.components.combat:SetTarget(data.attacker)
+	end
 end
 
-    local sounds =
-    {
-        attack = "dontstarve/sanity/creature2/attack",
-        attack_grunt = "dontstarve/sanity/creature2/attack_grunt",
-        death = "dontstarve/sanity/creature2/die",
-        idle = "dontstarve/sanity/creature2/idle",
-        taunt = "dontstarve/sanity/creature2/taunt",
-        appear = "dontstarve/sanity/creature2/appear",
-        disappear = "dontstarve/sanity/creature2/dissappear",
-    }
+local sounds =
+{
+    attack = "dontstarve/sanity/creature2/attack",
+    attack_grunt = "dontstarve/sanity/creature2/attack_grunt",
+    death = "dontstarve/sanity/creature2/die",
+    idle = "dontstarve/sanity/creature2/idle",
+    taunt = "dontstarve/sanity/creature2/taunt",
+    appear = "dontstarve/sanity/creature2/appear",
+    disappear = "dontstarve/sanity/creature2/dissappear",
+}
+
 local function ResetAbilityCooldown(inst, ability)
     local id = ability.."_cd"
     local remaining = TUNING["STALKER_"..string.upper(id)] - (inst.components.timer:GetTimeElapsed(id) or TUNING.STALKER_ABILITY_RETRY_CD)
@@ -67,12 +63,13 @@ local function ResetAbilityCooldown(inst, ability)
         inst.components.timer:StartTimer(id, remaining)
     end
 end	
+
 local CHANNELER_SPAWN_PERIOD = 0.5
 local function DoSpawnChanneler(inst,radius)
-local CHANNELER_SPAWN_RADIUS = 8.7
-if radius ~= nil then
-CHANNELER_SPAWN_RADIUS = radius
-end
+	local CHANNELER_SPAWN_RADIUS = 8.7
+	if radius then
+		CHANNELER_SPAWN_RADIUS = radius
+	end
     if inst.components.health:IsDead() then
         inst.channelertask = nil
         inst.channelerparams = nil
@@ -101,6 +98,7 @@ end
         inst.channelerparams = nil
     end
 end
+
 local function SpawnChannelers(inst)
     ResetAbilityCooldown(inst, "channelers")
 
@@ -120,8 +118,9 @@ local function SpawnChannelers(inst)
     }
     DoSpawnChanneler(inst)
 end
+
 local function DespawnChannelers(inst)
-    if inst.channelertask ~= nil then
+    if inst.channelertask then
         inst.channelertask:Cancel()
         inst.channelertask = nil
         inst.channelerparams = nil
@@ -132,6 +131,7 @@ local function DespawnChannelers(inst)
         end
     end
 end
+
 local function nodmgshielded(inst, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb)
     return inst.hasshield and amount <= 0 and not ignore_absorb or afflicter ~= nil and afflicter:HasTag("quakedebris")
 end
@@ -150,51 +150,40 @@ local function StartAbility(inst, ability)
 end
 
 local function CheckIfBozoLeft(inst)
-if FindEntity(inst, 20, 
-        function(guy) 
-            if inst.components.combat:CanTarget(guy) then
-                return guy:HasTag("character")
-            end
-			end) == nil then
-
-	inst.sg:GoToState("spawn")
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local Despawn = SpawnPrefab("shadow_despawn")
-	inst:DespawnChannelers()
-	if inst.components.health ~= nil then
-		inst.components.health:SetCurrentHealth(3000)
-	end
-	Despawn.Transform:SetPosition(x, 0, z)
-	local bozo =	FindEntity(inst, 40, 
+	if not FindEntity(inst, 20, function(guy) if inst.components.combat:CanTarget(guy) then return guy:HasTag("character") end end) then
+		inst.sg:GoToState("spawn")
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local Despawn = SpawnPrefab("shadow_despawn")
+		inst:DespawnChannelers()
+		if inst.components.health ~= nil then
+			inst.components.health:SetCurrentHealth(3000)
+		end
+		Despawn.Transform:SetPosition(x, 0, z)
+		local bozo = FindEntity(inst, 40, 
 			function(guy) 
-				if inst.components.combat:CanTarget(guy) then
-					return guy:HasTag("character")
-				end
-    end)
-	if bozo ~= nil then
-		inst.components.combat:SuggestTarget(bozo)
-		local x, y, z = bozo.Transform:GetWorldPosition()
-		inst.Transform:SetPosition(x, 0, z)
+			if inst.components.combat:CanTarget(guy) then
+				return guy:HasTag("character")
+			end
+		end)
+		if bozo then
+			inst.components.combat:SuggestTarget(bozo)
+			local x, y, z = bozo.Transform:GetWorldPosition()
+			inst.Transform:SetPosition(x, 0, z)
+		end
 	end
-end
 end
 
 local function CheckIfInsaners(inst)  --Actually just checks if anyone is below half sanity, rather than completely insane.
-local bozo =FindEntity(inst, 40, 
-        function(guy) 
-            if inst.components.combat:CanTarget(guy) then
-                return guy:HasTag("character")
-            end
-    end)
-if bozo ~= nil and bozo.components.sanity ~= nil and bozo.components.sanity:GetPercent() < 0.5 and inst.enraged == false then
-	inst.enraged = true
-	inst.sg:GoToState("anger")
-	if inst.components.combat ~= nil then
-		inst.components.combat:SuggestTarget(bozo)
-	end
-elseif inst.enraged == true and inst.components.combat ~= nil and inst.components.combat.target == nil then
-	inst.enraged = false
-	inst.sg:GoToState("calm")
+	local bozo = FindEntity(inst,40, function(guy) if inst.components.combat:CanTarget(guy) then return (guy:HasTag("character") and not guy:HasTag("playerghost")) end end)
+	if bozo and bozo.components.sanity and bozo.components.sanity:GetPercent() < 0.5 and inst.enraged == false then
+		inst.enraged = true
+		inst.sg:GoToState("anger")
+		if inst.components.combat ~= nil then
+			inst.components.combat:SuggestTarget(bozo)
+		end
+	elseif inst.enraged == true and inst.components.combat and not inst.components.combat.target then
+		inst.enraged = false
+		inst.sg:GoToState("calm")
 	end
 end
 
@@ -203,7 +192,7 @@ local function OnSave(inst,data)
 end
 
 local function OnLoad(inst,data)
-if data ~= nil and data.enraged ~= nil then
+if data and data.enraged then
 	inst.enraged = data.enraged
 	if inst.enraged == true then
 		inst.AnimState:SetBuild("ancient_trepidation")
@@ -213,16 +202,14 @@ end
 
 local function SetHarassPlayer(inst, player)
     if inst.harassplayer ~= player then
-        if inst._harassovertask ~= nil then
+        if inst._harassovertask then
             inst._harassovertask:Cancel()
             inst._harassovertask = nil
         end
-        if inst.harassplayer ~= nil then
-            --inst:RemoveEventCallback("onremove", inst._onharassplayerremoved, inst.harassplayer)
+        if inst.harassplayer then
             inst.harassplayer = nil
         end
-        if player ~= nil then
-            --inst:ListenForEvent("onremove", inst._onharassplayerremoved, player)
+        if player then
             inst.harassplayer = player
             inst._harassovertask = inst:DoTaskInTime(120, SetHarassPlayer, nil)
         end
@@ -230,7 +217,6 @@ local function SetHarassPlayer(inst, player)
 end
 
 local function FindTargetOfInterest(inst)
-
     if inst.harassplayer == nil and inst.components.combat.target == nil then
         local x, y, z = inst.Transform:GetWorldPosition()
         -- Get all players in range
@@ -243,43 +229,27 @@ local function FindTargetOfInterest(inst)
 				local x, y, z = target.Transform:GetWorldPosition()
 				if #TheSim:FindEntities(x,y,z,60,{"trepidation"}) <= 1 and target.components.areaaware:CurrentlyInTag("Nightmare") then
 					if not target:HasTag("playerghost") then
-					SetHarassPlayer(inst, target)
-					return
+						SetHarassPlayer(inst, target)
+						return
 					end
 				end
         end
     end
 end
 
-local function CheckIfTargetIsFrigginAlive(inst)
---print(inst.harassplayer)
-if inst.harassplayer ~= nil then
-local player = inst.harassplayer
-	if player:HasTag("playerghost") or not (player.components.areaaware:CurrentlyInTag("Nightmare")) then
-	inst.harassplayer = nil
-	end
-end
-end
-
 local function CheckWhereTheHeckIAm(inst)
 if not inst.components.areaaware:CurrentlyInTag("Nightmare") and inst.components.homeseeker then
-	if inst.components.combat.target ~= nil then
+	if inst.components.combat.target then
 		inst.components.combat.target = nil
 	end
-	if inst.brain ~= nil then
-		inst.brain:Stop()
-	end
 	inst.Physics:Stop()
-	inst.AnimState:PlayAnimation("channel_pre")	
+	inst.sg:GoToState("anger")
 	inst:DoTaskInTime(0.6,function(inst)
 		local x,y,z = inst.Transform:GetWorldPosition()
 		local Despawn = SpawnPrefab("shadow_despawn").Transform:SetPosition(x,y,z)
-		if inst.brain ~= nil then
-			inst.brain:Start()
-		end
 		local x,y,z = inst.components.homeseeker.home.Transform:GetWorldPosition()
 		inst.Transform:SetPosition(x,y,z)
-		if inst.components.combat.target ~= nil then
+		if inst.components.combat.target then
 			inst.components.combat.target = nil
 		end	
 	end)
@@ -299,11 +269,10 @@ local function fn(Sim)
 
     inst.Transform:SetFourFaced()
     inst.Transform:SetScale(2, 2, 2)
-        MakeCharacterPhysics(inst, 10, 1.5)
-        RemovePhysicsColliders(inst)
-        --inst.Physics:SetCollisionGroup(COLLISION.SANITY)
-        --inst.Physics:CollidesWith(COLLISION.SANITY)   
-
+    MakeCharacterPhysics(inst, 10, 1.5)
+	RemovePhysicsColliders(inst)
+	
+	inst.AnimState:UsePointFiltering (true)
 	inst.entity:SetPristine()
 	
 	if not TheWorld.ismastersim then
@@ -317,8 +286,8 @@ local function fn(Sim)
 	inst.AnimState:SetMultColour(0, 0, 0, 0.8)
     -- locomotor must be constructed before the stategraph!
     inst:AddComponent("locomotor")
-    inst.components.locomotor.walkspeed = 3/1.2
-    inst.components.locomotor.runspeed = 5/1.2
+    inst.components.locomotor.walkspeed = 3.5
+    inst.components.locomotor.runspeed = 3.5
 
     
     inst:AddComponent("lootdropper")
@@ -328,6 +297,7 @@ local function fn(Sim)
 	inst:AddTag("notraptrigger")
     inst:AddTag("shadowchesspiece")
 	inst:AddTag("trepidation")
+	inst:AddTag("fossil")
     ------------------
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(3000)
@@ -375,7 +345,6 @@ local function fn(Sim)
 	inst.onsave = OnSave
 	inst.onload = OnLoad
 	inst:DoPeriodicTask(3,CheckIfInsaners)
-	inst:DoPeriodicTask(6,CheckIfTargetIsFrigginAlive)
 	inst:DoPeriodicTask(10,CheckWhereTheHeckIAm)
 	inst.FindTargetOfInterestTask = inst:DoPeriodicTask(5, FindTargetOfInterest) --Find something to be interested in!
 	
@@ -387,4 +356,4 @@ local function fn(Sim)
     return inst
 end
 
-return Prefab("ancient_trepidation", fn, assets, prefabs)
+return Prefab("ancient_trepidation", fn)

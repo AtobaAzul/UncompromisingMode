@@ -246,7 +246,7 @@ TUNING.DSTU =
     ----------------------------------------------------------------------------
     --Woodie
     GOOSE_WATER_WETNESS_RATE = 3,
-
+    WOODIE = GetModConfigData("woodie"),
     --Wolfgang
     WOLFGANG_SANITY_MULTIPLIER = 1.3, --prev was 1.1
 	WOLFGANG_HUNGERMIGHTY = GetModConfigData("wolfgang"),
@@ -363,7 +363,7 @@ TUNING.DSTU =
 --More Config
     BETA_COMPATIBILITY = --[[GetModConfigData("beta_compatibility"),]] true, --I'm too lazy to really bother with the rest of the things
     UPDATE_CHECK = CurrentRelease.GreaterOrEqualTo("R21_REFRESH_WX78"),
-    POCKET_POWERTRIP = GetModConfigData("pocket_powertrip"),
+	POCKET_POWERTRIP = GetModConfigData("pocket_powertrip"),
     WINTER_BURNING = GetModConfigData("winter_burning"),
     HUNGRY_VOID = GetModConfigData("hungry_void"),
     BUTTERFLYWINGS_NERF = GetModConfigData("butterflywings_nerf"),
@@ -381,6 +381,7 @@ TUNING.DSTU =
     INSUL_THERMALSTONE = GetModConfigData("insul_thermalstone"),
     HOODEDFOREST = GetModConfigData("hoodedforest"),
     GHOSTWALRUS = GetModConfigData("ghostwalrus"),
+    WINONA_GEN = GetModConfigData("winona_gen"),
 --boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
     TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),

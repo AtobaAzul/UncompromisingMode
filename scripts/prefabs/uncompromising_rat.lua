@@ -358,7 +358,9 @@ local function fn()
 	inst:AddTag("cattoy")
 	inst:AddTag("catfood")
 	inst:AddTag("cookable")
-	
+	inst:AddTag("NOBLOCK")
+	--mainly for winky, too lazy to make it for only allied rats.
+
 	inst.entity:SetPristine()
 	
 	if not TheWorld.ismastersim then
@@ -1719,7 +1721,7 @@ local function fn_winkyburrow_master()
 end
 
 local function SlumberParty(inst)
-	if inst.components.herd.members ~= nil then
+	if inst.components.herd.members ~= nil and inst.components.herd.membercount > 0 then
 		local x, y, z = inst.Transform:GetWorldPosition()
 		
 		local ents = #TheSim:FindEntities(x, y, z, 8, { "ratscout" })

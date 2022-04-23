@@ -145,8 +145,9 @@ configuration_options =
 ------------------------------
 -- Character Reworks --
 ------------------------------
-    Header("Character Reworks"),
+    Header("Characters"),
 ------------------------------
+	BinaryConfig("funny rat", "Winky", "The Vile Vermin", true),
     BinaryConfig("willow", "Willow Rework", "Willow's Lighter now has infinite durability, Willow can cast explosions, etc.", true),
     BinaryConfig("bernie", "Big Bernie", "Enable Big BERNIE!!", true),
     BinaryConfig("warly", "Improved Warly", "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.", true),
@@ -154,6 +155,7 @@ configuration_options =
 	BinaryConfig("wolfgang", "Experimental Wolfgang", "Wolfgang gains mightiness based on hunger level. Hunger drain increases the longer mighty is maintained.", false),
 	BinaryConfig("maxhealthwell", "New Maxwell Downside", "Maxwell's max health is reduced by 20% of the damage he takes.", false),
 	BinaryConfig("winonaworker", "Improved Winona", "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.", true),
+	BinaryConfig("winona_gen", "Winona-restricted Generators", "Limits access to Winona's Generators to only allow her to use them", true),
 	BinaryConfig("wortox", "Rebalanced Wortox", "Wortox has 150 health instead of 200. A few enemies no longer drop souls.", true),
 	BinaryConfig("wickerbottom", "Wickerbottom Balance", "Wickerbottom/Maxwell can no longer read books while insane.", true),
 	BinaryConfig("on tentacles", "On Tentacles Re-Balance", "On Tentacles now spawns friendly tentacles that die over time, and do not drop tentacle spots.", true),
@@ -162,7 +164,8 @@ configuration_options =
 	BinaryConfig("wormwood_fire", "Extra Flamable Wormwood", "Wormwood is highly flameable, like in Hamlet.", false),
 	BinaryConfig("wormwood_plants", "Prevent Infinite Sanity Loop", "Increases the sanity loss from digging plants.", true),
 	BinaryConfig("wendy", "Nerfed Wendy", "Abigail was nerfed to not increase Wendy's maximum damage above average.", true),
-	BinaryConfig("wx78", "Tweaked WX-78", "WX now takes damage when wet and no longer heals from lightning.", true),
+	BinaryConfig("wx78", "Tweaked WX-78", "No longer heals from lightning", true),
+	BinaryConfig("woodie", "Nerfed Weregoose", "Weregoose gains wetness when over water.", false),
 	SkipSpace(),
 ------------------------------
 -- Weather --
@@ -336,7 +339,7 @@ configuration_options =
 	{
 		name = "electricalmishap",
 		label = "Electrical Weapon Retune",
-		hover = "Electrical weapons protect and charge from lightning strikes/rods, and Generators. Classic enables recharging via electrical items, with slightly different tuning.",
+		hover = "Electrical weapons can protect and charge from lightning strikes, lightning rods, and Winona Generators.\nBug Zapper will drain on hit.\nClassic enables recharging via electrical items, with slightly different tuning.\nBug Zapper will drain over time.",
 		options =
 		{
 			{description = "Electrical Mishap", data = 1},

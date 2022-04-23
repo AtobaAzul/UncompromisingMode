@@ -51,9 +51,9 @@ local function OnGooseOverWater(inst)
     end
     inst:DoTaskInTime(GLOBAL.TUNING.WEREGOOSE_RUN_DRAIN_TIME_DURATION, OnGooseOverWater)
 end
-
 AddPrefabPostInit("woodie", function (inst)
-    inst:DoTaskInTime(GLOBAL.TUNING.WEREGOOSE_RUN_DRAIN_TIME_DURATION, OnGooseOverWater)
-	
+    if TUNING.DSTU.WOODIE then
+        inst:DoTaskInTime(GLOBAL.TUNING.WEREGOOSE_RUN_DRAIN_TIME_DURATION, OnGooseOverWater)
+    end
 	inst:ListenForEvent("working", onworked)
 end)

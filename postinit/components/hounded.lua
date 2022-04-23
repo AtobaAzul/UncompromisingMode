@@ -213,6 +213,56 @@ AddComponentPostInit("hounded", function(self)
 	
 end)
 
+AddPrefabPostInit("cave", function(inst)
+    --lazy fix, not exactly mod compatible either
+    --but I really don't know what Korean's stuff does
+    --nor am patient enough to learn it right now.
+    local wormspawn_um =
+    {
+        base_prefab = "worm",
+        winter_prefab = "worm",
+        summer_prefab = "worm",
+
+        attack_levels =
+        {
+            intro   = { warnduration = function() return 120 end, numspawns = function() return 1 end },
+            light   = { warnduration = function() return 60 end, numspawns = function() return 1 + math.random(0,1) end },
+            med     = { warnduration = function() return 45 end, numspawns = function() return 1 + math.random(0,1) end },
+            heavy   = { warnduration = function() return 30 end, numspawns = function() return 2 + math.random(0,1) end },
+            crazy   = { warnduration = function() return 30 end, numspawns = function() return 3 + math.random(0,2) end },
+        },
+
+        attack_delays =
+        {
+            intro 		= function() return TUNING.TOTAL_DAY_TIME * 6, math.random() * TUNING.TOTAL_DAY_TIME * 2.5 end,
+            rare 		= function() return TUNING.TOTAL_DAY_TIME * 7, math.random() * TUNING.TOTAL_DAY_TIME * 2.5 end,
+            occasional 	= function() return TUNING.TOTAL_DAY_TIME * 8, math.random() * TUNING.TOTAL_DAY_TIME * 2.5 end,
+            frequent 	= function() return TUNING.TOTAL_DAY_TIME * 9, math.random() * TUNING.TOTAL_DAY_TIME * 2.5 end,
+            crazy 		= function() return TUNING.TOTAL_DAY_TIME * 10, math.random() * TUNING.TOTAL_DAY_TIME * 2.5 end,
+        },
+
+        warning_speech = "ANNOUNCE_WORMS",
+
+        --Key = time, Value = sound prefab
+        warning_sound_thresholds =
+        {
+            { time = 30, sound = "LVL4_WORM" },
+            { time = 60, sound = "LVL3_WORM" },
+            { time = 90, sound = "LVL2_WORM" },
+            { time = 500, sound = "LVL1_WORM" },
+        },
+    }
+    if TUNING.DSTU.DEPTHSEELS then
+        wormspawn_um.winter_prefab = "shockworm"
+    end
+    if TUNING.DSTU.DEPTHSVIPERS then
+        wormspawn_um.summer_prefab = "viperworm"
+    end
+    if inst.components.hounded ~= nil then
+        inst.components.hounded:SetSpawnData(wormspawn_um)
+    end
+end)
+--[[
 AddComponentPostInit("hounded", function(self) --We can see if we can copy korean's stuff for worms
     if not self.inst:HasTag("cave") then return end
 
@@ -340,7 +390,7 @@ AddComponentPostInit("hounded", function(self) --We can see if we can copy korea
         if pt and self.spawn_boss and magmaspawn_pt ~= nil and TUNING.DSTU.VARGWAVES and not TUNING.DSTU.BETA_COMPATIBILITY then
             self.spawn_boss = false
             prefab_list = self.seasonal_boss_prefabs[season]
-            prefab = --[[math.random() < self.seasonal_boss_chance and #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or]] self.default_boss_prefab
+            prefab = math.random() < self.seasonal_boss_chance and #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or self.default_boss_prefab
             
 			return SpawnHounded(prefab, pt, magmaspawn_pt)
 			
@@ -374,4 +424,4 @@ AddComponentPostInit("hounded", function(self) --We can see if we can copy korea
     self.SummonSpawn = function(self, pt)
         return pt ~= nil and _SummonSpawn(pt) or nil
     end
-end)
+end)]]

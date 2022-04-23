@@ -97,9 +97,6 @@ env.AddPlayerPostInit(function(inst)
                     refuelnumber = percent + 0.33
                 end
                 item.components.finiteuses:SetPercent(refuelnumber)
-                --what the fuck
-                --https://cdn.discordapp.com/attachments/624240394573447168/964957359111819324/unknown.png
-                --?????????
             end
 
             inst.components.health:DoDelta(TUNING.HEALING_SMALL, false, "lightning")

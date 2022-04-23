@@ -14,6 +14,9 @@ if GLOBAL.TUNING.UPDATE_CHECK then
     ModuleDefs.AddCreatureScanDataDefinition("mock_dragonfly", "heat", 10)
     ModuleDefs.AddCreatureScanDataDefinition("viperworm", "light", 6)
     ModuleDefs.AddCreatureScanDataDefinition("shockworm", "light", 6)
+    ModuleDefs.AddCreatureScanDataDefinition("magmahound", "heat", 4)
+    ModuleDefs.AddCreatureScanDataDefinition("glacialhound", "cold", 4)
+    ModuleDefs.AddCreatureScanDataDefinition("lightninghound", "taser", 5)
 end
 
 --TODO, reimplement dorainsparks to do based on wetness from min to max damage
@@ -78,7 +81,6 @@ local function onlightingstrike(inst)
             --inst.components.health:DoDelta(TUNING.HEALING_SUPERHUGE, false, "lightning")
             inst.components.sanity:DoDelta(-TUNING.SANITY_LARGE)
             inst.components.talker:Say(GetString(inst, "ANNOUNCE_CHARGE"))
-
             startovercharge(inst, CalcDiminishingReturns(inst.charge_time, TUNING.TOTAL_DAY_TIME))
         end
     end
@@ -106,9 +108,11 @@ local function onlessercharge(inst)
 				inst.components.upgrademoduleowner:AddCharge(1)
 			else
 				inst.components.talker:Say(GetString(inst, "ANNOUNCE_CHARGE"))
-				if inst.charge_time < TUNING.TOTAL_DAY_TIME/2 then
-					startovercharge(inst, CalcDiminishingReturns(inst.charge_time, TUNING.TOTAL_DAY_TIME/8))
-				end
+                if inst.components.upgrademoduleowner == nil then
+                    if inst.charge_time < TUNING.TOTAL_DAY_TIME/2 then
+                        startovercharge(inst, CalcDiminishingReturns(inst.charge_time, TUNING.TOTAL_DAY_TIME/8))
+                    end
+                end
 			end
 		end
 	end
@@ -197,31 +201,34 @@ local function OnEat_Electric(inst, data)
 		end
     end
 end
-if TUNING.DSTU.WX78_CONFIG then
-    env.AddPrefabPostInit("wx78", function(inst)
-	    if not TheWorld.ismastersim then
-		    return
-	    end
 
-        inst.wet_task = nil
-        inst.wet_spark_time = 0
-        inst.wet_spark_time_offset = 3
-	    inst:AddTag("automaton")
-		
-	    inst.OnLesserCharge = onlessercharge
-		
-		if inst.components.upgrademoduleowner ~= nil then
-			if inst.components.playerlightningtarget ~= nil then
-				inst.components.playerlightningtarget:SetOnStrikeFn(OnLightningStrike)
-			end
-		else
-			inst:ListenForEvent("moisturedelta", OnMoistureDelta)
-			
-			if inst.components.playerlightningtarget ~= nil then
-				inst.components.playerlightningtarget:SetOnStrikeFn(onlightingstrike)
-			end
-		end
-		
+env.AddPrefabPostInit("wx78", function(inst)
+    if not TheWorld.ismastersim then
+        return
+    end
+
+    inst.wet_task = nil
+    inst.wet_spark_time = 0
+    inst.wet_spark_time_offset = 3
+    inst:AddTag("automaton")
+
+    inst.OnLesserCharge = onlessercharge
+    --TODO Scrub old things when the update hits
+
+    if TUNING.DSTU.WX78_CONFIG then
+        if inst.components.upgrademoduleowner ~= nil then
+            if inst.components.playerlightningtarget ~= nil then
+                inst.components.playerlightningtarget:SetOnStrikeFn(OnLightningStrike)
+            end
+        else
+            inst:ListenForEvent("moisturedelta", OnMoistureDelta)
+            if inst.components.playerlightningtarget ~= nil then
+                inst.components.playerlightningtarget:SetOnStrikeFn(onlightingstrike)
+            end
+        end
+    end
+    if not TUNING.DSTU.UPDATE_CHECK then
         inst:ListenForEvent("oneat", OnEat_Electric)
-    end)
-end
+    end
+end)
+

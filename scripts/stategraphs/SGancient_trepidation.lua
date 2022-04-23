@@ -88,20 +88,7 @@ local events=
             inst.sg:GoToState("summon_channelers_pre")
         end
     end),
-    EventHandler("locomote", function(inst) 
-        if not inst.sg:HasStateTag("busy") then
-            
-            local is_moving = inst.sg:HasStateTag("moving")
-            local wants_to_move = inst.components.locomotor:WantsToMoveForward()
-            if not inst.sg:HasStateTag("attack") and is_moving ~= wants_to_move then
-                if wants_to_move then
-                    inst.sg:GoToState("premoving")
-                else
-                    inst.sg:GoToState("idle")
-                end
-            end
-        end
-    end),    
+	CommonHandlers.OnLocomote(false, true),
 }
 local function ShakeSummonRoar(inst)
     ShakeAllCameras(CAMERASHAKE.FULL, .7, .03, .4, inst, 30)
@@ -145,74 +132,14 @@ local states=
 			end),
         },
 
-    },    
-    
-    State{
-        name = "premoving",
-        tags = {"moving", "canrotate"},
-        
-        onenter = function(inst)
-            inst.components.locomotor:WalkForward()
-            inst.AnimState:PlayAnimation("walk_pre")
-        end,
-        
-        timeline=
-        {
-            --TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
-            --TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/mumble") end),
-        },
-        
-        events=
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("moving") end),
-        },
-    },
-    
-    State{
-        name = "moving",
-        tags = {"moving", "canrotate"},
-        
-        onenter = function(inst)
-            inst.components.locomotor:RunForward()
-            inst.AnimState:PushAnimation("walk_loop")
-        end,
-        
-        timeline=
-        {
-        
-        },
-        
-        events=
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("moving") end),
-        },
-        
-    },    
-    
-    
+    },     
     State{
         name = "idle",
         tags = {"idle", "canrotate"},
-        
-        ontimeout = function(inst)
-			inst.sg:GoToState("taunt")
-        end,
-        
+
         onenter = function(inst, start_anim)
-            inst.Physics:Stop()
-            local animname = "idle"
-            if math.random() < .3 then
-				--inst.sg:SetTimeout(math.random()*2 + 2)
-			end
-
-            if start_anim then
-                inst.AnimState:PlayAnimation(start_anim)
-                inst.AnimState:PushAnimation("idle", true)
-            else
-                inst.AnimState:PlayAnimation("idle", true)
-            end
-
-        end,
+            inst.AnimState:PushAnimation("idle", true)
+		end,
     },
     
     State{
@@ -223,7 +150,6 @@ local states=
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("taunt")
 			PlayExtendedSound(inst, "taunt")
-            --inst.SoundEmitter:PlaySound("UCSounds/Scorpion/taunt")
         end,
         timeline=
         {	TimeEvent(5*FRAMES, function(inst) PlayExtendedSound(inst, "taunt") end),
@@ -241,19 +167,16 @@ local states=
         onenter = function(inst)
 			inst:AddTag("hostile")
 		    local shieldtype = PickShield(inst)
-                if shieldtype ~= nil then
-                    local fx = SpawnPrefab("stalker_shield"..tostring(shieldtype))
-                    fx.entity:SetParent(inst.entity)
-                        fx.AnimState:SetScale(-1.3, 1, 1)
-					
-				end
+            if shieldtype ~= nil then
+                local fx = SpawnPrefab("stalker_shield"..tostring(shieldtype))
+                fx.entity:SetParent(inst.entity)
+                fx.AnimState:SetScale(-1.3, 1, 1)		
+			end
 			inst.AnimState:SetBuild("ancient_trepidation")
 			inst.enraged = true
             inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("anger")
-            --inst.AnimState:PushAnimation("taunt")
 			PlayExtendedSound(inst, "taunt")
-            --inst.SoundEmitter:PlaySound("UCSounds/Scorpion/taunt")
         end,
         timeline=
         {	TimeEvent(5*FRAMES, function(inst) PlayExtendedSound(inst, "taunt") end),
@@ -270,20 +193,11 @@ local states=
         
         onenter = function(inst)
 			inst:RemoveTag("hostile")
-		    local shieldtype = PickShield(inst)
-                if shieldtype ~= nil then
-                    local fx = SpawnPrefab("stalker_shield"..tostring(shieldtype))
-                    fx.entity:SetParent(inst.entity)
-                        fx.AnimState:SetScale(-1.3, 1, 1)
-					
-				end
 			inst.AnimState:SetBuild("ancient_trepidation_nomouth")
 			inst.enraged = false
             inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("anger")
-            --inst.AnimState:PushAnimation("taunt")
 			PlayExtendedSound(inst, "taunt")
-            --inst.SoundEmitter:PlaySound("UCSounds/Scorpion/taunt")
         end,
         timeline=
         {	TimeEvent(5*FRAMES, function(inst) PlayExtendedSound(inst, "taunt") end),
@@ -365,7 +279,7 @@ local states=
         onenter = function(inst, count)
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("channel_loop",true)
-			inst.sg:SetTimeout(math.random()*2 + 40)
+			inst.sg:SetTimeout(math.random()*2 + 30)
         end,
         ontimeout = function(inst)
 			if inst.components.health ~= nil then
@@ -406,10 +320,10 @@ local states=
 			PlayExtendedSound(inst, "taunt")
 			inst:RemoveTag("spawning")
         end,
-        timeline=
-        {	--TimeEvent(5*FRAMES, function(inst) PlayExtendedSound(inst, "taunt") end),
-			--TimeEvent(10*FRAMES, function(inst) PlayExtendedSound(inst, "taunt") end),
-        },      
+        onexit = function(inst)
+			inst.hasshield = nil
+		end,
+
         events=
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
@@ -431,7 +345,7 @@ local states=
 
 }
 
-
+CommonStates.AddWalkStates(states)
 
 return StateGraph("ancient_trepidation", states, events, "idle")
 
