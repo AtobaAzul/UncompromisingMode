@@ -224,7 +224,7 @@ local function SpawnMonkeysFunction(player)
 end
 
 local function SpawnMonkeys(player)
-	print("SpawnMonkeys")
+	--print("SpawnMonkeys")
 	player:DoTaskInTime(5 + math.random(0,5), function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
@@ -238,7 +238,7 @@ local function SpawnMonkeys(player)
 end
 
 local function SpawnBats(player)
-	print("SpawnBats")
+	--print("SpawnBats")
 	
 	local battime = 5 + (10 * math.random() * 2)
 	MultiFogAuto(player,battime)
@@ -294,7 +294,7 @@ local function SpawnDroppersFunction(player)
 end
 
 local function SpawnDroppers(player)
-	print("SpawnDropper")
+	--print("SpawnDropper")
 	player:DoTaskInTime(10 * math.random() * 2, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
@@ -310,7 +310,7 @@ local function SpawnDroppers(player)
 end
 
 local function SpawnSkitts(player)
-	print("SpawnSkitts")
+	--print("SpawnSkitts")
 	local skitttime = 10 * math.random() * 2
 	if TheWorld.state.iscavenight then
 		player:DoTaskInTime(skitttime, function()
@@ -341,7 +341,7 @@ local function SpawnFissuresFunction(player)
 end
 
 local function SpawnFissures(player)
-	print("SpawnFissures")
+	--print("SpawnFissures")
 	local tillrne = 10 + math.random(10,15)
 	MultiFogAuto(player,tillrne)
 		player:DoTaskInTime(tillrne, function()
@@ -492,7 +492,7 @@ local function SpawnShadowGrabby(player)
 							end
 						end
 						
-						print("spawn grabby")
+						--print("spawn grabby")
 					end
 				end
 			end)
@@ -628,14 +628,14 @@ local function AddCaveEvent(name, weight)
         self.caveevents = {}
         self.totalrandomcaveweight = 0
     end
-	print(name)
+	--print(name)
 	if not table.contains(self.caveevents, name) then
 		table.insert(self.caveevents, { name = name, weight = weight })
 		self.totalrandomcaveweight = self.totalrandomcaveweight + weight
-		print("rneweight"..weight)
-			print(self.totalrandomcaveweight)
+		--print("rneweight"..weight)
+			--print(self.totalrandomcaveweight)
 	else	
-		print("dupe event")
+		--print("dupe event")
 	end
 end
 
@@ -644,14 +644,14 @@ local function AddSecondaryCaveEvent(name, weight)
         self.secondarycaveevents = {}
         self.totalrandomsecondarycaveweight = 0
     end
-	print(name)
+	--print(name)
 	if not table.contains(self.secondarycaveevents, name) then
 		table.insert(self.secondarycaveevents, { name = name, weight = weight })
 		self.totalrandomsecondarycaveweight = self.totalrandomsecondarycaveweight + weight
-		print("rneweight"..weight)
-			print(self.totalrandomsecondarycaveweight)
+		--print("rneweight"..weight)
+			--print(self.totalrandomsecondarycaveweight)
 	else	
-		print("dupe event")
+		--print("dupe event")
 	end
 end
 

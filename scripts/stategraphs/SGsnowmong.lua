@@ -86,7 +86,7 @@ local states =
         events =
         {
             EventHandler("animover", function(inst)
-				print("thiscoderan")
+				--print("thiscoderan")
                 inst:SetUnder(inst)
                 inst.sg:GoToState("idle") 
             end)

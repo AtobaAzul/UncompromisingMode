@@ -297,24 +297,24 @@ function Uncompromising_Transformer:LoadPostPass(ents, data)
 	end)
 	
 	if self.transformEvent then
-			print("transformEvent")
+			--print("transformEvent")
 		if data.transformEventTarget then
-			print("transformEventTarget")
+			--print("transformEventTarget")
 			local tar = ents[data.transformEventTarget]
 			if tar then
 				tar = tar.entity
 				self:SetTransformEvent(self.transformEvent, tar)
 			end
 		else
-			print("else transformEvent")
+			--print("else transformEvent")
 			self:SetTransformEvent(self.transformEvent)
 		end
 	end
 
 	if self.revertEvent then
-			print("revertEvent")
+			--print("revertEvent")
 		if data.revertEventTarget then
-			print("revertEventTarget")
+			--print("revertEventTarget")
 			local tar = ents[data.revertEventTarget]
 			if tar then
 				tar = tar.entity
@@ -322,17 +322,17 @@ function Uncompromising_Transformer:LoadPostPass(ents, data)
 			end
 		else
 			self:SetRevertEvent(self.revertEvent)
-			print("else SetRevertEvent")
+			--print("else SetRevertEvent")
 		end
 	end
 
 	if self.transformWorldEvent then
-			print("transformWorldEvent")
+			--print("transformWorldEvent")
 		self:SetTransformWorldEvent(self.transformWorldEvent, self.transformWorldEventValue)
 	end
 
 	if self.revertWorldEvent then
-			print("revertWorldEvent")
+			--print("revertWorldEvent")
 		self:SetRevertWorldEvent(self.revertWorldEvent, self.revertWorldEventValue)
 	end
 

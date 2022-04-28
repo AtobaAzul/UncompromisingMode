@@ -335,9 +335,9 @@ end
 end
 
 local function Init(inst)
-print("1")
+--print("1")
 	if FindEntity(inst,5,nil,{"snowpileblocker"}) ~= nil then
-	print("2")
+	--print("2")
 		if inst.Transform:GetWorldPosition() ~= nil then
 			SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
 		end

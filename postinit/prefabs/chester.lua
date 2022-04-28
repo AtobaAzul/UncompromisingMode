@@ -238,11 +238,11 @@ local function MorphLazyEyebone(inst)
 	else
 	CloseEye(inst)
 	end
-	print('~~~')
-	print('~~~')
-	print('~~~')
-	print('~~~')
-	print('Morphed')
+	--print('~~~')
+	--print('~~~')
+	--print('~~~')
+	--print('~~~')
+	--print('Morphed')
 
  
 end

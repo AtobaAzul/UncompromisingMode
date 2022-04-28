@@ -33,7 +33,7 @@ SetSharedLootTable( 'snowmong_melting',
 local SEE_VICTIM_DIST = 25
 
 local function SetUnder(inst)
-	print("under")
+	--print("under")
 		inst.State = true
 		inst:AddTag("notdrawable")
 		inst:AddTag("INLIMBO")
@@ -44,7 +44,7 @@ local function SetUnder(inst)
 end
 
 local function SetAbove(inst)
-	print("above")
+	--print("above")
 		inst.State = false
 		inst:RemoveTag("INLIMBO")
 		inst:RemoveTag("notdrawable")

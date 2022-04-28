@@ -293,7 +293,7 @@ env.AddPrefabPostInit("deerclops", function(inst)
 				inst.components.health.currenthealth = data.healthUM
 			end
 		end
-		print("My upgrade is: "..inst.upgrade)
+		--print("My upgrade is: "..inst.upgrade)
 		_OnLoad(inst, data)
 	end
 	

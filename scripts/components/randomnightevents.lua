@@ -239,7 +239,7 @@ local function SpawnEyePlants(player)
 end
 
 local function LeifAttack(player)
-print("leifattack")
+--print("leifattack")
 local leiftime = 8 + math.random() * 3
 
 	local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
@@ -262,7 +262,7 @@ local leiftime = 8 + math.random() * 3
 					SpawnBirchNutters(player)
 				end)
 			end
-			print("leifattackfailed")
+			--print("leifattackfailed")
 		end)
 	end
 end
@@ -284,7 +284,7 @@ local function spawn_stumpling(target)
 end
 
 local function StumpsAttack(player)
-print("myshins!")
+--print("myshins!")
 local leiftime = 8 + math.random() * 3
 MultiFogAuto(player,leiftime)
 
@@ -304,7 +304,7 @@ local days_survived = player.components.age ~= nil and player.components.age:Get
 			for i = 1, level * 3 do
 				SpawnEyePlants(player)
 			end
-			print("leifattackfailed")
+			--print("leifattackfailed")
 		end)
 		end
 	end
@@ -382,7 +382,7 @@ local function SpawnMonkeysFunction(player)
 end
 
 local function SpawnMonkeys(player)
-	print("SpawnMonkeys")
+	--print("SpawnMonkeys")
 	player:DoTaskInTime(5 + math.random(0,5), function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
@@ -456,7 +456,7 @@ local function SpawnWerePigsFunction(player)
 end
 
 local function SpawnWerePigs(player)
-		print("SpawnWerePigs")
+		--print("SpawnWerePigs")
 	player:DoTaskInTime(5 + math.random(0,5), function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
@@ -471,7 +471,7 @@ local function SpawnWerePigs(player)
 end
 
 local function FireHungryGhostAttack(player)
-	print("ooooOOOOoooo")
+	--print("ooooOOOOoooo")
 	local ghosttime = 6 + math.random(0,5)
 	MultiFogAuto(player,ghosttime)
 	player:DoTaskInTime(ghosttime, function()
@@ -489,7 +489,7 @@ local function FireHungryGhostAttack(player)
 end
 
 local function SpawnBats(player)
-	print("SpawnBats")
+	--print("SpawnBats")
 	
 	local battime = 5 + (10 * math.random() * 2)
 	MultiFogAuto(player,battime)
@@ -529,7 +529,7 @@ local function SpawnBats(player)
 end
 
 local function SpawnBaseBats(player)
-	print("SpawnBaseBats")
+	--print("SpawnBaseBats")
 	
 	local battime = 5 + (10 * math.random() * 2)
 	MultiFogAuto(player,battime)
@@ -583,7 +583,7 @@ local function SpawnDroppersFunction(player)
 end
 
 local function SpawnDroppers(player)
-	print("SpawnDropper")
+	--print("SpawnDropper")
 	player:DoTaskInTime(10 * math.random() * 2, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
@@ -599,7 +599,7 @@ local function SpawnDroppers(player)
 end
 
 local function SpawnSkitts(player)
-	print("SpawnSkitts")
+	--print("SpawnSkitts")
 	local skitttime = 10 * math.random() * 2
 	if TheWorld.state.isnight then
 		player:DoTaskInTime(skitttime, function()
@@ -630,7 +630,7 @@ local function SpawnFissuresFunction(player)
 end
 
 local function SpawnFissures(player)
-	print("SpawnFissures")
+	--print("SpawnFissures")
 	local tillrne = 10 + math.random(10,15)
 	MultiFogAuto(player,tillrne)
 		player:DoTaskInTime(tillrne, function()
@@ -645,7 +645,7 @@ local function SpawnFissures(player)
 end
 
 local function SpawnKrampus(player)
-	print("kramping")
+	--print("kramping")
 	
 	if not TheWorld.state.israining then
 		TheWorld:PushEvent("ms_forceprecipitation")
@@ -725,7 +725,7 @@ local function SpawnThunderClose(player)
 end
 
 local function SpawnThunderFar(player)
-	print("Thundering")
+	--print("Thundering")
 	
 	if not TheWorld.state.israining then
 		TheWorld:PushEvent("ms_forceprecipitation")
@@ -778,7 +778,7 @@ local function SpawnSquidFunction(player)
 end
 
 local function SpawnSquids(player)
-	print("Spawnsquids")
+	--print("Spawnsquids")
 	local squidtime = 5 + (10 * math.random() * 2)
 	MultiFogAuto(player,squidtime)
 	player:DoTaskInTime(squidtime, function()
@@ -818,7 +818,7 @@ local function SpawnGnarwailFunction(player)
 end
 
 local function SpawnGnarwail(player)
-	print("Spawnsquids")
+	--print("Spawnsquids")
 	local sharktime = 5 + (10 * math.random() * 2)
 	MultiFogAuto(player,sharktime)
 	player:DoTaskInTime(sharktime, function()
@@ -865,7 +865,7 @@ end
 
 local function MoonTear(player)
 	if TheWorld.state.isfullmoon then
-		print("The Moon is Crying")
+		--print("The Moon is Crying")
 		local x, y, z = player.Transform:GetWorldPosition()
 		player:DoTaskInTime(0.6 + math.random(4), function()
 			local tear = SpawnPrefab("moon_tear_meteor")
@@ -885,7 +885,7 @@ end
 local function ChessPiece(player)
 	if TheWorld.state.isnewmoon and TheWorld.state.cycles > 10 then
 		MultiFogAuto(player,10)
-		print("Shadows...")
+		--print("Shadows...")
 		local x, y, z = player.Transform:GetWorldPosition()
 		local chesscheck = math.random()
 		
@@ -1065,7 +1065,7 @@ local function SpawnGingerDeadPigFunction(player)
 end	
 
 local function SpawnGingerDeadPig(player)
-	print("ginger dead")
+	--print("ginger dead")
 
 	player:DoTaskInTime(5+math.random(5,10), function()
 		player:DoTaskInTime(0.2 * math.random(4) * 0.3, function()
@@ -1075,7 +1075,7 @@ local function SpawnGingerDeadPig(player)
 end
 
 local function SpawnMushbooms(player)
-	print("SpawnSkitts")
+	--print("SpawnSkitts")
 	if TheWorld.state.isnight then
 		player:DoTaskInTime(15, function()
 			local x, y, z = player.Transform:GetWorldPosition()
@@ -1091,7 +1091,7 @@ local function SpawnMushbooms(player)
 end
 
 local function Earthquake(player)
-	print("Quake")
+	--print("Quake")
 	player:DoTaskInTime(15,function(player)
 		if TheWorld.state.isnight then
 			SpawnPrefab("rneearthquake").Transform:SetPosition(player.Transform:GetWorldPosition())
@@ -1320,7 +1320,7 @@ local function SpawnShadowGrabby(player)
 							end
 						end
 						
-						print("spawn grabby")
+						--print("spawn grabby")
 					end
 				end
 			end)
@@ -1485,7 +1485,7 @@ local function AddWildEvent(name, weight)
 		table.insert(self.wildevents, { name = name, weight = weight })
 		self.totalrandomwildweight = self.totalrandomwildweight + weight
 	else	
-		print("dupe event")
+		--print("dupe event")
 	end
 end
 
@@ -1497,12 +1497,12 @@ local function RemoveWildEvent(name, weight)
 	
 	for k, v in pairs(self.wildevents) do
 		if name == v.name then
-	print(name)
+	--print(name)
 			table.remove(self.wildevents, k)
-			print(k)
+			--print(k)
 			self.totalrandomwildweight = self.totalrandomwildweight - weight
-			print("reduce rneweight"..weight)
-			print(self.totalrandomwildweight)
+			--print("reduce rneweight"..weight)
+			--print(self.totalrandomwildweight)
 		end
 	end
 end
@@ -1522,14 +1522,14 @@ local function AddBaseEvent(name, weight)
         self.baseevents = {}
         self.totalrandombaseweight = 0
     end
-	print(name)
+	--print(name)
 	if not table.contains(self.baseevents, name) then
 		table.insert(self.baseevents, { name = name, weight = weight })
 		self.totalrandombaseweight = self.totalrandombaseweight + weight
-		print("rneweight"..weight)
-			print(self.totalrandombaseweight)
+		--print("rneweight"..weight)
+			--print(self.totalrandombaseweight)
 	else	
-		print("dupe event")
+		--print("dupe event")
 	end
 end
 
@@ -1541,12 +1541,12 @@ local function RemoveBaseEvent(name, weight)
 	
 	for k, v in pairs(self.baseevents) do
 		if name == v.name then
-	print(name)
+	--print(name)
 			table.remove(self.baseevents, k)
-			print(k)
+			--print(k)
 			self.totalrandombaseweight = self.totalrandombaseweight - weight
-			print("reduce rneweight"..weight)
-			print(self.totalrandombaseweight)
+			--print("reduce rneweight"..weight)
+			--print(self.totalrandombaseweight)
 		end
 	end
 end
@@ -1735,25 +1735,25 @@ local function OnSeasonTick(src, data)
 		for k, v in pairs(AUTUMN) do
 			AddBaseEvent(v.name, v.weight)
 			AddWildEvent(v.name, v.weight)
-			print("autumn")
+			--print("autumn")
 		end
 	elseif TheWorld.state.iswinter or (data ~= nil and data.season == "winter") then
 		for k, v in pairs(WINTER) do
 			AddBaseEvent(v.name, v.weight)
 			AddWildEvent(v.name, v.weight)
-			print("winter")
+			--print("winter")
 		end
 	elseif TheWorld.state.spring or (data ~= nil and data.season == "spring") then
 		for k, v in pairs(SPRING) do
 			AddBaseEvent(v.name, v.weight)
 			AddWildEvent(v.name, v.weight)
-			print("spring")
+			--print("spring")
 		end
 	elseif TheWorld.state.summer or (data ~= nil and data.season == "summer") then
 		for k, v in pairs(SUMMER) do
 			AddBaseEvent(v.name, v.weight)
 			AddWildEvent(v.name, v.weight)
-			print("summer")
+			--print("summer")
 		end
 	end
 end

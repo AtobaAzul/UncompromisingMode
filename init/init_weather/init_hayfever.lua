@@ -48,8 +48,8 @@ local function HayFeverEater(inst, data)
 		0
 	
 	if data.food ~= nil and data.food:HasTag("antihistamine") and inst.components.hayfever and inst.components.hayfever.enabled then
-		print(SugarBuff)
-		print(Antihistamine)
+		--print(SugarBuff)
+		--print(Antihistamine)
 		
 		inst.components.hayfever:SetNextSneezeTime(Antihistamine + SugarBuff)			
 	end	

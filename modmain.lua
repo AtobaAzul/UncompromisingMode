@@ -30,42 +30,42 @@ end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsDeath", function(...)
 	if not GLOBAL.TheWorld.ismastershard then
-	print("RPC DeerclopsDeath")
+	--print("RPC DeerclopsDeath")
 		GLOBAL.TheWorld:PushEvent("hasslerkilled")
 	end
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsRemoved", function(...)
 	if not GLOBAL.TheWorld.ismastershard then
-	print("RPC DeerclopsRemoved")
+	--print("RPC DeerclopsRemoved")
 		GLOBAL.TheWorld:PushEvent("hasslerremoved")
 	end
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsStored", function(...)
 	if not GLOBAL.TheWorld.ismastershard then
-	print("RPC DeerclopsStored")
+	--print("RPC DeerclopsStored")
 		GLOBAL.TheWorld:PushEvent("storehassler")
 	end
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsDeath_caves", function(...)
 	if GLOBAL.TheWorld.ismastershard then
-	print("RPC DeerclopsDeath")
+	--print("RPC DeerclopsDeath")
 		GLOBAL.TheWorld:PushEvent("hasslerkilled_secondary")
 	end
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsRemoved_caves", function(...)
 	if GLOBAL.TheWorld.ismastershard then
-	print("RPC DeerclopsRemoved")
+	--print("RPC DeerclopsRemoved")
 		GLOBAL.TheWorld:PushEvent("hasslerremoved")
 	end
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsStored_caves", function(...)
 	if GLOBAL.TheWorld.ismastershard then
-	print("RPC DeerclopsStored")
+	--print("RPC DeerclopsStored")
 		GLOBAL.TheWorld:PushEvent("storehassler")
 	end
 end)

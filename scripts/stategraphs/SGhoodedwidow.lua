@@ -87,7 +87,7 @@ local function WebMortar(inst,angle)
 	if speed < 5 then
 	speed = 14*math.random(100,200)*0.01
 	end
-	print("speed = "..speed)
+	--print("speed = "..speed)
     projectile.components.complexprojectile:SetHorizontalSpeed(speed)
     projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 	end

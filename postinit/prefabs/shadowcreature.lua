@@ -4,7 +4,7 @@ GLOBAL.setfenv(1, GLOBAL)
 
 local function onkilledbyother(inst, attacker)
     if attacker ~= nil and attacker.components.sanity ~= nil then
-		print(inst.sanityreward)
+		--print(inst.sanityreward)
 		
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local ents = TheSim:FindEntities(x, y, z, 15, { "player" }, { "playerghost" } )
@@ -75,7 +75,7 @@ end
 
 local function onkilledbyother_crawlinghorror(inst, attacker)
     if attacker ~= nil and attacker.components.sanity ~= nil then
-		print(inst.sanityreward)
+		--inst.sanityreward)
 		
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local ents = TheSim:FindEntities(x, y, z, 15, { "player" }, { "playerghost" } )

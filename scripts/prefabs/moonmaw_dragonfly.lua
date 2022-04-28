@@ -82,7 +82,7 @@ end
 if count < 1 then
 damagetime = 0.001
 end
-print(count)
+--print(count)
 for i = 1,8 do
 	if inst.lavae[i].hidden ~= true then
 		inst.lavae[i].damagetime = damagetime

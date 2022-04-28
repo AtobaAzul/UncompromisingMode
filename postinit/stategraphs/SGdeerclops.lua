@@ -378,7 +378,7 @@ local events =
 {	
     EventHandler("doattack", function(inst, data)
 		if inst.upgrade == "enrage_mutation" then
-			print("enragebank")
+			--print("enragebank")
 			EnrageAttackBank(inst,data)
 		end
 		if inst.upgrade == "strength_mutation" then
@@ -1048,10 +1048,10 @@ CommonStates.AddCombatStates(states,
         TimeEvent(29 * FRAMES, function(inst) SpawnIceFx(inst, inst.components.combat.target) end),
         TimeEvent(35 * FRAMES, function(inst)
             inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe")
-			print("thiscoderan")
-			print(inst.upgrade)
+			--print("thiscoderan")
+			--print(inst.upgrade)
 			if inst.upgrade == "ice_mutation" then
-			print("triedtoattack")
+			--print("triedtoattack")
 			SpawnAttackAuras(inst)
 			end
             inst.components.combat:DoAttack(inst.sg.statemem.target)

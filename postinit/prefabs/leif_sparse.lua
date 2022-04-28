@@ -190,7 +190,7 @@ end
 		
 		local function UnHide(inst, data)
 			if data.statename ~= "sleeping" then
-				print("flimbus")
+				--print("flimbus")
 				inst.sg:RemoveStateTag("hiding")
 				inst:RemoveEventCallback("newstate", UnHide)
 			end
@@ -205,7 +205,7 @@ end
 				end
 				
 				if data.attacker.components.combat:HasTarget() and not data.attacker.components.combat:TargetIs(inst) then
-					print("flimbo")
+					--print("flimbo")
 					data.attacker.components.combat:DropTarget()
 				end
 			end

@@ -1304,29 +1304,29 @@ local function MakeScoutBurrow(inst)
 			burrow.components.herd:AddMember(ratcrew)
 			burrow.components.herd:AddMember(ratcrew2)
 			burrow.components.herd:AddMember(ratcrew3)
-			print("make a den!")
+			--print("make a den!")
 			break
 		end
 		
 		if i >= 8 then
-			print("NO FUCKING SPACE SHITBOI")
+			--print("NO FUCKING SPACE SHITBOI")
 			inst.components.timer:StartTimer("scoutingparty", 1920 + math.random(480))
 		end
 	end
 end
 
 local function OnTimerDone(inst, data)
-	print("timer")
+	--print("timer")
 	if data.name == "scoutingparty" then
 		local x, y, z = inst.Transform:GetWorldPosition()
 		
         if #TheSim:FindEntities(x, 0, z, 1000, { "ratburrow" }) >= 10 then
-			print("Reduce Timer Too Many Burrows")
+			--print("Reduce Timer Too Many Burrows")
 			inst.components.timer:StartTimer("scoutingparty", 1920 + math.random(480))
             return
         end
 	
-		print("scouts go!")
+		--print("scouts go!")
 		MakeScoutBurrow(inst)
 	end
 end
@@ -1726,7 +1726,7 @@ local function SlumberParty(inst)
 		
 		local ents = #TheSim:FindEntities(x, y, z, 8, { "ratscout" })
 		if ents ~= nil and ents > 0 then
-			print("The girls are here, commencing pillowfort construction...")
+			--print("The girls are here, commencing pillowfort construction...")
 			local burrow = SpawnPrefab("uncompromising_ratburrow")
 			burrow.Transform:SetPosition(x, 0, z)
 			burrow.AnimState:PlayAnimation("spawn")
@@ -1857,11 +1857,11 @@ local function SmellProtection(v,container)
 		flowers = 25
 	end
 	flowers = flowers / 50
-	print(flowers)
+	--print(flowers)
 	potted = potted / 20
-	print(potted)
+	--print(potted)
 	forget_me_lots = forget_me_lots / 10
-	print(forget_me_lots)
+	--print(forget_me_lots)
 	
 	mod = 1 - flowers - potted - forget_me_lots
 	
@@ -2061,12 +2061,13 @@ local function TimeForACheckUp(inst,dev)
 	
 	
 	inst.ratscore = inst.ratscore + inst.itemscore + inst.foodscore + inst.burrowbonus
-	print("------------------------")
-	print("Itemscore = "..inst.itemscore)
-	print("Foodscore = "..inst.foodscore)
-	print("Burrowbonus = "..inst.burrowbonus)
-	print("Ratscore = "..inst.ratscore)
-	print("------------------------")
+	--print("------------------------")
+	--print("Itemscore = "..inst.itemscore)
+	--print("Foodscore = "..inst.foodscore)
+	--print("Burrowbonus = "..inst.burrowbonus)
+	--print("Ratscore = "..inst.ratscore)
+	--print("------------------------")
+	--just use the command if you wanna see i guess.
 	if TUNING.DSTU.ANNOUNCE_BASESTATUS == true then
 		TheNet:SystemMessage("-------------------------")
 		TheNet:SystemMessage("Itemscore = "..inst.itemscore)
