@@ -71,12 +71,10 @@ local start_inv =
 }
 
 local function checkfav(inst, food)
-	if food ~= nil and food.components.edible.foodtype == FOODTYPE.HORRIBLE then
-		local value = food.prefab == "powcake" and 5 or 0
-	
-		inst.components.hunger:DoDelta(10 + value)
-		inst.components.health:DoDelta(10 + value)
-		inst.components.sanity:DoDelta(10 + value)
+	if food ~= nil and food.prefab == "powcake" then
+		inst.components.hunger:DoDelta(15)
+		inst.components.health:DoDelta(15)
+		inst.components.sanity:DoDelta(15)
 	end
 end
 

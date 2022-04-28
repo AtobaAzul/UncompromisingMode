@@ -25,10 +25,6 @@ AddClassPostConstruct( "widgets/controls", function(self, inst)
 	self.uncompromising_tooltip = self:AddChild( uncompromising_tooltip(ownr) )
 	self.uncompromising_tooltip:MoveToBack() 
 	
-	local Wolfdrain = require "widgets/wolfdrain"
-	self.wolfdrain = self:AddChild( Wolfdrain(ownr) )
-	self.wolfdrain:MoveToBack()
-	
 end)
 --[[
 AddClassPostConstruct("screens/playerhud",function(inst)

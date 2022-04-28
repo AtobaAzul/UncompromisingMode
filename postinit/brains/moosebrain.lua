@@ -29,12 +29,10 @@ end
 local function WhyAreYouRunning(self)
 					
 	local FightMe = ChaseAndAttack(self.inst)
-	local LayEgg = DoAction(self.inst, LayEgg)
 	local FaceMe = FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn)
 					
     table.insert(self.bt.root.children, 1, FightMe)
-    table.insert(self.bt.root.children, 2, LayEgg)
-    table.insert(self.bt.root.children, 3, FaceMe)
+    table.insert(self.bt.root.children, 2, FaceMe)
 end
 
 

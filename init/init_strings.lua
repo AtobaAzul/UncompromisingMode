@@ -35,7 +35,7 @@ STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_FRIEND = { "KING SAY PROTECT", "PROT
 
 -- Hey look! I actually did something! -Canis
 STRINGS.CHARACTER_DESCRIPTIONS.willow = STRINGS.CHARACTER_DESCRIPTIONS.willow.."\n󰀕Lighter lasts long on the right hands\n󰀕Can ignite things in the cold"
-STRINGS.CHARACTER_DESCRIPTIONS.wx78 = STRINGS.CHARACTER_DESCRIPTIONS.wx78.."\n󰀕Has alternative charging methods\n󰀕Systems are not repaired via lightning\n󰀕Reduced waterproofness of circuits"
+STRINGS.CHARACTER_DESCRIPTIONS.wx78 = STRINGS.CHARACTER_DESCRIPTIONS.wx78.."󰀕Systems are not repaired via lightning"
 STRINGS.CHARACTER_DESCRIPTIONS.wickerbottom = STRINGS.CHARACTER_DESCRIPTIONS.wickerbottom.."\n󰀕Reading requires brainpower"
 STRINGS.CHARACTER_DESCRIPTIONS.wes = STRINGS.CHARACTER_DESCRIPTIONS.wes.."\n󰀕Expanded inner dialogue" --"\n󰀕Pengulls are fond of mimes"
 STRINGS.CHARACTER_DESCRIPTIONS.waxwell = STRINGS.CHARACTER_DESCRIPTIONS.waxwell.."\n󰀕Can summon his old puppets"

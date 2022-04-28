@@ -18,31 +18,34 @@ local function oneaten(inst, eater)
 end
 
 local function OnSave(inst,data)
-if inst.rotation ~= nil then
-data.rotation = inst.rotation
-end
-if inst.scalex ~= nil then
-data.scalex = inst.scalex
-end
-if inst.scalez ~= nil then
-data.scalez = inst.scalez
-end
+	if inst.rotation ~= nil then
+		data.rotation = inst.rotation
+	end
+	
+	if inst.scalex ~= nil then
+		data.scalex = inst.scalex
+	end
+	
+	if inst.scalez ~= nil then
+		data.scalez = inst.scalez
+	end
 end
 
 local function OnLoad(inst,data)
-if data.rotation ~= nil then
-inst.rotation = data.rotation
-inst.Transform:SetRotation(inst.rotation)
-end
-if data.scalex ~= nil and data.scalez ~= nil then
-inst.scalex = data.scalex
-inst.scalez = data.scalez
-inst.Transform:SetScale(inst.scalex,1,inst.scalez)
-end
+	if data.rotation ~= nil then
+		inst.rotation = data.rotation
+		inst.Transform:SetRotation(inst.rotation)
+	end
+	
+	if data.scalex ~= nil and data.scalez ~= nil then
+		inst.scalex = data.scalex
+		inst.scalez = data.scalez
+		inst.Transform:SetScale(inst.scalex,1,inst.scalez)
+	end
 end
 
 local function OnPicked(inst)
-inst:Remove()
+	inst:Remove()
 end
 
 local function fn()
@@ -68,25 +71,21 @@ local function fn()
 		return inst
 	end
 	
-	inst:AddComponent("inspectable")
-	
 	inst:AddComponent("edible")
     inst.components.edible.foodtype = FOODTYPE.VEGGIE --Horrible is generally unedible
 	inst.components.edible.healthvalue = -15
 	inst.components.edible:SetOnEatenFn(oneaten)
 	
-	inst:AddComponent("perishable")
-	inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)
 	inst:AddComponent("bait")
 	
-
+	inst:AddComponent("inspectable")
 	
-	inst:AddComponent("pickable")
-
-    inst.components.pickable.onpickedfn = OnPicked
-    inst.components.pickable:SetUp(nil,0)
-    inst.components.pickable.transplanted = true
+    inst:AddComponent("inventoryitem")
+	inst.components.inventoryitem:SetOnPutInInventoryFn(OnPicked)
 	
+	inst:AddComponent("perishable")
+	inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)
+
 	inst.AnimState:SetMultColour(0.6,1,1,1)
 	inst.OnSave = OnSave
 	inst.OnLoad = OnLoad
