@@ -15,6 +15,11 @@ GLOBAL.FUELTYPE.EYE = "EYE"
 
 if GetModConfigData("funny rat") then
 	AddModCharacter("winky")
+	
+	GLOBAL.TUNING.WINKY_HEALTH = 175
+	GLOBAL.TUNING.WINKY_HUNGER = 150
+	GLOBAL.TUNING.WINKY_SANITY = 125
+	GLOBAL.STRINGS.CHARACTER_SURVIVABILITY.winky = "Stinky"
 end
 RemapSoundEvent( "dontstarve/together_FE/DST_theme_portaled", "UMMusic/music/uncomp_char_select" )
 

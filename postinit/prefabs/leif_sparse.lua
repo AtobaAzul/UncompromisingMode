@@ -20,45 +20,13 @@ end)
 --Treeguard now has single target root attack -Axe
 env.AddPrefabPostInit("leif_sparse", function (inst)
 
---inst.scaleleif = nil
-
---local function SetLeifScale(inst, scale)
-   -- inst._scale = scale ~= 1 and scale or nil
-
-   -- inst.Transform:SetScale(scale, scale, scale)
-   -- inst.Physics:SetCapsule(.5 * scale, 1)
-   -- inst.DynamicShadow:SetSize(4 * scale, 1.5 * scale)
-
-   -- inst.components.locomotor.walkspeed = 1.5 * scale
-
-   -- inst.components.combat:SetDefaultDamage(TUNING.LEIF_DAMAGE * scale)
-   -- inst.components.combat:SetRange(3 * scale)
-
-   -- local health_percent = inst.components.health:GetPercent()
-   -- inst.components.health:SetMaxHealth(TUNING.LEIF_HEALTH * scale)
-    --inst.components.health:SetPercent(health_percent, true)
-	--inst.scaleleif = scale
---end
-
 env.AddComponentPostInit("wisecracker", function(self, inst)
-
-self.inst = inst
+	self.inst = inst
 
 	inst:ListenForEvent("rooting", function(inst, data)
         inst.components.talker:Say(GetString(inst, "ANNOUNCE_ROOTING"))
     end)
-
-	
 end)
-
-
-
-
-inst.rootready = true
-if inst.components.combat ~= nil and inst.components.combat.attackrange ~= nil then
-inst.oldrange = 3
-inst.components.combat:SetRange(3*inst.oldrange)
-end
 
 local prefabs = {
     "rootspike",
@@ -115,33 +83,37 @@ local function SpawnSnare(inst, target)
     local thetaoffset = math.random() * PI * 2
     local delaytoggle = 0
     local map = TheWorld.Map
-    for theta = math.random() * dtheta, PI * 2, dtheta do
-        local x1 = x + r * math.cos(theta)
-        local z1 = z + r * math.sin(theta)
-        if map:IsPassableAtPoint(x1, 0, z1) and not map:IsPointNearHole(Vector3(x1, 0, z1)) then
-            local spike = SpawnPrefab("rootspike")
-            spike.Transform:SetPosition(x1, 0, z1)
+	
+	
+	if x ~= nil and z ~= nil then
+		for theta = math.random() * dtheta, PI * 2, dtheta do
+			local x1 = x + r * math.cos(theta)
+			local z1 = z + r * math.sin(theta)
+			if map:IsPassableAtPoint(x1, 0, z1) and not map:IsPointNearHole(Vector3(x1, 0, z1)) then
+				local spike = SpawnPrefab("rootspike")
+				spike.Transform:SetPosition(x1, 0, z1)
 
-            local delay = delaytoggle == 0 and 0 or .2 + delaytoggle * math.random() * .2
-            delaytoggle = delaytoggle == 1 and -1 or 1
+				local delay = delaytoggle == 0 and 0 or .2 + delaytoggle * math.random() * .2
+				delaytoggle = delaytoggle == 1 and -1 or 1
 
-            local duration = GetRandomWithVariance(TUNING.STALKER_SNARE_TIME, TUNING.STALKER_SNARE_TIME_VARIANCE)
+				local duration = GetRandomWithVariance(TUNING.STALKER_SNARE_TIME, TUNING.STALKER_SNARE_TIME_VARIANCE)
 
-            local variation = table.remove(vars, math.random(#vars))
-            table.insert(used, variation)
-            if #used > 3 then
-                table.insert(queued, table.remove(used, 1))
-            end
-            if #vars <= 0 then
-                local swap = vars
-                vars = queued
-                queued = swap
-            end
+				local variation = table.remove(vars, math.random(#vars))
+				table.insert(used, variation)
+				if #used > 3 then
+					table.insert(queued, table.remove(used, 1))
+				end
+				if #vars <= 0 then
+					local swap = vars
+					vars = queued
+					queued = swap
+				end
 
-            spike:RestartSpike(delay, duration, variation)
-            count = count + 1
-        end
-    end
+				spike:RestartSpike(delay, duration, variation)
+				count = count + 1
+			end
+		end
+	end
     if count <= 0 then
         return false
     elseif target:IsValid() then
@@ -157,22 +129,37 @@ local function find_leif_spawn_target(item)
         and item.components.growable.stage <= 3
 end
 local function spawn_stumpling(target)
-    local stumpling = SpawnPrefab("stumpling")
+	if target:HasTag("deciduous") then
+		local stumpling = SpawnPrefab("birchling")
+	
+		if target.chopper ~= nil then
+			stumpling.components.combat:SuggestTarget(target.chopper)
+		end
 
-    if target.chopper ~= nil then
-        stumpling.components.combat:SuggestTarget(target.chopper)
-    end
+		local x, y, z = target.Transform:GetWorldPosition()
+		target:Remove()
+		local effect = SpawnPrefab("round_puff_fx_hi")
+		effect.Transform:SetPosition(x, y, z)
+		stumpling.Transform:SetPosition(x, y, z)
+		stumpling.sg:GoToState("hit")
+	else
+		local stumpling = SpawnPrefab("stumpling")
+	
+		if target.chopper ~= nil then
+			stumpling.components.combat:SuggestTarget(target.chopper)
+		end
 
-    local x, y, z = target.Transform:GetWorldPosition()
-    target:Remove()
-	local effect = SpawnPrefab("round_puff_fx_hi")
-	effect.Transform:SetPosition(x, y, z)
-    stumpling.Transform:SetPosition(x, y, z)
-    stumpling.sg:GoToState("hit")
+		local x, y, z = target.Transform:GetWorldPosition()
+		target:Remove()
+		local effect = SpawnPrefab("round_puff_fx_hi")
+		effect.Transform:SetPosition(x, y, z)
+		stumpling.Transform:SetPosition(x, y, z)
+		stumpling.sg:GoToState("hit")
+	end
 end
 local function SummonStumplings(target)
 	for k = 1, 3 do 
-    local stump = FindEntity(target, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, {"stump","evergreen"}, { "leif","burnt","deciduoustree" })
+    local stump = FindEntity(target, TUNING.LEIF_MAXSPAWNDIST, find_leif_spawn_target, {"stump"--[[,"evergreen"]]}, { "leif","burnt"--[[,"deciduoustree"]] })
 		if stump ~= nil then
 			stump.noleif = true
 			if inst.components.combat.target ~= nil then
@@ -186,7 +173,6 @@ end
 		inst.SummonStumplings = SummonStumplings
         inst.FindSnareTargets = FindSnareTargets
         inst.SpawnSnare = SpawnSnare
-		
 		
 		local function UnHide(inst, data)
 			if data.statename ~= "sleeping" then
@@ -212,7 +198,7 @@ end
 		end
 		
 		inst:ListenForEvent("attacked", BossCheck)
-
+		
 		local function OnHitOther(inst, other)
 			if other:HasTag("creatureknockbackable") then
 			other:PushEvent("knockback", {knocker = inst, radius = 75, strengthmult = 1})
@@ -228,4 +214,5 @@ end
 		if inst.components.combat ~= nil then
 			inst.components.combat.onhitotherfn = OnHitOther
 		end
+		
 end)

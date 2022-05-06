@@ -1,23 +1,28 @@
 local function OnHitZap(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
-    SpawnPrefab("electric_explosion").Transform:SetPosition(x,0,z)
+    
+	SpawnPrefab("electric_explosion").Transform:SetPosition(x,0,z)
 	SpawnPrefab("bishop_charge_hit").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	
 	local ents = TheSim:FindEntities(x, 0, z, 5, {"_health"}, { "shadow", "INLIMBO", "chess" })
+	
 	if #ents > 0 then
 		for i, v in ipairs(ents) do			
-				if v.components.health ~= nil and not v.components.health:IsDead() then
-					if not (v.components.inventory ~= nil and v.components.inventory:IsInsulated()) then
-						if v.sg ~= nil then
-							v.sg:GoToState("electrocute")
-						end
+			if v.components.health ~= nil and not v.components.health:IsDead() then
+				if not (v.components.inventory ~= nil and v.components.inventory:IsInsulated()) then
+					if v.sg ~= nil then
+						v.sg:GoToState("electrocute")
+					end
+
 					v.components.health:DoDelta(-30, nil, inst.prefab, nil, inst) --From the onhit stuff...
-					else
+				else
 					v.components.health:DoDelta(-15, nil, inst.prefab, nil, inst)
-					end
-					else
-					if not inst:HasTag("electricdamageimmune") and v.components.health ~= nil then
+				end
+					
+			else
+				if not inst:HasTag("electricdamageimmune") and v.components.health ~= nil then
 					v.components.health:DoDelta(-30, nil, inst.prefab, nil, inst) --From the onhit stuff...
-					end
+				end
 			end
 		end
     end
