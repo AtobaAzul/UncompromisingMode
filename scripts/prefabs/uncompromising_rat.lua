@@ -1021,7 +1021,7 @@ local function MakeRatBurrow(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 
     local function IsValidRatBurrowPosition(x, z)
-        if #TheSim:FindEntities(x, 0, z, TUNING.ANTLION_SINKHOLE.RADIUS, { "antlion_sinkhole_blocker" }) > 0 then
+        if #TheSim:FindEntities(x, 0, z, TUNING.ANTLION_SINKHOLE.RADIUS * 2, { "antlion_sinkhole_blocker" }) > 0 then
             return false
         end
 		
@@ -1272,7 +1272,7 @@ local function MakeScoutBurrow(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 
     local function IsValidRatBurrowPosition(x, z)
-        if #TheSim:FindEntities(x, 0, z, TUNING.ANTLION_SINKHOLE.RADIUS, { "antlion_sinkhole_blocker" }) > 0 then
+        if #TheSim:FindEntities(x, 0, z, TUNING.ANTLION_SINKHOLE.RADIUS * 2, { "antlion_sinkhole_blocker" }) > 0 then
             return false
         end
 		
@@ -1960,10 +1960,10 @@ local function FoodScoreCalculations(inst,container,v)
 		if IsAVersionOfRot(v) then
 			delta = ((5 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
 		end
-		if v:HasTag("stale") and v.components.farmplantable ~= nil then
+		if v:HasTag("stale") and v.components.farmplantable ~= nil and TUNING.DSTU.SEEDCHECK then
 			delta = ((1.5 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
 		end
-		if v:HasTag("spoiled") and v.components.farmplantable ~= nil then
+		if v:HasTag("spoiled") and v.components.farmplantable ~= nil and TUNING.DSTU.SEEDCHECK then
 			delta = ((3 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
 		end
 	else
@@ -1979,10 +1979,10 @@ local function FoodScoreCalculations(inst,container,v)
 		if IsAVersionOfRot(v) then
 			delta = ((15 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
 		end
-		if v:HasTag("stale") and v.components.farmplantable ~= nil then
+		if v:HasTag("stale") and v.components.farmplantable ~= nil and TUNING.DSTU.SEEDCHECK then
 			delta = ((3 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
 		end
-		if v:HasTag("spoiled") and v.components.farmplantable ~= nil then
+		if v:HasTag("spoiled") and v.components.farmplantable ~= nil and TUNING.DSTU.SEEDCHECK then
 			delta = ((6 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
 		end
 	end
@@ -2055,12 +2055,13 @@ local function TimeForACheckUp(inst,dev)
 							inst.foodscore = inst.foodscore + ((15 * inst.preparedmultiplier) * inst.multiplier)
 						end
 					end
-	]]
-					if not (v:HasTag("balloon") or v:HasTag("heavy") or v:HasTag("projectile")) then
-						if (v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool"))  then
-							inst.itemscore = inst.itemscore + 30 -- Oooh, wants wants! We steal!
-						elseif v:HasTag("molebait") then
-							inst.itemscore = inst.itemscore + 2 -- Oooh, wants wants! We steal!
+	]]				if TUNING.DSTU.ITEMCHECK then
+						if not (v:HasTag("balloon") or v:HasTag("heavy") or v:HasTag("projectile") or v.prefab == "lantern") then
+							if (v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool"))  then
+								inst.itemscore = inst.itemscore + 30 -- Oooh, wants wants! We steal!
+							elseif v:HasTag("molebait") then
+								inst.itemscore = inst.itemscore + 2 -- Oooh, wants wants! We steal!
+							end
 						end
 					end
 				end

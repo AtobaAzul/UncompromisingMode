@@ -243,14 +243,16 @@ local function TryPerish(item)
 end
 
 local function TryCure(item)
-	if item:HasTag("diseased") and item.components.pickable then
+	if (item:HasTag("diseased") or item:HasTag("barren") or item:HasTag("withered")) and item.components.pickable then
 		local x, y, z = item.Transform:GetWorldPosition()
 		item:Remove()
 		local cured = SpawnPrefab(item.prefab)
 		cured.Transform:SetPosition(x, y, z)
 		cured.components.pickable:OnTransplant()
+        cured.components.pickable:Regen()
+        cured.components.pickable.cycles_left = cured.components.pickable.max_cycles
 		SpawnPrefab("halloween_moonpuff").Transform:SetPosition(x, y, z)
-	end
+    end
 end
 
 local function DoAreaDrowsy(inst)
@@ -260,7 +262,7 @@ local function DoAreaDrowsy(inst)
         TryPerish(v)
     end
 	
-    local ents2 = TheSim:FindEntities(x, y, z, 9, { "diseased" })
+    local ents2 = TheSim:FindEntities(x, y, z, 9, nil, nil, { "diseased", "withered", "barren" })
     for i, k in ipairs(ents2) do
         TryCure(k)
     end

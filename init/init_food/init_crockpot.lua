@@ -393,9 +393,11 @@ local zaspberryparfait =
     perishtime = 2*TUNING.PERISH_TWO_DAY,
     cooktime = 1.8,
 }
-AddCookerRecipe("cookpot", zaspberryparfait)
-AddCookerRecipe("portablecookpot", zaspberryparfait)
-AddCookerRecipe("archive_cookpot", zaspberryparfait)
+if TUNING.DSTU.NEWRECIPES then
+    AddCookerRecipe("cookpot", zaspberryparfait)
+    AddCookerRecipe("portablecookpot", zaspberryparfait)
+    AddCookerRecipe("archive_cookpot", zaspberryparfait)
+end
 RegisterInventoryItemAtlas("images/inventoryimages/zaspberryparfait.xml", "zaspberryparfait.tex")
 
 local carapacecooler =
@@ -430,9 +432,11 @@ local seafoodpaella =
     sanity = 5,
     cooktime = 1,
 }
+if TUNING.DSTU.RICE and TUNING.DSTU.NEWRECIPES then
 AddCookerRecipe("cookpot", seafoodpaella)
 AddCookerRecipe("portablecookpot", seafoodpaella)
 AddCookerRecipe("archive_cookpot", seafoodpaella)
+end
 RegisterInventoryItemAtlas("images/inventoryimages/seafoodpaella.xml", "seafoodpaella.tex")
 
 local liceloaf =
@@ -450,9 +454,11 @@ local liceloaf =
     sanity = 0,
     cooktime = 1.2,
 }
-AddCookerRecipe("cookpot", liceloaf)
-AddCookerRecipe("portablecookpot", liceloaf)
-AddCookerRecipe("archive_cookpot", liceloaf)
+if TUNING.DSTU.RICE and TUNING.DSTU.NEWRECIPES then
+    AddCookerRecipe("cookpot", liceloaf)
+    AddCookerRecipe("portablecookpot", liceloaf)
+    AddCookerRecipe("archive_cookpot", liceloaf)
+end
 RegisterInventoryItemAtlas("images/inventoryimages/liceloaf.xml", "liceloaf.tex")
 
 local hardshelltacos =
@@ -469,9 +475,11 @@ local hardshelltacos =
     sanity = 5,
     cooktime = 1,
 }
-AddCookerRecipe("cookpot", hardshelltacos)
-AddCookerRecipe("portablecookpot", hardshelltacos)
-AddCookerRecipe("archive_cookpot", hardshelltacos)
+if TUNING.DSTU.NEWRECIPES then
+    AddCookerRecipe("cookpot", hardshelltacos)
+    AddCookerRecipe("portablecookpot", hardshelltacos)
+    AddCookerRecipe("archive_cookpot", hardshelltacos)
+end
 RegisterInventoryItemAtlas("images/inventoryimages/hardshelltacos.xml", "hardshelltacos.tex")
 
 local californiaking =
@@ -489,9 +497,11 @@ local californiaking =
     sanity = -15,
     cooktime = 2,
 }
-AddCookerRecipe("cookpot", californiaking)
-AddCookerRecipe("portablecookpot", californiaking)
-AddCookerRecipe("archive_cookpot", californiaking)
+if TUNING.DSTU.NEWRECIPES then
+    AddCookerRecipe("cookpot", californiaking)
+    AddCookerRecipe("portablecookpot", californiaking)
+    AddCookerRecipe("archive_cookpot", californiaking)
+end
 RegisterInventoryItemAtlas("images/inventoryimages/californiaking.xml", "californiaking.tex")
 
 local purplesteamedhams =
@@ -509,9 +519,11 @@ local purplesteamedhams =
     sanity = 15,
     cooktime = 1,
 }
-AddCookerRecipe("cookpot", purplesteamedhams)
-AddCookerRecipe("portablecookpot", purplesteamedhams)
-AddCookerRecipe("archive_cookpot", purplesteamedhams)
+if TUNING.DSTU.NEWRECIPES then
+    AddCookerRecipe("cookpot", purplesteamedhams)
+    AddCookerRecipe("portablecookpot", purplesteamedhams)
+    AddCookerRecipe("archive_cookpot", purplesteamedhams)
+end
 RegisterInventoryItemAtlas("images/inventoryimages/purplesteamedhams.xml", "purplesteamedhams.tex")
 
 local greensteamedhams =
@@ -529,9 +541,11 @@ local greensteamedhams =
     sanity = 15,
     cooktime = 1,
 }
-AddCookerRecipe("cookpot", greensteamedhams)
-AddCookerRecipe("portablecookpot", greensteamedhams)
-AddCookerRecipe("archive_cookpot", greensteamedhams)
+if TUNING.DSTU.NEWRECIPES then
+    AddCookerRecipe("cookpot", greensteamedhams)
+    AddCookerRecipe("portablecookpot", greensteamedhams)
+    AddCookerRecipe("archive_cookpot", greensteamedhams)
+end
 RegisterInventoryItemAtlas("images/inventoryimages/greensteamedhams.xml", "greensteamedhams.tex")
 
 local simpsalad =
@@ -548,9 +562,11 @@ local simpsalad =
     sanity = 5,
     cooktime = 0.4,
 }
-AddCookerRecipe("cookpot", simpsalad)
-AddCookerRecipe("portablecookpot", simpsalad)
-AddCookerRecipe("archive_cookpot", simpsalad)
+if TUNING.DSTU.NEWRECIPES then
+    AddCookerRecipe("cookpot", simpsalad)
+    AddCookerRecipe("portablecookpot", simpsalad)
+    AddCookerRecipe("archive_cookpot", simpsalad)
+end
 RegisterInventoryItemAtlas("images/inventoryimages/simpsalad.xml", "simpsalad.tex")
 
 local blueberrypancakes =
@@ -567,9 +583,11 @@ local blueberrypancakes =
     sanity = 20,
     cooktime = 1.8,
 }
-AddCookerRecipe("cookpot", blueberrypancakes)
-AddCookerRecipe("portablecookpot", blueberrypancakes)
-AddCookerRecipe("archive_cookpot", blueberrypancakes)
+if TUNING.DSTU.NEWRECIPES then
+    AddCookerRecipe("cookpot", blueberrypancakes)
+    AddCookerRecipe("portablecookpot", blueberrypancakes)
+    AddCookerRecipe("archive_cookpot", blueberrypancakes)
+end
 RegisterInventoryItemAtlas("images/inventoryimages/blueberrypancakes.xml", "blueberrypancakes.tex")
 
 local beefalowings =
@@ -587,9 +605,11 @@ local beefalowings =
     sanity = 30,
     cooktime = 2.4,
 }
+if TUNING.DSTU.NEWRECIPES then
 AddCookerRecipe("cookpot", beefalowings)
 AddCookerRecipe("portablecookpot", beefalowings)
 AddCookerRecipe("archive_cookpot", beefalowings)
+end
 RegisterInventoryItemAtlas("images/inventoryimages/beefalowings.xml", "beefalowings.tex")
 
 local snowcone =
@@ -650,9 +670,11 @@ local snotroast =
     perishtime = 10*TUNING.PERISH_TWO_DAY,
     cooktime = 1.8,
 }
-AddCookerRecipe("cookpot", snotroast)
-AddCookerRecipe("portablecookpot", snotroast)
-AddCookerRecipe("archive_cookpot", snotroast)
+if TUNING.DSTU.NEWRECIPES then
+    AddCookerRecipe("cookpot", snotroast)
+    AddCookerRecipe("portablecookpot", snotroast)
+    AddCookerRecipe("archive_cookpot", snotroast)
+end
 RegisterInventoryItemAtlas("images/inventoryimages/snotroast.xml", "snotroast.tex")
 
 local theatercorn =
@@ -671,7 +693,9 @@ local theatercorn =
     cooktime = 1.8,
 	stacksize = 3,
 }
-AddCookerRecipe("cookpot", theatercorn)
-AddCookerRecipe("portablecookpot", theatercorn)
-AddCookerRecipe("archive_cookpot", theatercorn)
+    AddCookerRecipe("cookpot", theatercorn)
+    AddCookerRecipe("portablecookpot", theatercorn)
+    AddCookerRecipe("archive_cookpot", theatercorn)
+end
 RegisterInventoryItemAtlas("images/inventoryimages/theatercorn.xml", "theatercorn.tex")
+

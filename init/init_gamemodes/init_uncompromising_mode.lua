@@ -36,6 +36,7 @@ local require = GLOBAL.require
 	modimport("init/init_descriptions/wurt")
 	modimport("init/init_descriptions/walter")
 	modimport("init/init_descriptions/wanda")
+	modimport("init/init_descriptions/winky")
 	
 --	[ 		Number Tuning and PostInits		]	--
 
@@ -174,10 +175,7 @@ local require = GLOBAL.require
 		modimport("init/init_character_changes/webber")
 		modimport("init/init_character_changes/winona")
 		modimport("init/init_character_changes/wanda")
-		
-	if GetModConfigData("wortox") == true then
 		modimport("init/init_character_changes/wortox")
-	end
 	
 		modimport("init/init_character_changes/wormwood")
 		modimport("init/init_character_changes/waxwell")

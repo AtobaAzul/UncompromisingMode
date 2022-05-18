@@ -432,7 +432,7 @@ NERFS:
 
 * [x] [THE HOODED FOREST] Bees, Killer Bees, and Butterflies no longer drop souls
 
-* [x]  [Fight or Flight] Wortox health changed to 150 from 200.
+* [x]  [CBTS] Wortox novv has config that allovvs different nerfs to him.
 
 --Wormwood
 

@@ -221,12 +221,18 @@ local function OnKilled(inst)
 		inst.components.lootdropper:AddChanceLoot("coontail",    1.00)
 		end
 		if inst.size == 18 then
-		creature  = "eyeofterror_mini"
-		inst.components.lootdropper:AddChanceLoot("milkywhites",		1.00)
-		inst.components.lootdropper:AddChanceLoot("milkywhites",		1.00)
-		inst.components.lootdropper:AddChanceLoot("milkywhites",		0.50)
-		inst.components.lootdropper:AddChanceLoot("monstermeat", 	1.00)
-		inst.components.lootdropper:AddChanceLoot("monstermeat", 	5.00)
+			creature  = "eyeofterror_mini"
+			inst.components.lootdropper:AddChanceLoot("milkywhites",		1.00)
+			inst.components.lootdropper:AddChanceLoot("milkywhites",		1.00)
+			inst.components.lootdropper:AddChanceLoot("milkywhites",		0.50)
+			inst.components.lootdropper:AddChanceLoot("monstermeat", 	1.00)
+			inst.components.lootdropper:AddChanceLoot("monstermeat", 	5.00)
+		end
+		if inst.size == 19 then
+			creature  = "pied_rat"
+			inst.components.lootdropper:AddChanceLoot("rat_tail",		1.00)
+			inst.components.lootdropper:AddChanceLoot("rat_tail",		1.00)
+			inst.components.lootdropper:AddChanceLoot("rat_tail",		0.50)
 		end
 		inst.components.lootdropper:DropLoot()
 	--[[if creature ~= nil and not creature == "spiderqueen" then
@@ -360,6 +366,10 @@ local function SetSize(inst)
 		SetSmall(inst)
 		inst.components.named:SetName("Grotesque Cocoon")
 	end
+	if inst.size == 19 then   --Pied Rat
+		SetSmall(inst)
+		inst.components.named:SetName("Stinky Cocoon")
+	end
 end
 
 local function Regen(inst, attacker)
@@ -439,7 +449,7 @@ local function fn()
 		inst.OnLoad = onload
 		inst.OnEntitySleep = OnEntitySleep
 		inst.OnEntityWake = OnEntityWake
-		inst.size = math.random(1,18)
+		inst.size = math.random(1,19)
 		return inst
 end
 

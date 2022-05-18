@@ -180,7 +180,11 @@ end
 -----HE:LP [ASME] MEE 
 local function OnHitOther(inst, data)
 	local other = data.target
-	if other ~= nil and not other:HasTag("webbedcreature") then
+	local blocked = false
+	if data.target and data.target.sg and data.target.sg:HasStateTag("shell") then
+		blocked = true
+	end
+	if other ~= nil and not other:HasTag("webbedcreature") and blocked == false then
 		if inst.combosucceed == false then
 			--TheNet:SystemMessage("Combo Succeed!")
 			inst.combosucceed = true
@@ -189,7 +193,7 @@ local function OnHitOther(inst, data)
 			inst.combo = inst.combo/10
 		end
 	end
-	if other ~= nil and other.components.inventory ~= nil and inst.armorcrunch == true then
+	if other ~= nil and other.components.inventory ~= nil and inst.armorcrunch == true and blocked == false then
 		local helm = other.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
 		local chest = other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
 		local hand = other.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)

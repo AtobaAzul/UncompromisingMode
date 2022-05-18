@@ -24,6 +24,7 @@ local component_post = {
 	"foodaffinity",
 	"eater",
 	"edible",
+	"inventory" -- This is an attempt at manually fixing an issue when people are checked for insulation. -scrimbles
 }
 
 local prefab_post = {
@@ -170,7 +171,6 @@ local brain_post = {
 	"perd",
 	"catcoon",
 	"deer",
-	"leif",
 }
 
 if GetModConfigData("hangyperds") then
@@ -180,84 +180,85 @@ if GetModConfigData("hangyperds") then
 end
 
 if GetModConfigData("harder_deerclops") then
-table.insert(stategraph_post,"deerclops")
-table.insert(prefab_post,"deerclops")
+	table.insert(stategraph_post,"deerclops")
+	table.insert(prefab_post,"deerclops")
 end
 
 if GetModConfigData("harder_moose") then
-table.insert(stategraph_post,"moose")
-table.insert(prefab_post,"moose")
-table.insert(brain_post,"moose")
+	table.insert(stategraph_post,"moose")
+	table.insert(prefab_post,"moose")
+	table.insert(brain_post,"moose")
 end
 
 if GetModConfigData("harder_bearger") then
-table.insert(stategraph_post,"bearger")
-table.insert(prefab_post,"bearger")
-table.insert(brain_post,"bearger")
+	table.insert(stategraph_post,"bearger")
+	table.insert(prefab_post,"bearger")
+	table.insert(brain_post,"bearger")
 end
 
 if GetModConfigData("harder_leifs") then
-table.insert(stategraph_post,"Leif")
-table.insert(prefab_post,"leif")
-table.insert(prefab_post,"leif_sparse")
+	table.insert(stategraph_post,"Leif")
+	table.insert(prefab_post,"leif")
+	table.insert(prefab_post,"leif_sparse")
+	table.insert(brain_post, "leif")
 end
 
-if GetModConfigData("rework_minotaur_disabled") then
-table.insert(stategraph_post,"minotaur")
-table.insert(prefab_post,"minotaur")
-table.insert(prefab_post,"pillar_ruins")
+if GetModConfigData("rework_minotaur_") --[[and not GetModConfigData("beta_compatibility")]] then
+	table.insert(stategraph_post,"minotaur")
+	table.insert(prefab_post,"minotaur")
+	table.insert(prefab_post,"pillar_ruins")
 end
 
 if GetModConfigData("harder_dragonfly") then 
-table.insert(prefab_post,"dragonfly")
+	table.insert(prefab_post,"dragonfly")
 end
 if GetModConfigData("harder_lavae") then
-table.insert(prefab_post,"lavae")
+	table.insert(prefab_post,"lavae")
 end
 
 if GetModConfigData("hardbatilisks") then
-table.insert(prefab_post,"bat")
+	table.insert(prefab_post,"bat")
 end
 
 if GetModConfigData("pinelings") then
-table.insert(prefab_post,"evergreen_stump")
+	table.insert(prefab_post,"evergreen_stump")
 end
 
 if GetModConfigData("canedurability") then
-table.insert(prefab_post,"cane")
+	table.insert(prefab_post,"cane")
 end
 
 if GetModConfigData("angrypenguins") then
-table.insert(prefab_post,"penguin")
-table.insert(prefab_post,"penguin_ice") --I think that should go too?  idk right here
+	table.insert(prefab_post,"penguin")
+	table.insert(prefab_post,"penguin_ice") --I think that should go too?  idk right here
 end
 
 if GetModConfigData("harder_pigs") then
-table.insert(prefab_post,"pigman")
-table.insert(brain_post,"pig")
-table.insert(brain_post,"werepig")
-table.insert(stategraph_post,"pigbunny")
+	table.insert(prefab_post,"pigman")
+	table.insert(brain_post,"pig")
+	table.insert(brain_post,"werepig")
+	table.insert(stategraph_post,"pigbunny")
 end
 
 if GetModConfigData("harder_walrus") then
-table.insert(prefab_post,"walrus")
-table.insert(stategraph_post,"walrus")
+	table.insert(prefab_post,"walrus")
+	table.insert(stategraph_post,"walrus")
 end
 if GetModConfigData("harder_beefalo") then
-table.insert(stategraph_post,"Beefalo")
+	table.insert(stategraph_post,"Beefalo")
 end
 
 if GetModConfigData("harder_spiderqueen") then
-table.insert(prefab_post,"spiderqueen")
-table.insert(stategraph_post,"spiderqueen")
+	table.insert(prefab_post,"spiderqueen")
+	table.insert(stategraph_post,"spiderqueen")
 end
 
 if GetModConfigData("pocket_powertrip") == 1 or 2 then
-table.insert(prefab_post,"pocket_powertrip")
+	table.insert(prefab_post,"pocket_powertrip")
 end
 
 if GetModConfigData("harder_koalefants") then
-table.insert(stategraph_post,"koalefant")
+	table.insert(stategraph_post,"koalefant")
 end
 
 if GetModConfigData("reworked_eyes") then
@@ -269,11 +270,11 @@ if GetModConfigData("scalemailbuff") then
 	table.insert(prefab_post,"armor_dragonfly")
 end
 
-if GetModConfigData("um_music") then
+if GetModConfigData("um_music") and TUNING.DSTU.ISLAND_ADVENTURES then
 	table.insert(component_post,"dynamicmusic")
 end
 
-if GetModConfigData("winter_burning") then
+if GetModConfigData("winter_burning") and TUNING.DSTU.ISLAND_ADVENTURES then
 	table.insert(component_post,"burnable")
 end
 

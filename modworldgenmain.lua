@@ -305,14 +305,14 @@ LOCKS["HF"] = lockcount + 1
 LOCKS_KEYS[LOCKS.RICE] = {KEYS.RICE}
 LOCKS_KEYS[LOCKS.HF] = {KEYS.HF}
 
-if GetModConfigData("rice") then
+if GetModConfigData("rice") and not GLOBAL.KnownModIndex:IsModEnabled("workshop-1467214795") then
 	AddTaskPreInit("Squeltch",function(task)
 		task.room_choices["ricepatch"] = 1 --Comment to test task based rice worldgen
 		task.room_choices["densericepatch"] = 1      --Comment to test task based rice worldgen
 	end)
 end
-if GetModConfigData("hoodedforest") then
-GLOBAL.require("map/tasks/gianttrees")
+if GetModConfigData("hoodedforest") and not GLOBAL.KnownModIndex:IsModEnabled("workshop-1467214795") then
+	GLOBAL.require("map/tasks/gianttrees")
 end
 --[[GLOBAL.require("map/tasks/ratacombs")
 GLOBAL.require("map/rooms/caves/ratacombsrooms")
@@ -334,7 +334,7 @@ else
 	end)
 end]]
 
-if GetModConfigData("hoodedforest") then
+if GetModConfigData("hoodedforest") and not GLOBAL.KnownModIndex:IsModEnabled("workshop-1467214795") then
 	AddTaskPreInit("Forest hunters",function(task) --Leave Forest Hunters in incase someone adds something to its setpieces.
 		task.room_choices={
 			["Forest"] = 1,
@@ -349,7 +349,7 @@ AddTaskSetPreInitAny(function(tasksetdata)
     if tasksetdata.location ~= "forest" then
         return
     end
-	if GetModConfigData("hoodedforest") then
+	if GetModConfigData("hoodedforest") and not GLOBAL.KnownModIndex:IsModEnabled("workshop-1467214795") then
 		table.insert(tasksetdata.tasks,"GiantTrees")
 	end
 	if GetModConfigData("rice") then
@@ -454,7 +454,7 @@ for i, room in ipairs(pawnrooms) do
 		if room.contents.distributeprefabs == nil then
 			room.contents.distributeprefabs = {}
 		end
-		room.contents.distributeprefabs.pawn_hopper = 0.20
+		room.contents.distributeprefabs.pawn_hopper = 0.133
 	end)
 end
 
@@ -466,7 +466,7 @@ for i, room in ipairs(damagedpawnrooms) do
 		if room.contents.distributeprefabs == nil then
 			room.contents.distributeprefabs = {}
 		end
-		room.contents.distributeprefabs.pawn_hopper_nightmare = 0.20
+		room.contents.distributeprefabs.pawn_hopper_nightmare = 0.2
 	end)
 end
 

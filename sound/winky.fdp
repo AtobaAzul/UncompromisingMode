@@ -27,6 +27,26 @@
 <notes></notes>
 <open>0</open>
 </eventcategory>
+<eventcategory>
+<name>set_sfx</name>
+<guid>{75d6c9fb-8a54-4c49-94e9-92c492b7b737}</guid>
+<volume_db>0</volume_db>
+<pitch>0</pitch>
+<maxplaybacks>0</maxplaybacks>
+<maxplaybacks_behavior>Steal_oldest</maxplaybacks_behavior>
+<notes></notes>
+<open>1</open>
+<eventcategory>
+<name>player</name>
+<guid>{c64d134b-94dc-46ab-ab9d-ccd9a7a0ab46}</guid>
+<volume_db>0</volume_db>
+<pitch>0</pitch>
+<maxplaybacks>0</maxplaybacks>
+<maxplaybacks_behavior>Steal_oldest</maxplaybacks_behavior>
+<notes></notes>
+<open>1</open>
+</eventcategory>
+</eventcategory>
 <sounddeffolder>
 <name>master</name>
 <guid>{02dac776-eb52-4bf3-b9e2-8861914f84d5}</guid>
@@ -569,7 +589,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/player</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -773,7 +793,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/player</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -967,7 +987,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/player</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -1191,7 +1211,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/player</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -1385,7 +1405,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/player</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -1577,7 +1597,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/player</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -1767,7 +1787,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/player</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -1957,7 +1977,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/player</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -2147,7 +2167,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/player</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>
@@ -2337,7 +2357,7 @@
 <istemplate>No</istemplate>
 <usetemplate></usetemplate>
 <notes></notes>
-<category>master</category>
+<category>set_sfx/player</category>
 <position_randomization_min>0</position_randomization_min>
 <position_randomization>0</position_randomization>
 <speaker_l>1</speaker_l>

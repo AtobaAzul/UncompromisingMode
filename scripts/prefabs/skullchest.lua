@@ -128,6 +128,6 @@ local function MakeChest(name, bank, build, indestructible, master_postinit, pre
     return Prefab(name, fn)
 end
 
-return MakeChest("skullchest", "skull_chest", "skull_chest", false, nil, { "collapse_small" }),
+return MakeChest("skullchest", "skull_chest", "skull_chest", true, nil, { "collapse_small" }),
 MakeChest("skullchest_child", "skull_chest", "skull_chest", false, nil, { "collapse_small" }),
 MakePlacer("skullchest_child_placer", "skull_chest", "skull_chest", "closed")

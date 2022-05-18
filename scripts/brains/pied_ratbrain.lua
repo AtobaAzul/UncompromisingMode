@@ -41,8 +41,10 @@ function Pied_RatBrain:OnStart()
             MinPeriod(self.inst, TUNING.WARG_SUMMONPERIOD, true,
             IfNode(function() return CanSpawnChild(self.inst) end, "needs follower",
                 ActionNode(function()
-                    self.inst.sg:GoToState("toot")
-                    return SUCCESS
+					if self.inst.components.health and not self.inst.components.health:IsDead() then
+						self.inst.sg:GoToState("toot")
+						return SUCCESS
+					end
                 end, "Summon Rat"))),
 			
 			

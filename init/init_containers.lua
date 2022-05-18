@@ -21,7 +21,7 @@ function CheckItem(container, item, slot)
 end
 
 function CheckEquipItem(container, item, slot)
-    return item:HasTag("_equippable")
+    return item:HasTag("_equippable") or item:HasTag("slingshotammo") or item:HasTag("tool") or item.components.finiteuses or item.components.fueled 
 end
 
 function CheckHandItem(container, item, slot)

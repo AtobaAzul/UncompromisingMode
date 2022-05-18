@@ -19,7 +19,7 @@ AddComponentPostInit("sewing", DoSewing)
 --]]
 -------------Torches only smolder objects now---------------
 local _OldLightAction = GLOBAL.ACTIONS.LIGHT.fn
-if TUNING.DSTU.WINTER_BURNING then
+if TUNING.DSTU.WINTER_BURNING and TUNING.DSTU.ISLAND_ADVENTURES then
 	GLOBAL.ACTIONS.LIGHT.fn = function(act)
     	if act.invobject ~= nil and act.invobject.components.lighter ~= nil then
 			if GLOBAL.TheWorld.state.season == "winter" and not act.doer:HasTag("pyromaniac") and act.target.components.burnable then
@@ -41,8 +41,9 @@ env.AddPrefabPostInit("cave", function(inst)
     if not TheWorld.ismastersim then
         return
     end
-    
+    if TUNING.DSTU.CAVECLOPS then
     inst:AddComponent("cavedeerclopsspawner")
+	end
     inst:AddComponent("randomnighteventscaves")
 	inst:AddComponent("ratacombs_junk_manager")
 end)
@@ -94,24 +95,25 @@ env.AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then
         return
     end
-	inst:AddComponent("toadrain")
-	--inst:AddComponent("hayfever_tracker")
-	inst:AddComponent("firefallwarning")
-	
-	inst:RemoveComponent("deerclopsspawner")
 
-	
-	
-	
-	inst:AddComponent("uncompromising_deerclopsspawner")
-	inst:AddComponent("pollenmitedenspawner")
+	if not TUNING.DSTU.ISLAND_ADVENTURES then
+
+		inst:RemoveComponent("deerclopsspawner")
+		inst:AddComponent("uncompromising_deerclopsspawner")
+
+		inst:AddComponent("toadrain")
+		--inst:AddComponent("hayfever_tracker")
+		inst:AddComponent("firefallwarning")
+		inst:AddComponent("pollenmitedenspawner")
+	end
+
 	--inst:ListenForEvent("seasontick", OnSeasonTick)
-	if TUNING.DSTU.SNOWSTORMS then
+	if TUNING.DSTU.SNOWSTORMS and TUNING.DSTU.ISLAND_ADVENTURES then
 		inst:AddComponent("snowstorminitiator")
 	end
 	
 	if TUNING.DSTU.DESERTSCORPIONS then	
-	inst:AddComponent("scorpionspawner")
+		inst:AddComponent("scorpionspawner")
 	end
 	
 	inst:AddComponent("randomnightevents")
@@ -122,7 +124,7 @@ env.AddPrefabPostInit("forest", function(inst)
 	--inst.OnLoad = OnLoad
 end)
 
-if TUNING.DSTU.SPAWNMOTHERGOOSE then
+if TUNING.DSTU.SPAWNMOTHERGOOSE and TUNING.DSTU.ISLAND_ADVENTURES then
 env.AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then
         return
@@ -131,7 +133,7 @@ env.AddPrefabPostInit("forest", function(inst)
 end)
 end
 
-if TUNING.DSTU.SPAWNWILTINGFLY then
+if TUNING.DSTU.SPAWNWILTINGFLY and TUNING.DSTU.ISLAND_ADVENTURES then
 env.AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then
         return

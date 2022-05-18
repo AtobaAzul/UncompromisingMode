@@ -1,5 +1,33 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
+local function ArtificialLocomote(inst,destination,speed) --Locomotor is basically running a similar code anyhovv, this bypasses any physics interactions preventing
+	if destination and speed then						  --our locomote from vvorking... Inconsistencies in vvhen the entity is supposed to vvalk forvvard led to this.
+		speed = speed*FRAMES
+		local hypoten = math.sqrt(inst:GetDistanceSqToPoint(destination))
+		local x,y,z = inst.Transform:GetWorldPosition()
+		local x_final,y_final,z_final
+		
+		x_final = ((destination.x-x)/hypoten)*speed+x
+		z_final = ((destination.z-z)/hypoten)*speed+z
+		
+		inst.Transform:SetPosition(x_final,y,z_final)
+	
+	end
+end
+
+local function FindFarLandingPoint(inst,destination) --This makes the geese aim for a point behind the player instead of vvhere the player is at.
+	if destination then								 --If it aimed directly at the player, it'll do something similar to the bugged version.
+		inst.hopPoint = destination
+		local hypoten = math.sqrt(inst:GetDistanceSqToPoint(destination))
+		local x,y,z = inst.Transform:GetWorldPosition()
+		local x_far, z_far
+		x_far = ((destination.x-x)/hypoten)*20+x --20 is arbitrary, another number could be used if desired, if it is lovv enough it may make m/goose undershoot the player too.
+		z_far = ((destination.z-z)/hypoten)*20+z
+		inst.hopPoint.x = x_far
+		inst.hopPoint.z = z_far
+	end
+end
+
 
 env.AddStategraphPostInit("moose", function(inst)
 
@@ -60,6 +88,10 @@ local states = {
 			
 			if target ~= nil and target.Transform ~= nil then
 				inst:ForceFacePoint(target.Transform:GetWorldPosition())
+				
+				FindFarLandingPoint(inst,inst.components.combat.target:GetPosition())
+			else
+				FindFarLandingPoint(inst,inst:GetPosition())
 			end
 			
 			if math.random() <= 0.3 or inst.doublesuperhop > 1 then
@@ -71,13 +103,10 @@ local states = {
 			end
                 
 		end,
-
+		
 		timeline=
 		{
 			TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/preen") end),
-			TimeEvent(30*FRAMES, function(inst)
-				inst.Physics:SetMotorVelOverride(15,0,0)
-			end),
 		},
 		
 		events=
@@ -98,7 +127,6 @@ local states = {
 			inst.Physics:CollidesWith(COLLISION.WORLD)
 			inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/attack")
 			inst.AnimState:PlayAnimation("hopatk_loop", true)
-			inst.Physics:SetMotorVelOverride(15,0,0)
 			inst.flapySound = inst:DoPeriodicTask(6*FRAMES,
 				function(inst)
 					inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/flap")
@@ -117,9 +145,9 @@ local states = {
 			end
 		end,
 
-		--[[ontimeout= function(inst)
-			inst.sg:GoToState("landatk")
-		end,]]
+		onupdate = function(inst)
+			ArtificialLocomote(inst,inst.hopPoint,15)
+		end,
 
 		events=
 		{
@@ -226,6 +254,10 @@ local states = {
 			
 			if target ~= nil and target.Transform ~= nil then
 				inst:ForceFacePoint(target.Transform:GetWorldPosition())
+				
+				FindFarLandingPoint(inst,inst.components.combat.target:GetPosition())
+			else
+				FindFarLandingPoint(inst,inst:GetPosition())
 			end
 			
 			if math.random() <= 0.3 or inst.doublesuperhop > 1 then
@@ -241,9 +273,6 @@ local states = {
 		timeline=
 		{
 			TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/preen") end),
-			TimeEvent(30*FRAMES, function(inst)
-				inst.Physics:SetMotorVelOverride(15,0,0)
-			end),
 		},
 		
 		events=
@@ -264,14 +293,17 @@ local states = {
 			inst.Physics:CollidesWith(COLLISION.WORLD)
 			inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/attack")
 			inst.AnimState:PlayAnimation("hopatk_loop", true)
-			inst.Physics:SetMotorVelOverride(15,0,0)
 			inst.flapySound = inst:DoPeriodicTask(6*FRAMES,
 				function(inst)
 					inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/moose/flap")
 				end)
 			--inst.sg:SetTimeout(.5)
 		end,
-
+		
+		onupdate = function(inst)
+			ArtificialLocomote(inst,inst.hopPoint,15)
+		end,
+		
 		onexit = function(inst)
 			inst.Physics:CollidesWith(COLLISION.OBSTACLES)
 			inst.Physics:CollidesWith(COLLISION.CHARACTERS)

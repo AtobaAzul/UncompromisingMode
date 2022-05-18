@@ -341,3 +341,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.PIED_PIPER_FLUTE = "Filled with the spit of that beast."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Your pack will not help you carry the burden of the world."
 	DESCRIBE.WINONA_TOOLBOX = ""
+	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "This raft is about to leave me to drown."

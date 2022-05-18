@@ -157,7 +157,19 @@ configuration_options =
 	BinaryConfig("maxhealthwell", "New Maxwell Downside", "Maxwell's max health is reduced by 20% of the damage he takes.", false),
 	BinaryConfig("winonaworker", "Improved Winona", "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.", true),
 	BinaryConfig("winona_gen", "Winona-restricted Generators", "Limits access to Winona's Generators to only allow her to use them", true),
-	BinaryConfig("wortox", "Rebalanced Wortox", "Wortox has 150 health instead of 200. A few enemies no longer drop souls.", true),
+		{
+		name = "wortox",
+		label = "Wortox changes",
+		hover = "Wortox has different settings that change his characteristics. \nSHOT- SoulsHealOverTime | Classic- Less Soul Sources, Less Max Health",
+		options =
+		{
+			{description = "SHOT", data = "SHOT"},
+			{description = "Classic", data = "UMNERF"},
+			{description = "Vanilla", data = "off"},
+		},
+		default = "SHOT",
+	},
+	
 	BinaryConfig("wickerbottom", "Wickerbottom Balance", "Wickerbottom/Maxwell can no longer read books while insane.", true),
 	BinaryConfig("on tentacles", "On Tentacles Re-Balance", "On Tentacles now spawns friendly tentacles that die over time, and do not drop tentacle spots.", true),
 	BinaryConfig("applied horticulture", "Horticulture, Abridged recipe Re-Balance", "Horticulture, Abridged now takes 1 Leafy Meat instead of 5 seeds, to better balance it from being too easily spammable early game.", true),
@@ -225,7 +237,7 @@ configuration_options =
     BinaryConfig("hayfever", "Hayfever", "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.", false),
     BinaryConfig("winter_burning", "Harder Burning", "Winter makes it so setting stuff alight takes more time, and also finish burning faster.", true),
 	--BinaryConfig("acidrain", "Acid Rain", "After the First Year, Toadstool will grow poisionous mushtrees aboveground and pollute the world, making the rain acidic.", true),
-
+	BinaryConfig("hotcaves", "Hotter Caves", "During summer, caves are just hot enough to heat you without any gear.", true),
 	--[[Header("Gamemode"),
 	{
 		name = "gamemode",
@@ -300,7 +312,8 @@ configuration_options =
 		},
 		default = 60,
 	},
-
+	BinaryConfig("itemcheck", "Item Check", "Toggles the item check mechanic, where rats will sniff items and equipment on the floor.", true),
+	BinaryConfig("seedcheck", "Seed Check", "Toggles wether seeds count towards the rat food score.", true),
 -----------------------------
 -- Items and Structures--
 -----------------------------
@@ -355,8 +368,9 @@ configuration_options =
 	SkipSpace(),
 	Header("Food"),
 	Header("--------------------"),
-	Header("Crockpot Recipe Changes"),
-	BinaryConfig("crockpotmonstmeat", "Harder Monster Meat", "Enables the monster meat dilution system, where regular monster meat must be diluted or dried to make certain dishes.", true),
+	Header("Crockpot Recipes"),
+	BinaryConfig("newrecipes", "New Recipes", "UM adds a few new recipes\nTurn this off if you're using mods that cause overlap such as HoF.", true),
+	BinaryConfig("crockpotmonstmeat", "Harder Monster Meat", "Enables the new monster lagsana recipe, where you can only make recipes if the meat value is greater than monster value.", true),
 	BinaryConfig("generalcrockblocker", "Trash Filler Blocker", "Heavy use of certain low quality crockpot ingredients, such as twigs, ice, buttefly wings, and other inedibles results in wet goop.", true),
 	BinaryConfig("icecrockblocker", "Snowcones", "Snowcones prevent heavy use of ice specifically in crockpot dishes that don't call for it.", true),
 
@@ -378,7 +392,7 @@ configuration_options =
 	},
 	BinaryConfig("buttmuffin", "Butter Muffin Buff", "Butter muffin restores 30 health 10 sanity instead of 20 health 5 sanity.", true),
 	BinaryConfig("icecreambuff", "Ice Cream Buff", "Ice Cream now restores 100 sanity, but does it slowly.", true),
-	BinaryConfig("farmfoodredux", "Farmpot Food Redux", "Reallocates most dishes that involve crockpot foods. Typically a buff, but may exchange some stats.", true),
+	BinaryConfig("farmfoodredux", "Farmplot Food Redux", "Reallocates most dishes that involve crockpot foods. Typically a buff, but may exchange some stats.", true),
 
 	SkipSpace(),
 	Header("General Food Tweaks"),
@@ -435,7 +449,7 @@ configuration_options =
 	Header("Wave Changes"),
 	BinaryConfig("lategamehoundspread", "Descreased Lategame Frequency", "Enabling this decreases the frequency in the lategame so hounds are still a threat, but not annoying.", true),
 
-	BinaryConfig("vargwaves", "Vargs in Hound Waves", "In the lategame, vargs will accompany hounds in houndwaves.", true),
+	--[[BinaryConfig("vargwaves", "Vargs in Hound Waves", "In the lategame, vargs will accompany hounds in houndwaves.", true),
 	{
 		name = "vargwaves grace",
 		label = "Varg Grace Period.",
@@ -472,7 +486,7 @@ configuration_options =
 			{description = "30 days", data = 30},
 		},
 		default = 15,
-	},
+	},]]
 
 	SkipSpace(),
 	Header("New Depths Worms"),
@@ -531,6 +545,7 @@ configuration_options =
 	Header("Harder Bosses"),
 	BinaryConfig("harder_spiderqueen","Harder Spider Queen", "Spider Queen ocasionally spits web balls that trap players.", true),
 	BinaryConfig("harder_deerclops", "Deerclops Mutations", "Three different harder versions of deerclops spawn instead of the vanilla variant.", true),
+	BinaryConfig("caveclops","Cave Deerclops", "During winter, Deerclops can break through the cealing to reach you.", true),
 	BinaryConfig("harder_moose", "Harder Goose", "Goose fight has more mechanics and is harder. This also disables Moose AOE. Does not apply to Mother Goose.", true),
 	BinaryConfig("harder_bearger", "Harder Bearger", "Enabling this option makes bearger's fight contain more attacks, and will make bearger more actively seek out you.", true),
 	BinaryConfig("harder_leifs", "Harder Treeguards", "Enabling this option makes treeguards perform root attacks, inflict knockback, and summon pinelings.", true),

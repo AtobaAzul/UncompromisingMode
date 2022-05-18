@@ -136,7 +136,7 @@ local actionhandlers =
         end)
 }
 
---[[
+
 local _OldIdleState = inst.states["idle"].onenter
 	inst.states["idle"].onenter = function(inst, pushanim)
 		if inst.wantstosneeze then
@@ -154,7 +154,7 @@ local _OldEatState = inst.states["eat"].onenter
 			_OldEatState(inst, foodinfo)
 		end
     end
-	]]
+
 	
 local states = {
 

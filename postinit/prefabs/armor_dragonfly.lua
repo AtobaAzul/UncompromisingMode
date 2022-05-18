@@ -154,20 +154,26 @@ end
 local function newonunequip(inst, owner)
     if inst.lavae1 ~= nil then
         local x, y, z = inst.lavae1.Transform:GetWorldPosition()
+        if x ~= nil and y ~= nil and z ~= nil then 
         SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
+        end
         inst.lavae1:Remove()
         inst.lavae1 = nil
     end
     if inst.lavae2 ~= nil then
         local x, y, z = inst.lavae2.Transform:GetWorldPosition()
+        if x ~= nil and y ~= nil and z ~= nil then 
         SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
+        end
         inst.lavae2:Remove()
         inst.lavae2 = nil
     end
     if inst.lavae3 ~= nil then
         local x, y, z = inst.lavae3.Transform:GetWorldPosition()
-        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
-        inst.lavae3:Remove()
+        if x ~= nil and y ~= nil and z ~= nil then
+            SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z) --if y is crashing, and y usually
+        end                                                                    --never changes, can't I solve this crash by just forcing Y as 1(or 0, I don't remember)?
+        inst.lavae3:Remove()                                                   --regardless, it probably is fixed now.
         inst.lavae3 = nil
     end
 _onunequip(inst,owner)

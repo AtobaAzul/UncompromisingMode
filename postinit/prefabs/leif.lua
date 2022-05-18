@@ -9,7 +9,7 @@ env.AddPrefabPostInit("leif", function (inst)
 				return true
 			end
 		end
-        inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE/2, TUNING.DEERCLOPS_AOE_SCALE, isnottree) -- you can edit these values to your liking -Axe
+        inst.components.combat:SetAreaDamage(3, TUNING.DEERCLOPS_AOE_SCALE, isnottree) -- you can edit these values to your liking -Axe
     end
 
 	if inst.components.lootdropper ~= nil then

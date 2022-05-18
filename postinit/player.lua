@@ -40,11 +40,11 @@ env.AddPlayerPostInit(function(inst)
             elseif item == nil or not item:HasTag("electricaltool") then
                 return false
             end
-                inst.components.sanity:DoDelta(-TUNING.SANITY_SMALL)
 
             if not inst.components.inventory:IsInsulated() then
                 inst.sg:GoToState("electrocute")
                 inst.components.health:DoDelta(-TUNING.HEALING_SMALL, false, "lightning")
+                inst.components.sanity:DoDelta(-TUNING.SANITY_SMALL)
             end
             return true
         elseif inst.components.upgrademoduleowner ~= nil and inst.components.upgrademoduleowner:ChargeIsMaxed() then
@@ -73,7 +73,6 @@ env.AddPlayerPostInit(function(inst)
             if not inst.components.inventory:IsInsulated() then
                 inst.sg:GoToState("electrocute")
                 inst.components.sanity:DoDelta(-TUNING.SANITY_SMALL)
-
                 inst.components.health:DoDelta(TUNING.HEALING_SMALL, false, "lightning")
             end
             return true
@@ -99,15 +98,15 @@ env.AddPlayerPostInit(function(inst)
                 item.components.finiteuses:SetPercent(refuelnumber)
             end
 
-            inst.components.sanity:DoDelta(-TUNING.SANITY_SMALL)
-        
+
             inst.components.upgrademoduleowner:AddCharge(1)
-        
+
             if not inst.components.inventory:IsInsulated() then
                 inst.sg:GoToState("electrocute")
                 inst.components.health:DoDelta(TUNING.HEALING_SMALL, false, "lightning")
+                inst.components.sanity:DoDelta(-TUNING.SANITY_SMALL)
             end
-        
+
             return true
         end
     end

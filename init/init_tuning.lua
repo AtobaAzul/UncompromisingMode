@@ -21,10 +21,13 @@ TUNING = GLOBAL.TUNING
 -- [              DSTU Related Overrides                  ]
 
 --moved outside of tuning.dstu
-if GetModConfigData("wortox") == true then
-TUNING.WORTOX_HEALTH = 150
+if GetModConfigData("wortox") == "UMNERF" then
+	TUNING.WORTOX_HEALTH = 150
 end
-	
+
+
+local ia_check = GLOBAL.KnownModIndex:IsModEnabled("workshop-1467214795")
+
 TUNING.DSTU = 
 {
 	----------------------------------------------------------------------------
@@ -283,6 +286,9 @@ TUNING.DSTU =
     --Wanda
     WANDA_NERF = GetModConfigData("wandanerf"),
 	
+	--Voretox
+	WORTOX = GetModConfigData("wortox"),
+	
 	--Mobs
 	RAIDRAT_HEALTH = 100,
 	RAIDRAT_DAMAGE = 20,
@@ -382,11 +388,20 @@ TUNING.DSTU =
     HOODEDFOREST = GetModConfigData("hoodedforest"),
     GHOSTWALRUS = GetModConfigData("ghostwalrus"),
     WINONA_GEN = GetModConfigData("winona_gen"),
+    RICE = GetModConfigData("rice"),
+    NEWRECIPES = GetModConfigData("newrecipes"),
+    CAVECLOPS = GetModConfigData("caveclops"),
+    HOTCAVES = GetModConfigData("hotcaves"),
+    ITEMCHECK = GetModConfigData("itemcheck"),
+
+
 --boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
     TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),
     TWIN1_HEALTH = GetModConfigData("twins health"),
     TWIN2_HEALTH = GetModConfigData("twins health"),
+
+    ISLAND_ADVENTURES = ia_check,
 }
 
 TUNING.NO_BOSS_TIME = 24
@@ -419,3 +434,7 @@ end
 TUNING.SLEEP_TICK_PERIOD = TUNING.SLEEP_TICK_PERIOD / TUNING.DSTU.SLEEPINGBUFF
 
 -- [              DST Related Overrides                  ]
+
+if TUNING.DSTU.ISLAND_ADVENTURES then --IA check just in case...
+    TUNING.DSTU.RNE_CHANCE = 100 --rnes probably would be funky with the water.
+end

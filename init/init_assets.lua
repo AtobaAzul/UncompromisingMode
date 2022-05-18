@@ -23,7 +23,6 @@ Assets = {
 	--Asset("IMAGE", "images/inventoryimages/turf_jungle.tex"),
 	----Turf
 
-
 	--WINKY!!!
 	
     Asset( "IMAGE", "images/saveslot_portraits/winky.tex" ),
@@ -56,8 +55,12 @@ Assets = {
 	Asset("SOUNDPACKAGE", "sound/winky.fev"),
 	Asset("SOUND", "sound/winky.fsb"),
 	
-	
-	
+	--
+
+
+
+
+
     -- Livingtree root attack custom art by @Advent (modded from poison birchnut roots)
     Asset("ANIM", "anim/tree_leaf_spike_lt.zip"),
     Asset("ANIM", "anim/frog_yellow_build.zip"),
@@ -781,6 +784,8 @@ Assets = {
 	Asset( "ATLAS", "images/map_icons/um_pawn_nightmare.xml"),
 	Asset( "IMAGE", "images/map_icons/uncompromising_ratburrow.tex"),
 	Asset( "ATLAS", "images/map_icons/uncompromising_ratburrow.xml"),
+	Asset( "IMAGE", "images/map_icons/uncompromising_winkyhomeburrow.tex"),
+	Asset( "ATLAS", "images/map_icons/uncompromising_winkyhomeburrow.xml"),
 	--Map Icons End--
 	
 	--skins--
@@ -804,4 +809,6 @@ Assets = {
     Asset( "ATLAS", "bigportraits/willow.xml" ),
 	Asset( "IMAGE", "bigportraits/willow_none.tex" ),
     Asset( "ATLAS", "bigportraits/willow_none.xml" ),
+    Asset("IMAGE", "images/inventoryimages/grassgekko.tex"),
+	Asset("ATLAS", "images/inventoryimages/grassgekko.xml"),
 }

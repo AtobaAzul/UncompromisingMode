@@ -98,14 +98,10 @@ local function onattack(inst, attacker, target)
 		inst.components.rechargeable:Discharge(5)        
 	
 		local x, y, z = target.Transform:GetWorldPosition()
-		local impactfx1 = SpawnPrefab("icespike_fx_1")
-		local impactfx2 = SpawnPrefab("icespike_fx_2")
-		local impactfx3 = SpawnPrefab("icespike_fx_3")
-		local impactfx4 = SpawnPrefab("icespike_fx_4")
-		impactfx1.Transform:SetPosition(x + math.random(-1.5, 1.5), 0, z + math.random(-1.5, 1.5))
-		impactfx2.Transform:SetPosition(x + math.random(-1.5, 1.5), 0, z + math.random(-1.5, 1.5))
-		impactfx3.Transform:SetPosition(x + math.random(-1.5, 1.5), 0, z + math.random(-1.5, 1.5))
-		impactfx4.Transform:SetPosition(x + math.random(-1.5, 1.5), 0, z + math.random(-1.5, 1.5))
+		for i = 1, 4 do
+			local icefx = SpawnPrefab("icespike_fx_"..i)
+			icefx.Transform:SetPosition(x + math.random(-1.5, 1.5), 0, z + math.random(-1.5, 1.5))
+		end
 
 		if target.components.freezable ~= nil and not target.components.health:IsDead() then
 			target.components.freezable:AddColdness(1)

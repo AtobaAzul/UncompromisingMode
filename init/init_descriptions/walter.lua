@@ -345,3 +345,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.PIED_PIPER_FLUTE = "Woby doesn't want me to play it."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Whoa, he could be a great Pinetree Pioneer!"
 	DESCRIBE.WINONA_TOOLBOX = ""
+	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "I'd better find some solid ground before this thing pops!"

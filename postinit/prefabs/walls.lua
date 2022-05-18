@@ -9,7 +9,16 @@ local anims =
     { threshold = 0.99, anim = "threequarter" },
     { threshold = 1, anim = { "fullA", "fullB", "fullC" } },
 }
-
+local all_walls = 
+{
+    "wall_stone",
+    "wall_hay",
+    "wall_wood",
+    "wall_moonrock",
+    "wall_ruins",
+    "fence",
+    "fence_gate"
+}
 local function makeobstacle(inst)
     inst.Physics:SetActive(true)
     inst._ispathfinding:set(true)
@@ -57,8 +66,8 @@ local function onhealthchange(inst, old_percent, new_percent)
     end
 end
 
-env.AddPrefabPostInit("wall_stone", function(inst)
-	if not TheWorld.ismastersim then
+env.AddPrefabPostInit("wall_stone", function(inst)--what's this for??
+	if not TheWorld.ismastersim then    
 		return
 	end
 	
@@ -67,3 +76,10 @@ env.AddPrefabPostInit("wall_stone", function(inst)
 		inst.components.health.nofadeout = true
 	end
 end)
+
+for k, v in ipairs(all_walls) do
+    env.AddPrefabPostInit(v, function(inst)
+        --inst:AddTag("companion")
+        --maybe we can return to this some day.
+    end)
+end

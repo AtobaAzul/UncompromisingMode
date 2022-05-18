@@ -136,13 +136,15 @@ end
 
 local function onattack(inst, attacker, target)
     if (target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid()) or (target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and TUNING.DSTU.ELECTRICALMISHAP == 2 and not inst.components.fueled:IsEmpty())  then
-		if target:HasTag("insect") and not target.components.health:IsDead() then
-			if TUNING.DSTU.ELECTRICALMISHAP == 0 or TUNING.DSTU.ELECTRICALMISHAP == 2 then
-				target.components.combat:GetAttacked(attacker, 30, nil)
-				--target.components.health:DoDelta(-30, false, attacker)
-			else
-				target.components.combat:GetAttacked(attacker, 40, nil)
-				--target.components.health:DoDelta(-40, false, attacker)
+		if target:HasTag("insect") then
+			if not target.components.health:IsDead() then
+				if TUNING.DSTU.ELECTRICALMISHAP == 0 or TUNING.DSTU.ELECTRICALMISHAP == 2 then
+					target.components.combat:GetAttacked(attacker, 30, nil)
+					--target.components.health:DoDelta(-30, false, attacker)
+				else
+					target.components.combat:GetAttacked(attacker, 40, nil)
+					--target.components.health:DoDelta(-40, false, attacker)
+				end
 			end
 			
 			SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
@@ -162,14 +164,17 @@ local function onattack(inst, attacker, target)
 			return
 		end
 		
-		if (target:HasTag("spider") or target:HasTag("hoodedwidow")) and not target.components.health:IsDead() then
-			if TUNING.DSTU.ELECTRICALMISHAP == 2 or TUNING.DSTU.ELECTRICALMISHAP == 0 then
-				target.components.combat:GetAttacked(attacker, 15, nil)
-				--target.components.health:DoDelta(-15, false, attacker)
-			else
-				target.components.combat:GetAttacked(attacker, 25, nil)
-				--target.components.health:DoDelta(-25, false, attacker)
+		if (target:HasTag("spider") or target:HasTag("hoodedwidow")) then
+			if not target.components.health:IsDead() then
+				if TUNING.DSTU.ELECTRICALMISHAP == 2 or TUNING.DSTU.ELECTRICALMISHAP == 0 then
+					target.components.combat:GetAttacked(attacker, 15, nil)
+					--target.components.health:DoDelta(-15, false, attacker)
+				else
+					target.components.combat:GetAttacked(attacker, 25, nil)
+					--target.components.health:DoDelta(-25, false, attacker)
+				end
 			end
+			
 			SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
 			
 			local x, y, z = target.Transform:GetWorldPosition()
