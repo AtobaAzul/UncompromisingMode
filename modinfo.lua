@@ -1,11 +1,12 @@
 name = "󰀕 Uncompromising Mode"
 description = 
 [[
-󰀔 [ Version 1.4.5.4 : "Squeaky Clean" ]
+󰀔 [ Version 1.4.6 : "Winky, The Vile Vermin" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
 Prominent features:
+- Winky, The Vile Vermin! April Fools... or so we thought.
 - Reworked Rat Raids, Reworked Rat AI, New Rats, and Items.
 - New Night Terrors (RNE), with new Shadow Creatures, Music, collectible masks.
 - Tooltips for Character and Item changes.
@@ -17,7 +18,7 @@ Prominent features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Squeaky Clean v1.4.5.4"
+version = "Squeaky Clean v1.4.6"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 

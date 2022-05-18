@@ -161,7 +161,7 @@ ChangeSortKey("snowgoggles", "catcoonhat", "CLOTHING", true)
 
 AddRecipe2(
     "ratpoisonbottle",
-    {Ingredient("red_cap", 1), Ingredient("jammypreserves", 1), Ingredient("rocks", 1)},
+    {Ingredient("red_cap", 2), Ingredient("jammypreserves", 1), Ingredient("rocks", 1)},
     TECH.SCIENCE_ONE,
     nil,
 	{"TOOLS"}

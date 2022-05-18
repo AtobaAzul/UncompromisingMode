@@ -20,45 +20,13 @@ end)
 --Treeguard now has single target root attack -Axe
 env.AddPrefabPostInit("leif", function (inst)
 
---inst.scaleleif = nil
-
---local function SetLeifScale(inst, scale)
-   -- inst._scale = scale ~= 1 and scale or nil
-
-   -- inst.Transform:SetScale(scale, scale, scale)
-   -- inst.Physics:SetCapsule(.5 * scale, 1)
-   -- inst.DynamicShadow:SetSize(4 * scale, 1.5 * scale)
-
-   -- inst.components.locomotor.walkspeed = 1.5 * scale
-
-   -- inst.components.combat:SetDefaultDamage(TUNING.LEIF_DAMAGE * scale)
-   -- inst.components.combat:SetRange(3 * scale)
-
-   -- local health_percent = inst.components.health:GetPercent()
-   -- inst.components.health:SetMaxHealth(TUNING.LEIF_HEALTH * scale)
-    --inst.components.health:SetPercent(health_percent, true)
-	--inst.scaleleif = scale
---end
-
 env.AddComponentPostInit("wisecracker", function(self, inst)
-
-self.inst = inst
+	self.inst = inst
 
 	inst:ListenForEvent("rooting", function(inst, data)
         inst.components.talker:Say(GetString(inst, "ANNOUNCE_ROOTING"))
     end)
-
-	
 end)
-
-
-
-
-inst.rootready = true
-if inst.components.combat ~= nil and inst.components.combat.attackrange ~= nil then
-inst.oldrange = 3
-inst.components.combat:SetRange(3*inst.oldrange)
-end
 
 local prefabs = {
     "rootspike",

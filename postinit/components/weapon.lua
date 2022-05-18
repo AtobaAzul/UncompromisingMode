@@ -9,7 +9,7 @@ env.AddComponentPostInit("weapon", function(self)
 	
 	function self:OnAttack_NoDurabilityLoss(attacker, target, projectile)
 		if self.onattack ~= nil then
-			self.onattack(self.inst, attacker, target)
+			self.onattack(self.inst, attacker, target, 2)
 		end
 
 		--[[if self.inst.components.finiteuses ~= nil then

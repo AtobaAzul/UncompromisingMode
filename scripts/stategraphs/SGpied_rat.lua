@@ -78,7 +78,7 @@ local function DoBuff(inst, number)
 	
 	for i, v in ipairs(ents) do
         if v.prefab == "uncompromising_rat" and v.note == nil then
-			v:PiedPiperBuff()
+			v:PiedPiperBuff(8)
 			
 			if v.components.combat.target ~= nil and v.components.combat.target == inst then
 				v.components.combat:GiveUp()

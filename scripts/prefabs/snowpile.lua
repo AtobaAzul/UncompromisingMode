@@ -36,13 +36,15 @@ local function onregen(inst)
 	--if inst ~= nil then
 		local my_x, my_y, my_z = inst.Transform:GetWorldPosition()
 		
+		local abominamoles = TheSim:FindEntities(my_x, my_y, my_z, 40, { "snowish" })
+		
 		if TheWorld.state.iswinter and not INVALID_TILES[TheWorld.Map:GetTileAtPoint(my_x, my_y, my_z)] then--or ents2 ~= nil and #ents2 < 0 then
 			if inst.components.workable.workleft < 3 then
 				SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
 				inst.components.workable:SetWorkLeft(inst.components.workable.workleft+1)
 				inst.components.pickable.cycles_left = inst.components.pickable.cycles_left + 1
 				startregen(inst)
-			elseif not inst.nospawning and inst.components.workable.workleft == 3 and math.random() <= 0.25 and not TheWorld.Map:GetPlatformAtPoint(my_x, my_z) then
+			elseif abominamoles ~= nil and #abominamoles < 2 and not inst.nospawning and inst.components.workable.workleft == 3 and math.random() <= 0.25 and not TheWorld.Map:GetPlatformAtPoint(my_x, my_z) then
 				local x1, y1, z1 = inst.Transform:GetWorldPosition()
 				local ents2 = TheSim:FindEntities(x1, y1, z1, 45, { "player" })
 				if #ents2 > 0 then
@@ -335,9 +337,9 @@ end
 end
 
 local function Init(inst)
---print("1")
+print("1")
 	if FindEntity(inst,5,nil,{"snowpileblocker"}) ~= nil then
-	--print("2")
+	print("2")
 		if inst.Transform:GetWorldPosition() ~= nil then
 			SpawnPrefab("splash_snow_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
 		end

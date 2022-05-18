@@ -5,6 +5,9 @@ GLOBAL.setfenv(1, GLOBAL)
 env.AddStategraphPostInit("deerclops", function(inst)
 
 local SHAKE_DIST = 40
+			
+local AREAATTACK_MUST_TAGS = { "_combat" }
+local AREA_EXCLUDE_TAGS = { "INLIMBO", "notarget", "noattack", "flight", "invisible", "playerghost" }
 
 local function SetLightValue(inst, val)
     if inst.Light ~= nil then
@@ -378,7 +381,7 @@ local events =
 {	
     EventHandler("doattack", function(inst, data)
 		if inst.upgrade == "enrage_mutation" then
-			--print("enragebank")
+			print("enragebank")
 			EnrageAttackBank(inst,data)
 		end
 		if inst.upgrade == "strength_mutation" then
@@ -865,23 +868,46 @@ local states = {
 			inst.components.combat:SetDefaultDamage(1.5*TUNING.DEERCLOPS_DAMAGE)
         end,
 
-
+		onexit = function(inst)
+            inst.components.combat:SetDefaultDamage(TUNING.DEERCLOPS_DAMAGE)
+        end,
+		
         timeline =
         {
         TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/attack") end),
         --TimeEvent(29 * FRAMES, function(inst) SpawnIceFx(inst, inst.components.combat.target) end),
         TimeEvent(35 * FRAMES, function(inst)
 			if inst.components.combat.target ~= nil then
-			local target = inst.components.combat.target
-			inst:ForceFacePoint(target.Transform:GetWorldPosition())
+				local target = inst.components.combat.target
+				inst:ForceFacePoint(target.Transform:GetWorldPosition())
+				
+				local x,y,z = inst.Transform:GetWorldPosition()
+				local ents = TheSim:FindEntities(x,0,z,8,AREAATTACK_MUST_TAGS,AREA_EXCLUDE_TAGS)
+				
+				if #ents > 0 then
+					for i,ent in ipairs(ents)do
+						if ent ~= inst then
+							if inst.components.combat:CanTarget(ent) then
+								local x1, y1, z1 = target.Transform:GetWorldPosition()
+								local angle = inst:GetAngleToPoint(x1, y1, z1)
+								local diff =  math.abs(inst.Transform:GetRotation() - angle)
+				
+								if diff > 180 then
+									diff = 360 - diff
+								end
+								
+								if diff <= 45 then
+									inst.components.combat:DoAttack(ent)
+								end
+							end
+						end
+					end
+				end
 			end
-			inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE*2/3)
-			inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE*2/3, TUNING.DEERCLOPS_AOE_SCALE*2/3)
-            inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe")
-			inst.components.combat:DoAttack(inst.sg.statemem.target)
-			inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE)
-			inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE, TUNING.DEERCLOPS_AOE_SCALE)
-			inst.components.combat:SetDefaultDamage(TUNING.DEERCLOPS_DAMAGE)
+			
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe")
+
+			
             if inst.bufferedaction ~= nil and inst.bufferedaction.action == ACTIONS.HAMMER then
                 local target = inst.bufferedaction.target
                 inst:ClearBufferedAction()
@@ -915,27 +941,53 @@ local states = {
             inst.components.timer:StopTimer("uppercuttime")
             inst.components.timer:StartTimer("uppercuttime", TUNING.DEERCLOPS_ATTACK_PERIOD * (math.random(2,5)))
 			inst.components.combat:SetDefaultDamage(1.5*TUNING.DEERCLOPS_DAMAGE)
-		if inst.components.combat.target ~= nil then
-		local target = inst.components.combat.target
-		inst:ForceFacePoint(target.Transform:GetWorldPosition())
-		end
+		
+			if inst.components.combat.target ~= nil then
+				local target = inst.components.combat.target
+				inst:ForceFacePoint(target.Transform:GetWorldPosition())
+			end
         end,
 
+		onexit = function(inst)
+            inst.components.combat:SetDefaultDamage(TUNING.DEERCLOPS_DAMAGE)
+        end,
 
         timeline =
         {
         TimeEvent(0 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/attack") end),
         --TimeEvent(29 * FRAMES, function(inst) SpawnIceFx(inst, inst.components.combat.target) end),
         TimeEvent(35 * FRAMES, function(inst)
-		if inst.components.combat.target ~= nil then
-		local target = inst.components.combat.target
-		inst:ForceFacePoint(target.Transform:GetWorldPosition())
-		end
-		inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE*2/3)
-		inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE*2/3, TUNING.DEERCLOPS_AOE_SCALE*2/3)
-            inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe")
-			inst.components.combat:DoAttack(inst.sg.statemem.target)
-			inst.components.combat:SetDefaultDamage(2*TUNING.DEERCLOPS_DAMAGE)
+			if inst.components.combat.target ~= nil then
+				local target = inst.components.combat.target
+				inst:ForceFacePoint(target.Transform:GetWorldPosition())
+				
+				local x,y,z = inst.Transform:GetWorldPosition()
+				local ents = TheSim:FindEntities(x,0,z,8,AREAATTACK_MUST_TAGS,AREA_EXCLUDE_TAGS)
+				
+				if #ents > 0 then
+					for i,ent in ipairs(ents)do
+						if ent ~= inst then
+							if inst.components.combat:CanTarget(ent) then
+								local x1, y1, z1 = target.Transform:GetWorldPosition()
+								local angle = inst:GetAngleToPoint(x1, y1, z1)
+								local diff =  math.abs(inst.Transform:GetRotation() - angle)
+				
+								if diff > 180 then
+									diff = 360 - diff
+								end
+								
+								if diff <= 45 then
+									inst.components.combat:DoAttack(ent)
+								end
+							end
+						end
+					end
+				end
+			end
+		
+		
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe")
+			
             if inst.bufferedaction ~= nil and inst.bufferedaction.action == ACTIONS.HAMMER then
                 local target = inst.bufferedaction.target
                 inst:ClearBufferedAction()
@@ -952,26 +1004,28 @@ local states = {
         TimeEvent(36 * FRAMES, function(inst) inst.sg:RemoveStateTag("heavyhit")
 		inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/attack")		end),
 		TimeEvent(60 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe") 	
-		if inst.components.combat.target ~= nil then
-		local target = inst.components.combat.target
-		inst:ForceFacePoint(target.Transform:GetWorldPosition())
-		end
-		inst.components.locomotor.walkspeed = 20
-		inst.components.locomotor:WalkForward() end),
+			if inst.components.combat.target ~= nil then
+				local target = inst.components.combat.target
+				inst:ForceFacePoint(target.Transform:GetWorldPosition())
+			end
+			
+			inst.components.locomotor.walkspeed = 20
+			inst.components.locomotor:WalkForward() 
+		end),
+			
 		TimeEvent(70 * FRAMES, function(inst) 
-		inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE/2)
-		inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE/2, TUNING.DEERCLOPS_AOE_SCALE/2)
-		inst.components.combat:DoAttack(inst.sg.statemem.target)
-		inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE)
-		inst.components.combat:SetAreaDamage(TUNING.DEERCLOPS_AOE_RANGE, TUNING.DEERCLOPS_AOE_SCALE)
-		inst.components.combat:SetDefaultDamage(TUNING.DEERCLOPS_DAMAGE)
-		inst.Physics:Stop() end),
+			inst.components.combat:DoAreaAttack(inst, 6, nil, nil, nil, { "INLIMBO", "notarget", "invisible", "noattack", "flight", "playerghost", "shadow", "shadowchesspiece", "shadowcreature" })
+			
+			inst.Physics:Stop() 
+		end),
+		
         },
 
         events =
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle")
-			inst.components.locomotor.walkspeed = 3 end),
+				inst.components.locomotor.walkspeed = 3 
+			end),
         },
     },
 	State{
@@ -1048,10 +1102,10 @@ CommonStates.AddCombatStates(states,
         TimeEvent(29 * FRAMES, function(inst) SpawnIceFx(inst, inst.components.combat.target) end),
         TimeEvent(35 * FRAMES, function(inst)
             inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe")
-			--print("thiscoderan")
-			--print(inst.upgrade)
+			print("thiscoderan")
+			print(inst.upgrade)
 			if inst.upgrade == "ice_mutation" then
-			--print("triedtoattack")
+			print("triedtoattack")
 			SpawnAttackAuras(inst)
 			end
             inst.components.combat:DoAttack(inst.sg.statemem.target)

@@ -170,6 +170,7 @@ local brain_post = {
 	"perd",
 	"catcoon",
 	"deer",
+	"leif",
 }
 
 if GetModConfigData("hangyperds") then

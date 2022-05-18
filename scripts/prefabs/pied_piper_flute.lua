@@ -6,10 +6,10 @@ local assets =
 local function TryAddFollower(leader, follower)
     if leader.components.leader ~= nil and
         follower.components.follower ~= nil and
-        follower:HasTag("raidrat") and follower:HasTag("hostile") and
-        leader.components.leader:CountFollowers("raidrat") < 3 then
+        follower:HasTag("raidrat") and follower:HasTag("hostile") and 
+        leader.components.leader:CountFollowers("raidrat") < 8 then
 		follower.components.follower:SetLeader(leader)
-		follower:PiedPiperBuff()
+		follower:PiedPiperBuff(20)
         --[[leader.components.leader:AddFollower(follower)
         follower.components.follower:AddLoyaltyTime(60 + math.random())]]
         if follower.components.combat ~= nil and follower.components.combat:TargetIs(leader) then

@@ -93,7 +93,7 @@ local function fn()
 end
 
 local function OnDeploy(inst, pt)
-	for i = 1,4 do 
+	for i = 1,8 do 
 		local poison = SpawnPrefab("ratpoison")
 		poison.Transform:SetPosition(pt.x, 0, pt.z)
 		inst:Remove()

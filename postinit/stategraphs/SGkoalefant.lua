@@ -34,7 +34,7 @@ end),
 	
 local function DisarmTarget(inst, target)
 	local item = nil
-	if target and target.components.inventory then
+	if target and target.components.inventory and not target:HasTag("stronggrip") then
 		item = target.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 	end
 	if item and item.Physics then

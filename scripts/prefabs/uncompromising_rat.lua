@@ -252,9 +252,25 @@ local function StealItem(inst, victim, stolenitem)
 	inst:PushEvent("onpickupitem", { item = stolenitem })
 end
 
+local function CancelBuff(inst)
+	inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_WALKSPEED
+	inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_RUNSPEED
+	inst.components.combat:SetAttackPeriod(TUNING.DSTU.RAIDRAT_ATTACK_PERIOD)
+		
+	if inst.note ~= nil then
+		inst.note:Remove()
+		inst.note = nil
+	end
+	
+	if inst.bufftask ~= nil then
+		inst.bufftask:Cancel()
+	end
+	
+	inst.bufftask = nil
+end
 
-local function PiedPiperBuff(inst)
-	if inst.note == nil then
+local function PiedPiperBuff(inst, duration)
+	if inst.bufftask == nil then
 		--print("note")
 	
 		local fx = SpawnPrefab("rat_note")
@@ -268,17 +284,11 @@ local function PiedPiperBuff(inst)
 		inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_BUFFED_RUNSPEED
 		inst.components.combat:SetAttackPeriod(TUNING.DSTU.RAIDRAT_BUFFED_ATTACK_PERIOD)
 		
-		inst:DoTaskInTime(8, PiedPiperBuff)
+		inst.bufftask = inst:DoTaskInTime(duration, CancelBuff)
     else
-		--print("nooooote")
-		inst.components.locomotor.walkspeed = TUNING.DSTU.RAIDRAT_WALKSPEED
-		inst.components.locomotor.runspeed = TUNING.DSTU.RAIDRAT_RUNSPEED
-		inst.components.combat:SetAttackPeriod(TUNING.DSTU.RAIDRAT_ATTACK_PERIOD)
-		
-		if inst.note ~= nil then
-			inst.note:Remove()
-			inst.note = nil
-		end
+		inst.bufftask:Cancel()
+		inst.bufftask = nil
+		inst.bufftask = inst:DoTaskInTime(duration, CancelBuff)
 	end
 end
 
@@ -361,6 +371,7 @@ local function fn()
 	inst:AddTag("NOBLOCK")
 	--mainly for winky, too lazy to make it for only allied rats.
 
+	inst.entity:SetCanSleep(false)
 	inst.entity:SetPristine()
 	
 	if not TheWorld.ismastersim then
@@ -786,6 +797,7 @@ local function packfn()
 	inst:AddTag("catfood")
 	inst:AddTag("cookable")
 	
+	inst.entity:SetCanSleep(false)
 	inst.entity:SetPristine()
 	
 	if not TheWorld.ismastersim then
@@ -1766,7 +1778,6 @@ local function fn_scoutburrow()
 	inst.AnimState:SetBuild("uncompromising_rat_burrow")
 	inst.AnimState:PushAnimation("idle_pile", true)
 	
-	inst:AddTag("ratburrow")
 	inst:AddTag("herd")
 	inst.entity:SetCanSleep(false)
 	
