@@ -231,6 +231,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	}
 	DESCRIBE.ANTIHISTAMINE = "It'll clear my snot."
     ANNOUNCE.CURSED_ITEM_EQUIP = "OUCH! Is that what burning feels like?"
+    DESCRIBE.VETSITEM = "What's that? You want me to curse myself? If you say so..."
 	DESCRIBE.SCREECHER_TRINKET = "I... I don't think I should burn this."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "I'll try waiting until night. UGH."}
 
@@ -355,3 +356,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.PIED_PIPER_FLUTE = "I'm holding this over the fire first."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Keep Bernie out of that backpack!"
 	DESCRIBE.WINONA_TOOLBOX = ""
+	DESCRIBE.OCEAN_SPEAKER = "What's this big dumb machine doing all the way out here?"
+	--DESCRIBE.UM_SIREN = "Oh yeah!? I can blow bubbles twice as big! Watch!"
+	
+	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "My life raft is about to be a dead raft!"
+
+	ACTIONFAIL.CHARGE_FROM =
+	{
+		NOT_ENOUGH_CHARGE = "test",
+		CHARGE_FULL = "test",
+	}

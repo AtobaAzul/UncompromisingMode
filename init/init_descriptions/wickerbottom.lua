@@ -221,6 +221,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
         }
 	DESCRIBE.ANTIHISTAMINE = "I believe this has antihistamine properties."
     ANNOUNCE.CURSED_ITEM_EQUIP = "It seems a cursed power lingers here."
+    DESCRIBE.VETSITEM = "Curses? There is no such thing, and I shall prove it!"
 	DESCRIBE.SCREECHER_TRINKET = "A pagan symbol, perhaps?"
 	ACTIONFAIL.GIVE = {NOTNIGHT = "Moon magic seems to work best when the moon is around."}
 
@@ -348,3 +349,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.PIED_PIPER_FLUTE = "Filled with horrid diseases, I'm sure."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Have they gained intelligence, or did they steal it?"
 	DESCRIBE.WINONA_TOOLBOX = ""
+	DESCRIBE.OCEAN_SPEAKER = "My, not something you'd expect to see all the way out here."
+	--DESCRIBE.UM_SIREN = "My, she appears to carry a very maniuplative frequency."
+	
+	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "We can retrieve this raft, if we can get to shore!"
+
+	ACTIONFAIL.CHARGE_FROM =
+	{
+		NOT_ENOUGH_CHARGE = "test",
+		CHARGE_FULL = "test",
+	}

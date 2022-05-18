@@ -216,6 +216,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
         }
 	DESCRIBE.ANTIHISTAMINE = "May give some allergy protection, for a time."
     ANNOUNCE.CURSED_ITEM_EQUIP = "Ouch! It's not meant for uncursed hands."
+    DESCRIBE.VETSITEM = "It's not meant for uncursed hands."
 	DESCRIBE.SCREECHER_TRINKET = "It's from another timeline..."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "The moon needs to be out."}
 	
@@ -343,3 +344,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 	DESCRIBE.PIED_PIPER_FLUTE = "Maybe it'd be worth the time to play."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "We must focus on that one!"
 	DESCRIBE.WINONA_TOOLBOX = ""
+	DESCRIBE.OCEAN_SPEAKER = "I remember these! I can't quite... remember what they do though..."
+	--DESCRIBE.UM_SIREN = "Oh botheration! Its YOU again."
+
+	ACTIONFAIL.CHARGE_FROM =
+	{
+		NOT_ENOUGH_CHARGE = "test",
+		CHARGE_FULL = "test",
+	}

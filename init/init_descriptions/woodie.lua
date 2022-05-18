@@ -216,6 +216,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
         }
 	DESCRIBE.ANTIHISTAMINE = "It'll clear your nose up come hayfever season."
     ANNOUNCE.CURSED_ITEM_EQUIP = "Ouch, this ones a jumper!"
+    DESCRIBE.VETSITEM = "I'm usually not the cursing type, despite my curse."
 	DESCRIBE.SCREECHER_TRINKET = "Symbols like these are what got me in trouble in the first place."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "Perhaps I should try again when the moons out, eh?"}
 
@@ -342,3 +343,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.PIED_PIPER_FLUTE = "Those varmints will have to listen to me!"
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Darn varmints!"
 	DESCRIBE.WINONA_TOOLBOX = ""
+	DESCRIBE.OCEAN_SPEAKER = "Ya think what it's saying is important, Lucy?"
+	--DESCRIBE.UM_SIREN = "Not half bad lookin' for an ocean critter, eh?"
+	
+	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "I'm going to lose my gear if I don't get to shore!"
+
+	ACTIONFAIL.CHARGE_FROM =
+	{
+		NOT_ENOUGH_CHARGE = "test",
+		CHARGE_FULL = "test",
+	}

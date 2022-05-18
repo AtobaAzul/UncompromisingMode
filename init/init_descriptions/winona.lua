@@ -217,6 +217,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
         }
 	DESCRIBE.ANTIHISTAMINE = "It'll help my lungs stay clean."
     ANNOUNCE.CURSED_ITEM_EQUIP = "Seems like safety gloves aren't enough!"
+    DESCRIBE.VETSITEM = "I'd accept any bargain to use a tool like this!"
 	DESCRIBE.SCREECHER_TRINKET = "What practical use does it have, other than being creepy?"
 	ACTIONFAIL.GIVE = {NOTNIGHT = "This ones a night owl."}
 
@@ -345,3 +346,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.PIED_PIPER_FLUTE = "I never was the best leader."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "I think we've found ourselves a target."
 	DESCRIBE.WINONA_TOOLBOX = ""
+	DESCRIBE.OCEAN_SPEAKER = "Now if I could just see its insides..."
+	--DESCRIBE.UM_SIREN = "Heh, she certainly knows how to run her workplace."
+	
+	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "This thing is about to pack up and leave me sinking!"
+
+	ACTIONFAIL.CHARGE_FROM =
+	{
+		NOT_ENOUGH_CHARGE = "It's outta juice!",
+		CHARGE_FULL = "It's fully charged!",
+	}

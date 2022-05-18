@@ -216,6 +216,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
         }
 	DESCRIBE.ANTIHISTAMINE = "It shall keep mine nose safe!"
     ANNOUNCE.CURSED_ITEM_EQUIP = "This tool fights back!"
+    DESCRIBE.VETSITEM = "I must challenge myself further in order to use this!"
 	DESCRIBE.SCREECHER_TRINKET = "A cursed symbol, no doubt!"
 	ACTIONFAIL.GIVE = {NOTNIGHT = "The great moon in the sky will give it power."}
 
@@ -342,4 +343,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.PIED_PIPER_FLUTE = "The songs I could play!"
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Coward, stop running off!"
 	DESCRIBE.WINONA_TOOLBOX = ""
+	DESCRIBE.OCEAN_SPEAKER = "It echoes songs unfit for battle!"
+	--DESCRIBE.UM_SIREN = "Finally a worthy opponent, our battle shall be legendary!"
+	
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "We live together or drown together, my faithful vessel!"
+
+	ACTIONFAIL.CHARGE_FROM =
+	{
+		NOT_ENOUGH_CHARGE = "test",
+		CHARGE_FULL = "test",
+	}

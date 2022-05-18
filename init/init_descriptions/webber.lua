@@ -215,6 +215,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
         }
 	DESCRIBE.ANTIHISTAMINE = "It stops us from sneezing! We're not sure how, but it does!"
     ANNOUNCE.CURSED_ITEM_EQUIP = "Ouchies!"
+    DESCRIBE.VETSITEM = "Our hands aren't cursed enough for this!"
 	DESCRIBE.SCREECHER_TRINKET = "I don't like it."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "I think its sleeping? But, in the day time?"}
 
@@ -342,5 +343,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.PIED_PIPER_FLUTE = "We always wanted to learn how to play."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Nice backpack!"
 	DESCRIBE.WINONA_TOOLBOX = ""
+	DESCRIBE.OCEAN_SPEAKER = "I want to get closer but he seems weary."
+	--DESCRIBE.UM_SIREN = "Her songs make our head all fuzzy..."
+	
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "The raft won't sink, but we will!"
 
+	ACTIONFAIL.CHARGE_FROM =
+	{
+		NOT_ENOUGH_CHARGE = "test",
+		CHARGE_FULL = "test",
+	}

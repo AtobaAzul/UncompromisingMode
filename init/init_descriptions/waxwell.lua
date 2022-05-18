@@ -217,6 +217,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
         }
 	DESCRIBE.ANTIHISTAMINE = "It'll help keep allergies down."
     ANNOUNCE.CURSED_ITEM_EQUIP = "It seems I've lost my touch!"
+    DESCRIBE.VETSITEM = "They are tempting us with fancy trinkets. Shall we tap into darker powers?"
 	DESCRIBE.SCREECHER_TRINKET = "It came from someplace far away."
 	
 	ANNOUNCE.ANNOUNCE_NOSANITY = "I have the worst headache!"
@@ -347,6 +348,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "That poor suit, ruined!"
 	DESCRIBE.PIED_PIPER_FLUTE = "I am NOT touching that, let alone putting it on my mouth."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Think you're clever, do you?"
-		DESCRIBE.WINONA_TOOLBOX = ""
-
+	DESCRIBE.WINONA_TOOLBOX = ""
+	DESCRIBE.OCEAN_SPEAKER = "You know, I used to be king. Here I am unable to recognize half the stuff I find in these wretched waters."
+	--DESCRIBE.UM_SIREN = "How grotesque. Yet somewhat alluring... hrmpf."
+	
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "If I drown, I'm leaving you behind."
+	ACTIONFAIL.CHARGE_FROM =
+	{
+		NOT_ENOUGH_CHARGE = "test",
+		CHARGE_FULL = "test",
+	}

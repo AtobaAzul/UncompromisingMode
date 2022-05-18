@@ -215,6 +215,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
         }
 	DESCRIBE.ANTIHISTAMINE = "I hate sneezing near food, this will help."
     ANNOUNCE.CURSED_ITEM_EQUIP = "My hands been sizzled!"
+    DESCRIBE.VETSITEM = "I seem to be missing some dark ingredient."
 	DESCRIBE.SCREECHER_TRINKET = "Something dark stirs."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "Some dishes are best served in the evening."}
 	
@@ -342,4 +343,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.PIED_PIPER_FLUTE = "Must I really touch it?"
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Hands off the goods!"
 	DESCRIBE.WINONA_TOOLBOX = ""
+	DESCRIBE.OCEAN_SPEAKER = "I never was one for machines."
+	--DESCRIBE.UM_SIREN = "Apologies Mademoiselle Wigfrid, but it is the supperior singer."
+	
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "Don't pack up and leave me to the sea!"
+
+	ACTIONFAIL.CHARGE_FROM =
+	{
+		NOT_ENOUGH_CHARGE = "test",
+		CHARGE_FULL = "test",
+	}

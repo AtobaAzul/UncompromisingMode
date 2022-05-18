@@ -216,6 +216,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
         }
 	DESCRIBE.ANTIHISTAMINE = "Good for sneeze time."
     ANNOUNCE.CURSED_ITEM_EQUIP = "The harder Wolfgang squeeze, the more it hurts!"
+    DESCRIBE.VETSITEM = "What you say? Need more curses?"
 	DESCRIBE.SCREECHER_TRINKET = "Ah! Looks scary!"
 	ACTIONFAIL.GIVE = {NOTNIGHT = "Needs big moon?"}
 
@@ -344,3 +345,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.PIED_PIPER_FLUTE = "At least rat is dead."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Little rat has backpack!"
 	DESCRIBE.WINONA_TOOLBOX = ""
+	DESCRIBE.OCEAN_SPEAKER = "Is speaker! Had many in circus!"
+	--DESCRIBE.UM_SIREN = "Hah! Is puny lady of song!"
+	
+	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "Floaty boat is sinking!"
+
+	ACTIONFAIL.CHARGE_FROM =
+	{
+		NOT_ENOUGH_CHARGE = "test",
+		CHARGE_FULL = "test",
+	}

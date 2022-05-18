@@ -65,6 +65,10 @@ local _OldSpellCast = inst.actionhandlers[ACTIONS.CASTSPELL].deststate
 inst.actionhandlers[ACTIONS.CASTSPELL].deststate = 
         function(inst, action, ...)
 			if action.invobject ~= nil then
+				if action.invobject:HasTag("vetsitem") and not inst:HasTag("vetcurse") then
+					return "idle"
+				end
+
 				if action.invobject:HasTag("lighter") then
 					return "castspelllighter"
 				elseif action.invobject:HasTag("beargerclaw") then

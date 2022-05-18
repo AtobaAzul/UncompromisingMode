@@ -76,6 +76,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINKY.ACTIONFAIL
 		OVERSTUFFED = "",
     }
     ANNOUNCE.CURSED_ITEM_EQUIP = "GAHH!"
+    DESCRIBE.VETSITEM = "It whispers, wants me to talk to skeleton man."
 	DESCRIBE.SCREECHER_TRINKET = "Little dolly thing."
 	
 	DESCRIBE.SAND = "Powder dust."

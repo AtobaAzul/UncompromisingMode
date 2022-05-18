@@ -106,6 +106,17 @@ GLOBAL.GetDescription = function(inst, item, ...)
 			end
 		end
 	end
+	
+	
+	if prefab and item and item:HasTag("vetsitem") and not inst:HasTag("vetcurse") and character ~= nil and character ~= "WES" then
+		item.vetstring = GLOBAL.STRINGS.CHARACTERS.GENERIC.DESCRIBE.VETSITEM
+			
+		if not inst.prefab == "wilson" and GLOBAL.STRINGS.CHARACTERS[character].DESCRIBE.VETSITEM ~= nil then
+			item.vetstring = GLOBAL.STRINGS.CHARACTERS[character].DESCRIBE.VETSITEM
+		end
 		
+		ret = ret .."\n".. item.vetstring
+	end
+	
 	return ret
 end
