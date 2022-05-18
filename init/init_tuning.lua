@@ -189,9 +189,9 @@ TUNING.DSTU =
 	
 	FIREBITEHOUNDS = GetModConfigData("firebitehounds"),
 	FROSTBITEHOUNDS = GetModConfigData("frostbitehounds"),
-	VARGWAVES = GetModConfigData("vargwaves"),
-	VARGWAVES_BOSS_GRACE = GetModConfigData("vargwaves grace"),
-	VARGWAVES_DELAY_PERIOD = GetModConfigData("vargwaves delay"),
+	VARGWAVES = false,--GetModConfigData("vargwaves"),
+	VARGWAVES_BOSS_GRACE = 15,--GetModConfigData("vargwaves grace"),
+	VARGWAVES_DELAY_PERIOD = 15,--GetModConfigData("vargwaves delay"),
 	
 	LATEGAMEHOUNDSPREAD = GetModConfigData("lategamehoundspread"),
 	--Worm inclusion
