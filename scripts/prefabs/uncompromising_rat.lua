@@ -1629,10 +1629,7 @@ local function fn_winkyburrow()
 	inst.OnSave = onsave_winkyburrow
 	inst.OnLoad = onload_winkyburrow
 	
-    inst:DoTaskInTime(0, OnInit)
     inst:DoTaskInTime(60, WinkyBurrowDespawn)
-	
-    inst:ListenForEvent("onremove", OnRemoved)
 	
 	return inst
 end
@@ -1694,10 +1691,6 @@ local function fn_winkyhomeburrow()
 	inst.winkyburrowremove = winkyburrowremove
 	inst.OnSave = onsave_winkyburrow
 	inst.OnLoad = onload_winkyburrow
-	
-    inst:DoTaskInTime(0, OnInit)
-	
-    inst:ListenForEvent("onremove", OnRemoved)
 	
 	return inst
 end
@@ -1766,6 +1759,12 @@ local function SlumberParty(inst)
 	end
 end
 
+local function CheckIfEmpty(inst)
+	if inst.components.herd.membercount == 0 then
+		inst:Remove()
+	end
+end
+
 local function fn_scoutburrow()
 	local inst = CreateEntity()
 	
@@ -1791,6 +1790,7 @@ local function fn_scoutburrow()
 	inst.components.herd:SetGatherRange(40)
 	inst.components.herd:SetUpdateRange(nil)
 	inst.components.herd:SetOnEmptyFn(inst.Remove)
+	inst.components.herd:SetRemoveMemberFn(CheckIfEmpty)
 	inst.components.herd.maxsize = 8
 	inst.components.herd.nomerging = true
     inst.components.herd.updateposincombat = true
@@ -1960,12 +1960,6 @@ local function FoodScoreCalculations(inst,container,v)
 		if IsAVersionOfRot(v) then
 			delta = ((5 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
 		end
-		if v:HasTag("stale") and v.components.farmplantable ~= nil and TUNING.DSTU.SEEDCHECK then
-			delta = ((1.5 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
-		end
-		if v:HasTag("spoiled") and v.components.farmplantable ~= nil and TUNING.DSTU.SEEDCHECK then
-			delta = ((3 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
-		end
 	else
 		if v:HasTag("fresh") and v.components.farmplantable == nil then
 			delta = ((5 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
@@ -1978,12 +1972,6 @@ local function FoodScoreCalculations(inst,container,v)
 		end
 		if IsAVersionOfRot(v) then
 			delta = ((15 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
-		end
-		if v:HasTag("stale") and v.components.farmplantable ~= nil and TUNING.DSTU.SEEDCHECK then
-			delta = ((3 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
-		end
-		if v:HasTag("spoiled") and v.components.farmplantable ~= nil and TUNING.DSTU.SEEDCHECK then
-			delta = ((6 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
 		end
 	end
 	inst.foodscore = inst.foodscore + delta
@@ -2055,13 +2043,12 @@ local function TimeForACheckUp(inst,dev)
 							inst.foodscore = inst.foodscore + ((15 * inst.preparedmultiplier) * inst.multiplier)
 						end
 					end
-	]]				if TUNING.DSTU.ITEMCHECK then
-						if not (v:HasTag("balloon") or v:HasTag("heavy") or v:HasTag("projectile") or v.prefab == "lantern") then
-							if (v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool"))  then
-								inst.itemscore = inst.itemscore + 30 -- Oooh, wants wants! We steal!
-							elseif v:HasTag("molebait") then
-								inst.itemscore = inst.itemscore + 2 -- Oooh, wants wants! We steal!
-							end
+	]]				
+					if not (v:HasTag("balloon") or v:HasTag("heavy") or v:HasTag("projectile") or v.prefab == "lantern") then
+						if (v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool"))  then
+							inst.itemscore = inst.itemscore + 30 -- Oooh, wants wants! We steal!
+						elseif v:HasTag("molebait") then
+							inst.itemscore = inst.itemscore + 2 -- Oooh, wants wants! We steal!
 						end
 					end
 				end

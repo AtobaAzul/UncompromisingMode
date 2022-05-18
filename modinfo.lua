@@ -167,7 +167,7 @@ configuration_options =
 			{description = "Classic", data = "UMNERF"},
 			{description = "Vanilla", data = "off"},
 		},
-		default = "SHOT",
+		default = "UMNERF",
 	},
 	
 	BinaryConfig("wickerbottom", "Wickerbottom Balance", "Wickerbottom/Maxwell can no longer read books while insane.", true),
@@ -312,8 +312,6 @@ configuration_options =
 		},
 		default = 60,
 	},
-	BinaryConfig("itemcheck", "Item Check", "Toggles the item check mechanic, where rats will sniff items and equipment on the floor.", true),
-	BinaryConfig("seedcheck", "Seed Check", "Toggles wether seeds count towards the rat food score.", true),
 -----------------------------
 -- Items and Structures--
 -----------------------------

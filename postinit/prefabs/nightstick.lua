@@ -134,10 +134,8 @@ local function onunequip(inst, owner)
 	owner.lightningpriority = nil
 	owner:ListenForEvent("lightningstrike", nil)
 
-	if TUNING.DSTU.UPDATE_CHECK then
-		if owner.components.upgrademoduleowner == nil then
-			owner:RemoveTag("batteryuser")          -- from batteryuser component
-		end
+	if owner.components.upgrademoduleowner == nil then
+		owner:RemoveTag("batteryuser")          -- from batteryuser component
 	end
 end
 

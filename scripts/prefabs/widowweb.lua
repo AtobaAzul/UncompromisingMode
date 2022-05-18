@@ -26,7 +26,7 @@ end
 local function SpawnInvestigators(inst, target)
 	local test = nil
 	local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 20, { "epic" }, {"hoodedwidow"})
+    local ents = TheSim:FindEntities(x, y, z, 20, { "epic" }, {"hoodedwidow","leif"})
 	if #ents >= 1 then
 	test = true
 	else
