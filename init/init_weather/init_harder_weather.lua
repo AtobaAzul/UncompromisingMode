@@ -41,10 +41,13 @@ env.AddPrefabPostInit("cave", function(inst)
     if not TheWorld.ismastersim then
         return
     end
-    if TUNING.DSTU.CAVECLOPS then
-    inst:AddComponent("cavedeerclopsspawner")
+    if TUNING.DSTU.CAVECLOPS and not TUNING.DSTU.ISLAND_ADVENTURES then --just in case, might've spawned in volcano dunno
+		inst:AddComponent("cavedeerclopsspawner")
 	end
-    inst:AddComponent("randomnighteventscaves")
+	if not TUNING.DSTU.ISLAND_ADVENTURES then --crashes because of the UM_deeerclopsspawner being off.
+		inst:AddComponent("randomnighteventscaves")
+	end
+
 	inst:AddComponent("ratacombs_junk_manager")
 end)
 
@@ -97,7 +100,6 @@ env.AddPrefabPostInit("forest", function(inst)
     end
 
 	if not TUNING.DSTU.ISLAND_ADVENTURES then
-
 		inst:RemoveComponent("deerclopsspawner")
 		inst:AddComponent("uncompromising_deerclopsspawner")
 
@@ -105,10 +107,11 @@ env.AddPrefabPostInit("forest", function(inst)
 		--inst:AddComponent("hayfever_tracker")
 		inst:AddComponent("firefallwarning")
 		inst:AddComponent("pollenmitedenspawner")
+		inst:AddComponent("randomnightevents")
 	end
 
 	--inst:ListenForEvent("seasontick", OnSeasonTick)
-	if TUNING.DSTU.SNOWSTORMS and TUNING.DSTU.ISLAND_ADVENTURES then
+	if TUNING.DSTU.SNOWSTORMS and not TUNING.DSTU.ISLAND_ADVENTURES then
 		inst:AddComponent("snowstorminitiator")
 	end
 	
@@ -116,7 +119,6 @@ env.AddPrefabPostInit("forest", function(inst)
 		inst:AddComponent("scorpionspawner")
 	end
 	
-	inst:AddComponent("randomnightevents")
 	
 	
 	--inst.OnSave = OnSave
@@ -124,7 +126,7 @@ env.AddPrefabPostInit("forest", function(inst)
 	--inst.OnLoad = OnLoad
 end)
 
-if TUNING.DSTU.SPAWNMOTHERGOOSE and TUNING.DSTU.ISLAND_ADVENTURES then
+if TUNING.DSTU.SPAWNMOTHERGOOSE and not TUNING.DSTU.ISLAND_ADVENTURES then
 env.AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then
         return
@@ -133,7 +135,7 @@ env.AddPrefabPostInit("forest", function(inst)
 end)
 end
 
-if TUNING.DSTU.SPAWNWILTINGFLY and TUNING.DSTU.ISLAND_ADVENTURES then
+if TUNING.DSTU.SPAWNWILTINGFLY and not TUNING.DSTU.ISLAND_ADVENTURES then
 env.AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then
         return
