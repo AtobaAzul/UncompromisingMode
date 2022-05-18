@@ -677,6 +677,7 @@ if TUNING.DSTU.NEWRECIPES then
 end
 RegisterInventoryItemAtlas("images/inventoryimages/snotroast.xml", "snotroast.tex")
 
+if TUNING.DSTU.NEWRECIPES then
 local theatercorn =
 {
     name = "theatercorn",
