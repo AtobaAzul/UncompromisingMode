@@ -65,7 +65,7 @@ return val
 end
 
 local function UpdateGlass(inst,data)
-if data ~= nil and data.target ~= nil and (data.target.components.combat ~= nil and data.target.components.combat.defaultdamage > 0) or data.target.prefab == "dummytarget" or data.target.prefab == "antlion"  then
+if data ~= nil and data.target ~= nil and (data.target.components.combat ~= nil and data.target.components.combat.defaultdamage > 0) or data.target.prefab == "dummytarget" or data.target.prefab == "antlion" or data.target.prefab == "stalker_atrium" or data.target.prefab == "stalker"  then
 	TempDamage(inst)
 	if inst.armormeleehits == nil then
 		inst.armormeleehits = 0

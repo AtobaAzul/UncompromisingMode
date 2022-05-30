@@ -145,9 +145,28 @@ local function light_reticuletargetfn()
 end
 
 local function onequip(inst, owner)
-	owner.AnimState:OverrideSymbol("swap_object", "swap_slobberlobber", "swap_slobberlobber")
-	owner.AnimState:Show("ARM_carry")
-	owner.AnimState:Hide("ARM_normal")
+	if not owner:HasTag("vetcurse") then
+		inst:DoTaskInTime(0, function(inst, owner)
+			local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner
+			local tool = owner ~= nil and owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+			if tool ~= nil and owner ~= nil then
+				owner.components.inventory:Unequip(EQUIPSLOTS.HANDS)
+				owner.components.inventory:DropItem(tool)
+				owner.components.inventory:GiveItem(inst)
+				owner.components.talker:Say(GetString(owner, "CURSED_ITEM_EQUIP"))
+				inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/HUD_hot_level1")
+				
+				if owner.sg ~= nil then
+					owner.sg:GoToState("hit")
+				end
+			end
+		end)
+	else
+		owner.AnimState:OverrideSymbol("swap_object", "swap_slobberlobber", "swap_slobberlobber")
+		owner.AnimState:Show("ARM_carry")
+		owner.AnimState:Hide("ARM_normal")
+	end
+
 end
 
 local function onunequip(inst, owner)
@@ -200,7 +219,6 @@ local function staff_fn()
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/slobberlobber.xml"
 
     inst:AddComponent("equippable")
-    inst.components.equippable.restrictedtag = "vetcurse"
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 

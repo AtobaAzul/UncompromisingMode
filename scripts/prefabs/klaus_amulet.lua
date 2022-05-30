@@ -36,8 +36,26 @@ local function DoubleSlap(owner)
 end
 
 local function onequip_blue(inst, owner)
-	owner.AnimState:OverrideSymbol("swap_body", "torso_amulets_klaus", "redamulet")
-	owner:ListenForEvent("onattackother", DoubleSlap)
+	if not owner:HasTag("vetcurse") then
+		inst:DoTaskInTime(0, function(inst, owner)
+			local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner
+			local tool = owner ~= nil and owner.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+			if tool ~= nil and owner ~= nil then
+				owner.components.inventory:Unequip(EQUIPSLOTS.BODY)
+				owner.components.inventory:DropItem(tool)
+				owner.components.inventory:GiveItem(inst)
+				owner.components.talker:Say(GetString(owner, "CURSED_ITEM_EQUIP"))
+				inst.SoundEmitter:PlaySound("dontstarve_DLC001/common/HUD_hot_level1")
+				
+				if owner.sg ~= nil then
+					owner.sg:GoToState("hit")
+				end
+			end
+		end)
+	else
+		owner.AnimState:OverrideSymbol("swap_body", "torso_amulets_klaus", "redamulet")
+		owner:ListenForEvent("onattackother", DoubleSlap)
+	end
 end
 
 local function onunequip_blue(inst, owner)
@@ -53,10 +71,10 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-
-    MakeInventoryPhysics(inst)
 	
 	inst:AddTag("vetsitem")
+
+    MakeInventoryPhysics(inst)
 
     inst.AnimState:SetBank("amulet_klaus")
     inst.AnimState:SetBuild("amulet_klaus")
