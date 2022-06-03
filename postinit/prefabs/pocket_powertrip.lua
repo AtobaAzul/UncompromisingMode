@@ -24,7 +24,14 @@ local function onequip_steel(inst, owner)
 	inst.components.container:Open(owner)
 end
 local function onequipreflect(inst, owner)
-    owner.AnimState:OverrideSymbol("swap_body", "torso_reflective", "swap_body")
+    local skin_build = inst:GetSkinBuild()
+    if skin_build ~= nil then
+        owner:PushEvent("equipskinneditem", inst:GetSkinName())
+        owner.AnimState:OverrideItemSkinSymbol("swap_body", skin_build, "swap_body", inst.GUID, "torso_reflective")
+    else
+		owner.AnimState:OverrideSymbol("swap_body", "torso_reflective", "swap_body")
+    end
+	
 	if inst.components.fueled ~= nil then
 		inst.components.fueled:StartConsuming()
 	end
@@ -34,9 +41,15 @@ end
 
 local function onunequip(inst, owner)
     owner.AnimState:ClearOverrideSymbol("swap_body")
+
 	if inst.components.fueled ~= nil then
 		inst.components.fueled:StopConsuming()
-	end
+    end
+
+    local skin_build = inst:GetSkinBuild()
+    if skin_build ~= nil then
+        owner:PushEvent("unequipskinneditem", inst:GetSkinName())
+    end
 	
     inst.components.container:Close(owner)
 end
