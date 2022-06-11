@@ -117,7 +117,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.SPOREPACK = "Anything can be useful if you have the know how!"
 	DESCRIBE.SALTPACK = "This will take care of the snow piles, though I prefer to do things myself!"
 	
-	DESCRIBE.UM_SCORPION = "Fun fact: You can suck the venom out of a bite wound! Not sure about scorpion stings though..."
+	DESCRIBE.SCORPION = "Fun fact: You can suck the venom out of a bite wound! Not sure about scorpion stings though..."
 	DESCRIBE.SCORPIONCARAPACE = "Uhh, Woby, you can have this one."
 	DESCRIBE.SCORPIONCARAPACECOOKED = "It's slightly better, but I would rather Woby have it."
 	DESCRIBE.HARDSHELLTACOS = "Huh, isn't half bad."
