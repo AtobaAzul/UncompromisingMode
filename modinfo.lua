@@ -253,7 +253,7 @@ configuration_options =
 
 	SkipSpace(),
 	Header("World Gen"),
-	BinaryConfig("worldgenmastertoggle", "Master Toggle", "Toggles ALL worldgen."),
+	BinaryConfig("worldgenmastertoggle", "Master Toggle", "Toggles ALL worldgen.", true),
 	BinaryConfig("hoodedforest", "Hooded Forest", "Hooded Forest replaces the Moon Base forest, with brand new things to explore, including a new boss!", true),
 	{
 		name = "ghostwalrus",
