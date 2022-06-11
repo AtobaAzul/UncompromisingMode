@@ -11,7 +11,7 @@
 
     Spawn a dirt mound that must be dug up to get loot?
 ]]
-
+local RuinsRespawner = require "prefabs/ruinsrespawner"
 
 local assets =
 {
@@ -387,5 +387,5 @@ local function onruinsrespawn(inst)
 	inst.sg:GoToState("lure_enter") 
 end
 
-return Prefab("shockworm", fn, assets, prefabs)--,
-   -- RuinsRespawner.Inst("worm", onruinsrespawn), RuinsRespawner.WorldGen("worm", onruinsrespawn)
+return Prefab("shockworm", fn, assets, prefabs),
+   RuinsRespawner.Inst("shockworm", onruinsrespawn), RuinsRespawner.WorldGen("shockworm", onruinsrespawn)

@@ -1,8 +1,11 @@
 local function OnBlocked(owner, data)
     owner.SoundEmitter:PlaySound("dontstarve/wilson/hit_scalemail")
 	--local lavaetaken = false
+
 	for i = 1,8 do
 		if owner.lavae[i].hidden == false then --and lavaetaken == false  then --I changed my mind, shatter ALL the lavae, like a *glass* cannon XD
+			owner.lavae[i].PlayBreakSound(owner.lavae[i])
+			owner.lavae[i].BreakShard(owner.lavae[i])
 			owner.lavae[i]:Hide()
 			owner.lavae[i].hidden = true
 			owner.lavae[i].Light:Enable(false)
@@ -32,6 +35,10 @@ end
 local function RemoveGlassDummies(inst)
 	for i = 1,8 do
 		if inst.lavae[i] ~= nil then
+			if inst.lavae[i].hidden == false then --and lavaetaken == false  then --I changed my mind, shatter ALL the lavae, like a *glass* cannon XD
+				inst.lavae[i].PlayBreakSound(inst.lavae[i])
+				inst.lavae[i].BreakShard(inst.lavae[i])
+			end
 			inst.lavae[i]:Remove()
 		end
 	end
@@ -49,6 +56,7 @@ local rand = math.random(1,8)
 		inst.lavae[rand].hidden = false
 		inst.lavae[rand]:Show()
 		inst.lavae[rand].Light:Enable(true)
+		inst.lavae[rand].SummonShard(inst.lavae[rand])
 	else
 		TryAddCrystal(inst)
 	end
@@ -65,17 +73,17 @@ return val
 end
 
 local function UpdateGlass(inst,data)
-if data ~= nil and data.target ~= nil and (data.target.components.combat ~= nil and data.target.components.combat.defaultdamage > 0) or data.target.prefab == "dummytarget" or data.target.prefab == "antlion" or data.target.prefab == "stalker_atrium" or data.target.prefab == "stalker"  then
-	TempDamage(inst)
-	if inst.armormeleehits == nil then
-		inst.armormeleehits = 0
-	end
-	inst.armormeleehits = inst.armormeleehits + 1
-	if inst.armormeleehits >= 2 and NoCrystalsLeftToSpawn(inst) == false then
-		TryAddCrystal(inst)
-		inst.armormeleehits = 0
-	end
-end
+    if data ~= nil and data.target ~= nil and (data.target.components.combat ~= nil and data.target.components.combat.defaultdamage > 0) or (data.target.prefab == "dummytarget" or data.target.prefab == "antlion" or data.target.prefab == "stalker_atrium" or data.target.prefab == "stalker")  then
+        TempDamage(inst)
+        if inst.armormeleehits == nil then
+            inst.armormeleehits = 0
+        end
+        inst.armormeleehits = inst.armormeleehits + 1
+        if inst.armormeleehits >= 2 and NoCrystalsLeftToSpawn(inst) == false then
+            TryAddCrystal(inst)
+            inst.armormeleehits = 0
+        end
+    end
 end
 
 local function onequip(inst, owner)

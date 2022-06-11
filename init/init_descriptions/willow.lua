@@ -35,8 +35,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "Stay away from Bernie!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "Eugh. Can we just smash it shut?"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "Eugh. Can we just smash it shut?"
-    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Eugh. Can we just smash it shut?"
-    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Eugh. Can we just smash it shut?"
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "I'm not sticking my hand in there, I'll probably get bit by a rat!"
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "It smells! But I can take whatever I want from it."
 	
 	DESCRIBE.WINKY =
         {
@@ -231,7 +231,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	}
 	DESCRIBE.ANTIHISTAMINE = "It'll clear my snot."
     ANNOUNCE.CURSED_ITEM_EQUIP = "OUCH! Is that what burning feels like?"
-    DESCRIBE.VETSITEM = "What's that? You want me to curse myself? If you say so..."
+	DESCRIBE.VETSITEM = "What's that? You want me to curse myself? If you say so..."
 	DESCRIBE.SCREECHER_TRINKET = "I... I don't think I should burn this."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "I'll try waiting until night. UGH."}
 
@@ -349,20 +349,20 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
         LEVEL_1 = "Our food smells awful!",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
-        LEVEL_1 = "There's a ton of disguising rats out there.",
+        LEVEL_1 = "There's a ton of disgusting rats out there.",
     }
 
 	DESCRIBE.PIED_RAT = "Bleh! He reeks!"
 	DESCRIBE.PIED_PIPER_FLUTE = "I'm holding this over the fire first."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Keep Bernie out of that backpack!"
-	DESCRIBE.WINONA_TOOLBOX = ""
-	DESCRIBE.OCEAN_SPEAKER = "What's this big dumb machine doing all the way out here?"
-	--DESCRIBE.UM_SIREN = "Oh yeah!? I can blow bubbles twice as big! Watch!"
 	
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "My life raft is about to be a dead raft!"
 
 	ACTIONFAIL.CHARGE_FROM =
 	{
-		NOT_ENOUGH_CHARGE = "test",
-		CHARGE_FULL = "test",
+		NOT_ENOUGH_CHARGE = "It's out.",
+		CHARGE_FULL = "It's already juiced up!",
 	}
+	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "Ha, can't shock me!"
+	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "OW! Not what I had in mind."
+	

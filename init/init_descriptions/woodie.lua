@@ -35,8 +35,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "More vermin come to steal my kit!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "That's where the varments are shackin' up!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "That's where the varments are shackin' up!"
-    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "That's where the varments are shackin' up!"
-    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "That's where the varments are shackin' up!"
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "This one looks like it's gonna collaspe."
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "It's the big rats home, nice of them to help out, eh?"
 	
 	DESCRIBE.WINKY =
         {
@@ -139,7 +139,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.BUGZAPPER = "I'll show those pesky bugs!"
-	DESCRIBE.STUMPLING = "The forest cry out!"
+	DESCRIBE.STUMPLING = "The forest cries out!"
 	DESCRIBE.BIRCHLING = DESCRIBE.STUMPLING
 	DESCRIBE.MOON_TEAR = "Cheer up, eh? Let's keep it company."
 	DESCRIBE.SHADOW_TELEPORTER = "Well I'll be darned."
@@ -216,7 +216,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
         }
 	DESCRIBE.ANTIHISTAMINE = "It'll clear your nose up come hayfever season."
     ANNOUNCE.CURSED_ITEM_EQUIP = "Ouch, this ones a jumper!"
-    DESCRIBE.VETSITEM = "I'm usually not the cursing type, despite my curse."
+	DESCRIBE.VETSITEM = "I'm usually not the cursing type, despite my curse."
 	DESCRIBE.SCREECHER_TRINKET = "Symbols like these are what got me in trouble in the first place."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "Perhaps I should try again when the moons out, eh?"}
 
@@ -342,14 +342,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "He's leading all those dang varmints!"
 	DESCRIBE.PIED_PIPER_FLUTE = "Those varmints will have to listen to me!"
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Darn varmints!"
-	DESCRIBE.WINONA_TOOLBOX = ""
-	DESCRIBE.OCEAN_SPEAKER = "Ya think what it's saying is important, Lucy?"
-	--DESCRIBE.UM_SIREN = "Not half bad lookin' for an ocean critter, eh?"
 	
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "I'm going to lose my gear if I don't get to shore!"
 
 	ACTIONFAIL.CHARGE_FROM =
 	{
-		NOT_ENOUGH_CHARGE = "test",
-		CHARGE_FULL = "test",
+		NOT_ENOUGH_CHARGE = "I'm not sure it's working.",
+		CHARGE_FULL = "Bit redundant?",
 	}
+	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "It's working now!"
+	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "Working, But I fried my hand!"
+	

@@ -16,19 +16,21 @@ AddComponentPostInit("container", function(self)
 	end
 end)
 ]]
-function CheckItem(container, item, slot)
+function CheckMush(container, item, slot)
     return item:HasTag("mushroom_fuel")
 end
 
-function CheckEquipItem(container, item, slot)
-    return item:HasTag("_equippable") or item:HasTag("slingshotammo") or item:HasTag("tool") or item.components.finiteuses or item.components.fueled 
+function CheckWardrobeItem(container, item, slot)
+    return item:HasTag("_equippable") or item:HasTag("slingshotammo") or item:HasTag("tool") or item.components.finiteuses or item.components.fueled or item.prefab == "razor" or item.prefab == "beef_bell"
 end
-
-function CheckHandItem(container, item, slot)
+function CheckEquipItem(container, item, slot)
+    return item:HasTag("_equippable")
+end
+--[[function CheckHandItem(container, item, slot)
     if item and item.components.equippable ~= nil then
         return item.components.equippable.equipslot == EQUIPSLOTS.HANDS
     end
-end
+end]]
 
 function CheckGem(container, item, slot)
     return not item:HasTag("irreplaceable") and item:HasTag("gem")
@@ -74,7 +76,7 @@ modparams.air_conditioner =
         pos = Vector3(200, 0, 0),
         side_align_tip = 120,
     },
-	itemtestfn = CheckItem,
+	itemtestfn = CheckMush,
     acceptsstacks = false,
     type = "cooker",
 }
@@ -303,6 +305,10 @@ end
 
 modparams.skullchest = containers.params.shadowchester
 modparams.winkyburrow = containers.params.shadowchester
+modparams.uncompromising_devcapture = containers.params.shadowchester
+
+
+modparams.sludge_sack = containers.params.piggyback
 
 local old_wsetup = containers.widgetsetup
 
@@ -402,7 +408,7 @@ containers.params.wardrobe =
         },		
     },
     type = "chest",
-	itemtestfn = CheckEquipItem,
+	itemtestfn = CheckWardrobeItem,
 	right = true,
 }
 
@@ -432,7 +438,7 @@ containers.params.winona_toolbox =
         side_align_tip = 160,
     },
     type = "chest",
-    itemtestfn = CheckHandItem,
+    itemtestfn = CheckWardrobeItem,
 }
 
 for y = 1, 0, -1 do

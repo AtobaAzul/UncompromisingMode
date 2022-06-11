@@ -196,6 +196,7 @@ local function fn()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 
+  inst.Transform:SetScale(1.6, 1.6, 1.6)
     MakeInventoryPhysics(inst)
 
     

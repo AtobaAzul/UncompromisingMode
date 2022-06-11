@@ -35,8 +35,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "Spiderfolk family? Have hair."
     DESCRIBE.UNCOMPROMISING_RATHERD = "Little eyes in hole! Hello!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "Little eyes in hole! Hello!"
-    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Little eyes in hole! Hello!"
-    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Little eyes in hole! Hello!"
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "A lotta things in that hole, glurp."
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Squeaky leaving things in that hole for us."
 	
 	DESCRIBE.WINKY =
         {
@@ -217,7 +217,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
         }
 	DESCRIBE.ANTIHISTAMINE = "Keep nose strong!"
     ANNOUNCE.CURSED_ITEM_EQUIP = "FLORP! HURTS!"
-    DESCRIBE.VETSITEM = "Wants me to curse? FLORP! ...Not that kind of curse?"
+	DESCRIBE.VETSITEM = "Wants me to curse? FLORP! ...Not that kind of curse?"
 	DESCRIBE.SCREECHER_TRINKET = "Glurp, scary!"
 	ACTIONFAIL.GIVE = {NOTNIGHT = "It sleepy? Wake up at night maybe."}
 
@@ -343,15 +343,16 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "Definitely not spiderfolk!"
 	DESCRIBE.PIED_PIPER_FLUTE = "Not spiderfolk could join Merm kingdom?"
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Don't like him!"
-	DESCRIBE.WINONA_TOOLBOX = ""
-	DESCRIBE.OCEAN_SPEAKER = "Loud box, florp!"
 	
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "We go for swim now?"
 	
-	--DESCRIBE.UM_SIREN = "Glorp is traitor!! Me think...?"
+
 
 	ACTIONFAIL.CHARGE_FROM =
 	{
-		NOT_ENOUGH_CHARGE = "test",
-		CHARGE_FULL = "test",
+		NOT_ENOUGH_CHARGE = "Not working!",
+		CHARGE_FULL = "/Gurgle!/",
 	}
+	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "Not shocking me! Florp!"
+	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "/Gurgle!/"
+	

@@ -194,7 +194,6 @@ local function staff_fn()
 
     --Sneak these into pristine state for optimization
     inst:AddTag("quickcast")
-	inst:AddTag("vetsitem")
 
     --inst.spelltype = "SCIENCE"
 

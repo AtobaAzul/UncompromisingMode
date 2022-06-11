@@ -15,6 +15,8 @@ local total_day_time = seg_time * 16
 local day_time = seg_time * day_segs
 local dusk_time = seg_time * dusk_segs
 local night_time = seg_time * night_segs
+local multiplayer_armor_durability_modifier = 0.7
+local multiplayer_armor_absorption_modifier = 1
 
 TUNING = GLOBAL.TUNING
 
@@ -38,34 +40,34 @@ TUNING.DSTU =
     --Food changes
     ----------------------------------------------------------------------------
     --Global appearance rate of foods
-    FOOD_CARROT_PLANTED_APPEARANCE_PERCENT = 0.75, 
-    FOOD_BERRY_NORMAL_APPEARANCE_PERCENT = 0.6, 
-    FOOD_BERRY_JUICY_APPEARANCE_PERCENT = 0.6, 
-    FOOD_MUSHROOM_GREEN_APPEARANCE_PERCENT = 0.65, 
-    FOOD_MUSHROOM_BLUE_APPEARANCE_PERCENT = 0.6, 
-    FOOD_MUSHROOM_RED_APPEARANCE_PERCENT = 0.7, 
-    
+    FOOD_CARROT_PLANTED_APPEARANCE_PERCENT = 0.75,
+    FOOD_BERRY_NORMAL_APPEARANCE_PERCENT = 0.6,
+    FOOD_BERRY_JUICY_APPEARANCE_PERCENT = 0.6,
+    FOOD_MUSHROOM_GREEN_APPEARANCE_PERCENT = 0.65,
+    FOOD_MUSHROOM_BLUE_APPEARANCE_PERCENT = 0.6,
+    FOOD_MUSHROOM_RED_APPEARANCE_PERCENT = 0.7,
+
     --Growth time increases
     STONE_FRUIT_GROWTH_INCREASE = 3,
     TREE_GROWTH_TIME_INCREASE = 1.05,
 	BERRYBUSH_JUICY_CYCLES = 2,
-	
+
     --Food stats
     FOOD_BUTTERFLY_WING_HEALTH = 1,
     FOOD_BUTTERFLY_WING_HUNGER = 2.5,
     FOOD_BUTTERFLY_WING_PERISHTIME = total_day_time / 2,
-	
+
     FOOD_SPOILED_FOOD_HEALTH = -5,
     FOOD_SPOILED_FOOD_SANITY = -5,
-	
+
     FOOD_SEEDS_HUNGER = 1.5,
-    
+
     --Food production
     FOOD_HONEY_PRODUCTION_PER_STAGE = {0,1,2,4},
 
     --Respawn time increases
     BUNNYMAN_RESPAWN_TIME_DAYS = 3,
-	
+
 	----------------------------------------------------------------------------
     --Winter Fire spreading
     ----------------------------------------------------------------------------
@@ -112,7 +114,7 @@ TUNING.DSTU =
     RECIPE_CHANGE_BACONEGG_PERISH = TUNING.PERISH_MED,
     RECIPE_CHANGE_MEATBALL_HUNGER = TUNING.CALORIES_SMALL*4, -- (12.5 * 4) = 50, from 62.5
     RECIPE_CHANGE_BUTTERMUFFIN_HEALTH = TUNING.HEALING_MED*1.5,
-    
+
     --Limits to fillers
     CROCKPOT_RECIPE_TWIG_LIMIT = 1,
     CROCKPOT_RECIPE_ICE_LIMIT = 1,
@@ -134,14 +136,14 @@ TUNING.DSTU =
     ----------------------------------------------------------------------------
     --Food Changes Config
     ----------------------------------------------------------------------------
-	
+
 	--Crockpot Recipes
 	CROCKPOTMONSTMEAT = GetModConfigData("crockpotmonstmeat"),
 	GENERALCROCKBLOCKER = GetModConfigData("generalcrockblocker"),
 	ICECROCKBLOCKER = GetModConfigData("icecrockblocker"),
-	
+
 	--Crockpot Dish Changes
-	
+
 	MEATBALL = GetModConfigData("meatball"),
 	PIEROGI = GetModConfigData("perogi"),
 	FARMFOODREDUX = GetModConfigData("farmfoodredux"),
@@ -154,83 +156,83 @@ TUNING.DSTU =
 	RATRAID_TIMERSTART = GetModConfigData("rattimer"),
 	RATRAID_GRACE = GetModConfigData("ratgrace"),
 	RATSNIFFER_TIMER = GetModConfigData("ratsnifftimer"),
-	
+
     --Generics
     MONSTER_BAT_CAVE_NR_INCREASE = 3,
     CAVE_ENTRANCE_BATS_SPAWN_PERIOD_UM = 0.8,
     MONSTER_CATCOON_HEALTH_CHANGE = TUNING.CATCOON_LIFE * 2.5,
-    
+
     --Mctusk
     MONSTER_MCTUSK_HEALTH_INCREASE = 3,
     MONSTER_MCTUSK_HOUND_NUMBER = 5,
 
     --Hounds
     MONSTER_HOUNDS_PER_WAVE_INCREASE = 1.5, --Controlled by player settings
-		
+
 	--Hooded Widow
 	WIDOW_HEALTH = GetModConfigData("widow health"),
-	
+
 	--Mother Goose
 	MOTHER_GOOSE_HEALTH = GetModConfigData("mother goose health"),
-	
+
 	--Wiltfly Health
 	WILTFLY_HEALTH = GetModConfigData("wiltfly health"),
-	
+
 
 	--Spawn New Bosses
 	SPAWNMOTHERGOOSE = GetModConfigData("mother_goose"),
 	SPAWNWILTINGFLY = GetModConfigData("wiltfly"),
-	
+
 	--Hound inclusion
 	SPOREHOUNDS = GetModConfigData("sporehounds"),
 	GLACIALHOUNDS = GetModConfigData("glacialhounds"),
 	LIGHTNINGHOUNDS = GetModConfigData("lightninghounds"),
 	MAGMAHOUNDS = GetModConfigData("magmahounds"),
-	
+
 	FIREBITEHOUNDS = GetModConfigData("firebitehounds"),
 	FROSTBITEHOUNDS = GetModConfigData("frostbitehounds"),
 	VARGWAVES = false,--GetModConfigData("vargwaves"),
 	VARGWAVES_BOSS_GRACE = 15,--GetModConfigData("vargwaves grace"),
 	VARGWAVES_DELAY_PERIOD = 15,--GetModConfigData("vargwaves delay"),
-	
+
 	LATEGAMEHOUNDSPREAD = GetModConfigData("lategamehoundspread"),
 	--Worm inclusion
 	DEPTHSEELS = GetModConfigData("depthseels"),
 	DEPTHSVIPERS = GetModConfigData("depthsvipers"),
-	
+
 	--Bats
 	ADULTBATILISKS = GetModConfigData("adultbatilisks"),
 	BATSPOOKING = GetModConfigData("batspooking"),
-	
+
 	--Scorpions
 	DESERTSCORPIONS = GetModConfigData("desertscorpions"),
-	
+
 	--Pinelings
 	PINELINGS = GetModConfigData("pinelings"),
 
 	--Ancient Trepidations
 	TREPIDATIONS = GetModConfigData("trepidations"),
-	
+
 	--Pawns
-	PAWNS = GetModConfigData("pawns"),	
-	
+	PAWNS = GetModConfigData("pawns"),
+
 	--Spiders
 	REGSPIDERJUMP = GetModConfigData("alljumperspiders"),
 	SPIDERWARRIORCOUNTER = GetModConfigData("spiderwarriorcounter"),
 	TRAPDOORSPIDERS = GetModConfigData("trapdoorspiders"),
-	
+
 	--Perishable Increase
 	PERISHABLETIME = GetModConfigData("more perishing"),
-	
+
 	--Fire Loot Rework
 	FIRELOOT = GetModConfigData("fireloot"),
-	
+
     POLLENMITES = GetModConfigData("pollenmites"),
     ----------------------------------------------------------------------------
     --Player changes
     ----------------------------------------------------------------------------
-	
-	
+
+
     --Tripover chance on walking with 100 wetness (depricated)
     TRIPOVER_HEALTH_DAMAGE = 10,
     TRIPOVER_ONMAXWET_CHANCE_PER_SEC = 0.10,
@@ -239,9 +241,9 @@ TUNING.DSTU =
 
     --Weapon slip increase
     SLIPCHANCE_INCREASE_X = 3,
-	
+
 	NIGHTSTICK_FUEL = 240,
-	
+
 	WET_FUEL_PENALTY = 0.20,
 
     ----------------------------------------------------------------------------
@@ -263,21 +265,20 @@ TUNING.DSTU =
     WORMWOOD_FIRE_DAMAGE = 1.50, -- orig 1.25
     WORMWOOD_CONFIG_FIRE = GetModConfigData("wormwood_fire"),
     WORMWOOD_CONFIG_PLANTS = GetModConfigData("wormwood_plants"),
-	
+
 	--Warly
     WARLY_SAME_OLD_COOLDOWN = total_day_time * 3,
 	WARLY_SAME_OLD_MULTIPLIERS = { .6, .5, .35, .2, .1 },
-	
+
 	--Maxwell
-	MAX_HEALTH_WELL = GetModConfigData("maxhealthwell"),
 	SHADOWWAXWELL_FUEL_COST = 2,
 	SHADOWWAXWELL_HEALTH_COST = 15,
 	OLD_SHADOWWAXWELL_SANITY_COST = 55,
 	OLD_SHADOWWAXWELL_SANITY_PENALTY = .275,
-	
+
 	--Winona
 	WINONA_WORKER = GetModConfigData("winonaworker"),
-	
+
 	--Wickerbottom
 	WICKERNERF = GetModConfigData("wickerbottom"),
 	WICKERNERF_TENTACLES = GetModConfigData("on tentacles"),
@@ -285,10 +286,10 @@ TUNING.DSTU =
 
     --Wanda
     WANDA_NERF = GetModConfigData("wandanerf"),
-	
+
 	--Voretox
 	WORTOX = GetModConfigData("wortox"),
-	
+
 	--Mobs
 	RAIDRAT_HEALTH = 100,
 	RAIDRAT_DAMAGE = 20,
@@ -301,16 +302,16 @@ TUNING.DSTU =
 	RAIDRAT_BUFFED_WALKSPEED = 6,
 	RAIDRAT_SPAWNRATE = seg_time / 5,
 	RAIDRAT_SPAWNRATE_VARIANCE = (seg_time / 5) * 0.5,
-	
+
 	PIEDPIPER_TOOT_RANGE = 25,
-	
+
 	--Weather Start Date
     WEATHERHAZARD_START_DATE_AUTUMN = GetModConfigData("weatherhazard_autumn"),
 	WEATHERHAZARD_START_DATE_WINTER = GetModConfigData("weatherhazard_winter"),
     WEATHERHAZARD_START_DATE_SPRING = GetModConfigData("weatherhazard_spring"),
     --WEATHERHAZARD_START_DATE_SUMMER = GetModConfigData("weatherhazard_summer"),
     RNE_CHANCE = GetModConfigData("rne chance"),
-	
+
     SNOWSTORMS = GetModConfigData("snowstorms"),
 
 	HARDER_SHADOWS = GetModConfigData("harder_shadows"),
@@ -331,24 +332,24 @@ TUNING.DSTU =
     DREADEYE_RANGE_1 = 1,
     DREADEYE_RANGE_2 = 2,
     DREADEYE_SPAWN_THRESH = 0.20,
-	
+
 	MOCK_DRAGONFLY_DAMAGE = 125,
-	
+
 	TOADLING_DAMAGE = 50,
 	TOADLING_HEALTH = 1000,
 	TOADLING_ATTACK_PERIOD = 2,
 	TOADLING_WALK_SPEED = 5,
 	TOADLING_RUN_SPEED = 6,
 	TOADLING_TARGET_DIST = 12,
-	
+
 	BAT_HEALTH = 75,
-	
+
 	TOAD_RAIN_DELAY = {min=5, max=10},
-	
+
 	SUMMER_CAVES_TEMP_MULT = 0.75,
 
 	WINTER_CAVES_TEMP_MULT = 1.25,
-	
+
 	--SNAPDRAGON FERTILIZER VALUES
 	PURPLE_VOMIT_NUTRIENTS	= { 16, 16, 0 },
 	ORANGE_VOMIT_NUTRIENTS	= { 0, 16, 16 },
@@ -367,8 +368,7 @@ TUNING.DSTU =
 	EYEBRELLAREWORK = GetModConfigData("eyebrellarework"),
 
 --More Config
-    BETA_COMPATIBILITY = --[[GetModConfigData("beta_compatibility"),]] true, --I'm too lazy to really bother with the rest of the things
-    UPDATE_CHECK = CurrentRelease.GreaterOrEqualTo("R21_REFRESH_WX78"),
+    UPDATE_CHECK = CurrentRelease.GreaterOrEqualTo("R21_REFRESH_WX78"),--REMEMBER TO ALWAYS UPDATE THIS WITH NEW BETAS.
 	POCKET_POWERTRIP = GetModConfigData("pocket_powertrip"),
     WINTER_BURNING = GetModConfigData("winter_burning"),
     HUNGRY_VOID = GetModConfigData("hungry_void"),
@@ -393,8 +393,8 @@ TUNING.DSTU =
     CAVECLOPS = GetModConfigData("caveclops"),
     HOTCAVES = GetModConfigData("hotcaves"),
     ITEMCHECK = GetModConfigData("itemcheck"),
-
-
+    SEEDS = GetModConfigData("seeds"),
+    MAXHPHITTERS = GetModConfigData("maxhphitters"),
 --boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
     TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),
@@ -411,7 +411,7 @@ TUNING.DISEASE_WARNING_TIME = total_day_time * 5
 TUNING.SANITY_BECOME_INSANE_THRESH = 40/200 -- 20%
 TUNING.SANITY_BECOME_SANE_THRESH  = 45/200 -- 22.5%
 
-TUNING.WORMWOOD_BURN_TIME = TUNING.DSTU.WORMWOOD_BURN_TIME 
+TUNING.WORMWOOD_BURN_TIME = TUNING.DSTU.WORMWOOD_BURN_TIME
 TUNING.WORMWOOD_FIRE_DAMAGE = TUNING.DSTU.WORMWOOD_FIRE_DAMAGE
 
 TUNING.AFFINITY_15_CALORIES_TINY = 1.6

@@ -4,59 +4,15 @@
 local require = GLOBAL.require
 require("recipe")
 
-local TechTree              = require("techtree")
-local TECH                  = GLOBAL.TECH
-local Recipe                = GLOBAL.Recipe
-local RECIPETABS            = GLOBAL.RECIPETABS
-local Ingredient            = GLOBAL.Ingredient
-local AllRecipes            = GLOBAL.AllRecipes
-local STRINGS               = GLOBAL.STRINGS
-local CUSTOM_RECIPETABS     = GLOBAL.CUSTOM_RECIPETABS
-local CONSTRUCTION_PLANS    = GLOBAL.CONSTRUCTION_PLANS
-local CRAFTING_FILTERS      = GLOBAL.CRAFTING_FILTERS
+local TechTree = require("techtree")
+local TECH = GLOBAL.TECH
+local Ingredient = GLOBAL.Ingredient
+local AllRecipes = GLOBAL.AllRecipes
+local STRINGS = GLOBAL.STRINGS
+local CONSTRUCTION_PLANS = GLOBAL.CONSTRUCTION_PLANS
+local CRAFTING_FILTERS = GLOBAL.CRAFTING_FILTERS
 
 modimport("uncompskins_api.lua")
-
---Registering all item atlas so we don't have to keep doing it on each craft.
-RegisterInventoryItemAtlas("images/inventoryimages/rat_whip.xml", "rat_whip.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/snowgoggles.xml", "snowgoggles.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/ratpoisonbottle.xml", "ratpoisonbottle.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/diseasecurebomb.xml", "diseasecurebomb.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/skeletonmeat.xml", "skeletonmeat.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/snowball_throwable.xml", "snowball_throwable.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/gasmask.xml", "gasmask.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/plaguemask.xml", "plaguemask.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/shroom_skin_fragment.xml", "shroom_skin_fragment.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/sporepack.xml", "sporepack.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/air_conditioner.xml", "air_conditioner.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/saltpack.xml", "saltpack.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/skullchest_child.xml", "skullchest_child.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/glass_scales.xml", "glass_scales.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/bugzapper.xml", "bugzapper.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/turf_hoodedmoss.xml", "turf_hoodedmoss.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/slingshotammo_firecrackers.xml", "slingshotammo_firecrackers.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/turf_ancienthoodedturf.xml", "turf_ancienthoodedturf.tex")
-RegisterInventoryItemAtlas(
-    "images/inventoryimages/um_bear_trap_equippable_tooth.xml",
-    "um_bear_trap_equippable_tooth.tex"
-)
-RegisterInventoryItemAtlas(
-    "images/inventoryimages/um_bear_trap_equippable_gold.xml",
-    "um_bear_trap_equippable_gold.tex"
-)
-RegisterInventoryItemAtlas("images/inventoryimages/armor_glassmail.xml", "armor_glassmail.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/watermelon_lantern.xml", "watermelon_lantern.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/hat_ratmask.xml", "hat_ratmask.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/ancient_amulet_red.xml", "ancient_amulet_red.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/mutator_trapdoor.xml", "mutator_trapdoor.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/moon_tear.xml", "moon_tear.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/dormant_rain_horn.xml", "dormant_rain_horn.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/driftwoodfishingrod.xml", "driftwoodfishingrod.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/rain_horn.xml", "rain_horn.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/floral_bandage.xml", "floral_bandage.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/rat_tail.xml", "rat_tail.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/book_rain.xml", "book_rain.tex")
-RegisterInventoryItemAtlas("images/inventoryimages/honey_log.xml", "honey_log.tex")
 
 -- List of Vanilla Recipe Filters
 -- "FAVORITES", "CRAFTING_STATION", "SPECIAL_EVENT", "MODS", "CHARACTER", "TOOLS", "LIGHT",
@@ -164,7 +120,7 @@ AddRecipe2(
     {Ingredient("red_cap", 2), Ingredient("jammypreserves", 1), Ingredient("rocks", 1)},
     TECH.SCIENCE_ONE,
     nil,
-	{"TOOLS"}
+    {"TOOLS"}
 )
 ChangeSortKey("ratpoisonbottle", "trap", "TOOLS", true)
 
@@ -187,8 +143,8 @@ AddRecipe2(
     {"CHARACTER"}
 )
 
-AddRecipe2("ice", {Ingredient("snowball_throwable", 4)}, TECH.SCIENCE_ONE, nil, {"REFINE"})
-ChangeSortKey("ice", "beeswax", "REFINE", true)
+AddRecipe2("ice_snowball", {Ingredient("snowball_throwable", 4)}, TECH.SCIENCE_ONE, {product = "ice"}, {"REFINE"})
+ChangeSortKey("ice_snowball", "beeswax", "REFINE", true)
 
 AddRecipe2(
     "gasmask",
@@ -265,6 +221,7 @@ AddRecipe2(
     {builder_tag = "plantkin"},
     {"CHARACTER"}
 )
+ChangeSortKey("honey_log", "livinglog", "CHARACTER", true)
 
 AddRecipe2(
     "bugzapper",
@@ -315,7 +272,7 @@ AddRecipe2(
     "turf_hoodedmoss",
     {Ingredient("twigs", 1), Ingredient("foliage", 1), Ingredient("moonrocknugget", 1)},
     TECH.TURFCRAFTING_TWO,
-    {num_to_give = 4},
+    {numtogive = 4},
     {"DECOR"}
 )
 ChangeSortKey("turf_hoodedmoss", "turf_deciduous", "DECOR", true)
@@ -324,7 +281,7 @@ AddRecipe2(
     "turf_ancienthoodedturf",
     {Ingredient("turf_hoodedmoss", 1), Ingredient("moonrocknugget", 1), Ingredient("thulecite_pieces", 1)},
     TECH.TURFCRAFTING_TWO,
-    {num_to_give = 4},
+    {numtogive = 4},
     {"DECOR"}
 )
 ChangeSortKey("turf_ancienthoodedturf", "turf_hoodedmoss", "DECOR", true)
@@ -333,7 +290,7 @@ AddRecipe2(
     "um_bear_trap_equippable_tooth",
     {Ingredient("cutstone", 2), Ingredient("houndstooth", 3), Ingredient("rope", 1)},
     TECH.SCIENCE_TWO,
-    {nounlock = true},
+    {nil},
     {"WEAPONS"}
 )
 ChangeSortKey("um_bear_trap_equippable_tooth", "trap_teeth", "WEAPONS", true)
@@ -342,7 +299,7 @@ AddRecipe2(
     "um_bear_trap_equippable_gold",
     {Ingredient("goldnugget", 4), Ingredient("houndstooth", 3), Ingredient("rope", 1)},
     TECH.SCIENCE_TWO,
-    {nounlock = true},
+    {nil},
     {"WEAPONS"}
 )
 ChangeSortKey("um_bear_trap_equippable_gold", "um_bear_trap_equippable_tooth", "WEAPONS", true)
@@ -363,6 +320,7 @@ AddRecipe2(
     {builder_tag = "spiderwhisperer"},
     {"CHARACTER"}
 )
+ChangeSortKey("mutator_trapdoor", "mutator_warrior", "CHARACTER", true)
 
 AddRecipe2(
     "book_rain",
@@ -371,6 +329,7 @@ AddRecipe2(
     {builder_tag = "bookbuilder"},
     {"CHARACTER"}
 )
+ChangeSortKey("book_rain", "book_tentacles", "CHARACTER", true)
 
 AddRecipe2(
     "driftwoodfishingrod",

@@ -429,7 +429,7 @@ local function Sniffertime(owner)
 	if ents ~= nil then
 		for i, v in ipairs(ents) do
 			if v.components.inventoryitem:IsHeld() then
-				if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" then
+				if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and (v.components.inventoryitem:GetGrandOwner().prefab == "lureplant"or v.components.inventoryitem:GetGrandOwner().prefab == "catcoon") then
 					--print("lureplant is holding!")
 				else
 					if not v:HasTag("frozen") and v.components.farmplantable == nil then
@@ -440,7 +440,7 @@ local function Sniffertime(owner)
 				if not v:HasTag("frozen") and v.components.farmplantable == nil then
 					FoodScoreCalculations(false,v)
 				end
-				if not (v:HasTag("balloon") or v:HasTag("heavy") or v:HasTag("projectile")) then
+				if not (v:HasTag("balloon") or v:HasTag("heavy") or v:HasTag("projectile") or v:HasTag("NORATCHECK")) then
 					if (v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool"))  then
 						TrySpawnIcon(v,1.5)
 					elseif v:HasTag("molebait") then

@@ -28,7 +28,7 @@ local brain = require "brains/lureplague_ratbrain"
 
 
 local function OnAttackOther(inst, data)
-	if data.target ~= nil and data.target:HasTag("player") and not data.target:HasTag("hasplaguemask") then
+	if data.target ~= nil and data.target:HasTag("player") and not data.target:HasTag("hasplaguemask") and TUNING.DSTU.MAXHPHITTERS then
 		data.target.components.health:DeltaPenalty(0.05)
 	end
 end

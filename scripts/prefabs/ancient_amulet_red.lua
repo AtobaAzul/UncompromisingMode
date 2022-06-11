@@ -165,7 +165,11 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("equippable")
-    inst.components.equippable.equipslot = EQUIPSLOTS.BODY
+    if EQUIPSLOTS["NECK"] ~= nil then
+        inst.components.equippable.equipslot = EQUIPSLOTS.NECK
+    else
+        inst.components.equippable.equipslot = EQUIPSLOTS.BODY
+    end
     inst.components.equippable.dapperness = TUNING.DAPPERNESS_SMALL
     inst.components.equippable.is_magic_dapperness = true
 

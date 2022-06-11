@@ -3,7 +3,7 @@ self.inst = inst
 
 function self:UnLockFirstArea()
 if self.areaoneblockers ~= nil then
---print("unlocking...")
+print("unlocking...")
 	for i, v in ipairs(self.areaoneblockers) do
 		v.lower(v)
 	end

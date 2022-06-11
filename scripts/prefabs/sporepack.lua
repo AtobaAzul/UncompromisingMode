@@ -146,7 +146,12 @@ local function fn()
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/sporepack.xml"
 
     inst:AddComponent("equippable")
-    inst.components.equippable.equipslot = EQUIPSLOTS.BODY
+    if EQUIPSLOTS["BACK"] ~= nil then
+        inst.components.equippable.equipslot = EQUIPSLOTS.BACK
+    else
+        inst.components.equippable.equipslot = EQUIPSLOTS.BODY
+    end
+
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 

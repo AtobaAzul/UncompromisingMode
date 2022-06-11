@@ -129,7 +129,7 @@ local function fnfoliagegreen()
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/greenfoliage.xml"
     inst:AddComponent("edible")
-    inst.components.edible.healthvalue = TUNING.HEALING_TINY
+    inst.components.edible.healthvalue = 0.5
     inst.components.edible.hungervalue = 0
     inst.components.edible.foodtype = FOODTYPE.VEGGIE
 

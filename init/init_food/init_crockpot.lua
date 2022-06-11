@@ -92,9 +92,9 @@ AddIngredientValues({"monstersmallmeat"}, {meat=0.5, monster=1}, true, true) --2
 AddIngredientValues({"cookedmonstersmallmeat"}, {meat=0.5, monster=1}, true, true) --2.5 monster total, Will be calculated with -1 meat
 AddIngredientValues({"monstersmallmeat_dried"}, {meat=0.5, monster=1}, true, true) --2 monster total, Will be calculated with -1 meat
 
-AddIngredientValues({"um_monsteregg"}, {egg=1, monster=1}, true)
+AddIngredientValues({"um_monsteregg"}, {egg=1, monster=GLOBAL.TUNING.DSTU.MONSTER_EGGS}, true)
 RegisterInventoryItemAtlas("images/inventoryimages/um_monsteregg.xml", "um_monsteregg.tex")
-AddIngredientValues({"um_monsteregg_cooked"}, {egg=1, monster=1}, true)
+AddIngredientValues({"um_monsteregg_cooked"}, {egg=1, monster=GLOBAL.TUNING.DSTU.MONSTER_EGGS}, true)
 RegisterInventoryItemAtlas("images/inventoryimages/um_monsteregg_cooked.xml", "um_monsteregg_cooked.tex")
 
 AddIngredientValues({"scorpioncarapace"}, {meat=0.5, monster=1, insectoid=0.5}, true, true)
@@ -677,7 +677,6 @@ if TUNING.DSTU.NEWRECIPES then
 end
 RegisterInventoryItemAtlas("images/inventoryimages/snotroast.xml", "snotroast.tex")
 
-if TUNING.DSTU.NEWRECIPES then
 local theatercorn =
 {
     name = "theatercorn",
@@ -688,12 +687,13 @@ local theatercorn =
     foodtype = "VEGGIE",
     health = 3,
     hunger = 37.5,
-	oneat_desc = "Great with some amusement.",
+	oneat_desc = "Great with some amusement",
 	sanity = 0,
     perishtime = 10*TUNING.PERISH_TWO_DAY,
     cooktime = 1.8,
 	stacksize = 3,
 }
+if TUNING.DSTU.NEWRECIPES then
     AddCookerRecipe("cookpot", theatercorn)
     AddCookerRecipe("portablecookpot", theatercorn)
     AddCookerRecipe("archive_cookpot", theatercorn)

@@ -11,6 +11,7 @@
 
     Spawn a dirt mound that must be dug up to get loot?
 ]]
+local RuinsRespawner = require "prefabs/ruinsrespawner"
 
 local easing = require("easing")
 local assets =
@@ -337,13 +338,14 @@ local function fnviperling()
 end
 
 local function FindPerson(inst)
-local person = FindEntity(inst,10,nil,{"player"})
-if person ~= nil then
-person.components.leader:AddFollower(inst)
-else
-inst.sg:GoToState("death")
+	local person = FindEntity(inst,10,nil,{"player"})
+	if person ~= nil then
+		person.components.leader:AddFollower(inst)
+	else
+		inst.sg:GoToState("death")
+	end
 end
-end
+
 local function fnviperlingfriend()
     local inst = CreateEntity()
 
@@ -402,9 +404,11 @@ local function fnviperlingfriend()
 	inst.ShadowDespawn = ShadowDespawn
 	inst:DoTaskInTime(60,ShadowDespawn)
 	inst:DoTaskInTime(0,FindPerson)
-	inst.OnLoad = function(inst) inst:Remove() end
+	inst.persists = false
+	
     return inst
 end
+
 local function ViperlingBelch(inst, target)
 	if target ~= nil then
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -540,6 +544,11 @@ local function fn()
     return inst
 end
 
+local function onruinsrespawn(inst)
+	inst.sg:GoToState("lure_enter")
+end
+
 return Prefab("viperworm", fn, assets, prefabs),
 Prefab("viperling",fnviperling),
-Prefab("viperlingfriend",fnviperlingfriend)
+Prefab("viperlingfriend",fnviperlingfriend),
+RuinsRespawner.Inst("viperworm", onruinsrespawn), RuinsRespawner.WorldGen("viperworm", onruinsrespawn)

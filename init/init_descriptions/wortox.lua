@@ -35,8 +35,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "You won't run off with my flute again, hm?"
     DESCRIBE.UNCOMPROMISING_RATHERD = "A portal to the little pranksters' den."
     DESCRIBE.UNCOMPROMISING_RATBURROW = "A portal to the little pranksters' den."
-    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "A portal to the little pranksters' den."
-    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "A portal to the little pranksters' den."
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Rather hastily made, it'll fall apart."
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Home is where the heart is, or the fart in this case, because /Pee-yew!/"
 	
 	DESCRIBE.WINKY =
         {
@@ -216,7 +216,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
         }
 	DESCRIBE.ANTIHISTAMINE = "Keeps my snout clean!"
     ANNOUNCE.CURSED_ITEM_EQUIP = "It scorched my paw! Is this some kind of practical joke?"
-    DESCRIBE.VETSITEM = "Ohoho! It's trying to trick me into cursing myself! Maybe I will..."
+	DESCRIBE.VETSITEM = "Ohoho! It's trying to trick me into cursing myself! Maybe I will..."
 	DESCRIBE.SCREECHER_TRINKET = "And just what dimension are you from, friend?"
 	ACTIONFAIL.GIVE = {NOTNIGHT = "Lets play when the moon comes out!"}
 
@@ -342,15 +342,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "His song shall make them strong!"
 	DESCRIBE.PIED_PIPER_FLUTE = "Let us sing, and they'll come under our wing!"
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "He'll take all our stuff with that pack, get it back!"
-	DESCRIBE.WINONA_TOOLBOX = ""
-	DESCRIBE.OCEAN_SPEAKER = "It plays a tune that could spell our doom. Hyuyu!" --Oh gee oh fuck I'm out of luck!!!!!
 	
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "Pop goes the weasel!"
 	
-	--DESCRIBE.UM_SIREN = "My, is that a siren on the horizon?"
-
 	ACTIONFAIL.CHARGE_FROM =
 	{
-		NOT_ENOUGH_CHARGE = "test",
-		CHARGE_FULL = "test",
+		NOT_ENOUGH_CHARGE = "There's no spark!",
+		CHARGE_FULL ="Can't do that silly goose, Hyuhu!",
 	}
+	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "That's the ticket!"
+	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "/Zipped/ and /zapped!/"
+	

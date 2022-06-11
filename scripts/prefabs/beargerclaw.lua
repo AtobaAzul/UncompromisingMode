@@ -159,7 +159,6 @@ local function staff_fn()
     --Sneak these into pristine state for optimization
     inst:AddTag("beargerclaw")
     inst:AddTag("quickcast")
-	inst:AddTag("vetsitem")
 	
 	MakeInventoryFloatable(inst)
 

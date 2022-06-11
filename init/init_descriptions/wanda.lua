@@ -35,8 +35,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "Get away from my clocks!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "I think they just wanted an escape from the Ratacombs."
     DESCRIBE.UNCOMPROMISING_RATBURROW = "I think they just wanted an escape from the Ratacombs."
-    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "I think they just wanted an escape from the Ratacombs."
-    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "I think they just wanted an escape from the Ratacombs."
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "It wasn't made to last."
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "At least this one is helping. Although I'd rather not risk it."
 	
 	DESCRIBE.WINKY =
         {
@@ -64,7 +64,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
     DESCRIBE.GASMASK = "Oh botheration, I'll look like a fool wearing that!"
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
 	DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
-	DESCRIBE.SPIDERQUEENCORPSE = "Mon dieu! That must get rid of!"
+	DESCRIBE.SPIDERQUEENCORPSE = "It's only a matter of time before something worse happens..."
 	ANNOUNCE.ANNOUNCE_SNEEZE = "Auuchoo! My goodness!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Allergies... I dread this time of year."
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Ah, clean air... about time!"
@@ -200,8 +200,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
         {
             BROKEN = "This can't be the end. We'll fix this!",
             GENERIC = "It looks well-loved.",
-            BROKEN = "This can't be the end. We'll fix this!",
-            GENERIC = "It looks well-loved.",
         }
 	
 	DESCRIBE.BERNIE_ACTIVE =
@@ -216,7 +214,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
         }
 	DESCRIBE.ANTIHISTAMINE = "May give some allergy protection, for a time."
     ANNOUNCE.CURSED_ITEM_EQUIP = "Ouch! It's not meant for uncursed hands."
-    DESCRIBE.VETSITEM = "It's not meant for uncursed hands."
+	DESCRIBE.VETSITEM = "It's not meant for uncursed hands."
 	DESCRIBE.SCREECHER_TRINKET = "It's from another timeline..."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "The moon needs to be out."}
 	
@@ -349,6 +347,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 
 	ACTIONFAIL.CHARGE_FROM =
 	{
-		NOT_ENOUGH_CHARGE = "test",
-		CHARGE_FULL = "test",
+		CHARGE_FULL = "It doesn't need a re-charge!",
 	}
+	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "Clearly the constructor didn't have the time to make it safe!"
+	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "It's not even insulated properly!"
+	

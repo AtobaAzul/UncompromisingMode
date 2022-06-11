@@ -42,7 +42,6 @@ env.AddPrefabPostInit("wx78", function(inst)
     end
 
     inst:AddTag("automaton")
-    inst:AddTag("mech")
 
     if TUNING.DSTU.WX78_CONFIG then
 		if inst.components.playerlightningtarget ~= nil then

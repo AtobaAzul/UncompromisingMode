@@ -39,9 +39,13 @@ local function onequip_blue(inst, owner)
 	if not owner:HasTag("vetcurse") then
 		inst:DoTaskInTime(0, function(inst, owner)
 			local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner
-			local tool = owner ~= nil and owner.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+			local tool = owner ~= nil and (owner.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) or owner.components.inventory:GetEquippedItem(EQUIPSLOTS.NECK))
 			if tool ~= nil and owner ~= nil then
-				owner.components.inventory:Unequip(EQUIPSLOTS.BODY)
+				if EQUIPSLOTS["NECK"] ~= nil then
+					owner.components.inventory:Unequip(EQUIPSLOTS.NECK)
+				else
+					owner.components.inventory:Unequip(EQUIPSLOTS.BODY)
+				end
 				owner.components.inventory:DropItem(tool)
 				owner.components.inventory:GiveItem(inst)
 				owner.components.talker:Say(GetString(owner, "CURSED_ITEM_EQUIP"))
@@ -71,8 +75,6 @@ local function fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-	
-	inst:AddTag("vetsitem")
 
     MakeInventoryPhysics(inst)
 
@@ -93,7 +95,11 @@ local function fn()
     inst:AddComponent("inspectable")
 
     inst:AddComponent("equippable")
-    inst.components.equippable.equipslot = EQUIPSLOTS.BODY
+    if EQUIPSLOTS["NECK"] ~= nil then
+        inst.components.equippable.equipslot = EQUIPSLOTS.NECK
+    else
+        inst.components.equippable.equipslot = EQUIPSLOTS.BODY
+    end
 
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/klaus_amulet.xml"

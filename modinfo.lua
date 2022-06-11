@@ -131,7 +131,7 @@ configuration_options =
 	},
 	{
 		name = "vetcurse",
-		label = "Veteran's Curse.",
+		label = "Veteran's Curse",
 		hover = "Veteran's curse is an optional dificulty mode, which increases risk & reward.",
 		options =
 		{
@@ -149,12 +149,12 @@ configuration_options =
     Header("Characters"),
 ------------------------------
 	BinaryConfig("funny rat", "Winky", "The Vile Vermin", true),
-    BinaryConfig("willow", "Willow Rework", "Willow's Lighter now has infinite durability, Willow can cast explosions, etc.", true),
+    BinaryConfig("willow", "Willow Rework", "Willow's Lighter now lasts forever when she holds it, she will retaliate when attacked by shadows.", true),
     BinaryConfig("bernie", "Big Bernie", "Enable Big BERNIE!!", true),
     BinaryConfig("warly", "Improved Warly", "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.", true),
+	BinaryConfig("waxwell", "Maxwell's Classic Shadows", "Maxwell gets buffed versions of his classic shadows by reading the Codex Umbra. Disable for Maxwell mod compatibility!", true),
 	--BinaryConfig("wolfgang", "Improved/Balanced Wolfgang", "Wolfgang gains new perks and downsides. Read the patch notes included in the mod folder or workshop for details.", false),
 	BinaryConfig("wolfgang", "Experimental Wolfgang", "Wolfgang gains mightiness based on hunger level. Hunger drain increases the longer mighty is maintained.", false),
-	BinaryConfig("maxhealthwell", "New Maxwell Downside", "Maxwell's max health is reduced by 20% of the damage he takes.", false),
 	BinaryConfig("winonaworker", "Improved Winona", "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.", true),
 	BinaryConfig("winona_gen", "Winona-restricted Generators", "Limits access to Winona's Generators to only allow her to use them", true),
 		{
@@ -173,7 +173,7 @@ configuration_options =
 	BinaryConfig("wickerbottom", "Wickerbottom Balance", "Wickerbottom/Maxwell can no longer read books while insane.", true),
 	BinaryConfig("on tentacles", "On Tentacles Re-Balance", "On Tentacles now spawns friendly tentacles that die over time, and do not drop tentacle spots.", true),
 	BinaryConfig("applied horticulture", "Horticulture, Abridged recipe Re-Balance", "Horticulture, Abridged now takes 1 Leafy Meat instead of 5 seeds, to better balance it from being too easily spammable early game.", true),
-	BinaryConfig("wanda_nerf", "Wanda Tweaks.", "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", false),
+	BinaryConfig("wanda_nerf", "Wanda Tweaks", "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", false),
 	BinaryConfig("wormwood_fire", "Extra Flamable Wormwood", "Wormwood is highly flameable, like in Hamlet.", false),
 	BinaryConfig("wormwood_plants", "Prevent Infinite Sanity Loop", "Increases the sanity loss from digging plants.", true),
 	BinaryConfig("wendy", "Nerfed Wendy", "Abigail was nerfed to not increase Wendy's maximum damage above average.", true),
@@ -187,7 +187,7 @@ configuration_options =
 ------------------------------
 	{
 		name = "weatherhazard_autumn",
-		label = "Start Date for Autumn weather.",
+		label = "Start Date for Autumn weather",
 		hover = "New autumn weather occurs in the second year by default.\nThis currently only includes poisonous frogs.",
 		options =
 		{
@@ -199,7 +199,7 @@ configuration_options =
 	},
 	{
 		name = "weatherhazard_winter",
-		label = "Start Date for Winter weather.",
+		label = "Start Date for Winter weather",
 		hover = "New winter weather occurs in the first year by default",
 		options =
 		{
@@ -223,7 +223,7 @@ configuration_options =
 	},
 --[[{
 	name = "weatherhazard_summer",
-	label = "Start Date for new Spring weather.",
+	label = "Start Date for new Spring weather",
 	hover = "New spring weather occurs in the first year, by default.",
 	options =
 	{
@@ -253,6 +253,7 @@ configuration_options =
 
 	SkipSpace(),
 	Header("World Gen"),
+	BinaryConfig("worldgenmastertoggle", "Master Toggle", "Toggles ALL worldgen."),
 	BinaryConfig("hoodedforest", "Hooded Forest", "Hooded Forest replaces the Moon Base forest, with brand new things to explore, including a new boss!", true),
 	{
 		name = "ghostwalrus",
@@ -267,6 +268,7 @@ configuration_options =
 		default = "enabled",
 	},
 	BinaryConfig("rice","Rice","Rice spawns in ponds in the swamp.", true),
+	BinaryConfig("trapdoorspiders", "Trapdoor Spiders", "Enables the spawn of trapdoor spider mounds on worldgen. Their dens are usually covered in a resource rich grass.", true),
 	SkipSpace(),
 ------------------------------
 -- Character Reworks --
@@ -293,7 +295,7 @@ configuration_options =
 		hover = "The cooldown between rat raids!",
 		options =
 		{
-			{description = "As soon as possible.", data = 1},
+			{description = "As soon as possible.", data = 10},
 			{description = "Half", data = 4800},
 			{description = "Default", data = 9600},
 			{description = "Double", data = 14400},
@@ -301,23 +303,24 @@ configuration_options =
 		default = 9600,
 	},
 	{
-		name = "ratsnifftimer",
+		name = "ratsnifftimer_",
 		label = "Rat Sniff Timer",
 		hover = "The rate at which your base is checked for messiness.",
 		options =
 		{
-			{description = "Lowered[30 seconds]", data = 30},
-			{description = "Default[60 seconds]", data = 60},
-			{description = "Raised[120 seconds]", data = 120},
+			{description = "Lowest[1 Minute]", data = 60},
+			{description = "Lowered[2 Minutes]", data = 120},
+			{description = "Default[3 Minutes]", data = 180},
+			{description = "Raised[4 Minutes]", data = 240},
+			{description = "Extended[8 Minutes]", data = 480}
 		},
-		default = 60,
+		default = 180,
 	},
 -----------------------------
 -- Items and Structures--
 -----------------------------
 	SkipSpace(),
 	Header("Items and Structures"),
-	Header("--------------------"),
 	BinaryConfig("scaledchestbuff", "Scaled Chest Buff", "Scaled chest is not worth the resources required. Enabling this buffs it to 25 slots. Toggling with scaled chests in existing world may cause crash.", true),
 	BinaryConfig("scalemailbuff", "Scalemail Buff", "Scalemail now spawns 3 Dimvaes to help you in combat", true),
 	BinaryConfig("canedurability", "Cane Durability (Off by default)", "Cane loses durability similarly to a whirly fan, note that UM walruses drop tusks 100% of the time with this on.", false),
@@ -325,7 +328,7 @@ configuration_options =
 	BinaryConfig("passibleimpassibles", "Remove Cheese-able Collisions", "Removes collision from stuff such as statues to prevent cheese.", true),
 	{
 		name = "sleepingbuff",
-		label = "Sleeping Stat Speed.",
+		label = "Sleeping Stat Speed",
 		hover = "Increases the speed at which sleeping gives stats/drains hunger. Default 1.5x",
 		options =
 		{
@@ -365,9 +368,8 @@ configuration_options =
 -----------------------------
 	SkipSpace(),
 	Header("Food"),
-	Header("--------------------"),
 	Header("Crockpot Recipes"),
-	BinaryConfig("newrecipes", "New Recipes", "UM adds a few new recipes\nTurn this off if you're using mods that cause overlap such as HoF.", true),
+	BinaryConfig("newrecipes", "New Recipes", "UM adds a few new recipes\nTurn this off if you're using mods that can cause overlap, such as HoF.", true),
 	BinaryConfig("crockpotmonstmeat", "Harder Monster Meat", "Enables the new monster lagsana recipe, where you can only make recipes if the meat value is greater than monster value.", true),
 	BinaryConfig("generalcrockblocker", "Trash Filler Blocker", "Heavy use of certain low quality crockpot ingredients, such as twigs, ice, buttefly wings, and other inedibles results in wet goop.", true),
 	BinaryConfig("icecrockblocker", "Snowcones", "Snowcones prevent heavy use of ice specifically in crockpot dishes that don't call for it.", true),
@@ -406,10 +408,11 @@ configuration_options =
 			{description = "2.5x", data = 2.5},
 			{description = "3x", data = 3},
 		},
-		default = 2,
+		default = 1.5,
 	},
 	BinaryConfig("butterflywings_nerf", "Weaker Butterfly Wings", "Butterfly wings have been nerfed to not be cheap healing", true),
 	BinaryConfig("rawcropsnerf", "Raw Crops Nerf", "Farm crops are nerfed in their base value when raw/cooked to incentivize using crockpot recipes.", true),
+	BinaryConfig("seeds", "Lowered Seeds Hunger", "Seeds have had their hunger lowered.", true),
 	{
 		name = "monstereggs",
 		label = "Monster Eggs",
@@ -424,13 +427,11 @@ configuration_options =
 		},
 		default = 1,
 	},
-	Header("--------------------"),
 -----------------------------
 -- Monsters --
 -----------------------------
 	SkipSpace(),
 	Header("Monsters"),
-	Header("--------------------"),
 
 	Header("New Hounds"),
 	BinaryConfig("lightninghounds", "Lightning Hounds", "Lightning Hounds are part of hound waves.", true),
@@ -501,7 +502,6 @@ configuration_options =
 	Header("Spiders"),
 	BinaryConfig("alljumperspiders", "Regular Spiders Jump", "Normal spiders leap, just like spider warriors.", true),
 	BinaryConfig("spiderwarriorcounter", "Warrior Counter", "Warrior spiders (and depth dwellers) perform a counter-attack when attacked (also lowers health to 300).", true),
-	BinaryConfig("trapdoorspiders", "Trapdoor Spiders", "Enables the spawn of trapdoor spider mounds on worldgen. Their dens are usually covered in a resource rich grass.", true),
 	SkipSpace(),
 
 	Header("New Ruins Monsters"),
@@ -515,8 +515,10 @@ configuration_options =
 	BinaryConfig("desertscorpions", "Scorpions", "Scorpions plague the desert lands. They will spawn from desert turf within the desert during the day.", true),
 	BinaryConfig("pinelings", "Pinelings", "Stumps will become pinelings if awoken by a treeguard, or can happen naturally to existing old stumps.", true),
 	BinaryConfig("pollenmites", "Pollen Mites", "Pollen mites spawn in spring and quickly infest the nearby area.", false),
-	Header("Standard Creatures"),
+	BinaryConfig("maxhphitters", "Max HP Damage", "Some monsters deal Max HP damage\nTurn this off if you're having problems with mods which also interact with it.", true),
+	SkipSpace(),
 
+	Header("Standard Creatures"),
 	BinaryConfig("angrypenguins", "Territorial Penguins","Penguins will aggresively defend their land.", true),
 	BinaryConfig("harder_pigs", "Harder Pigs","Pigs have  a new counter and charge attack.", true),
 	BinaryConfig("harder_walrus","Harder MacTusk","Mactusk has a counter attack and can throw traps.", true),
@@ -525,43 +527,33 @@ configuration_options =
 	BinaryConfig("hungryfrogs", "Hungry Frogs", "Frogs eat anything left on the floor.", true),
 	BinaryConfig("cowardfrogs", "Frog Anti-cheese", "Frogs flee from bosses to prevent cheesing.", true),
 	BinaryConfig("toads", "Toads", "Toads replace frogs in the second autumn and release poisonous clouds on death.", true),
-
 	SkipSpace(),
-	Header("--------------------"),
 
 -----------------------------
 -- Bosses --
 -----------------------------
-	Header(""),
-	Header("Boss Config"),
-	Header("--------------------"),
+	Header("Bosses"),
 	Header("Additional Seasonal Giants"),
 	BinaryConfig("mother_goose", "Mother Goose", "Mother Goose will now attack the player in spring, similar to the Reign of Giant's Moose.", true),
 	BinaryConfig("wiltfly", "Wilting Dragonfly", "Dragonfly will now leave her arena during summer and attack the player, similar to Reign of Giant's Dragonfly.", true),
-	Header(""),
+	SkipSpace(),
 
-	Header("Harder Bosses"),
+	Header("Giants & Bosses"),
 	BinaryConfig("harder_spiderqueen","Harder Spider Queen", "Spider Queen ocasionally spits web balls that trap players.", true),
 	BinaryConfig("harder_deerclops", "Deerclops Mutations", "Three different harder versions of deerclops spawn instead of the vanilla variant.", true),
 	BinaryConfig("caveclops","Cave Deerclops", "During winter, Deerclops can break through the cealing to reach you.", true),
 	BinaryConfig("harder_moose", "Harder Goose", "Goose fight has more mechanics and is harder. This also disables Moose AOE. Does not apply to Mother Goose.", true),
 	BinaryConfig("harder_bearger", "Harder Bearger", "Enabling this option makes bearger's fight contain more attacks, and will make bearger more actively seek out you.", true),
 	BinaryConfig("harder_leifs", "Harder Treeguards", "Enabling this option makes treeguards perform root attacks, inflict knockback, and summon pinelings.", true),
-	Header(""),
+	SkipSpace(),
 
-	Header("Harder Raid Bosses"),
+	Header("Raid Bosses"),
 	BinaryConfig("harder_dragonfly", "Harder Dragonfly", "Dragonfly now has knockback on hit.", true),
 	BinaryConfig("harder_lavae", "Exploding Lavae", "Lavae will now leave exploding paste upon death, knocks holes in walls.", true),
-	Header(""),
-
 	BinaryConfig("harder_beequeen", "Harder Bee Queen", "Bee Queen now has AOE attached to her main attack.", true),
 	BinaryConfig("rework_minotaur_disabled", "Ancient Guardian Rework", "[CURRENTLY BROKEN] The Ancient Guardian's fight is reworked, includes more attacks and a stunning mechanic.", false),
 	BinaryConfig("reworked_eyes", "Reworked Eyes of Terror", "Eye of Terror and the Twins have new attacks, inspired by their Terraria counterparts.", true),
-	Header(""),
-
-
-
-
+	SkipSpace(),
 
 	Header("Boss Quality of Life"),
     {
@@ -638,6 +630,7 @@ configuration_options =
 	},
 	BinaryConfig("crabking_claws", "Crabking Fight Adjustment", "The Crabkings imposing claws now deal 500 damage to the king when killed.", false),
 	SkipSpace(),
+	
 	Header("Experimental"),
 	--BinaryConfig("honeybandbuff", "Honey Poultice Buff", "[Experimental] Crafting honey poultice gives 2, healing with it gives 10 health overtime as well as 30 health.", false),
 	BinaryConfig("announce_basestatus", "[DEV] Announce Ratsniffer","[Developer Tool] Prints the exact rat sniff values to chat to be viewed in real time.",false),

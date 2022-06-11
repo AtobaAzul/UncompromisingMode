@@ -259,7 +259,6 @@ end
 
         inst:AddTag("hat")
         inst:AddTag("gore_horn")
-		inst:AddTag("vetsitem")
  
         MakeInventoryFloatable(inst)
 

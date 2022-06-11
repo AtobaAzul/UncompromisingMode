@@ -57,10 +57,10 @@ local function onnear(inst, target)
 
 			local x, y, z = inst.Transform:GetWorldPosition()
 			inst:Remove()
-			local effect = SpawnPrefab("round_puff_fx_hi")
+			local effect = SpawnPrefab("pine_needles_chop")
 			effect.Transform:SetPosition(x, y, z)
 			stumpling.Transform:SetPosition(x, y, z)
-			stumpling.sg:GoToState("hit")
+			stumpling.sg:GoToState("spawn")
 		end
 	end
 end

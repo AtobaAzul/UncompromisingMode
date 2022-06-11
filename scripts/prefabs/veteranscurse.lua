@@ -95,7 +95,7 @@ local function oneat(inst, data)
 
 	inst.components.eater:SetAbsorptionModifiers(0, inst.hungerabsorption or 1, 0)
 		
-	local strongstomach = inst.components.eater.strongstomach and data.food:HasTag("monstermeat")
+	local strongstomach = inst.components.eater.strongstomach and data.food:HasTag("monstermeat") or (inst.components.eater.eatsrawmeat or inst:HasTag("eatsrawmeat")) and data.food:HasTag("rawmeat")
 
 	local hasaffinity = inst.components.foodaffinity:HasPrefabAffinity(data.food)
 	

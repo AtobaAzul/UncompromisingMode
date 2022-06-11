@@ -139,7 +139,7 @@ if not TUNING.DSTU.ISLAND_ADVENTURES then
             print(self.varggraceperiod ~= nil and self.varggraceperiod + TUNING.DSTU.VARGWAVES_DELAY_PERIOD or "nil")
             
             --replaces the first hound in a wave with a random boss hound
-            if pt and self.spawn_boss and magmaspawn_pt ~= nil and TUNING.DSTU.VARGWAVES and not TUNING.DSTU.BETA_COMPATIBILITY then
+            if pt and self.spawn_boss and magmaspawn_pt ~= nil and TUNING.DSTU.VARGWAVES then
                 self.varggraceperiod = GLOBAL.TheWorld.state.cycles
                     
                     self.spawn_boss = false

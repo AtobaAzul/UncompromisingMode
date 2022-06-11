@@ -68,6 +68,22 @@ inst.destroy = false
 inst.components.linearcircler.setspeed = 0.2
 end
 
+local function PlayBreakSound(inst)
+	inst.SoundEmitter:PlaySound("dontstarve/creatures/slurtle/shatter",nil,0.5)
+end
+
+local function SummonShard(inst)
+	local x,y,z = inst.Transform:GetWorldPosition()
+	local fx = SpawnPrefab("moonstorm_glass_ground_fx")
+	fx.Transform:SetPosition(x,y,z)
+	fx.Transform:SetScale(0.5,0.5,0.5)
+end
+
+local function BreakShard(inst)
+	local x,y,z = inst.Transform:GetWorldPosition()
+	SpawnPrefab("mining_moonglass_fx").Transform:SetPosition(x,y,z)
+end
+
 local function fn_glassshards()
     local inst = CreateEntity()
 
@@ -97,7 +113,7 @@ local function fn_glassshards()
 	
 	inst:AddTag("NOBLOCK")
 	inst:AddTag("NOCLICK")
-
+	inst:AddTag("moonglass")
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -124,6 +140,9 @@ local function fn_glassshards()
 	inst:AddComponent("timer")
 	inst:ListenForEvent("timerdone", SlowDown)
 	inst.Speen = Speen
+	inst.PlayBreakSound = PlayBreakSound
+	inst.BreakShard = BreakShard
+	inst.SummonShard = SummonShard
     return inst
 end
 

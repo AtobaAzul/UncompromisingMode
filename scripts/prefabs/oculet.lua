@@ -120,8 +120,11 @@ local function fn()
     inst.components.finiteuses:SetUses(1000)
 
     inst:AddComponent("equippable")
-    inst.components.equippable.equipslot = EQUIPSLOTS.BODY
-
+    if EQUIPSLOTS["NECK"] ~= nil then
+        inst.components.equippable.equipslot = EQUIPSLOTS.NECK
+    else
+        inst.components.equippable.equipslot = EQUIPSLOTS.BODY
+    end
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 

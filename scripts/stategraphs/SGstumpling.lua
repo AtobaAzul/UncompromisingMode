@@ -1,27 +1,9 @@
 require("stategraphs/commonstates")
 
-local actionhandlers =
-{
-    ActionHandler(ACTIONS.EAT,
-        function(inst, action)
-            if action.target:HasTag("oceanfish") and action.target:HasTag("oceanfishable") then
-                return "gobble"
-            else
-                return action.target.components.oceanfishable ~= nil and "bitehook_pre" or "eat"
-            end
-        end),
-    ActionHandler(ACTIONS.TOSS,
-        function(inst, action)
-            if not inst.sg:HasStateTag('busy') then
-                inst.sg:GoToState("shoot", action.target) 
-            end
-        end),
-}
-
 local events =
 {
     EventHandler("attacked", function(inst)
-        if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then
+        if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("busy") then
             inst.sg:GoToState("hit")
         end
     end),
@@ -33,11 +15,6 @@ local events =
             inst.sg:GoToState("attack", data.target)
         end
     end),
-    EventHandler("doink", function(inst, data)
-        if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then
-            inst.sg:GoToState("shoot", data.target)
-        end
-    end),
     EventHandler("spawn", function(inst)
         inst.sg:GoToState("spawn")
     end),
@@ -46,60 +23,6 @@ local events =
     CommonHandlers.OnLocomote(true, false),
     CommonHandlers.OnFreeze(),
 }
-
-
-
-local function testExtinguish(inst)
-    if inst:HasTag("swimming") and inst.components.burnable:IsBurning() then
-        inst.components.burnable:Extinguish()
-    end
-end
-
-local function UpdateRunSpeed(inst)
-    local rod = (inst.components.oceanfishable ~= nil and inst.components.oceanfishable:GetRod()) or nil
-    local check_tension = rod ~= nil and math.abs(anglediff(inst.Transform:GetRotation(), inst:GetAngleToPoint(rod.Transform:GetWorldPosition()))) > 90
-    local tension_mod = check_tension and (1 - math.min(0.8, rod.components.oceanfishingrod:GetTensionRating()))
-                        or 1
-
-    inst.components.locomotor.runspeed = TUNING.SQUID_RUNSPEED * tension_mod
-end
-
-local function setdivelayering(inst,under)
-    local dive = false
-    if inst:HasTag("swimming") and under then
-        dive = true
-    end
-
-    if dive and not inst.under then
-        inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
-        inst.AnimState:SetLayer(LAYER_WIP_BELOW_OCEAN)        
-        inst.under = true
-    else
-        inst.AnimState:SetSortOrder(0)
-        inst.AnimState:SetLayer(LAYER_WORLD)
-        inst.under = nil
-    end
-end
-
-local function RestorRunSpeed(inst)
-    inst.components.locomotor.runspeed = TUNING.SQUID_RUNSPEED
-end
-
-local function RestoreCollidesWith(inst)
-    inst.Physics:CollidesWith(COLLISION.WORLD 
-                        + COLLISION.OBSTACLES
-                        + COLLISION.SMALLOBSTACLES
-                        + COLLISION.CHARACTERS
-                        + COLLISION.GIANTS)
-end
-
-local function AddNoClick(inst)
-    inst:AddTag("NOCLICK")
-end
-
-local function RemoveNoClick(inst)
-    inst:RemoveTag("NOCLICK")
-end
 
 local function GoToIdle(inst)
     inst.sg:GoToState("idle")
@@ -111,7 +34,6 @@ local states =
         name = "idle",
         tags = { "idle", "canrotate" },
         onenter = function(inst, playanim)
-            setdivelayering(inst, false)
             
             inst.Physics:Stop()
 
@@ -167,21 +89,19 @@ local states =
 
         onenter = function(inst)
             inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("spawn", false)
-            AddNoClick(inst)
+            inst.AnimState:PlayAnimation("birth", false)
+			inst.AnimState:PushAnimation("jump_dirt", false)
         end,
 
         events =
-        {
-            EventHandler("animover", GoToIdle),
+        {	
+			EventHandler("animover",function(inst)
+				local effect = SpawnPrefab("pine_needles_chop")
+				local x,y,z = inst.Transform:GetWorldPosition()
+				effect.Transform:SetPosition(x, y, z)
+			end),
+            EventHandler("animqueueover", GoToIdle),
         },
-
-        timeline =
-        {
-            TimeEvent(14*FRAMES, RemoveNoClick),
-        },
-
-        onexit = RemoveNoClick,
     },
 
     State{
@@ -198,12 +118,6 @@ local states =
             EventHandler("animover", function(inst) inst:Remove() end),
         },
 
-        timeline =
-        {
-            TimeEvent(12*FRAMES, AddNoClick),
-        },
-
-        onexit = RemoveNoClick,
     },    
 
     State{
@@ -259,233 +173,6 @@ local states =
             end),
         },
     },
-
-    State{
-        name = "shoot",
-        tags = { "attack", "busy" },
-
-        onenter = function(inst, target)
-            if not target then
-                target = inst.components.combat.target
-            end
-
-            if target then
-                inst.sg.statemem.target = target
-            end
-
-            inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("flee")
-        end,
-
-        timeline =
-        {   
-            TimeEvent(7*FRAMES, function(inst) inst.SoundEmitter:PlaySound(inst.sounds.spit) end),
-            TimeEvent(15*FRAMES, function(inst)
-                if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then
-                    inst.sg.statemem.inkpos = Vector3(inst.sg.statemem.target.Transform:GetWorldPosition())            
-                    inst:LaunchProjectile(inst.sg.statemem.inkpos)
-
-                    inst.components.timer:StopTimer("ink_cooldown")
-                    inst.components.timer:StartTimer("ink_cooldown", 10 + math.random()*3)
-                end
-            end),
-        },
-
-        events =
-        {
-            EventHandler("animover", GoToIdle),
-        },
-    },    
-
-    State{
-        name = "eat",
-        tags = { "busy" },
-
-        onenter = function(inst, cb)
-            inst.Physics:Stop()
-            inst.components.combat:StartAttack()
-            inst.AnimState:PlayAnimation("attack", false)
-        end,
-
-        timeline =
-        {
-            TimeEvent(14*FRAMES, function(inst)
-                inst.SoundEmitter:PlaySound(inst.sounds.bite)
-            end),
-        },
-
-        events =
-        {           
-            EventHandler("animover", GoToIdle),
-        },
-    },
-
-    State{
-        name = "gobble",
-        tags = { "busy" },
-
-        onenter = function(inst, cb)
-            inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("gobble_pre")
-            setdivelayering(inst,true)
-            inst.components.timer:StartTimer("gobble_cooldown", 2 + math.random()*5)
-            AddNoClick(inst)
-        end,      
-
-        timeline =
-        {
-            TimeEvent(12*FRAMES, function(inst) 
-                inst.components.locomotor:Stop()
-                inst.components.locomotor:EnableGroundSpeedMultiplier(false)
-                inst.Physics:SetMotorVelOverride(20,0,0)
-            end),
-        },
-
-        events =
-        {
-            EventHandler("animover", function(inst)
-                inst.SoundEmitter:PlaySound(inst.sounds.bite)
-                local action = inst:GetBufferedAction()
-                if action and action.target and action.target:IsValid() then
-                    if math.random() < inst.geteatchance(inst, action.target) then
-                        if action.target.components.oceanfishable and action.target.components.oceanfishable:GetRod() then
-                            local rod = action.target.components.oceanfishable:GetRod()
-                            inst.components.oceanfishable:SetRod(rod)
-
-                            inst:PushEvent("attacked",{attacker = rod.components.oceanfishingrod.fisher})
-                        end
-                        action.target:Remove() 
-                    else
-                        inst.sg.statemem.miss = true
-                        action.target:PushEvent("dobreach")
-                    end
-                end
-                inst:ClearBufferedAction()
-
-                if inst.sg.statemem.miss then
-                    inst.sg:GoToState("gobble_fail")
-                else
-                    inst.sg:GoToState("gobble_success")
-                end
-            end),
-        },
-
-        onexit = function(inst)
-            inst.components.locomotor:Stop()
-            inst.components.locomotor:EnableGroundSpeedMultiplier(true)
-            inst.Physics:ClearMotorVelOverride()
-            if inst.components.oceanfishable:GetRod() then
-                inst.components.oceanfishable:ResetStruggling()
-            end
-            setdivelayering(inst,false)
-            RemoveNoClick(inst)
-        end,
-    },
-
-    State{
-        name = "gobble_success",
-        tags = { "busy" },
-
-        onenter = function(inst)
-            setdivelayering(inst,true)            
-            local herd = inst.components.herdmember:GetHerd()
-            if herd then
-                for k,v in pairs(herd.components.herd.members)do
-                    if inst.foodtarget and k.foodtarget and k.foodtarget == inst.foodtarget then
-                        k.foodtarget = nil
-                    end
-                end
-            end
-            inst.foodtarget = nil
-
-            inst.components.locomotor:Stop()
-            inst.components.locomotor:EnableGroundSpeedMultiplier(false)
-            inst.Physics:SetMotorVelOverride(20,0,0)
-            inst.AnimState:PlayAnimation("gobble_success")
-            inst.SoundEmitter:PlaySound(inst.sounds.gobble)
-
-            AddNoClick(inst)
-        end,
-
-        timeline =
-        {
-            TimeEvent(6*FRAMES, function(inst) 
-                inst.components.locomotor:Stop()
-                inst.components.locomotor:EnableGroundSpeedMultiplier(true)
-                inst.Physics:ClearMotorVelOverride()
-            end),
-
-            TimeEvent(10*FRAMES, function(inst)
-                setdivelayering(inst,false)
-            end),
-
-            TimeEvent(12*FRAMES, RemoveNoClick),
-        },
-
-        events =
-        {
-            EventHandler("animover", GoToIdle),
-        },
-        
-        onexit = function(inst)
-            inst.components.locomotor:Stop()
-            inst.components.locomotor:EnableGroundSpeedMultiplier(true)
-            inst.Physics:ClearMotorVelOverride()
-            setdivelayering(inst,false)
-
-            RemoveNoClick(inst)
-        end,        
-    },
-
-    State{
-        name = "gobble_fail",
-        tags = { "busy" },
-
-        onenter = function(inst)
-            setdivelayering(inst,true)
-            inst.Physics:Stop()    
-            inst.AnimState:PlayAnimation("gobble_fail")
-
-            -- If the squid misses, give up this target and choose another from it's school 
-            -- so that it doesn't chase it off into no mans land away from the rest of the squid
-            if inst.foodtarget then
-                local herd = inst.foodtarget.components.herdmember:GetHerd()
-                local list = {}
-                if herd then
-                    for k,v in pairs(herd.components.herd.members)do
-                        if k ~= inst.foodtarget then
-                            table.insert(list,k)
-                        end
-                    end
-                end
-                if #list > 0 then
-                    inst.foodtarget = list[math.random(1,#list)]
-                end
-            end
-
-            AddNoClick(inst)
-        end,
-
-        timeline =
-        {
-            TimeEvent(7*FRAMES, function(inst)
-                setdivelayering(inst,false)
-            end),
-            TimeEvent(9*FRAMES, RemoveNoClick),
-        },
-
-        events =
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("taunt") end),
-        },
-
-        onexit = function(inst)
-            setdivelayering(inst,false)
-            RemoveNoClick(inst)
-        end,
-    },
-
-
     State{
         name = "hit",
         tags = { "busy", "hit" },
@@ -525,114 +212,12 @@ local states =
     },
 
     State{
-        name = "fling",
-        tags = { "busy","jumping" },
-
-        onenter = function(inst, norepeat)
-            if inst:IsOnOcean() then
-                inst.fling_land = false
-            else
-                inst.fling_land = true
-            end        
-            inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("jump")
-            inst.AnimState:SetTime(5*FRAMES)
-            inst.AnimState:PushAnimation("jump_loop")       
-
-            inst:StopBrain()     
-
-            inst.components.locomotor:Stop()
-            inst.components.locomotor:EnableGroundSpeedMultiplier(false)
-
-            inst.Physics:SetMotorVelOverride(10,0,0)
-
-            inst.sg:SetTimeout(0.35) 
-
-            --inst.Physics:SetCollisionMask(COLLISION.GROUND)
-        end,
-
-        onupdate = function(inst)     
-        end,
-
-        onexit = function(inst)
-            inst.components.locomotor:Stop()
-            inst.components.locomotor:EnableGroundSpeedMultiplier(true)
-            inst.Physics:ClearMotorVelOverride()
-
-            RestoreCollidesWith(inst)
-        end,        
-
-        timeline =
-        {
-            TimeEvent(9 * FRAMES, function(inst) 
-                if inst:HasTag("swimming") then 
-                    SpawnPrefab("splash_green").Transform:SetPosition(inst.Transform:GetWorldPosition())
-                else 
-                    PlayFootstep(inst,0.2)
-                end 
-            end),
-        },
-
-        ontimeout = function(inst)
-            inst.sg:GoToState("fling_pst")
-        end,
-    },    
-
-    State{
-        name = "fling_pst",
-        tags = { "busy","jumping" },
-
-        onenter = function(inst, norepeat)
-            inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("jump_pst")
-
-            inst.components.locomotor:Stop()
-            inst.components.locomotor:EnableGroundSpeedMultiplier(false)
-
-            inst.Physics:SetMotorVelOverride(10,0,0) 
-            --inst.Physics:SetCollisionMask(COLLISION.GROUND)
-        end, 
-
-        onupdate = function(inst)
-        end,
-
-        timeline =
-        {
-            TimeEvent(8 * FRAMES, function(inst) 
-                inst.fling_land = nil
-                inst.components.locomotor:Stop() 
-                if inst:HasTag("swimming") then
-                    SpawnPrefab("splash_green").Transform:SetPosition(inst.Transform:GetWorldPosition())
-                end
-                RestoreCollidesWith(inst)
-            end),
-        },
-
-
-        onexit = function(inst)
-            inst.components.locomotor:Stop()
-            inst.components.locomotor:EnableGroundSpeedMultiplier(true)
-            inst.Physics:ClearMotorVelOverride()     
-            inst:RestartBrain()
-            RestoreCollidesWith(inst)     
-        end,  
-
-        events =
-        {
-            EventHandler("animover", GoToIdle),
-        },        
-    },  
-
-    State{
         name = "death",
         tags = { "busy" },
 
         onenter = function(inst, reanimating)
-            if reanimating then
-                inst.AnimState:Pause()
-            else
-                inst.AnimState:PlayAnimation("dead")   
-            end
+
+            inst.AnimState:PlayAnimation("dead")   
             inst.Physics:Stop()
             RemovePhysicsColliders(inst)
             inst.SoundEmitter:PlaySound(inst.sounds.death)
@@ -660,158 +245,6 @@ local states =
         end,
     },
 
-    State{
-        name = "forcesleep",
-        tags = { "busy", "sleeping" },
-
-        onenter = function(inst)
-            inst.components.locomotor:StopMoving()
-            inst.AnimState:PlayAnimation("sleep_loop", true)
-        end,
-    },
-
--- FISHING STATES
-
-    State{
-        name = "bitehook_pre",
-        tags = {"busy"},
-        
-        onenter = function(inst)
-            inst.components.locomotor:Stop()
-            inst.AnimState:PlayAnimation("struggle_pre")
-            inst:PerformBufferedAction()
-            AddNoClick(inst)
-        end,
-
-        events =
-        {
-            EventHandler("animover", function(inst)
-                if inst.AnimState:AnimDone() then
-                    if inst.components.oceanfishable ~= nil and inst.components.oceanfishable:GetRod() ~= nil then
-                        inst.sg:GoToState("bitehook_loop")
-                    else
-                        inst.sg:GoToState("bitehook_jump")
-                    end
-                end
-            end),
-        },
-
-        onexit = RemoveNoClick,
-    },    
-
-    State{
-        name = "bitehook_loop",
-        tags = {"busy"},
-        
-        onenter = function(inst, remaining_loops)
-            inst.components.locomotor:Stop()
-            inst.AnimState:PlayAnimation("struggle_loop", true)
-            inst.sg:SetTimeout(3 + math.random() * 0.5) -- TODO: make tuning varaibles per fish def
-        end,
-        
-        onupdate = function(inst)
-            if inst.components.oceanfishable ~= nil and inst.components.oceanfishable:GetRod() ~= nil then
-                if not inst:HasTag("partiallyhooked") then
-                    inst.sg.statemem.not_interupted = true
-                    inst.sg:GoToState("idle")
-                end
-            else 
-                inst.sg:GoToState("bitehook_jump")
-            end
-        end,
-
-        ontimeout = function(inst)
-            if inst:HasTag("partiallyhooked") then
-                inst.sg.statemem.not_interupted = true
-                inst.sg:GoToState("bitehook_jump")
-            end
-        end,
-
-        onexit = function(inst)
-            if not inst.sg.statemem.not_interupted and inst.components.oceanfishable ~= nil then
-                inst.components.oceanfishable:SetRod(nil)
-            end
-        end,
-    },
-
-    State{
-        name = "bitehook_jump",
-        tags = {"busy", "jumping"},
-        
-        onenter = function(inst)
-            inst.components.locomotor:Stop()
-            inst.AnimState:PlayAnimation("struggle_to_breach")
-            inst.AnimState:PushAnimation("breach", false)
-        end,
-
-        timeline =
-        {
-            TimeEvent(3*FRAMES, function(inst) 
-                local theta, speed = math.random() * 2 * PI, 1
-                inst.Physics:SetMotorVelOverride(math.sin(theta) * speed, 0, math.cos(theta) * speed)
-            end),
-            TimeEvent(21*FRAMES, function(inst)
-                inst.Physics:ClearMotorVelOverride()
-                inst.components.locomotor:Stop()
-
-                AddNoClick(inst)
-            end),
-        },
-        
-        events =
-        {
-            EventHandler("animqueueover", function(inst)
-                if inst.AnimState:AnimDone() then
-                    if inst.components.oceanfishable ~= nil then
-                        inst.components.oceanfishable:SetRod(nil)
-                    end
-
-                    if inst.components.eater ~= nil then
-                        inst.components.eater.lasteattime = GetTime()
-                    end
-
-                    -- if hook is set then start fighting otherwise, drop hook and go to idle, refresh brain
-
-                    inst.sg:GoToState("idle")
-                end
-            end),
-        },
-
-        onexit = function(inst)
-            inst.Physics:ClearMotorVelOverride()
-            if inst:HasTag("partiallyhooked") and inst.components.oceanfishable ~= nil then
-                inst.components.oceanfishable:SetRod(nil)
-            end
-
-            RemoveNoClick(inst)
-        end,
-    },    
-
-    State{
-        name = "breach",
-        tags = {"busy"},
-        
-        onenter = function(inst, remaining_loops)
-            inst.components.locomotor:Stop()
-            inst.AnimState:PlayAnimation("breach_pre", false)
-            inst.AnimState:PushAnimation("breach", false)
-        end,
-
-        events =
-        {
-            EventHandler("animqueueover", GoToIdle),
-        },
-
-        timeline =
-        {
-            TimeEvent(25*FRAMES, AddNoClick),
-        },
-
-        onexit = RemoveNoClick,
-    },  
-
--- END FISHING STATES
-
 -- RUN STATES START HERE
 
     State{
@@ -821,50 +254,12 @@ local states =
         onenter = function(inst)
             inst.components.locomotor:RunForward()
             inst.AnimState:PlayAnimation("run_pre")
-
-            --UpdateRunSpeed(inst)
-
-            --inst.AnimState:SetSortOrder(ANIM_SORT_ORDER_BELOW_GROUND.UNDERWATER)
-            --inst.AnimState:SetLayer(LAYER_WIP_BELOW_OCEAN)            
-        end,
-
-        onupdate = function(inst)
-            --UpdateRunSpeed(inst)
-        end,
-
-        timeline = 
-        {
-            TimeEvent(1 * FRAMES, function(inst)  
-                if inst:HasTag("swimming") then
-                end
-            end), 
-            TimeEvent(3 * FRAMES, function(inst) 
-                testExtinguish(inst) 
-                setdivelayering(inst,true)
-            end),
-            TimeEvent(5 * FRAMES, function(inst)
-                if inst:HasTag("swimming") then
-                    AddNoClick(inst)
-                end
-            end),
-        },        
-
-        onexit = function(inst)
-            if inst.staydim then
-                inst.staydim = nil
-            else
-                if inst:HasTag("swimming") then
-                end
-            end
-            setdivelayering(inst,false)
-
-            RemoveNoClick(inst)
+           
         end,
 
         events =
         {
             EventHandler("animover", function(inst)
-                inst.staydim = true 
                 inst.sg:GoToState("run") 
             end),
         },
@@ -875,92 +270,38 @@ local states =
         tags = { "moving", "running", "canrotate" },
 
         onenter = function(inst)
-            setdivelayering(inst,true)
             inst.components.locomotor:RunForward()
             inst.AnimState:PlayAnimation("run_loop", true)
             inst.sg:SetTimeout(inst.AnimState:GetCurrentAnimationLength())
-
-            if inst:HasTag("swimming") then
-                inst.waketask = inst:DoPeriodicTask(0.3, function()
-                    local wake = SpawnPrefab("wake_small")
-                    local rotation = inst.Transform:GetRotation()
-
-                    local theta = rotation * DEGREES
-                    local offset = Vector3(math.cos( theta ), 0, -math.sin( theta ))
-                    local pos = Vector3(inst.Transform:GetWorldPosition()) + offset
-                    wake.Transform:SetPosition(pos.x,pos.y,pos.z)
-
-                    wake.Transform:SetRotation(rotation - 90)
-                end)
-
-                AddNoClick(inst)
-            end
-
-            UpdateRunSpeed(inst)
         end,
 
         timeline =
         {
             TimeEvent(0, function(inst)                
-                if inst:HasTag("swimming") then 
-                    inst.Physics:Stop()  
-                else
-                    PlayFootstep(inst,0.2)
-                end                
+                PlayFootstep(inst,0.2)              
             end),
             TimeEvent(2*FRAMES, function(inst) 
-                if not inst:HasTag("swimming") then
-                    inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/deciduous/drake_run_rustle")
-                end 
+                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/deciduous/drake_run_rustle")
             end),
 
             TimeEvent(4 * FRAMES, function(inst)
-                if inst:HasTag("swimming") then 
-                    inst.SoundEmitter:PlaySound(inst.sounds.swim)
-                else
-                    PlayFootstep(inst,0.2)                    
-                end
+                PlayFootstep(inst,0.2)                    
             end),
             TimeEvent(6*FRAMES, function(inst) 
-                if not inst:HasTag("swimming") then
-                    inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/deciduous/drake_run_rustle") 
-                end 
+                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/deciduous/drake_run_rustle") 
             end),
             TimeEvent(7 * FRAMES, function(inst) 
-                if inst:HasTag("swimming") then 
-                    inst.components.locomotor:RunForward() 
-                end 
+                inst.components.locomotor:RunForward() 
             end),
             TimeEvent(8*FRAMES, function(inst) 
-                if not inst:HasTag("swimming") then
-                    inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/deciduous/drake_run_rustle")
-                end 
+                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/deciduous/drake_run_rustle")
             end),
             TimeEvent(10*FRAMES, function(inst) 
-                if not inst:HasTag("swimming") then
-                    inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/deciduous/drake_run_rustle") 
-                end 
+                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/deciduous/drake_run_rustle") 
             end),
         },
 
-        onexit = function(inst)     
-            if inst.waketask then
-                inst.waketask:Cancel()
-                inst.waketask = nil
-            end
-
-            if inst.staydim then
-                inst.staydim = nil
-            elseif inst:HasTag("swimming") then
-            end
-
-            setdivelayering(inst,false)
-
-            RemoveNoClick(inst)
-        end,
-
         ontimeout = function(inst)
-            inst.staydim = true 
             inst.sg:GoToState("run") 
         end,
     },
@@ -970,26 +311,8 @@ local states =
         tags = { "idle" },
 
         onenter = function(inst)
-            setdivelayering(inst,true)
             inst.components.locomotor:StopMoving()
             inst.AnimState:PlayAnimation("run_pst")
-
-            if inst:HasTag("swimming") then
-                AddNoClick(inst)
-            end
-        end,
-
-        timeline =
-        {
-            TimeEvent(7 * FRAMES, function(inst)
-                setdivelayering(inst,false)
-            end),
-            TimeEvent(9 * FRAMES, RemoveNoClick),
-        },
-
-        onexit = function(inst)
-            setdivelayering(inst,false)
-            RemoveNoClick(inst)
         end,
 
         events =
@@ -997,11 +320,68 @@ local states =
             EventHandler("animqueueover", GoToIdle),
         },
     },   
+	
+    State{
+        name = "sleep",
+        tags = {"busy", "sleeping", "nowake"},
+
+        onenter = function(inst)
+            inst.AnimState:PlayAnimation("embed")
+        end,
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+                if inst.AnimState:AnimDone() then
+                    inst.sg.statemem.continuesleeping = true
+                    inst.sg:GoToState(inst.sg.mem.sleeping and "sleeping" or "spawn")
+                end
+            end),
+        },
+
+        onexit = function(inst)
+            if not inst.sg.statemem.continuesleeping and inst.components.sleeper ~= nil and inst.components.sleeper:IsAsleep() then
+                inst.components.sleeper:WakeUp()
+            end
+        end,
+    },
+
+    State{
+        name = "sleeping",
+        tags = { "busy", "sleeping" },
+
+        onenter = function(inst)
+            inst.AnimState:PlayAnimation("embed_loop")
+        end,
+
+        timeline =
+        {
+            TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dangerous_sea/creatures/water_plant/sleep") end),
+            TimeEvent(44*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dangerous_sea/creatures/water_plant/sleep") end),
+        },
+
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+                if inst.AnimState:AnimDone() then
+                    inst.sg.statemem.continuesleeping = true
+                    inst.sg:GoToState("sleeping")
+                end
+            end),
+        },
+
+        onexit = function(inst)
+            if not inst.sg.statemem.continuesleeping and inst.components.sleeper ~= nil and inst.components.sleeper:IsAsleep() then
+                inst.components.sleeper:WakeUp()
+            end
+        end,
+    },
 }
 
 
 
-CommonStates.AddSleepStates(states,
+--[[CommonStates.AddSleepStates(states,
 {
     sleeptimeline =
     {
@@ -1014,10 +394,10 @@ CommonStates.AddSleepStates(states,
         TimeEvent(11*FRAMES, function(inst) inst.SoundEmitter:PlaySound("hookline/creatures/squid/run") end),
         TimeEvent(16*FRAMES, function(inst) inst.SoundEmitter:PlaySound("hookline/creatures/squid/run") end),
     },
-})
+})]]
 
 CommonStates.AddWalkStates(states, nil, nil, nil, true)
 
 CommonStates.AddFrozenStates(states)
 
-return StateGraph("squid", states, events, "idle", actionhandlers)
+return StateGraph("stumpling", states, events, "idle")

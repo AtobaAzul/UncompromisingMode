@@ -83,7 +83,7 @@ local function MakeRatBurrow(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 
     local function IsValidRatBurrowPosition(x, z)
-        if #TheSim:FindEntities(x, 0, z, TUNING.ANTLION_SINKHOLE.RADIUS, { "antlion_sinkhole_blocker" }) > 0 then
+        if #TheSim:FindEntities(x, 0, z, (TUNING.ANTLION_SINKHOLE.RADIUS * 2), { "antlion_sinkhole_blocker" }) > 0 then
             return false
         end
         if #TheSim:FindEntities(x, 0, z, 50, { "player", "playerghost" }) > 0 then
@@ -100,7 +100,7 @@ local function MakeRatBurrow(inst)
         return true
     end
 	
-	for i = 1, 4 do
+	for i = 1, 8 do
 		inst.x1, inst.z1 = x + math.random(-200, 200), z + math.random(-200, 200)
 		
 		if IsValidRatBurrowPosition(inst.x1, inst.z1) then
@@ -170,14 +170,17 @@ local function IsEligible(doer)
 			and not area:CurrentlyInTag("nohasslers")
 end
 
-
+-----------------------------------------------------------------------------------------------
+-- Commented out the ratburrow spawning stuff because it could get annoying, and im a HORDER --
+-- _________________________________________________________________________________________ --
+-----------------------------------------------------------------------------------------------
 local function StartRaid(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local players = FindPlayersInRange(x, y, z, 50)
 	
 	local ratburrow = TheSim:FindFirstEntityWithTag("ratburrow")
 	
-	if ratburrow ~= nil then
+	--if ratburrow ~= nil then
 		TheWorld:PushEvent("ratcooldown", inst)
 		
 		if ratwarning == nil then
@@ -202,11 +205,11 @@ local function StartRaid(inst)
 			inst:DoTaskInTime(math.random(3, 6), StartRaid)
 		end
 		
-	else
+	 --[[else
 		TheWorld:PushEvent("ratcooldownshort", inst)
-		--print("No burrow, so make one ya dink!")
-		MakeRatBurrow(inst)
-	end
+		print("No burrow, so make one ya dink!")
+		MakeRatBurrow(inst)]]
+	--end
 	
 	--print("Rat Raid Warning :", ratwarning)
 end

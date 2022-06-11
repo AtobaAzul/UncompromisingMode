@@ -127,21 +127,21 @@ env.AddPrefabPostInit("forest", function(inst)
 end)
 
 if TUNING.DSTU.SPAWNMOTHERGOOSE and not TUNING.DSTU.ISLAND_ADVENTURES then
-env.AddPrefabPostInit("forest", function(inst)
-    if not TheWorld.ismastersim then
-        return
-    end
-	inst:AddComponent("gmoosespawner")
-end)
+	env.AddPrefabPostInit("forest", function(inst)
+		if not TheWorld.ismastersim then
+			return
+		end
+		inst:AddComponent("gmoosespawner")
+	end)
 end
 
 if TUNING.DSTU.SPAWNWILTINGFLY and not TUNING.DSTU.ISLAND_ADVENTURES then
-env.AddPrefabPostInit("forest", function(inst)
-    if not TheWorld.ismastersim then
-        return
-    end
-	inst:AddComponent("mock_dragonflyspawner")
-end)
+	env.AddPrefabPostInit("forest", function(inst)
+		if not TheWorld.ismastersim then
+			return
+		end
+		inst:AddComponent("mock_dragonflyspawner")
+	end)
 end
 
 env.AddPrefabPostInit("cave", function(inst)

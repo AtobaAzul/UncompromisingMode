@@ -35,8 +35,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "That's one part of home I was hoping NOT to see again."
     DESCRIBE.UNCOMPROMISING_RATHERD = "Seems you've been ratted out!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "Seems you've been ratted out!"
-    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Seems you've been ratted out!"
-    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Seems you've been ratted out!"
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "It wasn't made with structural integrity in mind."
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Just keep the goods flowing,and there'll be no issues."
 	
 	DESCRIBE.WINKY =
         {
@@ -217,7 +217,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
         }
 	DESCRIBE.ANTIHISTAMINE = "It'll help my lungs stay clean."
     ANNOUNCE.CURSED_ITEM_EQUIP = "Seems like safety gloves aren't enough!"
-    DESCRIBE.VETSITEM = "I'd accept any bargain to use a tool like this!"
+	DESCRIBE.VETSITEM = "I'd accept any bargain to use a tool like this!"
 	DESCRIBE.SCREECHER_TRINKET = "What practical use does it have, other than being creepy?"
 	ACTIONFAIL.GIVE = {NOTNIGHT = "This ones a night owl."}
 
@@ -345,9 +345,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "Must be the boss of those rats."
 	DESCRIBE.PIED_PIPER_FLUTE = "I never was the best leader."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "I think we've found ourselves a target."
-	DESCRIBE.WINONA_TOOLBOX = ""
-	DESCRIBE.OCEAN_SPEAKER = "Now if I could just see its insides..."
-	--DESCRIBE.UM_SIREN = "Heh, she certainly knows how to run her workplace."
+
 	
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "This thing is about to pack up and leave me sinking!"
 
@@ -356,3 +354,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 		NOT_ENOUGH_CHARGE = "It's outta juice!",
 		CHARGE_FULL = "It's fully charged!",
 	}
+	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "There's the socket."
+	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "Better wear some gloves next time!"
+	

@@ -147,7 +147,6 @@ local function fn()
     inst.AnimState:PlayAnimation("idle")
 	
 	inst:AddTag("cursedantler")
-	inst:AddTag("vetsitem")
 
     MakeInventoryFloatable(inst, "med", 0.2, 0.65)
 

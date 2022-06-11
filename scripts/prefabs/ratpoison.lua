@@ -66,6 +66,8 @@ local function fn()
     inst.AnimState:PlayAnimation("idle_full")
 	
 	inst.entity:SetPristine()
+
+	inst:AddTag("NORATCHECK")
 	
 	if not TheWorld.ismastersim then 
 		return inst
@@ -82,6 +84,8 @@ local function fn()
 	
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem:SetOnPutInInventoryFn(OnPicked)
+	inst.components.inventoryitem:SetOnPickupFn(OnPicked)
+	inst.components.inventoryitem.cangoincontainer = false
 	
 	inst:AddComponent("perishable")
 	inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)

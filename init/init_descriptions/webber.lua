@@ -35,8 +35,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "Nice fur!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "It's looking at us! Hey there little guy!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "It's looking at us! Hey there little guy!"
-    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "It's looking at us! Hey there little guy!"
-    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "It's looking at us! Hey there little guy!"
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "It's one of her treasure troves, she's a helpful rat."
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "She puts so many things in there! I hope she doesn't mind if we peek."
 	
 	DESCRIBE.WINKY =
         {
@@ -215,7 +215,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
         }
 	DESCRIBE.ANTIHISTAMINE = "It stops us from sneezing! We're not sure how, but it does!"
     ANNOUNCE.CURSED_ITEM_EQUIP = "Ouchies!"
-    DESCRIBE.VETSITEM = "Our hands aren't cursed enough for this!"
+	DESCRIBE.VETSITEM = "Our hands aren't cursed enough for this!"
 	DESCRIBE.SCREECHER_TRINKET = "I don't like it."
 	ACTIONFAIL.GIVE = {NOTNIGHT = "I think its sleeping? But, in the day time?"}
 
@@ -342,14 +342,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "Can we have your hat?"
 	DESCRIBE.PIED_PIPER_FLUTE = "We always wanted to learn how to play."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Nice backpack!"
-	DESCRIBE.WINONA_TOOLBOX = ""
-	DESCRIBE.OCEAN_SPEAKER = "I want to get closer but he seems weary."
-	--DESCRIBE.UM_SIREN = "Her songs make our head all fuzzy..."
 	
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "The raft won't sink, but we will!"
 
 	ACTIONFAIL.CHARGE_FROM =
 	{
-		NOT_ENOUGH_CHARGE = "test",
-		CHARGE_FULL = "test",
+		CHARGE_FULL = "Already fully charged.",
 	}
+	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "I think we did it right!"
+	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "Agh! We don't think that's right."
+	
