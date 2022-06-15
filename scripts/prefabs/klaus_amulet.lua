@@ -20,9 +20,12 @@ local function DoubleSlap(owner)
 		
 		local damagecalc = ((damage / 2) * damagemult) * damagemultex
 
-		
+		--[[
 		target:DoTaskInTime(0.3, function(target, owner, equip) 
-			if target ~= nil and owner.sg:HasStateTag("attack") and owner:IsNear(target, (range + 0.75)) then
+		
+			local dist = target ~= nil and distsq(target:GetPosition(), owner:GetPosition()) <= owner.components.combat:CalcAttackRangeSq(target) or false
+		
+			if target ~= nil and owner.sg:HasStateTag("attack") and dist then
 				
 				local equip = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 				if equip ~= nil then
@@ -31,7 +34,7 @@ local function DoubleSlap(owner)
 				
 				target.components.combat:GetAttacked(owner, damagecalc, equip) 
 			end
-		end, owner)
+		end, owner)]]
 	end
 end
 

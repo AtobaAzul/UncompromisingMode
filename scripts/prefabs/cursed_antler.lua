@@ -110,7 +110,7 @@ local function onattack(inst, attacker, target)
             target.components.freezable:SpawnShatterFX()
         end
 		
-		if not target.components.health:IsDead() then
+		if not target.components.health:IsDead() and target.components.combat ~= nil then
 			--target.components.health:DoDelta(-66 * 200, false, attacker, false, attacker)
 			target.components.combat:GetAttacked(attacker, 66, nil)
 		end

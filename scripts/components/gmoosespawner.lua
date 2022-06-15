@@ -115,6 +115,8 @@ local function TryStartAttacks(killed)
             local attackdelay = (TheWorld.state.springlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperspring + 1) 
             if killed == true then
                 attackdelay = attackdelay * HASSLER_KILLED_DELAY_MULT
+			else
+                --attackdelay = attackdelay * 2
             end
             -- Remove randomization in case that shifts it too far
             --local attackrandom = 0.1*attackdelay

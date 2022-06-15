@@ -47,6 +47,30 @@ local function DoTalkSound(inst)
     end
 end
 
+local function DoMockAttack(inst)
+	local target = inst.components.combat ~= nil and inst.components.combat.target
+	local equip = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+	local dist = target ~= nil and distsq(target:GetPosition(), inst:GetPosition()) <= inst.components.combat:CalcAttackRangeSq(target) or false
+	
+	if equip ~= nil and dist then
+		local damage = equip.components.weapon ~= nil and equip.components.weapon:GetDamage(inst, target)
+		local damagemult = inst.components.combat.damagemultiplier ~= nil and inst.components.combat.damagemultiplier or 1
+		local damagemultex = inst.components.combat.externaldamagemultipliers ~= nil and inst.components.combat.externaldamagemultipliers:Get() or 1
+			
+		local damagecalc = ((damage / 2) * damagemult) * damagemultex
+			
+		if target ~= nil and inst.sg:HasStateTag("attack") then	
+			local equip = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+			
+			if equip ~= nil then
+				equip.components.weapon:OnAttack_NoDurabilityLoss(inst, target)
+			end
+					
+			target.components.combat:GetAttacked(inst, damagecalc, equip) 
+		end
+	end
+end
+
 local events =
 {
 	EventHandler("sneeze", function(inst, data)
@@ -425,12 +449,12 @@ State{
         tags = { "busy", "attack", "notalking", "abouttoattack", "autopredict" },
 
         onenter = function(inst)
-            --[[if inst.components.combat:InCooldown() then
+            if inst.components.combat:InCooldown() then
                 inst.sg:RemoveStateTag("abouttoattack")
                 inst:ClearBufferedAction()
                 inst.sg:GoToState("idle", true)
                 return
-            end]]
+            end
             local buffaction = inst:GetBufferedAction()
             local target = buffaction ~= nil and buffaction.target or nil
             local equip = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
@@ -585,7 +609,8 @@ State{
                         inst.sg.statemem.projectilesound = nil
                     end
                     if inst.sg.statemem.projectiledelay <= 0 then
-                        inst:PerformBufferedAction()
+                        DoMockAttack(inst)
+						inst:ClearBufferedAction()
                         inst.sg:RemoveStateTag("abouttoattack")
                     end
                 end
@@ -601,7 +626,8 @@ State{
             end),
             TimeEvent(6 * FRAMES, function(inst)
                 if inst.sg.statemem.isbeaver then
-                    inst:PerformBufferedAction()
+                    DoMockAttack(inst)
+                    inst:ClearBufferedAction()
                     inst.sg:RemoveStateTag("abouttoattack")
                 elseif inst.sg.statemem.ischop then
                     inst.SoundEmitter:PlaySound("dontstarve/wilson/attack_weapon", nil, nil, true)
@@ -609,7 +635,8 @@ State{
             end),
             TimeEvent(7 * FRAMES, function(inst)
                 if inst.sg.statemem.ismoose then
-                    inst:PerformBufferedAction()
+                    DoMockAttack(inst)
+                    inst:ClearBufferedAction()
                     inst.sg:RemoveStateTag("abouttoattack")
                 end
             end),
@@ -617,16 +644,19 @@ State{
                 if not (inst.sg.statemem.isbeaver or
                         inst.sg.statemem.ismoose or
                         inst.sg.statemem.iswhip or
+						inst.sg.statemem.ispocketwatch or
                         inst.sg.statemem.isbook) and
                     inst.sg.statemem.projectiledelay == nil then
-                    inst:PerformBufferedAction()
+                    DoMockAttack(inst)
+                    inst:ClearBufferedAction()
                     inst.sg:RemoveStateTag("abouttoattack")
 					inst.sg:RemoveStateTag("busy")
                 end
             end),
             TimeEvent(10 * FRAMES, function(inst)
-                if inst.sg.statemem.iswhip or inst.sg.statemem.isbook then
-                    inst:PerformBufferedAction()
+                if inst.sg.statemem.iswhip or inst.sg.statemem.isbook or inst.sg.statemem.ispocketwatch then
+                    DoMockAttack(inst)
+                    inst:ClearBufferedAction()
                     inst.sg:RemoveStateTag("abouttoattack")
 					inst.sg:RemoveStateTag("busy")
                 end

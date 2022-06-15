@@ -124,7 +124,7 @@ local function OnPickup(inst, data)
 	if data.item.components.explosive == nil then
 		inst:AddTag("carrying")
 		data.item:AddTag("raided")
-		local item = string.lower(data.item.prefab)
+		local item = string.lower(data.item.prefab) ~= nil and string.lower(data.item.prefab)
 		local skin_build = data.item:GetSkinBuild()
 		inst._item = SpawnPrefab(item)
 		

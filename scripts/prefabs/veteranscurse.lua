@@ -166,24 +166,21 @@ local function oneat(inst, data)
 end
 
 local function ForceOvertimeFoodEffects(inst)
-	if not inst:HasTag("UM_foodregen") then
-	
-		if inst.healthabsorption == nil then
-			inst.healthabsorption = inst.components.eater.healthabsorption
-		end
-
-		if inst.hungerabsorption == nil then
-			inst.hungerabsorption = inst.components.eater.hungerabsorption
-		end
-		
-		if inst.sanityabsorption == nil then
-			inst.sanityabsorption = inst.components.eater.sanityabsorption
-		end
-
-		inst.components.eater:SetAbsorptionModifiers(0, inst.hungerabsorption or 1, 0)
-
-		inst:ListenForEvent("oneat", oneat)
+	if inst.healthabsorption == nil then
+		inst.healthabsorption = inst.components.eater.healthabsorption
 	end
+
+	if inst.hungerabsorption == nil then
+		inst.hungerabsorption = inst.components.eater.hungerabsorption
+	end
+		
+	if inst.sanityabsorption == nil then
+		inst.sanityabsorption = inst.components.eater.sanityabsorption
+	end
+
+	inst.components.eater:SetAbsorptionModifiers(0, inst.hungerabsorption or 1, 0)
+
+	inst:ListenForEvent("oneat", oneat)
 end
 
 local function AttachCurse(inst, target)

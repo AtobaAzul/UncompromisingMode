@@ -155,7 +155,7 @@ UpdateSpawn = function(player, params)
             end
         end
         for i = #toremove, params.targetpop + 1, -1 do
-			if i ~= nil then
+			if i ~= nil and i > 0 then
 				local ent = table.remove(toremove, math.random(i))
 				ent.persists = false
 				ent.wantstodespawn = true
