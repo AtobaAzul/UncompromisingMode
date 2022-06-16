@@ -9,13 +9,13 @@ if not TUNING.DSTU.ISLAND_ADVENTURES then
     -- THE IMPORTANT STUFF --
     --------------------------------------------------
         self.spawn_boss = false
-        self.boss_grace = TUNING.DSTU.VARGWAVES_BOSS_GRACE --grace period in days before boss hounds can spawn
+        self.boss_grace = 100 --TUNING.DSTU.VARGWAVES_BOSS_GRACE --grace period in days before boss hounds can spawn
 
         self.seasonal_chance = 0.33 --chance for seasonal hounds to spawn in their respective seasons
         self.spawnamount = 0
         self.seasonal_boss_chance = 0.5 --chance to spawn a seasonal boss hound instead of the default boss (defined on the line below)
         self.default_boss_prefab = "warg"
-        self.varggraceperiod = TUNING.DSTU.VARGWAVES_BOSS_GRACE - TUNING.DSTU.VARGWAVES_DELAY_PERIOD
+        self.varggraceperiod = 15 --TUNING.DSTU.VARGWAVES_BOSS_GRACE - TUNING.DSTU.VARGWAVES_DELAY_PERIOD
 
         --framework for future spawn additions
         --seasonal boss hounds will be chosen randomly from their respective season tables
