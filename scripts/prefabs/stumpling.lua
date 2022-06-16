@@ -52,6 +52,12 @@ local function KeepTarget(inst, target)
     return inst:IsNear(target, TUNING.SQUID_TARGET_KEEP)
 end
 
+local function IsEligible(player)
+	--local area = player.components.areaaware
+	return TheWorld.Map:IsVisualGroundAtPoint(player.Transform:GetWorldPosition())
+			--and area:GetCurrentArea() ~= nil 
+			--and not area:CurrentlyInTag("nohasslers")
+end
 
 local function OnAttacked(inst, data)
     inst.components.combat:SetTarget(data.attacker)
