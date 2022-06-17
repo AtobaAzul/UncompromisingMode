@@ -63,10 +63,14 @@ local function DoMockAttack(inst)
 			local equip = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
 			
 			if equip ~= nil then
+				if equip.prefab == "pocketwatch_weapon" and equip.components.fueled ~= nil and not equip.components.fueled:IsEmpty() then
+					equip.components.fueled:DoDelta(TUNING.TINY_FUEL)
+				end
+				
 				equip.components.weapon:OnAttack_NoDurabilityLoss(inst, target)
 			end
-					
-			target.components.combat:GetAttacked(inst, damagecalc, equip) 
+	
+			target.components.combat:GetAttacked(inst, damagecalc, equip)
 		end
 	end
 end

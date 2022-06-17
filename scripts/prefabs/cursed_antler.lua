@@ -115,7 +115,7 @@ local function onattack(inst, attacker, target)
 			target.components.combat:GetAttacked(attacker, 66, nil)
 		end
 		
-		local ents = TheSim:FindEntities(x, y, z, 2.5, nil, { "INLIMBO", "player", "abigail" })
+		local ents = TheSim:FindEntities(x, y, z, 2.5, nil, { "INLIMBO", "player", "companion" })
 		for i, v in ipairs(ents) do
 			if v ~= inst and v ~= target and v:IsValid() and not v:IsInLimbo() then
 				if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
