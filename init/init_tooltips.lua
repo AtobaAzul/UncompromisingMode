@@ -105,7 +105,7 @@ else
 	TOOLTIP.MOLEHAT = "- Grants protection against Sand Storms when worn."
 end
 
-if TUNING.DSTU.HAYFEVER then
+if GetModConfigData("hayfever") then
 	TOOLTIP.GASMASK = TOOLTIP.GASMASK.."\n- Prevents Hayfever while worn."
 	TOOLTIP.PLAGUEMASK = TOOLTIP.GASMASK.."\n- Prevents Hayfever while worn."
 end
