@@ -142,6 +142,33 @@ if CurrentRelease.GreaterOrEqualTo("R22_PIRATEMONKEYS") then
 				
 			}
 	}})
+	AddRoom("BGGiantTrees", 
+	{
+		colour = {r=1,g=1,b=1,a=.50}, 
+		value = WORLD_TILES.HOODEDFOREST,
+		tags = {"RoadPoison","hoodedcanopy"}, --"ForceDisconnected"
+		contents =  
+		{	
+			distributepercent = 0.3,
+			distributeprefabs = {
+			sapling = 0.2,
+			evergreen_sparse = 0.5,
+			hooded_fern = 0.5,
+			ghost_walrus = 0.005,
+			blueberryplantbuncher = 0.035,
+			hooded_mushtree_tall = 0.05,
+			giant_tree_infested = 0.005,
+			lightrays_canopy = 0.25,
+			},
+				countprefabs =	
+			{
+				
+				giant_tree = function () return 6 + math.random(0,1) end,
+				extracanopyspawner = function () return 10 + math.random(0,1) end,
+				pitcherplant = function () return math.random(0,1) end,
+				
+			}
+	}})
 	AddRoom("SnapDragons", 
 	{
 		colour = {r=1,g=1,b=1,a=.50}, 
