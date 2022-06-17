@@ -1,5 +1,7 @@
 local function onnextsneeze(self, sneezetime)
-    self.inst.replica.hayfever:SetNextSneezeTime(sneezetime)
+    if self.inst.replica.hayfever ~= nil then
+        self.inst.replica.hayfever:SetNextSneezeTime(sneezetime)
+    end
 end
 
 local Hayfever = Class(function(self, inst)
