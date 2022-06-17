@@ -1,7 +1,4 @@
 GLOBAL.require("map/terrain")
-
-------Turf Using Tile Adder From ADM's Turf Mod
-modimport("tile_adder.lua")
 local GROUND_OCEAN_COLOR = { -- Color for the main island ground tiles
     primary_color =        {0, 0, 0, 25},
     secondary_color =      {0, 20, 33, 0},
@@ -9,48 +6,117 @@ local GROUND_OCEAN_COLOR = { -- Color for the main island ground tiles
     minimap_color =        {46, 32, 18, 64}
 }
 
-AddTile(
-    "HOODEDFOREST",
-    102,
-    "hoodedmoss",
-    {
-        noise_texture = "levels/textures/noise_hoodedmoss.tex",
-        runsound = "dontstarve/movement/walk_grass",
-        walksound = "dontstarve/movement/walk_grass",
-        snowsound = "dontstarve/movement/run_snow",
-        mudsound = "dontstarve/movement/run_mud",
-        colors = GROUND_OCEAN_COLOR
-    },
-    {noise_texture = "levels/textures/mini_noise_hoodedmoss.tex"}
-)
-AddTile(
-    "ANCIENTHOODEDFOREST",
-    110,
-    "ancienthoodedturf",
-    {
-        noise_texture = "levels/textures/noise_jungle.tex",
-        runsound = "dontstarve/movement/walk_grass",
-        walksound = "dontstarve/movement/walk_grass",
-        snowsound = "dontstarve/movement/run_snow",
-        mudsound = "dontstarve/movement/run_mud",
-        colors = GROUND_OCEAN_COLOR
-    },
-    {noise_texture = "levels/textures/mini_noise_jungle.tex"}
-)
+if CurrentRelease.GreaterOrEqualTo("R22_PIRATEMONKEYS") then
+	AddTile(
+		"HOODEDFOREST", --tile_name 1
+		"LAND", --tile_range 2
+		{ --tile_data 3
+			ground_name = "hoodedmoss",
+			old_static_id = 102,
+		}, 
+		{ --ground_tile_def 4
+			name = "hoodedmoss.tex", 
+			atlas = "hoodedmoss.xml", 
+			noise_texture = "noise_hoodedmoss.tex",
+			runsound = "dontstarve/movement/walk_grass",
+			walksound = "dontstarve/movement/walk_grass",
+			snowsound = "dontstarve/movement/run_snow",
+			mudsound = "dontstarve/movement/run_mud",
+			colors = GROUND_OCEAN_COLOR
+		},
+		{ --minimap_tile_def 5
+			name = "hoodedmoss.tex",
+			atlas = "hoodedmoss.xml",
+			noise_texture = "mini_noise_hoodedmoss.tex"
+		},
+		{ --turf_def 6
+			name = "hoodedmoss",
+			anim = "hoodedmoss",
+			bank_build = "hfturf"
+		}
+	)
 
-local worldtiledefs = require "worldtiledefs"
+	AddTile(
+		"ANCIENTHOODEDFOREST", 
+		"LAND", 
+		{
+			ground_name = "ancienthoodedturf",
+			old_static_id = 110,
+		}, 
+		{ 
+			name = "ancienthoodedturf.tex", 
+			atlas = "ancienthoodedturf.xml", 
+			noise_texture = "noise_jungle.tex",
+			runsound = "dontstarve/movement/walk_grass",
+			walksound = "dontstarve/movement/walk_grass",
+			snowsound = "dontstarve/movement/run_snow",
+			mudsound = "dontstarve/movement/run_mud",
+			colors = GROUND_OCEAN_COLOR
+		},
+		{
+			name = "ancienthoodedturf.tex",
+			atlas = "ancienthoodedturf.xml",
+			noise_texture = "mini_noise_jungle.tex"
+		},
+		{
+			name = "ancienthoodedturf",
+			anim = "ancienthoodedturf",
+			bank_build = "hfturf"
+		}
+	)
 
-local MOD_TURF_PROPERTIES = {
-    [GROUND.HOODEDFOREST] = {name = "hoodedmoss", anim = "hoodedmoss", bank_build = "hfturf"},
-    [GROUND.ANCIENTHOODEDFOREST] = {name = "ancienthoodedturf", anim = "ancienthoodedturf", bank_build = "hfturf"}
-}
+	ChangeTileRenderOrder(GLOBAL.WORLD_TILES.HOODEDFOREST, GLOBAL.WORLD_TILES.DIRT)
+	ChangeTileRenderOrder(GLOBAL.WORLD_TILES.ANCIENTHOODEDFOREST, GLOBAL.WORLD_TILES.DIRT)
 
-for k, v in pairs(MOD_TURF_PROPERTIES) do
-    worldtiledefs.turf[k] = MOD_TURF_PROPERTIES[k]
+	ChangeMiniMapTileRenderOrder(GLOBAL.WORLD_TILES.HOODEDFOREST, GLOBAL.WORLD_TILES.DIRT)
+	ChangeMiniMapTileRenderOrder(GLOBAL.WORLD_TILES.ANCIENTHOODEDFOREST, GLOBAL.WORLD_TILES.DIRT)
+else
+	------Turf Using Tile Adder From ADM's Turf Mod
+	modimport("tile_adder.lua")
+
+	AddTile(
+		"HOODEDFOREST",
+		102,
+		"hoodedmoss",
+		{
+			noise_texture = "levels/textures/noise_hoodedmoss.tex",
+			runsound = "dontstarve/movement/walk_grass",
+			walksound = "dontstarve/movement/walk_grass",
+			snowsound = "dontstarve/movement/run_snow",
+			mudsound = "dontstarve/movement/run_mud",
+			colors = GROUND_OCEAN_COLOR
+		},
+		{noise_texture = "levels/textures/mini_noise_hoodedmoss.tex"}
+	)
+	AddTile(
+		"ANCIENTHOODEDFOREST",
+		110,
+		"ancienthoodedturf",
+		{
+			noise_texture = "levels/textures/noise_jungle.tex",
+			runsound = "dontstarve/movement/walk_grass",
+			walksound = "dontstarve/movement/walk_grass",
+			snowsound = "dontstarve/movement/run_snow",
+			mudsound = "dontstarve/movement/run_mud",
+			colors = GROUND_OCEAN_COLOR
+		},
+		{noise_texture = "levels/textures/mini_noise_jungle.tex"}
+	)
+
+	local worldtiledefs = require "worldtiledefs"
+
+	local MOD_TURF_PROPERTIES = {
+		[GROUND.HOODEDFOREST] = {name = "hoodedmoss", anim = "hoodedmoss", bank_build = "hfturf"},
+		[GROUND.ANCIENTHOODEDFOREST] = {name = "ancienthoodedturf", anim = "ancienthoodedturf", bank_build = "hfturf"}
+	}
+
+	for k, v in pairs(MOD_TURF_PROPERTIES) do
+		worldtiledefs.turf[k] = MOD_TURF_PROPERTIES[k]
+	end
+
+	ChangeTileTypeRenderOrder(GLOBAL.GROUND.HOODEDFOREST, GLOBAL.GROUND.DIRT)
+	ChangeTileTypeRenderOrder(GLOBAL.GROUND.ANCIENTHOODEDFOREST, GLOBAL.GROUND.DIRT)
 end
-
-ChangeTileTypeRenderOrder(GLOBAL.GROUND.HOODEDFOREST, GLOBAL.GROUND.DIRT)
-ChangeTileTypeRenderOrder(GLOBAL.GROUND.ANCIENTHOODEDFOREST, GLOBAL.GROUND.DIRT)
 
 ------
 
@@ -390,20 +456,37 @@ Layouts["hooded_town"] = StaticLayout.Get("map/static_layouts/hooded_town")
 Layouts["rose_garden"] = StaticLayout.Get("map/static_layouts/rose_garden")
 Layouts["hf_holidays"] = StaticLayout.Get("map/static_layouts/hf_holidays")
 
-Layouts["RatLockBlocker1"] = {
-    type = GLOBAL.LAYOUT.CIRCLE_EDGE,
-    start_mask = GLOBAL.PLACE_MASK.NORMAL,
-    fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
-    layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
-    ground_types = {GLOBAL.GROUND.ROCKY},
-    defs = {
-        rocks = {"ratacombslock_rock_spawner"}
-    },
-    count = {
-        rocks = 1
-    },
-    scale = 0.1
-}
+if CurrentRelease.GreaterOrEqualTo("R22_PIRATEMONKEYS") then
+    Layouts["RatLockBlocker1"] = {
+        type = GLOBAL.LAYOUT.CIRCLE_EDGE,
+        start_mask = GLOBAL.PLACE_MASK.NORMAL,
+        fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+        layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
+        ground_types = {GLOBAL.WORLD_TILES.ROCKY},
+        defs = {
+            rocks = {"ratacombslock_rock_spawner"}
+        },
+        count = {
+            rocks = 1
+        },
+        scale = 0.1
+    }
+else
+	Layouts["RatLockBlocker1"] = {
+		type = GLOBAL.LAYOUT.CIRCLE_EDGE,
+		start_mask = GLOBAL.PLACE_MASK.NORMAL,
+		fill_mask = GLOBAL.PLACE_MASK.IGNORE_IMPASSABLE_BARREN_RESERVED,
+		layout_position = GLOBAL.LAYOUT_POSITION.CENTER,
+		ground_types = {GLOBAL.GROUND.ROCKY},
+		defs = {
+			rocks = {"ratacombslock_rock_spawner"}
+		},
+		count = {
+			rocks = 1
+		},
+		scale = 0.1
+	}
+end
 
 if GetModConfigData("hoodedforest") and not GLOBAL.KnownModIndex:IsModEnabled("workshop-1467214795") then
     AddRoomPreInit("HoodedTown", function(room)

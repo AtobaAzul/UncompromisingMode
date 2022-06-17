@@ -136,7 +136,7 @@ return {
 	"marsh_grass",
 	"web_net_splat_fx",
 	"web_bomb",
-	"hoodedforestturf",
+	"hoodedforestturf", -- might cause pirate monkey issues
 	"poopregenbuff",
 	"giant_tree",
 	"webbedcreature",

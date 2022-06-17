@@ -20,7 +20,7 @@ local component_post = {
 	"perishable",
 	--"carnivalevent",
 	"lootdropper",
-	"ambientsound",
+	--"ambientsound",
 	"foodaffinity",
 	"eater",
 	"edible",
@@ -292,6 +292,11 @@ end
 
 if GetModConfigData("electricalmishap_") ~= 0 then
 	table.insert(prefab_post,"nightstick")
+end
+
+
+if not TUNING.DSTU.UPDATE_CHECK then
+	table.insert(component_post,"ambientsound")
 end
 
 modimport("postinit/sim")

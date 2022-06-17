@@ -164,9 +164,16 @@ env.AddPrefabPostInitAny(function(inst)
 end)
 
 --hornet; i dont care enough to know where to put this
-env.AddReplicableComponent("hayfever")
+--env.AddReplicableComponent("hayfever")
 
 
+--I don't know where else to put this
+env.AddPrefabPostInit("aphid", function(inst)
+	if TUNING.DSTU.ISLAND_ADVENTURES then
+		inst:AddComponent("appeasement")
+		inst.components.appeasement.appeasementvalue = TUNING.TOTAL_DAY_TIME
+	end
+end)
 
 
 
