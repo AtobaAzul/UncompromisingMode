@@ -109,6 +109,7 @@ end
 if GetModConfigData("hayfever") then
 	TOOLTIP.GASMASK = TOOLTIP.GASMASK.."\n- Prevents Hayfever while worn."
 	TOOLTIP.PLAGUEMASK = TOOLTIP.PLAGUEMASK.."\n- Prevents Hayfever while worn."
+	TOOLTIP.BEEHAT = "- Protects against certain bug's IDFK help!!!"
 end
 
 if TUNING.DSTU.GOTOBED then
