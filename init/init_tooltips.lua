@@ -43,7 +43,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	--uncomp content
 	RAT_WHIP = "- Stronger when well fed.",
 	AIR_CONDITIONER = "- Can crush up Mushrooms for helpful stat clouds.",
-	ANCIENT_AMULET_RED = "- Drops soul orbs when attacked, which will replenish lost health when picked up.",
+	ANCIENT_AMULET_RED = "- Drops soul orbs when attacked, which will replenish lost health when picked up.\n- Revives players when haunted.",
 	ARMOR_GLASSMAIL = "- Summons spinning Glass Shards when attacking enemies.\n- Loses shards when damage is taken.",
 	HONEY_LOG = "- Provides protection from Hayfever. Mostly useful for other allies.",
 	SALTPACK = "- Drops piles of salt, preventing buildup of Snow Piles.",
@@ -71,7 +71,7 @@ else
 end
 
 if TUNING.DSTU.SEWING_KIT then
-	TOOLTIP.SEWINGKIT = "- Doubled uses, but repairs less per use."
+	TOOLTIP.SEWING_KIT = "- Doubled uses, but repairs less per use."
 end
 
 if TUNING.DSTU.FLINGO_SETTING == "Fuelmuncher" then
@@ -101,6 +101,7 @@ if TUNING.DSTU.SNOWSTORMS then
 	TOOLTIP.WALL_MOONROCK_ITEM = "- Provides protection from Snow Storms."
 	TOOLTIP.YELLOWSTAFF = "- Dwarf Stars provide protection from Snow Storms."
 	TOOLTIP.MOLEHAT = "- Grants protection against Snow Storms / Sand Storms when worn."
+	TOOLTIP.DESERTHAT = "- Also works as protection against Snow Storms."
 else
 	TOOLTIP.MOLEHAT = "- Grants protection against Sand Storms when worn."
 end

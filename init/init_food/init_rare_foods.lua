@@ -200,11 +200,12 @@ end)
 -----------------------------------------------------------------
 -- Bunny huts respawn bunnies not as often
 -----------------------------------------------------------------
+--[[
 AddPrefabPostInit("rabbithouse", function (inst)
     if inst ~= nil and inst.components.spawner ~= nil then 
         inst.components.spawner:Configure("bunnyman", GLOBAL.TUNING.TOTAL_DAY_TIME*GLOBAL.TUNING.DSTU.BUNNYMAN_RESPAWN_TIME_DAYS)
     end
-end)
+end)]]
 
 -----------------------------------------------------------------
 -- Bees don't drop honey no more
