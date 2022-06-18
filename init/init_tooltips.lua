@@ -37,8 +37,11 @@ STRINGS.UNCOMP_TOOLTIP = {
 	WINONA_BATTERY_HIGH = "- Can charge electrical equipment.",
 	LIGHTNING_ROD = "- Can charge electrical equipment.",
     LIGHTER = "- Lasts forever in the hands of a pyromaniac.",
-    SISTURN = "- Petals inside decay into Mourning Glory.",
-    BANDAGE = "- Restores a bit of extra health over time.",
+	BANDAGE = "- Restores a bit of extra health over time.",
+    SISTURN = "- Petals inside decay into Mourning Glory.\n- Masks foul smells.",
+	POTTEDFERN = "- Masks foul smells.",
+	SUCCULENT_POTTED = "- Masks foul smells.",
+	ENDTABLE = "- Masks foul smells when decorated.",
 
 	--uncomp content
 	RAT_WHIP = "- Stronger when well fed.",
@@ -109,7 +112,7 @@ end
 if GetModConfigData("hayfever") then
 	TOOLTIP.GASMASK = TOOLTIP.GASMASK.."\n- Prevents Hayfever while worn."
 	TOOLTIP.PLAGUEMASK = TOOLTIP.PLAGUEMASK.."\n- Prevents Hayfever while worn."
-	TOOLTIP.BEEHAT = "- Protects against certain bug's IDFK help!!!"
+	TOOLTIP.BEEHAT = "- Stings won't cause allergic reactions."
 end
 
 if TUNING.DSTU.GOTOBED then

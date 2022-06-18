@@ -77,9 +77,9 @@ end
 local function onnear(inst, target)
 	if target ~= nil then
 		if target:HasTag("vetcurse") then
-			inst.components.talker:Say(GetString(inst.target, "VETERANCURSED"))
+			inst.components.talker:Say(GetString(target, "VETERANCURSED"))
 		else
-			inst.components.talker:Say(GetString(inst.target, "VETERANCURSETAUNT"))
+			inst.components.talker:Say(GetString(target, "VETERANCURSETAUNT"))
 		end
 	end
 	
