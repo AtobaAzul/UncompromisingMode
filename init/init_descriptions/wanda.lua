@@ -114,13 +114,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 	DESCRIBE.SHROOM_SKIN_FRAGMENT = "One piece of a whole."
 	DESCRIBE.AIR_CONDITIONER = "Why would I ever want to spray mushrooms into the air?"
 	DESCRIBE.SPOREPACK = "It's going to spread it's spores on everything. Gross!"
-<<<<<<< Updated upstream
-	DESCRIBE.SALTPACK = "Melt all your troubles away."
-	
-=======
 	DESCRIBE.SALTPACK = "Saves time on shoveling."
 
->>>>>>> Stashed changes
 	DESCRIBE.SCORPION = "Getting stung would be quite a bother!"
 	DESCRIBE.SCORPIONCARAPACE = "Slightly poisonous."
 	DESCRIBE.SCORPIONCARAPACECOOKED = "Not any more edible."
