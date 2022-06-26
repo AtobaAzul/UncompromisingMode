@@ -2,8 +2,8 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 require "behaviours/chaseandattack"
 
-local START_FACE_DIST = 15
-local KEEP_FACE_DIST = 20
+local START_FACE_DIST = 20
+local KEEP_FACE_DIST = 25
 
 local function LayEgg(inst)
     return inst.WantsToLayEgg
@@ -30,9 +30,11 @@ local function WhyAreYouRunning(self)
 					
 	local FightMe = ChaseAndAttack(self.inst)
 	local FaceMe = FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn)
+	local LayAnEgg = DoAction(self.inst, LayEgg)
 					
     table.insert(self.bt.root.children, 1, FightMe)
-    table.insert(self.bt.root.children, 2, FaceMe)
+    table.insert(self.bt.root.children, 2, LayAnEgg)
+    table.insert(self.bt.root.children, 3, FaceMe)
 end
 
 
