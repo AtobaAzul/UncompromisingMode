@@ -436,7 +436,7 @@ local function OnAttacked(player, data)
     if data ~= nil and
         --For a valid client side check, shadowattacker must be
         --false and not nil, pushed from player_classified
-        (data.isattackedbydanger == true or
+        (data.isattackedbydanger or
         --For a valid server side check, attacker must be non-nil
         (data.attacker ~= nil and
         not (data.attacker:HasTag("shadow") or

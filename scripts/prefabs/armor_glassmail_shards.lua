@@ -5,7 +5,7 @@ local function destroystuff(inst)
 	if inst.WINDSTAFF_CASTER == nil then
 		inst:Remove()
 	end
-	if inst.destroy == true and inst.hidden ~= true then
+	if inst.destroy and inst.hidden ~= true then
     local x, y, z = inst.Transform:GetWorldPosition()
 	
     local ents = TheSim:FindEntities(x, y, z, 2, nil, TARGET_IGNORE_TAGS, {"_health"})

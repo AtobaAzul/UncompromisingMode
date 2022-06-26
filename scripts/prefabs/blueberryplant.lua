@@ -6,8 +6,8 @@ local function on_anim_over(inst)
         return
     end
 
-	if inst.froze == true then
-	if inst.Harvestable == true then
+	if inst.froze then
+	if inst.Harvestable then
 	inst.AnimState:PushAnimation("idle_frozen", true)
 	else
 	inst.AnimState:PushAnimation("trap_idle", true)
@@ -41,7 +41,7 @@ local mine_no_tags = { "notraptrigger", "flying", "ghost", "playerghost", "snapd
 
 local function do_snap(inst)
     -- We're going off whether we hit somebody or not, so play the trap sound.
-	if inst.Harvestable == true then
+	if inst.Harvestable then
     inst.SoundEmitter:PlaySound("turnoftides/creatures/together/starfishtrap/trap")
 
     -- Do an AOE attack, based on how the combat component does it.
@@ -54,7 +54,7 @@ local function do_snap(inst)
     end
 	local otherbombs = TheSim:FindEntities(x, y, z, 3*TUNING.STARFISH_TRAP_RADIUS, {"blueberrybomb"}, mine_no_tags)
     for i, target in ipairs(otherbombs) do
-        if target ~= inst and target.components.mine and not target.components.mine.issprung and not target.froze == true then
+        if target ~= inst and target.components.mine and not target.components.mine.issprung and not target.froze then
 		target.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*12)
         end
     end
@@ -119,7 +119,7 @@ end
 
 local function on_deactivate(inst)
     if inst.components.lootdropper ~= nil then
-		if inst.Harvestable == true then
+		if inst.Harvestable then
 
 		inst.components.lootdropper:SpawnLootPrefab("giant_blueberry")
 		end	
@@ -135,7 +135,7 @@ local function on_deactivate(inst)
 end
 
 local function get_status(inst)
-    return (inst.components.mine.issprung and "REGROWING") or (inst.froze == true and "FROZE") or "READY"
+    return (inst.components.mine.issprung and "REGROWING") or (inst.froze and "FROZE") or "READY"
 end
 
 local function on_blueberry_dug_up(inst, digger)
@@ -185,7 +185,7 @@ end
 
 local function MakeWinter(inst)
 inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*0)
-if inst.Harvestable == true then
+if inst.Harvestable then
     inst.components.workable:SetWorkAction(ACTIONS.MINE)
     inst.components.workable:SetWorkLeft(1)
     inst.components.workable:SetOnFinishCallback(on_blueberry_mine)
@@ -231,11 +231,11 @@ inst.AnimState:PlayAnimation("melt")
 inst.froze = false
 end
 local function OnSpring(inst)
-if inst.pendingregrow == true or (inst.Harvestable == false and not inst.components.timer:TimerExists("regrow"))then
+if inst.pendingregrow or (inst.Harvestable == false and not inst.components.timer:TimerExists("regrow"))then
 Regrow(inst)
 inst.froze = false
 end
-if inst.Harvestable == true and inst.froze == true then
+if inst.Harvestable and inst.froze then
 inst:DoTaskInTime(3+math.random(0,15), Melt)
 end
 end
@@ -243,7 +243,7 @@ end
 local function Freeze(inst)
 if TheWorld.state.iswinter then
 MakeWinter(inst)
-if inst.Harvestable == true then
+if inst.Harvestable then
 inst.AnimState:PlayAnimation("freeze")
 inst.froze = true
 end

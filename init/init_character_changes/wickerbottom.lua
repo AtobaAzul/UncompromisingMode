@@ -14,7 +14,7 @@ GLOBAL.setfenv(1, GLOBAL)
 -- Leafy meat and bucket cost for applied horticulture
 -----------------------------------------------------------------
 
-if TUNING.DSTU.WICKERNERF == true then
+if TUNING.DSTU.WICKERNERF then
 	local BOOKS = 
 	{
 		"book_sleep",
@@ -47,7 +47,7 @@ if TUNING.DSTU.WICKERNERF == true then
 	end
 end
 
-if TUNING.DSTU.WICKERNERF_TENTACLES == true then
+if TUNING.DSTU.WICKERNERF_TENTACLES then
 	local function newtentacles(inst, reader)
 		if reader.components.sanity ~= nil and not reader.components.sanity:IsInsane() then
 			local pt = reader:GetPosition()
@@ -99,6 +99,6 @@ if TUNING.DSTU.WICKERNERF_TENTACLES == true then
 	end)
 end
 
-if TUNING.DSTU.WICKERNERF_HORTICULTURE == true then
+if TUNING.DSTU.WICKERNERF_HORTICULTURE then
 	Recipe("book_horticulture", {Ingredient("papyrus", 2), Ingredient("plantmeat", 1), Ingredient("poop", 5)}, CUSTOM_RECIPETABS.BOOKS, TECH.SCIENCE_ONE, nil, nil, nil, nil, "bookbuilder")
 end

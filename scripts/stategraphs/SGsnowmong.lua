@@ -23,7 +23,7 @@ local events =
             if not inst.sg:HasStateTag("idle") and not inst.sg:HasStateTag("moving") then return end
 
             if inst.components.locomotor:WantsToMoveForward() then
-                if inst.State == true then
+                if inst.State then
                     if not inst.sg:HasStateTag("moving") then
                         inst.sg:GoToState("walk_pre")
                     end
@@ -131,13 +131,13 @@ local states =
 
                 if inst.State == false then
                     inst.AnimState:PushAnimation("idle", true)
-                elseif inst.State == true then
+                elseif inst.State then
                     inst.AnimState:PushAnimation("idle_under", true)
                 end
             else
                 if inst.State == false then
                     inst.AnimState:PlayAnimation("idle", true)
-                elseif inst.State == true then
+                elseif inst.State then
                     inst.AnimState:PlayAnimation("idle_under", true)
                 end
             end       
@@ -235,7 +235,7 @@ local states =
 
         onenter = function(inst) 
             inst.components.locomotor:StopMoving()
-            if inst.State == true then
+            if inst.State then
                 inst.AnimState:PlayAnimation("enter")
                 inst.SoundEmitter:PlaySound("UCSounds/Grub/emerge")
                 inst.AnimState:PushAnimation("sleep_pre", false)

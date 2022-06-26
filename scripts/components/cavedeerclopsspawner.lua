@@ -109,7 +109,7 @@ local function ResetAttacks()
 end
 
 local function TryStartAttacks(killed)
-	if killed == true and #_activeplayers == 0 then
+	if killed and #_activeplayers == 0 then
 		local attackdelay = (TheWorld.state.winterlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperwinter + 1) 
 		attackdelay = attackdelay * HASSLER_KILLED_DELAY_MULT
 		_timetoattack = GetRandomWithVariance(attackdelay, 0)
@@ -123,7 +123,7 @@ local function TryStartAttacks(killed)
 			
 			local attackdelay = (TheWorld.state.winterlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperwinter + 1) 
             
-			if killed == true then
+			if killed then
                 attackdelay = attackdelay * HASSLER_KILLED_DELAY_MULT
             end
             -- Remove randomization in case that shifts it too far

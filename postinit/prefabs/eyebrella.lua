@@ -17,7 +17,7 @@ env.AddPrefabPostInit("eyebrellahat", function(inst)
 	
 	
 	-------------------------------------------------------------------------------------------
-	if TUNING.DSTU.EYEBRELLAREWORK == true then
+	if TUNING.DSTU.EYEBRELLAREWORK then
 		inst.components.fueled:InitializeFuelLevel(TUNING.EYEBRELLA_PERISHTIME*(12/9)) --12 Day Durability
 		inst.components.fueled.no_sewing = true
 		inst.components.fueled.fueltype = FUELTYPE.EYE

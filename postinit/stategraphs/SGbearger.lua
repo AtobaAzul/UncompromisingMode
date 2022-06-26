@@ -58,7 +58,7 @@ end
 
 local events={
 	EventHandler("doattack", function(inst, data)
-		if inst.rockthrow == true and not inst.components.health:IsDead() then
+		if inst.rockthrow and not inst.components.health:IsDead() then
             inst.sg:GoToState("pre_shoot", data.target)
 		else
 			onattackfn(inst)

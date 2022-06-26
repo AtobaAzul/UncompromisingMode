@@ -66,7 +66,7 @@ local function TryReanimate(self)
             self.reanimatetime = nil
         elseif self.reanimatetime == nil then
             self.reanimatetime = GetTime() + math.random() * .5
-        elseif self.reanimatetime == true then
+        elseif self.reanimatetime then
             self.inst:PushEvent("reanimate", { target = leader.components.combat.target })
         elseif self.reanimatetime < GetTime() then
             self.reanimatetime = true
@@ -77,7 +77,7 @@ local function TryReanimate(self)
             self.reanimatetime = nil
         elseif self.reanimatetime == nil then
             self.reanimatetime = GetTime() + 3
-        elseif self.reanimatetime == true then
+        elseif self.reanimatetime then
             self.inst:PushEvent("reanimate", { target = player })
         elseif self.reanimatetime < GetTime() then
             self.reanimatetime = true

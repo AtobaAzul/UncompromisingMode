@@ -52,7 +52,7 @@ end
 
 local function TryAddCrystal(inst)
 local rand = math.random(1,8)
-	if inst.lavae[rand].hidden == true then
+	if inst.lavae[rand].hidden then
 		inst.lavae[rand].hidden = false
 		inst.lavae[rand]:Show()
 		inst.lavae[rand].Light:Enable(true)
@@ -65,7 +65,7 @@ end
 local function NoCrystalsLeftToSpawn(inst)
 local val = true
 for i = 1,8 do
-	if inst.lavae[i].hidden == true then
+	if inst.lavae[i].hidden then
 		val = false 
 	end
 end

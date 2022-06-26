@@ -62,7 +62,7 @@ local function OnTimerDone(inst, data)
     if data ~= nil then
         if data.name == "1revive" then
             inst.lavaecond1 = "alive"
-            if inst.components.inventoryitem.owner ~= nil and inst.components.equippable.isequipped == true then
+            if inst.components.inventoryitem.owner ~= nil and inst.components.equippable.isequipped then
                 local owner = inst.components.inventoryitem.owner
                 local x, y, z = owner.Transform:GetWorldPosition()
                 local lavae1 = SpawnPrefab("armorlavae")
@@ -76,7 +76,7 @@ local function OnTimerDone(inst, data)
         end
         if data.name == "2revive" then
             inst.lavaecond2 = "alive"
-            if inst.components.inventoryitem.owner ~= nil and inst.components.equippable.isequipped == true then
+            if inst.components.inventoryitem.owner ~= nil and inst.components.equippable.isequipped then
                 local owner = inst.components.inventoryitem.owner
                 local x, y, z = owner.Transform:GetWorldPosition()
                 local lavae2 = SpawnPrefab("armorlavae")
@@ -90,7 +90,7 @@ local function OnTimerDone(inst, data)
         end
         if data.name == "3revive" then
             inst.lavaecond3 = "alive"
-            if inst.components.inventoryitem.owner ~= nil and inst.components.equippable.isequipped == true then
+            if inst.components.inventoryitem.owner ~= nil and inst.components.equippable.isequipped then
                 local owner = inst.components.inventoryitem.owner
                 local x, y, z = owner.Transform:GetWorldPosition()
                 local lavae3 = SpawnPrefab("armorlavae")

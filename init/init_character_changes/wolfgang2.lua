@@ -41,7 +41,7 @@ end
 local function UpdateMightiness(inst)
 	local hunger = inst.components.hunger:GetPercent()
 	
-	if TUNING.DSTU.WOLFGANG_HUNGERMIGHTY == true then
+	if TUNING.DSTU.WOLFGANG_HUNGERMIGHTY then
 		inst.components.mightiness:SetPercent(hunger)
 	end
 end
@@ -56,7 +56,7 @@ end
 
 env.AddPrefabPostInit("wolfgang", function(inst)
 	if inst ~= nil and inst.components.mightiness ~= nil then
-		if TUNING.DSTU.WOLFGANG_HUNGERMIGHTY == true then
+		if TUNING.DSTU.WOLFGANG_HUNGERMIGHTY then
 			inst.standardrate = TUNING.WILSON_HUNGER_RATE * 1.25
 			inst.hungerrate = inst.standardrate
 			inst.hungerpercent = 1.25

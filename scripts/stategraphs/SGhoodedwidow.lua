@@ -152,13 +152,13 @@ local states=
         events=
         {
             EventHandler("animover", function(inst)
-			if inst.components.timer ~= nil and not inst.components.timer:TimerExists("pounce") and not inst.combosucceed == false and not inst.docombo == true then
+			if inst.components.timer ~= nil and not inst.components.timer:TimerExists("pounce") and not inst.combosucceed == false and not inst.docombo then
 				inst.sg:GoToState("preleapattack")
 			else
-				if inst.components.timer ~= nil and not inst.components.timer:TimerExists("mortar") and not inst.combosucceed == false and not inst.docombo == true then
+				if inst.components.timer ~= nil and not inst.components.timer:TimerExists("mortar") and not inst.combosucceed == false and not inst.docombo then
 					inst.sg:GoToState("lobprojectile")
 				else
-   					if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.5 and inst.docombo == true then
+   					if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.5 and inst.docombo then
 						inst.docombo = false
 						--TheNet:SystemMessage(inst.combo)
 						inst.combo = inst.combo+2

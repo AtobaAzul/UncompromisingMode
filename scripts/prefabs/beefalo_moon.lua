@@ -620,7 +620,7 @@ end
 
 local function DomesticationTriggerFn(inst)
     return inst.components.hunger:GetPercent() > 0
-        or inst.components.rideable:IsBeingRidden() == true
+        or inst.components.rideable:IsBeingRidden()
 end
 
 local function OnStarving(inst, dt)

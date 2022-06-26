@@ -191,7 +191,7 @@ if GetModConfigData("caved") == false then
     )
 end
 
-if GetModConfigData("trapdoorspiders") == true then
+if GetModConfigData("trapdoorspiders") then
     AddRoomPreInit("BGSavanna", function(room) --This effects the outer areas of the Triple Mac and The Major Beefalo Plains
         room.contents.countprefabs =
 		{

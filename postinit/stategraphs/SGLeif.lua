@@ -8,7 +8,7 @@ local events=
     EventHandler("snare", function(inst, data)
         if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) then
             local stump = FindEntity(inst, TUNING.LEIF_MAXSPAWNDIST, nil, {"stump","evergreen"}, { "leif","burnt","deciduoustree" })
-			if stump ~= nil and TUNING.DSTU.PINELINGS == true then
+			if stump ~= nil and TUNING.DSTU.PINELINGS then
 				inst.sg:GoToState("summon")
 			else
 				inst.sg:GoToState("snare")

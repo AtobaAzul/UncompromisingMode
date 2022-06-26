@@ -396,7 +396,7 @@ local function TrySpawnIcon(v,intensity)
 end
 
 local function FoodScoreCalculations(container,v)
-	if container == true then
+	if container then
 		if v:HasTag("stale") then
 			TrySpawnIcon(v,1.5)
 		end

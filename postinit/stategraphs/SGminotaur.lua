@@ -255,7 +255,7 @@ local _OldLocomoteEvent = inst.events["locomote"].fn
 			if is_moving and not should_move then
 				inst.sg:GoToState(is_running and "run_stop" or "walk_stop")
 			elseif (not is_moving and should_move) or (is_moving and should_move and is_running ~= should_run) then
-				if inst.jumpready == true then
+				if inst.jumpready then
 					inst.sg:GoToState("leap_attack_pre", data.target)
 				else
 					inst.sg:GoToState(should_run and "run_start" or "walk_start")
@@ -281,7 +281,7 @@ local events=
         if is_moving and not should_move then
             inst.sg:GoToState(is_running and "run_stop" or "walk_stop")
         elseif (not is_moving and should_move) or (is_moving and should_move and is_running ~= should_run) then
-            if inst.jumpready == true then
+            if inst.jumpready then
 				inst.sg:GoToState("leap_attack_pre", data.target)
 			else
 				inst.sg:GoToState(should_run and "run_start" or "walk_start")

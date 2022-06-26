@@ -59,7 +59,7 @@ local function fn()
         inst:AddComponent("childspawner")
         inst.components.childspawner.childname = "ancient_trepidation"
 		
-		if TUNING.DSTU.TREPIDATIONS == true then
+		if TUNING.DSTU.TREPIDATIONS then
         inst.components.childspawner:StartSpawning()
 		end
 		

@@ -200,7 +200,7 @@ env.AddPrefabPostInit("winona", function(inst)
 		return
 	end
 
-	if TUNING.DSTU.WINONA_WORKER == true then
+	if TUNING.DSTU.WINONA_WORKER then
 		inst.multiplierapplied = false
 
 		inst:ListenForEvent("performaction", ActionHungerDrain)

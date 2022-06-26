@@ -22,7 +22,7 @@ EventHandler("doattack", function(inst)
 end),
 EventHandler("attacked", function(inst, data) 
 	if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("busy") and not inst.sg:HasStateTag("charging") then
-		if (math.random() > 0.66) and inst.components.combat.target ~= nil and (4 > inst:GetDistanceSqToInst(inst.components.combat.target)) and inst.counterattack == true then
+		if (math.random() > 0.66) and inst.components.combat.target ~= nil and (4 > inst:GetDistanceSqToInst(inst.components.combat.target)) and inst.counterattack then
 			inst.sg:GoToState("stomp") 
 		else
 			inst.sg:GoToState("hit")
@@ -89,7 +89,7 @@ local states = {
 					if inst.justcharged then
 						inst.justcharged = nil
 					end
-					if chance > 0.77 and inst.disarmattack == true then
+					if chance > 0.77 and inst.disarmattack then
 						inst.sg:GoToState("disarm")
 					else
 						inst.sg:GoToState("idle")

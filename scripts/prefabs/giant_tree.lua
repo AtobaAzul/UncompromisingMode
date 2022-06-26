@@ -428,7 +428,7 @@ end
 local function onload(inst,data)
 	if data then
 		inst.previouschops = data.previouschops
-		if data.chopped == true then
+		if data.chopped then
 			inst:RemoveComponent("workable")
 		end
 	else
@@ -483,7 +483,7 @@ local function makefn(infested)
     MakeObstaclePhysics(inst, 2.35)
 	
 	local bank
-	if infested == true then
+	if infested then
 		bank = "giant_tree_infested"
 	else
 		bank = "giant_tree"
@@ -540,7 +540,7 @@ local function makefn(infested)
 	inst.components.lightningblocker:SetBlockRange(TUNING.SHADE_CANOPY_RANGE_SMALL)
 	inst.components.lightningblocker:SetOnLightningStrike(OnLightningStrike)
 	
-	if infested == true then
+	if infested then
 		inst:DoTaskInTime(0, OnInit)	
 		inst:AddTag("infestedtree")
         inst:AddComponent("childspawner")

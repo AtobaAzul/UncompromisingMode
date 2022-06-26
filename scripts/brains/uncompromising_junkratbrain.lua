@@ -137,7 +137,7 @@ function Uncompromising_JunkRatBrain:OnStart()
 		
 		WhileNode( function() return self.inst.components.combat.target == nil or not self.inst.components.combat:InCooldown() end, "AttackMomentarily",
 			ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST)),
-        WhileNode(function() return self.inst.shouldhide == true end, "IsNight",
+        WhileNode(function() return self.inst.shouldhide end, "IsNight",
             DoAction(self.inst, GoHomeAction, "Go Home", true)),
 		WhileNode( function() return self.inst.components.combat.target and self.inst.components.combat:InCooldown() end, "Dodge",
 			RunAway(self.inst, function() return self.inst.components.combat.target end, AVOID_PLAYER_DIST, AVOID_PLAYER_STOP)),

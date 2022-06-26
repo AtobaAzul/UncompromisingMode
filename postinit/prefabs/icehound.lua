@@ -36,7 +36,7 @@ env.AddPrefabPostInit("icehound", function (inst)
 		return
 	end
 	
-	if TUNING.DSTU.FROSTBITEHOUNDS == true then
+	if TUNING.DSTU.FROSTBITEHOUNDS then
     if inst.components.combat ~= nil then
         inst:ListenForEvent("onhitother", OnHitOtherFreeze)
     end

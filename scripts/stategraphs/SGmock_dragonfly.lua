@@ -102,7 +102,7 @@ local events=
     CommonHandlers.OnFreeze(),
     --CommonHandlers.OnAttack(),
 	EventHandler("doattack", function(inst, data)
-		if inst.rockthrow == true and not inst.components.health:IsDead() and inst.fire_build ~= nil and inst.fire_build == true then
+		if inst.rockthrow and not inst.components.health:IsDead() and inst.fire_build ~= nil and inst.fire_build then
 			inst.sg:GoToState("charge_warning")
 			--[[if math.random() >= 0.5 then
 				inst.sg:GoToState("flamethrower")
@@ -321,7 +321,7 @@ local states=
         events=
         {
             EventHandler("animover", function(inst) 
-				if inst.rockthrow == true and not inst.components.health:IsDead() and inst.fire_build ~= nil and inst.fire_build == true then
+				if inst.rockthrow and not inst.components.health:IsDead() and inst.fire_build ~= nil and inst.fire_build then
 					inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/distant")
 					inst.sg:GoToState("charge_warning")
 				else

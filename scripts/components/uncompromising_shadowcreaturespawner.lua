@@ -121,7 +121,7 @@ UpdateSpawn = function(player, params)
         --if _map:IsPassableAtPoint(x, 0, z) then -- all shadow creatures now ignore all terrain regardless of situation
             local ent = SpawnPrefab("crawlinghorror")
 
-            if spawndrifter == true and sanity <= TUNING.DSTU.CREEPINGFEAR_SPAWN_THRESH then
+            if spawndrifter and sanity <= TUNING.DSTU.CREEPINGFEAR_SPAWN_THRESH then
                 ent = SpawnPrefab("creepingfear")
             elseif sanity < TUNING.DSTU.DREADEYE_SPAWN_THRESH then
                 if math.random() < 0.2 then

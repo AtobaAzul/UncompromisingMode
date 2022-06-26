@@ -257,7 +257,7 @@ end
 
 local function SpawnBlock(inst, x, z, cracked)
 	local blockade = SpawnPrefab("deerclops_barrier")
-	if cracked == true then
+	if cracked then
 	blockade:AddTag("cracked")
     blockade.AnimState:PlayAnimation("form_cracked")
     blockade.AnimState:PushAnimation("full_cracked")

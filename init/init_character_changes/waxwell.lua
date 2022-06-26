@@ -58,7 +58,7 @@ env.AddPrefabPostInit("waxwell", function(inst)
 		inst.components.petleash:SetOnSpawnFn(OnSpawnPet)
 	end	
 	
-	if TUNING.DSTU.MAX_HEALTH_WELL == true then
+	if TUNING.DSTU.MAX_HEALTH_WELL then
 		inst:ListenForEvent("attacked", CalculateMaxHealthLoss)
 	end
 end)

@@ -75,7 +75,7 @@ if inst.components.health ~= nil and
 		end	
 	end
 	if inst.components.combat.target ~= nil and inst.components.combat.target:HasTag("structure") or math.random() < (inst.randattack*0.05) or lavae ~= true then
-		if lavae == true then
+		if lavae then
 			inst.resetcooldown = true
 		end
 		inst.randattack = 0
@@ -766,7 +766,7 @@ local states=
 			inst.components.groundpounder.numRings = 2
 			inst.SoundEmitter:PlaySound("UCSounds/moonmaw/land")
 			--print("preran")
-			if inst.redolavae == true then
+			if inst.redolavae then
 				--print("2")
 				inst.SpawnLavae(inst)
 				inst.redolavae = nil

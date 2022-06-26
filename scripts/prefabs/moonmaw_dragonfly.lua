@@ -219,7 +219,7 @@ local function OnSave(inst, data)
 end
 
 local function LoadLavae(inst)
-if inst.fell == true then
+if inst.fell then
 	inst.SpawnLavae(inst)
 	inst.sg:GoToState("idle")
 end
@@ -432,7 +432,7 @@ lavae.number = choice
 if inst.components.combat ~= nil and inst.components.combat.target ~= nil then
 	lavae.components.combat:SuggestTarget(inst.components.combat.target)
 end
-if severed ~= nil and severed == true then
+if severed ~= nil and severed then
 	lavae.severed = true
 end
 inst.components.leader:AddFollower(lavae)
@@ -471,7 +471,7 @@ end
 local function CheckTimer(inst,data)
 if inst.components.health ~= nil and not inst.components.health:IsDead() then
 	if data.name == "summoncrystals" then
-		if NoLavae(inst) == true then
+		if NoLavae(inst) then
 			if inst.sg:HasStateTag("shards") then
 				inst.components.timer:StartTimer("summoncrystals",5)
 			else
@@ -485,7 +485,7 @@ if inst.components.health ~= nil and not inst.components.health:IsDead() then
 		end
 	end
 	if data.name == "glassshards" then
-		if NoLavae(inst) == true then
+		if NoLavae(inst) then
 			if inst.sg:HasStateTag("crystals") then
 				inst.components.timer:StartTimer("glassshards",5)
 			else

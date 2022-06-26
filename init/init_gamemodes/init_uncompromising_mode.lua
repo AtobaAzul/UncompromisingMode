@@ -69,7 +69,7 @@ local require = GLOBAL.require
 	
 
 
-	--if GetModConfigData("harder_monsters") == true then
+	--if GetModConfigData("harder_monsters") then
 		modimport("init/init_creatures/init_treebuffs")
 		modimport("init/init_creatures/init_harder_monsters")
 	--end
@@ -81,26 +81,26 @@ local require = GLOBAL.require
 	modimport("init/init_food/init_disableregrowth")
 
 
-	--if  GetModConfigData("harder_recipes") == true then <-- This isn't even a config change, yet.
+	--if  GetModConfigData("harder_recipes") then <-- This isn't even a config change, yet.
 		modimport("init/init_recipes")
 		modimport("init/init_food/init_crockpot")
 		modimport("init/init_food/monsterfoods")
 	--end
 
-	if GetModConfigData("rat_raids") == true then
+	if GetModConfigData("rat_raids") then
 		modimport("init/init_ratraid")
 	end
 
 	modimport("init/init_creatures/init_knockback")
 
-	if GetModConfigData("harder_shadows") == true then
+	if GetModConfigData("harder_shadows") then
 		modimport("init/init_creatures/init_harder_shadows")
 		--modimport("init/init_creatures/init_shadowspawner")
 		modimport("postinit/prefabs/shadowcreature")
 		modimport("postinit/stategraphs/SGshadowcreature")
 	end
 
-	--if  GetModConfigData("harder_weather") == true then <-- This isn't even a config change, yet.
+	--if  GetModConfigData("harder_weather") then <-- This isn't even a config change, yet.
 		--modimport("init/init_weather/init_acidmushroom_networking")
 		modimport("init/init_weather/init_acid_rain_effects")
 		modimport("init/init_weather/init_acid_rain_disease")
@@ -109,24 +109,24 @@ local require = GLOBAL.require
 		--modimport("init/init_weather/init_snowstorm_structures")
 	--end
 	
-	if GetModConfigData("acidrain") == true then
+	if GetModConfigData("acidrain") then
 		--modimport("init/init_uncompromisingshardrpc")
 		modimport("init/init_weather/init_acidmushroom_networking")
 		modimport("postinit/prefabs/toadstool_cap")
 	end
 	
-	if GetModConfigData("snowstorms") == true then
+	if GetModConfigData("snowstorms") then
 		modimport("init/init_weather/init_snowstorm")
 	end
 	
-	if GetModConfigData("hayfever") == true then
+	if GetModConfigData("hayfever") then
 		modimport("init/init_weather/init_hayfever")
 		modimport("init/init_creatures/init_sneeze_hitters")
 	end
 	
 	modimport("init/init_durability")
 	
-	if GetModConfigData("willow") == true then
+	if GetModConfigData("willow") then
 		modimport("init/init_character_changes/willow")
 	end
 	
@@ -134,33 +134,33 @@ local require = GLOBAL.require
 		modimport("init/init_character_changes/willow_bernie")
 	end
 	
-	--[[if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("waxwell") == true or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("waxwell") == true) then
+	--[[if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING and GetModConfigData("waxwell") or
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("waxwell")) then
 		modimport("init/init_character_changes/waxwell")
 	end]]
 	
-	if GetModConfigData("warly") == true  then
+	if GetModConfigData("warly")  then
 		modimport("init/init_character_changes/warly")
 	end
 	
-	--if GetModConfigData("wolfgang") == true then
+	--if GetModConfigData("wolfgang") then
 		--modimport("init/init_character_changes/wolfgang")
 		modimport("init/init_character_changes/wolfgang2")
 	--end
 	
-	if GetModConfigData("lifeamulet") == true then
+	if GetModConfigData("lifeamulet") then
 		modimport("init/init_lifeamulet")
 	end
 	
-	if GetModConfigData("caved") == false and GetModConfigData("acidrain") == true then
+	if GetModConfigData("caved") == false and GetModConfigData("acidrain") then
 		modimport("init/init_weather/init_overworld_toadstool")
 	end
 	
-	if  GetModConfigData("crabking_claws") == true then
+	if  GetModConfigData("crabking_claws") then
 		modimport("postinit/prefabs/crabking_claw")
 	end
 	
-	if GetModConfigData("foodregen") == true  then
+	if GetModConfigData("foodregen")  then
 		modimport("init/init_food/init_foodregen")
 	end
 

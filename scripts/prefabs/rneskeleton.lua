@@ -43,7 +43,7 @@ local x,y,z = inst.Transform:GetWorldPosition()
 local ents = TheSim:FindEntities(x, 0, z, 50, {"rneskeleton"})
 	for k,v in pairs(ents) do
 	v.decided = true
-	if dance == true then
+	if dance then
 	v.sg:GoToState("dance")
 	else
 	--v.sg:GoToState("idle") Doesn't seem to get them to stop dancing

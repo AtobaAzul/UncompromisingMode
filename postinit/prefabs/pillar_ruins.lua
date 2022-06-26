@@ -23,7 +23,7 @@ local function GetDebrisFn()
 end
 
 local function setPillarDestroyed(inst)
-	if inst.pillarDestroyed == true then
+	if inst.pillarDestroyed then
 		inst.AnimState:SetBuild("pillar_ruins_damaged")
 		RemovePhysicsColliders(inst)
 	else

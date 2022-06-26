@@ -17,7 +17,7 @@ local function NormalRetarget(inst)
     end
     return FindEntity(inst, targetDist, 
         function(guy) 
-            if inst.components.combat:CanTarget(guy) and inst.enraged == true then
+            if inst.components.combat:CanTarget(guy) and inst.enraged then
                 return guy:HasTag("character") and guy.components.sanity ~= nil and guy.components.sanity:GetPercent() < 0.5
             end
     end)
@@ -181,7 +181,7 @@ local function CheckIfInsaners(inst)  --Actually just checks if anyone is below 
 		if inst.components.combat ~= nil then
 			inst.components.combat:SuggestTarget(bozo)
 		end
-	elseif inst.enraged == true and inst.components.combat and not inst.components.combat.target then
+	elseif inst.enraged and inst.components.combat and not inst.components.combat.target then
 		inst.enraged = false
 		inst.sg:GoToState("calm")
 	end
@@ -194,7 +194,7 @@ end
 local function OnLoad(inst,data)
 if data and data.enraged then
 	inst.enraged = data.enraged
-	if inst.enraged == true then
+	if inst.enraged then
 		inst.AnimState:SetBuild("ancient_trepidation")
 	end
 end

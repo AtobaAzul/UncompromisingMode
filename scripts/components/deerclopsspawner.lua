@@ -111,7 +111,7 @@ local function TryStartAttacks(killed)
             -- Shorten the time used for winter to account for the time deerclops spends stomping around
             -- Then add one to _attacksperwinter to shift the attacks so the last attack isn't right when the season changes to spring
             local attackdelay = (TheWorld.state.winterlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperwinter + 1) 
-            if killed == true then
+            if killed then
                 attackdelay = attackdelay * HASSLER_KILLED_DELAY_MULT
             end
             -- Remove randomization in case that shifts it too far

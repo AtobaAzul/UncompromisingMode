@@ -2,7 +2,7 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
-if TUNING.DSTU.WANDA_NERF == true then
+if TUNING.DSTU.WANDA_NERF then
  --[[   env.AddPrefabPostInit("wanda", function(inst)
         if not TheWorld.ismastersim then
 		    return

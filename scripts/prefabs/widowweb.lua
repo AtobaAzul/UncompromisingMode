@@ -76,7 +76,7 @@ local function SpawnInvestigators(inst, target)
 	else
 	test = false
 	end
-    if inst.components.childspawner ~= nil and not test == true and target ~= nil then
+    if inst.components.childspawner ~= nil and not test and target ~= nil then
         local spider = inst.components.childspawner:SpawnChild(target, nil, 3)
         if spider ~= nil then
 			local x,y,z = inst.Transform:GetWorldPosition()

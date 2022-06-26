@@ -118,7 +118,7 @@ local function onfar(inst) --doesn't have the player part for some reason....
 			local ghostplayers = true
 		end
 	end
-    if inst.floating == true and ghostplayers == false then
+    if inst.floating and ghostplayers == false then
 		inst.floating = false
 		inst.AnimState:PlayAnimation("Hover_pst")
 		inst.AnimState:PushAnimation("Idle",true)

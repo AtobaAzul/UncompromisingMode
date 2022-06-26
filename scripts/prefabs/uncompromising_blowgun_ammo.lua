@@ -243,7 +243,7 @@ local function projectile_fn(ammo_def)
 	inst:AddComponent("weapon")
 	inst.components.weapon:SetDamage(ammo_def.damage)
 	inst.components.weapon:SetOnAttack(OnAttack)
-	if ammo_def.electric == true then
+	if ammo_def.electric then
 	inst.components.weapon:SetElectric()	
 	end
     inst:AddComponent("projectile")

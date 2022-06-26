@@ -458,8 +458,8 @@ local function on_anim_over(inst)
         return
     end
 
-	if inst.froze == true then
-	if inst.Harvestable == true then
+	if inst.froze then
+	if inst.Harvestable then
 	inst.AnimState:PushAnimation("idle_frozen", true)
 	else
 	inst.AnimState:PushAnimation("trap_idle", true)

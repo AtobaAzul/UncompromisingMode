@@ -43,7 +43,7 @@ env.AddPrefabPostInit("moondial", function(inst)
 
 	local function OnLoad(inst, data)
 		if data ~= nil then
-			if data.hastear ~= nil and data.hastear == true then
+			if data.hastear ~= nil and data.hastear then
 				inst.hastear = true
 				MakeWaterSource(inst)
 				

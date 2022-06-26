@@ -214,7 +214,7 @@ function self:SetMaxFrogs(max)
 end
 
 function self.StartTrackingFn(target)
-    _frogs[target] = target.persists == true
+    _frogs[target] = target.persists
     target.persists = false
     inst:ListenForEvent("entitysleep", OnTargetSleep, target)
     inst:ListenForEvent("onremove", self.StopTrackingFn, target)

@@ -47,7 +47,7 @@ local function pickup(inst, channeler)
         end
 		
 		
-		if v.components.crop ~= nil and v.components.crop.matured == true then   --Farmplots/Wild Crops
+		if v.components.crop ~= nil and v.components.crop.matured then   --Farmplots/Wild Crops
 		v.components.crop:Harvest(channeler)
 		SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
 		inst.channeler.components.sanity:DoDelta(-0.5)   --Can't take too much sanity if the purpose is to use in large farms

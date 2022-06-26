@@ -22,7 +22,7 @@ end
 
 local function OnLoad(inst,data)
 	if data ~= nil and data.unlocked ~= nil then
-		if data.unlocked == true then
+		if data.unlocked then
 			inst.unlocked = true
 			inst:DoTaskInTime(1,OnUnlock)	
 		else

@@ -5,7 +5,7 @@ local function destroystuff(inst)
 	if inst.WINDSTAFF_CASTER == nil then
 		inst:Remove()
 	end
-	if inst.destroy == true and inst.hidden ~= true then
+	if inst.destroy and inst.hidden ~= true then
     local x, y, z = inst.Transform:GetWorldPosition()
 	
     local ents = TheSim:FindEntities(x, y, z, 2, nil, TARGET_IGNORE_TAGS, {"_health"})
@@ -145,7 +145,7 @@ end
 end
 
 local function CheckIfShouldGoBack(inst)
-if inst.components.health ~= nil and not inst.components.health:IsDead() and not inst.severed == true then
+if inst.components.health ~= nil and not inst.components.health:IsDead() and not inst.severed then
 	if inst.components.follower ~= nil and inst.components.follower.leader ~= nil and inst.number ~= nil then
 		--[[local leader = inst.components.follower.leader
 		if leader.components.combat ~= nil and leader.components.combat.target == nil then --No Target, return home

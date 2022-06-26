@@ -289,7 +289,7 @@ end
 end
 
 local function Wrath(inst,super)
-if super == true then
+if super then
 	TrySpawnSkeleton(inst)
 	TrySpawnSkeleton(inst)
 	TrySpawnSkeleton(inst)

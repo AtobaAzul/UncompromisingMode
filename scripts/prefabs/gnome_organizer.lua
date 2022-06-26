@@ -108,7 +108,7 @@ despawnfx.Transform:SetPosition(pt.x, pt.y, pt.z)
 v:Remove()
 end
 end
-if inst.count >= 2 then--or is_day == true then
+if inst.count >= 2 then--or is_day then
 EndEncounter(inst)
 else
 inst.count = inst.count + 1

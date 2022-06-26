@@ -1950,7 +1950,7 @@ local function FoodScoreCalculations(inst,container,v)
 	inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
 	inst.preparedmultiplier = v:HasTag("preparedfood") and 2 or 1
 	
-	if container == true then
+	if container then
 		if v:HasTag("stale") and v.components.farmplantable == nil then
 			delta = ((2.5 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v,container)
 		end
@@ -2067,7 +2067,7 @@ local function TimeForACheckUp(inst,dev)
 	--print("Ratscore = "..inst.ratscore)
 	--print("------------------------")
 	--just use the command if you wanna see i guess.
-	if TUNING.DSTU.ANNOUNCE_BASESTATUS == true then
+	if TUNING.DSTU.ANNOUNCE_BASESTATUS then
 		TheNet:SystemMessage("-------------------------")
 		TheNet:SystemMessage("Itemscore = "..inst.itemscore)
 		TheNet:SystemMessage("Foodscore = "..inst.foodscore)
@@ -2077,7 +2077,7 @@ local function TimeForACheckUp(inst,dev)
 	if inst.ratscore > 240 then
 		inst.ratscore = 240
 	end
-	if TUNING.DSTU.ANNOUNCE_BASESTATUS == true then
+	if TUNING.DSTU.ANNOUNCE_BASESTATUS then
 		TheNet:SystemMessage("True Ratscore = "..inst.ratscore)
 		TheNet:SystemMessage("-------------------------")
 	end
@@ -2319,7 +2319,7 @@ local function TimeForACheckUpDev(inst)
 	print("Burrowbonus = "..inst.burrowbonus)
 	print("Ratscore = "..inst.ratscore)
 	print("------------------------")
-	if TUNING.DSTU.ANNOUNCE_BASESTATUS == true then
+	if TUNING.DSTU.ANNOUNCE_BASESTATUS then
 		TheNet:SystemMessage("-------------------------")
 		TheNet:SystemMessage("Itemscore = "..inst.itemscore)
 		TheNet:SystemMessage("Foodscore = "..inst.foodscore)

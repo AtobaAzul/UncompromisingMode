@@ -426,7 +426,7 @@ TUNING.AFFINITY_15_CALORIES_SUPERHUGE = 1.034
 
 TUNING.ARMORBRAMBLE_DMG = 10
 
-if GetModConfigData("wanda_nerf") == true then
+if GetModConfigData("wanda_nerf") then
     TUNING.POCKETWATCH_SHADOW_DAMAGE = 34*1.5 --reduced damage to 51 base
     TUNING.POCKETWATCH_REVIVE_COOLDOWN = TUNING.POCKETWATCH_REVIVE_COOLDOWN * 2 --doubled cooldown
 end

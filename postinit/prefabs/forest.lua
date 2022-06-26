@@ -7,7 +7,7 @@ env.AddPrefabPostInit("forest", function(inst)
     end
 	--[[
     if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_weather") == true) then
+	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_weather")) then
     inst:AddComponent("toadrain")
 	inst:AddComponent("hayfever_tracker")
 	inst:AddComponent("firefallwarning")

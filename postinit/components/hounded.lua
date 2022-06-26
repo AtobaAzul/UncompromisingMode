@@ -202,7 +202,7 @@ if not TUNING.DSTU.ISLAND_ADVENTURES then
         end
         
         
-        if TUNING.DSTU.LATEGAMEHOUNDSPREAD == true then
+        if TUNING.DSTU.LATEGAMEHOUNDSPREAD then
             local __spawndata = UpvalueHacker.GetUpvalue(self.SetSpawnData, "_spawndata")
             __spawndata.attack_delays =
             {
@@ -294,19 +294,19 @@ if not TUNING.DSTU.ISLAND_ADVENTURES then
             ["spring"] = {""},
             ["summer"] = {""},
         }
-        if TUNING.DSTU.DEPTHSVIPERS == true then
+        if TUNING.DSTU.DEPTHSVIPERS then
         self.seasonal_prefabs["autumn"] = {"viperworm"}
         end
         
-        if TUNING.DSTU.DEPTHSEELS == true then
+        if TUNING.DSTU.DEPTHSEELS then
         self.seasonal_prefabs["winter"] = {"shockworm"}
         end
         
-        if TUNING.DSTU.DEPTHSEELS == true then
+        if TUNING.DSTU.DEPTHSEELS then
         self.seasonal_prefabs["spring"] = {"shockworm"}
         end
         
-        if TUNING.DSTU.DEPTHSVIPERS == true then
+        if TUNING.DSTU.DEPTHSVIPERS then
         self.seasonal_prefabs["summer"] = {"viperworm"}
         end
         self.spawnlimit = 0

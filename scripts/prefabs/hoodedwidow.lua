@@ -189,11 +189,11 @@ local function OnHitOther(inst, data)
 			--TheNet:SystemMessage("Combo Succeed!")
 			inst.combosucceed = true
 		end
-		if inst.combo ~= 1 or inst.docombo == true then
+		if inst.combo ~= 1 or inst.docombo then
 			inst.combo = inst.combo/10
 		end
 	end
-	if other ~= nil and other.components.inventory ~= nil and inst.armorcrunch == true and blocked == false then
+	if other ~= nil and other.components.inventory ~= nil and inst.armorcrunch and blocked == false then
 		local helm = other.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
 		local chest = other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
 		local hand = other.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)

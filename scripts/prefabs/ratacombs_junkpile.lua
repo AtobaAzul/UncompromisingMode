@@ -113,7 +113,7 @@ local function TrySanityLoss(picker)
 end
 
 local function KillPile(inst,full)
-	if full == true then
+	if full then
 		inst.AnimState:PlayAnimation("idle_to_dead")
 		inst.AnimState:PushAnimation("dead",true)
 	else

@@ -85,7 +85,7 @@ end
 local function OnLoadTorch(inst,data)
 if data ~= nil and data.demolished ~= nil then
 inst.demolished = data.demolished
-if inst.demolished == true then
+if inst.demolished then
 	local x,y,z = inst.Transform:GetWorldPosition()
 	inst.Physics:ClearCollisionMask()
 	inst:Hide()

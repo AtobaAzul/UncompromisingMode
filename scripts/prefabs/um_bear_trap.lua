@@ -464,7 +464,7 @@ for i,v in ipairs(spots) do
 	end
 end
 
-if spotfound == true then
+if spotfound then
 return true
 end
 end

@@ -255,7 +255,7 @@ local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration
         inst:ListenForEvent("death", function()
             inst.components.debuff:Stop()
         end, target)
-		if not nospeech == true then
+		if not nospeech then
         target:PushEvent("foodbuffattached", { buff = "ANNOUNCE_ATTACH_BUFF_"..string.upper(name), priority = priority })
 		end
         if onattachedfn ~= nil then
@@ -266,7 +266,7 @@ local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration
     local function OnExtended(inst, target)
         inst.components.timer:StopTimer("buffover")
         inst.components.timer:StartTimer("buffover", duration)
-		if not nospeech == true then
+		if not nospeech then
         target:PushEvent("foodbuffattached", { buff = "ANNOUNCE_ATTACH_BUFF_"..string.upper(name), priority = priority })
 		end
         if onextendedfn ~= nil then
@@ -278,7 +278,7 @@ local function MakeBuff(name, onattachedfn, onextendedfn, ondetachedfn, duration
         if ondetachedfn ~= nil then
             ondetachedfn(inst, target)
         end
-		if not nospeech == true then
+		if not nospeech then
         target:PushEvent("foodbuffdetached", { buff = "ANNOUNCE_DETACH_BUFF_"..string.upper(name), priority = priority })
 		end
         inst:Remove()

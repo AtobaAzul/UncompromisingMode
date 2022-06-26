@@ -37,7 +37,7 @@ local _OldAttackedEvent = inst.events["attacked"].fn
 	inst.events["attacked"].fn = function(inst)
         if not inst.components.health:IsDead() and inst:HasTag("spider_warrior") then
 			if not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("evade") then -- don't interrupt attack or exit shield
-				if inst:HasTag("spider_warrior") and not inst:HasTag("trapdoorspider") and inst.components.combat.target ~= nil and TUNING.DSTU.SPIDERWARRIORCOUNTER == true then
+				if inst:HasTag("spider_warrior") and not inst:HasTag("trapdoorspider") and inst.components.combat.target ~= nil and TUNING.DSTU.SPIDERWARRIORCOUNTER then
 					inst.sg:GoToState("evade_loop")
 				else
 					_OldAttackedEvent(inst)
@@ -54,7 +54,7 @@ local _OldAttackedEvent = inst.events["attacked"].fn
         if not inst.components.health:IsDead() then
             if inst:HasTag("spider_warrior") or inst:HasTag("spider_spitter") or inst:HasTag("spider_moon") then
                 if not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("evade") then -- don't interrupt attack or exit shield
-					if inst:HasTag("spider_warrior") and not inst:HasTag("trapdoorspider") and inst.components.combat.target ~= nil and TUNING.DSTU.SPIDERWARRIORCOUNTER == true then
+					if inst:HasTag("spider_warrior") and not inst:HasTag("trapdoorspider") and inst.components.combat.target ~= nil and TUNING.DSTU.SPIDERWARRIORCOUNTER then
 					inst.sg:GoToState("evade_loop")
 					else
                     inst.sg:GoToState("hit") -- can still attack

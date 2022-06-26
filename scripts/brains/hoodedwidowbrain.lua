@@ -64,7 +64,7 @@ local function EquipLeap(inst)
 end
 local function CanLeapNow(inst)
     local target = inst.components.combat.target
-    return target ~= nil and inst.LeapReady == true and not inst.sg:HasStateTag("noleap")
+    return target ~= nil and inst.LeapReady and not inst.sg:HasStateTag("noleap")
 end
 local function CanRangeNow(inst)
     local target = inst.components.combat.target
@@ -143,7 +143,7 @@ end
 function HoodedWidowBrain:OnStart()
     local root = PriorityNode(
     {	
-		WhileNode(function() return self.inst.bullier == true end,"Being Bullied",
+		WhileNode(function() return self.inst.bullier end,"Being Bullied",
 		DoAction(self.inst, JumpHomeAction)),
         WhileNode(function() return CanMeleeNow(self.inst) or not TargetLeavingArena(self.inst) end, "Hit Stuck Target or Creature",
             SequenceNode({

@@ -123,7 +123,7 @@ local function OnHitOther(inst, data)
         if not (other.components.health ~= nil and other.components.health:IsDead()) then
 			if inst:HasTag("sleepattack") then
 				local grogginess = other.components.grogginess
-				if grogginess ~= nil and not other.sg:HasStateTag("waking") and not (other.components.rider and other.components.rider:IsRiding() == true) then 
+				if grogginess ~= nil and not other.sg:HasStateTag("waking") and not (other.components.rider and other.components.rider:IsRiding()) then 
 					grogginess:AddGrogginess(TUNING.GESTALT.ATTACK_DAMAGE_GROGGINESS, TUNING.GESTALT.ATTACK_DAMAGE_KO_TIME)
 						if grogginess.knockoutduration == 0 then
 							inst.sg.statemem.target:PushEvent("attacked", {attacker = inst, damage = 0})

@@ -52,7 +52,7 @@ local advices =
 	hasending = true,
 	chance = 0.3,
         reqfn = function(inst, player, line)
-            return line == nil and player.foundcure ~= nil and player.foundcure == true
+            return line == nil and player.foundcure ~= nil and player.foundcure
         end,
     },
 
@@ -100,7 +100,7 @@ local advices =
 -------------------------------------- SCENARIOS --------------------------------------
 
 local function FinishScenario(inst, player, text, string, exit)
-    if text == true then
+    if text then
        	if string ~= nil then
        	    inst.components.npc_talker:Say(string)
 	else
@@ -109,7 +109,7 @@ local function FinishScenario(inst, player, text, string, exit)
 	inst:DoTalk(3, player)
     end
 
-    if exit == true then
+    if exit then
     	inst.wantstoleave = true
     end
 end
@@ -196,7 +196,7 @@ local function stoptalking(inst)
 	    inst.AnimState:PushAnimation("dialog_pst")
 	    inst.AnimState:PushAnimation("idle", true)
 	end
-	if inst.wantstoleave == true and not inst.components.npc_talker:haslines() then
+	if inst.wantstoleave and not inst.components.npc_talker:haslines() then
 	    inst:Despawn()
 	end
 end
@@ -243,7 +243,7 @@ local function DoTalkQueue(inst, delay, player)
 	    end
             Yield()
         end
-	if --[[inst.scenario ~= nil and]] player ~= nil and not inst.components.npc_talker:haslines() and not inst.wantstoleave == true then
+	if --[[inst.scenario ~= nil and]] player ~= nil and not inst.components.npc_talker:haslines() and not inst.wantstoleave then
 	    PerformScenario(inst, player)
 	end
     end)
@@ -296,7 +296,7 @@ local function GetLines(inst, player)
         line = DEFAULTLINES[math.random(#DEFAULTLINES)]
     end
     inst.components.npc_talker:Say(line)
-    if hasending == true then
+    if hasending then
 	inst.components.npc_talker:Say(ENDINGLINES[math.random(#ENDINGLINES)])
     end
 end
@@ -304,7 +304,7 @@ end
 
 local function StartSpeech(inst, player)
     if not IsBusy(inst) then
-	if not (inst.scenario ~= nil and inst.scenario.skipgreeting == true) then
+	if not (inst.scenario ~= nil and inst.scenario.skipgreeting) then
 	    inst.components.npc_talker:Say(GREETINGLINES[math.random(#GREETINGLINES)])
 	end
 	GetLines(inst, player)
