@@ -44,7 +44,9 @@ local function Zap(inst)
 					if not v:HasTag("automaton") then
 						v.components.combat:GetAttacked(inst, -10)
 					else
-						v.OnLesserCharge(v)
+						if v.components.playerlightningtarget ~= nil then
+							v.components.playerlightningtarget:DoStrike()
+						end
 					end
 				end
 			elseif v.components.combat ~= nil then

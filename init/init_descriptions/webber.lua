@@ -101,7 +101,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.VETERANSHRINE = "It's looking at us!!"
 	DESCRIBE.RAT_TAIL = "It looks like our fur! But more smelly."
 	DESCRIBE.PLAGUEMASK = "It looks like a chicken!"
-	DESCRIBE.SPIDER_TRAPDOOR = "We don't care that you don't have hair, you're still our friend!"
+	DESCRIBE.SPIDER_TRAPDOOR = "We don't care that you are shy, you're still our friend!"
 	DESCRIBE.TRAPDOOR = "Our smart friends made those!"
 	DESCRIBE.HOODEDTRAPDOOR = "Our smart friends must be nearby!"
 	DESCRIBE.WICKER_TENTACLE = "I think it's sea sick, or land sick."
@@ -347,6 +347,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 
 	ACTIONFAIL.CHARGE_FROM =
 	{
+		NOT_ENOUGH_CHARGE = "Did we do it right?",
 		CHARGE_FULL = "Already fully charged.",
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "I think we did it right!"

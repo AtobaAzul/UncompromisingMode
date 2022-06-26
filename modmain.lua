@@ -11,7 +11,7 @@ ReloadPreloadAssets()
 modimport("init/init_gamemodes/init_uncompromising_mode")
 
 if GetModConfigData("funny rat") then
-	AddModCharacter("winky")
+	AddModCharacter("winky", "FEMALE")
 	
 	GLOBAL.TUNING.WINKY_HEALTH = 175
 	GLOBAL.TUNING.WINKY_HUNGER = 150

@@ -8,8 +8,20 @@ local prefabs =
     "gridplacer_farmablesoil",
 }
 
-local function MakeVomit(name, color, x, y, z)
-		
+
+
+local FERTILIZER_DEFS = require("prefabs/fertilizer_nutrient_defs").FERTILIZER_DEFS
+
+local function GetFertilizerKey(inst)
+	return inst.prefab
+end
+
+local function fertilizerresearchfn(inst)
+	return inst:GetFertilizerKey()
+end
+
+local function MakeVomit(name, color)
+
 	local function fn()
 		local inst = CreateEntity()
 
@@ -26,6 +38,9 @@ local function MakeVomit(name, color, x, y, z)
 		MakeInventoryFloatable(inst)
 		MakeDeployableFertilizerPristine(inst)
 
+		inst:AddTag("fertilizerresearchable")
+		inst.GetFertilizerKey = GetFertilizerKey
+
 		inst.entity:SetPristine()
 
 		if not TheWorld.ismastersim then
@@ -37,6 +52,9 @@ local function MakeVomit(name, color, x, y, z)
 		inst.components.inventoryitem.atlasname = "images/inventoryimages/"..color.."_vomit.xml"
 		
 		inst:AddComponent("stackable")
+
+		inst:AddComponent("fertilizerresearchable")
+		inst.components.fertilizerresearchable:SetResearchFn(fertilizerresearchfn)
 
 		inst:AddComponent("fuel")
 		inst.components.fuel.fuelvalue = TUNING.MED_FUEL
@@ -52,28 +70,28 @@ local function MakeVomit(name, color, x, y, z)
 		inst:AddComponent("fertilizer")
 		inst.components.fertilizer.fertilizervalue = TUNING.GLOMMERFUEL_FERTILIZE
 		inst.components.fertilizer.soil_cycles = TUNING.GLOMMERFUEL_SOILCYCLES
-		--inst.components.fertilizer:SetNutrients(FERTILIZER_DEFS.name.nutrients)
-		inst.components.fertilizer:SetNutrients({x, y, z})
+		inst.components.fertilizer:SetNutrients(FERTILIZER_DEFS[name].nutrients)
+		--inst.components.fertilizer:SetNutrients({x, y, z})
 
 		inst:AddComponent("edible")
-		inst.components.edible.healthvalue = -(x / 4)
-		inst.components.edible.hungervalue = -(y / 4)
-		inst.components.edible.sanityvalue = -(z / 4)
+		inst.components.edible.healthvalue = -(FERTILIZER_DEFS[name].nutrients[1] / 4)
+		inst.components.edible.hungervalue = -(FERTILIZER_DEFS[name].nutrients[2] / 4)
+		inst.components.edible.sanityvalue = -(FERTILIZER_DEFS[name].nutrients[3] / 4)
 
 
 		MakeDeployableFertilizer(inst)
 		MakeHauntableLaunch(inst)
-		
+
 		return inst
 	end
 
     return Prefab(name, fn, assets, prefabs)
 end
 
-return MakeVomit("purple_vomit", "purple", 16, 16, 0),
-		MakeVomit("orange_vomit", "orange", 0, 16, 16),
-		MakeVomit("yellow_vomit", "yellow", 16, 0, 16),
-		MakeVomit("red_vomit", "red", 0, 24, 0),
-		MakeVomit("green_vomit", "green", 0, 0, 24),
-		MakeVomit("pink_vomit", "pink", 24, 0, 0),
-		MakeVomit("pale_vomit", "pale", 8, 8, 8)
+return MakeVomit("purple_vomit", "purple"),
+		MakeVomit("orange_vomit", "orange"),
+		MakeVomit("yellow_vomit", "yellow"),
+		MakeVomit("red_vomit", "red"),
+		MakeVomit("green_vomit", "green"),
+		MakeVomit("pink_vomit", "pink"),
+		MakeVomit("pale_vomit", "pale")

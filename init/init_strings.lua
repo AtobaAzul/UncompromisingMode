@@ -14,10 +14,8 @@ STRINGS.DSTU = {
         POUCH = "Deteriorating",
         WETGOOP = "Toxic",
     },
-	
-}
 
-table.insert(GLOBAL.CHARACTER_GENDERS.FEMALE, "winky")
+}
 
 STRINGS.NAMES.WINKY = "Winky"
 STRINGS.CHARACTER_TITLES.winky = "The Vile Vermin"
@@ -77,7 +75,7 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPEAKER_SPECTER = "This is making me feel un
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPEAKER_RUSTED = "This is making me feel under the weather..."
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.SPEAKER_BRINE = "This is making me feel under the weather..."
 
-for _, sound in pairs({"talk_LP", "talk_end"}) do 
+for _, sound in pairs({"talk_LP", "talk_end"}) do
 RemapSoundEvent( "dontstarve/characters/tiddle_stranger/"..sound, "tiddle_stranger/characters/tiddle_stranger/"..sound )
 end
 
@@ -161,7 +159,7 @@ end
         	"...",
     	    },
 	    {
-		"Ever wanted to start a collection?", 
+		"Ever wanted to start a collection?",
         	"Well I have just the thing!",
        	 	"Hand crafted masks! No curses, I promise.",
         	"...",

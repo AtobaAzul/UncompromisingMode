@@ -346,6 +346,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 
 	ACTIONFAIL.CHARGE_FROM =
 	{
+		NOT_ENOUGH_CHARGE = "There's no life inside of it.",
 		CHARGE_FULL = "The battery is full already.",
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "It could've electrocuted me."

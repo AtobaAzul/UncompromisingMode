@@ -419,7 +419,7 @@ local function fn()
 		inst:AddTag("antlion_sinkhole_blocker")
 		inst:AddTag("queensstuff")
 		inst:AddTag("companion")
-		inst:AddTag("flying") --Atoba: Hope this doesn't cause any unintended side effects.
+		inst:AddTag("ignorewalkableplatforms")
 		inst:AddTag("ignorewalkableplatformdrowning")
 
 		inst.entity:SetPristine()

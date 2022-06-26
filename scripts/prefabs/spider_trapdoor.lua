@@ -105,7 +105,7 @@ local function OnGetItemFromPlayer(inst, giver, item)
 
                     if effectdone then
                         maxSpiders = maxSpiders - 1
-    
+
                         if v.components.sleeper:IsAsleep() then
                             v.components.sleeper:WakeUp()
                         end
@@ -262,11 +262,16 @@ local function OnWakeUp(inst)
     inst.components.inventoryitem.canbepickedup = false
 end
 
-local function SetHappyFace(cond) --Trapdoor spiders don't smile
+local function SetHappyFace(cond) --Trapdoor spiders don't *actually* smile.
+    if is_happy then
+        inst.AnimState:OverrideSymbol("face", "spider_trapdoor", "happy_face")    
+    else
+        inst.AnimState:ClearOverrideSymbol("face")
+    end
 end
 
 local function OnStartLeashing(inst, data)
-    --inst:SetHappyFace(true)
+    inst:SetHappyFace(true)
     inst.components.inventoryitem.canbepickedup = true
 
     if inst.recipe then
@@ -281,13 +286,17 @@ local function OnStopLeashing(inst, data)
     inst.no_targeting = false
     inst.components.inventoryitem.canbepickedup = false
 
-    --[[if not inst.bedazzled then
+    if not inst.bedazzled then
         inst:SetHappyFace(false)
-    end]]
+    end
 end
 
 local function SetHappyFace(inst, is_happy)
-    --No, the smile animations are awful, fuck off :0
+    if is_happy then
+        inst.AnimState:OverrideSymbol("face", "spider_trapdoor", "happy_face")    
+    else
+        inst.AnimState:ClearOverrideSymbol("face")
+    end
 end
 
 local function create_common(build)
@@ -315,7 +324,7 @@ local function create_common(build)
     inst:AddTag("drop_inventory_pickup")
     inst:AddTag("drop_inventory_murder")
 	inst:AddTag("spider_warrior")
-	
+
     --trader (from trader component) added to pristine state for optimization
     inst:AddTag("trader")
 

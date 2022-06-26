@@ -132,6 +132,7 @@ local prefab_post = {
 	"minotaur_drops",
 	"frog",
 	"petals",
+	"fertilizer",
 }
 
 local stategraph_post = {

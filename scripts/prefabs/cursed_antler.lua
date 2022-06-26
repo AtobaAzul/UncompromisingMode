@@ -105,12 +105,12 @@ local function onattack(inst, attacker, target)
 			icefx.Transform:SetPosition(x + math.random(-1.5, 1.5), 0, z + math.random(-1.5, 1.5))
 		end
 
-		if target.components.freezable ~= nil and not target.components.health:IsDead() then
+		if target.components.freezable ~= nil and target.components.health ~= nil and not target.components.health:IsDead() then
 			target.components.freezable:AddColdness(1)
             target.components.freezable:SpawnShatterFX()
         end
 		
-		if not target.components.health:IsDead() and target.components.combat ~= nil then
+		if target.components.health ~= nil and not target.components.health:IsDead() and target.components.combat ~= nil then
 			--target.components.health:DoDelta(-66 * 200, false, attacker, false, attacker)
 			target.components.combat:GetAttacked(attacker, 66, nil)
 		end
@@ -121,7 +121,7 @@ local function onattack(inst, attacker, target)
 				if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
 					v.components.combat:GetAttacked(attacker, 34, nil)
 						
-					if v.components.freezable ~= nil and not v.components.health:IsDead() and not v.components.freezable:IsFrozen() then
+					if v.components.freezable ~= nil and target.components.health ~= nil and not v.components.health:IsDead() and not v.components.freezable:IsFrozen() then
 						v.components.freezable:AddColdness(0.5)
 						v.components.freezable:SpawnShatterFX()
 					end
