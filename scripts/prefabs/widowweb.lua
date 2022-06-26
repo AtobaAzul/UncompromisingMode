@@ -114,7 +114,7 @@ local function fn()
     inst:ListenForEvent("timerdone", ontimerdone)
 
     if inst._rerolltask == nil then
-        inst._rerolltask = inst:DoPeriodicTask(2--[[TUNING.TOTAL_DAY_TIME*5]], RerollCocoons, 0, inst)
+        inst._rerolltask = inst:DoPeriodicTask(TUNING.TOTAL_DAY_TIME*5, RerollCocoons, 0, inst)
     end
 
     return inst
