@@ -155,7 +155,7 @@ TUNING.DSTU =
 	--ratraid
 	RATRAID_TIMERSTART = GetModConfigData("rattimer"),
 	RATRAID_GRACE = GetModConfigData("ratgrace"),
-	RATSNIFFER_TIMER = GetModConfigData("ratsnifftimer"),
+	RATSNIFFER_TIMER = GetModConfigData("ratsnifftimer_"),
 
     --Generics
     MONSTER_BAT_CAVE_NR_INCREASE = 3,
