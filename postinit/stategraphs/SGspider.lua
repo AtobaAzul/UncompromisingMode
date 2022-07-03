@@ -19,6 +19,7 @@ local function SoundPath(inst, event)
 end
 
 local _OldAttackEvent = inst.events["doattack"].fn
+if _OldAttackEvent then
 	inst.events["doattack"].fn = function(inst, data)
 		if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) and inst:HasTag("spider_regular") then
 			inst.sg:GoToState(
@@ -32,6 +33,7 @@ local _OldAttackEvent = inst.events["doattack"].fn
 			_OldAttackEvent(inst, data)
 		end
     end
+end
 
 local _OldAttackedEvent = inst.events["attacked"].fn
 	inst.events["attacked"].fn = function(inst)
