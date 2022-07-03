@@ -71,19 +71,20 @@ local function dig_up_normal(inst, worker)
     dig_up_common(inst, worker, 1)
 end
 
-env.AddPrefabPostInit("berrybush", function(inst)
+if env.GetModConfigData("bushcrabs") then
+    env.AddPrefabPostInit("berrybush", function(inst)
 
-	if not TheWorld.ismastersim then
-		return
-	end
-	
-	inst:AddTag("bushcrab_ambush")
+        if not TheWorld.ismastersim then
+            return
+        end
+        
+        inst:AddTag("bushcrab_ambush")
 
-	if inst.components.workable ~= nil then
-        inst.components.workable:SetOnFinishCallback(dig_up_normal)
-    end
-
-end)
+        if inst.components.workable ~= nil then
+            inst.components.workable:SetOnFinishCallback(dig_up_normal)
+        end
+    end)
+end
 
 local function setberries(inst, pct)
     if inst._setberriesonanimover then

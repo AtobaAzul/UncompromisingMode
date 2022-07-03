@@ -4,7 +4,7 @@
 local easing = require("easing")
 
 --------------------------------------------------------------------------
---[[ Deerclopsspawner class definition ]]
+--[[ Gmoosespawner class definition ]]
 --------------------------------------------------------------------------
 return Class(function(self, inst)
 
@@ -18,6 +18,7 @@ local STRUCTURE_DIST = 20
 local HASSLER_SPAWN_DIST = 40
 local HASSLER_KILLED_DELAY_MULT = 6
 local STRUCTURES_PER_SPAWN = 4
+local MOTHERGOOSE_TIMERNAME = "mothergoose_timetoattack"
 
 
 --------------------------------------------------------------------------
@@ -31,11 +32,15 @@ self.inst = inst
 --------------------------------------------------------------------------
 local _warning = false
 local _timetoattack = nil
+local _moonmawdelay = nil
 local _warnduration = 60
 local _timetonextwarningsound = 0
 local _announcewarningsoundinterval = 4
+
+local _worldsettingstimer = TheWorld.components.worldsettingstimer
 	
-local _attacksperspring = 1
+local _attackdelay = nil
+local _attacksperseason = 4
 local _attackduringoffseason = false
 local _targetplayer = nil
 local _activehassler = nil
@@ -100,34 +105,30 @@ local function PauseAttacks()
 	_targetplayer = nil
     _warning = false
     self.inst:StopUpdatingComponent(self)
+    _worldsettingstimer:PauseTimer(MOTHERGOOSE_TIMERNAME, true)
 end
 
 local function ResetAttacks()
-    _timetoattack = nil
+    _worldsettingstimer:StopTimer(MOTHERGOOSE_TIMERNAME)
     PauseAttacks()
 end
 
 local function TryStartAttacks(killed)
     if AllowedToAttack() then
-        if _activehassler == nil and _attacksperspring > 0 and _timetoattack == nil then
+        if _activehassler == nil and _attacksperseason > 0 and _timetoattack == nil then
             -- Shorten the time used for winter to account for the time deerclops spends stomping around
             -- Then add one to _attacksperwinter to shift the attacks so the last attack isn't right when the season changes to spring
-            local attackdelay = (TheWorld.state.springlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperspring + 1) 
-            if killed then
-                attackdelay = attackdelay * HASSLER_KILLED_DELAY_MULT
-			else
-                --attackdelay = attackdelay * 2
-            end
-            -- Remove randomization in case that shifts it too far
-            --local attackrandom = 0.1*attackdelay
-            _timetoattack = GetRandomWithVariance(attackdelay, 0)
-            --print("got time to attack", _timetoattack, attackdelay, attackrandom)
+            --local attackdelay = (TheWorld.state.summerlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperseason + 1) 
+			local attackdelay = killed == true and _attackdelay * HASSLER_KILLED_DELAY_MULT or _attackdelay
+			
+			_worldsettingstimer:StartTimer(MOTHERGOOSE_TIMERNAME, attackdelay)
         end
 
+        _worldsettingstimer:ResumeTimer(MOTHERGOOSE_TIMERNAME)
         self.inst:StartUpdatingComponent(self)
         self:StopWatchingWorldState("cycles", TryStartAttacks)
         self.inst.watchingcycles = nil
-    else--if TheWorld.state.isspring then
+    else
         PauseAttacks()
         if not self.inst.watchingcycles then
             self:WatchWorldState("cycles", TryStartAttacks)  -- keep checking every day until NO_BOSS_TIME is up
@@ -137,9 +138,13 @@ local function TryStartAttacks(killed)
 end
 
 local function TargetLost()
-    if _timetoattack == nil or (_timetoattack < _warnduration and _warning) then
+    local timetoattack = _worldsettingstimer:GetTimeLeft(MOTHERGOOSE_TIMERNAME)
+    if timetoattack == nil then
         _warning = false
-        _timetoattack = _warnduration + 1
+        _worldsettingstimer:StartTimer(MOTHERGOOSE_TIMERNAME, _warnduration + 1)
+    elseif (timetoattack < _warnduration and _warning) then
+        _warning = false
+        _worldsettingstimer:SetTimeLeft(MOTHERGOOSE_TIMERNAME, _warnduration + 1)
     end
 
     PickAttackTarget()
@@ -160,6 +165,7 @@ local function GetSpawnPoint(pt)
     end
 end
 
+local STRUCTURE_TAGS = {"structure"}
 local function ReleaseHassler(targetPlayer)
     assert(targetPlayer)
 
@@ -170,19 +176,18 @@ local function ReleaseHassler(targetPlayer)
 
     local spawn_pt = GetSpawnPoint(targetPlayer:GetPosition())
     if spawn_pt ~= nil then
-        if _storedhassler ~= nil then
+		if _storedhassler ~= nil then
             hassler = SpawnSaveRecord(_storedhassler, {})
             _storedhassler = nil
         else
-            hassler = SpawnPrefab("mothergoose")
+			hassler = SpawnPrefab("mothergoose")
 			hassler.sg:GoToState("glide")
 			hassler.components.timer:StartTimer("WantsToLayEgg", TUNING.SEG_TIME * math.random(4, 8))
-
         end
 
         if hassler ~= nil then
             hassler.Physics:Teleport(spawn_pt:Get())
-            local target = GetClosestInstWithTag("structure", targetPlayer, 40)
+            local target = GetClosestInstWithTag(STRUCTURE_TAGS, targetPlayer, 40)
             if target ~= nil then
                 hassler.components.knownlocations:RememberLocation("targetbase", target:GetPosition())
             end
@@ -243,24 +248,49 @@ local function OnHasslerKilled(src, hassler)
 	TryStartAttacks(true)
 end
 
+local function OnMotherGooseTimerDone(src, data)
+    _warning = false
+    if _targetplayer == nil then
+        PickAttackTarget() -- In case a long update skipped the warning or something
+    end
+    if _targetplayer ~= nil then
+        _activehassler = ReleaseHassler(_targetplayer)
+        ResetAttacks()
+    else
+        TargetLost()
+    end
+end
+
 --------------------------------------------------------------------------
 --[[ Public member functions ]]
 --------------------------------------------------------------------------
 
 function self:SetAttacksPerspring(attacks)
-    _attacksperspring = attacks
+    --_attacksperspring = attacks
 end
 
 function self:OverrideAttacksPerSeason(name, num)
 	if name == "MOOSE" then
-		_attacksperspring = num
+		--_attacksperspring = num
 	end
 end
 
 function self:OverrideAttackDuringOffSeason(name, bool)
 	if name == "MOOSE" then
-		_attackduringoffseason = bool
+		--_attackduringoffseason = bool
 	end
+end
+
+function self:OnPostInit()
+    -- Shorten the time used for winter to account for the time deerclops spends stomping around
+    -- Then add one to _attacksperseason to shift the attacks so the last attack isn't right when the season changes to spring
+    _attackdelay = (TheWorld.state.springlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperseason + 1) 
+	_worldsettingstimer:AddTimer(MOTHERGOOSE_TIMERNAME, _attackdelay, true, OnMotherGooseTimerDone)
+
+    if _timetoattack then
+        _worldsettingstimer:StartTimer(MOTHERGOOSE_TIMERNAME, math.min(_timetoattack, _attackdelay))
+    end
+    TryStartAttacks()
 end
 
 local function _DoWarningSpeech(player)
@@ -276,38 +306,21 @@ function self:DoWarningSpeech(_targetplayer)
 end
 
 function self:DoWarningSound(_targetplayer)
-    --Players near _targetplayer will hear the warning sound from the
-    --same direction and volume offset from their own local positions
-    SpawnPrefab("moosewarning_lvl"..
-        (((_timetoattack == nil or
-        _timetoattack < 30) and "4") or
-        (_timetoattack < 60 and "3") or
-        (_timetoattack < 90 and "2") or
-                                "1")
-    ).Transform:SetPosition(_targetplayer.Transform:GetWorldPosition())
+	local timetoattack = _worldsettingstimer:GetTimeLeft(MOTHERGOOSE_TIMERNAME)
+	SpawnPrefab("moosewarning_lvl"..
+		(((timetoattack == nil or timetoattack < 30) and "4") or (timetoattack < 60 and "3") or (timetoattack < 90 and "2") or "1")
+	).Transform:SetPosition(_targetplayer.Transform:GetWorldPosition())
 end
 
 function self:OnUpdate(dt)
-	--print("in OnUpdate", _timetoattack, _targetplayer, _activehassler)
-    if not _timetoattack or _activehassler ~= nil then
+    local timetoattack = _worldsettingstimer:GetTimeLeft(MOTHERGOOSE_TIMERNAME)
+    if _activehassler ~= nil or not timetoattack then
         ResetAttacks()
         return
     end
-	_timetoattack = _timetoattack - dt
-	if _timetoattack <= 0 then
-		_warning = false
-		_timetoattack = nil
-		if _targetplayer == nil then
-			PickAttackTarget() -- In case a long update skipped the warning or something
-		end
-        if _targetplayer ~= nil then
-            _activehassler = ReleaseHassler(_targetplayer)
-            ResetAttacks()
-        else
-            TargetLost()
-        end
-	else
-		if not _warning and _timetoattack < _warnduration then
+	
+    if not _warning then
+        if timetoattack > 0 and timetoattack < _warnduration then
 			-- let's pick a random player here
 			PickAttackTarget()
 			if not _targetplayer then
@@ -316,11 +329,9 @@ function self:OnUpdate(dt)
 			end
 			_warning = true
 			_timetonextwarningsound = 0
-		end
-	end
-
-	if _warning then
-		_timetonextwarningsound	= _timetonextwarningsound - dt
+        end
+    else
+        _timetonextwarningsound	= _timetonextwarningsound - dt
 
 		if _timetonextwarningsound <= 0 then
 	        if _targetplayer == nil then
@@ -336,7 +347,7 @@ function self:OnUpdate(dt)
 				self:DoWarningSpeech(_targetplayer)
 			end
 
-            _timetonextwarningsound = _timetoattack < 30 and 10 + math.random(1) or 15 + math.random(4)
+            _timetonextwarningsound = timetoattack < 30 and 10 + math.random(1) or 15 + math.random(4)
 			self:DoWarningSound(_targetplayer)
 		end
 	end
@@ -354,8 +365,8 @@ function self:OnSave()
 	local data =
 	{
 		warning = _warning,
-		timetoattack = _timetoattack,
 		storedhassler = _storedhassler,
+		moonmawdelay = _moonmawdelay
 	}
 
 	local ents = {}
@@ -369,8 +380,11 @@ end
 
 function self:OnLoad(data)
 	_warning = data.warning or false
-	_timetoattack = data.timetoattack
 	_storedhassler = data.storedhassler
+	
+    if data.timetoattack then
+        _timetoattack = data.timetoattack
+    end
 end
 
 function self:LoadPostPass(newents, savedata)
@@ -391,7 +405,7 @@ function self:GetDebugString()
 	elseif self.inst.updatecomponents[self] == nil then
 		s = s .. "DORMANT ".._timetoattack
 	elseif _timetoattack > 0 then
-		s = s .. string.format("%s Dragonfly is coming for %s in %2.2f", _warning and "WARNING" or "WAITING", tostring(_targetplayer) or "<nil>", _timetoattack)
+		s = s .. string.format("%s Mothergoose is coming for %s in %2.2f", _warning and "WARNING" or "WAITING", tostring(_targetplayer) or "<nil>", _timetoattack)
 	else
 		s = s .. string.format("ATTACKING!!!")
 	end
@@ -401,8 +415,25 @@ function self:GetDebugString()
 end
 
 function self:SummonMonster(player)
-	_timetoattack = 10
+    if _worldsettingstimer:ActiveTimerExists(MOTHERGOOSE_TIMERNAME) then
+        _worldsettingstimer:SetTimeLeft(MOTHERGOOSE_TIMERNAME, 10)
+        _worldsettingstimer:ResumeTimer(MOTHERGOOSE_TIMERNAME)
+    else
+        _worldsettingstimer:StartTimer(MOTHERGOOSE_TIMERNAME, 10)
+    end
 	self.inst:StartUpdatingComponent(self)
+end
+
+local function SummonMonsterFullMoon(player)
+	if _moonmawdelay == nil and TheWorld.state.cycles > 50 and TheWorld.state.issummer and TheWorld.state.isfullmoon and not TheWorld.state.isalterawake then
+		if _worldsettingstimer:ActiveTimerExists(MOTHERGOOSE_TIMERNAME) then
+			_worldsettingstimer:SetTimeLeft(MOTHERGOOSE_TIMERNAME, 10)
+			_worldsettingstimer:ResumeTimer(MOTHERGOOSE_TIMERNAME)
+		else
+			_worldsettingstimer:StartTimer(MOTHERGOOSE_TIMERNAME, 10)
+		end
+		self.inst:StartUpdatingComponent(self)
+	end
 end
 
 function self:GetWarning()
@@ -422,9 +453,4 @@ self:WatchWorldState("season", OnSeasonChange)
 self.inst:ListenForEvent("mothergooseremoved", OnHasslerRemoved, TheWorld)
 self.inst:ListenForEvent("mothergoosekilled", OnHasslerKilled, TheWorld)
 
-function self:OnPostInit()
-    TryStartAttacks()
-end
-
 end)
-

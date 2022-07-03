@@ -35,7 +35,6 @@ local prefab_post = {
 	"flingobalance",
 	"chester",
 	"mushlight",
-	"butterfly",
     --"toadstool_cap", Moved to init_uncompromising_mod.lua
     "amulet",
 	"beequeen",
@@ -145,7 +144,6 @@ local stategraph_post = {
 	--"wobysmall",
 	--"shadowcreature",
 	"stalker_minion",
-	"krampus",
 	--"merm",
 	"carnival_host",
 	"catcoon",
@@ -295,6 +293,13 @@ if GetModConfigData("electricalmishap_") ~= 0 then
 	table.insert(prefab_post,"nightstick")
 end
 
+if GetModConfigData("harder_krampus") then
+	table.insert(stategraph_post, "krampus")
+end
+
+if GetModConfigData("noauradamage_butterfly") then
+	table.insert(prefab_post, "butterfly")
+end
 
 if not TUNING.DSTU.UPDATE_CHECK then
 	table.insert(component_post,"ambientsound")

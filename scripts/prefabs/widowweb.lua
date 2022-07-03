@@ -47,23 +47,28 @@ end
 
 local function OnKilled(inst)
     inst.components.timer:StartTimer("regen_widow", TUNING.DRAGONFLY_RESPAWN_TIME)
-    if inst._cdtask ~= nil then
-        inst._cdtask:Cancel()
+    if inst.components.timer:TimerExists("reroll_cocoons") then
+        inst.components.timer:StopTimer("reroll_cocoons")
     end
-    inst._rerolltask = nil
 end
 
 local function GenerateNewWidow(inst)
     inst.components.childspawner:AddChildrenInside(1)
     --inst.components.childspawner:StartSpawning()
-    if inst._rerolltask == nil then
-        inst._rerolltask = inst:DoPeriodicTask(2--[[TUNING.TOTAL_DAY_TIME*5]], RerollCocoons, 0, inst)
+    if not inst.components.timer:TimerExists("reroll_cocoons") then
+        inst.components.timer:StartTimer("reroll_cocoons", TUNING.TOTAL_DAY_TIME*5)
     end
 end
 
 local function ontimerdone(inst, data)
     if data.name == "regen_widow" then
         GenerateNewWidow(inst)
+    end
+    if data.name == "reroll_cocoons" then
+        RerollCocoons(inst)
+        if not inst.components.timer:TimerExists("reroll_cocoons") then
+            inst.components.timer:StartTimer("reroll_cocoons", TUNING.TOTAL_DAY_TIME*5)
+        end
     end
 end
 
@@ -110,12 +115,14 @@ local function fn()
     inst.components.childspawner.onchildkilledfn = OnKilled
     inst.components.childspawner:StopRegen()
 	inst.GroundCreepEntity:SetRadius(8)
+
     inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", ontimerdone)
 
-    if inst._rerolltask == nil then
-        inst._rerolltask = inst:DoPeriodicTask(TUNING.TOTAL_DAY_TIME*5, RerollCocoons, 0, inst)
+    if not inst.components.timer:TimerExists("reroll_cocoons") then
+        inst.components.timer:StartTimer("reroll_cocoons", TUNING.TOTAL_DAY_TIME*5)
     end
+
 
     return inst
 end

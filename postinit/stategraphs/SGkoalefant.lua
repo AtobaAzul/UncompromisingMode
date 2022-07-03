@@ -323,7 +323,7 @@ State{
 
         timeline=
         {
-            TimeEvent(32*FRAMES, function(inst) 
+            TimeEvent(36*FRAMES, function(inst) 
 			SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
 			SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
 			SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
