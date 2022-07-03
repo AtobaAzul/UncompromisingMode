@@ -18,7 +18,7 @@ Prominent features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Squeaky Clean v1.4.7.14"
+version = "Squeaky Clean v1.4.7.2"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
