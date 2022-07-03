@@ -93,32 +93,33 @@ local function ToggleGrowable(inst, iswinter)
 end
 
 -- Stone fruits bushs
-AddPrefabPostInit("rock_avocado_bush", function(inst)
-    if inst~= nil and inst.components.pickable ~= nil then
-        GLOBAL.MakeNoGrowInWinter(inst)
-    end
-	
-	if inst.components.growable ~= nil then
-		inst:WatchWorldState("iswinter", ToggleGrowable)
-		ToggleGrowable(inst, GLOBAL.TheWorld.state.iswinter)
-	end
-	
-end)
+if GetModConfigData("nowintergrowing") then
+    AddPrefabPostInit("rock_avocado_bush", function(inst)
+        if inst~= nil and inst.components.pickable ~= nil then
+            GLOBAL.MakeNoGrowInWinter(inst)
+        end
+        
+        if inst.components.growable ~= nil then
+            inst:WatchWorldState("iswinter", ToggleGrowable)
+            ToggleGrowable(inst, GLOBAL.TheWorld.state.iswinter)
+        end
+        
+    end)
 
--- Cactus
-AddPrefabPostInit("cactus", function(inst)
-    if inst~= nil and inst.components.pickable ~= nil then
-        GLOBAL.MakeNoGrowInWinter(inst)
-    end
-end)
+    -- Cactus
+    AddPrefabPostInit("cactus", function(inst)
+        if inst~= nil and inst.components.pickable ~= nil then
+            GLOBAL.MakeNoGrowInWinter(inst)
+        end
+    end)
 
--- Oasis Cactus
-AddPrefabPostInit("oasis_cactus", function(inst)
-    if inst~= nil and inst.components.pickable ~= nil then
-        GLOBAL.MakeNoGrowInWinter(inst)
-    end
-end)
-
+    -- Oasis Cactus
+    AddPrefabPostInit("oasis_cactus", function(inst)
+        if inst~= nil and inst.components.pickable ~= nil then
+            GLOBAL.MakeNoGrowInWinter(inst)
+        end
+    end)
+end
 -----------------------------------------------------------------
 -- Bunnies don't drop carrots anymore
 -----------------------------------------------------------------
@@ -136,7 +137,7 @@ local function IsCrazyGuy(guy)
     local sanity = guy ~= nil and guy.replica.sanity or nil
     return sanity ~= nil and sanity:IsInsanityMode() and sanity:GetPercentNetworked() <= (guy:HasTag("dappereffects") and TUNING.DAPPER_BEARDLING_SANITY or TUNING.BEARDLING_SANITY)
 end
-
+--[[
 local function LootSetupFunction(lootdropper)
     if lootdropper.inst ~= nil then 
         local guy = lootdropper.inst.causeofdeath
@@ -160,7 +161,7 @@ AddPrefabPostInit("bunnyman", function (inst)
         LootSetupFunction(inst.components.lootdropper)
     end
 end)
-
+]]
 local rabbitloot = { "smallmeat" }
 
 local function SetRabbitLoot(lootdropper)

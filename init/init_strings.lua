@@ -29,6 +29,7 @@ STRINGS.ACTIONS.ACTIVATE.RECRUITRAT = "Recruit A Rat"
 STRINGS.ACTIONS.TURNOFF.HARPOON = "Break Reel"
 STRINGS.ACTIONS.ACTIVATE.HARPOON = "Reel"
 STRINGS.ACTIONS.CASTSPELL.HARPOON = "Throw Harpoon"
+STRINGS.ACTIONS.DEPLOY.POWERCELL = "Charge Equipment"
 
 STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON = { "NO SMASH HOUSES", "US WATCHING YOU", "BE GOOD HERE", "WATCHING YOU" }
 STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_NIGHT = { "KING SLEEPING, YOU GO NOW", "YOU LEAVE NOW", "STAY AND WE GET MEAN", "KING NEED SLEEP, GO AWAY" }
@@ -36,24 +37,37 @@ STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_EVENING = { "KING BED TIME SOON, YOU
 STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_FRIEND = { "KING SAY PROTECT", "PROTECT YOU", "WHERE MONSTERS?", "PROTECT!", "PROTECT KING!", "PROTECT FRIEND!" }
 
 -- Hey look! I actually did something! -Canis
-STRINGS.CHARACTER_DESCRIPTIONS.willow = STRINGS.CHARACTER_DESCRIPTIONS.willow.."\n󰀕Lighter lasts long on the right hands\n󰀕Can ignite things in the cold"
-STRINGS.CHARACTER_DESCRIPTIONS.wx78 = STRINGS.CHARACTER_DESCRIPTIONS.wx78.."󰀕Systems are not repaired via lightning"
-STRINGS.CHARACTER_DESCRIPTIONS.wickerbottom = STRINGS.CHARACTER_DESCRIPTIONS.wickerbottom.."\n󰀕Reading requires brainpower"
+if GetModConfigData("willow") then
+	STRINGS.CHARACTER_DESCRIPTIONS.willow = STRINGS.CHARACTER_DESCRIPTIONS.willow.."\n󰀕Lighter lasts long on the right hands\n󰀕Can ignite things in the cold"
+end
+if GetModConfigData("wx78") then
+	STRINGS.CHARACTER_DESCRIPTIONS.wx78 = STRINGS.CHARACTER_DESCRIPTIONS.wx78.."󰀕Systems are not repaired via lightning"
+end
+if GetModConfigData("wickerbottom") then
+	STRINGS.CHARACTER_DESCRIPTIONS.wickerbottom = STRINGS.CHARACTER_DESCRIPTIONS.wickerbottom.."\n󰀕Reading requires brainpower"
+end
 STRINGS.CHARACTER_DESCRIPTIONS.wes = STRINGS.CHARACTER_DESCRIPTIONS.wes.."\n󰀕Expanded inner dialogue" --"\n󰀕Pengulls are fond of mimes"
-STRINGS.CHARACTER_DESCRIPTIONS.waxwell = STRINGS.CHARACTER_DESCRIPTIONS.waxwell.."\n󰀕Can summon his old puppets"
-STRINGS.CHARACTER_DESCRIPTIONS.warly = STRINGS.CHARACTER_DESCRIPTIONS.warly.."\n󰀕Absorbs nutrients better, but prefers more variety"
-STRINGS.CHARACTER_DESCRIPTIONS.winona = STRINGS.CHARACTER_DESCRIPTIONS.winona.."\n󰀕Works hard until lunch\n󰀕Generators are for workers only"
-
+if GetModConfigData("waxwell") then
+	STRINGS.CHARACTER_DESCRIPTIONS.waxwell = STRINGS.CHARACTER_DESCRIPTIONS.waxwell.."\n󰀕Can summon his old puppets"
+end
+if GetModConfigData("warly") then
+	STRINGS.CHARACTER_DESCRIPTIONS.warly = STRINGS.CHARACTER_DESCRIPTIONS.warly.."\n󰀕Absorbs nutrients better, but prefers more variety"
+end
+if GetModConfigData("winona_gen") then
+	STRINGS.CHARACTER_DESCRIPTIONS.winona = STRINGS.CHARACTER_DESCRIPTIONS.winona.."\n󰀕Generators are for workers only"
+end
+if GetModConfigData("winonaworker") then
+	STRINGS.CHARACTER_DESCRIPTIONS.winona = STRINGS.CHARACTER_DESCRIPTIONS.winona.."\n󰀕Works hard until lunch"
+end
 if GetModConfigData("wortox") == "UMNERF" then
 	STRINGS.CHARACTER_DESCRIPTIONS.wortox = STRINGS.CHARACTER_DESCRIPTIONS.wortox.."\n󰀕Some weak creatures have no meaningful Soul \n󰀕Medium max health"
 end
-
 if GetModConfigData("wortox") == "SHOT" then
 	STRINGS.CHARACTER_DESCRIPTIONS.wortox = STRINGS.CHARACTER_DESCRIPTIONS.wortox.."\n󰀕Souls take time to heal"
 end
-
-STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr = STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr.."\n󰀕Less passionate in combat"
-
+if GetModConfigData("wigfrid") then
+	STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr = STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr.."\n󰀕Less passionate in combat"
+end
 if TUNING.DSTU.WORMWOOD_CONFIG_FIRE then
 	STRINGS.CHARACTER_DESCRIPTIONS.wormwood = STRINGS.CHARACTER_DESCRIPTIONS.wormwood.."\n󰀕Is dangerously flammable"
 end

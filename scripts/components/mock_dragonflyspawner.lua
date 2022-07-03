@@ -18,6 +18,7 @@ local STRUCTURE_DIST = 20
 local HASSLER_SPAWN_DIST = 40
 local HASSLER_KILLED_DELAY_MULT = 6
 local STRUCTURES_PER_SPAWN = 4
+local MOCKFLY_TIMERNAME = "mockfly_timetoattack"
 
 
 --------------------------------------------------------------------------
@@ -35,8 +36,11 @@ local _moonmawdelay = nil
 local _warnduration = 60
 local _timetonextwarningsound = 0
 local _announcewarningsoundinterval = 4
+
+local _worldsettingstimer = TheWorld.components.worldsettingstimer
 	
-local _attackspersummer = 4
+local _attackdelay = nil
+local _attacksperseason = 4
 local _attackduringoffseason = false
 local _targetplayer = nil
 local _activehassler = nil
@@ -101,36 +105,36 @@ local function PauseAttacks()
 	_targetplayer = nil
     _warning = false
     self.inst:StopUpdatingComponent(self)
+    _worldsettingstimer:PauseTimer(MOCKFLY_TIMERNAME, true)
 end
 
 local function ResetAttacks()
-    _timetoattack = nil
+    _worldsettingstimer:StopTimer(MOCKFLY_TIMERNAME)
     PauseAttacks()
 end
 
 local function TryStartAttacks(killed)
     if AllowedToAttack() then
-        if _activehassler == nil and _attackspersummer > 0 and _timetoattack == nil then
+        if _activehassler == nil and _attacksperseason > 0 and _timetoattack == nil then
             -- Shorten the time used for winter to account for the time deerclops spends stomping around
             -- Then add one to _attacksperwinter to shift the attacks so the last attack isn't right when the season changes to spring
-            local attackdelay = (TheWorld.state.summerlength - 1) * TUNING.TOTAL_DAY_TIME / (_attackspersummer + 1) 
-            if killed then
-                attackdelay = attackdelay * HASSLER_KILLED_DELAY_MULT
+            --local attackdelay = (TheWorld.state.summerlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperseason + 1) 
+			local attackdelay = killed == true and _attackdelay * HASSLER_KILLED_DELAY_MULT or _attackdelay
+
+			if killed then
 				_moonmawdelay = attackdelay / 2
 			else
-                attackdelay = attackdelay * 2
 				_moonmawdelay = attackdelay / 2
             end
-            -- Remove randomization in case that shifts it too far
-            --local attackrandom = 0.1*attackdelay
-            _timetoattack = GetRandomWithVariance(attackdelay, 0)
-            --print("got time to attack", _timetoattack, attackdelay, attackrandom)
+			
+			_worldsettingstimer:StartTimer(MOCKFLY_TIMERNAME, attackdelay)
         end
 
+        _worldsettingstimer:ResumeTimer(MOCKFLY_TIMERNAME)
         self.inst:StartUpdatingComponent(self)
         self:StopWatchingWorldState("cycles", TryStartAttacks)
         self.inst.watchingcycles = nil
-    else--if TheWorld.state.issummer  then
+    else
         PauseAttacks()
         if not self.inst.watchingcycles then
             self:WatchWorldState("cycles", TryStartAttacks)  -- keep checking every day until NO_BOSS_TIME is up
@@ -140,9 +144,13 @@ local function TryStartAttacks(killed)
 end
 
 local function TargetLost()
-    if _timetoattack == nil or (_timetoattack < _warnduration and _warning) then
+    local timetoattack = _worldsettingstimer:GetTimeLeft(MOCKFLY_TIMERNAME)
+    if timetoattack == nil then
         _warning = false
-        _timetoattack = _warnduration + 1
+        _worldsettingstimer:StartTimer(MOCKFLY_TIMERNAME, _warnduration + 1)
+    elseif (timetoattack < _warnduration and _warning) then
+        _warning = false
+        _worldsettingstimer:SetTimeLeft(MOCKFLY_TIMERNAME, _warnduration + 1)
     end
 
     PickAttackTarget()
@@ -150,7 +158,6 @@ local function TargetLost()
         PauseAttacks()
     end
 end
-
 
 local function FindNearbyLandFullMoon(position, range)
     local finaloffset = FindValidPositionByFan(math.random() * PI / 2, range or 8, 8, function(offset)
@@ -181,6 +188,7 @@ local function GetSpawnPoint(pt)
     end
 end
 
+local STRUCTURE_TAGS = {"structure"}
 local function ReleaseHassler(targetPlayer)
     assert(targetPlayer)
 
@@ -202,7 +210,7 @@ local function ReleaseHassler(targetPlayer)
 
         if hassler ~= nil then
             hassler.Physics:Teleport(spawn_pt:Get())
-            local target = GetClosestInstWithTag("structure", targetPlayer, 40)
+            local target = GetClosestInstWithTag(STRUCTURE_TAGS, targetPlayer, 40)
             if target ~= nil then
                 hassler.components.knownlocations:RememberLocation("targetbase", target:GetPosition())
             end
@@ -263,27 +271,48 @@ local function OnHasslerKilled(src, hassler)
 	TryStartAttacks(true)
 end
 
+local function OnMockflyTimerDone(src, data)
+    _warning = false
+    if _targetplayer == nil then
+        PickAttackTarget() -- In case a long update skipped the warning or something
+    end
+    if _targetplayer ~= nil then
+        _activehassler = ReleaseHassler(_targetplayer)
+        ResetAttacks()
+    else
+        TargetLost()
+    end
+end
+
 --------------------------------------------------------------------------
 --[[ Public member functions ]]
 --------------------------------------------------------------------------
 
 function self:SetAttacksPersummer(attacks)
-    _attackspersummer = attacks
+    --_attacksperseason = attacks
 end
 
 function self:OverrideAttacksPerSeason(name, num)
 	if name == "MOCK_DRAGONFLY" then
-		_attackspersummer = num
+		--_attacksperseason = num
 	end
 end
 
 function self:OverrideAttackDuringOffSeason(name, bool)
 	if name == "MOCK_DRAGONFLY" then
-		_attackduringoffseason = bool
+		--_attackduringoffseason = bool
 	end
 end
 
 function self:OnPostInit()
+    -- Shorten the time used for winter to account for the time deerclops spends stomping around
+    -- Then add one to _attacksperseason to shift the attacks so the last attack isn't right when the season changes to spring
+	_attackdelay = ((TheWorld.state.summerlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperseason + 1)) * 2
+	_worldsettingstimer:AddTimer(MOCKFLY_TIMERNAME, _attackdelay, true, OnMockflyTimerDone)
+
+    if _timetoattack then
+        _worldsettingstimer:StartTimer(MOCKFLY_TIMERNAME, math.min(_timetoattack, _attackdelay))
+    end
     TryStartAttacks()
 end
 
@@ -304,32 +333,27 @@ function self:DoWarningSound(_targetplayer)
     --same direction and volume offset from their own local positions
 	
 	if _moonmawdelay == nil and TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake then
+		
+		local timetoattack = _worldsettingstimer:GetTimeLeft(MOCKFLY_TIMERNAME)
 		SpawnPrefab("moonmaw_dragonflywarning_lvl"..
-			(((_timetoattack == nil or
-			_timetoattack < 30) and "4") or
-			(_timetoattack < 60 and "3") or
-			(_timetoattack < 90 and "2") or
-									"1")
+			(((timetoattack == nil or timetoattack < 30) and "4") or (timetoattack < 60 and "3") or (timetoattack < 90 and "2") or "1")
 		).Transform:SetPosition(_targetplayer.Transform:GetWorldPosition())
 	else
+		
+		local timetoattack = _worldsettingstimer:GetTimeLeft(MOCKFLY_TIMERNAME)
 		SpawnPrefab("dragonflywarning_lvl"..
-			(((_timetoattack == nil or
-			_timetoattack < 30) and "4") or
-			(_timetoattack < 60 and "3") or
-			(_timetoattack < 90 and "2") or
-									"1")
+			(((timetoattack == nil or timetoattack < 30) and "4") or (timetoattack < 60 and "3") or (timetoattack < 90 and "2") or "1")
 		).Transform:SetPosition(_targetplayer.Transform:GetWorldPosition())
 	end
 end
 
 function self:OnUpdate(dt)
-	--print("in OnUpdate", _timetoattack, _targetplayer, _activehassler)
-    if not _timetoattack or _activehassler ~= nil then
+    local timetoattack = _worldsettingstimer:GetTimeLeft(MOCKFLY_TIMERNAME)
+    if _activehassler ~= nil or not timetoattack then
         ResetAttacks()
         return
     end
-	_timetoattack = _timetoattack - dt
-
+	
 	if _moonmawdelay ~= nil then
 		_moonmawdelay = _moonmawdelay - dt
 		
@@ -338,20 +362,8 @@ function self:OnUpdate(dt)
 		end
 	end
 	
-	if _timetoattack <= 0 then
-		_warning = false
-		_timetoattack = nil
-		if _targetplayer == nil then
-			PickAttackTarget() -- In case a long update skipped the warning or something
-		end
-        if _targetplayer ~= nil then
-            _activehassler = ReleaseHassler(_targetplayer)
-            ResetAttacks()
-        else
-            TargetLost()
-        end
-	else
-		if not _warning and _timetoattack < _warnduration then
+    if not _warning then
+        if timetoattack > 0 and timetoattack < _warnduration then
 			-- let's pick a random player here
 			PickAttackTarget()
 			if not _targetplayer then
@@ -360,11 +372,9 @@ function self:OnUpdate(dt)
 			end
 			_warning = true
 			_timetonextwarningsound = 0
-		end
-	end
-
-	if _warning then
-		_timetonextwarningsound	= _timetonextwarningsound - dt
+        end
+    else
+        _timetonextwarningsound	= _timetonextwarningsound - dt
 
 		if _timetonextwarningsound <= 0 then
 	        if _targetplayer == nil then
@@ -380,7 +390,7 @@ function self:OnUpdate(dt)
 				self:DoWarningSpeech(_targetplayer)
 			end
 
-            _timetonextwarningsound = _timetoattack < 30 and 10 + math.random(1) or 15 + math.random(4)
+            _timetonextwarningsound = timetoattack < 30 and 10 + math.random(1) or 15 + math.random(4)
 			self:DoWarningSound(_targetplayer)
 		end
 	end
@@ -398,7 +408,6 @@ function self:OnSave()
 	local data =
 	{
 		warning = _warning,
-		timetoattack = _timetoattack,
 		storedhassler = _storedhassler,
 		moonmawdelay = _moonmawdelay
 	}
@@ -414,9 +423,12 @@ end
 
 function self:OnLoad(data)
 	_warning = data.warning or false
-	_timetoattack = data.timetoattack
 	_storedhassler = data.storedhassler
 	_moonmawdelay = data.moonmawdelay
+	
+    if data.timetoattack then
+        _timetoattack = data.timetoattack
+    end
 end
 
 function self:LoadPostPass(newents, savedata)
@@ -447,13 +459,23 @@ function self:GetDebugString()
 end
 
 function self:SummonMonster(player)
-	_timetoattack = 10
+    if _worldsettingstimer:ActiveTimerExists(MOCKFLY_TIMERNAME) then
+        _worldsettingstimer:SetTimeLeft(MOCKFLY_TIMERNAME, 10)
+        _worldsettingstimer:ResumeTimer(MOCKFLY_TIMERNAME)
+    else
+        _worldsettingstimer:StartTimer(MOCKFLY_TIMERNAME, 10)
+    end
 	self.inst:StartUpdatingComponent(self)
 end
 
 local function SummonMonsterFullMoon(player)
 	if _moonmawdelay == nil and TheWorld.state.cycles > 50 and TheWorld.state.issummer and TheWorld.state.isfullmoon and not TheWorld.state.isalterawake then
-		_timetoattack = 50
+		if _worldsettingstimer:ActiveTimerExists(MOCKFLY_TIMERNAME) then
+			_worldsettingstimer:SetTimeLeft(MOCKFLY_TIMERNAME, 10)
+			_worldsettingstimer:ResumeTimer(MOCKFLY_TIMERNAME)
+		else
+			_worldsettingstimer:StartTimer(MOCKFLY_TIMERNAME, 10)
+		end
 		self.inst:StartUpdatingComponent(self)
 	end
 end

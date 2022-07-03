@@ -51,49 +51,6 @@ env.AddPrefabPostInit("cave", function(inst)
 	inst:AddComponent("ratacombs_junk_manager")
 end)
 
-local function OnSeasonTick(inst)
-	if TheWorld.state.isspring then
-		if not TheWorld.components.mock_dragonflyspawner and TUNING.DSTU.SPAWNWILTINGFLY then
-			inst:AddComponent("mock_dragonflyspawner")
-		end
-	end
-end
-
-local function OnLoad(inst, data)
-	if inst.components.deerclopsspawner ~= nil then
-		TheWorld.components.deerclopsspawner:OverrideAttacksPerSeason("DEERCLOPS", 0)
-		inst:RemoveComponent("deerclopsspawner")
-	end
-	
-	if inst.components.forestresourcespawner ~= nil then
-		inst:RemoveComponent("forestresourcespawner")
-	end
-	
-	if inst.components.regrowthmanager ~= nil then
-		inst:RemoveComponent("regrowthmanager")
-	end
-	
-	if inst.components.desolationspawner ~= nil then
-		inst:RemoveComponent("desolationspawner")
-	end
-end
-
-local function OnSave()
-	--Now, if you're seeing this, you might be asking yourself, "Why is the default deerclops spawner
-	--being overwriten to 0? Cant you just outright disable the whole thing? Why don't you just edit
-	--the original component?" The answer, is that modding is fickle, and for some reason I cannot
-	--figure out, having the default spawner enabled completely glitches up the mock dragonfly and
-	--mother goose spawners, funny thing is, this uncomp deerclops spawner is a nearly IDENTICAL version,
-	--yet it doesnt have any effect, despite (ill say it again), being an IDENTICAL component.
-	--Removing the component from the world doesnt do anything, the only easy method is to keep on
-	--overriding the attacks per season to 0 on the classic version
-	if TheWorld.components.deerclopsspawner ~= nil then
-		TheWorld.components.deerclopsspawner:OverrideAttacksPerSeason("DEERCLOPS", 0)
-		inst:RemoveComponent("deerclopsspawner")
-	end
-	--/////////--
-end
-
 env.AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then
         return
@@ -118,12 +75,6 @@ env.AddPrefabPostInit("forest", function(inst)
 	if TUNING.DSTU.DESERTSCORPIONS then	
 		inst:AddComponent("scorpionspawner")
 	end
-	
-	
-	
-	--inst.OnSave = OnSave
-	
-	--inst.OnLoad = OnLoad
 end)
 
 if TUNING.DSTU.SPAWNMOTHERGOOSE and not TUNING.DSTU.ISLAND_ADVENTURES then

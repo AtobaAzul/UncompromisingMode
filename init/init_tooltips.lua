@@ -3,11 +3,8 @@ local STRINGS = GLOBAL.STRINGS
 
 STRINGS.UNCOMP_TOOLTIP = {
 	AMULET = "- Only revives the player upon death while worn.\n- Increased heal rate at lower health.\n- Never breaks, can be refueled with Nightmare Fuel.",
-	MINIFAN = "- Staves off heat, and hayfever.",
 	ARMORRUINS = "- Prevents knockback effects.\n- Reduces insanity aura effects by 40%.",
 	SWEATERVEST = "- Reduces insanity aura effects by 70%.",
-	FEATHERFAN = "- Grants large amounts of Hayfever protection when blown.",
-	PERDFAN = "- Grants large amounts of Hayfever protection when blown.",
 	SKELETONHAT = "- Will not spawn the Creeping Fear when worn.",
 	ICEPACK = "- Will not burn.",
 	COOKIECUTTERHAT = "- Reflects 75% of damage taken back at attacker.",
@@ -113,6 +110,9 @@ if TUNING.DSTU.HAYFEVER then
 	TOOLTIP.GASMASK = TOOLTIP.GASMASK.."\n- Prevents Hayfever while worn."
 	TOOLTIP.PLAGUEMASK = TOOLTIP.PLAGUEMASK.."\n- Prevents Hayfever while worn."
 	TOOLTIP.BEEHAT = "- Stings won't cause allergic reactions."
+	TOOLTIP.MINIFAN = "- Staves off hayfever."
+	TOOLTIP.FEATHERFAN = "- Grants large amounts of Hayfever protection when blown."
+	TOOLTIP.PERDFAN = "- Grants large amounts of Hayfever protection when blown."
 end
 
 if TUNING.DSTU.GOTOBED then

@@ -2000,12 +2000,12 @@ local function TimeForACheckUp(inst,dev)
 					if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and (v.components.inventoryitem:GetGrandOwner().prefab == "lureplant"or v.components.inventoryitem:GetGrandOwner().prefab == "catcoon") then
 						--print("lureplant is holding!")
 					else
-						if not v:HasTag("frozen") then
+						if not (v:HasTag("frozen") or v:HasTag("NORATCHECK")) then
 							FoodScoreCalculations(inst,true,v)
 						end
 					end
 				else
-					if not v:HasTag("frozen") then
+					if not (v:HasTag("frozen") or v:HasTag("NORATCHECK")) then
 						FoodScoreCalculations(inst,false,v)
 					end
 					

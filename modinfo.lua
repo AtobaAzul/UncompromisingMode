@@ -1,7 +1,7 @@
 name = "󰀕 Uncompromising Mode"
 description = 
 [[
-󰀔 [ Version 1.4.7.14 : "Winky, The Vile Vermin" ]
+󰀔 [ Version 1.4.7.2 : "Winky, The Vile Vermin" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -351,6 +351,7 @@ configuration_options =
 		default = 1,
 	},
 	BinaryConfig("insul_thermalstone", "Tweaked Thermal Stone", "Thermal stones now have less insulation, but inherit some insulation from clothing.", true),
+	BinaryConfig("uncool_chester", "Thermal Stone Snow Chester Nerf", "Snow Chester will no longer freeze Thermal Stones.", true),
 	{
 		name = "electricalmishap",
 		label = "Electrical Weapon Retune",
@@ -369,6 +370,7 @@ configuration_options =
 	SkipSpace(),
 	Header("Food"),
 	Header("Crockpot Recipes"),
+	BinaryConfig("nowintergrowing", "No Winter Growing", "Makes a few food sources such as kelp and stone fruit not grow in winter", true),
 	BinaryConfig("newrecipes", "New Recipes", "UM adds a few new recipes\nTurn this off if you're using mods that can cause overlap, such as HoF.", true),
 	BinaryConfig("crockpotmonstmeat", "Harder Monster Meat", "Enables the new monster lagsana recipe, where you can only make recipes if the meat value is greater than monster value.", true),
 	BinaryConfig("generalcrockblocker", "Trash Filler Blocker", "Heavy use of certain low quality crockpot ingredients, such as twigs, ice, buttefly wings, and other inedibles results in wet goop.", true),
@@ -512,10 +514,13 @@ configuration_options =
 
 
 	Header("Misc Monsters"),
+	BinaryConfig("bushcrabs", "Bush Crabs", "Bush Crabs ambush the player when digging berry bushes...", true),
 	BinaryConfig("desertscorpions", "Scorpions", "Scorpions plague the desert lands. They will spawn from desert turf within the desert during the day.", true),
 	BinaryConfig("pinelings", "Pinelings", "Stumps will become pinelings if awoken by a treeguard, or can happen naturally to existing old stumps.", true),
 	BinaryConfig("pollenmites", "Pollen Mites", "Pollen mites spawn in spring and quickly infest the nearby area.", false),
 	BinaryConfig("maxhphitters", "Max HP Damage", "Some monsters deal Max HP damage\nTurn this off if you're having problems with mods which also interact with it.", true),
+	BinaryConfig("harder_krampus", "Harder Krampus", "Krampii now have a new attack with knockback.", true),
+	BinaryConfig("noauradamage_butterfly", "AoE Immune Butterflies", "Butterflies are immune to AoE damage such as catapults, and Abigail.", true),
 	SkipSpace(),
 
 	Header("Standard Creatures"),

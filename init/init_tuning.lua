@@ -385,6 +385,7 @@ TUNING.DSTU =
     HUNGRYFROGS = GetModConfigData("hungryfrogs"),
     COWARDFROGS = GetModConfigData("cowardfrogs"),
     INSUL_THERMALSTONE = GetModConfigData("insul_thermalstone"),
+    UNCOOL_CHESTER = GetModConfigData("uncool_chester"),
     HOODEDFOREST = GetModConfigData("hoodedforest"),
     GHOSTWALRUS = GetModConfigData("ghostwalrus"),
     WINONA_GEN = GetModConfigData("winona_gen"),

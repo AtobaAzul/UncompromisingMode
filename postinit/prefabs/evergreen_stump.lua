@@ -19,38 +19,56 @@ end
 local function onnear(inst, target)
 	if not inst:HasTag("burnt") and inst:HasTag("stump") and target ~= nil and not target:HasTag("plantkin") then
 		if inst.stumplingambush then
+			local x, y, z = inst.Transform:GetWorldPosition()
+			
 			local stumpling = SpawnPrefab(inst.stumpling)
 
+			local disableambushtargets = TheSim:FindEntities(x, y, z, 100, {"stump", "evergreen"}, { "leif","burnt" })
+			
+			for k, b in ipairs(disableambushtargets) do
+				b.stumplingambush = false
+					
+				if b.components.timer ~= nil and b.components.timer:TimerExists("stumptime") then
+					b.components.timer:StopTimer("stumptime")
+				end
+			end
+			
 			if target ~= nil then
 				stumpling.components.combat:SuggestTarget(target)
 			end
 			
-			local x, y, z = inst.Transform:GetWorldPosition()
+			local stump = TheSim:FindEntities(x, y, z, 15, {"stump", "evergreen"}, { "leif","burnt" })
 			
-			local stump = FindEntity(inst, 20, nil, {"stump", "evergreen"}, { "leif","burnt" })
-			
-			if stump ~= nil then
-				for i, v in ipairs(stump) do
-					if v.stumplingambush ~= nil and v.stumplingambush then
-						v.stumplingambush = false
-					end
+			for i, v in ipairs(stump) do
+				local scaling = TheWorld.state.cycles / 35
+				
+				if scaling > 3 then
+					scaling = 3
 				end
 				
-				for k = 1, 3 do 
+				if i <= 2 + scaling then 
 					if inst.stumpling == "stumpling" then
-						if stump ~= nil then
-							stump.noleif = true
-							stump.chopper = target
-							stump.stumpling = inst.stumpling
-							stump:DoTaskInTime(0, spawn_stumpling)
+						if v ~= nil then
+							v.noleif = true
+							v.chopper = target
+							v.stumpling = inst.stumpling
+							spawn_stumpling(v)
+							--v:DoTaskInTime(0, spawn_stumpling)
 						end
 					else
-						if stump ~= nil then
-							stump.noleif = true
-							stump.chopper = target
-							stump.stumpling = inst.stumpling
-							stump:DoTaskInTime(0, spawn_stumpling)
+						if v ~= nil then
+							v.noleif = true
+							v.chopper = target
+							v.stumpling = inst.stumpling
+							spawn_stumpling(v)
+							--v:DoTaskInTime(0, spawn_stumpling)
 						end
+					end
+				else
+					v.stumplingambush = false
+					
+					if v.components.timer ~= nil and v.components.timer:TimerExists("stumptime") then
+						v.components.timer:StopTimer("stumptime")
 					end
 				end
 			end
@@ -69,7 +87,11 @@ local function OnTimerDone2(inst, data)
     if data.name == "stumptime" then
 		local scaling = TheWorld.state.cycles / 200
 		
-		if math.random() < (0.1 + scaling) then
+		if scaling > 0.3 then
+			scaling = 0.3
+		end
+		
+		if math.random() < scaling then
 			inst.stumplingambush = true
 		end
     end
@@ -77,7 +99,7 @@ end
 
 local function chop_down_tree(inst, data)
 	if TheWorld.state.cycles >= 4 then
-		inst.components.timer:StartTimer("stumptime", math.random(240, 960))
+		inst.components.timer:StartTimer("stumptime", math.random(960, 2400))
 	end
 	
 	return inst._OldOnFinish(inst, data)

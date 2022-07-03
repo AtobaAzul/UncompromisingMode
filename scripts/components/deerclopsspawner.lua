@@ -365,5 +365,4 @@ function self:SummonMonster(player)
 	self.inst:StartUpdatingComponent(self)
 end
 
-
 end)
