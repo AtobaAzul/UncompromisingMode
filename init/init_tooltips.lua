@@ -168,3 +168,7 @@ end
 if TUNING.DSTU.WICKERNERF_TENTACLES then
 	TOOLTIP.BOOK_TENTACLES = "- Summons Sickly Tentacles\n- Sickly Tentacles die over time, drop no loot but don't attack players."
 end
+
+if GetModConfigData("woodie") then
+	TOOLTIP.WEREITEM_GOOSE = "- Walking on water makes you wet."
+end

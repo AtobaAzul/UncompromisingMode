@@ -160,16 +160,16 @@ configuration_options =
 		{
 		name = "wortox",
 		label = "Wortox changes",
-		hover = "Wortox has different settings that change his characteristics. \nSHOT- SoulsHealOverTime | Classic- Less Soul Sources, Less Max Health",
+		hover = "Wortox has different settings that change his characteristics.",
 		options =
 		{
-			{description = "SHOT", data = "SHOT"},
-			{description = "Classic", data = "UMNERF"},
+			{description = "SHOT", data = "SHOT", hover = "Souls heal over time."},
+			{description = "Classic", data = "UMNERF", hover = "Less soul sources, less max health."},
 			{description = "Vanilla", data = "off"},
 		},
 		default = "UMNERF",
 	},
-	
+
 	BinaryConfig("wickerbottom", "Wickerbottom Balance", "Wickerbottom/Maxwell can no longer read books while insane.", true),
 	BinaryConfig("on tentacles", "On Tentacles Re-Balance", "On Tentacles now spawns friendly tentacles that die over time, and do not drop tentacle spots.", true),
 	BinaryConfig("applied horticulture", "Horticulture, Abridged recipe Re-Balance", "Horticulture, Abridged now takes 1 Leafy Meat instead of 5 seeds, to better balance it from being too easily spammable early game.", true),
@@ -179,6 +179,7 @@ configuration_options =
 	BinaryConfig("wendy", "Nerfed Wendy", "Abigail was nerfed to not increase Wendy's maximum damage above average.", true),
 	BinaryConfig("wx78", "Tweaked WX-78", "No longer heals from lightning", true),
 	BinaryConfig("woodie", "Weregoose Wetness", "Weregoose gains wetness when over water.", false),
+	BinaryConfig("wigfrid","Wigfrid Leech Nerf", "Wigfrid gains less sanity and health on attack.", true),
 	SkipSpace(),
 ------------------------------
 -- Weather --
@@ -262,7 +263,7 @@ configuration_options =
 		options = 
 		{
 			{description = "Enabled", data = "enabled"},
-			{description = "Enabled (No Respawn)", data = "norespawn"},
+			{description = "Enabled (No Respawn)", data = "norespawn", hover = "Traps don't respawn over time."},
 			{description = "Disabled", data = "disabled"},
 		},
 		default = "enabled",
@@ -345,7 +346,7 @@ configuration_options =
 		options =
 		{
 			{description = "On", data = 1},
-			{description = "On (No Drop)", data = 2},
+			{description = "On (Backpack-like)", data = 2, hover = "Items with pockets act like backpacks. Can't be put in inventory."},
 			{description = "Off", data = 0},
 		},
 		default = 1,
@@ -355,11 +356,11 @@ configuration_options =
 	{
 		name = "electricalmishap",
 		label = "Electrical Weapon Retune",
-		hover = "Electrical weapons can protect and charge from lightning strikes, lightning rods, and Winona Generators.\nBug Zapper will drain on hit.\nClassic enables recharging via electrical items, with slightly different tuning.\nBug Zapper will drain over time.",
+		hover = "Controls how electrical weapons (Bug Zapper and Morning Star) behaves.",
 		options =
 		{
-			{description = "Electrical Mishap", data = 1},
-			{description = "Classic", data = 2},
+			{description = "Electrical Mishap", data = 1, hover = "Weapons can be charged from lightning and generators."},
+			{description = "Classic", data = 2, hover = "Weapons can be refueled with some items. Bug Zapper drains over time." },
 			{description = "Off", data = 0},
 		},
 		default = 1,
@@ -448,7 +449,7 @@ configuration_options =
 	SkipSpace(),
 
 	Header("Wave Changes"),
-	BinaryConfig("lategamehoundspread", "Descreased Lategame Frequency", "Enabling this decreases the frequency in the lategame so hounds are still a threat, but not annoying.", true),
+	BinaryConfig("lategamehoundspread", "Decreased Lategame Frequency", "Enabling this decreases the frequency in the lategame so hounds are still a threat, but not annoying.", true),
 
 	--[[BinaryConfig("vargwaves", "Vargs in Hound Waves", "In the lategame, vargs will accompany hounds in houndwaves.", true),
 	{
