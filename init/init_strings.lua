@@ -70,7 +70,7 @@ if GetModConfigData("wortox") == "SHOT" then
 	STRINGS.CHARACTER_DESCRIPTIONS.wortox = STRINGS.CHARACTER_DESCRIPTIONS.wortox.."\n󰀕Souls take time to heal"
 end
 if GetModConfigData("wigfrid") then
-	STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr = STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr.."\n󰀕Less passionate in combat"
+	STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr = STRINGS.CHARACTER_DESCRIPTIONS.wathgrithr.."\n󰀕Combat is less sustaining"
 end
 if TUNING.DSTU.WORMWOOD_CONFIG_FIRE then
 	STRINGS.CHARACTER_DESCRIPTIONS.wormwood = STRINGS.CHARACTER_DESCRIPTIONS.wormwood.."\n󰀕Is dangerously flammable"

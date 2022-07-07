@@ -47,13 +47,15 @@ end
 local function onattackedfn(inst, data)
     if inst.components.health and not inst.components.health:IsDead()
     and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("frozen")) then
-        if inst.components.combat and data and data.attacker and not data.attacker:HasTag("moonglasscreature") then inst.components.combat:SuggestTarget(data.target) end
+        if inst.components.combat and data and data.attacker and not data.attacker:HasTag("moonglasscreature") then 
+			inst.components.combat:SuggestTarget(data.target) 
+		end
 		--print("Distance"..inst:GetDistanceSqToInst(data.attacker))
-			if inst:GetDistanceSqToInst(data.attacker) < 15 then
-				inst.sg:GoToState("hit")
-			end
-		elseif inst.sg:HasStateTag("crashed") then
-			inst.sg:GoToState("getup")
+		if data.attacker ~= nil and data.attacker:IsValid() and inst:GetDistanceSqToInst(data.attacker) < 15 then
+			inst.sg:GoToState("hit")
+		end
+	elseif inst.sg:HasStateTag("crashed") then
+		inst.sg:GoToState("getup")
     end
 end
 

@@ -204,6 +204,17 @@ env.AddPrefabPostInit("lighter", function(inst)
 		end
 	end
 	
+	if inst.components.cooker ~= nil then
+		local _SetOnCook = inst.components.cooker.oncookfn
+
+		inst.components.cooker.oncookfn = function(inst, product, chef)
+			if not chef:HasTag("pyromaniac") then
+				if _SetOnCook ~= nil then
+					_SetOnCook(inst, product, chef)
+				end
+			end
+		end
+	end
 end)
 
 local function getstatus(inst)
