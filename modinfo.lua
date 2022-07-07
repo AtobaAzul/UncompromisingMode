@@ -1,7 +1,7 @@
 name = "󰀕 Uncompromising Mode"
 description = 
 [[
-󰀔 [ Version 1.4.7.2 : "Winky, The Vile Vermin" ]
+󰀔 [ Version 1.4.7.3 : "Winky, The Vile Vermin" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -18,7 +18,7 @@ Prominent features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Squeaky Clean v1.4.7.2"
+version = "Squeaky Clean v1.4.7.3"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
