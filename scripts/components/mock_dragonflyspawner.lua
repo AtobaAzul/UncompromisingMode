@@ -120,12 +120,6 @@ local function TryStartAttacks(killed)
             -- Then add one to _attacksperwinter to shift the attacks so the last attack isn't right when the season changes to spring
             --local attackdelay = (TheWorld.state.summerlength - 1) * TUNING.TOTAL_DAY_TIME / (_attacksperseason + 1) 
 			local attackdelay = killed == true and _attackdelay * HASSLER_KILLED_DELAY_MULT or _attackdelay
-
-			if killed then
-				_moonmawdelay = attackdelay / 2
-			else
-				_moonmawdelay = attackdelay / 2
-            end
 			
 			_worldsettingstimer:StartTimer(MOCKFLY_TIMERNAME, attackdelay)
         end
@@ -174,7 +168,7 @@ end
 
 local function GetSpawnPoint(pt)
     if not TheWorld.Map:IsAboveGroundAtPoint(pt:Get()) then
-		if _moonmawdelay == nil and TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake then
+		if TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake then
 			pt = FindNearbyLandFullMoon(pt, 1) or pt
 		else
 			pt = FindNearbyLand(pt, 1) or pt
@@ -199,7 +193,7 @@ local function ReleaseHassler(targetPlayer)
 
     local spawn_pt = GetSpawnPoint(targetPlayer:GetPosition())
     if spawn_pt ~= nil then
-		if _moonmawdelay == nil and TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake then 
+		if TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake then 
 			hassler = SpawnPrefab("moonmaw_dragonfly")
         elseif _storedhassler ~= nil then
             hassler = SpawnSaveRecord(_storedhassler, {})
@@ -332,7 +326,7 @@ function self:DoWarningSound(_targetplayer)
     --Players near _targetplayer will hear the warning sound from the
     --same direction and volume offset from their own local positions
 	
-	if _moonmawdelay == nil and TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake then
+	if TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake then
 		
 		local timetoattack = _worldsettingstimer:GetTimeLeft(MOCKFLY_TIMERNAME)
 		SpawnPrefab("moonmaw_dragonflywarning_lvl"..
@@ -353,14 +347,6 @@ function self:OnUpdate(dt)
         ResetAttacks()
         return
     end
-	
-	if _moonmawdelay ~= nil then
-		_moonmawdelay = _moonmawdelay - dt
-		
-		if _moonmawdelay <= 0 then
-			_moonmawdelay = nil
-		end
-	end
 	
     if not _warning then
         if timetoattack > 0 and timetoattack < _warnduration then
@@ -409,7 +395,6 @@ function self:OnSave()
 	{
 		warning = _warning,
 		storedhassler = _storedhassler,
-		moonmawdelay = _moonmawdelay
 	}
 
 	local ents = {}
@@ -424,7 +409,6 @@ end
 function self:OnLoad(data)
 	_warning = data.warning or false
 	_storedhassler = data.storedhassler
-	_moonmawdelay = data.moonmawdelay
 	
     if data.timetoattack then
         _timetoattack = data.timetoattack
@@ -469,7 +453,7 @@ function self:SummonMonster(player)
 end
 
 local function SummonMonsterFullMoon(player)
-	if _moonmawdelay == nil and TheWorld.state.cycles > 50 and TheWorld.state.issummer and TheWorld.state.isfullmoon and not TheWorld.state.isalterawake then
+	if TheWorld.state.cycles > 50 and TheWorld.state.issummer and TheWorld.state.isfullmoon and not TheWorld.state.isalterawake then
 		if _worldsettingstimer:ActiveTimerExists(MOCKFLY_TIMERNAME) then
 			_worldsettingstimer:SetTimeLeft(MOCKFLY_TIMERNAME, 10)
 			_worldsettingstimer:ResumeTimer(MOCKFLY_TIMERNAME)
