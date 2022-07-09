@@ -270,6 +270,7 @@ local function onharvest(inst, picker, produce)
     end
 end
 
+--[[
 AddPrefabPostInit("beebox", function(inst)
     --TODO, test this
 	if not GLOBAL.TheWorld.ismastersim then
@@ -282,7 +283,7 @@ AddPrefabPostInit("beebox", function(inst)
 	
 	updatelevel(inst)
 end)
-
+]]
 -----------------------------------------------------------------
 -- Haunting pig torches only creates the pig with 10% chance
 -----------------------------------------------------------------

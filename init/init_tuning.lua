@@ -405,6 +405,10 @@ TUNING.DSTU =
     ISLAND_ADVENTURES = ia_check,
 }
 
+if GetModConfigData("beebox_nerf") then
+    TUNING.BEEBOX_BEES = 2
+end
+
 TUNING.NO_BOSS_TIME = 24
 --TUNING.DISEASE_DELAY_TIME = total_day_time * 50 / 1.5
 --TUNING.DISEASE_DELAY_TIME_VARIANCE = total_day_time * 20
