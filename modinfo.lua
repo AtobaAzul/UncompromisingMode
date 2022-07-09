@@ -400,6 +400,7 @@ configuration_options =
 
 	SkipSpace(),
 	Header("General Food Tweaks"),
+	BinaryConfig("beebox_nerf", "Bee Box Nerf", "Bee boxes only release 2 bees max.", true),
 	{
 		name = "more perishing",
 		label = "Increased Food Spoilage",
