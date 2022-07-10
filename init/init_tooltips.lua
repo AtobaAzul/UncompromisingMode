@@ -26,7 +26,6 @@ STRINGS.UNCOMP_TOOLTIP = {
 	RAINHAT = "- Slightly increased rain protection.",
 	ARMORMARBLE = "- Prevents knockback effects.",
 	TURF_DRAGONFLY = "- Prevents snowpile build-up.",
-	BEEBOX = "- Reduced active bees.",
 	BLOWDART_YELLOW = "- Stuns certain mechanical enemies.",
 	DRAGONFLYCHEST = "- Has even more item slots.\n- May hurt would be thieves.",
 	WARDROBE = "- Can store a lot of equipment.",
@@ -61,6 +60,10 @@ STRINGS.UNCOMP_TOOLTIP = {
 }
 
 local TOOLTIP = STRINGS.UNCOMP_TOOLTIP
+
+if GetModConfigData("beebox_nerf") then
+	TOOLTIP.BEEBOX "- Reduced yield per stage.\n- Reduced maximum active bees."
+end
 
 if not TUNING.DSTU.ELECTRICALMISHAP then
 	TOOLTIP.NIGHTSTICK = "- No longer breaks when empty.\n- Can be fueled by various electrical items, generators, and potatoes."

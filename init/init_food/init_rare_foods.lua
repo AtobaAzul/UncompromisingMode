@@ -270,20 +270,20 @@ local function onharvest(inst, picker, produce)
     end
 end
 
---[[
-AddPrefabPostInit("beebox", function(inst)
-    --TODO, test this
-	if not GLOBAL.TheWorld.ismastersim then
-		return
-	end
-	
-    if inst.components.harvestable ~= nil then 
-        inst.components.harvestable:SetUp("honey", HONEY_PER_STAGE[4], nil, onharvest, updatelevel)
-    end
-	
-	updatelevel(inst)
-end)
-]]
+if GetModConfigData("beebox_nerf") then
+    AddPrefabPostInit("beebox", function(inst)
+        --TODO, test this
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+        
+        if inst.components.harvestable ~= nil then 
+            inst.components.harvestable:SetUp("honey", HONEY_PER_STAGE[4], nil, onharvest, updatelevel)
+        end
+        
+        updatelevel(inst)
+    end)
+end
 -----------------------------------------------------------------
 -- Haunting pig torches only creates the pig with 10% chance
 -----------------------------------------------------------------
