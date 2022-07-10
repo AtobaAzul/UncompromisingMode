@@ -82,7 +82,7 @@ env.AddPrefabPostInit("moose", function(inst)
     inst:ListenForEvent("timerdone", SuperHop)
 	
 	inst:ListenForEvent("newstate", function(inst, data)
-		if inst.stormtask == nil and not inst.components.health:IsDead() and inst.components.health:GetPercent() <= 0.3 and data.statename == "disarm" then
+		if inst.stormtask == nil and not inst.components.health:IsDead() and inst.components.health:GetPercent() <= 0.33 and data.statename == "disarm" then
 			inst.stormtask = inst:DoPeriodicTask(1, function(inst)
 				if not inst.components.health:IsDead() then
 					if not TheWorld.state.israining then
@@ -121,13 +121,20 @@ env.AddPrefabPostInit("moose", function(inst)
 end)
 
 local function EnterPhase2TriggerMother(inst)
+	inst.components.lootdropper:SpawnLootPrefab("goose_feather")
+	inst.components.lootdropper:SpawnLootPrefab("goose_feather")
+	
 	inst.sg:GoToState("taunt")
 	
 	if not inst.components.timer:TimerExists("TornadoAttack") then
 		inst.components.timer:StartTimer("TornadoAttack", 10)
 	end
-		
-	inst.enraged = true
+end
+
+local function EnterPhase3TriggerMother(inst)
+	inst.components.lootdropper:SpawnLootPrefab("goose_feather")
+	inst.components.lootdropper:SpawnLootPrefab("goose_feather")
+	inst.components.lootdropper:SpawnLootPrefab("goose_feather")
 end
 
 env.AddPrefabPostInit("mothergoose", function(inst)
@@ -174,14 +181,15 @@ env.AddPrefabPostInit("mothergoose", function(inst)
     inst.components.groundpounder.noTags = { "FX", "NOCLICK", "DECOR", "INLIMBO", "mossling", "moose" }
 	
 	inst:AddComponent("healthtrigger")
-	inst.components.healthtrigger:AddTrigger(PHASE2_HEALTH, EnterPhase2TriggerMother)
+	inst.components.healthtrigger:AddTrigger(.66, EnterPhase2TriggerMother)
+	inst.components.healthtrigger:AddTrigger(.33, EnterPhase3TriggerMother)
 	
 	inst.superhop = true
 	
     inst:ListenForEvent("timerdone", SuperHop)
 	
 	inst:ListenForEvent("newstate", function(inst, data)
-		if inst.stormtask == nil and not inst.components.health:IsDead() and inst.components.health:GetPercent() <= 0.3 and data.statename == "disarm" then
+		if inst.stormtask == nil and not inst.components.health:IsDead() and inst.components.health:GetPercent() <= 0.33 and data.statename == "disarm" then
 			inst.stormtask = inst:DoPeriodicTask(1, function(inst)
 				if not inst.components.health:IsDead() then
 					if not TheWorld.state.israining then

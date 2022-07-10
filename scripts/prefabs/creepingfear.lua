@@ -246,7 +246,7 @@ local function fn()
     inst.Physics:CollidesWith(COLLISION.GROUND)
     --inst.Physics:CollidesWith(COLLISION.WORLD)
 
-    inst.Transform:SetScale(1.5, 1.5, 1.5)
+    --inst.Transform:SetScale(1.5, 1.5, 1.5)
 
     inst:AddTag("shadowcreature")
     inst:AddTag("monster")

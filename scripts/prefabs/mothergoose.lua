@@ -34,8 +34,8 @@ SetSharedLootTable( 'mothergoose',
     {'goose_feather',    1.00},
     {'goose_feather',    1.00},
     {'goose_feather',    1.00},
-    {'goose_feather',    0.33},
-    {'goose_feather',    0.33},
+    {'goose_feather',    1.00},
+    {'goose_feather',    1.00},
     {'chesspiece_moosegoose_sketch', 1.00},
 	{'oceanfishingbobber_goose_tacklesketch', 1.00},
 })
@@ -109,19 +109,10 @@ local function OnCollide(inst, other)
     --Destroy?
 end
 
-local function StartTornadoTimer(inst)
-	if not inst.components.timer:TimerExists("TornadoAttack") then
-		inst.components.timer:StartTimer("TornadoAttack", 10)
-	end
-	
-	inst.enraged = true
-end
-
 local function OnSave(inst, data)
     data.WantsToLayEgg = inst.WantsToLayEgg
     data.CanDisarm = inst.CanDisarm
     data.shouldGoAway = inst.shouldGoAway
-    data.enraged = inst.enraged or nil
 end
 
 local function OnLoad(inst, data)
@@ -158,12 +149,6 @@ local function OnPreLoad(inst, data)
 	if y > 0 then
 		inst.Transform:SetPosition(x, 0, z)
 	end
-	
-    if data ~= nil then
-        if data.enraged then
-            StartTornadoTimer(inst)
-        end
-    end
 end
 
 local function OnDead(inst)
@@ -172,13 +157,12 @@ local function OnDead(inst)
 
 	local loot = SpawnPrefab("bigbird_meat")
 	if loot ~= nil then
-	inst.components.lootdropper:SpawnLootPrefab("bigbird_meat")
-	inst.components.lootdropper:SpawnLootPrefab("bigbird_meat")
+		inst.components.lootdropper:SpawnLootPrefab("bigbird_meat")
+		inst.components.lootdropper:SpawnLootPrefab("bigbird_meat")
 	else
-	inst.components.lootdropper:SpawnLootPrefab("drumstick")
-	inst.components.lootdropper:SpawnLootPrefab("drumstick")
+		inst.components.lootdropper:SpawnLootPrefab("drumstick")
+		inst.components.lootdropper:SpawnLootPrefab("drumstick")
 	end
-
 end
 
 local function OnRemove(inst)
@@ -283,6 +267,7 @@ local function fn()
     inst:AddComponent("inventory")
     inst:AddComponent("entitytracker")
     inst:AddComponent("timer")
+    inst:AddComponent("drownable")
 
     ------------------------------------------
 

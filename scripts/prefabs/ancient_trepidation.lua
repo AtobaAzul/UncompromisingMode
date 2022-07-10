@@ -286,6 +286,7 @@ local function fn(Sim)
 	inst.AnimState:SetMultColour(0, 0, 0, 0.8)
     -- locomotor must be constructed before the stategraph!
     inst:AddComponent("locomotor")
+    inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.walkspeed = 3.5
     inst.components.locomotor.runspeed = 3.5
 

@@ -6,6 +6,7 @@ local itemassets =
 local assets =
 {
 	Asset("ANIM", "anim/tar_trap.zip"),
+	Asset("ANIM", "anim/um_goo.zip"),
 }
 
 local itemprefabs=
@@ -14,40 +15,36 @@ local itemprefabs=
 }
 
 local function oneaten(inst, eater)
+	if inst.count ~= 0 then
+		local poison = SpawnPrefab("ratpoison")
+		poison.Transform:SetPosition(inst.Transform:GetWorldPosition())
+		poison.count = inst.count - 1
+	end
 	eater:AddDebuff("ratpoison_debuff", "ratpoison_debuff")
 end
 
 local function OnSave(inst,data)
-	if inst.rotation ~= nil then
-		data.rotation = inst.rotation
+	if inst.count then
+		data.count = inst.count
 	end
-	
-	if inst.scalex ~= nil then
-		data.scalex = inst.scalex
-	end
-	
-	if inst.scalez ~= nil then
-		data.scalez = inst.scalez
-	end
+	data.rotation = inst.Transform:GetRotation()
 end
 
 local function OnLoad(inst,data)
-	if data.rotation ~= nil then
-		inst.rotation = data.rotation
-		inst.Transform:SetRotation(inst.rotation)
-	end
-	
-	if data.scalex ~= nil and data.scalez ~= nil then
-		inst.scalex = data.scalex
-		inst.scalez = data.scalez
-		inst.Transform:SetScale(inst.scalex,1,inst.scalez)
+	if data then
+		if data.count then
+		inst.count = data.count
+		end
+		if data.rotation ~= nil then
+            inst.Transform:SetRotation(data.rotation)
+        end
 	end
 end
 
 local function OnPicked(inst)
 	inst:Remove()
 end
-
+	
 local function fn()
     local inst = CreateEntity()
     inst.entity:AddTransform()
@@ -60,11 +57,10 @@ local function fn()
     inst.AnimState:SetLayer(LAYER_BACKGROUND)
     inst.AnimState:SetSortOrder(3)
 	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-    inst.AnimState:SetBank("tar_trap")
-    inst.AnimState:SetBuild("tar_trap")
+    inst.AnimState:SetBank("um_goo")
+    inst.AnimState:SetBuild("um_goo")
 
-    inst.AnimState:PlayAnimation("idle_full")
-	
+    inst.AnimState:PlayAnimation("true_idle")
 	inst.entity:SetPristine()
 
 	inst:AddTag("NORATCHECK")
@@ -91,17 +87,19 @@ local function fn()
 	inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)
 
 	inst.AnimState:SetMultColour(0.6,1,1,1)
+
+	inst.Transform:SetRotation(math.random() * 360)
+
 	inst.OnSave = OnSave
 	inst.OnLoad = OnLoad
     return inst
 end
 
 local function OnDeploy(inst, pt)
-	for i = 1,8 do 
-		local poison = SpawnPrefab("ratpoison")
-		poison.Transform:SetPosition(pt.x, 0, pt.z)
-		inst:Remove()
-	end
+	local poison = SpawnPrefab("ratpoison")
+	poison.Transform:SetPosition(pt.x, 0, pt.z)
+	poison.count = 8
+	inst:Remove()
 end
 
 local function itemfn()
@@ -139,4 +137,4 @@ end
 
 return Prefab( "ratpoisonbottle", itemfn, itemassets, itemprefabs),
     Prefab("ratpoison", fn, assets),
-    MakePlacer("ratpoisonbottle_placer",  "tar_trap", "tar_trap", "idle_full") 
+    MakePlacer("ratpoisonbottle_placer",  "um_goo", "um_goo", "true_idle") 
