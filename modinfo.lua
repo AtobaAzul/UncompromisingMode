@@ -180,7 +180,6 @@ configuration_options =
 	BinaryConfig("wendy", "Nerfed Wendy", "Abigail was nerfed to not increase Wendy's maximum damage above average.", true),
 	BinaryConfig("wx78", "Tweaked WX-78", "No longer heals from lightning", true),
 	BinaryConfig("woodie", "Weregoose Wetness", "Weregoose gains wetness when over water.", false),
-	BinaryConfig("wigfrid","Wigfrid Leech Nerf", "Wigfrid gains less sanity and health on attack.", true),
 	SkipSpace(),
 ------------------------------
 -- Weather --
