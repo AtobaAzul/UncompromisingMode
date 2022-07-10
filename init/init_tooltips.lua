@@ -62,7 +62,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 local TOOLTIP = STRINGS.UNCOMP_TOOLTIP
 
 if GetModConfigData("beebox_nerf") then
-	TOOLTIP.BEEBOX "- Reduced yield per stage.\n- Reduced maximum active bees."
+	TOOLTIP.BEEBOX = "- Reduced yield per stage.\n- Reduced maximum active bees."
 end
 
 if not TUNING.DSTU.ELECTRICALMISHAP then
