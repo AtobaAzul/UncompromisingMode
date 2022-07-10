@@ -155,9 +155,9 @@ end
 		AddPrefabPostInit(v, function (inst)
 			inst:AddTag("um_durability")
 		
-			if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
+			if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil and inst.components.fueled ~= nil then
 				inst.components.fueled:SetSections(4)
-					inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedhigh)
+				inst.components.fueled:SetSectionCallback(onfuelchangeinsulationmedhigh)
 			end
 		end)
 	end
