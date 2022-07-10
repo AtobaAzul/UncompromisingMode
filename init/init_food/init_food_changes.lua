@@ -423,3 +423,28 @@ if TUNING.DSTU.SEEDS then
 		end
 	end)
 end
+
+--idk where else to put this
+local farmplants =
+{
+	"asparagus",
+	"carrot",
+	"corn",
+	"dragonfruit",
+	"durian",
+	"eggplant",
+	"garlic",
+	"onion",
+	"pepper",
+	"pomegranate",
+	"potato",
+	"pumpkin",
+	"tomato",
+	"watermelon",
+}
+
+for k, v in ipairs(farmplants) do
+	AddPrefabPostInit(v.."_oversized_waxed", function(inst)
+		inst:AddTag("NORATCHECK")
+	end)
+end
