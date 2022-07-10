@@ -88,7 +88,7 @@ if TUNING.DSTU.CLOTHINGDEGREDATION then
 	AddPrefabPostInit("rainhat", function (inst)
 		inst:AddTag("um_durability")
 		
-		if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
+		if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil and inst.components.fueled ~= nil then
 			inst.components.fueled:SetSections(4)
 			inst.components.fueled:SetSectionCallback(onfuelchangemedium)
 		end
@@ -97,7 +97,7 @@ if TUNING.DSTU.CLOTHINGDEGREDATION then
 	AddPrefabPostInit("umbrella", function (inst)
 		inst:AddTag("um_durability")
 		
-		if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
+		if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil and inst.components.fueled ~= nil then
 			inst.components.fueled:SetSections(4)
 			inst.components.fueled:SetSectionCallback(onfuelchangehigh)
 		end
@@ -116,7 +116,7 @@ if TUNING.DSTU.CLOTHINGDEGREDATION then
 		AddPrefabPostInit(v, function (inst)
 			inst:AddTag("um_durability")
 			
-			if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
+			if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil and inst.components.fueled ~= nil then
 				inst.components.fueled:SetSections(4)
 				inst.components.fueled:SetSectionCallback(onfuelchangeabsolute)
 			end
@@ -133,7 +133,7 @@ if TUNING.DSTU.EYEBRELLAREWORK == false then
 		AddPrefabPostInit(v, function (inst)
 			inst:AddTag("um_durability")
 			
-			if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil then
+			if inst ~= nil and inst.components ~= nil and inst.components.waterproofer ~= nil and inst.components.fueled ~= nil then
 				inst.components.fueled:SetSections(4)
 				inst.components.fueled:SetSectionCallback(onfuelchangeabsolute)
 			end
@@ -177,7 +177,7 @@ end
 		AddPrefabPostInit(v, function (inst)
 			inst:AddTag("um_durability")
 		
-			if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil then
+			if inst ~= nil and inst.components ~= nil and inst.components.insulator ~= nil and inst.components.fueled ~= nil then
 				inst.components.fueled:SetSections(4)
 					inst.components.fueled:SetSectionCallback(onfuelchangeinsulationhigh)
 			end
