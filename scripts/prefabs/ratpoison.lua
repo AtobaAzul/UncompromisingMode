@@ -15,12 +15,15 @@ local itemprefabs=
 }
 
 local function oneaten(inst, eater)
-	if inst.count ~= 0 then
+	if inst.count ~= nil and inst.count ~= 0 then
 		local poison = SpawnPrefab("ratpoison")
 		poison.Transform:SetPosition(inst.Transform:GetWorldPosition())
 		poison.count = inst.count - 1
+		eater:AddDebuff("ratpoison_debuff", "ratpoison_debuff")
+	else
+		eater:AddDebuff("ratpoison_debuff", "ratpoison_debuff")
+		inst:Remove()
 	end
-	eater:AddDebuff("ratpoison_debuff", "ratpoison_debuff")
 end
 
 local function OnSave(inst,data)
