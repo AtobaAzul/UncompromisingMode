@@ -232,7 +232,8 @@ local function common_fn()
 	
     inst:AddComponent("inspectable")
 	
-	inst.SoundEmitter:PlaySound("dontstarve/impacts/impact_metal_armour_blunt")
+	--inst.SoundEmitter:PlaySound("dontstarve/impacts/impact_metal_armour_blunt")
+    --was causing a mem leak on the beta :/
 
 	--inst:AddComponent("inventoryitem")
 	--inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
@@ -304,7 +305,7 @@ local function old_fn(build)
 	
     inst:AddComponent("inspectable")
 	
-	inst.SoundEmitter:PlaySound("dontstarve/impacts/impact_metal_armour_blunt")
+	--inst.SoundEmitter:PlaySound("dontstarve/impacts/impact_metal_armour_blunt")
 
 	--inst:AddComponent("inventoryitem")
 	--inst.components.inventoryitem:SetOnDroppedFn(OnDropped)
