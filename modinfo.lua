@@ -178,7 +178,7 @@ configuration_options =
 	--BinaryConfig("wormwood_fire", "Extra Flamable Wormwood", "Wormwood is highly flameable, like in Hamlet.", false),
 	BinaryConfig("wormwood_plants", "Prevent Infinite Sanity Loop", "Increases the sanity loss from digging plants.", true),
 	BinaryConfig("wendy", "Nerfed Wendy", "Abigail was nerfed to not increase Wendy's maximum damage above average.", true),
-	--BinaryConfig("wx78", "Tweaked WX-78", "No longer heals from lightning", false),
+	BinaryConfig("wx78", "Tweaked WX-78", "No longer heals from lightning", true),
 	--BinaryConfig("woodie", "Weregoose Wetness", "Weregoose gains wetness when over water.", false),
 	SkipSpace(),
 ------------------------------
