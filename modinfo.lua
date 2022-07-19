@@ -1,7 +1,7 @@
 name = "󰀕 Uncompromising Mode"
 description = 
 [[
-󰀔 [ Version 1.4.7.5 : "Winky, The Vile Vermin" ]
+󰀔 [ Version 1.4.7.6 : "Winky, The Vile Vermin" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
