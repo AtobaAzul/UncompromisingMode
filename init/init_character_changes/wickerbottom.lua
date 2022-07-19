@@ -11,41 +11,6 @@ CUSTOM_RECIPETABS = GLOBAL.CUSTOM_RECIPETABS
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
--- Leafy meat and bucket cost for applied horticulture
------------------------------------------------------------------
-
-if TUNING.DSTU.WICKERNERF then
-	local BOOKS = 
-	{
-		"book_sleep",
-		"book_horticulture",
-		"book_silviculture",
-		"book_brimstone",
-		"book_birds",
-		"book_tentacles",
-	}
-	
-	local function NewRead(inst, reader)
-		if reader.components.sanity ~= nil and not reader.components.sanity:IsInsane() then
-			return inst._OldOnRead(inst, reader)
-		else
-			return false
-		end
-	end
-
-	for k, v in pairs(BOOKS) do
-		env.AddPrefabPostInit(v, function(inst)
-			if not TheWorld.ismastersim then
-				return
-			end
-			
-			if inst.components.book ~= nil then
-				inst._OldOnRead = inst.components.book.onread
-				inst.components.book.onread = NewRead
-			end
-		end)
-	end
-end
 
 if TUNING.DSTU.WICKERNERF_TENTACLES then
 	local function newtentacles(inst, reader)

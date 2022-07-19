@@ -160,6 +160,7 @@ local function OnDropped(inst)
 end
 
 local function ondeploy(inst, pt, deployer)
+	inst.SoundEmitter:PlaySound("dontstarve/impacts/impact_metal_armour_blunt")
     inst.components.mine:Reset()
     inst.Physics:Stop()
     inst.Physics:Teleport(pt:Get())
