@@ -53,7 +53,7 @@ local function DoHeal(inst)
                                 leader.components.leader:IsTargetedByFollowers(spider)))
 
         if not (targetting_us or targetted_by_us) then
-            local heal_amount = spider:HasTag("spiderwhisperer") and TUNING.HEALING_MEDSMALL or TUNING.SPIDER_HEALING_AMOUNT
+            local heal_amount = spider:HasTag("spiderwhisperer") and 5 or TUNING.SPIDER_HEALING_AMOUNT
             spider.components.health:DoDelta(heal_amount, false, inst.prefab)
             SpawnHealFx(spider, "spider_heal_target_fx")
         end

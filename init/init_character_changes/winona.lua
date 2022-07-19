@@ -73,13 +73,13 @@ local function ActionHungerDrain(inst, data)
 				inst._cdtask = inst:DoTaskInTime(.3, OnCooldown)
 				inst.hungryslowbuildtalktime = nil
 				if inst.hungryfastbuildtalktime == nil or inst.hungryfastbuildtalktime + 10 < t then
-					inst.hungryfastbuildtalktime = t + GetRandomMinMax(8, 12)
+					inst.hungryfastbuildtalktime = t + GetRandomMinMax(12, 24)
 				elseif inst.hungryfastbuildtalktime < t then
 					inst.hungryfastbuildtalktime = nil
 					inst.components.talker:Say(GetString(inst, "ANNOUNCE_HUNGRY_FASTBUILD"))
 				end
 				if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL or data.action.action == ACTIONS.PICK then
-					inst.components.hunger:DoDelta(-0.20, true)
+					inst.components.hunger:DoDelta(-0.1, true) --.2
 				elseif data.action.action == ACTIONS.CHOP then
 					if data.action.target ~= nil then
 						local snap = SpawnPrefab("impact")
@@ -91,7 +91,7 @@ local function ActionHungerDrain(inst, data)
 						snap.Transform:SetScale(0.8, 0.8, 0.8)
 					end
 
-					inst.components.hunger:DoDelta(-0.333, true)
+					inst.components.hunger:DoDelta(-0.2, true) --.333
 				elseif data.action.action == ACTIONS.MINE or
 				data.action.action == ACTIONS.HAMMER then
 					if data.action.target ~= nil then
@@ -104,33 +104,33 @@ local function ActionHungerDrain(inst, data)
 						snap.Transform:SetScale(0.8, 0.8, 0.8)
 					end
 
-					inst.components.hunger:DoDelta(-0.5, true)
+					inst.components.hunger:DoDelta(-0.333, true) --.5
 				elseif data.action.action == ACTIONS.DIG then
 					inst.components.hunger:DoDelta(-0.5, true)
 				else
-					inst.components.hunger:DoDelta(-0.25, true)
+					inst.components.hunger:DoDelta(-0.15, true) --.25
 				end
 			end
 		elseif slow then
 			inst.hungryfastbuildtalktime = nil
 			if (inst.hungryslowbuildtalktime or 0) < t then
-				inst.hungryslowbuildtalktime = t + GetRandomMinMax(8, 16)
+				inst.hungryfastbuildtalktime = t + GetRandomMinMax(12, 24)
 				inst.components.talker:Say(GetString(inst, "ANNOUNCE_HUNGRY_SLOWBUILD"))
 			end
 		else
 			if inst._cdtask == nil then
 				inst._cdtask = inst:DoTaskInTime(.3, OnCooldown)
 				if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL or data.action.action == ACTIONS.PICK then
-					inst.components.hunger:DoDelta(-0.1, true)
+					inst.components.hunger:DoDelta(-0.05, true)
 				elseif data.action.action == ACTIONS.CHOP then
-					inst.components.hunger:DoDelta(-0.15, true)
+					inst.components.hunger:DoDelta(-0.1, true)
 				elseif data.action.action == ACTIONS.MINE or
 				data.action.action == ACTIONS.HAMMER then
-					inst.components.hunger:DoDelta(-0.20, true)
+					inst.components.hunger:DoDelta(-0.166, true)
 				elseif data.action.action == ACTIONS.DIG then
 					inst.components.hunger:DoDelta(-0.25, true)
 				else
-					inst.components.hunger:DoDelta(-0.125, true)
+					inst.components.hunger:DoDelta(-0.1, true)
 				end
 			end
 		end
@@ -241,6 +241,9 @@ env.AddPrefabPostInit("winona", function(inst)
 			end
 		end
 	end
+
+	inst:AddTag("electrical_upgradeuser")
+
 end)
 
 
