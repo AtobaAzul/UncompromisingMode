@@ -15,7 +15,7 @@ local PollenOver =  Class(Widget, function(self, owner)
     self.bg:SetHAnchor(ANCHOR_MIDDLE)
     self.bg:SetScaleMode(SCALEMODE_FILLSCREEN)
 --]]
-    self.bg2 = self:AddChild(Image("images/fx4.xml", "pollen_over2.tex"))       
+    self.bg2 = self:AddChild(Image("images/UM_pollenover.xml", "pollen_over2.tex"))       
     self.bg2:SetVRegPoint(ANCHOR_MIDDLE)
     self.bg2:SetHRegPoint(ANCHOR_MIDDLE)
     self.bg2:SetVAnchor(ANCHOR_MIDDLE)

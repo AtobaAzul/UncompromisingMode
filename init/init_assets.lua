@@ -246,8 +246,8 @@ Assets = {
 	Asset("ANIM", "anim/hat_gasmask.zip"),
 	Asset("ANIM", "anim/hat_snowgoggles.zip"),
 	
-	Asset("ATLAS", "images/fx4.xml"),
-	Asset("IMAGE", "images/fx4.tex"),
+	Asset("ATLAS", "images/UM_pollenover.xml"),
+	Asset("IMAGE", "images/UM_pollenover.tex"),
 	Asset("ATLAS", "images/fx5.xml"),
 	Asset("IMAGE", "images/fx5.tex"),
 	Asset("ATLAS", "images/californiakingoverlay.xml"),
