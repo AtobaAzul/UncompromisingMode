@@ -54,6 +54,8 @@ if GetModConfigData("wolfgang") then
 	STRINGS.CHARACTER_DESCRIPTIONS.wolfgang = STRINGS.CHARACTER_DESCRIPTIONS.wolfgang.."\n󰀕Gains mightiness when well fed"
 end
 
+STRINGS.CHARACTER_DESCRIPTIONS.wolfgang = STRINGS.CHARACTER_DESCRIPTIONS.wolfgang.."\n󰀕Too big to push around when mighty"
+
 if GetModConfigData("warly") then
 	STRINGS.CHARACTER_DESCRIPTIONS.warly = STRINGS.CHARACTER_DESCRIPTIONS.warly.."\n󰀕Absorbs nutrients better, but prefers more variety"
 end
