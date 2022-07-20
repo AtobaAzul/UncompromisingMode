@@ -114,7 +114,7 @@ local function ActionHungerDrain(inst, data)
 		elseif slow then
 			inst.hungryfastbuildtalktime = nil
 			if (inst.hungryslowbuildtalktime or 0) < t then
-				inst.hungryfastbuildtalktime = t + GetRandomMinMax(12, 24)
+				inst.hungryslowbuildtalktime = t + GetRandomMinMax(12, 24)
 				inst.components.talker:Say(GetString(inst, "ANNOUNCE_HUNGRY_SLOWBUILD"))
 			end
 		else
