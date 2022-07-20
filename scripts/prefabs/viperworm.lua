@@ -272,6 +272,8 @@ local function fnviperling()
     inst._lighttask = nil
 
     inst.displaynamefn = displaynamefnviperling  --Handles the changing names.
+	
+	inst.AnimState:UsePointFiltering(true)
 
     inst.entity:SetPristine()
 
@@ -370,8 +372,7 @@ local function fnviperlingfriend()
 	inst:AddTag("shadow")
 	inst.AnimState:SetMultColour(0, 0, 0, 0.5)
 
-
-
+	inst.AnimState:UsePointFiltering(true)
 
     inst.entity:SetPristine()
 
