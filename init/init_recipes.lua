@@ -322,14 +322,21 @@ AddRecipe2(
 )
 ChangeSortKey("mutator_trapdoor", "mutator_warrior", "CHARACTER", true)
 
-AddRecipe2(
-    "book_rain",
-    {Ingredient("papyrus", 2), Ingredient("moon_tear", 1), Ingredient("waterballoon", 4)},
-    TECH.MAGIC_THREE,
-    {builder_tag = "bookbuilder"},
-    {"CHARACTER"}
-)
-ChangeSortKey("book_rain", "book_tentacles", "CHARACTER", true)
+if not TUNING.DSTU.UPDATE_CHECK then
+    AddRecipe2(
+        "book_rain_um",
+        {Ingredient("papyrus", 2), Ingredient("moon_tear", 1), Ingredient("waterballoon", 4)},
+        TECH.MAGIC_THREE,
+        {builder_tag = "bookbuilder"},
+        {"CHARACTER"}
+    )
+    ChangeSortKey("book_rain_um", "book_tentacles", "CHARACTER", true)
+else
+    if GetModConfigData("legacy_book_rain_recipe") then
+        AllRecipes["book_rain"].ingredients = {Ingredient("papyrus", 2), Ingredient("moon_tear", 1), Ingredient("waterballoon", 4)}
+        AllRecipes["book_rain"].level = TechTree.Create(TECH.MAGIC_THREE)
+    end
+end
 
 AddRecipe2(
     "driftwoodfishingrod",

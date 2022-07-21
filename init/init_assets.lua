@@ -32,7 +32,7 @@ local inventoryitems =
 	"blue_mushed_room",
 	"blueberrypancakes",
 	"bluegem_cracked",
-	"book_rain",
+	"book_rain_um",
 	"bugzapper",
 	"californiaking",
 	"cctrinket_don",
