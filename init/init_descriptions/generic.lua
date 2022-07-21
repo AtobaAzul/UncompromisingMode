@@ -437,4 +437,5 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "OW! What a shocking result!"
 	--DESCRIBE.UM_SIREN = "Science says we may be able to \"help\" each other."
 	--WHAT THE FUCK VARIANT
-	--DESCRIBE.UM_SIREN = "Science says she may not be from around here."	--DESCRIBE.UM_SIREN = "Science says she may not be from around here."
+	--DESCRIBE.UM_SIREN = "Science says she may not be from around here."
+	DESCRIBE.UM_DEVILED_EGGS = "They smell fowl."

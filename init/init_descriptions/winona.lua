@@ -356,4 +356,5 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "There's the socket."
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "Better wear some gloves next time!"
+	DESCRIBE.UM_DEVILED_EGGS = "They've been sitting in the back of the fridge for too long."
 	

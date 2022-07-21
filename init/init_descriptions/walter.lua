@@ -358,3 +358,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	
 	
 	--DESCRIBE.UM_SIREN = "Woah!! A REAL sea monster!!"
+	DESCRIBE.UM_DEVILED_EGGS = "It's pretty fowl! Get it? ...You get it."

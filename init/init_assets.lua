@@ -162,6 +162,7 @@ local inventoryitems =
 	"um_bear_trap_equippable",
 	"um_bear_trap_equippable_gold",
 	"um_bear_trap_equippable_tooth",
+	"um_deviled_eggs",
 	"um_monsteregg",
 	"um_monsteregg_cooked",
 	"uncompromising_blowgun",

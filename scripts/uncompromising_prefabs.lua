@@ -300,4 +300,6 @@ return {
 	"oculet_pets",
 	"terrarium",
 	"reedbuncher",
+	
+	"um_deviled_eggs",
 }

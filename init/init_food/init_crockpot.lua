@@ -113,7 +113,7 @@ AddIngredientValues({"forgetmelots"}, {decoration=1, foliage=1})
 -----------------------------------------------------------------
 
 if TUNING.DSTU.CROCKPOTMONSTMEAT then
-recipes.monsterlasagna.test = function(cooker, names, tags) return tags.monster and tags.meat and (tags.monster > tags.meat or tags.monster >= 3) and not tags.inedible and not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) end 
+recipes.monsterlasagna.test = function(cooker, names, tags) return tags.monster and (tags.meat and tags.monster > tags.meat or tags.monster >= 3) and not tags.inedible and not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) end 
 recipes.monsterlasagna.priority = 51
 -- Original:           test = function(cooker, names, tags) return tags.monster and tags.monster >= 2 and not tags.inedible end,    
 end
@@ -700,3 +700,27 @@ if TUNING.DSTU.NEWRECIPES then
 end
 RegisterInventoryItemAtlas("images/inventoryimages/theatercorn.xml", "theatercorn.tex")
 
+local um_deviled_eggs =
+{
+    name = "um_deviled_eggs",
+    test = function(cooker, names, tags) return tags.monster and tags.egg and not tags.meat and not tags.inedible end,
+
+    priority = 52,
+    weight = 1,
+    foodtype = "MEAT",
+    secondaryfoodtype = "MONSTER",
+	health = -TUNING.HEALING_MED,
+	hunger = TUNING.CALORIES_LARGE,
+	perishtime = TUNING.PERISH_FAST,
+	sanity = -TUNING.SANITY_MEDLARGE,
+	oneat_desc = "Sinner side up",
+	cooktime = .5,
+	tags = {"monstermeat"},
+	floater = {"med", nil, 0.58},
+}
+if TUNING.DSTU.NEWRECIPES then
+    AddCookerRecipe("cookpot", um_deviled_eggs)
+    AddCookerRecipe("portablecookpot", um_deviled_eggs)
+    AddCookerRecipe("archive_cookpot", um_deviled_eggs)
+end
+RegisterInventoryItemAtlas("images/inventoryimages/um_deviled_eggs.xml", "um_deviled_eggs.tex")
