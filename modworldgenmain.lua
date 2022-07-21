@@ -6,7 +6,6 @@ local GROUND_OCEAN_COLOR = { -- Color for the main island ground tiles
     minimap_color =        {46, 32, 18, 64}
 }
 
-if CurrentRelease.GreaterOrEqualTo("R22_PIRATEMONKEYS") then
 	AddTile(
 		"HOODEDFOREST", --tile_name 1
 		"LAND", --tile_range 2
@@ -70,53 +69,6 @@ if CurrentRelease.GreaterOrEqualTo("R22_PIRATEMONKEYS") then
 
 	ChangeMiniMapTileRenderOrder(GLOBAL.WORLD_TILES.HOODEDFOREST, GLOBAL.WORLD_TILES.DIRT)
 	ChangeMiniMapTileRenderOrder(GLOBAL.WORLD_TILES.ANCIENTHOODEDFOREST, GLOBAL.WORLD_TILES.DIRT)
-else
-	------Turf Using Tile Adder From ADM's Turf Mod
-	modimport("tile_adder.lua")
-
-	AddTile(
-		"HOODEDFOREST",
-		102,
-		"hoodedmoss",
-		{
-			noise_texture = "levels/textures/noise_hoodedmoss.tex",
-			runsound = "dontstarve/movement/walk_grass",
-			walksound = "dontstarve/movement/walk_grass",
-			snowsound = "dontstarve/movement/run_snow",
-			mudsound = "dontstarve/movement/run_mud",
-			colors = GROUND_OCEAN_COLOR
-		},
-		{noise_texture = "levels/textures/mini_noise_hoodedmoss.tex"}
-	)
-	AddTile(
-		"ANCIENTHOODEDFOREST",
-		110,
-		"ancienthoodedturf",
-		{
-			noise_texture = "levels/textures/noise_jungle.tex",
-			runsound = "dontstarve/movement/walk_grass",
-			walksound = "dontstarve/movement/walk_grass",
-			snowsound = "dontstarve/movement/run_snow",
-			mudsound = "dontstarve/movement/run_mud",
-			colors = GROUND_OCEAN_COLOR
-		},
-		{noise_texture = "levels/textures/mini_noise_jungle.tex"}
-	)
-
-	local worldtiledefs = require "worldtiledefs"
-
-	local MOD_TURF_PROPERTIES = {
-		[GROUND.HOODEDFOREST] = {name = "hoodedmoss", anim = "hoodedmoss", bank_build = "hfturf"},
-		[GROUND.ANCIENTHOODEDFOREST] = {name = "ancienthoodedturf", anim = "ancienthoodedturf", bank_build = "hfturf"}
-	}
-
-	for k, v in pairs(MOD_TURF_PROPERTIES) do
-		worldtiledefs.turf[k] = MOD_TURF_PROPERTIES[k]
-	end
-
-	ChangeTileTypeRenderOrder(GLOBAL.GROUND.HOODEDFOREST, GLOBAL.GROUND.DIRT)
-	ChangeTileTypeRenderOrder(GLOBAL.GROUND.ANCIENTHOODEDFOREST, GLOBAL.GROUND.DIRT)
-end
 
 ------
 
