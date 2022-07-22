@@ -55,7 +55,7 @@ local function UncompromisingSoulHeal(inst)
         local sanitytargetscount = 0
         local x, y, z = inst.Transform:GetWorldPosition()
 
-        for i, v in ipairs(AllPlayers) do
+        for i, v in ipairs(GLOBAL.AllPlayers) do
             if not (v.components.health:IsDead() or v:HasTag("playerghost")) and v.entity:IsVisible() and v:GetDistanceSqToPoint(x, y, z) < TUNING.WORTOX_SOULHEAL_RANGE * TUNING.WORTOX_SOULHEAL_RANGE then
                 -- NOTES(JBK): If the target is hurt put them on the list to do heals.
                 if v.components.health:IsHurt() then
