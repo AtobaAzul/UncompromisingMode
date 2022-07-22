@@ -54,6 +54,7 @@ function CheckNOTHING(container, item, slot)
 end
 
 local modparams = {}
+
 modparams.air_conditioner =
 {
     widget =
@@ -300,9 +301,7 @@ for y = 0, 3 do
     table.insert(modparams.frigginbirdpail.widget.slotpos, Vector3(-1, -75 * y + 110, 0))	
 end
 
-for k, v in pairs(modparams) do
-	containers.MAXITEMSLOTS = math.max(containers.MAXITEMSLOTS, v.widget.slotpos ~= nil and #v.widget.slotpos or 0)
-end
+
 
 modparams.skullchest = containers.params.shadowchester
 modparams.winkyburrow = containers.params.shadowchester
@@ -329,42 +328,32 @@ function containers.widgetsetup(container, prefab, data, ...)
 	end
 end
 
-
-
 if containers.MAXITEMSLOTS == nil or containers.MAXITEMSLOTS < 25 then
-containers.MAXITEMSLOTS = 25
+    containers.MAXITEMSLOTS = 25
 end
-local function addItemSlotNetvarsInContainer(inst)
-     if(#inst._itemspool < containers.MAXITEMSLOTS) then
-        for i = #inst._itemspool+1, containers.MAXITEMSLOTS do
-            table.insert(inst._itemspool, net_entity(inst.GUID, "container._items["..tostring(i).."]", "items["..tostring(i).."]dirty"))
-        end
-     end
-  end
-AddPrefabPostInit("container_classified", addItemSlotNetvarsInContainer)
 
 if GetModConfigData("scaledchestbuff") then
-containers.params.dragonflychest =
-{
-    widget =
+    containers.params.dragonflychest =
     {
-        slotpos = {},
-  		animbank = nil,
-  		animbuild = nil,
-        bgatlas = "images/dragonflycontainerborder.xml",
-        bgimage = "dragonflycontainerborder.tex",
-		bgimagetint = {r=.82,g=.77,b=.7,a=1},
-        pos = Vector3(0, 220, 0),
-        side_align_tip = 160,
-    },
-    type = "chest",
-}
+        widget =
+        {
+            slotpos = {},
+            animbank = nil,
+            animbuild = nil,
+            bgatlas = "images/dragonflycontainerborder.xml",
+            bgimage = "dragonflycontainerborder.tex",
+            bgimagetint = {r=.82,g=.77,b=.7,a=1},
+            pos = Vector3(0, 220, 0),
+            side_align_tip = 160,
+        },
+        type = "chest",
+    }
 
-for y = 2.5, -1.5, -1 do
-	for x = 0, 4 do
-		table.insert(containers.params.dragonflychest.widget.slotpos, Vector3(80*x-80*2, 80*y-80*2+120,0))
-  	end
-end
+    for y = 2.5, -1.5, -1 do
+        for x = 0, 4 do
+            table.insert(containers.params.dragonflychest.widget.slotpos, Vector3(80*x-80*2, 80*y-80*2+120,0))
+        end
+    end
 end
 
 containers.params.wardrobe =
