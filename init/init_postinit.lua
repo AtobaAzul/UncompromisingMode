@@ -133,6 +133,7 @@ local prefab_post = {
 	"petals",
 	"fertilizer",
 	"stinger",
+	"slurtle_shellpieces",
 }
 
 local stategraph_post = {
