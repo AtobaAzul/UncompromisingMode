@@ -301,7 +301,7 @@ env.AddPrefabPostInit("spider", function(inst)
 	inst:AddTag("spider_regular")
 	
 	if inst.components.combat ~= nil and TUNING.DSTU.REGSPIDERJUMP then
-        inst.components.combat:SetRange(TUNING.SPIDER_WARRIOR_ATTACK_RANGE*0.5, TUNING.SPIDER_WARRIOR_HIT_RANGE*0.5)
+        inst.components.combat:SetRange(TUNING.SPIDER_WARRIOR_ATTACK_RANGE*0.5, TUNING.SPIDER_WARRIOR_HIT_RANGE*0.8)
 		--inst.components.combat:SetRetargetFunction(2, WarriorRetarget)
 	end
 	
