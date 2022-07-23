@@ -76,7 +76,7 @@ local function UncompromisingSoulHeal(inst)
                 local v = healtargets[i]
                 v.components.debuffable:AddDebuff("healthregenbuff_vetcurse_soul", "healthregenbuff_vetcurse", {duration = (amt * 0.1)})
                 if v.components.combat then -- Always show fx now that the heals do special targeting to show the player that it stops working when everyone is full.
-                    local fx = SpawnPrefab("wortox_soul_heal_fx")
+                    local fx = GLOBAL.SpawnPrefab("wortox_soul_heal_fx")
                     fx.entity:AddFollower():FollowSymbol(v.GUID, v.components.combat.hiteffectsymbol, 0, -50, 0)
                     fx:Setup(v)
                 end
