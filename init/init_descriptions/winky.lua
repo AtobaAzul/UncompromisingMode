@@ -40,10 +40,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINKY.ACTIONFAIL
 	--Content Creators
 	DESCRIBE.CCTRINKET_DON = "I can only make out the words \"Squeek\" and uhhh \"Squeek\"."
 	DESCRIBE.CCTRINKET_JAZZY = "Looks pretty jazzy."
-	DESCRIBE.CCTRINKET_FREDDO = "There are stupid letters etched into it."		
+	DESCRIBE.CCTRINKET_FREDDO = "There are stupid scratches etched into it."		
 	--Content Creators
 	
-    DESCRIBE.UNCOMPROMISING_RAT = "Hello, friend."
+    DESCRIBE.UNCOMPROMISING_RAT = "Hello, family."
     DESCRIBE.UNCOMPROMISING_RATHERD = "We're all connected."
     DESCRIBE.UNCOMPROMISING_RATBURROW = "We're all connected."
     DESCRIBE.UNCOMPROMISING_WINKYBURROW = "There are many tunnels that lead to home."
@@ -54,11 +54,21 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINKY.ACTIONFAIL
             GENERIC = "Do I know you?",
             ATTACKER = "You need to keep your ratty claws away from me!",
             MURDERER = "%s I see blood in your fur!",
-            REVIVER = "We're family.",
-            GHOST = "You seem familar, are you part of my pack?",
-            FIRESTARTER = "I can smell the ash on you fur, %s.",
+            REVIVER = "We are family I guess.",
+            GHOST = "You seem familiar, were you part of my pack?",
+            FIRESTARTER = "I can smell the ash on your fur, you stupid.",
         }
 		
+	WIXIE =
+        {
+            GENERIC = "%s, You have teeth like me!",
+            ATTACKER = "Stop throwing your stupid pebbles at me!",
+            MURDERER = "I am going to throw rocks at you now, %s!",
+            REVIVER = "You are fine, I guess.",
+            GHOST = "Did you choke on a little pebble?",
+            FIRESTARTER = ".",
+        }
+	
     DESCRIBE.RATPOISONBOTTLE = "Yuck! Are you trying to kill me?"
     DESCRIBE.RATPOISON = "Yuck! Are you trying to kill me?"
 
@@ -74,7 +84,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINKY.ACTIONFAIL
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
 	DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
 	DESCRIBE.SPIDERQUEENCORPSE = "She is sitting there. Waiting..."
-	ANNOUNCE.ANNOUNCE_SNEEZE = "AHHH \"SQUEE-CHUU!!!!\""
+	ANNOUNCE.ANNOUNCE_SNEEZE = "AHHH SQUEE-CHUU!!!!"
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "My nose feels.. itchy."
 	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Finally, I don't want to claw my nose off anymore."
 	ANNOUNCE.ANNOUNCE_FIREFALL = {
@@ -122,8 +132,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINKY.ACTIONFAIL
 	DESCRIBE.SPIDER_TRAPDOOR = "Go back in your ugly hole."
 	DESCRIBE.TRAPDOOR = "Flatter, worse looking rock."
 	DESCRIBE.HOODEDTRAPDOOR = DESCRIBE.TRAPDOOR 
-	DESCRIBE.SHROOM_SKIN_FRAGMENT = "."
-	DESCRIBE.AIR_CONDITIONER = "Eyuck, Smells terrible! I do not like this fragrance."
+	DESCRIBE.SHROOM_SKIN_FRAGMENT = "Hmmm a little sporey smell."
+	DESCRIBE.AIR_CONDITIONER = "Eyuck. Smells terrible! I do not like this fragrance."
 	
 	DESCRIBE.SCORPION = "Crush it."
 	DESCRIBE.SCORPIONCARAPACE = "Tastes funny."
@@ -163,7 +173,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINKY.ACTIONFAIL
 	DESCRIBE.CURSED_ANTLER = "Bash heads ahahaha."
 	DESCRIBE.BERNIEBOX = "Box I can open with my teeth."
 	DESCRIBE.HOODED_FERN = "It is green."
-	DESCRIBE.HOODEDWIDOW = "/Ah!/ Who invited you!"
+	DESCRIBE.HOODEDWIDOW = "Ah! Who invited you!"
 	DESCRIBE.GIANT_TREE = "I should climb up it, and eat the baby birds."
 	DESCRIBE.WIDOWSGRASP =  "Haha, my personal toothpick."
 	DESCRIBE.WEBBEDCREATURE = ""
@@ -181,11 +191,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINKY.ACTIONFAIL
 	DESCRIBE.PITCHERPLANT = "Must climb to it I can smell the sweetness."
 	DESCRIBE.APHID = "Get out of here, this is Rat-land now."
 	DESCRIBE.GIANT_TREE_INFESTED = "Must be full of worms."
-	DESCRIBE.GIANT_BLUEBERRY = ""
+	DESCRIBE.GIANT_BLUEBERRY = "I will pop it now into my mouth."
 	DESCRIBE.STEAMEDHAMS = "These steamed hams are very similar to the ones they have at PorkShire."
 	DESCRIBE.BLUEBERRYPANCAKES = "This home-made blue slime is very satisfying."
-	DESCRIBE.SIMPSALAD = "Greens."
-	DESCRIBE.BEEFALOWINGS = "I am not sure if I eat the horn aswell."
+	DESCRIBE.SIMPSALAD = "It is leafs."
+	DESCRIBE.BEEFALOWINGS = "I am not sure if I eat the horn as well."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "Ha-ha! I am invincible!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "Ooooh.. my body is sore now.."
 	ANNOUNCE.WIDOWSHEAD = "My eyes are fine without this."
@@ -261,7 +271,7 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.RNESKELETON = "How are you walking?"
 	DESCRIBE.RAT_WHIP = "I wish my tail could whack like this."
 	DESCRIBE.KLAUS_AMULET = "Like the gem necklace, and less pretty."
-	DESCRIBE.CRABCLAW = "Whacker club." 
+	DESCRIBE.CRABCLAW = "Big whacker club." 
 	DESCRIBE.HAT_RATMASK = "It is how Humans say, flattering." 
 
 	DESCRIBE.ORANGE_VOMIT = "Slime paste. Very bitter tasting."
@@ -301,10 +311,10 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.ANCIENT_AMULET_RED = ""
 	DESCRIBE.UM_BEAR_TRAP = "Maybe I should throw a rock at it."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Rust is yummy."
-	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "I should cover it in rust too."
-	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "I should cover it in rust too."
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "I should cover it in rust."
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "I should cover it in rust."
 	DESCRIBE.CORNCAN = "Crack it open! I smell something inside."
-	DESCRIBE.SKULLCHEST_CHILD = "It is very quiet..."
+	DESCRIBE.SKULLCHEST_CHILD = "It is very silent inside..."
 	
 	DESCRIBE.SLOBBERLOBBER = "Yucky spatty thing."
 	DESCRIBE.GORE_HORN_HAT = "Run away from me! WINKY."
@@ -335,17 +345,43 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Oh"
 	--StantonStuff
 	
+	--Night Terror Masks
+	DESCRIBE.HAT_BAGMASK = "This is stupid."
+	DESCRIBE.HAT_BLACKCATMASK = "I can use this to decieve those stupid cats!"
+	DESCRIBE.HAT_CLOWNMASK = "I do not undetstand this."
+	DESCRIBE.HAT_WATHOMMASK = "I saw this lobster man once, he spoke in whispers."
+	DESCRIBE.HAT_DEVILMASK = "Why is it sticking its tongue at me!"
+	DESCRIBE.HAT_FIENDMASK = "Why is it sticking its tongue at me!"
+	DESCRIBE.HAT_GHOSTMASK = "I have seen scarier..."
+	DESCRIBE.HAT_GLOBMASK = "It is fake slime."
+	DESCRIBE.HAT_HOCKEYMASK = "It has many holes in it."
+	DESCRIBE.HAT_JOYOUSMASK = "Haha I feel a buzz with it."
+	DESCRIBE.HAT_MERMMASK = "Where is the smell? that is the best part."
+	DESCRIBE.HAT_OOZEMASK = "It is fake slime." 
+	DESCRIBE.HAT_ORANGECATMASK = "I can use this to decieve those stupid cats!"
+	DESCRIBE.HAT_PHANTOMMASK = "I have seen scarier..."
+	DESCRIBE.HAT_PIGMASK = "Ha ha ha, it is so ugly!"
+	DESCRIBE.HAT_PUMPGOREMASK = "Why do you keep giving them faces."
+	DESCRIBE.HAT_REDSKULLMASK = "It is not real bones But I will chew it anyways."
+	DESCRIBE.HAT_SKULLMASK = "It is not real bones But I will chew it anyways."
+	DESCRIBE.HAT_SPECTREMASK = "I have seen scarier..."
+	DESCRIBE.HAT_WHITECATMASK = "I can use this to decieve those stupid cats"
+	DESCRIBE.HAT_TECHNOMASK = "It is not real, So I like it more."
+	DESCRIBE.HAT_MANDRAKEMASK = "This is a very strange face."
+	DESCRIBE.HAT_OPOSSUMMASK = "It is a rat but wrong."
+	DESCRIBE.RNE_GOODIEBAG = "Yes, I deserve all the goods inside."
+	
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
 	DESCRIBE.THEATERCORN = "Ooh, it is funny to eat and laugh."
 	DESCRIBE.DEERCLOPS_BARRIER = "I'm Trapped! No!"
 	
 	
-	DESCRIBE.MOONMAW_DRAGONFLY = "AH! WHAT ARE YOU!"
+	DESCRIBE.MOONMAW_DRAGONFLY = "AaAAH!! WHAT ARE YOU!"
 	DESCRIBE.MOONMAW_LAVAE = "Spinning, spinning. Spinning..."
-	DESCRIBE.SNAPPERTURTLE = "ummm, Helllo? I am not here"
+	DESCRIBE.SNAPPERTURTLE = "ummm, I am not here, do not pay attention to me."
 	DESCRIBE.SNAPPERTURTLEBABY = "I'll pick it up and throw it!"
-	DESCRIBE.SNAPPERTURTLENEST = "Not my nest."
+	DESCRIBE.SNAPPERTURTLENEST = "I do not like my nest near water, so that is not mine."
 	DESCRIBE.GLASS_SCALES = "I like how it lights up like that!"
 	DESCRIBE.MOONGLASS_GEODE = "Full of Light."
 	DESCRIBE.ARMOR_GLASSMAIL = "I am the glass killer!"
@@ -359,10 +395,10 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.WOODPECKER = "Why are you banging your head, stupid."
 	DESCRIBE.SNOTROAST = "full of delicious slime."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "Ah, so full."
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = "I wish I had some food."
-	DESCRIBE.BOOK_RAIN_UM = "Cloudy with a chance of rain."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = "I wish I had some food now."
+	DESCRIBE.BOOK_RAIN = "Cloudy with a chance of rain."
 	DESCRIBE.FLORAL_BANDAGE = "I should just eat it."
-	DESCRIBE.DORMANT_RAIN_HORN = "It's salty."
+	DESCRIBE.DORMANT_RAIN_HORN = "It is salty."
 	DESCRIBE.RAIN_HORN = "Is it full of clouds?"
 	DESCRIBE.DRIFTWOODFISHINGROD = "Why do they like this one more?"
 	
@@ -393,4 +429,3 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "What is yours is mine as well."
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "/SQUEAK!!!/"
 	DESCRIBE.UM_DEVILED_EGGS = "Yummy eggs, they smell good!"
-	
