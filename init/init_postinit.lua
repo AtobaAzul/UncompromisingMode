@@ -237,8 +237,11 @@ end
 if GetModConfigData("harder_pigs") then
 	table.insert(prefab_post,"pigman")
 	table.insert(brain_post,"pig")
-	table.insert(brain_post,"werepig")
 	table.insert(stategraph_post,"pigbunny")
+end
+
+if GetModConfigData("angry_werepigs") then
+	table.insert(brain_post,"werepig")
 end
 
 if GetModConfigData("harder_walrus") then
