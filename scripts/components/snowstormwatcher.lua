@@ -88,7 +88,7 @@ function SnowStormWatcher:UpdateSnowstormWalkSpeed(src, data)
         if self.inst.components.playervision:HasGoggleVision() or
             self.inst.components.playervision:HasGhostVision() or
             self.inst.components.rider:IsRiding() or
-			suppressorNearby1 or suppressorNearby2 or suppressorNearby3 or suppressorNearby4 then
+			suppressorNearby1 or suppressorNearby2 or suppressorNearby3 or suppressorNearby4 or (self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ~= nil and self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY).prefab == "beargervest") then
             self.inst.components.locomotor:RemoveExternalSpeedMultiplier(self.inst, "snowstorm")
 			self.inst:PushEvent("checksnowvision")
         else
@@ -108,7 +108,7 @@ function TrySpawning(v)
 	
 	local playervalue2 = #nearbyplayers2 * 0.1
 	
-	if TheWorld.state.iswinter and ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart") )  then--and self.snowstormstart then
+	if TheWorld.state.iswinter and ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart") ) and TheWorld.Map:GetPlatformAtPoint(x1,0,z1) == nil then--and self.snowstormstart then
 		if math.random() <= 0.25 - playervalue2 then
 				--local spawn_pt = GetSpawnPoint(origin_pt, PLAYER_CHECK_DISTANCE + 5)
 				
@@ -146,8 +146,8 @@ local function SnowpileChance(inst, self)
 
 				if TheWorld.Map:IsPassableAtPoint(x + xrandom, 0, z + zrandom) and #ents7 < 1 and #ents8 < 1 and not INVALID_TILES[TheWorld.Map:GetTileAtPoint(x + xrandom, 0, z + zrandom)] then
 					if #TheSim:FindEntities(x + xrandom, 0, z + zrandom,5,{"snowpileblocker"}) == 0 then
-					local snowpilespawn = SpawnPrefab("snowpile")
-					snowpilespawn.Transform:SetPosition(x + xrandom, 0.05, z + zrandom)
+						local snowpilespawn = SpawnPrefab("snowpile")
+						snowpilespawn.Transform:SetPosition(x + xrandom, 0.05, z + zrandom)
 					end
 				end
 		else
