@@ -151,13 +151,13 @@ end)
 env.AddPrefabPostInit("reflectivevest", function(inst)
     if not TheWorld.ismastersim then
         inst.OnEntityReplicated = function(inst)
-            inst.replica.container:WidgetSetup("reflvest")
+            inst.replica.container:WidgetSetup("puffvest_big")
         end
         return inst
     end
 
     inst:AddComponent("container")
-    inst.components.container:WidgetSetup("reflvest")
+    inst.components.container:WidgetSetup("puffvest_big")
 
     if inst.components.equippable ~= nil then
         local OnEquip_old = inst.components.equippable.onequipfn
@@ -193,6 +193,63 @@ env.AddPrefabPostInit("reflectivevest", function(inst)
 
     if inst.components.fueled ~= nil then
         inst.components.fueled:SetDepletedFn(ExplodeInventory)
+    end
+
+    if EQUIPSLOTS["BACK"] ~= nil then
+		if inst.components.equippable ~= nil then
+			inst.components.equippable.equipslot = EQUIPSLOTS.BACK--:)))))))))))))))))))))))|
+		end
+    end
+
+    inst:ListenForEvent("itemget", Folded)
+    --return inst
+end)
+
+env.AddPrefabPostInit("hawaiianshirt", function(inst)
+    if not TheWorld.ismastersim then
+        inst.OnEntityReplicated = function(inst)
+            inst.replica.container:WidgetSetup("puffvest")
+        end
+        return inst
+    end
+
+    inst:AddComponent("container")
+    inst.components.container:WidgetSetup("puffvest")
+
+    if inst.components.equippable ~= nil then
+        local OnEquip_old = inst.components.equippable.onequipfn
+
+        inst.components.equippable.onequipfn = function(inst, owner)
+            if inst.components.container ~= nil then
+                inst.components.container:Open(owner)
+            end
+            if OnEquip_old ~= nil then
+                OnEquip_old(inst, owner)
+            end
+        end
+
+        local OnUnequip_old = inst.components.equippable.onunequipfn
+
+        inst.components.equippable.onunequipfn = function(inst, owner)
+            if inst.components.container ~= nil then
+                inst.components.container:Close(owner)
+            end
+            if OnUnequip_old ~= nil then
+                OnUnequip_old(inst, owner)
+            end
+        end
+    end
+
+    if TUNING.DSTU.POCKET_POWERTRIP == 2 then
+        inst.components.inventoryitem.cangoincontainer = false
+    end
+
+    if inst.components.inventoryitem ~= nil then
+        inst.components.inventoryitem:SetOnPutInInventoryFn(Folded)
+    end
+
+    if inst.components.perishable ~= nil then
+        inst.components.perishable:SetOnPerishFn(ExplodeInventory)
     end
 
     if EQUIPSLOTS["BACK"] ~= nil then
