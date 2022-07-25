@@ -257,7 +257,7 @@ if GetModConfigData("harder_spiderqueen") then
 	table.insert(stategraph_post,"spiderqueen")
 end
 
-if GetModConfigData("pocket_powertrip") == 1 or 2 then
+if GetModConfigData("pocket_powertrip") ~= 0 then
 	table.insert(prefab_post,"pocket_powertrip")
 end
 
