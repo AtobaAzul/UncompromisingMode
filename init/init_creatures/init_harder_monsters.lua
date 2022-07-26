@@ -29,14 +29,14 @@ local bunnytaunts =
 local function TalkShit(inst, taunts) 
     if taunts ~= nil then 
         local tauntnr = GLOBAL.math.floor(GLOBAL.GetRandomMinMax(1,GLOBAL.GetTableSize(taunts)))
-        if inst ~= nil and inst.components.talker ~= nil then
+        if inst and inst.components.talker then
             inst.components.talker:Say(taunts[tauntnr])
         end
     end
 end
 
 local function RetaliateAttacker(inst,attacker,taunts)
-    if inst ~= nil and attacker ~= nil and inst.components.combat ~= nil then
+    if inst and attacker and inst.components.combat then
         inst.components.combat:SuggestTarget(attacker) 
     end
     if taunts ~= nil then TalkShit(inst,taunts) end
