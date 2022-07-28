@@ -181,6 +181,10 @@ local function onsave_rat(inst, data)
 	if inst:HasTag("ratscout") then
 		data.scouting = true
 	end
+
+	if inst:HasTag("notraptrigger") and inst.components.follower.leader ~= nil then
+		data.iswinkyfollower = true
+	end
 end
 
 local function onload_rat(inst, data)
@@ -191,6 +195,10 @@ local function onload_rat(inst, data)
 		
 		if data.scouting ~= nil and data.scouting then
 			inst:AddTag("ratscout")
+		end
+		if data.iswinkyfollower then
+			inst:AddTag("notraptrigger")
+			inst:RemoveTag("canbetrapped")
 		end
 	end
 end
@@ -336,7 +344,7 @@ local function CalcSanityAura(inst, observer)
     (inst.components.follower.leader ~= nil and inst.components.follower.leader:HasTag("ratwhisperer")) then
         return 0
     end
-    
+
     return inst.components.sanityaura.aura
 end
 
@@ -1484,23 +1492,28 @@ local function fn_burrow()
 end
 
 local function WinkyInteract(inst, doer)
-	if doer:HasTag("ratwhisperer") and doer.components.hunger and doer.components.hunger.current >= 20 then
-		doer.components.hunger:DoDelta(-20)
-	
-		local newrat = SpawnPrefab("uncompromising_rat")
-		newrat.Transform:SetPosition(inst.Transform:GetWorldPosition())
-		doer.components.leader:AddFollower(newrat)
-		
-		inst.ratcount = inst.ratcount + 1
-		
-		if inst.ratcount >= 3 then
-			inst:winkyburrowremove()
-		end
-		
-		inst.AnimState:PlayAnimation("dig")
-		inst.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/submerge")
-	end
+    if doer:HasTag("ratwhisperer") and doer.components.hunger and
+        doer.components.hunger.current >= 20 then
+
+        if inst.ratcount >= 3 then
+            inst:winkyburrowremove()
+        else
+            doer.components.hunger:DoDelta(-20)
+
+			inst.ratcount = inst.ratcount + 1
+
+            local newrat = SpawnPrefab("uncompromising_rat")
+            newrat.Transform:SetPosition(inst.Transform:GetWorldPosition())
+            doer.components.leader:AddFollower(newrat)
+			newrat:AddTag("notraptrigger")
+			newrat:RemoveTag("canbetrapped")
+
+            inst.AnimState:PlayAnimation("dig")
+            inst.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/submerge")
+        end
+    end
 end
+
 
 local function onsave_winkyburrow(inst, data)
 	if inst.ratcount ~= nil then
