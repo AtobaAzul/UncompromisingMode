@@ -24,8 +24,12 @@ local function destroystuff(inst)
 					end
 					v.moonmaw_lavae_stun = v.moonmaw_lavae_stun+1
 					if v.moonmaw_lavae_stun > 4 then
-					v:PushEvent("knockback", {knocker = inst.WINDSTAFF_CASTER, radius = 1, strengthmult = 1})
-					v:DoTaskInTime(1.5,function(v) v.moonmaw_lavae_stun = 0 end)
+						if v.sg:HasStateTag("wixiepanic") then
+							v.sg:GoToState("idle")
+						end
+						
+						v:PushEvent("knockback", {knocker = inst.WINDSTAFF_CASTER, radius = 1, strengthmult = 1})
+						v:DoTaskInTime(1.5,function(v) v.moonmaw_lavae_stun = 0 end)
 					end
 				end
             end
@@ -35,14 +39,14 @@ local function destroystuff(inst)
 end
 
 local function Reposition(inst)
-if inst.WINDSTAFF_CASTER ~= nil then
-	local x,y,z = inst.WINDSTAFF_CASTER.Transform:GetWorldPosition()
-	if x ~= nil and y ~= nil and z ~= nil then
-		inst.Transform:SetPosition(x,y,z)
-	else
-		inst:Remove()
+	if inst.WINDSTAFF_CASTER ~= nil then
+		local x,y,z = inst.WINDSTAFF_CASTER.Transform:GetWorldPosition()
+		if x ~= nil and y ~= nil and z ~= nil then
+			inst.Transform:SetPosition(x,y,z)
+		else
+			inst:Remove()
+		end
 	end
-end
 end
 
 local function CheckDist(inst)

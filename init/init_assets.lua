@@ -212,6 +212,8 @@ Assets = {
 
     Asset( "IMAGE", "bigportraits/winky.tex" ),
     Asset( "ATLAS", "bigportraits/winky.xml" ),
+    Asset( "IMAGE", "bigportraits/winky_none.tex" ),
+    Asset( "ATLAS", "bigportraits/winky_none.xml" ),
 
 	Asset( "IMAGE", "images/map_icons/winky.tex" ),
 	Asset( "ATLAS", "images/map_icons/winky.xml" ),

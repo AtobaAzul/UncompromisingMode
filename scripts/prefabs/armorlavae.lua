@@ -29,9 +29,9 @@ local function fn()
     inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
     inst.Physics:ClearCollisionMask()
     inst.Physics:CollidesWith(COLLISION.WORLD)
-    inst.Physics:CollidesWith(COLLISION.OBSTACLES)
-    inst.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
-    inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+    --inst.Physics:CollidesWith(COLLISION.OBSTACLES)
+    --inst.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
+    --inst.Physics:CollidesWith(COLLISION.CHARACTERS)
     inst.Physics:SetCapsule(.5, 1)
     ----------------------------------------------------
 

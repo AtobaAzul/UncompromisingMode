@@ -19,6 +19,7 @@ local HASSLER_SPAWN_DIST = 40
 local HASSLER_KILLED_DELAY_MULT = 6
 local STRUCTURES_PER_SPAWN = 4
 local MOCKFLY_TIMERNAME = "mockfly_timetoattack"
+local _moonmaw_available = "mockfly_timetoattack"
 
 
 --------------------------------------------------------------------------
@@ -32,7 +33,7 @@ self.inst = inst
 --------------------------------------------------------------------------
 local _warning = false
 local _timetoattack = nil
-local _moonmawdelay = nil
+local _spawmmoonmaw = true
 local _warnduration = 60
 local _timetonextwarningsound = 0
 local _announcewarningsoundinterval = 4
@@ -219,6 +220,11 @@ end
 --------------------------------------------------------------------------
 
 local function OnSeasonChange(self, season)
+	if TheWorld.state.season ~= SEASONS.SUMMER then
+		_spawmmoonmaw = true
+		print("moonmaw available")
+	end
+
     TryStartAttacks()
 end
 
@@ -395,6 +401,7 @@ function self:OnSave()
 	{
 		warning = _warning,
 		storedhassler = _storedhassler,
+		spawmmoonmaw = _spawmmoonmaw,
 	}
 
 	local ents = {}
@@ -409,6 +416,7 @@ end
 function self:OnLoad(data)
 	_warning = data.warning or false
 	_storedhassler = data.storedhassler
+	_spawmmoonmaw = data.spawmmoonmaw
 	
     if data.timetoattack then
         _timetoattack = data.timetoattack
@@ -453,13 +461,16 @@ function self:SummonMonster(player)
 end
 
 local function SummonMonsterFullMoon(player)
-	if TheWorld.state.cycles > 50 and TheWorld.state.issummer and TheWorld.state.isfullmoon and not TheWorld.state.isalterawake then
+	if _spawmmoonmaw and TheWorld.state.cycles > 50 and TheWorld.state.issummer and TheWorld.state.isfullmoon and not TheWorld.state.isalterawake then
 		if _worldsettingstimer:ActiveTimerExists(MOCKFLY_TIMERNAME) then
 			_worldsettingstimer:SetTimeLeft(MOCKFLY_TIMERNAME, 10)
 			_worldsettingstimer:ResumeTimer(MOCKFLY_TIMERNAME)
 		else
 			_worldsettingstimer:StartTimer(MOCKFLY_TIMERNAME, 10)
 		end
+		
+		_spawmmoonmaw = false
+		
 		self.inst:StartUpdatingComponent(self)
 	end
 end

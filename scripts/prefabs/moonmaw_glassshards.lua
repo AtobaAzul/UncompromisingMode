@@ -24,8 +24,12 @@ local function destroystuff(inst)
 					end
 					v.moonmaw_lavae_stun = v.moonmaw_lavae_stun+1
 					if v.moonmaw_lavae_stun > 4 then
-					v:PushEvent("knockback", {knocker = inst.WINDSTAFF_CASTER, radius = 1, strengthmult = 1})
-					v:DoTaskInTime(1.5,function(v) v.moonmaw_lavae_stun = 0 end)
+						if v.sg:HasStateTag("wixiepanic") then
+							v.sg:GoToState("idle")
+						end
+						
+						v:PushEvent("knockback", {knocker = inst.WINDSTAFF_CASTER, radius = 1, strengthmult = 1})
+						v:DoTaskInTime(1.5,function(v) v.moonmaw_lavae_stun = 0 end)
 					end
 				end
             end
@@ -124,7 +128,6 @@ local function shardring_fn()
 end
 
 local function pipethrown(inst)
-    inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.AnimState:PlayAnimation(inst.anim)
     inst:AddTag("NOCLICK")
     inst.persists = false

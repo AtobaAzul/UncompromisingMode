@@ -24,8 +24,7 @@ local function fn_tonic()
 
     inst.AnimState:SetBank("stanton_shadow_tonic")
     inst.AnimState:SetBuild("stanton_shadow_tonic")
-    inst.AnimState:PlayAnimation("idle")
-    inst.AnimState:PlayAnimation("idle_loop", true)
+    inst.AnimState:PlayAnimation("idle", true)
     inst:AddTag("stantondrink")
     MakeInventoryFloatable(inst)
 
@@ -75,8 +74,7 @@ local function fn_tonic_fancy()
 
     inst.AnimState:SetBank("stanton_shadow_tonic_fancy")
     inst.AnimState:SetBuild("stanton_shadow_tonic")
-    inst.AnimState:PlayAnimation("idle")
-    inst.AnimState:PlayAnimation("idle_loop", true)
+    inst.AnimState:PlayAnimation("idle", true)
     inst:AddTag("stantondrink")
     MakeInventoryFloatable(inst)
 

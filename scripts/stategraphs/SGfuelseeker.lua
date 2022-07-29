@@ -85,7 +85,7 @@ local function ConsumeLight(inst)
 	
 	for i, v in ipairs(ents) do
 		if v.components.burnable ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
-			v.components.fueled:DoDelta(-7)
+			v.components.fueled:DoDelta(-12)
 			--print("fire")
 			
 			SpawnPrefab("fuelseeker_circle").Transform:SetPosition(v.Transform:GetWorldPosition())
@@ -94,7 +94,7 @@ local function ConsumeLight(inst)
 				inst.fire:LevelUp()
 			end
 		elseif v._light ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
-			v.components.fueled:DoDelta(-7)
+			v.components.fueled:DoDelta(-8)
 			--print("light")
 			
 			SpawnPrefab("fuelseeker_circle").Transform:SetPosition(v.Transform:GetWorldPosition())

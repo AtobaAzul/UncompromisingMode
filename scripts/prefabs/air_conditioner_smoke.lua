@@ -41,64 +41,64 @@ local prefabs =
 
 }
 
-local function keeptargetfn(inst, target)
-   return target:HasTag("player")
-          and target.components.combat
-          and target.components.health
-          and not target.components.health:IsDead()
+local function TimeToDie(inst)
+	inst.Light:Enable(false)
+	
+	if inst.bitetask ~= nil then
+		inst.bitetask:Cancel()
+		inst.bitetask = nil
+	end
+	
+	inst.components.health:Kill()
 end
 
-local function NormalRetarget(inst)
-    local targetDist = 4
-    local notags = {"FX", "NOCLICK", "INLIMBO", "playerghost"}
-	return FindEntity(inst, targetDist, 
-        function(guy) 
-            if inst.components.combat:CanTarget(guy)
-			and guy.components.combat
-			and guy.components.health
-			and not guy.components.health:IsDead() and not guy:HasTag("infested") then
-                return guy:HasTag("player")
-            end
-    end, nil, notags)
+local function RemoveSmokeTag(inst)
+	inst:RemoveTag("ac_smoke_host")
+	
+	if inst.ac_smoketask ~= nil then
+		inst.ac_smoketask:Cancel()
+		inst.ac_smoketask = nil
+	end
 end
 
 local function bite(inst)
-	--[[if inst.components.infester.target:HasTag("playerghost") then
-		inst.components.infester.Uninfest()
-	else]]
-	if inst.components.infester.target == nil or inst.components.infester.target:HasTag("playerghost") or inst:GetDistanceSqToInst(inst.components.infester.target) > 10 then
-		inst.components.health:Kill()
-	end
-	
-	if inst.components.infester.target then
-		inst.components.infester.target.components.health:DoDelta(inst.blue / 2)
-		inst.components.infester.target.components.sanity:DoDelta(inst.green / 2)
+	if inst.host ~= nil and inst.host:IsValid() and not inst.host:HasTag("playerghost") and inst:GetDistanceSqToInst(inst.host) <= 10 then
+		inst.host:AddTag("ac_smoke_host")
 		
-		if inst.components.infester.target.components.hayfever ~= nil and inst.components.infester.target.components.hayfever.nextsneeze < 240 then
-			inst.components.infester.target.components.hayfever:SetNextSneezeTime(inst.components.infester.target.components.hayfever.nextsneeze + inst.red)
+		if inst.host.ac_smoketask ~= nil then
+			inst.host.ac_smoketask:Cancel()
+			inst.host.ac_smoketask = nil
 		end
+		
+		inst.host.ac_smoketask = inst.host:DoTaskInTime(2, RemoveSmokeTag)
+		
+		inst.host.components.health:DoDelta(inst.blue / 2)
+		inst.host.components.sanity:DoDelta(inst.green / 2)
+			
+		if inst.host.components.hayfever ~= nil and inst.host.components.hayfever.nextsneeze < 240 then
+			inst.host.components.hayfever:SetNextSneezeTime(inst.host.components.hayfever.nextsneeze + inst.red)
+		end
+	else
+		TimeToDie(inst)
 	end
 end
 
-local function findlight(inst)
-    local targetDist = 15
-    local notags = {"FX", "NOCLICK","INLIMBO"}
-	local light = FindEntity(inst, targetDist, 
-        function(guy) 
-            if guy.Light and guy.Light:IsEnabled() then
-                return true
-            end
-    end, nil, notags)
-
-    return light
+local function OnNear(inst, target)
+	if target ~= nil and target:IsValid() and not target:HasTag("ac_smoke_host") then
+		inst.Physics:Stop()
+		inst.host = target
+		inst:RemoveComponent("playerprox")
+		inst.entity:SetParent(target.entity)
+		inst.Transform:SetPosition(0, 0, 0)	
+		inst.components.timer:SetTimeLeft("die", 31.1)
+		inst.brain:Stop()
+		bite(inst)
+		inst.bitetask = inst:DoPeriodicTask(1, bite)
+	end
 end
 
 local function ResetTimer(inst)
 	inst.components.timer:SetTimeLeft("die", 31.1)
-end
-
-local function TimeToDie(inst)
-	inst.components.health:Kill()
 end
 
 local function fn2()
@@ -116,6 +116,12 @@ local function fn2()
 	inst.Transform:SetFourFaced()
 	RemovePhysicsColliders(inst)
     inst.Physics:SetCollisionGroup(COLLISION.FLYERS)
+	
+	inst.Light:SetColour(50, 50, 50)
+	inst.Light:SetIntensity(0.75)
+	inst.Light:SetFalloff(0.5)
+	inst.Light:SetRadius(1)
+	inst.Light:Enable(true)
 	
 	inst.AnimState:SetBuild("air_conditioner_cloud")
 	inst.AnimState:SetBank("gnat")
@@ -138,27 +144,19 @@ local function fn2()
 	inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 	inst.components.locomotor:SetTriggersCreep(false)
 	inst.components.locomotor.walkspeed = 4
-    inst.components.locomotor.runspeed = 12
-	
-	inst:AddComponent("combat")
-	inst.components.combat.hiteffectsymbol = "fx_puff"
-    inst.components.combat:SetKeepTargetFunction(keeptargetfn)
-
-    --inst.components.combat:SetDefaultDamage(1)
-    --inst.components.combat:SetAttackPeriod(5)
-    inst.components.combat:SetRetargetFunction(1, NormalRetarget)    
+    inst.components.locomotor.runspeed = 12 
  
 	inst:AddComponent("knownlocations")
 	
 	inst:AddComponent("inspectable")
 	
+	inst:AddComponent("playerprox")
+	inst.components.playerprox:SetDist(1.5, 2)
+	inst.components.playerprox:SetOnPlayerNear(OnNear)
+    inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
+	
 	inst:AddComponent("health")
 	inst.components.health:SetMaxHealth(500)
-
-	inst:AddComponent("infester")
-	inst.components.infester.basetime = 1
-	inst.components.infester.randtime = 0
-	inst.components.infester.bitefn = bite
 	
 	inst:AddComponent("timer")
 	

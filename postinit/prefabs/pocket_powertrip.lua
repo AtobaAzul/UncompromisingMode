@@ -16,7 +16,13 @@ local function Folded(inst)
 
             if not inst.components.equippable:IsEquipped() and owner ~= nil then
                 if #inst.components.container:FindItems(function(item) return item.components.inventoryitem ~= nil end) > 0 then
-                    if owner.SoundEmitter ~= nil and TUNING.DSTU.POCKET_POWERTRIP == 1 then
+                    if owner:HasTag("winky") then
+						for i = 1, inst.components.container:NumItems() do
+							owner.components.sanity:DoDelta(-5)
+						end
+					end
+					
+					if owner.SoundEmitter ~= nil and TUNING.DSTU.POCKET_POWERTRIP == 1 then
                         owner.SoundEmitter:PlaySound("dontstarve/common/tool_slip")
                     end
                 end

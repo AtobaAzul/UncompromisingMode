@@ -4,9 +4,7 @@ local WALK_SPEED = 5
 
 local actionhandlers = 
 {
-    ActionHandler(ACTIONS.GOHOME, "land"),
-    ActionHandler(ACTIONS.INFEST, "infest"),
-   -- ActionHandler(ACTIONS.SPECIAL_ACTION, "land_pre"),    
+    ActionHandler(ACTIONS.GOHOME, "land"), 
 }
 
 local events=
@@ -78,7 +76,13 @@ local states=
         
         events =
         {
-            EventHandler("animqueueover", function(inst) inst.sg:GoToState("running") end),
+            EventHandler("animqueueover", function(inst) 
+				if inst.host ~= nil then
+					inst.sg:GoToState("idle")
+				else
+					inst.sg:GoToState("running") 
+				end
+			end),
         },        
     },
     
@@ -114,7 +118,7 @@ local states=
         events=
         {
             EventHandler("animover", function(inst)
-                if inst.sg.statemem.wantstomove then
+                if inst.sg.statemem.wantstomove and inst.host == nil then
 					inst.sg:GoToState("moving")
 				else
 					inst.sg:GoToState("idle")
@@ -166,34 +170,6 @@ local states=
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
         },
         
-    },
-
-    State{
-        name = "infest",
-        tags = {"busy"},
-        
-        onenter = function(inst)
-            if inst.chasingtargettask then
-                inst.chasingtargettask:Cancel()
-                inst.chasingtargettask = nil
-            end
-            --inst.Physics:Stop()
-            --inst.AnimState:PlayAnimation("attack_pst", false)
-            --inst.AnimState:PushAnimation("attack_pst",false)
-            inst:PerformBufferedAction()
-        end,
-        
-        timeline=
-        {
-            --TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/pollenmite/hit") end),
-        },
- 
-        events=
-        {
-            EventHandler("animover", function(inst)
-                inst.sg:GoToState("idle")
-            end),
-        },
     },
 
 

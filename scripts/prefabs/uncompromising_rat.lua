@@ -1716,6 +1716,7 @@ local function fn_winkyburrow_master()
 	inst.entity:AddNetwork()
 	
 	inst:AddTag("chest")
+	inst.entity:SetCanSleep(false)
 	
 	inst.entity:SetPristine()
 	

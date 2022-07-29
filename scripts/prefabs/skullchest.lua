@@ -62,6 +62,8 @@ local function MakeChest(name, bank, build, indestructible, master_postinit, pre
 
 		if name == "skullchest_child" then
 			inst.MiniMapEntity:SetIcon(name..".png")
+		else
+			inst.entity:SetCanSleep(false)
 		end
         inst:AddTag("structure")
         inst:AddTag("chest")

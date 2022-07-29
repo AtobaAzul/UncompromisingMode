@@ -42,7 +42,7 @@ local function Zap(inst)
 					v.sg:GoToState("electrocute")
 				else
 					if not v:HasTag("automaton") then
-						v.components.combat:GetAttacked(inst, -10)
+						v.components.combat:GetAttacked(inst, 10)
 					else
 						if v.components.playerlightningtarget ~= nil then
 							v.components.playerlightningtarget:DoStrike()
@@ -50,7 +50,7 @@ local function Zap(inst)
 					end
 				end
 			elseif v.components.combat ~= nil then
-				v.components.combat:GetAttacked(inst, -25)
+				v.components.combat:GetAttacked(inst, 25)
 			end
 		end
 	end

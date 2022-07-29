@@ -380,6 +380,8 @@ local function onthrown_eye(inst)
     inst.Physics:SetCapsule(1.5, 1.5)
 	
     inst.Physics:SetCollisionCallback(oncollide)
+
+	inst:DoTaskInTime(3, inst.Remove)
 end
 
 local function fneye_proj()
@@ -416,8 +418,6 @@ local function fneye_proj()
     inst.persists = false
 
     inst:AddComponent("locomotor")
-
-	inst:DoTaskInTime(5, inst.Remove)
 
     return inst
 end

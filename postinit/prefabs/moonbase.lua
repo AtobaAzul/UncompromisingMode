@@ -121,7 +121,7 @@ local function givetear(inst, item, giver)
         giver = nil
     end
 
-    local item = SpawnPrefab("moontear")
+    local item = SpawnPrefab("moon_tear")
 	if item ~= nil then
 		item.Transform:SetPosition(x, y, z)
 		launchitem(item, angle)
@@ -232,11 +232,13 @@ local function ItemTradeTest(inst, item, giver)
 			inst:WatchWorldState("isday", function(inst, item, giver)
 				if inst.moonteartransformtask ~= nil then
 					inst.moonteartransformtask:Cancel()
-					
-					givetear(inst, item, giver)
 				end
 				
 				inst.moonteartransformtask = nil
+				
+				givetear(inst, item, giver)
+				StopFX(inst)
+				inst.mooning = false
 			
 				inst:StopWatchingWorldState("isday")
 			end)

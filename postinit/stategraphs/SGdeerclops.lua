@@ -713,7 +713,6 @@ local states = {
 
         onenter = function(inst)
             inst.Physics:Stop()
-			inst.components.combat:SetRange(TUNING.DEERCLOPS_ATTACK_RANGE)
 			inst.AnimState:PlayAnimation("fortresscast_pst")
 			inst.components.timer:StartTimer("auratime", 24+math.random(1,11))
         end,

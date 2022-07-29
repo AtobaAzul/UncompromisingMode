@@ -9,7 +9,7 @@ local AGRO_DIST = 5
 local AGRO_STOP_DIST = 7
 
 local function findinfesttarget(inst,brain)
-	if (inst.components.combat and inst.components.combat.target) ~= nil then
+	if (inst.components.combat and inst.components.combat.target) ~= nil and inst.components.infester ~= nil then
 	local target = nil
 	target = inst.components.combat.target
   if target ~= nil then  
@@ -92,7 +92,7 @@ function PollenmitesBrain:OnStart()
     local root =
         PriorityNode(
         {
-            WhileNode( function() return not self.inst.components.infester.infesting end, "not infesting",
+            WhileNode( function() return self.inst.components.infester == nil and not self.inst.host or self.inst.components.infester ~= nil and not self.inst.components.infester.infesting end, "not infesting",
             PriorityNode{            
                 WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", 
                     Panic(self.inst) ),

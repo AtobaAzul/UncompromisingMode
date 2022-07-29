@@ -92,7 +92,7 @@ UpdateSpawn = function(player, params)
         end
 		
 		local bosses = TheSim:FindEntities(x, y, z, 35, { "_combat" }, { "FX", "NOCLICK", "INLIMBO", "player" }, {"epic", "shadowchesspiece" })
-		local bossesnearby = #TheSim:FindEntities(x, y, z, 30, { "_combat" }, { "FX", "NOCLICK", "INLIMBO", "player" }, {"deerclops", "shadowchesspiece", "mock_dragonfly", "minotaur", "stalker", "bearger","creepingfear" })
+		local bossesnearby = #TheSim:FindEntities(x, y, z, 30, { "_combat" }, { "FX", "NOCLICK", "INLIMBO", "player" }, {"deerclops", "shadowchesspiece", "mock_dragonfly", "minotaur", "stalker", "bearger", "creepingfear", "mothergoose" })
 
 
 

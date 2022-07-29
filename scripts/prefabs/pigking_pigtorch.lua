@@ -535,7 +535,7 @@ local function OnNewTarget(inst, data)
     if inst:HasTag("werepig") then
         inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST, IsWerePig, MAX_TARGET_SHARES)
 		else
-		if data.target:HasTag("pig") then
+		if data.target:HasTag("pig") and not data.target:HasTag("werepig") then
 		inst.components.combat.target = nil
 		end
 		if data.target.userid ~= nil and inst.hitlist ~= nil and not table.contains(inst.hitlist,data.target.userid) then
