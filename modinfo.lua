@@ -1,7 +1,7 @@
 name = "󰀕 Uncompromising Mode"
 description = 
 [[
-󰀔 [ Version 1.4.7.8 : "Winky, The Vile Vermin" ]
+󰀔 [ Version 1.4.7.9 : "Winky, The Vile Vermin" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -14,11 +14,11 @@ Prominent features:
 - Brand New custom attacks for all Eye of Terror bosses.
 - And many more changes, there are too many to list!
 
-󰀏 NEXT UPDATE: Under the Weather, Part I.]]
+󰀏 NEXT UPDATE: Calm Before The Storm.]]
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Squeaky Clean v1.4.7.8"
+version = "Squeaky Clean v1.4.7.9"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 

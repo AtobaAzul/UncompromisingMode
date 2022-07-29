@@ -1,6 +1,7 @@
 return {
     --Characters
 	"winky",
+	"winky_none",
 	--"wixie",
 	--"wathom",
 	--"wickett",
