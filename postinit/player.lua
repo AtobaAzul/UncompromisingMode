@@ -123,7 +123,7 @@ env.AddPlayerPostInit(function(inst)
 
     inst.OnDespawn = function(inst, migrationdata, ...)
         for k, v in pairs(inst.components.leader.followers) do
-            if k.prefab ~= "hutch" and k.prefab ~= "chester" and k.prefab ~= "glommer" and k.prefab ~= "beefalo" and k.prefab ~= "friendlyfruitfly" and k.prefab ~= "rocky" and not k:HasTag("critter") then--exluding things that can't/shouldn't/already do
+            if (k:HasTag("spider") or k:HasTag("pig") or k:HasTag("merm") or k:HasTag("raidrat")) then--exluding things that can't/shouldn't/already do
                 local savedata = k:GetSaveRecord()
                 table.insert(inst.um_all_followers, savedata)
                 -- remove followers
