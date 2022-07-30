@@ -5,6 +5,7 @@ local WALK_SPEED = 5
 local actionhandlers = 
 {
     ActionHandler(ACTIONS.GOHOME, "land"), 
+	ActionHandler(ACTIONS.INFEST, "infest"),
 }
 
 local events=
@@ -241,7 +242,35 @@ local states=
                 inst.sg:GoToState("takeoff")
             end),
         },
-    },    
+    },  
+	
+	State{
+        name = "infest",
+        tags = {"busy"},
+        
+        onenter = function(inst)
+            if inst.chasingtargettask then
+                inst.chasingtargettask:Cancel()
+                inst.chasingtargettask = nil
+            end
+            --inst.Physics:Stop()
+            --inst.AnimState:PlayAnimation("attack_pst", false)
+            --inst.AnimState:PushAnimation("attack_pst",false)
+            inst:PerformBufferedAction()
+        end,
+        
+        timeline=
+        {
+            --TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/pollenmite/hit") end),
+        },
+ 
+        events=
+        {
+            EventHandler("animover", function(inst)
+                inst.sg:GoToState("idle")
+            end),
+        },
+    },
 
 }
 CommonStates.AddFrozenStates(states)
