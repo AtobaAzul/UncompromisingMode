@@ -145,8 +145,9 @@ local function fn()
     inst.AnimState:SetBank("cursed_antler")
     inst.AnimState:SetBuild("cursed_antler")
     inst.AnimState:PlayAnimation("idle")
-	
+
 	inst:AddTag("cursedantler")
+	inst:AddTag("vetcurse_item")
 
     MakeInventoryFloatable(inst, "med", 0.2, 0.65)
 

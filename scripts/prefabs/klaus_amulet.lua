@@ -89,6 +89,8 @@ local function fn()
 
     MakeInventoryFloatable(inst, "med", nil, 0.6)
 
+	inst:AddTag("vetcurse_item")
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then

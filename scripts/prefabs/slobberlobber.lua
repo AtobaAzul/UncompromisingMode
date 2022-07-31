@@ -191,6 +191,7 @@ local function staff_fn()
 
     inst:AddTag("nopunch")
     inst:AddTag("slobberlobber")
+	inst:AddTag("vetcurse_item")
 
     --Sneak these into pristine state for optimization
     inst:AddTag("quickcast")

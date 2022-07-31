@@ -104,6 +104,7 @@ local function feather(feathertype)
         inst.entity:AddNetwork()
 
         inst:AddTag("FX")
+        inst:AddTag("vetcurse_item")
 
         inst.Transform:SetFourFaced()
 		inst.Transform:SetScale(0.8, 0.8, 0.8)

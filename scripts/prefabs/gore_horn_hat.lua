@@ -259,7 +259,8 @@ end
 
         inst:AddTag("hat")
         inst:AddTag("gore_horn")
- 
+		inst:AddTag("vetcurse_item")
+
         MakeInventoryFloatable(inst)
 
         inst.entity:SetPristine()

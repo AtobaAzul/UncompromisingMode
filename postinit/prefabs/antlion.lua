@@ -37,6 +37,7 @@ end
 env.AddPrefabPostInit("antlion", function(inst)
 	
 	inst:AddTag("insect")
+	inst:AddTag("bear_trap_immune")
 
 	if not TheWorld.ismastersim then
 		return

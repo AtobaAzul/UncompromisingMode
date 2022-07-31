@@ -322,6 +322,7 @@ local function frockfn()
 	
 	--inst:AddTag("wingsuit")
     --inst:AddTag("backpack")
+	inst:AddTag("vetcurse_item")
 
 	--inst.foleysound = "dontstarve/movement/foley/cactus_armor"
 

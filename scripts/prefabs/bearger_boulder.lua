@@ -198,6 +198,7 @@ local function clawprojectilefn()
     local inst = CreateEntity()
 	
     inst:AddTag("bearger_boulder")
+	inst:AddTag("vetcurse_item")
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -214,7 +215,7 @@ local function clawprojectilefn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
 	inst.clawer = nil
 
     inst:AddComponent("complexprojectile")
