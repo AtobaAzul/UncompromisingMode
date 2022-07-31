@@ -123,30 +123,31 @@ local function newonequip(inst, owner)
     local x, y, z = owner.Transform:GetWorldPosition()
     if inst.lavaecond1 == "alive" then
         local lavae1 = SpawnPrefab("armorlavae")
-        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
         lavae1.number = 1
-        lavae1.Transform:SetPosition(x, y, z)
+        lavae1.Transform:SetPosition(x+math.random(-3, 3), y, z+math.random(-3, 3))
         inst.lavae1 = lavae1
         owner.components.leader:AddFollower(lavae1)
         lavae1.components.follower.leader = owner
+        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(lavae1.Transform:GetWorldPosition())
+
     end
     if inst.lavaecond2 == "alive" then
         local lavae2 = SpawnPrefab("armorlavae")
-        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
         lavae2.number = 2
-        lavae2.Transform:SetPosition(x, y, z)
+        lavae2.Transform:SetPosition(x+math.random(-3, 3), y, z+math.random(-3, 3))
         inst.lavae2 = lavae2
         owner.components.leader:AddFollower(lavae2)
         lavae2.components.follower.leader = owner
+        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(lavae2.Transform:GetWorldPosition())
     end
     if inst.lavaecond3 == "alive" then
         local lavae3 = SpawnPrefab("armorlavae")
-        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
         lavae3.number = 3
-        lavae3.Transform:SetPosition(x, y, z)
+        lavae3.Transform:SetPosition(x+math.random(-3, 3), y, z+math.random(-3, 3))
         inst.lavae3 = lavae3
         owner.components.leader:AddFollower(lavae3)
         lavae3.components.follower.leader = owner
+        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(lavae3.Transform:GetWorldPosition())
     end
 _onequip(inst,owner)
 end
