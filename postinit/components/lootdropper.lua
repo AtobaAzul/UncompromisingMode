@@ -8,7 +8,7 @@ env.AddComponentPostInit("lootdropper", function(self)
 	local _OldDropLoot = self.DropLoot
 	local _GenerateLoot = self.GenerateLoot
 	if TUNING.DSTU.FIRELOOT ~= nil and TUNING.DSTU.FIRELOOT > 1 then
-		function self:DropLoot(pt)
+		function self:DropLoot(pt, ...)
 			local prefabs = self:GenerateLoot(self)
 			local isstructure = self.inst:HasTag("structure")
 				
@@ -61,7 +61,7 @@ env.AddComponentPostInit("lootdropper", function(self)
 
 					TheWorld:PushEvent("entity_droploot", { inst = self.inst }) 
 			else
-				return _OldDropLoot(self, pt)
+				return _OldDropLoot(self, pt, ...)
 			end
 		end
 	end
