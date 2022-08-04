@@ -1492,26 +1492,24 @@ local function fn_burrow()
 end
 
 local function WinkyInteract(inst, doer)
-    if doer:HasTag("ratwhisperer") and doer.components.hunger and
-        doer.components.hunger.current >= 20 then
-
-        if inst.ratcount >= 3 then
-            inst:winkyburrowremove()
-        else
-            doer.components.hunger:DoDelta(-20)
-
+	if inst.ratcount < 3 then
+		if doer:HasTag("ratwhisperer") and doer.components.hunger and doer.components.hunger.current >= 20 then
+			doer.components.hunger:DoDelta(-20)
 			inst.ratcount = inst.ratcount + 1
 
-            local newrat = SpawnPrefab("uncompromising_rat")
-            newrat.Transform:SetPosition(inst.Transform:GetWorldPosition())
-            doer.components.leader:AddFollower(newrat)
+			local newrat = SpawnPrefab("uncompromising_rat")
+
+			newrat.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			doer.components.leader:AddFollower(newrat)
 			newrat:AddTag("notraptrigger")
 			newrat:RemoveTag("canbetrapped")
 
-            inst.AnimState:PlayAnimation("dig")
-            inst.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/submerge")
-        end
-    end
+			inst.AnimState:PlayAnimation("dig")
+			inst.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/submerge")
+		end
+	else
+		inst:winkyburrowremove()
+	end
 end
 
 
