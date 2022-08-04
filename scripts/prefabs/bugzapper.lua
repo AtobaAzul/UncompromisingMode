@@ -107,8 +107,18 @@ local function onunequip(inst, owner)
 		inst.sparktask:Cancel()
 	end
 	inst.sparktask = nil
+
 	if owner.components.upgrademoduleowner == nil then
-		owner:RemoveTag("batteryuser")          -- from batteryuser component
+		local item = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+		if item ~= nil then
+			if not item:HasTag("electricaltool") and owner:HasTag("batteryuser") then
+				owner:RemoveTag("batteryuser")
+			end
+		else
+			if owner:HasTag("batteryuser") then
+				owner:RemoveTag("batteryuser")
+			end
+		end
 	end
 end
 
@@ -150,12 +160,12 @@ local function onattack(inst, attacker, target)
 			SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
 			
 			local x, y, z = target.Transform:GetWorldPosition()
-			local ents = TheSim:FindEntities(x, y, z, 3, nil, { "INLIMBO", "player", "abigail" }, { "insect", "spider", "hoodedwidow"})
+			local ents = TheSim:FindEntities(x, y, z, 3.5, nil, { "INLIMBO", "player", "abigail" }, { "insect", "spider", "hoodedwidow"})
 
 			for i, v in ipairs(ents) do
 				if v ~= inst and v ~= target and v:IsValid() and not v:IsInLimbo() then
-					if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
-						v.components.combat:GetAttacked(attacker, 10, nil)
+					if (v.components.health ~= nil and not v.components.health:IsDead()) and not v.sg:HasStateTag("noattack") then
+						v.components.health:DoDelta(-10, false, attacker, false, attacker)
 						SpawnPrefab("electrichitsparks"):AlignToTarget(v, attacker, true)
 					end
 				end
@@ -178,12 +188,12 @@ local function onattack(inst, attacker, target)
 			SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
 			
 			local x, y, z = target.Transform:GetWorldPosition()
-			local ents = TheSim:FindEntities(x, y, z, 3, nil, { "INLIMBO", "player", "abigail" }, { "insect", "spider", "hoodedwidow"})
+			local ents = TheSim:FindEntities(x, y, z, 3.5, nil, { "INLIMBO", "player", "abigail" }, { "insect", "spider", "hoodedwidow"})
 
 			for i, v in ipairs(ents) do
 				if v ~= inst and v ~= target and v:IsValid() and not v:IsInLimbo() then
-					if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
-						v.components.combat:GetAttacked(attacker, 10, nil)
+					if v.components.combat ~= nil and not (v.components.health ~= nil and not v.components.health:IsDead()) then
+						v.components.health:DoDelta(-10, false, attacker, false, attacker)
 						SpawnPrefab("electrichitsparks"):AlignToTarget(v, attacker, true)
 					end
 				end
