@@ -71,11 +71,16 @@ local start_inv =
 }
 
 local function checkfav(inst, food)
-	if food ~= nil and food.prefab == "powcake" then
-		inst.components.hunger:DoDelta(15)
-		inst.components.health:DoDelta(15)
-		inst.components.sanity:DoDelta(15)
-	end
+    if food ~= nil then
+        if food.prefab == "powcake" then
+            inst.components.hunger:DoDelta(15)
+            inst.components.health:DoDelta(15)
+            inst.components.sanity:DoDelta(15)
+        elseif food.prefab == "winter_food4" then
+            inst.components.health:DoDelta(4)
+            inst.components.sanity:DoDelta(4)
+        end
+    end
 end
 
 local function OnPickSomething(inst, data)
