@@ -174,7 +174,7 @@ configuration_options =
 	BinaryConfig("wickerbottom", "Wickerbottom Balance", "Wickerbottom/Maxwell can no longer read books while insane.", true),
 	BinaryConfig("on tentacles", "On Tentacles Re-Balance", "On Tentacles now spawns friendly tentacles that die over time, and do not drop tentacle spots.", true),
 	BinaryConfig("applied horticulture", "Horticulture, Abridged recipe Re-Balance", "Horticulture, Abridged now takes 1 Leafy Meat instead of 5 seeds, to better balance it from being too easily spammable early game.", true),
-	BinaryConfig("legacy_book_rain_recipe", "[BETA] Old Rain Book Recipe", "Uncompromising Mode added a rain book before Klei did. This option returns the old recipe.", true),
+	BinaryConfig("legacy_book_rain_recipe", "Old Rain Book Recipe", "Uncompromising Mode added a rain book before Klei did. This option returns the old recipe.", true),
 	BinaryConfig("wanda_nerf", "Wanda Tweaks", "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", false),
 	--BinaryConfig("wormwood_fire", "Extra Flamable Wormwood", "Wormwood is highly flameable, like in Hamlet.", false),
 	BinaryConfig("wormwood_extrafiredmg", "Increased Fire Damage Mult", "Increases Wormwood's fire damage multiplier to 1.75x, from 1.25x", true),
