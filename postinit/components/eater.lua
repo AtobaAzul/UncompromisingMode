@@ -16,25 +16,15 @@ AddComponentPostInit("eater", function(self)
 		end
 	end
 
-	function self:PrefersToEat(food)--Hook didn't work, food always came as nil, despite adding nil checks :/
-		if food.prefab == "winter_food4" and self.inst:HasTag("player") and not self.inst:HasTag("ratwhisperer") then
-			--V2C: fruitcake hack. see how long this code stays untouched - _-"
-			return false
-		elseif self.nospoiledfood and (food.components.perishable and food.components.perishable:IsSpoiled()) then
-			return false
-		elseif self.preferseatingtags ~= nil then
-			--V2C: now it has the warly hack for only eating prepared foods ;-D
-			local preferred = false
-			for i, v in ipairs(self.preferseatingtags) do
-				if food:HasTag(v) then
-					preferred = true
-					break
-				end
-			end
-			if not preferred then
-				return false
+	local _PrefersToEat = self.PrefersToEat
+
+	function self:PrefersToEat(food)
+		if food.prefab == "winter_food4" and self.inst:HasTag("player") and self.inst:HasTag("ratwhisperer") then
+			return self:TestFood(food, self.preferseating)
+		else
+			if _PrefersToEat ~= nil then --realistically, this should never be nil, but ya never know...
+				return _PrefersToEat(self, food)
 			end
 		end
-		return self:TestFood(food, self.preferseating)
 	end
 end)

@@ -114,6 +114,8 @@ local function master_postinit(inst)
 	inst.soundsname = "winky"
 	
     inst.components.foodaffinity:AddPrefabAffinity("powcake", 20)
+    inst.components.foodaffinity:AddPrefabAffinity("winter_food4", 20)
+
 	inst.components.eater:SetCanEatHorrible()
 	inst.components.eater:SetStrongStomach(true) -- can eat monster meat!
 	inst.components.eater:SetCanEatRawMeat(true)
