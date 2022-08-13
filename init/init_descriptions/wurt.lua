@@ -5,7 +5,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 --	[ 		Wurt Descriptions		]	--
 	DESCRIBE.DEERCLOPS = "He not look happy, florp."
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Not go in there, florp."
-    ANNOUNCE.ANNOUNCE_WINONAGEN = "Weeno-lady need to do it!"
+    ANNOUNCE.ANNOUNCE_WINONAGEN = "Weenowna-lady need to do it!"
     ANNOUNCE.ANNOUNCE_RATRAID = "What that squeak?"
     ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Sneaky things!"
     ANNOUNCE.ANNOUNCE_RATRAID_OVER = "Little meanies take stuff! Follow! Get!"
@@ -18,67 +18,73 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	--FoodBuffs
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LESSERELECTRICATTACK = ANNOUNCE.ANNOUNCE_ATTACH_BUFF_ELECTRICATTACK
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_ELECTRICRETALIATION = ANNOUNCE.ANNOUNCE_ATTACH_BUFF_ELECTRICATTACK
-	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_FROZENFURY = "ssSsooo cCccold"
-	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_VETCURSE = "F-florp!!"
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_FROZENFURY = "Flrrrr! T-too cold... TOO COLD!!"
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_VETCURSE = "G-glorp!! What happening to me?!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LESSERELECTRICATTACK = ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICRETALIATION = ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now."
 	--FoodBuffs
 	
 	--CaliforniaKing
-	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING = "Help, I ate something that I am unable to eat."
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "Help, I ate something that I am unable to eat."
-	DESCRIBE.CALIFORNIAKING = "This not food! Glorph, is murder!"
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING = "Glargh!! Tasted terrible! Knew me wasn't supposed to eat this but did it anyways!!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "Never gonna do that impossible thing ever again! Gotta tell someone how that happen!"
+	DESCRIBE.CALIFORNIAKING = "Glurgh... this is bad drink!"
 	--CaliforniaKing
 	
 	ANNOUNCE.ANNOUNCE_RNEFOG = "Stop looking!!"
-    DESCRIBE.UNCOMPROMISING_RAT = "Spiderfolk family? Have hair."
+    DESCRIBE.UNCOMPROMISING_RAT = "It look like Spiderfolk, but it squeaking..?"
     DESCRIBE.UNCOMPROMISING_RATHERD = "Little eyes in hole! Hello!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "Little eyes in hole! Hello!"
-    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "A lotta things in that hole, glurp."
-    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Squeaky leaving things in that hole for us."
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Little eyes in hole! Hello!"
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "A lot more eyes in this one! How many in there? One, two..."
 	
 	DESCRIBE.WINKY =
         {
-            GENERIC = "Hairy squeaky is nice squeaky!",
-            ATTACKER = "Squeaky is not nice!",
-            MURDERER = "%s is on a mean squeak!",
-            REVIVER = "Squeaky is friend to mermfolk!",
-            GHOST = "If help squeaky, then squeaky is friend?",
-            FIRESTARTER = "No burning, squeaky!",
+            GENERIC = "Hi squeaky!",
+            ATTACKER = "Ow! Why you hit me?!",
+            MURDERER = "You just as sneaky as the rest of them!",
+            REVIVER = "This mean we friends now?",
+            GHOST = "You be okay, squeaky! Will get heart!",
+            FIRESTARTER = "She did it! She burn it all!",
         }
 		
-    DESCRIBE.RATPOISONBOTTLE = "Veggies but taste really bad."
-    DESCRIBE.RATPOISON = "Spill! Wasn't good anyway."
+    DESCRIBE.RATPOISONBOTTLE = "What you mean \"don't eat\"?"
+    DESCRIBE.RATPOISON = "Glurmph, fine..."
 
-    DESCRIBE.MONSTERSMALLMEAT = "No, not good. Leave for Spiderfolk?"
-    DESCRIBE.COOKEDMONSTERSMALLMEAT = "Glurgh! Smell so bad."
-    DESCRIBE.MONSTERSMALLMEAT_DRIED = "Even bader now, florpt!"
+    DESCRIBE.MONSTERSMALLMEAT = "Nuh uh."
+    DESCRIBE.COOKEDMONSTERSMALLMEAT = "Glurph."
+    DESCRIBE.MONSTERSMALLMEAT_DRIED = "Glurgh, even worse now."
 
-    DESCRIBE.UM_MONSTEREGG = "Good egg. I like egg."
-    DESCRIBE.UM_MONSTEREGG_COOKED = "Oh, egg gone bad..."
+    DESCRIBE.UM_MONSTEREGG = "Something wrong with this egg..."
+    DESCRIBE.UM_MONSTEREGG_COOKED = "Glurgh..."
 
-    DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Mushroom? Mad mushroom!"
-    DESCRIBE.TOADLING = "Veggie...froggie? Not sure if ok to eat."
+    DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "The mushroom been causing this!"
+    DESCRIBE.TOADLING = "Hello froggy!"
 	
-    DESCRIBE.GASMASK = "Smell bad, smells bad."
+    DESCRIBE.GASMASK = "Smells like birdy!"
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
 	DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
-	DESCRIBE.SPIDERQUEENCORPSE = "Like the smell!"
-	ANNOUNCE.ANNOUNCE_SNEEZE = "Choo! Egh."
+	DESCRIBE.SPIDERQUEENCORPSE = "Victory for Mermfolk!"
+	ANNOUNCE.ANNOUNCE_SNEEZE = "Choo! Glrph"
 	ANNOUNCE.ANNOUNCE_HAYFEVER = "Nose feel funny!"
-	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Nose feels good again!"
+	ANNOUNCE.ANNOUNCE_HAYFEVER_OFF = "Nose feel good again!"
 	ANNOUNCE.ANNOUNCE_FIREFALL = {
 		"Bllrgh, is scary!",
 		"Anty angry!",
 		"Groundy fire! Florp!",
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "Stuck!"
-	ANNOUNCE.ANNOUNCE_SNOWSTORM = "Brr... chilly wind. I think storm happens soon."
+	ANNOUNCE.ANNOUNCE_SNOWSTORM = "Brrr... chilly wind. More snow coming soon?"
 	ANNOUNCE.SHADOWTALKER = {
-        "DO SCALELESS TRUST ME?",
+        "DO SCALE-LESS TRUST ME?",
         "WHERE... FROM...",
         "WHY... HORNS? AM... MERMFOLK?",
+		"MOUTH IN SKY...",
+		"IS STORY... TRUE?",
+		"WHAT IF WEBBY BOY NOT FRIEND?",
+		"NOTHING FEEL RIGHT...",
+		"DO ANYONE EVEN LIKE MERMFOLK?",
+		"WILL SCALE-LESS STILL HELP ME?",
     }
 	ANNOUNCE.ANNOUNCE_OVER_EAT =
 	{
@@ -94,108 +100,108 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.SNOWMONG = "Not fun!!!"
 	DESCRIBE.SHOCKWORM = "Sparky Worm!!"
 	DESCRIBE.ZASPBERRY = "Raps-perry?"
-	DESCRIBE.ZASPBERRYPARFAIT = "Tickles Belly."
+	DESCRIBE.ZASPBERRYPARFAIT = "Tickles belly."
 	DESCRIBE.ICEBOOMERANG = "This is fun, florp!"
 	DESCRIBE.MINOTAUR_BOULDER = "Ahh! Dangerous!"
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "Would hurt cranky things head!"
 	SNOWBALL_THROWABLE = "Why you throw at us!?"
-	DESCRIBE.VETERANSHRINE = "I hate it, florp!"
-	DESCRIBE.RAT_TAIL = "It feels good to rub on face, florp!"
-	DESCRIBE.PLAGUEMASK = "I don't like it! It's scary, florp!"
-	DESCRIBE.SPIDER_TRAPDOOR = "Is it naked?"
-	DESCRIBE.TRAPDOOR = "I see nothing!"
+	DESCRIBE.VETERANSHRINE = "Glurp... w-why it talking to me?"
+	DESCRIBE.RAT_TAIL = "Feels good to rub on face, florp!"
+	DESCRIBE.PLAGUEMASK = "Maybe birdies not fly away if look like this?"
+	DESCRIBE.SPIDER_TRAPDOOR = "Glorp! Spiderfolk make trap now too?!"
+	DESCRIBE.TRAPDOOR = "What supposed to be looking for..? Don't see anything!"
 	DESCRIBE.HOODEDTRAPDOOR = DESCRIBE.TRAPDOOR 
-	DESCRIBE.WICKER_TENTACLE = "Wiggler don't look normal... sick?"
-	DESCRIBE.HONEY_LOG = "Flrbbl... not alive is it?"
+	DESCRIBE.WICKER_TENTACLE = "G-glorp! Wicker-lady make swamp appear to help!"
+	DESCRIBE.HONEY_LOG = "You sure this okay?"
 
 	DESCRIBE.BUSHCRAB = "Crabby!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
-	DESCRIBE.DISEASECUREBOMB = "Plant make snacks in no time!"
-	DESCRIBE.SHROOM_SKIN_FRAGMENT = "Smell like me!"
+	DESCRIBE.DISEASECUREBOMB = "Plant feel better in no time!"
+	DESCRIBE.SHROOM_SKIN_FRAGMENT = "Feel kinda bad, florp..."
 	DESCRIBE.AIR_CONDITIONER = "Smells weird, florp."
 	DESCRIBE.SPOREPACK = "Smells like home!"
-	DESCRIBE.SALTPACK = "Eyes hurt!"
+	DESCRIBE.SALTPACK = "Glargh! Eyes on fire!!"
 	
-	DESCRIBE.SCORPION = "Look like spiderfolk?"
-	DESCRIBE.SCORPIONCARAPACE = "Yuck! Worse than just meat!"
-	DESCRIBE.SCORPIONCARAPACECOOKED = "Throw it away!"
-	DESCRIBE.HARDSHELLTACOS = "Get that thing away!"
+	DESCRIBE.SCORPION = "Look like Spiderfolk?"
+	DESCRIBE.SCORPIONCARAPACE = "Glurgh... yucky stuff is worse than just meat!"
+	DESCRIBE.SCORPIONCARAPACECOOKED = "Gluuurrrgh!"
+	DESCRIBE.HARDSHELLTACOS = "Gluuuuuuurrrrrrgh!!"
 	
-	DESCRIBE.SKELETONMEAT = "Whats problem?"
+	DESCRIBE.SKELETONMEAT = "Glurph, don't wanna hold this for long."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
-	DESCRIBE.SWILSON = "Florrrp! Scaleless betray?!"
-	DESCRIBE.VAMPIREBAT = "Bigger! Grrr!"
+	DESCRIBE.SWILSON = "Glorp! Funny hair man betray?!"
+	DESCRIBE.VAMPIREBAT = "Grrr, bigger bat!"
 									
 	--Swampyness
-	DESCRIBE.RICEPLANT = "A soaked marsh-ey plant."
-	DESCRIBE.RICE = "Was better damp."
-	DESCRIBE.RICE_COOKED = "Tasty! Florp."
+	DESCRIBE.RICEPLANT = "Yummy marsh plant!"
+	DESCRIBE.RICE = "Water snack!"
+	DESCRIBE.RICE_COOKED = "Tasty!"
 	DESCRIBE.SEAFOODPAELLA = "Why..."
-	DESCRIBE.LICELOAF = "Could use more taste, Florp."
-	DESCRIBE.SUNGLASSES = "GLLRP! Why no fit?!"
+	DESCRIBE.LICELOAF = "It seem fine to me, florp."
+	DESCRIBE.SUNGLASSES = "It make everything a bit dark."
 	
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
-	DESCRIBE.CRITTERLAB_REAL_BROKEN = "Moon rock make new home for tiny things."
+	DESCRIBE.CRITTERLAB_REAL_BROKEN = "Maybe moon rock make new home for tiny things."
 	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
-	DESCRIBE.BUGZAPPER = "Hit bugs with stick, florp."
-	DESCRIBE.STUMPLING = "Never seen this before."
+	DESCRIBE.BUGZAPPER = "Hit bugs with zappy stick!"
+	DESCRIBE.STUMPLING = "Glorp! Tree coming back to fight!"
 	DESCRIBE.BIRCHLING = DESCRIBE.STUMPLING
-	DESCRIBE.MOON_TEAR = "Not happy wet, but sad wet..."
-	DESCRIBE.SHADOW_TELEPORTER = "Treasure in it's claws!"
-	DESCRIBE.POLLENMITEDEN = "Glrp... scary."
-    DESCRIBE.POLLENMITES = "FLURP! Flyers itch..."
-    DESCRIBE.SHADOW_CROWN = "Make body and head hurt more..."
-    DESCRIBE.RNEGHOST = DESCRIBE.GHOST
-	DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
-	DESCRIBE.LUREPLAGUE_RAT = "Definitely not spiderfolk!"
-	DESCRIBE.MARSH_GRASS = "Fish?"
+	DESCRIBE.MOON_TEAR = "Moon is... sad?"
+	DESCRIBE.SHADOW_TELEPORTER = "Treasure in its claws!"
+	DESCRIBE.POLLENMITEDEN = "It home for nasty itchy bugs!"
+    DESCRIBE.POLLENMITES = "Glorp! Go away itchy bugs!"
+    DESCRIBE.SHADOW_CROWN = "Queen Wur-..? ...Erm.... Maybe someone else can have this crown..."
+    DESCRIBE.RNEGHOST = "Glorp! Ghost might be cold, but can't have fire!"
+	DESCRIBE.TRAPDOORGRASS = "Big grass."
+	DESCRIBE.LUREPLAGUE_RAT = "Glorp! Something wrong with this squeaker!"
+	DESCRIBE.MARSH_GRASS = "Cute fishies inside?"
 	DESCRIBE.CURSED_ANTLER = "Glurph, is heavy..."
 	DESCRIBE.BERNIEBOX = "Fun box... what inside?"
 	DESCRIBE.HOODED_FERN = "Taste okay."
-	DESCRIBE.HOODEDWIDOW = "F-florp!! Im not bite-sized!"
-	DESCRIBE.GIANT_TREE = "Wurgh, big tree!"
-	DESCRIBE.WIDOWSGRASP = "Got an owie, florp."
-	DESCRIBE.WEBBEDCREATURE = "Belongs to spiderfolk, florp."
-	ANNOUNCE.WEBBEDCREATURE = "Can't break! Flurgh! How spiderfolk break?"
-	DESCRIBE.SNAPDRAGON_BUDDY = "We eat same thing!"
-	DESCRIBE.SNAPDRAGON = "Friendly, florp?"
-	DESCRIBE.SNAPPLANT = "Big plant likes that gross flower."
-	DESCRIBE.WHISPERPOD = "Wants soil?"
+	DESCRIBE.HOODEDWIDOW = "Glorp!! Biggest spider ever!"
+	DESCRIBE.GIANT_TREE = "It a really big tree!"
+	DESCRIBE.WIDOWSGRASP = "Took its claw!"
+	DESCRIBE.WEBBEDCREATURE = "Belongs to Spiderfolk, florp."
+	ANNOUNCE.WEBBEDCREATURE = "Can't break! Flurgh! How Spiderfolk break?"
+	DESCRIBE.SNAPDRAGON_BUDDY = "Plant want to eat more plant?"
+	DESCRIBE.SNAPDRAGON = "Seems friendly, florp."
+	DESCRIBE.SNAPPLANT = "Big plant likes that ugly flower."
+	DESCRIBE.WHISPERPOD = "Maybe put in dirt."
 	DESCRIBE.WHISPERPOD_NORMAL_GROUND =
 	{
-		GENERIC = "Need growy seeds?",
+		GENERIC = "Need some seeds?",
 		GROWING = "Ready soon, flort?",
 	}
-	DESCRIBE.FRUITBAT = "Looks tasty, florp."
-	DESCRIBE.PITCHERPLANT = "Can't reach."
-	DESCRIBE.APHID = "Bug, florp."
+	DESCRIBE.FRUITBAT = "Glorp! Fruit alive?!"
+	DESCRIBE.PITCHERPLANT = "Gluuurgh... can't reach."
+	DESCRIBE.APHID = "It a bug, florp."
 	DESCRIBE.GIANT_TREE_INFESTED = "Bugs eating big tree."
 	DESCRIBE.GIANT_BLUEBERRY = "Yum!"
-	DESCRIBE.STEAMEDHAMS = "Ham? Gross!"
-	DESCRIBE.BLUEBERRYPANCAKES = "Mmmmmmm"
-	DESCRIBE.SIMPSALAD = "Is better than meat, florp."
-	DESCRIBE.BEEFALOWINGS = "Poor beefalo..."
-	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I can't get this buff, someone help me I'm not supposed to have this buff Oh gee oh gosh."
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = ":Waldo:"
-	DESCRIBE.WIDOWSHEAD = "Big mean head."
+	DESCRIBE.STEAMEDHAMS = "Glurgh... how you even \"steam\" ham?"
+	DESCRIBE.BLUEBERRYPANCAKES = "Fluffy and juicy!"
+	DESCRIBE.SIMPSALAD = "Very purple and tasty!"
+	DESCRIBE.BEEFALOWINGS = "Glurgh, who hid meat in horn?"
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "Oh no... that was bad idea! Glurgh... me gonna be sick..."
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "Never gonna do impossible things again... was terrible!"
+	DESCRIBE.WIDOWSHEAD = "Glurp... it still look kinda scary..."
 	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
-	DESCRIBE.WATERMELON_LANTERN = "Nice face, nice melon."
+	DESCRIBE.WATERMELON_LANTERN = "Has nice face, florp."
 	
 		--Viperstuff Quotes
-	DESCRIBE.VIPERWORM = "SNAKE!!!"
+	DESCRIBE.VIPERWORM = "Glorp! Angry Scaled-folk!"
 	DESCRIBE.VIPERFRUIT = "Safe to eat?"
 	DESCRIBE.VIPERJAM = "Hard to open!"
 	
 	
 	DESCRIBE.BLUEBERRYPLANT =         
 		{
-            READY = "Look tasty! Hard to dig, though...",
-			FROZE = "Look Chilly",
-			REGROWING = "Loud boom scary, florp!",
+            READY = "Looks tasty! Gotta dig it fast!",
+			FROZE = "Look chilly.",
+			REGROWING = "Glorp! Aww, it gone...!",
 		}
 	DESCRIBE.BERNIE_INACTIVE =
         {
@@ -216,20 +222,20 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
             ASHLEY = "Fun toy, flurp!",
         }
 	DESCRIBE.ANTIHISTAMINE = "Keep nose strong!"
-    ANNOUNCE.CURSED_ITEM_EQUIP = "FLORP! HURTS!"
-	DESCRIBE.VETSITEM = "Wants me to curse? FLORP! ...Not that kind of curse?"
-	DESCRIBE.SCREECHER_TRINKET = "Glurp, scary!"
+    ANNOUNCE.CURSED_ITEM_EQUIP = "GLORP! HURTS!"
+    DESCRIBE.VETSITEM = "Wants me to curse? ...Maybe will when not in front of Wicker-lady..."
+	DESCRIBE.SCREECHER_TRINKET = "Glurp, not wanna touch that one!"
 	ACTIONFAIL.GIVE = {NOTNIGHT = "It sleepy? Wake up at night maybe."}
 
-	DESCRIBE.MAGMAHOUND = "FLURGH! Run!"
-	DESCRIBE.LIGHTNINGHOUND = "Lightning hurts!!"
-	DESCRIBE.SPOREHOUND = "Sick dog."
+	DESCRIBE.MAGMAHOUND = "GLORP! It shooting fire! Run!!"
+	DESCRIBE.LIGHTNINGHOUND = "Lightning doggy! LIGHTNING DOGGY!!"
+	DESCRIBE.SPOREHOUND = "Something wrong with this one..."
 	DESCRIBE.GLACIALHOUND = "Big chilly doggy."
 	DESCRIBE.RNESKELETON = "It not dead!!"
-	DESCRIBE.RAT_WHIP = "Fun to play with! ... OUCH!"
-	DESCRIBE.KLAUS_AMULET = "Cold! Brr!"
-	DESCRIBE.CRABCLAW = "Is big, it hurt!" 
-	DESCRIBE.HAT_RATMASK = "So many smells!!" 
+	DESCRIBE.RAT_WHIP = "Fun to play with! ...OW!"
+	DESCRIBE.KLAUS_AMULET = "Brr... It cold!"
+	DESCRIBE.CRABCLAW = "Big clampy claw!" 
+	DESCRIBE.HAT_RATMASK = "So many smells!" 
 
 	DESCRIBE.ORANGE_VOMIT = "Flurgh..."
 	DESCRIBE.GREEN_VOMIT = "Flurgh..."
@@ -242,13 +248,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.WALRUS_CAMP_EMPTY = DESCRIBE.WALRUS_CAMP.EMPTY
 	DESCRIBE.PIGKING_PIGGUARD = 
 	{
-	GUARD = DESCRIBE.PIGMAN.GUARD,
+	GUARD = "Pigfolk stole royal guard idea! Not fair!!",
 	WEREPIG = DESCRIBE.PIGMAN.WEREPIG,
 	}
 	
 	DESCRIBE.BIGHT = "Glorp! Not broken enough!"
-	DESCRIBE.KNOOK = "Jumpy Ironfolk is scary!"
-	DESCRIBE.ROSHIP = "Scales don't mix well with zap!"
+	DESCRIBE.KNOOK = "What wrong with them?!"
+	DESCRIBE.ROSHIP = "Don't wanna be zapped by these things!"
 	
 	DESCRIBE.UM_PAWN = "Don't like Ironfolk's noises."
 	DESCRIBE.UM_PAWN_NIGHTMARE = "Don't like Ironfolk's noises."
@@ -257,7 +263,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
 	DESCRIBE.CAVE_EXIT_SUNKDECID= DESCRIBE.CAVE_EXIT
 	
-	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH	
+	DESCRIBE.PIGKING_PIGTORCH = "Flurmph, gonna make better fire sticks around better king!"
 	-- Blowgun stuff
 	DESCRIBE.UNCOMPROMISING_BLOWGUN = DESCRIBE.BLOWDART_PIPE
 	DESCRIBE.BLOWGUNAMMO_TOOTH = DESCRIBE.BLOWDART_PIPE
@@ -265,18 +271,18 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.BLOWGUNAMMO_SLEEP = DESCRIBE.BLOWDART_SLEEP
 	DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
 	
-	DESCRIBE.ANCIENT_AMULET_RED = "How magic rock have soul?"
-	DESCRIBE.UM_BEAR_TRAP = "Ice house people have mean things."
-	DESCRIBE.UM_BEAR_TRAP_OLD = "Ice house people have mean things."
-	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "Snappy trappy."
-	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Snappy trappy."
-	DESCRIBE.CORNCAN = "Where come from? Pigfolk?"
-	DESCRIBE.SKULLCHEST_CHILD = "Box for things, but is weird."
+	DESCRIBE.ANCIENT_AMULET_RED = "Impy say it help my soul..?"
+	DESCRIBE.UM_BEAR_TRAP = "\"Keep looking down\"? ...Glorp! Almost stepped on it!"
+	DESCRIBE.UM_BEAR_TRAP_OLD = "\"Keep looking down\"? ...Glorp! Almost stepped on it!"
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "Gonna use forest trap for myself!"
+	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Shiny trap extra dangerous!"
+	DESCRIBE.CORNCAN = "Crunchy corn inside?! Will smash it open!"
+	DESCRIBE.SKULLCHEST_CHILD = "Something weird about this box..."
 	
-	DESCRIBE.SLOBBERLOBBER = "Hot blegh."
-	DESCRIBE.GORE_HORN_HAT = "Glurp, jealous..."
-	DESCRIBE.BEARGERCLAW = "Bear claw, badger paw!"
-	DESCRIBE.FEATHER_FROCK = "Feathers gross, scales much better!"
+	DESCRIBE.SLOBBERLOBBER = "Glurph, hot and yucky."
+	DESCRIBE.GORE_HORN_HAT = "Only one horn? Flurmph, at least it big..."
+	DESCRIBE.BEARGERCLAW = "Gonna throw rocks like that rock thrower Weenowna-lady made!"
+	DESCRIBE.FEATHER_FROCK = "This how birdies feel all the time?"
 	
 	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nGem different?"
 	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nGem different?"
@@ -286,24 +292,24 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nGem different?"
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nGem different?"
 	
-	DESCRIBE.RED_MUSHED_ROOM = "I squish it."
-	DESCRIBE.GREEN_MUSHED_ROOM = "I squish it."
-	DESCRIBE.BLUE_MUSHED_ROOM = "I squish it."
+	DESCRIBE.RED_MUSHED_ROOM = "Squished it!"
+	DESCRIBE.GREEN_MUSHED_ROOM = "Squished it!"
+	DESCRIBE.BLUE_MUSHED_ROOM = "Squished it!"
 	
 	--StantonStuff
-	DESCRIBE.SKULLFLASK = "Funny drink."
-	DESCRIBE.SKULLFLASK_EMPTY = "Empty."
-	DESCRIBE.STANTON_SHADOW_TONIC = "Should drink?"
+	DESCRIBE.SKULLFLASK = "What you mean \"Shouldn't drink this\"?"
+	DESCRIBE.SKULLFLASK_EMPTY = "It empty now."
+	DESCRIBE.STANTON_SHADOW_TONIC = "Something wrong with this drink..."
 	DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 	DESCRIBE.STANTON = "You not dead?"
-	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "Drink give mermfolk courage!"
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "More drink?"
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "Glorp! Feel like could fight anything!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Wanna drink more!"
 	--StantonStuff
 	
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
-	DESCRIBE.THEATERCORN = "Like watch mermfolk fight pigfolk when eat it."
-	DESCRIBE.DEERCLOPS_BARRIER = "Must break out. Don't like being trapped."
+	DESCRIBE.THEATERCORN = "Feel like sitting down in swamp while eating seem fun."
+	DESCRIBE.DEERCLOPS_BARRIER = "Don't like this! Want out! WANT OUT!"
 	
 
 	DESCRIBE.MOONMAW_DRAGONFLY = "Pretty scales!"
@@ -311,49 +317,47 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.SNAPPERTURTLE = "New to territory! Friend, or not friend?"
 	DESCRIBE.SNAPPERTURTLEBABY = "Tiny!"
 	DESCRIBE.SNAPPERTURTLENEST = "New folk here?"
-	DESCRIBE.GLASS_SCALES = "Pretty! Want to adorn head, flegh!"
-	DESCRIBE.MOONGLASS_GEODE = "Not scale?"
-	DESCRIBE.ARMOR_GLASSMAIL = "Best scales!"
-	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "Flying rocks scary!!"
-	DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
-	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
+	DESCRIBE.GLASS_SCALES = "They so pretty... Want scales like this too!"
+	DESCRIBE.MOONGLASS_GEODE = "These not scales..."
+	DESCRIBE.ARMOR_GLASSMAIL = "Hehe! This the best! Like it very much!"
+	DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "These not gonna hurt me, r-right..?"
+	DESCRIBE.MOONMAW_GLASSSHARDS_RING = "GLORP! Wh-what it doing?!"
+	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.MOONMAW_GLASSSHARDS_RING
 	DESCRIBE.MOONMAW_LAVAE_RING = DESCRIBE.MOONMAW_LAVAE
 	DESCRIBE.MUTATOR_TRAPDOOR = DESCRIBE.MUTATOR_WARRIOR
 
-	DESCRIBE.WOODPECKER = "Colorful bird."
-	DESCRIBE.SNOTROAST = "Blegh! Even worse!"
-	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "Me not say this florptof"
-	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
-	DESCRIBE.BOOK_RAIN_UM = "Wet book is good book."
-	DESCRIBE.FLORAL_BANDAGE = "Flower and honey are good team to fight boo boos."
-	DESCRIBE.DORMANT_RAIN_HORN = "Funny looking shell."
-	DESCRIBE.RAIN_HORN = "Me like drowning, florpt!"
-	DESCRIBE.DRIFTWOODFISHINGROD = "Catch a lot of fishes with salty catcher."
+	DESCRIBE.WOODPECKER = "Colorful birdy."
+	DESCRIBE.SNOTROAST = "Glurgh... Who tried to cook nose?!"
+	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "Glurp! That not supposed to happen! Wicker-lady, HELP!!"
+	ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = "Hate doing impossible things... Not fun at all!"
+	DESCRIBE.BOOK_RAIN = "Why Wicker-lady only okay with this book getting wet?"
+	DESCRIBE.FLORAL_BANDAGE = "This really make the hurts go away!"
+	DESCRIBE.DORMANT_RAIN_HORN = "This shell not look right... Maybe Crabby lady know what to do!"
+	DESCRIBE.RAIN_HORN = "Ooooh... It so pretty!"
+	DESCRIBE.DRIFTWOODFISHINGROD = "Fishies seem to like this more!"
 
 	    ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
-        LEVEL_1 = "Little hairy wants our stuff!",
+        LEVEL_1 = "Squeakers want our stuff!",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
-        LEVEL_1 = "Little hairy wants our food!",
+        LEVEL_1 = "Squeakers want our food!",
     }
     ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
-        LEVEL_1 = "Little hairy is coming together out there!",
+        LEVEL_1 = "Squeakers coming together out there!",
     }
 
-	DESCRIBE.PIED_RAT = "Definitely not spiderfolk!"
-	DESCRIBE.PIED_PIPER_FLUTE = "Not spiderfolk could join Merm kingdom?"
-	DESCRIBE.UNCOMPROMISING_PACKRAT = "Don't like him!"
+	DESCRIBE.PIED_RAT = "What he playing?!"
+	DESCRIBE.PIED_PIPER_FLUTE = "Maybe squeakies join Mermfolk kingdom with this?"
+	DESCRIBE.UNCOMPROMISING_PACKRAT = "He stealing everything!!"
+	DESCRIBE.WINONA_TOOLBOX = "Weenowna-lady not like me playing with things inside..."
+	DESCRIBE.OCEAN_SPEAKER = "What it yelling at?"
 	
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "We go for swim now?"
 	
-
+	--DESCRIBE.UM_SIREN = "Glorp is traitor!! Me think...?"
 
 	ACTIONFAIL.CHARGE_FROM =
 	{
-		NOT_ENOUGH_CHARGE = "Not working!",
-		CHARGE_FULL = "/Gurgle!/",
+		NOT_ENOUGH_CHARGE = "test",
+		CHARGE_FULL = "test",
 	}
-	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "Not shocking me! Florp!"
-	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "/Gurgle!/"
-	DESCRIBE.UM_DEVILED_EGGS = "Bad egg. Very bad egg."
-	
