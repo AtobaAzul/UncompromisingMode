@@ -145,16 +145,11 @@ end
 --------------------------------------------------------------------------
 
 local function onattack(inst, attacker, target)
-    if (target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid()) or (target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and TUNING.DSTU.ELECTRICALMISHAP == 2 and not inst.components.fueled:IsEmpty())  then
+    if target ~= nil and target:IsValid() and attacker ~= nil and attacker:IsValid() and not inst.components.fueled:IsEmpty() then
 		if target:HasTag("insect") then
 			if not target.components.health:IsDead() then
-				if TUNING.DSTU.ELECTRICALMISHAP == 0 or TUNING.DSTU.ELECTRICALMISHAP == 2 then
-					target.components.combat:GetAttacked(attacker, 30, nil)
-					--target.components.health:DoDelta(-30, false, attacker)
-				else
-					target.components.combat:GetAttacked(attacker, 40, nil)
-					--target.components.health:DoDelta(-40, false, attacker)
-				end
+				target.components.combat:GetAttacked(attacker, 30, nil)
+				--target.components.health:DoDelta(-30, false, attacker)
 			end
 			
 			SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
@@ -176,13 +171,7 @@ local function onattack(inst, attacker, target)
 		
 		if (target:HasTag("spider") or target:HasTag("hoodedwidow")) then
 			if not target.components.health:IsDead() then
-				if TUNING.DSTU.ELECTRICALMISHAP == 2 or TUNING.DSTU.ELECTRICALMISHAP == 0 then
-					target.components.combat:GetAttacked(attacker, 15, nil)
-					--target.components.health:DoDelta(-15, false, attacker)
-				else
-					target.components.combat:GetAttacked(attacker, 25, nil)
-					--target.components.health:DoDelta(-25, false, attacker)
-				end
+				target.components.combat:GetAttacked(attacker, 15, nil)
 			end
 			
 			SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
@@ -192,7 +181,7 @@ local function onattack(inst, attacker, target)
 
 			for i, v in ipairs(ents) do
 				if v ~= inst and v ~= target and v:IsValid() and not v:IsInLimbo() then
-					if v.components.combat ~= nil and not (v.components.health ~= nil and not v.components.health:IsDead()) then
+					if (v.components.health ~= nil and not v.components.health:IsDead()) and not v.sg:HasStateTag("noattack") then
 						v.components.health:DoDelta(-10, false, attacker, false, attacker)
 						SpawnPrefab("electrichitsparks"):AlignToTarget(v, attacker, true)
 					end
@@ -247,34 +236,32 @@ local function fn()
 
     inst:AddComponent("equippable")
 	
+	inst:AddComponent("fueled")
 	if TUNING.DSTU.ELECTRICALMISHAP == 2 or TUNING.DSTU.ELECTRICALMISHAP == 0 then
-		inst:AddComponent("fueled")
 		inst.components.fueled.fueltype = FUELTYPE.BATTERYPOWER
-		--inst.components.fueled.secondaryfueltype = FUELTYPE.CHEMICAL
-		--inst.components.fueled:InitializeFuelLevel(120)
-		--inst.components.fueled.maxfuel = TUNING.NIGHTSTICK_FUEL / 2
-		inst.components.fueled:InitializeFuelLevel(TUNING.NIGHTSTICK_FUEL)
-		inst.components.fueled.rate = 2
-		inst.components.fueled:SetDepletedFn(nofuel)
-		inst.components.fueled:SetTakeFuelFn(ontakefuel)
-		inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION, TUNING.TURNON_FULL_FUELED_CONSUMPTION)
 		inst.components.fueled.accepting = true
-		inst._onownerequip = function(owner, data)
-			if data.item ~= inst and
-				(   data.eslot == EQUIPSLOTS.HANDS or
-					(data.eslot == EQUIPSLOTS.BODY and data.item:HasTag("heavy"))
-				) then
-				turnoff(inst)
-			end
-		end
 	else
-		inst:AddComponent("finiteuses")
-		inst.components.finiteuses:SetMaxUses(80)
-		inst.components.finiteuses:SetUses(80)
-		inst.components.weapon:SetElectric()
-		inst.components.finiteuses:SetOnFinished(inst.Remove)
+		inst.components.fueled.accepting = false
 	end
-
+	
+	--inst.components.fueled.secondaryfueltype = FUELTYPE.CHEMICAL
+	--inst.components.fueled:InitializeFuelLevel(120)
+	--inst.components.fueled.maxfuel = TUNING.NIGHTSTICK_FUEL / 2
+	inst.components.fueled:InitializeFuelLevel(TUNING.NIGHTSTICK_FUEL)
+	inst.components.fueled.rate = 1.5
+	inst.components.fueled:SetDepletedFn(nofuel)
+	inst.components.fueled:SetTakeFuelFn(ontakefuel)
+	inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION, TUNING.TURNON_FULL_FUELED_CONSUMPTION)
+	
+	inst._onownerequip = function(owner, data)
+		if data.item ~= inst and
+			(   data.eslot == EQUIPSLOTS.HANDS or
+				(data.eslot == EQUIPSLOTS.BODY and data.item:HasTag("heavy"))
+			) then
+			turnoff(inst)
+		end
+	end
+		
     inst._light = nil
 
     MakeHauntableLaunch(inst)
