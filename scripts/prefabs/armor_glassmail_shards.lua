@@ -45,7 +45,11 @@ local function CheckDist(inst)
 if inst.WINDSTAFF_CASTER ~= nil then
 	if inst:GetDistanceSqToInst(inst.WINDSTAFF_CASTER) > 15 then
 		local x,y,z = inst.WINDSTAFF_CASTER.Transform:GetWorldPosition()
-		inst.Transform:SetPosition(x,y,z)
+		if x ~= nil and y ~= nil and z ~= nil then
+			inst.Transform:SetPosition(x,y,z)
+		else
+			inst:Remove()
+		end
 	end
 else
 	inst:Remove()
@@ -75,13 +79,17 @@ end
 local function SummonShard(inst)
 	local x,y,z = inst.Transform:GetWorldPosition()
 	local fx = SpawnPrefab("moonstorm_glass_ground_fx")
-	fx.Transform:SetPosition(x,y,z)
+	if x ~= nil and y ~= nil and z ~= nil then
+		fx.Transform:SetPosition(x,y,z)
+	end
 	fx.Transform:SetScale(0.5,0.5,0.5)
 end
 
 local function BreakShard(inst)
 	local x,y,z = inst.Transform:GetWorldPosition()
-	SpawnPrefab("mining_moonglass_fx").Transform:SetPosition(x,y,z)
+	if x ~= nil and y ~= nil and z ~= nil then
+		SpawnPrefab("mining_moonglass_fx").Transform:SetPosition(x,y,z)
+	end
 end
 
 local function fn_glassshards()
