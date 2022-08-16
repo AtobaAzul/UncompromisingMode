@@ -2,14 +2,14 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local function onnear(inst, target)
-    if inst.components.childspawner ~= nil and inst.ambush == nil then
+    if inst.components.childspawner ~= nil and inst.ambush then
         SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
         inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
         SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
         inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
         SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
         inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
-        SpawnPrefab("critterlab_broken").Transform:SetPosition(inst.Transform:GetWorldPosition())
+        SpawnPrefab("critterlab_real_broken").Transform:SetPosition(inst.Transform:GetWorldPosition())
         inst.components.childspawner:ReleaseAllChildren(target, "mutatedhound")
 		inst:DoTaskInTime(0, function() inst:Remove() end)
     end
