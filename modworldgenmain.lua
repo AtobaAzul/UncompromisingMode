@@ -1,4 +1,7 @@
 GLOBAL.require("map/terrain")
+
+local STRINGS = GLOBAL.STRINGS
+
 local GROUND_OCEAN_COLOR = { -- Color for the main island ground tiles
     primary_color = { 0, 0, 0, 25 },
     secondary_color = { 0, 20, 33, 0 },
@@ -125,7 +128,7 @@ end)
     if GetModConfigData("caved") == false then
         AddTaskSetPreInitAny(
             function(tasksetdata)
-                if tasksetdata.location ~= "forest" then
+                if tasksetdata.location ~= "forest" or (tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.VOLCANO or tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED) then
                     return
                 end
 
@@ -353,7 +356,7 @@ GLOBAL.require("map/rooms/forest/ratking")
 if GetModConfigData("caved") == false then
 
     AddTaskSetPreInitAny(function(tasksetdata)
-		if tasksetdata.location ~= "forest" then
+		if tasksetdata.location ~= "forest" or (tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.VOLCANO or tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED) then
 			return
 		end
 		AddTaskPreInit("Dig that rock",function(task)
@@ -378,7 +381,7 @@ end]]
     local StaticLayout = GLOBAL.require("map/static_layout")
 
     AddTaskSetPreInitAny(function(tasksetdata)
-        if tasksetdata.location ~= "forest" then
+        if tasksetdata.location ~= "forest" or (tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.VOLCANO or tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED) then
             return
         end
         if GetModConfigData("hoodedforest") then
