@@ -31,24 +31,24 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_VETCURSE = "I'm glad that's over!"
 	ANNOUNCE.ANNOUNCE_RNEFOG = "I feel like I'm being watched."
 	--FoodBuffs
-	
+
 	--CaliforniaKing
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING = "Huh, it wasn't that bad."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "Who am I again?"
 	DESCRIBE.CALIFORNIAKING = "This dish is gruesome."
 	--CaliforniaKing
-	
+
 	--Content Creators
 	DESCRIBE.CCTRINKET_DON = "I can only make out the words \"Don\" and \"Guide\"."
 	DESCRIBE.CCTRINKET_JAZZY = "Looks pretty jazzy."
-	DESCRIBE.CCTRINKET_FREDDO = "The name \"Freddo\" is etched onto it."		
+	DESCRIBE.CCTRINKET_FREDDO = "The name \"Freddo\" is etched onto it."
 	--Content Creators
     DESCRIBE.UNCOMPROMISING_RAT = "They're rataliating!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "It must lead to their labo-rat-ory."
     DESCRIBE.UNCOMPROMISING_RATBURROW = "It must lead to their labo-rat-ory."
     DESCRIBE.UNCOMPROMISING_WINKYBURROW = "She keeps leaving these around, I hope no rats come out..."
     DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "I think that's supposed to be that rat things home. Maybe I should look inside?"
-	
+
 	DESCRIBE.WINKY =
         {
             GENERIC = "How would you feel about a few experiments, %s?",
@@ -58,7 +58,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
             GHOST = "I hope that wasn't caused by one of my experiments.",
             FIRESTARTER = "Rats shouldn't wield fire!",
         }
-	
+
     DESCRIBE.RATPOISONBOTTLE = "It's labeled \"Do not drink. That means you, Webber.\""
     DESCRIBE.RATPOISON = "It's all murdery."
 
@@ -72,7 +72,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "There's the source of the pestilence!"
     DESCRIBE.TOADLING = "It sure likes those weird trees."
 	DESCRIBE.UNCOMPROMISING_TOAD = "That toads looking pretty sick."
-	
+
     DESCRIBE.GASMASK = "Now I can breathe anywhere."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
 	DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
@@ -87,7 +87,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	}
 	ANNOUNCE.ANNOUNCE_ROOTING = "I'm stuck!"
 	ANNOUNCE.ANNOUNCE_SNOWSTORM = "The winds picking up..."
-	
+
 	ANNOUNCE.SHADOWTALKER = {
         "THERES NO ESCAPE",
         "THEY ARE OUT THERE, WATCHING, ALWAYS",
@@ -109,7 +109,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
         "TOO DIFFICULT FOR YOU?",
         "CURSE TOO TOUGH? THERE IS ONLY ONE WAY OUT...", --should this still be here?
 	}
-	
+
 	ANNOUNCE.STANTON_GREET = {"Care to drink with the dead?", "Let's play a little game, how's about a drink?", "Come and drink with me.","I pick the drinks, you knock 'em back." }
 	ANNOUNCE.STANTON_GIVE = {"You seem willing, I'll drink with you.", "It'll be you then."}
 	ANNOUNCE.STANTON_RESTOCK = {"Still awake? We can drink again.", "I can give you another."}
@@ -124,7 +124,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 
 	ANNOUNCE.STANTON_IMPATIENT = {"I'm getting tired of waiting here.","I ain't got all night!"}
 	ANNOUNCE.STANTON_SUPERIMPATIENT = {"I'm done waiting."}
-	
+
 	ANNOUNCE.SHADOW_CROWN_CHALLENGE = "DEFEAT THIS CREATURE AND CLAIM YOUR PRIZE"
 	ANNOUNCE.ANNOUNCE_OVER_EAT =
 	{
@@ -134,18 +134,18 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
     ANNOUNCE.CURSED_ITEM_EQUIP = "Ow, my hand!"
     DESCRIBE.VETSITEM = "I need to seek out a dark power to use this!"
 	DESCRIBE.SCREECHER_TRINKET = "Great, just what I needed."
-	
+
 	DESCRIBE.SAND = "A handy pile of pocket sand."
 	DESCRIBE.SANDHILL = "You better stay out of my shoes."
 	DESCRIBE.SNOWPILE = "That'll be a problem if it builds up."
 	DESCRIBE.SNOWGOGGLES = "Icy clearly now!"
-	
+
 	DESCRIBE.SNOWMONG = "Shiverbug!"
 	DESCRIBE.SHOCKWORM = "Quite the conductive worm!"
 	DESCRIBE.ZASPBERRY = "I can feel the electricity flowing through it."
 	DESCRIBE.ZASPBERRYPARFAIT = "Shockingly delicious."
 	DESCRIBE.ICEBOOMERANG = "It has a chilling bite to it."
-	
+
 	DESCRIBE.MINOTAUR_BOULDER = "Thats a nice boulder."
 	DESCRIBE.MINOTAUR_BOULDER_BIG = "Science says it would hurt if you ran into it. Probably."
 	DESCRIBE.BUSHCRAB = "AH! How long was he down there?!"
@@ -156,7 +156,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.VETERANSHRINE = "I know what I'm doing... right?"
 	DESCRIBE.WICKER_TENTACLE = "Doubly sickening."
 	DESCRIBE.HONEY_LOG = "I have a strange desire to eat it."
-	
+
 	DESCRIBE.RAT_TAIL = "It reeks of a pestilence."
 	DESCRIBE.PLAGUEMASK = "The mushrooms stuffed in the beak smell nice."
 	DESCRIBE.SALTPACK = "It breaks down the snow around me!"
@@ -164,15 +164,16 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.SNOWBALL_THROWABLE = "Not the face!"
 	DESCRIBE.SPIDER_TRAPDOOR = "Agh! An ambush!"
 	DESCRIBE.TRAPDOOR = "Nothing out of the ordinary here."
-	DESCRIBE.HOODEDTRAPDOOR = DESCRIBE.TRAPDOOR 
+	DESCRIBE.HOODEDTRAPDOOR = DESCRIBE.TRAPDOOR
 	DESCRIBE.SHROOM_SKIN_FRAGMENT = "It's small, but the stench is still a punch in the face."
 	DESCRIBE.AIR_CONDITIONER = "Smells great!"
-	
+
 	DESCRIBE.SCORPION = "That better not be venomous."
+
 	DESCRIBE.SCORPIONCARAPACE = "I'll pass."
 	DESCRIBE.SCORPIONCARAPACECOOKED = "The shell is still pretty hard."
 	DESCRIBE.HARDSHELLTACOS = "Must be Tuesday."
-	
+
 	DESCRIBE.SKELETONMEAT = "Flesh is flesh. Where do I draw the line?"
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "What-?!"
@@ -182,13 +183,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
-	
+
 	--Swampyness
 	DESCRIBE.RICEPLANT = "Rice is nice."
 	DESCRIBE.RICE = "It's too tough to eat."
 	DESCRIBE.RICE_COOKED = "Tastes soggy."
 	DESCRIBE.SEAFOODPAELLA = "Clears the sinuses."
-	
+
 	DESCRIBE.STUMPLING = "He's small, but he's angry!"
 	DESCRIBE.BIRCHLING = DESCRIBE.STUMPLING
 	DESCRIBE.BUGZAPPER = "Now I'll show those pesky pests!"
@@ -231,19 +232,19 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.BEEFALOWINGS = "I'm sure the beefalo didn't mind."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "Never gonna knock me down."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "My legs are getting flimsy again."
-	ANNOUNCE.WIDOWSHEAD = "It seems to augment my vision."
+	DESCRIBE.WIDOWSHEAD = "It seems to augment my vision."
 	DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.WATERMELON_LANTERN = "Spooky?"
 	DESCRIBE.SNOWCONE = "Must've used too much ice."
-	
+
 	--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "It's messing with my head!"
 	DESCRIBE.VIPERFRUIT = "I create snakes through the power of science!"
 	DESCRIBE.VIPERJAM = "At least I have the jar now."
-	
-	DESCRIBE.BLUEBERRYPLANT =         
+
+	DESCRIBE.BLUEBERRYPLANT =
 		{
             READY = "It's pretty big, maybe I can dig it up.",
 			FROZE = "It's frozen solid.",
@@ -256,7 +257,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
             ASHLEY_BROKEN = "It finally fell apart.",
             ASHLEY = "It's all scorched.",
         }
-	
+
 	DESCRIBE.BERNIE_ACTIVE =
         {
             GENERIC = "That teddy bear is moving around. Interesting.",
@@ -269,7 +270,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
         }
 	DESCRIBE.ANTIHISTAMINE = "It's useful for ailing a stuffy nose!"
 
-	DESCRIBE.HEATROCK_LEVEL = 
+	DESCRIBE.HEATROCK_LEVEL =
 	{
 		TINY = "A lonely old rock, sitting out in the open.",
 		SMALL = "It's a little bit insulated when sitting in my pocket.",
@@ -278,7 +279,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 		HUGE = "It's perfectly protected against the elements!",
 	}
 
-	DESCRIBE.DURABILITY_LEVEL = 
+	DESCRIBE.DURABILITY_LEVEL =
 	{
 		QUARTER = "It's practically falling apart!",
 		HALF = "It has some nasty holes in it.",
@@ -304,8 +305,8 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.RNESKELETON = "They are spooky AND scary!"
 	DESCRIBE.RAT_WHIP = "I make all the rules."
 	DESCRIBE.KLAUS_AMULET = "It's chains contain the King of Winter!"
-	DESCRIBE.CRABCLAW = "Hey, these are gem holes!" 
-	DESCRIBE.HAT_RATMASK = "I'll sniff out those dens myself!" 
+	DESCRIBE.CRABCLAW = "Hey, these are gem holes!"
+	DESCRIBE.HAT_RATMASK = "I'll sniff out those dens myself!"
 
 	DESCRIBE.ORANGE_VOMIT = "Oh, how nice of you..."
 	DESCRIBE.GREEN_VOMIT = "Oh, how nice of you..."
@@ -316,7 +317,7 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.PALE_VOMIT = "Oh, how nice of you..."
 
 	DESCRIBE.WALRUS_CAMP_EMPTY = DESCRIBE.WALRUS_CAMP.EMPTY
-	DESCRIBE.PIGKING_PIGGUARD = 
+	DESCRIBE.PIGKING_PIGGUARD =
 	{
 	GUARD = DESCRIBE.PIGMAN.GUARD,
 	WEREPIG = DESCRIBE.PIGMAN.WEREPIG,
@@ -326,21 +327,21 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.BIGHT = "It lives!"
 	DESCRIBE.KNOOK = "I don't like that maw!"
 	DESCRIBE.ROSHIP = "What a horror!"
-	
+
 	DESCRIBE.UM_PAWN = "It gets louder when I get closer."
 	DESCRIBE.UM_PAWN_NIGHTMARE = "I should keep my distance."
-	
+
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
 	DESCRIBE.CAVE_EXIT_SUNKDECID= DESCRIBE.CAVE_EXIT
-	
+
 	-- Blowgun stuff
 	DESCRIBE.UNCOMPROMISING_BLOWGUN = DESCRIBE.BLOWDART_PIPE
 	DESCRIBE.BLOWGUNAMMO_TOOTH = DESCRIBE.BLOWDART_PIPE
 	DESCRIBE.BLOWGUNAMMO_FIRE = DESCRIBE.BLOWDART_FIRE
 	DESCRIBE.BLOWGUNAMMO_SLEEP = DESCRIBE.BLOWDART_SLEEP
 	DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
-	
+
 	DESCRIBE.ANCIENT_AMULET_RED = "It's tugging at my heart strings!"
 	DESCRIBE.UM_BEAR_TRAP = "I need to watch my step."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Woah! I need to watch my step!"
@@ -348,12 +349,12 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Don't get snappy with me!"
 	DESCRIBE.CORNCAN = "Where did this can come from?"
 	DESCRIBE.SKULLCHEST_CHILD = "If only I could fit inside."
-	
+
 	DESCRIBE.SLOBBERLOBBER = "A portable loogie launcher."
 	DESCRIBE.GORE_HORN_HAT = "My mind was always the greatest weapon but... yeah, you get the idea."
 	DESCRIBE.BEARGERCLAW = "Sticks and stones can break some bones."
 	DESCRIBE.FEATHER_FROCK = "All the comfort of a bed, in wearable form!"
-	
+
 	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\n...It's nigh unusable in this form."
 	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\n...It's nigh unusable in this form."
 	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\n...It's nigh unusable in this form."
@@ -361,11 +362,11 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\n...It's nigh unusable in this form."
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\n...It's nigh unusable in this form."
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\n...It's nigh unusable in this form."
-	
+
 	DESCRIBE.RED_MUSHED_ROOM = "It's all mushed up now."
 	DESCRIBE.GREEN_MUSHED_ROOM = "It's all mushed up now."
 	DESCRIBE.BLUE_MUSHED_ROOM = "It's all mushed up now."
-	
+
 	DESCRIBE.HEAT_SCALES_ARMOR = "If only I could fit inside."
 
 	--StantonStuff
@@ -377,13 +378,13 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "What's so scary?"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "I..."
 	--StantonStuff
-	
+
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
-	
+
 	DESCRIBE.THEATERCORN = "I should find something interesting to watch."
 	DESCRIBE.DEERCLOPS_BARRIER = "I need to mine my way out of here!"
-	
-	
+
+
 	DESCRIBE.MOONMAW_DRAGONFLY = "Crys-terrifying!"
 	DESCRIBE.MOONMAW_LAVAE = "They're protecting it's mom!"
 	DESCRIBE.SNAPPERTURTLE = "These are the kind that don't bite your hand off, right?"
@@ -398,7 +399,7 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.MOONMAW_LAVAE_RING = DESCRIBE.MOONMAW_LAVAE
 
 	DESCRIBE.MUTATOR_TRAPDOOR = DESCRIBE.MUTATOR_WARRIOR
-	
+
 	DESCRIBE.WOODPECKER = "Science makes it not get headaches."
 	DESCRIBE.SNOTROAST = "That isn't going anywhere near my mouth."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "I've lost my appetite."
@@ -408,10 +409,10 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.DORMANT_RAIN_HORN = "Looking at it gives me flashes of a tropical setting."
 	DESCRIBE.RAIN_HORN = "This'll be useful for when wildfires start up again."
 	DESCRIBE.DRIFTWOODFISHINGROD = "It's attuned to the ocean."
-	
+
 	ANNOUNCE.ANNOUNCE_NORATBURROWS = "Sounds like theres no rat dens nearby."
-	
-	
+
+
     ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "The camp is looking like rat's nest.",
     }
@@ -425,9 +426,9 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.PIED_RAT = "He must be leading the vermin!"
 	DESCRIBE.PIED_PIPER_FLUTE = "Maybe I could lead some of the rats myself?"
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Hey! It's carrying off all of our valuables!"
-	
+
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "I can't retrieve this raft if I drown!"
-	
+
 	ACTIONFAIL.CHARGE_FROM =
 	{
 		NOT_ENOUGH_CHARGE = "I need to restore the power before I can do that.",
@@ -435,7 +436,5 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "What a shocking result!"
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "OW! What a shocking result!"
-	--DESCRIBE.UM_SIREN = "Science says we may be able to \"help\" each other."
-	--WHAT THE FUCK VARIANT
-	--DESCRIBE.UM_SIREN = "Science says she may not be from around here."
+
 	DESCRIBE.UM_DEVILED_EGGS = "They smell fowl."
