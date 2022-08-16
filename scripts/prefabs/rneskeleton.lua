@@ -1,7 +1,7 @@
 local brain = require "brains/swilsonbrain"
 local assets =
 {
-
+	Asset("ANIM", "anim/death_fallapart.zip"),
 }
     
     
@@ -96,7 +96,8 @@ local function fn(Sim)
 	inst:AddTag("plant")
     inst:AddTag("swilson") 
 	inst:AddTag("nightmarecreature")
-	inst:AddTag("shadow")
+	--inst:AddTag("shadow")
+	inst:AddTag("noepicmusic")
 
 	inst.entity:SetPristine()
 	

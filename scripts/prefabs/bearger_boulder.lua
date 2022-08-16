@@ -13,9 +13,11 @@ local ink_prefabs =
 local COLLAPSIBLE_TAGS = { "_combat", "pickable", "NPC_workable" }
 local NON_COLLAPSIBLE_TAGS = { "bearger", "bird", "playerghost", "FX", "NOCLICK", "DECOR", "INLIMBO" }
 
+local easing = require("easing")
+
 local function OnHitInk(inst, attacker, target)
 	local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, 0, z, 4, nil, NON_COLLAPSIBLE_TAGS, COLLAPSIBLE_TAGS)
+    local ents = TheSim:FindEntities(x, 0, z, 3, nil, NON_COLLAPSIBLE_TAGS, COLLAPSIBLE_TAGS)
     for i, v in ipairs(ents) do
         if v:IsValid() then
             if v.components.combat ~= nil
@@ -41,12 +43,41 @@ local function OnHitInk(inst, attacker, target)
 		inst.fx = "splash_green"
 	else
 		inst.SoundEmitter:PlaySound("dontstarve/wilson/rock_break")
+		
+		if inst.big == nil then
+			local a, b, c = inst.Transform:GetWorldPosition()
+			local targetpos = inst:GetPosition()
+			local theta = inst.Transform:GetRotation()
+			
+			theta = theta*DEGREES
+			
+			--local variableanglex = math.random(0, 30)
+			--local variableanglez = math.random(0, 30)
+			--targetpos.x = targetpos.x + variableanglex*math.cos(theta)
+			--targetpos.z = targetpos.z - variableanglez*math.sin(theta)
+			
+			targetpos.x = targetpos.x + 15*math.cos(theta)
+			targetpos.z = targetpos.z - 15*math.sin(theta)
+			
+			local rangesq = ((a-x)^2) + ((c-z)^2)
+			local maxrange = 15
+			local bigNum = 10
+			local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
+			
+			local projectile = SpawnPrefab("bearger_boulder")
+			projectile.Transform:SetPosition(x, y, z)
+			projectile.components.complexprojectile:SetHorizontalSpeed(speed + math.random(4, 6))
+			projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+			projectile.components.complexprojectile:SetLaunchOffset(Vector3(0, 1, 0))
+			projectile.big = true
+			projectile.Transform:SetScale(0.9 + math.random(0, 0.2), 0.9 + math.random(0, 0.2), 0.9 + math.random(0, 0.2))
+		end
 	end
 					
 	SpawnPrefab(inst.fx).Transform:SetPosition(x, 0, z)
 	local ring = SpawnPrefab("groundpoundring_fx")
 	ring.Transform:SetPosition(x, 0, z)
-	ring.Transform:SetScale(0.7, 0.7, 0.7)
+	ring.Transform:SetScale(0.65, 0.65, 0.65)
 	
     inst:Remove()
 end
@@ -54,6 +85,7 @@ end
 local function oncollide(inst, other)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	if other ~= nil and other:IsValid() and other:HasTag("_combat") and not other:HasTag("bearger_boulder") or y <= inst:GetPhysicsRadius() + 0.001 then
+		inst.big = true
 		OnHitInk(inst, other)
 	end
 end

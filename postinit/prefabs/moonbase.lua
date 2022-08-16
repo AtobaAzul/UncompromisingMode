@@ -227,16 +227,24 @@ local function ItemTradeTest(inst, item, giver)
 				giveopal(inst, item, giver)
 				StopFX(inst)
 				inst.mooning = false
-			end)
-			
-			inst:WatchWorldState("isday", function(inst, item, giver)
+				
+				inst:StopWatchingWorldState("isday")
+				
 				if inst.moonteartransformtask ~= nil then
 					inst.moonteartransformtask:Cancel()
 				end
 				
 				inst.moonteartransformtask = nil
+			end)
+			
+			inst:WatchWorldState("isday", function(inst, item, giver)
+				if inst.moonteartransformtask ~= nil then
+					inst.moonteartransformtask:Cancel()
+					givetear(inst, item, giver)
+				end
 				
-				givetear(inst, item, giver)
+				inst.moonteartransformtask = nil
+				
 				StopFX(inst)
 				inst.mooning = false
 			

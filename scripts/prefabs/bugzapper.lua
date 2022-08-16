@@ -248,7 +248,7 @@ local function fn()
 	--inst.components.fueled:InitializeFuelLevel(120)
 	--inst.components.fueled.maxfuel = TUNING.NIGHTSTICK_FUEL / 2
 	inst.components.fueled:InitializeFuelLevel(TUNING.NIGHTSTICK_FUEL)
-	inst.components.fueled.rate = 1.5
+	inst.components.fueled.rate = 2
 	inst.components.fueled:SetDepletedFn(nofuel)
 	inst.components.fueled:SetTakeFuelFn(ontakefuel)
 	inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION, TUNING.TURNON_FULL_FUELED_CONSUMPTION)

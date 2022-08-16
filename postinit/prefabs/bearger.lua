@@ -91,29 +91,43 @@ end]]
 local function LaunchProjectile(inst, target)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	
-	if target ~= nil then
-		inst.rockthrow = false
-		
-		local a, b, c = target.Transform:GetWorldPosition()
-		local targetpos = target:GetPosition()
-		local theta = inst.Transform:GetRotation()
-		
-		theta = theta*DEGREES
-		
-		local variableanglex = math.random(0, 30)
-		local variableanglez = math.random(0, 30)
-		targetpos.x = targetpos.x + variableanglex*math.cos(theta)
-		targetpos.z = targetpos.z - variableanglez*math.sin(theta)
-		
-		local rangesq = ((a-x)^2) + ((c-z)^2)
-		local maxrange = 15
-		local bigNum = 10
-		local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
-		
-		local projectile = SpawnPrefab("bearger_boulder")
-		projectile.Transform:SetPosition(x, y, z)
-		projectile.components.complexprojectile:SetHorizontalSpeed(speed + math.random(4, 6))
-		projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+	for i = 1, 5 do
+		if target ~= nil then
+			inst.rockthrow = false
+			
+			local a, b, c = target.Transform:GetWorldPosition()
+			local targetpos = target:GetPosition()
+			--local theta = inst.Transform:GetRotation()
+			
+			
+			
+			local theta = (inst:GetAngleToPoint(a, 0, c) + (-30 + ((i-1)*15))) * DEGREES
+			--local theta = (inst:GetAngleToPoint(a, 0, c) + GetRandomWithVariance(0, 30)) * DEGREES
+			
+			--theta = theta*DEGREES
+			
+			--local variableanglex = math.random(0, 30)
+			--local variableanglez = math.random(0, 30)
+			
+			local variableanglex = (i - 1) * 7.5
+			local variableanglez = (5 - i) * 7.5
+			
+			
+			
+			targetpos.x = targetpos.x + 15*math.cos(theta)
+			targetpos.z = targetpos.z - 15*math.sin(theta)
+			
+			local rangesq = ((a-x)^2) + ((c-z)^2)
+			local maxrange = 15
+			local bigNum = 10
+			local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
+			
+			local projectile = SpawnPrefab("bearger_boulder")
+			projectile.Transform:SetPosition(x, y, z)
+			projectile.components.complexprojectile:SetHorizontalSpeed(speed + math.random(4, 6))
+			projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+			projectile.Transform:SetScale(0.9 + math.random(0, 0.2), 0.9 + math.random(0, 0.2), 0.9 + math.random(0, 0.2))
+		end
 	end
 end
 
@@ -123,13 +137,17 @@ local function Sinkholes(inst)
 		local target_index = {}
 		local found_targets = {}
 		local ix, iy, iz = inst.Transform:GetWorldPosition()
+		local targetfocus = target
+		
 		for i = 1,5 do
 			local delay = i / 10
 		
+			local px, py, pz = targetfocus.Transform:GetWorldPosition()
 			inst:DoTaskInTime(FRAMES * i * 1.5 + delay, function()
-				if target ~= nil then
-					local px, py, pz = target.Transform:GetWorldPosition()
+				if targetfocus ~= nil then
+					--local px, py, pz = targetfocus.Transform:GetWorldPosition()
 					local rad = math.rad(inst:GetAngleToPoint(px, py, pz))
+					print(rad)
 					local velx = math.cos(rad) * 4.5
 					local velz = -math.sin(rad) * 4.5
 				

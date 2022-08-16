@@ -353,11 +353,65 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.OCEAN_SPEAKER = "What it yelling at?"
 	
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "We go for swim now?"
-	
-	--DESCRIBE.UM_SIREN = "Glorp is traitor!! Me think...?"
 
 	ACTIONFAIL.CHARGE_FROM =
 	{
-		NOT_ENOUGH_CHARGE = "test",
-		CHARGE_FULL = "test",
+		NOT_ENOUGH_CHARGE = "Not working!",
+		CHARGE_FULL = "Gurgle!",
 	}
+	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "Not shocking me! Florp!"
+	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "Gurgle!"
+	
+	----UNDER THE WEATHER----
+	
+	DESCRIBE.WINONA_TOOLBOX = "Put things in there for later, glurp."
+	ACTIONFAIL.WINONATOOLBOX = "Can't open lock!"
+	DESCRIBE.POWERCELL = "."
+	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "Give box to lights."
+	DESCRIBE.MINERHAT_ELECTRICAL = "Has a box now."
+	DESCRIBE.OCEAN_SPEAKER = "Loud box, florp!"
+	--DESCRIBE.UM_SIREN = "Glorp is traitor!! Me think...?"
+	
+	--DESCRIBE.OCUPUS_BEAK = ""
+	--DESCRIBE.OCUPUS_TENTACLE = ""
+	--DESCRIBE.OCUPUS_TENTACLE_EYE = ""
+	--DESCRIBE.OCUPUS_TENTACLE_COOKED = ""
+	
+	DESCRIBE.ARMOR_REED_UM = "Mermfolk use everything we got in swamp."
+	DESCRIBE.ARMOR_SHARKSUIT_UM = "Scales feel good on scales."
+	DESCRIBE.ROCKJAWLEATHER = "Sorry, but you were mean."
+	
+	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
+	DESCRIBE.STUFFED_PEEPER_POPPERS = "Waste of good durian."
+	DESCRIBE.UM_DEVILED_EGGS = "Bad egg. Very bad egg."
+	DESCRIBE.LUSH_ENTRANCE = "Glorp... scary hole..."
+	DESCRIBE.CRITTER_FIGGY = "Florp! Fluffy!"
+	DESCRIBE.GIANT_TREE_BIRDNEST = "Florp! Baby birds in there!"
+	
+    DESCRIBE.SLUDGE = "This stuff is... Glurp..."
+	DESCRIBE.SLUDGE_OIL = ""
+    DESCRIBE.SLUDGE_SACK = "Sloshy bag, florp."
+	DESCRIBE.CANNONBALL_SLUDGE_ITEM = "Goo hard now."
+	DESCRIBE.BOAT_BUMPER_SLUDGE = "Wobbley Goo keep boat strong."
+	DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "Wobbley."
+    DESCRIBE.BOATPATCH_SLUDGE = ""
+    DESCRIBE.UM_COPPER_PIPE = ""
+    DESCRIBE.UM_SALTSALVE  = "Like salt but this too salty!"
+    DESCRIBE.UNCOMPROMISING_FISHINGNET = "Better not hurt them."
+	DESCRIBE.UM_AMBER = ""
+    DESCRIBE.UM_BEEGUN = "?"
+	DESCRIBE.SUNKENCHEST_ROYAL = "."
+	DESCRIBE.STEERINGWHEEL_COPPER = ""
+	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = ""
+	DESCRIBE.BOAT_BUMPER_COPPER = ""
+	DESCRIBE.BOAT_BUMPER_COPPER_KIT = ""
+	DESCRIBE.UM_DREAMCATCHER = "Bad sleep catcher? Florp. How that work?"
+	DESCRIBE.UM_BRINEISHMOSS = "Moss tasty"
+	DESCRIBE.UM_COALESCED_NIGHTMARE = ""
+	DESCRIBE.SLUDGE_CORK = ""
+	
+	DESCRIBE.UNCOMPROMISING_HARPOON = "Stabbing things from a distance has never been easier."
+	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
+	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
+	DESCRIBE.UM_MAGNERANG = "It'll come back and bring something with it."
+	DESCRIBE.UM_MAGNERANGREEL = ""

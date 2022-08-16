@@ -131,9 +131,9 @@ local states = {
 						inst:ForceFacePoint(target.Transform:GetWorldPosition())
 					end
 					
-					for i = 1, math.random(5,6) do
-						inst.LaunchProjectile(inst, inst.components.combat.target)
-					end
+					local launchx, launchy, launchz = target.Transform:GetWorldPosition()
+					
+					inst.LaunchProjectile(inst, target, launchx, launchy, launchz)
 					
 					local x, y, z = inst.Transform:GetWorldPosition()
 
@@ -143,7 +143,7 @@ local states = {
 					sandpuff.Transform:SetScale(2,2,2)
 					
 					inst.components.timer:StopTimer("RockThrow")
-					inst.components.timer:StartTimer("RockThrow", TUNING.BEARGER_NORMAL_GROUNDPOUND_COOLDOWN * 1.25)
+					inst.components.timer:StartTimer("RockThrow", TUNING.BEARGER_NORMAL_GROUNDPOUND_COOLDOWN * 1.4)
                 
 				end
             end),
