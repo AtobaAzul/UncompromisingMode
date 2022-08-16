@@ -118,7 +118,7 @@ GLOBAL.GetDescription = function(inst, item, ...)
 		ret = ret .."\n".. item.vetstring
 	end
 	
-	if prefab and item and inst:HasTag("masterchef") and inst.components.foodmemory ~= nil and inst.components.foodmemory:GetFoodMultiplier(prefab) ~= 1 then
+	if prefab and item and inst:HasTag("masterchef") and inst.components.foodmemory ~= nil and inst.components.foodmemory:GetMemoryCount(prefab) > 0 then
 		ret = ret .."\n".. "I would prefer something a little more... varied."
 	end
 	
