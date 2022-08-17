@@ -2,7 +2,7 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local function onnear(inst, target)
-    if inst.components.childspawner ~= nil and inst.ambush then
+    if inst.components.childspawner ~= nil and inst.doafuckingambush then
         SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
         inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
         SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
@@ -15,10 +15,30 @@ local function onnear(inst, target)
     end
 end
 
+local function OnSave(inst, data)
+	data.doafuckingambush = inst.doafuckingambush
+		
+	if inst._OldOnSave ~= nil then
+		--inst._OldOnSave(inst, data)
+	end
+end
+	
+local function OnLoad(inst, data)
+    if data then
+		inst.doafuckingambush = data.doafuckingambush or inst.doafuckingambush
+	end
+		
+	if inst._OldOnLoad ~= nil then
+		--inst._OldOnLoad(inst, data)
+	end
+end
+
 env.AddPrefabPostInit("critterlab", function (inst)
     if not TheWorld.ismastersim then
 		return
 	end
+	
+	inst.doafuckingambush = true
 
 	inst:AddComponent("childspawner")
 	inst.components.childspawner.childname = "mutatedhound"
@@ -34,40 +54,14 @@ env.AddPrefabPostInit("critterlab", function (inst)
 	local _OldOnLoad = inst.OnLoad
 	
 	if inst.OnSave ~= nil then
-		_OldOnSave = inst.OnSave
+		inst._OldOnSave = inst.OnSave
 	end
 	
 	if inst.OnLoad ~= nil then
-		_OldOnLoad = inst.OnLoad
-	end
-	
-	local function OnSave(inst, data)
-		if inst.ambush ~= nil then
-			data.ambush = inst.ambush
-		end
-		
-		if _OldOnSave ~= nil then
-			_OldOnSave(inst, data)
-		end
+		inst._OldOnLoad = inst.OnLoad
 	end
 	
     inst.OnSave = OnSave
 	
-	local function OnLoad(inst, data)
-		if data ~= nil then
-			if data.ambush then
-				inst.ambush = data.ambush
-			end
-		end
-		
-		if _OldOnLoad ~= nil then
-			_OldOnLoad(inst, data)
-		end
-	end
-	
     inst.OnLoad = OnLoad
-
-	if inst.ambush == nil then
-		inst.ambush = true
-	end
 end)

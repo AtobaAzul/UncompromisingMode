@@ -3,14 +3,6 @@ local assets =
     Asset("ANIM", "anim/critterlab.zip"),
 }
 
-local function SwitchToClassic(inst)
-	local pos = inst:GetPosition()
-	local altar = SpawnPrefab("critterlab")
-	altar.Transform:SetPosition(pos:Get())
-	altar.ambush = false
-	inst:Remove()
-end
-
 local function blink(inst)
     inst.AnimState:PlayAnimation("proximity_loop"..math.random(4))
 	inst.idletask = inst:DoTaskInTime(math.random() + 1.0, blink)
@@ -26,6 +18,7 @@ local function onturnoff(inst)
 end
 
 local function onturnon(inst)
+    inst.components.prototyper.trees = TUNING.PROTOTYPER_TREES.CRITTERLAB
 	inst.SoundEmitter:PlaySound("dontstarve/common/together/critter_lab/idle", "loop")
 	blink(inst)
 end
@@ -71,8 +64,6 @@ local function fn()
 
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
-	
-	inst:DoTaskInTime(0, SwitchToClassic)
 
     return inst
 end
@@ -83,9 +74,8 @@ local function broken_onrepaired(inst, doer, repair_item)
         --inst.SoundEmitter:PlaySound("dontstarve/common/ancienttable_repair")
     --else
         local pos = inst:GetPosition()
-        local altar = SpawnPrefab("critterlab")
+        local altar = SpawnPrefab("critterlab_real")
         altar.Transform:SetPosition(pos:Get())
-        altar.ambush = false
         --altar.SoundEmitter:PlaySound("dontstarve/common/ancienttable_activate")
         SpawnPrefab("collapse_small").Transform:SetPosition(pos:Get())
         --inst:PushEvent("onprefabswaped", {newobj = altar})

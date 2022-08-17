@@ -423,3 +423,5 @@ STRINGS.RECIPE_DESC.BOOK_RAIN_UM = "A catalogue of weather effects."
 STRINGS.RECIPE_DESC.RAIN_HORN = "Drown the world."
 STRINGS.RECIPE_DESC.HAT_RATMASK = "Sniff out some vermin!"
 STRINGS.RECIPE_DESC.FLORAL_BANDAGE = "Sweetened Healing!"
+
+GLOBAL.PROTOTYPER_DEFS.critterlab_real = GLOBAL.PROTOTYPER_DEFS.critterlab
