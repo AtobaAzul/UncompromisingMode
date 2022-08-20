@@ -1538,6 +1538,7 @@ end
 local function winkyburrowremove(inst)
 	inst:AddTag("NOCLICK")
 	inst.components.container:Close()
+	inst.components.container.canbeopened = false
 	inst.components.sizetweener:StartTween(0.05, 1, inst.Remove)
 end
 
