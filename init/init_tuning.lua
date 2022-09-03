@@ -398,6 +398,10 @@ TUNING.DSTU =
     ITEMCHECK = GetModConfigData("itemcheck"),
     SEEDS = GetModConfigData("seeds"),
     MAXHPHITTERS = GetModConfigData("maxhphitters"),
+
+    NO_MOCK_DRAGONFLY_BOSS_TIME = GetModConfigData("wiltfly_spawn"),
+    NO_MOTHER_GOOSE_BOSS_TIME = GetModConfigData("mother_goose_spawn"),
+
 --boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
     TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),

@@ -545,7 +545,31 @@ configuration_options =
 	Header("Bosses"),
 	Header("Additional Seasonal Giants"),
 	BinaryConfig("mother_goose", "Mother Goose", "Mother Goose will now attack the player in spring, similar to the Reign of Giant's Moose.", true),
+	{
+		name = "mother_goose_spawn",
+		label = "Mother Goose Spawn Date",
+		hover = "The year that Mother Goose can spawn.",
+		options = 
+		{
+			{description = "Year 1 (Default)", data = 26},
+			{description = "Year 2", data = 26*1.5},--maybe???
+			{description = "Year 3", data = 26*2.5}--???
+		},
+		default = 26,
+	},
 	BinaryConfig("wiltfly", "Wilting Dragonfly", "Dragonfly will now leave her arena during summer and attack the player, similar to Reign of Giant's Dragonfly.", true),
+	{
+		name = "wiltfly_spawn",
+		label = "Wilting Dragonfly Spawn Date",
+		hover = "The year that Wilting Dragonfly can spawn.",
+		options = 
+		{
+			{description = "Year 1 (Default)", data = 26},
+			{description = "Year 2", data = 26*2},--maybe???
+			{description = "Year 3", data = 26*3}--???
+		},
+		default = 26,
+	},
 	SkipSpace(),
 
 	Header("Giants & Bosses"),
