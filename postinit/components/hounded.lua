@@ -5,9 +5,9 @@ if not TUNING.DSTU.ISLAND_ADVENTURES then
     AddComponentPostInit("hounded", function(self)
         if not self.inst:HasTag("forest") then return end
 
-    --------------------------------------------------
-    -- THE IMPORTANT STUFF --
-    --------------------------------------------------
+        --------------------------------------------------
+        -- THE IMPORTANT STUFF --
+        --------------------------------------------------
         self.spawn_boss = false
         self.boss_grace = 100 --TUNING.DSTU.VARGWAVES_BOSS_GRACE --grace period in days before boss hounds can spawn
 
@@ -28,10 +28,10 @@ if not TUNING.DSTU.ISLAND_ADVENTURES then
         --seasonal hound variants will be chosen randomly from their respective season tables
         --seasonal hound variants will be chosen randomly from their respective season tables
         self.seasonal_prefabs = {
-            ["autumn"] = {""},
-            ["winter"] = {""},
-            ["spring"] = {""},
-            ["summer"] = {""},
+            ["autumn"] = { "" },
+            ["winter"] = { "" },
+            ["spring"] = { "" },
+            ["summer"] = { "" },
         }
         if TUNING.DSTU.SPOREHOUNDS and not TUNING.DSTU.ISLAND_ADVENTURES then
         self.seasonal_prefabs["autumn"] = {"sporehound"}
@@ -51,10 +51,10 @@ if not TUNING.DSTU.ISLAND_ADVENTURES then
         
         self.spawnlimit = 0
 
-    --------------------------------------------------
-    -- THE ALSO IMPORTANT STUFF --
-    --------------------------------------------------
-        
+        --------------------------------------------------
+        -- THE ALSO IMPORTANT STUFF --
+        --------------------------------------------------
+
         local function CalcSpawnLimit(value)
             if GLOBAL.TheWorld.state.cycles < 10 then
                 return 0
@@ -74,7 +74,7 @@ if not TUNING.DSTU.ISLAND_ADVENTURES then
             if self.GetTimeToAttack(self) > 0 and self.spawnamount > 0 then
                 self.spawnamount = 0
             end
-        
+
             --[[if self.GetTimeToAttack(self) > 0 and GLOBAL.TheWorld.state.cycles >= self.boss_grace then
                 self.spawn_boss = true
             end]]
@@ -83,6 +83,40 @@ if not TUNING.DSTU.ISLAND_ADVENTURES then
 
         local _SummonSpawn = UpvalueHacker.GetUpvalue(self.SummonSpawn, "SummonSpawn")
         local _GetSpawnPoint = UpvalueHacker.GetUpvalue(self.SummonSpawn, "SummonSpawn", "GetSpawnPoint")
+
+        --fallback in case _GetSpawnPoint is nil (or not a function)
+        local function NoHoles(pt)
+            return not GLOBAL.TheWorld.Map:IsPointNearHole(pt)
+        end
+        local SPAWN_DIST = 30
+
+        local function GetSpawnPointUM(pt)
+            if GLOBAL.TheWorld.has_ocean then
+                local function OceanSpawnPoint(offset)
+                    local x = pt.x + offset.x
+                    local y = pt.y + offset.y
+                    local z = pt.z + offset.z
+                    return GLOBAL.TheWorld.Map:IsAboveGroundAtPoint(x, y, z, true) and NoHoles(pt)
+                end
+        
+                local offset = GLOBAL.FindValidPositionByFan(math.random() * 2 * GLOBAL.PI, SPAWN_DIST, 12, OceanSpawnPoint)
+                if offset ~= nil then
+                    offset.x = offset.x + pt.x
+                    offset.z = offset.z + pt.z
+                    return offset
+                end
+            else
+                if not GLOBAL.TheWorld.Map:IsAboveGroundAtPoint(pt:Get()) then
+                    pt = GLOBAL.FindNearbyLand(pt, 1) or pt
+                end
+                local offset = GLOBAL.FindWalkableOffset(pt, math.random() * 2 * GLOBAL.PI, SPAWN_DIST, 12, true, true, NoHoles)
+                if offset ~= nil then
+                    offset.x = offset.x + pt.x
+                    offset.z = offset.z + pt.z
+                    return offset
+                end
+            end
+        end
         
         local function SpawnHounded(prefab, pt, spawn_pt)
             if not prefab then
@@ -99,18 +133,16 @@ if not TUNING.DSTU.ISLAND_ADVENTURES then
                 end
             end
         end
-        
-        local function NoHoles(pt)
-            return not GLOBAL.TheWorld.Map:IsPointNearHole(pt)
-        end
+
 
         local SPAWN_DIST = 30
-        
+
         local function GetMagmaSpawnPoint(pt)
             if not GLOBAL.TheWorld.Map:IsAboveGroundAtPoint(pt:Get()) then
                 pt = GLOBAL.FindNearbyLand(pt, 1) or pt
             end
-            local offset = GLOBAL.FindWalkableOffset(pt, math.random() * 2 * GLOBAL.PI, SPAWN_DIST, 12, true, true, NoHoles)
+            local offset = GLOBAL.FindWalkableOffset(pt, math.random() * 2 * GLOBAL.PI, SPAWN_DIST, 12, true, true,
+                NoHoles)
             if offset ~= nil then
                 offset.x = offset.x + pt.x
                 offset.z = offset.z + pt.z
@@ -119,41 +151,44 @@ if not TUNING.DSTU.ISLAND_ADVENTURES then
         end
 
         local function SummonSpawn(pt, upgrade)
-            local spawn_pt = _GetSpawnPoint(pt)
+            local spawn_pt = _GetSpawnPoint ~= nil and _GetSpawnPoint(pt) or GetSpawnPointUM(pt)
             local magmaspawn_pt = GetMagmaSpawnPoint(pt)
             local season = GLOBAL.TheWorld.state.season
             local chance = math.random()
             local prefab_list = {}
             local prefab = nil
             local SpawnLimit = CalcSpawnLimit()
-            
-            if self.varggraceperiod ~= nil and GLOBAL.TheWorld.state.cycles > (self.varggraceperiod + TUNING.DSTU.VARGWAVES_DELAY_PERIOD) then
+
+            if self.varggraceperiod ~= nil and
+                GLOBAL.TheWorld.state.cycles > (self.varggraceperiod + TUNING.DSTU.VARGWAVES_DELAY_PERIOD) then
                 self.spawn_boss = true
                 print("cd boss")
-                
+
             end
-            
+
             print(GLOBAL.TheWorld.state.cycles)
             print(self.varggraceperiod)
             print(TUNING.DSTU.VARGWAVES_DELAY_PERIOD)
             print(self.varggraceperiod ~= nil and self.varggraceperiod + TUNING.DSTU.VARGWAVES_DELAY_PERIOD or "nil")
-            
+
             --replaces the first hound in a wave with a random boss hound
             if pt and self.spawn_boss and magmaspawn_pt ~= nil and TUNING.DSTU.VARGWAVES then
                 self.varggraceperiod = GLOBAL.TheWorld.state.cycles
-                    
-                    self.spawn_boss = false
-                    prefab_list = self.seasonal_boss_prefabs[season]
-                    prefab = --[[math.random() < self.seasonal_boss_chance and #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or]] self.default_boss_prefab
-                    
-                    return SpawnHounded(prefab, pt, magmaspawn_pt)
+
+                self.spawn_boss = false
+                prefab_list = self.seasonal_boss_prefabs[season]
+                prefab = --[[math.random() < self.seasonal_boss_chance and #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or]] self
+                    .default_boss_prefab
+
+                return SpawnHounded(prefab, pt, magmaspawn_pt)
             end
             --spawn a random seasonal hound
-            if pt and chance < self.seasonal_chance and self.spawnamount <= SpawnLimit and GLOBAL.TheWorld.state.cycles >= 22 then
+            if pt and chance < self.seasonal_chance and self.spawnamount <= SpawnLimit and
+                GLOBAL.TheWorld.state.cycles >= 22 then
                 --print(CalcSpawnLimit)
                 self.spawnamount = self.spawnamount + 1
                 --print(self.spawnamount)
-                
+
                 prefab_list = self.seasonal_prefabs[season]
                 prefab = #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or nil
                 if prefab == "magmahound" then
@@ -172,7 +207,7 @@ if not TUNING.DSTU.ISLAND_ADVENTURES then
         end
 
         UpvalueHacker.SetUpvalue(self.SummonSpawn, SummonSpawn, "SummonSpawn")
-        
+
         local _OnSave = self.OnSave
         self.OnSave = function(self)
             local _houndedData = _OnSave(self)
@@ -185,33 +220,33 @@ if not TUNING.DSTU.ISLAND_ADVENTURES then
             -- code for new variables
             return houndedData
         end
-        
+
         local _OnLoad = self.OnLoad
         self.OnLoad = function(self, data)
-            
+
             if data.varggraceperiod ~= nil then
                 self.varggraceperiod = data.varggraceperiod
             end
-            
+
             return _OnLoad(self, data)
         end
-        
+
         --override the global SummonSpawn with the old local SummonSpawn function because Vargs use this to summon hounds
         self.SummonSpawn = function(self, pt)
             return pt ~= nil and _SummonSpawn(pt) or nil
         end
-        
-        
+
+
         if TUNING.DSTU.LATEGAMEHOUNDSPREAD then
             local __spawndata = UpvalueHacker.GetUpvalue(self.SetSpawnData, "_spawndata")
             __spawndata.attack_delays =
             {
-                rare 		= function() return TUNING.TOTAL_DAY_TIME * 6, math.random() * TUNING.TOTAL_DAY_TIME * 7 end, -- (
-                occasional 	= function() return TUNING.TOTAL_DAY_TIME * 7, math.random() * TUNING.TOTAL_DAY_TIME * 6 end, -- 
-                frequent 	= function() return TUNING.TOTAL_DAY_TIME * 7, math.random() * TUNING.TOTAL_DAY_TIME * 3 end, -- (7 to 13
+                rare       = function() return TUNING.TOTAL_DAY_TIME * 6, math.random() * TUNING.TOTAL_DAY_TIME * 7 end, -- (
+                occasional = function() return TUNING.TOTAL_DAY_TIME * 7, math.random() * TUNING.TOTAL_DAY_TIME * 6 end, --
+                frequent   = function() return TUNING.TOTAL_DAY_TIME * 7, math.random() * TUNING.TOTAL_DAY_TIME * 3 end, -- (7 to 13
             }
         end
-        
+
     end)
 
     AddPrefabPostInit("cave", function(inst)
@@ -226,20 +261,20 @@ if not TUNING.DSTU.ISLAND_ADVENTURES then
 
             attack_levels =
             {
-                intro   = { warnduration = function() return 120 end, numspawns = function() return 1 end },
-                light   = { warnduration = function() return 60 end, numspawns = function() return 1 + math.random(0,1) end },
-                med     = { warnduration = function() return 45 end, numspawns = function() return 1 + math.random(0,1) end },
-                heavy   = { warnduration = function() return 30 end, numspawns = function() return 2 + math.random(0,1) end },
-                crazy   = { warnduration = function() return 30 end, numspawns = function() return 3 + math.random(0,2) end },
+                intro = { warnduration = function() return 120 end, numspawns = function() return 1 end },
+                light = { warnduration = function() return 60 end, numspawns = function() return 1 + math.random(0, 1) end },
+                med   = { warnduration = function() return 45 end, numspawns = function() return 1 + math.random(0, 1) end },
+                heavy = { warnduration = function() return 30 end, numspawns = function() return 2 + math.random(0, 1) end },
+                crazy = { warnduration = function() return 30 end, numspawns = function() return 3 + math.random(0, 2) end },
             },
 
             attack_delays =
             {
-                intro 		= function() return TUNING.TOTAL_DAY_TIME * 6, math.random() * TUNING.TOTAL_DAY_TIME * 2.5 end,
-                rare 		= function() return TUNING.TOTAL_DAY_TIME * 7, math.random() * TUNING.TOTAL_DAY_TIME * 2.5 end,
-                occasional 	= function() return TUNING.TOTAL_DAY_TIME * 8, math.random() * TUNING.TOTAL_DAY_TIME * 2.5 end,
-                frequent 	= function() return TUNING.TOTAL_DAY_TIME * 9, math.random() * TUNING.TOTAL_DAY_TIME * 2.5 end,
-                crazy 		= function() return TUNING.TOTAL_DAY_TIME * 10, math.random() * TUNING.TOTAL_DAY_TIME * 2.5 end,
+                intro      = function() return TUNING.TOTAL_DAY_TIME * 6, math.random() * TUNING.TOTAL_DAY_TIME * 2.5 end,
+                rare       = function() return TUNING.TOTAL_DAY_TIME * 7, math.random() * TUNING.TOTAL_DAY_TIME * 2.5 end,
+                occasional = function() return TUNING.TOTAL_DAY_TIME * 8, math.random() * TUNING.TOTAL_DAY_TIME * 2.5 end,
+                frequent   = function() return TUNING.TOTAL_DAY_TIME * 9, math.random() * TUNING.TOTAL_DAY_TIME * 2.5 end,
+                crazy      = function() return TUNING.TOTAL_DAY_TIME * 10, math.random() * TUNING.TOTAL_DAY_TIME * 2.5 end,
             },
 
             warning_speech = "ANNOUNCE_WORMS",
