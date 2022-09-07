@@ -156,7 +156,6 @@ configuration_options =
 	BinaryConfig("wigfrid", "Wigfrid", "Reduced Wigfrids combat leeching effect to more balanced levels.", true),
 	BinaryConfig("wolfgang", "Experimental Wolfgang", "Wolfgang gains mightiness based on hunger level. Hunger drain increases the longer mighty is maintained.", false),
 	BinaryConfig("winonaworker", "Winona: Faster Working", "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.", true),
-	BinaryConfig("winonawackycats", "Experimental Winona Catapults", "Catapults no longer regenerate, have reduced health, and 34 AOE damage.", false),
 	BinaryConfig("winona_gen", "Winona: Generators", "Limits access to Winona's Generators to only allow her to use them", true),
 		{
 		name = "wortox",
