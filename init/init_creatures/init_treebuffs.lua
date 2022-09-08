@@ -26,7 +26,7 @@ end
 
 -- Override onworked
 local function onworked(inst, chopper, workleft)
-    if not (chopper ~= nil and chopper:HasTag("playerghost")) then
+    if not (chopper ~= nil and (chopper:HasTag("playerghost") or chopper:HasTag("plantkin"))) then
         inst.SoundEmitter:PlaySound(
             chopper ~= nil and chopper:HasTag("beaver") and
             "dontstarve/characters/woodie/beaver_chop_tree" or
@@ -51,7 +51,7 @@ end
 AddPrefabPostInit("livingtree", livingtree_postinit)
 
 local function onworked_halloween(inst, chopper, workleft)
-    if not (chopper ~= nil and chopper:HasTag("playerghost")) then
+    if not (chopper ~= nil and (chopper:HasTag("playerghost") or chopper:HasTag("plantkin"))) then
         inst.SoundEmitter:PlaySound(
             chopper ~= nil and chopper:HasTag("beaver") and
             "dontstarve/characters/woodie/beaver_chop_tree" or
