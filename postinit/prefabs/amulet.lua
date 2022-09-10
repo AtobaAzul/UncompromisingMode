@@ -83,13 +83,27 @@ end
 
 local function onequip(inst, owner)
     inst._owner = owner
-    owner.AnimState:OverrideSymbol("swap_body", "torso_amulets", "yellowamulet")
+	
+    local skin_build = inst:GetSkinBuild()
+    if skin_build ~= nil then
+        owner:PushEvent("equipskinneditem", inst:GetSkinName())
+        owner.AnimState:OverrideItemSkinSymbol("swap_body", skin_build, "swap_body", inst.GUID, "torso_amulets")
+    else
+        owner.AnimState:OverrideSymbol("swap_body", "torso_amulets", "yellowamulet")
+    end
+	
     turnon(inst, owner)
 end
 
 local function onunequip(inst, owner)
     inst._owner = nil
     owner.AnimState:ClearOverrideSymbol("swap_body")
+
+    local skin_build = inst:GetSkinBuild()
+    if skin_build ~= nil then
+        owner:PushEvent("unequipskinneditem", inst:GetSkinName())
+    end
+	
     turnoff(inst, owner)
 end
 
