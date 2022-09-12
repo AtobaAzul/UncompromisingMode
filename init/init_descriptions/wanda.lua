@@ -354,3 +354,4 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "It's not even insulated properly!"
 	DESCRIBE.UM_DEVILED_EGGS = "Not in a hundred years."
 	
+	DESCRIBE.CORNCAN = "The can is a temporal time bubble."

@@ -352,24 +352,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "That was still a little dangerous."
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "OW! I can't cook with singed fingers!"
-	
-	----UNDER THE WEATHER----
-	
-	DESCRIBE.WINONA_TOOLBOX = "Not meant for pots and pans, but I can make do."
-	DESCRIBE.OCEAN_SPEAKER = "I never was one for machines."
-	--DESCRIBE.UM_SIREN = "Apologies Mademoiselle Wigfrid, but it she the supperior singer!"
-	
-    --DESCRIBE.OCUPUS_BEAK = "",
-	--DESCRIBE.OCUPUS_TENTACLE = "",
-	--DESCRIBE.OCUPUS_TENTACLE_EYE = "",
-	--DESCRIBE.OCUPUS_TENTACLE_COOKED = "",
-	
-	DESCRIBE.REEDSUIT_UM = "I can still feel the breeze going through it..."
-	--DESCRIBE.SHARKSUIT_UM = "",
-	--DESCRIBE.ROCKJAWLEATHER = "",
-	
-	ACTIONFAIL.WINONATOOLBOX = "wacky, help!"
-	DESCRIBE.MINERHAT_ELECTRICAL = "help"
-	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
-	DESCRIBE.STUFFED_PEEPER_POPPERS = "I... think I misheard the order."
+
 	DESCRIBE.UM_DEVILED_EGGS = "Hors d'evil."
+
+	DESCRIBE.CORNCAN = "I'll be able to use this corn for recipes later!"
