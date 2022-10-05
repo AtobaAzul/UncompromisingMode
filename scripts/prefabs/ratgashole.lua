@@ -93,16 +93,14 @@ end
 
 local function fn(Sim)
 	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
 	inst.entity:AddNetwork()
 
-	anim:SetBank("ratgas_hole")
-	anim:SetBuild("ratgas_hole")
-	anim:PlayAnimation("boil_loop", true)
-	anim:SetLayer( LAYER_BACKGROUND )
-	anim:SetSortOrder( 3 )
+	inst.AnimState:SetBank("ratgas_hole")
+	inst.AnimState:SetBuild("ratgas_hole")
+	inst.AnimState:PlayAnimation("boil_loop", true)
+	inst.AnimState:SetLayer( LAYER_BACKGROUND )
+	inst.AnimState:SetSortOrder( 3 )
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then

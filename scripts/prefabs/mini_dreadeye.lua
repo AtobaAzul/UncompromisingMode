@@ -88,9 +88,6 @@ end
 local function fn(Sim)
 	-- print ('sandhillfn')
 	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	local sound = inst.entity:AddSoundEmitter()
 	inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
@@ -101,9 +98,9 @@ local function fn(Sim)
 
 	inst.idletask = nil
 			
-	anim:SetBuild("shadow_eye")
-	anim:SetBank("shadow_eye")
-	anim:PlayAnimation("spawn")
+	inst.AnimState:SetBuild("shadow_eye")
+	inst.AnimState:SetBank("shadow_eye")
+	inst.AnimState:PlayAnimation("spawn")
 	
 	inst.AnimState:SetMultColour(0, 0, 0, 0.5)
 	
@@ -158,17 +155,14 @@ end
 local function fxfn(Sim)
 	-- print ('sandhillfn')
 	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	local sound = inst.entity:AddSoundEmitter()
 	inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
 			
-	anim:SetBuild("statue_ruins_fx")
-	anim:SetBank("statue_ruins_fx")
-	anim:PlayAnimation("transform_nightmare")
+	inst.AnimState:SetBuild("statue_ruins_fx")
+	inst.AnimState:SetBank("statue_ruins_fx")
+	inst.AnimState:PlayAnimation("transform_nightmare")
 	
 	inst.AnimState:SetMultColour(0, 0, 0, 0.6)
 	

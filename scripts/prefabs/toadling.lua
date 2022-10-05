@@ -304,9 +304,6 @@ end
 
 local function MakeMoose(nightmare)
 	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	local sound = inst.entity:AddSoundEmitter()
 	local shadow = inst.entity:AddDynamicShadow()
     inst.entity:AddNetwork()
 
@@ -317,8 +314,8 @@ local function MakeMoose(nightmare)
     MakeCharacterPhysics(inst, 50, 1.5)
     inst.Physics:SetCollisionCallback(oncollide)
 
-    anim:SetBank("hippo")
-    anim:SetBuild("toadling")
+    inst.AnimState:SetBank("hippo")
+    inst.AnimState:SetBuild("toadling")
     
     inst:AddTag("animal")
     inst:AddTag("frog")

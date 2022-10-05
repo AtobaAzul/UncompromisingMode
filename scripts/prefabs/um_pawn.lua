@@ -331,10 +331,6 @@ end
 
 local function pawn_common(pawntype)
 	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-    local physics = inst.entity:AddPhysics()
-	local sound = inst.entity:AddSoundEmitter()
 	local shadow = inst.entity:AddDynamicShadow()
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
@@ -350,9 +346,9 @@ local function pawn_common(pawntype)
 
     MakeCharacterPhysics(inst, 1, 0.5)
 
-    anim:SetBank("uncompromising_pawn")
-    anim:SetBuild("uncompromising_pawn"..pawntype.."_build")
-    anim:PlayAnimation("idle")
+    inst.AnimState:SetBank("uncompromising_pawn")
+    inst.AnimState:SetBuild("uncompromising_pawn"..pawntype.."_build")
+    inst.AnimState:PlayAnimation("idle")
     
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
 	inst.components.locomotor:SetTriggersCreep(false)

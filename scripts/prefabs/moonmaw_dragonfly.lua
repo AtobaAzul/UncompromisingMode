@@ -545,7 +545,6 @@ end
 local function fn(Sim)
     local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
 	local sound = inst.entity:AddSoundEmitter()
 	local shadow = inst.entity:AddDynamicShadow()
 	shadow:SetSize(6, 3.5)
@@ -571,8 +570,8 @@ local function fn(Sim)
     inst.OnEntitySleep = OnSleep 
     inst.OnRemoveEntity = OnRemove
 
-    anim:SetBank("moonmaw_dragonfly")
-    anim:SetBuild("moonmaw_dragonfly")
+    inst.AnimState:SetBank("moonmaw_dragonfly")
+    inst.AnimState:SetBuild("moonmaw_dragonfly")
     --anim:PlayAnimation("idle", true)
 	
 	inst:AddTag("epic")

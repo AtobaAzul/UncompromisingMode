@@ -130,9 +130,6 @@ local function MakePhonographFn(track)
     return function()
 
 			local inst = CreateEntity()
-			local trans = inst.entity:AddTransform()
-			local anim = inst.entity:AddAnimState()
-			local sound = inst.entity:AddSoundEmitter()
 			
 			inst.entity:AddTransform()
 			inst.entity:AddAnimState()
@@ -140,9 +137,9 @@ local function MakePhonographFn(track)
 			inst.entity:AddNetwork()
 			
 			MakeObstaclePhysics(inst, 0.1)
-			anim:SetBank("phonograph")
-			anim:SetBuild("phonograph")		
-			anim:PlayAnimation("idle")
+			inst.AnimState:SetBank("phonograph")
+			inst.AnimState:SetBuild("phonograph")		
+			inst.AnimState:PlayAnimation("idle")
 
 			inst:AddTag("charliephonograph")
 			

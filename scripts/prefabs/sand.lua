@@ -6,13 +6,12 @@ local assets =
 local function sandfn(Sim)
 	local inst = CreateEntity()
 	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
 	inst.entity:AddNetwork()
 	MakeInventoryPhysics(inst)
 
-	anim:SetBuild( "sandhill" )
-	anim:SetBank( "sandhill" )
-	anim:PlayAnimation("idle")
+	inst.AnimState:SetBuild( "sandhill" )
+	inst.AnimState:SetBank( "sandhill" )
+	inst.AnimState:PlayAnimation("idle")
 	
 	inst.entity:SetPristine()
 

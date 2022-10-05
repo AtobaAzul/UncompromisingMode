@@ -91,9 +91,6 @@ end
 
 local function fn()
 	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-	local sound = inst.entity:AddSoundEmitter()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -104,13 +101,13 @@ local function fn()
 
 	MakeGhostPhysics(inst, 1, .5)
 
-	anim:SetBank("wilson")
-	anim:SetBuild("waxwell_shadow_mod")
-	anim:PlayAnimation("idle")
+	inst.AnimState:SetBank("wilson")
+	inst.AnimState:SetBuild("waxwell_shadow_mod")
+	inst.AnimState:PlayAnimation("idle")
 
-    anim:Hide("ARM_carry")
-    anim:Hide("hat")
-    anim:Hide("hat_hair")
+    inst.AnimState:Hide("ARM_carry")
+    inst.AnimState:Hide("hat")
+    inst.AnimState:Hide("hat_hair")
 
 	inst:AddTag("shadowminion")
     inst:AddTag("scarytoprey")

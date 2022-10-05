@@ -314,18 +314,15 @@ end
 
 local function circlingbatfn()
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
-    local sound = inst.entity:AddSoundEmitter()
 
     MakeAmphibiousGhostPhysics(inst, 1, .5)
 
-    anim:SetBank("bat_vamp_shadow")
-    anim:SetBuild("bat_vamp_shadow")
-    anim:PlayAnimation("shadow_flap_loop", true)
-    anim:SetOrientation( ANIM_ORIENTATION.OnGround )
-    anim:SetLayer( LAYER_BACKGROUND )
-    anim:SetSortOrder( 3 )
+    inst.AnimState:SetBank("bat_vamp_shadow")
+    inst.AnimState:SetBuild("bat_vamp_shadow")
+    inst.AnimState:PlayAnimation("shadow_flap_loop", true)
+    inst.AnimState:SetOrientation( ANIM_ORIENTATION.OnGround )
+    inst.AnimState:SetLayer( LAYER_BACKGROUND )
+    inst.AnimState:SetSortOrder( 3 )
 
     inst:AddTag("scarytoprey")
     inst:AddTag("monster")

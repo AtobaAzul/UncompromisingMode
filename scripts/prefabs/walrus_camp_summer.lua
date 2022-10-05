@@ -53,39 +53,38 @@ end
 local function SetOccupied(inst, occupied)
     --print("SetOccupied", inst, occupied)
 
-    local anim = inst.AnimState
 
     inst.data.occupied = occupied
 
     if occupied then
 
-        anim:SetBank("walrus_house")
-        anim:SetBuild("walrus_house_summer")
+        inst.AnimState:SetBank("walrus_house")
+        inst.AnimState:SetBuild("walrus_house_summer")
 
         UpdateLight(inst, not TheWorld.state.isday)
 
-        anim:SetOrientation(ANIM_ORIENTATION.Default)
-        anim:SetLayer(LAYER_WORLD)
-        anim:SetSortOrder(0)
-		anim:SetMultColour(1, 1, 1, 1)
+        inst.AnimState:SetOrientation(ANIM_ORIENTATION.Default)
+        inst.AnimState:SetLayer(LAYER_WORLD)
+        inst.AnimState:SetSortOrder(0)
+		inst.AnimState:SetMultColour(1, 1, 1, 1)
 
         MakeObstaclePhysics(inst, 3)
     else
         UpdateLight(inst, false)
 
-        anim:SetBank("igloo_track")
-        anim:SetBuild("igloo_track")
+        inst.AnimState:SetBank("igloo_track")
+        inst.AnimState:SetBuild("igloo_track")
 		
 		if TheWorld.state.iswinter then
-			anim:PlayAnimation("idleno")
+			inst.AnimState:PlayAnimation("idleno")
 		else
-			anim:PlayAnimation("idle")
+			inst.AnimState:PlayAnimation("idle")
 		end
 		
-        anim:SetOrientation(ANIM_ORIENTATION.OnGround)
-        anim:SetLayer(LAYER_BACKGROUND)
-        anim:SetSortOrder(4)
-		anim:SetMultColour(1, 1, 1, 0)
+        inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+        inst.AnimState:SetLayer(LAYER_BACKGROUND)
+        inst.AnimState:SetSortOrder(4)
+		inst.AnimState:SetMultColour(1, 1, 1, 0)
  
         inst.Physics:ClearCollisionMask()
         inst.Physics:CollidesWith(COLLISION.WORLD)

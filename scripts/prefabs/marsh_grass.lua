@@ -9,8 +9,6 @@ local prefabs =
 
 local function fn(Sim)
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
 	
 	inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -18,9 +16,9 @@ local function fn(Sim)
     inst.entity:AddDynamicShadow()
     inst.entity:AddNetwork()
 	
-    anim:SetBuild("bush_marsh")    
-    anim:SetBank("bank_a26ad8bb")
-    anim:PlayAnimation("idle_loop", true)
+    inst.AnimState:SetBuild("bush_marsh")    
+    inst.AnimState:SetBank("bank_a26ad8bb")
+    inst.AnimState:PlayAnimation("idle_loop", true)
 	MakeSmallBurnable(inst, TUNING.MED_BURNTIME)
 	inst.entity:SetPristine()
 	

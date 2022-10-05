@@ -149,8 +149,6 @@ end
 
 local function fn(Sim)
     local inst = CreateEntity()
-    local trans = inst.entity:AddTransform()
-    local anim = inst.entity:AddAnimState()
 	
 	inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -160,9 +158,9 @@ local function fn(Sim)
 	inst.entity:AddMiniMapEntity()
 	inst.MiniMapEntity:SetIcon("veteranshrine_map.tex")
 
-    anim:SetBuild("veteranshrine")    
-    anim:SetBank("veteranshrine")
-    anim:PlayAnimation("idle", true)
+    inst.AnimState:SetBuild("veteranshrine")    
+    inst.AnimState:SetBank("veteranshrine")
+    inst.AnimState:PlayAnimation("idle", true)
 	
     --inst.GetActivateVerb = GetVerb
 	
