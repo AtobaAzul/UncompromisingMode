@@ -165,6 +165,7 @@ local prefab_post = {
 	"staffs", --generic staffs.
 	"stalker",
 	"sacred_chest",
+	"soil_amender",
 }
 
 local stategraph_post = {
