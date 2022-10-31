@@ -620,13 +620,15 @@ local function cord_fn()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
 
-    inst.AnimState:SetBank("portableboat_test")
-    inst.AnimState:SetBuild("portableboat_test")
+    inst.AnimState:SetBank("portableboat")
+    inst.AnimState:SetBuild("portableboat")
     inst.AnimState:PlayAnimation("plug_place")
     inst.AnimState:PushAnimation("plug_idle", false)
 
     inst:AddTag("ignorewalkableplatforms")
     inst:AddTag("boat_ripcord")
+	
+	inst.Transform:SetScale(0.65, 0.65, 0.65)
 
     inst.entity:SetPristine()
 
