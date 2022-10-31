@@ -535,6 +535,7 @@ AddRecipe2(
 ChangeSortKey("sludge_cork", "oceanfishingrod", "TOOLS", true)
 ChangeSortKey("sludge_cork", "boat_magnet_beacon", "SEAFARING", true)
 
+--[[
 AddRecipe2(
     "boat_bumper_copper_kit",
     {Ingredient("um_copper_pipe", 14)},
