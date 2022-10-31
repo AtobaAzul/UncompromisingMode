@@ -115,7 +115,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.SPOREPACK = "Absolutely not."
 	DESCRIBE.SALTPACK = "Would anyone mind if I use this salt?"
 	
-	DESCRIBE.SCORPION = "Fried scorpion? Too dangerous."
+	DESCRIBE.UM_SCORPION = "Fried scorpion? Too dangerous."
 	DESCRIBE.SCORPIONCARAPACE = "I wouldn't dare eat this without a gallon of fry oil."
 	DESCRIBE.SCORPIONCARAPACECOOKED = "It's still not good."
 	DESCRIBE.HARDSHELLTACOS = "The shell is actually surprisingly pallatable."
@@ -352,7 +352,80 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "That was still a little dangerous."
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "OW! I can't cook with singed fingers!"
-
+	
+	----UNDER THE WEATHER----
+	
+	DESCRIBE.WINONA_TOOLBOX = "Not meant for pots and pans, but I can make do."
+	ACTIONFAIL.WINONATOOLBOX = "Not full of utensils I presume."
+	DESCRIBE.POWERCELL = "Food for the batteries, I suppose."
+	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "I could use a battery charged... well, everything."
+	DESCRIBE.MINERHAT_ELECTRICAL = "Would make cooking in the dark easier."
+	DESCRIBE.OCEAN_SPEAKER = "I never was one for machines."
+	--DESCRIBE.UM_SIREN = "Apologies Mademoiselle Wigfrid, but it she the supperior singer!"
+	
+    DESCRIBE.OCUPUS_BEAK = "An oversized bowl at best."
+	DESCRIBE.OCUPUS_TENTACLE = "Some prefer to eat it raw."
+	DESCRIBE.OCUPUS_TENTACLE_EYE = "Hhmm what can I make with this?"
+	DESCRIBE.OCUPUS_TENTACLE_COOKED = "I need some soy, or wasabi."
+	
+	DESCRIBE.ARMOR_REED_UM = "I can still feel the breeze going through it..."
+	DESCRIBE.ARMOR_SHARKSUIT_UM = ""
+	DESCRIBE.ROCKJAWLEATHER = "I uhh... Don't think I have any recipes on shark skin."
+	
+	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
+	DESCRIBE.STUFFED_PEEPER_POPPERS = "I... think I misheard the order."
 	DESCRIBE.UM_DEVILED_EGGS = "Hors d'evil."
-
+	DESCRIBE.LUSH_ENTRANCE = "There's a very strong aroma coming from down there."
+	DESCRIBE.CRITTER_FIGGY = "What was your name again? Figgy, like the fruit, right?"
+	DESCRIBE.GIANT_TREE_BIRDNEST = "The food's delivering itself now!"
+	
+    DESCRIBE.SLUDGE = "Repugnant!"
+	DESCRIBE.SLUDGE_OIL = "It's been boiled down to a base."
+    DESCRIBE.SLUDGE_SACK = "Not fit for storing ingredients."
+	DESCRIBE.CANNONBALL_SLUDGE_ITEM = "This will blast anything I aim at into kingdom come!"
+	DESCRIBE.BOAT_BUMPER_SLUDGE = "It's gross, and that's why it keeps things away."
+	DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "Should I even stick this to my boat?"
+    DESCRIBE.BOATPATCH_SLUDGE = "A plug that stays put."
+    DESCRIBE.UM_COPPER_PIPE = "."
+    DESCRIBE.BRINE_BALM  = "A powerful concoction of salty reagents."
+    DESCRIBE.UNCOMPROMISING_FISHINGNET = DESCRIBE.FISHINGNET
+	DESCRIBE.UM_AMBER = "It's like cracking open a brittle egg. Right?"
+    DESCRIBE.UM_BEEGUN = "I'd rather keep bees for honey, but if I must."
+	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.SUNKENCHEST_ROYAL = "Magnifique!"
+	DESCRIBE.STEERINGWHEEL_COPPER = "I've heard copper is quite sanitary."
+	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "I've heard copper is quite sanitary."
+	DESCRIBE.BOAT_BUMPER_COPPER = "It's strong, but it doesn't stop the boat rocking."
+	DESCRIBE.BOAT_BUMPER_COPPER_KIT = "Dense Defense."
+	DESCRIBE.UM_DREAMCATCHER = "A net for nightmares."
+	DESCRIBE.UM_BRINEISHMOSS = "Salted moss."
+	DESCRIBE.UM_COALESCED_NIGHTMARE = "A stew of bad thoughts."
+	DESCRIBE.SLUDGE_CORK = "Not a cork for wine, unfortunately."
+	DESCRIBE.SLUDGESTACK = "It reeks of rotten eggs!"
+	DESCRIBE.SPECTER_SHIPWRECK = "I hope my boat doesn't end up like that." 
+	
+	DESCRIBE.UNCOMPROMISING_HARPOON = "Stabbing things from a distance has never been easier."
+	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
+	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
+	DESCRIBE.UM_MAGNERANG = "Magnets have no place in a kitchen!"
+	DESCRIBE.UM_MAGNERANGREEL = ""
 	DESCRIBE.CORNCAN = "I'll be able to use this corn for recipes later!"
+	DESCRIBE.LAVASPIT_SLUDGE = "I prefer my fires in the pan!"
+	
+	DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_BLOCKER = "This makes getting honey a bit more complicated."
+
+	DESCRIBE.PORTABLEBOAT_ITEM = "Reminds me of the first steak I'd ever cooked."
+	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "Let there be light!"
+	
+	DESCRIBE.WIXIE_PIANO = "Dinner and a show!"
+	DESCRIBE.WIXIE_CLOCK = "How long has my souffle been baking?"
+	DESCRIBE.WIXIE_WARDROBE = "Trouble's brewing!"
+	DESCRIBE.CHARLES_T_HORSE = "This mare is rare!"
+
+	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Would you like to help me clean up the scraps?"
+	DESCRIBE.UM_ORNAMENT_RAT = "No pests in my kitchen!"
+	
+	DESCRIBE.TRINKET_WATHOM1 = "Is... is that a piece of that beast??"

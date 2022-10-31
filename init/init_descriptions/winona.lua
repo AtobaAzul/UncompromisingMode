@@ -115,7 +115,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.SPOREPACK = "Wow, that smell is a punch in the face."
 	DESCRIBE.SALTPACK = "I should've thought of this sooner!"
 	
-	DESCRIBE.SCORPION = "I don't want to see the business end of that stinger!"
+	DESCRIBE.UM_SCORPION = "I don't want to see the business end of that stinger!"
 	DESCRIBE.SCORPIONCARAPACE = "I'm sure I could find something else to eat."
 	DESCRIBE.SCORPIONCARAPACECOOKED = "There must be something better to eat nearby..."
 	DESCRIBE.HARDSHELLTACOS = "It has a nice crunch."
@@ -356,5 +356,81 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "There's the socket."
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "Better wear some gloves next time!"
-	DESCRIBE.UM_DEVILED_EGGS = "They've been sitting in the back of the fridge for too long."
 	
+	----UNDER THE WEATHER----
+	
+	DESCRIBE.WINONA_TOOLBOX = "Wouldn't leave home without it."
+	ACTIONFAIL.WINONATOOLBOX = "Huh? Who locked me out!"
+	DESCRIBE.POWERCELL = "Lil' ingenuity and elbow grease go a long way."
+	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "I designed it from scratch."
+	DESCRIBE.MINERHAT_ELECTRICAL = "A lil' tinkering makes all the difference."
+	DESCRIBE.OCEAN_SPEAKER = "Now if I could just see its insides..."
+	--DESCRIBE.UM_SIREN = "Heh, she certainly knows how to run her workplace."
+	
+	DESCRIBE.OCUPUS_BEAK = "Has a nice sheen to 'er."
+	DESCRIBE.OCUPUS_TENTACLE = "" --It'll wriggle on down yer gullet.
+	DESCRIBE.OCUPUS_TENTACLE_EYE = "Not one for eatin' eyes and all."
+	DESCRIBE.OCUPUS_TENTACLE_COOKED = "Smells a lot better now."
+	
+	DESCRIBE.ARMOR_REED_UM = DESCRIBE.ARMORGRASS
+	DESCRIBE.ARMOR_SHARKSUIT_UM = ""
+	DESCRIBE.ROCKJAWLEATHER = "Looks like he lost a bit of skin."
+	
+	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
+	DESCRIBE.STUFFED_PEEPER_POPPERS = "This feels like a good way to get food poisoning."
+	DESCRIBE.UM_DEVILED_EGGS = "They've been sitting in the back of the fridge for too long."
+	DESCRIBE.LUSH_ENTRANCE = "I've learnt my lesson poking around ominous doorways."
+	DESCRIBE.CRITTER_FIGGY = "I know a hard worker when I see 'em!"
+	DESCRIBE.GIANT_TREE_BIRDNEST = "Hah! I'm impressed those shells didn't crack from that fall."
+	
+    DESCRIBE.SLUDGE = "Awfully digusting, but probably worth something."
+	DESCRIBE.SLUDGE_OIL = "At the end of the day, fuel is fuel."
+    DESCRIBE.SLUDGE_SACK = "It's all slimey now, probably not the best storage."
+	DESCRIBE.CANNONBALL_SLUDGE_ITEM = "Wouldn't want to be on the receiving end of this one."
+	DESCRIBE.BOAT_BUMPER_SLUDGE = "Seems safe enough."
+	DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "I'm a little worried putting this on my boat."
+    DESCRIBE.BOATPATCH_SLUDGE = "Better hammer it in too."
+    DESCRIBE.UM_COPPER_PIPE = "Wasn't expecting to find these out here."
+    DESCRIBE.BRINE_BALM  = "Better be worth its salt."
+    DESCRIBE.UNCOMPROMISING_FISHINGNET = DESCRIBE.FISHINGNET
+	DESCRIBE.UM_AMBER = "Not sure what kind of rock this."
+    DESCRIBE.UM_BEEGUN = "Bees always have been crafty. But this is something else."
+	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.SUNKENCHEST_ROYAL = "Oooh, real fancy now aren't we!"
+	DESCRIBE.STEERINGWHEEL_COPPER = "Keep on turning, nice and smooth."
+	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "Real nice piece a'work."
+	DESCRIBE.BOAT_BUMPER_COPPER = "Gonna take a lot to bust through that."
+	DESCRIBE.BOAT_BUMPER_COPPER_KIT = "Took some time to wield it all."
+	DESCRIBE.UM_DREAMCATCHER = "No time for day dreaming."
+	DESCRIBE.UM_BRINEISHMOSS = "Uh huh, it's moss alright."
+	DESCRIBE.UM_COALESCED_NIGHTMARE = "Was this in my noggin?"
+	DESCRIBE.SLUDGE_CORK = "It should help me plug up that sludge."
+	DESCRIBE.SLUDGESTACK = "Might be worth giving it a look."
+	DESCRIBE.SPECTER_SHIPWRECK = "Some poor craftsmanship is what I'm seeing." 
+	
+	DESCRIBE.UNCOMPROMISING_HARPOON = "Stabbing things from a distance has never been easier."
+	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
+	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
+	DESCRIBE.UM_MAGNERANG = "Hefty, like tossin' round a horseshoe."
+	DESCRIBE.UM_MAGNERANGREEL = "I love these things!"
+	DESCRIBE.SIREN_THRONE = "Oh wow, another rock."
+	DESCRIBE.LAVASPIT_SLUDGE = "It's the factory fire all over again!"
+
+	DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_BLOCKER = "For a bunch of bees, they sure know how to make a wall."
+
+	DESCRIBE.PORTABLEBOAT_ITEM = "Tiny boat is wimpy!"
+	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "Mighty wind makes mighty light!"
+	
+	DESCRIBE.WIXIE_PIANO = "This would've been right up Charlie's alley."
+	--I can't play a PIANO as a god damn SHADOW. FUCK.
+	DESCRIBE.WIXIE_CLOCK = "Broken huh? Wouldn'tve happened if it were made of steel!"
+	DESCRIBE.WIXIE_WARDROBE = "Give me a steel locker any day of the week."
+	DESCRIBE.CHARLES_T_HORSE = "What kind of kid would want THIS?"
+
+	DESCRIBE.UM_ORNAMENT_OPOSSUM = "This critters more bark than bite."
+	DESCRIBE.UM_ORNAMENT_RAT = "Don't go chewing holds in things when my back is turned!"
+	
+	DESCRIBE.TRINKET_WATHOM1 = "All that for a hunk of junk..."

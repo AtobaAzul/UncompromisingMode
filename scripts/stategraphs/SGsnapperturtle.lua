@@ -6,9 +6,9 @@ local actionhandlers =
 }
 
 local function IsSpeenDone(inst,data)
-if data ~= nil and data.name == "speendone" and inst.sg:HasStateTag("speen") then
-inst.sg:GoToState("speen_pst")
-end
+	if data ~= nil and data.name == "speendone" and inst.sg:HasStateTag("speen") then
+		inst.sg:GoToState("speen_pst")
+	end
 end
 
 local function GetHome(inst)
@@ -16,12 +16,12 @@ local function GetHome(inst)
 end
 
 local function Splash(inst)
-local x,y,z = inst.Transform:GetWorldPosition()
-if not TheWorld.Map:IsAboveGroundAtPoint(x,y,z) then
-	local splash = SpawnPrefab("splash")
-	splash.Transform:SetPosition(x,y,z)
-	splash.Transform:SetScale(2,1.5,2)
-end
+	local x,y,z = inst.Transform:GetWorldPosition()
+	if not TheWorld.Map:IsAboveGroundAtPoint(x,y,z) then
+		local splash = SpawnPrefab("splash")
+		splash.Transform:SetPosition(x,y,z)
+		splash.Transform:SetScale(2,1.5,2)
+	end
 end
 
 
@@ -484,4 +484,4 @@ CommonStates.AddFrozenStates(states)
 
 CommonStates.AddWalkStates(states, nil, nil, nil, true)
 
-return StateGraph("hound", states, events, "taunt", actionhandlers)
+return StateGraph("snapperturtle", states, events, "idle", actionhandlers)

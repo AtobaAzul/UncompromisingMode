@@ -23,7 +23,8 @@ return Class(
                         end) -- play this animation instead
                     end
                 end)]]
-				inst:DoTaskInTime(84 * FRAMES, function(inst)
+                --previously 84*FRAMES, in case we ever want to return death.
+				inst:DoTaskInTime(0 * FRAMES, function(inst)
 					if inst.PutBackOnGround ~= nil then
 						inst:PutBackOnGround()
 						inst:RemoveTag("VoidDoomed")
@@ -42,5 +43,5 @@ return Class(
             end
         end
 
-        inst:DoPeriodicTask(1, CheckLand)
+        inst:DoPeriodicTask(0.75, CheckLand)
     end)

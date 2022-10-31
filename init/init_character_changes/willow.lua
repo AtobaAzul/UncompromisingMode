@@ -185,7 +185,7 @@ end
 
 env.AddPrefabPostInit("lighter", function(inst)
 	if not TheWorld.ismastersim then
-		return 
+		return
 	end
 	
 	inst:AddTag("lighter")
@@ -198,7 +198,7 @@ env.AddPrefabPostInit("lighter", function(inst)
 				_SetOnEquip(inst, owner)
 			end
 				
-			if owner:HasTag("pyromaniac") then
+			if owner:HasTag("pyromaniac") and inst.components.fueled ~= nil then
 				inst.components.fueled:StopConsuming()
 			end
 		end

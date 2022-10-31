@@ -134,6 +134,24 @@ createburrow.rmb = true
 createburrow.distance = 2
 createburrow.mount_valid = false
 
+local charge_powercell = AddAction(
+	"CHARGE_POWERCELL",
+	GLOBAL.STRINGS.ACTIONS.CHARGE_POWERCELL,
+    function(act)
+	local target = act.target or act.invobject
+
+    if (target ~= nil and target:HasTag("powercell")) and (act.doer ~= nil and act.doer:HasTag("batteryuser")) then
+        act.doer.components.batteryuser:ChargeFrom(target)
+		return true
+    else
+        return false
+    end
+end)
+
+charge_powercell.instant = true
+charge_powercell.rmb = true
+charge_powercell.priority = HIGH_ACTION_PRIORITY
+
 local _RummageFn = GLOBAL.ACTIONS.RUMMAGE.fn
 
 GLOBAL.ACTIONS.RUMMAGE.fn = function(act)
@@ -147,10 +165,12 @@ GLOBAL.ACTIONS.RUMMAGE.fn = function(act)
 		if GLOBAL.TheWorld.components.skullchestinventory.trunk and GLOBAL.TheWorld.components.skullchestinventory.trunk.components.container:IsOpen() and not GLOBAL.TheWorld.components.skullchestinventory.trunk.components.container:IsOpenedBy(act.doer) then
 			return false, "INUSE"
 		end
+	elseif targ ~= nil and targ:HasTag("winona_notouchy") and not act.doer:HasTag("handyperson") then
+		return false, "WINONATOOLBOX"
 	end
-
 	return _RummageFn(act)
 end
+
 
 if TUNING.DSTU.WICKERNERF then
 	local _ReadFn = GLOBAL.ACTIONS.READ.fn
@@ -162,7 +182,34 @@ if TUNING.DSTU.WICKERNERF then
 				return false
 			end
 		end
-		
+
 		return _ReadFn(act)
+	end
+end
+
+local _UpgradeStrFn = GLOBAL.ACTIONS.UPGRADE.strfn
+
+GLOBAL.ACTIONS.UPGRADE.strfn = function(act)
+	if act.target ~= nil and act.target:HasTag(GLOBAL.UPGRADETYPES.SLUDGE_CORK.."_upgradeable") then
+		return "SLUDGE_CORK"
+	end
+	return _UpgradeStrFn(act)
+end
+
+local _AddFuelFn = GLOBAL.ACTIONS.ADDFUEL.fn
+
+GLOBAL.ACTIONS.ADDFUEL.fn = function(act)
+    if act.doer.components.inventory and act.invobject.components.finiteuses ~= nil and act.invobject:HasTag("sludge_oil") then
+		local fuel = act.invobject
+        if fuel then
+            if act.target.components.fueled and act.target.components.fueled:TakeFuelItem(fuel, act.doer) then
+                return true
+            else
+                --print("False")
+                act.doer.components.inventory:GiveItem(fuel)
+            end
+        end
+	else
+		return _AddFuelFn(act)
 	end
 end

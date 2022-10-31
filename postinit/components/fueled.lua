@@ -5,10 +5,8 @@ env.AddComponentPostInit("fueled", function(self)
 	local _TakeFuelItem = self.TakeFuelItem
 
 	function self:TakeFuelItem(item, doer)
-		if self:CanAcceptFuelItem(item) and item.components ~= nil and item.components.fuel.fueltype == FUELTYPE.BURNABLE then
-			local oldsection = self:GetCurrentSection()
-
-			local wetmult = item:GetIsWet() and TUNING.DSTU.WET_FUEL_PENALTY or 1
+		if self:CanAcceptFuelItem(item) and item.components ~= nil and item.components.finiteuses ~= nil and item:HasTag("sludge_oil") then
+			local wetmult = item:GetIsWet() and TUNING.WET_FUEL_PENALTY or 1
 			local masterymult = doer ~= nil and doer.components.fuelmaster ~= nil and doer.components.fuelmaster:GetBonusMult(item, self.inst) or 1
 			self:DoDelta(item.components.fuel.fuelvalue * self.bonusmult * wetmult * masterymult, doer)
 
@@ -17,7 +15,7 @@ env.AddComponentPostInit("fueled", function(self)
 				fuelvalue = item.components.fuel.fuelvalue
 				item.components.fuel:Taken(self.inst)
 			end
-			item:Remove()
+			item.components.finiteuses:Use()
 
 			if self.ontakefuelfn ~= nil then
 				self.ontakefuelfn(self.inst)

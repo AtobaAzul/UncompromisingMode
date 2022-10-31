@@ -29,8 +29,10 @@ end
 
 local function onequip_blue(inst, owner)
 	
-	if inst.skinname ~= nil then
-		owner.AnimState:OverrideSymbol("swap_body", "torso_ancient_amulet_red_demoneye", "redamulet")
+	local skin_build = inst:GetSkinBuild()
+	if skin_build ~= nil then
+		owner:PushEvent("equipskinneditem", inst:GetSkinName())
+		owner.AnimState:OverrideSymbol("swap_object", skin_build or "torso_ancient_amulet_red_demoneye", "redamulet")	
 	else
 		owner.AnimState:OverrideSymbol("swap_body", "torso_amulets_ancient", "redamulet")
 	end
@@ -53,6 +55,10 @@ local function onequip_blue(inst, owner)
 end
 
 local function onunequip_blue(inst, owner)
+	local skin_build = inst:GetSkinBuild()
+	if skin_build ~= nil then
+		owner:PushEvent("unequipskinneditem", inst:GetSkinName())
+	end
     owner.AnimState:ClearOverrideSymbol("swap_body")
 
     inst:RemoveEventCallback("attacked", inst.orbfn, owner)
@@ -196,35 +202,4 @@ local function fn()
     return inst
 end
 
-local function amulet_skin()
-	local inst = fn()
-	
-    inst.AnimState:SetBank("ancient_amulet_red_demoneye")
-    inst.AnimState:SetBuild("ancient_amulet_red_demoneye")
-	
-	inst.skinname = "twisted_antler"
-	
-	if inst.components.inventoryitem ~= nil then
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/ancient_amulet_red_demoneye.xml"
-	end
-
-	return inst
-end
-
-return Prefab("ancient_amulet_red", fn, assets),
-	CreateModPrefabSkin("ancient_amulet_red_demoneye",
-	{
-		assets = {
-			Asset("ANIM", "anim/ancient_amulet_red_demoneye.zip"),
-		},
-		base_prefab = "ancient_amulet_red",
-		fn = amulet_skin, -- This is our constructor!
-		rarity = "Timeless",
-		reskinable = true,
-		
-		build_name_override = "ancient_amulet_red_demoneye",
-		
-		type = "item",
-		skin_tags = { },
-		release_group = 0,
-	})
+return Prefab("ancient_amulet_red", fn, assets)

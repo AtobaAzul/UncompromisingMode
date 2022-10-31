@@ -266,13 +266,13 @@ local states = {
 
 		timeline =
 		{
-			TimeEvent(2*FRAMES, function(inst)
+			TimeEvent(10*FRAMES, function(inst)
 				inst.SoundEmitter:PlaySound("dontstarve/creatures/koalefant/angry")
 				if inst.components.combat.target and inst.components.combat.target.ShakeCamera then
 					inst.components.combat.target:ShakeCamera(CAMERASHAKE.FULL, 0.75, 0.01, 1.5, 40)
 				end
 			end),
-			TimeEvent(2*FRAMES, function(inst) DisarmTarget(inst, inst.components.combat.target) end),
+			TimeEvent(10*FRAMES, function(inst) DisarmTarget(inst, inst.components.combat.target) end),
 		},
 
 		events=

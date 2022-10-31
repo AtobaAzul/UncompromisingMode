@@ -1,6 +1,10 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
+--TUNING.WOLFGANG_HEALTH = 225
+--TUNING.WOLFGANG_HUNGER = 225
+--TUNING.WOLFGANG_SANITY = 175
+
 local function UpdateHungerDrain(inst)
 	local hunger = inst.components.hunger:GetPercent()
 

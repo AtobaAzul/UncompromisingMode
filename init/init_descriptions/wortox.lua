@@ -115,7 +115,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.SPOREPACK = "It is very rude, and rots your food!"
 	DESCRIBE.SALTPACK = "I can now frolic through the snow in peace!"
 	
-	DESCRIBE.SCORPION = "It crawls, creeps, and makes you sleep!"
+	DESCRIBE.UM_SCORPION = "It crawls, creeps, and makes you sleep!"
 	DESCRIBE.SCORPIONCARAPACE = "This food is below even mortal tastes!"
 	DESCRIBE.SCORPIONCARAPACECOOKED = "Willow was wrong this time, fire did not improve it."
 	DESCRIBE.HARDSHELLTACOS = "It may be acceptible to mortals now, but not me!"
@@ -351,6 +351,81 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 		CHARGE_FULL ="Can't do that silly goose, Hyuhu!",
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "That's the ticket!"
-	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "/Zipped/ and /zapped!/"
-	DESCRIBE.UM_DEVILED_EGGS = "You're yolking me!"
+	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "Zipped and zapped!"
 	
+	----UNDER THE WEATHER----
+	
+	DESCRIBE.WINONA_TOOLBOX = "A place to put the tools of trade."
+	ACTIONFAIL.WINONATOOLBOX = "My tools of trade are in another type of box."
+	DESCRIBE.POWERCELL = "."
+	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = ""
+	DESCRIBE.MINERHAT_ELECTRICAL = "I can fill it with shock and awe, hyuyuyuyu!"
+	DESCRIBE.OCEAN_SPEAKER = "It plays a tune that could spell our doom. Hyuyu!" --Oh gee oh fuck I'm out of luck!!!!!
+	--DESCRIBE.UM_SIREN = "My, is that a siren on the horizon?"
+
+	--DESCRIBE.OCUPUS_BEAK = ""
+	DESCRIBE.OCUPUS_TENTACLE = "You'd have to be a real sucker to eat this."
+	DESCRIBE.OCUPUS_TENTACLE_EYE = "I'm glad we're seeing eye to eye now."
+	DESCRIBE.OCUPUS_TENTACLE_COOKED = ""
+	
+	DESCRIBE.ARMOR_REED_UM = "It'll fall apart in a small breeze!"
+	DESCRIBE.ARMOR_SHARKSUIT_UM = "It makes me as sleek as some ocean freak."
+	DESCRIBE.ROCKJAWLEATHER = "Just a flesh wound."
+	
+	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
+	DESCRIBE.STUFFED_PEEPER_POPPERS = "The mortals surely can't like this."
+	DESCRIBE.UM_DEVILED_EGGS = "You're yolking me!"
+	DESCRIBE.LUSH_ENTRANCE = "Oh my, hoho! What an ominous hole!"
+	DESCRIBE.CRITTER_FIGGY = "We could be companions, I feel that'd be ideal!"
+	DESCRIBE.GIANT_TREE_BIRDNEST = "The nest of a bird, or so I've been told."
+	
+    DESCRIBE.SLUDGE = "A slick of slime."
+	DESCRIBE.SLUDGE_OIL = "A putrid smell to wrinkle my nose."
+    DESCRIBE.SLUDGE_SACK = "Icky, sticky and somewhat fishy."
+	DESCRIBE.CANNONBALL_SLUDGE_ITEM = "It will leave foe alike in smithereens!"
+	DESCRIBE.BOAT_BUMPER_SLUDGE = "With this sludge, our boat won't budge!"
+	DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "With this sludge, our boat won't budge!"
+    DESCRIBE.BOATPATCH_SLUDGE = "When we're struck, plug it up with muck!"
+    DESCRIBE.UM_COPPER_PIPE = "Who knew metal grew, hyuyuyu."
+    DESCRIBE.BRINE_BALM  = "Must I rub this ooey, gooey, salty sea slime into my nice soft fur?"
+    DESCRIBE.UNCOMPROMISING_FISHINGNET = DESCRIBE.FISHINGNET
+	DESCRIBE.UM_AMBER = "A prison for plants, and bugs alike."
+    DESCRIBE.UM_BEEGUN = "You better bee quick on the draw."
+	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.SUNKENCHEST_ROYAL = "A king's ransom."
+	DESCRIBE.STEERINGWHEEL_COPPER = "Take the wheel!"
+	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "I could steer the world if I desired!"
+	DESCRIBE.BOAT_BUMPER_COPPER = "Huff and puff, you won't blow this down!"
+	DESCRIBE.BOAT_BUMPER_COPPER_KIT = "It's tough stuff, I do say!"
+	DESCRIBE.UM_DREAMCATCHER = "Oh me, Oh my, a door into your mind!"
+	DESCRIBE.UM_BRINEISHMOSS = "I'm the boss of this moss, see?"
+	DESCRIBE.UM_COALESCED_NIGHTMARE = "What is it that lurks in the minds of men?"
+	DESCRIBE.SLUDGE_CORK = "A boat leak it won't plug, it's much too snug!" --is this a stretch? yes. yes it is.
+	DESCRIBE.SLUDGESTACK = "Hyuyu, watch it spew sludge out the wazoo!" --yea
+	DESCRIBE.SPECTER_SHIPWRECK = "A place of ruin, much too soon." 
+	
+	DESCRIBE.UNCOMPROMISING_HARPOON = "Stabbing things from a distance has never been easier."
+	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
+	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
+	DESCRIBE.UM_MAGNERANG = "Round and round it goes!"
+	DESCRIBE.UM_MAGNERANGREEL = "Keep your enemies close!"
+	DESCRIBE.SIREN_THRONE = "What a shock, it's a rock!"
+	DESCRIBE.LAVASPIT_SLUDGE = "A fire from Hell to quell!"
+	
+	DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_BLOCKER = "We must find a breach in their bee fences!"
+
+	DESCRIBE.PORTABLEBOAT_ITEM = "We need a mote to help this boat float!"
+	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "Those humans are quite clever!"
+	
+	DESCRIBE.WIXIE_PIANO = "How about a jaunty tune?"
+	DESCRIBE.WIXIE_CLOCK = "Cuckoo! Cuckoo!"
+	DESCRIBE.WIXIE_WARDROBE = "Hmm? A portal of some kind?"
+	DESCRIBE.CHARLES_T_HORSE = "What secrets do you hold? I can't wait to find out!"
+
+	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Do you like tricks too?"
+	DESCRIBE.UM_ORNAMENT_RAT = "Catch him by the tail!"
+	
+	DESCRIBE.TRINKET_WATHOM1 = "You've met with a terrible fate, haven't you?"

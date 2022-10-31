@@ -1,33 +1,85 @@
 require "prefabutil" -- for the MakePlacer function
 
+local assets = {
+	Asset("ANIM", "anim/um_goo_blue.zip"),
+}
+
+local function FxAppear(inst)
+	SpawnPrefab("blueberryexplosion").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	SpawnPrefab("blueberrypuddle").Transform:SetPosition(inst.Transform:GetWorldPosition())
+end
+
+local function on_deactivate(inst)
+    if inst.components.lootdropper ~= nil then
+		if inst.Harvestable == "full" then
+			if math.random() > 0.1 then
+				inst.components.lootdropper:SpawnLootPrefab("giant_blueberry")
+			else
+				local berryman = SpawnPrefab("fruitbat")
+				berryman.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			end
+		end	
+    end
+    if inst.Harvestable == "regrow" then
+		inst:Remove()
+	else
+		inst.components.workable:SetWorkLeft(1)
+		inst.Harvestable = "regrow"
+	end
+end
+
+
+local function on_blueberry_dug_up(inst, digger)
+	if digger:HasTag("player") then
+		if inst.Harvestable == "full" then
+			on_deactivate(inst)
+			inst.AnimState:PlayAnimation("dig")
+			inst.AnimState:PushAnimation("spawn")
+			inst.AnimState:PushAnimation("trap_idle")
+			inst.components.workable:SetWorkable(false)
+			inst:DoTaskInTime(5, function(inst)
+				inst.components.workable:SetWorkable(true)
+			end)
+		else
+			inst:Remove()
+		end
+	else
+		inst.components.workable:SetWorkLeft(1)
+	end
+end
+
+local function MakeNotWinter(inst)
+	inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*1.1)
+	inst:RemoveComponent("workable")
+	inst:AddComponent("workable")
+    inst.components.workable:SetWorkAction(ACTIONS.DIG)
+    inst.components.workable:SetWorkLeft(1)
+    inst.components.workable:SetOnFinishCallback(on_blueberry_dug_up)
+    inst.components.workable:SetWorkable(true)
+end
+
+local function Melt(inst)
+	MakeNotWinter(inst)
+	inst.AnimState:PlayAnimation("melt")
+	inst.AnimState:PushAnimation("idle"..math.random(1,4))
+end
 
 local function on_anim_over(inst)
     if inst.components.mine.issprung then
         return
     end
-
 	if inst.froze then
-	if inst.Harvestable then
-	inst.AnimState:PushAnimation("idle_frozen", true)
-	else
-	inst.AnimState:PushAnimation("trap_idle", true)
+		if inst.Harvestable == "full" and TheWorld.state.iswinter then
+			inst.AnimState:PushAnimation("idle_frozen", true)
+			elseif not TheWorld.state.iswinter  then
+			inst.froze = false
+			Melt(inst)
+		else
+			inst.AnimState:PushAnimation("trap_idle", true)
+		end
+	elseif not TheWorld.state.iswinter then
+		inst.AnimState:PushAnimation("idle"..math.random(1,4))
 	end
-	else
-    local random_value = math.random()
-    if random_value < 0.4 then
-        inst.AnimState:PushAnimation("idle_2")
-        -- inst.SoundEmitter:PlaySound("turnoftides/creatures/together/starfishtrap/idle")
-        inst.AnimState:PushAnimation("idle", true)
-
-
-    elseif random_value < 0.8 then
-        inst.AnimState:PushAnimation("idle_3")
-        -- inst.SoundEmitter:PlaySound("turnoftides/creatures/together/starfishtrap/idle")
-        inst.AnimState:PushAnimation("idle", true)
-    end
-	end
-
-	
 end
 
 -- Copied from mine.lua to emulate its mine test.
@@ -35,30 +87,32 @@ local mine_test_fn = function(target, inst)
     return not (target.components.health ~= nil and target.components.health:IsDead())
             and (target.components.combat ~= nil and target.components.combat:CanBeAttacked(inst))
 end
+
 local mine_test_tags = { "monster", "character", "animal" }
 local mine_must_tags = { "_combat" }
 local mine_no_tags = { "notraptrigger", "flying", "ghost", "playerghost", "snapdragon" }
 
 local function do_snap(inst)
-    -- We're going off whether we hit somebody or not, so play the trap sound.
-	if inst.Harvestable then
-    inst.SoundEmitter:PlaySound("turnoftides/creatures/together/starfishtrap/trap")
-
-    -- Do an AOE attack, based on how the combat component does it.
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local target_ents = TheSim:FindEntities(x, y, z, 1.1*TUNING.STARFISH_TRAP_RADIUS, mine_must_tags, mine_no_tags, mine_test_tags)
-    for i, target in ipairs(target_ents) do
-        if target ~= inst and target.entity:IsVisible() and mine_test_fn(target, inst) then
-            target.components.combat:GetAttacked(inst, TUNING.STARFISH_TRAP_DAMAGE)
-        end
-    end
-	local otherbombs = TheSim:FindEntities(x, y, z, 3*TUNING.STARFISH_TRAP_RADIUS, {"blueberrybomb"}, mine_no_tags)
-    for i, target in ipairs(otherbombs) do
-        if target ~= inst and target.components.mine and not target.components.mine.issprung and not target.froze then
-		target.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*12)
-        end
-    end
-	inst.Harvestable = false
+	if inst.Harvestable == "full" then
+		inst.AnimState:PushAnimation("spawn")
+		inst.AnimState:PushAnimation("trap_idle", true)
+		inst.SoundEmitter:PlaySound("turnoftides/creatures/together/starfishtrap/trap")
+		FxAppear(inst)
+		-- Do an AOE attack, based on how the combat component does it.
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local target_ents = TheSim:FindEntities(x, y, z, 1.1*TUNING.STARFISH_TRAP_RADIUS, mine_must_tags, mine_no_tags, mine_test_tags)
+		for i, target in ipairs(target_ents) do
+			if target ~= inst and target.entity:IsVisible() and mine_test_fn(target, inst) then
+				target.components.combat:GetAttacked(inst, TUNING.STARFISH_TRAP_DAMAGE)
+			end
+		end
+		local otherbombs = TheSim:FindEntities(x, y, z, 3*TUNING.STARFISH_TRAP_RADIUS, {"blueberrybomb"}, mine_no_tags)
+		for i, target in ipairs(otherbombs) do
+			if target ~= inst and target.components.mine and not target.components.mine.issprung and not target.froze then
+			target.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*12)
+			end
+		end
+		inst.Harvestable = "regrow"
 	end
     if inst._snap_task ~= nil then
         inst._snap_task:Cancel()
@@ -67,86 +121,51 @@ local function do_snap(inst)
 end
 
 local function Regrow(inst)
-inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*1.1)
+	inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*1.1)
     inst.components.mine:Reset()
-	inst.Harvestable = true
+	inst.Harvestable = "full"
 end
+
 local function CheckTimeRegrow(inst)
-if TheWorld.state.iswinter then
-inst.pendingregrow = true
-else
-Regrow(inst)
+	if TheWorld.state.iswinter then
+		inst.pendingregrow = true
+	else
+		Regrow(inst)
+	end
 end
-end
+
 local function start_reset_task(inst)
 	inst.components.timer:StartTimer("regrow", 3840)
 end
 
 local function on_explode(inst, target)
     inst.AnimState:PlayAnimation("trap")
-    inst.AnimState:PushAnimation("trap_idle", true)
 	inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*1.1) --Gotta Reset
     inst:RemoveEventCallback("animover", on_anim_over)
-
     if target ~= nil and inst._snap_task == nil then
         local frames_until_anim_snap = 40
         inst._snap_task = inst:DoTaskInTime(frames_until_anim_snap * FRAMES, do_snap)
     end
-
     start_reset_task(inst)
 end
 
 local function on_reset(inst)
     inst:ListenForEvent("animover", on_anim_over)
-
-    --if inst.AnimState:IsCurrentAnimation("trap_idle") then
-        inst.AnimState:PlayAnimation("reset")
-        --- scott this one is playing as expected
-        inst.SoundEmitter:PlaySound("turnoftides/creatures/together/starfishtrap/idle")
-        inst.AnimState:PushAnimation("idle", true)
-    --end
+    inst.AnimState:PlayAnimation("reset")
+    inst.SoundEmitter:PlaySound("turnoftides/creatures/together/starfishtrap/idle")
+    inst.AnimState:PushAnimation("idle"..math.random(1,4), true)
 end
 
 local function on_sprung(inst)
     inst.AnimState:PlayAnimation("trap_idle", true)
 	inst.AnimState:PushAnimation("trap_idle", true)
     inst.AnimState:SetTime(math.random() * inst.AnimState:GetCurrentAnimationLength())
-
     inst:RemoveEventCallback("animover", on_anim_over)
-
     start_reset_task(inst)
-end
-
-local function on_deactivate(inst)
-    if inst.components.lootdropper ~= nil then
-		if inst.Harvestable then
-
-		inst.components.lootdropper:SpawnLootPrefab("giant_blueberry")
-		end	
-
-    end
-
-    if inst.Harvestable == false then
-	inst:Remove()
-	else
-	inst.components.workable:SetWorkLeft(1)
-	inst.Harvestable = false
-	end
 end
 
 local function get_status(inst)
     return (inst.components.mine.issprung and "REGROWING") or (inst.froze and "FROZE") or "READY"
-end
-
-local function on_blueberry_dug_up(inst, digger)
-	if digger:HasTag("player") then
-	inst.AnimState:PlayAnimation("dig")
-	inst.AnimState:PushAnimation("trap_idle")
-
-    on_deactivate(inst)
-	else
-	inst.components.workable:SetWorkLeft(1)
-	end
 end
 
 local function calculate_mine_test_time()
@@ -166,97 +185,99 @@ local function on_save(inst, data)
 end
 
 local function on_blueberry_mine(inst)
-inst.components.lootdropper:SpawnLootPrefab("ice")
-local x,y,z = inst.Transform:GetWorldPosition()
-local players = TheSim:FindEntities(x,y,z,1.5,{"player"},{"ghost"})
-for i, v in ipairs(players) do
-if v.components.moisture ~= nil then
-v.components.moisture:DoDelta(5)
-end
-end
-
-inst.Harvestable = false
-inst.components.workable:SetWorkAction(ACTIONS.DIG)
-inst.components.workable:SetWorkLeft(1)
-inst.components.workable:SetOnFinishCallback(on_blueberry_dug_up)
-start_reset_task(inst)
-inst.AnimState:PlayAnimation("mine")
+	inst.components.lootdropper:SpawnLootPrefab("ice")
+	local x,y,z = inst.Transform:GetWorldPosition()
+	local players = TheSim:FindEntities(x,y,z,1.5,{"player"},{"ghost"})
+	for i, v in ipairs(players) do
+		if v.components.moisture ~= nil then
+			v.components.moisture:DoDelta(5)
+		end
+	end
+	inst.Harvestable = "regrow"
+	inst.components.workable:SetWorkAction(ACTIONS.DIG)
+	inst.components.workable:SetWorkLeft(1)
+	inst.components.workable:SetOnFinishCallback(on_blueberry_dug_up)
+	start_reset_task(inst)
+	FxAppear(inst)
+	inst.AnimState:PlayAnimation("mine")
+	inst.AnimState:PushAnimation("spawn")
+	inst.AnimState:PushAnimation("trap_idle")
 end
 
 local function MakeWinter(inst)
-inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*0)
-if inst.Harvestable then
-    inst.components.workable:SetWorkAction(ACTIONS.MINE)
-    inst.components.workable:SetWorkLeft(1)
-    inst.components.workable:SetOnFinishCallback(on_blueberry_mine)
-    inst.components.workable:SetWorkable(true)
-else
-    inst.components.workable:SetWorkAction(ACTIONS.DIG)
-    inst.components.workable:SetWorkLeft(1)
-    inst.components.workable:SetOnFinishCallback(on_blueberry_dug_up)
-    inst.components.workable:SetWorkable(true)
-end
-end
-
-local function MakeNotWinter(inst)
-inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*1.1)
-    inst.components.workable:SetWorkAction(ACTIONS.DIG)
-    inst.components.workable:SetWorkLeft(1)
-    inst.components.workable:SetOnFinishCallback(on_blueberry_dug_up)
-    inst.components.workable:SetWorkable(true)
-end
-
-local function on_load(inst, data)
-    if data ~= nil and data.reset_task_time_remaining ~= nil then
-        if inst._reset_task ~= nil then
-            inst._reset_task:Cancel()
-        end
-	inst.Harvestable = data.Harvestable
-        inst._reset_task = inst:DoTaskInTime(data.reset_task_time_remaining, reset)
-        inst._reset_task_end_time = GetTime() + data.reset_task_time_remaining
-	inst.pendingregrow = data.pendingregrow
-    end
-	if TheWorld.state.iswinter then
-	inst.froze = true
-	MakeWinter(inst)
+	inst.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*0)
+	if inst.Harvestable == "full" then
+		inst.components.workable:SetWorkAction(ACTIONS.MINE)
+		inst.components.workable:SetWorkLeft(1)
+		inst.components.workable:SetOnFinishCallback(on_blueberry_mine)
+		inst.components.workable:SetWorkable(true)
 	else
-	inst.froze = false
-	MakeNotWinter(inst)
+		inst.components.workable:SetWorkAction(ACTIONS.DIG)
+		inst.components.workable:SetWorkLeft(1)
+		inst.components.workable:SetOnFinishCallback(on_blueberry_dug_up)
+		inst.components.workable:SetWorkable(true)
 	end
 end
 
-local function Melt(inst)
-MakeNotWinter(inst)
-inst.AnimState:PlayAnimation("melt")
-inst.froze = false
+local function on_load(inst, data)
+    if data then
+		if data.Harvestable then
+			inst.Harvestable = data.Harvestable
+		end
+		if data.reset_task_time_remaining then
+			if inst._reset_task then
+				inst._reset_task:Cancel()
+			end
+			inst._reset_task = inst:DoTaskInTime(data.reset_task_time_remaining, reset)
+			inst._reset_task_end_time = GetTime() + data.reset_task_time_remaining
+		end
+		if data.pendingregrow then
+			inst.pendingregrow = data.pendingregrow
+		end
+    end
+	if TheWorld.state.iswinter then
+		inst.froze = true
+		MakeWinter(inst)
+	else
+		inst.froze = false
+		MakeNotWinter(inst)
+	end
 end
+
+
+
 local function OnSpring(inst)
-if inst.pendingregrow or (inst.Harvestable == false and not inst.components.timer:TimerExists("regrow"))then
-Regrow(inst)
-inst.froze = false
-end
-if inst.Harvestable and inst.froze then
-inst:DoTaskInTime(3+math.random(0,15), Melt)
-end
+	if inst.pendingregrow or (inst.Harvestable == "regrow" and not inst.components.timer:TimerExists("regrow"))then
+		Regrow(inst)
+	end
+	if inst.Harvestable == "full" and inst.froze then
+		inst:RemoveEventCallback("animover",on_anim_over)
+		inst:DoTaskInTime(3+math.random(0,15), function(inst) 
+			Melt(inst)
+			inst:ListenForEvent("animover", on_anim_over)
+		end)
+	end
+	inst.froze = false
 end
 
 local function Freeze(inst)
-if TheWorld.state.iswinter then
-MakeWinter(inst)
-if inst.Harvestable then
-inst.AnimState:PlayAnimation("freeze")
-inst.froze = true
-end
-else
-inst.froze = false
-end
+	if TheWorld.state.iswinter then
+		MakeWinter(inst)
+		if inst.Harvestable == "full" then
+			inst.AnimState:PlayAnimation("freeze")
+			inst.froze = true
+		end
+	else
+		inst.froze = false
+	end
 end
 
 local function OnWinter(inst)
-if inst.froze ~= true then
-inst:DoTaskInTime(3+math.random(0,15), Freeze)
+	if inst.froze ~= true then
+		inst:DoTaskInTime(3+math.random(0,15), Freeze)
+	end
 end
-end
+
 local function blueberryplant()
     local inst = CreateEntity()
 
@@ -270,7 +291,7 @@ local function blueberryplant()
 
     inst.AnimState:SetBank("blueberryplant")
     inst.AnimState:SetBuild("blueberryplant")
-    inst.AnimState:PlayAnimation("idle", true)
+    inst.AnimState:PlayAnimation("idle"..math.random(1,4), true)
 
     inst:AddTag("trap")
 	inst:AddTag("blueberrybomb")
@@ -309,12 +330,13 @@ local function blueberryplant()
     inst.components.mine:SetReusable(false)
     Regrow(inst)
     -- Stop the blueberries from idling in unison.
-    inst.AnimState:SetTime(math.random() * inst.AnimState:GetCurrentAnimationLength())
+    inst.AnimState:SetTime(math.random(0.1,0.3) * inst.AnimState:GetCurrentAnimationLength())
 	inst:AddComponent("timer")
 	inst:ListenForEvent("timerdone", CheckTimeRegrow)
     -- Start the task for the characterizing additional idles.
     inst:ListenForEvent("animover", on_anim_over)
-	inst.Harvestable = true
+	
+	inst:DoTaskInTime(0,function(inst) if not inst.Harvestable then inst.Harvestable = "full" end end)
     inst.OnSave = on_save
     inst.OnLoad = on_load
 	inst.pendingregrow = false
@@ -378,6 +400,62 @@ local function blueberryflower()
     return inst
 end
 
-return Prefab("blueberryplant", blueberryplant),
+local function blueberryexplosion()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+
+    MakeInventoryPhysics(inst)
+
+    inst.AnimState:SetBank("treegrowthsolution")
+    inst.AnimState:SetBuild("um_goo_blue")
+
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	inst.Transform:SetScale(1.5,1.5,1.5)
+	inst.AnimState:PlayAnimation("use", false)
+	inst:ListenForEvent("animover",function(inst) inst:Remove() end)
+	inst.persists = false
+
+    return inst
+end
+
+local function blueberrypuddle()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+
+    MakeInventoryPhysics(inst)
+
+    inst.AnimState:SetBank("treegrowthsolution")
+    inst.AnimState:SetBuild("um_goo_blue")
+    inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+    inst.AnimState:SetLayer(LAYER_BACKGROUND)
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	inst.Transform:SetScale(1.5,1.5,1.5)
+    inst.AnimState:PlayAnimation("pre_idle", false)
+	inst.AnimState:PushAnimation("idle", false)
+	inst:ListenForEvent("animqueueover",function(inst) inst:Remove() end)
+	inst.persists = false
+
+    return inst
+end
+
+return Prefab("blueberryplant", blueberryplant,assets),
 Prefab("blueberryflower", blueberryflower),
-MakePlacer("blueberryflower_placer", "star_trap", "star_trap", "trap_idle")
+MakePlacer("blueberryflower_placer", "star_trap", "star_trap", "trap_idle"),
+Prefab("blueberryexplosion",blueberryexplosion),
+Prefab("blueberrypuddle",blueberrypuddle)

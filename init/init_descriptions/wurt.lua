@@ -35,8 +35,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
     DESCRIBE.UNCOMPROMISING_RAT = "It look like Spiderfolk, but it squeaking..?"
     DESCRIBE.UNCOMPROMISING_RATHERD = "Little eyes in hole! Hello!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "Little eyes in hole! Hello!"
-    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Little eyes in hole! Hello!"
-    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "A lot more eyes in this one! How many in there? One, two..."
+    DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Why you burying things in here..?"
+    DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Oh. This where stuff ends up? How it get here?"
 	
 	DESCRIBE.WINKY =
         {
@@ -349,8 +349,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "What he playing?!"
 	DESCRIBE.PIED_PIPER_FLUTE = "Maybe squeakies join Mermfolk kingdom with this?"
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "He stealing everything!!"
-	DESCRIBE.WINONA_TOOLBOX = "Weenowna-lady not like me playing with things inside..."
-	DESCRIBE.OCEAN_SPEAKER = "What it yelling at?"
 	
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "We go for swim now?"
 
@@ -364,18 +362,18 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	
 	----UNDER THE WEATHER----
 	
-	DESCRIBE.WINONA_TOOLBOX = "Put things in there for later, glurp."
+	DESCRIBE.WINONA_TOOLBOX = "Weenowna-lady not like me playing with things inside..."
 	ACTIONFAIL.WINONATOOLBOX = "Can't open lock!"
 	DESCRIBE.POWERCELL = "."
 	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "Give box to lights."
 	DESCRIBE.MINERHAT_ELECTRICAL = "Has a box now."
-	DESCRIBE.OCEAN_SPEAKER = "Loud box, florp!"
+	DESCRIBE.OCEAN_SPEAKER = "What it yelling at?"
 	--DESCRIBE.UM_SIREN = "Glorp is traitor!! Me think...?"
 	
-	--DESCRIBE.OCUPUS_BEAK = ""
-	--DESCRIBE.OCUPUS_TENTACLE = ""
-	--DESCRIBE.OCUPUS_TENTACLE_EYE = ""
-	--DESCRIBE.OCUPUS_TENTACLE_COOKED = ""
+	DESCRIBE.OCUPUS_BEAK = "Bird mouth?"
+	DESCRIBE.OCUPUS_TENTACLE = ""
+	DESCRIBE.OCUPUS_TENTACLE_EYE = "Eye ball, florp."
+	DESCRIBE.OCUPUS_TENTACLE_COOKED = "No! Not food."
 	
 	DESCRIBE.ARMOR_REED_UM = "Mermfolk use everything we got in swamp."
 	DESCRIBE.ARMOR_SHARKSUIT_UM = "Scales feel good on scales."
@@ -389,29 +387,52 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 	DESCRIBE.GIANT_TREE_BIRDNEST = "Florp! Baby birds in there!"
 	
     DESCRIBE.SLUDGE = "This stuff is... Glurp..."
-	DESCRIBE.SLUDGE_OIL = ""
+	DESCRIBE.SLUDGE_OIL = "Drip drop."
     DESCRIBE.SLUDGE_SACK = "Sloshy bag, florp."
 	DESCRIBE.CANNONBALL_SLUDGE_ITEM = "Goo hard now."
 	DESCRIBE.BOAT_BUMPER_SLUDGE = "Wobbley Goo keep boat strong."
 	DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "Wobbley."
-    DESCRIBE.BOATPATCH_SLUDGE = ""
-    DESCRIBE.UM_COPPER_PIPE = ""
-    DESCRIBE.UM_SALTSALVE  = "Like salt but this too salty!"
+    DESCRIBE.BOATPATCH_SLUDGE = "Little things stop the water. Want water."
+    DESCRIBE.UM_COPPER_PIPE = "glurpt?"
+    DESCRIBE.BRINE_BALM  = "Like salt, but this too salty!"
     DESCRIBE.UNCOMPROMISING_FISHINGNET = "Better not hurt them."
-	DESCRIBE.UM_AMBER = ""
-    DESCRIBE.UM_BEEGUN = "?"
-	DESCRIBE.SUNKENCHEST_ROYAL = "."
-	DESCRIBE.STEERINGWHEEL_COPPER = ""
-	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = ""
-	DESCRIBE.BOAT_BUMPER_COPPER = ""
-	DESCRIBE.BOAT_BUMPER_COPPER_KIT = ""
+	DESCRIBE.UM_AMBER = "Surprise rock!"
+    DESCRIBE.UM_BEEGUN = "Buzzys work for me now!"
+	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.SUNKENCHEST_ROYAL = "Need this. Bring to king."
+	DESCRIBE.STEERINGWHEEL_COPPER = "No taste good."
+	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "Shiny wheel thingy!"
+	DESCRIBE.BOAT_BUMPER_COPPER = "Boat look like Ironfolk, flurp."
+	DESCRIBE.BOAT_BUMPER_COPPER_KIT = "Make boat look like Ironfolk."
 	DESCRIBE.UM_DREAMCATCHER = "Bad sleep catcher? Florp. How that work?"
 	DESCRIBE.UM_BRINEISHMOSS = "Moss tasty"
-	DESCRIBE.UM_COALESCED_NIGHTMARE = ""
-	DESCRIBE.SLUDGE_CORK = ""
+	DESCRIBE.UM_COALESCED_NIGHTMARE = "Scary thingy. Bad thingy!"
+	DESCRIBE.SLUDGE_CORK = "Big plug thingy."
+	DESCRIBE.SLUDGESTACK = "Ooey Gooey."
+	DESCRIBE.SPECTER_SHIPWRECK = "Boat not round?" 
 	
-	DESCRIBE.UNCOMPROMISING_HARPOON = "Stabbing things from a distance has never been easier."
-	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
-	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
-	DESCRIBE.UM_MAGNERANG = "It'll come back and bring something with it."
-	DESCRIBE.UM_MAGNERANGREEL = ""
+	DESCRIBE.UNCOMPROMISING_HARPOON = "." -- unimplemented
+	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "." -- unimplemented
+	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "." -- unimplemented
+	DESCRIBE.UM_MAGNERANG = "Magnet? How that work?"
+	DESCRIBE.UM_MAGNERANGREEL = "Tiny horsey shoe!"
+	DESCRIBE.SIREN_THRONE = "Pretty lady's rock?"
+	DESCRIBE.LAVASPIT_SLUDGE = "Glorp! Too hot!"
+	
+	DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_BLOCKER = "Stinger wall! Glurp!"
+
+	DESCRIBE.PORTABLEBOAT_ITEM = "Mermfolk can float better!"
+	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "It make wind... into light?"
+	
+	DESCRIBE.WIXIE_PIANO = "Makes funny little sounds!"
+	DESCRIBE.WIXIE_CLOCK = "Pulling thingies makes pointy things spin!"
+	DESCRIBE.WIXIE_WARDROBE = "What inside? Is it bad?"
+	DESCRIBE.CHARLES_T_HORSE = "Like springy folk, but no springy."
+
+	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Swampy kitty!"
+	DESCRIBE.UM_ORNAMENT_RAT = "Sneaky thing taking nap?"
+	
+	DESCRIBE.TRINKET_WATHOM1 = "Look like Wathy! Maybe he want it?"

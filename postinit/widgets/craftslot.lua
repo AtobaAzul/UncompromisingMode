@@ -76,7 +76,8 @@ env.AddClassPostConstruct("widgets/redux/craftingmenu_hud", function(self)
 			self.craftingmenu.details_root.data and 
 			self.craftingmenu.details_root.data.recipe ~= nil and 
 			self.craftingmenu.details_root.data.recipe.name and 
-			STRINGS.UNCOMP_TOOLTIP[string.upper(self.craftingmenu.details_root.data.recipe.name)] ~= nil then
+			(STRINGS.UNCOMP_TOOLTIP[string.upper(self.craftingmenu.details_root.data.recipe.name)] ~= nil or 
+			STRINGS.PINETREE_TOOLTIP[string.upper(self.craftingmenu.details_root.data.recipe.name)] ~= nil) then
 				self.uncomptip.item_tip = self.craftingmenu.details_root.data.recipe.name
 				self.uncomptip.skins_spinner = self.craftingmenu.details_root.skins_spinner or nil
 				self.uncomptip:ShowTip()

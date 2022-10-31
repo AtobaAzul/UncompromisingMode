@@ -19,7 +19,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	GLASSCUTTER = "- Deals slightly more damage to Shadows.",
 	FEATHERHAT = "- Provides safety from territorial Pengulls.",
 	YELLOWAMULET = "- No longer breaks when empty.",
-	ORANGEAMULET = "- No longer breaks when empty.\n- Can be fueled with Nightmare Fuel.\n- Will pick certain plants too!",
+	ORANGEAMULET = "- No longer breaks when empty.\n- Will pick certain plants too!",
 	PURPLEAMULET = "- Grants bonus Nightmare Fuel from slain Shadows.",
 	PIGGYBACK = "- No Passive -10% movement speed while worn.\n- Decreases Player speed by 1% per item held.",
 	PREMIUMWATERINGCAN = "- Can contain and preserve ocean fish.",
@@ -38,6 +38,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	POTTEDFERN = "- Masks foul smells.",
 	SUCCULENT_POTTED = "- Masks foul smells.",
 	ENDTABLE = "- Masks foul smells when decorated.",
+	MULTITOOL_AXE_PICKAXE = "- Creates shockwaves when chopping/mining.",
 
 	--uncomp content
 	RAT_WHIP = "- Stronger when well fed.",
@@ -56,10 +57,26 @@ STRINGS.UNCOMP_TOOLTIP = {
     GASMASK = "- Provides protection against spore clouds.",
 	PLAGUEMASK = "- Provides protection against spore clouds.",
     FLORAL_BANDAGE = "- Restores extra health over time.",
-    DISEASECUREBOMB = "- Restores sickly plants."
+    DISEASECUREBOMB = "- Restores sickly plants.",
+	SLUDGE_OIL = "- Multi-use fuel for fires and lanterns alike.",
+}
+
+STRINGS.PINETREE_TOOLTIP = {
+	WALTERHAT = "- Wearing it makes scrapes and bruises feel less scary!",
+	HEALINGSALVE = "- My first aid training helps me get more out of this!",
+	TILLWEEDSALVE = "- My first aid training helps me get more out of this!",
+	BANDAGE = "- Restores a bit of extra health over time.\n- My first aid training helps me get more out of this!",
+    FLORAL_BANDAGE = "- Restores extra health over time.\n- My first aid training helps me get more out of this!",
+    BEDROLL_STRAW = "- A pine tree pioneer knows how to conserve energy when relaxing!",
+    BEDROLL_FURRY = "- A pine tree pioneer knows how to conserve energy when relaxing!",
+    TENT = "- A pine tree pioneer knows how to conserve energy when relaxing!",
+    SIESTAHUT = "- A pine tree pioneer knows how to conserve energy when relaxing!",
+    PORTABLETENT_ITEM = "- A pine tree pioneer knows how to conserve energy when relaxing!",
+    MEATRACK_HAT = "- If I go fast enough, it will dry even faster!"
 }
 
 local TOOLTIP = STRINGS.UNCOMP_TOOLTIP
+local PINETREETOOLTIP = STRINGS.PINETREE_TOOLTIP
 
 if GetModConfigData("beebox_nerf") then
 	TOOLTIP.BEEBOX = "- Reduced yield per stage.\n- Reduced maximum active bees."
@@ -120,27 +137,55 @@ end
 
 if TUNING.DSTU.GOTOBED then
 	TOOLTIP.BEDROLL_STRAW = "- May restore maximum health."
+	PINETREETOOLTIP.BEDROLL_STRAW = "- May restore maximum health.\n"..PINETREETOOLTIP.BEDROLL_STRAW
+	
 	TOOLTIP.BEDROLL_FURRY = "- May restore maximum health."
+	PINETREETOOLTIP.BEDROLL_FURRY = "- May restore maximum health.\n"..PINETREETOOLTIP.BEDROLL_FURRY
+	
 	TOOLTIP.TENT = "- May restore maximum health."
+	PINETREETOOLTIP.TENT = "- May restore maximum health.\n"..PINETREETOOLTIP.TENT
+	
     TOOLTIP.PORTABLETENT_ITEM = "- May restore maximum health."
+	PINETREETOOLTIP.PORTABLETENT_ITEM = "- May restore maximum health.\n"..PINETREETOOLTIP.PORTABLETENT_ITEM
+	
 	TOOLTIP.SIESTAHUT = "- A bit less efficient.\n- May restore maximum health."
+	PINETREETOOLTIP.SIESTAHUT = "- May restore maximum health.\n"..PINETREETOOLTIP.SIESTAHUT
 else
 	TOOLTIP.SIESTAHUT = "- A bit less efficient."
+	PINETREETOOLTIP.SIESTAHUT = "- A bit less efficient.\n"..PINETREETOOLTIP.SIESTAHUT
 end
 
 if TUNING.DSTU.SLEEPINGBUFF > 1 then
 	if TUNING.DSTU.GOTOBED then
 		TOOLTIP.BEDROLL_STRAW = TOOLTIP.BEDROLL_STRAW.."\n- Faster healing rate."
+		PINETREETOOLTIP.BEDROLL_STRAW = "- Faster healing rate.\n"..PINETREETOOLTIP.BEDROLL_STRAW
+		
 		TOOLTIP.BEDROLL_FURRY = TOOLTIP.BEDROLL_FURRY.."\n- Faster healing rate."
+		PINETREETOOLTIP.BEDROLL_FURRY = "- Faster healing rate.\n"..PINETREETOOLTIP.BEDROLL_FURRY
+		
 		TOOLTIP.TENT = TOOLTIP.TENT.."\n- Faster healing rate."
+		PINETREETOOLTIP.TENT = "- Faster healing rate.\n"..PINETREETOOLTIP.TENT
+		
 		TOOLTIP.SIESTAHUT = TOOLTIP.SIESTAHUT.."\n- Faster healing rate."
+		PINETREETOOLTIP.SIESTAHUT = "- Faster healing rate.\n"..PINETREETOOLTIP.SIESTAHUT
+		
 		TOOLTIP.PORTABLETENT_ITEM = TOOLTIP.PORTABLETENT_ITEM.."\n- Faster healing rate."
+		PINETREETOOLTIP.PORTABLETENT_ITEM = "- Faster healing rate.\n"..PINETREETOOLTIP.PORTABLETENT_ITEM
 	else
 		TOOLTIP.BEDROLL_STRAW = "- Faster healing rate."
+		PINETREETOOLTIP.BEDROLL_STRAW = "- Faster healing rate.\n"..PINETREETOOLTIP.BEDROLL_STRAW
+		
 		TOOLTIP.BEDROLL_FURRY = "- Faster healing rate."
+		PINETREETOOLTIP.BEDROLL_FURRY = "- Faster healing rate.\n"..PINETREETOOLTIP.BEDROLL_FURRY
+		
 		TOOLTIP.TENT = "- Faster healing rate."
+		PINETREETOOLTIP.TENT = "- Faster healing rate.\n"..PINETREETOOLTIP.TENT
+		
 		TOOLTIP.SIESTAHUT = "- Faster healing rate."
+		PINETREETOOLTIP.SIESTAHUT = "- Faster healing rate.\n"..PINETREETOOLTIP.SIESTAHUT
+		
 		TOOLTIP.PORTABLETENT_ITEM = "- Faster healing rate."
+		PINETREETOOLTIP.PORTABLETENT_ITEM = "- Faster healing rate.\n"..PINETREETOOLTIP.PORTABLETENT_ITEM
 	end
 end
 
@@ -155,8 +200,7 @@ if GetModConfigData("canedurability") then--is this modmain env.?
 end
 
 if TUNING.DSTU.WANDA_NERF then
-	TOOLTIP.POCKETWATCH_WEAPON = "- Deals less damage against shadows."
-	TOOLTIP.POCKETWATCH_REVIVE = "- Increased cooldown."
+	TOOLTIP.POCKETWATCH_REVIVE = "- Increased cooldown.\n- Gives health penalty."
 end
 
 if TUNING.DSTU.INSUL_THERMALSTONE then

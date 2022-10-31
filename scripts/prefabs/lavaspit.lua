@@ -45,6 +45,9 @@ local function TrySlowdown(inst, target)
 	
 	if inst.components.propagator ~= nil and target.components.combat ~= nil and target.components.health ~= nil and not target:HasTag("dragonfly") and not target:HasTag("lavae") then
 		target.components.health:DoDelta(-4)
+		
+		target:PushEvent("onignite")
+		
 		if inst.lobber ~= nil then
 			target.components.combat:SuggestTarget(inst.lobber)
 		end
@@ -188,7 +191,7 @@ local function slobberfn()
     end
 	
 	inst.lobber = nil
-	
+
 	inst.coolingtime = 8
 
     return inst
@@ -344,5 +347,6 @@ end
 
 return Prefab( "lavaspit", fn, assets),
 		Prefab( "lavaspit_slobber", slobberfn, assets),
+        Prefab("lavaspit_sludge", slobberfn, assets), --because FOR SOME REASON I can't use SetPrefabNameOverride...
 		Prefab("lavaspit_projectile", projectilefn),
 		Prefab("lavaspit_target", projectiletargetfn)

@@ -89,7 +89,14 @@ local function SpawnSnare(inst, target)
 		for theta = math.random() * dtheta, PI * 2, dtheta do
 			local x1 = x + r * math.cos(theta)
 			local z1 = z + r * math.sin(theta)
-			if map:IsPassableAtPoint(x1, 0, z1) and not map:IsPointNearHole(Vector3(x1, 0, z1)) then
+			local boat = map:GetPlatformAtPoint(x, z)
+			if boat then
+				if boat.components.health ~= nil and not boat.components.health:IsDead() then
+					boat.components.health:DoDelta(-25)
+					boat:PushEvent("spawnnewboatleak", {pt = target:GetPosition(), leak_size = "med_leak", playsoundfx = true, cause = "leif"})
+					break
+				end
+			elseif map:IsPassableAtPoint(x1, 0, z1) and not map:IsPointNearHole(Vector3(x1, 0, z1)) then
 				local spike = SpawnPrefab("rootspike")
 				spike.Transform:SetPosition(x1, 0, z1)
 
@@ -123,6 +130,7 @@ local function SpawnSnare(inst, target)
     end
     return true
 end
+
 local function find_leif_spawn_target(item)
     return not item.noleif
         and item.components.growable ~= nil

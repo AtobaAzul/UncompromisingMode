@@ -1,7 +1,7 @@
 local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
 
 --We can hack our way through the hounded component and create our own variables so we don't have to touch any of the private data --KoreanWaffles
-if not TUNING.DSTU.ISLAND_ADVENTURES then
+if not GLOBAL:TestForIA() then
     AddComponentPostInit("hounded", function(self)
         if not self.inst:HasTag("forest") then return end
 
@@ -33,22 +33,22 @@ if not TUNING.DSTU.ISLAND_ADVENTURES then
             ["spring"] = { "" },
             ["summer"] = { "" },
         }
-        if TUNING.DSTU.SPOREHOUNDS and not TUNING.DSTU.ISLAND_ADVENTURES then
-        self.seasonal_prefabs["autumn"] = {"sporehound"}
+        if TUNING.DSTU.SPOREHOUNDS and not GLOBAL:TestForIA() then
+            self.seasonal_prefabs["autumn"] = { "sporehound" }
         end
-        
-        if TUNING.DSTU.GLACIALHOUNDS and not TUNING.DSTU.ISLAND_ADVENTURES then
-        self.seasonal_prefabs["winter"] = {"glacialhound"}
+
+        if TUNING.DSTU.GLACIALHOUNDS and not GLOBAL:TestForIA() then
+            self.seasonal_prefabs["winter"] = { "glacialhound" }
         end
-        
-        if TUNING.DSTU.LIGHTNINGHOUNDS and not TUNING.DSTU.ISLAND_ADVENTURES then
-        self.seasonal_prefabs["spring"] = {"lightninghound"}
+
+        if TUNING.DSTU.LIGHTNINGHOUNDS and not GLOBAL:TestForIA() then
+            self.seasonal_prefabs["spring"] = { "lightninghound" }
         end
-        
-        if TUNING.DSTU.MAGMAHOUNDS and not TUNING.DSTU.ISLAND_ADVENTURES then
-        self.seasonal_prefabs["summer"] = {"magmahound"}
-        end    
-        
+
+        if TUNING.DSTU.MAGMAHOUNDS and not GLOBAL:TestForIA() then
+            self.seasonal_prefabs["summer"] = { "magmahound" }
+        end
+
         self.spawnlimit = 0
 
         --------------------------------------------------

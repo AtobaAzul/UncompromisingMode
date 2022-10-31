@@ -1,24 +1,21 @@
 name = "󰀕 Uncompromising Mode"
-description = 
+description =
 [[
-󰀔 [ Version 1.4.8.3.1 : "Winky, The Vile Vermin" ]
+󰀔 [ Version 1.5: "Calm Before the Storm" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
 Prominent features:
-- Winky, The Vile Vermin! April Fools... or so we thought.
-- Reworked Rat Raids, Reworked Rat AI, New Rats, and Items.
-- New Night Terrors (RNE), with new Shadow Creatures, Music, collectible masks.
-- Tooltips for Character and Item changes.
-- Alternate Skins available for the Cursed Antler, Feather Frock, Plague Mask, and Soul Amulet.
-- Brand New custom attacks for all Eye of Terror bosses.
-- And many more changes, there are too many to list!
+- Wathom, the Forgotten Parody
+- Reworks to the Bee Queen and Ancient Guardian. New Vets Curse item from Bee Queen.
+- New setpieces, and mysteries at sea.
+- Reed Armor, Shark Suit Armor, Magnerang, Fishing Net, and much more!
 
-󰀏 NEXT UPDATE: Calm Before The Storm.]]
+󰀏 NEXT UPDATE: Under the Weather, Part I.]]
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Squeaky Clean v1.4.8.3.1"
+version = "Calm Before the Storm v1.5"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
@@ -62,7 +59,7 @@ local function SkipSpace()
 end
 
 local function BinaryConfig(name, label, hover, default)
-    return { name = name, label = label, hover = hover, options = { {description = "Enabled", data = true}, {description = "Disabled", data = false}, }, default = default, }
+    return { name = name, label = label, hover = hover, options = { {description = "Enabled", data = true, hover = "Enabled."}, {description = "Disabled", data = false, hover = "Disabled."}, }, default = default, }
 end
 ------------------------------
 
@@ -86,7 +83,7 @@ configuration_options =
 	{
 		name = "rne chance",
 		label = "Night Terrors Chance",
-		hover = "Night Terrors have a default 20% chance to occur each night. Night Terrors are disabled before Day 5.",
+		hover = "Night Terrors have a default 40% chance to occur each night. Night Terrors are disabled before Day 5.",
 		options =
 		{
 			{description = "None", data = 100},
@@ -96,7 +93,7 @@ configuration_options =
 			{description = "80%", data = 0.2},
 			{description = "INSANITY", data = 0},
 		},
-		default = 0.8,
+		default = 0.6,
 	},
     BinaryConfig("harder_shadows", "Harder Nightmare Creatures", "Insanity is a big threat now. Those who pass the brink may never return.", true),
     BinaryConfig("rat_raids", "Rat Raids", "Rats will periodically be attracted to your base.", true),
@@ -141,21 +138,48 @@ configuration_options =
 		},
 		default = "default",
 	},
-	BinaryConfig("moon_transformations", "Moon Transformations","Certain things transform under the dim light of the full \"Moon\".", true),
+	--BinaryConfig("moon_transformations", "Moon Transformations","Certain things transform under the dim light of the full \"Moon\".", true),
 	SkipSpace(),
 ------------------------------
 -- Character Reworks --
 ------------------------------
     Header("Characters"),
 ------------------------------
-	BinaryConfig("funny rat", "Winky", "The Vile Vermin", true),
-    BinaryConfig("willow", "Willow", "Willow's Lighter now lasts forever when she holds it, she will retaliate when attacked by shadows.", true),
+	BinaryConfig("funny rat", "Winky", "Enable Uncompromising Mode's Winky, the Vile Vermin.", true),
+	BinaryConfig("holy fucking shit it's wathom", "Wathom", "Enable Uncompromising Mode's Wathom, the Abomination.", true),
+	BinaryConfig("wathom_maxdmg", "Wathom: Damage Cap", "Wathom's damage is capped at 600 to limit his absurd burst damage potential.", true),
+	{
+		name = "wathom_ampvulnerability",
+		label = "Wathom: Amped Vulnerability",
+		hover = "Wathom takes more damage when amped.",
+		options =
+		{
+			{description = "5x (Default)", data = 5},
+			{description = "4x", data = 4},
+			{description = "3x", data = 3},
+			{description = "2x", data = 2},
+		},
+		default = 5,
+	},
+	{
+		name = "wathom_armordamage",
+		label = "Wathom: Armor Damage Priority",
+		hover = "Wathom can take increased damage, choose if armor damage is ignored.",
+		options =
+		{
+			{description = "Include Armor", data = true, hover = "Wathom multiplies incoming damage by the current damage multiplier"},
+			{description = "Don't include armor", data = false, hover = "Wathom multiplies resulting damage by the current damage multiplier."},
+		},
+		default = true,
+	},
+	BinaryConfig("willow", "Willow", "Willow's Lighter now lasts forever when she holds it, she will retaliate when attacked by shadows.", true),
     BinaryConfig("warly", "Warly", "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.", true),
 	BinaryConfig("waxwell", "Maxwell", "Maxwell gets buffed versions of his classic shadows by reading the Codex Umbra. Disable for Maxwell mod compatibility!", true),
 	--BinaryConfig("wolfgang", "Improved/Balanced Wolfgang", "Wolfgang gains new perks and downsides. Read the patch notes included in the mod folder or workshop for details.", false),
 	BinaryConfig("wigfrid", "Wigfrid", "Reduced Wigfrids combat leeching effect to more balanced levels.", true),
 	BinaryConfig("wolfgang", "Experimental Wolfgang", "Wolfgang gains mightiness based on hunger level. Hunger drain increases the longer mighty is maintained.", false),
 	BinaryConfig("winonaworker", "Winona: Faster Working", "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.", true),
+	BinaryConfig("winonawackycats", "Experimental Winona Catapults", "Catapults no longer regenerate, have reduced health, and 34 AOE damage.", false),
 	BinaryConfig("winona_gen", "Winona: Generators", "Limits access to Winona's Generators to only allow her to use them", true),
 		{
 		name = "wortox",
@@ -172,7 +196,7 @@ configuration_options =
 	BinaryConfig("wickerbottom", "Wickerbottom: Sane Reading", "Wickerbottom/Maxwell can no longer read books while insane.", true),
 	BinaryConfig("on tentacles", "Wickerbottom: On Tentacles", "On Tentacles now spawns friendly tentacles that die over time, and do not drop tentacle spots.", true),
 	BinaryConfig("applied horticulture", "Wickerbottom: Horticulture", "\"Horticulture, Abridged\" now takes 1 Leafy Meat instead of 5 seeds, to better balance it from being too easily spammable early game.", true),
-	BinaryConfig("legacy_book_rain_recipe", "Wickerbottom: Rain Book Recipe", "Uncompromising Mode added a rain book before Klei did. This option returns the old recipe.", true),
+	BinaryConfig("book_recipes", "Wickerbottom: Book Recipe Tweaks", "Changes some book recipes to be slightly more balanced.", true),
 	BinaryConfig("wanda_nerf", "Experimental Wanda", "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", false),
 	BinaryConfig("wormwood_extrafiredmg", "Wormwood: Extra Fire Damage", "Increases Wormwood's fire damage multiplier to 1.75x, from 1.25x", true),
 	BinaryConfig("wormwood_plants", "Wormwood: Planting Sanity", "Increases the sanity loss from digging plants.", true),
@@ -319,10 +343,11 @@ configuration_options =
 -----------------------------
 	SkipSpace(),
 	Header("Items and Structures"),
+	BinaryConfig("no4crafts", "No 4-Ingredient Recipes", "Changes all 4-ingredient recipes to use 3 instead.", false),
 	BinaryConfig("scaledchestbuff", "Scaled Chest Buff", "Scaled chest is not worth the resources required. Enabling this buffs it to 25 slots. Toggling with scaled chests in existing world may cause crash.", true),
 	BinaryConfig("scalemailbuff", "Scalemail Buff", "Scalemail now spawns 3 Dimvaes to help you in combat", true),
 	BinaryConfig("canedurability", "Cane Durability (Off by default)", "Cane loses durability similarly to a whirly fan, note that UM walruses drop tusks 100% of the time with this on.", false),
-	BinaryConfig("gotobed", "Sleeping Buff", "Sleeping gives stats at a faster rate, and can heal max health loss. Siesta Lean-to hunger drain is now 50% of a Tent, instead of 33%.", true),
+	BinaryConfig("gotobed", "Sleeping Buff", "Sleeping can heal max health loss. Siesta Lean-to hunger drain is now 50% of a Tent, instead of 33%.", true),
 	BinaryConfig("passibleimpassibles", "Remove Cheese-able Collisions", "Removes collision from stuff such as statues to prevent cheese.", true),
 	{
 		name = "sleepingbuff",
@@ -513,6 +538,7 @@ configuration_options =
 
 
 	Header("Misc Monsters"),
+	BinaryConfig("pigking_guards", "Pig King Guards", "Pig King now has neutral guards watching over any suspicious activity.", true),
 	BinaryConfig("bushcrabs", "Bush Crabs", "Bush Crabs ambush the player when digging berry bushes...", true),
 	BinaryConfig("desertscorpions", "Scorpions", "Scorpions plague the desert lands. They will spawn from desert turf within the desert during the day.", true),
 	BinaryConfig("pinelings", "Pinelings", "Stumps will become pinelings if awoken by a treeguard, or can happen naturally to existing old stumps.", true),
@@ -532,6 +558,7 @@ configuration_options =
 	BinaryConfig("hungryfrogs", "Hungry Frogs", "Frogs eat anything left on the floor.", true),
 	BinaryConfig("cowardfrogs", "Frog Anti-cheese", "Frogs flee from bosses to prevent cheesing.", true),
 	BinaryConfig("toads", "Toads", "Toads replace frogs in the second autumn and release poisonous clouds on death.", true),
+	BinaryConfig("fiendforcedmetodothis", "Slurtle Tweaks", "Slurtles attack faster, have less health and drop Shellmets more often.", true),
 	SkipSpace(),
 
 -----------------------------
@@ -580,7 +607,7 @@ configuration_options =
 	BinaryConfig("harder_dragonfly", "Harder Dragonfly", "Dragonfly now has knockback on hit.", true),
 	BinaryConfig("harder_lavae", "Exploding Lavae", "Lavae will now leave exploding paste upon death, knocks holes in walls.", true),
 	BinaryConfig("harder_beequeen", "Harder Bee Queen", "Bee Queen now has AOE attached to her main attack.", true),
-	BinaryConfig("rework_minotaur_disabled", "Ancient Guardian Rework", "[CURRENTLY BROKEN] The Ancient Guardian's fight is reworked, includes more attacks and a stunning mechanic.", false),
+	BinaryConfig("rework_minotaur", "Ancient Guardian Rework", "The Ancient Guardian's fight is expanded, includes more attacks.", true),
 	BinaryConfig("reworked_eyes", "Reworked Eyes of Terror", "Eye of Terror and the Twins have new attacks, inspired by their Terraria counterparts.", true),
 	SkipSpace(),
 
@@ -661,6 +688,7 @@ configuration_options =
 	SkipSpace(),
 	
 	Header("Experimental"),
+	BinaryConfig("beefalo_nerf", "Beefalo Nerf", "Beefalo take half of the damage taken, instead of all.", false),
 	BinaryConfig("announce_basestatus", "[DEV] Announce Ratsniffer","[Developer Tool] Prints the exact rat sniff values to chat to be viewed in real time.",false),
 	BinaryConfig("eyebrellarework", "Eyebrella Rework","Eyebrella stats restored to vanilla value, must be repaired with Milky Whites, 12 day durability. Isn't affected by clothing degradation.",false),
 	BinaryConfig("cooldown_orangestaff", "Cooldown Based Lazy Explorer", "Lazy explorer no longer has durabilty, but instead has cooldown, like Wanda's watches.\nSuggested by Lux.", false),

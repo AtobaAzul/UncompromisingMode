@@ -68,6 +68,28 @@ local function WithinDomain(inst)
 	end
 end
 
+local function ShouldChase_UM(self)
+    local target = self.inst.components.combat.target
+	if target and target:IsValid() then
+		local distsq = self.inst:GetDistanceSqToInst(target)
+		local range = 2*TUNING.BEEQUEEN_CHASE_TO_RANGE
+		if distsq <= range * range then
+			return self.inst.Remember(self.inst,target)
+		else
+			return true
+		end
+	end
+end
+
+local function GetFaceTargetFn(inst)
+    return inst.components.combat.target
+end
+
+local function KeepFaceTargetFn(inst, target)
+    return inst.components.combat:TargetIs(target)
+end
+
+
 function TrepidationBrain:OnStart()
     local root = PriorityNode(
     {	
@@ -77,12 +99,11 @@ function TrepidationBrain:OnStart()
                     self.abilityname = nil
                     self.abilitydata = nil
                 end)),
-        WhileNode(function() return ShouldAttack(self) end, "Attack", ChaseAndAttack(self.inst)),
+        WhileNode(function() return ShouldChase_UM(self) end, "Attack", ChaseAndAttack(self.inst)),
 		
-		--WhileNode(function() return WithinDomain(self.inst) end, "Follow",
-		Follow(self.inst, function() return self.inst.harassplayer end, 1, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST),--),
+		FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
 		
-        WhileNode(function() return self.inst.harassplayer == nil end, "Home",
+        WhileNode(function() return self.inst.components.combat and not self.inst.components.combat.target end, "Home",
 		Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, 20)),
     }, .25)
 

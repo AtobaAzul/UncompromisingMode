@@ -21,17 +21,16 @@ function CheckMush(container, item, slot)
 end
 
 function CheckWardrobeItem(container, item, slot)
-    return item:HasTag("_equippable") or item:HasTag("slingshotammo") or item:HasTag("tool") or (item.components.finiteuses or item.components.fueled or item.prefab == "razor" or item.prefab == "beef_bell") or (item:HasTag("pocketwatch") or item.prefab == "pocketwatch_dismantler")
+    return item:HasTag("_equippable") or item:HasTag("reloaditem_ammo") or item:HasTag("tool") or item:HasTag("weapon") or(item.prefab == "razor" or item.prefab == "beef_bell") or item:HasTag("heatrock") or (item:HasTag("pocketwatch") or item.prefab == "pocketwatch_dismantler") or item:HasTag("toolbox_item") or item.prefab == "sewing_tape" or item.prefab == "sewing_kit"
 end
 
 function CheckEquipItem(container, item, slot)
     return item:HasTag("_equippable")
 end
---[[function CheckHandItem(container, item, slot)
-    if item and item.components.equippable ~= nil then
-        return item.components.equippable.equipslot == EQUIPSLOTS.HANDS
-    end
-end]]
+
+function CheckBee(container, item, slot)
+    return item:HasTag("bee")
+end
 
 function CheckGem(container, item, slot)
     return not item:HasTag("irreplaceable") and item:HasTag("gem")
@@ -199,6 +198,28 @@ modparams.um_blowgun =
     type = "hand_inv",
 }
 
+modparams.um_beegun =
+{
+    widget =
+    {
+        slotpos =
+        {
+            Vector3(0,   32 + 4,  0),
+        },
+        slotbg =
+        {
+			{ image = "bee_slot.tex", atlas = "images/bee_slot.xml" },
+        },
+        animbank = "ui_cookpot_1x2",
+        animbuild = "ui_cookpot_1x2",
+        pos = Vector3(0, 15, 0),
+    },
+	itemtestfn = CheckBee,
+    usespecificslotsforitems = true,
+    acceptsstacks = true,
+    type = "hand_inv",
+}
+
 modparams.frigginbirdpail =
 {
     widget =
@@ -305,7 +326,7 @@ end
 
 modparams.skullchest = containers.params.shadowchester
 modparams.winkyburrow = containers.params.shadowchester
-modparams.uncompromising_devcapture = containers.params.shadowchester
+modparams.um_devcapture = containers.params.shadowchester
 
 
 modparams.sludge_sack = containers.params.piggyback
@@ -436,3 +457,19 @@ for y = 1, 0, -1 do
         table.insert(containers.params.winona_toolbox.widget.slotpos, Vector3(80 * x - 80 * 2 + 80, 80 * y - 80 * 2 + 120, 0))
     end
 end
+
+containers.params.sunkenchest_royal = containers.params.shadowchester
+
+for k, v in pairs(modparams) do
+	containers.MAXITEMSLOTS = math.max(containers.MAXITEMSLOTS, v.widget.slotpos ~= nil and #v.widget.slotpos or 0)
+end
+
+local function addItemSlotNetvarsInContainer(inst)
+    if (#inst._itemspool < containers.MAXITEMSLOTS) then
+        for i = #inst._itemspool + 1, containers.MAXITEMSLOTS do
+            table.insert(inst._itemspool, net_entity(inst.GUID, "container._items[" .. tostring(i) .. "]", "items[" .. tostring(i) .. "]dirty"))
+        end
+    end
+end
+
+AddPrefabPostInit("container_classified", addItemSlotNetvarsInContainer)

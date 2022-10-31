@@ -2,136 +2,170 @@
 
 return Class(function(self, inst)
 
---assert(TheWorld.ismastersim, "Ratcheck should not exist on client")
+	--assert(TheWorld.ismastersim, "Ratcheck should not exist on client")
 
---------------------------------------------------------------------------
---[[ Public Member Variables ]]
---------------------------------------------------------------------------
+	--------------------------------------------------------------------------
+	--[[ Public Member Variables ]]
+	--------------------------------------------------------------------------
 
-self.inst = inst
+	self.inst = inst
 
---------------------------------------------------------------------------
---[[ Private Member Variables ]]
---------------------------------------------------------------------------
+	--------------------------------------------------------------------------
+	--[[ Private Member Variables ]]
+	--------------------------------------------------------------------------
 
-local _ratraid = nil
-local _cooldown = nil
-local _respawntime = nil
-local _time = nil
-local _raided = true
-local _respawntimeremaining = nil
-local ratwarning = nil
---local _initialrattimer = 24000
-local _initialrattimer = TUNING.DSTU.RATRAID_TIMERSTART --24000
-local _rattimer = TUNING.DSTU.RATRAID_TIMERSTART --24000
-local _rattimer_variance = _rattimer / 3 --24000
-local _rattimer_short = TUNING.DSTU.RATRAID_TIMERSTART / 3 --24000
-local _rattimer_short_variance = _rattimer_short / 3 --24000
-local _ratsnifftimer = TUNING.DSTU.RATSNIFFER_TIMER
-local _ratgrace = TUNING.DSTU.RATRAID_GRACE
-local _ratburrows = 0
+	--I'm lazy.
 
-local RATRAID_TIMERNAME = "rat_raid"
+	local _ratraid = self._ratraid
+	local _cooldown = self._cooldown
+	local _respawntime = self._respawntime
+	local _time = self._time
+	local _raided = self._raided
+	local _respawntimeremaining = self._respawntimeremaining
+	local ratwarning = self.ratwarning
+	local _initialrattimer = self._initialrattimer
+	local _rattimer = self.rattimer
+	local _rattimer_variance = self._rattimer_variance
+	local _rattimer_short = self.rattimer_short
+	local _rattimer_short_variance = self._rattimer_short_variance
+	local _ratsnifftimer = self._ratsnifftimer
+	local _ratgrace = self._ratgrace
+	local _ratburrows = self._ratburrows
 
---------------------------------------------------------------------------
---[[ Private member functions ]]
---------------------------------------------------------------------------
+	_ratraid = nil
+	_cooldown = nil
+	_respawntime = nil
+	_time = nil
+	_raided = true
+	_respawntimeremaining = nil
+	ratwarning = nil
+	_initialrattimer = TUNING.DSTU.RATRAID_TIMERSTART --24000
+	_rattimer = TUNING.DSTU.RATRAID_TIMERSTART --24000
+	_rattimer_variance = _rattimer / 3 --24000
+	_rattimer_short = TUNING.DSTU.RATRAID_TIMERSTART / 3 --24000
+	_rattimer_short_variance = _rattimer_short / 3 --24000
+	_ratsnifftimer = TUNING.DSTU.RATSNIFFER_TIMER
+	_ratgrace = TUNING.DSTU.RATRAID_GRACE
+	_ratburrows = 0
 
-local function CooldownRaid(src, data)
+	local RATRAID_TIMERNAME = "rat_raid"
+
+	--------------------------------------------------------------------------
+	--[[ Private member functions ]]
+	--------------------------------------------------------------------------
+
+	local function CooldownRaid(src, data)
 		_respawntime = nil
 		_raided = false
 		--print("cooldown raid")
-end
-
-local function Print()
-	--print(_respawntime)
-	--print(_raided)
-end
-
-local function StartRatTimer()
-	--local _time = 20 + math.random(20)
-	local _time = _rattimer + math.random(_rattimer_variance)
-	
-	_initialrattimer = _time
-end
-
-local function StartTimerShort()
-	--local _time = 20 + math.random(20)
-	local _time = _rattimer_short + math.random(_rattimer_short_variance)
-	
-	_initialrattimer = _time
-end
-
-local function ChangeRatTimer(src, data)
-	local value = data ~= nil and data.value ~= nil and data.value or 60
-	if _initialrattimer > 0 then
-		if value ~= nil and value < 0 and _initialrattimer < _rattimer then
-			_initialrattimer = _initialrattimer - value
-			--print("increase timer")
-			--print(_initialrattimer)
-		elseif value ~= nil and value > 0 then
-			_initialrattimer = _initialrattimer - value
-			--print("reduce timer")
-			--print(_initialrattimer)
-		end
-	else
-		--print("Rats are ready :)")
 	end
-end
 
-local function MakeRatBurrow(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
+	local function Print()
+		--print(_respawntime)
+		--print(_raided)
+	end
 
-    local function IsValidRatBurrowPosition(x, z)
-        if #TheSim:FindEntities(x, 0, z, (TUNING.ANTLION_SINKHOLE.RADIUS * 2), { "antlion_sinkhole_blocker" }) > 0 then
-            return false
-        end
-        if #TheSim:FindEntities(x, 0, z, 50, { "player", "playerghost" }) > 0 then
-            return false
-        end
-		
-        for dx = -1, 1 do
-            for dz = -1, 1 do
-                if not TheWorld.Map:IsPassableAtPoint(x + dx * TUNING.ANTLION_SINKHOLE.RADIUS, 0, z + dz * TUNING.ANTLION_SINKHOLE.RADIUS, false, true) then
-                    return false
-                end
-            end
-        end
-        return true
-    end
-	
-	for i = 1, 8 do
-		inst.x1, inst.z1 = x + math.random(-200, 200), z + math.random(-200, 200)
-		
-		if IsValidRatBurrowPosition(inst.x1, inst.z1) then
-			TheFocalPoint.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/reaction")
-		
-			local ratburrow = SpawnPrefab("uncompromising_ratburrow")
-			ratburrow.Transform:SetPosition(inst.x1, 0, inst.z1)
-			
-			local x, y, z = inst.Transform:GetWorldPosition()
-	
-			local players = #TheSim:FindEntities(x, y, z, 30, { "player" })
-					
-			if math.random() >= 0.7 then
-				if players < 1 then
-					local piper = SpawnPrefab("pied_rat")
-						
-					piper.Transform:SetPosition(inst.Transform:GetWorldPosition())
-					ratburrow.components.herd:AddMember(piper)
+	local function StartRatTimer()
+		--local _time = 20 + math.random(20)
+		local _time = _rattimer + math.random(_rattimer_variance)
+
+		_initialrattimer = _time
+		self._initialrattimer = _initialrattimer
+	end
+
+	local function StartTimerShort()
+		--local _time = 20 + math.random(20)
+		local _time = _rattimer_short + math.random(_rattimer_short_variance)
+
+		_initialrattimer = _time
+		self._initialrattimer = _initialrattimer
+	end
+
+	local function ChangeRatTimer(src, data)
+		local value = data ~= nil and data.value ~= nil and data.value or 60
+		if _initialrattimer > 0 then
+			if value ~= nil and value < 0 and _initialrattimer < _rattimer then
+				_initialrattimer = _initialrattimer - value
+				self._initialrattimer = _initialrattimer
+				--print("increase timer")
+				--print(_initialrattimer)
+			elseif value ~= nil and value > 0 then
+				_initialrattimer = _initialrattimer - value
+				self._initialrattimer = _initialrattimer
+				--print("reduce timer")
+				--print(_initialrattimer)
+			end
+		else
+			--print("Rats are ready :)")
+		end
+	end
+
+	local function MakeRatBurrow(inst)
+		local x, y, z = inst.Transform:GetWorldPosition()
+
+		local function IsValidRatBurrowPosition(x, z)
+			if #TheSim:FindEntities(x, 0, z, (TUNING.ANTLION_SINKHOLE.RADIUS * 2), { "antlion_sinkhole_blocker" }) > 0 then
+				return false
+			end
+			if #TheSim:FindEntities(x, 0, z, 50, { "player", "playerghost" }) > 0 then
+				return false
+			end
+
+			for dx = -1, 1 do
+				for dz = -1, 1 do
+					if not
+						TheWorld.Map:IsPassableAtPoint(x + dx * TUNING.ANTLION_SINKHOLE.RADIUS, 0, z + dz * TUNING.ANTLION_SINKHOLE.RADIUS
+							, false, true) then
+						return false
+					end
 				end
 			end
-			
-			break
+			return true
+		end
+
+		for i = 1, 8 do
+			inst.x1, inst.z1 = x + math.random(-200, 200), z + math.random(-200, 200)
+
+			if IsValidRatBurrowPosition(inst.x1, inst.z1) then
+				TheFocalPoint.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/reaction")
+
+				local ratburrow = SpawnPrefab("uncompromising_ratburrow")
+				ratburrow.Transform:SetPosition(inst.x1, 0, inst.z1)
+
+				local x, y, z = inst.Transform:GetWorldPosition()
+
+				local players = #TheSim:FindEntities(x, y, z, 30, { "player" })
+
+				if math.random() >= 0.7 then
+					if players < 1 then
+						local piper = SpawnPrefab("pied_rat")
+
+						piper.Transform:SetPosition(inst.Transform:GetWorldPosition())
+						ratburrow.components.herd:AddMember(piper)
+					end
+				end
+
+				break
+			end
 		end
 	end
-end
 
-local function SpawnRaid(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local players = FindPlayersInRange(x, y, z, 50)
-	if players ~= nil then
-		for i, v in ipairs(players) do
+	local function SpawnRaid(inst)
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local players = FindPlayersInRange(x, y, z, 50)
+		if players ~= nil then
+			for i, v in ipairs(players) do
+				local raid = SpawnPrefab("uncompromising_ratherd")
+				local x2 = x + math.random(-10, 10)
+				local z2 = z + math.random(-10, 10)
+				if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
+					raid.Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
+					--TheWorld:DoTaskInTime(9600 + math.random(4800), CooldownRaid)
+					--TheWorld:PushEvent("ratcooldown", inst)
+					--TheWorld.components.ratcheck:StartTimer()
+				end
+			end
+		else
 			local raid = SpawnPrefab("uncompromising_ratherd")
 			local x2 = x + math.random(-10, 10)
 			local z2 = z + math.random(-10, 10)
@@ -142,47 +176,36 @@ local function SpawnRaid(inst)
 				--TheWorld.components.ratcheck:StartTimer()
 			end
 		end
-	else
-		local raid = SpawnPrefab("uncompromising_ratherd")
-		local x2 = x + math.random(-10, 10)
-		local z2 = z + math.random(-10, 10)
-		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
-			raid.Transform:SetPosition(x + math.random(-10, 10), y, z + math.random(-10, 10))
-			--TheWorld:DoTaskInTime(9600 + math.random(4800), CooldownRaid)
-			--TheWorld:PushEvent("ratcooldown", inst)
-			--TheWorld.components.ratcheck:StartTimer()
+	end
+
+	local function SoundRaid(inst)
+		if ratwarning ~= nil then
+			inst.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/stunned", "ratwarning")
+			inst.SoundEmitter:SetParameter("ratwarning", "size", ratwarning)
+			inst:DoTaskInTime(math.random(10 / ratwarning, 15 / ratwarning), SoundRaid)
 		end
 	end
-end
 
-local function SoundRaid(inst)
-	if ratwarning ~= nil then
-		inst.SoundEmitter:PlaySound("turnoftides/creatures/together/carrat/stunned", "ratwarning")
-		inst.SoundEmitter:SetParameter("ratwarning", "size", ratwarning)
-		inst:DoTaskInTime(math.random(10 / ratwarning, 15 / ratwarning), SoundRaid)
-	end
-end
-
-local function IsEligible(doer)
-	local area = doer.components.areaaware
-	return TheWorld.Map:IsVisualGroundAtPoint(doer.Transform:GetWorldPosition())
-			and area:GetCurrentArea() ~= nil 
+	local function IsEligible(doer)
+		local area = doer.components.areaaware
+		return TheWorld.Map:IsVisualGroundAtPoint(doer.Transform:GetWorldPosition())
+			and area:GetCurrentArea() ~= nil
 			and not area:CurrentlyInTag("nohasslers")
-end
+	end
 
------------------------------------------------------------------------------------------------
--- Commented out the ratburrow spawning stuff because it could get annoying, and im a HORDER --
--- _________________________________________________________________________________________ --
------------------------------------------------------------------------------------------------
-local function StartRaid(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local players = FindPlayersInRange(x, y, z, 50)
-	
-	local ratburrow = TheSim:FindFirstEntityWithTag("ratburrow")
-	
-	--if ratburrow ~= nil then
+	-----------------------------------------------------------------------------------------------
+	-- Commented out the ratburrow spawning stuff because it could get annoying, and im a HORDER --
+	-- _________________________________________________________________________________________ --
+	-----------------------------------------------------------------------------------------------
+	local function StartRaid(inst)
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local players = FindPlayersInRange(x, y, z, 50)
+
+		local ratburrow = TheSim:FindFirstEntityWithTag("ratburrow")
+
+		--if ratburrow ~= nil then
 		TheWorld:PushEvent("ratcooldown", inst)
-		
+
 		if ratwarning == nil then
 			ratwarning = 0
 		else
@@ -204,163 +227,166 @@ local function StartRaid(inst)
 		else
 			inst:DoTaskInTime(math.random(3, 6), StartRaid)
 		end
-		
-	 --[[else
-		TheWorld:PushEvent("ratcooldownshort", inst)
-		print("No burrow, so make one ya dink!")
-		MakeRatBurrow(inst)]]
-	--end
-	
-	--print("Rat Raid Warning :", ratwarning)
-end
 
-local function ActiveRaid(src, data)
-	--print("Active Raid")
-	
-	if data.doer == nil and data.container ~= nil then
-		data.doer = data.container:GetNearestPlayer(true)
+		--[[else
+		TheWorld:PushEvent("ratcooldownshort", inst)
+		--print("No burrow, so make one ya dink!")
+		MakeRatBurrow(inst)]]
+		--end
+
+		--print("Rat Raid Warning :", ratwarning)
 	end
-	
-	local x, y, z = data.doer.Transform:GetWorldPosition()
-	
-    if data ~= nil and data.doer ~= nil and data.container ~= nil then
-		--print("Found a Doer!")
-		if not data.doer or not data.doer:IsValid() or not data.doer.Transform or not IsEligible(data.doer) then
-			return
+
+	local function ActiveRaid(src, data)
+		--print("Active Raid")
+
+		if data.doer == nil and data.container ~= nil then
+			data.doer = data.container:GetNearestPlayer(true)
 		end
-		
-		--print("Doer is valid!")
-		
-		local ents = TheSim:FindEntities(x, y, z, 30, nil, {"cattoy"}, {"_inventoryitem"})
-		if IsEligible(data.doer) and
-			not TheWorld:HasTag("cave") and
-			not (_raided ~= nil and _raided) and
-			--[[not data.container.components.container:IsEmpty() and]]
-			#ents >= 20 then
-			--print("GOGO NINJA RATORIO")
-			
-			_raided = true
-			
-			data.container:DoTaskInTime(0, StartRaid, data.doer)
-		else
-			--print(_initialrattimer)
-			
-			if #ents <= 20 then
-				--print("CAN'T SPAWN RATS! There aren't enough items around!")
+
+		local x, y, z = data.doer.Transform:GetWorldPosition()
+
+		if data ~= nil and data.doer ~= nil and data.container ~= nil then
+			--print("Found a Doer!")
+			if not data.doer or not data.doer:IsValid() or not data.doer.Transform or not IsEligible(data.doer) then
+				return
+			end
+
+			--print("Doer is valid!")
+
+			local ents = TheSim:FindEntities(x, y, z, 30, nil, { "cattoy" }, { "_inventoryitem" })
+			if IsEligible(data.doer) and
+				not TheWorld:HasTag("cave") and
+				not (_raided ~= nil and _raided) and
+				--[[not data.container.components.container:IsEmpty() and]]
+				#ents >= 20 then
+				--print("GOGO NINJA RATORIO")
+
+				_raided = true
+
+				data.container:DoTaskInTime(0, StartRaid, data.doer)
 			else
-				if #TheSim:FindEntities(x, y, z, 30, { "structure" }) > 3 then
-					local ratchecker = TheSim:FindFirstEntityWithTag("rat_sniffer")
-					if ratchecker ~= nil then
-						ratchecker.Transform:SetPosition(x, 0, z)
-					else
-						SpawnPrefab("uncompromising_ratsniffer").Transform:SetPosition(x, 0, z)
+				--print(_initialrattimer)
+
+				if #ents <= 20 then
+					--print("CAN'T SPAWN RATS! There aren't enough items around!")
+				else
+					if #TheSim:FindEntities(x, y, z, 30, { "structure" }) > 3 then
+						local ratchecker = TheSim:FindFirstEntityWithTag("rat_sniffer")
+						if ratchecker ~= nil then
+							ratchecker.Transform:SetPosition(x, 0, z)
+						else
+							SpawnPrefab("uncompromising_ratsniffer").Transform:SetPosition(x, 0, z)
+						end
 					end
 				end
-			end
-			
-			
-			if data.container.components.container:IsEmpty() then
-				--print("CAN'T SPAWN RATS! This container is empty!")
-			end
-			
-			if not IsEligible(data.doer) then
-				--print("CAN'T SPAWN RATS! Player is in a 'safe' zone!")
-			end
-			
-			if (_raided ~= nil and _raided) then
-				--print("CAN'T SPAWN RATS! They are on break!")
-			end
-		end
-		
-		
-    end
-end
 
-local function IncreaseDens(data)
-	_ratburrows = _ratburrows + 1
-	--print("INCREASED RAT BURROWS TO ".._ratburrows)
-end
 
-local function DecreaseDens(data)
-	_ratburrows = _ratburrows - 1
-	--print("DECREASED RAT BURROWS TO ".._ratburrows)
-end
+				if data.container.components.container:IsEmpty() then
+					--print("CAN'T SPAWN RATS! This container is empty!")
+				end
 
-function self:GetBurrows()
-    return _ratburrows
-end
+				if not IsEligible(data.doer) then
+					--print("CAN'T SPAWN RATS! Player is in a 'safe' zone!")
+				end
 
-function self:OnUpdate(dt)
-	if _ratsnifftimer then
-		if _ratsnifftimer > 0 then
-			_ratsnifftimer = _ratsnifftimer - dt --(dt * _ratburrows)
-			--print(_ratsnifftimer)
-			--print(_ratburrows)
-		else
-			_ratsnifftimer = TUNING.DSTU.RATSNIFFER_TIMER
-            --TheWorld:PushEvent("rat_sniffer")
-			local ratchecker = TheSim:FindFirstEntityWithTag("rat_sniffer")
-			
-			if ratchecker ~= nil then
-				ratchecker:PushEvent("rat_sniffer")
+				if (_raided ~= nil and _raided) then
+					--print("CAN'T SPAWN RATS! They are on break!")
+				end
 			end
+
+
 		end
 	end
-	
-	if _initialrattimer <= 0 and _raided then
-		TheWorld:PushEvent("cooldownraid")
-	end
-end
 
-function self:LongUpdate(dt)
-	if TheWorld.state.cycles > _ratgrace then
-		self:OnUpdate(dt)
+	local function IncreaseDens(data)
+		_ratburrows = _ratburrows + 1
+		--print("INCREASED RAT BURROWS TO " .. _ratburrows)
 	end
-end
 
-local function StartRespawnTimer()
-	if TheWorld.state.cycles > _ratgrace then
-		self.inst:StartUpdatingComponent(self)
+	local function DecreaseDens(data)
+		_ratburrows = _ratburrows - 1
+		--print("DECREASED RAT BURROWS TO " .. _ratburrows)
 	end
-end
 
-function self:OnSave()
-	local data =
-	{
-		raided = _raided,
-		ratsnifftimer = _ratsnifftimer,
-		initialrattimer = _initialrattimer,
-	}
-	
-	return data
-end
+	function self:GetBurrows()
+		return _ratburrows
+	end
 
-function self:OnLoad(data)
-    if data.raided ~= nil then
-		_raided = data.raided
+	function self:OnUpdate(dt)
+		if _ratsnifftimer then
+			if _ratsnifftimer > 0 then
+				_ratsnifftimer = _ratsnifftimer - dt --(dt * _ratburrows)
+				--print(_ratsnifftimer)
+				--print(_ratburrows)
+			else
+				_ratsnifftimer = TUNING.DSTU.RATSNIFFER_TIMER
+				--TheWorld:PushEvent("rat_sniffer")
+				local ratchecker = TheSim:FindFirstEntityWithTag("rat_sniffer")
+
+				if ratchecker ~= nil then
+					ratchecker:PushEvent("rat_sniffer")
+				end
+			end
+		end
+
+		if _initialrattimer <= 0 and _raided then
+			TheWorld:PushEvent("cooldownraid")
+		end
 	end
-		
-    if data.ratsnifftimer ~= nil then
-		_ratsnifftimer = data.ratsnifftimer
+
+	function self:LongUpdate(dt)
+		if TheWorld.state.cycles > _ratgrace then
+			self:OnUpdate(dt)
+		end
 	end
-		
-    if data.initialrattimer ~= nil then
-		_initialrattimer = data.initialrattimer
+
+	local function StartRespawnTimer()
+		if TheWorld.state.cycles > _ratgrace then
+			self.inst:StartUpdatingComponent(self)
+		end
 	end
-	
+
+	function self:OnSave()
+		local data =
+		{
+			raided = _raided,
+			ratsnifftimer = _ratsnifftimer,
+			initialrattimer = _initialrattimer,
+		}
+
+		return data
+	end
+
+	function self:OnLoad(data)
+		if data.raided ~= nil then
+			_raided = data.raided
+		end
+
+		if data.ratsnifftimer ~= nil then
+			_ratsnifftimer = data.ratsnifftimer
+		end
+
+		if data.initialrattimer ~= nil then
+			_initialrattimer = data.initialrattimer
+			self._initialrattimer = _initialrattimer
+		end
+
+		StartRespawnTimer()
+	end
+
+	function self:GetRatTimer()
+		return self._initialrattimer
+	end
+
 	StartRespawnTimer()
-end
-
-
-StartRespawnTimer()
-self.inst:WatchWorldState("cycles", StartRespawnTimer)
-self.inst:ListenForEvent("ratcooldown", StartRatTimer, TheWorld)
-self.inst:ListenForEvent("ratcooldownshort", StartTimerShort, TheWorld)
-self.inst:ListenForEvent("activeraid", ActiveRaid, TheWorld)
-self.inst:ListenForEvent("ms_oncroprotted", ChangeRatTimer, TheWorld)
-self.inst:ListenForEvent("reducerattimer", ChangeRatTimer, TheWorld)
-self.inst:ListenForEvent("DenSpawned", IncreaseDens, TheWorld)
-self.inst:ListenForEvent("DenRemoved", DecreaseDens, TheWorld)
-self.inst:ListenForEvent("cooldownraid", CooldownRaid, TheWorld)
-
+	self.inst:WatchWorldState("cycles", StartRespawnTimer)
+	self.inst:ListenForEvent("ratcooldown", StartRatTimer, TheWorld)
+	self.inst:ListenForEvent("ratcooldownshort", StartTimerShort, TheWorld)
+	self.inst:ListenForEvent("activeraid", ActiveRaid, TheWorld)
+	self.inst:ListenForEvent("ms_oncroprotted", ChangeRatTimer, TheWorld)
+	self.inst:ListenForEvent("reducerattimer", ChangeRatTimer, TheWorld)
+	self.inst:ListenForEvent("DenSpawned", IncreaseDens, TheWorld)
+	self.inst:ListenForEvent("DenRemoved", DecreaseDens, TheWorld)
+	self.inst:ListenForEvent("cooldownraid", CooldownRaid, TheWorld)
 end)

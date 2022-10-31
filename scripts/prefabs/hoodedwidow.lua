@@ -36,24 +36,14 @@ local function Retarget(inst)
     end
 end
 
-local function CalcSanityAura(inst, observer)	--Webber is caught offguard by her aggression?
+local function CalcSanityAura(inst, observer)
     return observer:HasTag("spiderwhisperer") and -TUNING.SANITYAURA_HUGE*1.25 or -TUNING.SANITYAURA_HUGE
 end
 
 local function OnAttacked(inst, data)
-    if data.attacker ~= nil and not inst.sg:HasStateTag("attack")then
+    if data.attacker and not inst.sg:HasStateTag("attack")then
         inst.components.combat:SetTarget(data.attacker)
     end
-end
-
-
-local PLAYER_TAGS = { "player" }
-local PLAYER_IGNORE_TAGS = { "playerghost" }
-
-
-
-local function OnDead(inst)
-    AwardRadialAchievement("spiderqueen_killed", inst:GetPosition(), TUNING.ACHIEVEMENT_RADIUS_FOR_GIANT_KILL)
 end
 
 local function DoDespawn(inst)
@@ -72,14 +62,6 @@ local function DoDespawn(inst)
 	
 end
 
-local projectile_prefabs =
-{
-    "spat_splat_fx",
-    "spat_splash_fx_full",
-    "spat_splash_fx_med",
-    "spat_splash_fx_low",
-    "spat_splash_fx_melted",
-}
 local function EquipWeapons(inst)
     if inst.components.inventory ~= nil and not inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) then
         local snotbomb = CreateEntity()
@@ -119,35 +101,18 @@ local function EquipWeapons(inst)
 end
 
 local function OnLoad(inst)
---inst.WebReady = true
-inst.investigated = false
-end
-
-local function DoLeap(inst)
-if inst.components.combat ~= nil and inst.components.combat.target and not inst.components.health:IsDead() then
-if math.random()>0 then
-inst.sg:GoToState("preleapattack")
-end
-end
-end
-
-local function DoMortar(inst)
-if inst.components.combat ~= nil and inst.components.combat.target and not inst.components.health:IsDead() then
-if math.random()>0 then
-inst.sg:GoToState("lobprojectile")
-end
-end
+	inst.investigated = false
 end
 
 local function TryPowerMove(inst,data)
-if not inst.sg:HasStateTag("busy") and (inst.components.health ~= nil and not inst.components.health:IsDead()) and (inst.components.combat ~= nil and inst.components.combat.target ~= nil) and not inst.sg:HasStateTag("attack") then
-	if data ~= nil and data.name == "pounce" then
-			DoLeap(inst)	
+	if not inst.sg:HasStateTag("busy") and (inst.components.health ~= nil and not inst.components.health:IsDead()) and (inst.components.combat ~= nil and inst.components.combat.target ~= nil) and not inst.sg:HasStateTag("attack") and not inst.sg:HasStateTag("ability") then
+		if data and data.name == "pounce" then
+			inst.sg:GoToState("preleapattack")	
+		end
+		if data and data.name == "mortar" then
+			inst.sg:GoToState("lobprojectile")	
+		end
 	end
-	if data ~= nil and data.name == "mortar" then
-			DoMortar(inst)	
-	end
-end
 end
 
 
@@ -170,7 +135,7 @@ end
 
 local function GettingBullied(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 20, { "epic" }, { "hoodedwidow", "leif" } )
+    local ents = TheSim:FindEntities(x, y, z, 20, { "epic" }, { "hoodedwidow","leif" } )
 	if #ents >= 1 or inst.components.homeseeker ~= nil and inst.components.homeseeker.home and inst:GetDistanceSqToInst(inst.components.homeseeker.home) > TUNING.DRAGONFLY_RESET_DIST*20 then
 	inst.bullier = true
 	else
@@ -184,7 +149,7 @@ local function OnHitOther(inst, data)
 	if data.target and data.target.sg and data.target.sg:HasStateTag("shell") then
 		blocked = true
 	end
-	if other ~= nil and not other:HasTag("webbedcreature") and blocked == false then
+	if other and not other:HasTag("webbedcreature") and blocked == false then
 		if inst.combosucceed == false then
 			--TheNet:SystemMessage("Combo Succeed!")
 			inst.combosucceed = true
@@ -249,6 +214,8 @@ local function fn()
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetLoot(loot)
 
+    inst:AddComponent("drownable")
+
     ---------------------
     MakeLargeBurnableCharacter(inst, "body")
     MakeLargeFreezableCharacter(inst, "body")
@@ -257,7 +224,10 @@ local function fn()
     ------------------
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(TUNING.DSTU.WIDOW_HEALTH)
-
+    inst:AddComponent("healthtrigger")
+    inst.components.healthtrigger:AddTrigger(0.5, function(inst)
+		inst.sg:GoToState("tired")
+	end)
     ------------------
     inst:AddComponent("knownlocations")
     inst:AddComponent("combat")
@@ -335,7 +305,6 @@ local function fn()
     inst:SetBrain(brain)
 	inst.OnLoad = OnLoad
     inst:ListenForEvent("attacked", OnAttacked)
-    inst:ListenForEvent("death", OnDead)
 	inst.combo = 1
 	inst:AddComponent("timer")
 	inst:ListenForEvent("timerdone", TryPowerMove)

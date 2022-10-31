@@ -70,7 +70,7 @@ local function fn()
 	inst:AddComponent("weapon")
     inst:AddTag("weapon")
 	inst.components.weapon:SetOnAttack(onattack)
-    inst.components.weapon:SetDamage(150)
+    inst.components.weapon:SetDamage(17)
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/widowsgrasp.xml"
 

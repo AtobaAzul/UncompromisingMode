@@ -18,7 +18,7 @@ self.caveevents = nil
 self.secondarycaveevents = nil
 self.totalrandomcaveweight = nil
 self.totalrandomsecondarycaveweight = nil
-
+self.dreamcatchers = {}
 
 --------------------------------
 --RNE Player Scaling function
@@ -255,7 +255,7 @@ local function SpawnBats(player)
 					bat.Transform:SetPosition(x + math.random(-10,12), y, z + math.random(-10,12))
 					bat:PushEvent("fly_back")
 					bat:DoTaskInTime(0, function(bat) DayBreak(bat) end)
-					bat:AddTag("shadow")
+					--bat:AddTag("shadow")
 				end)
 			end
 		else
@@ -270,7 +270,7 @@ local function SpawnBats(player)
 					bat.Transform:SetPosition(x + math.random(-12,12), y, z + math.random(-12,12))
 					bat:PushEvent("fly_back")
 					bat:DoTaskInTime(0, function(bat) DayBreak(bat) end)
-					bat:AddTag("shadow")
+					--bat:AddTag("shadow")
 				end)
 			end
 		end
@@ -759,50 +759,54 @@ end
 
 
 local function CheckPlayers(forced)
-    _targetplayer = nil
-    if #_activeplayers == 0 then
-        return
-    end
-
-	local playerlist = {}
-	for _, v in ipairs(_activeplayers) do
-		if IsEligible(v) then
-			table.insert(playerlist, v)
+	if TheWorld.state.iscavenight then
+		_targetplayer = nil
+		if #_activeplayers == 0 then
+			return
 		end
-	end
-	
-		
-	--shuffleArray(playerlist)
-	if #playerlist == 0 then
-		return
-	end
-	local player = playerlist[math.random(#playerlist)]
-	local numStructures = 0
-	local numStructures2 = 0
-	
-	local playerchancescaling = TUNING.DSTU.RNE_CHANCE
-	
-	local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
-	
-	if days_survived >= 5 and math.random() >= playerchancescaling or forced then
-		if player ~= nil then
-			local x,y,z = player.Transform:GetWorldPosition()
-			
-			if IsEligible(player) then
-				DoCaveRNE(player)
+
+		local playerlist = {}
+		for _, v in ipairs(_activeplayers) do
+			if IsEligible(v) then
+				table.insert(playerlist, v)
 			end
 		end
 		
-		local k = #playerlist
+			
+		--shuffleArray(playerlist)
+		if #playerlist == 0 then
+			return
+		end
+		local player = playerlist[math.random(#playerlist)]
+		local numStructures = 0
+		local numStructures2 = 0
 		
-		for _, i in ipairs(playerlist) do
-			local days_survived_secondary = i.components.age ~= nil and i.components.age:GetAgeInDays()
-	
-			if i ~= player and days_survived_secondary >= 5 and math.random() >= 0.5 then
-				local x,y,z = i.Transform:GetWorldPosition()
+		local playerchancescaling = TUNING.DSTU.RNE_CHANCE
 		
-				if IsEligible(i) then
-					DoSecondaryCaveRNE(i)
+		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
+		
+		if self.rnequeued or forced then
+			self.rnequeued = false
+			--TheNet:Announce("DOING RNE BABY")
+			if player ~= nil then
+				local x,y,z = player.Transform:GetWorldPosition()
+				
+				if IsEligible(player) then
+					DoCaveRNE(player)
+				end
+			end
+			
+			local k = #playerlist
+			
+			for _, i in ipairs(playerlist) do
+				local days_survived_secondary = i.components.age ~= nil and i.components.age:GetAgeInDays()
+		
+				if i ~= player and days_survived_secondary >= 5 and math.random() >= 0.5 then
+					local x,y,z = i.Transform:GetWorldPosition()
+			
+					if IsEligible(i) then
+						DoSecondaryCaveRNE(i)
+					end
 				end
 			end
 		end
@@ -838,18 +842,27 @@ local function OnPlayerLeft(src,player)
     end
 end
 
---function RandomNightEvents:OnSave()
-local function OnSave()
-	return {
-		storedcaverne = self.storedcaverne,
-	}
+
+function self:OnSave()
+	local data = {}
+	data.storedcaverne = self.storedcaverne
+	data.LastNewMoonRNE = self.LastNewMoonRNE
+	data.moontear_available = self.moontear_available
+	data.rnequeued = self.rnequeued
+	data.punish = self.punish
+	return data
 end
 
---function RandomNightEvents:OnLoad(data)
-local function OnLoad(data)
+function self:OnLoad(data)
 	if data ~= nil then
 		if data.storedcaverne ~= nil then
 			self.storedcaverne = data.storedcaverne
+		end
+		if data.rnequeued then
+			self.rnequeued = true
+		end
+		if data.punish then
+			self.punish = data.punish
 		end
 	end
 end
@@ -860,9 +873,42 @@ function self:ForceRNE(forced)
 	end
 end
 
+local function DoRNEChance(inst)
+	if TheWorld.state.iscaveday then
+
+		local playerlist = {}
+		for _, v in ipairs(_activeplayers) do
+			if IsEligible(v) then
+				table.insert(playerlist, v)
+			end
+		end
+		
+			
+		--shuffleArray(playerlist)
+		if #playerlist == 0 then
+			return
+		end
+		local player = playerlist[math.random(#playerlist)]
+		--TheNet:Announce("DIDRNECHANCE")
+		local playerchancescaling = TUNING.DSTU.RNE_CHANCE
+		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
+		if days_survived >= 5 and math.random() >= playerchancescaling then
+			self.rnequeued = true
+			self.playertarget = player
+		end
+		--[[if self.rnequeued then
+			TheNet:Announce("true")
+		else
+			TheNet:Announce("false")
+		end]]
+	end
+end
+
 inst:ListenForEvent("ms_playerjoined", OnPlayerJoined)
 inst:ListenForEvent("ms_playerleft", OnPlayerLeft)
 
 self:WatchWorldState("iscavenight", function() self.inst:DoTaskInTime(10, TryRandomNightEvent) end)
+self:WatchWorldState("iscaveday", function() self.inst:DoTaskInTime(0, DoRNEChance) end)
 self:WatchWorldState("cycleschanged", function() self.inst:DoTaskInTime(5, TryRandomNightEvent) end)
+self:WatchWorldState("cycleschanged", function() self.inst:DoTaskInTime(0, DoRNEChance) end)
 end)

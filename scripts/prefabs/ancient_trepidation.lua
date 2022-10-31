@@ -7,39 +7,77 @@ SetSharedLootTable( 'ancient_trepidation',
     {'nightmarefuel',  1.00},
 })
 
+local function Remember(inst,target,insert) --Remember those vvho are menaces
+	if insert then
+		local notintable = true
+		for i,v in ipairs(inst.menaces) do
+			if v == target then
+				notintable = nil
+			end
+		end
+		if notintable then
+			table.insert(inst.menaces,target)
+		end
+	else
+		for i,v in ipairs(inst.menaces) do
+			if v == target then
+				return true
+			end
+		end
+	end
+end
 
 local SHARE_TARGET_DIST = 30
 
 local function NormalRetarget(inst)
     local targetDist = 40
-    if inst.components.knownlocations:GetLocation("investigate") then
-        targetDist = 40
-    end
-    return FindEntity(inst, targetDist, 
-        function(guy) 
-            if inst.components.combat:CanTarget(guy) and inst.enraged then
-                return guy:HasTag("character") and guy.components.sanity ~= nil and guy.components.sanity:GetPercent() < 0.5
-            end
-    end)
+	local x,y,z = inst.Transform:GetWorldPosition()
+	local potentialtargets = TheSim:FindEntities(x,y,z,targetDist,{"character"},{"playerghost"})
+	local foundtarget = nil
+	for i,target in ipairs(potentialtargets) do
+		if inst.components.combat:CanTarget(target) and target.components.sanity and (target.components.sanity:GetPercent() < 0.5 or Remember(inst,target)) then
+			Remember(inst,target,true) --This guy vvas insane near me, remember vvho they are.
+			foundtarget = true
+			return target
+		end
+	end
+	if not foundtarget then
+		for i,target in ipairs(potentialtargets) do
+			if inst.components.combat:CanTarget(target) and target.components.sanity then
+				return target
+			end
+		end
+	end
 end
 
-local function FindWarriorTargets(guy)
-	return (guy:HasTag("character") or guy:HasTag("pig"))
-               and inst.components.combat:CanTarget(guy)
-               and not (inst.components.follower and inst.components.follower.leader == guy)
-end
 
 local function keeptargetfn(inst, target)
-   return target
-          and target.components.combat
-          and target.components.health
-          and not target.components.health:IsDead()
-          and not (inst.components.follower and inst.components.follower.leader == target)
+	if target.components.health and not target.components.health:IsDead() and target.components.sanity then
+		if target.components.sanity:GetPercent() < 0.5 or Remember(inst,target) then
+			return target
+		else
+			local targetDist = 40
+			local x,y,z = inst.Transform:GetWorldPosition()
+			local potentialtargets = TheSim:FindEntities(x,y,z,targetDist,{"character"},{"playerghost"})
+			local foundtarget = nil
+			for i,v in ipairs(potentialtargets) do
+				if inst.components.combat:CanTarget(v) and v.components.sanity and (v.components.sanity:GetPercent() < 0.5 or Remember(inst,v)) then
+					Remember(inst,v,true) --This guy is insane and my current target is not, I'm svvapping to them
+					inst.components.combat:SetTarget(v)
+					foundtarget = true
+				end
+			end
+			if not foundtarget then
+				return target
+			end
+		end
+	end	
 end
 
 
 local function OnAttacked(inst, data)
 	if data.attacker and data.attacker:HasTag("player") then
+		Remember(inst,data.attacker,true) --This guy vvas insane enough to hit me, I'm gonna clobber 'em the next time I see them.
 		inst.components.combat:SetTarget(data.attacker)
 	end
 end
@@ -173,87 +211,32 @@ local function CheckIfBozoLeft(inst)
 	end
 end
 
-local function CheckIfInsaners(inst)  --Actually just checks if anyone is below half sanity, rather than completely insane.
-	local bozo = FindEntity(inst,40, function(guy) if inst.components.combat:CanTarget(guy) then return (guy:HasTag("character") and not guy:HasTag("playerghost")) end end)
-	if bozo and bozo.components.sanity and bozo.components.sanity:GetPercent() < 0.5 and inst.enraged == false then
-		inst.enraged = true
-		inst.sg:GoToState("anger")
-		if inst.components.combat ~= nil then
-			inst.components.combat:SuggestTarget(bozo)
-		end
-	elseif inst.enraged and inst.components.combat and not inst.components.combat.target then
-		inst.enraged = false
-		inst.sg:GoToState("calm")
-	end
-end
+
 
 local function OnSave(inst,data)
-	data.enraged = inst.enraged
 end
 
 local function OnLoad(inst,data)
-if data and data.enraged then
-	inst.enraged = data.enraged
-	if inst.enraged then
-		inst.AnimState:SetBuild("ancient_trepidation")
-	end
-end
-end
 
-local function SetHarassPlayer(inst, player)
-    if inst.harassplayer ~= player then
-        if inst._harassovertask then
-            inst._harassovertask:Cancel()
-            inst._harassovertask = nil
-        end
-        if inst.harassplayer then
-            inst.harassplayer = nil
-        end
-        if player then
-            inst.harassplayer = player
-            inst._harassovertask = inst:DoTaskInTime(120, SetHarassPlayer, nil)
-        end
-    end
-end
-
-local function FindTargetOfInterest(inst)
-    if inst.harassplayer == nil and inst.components.combat.target == nil then
-        local x, y, z = inst.Transform:GetWorldPosition()
-        -- Get all players in range
-        local targets = FindPlayersInRange(x, y, z, 40)
-        -- randomly iterate over all players until we find one we're interested in.
-        for i = 1, #targets do
-            local randomtarget = math.random(#targets)
-            local target = targets[randomtarget]
-            table.remove(targets, randomtarget)
-				local x, y, z = target.Transform:GetWorldPosition()
-				if #TheSim:FindEntities(x,y,z,60,{"trepidation"}) <= 1 and target.components.areaaware:CurrentlyInTag("Nightmare") then
-					if not target:HasTag("playerghost") then
-						SetHarassPlayer(inst, target)
-						return
-					end
-				end
-        end
-    end
 end
 
 local function CheckWhereTheHeckIAm(inst)
-if not inst.components.areaaware:CurrentlyInTag("Nightmare") and inst.components.homeseeker then
-	if inst.components.combat.target then
-		inst.components.combat.target = nil
-	end
-	inst.Physics:Stop()
-	inst.sg:GoToState("anger")
-	inst:DoTaskInTime(0.6,function(inst)
-		local x,y,z = inst.Transform:GetWorldPosition()
-		local Despawn = SpawnPrefab("shadow_despawn").Transform:SetPosition(x,y,z)
-		local x,y,z = inst.components.homeseeker.home.Transform:GetWorldPosition()
-		inst.Transform:SetPosition(x,y,z)
+	if not inst.components.areaaware:CurrentlyInTag("Nightmare") and inst.components.homeseeker then
 		if inst.components.combat.target then
 			inst.components.combat.target = nil
-		end	
-	end)
-end
+		end
+		inst.Physics:Stop()
+		inst.sg:GoToState("anger")
+		inst:DoTaskInTime(0.6,function(inst)
+			local x,y,z = inst.Transform:GetWorldPosition()
+			local Despawn = SpawnPrefab("shadow_despawn").Transform:SetPosition(x,y,z)
+			local x,y,z = inst.components.homeseeker.home.Transform:GetWorldPosition()
+			inst.Transform:SetPosition(x,y,z)
+			if inst.components.combat.target then
+				inst.components.combat.target = nil
+			end	
+		end)
+	end
 end
 
 
@@ -280,7 +263,7 @@ local function fn(Sim)
     end
 	
     inst.AnimState:SetBank("ancient_trepidation")
-    inst.AnimState:SetBuild("ancient_trepidation_nomouth")
+    inst.AnimState:SetBuild("ancient_trepidation")
     inst.AnimState:PlayAnimation("give_life",true)
     
 	inst.AnimState:SetMultColour(0, 0, 0, 0.8)
@@ -342,12 +325,13 @@ local function fn(Sim)
     inst:ListenForEvent("attacked", OnAttacked)
 	inst.sg:GoToState("spawn")
     inst.hasshield = false
-	inst.enraged = false
+
 	inst.onsave = OnSave
 	inst.onload = OnLoad
-	inst:DoPeriodicTask(3,CheckIfInsaners)
 	inst:DoPeriodicTask(10,CheckWhereTheHeckIAm)
-	inst.FindTargetOfInterestTask = inst:DoPeriodicTask(5, FindTargetOfInterest) --Find something to be interested in!
+	
+	inst.Remember = Remember
+	inst.menaces = {}
 	
 	inst:DoTaskInTime(0, function(inst)
 		if TUNING.DSTU.TREPIDATIONS == false then

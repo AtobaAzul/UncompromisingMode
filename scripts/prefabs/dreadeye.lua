@@ -68,7 +68,7 @@ local function retargetfn(inst)
     local rangesq, rangesq1, rangesq2 = maxrangesq, math.huge, math.huge
     local target1, target2 = nil, nil
     for i, v in ipairs(AllPlayers) do
-        if v.components.sanity:IsInsane() and not v:HasTag("playerghost") then
+        if v.components.sanity:IsInsane() and not v:HasTag("playerghost") and not v:HasTag("notarget_shadow") then
             local distsq = v:GetDistanceSqToInst(inst)
             if distsq < rangesq then
                 if inst.components.shadowsubmissive:TargetHasDominance(v) then

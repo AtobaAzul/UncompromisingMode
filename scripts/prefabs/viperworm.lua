@@ -21,7 +21,7 @@ local assets =
 local prefabs =
 {
     "monstermeat",
-	"viperling",
+    "viperling",
 }
 
 local brain = require("brains/viperwormbrain")
@@ -90,13 +90,13 @@ local function retargetfn(inst)
     --Don't search for targets when you're luring. Targets will come to you.
     return not inst.sg:HasStateTag("lure")
         and FindEntity(
-                inst,
-                TUNING.WORM_TARGET_DIST,
-                IsAlive,
-                { "_combat", "_health" }, -- see entityscript.lua
-                { "prey", "worm", "INLIMBO" },
-                { "character", "monster", "animal" }
-            )
+            inst,
+            TUNING.WORM_TARGET_DIST,
+            IsAlive,
+            { "_combat", "_health" }, -- see entityscript.lua
+            { "prey", "worm", "INLIMBO" },
+            { "character", "monster", "animal" }
+        )
         or nil
 end
 
@@ -131,25 +131,23 @@ local function onpickedfn(inst, target)
 end
 
 local function displaynamefn(inst)
-    return
-
-        STRINGS.NAMES[
-            (inst:HasTag("lure") and "WORM_PLANT") or
+    return STRINGS.NAMES[
+        (inst:HasTag("lure") and "WORM_PLANT") or
             (inst:HasTag("dirt") and "WORM_DIRT") or
             "VIPERWORM"
         ]
 
 end
-local function displaynamefnviperling(inst)
-    return
 
-        STRINGS.NAMES[
-            --(inst:HasTag("lure") and "WORM_PLANT") or
-            --(inst:HasTag("dirt") and "WORM_DIRT") or
-            "VIPERLING"
+local function displaynamefnviperling(inst)
+    return STRINGS.NAMES[
+        --(inst:HasTag("lure") and "WORM_PLANT") or
+        --(inst:HasTag("dirt") and "WORM_DIRT") or
+        "VIPERLING"
         ]
 
 end
+
 local function getstatus(inst)
     return (inst:HasTag("lure") and "PLANT")
         or (inst:HasTag("dirt") and "DIRT")
@@ -176,7 +174,7 @@ local function LookForHome(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
 
     for i = 1, 30 do
-        local s = i / 32--(num/2) -- 32.0
+        local s = i / 32 --(num/2) -- 32.0
         local a = math.sqrt(s * 512)
         local b = math.sqrt(s) * 30
         local x1 = x + math.sin(a) * b
@@ -234,12 +232,14 @@ local function CustomOnHaunt(inst, haunter)
     end
     return false
 end
+
 local function ShadowDespawn(inst)
-local x,y,z = inst.Transform:GetWorldPosition()
-local despawn = SpawnPrefab("shadow_despawn")
-despawn.Transform:SetPosition(x,y,z)
-inst:Remove()
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local despawn = SpawnPrefab("shadow_despawn")
+    despawn.Transform:SetPosition(x, y, z)
+    inst:Remove()
 end
+
 local function fnviperling()
     local inst = CreateEntity()
 
@@ -249,31 +249,31 @@ local function fnviperling()
     inst.entity:AddLight()
     inst.entity:AddNetwork()
 
-       MakeCharacterPhysics(inst, 10, 0.5)
-        RemovePhysicsColliders(inst)
+    MakeCharacterPhysics(inst, 10, 0.5)
+    RemovePhysicsColliders(inst)
     inst.Transform:SetFourFaced()
-	local scale = 0.5
+    local scale = 0.5
     inst.AnimState:SetBank("worm")
     inst.AnimState:SetBuild("viperworm")
     inst.AnimState:PlayAnimation("idle_loop", true)
     inst.Transform:SetScale(scale, scale, scale)
-	
+
     inst:AddTag("monster")
     inst:AddTag("hostile")
     inst:AddTag("worm")
-	inst:AddTag("viperling")
+    inst:AddTag("viperling")
     inst:AddTag("cavedweller")
-	inst:AddTag("shadowcreature")
-	inst:AddTag("shadow")
-	inst.AnimState:SetMultColour(0, 0, 0, 0.5)
+    inst:AddTag("shadowcreature")
+    inst:AddTag("shadow")
+    inst.AnimState:SetMultColour(0, 0, 0, 0.5)
 
     inst._lightframe = net_smallbyte(inst.GUID, "worm._lightframe", "lightdirty")
     inst._islighton = net_bool(inst.GUID, "worm._islighton", "lightdirty")
     inst._lighttask = nil
 
-    inst.displaynamefn = displaynamefnviperling  --Handles the changing names.
-	
-	inst.AnimState:UsePointFiltering(true)
+    inst.displaynamefn = displaynamefnviperling --Handles the changing names.
+
+    inst.AnimState:UsePointFiltering(true)
 
     inst.entity:SetPristine()
 
@@ -287,7 +287,7 @@ local function fnviperling()
     inst.components.health:SetMaxHealth(100)
 
     inst:AddComponent("combat")
-    inst.components.combat:SetRange(TUNING.WORM_ATTACK_DIST/2)
+    inst.components.combat:SetRange(TUNING.WORM_ATTACK_DIST / 2)
     inst.components.combat:SetDefaultDamage(37.5)
     inst.components.combat:SetAttackPeriod(TUNING.WORM_ATTACK_PERIOD)
     inst.components.combat:SetRetargetFunction(GetRandomWithVariance(2, 0.5), retargetfn)
@@ -298,7 +298,7 @@ local function fnviperling()
 
     inst:AddComponent("locomotor")
     inst.components.locomotor.walkspeed = 12
-    inst.components.locomotor:SetSlowMultiplier( 1 )
+    inst.components.locomotor:SetSlowMultiplier(1)
     inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = true }
 
@@ -329,23 +329,23 @@ local function fnviperling()
 
     inst.turnonlight = turnonlight
     inst.turnofflight = turnofflight
-	inst.attacks = 0
+    inst.attacks = 0
     inst:SetStateGraph("SGviperworm")
     inst:SetBrain(viperlingbrain)
-	inst.ShadowDespawn = ShadowDespawn
-	inst:DoTaskInTime(10,ShadowDespawn)
-	
+    inst.ShadowDespawn = ShadowDespawn
+    inst:DoTaskInTime(10, ShadowDespawn)
+
 
     return inst
 end
 
 local function FindPerson(inst)
-	local person = FindEntity(inst,10,nil,{"player"})
-	if person ~= nil then
-		person.components.leader:AddFollower(inst)
-	else
-		inst.sg:GoToState("death")
-	end
+    local person = FindEntity(inst, 10, nil, { "player" })
+    if person ~= nil then
+        person.components.leader:AddFollower(inst)
+    else
+        inst.sg:GoToState("death")
+    end
 end
 
 local function fnviperlingfriend()
@@ -357,22 +357,22 @@ local function fnviperlingfriend()
     inst.entity:AddLight()
     inst.entity:AddNetwork()
 
-       MakeCharacterPhysics(inst, 10, 0.5)
-        RemovePhysicsColliders(inst)
+    MakeCharacterPhysics(inst, 10, 0.5)
+    RemovePhysicsColliders(inst)
     inst.Transform:SetFourFaced()
-	local scale = 0.5
+    local scale = 0.5
     inst.AnimState:SetBank("worm")
     inst.AnimState:SetBuild("viperworm")
     inst.AnimState:PlayAnimation("idle_loop", true)
     inst.Transform:SetScale(scale, scale, scale)
-	
-	inst:AddTag("viperling")
-	inst:AddTag("viperlingfriend")
-	--inst:AddTag("shadowcreature")
-	inst:AddTag("shadow")
-	inst.AnimState:SetMultColour(0, 0, 0, 0.5)
 
-	inst.AnimState:UsePointFiltering(true)
+    inst:AddTag("viperling")
+    inst:AddTag("viperlingfriend")
+    --inst:AddTag("shadowcreature")
+    inst:AddTag("shadow")
+    inst.AnimState:SetMultColour(0, 0, 0, 0.5)
+
+    inst.AnimState:UsePointFiltering(true)
 
     inst.entity:SetPristine()
 
@@ -389,50 +389,50 @@ local function fnviperlingfriend()
 
     inst:AddComponent("locomotor")
     inst.components.locomotor.walkspeed = 12
-    inst.components.locomotor:SetSlowMultiplier( 1 )
+    inst.components.locomotor:SetSlowMultiplier(1)
     inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = true }
 
 
-	inst:AddComponent("follower")
+    inst:AddComponent("follower")
 
 
     inst.turnonlight = turnonlight
     inst.turnofflight = turnofflight
-	inst.attacks = 0
+    inst.attacks = 0
     inst:SetStateGraph("SGviperworm")
     inst:SetBrain(viperlingbrain)
-	inst.ShadowDespawn = ShadowDespawn
-	inst:DoTaskInTime(60,ShadowDespawn)
-	inst:DoTaskInTime(0,FindPerson)
-	inst.persists = false
-	
+    inst.ShadowDespawn = ShadowDespawn
+    inst:DoTaskInTime(60, ShadowDespawn)
+    inst:DoTaskInTime(0, FindPerson)
+    inst.persists = false
+
     return inst
 end
 
 local function ViperlingBelch(inst, target)
-	if target ~= nil then
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local projectile = SpawnPrefab("viperprojectile")
-    projectile.Transform:SetPosition(x, y, z)
-    local a, b, c = target.Transform:GetWorldPosition()
-	local targetpos = target:GetPosition()
-	local theta = inst.Transform:GetRotation()
-	theta = theta*DEGREES
+    if target ~= nil then
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local projectile = SpawnPrefab("viperprojectile")
+        projectile.Transform:SetPosition(x, y, z)
+        local a, b, c = target.Transform:GetWorldPosition()
+        local targetpos = target:GetPosition()
+        local theta = inst.Transform:GetRotation()
+        theta = theta * DEGREES
 
-	targetpos.x = targetpos.x + 15*math.cos(theta)
+        targetpos.x = targetpos.x + 15 * math.cos(theta)
 
-	targetpos.z = targetpos.z - 15*math.sin(theta)
+        targetpos.z = targetpos.z - 15 * math.sin(theta)
 
-	local rangesq = ((a-x)^2) + ((c-z)^2)
-    local maxrange = 15
-    local bigNum = 10
-    local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
-	projectile:AddTag("canthit")
+        local rangesq = ((a - x) ^ 2) + ((c - z) ^ 2)
+        local maxrange = 15
+        local bigNum = 10
+        local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
+        projectile:AddTag("canthit")
 
-    projectile.components.complexprojectile:SetHorizontalSpeed(speed+math.random(4,9))
-    projectile.components.complexprojectile:Launch(targetpos, inst, inst)
-	end
+        projectile.components.complexprojectile:SetHorizontalSpeed(speed + math.random(4, 9))
+        projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+    end
 end
 
 local function fn()
@@ -468,7 +468,7 @@ local function fn()
     inst._islighton = net_bool(inst.GUID, "worm._islighton", "lightdirty")
     inst._lighttask = nil
 
-    inst.displaynamefn = displaynamefn  --Handles the changing names.
+    inst.displaynamefn = displaynamefn --Handles the changing names.
 
     inst.entity:SetPristine()
 
@@ -490,13 +490,13 @@ local function fn()
 
     inst:AddComponent("sanityaura")
     inst.components.sanityaura.aura = -TUNING.SANITYAURA_SMALL
-	
-	inst:AddComponent("timer")
-	inst:AddComponent("entitytracker")
-	
+
+    inst:AddComponent("timer")
+    inst:AddComponent("entitytracker")
+
     inst:AddComponent("locomotor")
     inst.components.locomotor.walkspeed = 4
-    inst.components.locomotor:SetSlowMultiplier( 1 )
+    inst.components.locomotor:SetSlowMultiplier(1)
     inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = true }
 
@@ -521,7 +521,7 @@ local function fn()
 
     inst:AddComponent("lootdropper")
     inst.components.lootdropper:SetLoot({ "monstermeat", "monstermeat", "monstermeat", "monstermeat", "viperfruit" })
-	inst:AddComponent("commander")
+    inst:AddComponent("commander")
     --Disable this task for worm attacks
     inst.HomeTask = inst:DoPeriodicTask(3, LookForHome)
     inst.lastluretime = 0
@@ -534,22 +534,22 @@ local function fn()
 
     inst:SetStateGraph("SGviperworm")
     inst:SetBrain(brain)
-	inst.ViperlingBelch = ViperlingBelch
-	inst:ListenForEvent("freeze", function()
-		inst:turnonlight()
-	end)    
+    inst.ViperlingBelch = ViperlingBelch
+    inst:ListenForEvent("freeze", function()
+        inst:turnonlight()
+    end)
 
-	inst:ListenForEvent("unfreeze", function() 
-		inst:turnofflight()
-	end)
+    inst:ListenForEvent("unfreeze", function()
+        inst:turnofflight()
+    end)
     return inst
 end
 
 local function onruinsrespawn(inst)
-	inst.sg:GoToState("lure_enter")
+    inst.sg:GoToState("lure_enter")
 end
 
 return Prefab("viperworm", fn, assets, prefabs),
-Prefab("viperling",fnviperling),
-Prefab("viperlingfriend",fnviperlingfriend),
-RuinsRespawner.Inst("viperworm", onruinsrespawn), RuinsRespawner.WorldGen("viperworm", onruinsrespawn)
+    Prefab("viperling", fnviperling),
+    Prefab("viperlingfriend", fnviperlingfriend),
+    RuinsRespawner.Inst("viperworm", onruinsrespawn), RuinsRespawner.WorldGen("viperworm", onruinsrespawn)

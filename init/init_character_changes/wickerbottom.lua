@@ -18,8 +18,6 @@ if TUNING.DSTU.WICKERNERF_TENTACLES then
 			local pt = reader:GetPosition()
 			local numtentacles = 3
 
-			reader.components.sanity:DoDelta(-TUNING.SANITY_HUGE)
-
 			reader:StartThread(function()
 				for k = 1, numtentacles do
 					local theta = math.random() * 2 * PI

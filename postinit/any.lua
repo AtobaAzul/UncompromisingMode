@@ -164,18 +164,43 @@ env.AddPrefabPostInitAny(function(inst)
 end)
 
 --hornet; i dont care enough to know where to put this
-env.AddReplicableComponent("hayfever")
-
+--env.AddReplicableComponent("hayfever")
+env.AddReplicableComponent("adrenaline")
 
 --I don't know where else to put this
 env.AddPrefabPostInit("aphid", function(inst)
-	if TUNING.DSTU.ISLAND_ADVENTURES then
+	if TestForIA() then
 		inst:AddComponent("appeasement")
 		inst.components.appeasement.appeasementvalue = TUNING.TOTAL_DAY_TIME
 	end
 end)
 
+--for the super spawner tags
+env.AddPrefabPostInitAny(function(inst)
+	local old_OnSave = inst.OnSave
+	inst.OnSave = function(inst, data)
+		if inst.umss_tags then
+			data.umss_tags = inst.umss_tags
+		end
 
+		if old_OnSave ~= nil then
+			old_OnSave(inst, data)
+		end
+	end
+
+	local old_OnLoad = inst.OnLoad
+	inst.OnLoad = function(inst, data)
+		if data ~= nil and data.umss_tags ~= nil then
+			for k, v in ipairs(data.umss_tags) do
+				inst:AddTag("umss_"..v)
+			end
+		end
+
+		if old_OnLoad ~= nil then
+			old_OnLoad(inst, data)
+		end
+	end
+end)
 
 
 

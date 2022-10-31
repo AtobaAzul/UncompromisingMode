@@ -149,7 +149,7 @@ local function MakeBeebox(name, common_postinit)
 		inst.count = 0
 		inst.OnSave = onsave
 		inst.OnLoad = onload  
-		
+		inst:DoTaskInTime(0,function(inst) inst:Remove() end)
         return inst
     end
 

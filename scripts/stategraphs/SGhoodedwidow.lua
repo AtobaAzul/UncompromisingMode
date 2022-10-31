@@ -8,27 +8,29 @@ ActionHandler(ACTIONS.GOHOME, "jumphome"),
 --sdfqocipqowiecjAAAAAAASSDFFASDFASDFQWCQWCQWE
 local events=
 {
-    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("nointerrupt") and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),
+    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("ability") and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     EventHandler("doattack", function(inst, data)
-        if not inst.components.health:IsDead() then
-            local weapon = inst.components.combat and inst.components.combat:GetWeapon()
-            if weapon then
-                if weapon:HasTag("snotbomb") then
-                    inst.sg:GoToState("launchprojectile", data.target)
-                else
-					if inst.components.timer ~= nil and not inst.components.timer:TimerExists("pounce") then
-					inst.sg:GoToState("preleapattack")
+		if not inst.sg:HasStateTag("busy") then
+			if not inst.components.health:IsDead() then
+				local weapon = inst.components.combat and inst.components.combat:GetWeapon()
+				if weapon then
+					if weapon:HasTag("snotbomb") then
+						inst.sg:GoToState("launchprojectile", data.target)
 					else
-					if inst.components.timer ~= nil and not inst.components.timer:TimerExists("mortar") then
-					inst.sg:GoToState("lobprojectile")
-					else
-                    inst.sg:GoToState("attack", data.target)
+						if inst.components.timer and not inst.components.timer:TimerExists("pounce") then
+							inst.sg:GoToState("preleapattack")
+						else
+							if inst.components.timer and not inst.components.timer:TimerExists("mortar") then
+								inst.sg:GoToState("lobprojectile")
+							else
+								inst.sg:GoToState("attack", data.target)
+							end
+						end
 					end
-					end
-                end
-            end
-        end
+				end
+			end
+		end
     end),
 
     CommonHandlers.OnSleep(),
@@ -37,12 +39,13 @@ local events=
 }
 
 local function ShadowFade(inst)
-inst.scaleFactor = inst.scaleFactor - 0.01
-inst.Transform:SetScale(inst.scaleFactor, inst.scaleFactor, inst.scaleFactor)
-if inst.scaleFactor < 0.05 then
-inst:Remove()
+	inst.scaleFactor = inst.scaleFactor - 0.01
+	inst.Transform:SetScale(inst.scaleFactor, inst.scaleFactor, inst.scaleFactor)
+	if inst.scaleFactor < 0.05 then
+		inst:Remove()
+	end
 end
-end
+
 local splashprefabs =
 {
     "web_splash_fx_melted",
@@ -87,7 +90,7 @@ local function WebMortar(inst,angle)
 	if speed < 5 then
 	speed = 14*math.random(100,200)*0.01
 	end
-	--print("speed = "..speed)
+	print("speed = "..speed)
     projectile.components.complexprojectile:SetHorizontalSpeed(speed)
     projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 	end
@@ -115,12 +118,9 @@ local states=
 
     State{
         name = "attack",
-        tags = {"attack", "nointerrupt"},
+        tags = {"attack"},
 
         onenter = function(inst, target)
-		if target ~= nil then
-		inst.components.combat:SuggestTarget(target)
-		end
             inst.Physics:Stop()
 			if math.random() < 0.5/inst.combo and inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.5 then
 				inst.docombo = true
@@ -131,10 +131,10 @@ local states=
 			end
 			local weapon = inst.components.combat and inst.components.combat:GetWeapon()
             if weapon ~= nil and weapon:HasTag("snotbomb") then
-			inst.sg:GoToState("launchprojectile",target)
+				inst.sg:GoToState("launchprojectile",target)
 			else
-            inst.components.combat:StartAttack()
-            inst.AnimState:PlayAnimation("atk")
+				inst.components.combat:StartAttack()
+				inst.AnimState:PlayAnimation("atk")
 			end
         end,
 
@@ -152,37 +152,29 @@ local states=
         events=
         {
             EventHandler("animover", function(inst)
-			if inst.components.timer ~= nil and not inst.components.timer:TimerExists("pounce") and not inst.combosucceed == false and not inst.docombo then
-				inst.sg:GoToState("preleapattack")
-			else
-				if inst.components.timer ~= nil and not inst.components.timer:TimerExists("mortar") and not inst.combosucceed == false and not inst.docombo then
-					inst.sg:GoToState("lobprojectile")
+				--TheNet:Announce("combo is "..inst.combo)
+				if inst.components.health and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.5 and inst.docombo then
+					inst.docombo = false
+					--TheNet:SystemMessage(inst.combo)
+					inst.combo = inst.combo+2
+					inst.sg:GoToState("attack")
 				else
-   					if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.5 and inst.docombo then
-						inst.docombo = false
-						--TheNet:SystemMessage(inst.combo)
-						inst.combo = inst.combo+2
-						inst.sg:GoToState("attack")
+					if inst.combosucceed == false and inst.combo > 1 then
+						--TheNet:Announce("told_to_go_to_tired")
+						inst.combosucceed = true
+						inst.sg:GoToState("tired")
 					else
-						if inst.combosucceed == false and inst.combo > 1 then
-							inst.combosucceed = true
-							--TheNet:SystemMessage("Combo Failed!")
-							if inst.components.combat and inst.components.combat.laststartattacktime then
-								inst.components.combat.laststartattacktime = inst.components.combat.laststartattacktime + 2
-							end
-						end
 						inst.combo = 1
 						inst.sg:GoToState("idle") 
-					end 
-				end
-			end
-		end),
+					end
+				end 
+			end),
         },
     },
 
   	State{
 		name = "hit",
-        tags = {"busy", "hit"},
+        tags = {"hit"},
 
         onenter = function(inst, cb)
             inst.Physics:Stop()
@@ -196,6 +188,22 @@ local states=
         },
     },
 
+  	State{
+		name = "tired",
+        tags = {"busy", "ability"},
+
+        onenter = function(inst, cb)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("tired")
+            inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/scream")
+        end,
+
+        events=
+        {
+			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
+    },
+	
 	State{
 		name = "taunt",
         tags = {"busy"},
@@ -227,7 +235,7 @@ local states=
     },
     State{
         name = "launchprojectile",
-        tags = {"attack", "busy", "superbusy","nointerrupt"},
+        tags = {"attack", "busy", "ability"},
         
         onenter = function(inst, target)
 			inst.sg.statemem.target = target
@@ -255,7 +263,7 @@ local states=
     },
     State{
         name = "lobprojectile",
-        tags = {"attack", "busy", "superbusy","nointerrupt"},
+        tags = {"attack", "busy", "ability"},
         
         onenter = function(inst)
             inst.components.combat:StartAttack()
@@ -269,7 +277,7 @@ local states=
         timeline=
         {
             TimeEvent(47*FRAMES, function(inst)
-			if inst.components.combat ~= nil and inst.components.combat.target ~= nil and inst.components.combat:CanHitTarget(inst.components.combat.target) then
+			if inst.components.combat and inst.components.combat.target ~= nil and inst.components.combat:CanHitTarget(inst.components.combat.target) then
 				local target = inst.components.combat.target
 				if target.components.pinnable ~= nil then
 					target.components.pinnable:Stick("web_net_trap",splashprefabs)
@@ -280,15 +288,12 @@ local states=
 			end
 			WebMortar(inst,-15)
 			WebMortar(inst,15)
-			if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.66 then
+			if inst.components.health and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.66 and inst.components.health.currenthealth > TUNING.DSTU.WIDOW_HEALTH*0.33 then
+				WebMortar(inst,0)
+			end
+			if inst.components.health and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.33 then
 				WebMortar(inst,-30)
 				WebMortar(inst,30)
-			end
-			if inst.components.health ~= nil and inst.components.health.currenthealth < TUNING.DSTU.WIDOW_HEALTH*0.33 then
-				WebMortar(inst,-45)
-				WebMortar(inst,45)
-				WebMortar(inst,-60)
-				WebMortar(inst,60)
 			end
 			inst.components.timer:StartTimer("mortar",20+math.random(-3,5))
             end),
@@ -302,7 +307,7 @@ local states=
 	
     State{
         name = "tossplayer", --Not Finished
-        tags = {"attack", "busy", "superbusy","nointerrupt"},
+        tags = {"attack", "busy", "ability"},
         
         onenter = function(inst, target)
 			inst.sg.statemem.target = target
@@ -321,7 +326,7 @@ local states=
 	
     State{
         name = "fall",
-        tags = {"busy","noweb"},
+        tags = {"busy","noweb","ability"},
         onenter = function(inst, data)
 			if inst:HasTag("notarget") then
 				inst:RemoveTag("notarget")
@@ -343,7 +348,7 @@ local states=
     },
     State{
         name = "preleapattack",
-        tags = {"busy", "noweb","superbusy","nointerrupt"},
+        tags = {"busy", "noweb","ability"},
         onenter = function(inst)
 		inst.components.locomotor:Stop()
 		inst.AnimState:PlayAnimation("prejump")
@@ -362,7 +367,7 @@ local states=
     },
     State{
         name = "leapattack",
-        tags = {"busy", "noweb","superbusy","nointerrupt"},
+        tags = {"busy", "noweb","ability"},
         onenter = function(inst, data)
 			inst.Physics:ClearCollisionMask()
 			inst.Physics:CollidesWith(COLLISION.WORLD)
@@ -415,7 +420,7 @@ local states=
     },
     State{
         name = "jumphome",
-        tags = {"busy", "noweb","superbusy","nointerrupt"},
+        tags = {"busy", "noweb","ability"},
         onenter = function(inst, data)
 			inst:AddTag("notarget")
             inst.AnimState:PlayAnimation("precanopy")
@@ -436,7 +441,7 @@ local states=
 	
     State{
         name = "precanopy",
-        tags = {"busy", "noweb","superbusy","nointerrupt"},
+        tags = {"busy", "noweb","ability"},
         onenter = function(inst, data)
 		inst.components.locomotor:Stop()
 		inst.AnimState:PlayAnimation("prejump")
@@ -455,7 +460,7 @@ local states=
     },
 State{
         name = "canopyjump", --depricated
-        tags = {"busy", "noweb","superbusy","nointerrupt"},
+        tags = {"busy", "noweb","ability"},
         onenter = function(inst, data)
 			inst.components.locomotor:Stop()
             inst.AnimState:PlayAnimation("leap", true)
@@ -472,7 +477,7 @@ State{
     },
     State{
         name = "canopyland",
-        tags = {"busy", "noweb","superbusy","nointerrupt"},
+        tags = {"busy", "noweb","ability"},
         onenter = function(inst, data)
 			if inst:HasTag("notarget") then
 			inst:RemoveTag("notarget")

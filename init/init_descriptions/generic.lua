@@ -1,4 +1,4 @@
--- Wilson's speech file
+	-- Wilson's speech file
 -- The strings here are also used when other characters are missing a line
 -- If you've added an object to the mod, this is where to add placeholder strings
 -- Keep things organized
@@ -58,6 +58,16 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
             GHOST = "I hope that wasn't caused by one of my experiments.",
             FIRESTARTER = "Rats shouldn't wield fire!",
         }
+	DESCRIBE.WATHOM =
+        {
+            GENERIC = "%s seems smarter than he looks.",
+            ATTACKER = "%s looks pretty intimidating!",
+            MURDERER = "This monster is going to kill us all!",
+            REVIVER = "I'm glad %s is on my side!",
+            GHOST = "That doesn't look like normal ghosts. Well, \"normal\".",
+            FIRESTARTER = "Are you trying to breathe fire, %s?",
+        }
+
 
     DESCRIBE.RATPOISONBOTTLE = "It's labeled \"Do not drink. That means you, Webber.\""
     DESCRIBE.RATPOISON = "It's all murdery."
@@ -168,8 +178,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.SHROOM_SKIN_FRAGMENT = "It's small, but the stench is still a punch in the face."
 	DESCRIBE.AIR_CONDITIONER = "Smells great!"
 
-	DESCRIBE.SCORPION = "That better not be venomous."
-
+	DESCRIBE.UM_SCORPION = "That better not be venomous."
+	DESCRIBE.UM_SCORPIONHOLE = "Another inconspicious mark in the terrain."
 	DESCRIBE.SCORPIONCARAPACE = "I'll pass."
 	DESCRIBE.SCORPIONCARAPACECOOKED = "The shell is still pretty hard."
 	DESCRIBE.HARDSHELLTACOS = "Must be Tuesday."
@@ -437,4 +447,83 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "What a shocking result!"
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "OW! What a shocking result!"
 
+	----UNDER THE WEATHER----
+
+	DESCRIBE.WINONA_TOOLBOX = "I had one like this for all of my scientific tools."
+	ACTIONFAIL.WINONATOOLBOX = "Well, I never said these were my tools."
+    DESCRIBE.POWERCELL = "It's like carrying around a little box of electricty."
+	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "Of course I know how this works! I could've made one myself."
+	DESCRIBE.MINERHAT_ELECTRICAL = "Hands-free and scientifically powered!"
+	DESCRIBE.OCEAN_SPEAKER = "Well this seems awfully out of place." --Lame guy. Lame quote.
+
+	DESCRIBE.OCUPUS_BEAK = "Better that I ate you, than you eat me."
+	DESCRIBE.OCUPUS_TENTACLE = ""
+	DESCRIBE.OCUPUS_TENTACLE_EYE = "Everyone around here seems to be watching me."
+	DESCRIBE.OCUPUS_TENTACLE_COOKED = "It doesn't look that bad..."
+
+	DESCRIBE.ARMOR_REED_UM = "I'll still be light on my feet with it on."
+	DESCRIBE.ARMOR_SHARKSUIT_UM = "It makes me feel like the alpha predator."
+	DESCRIBE.ROCKJAWLEATHER = "It's cold and surprinsgly smooth."
+
+	--DESCRIBE.UM_SIREN = "Science says we may be able to \"help\" each other."
+	--WHAT THE FUCK VARIANT
+	--DESCRIBE.UM_SIREN = "Science says she may not be from around here."
+
+	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
+	DESCRIBE.STUFFED_PEEPER_POPPERS = "I'll have to keep an eye on these eyes."
 	DESCRIBE.UM_DEVILED_EGGS = "They smell fowl."
+	DESCRIBE.LUSH_ENTRANCE = "What a perfectly innocent looking ominous hole in the ground."
+	DESCRIBE.CRITTER_FIGGY = "Hmm. I think I'll call you Figgy Newton Fluffybottom the Fourteenth."
+	DESCRIBE.GIANT_TREE_BIRDNEST = "What an eggscellent find!"
+	ACTIONFAIL.UPGRADE.NOT_HARVESTED = "Yuck, I gotta clean that first!"
+
+    DESCRIBE.SLUDGE = "It reeks like eggs, but doesn't look nearly as appetizing."
+	DESCRIBE.SLUDGE_OIL = "Something like this belongs in my old laboratory."
+    DESCRIBE.SLUDGE_SACK = "I hope it doesn't stick to my back."
+	DESCRIBE.CANNONBALL_SLUDGE_ITEM = "It's crude, but it blows things up all the same."
+	DESCRIBE.BOAT_BUMPER_SLUDGE = "It'll bounce back whatever hits it."
+	DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "A softer cushion for something hitting my boat."
+    DESCRIBE.BOATPATCH_SLUDGE = "Another way to plug up any leaks."
+    DESCRIBE.UM_COPPER_PIPE = "Metal tubes, from a tree?"
+    DESCRIBE.BRINE_BALM  = "It keeps wounds fresh. No wait, that's not right."
+    DESCRIBE.UNCOMPROMISING_FISHINGNET = DESCRIBE.FISHINGNET
+	DESCRIBE.UM_AMBER = "There's something inside of it?"
+	DESCRIBE.UM_BEEGUN = "Bees love being shot out of cannons, right?"
+	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.SUNKENCHEST_ROYAL = "It was a royal pain just to get this."
+	DESCRIBE.STEERINGWHEEL_COPPER = "It's mechanical, and that means it's better."
+	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "It's better because it's mechanical."
+	DESCRIBE.BOAT_BUMPER_COPPER = "It will take a lot more hits before it breaks done."
+	DESCRIBE.BOAT_BUMPER_COPPER_KIT = "Metal tubes stuck to one another."
+	DESCRIBE.UM_DREAMCATCHER = "It's not easy having a good nights rest anymore, I hope this helps."
+	DESCRIBE.UM_BRINEISHMOSS = "You're not the moss of me!"
+	DESCRIBE.UM_COALESCED_NIGHTMARE = "That stuff better not start crawling around."
+	DESCRIBE.SLUDGE_CORK = "It's too big for a boat. Maybe it can plug something else."
+	DESCRIBE.SLUDGESTACK = "Is that where that awful smell is coming from?"
+	DESCRIBE.SPECTER_SHIPWRECK = "It's been ship wrecked." --TM
+
+	DESCRIBE.UNCOMPROMISING_HARPOON = "Stabbing things from a distance has never been easier."
+	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
+	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal." -- I think he already has a quote that's exactly like this
+	DESCRIBE.UM_MAGNERANG = "It'll come back and bring something with it."
+	DESCRIBE.UM_MAGNERANGREEL = "Science is pretty attractive."
+	DESCRIBE.SIREN_THRONE = "Something... or someone, seems to have been here recently."
+	DESCRIBE.LAVASPIT_SLUDGE = "Ack, that's boiling!"
+		
+	DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_BLOCKER = "They beecame a wall!"
+
+	DESCRIBE.PORTABLEBOAT_ITEM = "Science will determine if it floats."
+	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "It produces light, theoretically."
+	
+	DESCRIBE.WIXIE_PIANO = "It's never too late to learn!"
+	DESCRIBE.WIXIE_CLOCK = "We're both right twice a day. Usually."
+	DESCRIBE.WIXIE_WARDROBE = "It contains dark secrets. Or clothing."
+	DESCRIBE.CHARLES_T_HORSE = "This better not be a trick."
+
+	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Would it make a good decoration? Possumbly!"
+	DESCRIBE.UM_ORNAMENT_RAT = "Rats aren't so scary!"
+	
+	DESCRIBE.TRINKET_WATHOM1 = "It looks a little brokeny, whatever it is."

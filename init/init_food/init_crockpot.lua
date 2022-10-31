@@ -105,6 +105,13 @@ end
 
 AddIngredientValues({"forgetmelots"}, {decoration=1, foliage=1})
 
+AddIngredientValues({"aphid"}, {insectoid = 0.5, meat = 0.5, monster = 0.5})
+recipes.koalefig_trunk.test = function(cooker, names, tags) return (names.trunk_summer or names.trunk_cooked or names.trunk_winter) and (names.fig or names.fig_cooked or names.aphid) end
+recipes.figatoni.test = function(cooker, names, tags) return (names.fig or names.fig_cooked or names.aphid) and tags.veggie and tags.veggie >= 2  and not tags.meat end
+recipes.figkabab.test = function(cooker, names, tags) return (names.fig or names.fig_cooked or names.aphid) and names.twigs and tags.meat and tags.meat >= 1 and (not tags.monster or tags.monster <= 1) end
+recipes.frognewton.test = function(cooker, names, tags) return (names.fig or names.fig_cooked or names.aphid) and (names.froglegs or names.froglegs_cooked) end
+--teehee :)
+
 --not tags.inedible and not (tags.insectoid and tags.insectoid >= 1)
 
 -----------------------------------------------------------------
@@ -420,7 +427,7 @@ local carapacecooler =
 local seafoodpaella =
 {
     name = "seafoodpaella",
-    test = function(cooker, names, tags) return not tags.monster and not tags.inedible and UncompromisingFillers(tags) and tags.rice and tags.veggie >= 2 and names.wobster_sheller_land end,
+    test = function(cooker, names, tags) return UncompromisingFillers(tags) and tags.rice and tags.veggie >= 2 and (names.wobster_sheller_land or tags.fish >= 2) end,
 
     priority = 30,
     weight = 1,
@@ -700,6 +707,28 @@ if TUNING.DSTU.NEWRECIPES then
 end
 RegisterInventoryItemAtlas("images/inventoryimages/theatercorn.xml", "theatercorn.tex")
 
+local stuffed_peeper_poppers =
+{
+    name = "stuffed_peeper_poppers",
+    test = function(cooker, names, tags) return (names.milkywhites) and (tags.monster and tags.monster >= 2) and (names.durian or names_durian_cooked) and not tags.inedible end,
+
+    priority = 52,
+    weight = 1,
+    foodtype = "MEAT",
+    health = -3,
+    hunger = 37.5,
+	oneat_desc = "A sight to behold",
+	sanity = -15,
+    perishtime = 4*TUNING.PERISH_TWO_DAY,
+    cooktime = 1.8,
+}
+if TUNING.DSTU.NEWRECIPES then
+    AddCookerRecipe("cookpot", stuffed_peeper_poppers)
+    AddCookerRecipe("portablecookpot", stuffed_peeper_poppers)
+    AddCookerRecipe("archive_cookpot", stuffed_peeper_poppers)
+end
+RegisterInventoryItemAtlas("images/inventoryimages/stuffed_peeper_poppers.xml", "stuffed_peeper_poppers.tex")
+
 local um_deviled_eggs =
 {
     name = "um_deviled_eggs",
@@ -724,3 +753,9 @@ if TUNING.DSTU.NEWRECIPES then
     AddCookerRecipe("archive_cookpot", um_deviled_eggs)
 end
 RegisterInventoryItemAtlas("images/inventoryimages/um_deviled_eggs.xml", "um_deviled_eggs.tex")
+
+--sailing rebalance related food changes.
+recipes.surfnturf.test = function(cooker, names, tags) return tags.meat and tags.meat >= 2.5 and tags.fish and tags.fish >= 2.0 and not tags.frozen end
+recipes.seafoodgumbo.test = function(cooker, names, tags) return tags.fish and tags.fish >= 3 and tags.meat >= 3 end
+recipes.seafoodgumbo.priority = 31
+recipes.barnaclesushi.test = function(cooker, names, tags) return (names.barnacle or names.barnacle_cooked) and (names.kelp or names.kelp_cooked) end      

@@ -185,6 +185,7 @@ end
 
 local STRUCTURE_TAGS = {"structure"}
 local function ReleaseHassler(targetPlayer)
+	print("release hassler")
     assert(targetPlayer)
 
     local hassler = TheSim:FindFirstEntityWithTag("mock_dragonfly")
@@ -461,7 +462,7 @@ function self:SummonMonster(player)
 end
 
 local function SummonMonsterFullMoon(player)
-	if _spawmmoonmaw and TheWorld.state.cycles > 50 and TheWorld.state.issummer and TheWorld.state.isfullmoon and not TheWorld.state.isalterawake then
+	if _spawmmoonmaw and TheWorld.state.cycles > 50 and TheWorld.state.issummer and (TheWorld.state.isfullmoon or TheWorld.state.isalterawake) then
 		if _worldsettingstimer:ActiveTimerExists(MOCKFLY_TIMERNAME) then
 			_worldsettingstimer:SetTimeLeft(MOCKFLY_TIMERNAME, 10)
 			_worldsettingstimer:ResumeTimer(MOCKFLY_TIMERNAME)

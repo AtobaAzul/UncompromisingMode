@@ -23,7 +23,7 @@ self.totalrandomcaveweight = nil
 self.moontear_available = true
 self.weightheodds = math.random()
 self.LastNewMoonRNE = nil
-
+self.dreamcatchers = {}
 
 --------------------------------
 --RNE Player Scaling function
@@ -46,11 +46,11 @@ local function PlayerScaling(player)
 		--print("4")
 		return 4
 	end
-	
+
 	--print("default")
 	return 1
 end
-	
+
 --------------------------------
 --RNE Fog Controller Functions Below
 --------------------------------
@@ -98,14 +98,14 @@ end
 
 local function DayBreak(mob)
 	mob.persists = false
-	mob:WatchWorldState("isday", function() 
+	mob:WatchWorldState("isday", function()
 		local x, y, z = mob.Transform:GetWorldPosition()
 		local despawnfx = SpawnPrefab("shadow_despawn")
-		despawnfx.Transform:SetPosition(x, y, z)	
+		despawnfx.Transform:SetPosition(x, y, z)
 		if mob.components.inventory ~= nil then
 			mob.components.inventory:DropEverything(true)
 		end
-		
+
 		mob:Remove()
 	end)
 end
@@ -160,7 +160,7 @@ local function SpawnGnomes(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	if TheWorld.state.isnight then
 		player:DoTaskInTime(2 * math.random() * 0.3, function()
-					
+
 			local x1 = x + math.random(-10, 10)
 			local z1 = z + math.random(-10, 10)
 			local gnomes = SpawnPrefab("gnome_organizer")
@@ -169,7 +169,7 @@ local function SpawnGnomes(player)
 			else
 				player:DoTaskInTime(0.1, function(player) SpawnGnomes(player) end)
 			end
-		
+
 		end)
 	end
 end
@@ -201,12 +201,12 @@ local function SpawnBirchNutters(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	if TheWorld.state.isnight then
 		player:DoTaskInTime(2 * math.random() * 0.3, function()
-					
+
 			local x1 = x + math.random(-10, 10)
 			local z1 = z + math.random(-10, 10)
 			--local nutters = math.random() >= 0.7 and SpawnPrefab("nightmarebeak") or SpawnPrefab("crawlingnightmare")
 			local nutters = SpawnPrefab("birchnutdrake")
-			
+
 			if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 				nutters.Transform:SetPosition(x1, y, z1)
 				nutters:DoTaskInTime(0, function(nutters) DayBreak(nutters) end)
@@ -222,7 +222,7 @@ local function SpawnEyePlants(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	if TheWorld.state.isnight then
 		player:DoTaskInTime(2 * math.random() * 0.3, function()
-					
+
 			local x1 = x + math.random(-10, 10)
 			local z1 = z + math.random(-10, 10)
 			local eyeplant = SpawnPrefab("rneshadowskittish")
@@ -298,7 +298,7 @@ local days_survived = player.components.age ~= nil and player.components.age:Get
 				--assert(GetBuild(target).leif ~= nil)
 			target:DoTaskInTime(leiftime, spawn_stumpling)
 		else
-	
+
 		player:DoTaskInTime(10 * math.random() + 3, function()
 			local level = PlayerScaling(player)
 			for i = 1, level * 3 do
@@ -316,7 +316,7 @@ local function SpawnShadowCharsFunction(player)
 	local z1 = z + math.random(6, 8)
 	local x2 = x - math.random(6, 8)
 	local z2 = z - math.random(6, 8)
-	
+
 
 	if TheWorld.state.isnight then
 		if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
@@ -359,8 +359,8 @@ local function SpawnMonkeysFunction(player)
 	local z1 = z + math.random(12, 16)
 	local x2 = x - math.random(12, 16)
 	local z2 = z - math.random(12, 16)
-	
-	if TheWorld.state.isnight then 
+
+	if TheWorld.state.isnight then
 	local monkey = SpawnPrefab("chimp")
 		if math.random()>0.5 then
 			if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
@@ -401,7 +401,7 @@ local function SpawnWerePigsFunction(player)
 	local z1 = z + math.random(12, 16)
 	local x2 = x - math.random(12, 16)
 	local z2 = z - math.random(12, 16)
-	
+
 	if TheWorld.state.isnight then
 	local pig = SpawnPrefab("pigman")
 		if math.random()>0.5 then
@@ -490,14 +490,14 @@ end
 
 local function SpawnBats(player)
 	print("SpawnBats")
-	
+
 	local battime = 5 + (10 * math.random() * 2)
 	MultiFogAuto(player,battime)
 	player:DoTaskInTime(battime, function()
 		if TheWorld.state.cycles <= 10 then
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
-			
+
 			local level = PlayerScaling(player)
 			local num_bats = 4
 			for i = 1, num_bats do
@@ -506,13 +506,13 @@ local function SpawnBats(player)
 					bat.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
 					bat:PushEvent("fly_back")
 					bat:DoTaskInTime(0, function(bat) DayBreak(bat) end)
-					bat:AddTag("shadow")
+					--bat:AddTag("shadow")
 				end)
 			end
 		else
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
-			
+
 			local level = PlayerScaling(player)
 			local num_bats = math.min(3 + math.floor(day/35), 6)
 			for i = 1, num_bats do
@@ -521,7 +521,7 @@ local function SpawnBats(player)
 					bat.Transform:SetPosition(x + math.random(-8,8), y, z + math.random(-8,8))
 					bat:PushEvent("fly_back")
 					bat:DoTaskInTime(0, function(bat) DayBreak(bat) end)
-					bat:AddTag("shadow")
+					--bat:AddTag("shadow")
 				end)
 			end
 		end
@@ -530,14 +530,14 @@ end
 
 local function SpawnBaseBats(player)
 	print("SpawnBaseBats")
-	
+
 	local battime = 5 + (10 * math.random() * 2)
 	MultiFogAuto(player,battime)
 	player:DoTaskInTime(battime, function()
 		if TheWorld.state.cycles <= 10 then
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
-			
+
 			local level = PlayerScaling(player)
 			local num_bats = 4 + level
 			for i = 1 * level, num_bats do
@@ -551,7 +551,7 @@ local function SpawnBaseBats(player)
 		else
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
-			
+
 			local level = PlayerScaling(player)
 			local num_bats = math.min(3 + math.floor(day/35), 6) + level
 			for i = 1 * level, num_bats do
@@ -587,7 +587,7 @@ local function SpawnDroppers(player)
 	player:DoTaskInTime(10 * math.random() * 2, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local day = TheWorld.state.cycles
-			
+
 			local level = PlayerScaling(player)
 			local num_droppers = 2 + level
 			for i = 1, num_droppers do
@@ -619,7 +619,7 @@ local function SpawnFissuresFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local x2 = x + math.random(-10, 10)
 	local z2 = z + math.random(-10, 10)
-	
+
 	if TheWorld.state.isnight then
 		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
 			SpawnPrefab("rnefissure").Transform:SetPosition(x2, 0, z2)
@@ -646,11 +646,11 @@ end
 
 local function SpawnKrampus(player)
 	print("kramping")
-	
+
 	if not TheWorld.state.israining then
 		TheWorld:PushEvent("ms_forceprecipitation")
 	end
-	
+
 	player:DoTaskInTime(10 * math.random() * 2, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			SpawnPrefab("krampuswarning_lvl3").Transform:SetPosition(player.Transform:GetWorldPosition())
@@ -670,7 +670,7 @@ local function SpawnLureplagueRat(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	if TheWorld.state.isnight then
 		player:DoTaskInTime(2 * math.random() * 0.3, function()
-			
+
 			local x1 = x + math.random(6, 10)
 			local z1 = z + math.random(6, 10)
 
@@ -726,11 +726,11 @@ end
 
 local function SpawnThunderFar(player)
 	print("Thundering")
-	
+
 	if not TheWorld.state.israining then
 		TheWorld:PushEvent("ms_forceprecipitation")
 	end
-	
+
 	player:DoTaskInTime(10 * math.random() * 2, function()
 			local x, y, z = player.Transform:GetWorldPosition()
 			local thunders = math.random(15,20)
@@ -760,10 +760,10 @@ local function SpawnSquidFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local xoff = x + math.random(-12, 12)
 	local zoff = z + math.random(-12, 12)
-	
+
 	local squid = SpawnPrefab("squid")
 	local splash = SpawnPrefab("splash_green")
-	
+
 	if TheWorld.state.isnight then
 		if not TheWorld.Map:IsPassableAtPoint(xoff, 0, zoff) then
 			squid.Transform:SetPosition(xoff, y, zoff)
@@ -784,7 +784,7 @@ local function SpawnSquids(player)
 	player:DoTaskInTime(squidtime, function()
 		local x, y, z = player.Transform:GetWorldPosition()
 		local day = TheWorld.state.cycles
-		
+
 		local level = PlayerScaling(player)
 		for i = 1, 1 + level do
 			player:DoTaskInTime(0.2 * i + math.random(4) * 0.3, function()
@@ -798,7 +798,7 @@ local function SpawnGnarwailFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local xoff = x + math.random(-12, 12)
 	local zoff = z + math.random(-12, 12)
-	
+
 	local gnarwail = SpawnPrefab("gnarwail")
 	local splash = SpawnPrefab("splash_green")
 	if TheWorld.state.isnight then
@@ -809,7 +809,7 @@ local function SpawnGnarwailFunction(player)
 			gnarwail.components.combat:SetTarget(player)
 			gnarwail:DoTaskInTime(0, function(gnarwail) DayBreak(gnarwail) end)
 			gnarwail:PushEvent("attacked", {attacker = player, damage = 0, weapon = nil})
-			
+
 			--shark.sg:GoToState("eat_pre")
 		else
 			player:DoTaskInTime(0.1, function(player) SpawnGnarwailFunction(player) end)
@@ -830,7 +830,7 @@ local function SpawnLightFlowersNFernsFunction(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local x2 = x + math.random(-8, 8)
 	local z2 = z + math.random(-8, 8)
-	
+
 	if TheWorld.state.isnight then
 		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
 			if math.random() > 0.7 then
@@ -839,7 +839,7 @@ local function SpawnLightFlowersNFernsFunction(player)
 			else
 				if math.random() > 0.7 then
 					local flowersng = SpawnPrefab("stalker_bulb")
-					flowersng.Transform:SetPosition(x2, y, z2)				
+					flowersng.Transform:SetPosition(x2, y, z2)
 				else
 					local fern = SpawnPrefab("stalker_fern")
 					fern.Transform:SetPosition(x2, y, z2)
@@ -849,8 +849,8 @@ local function SpawnLightFlowersNFernsFunction(player)
 			player:DoTaskInTime(0.1, function(player) SpawnLightFlowersNFernsFunction(player) end)
 		end
 	end
-end	
-											
+end
+
 local function SpawnLightFlowersNFerns(player)
 	player:DoTaskInTime(5+math.random(5,10), function()
 		local ents = 7+math.floor(math.random()*3)
@@ -888,7 +888,7 @@ local function ChessPiece(player)
 		print("Shadows...")
 		local x, y, z = player.Transform:GetWorldPosition()
 		local chesscheck = math.random()
-		
+
 		local level = PlayerScaling(player)
 		for i = 1, level do
 			player:DoTaskInTime(10 + math.random(4), function()
@@ -898,21 +898,21 @@ local function ChessPiece(player)
 					piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
 					piece:DoTaskInTime(0, function(piece) piece:ListenForEvent("levelup", nil) end)--, piece.OnLevelUp)
 					piece:DoTaskInTime(0, function(piece) piece:ListenForEvent("death", DropRneFuel) end)--, piece.OnLevelUp)
-					
+
 				elseif chesscheck >= 0.33 and chesscheck < 0.66 then
 					local piece = SpawnPrefab("shadow_rook")
 					piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
 					piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
 					piece:DoTaskInTime(0, function(piece) piece:ListenForEvent("levelup", nil) end)--, piece.OnLevelUp)
 					piece:DoTaskInTime(0, function(piece) piece:ListenForEvent("death", DropRneFuel) end)--, piece.OnLevelUp)
-					
+
 				else
 					local piece = SpawnPrefab("shadow_knight")
 					piece.Transform:SetPosition(x + math.random(-7,7), y, z + math.random(-7,7))
 					piece:DoTaskInTime(0, function(piece) DayBreak(piece) end)
 					piece:DoTaskInTime(0, function(piece) piece:ListenForEvent("levelup", nil) end)
 					piece:DoTaskInTime(0, function(piece) piece:ListenForEvent("death", DropRneFuel) end)--, piece.OnLevelUp)
-					
+
 				end
 			end)
 		end
@@ -931,8 +931,8 @@ local function SpawnPhonographFunction(player)
 			player:DoTaskInTime(0.1, function(player) SpawnPhonographFunction(player) end)
 		end
 	end
-end	
-											
+end
+
 local function SpawnPhonograph(player)
 	player:DoTaskInTime(8, function()
 		SpawnPhonographFunction(player)
@@ -951,8 +951,8 @@ local function SpawnShadowTeleporterFunction(player)
 			player:DoTaskInTime(0.1, function(player) SpawnShadowTeleporterFunction(player) end)
 		end
 	end
-end	
-											
+end
+
 local function SpawnShadowTeleporter(player)
 	player:DoTaskInTime(10, function()
 		SpawnShadowTeleporterFunction(player)
@@ -966,7 +966,7 @@ local function SpawnWalrusHuntFunction(player)
 	if TheWorld.state.isnight then
 		if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) and #TheSim:FindEntities(x2, y, z2, 20, {"player"}) < 1 then
 			local leader = SpawnPrefab("walrus")
-			
+
 			leader.Transform:SetPosition(x2, y, z2)
 			leader:DoTaskInTime(0, function(leader) DayBreak(leader) end)
 			if leader.components.sleeper ~= nil then
@@ -997,7 +997,7 @@ local function SpawnWalrusHuntFunction(player)
 			player:DoTaskInTime(1, function(player) SpawnWalrusHuntFunction(player) end)
 		end
 	end
-end	
+end
 
 local function SpawnWalrusHunt(player)
 	player:DoTaskInTime(5+math.random(5,10), function()
@@ -1031,7 +1031,7 @@ local function SpawnShadowBoomer(player)
 			local x1 = x + radius * math.cos(theta)
 			local z1 = z - radius * math.sin(theta)
 			local light = TheSim:GetLightAtPoint(x1, 0, z1)
-			
+
 			if light <= .1 and #TheSim:FindEntities(x1, 0, z1, 50, {"stalkerminion"}) <= 25 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 				local ent = SpawnPrefab("stalker_minion")
 				ent.Transform:SetPosition(x1, 0, z1)
@@ -1042,11 +1042,11 @@ local function SpawnShadowBoomer(player)
 				ent.Physics:CollidesWith(COLLISION.CHARACTERS)
 				ent.Physics:SetCollisionCallback(OnCollide)
 				ent:AddTag("soulless")
-				
-				ent:WatchWorldState("isday", function() 
+
+				ent:WatchWorldState("isday", function()
 					ent.components.health:Kill()
 				end)
-				
+
 				ent.persists = false
 			end
 			--print("what")
@@ -1062,7 +1062,7 @@ local function SpawnGingerDeadPigFunction(player)
 	local ent = SpawnPrefab("gingerdeadpig_rne")
 	ent:OnSpawnedBy(player)
 	ent.Transform:SetPosition(x2, y, z2)
-end	
+end
 
 local function SpawnGingerDeadPig(player)
 	print("ginger dead")
@@ -1139,7 +1139,7 @@ local function SpawnLesserShadowGrabby(player)
 						local x1 = x + radius * math.cos(theta)
 						local z1 = z - radius * math.sin(theta)
 						local light = TheSim:GetLightAtPoint(x1, 0, z1)
-						
+
 						for i = 1, 3 do
 							if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 								local ent = SpawnPrefab("rne_grabbyshadows")
@@ -1180,7 +1180,7 @@ local function SpawnLesserNervousTicks(player)
 						local x1 = x + radius * math.cos(theta)
 						local z1 = z - radius * math.sin(theta)
 						local light = TheSim:GetLightAtPoint(x1, 0, z1)
-			
+
 						if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 							local ent = SpawnPrefab("nervoustickden")
 							ent.Transform:SetPosition(x1, 0, z1)
@@ -1205,7 +1205,7 @@ local function SpawnLesserNightCrawlers(player)
 						local x1 = x + radius * math.cos(theta)
 						local z1 = z - radius * math.sin(theta)
 						local light = TheSim:GetLightAtPoint(x1, 0, z1)
-			
+
 						if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 							local ent = SpawnPrefab("nightcrawler")
 							ent.Transform:SetPosition(x1, 0, z1)
@@ -1230,7 +1230,7 @@ local function SpawnLesserFuelSeekers(player)
 						local x1 = x + radius * math.cos(theta)
 						local z1 = z - radius * math.sin(theta)
 						local light = TheSim:GetLightAtPoint(x1, 0, z1)
-			
+
 						if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 							local ent = SpawnPrefab("fuelseeker")
 							ent.Transform:SetPosition(x1, 0, z1)
@@ -1246,7 +1246,7 @@ end
 local function DoLesserThreat(player, threat)
 	if TheWorld.state.isnight then
 		self.weightheodds = math.random()
-		
+
 		if self.weightheodds >= 0.83 and not threat == "vortex" and not threat == "grabby" then
 			SpawnLesserShadowVortex(player)
 		elseif self.weightheodds < 0.83 and self.weightheodds >= 0.664 and not threat == "grabby" and not threat == "vortex" then
@@ -1287,9 +1287,9 @@ local function SpawnShadowVortex(player)
 				end
 			end)
 		end
-		
+
 		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
-		
+
 		if days_survived >= 30 then
 			DoLesserThreat(player, "vortex")
 		end
@@ -1311,7 +1311,7 @@ local function SpawnShadowGrabby(player)
 						local x1 = x + radius * math.cos(theta)
 						local z1 = z - radius * math.sin(theta)
 						local light = TheSim:GetLightAtPoint(x1, 0, z1)
-						
+
 						for i = 1, 3 do
 							if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 								local ent = SpawnPrefab("rne_grabbyshadows")
@@ -1319,15 +1319,15 @@ local function SpawnShadowGrabby(player)
 								break
 							end
 						end
-						
+
 						print("spawn grabby")
 					end
 				end
 			end)
 		end
-		
+
 		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
-		
+
 		if days_survived >= 30 then
 			DoLesserThreat(player, "grabby")
 		end
@@ -1346,9 +1346,9 @@ local function SpawnMindWeavers(player)
 				end
 			end)
 		end
-		
+
 		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
-		
+
 		if days_survived >= 30 then
 			DoLesserThreat(player, "weaver")
 		end
@@ -1368,7 +1368,7 @@ local function SpawnNervousTicks(player)
 						local x1 = x + radius * math.cos(theta)
 						local z1 = z - radius * math.sin(theta)
 						local light = TheSim:GetLightAtPoint(x1, 0, z1)
-			
+
 						if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 							local ent = SpawnPrefab("nervoustickden")
 							ent.Transform:SetPosition(x1, 0, z1)
@@ -1378,9 +1378,9 @@ local function SpawnNervousTicks(player)
 				end
 			end)
 		end
-		
+
 		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
-		
+
 		if days_survived >= 30 then
 			DoLesserThreat(player, "ticks")
 		end
@@ -1400,7 +1400,7 @@ local function SpawnNightCrawlers(player)
 						local x1 = x + radius * math.cos(theta)
 						local z1 = z - radius * math.sin(theta)
 						local light = TheSim:GetLightAtPoint(x1, 0, z1)
-			
+
 						if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 							local ent = SpawnPrefab("nightcrawler")
 							ent.Transform:SetPosition(x1, 0, z1)
@@ -1410,9 +1410,9 @@ local function SpawnNightCrawlers(player)
 				end
 			end)
 		end
-		
+
 		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
-		
+
 		if days_survived >= 30 then
 			DoLesserThreat(player, "crawlers")
 		end
@@ -1432,7 +1432,7 @@ local function SpawnFuelSeekers(player)
 						local x1 = x + radius * math.cos(theta)
 						local z1 = z - radius * math.sin(theta)
 						local light = TheSim:GetLightAtPoint(x1, 0, z1)
-			
+
 						if light <= 0.1 and TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 							local ent = SpawnPrefab("fuelseeker")
 							ent.Transform:SetPosition(x1, 0, z1)
@@ -1442,9 +1442,9 @@ local function SpawnFuelSeekers(player)
 				end
 			end)
 		end
-		
+
 		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
-		
+
 		if days_survived >= 30 then
 			DoLesserThreat(player, "seekers")
 		end
@@ -1460,7 +1460,7 @@ local function MaskMan(player)
 				local x, y, z = player.Transform:GetWorldPosition()
 				local x1 = x + radius * math.cos(theta)
 				local z1 = z - radius * math.sin(theta)
-				
+
 				if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
 					local ent = SpawnPrefab("tiddlestranger_rne")
 					ent.Transform:SetPosition(x1, 0, z1)
@@ -1484,7 +1484,7 @@ local function AddWildEvent(name, weight)
 	if not table.contains(self.wildevents, name) then
 		table.insert(self.wildevents, { name = name, weight = weight })
 		self.totalrandomwildweight = self.totalrandomwildweight + weight
-	else	
+	else
 		print("dupe event")
 	end
 end
@@ -1494,7 +1494,7 @@ local function RemoveWildEvent(name, weight)
         self.wildevents = {}
         self.totalrandomwildweight = 0
     end
-	
+
 	for k, v in pairs(self.wildevents) do
 		if name == v.name then
 	print(name)
@@ -1528,7 +1528,7 @@ local function AddBaseEvent(name, weight)
 		self.totalrandombaseweight = self.totalrandombaseweight + weight
 		print("rneweight"..weight)
 			print(self.totalrandombaseweight)
-	else	
+	else
 		print("dupe event")
 	end
 end
@@ -1538,7 +1538,7 @@ local function RemoveBaseEvent(name, weight)
         self.baseevents = {}
         self.totalrandombaseweight = 0
     end
-	
+
 	for k, v in pairs(self.baseevents) do
 		if name == v.name then
 	print(name)
@@ -1585,31 +1585,31 @@ end
 --Inclusion and Tuning
 ------------------------
 
-local AUTUMN = 
+local AUTUMN =
 {
 	SpawnMushbooms = { name = SpawnMushbooms, weight = 0.3, },
 }
 
-local WINTER = 
+local WINTER =
 {
 	SpawnKrampus = { name = SpawnKrampus, weight = .2, },
 	SpawnGingerDeadPig = { name = SpawnGingerDeadPig, weight = 0.6, },
 }
 
-local SPRING = 
+local SPRING =
 {
 	SpawnThunderFar = { name = SpawnThunderFar, weight = 0.3, },
 	SpawnLureplagueRat = { name = SpawnLureplagueRat, weight = 0.1, },
 }
 
-local SUMMER = 
+local SUMMER =
 {
 	--SpawnWalrusHunt = { name = SpawnWalrusHunt, weight = 1, },
 }
 
 local _maskmanchance = IsSpecialEventActive(SPECIAL_EVENTS.HALLOWED_NIGHTS) and .8 or 0.1
 
-local BASE = 
+local BASE =
 {
 	MaskMan = { name = MaskMan, weight = _maskmanchance, },
 	SpawnBaseBats = { name = SpawnBaseBats, weight = .3, },
@@ -1639,7 +1639,7 @@ for k, v in pairs(BASE) do
 	AddBaseEvent(v.name, v.weight)
 end
 
-local WILD = 
+local WILD =
 {
 	SpawnBats = { name = SpawnBats, weight = .3, },
 	SpawnLightFlowersNFerns = { name = SpawnLightFlowersNFerns, weight = .3, },
@@ -1665,7 +1665,7 @@ for k, v in pairs(WILD) do
 	AddWildEvent(v.name, v.weight)
 end
 
-local SECONDARYWILD = 
+local SECONDARYWILD =
 {
 	SpawnBaseBats = { name = SpawnBaseBats, weight = .3, },
 	SpawnSkitts = { name = SpawnSkitts, weight = .5, },
@@ -1679,7 +1679,7 @@ for k, v in pairs(SECONDARYWILD) do
 	AddSecondaryWildEvent(v.name, v.weight)
 end
 
-local FULLMOON = 
+local FULLMOON =
 {
 	MoonTear = { name = MoonTear, weight = 1, },
 }
@@ -1688,7 +1688,7 @@ for k, v in pairs(FULLMOON) do
 	AddFullMoonEvent(v.name, v.weight)
 end
 
-local NEWMOON = 
+local NEWMOON =
 {
 	SpawnPhonograph = { name = SpawnPhonograph, weight = 1, },
 	SpawnShadowTeleporter = { name = SpawnShadowTeleporter, weight = 1, },
@@ -1698,7 +1698,7 @@ for k, v in pairs(NEWMOON) do
 	AddNewMoonEvent(v.name, v.weight)
 end
 
-local OCEAN = 
+local OCEAN =
 {
 	SpawnSquids = { name = SpawnSquids, weight = .6, },
 	SpawnBats = { name = SpawnBats, weight = .3, },
@@ -1715,17 +1715,17 @@ local function OnSeasonTick(src, data)
 		RemoveBaseEvent(av.name, av.weight)
 		RemoveWildEvent(av.name, av.weight)
 	end
-	
+
 	for wk, wv in pairs(WINTER) do
 		RemoveBaseEvent(wv.name, wv.weight)
 		RemoveWildEvent(wv.name, wv.weight)
 	end
-	
+
 	for spk, spv in pairs(SPRING) do
 		RemoveBaseEvent(spv.name, spv.weight)
 		RemoveWildEvent(spv.name, spv.weight)
 	end
-	
+
 	for suk, suv in pairs(SUMMER) do
 		RemoveBaseEvent(suv.name, suv.weight)
 		RemoveWildEvent(suv.name, suv.weight)
@@ -1771,9 +1771,9 @@ local function DoBaseRNE(player)
 					if #self.storedrne >= 10 then
 						table.remove(self.storedrne, 1)
 					end
-					
-					
-					
+
+
+
 					table.insert(self.storedrne, v.name)
 					v.name(player)
 					return
@@ -1793,7 +1793,7 @@ local function DoWildRNE(player)
 					if #self.storedrne >= 10 then
 						table.remove(self.storedrne, 1)
 					end
-				
+
 					v.name(player)
 					table.insert(self.storedrne, v.name)
 					return
@@ -1845,6 +1845,7 @@ local function DoOceanRNE(player)
 end
 
 local function DoFullMoonRNE(player)
+	--TheNet:Announce("DidFullmoon")
 	if TheWorld.state.isnight then
 		if self.totalrandomfullmoonweight and self.totalrandomfullmoonweight > 0 and self.fullmoonevents then
 			local rnd = math.random()*self.totalrandomfullmoonweight
@@ -1898,32 +1899,43 @@ end
 local function IsEligible(player)
 	local x, y, z = player.Transform:GetWorldPosition()
 	local theent = #TheSim:FindEntities(x, 0, z, 40, {"epic"}, {"leif", "crabking"})
-	local hounding = TheWorld.components.hounded:GetWarning()
-	local deerclopsed = TheWorld.components.uncompromising_deerclopsspawner:GetWarning()
 	--local beargered = TheWorld.components.beargerspawner:GetWarning()
-	
-	local gmoosed, dragonflied
+
+	local gmoosed, dragonflied, deerclopsed, hounding
 	if TheWorld.components.gmoosespawner ~= nil then
 		gmoosed = TheWorld.components.gmoosespawner:GetWarning()
 	else
 		gmoosed = false
 	end
+
 	if TheWorld.components.mock_dragonflyspawner ~= nil then
 		dragonflied = TheWorld.components.mock_dragonflyspawner:GetWarning()
 	else
 		dragonflied = false
 	end
-	
+
+	if TheWorld.components.uncompromising_deerclopsspawner ~= nil then
+		deerclopsed = TheWorld.components.uncompromising_deerclopsspawner:GetWarning()
+	else
+		deerclopsed = false
+	end
+
+	if TheWorld.components.hounded ~= nil then
+		hounding = TheWorld.components.hounded:GetWarning()
+	else
+		hounding = false
+	end
+
 	local area = player.components.areaaware
-	
-	
+
+
 	local terrarium = TheSim:FindFirstEntityWithTag("terrarium")
-	
+
 	local eyeofterror = terrarium ~= nil and (terrarium.eyeofterror or terrarium._summoning_fx) and true or false
-	
-	
-	return not TheWorld:HasTag("snowstormstart") and not TheWorld.net:HasTag("snowstormstart") and not 
-		player:HasTag("playerghost") and theent == 0 and not (hounding or deerclopsed --[[or beargered]] 
+
+
+	return not TheWorld:HasTag("snowstormstart") and not TheWorld.net:HasTag("snowstormstart") and not
+		player:HasTag("playerghost") and theent == 0 and not (hounding or deerclopsed --[[or beargered]]
 		or gmoosed or dragonflied) and
 		area:GetCurrentArea() ~= nil
 		and not eyeofterror
@@ -1932,99 +1944,108 @@ end
 
 
 local function CheckPlayers(forced)
-    _targetplayer = nil
-    if #_activeplayers == 0 then
-        return
-    end
-
-	local playerlist = {}
-	for _, v in ipairs(_activeplayers) do
-		if IsEligible(v) then
-			table.insert(playerlist, v)
+	if TheWorld.state.isnight then
+		_targetplayer = nil
+		if #_activeplayers == 0 then
+			return
 		end
-	end
-	
-		
-	--shuffleArray(playerlist)
-	if #playerlist == 0 then
-		return
-	end
-	local player = playerlist[math.random(#playerlist)]
-	local numStructures = 0
-	local numStructures2 = 0
-	
-	local playerchancescaling = TUNING.DSTU.RNE_CHANCE -- - (#playerlist * 0.1)
-	--print(playerchancescaling)
-	
-	local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
-	
-	if --[[TheWorld.state.cycles]]days_survived >= 5 and math.random() >= playerchancescaling or (days_survived >= 5 and TheWorld.state.isfullmoon) or (days_survived >= 5 and TheWorld.state.isnewmoon) or forced then
-		
-		--for i, 1 in ipairs(playerlist) do  --try a base RNE
-		if player ~= nil then
-			local x,y,z = player.Transform:GetWorldPosition()--local x,y,z = v.Transform:GetWorldPosition()
-			local ents = TheSim:FindEntities(x,y,z, STRUCTURE_DIST, {"structure"})
-			numStructures = #ents
-			
-			if IsOcean(player) and IsEligible(player) then --Double Checking For Eligibility after chosen just in case.
-				DoOceanRNE(player)
-			elseif IsEligible(player) then --Double Checking For Eligibility after chosen just in case.
-				if numStructures >= 4 then
-					if TheWorld:HasTag("cave") then
-						DoCaveRNE(player)
-					else
-						if TheWorld.state.isfullmoon then
-							if self.moontear_available then
-								self.moontear_available = false
-								DoFullMoonRNE(player)--DoFullMoonRNE(v)
-							end
-						elseif TheWorld.state.isnewmoon then
-							--print("newmoon")
-							DoNewMoonRNE(player)--DoNewMoonRNE(v)
-						else
-							self.moontear_available = true
-							DoBaseRNE(player)--DoBaseRNE(v)
-						end
-					end
-					--print("found base")
-				else
-					if TheWorld:HasTag("cave") then
-						DoCaveRNE(player)
-					else
-						if TheWorld.state.isfullmoon then
-							if self.moontear_available then
-								self.moontear_available = false
-								DoFullMoonRNE(player)--DoFullMoonRNE(v)
-							end
-						elseif TheWorld.state.isnewmoon then
-							--print("newmoon")
-							DoNewMoonRNE(player)--DoNewMoonRNE(v)
-						else
-							self.moontear_available = true
-							DoWildRNE(player)--DoWildRNE(v)
-						end
-					end
-					--print("no find base")
-				end
+
+		local playerlist = {}
+		for _, v in ipairs(_activeplayers) do
+			if IsEligible(v) then
+				table.insert(playerlist, v)
 			end
 		end
-		
-		local k = #playerlist
-		
-		for _, i in ipairs(playerlist) do
-		
-		local days_survived_secondary = i.components.age ~= nil and i.components.age:GetAgeInDays()
-	
-			if i ~= player and days_survived_secondary >= 5 and math.random() >= 0.5 then
-				local x,y,z = i.Transform:GetWorldPosition()--local x,y,z = v.Transform:GetWorldPosition()
-				local ents2 = TheSim:FindEntities(x,y,z, STRUCTURE_DIST, {"structure"})
-				numStructures2 = #ents2
-		
-				if IsEligible(i) and not IsOcean(i) then
-					if numStructures2 >= 4 then
-						--nothing, not really accounting for other players in other bases but meh
+
+
+		--shuffleArray(playerlist)
+		if #playerlist == 0 then
+			return
+		end
+		local player = playerlist[math.random(#playerlist)]
+		local numStructures = 0
+		local numStructures2 = 0
+
+		local playerchancescaling = TUNING.DSTU.RNE_CHANCE -- - (#playerlist * 0.1)
+		--print(playerchancescaling)
+
+		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
+
+		if self.rnequeued or forced then
+			--TheNet:Announce("commencingrne")
+			if inst.punish and inst.punish > 0 then
+				inst.punish = inst.punish - 0.3 -- <-- This changes hovv many rnes it takes to cool dovvn the punishment 
+			else
+				inst.punish = 0
+			end
+			--TheNet:Announce("RNESTARTINGBABY")
+			self.rnequeued = false
+			--for i, 1 in ipairs(playerlist) do  --try a base RNE
+			if player ~= nil then
+				local x,y,z = player.Transform:GetWorldPosition()--local x,y,z = v.Transform:GetWorldPosition()
+				local ents = TheSim:FindEntities(x,y,z, STRUCTURE_DIST, {"structure"})
+				numStructures = #ents
+
+				if IsOcean(player) and IsEligible(player) then --Double Checking For Eligibility after chosen just in case.
+					DoOceanRNE(player)
+				elseif IsEligible(player) then --Double Checking For Eligibility after chosen just in case.
+					if numStructures >= 4 then
+						if TheWorld:HasTag("cave") then
+							DoCaveRNE(player)
+						else
+							if TheWorld.state.isfullmoon then
+								if self.moontear_available then
+									self.moontear_available = false
+									DoFullMoonRNE(player)--DoFullMoonRNE(v)
+								end
+							elseif TheWorld.state.isnewmoon then
+								--print("newmoon")
+								DoNewMoonRNE(player)--DoNewMoonRNE(v)
+							else
+								self.moontear_available = true
+								DoBaseRNE(player)--DoBaseRNE(v)
+							end
+						end
+						--print("found base")
 					else
-						DoSecondaryWildRNE(i)
+						if TheWorld:HasTag("cave") then
+							DoCaveRNE(player)
+						else
+							if TheWorld.state.isfullmoon then
+								if self.moontear_available then
+									self.moontear_available = false
+									DoFullMoonRNE(player)--DoFullMoonRNE(v)
+								end
+							elseif TheWorld.state.isnewmoon then
+								--print("newmoon")
+								DoNewMoonRNE(player)--DoNewMoonRNE(v)
+							else
+								self.moontear_available = true
+								DoWildRNE(player)--DoWildRNE(v)
+							end
+						end
+						--print("no find base")
+					end
+				end
+			end
+
+			local k = #playerlist
+
+			for _, i in ipairs(playerlist) do
+
+			local days_survived_secondary = i.components.age ~= nil and i.components.age:GetAgeInDays()
+
+				if i ~= player and days_survived_secondary >= 5 and math.random() >= 0.5 then
+					local x,y,z = i.Transform:GetWorldPosition()--local x,y,z = v.Transform:GetWorldPosition()
+					local ents2 = TheSim:FindEntities(x,y,z, STRUCTURE_DIST, {"structure"})
+					numStructures2 = #ents2
+
+					if IsEligible(i) and not IsOcean(i) then
+						if numStructures2 >= 4 then
+							--nothing, not really accounting for other players in other bases but meh
+						else
+							DoSecondaryWildRNE(i)
+						end
 					end
 				end
 			end
@@ -2061,28 +2082,34 @@ local function OnPlayerLeft(src,player)
     end
 end
 
---function RandomNightEvents:OnSave()
-local function OnSave()
-	return {
-		storedrne = self.storedrne,
-		LastNewMoonRNE = self.LastNewMoonRNE,
-		moontear_available = self.moontear_available,
-	}
+function self:OnSave()
+	local data = {}
+	data.storedrne = self.storedrne
+	data.LastNewMoonRNE = self.LastNewMoonRNE
+	data.moontear_available = self.moontear_available
+	data.rnequeued = self.rnequeued
+	data.punish = self.punish
+	return data
 end
 
---function RandomNightEvents:OnLoad(data)
-local function OnLoad(data)
+function self:OnLoad(data)
 	if data ~= nil then
-		if data.storedrne ~= nil then
+		if data.storedrne then
 			self.storedrne = data.storedrne
 		end
 
-		if data.LastNewMoonRNE ~= nil then
+		if data.LastNewMoonRNE then
 			self.LastNewMoonRNE = data.LastNewMoonRNE
 		end
-		
-		if data.moontear_available ~= nil then
+
+		if data.moontear_available then
 			self.moontear_available = data.moontear_available
+		end
+		if data.rnequeued then
+			self.rnequeued = true
+		end
+		if data.punish then
+			self.punish = data.punish
 		end
 	end
 end
@@ -2097,10 +2124,47 @@ function self:ForceRNE(forced)
 	end
 end
 
+local function DoRNEChance(inst)
+	if TheWorld.state.isday then
+
+		local playerlist = {}
+		for _, v in ipairs(_activeplayers) do
+			if IsEligible(v) then
+				table.insert(playerlist, v)
+			end
+		end
+
+
+		--shuffleArray(playerlist)
+		if #playerlist == 0 then
+			return
+		end
+		local player = playerlist[math.random(#playerlist)]
+		--TheNet:Announce("DIDRNECHANCE")
+		local playerchancescaling = TUNING.DSTU.RNE_CHANCE
+		local days_survived = player.components.age ~= nil and player.components.age:GetAgeInDays()
+		--TheNet:Announce(days_survived)
+		if --[[TheWorld.state.cycles]]days_survived >= 5 and math.random() >= playerchancescaling then
+			self.rnequeued = true
+			self.playertarget = player
+		end
+		--[[if self.rnequeued then
+			TheNet:Announce("true")
+		else
+			TheNet:Announce("false")
+		end]]
+	end
+end
+
 inst:ListenForEvent("ms_playerjoined", OnPlayerJoined)
 inst:ListenForEvent("ms_playerleft", OnPlayerLeft)
 inst:ListenForEvent("seasontick", OnSeasonTick, TheWorld)
 
 self:WatchWorldState("isnight", function() self.inst:DoTaskInTime(6, TryRandomNightEvent) end)
+
+self:WatchWorldState("isday", function() self.inst:DoTaskInTime(0, DoRNEChance) end)
+
 self:WatchWorldState("cycleschanged", function() self.inst:DoTaskInTime(6, TryRandomNightEvent) end)
+
+self:WatchWorldState("cycleschanged", function() self.inst:DoTaskInTime(0, DoRNEChance) end)
 end)

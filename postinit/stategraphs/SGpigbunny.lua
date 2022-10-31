@@ -99,7 +99,7 @@ local states = {
 				local target = inst.components.combat.target
 				
 				if target ~= nil and distsq(target:GetPosition(), inst:GetPosition()) <= inst.components.combat:CalcAttackRangeSq(target) then
-					target:PushEvent("attacked", { attacker = inst, damage = 5} )
+					target.components.combat:GetAttacked(inst, 5)
 					
 					if target ~= nil and target.components.inventory ~= nil and not target:HasTag("fat_gang") and not target:HasTag("foodknockbackimmune") and not (target.components.rider ~= nil and target.components.rider:IsRiding()) and 
 					--Don't knockback if you wear marble

@@ -10,7 +10,7 @@ env.AddComponentPostInit("propagator", function(self)
 
 			if self.spreading then
 				local pos = self.inst:GetPosition()
-				local prop_range = (self.propagaterange or 3) * TUNING.DSTU.WINTER_FIRE_MOD
+				local prop_range = (self.propagaterange or 3) * TUNING.DSTU.WINTER_FIRE_MOD or 0
 				local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, prop_range, nil, { "INLIMBO" })
 				if ents ~= nil and #ents > 0 then
 					local dmg_range = self.damagerange * TUNING.DSTU.WINTER_FIRE_MOD
@@ -59,7 +59,7 @@ env.AddComponentPostInit("propagator", function(self)
 			else
 				if not (self.inst.components.heater ~= nil and self.inst.components.heater:IsEndothermic()) then
 					local x, y, z = self.inst.Transform:GetWorldPosition()
-					local prop_range = (self.propagaterange or 3) * TUNING.DSTU.WINTER_FIRE_MOD
+					local prop_range = (self.propagaterange or 3) * TUNING.DSTU.WINTER_FIRE_MOD or 0
 					local ents = TheSim:FindEntities(x, y, z, prop_range, { "frozen", "firemelt" })
 					for i, v in ipairs(ents) do
 						v:PushEvent("stopfiremelt")

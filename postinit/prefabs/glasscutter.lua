@@ -4,7 +4,7 @@ GLOBAL.setfenv(1, GLOBAL)
 local function onattack(inst, attacker, target)
 	if target ~= nil and (target:HasTag("shadow") or target:HasTag("shadowminion") or target:HasTag("shadowchesspiece") or target:HasTag("stalker") or target:HasTag("stalkerminion")) and not target.components.health:IsDead() then
 		--target.components.health:DoDelta(-12 * 200, false, inst, false, attacker)
-		target.components.combat:GetAttacked(attacker, 12, nil)
+		target.components.combat:GetAttacked(attacker, 17, nil)
     end
 
 	inst.components.weapon.attackwear = target ~= nil and target:IsValid() 

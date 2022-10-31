@@ -42,7 +42,7 @@ local function RepositionToDarkness(inst)
 				end
 			end
 		else
-			--print("speech nil")
+			print("speech nil")
 			inst.speech = GetClosestInstWithTag({"player"}, inst, 50)
 		end
 	else

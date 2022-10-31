@@ -13,7 +13,7 @@ local prefabs =
 
 local function Beat(inst)
 	inst.SoundEmitter:SetParameter("shadowvortex", "intensity", inst.Transform:GetScale() / 1.8)
-	--print(inst.Transform:GetScale())
+	print(inst.Transform:GetScale())
 end
 
 local function Init(inst)
@@ -43,21 +43,21 @@ local function Vac(inst)
 			local velz = -math.sin(rad) --* 4.5
 			
 			local multiplierplayer = inst:GetDistanceSqToPoint(px, py, pz)
-			--print("Multiplier")
-			--print(multiplierplayer)
+			print("Multiplier")
+			print(multiplierplayer)
 			
 			multiplierplayer = (multiplierplayer * inst.Transform:GetScale()) / 50
-			--print("Divide by 10")
-			--print(multiplierplayer)
+			print("Divide by 10")
+			print(multiplierplayer)
 			
 			if multiplierplayer > 15 then
 				multiplierplayer = 15
-			--print("Too Far")
-			--print(multiplierplayer)
+			print("Too Far")
+			print(multiplierplayer)
 			elseif multiplierplayer < 1.5 then
 				multiplierplayer = 1.5
-			--print("Too Close")
-			--print(multiplierplayer)
+			print("Too Close")
+			print(multiplierplayer)
 			end
 			
 			local dx, dy, dz = px + (((FRAMES * 5) * velx) / multiplierplayer) * inst.Transform:GetScale(), 0, pz + (((FRAMES * 5) * velz) / multiplierplayer) * inst.Transform:GetScale()

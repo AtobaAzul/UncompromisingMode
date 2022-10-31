@@ -267,6 +267,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP_OLD = "I don't like being stuck in one place."
 	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "Reminds me of clockwork."
 	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Springs, gears, and sharp teeth. It really is clockwork."
+	DESCRIBE.CORNCAN = "The can is a temporal time bubble."
 	DESCRIBE.SKULLCHEST_CHILD = "The insides can exist at multiple points in time!"
 
 	DESCRIBE.SLOBBERLOBBER = "Rude, and crude!"
@@ -341,17 +342,89 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "How did we let it get this bad?"
 	DESCRIBE.PIED_PIPER_FLUTE = "Maybe it'd be worth the time to play."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "We must focus on that one!"
-	DESCRIBE.WINONA_TOOLBOX = ""
-	DESCRIBE.WINONA_TOOLBOX = "fuck you ato i mean i love you except not really actually hahaahahahahaha platonically haha (this is a co written message)"
-	DESCRIBE.OCEAN_SPEAKER = "I remember these! I can't quite... remember what they do though..."
-	--DESCRIBE.UM_SIREN = "Oh botheration! Its YOU again."
 
 	ACTIONFAIL.CHARGE_FROM =
 	{
+	    NOT_ENOUGH_CHARGE = "It's pointless to sit here and wait.",
 		CHARGE_FULL = "It doesn't need a re-charge!",
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "Clearly the constructor didn't have the time to make it safe!"
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "It's not even insulated properly!"
-	DESCRIBE.UM_DEVILED_EGGS = "Not in a hundred years."
+
+	----UNDER THE WEATHER----
 	
-	DESCRIBE.CORNCAN = "The can is a temporal time bubble."
+	DESCRIBE.WINONA_TOOLBOX = "I keep everything I need on me."
+	ACTIONFAIL.WINONATOOLBOX = "What could I possibly need from here."
+	DESCRIBE.POWERCELL = ""
+	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = ""
+	DESCRIBE.MINERHAT_ELECTRICAL = "Not bad for just wires with no clockwork."
+	DESCRIBE.OCEAN_SPEAKER = "I remember these! I can't quite... remember what they do though..."
+	--DESCRIBE.UM_SIREN = "Oh botheration! Its YOU again."
+	
+	--DESCRIBE.OCUPUS_BEAK = ""
+	DESCRIBE.OCUPUS_TENTACLE = "Hands off."
+	DESCRIBE.OCUPUS_TENTACLE_EYE = "This is what happens when you keep staring."
+	DESCRIBE.OCUPUS_TENTACLE_COOKED = "Smells like desperation."
+	
+	DESCRIBE.ARMOR_REED_UM = "It's sturdier, but this isn't what I meant."
+	DESCRIBE.ARMOR_SHARKSUIT_UM = "Hopefully it will keep all my insides, inside me."
+	DESCRIBE.ROCKJAWLEATHER = "It must take great strength to swim with thick skin."
+	
+	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
+	DESCRIBE.STUFFED_PEEPER_POPPERS = "Even the food is watching me."
+	DESCRIBE.UM_DEVILED_EGGS = "Not in a hundred years."
+	DESCRIBE.LUSH_ENTRANCE = "I should explore this later. Or earlier."
+	DESCRIBE.CRITTER_FIGGY = "You're a little cosmic horror across timelines, you know that?"
+	DESCRIBE.GIANT_TREE_BIRDNEST = "What, you eggs?"
+	ACTIONFAIL.UPGRADE.NOT_HARVESTED = "Where's my cleaning tools?"
+	
+    DESCRIBE.SLUDGE = "This is the most interesting ball of toxins I've met."
+	DESCRIBE.SLUDGE_OIL = "Maybe I could use this to grease my gears."
+    DESCRIBE.SLUDGE_SACK = "Putting my watches inside will only gunk them up."
+	DESCRIBE.CANNONBALL_SLUDGE_ITEM = "The crudeness only made it more dangerous."
+	DESCRIBE.BOAT_BUMPER_SLUDGE = "This should keep things afloat."
+	DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "It should give the boat more time to float."
+    DESCRIBE.BOATPATCH_SLUDGE = "Pop it in a hole and forget about it."
+    DESCRIBE.UM_COPPER_PIPE ="It's aged and rusty."
+    DESCRIBE.BRINE_BALM  = "No thanks, time heals all wounds."
+    DESCRIBE.UNCOMPROMISING_FISHINGNET = DESCRIBE.FISHINGNET
+	DESCRIBE.UM_AMBER = "Something got caught inside there a long time ago."
+	DESCRIBE.UM_BEEGUN = "Now I'm their queen."
+	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.SUNKENCHEST_ROYAL = "It's from another timeline, how did you get into this one?"
+	DESCRIBE.STEERINGWHEEL_COPPER = "It could last a millenium."
+	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "We need something to steer first."
+	DESCRIBE.BOAT_BUMPER_COPPER = "This should last long enough."
+	DESCRIBE.BOAT_BUMPER_COPPER_KIT = "Now we just need a boat to protect."
+	DESCRIBE.UM_DREAMCATCHER = "Does it catch nightmares too?"
+	DESCRIBE.UM_BRINEISHMOSS = "Moss, it grows everywhere."
+	DESCRIBE.UM_COALESCED_NIGHTMARE = "I doubt this will contain Them for long."
+	DESCRIBE.SLUDGE_CORK = "This should speed things up with that sludge."
+	DESCRIBE.SLUDGESTACK = "That sludge has worn the rock down over time."
+	DESCRIBE.SPECTER_SHIPWRECK = "All comes to ruin, eventually." 
+	
+	DESCRIBE.UNCOMPROMISING_HARPOON = "Stabbing things from a distance has never been easier."
+	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
+	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
+	DESCRIBE.UM_MAGNERANG = "Magnets aren't my specialty."
+	DESCRIBE.UM_MAGNERANGREEL = "It looks unstable."
+	DESCRIBE.SIREN_THRONE = "Oh look! A rock! Anyways."
+	DESCRIBE.LAVASPIT_SLUDGE = "I have no time to be dancing around hot coals!"
+		
+	DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_BLOCKER = "Attacking those head on would be a waste of time."
+
+	DESCRIBE.PORTABLEBOAT_ITEM = "This boat is sure to have a short life span."
+	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "The faster we go, the brighter it glows!"
+	
+	DESCRIBE.WIXIE_PIANO = "We have eternity to learn!"
+	DESCRIBE.WIXIE_CLOCK = "I can't open it up, so I can't fix it!"
+	DESCRIBE.WIXIE_WARDROBE = "Wait, how long has this been here?"
+	DESCRIBE.CHARLES_T_HORSE = "Not a cog in sight."
+
+	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Shame about their short lifespan."
+	DESCRIBE.UM_ORNAMENT_RAT = "Don't let it get in my clocks!"
+	
+	DESCRIBE.TRINKET_WATHOM1 = "Oh that was SUCH a waste of time."

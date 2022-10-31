@@ -9,6 +9,7 @@ local assets =
     Asset("ANIM", "anim/hound_ice.zip"),
     Asset("ANIM", "anim/hound_ice_ocean.zip"),
     Asset("ANIM", "anim/hound_mutated.zip"),
+	Asset("ANIM", "anim/rnehound.zip"),
     Asset("SOUND", "sound/hound.fsb"),
 }
 
@@ -48,6 +49,7 @@ for i, v in ipairs(prefabs) do
 end
 
 local brain = require("brains/houndbrain")
+local rnebrain = require("brains/rnehoundbrain")
 local moonbrain = require("brains/moonbeastbrain")
 local sporebrain = require "brains/sporehoundbrain"
 
@@ -83,6 +85,14 @@ SetSharedLootTable('hound_magma',
     --{'deer_fire_circle',   1.0},
     {'redgem',      1.0},
     {'redgem',      0.5},
+})
+
+SetSharedLootTable('hound_rne',
+{	
+	{'monstermeat', 1.0},
+    {'nightmarefuel', 1.0},
+	{'nightmarefuel', 0.5},
+    {'purplegem',     0.25},
 })
 
 SetSharedLootTable('hound_glacial',
@@ -559,7 +569,7 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
     inst:AddComponent("inspectable")
     inst.components.inspectable.getstatus = GetStatus
 
-    if tag == "clay" then
+    if tag == "clay" or tag == "unfathomable" then
         --inst.sg:GoToState("statue")
 
         inst:AddComponent("hauntable")
@@ -947,8 +957,55 @@ local function fnspore()
     return inst
 end
 
+local function AdjustVisibility(inst)
+	local player = FindEntity(inst,20^2,nil,{"player"})
+	if player and player:IsValid() and inst:IsValid() then
+		local dist = inst:GetDistanceSqToInst(player)/50
+		if dist < 1 then
+			inst.AnimState:SetMultColour(1,1,1,1-dist)
+			if inst:HasTag("notarget") then
+				inst:RemoveTag("notarget")
+			end
+		else
+			if not inst:HasTag("notarget") then
+				inst:AddTag("notarget")
+			end
+			inst.AnimState:SetMultColour(1,1,1,0)
+		end
+	else
+		if not inst:HasTag("notarget") then
+			inst:AddTag("notarget")
+		end
+		inst.AnimState:SetMultColour(1,1,1,0)
+	end
+end
+
+local function fnrne()
+    local inst = fncommon("hound", "rnehound", nil, nil, "unfathomable")
+	
+	inst.Physics:SetCollisionGroup(COLLISION.SANITY)
+	inst.Physics:CollidesWith(COLLISION.SANITY)
+	
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.components.locomotor:SetTriggersCreep(false)
+    inst:SetStateGraph("SGhound")
+    inst:SetBrain(rnebrain)
+
+	inst:DoPeriodicTask(FRAMES,AdjustVisibility)
+		
+	inst:AddTag("shadow")
+    inst.components.lootdropper:SetChanceLootTable('hound_rne')
+	inst.DynamicShadow:Enable(false)
+
+    return inst
+end
+
 return Prefab("lightninghound", fnlightning, assets, prefabs),
 	Prefab("glacialhound", fnglacial, assets, prefabs),
 	Prefab("glacialhound_projectile", fnglacial_proj, assets, prefabs),
 	Prefab("magmahound", fnmagma, assets, prefabs),
-	Prefab("sporehound", fnspore, assets, prefabs)
+	Prefab("sporehound", fnspore, assets, prefabs),
+	Prefab("rnehound",fnrne)

@@ -51,7 +51,7 @@ local states=
         onenter = function(inst)
 			inst.Physics:Stop()
 			RemovePhysicsColliders(inst) 
-            inst.AnimState:PlayAnimation("death")
+            inst.AnimState:PlayAnimation("death_fallapart")
             inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition()))
         end,
 		timeline=
@@ -59,14 +59,6 @@ local states=
             TimeEvent(3*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
 			TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
 			TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/leif/attack_VO") end),
-        },
-        events=
-        {
-            EventHandler("animover", function(inst) inst:Remove()
-		local x, y, z = inst.Transform:GetWorldPosition()
-		local despawnfx = SpawnPrefab("maxwell_smoke")
-		despawnfx.Transform:SetPosition(x, y, z)			
-		end),
         },
     },    
     State{

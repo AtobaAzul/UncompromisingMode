@@ -193,7 +193,7 @@ local states=
         
         onenter = function(inst)
 			inst:RemoveTag("hostile")
-			inst.AnimState:SetBuild("ancient_trepidation_nomouth")
+			inst.AnimState:SetBuild("ancient_trepidation")
 			inst.enraged = false
             inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("anger")

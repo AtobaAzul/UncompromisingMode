@@ -116,7 +116,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.SPOREPACK = "A large sack made from toad skin. It's scent is far from lovely."
 	DESCRIBE.SALTPACK = "The device releases sodium chloride into the atmosphere."
 	
-	DESCRIBE.SCORPION = "Scorpiones. It's a desert species of some sort."
+	DESCRIBE.UM_SCORPION = "Scorpiones. It's a desert species of some sort."
 	DESCRIBE.SCORPIONCARAPACE = "While it should not be poisonous, it is unfit to eat in this condition."
 	DESCRIBE.SCORPIONCARAPACECOOKED = "I believe it requires more than just an open flame."
 	DESCRIBE.HARDSHELLTACOS = "The scorpion tastes well like this."
@@ -358,5 +358,80 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "A succesful conversion of energy!"
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "I did not expect to become the conduit!"
-	DESCRIBE.UM_DEVILED_EGGS = "Aptly named."
 	
+	----UNDER THE WEATHER----
+	
+	DESCRIBE.WINONA_TOOLBOX = "An organized work place is an efficient work place."
+	ACTIONFAIL.WINONATOOLBOX = "I'm no handywoman myself, I do know a thing or two however."
+	DESCRIBE.POWERCELL = "A box full of electricty, I'm not too familiar with this."
+	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "The whole is greater than the sum of its parts."
+	DESCRIBE.MINERHAT_ELECTRICAL = "Now that it's electric it will be quite beneficial."
+	DESCRIBE.OCEAN_SPEAKER = "My, not something you'd expect to see all the way out here."
+	--DESCRIBE.UM_SIREN = "My, she appears to carry a very maniuplative frequency."
+	
+	DESCRIBE.OCUPUS_BEAK = "The beak of a large unidentified cephalopod."
+	DESCRIBE.OCUPUS_TENTACLE = "It's rather inedible in this state."
+	DESCRIBE.OCUPUS_TENTACLE_EYE = "."
+	DESCRIBE.OCUPUS_TENTACLE_COOKED = "Chewing is very important, now."
+	
+	DESCRIBE.ARMOR_REED_UM = "Surprisngly effective when bundled close enough."
+	DESCRIBE.ARMOR_SHARKSUIT_UM = ""
+	DESCRIBE.ROCKJAWLEATHER = "Unfortunatly it's easier to examine it dead."
+	
+	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
+	DESCRIBE.STUFFED_PEEPER_POPPERS = "I believe I might have misread the recipe book."
+	DESCRIBE.UM_DEVILED_EGGS = "Aptly named."
+	DESCRIBE.LUSH_ENTRANCE = "Curious. It smells strongly of bryophyta."
+	DESCRIBE.CRITTER_FIGGY = "An Eriosomatinae out here? And a... particularly round one."
+	DESCRIBE.GIANT_TREE_BIRDNEST = "Oh dear. I don't except its mother to come back for it."
+	
+    DESCRIBE.SLUDGE = "Potentially dangerous, albiet quite useful."
+	DESCRIBE.SLUDGE_OIL = "The impurities have been removed."
+    DESCRIBE.SLUDGE_SACK = "It will provide ample storage."
+	DESCRIBE.CANNONBALL_SLUDGE_ITEM = "Another fiery accident waiting to happen."
+	DESCRIBE.BOAT_BUMPER_SLUDGE = "Any debris should bounce right off!"
+	DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "Good for keeping debris away from my boat."
+    DESCRIBE.BOATPATCH_SLUDGE = "A good idea to have a few spare plugs around."
+    DESCRIBE.UM_COPPER_PIPE = "I don't believe copper grows ..."
+    DESCRIBE.BRINE_BALM  = "A painful antiseptic."
+    DESCRIBE.UNCOMPROMISING_FISHINGNET = DESCRIBE.FISHINGNET
+	DESCRIBE.UM_AMBER = "Presumably, something ancient lies within."
+	DESCRIBE.UM_BEEGUN = "How does it propel the bees with such force?"
+	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.SUNKENCHEST_ROYAL = "Must be full of riches."
+	DESCRIBE.STEERINGWHEEL_COPPER = "I should be able to turn the entire barge now."
+	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "The mechinism allows it to work with a rudder."
+	DESCRIBE.BOAT_BUMPER_COPPER = "It should last a millenium."
+	DESCRIBE.BOAT_BUMPER_COPPER_KIT = "Where should we put it?"
+	DESCRIBE.UM_DREAMCATCHER = "Not much use to me."
+	DESCRIBE.UM_BRINEISHMOSS = "It grows almost everywhere."
+	DESCRIBE.UM_COALESCED_NIGHTMARE = "The esscence of someones negative thoughts."
+	DESCRIBE.SLUDGE_CORK = "Not suitable for a boat, it's for a much bigger hole."
+	DESCRIBE.SLUDGESTACK = "It's reminiscient of a hydrothermal vent."
+	DESCRIBE.SPECTER_SHIPWRECK = "an Abandoned wreck." 
+	
+	DESCRIBE.UNCOMPROMISING_HARPOON = "Stabbing things from a distance has never been easier."
+	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
+	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
+	DESCRIBE.UM_MAGNERANG = "This is not the intended use for a magnet!"
+	DESCRIBE.UM_MAGNERANGREEL = "I don't believe that's how magnets work."
+	DESCRIBE.SIREN_THRONE = "Curious. It seems something has made a home out of this formation."
+	DESCRIBE.LAVASPIT_SLUDGE = "It'd be smart to keep my distance."
+	
+	DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_BLOCKER = "The Osmia bicornis are insistent we do not reach the monarch."
+
+	DESCRIBE.PORTABLEBOAT_ITEM = "It doesn't look stable."
+	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "A facinating use of kinetic principles!"
+	
+	DESCRIBE.WIXIE_PIANO = "I haven't played one of these in a long time."
+	DESCRIBE.WIXIE_CLOCK = "I miss the ticking of my old grandfather clock."
+	DESCRIBE.WIXIE_WARDROBE = "An ordinary wardrobe, from a glance."
+	DESCRIBE.CHARLES_T_HORSE = "I couldn't bring myself to burn it... Because it won't burn!"
+
+	DESCRIBE.UM_ORNAMENT_OPOSSUM = "An excellent model of a Didelphis Virginiana."
+	DESCRIBE.UM_ORNAMENT_RAT = "The kittens would love it!"
+	
+	DESCRIBE.TRINKET_WATHOM1 = "Oh, this must be a subspecies of that sentient creature!"

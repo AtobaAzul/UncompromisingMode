@@ -307,6 +307,25 @@ local function Stop(player, params)
     end
 end
 
+local function ForceSpawnShadow(inst)
+	TheWorld:PushEvent("ms_setclocksegs", {day = 0, dusk = 0, night = 16})
+    inst.SoundEmitter:PlaySound("dontstarve/sanity/shadowhand_creep")
+	print("shadowy")
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local angle = math.random() * 2 * PI
+	x = x + (15 + math.random() *5) * math.cos(angle)
+	z = z - (15 + math.random() *5) * math.sin(angle)
+
+	local ent = SpawnPrefab("crawlingnightmare")
+
+	if math.random() < 0.5 then
+		ent = SpawnPrefab("nightmarebeak")
+	end
+
+	ent.Transform:SetPosition(x, 0, z)
+	ent.components.locomotor.walkspeed = ent.components.locomotor.walkspeed * 2
+	ent.components.locomotor.runspeed = ent.components.locomotor.runspeed * 2
+end
 --------------------------------------------------------------------------
 --[[ Private event handlers ]]
 --------------------------------------------------------------------------
@@ -326,6 +345,11 @@ local function OnPlayerJoined(inst, player)
     end
     _players[player] = { ents = {}, targetpop = 0 }
     Start(player, _players[player])
+	--[[
+	if TheNet:GetServerPlaystyle() ~= nil and TheNet:GetServerPlaystyle() == "relaxed" or TheNet:GetServerPlaystyle() == "RELAXED" then
+		player:DoPeriodicTask(2, ForceSpawnShadow)
+	end]]
+	
     inst:ListenForEvent("inducedinsanity", OnInducedInsanity, player)
     inst:ListenForEvent("sanitymodechanged", OnInducedInsanity, player)
 end

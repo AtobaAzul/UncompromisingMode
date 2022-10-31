@@ -3,7 +3,7 @@ require("stategraphs/commonstates")
 local actionhandlers = 
 {
     ActionHandler(ACTIONS.EAT, "eat"),
-    ActionHandler(ACTIONS.GOHOME, "eat"),
+    ActionHandler(ACTIONS.GOHOME, "exitdig"),
     ActionHandler(ACTIONS.INVESTIGATE, "investigate"),
 }
 
@@ -69,36 +69,9 @@ local states=
         onenter = function(inst)
             inst.SoundEmitter:PlaySound("UCSounds/Scorpion/death")
 			inst.Physics:Stop()
-			RemovePhysicsColliders(inst) 
-			if inst:HasTag("notactuallydead") then
-			inst.AnimState:PlayAnimation("disappear")
-			inst.sg:SetTimeout(0.6)
-			else
             inst.AnimState:PlayAnimation("death")
             inst.components.lootdropper:DropLoot(Vector3(inst.Transform:GetWorldPosition())) 
-			end
         end,
-		ontimeout = function(inst)
-			local x, y, z = inst.Transform:GetWorldPosition()
-			SpawnPrefab("sand_puff").Transform:SetPosition(x, y, z)
-			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
-			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
-			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
-			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
-        end,
-		        events=
-        {
-            EventHandler("animover", function(inst) 
-			if inst:HasTag("notactuallydead") then
-			local x, y, z = inst.Transform:GetWorldPosition()
-			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
-			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
-			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
-			SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
-			end
-
-			end),
-        },
 
     },    
     
@@ -136,14 +109,10 @@ local states=
         {
         
             TimeEvent(0*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
-            ----TimeEvent(2*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
             TimeEvent(4*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
-            ----TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
             TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/mumble") end),
             TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
-            ----TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
             TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
-            ----TimeEvent(14*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/scorpion/walk") end),
             TimeEvent(16*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/walk") end),
         },
         
@@ -285,7 +254,7 @@ local states=
             TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
             TimeEvent(12*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
             TimeEvent(10*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/attack") end),
-            TimeEvent(25*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+            TimeEvent(19*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
         
         events=
@@ -299,7 +268,6 @@ local states=
         tags = {"attack", "busy","no_stun"},
         
         onenter = function(inst, target)
-            --inst.components.combat.poisonous = true
 			inst:AddTag("sleepattack")
             inst.Physics:Stop()
             inst.components.combat:StartAttack()
@@ -311,8 +279,7 @@ local states=
         {
             TimeEvent(20*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
             TimeEvent(15*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/attack") end),
-            TimeEvent(20*FRAMES, function(inst) 
-                inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+            TimeEvent(20*FRAMES, function(inst) inst.components.combat:DoAttack(inst.sg.statemem.target) end),
         },
         
         events=
@@ -321,7 +288,6 @@ local states=
         },
 
         onexit = function(inst)
-             --inst.components.combat.poisonous = false
 			 inst:RemoveTag("sleepattack")
         end,
        
@@ -335,12 +301,11 @@ local states=
 		onenter = function(inst)
 		inst.components.combat:SetRange(2*TUNING.SPIDER_WARRIOR_ATTACK_RANGE, 2*TUNING.SPIDER_WARRIOR_HIT_RANGE)
             inst.sg:SetTimeout(21*FRAMES)                  
-            --if inst.components.combat.target and inst.components.combat.target:IsValid() then
+            if inst.components.combat.target then
                 inst:ForceFacePoint(inst.components.combat.target:GetPosition() )
-            --end   
+			end   
             inst.components.locomotor:Stop()           
             inst.AnimState:PlayAnimation("atk")
-            --inst.Physics:SetMotorVelOverride(20,0,0)
             inst.components.locomotor:EnableGroundSpeedMultiplier(false)
         end,
 		
@@ -364,7 +329,9 @@ local states=
             TimeEvent(8*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap_pre") end),
             TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
             TimeEvent(19*FRAMES, function(inst) inst.components.combat:SetRange(3, 3)
-			inst.components.combat:DoAttack(inst.sg.statemem.target) end),
+			inst.components.combat:DoAttack(inst.sg.statemem.target) 
+            print("getting attacked!")
+        end),
             TimeEvent(20*FRAMES,
                 function(inst)
                     inst.Physics:ClearMotorVelOverride()
@@ -372,46 +339,6 @@ local states=
                 end),
         },
 
-        events=
-        {
-            --EventHandler("animover", function(inst) inst.sg:GoToState("taunt") end),
-        },
-    },
-
-    State{
-        name = "spitter_attack",
-        tags = {"attack", "canrotate", "busy", "spitting"},
-
-        onenter = function(inst, target)
-            if inst.weapon and inst.components.inventory then 
-                inst.components.inventory:Equip(inst.weapon)
-            end
-            if inst.components.locomotor then
-                inst.components.locomotor:StopMoving()
-            end
-            inst.AnimState:PlayAnimation("spit")
-        end,
-
-        onexit = function(inst)
-            if inst.components.inventory then
-                inst.components.inventory:Unequip(EQUIPSLOTS.HANDS)
-            end
-        end,
-
-        timeline =
-        {
-            TimeEvent(7*FRAMES, function(inst) 
-            inst.SoundEmitter:PlaySound(SoundPath(inst, "spit_web")) end),
-
-            TimeEvent(21*FRAMES, function(inst) inst.components.combat:DoAttack()
-            --inst.SoundEmitter:PlaySound(SoundPath(inst, "spit_voice"))
-             end),
-        },
-
-        events =
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("taunt") end),
-        },
     },
 
     State{
@@ -459,16 +386,11 @@ local states=
             inst.AnimState:PlayAnimation("evade")
             inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 			inst.components.combat:SetRange(TUNING.SPIDER_WARRIOR_ATTACK_RANGE, TUNING.SPIDER_WARRIOR_HIT_RANGE)
-			--if inst.components.combat.target and inst.components.combat.target:IsValid() then
-                --inst:ForceFacePoint(inst.components.combat.target:GetPosition() )
-            --end  
-			--inst.Physics:SetMotorVelOverride(-20,0,0)
         end,
 
         events=
         {
-            EventHandler("animover", function(inst)
-				--inst.Physics:SetMotorVelOverride(-20,0,0)			
+            EventHandler("animover", function(inst)		
                 inst.sg:GoToState("evade_loop") 
             end ),
         },               
@@ -480,14 +402,9 @@ local states=
 
 
         onenter = function(inst)
-		--inst.components.combat:SetRange(10, 10)
             inst.sg:SetTimeout(0.1)                  
-            --if inst.components.combat.target and inst.components.combat.target:IsValid() then
-            --    inst:ForceFacePoint(inst.components.combat.target:GetPosition() )
-            --end   
             inst.components.locomotor:Stop()           
             inst.AnimState:PlayAnimation("evade_loop",true)
-           --inst.Physics:SetMotorVelOverride(-20,0,0)
             inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 			inst.sg.statemem.startpos = Vector3(inst.Transform:GetWorldPosition())
 			
@@ -507,19 +424,7 @@ local states=
             inst.Transform:SetPosition(inst.sg.statemem.startpos.x-(xdiff*percent),0,inst.sg.statemem.startpos.z-(zdiff*percent))
 			end
         end,
---[[
-        events=
-        {
-            EventHandler("animover", function(inst) 
-                inst.sg:GoToState("evade_pst") 
-            end ),
-        },  
-]]
-        timeline =
-        {
-            --TimeEvent(0*FRAMES, function(inst) inst.Physics:SetMotorVel(-20,0,0) end),
-          
-        },
+		
         ontimeout = function(inst)
             inst.sg:GoToState("evade_pst")
         end,
@@ -536,9 +441,6 @@ local states=
         tags = {"busy", "evade","no_stun"},
 
         onenter = function(inst)                     
-            --if inst.components.combat.target and inst.components.combat.target:IsValid() then
-            --    inst:ForceFacePoint(inst.components.combat.target:GetPosition() )
-            --end   
             inst.components.locomotor:Stop()           
             inst.AnimState:PlayAnimation("evade_pst")                    
         end,
@@ -610,25 +512,6 @@ local states=
             inst.Transform:SetPosition(pt:Get())
         end,
     }, 
-
-    State{
-        name = "dropper_enter",
-        tags = {"busy"},
-
-        onenter = function(inst)
-            inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("enter")
-            --inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/descend")            
-        end,
-
-        events=
-        {
-            EventHandler("animqueueover", function(inst) inst.sg:GoToState("taunt") end ),
-        },
-
-
-
-    },
     State{
         name = "enterdig",
         tags = {"busy"},
@@ -655,7 +538,26 @@ local states=
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("taunt") end),
         },
-    },  
+    },
+    State{
+        name = "exitdig",
+        tags = {"busy"},
+        
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("disappear")
+        end,
+        events=
+        {
+            EventHandler("animover", function(inst) 
+				inst.SoundEmitter:PlaySound("UCSounds/Scorpion/taunt")
+				local x,y,z = inst.Transform:GetWorldPosition()
+				SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
+				SpawnPrefab("sinkhole_warn_fx_"..math.random(3)).Transform:SetPosition(x, y, z)
+				inst:PerformBufferedAction()
+			end),
+        },
+    }, 	
 }
 
 CommonStates.AddSleepStates(states,
@@ -673,5 +575,5 @@ CommonStates.AddSleepStates(states,
 })
 CommonStates.AddFrozenStates(states)
 
-return StateGraph("scorpion", states, events, "idle", actionhandlers)
+return StateGraph("um_scorpion", states, events, "idle", actionhandlers)
 

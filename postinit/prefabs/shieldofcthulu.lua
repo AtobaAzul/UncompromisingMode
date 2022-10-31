@@ -7,7 +7,7 @@ env.AddPrefabPostInit("shieldofterror", function(inst)
 	end
 	
 	if inst.components.armor ~= nil then
-		inst.components.armor:InitCondition(TUNING.SHIELDOFTERROR_ARMOR * 2, TUNING.SHIELDOFTERROR_ABSORPTION)
+		inst.components.armor:InitCondition(TUNING.SHIELDOFTERROR_ARMOR * 2.333, TUNING.SHIELDOFTERROR_ABSORPTION+0.05)
 	end
 	
 	if inst.components.eater ~= nil then

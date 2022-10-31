@@ -11,7 +11,7 @@ local night_segs = 2
 
 local day_time = seg_time * day_segs
 local total_day_time = seg_time * 16
-
+local wilson_attack = 34
 local day_time = seg_time * day_segs
 local dusk_time = seg_time * dusk_segs
 local night_time = seg_time * night_segs
@@ -30,8 +30,12 @@ end
 
 local ia_check = GLOBAL.KnownModIndex:IsModEnabled("workshop-1467214795")
 
-TUNING.DSTU = 
+TUNING.DSTU =
 {
+    ----------------------------------------------------------------------------
+    --Armor
+    ----------------------------------------------------------------------------
+    ARMORREED_UM = TUNING.WILSON_HEALTH*2.1*multiplayer_armor_durability_modifier,
 	----------------------------------------------------------------------------
     --Acid colour
     ----------------------------------------------------------------------------
@@ -278,16 +282,17 @@ TUNING.DSTU =
 
 	--Winona
 	WINONA_WORKER = GetModConfigData("winonaworker"),
-
+	WINONA_WACKCATS = GetModConfigData("winonawackycats"),
+	
 	--Wickerbottom
 	WICKERNERF = GetModConfigData("wickerbottom"),
 	WICKERNERF_TENTACLES = GetModConfigData("on tentacles"),
 	WICKERNERF_HORTICULTURE = GetModConfigData("applied horticulture"),
 
     --Wanda
-    WANDA_NERF = GetModConfigData("wandanerf"),
+    WANDA_NERF = GetModConfigData("wanda_nerf"),
 
-	--Voretox
+	--Wortox
 	WORTOX = GetModConfigData("wortox"),
 
 	--Mobs
@@ -324,8 +329,8 @@ TUNING.DSTU =
     CREEPINGFEAR_RANGE_1 = 3.0,
     CREEPINGFEAR_RANGE_2 = 4.0, --4.2,
     CREEPINGFEAR_SPAWN_THRESH = 0, -- 10%
-    CREEPINGFEAR_WALK_SPEED = 6,
-    CREEPINGFEAR_RUN_SPEED = 8,
+    CREEPINGFEAR_WALK_SPEED = 5,
+    CREEPINGFEAR_RUN_SPEED = 6,
 
     DREADEYE_SPEED = 7,
     DREADEYE_HEALTH = 350,
@@ -370,7 +375,7 @@ TUNING.DSTU =
 	EYEBRELLAREWORK = GetModConfigData("eyebrellarework"),
 
 --More Config
-    UPDATE_CHECK = CurrentRelease.GreaterOrEqualTo("R23_REFRESH_WICKERBOTTOM"),--REMEMBER TO ALWAYS UPDATE THIS WITH NEW BETAS.
+    UPDATE_CHECK = CurrentRelease.GreaterOrEqualTo("R24_STS_ALITTLEDRAMA"),--REMEMBER TO ALWAYS UPDATE THIS WITH NEW BETAS.
 	POCKET_POWERTRIP = GetModConfigData("pocket_powertrip"),
     WINTER_BURNING = GetModConfigData("winter_burning"),
     HUNGRY_VOID = GetModConfigData("hungry_void"),
@@ -398,9 +403,15 @@ TUNING.DSTU =
     ITEMCHECK = GetModConfigData("itemcheck"),
     SEEDS = GetModConfigData("seeds"),
     MAXHPHITTERS = GetModConfigData("maxhphitters"),
-
+    BEEFALO_NERF = GetModConfigData("beefalo_nerf"),
     NO_MOCK_DRAGONFLY_BOSS_TIME = GetModConfigData("wiltfly_spawn"),
     NO_MOTHER_GOOSE_BOSS_TIME = GetModConfigData("mother_goose_spawn"),
+
+    WATHOM_MAX_DAMAGE_CAP = GetModConfigData("wathom_maxdmg"),
+    WATHOM_AMPED_VULNERABILITY = GetModConfigData("wathom_ampvulnerability"),
+    WATHOM_ARMOR_DAMAGE = GetModConfigData("wathom_armordamage"),
+
+    PK_GUARDS = GetModConfigData("pigking_guards"),
 
 --boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
@@ -410,11 +421,20 @@ TUNING.DSTU =
 
     ISLAND_ADVENTURES = ia_check,
 }
+-- [              DST Related Overrides                  ]
 
 if GetModConfigData("beebox_nerf") then
     TUNING.BEEBOX_BEES = 2
     TUNING.BEEBOX_RELEASE_TIME = (0.5 * day_time) / 2
 end
+
+TUNING.NONLETHAL_TEMPERATURE = false
+TUNING.NONLETHAL_HUNGER = false
+TUNING.NONLETHAL_DARKNESS = false
+TUNING.NONLETHAL_PERCENT = 0
+
+--shield buff
+TUNING.SHIELDOFTERROR_DAMAGE = 59.5
 
 TUNING.NO_BOSS_TIME = 24
 --TUNING.DISEASE_DELAY_TIME = total_day_time * 50 / 1.5
@@ -442,10 +462,55 @@ TUNING.AFFINITY_15_CALORIES_SUPERHUGE = 1.034
 --TUNING.ARMORBRAMBLE_DMG = 10
 
 if GetModConfigData("wanda_nerf") then
-    TUNING.POCKETWATCH_SHADOW_DAMAGE = 34*1.5 --reduced damage to 51 base
+    TUNING.POCKETWATCH_SHADOW_DAMAGE = wilson_attack*1.5
     TUNING.POCKETWATCH_REVIVE_COOLDOWN = TUNING.POCKETWATCH_REVIVE_COOLDOWN * 2 --doubled cooldown
 end
 
-TUNING.SLEEP_TICK_PERIOD = TUNING.SLEEP_TICK_PERIOD / TUNING.DSTU.SLEEPINGBUFF
+if GetModConfigData("sleepingbuff") then
+	TUNING.SLEEP_TICK_PERIOD = TUNING.SLEEP_TICK_PERIOD / GetModConfigData("sleepingbuff")
+	--TUNING.SLEEP_TICK_PERIOD = TUNING.SLEEP_TICK_PERIOD / TUNING.DSTU.SLEEPINGBUFF
+end
 
--- [              DST Related Overrides                  ]
+TUNING.BATTLESONG_FIRE_RESIST_MOD = 0
+
+TUNING.SPAWNPROTECTIONBUFF_IDLE_DURATION = TUNING.SPAWNPROTECTIONBUFF_IDLE_DURATION * 4
+TUNING.SPAWNPROTECTIONBUFF_DURATION = 5
+TUNING.SPAWNPROTECTIONBUFF_SPAWN_DIST_SQ = 3*3
+
+TUNING.MULTITOOL_DAMAGE = TUNING.AXE_DAMAGE
+
+
+--Sailing Rebalance related tuning changes
+--trident buff
+TUNING.TRIDENT.DAMAGE = wilson_attack * 1.5
+TUNING.TRIDENT.OCEAN_DAMAGE = wilson_attack*2.4
+TUNING.TRIDENT.USES = TUNING.TRIDENT.USES + 50
+TUNING.TRIDENT.SPELL.USE_COUNT = TUNING.TRIDENT.USES
+TUNING.TRIDENT.SPELL.DAMAGE = wilson_attack*3
+
+--bumper buff
+TUNING.BOAT.BUMPERS.KELP.HEALTH = TUNING.BOAT.BUMPERS.KELP.HEALTH*1.33
+TUNING.BOAT.BUMPERS.SHELL.HEALTH = TUNING.BOAT.BUMPERS.SHELL.HEALTH*1.33
+
+--cannon buff
+TUNING.CANNONBALLS.ROCK.SPEED = TUNING.CANNONBALLS.ROCK.SPEED * 1.25
+TUNING.CANNONBALLS.ROCK.GRAVITY = TUNING.CANNONBALLS.ROCK.GRAVITY * 1.25
+
+TUNING.CANNONBALL_RADIUS = TUNING.CANNONBALL_RADIUS*1.25
+TUNING.CANNONBALL_SPLASH_RADIUS = TUNING.CANNONBALL_SPLASH_RADIUS*1.33
+TUNING.CANNONBALL_SPLASH_DAMAGE_PERCENT = 1
+
+--sea weed changes
+TUNING.WATERPLANT.DAMAGE = TUNING.WATERPLANT.DAMAGE * 0.75
+TUNING.WATERPLANT.ITEM_DAMAGE = TUNING.WATERPLANT.ITEM_DAMAGE * 1.75
+
+--shark nerf
+TUNING.SHARK.DAMAGE = 50 / 3
+
+--more treasures
+TUNING.MESSAGEBOTTLE_NOTE_CHANCE = 0.66
+
+--nautopilot buff
+TUNING.BOAT.BOAT_MAGNET.MAX_DISTANCE = TUNING.BOAT.BOAT_MAGNET.MAX_DISTANCE*2
+TUNING.BOAT.BOAT_MAGNET.MAX_VELOCITY = TUNING.BOAT.BOAT_MAGNET.MAX_VELOCITY*10--No matter the boatspeed, nautopilots should be able to keep up.
+TUNING.BOAT.BOAT_MAGNET.CATCH_UP_SPEED = TUNING.BOAT.BOAT_MAGNET.CATCH_UP_SPEED*100

@@ -4,7 +4,7 @@
 
 - @ Canis
 
-- @ Sho / Scrimbles
+- @ Scrimbles
 
 - @ The Axe Swinging Smasher
 
@@ -14,7 +14,7 @@
 
 ## Code contributors
 
-- @ Sho / Scrimbles
+- @ Scrimbles
 
 - @ The Axe Swinging Smasher
 
@@ -32,24 +32,36 @@
 
 - @ loopuleasa
 
+- @ Maradyne
+
+- @ Canis
+
 
 ## Art contributors
 
 - @ The Axe Swinging Smasher
 
-- @ Advent - Living tree root attack custom animation
+- @ Advent
 
-- @-Variant- - Rat artwork
+- @-Variant-
 
-- @ Ismael Daniel - Uncompromising logo
+- @ Ismael Daniel - Original Uncompromising logo!
 
-- @ Maradyne - Logo animation, Rat Den art
+- @ Wacky
+
+- @ Maradyne
+
+- @ Gearless
+
+- @ Anomen
 
 ## Quote contributors
 
-- @ Maradyne - Quote quality assurance
+- @ Maradyne
 
 - @ Canis
+
+- @ Scrimbles
 
 
 ## Brand new music!
@@ -58,4 +70,4 @@
 
 &nbsp;
 
-Many thanks to the people on discord with the design, votes and discussions on what should make it in the mod collab.
+Many thanks to the people on Discord with the design, votes and discussions on what should make it into the mod collab.

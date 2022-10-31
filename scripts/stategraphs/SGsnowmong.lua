@@ -86,7 +86,6 @@ local states =
         events =
         {
             EventHandler("animover", function(inst)
-				--print("thiscoderan")
                 inst:SetUnder(inst)
                 inst.sg:GoToState("idle") 
             end)
@@ -98,7 +97,7 @@ local states =
             TimeEvent(1* FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Grub/jump") end),
             TimeEvent(22*FRAMES, function(inst) 
 				local x, y, z = inst:GetPosition():Get()
-				local ents = TheSim:FindEntities(x, y, z, 3, nil, {"snowish", "ghost", "playerghost", "shadow", "INLIMBO" })
+				local ents = TheSim:FindEntities(x, y, z, 3, nil, {"snowish", "ghost", "playerghost", "shadow", "INLIMBO","structure","wall","companion"})
 				for i, v in ipairs(ents) do
 					if v.components.combat ~= nil then
 					v.components.combat:GetAttacked(inst, TUNING.METEOR_DAMAGE * 1.25, nil)

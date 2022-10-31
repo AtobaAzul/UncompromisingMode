@@ -69,8 +69,14 @@ end
 local function onattackedfn(inst, data)
     if inst.components.health and not inst.components.health:IsDead()
     and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("frozen")) then
-        if inst.components.combat and data and data.attacker then inst.components.combat:SuggestTarget(data.target) end
-        inst.sg:GoToState("hit")
+        if inst.components.combat and data and data.attacker then 
+			inst.components.combat:SuggestTarget(data.target) 
+			
+		end
+		
+		if data and not (data.weapon ~= nil and (data.weapon.components.projectile or data.weapon.components.complexprojectile)) or data == nil then
+			inst.sg:GoToState("hit")
+		end
     end
 end
 

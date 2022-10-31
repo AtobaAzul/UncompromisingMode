@@ -39,44 +39,14 @@ local function EscapeAction(inst)
         or nil
 end
 
-local function EatFoodAction(inst)
-	if inst.sg:HasStateTag("busy") or inst:GetTimeAlive() < 5 or
-        (inst.components.eater:TimeSinceLastEating() ~= nil and inst.components.eater:TimeSinceLastEating() < 5) then
-        return
-    elseif inst.components.inventory ~= nil and inst.components.eater ~= nil then
-        local target = inst.components.inventory:FindItem(function(item)
-            return inst.components.eater:CanEat(item)
-        end)
-        if target ~= nil and not target:HasTag("planted") then
-            return BufferedAction(inst, target, ACTIONS.EAT)
-        end
-    end
-
-    local target = FindEntity(
-        inst,
-        SEE_FOOD_DIST,
-        function(item)
-            return item:GetTimeAlive() >= 8
-                and item:IsOnPassablePoint(true)
-                and inst.components.eater:CanEat(item)
-        end,
-        nil,
-        NO_TAGS,
-        inst.components.eater:GetEdibleTags()
-    )
-    return target ~= nil and BufferedAction(inst, target, ACTIONS.EAT) or nil
-end
 
 function FruitBatBrain:OnStart()
     local root = PriorityNode({
         WhileNode(function() return self.inst.components.health.takingfiredamage or self.inst.components.hauntable.panic end, "Panic", Panic(self.inst)),
-        ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST),
-        WhileNode(function() return TheWorld.state.isnight end, "IsNight",
-            DoAction(self.inst, GoHomeAction)),
-          
-                DoAction(self.inst, EatFoodAction),
-                MinPeriod(self.inst, TUNING.BAT_ESCAPE_TIME, false,
-                    DoAction(self.inst, EscapeAction)),
+        --WhileNode(function() return TheWorld.state.isnight end, "IsNight",
+            --DoAction(self.inst, GoHomeAction)),
+				ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST),
+                --MinPeriod(self.inst, TUNING.BAT_ESCAPE_TIME, false, DoAction(self.inst, EscapeAction)),
                 Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST),
     }, .25)
 

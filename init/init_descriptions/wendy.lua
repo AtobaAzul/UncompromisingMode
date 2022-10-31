@@ -115,7 +115,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	DESCRIBE.SPOREPACK = "It reeks, just like everything else."
 	DESCRIBE.SALTPACK = "It deals with menial chores. My other problems remain unsolved."
 	
-	DESCRIBE.SCORPION = "One sting and it could be over."
+	DESCRIBE.UM_SCORPION = "One sting and it could be over."
 	DESCRIBE.SCORPIONCARAPACE = "Another piece of vile meat."
 	DESCRIBE.SCORPIONCARAPACECOOKED = "It was pointless to cook it."
 	DESCRIBE.HARDSHELLTACOS = "I like the dark shell."
@@ -351,5 +351,80 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "It could've electrocuted me."
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "It could've electrocuted me. I wish it did."
-	DESCRIBE.UM_DEVILED_EGGS = "Sins of the father."
 	
+	----UNDER THE WEATHER----
+	
+	DESCRIBE.WINONA_TOOLBOX = "If empty it has no purpose."
+	ACTIONFAIL.WINONATOOLBOX = "It is not mine to take from."
+	DESCRIBE.POWERCELL = "."
+	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "."
+	DESCRIBE.MINERHAT_ELECTRICAL = ""
+	DESCRIBE.OCEAN_SPEAKER = "It's busted and hollow inside. Only playing dreary tunes."
+	--DESCRIBE.UM_SIREN = "She manipulates her pawns through song. A very potentent ability..."
+	
+	--DESCRIBE.OCUPUS_BEAK = ""
+	DESCRIBE.OCUPUS_TENTACLE = "It wanted to pull me down into the abyss."
+	DESCRIBE.OCUPUS_TENTACLE_EYE = ""
+	DESCRIBE.OCUPUS_TENTACLE_COOKED = "A delicately cooked tendril."
+	
+	DESCRIBE.ARMOR_REED_UM = DESCRIBE.ARMORGRASS
+	DESCRIBE.ARMOR_SHARKSUIT_UM = ""
+	DESCRIBE.ROCKJAWLEATHER = "Even their skin bites back."
+	
+	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
+	DESCRIBE.STUFFED_PEEPER_POPPERS = "They peer into the everlasting darkness of my mouth."
+	DESCRIBE.UM_DEVILED_EGGS = "Sins of the father."
+	DESCRIBE.LUSH_ENTRANCE = "I can only imagine what horrors lurk below."
+	DESCRIBE.CRITTER_FIGGY = "Its hollow eyes stare right through me..."
+	DESCRIBE.GIANT_TREE_BIRDNEST = "They haven't even hatched, yet the world is cruel enough to throw them to the predators."
+	
+    DESCRIBE.SLUDGE = "A vile concoction of the ocean."
+	DESCRIBE.SLUDGE_OIL = "A drink of death."
+    DESCRIBE.SLUDGE_SACK = "A soggy sack."
+	DESCRIBE.CANNONBALL_SLUDGE_ITEM = "May those on the other end face a quick end."
+	DESCRIBE.BOAT_BUMPER_SLUDGE = "It will only prolong the inevitable." -- listen if klei can be lazy with her quotes i can too
+	DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "It will only prolong the inevitable."
+    DESCRIBE.BOATPATCH_SLUDGE = "Temporary protection from the cruelty of the sea."
+    DESCRIBE.UM_COPPER_PIPE = "Hollow."
+    DESCRIBE.BRINE_BALM  = "Pain to soothe my cuts."
+    DESCRIBE.UNCOMPROMISING_FISHINGNET = DESCRIBE.FISHINGNET
+	DESCRIBE.UM_AMBER = "Encased forever."
+	DESCRIBE.UM_BEEGUN = "Death by a thousand little stabs."
+	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.SUNKENCHEST_ROYAL = "It was a royal pain just to get this."
+	DESCRIBE.STEERINGWHEEL_COPPER = "Now I can rotate this boat."
+	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "It can turn an entire boat, if only I had one."
+	DESCRIBE.BOAT_BUMPER_COPPER = "This will last longer, but not forever."
+	DESCRIBE.BOAT_BUMPER_COPPER_KIT = "This will last longer, but not forever."
+	DESCRIBE.UM_DREAMCATCHER = "Oh, to catch a dream."
+	DESCRIBE.UM_BRINEISHMOSS = "Sad, sad moss."
+	DESCRIBE.UM_COALESCED_NIGHTMARE = "Dreams of sustained cruelty."
+	DESCRIBE.SLUDGE_CORK = "To plug the slimey tears of the ocean."
+	DESCRIBE.SLUDGESTACK = "Tears rising from below the salty depths."
+	DESCRIBE.SPECTER_SHIPWRECK = "Left to rot in the ocean." 
+	
+	DESCRIBE.UNCOMPROMISING_HARPOON = "Stabbing things from a distance has never been easier."
+	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
+	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
+	DESCRIBE.UM_MAGNERANG = "I'm not good at keeping things close."
+	DESCRIBE.UM_MAGNERANGREEL = "I have seperation anxiety too."
+	DESCRIBE.SIREN_THRONE = "A throne to rule over the vast nothingness."
+	DESCRIBE.LAVASPIT_SLUDGE = "A tempting way to go out in a blaze."
+	
+	DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_BLOCKER = "They are a fight we ought to avoid..."
+
+	DESCRIBE.PORTABLEBOAT_ITEM = "It won't be joining us in the murky depths."
+	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "An endless cycle."
+	
+	DESCRIBE.WIXIE_PIANO = "I only know sad songs. Sorry..."
+	DESCRIBE.WIXIE_CLOCK = "It looks like its time is at it's end."
+	DESCRIBE.WIXIE_WARDROBE = "Dark secrets may lie within."
+	DESCRIBE.CHARLES_T_HORSE = "It might bring someone else joy."
+
+	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Is it truly dead, or merely playing? What do you think, Abigail?"
+	DESCRIBE.UM_ORNAMENT_RAT = "Rats have short lifespans."
+	
+	DESCRIBE.TRINKET_WATHOM1 = "Broken and worthless. Like... Nevermind."

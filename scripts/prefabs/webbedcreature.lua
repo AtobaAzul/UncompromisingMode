@@ -373,16 +373,19 @@ local function SetSize(inst)
 end
 
 local function Regen(inst, attacker)
-if not attacker:HasTag("player") then
-	if attacker.components.combat ~= nil and attacker.components.combat.target ~= nil then
-	attacker.components.combat:DropTarget()
+	---TheNet:Announce("attacked")
+	if not attacker:HasTag("player") then
+		if attacker.components.combat ~= nil and attacker.components.combat.target ~= nil then
+		attacker.components.combat:DropTarget()
+		end
 	end
-end
     if not inst.components.health:IsDead() and not attacker:HasTag("hoodedwidow") then
-	local widowweb = FindEntity(inst,50,function(guy) return guy:HasTag("widowweb") end)
-	if widowweb ~= nil then
-	widowweb.SpawnInvestigators(widowweb,attacker)
-	end
+		--TheNet:Announce("advancing")
+		local widowweb = FindEntity(inst,50,function(guy) return guy:HasTag("widowweb") end)
+		if widowweb then
+			--TheNet:Announce("tellingvvidovv")
+			widowweb.SpawnInvestigators(widowweb,attacker)
+		end
 
         inst.SoundEmitter:PlaySound("dontstarve/creatures/spider/spiderLair_hit")
         inst.AnimState:PlayAnimation(inst.anims.hit)

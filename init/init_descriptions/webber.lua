@@ -115,7 +115,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.SPOREPACK = "We need a bubble bath after wearing it!"
 	DESCRIBE.SALTPACK = "We kinda want to play in the snow, though."
 	
-	DESCRIBE.SCORPION = "Hello, fellow arachnid."
+	DESCRIBE.UM_SCORPION = "Hello, fellow arachnid."
 	DESCRIBE.SCORPIONCARAPACE = "A little more crunchy than usual."
 	DESCRIBE.SCORPIONCARAPACECOOKED = "It's not that bad."
 	DESCRIBE.HARDSHELLTACOS = "I want another!"
@@ -298,6 +298,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Everything's getting scary again!!"
 	--StantonStuff
 	
+	
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
 	
 	DESCRIBE.THEATERCORN = "We like to watch things fight when we eat it."
@@ -352,5 +353,80 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "I think we did it right!"
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "Agh! We don't think that's right."
-	DESCRIBE.UM_DEVILED_EGGS = "We love these!"
 	
+	----UNDER THE WEATHER----
+	
+	DESCRIBE.WINONA_TOOLBOX = "Can we make it into a toy box?"
+	ACTIONFAIL.WINONATOOLBOX = "We should be respectful."
+	DESCRIBE.POWERCELL = "That's a big battery."
+	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "Makes everything we put in on a battery!"
+	DESCRIBE.MINERHAT_ELECTRICAL = "Now We can charge it too."
+	DESCRIBE.OCEAN_SPEAKER = "I want to get closer but he seems weary."
+	--DESCRIBE.UM_SIREN = "Her songs make our head all fuzzy..."
+	
+    DESCRIBE.OCUPUS_BEAK = ""
+	DESCRIBE.OCUPUS_TENTACLE = "We'd shake your hand but its, well..."
+	DESCRIBE.OCUPUS_TENTACLE_EYE = "My, what a big eye you had."
+	DESCRIBE.OCUPUS_TENTACLE_COOKED = "Cripsy but still squishy."
+	
+	DESCRIBE.ARMOR_REED_UM = "We can barely feel it over our body."
+	DESCRIBE.ARMOR_SHARKSUIT_UM = "We feel more monstrous with it on."
+	DESCRIBE.ROCKJAWLEATHER = "What a nice fin."
+	
+	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
+	DESCRIBE.STUFFED_PEEPER_POPPERS = "I think we might have gone too far."
+	DESCRIBE.UM_DEVILED_EGGS = "We love these!"
+	DESCRIBE.LUSH_ENTRANCE = "I'm not sure I want to go down there... but he wants to!"
+	DESCRIBE.CRITTER_FIGGY = "Yay!! A new bug friend!"
+	DESCRIBE.GIANT_TREE_BIRDNEST = "He says he thinks our nest is safer."
+	
+    DESCRIBE.SLUDGE = "We don't want that getting on our fur."
+	DESCRIBE.SLUDGE_OIL = "Spilling this won't be good. We shouldn't touch it."
+    DESCRIBE.SLUDGE_SACK = "We don't like how it feels on our back."
+	DESCRIBE.CANNONBALL_SLUDGE_ITEM = "A rock that will go, KABOOM!"
+	DESCRIBE.BOAT_BUMPER_SLUDGE = "This bumpy bumper will keep the boat safe."
+	DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "It'll bump stuff."
+    DESCRIBE.BOATPATCH_SLUDGE = "It's the perfect size for any holes."
+    DESCRIBE.UM_COPPER_PIPE = "We can look through it and pretend it's a spyglass."
+    DESCRIBE.BRINE_BALM  = "It hurts, but it's good for us."
+    DESCRIBE.UNCOMPROMISING_FISHINGNET = DESCRIBE.FISHINGNET
+	DESCRIBE.UM_AMBER = "It's hard to see, but there's something inside."
+	DESCRIBE.UM_BEEGUN = "This seems wrong."
+	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.SUNKENCHEST_ROYAL = "Yay! A fancy treasure chest!"
+	DESCRIBE.STEERINGWHEEL_COPPER = "We might get sea sick with all this turning."
+	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "It'll will help us spin our boat."
+	DESCRIBE.BOAT_BUMPER_COPPER = ""
+	DESCRIBE.BOAT_BUMPER_COPPER_KIT = ""
+	DESCRIBE.UM_DREAMCATCHER = "Nighty night."
+	DESCRIBE.UM_BRINEISHMOSS = "It feels like wet fur."
+	DESCRIBE.UM_COALESCED_NIGHTMARE = "They're not our thoughts."
+	DESCRIBE.SLUDGE_CORK = "We can plug really big holes with this."
+	DESCRIBE.SLUDGESTACK = "We don't think that'll be good for our fur."
+	DESCRIBE.SPECTER_SHIPWRECK = "Is anyone in there?" 
+	
+	DESCRIBE.UNCOMPROMISING_HARPOON = "Stabbing things from a distance has never been easier."
+	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
+	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
+	DESCRIBE.UM_MAGNERANG = "Didn't dad have some in his drawer."
+	DESCRIBE.UM_MAGNERANGREEL = "We like the colors!"
+	DESCRIBE.SIREN_THRONE = "No ones home."
+	DESCRIBE.LAVASPIT_SLUDGE = "Ah, it scorched our fur!"
+
+	DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_BLOCKER = "Wahh! Let us through you meanies!"
+
+	DESCRIBE.PORTABLEBOAT_ITEM = "It won't be joining us in the murky depths."
+	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "An endless cycle."
+	
+	DESCRIBE.WIXIE_PIANO = "It's still hard to play, even with eight arms!"
+	DESCRIBE.WIXIE_CLOCK = "Aw, it's not a cuckoo clock."
+	DESCRIBE.WIXIE_WARDROBE = "Looks scary!"
+	DESCRIBE.CHARLES_T_HORSE = "Giddy up, horsey!"
+
+	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Oh no! Are you okay?"
+	DESCRIBE.UM_ORNAMENT_RAT = "We got you, you sneaky thing!"
+	
+	DESCRIBE.TRINKET_WATHOM1 = "We want a refund!!"

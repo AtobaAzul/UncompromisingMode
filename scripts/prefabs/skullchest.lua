@@ -67,6 +67,7 @@ local function MakeChest(name, bank, build, indestructible, master_postinit, pre
 		end
         inst:AddTag("structure")
         inst:AddTag("chest")
+		inst:AddTag("irreplaceable")
 
 		if name == "skullchest_child" then
 			inst:AddTag("skull_storage")

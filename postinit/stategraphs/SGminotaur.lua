@@ -1,509 +1,314 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
+local BOUNCESTUFF_MUST_TAGS = { "_inventoryitem" }
+local BOUNCESTUFF_CANT_TAGS = { "locomotor", "INLIMBO" }
+
+local function shield_fxanim(inst)
+    inst._fx.AnimState:PlayAnimation("hit")
+    inst._fx.AnimState:PushAnimation("idle_loop")
+end
+
+local function ClearRecentlyBounced(inst, other)
+    inst.sg.mem.recentlybounced[other] = nil
+end
+
+local function SmallLaunch(inst, launcher, basespeed)
+    local hp = inst:GetPosition()
+    local pt = launcher:GetPosition()
+    local vel = (hp - pt):GetNormalized()
+    local speed = basespeed * 2 + math.random() * 2
+    local angle = math.atan2(vel.z, vel.x) + (math.random() * 20 - 10) * DEGREES
+    inst.Physics:Teleport(hp.x, .1, hp.z)
+    inst.Physics:SetVel(math.cos(angle) * speed, 1.5 * speed + math.random(), math.sin(angle) * speed)
+
+    launcher.sg.mem.recentlybounced[inst] = true
+    launcher:DoTaskInTime(.6, ClearRecentlyBounced, inst)
+end
+
+local function BounceStuff(inst) --Possibly upvaluehack this function in the future?
+    if inst.sg.mem.recentlybounced == nil then
+        inst.sg.mem.recentlybounced = {}
+    end
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x, y, z, 6, BOUNCESTUFF_MUST_TAGS, BOUNCESTUFF_CANT_TAGS)
+    for i, v in ipairs(ents) do
+        if v:IsValid() and not (v.components.inventoryitem.nobounce or inst.sg.mem.recentlybounced[v]) and v.Physics ~= nil and v.Physics:IsActive() then
+            local distsq = v:GetDistanceSqToPoint(x, y, z)
+            local intensity = math.clamp((36 - distsq) / 27, 0, 1)
+            SmallLaunch(v, inst, intensity)
+        end
+    end
+end
+
+local function SetUpProjectiles(inst)
+	for i = 1,5 do
+		inst:LaunchProjectile(inst)
+	end
+end
+
 env.AddStategraphPostInit("minotaur", function(inst)
-
-local function GetDebrisFn()
-	return "minotaur_boulder", 0
-end
-
-local HEAVY_WORK_ACTIONS =
-{
-    CHOP = true,
-    DIG = true,
-    HAMMER = true,
-    MINE = true,
-}
---[[
-local function BreakDebris(debris)
-    local x, y, z = debris.Transform:GetWorldPosition()
-    SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(x, 0, z)
-    debris:PushEvent("stopfalling")
-end--]]
-
-local function UpdateShadowSize(shadow, height)
-    local scaleFactor = Lerp(.5, 1.5, height / 25)
-    shadow.Transform:SetScale(scaleFactor, scaleFactor, scaleFactor)
-end
-
-local function OnRemoveDebris(debris)
-    debris.shadow:Remove()
-end
-
-local function GroundDetectionUpdate(debris)
-    local x, y, z = debris.Transform:GetWorldPosition()
-    if y <= .2 then
-        if not debris:IsOnValidGround() then
-            debris:PushEvent("detachchild")
-            debris:Remove()
-        elseif TheWorld.Map:IsPointNearHole(Vector3(x, 0, z)) then
-		local xremove, yremove, zremove = debris.Transform:GetWorldPosition()
-		SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(xremove, 0, zremove)
-		debris:Remove()
-        else
-            --PlayFallingSound(debris)
-
-            -- break stuff we land on
-            -- NOTE: re-check validity as we iterate, since we're invalidating stuff as we go
-            local softbounce = false
-            if debris:HasTag("heavy") then
-                local ents = TheSim:FindEntities(x, 0, z, 2, nil, nil, "structure")
-                for i, v in ipairs(ents) do
-                    if v ~= debris and v:IsValid() and not v:IsInLimbo() then
-                        softbounce = true
-                        --NOTE: "smashable" excluded for now
-                        if v:HasTag("quakedebris") then
-                            local vx, vy, vz = v.Transform:GetWorldPosition()
-                            SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(vx, 0, vz)
-                            v:Remove()
-                        elseif v.components.workable ~= nil then
-                            if v.sg == nil or not v.sg:HasStateTag("busy") then
-                                local work_action = v.components.workable:GetWorkAction()
-                                --V2C: nil action for NPC_workable (e.g. campfires)
-                                if (    (work_action == nil and v:HasTag("NPC_workable")) or
-                                        (work_action ~= nil and HEAVY_WORK_ACTIONS[work_action.id]) ) and
-                                    (work_action ~= ACTIONS.DIG
-                                    or (v.components.spawner == nil and
-                                        v.components.childspawner == nil)) then
-                                    v.components.workable:Destroy(debris)
-                                end
-                            end
-                        elseif v.components.combat ~= nil then
-                            v.components.combat:GetAttacked(debris, 30, nil)
-                        elseif v.components.inventoryitem ~= nil then
-                            if v.components.mine ~= nil then
-                                v.components.mine:Deactivate()
-                            end
-                            Launch(v, debris, TUNING.LAUNCH_SPEED_SMALL)
-                        end
-                    end
-                end
-            else
-                local ents = TheSim:FindEntities(x, 0, z, 2, nil, NON_SMASHABLE_TAGS, SMASHABLE_TAGS)
-                for i, v in ipairs(ents) do
-                    if v ~= debris and v:IsValid() and not v:IsInLimbo() then
-                        softbounce = true
-                        --NOTE: "smashable" excluded for now
-                        if v:HasTag("quakedebris") then
-                            local vx, vy, vz = v.Transform:GetWorldPosition()
-                            SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(vx, 0, vz)
-                            v:Remove()
-                        elseif v.components.combat ~= nil and not (v:HasTag("epic") or v:HasTag("wall")) then
-                            v.components.combat:GetAttacked(debris, 20, nil)
-                        end
-                    end
-                end
-            end
-
-            debris.Physics:SetDamping(.9)
-
-            if softbounce then
-                local speed = 3.2 + math.random()
-                local angle = math.random() * 2 * PI
-                debris.Physics:SetMotorVel(0, 0, 0)
-                debris.Physics:SetVel(
-                    speed * math.cos(angle),
-                    speed * 2.3,
-                    speed * math.sin(angle)
-                )
-            end
-
-            debris.shadow:Remove()
-            debris.shadow = nil
-
-            debris.updatetask:Cancel()
-            debris.updatetask = nil
-
-            local density = 1 or DENSITYRADIUS
-            if density <= 0 or
-                debris.prefab == "mole" or
-                debris.prefab == "rabbit" or
-                not (math.random() < .75 or
-                    --NOTE: There will always be at least one found within DENSITYRADIUS, ourself!
-                    #TheSim:FindEntities(x, 0, y, density, nil, { "quakedebris" }, { "INLIMBO" }) > 1
-                ) then
-                --keep it
-                debris.persists = true
-                debris.entity:SetCanSleep(true)
-                if debris._restorepickup then
-                    debris._restorepickup = nil
-                    if debris.components.inventoryitem ~= nil then
-                        debris.components.inventoryitem.canbepickedup = true
-                    end
-                end
-                debris:PushEvent("stopfalling")
-            else
-                --we missed detecting our first bounce, so break immediately this time
-                
-                debris:PushEvent("stopfalling")
-            end
-        end
-    elseif debris:GetTimeAlive() < 3 then
-        if y < 2 then
-            debris.Physics:SetMotorVel(0, 0, 0)
-        end
-        UpdateShadowSize(debris.shadow, y)
-    elseif debris:IsInLimbo() then
-        --failsafe, but maybe we got trapped or picked up somehow, so keep it
-        debris.persists = true
-        debris.entity:SetCanSleep(true)
-        debris.shadow:Remove()
-        debris.shadow = nil
-        debris.updatetask:Cancel()
-        debris.updatetask = nil
-        if debris._restorepickup then
-            debris._restorepickup = nil
-            if debris.components.inventoryitem ~= nil then
-                debris.components.inventoryitem.canbepickedup = true
-            end
-        end
-        debris:PushEvent("stopfalling")
-    elseif debris.prefab == "mole" or debris.prefab == "rabbit" then
-        --failsafe
-        debris:PushEvent("detachchild")
-        debris:Remove()
-    else
-        --failsafe
-                debris:PushEvent("stopfalling")
-    end
-end
-
-local function fallingpianogag(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
-    local target1 = TheSim:FindEntities(x, y, z, 50, nil, { "playerghost" }, { "player" })
-	
-			--if target ~= nil then
-	if #target1 > 0 then
-	local target2 = inst:GetNearestPlayer(true)
-		if target2 ~= nil then
-		local x, y, z = target2.Transform:GetWorldPosition()
-
-		local debris = SpawnPrefab("minotaur_boulder")
-		
-			if debris ~= nil then
-				debris.entity:SetCanSleep(false)
-				debris.persists = false
-				
-				local xrandom = x + math.random(-5, 5)
-				local zrandom = z + math.random(-5, 5)
-						
-				SpawnPrefab("cavein_debris").Transform:SetPosition(xrandom, 0, zrandom)
-						
-				debris.shadow = SpawnPrefab("warningshadow")
-				debris.shadow:ListenForEvent("onremove", OnRemoveDebris, debris)
-				debris.shadow.Transform:SetPosition(xrandom, 0, zrandom)
-				debris.shadow.Transform:SetScale(2.75, 2.75, 2.75)
-				UpdateShadowSize(debris.shadow, 25)
-						
-				debris.Physics:Teleport(xrandom, 25, zrandom)
-				debris.updatetask = debris:DoPeriodicTask(FRAMES, GroundDetectionUpdate, nil, 1)
-				debris:PushEvent("startfalling")
-			end
-		end
-	end
-end
-
-local function giantfallingpianogag(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
-    local target1 = TheSim:FindEntities(x, y, z, 50, nil, { "playerghost" }, { "player" })
-	
-			--if target ~= nil then
-	if #target1 > 0 then
-	
-		local target2 = inst:GetNearestPlayer(true)
-	
-		if target2 ~= nil then
-			local x, y, z = target2.Transform:GetWorldPosition()
-
-			local debris = SpawnPrefab("minotaur_boulder_big")
-			
-			if debris ~= nil then
-				debris.entity:SetCanSleep(false)
-				debris.persists = false
-				
-				local xrandom = x + math.random(-5, 5)
-				local zrandom = z + math.random(-5, 5)
-				
-				SpawnPrefab("cavein_debris").Transform:SetPosition(xrandom, 0, zrandom)
-						
-				debris.shadow = SpawnPrefab("warningshadow")
-				debris.shadow:ListenForEvent("onremove", OnRemoveDebris, debris)
-				debris.shadow.Transform:SetPosition(xrandom, 0, zrandom)
-				debris.shadow.Transform:SetScale(3.5, 3.5, 3.5)
-				UpdateShadowSize(debris.shadow, 35)
-						
-				debris.Physics:Teleport(xrandom, 35, zrandom)
-				debris.updatetask = debris:DoPeriodicTask(FRAMES, GroundDetectionUpdate, nil, 1)
-				debris:PushEvent("startfalling")
-			end
-		end
-	end
-end
-
-local _OldLocomoteEvent = inst.events["locomote"].fn
-	inst.events["locomote"].fn = function(inst, data)
-       -- if inst:HasTag("minotaur") then
-			if inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("attack") or inst.sg:HasStateTag("runningattack") then
-				return
-			end
-
-			local is_moving = inst.sg:HasStateTag("moving")
-			local is_running = inst.sg:HasStateTag("running") or inst.sg:HasStateTag("runningattack")
-			local should_move = inst.components.locomotor:WantsToMoveForward()
-			local should_run = inst.components.locomotor:WantsToRun()
-
-			if is_moving and not should_move then
-				inst.sg:GoToState(is_running and "run_stop" or "walk_stop")
-			elseif (not is_moving and should_move) or (is_moving and should_move and is_running ~= should_run) then
-				if inst.jumpready then
-					inst.sg:GoToState("leap_attack_pre", data.target)
-				else
-					inst.sg:GoToState(should_run and "run_start" or "walk_start")
-				end
-			end
-		--else
-		--	_OldLocomoteEvent(inst, data)
-       -- end
-    end
-	--[[
-local events=
-{
-    EventHandler("locomote", function(inst,data)
-        if inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("attack") or inst.sg:HasStateTag("runningattack") then
-            return
-        end
-
-        local is_moving = inst.sg:HasStateTag("moving")
-        local is_running = inst.sg:HasStateTag("running") or inst.sg:HasStateTag("runningattack")
-        local should_move = inst.components.locomotor:WantsToMoveForward()
-        local should_run = inst.components.locomotor:WantsToRun()
-
-        if is_moving and not should_move then
-            inst.sg:GoToState(is_running and "run_stop" or "walk_stop")
-        elseif (not is_moving and should_move) or (is_moving and should_move and is_running ~= should_run) then
-            if inst.jumpready then
-				inst.sg:GoToState("leap_attack_pre", data.target)
+	local _OldAttackEvent = inst.events["doattack"].fn --Event handler to force the leap if we haven't done the leap for long enough (brainside leap still independent
+	inst.events["doattack"].fn = function(inst, data)
+		if inst.forcebelch and inst.components.combat and inst.components.combat.target and not inst.sg:HasStateTag("running") then
+			inst.sg:GoToState("belch")
+		else
+			if inst.forceleap and inst.components.combat and inst.components.combat.target and inst.components.combat.target:IsValid() and inst:GetDistanceSqToInst(inst.components.combat.target) < 15^2 then
+				inst.sg:GoToState("leap_attack_pre",inst.components.combat.target)
 			else
-				inst.sg:GoToState(should_run and "run_start" or "walk_start")
+				_OldAttackEvent(inst, data)
 			end
-        end
-    end),
-}
-]]
-local states = {
-
-    State{
-
-        name = "leap_attack_pre",
-        tags = {"busy", "moving", "canrotate", "hopping", "nointerrupt"},
-        
-        onenter = function(inst, target)
-		
-            inst.SoundEmitter:PlaySound("dontstarve/creatures/rook_minotaur/voice")
-            inst.SoundEmitter:PlaySound("dontstarve/common/horn_beefalo")
-            
-			inst.components.combat:SetRange(9, 12)
-			inst.AnimState:PlayAnimation("taunt")
-
-        end,
-		
-		timeline =
-        {
-            
-            TimeEvent(35 * FRAMES, function(inst)
-						inst:DoTaskInTime(20, function(inst) 
-						inst.jumpready = true
-						end)
-                
-			inst.components.locomotor:WalkForward()
-			inst.AnimState:PlayAnimation("walk_loop")
-            end),
-			
-        },
-
-        events=
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("leap_attack") ShakeAllCameras(CAMERASHAKE.FULL, .35, .02, 1, inst, 40) end),
-        },
-    },
+		end
+    end	
 	
-	State{
-
-        name = "leap_attack",
-        tags = {"busy", "moving", "canrotate", "hopping", "nointerrupt"},
-        
-        onenter = function(inst, target)
-		
-
+	local _OldAttackedEvent = inst.events["attacked"].fn
+	inst.events["attacked"].fn = function(inst, data)
+		if inst:HasTag("forcefield") then
+			shield_fxanim(inst)
+		else
+			_OldAttackedEvent(inst, data)
+		end
+	end
+	
+	local _OldOnEnter = inst.states["run_start"].onenter 
+	inst.states["run_start"].onenter = function(inst)
+		if inst.forceleap and inst.components.combat and inst.components.combat.target then
+			inst.sg:GoToState("leap_attack_pre",inst.components.combat.target)
+		else
+			_OldOnEnter(inst)
+		end
+	end
+	
+	------------------------------------------------------------
+	inst.states["stun_pst"].onexit = function(inst)
+		if inst.forcebelch and inst.components.health and not inst.components.health:IsDead() then
+			inst:DoTaskInTime(0,function(inst) inst.sg:GoToState("belch") end)
+		end
+	end
+	
+	local _OldOnExit = inst.states["leap_attack_pst"].onexit    --Both of these calls are to make AG belch if it can and is getting up from being stunned
+	
+	inst.states["leap_attack_pst"].onexit = function(inst)
+		if inst.forcebelch and inst.components.health and not inst.components.health:IsDead() then
+			inst:DoTaskInTime(0,function(inst) inst.sg:GoToState("belch") end)
+		end
+		_OldOnExit(inst)
+	end
+	------------------------------------------------------------
+	
+	
+	inst.states["leap_attack"].events["animover"].fn = function(inst) --Less intrusive than redoing the whole leap_attack state
+        inst.forceleap = false
 		inst.components.groundpounder:GroundPound()
-        inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
-
-		inst.components.locomotor:WalkForward()
-		inst.AnimState:PlayAnimation("walk_loop")
-		
-		local x, y, z = inst.Transform:GetWorldPosition()
-		local ents = TheSim:FindEntities(x, y, z, 50, { "player" })
-		
-		if ents ~= nil then
-			fallingpianogag(inst)
+        BounceStuff(inst)
+		----------------------------------------------- Break any organ shields.
+		local x,y,z = inst.Transform:GetWorldPosition()
+		local organs = TheSim:FindEntities(x,y,z,7,{"minotaur_organ"})
+		if organs then
+			for i,organ in ipairs(organs) do
+				organ:DeactivateShield(organ)
+			end
 		end
-		
-        end,
-
-        events=
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("leap_attack2") ShakeAllCameras(CAMERASHAKE.FULL, .35, .02, 1, inst, 40) end),
-        },
-    },
-	
-	State{
-
-        name = "leap_attack2",
-        tags = {"busy", "moving", "canrotate", "hopping", "nointerrupt"},
-        
-        onenter = function(inst, target)
-		
-            inst.components.groundpounder:GroundPound()
-            inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
-				
-			inst.components.locomotor:WalkForward()
-			inst.AnimState:PlayAnimation("walk_loop")
-			
-		local x, y, z = inst.Transform:GetWorldPosition()
-		local ents = TheSim:FindEntities(x, y, z, 50, { "player" })
-		
-		if ents ~= nil then
-			fallingpianogag(inst)
-		end
-			
-        end,
-
-        events=
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("leap_attack_pst") ShakeAllCameras(CAMERASHAKE.FULL, .35, .02, 1, inst, 40) end),
-        },
-    },
-	
-	State{
-
-        name = "leap_attack_pst",
-        tags = {"busy", "moving", "canrotate", "hopping", "nointerrupt"},
-        
-        onenter = function(inst, target)
-		
-            inst.components.groundpounder:GroundPound()
-            inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
-			ShakeAllCameras(CAMERASHAKE.FULL, .35, .02, 1, inst, 40)
-			inst.jumpready = false
-			
-			inst.components.locomotor:WalkForward()
-			inst.AnimState:PlayAnimation("walk_loop")
-		
-		local x, y, z = inst.Transform:GetWorldPosition()
-		local ents = TheSim:FindEntities(x, y, z, 50, { "player" })
-		
-		if ents ~= nil then
-			fallingpianogag(inst)
-		end
-		end,
-		
-        onexit = function(inst)
-			inst.components.combat:SetRange(3, 4)
-        end,
-			
-
-        events=
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") 
-			ShakeAllCameras(CAMERASHAKE.FULL, 1, .02, 1, inst, 40)
-            inst.components.groundpounder:GroundPound()
-            inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/bearger/groundpound",nil,.5)
-		
-		local x, y, z = inst.Transform:GetWorldPosition()
-		local ents = TheSim:FindEntities(x, y, z, 50, { "player" })
-		local ents2 = TheSim:FindEntities(x, y, z, 50, { "megaboulder" })
-		
-		if ents ~= nil then
-			if ents2 ~= nil then
-				if #ents2 == 0 and math.random() < 0.5 then
-					giantfallingpianogag(inst)
+		if inst.components.combat and inst.components.combat.target and ((inst.combo < math.random(2,3) and (inst.components.health:GetPercent() > 0.3 and inst.components.health:GetPercent() < 0.6)) or (inst.combo < math.random(4,5) and inst.components.health:GetPercent() < 0.3)) then
+			inst.sg:GoToState("leap_attack_pre_quick",inst.components.combat.target) 		-- Leap attack combo depends on how much health the AG has
+			inst.SoundEmitter:PlaySound("ancientguardian_rework/minotaur2/groundpound")		-- it won't combo if it doesn't have low enough health and
+			inst.combo = inst.combo + 1														-- the lower it gets, the longer the combo can possibly go.
+		else
+			inst.components.groundpounder.numRings = 2
+			inst.combo = 0
+			inst.components.timer:StartTimer("forceleapattack", 30+math.random(0,15)) --Secondary means to force the leap if the player is never in position for it to happen naturally
+			if inst.jumpland(inst) then
+				inst.sg:GoToState("leap_attack_pst")
+				inst.SoundEmitter:PlaySound("ancientguardian_rework/minotaur2/groundpound")
+			elseif inst.components.health and inst.components.health:GetPercent() < 0.6 then
+					inst.sg:GoToState("stun",{land_stun=true})
+					return
 				else
-					fallingpianogag(inst)
-				end
-			else
-				fallingpianogag(inst)
+					inst.sg:GoToState("leap_attack_pst")
+					return
 			end
 		end
-			
-			end),
-        },
-    },
+	end
 	
-	State{
-        name = "AGStun",
-        tags = { "busy", "sleeping", "nowake" },
-
-        onenter = function(inst)
-            if inst.components.locomotor ~= nil then
-                inst.components.locomotor:StopMoving()
-            end
+	local states = {
+		State{ --This state is almost a perfect copy of the leap_attack_pre state... it uses different time paramaters so that it passes quicker
+			name = "leap_attack_pre_quick",
+			tags = {"attack", "busy","leapattack","newbuild"},
 			
-			if inst.components.freezable then
-				inst.components.freezable:Unfreeze()
-			end
+			onenter = function(inst)
+				inst.components.timer:StartTimer("leapattack_cooldown", 15)
+				inst.components.locomotor:Stop()
+				inst.AnimState:SetBank("um_minotaur_actions")
+				inst.AnimState:SetBuild("um_minotaur_actions")
+				inst.AnimState:PlayAnimation("jump_atk_pre_quick")
+				inst.sg.statemem.startpos = Vector3(inst.Transform:GetWorldPosition())
+				inst:DoTaskInTime(0.5,function()
+					local target = inst.components.combat.target or nil
+					if target then
+						inst.sg.statemem.targetpos = Vector3(inst.components.combat.target.Transform:GetWorldPosition())
+						inst:ForceFacePoint(inst.sg.statemem.targetpos)
+					else
+						local range = 6 -- overshoot range
+						local theta = inst.Transform:GetRotation()*DEGREES
+						local offset = Vector3(range * math.cos( theta ), 0, -range * math.sin( theta ))            
+						inst.sg.statemem.targetpos = Vector3(inst.sg.statemem.startpos.x + offset.x, 0, inst.sg.statemem.startpos.z + offset.z)
+					end
+				end)
+				inst.sg:SetTimeout(1)
+			end,
+
+			onexit = function(inst)
+				inst.AnimState:SetBank("rook")
+				if inst.components.health:GetPercent() > 0.6 then
+					inst.AnimState:SetBuild("rook_rhino")
+				else
+					inst.AnimState:SetBuild("rook_rhino_damaged_build")
+				end
+			end,
+
+			ontimeout = function(inst, target)
+				inst.components.groundpounder.numRings = 2 -- The quick combo jumps have a smaller groundpound than the first one, which gives a longer window for the player to move.
+				inst.sg:GoToState("leap_attack",{targetpos = inst.sg.statemem.targetpos}) 
+			end,
+		},
+		
+State{ --This state is for the guardian belching a bunch of shadow goo out! It's a decent attack, but may provide a bit more interesting aspects later...
+			name = "belch",
+			tags = {"attack", "busy","newbuild"},
 			
-            inst.AnimState:PlayAnimation("rhinostun_pre")
-        end,
+			onenter = function(inst)
+				inst.forcebelch = false
+				inst.components.timer:StartTimer("forcebelch", math.random(20,40))
+				inst.components.locomotor:Stop()
+				inst.AnimState:SetBank("um_minotaur_actions")
+				inst.AnimState:SetBuild("um_minotaur_actions")
+				inst.AnimState:PlayAnimation("belch")
+				inst.SoundEmitter:PlaySound("ancientguardian_rework/minotaur2/hurt")
 
-        events=
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("AGStunned") end),
-        },
-    },
+			end,
+			
+			onupdate = function(inst)
+				if inst.components.combat and inst.components.combat.target ~= nil then
+					inst:ForceFacePoint(Vector3(inst.components.combat.target.Transform:GetWorldPosition()))
+					inst.belchtarget = inst.components.combat.target
+				end
+			end,
+			
+			timeline=
+			{ 
+				TimeEvent(36*FRAMES, function(inst)
+					inst.SoundEmitter:PlaySound("ancientguardian_rework/minotaur2/bite")
+					inst.tentbelch = true
+					SetUpProjectiles(inst)
+				 end), 			
+				TimeEvent(38*FRAMES, function(inst)
+					inst.SoundEmitter:PlaySound("ancientguardian_rework/minotaur2/bite")
+					SetUpProjectiles(inst)
+				 end), 				
+				TimeEvent(40*FRAMES, function(inst)
+					inst.projectilespeed = 2
+					inst.SoundEmitter:PlaySound("ancientguardian_rework/minotaur2/bite")
+					SetUpProjectiles(inst)
+				 end),
+				TimeEvent(42*FRAMES, function(inst)
+					inst.tentbelch = true
+					inst.SoundEmitter:PlaySound("ancientguardian_rework/minotaur2/bite")
+					SetUpProjectiles(inst)
+				 end), 
+				TimeEvent(44*FRAMES, function(inst)
+					inst.SoundEmitter:PlaySound("ancientguardian_rework/minotaur2/bite")
+					SetUpProjectiles(inst)
+				 end),
+				TimeEvent(46*FRAMES, function(inst)
+					inst.SoundEmitter:PlaySound("ancientguardian_rework/minotaur2/bite")
+					SetUpProjectiles(inst)
+				 end),
+				TimeEvent(48*FRAMES, function(inst)
+					inst.SoundEmitter:PlaySound("ancientguardian_rework/minotaur2/bite")
+					SetUpProjectiles(inst)
+				 end), 
+				TimeEvent(50*FRAMES, function(inst)
+					inst.SoundEmitter:PlaySound("ancientguardian_rework/minotaur2/bite")
+					inst.tentbelch = true
+					SetUpProjectiles(inst)
+				 end), 
+			},		
+			
+			onexit = function(inst)
+				inst.AnimState:SetBank("rook")
+				inst.belchtarget = nil
+				if inst.components.health:GetPercent() > 0.6 then
+					inst.AnimState:SetBuild("rook_rhino")
+				else
+					inst.AnimState:SetBuild("rook_rhino_damaged_build")
+				end
+			end,
 
+			events =
+			{
+				EventHandler("animover", function(inst)
+					inst.sg:GoToState("idle")
+				end),
+			},
+		},
+	
     State{
-        name = "AGStunned",
-        tags = { "busy", "sleeping" },
-
+        name = "arena_return_pre",
+        tags = {"busy", "leapattack"},
+        
         onenter = function(inst)
-            inst.AnimState:PlayAnimation("rhinostun_loop")
-			
-			if inst.components.freezable then
-				inst.components.freezable:Unfreeze()
-			end
-			
+			inst.components.locomotor:Stop()
+            inst.AnimState:PlayAnimation("jump_atk_pre",false)
+			inst.sg:SetTimeout(1.5)
         end,
-
-        events=
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("AGStunned") end),
-        },
-    },
-
+		
+		ontimeout = function(inst)
+			inst.sg:GoToState("arena_return")
+		end,
+    },	
     State{
-        name = "AGStunwake",
-        tags = { "busy", "waking", "nosleep" },
-
+        name = "arena_return",
+        tags = {"attack", "busy", "leapattack"},
+        
         onenter = function(inst)
-            inst.AnimState:PlayAnimation("rhinostun_post")
-			
-			if inst.components.freezable then
-				inst.components.freezable:Unfreeze()
-			end
-			
-        end,
+            inst.AnimState:PushAnimation("jump_atk_loop",false)
+            inst.components.locomotor:Stop()
+            
+			inst.Physics:SetMotorVelOverride(0,40,0)
 
-        events=
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
-        },
+            inst.Physics:ClearCollisionMask()
+            inst.Physics:CollidesWith(COLLISION.WORLD)
+			inst.ascended = false
+        end,
+		
+		onupdate = function(inst)
+			if inst:IsValid() then
+				local x,y,z = inst.Transform:GetWorldPosition()
+				if inst.ascended then
+					inst.Physics:SetMotorVelOverride(0,-40,0)
+					if y < 1 then
+						inst.Transform:SetPosition(x,0,z)
+						inst.components.groundpounder:GroundPound()
+						BounceStuff(inst)
+						inst.OnChangeToObstacle(inst)
+						inst.sg:GoToState("leap_attack_pst")
+					end
+				else
+					if y > 50 then
+						if inst.spawnlocation then
+							local point = inst.spawnlocation
+							inst.Transform:SetPosition(point.x,y,point.z)
+							inst.ascended = true
+						else
+							inst:Remove()
+						end
+					end
+					inst.Physics:SetMotorVelOverride(0,40,0)
+				end
+			end
+        end,
+    },
 	}
-}
-
---[[for k, v in pairs(events) do
-    assert(v:is_a(EventHandler), "Non-event added in mod events table!")
-    inst.events[v.name] = v
-end]]
 
 for k, v in pairs(states) do
     assert(v:is_a(State), "Non-state added in mod state table!")

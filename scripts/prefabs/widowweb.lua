@@ -100,7 +100,6 @@ local function fn()
     inst.entity:AddNetwork()
 	inst.MiniMapEntity:SetIcon("hoodedwidow_map.tex")
     inst.entity:SetPristine()
-	inst.entity:AddGroundCreepEntity()
 		
     if not TheWorld.ismastersim then
         return inst

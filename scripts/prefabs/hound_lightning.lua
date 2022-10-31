@@ -76,7 +76,7 @@ local function fn()
         return inst
     end
 	
-	inst.NoTags = { "INLIMBO", "shadow" }
+	inst.NoTags = { "INLIMBO", "shadow", "structure", "wall" }
 	
 	Sparks(inst)
 	

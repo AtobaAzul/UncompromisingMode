@@ -365,7 +365,8 @@ end)
 
 AddPrefabPostInit("cactus_meat_cooked", function (inst)
     if inst ~= nil and inst.components.edible ~= nil then
-        inst.components.edible.healthvalue = -5
+        --inst.components.edible.healthvalue = -5
+		inst.components.edible.sanityvalue = 5
     end
 end)
 
@@ -424,6 +425,86 @@ if TUNING.DSTU.SEEDS then
 	end)
 end
 
+--sailing rebalanced related foood cahnges
+
+local faf = GLOBAL.KnownModIndex:IsModEnabled("workshop-1908933602")
+local linguine = {
+	"barnaclinguine",
+	"barnaclinguine_spice_chili",
+	"barnaclinguine_spice_garlic",
+	"barnaclinguine_spice_salt",
+	"barnaclinguine_spice_sugar"
+}
+
+if faf then
+	for k, v in pairs(linguine) do
+		AddPrefabPostInit(
+			v,
+			function(inst)
+				if inst ~= nil and inst.components.edible ~= nil then
+					inst.components.edible.hungervalue = 150
+					inst.components.edible.healthvalue = 40
+					inst.components.edible.sanityvalue = 33
+				end
+			end
+		)
+	end
+end
+
+local pita = {
+	"barnaclepita",
+	"barnaclepita_spice_chili",
+	"barnaclepita_spice_garlic",
+	"barnaclepita_spice_salt",
+	"barnaclepita_spice_sugar"
+}
+if faf then
+	for k, v in pairs(pita) do
+		AddPrefabPostInit(
+			v,
+			function(inst)
+				if inst ~= nil and inst.components.edible ~= nil then
+					inst.components.edible.hungervalue = 37.5
+					inst.components.edible.sanityvalue = 33
+					inst.components.edible.healthvalue = 20
+				end
+			end
+		)
+	end
+else
+	for k, v in pairs(pita) do
+		AddPrefabPostInit(
+			v,
+			function(inst)
+				if inst ~= nil and inst.components.edible ~= nil then
+					inst.components.edible.hungervalue = 37.5
+					inst.components.edible.sanityvalue = 15
+					inst.components.edible.healthvalue = 8
+				end
+			end
+		)
+	end
+end
+local fishstew = {
+	"seafoodgumbo",
+	"seafoodgumbo_spice_chili",
+	"seafoodgumbo_spice_garlic",
+	"seafoodgumbo_spice_salt",
+	"seafoodgumbo_spice_sugar"
+}
+for k, v in pairs(fishstew) do
+	AddPrefabPostInit(
+		v,
+		function(inst)
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.hungervalue = 100
+				inst.components.edible.sanityvalue = 5
+				inst.components.edible.healthvalue = 5
+			end
+		end
+	)
+end
+
 --idk where else to put this
 local farmplants =
 {
@@ -446,5 +527,18 @@ local farmplants =
 for k, v in ipairs(farmplants) do
 	AddPrefabPostInit(v.."_oversized_waxed", function(inst)
 		inst:AddTag("NORATCHECK")
+	end)
+end
+
+local froglegs = {"froglegs","froglegs_cooked"}
+
+for k, v in ipairs(froglegs) do
+	AddPrefabPostInit(v, function(inst)
+		if not GLOBAL.TheWorld.ismastersim then
+			return
+		end
+
+		inst:AddComponent("tradable")
+		inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
 	end)
 end

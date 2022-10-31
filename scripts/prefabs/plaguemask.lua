@@ -6,8 +6,10 @@ local assets=
 }
 
 local function onequip(inst, owner)
-	if inst.skinname ~= nil then
-		owner.AnimState:OverrideSymbol("swap_hat", "hat_plaguemask_formal", "swap_hat")	
+	local skin_build = inst:GetSkinBuild()
+	if skin_build ~= nil then
+		owner:PushEvent("equipskinneditem", inst:GetSkinName())
+		owner.AnimState:OverrideSymbol("swap_hat", skin_build or "hat_plaguemask", "swap_hat")	
 	else
 		owner.AnimState:OverrideSymbol("swap_hat", "hat_plaguemask", "swap_hat")	
 	end
@@ -28,6 +30,11 @@ local function onequip(inst, owner)
 end
  
 local function onunequip(inst, owner)
+	local skin_build = inst:GetSkinBuild()
+	if skin_build ~= nil then
+		owner:PushEvent("unequipskinneditem", inst:GetSkinName())
+	end
+	
     owner.AnimState:ClearOverrideSymbol("swap_hat")
 	owner.AnimState:ClearOverrideSymbol("face")
     owner.AnimState:Hide("HAT")
@@ -58,6 +65,8 @@ local function fn()
 	inst:AddTag("has_gasmask")
 	inst:AddTag("hasplaguemask")
     inst:AddTag("goggles")
+	
+	inst.Transform:SetScale(1.25, 1.25, 1.25)
 		
     inst.entity:SetPristine()
 	
@@ -90,35 +99,4 @@ local function fn()
     return inst
 end
 
-local function plaguemask_skin()
-	local inst = fn()
-	
-    inst.AnimState:SetBank("hat_plaguemask_formal")
-    inst.AnimState:SetBuild("hat_plaguemask_formal")
-	
-	inst.skinname = "hat_plaguemask_formal"
-	
-	if inst.components.inventoryitem ~= nil then
-		inst.components.inventoryitem.atlasname = "images/inventoryimages/plaguemask_formal.xml"
-	end
-
-	return inst
-end
-
-return Prefab("plaguemask", fn, assets),
-	CreateModPrefabSkin("plaguemask_formal",
-	{
-		assets = {
-			Asset("ANIM", "anim/hat_plaguemask_formal.zip"),
-		},
-		base_prefab = "plaguemask",
-		fn = plaguemask_skin, -- This is our constructor!
-		rarity = "Timeless",
-		reskinable = true,
-		
-		build_name_override = "hat_plaguemask_formal",
-		
-		type = "item",
-		skin_tags = { },
-		release_group = 0,
-	})
+return Prefab("plaguemask", fn, assets)

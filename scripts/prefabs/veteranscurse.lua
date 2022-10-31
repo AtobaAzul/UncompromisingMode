@@ -5,12 +5,12 @@
 local function ForceToTakeMoreDamage(inst)
 	local self = inst.components.combat
 	local _GetAttacked = self.GetAttacked
-	self.GetAttacked = function(self, attacker, damage, weapon, stimuli)
+	self.GetAttacked = function(self, attacker, damage, weapon, stimuli, ...)
 		if attacker and damage then
 			-- Take extra damage
 			damage = damage * 1.2
 		end
-		return _GetAttacked(self, attacker, damage, weapon, stimuli)
+		return _GetAttacked(self, attacker, damage, weapon, stimuli, ...)
 	end
 end
 
@@ -43,143 +43,111 @@ end
 local function ForceToTakeUsualDamage(inst)
 	local self = inst.components.combat
 	local _GetAttacked = self.GetAttacked
-	self.GetAttacked = function(self, attacker, damage, weapon, stimuli)
+	self.GetAttacked = function(self, attacker, damage, weapon, stimuli, ...)
 	if attacker and damage then
 			-- Take normal damage
 			damage = damage / 1.2
 		end
-		return _GetAttacked(self, attacker, damage, weapon, stimuli)
+		return _GetAttacked(self, attacker, damage, weapon, stimuli, ...)
 	end
 end
 
 local function ForceToTakeUsualHunger(inst)
 	local self = inst.components.hunger
 	local _DoDelta = self.DoDelta
-	self.DoDelta = function(self, delta, overtime, ignore_invincible)
+	self.DoDelta = function(self, delta, overtime, ignore_invincible, ...)
 	if delta and overtime and delta < 0 then
 		-- Take normal hunger
 		delta = delta / 1.2
 		end
-		return _DoDelta(self, delta, overtime, ignore_invincible)
+		return _DoDelta(self, delta, overtime, ignore_invincible, ...)
 	end
 end
 
 local function ForceToTakeUsualTime(inst)
 	local self = inst.components.oldager
 	local _OnTakeDamage = self.OnTakeDamage
-	self.OnTakeDamage = function(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb)
+	self.OnTakeDamage = function(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
 	if amount and overtime and amount < 0 then
 		-- Take extra time
 		amount = amount / 1.2
 		end
-		return _OnTakeDamage(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb)
+		return _OnTakeDamage(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
 	end
 end
 
 --------------------------------------------------------------------------
 
 local function oneat(inst, data)
-	if inst.healthabsorption == nil then
-		inst.healthabsorption = inst.components.eater.healthabsorption
+	if inst.modded_healthabsorption == nil then
+		inst.modded_healthabsorption = inst.components.eater.healthabsorption
+	end
+			
+	if inst.modded_hungerabsorption == nil then
+		inst.modded_hungerabsorption = inst.components.eater.hungerabsorption
+	end
+			
+	if inst.modded_sanityabsorption == nil then
+		inst.modded_sanityabsorption = inst.components.eater.sanityabsorption
 	end
 		
-	if inst.hungerabsorption == nil then
-		inst.hungerabsorption = inst.components.eater.hungerabsorption
-	end
+	inst.components.eater:SetAbsorptionModifiers(0, inst.modded_hungerabsorption or 1, 0)
 		
-	if inst.sanityabsorption == nil then
-		inst.sanityabsorption = inst.components.eater.sanityabsorption
-	end
-	
-	--print(inst.healthabsorption, inst.hungerabsorption, inst.sanityabsorption)
+	local stack_mult = inst.components.eater.eatwholestack and data.food.components.stackable ~= nil and data.food.components.stackable:StackSize() or 1
+        
+	local base_mult = inst.components.foodmemory ~= nil and inst.components.foodmemory:GetFoodMultiplier(data.food.prefab) or 1
 
-	inst.components.eater:SetAbsorptionModifiers(0, inst.hungerabsorption or 1, 0)
-		
-	local strongstomach = inst.components.eater.strongstomach and data.food:HasTag("monstermeat") or (inst.components.eater.eatsrawmeat or inst:HasTag("eatsrawmeat")) and data.food:HasTag("rawmeat")
-
-	local hasaffinity = inst.components.foodaffinity:HasPrefabAffinity(data.food)
-	
-	local foodmemorybuff = inst.components.foodmemory ~= nil and inst.components.foodmemory:GetFoodMultiplier(data.food.prefab) or 1
-	local foodaffinitysanitybuff = inst:HasTag("playermerm") and (data.food.prefab == "kelp" or data.food.prefab == "kelp_cooked") and 0 or inst.components.foodaffinity:HasPrefabAffinity(data.food) and 15 or 0
-	
 	local warlybuff = inst:HasTag("warlybuffed") and 1.2 or 1
 
-	if inst.components.eater.ignoresspoilage then
-		local wxhealthvalue = data.food.components.edible.healthvalue ~= nil and data.food.components.edible.healthvalue
-		local wxsanityvalue = data.food.components.edible.sanityvalue ~= nil and data.food.components.edible.sanityvalue
-	
-		if wxhealthvalue > 3 then
-			inst.components.debuffable:AddDebuff("healthregenbuff_vetcurse_"..data.food.prefab, "healthregenbuff_vetcurse", {duration = (wxhealthvalue * 0.1)})
-		else
-			inst.components.health:DoDelta(wxhealthvalue)
-		end
-			
-		if wxsanityvalue > 3 then
-			inst.components.debuffable:AddDebuff("sanityregenbuff_vetcurse_"..data.food.prefab, "sanityregenbuff_vetcurse", {duration = ((wxsanityvalue + foodaffinitysanitybuff) * 0.1)})
-		else
-			if wxsanityvalue <= 0 then
-				if not hasaffinity and not strongstomach then
-					inst.components.sanity:DoDelta(wxsanityvalue)
-				elseif hasaffinity then
-					inst.components.debuffable:AddDebuff("sanityregenbuff_vetcurse_"..data.food.prefab, "sanityregenbuff_vetcurse", {duration = (foodaffinitysanitybuff * 0.1)})
-				end
-			else
-				inst.components.sanity:DoDelta(wxsanityvalue)
-			end
-		end
-	else
-		local healthvalue = data.food.components.edible:GetHealth() ~= nil and (((data.food.components.edible:GetHealth() * foodmemorybuff) * warlybuff) * inst.healthabsorption)
-		local sanityvalue = data.food.components.edible.sanityvalue < 0 and (((data.food.components.edible.sanityvalue * foodmemorybuff) * warlybuff) * inst.sanityabsorption) - (data.food.components.perishable ~= nil and data.food.components.perishable:IsSpoiled() and TUNING.SANITY_SMALL or 0) or data.food.components.edible:GetSanity() ~= nil and (((data.food.components.edible:GetSanity() * foodmemorybuff) * warlybuff) * inst.sanityabsorption)
-		--print(sanityvalue)
-		if not inst:HasTag("plantkin") then
-			if healthvalue > 3 then
-				inst.components.debuffable:AddDebuff("healthregenbuff_vetcurse_"..data.food.prefab, "healthregenbuff_vetcurse", {duration = (healthvalue * 0.1)})
-			else
-				if healthvalue < 0 then
-					if not hasaffinity and not strongstomach then
-						--print("damage health")
-						inst.components.health:DoDelta(healthvalue)
-					end
-				else
-					--print("health")
-					inst.components.health:DoDelta(healthvalue)
-				end
-			end
-		end
+	local health_delta = 0
+	local sanity_delta = 0
+	local hunger_delta = 0
 		
-		if sanityvalue > 3 then
-			inst.components.debuffable:AddDebuff("sanityregenbuff_vetcurse_"..data.food.prefab, "sanityregenbuff_vetcurse", {duration = ((sanityvalue + foodaffinitysanitybuff) * 0.1)})
-		else
-			--print("sanity below 3")
-			if sanityvalue <= 0 then
-				if not hasaffinity and not strongstomach then
-					--print("sanity damage")
-					inst.components.sanity:DoDelta(sanityvalue)
-				elseif hasaffinity then
-					inst.components.debuffable:AddDebuff("sanityregenbuff_vetcurse_"..data.food.prefab, "sanityregenbuff_vetcurse", {duration = (foodaffinitysanitybuff * 0.1)})
-				end
-			else
-				inst.components.sanity:DoDelta(sanityvalue)
-			end
-		end
+	if inst.components.health ~= nil and
+		(data.food.components.edible.healthvalue >= 0 or inst.components.eater:DoFoodEffects(data.food)) then
+		health_delta = data.food.components.edible:GetHealth(inst) * base_mult * inst.modded_healthabsorption * warlybuff
+	end
+		
+	if inst.components.sanity ~= nil and
+		(data.food.components.edible.sanityvalue >= 0 or inst.components.eater:DoFoodEffects(data.food)) then
+		sanity_delta = data.food.components.edible:GetSanity(inst) * base_mult * inst.modded_sanityabsorption * warlybuff
+	end
+	
+	if inst.components.eater.custom_stats_mod_fn ~= nil then
+		health_delta, hunger_delta, sanity_delta = inst.components.eater.custom_stats_mod_fn(inst, health_delta, hunger_delta, sanity_delta, data.food, data.feeder)
+	end
+
+	local foodaffinitysanitybuff = inst:HasTag("playermerm") and (data.food.prefab == "kelp" or data.food.prefab == "kelp_cooked") and 0 or inst.components.foodaffinity:HasPrefabAffinity(data.food) and 15 or 0
+	sanity_delta = sanity_delta + foodaffinitysanitybuff
+		
+	if health_delta > 3 then
+		inst.components.debuffable:AddDebuff("healthregenbuff_vetcurse_"..data.food.prefab, "healthregenbuff_vetcurse", {duration = (health_delta * 0.1)})
+	else
+		inst.components.health:DoDelta(health_delta)
+	end
+		
+	if sanity_delta > 3 then
+		inst.components.debuffable:AddDebuff("sanityregenbuff_vetcurse_"..data.food.prefab, "sanityregenbuff_vetcurse", {duration = (sanity_delta * 0.1)})
+	else
+		inst.components.sanity:DoDelta(sanity_delta)
 	end
 end
 
 local function ForceOvertimeFoodEffects(inst)
-	if inst.healthabsorption == nil then
-		inst.healthabsorption = inst.components.eater.healthabsorption
+	if inst.modded_healthabsorption == nil then
+		inst.modded_healthabsorption = inst.components.eater.healthabsorption
 	end
 
-	if inst.hungerabsorption == nil then
-		inst.hungerabsorption = inst.components.eater.hungerabsorption
+	if inst.modded_hungerabsorption == nil then
+		inst.modded_hungerabsorption = inst.components.eater.hungerabsorption
 	end
 		
-	if inst.sanityabsorption == nil then
-		inst.sanityabsorption = inst.components.eater.sanityabsorption
+	if inst.modded_sanityabsorption == nil then
+		inst.modded_sanityabsorption = inst.components.eater.sanityabsorption
 	end
 
-	inst.components.eater:SetAbsorptionModifiers(0, inst.hungerabsorption or 1, 0)
-
+	inst.components.eater:SetAbsorptionModifiers(0, inst.modded_hungerabsorption or 1, 0)
+		
 	inst:ListenForEvent("oneat", oneat)
 end
 

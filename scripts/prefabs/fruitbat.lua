@@ -6,45 +6,14 @@ SetSharedLootTable( 'fruitbat',
     {'giant_blueberry',1},
 })
 
-local SLEEP_DIST_FROMHOME = 1
-local SLEEP_DIST_FROMTHREAT = 20
-local MAX_CHASEAWAY_DIST = 80
+
+
 local MAX_TARGET_SHARES = 100
 local SHARE_TARGET_DIST = 100
 --Thanks for these functions scrimbles
-local RETARGET_MUST_TAGS = { "_combat", "player" }
-local RETARGET_CANT_TAGS = { "bat", "wall", "plantkin", "INLIMBO", "notarget" }
 
-local function retargetfn(inst)
-    return TheWorld.state.issummer and FindEntity(
-                inst,
-                TUNING.BEEFALO_TARGET_DIST,
-                function(guy)
-                    return inst.components.combat:CanTarget(guy)
-                end,
-                RETARGET_MUST_TAGS, --See entityreplica.lua (re: "_combat" tag)
-                RETARGET_CANT_TAGS
-            )
-        or nil
-end
 
-local function KeepTarget(inst, target)
-    return true 
-end
-
-local function OnEat(inst, data)
-	if data ~= nil and data:HasTag("pollenmites") then
-		inst.SoundEmitter:PlaySound("UCSounds/pollenmite/die")
-	end
-		inst.bugcount = inst.bugcount + 1
-end
-local function MakeTeam(inst, attacker)
-    local leader = SpawnPrefab("teamleader")
-    leader:AddTag("bat")
-    leader.components.teamleader.threat = attacker
-    leader.components.teamleader.team_type = inst.components.teamattacker.team_type
-    leader.components.teamleader:NewTeammate(inst)
-    leader.components.teamleader:BroadcastDistress(inst)
+local function OnEat(inst, data) --Data is actually the thing being eaten...
 end
 
 local function OnWingDown(inst)
@@ -107,17 +76,9 @@ end
 
 
 local function OnAttacked(inst, data)
-    if not inst.components.teamattacker.inteam and not inst.components.teamattacker:SearchForTeam() then
-        MakeTeam(inst, data.attacker)
-    elseif inst.components.teamattacker.teamleader then    
-        inst.components.teamattacker.teamleader:BroadcastDistress()   --Ask for  help!
-    end
-
-    if inst.components.teamattacker.inteam and not inst.components.teamattacker.teamleader:CanAttack() then
-        local attacker = data and data.attacker
-        inst.components.combat:SetTarget(attacker)
-        inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("bat") end, MAX_TARGET_SHARES)
-    end
+    local attacker = data and data.attacker
+    inst.components.combat:SetTarget(attacker)
+    inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("bat") end, MAX_TARGET_SHARES)
 end
 
 
@@ -137,7 +98,7 @@ local function onsave(inst, data)
     if inst.sg:HasStateTag("sleeping") then
         data.forcesleep = true
     end
-	data.bugcount = inst.bugcount
+
 end
 
 local function onload(inst, data)
@@ -150,11 +111,6 @@ local function onload(inst, data)
         inst.components.sleeper.hibernate = true
         inst.components.sleeper:GoToSleep()
     end
-	if data.bugcount then
-	inst.bugcount = data.bugcount
-	else
-	inst.bugcount = 0
-	end
   end
 end
 
@@ -162,6 +118,34 @@ local function OnPreLoad(inst, data)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	if y > 0 then
 		inst.Transform:SetPosition(x, 0, z)
+	end
+end
+
+local RETARGET_CANT_TAGS = {"bat","EPIC","player"}
+local RETARGET_ONEOF_TAGS = {"insect","spider"}
+local function Retarget(inst)
+    local newtarget = FindEntity(inst, 2*TUNING.BAT_TARGET_DIST, function(guy)
+            return inst.components.combat:CanTarget(guy)
+        end,
+        nil,
+        RETARGET_CANT_TAGS,
+        RETARGET_ONEOF_TAGS
+    )
+    return newtarget
+end
+
+local function KeepTarget(inst, target)
+    return true
+end
+
+local function OnAttackOther(inst, data)
+	if data.target and data.target.components.health and not data.target.components.health:IsDead() then
+		inst.food_baby = data.target
+		if inst.food_baby.brain then
+			inst.food_baby.brain:Stop()
+			inst.food_baby.sg:Stop()
+		end
+		inst.sg:GoToState("eat_loop")
 	end
 end
 
@@ -196,7 +180,7 @@ local function fn()
         return inst
     end
 	
-    inst.AnimState:SetBank("bat")
+    inst.AnimState:SetBank("fruitbat")
     inst.AnimState:SetBuild("fruitbat")
     inst:AddComponent("locomotor")
     inst.components.locomotor:SetSlowMultiplier( 1 )
@@ -204,18 +188,11 @@ local function fn()
     inst.components.locomotor.pathcaps = { ignorecreep = true }
     inst.components.locomotor.walkspeed = 10
 
-    inst:AddComponent("eater")
-    inst.components.eater:SetDiet({ FOODTYPE.INSECT, FOODTYPE.VEGGIE }, { FOODTYPE.INSECT, FOODTYPE.VEGGIE })
-    inst.components.eater:SetOnEatFn(OnEat)   
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(100)
-     
+    inst.components.health.destroytime = 4
 
-    inst:AddComponent("combat")
-    inst.components.combat:SetDefaultDamage(25)
-    inst.components.combat:SetAttackPeriod(1.8)
-    inst.components.combat:SetRetargetFunction(3, retargetfn)
-    inst.components.combat:SetKeepTargetFunction(KeepTarget)
+
 
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetResistance(3)
@@ -226,7 +203,6 @@ local function fn()
     inst:SetBrain(brain)
 
     inst:AddComponent("lootdropper")
-    inst.components.lootdropper:SetChanceLootTable('fruitbat')
 
     inst:AddComponent("inventory")
     
@@ -237,18 +213,23 @@ local function fn()
     
     inst:ListenForEvent("wingdown", OnWingDown)
     inst:ListenForEvent("attacked", OnAttacked)  
+	
+    inst:AddComponent("combat")
+    inst.components.combat.hiteffectsymbol = "fruitbat_body"
+    inst.components.combat:SetAttackPeriod(TUNING.BAT_ATTACK_PERIOD)
+    inst.components.combat:SetRange(TUNING.BAT_ATTACK_DIST)
+    inst.components.combat:SetRetargetFunction(3, Retarget)
+    inst.components.combat:SetKeepTargetFunction(KeepTarget)
+	inst:ListenForEvent("onattackother", OnAttackOther)
 
-    inst:AddComponent("teamattacker")
-    inst.components.teamattacker.team_type = "fruitbat"
-    inst.MakeTeam = MakeTeam
 	MakeHauntablePanic(inst)
-    MakeMediumBurnableCharacter(inst, "bat_body")
-    MakeMediumFreezableCharacter(inst, "bat_body")
+    MakeMediumBurnableCharacter(inst, "fruitbat_body")
+    MakeMediumFreezableCharacter(inst, "fruitbat_body")
 	
 	inst.OnEntitySleep = OnEntitySleep
     inst.OnEntityWake = OnEntityWake
     inst.OnPreLoad = OnPreLoad
-	inst.bugcount = 0
+
     inst.OnSave = onsave 
     inst.OnLoad = onload 
 

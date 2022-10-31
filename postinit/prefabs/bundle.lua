@@ -20,10 +20,10 @@ env.AddPrefabPostInit("bundle", function(inst)
 		if inst.burnt then
 			SpawnPrefab("ash").Transform:SetPosition(pos:Get())
 		else
-			--print("bubba")
+			print("bubba")
 			local loottable = (setupdata ~= nil and setupdata.lootfn ~= nil) and setupdata.lootfn(inst, doer) or loot
 			if loottable ~= nil then
-						--print("chumba")
+						print("chumba")
 				local moisture = inst.components.inventoryitem:GetMoisture()
 				local iswet = inst.components.inventoryitem:IsWet()
 				for i, v in ipairs(loottable) do
@@ -43,7 +43,7 @@ env.AddPrefabPostInit("bundle", function(inst)
 						end
 						
 						if item.components.perishable ~= nil then
-						--print("chumba")
+						print("chumba")
 							item.components.perishable:ReducePercent(1)
 						end
 					end

@@ -36,7 +36,7 @@ local function dig_up_common(inst, worker, numberries)
 				inst:RemoveTag("bushcrab_attack")
                 inst.components.lootdropper:SpawnLootPrefab("twigs")
                 inst.components.lootdropper:SpawnLootPrefab("twigs")
-            elseif math.random() <= 0.1 or inst:HasTag("bushcrab_attack") then
+            elseif (math.random() <= 0.1 or inst:HasTag("bushcrab_attack")) and not (inst.components.pickable and inst.components.pickable.transplanted) then
 			
 				local ents2 = TheSim:FindEntities(x, y, z, 12, { "bushcrab_ambush" })
 					for i, v in ipairs(ents2) do

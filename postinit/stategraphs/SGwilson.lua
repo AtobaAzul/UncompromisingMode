@@ -101,6 +101,8 @@ inst.actionhandlers[ACTIONS.CASTSPELL].deststate =
 					else
 						return "bearclaw_dig_start"
 					end
+				elseif action.invobject:HasTag("beegun") then
+					return "collectthebees"
 				end
             end
 			return _OldSpellCast(inst, action, ...)
@@ -127,6 +129,31 @@ inst.actionhandlers[ACTIONS.STARTCHANNELING].deststate =
 			end
         end
 
+local _OldAttackState = inst.actionhandlers[ACTIONS.ATTACK].deststate
+	inst.actionhandlers[ACTIONS.ATTACK].deststate = function(inst, action, ...)
+		local weapon = inst.components.combat and inst.components.combat:GetWeapon()
+		if weapon and weapon:HasTag("beegun") then
+		
+            if inst.sg.laststate.name == "beegun" or inst.sg.laststate.name == "beegun_short" then
+				return "beegun_short"
+			else
+				return "beegun"
+			end
+		else
+			return _OldAttackState(inst, action, ...)
+		end
+    end
+		
+local _OldCast_Net = inst.actionhandlers[ACTIONS.CAST_NET].deststate
+inst.actionhandlers[ACTIONS.CAST_NET].deststate = 
+        function(inst, action, ...)
+			if inst ~= nil then
+				return "cast_net_fixed"
+			else
+				return _OldCast_Net(inst, action, ...)
+			end
+        end
+
 local _OldDeathEvent = inst.events["death"].fn
 	inst.events["death"].fn = function(inst, data)
         if data ~= nil and data.cause == "shadowvortex" and not inst:HasTag("wereplayer") then
@@ -139,12 +166,12 @@ local _OldDeathEvent = inst.events["death"].fn
 			_OldDeathEvent(inst, data)
 		end
     end
-
+	
 local actionhandlers =
 {
 	--[[ActionHandler(ACTIONS.CASTSPELL,
         function(inst, action)
-            return action.invobject ~= nil
+            return action.invobject ~= nil"
                 and action.invobject:HasTag("lighter") and "castspelllighter"
 				or _OldSpellCast
         end),]]
@@ -161,9 +188,12 @@ local actionhandlers =
 	ActionHandler(ACTIONS.CREATE_BURROW,
         function(inst, action)
             return "dolongaction"
+        end),
+    ActionHandler(ACTIONS.CHARGE_POWERCELL,
+        function(inst, action)
+            return action.invobject ~= nil and action.invobject:HasTag("powercell") and "doshortaction"
         end)
 }
-
 
 local _OldIdleState = inst.states["idle"].onenter
 	inst.states["idle"].onenter = function(inst, pushanim)
@@ -988,6 +1018,268 @@ State{
                 inst.sg.statemem.talktask:Cancel()
                 inst.sg.statemem.talktask = nil
                 StopTalkSound(inst)
+            end
+        end,
+    },
+	
+	State{
+        name = "cast_net_fixed",
+        tags = { "doing", "busy" },
+
+        onenter = function(inst, silent)
+            inst.components.locomotor:Stop()
+            --inst.AnimState:PlayAnimation("cast_pre")
+            --inst.AnimState:PushAnimation("cast_loop", true)
+            inst.AnimState:PlayAnimation("fishing_ocean_pre")
+            inst.AnimState:PushAnimation("fishing_ocean_cast", false)
+            inst.AnimState:PushAnimation("fishing_ocean_cast_loop", true)
+            --inst.sg.statemem.action = inst.bufferedaction
+            --inst.sg.statemem.silent = silent
+            --inst.sg:SetTimeout(10 * FRAMES)
+        end,
+
+        timeline =
+        {
+            TimeEvent(6 * FRAMES, function(inst)
+				inst.AnimState:ClearOverrideSymbol("swap_object")
+
+                inst:PerformBufferedAction()
+            end),
+        },
+
+        events =
+        {
+            EventHandler("begin_retrieving", function(inst)
+                inst.sg:GoToState("cast_net_retrieving_fixed")
+            end),
+            },
+
+        --[[
+        ontimeout = function(inst)
+            --pickup_pst should still be playing
+            inst.sg:GoToState("idle", true)
+        end,
+        ]]--
+
+        --[[
+        onexit = function(inst)
+            if inst.bufferedaction == inst.sg.statemem.action and
+            (inst.components.playercontroller == nil or inst.components.playercontroller.lastheldaction ~= inst.bufferedaction) then
+                inst:ClearBufferedAction()
+            end
+        end,
+        ]]--
+    },
+
+    State{
+        name = "cast_net_retrieving_fixed",
+        tags = { "doing", "busy" },
+
+        onenter = function(inst, silent)
+            --inst.AnimState:PlayAnimation("cast_pst")
+            --inst.AnimState:PushAnimation("return_pre")
+            --inst.AnimState:PushAnimation("return_loop", true)
+            inst.AnimState:PlayAnimation("fishing_ocean_catch")
+            inst.AnimState:PushAnimation("fishing_ocean_pst")
+        end,
+
+        events =
+        {
+            EventHandler("begin_final_pickup", function(inst)
+                inst.sg:GoToState("cast_net_release_fixed")
+            end),
+        },
+    },
+
+    State{
+        name = "cast_net_release_fixed",
+        tags = { "doing", "busy" },
+
+        onenter = function(inst, silent)
+            --inst.AnimState:PlayAnimation("release_loop", false)
+			
+			inst.AnimState:OverrideSymbol("swap_object", "swap_boat_net", "swap_boat_net")
+			inst.AnimState:PlayAnimation("pickup")
+        end,
+
+        events =
+        {
+            EventHandler("animqueueover", function(inst)
+                inst.sg:GoToState("cast_net_release_pst_fixed")
+            end),
+        }
+    },
+
+    State{
+        name = "cast_net_release_pst_fixed",
+        tags = { "doing" },
+
+        onenter = function(inst, silent)
+            inst.sg:RemoveStateTag("busy")
+            --inst.AnimState:PlayAnimation("release_pst", false)
+			inst.AnimState:PlayAnimation("pickup_pst", false)
+        end,
+
+        events =
+        {
+            EventHandler("animqueueover", function(inst)
+                inst.sg:GoToState("idle")
+            end),
+        }
+    },
+	
+	
+    State{
+        name = "beegun",
+        tags = {"attack", "notalking", "abouttoattack"},
+        
+        onenter = function(inst)
+            inst.sg.statemem.target = inst.components.combat.target
+            inst.components.combat:StartAttack()
+            inst.components.locomotor:Stop()
+            inst.AnimState:PlayAnimation("speargun")
+            
+			inst.sg.statemem.abouttoattack = true
+			
+            if inst.components.combat.target then
+                if inst.components.combat.target and inst.components.combat.target:IsValid() then
+                    inst:FacePoint(Point(inst.components.combat.target.Transform:GetWorldPosition()))
+                end
+            end
+        end,
+        
+        timeline=
+        {
+           
+            TimeEvent(12*FRAMES, function(inst)
+				local equip = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+				if equip ~= nil and equip.components.weapon ~= nil and equip.components.weapon.projectile ~= nil then
+					local buffaction = inst:GetBufferedAction()
+					local target = buffaction ~= nil and buffaction.target or nil
+					if target ~= nil and target:IsValid() and inst.components.combat:CanTarget(target) then
+						inst.sg.statemem.abouttoattack = false
+						inst:PerformBufferedAction()
+					else
+						inst:ClearBufferedAction()
+						inst.sg:GoToState("idle")
+					end
+				else
+					inst:ClearBufferedAction()
+				end
+               -- inst.components.combat:DoAttack(inst.sg.statemem.target)
+                --inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/use_speargun")
+            end),
+            TimeEvent(20*FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
+        },
+        
+        events=
+        {
+            EventHandler("animover", function(inst)
+                inst.sg:GoToState("idle")
+            end),
+        },
+    },
+	
+    State{
+        name = "beegun_short",
+        tags = {"attack", "notalking", "abouttoattack"},
+        
+        onenter = function(inst)
+            inst.sg.statemem.target = inst.components.combat.target
+            inst.components.combat:StartAttack()
+            inst.components.locomotor:Stop()
+            inst.AnimState:PlayAnimation("speargun")
+			inst.AnimState:SetTime(5 * FRAMES)
+            
+			inst.sg.statemem.abouttoattack = true
+			
+            if inst.components.combat.target then
+                if inst.components.combat.target and inst.components.combat.target:IsValid() then
+                    inst:FacePoint(Point(inst.components.combat.target.Transform:GetWorldPosition()))
+                end
+            end
+        end,
+        
+        timeline=
+        {
+           
+            TimeEvent(6*FRAMES, function(inst)
+				local equip = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+				if equip ~= nil and equip.components.weapon ~= nil and equip.components.weapon.projectile ~= nil then
+					local buffaction = inst:GetBufferedAction()
+					local target = buffaction ~= nil and buffaction.target or nil
+					if target ~= nil and target:IsValid() and inst.components.combat:CanTarget(target) then
+						inst.sg.statemem.abouttoattack = false
+						inst:PerformBufferedAction()
+					else
+						inst:ClearBufferedAction()
+						inst.sg:GoToState("idle")
+					end
+				else
+					inst:ClearBufferedAction()
+				end
+               -- inst.components.combat:DoAttack(inst.sg.statemem.target)
+                --inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/use_speargun")
+            end),
+            TimeEvent(20*FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
+        },
+        
+        events=
+        {
+            EventHandler("animover", function(inst)
+                inst.sg:GoToState("idle")
+            end),
+        },
+    },
+	
+    State{
+        name = "collectthebees",
+        tags = { "doing", "busy", "canrotate" },
+
+        onenter = function(inst)
+            if inst.components.playercontroller ~= nil then
+                inst.components.playercontroller:Enable(false)
+            end
+            inst.AnimState:PlayAnimation("staff_pre")
+            inst.AnimState:PushAnimation("staff", false)
+			
+            --inst.AnimState:PushAnimation("staff", false)
+            inst.components.locomotor:Stop()
+
+            --Spawn an effect on the player's location
+            local staff = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+            local colour = staff ~= nil and staff.fxcolour or { 1, 1, 1 }
+
+            inst.sg.statemem.stafffx = SpawnPrefab("bee_poof_big")
+			inst.sg.statemem.stafffx.entity:SetParent(inst.entity)
+			inst.sg.statemem.stafffx.entity:AddFollower()
+			inst.sg.statemem.stafffx.Follower:FollowSymbol(inst.GUID, "swap_object", 30, 0, 0.1)
+        end,
+
+        timeline =
+        {
+            TimeEvent(13 * FRAMES, function(inst)
+                inst.sg.statemem.stafffx = nil --Can't be cancelled anymore
+				inst.SoundEmitter:PlaySound("dontstarve/creatures/together/bee_queen/taunt")
+                inst:PerformBufferedAction()
+            end),
+        },
+
+        events =
+        {
+            EventHandler("animqueueover", function(inst)
+                if inst.AnimState:AnimDone() then
+                    inst.sg:GoToState("idle")
+                end
+            end),
+        },
+
+        onexit = function(inst)
+            if inst.components.playercontroller ~= nil then
+                inst.components.playercontroller:Enable(true)
+            end
+            if inst.sg.statemem.stafffx ~= nil and inst.sg.statemem.stafffx:IsValid() then
+                inst.sg.statemem.stafffx:Remove()
             end
         end,
     },

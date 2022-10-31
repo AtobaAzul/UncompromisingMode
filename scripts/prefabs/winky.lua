@@ -40,7 +40,7 @@ local prefabs = {}
 local function GetPointSpecialActions(inst, pos, useitem, right)
     if right and useitem == nil then
         local rider = inst.replica.rider
-        if rider == nil or not rider:IsRiding() then
+        if rider == nil or not rider:IsRiding() and TheWorld.Map:GetTileAtPoint(pos.x, pos.y, pos.z) ~= WORLD_TILES.FARMING_SOIL then
             return { ACTIONS.CREATE_BURROW }
         end
     end

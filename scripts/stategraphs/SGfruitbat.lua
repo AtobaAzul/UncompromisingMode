@@ -1,10 +1,55 @@
 require("stategraphs/commonstates")
 
+-- Copied from mine.lua to emulate its mine test.
+local mine_test_fn = function(target, inst)
+    return not (target.components.health ~= nil and target.components.health:IsDead())
+            and (target.components.combat ~= nil and target.components.combat:CanBeAttacked(inst))
+end
+
+local mine_test_tags = { "monster", "character", "animal" }
+local mine_must_tags = { "_combat" }
+local mine_no_tags = { "notraptrigger", "flying", "ghost", "playerghost", "snapdragon" }
+
+local function FxAppear(inst)
+	SpawnPrefab("blueberryexplosion").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	SpawnPrefab("blueberrypuddle").Transform:SetPosition(inst.Transform:GetWorldPosition())
+end
+
+local function Explode(inst)
+	inst.SoundEmitter:PlaySound("turnoftides/creatures/together/starfishtrap/trap")
+	FxAppear(inst)
+	
+	local x,y,z = inst.Transform:GetWorldPosition()
+	local target_ents = TheSim:FindEntities(x, y, z, 1.1*TUNING.STARFISH_TRAP_RADIUS, mine_must_tags, mine_no_tags, mine_test_tags)
+	for i, target in ipairs(target_ents) do
+		if target ~= inst and target.entity:IsVisible() and mine_test_fn(target, inst) then
+			target.components.combat:GetAttacked(inst, TUNING.STARFISH_TRAP_DAMAGE)
+		end
+	end
+	
+	local otherbombs = TheSim:FindEntities(x, y, z, 3*TUNING.STARFISH_TRAP_RADIUS, {"blueberrybomb"}, mine_no_tags)
+	for i, target in ipairs(otherbombs) do
+		if target ~= inst and target.components.mine and not target.components.mine.issprung and not target.froze then
+			target.components.mine:SetRadius(TUNING.STARFISH_TRAP_RADIUS*12)
+		end
+	end
+end
+
+local function FoodBabyAnimation(inst)
+	if inst.food_baby and inst.food_baby.AnimState then
+		if inst.food_baby:HasTag("butterfly") then
+			inst.food_baby.AnimState:PlayAnimation("idle", false)
+		end
+		if inst.food_baby:HasTag("bee") then
+			inst.food_baby.AnimState:PushAnimation("land_idle", true)
+		end
+	end
+end
+
 local actionhandlers =
 {
     ActionHandler(ACTIONS.GOHOME, "flybackup"),
-    ActionHandler(ACTIONS.EAT, "eat_enter"),
-    ActionHandler(ACTIONS.PICKUP, "eat_enter")
+    ActionHandler(ACTIONS.PICKUP, "eat")
 }
 
 local events=
@@ -14,11 +59,16 @@ local events=
     end),
     CommonHandlers.OnLocomote(false, true),
     CommonHandlers.OnFreeze(),
-    CommonHandlers.OnAttack(),
+    EventHandler("doattack", function(inst, data) 
+        if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) then
+            inst.sg:GoToState("eat")
+		end
+	end),
     CommonHandlers.OnAttacked(),
-    CommonHandlers.OnDeath(),
+    EventHandler("death", function(inst) inst.sg:GoToState("death") end),
     CommonHandlers.OnSleep(),
 }
+
 
 local states =
 {
@@ -30,9 +80,9 @@ local states =
             inst.Physics:Stop()
             if playanim then
                 inst.AnimState:PlayAnimation(playanim)
-                inst.AnimState:PushAnimation("fly_loop", true)
+                inst.AnimState:PushAnimation("idle", true)
             else
-                inst.AnimState:PlayAnimation("fly_loop", true)
+                inst.AnimState:PlayAnimation("idle", true)
             end
         end,
         
@@ -142,72 +192,45 @@ local states =
         },
 
     },
-	
-    State{
-        name = "taunt",
-        tags = {"busy"},
-        
-        onenter = function(inst)
-            inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("taunt")
-        end,
-
-        timeline = 
-        {
-            TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/taunt") end ),
-			TimeEvent(3*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
-            TimeEvent(6*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/breath")  end ),
-			TimeEvent(14*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
-			TimeEvent(24*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
-			TimeEvent(41*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
-        },
-        
-        events=
-        {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
-        },
-    },
 
     State{
-        name = "eat_enter",
-        tags = {"busy"},
+        name = "eat",
+        tags = {"busy","attack"},
 
         onenter = function(inst)
-            inst.Physics:Stop()
-            inst.AnimState:PlayAnimation("eat", false)
-        end,
-
-        onexit = function(inst)
-
+            --inst.Physics:Stop()
+			inst:PerformBufferedAction()
+			inst.components.combat:StartAttack()
+            inst.AnimState:PlayAnimation("eat_pre", false)
         end,
 
         timeline = 
         {
 			TimeEvent(3*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
-            TimeEvent(8*FRAMES, function(inst) inst:PerformBufferedAction()
-            inst.SoundEmitter:PlaySound("UCSounds/vampirebat/bite") end ),
-			TimeEvent(14*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
+            TimeEvent(8*FRAMES, function(inst) 
+				inst.SoundEmitter:PlaySound("UCSounds/vampirebat/bite") 
+				inst.components.combat:DoAttack()
+			end),
         },
 
         events = 
         {
-            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end)
+            EventHandler("animqueueover", function(inst) if not inst.food_baby then inst.sg:GoToState("idle") end end)
         },
     },
 
     State{
         name = "eat_loop",
-        tags = {"busy"},
+        tags = {"busy","noattack","nosleep","flying"},
 
         onenter = function(inst)
-            inst.AnimState:PlayAnimation("eat_loop", true)
-            inst.sg:SetTimeout(1+math.random()*2)
-        end,
-
-        ontimeout= function(inst)
-            inst.lastmeal = GetTime()
-            inst:PerformBufferedAction()
-            inst.sg:GoToState("idle")
+			inst.DynamicShadow:Enable(false)
+			if inst.food_baby then
+				inst.food_baby.entity:AddFollower():FollowSymbol(inst.GUID, "food_baby", 0, 7, 0)
+			end
+			FoodBabyAnimation(inst)
+			inst.AnimState:PlayAnimation("eat_pst", true)
+            inst.AnimState:PushAnimation("take_food_baby", true)
         end,
 
         timeline = 
@@ -215,24 +238,51 @@ local states =
 			TimeEvent(7*FRAMES, function(inst) inst:PushEvent("wingdown") inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/chew") end ),
 			TimeEvent(17*FRAMES, function(inst) inst:PushEvent("wingdown") inst.SoundEmitter:PlaySound("dontstarve/creatures/bat/chew") end ),
         },
-
+		onupdate = function(inst)
+			inst.Physics:SetMotorVelOverride(0,10,0)
+			local x,y,z = inst.Transform:GetWorldPosition()
+			if y > 50 then
+				inst.food_baby:Remove()
+				inst.food_baby = nil
+				inst.sg:GoToState("digest")
+			end
+		end,
         events = 
         {
-            EventHandler("attacked", function(inst) inst.components.inventory:DropEverything() inst.sg:GoToState("idle") end) --drop food
         },
     },
 
+    State{
+        name = "digest",
+        tags = {"busy","noattack","nosleep","flying"},
+
+        onenter = function(inst)
+			inst.Physics:Stop()
+			inst.sg:SetTimeout(480)
+        end,
+
+        ontimeout= function(inst)
+            inst.sg:GoToState("glide")
+        end,
+
+        timeline = 
+        {
+        },
+        events = 
+        {
+        },
+    },	
     State{
         name = "glide",
         tags = {"idle", "flying", "busy"},
         onenter= function(inst)
             inst.DynamicShadow:Enable(false)
             inst.AnimState:PlayAnimation("glide", true)
-            inst.Physics:SetMotorVelOverride(0,-25,0)        
+            inst.Physics:SetMotorVelOverride(0,-10,0)        
         end,
         
         onupdate= function(inst)
-            inst.Physics:SetMotorVelOverride(0,-25,0)
+            inst.Physics:SetMotorVelOverride(0,-10,0)
             local pt = Point(inst.Transform:GetWorldPosition())            
             if pt.y <= .1 then
                 inst.Physics:ClearMotorVelOverride()
@@ -272,22 +322,34 @@ local states =
         },
     },
 
+    State{
+        name = "boop",
+        tags = {"busy"},
+
+        onenter = function(inst)
+            inst.AnimState:PlayAnimation("boop", false)
+            --inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/land")
+        end,
+
+        events = 
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end)
+        },
+    },
 }
 
 local walkanims = 
 {
-    startwalk = "fly_loop",
-    walk = "fly_loop",
-    stopwalk = "fly_loop",
+    startwalk = "move_pre",
+    walk = "move",
+    stopwalk = "move_pst",
 }
 
 CommonStates.AddWalkStates(states,
 {
     starttimeline =
     {
-        TimeEvent(7*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
-        --TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/breath")  end ),
-        TimeEvent(17*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
+        TimeEvent(1*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
     },
 
     walktimeline = 
@@ -299,9 +361,7 @@ CommonStates.AddWalkStates(states,
 
     endtimeline =
     {
-        TimeEvent(7*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
-        --TimeEvent(5*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/breath")  end ),
-        TimeEvent(17*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
+        TimeEvent(1*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
     },
 
 },  walkanims, true)
@@ -329,32 +389,21 @@ CommonStates.AddSleepStates(states,
 
 CommonStates.AddCombatStates(states,
 {
-    attacktimeline = 
-    {
-        
-        -- TimeEvent(7* FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve_DLC003/creatures/enemy/vampire_bat/bite") end),
-        TimeEvent(7*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
-        TimeEvent(8* FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/bite") end),
-        TimeEvent(14*FRAMES, function(inst) 
-        inst.components.combat:DoAttack()
-        inst:PushEvent("wingdown")
-        end),
-    },
-
     hittimeline =
     {
-        TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/hurt") end),
-        TimeEvent(3*FRAMES, function(inst) inst:PushEvent("wingdown") end ),
+        TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/hurt")	end),
+        TimeEvent(3*FRAMES, function(inst) inst:PushEvent("wingdown")	end),
     },
 
     deathtimeline =
     {
         TimeEvent(1*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/vampirebat/death") end),
-        TimeEvent(4*FRAMES, function(inst) inst:PushEvent("wingdown")  end ),
+        TimeEvent(4*FRAMES, function(inst) inst:PushEvent("wingdown")	end),
+		TimeEvent(45*FRAMES, Explode),
     },
 })
 
 CommonStates.AddFrozenStates(states)
 
 
-return StateGraph("fruitbat", states, events, "idle", actionhandlers)
+return StateGraph("fruitbat", states, events, "boop", actionhandlers)

@@ -196,6 +196,8 @@ local function onbecameghost(inst, data)
 end
 
 env.AddPrefabPostInit("winona", function(inst)
+	inst:AddTag("electrical_upgradeuser")
+
 	if not TheWorld.ismastersim then
 		return
 	end
@@ -241,11 +243,75 @@ env.AddPrefabPostInit("winona", function(inst)
 			end
 		end
 	end
-
-	inst:AddTag("electrical_upgradeuser")
-
 end)
 
+local function onrepaired(inst)
+       --inst.SoundEmitter:PlaySound(data.buildsound) --If desired, can attach build sound here later.
+end
+
+local function ValidRepairFn(inst)
+    if inst.Physics:IsActive() then
+        return true
+    end
+
+    local x, y, z = inst.Transform:GetWorldPosition()
+    if TheWorld.Map:IsAboveGroundAtPoint(x, y, z) then
+        return true
+    end
+
+    if TheWorld.Map:IsVisualGroundAtPoint(x,y,z) then
+        for i, v in ipairs(TheSim:FindEntities(x, 0, z, 1, PLAYER_TAGS)) do
+            if v ~= inst and
+            v.entity:IsVisible() and
+            v.components.placer == nil and
+            v.entity:GetParent() == nil then
+                local px, _, pz = v.Transform:GetWorldPosition()
+                if math.floor(x) == math.floor(px) and math.floor(z) == math.floor(pz) then
+                    return false
+                end
+            end
+        end
+    end
+    return true
+end
+	
+env.AddPrefabPostInit("winona_catapult", function(inst)
+	if TUNING.DSTU.WINONA_WACKCATS then
+		TUNING.WINONA_CATAPULT_HEALTH = 300
+		TUNING.WINONA_CATAPULT_HEALTH_REGEN = 0
+		inst:AddComponent("repairable")
+		inst.components.repairable.repairmaterial = "stone"
+        inst.components.repairable.onrepaired = onrepaired
+        --inst.components.repairable.testvalidrepairfn = ValidRepairFn
+	end
+end)
+
+env.AddPrefabPostInit("winona_catapult_projectile", function(inst)
+	if TUNING.DSTU.WINONA_WACKCATS and inst.components.combat ~= nil then
+		inst.components.combat:SetDefaultDamage(34)
+	end
+end)
+
+env.AddPrefabPostInit("sewing_tape", function(inst)
+	if TUNING.DSTU.WINONA_WACKCATS then
+		inst:AddComponent("repairer")
+		inst.components.repairer.healthrepairvalue = 200
+		inst.components.repairer.repairmaterial = MATERIALS.STONE
+	end
+end)
+
+env.AddComponentPostInit("repairable", function(self)
+	if TUNING.DSTU.WINONA_WACKCATS then
+		local _Repair = self.Repair
+		function self:Repair(doer,repair_item)
+			if repair_item:HasTag("tape") then
+				self.inst.components.health:DoDelta(repair_item.components.repairer.healthrepairvalue)
+			else
+				return _Repair(self,doer,repair_item)
+			end
+		end
+	end
+end)
 
 --[[
 

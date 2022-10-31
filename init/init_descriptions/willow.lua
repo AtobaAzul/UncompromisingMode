@@ -120,7 +120,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.SPOREPACK = "The smell is nothing fire can't handle!"
 	DESCRIBE.SALTPACK = "I still hate Winter."
 	
-	DESCRIBE.SCORPION = "Ugh, gross!"
+	DESCRIBE.UM_SCORPION = "Ugh, gross!"
 	DESCRIBE.SCORPIONCARAPACE = "It's gonna need a lot of fire to fix this."
 	DESCRIBE.SCORPIONCARAPACECOOKED = "I can't believe it, fire wasn't enough..."
 	DESCRIBE.HARDSHELLTACOS = "That went well."
@@ -365,5 +365,80 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "Ha, can't shock me!"
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "OW! Not what I had in mind."
-	DESCRIBE.UM_DEVILED_EGGS = "Yuck! I hate runny eggs!"
 	
+	----UNDER THE WEATHER----
+	
+	DESCRIBE.WINONA_TOOLBOX = "Do I have to carry everything around?"
+	ACTIONFAIL.WINONATOOLBOX = "Hey, at least let me take a peak."
+	DESCRIBE.POWERCELL = "yeah, yeah, it's nice, but how well does it burn."
+	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "."
+	DESCRIBE.MINERHAT_ELECTRICAL = "Why cant I energize it with fire!"
+	DESCRIBE.OCEAN_SPEAKER = "What's this big dumb machine doing all the way out here?"
+	--DESCRIBE.UM_SIREN = "Oh yeah!? I can blow bubbles twice as big! Watch!"
+	
+	--DESCRIBE.OCUPUS_BEAK = ""
+	DESCRIBE.OCUPUS_TENTACLE = "I'm not sinking my teeth into that."
+	DESCRIBE.OCUPUS_TENTACLE_EYE = "I don't like being watched by my food."
+	DESCRIBE.OCUPUS_TENTACLE_COOKED = "That still looks rubbery."
+	
+	DESCRIBE.ARMOR_REED_UM = "Well that was fun to make, time to burn it."
+	DESCRIBE.ARMOR_SHARKSUIT_UM = ""
+	DESCRIBE.ROCKJAWLEATHER = "I don't want gross fish skin."
+	
+	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
+	DESCRIBE.STUFFED_PEEPER_POPPERS = "Aww, they are looking right at me!"
+	DESCRIBE.UM_DEVILED_EGGS = "Yuck! I hate runny eggs!"
+	DESCRIBE.LUSH_ENTRANCE = "Oh, I bet there's all sorts of stuff to burn down there!"
+	DESCRIBE.CRITTER_FIGGY = "Awwh! So fluffy, I wouldn't burn a hair on your lil' body!"
+	DESCRIBE.GIANT_TREE_BIRDNEST = "Think if I light the nest on fire the eggs'll fry?"
+	
+    DESCRIBE.SLUDGE = "Burning this gross stuff would be easy."
+	DESCRIBE.SLUDGE_OIL = "Smells like a good way to start some fires."
+    DESCRIBE.SLUDGE_SACK = "The grossest backpack known to man."
+	DESCRIBE.CANNONBALL_SLUDGE_ITEM = "A beautiful chunk of fiery destruction."
+	DESCRIBE.BOAT_BUMPER_SLUDGE = "Well, it better save my boat from sinking."
+	DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "Burning it would have been better."
+    DESCRIBE.BOATPATCH_SLUDGE = "Ugh, the boat is gonna smell bad!"
+    DESCRIBE.UM_COPPER_PIPE = "These won't burn at all."
+    DESCRIBE.BRINE_BALM  = "A different kind of burning, I can get used to this."
+    DESCRIBE.UNCOMPROMISING_FISHINGNET = DESCRIBE.FISHINGNET
+	DESCRIBE.UM_AMBER = "Pretty."
+	DESCRIBE.UM_BEEGUN = "Everybody gets BEES!"
+	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.SUNKENCHEST_ROYAL = "Riches beyond my wildest dreams."
+	DESCRIBE.STEERINGWHEEL_COPPER = "Now the whole boats spinning!"
+	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "I still need one of these."
+	DESCRIBE.BOAT_BUMPER_COPPER = "Does this mean I can crash into as many things I want too?"
+	DESCRIBE.BOAT_BUMPER_COPPER_KIT = "So, this must be pretty strong I guess."
+	DESCRIBE.UM_DREAMCATCHER = "Can you catch all my bad dreams?"
+	DESCRIBE.UM_BRINEISHMOSS = "Moist and gross."
+	DESCRIBE.UM_COALESCED_NIGHTMARE = "I don't even want to think about where it came from."
+	DESCRIBE.SLUDGE_CORK = "Atleast now I can plug that sludge up!"
+	DESCRIBE.SLUDGESTACK = "C'moooon, wouldn't it be fun to watch it combust?"
+	DESCRIBE.SPECTER_SHIPWRECK = "It's in the water, but it looks burnable enough." 
+	
+	DESCRIBE.UNCOMPROMISING_HARPOON = "Stabbing things from a distance has never been easier."
+	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
+	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
+	DESCRIBE.UM_MAGNERANG = "Hey, this is bent wrong."
+	DESCRIBE.UM_MAGNERANGREEL = "Yeah! Keep them in their place!"
+	DESCRIBE.SIREN_THRONE = "Ugh, who would want to sit on a dumb stinky rock?"
+	DESCRIBE.LAVASPIT_SLUDGE = "Hah! This stuff's awesome!"
+	
+	DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_BLOCKER = "That jerk is keeping me away!"
+
+	DESCRIBE.PORTABLEBOAT_ITEM = "A fireproof boat? All aboard!"
+	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "It doesn't have the comforting glow of a nice roaring fire."
+	
+	DESCRIBE.WIXIE_PIANO = "Potatoes and molasses!"
+	DESCRIBE.WIXIE_CLOCK = "It's fire-o-clock! Every hour, every day!"
+	DESCRIBE.WIXIE_WARDROBE = "I hate non-flammable wood!"
+	DESCRIBE.CHARLES_T_HORSE = "I couldn't bring myself to burn it... Because it won't burn!"
+
+	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Oh, it's a little angel!"
+	DESCRIBE.UM_ORNAMENT_RAT = "I hate rats! Oh, it's fake? I still hate it!"
+	
+	DESCRIBE.TRINKET_WATHOM1 = "Wow!! This is worthless."

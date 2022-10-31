@@ -165,15 +165,15 @@ end
 
 local function OnAttacked(inst, data)
 inst:ClearBufferedAction()
-if not data.attacker:HasTag("moonglasscreature") then
-inst.components.combat:SetTarget(data.attacker)
-	if inst.components.follower ~= nil and inst.components.follower.leader ~= nil then
-		local leader = inst.components.follower.leader
-		if leader.components.combat ~= nil and leader.components.combat.target == nil then
-			leader.components.combat:SetTarget(data.attacker)
+	if data.attacker and not data.attacker:HasTag("moonglasscreature") then
+	inst.components.combat:SetTarget(data.attacker)
+		if inst.components.follower ~= nil and inst.components.follower.leader ~= nil then
+			local leader = inst.components.follower.leader
+			if leader.components.combat ~= nil and leader.components.combat.target == nil then
+				leader.components.combat:SetTarget(data.attacker)
+			end
 		end
 	end
-end
 end
 
 local function lavae_fn()

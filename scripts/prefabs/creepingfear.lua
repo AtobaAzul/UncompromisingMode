@@ -60,13 +60,13 @@ local function SpikeWaves(inst, target)
     inst.SoundEmitter:PlaySound("dontstarve/common/shadowTentacleAttack_1")
     inst.SoundEmitter:PlaySound("dontstarve/common/shadowTentacleAttack_2")
     for i = 1,20 do
-        inst:DoTaskInTime(FRAMES * i * 1.5, function()
+        inst:DoTaskInTime(FRAMES * i --[[* 1.5]], function()
             local dx, dy, dz = ix + (i * velx), 0, iz + (i * velz)
-            local fx1 = SpawnPrefab("uncompromising_shadow_projectile1_fx")
+            local fx1 = SpawnPrefab("uncompromising_shadow_projectile1_fx_fast")
             fx1.Transform:SetPosition(dx, dy, dz)
-            inst:DoTaskInTime(1.2, function()
+            inst:DoTaskInTime(.6, function()
                 inst.SoundEmitter:PlaySound("dontstarve/sanity/creature2/attack")
-                local ents = TheSim:FindEntities(dx, dy, dz, 1.2, nil, { "FX", "NOCLICK", "INLIMBO", "shadowdominant" })
+                local ents = TheSim:FindEntities(dx, dy, dz, 1.5, nil, { "FX", "NOCLICK", "INLIMBO", "shadowdominant" })
                 for k,v in ipairs(ents) do
                     if not target_index[v] and v ~= inst and inst.components.combat:IsValidTarget(v) and v.components.combat and ((v.components.sanity and v.components.sanity:IsInsane()) or v == target) and not v:HasTag("shadowdominant") then
                         target_index[v] = true
@@ -120,7 +120,7 @@ local function retargetfn(inst)
     local rangesq, rangesq1, rangesq2 = maxrangesq, math.huge, math.huge
     local target1, target2 = nil, nil
     for i, v in ipairs(AllPlayers) do
-        if v.components.sanity:IsInsane() and not v:HasTag("playerghost") then
+        if v.components.sanity:IsInsane() and not v:HasTag("playerghost") and not v:HasTag("notarget_shadow") then
             local distsq = v:GetDistanceSqToInst(inst)
             if distsq < rangesq then
                 if inst.components.shadowsubmissive:TargetHasDominance(v) then
@@ -232,6 +232,24 @@ local function OnPreLoad(inst, data)
     end
 end
 
+local function ConsumeShadow(inst, other, damage)
+	print("eaty")
+	if other:HasTag("shadowcreature") then
+		print("shadow")
+		local x, y, z = other.Transform:GetWorldPosition()
+		local shadowdespawnfx = SpawnPrefab("shadow_despawn")
+		shadowdespawnfx.Transform:SetPosition(x, y, z)
+		
+		other:Remove()
+		inst.components.health:DoDelta(inst.components.health.maxhealth * 0.2)
+		
+		inst.size = inst.size + 0.1
+		if inst.size < 1.8 then
+			inst.Transform:SetScale(inst.size, inst.size, inst.size)
+		end
+	end
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -246,7 +264,7 @@ local function fn()
     inst.Physics:CollidesWith(COLLISION.GROUND)
     --inst.Physics:CollidesWith(COLLISION.WORLD)
 
-    --inst.Transform:SetScale(1.5, 1.5, 1.5)
+    inst.Transform:SetScale(1.2, 1.2, 1.2)
 
     inst:AddTag("shadowcreature")
     inst:AddTag("monster")
@@ -261,8 +279,8 @@ local function fn()
     inst.AnimState:PlayAnimation("idle_loop", true)
     inst.AnimState:SetMultColour(1, 1, 1, .5)
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-    inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
-
+    inst.AnimState:SetLayer(LAYER_WORLD)
+	inst.AnimState:SetSortOrder(5)
     inst:AddComponent("transparentonsanity")
 
     inst.entity:SetPristine()
@@ -271,13 +289,15 @@ local function fn()
         return inst
     end
 
+	inst.size = 1.2
     inst.hitcount = 3
     inst.sp_atk_cd = 15
 
     inst:AddComponent("uncompromising_shadowfollower")
 
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-    inst.components.locomotor.walkspeed = TUNING.DSTU.CREEPINGFEAR_SPEED
+    inst.components.locomotor.walkspeed = TUNING.DSTU.CREEPINGFEAR_WALK_SPEED
+    inst.components.locomotor.runspeed = TUNING.DSTU.CREEPINGFEAR_RUN_SPEED
     --inst.components.locomotor.pathcaps = { allowocean = true }
 	inst.components.locomotor:SetTriggersCreep(false)
     inst.sounds = sounds
@@ -293,9 +313,13 @@ local function fn()
 
     inst:AddComponent("combat")
     inst.components.combat:SetAttackPeriod(TUNING.DSTU.CREEPINGFEAR_ATTACK_PERIOD)
-    inst.components.combat:SetRange(TUNING.DSTU.CREEPINGFEAR_RANGE_1*1.15, TUNING.DSTU.CREEPINGFEAR_RANGE_2*1.15)
+    inst.components.combat:SetRange(TUNING.DSTU.CREEPINGFEAR_RANGE_1, TUNING.DSTU.CREEPINGFEAR_RANGE_2)
     inst.components.combat.onkilledbyother = onkilledbyother
     inst.components.combat:SetRetargetFunction(3, retargetfn)
+	
+	inst:AddComponent("eater")
+	inst.components.eater:SetDiet({ FOODGROUP.SHADOWCREATURE }, { FOODGROUP.SHADOWCREATURE })
+	inst.components.eater:SetOnEatFn(ConsumeShadow)
 
     --if TheWorld.state.cycles then
     --    inst.components.health:SetMaxHealth(1200 + (math.min(TheWorld.state.cycles, 100) *  38))

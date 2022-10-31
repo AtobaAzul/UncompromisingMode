@@ -18,7 +18,7 @@ env.AddPrefabPostInit("bat", function(inst)
 	end
 	
 	if inst.components.health ~= nil then
-		inst.components.health:SetMaxHealth(TUNING.DSTU.BAT_HEALTH)
+		inst.components.health:SetMaxHealth(TUNING.BAT_HEALTH)
 	end
 	
 end)

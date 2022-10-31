@@ -1,6 +1,7 @@
 require "stategraphs/SGsnowmong"
 local easing = require("easing")
 local brain = require "brains/snowmongbrain"
+
 local assets =
 {
 	Asset("ANIM", "anim/snowmong.zip"),
@@ -12,12 +13,12 @@ SetSharedLootTable( 'snowmong',
 	{'charcoal',            1.00},
 	{'charcoal',            1.00},
 	{'charcoal',            1.00},
-    {'ice',  			 1.00},
-	{'ice',  			 1.00},
-	{'ice',  			 1.00},
-    {'iceboomerang',       0.25},
-	{'snowball_throwable',  			 1.00},
-	{'snowball_throwable',  			 2.00},
+    {'ice',  			 	1.00},
+	{'ice',  			 	1.00},
+	{'ice',  			 	1.00},
+    {'iceboomerang',      	0.25},
+	{'snowball_throwable',  1.00},
+	{'snowball_throwable',  2.00},
 	
 })
 
@@ -25,15 +26,15 @@ SetSharedLootTable( 'snowmong_melting',
 {
     {'charcoal',            1.00},
 	{'charcoal',            1.00},
-    {'ice',  			 1.00},
-	{'snowball_throwable',  			 1.00},
+    {'ice',  			 	1.00},
+	{'snowball_throwable',  1.00},
 	
 })
 
 local SEE_VICTIM_DIST = 25
 
 local function SetUnder(inst)
-	--print("under")
+	print("under")
 		inst.State = true
 		inst:AddTag("notdrawable")
 		inst:AddTag("INLIMBO")
@@ -44,7 +45,7 @@ local function SetUnder(inst)
 end
 
 local function SetAbove(inst)
-	--print("above")
+	print("above")
 		inst.State = false
 		inst:RemoveTag("INLIMBO")
 		inst:RemoveTag("notdrawable")
@@ -57,15 +58,8 @@ end
 
 local function Retarget(inst)
     local targetDist = 30
-    local notags = {"FX", "NOCLICK","INLIMBO", "playerghost", "shadowcreature","webbedcreature","wall"}
-    return FindEntity(inst, targetDist, 
-        function(guy) 
-            if inst.components.combat:CanTarget(guy)
-               and not (inst.components.follower and inst.components.follower.leader == guy and target.components.health:IsDead())
-               and not (inst.components.follower and guy:HasTag("companion")) then
-                return not (guy:HasTag("snowish"))
-            end
-    end, nil, notags)
+    local notags = {"FX", "NOCLICK","INLIMBO", "playerghost", "shadowcreature","webbedcreature","wall","structure","companion","snowish"}
+    return FindEntity(inst, targetDist, function(guy) return inst.components.combat:CanTarget(guy) and not guy.components.health:IsDead() end, nil, notags)
 end
 
 local function KeepTarget(inst, target)
@@ -82,32 +76,33 @@ end
 
 local function SnowballBelch(inst, target)
 	if target ~= nil then
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local projectile = SpawnPrefab("snowball_throwable")
-    projectile.Transform:SetPosition(x, y, z)
-    local a, b, c = target.Transform:GetWorldPosition()
-	local targetpos = target:GetPosition()
-	targetpos.x = targetpos.x + math.random(-3,3)
-	targetpos.z = targetpos.z + math.random(-3,3)
-    local dx = a - x
-    local dz = c - z
-    local rangesq = dx * dx + dz * dz
-    local maxrange = 15
-    local bigNum = 10
-    local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
-	projectile:AddTag("canthit")
-    projectile.components.complexprojectile:SetHorizontalSpeed(speed+math.random(4,9))
-    projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local projectile = SpawnPrefab("snowball_throwable")
+		projectile.Transform:SetPosition(x, y, z)
+		local a, b, c = target.Transform:GetWorldPosition()
+		local targetpos = target:GetPosition()
+		targetpos.x = targetpos.x + math.random(-3,3)
+		targetpos.z = targetpos.z + math.random(-3,3)
+		local dx = a - x
+		local dz = c - z
+		local rangesq = dx * dx + dz * dz
+		local maxrange = 15
+		local bigNum = 10
+		local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
+		projectile:AddTag("canthit")
+		projectile.components.complexprojectile:SetHorizontalSpeed(speed+math.random(4,9))
+		projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 	end
 end
+
 local function DoSnowballBelch(inst)
-local maxsnow =  math.floor(math.random(8,12))
-for k = 1, maxsnow do
-   if inst.components.combat.target ~= nil then
-   local target = inst.components.combat.target
-   inst:DoTaskInTime(FRAMES+math.random()*0.1, SnowballBelch, target)
-   end
-end
+	local maxsnow =  math.floor(math.random(8,12))
+	for k = 1, maxsnow do
+	   if inst.components.combat.target ~= nil then
+		   local target = inst.components.combat.target
+		   inst:DoTaskInTime(FRAMES+math.random()*0.1, SnowballBelch, target)
+	   end
+	end
 end
 
 local function melting(inst)
@@ -120,6 +115,24 @@ local function melting(inst)
 		end
 	else
 		inst.components.lootdropper:SetChanceLootTable('snowmong')
+	end
+end
+
+local function OnAttacked(inst, data)
+	if data.attacker and data.attacker:IsValid() and data.attacker.components.health and not data.attacker.components.health:IsDead() then
+        inst.components.combat:SetTarget(data.attacker)
+    end
+end
+
+local function SetTier(inst,tier)
+	if tier == 1 then
+
+	end
+	if tier == 2 then
+	
+	end
+	if tier == 3 then
+	
 	end
 end
 
@@ -158,7 +171,7 @@ local function fn(Sim)
 	inst.components.locomotor.walkspeed = 2
 
 	inst:AddComponent("health")
-	inst.components.health:SetMaxHealth(600)
+	inst.components.health:SetMaxHealth(350)
 	inst.components.health.murdersound = "dontstarve/rabbit/scream_short"
 	inst.components.health.fire_damage_scale = 0
 
@@ -182,13 +195,12 @@ local function fn(Sim)
     inst:AddComponent("hauntable")
 		
 	inst:AddComponent("combat")
-	inst.components.combat:SetDefaultDamage(44)
+	inst.components.combat:SetDefaultDamage(51)
 	inst.components.combat:SetAttackPeriod(3)
 	inst.components.combat:SetRange(3, 3)
 	inst.components.combat:SetRetargetFunction(3, Retarget)
 	inst.components.combat:SetKeepTargetFunction(KeepTarget)
 	inst.components.combat.canbeattackedfn = CanBeAttacked
-	inst.components.combat.hiteffectsymbol = "chest"
 
 	inst:SetStateGraph("SGsnowmong")
 	inst:SetBrain(brain)
@@ -208,6 +220,9 @@ local function fn(Sim)
     inst.SetUnder = SetUnder
 	inst.SetAbove = SetAbove
 	
+	inst.SetTier = SetTier
+    
+	inst:ListenForEvent("attacked", OnAttacked) 
 	return inst
 end
 

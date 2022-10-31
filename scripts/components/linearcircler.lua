@@ -44,8 +44,13 @@ function LinearCircler:Start()
     self.facingAngle = (math.atan2(self.offset.x, self.offset.z) + self.direction) * RADIANS
 
     local x, y, z = self.circleTarget.Transform:GetWorldPosition()
-    self.inst.Transform:SetRotation(self.facingAngle)
-    self.inst.Transform:SetPosition(x + self.offset.x, 0, z + self.offset.z)
+	self.inst.Transform:SetRotation(self.facingAngle)
+	if not self.grounded then
+		self.inst.Transform:SetPosition(x + self.offset.x, 0, z + self.offset.z)
+	else
+		local x1,y1,z1 = self.inst.Transform:GetWorldPosition()
+		self.inst.Transform:SetPosition(x + self.offset.x, y1, z + self.offset.z)
+	end
     self.inst:StartUpdatingComponent(self)
 end
 
@@ -107,8 +112,15 @@ function LinearCircler:OnUpdate(dt)
     self.facingAngle = (math.atan2(self.offset.x, self.offset.z) + self.direction) * RADIANS
 
     local x, y, z = self.circleTarget.Transform:GetWorldPosition()
-    self.inst.Transform:SetRotation(self.facingAngle)
-    self.inst.Transform:SetPosition(x + self.offset.x, 0, z + self.offset.z)
+	if not self.freeface then
+		self.inst.Transform:SetRotation(self.facingAngle)
+	end
+	if not self.grounded then
+		self.inst.Transform:SetPosition(x + self.offset.x, 0, z + self.offset.z)
+	else
+		local x1,y1,z1 = self.inst.Transform:GetWorldPosition()
+		self.inst.Transform:SetPosition(x + self.offset.x, y1, z + self.offset.z)
+	end
 end
 
 LinearCircler.OnEntitySleep = LinearCircler.Stop

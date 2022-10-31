@@ -59,7 +59,7 @@ local function fn()
 
     inst:AddComponent("equippable")
     inst.components.equippable.equipslot = EQUIPSLOTS.HEAD
-	inst.components.equippable.dapperness = TUNING.DAPPERNESS_MED
+	inst.components.equippable.dapperness = TUNING.DAPPERNESS_LARGE
 
     inst:AddComponent("insulator")
     inst.components.insulator:SetSummer()

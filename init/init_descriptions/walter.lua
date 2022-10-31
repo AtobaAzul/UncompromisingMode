@@ -2,7 +2,7 @@ ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.WALTER
 DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WALTER.DESCRIBE
 ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 
---	[ 		Wigfrid Descriptions		]   --
+--	[ 		Walter Descriptions		]   --
 
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "You need my help! And your body..."
     ANNOUNCE.ANNOUNCE_WINONAGEN = "I haven't gotten my \"putting rocks in machines\" badge yet."
@@ -117,7 +117,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.SPOREPACK = "Anything can be useful if you have the know how!"
 	DESCRIBE.SALTPACK = "This will take care of the snow piles, though I prefer to do things myself!"
 	
-	DESCRIBE.SCORPION = "Fun fact: You can suck the venom out of a bite wound! Not sure about scorpion stings though..."
+	DESCRIBE.UM_SCORPION = "Fun fact: You can suck the venom out of a bite wound! Not sure about scorpion stings though..."
 	DESCRIBE.SCORPIONCARAPACE = "Uhh, Woby, you can have this one."
 	DESCRIBE.SCORPIONCARAPACECOOKED = "It's slightly better, but I would rather Woby have it."
 	DESCRIBE.HARDSHELLTACOS = "Huh, isn't half bad."
@@ -356,6 +356,77 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "Woah! I think I almost got electrocuted."
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "Woah! I think I almost got electrocuted."
 	
+	----UNDER THE WEATHER----
 	
+	DESCRIBE.WINONA_TOOLBOX = "I wonder what kind of gadgets and do-hickeys are inside."
+	ACTIONFAIL.WINONATOOLBOX = "I don't have a badge for this yet."
+	DESCRIBE.POWERCELL = "Is this safe?"
+	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "It'd be more useful powering something."
+	DESCRIBE.MINERHAT_ELECTRICAL = "This makes refueling a lot easier."
+	DESCRIBE.OCEAN_SPEAKER = "I wonder if Woby can hear its frequency?"
 	--DESCRIBE.UM_SIREN = "Woah!! A REAL sea monster!!"
+	
+	DESCRIBE.OCUPUS_BEAK = "The mouth of the Kraken!"
+	DESCRIBE.OCUPUS_TENTACLE = ""
+	DESCRIBE.OCUPUS_TENTACLE_EYE = ""
+	DESCRIBE.OCUPUS_TENTACLE_COOKED = ""
+	
+	DESCRIBE.ARMOR_REED_UM = "It just might help me blend in."
+	DESCRIBE.ARMOR_SHARKSUIT_UM = "I don't need help swimming!"
+	DESCRIBE.ROCKJAWLEATHER = "Woah, Geniune shark skin."
+
+	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
+	DESCRIBE.STUFFED_PEEPER_POPPERS = "If I close my eyes and swallow, maybe it will taste better!"
 	DESCRIBE.UM_DEVILED_EGGS = "It's pretty fowl! Get it? ...You get it."
+	DESCRIBE.LUSH_ENTRANCE = "I'm not sure I want to go down there just yet, Woby..."
+	DESCRIBE.CRITTER_FIGGY = "Woby wants to play with you, Figgy!"
+	DESCRIBE.GIANT_TREE_BIRDNEST = "Woby, leave those eggs alone!" --Woby you bitch don't eat the eggsssss
+	ACTIONFAIL.UPGRADE.NOT_HARVESTED = "Always keep your equipment clean and tidy!"
+
+    DESCRIBE.SLUDGE = "A smelly glob of stuff?"
+	DESCRIBE.SLUDGE_OIL = "This is some greasy oil."
+    DESCRIBE.SLUDGE_SACK = "It'll keep stuff I don't want stolen!"
+	DESCRIBE.CANNONBALL_SLUDGE_ITEM = "Maybe this is what solid fire looks like."
+	DESCRIBE.BOAT_BUMPER_SLUDGE = "It reminds me of a rubber raft!"
+	DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "Better safe than sorry!"
+    DESCRIBE.BOATPATCH_SLUDGE = "The best kind of hole is a plugged one."
+    DESCRIBE.UM_COPPER_PIPE = "Metalworking wasn't a part of my training..."
+    DESCRIBE.BRINE_BALM  = "M-maybe I should just stick to bandaids."
+    DESCRIBE.UNCOMPROMISING_FISHINGNET = DESCRIBE.FISHINGNET
+	DESCRIBE.UM_AMBER = "Ooh, are there any bugs in it?"
+    DESCRIBE.UM_BEEGUN = "K-keep your enemies close, right?" --please make Walter lose 20 sanity per minute with this equipped I think that would be a cool flavour perk
+	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
+	DESCRIBE.SUNKENCHEST_ROYAL = "It was a royal pain just to get this."
+	DESCRIBE.STEERINGWHEEL_COPPER = "The future is now!"
+	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "I prefer a nice wooden wheel."
+	DESCRIBE.BOAT_BUMPER_COPPER = "This will keep us safe!"
+	DESCRIBE.BOAT_BUMPER_COPPER_KIT = "Reinforce the perimeter!"
+	DESCRIBE.UM_DREAMCATCHER = "I've read about these! I hope they work..."
+	DESCRIBE.UM_BRINEISHMOSS = "It looks like a caterpillar."
+	DESCRIBE.UM_COALESCED_NIGHTMARE = "Is that what my nightmares look like? It's really not that scary."
+	DESCRIBE.SLUDGE_CORK = "A plug for an oversized bathtub!"
+	DESCRIBE.SLUDGESTACK = "What is that stuff? I don't recognize it..."
+	DESCRIBE.SPECTER_SHIPWRECK = "I hope it's haunted!" 
+	
+	DESCRIBE.UNCOMPROMISING_HARPOON = "Stabbing things from a distance has never been easier."
+	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
+	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
+	DESCRIBE.UM_MAGNERANG = "It always finds its way back!"
+	DESCRIBE.UM_MAGNERANGREEL = "Are we sure it's not going to start a forest fire?"
+	DESCRIBE.SIREN_THRONE = "Look Woby! A rock!" --Dumb kid.
+	DESCRIBE.LAVASPIT_SLUDGE = "Careful around that Woby!"
+		
+	DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
+	DESCRIBE.UM_BEEGUARD_BLOCKER = "That's fine, I wasn't planning on getting too close anyway!"
+	
+	DESCRIBE.WIXIE_PIANO = "Piano lessens weren't a part of my training!"
+	DESCRIBE.WIXIE_CLOCK = "Shame it's broken, a ticking clock adds tension to horror stories!"
+	DESCRIBE.WIXIE_WARDROBE = "Reminds me of this one radio play I heard, the \"Haunted Wardrobe at the End of the Hall\" it's about-"
+	DESCRIBE.CHARLES_T_HORSE = "I can't be seen playing with kids toys!"
+
+	DESCRIBE.UM_ORNAMENT_OPOSSUM = "I love these little guys! I wish we had more up north..."
+	DESCRIBE.UM_ORNAMENT_RAT = "All alone, little guy?"
+	
+	DESCRIBE.TRINKET_WATHOM1 = "It's... Treasure? I think? Is it??"

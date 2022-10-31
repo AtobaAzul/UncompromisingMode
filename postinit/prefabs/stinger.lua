@@ -8,4 +8,5 @@ env.AddPrefabPostInit("stinger", function(inst)
 	end
 
     inst:AddComponent("selfstacker")
+	inst:AddComponent("fuel")
 end)

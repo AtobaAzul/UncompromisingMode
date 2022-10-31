@@ -167,8 +167,8 @@ end
 
 function ThankYouToshInit(inst)
 	if inst and inst.components.trader then
-    inst.components.trader:SetAcceptTest(ShouldAcceptItem)
-	inst.components.trader.onaccept = OnGetItem
+		inst.components.trader:SetAcceptTest(ShouldAcceptItem)
+		inst.components.trader.onaccept = OnGetItem
 	end
 end
 
