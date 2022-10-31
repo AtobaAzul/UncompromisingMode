@@ -1718,6 +1718,21 @@ Assets = {
 
 	Asset("IMAGE", "images/map_icons/uncompromising_winkyhomeburrow.tex"),
 	Asset("ATLAS", "images/map_icons/uncompromising_winkyhomeburrow.xml"),
+	
+	Asset("IMAGE", "images/map_icons/sludge_sack.tex"),
+	Asset("ATLAS", "images/map_icons/sludge_sack.xml"),
+	
+	Asset("IMAGE", "images/map_icons/sludge_stack.tex"),
+	Asset("ATLAS", "images/map_icons/sludge_stack.xml"),
+	
+	Asset("IMAGE", "images/map_icons/winonas_toolbox.tex"),
+	Asset("ATLAS", "images/map_icons/winonas_toolbox.xml"),
+	
+	Asset("IMAGE", "images/map_icons/inflatable_raft.tex"),
+	Asset("ATLAS", "images/map_icons/inflatable_raft.xml"),
+	
+	Asset("IMAGE", "images/map_icons/boomberry.tex"),
+	Asset("ATLAS", "images/map_icons/boomberry.xml"),
 
 
 	--BIGPORTRAITS

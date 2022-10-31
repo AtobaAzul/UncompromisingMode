@@ -403,7 +403,7 @@ ChangeSortKey("floral_bandage", "bandage", "RESTORATION", true)
 
 AddRecipe2(
     "winona_toolbox",
-    {Ingredient("boards", 2), Ingredient("goldnugget", 3), Ingredient("sewing_tape", 1)},
+    {Ingredient("boards", 2), Ingredient("goldnugget", 4), Ingredient("sewing_tape", 2)},
     TECH.NONE,
     {builder_tag = "handyperson"},
     {"CONTAINERS", "CHARACTER"}
@@ -451,7 +451,7 @@ AddRecipe2(
      nil, --{numtogive = 2},
     {"SEAFARING"}
 )
-ChangeSortKey("boatpatch_sludge", "boatpatch", "SEAFARING", false)
+ChangeSortKey("boatpatch_sludge", "oar", "SEAFARING", false)
 
 AddRecipe2(
     "sludge_sack",
@@ -530,9 +530,11 @@ AddRecipe2(
     {Ingredient("driftwood_log", 2), Ingredient("rope", 2)},
     TECH.SCIENCE_ONE,
     nil,
-    {"TOOLS", "SEAFARING"}
+    {"TOOLS","SEAFARING"}
 )
---[[
+ChangeSortKey("sludge_cork", "oceanfishingrod", "TOOLS", true)
+ChangeSortKey("sludge_cork", "boat_magnet_beacon", "SEAFARING", true)
+
 AddRecipe2(
     "boat_bumper_copper_kit",
     {Ingredient("um_copper_pipe", 14)},
@@ -766,11 +768,12 @@ STRINGS.RECIPE_DESC.FLORAL_BANDAGE = "Sweetened healing!"
 STRINGS.RECIPE_DESC.WINONA_TOOLBOX = "An engineer is always prepared."
 STRINGS.RECIPE_DESC.POWERCELL = "Portable electricity!"
 STRINGS.RECIPE_DESC.WINONA_UPGRADEKIT_ELECTRICAL = "Any old light source can be electric now."
-STRINGS.RECIPE_DESC.BOATPATCH_SLUDGE = "For when your boat needs a little more than a bit of fixing."
+STRINGS.RECIPE_DESC.BOATPATCH_SLUDGE = "For when your boat has a hole that shouldn't be there."
 STRINGS.RECIPE_DESC.ARMOR_REED_UM = "Waterproof protection."
 STRINGS.RECIPE_DESC.ARMOR_SHARKSUIT_UM = "Become the shark."
 STRINGS.RECIPE_DESC.SLUDGE_SACK = "Thieves turn up with nothing but sticky fingers."
 STRINGS.RECIPE_DESC.SLUDGE_OIL = "Only the purest sludge."
+STRINGS.RECIPE_DESC.SLUDGE_CORK = "Impractically large for a boat."
 STRINGS.RECIPE_DESC.CANNONBALL_SLUDGE_ITEM = "Fire in the hole!"
 STRINGS.RECIPE_DESC.BRINE_BALM = "Rub salt in the wounds."
 STRINGS.RECIPE_DESC.CRITTER_FIGGY_BUILDER = "They like to put holes in things."

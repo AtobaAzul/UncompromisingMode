@@ -1,6 +1,7 @@
 local assets =
 {
     Asset("ANIM", "anim/sludge_oil.zip"),
+	Asset("ANIM", "anim/sludge_plug.zip"),
 	 Asset("ANIM", "anim/sludge.zip"),
      Asset("ANIM", "anim/boat_repair_sludge_build.zip")
 }
@@ -157,8 +158,8 @@ local function bucket_fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("driftwood_log")
-    inst.AnimState:SetBuild("driftwood_log")
+    inst.AnimState:SetBank("sludge_plug")
+    inst.AnimState:SetBuild("sludge_plug")
     inst.AnimState:PlayAnimation("idle")
 
     inst:AddTag("allow_action_on_impassable")
