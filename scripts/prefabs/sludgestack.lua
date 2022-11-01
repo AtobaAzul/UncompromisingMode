@@ -58,6 +58,9 @@ end
 
 local function DoLootExplosion(inst)
     local MAX_LOOTFLING_DELAY = 0.8
+	
+	SpawnPrefab("honey_splash").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
 
     local cork_pop_loot = {
         "sludge", "sludge", "sludge", "sludge" --, "sludge_cork"

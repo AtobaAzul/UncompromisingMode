@@ -121,11 +121,16 @@ local function OnUnwrapped(inst)
 			
 		if inst.size == 23 then
 			inst.components.lootdropper:AddChanceLoot("hat_opossummask",    1.00)
-		inst.components.lootdropper:AddChanceLoot("bananapop",    1.00)
+			inst.components.lootdropper:AddChanceLoot("bananapop",    1.00)
 		end
 		
-		
-		
+		if math.random() > 0.5 then
+			if math.random() > 0.5 then
+				inst.components.lootdropper:AddChanceLoot("um_ornament_opossum",    1.00)
+			else
+				inst.components.lootdropper:AddChanceLoot("um_ornament_rat",    1.00)
+			end
+		end
 		
 		inst.components.lootdropper:DropLoot()
 	end
