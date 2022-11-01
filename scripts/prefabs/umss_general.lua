@@ -109,7 +109,6 @@ local function UncompromisingSpawnGOOOOO(inst, data)
 						prefab:Remove()
 					end
 				end
-
 				if v.diseased then
 					-- If we ever add back acid rain I guess we could have this, whatever
 				end
