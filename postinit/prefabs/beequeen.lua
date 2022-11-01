@@ -117,6 +117,7 @@ local function SpavvnShooterBeesLine(inst,time,back)
 			inst.shooterbeeline[i] = SpawnPrefab("um_beeguard_shooter")
 			if inst.prefab == "cherry_beequeen" then
 				inst.shooterbeeline[i].AnimState:SetBuild("cherry_bee_guard_puffy_build")
+				inst.shooterbeeline[i].AnimState:SetMultColour(1,0.66,1,1)
 			end
 			inst.shooterbeeline[i].queen = inst
 			inst.shooterbeeline[i].target = target
@@ -165,6 +166,7 @@ local function SpavvnShooterBeesLine(inst,time,back)
 			inst.shooterbeeline[j] = SpawnPrefab("um_beeguard_shooter")
 			if inst.prefab == "cherry_beequeen" then
 				inst.shooterbeeline[i].AnimState:SetBuild("cherry_bee_guard_puffy_build")
+				inst.shooterbeeline[i].AnimState:SetMultColour(1,0.66,1,1)
 			end
 			inst.shooterbeeline[j].queen = inst
 			inst.shooterbeeline[j].target = target
@@ -229,6 +231,7 @@ local function SpawnShooterBeesCircle(inst, prioritytarget)
 			inst.shooterbees[i] = SpawnPrefab("um_beeguard_shooter")
 			if inst.prefab == "cherry_beequeen" then
 				inst.shooterbees[i].AnimState:SetBuild("cherry_bee_guard_puffy_build")
+				inst.shooterbees[i].AnimState:SetMultColour(1,0.66,1,1)
 			end
 			inst.shooterbees[i].queen = inst
 			inst.shooterbees[i].target = target
@@ -270,6 +273,7 @@ local function SpawnDefensiveBeesII(inst)
 		inst.defensebees[i] = SpawnPrefab("um_beeguard_blocker")
 		if inst.prefab == "cherry_beequeen" then
 			inst.defensebees[i].AnimState:SetBuild("cherry_bee_guard_puffy_build")
+			inst.defensebees[i].AnimState:SetMultColour(1,0.9,0,1)
 		end
 		inst.defensebees[i].queen = inst
 		inst.defensebees[i].components.linearcircler:SetCircleTarget(inst)
@@ -292,6 +296,7 @@ local function SpawnDefensiveBees(inst)
 		inst.defensebees[i] = SpawnPrefab("um_beeguard_blocker")
 		if inst.prefab == "cherry_beequeen" then
 			inst.defensebees[i].AnimState:SetBuild("cherry_bee_guard_puffy_build")
+			inst.defensebees[i].AnimState:SetMultColour(1,0.9,0,1)
 		end
 		inst.defensebees[i].queen = inst
 		inst.defensebees[i].components.linearcircler:SetCircleTarget(inst)
@@ -322,6 +327,7 @@ local function SpawnSeekerBees(inst)
 		inst.seekerbees[i] = SpawnPrefab("um_beeguard_seeker")
 		if inst.prefab == "cherry_beequeen" then
 			inst.seekerbees[i].AnimState:SetBuild("cherry_bee_guard_puffy_build")
+			inst.seekerbees[i].AnimState:SetMultColour(1,0.33,0.33,1)
 		end
 		inst.seekerbees[i].queen = inst
 		inst.seekerbees[i].components.linearcircler:SetCircleTarget(inst)

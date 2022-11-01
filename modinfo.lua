@@ -257,7 +257,7 @@ configuration_options =
 	default = 22,
 	},]]
     BinaryConfig("snowstorms", "Snowstorms", "Snowtorms impede on players' speed and vision if they are not wearing eye protection. Snowstorms also causes snow to build up on structures.", true),
-    BinaryConfig("hayfever", "Hayfever", "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.", false),
+    --BinaryConfig("hayfever", "Hayfever", "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.", false),
     BinaryConfig("winter_burning", "Harder Burning", "Winter makes it so setting stuff alight takes more time, and also finish burning faster.", true),
 	--BinaryConfig("acidrain", "Acid Rain", "After the First Year, Toadstool will grow poisionous mushtrees aboveground and pollute the world, making the rain acidic.", true),
 	BinaryConfig("hotcaves", "Hotter Caves", "During summer, caves are just hot enough to heat you without any gear.", true),
