@@ -156,7 +156,7 @@ local function UncompromisingSpawnGOOOOO(inst, data)
                 local tile_x, tile_z = TheWorld.Map:GetTileCoordsAtPoint(x + v.x * rotx, (v.y and v.y + y) or 0, z + v.z * rotz)
                 -- :Announce("spawninwater_tile:")
                 -- TheNet:Announce(tostring(inst.spawninwater_tile))
-                if inst.spawninwater_tile then
+                if inst.spawninwater_tiles then
                     -- TheNet:Announce("spawninwater true!")
                     -- print(v.tile)
                     TheWorld.Map:SetTile(tile_x, tile_z, v.tile)
@@ -193,8 +193,8 @@ local function DefineTable(inst,data)
 		inst.spawnTable = funtable.content
 		inst.rotatable = funtable.rotate == nil and false or funtable.rotate
 		inst.tile_centered = funtable.tile_centered == nil and false or funtable.tile_centered
-		inst.spawninwater_tile = funtable.spawninwater_tile == nil and false or funtable.spawninwater_tile
-		inst.spawninwater_prefab = funtable.spawninwater_prefab == nil and false or funtable.spawninwater_prefab
+		inst.spawninwater_tiles = funtable.spawninwater_tiles == nil and false or funtable.spawninwater_tiles
+		inst.spawninwater_prefabs = funtable.spawninwater_prefabs == nil and false or funtable.spawninwater_prefabs
 		inst.SpawnFn = funtable.spawnfn
 		inst.umss_tags = funtable.tags
 	end
