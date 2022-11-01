@@ -127,6 +127,9 @@ env.AddPrefabPostInit("minotaur", function(inst)
 	inst.have_a_heart = false
 	
 	inst.combo = 0
+	if inst.components.timer == nil then
+		inst:AddComponent("timer")--in case it's somehow not real.
+	end
 	inst.components.timer:StartTimer("forceleapattack", math.random(30,45))
 	inst.components.timer:StartTimer("forcebelch", math.random(30,45))
 	
