@@ -31,4 +31,4 @@ local function sandfn(Sim)
 	return inst
 end
 
-return Prefab( "common/inventory/sand", sandfn, assets)
+return Prefab( "um_sand", sandfn, assets)

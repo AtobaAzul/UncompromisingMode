@@ -422,7 +422,7 @@ return{
 	ANNOUNCE_COLD = "Can't... Stop... Now...",
 	ANNOUNCE_HOT = "Can't breathe!",
 	ANNOUNCE_CRAFTING_FAIL = "What.",
-	ANNOUNCE_DEERCLOPS = "Deerclops. Let's dance.",
+	ANNOUNCE_DEERCLOPS = "Megafauna. Let's dance.",
 	ANNOUNCE_CAVEIN = "Earthquake. Mindful, head.",
 	ANNOUNCE_ANTLION_SINKHOLE =
 	{

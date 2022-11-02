@@ -128,7 +128,7 @@ local inventoryitems =
 	"rice_cooked",
 	"rne_goodiebag",
 	"saltpack",
-	"sand",
+	--"sand",
 	"scorpioncarapace",
 	"scorpioncarapacecooked",
 	"screecher_trinket",
@@ -603,7 +603,7 @@ Assets = {
 	Asset("ANIM", "anim/chop_root_spike.zip"),
 
 	Asset("ANIM", "anim/snow_dune.zip"),
-	Asset("ANIM", "anim/sandhill.zip"),
+	--Asset("ANIM", "anim/sandhill.zip"),
 	Asset("ANIM", "anim/snowpile.zip"),
 
 	Asset("ANIM", "anim/tar.zip"),
@@ -1375,8 +1375,8 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/gasmask.tex"),
 
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/sand.xml"),
-	Asset("ATLAS", "images/inventoryimages/sand.xml"),
-	Asset("IMAGE", "images/inventoryimages/sand.tex"),
+	--Asset("ATLAS", "images/inventoryimages/sand.xml"),
+	--Asset("IMAGE", "images/inventoryimages/sand.tex"),
 
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/snowgoggles.xml"),
 	Asset("ATLAS", "images/inventoryimages/snowgoggles.xml"),

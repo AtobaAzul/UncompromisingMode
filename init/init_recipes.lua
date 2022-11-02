@@ -65,7 +65,7 @@ if GetModConfigData("longpig") then
 end
 
 if GetModConfigData("wanda_nerf") then
-    AllRecipes["pocketwatch_revive"].ingredients = {Ingredient("pocketwatch_parts", 3), Ingredient("livinglog", 2), Ingredient("skeletonmeat", 1)}
+    AllRecipes["pocketwatch_revive"].ingredients = {Ingredient("pocketwatch_parts", 3), Ingredient("livinglog", 2), Ingredient("reviver", 1)}
 end
 
 AllRecipes["moonrockidol"].ingredients = { Ingredient("moonrocknugget", GLOBAL.TUNING.DSTU.RECIPE_MOONROCK_IDOL_MOONSTONE_COST), Ingredient("purplegem", 1)}

@@ -41,7 +41,7 @@ return {
 	"moonmaw_glassshards",
 
 	"lavaspit",
-	"um_sandhill",
+	--"um_sandhill",
 	"snowpile",
 	--"sand",
 	"snowgoggles",
@@ -352,7 +352,7 @@ return {
 	"um_amber",
 	"um_sorrel",
 	"brine_balm",
-	"um_sandrock",
+	--"um_sandrock",
 	"um_scorpioneggs",
 	"giant_tree_birdnest",
 	"uncompromising_bumpers",

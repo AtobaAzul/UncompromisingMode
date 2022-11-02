@@ -58,6 +58,7 @@ local function fn()
     inst.foleysound = "dontstarve/movement/foley/backpack"
 
     inst:AddTag("backpack")
+    inst:AddTag("outofreach")--I sure do hope this doesn't cause any issues!
     inst:AddTag("wet")
 
     --waterproofer (from waterproofer component) added to pristine state for optimization
