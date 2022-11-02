@@ -14,8 +14,10 @@ env.AddPrefabPostInit("icestaff", function(inst)
             local x, y, z = target.Transform:GetWorldPosition()
 
             local ents = TheSim:FindEntities(x, y, z, 4, nil, { "player", "playerghost", "notarget", "companion", "abigail", "INLIMBO" })
-            target.components.freezable:AddColdness(1)
 
+            if target.components.freezable ~= nil then
+                target.components.freezable:AddColdness(1)
+            end
             for k, v in ipairs(ents) do
                 if v ~= target then
                     if v.components.freezable ~= nil then
