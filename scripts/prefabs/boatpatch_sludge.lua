@@ -61,8 +61,8 @@ local function fn()
 
     inst:AddComponent("finiteuses")
     --inst.components.finiteuses:SetConsumption(ACTIONS.REPAIR_LEAK, 1)
-    inst.components.finiteuses:SetMaxUses(5)
-    inst.components.finiteuses:SetUses(5)
+    inst.components.finiteuses:SetMaxUses(10)
+    inst.components.finiteuses:SetUses(10)
     inst.components.finiteuses:SetOnFinished(inst.Remove)--onfinished
 
     inst:AddComponent("inventoryitem")

@@ -373,7 +373,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	
 	DESCRIBE.ARMOR_REED_UM = "It just might help me blend in."
 	DESCRIBE.ARMOR_SHARKSUIT_UM = "I don't need help swimming!"
-	DESCRIBE.ROCKJAWLEATHER = "Woah, Geniune shark skin."
+	DESCRIBE.ROCKJAWLEATHER = "Woah, geniune shark skin."
 
 	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
 	DESCRIBE.STUFFED_PEEPER_POPPERS = "If I close my eyes and swallow, maybe it will taste better!"

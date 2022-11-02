@@ -33,21 +33,21 @@ env.AddComponentPostInit("boatleak", function(self)
             end)
         
             return true
-        else
+        elseif patch_item.components.repairer.repairmaterial ~= MATERIALS.WOOD then
+            --Hack to get past the item not removing.
+            --Vanilla boat patches get removed from being used as a repair and have the MATERIALS.WOOD material
+            --however, sludge has MATERIALS.SLUDGE, which doesn't work for WOOD.
+            
             --BY GOD'S LIGHT I SMITE YOOOUUU!!!!
             local ret = _Repair(self, doer, patch_item)
-            if patch_item.components.repairer and self.inst:GetCurrentPlatform() and self.inst:GetCurrentPlatform().components.repairable then
-                self.inst:GetCurrentPlatform().components.repairable:Repair(doer, patch_item)
-                -- consumed in the repair
+            if patch_item.components.stackable ~= nil then
+                patch_item.components.stackable:Get():Remove()
             else
-                if patch_item.components.stackable ~= nil then
-                    patch_item.components.stackable:Get():Remove()
-                else
-                    patch_item:Remove()
-                end
+                patch_item:Remove()
             end
-            --print("WHy the FUCK is this not working... or is it???")
             return ret
+        else
+            return _Repair(self, doer, patch_item)
         end
     end
 end)
