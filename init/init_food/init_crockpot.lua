@@ -427,7 +427,7 @@ local carapacecooler =
 local seafoodpaella =
 {
     name = "seafoodpaella",
-    test = function(cooker, names, tags) return UncompromisingFillers(tags) and tags.rice and tags.veggie >= 2 and (names.wobster_sheller_land or tags.fish >= 2) end,
+    test = function(cooker, names, tags) return UncompromisingFillers(tags) and tags.rice and tags.veggie >= 2 and (names.wobster_sheller_land or tags.fish and tags.fish >= 2) end,
 
     priority = 30,
     weight = 1,
