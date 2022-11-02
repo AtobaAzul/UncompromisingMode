@@ -133,6 +133,10 @@ local function oil_fn()
     inst.components.finiteuses:SetUses(10)
     inst.components.finiteuses:SetOnFinished(onfinished)
 
+    inst:ListenForEvent("percentusedchange", function(inst)
+        print("percentusedchange")
+    end)
+
     MakeSmallBurnable(inst, TUNING.LARGE_BURNTIME)
     MakeSmallPropagator(inst)
 
