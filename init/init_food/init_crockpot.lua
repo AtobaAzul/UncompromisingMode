@@ -106,6 +106,8 @@ end
 AddIngredientValues({"forgetmelots"}, {decoration=1, foliage=1})
 
 AddIngredientValues({"aphid"}, {insectoid = 0.5, meat = 0.5, monster = 0.5})
+AddIngredientValues({"rabbit"}, {meat = 0.5})
+
 recipes.koalefig_trunk.test = function(cooker, names, tags) return (names.trunk_summer or names.trunk_cooked or names.trunk_winter) and (names.fig or names.fig_cooked or names.aphid) end
 recipes.figatoni.test = function(cooker, names, tags) return (names.fig or names.fig_cooked or names.aphid) and tags.veggie and tags.veggie >= 2  and not tags.meat end
 recipes.figkabab.test = function(cooker, names, tags) return (names.fig or names.fig_cooked or names.aphid) and names.twigs and tags.meat and tags.meat >= 1 and (not tags.monster or tags.monster <= 1) end
@@ -270,6 +272,9 @@ recipes.barnaclepita.test = function(cooker, names, tags) return (names.barnacle
 recipes.frognewton.test =  function(cooker, names, tags) return (names.fig or names.fig_cooked) and (names.froglegs or names.froglegs_cooked) and tags.sweetener and not tags.inedible end
 recipes.frognewton.priority = 20
 
+recipes.bunnystew.test = function(cooker,names, tags) return (names.rabbit) and (tags.frozen and tags.frozen >= 2) and (not tags.inedible) end
+-- Original: test = function(cooker, names, tags) return (tags.meat and tags.meat < 1) and (tags.frozen and tags.frozen >= 2) and (not tags.inedible) end
+
 -- WARLY recipes
 
 warly_recipes.monstertartare.test = function(cooker, names, tags) return tags.monster and tags.monster >= 4 and not tags.inedible and not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) end
@@ -303,6 +308,9 @@ warly_recipes.bonesoup.test = function(cooker, names, tags) return names.bonesha
 warly_recipes.moqueca.test = function(cooker, names, tags) return tags.fish and (names.onion or names.onion_cooked) and (names.tomato or names.tomato_cooked) and not tags.inedible and not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) --[[and MonsterMeatSupport(tags)]] end
 -- Original:    test = function(cooker, names, tags) return tags.fish and (names.onion or names.onion_cooked) and (names.tomato or names.tomato_cooked) and not tags.inedible end,
 --warly_recipes.zaspberryparfait.test = function(cooker, names, tags) return not tags.monster and not tags.inedible and UncompromisingFillers(tags) and names.zaspberry and tags.dairy and tags.sweetener end
+
+
+
 local ingredients = cooking.ingredients
 --[[InsertIngredientValues function by Serpens https://forums.kleientertainment.com/forums/topic/69732-dont-use-addingredientvalues-in-mods/]]
 
@@ -732,7 +740,7 @@ RegisterInventoryItemAtlas("images/inventoryimages/stuffed_peeper_poppers.xml", 
 local um_deviled_eggs =
 {
     name = "um_deviled_eggs",
-    test = function(cooker, names, tags) return tags.monster and tags.egg and not tags.meat and not tags.inedible end,
+    test = function(cooker, names, tags) return tags.monster >= 2 and tags.egg and not tags.meat end,
 
     priority = 52,
     weight = 1,

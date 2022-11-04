@@ -48,8 +48,6 @@ local prefab_post = {
 	"mushlight",
 	--"toadstool_cap", Moved to init_uncompromising_mod.lua
 	"amulet",
-	"beequeen",
-	"beeguard",
 	"cave_entrance_open",
 	"catcoon",
 	"icehound",
@@ -166,6 +164,7 @@ local prefab_post = {
 	"stalker",
 	"sacred_chest",
 	"soil_amender",
+	"vetcurse_drops",
 }
 
 local stategraph_post = {
@@ -181,8 +180,6 @@ local stategraph_post = {
 	--"merm",
 	"carnival_host",
 	"catcoon",
-	"beequeen",
-	"beeguard",
 }
 
 local class_post = {
@@ -207,7 +204,6 @@ local brain_post = {
 	"perd",
 	"catcoon",
 	"deer",
-	"beequeen",
 }
 
 if GetModConfigData("hangyperds") then
@@ -345,6 +341,17 @@ end
 if GetModConfigData("beefalo_nerf") then
 	table.insert(component_post, "rider")
 end
+
+if GetModConfigData("harder_beequeen") then
+	table.insert(prefab_post, "beequeen")
+	table.insert(prefab_post, "beeguard")
+
+	table.insert(stategraph_post, "beequeen")
+	table.insert(stategraph_post, "beeguard")
+
+	table.insert(brain_post, "beequeen")
+end
+
 --if GetModConfigData("boatturning") then
 --	table.insert(prefab_post, "boat")
 --end

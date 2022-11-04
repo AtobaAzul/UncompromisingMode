@@ -16,7 +16,7 @@ STRINGS.DSTU = {
 	},
 
 }
-
+STRINGS.SPELLS.SHADOW_MIMIC = "Shadow Mimic"
 STRINGS.NAMES.WINKY = "Winky"
 STRINGS.CHARACTER_TITLES.winky = "The Vile Vermin"
 STRINGS.CHARACTER_NAMES.winky = "winky"
@@ -302,3 +302,4 @@ STRINGS.STALKER_ATRIUM_WATHOM_BATTLECRY = {
 	"Let the dead stay buried.",
 	"I pity you, mimic.",
 }
+

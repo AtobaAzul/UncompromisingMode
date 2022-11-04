@@ -1,190 +1,116 @@
 local assets =
 {
-	Asset("ANIM", "anim/um_books.zip"),
-	Asset("ATLAS", "images/inventoryimages/book_rain_um.xml"),
-	Asset("IMAGE", "images/inventoryimages/book_rain_um.tex"),
+    Asset("ANIM", "anim/um_books.zip"),
+    Asset("ATLAS", "images/inventoryimages/book_rain_um.xml"),
+    Asset("IMAGE", "images/inventoryimages/book_rain_um.tex"),
 }
 
 local book_defs
 
-if not TUNING.DSTU.UPDATE_CHECK then
-    book_defs = {
-        {
-            name = "book_rain_um", -- kept for legacy worlds, for now at least, since I don't know what to do with it.
-            uses = 5,
-            fn = function(inst, reader)
-                reader.components.sanity:DoDelta(-125) -- Eat Half Her Sanity
+
+book_defs = {
+    {
+        name = "book_rain_um",
+        uses = TUNING.BOOK_USES_LARGE,
+        read_sanity = -TUNING.SANITY_LARGE,
+        peruse_sanity = TUNING.SANITY_LARGE,
+        fx = "fx_book_rain",
+        fn = function(inst, reader)
+            if TheWorld.state.precipitation ~= "none" then
+                TheWorld:PushEvent("ms_forceprecipitation", false)
+            else
                 TheWorld:PushEvent("ms_forceprecipitation", true)
-                return true
-            end,
-            perusefn = function(inst, reader)
-                if reader.peruse_silviculture then
-                    reader.peruse_silviculture(reader)
-                end
-                reader.components.talker:Say(GetString(reader,
-                                                       "ANNOUNCE_READ_BOOK",
-                                                       "BOOK_SILVICULTURE"))
-                return true
             end
-        }
-    }
-else
-    book_defs = {
-        {
-            name = "book_rain_um",
-            uses = TUNING.BOOK_USES_LARGE,
-            read_sanity = -TUNING.SANITY_LARGE,
-            peruse_sanity = TUNING.SANITY_LARGE,
-            fx = "fx_book_rain",
-            fn = function(inst, reader)
-                if TheWorld.state.precipitation ~= "none" then
-                    TheWorld:PushEvent("ms_forceprecipitation", false)
-                else
-                    TheWorld:PushEvent("ms_forceprecipitation", true)
-                end
 
-                local x, y, z = reader.Transform:GetWorldPosition()
-                local size = TILE_SCALE
+            local x, y, z = reader.Transform:GetWorldPosition()
+            local size = TILE_SCALE
 
-                for i = x - size, x + size do
-                    for j = z - size, z + size do
-                        if TheWorld.Map:GetTileAtPoint(i, 0, j) ==
-                            WORLD_TILES.FARMING_SOIL then
-                            TheWorld.components.farming_manager:AddSoilMoistureAtPoint(i, y, j, 100)
-                        end
+            for i = x - size, x + size do
+                for j = z - size, z + size do
+                    if TheWorld.Map:GetTileAtPoint(i, 0, j) ==
+                        WORLD_TILES.FARMING_SOIL then
+                        TheWorld.components.farming_manager:AddSoilMoistureAtPoint(i, y, j, 100)
                     end
                 end
-
-                return true
-            end,
-            perusefn = function(inst, reader)
-                if reader.peruse_rain then
-                    reader.peruse_rain(reader)
-                end
-                reader.components.talker:Say(GetString(reader, "ANNOUNCE_READ_BOOK", "BOOK_RAIN"))
-                return true
             end
-        }
+
+            return true
+        end,
+        perusefn = function(inst, reader)
+            if reader.peruse_rain then
+                reader.peruse_rain(reader)
+            end
+            reader.components.talker:Say(GetString(reader, "ANNOUNCE_READ_BOOK", "BOOK_RAIN"))
+            return true
+        end
     }
-end
+}
+
 
 local function MakeBook(def)
-    if not TUNING.DSTU.UPDATE_CHECK then
-        local function fn()
-            local inst = CreateEntity()
+    local function fn()
+        local inst = CreateEntity()
 
-            inst.entity:AddTransform()
-            inst.entity:AddAnimState()
-            inst.entity:AddSoundEmitter()
-            inst.entity:AddNetwork()
+        inst.entity:AddTransform()
+        inst.entity:AddAnimState()
+        inst.entity:AddSoundEmitter()
+        inst.entity:AddNetwork()
 
-            MakeInventoryPhysics(inst)
+        MakeInventoryPhysics(inst)
 
-            inst.AnimState:SetBank("um_books") --temp
-            inst.AnimState:SetBuild("um_books")
-            inst.AnimState:PlayAnimation(--[[def.name]]"book_rain")
+        inst.AnimState:SetBank("um_books") --temp
+        inst.AnimState:SetBuild("um_books")
+        inst.AnimState:PlayAnimation(--[[def.name]] "book_rain")
 
-            MakeInventoryFloatable(inst, "med", nil, 0.75)
+        MakeInventoryFloatable(inst, "med", nil, 0.75)
 
-            inst.entity:SetPristine()
+        inst:AddTag("book")
+        inst:AddTag("bookcabinet_item")
 
-            if not TheWorld.ismastersim then
-                return inst
-            end
+        inst.entity:SetPristine()
 
-            -----------------------------------
-
-            inst:AddComponent("inspectable")
-            inst:AddComponent("book")
-            inst.components.book.onread = def.fn
-            inst.components.book.onperuse = def.perusefn
-
-            inst:AddComponent("inventoryitem")
-            inst.components.inventoryitem.atlasname = "images/inventoryimages/"..def.name..".xml"
-
-            inst:AddComponent("finiteuses")
-            inst.components.finiteuses:SetMaxUses(def.uses)
-            inst.components.finiteuses:SetUses(def.uses)
-            inst.components.finiteuses:SetOnFinished(inst.Remove)
-
-            inst:AddComponent("fuel")
-            inst.components.fuel.fuelvalue = TUNING.MED_FUEL
-
-            MakeSmallBurnable(inst, TUNING.MED_BURNTIME)
-            MakeSmallPropagator(inst)
-
-            --MakeHauntableLaunchOrChangePrefab(inst, TUNING.HAUNT_CHANCE_OFTEN, TUNING.HAUNT_CHANCE_OCCASIONAL, nil, nil, morphlist)
-            MakeHauntableLaunch(inst)
-
+        if not TheWorld.ismastersim then
             return inst
         end
 
-        return Prefab(def.name, fn, assets)
-    else
-        local function fn()
-            local inst = CreateEntity()
+        -----------------------------------
 
-            inst.entity:AddTransform()
-            inst.entity:AddAnimState()
-            inst.entity:AddSoundEmitter()
-            inst.entity:AddNetwork()
+        inst.def = def
 
-            MakeInventoryPhysics(inst)
+        inst:AddComponent("inspectable")
+        inst:AddComponent("book")
+        inst.components.book:SetOnRead(def.fn)
+        inst.components.book:SetOnPeruse(def.perusefn)
+        inst.components.book:SetReadSanity(def.read_sanity)
+        inst.components.book:SetPeruseSanity(def.peruse_sanity)
+        inst.components.book:SetFx(def.fx)
 
-            inst.AnimState:SetBank("um_books") --temp
-            inst.AnimState:SetBuild("um_books")
-            inst.AnimState:PlayAnimation(--[[def.name]]"book_rain")
+        inst:AddComponent("inventoryitem")
 
-            MakeInventoryFloatable(inst, "med", nil, 0.75)
+        inst:AddComponent("finiteuses")
+        inst.components.finiteuses:SetMaxUses(def.uses)
+        inst.components.finiteuses:SetUses(def.uses)
+        inst.components.finiteuses:SetOnFinished(inst.Remove)
 
-            inst:AddTag("book")
-            inst:AddTag("bookcabinet_item")
+        inst:AddComponent("fuel")
+        inst.components.fuel.fuelvalue = TUNING.MED_FUEL
 
-            inst.entity:SetPristine()
+        MakeSmallBurnable(inst, TUNING.MED_BURNTIME)
+        MakeSmallPropagator(inst)
 
-            if not TheWorld.ismastersim then
-                return inst
-            end
+        --MakeHauntableLaunchOrChangePrefab(inst, TUNING.HAUNT_CHANCE_OFTEN, TUNING.HAUNT_CHANCE_OCCASIONAL, nil, nil, morphlist)
+        MakeHauntableLaunch(inst)
 
-            -----------------------------------
+        --inst:SetPrefabNameOverride("book_rain")
 
-            inst.def = def
-
-            inst:AddComponent("inspectable")
-            inst:AddComponent("book")
-            inst.components.book:SetOnRead(def.fn)
-            inst.components.book:SetOnPeruse(def.perusefn)
-            inst.components.book:SetReadSanity(def.read_sanity)
-            inst.components.book:SetPeruseSanity(def.peruse_sanity)
-            inst.components.book:SetFx(def.fx)
-
-            inst:AddComponent("inventoryitem")
-
-            inst:AddComponent("finiteuses")
-            inst.components.finiteuses:SetMaxUses(def.uses)
-            inst.components.finiteuses:SetUses(def.uses)
-            inst.components.finiteuses:SetOnFinished(inst.Remove)
-
-            inst:AddComponent("fuel")
-            inst.components.fuel.fuelvalue = TUNING.MED_FUEL
-
-            MakeSmallBurnable(inst, TUNING.MED_BURNTIME)
-            MakeSmallPropagator(inst)
-
-            --MakeHauntableLaunchOrChangePrefab(inst, TUNING.HAUNT_CHANCE_OFTEN, TUNING.HAUNT_CHANCE_OCCASIONAL, nil, nil, morphlist)
-            MakeHauntableLaunch(inst)
-
-            --inst:SetPrefabNameOverride("book_rain")
-
-            return inst
-        end
-
-        return Prefab(def.name, fn, assets, prefabs)
+        return inst
     end
+
+    return Prefab(def.name, fn, assets, prefabs)
 end
 
 local function book_placeholder_spell_fn()
-	local inst = CreateEntity()
+    local inst = CreateEntity()
 
     if not TheWorld.ismastersim then
         --Not meant for client!
@@ -201,9 +127,9 @@ local function book_placeholder_spell_fn()
 
     inst:AddTag("CLASSIFIED")
 
-	inst.persists = false
+    inst.persists = false
 
-	return inst
+    return inst
 end
 
 local books = { Prefab("book_placeholder_spell", book_placeholder_spell_fn) }

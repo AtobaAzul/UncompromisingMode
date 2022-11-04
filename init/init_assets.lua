@@ -643,7 +643,8 @@ Assets = {
 
 	Asset("ANIM", "anim/bearger_boulder.zip"),
 
-
+	Asset("ATLAS", "images/the_men.xml"),
+	Asset("IMAGE", "images/the_men.tex"),
 
 	--OVERLAYS
 	Asset("ATLAS", "images/UM_pollenover.xml"),

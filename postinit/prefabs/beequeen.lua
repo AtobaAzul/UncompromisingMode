@@ -699,11 +699,7 @@ env.AddPrefabPostInit("cherry_beequeen", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	
-	if TUNING.DSTU.VETCURSE ~= "off" then
-		inst:AddComponent("vetcurselootdropper")
-		inst.components.vetcurselootdropper.loot = "um_beegun_cherry"
-	end
+
 	
 	BeeQueenPost(inst)
 end)
@@ -711,11 +707,6 @@ end)
 env.AddPrefabPostInit("beequeen", function(inst)
 	if not TheWorld.ismastersim then
 		return
-	end
-	
-	if TUNING.DSTU.VETCURSE ~= "off" then
-		inst:AddComponent("vetcurselootdropper")
-		inst.components.vetcurselootdropper.loot = "um_beegun"
 	end
 
 	BeeQueenPost(inst)

@@ -606,7 +606,7 @@ configuration_options =
 	Header("Raid Bosses"),
 	BinaryConfig("harder_dragonfly", "Harder Dragonfly", "Dragonfly now has knockback on hit.", true),
 	BinaryConfig("harder_lavae", "Exploding Lavae", "Lavae will now leave exploding paste upon death, knocks holes in walls.", true),
-	BinaryConfig("harder_beequeen", "Harder Bee Queen", "Bee Queen now has AOE attached to her main attack.", true),
+	BinaryConfig("harder_beequeen", "Harder Bee Queen", "Bee Queen now has a variety of attacks with different bees.", true),--lame! help!
 	BinaryConfig("rework_minotaur", "Ancient Guardian Rework", "The Ancient Guardian's fight is expanded, includes more attacks.", true),
 	BinaryConfig("reworked_eyes", "Reworked Eyes of Terror", "Eye of Terror and the Twins have new attacks, inspired by their Terraria counterparts.", true),
 	SkipSpace(),

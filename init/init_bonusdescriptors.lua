@@ -122,12 +122,6 @@ GLOBAL.GetDescription = function(inst, item, ...)
 
 			ret = ret .. "\n" .. item.vetstring
 		end
-		--[[if not GLOBAL.TUNING.DSTU.UPDATE_CHECK then
-			if prefab and item and inst:HasTag("masterchef") and inst.components.foodmemory ~= nil and
-				inst.components.foodmemory:GetMemoryCount(prefab) > 0 then
-				ret = ret .. "\n" .. "I would prefer something a little more... varied."
-			end
-		end]]
 	end
 
 	return ret

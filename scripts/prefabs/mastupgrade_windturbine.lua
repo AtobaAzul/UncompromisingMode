@@ -29,7 +29,7 @@ end
 
 local function onbuilt(inst)
 	inst.AnimState:PlayAnimation("place")
-	inst.SoundEmitter:PlaySound("dontstarve/common/place_structure_stone") --AKA "generic place sound"
+	inst.SoundEmitter:PlaySound("dontstarve/common/place_structure_stone") --AKA "generic place sound" 
 
 	inst.animqueueclear = inst:ListenForEvent("animover", function(inst)
 		inst.startupdating = true

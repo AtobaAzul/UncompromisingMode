@@ -54,11 +54,6 @@ env.AddPrefabPostInit("dragonfly", function (inst)
     inst.components.playerprox:SetOnPlayerNear(onnear)
     inst.components.playerprox:SetOnPlayerFar(onfar)
 
-	if TUNING.DSTU.VETCURSE ~= "off" then
-		inst:AddComponent("vetcurselootdropper")
-		inst.components.vetcurselootdropper.loot = "slobberlobber"
-	end
-
 	inst.components.damagetracker.damage_threshold_fn = nil
 	inst.components.lootdropper:AddChanceLoot("dragon_scales",    1.00)
 	inst.components.lootdropper:AddChanceLoot("dragon_scales",    1.00)

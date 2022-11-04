@@ -123,6 +123,10 @@ local function fn()
         return inst
     end
 
+    inst:AddComponent("skinner")
+    inst.components.skinner:SetupNonPlayerData()
+
+
 	inst:AddComponent("colourtweener")
 	inst.components.colourtweener:StartTween({0,0,0,.5}, 0)
 

@@ -117,9 +117,7 @@ end
 local function OnSave(inst, data)
     if data ~= nil then
         data.upgraded = inst.upgraded
-        print("upgraded", inst.upgraded)
         data.explode_when_loaded = inst.explode_when_loaded
-        print("explode_when_loaded", inst.explode_when_loaded)
     end
 end
 

@@ -505,6 +505,44 @@ for k, v in pairs(fishstew) do
 	)
 end
 
+local fishsticks = {
+	"fishsticks",
+	"fishsticks_spice_chili",
+	"fishsticks_spice_garlic",
+	"fishsticks_spice_salt",
+	"fishsticks_spice_sugar"
+}
+for k, v in pairs(fishsticks) do
+	AddPrefabPostInit(
+		v,
+		function(inst)
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.healthvalue = 20
+			end
+		end
+	)
+end
+--[[
+	do whatever you want
+local bunnystew = {
+	"bunnystew",
+	"bunnystew_spice_chili",
+	"bunnystew_spice_garlic",
+	"bunnystew_spice_salt",
+	"bunnystew_spice_sugar"
+}
+for k, v in pairs(bunnystew) do
+	AddPrefabPostInit(
+		v,
+		function(inst)
+			if inst ~= nil and inst.components.edible ~= nil then
+				inst.components.edible.healthvalue = 20
+			end
+		end
+	)
+end
+]]
+
 --idk where else to put this
 local farmplants =
 {
