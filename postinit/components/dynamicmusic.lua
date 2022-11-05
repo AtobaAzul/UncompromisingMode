@@ -27,6 +27,7 @@ if GetModConfigData("um_music") and not TUNING.DSTU.ISLAND_ADVENTURES then
 
         local BUSYTHEMES = UpvalueHacker.GetUpvalue(_StartBusy, "BUSYTHEMES")
         BUSYTHEMES["HOODEDFOREST"] = 1337
+        BUSYTHEMES["PINETREE_PIONEER"] = 1338
         
         local function IsInHoodedForest(player)
             return player.components.areaaware ~= nil
@@ -45,6 +46,7 @@ if GetModConfigData("um_music") and not TUNING.DSTU.ISLAND_ADVENTURES then
             local _dangertask = UpvalueHacker.GetUpvalue(_StartBusy, "_dangertask")
             local _isenabled = UpvalueHacker.GetUpvalue(_StartBusy, "_isenabled")
             local _soundemitter = UpvalueHacker.GetUpvalue(_StartBusy, "_soundemitter")
+            local _pirates_near = UpvalueHacker.GetUpvalue(_StartBusy, "_pirates_near")
 
             -- Note: We only have references to the private variables
             -- In order to modify the actual variables, we have to use debug.setupvalue
@@ -53,7 +55,7 @@ if GetModConfigData("um_music") and not TUNING.DSTU.ISLAND_ADVENTURES then
             elseif _busytask ~= nil then
                 local extendtime = GLOBAL.GetTime() + 15
                 UpvalueHacker.SetUpvalue(_StartBusy, extendtime, "_extendtime")
-            elseif _dangertask == nil and (_extendtime == 0 or GLOBAL.GetTime() >= _extendtime) and 
+            elseif _dangertask == nil and _pirates_near == nil and (_extendtime == 0 or GLOBAL.GetTime() >= _extendtime) and 
                 _isenabled and not _iscave and IsInHoodedForest(player) then
                 if _busytheme ~= BUSYTHEMES.HOODEDFOREST then
                     _soundemitter:KillSound("busy")
@@ -70,6 +72,72 @@ if GetModConfigData("um_music") and not TUNING.DSTU.ISLAND_ADVENTURES then
             end
         end
         
+		local function StartWoby(player)
+            -- get updated private variables
+            local BUSYTHEMES = UpvalueHacker.GetUpvalue(_StartBusy, "BUSYTHEMES")
+            local SEASON_DANGER_MUSIC = UpvalueHacker.GetUpvalue(_StartBusy, "SEASON_DANGER_MUSIC")
+            local _iscave = UpvalueHacker.GetUpvalue(_StartBusy, "_iscave")
+            local _isday = UpvalueHacker.GetUpvalue(_StartBusy, "_isday")
+            local _busytask = UpvalueHacker.GetUpvalue(_StartBusy, "_busytask")
+            local _busytheme = UpvalueHacker.GetUpvalue(_StartBusy, "_busytheme")
+            local _extendtime = UpvalueHacker.GetUpvalue(_StartBusy, "_extendtime")
+            local _dangertask = UpvalueHacker.GetUpvalue(_StartBusy, "_dangertask")
+            local _isenabled = UpvalueHacker.GetUpvalue(_StartBusy, "_isenabled")
+            local _soundemitter = UpvalueHacker.GetUpvalue(_StartBusy, "_soundemitter")
+            local _pirates_near = UpvalueHacker.GetUpvalue(_StartBusy, "_pirates_near")
+
+            -- Note: We only have references to the private variables
+            -- In order to modify the actual variables, we have to use debug.setupvalue
+			if not (_iscave or _isday) then
+				if inst.wobytask ~= nil then
+					inst.wobytask:Cancel()
+					inst.wobytask = nil
+				end
+			
+                return
+			elseif (player.replica.rider ~= nil and player.replica.rider:IsRiding()) and not player:HasTag("dismounting") 
+			and player.replica.rider:GetMount() ~= nil and player.replica.rider:GetMount():HasTag("woby") then
+				
+				if inst.wobytask == nil then
+					inst.wobytask = player:DoPeriodicTask(3, function()
+						StartWoby(player)
+					end)
+				end
+				
+				if _busytask ~= nil then
+				print("busytask ~= nil")
+							
+					local extendtime = GLOBAL.GetTime() + 5
+					UpvalueHacker.SetUpvalue(_StartBusy, extendtime, "_extendtime")
+							
+					--local busytask = inst:DoTaskInTime(5, _StopBusy, true)
+					--UpvalueHacker.SetUpvalue(_StartBusy, busytask, "_busytask")
+						
+					--UpvalueHacker.SetUpvalue(_StartBusy, busytask, "_busytask")
+				elseif _dangertask == nil and _pirates_near == nil and (_extendtime == 0 or GLOBAL.GetTime() >= _extendtime) and _isenabled then
+						
+				print("danger, pirates, extendtime == nil")
+						
+						
+					if _busytheme ~= BUSYTHEMES.PINETREE_PIONEER then
+						_soundemitter:KillSound("busy")
+						_soundemitter:PlaySound("UMMusic/music/follow_me_woby", "busy")
+					end
+							
+					local busytheme = BUSYTHEMES.PINETREE_PIONEER
+					UpvalueHacker.SetUpvalue(_StartBusy, busytheme, "_busytheme")
+					_soundemitter:SetParameter("busy", "intensity", 1)
+							
+					local busytask = inst:DoTaskInTime(10, _StopBusy, true)
+					UpvalueHacker.SetUpvalue(_StartBusy, busytask, "_busytask")
+					UpvalueHacker.SetUpvalue(_StartBusy, 0, "_extendtime")
+				end
+			elseif inst.wobytask ~= nil then
+				inst.wobytask:Cancel()
+				inst.wobytask = nil
+			end
+        end
+		
         local EPIC_TAGS = { "epic" }
         local NO_EPIC_TAGS = { "noepicmusic" }
         local function StartDanger(player)
@@ -85,6 +153,7 @@ if GetModConfigData("um_music") and not TUNING.DSTU.ISLAND_ADVENTURES then
             local _hasinspirationbuff = UpvalueHacker.GetUpvalue(_StartDanger, "_hasinspirationbuff")
             local _triggeredlevel = UpvalueHacker.GetUpvalue(_StartDanger, "_triggeredlevel")
             local _StopDanger = UpvalueHacker.GetUpvalue(_StartDanger, "StopDanger")
+            local _pirates_near = UpvalueHacker.GetUpvalue(_StartDanger, "_pirates_near")
 
             -- Note: We only have references to the private variables
             -- In order to modify the actual variables, we have to use debug.setupvalue
@@ -111,6 +180,10 @@ if GetModConfigData("um_music") and not TUNING.DSTU.ISLAND_ADVENTURES then
                         UpvalueHacker.SetUpvalue(_StartDanger, nil, "_triggeredlevel")
                         UpvalueHacker.SetUpvalue(_StartDanger, 0, "_extendtime")
 
+						if _pirates_near then
+							_soundemitter:SetVolume("danger", 0)
+						end
+		
                         if _hasinspirationbuff then
                             _soundemitter:SetParameter("danger", "wathgrithr_intensity", _hasinspirationbuff)
                         end
@@ -154,6 +227,16 @@ if GetModConfigData("um_music") and not TUNING.DSTU.ISLAND_ADVENTURES then
         if player:HasTag("working") then
             StartBusy(player)
         end
+		
+		if player:HasTag("polite") and (player.replica.rider ~= nil and player.replica.rider:IsRiding())
+		and player.replica.rider:GetMount() ~= nil and player.replica.rider:GetMount():HasTag("woby") then
+			inst:DoTaskInTime(1, function()
+				StartWoby(player)
+			end)
+		elseif inst.wobytask ~= nil then
+			inst.wobytask:Cancel()
+			inst.wobytask = nil
+		end
     end
 
     local function OnAttacked(player, data)

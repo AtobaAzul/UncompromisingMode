@@ -71,7 +71,6 @@ local function ActionHungerDrain(inst, data)
 		if fast then
 			if inst._cdtask == nil then
 				inst._cdtask = inst:DoTaskInTime(.3, OnCooldown)
-				inst.hungryslowbuildtalktime = nil
 				if inst.hungryfastbuildtalktime == nil or inst.hungryfastbuildtalktime + 10 < t then
 					inst.hungryfastbuildtalktime = t + GetRandomMinMax(12, 24)
 				elseif inst.hungryfastbuildtalktime < t then
@@ -111,13 +110,7 @@ local function ActionHungerDrain(inst, data)
 					inst.components.hunger:DoDelta(-0.15, true) --.25
 				end
 			end
-		elseif slow then
-			inst.hungryfastbuildtalktime = nil
-			if (inst.hungryslowbuildtalktime or 0) < t then
-				inst.hungryslowbuildtalktime = t + GetRandomMinMax(12, 24)
-				inst.components.talker:Say(GetString(inst, "ANNOUNCE_HUNGRY_SLOWBUILD"))
-			end
-		else
+		elseif not fast and not slow then
 			if inst._cdtask == nil then
 				inst._cdtask = inst:DoTaskInTime(.3, OnCooldown)
 				if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL or data.action.action == ACTIONS.PICK then

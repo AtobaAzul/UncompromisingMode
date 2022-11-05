@@ -178,7 +178,13 @@ local function OnUpdateProjectile(inst)
 
         -- Ignore hitting bumpers while flying through the air
         if target ~= nil and target ~= inst.components.complexprojectile.attacker and not target:HasTag("boatbumper") then
-            -- Remove and do splash damage if it hits a wall, fixed from klei's funny bugs
+            
+            -- Playful bit of arson
+            if target ~= nil and target:IsValid() and target.components.burnable ~= nil and inst:HasTag("sludge_cannonball") then
+                target.components.burnable:Ignite()
+            end
+			
+			-- Remove and do splash damage if it hits a wall, fixed from klei's funny bugs
             if target:HasTag("wall") and target.components.health then
                 if not target.components.health:IsDead() then
                     inst.components.combat:DoAreaAttack(inst, CANNONBALL_SPLASH_RADIUS, nil, nil, nil,
@@ -196,11 +202,6 @@ local function OnUpdateProjectile(inst)
             if target.components.combat and
                 GetTime() - target.components.combat.lastwasattackedtime > CANNONBALL_PASS_THROUGH_TIME_BUFFER then
                 target.components.combat:GetAttacked(inst, CANNONBALL_DAMAGE * 0.25, nil)
-            end
-
-            -- Playful bit of arson
-            if target.components.burnable ~= nil and inst:HasTag("sludge_cannonball") then
-                target.components.burnable:Ignite()
             end
         end
     end
@@ -270,8 +271,6 @@ local function common_fn(bank, build, anim, tag, isinventoryitem)
     inst.components.combat:SetDefaultDamage(CANNONBALL_DAMAGE * 0.75)
     inst.components.combat:SetAreaDamage(CANNONBALL_SPLASH_RADIUS, CANNONBALL_SPLASH_DAMAGE_PERCENT)
 
-    MakeMediumBurnable(inst, TUNING.MED_BURNTIME)
-    MakeMediumPropagator(inst)
     return inst
 end
 

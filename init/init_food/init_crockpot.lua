@@ -740,7 +740,8 @@ RegisterInventoryItemAtlas("images/inventoryimages/stuffed_peeper_poppers.xml", 
 local um_deviled_eggs =
 {
     name = "um_deviled_eggs",
-    test = function(cooker, names, tags) return tags.monster >= 2 and tags.egg and not tags.meat end,
+    --test = function(cooker, names, tags) return tags.monster >= 2 and tags.egg and not tags.meat end,
+    test = function(cooker, names, tags) return tags.monster and tags.egg and (not tags.meat or tags.egg >= 3) and not tags.inedible end,
 
     priority = 52,
     weight = 1,

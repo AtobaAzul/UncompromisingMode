@@ -369,7 +369,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.OCUPUS_TENTACLE_COOKED = "I need some soy, or wasabi."
 	
 	DESCRIBE.ARMOR_REED_UM = "I can still feel the breeze going through it..."
-	DESCRIBE.ARMOR_SHARKSUIT_UM = ""
+	DESCRIBE.ARMOR_SHARKSUIT_UM = "Shark fin soup is OFF the menu!"
 	DESCRIBE.ROCKJAWLEATHER = "I uhh... Don't think I have any recipes on shark skin."
 	
 	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI

@@ -71,7 +71,7 @@ if target == nil then
 target = caster
 end
 
-if caster.components.sanity ~= nil and caster:HasTag("Funny_Words_Magic_Man") then
+if caster ~= nil and caster.components.sanity ~= nil and caster:HasTag("Funny_Words_Magic_Man") then
 caster.components.sanity:DoDelta(TUNING.SANITY_HUGE/2) --Cut the sanity loss in half
 end
 

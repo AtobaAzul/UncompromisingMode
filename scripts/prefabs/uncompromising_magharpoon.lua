@@ -390,7 +390,7 @@ local function Vac(inst)
 			end
 		end
 		
-		inst.magnet_damage = (inst.magnet_damage + distmult) * tuningmultiplier
+		inst.magnet_damage = inst.magnet_damage + (distmult * tuningmultiplier)
 	else
 		if inst.hitfx ~= nil then
 			inst.hitfx.SoundEmitter:KillSound("twirl")
@@ -505,37 +505,6 @@ local function GetVerb(inst)
 	return "HARPOON"
 end
 
-local function PulseTask(inst)
-	if inst.magnet_damage <= 50 then
-		local fx = SpawnPrefab("dr_warm_loop_1")
-		fx.entity:SetParent(inst.entity)
-		fx.Transform:SetPosition(0, 1.5, 0)
-		fx.Transform:SetScale(0.8, 0.8, 0.8)
-		
-		inst:DoTaskInTime(2, PulseTask)
-	elseif inst.magnet_damage <= 100 and inst.magnet_damage > 50 then
-		local fx = SpawnPrefab("dr_warm_loop_1")
-		fx.entity:SetParent(inst.entity)
-		fx.Transform:SetPosition(0, 1.5, 0)
-		
-		inst:DoTaskInTime(1.5, PulseTask)
-	elseif inst.magnet_damage <= 150 and inst.magnet_damage > 100 then
-		local fx = SpawnPrefab("dr_warmer_loop")
-		fx.Transform:SetScale(0.9, 0.9, 0.9)
-		fx.entity:SetParent(inst.entity)
-		fx.Transform:SetPosition(0, 1.5, 0)
-		
-		inst:DoTaskInTime(1, PulseTask)
-	elseif inst.magnet_damage > 150 then
-		local fx = SpawnPrefab("dr_hot_loop")
-		fx.entity:SetParent(inst.entity)
-		fx.Transform:SetPosition(0, 1.5, 0)
-		fx.Transform:SetScale(0.8, 0.8, 0.8)
-		
-		inst:DoTaskInTime(0.5, PulseTask)
-	end
-end
-
 local function reel()
     local inst = CreateEntity()
 
@@ -586,8 +555,6 @@ local function reel()
     inst.components.updatelooper:AddOnUpdateFn(Vac)
 	
 	inst:DoTaskInTime(60, KillRopes)
-	
-	inst:DoTaskInTime(1, PulseTask)
 	
 	inst:DoTaskInTime(60, KillRopes)
 	

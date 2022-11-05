@@ -375,7 +375,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.OCUPUS_TENTACLE_COOKED = "Chewing is very important, now."
 	
 	DESCRIBE.ARMOR_REED_UM = "Surprisngly effective when bundled close enough."
-	DESCRIBE.ARMOR_SHARKSUIT_UM = ""
+	DESCRIBE.ARMOR_SHARKSUIT_UM = "I'm not sure what clasification of rock this falls under."
 	DESCRIBE.ROCKJAWLEATHER = "Unfortunatly it's easier to examine it dead."
 	
 	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI

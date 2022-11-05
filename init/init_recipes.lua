@@ -535,7 +535,6 @@ AddRecipe2(
 ChangeSortKey("sludge_cork", "oceanfishingrod", "TOOLS", true)
 ChangeSortKey("sludge_cork", "boat_magnet_beacon", "SEAFARING", true)
 
---[[
 AddRecipe2(
     "boat_bumper_copper_kit",
     {Ingredient("um_copper_pipe", 14)},
@@ -543,9 +542,8 @@ AddRecipe2(
     {numtogive = 2},
     {"SEAFARING"}
 )
-ChangeSortKey("boat_bumper_copper_kit", "boat_bumper_shell_kit", "SEAFARING", true)]]
+ChangeSortKey("boat_bumper_copper_kit", "boat_bumper_shell_kit", "SEAFARING", true)
 
---[[
 AddRecipe2(
     "steeringwheel_copper_item",
     {Ingredient("um_copper_pipe", 3), Ingredient("gears", 1)},
@@ -553,7 +551,7 @@ AddRecipe2(
     nil,
     {"SEAFARING"}
 )
-ChangeSortKey("steeringwheel_copper_item", "steeringwheel_item", "SEAFARING", true)]]
+ChangeSortKey("steeringwheel_copper_item", "steeringwheel_item", "SEAFARING", true)
 
 --[[
 AddRecipe2(--unsure...
@@ -580,7 +578,7 @@ AddDeconstructRecipe("rain_horn", {Ingredient("slurtle_shellpieces", 4),Ingredie
 AddDeconstructRecipe("dormant_rain_horn", {Ingredient("cookiecuttershell", 4),Ingredient("rocks", 2)})
 
 ----deconstruct recipes for craftable items
---AddDeconstructRecipe("steeringwheel_copper", {Ingredient("um_copper_pipe", 3), Ingredient("gears", 1)})
+AddDeconstructRecipe("steeringwheel_copper", {Ingredient("um_copper_pipe", 3), Ingredient("gears", 1)})
 
 --Sailing Rebalance related recipes.
 
@@ -773,6 +771,7 @@ STRINGS.RECIPE_DESC.BOATPATCH_SLUDGE = "For when your boat has a hole that shoul
 STRINGS.RECIPE_DESC.ARMOR_REED_UM = "Waterproof protection."
 STRINGS.RECIPE_DESC.ARMOR_SHARKSUIT_UM = "Become the shark."
 STRINGS.RECIPE_DESC.SLUDGE_SACK = "Thieves turn up with nothing but sticky fingers."
+STRINGS.RECIPE_DESC.BOAT_BUMPER_SLUDGE_KIT = "Cushion the blow."
 STRINGS.RECIPE_DESC.SLUDGE_OIL = "Only the purest sludge."
 STRINGS.RECIPE_DESC.SLUDGE_CORK = "Impractically large for a boat."
 STRINGS.RECIPE_DESC.CANNONBALL_SLUDGE_ITEM = "Fire in the hole!"
