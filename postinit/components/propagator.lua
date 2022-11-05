@@ -11,6 +11,7 @@ env.AddComponentPostInit("propagator", function(self)
 			local x, y, z = self.inst.Transform:GetWorldPosition()
 			
 			if self.spreading then
+				local pos = self.inst:GetPosition()
 				local prop_range = (self.propagaterange or 3) * TUNING.DSTU.WINTER_FIRE_MOD or 0
 				local ents = TheSim:FindEntities(x, y, z, prop_range, nil, { "INLIMBO" })
 				if ents ~= nil and #ents > 0 then

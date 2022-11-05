@@ -535,24 +535,6 @@ AddRecipe2(
 ChangeSortKey("sludge_cork", "oceanfishingrod", "TOOLS", true)
 ChangeSortKey("sludge_cork", "boat_magnet_beacon", "SEAFARING", true)
 
-AddRecipe2(
-    "boat_bumper_copper_kit",
-    {Ingredient("um_copper_pipe", 14)},
-    TECH.SEAFARING_ONE,
-    {numtogive = 2},
-    {"SEAFARING"}
-)
-ChangeSortKey("boat_bumper_copper_kit", "boat_bumper_shell_kit", "SEAFARING", true)
-
-AddRecipe2(
-    "steeringwheel_copper_item",
-    {Ingredient("um_copper_pipe", 3), Ingredient("gears", 1)},
-    TECH.SEAFARING_ONE,
-    nil,
-    {"SEAFARING"}
-)
-ChangeSortKey("steeringwheel_copper_item", "steeringwheel_item", "SEAFARING", true)
-
 --[[
 AddRecipe2(--unsure...
     "trinket_6",
