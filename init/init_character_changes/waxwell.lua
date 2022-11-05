@@ -129,52 +129,46 @@ else
 	local SPELLBOOK_RADIUS = 100
 	local SPELLBOOK_FOCUS_RADIUS = SPELLBOOK_RADIUS + 2
 	local NUM_MINIONS_PER_SPAWN = 1
-
-
+	
+	
 	local function _CheckMaxSanity(sanity, minionprefab)
 		return sanity ~= nil and
 			sanity:GetPenaltyPercent() +
 			(TUNING.SHADOWWAXWELL_SANITY_PENALTY[string.upper(minionprefab)] or 0) * NUM_MINIONS_PER_SPAWN <=
 			TUNING.MAXIMUM_SANITY_PENALTY
 	end
-
+	
 	local function CheckMaxSanity(doer, minionprefab)
 		return _CheckMaxSanity(doer.components.sanity, minionprefab)
 	end
-
+	
 	--I don't know why Klei does this, but i'm not gonna ask.
-
+	
 	local function SpellCost(pct)
 		return pct * TUNING.LARGE_FUEL * -4
 	end
-
+	
 	local function ShadowMimicSpellFn(inst, doer)
-		if doer.um_spawned_shadows == nil then
-			doer.um_spawned_shadows = 0
-		end
 		if inst.components.fueled:IsEmpty() then
 			return false, "NO_FUEL"
-		elseif not CheckMaxSanity(doer, "shadowprotector") then
-			return false, "NO_MAX_SANITY"
 		elseif doer.components.health.currenthealth <= TUNING.DSTU.SHADOWWAXWELL_HEALTH_COST then
 			doer.components.talker:Say(GetString(doer.prefab, "ANNOUNCE_NOHEALTH"))
-		elseif doer.components.inventory ~= nil and doer.um_spawned_shadows < 2 then
+		elseif ThePlayer and ThePlayer.waxwellshadow ~= nil then
+			return false, "MAX_MIMICS"
+		else
 			local x, y, z = doer.Transform:GetWorldPosition()
 			local shadowmax = doer.components.petleash:SpawnPetAt(x, y, z, "old_shadowwaxwell")
-
+	
 			if shadowmax ~= nil then
 				inst.components.fueled:DoDelta(SpellCost(TUNING.WAXWELLJOURNAL_SPELL_COST.SHADOW_TOPHAT * 2), doer)
 				shadowmax:DoTaskInTime(0, function(shadowmax) shadowmax.sg:GoToState("jumpout") end)
 				doer.components.health:DoDelta(-TUNING.DSTU.SHADOWWAXWELL_HEALTH_COST)
 				doer.components.sanity:RecalculatePenalty()
 				doer.SoundEmitter:PlaySound("dontstarve/maxwell/shadowmax_appear")
-				doer.um_spawned_shadows = doer.um_spawned_shadows + 1
-			else
-				return false
 			end
 		end
 	end
-
+	
 	local SHADOW_MIMIC_SPELL =
 	{
 		label = STRINGS.SPELLS.SHADOW_MIMIC,
@@ -190,57 +184,23 @@ else
 			if inventory ~= nil then
 				inventory:CastSpellBookFromInv(inst)
 			end
+			print("here?")
 		end,
 		atlas = "images/the_men.xml", --didn't rename because I thought it was funny.
 		normal = "the_men.tex",
 		widget_scale = ICON_SCALE,
 		hit_radius = ICON_RADIUS,
 	}
-
-
-
+	
 	env.AddPrefabPostInit("waxwelljournal", function(inst)
 		if not TheWorld.ismastersim then
 			return
 		end
-
-		--[[setmetatable(inst.components.spellbook.items, {
-		__newindex = function(s, i, v)
-			print("HERE!!!", i, v)
-			dumptable(v)
-			print(debugstack())
-			return rawset(s, i, v)
-		end
-	})
 	
-	imagine going through metatable hell just to add new spells, couldn't be me/penguin]]
-
 		if inst.components.spellbook ~= nil then
 			if not table.contains(inst.components.spellbook.items, SHADOW_MIMIC_SPELL) then
 				table.insert(inst.components.spellbook.items, SHADOW_MIMIC_SPELL)
 			end
 		end
-	end)
-
-
-	env.AddPrefabPostInit("waxwell", function(inst)
-		local _OnSave = inst.OnSave
-		local function OnSave(inst, data)
-			if inst.um_spawned_shadows then
-				data.um_spawned_shadows = inst.um_spawned_shadows
-			end
-			return _OnSave(inst, data)
-		end
-
-		local _OnLoad = inst.OnLoad
-		local function OnLoad(inst, data)
-			if data and data.um_spawned_shadows then
-				inst.um_spawned_shadows = data.um_spawned_shadows
-			end
-			return _OnLoad(inst, data)
-		end
-
-		inst.OnSave = OnSave
-		inst.OnLoad = OnLoad
-	end)
+	end)	
 end
