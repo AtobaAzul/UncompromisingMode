@@ -29,7 +29,7 @@ end, nil, {})
 function AreaHandler:GetHandlers() return self.handlers end
 
 function AreaHandler:GetSirens()
-    print("GetSirens")
+    --print("GetSirens")
     if self.handlers ~= {} then
         for k, v in ipairs(self.handlers) do
             if v.sirenpoint ~= nil then

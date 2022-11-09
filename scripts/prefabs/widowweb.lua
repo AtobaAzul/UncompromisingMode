@@ -33,15 +33,15 @@ local function RerollCocoons(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local existing_cocoons = TheSim:FindEntities(x,y,z, 30, {"webbedcreature"})
     local widowweb = TheSim:FindFirstEntityWithTag("widowweb")
-    print("widowweb:",widowweb)
+    --print("widowweb:",widowweb)
     if widowweb ~= nil--[[Just to prevent a crash if it was deleted.]] and widowweb.components.childspawner:IsFull() then
         for k, v in ipairs(existing_cocoons) do
             v:Remove()
         end
-        print("spawning new cocoons!")
+        --print("spawning new cocoons!")
         SpawnCocoon(inst)
     else
-        print("widowweb was nil or not full!")
+        --print("widowweb was nil or not full!")
     end
 end
 

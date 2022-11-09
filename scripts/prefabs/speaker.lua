@@ -109,11 +109,11 @@ local function fn1()
     end
 
     inst:DoTaskInTime(math.random(), function(inst)
-        print(types[math.random(3)] .. "_teaser")
+        --print(types[math.random(3)] .. "_teaser")
         local x, y, z = inst.Transform:GetWorldPosition()
-        print(TheSim:FindFirstEntityWithTag("sirenpoint_speaker"),"speaker")
-        print(TheSim:FindFirstEntityWithTag("sirenpoint_bird"),"bird")
-        print(TheSim:FindFirstEntityWithTag("sirenpoint_throne"),"siren")
+        --print(TheSim:FindFirstEntityWithTag("sirenpoint_speaker"),"speaker")
+        --print(TheSim:FindFirstEntityWithTag("sirenpoint_bird"),"bird")
+        --print(TheSim:FindFirstEntityWithTag("sirenpoint_throne"),"siren")
 
         if TheSim:FindFirstEntityWithTag("sirenpoint_speaker") == nil then
             local siren = SpawnPrefab("ocean_speaker_teaser")

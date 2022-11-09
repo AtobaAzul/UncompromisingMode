@@ -2,7 +2,7 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 
-if env.GetModConfigData("bernie") then
+if not env.GetModConfigData("bernie") then
 	local function gobig(inst)
 		--no
 		--[[

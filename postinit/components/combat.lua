@@ -29,11 +29,11 @@ env.AddComponentPostInit("combat", function(self)
         local redirect_combat = damageredirecttarget ~= nil and damageredirecttarget.components.combat or nil
         if redirect_combat ~= nil and TUNING.DSTU.BEEFALO_NERF then
             if self.inst.components.health ~= nil and not self.inst.components.health:IsDead() then
-                print("health not nil and not dead")
+                --print("health not nil and not dead")
                 redirect_combat:GetAttacked(attacker, damage, weapon, stimuli)
                 return _GetAttacked(self, attacker, damage/2, weapon, "beefalo_half_damage", ...)--added new stimuli to prevent Stackoverflow
             else
-                print("health nil and/or dead")
+                --print("health nil and/or dead")
                 redirect_combat:GetAttacked(attacker, damage, weapon, stimuli)
             end
         end

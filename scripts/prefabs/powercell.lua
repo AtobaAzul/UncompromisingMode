@@ -53,7 +53,7 @@ end
 
 local function OnEaten(inst, eater)
     if not eater.components.inventory:IsInsulated() then
-        print("no inssulation wx")
+        --print("no inssulation wx")
         eater.sg:GoToState("electrocute")
         eater.components.health:DoDelta(-TUNING.HEALING_SMALL, false, "lightning")
         eater.components.sanity:DoDelta(-TUNING.SANITY_SMALL)
@@ -61,7 +61,7 @@ local function OnEaten(inst, eater)
             eater:DoTaskInTime(1, eater.components.talker:Say(GetString(eater, "ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED")))
         end
     else
-        print("insulated wx")
+        --print("insulated wx")
         if eater.components.talker ~= nil then
             eater:DoTaskInTime(1, eater.components.talker:Say(GetString(eater, "ANNOUNCE_CHARGE_SUCCESS_INSULATED")))
         end

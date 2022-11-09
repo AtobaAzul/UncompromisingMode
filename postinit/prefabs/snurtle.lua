@@ -17,7 +17,7 @@ local snails =
 }
 for k, v in ipairs(snails) do
     env.AddPrefabPostInit(v, function(inst)
-        print("adding snurtle postinit "..k,v)
+        --print("adding snurtle postinit "..k,v)
 		if inst.components.health then
 			inst.components.health:SetMaxHealth(TUNING.SLURTLE_HEALTH*0.5)
 		end

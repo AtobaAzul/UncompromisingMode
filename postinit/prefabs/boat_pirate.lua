@@ -2,7 +2,7 @@
 --well I don't feel like copying every local today.
 
 local function hitbycannonorseedshell(boat, data)
-    print(data.cause)
+    --print(data.cause)
     if data.cause == "cannonball" or data.cause == "trident" or data.cause == "waterplant_bomb" then
         if boat.components.boatcrew then
             boat.components.boatcrew.fqlee = true

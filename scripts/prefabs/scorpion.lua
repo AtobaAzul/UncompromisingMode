@@ -86,13 +86,13 @@ local function OnHitOther(inst, data)
                     grogginess:AddGrogginess(TUNING.GESTALT.ATTACK_DAMAGE_GROGGINESS,
                         TUNING.GESTALT.ATTACK_DAMAGE_KO_TIME)
                     if grogginess.knockoutduration == 0 then
-                        print("getting attacked!")
+                        --print("getting attacked!")
                         --inst.sg.statemem.target.components.combat:GetAttacked(inst, 0)
                     else
                         -- TODO: turn on special hud overlay while asleep in enlightened dream land
                     end
                 else
-                    print("getting attacked!")
+                    --print("getting attacked!")
                     --inst.sg.statemem.target.components.combat:GetAttacked(inst, 20)
                 end
             end
