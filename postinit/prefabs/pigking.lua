@@ -27,20 +27,6 @@ if TUNING.DSTU.PK_GUARDS then
             end
         end)
 
-
-
-        local function AcceptTest(inst, item, giver)
-            -- Wurt can still play the mini-game though
-            if giver:HasTag("merm") and item.prefab ~= "pig_token" then
-                return
-            end
-
-            local is_event_item = IsSpecialEventActive(SPECIAL_EVENTS.HALLOWED_NIGHTS) and
-                item.components.tradable.halloweencandyvalue and item.components.tradable.halloweencandyvalue > 0
-            return item.components.tradable.goldvalue > 0 or is_event_item or item.prefab == "pig_token" or
-                (item.components.edible ~= nil and item.components.edible.hungervalue > 70)
-        end
-
         local function IsGuard(guy)
             return guy.prefab == "pigking_pigguard" and
                 not (guy.components.follower ~= nil and guy.components.follower.leader ~= nil)
@@ -53,6 +39,18 @@ if TUNING.DSTU.PK_GUARDS then
             else
                 return false
             end
+        end
+
+        local function AcceptTest(inst, item, giver)
+            -- Wurt can still play the mini-game though
+            if giver:HasTag("merm") and item.prefab ~= "pig_token" then
+                return
+            end
+
+            local is_event_item = IsSpecialEventActive(SPECIAL_EVENTS.HALLOWED_NIGHTS) and
+                item.components.tradable.halloweencandyvalue and item.components.tradable.halloweencandyvalue > 0
+            return item.components.tradable.goldvalue > 0 or is_event_item or item.prefab == "pig_token" or
+                (item.components.edible ~= nil and item.components.edible.hungervalue > 70 and FindRecruit(inst))
         end
 
         local function SendRecruit(inst, hunger, guard, giver)

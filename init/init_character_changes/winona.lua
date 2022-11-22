@@ -75,9 +75,11 @@ local function ActionHungerDrain(inst, data)
 					inst.hungryfastbuildtalktime = t + GetRandomMinMax(12, 24)
 				elseif inst.hungryfastbuildtalktime < t then
 					inst.hungryfastbuildtalktime = nil
-					inst.components.talker:Say(GetString(inst, "ANNOUNCE_HUNGRY_FASTBUILD"))
+					if not (inst.components.rider ~= nil and inst.components.rider:IsRiding()) then
+						inst.components.talker:Say(GetString(inst, "ANNOUNCE_HUNGRY_FASTBUILD"))
+					end
 				end
-				if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL or data.action.action == ACTIONS.PICK then
+				if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL or data.action.action == ACTIONS.PICK and not (inst.components.rider ~= nil and inst.components.rider:IsRiding()) then
 					inst.components.hunger:DoDelta(-0.1, true) --.2
 				elseif data.action.action == ACTIONS.CHOP then
 					if data.action.target ~= nil then

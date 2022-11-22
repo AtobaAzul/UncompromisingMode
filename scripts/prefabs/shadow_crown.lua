@@ -78,7 +78,7 @@ end
 		MakeInventoryFloatable(inst, "small", 0.2, 0.80)
 
         inst.entity:SetPristine()
-		
+    
         if not TheWorld.ismastersim then
             return inst
         end
@@ -99,6 +99,9 @@ end
 		inst.components.equippable.dapperness = TUNING.CRAZINESS_SMALL
 		inst.components.equippable.is_magic_dapperness = true
 		inst.components.equippable.walkspeedmult = TUNING.CANE_SPEED_MULT
+
+        inst:AddComponent("shadowlevel")
+        inst.components.shadowlevel:SetDefaultLevel(TUNING.THURIBLE_SHADOW_LEVEL)
 
         MakeHauntableLaunch(inst)
 		--------------------------------------------------------------

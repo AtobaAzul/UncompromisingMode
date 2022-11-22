@@ -15,31 +15,30 @@ local Vetcursewidget = Class(Widget, function(self, owner)
     self.bg2:SetHRegPoint(ANCHOR_MIDDLE)
     self.bg2:SetVAnchor(ANCHOR_MIDDLE)
     self.bg2:SetHAnchor(ANCHOR_MIDDLE)
-	self.bg2:SetPosition(880, -380, 0)
+    self.bg2:SetPosition(880, -380, 0)
     self.bg2:SetScaleMode(0.01)
-	self.bg2:SetScale(.33, .33, .33)
-	self:StartUpdating()
+    self.bg2:SetScale(.33, .33, .33)
+    self:StartUpdating()
     self:Show()
-	self:RefreshTooltips()
+    self:RefreshTooltips()
 end)
 
 function Vetcursewidget:RefreshTooltips()
     local controller_id = TheInput:GetControllerID()
-	
-	if self.owner:HasTag("clockmaker") then
-		self.bg2:SetTooltip("Veteran's Curse:\n - Age faster when damaged.\n - Hunger drains faster.\n - Sanity from foods is applied over time.\n - Gain the ability to wield cursed items, dropped by certain bosses.")
-	else
-		self.bg2:SetTooltip("Veteran's Curse:\n - Receive more damage when attacked.\n - Hunger drains faster.\n - Health and Sanity from foods is applied over time.\n - Gain the ability to wield cursed items, dropped by certain bosses.")
-	end
-end
 
+    if self.owner:HasTag("clockmaker") then
+        self.bg2:SetTooltip("Veteran's Curse:\n - Age faster when damaged.\n - Hunger drains faster.\n - Sanity from foods is applied over time.\n - Gain the ability to wield cursed items, dropped by certain bosses.")
+    else
+        self.bg2:SetTooltip("Veteran's Curse:\n - Receive more damage when attacked.\n - Hunger drains faster.\n - Health and Sanity from foods is applied over time.\n - Gain the ability to wield cursed items, dropped by certain bosses.")
+    end
+end
 
 function Vetcursewidget:OnUpdate(dt)
-if self.owner:HasTag("vetcurse") then
-self:Show()
-else
-self:Hide()
-end
+    if self.owner:HasTag("vetcurse") then
+        self:Show()
+    else
+        self:Hide()
+    end
 end
 
 return Vetcursewidget

@@ -2125,6 +2125,8 @@ function self:ForceRNE(forced)
 end
 
 local function DoRNEChance(inst)
+	SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "ToggleLagCompOff"), nil)
+
 	if TheWorld.state.isday then
 
 		local playerlist = {}

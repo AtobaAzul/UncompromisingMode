@@ -1,7 +1,7 @@
 name = "󰀕 Uncompromising Mode"
 description =
 [[
-󰀔 [ Version 1.5.0.9: "Calm Before the Storm" ]
+󰀔 [ Version 1.5.1: "Calm Before the Storm" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -15,7 +15,7 @@ Prominent features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Calm Before the Storm v1.5.0.9"
+version = "Calm Before the Storm v1.5.1"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
@@ -93,7 +93,7 @@ configuration_options =
 			{description = "80%", data = 0.2},
 			{description = "INSANITY", data = 0},
 		},
-		default = 0.6,
+		default = 0.8,
 	},
     BinaryConfig("harder_shadows", "Harder Nightmare Creatures", "Insanity is a big threat now. Those who pass the brink may never return.", true),
     BinaryConfig("rat_raids", "Rat Raids", "Rats will periodically be attracted to your base.", true),
@@ -173,6 +173,7 @@ configuration_options =
 		default = true,
 	},
 	BinaryConfig("willow", "Willow", "Willow's Lighter now lasts forever when she holds it, she will retaliate when attacked by shadows.", true),
+	BinaryConfig("bernie_buffs", "Willow: Bernie Buffs", "Bernie has 80% resistance against shadows\nHolding bernie prevents shadows from aggro'ing.", true),
     BinaryConfig("warly", "Warly", "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.", true),
 	BinaryConfig("waxwell", "Maxwell", "Maxwell gets buffed versions of his classic shadows by reading the Codex Umbra. Disable for Maxwell mod compatibility!", true),
 	--BinaryConfig("wolfgang", "Improved/Balanced Wolfgang", "Wolfgang gains new perks and downsides. Read the patch notes included in the mod folder or workshop for details.", false),
@@ -347,7 +348,19 @@ configuration_options =
 	BinaryConfig("scaledchestbuff", "Scaled Chest Buff", "Scaled chest is not worth the resources required. Enabling this buffs it to 25 slots. Toggling with scaled chests in existing world may cause crash.", true),
 	BinaryConfig("scalemailbuff", "Scalemail Buff", "Scalemail now spawns 3 Dimvaes to help you in combat", true),
 	BinaryConfig("canedurability", "Cane Durability (Off by default)", "Cane loses durability similarly to a whirly fan, note that UM walruses drop tusks 100% of the time with this on.", false),
-	BinaryConfig("gotobed", "Sleeping Buff", "Sleeping can heal max health loss. Siesta Lean-to hunger drain is now 50% of a Tent, instead of 33%.", true),
+
+	{
+		name = "gotobed",
+		label = "Sleeping Buff",
+		hover = "Sleeping can heal max health loss. Siesta Lean-to hunger drain is now 50% of a Tent, instead of 33%.",
+		options =
+		{
+			{description = "Default", data = "default", hover= "Only heal max health loss if BELOW 25%."},
+			{description = "Legacy", data = "legacy", hover = "Heal max health lost regardless of %."},
+			{description = "Disabled", data = false},
+		},
+		default = "default",
+	},
 	BinaryConfig("passibleimpassibles", "Remove Cheese-able Collisions", "Removes collision from stuff such as statues to prevent cheese.", true),
 	{
 		name = "sleepingbuff",
@@ -418,7 +431,7 @@ configuration_options =
 	BinaryConfig("buttmuffin", "Butter Muffin Buff", "Butter muffin restores 30 health 10 sanity instead of 20 health 5 sanity.", true),
 	BinaryConfig("icecreambuff", "Ice Cream Buff", "Ice Cream now restores 100 sanity, but does it slowly.", true),
 	BinaryConfig("farmfoodredux", "Farmplot Food Redux", "Reallocates most dishes that involve crockpot foods. Typically a buff, but may exchange some stats.", true),
-
+	BinaryConfig("sr_foodrebalance", "Fish foods rebalance", "Several fish based foods have their stats tweaked.", true),
 	SkipSpace(),
 	Header("General Food Tweaks"),
 	BinaryConfig("beebox_nerf", "Bee Box Nerf", "Bee boxes only release 2 bees max.", true),

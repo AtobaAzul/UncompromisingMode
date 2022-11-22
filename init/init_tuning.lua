@@ -273,6 +273,9 @@ TUNING.DSTU =
 	--Warly
     WARLY_SAME_OLD_COOLDOWN = total_day_time * 3,
 	WARLY_SAME_OLD_MULTIPLIERS = { .6, .5, .35, .2, .1 },
+	
+	--Wigfrid
+    BATTLESONG_FIRE_RESIST_MOD = 0, --orig 33% fire resis
 
 	--Maxwell
 	SHADOWWAXWELL_FUEL_COST = 2,
@@ -288,6 +291,7 @@ TUNING.DSTU =
 	WICKERNERF = GetModConfigData("wickerbottom"),
 	WICKERNERF_TENTACLES = GetModConfigData("on tentacles"),
 	WICKERNERF_HORTICULTURE = GetModConfigData("applied horticulture"),
+	
 
     --Wanda
     WANDA_NERF = GetModConfigData("wanda_nerf"),
@@ -413,6 +417,8 @@ TUNING.DSTU =
 
     PK_GUARDS = GetModConfigData("pigking_guards"),
 
+    BERNIE_BUFF = GetModConfigData("bernie_buffs"),
+
 --boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
     TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),
@@ -479,6 +485,8 @@ TUNING.SPAWNPROTECTIONBUFF_SPAWN_DIST_SQ = 3*3
 
 TUNING.MULTITOOL_DAMAGE = TUNING.AXE_DAMAGE
 
+
+TUNING.HAWAIIANSHIRT_PERISHTIME = TUNING.HAWAIIANSHIRT_PERISHTIME+total_day_time*5
 
 --Sailing Rebalance related tuning changes
 --trident buff

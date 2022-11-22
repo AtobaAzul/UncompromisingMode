@@ -77,8 +77,10 @@ end
 
 local function OnAttacked(inst, data)
     local attacker = data and data.attacker
-    inst.components.combat:SetTarget(attacker)
-    inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("bat") end, MAX_TARGET_SHARES)
+	if attacker and (attacker:HasTag("insect") or attacker:HasTag("spider")) and not attacker:HasTag("player") then
+		inst.components.combat:SetTarget(attacker)
+		inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("fruitbat") end, MAX_TARGET_SHARES)
+	end
 end
 
 
@@ -166,7 +168,7 @@ local function fn()
 	inst.Transform:SetScale(0.9, 0.9, 0.9)
 	MakeFlyingCharacterPhysics(inst, 1, .5)
 
-    inst:AddTag("bat")
+   
     inst:AddTag("animal")
 	inst:AddTag("fruitbat")
 	inst:AddTag("animal")

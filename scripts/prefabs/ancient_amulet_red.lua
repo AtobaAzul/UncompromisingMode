@@ -189,6 +189,9 @@ local function fn()
     inst.components.finiteuses:SetOnFinished(inst.Remove)
     inst.components.finiteuses:SetMaxUses(1000)
     inst.components.finiteuses:SetUses(1000)
+	
+	inst:AddComponent("shadowlevel")
+	inst.components.shadowlevel:SetDefaultLevel(TUNING.AMULET_SHADOW_LEVEL)
 
     inst:AddComponent("hauntable")
 	inst.components.hauntable:SetOnHauntFn(OnHaunt)

@@ -69,6 +69,35 @@ local function SpinVVall(inst,speed)
 	end
 end
 
+
+local function Honey(inst,angle,count,variation)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    
+    local fx = SpawnPrefab("honey_trail")
+	if not variation then 
+		variation = 0
+	end
+    fx.Transform:SetPosition(x + 2 * math.cos(angle) + variation * math.cos(angle+3.14/2), 0, z + 2 * math.sin(angle)+ variation * math.sin(angle+3.14/2))
+    fx:SetVariation(math.random(1,7), GetRandomMinMax(1, 1.3), 4)
+	fx.count = count - 1
+	fx.angle = angle
+	if count > 0 then
+		fx:DoTaskInTime(0.2,function(fx)
+			Honey(fx,fx.angle,fx.count)
+		end)
+	end
+end
+
+
+local function SpillHoney(inst)
+	local angle = -inst.Transform:GetRotation() * DEGREES
+	Honey(inst,angle,10,-2)
+	Honey(inst,angle,10,2)
+	Honey(inst,angle,10,0)
+end
+
+
+
 env.AddStategraphPostInit("SGbeequeen", function(inst) --For some reason it's called "SGbeequeen" instead of just... beequeen, funky
 	
 	local _OldOnExit 
@@ -159,6 +188,37 @@ local states = {
 				end
 				inst.components.groundpounder:GroundPound()
             end),
+        },
+
+        events =
+        {
+            CommonHandlers.OnNoSleepAnimOver("screech"),
+        },
+
+        onexit = function(inst)
+            --RestoreFlapping(inst)
+            inst.Transform:SetSixFaced()
+            inst.components.health:SetInvincible(false)
+        end,
+    },
+    State{
+        name = "lob",
+        tags = { "busy", "nosleep", "nofreeze", "ability" },
+
+        onenter = function(inst)
+			--inst.brain:Stop()
+            --StopFlapping(inst)
+			if inst.components.combat and inst.components.combat.target then
+				inst:ForceFacePoint(inst.components.combat.target:GetPosition())
+			end
+            inst.components.locomotor:StopMoving()
+            inst.components.health:SetInvincible(true)
+            inst.AnimState:PlayAnimation("atk")
+        end,
+
+        timeline =
+        {
+            CommonHandlers.OnNoSleepTimeEvent(10 * FRAMES, SpillHoney),
         },
 
         events =

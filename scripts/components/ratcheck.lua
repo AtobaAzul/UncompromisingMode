@@ -230,7 +230,7 @@ return Class(function(self, inst)
 
 		--[[else
 		TheWorld:PushEvent("ratcooldownshort", inst)
-		--print("No burrow, so make one ya dink!")
+		print("No burrow, so make one ya dink!")
 		MakeRatBurrow(inst)]]
 		--end
 
@@ -243,58 +243,58 @@ return Class(function(self, inst)
 		if data.doer == nil and data.container ~= nil then
 			data.doer = data.container:GetNearestPlayer(true)
 		end
+		if data.doer then
+			local x, y, z = data.doer.Transform:GetWorldPosition()
 
-		local x, y, z = data.doer.Transform:GetWorldPosition()
+			if data ~= nil and data.doer ~= nil and data.container ~= nil then
+				--print("Found a Doer!")
+				if not data.doer or not data.doer:IsValid() or not data.doer.Transform or not IsEligible(data.doer) then
+					return
+				end
 
-		if data ~= nil and data.doer ~= nil and data.container ~= nil then
-			--print("Found a Doer!")
-			if not data.doer or not data.doer:IsValid() or not data.doer.Transform or not IsEligible(data.doer) then
-				return
-			end
+				--print("Doer is valid!")
 
-			--print("Doer is valid!")
+				local ents = TheSim:FindEntities(x, y, z, 30, nil, { "cattoy" }, { "_inventoryitem" })
+				if IsEligible(data.doer) and
+					not TheWorld:HasTag("cave") and
+					not (_raided ~= nil and _raided) and
+					--[[not data.container.components.container:IsEmpty() and]]
+					#ents >= 20 then
+					--print("GOGO NINJA RATORIO")
 
-			local ents = TheSim:FindEntities(x, y, z, 30, nil, { "cattoy" }, { "_inventoryitem" })
-			if IsEligible(data.doer) and
-				not TheWorld:HasTag("cave") and
-				not (_raided ~= nil and _raided) and
-				--[[not data.container.components.container:IsEmpty() and]]
-				#ents >= 20 then
-				--print("GOGO NINJA RATORIO")
+					_raided = true
 
-				_raided = true
-
-				data.container:DoTaskInTime(0, StartRaid, data.doer)
-			else
-				--print(_initialrattimer)
-
-				if #ents <= 20 then
-					--print("CAN'T SPAWN RATS! There aren't enough items around!")
+					data.container:DoTaskInTime(0, StartRaid, data.doer)
 				else
-					if #TheSim:FindEntities(x, y, z, 30, { "structure" }) > 3 then
-						local ratchecker = TheSim:FindFirstEntityWithTag("rat_sniffer")
-						if ratchecker ~= nil then
-							ratchecker.Transform:SetPosition(x, 0, z)
-						else
-							SpawnPrefab("uncompromising_ratsniffer").Transform:SetPosition(x, 0, z)
+					--print(_initialrattimer)
+
+					if #ents <= 20 then
+						--print("CAN'T SPAWN RATS! There aren't enough items around!")
+					else
+						if #TheSim:FindEntities(x, y, z, 30, { "structure" }) > 3 then
+							local ratchecker = TheSim:FindFirstEntityWithTag("rat_sniffer")
+							if ratchecker ~= nil then
+								ratchecker.Transform:SetPosition(x, 0, z)
+							else
+								SpawnPrefab("uncompromising_ratsniffer").Transform:SetPosition(x, 0, z)
+							end
 						end
 					end
-				end
 
 
-				if data.container.components.container:IsEmpty() then
-					--print("CAN'T SPAWN RATS! This container is empty!")
-				end
+					if data.container.components.container:IsEmpty() then
+						--print("CAN'T SPAWN RATS! This container is empty!")
+					end
 
-				if not IsEligible(data.doer) then
-					--print("CAN'T SPAWN RATS! Player is in a 'safe' zone!")
-				end
+					if not IsEligible(data.doer) then
+						--print("CAN'T SPAWN RATS! Player is in a 'safe' zone!")
+					end
 
-				if (_raided ~= nil and _raided) then
-					--print("CAN'T SPAWN RATS! They are on break!")
+					if (_raided ~= nil and _raided) then
+						--print("CAN'T SPAWN RATS! They are on break!")
+					end
 				end
 			end
-
 
 		end
 	end

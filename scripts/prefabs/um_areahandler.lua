@@ -112,7 +112,7 @@ local function fn()
 	inst:ListenForEvent("generate_main", SpawnSiren)
 	--inst:ListenForEvent("clear", Clear)
 
-	inst:DoTaskInTime(0,ClearSeastacks)
+	--inst:DoTaskInTime(0,ClearSeastacks)
 	inst:DoTaskInTime(1,function(inst)
 		if TheWorld.components.um_areahandler ~= nil and not table.contains(TheWorld.components.um_areahandler.handlers, inst) then
 			table.insert(TheWorld.components.um_areahandler.handlers, inst)

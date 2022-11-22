@@ -157,7 +157,7 @@ local _RummageFn = GLOBAL.ACTIONS.RUMMAGE.fn
 GLOBAL.ACTIONS.RUMMAGE.fn = function(act)
 	local targ = act.target or act.invobject
 	
-	if targ ~= nil and targ:HasTag("winky_storage") then
+	--[[if targ ~= nil and targ:HasTag("winky_storage") then
 		if GLOBAL.TheWorld.components.winkyburrowinventory.trunk and GLOBAL.TheWorld.components.winkyburrowinventory.trunk.components.container:IsOpen() and not GLOBAL.TheWorld.components.winkyburrowinventory.trunk.components.container:IsOpenedBy(act.doer) then
 			return false, "INUSE"
 		end
@@ -165,7 +165,7 @@ GLOBAL.ACTIONS.RUMMAGE.fn = function(act)
 		if GLOBAL.TheWorld.components.skullchestinventory.trunk and GLOBAL.TheWorld.components.skullchestinventory.trunk.components.container:IsOpen() and not GLOBAL.TheWorld.components.skullchestinventory.trunk.components.container:IsOpenedBy(act.doer) then
 			return false, "INUSE"
 		end
-	elseif targ ~= nil and targ:HasTag("winona_notouchy") and not act.doer:HasTag("handyperson") then
+	else]]if targ ~= nil and targ:HasTag("winona_notouchy") and not act.doer:HasTag("handyperson") then
 		return false, "WINONATOOLBOX"
 	end
 	return _RummageFn(act)
@@ -229,4 +229,11 @@ GLOBAL.ACTIONS.ADDWETFUEL.fn = function(act)--I'M GOING TO ***BOMB KLEI*** WHY T
 	else
 		return _AddWetFuelFn(act)
 	end
+end
+
+local _UseSpellBookStrFn = GLOBAL.ACTIONS.USESPELLBOOK.strfn
+
+GLOBAL.ACTIONS.USESPELLBOOK.strfn = function(act)
+	local target = act.invobject or act.target
+	return target:HasTag("telestaff") and "TELESTAFF" or _UseSpellBookStrFn ~= nil and _UseSpellBookStrFn(act) or "BOOK"
 end

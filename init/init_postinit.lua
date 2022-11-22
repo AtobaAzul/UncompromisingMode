@@ -37,6 +37,7 @@ local component_post = {
 	"combat",
 	"hullhealth",
 	"health",
+	--"spellbook"
 }
 
 local prefab_post = {

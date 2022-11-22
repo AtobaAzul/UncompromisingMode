@@ -15,17 +15,18 @@ local function pipethrown(inst)
 end
 
 local function onhit(inst, attacker, target)
-
-    if target ~= nil and target.prefab == "nightlight" then
-		inst.SoundEmitter:PlaySound("dontstarve/maxwell/shadowmax_appear")
-		target.components.fueled:TakeFuelItem(inst)
-		SpawnPrefab("statue_transition").Transform:SetPosition(target.Transform:GetWorldPosition())
+	inst.SoundEmitter:PlaySound("dontstarve/maxwell/shadowmax_appear")
+	SpawnPrefab(inst.fx).Transform:SetPosition(target.Transform:GetWorldPosition())
 		
-		inst:Remove()
+    if target ~= nil and target.prefab == "nightlight" then
+		target.components.fueled:TakeFuelItem(inst)
 	end
+	
+	
+	inst:Remove()
 end
 
-local function fn()
+local function fncommon()
 	local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -53,6 +54,8 @@ local function fn()
         return inst
     end
 	
+	inst.fx = "statue_transition"
+	
     inst:AddComponent("fuel")
     inst.components.fuel.fueltype = FUELTYPE.NIGHTMARE
     inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
@@ -76,4 +79,35 @@ local function fn()
     return inst
 end
 
-return Prefab("nightlightfuel", fn, assets)
+local function fn()
+    local inst = fncommon()
+	
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.fx = "mini_dreadeye_fx"
+
+    return inst
+end
+
+local function eyefn()
+    local inst = fncommon()
+	
+    if not TheNet:IsDedicated() then
+		-- this is purely view related
+		inst:AddComponent("transparentonsanity_dreadeye")
+		inst.components.transparentonsanity_dreadeye:ForceUpdate()
+	end
+	
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	
+	inst.fx = "mini_dreadeye_fx"
+
+    return inst
+end
+
+return Prefab("nightlightfuel", fn, assets),
+		Prefab("mini_dreadeye_fuel", eyefn, assets)

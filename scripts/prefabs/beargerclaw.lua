@@ -185,6 +185,9 @@ local function staff_fn()
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
 
+	inst:AddComponent("shadowlevel")
+	inst.components.shadowlevel:SetDefaultLevel(TUNING.AMULET_SHADOW_LEVEL)
+
     inst:AddComponent("tool")
     inst.components.tool:SetAction(ACTIONS.DIG)
 	

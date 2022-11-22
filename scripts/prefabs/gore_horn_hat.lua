@@ -284,6 +284,9 @@ end
 		inst.components.fueled:SetDepletedFn(stoprunning)
 		inst:ListenForEvent("percentusedchange", checkiffull)
 		
+		inst:AddComponent("shadowlevel")
+		inst.components.shadowlevel:SetDefaultLevel(TUNING.AMULET_SHADOW_LEVEL*2)
+
 		inst.fueltask = nil
 		inst.fuelmetask = nil
 		inst.pausedfuel = true

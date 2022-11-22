@@ -37,6 +37,7 @@ local inventoryitems =
 	"cctrinket_don",
 	"cctrinket_freddo",
 	"cctrinket_jazzy",
+	"codex_mantra",
 	"chester_eyebone_closed_lazy",
 	"chester_eyebone_lazy",
 	"cookedmonstersmallmeat",
@@ -646,6 +647,21 @@ Assets = {
 	Asset("ATLAS", "images/the_men.xml"),
 	Asset("IMAGE", "images/the_men.tex"),
 
+	Asset("ATLAS", "images/tele_icon1.xml"),
+	Asset("IMAGE", "images/tele_icon1.tex"),
+	Asset("ATLAS", "images/tele_icon2.xml"),
+	Asset("IMAGE", "images/tele_icon2.tex"),
+	Asset("ATLAS", "images/tele_icon3.xml"),
+	Asset("IMAGE", "images/tele_icon3.tex"),
+	Asset("ATLAS", "images/tele_icon1b.xml"),
+	Asset("IMAGE", "images/tele_icon1b.tex"),
+	Asset("ATLAS", "images/tele_icon2b.xml"),
+	Asset("IMAGE", "images/tele_icon2b.tex"),
+	Asset("ATLAS", "images/tele_icon3b.xml"),
+	Asset("IMAGE", "images/tele_icon3b.tex"),
+	Asset("ATLAS", "images/tele_icon1c.xml"),
+	Asset("IMAGE", "images/tele_icon1c.tex"),
+
 	--OVERLAYS
 	Asset("ATLAS", "images/UM_pollenover.xml"),
 	Asset("IMAGE", "images/UM_pollenover.tex"),
@@ -960,6 +976,10 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/ancient_amulet_red_demoneye.tex"),
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/ancient_amulet_red_demoneye.xml"),
 	Asset("ATLAS", "images/inventoryimages/ancient_amulet_red_demoneye.xml"),
+
+	Asset("IMAGE", "images/inventoryimages/codex_mantra.tex"),
+	--ASSET("ATLAS_BUILD", "images/inventoryimages/ancient_amulet_red_demoneye.xml"),
+	Asset("ATLAS", "images/inventoryimages/codex_mantra.xml"),
 
 	Asset("IMAGE", "images/inventoryimages/driftwoodfishingrod.tex"),
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/driftwoodfishingrod.xml"),
@@ -1617,7 +1637,8 @@ Assets = {
 	Asset("ANIM", "anim/winona_toolbox.zip"),
 	Asset("ANIM", "anim/winona_upgradekit_electrical.zip"),
 	
-
+	Asset("ANIM", "anim/um_goo_honey.zip"),
+	
 	--UI
 	Asset("IMAGE", "images/dragonflycontainerborder.tex"),
 	Asset("ATLAS", "images/dragonflycontainerborder.xml"),
@@ -1735,6 +1756,8 @@ Assets = {
 	--Asset("IMAGE", "images/map_icons/boomberry.tex"),
 	--Asset("ATLAS", "images/map_icons/boomberry.xml"),
 
+	Asset("IMAGE", "images/map_icons/telebase_active.tex"),
+	Asset("ATLAS", "images/map_icons/telebase_active.xml"),
 
 	--BIGPORTRAITS
 	Asset("IMAGE", "bigportraits/willow.tex"),

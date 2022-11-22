@@ -379,4 +379,6 @@ return {
 	"wathom_none",
 
 	"uncompromising_skins",
+	
+	"codex_mantra",
 }

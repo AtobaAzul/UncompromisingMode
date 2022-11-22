@@ -419,7 +419,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 	DESCRIBE.PORTABLEBOAT_ITEM = "This boat is sure to have a short life span."
 	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "The faster we go, the brighter it glows!"
 	
-	DESCRIBE.WIXIE_PIANO = "We have eternity to learn!"
+	DESCRIBE.WIXIE_PIANO = "We have an eternity to learn!"
 	DESCRIBE.WIXIE_CLOCK = "I can't open it up, so I can't fix it!"
 	DESCRIBE.WIXIE_WARDROBE = "Wait, how long has this been here?"
 	DESCRIBE.CHARLES_T_HORSE = "Not a cog in sight."
@@ -428,3 +428,5 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 	DESCRIBE.UM_ORNAMENT_RAT = "Don't let it get in my clocks!"
 	
 	DESCRIBE.TRINKET_WATHOM1 = "Oh that was SUCH a waste of time."
+	
+	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL

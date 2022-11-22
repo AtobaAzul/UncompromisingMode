@@ -133,6 +133,14 @@ end
 
 
 
+local function Honey(inst)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local fx = SpawnPrefab("honey_trail")
+    fx.Transform:SetPosition(x, 0, z)
+    fx:SetVariation(math.random(1,7), GetRandomMinMax(1, 1.3), math.random(45,60))
+end
+
+
 local function MortarAttack(inst)
 	if not inst.sg:HasStateTag("mortar") then
 		local target = FindEntity(inst,40^2,nil,{"player"},{"playerghost","bee","smallcreature","structure"})
@@ -322,6 +330,7 @@ local function fnmain(bee, build)
 		inst.Transform:SetScale(1.2,1.2,1.2)
 		inst.MortarAttack = MortarAttack
 		inst:DoTaskInTime(math.random(1,3),MortarAttack)
+		inst.dohoney = Honey
 	end
 	if bee == "shooter" then
 		inst.components.health:SetMaxHealth(0.5*TUNING.BEEGUARD_HEALTH)
@@ -365,7 +374,36 @@ local function fntarget()
 	inst:AddComponent("combat")
     return inst
 end
+
+local function honeyexplosion()
+    local inst = CreateEntity()
+
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
+	inst.entity:AddSoundEmitter()
+    MakeInventoryPhysics(inst)
+
+    inst.AnimState:SetBank("treegrowthsolution")
+    inst.AnimState:SetBuild("um_goo_honey")
+
+
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
+        return inst
+    end
+	inst.Transform:SetScale(1.5,1.5,1.5)
+	inst.AnimState:PlayAnimation("use", false)
+	inst:ListenForEvent("animover",function(inst) inst:Remove() end)
+	inst.persists = false
+
+    return inst
+end
+
+
 return Prefab("um_beeguard_blocker", fnblocker),
 Prefab("um_beeguard_seeker",fnseeker),
 Prefab("um_beeguard_shooter",fnshooter),
+Prefab("honeyexplosion",honeyexplosion),
 Prefab("um_beeguard_shooter_target",fntarget)

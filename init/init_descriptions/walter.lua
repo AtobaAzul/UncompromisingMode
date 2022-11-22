@@ -421,7 +421,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
 	DESCRIBE.UM_BEEGUARD_BLOCKER = "That's fine, I wasn't planning on getting too close anyway!"
 	
-	DESCRIBE.WIXIE_PIANO = "Piano lessens weren't a part of my training!"
+	DESCRIBE.WIXIE_PIANO = "Piano lessons weren't a part of my training!"
 	DESCRIBE.WIXIE_CLOCK = "Shame it's broken, a ticking clock adds tension to horror stories!"
 	DESCRIBE.WIXIE_WARDROBE = "Reminds me of this one radio play I heard, the \"Haunted Wardrobe at the End of the Hall\" it's about-"
 	DESCRIBE.CHARLES_T_HORSE = "I can't be seen playing with kids toys!"
@@ -430,3 +430,5 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.UM_ORNAMENT_RAT = "All alone, little guy?"
 	
 	DESCRIBE.TRINKET_WATHOM1 = "It's... Treasure? I think? Is it??"
+	
+	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL

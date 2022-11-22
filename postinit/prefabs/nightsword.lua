@@ -10,8 +10,8 @@ env.AddPrefabPostInit("nightsword", function(inst)
     local _onattack = inst.components.weapon.onattack
 
     local function DrainSanity(inst, attacker, target)
-        if attacker.components.sanity ~= nil and attacker.age_state ~= "old" then
-            attacker.components.sanity:DoDelta(-0.5*(attacker:HasTag("Funny_Words_Magic_Man") and 0.5 or 1))
+        if attacker.components.sanity ~= nil and attacker.age_state ~= "old" and not attacker:HasTag("shadowmagic") then
+            attacker.components.sanity:DoDelta((attacker:HasTag("Funny_Words_Magic_Man") and -0.125 or -0.33))
         end
         if _onattack ~= nil then--mod compat/future proofing, just in case
             _onattack(inst, attacker, target)

@@ -61,6 +61,8 @@ local function fn(Sim)
     inst.AnimState:SetBank("fuelseeker")
     inst.AnimState:SetBuild("fuelseeker")
     inst.AnimState:PlayAnimation("appear")
+    inst.AnimState:SetMultColour(1, 1, 1, .5)
+	inst.AnimState:UsePointFiltering(true)
 	
 	inst.Transform:SetScale(0.44, 0.44, 0.44)
 
@@ -157,7 +159,8 @@ local function darkfirefn()
     inst.AnimState:SetBank("fire")
     inst.AnimState:SetBuild("fire")
     inst.AnimState:PlayAnimation("level4", true)
-	inst.AnimState:SetMultColour(0, 0, 0, 1)
+	inst.AnimState:SetMultColour(0, 0, 0, .5)
+	inst.AnimState:UsePointFiltering(true)
 
     inst.entity:SetPristine()
 

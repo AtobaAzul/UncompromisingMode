@@ -58,18 +58,73 @@ local function WathomMusicToggle(level)
 		GLOBAL.TheFocalPoint.SoundEmitter:KillSound("wathommusic")
 	end
 end
+
 --wathomcustomvoice/wathomvoiceevent
 local function DoAdrenalineUpStinger(sound)
-	if type(sound) =="string" then
-		GLOBAL.TheFrontEnd:GetSound():PlaySound("wathomcustomvoice/wathomvoiceevent/"..sound)
+	if type(sound) == "string" then
+		GLOBAL.TheFrontEnd:GetSound():PlaySound("wathomcustomvoice/wathomvoiceevent/" .. sound)
 	else
 		GLOBAL.TheFrontEnd:GetSound():PlaySound("dontstarve_DLC001/characters/wathgrithr/inspiration_down")
 	end
 end
 
+local function GetTargetFocus(player, telebase, telestaff)
+	telestaff.target_focus = telebase
+end
+
+AddModRPCHandler("UncompromisingSurvival", "GetTargetFocus", GetTargetFocus)
 AddClientModRPCHandler("UncompromisingSurvival", "WathomMusicToggle", WathomMusicToggle)
 AddClientModRPCHandler("UncompromisingSurvival", "WathomAdrenalineStinger", DoAdrenalineUpStinger)
 
+local function ToggleLagCompOn(self)
+    if --[[not GLOBAL.IsDefaultScreen() or]] GLOBAL.ThePlayer == nil or GLOBAL.ThePlayer.hadcompenabled ~= nil then
+		return
+    end
+	
+	if GLOBAL.Profile:GetMovementPredictionEnabled() then
+		GLOBAL.ThePlayer:EnableMovementPrediction(false)
+		GLOBAL.Profile:SetMovementPredictionEnabled(false)
+		
+		--GLOBAL.ThePlayer.HUD.controls.networkchatqueue:DisplaySystemMessage("The shadows have turned lag compensation off, it will be restored on nights end.")
+		--GLOBAL.TheNet:Announce("The shadows have turned lag compensation off, it will be restored on nights end.")
+			
+		if GLOBAL.ThePlayer.components.playercontroller:CanLocomote() then
+			GLOBAL.ThePlayer.components.playercontroller.locomotor:Stop()
+		else
+			GLOBAL.ThePlayer.components.playercontroller:RemoteStopWalking()
+		end
+	
+		GLOBAL.ThePlayer.hadcompenabled = true
+	end
+end
+
+AddClientModRPCHandler("UncompromisingSurvival", "ToggleLagCompOn", ToggleLagCompOn)
+
+local function ToggleLagCompOff(self)
+    if --[[not GLOBAL.IsDefaultScreen() or]] GLOBAL.ThePlayer == nil or GLOBAL.ThePlayer.hadcompenabled == nil then
+		return
+    end
+	
+	if GLOBAL.ThePlayer.hadcompenabled then
+		if not GLOBAL.Profile:GetMovementPredictionEnabled() then
+			GLOBAL.ThePlayer:EnableMovementPrediction(true)
+			GLOBAL.Profile:SetMovementPredictionEnabled(true)
+			
+			--GLOBAL.ThePlayer.HUD.controls.networkchatqueue:DisplaySystemMessage("The shadows are gone, and lag compensation returns.")
+			--GLOBAL.TheNet:Announce("The shadows are gone, and lag compensation returns.")
+			
+			if GLOBAL.ThePlayer.components.playercontroller:CanLocomote() then
+				GLOBAL.ThePlayer.components.playercontroller.locomotor:Stop()
+			else
+				GLOBAL.ThePlayer.components.playercontroller:RemoteStopWalking()
+			end
+		
+			GLOBAL.ThePlayer.hadcompenabled = nil
+		end
+	end
+end
+
+AddClientModRPCHandler("UncompromisingSurvival", "ToggleLagCompOff", ToggleLagCompOff)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsDeath", function(...)
 	if not GLOBAL.TheWorld.ismastershard then
@@ -130,7 +185,8 @@ GLOBAL.feather_frock_clear_fn = function(inst) GLOBAL.basic_clear_fn(inst, "feat
 GLOBAL.cursed_antler_init_fn = function(inst, build_name) GLOBAL.basic_init_fn(inst, build_name, "cursed_antler") end
 GLOBAL.cursed_antler_clear_fn = function(inst) GLOBAL.basic_clear_fn(inst, "cursed_antler") end
 
-GLOBAL.ancient_amulet_red_init_fn = function(inst, build_name) GLOBAL.basic_init_fn(inst, build_name, "ancient_amulet_red") end
+GLOBAL.ancient_amulet_red_init_fn = function(inst, build_name) GLOBAL.basic_init_fn(inst, build_name,
+	"ancient_amulet_red") end
 GLOBAL.ancient_amulet_red_clear_fn = function(inst) GLOBAL.basic_clear_fn(inst, "ancient_amulet_red") end
 
 GLOBAL.TUNING.DSTU.MODROOT = MODROOT

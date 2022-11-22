@@ -34,6 +34,7 @@ local function onfinished_normal(inst)
         inst.deathtask = nil
         inst:RemoveComponent("inventoryitem")
         inst:RemoveComponent("mine")
+		inst:AddTag("fx")
         inst.persists = false
         inst.Physics:SetActive(false)
 
@@ -44,7 +45,7 @@ local function onfinished_normal(inst)
             inst.AnimState:PushAnimation("death", false)
         end
 
-        --print("prefab = " .. inst.prefab)
+        print("prefab = " .. inst.prefab)
 
         inst.SoundEmitter:PlaySound("dontstarve/common/destroy_stone")
         inst:DoTaskInTime(3, inst.Remove)
@@ -165,7 +166,7 @@ local function OnReset(inst)
     end
 
     if not inst.AnimState:IsCurrentAnimation("idle") then
-        --print("is the sound here?")
+        print("is the sound here?")
         inst.SoundEmitter:PlaySound("dontstarve/common/trap_teeth_reset")
         inst.AnimState:PlayAnimation("land")
         inst.AnimState:PushAnimation("idle", false)
@@ -190,7 +191,7 @@ end
 
 local function OnDropped(inst)
     inst.components.mine:Reset()
-    --print("or is the sound here?")
+    print("or is the sound here?")
     inst.SoundEmitter:PlaySound("dontstarve/common/trap_teeth_reset")
 end
 
@@ -526,7 +527,7 @@ end
 local function DoSpawnTrap(x, y, z)
     local spawned = false
     if VacantSpotNearby(x, y, z) then --For spawning behind certain prefabs
-        --print("boutaruncode")
+        print("boutaruncode")
         SpawnNearVacantSpot(x, y, z)
     end
     local xi = x + math.random(-7, 7)

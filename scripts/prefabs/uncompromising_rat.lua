@@ -104,7 +104,7 @@ local function OnAttacked(inst, data)
 		inst.components.combat:SetTarget(data.attacker)
 	end
 
-	if inst:HasTag("winky_rat") and data.attacker ~= nil and data.attacker:HasTag("ratwhisperer") then--meanie :(
+	if inst:HasTag("winky_rat") and data.attacker ~= nil and data.attacker:HasTag("ratwhisperer") then --meanie :(
 		inst:RemoveTag("winky_rat")
 		inst:RemoveTag("companion")
 		inst:RemoveTag("notraptrigger")
@@ -362,9 +362,10 @@ local function CalcSanityAura(inst, observer)
 end
 
 local function onnear(inst, target)
-    if inst:HasTag("winky_rat") and inst.components.follower.leader == nil and target:HasTag("ratwhisperer") and target.components.leader ~= nil then
+	if inst:HasTag("winky_rat") and inst.components.follower.leader == nil and target:HasTag("ratwhisperer") and
+		target.components.leader ~= nil then
 		target.components.leader:AddFollower(inst)
-    end
+	end
 end
 
 local function fn()
@@ -413,9 +414,9 @@ local function fn()
 	end
 
 	inst:AddComponent("playerprox")
-    inst.components.playerprox:SetDist(4, 6) --set specific values
-    inst.components.playerprox:SetOnPlayerNear(onnear)
-    inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
+	inst.components.playerprox:SetDist(4, 6) --set specific values
+	inst.components.playerprox:SetOnPlayerNear(onnear)
+	inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
 
 	--[[inst.Physics:ClearCollisionMask()
     inst.Physics:CollidesWith(COLLISION.GROUND)
@@ -1568,8 +1569,8 @@ end
 
 local function winkyburrowremove(inst)
 	inst:AddTag("NOCLICK")
-	inst.components.container:Close()
-	inst.components.container.canbeopened = false
+	inst.components.container_proxy:Close()
+	inst.components.container_proxy.canbeopened = false
 	inst.components.sizetweener:StartTween(0.05, 1, inst.Remove)
 end
 
@@ -1583,27 +1584,19 @@ local function OnStopChanneling(inst)
 end
 
 local function onopen(inst, data)
-	if TheWorld.components.winkyburrowinventory.trunk and
-		not TheWorld.components.winkyburrowinventory.trunk.components.container:IsOpen() then
-		TheWorld.components.winkyburrowinventory.trunk.Transform:SetPosition(data.doer.Transform:GetWorldPosition())
-		TheWorld.components.winkyburrowinventory.trunk.components.container:Open(data.doer)
-	else
-		inst.components.container:Close(data.doer)
-	end
-
 	inst.AnimState:PlayAnimation("dig")
 end
 
 local function onclose(inst, data)
-	if TheWorld.components.winkyburrowinventory.trunk then
-		TheWorld.components.winkyburrowinventory.trunk.components.container:Close(data.doer)
-	end
-
 	inst.AnimState:PlayAnimation("dig")
 end
 
 local function GetActivateVerb(inst)
 	return "OPEN"
+end
+
+local function AttachShadowContainer(inst)
+	inst.components.container_proxy:SetMaster(TheWorld:GetPocketDimensionContainer("winky"))
 end
 
 local function fn_winkyburrow()
@@ -1621,22 +1614,20 @@ local function fn_winkyburrow()
 
 	inst:AddTag("winky_storage")
 	inst:AddTag("herd")
-	inst:AddTag("trader")
+	--inst:AddTag("trader")
 	inst:AddTag("chest")
 	inst:AddTag("irreplaceable")
+	inst:AddTag("winky_burrow")
 
 	inst.MiniMapEntity:SetIcon("uncompromising_ratburrow.tex")
 
 	inst.Transform:SetScale(0.8, 0.8, 0.8)
 
+	inst:AddComponent("container_proxy")
+
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
-		inst.OnEntityReplicated = function(inst)
-			if inst.replica.container ~= nil then
-				inst.replica.container:WidgetSetup("winkyburrow_child")
-			end
-		end
 		return inst
 	end
 
@@ -1646,12 +1637,8 @@ local function fn_winkyburrow()
 	inst:AddComponent("inspectable")
 	inst:AddComponent("sizetweener")
 
-	inst:AddComponent("container")
-	inst.components.container:WidgetSetup("winkyburrow_child")
-	inst.components.container.onopenfn = onopen
-	inst.components.container.onclosefn = onclose
-	inst.components.container.skipclosesnd = true
-	inst.components.container.skipopensnd = true
+	inst.components.container_proxy:SetOnOpenFn(onopen)
+	inst.components.container_proxy:SetOnCloseFn(onclose)
 
 	inst:AddComponent("workable")
 	inst.components.workable:SetOnFinishCallback(WinkyBurrowDespawn)
@@ -1673,6 +1660,11 @@ local function fn_winkyburrow()
 	inst.winkyburrowremove = winkyburrowremove
 	inst.OnSave = onsave_winkyburrow
 	inst.OnLoad = onload_winkyburrow
+	inst.OnLoadPostPass = AttachShadowContainer
+
+	if not POPULATING then
+		AttachShadowContainer(inst)
+	end
 
 	inst:DoTaskInTime(60, WinkyBurrowDespawn)
 
@@ -1695,19 +1687,17 @@ local function fn_winkyhomeburrow()
 	inst:AddTag("winkyburrow")
 	inst:AddTag("winky_storage")
 	inst:AddTag("herd")
-	inst:AddTag("trader")
+	--inst:AddTag("trader")
 	inst:AddTag("chest")
+	inst:AddTag("winky_burrow")
 
 	inst.MiniMapEntity:SetIcon("uncompromising_winkyhomeburrow.tex")
+
+	inst:AddComponent("container_proxy")
 
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
-		inst.OnEntityReplicated = function(inst)
-			if inst.replica.container ~= nil then
-				inst.replica.container:WidgetSetup("winkyburrow_child")
-			end
-		end
 		return inst
 	end
 
@@ -1718,12 +1708,8 @@ local function fn_winkyhomeburrow()
 	inst:AddComponent("inspectable")
 	inst:AddComponent("sizetweener")
 
-	inst:AddComponent("container")
-	inst.components.container:WidgetSetup("winkyburrow_child")
-	inst.components.container.onopenfn = onopen
-	inst.components.container.onclosefn = onclose
-	inst.components.container.skipclosesnd = true
-	inst.components.container.skipopensnd = true
+	inst.components.container_proxy:SetOnOpenFn(onopen)
+	inst.components.container_proxy:SetOnCloseFn(onclose)
 
 	inst:AddComponent("workable")
 	inst.components.workable:SetOnFinishCallback(WinkyBurrowDespawn)
@@ -1736,39 +1722,11 @@ local function fn_winkyhomeburrow()
 	inst.winkyburrowremove = winkyburrowremove
 	inst.OnSave = onsave_winkyburrow
 	inst.OnLoad = onload_winkyburrow
+	inst.OnLoadPostPass = AttachShadowContainer
 
-	return inst
-end
-
-local function fn_winkyburrow_master()
-	local inst = CreateEntity()
-
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddNetwork()
-
-	inst:AddTag("chest")
-	inst:AddTag("irreplaceable")
-
-	inst.entity:SetCanSleep(false)
-
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		inst.OnEntityReplicated = function(inst)
-			if inst.replica.container ~= nil then
-				inst.replica.container:WidgetSetup("winkyburrow")
-			end
-		end
-		return inst
+	if not POPULATING then
+		AttachShadowContainer(inst)
 	end
-
-	inst:AddComponent("container")
-	inst.components.container:WidgetSetup("winkyburrow")
-	--inst.components.container.onopenfn = onopen
-	--inst.components.container.onclosefn = onclose
-	--inst.components.container.skipclosesnd = true
-	--inst.components.container.skipopensnd = true
 
 	return inst
 end
@@ -1875,7 +1833,8 @@ local function SmellProtection(v, container)
 	local flowers = #TheSim:FindEntities(x, y, z, 5, { "flower" })
 	local decoratedSisturn = FindEntity(v, 10,
 		function(inst) return (inst.prefab == "sisturn" and (inst.components.container and inst.components.container:IsFull())
-			) end)
+				)
+		end)
 	local potted_ = TheSim:FindEntities(x, y, z, 6, { "cavedweller" })
 	local potted = 0 -- both potted plants have the cavedweller tag for some reason I have no idea
 	local forget_me_lots = 0 -- The end-all-beat-all, forget-me-lots's ability to make those who smell or eat them forgetful is the perfect insulator for rats
@@ -2136,7 +2095,10 @@ local function TimeForACheckUp(inst, dev)
 	end
 	if TUNING.DSTU.ANNOUNCE_BASESTATUS then
 		TheNet:SystemMessage("True Ratscore = " .. inst.ratscore)
-		TheNet:SystemMessage("Timer = " .. (TheWorld.components.ratcheck:GetRatTimer() ~= nil and TheWorld.components.ratcheck:GetRatTimer() or "... not available? timer is 0 second") .. "s")
+		TheNet:SystemMessage("Timer = " ..
+			(
+			TheWorld.components.ratcheck:GetRatTimer() ~= nil and TheWorld.components.ratcheck:GetRatTimer() or
+				"... not available? timer is 0 second") .. "s")
 		TheNet:SystemMessage("-------------------------")
 	end
 	TheWorld:PushEvent("reducerattimer", { value = inst.ratscore })
@@ -2300,140 +2262,6 @@ local function fn_warning()
 	return inst
 end
 
---[[
-local function TimeForACheckUpDev(inst)
-	local x, y, z = inst.Transform:GetWorldPosition()
-
-	local ents = TheSim:FindEntities(x, 0, z, 40, {"_inventoryitem"})
-	print("THE RAT SNIFFS")
-	print("                o")
-	print("    =========B  *sniff* *sniff*")
-	print("---========vv")
-	print("   ========")
-	print("    V V    V V")
-	
-	inst.ratscore = -60
-	inst.itemscore = 0
-	inst.foodscore = 0
-	--print(#ents)
-	
-	if ents ~= nil then
-		for i, v in ipairs(ents) do
-			if not v:HasTag("_container") and not v:HasTag("smallcreature") then
-				if v.components.inventoryitem:IsHeld() then
-				
-				
-					if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" then
-						--print("lureplant is holding!")
-					else
-						if not v:HasTag("frozen") then
-							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
-						
-							if v:HasTag("stale") then
-								inst.foodscore = inst.foodscore + (5 * inst.multiplier)
-							elseif v:HasTag("spoiled") then
-								inst.foodscore = inst.foodscore + (10 * inst.multiplier)
-							elseif IsAVersionOfRot(v)  then
-								inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
-								inst.foodscore = inst.foodscore + (15 * inst.multiplier)
-							end
-						end
-					end
-				else
-					if not v:HasTag("frozen") then
-						inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
-						
-						if v:HasTag("fresh") then
-							inst.foodscore = inst.foodscore + (10 * inst.multiplier)
-						elseif v:HasTag("stale") then
-							inst.foodscore = inst.foodscore + (20 * inst.multiplier)
-						elseif v:HasTag("spoiled") then
-							inst.foodscore = inst.foodscore + (30 * inst.multiplier)
-						elseif IsAVersionOfRot(v) then
-							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
-							inst.foodscore = inst.foodscore + (35 * inst.multiplier)
-						end
-					end
-					
-					if v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool") then
-						inst.itemscore = inst.itemscore + 30 -- Oooh, wants wants! We steal!
-					elseif v:HasTag("molebait") then
-						inst.itemscore = inst.itemscore + 2 -- Oooh, wants wants! We steal!
-					end
-				end
-			end
-		end
-	end
-	
-	inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck:GetBurrows() or 0
-	inst.burrowbonus = 15 * inst.ratburrows
-	
-	
-	inst.ratscore = inst.ratscore + inst.itemscore + inst.foodscore + inst.burrowbonus
-	print("------------------------")
-	print("Itemscore = "..inst.itemscore)
-	print("Foodscore = "..inst.foodscore)
-	print("Burrowbonus = "..inst.burrowbonus)
-	print("Ratscore = "..inst.ratscore)
-	print("------------------------")
-	if TUNING.DSTU.ANNOUNCE_BASESTATUS then
-		TheNet:SystemMessage("-------------------------")
-		TheNet:SystemMessage("Itemscore = "..inst.itemscore)
-		TheNet:SystemMessage("Foodscore = "..inst.foodscore)
-		TheNet:SystemMessage("Burrowbonus = "..inst.burrowbonus)
-		TheNet:SystemMessage("Ratscore = "..inst.ratscore)
-		TheNet:SystemMessage("-------------------------")
-	end
-	if inst.ratscore > 240 then
-		inst.ratscore = 240
-	end
-	TheWorld:PushEvent("reducerattimer", {value = inst.ratscore})
-	
-	
-	inst.ratwarning = inst.ratscore / 48
-	
-	if inst.ratscore >= 60 then
-		--if math.random() > 0.85 then
-			if inst.ratwarning > 5 then
-				inst.ratwarning = 5
-			end
-			
-			for c = 1, (inst.ratwarning) do
-				inst:DoTaskInTime((c/5), function(inst)
-					local warning = SpawnPrefab("uncompromising_ratwarning")
-					warning.Transform:SetPosition(inst.Transform:GetWorldPosition())
-					--warning.entity:SetParent(b)
-					--b.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
-					--warning.entity:SetParent(TheFocalPoint.b.entity)
-				end)
-			end
-			
-			local players = TheSim:FindEntities(x, y, z, 40, {"player"},{"playerghost"})
-			for a, b in ipairs(players) do
-				if b.prefab == "wilson" then
-					--if math.random() > 0.5 then
-						if inst.burrowbonus > inst.itemscore and inst.burrowbonus > inst.foodscore then
-							b:DoTaskInTime(2+math.random(), function(b)
-								b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_BURROWS", "LEVEL_1"))
-							end)
-						elseif inst.itemscore > inst.burrowbonus and inst.itemscore > inst.foodscore then
-							b:DoTaskInTime(2+math.random(), function(b)
-								b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_ITEMS", "LEVEL_1"))
-							end)
-						elseif inst.foodscore > inst.burrowbonus and inst.foodscore > inst.itemscore then
-							b:DoTaskInTime(2+math.random(), function(b)
-								b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_FOOD", "LEVEL_1"))
-							end)
-						end
-					--end
-				end
-			end
-		--end
-	end
-	
-	inst:Remove()
-end]] --This does nothing different than the other one
-
 local function fn_devwarning()
 	local inst = CreateEntity()
 
@@ -2463,7 +2291,6 @@ return Prefab("uncompromising_rat", fn, assets, prefabs),
 	Prefab("uncompromising_ratburrow", fn_burrow, assets, prefabs),
 	Prefab("uncompromising_winkyburrow", fn_winkyburrow, assets, prefabs),
 	Prefab("uncompromising_winkyhomeburrow", fn_winkyhomeburrow, assets, prefabs),
-	Prefab("uncompromising_winkyburrow_master", fn_winkyburrow_master, assets, prefabs),
 	Prefab("uncompromising_scoutburrow", fn_scoutburrow, assets, prefabs),
 	Prefab("uncompromising_ratsniffer", fn_sniffer, assets, prefabs),
 	Prefab("ratdroppings", fn_droppings, assets),

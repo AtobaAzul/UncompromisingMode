@@ -46,11 +46,11 @@ env.AddComponentPostInit("combat", function(self)
                 damage = 600
             end
             return _GetAttacked(self, attacker, damage, weapon, stimuli, ...)
-        elseif self.inst ~= nil and (self.inst.prefab == "bernie_active" or self.inst.prefab == "bernie_big") and attacker ~= nil and attacker:HasTag("shadow") then
+        elseif self.inst ~= nil and (self.inst.prefab == "bernie_active" or self.inst.prefab == "bernie_big") and attacker ~= nil and attacker:HasTag("shadow") and TUNING.DSTU.BERNIE_BUFF then
             damage = damage * 0.2
             return _GetAttacked(self, attacker, damage, weapon, stimuli, ...)
-        elseif self.inst:HasTag("ratwhisperer") and attacker ~= nil and attacker.prefab == "catcoon"  then
-            damage = damage + 10
+        elseif self.inst:HasTag("ratwhisperer") and attacker ~= nil and attacker.prefab == "catcoon" and self.inst.components.health ~= nil then
+            self.inst.components.health:DoDelta(-10, false, attacker.prefab)
             return _GetAttacked(self, attacker, damage, weapon, stimuli, ...)
         else
             return _GetAttacked(self, attacker, damage, weapon, stimuli, ...)

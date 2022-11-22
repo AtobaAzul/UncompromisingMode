@@ -5,13 +5,9 @@ local assets=
 
 local prefabs = 
 {
-	"dragoon",
 	"rocks",
 	"groundpound_fx",
 	"groundpoundring_fx",
-	"bombsplash",
-	"lava_bombsplash",
-	"firerainshadow",
 }
 
 local loot = 

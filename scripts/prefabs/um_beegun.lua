@@ -244,6 +244,9 @@ local function fn(beetype)
         return inst
     end
 
+	inst:AddComponent("shadowlevel")
+	inst.components.shadowlevel:SetDefaultLevel(TUNING.AMULET_SHADOW_LEVEL)
+
     inst.beetype = beetype
 
     inst:AddComponent("inspectable")

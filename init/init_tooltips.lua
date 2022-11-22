@@ -39,6 +39,8 @@ STRINGS.UNCOMP_TOOLTIP = {
 	SUCCULENT_POTTED = "- Masks foul smells.",
 	ENDTABLE = "- Masks foul smells when decorated.",
 	MULTITOOL_AXE_PICKAXE = "- Creates shockwaves when chopping/mining.",
+	TELESTAFF = "- Can select its destination.\n- Increased uses.",
+	TELEBASE = "- No longer requires gems per teleport.",
 
 	--uncomp content
 	RAT_WHIP = "- Stronger when well fed.",
@@ -135,7 +137,7 @@ if TUNING.DSTU.HAYFEVER then
 	TOOLTIP.PERDFAN = "- Grants large amounts of Hayfever protection when blown."
 end
 
-if TUNING.DSTU.GOTOBED then
+if TUNING.DSTU.GOTOBED ~= false then
 	TOOLTIP.BEDROLL_STRAW = "- May restore maximum health."
 	PINETREETOOLTIP.BEDROLL_STRAW = "- May restore maximum health.\n"..PINETREETOOLTIP.BEDROLL_STRAW
 	

@@ -99,6 +99,14 @@ local function UpdateShadowShooter(inst)
 	end
 end
 
+local function Pop(inst)
+	local honey = SpawnPrefab("honeyexplosion")
+	honey.Transform:SetPosition(inst.Transform:GetWorldPosition())
+	honey.SoundEmitter:PlaySound("turnoftides/creatures/together/starfishtrap/trap")
+	inst.dohoney(inst)
+	inst:Remove()
+end
+
 env.AddStategraphPostInit("SGbeeguard", function(inst) --beeguard time
 
 	local _OldOnEnter
@@ -107,10 +115,12 @@ env.AddStategraphPostInit("SGbeeguard", function(inst) --beeguard time
 	end
 	inst.states["death"].onenter = function(inst) --This specifically is for the seeker bee, just to make them not play the death animation and instead stay stuck in the ground vvhen they die.
 		if inst.stabdied then
+			inst.AnimState:PlayAnimation("explode")
             StopBuzz(inst)
             inst.components.locomotor:StopMoving()
             inst.components.lootdropper:DropLoot(inst:GetPosition())
-            inst.SoundEmitter:PlaySound(inst.sounds.death)			
+            inst.SoundEmitter:PlaySound(inst.sounds.death)
+			inst:ListenForEvent("animover",Pop)
 		else
 			_OldOnEnter(inst)
 		end

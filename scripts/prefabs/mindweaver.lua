@@ -140,6 +140,8 @@ local function fn(Sim)
     inst.AnimState:SetBuild("mindweaver")
     inst.AnimState:PlayAnimation("appear")
 	inst.AnimState:SetFinalOffset(2)
+    inst.AnimState:SetMultColour(1, 1, 1, .5)
+	inst.AnimState:UsePointFiltering(true)
 	
 	inst.Transform:SetScale(1.6, 1.6, 1.6)
 

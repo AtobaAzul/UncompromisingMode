@@ -435,3 +435,5 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.UM_ORNAMENT_RAT = "Begone, vile thing!"
 	
 	DESCRIBE.TRINKET_WATHOM1 = "No wonder he's been having heart attacks."
+	
+	DESCRIBE.CODEX_MANTRA = "I'm so sorry Charlie."

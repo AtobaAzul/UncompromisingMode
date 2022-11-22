@@ -40,8 +40,8 @@ env.AddPrefabPostInit("forest", function(inst)
     end
 	
 	
-	inst:AddComponent("skullchestinventory")
-	inst:AddComponent("winkyburrowinventory")
+	--inst:AddComponent("skullchestinventory")
+	--inst:AddComponent("winkyburrowinventory")
 	inst:ListenForEvent("hasslerremoved", DeerclopsRemovedRPC, TheWorld)
 	inst:ListenForEvent("hasslerkilled", DeerclopsDeathRPC, TheWorld)
 	inst:ListenForEvent("storehassler", DeerclopsStoredRPC, TheWorld)

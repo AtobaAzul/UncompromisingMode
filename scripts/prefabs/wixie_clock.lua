@@ -25,15 +25,15 @@ local function InitializeClockPieces(inst)
 	inst.front.Transform:SetPosition(x, y - 0.1, z)
 	
 	inst.second.entity:SetParent(inst.entity)
-	inst.second.Transform:SetPosition(0,0 + .01,0)
+	inst.second.Transform:SetPosition(0,0,0)
 	inst.entity:AddFollower()
 	
 	inst.minute.entity:SetParent(inst.entity)
-	inst.minute.Transform:SetPosition(0,0 + .01,0)
+	inst.minute.Transform:SetPosition(0,0,0)
 	inst.entity:AddFollower()
 	
 	inst.hour.entity:SetParent(inst.entity)
-	inst.hour.Transform:SetPosition(0,0 + .01,0)
+	inst.hour.Transform:SetPosition(0,0,0)
 	inst.entity:AddFollower()
 	
 	--inst.seconddangle.entity:SetParent(inst.entity)
@@ -41,11 +41,11 @@ local function InitializeClockPieces(inst)
 	inst.seconddangle.myhand = inst.second
 	
 	--inst.minutedangle.entity:SetParent(inst.entity)
-	inst.minutedangle.Transform:SetPosition(x, y - 0.05, z)
+	inst.minutedangle.Transform:SetPosition(x, y - 0.06, z)
 	inst.minutedangle.myhand = inst.minute
 	
 	--inst.hourdangle.entity:SetParent(inst.entity)
-	inst.hourdangle.Transform:SetPosition(x, y - 0.05, z)
+	inst.hourdangle.Transform:SetPosition(x, y - 0.06, z)
 	inst.hourdangle.myhand = inst.hour
 end
 
@@ -223,9 +223,9 @@ local function frontfn()
     inst.entity:AddAnimState()
     inst.entity:AddNetwork()
 
-    inst.AnimState:SetBuild("wixie_dangley")    
-    inst.AnimState:SetBank("wixie_dangley")
-	inst.AnimState:PlayAnimation("overlay")
+    inst.AnimState:SetBuild("wixie_clock")    
+    inst.AnimState:SetBank("wixie_clock")
+	inst.AnimState:PlayAnimation("back")
 	
 	inst:AddTag("NOCLICK")
 	
