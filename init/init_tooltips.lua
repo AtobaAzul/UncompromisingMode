@@ -39,8 +39,6 @@ STRINGS.UNCOMP_TOOLTIP = {
 	SUCCULENT_POTTED = "- Masks foul smells.",
 	ENDTABLE = "- Masks foul smells when decorated.",
 	MULTITOOL_AXE_PICKAXE = "- Creates shockwaves when chopping/mining.",
-	TELESTAFF = "- Can select its destination.\n- Increased uses.",
-	TELEBASE = "- No longer requires gems per teleport.",
 
 	--uncomp content
 	RAT_WHIP = "- Stronger when well fed.",
@@ -79,6 +77,11 @@ STRINGS.PINETREE_TOOLTIP = {
 
 local TOOLTIP = STRINGS.UNCOMP_TOOLTIP
 local PINETREETOOLTIP = STRINGS.PINETREE_TOOLTIP
+
+if GetModConfigData("telestaff_rework") then
+	TOOLTIP.TELESTAFF = "- Can select its destination.\n- Increased uses."
+	TOOLTIP.TELEBASE = "- No longer requires gems per teleport."
+end
 
 if GetModConfigData("beebox_nerf") then
 	TOOLTIP.BEEBOX = "- Reduced yield per stage.\n- Reduced maximum active bees."

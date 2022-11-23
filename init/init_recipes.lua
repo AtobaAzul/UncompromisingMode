@@ -131,41 +131,10 @@ if TUNING.DSTU.WOLFGANG_HUNGERMIGHTY then
         Ingredient("twigs", 2) }
 end
 
-AllRecipes["telebase"].ingredients = { Ingredient("purplegem", 3), Ingredient("livinglog", 4), Ingredient("nightmarefuel", 4) }
---[[
---boats forces things on them to unload with them.
---which caused telebases to unload.    
-AllRecipes["telebase"].testfn = function(pt, rot)
-    --See telebase.lua
-    local telebase_parts =
-    {
-        { x = -1.6, z = -1.6 },
-        { x = 2.7, z = -0.8 },
-        { x = -0.8, z = 2.7 },
-    }
-    rot = (45 - rot) * GLOBAL.DEGREES
-    local sin_rot = math.sin(rot)
-    local cos_rot = math.cos(rot)
-    local boat = GLOBAL.TheWorld.Map:GetPlatformAtPoint(pt.x * cos_rot, pt.z * sin_rot)
-    if boat ~= nil then
-        for i, v in pairs(telebase_parts) do
-            if not GLOBAL.TheWorld.Map:GetPlatformAtPoint(pt.x + v.x * cos_rot - v.z * sin_rot,
-                pt.z + v.z * cos_rot + v.x * sin_rot) ==
-                GLOBAL.TheWorld.Map:GetPlatformAtPoint(pt.x * cos_rot, pt.z * sin_rot) then
-                return false
-            end
-        end
-    else
-        for i, v in ipairs(telebase_parts) do
-            if not
-                GLOBAL.TheWorld.Map:IsPassableAtPoint(pt.x + v.x * cos_rot - v.z * sin_rot, pt.y,
-                    pt.z + v.z * cos_rot + v.x * sin_rot) then
-                return false
-            end
-        end
-    end
-    return true
-end]]
+if GetModConfigData("telestaff_rework") then
+    AllRecipes["telebase"].ingredients = { Ingredient("purplegem", 3), Ingredient("livinglog", 4),
+        Ingredient("nightmarefuel", 4) }
+end
 
 AddRecipe2(
     "ghostlyelixir_fastregen",
@@ -816,14 +785,14 @@ STRINGS.RECIPE_DESC.SLUDGE_CORK = "Impractically large for a boat."
 STRINGS.RECIPE_DESC.CANNONBALL_SLUDGE_ITEM = "Fire in the hole!"
 STRINGS.RECIPE_DESC.BRINE_BALM = "Rub salt in the wounds."
 STRINGS.RECIPE_DESC.CRITTER_FIGGY_BUILDER = "They like to put holes in things."
-STRINGS.RECIPE_DESC.BOAT_BUMBER_SLUDGE_KIT = "Sticky protection."
-STRINGS.RECIPE_DESC.BOAT_BUMPER_COPPER_KIT = "Sturdy protection."
 STRINGS.RECIPE_DESC.STEERINGWHEEL_COPPER_ITEM = "Steer more than your masts."
 STRINGS.RECIPE_DESC.TRINKET_6 = "A key ingredient for modern marvels."
 STRINGS.RECIPE_DESC.PORTABLEBOAT_ITEM = "Pack up and go!"
 STRINGS.RECIPE_DESC.MASTUPGRADE_WINDTURBINE_ITEM = "Full speed ahead!"
 STRINGS.RECIPE_DESC.CODEX_MANTRA = "Repeat after me."
-
+if GetModConfigData("telestaff_rework") then
+    STRINGS.RECIPE_DESC.TELEBASE = "Now with 100% less gold!"
+end
 --sailing rebalance strings
 STRINGS.RECIPE_DESC.MOONSTORM_STATIC_ITEM = "The power of the moon, contained!"
 STRINGS.RECIPE_DESC.ALTERGUARDIANHATSHARD = "Harness the moonlight."

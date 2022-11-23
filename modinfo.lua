@@ -344,6 +344,7 @@ configuration_options =
 -----------------------------
 	SkipSpace(),
 	Header("Items and Structures"),
+	BinaryConfig("telestaff_rework", "Telelocator Rework", "You can now select Focus you want to teleport to. Focuses now cost 3 Purple gems instead of gold.\nStaff's uses doubled.", true),
 	BinaryConfig("no4crafts", "No 4-Ingredient Recipes", "Changes all 4-ingredient recipes to use 3 instead.", false),
 	BinaryConfig("scaledchestbuff", "Scaled Chest Buff", "Scaled chest is not worth the resources required. Enabling this buffs it to 25 slots. Toggling with scaled chests in existing world may cause crash.", true),
 	BinaryConfig("scalemailbuff", "Scalemail Buff", "Scalemail now spawns 3 Dimvaes to help you in combat", true),
