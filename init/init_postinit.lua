@@ -45,7 +45,7 @@ local prefab_post = {
 	"shieldofcthulu",
 	"clockworks",
 	"flingobalance",
-	"chester",
+	--"chester",
 	"mushlight",
 	--"toadstool_cap", Moved to init_uncompromising_mod.lua
 	"amulet",
