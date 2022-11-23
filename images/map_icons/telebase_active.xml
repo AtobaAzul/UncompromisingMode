@@ -1,1 +1,1 @@
-<Atlas><Texture filename="telebase_active.tex" /><Elements><Element name="winky.tex" u1="0.00390625" u2="0.55859375" v1="0.44140625" v2="0.99609375" /></Elements></Atlas>
+<Atlas><Texture filename="telebase_active.tex" /><Elements><Element name="telebase_active.tex" u1="0.00390625" u2="0.55859375" v1="0.44140625" v2="0.99609375" /></Elements></Atlas>
