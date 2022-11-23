@@ -180,6 +180,8 @@ local inventoryitems =
 	"zaspberry",
 	"zaspberryparfait",
 
+	"um_beegun",
+	"um_beegun_cherry",
 	"bulletbee",
 	"cherrybulletbee",
 	"sludge",
@@ -1190,6 +1192,9 @@ Assets = {
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/um_beegun.xml"),
 	Asset("ATLAS", "images/inventoryimages/um_beegun.xml"),
 	Asset("IMAGE", "images/inventoryimages/um_beegun.tex"),
+	
+	Asset("ATLAS", "images/inventoryimages/um_beegun_cherry.xml"),
+	Asset("IMAGE", "images/inventoryimages/um_beegun_cherry.tex"),
 
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/sludge.xml"),
 	Asset("ATLAS", "images/inventoryimages/sludge.xml"),
@@ -1594,6 +1599,7 @@ Assets = {
 	Asset("ANIM", "anim/swap_driftwood_fishingrod.zip"),
 
 	Asset("ANIM", "anim/swap_um_beegun.zip"),
+	Asset("ANIM", "anim/swap_um_beegun_cherry.zip"),
 
 	Asset("ANIM", "anim/hat_gore_horn_swap_on.zip"),
 	Asset("ANIM", "anim/hat_gore_horn_swap_off.zip"),

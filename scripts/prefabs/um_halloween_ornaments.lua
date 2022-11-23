@@ -15,7 +15,7 @@ local function fncommon(name, symboloverride)
 
 	inst.AnimState:SetBank("um_halloween_ornaments")
 	inst.AnimState:SetBuild("um_halloween_ornaments")
-	inst.AnimState:PlayAnimation(name)
+	inst.AnimState:PlayAnimation(symboloverride)
 
 	inst:AddTag("halloween_ornament")
 	inst:AddTag("molebait")

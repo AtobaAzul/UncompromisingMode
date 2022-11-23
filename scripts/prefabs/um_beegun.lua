@@ -29,7 +29,7 @@ local function OnEquip(inst, owner)
             end
         end)
     else
-        owner.AnimState:OverrideSymbol("swap_object", "swap_um_beegun", "swap_um_beegun")
+        owner.AnimState:OverrideSymbol("swap_object", inst.swap, inst.swap)
         owner.AnimState:Show("ARM_carry")
         owner.AnimState:Hide("ARM_normal")
 
@@ -204,7 +204,7 @@ local function can_cast_fn(doer, target, pos)
     end
 end
 
-local function fn(beetype)
+local function fn(anim, name, swap, beetype)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -216,7 +216,7 @@ local function fn(beetype)
 
     inst.AnimState:SetBank("um_beegun")
     inst.AnimState:SetBuild("um_beegun")
-    inst.AnimState:PlayAnimation("idle")
+    inst.AnimState:PlayAnimation(anim)
 
     inst:AddTag("rangedweapon")
     inst:AddTag("beegun")
@@ -248,11 +248,12 @@ local function fn(beetype)
 	inst.components.shadowlevel:SetDefaultLevel(TUNING.AMULET_SHADOW_LEVEL)
 
     inst.beetype = beetype
+	inst.swap = swap
 
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
-    inst.components.inventoryitem.atlasname = "images/inventoryimages/um_beegun.xml"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/"..name..".xml"
 
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(OnEquip)
@@ -287,13 +288,13 @@ local function fn(beetype)
 end
 
 local function um_gun()
-    local inst = fn("bulletbee")
+    local inst = fn("idle", "um_beegun", "swap_um_beegun", "bulletbee")
 
     return inst
 end
 
 local function cherry_gun()
-    local inst = fn("cherrybulletbee")
+    local inst = fn("cherryidle", "um_beegun_cherry", "swap_um_beegun_cherry", "cherrybulletbee")
 
     return inst
 end

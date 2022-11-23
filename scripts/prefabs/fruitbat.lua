@@ -141,7 +141,7 @@ local function KeepTarget(inst, target)
 end
 
 local function OnAttackOther(inst, data)
-	if data.target and data.target.components.health and not data.target.components.health:IsDead() then
+	if data.target and data.target.components.health and not data.target.components.health:IsDead() and data.target:HasTag("aphid") then
 		inst.food_baby = data.target
 		if inst.food_baby.brain then
 			inst.food_baby.brain:Stop()

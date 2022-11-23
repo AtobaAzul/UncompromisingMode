@@ -111,7 +111,8 @@ local function MakeBeebox(name, common_postinit)
 		inst.AnimState:SetBank("pitcher")
 		inst.AnimState:SetBuild("pitcher")
 		inst.AnimState:PushAnimation("swinglong")
-		inst:AddTag("CLASSIFIED")
+		--inst:AddTag("CLASSIFIED")
+		inst:AddTag("pitcherplant")
       
   
         if common_postinit ~= nil then
@@ -149,7 +150,7 @@ local function MakeBeebox(name, common_postinit)
 		inst.count = 0
 		inst.OnSave = onsave
 		inst.OnLoad = onload  
-		inst:DoTaskInTime(0,function(inst) inst:Remove() end)
+		--inst:DoTaskInTime(0,function(inst) inst:Remove() end)
         return inst
     end
 

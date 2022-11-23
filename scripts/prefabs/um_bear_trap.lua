@@ -34,7 +34,10 @@ local function onfinished_normal(inst)
         inst.deathtask = nil
         inst:RemoveComponent("inventoryitem")
         inst:RemoveComponent("mine")
-		inst:AddTag("fx")
+        inst:RemoveComponent("combat")
+		
+		inst:AddTag("NOCLICK")
+		
         inst.persists = false
         inst.Physics:SetActive(false)
 
@@ -158,7 +161,7 @@ local function OnReset(inst)
     inst.Snapped = false
 
     inst.Physics:ClearCollisionMask()
-    inst:SetPhysicsRadiusOverride(3)
+	--inst:SetPhysicsRadiusOverride(3)
     inst.Physics:CollidesWith(COLLISION.WORLD)
 
     if inst.components.inventoryitem ~= nil then

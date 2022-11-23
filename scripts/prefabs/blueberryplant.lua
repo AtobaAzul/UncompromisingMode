@@ -303,6 +303,16 @@ local function blueberryplant()
     if not TheWorld.ismastersim then
         return inst
     end
+	
+	inst:DoTaskInTime(math.random() * (10 * math.random()), function(inst)
+		local x, y, z = inst.Transform:GetWorldPosition()
+		
+		local pitchers = TheSim:FindEntities(x, y, z, 50, { "pitcherplant" })
+		
+		if pitchers == nil or #pitchers < 1 then
+			SpawnPrefab("pitcherplant").Transform:SetPosition(x, y, z)
+		end
+	end)
 
     inst:AddComponent("inspectable")
     inst.components.inspectable.nameoverride = "BLUEBERRYPLANT"
