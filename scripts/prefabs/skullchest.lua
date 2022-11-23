@@ -15,14 +15,14 @@ local POCKETDIMENSIONCONTAINER_DEFS = {
 		name = "skull",
 		prefab = "skullchest",
 		ui = "anim/ui_portal_shadow_3x4.zip",
-		widgetname = "shadowchester",
+		widgetname = "skullchest",
 	},
-	{--but this one doesn't??
+	--[[{--but this one doesn't??
 		name = "winky",
 		prefab = "uncompromising_winkyburrow_master",
 		ui = "anim/ui_portal_shadow_3x4.zip",
-		widgetname = "shadowchester",
-	},
+		widgetname = "winkyburrow",
+	},]]
 }
 
 local function OnOpen(inst)

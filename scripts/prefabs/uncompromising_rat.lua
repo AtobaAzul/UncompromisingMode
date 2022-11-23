@@ -1604,9 +1604,31 @@ local POCKETDIMENSIONCONTAINER_DEFS = {
 		name = "winky",
 		prefab = "uncompromising_winkyburrow_master",
 		ui = "anim/ui_portal_shadow_3x4.zip",
-		widgetname = "shadowchester",
+		widgetname = "winkyburrow",
 	},
 }
+
+local function OnAnyOpenStorage(inst, data)
+	if inst.components.container.opencount > 1 then
+		--multiple users, make it global to all players now
+		inst.Network:SetClassifiedTarget(nil)
+	else
+		--just one user, only network to that player
+		inst.Network:SetClassifiedTarget(data.doer)
+	end
+end
+
+local function OnAnyCloseStorage(inst, data)
+	local opencount = inst.components.container.opencount
+	if opencount == 0 then
+		--all closed, disable networking
+		inst.Network:SetClassifiedTarget(inst)
+	elseif opencount == 1 then
+		--only one user remaining, only network to that player
+		local opener = next(inst.components.container.openlist)
+		inst.Network:SetClassifiedTarget(opener)
+	end
+end
 
 local function fn_winkyburrow()
 	local inst = CreateEntity()

@@ -322,12 +322,16 @@ for y = 0, 3 do
     table.insert(modparams.frigginbirdpail.widget.slotpos, Vector3(-1, -75 * y + 110, 0))	
 end
 
+local function NoIIreplaceables(container, item, slot)
+    return not item:HasTag("irreplaceable")
+end
 
-
-modparams.skullchest = containers.params.shadowchester
-modparams.winkyburrow = containers.params.shadowchester
-modparams.um_devcapture = containers.params.shadowchester
-
+modparams.skullchest = GLOBAL.deepcopy(containers.params.shadowchester)
+modparams.skullchest.itemtestfn = NoIIreplaceables
+modparams.winkyburrow = GLOBAL.deepcopy(containers.params.shadowchester)
+modparams.winkyburrow.itemtestfn = NoIIreplaceables
+modparams.um_devcapture = GLOBAL.deepcopy(containers.params.shadowchester)
+modparams.um_devcapture.itemtestfn = NoIIreplaceables
 
 modparams.sludge_sack = containers.params.piggyback
 
