@@ -13,6 +13,12 @@ local UM_POCKETDIMS = {
         ui = "anim/ui_portal_shadow_3x4.zip",
         widgetname = "winkyburrow",
     },
+    { --but this one doesn't??
+        name = "winky",
+        prefab = "uncompromising_winkyburrow_master",
+        ui = "anim/ui_portal_shadow_3x4.zip",
+        widgetname = "uncompromising_winkyburrow_master",
+    },
 }
 
 for k,v in pairs(UM_POCKETDIMS) do

@@ -331,8 +331,8 @@ end
 
 modparams.skullchest = GLOBAL.deepcopy(containers.params.shadowchester)
 modparams.skullchest.itemtestfn = NoIreplaceables
-modparams.winkyburrow = GLOBAL.deepcopy(containers.params.shadowchester)
-modparams.winkyburrow.itemtestfn = NoIreplaceables
+modparams.uncompromising_winkyburrow_master = GLOBAL.deepcopy(containers.params.shadowchester)
+modparams.uncompromising_winkyburrow_master.itemtestfn = NoIreplaceables
 modparams.um_devcapture = GLOBAL.deepcopy(containers.params.shadowchester)
 modparams.um_devcapture.itemtestfn = NoIreplaceables
 
