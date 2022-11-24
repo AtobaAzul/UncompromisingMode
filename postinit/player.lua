@@ -151,7 +151,7 @@ env.AddPlayerPostInit(function(inst)
         for k, v in pairs(inst.components.leader.followers) do
             if (
                 k:HasTag("spider") or k:HasTag("pig") or k:HasTag("merm") or k:HasTag("raidrat") or k:HasTag("winky_rat")
-                    or k.prefab == "eyeofterror_mini_ally") or k.prefab == "smallbird" or k.prefab == "teenbird" then --exluding things that can't/shouldn't/already do
+                    or k.prefab == "eyeofterror_mini_ally") or k.prefab == "smallbird" or k.prefab == "teenbird" or k:HasTag("shadowminion") then --exluding things that can't/shouldn't/already do
                 local savedata = k:GetSaveRecord()
                 table.insert(inst.um_all_followers, savedata)
                 -- remove followers
