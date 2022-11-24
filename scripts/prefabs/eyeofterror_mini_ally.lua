@@ -22,14 +22,41 @@ local function KeepTarget(inst, target)
 end
 
 local function OnAttacked(inst, data)
-	if data and data.attacker then
-		inst.components.combat:SetTarget(data.attacker)
-	end
+    if data and data.attacker then
+        inst.components.combat:SetTarget(data.attacker)
+    end
 end
 
 local function onnear(inst, target)
     if inst.components.follower.leader == nil then
-		target.components.leader:AddFollower(inst)
+        target.components.leader:AddFollower(inst)
+    end
+end
+local easing = require("easing")
+
+local function OnDeath(inst, cause, afflicter, ...)
+    print(inst, cause, afflicter, ...)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local projectile = SpawnPrefab("eyeofterror_mini_projectile_ally")
+    projectile.Transform:SetPosition(x, y, z)
+    projectile.is_revive = true
+    local pt = inst:GetPosition()
+    pt.x = pt.x + math.random(-3, 3)
+    pt.z = pt.z + math.random(-3, 3)
+    local speed = easing.linear(3, 7, 3, 10)
+    projectile:AddTag("canthit")
+    projectile:AddTag("friendly")
+    --projectile.components.wateryprotection.addwetness = TUNING.WATERBALLOON_ADD_WETNESS/2
+    projectile.components.complexprojectile:SetHorizontalSpeed(speed + math.random(4, 9))
+    if TheWorld.Map:IsAboveGroundAtPoint(pt.x, 0, pt.z) or TheWorld.Map:GetPlatformAtPoint(pt.x, pt.z) ~= nil then
+        inst.count = 0
+        projectile.components.complexprojectile:Launch(pt, inst, inst)
+    else
+        if inst.count < 10 then
+            inst.count = inst.count + 1
+            inst:DoTaskInTime(0, OnDeath)
+        end
+        projectile:Remove()
     end
 end
 
@@ -67,7 +94,7 @@ local function commonfn(build, tags)
     if not TheWorld.ismastersim then
         return inst
     end
-	inst.Transform:SetScale(1.2,1.2,1.2)
+    inst.Transform:SetScale(1.2, 1.2, 1.2)
     ---------------------
     inst:AddComponent("locomotor")
     inst.components.locomotor.walkspeed = 4
@@ -81,11 +108,13 @@ local function commonfn(build, tags)
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(600)
 
+    inst:ListenForEvent("death", OnDeath)
+
     ------------------
     inst:AddComponent("combat")
     inst.components.combat:SetRange(TUNING.EYEOFTERROR_MINI_ATTACK_RANGE, TUNING.EYEOFTERROR_MINI_HIT_RANGE)
     inst.components.combat.hiteffectsymbol = "glomling_body"
-    inst.components.combat:SetDefaultDamage(35)
+    inst.components.combat:SetDefaultDamage(50)
     inst.components.combat:SetAttackPeriod(TUNING.EYEOFTERROR_MINI_ATTACK_PERIOD)
     --inst.components.combat:SetRetargetFunction(2, Retarget)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
@@ -96,7 +125,7 @@ local function commonfn(build, tags)
 
     ------------------
     inst:AddComponent("knownlocations")
-	inst:AddComponent("follower")
+    inst:AddComponent("follower")
 
     ------------------
     inst:AddComponent("inspectable")
@@ -106,12 +135,6 @@ local function commonfn(build, tags)
     inst.components.playerprox:SetDist(4, 6) --set specific values
     inst.components.playerprox:SetOnPlayerNear(onnear)
     inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)
-
-    ------------------
-    inst:AddComponent("eater")
-    inst.components.eater:SetDiet(DIET, DIET)
-    inst.components.eater:SetCanEatHorrible()
-    inst.components.eater:SetStrongStomach(true)
 
     ------------------
     MakeSmallBurnableCharacter(inst, "glomling_body")

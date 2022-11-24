@@ -46,7 +46,7 @@ function EyeOfTerrorMini_AllyBrain:OnStart()
                     end, "OnFire", Panic(self.inst)
                 ),
                 ChaseAndAttack(self.inst),
-                DoAction(self.inst, EatFoodAction, "Find And Eat Food"),
+                --DoAction(self.inst, EatFoodAction, "Find And Eat Food"),--no eat!!!
 				Follow(self.inst, GetLeader, MIN_FOLLOW_LEADER, TARGET_FOLLOW_LEADER, MAX_FOLLOW_LEADER),
             }, 0.5)
         ),
