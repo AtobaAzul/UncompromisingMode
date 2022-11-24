@@ -21,7 +21,10 @@ function CheckMush(container, item, slot)
 end
 
 function CheckWardrobeItem(container, item, slot)
-    return item:HasTag("_equippable") or item:HasTag("reloaditem_ammo") or item:HasTag("tool") or item:HasTag("weapon") or(item.prefab == "razor" or item.prefab == "beef_bell") or item:HasTag("heatrock") or (item:HasTag("pocketwatch") or item.prefab == "pocketwatch_dismantler") or item:HasTag("toolbox_item") or item.prefab == "sewing_tape" or item.prefab == "sewing_kit"
+    return item:HasTag("_equippable") or item:HasTag("reloaditem_ammo") or item:HasTag("tool") or item:HasTag("weapon")
+        or (item.prefab == "razor" or item.prefab == "beef_bell") or item:HasTag("heatrock") or
+        (item:HasTag("pocketwatch") or item.prefab == "pocketwatch_dismantler") or item:HasTag("toolbox_item") or
+        item.prefab == "sewing_tape" or item.prefab == "sewing_kit" or item:HasTag("fan") or string.match(item.prefab, "wx78module_") ~= nil
 end
 
 function CheckEquipItem(container, item, slot)
@@ -60,24 +63,24 @@ modparams.air_conditioner =
     {
         slotpos =
         {
-            Vector3(-37.5, 32 + 4, 0), 
+            Vector3(-37.5, 32 + 4, 0),
             Vector3(37.5, 32 + 4, 0),
-            Vector3(-37.5, -(32 + 4), 0), 
+            Vector3(-37.5, -(32 + 4), 0),
             Vector3(37.5, -(32 + 4), 0),
         },
         slotbg =
         {
-			{ image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
-			{ image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
-			{ image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
-			{ image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
+            { image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
+            { image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
+            { image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
+            { image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
         },
         animbank = "ui_chest_2x2",
         animbuild = "ui_chest_2x2",
         pos = Vector3(200, 0, 0),
         side_align_tip = 120,
     },
-	itemtestfn = CheckMush,
+    itemtestfn = CheckMush,
     acceptsstacks = false,
     type = "cooker",
 }
@@ -88,24 +91,24 @@ modparams.itemscrapper =
     {
         slotpos =
         {
-            Vector3(-37.5, 32 + 4, 0), 
+            Vector3(-37.5, 32 + 4, 0),
             Vector3(37.5, 32 + 4, 0),
-            Vector3(-37.5, -(32 + 4), 0), 
+            Vector3(-37.5, -(32 + 4), 0),
             Vector3(37.5, -(32 + 4), 0),
         },
         slotbg =
         {
-			{ image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
-			{ image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
-			{ image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
-			{ image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
+            { image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
+            { image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
+            { image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
+            { image = "mushroom_slot.tex", atlas = "images/mushroom_slot.xml" },
         },
         animbank = "ui_chest_2x2",
         animbuild = "ui_chest_2x2",
         pos = Vector3(200, 0, 0),
         side_align_tip = 120,
     },
-	itemtestfn = CheckEquipItem,
+    itemtestfn = CheckEquipItem,
     acceptsstacks = false,
     type = "cooker",
 }
@@ -167,16 +170,16 @@ modparams.crabclaw =
         },]]
         slotbg =
         {
-			{ image = "gem_slot.tex", atlas = "images/gem_slot.xml" },
-			{ image = "gem_slot.tex", atlas = "images/gem_slot.xml" },
-			{ image = "gem_slot.tex", atlas = "images/gem_slot.xml" },
-			{ image = "gem_slot.tex", atlas = "images/gem_slot.xml" },
+            { image = "gem_slot.tex", atlas = "images/gem_slot.xml" },
+            { image = "gem_slot.tex", atlas = "images/gem_slot.xml" },
+            { image = "gem_slot.tex", atlas = "images/gem_slot.xml" },
+            { image = "gem_slot.tex", atlas = "images/gem_slot.xml" },
         },
         animbank = "ui_lamp_1x4",
         animbuild = "ui_lamp_1x4",
         pos = Vector3(0, 125, 0),
     },
-	itemtestfn = CheckGem,
+    itemtestfn = CheckGem,
     acceptsstacks = false,
     type = "hand_inv",
 }
@@ -187,13 +190,13 @@ modparams.um_blowgun =
     {
         slotpos =
         {
-            Vector3(0,   32 + 4,  0),
+            Vector3(0, 32 + 4, 0),
         },
         animbank = "ui_cookpot_1x2",
         animbuild = "ui_cookpot_1x2",
         pos = Vector3(0, 15, 0),
     },
-	itemtestfn = CheckDart,
+    itemtestfn = CheckDart,
     acceptsstacks = true,
     type = "hand_inv",
 }
@@ -204,17 +207,17 @@ modparams.um_beegun =
     {
         slotpos =
         {
-            Vector3(0,   32 + 4,  0),
+            Vector3(0, 32 + 4, 0),
         },
         slotbg =
         {
-			{ image = "bee_slot.tex", atlas = "images/bee_slot.xml" },
+            { image = "bee_slot.tex", atlas = "images/bee_slot.xml" },
         },
         animbank = "ui_cookpot_1x2",
         animbuild = "ui_cookpot_1x2",
         pos = Vector3(0, 15, 0),
     },
-	itemtestfn = CheckBee,
+    itemtestfn = CheckBee,
     usespecificslotsforitems = true,
     acceptsstacks = true,
     type = "hand_inv",
@@ -230,16 +233,16 @@ modparams.frigginbirdpail =
         },
         slotbg =
         {
-			{ image = "fish_slot.tex", atlas = "images/fish_slot.xml" },
-			{ image = "fish_slot.tex", atlas = "images/fish_slot.xml" },
-			{ image = "fish_slot.tex", atlas = "images/fish_slot.xml" },
-			{ image = "fish_slot.tex", atlas = "images/fish_slot.xml" },
+            { image = "fish_slot.tex", atlas = "images/fish_slot.xml" },
+            { image = "fish_slot.tex", atlas = "images/fish_slot.xml" },
+            { image = "fish_slot.tex", atlas = "images/fish_slot.xml" },
+            { image = "fish_slot.tex", atlas = "images/fish_slot.xml" },
         },
         animbank = "ui_lamp_1x4",
         animbuild = "ui_lamp_1x4",
         pos = Vector3(0, 125, 0),
     },
-	itemtestfn = CheckFish,
+    itemtestfn = CheckFish,
     --acceptsstacks = true,
     type = "hand_inv",
 }
@@ -250,7 +253,7 @@ modparams.wingsuit =
     {
         slotpos =
         {
-            Vector3(0,   32 + 4,  0),
+            Vector3(0, 32 + 4, 0),
         },
         slotbg =
         {
@@ -260,7 +263,7 @@ modparams.wingsuit =
         animbuild = "ui_cookpot_1x2",
         pos = Vector3(53, 15, 0),
     },
-	itemtestfn = CheckFeather,
+    itemtestfn = CheckFeather,
     usespecificslotsforitems = true,
     type = "hand_inv",
 }
@@ -271,7 +274,7 @@ modparams.corvushat =
     {
         slotpos =
         {
-            Vector3(0,   32 + 4,  0),
+            Vector3(0, 32 + 4, 0),
         },
         slotbg =
         {
@@ -282,7 +285,7 @@ modparams.corvushat =
         pos = Vector3(106, 15, 0),
     },
     acceptsstacks = false,
-	itemtestfn = CheckFeather,
+    itemtestfn = CheckFeather,
     usespecificslotsforitems = true,
     type = "hand_inv",
 }
@@ -294,7 +297,7 @@ modparams.winkyburrow_child =
         slotpos = {},
         slotbg = {},
     },
-	itemtestfn = CheckNOTHING,
+    itemtestfn = CheckNOTHING,
     type = "special for shared inventory",
 }
 
@@ -305,21 +308,21 @@ modparams.skullchest_child =
         slotpos = {},
         slotbg = {},
     },
-	itemtestfn = CheckNOTHING,
+    itemtestfn = CheckNOTHING,
     type = "special for shared inventory",
 }
 
 for y = 0, 3 do
-    table.insert(modparams.puffvest.widget.slotpos, Vector3(-1, -75 * y + 110, 0))	
+    table.insert(modparams.puffvest.widget.slotpos, Vector3(-1, -75 * y + 110, 0))
 end
 for y = 0, 3 do
-    table.insert(modparams.reflvest.widget.slotpos, Vector3(-1, -75 * y + 110, 0))	
+    table.insert(modparams.reflvest.widget.slotpos, Vector3(-1, -75 * y + 110, 0))
 end
 for y = 0, 3 do
-    table.insert(modparams.crabclaw.widget.slotpos, Vector3(-1, -75 * y + 110, 0))	
+    table.insert(modparams.crabclaw.widget.slotpos, Vector3(-1, -75 * y + 110, 0))
 end
 for y = 0, 3 do
-    table.insert(modparams.frigginbirdpail.widget.slotpos, Vector3(-1, -75 * y + 110, 0))	
+    table.insert(modparams.frigginbirdpail.widget.slotpos, Vector3(-1, -75 * y + 110, 0))
 end
 
 local function NoIreplaceables(container, item, slot)
@@ -338,19 +341,19 @@ modparams.sludge_sack = containers.params.piggyback
 local old_wsetup = containers.widgetsetup
 
 function containers.widgetsetup(container, prefab, data, ...)
-    local t = modparams[prefab or container.inst.prefab--[[ or inst.widgetsetup]]]
+    local t = modparams[prefab or container.inst.prefab--[[ or inst.widgetsetup]] ]
     if t ~= nil then
-	--if modparams[prefab or container.inst.prefab] and not data then
+        --if modparams[prefab or container.inst.prefab] and not data then
         for k, v in pairs(t) do
             container[k] = v
         end
         container:SetNumSlots(container.widget.slotpos ~= nil and #container.widget.slotpos or 0)
-		--data = modparams[prefab or container.inst.prefab]
-		--return old_wsetup(container, prefab, data, ...)
-	else
-		return old_wsetup(container, prefab, data, ...)
+        --data = modparams[prefab or container.inst.prefab]
+        --return old_wsetup(container, prefab, data, ...)
+    else
+        return old_wsetup(container, prefab, data, ...)
         --containers_widgetsetup_base(container, prefab, data, ...)
-	end
+    end
 end
 
 if containers.MAXITEMSLOTS == nil or containers.MAXITEMSLOTS < 25 then
@@ -367,7 +370,7 @@ if GetModConfigData("scaledchestbuff") then
             animbuild = nil,
             bgatlas = "images/dragonflycontainerborder.xml",
             bgimage = "dragonflycontainerborder.tex",
-            bgimagetint = {r=.82,g=.77,b=.7,a=1},
+            bgimagetint = { r = .82, g = .77, b = .7, a = 1 },
             pos = Vector3(0, 220, 0),
             side_align_tip = 160,
         },
@@ -376,7 +379,8 @@ if GetModConfigData("scaledchestbuff") then
 
     for y = 2.5, -1.5, -1 do
         for x = 0, 4 do
-            table.insert(containers.params.dragonflychest.widget.slotpos, Vector3(80*x-80*2, 80*y-80*2+120,0))
+            table.insert(containers.params.dragonflychest.widget.slotpos, Vector3(80 * x - 80 * 2, 80 * y - 80 * 2 + 120
+                , 0))
         end
     end
 end
@@ -386,51 +390,51 @@ containers.params.wardrobe =
     widget =
     {
         slotpos = {},
-  		animbank = nil,
-  		animbuild = nil,
+        animbank = nil,
+        animbuild = nil,
         bgatlas = "images/dragonflycontainerborder.xml",
         bgimage = "dragonflycontainerborder.tex",
-		bgimagetint = {r=.82,g=.77,b=.7,a=1},
+        bgimagetint = { r = .82, g = .77, b = .7, a = 1 },
         pos = Vector3(0, 220, 0),
         side_align_tip = 160,
         slotbg =
         {
-			{ image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
-			{ image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
-			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-			{ image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
-			{ image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
-			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-			{ image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
-			{ image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
-			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-			{ image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
-			{ image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
-			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-			{ image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
-			{ image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
-			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },	
-			{ image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
-			{ image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
-			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-			{ image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
-			{ image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
-			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-			{ image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
-			{ image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
-			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-			{ image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },			
-        },		
+            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+            { image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+            { image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+            { image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+            { image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+            { image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+            { image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+            { image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+            { image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+        },
     },
     type = "chest",
-	itemtestfn = CheckWardrobeItem,
-	right = true,
+    itemtestfn = CheckWardrobeItem,
+    right = true,
 }
 
 for y = 2.5, -1.5, -1 do
-	for x = 0, 4 do
-		table.insert(containers.params.wardrobe.widget.slotpos, Vector3(80*x-80*2, 80*y-80*2+120,0))
-  	end
+    for x = 0, 4 do
+        table.insert(containers.params.wardrobe.widget.slotpos, Vector3(80 * x - 80 * 2, 80 * y - 80 * 2 + 120, 0))
+    end
 end
 
 containers.params.winona_toolbox =
@@ -438,14 +442,14 @@ containers.params.winona_toolbox =
     widget =
     {
         slotpos = {},
-        slotbg = 
+        slotbg =
         {
-			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-			{ image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
         },
         animbank = "ui_tacklecontainer_3x2",
         animbuild = "ui_tacklecontainer_3x2",
@@ -458,20 +462,22 @@ containers.params.winona_toolbox =
 
 for y = 1, 0, -1 do
     for x = 0, 2 do
-        table.insert(containers.params.winona_toolbox.widget.slotpos, Vector3(80 * x - 80 * 2 + 80, 80 * y - 80 * 2 + 120, 0))
+        table.insert(containers.params.winona_toolbox.widget.slotpos,
+            Vector3(80 * x - 80 * 2 + 80, 80 * y - 80 * 2 + 120, 0))
     end
 end
 
 containers.params.sunkenchest_royal = containers.params.shadowchester
 
 for k, v in pairs(modparams) do
-	containers.MAXITEMSLOTS = math.max(containers.MAXITEMSLOTS, v.widget.slotpos ~= nil and #v.widget.slotpos or 0)
+    containers.MAXITEMSLOTS = math.max(containers.MAXITEMSLOTS, v.widget.slotpos ~= nil and #v.widget.slotpos or 0)
 end
 
 local function addItemSlotNetvarsInContainer(inst)
     if (#inst._itemspool < containers.MAXITEMSLOTS) then
         for i = #inst._itemspool + 1, containers.MAXITEMSLOTS do
-            table.insert(inst._itemspool, net_entity(inst.GUID, "container._items[" .. tostring(i) .. "]", "items[" .. tostring(i) .. "]dirty"))
+            table.insert(inst._itemspool,
+                net_entity(inst.GUID, "container._items[" .. tostring(i) .. "]", "items[" .. tostring(i) .. "]dirty"))
         end
     end
 end
