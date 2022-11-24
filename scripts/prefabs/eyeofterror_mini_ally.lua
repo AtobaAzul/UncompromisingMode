@@ -34,10 +34,15 @@ local function onnear(inst, target)
 end
 local easing = require("easing")
 
-local function OnDeath(inst, cause, afflicter, ...)
-    print(inst, cause, afflicter, ...)
+local function OnDeath(inst, data)
+    if inst.components.health.maxhealth < 100 then
+        return
+    end
+    print(inst)
+    printwrap("data:",data)
     local x, y, z = inst.Transform:GetWorldPosition()
     local projectile = SpawnPrefab("eyeofterror_mini_projectile_ally")
+    --projectile
     projectile.Transform:SetPosition(x, y, z)
     projectile.is_revive = true
     local pt = inst:GetPosition()
@@ -46,6 +51,7 @@ local function OnDeath(inst, cause, afflicter, ...)
     local speed = easing.linear(3, 7, 3, 10)
     projectile:AddTag("canthit")
     projectile:AddTag("friendly")
+    projectile.health = inst.components.health.maxhealth/2
     --projectile.components.wateryprotection.addwetness = TUNING.WATERBALLOON_ADD_WETNESS/2
     projectile.components.complexprojectile:SetHorizontalSpeed(speed + math.random(4, 9))
     if TheWorld.Map:IsAboveGroundAtPoint(pt.x, 0, pt.z) or TheWorld.Map:GetPlatformAtPoint(pt.x, pt.z) ~= nil then

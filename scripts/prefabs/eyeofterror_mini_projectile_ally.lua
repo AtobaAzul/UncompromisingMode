@@ -17,6 +17,9 @@ local function on_mini_eye_landed(inst)
 
         grounded.AnimState:PlayAnimation("land_pre", false)
         grounded.AnimState:PushAnimation("land_idle", true)
+        -- The spawned mob inherits the helth value of the when it spawns.
+        grounded.components.health:SetCurrentHealth(inst.health)
+        grounded.components.health:SetMaxHealth(inst.health)
 
         grounded:PushEvent("on_landed")
 
@@ -54,6 +57,7 @@ local function try_to_hatch(inst)
 
     -- The spawned mob inherits the helth value of the grounded "egg" when it spawns.
     minieye.components.health:SetCurrentHealth(inst.components.health.currenthealth)
+    minieye.components.health:SetMaxHealth(inst.components.health.currenthealth)
 
     inst:Remove()
 end
