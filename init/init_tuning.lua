@@ -419,6 +419,8 @@ TUNING.DSTU =
 
     BERNIE_BUFF = GetModConfigData("bernie_buffs"),
 
+    COMPROMISING_SHADOWVORTEX = GetModConfigData("compromising_vortex"),
+
 --boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
     TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),

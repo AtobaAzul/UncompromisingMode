@@ -422,3 +422,4 @@ STRINGS.TRINKET_WATHOM1 = "Busted Inhaler"
 STRINGS.DEATHAMP = "a heart attack"
 
 STRINGS.CODEX_MANTRA = "Codex Mantra"
+STRINGS.SHADOWVORTEX = "Shadow Vortex"

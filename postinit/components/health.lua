@@ -79,7 +79,10 @@ env.AddComponentPostInit("health", function(self)
 	local _DoDelta = self.DoDelta
 	--(self:HasTag("wathom") and self:HasTag("amped")
 	function self:DoDelta(amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb)
-		if MayKill(self, amount) and HasLLA(self) and not self.inst:HasTag("deathamp") then --and not (self.inst:HasTag("deathamp")) then
+		if MayKill(self, amount) and cause == "shadowvortex" and TUNING.DSTU.COMPROMISING_SHADOWVORTEX and not self.inst.sg:HasStateTag("blackpuddle_death") then
+			self.inst.components.rider:ActualDismount()
+            self.inst.sg:GoToState("blackpuddle_death")
+		elseif MayKill(self, amount) and HasLLA(self) and not self.inst:HasTag("deathamp") then --and not (self.inst:HasTag("deathamp")) then
 			TriggerLLA(self)
 		elseif MayKill(self, amount) and HasLLA(self) and self.inst:HasTag("deathamp") and cause == "deathamp" then
 			if not self.inst:HasTag("playerghost") and self.inst.ToggleUndeathState ~= nil then

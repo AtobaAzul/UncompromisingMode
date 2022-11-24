@@ -95,6 +95,7 @@ configuration_options =
 		},
 		default = 0.8,
 	},
+	BinaryConfig("compromising_vortex", "Non-lethal Shadow Vortex", "Shadow Vortex now teleports you to some random place.", false),
     BinaryConfig("harder_shadows", "Harder Nightmare Creatures", "Insanity is a big threat now. Those who pass the brink may never return.", true),
     BinaryConfig("rat_raids", "Rat Raids", "Rats will periodically be attracted to your base.", true),
     BinaryConfig("durability", "Clothing Degradation", "Winter and Rain protection clothing items become less effective when their durability drops.", false),
