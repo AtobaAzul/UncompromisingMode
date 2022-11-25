@@ -369,7 +369,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.OCUPUS_TENTACLE_COOKED = "it's not that bad once peel back the skin."
 	
 	DESCRIBE.ARMOR_REED_UM = "At least it's something."
-	DESCRIBE.ARMOR_SHARKSUIT_UM = "That seems a little exotic don'tcha think."
+	DESCRIBE.ARMOR_SHARKSUIT_UM = "That seems a little exotic dont'cha think?"
 	DESCRIBE.ROCKJAWLEATHER = "It's skin, we all have it."
 	
 	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
