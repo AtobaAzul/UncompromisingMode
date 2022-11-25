@@ -219,6 +219,7 @@ local function fn()
     inst:AddComponent("combat")
     inst.components.combat.hiteffectsymbol = "fruitbat_body"
     inst.components.combat:SetAttackPeriod(TUNING.BAT_ATTACK_PERIOD)
+    inst.components.combat:SetDefaultDamage(20)--give it damage, since it can target spiders now.
     inst.components.combat:SetRange(TUNING.BAT_ATTACK_DIST)
     inst.components.combat:SetRetargetFunction(3, Retarget)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
