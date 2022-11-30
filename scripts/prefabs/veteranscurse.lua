@@ -151,6 +151,12 @@ local function ForceOvertimeFoodEffects(inst)
 	inst:ListenForEvent("oneat", oneat)
 end
 
+local function ForceUsualFoodEffects(inst)
+	inst.components.eater:SetAbsorptionModifiers(inst.modded_healthabsorption, inst.modded_hungerabsorption, inst.modded_sanityabsorption)
+	
+	inst:RemoveEventCallback("oneat", oneat)
+end
+
 local function AttachCurse(inst, target)
     if target.components.combat ~= nil then
         --target.components.combat.externaldamagemultipliers:SetModifier(inst, .75)    Effect Removed
@@ -187,6 +193,7 @@ local function DetachCurse(inst, target)
 		end
 		
 		ForceToTakeUsualHunger(target)
+		ForceUsualFoodEffects(target)
 		target:RemoveTag("vetcurse")
     end
 end

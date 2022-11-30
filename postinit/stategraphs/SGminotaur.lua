@@ -150,8 +150,12 @@ env.AddStategraphPostInit("minotaur", function(inst)
 					else
 						local range = 6 -- overshoot range
 						local theta = inst.Transform:GetRotation()*DEGREES
-						local offset = Vector3(range * math.cos( theta ), 0, -range * math.sin( theta ))            
-						inst.sg.statemem.targetpos = Vector3(inst.sg.statemem.startpos.x + offset.x, 0, inst.sg.statemem.startpos.z + offset.z)
+						local offset = Vector3(range * math.cos( theta ), 0, -range * math.sin( theta ))
+						if inst.sg.statemem.startpos ~= nil then
+							inst.sg.statemem.targetpos = Vector3(inst.sg.statemem.startpos.x + offset.x, 0, inst.sg.statemem.startpos.z + offset.z)
+						else
+							inst.sg.statemem.targetpos = Vector3(inst.Transform:GetWorldPosition())
+						end
 					end
 				end)
 				inst.sg:SetTimeout(1)

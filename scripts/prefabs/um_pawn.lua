@@ -297,7 +297,7 @@ local function onnear(inst, target)
 	inst.target = target
 	
 	inst.neartask = inst:DoPeriodicTask(0.1, function(inst) 
-		if not inst.components.freezable:IsFrozen() and inst.target ~= nil and inst.components.health ~= nil and not inst.components.health:IsDead() and not inst:HasTag("removingpawn") then
+		if not inst.components.freezable:IsFrozen() and inst.target ~= nil and (inst.target.sg == nil or inst.target.sg ~= nil and not inst.target.sg:HasStateTag("hiding")) and inst.components.health ~= nil and not inst.components.health:IsDead() and not inst:HasTag("removingpawn") then
 			inst.neartask:Cancel()
 			SpawnSpikes(inst.target)
 			SpawnAmalgams(inst.target)
@@ -317,7 +317,7 @@ local function FindTarget(inst, radius)
         inst,
         radius,
         function(guy)
-            return guy:HasTag("player")
+            return guy:HasTag("player") and (guy.sg == nil or guy.sg ~= nil and not guy.sg:HasStateTag("hiding"))
                 and inst.components.combat:CanTarget(guy) and not inst.components.freezable:IsFrozen()
         end,
         "player",

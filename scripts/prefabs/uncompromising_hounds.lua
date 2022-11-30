@@ -298,7 +298,7 @@ local function OnAttackOther(inst, data)
                 not (data.target.components.inventory ~= nil and data.target.components.inventory:IsInsulated()) then
 
                 data.target.components.health:DoDelta(-5, nil, inst.prefab, nil, inst)
-                if data.target:HasTag("player") then
+                if data.target:HasTag("player") and not data.target.components.health:IsDead() then
 					local shockvictim = data.target.sg ~= nil and data.target.sg:GoToState("electrocute")
 					inst:DoTaskInTime(2, shockvictim)
                 end

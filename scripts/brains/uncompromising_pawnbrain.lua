@@ -33,9 +33,21 @@ end
 
 local function IsDangerClose(inst)
 	if inst:HasTag("landmine") then
-		return FindEntity(inst, SEE_PLAYER_DIST_NIGHTMARE, nil, {"player"}, {"playerghost"}) ~= nil
+		return FindEntity(
+		inst, 
+		SEE_PLAYER_DIST_NIGHTMARE, 
+		function(guy)
+			return guy ~= nil and (guy.sg == nil or guy.sg ~= nil and not guy.sg:HasStateTag("hiding"))
+		end, 
+		{"player"}, {"playerghost"})
 	else
-		return FindEntity(inst, SEE_PLAYER_DIST, nil, {"player"}, {"playerghost"}) ~= nil
+		return FindEntity(
+		inst, 
+		SEE_PLAYER_DIST, 
+		function(guy)
+			return guy ~= nil and (guy.sg == nil or guy.sg ~= nil and not guy.sg:HasStateTag("hiding"))
+		end, 
+		{"player"}, {"playerghost"})
 	end
 end
 

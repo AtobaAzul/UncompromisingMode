@@ -286,16 +286,17 @@ local function TrySpawnSkeleton(inst)
         skele.Transform:SetPosition(x, y, z)
         skele.decided = true
     else
-        TrySpawnSkeleton(inst)
+        inst:DoTaskInTime(1, TrySpawnSkeleton)
     end
 end
 
 local function Wrath(inst, super)
     if super then
-        TrySpawnSkeleton(inst)
-        TrySpawnSkeleton(inst)
-        TrySpawnSkeleton(inst)
+		for i = 1, 3 do
+			TrySpawnSkeleton(inst)
+		end
     end
+	
     TrySpawnSkeleton(inst)
 end
 
