@@ -330,7 +330,7 @@ local states=
             TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
             TimeEvent(19*FRAMES, function(inst) inst.components.combat:SetRange(3, 3)
 			inst.components.combat:DoAttack(inst.sg.statemem.target) 
-            print("getting attacked!")
+            --print("getting attacked!")
         end),
             TimeEvent(20*FRAMES,
                 function(inst)
