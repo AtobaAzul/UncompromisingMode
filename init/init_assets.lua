@@ -216,7 +216,7 @@ local inventoryitems =
 }
 
 for k, v in ipairs(inventoryitems) do
-	print("registering inventory item atlas: " .. v)
+	--print("registering inventory item atlas: " .. v)
 	RegisterInventoryItemAtlas("images/inventoryimages/" .. v .. ".xml", v .. ".tex")
 end
 

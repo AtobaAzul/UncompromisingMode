@@ -166,11 +166,6 @@ if not GLOBAL:TestForIA() then
 
             end
 
-            print(GLOBAL.TheWorld.state.cycles)
-            print(self.varggraceperiod)
-            print(TUNING.DSTU.VARGWAVES_DELAY_PERIOD)
-            print(self.varggraceperiod ~= nil and self.varggraceperiod + TUNING.DSTU.VARGWAVES_DELAY_PERIOD or "nil")
-
             --replaces the first hound in a wave with a random boss hound
             if pt and self.spawn_boss and magmaspawn_pt ~= nil and TUNING.DSTU.VARGWAVES then
                 self.varggraceperiod = GLOBAL.TheWorld.state.cycles

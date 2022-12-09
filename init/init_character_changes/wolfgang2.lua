@@ -37,7 +37,7 @@ local function UpdateHungerDrain(inst)
 		end
 	end
 	
-	print("Wolfgang Hunger Drain = "..inst.hungerpercent)
+	--print("Wolfgang Hunger Drain = "..inst.hungerpercent)
 	
 	inst.components.hunger:SetRate(inst.hungerrate)
 end
