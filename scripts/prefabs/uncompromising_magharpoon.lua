@@ -556,8 +556,6 @@ local function reel()
 	
 	inst:DoTaskInTime(60, KillRopes)
 	
-	inst:DoTaskInTime(60, KillRopes)
-	
 	inst.persists = false
 	
     return inst

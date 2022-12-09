@@ -2,20 +2,23 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local function onnear(inst, target)
-    if inst.components.childspawner ~= nil and inst.doafuckingambush then
-        SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
-        inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
-        SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
-        inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
-        SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
-        inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
-        SpawnPrefab("critterlab_real_broken").Transform:SetPosition(inst.Transform:GetWorldPosition())
-        inst.components.childspawner:ReleaseAllChildren(target, "mutatedhound")
-		inst:DoTaskInTime(0, function() inst:Remove() end)
-    end
+	if not inst.repaired then
+		if inst.components.childspawner ~= nil and inst.doafuckingambush then
+			SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
+			SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
+			SpawnPrefab("collapse_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
+			inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
+			SpawnPrefab("critterlab_real_broken").Transform:SetPosition(inst.Transform:GetWorldPosition())
+			inst.components.childspawner:ReleaseAllChildren(target, "mutatedhound")
+			inst:DoTaskInTime(0, function() inst:Remove() end)
+		end
+	end
 end
 
 local function OnSave(inst, data)
+	data.repaired = inst.repaired
 	data.doafuckingambush = inst.doafuckingambush
 		
 	if inst._OldOnSave ~= nil then
@@ -25,6 +28,7 @@ end
 	
 local function OnLoad(inst, data)
     if data then
+		inst.repaired = data.repaired
 		inst.doafuckingambush = data.doafuckingambush or inst.doafuckingambush
 	end
 		
@@ -39,6 +43,7 @@ env.AddPrefabPostInit("critterlab", function (inst)
 	end
 	
 	inst.doafuckingambush = true
+	inst.repaired = false
 
 	inst:AddComponent("childspawner")
 	inst.components.childspawner.childname = "mutatedhound"

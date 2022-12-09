@@ -702,7 +702,7 @@ AddRecipe2("portableboat_item", { Ingredient("mosquitosack", 2), Ingredient("rop
     { "SEAFARING" })
 ChangeSortKey("portableboat_item", "boat_item", "SEAFARING", true)
 
-
+--[[
 AddRecipe2(
     "codex_mantra",
     { Ingredient("waxwelljournal", 1) },
@@ -711,7 +711,7 @@ AddRecipe2(
     { "CHARACTER" }
 )
 ChangeSortKey("codex_mantra", "waxwelljournal", "CHARACTER", true)
-
+]]
 
 AddRecipe2("mastupgrade_windturbine_item", { Ingredient("cutstone", 2), Ingredient("transistor", 2) }, TECH.SEAFARING_ONE
     , nil, { "SEAFARING" })

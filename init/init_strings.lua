@@ -148,7 +148,7 @@ STRINGS.TIDDLESTRANGER_RNE_FAREWELL = {
 	},
 	{
 		"Nights ain't as comfy as they used to be.",
-		"Strange occurances, creatures in the dark...",
+		"Strange occurences, creatures in the dark...",
 		"I'd keep my eyes and ears open, and a light by my side if I were you.",
 	},
 }
@@ -194,7 +194,7 @@ STRINGS.TIDDLESTRANGER_RNE_DEFAULT = {
 		"You look like you could use a new face!",
 		"Lucky for you, I have several!",
 		"...Masks, that is.",
-		"Whats their purpose?",
+		"What's their purpose?",
 		"...",
 	},
 	{
@@ -213,7 +213,7 @@ STRINGS.TIDDLESTRANGER_RNE_BANTER = {
 		"Don't ya have... things you need to do, friend?",
 	},
 	{
-		"I appreciate the company an all, but this is gettin' a bit awkward.",
+		"I appreciate the company and all, but this is gettin' a bit awkward.",
 	},
 	{
 		"You just gonna stand there all day, friend?",

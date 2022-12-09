@@ -166,6 +166,7 @@ local prefab_post = {
 	"sacred_chest",
 	"soil_amender",
 	"vetcurse_drops",
+	"charcoal",
 }
 
 local stategraph_post = {

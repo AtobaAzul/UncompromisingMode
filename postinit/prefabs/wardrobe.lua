@@ -11,24 +11,27 @@ local function onclose(inst)
     inst.SoundEmitter:PlaySound("dontstarve/common/wardrobe_close")
 end
 
-local function ChangeIn(inst,doer)
-	inst.components.wardrobe:BeginChanging(doer)
+local function ChangeIn(inst, doer)
+    if inst.components.wardrobe then
+        inst.components.wardrobe:BeginChanging(doer)
+    end
 end
+
 local function OnStopChanneling(inst)
-	if inst.channeler ~= nil then
-		--inst.channeler.sg:GoToState("idle")
-	end
-	inst.channeler = nil
+    if inst.channeler ~= nil then
+        --inst.channeler.sg:GoToState("idle")
+    end
+    inst.channeler = nil
 end
 
 local function GetActivateVerb(inst)
- return "OPEN"
+    return "OPEN"
 end
 
 env.AddPrefabPostInit("wardrobe", function(inst)
-	if not TheWorld.ismastersim then
-		return
-	end
+    if not TheWorld.ismastersim then
+        return
+    end
     inst:AddComponent("container")
     inst.components.container:WidgetSetup("wardrobe")
     inst.components.container.skipclosesnd = true
@@ -43,27 +46,28 @@ env.AddPrefabPostInit("wardrobe", function(inst)
     --inst.components.channelable.skip_state_stopchanneling = true
     inst.components.channelable.skip_state_channeling = true
     --inst.components.channelable.ignore_prechannel = true
-	
-	inst.GetActivateVerb = GetActivateVerb
-	
-	local _OnHit = inst.components.workable.onwork
-	local _OnFinish = inst.components.workable.onfinish
-	local function onhit(inst, worker)
+
+    inst.GetActivateVerb = GetActivateVerb
+
+    local _OnHit = inst.components.workable.onwork
+    local _OnFinish = inst.components.workable.onfinish
+    local function onhit(inst, worker)
         if inst.components.container ~= nil then
             inst.components.container:DropEverything()
             inst.components.container:Close()
-        end		
-		_OnHit(inst,worker)
-	end
-	local function onhammered(inst, worker)
+        end
+        _OnHit(inst, worker)
+    end
+
+    local function onhammered(inst, worker)
         if inst.components.container ~= nil then
             inst.components.container:DropEverything()
-        end		
-		_OnFinish(inst,worker)
-	end
+        end
+        _OnFinish(inst, worker)
+    end
 
-	inst.components.workable:SetOnWorkCallback(onhit)
-	inst.components.workable:SetOnFinishCallback(onhammered)
+    inst.components.workable:SetOnWorkCallback(onhit)
+    inst.components.workable:SetOnFinishCallback(onhammered)
 
     inst:SetPhysicsRadiusOverride(0)
     MakeObstaclePhysics(inst, 0)

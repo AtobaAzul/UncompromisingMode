@@ -1,13 +1,19 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
-			
-			
-			
-local function NoFirePanic(self)				
-    table.remove(self.bt.root.children, 2)
+
+local function NoFirePanic(self)
+	table.remove(self.bt.root.children, 1)
 end
-			
+
 env.AddBrainPostInit("spiderqueenbrain", NoFirePanic)
-env.AddBrainPostInit("bishopbrain", NoFirePanic)
-env.AddBrainPostInit("rookbrain", NoFirePanic)
-env.AddBrainPostInit("knightbrain", NoFirePanic)
+
+
+local function RemoveFireDamage(inst)
+	if inst.components.health ~= nil then
+		inst.components.health.vulnerabletoheatdamage = false
+	end
+end
+
+env.AddPrefabPostInit("bishop", RemoveFireDamage)
+env.AddPrefabPostInit("rook", RemoveFireDamage)
+env.AddPrefabPostInit("knight", RemoveFireDamage)

@@ -65,6 +65,15 @@ local function fn()
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
 
+	inst:DoTaskInTime(0, function(inst)
+        local pos = inst:GetPosition()
+        local altar = SpawnPrefab("critterlab")
+        altar.Transform:SetPosition(pos:Get())
+		altar.repaired = true
+		
+        inst:Remove()
+	end)
+	
     return inst
 end
 
@@ -74,8 +83,9 @@ local function broken_onrepaired(inst, doer, repair_item)
         --inst.SoundEmitter:PlaySound("dontstarve/common/ancienttable_repair")
     --else
         local pos = inst:GetPosition()
-        local altar = SpawnPrefab("critterlab_real")
+        local altar = SpawnPrefab("critterlab")
         altar.Transform:SetPosition(pos:Get())
+		altar.repaired = true
         --altar.SoundEmitter:PlaySound("dontstarve/common/ancienttable_activate")
         SpawnPrefab("collapse_small").Transform:SetPosition(pos:Get())
         --inst:PushEvent("onprefabswaped", {newobj = altar})

@@ -14,6 +14,10 @@ local function NotBlocked(pt)
     return not TheWorld.Map:IsGroundTargetBlocked(pt)
 end
 
+local function IsNearTarget(inst, target, range)
+	return inst:IsNear(target, range + target:GetPhysicsRadius(0))
+end
+
 local function IsLeaderNear(inst, leader, target, range)
     --leader is in range of us or our target
     return inst:IsNear(leader, range) or (target ~= nil and IsNearTarget(leader, target, range))

@@ -1820,6 +1820,7 @@ local NOTAGS =
 	"smallcreature",
 	"_container",
 	"spore",
+	"NORATCHECK"
 }
 
 local function SmellProtection(v, container)
