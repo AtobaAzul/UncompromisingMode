@@ -70,18 +70,19 @@ local SHADOW_MIMIC_SPELL =
 	widget_scale = ICON_SCALE,
 	hit_radius = ICON_RADIUS,
 }
+if TUNING.DSTU.OLD_SHADOWWAXWELL then
+	env.AddPrefabPostInit("waxwelljournal", function(inst)
+		--if not TheWorld.ismastersim then
+		--	return
+		--end Commented out to see if this is causing the issue of the spell sometimes not appearing
 
-env.AddPrefabPostInit("waxwelljournal", function(inst)
-	--if not TheWorld.ismastersim then
-	--	return
-	--end Commented out to see if this is causing the issue of the spell sometimes not appearing
-
-	if inst.components.spellbook ~= nil then
-		if not table.contains(inst.components.spellbook.items, SHADOW_MIMIC_SPELL) then
-			table.insert(inst.components.spellbook.items, SHADOW_MIMIC_SPELL)
+		if inst.components.spellbook ~= nil then
+			if not table.contains(inst.components.spellbook.items, SHADOW_MIMIC_SPELL) then
+				table.insert(inst.components.spellbook.items, SHADOW_MIMIC_SPELL)
+			end
 		end
-	end
-end)
+	end)
+end
 
 local function DoEffects(pet)
 	local x, y, z = pet.Transform:GetWorldPosition()

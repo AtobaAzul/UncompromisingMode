@@ -25,7 +25,7 @@ end
 
 local function makeemptyfn(inst)
     if not POPULATING and
-        (   inst.components.witherable ~= nil and
+        (inst.components.witherable ~= nil and
             inst.components.witherable:IsWithered() or
             inst.AnimState:IsCurrentAnimation("idle_dead")
         ) then
@@ -38,7 +38,7 @@ end
 
 local function makebarrenfn(inst, wasempty)
     if not POPULATING and
-        (   inst.components.witherable ~= nil and
+        (inst.components.witherable ~= nil and
             inst.components.witherable:IsWithered()
         ) then
         inst.AnimState:PlayAnimation(wasempty and "empty_to_dead" or "full_to_dead")
@@ -59,31 +59,30 @@ local function onpickedfn(inst, picker)
     end
 end
 
-
 local function dig_up(inst, worker)
     if inst.components.pickable ~= nil and inst.components.lootdropper ~= nil then
         local withered = inst.components.witherable ~= nil and inst.components.witherable:IsWithered()
 
         if inst.components.pickable:CanBePicked() then
             inst.components.lootdropper:SpawnLootPrefab(inst.components.pickable.product)
-			inst.components.lootdropper:SpawnLootPrefab(inst.components.pickable.product)
-			inst.components.lootdropper:SpawnLootPrefab(inst.components.pickable.product)
+            inst.components.lootdropper:SpawnLootPrefab(inst.components.pickable.product)
+            inst.components.lootdropper:SpawnLootPrefab(inst.components.pickable.product)
         end
-		for i = 1, 3 do
-        inst.components.lootdropper:SpawnLootPrefab(
-            (withered) and
-            "cutgrass" or
-            "dug_grass"
-        )
-		end
+        for i = 1, 3 do
+            inst.components.lootdropper:SpawnLootPrefab(
+                (withered) and
+                "cutgrass" or
+                "dug_grass"
+            )
+        end
     end
     inst:Remove()
 end
 
 local function Init(inst)
-if TUNING.DSTU.TRAPDOORSPIDERS == false then
-inst:Remove()
-end
+    if TUNING.DSTU.TRAPDOORSPIDERS == false then
+        inst:Remove()
+    end
 end
 
 local function grass(name, stage)
@@ -104,17 +103,18 @@ local function grass(name, stage)
 
         inst:AddTag("plant")
         inst:AddTag("renewable")
+        inst:AddTag("trapdoorgrass")
 
         --witherable (from witherable component) added to pristine state for optimization
         inst:AddTag("witherable")
-		--MakeObstaclePhysics(inst, 2, 0)
-		--inst.Transform:SetScale(2,1.5,2)
+        --MakeObstaclePhysics(inst, 2, 0)
+        --inst.Transform:SetScale(2,1.5,2)
         inst.entity:SetPristine()
 
         if not TheWorld.ismastersim then
             return inst
         end
-		--RemovePhysicsColliders(inst)
+        --RemovePhysicsColliders(inst)
         inst.AnimState:SetTime(math.random() * 2)
         local color = 0.75 + math.random() * 0.25
         inst.AnimState:SetMultColour(color, color, color, 1)
@@ -122,7 +122,7 @@ local function grass(name, stage)
         inst:AddComponent("pickable")
         inst.components.pickable.picksound = "dontstarve/wilson/pickup_reeds"
 
-        inst.components.pickable:SetUp("cutgrass", TUNING.GRASS_REGROW_TIME,3)
+        inst.components.pickable:SetUp("cutgrass", TUNING.GRASS_REGROW_TIME, 3)
         inst.components.pickable.onregenfn = onregenfn
         inst.components.pickable.onpickedfn = onpickedfn
         inst.components.pickable.makeemptyfn = makeemptyfn
@@ -138,21 +138,21 @@ local function grass(name, stage)
 
         inst:AddComponent("lootdropper")
         inst:AddComponent("inspectable")
-		if not GetGameModeProperty("disable_transplanting") then
-			inst:AddComponent("workable")
-			inst.components.workable:SetWorkAction(ACTIONS.DIG)
-			inst.components.workable:SetOnFinishCallback(dig_up)
-			inst.components.workable:SetWorkLeft(1)
-		end
+        if not GetGameModeProperty("disable_transplanting") then
+            inst:AddComponent("workable")
+            inst.components.workable:SetWorkAction(ACTIONS.DIG)
+            inst.components.workable:SetOnFinishCallback(dig_up)
+            inst.components.workable:SetWorkLeft(1)
+        end
         ---------------------
 
         MakeMediumBurnable(inst)
         MakeSmallPropagator(inst)
         MakeNoGrowInWinter(inst)
         MakeHauntableIgnite(inst)
-		
+
         ---------------------
-		inst:DoTaskInTime(0,Init)
+        inst:DoTaskInTime(0, Init)
         return inst
     end
 

@@ -164,6 +164,11 @@ local function GetTargetFocus(player, telebase, telestaff)
 end
 
 AddModRPCHandler("UncompromisingSurvival", "GetTargetFocus", GetTargetFocus)
+
+AddModRPCHandler("UncompromisingSurvival", "PianoPuzzleComplete", function()
+	GLOBAL.TheWorld:PushEvent("pianopuzzlecomplete")
+end)
+
 AddClientModRPCHandler("UncompromisingSurvival", "WathomMusicToggle", WathomMusicToggle)
 AddClientModRPCHandler("UncompromisingSurvival", "WathomAdrenalineStinger", DoAdrenalineUpStinger)
 

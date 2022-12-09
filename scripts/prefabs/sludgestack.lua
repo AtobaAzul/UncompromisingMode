@@ -171,6 +171,7 @@ local function fn_stack()
 
     -- Have to add to pristine state.
     inst:AddTag("SLUDGE_CORK_upgradeable")
+    inst:AddTag("sludgestack")
 
     inst.entity:SetPristine()
 

@@ -315,10 +315,10 @@ env.AddPrefabPostInit("spider", function(inst)
     inst.components.playerprox:SetOnPlayerNear(onnear)
     inst.components.playerprox:SetPlayerAliveMode(inst.components.playerprox.AliveModes.AliveOnly)]]
 	
-	--if TUNING.DSTU.MOON_TRANSFORMATIONS then
-	--	inst:WatchWorldState("isfullmoon", OnFullMoon)
-	--	OnFullMoon(inst, TheWorld.state.isfullmoon)
-	--end
+	if TUNING.DSTU.MOON_TRANSFORMATIONS then
+		inst:WatchWorldState("isfullmoon", OnFullMoon)
+		OnFullMoon(inst, TheWorld.state.isfullmoon)
+	end
 	
     --inst.task = inst:DoTaskInTime(3, CheckTargetPiece)
 

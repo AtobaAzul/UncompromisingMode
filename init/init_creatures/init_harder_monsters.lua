@@ -1,7 +1,7 @@
 -----------------------------------------------------------------
 --Pigs and bunnies defend their turf if their home is destroyed
 -----------------------------------------------------------------
-local pigtaunts = 
+local pigtaunts =
 {
     "GET OFF LAWN",
     "LEAVE HOUSE ALONE",
@@ -14,7 +14,7 @@ local pigtaunts =
     "STOP RIGHT THERE"
 }
 
-local bunnytaunts = 
+local bunnytaunts =
 {
     "INVADER!",
     "CRIMINAL!",
@@ -26,20 +26,20 @@ local bunnytaunts =
     "BEGONE!",
 }
 
-local function TalkShit(inst, taunts) 
-    if taunts ~= nil then 
-        local tauntnr = GLOBAL.math.floor(GLOBAL.GetRandomMinMax(1,GLOBAL.GetTableSize(taunts)))
+local function TalkShit(inst, taunts)
+    if taunts ~= nil then
+        local tauntnr = GLOBAL.math.floor(GLOBAL.GetRandomMinMax(1, GLOBAL.GetTableSize(taunts)))
         if inst and inst.components.talker then
             inst.components.talker:Say(taunts[tauntnr])
         end
     end
 end
 
-local function RetaliateAttacker(inst,attacker,taunts)
+local function RetaliateAttacker(inst, attacker, taunts)
     if inst and attacker and inst.components.combat then
-        inst.components.combat:SuggestTarget(attacker) 
+        inst.components.combat:SuggestTarget(attacker)
     end
-    if taunts ~= nil then TalkShit(inst,taunts) end
+    if taunts ~= nil then TalkShit(inst, taunts) end
 end
 
 --Get the pig to attack the perpetrator of the crime against pig-kind
@@ -47,18 +47,18 @@ end
 local function onworked_pighouse(inst, worker)
     if inst.components.spawner ~= nil and inst.components.spawner.child then
         RetaliateAttacker(inst.components.spawner.child, worker, pigtaunts)
-		local x, y, z = inst.Transform:GetWorldPosition()
-		local guards = TheSim:FindEntities(x,y,z,40,{"guard"})
-		for i, v in ipairs(guards) do
-		if v.components.health ~= nil and v.components.combat ~= nil and not v.components.health:IsDead() then
-		v.components.combat:SuggestTarget(worker)
-		end
-		end
-		inst.components.spawner:ReleaseChild()
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local guards = TheSim:FindEntities(x, y, z, 40, { "guard" })
+        for i, v in ipairs(guards) do
+            if v.components.health ~= nil and v.components.combat ~= nil and not v.components.health:IsDead() then
+                v.components.combat:SuggestTarget(worker)
+            end
+        end
+        inst.components.spawner:ReleaseChild()
     end
 end
 
-AddPrefabPostInit("pighouse", function (inst)
+AddPrefabPostInit("pighouse", function(inst)
     if inst ~= nil and inst.components ~= nil and inst.components.workable ~= nil then
         inst.components.workable:SetOnWorkCallback(onworked_pighouse)
     end
@@ -68,11 +68,11 @@ end)
 local function onworked_rabbithouse(inst, worker)
     if inst.components.spawner ~= nil and inst.components.spawner.child then
         RetaliateAttacker(inst.components.spawner.child, worker, bunnytaunts)
-		inst.components.spawner:ReleaseChild()
+        inst.components.spawner:ReleaseChild()
     end
 end
 
-AddPrefabPostInit("rabbithouse", function (inst)
+AddPrefabPostInit("rabbithouse", function(inst)
     if inst ~= nil and inst.components ~= nil and inst.components.workable ~= nil then
         inst.components.workable:SetOnWorkCallback(onworked_rabbithouse)
     end
@@ -149,22 +149,22 @@ end)
 --Clockworks will no longer panic while on fire or take damage -Axe
 -----------------------------------------------------------------
 AddPrefabPostInit("bishop", function(inst)
-inst:RemoveComponent("burnable")
+    inst:RemoveComponent("burnable")
 end)
 AddPrefabPostInit("knight", function(inst)
-inst:RemoveComponent("burnable")
+    inst:RemoveComponent("burnable")
 end)
 AddPrefabPostInit("rook", function(inst)
-inst:RemoveComponent("burnable")
+    inst:RemoveComponent("burnable")
 end)
 AddPrefabPostInit("bishop_nightmare", function(inst)
-inst:RemoveComponent("burnable")
+    inst:RemoveComponent("burnable")
 end)
 AddPrefabPostInit("knight_nightmare", function(inst)
-inst:RemoveComponent("burnable")
+    inst:RemoveComponent("burnable")
 end)
 AddPrefabPostInit("rook_nightmare", function(inst)
-inst:RemoveComponent("burnable")
+    inst:RemoveComponent("burnable")
 end)
 -----------------------------------------------------------------
 --Pig guards now target walls
@@ -173,7 +173,7 @@ end)
 local function AliveWall(wall, targetter)
     if wall ~= nil and wall.components.health ~= nil then
         return not wall.components.health:IsDead()
-    end 
+    end
     return nil
 end
 
@@ -182,38 +182,46 @@ local function GuardRetargetFn(inst)
     local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
     local defendDist = GLOBAL.SpringCombatMod(TUNING.PIG_GUARD_DEFEND_DIST)
     local defenseTarget =
-        GLOBAL.FindEntity(inst, defendDist, nil, { "king" }) or
+    GLOBAL.FindEntity(inst, defendDist, nil, { "king" }) or
         (home ~= nil and inst:IsNear(home, defendDist) and home) or
         inst
 
-    local wall =  GLOBAL.FindEntity(defenseTarget, defendDist, AliveWall, {"wall"}, { "INLIMBO" })
-    local monster = GLOBAL.FindEntity(defenseTarget, defendDist, nil, {"monster"}, { "INLIMBO" })
-    if monster ~= nil then 
-        target = monster 
-    else 
-        if wall ~= nil then 
+    local wall = GLOBAL.FindEntity(defenseTarget, defendDist, AliveWall, { "wall" }, { "INLIMBO" })
+    local monster = GLOBAL.FindEntity(defenseTarget, defendDist, nil, { "monster" }, { "INLIMBO" })
+    if monster ~= nil then
+        target = monster
+    else
+        if wall ~= nil then
             target = wall
-        end 
+        end
     end
 
     if not defenseTarget.happy then
         local invader = GLOBAL.FindEntity(defenseTarget, defendDist, nil, { "character" }, { "guard", "INLIMBO", "pig" })
         if invader ~= nil and
-            not (defenseTarget.components.trader ~= nil and defenseTarget.components.trader:IsTryingToTradeWithMe(invader)) and
+            not
+            (defenseTarget.components.trader ~= nil and defenseTarget.components.trader:IsTryingToTradeWithMe(invader))
+            and
             not (inst.components.trader ~= nil and inst.components.trader:IsTryingToTradeWithMe(invader)) then
-                target = invader
+            target = invader
         else
-            if not GLOBAL.TheWorld.state.isday and home ~= nil and home.components.burnable ~= nil and home.components.burnable:IsBurning() then
+            if not GLOBAL.TheWorld.state.isday and home ~= nil and home.components.burnable ~= nil and
+                home.components.burnable:IsBurning() then
                 local lightThief = GLOBAL.FindEntity(
                     home,
                     home.components.burnable:GetLargestLightRadius(),
                     function(guy)
                         return guy.LightWatcher:IsInLight()
-                            and not (defenseTarget.components.trader ~= nil and defenseTarget.components.trader:IsTryingToTradeWithMe(guy))
-                            and not (inst.components.trader ~= nil and inst.components.trader:IsTryingToTradeWithMe(guy))
+                            and
+                            not
+                            (
+                            defenseTarget.components.trader ~= nil and
+                                defenseTarget.components.trader:IsTryingToTradeWithMe(guy))
+                            and not (inst.components.trader ~= nil and inst.components.trader:IsTryingToTradeWithMe(guy)
+                            )
                     end,
                     { "player" },
-					{ "pig" }
+                    { "pig" }
                 )
                 if lightThief ~= nil then
                     target = lightThief
@@ -249,8 +257,8 @@ end
 ]]
 
 AddPrefabPostInit("pigguard", GuardRetargetFn)
-AddPrefabPostInit("pigguard", function (inst)
-    if inst ~= nil and inst.components.combat ~= nil then 
+AddPrefabPostInit("pigguard", function(inst)
+    if inst ~= nil and inst.components.combat ~= nil then
         --inst.components.combat:SetKeepTargetFunction(GuardKeepTargetFn)
         inst.components.combat:SetRetargetFunction(1, GuardRetargetFn, DeadWall)
     end

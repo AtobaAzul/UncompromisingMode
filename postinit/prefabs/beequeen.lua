@@ -265,9 +265,20 @@ local function SpawnShooterBeesCircle(inst, prioritytarget)
 	end
 end
 
+local function KillOffOldDefense(inst)
+	for i,bee in ipairs(inst.defensebees) do
+		if bee.components.health and not bee.components.health:IsDead() and bee.components.timer:TimerExists("natural_death") then
+			bee.components.timer:SetTimeLeft("natural_death", math.random(0,2))
+		end
+	end
+end
+
 local function SpawnDefensiveBeesII(inst)
 	local x,y,z = inst.Transform:GetWorldPosition()
 	local LIMIT = 5
+	if inst.defensebees then
+		KillOffOldDefense(inst)
+	end
 	inst.defensebees = {}
 	for i = 1,8 do
 		inst.defensebees[i] = SpawnPrefab("um_beeguard_blocker")
@@ -291,6 +302,9 @@ end
 local function SpawnDefensiveBees(inst)
 	local x,y,z = inst.Transform:GetWorldPosition()
 	local LIMIT = 4
+	if inst.defensebees then
+		KillOffOldDefense(inst)
+	end
 	inst.defensebees = {}
 	for i = 1,8 do
 		inst.defensebees[i] = SpawnPrefab("um_beeguard_blocker")
@@ -385,7 +399,7 @@ local function RedoSpavvnguard_cd(inst)
 	inst.spawnguards_threshold = 20 --threshhold is primarily related ot the spavvn times rather than number of bees novv...
 	local x,y,z = inst.Transform:GetWorldPosition()
 	local players = TheSim:FindEntities(x,y,z,30,{"player"})
-	local count = math.sqrt(#players)*20
+	local count = math.sqrt(#players)*10
 	local time = math.random(80,100)-count
 	if time < 10 then
 		time = 10

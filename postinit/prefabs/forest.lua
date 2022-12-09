@@ -5,14 +5,15 @@ env.AddPrefabPostInit("forest", function(inst)
     if not TheWorld.ismastersim then
         return
     end
-	--[[
-    if GetModConfigData("gamemode") == GAMEMODE_UNCOMPROMISING or
-	(GetModConfigData("gamemode") == GAMEMODE_CUSTOM_SETTINGS and GetModConfigData("harder_weather")) then
-    inst:AddComponent("toadrain")
-	inst:AddComponent("hayfever_tracker")
-	inst:AddComponent("firefallwarning")
+
+	local function TentacleRegrowth()
+		return (
+			_worldstate.isspring and TUNING.CACTUS_REGROWTH_TIME_SUMMER_MULT or -- Bloom.
+			_worldstate.iswinter and TUNING.CACTUS_REGROWTH_TIME_WINTER_MULT or -- Hibernation.
+			TUNING.CACTUS_REGROWTH_TIME_BASE_MULT -- Generic.
+		) * (
+			_worldstate.israining and TUNING.CACTUS_REGROWTH_RAINING_MULT or 1
+		) * TUNING.CACTUS_REGROWTH_TIME_MULT
 	end
-	
-	inst:AddComponent("gmoosespawner")
-	inst:AddComponent("mock_dragonflyspawner")--]]
+	inst.components.regrowthmanager:SetRegrowthForType("tentacle", TUNING.CACTUS_REGROWTH_TIME, "tentacle", TentacleRegrowth)
 end)

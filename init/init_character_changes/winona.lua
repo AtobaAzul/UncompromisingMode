@@ -52,7 +52,7 @@ if TUNING.DSTU.WINONA_GEN then
 end
 
 local function OnCooldown(inst)
-    inst._cdtask = nil
+	inst._cdtask = nil
 end
 
 local function ActionHungerDrain(inst, data)
@@ -61,13 +61,13 @@ local function ActionHungerDrain(inst, data)
 	local t = GetTime()
 
 	if data.action.action == ACTIONS.CHOP or
-	data.action.action == ACTIONS.MINE or
-	data.action.action == ACTIONS.HAMMER or
-	data.action.action == ACTIONS.ROW or
-	data.action.action == ACTIONS.DIG or
-	data.action.action == ACTIONS.ATTACK or
-	data.action.action == ACTIONS.PICK or
-	data.action.action == ACTIONS.TILL then
+		data.action.action == ACTIONS.MINE or
+		data.action.action == ACTIONS.HAMMER or
+		data.action.action == ACTIONS.ROW or
+		data.action.action == ACTIONS.DIG or
+		data.action.action == ACTIONS.ATTACK or
+		data.action.action == ACTIONS.PICK or
+		data.action.action == ACTIONS.TILL then
 		if fast then
 			if inst._cdtask == nil then
 				inst._cdtask = inst:DoTaskInTime(.3, OnCooldown)
@@ -79,7 +79,8 @@ local function ActionHungerDrain(inst, data)
 						inst.components.talker:Say(GetString(inst, "ANNOUNCE_HUNGRY_FASTBUILD"))
 					end
 				end
-				if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL or data.action.action == ACTIONS.PICK and not (inst.components.rider ~= nil and inst.components.rider:IsRiding()) then
+				if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL or
+					data.action.action == ACTIONS.PICK and not (inst.components.rider ~= nil and inst.components.rider:IsRiding()) then
 					inst.components.hunger:DoDelta(-0.1, true) --.2
 				elseif data.action.action == ACTIONS.CHOP then
 					if data.action.target ~= nil then
@@ -94,7 +95,7 @@ local function ActionHungerDrain(inst, data)
 
 					inst.components.hunger:DoDelta(-0.2, true) --.333
 				elseif data.action.action == ACTIONS.MINE or
-				data.action.action == ACTIONS.HAMMER then
+					data.action.action == ACTIONS.HAMMER then
 					if data.action.target ~= nil then
 						local snap = SpawnPrefab("impact")
 						local x, y, z = inst.Transform:GetWorldPosition()
@@ -120,7 +121,7 @@ local function ActionHungerDrain(inst, data)
 				elseif data.action.action == ACTIONS.CHOP then
 					inst.components.hunger:DoDelta(-0.1, true)
 				elseif data.action.action == ACTIONS.MINE or
-				data.action.action == ACTIONS.HAMMER then
+					data.action.action == ACTIONS.HAMMER then
 					inst.components.hunger:DoDelta(-0.166, true)
 				elseif data.action.action == ACTIONS.DIG then
 					inst.components.hunger:DoDelta(-0.25, true)
@@ -137,29 +138,29 @@ local function onhungerchange(inst, data)
 	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
 
 	if fast then
-		inst.components.workmultiplier:AddMultiplier(ACTIONS.CHOP,   1.5, "ohungy")
-		inst.components.workmultiplier:AddMultiplier(ACTIONS.MINE,   1.5, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.CHOP, 1.5, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.MINE, 1.5, "ohungy")
 		inst.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, 1.5, "ohungy")
 		inst.components.workmultiplier:AddMultiplier(ACTIONS.ROW, 1.5, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.CHOP,   0.5, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.MINE,   0.5, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.CHOP, 0.5, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.MINE, 0.5, "ohungy")
 		inst.components.efficientuser:AddMultiplier(ACTIONS.HAMMER, 0.5, "ohungy")
 		inst.components.efficientuser:AddMultiplier(ACTIONS.DIG, 0.5, "ohungy")
 		inst.components.efficientuser:AddMultiplier(ACTIONS.ATTACK, 0.5, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.TILL,   0.5, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.TILL, 0.5, "ohungy")
 		inst.multiplierapplied = true
 	elseif slow then
-		inst.components.workmultiplier:AddMultiplier(ACTIONS.CHOP,   0.666, "ohungy")
-		inst.components.workmultiplier:AddMultiplier(ACTIONS.MINE,   0.666, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.CHOP, 0.666, "ohungy")
+		inst.components.workmultiplier:AddMultiplier(ACTIONS.MINE, 0.666, "ohungy")
 		inst.components.workmultiplier:AddMultiplier(ACTIONS.HAMMER, 0.666, "ohungy")
 		inst.components.workmultiplier:AddMultiplier(ACTIONS.ROW, 0.666, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.CHOP,   1.333, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.MINE,   1.333, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.CHOP, 1.333, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.MINE, 1.333, "ohungy")
 		inst.components.efficientuser:AddMultiplier(ACTIONS.HAMMER, 1.333, "ohungy")
 		inst.components.efficientuser:AddMultiplier(ACTIONS.DIG, 1.333, "ohungy")
 		inst.components.efficientuser:AddMultiplier(ACTIONS.ATTACK, 1.333, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.ROW,   1.333, "ohungy")
-		inst.components.efficientuser:AddMultiplier(ACTIONS.TILL,   1.333, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.ROW, 1.333, "ohungy")
+		inst.components.efficientuser:AddMultiplier(ACTIONS.TILL, 1.333, "ohungy")
 		inst.multiplierapplied = true
 	else
 		if inst.multiplierapplied then
@@ -180,13 +181,13 @@ local function onhungerchange(inst, data)
 end
 
 local function onbecamehuman(inst, data)
-    inst:ListenForEvent("performaction", ActionHungerDrain)
+	inst:ListenForEvent("performaction", ActionHungerDrain)
 	inst:ListenForEvent("hungerdelta", onhungerchange)
 	onhungerchange(inst, nil)
 end
 
 local function onbecameghost(inst, data)
-    inst:ListenForEvent("performaction", ActionHungerDrain)
+	inst:ListenForEvent("performaction", ActionHungerDrain)
 	inst:RemoveEventCallback("hungerdelta", onhungerchange)
 end
 
@@ -212,28 +213,28 @@ env.AddPrefabPostInit("winona", function(inst)
 
 		local _PickActionOld = inst.sg.sg.actionhandlers[ACTIONS.PICK].deststate
 		inst.sg.sg.actionhandlers[ACTIONS.PICK].deststate = function(inst, action)
-		local fast = inst.components.hunger:GetPercent() >= HUNGRY_THRESH_HIGH
-		local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
+			local fast = inst.components.hunger:GetPercent() >= HUNGRY_THRESH_HIGH
+			local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
 			if inst:HasTag("hungrybuilder") then
 				return (inst.components.rider ~= nil and inst.components.rider:IsRiding() and "dolongaction")
 					or (action.target ~= nil
-					and action.target.components.pickable ~= nil
-					and (   (action.target.components.pickable.jostlepick and "dojostleaction") or
+						and action.target.components.pickable ~= nil
+						and ((action.target.components.pickable.jostlepick and "dojostleaction") or
 							(action.target.components.pickable.quickpick and "doshortaction") or
 							(inst:HasTag("fastpicker") and "doshortaction") or
 							(inst:HasTag("quagmire_fasthands") or fast and "domediumaction") or
 							(slow and "dohungrybuild") or
-							"dolongaction"  ))
+							"dolongaction"))
 					or nil
 			else
 				return (inst.components.rider ~= nil and inst.components.rider:IsRiding() and "dolongaction")
 					or (action.target ~= nil
-					and action.target.components.pickable ~= nil
-					and (   (action.target.components.pickable.jostlepick and "dojostleaction") or
+						and action.target.components.pickable ~= nil
+						and ((action.target.components.pickable.jostlepick and "dojostleaction") or
 							(action.target.components.pickable.quickpick and "doshortaction") or
 							(inst:HasTag("fastpicker") and "doshortaction") or
 							(inst:HasTag("quagmire_fasthands") and "domediumaction") or
-							"dolongaction"  ))
+							"dolongaction"))
 					or nil
 			end
 		end
@@ -241,45 +242,48 @@ env.AddPrefabPostInit("winona", function(inst)
 end)
 
 local function onrepaired(inst)
-       --inst.SoundEmitter:PlaySound(data.buildsound) --If desired, can attach build sound here later.
+	--inst.SoundEmitter:PlaySound(data.buildsound) --If desired, can attach build sound here later.
 end
 
 local function ValidRepairFn(inst)
-    if inst.Physics:IsActive() then
-        return true
-    end
+	if inst.Physics:IsActive() then
+		return true
+	end
 
-    local x, y, z = inst.Transform:GetWorldPosition()
-    if TheWorld.Map:IsAboveGroundAtPoint(x, y, z) then
-        return true
-    end
+	local x, y, z = inst.Transform:GetWorldPosition()
+	if TheWorld.Map:IsAboveGroundAtPoint(x, y, z) then
+		return true
+	end
 
-    if TheWorld.Map:IsVisualGroundAtPoint(x,y,z) then
-        for i, v in ipairs(TheSim:FindEntities(x, 0, z, 1, PLAYER_TAGS)) do
-            if v ~= inst and
-            v.entity:IsVisible() and
-            v.components.placer == nil and
-            v.entity:GetParent() == nil then
-                local px, _, pz = v.Transform:GetWorldPosition()
-                if math.floor(x) == math.floor(px) and math.floor(z) == math.floor(pz) then
-                    return false
-                end
-            end
-        end
-    end
-    return true
+	if TheWorld.Map:IsVisualGroundAtPoint(x, y, z) then
+		for i, v in ipairs(TheSim:FindEntities(x, 0, z, 1, PLAYER_TAGS)) do
+			if v ~= inst and
+				v.entity:IsVisible() and
+				v.components.placer == nil and
+				v.entity:GetParent() == nil then
+				local px, _, pz = v.Transform:GetWorldPosition()
+				if math.floor(x) == math.floor(px) and math.floor(z) == math.floor(pz) then
+					return false
+				end
+			end
+		end
+	end
+	return true
 end
-	
+
 env.AddPrefabPostInit("winona_catapult", function(inst)
 	if TUNING.DSTU.WINONA_WACKCATS then
-		TUNING.WINONA_CATAPULT_HEALTH = 300
-		TUNING.WINONA_CATAPULT_HEALTH_REGEN = 0
 		inst:AddComponent("repairable")
 		inst.components.repairable.repairmaterial = "stone"
-        inst.components.repairable.onrepaired = onrepaired
-        --inst.components.repairable.testvalidrepairfn = ValidRepairFn
+		inst.components.repairable.onrepaired = onrepaired
+		--inst.components.repairable.testvalidrepairfn = ValidRepairFn
 	end
 end)
+
+if TUNING.DSTU.WINONA_WACKCATS then
+	TUNING.WINONA_CATAPULT_HEALTH = 300
+	TUNING.WINONA_CATAPULT_HEALTH_REGEN = 0
+end
 
 env.AddPrefabPostInit("winona_catapult_projectile", function(inst)
 	if TUNING.DSTU.WINONA_WACKCATS and inst.components.combat ~= nil then
@@ -298,11 +302,17 @@ end)
 env.AddComponentPostInit("repairable", function(self)
 	if TUNING.DSTU.WINONA_WACKCATS then
 		local _Repair = self.Repair
-		function self:Repair(doer,repair_item)
+		function self:Repair(doer, repair_item)
 			if repair_item:HasTag("tape") then
 				self.inst.components.health:DoDelta(repair_item.components.repairer.healthrepairvalue)
+				if repair_item.components.stackable ~= nil then
+					repair_item.components.stackable:Get():Remove()
+				else
+					repair_item:Remove()
+				end
+				return true
 			else
-				return _Repair(self,doer,repair_item)
+				return _Repair(self, doer, repair_item)
 			end
 		end
 	end

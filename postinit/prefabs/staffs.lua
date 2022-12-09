@@ -307,10 +307,10 @@ if env.GetModConfigData("telestaff_rework") then
         local spells = {}
         local deselect_spell =
         {
-            widget_scale = inst.target_focus ~= nil and ICON_SCALE or ICON_SCALE * 1.5,
+            widget_scale = ICON_SCALE,
             hit_radius = ICON_RADIUS,
-            atlas = "images/tele_icon1c.xml",
-            normal = "tele_icon1c.tex",
+            atlas = inst.target_focus ~= nil and "images/tele_icon1c.xml" or "images/tele_icon1d.xml",
+            normal = inst.target_focus ~= nil and "tele_icon1c.tex" or "tele_icon1d.tex",
             label = "Location: Nearest.",
             execute = function(inst)
                 inst.target_focus = nil

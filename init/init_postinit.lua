@@ -35,6 +35,7 @@ local component_post = {
 	"playerspawner",
 	--"drownable",
 	"combat",
+	"combat_replica",
 	"hullhealth",
 	"health",
 	--"spellbook"
@@ -53,7 +54,7 @@ local prefab_post = {
 	"catcoon",
 	"icehound",
 	"firehound",
-	--"forest",
+	"forest",
 	"world",
 	"antlion",
 	"minifan",
@@ -206,6 +207,7 @@ local brain_post = {
 	"perd",
 	"catcoon",
 	"deer",
+	"shadowwaxwell"
 }
 
 if GetModConfigData("hangyperds") then

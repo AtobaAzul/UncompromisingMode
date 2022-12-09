@@ -143,7 +143,8 @@ startregen = function(inst, regentime)
             ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")) then
             regentime = regentime / 2
         elseif TheWorld.state.iswinter and not TheWorld.state.issnowing and
-            not ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")
+            not
+            ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")
             ) then
             regentime = regentime
         else

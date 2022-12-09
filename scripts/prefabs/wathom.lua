@@ -81,7 +81,7 @@ local function UnAmp(inst)
 		
 		local bed = inst.components.sleepingbaguser ~= nil and inst.components.sleepingbaguser.bed or nil
 
-		if bed ~= nil then
+		if bed ~= nil and bed.components.sleepingbag ~= nil then
 			bed.components.sleepingbag:DoWakeUp()
 		end
 

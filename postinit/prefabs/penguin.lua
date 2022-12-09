@@ -143,10 +143,10 @@ env.AddPrefabPostInit("penguin", function(inst)
 		inst.components.combat:SetRetargetFunction(2, NewRetarget)
 	end
 
-	--if TUNING.DSTU.MOON_TRANSFORMATIONS then
-	--	inst:WatchWorldState("isfullmoon", OnFullMoon)
-	--	OnFullMoon(inst, TheWorld.state.isfullmoon)
-	--end
+	if TUNING.DSTU.MOON_TRANSFORMATIONS then
+		inst:WatchWorldState("isfullmoon", OnFullMoon)
+		OnFullMoon(inst, TheWorld.state.isfullmoon)
+	end
 
 	inst:ListenForEvent("oneat", OnEat)
 end)
@@ -156,9 +156,9 @@ env.AddPrefabPostInit("mutated_penguin", function(inst)
 		return
 	end
 	
-	--inst:AddComponent("halloweenmoonmutable")
-	--inst.components.halloweenmoonmutable:SetPrefabMutated("penguin")
-	--inst.components.halloweenmoonmutable:SetOnMutateFn(OnMoonMutate)
+	inst:AddComponent("halloweenmoonmutable")
+	inst.components.halloweenmoonmutable:SetPrefabMutated("penguin")
+	inst.components.halloweenmoonmutable:SetOnMutateFn(OnMoonMutate)
 
 	--inst:WatchWorldState("isfullmoon", OnNonFullMoon)
 	--OnNonFullMoon(inst, TheWorld.state.isfullmoon)

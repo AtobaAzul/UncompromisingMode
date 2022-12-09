@@ -165,7 +165,7 @@ local function fn()
 
     inst:AddComponent("fueled")
     inst.components.fueled.fueltype = FUELTYPE.SALT
-    inst.components.fueled:InitializeFuelLevel(TUNING.TORCH_FUEL * 2)
+    inst.components.fueled:InitializeFuelLevel(TUNING.TORCH_FUEL * 4)
     inst.components.fueled:SetTakeFuelFn(ontakefuel)
     inst.components.fueled:SetDepletedFn(Depleted)
     inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION * 2,TUNING.TURNON_FULL_FUELED_CONSUMPTION *2)

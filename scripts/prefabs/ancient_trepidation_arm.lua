@@ -4,7 +4,7 @@ local function retargetfn(inst)
     return FindEntity(
         inst,
         TUNING.TENTACLE_ATTACK_DIST,
-        function(guy) 
+        function(guy)
             return guy.prefab ~= inst.prefab
                 and guy.entity:IsVisible()
                 and not guy.components.health:IsDead()
@@ -72,13 +72,13 @@ local function fn()
     inst.AnimState:SetBuild("ancient_trepidation_arm")
     inst.AnimState:PlayAnimation("emerge")
     inst.Transform:SetFourFaced()
-    --inst:AddTag("monster")    
+    --inst:AddTag("monster")
     inst:AddTag("hostile")
-	inst:AddTag("shadow")
-	inst:AddTag("treparm")
-	--inst:AddTag("shadowcreature")	
+    inst:AddTag("shadow")
+    inst:AddTag("treparm")
+    --inst:AddTag("shadowcreature")
     inst.entity:SetPristine()
-	inst.AnimState:SetMultColour(0, 0, 0, 0.8)
+    inst.AnimState:SetMultColour(0, 0, 0, 0.8)
     if not TheWorld.ismastersim then
         return inst
     end
