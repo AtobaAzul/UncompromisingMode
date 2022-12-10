@@ -18,9 +18,9 @@ local function StopLight(inst)
 end
 
 local function HasStaff(inst, staffname)
-    return (inst._staffinst ~= nil and inst._staffinst.prefab or inst.components.pickable.product) == staffname or inst.mooning
+    return (inst._staffinst ~= nil and inst._staffinst.prefab or inst.components.pickable.product) == staffname or
+        inst.mooning
 end
-
 
 local function StopFX(inst)
     if inst._fxpulse ~= nil then
@@ -101,9 +101,9 @@ local function giveopal(inst, item, giver)
     end
 
     local item = SpawnPrefab("opalpreciousgem")
-	if item ~= nil then
-		item.Transform:SetPosition(x, y, z)
-		launchitem(item, angle)
+    if item ~= nil then
+        item.Transform:SetPosition(x, y, z)
+        launchitem(item, angle)
     end
 end
 
@@ -122,9 +122,9 @@ local function givetear(inst, item, giver)
     end
 
     local item = SpawnPrefab("moon_tear")
-	if item ~= nil then
-		item.Transform:SetPosition(x, y, z)
-		launchitem(item, angle)
+    if item ~= nil then
+        item.Transform:SetPosition(x, y, z)
+        launchitem(item, angle)
     end
 end
 
@@ -165,105 +165,105 @@ local function StartFX(inst)
 end
 
 local function SpawnReinforcements(inst, giver)
-	local x, y, z = inst.Transform:GetWorldPosition()
-	
-	local x1 = x + math.random(-10, 10)
-	local z1 = z + math.random(-10, 10)
-	
-	inst.fxpulse = SpawnPrefab("positronpulse")
-	inst.fxpulse.Transform:SetPosition(x1, y, z1)
-	
-	inst.fxfront = SpawnPrefab("positronbeam_front")
-	inst.fxfront.Transform:SetPosition(x1, y, z1)
+    local x, y, z = inst.Transform:GetWorldPosition()
 
-	inst.fxback = SpawnPrefab("positronbeam_back")
-	inst.fxback.Transform:SetPosition(x1, y, z1)
-	
-	inst:DoTaskInTime(3.5, function(inst)
-		if inst.fxpulse ~= nil then
-			inst.fxpulse:KillFX()
-			inst.fxpulse = nil
-		end
-		
-		if inst.fxfront ~= nil then
-			inst.fxfront:KillFX()
-			inst.fxfront = nil
-		end
-		
-		if inst.fxback ~= nil then
-			inst.fxback:KillFX()
-			inst.fxback = nil
-		end
+    local x1 = x + math.random(-10, 10)
+    local z1 = z + math.random(-10, 10)
 
-		local x, _, z = inst.Transform:GetWorldPosition()
-		local moonpulsefx = SpawnPrefab("moonpulse_fx")
-		moonpulsefx.Transform:SetPosition(x1, 0, z1)
-		moonpulsefx.Transform:SetScale(0.8, 0.8, 0.8)
-		
-		local threat = TUNING.DSTU.MOON_TRANSFORMATIONS and SpawnPrefab("mutatedhound") or SpawnPrefab("hound")
-		threat.Transform:SetPosition(x1, 0, z1)
-		threat.SoundEmitter:PlaySound("grotto/common/moon_alter/link/wave1")
-	end)
+    inst.fxpulse = SpawnPrefab("positronpulse")
+    inst.fxpulse.Transform:SetPosition(x1, y, z1)
+
+    inst.fxfront = SpawnPrefab("positronbeam_front")
+    inst.fxfront.Transform:SetPosition(x1, y, z1)
+
+    inst.fxback = SpawnPrefab("positronbeam_back")
+    inst.fxback.Transform:SetPosition(x1, y, z1)
+
+    inst:DoTaskInTime(3.5, function(inst)
+        if inst.fxpulse ~= nil then
+            inst.fxpulse:KillFX()
+            inst.fxpulse = nil
+        end
+
+        if inst.fxfront ~= nil then
+            inst.fxfront:KillFX()
+            inst.fxfront = nil
+        end
+
+        if inst.fxback ~= nil then
+            inst.fxback:KillFX()
+            inst.fxback = nil
+        end
+
+        local x, _, z = inst.Transform:GetWorldPosition()
+        local moonpulsefx = SpawnPrefab("moonpulse_fx")
+        moonpulsefx.Transform:SetPosition(x1, 0, z1)
+        moonpulsefx.Transform:SetScale(0.8, 0.8, 0.8)
+
+        local threat = TUNING.DSTU.MOON_TRANSFORMATIONS and SpawnPrefab("mutatedhound") or SpawnPrefab("hound")
+        threat.Transform:SetPosition(x1, 0, z1)
+        threat.SoundEmitter:PlaySound("grotto/common/moon_alter/link/wave1")
+    end)
 end
 
 local function ItemTradeTest(inst, item, giver)
-	if item.prefab == "moon_tear" and not inst.mooning then
-		if TheWorld.state.isfullmoon then
-			inst.mooning = true
-			StartFX(inst)
-			item:Remove()
-			
-			for i = 1, 6 do
-				inst:DoTaskInTime(i * 4, function(inst, giver)
-					if TheWorld.state.isfullmoon then
-						SpawnReinforcements(inst, giver)
-					end
-				end)
-			end
-			
-			TheWorld:PushEvent("ms_forceprecipitation")
-			
-			inst.moonteartransformtask = inst:DoTaskInTime(30, function(inst, item, giver)
-				giveopal(inst, item, giver)
-				StopFX(inst)
-				inst.mooning = false
-				
-				inst:StopWatchingWorldState("isday")
-				
-				if inst.moonteartransformtask ~= nil then
-					inst.moonteartransformtask:Cancel()
-				end
-				
-				inst.moonteartransformtask = nil
-			end)
-			
-			inst:WatchWorldState("isday", function(inst, item, giver)
-				if inst.moonteartransformtask ~= nil then
-					inst.moonteartransformtask:Cancel()
-					givetear(inst, item, giver)
-				end
-				
-				inst.moonteartransformtask = nil
-				
-				StopFX(inst)
-				inst.mooning = false
-			
-				inst:StopWatchingWorldState("isday")
-			end)
-			
-			return true
-		else
-			return false, "NOTNIGHT"
-		end
-	elseif not inst.mooning then
-		return inst._OldItemTradeTest(inst, item)
-		--[[if item == nil then
+    if item.prefab == "moon_tear" and not inst.mooning then
+        if TheWorld.state.isfullmoon then
+            inst.mooning = true
+            StartFX(inst)
+            item:Remove()
+
+            for i = 1, 6 do
+                inst:DoTaskInTime(i * 4, function(inst, giver)
+                    if TheWorld.state.isfullmoon then
+                        SpawnReinforcements(inst, giver)
+                    end
+                end)
+            end
+
+            TheWorld:PushEvent("ms_forceprecipitation")
+
+            inst.moonteartransformtask = inst:DoTaskInTime(30, function(inst, item, giver)
+                giveopal(inst, item, giver)
+                StopFX(inst)
+                inst.mooning = false
+
+                inst:StopWatchingWorldState("isday")
+
+                if inst.moonteartransformtask ~= nil then
+                    inst.moonteartransformtask:Cancel()
+                end
+
+                inst.moonteartransformtask = nil
+            end)
+
+            inst:WatchWorldState("isday", function(inst, item, giver)
+                if inst.moonteartransformtask ~= nil then
+                    inst.moonteartransformtask:Cancel()
+                    givetear(inst, item, giver)
+                end
+
+                inst.moonteartransformtask = nil
+
+                StopFX(inst)
+                inst.mooning = false
+
+                inst:StopWatchingWorldState("isday")
+            end)
+
+            return true
+        else
+            return false, "NOTNIGHT"
+        end
+    elseif not inst.mooning then
+        return inst._OldItemTradeTest(inst, item)
+        --[[if item == nil then
 			return false
 		elseif string.sub(item.prefab, -5) ~= "staff" then
 			return false, "NOTSTAFF"
 		end
 		return true]]
-	end
+    end
 end
 
 local function OnTearGiven(inst, giver, item)
@@ -279,14 +279,14 @@ local function MakeRepairable(inst)
 end
 
 env.AddPrefabPostInit("moonbase", function(inst)
-	if not TheWorld.ismastersim then
-		return
-	end
-	
-	inst.mooning = false
-	
+    if not TheWorld.ismastersim then
+        return
+    end
+
+    inst.mooning = false
+
     MakeRepairable(inst)
-	--[[local _ItemTradeTest = inst.components.trader.abletoaccepttest
+    --[[local _ItemTradeTest = inst.components.trader.abletoaccepttest
 	
 	inst.components.trader.abletoaccepttest = function(inst, item, giver)
 		if item.prefab == "moon_tear" then
@@ -297,21 +297,21 @@ env.AddPrefabPostInit("moonbase", function(inst)
 			end
 		end
 	end]]
-	
-	local _OnStaffGiven = inst.components.trader.onaccept
-	inst._OldItemTradeTest = inst.components.trader.abletoaccepttest
+
+    local _OnStaffGiven = inst.components.trader.onaccept
+    inst._OldItemTradeTest = inst.components.trader.abletoaccepttest
 
     inst.components.trader:SetAbleToAcceptTest(ItemTradeTest)
     inst.components.trader.onaccept = function(inst, giver, item)
-	
-	if item.prefab == "moon_tear" then
-		OnTearGiven(inst, giver, item)
-	else
-		if _OnStaffGiven ~= nil then
-			_OnStaffGiven(inst, giver, item)
-		end
-	end
-	
-	end
-	
+
+        if item.prefab == "moon_tear" then
+            OnTearGiven(inst, giver, item)
+        else
+            if _OnStaffGiven ~= nil then
+                _OnStaffGiven(inst, giver, item)
+            end
+        end
+
+    end
+
 end)
