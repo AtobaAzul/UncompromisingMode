@@ -402,39 +402,42 @@ local states=
 
 
         onenter = function(inst)
-            inst.sg:SetTimeout(0.1)                  
-            inst.components.locomotor:Stop()           
-            inst.AnimState:PlayAnimation("evade_loop",true)
-            inst.components.locomotor:EnableGroundSpeedMultiplier(false)
-			inst.sg.statemem.startpos = Vector3(inst.Transform:GetWorldPosition())
-			
-            if inst.components.combat.target and inst.components.combat.target:IsValid() then
-				inst.sg.statemem.targetpos = Vector3(inst.components.combat.target.Transform:GetWorldPosition())
-			else
-				inst.sg.statemem.targetpos = Vector3(inst.Transform:GetWorldPosition())
-            end
-        end,
-		onupdate = function(inst)
-            local percent = inst.AnimState:GetCurrentAnimationTime () / inst.AnimState:GetCurrentAnimationLength()
-            local xdiff = inst.sg.statemem.targetpos.x - inst.sg.statemem.startpos.x
-            local zdiff = inst.sg.statemem.targetpos.z - inst.sg.statemem.startpos.z
+                if inst ~= nil then
+                    inst.sg:SetTimeout(0.1)
+                    if inst.components.combat.target and inst.components.combat.target:IsValid() then
+                        inst:ForceFacePoint(inst.components.combat.target:GetPosition())
+                    else
+                        inst:GoToState("hit")
+                    end
+                    inst.components.locomotor:Stop()
+                    inst.AnimState:PlayAnimation("evade_loop", true)
+                    inst.Physics:SetMotorVelOverride(-40, 0, 0)
+                    inst.components.locomotor:EnableGroundSpeedMultiplier(false)
+                end
+            end,
+            --[[
+        events=
+        {
+            EventHandler("animover", function(inst) 
+                inst.sg:GoToState("evade_pst") 
+            end ),
+        },  
+]]
+            timeline =
+            {
+                TimeEvent(3 * FRAMES, function(inst) inst.Physics:SetMotorVel(-30, 0, 0) end),
 
-            --print(inst.sg.statemem.targetpos.x,inst.sg.statemem.targetpos.z, inst.sg.statemem.startpos.x,inst.sg.statemem.startpos.z)
-			if TheWorld.Map:IsAboveGroundAtPoint(inst.sg.statemem.startpos.x-(xdiff*percent),0,inst.sg.statemem.startpos.z-(zdiff*percent)) then
-            inst.Transform:SetPosition(inst.sg.statemem.startpos.x-(xdiff*percent),0,inst.sg.statemem.startpos.z-(zdiff*percent))
-			end
-        end,
-		
-        ontimeout = function(inst)
-            inst.sg:GoToState("evade_pst")
-        end,
+            },
+            ontimeout = function(inst)
+                inst.sg:GoToState("evade_pst")
+            end,
 
-        onexit = function(inst)
-            inst.components.locomotor:EnableGroundSpeedMultiplier(true)
-            inst.Physics:ClearMotorVelOverride()
-            inst.components.locomotor:Stop()
-        end,        
-    },
+            onexit = function(inst)
+                inst.components.locomotor:EnableGroundSpeedMultiplier(true)
+                inst.Physics:ClearMotorVelOverride()
+                inst.components.locomotor:Stop()
+            end,
+        },
 
     State{
         name = "evade_pst",

@@ -19,10 +19,14 @@ end
 local WixiePiano = Class(Screen, function(self, title, text, buttons, scale_bg, spacing_override, style)
 	Screen._ctor(self, "WixiePiano")
 	
-    self.proot = self:AddChild(Widget("ROOT"))
-    self.proot:SetVAnchor(ANCHOR_MIDDLE)
-    self.proot:SetHAnchor(ANCHOR_MIDDLE)
-    self.proot:SetPosition(0,300,0)
+    self.theroot = self:AddChild(Widget("ROOT"))
+    self.theroot:SetVAnchor(ANCHOR_MIDDLE)
+    self.theroot:SetHAnchor(ANCHOR_MIDDLE)
+    self.theroot:SetScaleMode(SCALEMODE_PROPORTIONAL)
+	
+    self.proot = self.theroot:AddChild(Widget("root"))
+    self.proot:SetScale(.75)
+    self.proot:SetPosition(0,250,0)
 	
     local buttons = {{ text = "Hm...", cb = acceptance }}
 	
@@ -216,28 +220,10 @@ end
 
 function WixiePiano:OnControl(control, down)
     if WixiePiano._base.OnControl(self,control, down) then return true end
---[[
-    if control == CONTROL_CANCEL and not down then
-        if #self.buttons > 1 and self.buttons[#self.buttons] then
-            self.buttons[#self.buttons].cb()
-            TheFrontEnd:GetSound():PlaySound("dontstarve/HUD/click_move")
-            return true
-        end
-    end]]
 end
-
 
 function WixiePiano:Close()
 	TheFrontEnd:PopScreen(self)
-end
-
-function WixiePiano:GetHelpText()
-	local controller_id = TheInput:GetControllerID()
-	local t = {}
-	if #self.buttons > 1 and self.buttons[#self.buttons] then
-        table.insert(t, TheInput:GetLocalizedControl(controller_id, CONTROL_CANCEL) .. " " .. STRINGS.UI.HELP.BACK)
-    end
-	return table.concat(t, "  ")
 end
 
 return WixiePiano
