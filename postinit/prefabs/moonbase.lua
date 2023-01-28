@@ -200,7 +200,7 @@ local function SpawnReinforcements(inst, giver)
         moonpulsefx.Transform:SetPosition(x1, 0, z1)
         moonpulsefx.Transform:SetScale(0.8, 0.8, 0.8)
 
-        local threat = TUNING.DSTU.MOON_TRANSFORMATIONS and SpawnPrefab("mutatedhound") or SpawnPrefab("hound")
+        local threat = SpawnPrefab("mutatedhound")
         threat.Transform:SetPosition(x1, 0, z1)
         threat.SoundEmitter:PlaySound("grotto/common/moon_alter/link/wave1")
     end)
