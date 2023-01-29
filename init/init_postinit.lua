@@ -167,6 +167,7 @@ local prefab_post = {
 	"soil_amender",
 	"vetcurse_drops",
 	"charcoal",
+	"mermhat",
 }
 
 local stategraph_post = {
