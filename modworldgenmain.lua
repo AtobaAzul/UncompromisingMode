@@ -193,7 +193,7 @@ AddTaskPreInit("BigBatCave",
     task.room_bg=WORLD_TILES.MAGMA_ASH
 end)]]
 
-	
+
 if GetModConfigData("worldgenmastertoggle") then
     -- <<Cave Update WIP: Toggle at your own risk you buffoons! (That means you atoba, don't leak it please eh?)>>
     -- I became a dev :sunglasses: - Atobá
@@ -248,9 +248,9 @@ if GetModConfigData("worldgenmastertoggle") then
         if tasksetdata.location ~= "forest" then
             return
         end
-        if (
-            tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.VOLCANO or
-                tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED) then
+        if (tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.VOLCANO) then
+            return
+        elseif (tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED) then
             if GetModConfigData("hoodedforest") then
                 table.insert(tasksetdata.tasks, "GiantTrees_IA")
             end
@@ -260,6 +260,7 @@ if GetModConfigData("worldgenmastertoggle") then
         if GetModConfigData("hoodedforest") then
             table.insert(tasksetdata.tasks, "GiantTrees")
         end
+    
         if GetModConfigData("rice") then
             table.insert(tasksetdata.required_prefabs, "riceplantspawnerlarge")
             table.insert(tasksetdata.required_prefabs, "riceplantspawner")
@@ -346,7 +347,7 @@ if GetModConfigData("worldgenmastertoggle") then
             tasksetdata.ocean_prefill_setpieces["utw_biomespawner"] = { count = math.random(6, 9) }
         end --nice
     end)
-	
+
     if GetModConfigData("trapdoorspiders") then
         AddRoomPreInit("BGSavanna",
             function(room) --This effects the outer areas of the Triple Mac and The Major Beefalo Plains
@@ -490,7 +491,7 @@ if GetModConfigData("worldgenmastertoggle") then
 
     -----KoreanWaffle's Spawner Limiter Tag Adding Code
     --Add new map tags to storygen
-    local MapTags = { "scorpions", "hoodedcanopy", "rattygas", "ratkey1","mosaic" }
+    local MapTags = { "scorpions", "hoodedcanopy", "rattygas", "ratkey1", "mosaic" }
     AddGlobalClassPostConstruct("map/storygen", "Story", function(self)
         for k, v in pairs(MapTags) do
             self.map_tags.Tag[v] = function(tagdata)
@@ -537,7 +538,7 @@ if GetModConfigData("worldgenmastertoggle") then
             end
         end)
     end
-	
+
     -----KoreanWaffle's Spawner Limiter Tag Adding Code
     GLOBAL.require("map/rooms/forest/extraswamp")
     if GetModConfigData("vetcurse") == "default" then
