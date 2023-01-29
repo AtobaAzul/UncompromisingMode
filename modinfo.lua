@@ -346,6 +346,7 @@ configuration_options =
 		},
 		default = 180,
 	},
+	BinaryConfig("itemcheck", "Item Score", "Equippable items and mole bait items increase the \'rat score\' value.", true),
 -----------------------------
 -- Items and Structures--
 -----------------------------
