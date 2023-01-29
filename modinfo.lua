@@ -346,6 +346,7 @@ configuration_options =
 		},
 		default = 180,
 	},
+	BinaryConfig("itemcheck", "Item Score", "Equippable items and mole bait items increase the \'rat score\' value.", true),
 -----------------------------
 -- Items and Structures--
 -----------------------------
@@ -408,6 +409,7 @@ configuration_options =
 		},
 		default = 1,
 	},
+	BinaryConfig("hambatnerf", "Ham Bat Nerf", "Spoils faster and minimum damage is lower.", true),
 -----------------------------
 -- Food --
 -----------------------------

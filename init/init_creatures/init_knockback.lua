@@ -18,7 +18,7 @@ local EQUIPSLOTS = _G.EQUIPSLOTS
 --TODO: Add antlion upward attack to deerclops shards
 --TODO: Add AoE to most mobs that require it
 
-local GIANTS = 
+local GIANTS =
 {
 	--[[["bearger"] =
     {
@@ -66,27 +66,32 @@ local GIANTS =
 		power = 1,
 	},]]
 	["mothergoose"] =
-    {
-        radius = 200,
+	{
+		radius = 200,
 		power = 1,
 	},
-	--No klaus, since he does double attacks and has deer 
+	--No klaus, since he does double attacks and has deer
 }
 
 for k, v in pairs(GIANTS) do
 	AddPrefabPostInit(k, function(inst)
 		local function OnHitOther(inst, other)
 			if other:HasTag("creatureknockbackable") then
-			other:PushEvent("knockback", {knocker = inst, radius = v.radius, strengthmult = v.power})
+				other:PushEvent("knockback", { knocker = inst, radius = v.radius, strengthmult = v.power })
 			else
-			if other ~= nil and other.components.inventory ~= nil and not other:HasTag("fat_gang") and not other:HasTag("foodknockbackimmune") and not (other.components.rider ~= nil and other.components.rider:IsRiding()) and 
-			--Don't knockback if you wear marble
-			(other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ==nil or not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
-				other:PushEvent("knockback", {knocker = inst, radius = v.radius, strengthmult = v.power})
-			end
+				if other ~= nil and other.components.inventory ~= nil and not other:HasTag("fat_gang") and
+					not other:HasTag("foodknockbackimmune") and
+					not (other.components.rider ~= nil and other.components.rider:IsRiding()) and
+					--Don't knockback if you wear marble
+					(
+					other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) == nil or
+						not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and
+						not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
+					other:PushEvent("knockback", { knocker = inst, radius = v.radius, strengthmult = v.power })
+				end
 			end
 		end
-	
+
 		if inst.components.combat ~= nil then
 			inst.components.combat.onhitotherfn = OnHitOther
 		end
@@ -94,5 +99,5 @@ for k, v in pairs(GIANTS) do
 end
 
 if GetModConfigData("harder_beequeen") then
- --TODO make it configure the revvork instead
+	--TODO make it configure the revvork instead
 end
