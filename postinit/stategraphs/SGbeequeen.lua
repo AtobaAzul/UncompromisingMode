@@ -70,11 +70,11 @@ local function SpinVVall(inst,speed)
 end
 
 
-local function Honey(inst,angle,count,variation)
+local function Honey(inst,angle,count,variation, slowness)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local fx = SpawnPrefab(inst.prefab == "cherry_beequeen" and "cherry_honey_trail" or "honey_trail")
-    if inst.prefab == "cherry_beequeen" then
-        fx.slowness = fx.slowness + inst.flowerbuffs.honeyslowness
+    local fx = SpawnPrefab((inst.prefab == "cherry_beequeen" or inst.prefab == "cherry_honey_trail") and "cherry_honey_trail" or "honey_trail")
+    if inst.prefab == "cherry_beequeen" or inst.prefab == "cherry_honey_trail" then
+        fx.slowness = inst.flowerbuffs ~= nil and fx.slowness + inst.flowerbuffs.honeyslowness or slowness
     end
 
 	if not variation then
@@ -88,7 +88,7 @@ local function Honey(inst,angle,count,variation)
 
 	if count > 0 then
 		fx:DoTaskInTime(0.2,function(fx)
-			Honey(fx,fx.angle,fx.count)
+			Honey(fx,fx.angle,fx.count, nil, fx.slowness)
 		end)
 	end
 end
