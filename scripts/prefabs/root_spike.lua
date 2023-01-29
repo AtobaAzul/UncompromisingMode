@@ -1,7 +1,7 @@
 local assets =
 {
     Asset("ANIM", "anim/root_spike.zip"),
-	Asset("ANIM", "anim/chop_root_spike.zip"),
+    Asset("ANIM", "anim/chop_root_spike.zip"),
 }
 
 local prefabs =
@@ -22,7 +22,7 @@ local function ChangeToObstacle(inst)
     inst:RemoveEventCallback("animover", ChangeToObstacle)
     local x, y, z = inst.Transform:GetWorldPosition()
     inst.Physics:Stop()
-    inst.Physics:SetMass(0) 
+    inst.Physics:SetMass(0)
     inst.Physics:ClearCollisionMask()
     inst.Physics:CollidesWith(COLLISION.ITEMS)
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
@@ -57,13 +57,14 @@ local COLLAPSIBLE_WORK_ACTIONS =
 }
 local COLLAPSIBLE_TAGS = { "_combat", "pickable", "NPC_workable" }
 for k, v in pairs(COLLAPSIBLE_WORK_ACTIONS) do
-    table.insert(COLLAPSIBLE_TAGS, k.."_workable")
+    table.insert(COLLAPSIBLE_TAGS, k .. "_workable")
 end
 local NON_COLLAPSIBLE_TAGS = { "stalker", "flying", "shadow", "ghost", "playerghost", "FX", "NOCLICK", "DECOR", "INLIMBO" }
 
 local function DoDamage(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, 0, z, PHYSICS_RADIUS + DAMAGE_RADIUS_PADDING, nil, NON_COLLAPSIBLE_TAGS, COLLAPSIBLE_TAGS)
+    local ents = TheSim:FindEntities(x, 0, z, PHYSICS_RADIUS + DAMAGE_RADIUS_PADDING, nil, NON_COLLAPSIBLE_TAGS,
+        COLLAPSIBLE_TAGS)
     for i, v in ipairs(ents) do
         if v:IsValid() then
             local isworkable = false
@@ -73,8 +74,10 @@ local function DoDamage(inst)
                 --     allow digging spawners (e.g. rabbithole)
                 isworkable = (
                     (work_action == nil and v:HasTag("NPC_workable")) or
-                    (v.components.workable:CanBeWorked() and work_action ~= nil and COLLAPSIBLE_WORK_ACTIONS[work_action.id])
-                )
+                        (
+                        v.components.workable:CanBeWorked() and work_action ~= nil and
+                            COLLAPSIBLE_WORK_ACTIONS[work_action.id])
+                    )
             end
             if isworkable then
                 v.components.workable:Destroy(inst)
@@ -105,7 +108,8 @@ local function DoDamage(inst)
         end
     end
 
-    local totoss = TheSim:FindEntities(x, 0, z, PHYSICS_RADIUS + DAMAGE_RADIUS_PADDING, { "_inventoryitem" }, { "locomotor", "INLIMBO" })
+    local totoss = TheSim:FindEntities(x, 0, z, PHYSICS_RADIUS + DAMAGE_RADIUS_PADDING, { "_inventoryitem" },
+        { "locomotor", "INLIMBO" })
     for i, v in ipairs(totoss) do
         if v.components.mine ~= nil then
             v.components.mine:Deactivate()
@@ -127,7 +131,7 @@ local function OnKill(inst)
     inst:DoTaskInTime(0, OnKill2)
 end
 
-local function KillSpike(inst)
+local function KillSpike(inst, instant)
     if not inst.killed then
         if inst.basefx ~= nil then
             inst.killed = true
@@ -140,8 +144,8 @@ local function KillSpike(inst)
             inst:RemoveEventCallback("animover", ChangeToObstacle)
 
             if inst.basefx:IsValid() then
-                inst.basefx.AnimState:PlayAnimation("base_pst"..tostring(inst.basefx.variation))
-                inst:DoTaskInTime(1, OnKill)
+                inst.basefx.AnimState:PlayAnimation("base_pst" .. tostring(inst.basefx.variation))
+                inst:DoTaskInTime(instant and 0 or 1, OnKill)
             else
                 OnKill(inst)
             end
@@ -155,7 +159,7 @@ local function StartSpike(inst, duration, variation)
     inst.task = inst:DoTaskInTime(duration, KillSpike)
 
     if variation > 1 then
-        inst.AnimState:OverrideSymbol("bone1", "root_spike", "bone"..tostring(variation))
+        inst.AnimState:OverrideSymbol("bone1", "root_spike", "bone" .. tostring(variation))
     end
 
     inst.basefx = SpawnPrefab("rootspike_base")
@@ -191,27 +195,28 @@ local function chop_root(inst, chopper, chopsleft, numchops)
     end
 
     --inst.AnimState:PlayAnimation("onworked")
-   -- inst.AnimState:PushAnimation("idle", true)
+    -- inst.AnimState:PushAnimation("idle", true)
 
-   -- if inst.build ~= "twiggy" then
-       -- local x, y, z = inst.Transform:GetWorldPosition()
-     --   SpawnPrefab("pine_needles_chop").Transform:SetPosition(x, y + math.random() * 2, z)
+    -- if inst.build ~= "twiggy" then
+    -- local x, y, z = inst.Transform:GetWorldPosition()
+    --   SpawnPrefab("pine_needles_chop").Transform:SetPosition(x, y + math.random() * 2, z)
 
-        --tell any nearby leifs to wake up --                                                        <-- We can Activate this if you want treeguards to be harder
-      --  local ents = TheSim:FindEntities(x, y, z, TUNING.LEIF_REAWAKEN_RADIUS, { "leif" })
-       -- for i, v in ipairs(ents) do
-         --   if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
-           --     v:DoTaskInTime(math.random(), WakeUpLeif)
-            --end
-            --v.components.combat:SuggestTarget(chopper)
-     --   end
-   -- end
+    --tell any nearby leifs to wake up --                                                        <-- We can Activate this if you want treeguards to be harder
+    --  local ents = TheSim:FindEntities(x, y, z, TUNING.LEIF_REAWAKEN_RADIUS, { "leif" })
+    -- for i, v in ipairs(ents) do
+    --   if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
+    --     v:DoTaskInTime(math.random(), WakeUpLeif)
+    --end
+    --v.components.combat:SuggestTarget(chopper)
+    --   end
+    -- end
 end
 
 local function chop_down_root(inst, chopper)
     inst.SoundEmitter:PlaySound("dontstarve/forest/treefall")
     OnKill(inst)
 end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -235,19 +240,20 @@ local function fn()
     inst.Physics:CollidesWith(COLLISION.GIANTS)
     inst.Physics:CollidesWith(COLLISION.WORLD)
     inst.Physics:SetCapsule(PHYSICS_RADIUS, 2)
-	
+
     inst:AddTag("groundspike")
     inst:AddTag("fossilspike")
+    inst:AddTag("rootspike")
 
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
         return inst
     end
-	
-	inst:AddComponent("workable")
-	inst.components.workable:SetWorkLeft(5)
-	inst.components.workable:SetOnWorkCallback(chop_root)
+
+    inst:AddComponent("workable")
+    inst.components.workable:SetWorkLeft(5)
+    inst.components.workable:SetOnWorkCallback(chop_root)
     inst.components.workable:SetOnFinishCallback(chop_down_root)
 
     --[[inst:AddComponent("combat")
@@ -260,7 +266,7 @@ local function fn()
     inst.task = inst:DoTaskInTime(0, StartSpike, 5 + math.random(), math.random(NUM_VARIATIONS))
     inst.RestartSpike = RestartSpike
     inst.KillSpike = KillSpike
-
+    
     return inst
 end
 
@@ -290,7 +296,7 @@ local function basefn()
 
     inst.variation = math.random(3)
     if inst.variation > 1 then
-        inst.AnimState:PlayAnimation("base_pre"..tostring(inst.variation))
+        inst.AnimState:PlayAnimation("base_pre" .. tostring(inst.variation))
     end
 
     return inst
