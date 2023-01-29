@@ -219,13 +219,20 @@ env.AddPrefabPostInit("leif", function(inst)
 			other:PushEvent("knockback", { knocker = inst, radius = 75, strengthmult = 1 })
 		else
 			if other ~= nil and other.components.inventory ~= nil and not other:HasTag("fat_gang") and
-				not other:HasTag("foodknockbackimmune") and not (other.components.rider ~= nil and other.components.rider:IsRiding()
+				not other:HasTag("foodknockbackimmune") and
+				not (other.components.rider ~= nil and other.components.rider:IsRiding()
 				) and
 				--Don't knockback if you wear marble
 				(
 				other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) == nil or
 					not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and
 					not other.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
+				local x, y, z = other.Transform:GetWorldPosition()
+				local roots = TheSim:FindEntities(x, y, z, 4, { "rootspike" })
+				for k, v in ipairs(roots) do
+					v.Physics:SetActive(false) --putting this here since the actual KillSpike has a ~1s delay from *actually* disabling physics.
+					v.KillSpike(v, true)
+				end
 				other:PushEvent("knockback", { knocker = inst, radius = 75, strengthmult = 1 })
 			end
 		end
