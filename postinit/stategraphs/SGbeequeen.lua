@@ -72,15 +72,20 @@ end
 
 local function Honey(inst,angle,count,variation)
     local x, y, z = inst.Transform:GetWorldPosition()
-    
-    local fx = SpawnPrefab("honey_trail")
-	if not variation then 
+    local fx = SpawnPrefab(inst.prefab == "cherry_beequeen" and "cherry_honey_trail" or "honey_trail")
+    if inst.prefab == "cherry_beequeen" then
+        fx.slowness = fx.slowness + inst.flowerbuffs.honeyslowness
+    end
+
+	if not variation then
 		variation = 0
 	end
+
     fx.Transform:SetPosition(x + 2 * math.cos(angle) + variation * math.cos(angle+3.14/2), 0, z + 2 * math.sin(angle)+ variation * math.sin(angle+3.14/2))
     fx:SetVariation(math.random(1,7), GetRandomMinMax(1, 1.3), 4)
 	fx.count = count - 1
 	fx.angle = angle
+
 	if count > 0 then
 		fx:DoTaskInTime(0.2,function(fx)
 			Honey(fx,fx.angle,fx.count)
