@@ -104,7 +104,6 @@ local prefab_post = {
 	"glasscutter",
 	"critterlab",
 	"wobster",
-	"hambat",
 	"townportal",
 	"trinkets", --This is for the grave mound cc trinkets
 	"moonbase",
@@ -359,6 +358,10 @@ end
 --if GetModConfigData("boatturning") then
 --	table.insert(prefab_post, "boat")
 --end
+
+if GetModConfigData("hambatnerf") then
+	table.insert(prefab_post, "hambat")
+end
 
 modimport("postinit/sim")
 modimport("postinit/any")

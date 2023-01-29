@@ -408,6 +408,7 @@ configuration_options =
 		},
 		default = 1,
 	},
+	BinaryConfig("hambatnerf", "Ham Bat Nerf", "Spoils faster and minimum damage is lower.", true),
 -----------------------------
 -- Food --
 -----------------------------
