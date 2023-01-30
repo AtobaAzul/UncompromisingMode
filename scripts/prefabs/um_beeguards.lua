@@ -265,6 +265,8 @@ local function fnmain(bee, build)
 
     inst.entity:SetPristine()
 
+    inst.persists = false
+
     if not TheWorld.ismastersim then
         return inst
     end
