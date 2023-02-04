@@ -41,7 +41,7 @@ local function LookNearby(inst,data)
 	local x,y,z = inst.Transform:GetWorldPosition()
 	local clockworks = #TheSim:FindEntities(x,y,z,24,{"chess"},{"mech"})
 	local chessjunk = FindEntity(inst,24,nil,{"chess","mech"})
-	if (math.random()-(clockworks^1.5)*0.1) > 0.6 and chessjunk ~= nil then -- We want it to be pretty likely if it was the last clockwork, however, if there's more than 1 it shouldn't be likely
+	if (math.random()-(clockworks^1.5)*0.1) > 0.6 and TUNING.DSTU.AMALGAMS and chessjunk ~= nil then -- We want it to be pretty likely if it was the last clockwork, however, if there's more than 1 it shouldn't be likely
 		if data.afflicter ~= nil then
 			chessjunk.SpawnClockwork(chessjunk,data.afflicter)
 		else
