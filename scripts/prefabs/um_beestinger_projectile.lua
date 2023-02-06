@@ -28,20 +28,21 @@ local function onhit(inst, attacker, target)
         target.components.combat:SuggestTarget(attacker)
     end
 
-	target.components.combat:GetAttacked(attacker, 50, inst)
+    target.components.combat:GetAttacked(attacker, 50, inst)
 
-	inst:Remove()
+    inst:Remove()
 end
 
 local function PhysTest(inst)
-	local ent = FindEntity(inst,inst.hitdist,nil,{"_combat"},{"INLIMBO"})
-	if ent and not ent:HasTag("bee") and ent:IsValid() then
-		onhit(inst,inst,ent)
-	end
+    local ent = FindEntity(inst, inst.hitdist, nil, { "_combat" }, { "INLIMBO", "dead", "playerghost" })
+    if ent and not ent:HasTag("bee") and ent:IsValid() then
+        print(ent)
+        onhit(inst, inst, ent)
+    end
 end
 
 local function stinger_fn()
-	local inst = CreateEntity()
+    local inst = CreateEntity()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -50,42 +51,43 @@ local function stinger_fn()
 
     MakeInventoryPhysics(inst)
     RemovePhysicsColliders(inst)
-	
-	inst.AnimState:SetFinalOffset(0.5)
+
+    inst.AnimState:SetFinalOffset(0.5)
     inst.AnimState:SetBank("um_beestinger_projectile")
     inst.AnimState:SetBuild("um_beestinger_projectile")
 
-	inst.AnimState:SetMultColour(1,0,0,1)
-	
+    inst.AnimState:SetMultColour(1, 0, 0, 1)
+
     inst:AddTag("NOCLICK")
     inst:AddTag("sharp")
     inst:AddTag("weapon")
     inst:AddTag("projectile")
-	inst:AddTag("bee")
+    inst:AddTag("bee")
     inst.entity:SetPristine()
-	
+
     if not TheWorld.ismastersim then
         return inst
     end
-	inst.anim = 1
+    inst.anim = 1
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(0)
-	
+
     inst:AddComponent("projectile")
     inst.components.projectile:SetSpeed(25)
     inst.components.projectile:SetOnThrownFn(pipethrown)
     inst.components.projectile:SetHoming(false)
-	inst.hitdist = math.sqrt(2)
+    inst.hitdist = math.sqrt(2)
     inst.components.projectile:SetHitDist(inst.hitdist)
     inst.components.projectile:SetOnHitFn(onhit)
     inst.components.projectile:SetOnMissFn(function(inst) inst:Remove() end)
     inst.components.projectile:SetLaunchOffset(Vector3(0, 0.5, 0))
-	inst:DoTaskInTime(5,function(inst) inst:Remove() end)
-	inst:DoPeriodicTask(FRAMES,PhysTest)
-	
-	inst.Transform:SetScale(1.2,1.2,1.2)
+    inst:DoTaskInTime(5, function(inst) inst:Remove() end)
+    inst:DoPeriodicTask(FRAMES, PhysTest)
+
+    inst.Transform:SetScale(1.2, 1.2, 1.2)
     inst.persists = false
 
     return inst
 end
-return Prefab("um_beestinger_projectile",stinger_fn,assets)
+
+return Prefab("um_beestinger_projectile", stinger_fn, assets)
