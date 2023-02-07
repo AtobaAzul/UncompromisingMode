@@ -156,8 +156,6 @@ local function fn(Sim)
         inst.isunder = nil 
         return inst
     end
-	
-
 
 	inst.AnimState:SetBank("snowmong")
 	inst.AnimState:SetBuild("snowmong")
@@ -223,6 +221,7 @@ local function fn(Sim)
 	inst.SetTier = SetTier
     
 	inst:ListenForEvent("attacked", OnAttacked) 
+
 	return inst
 end
 
