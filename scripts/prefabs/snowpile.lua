@@ -374,6 +374,14 @@ local function Init(inst)
     end
 end
 
+local function OnSeasonChange(inst)
+    print("OnSeasonChange")
+	if not TheWorld.state.iswinter then
+		inst.persists = false
+        inst:Remove()
+	end
+end
+
 local function snowpilefn(Sim)
     -- print ('sandhillfn')
     local inst = CreateEntity()
@@ -454,6 +462,8 @@ local function snowpilefn(Sim)
             { "wall" })
         for i, v in ipairs(inlimbostructures) do v:RemoveTag("INLIMBO") end
     end)
+
+	inst:WatchWorldState("season", OnSeasonChange)
 
     startregen(inst)
     inst:DoTaskInTime(0, Init)
