@@ -33,7 +33,7 @@ env.AddComponentPostInit("boatleak", function(self)
             end)
         
             return true
-        elseif patch_item.components.repairer.repairmaterial ~= MATERIALS.WOOD then
+        elseif patch_item.components.repairer ~= nil and patch_item.components.repairer.repairmaterial ~= MATERIALS.WOOD then
             --Hack to get past the item not removing.
             --Vanilla boat patches get removed from being used as a repair and have the MATERIALS.WOOD material
             --however, sludge has MATERIALS.SLUDGE, which doesn't work for WOOD.

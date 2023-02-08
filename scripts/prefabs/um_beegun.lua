@@ -805,6 +805,7 @@ return Prefab("um_beegun", um_gun, assets, prefabs),
     Prefab("um_bee_ball", yellowball, assets, prefabs),
     Prefab("um_killerbee_ball", redball, assets, prefabs),
     Prefab("um_bulletbee_ball", greenball, assets, prefabs),
+    Prefab("um_cherry_bee_ball", cherryball, assets, prefabs),
     Prefab("um_cherrybulletbee_ball", cherryball, assets, prefabs),
     Prefab("bulletbee", bulletbee),
     Prefab("cherrybulletbee", cherrybee)

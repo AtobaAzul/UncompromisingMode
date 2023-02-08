@@ -31,7 +31,7 @@ end
 
 local function onhit(inst, worker)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local guards = TheSim:FindEntities(x, y, z, 40, { "guard" })
+    local guards = TheSim:FindEntities(x, y, z, 40, { "pig", "guard" })
     for i, v in ipairs(guards) do
         if v.components.health ~= nil and v.components.combat ~= nil and not v.components.health:IsDead() then
             v.components.combat:SuggestTarget(worker)
