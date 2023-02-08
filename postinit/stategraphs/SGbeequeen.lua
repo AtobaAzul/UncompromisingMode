@@ -108,7 +108,6 @@ end
 
 env.AddStategraphPostInit("SGbeequeen",
     function(inst) --For some reason it's called "SGbeequeen" instead of just... beequeen, funky
-
         local _OldOnExit
         if inst.states["spawnguards"].onexit then
             _OldOnExit = inst.states["spawnguards"].onexit
@@ -140,7 +139,6 @@ env.AddStategraphPostInit("SGbeequeen",
 			end
 		end
 	end]]
-
         local _OldOnHit
         if inst.states["hit"].onexit then
             _OldOnHit = inst.states["hit"].onexit
@@ -690,7 +688,7 @@ env.AddStategraphPostInit("SGbeequeen",
                 },
                 onexit = function(inst)
                     local target
-                    if inst.seeker_hitlist then
+                    if inst.seeker_hitlist and #inst.seeker_hitlist > 1 then
                         local possibletarget = inst.seeker_hitlist[inst.seekercount + 1]
                         if possibletarget and possibletarget.components.health and
                             not possibletarget.components.health:IsDead() and not possibletarget:HasTag("playerghost") then
@@ -709,6 +707,7 @@ env.AddStategraphPostInit("SGbeequeen",
                     else
                         target = inst.components.combat.target
                     end
+
                     if target then
                         if inst.seekerbees then
                             for i, seeker in ipairs(inst.seekerbees) do
@@ -779,5 +778,4 @@ env.AddStategraphPostInit("SGbeequeen",
             assert(v:is_a(State), "Non-state added in mod state table!")
             inst.states[v.name] = v
         end
-
     end)
