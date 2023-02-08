@@ -35,10 +35,10 @@ env.AddComponentPostInit("fishingnetvisualizer", function(self)
 			local fishies = TheSim:FindEntities(my_x,my_y,my_z, self.collect_radius, {"oceanfishable"})
 			for k, v in pairs(fishies) do
 				local fishdef = v.fish_def ~= nil and v.fish_def.prefab ~= nil and v.fish_def.prefab or nil
-				local fish = fishdef ~= nil and SpawnPrefab(fishdef.."_inv")
+				local fish = fishdef ~= nil and SpawnPrefab(fishdef.."_inv") or nil
 				
 				if fish == nil then
-					fish = fishdef ~= nil and SpawnPrefab(fishdef.."_land")
+					fish = fishdef ~= nil and SpawnPrefab(fishdef.."_land") or nil
 				end
 					
 				if fish == nil then
