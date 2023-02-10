@@ -737,7 +737,7 @@ end)
 
 STRINGS.RECIPE_DESC.WATERMELON_LANTERN = "Juicy illumination."
 STRINGS.RECIPE_DESC.CRITTERLAB_REAL = "Cute pals to ruin the mood."
-STRINGS.RECIPE_DESC.SAND = "Turn a big rock into smaller rocks."
+STRINGS.RECIPE_DESC.UM_SAND = "Turn a big rock into smaller rocks."
 STRINGS.RECIPE_DESC.SNOWGOGGLES = "Keep your eyes clear and ears extra warm."
 STRINGS.RECIPE_DESC.RATPOISONBOTTLE = "Highly addictive to pestilence pests."
 STRINGS.RECIPE_DESC.DISEASECUREBOMB = "Effective disease prevention."

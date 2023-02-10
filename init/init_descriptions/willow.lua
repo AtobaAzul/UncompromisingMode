@@ -90,8 +90,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 		STUFFED = "Seconds were too tempting.",
 		OVERSTUFFED = "I really shouldn't have eaten thirds!",
     }
-	DESCRIBE.SAND = "Big deal, it's sand."
-	DESCRIBE.SANDHILL = "Oh, look! It's some sand."
+	DESCRIBE.UM_SAND = "Big deal, it's sand."
+	DESCRIBE.UM_SANDHILL = "Oh, look! It's some sand."
 	DESCRIBE.SNOWPILE = "Fire seems oddly ineffective."
 	DESCRIBE.SNOWGOGGLES = "Now I can see the opposite of the world burning."
 	

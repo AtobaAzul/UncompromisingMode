@@ -86,8 +86,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 		STUFFED = "wacky's inflation fantasy has taken over",
 		OVERSTUFFED = "BRAPPING",
     }
-	--DESCRIBE.SAND = "Lots of tiny, tiny stones."
-	--DESCRIBE.SANDHILL = "The sand has formed a small pile."
+	--DESCRIBE.UM_SAND = "Lots of tiny, tiny stones."
+	--DESCRIBE.UM_SANDHILL = "The sand has formed a small pile."
 	DESCRIBE.SNOWPILE = "Time to clean shop!"
 	DESCRIBE.SNOWGOGGLES = "My future is a little more clear."
 

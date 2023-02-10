@@ -85,8 +85,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WENDY.ACTIONFAIL
 		STUFFED = "Greed and gluttony.",
 		OVERSTUFFED = "Sheer gluttony. I am ashamed.",
     }
-	DESCRIBE.SAND = "I wonder if the sand knows of its own insignificance?"
-	DESCRIBE.SANDHILL = "This looks impermanent."
+	DESCRIBE.UM_SAND = "I wonder if the sand knows of its own insignificance?"
+	DESCRIBE.UM_SANDHILL = "This looks impermanent."
 	DESCRIBE.SNOWPILE = "Cold death awaits us."
 	DESCRIBE.SNOWGOGGLES = "Like tears, in the snow."
 	

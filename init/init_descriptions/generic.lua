@@ -145,8 +145,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
     DESCRIBE.VETSITEM = "I need to seek out a dark power to use this!"
 	DESCRIBE.SCREECHER_TRINKET = "Great, just what I needed."
 
-	DESCRIBE.SAND = "A handy pile of pocket sand."
-	DESCRIBE.SANDHILL = "You better stay out of my shoes."
+	DESCRIBE.UM_SAND = "A handy pile of pocket sand."
+	DESCRIBE.UM_SANDHILL = "You better stay out of my shoes."
 	DESCRIBE.SNOWPILE = "That'll be a problem if it builds up."
 	DESCRIBE.SNOWGOGGLES = "Icy clearly now!"
 

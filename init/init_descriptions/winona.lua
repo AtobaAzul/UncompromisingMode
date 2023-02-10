@@ -85,8 +85,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 		STUFFED = "I'm stuffed, let's get to work!",
 		OVERSTUFFED = "My stomach is jammed!",
     }
-	DESCRIBE.SAND = "I can only break it down so much."
-	DESCRIBE.SANDHILL = "I usually leave the cleanup to the janitors."
+	DESCRIBE.UM_SAND = "I can only break it down so much."
+	DESCRIBE.UM_SANDHILL = "I usually leave the cleanup to the janitors."
 	DESCRIBE.SNOWPILE = "Save your back, shovel early."
 	DESCRIBE.SNOWGOGGLES = "Winter workin."
 	
