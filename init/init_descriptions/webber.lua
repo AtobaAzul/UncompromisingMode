@@ -85,8 +85,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 		STUFFED = "We've really packed both stomachs.",
 		OVERSTUFFED = "We wish we had a third stomach!",
     }
-	DESCRIBE.SAND = "It's nice to feel it beneath our many feet."
-	DESCRIBE.SANDHILL = "Wish we had a bucket and a shovel."
+	DESCRIBE.UM_SAND = "It's nice to feel it beneath our many feet."
+	DESCRIBE.UM_SANDHILL = "Wish we had a bucket and a shovel."
 	DESCRIBE.SNOWPILE = "I wish it was a good time to play..."
 	DESCRIBE.SNOWGOGGLES = "We are neither cat eyed or bug eyed."
 	

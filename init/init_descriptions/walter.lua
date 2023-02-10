@@ -87,8 +87,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 		STUFFED = "A Pinetree Pioneer never wastes food, even when stuffed...",
 		OVERSTUFFED = "This much food is a bad idea!",
     }
-	DESCRIBE.SAND = "make fun of me if I forget to change this if sand is reimplemented."
-	DESCRIBE.SANDHILL = "I will not make a mountain out of a sandhill."
+	DESCRIBE.UM_SAND = "make fun of me if I forget to change this if sand is reimplemented."
+	DESCRIBE.UM_SANDHILL = "I will not make a mountain out of a sandhill."
 	DESCRIBE.SNOWPILE = "A shovel would help against frostbite when clearing these!"
 	DESCRIBE.SNOWGOGGLES = "They're a bit big, but they're warm!"
 	

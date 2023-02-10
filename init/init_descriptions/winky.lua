@@ -120,8 +120,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINKY.ACTIONFAIL
 	DESCRIBE.VETSITEM = "It whispers, It wants me to talk to that bone head!"
 	DESCRIBE.SCREECHER_TRINKET = "Little dolly thing."
 	
-	DESCRIBE.SAND = "Powder dust."
-	DESCRIBE.SANDHILL = "Dust hill."
+	DESCRIBE.UM_SAND = "Powder dust."
+	DESCRIBE.UM_SANDHILL = "Dust hill."
 	DESCRIBE.SNOWPILE = "Snow hill."
 	DESCRIBE.SNOWGOGGLES = "Snoggles."
 	

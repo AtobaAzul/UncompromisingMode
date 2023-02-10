@@ -85,8 +85,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 		STUFFED = "My stomach is full, but my soul still hungers.",
 		OVERSTUFFED = "I almost don't feel starved at all!",
     }
-	DESCRIBE.SAND = "Itchy and scratchy!"
-	DESCRIBE.SANDHILL = "Great grains of gravel!"
+	DESCRIBE.UM_SAND = "Itchy and scratchy!"
+	DESCRIBE.UM_SANDHILL = "Great grains of gravel!"
 	DESCRIBE.SNOWPILE = "Ooh what mischief we could cause with this! Hyuyu!"
 	DESCRIBE.SNOWGOGGLES = "Cats Eyes!"
 	

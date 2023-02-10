@@ -92,8 +92,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WURT.ACTIONFAIL
 		OVERSTUFFED = "Brlghh, belly full!",
     }
 	
-	DESCRIBE.SAND = "Grainy stuffs."
-	DESCRIBE.SANDHILL = "Itch on scales..."
+	DESCRIBE.UM_SAND = "Grainy stuffs."
+	DESCRIBE.UM_SANDHILL = "Itch on scales..."
 	DESCRIBE.SNOWPILE = "Fun! Brr..."
 	DESCRIBE.SNOWGOGGLES = "Silly eyes on silly hat!"
 	

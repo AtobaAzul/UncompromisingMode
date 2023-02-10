@@ -85,8 +85,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 		STUFFED = "Wolfgang full, ready to fight!",
 		OVERSTUFFED = "Too much food bad for workout.",
     }
-	DESCRIBE.SAND = "When Wolfgang holds it it slips through his large, strong hands."
-	DESCRIBE.SANDHILL = "Tiny, crushable hill."
+	DESCRIBE.UM_SAND = "When Wolfgang holds it it slips through his large, strong hands."
+	DESCRIBE.UM_SANDHILL = "Tiny, crushable hill."
 	DESCRIBE.SNOWPILE = "Cold is no good for the muscles!."
 	DESCRIBE.SNOWGOGGLES = "Is... little tight... for head."
 	

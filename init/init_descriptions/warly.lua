@@ -85,8 +85,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 		STUFFED = "Ah, perhaps I had one bite too many...",
 		OVERSTUFFED = "Hard to enjoy a meal when you force yourself to eat!",
     }
-	DESCRIBE.SAND = "Lots of tiny, tiny stones."
-	DESCRIBE.SANDHILL = "The sand has formed a small pile."
+	DESCRIBE.UM_SAND = "Lots of tiny, tiny stones."
+	DESCRIBE.UM_SANDHILL = "The sand has formed a small pile."
 	DESCRIBE.SNOWPILE = "Snow is a new thing for me, seems like a problem."
 	DESCRIBE.SNOWGOGGLES = "Still not my style, but I can see better atleast."
 	

@@ -86,8 +86,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 		STUFFED = "What can I say? I'm a gluttonous king.",
 		OVERSTUFFED = "Gluttony is a sin, and I've sinned enough!",
     }
-	DESCRIBE.SAND = "Rocks so thoroughly beaten down they are no longer recognizable."
-	DESCRIBE.SANDHILL = "A little mound of yellow sand."
+	DESCRIBE.UM_SAND = "Rocks so thoroughly beaten down they are no longer recognizable."
+	DESCRIBE.UM_SANDHILL = "A little mound of yellow sand."
 	DESCRIBE.SNOWPILE = "Remove it, before it gets in my boots."
 	DESCRIBE.SNOWGOGGLES = "..."
 	

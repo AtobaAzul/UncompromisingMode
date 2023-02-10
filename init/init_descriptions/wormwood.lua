@@ -85,8 +85,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORMWOOD.ACTIONFAIL
 		STUFFED = "Too much belly stuff",
 		OVERSTUFFED = "Too full!",
     }
-	DESCRIBE.SAND = "Dirt"
-	DESCRIBE.SANDHILL = "Pile of dirt"
+	DESCRIBE.UM_SAND = "Dirt"
+	DESCRIBE.UM_SANDHILL = "Pile of dirt"
 	DESCRIBE.SNOWPILE = "Friend killer!"
 	DESCRIBE.SNOWGOGGLES = "Kitty eyes?"
 	

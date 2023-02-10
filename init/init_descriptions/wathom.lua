@@ -111,8 +111,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHOM.ACTIONFAIL
     DESCRIBE.VETSITEM = "The damned, accepting."
 	DESCRIBE.SCREECHER_TRINKET = "Thankful, long dead."
 
-	DESCRIBE.SAND = "Small traces, magic incubation."
-	DESCRIBE.SANDHILL = "Concentration, sand."
+	DESCRIBE.UM_SAND = "Small traces, magic incubation."
+	DESCRIBE.UM_SANDHILL = "Concentration, sand."
 	DESCRIBE.SNOWPILE = "Concentration, obscuration."
 	DESCRIBE.SNOWGOGGLES = "Hibernation, irrelevant."
 
