@@ -53,7 +53,7 @@ env.AddPrefabPostInit("lantern", function(inst)
             inst.components.named:SetName(STRINGS.NAMES.LANTERN_ELECTRICAL)
             local owner = inst.components.inventoryitem:GetGrandOwner()
 
-            if owner ~= nil and owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) == inst then
+            if owner ~= nil and owner.components.inventory ~= nil and owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS) == inst then
                 owner:AddTag("batteryuser")
             end
         end --but wait! won't that fuck everything up?

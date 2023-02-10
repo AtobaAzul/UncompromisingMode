@@ -52,7 +52,7 @@ env.AddPrefabPostInit("minerhat", function(inst)
 
             local owner = inst.components.inventoryitem:GetGrandOwner()
 
-            if owner ~= nil and owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) == inst then
+            if owner ~= nil and owner.components.inventory ~= nil and owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) == inst then
                 owner:AddTag("batteryuser")
             end
         end --but wait! won't that fuck everything up?
