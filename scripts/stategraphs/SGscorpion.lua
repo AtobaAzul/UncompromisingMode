@@ -407,7 +407,7 @@ local states=
                     if inst.components.combat.target and inst.components.combat.target:IsValid() then
                         inst:ForceFacePoint(inst.components.combat.target:GetPosition())
                     else
-                        inst:GoToState("hit")
+                        inst.sg:GoToState("hit")
                     end
                     inst.components.locomotor:Stop()
                     inst.AnimState:PlayAnimation("evade_loop", true)
