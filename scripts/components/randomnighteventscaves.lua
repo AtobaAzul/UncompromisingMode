@@ -435,8 +435,9 @@ local function OnCollide()
 end
 
 local function SpawnShadowBoomer(player)
+	
 	if TheWorld.state.iscavenight then
-		MultiFogAuto(player,10)
+		--MultiFogAuto(player,10)
 		player:DoTaskInTime(0.1 + math.random(), function()
 			local radius = 10 + math.random() * 10
 			local theta = math.random() * 2 * PI
