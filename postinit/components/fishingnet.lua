@@ -41,7 +41,6 @@ env.AddComponentPostInit("fishingnetvisualizer", function(self)
 					fish = fishdef ~= nil and SpawnPrefab(fishdef.."_land") or nil
 				end
 					
-				--how the FUCK does a 
 				if fish == nil then
 					return
 				elseif fish ~= nil and k < 3 then
