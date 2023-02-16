@@ -29,7 +29,7 @@ end
 
 local function FindSleepoPeepo(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
-	local ents = TheSim:FindEntities(x, y, z, 7, { "_combat", "_health" })
+	local ents = TheSim:FindEntities(x, y, z, 7, { "_combat", "_health" }, { "player" })
 	if ents then
 		for i, v in ipairs(ents) do
 			if v.components.health and not v.components.health:IsDead() then
@@ -78,27 +78,31 @@ env.AddComponentPostInit("health", function(self)
 
 	local _DoDelta = self.DoDelta
 	--(self:HasTag("wathom") and self:HasTag("amped")
-	function self:DoDelta(amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb)
-		if MayKill(self, amount) and cause == "shadowvortex" and TUNING.DSTU.COMPROMISING_SHADOWVORTEX and not self.inst.sg:HasStateTag("blackpuddle_death") then
-			self.inst.components.rider:ActualDismount()
-            self.inst.sg:GoToState("blackpuddle_death")
-		elseif MayKill(self, amount) and HasLLA(self) and not self.inst:HasTag("deathamp") then --and not (self.inst:HasTag("deathamp")) then
-			TriggerLLA(self)
-		elseif MayKill(self, amount) and HasLLA(self) and self.inst:HasTag("deathamp") and cause == "deathamp" then
-			if not self.inst:HasTag("playerghost") and self.inst.ToggleUndeathState ~= nil then
-				self.inst:ToggleUndeathState(self.inst, false)
+	function self:DoDelta(amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
+		if self.inst:HasTag("wathom") then
+			if MayKill(self, amount) and cause == "shadowvortex" and TUNING.DSTU.COMPROMISING_SHADOWVORTEX and not self.inst.sg:HasStateTag("blackpuddle_death") then
+				self.inst.components.rider:ActualDismount()
+				self.inst.sg:GoToState("blackpuddle_death")
+			elseif MayKill(self, amount) and HasLLA(self) and not self.inst:HasTag("deathamp") then --and not (self.inst:HasTag("deathamp")) then
+				TriggerLLA(self)
+			elseif MayKill(self, amount) and HasLLA(self) and self.inst:HasTag("deathamp") and cause == "deathamp" then
+				if not self.inst:HasTag("playerghost") and self.inst.ToggleUndeathState ~= nil then
+					self.inst:ToggleUndeathState(self.inst, false)
+				end
+				TriggerLLA(self) --Don't trigger the LLA here, let it happen in our ovvn component, so this doesn't break vvhenever canis moves it to his ovvn mod.
+			elseif self.inst:HasTag("deathamp") and cause ~= "deathamp" then
+				self.inst.components.adrenaline:DoDelta(amount*0.2)
+			elseif MayKill(self, amount) and (self.inst:HasTag("wathom") and self.inst:HasTag("amped")) and cause ~= "deathamp" then --suggest that vve add a trigger here to shovv that vvathom is still being hit, despite his lack of flinching or anything.
+				if not self.inst:HasTag("deathamp") then
+					self.inst:AddTag("deathamp")
+					self.inst:ToggleUndeathState(self.inst, true)
+					_DoDelta(self, -self.currenthealth + 1, false, cause, true, afflicter, ignore_absorb, ...) --needed to do this for ignore_invincible...
+				end
+			elseif not self.inst:HasTag("deathamp") then -- No positive healing if you're on your last breath
+				_DoDelta(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
 			end
-			TriggerLLA(self) --Don't trigger the LLA here, let it happen in our ovvn component, so this doesn't break vvhenever canis moves it to his ovvn mod.
-		elseif self.inst:HasTag("deathamp") and cause ~= "deathamp" then
-			self.inst.components.adrenaline:DoDelta(amount*0.2)
-		elseif MayKill(self, amount) and (self.inst:HasTag("wathom") and self.inst:HasTag("amped")) and cause ~= "deathamp" then --suggest that vve add a trigger here to shovv that vvathom is still being hit, despite his lack of flinching or anything.
-			if not self.inst:HasTag("deathamp") then
-				self.inst:AddTag("deathamp")
-				self.inst:ToggleUndeathState(self.inst, true)
-				_DoDelta(self, -self.currenthealth + 1, nil, nil, true) --needed to do this for ignore_invincible...
-			end
-		elseif not self.inst:HasTag("deathamp") then -- No positive healing if you're on your last breath
-			_DoDelta(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb)
+		else
+			_DoDelta(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
 		end
 	end
 end)
