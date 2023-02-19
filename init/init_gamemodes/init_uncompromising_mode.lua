@@ -121,7 +121,7 @@ if GetModConfigData("snowstorms") then
 	modimport("init/init_weather/init_snowstorm")
 end
 
-if GetModConfigData("hayfever") then
+if GetModConfigData("hayfever_disable") then
 	modimport("init/init_weather/init_hayfever")
 	modimport("init/init_creatures/init_sneeze_hitters")
 end
