@@ -8,7 +8,7 @@ GLOBAL.setfenv(1, GLOBAL)
 --gold value is determined by meatvalue. rare fish (baitfish & lionfish) give x3 gold for their value
 local fishdata = {
     --{meatprefab, meatvalue, extraitems, israre }
-    oceanfish_medium_1 = {"fishmeat", 2}, --mudfish
+    oceanfish_medium_1 = {"fishmeat", 1}, --mudfish
     oceanfish_medium_2 = {"fishmeat", 2}, --deep bass
     oceanfish_medium_3 = {"fishmeat", 3, nil, true}, --dandy lionfish
     oceanfish_medium_4 = {"fishmeat", 4}, --black catfish
