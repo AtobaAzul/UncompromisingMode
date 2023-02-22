@@ -35,6 +35,16 @@ AddComponentPostInit("edible", function(self)
         return hungervalue * multiplier
     end
 
+    function self:GetSanity(eater, ...)--scuffed af but I don't really know how to integrate that with the next GetSanity lmao
+        if eater:HasTag("ratwhisperer") then --if winky
+            return self.sanityvalue --return the normal sanity val with no multipliers
+        else
+            return _GetSanity(self, eater, ...) -- return the vanilla behaviour otherwise
+        end
+    end
+
+    local _GetSanity = self.GetSanity
+
     self.GetSanity = function(self, eater)
         local sanityvalue = _GetSanity(self, eater) or 0
         local addend = 0
