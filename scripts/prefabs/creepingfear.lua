@@ -94,9 +94,12 @@ local function CreepinFearTimer(inst)
             local target_pos = target:GetPosition()
             if math.random() < 0.5 and distsq(target_pos, init_pos) < 900 then
                 CancelSpikewaves(inst)
-                SpikeWaves(inst, target)
-                inst.spiketask = inst:DoPeriodicTask(1, function() SpikeWaves(inst, target) end)
-                inst:DoTaskInTime(2.1, function() CancelSpikewaves(inst) inst.spiketask = nil end)
+				
+				inst:DoTaskInTime(1, function()
+					SpikeWaves(inst, target)
+					inst.spiketask = inst:DoPeriodicTask(1, function() SpikeWaves(inst, target) end)
+					inst:DoTaskInTime(2.1, function() CancelSpikewaves(inst) inst.spiketask = nil end)
+				end)
             else
                 SpawnTentacles(inst, target)
                 inst:DoTaskInTime(1, function() SpawnTentacles(inst, target) end)

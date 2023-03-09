@@ -15,7 +15,11 @@ local SEE_BAIT_DIST = 20
 local MAX_WANDER_DIST = 30
 
 
+
+
 local Uncompromising_PawnBrain = Class(Brain, function(self, inst)
+	self.trytohide = false
+
     Brain._ctor(self, inst)
 end)
 
@@ -32,6 +36,10 @@ local function KeepFaceTargetFn(inst, target)
 end
 
 local function IsDangerClose(inst)
+	if inst.keeptryingtohide ~= nil and inst.keeptryingtohide then
+		return true
+	end
+
 	if inst:HasTag("landmine") then
 		return FindEntity(
 		inst, 
@@ -52,6 +60,8 @@ local function IsDangerClose(inst)
 end
 
 local function TryHide(inst)
+	inst.keeptryingtohide = true
+
     if not inst.sg:HasStateTag("busy") then
         return BufferedAction(inst, inst, ACTIONS.UNCOMPROMISING_PAWN_HIDE)
     end
@@ -63,15 +73,9 @@ function Uncompromising_PawnBrain:OnStart()
     {
         WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
         --RunAway(self.inst, "scarytopr1ey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
-        ParallelNode
-        {
-            --RunAway(self.inst, "player", SEE_PLAYER_DIST, STOP_RUN_DIST),
-            SequenceNode
-            {
-                IfNode(function() return IsDangerClose(self.inst) and not self.inst.components.freezable:IsFrozen() end, "DangerClose", DoAction(self.inst, TryHide, "Hide")),
-            },
-        },
-		
+        
+		IfNode(function() return IsDangerClose(self.inst) and not self.inst.components.freezable:IsFrozen() end, "DangerClose", DoAction(self.inst, TryHide, "Hide")),
+
         ChaseAndAttack(self.inst, 10),
 		
 		--FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),

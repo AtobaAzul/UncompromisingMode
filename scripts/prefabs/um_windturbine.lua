@@ -47,8 +47,6 @@ local function UpdateLight(inst)
 	
 	local snowstorm = ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")) and 2 or 0
 	
-	print(velocity)
-	
 	local finalnums = velocity + sandstorm + snowstorm
 	
 	if finalnums >= 1.5 then
@@ -85,7 +83,6 @@ local function UpdateLight(inst)
 	end
 	
 	local lerpval = Lerp(.4, .7, inst.lightlevel)
-	print(lerpval)
 	if lerpval > .7 then
 		lerpval = .7
 	end
@@ -100,8 +97,6 @@ local function UpdateLight(inst)
 		inst.Light:SetRadius(inst.lightlevel * 5)
 		inst.Light:SetFalloff(.9)
 	end
-	
-	print(inst.powerlevel)
 end
 
 local function fn()

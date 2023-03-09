@@ -99,8 +99,6 @@ end
 
 local states =
 {
-
-
     State {
         name = "death",
         tags = { "busy" },
@@ -140,12 +138,47 @@ local states =
         },
 
     },
+	
+    State {
+        name = "despawn",
+        tags = { "busy" },
+
+        onenter = function(inst)
+			inst.components.health:SetInvincible(true)
+			
+            inst.Physics:Stop()
+			
+            PlayExtendedSound(inst, "death")
+            PlayExtendedSound(inst, "death")
+            PlayExtendedSound(inst, "death")
+			
+            RemovePhysicsColliders(inst)
+            inst.AnimState:PlayAnimation("death")
+            inst:AddTag("NOCLICK")
+			
+        end,
+		
+        events =
+        {
+            EventHandler("animover", function(inst)
+				inst:Remove()
+            end),
+        },
+
+    },
+	
     State {
         name = "idle",
         tags = { "idle", "canrotate" },
 
         onenter = function(inst, start_anim)
             inst.AnimState:PushAnimation("idle", true)
+			
+            PlayExtendedSound(inst, "idle")
+			
+			if inst.wantstodespawn then
+				inst.sg:GoToState("despawn")
+			end
         end,
     },
 

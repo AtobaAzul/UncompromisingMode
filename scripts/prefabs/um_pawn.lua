@@ -190,19 +190,9 @@ local function GenerateSpiralSpikes(inst)
     return spawnpoints, source
 end
 
-local function DoSpawnSpikes(inst, pts, level, cache)
+local function DoSpawnSpikes(inst, pts, level)
     if not inst.components.health:IsDead() then
         for i, v in ipairs(pts) do
-            local variation = table.remove(cache.vars, math.random(#cache.vars))
-            table.insert(cache.used, variation)
-            if #cache.used > 3 then
-                table.insert(cache.queued, table.remove(cache.used, 1))
-            end
-            if #cache.vars <= 0 then
-                local swap = cache.vars
-                cache.vars = cache.queued
-                cache.queued = swap
-            end
 
             local spike = SpawnPrefab("nightmaregrowth")
 				spike.Transform:SetPosition(v:Get())
@@ -230,15 +220,8 @@ local function SpawnSpikes(inst)
     local spikes, source = GenerateSpiralSpikes(inst)
 	
     if #spikes > 0 then
-        local cache =
-        {
-            vars = { 1, 2, 3, 4, 5, 6, 7 },
-            used = {},
-            queued = {},
-        }
-        local flameperiod = .8
         for i, v in ipairs(spikes) do
-            inst:DoTaskInTime((v.t / 1.5), DoSpawnSpikes, v.pts, v.level, cache)
+            inst:DoTaskInTime((v.t / 1.5), DoSpawnSpikes, v.pts, v.level)
         end
 
     end

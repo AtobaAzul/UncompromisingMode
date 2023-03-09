@@ -4,6 +4,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 
 --	[ 		Warly Descriptions		]   --
 
+	ANNOUNCE.DREADEYE_SPOOKED = "Mon ami!."
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "It would be best served to the patron themself."
     ANNOUNCE.ANNOUNCE_WINONAGEN = "Engineering isn't part of my palate."
     ANNOUNCE.ANNOUNCE_RATRAID = "Oh non..."
@@ -46,6 +47,24 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
             REVIVER = "Thank you %s! Perhaps we could cook together some time.",
             GHOST = "Well, atleast she's not in all the food anymore.",
             FIRESTARTER = "Turn down the heat, %s! You'll burn all the food!",
+        }
+	DESCRIBE.WATHOM =
+        {
+            GENERIC = "Please don't slobber on my food, %s.",
+            ATTACKER = "I cannot quench your thirst for violence, %s!",
+            MURDERER = "This pot is over boiled!",
+            REVIVER = "Merci, %s!",
+            GHOST = "You're a strange one, %s.",
+            FIRESTARTER = "Turn the heat down, %s!",
+        }
+	DESCRIBE.WIXIE =
+        {
+            GENERIC = "Un petit diable!",
+            ATTACKER = "Trouble is brewing within %s's head!",
+            MURDERER = "I cannot handle all her violence!",
+            REVIVER = "Thank you %s, but please stay out of my kitchen!",
+            GHOST = "Should we help %s? I'm not so sure.",
+            FIRESTARTER = "She likes everything over cooked!",
         }
 		
     DESCRIBE.RATPOISONBOTTLE = "Peace of mind in a bottle."
@@ -126,7 +145,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.VAMPIREBAT = "I assure you, I taste horrible!"
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "Some moon rocks would be the perfect ingredient for a new little home."
-	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = "I wonder what is in her record collection?"
 	DESCRIBE.BUGZAPPER = "I had to use one of these often back at..."
 	
@@ -357,6 +375,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	
 	DESCRIBE.WINONA_TOOLBOX = "Not meant for pots and pans, but I can make do."
 	ACTIONFAIL.WINONATOOLBOX = "Not full of utensils I presume."
+	DESCRIBE.WINONA_CATAPULT_ITEM = "I'll stick to my kitchenware."
+	DESCRIBE.WINONA_SPOTLIGHT_ITEM = "I'll stick to my kitchenware."
+	DESCRIBE.WINONA_BATTERY_LOW_ITEM = "I'll stick to my kitchenware."
+	DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "I'll stick to my kitchenware."
 	DESCRIBE.POWERCELL = "Food for the batteries, I suppose."
 	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "I could use a battery charged... well, everything."
 	DESCRIBE.MINERHAT_ELECTRICAL = "Would make cooking in the dark easier."
@@ -393,7 +415,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
     DESCRIBE.UM_BEEGUN = "I'd rather keep bees for honey, but if I must."
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
-	DESCRIBE.SUNKENCHEST_ROYAL = "Magnifique!"
+	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "Magnifique!"
 	DESCRIBE.STEERINGWHEEL_COPPER = "I've heard copper is quite sanitary."
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "I've heard copper is quite sanitary."
 	DESCRIBE.BOAT_BUMPER_COPPER = "It's strong, but it doesn't stop the boat rocking."
@@ -419,11 +441,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 
 	DESCRIBE.PORTABLEBOAT_ITEM = "Reminds me of the first steak I'd ever cooked."
 	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "Let there be light!"
-	
-	DESCRIBE.WIXIE_PIANO = "Dinner and a show!"
-	DESCRIBE.WIXIE_CLOCK = "How long has my souffle been baking?"
-	DESCRIBE.WIXIE_WARDROBE = "Trouble's brewing!"
-	DESCRIBE.CHARLES_T_HORSE = "This mare is rare!"
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Would you like to help me clean up the scraps?"
 	DESCRIBE.UM_ORNAMENT_RAT = "No pests in my kitchen!"
@@ -431,3 +448,45 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.TRINKET_WATHOM1 = "Is... is that a piece of that beast??"
 	
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
+	
+	-- WIXIE RELATED STRINGS
+	
+	DESCRIBE.WIXIE_PIANO = "Dinner and a show!"
+	DESCRIBE.WIXIE_CLOCK = "How long has my souffle been baking?"
+	DESCRIBE.WIXIE_WARDROBE = "Trouble's brewing!"
+	DESCRIBE.CHARLES_T_HORSE = "This mare is rare!"
+	DESCRIBE.THE_REAL_CHARLES_T_HORSE = "A passionate craft!"
+	DESCRIBE.SLINGSHOT_MATILDA = "Seems like a lucky gambit."
+	DESCRIBE.SLINGSHOT_GNASHER = "She's got a nasty bite!"
+
+	DESCRIBE.SLINGSHOTAMMO_LAZY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SHADOW = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_HONEY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_RUBBER = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TREMOR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONROCK = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+		
+	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_ROCK
+
+	DESCRIBE.BAGOFMARBLES = "I hope none of the children mistake them for candy."
+
+	DESCRIBE.MEATRACK_HAT = {
+            GENERIC = DESCRIBE.MEATRACK.GENERIC,
+			
+            DRYING = DESCRIBE.MEATRACK.DRYING,
+            DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
+			
+            DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
+            DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
+	}
+	DESCRIBE.FISHMEAT_DRIED = "Where's a slice of lemon when you need it?"
+	DESCRIBE.SMALLFISHMEAT_DRIED = "A low grade appetizer."
+		
+	DESCRIBE.WIXIEGUN = "Protect my casserole!"

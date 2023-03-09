@@ -1,10 +1,12 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
+
+
 env.AddPrefabPostInit("lantern", function(inst)
-	if not TheWorld.ismastersim then
-		return
-	end
+    if not TheWorld.ismastersim then
+        return
+    end
 
     if inst.components.equippable ~= nil then
         local OnEquip_old = inst.components.equippable.onequipfn
@@ -22,7 +24,6 @@ env.AddPrefabPostInit("lantern", function(inst)
         local OnUnequip_old = inst.components.equippable.onunequipfn
 
         inst.components.equippable.onunequipfn = function(inst, owner)
-
             if owner.components.upgrademoduleowner == nil then
                 local item = owner.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
                 if item ~= nil then
@@ -37,18 +38,19 @@ env.AddPrefabPostInit("lantern", function(inst)
             end
 
             if OnUnequip_old ~= nil then
-                OnUnequip_old (inst, owner)
+                OnUnequip_old(inst, owner)
             end
         end
     end
 
     local function OnUpgrade(inst)
         if inst ~= nil then
+            inst:AddTag("overchargeable")
             inst.upgraded = true
             inst:SetPrefabNameOverride("LANTERN_ELECTRICAL")
             inst.components.upgradeable.upgradetype = nil
             inst.components.fueled.fueltype = FUELTYPE.BATTERYPOWER
-            inst.components.fueled.maxfuel = TUNING.LANTERN_LIGHTTIME*2
+            inst.components.fueled.maxfuel = TUNING.LANTERN_LIGHTTIME * 2
             inst:AddTag("electricaltool")
             inst.components.named:SetName(STRINGS.NAMES.LANTERN_ELECTRICAL)
             local owner = inst.components.inventoryitem:GetGrandOwner()
@@ -57,7 +59,7 @@ env.AddPrefabPostInit("lantern", function(inst)
                 owner:AddTag("batteryuser")
             end
         end --but wait! won't that fuck everything up?
-    end     --maybe I could alter in onequip instead too.
+    end --maybe I could alter in onequip instead too.
 
     local _OnSave = inst.OnSave
     local function OnSave(inst, data)
@@ -78,7 +80,7 @@ env.AddPrefabPostInit("lantern", function(inst)
             inst.upgraded = true
             OnUpgrade(inst)
             if data.saved_fuel_value ~= nil and inst.components.fueled ~= nil then
-                inst.components.fueled:SetPercent(data.saved_fuel_value)
+                inst:DoTaskInTime(0, function() inst.components.fueled:SetPercent(data.saved_fuel_value) end)
             end
         end
         if _OnLoad ~= nil then

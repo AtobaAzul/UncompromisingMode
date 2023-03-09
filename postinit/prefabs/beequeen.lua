@@ -755,6 +755,13 @@ local function BeeQueenPost(inst)
 	inst.StartHoney = function(inst) end
 
 	inst:DoPeriodicTask(10, function(inst)
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local ents = TheSim:FindEntities(x, y, z, 20, { "epic" }, { "beequeen" } )
+		
+		if #ents > 0 then
+			inst:PushEvent("flee")
+		end
+
 		if inst.components.health and not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") and
 			inst.components.combat and inst.components.combat.target and not ShouldChase(inst) then
 			inst.sg:GoToState("lob")

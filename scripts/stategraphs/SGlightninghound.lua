@@ -7,7 +7,11 @@ local actionhandlers =
 
 local events =
 {
-    EventHandler("attacked", function(inst) if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then inst.sg:GoToState("hit") end end),
+    EventHandler("attacked", function(inst) 
+		if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then 
+			inst.sg:GoToState("hit") 
+		end 
+	end),
     EventHandler("death", function(inst) inst.sg:GoToState("death", inst.sg.statemem.dead) end),
     EventHandler("doattack", function(inst, data) 
 		if not inst.components.health:IsDead() and (inst.sg:HasStateTag("hit") or not inst.sg:HasStateTag("busy")) then 
@@ -159,7 +163,7 @@ local states =
 	
 	State{
         name = "charging_loop",
-        tags = { "attack", "canrotate", "busy", "charging" },
+        tags = { "busy", "canrotate", "charging" },
         onenter = function(inst)
             inst.SoundEmitter:PlaySound(inst.sounds.pant)
             inst.Physics:Stop()
@@ -170,6 +174,9 @@ local states =
         end,
 		
         onexit = function(inst)
+			inst.lightningshot = false
+			inst.components.timer:StopTimer("lightningshot_cooldown")
+			inst.components.timer:StartTimer("lightningshot_cooldown", 6 + math.random())
 			inst:CancelCharge()
         end,
 		
@@ -381,9 +388,6 @@ local states =
         {
             TimeEvent(0, function(inst) 
 				inst.SoundEmitter:PlaySound(inst.sounds.howl)
-				inst.lightningshot = false
-				inst.components.timer:StopTimer("lightningshot_cooldown")
-				inst.components.timer:StartTimer("lightningshot_cooldown", 6 + math.random())
 			end),
             TimeEvent(15*FRAMES, function(inst) 
 				if inst.sg.statemem.target and inst.sg.statemem.target:IsValid() then

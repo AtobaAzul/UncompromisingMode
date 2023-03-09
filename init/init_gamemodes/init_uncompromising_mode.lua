@@ -53,7 +53,7 @@ modimport("init/init_sweaterpower")
 modimport("init/init_rpctrackers")
 modimport("init/init_creatures/init_ediblebugs")
 modimport("init/init_creatures/init_bear_trap_immune")
-
+modimport("init/init_generatorcharging")
 --	[ 	Console Commands for tests !	]	--
 
 require("uncompromisingcommands")
@@ -155,10 +155,6 @@ end
 
 if GetModConfigData("caved") == false and GetModConfigData("acidrain") then
 	modimport("init/init_weather/init_overworld_toadstool")
-end
-
-if GetModConfigData("crabking_claws") then
-	modimport("postinit/prefabs/crabking_claw")
 end
 
 if GetModConfigData("foodregen") then

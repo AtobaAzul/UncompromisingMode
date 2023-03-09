@@ -17,11 +17,21 @@ STRINGS.DSTU = {
 
 }
 STRINGS.SPELLS.SHADOW_MIMIC = "Shadow Mimic"
+
 STRINGS.NAMES.WINKY = "Winky"
 STRINGS.CHARACTER_TITLES.winky = "The Vile Vermin"
 STRINGS.CHARACTER_NAMES.winky = "winky"
 STRINGS.CHARACTER_DESCRIPTIONS.winky = "*Is a Rat\n*Can dig interconnected burrows\n*'Is weak, but fast'\n*Can eat horrible foods\n*Hates to lose hold of things"
 STRINGS.CHARACTER_QUOTES.winky = "\"Squeak!\""
+
+STRINGS.CHARACTER_NAMES.wixie = "Wixie"
+STRINGS.CHARACTER_TITLES.wixie = "The Delinquent"
+STRINGS.CHARACTER_DESCRIPTIONS.wixie = "*Good with a slingshot\n*Has a mighty shove\n*Is Claustrophobic"
+STRINGS.CHARACTER_QUOTES.wixie = "\"It wasn't me!\""
+
+if GetModConfigData("wixie_walter") then
+	STRINGS.CHARACTER_DESCRIPTIONS.walter = "*Not afraid of anything, except getting hurt \n*Is a master of survival tactics \n*Has a four-legged friend \n*Is an expert dog trainer \n*Hates to see innocent animals get hurt"
+end
 
 STRINGS.ACTIONS.CREATE_BURROW = "Make Burrow"
 STRINGS.ACTIONS.ACTIVATE.RECRUITRAT = "Recruit A Rat"
@@ -37,6 +47,10 @@ STRINGS.ACTIONS.USESPELLBOOK = {
 	TELESTAFF = "Select Focus"
 }
 STRINGS.ACTIONS.WX_CHARGEFROMPOWERCELL = "Charge"
+STRINGS.ACTIONS.CASTSPELL.CHARLES_CHARGE = "Charge!"
+STRINGS.ACTIONS.CASTSPELL.SLINGSHOT = "Shoot"
+
+
 
 STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON = { "NO SMASH HOUSES", "US WATCHING YOU", "BE GOOD HERE", "WATCHING YOU" }
 STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_NIGHT = { "KING SLEEPING, YOU GO NOW", "YOU LEAVE NOW",
@@ -73,7 +87,7 @@ if GetModConfigData("warly") then
 	STRINGS.CHARACTER_DESCRIPTIONS.warly = STRINGS.CHARACTER_DESCRIPTIONS.warly ..
 		"\n󰀕Absorbs nutrients better, but prefers more variety"
 end
-if GetModConfigData("winona_gen") then
+if GetModConfigData("winona_gen_") then
 	STRINGS.CHARACTER_DESCRIPTIONS.winona = STRINGS.CHARACTER_DESCRIPTIONS.winona .. "\n󰀕Generators are for workers only"
 end
 if GetModConfigData("winonaworker") then

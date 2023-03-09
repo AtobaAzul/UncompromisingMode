@@ -3,7 +3,7 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local function DeerclopsDeathRPC(inst)
 	if inst.deerdeathtask == nil or inst.deerdeathtask then
-		--print("FOREST DEATH")
+		print("FOREST DEATH")
 		inst.deerdeathtask = false
 			inst:DoTaskInTime(5, function(inst)
 				inst.deerdeathtask = true
@@ -14,7 +14,7 @@ end
 
 local function DeerclopsRemovedRPC(inst)
 	if inst.deerremovedtask == nil or inst.deerremovedtask then
-		--print("FOREST REMOVED")
+		print("FOREST REMOVED")
 		inst.deerremovedtask = false
 			inst:DoTaskInTime(5, function(inst)
 				inst.deerremovedtask = true
@@ -25,7 +25,7 @@ end
 
 local function DeerclopsStoredRPC(inst)
 	if inst.deerstoredtask == nil or inst.deerstoredtask then
-		--print("FOREST STORED")
+		print("FOREST STORED")
 		inst.deerstoredtask = false
 			inst:DoTaskInTime(5, function(inst)
 				inst.deerstoredtask = true
@@ -49,7 +49,7 @@ end)
 
 local function DeerclopsDeathRPC_caves(inst)
 	if inst.deerdeathtask == nil or inst.deerdeathtask then
-		--print("CAVE DEATH")
+		print("CAVE DEATH")
 		inst.deerdeathtask = false
 			inst:DoTaskInTime(5, function(inst)
 				inst.deerdeathtask = true
@@ -60,7 +60,7 @@ end
 
 local function DeerclopsRemovedRPC_caves(inst)
 	if inst.deerremovedtask == nil or inst.deerremovedtask then
-		--print("CAVE REMOVED")
+		print("CAVE REMOVED")
 		inst.deerremovedtask = false
 			inst:DoTaskInTime(5, function(inst)
 				inst.deerremovedtask = true
@@ -71,7 +71,7 @@ end
 
 local function DeerclopsStoredRPC_caves(inst)
 	if inst.deerstoredtask == nil or inst.deerstoredtask then
-		--print("CAVE STORED")
+		print("CAVE STORED")
 		inst.deerstoredtask = false
 			inst:DoTaskInTime(5, function(inst)
 				inst.deerstoredtask = true

@@ -5,6 +5,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 
 --	[ 		Wickerbottom Descriptions		]	--
 
+	ANNOUNCE.DREADEYE_SPOOKED = "Oh!! That wasn't what I was expecting..."
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "We'll need the body for a heart to be of much use."
     ANNOUNCE.ANNOUNCE_WINONAGEN = "Winona dear, is there documentation for this model?"
     ANNOUNCE.ANNOUNCE_RATRAID = "Ah, new subjects of study!"
@@ -47,6 +48,24 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
             REVIVER = "You're quite evolved, %s!",
             GHOST = "The sooner we help her, the sooner we can stop asking questions.",
             FIRESTARTER = "%s has discovered fire, this is quite unprecedented!",
+        }
+	DESCRIBE.WATHOM =
+        {
+            GENERIC = "Quite an impressive exoskeleton, %s.",
+            ATTACKER = "%s is one of the aggressive ones.",
+            MURDERER = "The apex predator is on the hunt.",
+            REVIVER = "Let this be a learning experience for both of us, %s.",
+            GHOST = "This is far from my area of expertise.",
+            FIRESTARTER = "Don't burn my books, %s.",
+        }
+	DESCRIBE.WIXIE =
+        {
+            GENERIC = "I'll classify %s as a 'troubled youth'.",
+            ATTACKER = "%s needs a good role model, and a good book. \nI'm afraid I only have the latter.",
+            MURDERER = "I think %s is beyond the point of helping.",
+            REVIVER = "You're making progress, %s!",
+            GHOST = "%s could use a second chance.",
+            FIRESTARTER = "Another firebug? Tsk tsk, I had such high hopes...",
         }
 		
     DESCRIBE.RATPOISONBOTTLE = "The toxic elements of the fungus have been fully activated."
@@ -127,7 +146,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.VAMPIREBAT = "This one has managed to reach adulthood."
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "Moon debris may make the perfect new home for some critters."
-	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.BUGZAPPER = "This'll teach those mites a lesson!"
@@ -363,6 +381,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	
 	DESCRIBE.WINONA_TOOLBOX = "An organized work place is an efficient work place."
 	ACTIONFAIL.WINONATOOLBOX = "I'm no handywoman myself, I do know a thing or two however."
+	DESCRIBE.WINONA_CATAPULT_ITEM = "I can't tell what it is, it needs to be put together."
+	DESCRIBE.WINONA_SPOTLIGHT_ITEM = "I can't tell what it is, it needs to be put together."
+	DESCRIBE.WINONA_BATTERY_LOW_ITEM = "I can't tell what it is, it needs to be put together."
+	DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "I can't tell what it is, it needs to be put together."
 	DESCRIBE.POWERCELL = "A box full of electricty, I'm not too familiar with this."
 	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "The whole is greater than the sum of its parts."
 	DESCRIBE.MINERHAT_ELECTRICAL = "Now that it's electric it will be quite beneficial."
@@ -399,7 +421,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.UM_BEEGUN = "How does it propel the bees with such force?"
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
-	DESCRIBE.SUNKENCHEST_ROYAL = "Must be full of riches."
+	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "Must be full of riches."
 	DESCRIBE.STEERINGWHEEL_COPPER = "I should be able to turn the entire barge now."
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "The mechinism allows it to work with a rudder."
 	DESCRIBE.BOAT_BUMPER_COPPER = "It should last a millenium."
@@ -425,11 +447,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 
 	DESCRIBE.PORTABLEBOAT_ITEM = "It doesn't look stable."
 	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "A facinating use of kinetic principles!"
-	
-	DESCRIBE.WIXIE_PIANO = "I haven't played one of these in a long time."
-	DESCRIBE.WIXIE_CLOCK = "I miss the ticking of my old grandfather clock."
-	DESCRIBE.WIXIE_WARDROBE = "An ordinary wardrobe, from a glance."
-	DESCRIBE.CHARLES_T_HORSE = "I couldn't bring myself to burn it... Because it won't burn!"
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "An excellent model of a Didelphis Virginiana."
 	DESCRIBE.UM_ORNAMENT_RAT = "The kittens would love it!"
@@ -437,3 +454,45 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.TRINKET_WATHOM1 = "Oh, this must be a subspecies of that sentient creature!"
 	
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
+	
+	-- WIXIE RELATED STRINGS
+	
+	DESCRIBE.WIXIE_PIANO = "I haven't played one of these in a long time."
+	DESCRIBE.WIXIE_CLOCK = "I miss the ticking of my old grandfather clock."
+	DESCRIBE.WIXIE_WARDROBE = "An ordinary wardrobe, from a glance."
+	DESCRIBE.CHARLES_T_HORSE = "A childhood toy lost to time."
+	DESCRIBE.THE_REAL_CHARLES_T_HORSE = "A charming toy for the children."
+	DESCRIBE.SLINGSHOT_MATILDA = "She's getting reckless."
+	DESCRIBE.SLINGSHOT_GNASHER = "I worry for that little girl."
+
+	DESCRIBE.SLINGSHOTAMMO_LAZY = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_SHADOW = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_HONEY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_RUBBER = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TREMOR = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_MOONROCK = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+		
+	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_THULECITE
+
+	DESCRIBE.BAGOFMARBLES = "It seems like a tripping hazard."
+
+	DESCRIBE.MEATRACK_HAT = {
+            GENERIC = DESCRIBE.MEATRACK.GENERIC,
+			
+            DRYING = DESCRIBE.MEATRACK.DRYING,
+            DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
+			
+            DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
+            DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
+	}
+	DESCRIBE.FISHMEAT_DRIED = "Rich in sodium and oils."
+	DESCRIBE.SMALLFISHMEAT_DRIED = "Just make sure to wash your hands after eating."
+		
+	DESCRIBE.WIXIEGUN = "This doesn't belong in the hands of a child."

@@ -4,6 +4,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 
 --	[ 		Wolfgang Descriptions		]	--
 
+	ANNOUNCE.DREADEYE_SPOOKED = "AHH! Eye scared Wolfgang!"
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Heart not stay in spooky ghost. Where body?"
     ANNOUNCE.ANNOUNCE_WINONAGEN = "How do Wolfgang make box work?"
     ANNOUNCE.ANNOUNCE_RATRAID = "Wolfgang hear tiny squeak squeaks?"
@@ -46,6 +47,24 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
             REVIVER = "Thank you %s! But you still scary...",
             GHOST = "Wolfgang hate rats! Wolfgang HATE ghosts!",
             FIRESTARTER = "Do not burn things %s!",
+        }
+	DESCRIBE.WATHOM =
+        {
+            GENERIC = "Ah! %s is scary monster!",
+            ATTACKER = "Scary monster is hurting us!",
+            MURDERER = "%s is angry! Run!!",
+            REVIVER = "There's more to you than I first thought, %s!",
+            GHOST = "AH! Ghost is more scary than others...",
+            FIRESTARTER = "Scary monster is burning things!",
+        }
+	DESCRIBE.WIXIE =
+        {
+            GENERIC = "Haha! You speak funny words, %s!",
+            ATTACKER = "Trying to hurt Wolfgang, little %s?",
+            MURDERER = "Little girl is scary!",
+            REVIVER = "Thank you, funny little girl!",
+            GHOST = "Eat beet root next time, is good for you.",
+            FIRESTARTER = "Funny little girl is burning things!",
         }
 		
     DESCRIBE.RATPOISONBOTTLE = "Icky death soup."
@@ -358,6 +377,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	
 	DESCRIBE.WINONA_TOOLBOX = "Wolfgang did not leave dumbbells in there."
 	ACTIONFAIL.WINONATOOLBOX = "Wolfgang did not leave dumbbells in there."
+	DESCRIBE.WINONA_CATAPULT_ITEM = "For lifting?"
+	DESCRIBE.WINONA_SPOTLIGHT_ITEM = "For lifting?"
+	DESCRIBE.WINONA_BATTERY_LOW_ITEM = "For lifting?"
+	DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "For lifting?"
 	DESCRIBE.POWERCELL = "Is a box of shock."
 	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "Must connect to lamp now."
 	DESCRIBE.MINERHAT_ELECTRICAL = "Head lamp is now electric head lamp."
@@ -394,7 +417,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.UM_BEEGUN = "I like shooting them at things I do not like."
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
-	DESCRIBE.SUNKENCHEST_ROYAL = "Was a much work to get this, be proud."
+	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "Was a much work to get this, be proud."
 	DESCRIBE.STEERINGWHEEL_COPPER = "Strong wheel perfect for Wolfgang!"
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "A mighty wheel!"
 	DESCRIBE.BOAT_BUMPER_COPPER = "It will bump many things before it breaks."
@@ -420,11 +443,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 
 	DESCRIBE.PORTABLEBOAT_ITEM = "Tiny boat is wimpy!"
 	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "Mighty wind makes mighty light!"
-	
-	DESCRIBE.WIXIE_PIANO = "Smashed by a mighty force? Wolfgang must find!"
-	DESCRIBE.WIXIE_CLOCK = "Who broken?"
-	DESCRIBE.WIXIE_WARDROBE = "Being near it gives Wolfgang chills."
-	DESCRIBE.CHARLES_T_HORSE = "Little circus horse! Wolfgang love this!"
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Ahh! Don't bite!"
 	DESCRIBE.UM_ORNAMENT_RAT = "Don't let elephants see!"
@@ -432,3 +450,45 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOLFGANG.ACTIONFAIL
 	DESCRIBE.TRINKET_WATHOM1 = "Forbidden potato."
 	
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
+	
+	-- WIXIE RELATED STRINGS
+	
+	DESCRIBE.WIXIE_PIANO = "Smashed by a mighty force? Wolfgang must find!"
+	DESCRIBE.WIXIE_CLOCK = "Who broken?"
+	DESCRIBE.WIXIE_WARDROBE = "Being near it gives Wolfgang chills."
+	DESCRIBE.CHARLES_T_HORSE = "Scary horse!"
+	DESCRIBE.THE_REAL_CHARLES_T_HORSE = "Little circus horse! Wolfgang love this!"
+	DESCRIBE.SLINGSHOT_MATILDA = "Why do many hits when one big hit will do?"
+	DESCRIBE.SLINGSHOT_GNASHER = "Like Wolfgangs gym, yes?"
+
+	DESCRIBE.SLINGSHOTAMMO_LAZY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SHADOW = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_HONEY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_RUBBER = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TREMOR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONROCK = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+		
+	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_ROCK
+
+	DESCRIBE.BAGOFMARBLES = "How swirls get in there?"
+
+	DESCRIBE.MEATRACK_HAT = {
+            GENERIC = DESCRIBE.MEATRACK.GENERIC,
+			
+            DRYING = DESCRIBE.MEATRACK.DRYING,
+            DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
+			
+            DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
+            DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
+	}
+	DESCRIBE.FISHMEAT_DRIED = "Look like leather, taste like fish."
+	DESCRIBE.SMALLFISHMEAT_DRIED = "Look like leather, taste like fish."
+		
+	DESCRIBE.WIXIEGUN = "Wolfgang not like this..."

@@ -86,7 +86,7 @@ function c_spawnsunkenchest(royal)
     elseif royal then
         local messagebottletreasures_um = require("messagebottletreasures_um")
         print("spawning royal sunken chest at X:"..pos.x.." Z:".. pos.z)
-        local treasure = messagebottletreasures_um.GenerateTreasure(pos, "sunkenchest_royal")
+        local treasure = messagebottletreasures_um.GenerateTreasure(pos, "sunkenchest_royal_random")
         treasure.Transform:SetPosition(pos.x, pos.y, pos.z)
     elseif not royal then
         local messagebottletreasures_um = require("messagebottletreasures_um")

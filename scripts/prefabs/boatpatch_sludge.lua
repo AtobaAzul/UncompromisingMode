@@ -9,18 +9,6 @@ local prefabs =
     "fishingnetvisualizer"
 }
 
-local function onfinished(inst)
-    local owner = inst.components.inventoryitem:GetGrandOwner()
-    local x,y,z = inst.Transform:GetWorldPosition()
-    local bottle = SpawnPrefab("messagebottleempty")
-
-    bottle.Transform:SetPosition(x,y,z)
-    if owner ~= nil then
-        owner.components.inventory:GiveItem(bottle)
-    end
-    inst:Remove()
-end
-
 local function onactiveitem(item, inst)
     item.components.inventoryitem:SetOwner(inst)
 end
@@ -54,10 +42,10 @@ local function fn()
     inst:AddComponent("boatpatch")
     inst.components.boatpatch.patch_type = "driftwood"
 
-    --[[inst:AddComponent("repairer")
+    inst:AddComponent("repairer")
     inst.components.repairer.repairmaterial = MATERIALS.WOOD
     inst.components.repairer.healthrepairvalue = TUNING.REPAIR_LOGS_HEALTH * 2
-    inst.components.repairer.boatrepairsound = "turnoftides/common/together/boat/repair_with_wood"]]
+    inst.components.repairer.boatrepairsound = "turnoftides/common/together/boat/repair_with_wood"
 
     inst:AddComponent("finiteuses")
     --inst.components.finiteuses:SetConsumption(ACTIONS.REPAIR_LEAK, 1)

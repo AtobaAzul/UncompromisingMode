@@ -11,8 +11,8 @@ local _IsAlly = Combat.IsAlly
 function Combat:IsAlly(guy, ...)
     if guy.prefab == "um_beeguard_blocker" and FindEntity(guy, 30, FindBeeQueen) then
         return true
-    elseif guy.prefab == "ancient_trepidation" and not guy:HasTag("hostile") then
-        return true
+    --elseif guy.prefab == "ancient_trepidation" and not guy:HasTag("hostile") then
+    --    return true
     end
 
     return _IsAlly(self, guy, ...)

@@ -43,9 +43,13 @@ local function LookNearby(inst,data)
 	local chessjunk = FindEntity(inst,24,nil,{"chess","mech"})
 	if (math.random()-(clockworks^1.5)*0.1) > 0.6 and TUNING.DSTU.AMALGAMS and chessjunk ~= nil then -- We want it to be pretty likely if it was the last clockwork, however, if there's more than 1 it shouldn't be likely
 		if data.afflicter ~= nil then
-			chessjunk.SpawnClockwork(chessjunk,data.afflicter)
+			if chessjunk.SpawnClockwork ~= nil then
+				chessjunk.SpawnClockwork(chessjunk,data.afflicter)
+			end
 		else
-			chessjunk.SpawnClockwork(chessjunk,nil)
+			if chessjunk.SpawnClockwork ~= nil then
+				chessjunk.SpawnClockwork(chessjunk,nil)
+			end
 		end
 	elseif (math.random()-(clockworks^1.5)*0.1) > 0.8 and TheWorld:HasTag("cave") then --Not quite as likely if there's no chessjunk nearby, but still have a very rare case where a zombie may come out of the ground, damaged pawns can come too
 		if data.afflicter ~= nil then

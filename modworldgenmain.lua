@@ -260,7 +260,7 @@ if GetModConfigData("worldgenmastertoggle") then
         if GetModConfigData("hoodedforest") then
             table.insert(tasksetdata.tasks, "GiantTrees")
         end
-    
+
         if GetModConfigData("rice") then
             table.insert(tasksetdata.required_prefabs, "riceplantspawnerlarge")
             table.insert(tasksetdata.required_prefabs, "riceplantspawner")

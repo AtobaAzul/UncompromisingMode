@@ -20,10 +20,11 @@ AddComponentPostInit("sewing", DoSewing)
 
 -------------Torches only smolder objects now---------------
 local _OldLightAction = GLOBAL.ACTIONS.LIGHT.fn
-if TUNING.DSTU.WINTER_BURNING  then
+if TUNING.DSTU.WINTER_BURNING then
 	GLOBAL.ACTIONS.LIGHT.fn = function(act)
 		if act.invobject ~= nil and act.invobject.components.lighter ~= nil then
-			if GLOBAL.TheWorld.state.season == "winter" and not act.doer:HasTag("pyromaniac") and act.target.components.burnable and not GLOBAL:TestForIA() then
+			if GLOBAL.TheWorld.state.season == "winter" and not act.doer:HasTag("pyromaniac") and act.target.components.burnable
+				and not GLOBAL:TestForIA() then
 				if act.invobject.components.fueled then
 					act.invobject.components.fueled:DoDelta(-5, act.doer) --Hornet: Made it take fuel away because.... The snow and cold takes some of the fire? probably will change
 				end
@@ -63,9 +64,11 @@ env.AddPrefabPostInit("cave", function(inst)
 	inst:AddComponent("ratacombs_junk_manager")
 
 	inst:DoTaskInTime(0, function(inst)
-		inst:RemoveComponent("cavedeerclopsspawner")
-		inst:RemoveComponent("randomnighteventscaves")
-		inst:RemoveComponent("ratacombs_junk_manager")
+		if TestForIA() then
+			inst:RemoveComponent("cavedeerclopsspawner")
+			inst:RemoveComponent("randomnighteventscaves")
+			inst:RemoveComponent("ratacombs_junk_manager")
+		end
 	end)
 end)
 
@@ -74,7 +77,6 @@ env.AddPrefabPostInit("forest", function(inst)
 		return
 	end
 
-	inst:RemoveComponent("deerclopsspawner")
 	inst:AddComponent("uncompromising_deerclopsspawner")
 
 	inst:AddComponent("toadrain")

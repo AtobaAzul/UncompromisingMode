@@ -9,6 +9,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 
 --	[ 		Wilson Descriptions		]   --
 
+	ANNOUNCE.DREADEYE_SPOOKED = "W-What?"
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Hearts aren't part of ghost anatomy!"
     ANNOUNCE.ANNOUNCE_WINONAGEN = "That's not really my thing."
     ANNOUNCE.ANNOUNCE_RATRAID = "Squeak squeak?"
@@ -67,7 +68,15 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
             GHOST = "That doesn't look like normal ghosts. Well, \"normal\".",
             FIRESTARTER = "Are you trying to breathe fire, %s?",
         }
-
+	DESCRIBE.WIXIE =
+        {
+            GENERIC = "I don't think %s likes me.",
+            ATTACKER = "%s is being a bully!",
+            MURDERER = "She's lost her moral compass!",
+            REVIVER = "%s motives are a mystery.",
+            GHOST = "I think %s got what was coming to her.",
+            FIRESTARTER = "%s is a menace!",
+        }
 
     DESCRIBE.RATPOISONBOTTLE = "It's labeled \"Do not drink. That means you, Webber.\""
     DESCRIBE.RATPOISON = "It's all murdery."
@@ -190,7 +199,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.GENERIC.ACTIONFAIL
 	DESCRIBE.VAMPIREBAT = "This one is uglier!"
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "I could fix this up with some moon rocks."
-	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 
@@ -451,6 +459,10 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 
 	DESCRIBE.WINONA_TOOLBOX = "I had one like this for all of my scientific tools."
 	ACTIONFAIL.WINONATOOLBOX = "Well, I never said these were my tools."
+	DESCRIBE.WINONA_CATAPULT_ITEM = "I'm not trained to handle heavy machinery."
+	DESCRIBE.WINONA_SPOTLIGHT_ITEM = "I'm not trained to handle heavy machinery."
+	DESCRIBE.WINONA_BATTERY_LOW_ITEM = "I'm not trained to handle heavy machinery."
+	DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "I'm not trained to handle heavy machinery."
     DESCRIBE.POWERCELL = "It's like carrying around a little box of electricty."
 	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "Of course I know how this works! I could've made one myself."
 	DESCRIBE.MINERHAT_ELECTRICAL = "Hands-free and scientifically powered!"
@@ -491,7 +503,7 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.UM_BEEGUN = "Bees love being shot out of cannons, right?"
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
-	DESCRIBE.SUNKENCHEST_ROYAL = "It was a royal pain just to get this."
+	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "It was a royal pain just to get this."
 	DESCRIBE.STEERINGWHEEL_COPPER = "It's mechanical, and that means it's better."
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "It's better because it's mechanical."
 	DESCRIBE.BOAT_BUMPER_COPPER = "It will take a lot more hits before it breaks done."
@@ -517,11 +529,6 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 
 	DESCRIBE.PORTABLEBOAT_ITEM = "Science will determine if it floats."
 	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "It produces light, theoretically."
-	
-	DESCRIBE.WIXIE_PIANO = "It's never too late to learn!"
-	DESCRIBE.WIXIE_CLOCK = "We're both right twice a day. Usually."
-	DESCRIBE.WIXIE_WARDROBE = "It contains dark secrets. Or clothing."
-	DESCRIBE.CHARLES_T_HORSE = "This better not be a trick."
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Would it make a good decoration? Possumbly!"
 	DESCRIBE.UM_ORNAMENT_RAT = "Rats aren't so scary!"
@@ -529,3 +536,45 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.TRINKET_WATHOM1 = "It looks a little brokeny, whatever it is."
 	
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
+	
+	-- WIXIE RELATED STRINGS
+	
+	DESCRIBE.WIXIE_PIANO = "It's never too late to learn!"
+	DESCRIBE.WIXIE_CLOCK = "We're both right twice a day. Usually."
+	DESCRIBE.WIXIE_WARDROBE = "It contains dark secrets. Or clothing."
+	DESCRIBE.CHARLES_T_HORSE = "This better not be a trick."
+	DESCRIBE.THE_REAL_CHARLES_T_HORSE = "Yee-haw."
+	DESCRIBE.SLINGSHOT_MATILDA = "She's raising her smashed windows quota."
+	DESCRIBE.SLINGSHOT_GNASHER = "For precision window strikes."
+
+	DESCRIBE.SLINGSHOTAMMO_LAZY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SHADOW = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_HONEY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_RUBBER = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TREMOR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONROCK = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+		
+	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_ROCK
+
+	DESCRIBE.BAGOFMARBLES = "A slipping hazard, for sure."
+
+	DESCRIBE.MEATRACK_HAT = {
+            GENERIC = DESCRIBE.MEATRACK.GENERIC,
+			
+            DRYING = DESCRIBE.MEATRACK.DRYING,
+            DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
+			
+            DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
+            DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
+	}
+	DESCRIBE.FISHMEAT_DRIED = "The fishy smell is gone."
+	DESCRIBE.SMALLFISHMEAT_DRIED = "A little fishy."
+		
+	DESCRIBE.WIXIEGUN = "Science has gone too far."

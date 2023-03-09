@@ -120,6 +120,73 @@ env.AddStategraphPostInit("wilson", function(inst)
         end
     end
 
+
+	local SLEEPREPEL_MUST_TAGS = { "_combat" }
+	local SLEEPREPEL_CANT_TAGS = { "player", "companion", "shadow", "playerghost", "INLIMBO", "wixieshoved", "invisible", "hiding", "NOTARGET", "flight" }
+
+    local function Check_Bowling(inst)
+		if inst ~= nil then
+			local x, y, z = inst.Transform:GetWorldPosition()
+			
+			local ents = TheSim:FindEntities(x, y, z, 3.5, SLEEPREPEL_MUST_TAGS, SLEEPREPEL_CANT_TAGS)
+			
+			for i, v in ipairs(ents) do
+			
+				v:AddTag("wixieshoved")
+				SpawnPrefab("round_puff_fx_sm").Transform:SetPosition(v.Transform:GetWorldPosition())
+
+				if v.components.combat ~= nil then
+					v.components.combat:GetAttacked(inst, 0)
+				end
+				
+				if v.components.locomotor ~= nil then
+					for i = 1, 50 do
+						v:DoTaskInTime((i - 1) / 50, function(v)
+							if v ~= nil and inst ~= nil then 
+								local x, y, z = inst.Transform:GetWorldPosition()
+								local tx, ty, tz = v.Transform:GetWorldPosition()
+													
+								local rad = math.rad(inst:GetAngleToPoint(tx, ty, tz))
+								local velx = math.cos(rad) --* 4.5
+								local velz = -math.sin(rad) --* 4.5
+													
+								local giantreduction = v:HasTag("epic") and 1.5 or v:HasTag("smallcreature") and 0.8 or 1
+								local cursemultiplier = v:HasDebuff("wixiecurse_debuff") and 1.75 or 1.25
+								local shovevalue = inst:HasTag("troublemaker") and 3 or 2
+								
+								local dx, dy, dz = tx + (((shovevalue / (i + 3)) * velx) / giantreduction) * cursemultiplier, ty, tz + (((shovevalue / (i + 3)) * velz) / giantreduction) * cursemultiplier
+								local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
+								local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
+								local ocean_collision = TheWorld.Map:IsOceanAtPoint(dx, dy, dz)
+								local on_water = nil
+																			
+								if TUNING.DSTU.ISLAND_ADVENTURES then
+									on_water = IsOnWater(dx, dy, dz)
+								end
+								
+								if not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) then
+									if v ~= nil and dx ~= nil and (ground or boat or ocean_collision and v.components.locomotor:CanPathfindOnWater() or v.components.tiletracker ~= nil and not v:HasTag("whale")) then
+										if not v:HasTag("aquatic") and not on_water or v:HasTag("aquatic") and on_water then
+											--[[if ocean_collision and v.components.amphibiouscreature and not v.components.amphibiouscreature.in_water then
+												v.components.amphibiouscreature:OnEnterOcean()
+											end]]
+											
+											v.Transform:SetPosition(dx, dy, dz)
+										end
+									end
+								end
+								
+								if i >= 50 then
+									v:RemoveTag("wixieshoved")
+								end
+							end
+						end)
+					end
+				end
+			end
+		end
+    end
+
     local events =
     {
         EventHandler("sneeze", function(inst, data)
@@ -131,6 +198,12 @@ env.AddStategraphPostInit("wilson", function(inst)
                 inst.sg:GoToState("sneeze")
                 -- end
             end
+        end),
+		
+        EventHandler("dreadeye_spooked", function(inst)
+            if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead() or inst.components.rider:IsRiding()) then
+                inst.sg:GoToState("dreadeye_spooked")
+            end
         end)
     }
 
@@ -140,6 +213,16 @@ env.AddStategraphPostInit("wilson", function(inst)
         if action.invobject ~= nil then
             if action.invobject:HasTag("lighter") then
                 return "castspelllighter"
+            elseif action.invobject:HasTag("charles_t_horse") then
+				if action.invobject.components.fueled:GetPercent() >= 0.2 then
+					if inst.components.rider and inst.components.rider:IsRiding() then
+						inst.components.rider:Dismount()
+					else
+						return "charles_charge"
+					end
+				else
+					return
+				end
             elseif action.invobject:HasTag("beargerclaw") then
                 if inst.components.rider and inst.components.rider:IsRiding() then
                     inst.components.rider:Dismount()
@@ -1356,6 +1439,150 @@ env.AddStategraphPostInit("wilson", function(inst)
                 end
             end,
         },
+		
+		State{
+			name = "dreadeye_spooked",
+			tags = { "busy", "pausepredict" },
+
+			onenter = function(inst)
+				ForceStopHeavyLifting(inst)
+				inst.components.locomotor:Stop()
+				inst:ClearBufferedAction()
+
+				inst.AnimState:PlayAnimation("spooked")
+
+				if inst.components.playercontroller ~= nil then
+					inst.components.playercontroller:RemotePausePrediction()
+				end
+			end,
+
+			timeline =
+			{
+				TimeEvent(20 * FRAMES, function(inst)
+					if inst.components.talker ~= nil then
+						inst.components.talker:Say(GetString(inst, "ANNOUNCE_DREADEYE_SPOOKED"))
+					end
+				end),
+				TimeEvent(49 * FRAMES, function(inst)
+					inst.sg:GoToState("idle", true)
+				end),
+			},
+
+			events =
+			{
+				EventHandler("ontalk", function(inst)
+					if inst.sg.statemem.talktask ~= nil then
+						inst.sg.statemem.talktask:Cancel()
+						inst.sg.statemem.talktask = nil
+						StopTalkSound(inst, true)
+					end
+					if DoTalkSound(inst) then
+						inst.sg.statemem.talktask =
+							inst:DoTaskInTime(1.5 + math.random() * .5,
+								function()
+									inst.sg.statemem.talktask = nil
+									StopTalkSound(inst)
+								end)
+					end
+				end),
+				EventHandler("donetalking", function(inst)
+					if inst.sg.statemem.talktalk ~= nil then
+						inst.sg.statemem.talktask:Cancel()
+						inst.sg.statemem.talktask = nil
+						StopTalkSound(inst)
+					end
+				end),
+				EventHandler("animover", function(inst)
+					if inst.AnimState:AnimDone() then
+						inst.sg:GoToState("idle")
+					end
+				end),
+			},
+
+			onexit = function(inst)
+				if inst.sg.statemem.talktask ~= nil then
+					inst.sg.statemem.talktask:Cancel()
+					inst.sg.statemem.talktask = nil
+					StopTalkSound(inst)
+				end
+			end,
+		},
+		
+		State{
+			name = "charles_charge",
+			tags = { "canrotate", "busy" },
+
+			onenter = function(inst)
+				inst.components.locomotor:Stop()
+				inst.components.locomotor:EnableGroundSpeedMultiplier(false)
+			
+				local buffaction = inst:GetBufferedAction()
+				if buffaction ~= nil and buffaction.pos ~= nil then
+					inst:ForceFacePoint(buffaction:GetActionPoint():Get())
+				elseif buffaction ~= nil and buffaction.target ~= nil then
+					inst:ForceFacePoint(buffaction.target:GetPosition())
+				end
+			
+				inst:PerformBufferedAction()
+				--inst.AnimState:PlayAnimation("spearjab_pre")
+				--inst.AnimState:PushAnimation("spearjab", false)
+				
+				inst.AnimState:PlayAnimation("spearjab")
+				
+				local fxcircle = SpawnPrefab("dreadeye_sanityburstring")
+				fxcircle:AddTag("ignore_transparency")
+				fxcircle.Transform:SetScale(1.3, 1.3, 1.3)
+				fxcircle.entity:SetParent(inst.entity)
+			end,
+
+			timeline =
+			{
+				TimeEvent(0 * FRAMES, function(inst)
+					inst.SoundEmitter:PlaySound("dontstarve/creatures/knight/attack")
+					
+					inst.Physics:SetMotorVelOverride(20,0,0)
+					
+					Check_Bowling(inst)
+				end),
+				
+				TimeEvent(5 * FRAMES, function(inst)
+					inst.Physics:ClearMotorVelOverride()
+					inst.Physics:SetMotorVelOverride(15,0,0)
+					Check_Bowling(inst)
+				end),
+				
+				TimeEvent(10 * FRAMES, function(inst)
+					inst.Physics:ClearMotorVelOverride()
+					inst.Physics:SetMotorVelOverride(10,0,0)
+					Check_Bowling(inst)
+				end),
+				
+				TimeEvent(15 * FRAMES, function(inst)
+					inst.Physics:ClearMotorVelOverride()
+					inst.Physics:SetMotorVelOverride(5,0,0)
+					Check_Bowling(inst)
+				end),
+				
+				TimeEvent(18 * FRAMES, function(inst)
+					inst.Physics:ClearMotorVelOverride()
+					inst.components.locomotor:EnableGroundSpeedMultiplier(true)
+					
+					inst.sg:RemoveStateTag("busy")
+				end),
+			},
+
+			events =
+			{
+				EventHandler("animqueueover", function(inst)
+					inst.sg:GoToState("idle")
+				end),
+			},
+
+			onexit = function(inst)
+				inst.components.locomotor:EnableGroundSpeedMultiplier(true)
+				inst.Physics:ClearMotorVelOverride()
+			end,
+		},
     }
 
     for k, v in pairs(events) do

@@ -15,11 +15,13 @@ local function pipethrown(inst)
 end
 
 local function onhit(inst, attacker, target)
-	inst.SoundEmitter:PlaySound("dontstarve/maxwell/shadowmax_appear")
 	SpawnPrefab(inst.fx).Transform:SetPosition(target.Transform:GetWorldPosition())
 		
     if target ~= nil and target.prefab == "nightlight" then
 		target.components.fueled:TakeFuelItem(inst)
+		inst.SoundEmitter:PlaySound("dontstarve/maxwell/shadowmax_appear")
+	else
+		inst.SoundEmitter:PlaySound("dontstarve/creatures/together/stalker/shield")
 	end
 	
 	
@@ -100,11 +102,15 @@ local function eyefn()
 		inst.components.transparentonsanity_dreadeye:ForceUpdate()
 	end
 	
+	inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
+	
     if not TheWorld.ismastersim then
         return inst
     end
 	
 	inst.fx = "mini_dreadeye_fx"
+	
+    inst.components.projectile:SetLaunchOffset(Vector3(0, 0, 0))
 
     return inst
 end

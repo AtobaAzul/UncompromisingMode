@@ -72,6 +72,8 @@ function TransparentOnSanity_Dreadeye:DoUpdate(dt, force)
 
 	if self.inst:HasTag("dreadeyefading") then
 		self.target_alpha = 0
+	elseif self.inst:HasTag("ignore_transparency") then
+		self.target_alpha = 1
 	end
 		
 	if force then

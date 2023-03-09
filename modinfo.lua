@@ -1,21 +1,21 @@
 name = "󰀕 Uncompromising Mode"
 description =
 [[
-󰀔 [ Version 1.5.1.8: "Calm Before the Storm" ]
+󰀔 [ Version 1.6: "Face Your Fears" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
-Prominent features:
-- Wathom, the Forgotten Parody
-- Reworks to the Bee Queen and Ancient Guardian. New Vets Curse item from Bee Queen.
-- New setpieces, and mysteries at sea.
-- Reed Armor, Shark Suit Armor, Magnerang, Fishing Net, and much more!
+Latest update features:
+- Wixie, the Delinquent & Walter Rework
+- Reworks to Crab King and Dread Eye and Trepidation.
+- New Winona perks
+- A ton of misc. changes, ranging from Wickerbottom's books to hounds.
 
-󰀏 NEXT UPDATE: Under the Weather, Part I.]]
+󰀏 NEXT UPDATE: Under the Weather, part 1]]
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Calm Before the Storm v1.5.1.8"
+version = "Face Your Fears v1.6"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
@@ -69,12 +69,17 @@ configuration_options =
 -- Core Gameplay --
 ------------------------------
 	--Header("Official Beta Compatibility"),
-	--BinaryConfig("beta_compatibility", "March QoL Beta", "This will enable proper compatibility for the beta Crafting, Ancient Guardian, and Varg Waves features.", false),
+	--BinaryConfig("beta_compatibility", "March QoL Beta", "This will enable proper compatibility for the beta Crafting, Ancient Guardian, and Varg Waves features.", false),|
 
 	Header("Mod Compatibility"),
 	BinaryConfig("worldgenmastertoggle", "Master Toggle", "Toggles ALL worldgen. MUST DISABLE IN ISLAND ADVENTURE WORLDS!", true),
 	BinaryConfig("um_music", "Official Soundtrack", "Disable this if you are crashing when using client music mods.", true),
 	BinaryConfig("hungry_void", "Anti-Voidwalk", "Disable this if you are using any mods that allow flight or traversal over the cave void.", true),
+	SkipSpace(),
+
+	Header("In Development"),
+	BinaryConfig("winona_portables", "Winona: Portable Structures", "Makes winona's structures portable,  and reworks the toolbox into the Contraption Container\nMissing art assets.", false),
+	BinaryConfig("ck_loot", "Additional Crab King Loot", "Crab King now drops unique loot based on the gems used.\nMissing art assets.", false),
 	SkipSpace(),
 
 	Header("Core Gameplay"),
@@ -153,6 +158,7 @@ configuration_options =
     Header("Characters"),
 ------------------------------
 	BinaryConfig("funny rat", "Winky", "Enable Uncompromising Mode's Winky, the Vile Vermin.", true),
+	BinaryConfig("wixie_walter", "Wixie", "Enable Uncompromising Mode's Wixie, the Delinquent.", true),
 	BinaryConfig("holy fucking shit it's wathom", "Wathom", "Enable Uncompromising Mode's Wathom, the Abomination.", true),
 	BinaryConfig("wathom_maxdmg", "Wathom: Damage Cap", "Wathom's damage is capped at 600 to limit his absurd burst damage potential.", true),
 	{
@@ -188,7 +194,7 @@ configuration_options =
 	BinaryConfig("wolfgang", "Experimental Wolfgang", "Wolfgang gains mightiness based on hunger level. Hunger drain increases the longer mighty is maintained.", false),
 	BinaryConfig("winonaworker", "Winona: Faster Working", "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.", true),
 	BinaryConfig("winonawackycats", "Experimental Winona Catapults", "Catapults no longer regenerate, have reduced health, and 34 AOE damage.", false),
-	BinaryConfig("winona_gen", "Winona: Generators", "Limits access to Winona's Generators to only allow her to use them", true),
+	BinaryConfig("winona_gen_", "Winona: Generators", "Limits access to Winona's Generators to only allow her to use them", false),
 		{
 		name = "wortox",
 		label = "UM Wortox",
@@ -204,6 +210,8 @@ configuration_options =
 	BinaryConfig("wickerbottom", "Wickerbottom: Sane Reading", "Wickerbottom/Maxwell can no longer read books while insane.", true),
 	BinaryConfig("on tentacles", "Wickerbottom: On Tentacles", "On Tentacles now spawns friendly tentacles that die over time, and do not drop tentacle spots.", true),
 	BinaryConfig("applied horticulture", "Wickerbottom: Horticulture", "\"Horticulture, Abridged\" now takes 1 Leafy Meat instead of 5 seeds, to better balance it from being too easily spammable early game.", true),
+	BinaryConfig("lunar grimoire", "Wickerbottom: Lunar Grimoire", "\"Lunar Grimoire\" now mutates creates around you.", true),
+	BinaryConfig("apicultural notes", "Wickerbottom: Apicultural Notes", "\"Apicultural Notes\" now makes beehives get filled to max around you.", true),
 	BinaryConfig("book_recipes", "Wickerbottom: Book Recipe Tweaks", "Changes some book recipes to be slightly more balanced.", true),
 	BinaryConfig("wanda_nerf", "Wanda", "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", true),
 	BinaryConfig("wormwood_extrafiredmg", "Wormwood: Extra Fire Damage", "Increases Wormwood's fire damage multiplier to 1.75x, from 1.25x", true),
@@ -410,6 +418,7 @@ configuration_options =
 		default = 1,
 	},
 	BinaryConfig("hambatnerf", "Ham Bat Nerf", "Spoils faster and minimum damage is lower.", true),
+	BinaryConfig("lazydeserter", "Lazy Deserter Buff", "The Lazy Deserter picks and harvests things nearby it when being used.", true),
 -----------------------------
 -- Food --
 -----------------------------
@@ -621,6 +630,7 @@ configuration_options =
 	BinaryConfig("harder_spiderqueen","Harder Spider Queen", "Spider Queen ocasionally spits web balls that trap players.", true),
 	BinaryConfig("harder_deerclops", "Deerclops Mutations", "Three different harder versions of deerclops spawn instead of the vanilla variant.", true),
 	BinaryConfig("caveclops","Cave Deerclops", "During winter, Deerclops can break through the cealing to reach you.", true),
+	BinaryConfig("disable_megaflare", "Disable Hostile Flare", "Hostile Flares no longer spawn Deerclops.", true),
 	BinaryConfig("harder_moose", "Harder Goose", "Goose fight has more mechanics and is harder. This also disables Moose AOE. Does not apply to Mother Goose.", true),
 	BinaryConfig("harder_bearger", "Harder Bearger", "Enabling this option makes bearger's fight contain more attacks, and will make bearger more actively seek out you.", true),
 	BinaryConfig("harder_leifs", "Harder Treeguards", "Enabling this option makes treeguards perform root attacks, inflict knockback, and summon pinelings.", true),
@@ -632,6 +642,7 @@ configuration_options =
 	BinaryConfig("harder_beequeen", "Harder Bee Queen", "Bee Queen now has a variety of attacks with different bees.", true),--lame! help!
 	BinaryConfig("rework_minotaur", "Ancient Guardian Rework", "The Ancient Guardian's fight is expanded, includes more attacks.", true),
 	BinaryConfig("reworked_eyes", "Reworked Eyes of Terror", "Eye of Terror and the Twins have new attacks, inspired by their Terraria counterparts.", true),
+	BinaryConfig("reworked_ck", "Reworked Crab King", "Crab King has his main attack altered, freeze removed and a couple more mechanics.", true),
 	SkipSpace(),
 
 	Header("Boss Quality of Life"),
@@ -707,7 +718,7 @@ configuration_options =
 		},
 		default = 10000,
 	},
-	BinaryConfig("crabking_claws", "Crabking Fight Adjustment", "The Crabkings imposing claws now deal 500 damage to the king when killed.", false),
+	--BinaryConfig("crabking_claws", "Crabking Fight Adjustment", "The Crabkings imposing claws now deal 500 damage to the king when killed.", false),
 	SkipSpace(),
 	
 	Header("Experimental"),

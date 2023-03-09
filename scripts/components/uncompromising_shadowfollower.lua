@@ -20,6 +20,10 @@ local function DoPortCheck(inst)
     if self.target == nil or self.target:IsAsleep() then -- or not inst:IsAsleep()
         return
     end
+	
+	if inst.sg:HasStateTag("attack") or inst.sg:HasStateTag("busy") then
+		return
+	end
 
     local init_pos = inst:GetPosition()
     local target_pos = self.target:GetPosition()
@@ -36,7 +40,12 @@ local function DoPortCheck(inst)
 
         --There's a crash if you teleport without the delay
         --V2C: ORLY
-        self.porttask = inst:DoTaskInTime(0, self:DoPortNeartarget(target_pos)) -- , self, target_pos
+		
+		if inst.prefab == "dreadeye" and inst.oncooldown == nil and not inst.isdisguised and not inst.components.health:IsDead() and not inst.components.combat:HasTarget() then
+			inst:TryDisguise(inst, self.target)
+		else
+			self.porttask = inst:DoTaskInTime(0, self:DoPortNeartarget(target_pos)) -- , self, target_pos
+		end
     end
 end
 

@@ -4,6 +4,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 
 --	[ 		Wanda Descriptions		]   --
 
+	ANNOUNCE.DREADEYE_SPOOKED = "That wasn't one of the usual creeps..."
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "what."
     ANNOUNCE.ANNOUNCE_WINONAGEN = "Haven't had time to learn this stuff yet."
     ANNOUNCE.ANNOUNCE_RATRAID = "Go bother someone else!"
@@ -46,6 +47,24 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
             REVIVER = "Thank you, %s, but I've still got my eye on you.",
             GHOST = "Maybe it's better this way.",
             FIRESTARTER = "She's left destruction in her wake!",
+        }
+	DESCRIBE.WATHOM =
+        {
+            GENERIC = "%s is a relic of the past.",
+            ATTACKER = "%s is starting trouble.",
+            MURDERER = "You'll wish you could take it back, %s!",
+            REVIVER = "%s has plans for me, it seems!",
+            GHOST = "I can only speculate why their ghost looks like that.",
+            FIRESTARTER = "%s is a destructive force!",
+        }
+	DESCRIBE.WIXIE =
+        {
+            GENERIC = "% makes me want to jump from this timeline.",
+            ATTACKER = "Respect your elders, %s!",
+            MURDERER = "Violent youth are an issue around here!",
+            REVIVER = "Whats your angle, %s?",
+            GHOST = "Should we help %s? I'm not so sure.",
+            FIRESTARTER = "She's too reckless!",
         }
 
     DESCRIBE.RATPOISONBOTTLE = "Sorry it had to come to this."
@@ -127,7 +146,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 	DESCRIBE.VAMPIREBAT = "I've never seen them mature like this."
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "Maybe as moon rock would fix it."
-	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = "Have I heard this tune before?"
 	DESCRIBE.BUGZAPPER = "Helps with keeping bugs out of my hair."
 
@@ -355,8 +373,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 	
 	DESCRIBE.WINONA_TOOLBOX = "I keep everything I need on me."
 	ACTIONFAIL.WINONATOOLBOX = "What could I possibly need from here."
-	DESCRIBE.POWERCELL = ""
-	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = ""
+	DESCRIBE.WINONA_CATAPULT_ITEM = "I'm not much of an electronics person."
+	DESCRIBE.WINONA_SPOTLIGHT_ITEM = "I'm not much of an electronics person."
+	DESCRIBE.WINONA_BATTERY_LOW_ITEM = "I'm not much of an electronics person."
+	DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "I'm not much of an electronics person."
+	DESCRIBE.POWERCELL = "Extends the lifetime of electronics."
+	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "The future is now!"
 	DESCRIBE.MINERHAT_ELECTRICAL = "Not bad for just wires with no clockwork."
 	DESCRIBE.OCEAN_SPEAKER = "I remember these! I can't quite... remember what they do though..."
 	--DESCRIBE.UM_SIREN = "Oh botheration! Its YOU again."
@@ -392,7 +414,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 	DESCRIBE.UM_BEEGUN = "Now I'm their queen."
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
-	DESCRIBE.SUNKENCHEST_ROYAL = "It's from another timeline, how did you get into this one?"
+	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "It's from another timeline, how did you get into this one?"
 	DESCRIBE.STEERINGWHEEL_COPPER = "It could last a millenium."
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "We need something to steer first."
 	DESCRIBE.BOAT_BUMPER_COPPER = "This should last long enough."
@@ -418,11 +440,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 
 	DESCRIBE.PORTABLEBOAT_ITEM = "This boat is sure to have a short life span."
 	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "The faster we go, the brighter it glows!"
-	
-	DESCRIBE.WIXIE_PIANO = "We have an eternity to learn!"
-	DESCRIBE.WIXIE_CLOCK = "I can't open it up, so I can't fix it!"
-	DESCRIBE.WIXIE_WARDROBE = "Wait, how long has this been here?"
-	DESCRIBE.CHARLES_T_HORSE = "Not a cog in sight."
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Shame about their short lifespan."
 	DESCRIBE.UM_ORNAMENT_RAT = "Don't let it get in my clocks!"
@@ -430,3 +447,45 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
 	DESCRIBE.TRINKET_WATHOM1 = "Oh that was SUCH a waste of time."
 	
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
+	
+	-- WIXIE RELATED STRINGS
+	
+	DESCRIBE.WIXIE_PIANO = "We have an eternity to learn!"
+	DESCRIBE.WIXIE_CLOCK = "I can't open it up, so I can't fix it!"
+	DESCRIBE.WIXIE_WARDROBE = "Wait, how long has this been here?"
+	DESCRIBE.CHARLES_T_HORSE = "It's been lost to time."
+	DESCRIBE.THE_REAL_CHARLES_T_HORSE = "Not a cog in sight."
+	DESCRIBE.SLINGSHOT_MATILDA = "Threes the lucky number."
+	DESCRIBE.SLINGSHOT_GNASHER = "It seems like precise timing is needed!"
+
+	DESCRIBE.SLINGSHOTAMMO_LAZY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SHADOW = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_HONEY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_RUBBER = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TREMOR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONROCK = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+		
+	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_ROCK
+
+	DESCRIBE.BAGOFMARBLES = "I appreciate the intricacies of their design."
+
+	DESCRIBE.MEATRACK_HAT = {
+            GENERIC = DESCRIBE.MEATRACK.GENERIC,
+			
+            DRYING = DESCRIBE.MEATRACK.DRYING,
+            DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
+			
+            DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
+            DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
+	}
+	DESCRIBE.FISHMEAT_DRIED = "Time has taken away the smell, but will it improve the taste?"
+	DESCRIBE.SMALLFISHMEAT_DRIED = "I'm surprised it didn't wither away."
+		
+	DESCRIBE.WIXIEGUN = "This is NOT the right timeline!"

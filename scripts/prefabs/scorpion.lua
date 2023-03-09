@@ -81,18 +81,36 @@ local function OnHitOther(inst, data)
         if not (other.components.health ~= nil and other.components.health:IsDead()) then
             if inst:HasTag("sleepattack") then
                 local grogginess = other.components.grogginess
-                if grogginess ~= nil and not other.sg:HasStateTag("waking") and
+                if other._scorpion_debuff_immunitytask == nil and 
+					grogginess ~= nil and not other.sg:HasStateTag("waking") and
                     not (other.components.rider and other.components.rider:IsRiding()) then
                     grogginess:AddGrogginess(TUNING.GESTALT.ATTACK_DAMAGE_GROGGINESS,
                         TUNING.GESTALT.ATTACK_DAMAGE_KO_TIME)
+						
+					if other._scorpion_debuff_immunity ~= nil then
+						other._scorpion_debuff_immunitytask:Cancel()
+					end
+					
+					other._scorpion_debuff_immunitytask = other:DoTaskInTime(2, function(i) 
+						i._scorpion_debuff_immunitytask = nil 
+					end)
+					
                     if grogginess.knockoutduration == 0 then
-                        --print("getting attacked!")
+                        print("getting attacked!")
                         --inst.sg.statemem.target.components.combat:GetAttacked(inst, 0)
                     else
                         -- TODO: turn on special hud overlay while asleep in enlightened dream land
                     end
                 else
-                    --print("getting attacked!")
+					if other._scorpion_debuff_immunity ~= nil then
+						other._scorpion_debuff_immunitytask:Cancel()
+					end
+					
+					other._scorpion_debuff_immunitytask = other:DoTaskInTime(2, function(i) 
+						i._scorpion_debuff_immunitytask = nil 
+					end)
+
+                    print("getting attacked!")
                     --inst.sg.statemem.target.components.combat:GetAttacked(inst, 20)
                 end
             end

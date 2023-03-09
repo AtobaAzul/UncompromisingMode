@@ -65,13 +65,22 @@ local function fn()
     end
 
     inst:AddTag("sirenpoint")
-    inst:AddTag("sirenpoint_speaker")
 
     inst:AddComponent("inspectable")
 
     inst:WatchWorldState("isnight", PlaySound)
 
     return inst
+end
+
+local function PickSiren(inst)
+    if TheWorld.siren_count == 1 then
+        return "siren_throne"
+    elseif TheWorld.siren_count == 2 then
+        return "siren_bird_nest"
+    else
+        return "ocean_speaker"
+    end
 end
 
 --I am incredibly lazy.
@@ -108,29 +117,24 @@ local function fn1()
         return inst
     end
 
+    --hopefully impossibly hard to get things to spawn at the same time.
     inst:DoTaskInTime(math.random(), function(inst)
-        --print(types[math.random(3)] .. "_teaser")
-        local x, y, z = inst.Transform:GetWorldPosition()
-        --print(TheSim:FindFirstEntityWithTag("sirenpoint_speaker"),"speaker")
-        --print(TheSim:FindFirstEntityWithTag("sirenpoint_bird"),"bird")
-        --print(TheSim:FindFirstEntityWithTag("sirenpoint_throne"),"siren")
 
-        if TheSim:FindFirstEntityWithTag("sirenpoint_speaker") == nil then
-            local siren = SpawnPrefab("ocean_speaker_teaser")
-            siren.Transform:SetPosition(x, y, z)
-            inst:Remove()
-        elseif TheSim:FindFirstEntityWithTag("sirenpoint_bird") == nil then
-            local siren = SpawnPrefab("siren_bird_nest_teaser")
-            siren.Transform:SetPosition(x, y, z)
-            inst:Remove()
-        elseif TheSim:FindFirstEntityWithTag("sirenpoint_throne") == nil then
-            local siren = SpawnPrefab("siren_throne_teaser")
-            siren.Transform:SetPosition(x, y, z)
-            inst:Remove()
+        if TheWorld.siren_count == nil then
+            TheWorld.siren_count = 0
         end
+        print(PickSiren())
+        local x, y, z = inst.Transform:GetWorldPosition()
+        local siren = SpawnPrefab(PickSiren() .. "_teaser")
+        siren.Transform:SetPosition(x, y, z)
+        TheWorld.siren_count = TheWorld.siren_count + 1
+        inst:Remove()
     end)
     return inst
 end
+
+
+
 
 return Prefab("ocean_speaker", fn, assets, prefabs), -- This is the real one, other ones are temp placeholders.
     Prefab("ocean_speaker_teaser", fn, assets, prefabs),

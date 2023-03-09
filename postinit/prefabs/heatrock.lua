@@ -6,6 +6,8 @@
 ]]
 if TUNING.DSTU.INSUL_THERMALSTONE then
     AddPrefabPostInit("heatrock", function(inst)
+        inst:AddTag("NORATCHECK")
+
         local base_insulation = GLOBAL.TUNING.INSULATION_TINY --60 insulation
         
         if inst.components.temperature ~= nil then
