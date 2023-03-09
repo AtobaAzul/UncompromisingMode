@@ -478,7 +478,7 @@ local treasure_templates =
 					moonrocknugget = { 1, 2,3,4},
 					moonglass = { 0, 1, 2, 3, 4, 5 },
 					moonstorm_spark = {1,2,3}, -- Teehee :)
-					charged_moonglass = {1,2,3,4,5},
+					moonglass_charged = {1,2,3,4,5},
 				},
 			},
 		}
