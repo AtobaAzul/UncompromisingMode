@@ -205,7 +205,7 @@ configuration_options =
 	BinaryConfig("on tentacles", "Wickerbottom: On Tentacles", "On Tentacles now spawns friendly tentacles that die over time, and do not drop tentacle spots.", true),
 	BinaryConfig("applied horticulture", "Wickerbottom: Horticulture", "\"Horticulture, Abridged\" now takes 1 Leafy Meat instead of 5 seeds, to better balance it from being too easily spammable early game.", true),
 	BinaryConfig("book_recipes", "Wickerbottom: Book Recipe Tweaks", "Changes some book recipes to be slightly more balanced.", true),
-	BinaryConfig("wanda_nerf", "Wanda:", "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", true),
+	BinaryConfig("wanda_nerf", "Wanda", "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", true),
 	BinaryConfig("wormwood_extrafiredmg", "Wormwood: Extra Fire Damage", "Increases Wormwood's fire damage multiplier to 1.75x, from 1.25x", true),
 	BinaryConfig("wormwood_plants", "Wormwood: Planting Sanity", "Increases the sanity loss from digging plants.", true),
 	BinaryConfig("wendy", "Wendy", "Abigail was nerfed to not increase Wendy's maximum damage above average.", true),
