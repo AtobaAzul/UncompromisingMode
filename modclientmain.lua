@@ -1,6 +1,7 @@
 PrefabFiles = {
 	"winky_none",
-	"wathom_none"    
+	"wathom_none",
+	"wixie_none"
 }
 
 Assets = {
@@ -28,6 +29,25 @@ Assets = {
     Asset( "ATLAS", "images/names_gold_winky.xml" ),
 	Asset( "IMAGE", "images/names_wathom.tex" ),
     Asset( "ATLAS", "images/names_wathom.xml" ),    
+	
+	
+	Asset("ANIM", "anim/wixie.zip"),
+	Asset("ANIM", "anim/ghost_wixie_build.zip"),
+	
+	Asset( "IMAGE", "bigportraits/wixie.tex" ),
+    Asset( "ATLAS", "bigportraits/wixie.xml" ),
+
+    Asset( "IMAGE", "bigportraits/wixie_none_oval.tex" ),
+    Asset( "ATLAS", "bigportraits/wixie_none.xml" ),
+
+    Asset( "IMAGE", "images/saveslot_portraits/wixie.tex" ),
+    Asset( "ATLAS", "images/saveslot_portraits/wixie.xml" ),
+
+    Asset( "IMAGE", "images/names_gold_wixie.tex" ),
+    Asset( "ATLAS", "images/names_gold_wixie.xml" ),
+	
+    Asset("IMAGE", "images/inventoryimages/meatrack_hat.tex" ),
+    Asset("ATLAS", "images/inventoryimages/meatrack_hat.xml"), 
 }
 
 local STRINGS = GLOBAL.STRINGS
@@ -77,5 +97,40 @@ TUNING.WATHOM_HEALTH = 200
 TUNING.WATHOM_HUNGER = 120
 TUNING.WATHOM_SANITY = 120
 
+STRINGS.NAMES.WIXIE = "Wixie"
+STRINGS.SKIN_NAMES.wixie_none = "Wixie"
+STRINGS.SKIN_DESCRIPTIONS.wixie_none = "The perfect clothing for roughhousing."
+
+STRINGS.CHARACTER_TITLES.wixie = "The Delinquent"
+STRINGS.CHARACTER_NAMES.wixie = "Wixie"
+STRINGS.CHARACTER_DESCRIPTIONS.wixie = "*Good with a slingshot\n*Has a mighty shove\n*Is Claustrophobic"
+STRINGS.CHARACTER_QUOTES.wixie = "\"It wasn't me!\""
+STRINGS.CHARACTER_ABOUTME.wixie = "Some say Wixies abrasive attitude is a cover for her insecurities. These people tend to be on the recieving end of her slingshot."
+STRINGS.CHARACTER_BIOS.wixie = {
+ { title = "Birthday", desc = "March 23" },
+ { title = "Favorite Food", desc = "Boomberry Pancakes" },
+ { title = "All Good Things...", desc = "Growing up can hurt, and few know it better than Wixie. As long as she could remember she would see shadows in the corner of her eye, and hear whispers in the dark when she felt surrounded. After tragedy struck her family, her fears, and her abrasive attitude grew, as she further pushed people away. This cycled continued, gaining the attention of a dark force from beyond. Now, she finds her self in the constant, free from the confines of her old life, but more trapped than ever before."},
+}
+
+STRINGS.CHARACTER_SURVIVABILITY.wixie= "Grim"
+
+TUNING.WIXIE_HEALTH = 130
+TUNING.WIXIE_HUNGER = 150
+TUNING.WIXIE_SANITY = 200
+
+--Wixie + Walter
+
+TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WIXIE = {"slingshot", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock"}
+
+STRINGS.CHARACTER_DESCRIPTIONS.walter = "*Not afraid of anything, except getting hurt \n*Is a master of survival tactics \n*Has a four-legged friend \n*Is an expert dog trainer \n*Hates to see innocent animals get hurt"
+
+TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WALTER = {"walterhat", "meatrack_hat", "meat", "monstermeat"}
+                
+TUNING.STARTING_ITEM_IMAGE_OVERRIDE["meatrack_hat"] = {
+    atlas = "images/inventoryimages/meatrack_hat.xml",
+    image = "meatrack_hat.tex",
+}
+
 AddModCharacter("winky", "FEMALE")
 AddModCharacter("wathom", "MALE")
+AddModCharacter("wixie", "FEMALE")

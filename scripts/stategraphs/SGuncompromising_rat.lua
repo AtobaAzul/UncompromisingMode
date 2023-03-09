@@ -16,7 +16,11 @@ local events =
 	CommonHandlers.OnSleep(),
 	CommonHandlers.OnFreeze(),
 	CommonHandlers.OnAttack(),
-	CommonHandlers.OnAttacked(),
+    EventHandler("attacked", function(inst) 
+		if not inst.components.health:IsDead() and not inst.sg:HasStateTag("attack") then 
+			inst.sg:GoToState("hit") 
+		end 
+	end),
 	CommonHandlers.OnDeath(),
 	CommonHandlers.OnLocomote(true, true),
 	EventHandler("trapped", function(inst) inst.sg:GoToState("trapped") end),
@@ -57,6 +61,22 @@ local states =
 		end,
 	},
 
+    State{
+        name = "hit",
+        tags = { "busy", "hit" },
+
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("hit")
+			inst.SoundEmitter:PlaySound(inst.sounds.hit)
+        end,
+
+        events =
+        {
+            EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+        },
+    },
+	
 	State {
 		name = "idle2",
 		tags = { "idle", "canrotate" },

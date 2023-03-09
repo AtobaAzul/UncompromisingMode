@@ -4,6 +4,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 
 --	[ 			Woodie Descriptions			]	--
 
+	ANNOUNCE.DREADEYE_SPOOKED = "Whose there? Show yourself!"
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Wouldn't do much good without a body, eh?"
     ANNOUNCE.ANNOUNCE_WINONAGEN = "I'm not too keen on maintaining an electrical engine."
     ANNOUNCE.ANNOUNCE_RATRAID = "That's the sound of somethin' devious."
@@ -46,6 +47,24 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
             REVIVER = "I love these critters!",
             GHOST = "Save the woodland animals!",
             FIRESTARTER = "Rats are nothing but trouble!",
+        }
+	DESCRIBE.WATHOM =
+        {
+            GENERIC = "I hope you won't cause any trouble, %s.",
+            ATTACKER = "I've seen scarier things in the woods.",
+            MURDERER = "%s is one of the deadly ones.",
+            REVIVER = "We creatures of the woods need to stick together, eh %s?",
+            GHOST = "You see something new every day, eh %s?",
+            FIRESTARTER = "%s doesn't care much for the environment.",
+        }
+	DESCRIBE.WIXIE =
+        {
+            GENERIC = "Keep away from me and Lucy, you little menace!",
+            ATTACKER = "Quit shooting your rocks at me!",
+            MURDERER = "%s has quite a mean streak!",
+            REVIVER = "I suppose I could forgive you, %s.",
+            GHOST = "%s still has a soul, eh?",
+            FIRESTARTER = "I don't mind the insults, but lighting fires crosses the line!",
         }
 		
     DESCRIBE.RATPOISONBOTTLE = "Feast your eyes on the deep woods gut bomb!"
@@ -135,7 +154,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "Some moon rocks would make a great little den."
-	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.BUGZAPPER = "I'll show those pesky bugs!"
@@ -357,6 +375,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	
 	DESCRIBE.WINONA_TOOLBOX = "Sorry, but I have all the tools I need."
 	ACTIONFAIL.WINONATOOLBOX = "I am not putting Lucy in there."
+	DESCRIBE.WINONA_CATAPULT_ITEM = "Is it broken?"
+	DESCRIBE.WINONA_SPOTLIGHT_ITEM = "Is it broken?"
+	DESCRIBE.WINONA_BATTERY_LOW_ITEM = "Is it broken?"
+	DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "Is it broken?"
 	DESCRIBE.POWERCELL = "Some kind of electrical doohickey."
 	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "."
 	DESCRIBE.MINERHAT_ELECTRICAL = "Eh, Why didn't I think of that."
@@ -393,7 +415,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
     DESCRIBE.UM_BEEGUN = "I wouldn't be too happy about this if it were me."
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
-	DESCRIBE.SUNKENCHEST_ROYAL = "No wonder he was a king."
+	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "No wonder he was a king."
 	DESCRIBE.STEERINGWHEEL_COPPER = "Touching it makes my hands smell like pennies."
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "I think I like the wood one better."
 	DESCRIBE.BOAT_BUMPER_COPPER = "The boat will be safe now."
@@ -419,11 +441,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 
 	DESCRIBE.PORTABLEBOAT_ITEM = "I'd prefer something more sturdy. Oak, perhaps."
 	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "What'll they think of next?"
-	
-	DESCRIBE.WIXIE_PIANO = "She's a beaut'! Shame it's been smashed up..."
-	DESCRIBE.WIXIE_CLOCK = "Excellent craftmanship!"
-	DESCRIBE.WIXIE_WARDROBE = "It's got a nice oak smell, with a hint of nightmares."
-	DESCRIBE.CHARLES_T_HORSE = "A fine toy for the kiddies."
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "We don't get many of these up north."
 	DESCRIBE.UM_ORNAMENT_RAT = "Oh good, it's just a toy."
@@ -431,3 +448,45 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.TRINKET_WATHOM1 = "Well that a right load'a malarky."
 	
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
+	
+	-- WIXIE RELATED STRINGS
+	
+	DESCRIBE.WIXIE_PIANO = "She's a beaut'! Shame it's been smashed up..."
+	DESCRIBE.WIXIE_CLOCK = "Excellent craftmanship!"
+	DESCRIBE.WIXIE_WARDROBE = "It's got a nice oak smell, with a hint of nightmares."
+	DESCRIBE.CHARLES_T_HORSE = "Poor thing."
+	DESCRIBE.THE_REAL_CHARLES_T_HORSE = "A fine toy for the kiddies."
+	DESCRIBE.SLINGSHOT_MATILDA = "Three birds for three stones, eh?"
+	DESCRIBE.SLINGSHOT_GNASHER = "The woods whispering dark secrets, eh?"
+
+	DESCRIBE.SLINGSHOTAMMO_LAZY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SHADOW = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_HONEY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_RUBBER = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TREMOR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONROCK = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+		
+	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_ROCK
+
+	DESCRIBE.BAGOFMARBLES = "Never been much for glasswork."
+
+	DESCRIBE.MEATRACK_HAT = {
+            GENERIC = DESCRIBE.MEATRACK.GENERIC,
+			
+            DRYING = DESCRIBE.MEATRACK.DRYING,
+            DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
+			
+            DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
+            DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
+	}
+	DESCRIBE.FISHMEAT_DRIED = "A Canadian classic."
+	DESCRIBE.SMALLFISHMEAT_DRIED = "A small bite."
+		
+	DESCRIBE.WIXIEGUN = "That just ain't right."

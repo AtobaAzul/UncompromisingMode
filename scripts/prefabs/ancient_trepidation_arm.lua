@@ -73,9 +73,12 @@ local function fn()
     inst.AnimState:PlayAnimation("emerge")
     inst.Transform:SetFourFaced()
     --inst:AddTag("monster")
+	
     inst:AddTag("hostile")
-    inst:AddTag("shadow")
+	inst:AddTag("notraptrigger")
+	inst:AddTag("shadowchesspiece")
     inst:AddTag("treparm")
+	
     --inst:AddTag("shadowcreature")
     inst.entity:SetPristine()
     inst.AnimState:SetMultColour(0, 0, 0, 0.8)

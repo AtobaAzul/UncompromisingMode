@@ -7,7 +7,8 @@ local CANNONBALL_RADIUS = TUNING.CANNONBALL_RADIUS
 local CANNONBALL_DAMAGE = TUNING.CANNONBALL_DAMAGE
 local CANNONBALL_SPLASH_RADIUS = TUNING.CANNONBALL_SPLASH_RADIUS
 local CANNONBALL_SPLASH_DAMAGE_PERCENT = TUNING.CANNONBALL_SPLASH_DAMAGE_PERCENT
-local CANNONBALL_PASS_THROUGH_TIME_BUFFER = TUNING.CANNONBALL_PASS_THROUGH_TIME_BUFFER -- to prevent the cannonball from hitting the same target multiple times as it passes through
+local CANNONBALL_PASS_THROUGH_TIME_BUFFER = TUNING
+    .CANNONBALL_PASS_THROUGH_TIME_BUFFER -- to prevent the cannonball from hitting the same target multiple times as it passes through
 
 local MUST_ONE_OF_TAGS = { "_combat", "_health", "blocker" }
 local AREAATTACK_EXCLUDETAGS = { "INLIMBO", "notarget", "noattack", "flight", "invisible", "playerghost" }
@@ -55,7 +56,7 @@ local function DoBubbleFX(inst)
             break
         end
         local fx = SpawnPrefab("crab_king_bubble" .. math.random(3))
-        local x1, y1, z1 = x + math.random(-5, 5), 0, z + math.random(-5, 5)
+        local x1, y1, z1 = x + math.random( -5, 5), 0, z + math.random( -5, 5)
         if TheWorld.Map:IsOceanAtPoint(x1, y1, z1) and TheWorld.Map:GetPlatformAtPoint(x1, z1) == nil then
             fx.Transform:SetPosition(x1, y1, z1)
         end
@@ -63,7 +64,6 @@ local function DoBubbleFX(inst)
 end
 
 local function OnHit(inst, attacker, target)
-
     -- Do splash damage upon hitting the ground
     inst.components.combat:DoAreaAttack(inst, CANNONBALL_SPLASH_RADIUS, nil, nil, nil, AREAATTACK_EXCLUDETAGS)
 
@@ -75,7 +75,7 @@ local function OnHit(inst, attacker, target)
 
     -- Hit a boat? Cause a leak!
     if target ~= nil and target:HasTag("boat") then
-        target.components.health:DoDelta(-TUNING.CANNONBALL_DAMAGE * 0.75)
+        target.components.health:DoDelta( -TUNING.CANNONBALL_DAMAGE * 0.75)
     end
 
     -- Look for stuff on the ocean/ground and launch them
@@ -96,7 +96,7 @@ local function OnHit(inst, attacker, target)
                     local loot = SpawnPrefab(product)
                     if loot ~= nil then
                         local ae_x, ae_y, ae_z =
-                        affected_entity.Transform:GetWorldPosition()
+                            affected_entity.Transform:GetWorldPosition()
                         loot.Transform:SetPosition(ae_x, ae_y, ae_z)
                         launch_away(loot, position, true)
                     end
@@ -106,7 +106,7 @@ local function OnHit(inst, attacker, target)
             -- Spawn kelp roots along with kelp is a bullkelp plant is hit
         elseif affected_entity.prefab == "bullkelp_plant" then
             local ae_x, ae_y, ae_z =
-            affected_entity.Transform:GetWorldPosition()
+                affected_entity.Transform:GetWorldPosition()
 
             if affected_entity.components.pickable and
                 affected_entity.components.pickable:CanBePicked() then
@@ -147,12 +147,8 @@ local function OnHit(inst, attacker, target)
     if inst:IsOnOcean() then
         SpawnPrefab("crab_king_waterspout").Transform:SetPosition(inst.Transform:GetWorldPosition())
         if inst:HasTag("sludge_cannonball") then --BOIL SOME WATER
-            DoBubbleFX(inst)
-            inst:DoTaskInTime(FRAMES*math.random(10), DoBubbleFX, nil, inst)
-            inst:DoTaskInTime(FRAMES*math.random(10), DoBubbleFX, nil, inst)
-            inst:DoTaskInTime(FRAMES*math.random(10), DoBubbleFX, nil, inst)
-            inst:RemoveFromScene()
-            inst:DoTaskInTime(FRAMES*11, inst.Remove)
+            SpawnPrefab("boiling_water_spawner").Transform:SetPosition(x, y, z)
+            inst:Remove()
         end
         -- Landed on ground
     else
@@ -174,17 +170,32 @@ local function OnUpdateProjectile(inst)
     -- Look to hit targets while the cannonball is flying through the air
     local x, y, z = inst.Transform:GetWorldPosition()
     local targets = TheSim:FindEntities(x, 0, z, CANNONBALL_RADIUS, nil, nil, MUST_ONE_OF_TAGS) -- Set y to zero to look for objects on the ground
+
+    local crabking = TheSim:FindEntities(x, 0, z, CANNONBALL_RADIUS*1.5, {"crab"}, nil, MUST_ONE_OF_TAGS)--slightly more forgiving radius for CK
+    for i, target in ipairs(crabking) do
+
+        if target ~= nil and target ~= inst.components.complexprojectile.attacker and not target:HasTag("boatbumper") then
+            if target ~= nil and target:IsValid() and target.components.burnable ~= nil and inst:HasTag("sludge_cannonball") then
+                target.components.burnable:Ignite()
+            end
+
+            if target.components.combat and
+                GetTime() - target.components.combat.lastwasattackedtime > CANNONBALL_PASS_THROUGH_TIME_BUFFER then
+                target.components.combat:GetAttacked(inst, CANNONBALL_DAMAGE * 0.25, nil)
+            end
+        end
+    end
+
     for i, target in ipairs(targets) do
 
         -- Ignore hitting bumpers while flying through the air
         if target ~= nil and target ~= inst.components.complexprojectile.attacker and not target:HasTag("boatbumper") then
-            
             -- Playful bit of arson
             if target ~= nil and target:IsValid() and target.components.burnable ~= nil and inst:HasTag("sludge_cannonball") then
                 target.components.burnable:Ignite()
             end
-			
-			-- Remove and do splash damage if it hits a wall, fixed from klei's funny bugs
+
+            -- Remove and do splash damage if it hits a wall, fixed from klei's funny bugs
             if target:HasTag("wall") and target.components.health then
                 if not target.components.health:IsDead() then
                     inst.components.combat:DoAreaAttack(inst, CANNONBALL_SPLASH_RADIUS, nil, nil, nil,

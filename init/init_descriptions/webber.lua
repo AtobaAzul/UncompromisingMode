@@ -4,6 +4,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 
 --	[ 		Webber Descriptions		]	--
 
+	ANNOUNCE.DREADEYE_SPOOKED = "Eek! That scared us..."
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Mister Wilson says that isn't how ghosts work."
     ANNOUNCE.ANNOUNCE_WINONAGEN = "Father told me not to play with machinery."
     ANNOUNCE.ANNOUNCE_RATRAID = "What's that sound? Friends?"
@@ -46,6 +47,24 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
             REVIVER = "Thank you %s! I knew we could be friends!",
             GHOST = "Oh no! We should help her!",
             FIRESTARTER = "Careful not to singe your fur, %s! Also, don't burn our stuff...",
+        }
+	DESCRIBE.WATHOM =
+        {
+            GENERIC = "I wish %s had more in common with us!",
+            ATTACKER = "No one likes a bully, %s.",
+            MURDERER = "%s might be a monster!",
+            REVIVER = "You have a good heart, %s!",
+            GHOST = "What a strange ghost!",
+            FIRESTARTER = "Don't play with fire, %s.",
+        }
+	DESCRIBE.WIXIE =
+        {
+            GENERIC = "Hi %s! Wanna play? ...No?",
+            ATTACKER = "Stop being a meanie, %s!",
+            MURDERER = "You've gone too far, %!",
+            REVIVER = "Thank you, %!",
+            GHOST = "Oh, poor %s!",
+            FIRESTARTER = "Your bow is a bit charred, %s.",
         }
 		
     DESCRIBE.RATPOISONBOTTLE = "Wendy really likes this stuff! Wonder what it tastes like..."
@@ -126,7 +145,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.VAMPIREBAT = "Nice monster!"
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "Moon rocks would make a great new home for some little critters!"
-	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.BUGZAPPER = "What does this do? OUCH!"	
@@ -358,6 +376,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	
 	DESCRIBE.WINONA_TOOLBOX = "Can we make it into a toy box?"
 	ACTIONFAIL.WINONATOOLBOX = "We should be respectful."
+	DESCRIBE.WINONA_CATAPULT_ITEM = "I don't want to lose an arm!"
+	DESCRIBE.WINONA_SPOTLIGHT_ITEM = "I don't want to lose an arm!"
+	DESCRIBE.WINONA_BATTERY_LOW_ITEM = "I don't want to lose an arm!"
+	DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "I don't want to lose an arm!"
 	DESCRIBE.POWERCELL = "That's a big battery."
 	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "Makes everything we put in on a battery!"
 	DESCRIBE.MINERHAT_ELECTRICAL = "Now We can charge it too."
@@ -394,7 +416,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.UM_BEEGUN = "This seems wrong."
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
-	DESCRIBE.SUNKENCHEST_ROYAL = "Yay! A fancy treasure chest!"
+	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "Yay! A fancy treasure chest!"
 	DESCRIBE.STEERINGWHEEL_COPPER = "We might get sea sick with all this turning."
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "It'll will help us spin our boat."
 	DESCRIBE.BOAT_BUMPER_COPPER = ""
@@ -420,11 +442,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 
 	DESCRIBE.PORTABLEBOAT_ITEM = "It won't be joining us in the murky depths."
 	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "An endless cycle."
-	
-	DESCRIBE.WIXIE_PIANO = "It's still hard to play, even with eight arms!"
-	DESCRIBE.WIXIE_CLOCK = "Aw, it's not a cuckoo clock."
-	DESCRIBE.WIXIE_WARDROBE = "Looks scary!"
-	DESCRIBE.CHARLES_T_HORSE = "Giddy up, horsey!"
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Oh no! Are you okay?"
 	DESCRIBE.UM_ORNAMENT_RAT = "We got you, you sneaky thing!"
@@ -432,3 +449,45 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 	DESCRIBE.TRINKET_WATHOM1 = "We want a refund!!"
 	
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
+	
+	-- WIXIE RELATED STRINGS
+	
+	DESCRIBE.WIXIE_PIANO = "It's still hard to play, even with eight arms!"
+	DESCRIBE.WIXIE_CLOCK = "Aw, it's not a cuckoo clock."
+	DESCRIBE.WIXIE_WARDROBE = "Looks scary!"
+	DESCRIBE.CHARLES_T_HORSE = "Aw, poor toy!"
+	DESCRIBE.THE_REAL_CHARLES_T_HORSE = "Giddy up, horsey!"
+	DESCRIBE.SLINGSHOT_MATILDA = "I don't think she wants us to play with this."
+	DESCRIBE.SLINGSHOT_GNASHER = "It's telling me to commit crimes! No thanks, slingshot!"
+
+	DESCRIBE.SLINGSHOTAMMO_LAZY = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_SHADOW = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_HONEY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_RUBBER = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TREMOR = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_MOONROCK = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+		
+	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_THULECITE
+
+	DESCRIBE.BAGOFMARBLES = "Ooh, I like the pretty swirls!"
+
+	DESCRIBE.MEATRACK_HAT = {
+            GENERIC = DESCRIBE.MEATRACK.GENERIC,
+			
+            DRYING = DESCRIBE.MEATRACK.DRYING,
+            DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
+			
+            DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
+            DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
+	}
+	DESCRIBE.FISHMEAT_DRIED = "I wasn't sure that would work!"
+	DESCRIBE.SMALLFISHMEAT_DRIED = "Itty bitty fishy bites!"
+		
+	DESCRIBE.WIXIEGUN = "We shouldn't play with this!"

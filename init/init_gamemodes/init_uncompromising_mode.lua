@@ -53,7 +53,7 @@ modimport("init/init_sweaterpower")
 modimport("init/init_rpctrackers")
 modimport("init/init_creatures/init_ediblebugs")
 modimport("init/init_creatures/init_bear_trap_immune")
-
+modimport("init/init_generatorcharging")
 --	[ 	Console Commands for tests !	]	--
 
 require("uncompromisingcommands")
@@ -121,7 +121,7 @@ if GetModConfigData("snowstorms") then
 	modimport("init/init_weather/init_snowstorm")
 end
 
-if GetModConfigData("hayfever") then
+if GetModConfigData("hayfever_disable") then
 	modimport("init/init_weather/init_hayfever")
 	modimport("init/init_creatures/init_sneeze_hitters")
 end
@@ -155,10 +155,6 @@ end
 
 if GetModConfigData("caved") == false and GetModConfigData("acidrain") then
 	modimport("init/init_weather/init_overworld_toadstool")
-end
-
-if GetModConfigData("crabking_claws") then
-	modimport("postinit/prefabs/crabking_claw")
 end
 
 if GetModConfigData("foodregen") then

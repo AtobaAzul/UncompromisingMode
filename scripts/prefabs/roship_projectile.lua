@@ -16,7 +16,8 @@ local function OnHitZap(inst)
 
 					v.components.health:DoDelta(-30, nil, inst.prefab, nil, inst) --From the onhit stuff...
 				else
-					v.components.health:DoDelta(-15, nil, inst.prefab, nil, inst)
+					v.components.combat:GetAttacked(inst, 15)
+					--v.components.health:DoDelta(-15, nil, inst.prefab, nil, inst)
 				end
 					
 			else

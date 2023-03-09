@@ -123,7 +123,7 @@ local function OnPreLoad(inst, data)
 	end
 end
 
-local RETARGET_CANT_TAGS = {"bat","EPIC","player"}
+local RETARGET_CANT_TAGS = {"bat","EPIC","player","fruitbat_eating"}
 local RETARGET_ONEOF_TAGS = {"insect","spider"}
 local function Retarget(inst)
     local newtarget = FindEntity(inst, 2*TUNING.BAT_TARGET_DIST, function(guy)
@@ -137,16 +137,18 @@ local function Retarget(inst)
 end
 
 local function KeepTarget(inst, target)
-    return true
+    return target ~= nil and not target:HasTag("fruitbat_eating")
 end
 
 local function OnAttackOther(inst, data)
-	if data.target and data.target.components.health and not data.target.components.health:IsDead() and data.target:HasTag("aphid") then
+	if data.target and not data.target:HasTag("fruitbat_eating") and data.target.components.health and not data.target.components.health:IsDead() and data.target:HasTag("aphid") then
 		inst.food_baby = data.target
 		if inst.food_baby.brain then
 			inst.food_baby.brain:Stop()
 			inst.food_baby.sg:Stop()
 		end
+		
+		inst.food_baby:AddTag("fruitbat_eating")
 		inst.sg:GoToState("eat_loop")
 	end
 end

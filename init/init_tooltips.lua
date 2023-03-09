@@ -32,9 +32,9 @@ STRINGS.UNCOMP_TOOLTIP = {
 	WINONA_BATTERY_LOW = "- Can charge electrical equipment.",
 	WINONA_BATTERY_HIGH = "- Can charge electrical equipment.",
 	LIGHTNING_ROD = "- Can charge electrical equipment.",
-    LIGHTER = "- Lasts forever in the hands of a pyromaniac.",
+	LIGHTER = "- Lasts forever in the hands of a pyromaniac.",
 	BANDAGE = "- Restores a bit of extra health over time.",
-    SISTURN = "- Petals inside decay into Mourning Glory.\n- Masks foul smells.",
+	SISTURN = "- Petals inside decay into Mourning Glory.\n- Masks foul smells.",
 	POTTEDFERN = "- Masks foul smells.",
 	SUCCULENT_POTTED = "- Masks foul smells.",
 	ENDTABLE = "- Masks foul smells when decorated.",
@@ -47,36 +47,55 @@ STRINGS.UNCOMP_TOOLTIP = {
 	ARMOR_GLASSMAIL = "- Summons spinning Glass Shards when attacking enemies.\n- Loses shards when damage is taken.",
 	HONEY_LOG = "- Provides protection from Hayfever. Mostly useful for other allies.",
 	SALTPACK = "- Drops piles of salt, preventing buildup of Snow Piles.",
-	SPOREPACK = "- Provides lots of storage space.\n- Rots food.",
+	SPOREPACK = "- Provides lots of storage space.\n- Rots food, but refreshes Spores.",
 	UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "- Slows down anything it's attached to. Deployable and throwable.",
-    UM_BEAR_TRAP_EQUIPPABLE_GOLD = "- Slows down anything it's attached to. Deployable and throwable.",
+	UM_BEAR_TRAP_EQUIPPABLE_GOLD = "- Slows down anything it's attached to. Deployable and throwable.",
 	WATERMELON_LANTERN = "- Has a positive sanity aura.",
 	HAT_RATMASK = "- Finds rat burrows\n- Shows sources of unwanted attention.",
 	SKULLCHEST_CHILD = "- Shares its contents with other Skull Chests.",
 	SNOWGOGGLES = "- Grants protection against Snow Storms / Sand Storms when worn.",
-    GASMASK = "- Provides protection against spore clouds.",
+	GASMASK = "- Provides protection against spore clouds.",
 	PLAGUEMASK = "- Provides protection against spore clouds.",
-    FLORAL_BANDAGE = "- Restores extra health over time.",
-    DISEASECUREBOMB = "- Restores sickly plants.",
+	FLORAL_BANDAGE = "- Restores extra health over time.",
+	DISEASECUREBOMB = "- Restores sickly plants.",
 	SLUDGE_OIL = "- Multi-use fuel for fires and lanterns alike.",
+
+	CRAB_HAT = "- Repairs & sewing are twice as effective when worn.",
+	CRAB_HAT_ICE = "- Resistance scales with wetness.\n- Prevents the wearer from drying up.",
+	ARMOR_CRAB_MAXHP = "- Increases maximum health when worn.",
+	ARMOR_CRAB_REGEN = "- Self-healing."
 }
 
 STRINGS.PINETREE_TOOLTIP = {
 	WALTERHAT = "- Wearing it makes scrapes and bruises feel less scary!",
 	HEALINGSALVE = "- My first aid training helps me get more out of this!",
 	TILLWEEDSALVE = "- My first aid training helps me get more out of this!",
-	BANDAGE = "- Restores a bit of extra health over time.\n- My first aid training helps me get more out of this!",
-    FLORAL_BANDAGE = "- Restores extra health over time.\n- My first aid training helps me get more out of this!",
-    BEDROLL_STRAW = "- A pine tree pioneer knows how to conserve energy when relaxing!",
-    BEDROLL_FURRY = "- A pine tree pioneer knows how to conserve energy when relaxing!",
-    TENT = "- A pine tree pioneer knows how to conserve energy when relaxing!",
-    SIESTAHUT = "- A pine tree pioneer knows how to conserve energy when relaxing!",
-    PORTABLETENT_ITEM = "- A pine tree pioneer knows how to conserve energy when relaxing!",
-    MEATRACK_HAT = "- If I go fast enough, it will dry even faster!"
+	BANDAGE = "- My first aid training helps me get more out of this!",
+	FLORAL_BANDAGE = "- My first aid training helps me get more out of this!",
+	BEDROLL_STRAW = "- A pine tree pioneer knows how to conserve energy when relaxing!",
+	BEDROLL_FURRY = "- A pine tree pioneer knows how to conserve energy when relaxing!",
+	TENT = "- A pine tree pioneer knows how to conserve energy when relaxing!",
+	SIESTAHUT = "- A pine tree pioneer knows how to conserve energy when relaxing!",
+	PORTABLETENT_ITEM = "- A pine tree pioneer knows how to conserve energy when relaxing!",
+	MEATRACK_HAT = "- If I go fast enough, it will dry even faster!",
+	BRINE_BALM = "- My first aid training helps me get more out of this!",
 }
 
+STRINGS.ENGINEERING_TOOLTIP = {
+	MINERHAT = " - May be upgraded.\n- Can be overcharged, if upgraded.",
+	LANTERN = "- May be upgraded.\n- Can be overcharged, if upgraded.",
+	NIGHTSTICK = "- Can be overcharged.",
+	BUGZAPPER = "- Can be overcharged."
+}
+
+if GetModConfigData("winona_portables") then
+	STRINGS.ENGINEERING_TOOLTIP.WINONA_CATAPULT = "- Now portable."
+	STRINGS.ENGINEERING_TOOLTIP.WINONA_SPOTLIGHT = "- Now portable."
+	STRINGS.ENGINEERING_TOOLTIP.WINONA_BATTERY_LOW = "- Now portable."
+	STRINGS.ENGINEERING_TOOLTIP.WINONA_BATTERY_HIGH = "- Now portable."
+end
+
 local TOOLTIP = STRINGS.UNCOMP_TOOLTIP
-local PINETREETOOLTIP = STRINGS.PINETREE_TOOLTIP
 
 if GetModConfigData("telestaff_rework") then
 	TOOLTIP.TELESTAFF = "- Can select its destination.\n- Increased uses."
@@ -88,11 +107,15 @@ if GetModConfigData("beebox_nerf") then
 end
 
 if not TUNING.DSTU.ELECTRICALMISHAP then
-	TOOLTIP.NIGHTSTICK = "- No longer breaks when empty.\n- Can be fueled by various electrical items, generators, and potatoes."
-	TOOLTIP.BUGZAPPER = "- Deals bonus damage, and area damage to Insects.\n- Deals electrical damage.\n- Can be fueled by various electrical items, generators, and potatoes."
+	TOOLTIP.NIGHTSTICK =
+	"- No longer breaks when empty.\n- Can be fueled by various electrical items, generators, and potatoes."
+	TOOLTIP.BUGZAPPER =
+	"- Deals bonus damage, and area damage to Insects.\n- Deals electrical damage.\n- Can be fueled by various electrical items, generators, and potatoes."
 else
-	TOOLTIP.NIGHTSTICK = "- No longer breaks when empty.\n- Functions as a portable lightning rod.\n- Regains fuel when struck by lightning or when charged at generators."
-	TOOLTIP.BUGZAPPER = "- Deals bonus damage, and area damage to Insects.\n- Deals electrical damage.\n - Can be charged at generators."
+	TOOLTIP.NIGHTSTICK =
+	"- No longer breaks when empty.\n- Functions as a portable lightning rod.\n- Regains fuel when struck by lightning or when charged at generators."
+	TOOLTIP.BUGZAPPER =
+	"- Deals bonus damage, and area damage to Insects.\n- Deals electrical damage.\n - Can be charged at generators."
 end
 
 if TUNING.DSTU.SEWING_KIT then
@@ -132,8 +155,8 @@ else
 end
 
 if TUNING.DSTU.HAYFEVER then
-	TOOLTIP.GASMASK = TOOLTIP.GASMASK.."\n- Prevents Hayfever while worn."
-	TOOLTIP.PLAGUEMASK = TOOLTIP.PLAGUEMASK.."\n- Prevents Hayfever while worn."
+	TOOLTIP.GASMASK = TOOLTIP.GASMASK .. "\n- Prevents Hayfever while worn."
+	TOOLTIP.PLAGUEMASK = TOOLTIP.PLAGUEMASK .. "\n- Prevents Hayfever while worn."
 	TOOLTIP.BEEHAT = "- Stings won't cause allergic reactions."
 	TOOLTIP.MINIFAN = "- Staves off hayfever."
 	TOOLTIP.FEATHERFAN = "- Grants large amounts of Hayfever protection when blown."
@@ -142,55 +165,39 @@ end
 
 if TUNING.DSTU.GOTOBED ~= false then
 	TOOLTIP.BEDROLL_STRAW = "- May restore maximum health."
-	PINETREETOOLTIP.BEDROLL_STRAW = "- May restore maximum health.\n"..PINETREETOOLTIP.BEDROLL_STRAW
-	
+
 	TOOLTIP.BEDROLL_FURRY = "- May restore maximum health."
-	PINETREETOOLTIP.BEDROLL_FURRY = "- May restore maximum health.\n"..PINETREETOOLTIP.BEDROLL_FURRY
-	
+
 	TOOLTIP.TENT = "- May restore maximum health."
-	PINETREETOOLTIP.TENT = "- May restore maximum health.\n"..PINETREETOOLTIP.TENT
-	
-    TOOLTIP.PORTABLETENT_ITEM = "- May restore maximum health."
-	PINETREETOOLTIP.PORTABLETENT_ITEM = "- May restore maximum health.\n"..PINETREETOOLTIP.PORTABLETENT_ITEM
-	
+
+	TOOLTIP.PORTABLETENT_ITEM = "- May restore maximum health."
+
 	TOOLTIP.SIESTAHUT = "- A bit less efficient.\n- May restore maximum health."
-	PINETREETOOLTIP.SIESTAHUT = "- May restore maximum health.\n"..PINETREETOOLTIP.SIESTAHUT
 else
 	TOOLTIP.SIESTAHUT = "- A bit less efficient."
-	PINETREETOOLTIP.SIESTAHUT = "- A bit less efficient.\n"..PINETREETOOLTIP.SIESTAHUT
 end
 
 if TUNING.DSTU.SLEEPINGBUFF > 1 then
 	if TUNING.DSTU.GOTOBED then
-		TOOLTIP.BEDROLL_STRAW = TOOLTIP.BEDROLL_STRAW.."\n- Faster healing rate."
-		PINETREETOOLTIP.BEDROLL_STRAW = "- Faster healing rate.\n"..PINETREETOOLTIP.BEDROLL_STRAW
-		
-		TOOLTIP.BEDROLL_FURRY = TOOLTIP.BEDROLL_FURRY.."\n- Faster healing rate."
-		PINETREETOOLTIP.BEDROLL_FURRY = "- Faster healing rate.\n"..PINETREETOOLTIP.BEDROLL_FURRY
-		
-		TOOLTIP.TENT = TOOLTIP.TENT.."\n- Faster healing rate."
-		PINETREETOOLTIP.TENT = "- Faster healing rate.\n"..PINETREETOOLTIP.TENT
-		
-		TOOLTIP.SIESTAHUT = TOOLTIP.SIESTAHUT.."\n- Faster healing rate."
-		PINETREETOOLTIP.SIESTAHUT = "- Faster healing rate.\n"..PINETREETOOLTIP.SIESTAHUT
-		
-		TOOLTIP.PORTABLETENT_ITEM = TOOLTIP.PORTABLETENT_ITEM.."\n- Faster healing rate."
-		PINETREETOOLTIP.PORTABLETENT_ITEM = "- Faster healing rate.\n"..PINETREETOOLTIP.PORTABLETENT_ITEM
+		TOOLTIP.BEDROLL_STRAW = TOOLTIP.BEDROLL_STRAW .. "\n- Faster healing rate."
+
+		TOOLTIP.BEDROLL_FURRY = TOOLTIP.BEDROLL_FURRY .. "\n- Faster healing rate."
+
+		TOOLTIP.TENT = TOOLTIP.TENT .. "\n- Faster healing rate."
+
+		TOOLTIP.SIESTAHUT = TOOLTIP.SIESTAHUT .. "\n- Faster healing rate."
+
+		TOOLTIP.PORTABLETENT_ITEM = TOOLTIP.PORTABLETENT_ITEM .. "\n- Faster healing rate."
 	else
 		TOOLTIP.BEDROLL_STRAW = "- Faster healing rate."
-		PINETREETOOLTIP.BEDROLL_STRAW = "- Faster healing rate.\n"..PINETREETOOLTIP.BEDROLL_STRAW
-		
+
 		TOOLTIP.BEDROLL_FURRY = "- Faster healing rate."
-		PINETREETOOLTIP.BEDROLL_FURRY = "- Faster healing rate.\n"..PINETREETOOLTIP.BEDROLL_FURRY
-		
+
 		TOOLTIP.TENT = "- Faster healing rate."
-		PINETREETOOLTIP.TENT = "- Faster healing rate.\n"..PINETREETOOLTIP.TENT
-		
+
 		TOOLTIP.SIESTAHUT = "- Faster healing rate."
-		PINETREETOOLTIP.SIESTAHUT = "- Faster healing rate.\n"..PINETREETOOLTIP.SIESTAHUT
-		
+
 		TOOLTIP.PORTABLETENT_ITEM = "- Faster healing rate."
-		PINETREETOOLTIP.PORTABLETENT_ITEM = "- Faster healing rate.\n"..PINETREETOOLTIP.PORTABLETENT_ITEM
 	end
 end
 
@@ -200,7 +207,7 @@ if TUNING.DSTU.POCKET_POWERTRIP ~= 0 then
 	TOOLTIP.REFLECTIVEVEST = "- Now has pockets!"
 end
 
-if GetModConfigData("canedurability") then--is this modmain env.?
+if GetModConfigData("canedurability") then
 	TOOLTIP.CANE = "- Has durability, only drains when walking."
 end
 
@@ -212,15 +219,16 @@ if TUNING.DSTU.INSUL_THERMALSTONE then
 	TOOLTIP.HEATROCK = "- Reduced inherent insulation.\n- Inherits part of players insulation."
 end
 
-if TUNING.DSTU.WINONA_GEN then
-	TOOLTIP.WINONA_BATTERY_HIGH = TOOLTIP.WINONA_BATTERY_HIGH.."\n- Access limited to Winona."
-	TOOLTIP.WINONA_BATTERY_LOW = TOOLTIP.WINONA_BATTERY_LOW.."\n- Access limited to Winona."
-end
-
 if TUNING.DSTU.WICKERNERF_TENTACLES then
-	TOOLTIP.BOOK_TENTACLES = "- Summons Sickly Tentacles\n- Sickly Tentacles die over time, drop no loot but don't attack players."
+	TOOLTIP.BOOK_TENTACLES =
+	"- Summons Sickly Tentacles\n- Sickly Tentacles die over time, drop no loot but don't attack players."
 end
 
 if GetModConfigData("woodie") then
 	TOOLTIP.WEREITEM_GOOSE = "- Walking on water makes you wet."
+end
+
+if TUNING.DSTU.WINONA_GEN then
+	TOOLTIP.WINONA_BATTERY_HIGH = TOOLTIP.WINONA_BATTERY_HIGH .. "\n- Access limited to Winona."
+	TOOLTIP.WINONA_BATTERY_LOW = TOOLTIP.WINONA_BATTERY_LOW .. "\n- Access limited to Winona."
 end

@@ -14,7 +14,6 @@ end
 
 local function GenerateNewTrep(inst)
     inst.components.childspawner:AddChildrenInside(1)
-    inst.components.childspawner:StartSpawning()
 end
 
 local function ontimerdone(inst, data)
@@ -22,11 +21,32 @@ local function ontimerdone(inst, data)
         GenerateNewTrep(inst)
     end
 end
-local function Initialize(inst)
-local pt = inst:GetPosition()
-if #TheSim:FindEntities(pt.x,pt.y,pt.z,0,{"trepidationspawner"}) > 1 then
-inst:Remove()
+
+local function AddToList(inst)
+	if TheWorld.trepspawners ~= nil then
+		table.insert(TheWorld.trepspawners, inst)
+	end
 end
+
+local function Initialize(inst)
+	local pt = inst:GetPosition()
+	if #TheSim:FindEntities(pt.x,pt.y,pt.z,0,{"trepidationspawner"}) > 1 then
+		inst:Remove()
+	end
+	
+	inst:DoTaskInTime(1, AddToList)
+end
+
+local function OnNightmarePhaseChanged(inst, phase)
+	if phase == "calm" then
+		inst.components.childspawner:StopSpawning()
+	end
+end
+
+local function CheckIfSpawning(inst, phase)
+	if inst.components.childspawner.spawning then
+		SpawnPrefab("shadow_despawn").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	end
 end
 
 local function fn()
@@ -37,13 +57,8 @@ local function fn()
         inst.entity:AddSoundEmitter()
         inst.entity:AddNetwork()
 
-
-
-		--inst.AnimState:SetBank("pitcher")
-		--inst.AnimState:SetBuild("pitcher")
-		--inst.AnimState:PushAnimation("swinglong")
-		--inst:AddTag("CLASSIFIED")
-
+		inst:AddTag("trepidationspawner")
+		inst:AddTag("NOBLOCK")
 
         inst.entity:SetPristine()
 
@@ -53,27 +68,26 @@ local function fn()
 
         ---------------------  
 
-		inst:AddTag("trepidationspawner")
         -------------------
 		inst:AddComponent("timer")
         inst:AddComponent("childspawner")
         inst.components.childspawner.childname = "ancient_trepidation"
 		
 		if TUNING.DSTU.TREPIDATIONS then
-        inst.components.childspawner:StartSpawning()
+			inst:WatchWorldState("nightmarephase", OnNightmarePhaseChanged)
+			OnNightmarePhaseChanged(inst, TheWorld.state.nightmarephase, true)
 		end
 		
 		inst.components.childspawner:SetMaxChildren(1)
-		inst.components.childspawner:SetSpawnPeriod(TUNING.DRAGONFLY_SPAWN_TIME/4, 0)
-		inst.components.childspawner.onchildkilledfn = OnKilled
-		inst.components.childspawner:StartSpawning()
+		inst.components.childspawner:SetSpawnPeriod(1)
+		--inst.components.childspawner.onchildkilledfn = OnKilled
+		inst.components.childspawner:StopSpawning()
 		inst.components.childspawner:StopRegen()	
 		inst:DoTaskInTime(math.random(0.1,0.2),Initialize)
-		MakeLargePropagator(inst)
+		
+		--inst:DoPeriodicTask(1, CheckIfSpawning)
 		
         return inst
 end
 
 return Prefab("ancient_trepidation_anchor", fn)
-
-    

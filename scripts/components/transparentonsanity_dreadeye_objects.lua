@@ -23,7 +23,7 @@ local TransparentOnSanity = Class(function(self, inst)
     PushAlpha(self, 0.6, 1.2)
     inst:StartUpdatingComponent(self)
 
-	self.inst.AnimState:UsePointFiltering(true)
+	--self.inst.AnimState:UsePointFiltering(true)
 end)
 
 function TransparentOnSanity:OnUpdate(dt)
@@ -35,7 +35,7 @@ function TransparentOnSanity:OnUpdate(dt)
     else
         self.offset = self.offset + dt
         self.target_alpha =
-            (self.calc_percent_fn and self.calc_percent_fn(self.inst, player) or (1 - player.replica.sanity:GetPercent())) *  --insanity factor
+            (self.calc_percent_fn and self.calc_percent_fn(self.inst, player) or (1.5 - player.replica.sanity:GetPercent())) *  --insanity factor
             self.most_alpha *                           --max alpha value
             (1 + self.osc_amp * (math.sin(self.offset * self.osc_speed) - 1)) --variance
     end

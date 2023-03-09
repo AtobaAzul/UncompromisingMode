@@ -4,6 +4,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 
 --	[ 		Maxwell Descriptions		]	--
 
+	ANNOUNCE.DREADEYE_SPOOKED = "Charlie? No... it was something else..."
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "I'll have to impart this heart to their rotting corpse."
     ANNOUNCE.ANNOUNCE_WINONAGEN = "I'm more of a \"magic and dark arts\" man."
     ANNOUNCE.ANNOUNCE_RATRAID = "Oh, no."
@@ -47,6 +48,24 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
             REVIVER = "Glad to be alive, but try not to touch my suit!",
             GHOST = "%s died as she lived. As a filthy, smelly rat.",
             FIRESTARTER = "Why must all the creatures here have to cause trouble?",
+        }
+	DESCRIBE.WATHOM =
+        {
+            GENERIC = "Not one of my proudest experiments.",
+            ATTACKER = "You're getting out of control, %s.",
+            MURDERER = "Is this how you repay me, %s?",
+            REVIVER = "I knew you would have your uses, %s.",
+            GHOST = "Strange, They manifest under the surface.",
+            FIRESTARTER = "I didn't expect you to be a firestarter, %s.",
+        }
+	DESCRIBE.WIXIE =
+        {
+            GENERIC = "I hope you aren't collecting strays, Charlie.",
+            ATTACKER = "Cease your violence at once, %s!",
+            MURDERER = "I don't understand children anymore.",
+            REVIVER = "I'll be keeping an eye on you, %s.",
+            GHOST = "Finally, some peace and quiet.",
+            FIRESTARTER = "%s is becoming predictable.",
         }
 		
     DESCRIBE.RATPOISONBOTTLE = "Hmhm...I remember what the red ones were for now."
@@ -128,7 +147,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.VAMPIREBAT = "I remember you being... different."
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "With moon rocks, I could foster some filthy creatures."
-	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.BUGZAPPER = "Mundane, but it keeps the bugs out."		
@@ -363,7 +381,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	
 	DESCRIBE.WINONA_TOOLBOX = "I will not lug that around."
 	ACTIONFAIL.WINONATOOLBOX = "How can I help if I can't get inside?"
-	DESCRIBE.POWERCELL = "."
+	DESCRIBE.WINONA_CATAPULT_ITEM = "Some days I miss my clockworks."
+	DESCRIBE.WINONA_SPOTLIGHT_ITEM = "Some days I miss my clockworks."
+	DESCRIBE.WINONA_BATTERY_LOW_ITEM = "Some days I miss my clockworks."
+	DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "Some days I miss my clockworks."
+	DESCRIBE.POWERCELL = "Time flies when you're stuck in here."
 	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "She's just full of bright ideas."
 	DESCRIBE.MINERHAT_ELECTRICAL = "I guess that solves the firefly problem."
 	DESCRIBE.OCEAN_SPEAKER = "You know, I used to be king. Here I am unable to recognize half the stuff I find in these wretched waters."
@@ -399,7 +421,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.UM_BEEGUN = "I can appreciate the alliteration."
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
-	DESCRIBE.SUNKENCHEST_ROYAL = "It was a royal pain just to get this."
+	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "It was a royal pain just to get this."
 	DESCRIBE.STEERINGWHEEL_COPPER = "Round, and round my boat goes."
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "It need a boat to rotate."
 	DESCRIBE.BOAT_BUMPER_COPPER = "It's sturdy stuff."
@@ -425,11 +447,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 
 	DESCRIBE.PORTABLEBOAT_ITEM = "I wouldn't trust it with my life."
 	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "We have taken advantage of nature, once again."
-	
-	DESCRIBE.WIXIE_PIANO = "How did this get here?"
-	DESCRIBE.WIXIE_CLOCK = "A shame it's not in working condition."
-	DESCRIBE.WIXIE_WARDROBE = "It's some kind of one way portal..."
-	DESCRIBE.CHARLES_T_HORSE = "How quaint."
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "It's not dead, it's merely an act. I think."
 	DESCRIBE.UM_ORNAMENT_RAT = "Begone, vile thing!"
@@ -437,3 +454,45 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WAXWELL.ACTIONFAIL
 	DESCRIBE.TRINKET_WATHOM1 = "No wonder he's been having heart attacks."
 	
 	DESCRIBE.CODEX_MANTRA = "I'm so sorry Charlie."
+	
+	-- WIXIE RELATED STRINGS
+	
+	DESCRIBE.WIXIE_PIANO = "How did this get here?"
+	DESCRIBE.WIXIE_CLOCK = "A shame it's not in working condition."
+	DESCRIBE.WIXIE_WARDROBE = "It's some kind of one way portal..."
+	DESCRIBE.CHARLES_T_HORSE = "They have reclaimed it."
+	DESCRIBE.THE_REAL_CHARLES_T_HORSE = "How quaint."
+	DESCRIBE.SLINGSHOT_MATILDA = "It's surprisingly sturdy, given the materials used."
+	DESCRIBE.SLINGSHOT_GNASHER = "What a sick joke."
+
+	DESCRIBE.SLINGSHOTAMMO_LAZY = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_SHADOW = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_HONEY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_RUBBER = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TREMOR = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_MOONROCK = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+		
+	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_THULECITE
+
+	DESCRIBE.BAGOFMARBLES = "I have no time for childish games."
+
+	DESCRIBE.MEATRACK_HAT = {
+            GENERIC = DESCRIBE.MEATRACK.GENERIC,
+			
+            DRYING = DESCRIBE.MEATRACK.DRYING,
+            DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
+			
+            DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
+            DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
+	}
+	DESCRIBE.FISHMEAT_DRIED = "It's softer than regular jerky."
+	DESCRIBE.SMALLFISHMEAT_DRIED = "It's softer than regular jerky, and a bit smaller."
+		
+	DESCRIBE.WIXIEGUN = "What magic is this?!"

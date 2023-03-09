@@ -23,8 +23,13 @@ end
 function CheckWardrobeItem(container, item, slot)
     return item:HasTag("_equippable") or item:HasTag("reloaditem_ammo") or item:HasTag("tool") or item:HasTag("weapon")
         or (item.prefab == "razor" or item.prefab == "beef_bell") or item:HasTag("heatrock") or
-        (item:HasTag("pocketwatch") or item.prefab == "pocketwatch_dismantler") or item:HasTag("toolbox_item") or
-        item.prefab == "sewing_tape" or item.prefab == "sewing_kit" or item:HasTag("fan") or string.match(item.prefab, "wx78module_") ~= nil
+        (item:HasTag("pocketwatch") or item.prefab == "pocketwatch_dismantler") or
+        item.prefab == "sewing_tape" or item.prefab == "sewing_kit" or item:HasTag("fan") or
+        string.match(item.prefab, "wx78module_") ~= nil
+end
+
+function CheckToolboxItem(container, item, slot)
+    return item:HasTag("toolbox_item") or item:HasTag("gem") or item.prefab == "nitre"
 end
 
 function CheckEquipItem(container, item, slot)
@@ -63,9 +68,9 @@ modparams.air_conditioner =
     {
         slotpos =
         {
-            Vector3(-37.5, 32 + 4, 0),
+            Vector3( -37.5, 32 + 4, 0),
             Vector3(37.5, 32 + 4, 0),
-            Vector3(-37.5, -(32 + 4), 0),
+            Vector3( -37.5, -(32 + 4), 0),
             Vector3(37.5, -(32 + 4), 0),
         },
         slotbg =
@@ -91,9 +96,9 @@ modparams.itemscrapper =
     {
         slotpos =
         {
-            Vector3(-37.5, 32 + 4, 0),
+            Vector3( -37.5, 32 + 4, 0),
             Vector3(37.5, 32 + 4, 0),
-            Vector3(-37.5, -(32 + 4), 0),
+            Vector3( -37.5, -(32 + 4), 0),
             Vector3(37.5, -(32 + 4), 0),
         },
         slotbg =
@@ -120,7 +125,7 @@ modparams.puffvest =
         slotpos = {},
         animbank = "ui_lamp_1x4",
         animbuild = "ui_lamp_1x4",
-        pos = Vector3(-70, -70, 0),
+        pos = Vector3( -70, -70, 0),
     },
     issidewidget = true,
     type = "pack",
@@ -132,7 +137,7 @@ modparams.reflvest =
         slotpos = {},
         animbank = "ui_lamp_1x4",
         animbuild = "ui_lamp_1x4",
-        pos = Vector3(-70, -70, 0),
+        pos = Vector3( -70, -70, 0),
     },
     issidewidget = true,
     type = "pack",
@@ -145,15 +150,15 @@ modparams.puffvest_big =
         slotpos = {},
         animbank = "ui_icepack_2x3",
         animbuild = "ui_icepack_2x3",
-        pos = Vector3(-5, -70, 0),
+        pos = Vector3( -5, -70, 0),
     },
     issidewidget = true,
     type = "pack",
 }
 
 for y = 0, 2 do
-    table.insert(modparams.puffvest_big.widget.slotpos, Vector3(-162, -75 * y + 75, 0))
-    table.insert(modparams.puffvest_big.widget.slotpos, Vector3(-162 + 75, -75 * y + 75, 0))
+    table.insert(modparams.puffvest_big.widget.slotpos, Vector3( -162, -75 * y + 75, 0))
+    table.insert(modparams.puffvest_big.widget.slotpos, Vector3( -162 + 75, -75 * y + 75, 0))
 end
 
 modparams.crabclaw =
@@ -313,16 +318,16 @@ modparams.skullchest_child =
 }
 
 for y = 0, 3 do
-    table.insert(modparams.puffvest.widget.slotpos, Vector3(-1, -75 * y + 110, 0))
+    table.insert(modparams.puffvest.widget.slotpos, Vector3( -1, -75 * y + 110, 0))
 end
 for y = 0, 3 do
-    table.insert(modparams.reflvest.widget.slotpos, Vector3(-1, -75 * y + 110, 0))
+    table.insert(modparams.reflvest.widget.slotpos, Vector3( -1, -75 * y + 110, 0))
 end
 for y = 0, 3 do
-    table.insert(modparams.crabclaw.widget.slotpos, Vector3(-1, -75 * y + 110, 0))
+    table.insert(modparams.crabclaw.widget.slotpos, Vector3( -1, -75 * y + 110, 0))
 end
 for y = 0, 3 do
-    table.insert(modparams.frigginbirdpail.widget.slotpos, Vector3(-1, -75 * y + 110, 0))
+    table.insert(modparams.frigginbirdpail.widget.slotpos, Vector3( -1, -75 * y + 110, 0))
 end
 
 local function NoIreplaceables(container, item, slot)
@@ -341,7 +346,7 @@ modparams.sludge_sack = containers.params.piggyback
 local old_wsetup = containers.widgetsetup
 
 function containers.widgetsetup(container, prefab, data, ...)
-    local t = modparams[prefab or container.inst.prefab--[[ or inst.widgetsetup]] ]
+    local t = modparams[ prefab or container.inst.prefab --[[ or inst.widgetsetup]] ]
     if t ~= nil then
         --if modparams[prefab or container.inst.prefab] and not data then
         for k, v in pairs(t) do
@@ -399,31 +404,31 @@ containers.params.wardrobe =
         side_align_tip = 160,
         slotbg =
         {
-            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+            { image = "wardrobe_hat_slot.tex",   atlas = "images/wardrobe_hat_slot.xml" },
             { image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
-            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+            { image = "wardrobe_tool_slot.tex",  atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_hat_slot.tex",   atlas = "images/wardrobe_hat_slot.xml" },
             { image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
-            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+            { image = "wardrobe_tool_slot.tex",  atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_hat_slot.tex",   atlas = "images/wardrobe_hat_slot.xml" },
             { image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
-            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+            { image = "wardrobe_tool_slot.tex",  atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_hat_slot.tex",   atlas = "images/wardrobe_hat_slot.xml" },
             { image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
-            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+            { image = "wardrobe_tool_slot.tex",  atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_hat_slot.tex",   atlas = "images/wardrobe_hat_slot.xml" },
             { image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
-            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+            { image = "wardrobe_tool_slot.tex",  atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_hat_slot.tex",   atlas = "images/wardrobe_hat_slot.xml" },
             { image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
-            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+            { image = "wardrobe_tool_slot.tex",  atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_hat_slot.tex",   atlas = "images/wardrobe_hat_slot.xml" },
             { image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
-            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+            { image = "wardrobe_tool_slot.tex",  atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_hat_slot.tex",   atlas = "images/wardrobe_hat_slot.xml" },
             { image = "wardrobe_chest_slot.tex", atlas = "images/wardrobe_chest_slot.xml" },
-            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
-            { image = "wardrobe_hat_slot.tex", atlas = "images/wardrobe_hat_slot.xml" },
+            { image = "wardrobe_tool_slot.tex",  atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_hat_slot.tex",   atlas = "images/wardrobe_hat_slot.xml" },
         },
     },
     type = "chest",
@@ -450,24 +455,32 @@ containers.params.winona_toolbox =
             { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
             { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
             { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
+            { image = "wardrobe_tool_slot.tex", atlas = "images/wardrobe_tool_slot.xml" },
         },
-        animbank = "ui_tacklecontainer_3x2",
-        animbuild = "ui_tacklecontainer_3x2",
-        pos = Vector3(0, 200, 0),
+        animbank = "ui_chester_shadow_3x4",
+        animbuild = "ui_chester_shadow_3x4",
+        pos = Vector3(0, 220, 0),
         side_align_tip = 160,
     },
     type = "chest",
-    itemtestfn = CheckWardrobeItem,
+    itemtestfn = GetModConfigData("winona_portables") and CheckToolboxItem or CheckWardrobeItem,
 }
 
-for y = 1, 0, -1 do
-    for x = 0, 2 do
-        table.insert(containers.params.winona_toolbox.widget.slotpos,
-            Vector3(80 * x - 80 * 2 + 80, 80 * y - 80 * 2 + 120, 0))
-    end
-end
+containers.params.winona_toolbox.widget.slotpos = containers.params.shadowchester.widget.slotpos
 
-containers.params.sunkenchest_royal = containers.params.shadowchester
+modparams.sunkenchest_royal_random = containers.params.shadowchester
+modparams.sunkenchest_royal_red = containers.params.shadowchester
+modparams.sunkenchest_royal_blue = containers.params.shadowchester
+modparams.sunkenchest_royal_purple = containers.params.shadowchester
+modparams.sunkenchest_royal_green = containers.params.shadowchester
+modparams.sunkenchest_royal_orange = containers.params.shadowchester
+modparams.sunkenchest_royal_yellow = containers.params.shadowchester
+modparams.sunkenchest_royal_rainbow = containers.params.shadowchester
 
 for k, v in pairs(modparams) do
     containers.MAXITEMSLOTS = math.max(containers.MAXITEMSLOTS, v.widget.slotpos ~= nil and #v.widget.slotpos or 0)

@@ -1,0 +1,7 @@
+<Atlas>
+    <Texture filename="wathom_triumphant.tex" />
+    <Elements>
+        <Element name="wathom_triumphant_oval.tex" u1="0.0009765625" u2="0.8291015625" v1="0.41455078125"
+            v2="0.99951171875" />
+    </Elements>
+</Atlas>

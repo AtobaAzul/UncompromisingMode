@@ -13,8 +13,12 @@ local function reticuletargetfunction(inst)
 end
 
 local function onusesfinished(inst)
+    local item = SpawnPrefab("dormant_rain_horn")
+    local x,y,z = inst.Transform:GetWorldPosition()
+    item.Transform:SetPosition(x,y,z)
+
     if inst.components.inventoryitem.owner ~= nil then
-        inst.components.inventoryitem.owner:PushEvent("toolbroke", { tool = inst })
+        inst.components.inventoryitem.owner.components.inventory:GiveItem(item)
     end
 
     inst:Remove()

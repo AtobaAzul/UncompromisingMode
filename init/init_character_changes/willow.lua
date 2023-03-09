@@ -6,23 +6,20 @@ local function propegation(inst)
 		MakeSmallPropagator(inst)
 	else
 		inst:DoTaskInTime(5, propegation)
-	end 
+	end
 end
 
 local function OnIgniteFn(inst)
-
 	if inst.components.sanity:IsInsane() then
-	
 		inst.SoundEmitter:KillSound("hiss")
 		SpawnPrefab("firesplash_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
 		inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
-		
+
 		local x, y, z = inst.Transform:GetWorldPosition()
-		local ents = TheSim:FindEntities(x, y, z, 4, nil, { "INLIMBO", "player", "abigail" })
+		local ents = TheSim:FindEntities(x, y, z, 4, nil, { "INLIMBO", "player", "abigail", "companion"})
 
 		for i, v in ipairs(ents) do
 			if v ~= inst and v:IsValid() and not v:IsInLimbo() then
-			   
 				--Recheck valid after work
 				if v:IsValid() and not v:IsInLimbo() then
 					if v.components.fueled == nil and
@@ -31,7 +28,7 @@ local function OnIgniteFn(inst)
 						not v:HasTag("burnt") then
 						v.components.burnable:Ignite()
 					end
-					
+
 					if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
 						local dmg = 40
 						if v.components.explosiveresist ~= nil then
@@ -46,51 +43,49 @@ local function OnIgniteFn(inst)
 				end
 			end
 		end
-	
 	end
 	--propegation(inst)
-
 end
 
 local function OnBurnt(inst)
 	--will this stop her from losing her burning effect?
-	inst:DoTaskInTime(1, function(inst) 
-		if inst.components.health and not inst.components.health:IsDead() then 
+	inst:DoTaskInTime(1, function(inst)
+		if inst.components.health and not inst.components.health:IsDead() then
 			inst.components.burnable:Extinguish()
 			MakeSmallPropagator(inst)
 			inst.components.burnable:SetBurnTime(TUNING.WORMWOOD_BURN_TIME * 2)
 			inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
 			inst.components.burnable:SetOnBurntFn(OnBurnt)
-		end 
+		end
 	end)
 
 
-	if inst.components.burnable ~= nil then 
-		inst.components.burnable:Extinguish()	
+	if inst.components.burnable ~= nil then
+		inst.components.burnable:Extinguish()
 	end
 end
 
 local function OnRespawnedFromGhost2(inst)
-	inst:DoTaskInTime(1, function(inst) 
+	inst:DoTaskInTime(1, function(inst)
 		if inst.components.health and not inst.components.health:IsDead() then
 			inst.components.burnable:Extinguish()
-			MakeSmallPropagator(inst) 
+			MakeSmallPropagator(inst)
 			inst.components.burnable:SetBurnTime(TUNING.WORMWOOD_BURN_TIME * 2)
 			inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
 			inst.components.burnable:SetOnBurntFn(OnBurnt)
-		end 
+		end
 	end)
 end
 
 local function onattacked(inst, data)
-    if data.attacker ~= nil and inst.components.health ~= nil and not inst.components.health:IsDead() and inst.components.sanity ~= nil and not inst.components.sanity:IsSane() and (data.attacker:HasTag("shadow") or data.attacker:HasTag("shadowchesspiece") or data.attacker:HasTag("stalker")) then
-        OnIgniteFn(inst)
+	if data.attacker ~= nil and inst.components.health ~= nil and not inst.components.health:IsDead() and inst.components.sanity ~= nil and not inst.components.sanity:IsSane() and (data.attacker:HasTag("shadow") or data.attacker:HasTag("shadowchesspiece") or data.attacker:HasTag("stalker")) then
+		OnIgniteFn(inst)
 	end
 end
 
 local function OnMoistureDelta(inst)
 	--Overriding the OnBurnt function to prevent propegator from sometimes removing, hopefully.
-	inst:DoTaskInTime(1, function(inst) 
+	inst:DoTaskInTime(1, function(inst)
 		if inst.components.health and not inst.components.health:IsDead() and inst.components.moisture and inst.components.moisture:GetMoisturePercent() >= 0.4 then
 			if inst.components.propegator ~= nil then
 				inst.components.propagator.acceptsheat = false
@@ -99,7 +94,7 @@ local function OnMoistureDelta(inst)
 			if inst.components.propegator ~= nil then
 				inst.components.propagator.acceptsheat = true
 			end
-		end 
+		end
 	end)
 end
 
@@ -116,11 +111,9 @@ env.AddPrefabPostInit("willow", function(inst)
 		inst.components.burnable:SetOnIgniteFn(OnIgniteFn)
 		inst.components.burnable:SetOnBurntFn(OnBurnt)
 	end]]
-	
-    inst:ListenForEvent("attacked", onattacked)
-    --inst:ListenForEvent("ms_respawnedfromghost", OnRespawnedFromGhost2)
-    --inst:ListenForEvent("moisturedelta", OnMoistureDelta)
-	
+	inst:ListenForEvent("attacked", onattacked)
+	--inst:ListenForEvent("ms_respawnedfromghost", OnRespawnedFromGhost2)
+	--inst:ListenForEvent("moisturedelta", OnMoistureDelta)
 end)
 
 
@@ -137,59 +130,56 @@ Recipe("bernie_inactive", {Ingredient("berniebox", 1, "images/inventoryimages/be
 AllRecipes["bernie_inactive"].sortkey = AllRecipes["healingsalve"].sortkey - .1
 ]]
 local function createlight(inst)
-
-    local caster = inst.components.inventoryitem.owner
-	caster.components.talker:Say(GetString(caster.prefab, "ANNOUNCE_UNCOMP_LIGHTFIRE"))  
-    inst.SoundEmitter:KillSound("hiss")
+	local caster = inst.components.inventoryitem.owner
+	caster.components.talker:Say(GetString(caster.prefab, "ANNOUNCE_UNCOMP_LIGHTFIRE"))
+	inst.SoundEmitter:KillSound("hiss")
 	SpawnPrefab("firesplash_fx").Transform:SetPosition(inst.Transform:GetWorldPosition())
-    inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
-	
-	local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 4, nil, { "INLIMBO", "player", "abigail" })
+	inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
 
-    for i, v in ipairs(ents) do
-        if v ~= inst and v:IsValid() and not v:IsInLimbo() then
-           
-            --Recheck valid after work
-            if v:IsValid() and not v:IsInLimbo() then
-                if v.components.fueled == nil and
-                    v.components.burnable ~= nil and
-                    not v.components.burnable:IsBurning() and
-                    not v:HasTag("burnt") then
-                    v.components.burnable:Ignite()
-                end
-				
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local ents = TheSim:FindEntities(x, y, z, 4, nil, { "INLIMBO", "player", "abigail" })
+
+	for i, v in ipairs(ents) do
+		if v ~= inst and v:IsValid() and not v:IsInLimbo() then
+			--Recheck valid after work
+			if v:IsValid() and not v:IsInLimbo() then
+				if v.components.fueled == nil and
+					v.components.burnable ~= nil and
+					not v.components.burnable:IsBurning() and
+					not v:HasTag("burnt") then
+					v.components.burnable:Ignite()
+				end
+
 				if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
-                    local dmg = 40
-                    if v.components.explosiveresist ~= nil then
-                        dmg = dmg * (1 - v.components.explosiveresist:GetResistance())
-                        v.components.explosiveresist:OnExplosiveDamage(dmg, inst)
-                    end
+					local dmg = 40
+					if v.components.explosiveresist ~= nil then
+						dmg = dmg * (1 - v.components.explosiveresist:GetResistance())
+						v.components.explosiveresist:OnExplosiveDamage(dmg, inst)
+					end
 					if v:HasTag("shadow") or v:HasTag("shadowchesspiece") then
 						dmg = dmg * 3
 					end
-                    v.components.combat:GetAttacked(inst, dmg, nil)
-                end
-            end
-        end
-    end
-	
+					v.components.combat:GetAttacked(inst, dmg, nil)
+				end
+			end
+		end
+	end
+
 	if caster ~= nil then
 		SpawnPrefab("willowfire").Transform:SetPosition(caster.Transform:GetWorldPosition())
 	end
-	
+
 	local reduce = inst.components.fueled:GetPercent() - 0.1001
 	inst.components.fueled:SetPercent(reduce)
-	
 end
 
 env.AddPrefabPostInit("lighter", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	
+
 	inst:AddTag("lighter")
-	
+
 	if inst.components.equippable ~= nil then
 		local _SetOnEquip = inst.components.equippable.onequipfn
 
@@ -197,13 +187,13 @@ env.AddPrefabPostInit("lighter", function(inst)
 			if _SetOnEquip ~= nil then
 				_SetOnEquip(inst, owner)
 			end
-				
+
 			if owner:HasTag("pyromaniac") and inst.components.fueled ~= nil then
 				inst.components.fueled:StopConsuming()
 			end
 		end
 	end
-	
+
 	if inst.components.cooker ~= nil then
 		local _SetOnCook = inst.components.cooker.oncookfn
 
@@ -218,15 +208,15 @@ env.AddPrefabPostInit("lighter", function(inst)
 end)
 
 local function getstatus(inst)
-    local skin_name = nil
-	
-    if inst:GetSkinName() ~= nil then
-        --skin_name = inst:GetSkinName()
+	local skin_name = nil
+
+	if inst:GetSkinName() ~= nil then
+		--skin_name = inst:GetSkinName()
 		--return skin_name
 		return inst.components.fueled ~= nil and inst.components.fueled:IsEmpty() and "ASHLEY_BROKEN" or "ASHLEY"
 	end
-	
-    return inst.components.fueled ~= nil and inst.components.fueled:IsEmpty() and "BROKEN" or nil
+
+	return inst.components.fueled ~= nil and inst.components.fueled:IsEmpty() and "BROKEN" or nil
 end
 
 local function SetName(inst)
@@ -246,7 +236,6 @@ local function gobig(inst)
 end
 
 env.AddPrefabPostInit("bernie_inactive", function(inst)
-
 	if not TheWorld.ismastersim then
 		return
 	end
@@ -270,11 +259,9 @@ end)
 
 
 env.AddPrefabPostInit("bernie_active", function(inst)
-
 	if not TheWorld.ismastersim then
 		return
 	end
-	
-	--inst.GoBig = gobig
 
+	--inst.GoBig = gobig
 end)

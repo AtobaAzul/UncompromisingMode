@@ -9,8 +9,8 @@ local function TryPerish(item)
     if item:IsInLimbo() then
         local owner = item.components.inventoryitem ~= nil and item.components.inventoryitem.owner or nil
         if owner == nil or
-            (   owner.components.container ~= nil and
-                (owner:HasTag("chest") or owner:HasTag("structure")) ) then
+            (owner.components.container ~= nil and
+                (owner:HasTag("chest") or owner:HasTag("structure"))) then
             --in limbo but not inventory or container?
             --or in a closed chest
             return
@@ -19,12 +19,30 @@ local function TryPerish(item)
     item.components.perishable:ReducePercent(0.005)
 end
 
+local function TryRefresh(item)
+    if item:IsInLimbo() then
+        local owner = item.components.inventoryitem ~= nil and item.components.inventoryitem.owner or nil
+        if owner == nil or
+            (owner.components.container ~= nil and
+                (owner:HasTag("chest") or owner:HasTag("structure"))) then
+            --in limbo but not inventory or container?
+            --or in a closed chest
+            return
+        end
+    end
+    item.components.perishable:ReducePercent(-0.005)
+end
+
 local function DoAreaSpoil(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
-	
-    local ents = TheSim:FindEntities(x, y, z, 3, nil, { "small_livestock" }, { "fresh", "stale", "spoiled" })
-	for i, v in ipairs(ents) do
-        TryPerish(v)
+
+    local ents = TheSim:FindEntities(x, y, z, 3, nil, { "small_livestock" }, { "fresh", "stale", "spoiled", "spore" })
+    for i, v in ipairs(ents) do
+        if v:HasTag("spore") then
+            TryRefresh(v)
+        else
+            TryPerish(v)
+        end
     end
 end
 
@@ -46,63 +64,63 @@ local function CreateBase()
     inst.AnimState:SetSortOrder(3)
     inst.AnimState:SetFinalOffset(-1)
 
-	inst.AnimState:PlayAnimation("sporecloud_base_pst")
-	--inst.AnimState:PlayAnimation("sporecloud_base_pre")
-	--inst.AnimState:PushAnimation("sporecloud_base_pst", false)
-	
-	inst.Transform:SetScale(0.6, 0.6, 0.6)
-	inst.AnimState:SetMultColour(1, 1, 1, 0.7)
-	
+    inst.AnimState:PlayAnimation("sporecloud_base_pst")
+    --inst.AnimState:PlayAnimation("sporecloud_base_pre")
+    --inst.AnimState:PushAnimation("sporecloud_base_pst", false)
+
+    inst.Transform:SetScale(0.6, 0.6, 0.6)
+    inst.AnimState:SetMultColour(1, 1, 1, 0.7)
+
     if not TheWorld.ismastersim then
         return inst
     end
-	
-	inst.SoundEmitter:PlaySound("dontstarve/creatures/together/toad_stool/infection_post", nil, 0.5)
-	--inst:ListenForEvent("animqueueover", function(inst) inst:Remove() end)
-	inst:ListenForEvent("animover", function(inst) inst:Remove() end)
+
+    inst.SoundEmitter:PlaySound("dontstarve/creatures/together/toad_stool/infection_post", nil, 0.5)
+    --inst:ListenForEvent("animqueueover", function(inst) inst:Remove() end)
+    inst:ListenForEvent("animover", function(inst) inst:Remove() end)
 
     return inst
 end
 
 local function InitFX(inst)
-	local cloud = SpawnPrefab("sporepack_circle")
-	--cloud.Transform:SetPosition(inst.Transform:GetWorldPosition())
-	cloud.entity:SetParent(inst.entity)
+    local cloud = SpawnPrefab("sporepack_circle")
+    --cloud.Transform:SetPosition(inst.Transform:GetWorldPosition())
+    cloud.entity:SetParent(inst.entity)
 end
 
 local function onequip(inst, owner)
     owner.AnimState:OverrideSymbol("swap_body", "swap_sporepack", "backpack")
     owner.AnimState:OverrideSymbol("swap_body", "swap_sporepack", "swap_body")
     inst.components.container:Open(owner)
-	
-	if owner.sporepack_task ~= nil then
-		owner.sporepack_task:Cancel()
-		owner.sporepack_task = nil
-	end
-	
-	if owner.sporespoil_task ~= nil then
-		owner.sporespoil_task:Cancel()
-		owner.sporespoil_task = nil
-	end
-	
-	owner.sporepack_task = owner:DoPeriodicTask(3, InitFX)
-	owner.sporespoil_task = owner:DoPeriodicTask(3, DoAreaSpoil)
+
+    if owner.sporepack_task ~= nil then
+        owner.sporepack_task:Cancel()
+        owner.sporepack_task = nil
+    end
+
+    if owner.sporespoil_task ~= nil then
+        owner.sporespoil_task:Cancel()
+        owner.sporespoil_task = nil
+    end
+
+    owner.sporepack_task = owner:DoPeriodicTask(3, InitFX)
+    owner.sporespoil_task = owner:DoPeriodicTask(3, DoAreaSpoil)
 end
 
 local function onunequip(inst, owner)
     owner.AnimState:ClearOverrideSymbol("swap_body")
     owner.AnimState:ClearOverrideSymbol("backpack")
     inst.components.container:Close(owner)
-	
-	if owner.sporepack_task ~= nil then
-		owner.sporepack_task:Cancel()
-		owner.sporepack_task = nil
-	end
-	
-	if owner.sporespoil_task ~= nil then
-		owner.sporespoil_task:Cancel()
-		owner.sporespoil_task = nil
-	end
+
+    if owner.sporepack_task ~= nil then
+        owner.sporepack_task:Cancel()
+        owner.sporepack_task = nil
+    end
+
+    if owner.sporespoil_task ~= nil then
+        owner.sporespoil_task:Cancel()
+        owner.sporespoil_task = nil
+    end
 end
 
 local function fn()
@@ -120,8 +138,8 @@ local function fn()
     inst.AnimState:SetBank("sporepack")
     inst.AnimState:SetBuild("sporepack")
     inst.AnimState:PlayAnimation("idle")
-	
-	inst.rottask = nil
+
+    inst.rottask = nil
 
     inst.foleysound = "dontstarve/movement/foley/backpack"
 
@@ -133,9 +151,9 @@ local function fn()
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
-		inst.OnEntityReplicated = function(inst) 
-			inst.replica.container:WidgetSetup("krampus_sack") 
-		end
+        inst.OnEntityReplicated = function(inst)
+            inst.replica.container:WidgetSetup("krampus_sack")
+        end
         return inst
     end
 
@@ -143,7 +161,7 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.cangoincontainer = false
-	inst.components.inventoryitem.atlasname = "images/inventoryimages/sporepack.xml"
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/sporepack.xml"
 
     inst:AddComponent("equippable")
     if EQUIPSLOTS["BACK"] ~= nil then
@@ -160,9 +178,9 @@ local function fn()
 
     inst:AddComponent("container")
     inst.components.container:WidgetSetup("krampus_sack")
-	
-	inst:AddComponent("preserver")
-	inst.components.preserver:SetPerishRateMultiplier(2)
+
+    inst:AddComponent("preserver")
+    inst.components.preserver:SetPerishRateMultiplier(2)
 
     MakeHauntableLaunchAndDropFirstItem(inst)
 
@@ -170,4 +188,4 @@ local function fn()
 end
 
 return Prefab("sporepack", fn, assets),
-		Prefab("sporepack_circle", CreateBase, assets)
+    Prefab("sporepack_circle", CreateBase, assets)

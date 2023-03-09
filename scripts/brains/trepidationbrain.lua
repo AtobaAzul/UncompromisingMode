@@ -2,7 +2,7 @@ require "behaviours/wander"
 require "behaviours/chaseandattack"
 require "behaviours/follow"
 
-local MIN_FOLLOW = 5
+local MIN_FOLLOW = 8
 local MED_FOLLOW = 15
 local MAX_FOLLOW = 30
 
@@ -69,8 +69,13 @@ local function WithinDomain(inst)
 end
 
 local function ShouldChase_UM(self)
-    local target = self.inst.components.combat.target
-	if target and target:IsValid() then
+    local target = self.inst.components.combat.target or self.inst.followtarget
+	return target or nil
+end
+
+--[[local function ShouldChase_UM(self)
+    local target = self.inst.components.combat.target or self.inst.followtarget
+	if target ~= nil and target:IsValid() then
 		local distsq = self.inst:GetDistanceSqToInst(target)
 		local range = 2*TUNING.BEEQUEEN_CHASE_TO_RANGE
 		if distsq <= range * range then
@@ -79,6 +84,15 @@ local function ShouldChase_UM(self)
 			return true
 		end
 	end
+end]]
+
+local function ShouldAttack(self)
+    if self.inst.components.shadowsubmissive:ShouldSubmitToTarget(self.inst.components.combat.target) then
+        self._harasstarget = self.inst.components.combat.target
+        return false
+    end
+    self._harasstarget = nil
+    return true
 end
 
 local function GetFaceTargetFn(inst)
@@ -99,8 +113,12 @@ function TrepidationBrain:OnStart()
                     self.abilityname = nil
                     self.abilitydata = nil
                 end)),
-        WhileNode(function() return ShouldChase_UM(self) end, "Attack", ChaseAndAttack(self.inst)),
+				
+        WhileNode(function() return ShouldAttack(self) end, "Attack", ChaseAndAttack(self.inst)),
 		
+		WhileNode(function() return ShouldChase_UM(self) ~= nil end, "Chase",
+            Follow(self.inst, ShouldChase_UM(self), MIN_FOLLOW, MED_FOLLOW, MAX_FOLLOW, false)),
+			
 		FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
 		
         WhileNode(function() return self.inst.components.combat and not self.inst.components.combat.target end, "Home",

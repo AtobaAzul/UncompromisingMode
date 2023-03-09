@@ -1,6 +1,13 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
+local function OnOvercharge(inst, toggle)
+    if inst._light ~= nil then
+        inst._light.Light:SetRadius(toggle and 5 or 2.5)
+        inst.components.fueled.rate = toggle and 2 or 1
+    end
+end
+
 env.AddPrefabPostInit("minerhat", function(inst)
     if not TheWorld.ismastersim then
 		return
@@ -42,6 +49,7 @@ env.AddPrefabPostInit("minerhat", function(inst)
 
     local function OnUpgrade(inst)
         if inst ~= nil then
+            inst:AddTag("overchargeable")
             inst.upgraded = true
             inst:SetPrefabNameOverride("MINERHAT_ELECTRICAL")--this is mainly for quotes, though I could use getstatus instead now...
             inst.components.upgradeable.upgradetype = nil
@@ -60,28 +68,30 @@ env.AddPrefabPostInit("minerhat", function(inst)
 
     local _OnSave = inst.OnSave
     local function OnSave(inst, data)
+        if _OnSave ~= nil then
+            _OnSave(inst, data)
+        end
+
         if inst.upgraded then
             data.upgraded = inst.upgraded
         end
         if inst.components.fueled ~= nil then
             data.saved_fuel_value = inst.components.fueled:GetPercent()
         end
-        if _OnSave ~= nil then
-            _OnSave(inst, data)
-        end
     end
 
     local _OnLoad = inst.OnLoad
     local function OnLoad(inst, data)
+        if _OnLoad ~= nil then
+            _OnLoad(inst, data)
+        end
+
         if data ~= nil and data.upgraded then
             inst.upgraded = true
             OnUpgrade(inst)
             if data.saved_fuel_value ~= nil and inst.components.fueled ~= nil then
-                inst.components.fueled:SetPercent(data.saved_fuel_value)
+                inst:DoTaskInTime(0, function() inst.components.fueled:SetPercent(data.saved_fuel_value) end)
             end
-        end
-        if _OnLoad ~= nil then
-            _OnLoad(inst, data)
         end
     end
 
@@ -94,4 +104,5 @@ env.AddPrefabPostInit("minerhat", function(inst)
 
     inst:AddComponent("named")
 
+    inst:ListenForEvent("overcharged", OnOvercharge)
 end)

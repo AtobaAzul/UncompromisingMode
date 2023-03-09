@@ -4,6 +4,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 
 --	[ 		Walter Descriptions		]   --
 
+	ANNOUNCE.DREADEYE_SPOOKED = "Hey! Don't sneak up one me like that!"
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "You need my help! And your body..."
     ANNOUNCE.ANNOUNCE_WINONAGEN = "I haven't gotten my \"putting rocks in machines\" badge yet."
     ANNOUNCE.ANNOUNCE_RATRAID = "Sounds like rats!"
@@ -47,6 +48,24 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
             REVIVER = "She's a NICE were-rat! What a twist!",
             GHOST = "Haunted by the ghost of a were-rat? This would make a great story!",
             FIRESTARTER = "I wouldn't have thought you knew how to start fires!",
+        }
+	DESCRIBE.WATHOM =
+        {
+            GENERIC = "Look Woby! Another talking monster!",
+            ATTACKER = "%s is dangerous!",
+            MURDERER = "Run, Woby! %s is feral!",
+            REVIVER = "%s is a nice monster!",
+            GHOST = "Woah! %s has a cool ghost!",
+            FIRESTARTER = "I know you understand me, %s!",
+        }
+	DESCRIBE.WIXIE =
+        {
+            GENERIC = "What's the matter? Don't you want to be friends, %s?",
+            ATTACKER = "Violence will get you no where, %s!",
+            MURDERER = "I think somethings wrong with %s!",
+            REVIVER = "See %s? Helping others feels good!",
+            GHOST = "A pinetree pioneer always helps those in need! Even if they are mean.",
+            FIRESTARTER = "Fire is no joke, %s! Please stop laughing.",
         }
 	
     DESCRIBE.RATPOISONBOTTLE = "If there's no other option..."
@@ -128,7 +147,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.VAMPIREBAT = "You don't look like a vampire at all!"
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "We can make a mini animal shelter with some moon rocks!"
-	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.BUGZAPPER = "I was the best flyswatter back at camp."
@@ -360,6 +378,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	
 	DESCRIBE.WINONA_TOOLBOX = "I wonder what kind of gadgets and do-hickeys are inside."
 	ACTIONFAIL.WINONATOOLBOX = "I don't have a badge for this yet."
+	DESCRIBE.WINONA_CATAPULT_ITEM = "Machines aren't covered in the Pinetree Pioneers."
+	DESCRIBE.WINONA_SPOTLIGHT_ITEM = "Machines aren't covered in the Pinetree Pioneers."
+	DESCRIBE.WINONA_BATTERY_LOW_ITEM = "Machines aren't covered in the Pinetree Pioneers."
+	DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "Machines aren't covered in the Pinetree Pioneers."
 	DESCRIBE.POWERCELL = "Is this safe?"
 	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "It'd be more useful powering something."
 	DESCRIBE.MINERHAT_ELECTRICAL = "This makes refueling a lot easier."
@@ -397,7 +419,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
     DESCRIBE.UM_BEEGUN = "K-keep your enemies close, right?" --please make Walter lose 20 sanity per minute with this equipped I think that would be a cool flavour perk
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
-	DESCRIBE.SUNKENCHEST_ROYAL = "It was a royal pain just to get this."
+	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "It was a royal pain just to get this."
 	DESCRIBE.STEERINGWHEEL_COPPER = "The future is now!"
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "I prefer a nice wooden wheel."
 	DESCRIBE.BOAT_BUMPER_COPPER = "This will keep us safe!"
@@ -420,11 +442,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
 	DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
 	DESCRIBE.UM_BEEGUARD_BLOCKER = "That's fine, I wasn't planning on getting too close anyway!"
-	
-	DESCRIBE.WIXIE_PIANO = "Piano lessons weren't a part of my training!"
-	DESCRIBE.WIXIE_CLOCK = "Shame it's broken, a ticking clock adds tension to horror stories!"
-	DESCRIBE.WIXIE_WARDROBE = "Reminds me of this one radio play I heard, the \"Haunted Wardrobe at the End of the Hall\" it's about-"
-	DESCRIBE.CHARLES_T_HORSE = "I can't be seen playing with kids toys!"
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "I love these little guys! I wish we had more up north..."
 	DESCRIBE.UM_ORNAMENT_RAT = "All alone, little guy?"
@@ -432,3 +449,45 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.TRINKET_WATHOM1 = "It's... Treasure? I think? Is it??"
 	
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
+	
+	-- WIXIE RELATED STRINGS
+	
+	DESCRIBE.WIXIE_PIANO = "Piano lessons weren't a part of my training!"
+	DESCRIBE.WIXIE_CLOCK = "Shame it's broken, a ticking clock adds tension to horror stories!"
+	DESCRIBE.WIXIE_WARDROBE = "Reminds me of this one radio play I heard, the \"Haunted Wardrobe at the End of the Hall\" it's about-"
+	DESCRIBE.CHARLES_T_HORSE = "Think it's cursed, Woby?"
+	DESCRIBE.THE_REAL_CHARLES_T_HORSE = "I can't be seen playing with kids toys!"
+	DESCRIBE.SLINGSHOT_MATILDA = "Three shots? Thats three eyes out!"
+	DESCRIBE.SLINGSHOT_GNASHER = "Somebody could shoot their eye out with this!"
+
+	DESCRIBE.SLINGSHOTAMMO_LAZY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SHADOW = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_HONEY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_RUBBER = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TREMOR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONROCK = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+		
+	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_ROCK
+
+	DESCRIBE.BAGOFMARBLES = "I can't think of a practical use for these."
+
+	DESCRIBE.MEATRACK_HAT = {
+            GENERIC = DESCRIBE.MEATRACK.GENERIC,
+			
+            DRYING = DESCRIBE.MEATRACK.DRYING,
+            DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
+			
+            DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
+            DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
+	}
+	DESCRIBE.FISHMEAT_DRIED = "It's a great snack, if you don't mind the taste!"
+	DESCRIBE.SMALLFISHMEAT_DRIED = "A bite sized nutritional snack!"
+		
+	DESCRIBE.WIXIEGUN = "This is NOT Pinetree Pioneer approved!"

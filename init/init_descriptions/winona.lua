@@ -4,6 +4,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 
 --	[ 		Winona Descriptions		]   --
 
+	ANNOUNCE.DREADEYE_SPOOKED = "I-is that you, Charlie?"
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Without the body? That wouldn't be too constructive."
     ANNOUNCE.ANNOUNCE_WINONAGEN = "Even if it's small, please...p-put your bug report in my Discord server, Player-san!"
     ANNOUNCE.ANNOUNCE_RATRAID = "Aw, rats."
@@ -46,6 +47,24 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
             REVIVER = "Thanks for the help, you mischievous thing!",
             GHOST = "There must be hundreds of rats haunting the old factory back home!",
             FIRESTARTER = "Were you chewing wires, %s? Did you start an electrical fire?!",
+        }
+	DESCRIBE.WATHOM =
+        {
+            GENERIC = "I know a replica when I see one.",
+            ATTACKER = "%s is more bite than bark!",
+            MURDERER = "%s is on a rampage!",
+            REVIVER = "There's more to you than I first thought, %s!",
+            GHOST = "I think this ghost is defective!",
+            FIRESTARTER = "&s is out to wreck all our stuff!",
+        }
+	DESCRIBE.WIXIE =
+        {
+            GENERIC = "%s reminds me of myself at her age. Sorry, Charlie...",
+            ATTACKER = "Stop your rough-housing, %s!",
+            MURDERER = "You little menace!",
+            REVIVER = "Bully with the heart of gold, huh?",
+            GHOST = "What comes around goes around.",
+            FIRESTARTER = "Resorting to arson, you little devil?!",
         }
 		
     DESCRIBE.RATPOISONBOTTLE = "Darn, this stuff woulda put Red Squill to shame."
@@ -135,7 +154,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "I could fix that den back up, moon rocks could make a good base."
-	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.BUGZAPPER = "Best patent this model."
@@ -361,6 +379,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	
 	DESCRIBE.WINONA_TOOLBOX = "Wouldn't leave home without it."
 	ACTIONFAIL.WINONATOOLBOX = "Huh? Who locked me out!"
+	DESCRIBE.WINONA_CATAPULT_ITEM = "A bit of portable protection."
+	DESCRIBE.WINONA_SPOTLIGHT_ITEM = "Who needs the spotlight?"
+	DESCRIBE.WINONA_BATTERY_LOW_ITEM = "I just wish it wasn't so heavy!"
+	DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "None of that magic made it any lighter."
 	DESCRIBE.POWERCELL = "Lil' ingenuity and elbow grease go a long way."
 	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "I designed it from scratch."
 	DESCRIBE.MINERHAT_ELECTRICAL = "A lil' tinkering makes all the difference."
@@ -397,7 +419,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
     DESCRIBE.UM_BEEGUN = "Bees always have been crafty. But this is something else."
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
-	DESCRIBE.SUNKENCHEST_ROYAL = "Oooh, real fancy now aren't we!"
+	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "Oooh, real fancy now aren't we!"
 	DESCRIBE.STEERINGWHEEL_COPPER = "Keep on turning, nice and smooth."
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "Real nice piece a'work."
 	DESCRIBE.BOAT_BUMPER_COPPER = "Gonna take a lot to bust through that."
@@ -423,12 +445,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 
 	DESCRIBE.PORTABLEBOAT_ITEM = "Tiny boat is wimpy!"
 	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "Mighty wind makes mighty light!"
-	
-	DESCRIBE.WIXIE_PIANO = "This would've been right up Charlie's alley."
-	--I can't play a PIANO as a god damn SHADOW. FUCK.
-	DESCRIBE.WIXIE_CLOCK = "Broken huh? Wouldn'tve happened if it were made of steel!"
-	DESCRIBE.WIXIE_WARDROBE = "Give me a steel locker any day of the week."
-	DESCRIBE.CHARLES_T_HORSE = "What kind of kid would want THIS?"
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "This critters more bark than bite."
 	DESCRIBE.UM_ORNAMENT_RAT = "Don't go chewing holds in things when my back is turned!"
@@ -436,3 +452,46 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WINONA.ACTIONFAIL
 	DESCRIBE.TRINKET_WATHOM1 = "All that for a hunk of junk..."
 	
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
+	
+	-- WIXIE RELATED STRINGS
+	
+	DESCRIBE.WIXIE_PIANO = "This would've been right up Charlie's alley."
+	--I can't play a PIANO as a god damn SHADOW. FUCKKKKKK!!!
+	DESCRIBE.WIXIE_CLOCK = "Broken huh? Wouldn'tve happened if it were made of steel!"
+	DESCRIBE.WIXIE_WARDROBE = "Give me a steel locker any day of the week."
+	DESCRIBE.CHARLES_T_HORSE = "Don't ask me to fix it, I'm not a woodworker."
+	DESCRIBE.THE_REAL_CHARLES_T_HORSE = "What kind of kid would want THIS?"
+	DESCRIBE.SLINGSHOT_MATILDA = "How is this thing holding together?"
+	DESCRIBE.SLINGSHOT_GNASHER = "That stuff is nothing but trouble."
+
+	DESCRIBE.SLINGSHOTAMMO_LAZY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SHADOW = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_HONEY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_RUBBER = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TREMOR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONROCK = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+		
+	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_ROCK
+
+	DESCRIBE.BAGOFMARBLES = "Huh. What will they come up with next?"
+
+	DESCRIBE.MEATRACK_HAT = {
+            GENERIC = DESCRIBE.MEATRACK.GENERIC,
+			
+            DRYING = DESCRIBE.MEATRACK.DRYING,
+            DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
+			
+            DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
+            DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
+	}
+	DESCRIBE.FISHMEAT_DRIED = "A good working gal's snack."
+	DESCRIBE.SMALLFISHMEAT_DRIED = "Could use a few more of these..."
+		
+	DESCRIBE.WIXIEGUN = "Is this the future of manufacturing? For shame."

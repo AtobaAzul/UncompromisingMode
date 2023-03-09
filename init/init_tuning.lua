@@ -292,7 +292,8 @@ TUNING.DSTU =
 	WICKERNERF = GetModConfigData("wickerbottom"),
 	WICKERNERF_TENTACLES = GetModConfigData("on tentacles"),
 	WICKERNERF_HORTICULTURE = GetModConfigData("applied horticulture"),
-	
+    WICKERNERF_BEEBOOK = GetModConfigData("apicultural notes"),
+    WICKERNERF_MOONBOOK = GetModConfigData("lunar grimoire"),
 
     --Wanda
     WANDA_NERF = GetModConfigData("wanda_nerf"),
@@ -340,10 +341,12 @@ TUNING.DSTU =
     DREADEYE_SPEED = 7,
     DREADEYE_HEALTH = 350,
     DREADEYE_DAMAGE = 35,
-    DREADEYE_ATTACK_PERIOD = 2,
-    DREADEYE_RANGE_1 = 1,
-    DREADEYE_RANGE_2 = 2,
-    DREADEYE_SPAWN_THRESH = 0.20,
+    DREADEYE_ATTACK_PERIOD = 6,
+    DREADEYE_RANGE_1 = 13,
+    DREADEYE_RANGE_2 = 2.5,
+    DREADEYE_SPAWN_THRESH = 0.50,
+	
+    MINI_DREADEYE_HEALTH = 100,
 
 	MOCK_DRAGONFLY_DAMAGE = 125,
 
@@ -400,7 +403,7 @@ TUNING.DSTU =
     UNCOOL_CHESTER = GetModConfigData("uncool_chester"),
     HOODEDFOREST = GetModConfigData("hoodedforest"),
     GHOSTWALRUS = GetModConfigData("ghostwalrus"),
-    WINONA_GEN = GetModConfigData("winona_gen"),
+    WINONA_GEN = GetModConfigData("winona_gen_"),
     RICE = GetModConfigData("rice"),
     NEWRECIPES = GetModConfigData("newrecipes"),
     CAVECLOPS = GetModConfigData("caveclops"),
@@ -422,6 +425,10 @@ TUNING.DSTU =
 
     COMPROMISING_SHADOWVORTEX = GetModConfigData("compromising_vortex"),
 
+    DISABLE_MEGAFLARE = GetModConfigData("disable_megaflare"),
+
+    WIXIE = GetModConfigData("wixie_walter"),
+
 --boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
     TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),
@@ -437,10 +444,23 @@ if GetModConfigData("beebox_nerf") then
     TUNING.BEEBOX_RELEASE_TIME = (0.5 * day_time) / 2
 end
 
+if GetModConfigData("wixie_walter") then
+	TUNING.WOBY_BIG_HUNGER = GLOBAL.TUNING.WALTER_HUNGER
+	TUNING.WOBY_BIG_HUNGER_RATE = GLOBAL.TUNING.WILSON_HUNGER_RATE / 1.5
+			
+	TUNING.WOBY_SMALL_HUNGER = GLOBAL.TUNING.WALTER_HUNGER
+	TUNING.WOBY_SMALL_HUNGER_RATE = GLOBAL.TUNING.WILSON_HUNGER_RATE / 1.5
+	
+	TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WALTER = {"walterhat", "meatrack_hat", "meat", "monstermeat"}
+	TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WIXIE = {"slingshot", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock"}	
+end
+
 TUNING.NONLETHAL_TEMPERATURE = false
 TUNING.NONLETHAL_HUNGER = false
 TUNING.NONLETHAL_DARKNESS = false
 TUNING.NONLETHAL_PERCENT = 0
+
+TUNING.WINONA_BATTERY_MIN_LOAD = 0 --generators don't drain when not powering anything, I think.
 
 --shield buff
 TUNING.SHIELDOFTERROR_DAMAGE = 59.5
@@ -497,7 +517,7 @@ TUNING.TRIDENT.DAMAGE = wilson_attack * 1.5
 TUNING.TRIDENT.OCEAN_DAMAGE = wilson_attack*2.4
 TUNING.TRIDENT.USES = TUNING.TRIDENT.USES + 50
 TUNING.TRIDENT.SPELL.USE_COUNT = TUNING.TRIDENT.USES
-TUNING.TRIDENT.SPELL.DAMAGE = wilson_attack*3
+TUNING.TRIDENT.SPELL.DAMAGE = wilson_attack*1.33
 
 --bumper buff
 TUNING.BOAT.BUMPERS.KELP.HEALTH = TUNING.BOAT.BUMPERS.KELP.HEALTH*1.33

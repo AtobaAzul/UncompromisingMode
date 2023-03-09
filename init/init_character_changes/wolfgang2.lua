@@ -36,15 +36,15 @@ local function UpdateHungerDrain(inst)
 			inst.hungerrate = inst.standardrate * inst.hungerpercent
 		end
 	end
-	
-	--print("Wolfgang Hunger Drain = "..inst.hungerpercent)
-	
+
+	print("Wolfgang Hunger Drain = " .. inst.hungerpercent)
+
 	inst.components.hunger:SetRate(inst.hungerrate)
 end
 
 local function UpdateMightiness(inst)
 	local hunger = inst.components.hunger:GetPercent()
-	
+
 	if TUNING.DSTU.WOLFGANG_HUNGERMIGHTY then
 		inst.components.mightiness:SetPercent(hunger)
 	end
@@ -70,7 +70,7 @@ env.AddPrefabPostInit("wolfgang", function(inst)
 			inst.components.hunger.current = TUNING.WOLFGANG_START_HUNGER
 			inst:ListenForEvent("hungerdelta", UpdateMightiness)
 		end
-		
+
 		inst:ListenForEvent("mightinessdelta", UpdateKnockbackResistance)
 	end
 end)

@@ -373,8 +373,6 @@ local function MakeMoose(nightmare)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("knownlocations")
-    --inst:AddComponent("herdmember")
-    --inst.components.herdmember:SetHerdPrefab("hippoherd")
  
     local brain = require "brains/toadlingbrain"
     inst:SetBrain(brain)

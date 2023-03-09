@@ -354,31 +354,24 @@ local function SpawnShadowChars(player)
 end
 
 local function SpawnMonkeysFunction(player)
-	local x, y, z = player.Transform:GetWorldPosition()
-	local x1 = x + math.random(12, 16)
-	local z1 = z + math.random(12, 16)
-	local x2 = x - math.random(12, 16)
-	local z2 = z - math.random(12, 16)
-
-	if TheWorld.state.isnight then
-	local monkey = SpawnPrefab("chimp")
-		if math.random()>0.5 then
-			if TheWorld.Map:IsPassableAtPoint(x1, 0, z1) then
-				monkey.Transform:SetPosition(x1, y, z1)
+	local max_tries = 8
+	for k = 1, max_tries do
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local offset = 15
+		x = x + math.random(2 * offset) - offset
+		z = z + math.random(2 * offset) - offset
+						
+		local playercheck = TheSim:FindEntities(x, y, z, 5, {"player"})
+						
+		if (playercheck == nil or #playercheck == 0) then
+			if TheWorld.Map:IsPassableAtPoint(x, 0, z) then
+				local monkey = SpawnPrefab("chimp")
+				monkey.Transform:SetPosition(x, y, z)
 				monkey:DoTaskInTime(0, function(monkey) DayBreak(monkey) end)
-			else
-				player:DoTaskInTime(0.1, function(player) SpawnMonkeysFunction(player) end)
-			end
-		else
-			if TheWorld.Map:IsPassableAtPoint(x2, 0, z2) then
-				monkey.Transform:SetPosition(x2, y, z2)
-				monkey:DoTaskInTime(0, function(monkey) DayBreak(monkey) end)
-			else
-				player:DoTaskInTime(0.1, function(player) SpawnMonkeysFunction(player) end)
+				break
 			end
 		end
 	end
-
 end
 
 local function SpawnMonkeys(player)

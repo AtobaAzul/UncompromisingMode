@@ -329,6 +329,7 @@ local function fnmain(bee, build)
         inst.Transform:SetScale(1.6, 1.6, 1.6)
 
         inst:ListenForEvent("timerdone", SlovvDeath)
+        inst.components.combat:SetRange(TUNING.BEEGUARD_ATTACK_RANGE)
     end
     if bee == "seeker" then
         inst.components.health:SetMaxHealth(0.5 * TUNING.BEEGUARD_HEALTH)
@@ -336,7 +337,6 @@ local function fnmain(bee, build)
         inst.MortarAttack = MortarAttack
         inst:DoTaskInTime(math.random(1, 3), MortarAttack)
         inst.dohoney = Honey
-
     end
     if bee == "shooter" then
         inst.components.health:SetMaxHealth(0.5 * TUNING.BEEGUARD_HEALTH)

@@ -33,13 +33,21 @@ env.AddComponentPostInit("boatleak", function(self)
                 self:SetState(repair_state)
             end)
 
+            if patch_item.components.repairer ~= nil then
+                local boat = self.inst:GetCurrentPlatform()
+                if boat ~= nil then
+                    boat.components.health:DoDelta(patch_item.components.repairer.healthrepairvalue)
+                    boat.components.health:DoDelta(patch_item.components.repairer.healthrepairpercent *
+                    boat.components.health.maxhealth)
+                end
+            end
+
             return true
         elseif patch_item.components.repairer ~= nil and patch_item.components.repairer.repairmaterial ~= MATERIALS.WOOD then
             --Hack to get past the item not removing.
             --Vanilla boat patches get removed from being used as a repair and have the MATERIALS.WOOD material
             --however, sludge has MATERIALS.SLUDGE, which doesn't work for WOOD.
 
-            --BY GOD'S LIGHT I SMITE YOOOUUU!!!!
             local ret = _Repair(self, doer, patch_item)
             if patch_item.components.stackable ~= nil then
                 patch_item.components.stackable:Get():Remove()

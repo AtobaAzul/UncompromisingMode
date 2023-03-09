@@ -32,6 +32,24 @@ end
 
 local SHARE_TARGET_DIST = 30
 
+local TARGET_MUST_TAGS = { "_combat", "character" }
+local TARGET_CANT_TAGS = { "playerghost", "INLIMBO" }
+
+local function NormalRetarget(inst)
+	return FindEntity(
+		inst,
+		40,
+		function(guy)
+			inst.followtarget = guy
+			
+			return TheWorld.state.nightmarephase == "wild" and
+					inst.components.combat:CanTarget(guy)
+		end,
+		TARGET_MUST_TAGS,
+		TARGET_CANT_TAGS
+	)
+end
+--[[
 local function NormalRetarget(inst)
 	local targetDist = 40
 	local x, y, z = inst.Transform:GetWorldPosition()
@@ -52,8 +70,9 @@ local function NormalRetarget(inst)
 			end
 		end
 	end
-end
+end]]
 
+--Unused
 local function keeptargetfn(inst, target)
 	if target.components.health and not target.components.health:IsDead() and target.components.sanity then
 		if target.components.sanity:GetPercent() < 0.5 or Remember(inst, target) then
@@ -219,10 +238,13 @@ local function CheckIfBozoLeft(inst)
 end
 
 local function OnSave(inst, data)
+    data.wantstodespawn = inst.wantstodespawn
 end
 
 local function OnLoad(inst, data)
-
+    if data ~= nil then
+        inst.wantstodespawn = data.wantstodespawn
+    end
 end
 
 local function CheckWhereTheHeckIAm(inst)
@@ -244,6 +266,30 @@ local function CheckWhereTheHeckIAm(inst)
 	end
 end
 
+local function OnNightmarePhaseChanged(inst, phase)
+	if phase == "wild" then
+		inst.AnimState:SetMultColour(1, 1, 1, .7)
+	elseif phase == "calm" then
+		inst.AnimState:SetMultColour(1, 1, 1, .4)
+		inst.wantstodespawn = true
+	end
+end
+
+local function CLIENT_ShadowSubmissive_HostileToPlayerTest(inst, player)
+	if player:HasTag("shadowdominance") then
+		return false
+	end
+	local combat = inst.replica.combat
+	if combat ~= nil and combat:GetTarget() == player then
+		return true
+	end
+	local sanity = player.replica.sanity
+	if sanity ~= nil and sanity:IsCrazy() then
+		return true
+	end
+	return false
+end
+
 local function fn(Sim)
 	local inst = CreateEntity()
 
@@ -258,15 +304,27 @@ local function fn(Sim)
 	inst.Transform:SetScale(2, 2, 2)
 	MakeCharacterPhysics(inst, 10, 1.5)
 	RemovePhysicsColliders(inst)
+    inst.AnimState:SetMultColour(1, 1, 1, .4)
+	inst.AnimState:UsePointFiltering(true)
+	
+	inst.HostileToPlayerTest = CLIENT_ShadowSubmissive_HostileToPlayerTest
 
 	inst.AnimState:UsePointFiltering(true)
 	inst.entity:SetPristine()
+
+	inst:AddTag("notraptrigger")
+	inst:AddTag("shadowchesspiece")
+	inst:AddTag("trepidation")
+	inst:AddTag("fossil")
 
 	inst.menaces = {} --putting this here so clients can access it!
 
 	if not TheWorld.ismastersim then
 		return inst
 	end
+	
+	inst.wantstodespawn = false
+	inst.followtarget = nil
 
 	inst.AnimState:SetBank("ancient_trepidation")
 	inst.AnimState:SetBuild("ancient_trepidation")
@@ -282,12 +340,6 @@ local function fn(Sim)
 
 	inst:AddComponent("lootdropper")
 	inst.components.lootdropper:SetChanceLootTable('ancient_trepidation')
-
-
-	inst:AddTag("notraptrigger")
-	inst:AddTag("shadowchesspiece")
-	inst:AddTag("trepidation")
-	inst:AddTag("fossil")
 	------------------
 	inst:AddComponent("health")
 	inst.components.health:SetMaxHealth(3000)
@@ -297,7 +349,7 @@ local function fn(Sim)
 
 	inst:AddComponent("shadowsubmissive")
 	inst:AddComponent("combat")
-	inst.components.combat:SetKeepTargetFunction(keeptargetfn)
+	--inst.components.combat:SetKeepTargetFunction(keeptargetfn)
 	inst.components.combat:SetDefaultDamage(75)
 	inst.components.combat:SetAttackPeriod(3)
 	inst.components.combat:SetRetargetFunction(1, NormalRetarget)
@@ -335,6 +387,9 @@ local function fn(Sim)
 	inst.onsave = OnSave
 	inst.onload = OnLoad
 	inst:DoPeriodicTask(10, CheckWhereTheHeckIAm)
+	
+	inst:WatchWorldState("nightmarephase", OnNightmarePhaseChanged)
+	OnNightmarePhaseChanged(inst, TheWorld.state.nightmarephase, true)
 
 	inst.Remember = Remember
 

@@ -23,7 +23,11 @@ end
 
 local function OnPicked(inst) inst:Remove() end
 
-local function OnSpring(inst) inst:Remove() end
+local function OnSpring(inst) 
+	if not TheWorld.state.iswinter then
+		inst:Remove() 
+	end
+end
 
 local function TrySaltingFarms(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()

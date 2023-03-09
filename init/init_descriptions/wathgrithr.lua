@@ -4,6 +4,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 
 --	[ 		Wigfrid Descriptions		]   --
 
+	ANNOUNCE.DREADEYE_SPOOKED = "No more tricks! Face me!"
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Comrade! We must venture to thine corpse!"
     ANNOUNCE.ANNOUNCE_WINONAGEN = "Such is best left to the mechanical maiden."
     ANNOUNCE.ANNOUNCE_RATRAID = "Something squeaky approaches."
@@ -42,11 +43,29 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.WINKY =
         {
             GENERIC = "A man sized rat! Surely this is an omen!",
-            ATTACKER = "Keep thy teeth to thyself!",
+            ATTACKER = "Keep thine teeth to thyself!",
             MURDERER = "%s will bring a plague upon us!",
             REVIVER = "Perhaps I judged too quickly!",
             GHOST = "The beast is slain, but her spirit remains.",
             FIRESTARTER = "A pox upon our crops and houses!",
+        }
+	DESCRIBE.WATHOM =
+        {
+            GENERIC = "May we meet in battle on day, %s!",
+            ATTACKER = "To arms, %s!",
+            MURDERER = "I shall bring you to justice!",
+            REVIVER = "We may yet be friends, %s!",
+            GHOST = "Another beast has been slain!",
+            FIRESTARTER = "Why fight with fire with claws like that?",
+        }
+	DESCRIBE.WIXIE =
+        {
+            GENERIC = "%s is Loki incarnate!",
+            ATTACKER = "Quit fighting from afar, %s!",
+            MURDERER = "You're too young to be a killer!",
+            REVIVER = "You wish to taunt me further, %s?",
+            GHOST = "The little devil has been slain!",
+            FIRESTARTER = "Up to your tricks, Loki?",
         }
 		
     DESCRIBE.RATPOISONBOTTLE = "My treasures, the bait. Mine fury, the trap."
@@ -127,7 +146,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.VAMPIREBAT = "The bigger they are, the harder they fall!"
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "With some moon rocks we could create the perfect battlements for tiny creatures!"
-	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.BUGZAPPER = "This is not a weapon worthy of a Valkyrie!"	
@@ -357,6 +375,10 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	
 	DESCRIBE.WINONA_TOOLBOX = "Not needed, I have every tool for battle I require."
 	ACTIONFAIL.WINONATOOLBOX = "Encore! It hath no tools of war!"
+	DESCRIBE.WINONA_CATAPULT_ITEM = "An evil contraption!"
+	DESCRIBE.WINONA_SPOTLIGHT_ITEM = "An evil contraption!"
+	DESCRIBE.WINONA_BATTERY_LOW_ITEM = "An evil contraption!"
+	DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "An evil contraption!"
 	DESCRIBE.POWERCELL = "She has harenessed thors might into a box."
 	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "She has harenessed thors might into a box."
 	DESCRIBE.MINERHAT_ELECTRICAL = "Thors boons are without doubt."
@@ -393,7 +415,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
     DESCRIBE.UM_BEEGUN = "A volley of bees!"
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
-	DESCRIBE.SUNKENCHEST_ROYAL = "Treasures for our hall!"
+	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "Treasures for our hall!"
 	DESCRIBE.STEERINGWHEEL_COPPER = "My vessel will be covered from all angles of attack."
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "Sturdy, but a it requires a vessel to steer."
 	DESCRIBE.BOAT_BUMPER_COPPER = "Plate armor to keep the waves at bay."
@@ -419,11 +441,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 
 	DESCRIBE.PORTABLEBOAT_ITEM = "This vessel is not combat worthy!"
 	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "Bestow light upon me, Njoror!"
-	
-	DESCRIBE.WIXIE_PIANO = "I shall write a symphony worthy of my greatness!"
-	DESCRIBE.WIXIE_CLOCK = "Time stops for no one! Oh, wait..."
-	DESCRIBE.WIXIE_WARDROBE = "What lies inside? A beast of burden?"
-	DESCRIBE.CHARLES_T_HORSE = "Beast, wooden. Purpose unknown."
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Awaken, foul beast!"
 	DESCRIBE.UM_ORNAMENT_RAT = "You are beneath me, little one!"
@@ -431,3 +448,45 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.TRINKET_WATHOM1 = "What sort of instrument is this?"
 	
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
+	
+	-- WIXIE RELATED STRINGS
+	
+	DESCRIBE.WIXIE_PIANO = "I shall write a symphony worthy of my greatness!"
+	DESCRIBE.WIXIE_CLOCK = "Time stops for no one! Oh, wait..."
+	DESCRIBE.WIXIE_WARDROBE = "What lies inside? A beast of burden?"
+	DESCRIBE.CHARLES_T_HORSE = "This horse has gone to Valhalla long ago."
+	DESCRIBE.THE_REAL_CHARLES_T_HORSE = "Are there tiny soldiers lying within?"
+	DESCRIBE.SLINGSHOT_MATILDA = "Fight with honor, or not at all!."
+	DESCRIBE.SLINGSHOT_GNASHER = "The little one is meddling with dark magicks!"
+
+	DESCRIBE.SLINGSHOTAMMO_LAZY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SHADOW = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_HONEY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_RUBBER = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TREMOR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONROCK = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+		
+	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_ROCK
+
+	DESCRIBE.BAGOFMARBLES = "What foul trickery is this?"
+
+	DESCRIBE.MEATRACK_HAT = {
+            GENERIC = DESCRIBE.MEATRACK.GENERIC,
+			
+            DRYING = DESCRIBE.MEATRACK.DRYING,
+            DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
+			
+            DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
+            DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
+	}
+	DESCRIBE.FISHMEAT_DRIED = "I feast for a day!"
+	DESCRIBE.SMALLFISHMEAT_DRIED = "Barely a snack!"
+		
+	DESCRIBE.WIXIEGUN = "This modern warfare frightens me."

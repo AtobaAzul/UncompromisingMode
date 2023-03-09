@@ -114,9 +114,10 @@ local function SpawnLaser(inst)
         if i == 0 then
             ShakeAllCameras(CAMERASHAKE.FULL, .7, .02, .6, fx, 30)
         end
-        if noground then
-            break
-        end
+        --if noground then
+        --    break
+        --end
+        --TODO: Change the fx on land
     end
 
     if i < numsteps then

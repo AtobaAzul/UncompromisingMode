@@ -16,7 +16,7 @@ local function spark(inst)
 		fx.entity:AddFollower()
 		fx.Follower:FollowSymbol(owner.GUID, "swap_object", 0, -145, 0)
 		fx.Transform:SetScale(.66, .66, .66)
-		if math.random() >= 0.15 then
+		if math.random() >= (inst.overcharged and 0 or 0.15) then
 			inst.sparktask = inst:DoTaskInTime(math.random() * 0.5, spark)
 		else
 			inst.sparktask = inst:DoTaskInTime(math.random() + 5, spark)
@@ -27,7 +27,7 @@ local function spark(inst)
 		fx.Transform:SetPosition(0, 1, 0)
 		fx.Transform:SetScale(.66, .66, .66)
 		--fx.Follower:FollowSymbol(inst.GUID, inst, 0, -150, 0)
-		if math.random() <= 0.15 then
+		if math.random()  <= (inst.overcharged and 0 or 0.15) then
 			inst.sparktask = inst:DoTaskInTime(math.random() * 0.5, spark)
 		else
 			inst.sparktask = inst:DoTaskInTime(math.random() + 5, spark)
@@ -45,12 +45,10 @@ local function turnon(inst)
 		if inst.sparktask == nil then
 			inst.sparktask = inst:DoTaskInTime(math.random() + 3, spark)
 		end
-
 	end
 end
 
 local function turnoff(inst)
-
 	if inst.components.fueled ~= nil then
 		inst.components.weapon:RemoveElectric()
 		inst.components.fueled:StopConsuming()
@@ -85,7 +83,6 @@ local function onremovefire(fire)
 end
 
 local function onequip(inst, owner)
-
 	owner.AnimState:OverrideSymbol("swap_object", "swap_bugzapper", "swap_bugzapper")
 
 	owner.AnimState:Show("ARM_carry")
@@ -95,11 +92,9 @@ local function onequip(inst, owner)
 		turnon(inst)
 	end
 	owner:AddTag("batteryuser") -- from batteryuser component
-
 end
 
 local function onunequip(inst, owner)
-
 	owner.AnimState:Hide("ARM_carry")
 	owner.AnimState:Show("ARM_normal")
 
@@ -162,7 +157,11 @@ local function onattack(inst, attacker, target)
 			for i, v in ipairs(ents) do
 				if v ~= inst and v ~= target and v:IsValid() and not v:IsInLimbo() then
 					if (v.components.health ~= nil and not v.components.health:IsDead()) and not v.sg:HasStateTag("noattack") then
-						v.components.health:DoDelta(-10, false, attacker, false, attacker)
+						if not inst.overcharged then
+							v.components.health:DoDelta( -10, false, attacker, false, attacker)
+						else
+							v.components.combat:GetAttacked(attacker, 10, nil) --overcharge gets hitstun
+						end
 						SpawnPrefab("electrichitsparks"):AlignToTarget(v, attacker, true)
 					end
 				end
@@ -184,8 +183,12 @@ local function onattack(inst, attacker, target)
 
 			for i, v in ipairs(ents) do
 				if v ~= inst and v ~= target and v:IsValid() and not v:IsInLimbo() then
-					if (v.components.health ~= nil and not v.components.health:IsDead()) and not v.sg:HasStateTag("noattack") then
-						v.components.health:DoDelta(-10, false, attacker, false, attacker)
+					if (v.components.health ~= nil and not v.components.health:IsDead()) and v.components.combat ~= nil and not v.sg:HasStateTag("noattack") then
+						if not inst.overcharged then
+							v.components.health:DoDelta( -10, false, attacker, false, attacker)
+						else
+							v.components.combat:GetAttacked(attacker, 10, nil) --overcharge gets hitstun
+						end
 						SpawnPrefab("electrichitsparks"):AlignToTarget(v, attacker, true)
 					end
 				end
@@ -194,6 +197,11 @@ local function onattack(inst, attacker, target)
 			return
 		end
 	end
+end
+
+local function OnOvercharge(inst, toggle)
+	inst.overcharged = toggle
+	inst.components.fueled.rate = toggle and 4 or 2
 end
 
 local function fn()
@@ -212,6 +220,7 @@ local function fn()
 
 	inst:AddTag("light")
 	inst:AddTag("electricaltool")
+	inst:AddTag("overchargeable")
 
 	MakeInventoryFloatable(inst, "med", 0.2, 0.65)
 
@@ -226,7 +235,6 @@ local function fn()
 	inst:AddComponent("burnable")
     inst.components.burnable.canlight = false
     inst.components.burnable.fxprefab = nil]]
-
 	inst:AddComponent("weapon")
 	inst.components.weapon:SetDamage(24)
 	inst.components.weapon:SetOnAttack(onattack)
@@ -255,7 +263,7 @@ local function fn()
 	inst._onownerequip = function(owner, data)
 		if data.item ~= inst and
 			(data.eslot == EQUIPSLOTS.HANDS or
-				(data.eslot == EQUIPSLOTS.BODY and data.item:HasTag("heavy"))
+			(data.eslot == EQUIPSLOTS.BODY and data.item:HasTag("heavy"))
 			) then
 			turnoff(inst)
 		end
@@ -270,6 +278,19 @@ local function fn()
 
 	inst.OnRemoveEntity = OnRemove
 
+	inst:ListenForEvent("overcharged", OnOvercharge)
+
+	inst.OnSave = function(inst, data)
+		if data ~= nil then
+			data.actual_fuel = inst.components.fueled:GetPercent()
+		end
+	end
+
+	inst.OnLoad = function(inst, data)
+		if data ~= nil and data.actual_fuel ~= nil then
+			inst:DoTaskInTime(0, function() inst.components.fueled:SetPercent(data.actual_fuel) end)
+		end
+	end
 
 
 	return inst

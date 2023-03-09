@@ -2,16 +2,18 @@ require "behaviours/follow"
 require "behaviours/wander"
 require "behaviours/faceentity"
 require "behaviours/panic"
+require "behaviours/doaction"
+require "behaviours/jukeandjive"
 
 local TARGET_FOLLOW_DIST = 4
 local MAX_FOLLOW_DIST = 4.5
 
-local COMBAT_TOO_CLOSE_DIST = 6                 -- distance for find enitities check
+local COMBAT_TOO_CLOSE_DIST = 10                 -- distance for find enitities check
 local COMBAT_TOO_CLOSE_DIST_SQ = COMBAT_TOO_CLOSE_DIST * COMBAT_TOO_CLOSE_DIST
-local COMBAT_SAFE_TO_WATCH_FROM_DIST = 9        -- will run to this distance and watch if was too close
-local COMBAT_SAFE_TO_WATCH_FROM_MAX_DIST = 13   -- combat is quite far away now, better catch up
+local COMBAT_SAFE_TO_WATCH_FROM_DIST = 12        -- will run to this distance and watch if was too close
+local COMBAT_SAFE_TO_WATCH_FROM_MAX_DIST = 14   -- combat is quite far away now, better catch up
 local COMBAT_SAFE_TO_WATCH_FROM_MAX_DIST_SQ = COMBAT_SAFE_TO_WATCH_FROM_MAX_DIST * COMBAT_SAFE_TO_WATCH_FROM_MAX_DIST
-local COMBAT_TIMEOUT = 7
+local COMBAT_TIMEOUT = 8
 
 local MAX_PLAYFUL_FIND_DIST = 4
 local MAX_PLAYFUL_KEEP_DIST_FROM_OWNER = 6
@@ -40,7 +42,7 @@ local function LoveOwner(inst)
     local owner = GetOwner(inst)
     return owner ~= nil
         and not owner:HasTag("playerghost")
-        and (GetTime() - (inst.sg.mem.prevnuzzletime or 0) > TUNING.CRITTER_NUZZLE_DELAY) 
+        and (GetTime() - (inst.sg.mem.prevnuzzletime or 0) > TUNING.CRITTER_NUZZLE_DELAY)
         and math.random() < 0.05
         and BufferedAction(inst, owner, ACTIONS.NUZZLE)
         or nil
@@ -48,9 +50,16 @@ end
 
 -------------------------------------------------------------------------------
 --  Play With Other Critters
-
+local PLAYMATE_NO_TAGS = {"busy"}
 local function PlayWithPlaymate(self)
-    self.inst:PushEvent("critterplayful", {target=self.playfultarget})
+    self.inst:PushEvent("start_playwithplaymate", {target=self.playfultarget})
+end
+
+local function TargetCanPlay(self, target, owner, max_dist_from_owner, is_flier)
+	return (target.IsPlayful == nil or target:IsPlayful()) 
+			and target:IsNear(owner, max_dist_from_owner) 
+			and (is_flier or target:IsOnPassablePoint())
+			and (target.components.sleeper == nil or not target.components.sleeper:IsAsleep())
 end
 
 local function FindPlaymate(self)
@@ -58,24 +67,24 @@ local function FindPlaymate(self)
 
     local is_playful = self.inst.components.crittertraits:IsDominantTrait("playful")
     local max_dist_from_owner = is_playful and MAX_DOMINANTTRAIT_PLAYFUL_KEEP_DIST_FROM_OWNER or MAX_PLAYFUL_KEEP_DIST_FROM_OWNER
+    local is_flier = self.inst:HasTag("flying")
 
     local can_play = self.inst:IsPlayful() and self.inst:IsNear(owner, max_dist_from_owner)
 
     -- Try to keep the current playmate
-    if self.playfultarget ~= nil and self.playfultarget:IsValid() and can_play then
+    if self.playfultarget ~= nil and self.playfultarget:IsValid() and can_play and TargetCanPlay(self, self.playfultarget, owner, max_dist_from_owner, is_flier) then
         return true
     end
 
     local find_dist = is_playful and MAX_DOMINANTTRAIT_PLAYFUL_FIND_DIST or MAX_PLAYFUL_FIND_DIST
 
     -- Find a new playmate
-    local we_fly = self.inst:HasTag("flying")
     self.playfultarget = can_play and
         not owner.components.locomotor:WantsToMoveForward() and
-        FindEntity(self.inst, find_dist, 
+        FindEntity(self.inst, find_dist,
             function(v)
-                return (v.IsPlayful == nil or v:IsPlayful()) and v:IsNear(owner, max_dist_from_owner) and (we_fly or v:IsOnPassablePoint())
-            end, nil, nil, self.inst.playmatetags)
+                return TargetCanPlay(self, v, owner, max_dist_from_owner, is_flier)
+            end, nil, PLAYMATE_NO_TAGS, self.inst.playmatetags)
         or nil
 
     return self.playfultarget ~= nil
@@ -92,10 +101,12 @@ local function _avoidtargetfn(self, target)
     local owner = self.inst.components.follower.leader
     local owner_combat = owner ~= nil and owner.components.combat or nil
     local target_combat = target.components.combat
-    if owner_combat == nil or target_combat == nil then
+    if owner_combat == nil or target_combat == nil or not self.inst:IsNear(owner, 20) then
         return false
     elseif target_combat:TargetIs(owner)
-        or (target.components.grouptargeter ~= nil and target.components.grouptargeter:IsTargeting(owner)) then
+        or (target.components.grouptargeter ~= nil and target.components.grouptargeter:IsTargeting(owner))
+		or target_combat:TargetIs(self.inst)
+        or (target.components.grouptargeter ~= nil and target.components.grouptargeter:IsTargeting(self.inst)) then
         return true
     end
 
@@ -110,15 +121,13 @@ local function _avoidtargetfn(self, target)
 
     -- Is owner in combat with target?
     -- Are owner and target both in any combat?
-	
-		local t = GetTime()
-		return  (	owner_combat.laststartattacktime ~= nil and (owner_combat:IsRecentTarget(target) or target_combat:HasTarget()) and
-                math.max(owner_combat.laststartattacktime, owner_combat.lastdoattacktime or 0) + COMBAT_TIMEOUT > t
+    local t = GetTime()
+    return  (   (owner_combat:IsRecentTarget(target) or target_combat:HasTarget()) and
+                math.max(owner_combat.laststartattacktime or 0, owner_combat.lastdoattacktime or 0) + COMBAT_TIMEOUT > t
             ) or
             (   owner_combat.lastattacker == target and
                 owner_combat:GetLastAttackedTime() + COMBAT_TIMEOUT > t
             )
-			
 end
 
 local function CombatAvoidanceFindEntityCheck(self)
@@ -133,7 +142,10 @@ local function CombatAvoidanceFindEntityCheck(self)
 end
 
 local function ValidateCombatAvoidance(self)
-    if self.runawayfrom == nil then
+    if self.runawayfrom == nil or 
+		self.inst:GetCurrentPlatform() ~= nil or 
+		self.inst.components.follower.leader ~= nil and not 
+		self.inst:IsNear(self.inst.components.follower.leader, 20) then
         return false
     end
 
@@ -156,6 +168,102 @@ local function ValidateCombatAvoidance(self)
     return true
 end
 
+--- Minigames
+local function WatchingMinigame(inst)
+	return (inst.components.follower.leader ~= nil and inst.components.follower.leader.components.minigame_participator ~= nil) and inst.components.follower.leader.components.minigame_participator:GetMinigame() or nil
+end
+local function WatchingMinigame_MinDist(inst)
+	local minigame = WatchingMinigame(inst)
+	return minigame ~= nil and minigame.components.minigame.watchdist_min or 0
+end
+local function WatchingMinigame_TargetDist(inst)
+	local minigame = WatchingMinigame(inst)
+	return minigame ~= nil and minigame.components.minigame.watchdist_target or 0
+end
+local function WatchingMinigame_MaxDist(inst)
+	local minigame = WatchingMinigame(inst)
+	return minigame ~= nil and minigame.components.minigame.watchdist_max or 0
+end
+
+
+-------------------------------------------------------------------------------
+-- CUSTOM FUNCTIONS FOR WOBY ACTIONS
+
+local function HasWobyTarget(inst)
+    return inst.wobytarget ~= nil and
+			inst.wobytarget:IsValid() and not
+			inst.wobytarget:HasTag("outofreach") and not
+			inst.wobytarget:HasTag("INLIMBO") and
+			inst.wobytarget:IsOnPassablePoint() ~= nil and inst.wobytarget:IsOnPassablePoint() and
+			-- is my pal walter near?
+			(inst.components.follower.leader ~= nil and
+            inst:IsNear(inst.components.follower.leader, 25)) and
+			(
+			-- Check for Picking (plants)
+			(inst.wobytarget.components.pickable ~= nil and inst.wobytarget.components.pickable.canbepicked) or
+			-- Check for item to pick up		
+			(inst.wobytarget.components.inventoryitem ~= nil and inst.wobytarget.components.inventoryitem.canbepickedup and not inst.wobytarget.components.combat) or
+			-- Check for harvestable target	
+			(inst.wobytarget.components.harvestable ~= nil and inst.wobytarget.components.harvestable:CanBeHarvested()) or 
+			-- Bark Bark! Attack me you dink!
+			(inst.wobytarget.components.combat ~= nil and 
+			inst.wobytarget.components.combat:CanTarget(inst) and not
+			(inst.wobytarget.components.combat:TargetIs(inst) or inst.wobytarget.components.grouptargeter ~= nil and inst.wobytarget.components.grouptargeter:IsTargeting(self.inst)) and not
+			(inst.wobytarget.sg ~= nil and inst.wobytarget.sg:HasStateTag("attack")))
+			
+			) or false
+end
+
+local function DoTargetAction(inst)
+    return inst.wobytarget ~= nil and
+			inst.wobytarget:IsValid() and not
+			inst.wobytarget:HasTag("outofreach") and not
+			inst.wobytarget:HasTag("INLIMBO") and
+			inst.wobytarget:IsOnPassablePoint() ~= nil and inst.wobytarget:IsOnPassablePoint() and
+			-- is my pal walter near?
+			(inst.components.follower.leader ~= nil and
+            inst:IsNear(inst.components.follower.leader, 25)) and
+			(
+			-- Check for Picking (plants)
+			(inst.wobytarget.components.pickable ~= nil and inst.wobytarget.components.pickable.canbepicked and
+			BufferedAction(inst, inst.wobytarget, ACTIONS.PICK)) or
+			-- Check for item to pick up		
+			(inst.wobytarget.components.inventoryitem ~= nil and inst.wobytarget.components.inventoryitem.canbepickedup and not inst.wobytarget.components.combat and
+			BufferedAction(inst, inst.wobytarget, ACTIONS.PICKUP)) or
+			-- Check for harvestable target	
+			(inst.wobytarget.components.harvestable ~= nil and inst.wobytarget.components.harvestable:CanBeHarvested() and
+			BufferedAction(inst, inst.wobytarget, ACTIONS.HARVEST)) or 
+			-- Bark Bark! Attack me you dink!
+			(inst.wobytarget.components.combat ~= nil and 
+			inst.wobytarget.components.combat:CanTarget(inst) and not
+			(inst.wobytarget.components.combat:TargetIs(inst) or inst.wobytarget.components.grouptargeter ~= nil and inst.wobytarget.components.grouptargeter:IsTargeting(inst)) and not
+			(inst.wobytarget.sg ~= nil and inst.wobytarget.sg:HasStateTag("attack")) and
+			BufferedAction(inst, inst.wobytarget, ACTIONS.WOBY_BARK))
+			
+			) or nil
+end
+
+local function HasSitTarget(inst)
+    return inst.wobytarget ~= nil and inst.wobytarget:HasTag("wobysittarget") and inst.wobytarget:IsOnPassablePoint() or nil
+end
+
+local function GoSitAction(inst)
+    if inst.wobytarget == nil then
+		return
+	end
+	
+    local sitPos = inst.wobytarget:GetPosition()
+    return sitPos ~= nil
+        and BufferedAction(inst, nil, ACTIONS.WALKTO, nil, sitPos, nil, .3)
+        or nil
+end
+
+local function ShouldWobyRun(inst)
+    return inst:GetCurrentPlatform() == nil or 
+		inst.components.follower.leader ~= nil and
+		inst:IsNear(inst.components.follower.leader, 25)
+end
+
 -------------------------------------------------------------------------------
 --  Brain
 
@@ -164,18 +272,35 @@ local SmallWobyBrain = Class(Brain, function(self, inst)
 end)
 
 function SmallWobyBrain:OnStart()
-    local root =
-    PriorityNode({
+	local watch_game = WhileNode( function() return WatchingMinigame(self.inst) end, "Watching Game",
+        PriorityNode{
+				Follow(self.inst, WatchingMinigame, WatchingMinigame_MinDist, WatchingMinigame_TargetDist, WatchingMinigame_MaxDist),
+				RunAway(self.inst, "minigame_participator", 5, 7),
+				FaceEntity(self.inst, WatchingMinigame, WatchingMinigame ),
+        }, 0.1)
+
+    local root = PriorityNode({
         WhileNode( function() return self.inst.components.follower.leader end, "Has Owner",
             PriorityNode{
+					
+				watch_game,
+				
+				
+				WhileNode( function() return HasWobyTarget(self.inst) end, "Has Target",
+					DoAction(self.inst, DoTargetAction, nil, true )
+				),
+				
                 -- Combat Avoidance
-                PriorityNode{
-                    RunAway(self.inst, {tags={"_combat", "_health"}, notags={"wall", "INLIMBO"}, fn=CombatAvoidanceFindEntityCheck(self)}, COMBAT_TOO_CLOSE_DIST, COMBAT_SAFE_TO_WATCH_FROM_DIST),
-                    WhileNode( function() return ValidateCombatAvoidance(self) end, "Is Near Combat",
-                        FaceEntity(self.inst, GetOwner, KeepFaceTargetFn)
-                        ),
-                },
-
+				PriorityNode{
+					JukeAndJive(self.inst, {tags={"_combat", "_health"}, notags={"player", "wall", "INLIMBO"}, fn=CombatAvoidanceFindEntityCheck(self)}, COMBAT_TOO_CLOSE_DIST, COMBAT_SAFE_TO_WATCH_FROM_DIST),
+					WhileNode( function() return ValidateCombatAvoidance(self) end, "Is Near Combat",
+						FaceEntity(self.inst, GetOwner, KeepFaceTargetFn)),
+				},
+				
+				WhileNode( function() return HasSitTarget(self.inst) end, "Has Target",
+					DoAction(self.inst, GoSitAction, nil, true )
+				),
+				
                 WhileNode(function() return FindPlaymate(self) end, "Playful",
                     SequenceNode{
                         WaitNode(6),

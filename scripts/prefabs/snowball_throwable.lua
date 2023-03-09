@@ -142,6 +142,7 @@ local function fn()
 	
     inst:AddTag("projectile")
 	inst:AddTag("weapon")
+	inst:AddTag("thrown")
     
 	inst:AddTag("frozen")
     inst:AddTag("watersource")

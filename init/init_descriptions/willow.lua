@@ -4,6 +4,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 
 --	[ 		Willow Descriptions		]	--
 
+	ANNOUNCE.DREADEYE_SPOOKED = "Bernie! Help me!"
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Wait, where would I even put this thing?"
     ANNOUNCE.ANNOUNCE_WINONAGEN = "Eww, I don't want grease on my hands!"
     ANNOUNCE.ANNOUNCE_RATRAID = "I really don't like that sound..."
@@ -46,6 +47,24 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
             REVIVER = "If I find any cheese, you're welcome to share it!",
             GHOST = "I had a pet rat once. I wonder if she became a ghost too?",
             FIRESTARTER = "You're not so bad for a rat, %s!",
+        }
+	DESCRIBE.WATHOM =
+        {
+            GENERIC = "You'll let flies in with a mouth like that!",
+            ATTACKER = "Cool it, %s!",
+            MURDERER = "Another angry murderous beast!",
+            REVIVER = "You'll kill me again with that breath!",
+            GHOST = "%s looks even creepier as a ghost!",
+            FIRESTARTER = "A monster who burns stuff? I hope I'm not looking in a mirror.",
+        }
+	DESCRIBE.WIXIE =
+        {
+            GENERIC = "I didn't have friends either, but it wasn't because I was a jerk!",
+            ATTACKER = "Quit hitting people with rocks, you jerk!",
+            MURDERER = "%s has gone mad!",
+            REVIVER = "Don't act like your my friend, %s!",
+            GHOST = "That's what you get for being a bully, %s!",
+            FIRESTARTER = "You like burning stuff too? Maybe we can be friends!",
         }
 		
     DESCRIBE.RATPOISONBOTTLE = "Yea, this'll take care of those gross little jerks!"
@@ -141,7 +160,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "I could make a mini foster home with some moon rocks."
-	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.BUGZAPPER = "I prefer fire over electricity, unless it's an electrical fire!"
@@ -370,8 +388,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	
 	DESCRIBE.WINONA_TOOLBOX = "Do I have to carry everything around?"
 	ACTIONFAIL.WINONATOOLBOX = "Hey, at least let me take a peak."
-	DESCRIBE.POWERCELL = "yeah, yeah, it's nice, but how well does it burn."
-	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "."
+	DESCRIBE.WINONA_CATAPULT_ITEM = "Dumb machines!"
+	DESCRIBE.WINONA_SPOTLIGHT_ITEM = "Dumb machines!"
+	DESCRIBE.WINONA_BATTERY_LOW_ITEM = "Dumb machines!"
+	DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "Dumb machines!"
+	DESCRIBE.POWERCELL = "Yeah, yeah, it's nice, but how well does it burn."
+	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "Let's hope an electrical fire doesn't break out, right?"
 	DESCRIBE.MINERHAT_ELECTRICAL = "Why cant I energize it with fire!"
 	DESCRIBE.OCEAN_SPEAKER = "What's this big dumb machine doing all the way out here?"
 	--DESCRIBE.UM_SIREN = "Oh yeah!? I can blow bubbles twice as big! Watch!"
@@ -406,7 +428,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.UM_BEEGUN = "Everybody gets BEES!"
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
-	DESCRIBE.SUNKENCHEST_ROYAL = "Riches beyond my wildest dreams."
+	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "Riches beyond my wildest dreams."
 	DESCRIBE.STEERINGWHEEL_COPPER = "Now the whole boats spinning!"
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "I still need one of these."
 	DESCRIBE.BOAT_BUMPER_COPPER = "Does this mean I can crash into as many things I want too?"
@@ -432,11 +454,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 
 	DESCRIBE.PORTABLEBOAT_ITEM = "A fireproof boat? All aboard!"
 	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "It doesn't have the comforting glow of a nice roaring fire."
-	
-	DESCRIBE.WIXIE_PIANO = "Potatoes and molasses!"
-	DESCRIBE.WIXIE_CLOCK = "It's fire-o-clock! Every hour, every day!"
-	DESCRIBE.WIXIE_WARDROBE = "I hate non-flammable wood!"
-	DESCRIBE.CHARLES_T_HORSE = "I couldn't bring myself to burn it... Because it won't burn!"
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Oh, it's a little angel!"
 	DESCRIBE.UM_ORNAMENT_RAT = "I hate rats! Oh, it's fake? I still hate it!"
@@ -444,3 +461,45 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WILLOW.ACTIONFAIL
 	DESCRIBE.TRINKET_WATHOM1 = "Wow!! This is worthless."
 	
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
+	
+	-- WIXIE RELATED STRINGS
+	
+	DESCRIBE.WIXIE_PIANO = "Potatoes and molasses!"
+	DESCRIBE.WIXIE_CLOCK = "It's fire-o-clock! Every hour, every day!"
+	DESCRIBE.WIXIE_WARDROBE = "I hate non-flammable wood!"
+	DESCRIBE.CHARLES_T_HORSE = "I couldn't bring myself to burn it... Because it won't burn!"
+	DESCRIBE.THE_REAL_CHARLES_T_HORSE = "I already have Bernie!"
+	DESCRIBE.SLINGSHOT_MATILDA = "More shooting!"
+	DESCRIBE.SLINGSHOT_GNASHER = "Does it come in red?"
+
+	DESCRIBE.SLINGSHOTAMMO_LAZY = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_SHADOW = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = "Yes!! Now were talking!!"
+	DESCRIBE.SLINGSHOTAMMO_HONEY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_RUBBER = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TREMOR = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_MOONROCK = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_THULECITE
+	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+		
+	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_THULECITE
+
+	DESCRIBE.BAGOFMARBLES = "A little flame is trapped within, waiting to get out!"
+
+	DESCRIBE.MEATRACK_HAT = {
+            GENERIC = DESCRIBE.MEATRACK.GENERIC,
+			
+            DRYING = DESCRIBE.MEATRACK.DRYING,
+            DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
+			
+            DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
+            DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
+	}
+	DESCRIBE.FISHMEAT_DRIED = "Ew, it's still oily."
+	DESCRIBE.SMALLFISHMEAT_DRIED = "Is it still Sushi?"
+		
+	DESCRIBE.WIXIEGUN = "Yes!! Violence!!!"

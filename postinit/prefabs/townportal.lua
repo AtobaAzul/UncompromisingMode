@@ -1,5 +1,6 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
+
 local function StartSoundLoop(inst)
     if not inst.playingsound then
         inst.playingsound = true
@@ -9,7 +10,7 @@ end
 
 ---ORANGE
 local ORANGE_PICKUP_MUST_TAGS = { "_inventoryitem", "plant", "witherable", "kelp", "structure", "lureplant", "mush-room",
-    "waterplant", "oceanvine", "lichen", "pickable"}
+    "waterplant", "oceanvine", "lichen", "pickable" }
 local ORANGE_PICKUP_CANT_TAGS = { "INLIMBO", "NOCLICK", "knockbackdelayinteraction", "catchable", "fire", "minesprung",
     "mineactive" }
 local function pickup(inst, channeler)
@@ -25,7 +26,6 @@ local function pickup(inst, channeler)
             v.components.inventoryitem.cangoincontainer and
             not v.components.inventoryitem:IsHeld() and
             channeler.components.inventory:CanAcceptCount(v, 1) > 0 then
-
             if channeler.components.minigame_participator ~= nil then
                 local minigame = channeler.components.minigame_participator:GetMinigame()
                 if minigame ~= nil then
@@ -54,19 +54,19 @@ local function pickup(inst, channeler)
         if v.components.crop ~= nil and v.components.crop.matured then --Farmplots/Wild Crops
             v.components.crop:Harvest(channeler)
             SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
-            inst.channeler.components.sanity:DoDelta(-0.5) --Can't take too much sanity if the purpose is to use in large farms
+            inst.channeler.components.sanity:DoDelta( -0.5) --Can't take too much sanity if the purpose is to use in large farms
             return
         end
         if v.components.harvestable ~= nil and v.components.harvestable:CanBeHarvested() then -- and v:HasTag("mushroom_farm") then --Mushroom Farms
             v.components.harvestable:Harvest(channeler)
             SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
-            inst.channeler.components.sanity:DoDelta(-0.25) --Can't take too much sanity if the purpose is to use in large farms
+            inst.channeler.components.sanity:DoDelta( -0.25) --Can't take too much sanity if the purpose is to use in large farms
             return
         end
         if v.components.stewer ~= nil and v.components.stewer:IsDone() then --Crockpot dishes, not sure who's gonna do this though lol
             v.components.stewer:Harvest(channeler)
             SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
-            inst.channeler.components.sanity:DoDelta(-0.25) --Can't take too much sanity if the purpose is to use in large farms
+            inst.channeler.components.sanity:DoDelta( -0.25) --Can't take too much sanity if the purpose is to use in large farms
             return
         end
         if v.components.pickable ~= nil and v.components.pickable:CanBePicked() then --Pickable stuff
@@ -74,19 +74,19 @@ local function pickup(inst, channeler)
             v.components.pickable:Pick(channeler)
             channeler:RemoveTag("channelingpicker")
             SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
-            inst.channeler.components.sanity:DoDelta(-0.25) --Can't take too much sanity if the purpose is to use in large farms
+            inst.channeler.components.sanity:DoDelta( -0.25) --Can't take too much sanity if the purpose is to use in large farms
             return
         end
         if v.components.dryer ~= nil and v.components.dryer:IsDone() then --Drying racks
             v.components.dryer:Harvest(channeler)
             SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
-            inst.channeler.components.sanity:DoDelta(-0.25)
+            inst.channeler.components.sanity:DoDelta( -0.25)
             return
         end
         if v.components.shelf ~= nil and v.components.shelf.itemonshelf ~= nil and not TheWorld.state.iswinter then --Lureplants
             v.components.shelf:TakeItem(channeler)
             SpawnPrefab("sand_puff").Transform:SetPosition(v.Transform:GetWorldPosition())
-            inst.channeler.components.sanity:DoDelta(-0.25)
+            inst.channeler.components.sanity:DoDelta( -0.25)
             return
         end
     end
@@ -110,7 +110,7 @@ local function OnStartChanneling(inst, channeler)
 
     inst.channeler = channeler.components.sanity ~= nil and channeler or nil
     if inst.channeler ~= nil then
-        inst.channeler.components.sanity:DoDelta(-TUNING.SANITY_MED)
+        inst.channeler.components.sanity:DoDelta( -TUNING.SANITY_MED)
         inst.channeler.components.sanity.externalmodifiers:SetModifier(inst, -TUNING.DAPPERNESS_SUPERHUGE)
     end
 end
@@ -128,7 +128,6 @@ local function OnStopChanneling(inst, aborted)
 
     if inst.channeler ~= nil and inst.channeler:IsValid() and inst.channeler.components.sanity ~= nil then
         inst.channeler.components.sanity.externalmodifiers:RemoveModifier(inst)
-
     end
     if inst.task ~= nil then
         inst.task:Cancel()
@@ -136,11 +135,13 @@ local function OnStopChanneling(inst, aborted)
     end
 end
 
-env.AddPrefabPostInit("townportal", function(inst)
-    if not TheWorld.ismastersim then
-        return
-    end
+if env.GetModConfigData("lazydeserter") then
+    env.AddPrefabPostInit("townportal", function(inst)
+        if not TheWorld.ismastersim then
+            return
+        end
 
-    inst.components.channelable:SetChannelingFn(OnStartChanneling, OnStopChanneling)
-    --return inst
-end)
+        inst.components.channelable:SetChannelingFn(OnStartChanneling, OnStopChanneling)
+        --return inst
+    end)
+end

@@ -349,6 +349,7 @@ local states =
         name = "mine_start",
         tags = { "premine", "working" },
         onenter = function(inst)
+			
             inst.equipfn(inst, inst.items["PICK"])
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("pickaxe_pre")
@@ -364,6 +365,7 @@ local states =
         name = "mine",
         tags = { "premine", "mining", "working" },
         onenter = function(inst)
+			inst.sg.statemem.action = inst:GetBufferedAction()
             inst.AnimState:PlayAnimation("pickaxe_loop")
         end,
 
@@ -372,7 +374,7 @@ local states =
             TimeEvent(9 * FRAMES, function(inst)
                 inst:PerformBufferedAction()
                 inst.sg:RemoveStateTag("premine")
-                inst.SoundEmitter:PlaySound("dontstarve/wilson/use_pick_rock")
+				PlayMiningFX(inst, inst.sg.statemem.action.target)
             end),
 
             -- TimeEvent(14*FRAMES, function(inst)

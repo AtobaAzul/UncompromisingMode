@@ -54,7 +54,6 @@ local function turnon(inst)
 end
 
 local function turnoff(inst)
-
 	inst.components.weapon:RemoveElectric()
 
 	local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner or nil
@@ -98,6 +97,28 @@ local function nofuel(inst)
 	end
 end
 
+local function spark(inst)
+	local fx = SpawnPrefab("electrichitsparks")
+
+	local owner = inst.components.inventoryitem.owner
+
+	if inst.components.equippable:IsEquipped() and owner ~= nil then
+		fx.entity:SetParent(owner.entity)
+		fx.entity:AddFollower()
+		fx.Follower:FollowSymbol(owner.GUID, "swap_object", 0, -145, 0)
+		fx.Transform:SetScale(.66, .66, .66)
+		inst.sparktask = inst:DoTaskInTime(math.random() * 0.5, spark)
+	else
+		fx.entity:SetParent(inst.entity)
+		--fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+		fx.Transform:SetPosition(0, 1, 0)
+		fx.Transform:SetScale(.66, .66, .66)
+		--fx.Follower:FollowSymbol(inst.GUID, inst, 0, -150, 0)
+		inst.sparktask = inst:DoTaskInTime(math.random() * 0.5, spark)
+	end
+end
+
+
 local function onequip(inst, owner)
 	inst.components.burnable:Ignite()
 	owner.AnimState:OverrideSymbol("swap_object", "swap_nightstick", "swap_nightstick")
@@ -120,6 +141,9 @@ local function onequip(inst, owner)
 	owner:ListenForEvent("lightningstrike", Strike, owner)
 	owner:AddTag("batteryuser") -- from batteryuser component
 
+	if inst.overcharged then
+		inst.sparktask = inst:DoTaskInTime(math.random(), spark)
+	end
 end
 
 local function onunequip(inst, owner)
@@ -145,6 +169,11 @@ local function onunequip(inst, owner)
 				owner:RemoveTag("batteryuser")
 			end
 		end
+	end
+
+	if inst.sparktask ~= nil then
+		inst.sparktask:Cancel()
+		inst.sparktask = nil
 	end
 end
 
@@ -178,20 +207,33 @@ local function onattack(inst, attacker, target)
 		inst.components.weapon.stimuli == "electric" then
 		SpawnPrefab("electrichitsparks"):AlignToTarget(target, attacker, true)
 	end
+
+	if inst.overcharged and target:IsValid() then
+		if not target.components.debuffable then
+			target:AddComponent("debuffable")
+		end
+		target.components.debuffable:AddDebuff("shockstundebuff", "shockstundebuff")
+
+		if (target:HasTag("chess") or target:HasTag("uncompromising_pawn") or target:HasTag("twinofterror") and not target:HasTag("fleshyeye")) and (target.components.health ~= nil and not target.components.health:IsDead()) and not target.sg:HasStateTag("noattack") then
+			target.components.health:DoDelta( -34, false, attacker, false, attacker)
+		end
+	end
 end
 
-local function setcharged(inst, charges)
-	if not inst.charged then
-		inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
-		inst.Light:Enable(true)
-		inst:WatchWorldState("cycles", ondaycomplete)
-		inst.charged = true
+local function OnOvercharge(inst, toggle)
+	inst.overcharged = toggle
+	inst.components.fueled.rate = toggle and 4 or 2
+
+	if toggle and inst.sparktask == nil and inst.components.equippable:IsEquipped() then
+		inst.sparktask = inst:DoTaskInTime(math.random(), spark)
+	elseif not toggle and inst.sparktask ~= nil then
+		inst.sparktask:Cancel()
+		inst.sparktask = nil
 	end
-	inst.chargeleft = math.max(inst.chargeleft or 0, charges)
-	dozap(inst)
 end
 
 env.AddPrefabPostInit("nightstick", function(inst)
+	inst:AddTag("overchargeable")
 
 	if not TheWorld.ismastersim then
 		return
@@ -225,5 +267,29 @@ env.AddPrefabPostInit("nightstick", function(inst)
 		inst.components.weapon:RemoveElectric()
 		inst.components.weapon:SetOnAttack(onattack)
 	end
+
 	inst:AddTag("electricaltool")
+
+	inst:ListenForEvent("overcharged", OnOvercharge)
+
+	local _OnSave = inst.OnSave
+	local _OnLoad = inst.OnLoad
+
+	inst.OnSave = function(inst, data)
+		if data ~= nil then
+			data.actual_fuel = inst.components.fueled:GetPercent()
+		end
+		if _OnSave ~= nil then
+			_OnSave(inst, data)
+		end
+	end
+
+	inst.OnLoad = function(inst, data)
+		if data ~= nil and data.actual_fuel ~= nil then
+			inst:DoTaskInTime(0, function() inst.components.fueled:SetPercent(data.actual_fuel) end)
+		end
+		if _OnLoad ~= nil then
+			_OnLoad(inst, data)
+		end
+	end
 end)

@@ -163,6 +163,7 @@ AddPrefabPostInit("bunnyman", function (inst)
 end)
 ]]
 local rabbitloot = { "smallmeat" }
+local forced_beardlingloot = { "nightmarefuel" }
 
 local function SetRabbitLoot(lootdropper)
     if lootdropper.loot ~= rabbitloot and not lootdropper.inst._fixedloot then
@@ -180,19 +181,36 @@ local function SetBeardlingLoot(lootdropper)
     end
 end
 
-local function LootSetupFunction_jack(lootdropper)
-    if lootdropper.inst ~= nil then 
-		local guy = lootdropper.inst.causeofdeath
-		if IsCrazyGuy(guy ~= nil and guy.components.follower ~= nil and guy.components.follower.leader or guy) then
-			SetBeardlingLoot(lootdropper)
-		else
-			SetRabbitLoot(lootdropper)
+local function SetForcedBeardlingLoot(lootdropper)
+	if not lootdropper.inst._fixedloot then
+		lootdropper:SetLoot(forced_beardlingloot)
+		if math.random() < .5 then
+			lootdropper:AddRandomLoot("beardhair", .5)
+			lootdropper:AddRandomLoot("monstersmallmeat", 1)
+			lootdropper.numrandomloot = 1
 		end
 	end
 end
 
-AddPrefabPostInit("rabbit", LootSetupFunction_jack, IsCrazyGuy, SetBeardLord)
+local function IsForcedNightmare(inst)
+	return inst.components.timer:TimerExists("forcenightmare")
+end
+
+local function LootSetupFunction_jack(lootdropper)
+    local guy = lootdropper.inst.causeofdeath
+	if IsForcedNightmare(lootdropper.inst) then
+		SetForcedBeardlingLoot(lootdropper)
+	elseif IsCrazyGuy(guy ~= nil and guy.components.follower ~= nil and guy.components.follower.leader or guy) then
+        SetBeardlingLoot(lootdropper)
+    else
+        SetRabbitLoot(lootdropper)
+    end
+end
+
 AddPrefabPostInit("rabbit", function (inst)
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
     if inst ~= nil and inst.components.lootdropper ~= nil then 
         inst.components.lootdropper:SetLootSetupFn(LootSetupFunction_jack)
         LootSetupFunction_jack(inst.components.lootdropper)

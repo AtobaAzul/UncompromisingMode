@@ -159,7 +159,7 @@ local states =
 	
 	State{
         name = "charging_loop",
-        tags = { "attack", "canrotate", "busy", "charging" },
+        tags = { "busy", "canrotate", "charging" },
         onenter = function(inst)
             inst.SoundEmitter:PlaySound(inst.sounds.pant)
             inst.Physics:Stop()
@@ -170,6 +170,9 @@ local states =
         end,
 		
         onexit = function(inst)
+			inst.lightningshot = false
+			inst.components.timer:StopTimer("lightningshot_cooldown")
+			inst.components.timer:StartTimer("lightningshot_cooldown", 6 + math.random())
 			inst:CancelCharge()
         end,
 		
@@ -386,9 +389,6 @@ local states =
         {
             TimeEvent(0, function(inst) 
 				inst.SoundEmitter:PlaySound(inst.sounds.bark)
-				inst.lightningshot = false
-				inst.components.timer:StopTimer("lightningshot_cooldown")
-				inst.components.timer:StartTimer("lightningshot_cooldown", 6 + math.random())
 			end),
             TimeEvent(5*FRAMES, function(inst, target) 
 				if not target then

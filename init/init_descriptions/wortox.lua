@@ -4,6 +4,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 
 --	[ 		Wortox Descriptions		]	--
 
+	ANNOUNCE.DREADEYE_SPOOKED = "Someone is playing tricks. H-Hyuyu... "
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Just kidding! Hyuyu."
     ANNOUNCE.ANNOUNCE_WINONAGEN = "Let the mortal have her fun. I've elsewhere to run!"
     ANNOUNCE.ANNOUNCE_RATRAID = "The piper calls! Best hide it all!"
@@ -46,6 +47,24 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
             REVIVER = "We bipeds need to stick together!",
             GHOST = "Ohoho, you need to be more careful, %s!",
             FIRESTARTER = "Watch out, %s has learned to use fire!",
+        }
+	DESCRIBE.WATHOM =
+        {
+            GENERIC = "%s has a great smile!",
+            ATTACKER = "%s is up to no good!",
+            MURDERER = "%s has taken pranks too far!",
+            REVIVER = "We may yet be friends, %s!",
+            GHOST = "You're like the old ones, aren't you %s?",
+            FIRESTARTER = "%s likes a roaring fire!",
+        }
+	DESCRIBE.WIXIE =
+        {
+            GENERIC = "Not very subtle with your quips, are you %s?",
+            ATTACKER = "%s has resorted to violence!",
+            MURDERER = "A killer in red!",
+            REVIVER = "Ohoho, helping a fellow prankster in need, %s?",
+            GHOST = "Karma bites, doesn't it %s?",
+            FIRESTARTER = "Another firebug is among us!",
         }
 		
     DESCRIBE.RATPOISONBOTTLE = "My oh my, what a way to die!"
@@ -135,7 +154,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "Moon rocks would make a great little shelter!"
-	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.BUGZAPPER = "Cmon, it's just a little sting!"
@@ -357,8 +375,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	
 	DESCRIBE.WINONA_TOOLBOX = "A place to put the tools of trade."
 	ACTIONFAIL.WINONATOOLBOX = "My tools of trade are in another type of box."
-	DESCRIBE.POWERCELL = "."
-	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = ""
+	DESCRIBE.WINONA_CATAPULT_ITEM = "It's a bit too complex for me."
+	DESCRIBE.WINONA_SPOTLIGHT_ITEM = "It's a bit too complex for me."
+	DESCRIBE.WINONA_BATTERY_LOW_ITEM = "It's a bit too complex for me."
+	DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "It's a bit too complex for me."
+	DESCRIBE.POWERCELL = "Gives quite a shock!"
+	DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL = "An assortment of whimsical wires."
 	DESCRIBE.MINERHAT_ELECTRICAL = "I can fill it with shock and awe, hyuyuyuyu!"
 	DESCRIBE.OCEAN_SPEAKER = "It plays a tune that could spell our doom. Hyuyu!" --Oh gee oh fuck I'm out of luck!!!!!
 	--DESCRIBE.UM_SIREN = "My, is that a siren on the horizon?"
@@ -393,7 +415,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
     DESCRIBE.UM_BEEGUN = "You better bee quick on the draw."
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
-	DESCRIBE.SUNKENCHEST_ROYAL = "A king's ransom."
+	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "A king's ransom."
 	DESCRIBE.STEERINGWHEEL_COPPER = "Take the wheel!"
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "I could steer the world if I desired!"
 	DESCRIBE.BOAT_BUMPER_COPPER = "Huff and puff, you won't blow this down!"
@@ -419,11 +441,6 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 
 	DESCRIBE.PORTABLEBOAT_ITEM = "We need a mote to help this boat float!"
 	DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "Those humans are quite clever!"
-	
-	DESCRIBE.WIXIE_PIANO = "How about a jaunty tune?"
-	DESCRIBE.WIXIE_CLOCK = "Cuckoo! Cuckoo!"
-	DESCRIBE.WIXIE_WARDROBE = "Hmm? A portal of some kind?"
-	DESCRIBE.CHARLES_T_HORSE = "What secrets do you hold? I can't wait to find out!"
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Do you like tricks too?"
 	DESCRIBE.UM_ORNAMENT_RAT = "Catch him by the tail!"
@@ -431,3 +448,45 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.TRINKET_WATHOM1 = "You've met with a terrible fate, haven't you?"
 	
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
+	
+	-- WIXIE RELATED STRINGS
+	
+	DESCRIBE.WIXIE_PIANO = "How about a jaunty tune?"
+	DESCRIBE.WIXIE_CLOCK = "Cuckoo! Cuckoo!"
+	DESCRIBE.WIXIE_WARDROBE = "Hmm? A portal of some kind?"
+	DESCRIBE.CHARLES_T_HORSE = "What secrets do you hold? I can't wait to find out!"
+	DESCRIBE.THE_REAL_CHARLES_T_HORSE = "Trot-a-lot!"
+	DESCRIBE.SLINGSHOT_MATILDA = "Triple the fun!"
+	DESCRIBE.SLINGSHOT_GNASHER = "What's that? Get into trouble? I already am!"
+
+	DESCRIBE.SLINGSHOTAMMO_LAZY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SHADOW = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_HONEY = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_RUBBER = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TREMOR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONROCK = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_MOONGLASS = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
+		
+	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
+	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_ROCK
+
+	DESCRIBE.BAGOFMARBLES = "I think she's lost her marbles!"
+
+	DESCRIBE.MEATRACK_HAT = {
+            GENERIC = DESCRIBE.MEATRACK.GENERIC,
+			
+            DRYING = DESCRIBE.MEATRACK.DRYING,
+            DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
+			
+            DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
+            DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
+	}
+	DESCRIBE.FISHMEAT_DRIED = "Drying makes it better, according to the mortals."
+	DESCRIBE.SMALLFISHMEAT_DRIED = "It just don't get it."
+		
+	DESCRIBE.WIXIEGUN = "Too much mischief!"
