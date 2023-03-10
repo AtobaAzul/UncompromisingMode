@@ -136,16 +136,16 @@ if GetModConfigData("no4crafts") then --:desolate:
         Ingredient("stingers", 2),
         Ingredient("palmconetree_scale", 4)
     }
-    AllRecipes["boat_magnet_kit"].ingredients = {
+    --[[AllRecipes["boat_magnet_kit"].ingredients = {
         Ingredient("gears", 1),
         Ingredient("transistor", 2),
-        Ingredient("um_copper_pipe", 3)
+        Ingredient("um_copper_pipe", 3)--copper isn't fucking obtainable yet what the fuck
     }
     AllRecipes["boat_magnet_beacon"].ingredients = {
         Ingredient("messagebottleempty", 1),
         Ingredient("transistor", 1),
         Ingredient("um_copper_pipe", 1)
-    }
+    }]]
 end
 
 AllRecipes["boat_bumper_shell_kit"].numtogive = 4 --8
@@ -612,33 +612,6 @@ AddRecipe2(
 ChangeSortKey("sludge_cork", "oceanfishingrod", "TOOLS", true)
 ChangeSortKey("sludge_cork", "boat_magnet_beacon", "SEAFARING", true)
 
-AddRecipe2(
-    "boat_bumper_copper_kit",
-    { Ingredient("um_copper_pipe", 14) },
-    TECH.SEAFARING_ONE,
-    { numtogive = 2 },
-    { "SEAFARING" }
-)
-ChangeSortKey("boat_bumper_copper_kit", "boat_bumper_shell_kit", "SEAFARING", true)
-
-AddRecipe2(
-    "steeringwheel_copper_item",
-    { Ingredient("um_copper_pipe", 3), Ingredient("gears", 1) },
-    TECH.SEAFARING_ONE,
-    nil,
-    { "SEAFARING" }
-)
-ChangeSortKey("steeringwheel_copper_item", "steeringwheel_item", "SEAFARING", true)
-
---[[
-AddRecipe2(--unsure...
-    "trinket_6",
-    {Ingredient("um_copper_pipe", 3)},
-    TECH.SCIENCE_TWO,
-    {numtogive = 2},
-    {"REFINE"}
-)
-ChangeSortKey("trinket_6", "transistor", "REFINE", true)]]
 --deconstruct recipes
 AddDeconstructRecipe("cursed_antler", { Ingredient("boneshard", 8), Ingredient("nightmarefuel", 2) })
 AddDeconstructRecipe("beargerclaw", { Ingredient("boneshard", 4), Ingredient("furtuft", 8) })
