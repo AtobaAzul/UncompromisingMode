@@ -66,8 +66,9 @@ local function OnAttack(inst, attacker, target)
 		end
 		
 		ImpactFx(inst, attacker, target)
-		
-		target.components.combat:RemoveShouldAvoidAggro(attacker)
+		if target.components.combat ~= nil then
+			target.components.combat:RemoveShouldAvoidAggro(attacker)
+		end
 		attacker.components.combat:SetTarget(target)
 	end
 end
