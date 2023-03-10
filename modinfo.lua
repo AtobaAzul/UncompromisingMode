@@ -1,7 +1,7 @@
 name = "󰀕 Uncompromising Mode"
 description =
 [[
-󰀔 [ Version 1.0.1: "Face Your Fears" ]
+󰀔 [ Version 1.0.2: "Face Your Fears" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
