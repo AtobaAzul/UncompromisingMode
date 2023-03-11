@@ -377,56 +377,56 @@ env.AddPrefabPostInit("crabking", function(inst)
 			local count = 0
 
 			if math.random(6) < opal then
-				messagebottletreasures:GenerateTreasure(pos, "sunkenchest_royal_rainbow").Transform:SetPosition(
+				messagebottletreasures.GenerateTreasure(pos, "sunkenchest_royal_rainbow").Transform:SetPosition(
 					pos.x + math.random(-4, 4), pos.y, pos.z + math.random(-4, 4))
 				count = count + 1
 				if count > 3 then return end
 			end
 
 			if math.random(6) < red then
-				messagebottletreasures:GenerateTreasure(pos, "sunkenchest_royal_red").Transform:SetPosition(
+				messagebottletreasures.GenerateTreasure(pos, "sunkenchest_royal_red").Transform:SetPosition(
 					pos.x + math.random(-4, 4), pos.y, pos.z + math.random(-4, 4))
 				count = count + 1
 				if count > 3 then return end
 			end
 
 			if math.random(6) < blue then
-				messagebottletreasures:GenerateTreasure(pos, "sunkenchest_royal_blue").Transform:SetPosition(
+				messagebottletreasures.GenerateTreasure(pos, "sunkenchest_royal_blue").Transform:SetPosition(
 					pos.x + math.random(-4, 4), pos.y, pos.z + math.random(-4, 4))
 				count = count + 1
 				if count > 3 then return end
 			end
 
 			if math.random(6) < purple then
-				messagebottletreasures:GenerateTreasure(pos, "sunkenchest_royal_purple").Transform:SetPosition(
+				messagebottletreasures.GenerateTreasure(pos, "sunkenchest_royal_purple").Transform:SetPosition(
 					pos.x + math.random(-4, 4), pos.y, pos.z + math.random(-4, 4))
 				count = count + 1
 				if count > 3 then return end
 			end
 
 			if math.random(6) < yellow then
-				messagebottletreasures:GenerateTreasure(pos, "sunkenchest_royal_yellow").Transform:SetPosition(
+				messagebottletreasures.GenerateTreasure(pos, "sunkenchest_royal_yellow").Transform:SetPosition(
 					pos.x + math.random(-4, 4), pos.y, pos.z + math.random(-4, 4))
 				count = count + 1
 				if count > 3 then return end
 			end
 
 			if math.random(6) < orange then
-				messagebottletreasures:GenerateTreasure(pos, "sunkenchest_royal_orange").Transform:SetPosition(
+				messagebottletreasures.GenerateTreasure(pos, "sunkenchest_royal_orange").Transform:SetPosition(
 					pos.x + math.random(-4, 4), pos.y, pos.z + math.random(-4, 4))
 				count = count + 1
 				if count > 3 then return end
 			end
 
 			if math.random(6) < green then
-				messagebottletreasures:GenerateTreasure(pos, "sunkenchest_royal_green").Transform:SetPosition(
+				messagebottletreasures.GenerateTreasure(pos, "sunkenchest_royal_green").Transform:SetPosition(
 					pos.x + math.random(-4, 4), pos.y, pos.z + math.random(-4, 4))
 				count = count + 1
 				if count > 3 then return end
 			end
 
 			if count == 0 then
-				messagebottletreasures:GenerateTreasure(pos, "sunkenchest_royal_"..types[math.random(#types)]).Transform:SetPosition(
+				messagebottletreasures.GenerateTreasure(pos, "sunkenchest_royal_"..types[math.random(#types)]).Transform:SetPosition(
 					pos.x + math.random(-4, 4), pos.y, pos.z + math.random(-4, 4))
 				count = count + 1
 			end
