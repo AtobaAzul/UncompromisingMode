@@ -12,6 +12,8 @@ local function fn()
     inst.entity:SetPristine()
 
     inst:AddTag("FX")
+    inst:AddTag("scarytoprey")
+    inst:AddTag("scarytooceanprey")
 
     if not TheWorld.ismastersim then
         return inst
@@ -26,7 +28,7 @@ local function fn()
 
         for k, v in ipairs(ents) do
             local x1, y1, z1 = v.Transform:GetWorldPosition()
-            if v:GetCurrentPlatform() == nil and TheWorld.Map:IsOceanAtPoint(x1, y1, z1) and not v:HasTag("flying") and not v:HasTag("boat") then
+            if v:GetCurrentPlatform() == nil and TheWorld.Map:IsOceanAtPoint(x1, y1, z1) and not v:HasTag("flying") and not v:HasTag("boat") and v.prefab ~= "waterplant" then
                 v.components.health:DoDelta(-34)
             elseif v:HasTag("boat") then
                 v.components.health:DoDelta(-5)
@@ -34,7 +36,7 @@ local function fn()
         end
 
         for k, v in ipairs(oceanfish) do
-            if v.components.oceanfishable ~= nil and v.fish_def ~= nil and v.fish_def.loot ~= nil then
+            if v.components.oceanfishable ~= nil and v.fish_def ~= nil and v.fish_def.loot ~= nil and v.prefab ~= "oceanfish_small_9" then
                 for i, product in ipairs(v.fish_def.loot) do
                     local loot = SpawnPrefab(product)
                     if loot ~= nil then
