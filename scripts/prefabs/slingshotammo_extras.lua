@@ -162,7 +162,7 @@ local function DoPop(inst, remaining, total, level, hissvol)
 	print("pop")
 	
 	for i, v in ipairs(TheSim:FindEntities(x, y, z, 1.2 + inst.powerlevel, { "_combat" }, AURA_EXCLUDE_TAGS)) do
-		if not (v.components.health:IsDead() or v == inst.attacker or v:HasTag("playerghost") or (v:HasTag("player") and TheNet:GetPVPEnabled())) and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
+		if v.components.health ~= nil and not (v.components.health:IsDead() or v == inst.attacker or v:HasTag("playerghost") or (v:HasTag("player") and TheNet:GetPVPEnabled())) and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
 			if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
 				if not v.components.health:IsDead() then
 					--
@@ -1063,7 +1063,7 @@ local function GlassCut(inst)
 						v.components.combat:SetShouldAvoidAggro(attacker)
 					end
 					
-					if v:HasTag("shadow") or v:HasTag("shadowcreature") or v:HasTag("stalker") or v:HasTag("shadowchesspiece") then
+					if v:HasTag("shadow_aligned") then
 						inst.finallevel = inst.powerlevel + .5
 					end
 					
@@ -1110,7 +1110,7 @@ local function GlassCut(inst)
 						v.components.combat:SetShouldAvoidAggro(attacker)
 					end
 					
-					if v:HasTag("shadow") or v:HasTag("shadowcreature") then
+					if v:HasTag("shadow_aligned") then
 						inst.finallevel = inst.powerlevel + .5
 					end
 					
