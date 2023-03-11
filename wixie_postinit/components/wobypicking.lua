@@ -9,6 +9,10 @@ GLOBAL.setfenv(1, GLOBAL)
 env.AddComponentPostInit("pickable", function(self)
 	local _OldPick = self.Pick
 	
+	local function OnRegen(inst)
+		inst.components.pickable:Regen()
+	end
+
 	function self:Pick(picker)
 		if picker ~= nil and picker.components.container ~= nil then
 			if self.canbepicked and self.caninteractwith then
@@ -55,8 +59,37 @@ env.AddComponentPostInit("pickable", function(self)
 						end
 					end
 				end
+
+				if self.onpickedfn ~= nil then
+					self.onpickedfn(self.inst, picker, loot)
+				end
+
+				self.canbepicked = false
+
+				if self.baseregentime ~= nil and not (self.paused or self:IsBarren() or self.inst:HasTag("withered")) then
+					if TheWorld.state.isspring then
+						self.regentime = self.baseregentime * TUNING.SPRING_GROWTH_MODIFIER
+					end
+
+					if not self.useexternaltimer then
+						if self.task ~= nil then
+							self.task:Cancel()
+						end
+						self.task = self.inst:DoTaskInTime(self.regentime, OnRegen)
+						self.targettime = GetTime() + self.regentime
+					else
+						self.stopregentimer(self.inst)
+						self.startregentimer(self.inst, self.regentime)
+					end
+				end
+
+				self.inst:PushEvent("picked", { picker = picker, loot = loot, plant = self.inst })
+
+				if self.remove_when_picked then
+					self.inst:Remove()
+				end
 				
-				return _OldPick(self, picker)
+				--return _OldPick(self, picker)
 			end
 		else
 			return _OldPick(self, picker)
