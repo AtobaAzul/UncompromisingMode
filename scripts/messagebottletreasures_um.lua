@@ -516,11 +516,7 @@ for prefabname, data in pairs(treasure_templates) do
 	end
 end
 
-local function GenerateTreasure(self, pt, overrideprefab, spawn_as_empty, postfn)
-	print("pt", pt)
-	print("overrideprefab", overrideprefab)
-	print("spawn_as_empty", spawn_as_empty)
-	print("postfn", postfn)
+local function GenerateTreasure(pt, overrideprefab, spawn_as_empty, postfn)
 
 	local prefab = overrideprefab or weighted_random_choice(weighted_treasure_prefabs)
 

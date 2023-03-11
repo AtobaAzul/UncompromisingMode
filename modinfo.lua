@@ -15,7 +15,7 @@ Latest update features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Face Your Fears v1.0.1"
+version = "Face Your Fears v1.0.2"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
