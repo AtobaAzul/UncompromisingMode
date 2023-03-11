@@ -180,7 +180,9 @@ local function shard_fn()
     inst:AddTag("sharp")
     inst:AddTag("weapon")
     inst:AddTag("projectile")
-	
+	inst:AddTag("lunar_aligned")
+
+
     inst.entity:SetPristine()
 	
     if not TheWorld.ismastersim then

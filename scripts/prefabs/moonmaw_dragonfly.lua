@@ -596,6 +596,8 @@ local function fn(Sim)
 	inst._playingmusic = false
 	OnMusicDirty(inst)
 
+	inst:AddTag("lunar_aligned")
+
 
 	inst.entity:SetPristine()
 

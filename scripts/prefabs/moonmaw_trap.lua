@@ -255,6 +255,7 @@ local function trap_fn()
     inst.Light:SetColour(0.05, 0.05, 1)
 
     inst:AddTag("moonglass")
+	inst:AddTag("lunar_aligned")
 
     inst.AnimState:SetBank("alterguardian_meteor")
     inst.AnimState:SetBuild("alterguardian_meteor")

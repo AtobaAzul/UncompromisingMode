@@ -204,6 +204,8 @@ local function lavae_fn()
 
 	inst.entity:SetPristine()
 
+	inst:AddTag("lunar_aligned")
+
 	if not TheWorld.ismastersim then
 		return inst
 	end
