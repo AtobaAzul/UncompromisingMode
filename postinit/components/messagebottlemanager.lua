@@ -9,8 +9,8 @@ local BORDER_SCALE = .85 -- 0 < BORDER_SCALE < 1
 local SPAWN_POINTS_PER_SIDE = 8
 local SPAWN_OFFSET_ATTEMPTS = 8
 
-local DOER_CHECK_RADIUS_SQ = 200*200 -- Minimum distance a treasure can spawn from the player using the message bottle
-local ALLPLAYERS_CHECK_RADIUS_SQ = 50*50 -- Minimum distance from any player
+local DOER_CHECK_RADIUS_SQ = 200 * 200   -- Minimum distance a treasure can spawn from the player using the message bottle
+local ALLPLAYERS_CHECK_RADIUS_SQ = 50 * 50 -- Minimum distance from any player
 
 local WATER_RADIUS_CHECK_BIAS = -4
 
@@ -101,7 +101,7 @@ local function gettreasurepos(doer)
 		base_point.x + offset.x,
 		0,
 		base_point.z + offset.z
-		)
+	)
 end
 
 --------------------------------------------------------------------------
@@ -121,58 +121,57 @@ local messagebottletreasures_um = require("messagebottletreasures_um")
 local messagebottletreasures = require("messagebottletreasures")
 
 env.AddComponentPostInit("messagebottlemanager", function(self)
+	function self:UseMessageBottle(bottle, doer, is_not_from_hermit)
+		--I should really, really use function hooking here, but I just woke up and want to get this done with.
+		local hermitcrab = self:GetHermitCrab()
 
-    function self:UseMessageBottle(bottle, doer, is_not_from_hermit)
-        --I should really, really use function hooking here, but I just woke up and want to get this done with.
-            local hermitcrab = self:GetHermitCrab()
-    
-            if not is_not_from_hermit and hermitcrab ~= nil and not self:GetPlayerHasFoundHermit(doer) then
-                return hermitcrab:GetPosition()--, reason=nil
-            else
-                local pos, reason
-                local num_active_hunts = GetTableSize(self.active_treasure_hunt_markers)
-        
-                if num_active_hunts < MAX_ACTIVE_TREASURE_HUNTS then
-                    pos, reason = gettreasurepos(doer)
-        
-                    local rng = math.random()
-                  
+		if not is_not_from_hermit and hermitcrab ~= nil and not self:GetPlayerHasFoundHermit(doer) then
+			return hermitcrab:GetPosition()     --, reason=nil
+		else
+			local pos, reason
+			local num_active_hunts = GetTableSize(self.active_treasure_hunt_markers)
 
-                   if pos and pos.x ~= nil then
-                       if rng > 0.5 then
-                           local treasure = messagebottletreasures.GenerateTreasure(pos)
-                           treasure.Transform:SetPosition(pos.x, pos.y, pos.z)
-                           treasure:ListenForEvent("on_submerge", AddMinimapMarker)
-                       else
-                           local treasure = messagebottletreasures_um.GenerateTreasure(pos)
-                           treasure.Transform:SetPosition(pos.x, pos.y, pos.z)
-                           treasure:ListenForEvent("on_submerge", AddMinimapMarker)
-                       end
-                   end
-        
-                    return pos, reason
-                else
-                    local active_hunt = nil
-        
-                    -- Iterate in random order
-                    local rand = math.random(MAX_ACTIVE_TREASURE_HUNTS)
-                    for i = 1, MAX_ACTIVE_TREASURE_HUNTS do
-                        local ind = ((i + rand) % MAX_ACTIVE_TREASURE_HUNTS) + 1
-        
-                        local keys = {}
-                        for k, v in pairs(self.active_treasure_hunt_markers) do
-                            table.insert(keys, k)
-                        end
-                        active_hunt = keys[ind]
-        
-                        if active_hunt ~= nil and active_hunt:IsValid() then
-                            return active_hunt:GetPosition()--, reason=nil
-                        else
-                            self.active_treasure_hunt_markers[keys[ind]] = nil
-                        end
-                    end
-                end
-            end
-                    return nil, "STALE_ACTIVE_HUNT_REFERENCES"
-    end
+			if num_active_hunts < MAX_ACTIVE_TREASURE_HUNTS then
+				pos, reason = gettreasurepos(doer)
+
+				local rng = math.random()
+
+
+				if pos and pos.x ~= nil then
+					if rng > 0.5 then
+						local treasure = messagebottletreasures.GenerateTreasure(pos)
+						treasure.Transform:SetPosition(pos.x, pos.y, pos.z)
+						treasure:ListenForEvent("on_submerge", AddMinimapMarker)
+					else
+						local treasure = messagebottletreasures_um.GenerateTreasure(pos)
+						treasure.Transform:SetPosition(pos.x, pos.y, pos.z)
+						treasure:ListenForEvent("on_submerge", AddMinimapMarker)
+					end
+				end
+
+				return pos, reason
+			else
+				local active_hunt = nil
+
+				-- Iterate in random order
+				local rand = math.random(MAX_ACTIVE_TREASURE_HUNTS)
+				for i = 1, MAX_ACTIVE_TREASURE_HUNTS do
+					local ind = ((i + rand) % MAX_ACTIVE_TREASURE_HUNTS) + 1
+
+					local keys = {}
+					for k, v in pairs(self.active_treasure_hunt_markers) do
+						table.insert(keys, k)
+					end
+					active_hunt = keys[ind]
+
+					if active_hunt ~= nil and active_hunt:IsValid() then
+						return active_hunt:GetPosition()     --, reason=nil
+					else
+						self.active_treasure_hunt_markers[keys[ind]] = nil
+					end
+				end
+			end
+		end
+		return nil, "STALE_ACTIVE_HUNT_REFERENCES"
+	end
 end)

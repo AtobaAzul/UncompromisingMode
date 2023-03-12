@@ -167,7 +167,13 @@ return Class(function(self, inst)
         end
 
         local function GetSpawnPoint(pt)
-            if not TheWorld.Map:IsAboveGroundAtPoint(pt:Get()) then
+            print("get spawn point")
+            local x,y,z = pt:Get() --need *just* x and z for GPAP
+            print(TheWorld.Map:GetPlatformAtPoint(x, z) ~= nil)
+            local boat = TheWorld.Map:GetPlatformAtPoint(x, z)
+            print(TheWorld.Map:IsOceanTileAtPoint(pt:Get()))
+            print(TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake)
+            if boat ~= nil or not TheWorld.Map:IsOceanTileAtPoint(pt:Get()) then
                 if TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake then
                     pt = FindNearbyLandFullMoon(pt, 1) or pt
                 else
@@ -175,7 +181,8 @@ return Class(function(self, inst)
                 end
             end
 
-            local offset = FindWalkableOffset(pt, math.random() * 2 * PI, HASSLER_SPAWN_DIST, 12, true)
+            local offset = boat == nil and FindWalkableOffset(pt, math.random() * 2 * PI, HASSLER_SPAWN_DIST, 12, true) or FindSwimmableOffset(pt, math.random() * 2 * PI, HASSLER_SPAWN_DIST, 12, true)
+            print(offset)
             if offset ~= nil then
                 offset.x = offset.x + pt.x
                 offset.z = offset.z + pt.z
@@ -194,6 +201,7 @@ return Class(function(self, inst)
             end
 
             local spawn_pt = GetSpawnPoint(targetPlayer:GetPosition())
+
             if spawn_pt ~= nil then
                 if TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake then
                     hassler = SpawnPrefab("moonmaw_dragonfly")
