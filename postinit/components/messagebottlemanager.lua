@@ -143,7 +143,7 @@ env.AddComponentPostInit("messagebottlemanager", function(self)
 						treasure.Transform:SetPosition(pos.x, pos.y, pos.z)
 						treasure:ListenForEvent("on_submerge", AddMinimapMarker)
 					else
-						local treasure = messagebottletreasures_um.GenerateTreasure(pos)
+						local treasure = messagebottletreasures_um.GenerateTreasure(pos, (math.random() > 0.25 and "sunkenchest" or "sunkenchest_royal_random"))
 						treasure.Transform:SetPosition(pos.x, pos.y, pos.z)
 						treasure:ListenForEvent("on_submerge", AddMinimapMarker)
 					end
