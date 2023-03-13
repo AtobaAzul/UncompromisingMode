@@ -4,7 +4,7 @@ description =
 󰀔 [ Version 1.0.3: "Face Your Fears" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
-
+test
 Latest update features:
 - Wixie, the Delinquent & Walter Rework
 - Reworks to Crab King and Dread Eye and Trepidation.
