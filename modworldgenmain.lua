@@ -255,12 +255,9 @@ if GetModConfigData("worldgenmastertoggle") then
         table.insert(tasksetdata.required_prefabs, "wixie_piano")
         table.insert(tasksetdata.required_prefabs, "charles_t_horse")
 
-        print("HERE, tasksetdata.name", STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED)
-        print(tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED)
 
         if (tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED) then
             if GetModConfigData("hoodedforest") then
-                print("hf config enabled, inserting")
                 table.insert(tasksetdata.tasks, "GiantTrees_IA")
             end
             return
