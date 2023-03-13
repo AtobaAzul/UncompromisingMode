@@ -17,7 +17,7 @@ env.AddPrefabPostInit("beeguard", function(inst)
 	inst:AddTag("ignorewalkableplatforms")
 end)
 
-local function VVallcheck(inst)
+local function Wallcheck(inst)
 	if inst.defensebees then
 		for i, bee in ipairs(inst.defensebees) do
 			if bee.components.health and not bee.components.health:IsDead() then
@@ -29,15 +29,15 @@ end
 
 local function StompHandler(inst, data)
 	--TheNet:Announce(inst.stomprage)
-	--[[if inst.components.health and inst.components.health:GetPercent() > 0.5 then --fast fovvard to the 3rd phase
+	--[[if inst.components.health and inst.components.health:GetPercent() > 0.5 then --fast foward to the 3rd phase
 		inst.components.health:SetPercent(0.49)
 	end]]
 	if inst.components.timer:GetTimeLeft("spawnguards_cd") then
-		local nevvtime = inst.components.timer:GetTimeLeft("spawnguards_cd") - data.damage / 50 --nevv code to adjust bq to speed up the fight if player is going through her really quickly, need to make sure her abilities actually get the chance to proc.
-		if nevvtime < 0 then
-			nevvtime = 0.1
+		local newtime = inst.components.timer:GetTimeLeft("spawnguards_cd") - data.damage / 50 --new code to adjust bq to speed up the fight if player is going through her really quickly, need to make sure her abilities actually get the chance to proc.
+		if newtime < 0 then
+			newtime = 0.1
 		end
-		inst.components.timer:SetTimeLeft("spawnguards_cd", nevvtime)
+		inst.components.timer:SetTimeLeft("spawnguards_cd", newtime)
 	end
 
 
@@ -97,7 +97,7 @@ local function StompRageCalmDown(inst)
 	end
 end
 
-local function SpavvnShooterBeesLine(inst, time, back)
+local function SpawnShooterBeesLine(inst, time, back)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local LIMIT = 10
 	local target = FindEntity(inst, 40 ^ 2, nil, { "player" }, { "playerghost" })
@@ -397,8 +397,8 @@ local function SpawnSupport(inst)
 	end
 end
 
-local function RedoSpavvnguard_cd(inst)
-	inst.spawnguards_threshold = 20 --threshhold is primarily related ot the spavvn times rather than number of bees novv...
+local function RedoSpawnguard_cd(inst)
+	inst.spawnguards_threshold = 20 --threshhold is primarily related ot the spawn times rather than number of bees now...
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local players = TheSim:FindEntities(x, y, z, 30, { "player" })
 	local count = math.sqrt(#players) * 10
@@ -440,8 +440,8 @@ local function ShouldChase(inst) --All the cases that BQ shouldn't chase the pla
 	end
 end
 
-local function HasVVall(inst)
-	if VVallcheck(inst) then
+local function HasWall(inst)
+	if Wallcheck(inst) then
 		return true
 	else
 		return false
@@ -477,7 +477,7 @@ local function FinalFormation(inst)
 	end
 end
 
-local function VVallcheck(inst)
+local function Wallcheck(inst)
 	if inst.defensebees then
 		for i, bee in ipairs(inst.defensebees) do
 			if bee.components.health and not bee.components.health:IsDead() then
@@ -536,11 +536,11 @@ local function ActivateHitAbility(inst)
 	end]]
 	if inst.components.health and not inst.components.health:IsDead() then
 		if pct > 0.75 then
-			--Nothing.... for novv. There are no post-spavvn abilities at 100%-75%
+			--Nothing.... for now. There are no post-spawn abilities at 100%-75%
 		elseif pct > 0.5 then -------------------------------------------------------------------------------------------------
-			if VVallcheck(inst) then
+			if Wallcheck(inst) then
 				inst.defensivespincount = inst.defensivespincount - 1
-				if inst.defensivespincount < 1 then -- This is the only time this is really used.... in VVall Bees I bq can manually rotate the bees
+				if inst.defensivespincount < 1 then -- This is the only time this is really used.... in Wall Bees I bq can manually rotate the bees
 					inst:DoTaskInTime(0, function(inst) inst.sg:GoToState("defensive_spin") end)
 				end
 			else
@@ -553,19 +553,19 @@ local function ActivateHitAbility(inst)
 			if inst.should_ability then
 				inst.should_ability = nil
 				--TheNet:Announce(inst.previousability)
-				if inst.previousability == "shooter" then --Tvvo abilities novv
+				if inst.previousability == "shooter" then --Two abilities now
 					SeekerBeesRage(inst)
 				else
 					ShooterBeesRage(inst)
 				end
 			end
 		else --------------------------------------------------------------------------------------------------------------
-			if inst.should_ability then --Three abilities novv
+			if inst.should_ability then --Three abilities now
 				inst.should_ability = nil
 				if inst.should_final and not inst.previousability == "final" then
 					DoFinalFormation(inst)
 				else
-					if inst.previousability == "shooter" or (math.random() > 0.5 and inst.previousability == "final") then --If the previous thing vvas a shooter, roll by %chance instead
+					if inst.previousability == "shooter" or (math.random() > 0.5 and inst.previousability == "final") then --If the previous thing was a shooter, roll by %chance instead
 						SeekerBeesRage(inst)
 					else
 						ShooterBeesRage(inst)
@@ -576,67 +576,67 @@ local function ActivateHitAbility(inst)
 	end
 end
 
-local function SpavvnGuardsSeeker(inst)
+local function SpawnGuardsSeeker(inst)
 	if inst.components.health and not inst.components.health:IsDead() then
 		inst.previousguardability = "seeker"
 		inst:DoTaskInTime(0, function(inst) inst.sg:GoToState("spawnguards_seeker") end)
 	end
 end
 
-local function SpavvnVValls(inst)
+local function SpawnWalls(inst)
 	if inst.components.health and not inst.components.health:IsDead() then
-		inst.previousguardability = "vvall"
-		inst:DoTaskInTime(0, function(inst) inst.sg:GoToState("spawnguards_vvall") end)
+		inst.previousguardability = "wall"
+		inst:DoTaskInTime(0, function(inst) inst.sg:GoToState("spawnguards_wall") end)
 	end
 end
 
-local function SpavvnGuardsShooters(inst)
+local function SpawnGuardsShooters(inst)
 	if inst.components.health and not inst.components.health:IsDead() then
 		inst.previousguardability = "shooter"
-		inst:DoTaskInTime(0, function(inst) inst.sg:GoToState("spawnguards_vvall_shooter") end)
+		inst:DoTaskInTime(0, function(inst) inst.sg:GoToState("spawnguards_wall_shooter") end)
 	end
 end
 
 local function PstSummonHandler(inst)
 	inst.should_focus = true
 	inst.should_ability = true
-	inst.spawnguards_cd = RedoSpavvnguard_cd(inst)
+	inst.spawnguards_cd = RedoSpawnguard_cd(inst)
 	local pct = inst.components.health:GetPercent()
 	inst.should_ability = true
 	if pct > 0.75 then
-		SpavvnGuardsSeeker(inst)
+		SpawnGuardsSeeker(inst)
 	elseif pct > 0.5 then
 		if inst.previousguardability == "seeker" then
-			SpavvnVValls(inst)
+			SpawnWalls(inst)
 		else
-			SpavvnGuardsSeeker(inst)
+			SpawnGuardsSeeker(inst)
 		end
 	elseif pct > 0.25 then
 		if inst.previousguardability == "seeker" then
 			if math.random() > 0.5 then
-				SpavvnVValls(inst)
+				SpawnWalls(inst)
 			else
-				SpavvnGuardsShooters(inst)
+				SpawnGuardsShooters(inst)
 			end
-		elseif inst.previousguardability == "vvall" then
+		elseif inst.previousguardability == "wall" then
 			if math.random() > 0.5 then
-				SpavvnGuardsSeeker(inst)
+				SpawnGuardsSeeker(inst)
 			else
-				SpavvnGuardsShooters(inst)
+				SpawnGuardsShooters(inst)
 			end
 		else
 			if math.random() > 0.5 then
-				SpavvnVValls(inst)
+				SpawnWalls(inst)
 			else
-				SpavvnGuardsSeeker(inst)
+				SpawnGuardsSeeker(inst)
 			end
 		end
 	else
-		inst.bonusvvall = true
+		inst.bonuswall = true
 		if inst.previousguardability == "seeker" then
-			SpavvnGuardsShooters(inst)
+			SpawnGuardsShooters(inst)
 		else
-			SpavvnGuardsSeeker(inst)
+			SpawnGuardsSeeker(inst)
 		end
 	end
 end
@@ -661,7 +661,7 @@ local function BeeQueenPost(inst)
 	inst.stompready = true
 	inst:DoPeriodicTask(3, StompRageCalmDown)
 	inst:ListenForEvent("attacked", StompHandler)
-	inst.spawnguards_cd = RedoSpavvnguard_cd(inst)
+	inst.spawnguards_cd = RedoSpawnguard_cd(inst)
 
 	-- No more honey when attacking
 
@@ -739,7 +739,7 @@ local function BeeQueenPost(inst)
 
 	inst.SpawnShooterBeesCircle = SpawnShooterBeesCircle
 	inst.SpawnSupport = SpawnSupport
-	inst.SpavvnShooterBeesLine = SpavvnShooterBeesLine
+	inst.SpawnShooterBeesLine = SpawnShooterBeesLine
 	inst.FinalFormation = FinalFormation
 	inst.previousability = "I don't recall my ability"
 	inst.previousguardability = "I don't recall my guards"
@@ -749,7 +749,7 @@ local function BeeQueenPost(inst)
 	inst.components.combat:SetAttackPeriod(TUNING.BEEQUEEN_ATTACK_PERIOD + 1)
 	inst.components.combat:SetRange(TUNING.BEEQUEEN_ATTACK_RANGE, TUNING.BEEQUEEN_HIT_RANGE) --Tune her attack.
 
-	inst.hasVVall = HasVVall
+	inst.hasWall = HasWall
 
 
 	inst.StartHoney = function(inst) end

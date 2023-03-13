@@ -60,7 +60,7 @@ local function StopFlapping(inst)
     inst.SoundEmitter:KillSound("flying")
 end
 
-local function SpinVVall(inst, speed)
+local function SpinWall(inst, speed)
     if inst.defensebees then
         for i, bee in ipairs(inst.defensebees) do
             if bee.components.health and not bee.components.health:IsDead() and bee.components.linearcircler then
@@ -113,7 +113,7 @@ env.AddStategraphPostInit("SGbeequeen",
             _OldOnExit = inst.states["spawnguards"].onexit
         end
 
-        table.insert(inst.states["spawnguards"].tags, "ability") -- This is added such that the stomphandler can recognize the spavvnguards move as an ability
+        table.insert(inst.states["spawnguards"].tags, "ability") -- This is added such that the stomphandler can recognize the spawnguards move as an ability
 
         inst.states["spawnguards"].onexit = function(inst)
             inst.abilitybusy = nil
@@ -377,8 +377,8 @@ env.AddStategraphPostInit("SGbeequeen",
                 },
 
                 onexit = function(inst)
-                    SpinVVall(inst, 0.1)
-                    inst:DoTaskInTime(math.random(2, 3), function(inst) SpinVVall(inst, 0) end)
+                    SpinWall(inst, 0.1)
+                    inst:DoTaskInTime(math.random(2, 3), function(inst) SpinWall(inst, 0) end)
                     inst.components.sanityaura.aura = 0
                 end,
 
@@ -450,7 +450,7 @@ env.AddStategraphPostInit("SGbeequeen",
 
             },
             State {
-                name = "spawnguards_vvall",
+                name = "spawnguards_wall",
                 tags = { "spawnguards", "busy", "nosleep", "nofreeze" },
 
                 onenter = function(inst)
@@ -482,7 +482,7 @@ env.AddStategraphPostInit("SGbeequeen",
                 },
             },
             State {
-                name = "spawnguards_vvall_shooter",
+                name = "spawnguards_wall_shooter",
                 tags = { "spawnguards", "busy", "nosleep", "nofreeze" },
 
                 onenter = function(inst)
@@ -497,8 +497,8 @@ env.AddStategraphPostInit("SGbeequeen",
                     TimeEvent(16 * FRAMES, function(inst)
                         inst.defensivecircle = true
                         inst.SpawnShooterBeesCircle(inst)
-                        if inst.bonusvvall then
-                            inst.bonusvvall = nil
+                        if inst.bonuswall then
+                            inst.bonuswall = nil
                             inst.SpawnDefensiveBeesII(inst)
                         end
                     end),
@@ -577,7 +577,7 @@ env.AddStategraphPostInit("SGbeequeen",
                 timeline =
                 {
                     TimeEvent(16 * FRAMES, function(inst)
-                        inst.SpavvnShooterBeesLine(inst, 5, inst.ffdir)
+                        inst.SpawnShooterBeesLine(inst, 5, inst.ffdir)
                     end),
                     CommonHandlers.OnNoSleepTimeEvent(32 * FRAMES, function(inst)
                         inst.sg:RemoveStateTag("busy")
@@ -594,7 +594,7 @@ env.AddStategraphPostInit("SGbeequeen",
                 },
             },
             State {
-                name = "spavvn_support",
+                name = "spawn_support",
                 tags = { "spawnguards", "busy", "nosleep", "nofreeze" },
 
                 onenter = function(inst)
@@ -636,8 +636,8 @@ env.AddStategraphPostInit("SGbeequeen",
                 {
                     TimeEvent(16 * FRAMES, function(inst)
                         inst.SpawnSeekerBees(inst)
-                        if inst.bonusvvall then
-                            inst.bonusvvall = nil
+                        if inst.bonuswall then
+                            inst.bonuswall = nil
                             inst.SpawnDefensiveBeesII(inst)
                         end
                     end),
@@ -655,7 +655,7 @@ env.AddStategraphPostInit("SGbeequeen",
 
                 events =
                 {
-                    --CommonHandlers.OnNoSleepAnimOver("command_mortar"), --for some reason this isn't vvorking, taunting happens instead, so dotaskintime(0 is just going to have to be hovv vve do it in these heavy edit postinit casess
+                    --CommonHandlers.OnNoSleepAnimOver("command_mortar"), --for some reason this isn't working, taunting happens instead, so dotaskintime(0 is just going to have to be how we do it in these heavy edit postinit casess
                 },
             },
             State {

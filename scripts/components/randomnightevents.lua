@@ -1967,7 +1967,7 @@ local function CheckPlayers(forced)
 		if self.rnequeued or forced then
 			--TheNet:Announce("commencingrne")
 			if inst.punish and inst.punish > 0 then
-				inst.punish = inst.punish - 0.3 -- <-- This changes hovv many rnes it takes to cool dovvn the punishment 
+				inst.punish = inst.punish - 0.3 -- <-- This changes how many rnes it takes to cool down the punishment 
 			else
 				inst.punish = 0
 			end

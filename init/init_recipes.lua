@@ -579,7 +579,7 @@ AddRecipe2("armor_reed_um", { Ingredient("cutreeds", 8), Ingredient("twigs", 3) 
 ChangeSortKey("armor_reed_um", "armorgrass", "ARMOUR", true)
 ChangeSortKey("armor_reed_um", "raincoat", "RAIN", true)
 
---ChangeSortKey("PREFAB_NAME_OF_ITEM_THAT_YOURE_SORTING","PREFAB_NAME_OF_ITEM_YOU_VVANT_IT_TO_GO_AFTER","THE_TAB",true) you need to do this for each tab that you vvant it to be sorted in -AXE
+--ChangeSortKey("PREFAB_NAME_OF_ITEM_THAT_YOURE_SORTING","PREFAB_NAME_OF_ITEM_YOU_WANT_IT_TO_GO_AFTER","THE_TAB",true) you need to do this for each tab that you want it to be sorted in -AXE
 --need to add the inv atlases
 
 AddRecipe2(

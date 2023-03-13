@@ -382,7 +382,7 @@ local function Regen(inst, attacker)
 		--TheNet:Announce("advancing")
 		local widowweb = FindEntity(inst, 50, function(guy) return guy:HasTag("widowweb") end)
 		if widowweb then
-			--TheNet:Announce("tellingvvidovv")
+			--TheNet:Announce("tellingwidow")
 			widowweb.SpawnInvestigators(widowweb, attacker)
 		end
 

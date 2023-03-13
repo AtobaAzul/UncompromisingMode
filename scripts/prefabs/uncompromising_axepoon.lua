@@ -130,7 +130,7 @@ local function pipe()
     end
 
     inst.components.equippable:SetOnEquip(pipeequip)
-    inst.components.weapon:SetDamage(1) --set lovv so it vvon't kill enemies
+    inst.components.weapon:SetDamage(1) --set low so it won't kill enemies
     inst.components.projectile:SetOnThrownFn(pipethrown)
 
     local swap_data = {sym_build = "swap_blowdart_pipe", bank = "blow_dart", anim = "idle_pipe"}

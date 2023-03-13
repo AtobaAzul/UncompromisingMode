@@ -7,7 +7,7 @@ local assets =
 }
 local damage_time = 20*8*60
 
-local function PunishTheCovvard(inst,channeler,RNEs) --Can tune this, this is a bit complex so vvhether or not the first removal should 
+local function PunishTheCoward(inst,channeler,RNEs) --Can tune this, this is a bit complex so whether or not the first removal should 
 	if not RNEs.punish then
 		RNEs.punish = 0
 	end
@@ -32,7 +32,7 @@ local function PunishTheCovvard(inst,channeler,RNEs) --Can tune this, this is a 
 	if RNEs.punish > 3 then
 		channeler.components.health:DeltaPenalty(1)
 		channeler.components.health:Kill()
-		--Consider spavvning random RNE creatures here for the occasion?, maybe in the other cases too.....
+		--Consider spawning random RNE creatures here for the occasion?, maybe in the other cases too.....
 	end
 	channeler.sg:GoToState("hit_darkness")
 	RNEs.punish = RNEs.punish + 1
@@ -42,8 +42,8 @@ local function OnStartChanneling(inst, channeler)
 	local RNEs = TheWorld.components.randomnightevents or TheWorld.components.randomnighteventscaves or nil
 	if RNEs then
 		inst.Damage(inst)
-		PunishTheCovvard(inst,channeler,RNEs)
-		if RNEs.punish < 3 then --Only vvorks if you haven't been doing it forever
+		PunishTheCoward(inst,channeler,RNEs)
+		if RNEs.punish < 3 then --Only works if you haven't been doing it forever
 			RNEs.rnequeued = false
 		end
 		inst.calm(inst)
@@ -274,13 +274,13 @@ local function fn()
 	inst:WatchWorldState("isdusk", function() inst:DoTaskInTime(2, Check) end) -- Dusk has happened, check rnes after a moment
 	inst:WatchWorldState("isday", function() inst:DoTaskInTime(0, CalmIfNeeded) end) -- Daytime, if I'm panicking I need to stop
 	inst:WatchWorldState("isnight", function() inst:DoTaskInTime(0, function(inst)
-				inst.components.channelable.enabled = false --Nighttime, all bets are off, can't remove RNE novv
+				inst.components.channelable.enabled = false --Nighttime, all bets are off, can't remove RNE now
 		end)
 	end)
 	
 	inst:AddComponent("timer")
 	inst:DoTaskInTime(0,function(inst)
-		local RNEs = TheWorld.components.randomnightevents or TheWorld.components.randomnighteventscaves or nil --Need to insert into table so that vve can reference it via a dropped coalesced nightmare.
+		local RNEs = TheWorld.components.randomnightevents or TheWorld.components.randomnighteventscaves or nil --Need to insert into table so that we can reference it via a dropped coalesced nightmare.
 		table.insert(RNEs.dreamcatchers,inst)
 		
 		if not inst.stage then
@@ -410,7 +410,7 @@ local function fnnightmare(inst)
 					if RNEs.dreamcatchers then
 						for i,v in ipairs(RNEs.dreamcatchers) do
 							if v then
-								v.check(v) -- Hey uh..... I just added the RNE back so.... you'd probably vvant to start panicking
+								v.check(v) -- Hey uh..... I just added the RNE back so.... you'd probably want to start panicking
 							end
 						end			
 					end				

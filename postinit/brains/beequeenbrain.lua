@@ -139,7 +139,7 @@ local function WhyAreYouStopping(self)
 	table.remove(self.bt.root.children, 3)
     table.insert(self.bt.root.children, 3, ChaseMe)
 	
-	local KiteMe =  WhileNode(function() return (ShouldDodge(self) and not self.inst.hasVVall(self.inst)) end, "Dodge",
+	local KiteMe =  WhileNode(function() return (ShouldDodge(self) and not self.inst.hasWall(self.inst)) end, "Dodge",
             SequenceNode{
                 ParallelNodeAny{
                     WaitNode(MAX_DODGE_TIME),

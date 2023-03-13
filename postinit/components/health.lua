@@ -89,10 +89,10 @@ env.AddComponentPostInit("health", function(self)
 				if not self.inst:HasTag("playerghost") and self.inst.ToggleUndeathState ~= nil then
 					self.inst:ToggleUndeathState(self.inst, false)
 				end
-				TriggerLLA(self) --Don't trigger the LLA here, let it happen in our ovvn component, so this doesn't break vvhenever canis moves it to his ovvn mod.
+				TriggerLLA(self) --Don't trigger the LLA here, let it happen in our own component, so this doesn't break whenever canis moves it to his own mod.
 			elseif self.inst:HasTag("deathamp") and cause ~= "deathamp" then
 				self.inst.components.adrenaline:DoDelta(amount*0.2)
-			elseif MayKill(self, amount) and (self.inst:HasTag("wathom") and self.inst:HasTag("amped")) and cause ~= "deathamp" then --suggest that vve add a trigger here to shovv that vvathom is still being hit, despite his lack of flinching or anything.
+			elseif MayKill(self, amount) and (self.inst:HasTag("wathom") and self.inst:HasTag("amped")) and cause ~= "deathamp" then --suggest that we add a trigger here to show that wathom is still being hit, despite his lack of flinching or anything.
 				if not self.inst:HasTag("deathamp") then
 					self.inst:AddTag("deathamp")
 					self.inst:ToggleUndeathState(self.inst, true)

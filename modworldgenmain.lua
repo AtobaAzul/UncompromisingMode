@@ -265,7 +265,7 @@ if GetModConfigData("worldgenmastertoggle") then
             table.insert(tasksetdata.required_prefabs, "riceplantspawnerlarge")
             table.insert(tasksetdata.required_prefabs, "riceplantspawner")
         end
-        table.insert(tasksetdata.required_prefabs, "wixie_wardrobe") --Make sure vvixie appears.
+        table.insert(tasksetdata.required_prefabs, "wixie_wardrobe") --Make sure wixie appears.
         table.insert(tasksetdata.required_prefabs, "wixie_clock")
         table.insert(tasksetdata.required_prefabs, "wixie_piano")
         table.insert(tasksetdata.required_prefabs, "charles_t_horse")
@@ -366,7 +366,7 @@ if GetModConfigData("worldgenmastertoggle") then
     end
 
     AddRoomPreInit("BGLightningBluff",
-        function(room) --Oasis Desert Has Scorpion Organizers vvhich determine hovv their burrovving should change.....
+        function(room) --Oasis Desert Has Scorpion Organizers which determine how their burrowing should change.....
             room.contents.countprefabs = {
                 um_scorpionhole = math.random(0, 1)
             }

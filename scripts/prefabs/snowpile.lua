@@ -19,10 +19,10 @@ end
 
 local function TryColdMenace(inst)
     if math.random() > 0.9 and (inst.components.workable.workleft > 2 or inst.components.pickable.cycles_left > 2) and
-        not inst.mongproof then --This chance could be adjusted or scale vvith time.
+        not inst.mongproof then --This chance could be adjusted or scale with time.
         inst:DoColdMenace(inst)
         local x, y, z = inst.Transform:GetWorldPosition()
-        if math.random() > 0.3 then --Have a good chance of spavvning buddies vvith them.
+        if math.random() > 0.3 then --Have a good chance of spawning buddies with them.
             local sno = TheSim:FindEntities(x, y, z, 10, { "snowpile" })
             local nummongs = math.random(1, 3)
             for i, pile in ipairs(sno) do
@@ -61,13 +61,13 @@ local function FindSpreadSpot(inst, angle)
     end
     x = x + 4 * math.cos(angle)
     z = z + 4 * math.sin(angle)
-    if TheSim:FindEntities(x, y, z, 2, { "snowpile" }) then --Don't vvant to be close to a single pile
+    if TheSim:FindEntities(x, y, z, 2, { "snowpile" }) then --Don't want to be close to a single pile
         inst.redo = true
     end
-    if #TheSim:FindEntities(x, y, z, 3, { "snowpile" }) > 3 then -- Don't vvant to clog the piles all in one location either
+    if #TheSim:FindEntities(x, y, z, 3, { "snowpile" }) > 3 then -- Don't want to clog the piles all in one location either
         inst.redo = true
     end
-    if inst.count > 7 or not inst.redo then -- If vve've been going at it forever... then maybe just return this anyhovv
+    if inst.count > 7 or not inst.redo then -- If we've been going at it forever... then maybe just return this anyhow
         return x, y, z, angle
     else
         inst.redo = nil

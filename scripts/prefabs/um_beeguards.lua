@@ -119,7 +119,7 @@ local function ShouldWake(inst)
 end
 
 --------------------------------------------------------------------------
-local function SlovvDeath(inst) --Slovv death, they just fall dovvn...
+local function SlowDeath(inst) --Slow death, they just fall down...
     if inst.components.health and not inst.components.health:IsDead() then
         local x, y, z = inst.Transform:GetWorldPosition()
         inst:RemoveComponent("linearcircler")
@@ -259,7 +259,7 @@ local function fnmain(bee, build)
     inst:AddTag("scarytoprey")
     inst:AddTag("flying")
     inst:AddTag("ignorewalkableplatformdrowning")
-    inst:AddTag("soulless") --Overload for vvortox..
+    inst:AddTag("soulless") --Overload for wortox..
 
     MakeInventoryFloatable(inst)
 
@@ -328,7 +328,7 @@ local function fnmain(bee, build)
         inst.components.health:SetMaxHealth(15 * TUNING.BEEGUARD_HEALTH)
         inst.Transform:SetScale(1.6, 1.6, 1.6)
 
-        inst:ListenForEvent("timerdone", SlovvDeath)
+        inst:ListenForEvent("timerdone", SlowDeath)
         inst.components.combat:SetRange(TUNING.BEEGUARD_ATTACK_RANGE)
     end
     if bee == "seeker" then

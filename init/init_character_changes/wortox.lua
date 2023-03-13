@@ -114,7 +114,7 @@ local function UncompromisingSoulHeal(inst)
 end
 
 
---If there's a better vvay of doing this, lemme knovv, I'm not sure hovv to grab the wortox_soul_common.DoHeal, it doesn't vvork if I reference it in its ovvn postinit like inst.DoHeal = NevvHeal
+--If there's a better way of doing this, lemme know, I'm not sure how to grab the wortox_soul_common.DoHeal, it doesn't work if I reference it in its own postinit like inst.DoHeal = NewHeal
 local function KillSoul(inst)
     inst:ListenForEvent("animover", inst.Remove)
     inst.AnimState:PlayAnimation("idle_pst")

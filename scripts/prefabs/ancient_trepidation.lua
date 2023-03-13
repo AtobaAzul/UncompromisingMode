@@ -7,7 +7,7 @@ SetSharedLootTable('ancient_trepidation',
 		{ 'nightmarefuel', 1.00 },
 	})
 
-local function Remember(inst, target, insert) --Remember those vvho are menaces
+local function Remember(inst, target, insert) --Remember those who are menaces
 	if insert then
 		local notintable = true
 		for i, v in ipairs(inst.menaces) do
@@ -58,7 +58,7 @@ local function NormalRetarget(inst)
 	for i, target in ipairs(potentialtargets) do
 		if inst.components.combat:CanTarget(target) and target.components.sanity and
 			(target.components.sanity:GetPercent() < 0.5 or Remember(inst, target)) then
-			Remember(inst, target, true) --This guy vvas insane near me, remember vvho they are.
+			Remember(inst, target, true) --This guy was insane near me, remember who they are.
 			foundtarget = true
 			return target
 		end
@@ -85,7 +85,7 @@ local function keeptargetfn(inst, target)
 			for i, v in ipairs(potentialtargets) do
 				if inst.components.combat:CanTarget(v) and v.components.sanity and
 					(v.components.sanity:GetPercent() < 0.5 or Remember(inst, v)) then
-					Remember(inst, v, true) --This guy is insane and my current target is not, I'm svvapping to them
+					Remember(inst, v, true) --This guy is insane and my current target is not, I'm swapping to them
 					inst.components.combat:SetTarget(v)
 					foundtarget = true
 				end
@@ -99,7 +99,7 @@ end
 
 local function OnAttacked(inst, data)
 	if data.attacker and data.attacker:HasTag("player") then
-		Remember(inst, data.attacker, true) --This guy vvas insane enough to hit me, I'm gonna clobber 'em the next time I see them.
+		Remember(inst, data.attacker, true) --This guy was insane enough to hit me, I'm gonna clobber 'em the next time I see them.
 		inst.components.combat:SetTarget(data.attacker)
 	end
 end

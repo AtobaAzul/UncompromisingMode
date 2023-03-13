@@ -73,7 +73,7 @@ local function UncompromisingSpawnGOOOOO(inst, data)
     local rotx = 1
     local rotz = 1
 
-    if inst.rotatable then -- This rotates the vvhole 
+    if inst.rotatable then -- This rotates the whole 
         if math.random() > 0.5 then rotx = -1 end
         if math.random() > 0.5 then rotz = -1 end
     end
@@ -107,7 +107,7 @@ local function UncompromisingSpawnGOOOOO(inst, data)
 				end
 
 				if v.diseased then
-					-- If vve ever add back acid rain I guess vve could have this, vvhatever
+					-- If we ever add back acid rain I guess we could have this, whatever
 				end
 				if v.barren and prefab.components.pickable then
 					prefab.components.pickable:MakeBarren()

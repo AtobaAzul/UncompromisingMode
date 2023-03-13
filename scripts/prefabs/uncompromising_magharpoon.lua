@@ -403,7 +403,7 @@ end
 local function Link(inst,option)
 	if inst.target then
 		if option == "link" then
-			if inst.target.magnerang then --If there's already a magnerang, replace it vvith this nevv one.
+			if inst.target.magnerang then --If there's already a magnerang, replace it with this new one.
 				inst.target.magnerang:KillRopes(inst.target.magnerang)
 			end
 			inst.target.magnerang = inst

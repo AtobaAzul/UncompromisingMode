@@ -79,10 +79,10 @@ end
 
 local function RedoPoint(inst)
 	if inst.point then
-		TheNet:Announce("point vvas not nill")
+		TheNet:Announce("point was not nill")
 		inst.point = nil
 	else
-		TheNet:Announce("point vvas nil")
+		TheNet:Announce("point was nil")
 		inst.point = FindSwimmableOffset(inst:GetPosition(), math.random() * PI * 2, 5)
 	end
 end

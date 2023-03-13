@@ -117,7 +117,7 @@ local function IHaveDied(inst)
 				queen.sg:GoToState("focustarget")
 			else
 				if math.random() > 0.75 then
-					queen.sg:GoToState("spavvn_support")
+					queen.sg:GoToState("spawn_support")
 				else
 					if math.random() > 0.75 then
 						queen.sg:GoToState("screech")

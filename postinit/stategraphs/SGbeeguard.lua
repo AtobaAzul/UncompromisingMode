@@ -117,7 +117,7 @@ env.AddStategraphPostInit("SGbeeguard", function(inst) --beeguard time
 	if inst.states["death"].onenter then
 		_OldOnEnter = inst.states["death"].onenter
 	end
-	inst.states["death"].onenter = function(inst) --This specifically is for the seeker bee, just to make them not play the death animation and instead stay stuck in the ground vvhen they die.
+	inst.states["death"].onenter = function(inst) --This specifically is for the seeker bee, just to make them not play the death animation and instead stay stuck in the ground when they die.
 		if inst.stabdied then
 			inst.AnimState:PlayAnimation("explode")
 			StopBuzz(inst)
@@ -220,7 +220,7 @@ env.AddStategraphPostInit("SGbeeguard", function(inst) --beeguard time
 					if inst.prefab == "um_beeguard_seeker" then
 						FindSpotForShadow(inst, inst.stabtarget, shadow)
 					else
-						FindSpotForShadow(inst, inst.stabtarget, shadow) --Aim the shadovv first, the bee aims at the shadovv after that, simple!
+						FindSpotForShadow(inst, inst.stabtarget, shadow) --Aim the shadow first, the bee aims at the shadow after that, simple!
 					end
 					local scaleFactor = Lerp(.5, 1.5, 1)
 					shadow.Transform:SetScale(scaleFactor, scaleFactor, scaleFactor)
@@ -378,7 +378,7 @@ env.AddStategraphPostInit("SGbeeguard", function(inst) --beeguard time
 				end),
 			},
 		},
-		State { --Need the shooter bees to stand still vvhen they're going to shoot in a line
+		State { --Need the shooter bees to stand still when they're going to shoot in a line
 			name = "lineshoot",
 			tags = { "busy", "stuck" },
 

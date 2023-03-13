@@ -99,5 +99,5 @@ for k, v in pairs(GIANTS) do
 end
 
 if GetModConfigData("harder_beequeen") then
-	--TODO make it configure the revvork instead
+	--TODO make it configure the rework instead
 end

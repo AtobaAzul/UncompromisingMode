@@ -1,8 +1,8 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
-local function ArtificialLocomote(inst, destination, speed) --Locomotor is basically running a similar code anyhovv, this bypasses any physics interactions preventing
-	if destination and speed then --our locomote from vvorking... Inconsistencies in vvhen the entity is supposed to vvalk forvvard led to this.
+local function ArtificialLocomote(inst, destination, speed) --Locomotor is basically running a similar code anyhow, this bypasses any physics interactions preventing
+	if destination and speed then --our locomote from working... Inconsistencies in when the entity is supposed to walk forward led to this.
 		speed = speed * FRAMES
 		local hypoten = math.sqrt(inst:GetDistanceSqToPoint(destination))
 		local x, y, z = inst.Transform:GetWorldPosition()
@@ -15,13 +15,13 @@ local function ArtificialLocomote(inst, destination, speed) --Locomotor is basic
 	end
 end
 
-local function FindFarLandingPoint(inst, destination) --This makes the geese aim for a point behind the player instead of vvhere the player is at.
+local function FindFarLandingPoint(inst, destination) --This makes the geese aim for a point behind the player instead of where the player is at.
 	if destination then --If it aimed directly at the player, it'll do something similar to the bugged version.
 		inst.hopPoint = destination
 		local hypoten = math.sqrt(inst:GetDistanceSqToPoint(destination))
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local x_far, z_far
-		x_far = ((destination.x - x) / hypoten) * 20 + x --20 is arbitrary, another number could be used if desired, if it is lovv enough it may make m/goose undershoot the player too.
+		x_far = ((destination.x - x) / hypoten) * 20 + x --20 is arbitrary, another number could be used if desired, if it is low enough it may make m/goose undershoot the player too.
 		z_far = ((destination.z - z) / hypoten) * 20 + z
 		inst.hopPoint.x = x_far
 		inst.hopPoint.z = z_far

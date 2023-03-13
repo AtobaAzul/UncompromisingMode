@@ -35,7 +35,7 @@ local function Init(inst)
 			table.insert(TheWorld.components.UM_scorpionholes.homesites,inst)
 		end
 	else
-		TheNet:Announce("something vvasn't right...")
+		TheNet:Announce("something wasn't right...")
 	end
 end
 
