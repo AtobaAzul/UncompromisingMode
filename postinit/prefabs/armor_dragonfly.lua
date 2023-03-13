@@ -119,10 +119,11 @@ env.AddPrefabPostInit("armordragonfly", function(inst)
     local function newonequip(inst, owner)
         InitializeLavae(inst, owner)
         local x, y, z = owner.Transform:GetWorldPosition()
+        local boat = TheWorld.Map:GetPlatformAtPoint(x,z)
         if inst.lavaecond1 == "alive" then
             local lavae1 = SpawnPrefab("armorlavae")
             lavae1.number = 1
-            lavae1.Transform:SetPosition(x + GetRandomWithVariance(-3, 3), y, z + GetRandomWithVariance(-3, 3))
+            lavae1.Transform:SetPosition(x + (not boat and GetRandomWithVariance(-3, 3) or 0), y, z + (not boat and GetRandomWithVariance(-3, 3) or 0))
             inst.lavae1 = lavae1
             owner.components.leader:AddFollower(lavae1)
             lavae1.components.follower.leader = owner
@@ -132,7 +133,7 @@ env.AddPrefabPostInit("armordragonfly", function(inst)
         if inst.lavaecond2 == "alive" then
             local lavae2 = SpawnPrefab("armorlavae")
             lavae2.number = 2
-            lavae2.Transform:SetPosition(x + GetRandomWithVariance(-3, 3), y, z + GetRandomWithVariance(-3, 3))
+            lavae2.Transform:SetPosition(x + (not boat and GetRandomWithVariance(-3, 3) or 0), y, z + (not boat and GetRandomWithVariance(-3, 3) or 0))
             inst.lavae2 = lavae2
             owner.components.leader:AddFollower(lavae2)
             lavae2.components.follower.leader = owner
@@ -141,7 +142,7 @@ env.AddPrefabPostInit("armordragonfly", function(inst)
         if inst.lavaecond3 == "alive" then
             local lavae3 = SpawnPrefab("armorlavae")
             lavae3.number = 3
-            lavae3.Transform:SetPosition(x + GetRandomWithVariance(-3, 3), y, z + GetRandomWithVariance(-3, 3))
+            lavae3.Transform:SetPosition(x + (not boat and GetRandomWithVariance(-3, 3) or 0), y, z + (not boat and GetRandomWithVariance(-3, 3) or 0))
             inst.lavae3 = lavae3
             owner.components.leader:AddFollower(lavae3)
             lavae3.components.follower.leader = owner
