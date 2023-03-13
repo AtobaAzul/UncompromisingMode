@@ -10,7 +10,7 @@ local STRINGS = GLOBAL.STRINGS
 local function TestForIA()
     if (
         TheWorld ~= nil and not (TheWorld:HasTag("forest") or TheWorld:HasTag("cave")) and
-            (TheWorld:HasTag("island") or TheWorld:HasTag("volcano"))) or
+        (TheWorld:HasTag("island") or TheWorld:HasTag("volcano"))) or
         GLOBAL.KnownModIndex:IsModEnabled("workshop-1467214795") then
         return true
     else
@@ -18,7 +18,8 @@ local function TestForIA()
     end
 end
 
-local GROUND_OCEAN_COLOR = { -- Color for the main island ground tiles
+local GROUND_OCEAN_COLOR = {
+                             -- Color for the main island ground tiles
     primary_color = { 0, 0, 0, 25 },
     secondary_color = { 0, 20, 33, 0 },
     secondary_color_dusk = { 0, 20, 33, 80 },
@@ -27,12 +28,14 @@ local GROUND_OCEAN_COLOR = { -- Color for the main island ground tiles
 
 AddTile(
     "HOODEDFOREST", --tile_name 1
-    "LAND", --tile_range 2
-    { --tile_data 3
+    "LAND",         --tile_range 2
+    {
+                    --tile_data 3
         ground_name = "hoodedmoss",
         old_static_id = 102,
     },
-    { --ground_tile_def 4
+    {
+      --ground_tile_def 4
         name = "hoodedmoss.tex",
         atlas = "hoodedmoss.xml",
         noise_texture = "noise_hoodedmoss.tex",
@@ -42,12 +45,14 @@ AddTile(
         mudsound = "dontstarve/movement/run_mud",
         colors = GROUND_OCEAN_COLOR
     },
-    { --minimap_tile_def 5
+    {
+      --minimap_tile_def 5
         name = "hoodedmoss.tex",
         atlas = "hoodedmoss.xml",
         noise_texture = "mini_noise_hoodedmoss.tex"
     },
-    { --turf_def 6
+    {
+      --turf_def 6
         name = "hfturf",
         anim = "hoodedmoss",
         bank_build = "hfturf"
@@ -144,7 +149,6 @@ AddTile(
 
 ChangeTileRenderOrder(GLOBAL.WORLD_TILES.MAGMA_ROCK, GLOBAL.WORLD_TILES.DIRT)
 ChangeTileRenderOrder(GLOBAL.WORLD_TILES.MAGMA_ASH, GLOBAL.WORLD_TILES.DIRT)]]
-
 ChangeTileRenderOrder(GLOBAL.WORLD_TILES.HOODEDFOREST, GLOBAL.WORLD_TILES.DIRT)
 ChangeTileRenderOrder(GLOBAL.WORLD_TILES.ANCIENTHOODEDFOREST, GLOBAL.WORLD_TILES.DIRT)
 
@@ -177,7 +181,6 @@ for i,v in ipairs(batplaces) do
 		room.contents.prefabdata.umss_general = function() return {table = "MAGMASPLOTCH"..math.random(1,4)} end
 	end)	
 end]]
-
 --[[
 GLOBAL.require("map/rooms/caves/moltenregions")
 		
@@ -192,8 +195,6 @@ AddTaskPreInit("BigBatCave",
     task.background_room="BGMoltenBatCaveRoom"
     task.room_bg=WORLD_TILES.MAGMA_ASH
 end)]]
-
-
 if GetModConfigData("worldgenmastertoggle") then
     -- <<Cave Update WIP: Toggle at your own risk you buffoons! (That means you atoba, don't leak it please eh?)>>
     -- I became a dev :sunglasses: - Atobá
@@ -210,8 +211,8 @@ if GetModConfigData("worldgenmastertoggle") then
         task.region_id = "RuinsIsland"
         task.locks = {}
         end)
-    
-    
+
+
         local ruins_tasks = {
                 "Residential",
                 "Military",
@@ -232,7 +233,7 @@ if GetModConfigData("worldgenmastertoggle") then
         task.region_id = "RuinsIsland"
         end)
         end
-    
+
         AddTaskPreInit("Residential2",function(task)
         task.entrance_room = "BGSinkhole"
         task.room_choices = {["BGSinkhole"] = 1}
@@ -241,17 +242,25 @@ if GetModConfigData("worldgenmastertoggle") then
         task.entrance_room = "BGSinkhole"
         task.room_choices = {["BGSinkhole"] = 1}
         end)
-    
+
         --Ruins Split
         ]]
     AddTaskSetPreInitAny(function(tasksetdata)
         if tasksetdata.location ~= "forest" then
             return
         end
-        if (tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.VOLCANO) then
-            return
-        elseif (tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED) then
+
+        table.insert(tasksetdata.required_prefabs, "wixie_wardrobe") --Make sure wixie appears.
+        table.insert(tasksetdata.required_prefabs, "wixie_clock")
+        table.insert(tasksetdata.required_prefabs, "wixie_piano")
+        table.insert(tasksetdata.required_prefabs, "charles_t_horse")
+
+        print("HERE, tasksetdata.name", STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED)
+        print(tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED)
+
+        if (tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED) then
             if GetModConfigData("hoodedforest") then
+                print("hf config enabled, inserting")
                 table.insert(tasksetdata.tasks, "GiantTrees_IA")
             end
             return
@@ -265,10 +274,6 @@ if GetModConfigData("worldgenmastertoggle") then
             table.insert(tasksetdata.required_prefabs, "riceplantspawnerlarge")
             table.insert(tasksetdata.required_prefabs, "riceplantspawner")
         end
-        table.insert(tasksetdata.required_prefabs, "wixie_wardrobe") --Make sure wixie appears.
-        table.insert(tasksetdata.required_prefabs, "wixie_clock")
-        table.insert(tasksetdata.required_prefabs, "wixie_piano")
-        table.insert(tasksetdata.required_prefabs, "charles_t_horse")
     end)
 
     if GetModConfigData("caved") == false then
@@ -277,9 +282,9 @@ if GetModConfigData("worldgenmastertoggle") then
                 return
             end
             if (
-                tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.VOLCANO or
-                    tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED) then
-                tasksetdata.set_pieces["ToadstoolArena"] = { 1,
+                tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED) then
+                tasksetdata.set_pieces["ToadstoolArena"] = {
+                    1,
                     tasks = {
                         "ThemeMarshCity"
                     }
@@ -287,7 +292,8 @@ if GetModConfigData("worldgenmastertoggle") then
                 return
             end
 
-            tasksetdata.set_pieces["ToadstoolArena"] = { 1,
+            tasksetdata.set_pieces["ToadstoolArena"] = {
+                1,
                 tasks = {
                     "Guarded Squeltch",
                     "Merms ahoy",
@@ -312,11 +318,12 @@ if GetModConfigData("worldgenmastertoggle") then
         if tasksetdata.location ~= "forest" or
             (
             tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.VOLCANO or
-                tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED) then
+            tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED) then
             return
         end
 
-        tasksetdata.set_pieces["umss_biometable"] = { count = math.random(3, 5),
+        tasksetdata.set_pieces["umss_biometable"] = {
+            count = math.random(3, 5),
             tasks = {
                 "Make a pick",
                 --"Dig that rock",
@@ -573,7 +580,7 @@ if GetModConfigData("worldgenmastertoggle") then
 
     if GetModConfigData("rice") then
         AddTaskPreInit("Squeltch", function(task)
-            task.room_choices["ricepatch"] = 1 --Comment to test task based rice worldgen
+            task.room_choices["ricepatch"] = 1      --Comment to test task based rice worldgen
             task.room_choices["densericepatch"] = 1 --Comment to test task based rice worldgen
         end)
     end
@@ -583,9 +590,9 @@ if GetModConfigData("worldgenmastertoggle") then
     --[[GLOBAL.require("map/tasks/ratacombs")
         GLOBAL.require("map/rooms/caves/ratacombsrooms")
         GLOBAL.require("map/rooms/forest/ratking")
-    
+
         if GetModConfigData("caved") == false then
-        
+
             AddTaskSetPreInitAny(function(tasksetdata)
             if tasksetdata.location ~= "forest" or (tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.VOLCANO or tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED) then
                     return
@@ -622,7 +629,7 @@ if GetModConfigData("worldgenmastertoggle") then
             table.insert(tasksetdata.tasks,"Ratty_Maze")
             table.insert(tasksetdata.tasks,"Ratty_Maze2")
             table.insert(tasksetdata.tasks,"Ratty_Maze3")
-        
+
             if tasksetdata.required_prefabs ~= nil then
                 table.insert(tasksetdata.required_prefabs,"ratking")
                 table.insert(tasksetdata.required_prefabs,"ratacombslock")
@@ -782,7 +789,6 @@ if GetModConfigData("worldgenmastertoggle") then
         end
         room.contents.countstaticlayouts["impactfuldiscovery"] = 1
     end)]]
-
     AddRoomPreInit("OceanCoastal", function(room)
         room.contents.countprefabs =
         {
@@ -826,7 +832,6 @@ if GetModConfigData("worldgenmastertoggle") then
     end
 
     -- WIXIE PUZZLE SETS
-
 
     modimport("init/init_food/init_food_worldgen")
 
