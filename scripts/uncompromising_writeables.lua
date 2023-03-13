@@ -36,3 +36,4 @@ kinds["um_devcapture"] = {
 
     --defaulttext = SignGenerator,
 }
+kinds["telebase"] = kinds["homesign"]

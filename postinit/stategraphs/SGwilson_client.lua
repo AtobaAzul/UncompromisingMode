@@ -144,7 +144,8 @@ local _OldDeathEvent = inst.events["death"].fn
             function(inst, action)
                 return action.invobject ~= nil
                 and action.invobject:HasTag("powercell") and "doshortaction"
-            end)
+            end),
+            ActionHandler(ACTIONS.NAME_FOCUS, "doshortaction"),
     }
 
     --[[

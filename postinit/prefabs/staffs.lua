@@ -323,9 +323,11 @@ if env.GetModConfigData("telestaff_rework") then
                 inst.components.spellbook.items = GetAllValidSpells(inst)
             end
         }
-        if #GetAllActiveTelebases() < 2 then--only show 
+
+        if #GetAllActiveTelebases() < 2 then --only show
             return spells
-        end 
+        end
+
         for k, v in pairs(GetAllActiveTelebases()) do
             if not table.contains(spells, deselect_spell) then --only show deselect spell with focuses
                 table.insert(spells, deselect_spell)
@@ -359,7 +361,9 @@ if env.GetModConfigData("telestaff_rework") then
             end
 
             if spell.target_focus.spell_location ~= nil then
-                spell.label = "Location: " .. spell.target_focus.spell_location
+                spell.label = "Location: " .. (spell.target_focus.custom_location_name ~= nil and
+                spell.target_focus.custom_location_name:value() ~= "" and
+                spell.target_focus.custom_location_name:value() or spell.target_focus.spell_location)
             else
                 spell.label = "Location: Unknown."
             end
@@ -476,10 +480,13 @@ if env.GetModConfigData("telestaff_rework") then
         ["LightningBluffOasis"] = "Oasis",
         ["Make a Beehat"] = "Grasslands",
         ["Mole Colony Rocks"] = "Rocky",
-
     }
 
     local function ParseAreaAwareData(inst)
+        if inst.custom_location_name ~= nil and inst.custom_location_name:value() ~= "" then
+            return inst.custom_location_name:value()
+        end
+
         local x, y, z = inst.Transform:GetWorldPosition()
         local data = inst.components.areaaware:GetCurrentArea()
         if data == nil then
@@ -496,8 +503,6 @@ if env.GetModConfigData("telestaff_rework") then
         local thing1, thing2
         if data.id ~= "START" then
             thing1, thing2 = string.match(data.id, "([^:]+):.+:(.+)$")
-            print("data.id", data ~= nil and data.id or "Data is nil!!!")
-            print("thing1, thing2", thing1, thing2)
             _string = locations2[thing2] or locations1[thing1] or _string
         else
             _string = "Spawn"
@@ -515,18 +520,24 @@ if env.GetModConfigData("telestaff_rework") then
     end
 
     env.AddPrefabPostInit("telebase", function(inst)
+        inst:AddTag("telebase")
+
         inst.OnRemoveEntity = UpdateTelestaffs
 
         inst.onteleto = teleport_target
         inst.canteleto = validteleporttarget
 
         inst:AddComponent("areaaware")
-        inst:DoTaskInTime(0, function()
+        inst.update_location = function(inst)
             local x, y, z = inst.Transform:GetWorldPosition()
             inst.components.areaaware:UpdatePosition(x, y, z)
             inst.spell_location = ParseAreaAwareData(inst)
             UpdateTelestaffs()
-        end)
+        end
+
+        inst:DoTaskInTime(0, inst.update_location)
+
+        inst.custom_location_name = net_string(inst.GUID, "custom_location_name")
 
         if not TheWorld.ismastersim then
             return
@@ -535,6 +546,38 @@ if env.GetModConfigData("telestaff_rework") then
         inst.components.workable:SetOnWorkCallback(onhit)
 
         inst.entity:SetCanSleep(false)
+
+        inst:AddComponent("writeable")
+        inst:RemoveEventCallback("onbuilt", inst.event_listening.onbuilt[inst][2])
+        inst.components.writeable:SetDefaultWriteable(false)
+        inst.components.writeable:SetAutomaticDescriptionEnabled(false)
+
+        local _Write = inst.components.writeable.Write
+        inst.components.writeable.Write = function(self, doer, text, ...)
+            if not text then
+                text = self.text
+                if doer.tool_prefab then
+                    doer.components.inventory:GiveItem(SpawnPrefab(doer.tool_prefab), nil, inst:GetPosition())
+                end
+            else
+                inst.SoundEmitter:PlaySound("dontstarve/common/together/draw")
+            end
+
+            SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "UpdateAllFocuses"))
+
+            self.inst.custom_location_name:set(text and text ~= "" and text or "")
+
+            UpdateTelestaffs()
+        
+            _Write(self, doer, text, ...)
+        end
+
+        local _OnLoad = inst.components.writeable.OnLoad
+        inst.components.writeable.OnLoad = function(self, ...)
+            _OnLoad(self, ...)
+            local text = self.text
+            self.inst.custom_location_name:set(text and text ~= "" and text or "")
+        end
     end)
 
     --I basicly have to remake this thing, fun!!
@@ -584,6 +627,7 @@ if env.GetModConfigData("telestaff_rework") then
             local x, y, z = inst.Transform:GetWorldPosition()
             SpawnPrefab("crab_king_shine").Transform:SetPosition(x, y + 1.75, z)
         end)
+
         inst.components.trader.onaccept = OnGemGiven
         inst.components.inspectable.getstatus = getstatus
         inst.DestroyGemFn = DestroyGem

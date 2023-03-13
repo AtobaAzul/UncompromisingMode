@@ -163,6 +163,26 @@ end
 
 AddModRPCHandler("UncompromisingSurvival", "GetTargetFocus", GetTargetFocus)
 
+local function GetAllActiveTelebases()
+    local valid_telebases = {}
+    for k, telebase in pairs(Ents) do
+        if telebase.prefab == "telebase" then
+            if telebase.canteleto(telebase) then
+                table.insert(valid_telebases, telebase)
+            end
+        end
+    end
+    return valid_telebases
+end
+
+local function UpdateAllFocuses(player)
+    for k,v in ipairs(GetAllActiveTelebases()) do
+        v.update_location(v)
+    end
+end
+
+AddClientModRPCHandler("UncompromisingSurvival", "UpdateAllFocuses", UpdateAllFocuses)
+
 local function PianoPuzzleComplete1()
 	print("PianoPuzzleComplete")
 	

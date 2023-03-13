@@ -2,7 +2,6 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
 env.AddStategraphPostInit("wilson", function(inst)
-
     local function ClearStatusAilments(inst)
         if inst.components.freezable ~= nil and inst.components.freezable:IsFrozen() then
             inst.components.freezable:Unfreeze()
@@ -96,7 +95,8 @@ env.AddStategraphPostInit("wilson", function(inst)
 
         if equip ~= nil and dist then
             local damage = equip.components.weapon ~= nil and equip.components.weapon:GetDamage(inst, target)
-            local damagemult = inst.components.combat.damagemultiplier ~= nil and inst.components.combat.damagemultiplier
+            local damagemult = inst.components.combat.damagemultiplier ~= nil and inst.components.combat
+                .damagemultiplier
                 or 1
             local damagemultex = inst.components.combat.externaldamagemultipliers ~= nil and
                 inst.components.combat.externaldamagemultipliers:Get() or 1
@@ -121,70 +121,71 @@ env.AddStategraphPostInit("wilson", function(inst)
     end
 
 
-	local SLEEPREPEL_MUST_TAGS = { "_combat" }
-	local SLEEPREPEL_CANT_TAGS = { "player", "companion", "shadow", "playerghost", "INLIMBO", "wixieshoved", "invisible", "hiding", "NOTARGET", "flight" }
+    local SLEEPREPEL_MUST_TAGS = { "_combat" }
+    local SLEEPREPEL_CANT_TAGS = { "player", "companion", "shadow", "playerghost", "INLIMBO", "wixieshoved", "invisible",
+        "hiding", "NOTARGET", "flight" }
 
     local function Check_Bowling(inst)
-		if inst ~= nil then
-			local x, y, z = inst.Transform:GetWorldPosition()
-			
-			local ents = TheSim:FindEntities(x, y, z, 3.5, SLEEPREPEL_MUST_TAGS, SLEEPREPEL_CANT_TAGS)
-			
-			for i, v in ipairs(ents) do
-			
-				v:AddTag("wixieshoved")
-				SpawnPrefab("round_puff_fx_sm").Transform:SetPosition(v.Transform:GetWorldPosition())
+        if inst ~= nil then
+            local x, y, z = inst.Transform:GetWorldPosition()
 
-				if v.components.combat ~= nil then
-					v.components.combat:GetAttacked(inst, 0)
-				end
-				
-				if v.components.locomotor ~= nil then
-					for i = 1, 50 do
-						v:DoTaskInTime((i - 1) / 50, function(v)
-							if v ~= nil and inst ~= nil then 
-								local x, y, z = inst.Transform:GetWorldPosition()
-								local tx, ty, tz = v.Transform:GetWorldPosition()
-													
-								local rad = math.rad(inst:GetAngleToPoint(tx, ty, tz))
-								local velx = math.cos(rad) --* 4.5
-								local velz = -math.sin(rad) --* 4.5
-													
-								local giantreduction = v:HasTag("epic") and 1.5 or v:HasTag("smallcreature") and 0.8 or 1
-								local cursemultiplier = v:HasDebuff("wixiecurse_debuff") and 1.75 or 1.25
-								local shovevalue = inst:HasTag("troublemaker") and 3 or 2
-								
-								local dx, dy, dz = tx + (((shovevalue / (i + 3)) * velx) / giantreduction) * cursemultiplier, ty, tz + (((shovevalue / (i + 3)) * velz) / giantreduction) * cursemultiplier
-								local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
-								local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
-								local ocean_collision = TheWorld.Map:IsOceanAtPoint(dx, dy, dz)
-								local on_water = nil
-																			
-								if TUNING.DSTU.ISLAND_ADVENTURES then
-									on_water = IsOnWater(dx, dy, dz)
-								end
-								
-								if not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) then
-									if v ~= nil and dx ~= nil and (ground or boat or ocean_collision and v.components.locomotor:CanPathfindOnWater() or v.components.tiletracker ~= nil and not v:HasTag("whale")) then
-										if not v:HasTag("aquatic") and not on_water or v:HasTag("aquatic") and on_water then
-											--[[if ocean_collision and v.components.amphibiouscreature and not v.components.amphibiouscreature.in_water then
+            local ents = TheSim:FindEntities(x, y, z, 3.5, SLEEPREPEL_MUST_TAGS, SLEEPREPEL_CANT_TAGS)
+
+            for i, v in ipairs(ents) do
+                v:AddTag("wixieshoved")
+                SpawnPrefab("round_puff_fx_sm").Transform:SetPosition(v.Transform:GetWorldPosition())
+
+                if v.components.combat ~= nil then
+                    v.components.combat:GetAttacked(inst, 0)
+                end
+
+                if v.components.locomotor ~= nil then
+                    for i = 1, 50 do
+                        v:DoTaskInTime((i - 1) / 50, function(v)
+                            if v ~= nil and inst ~= nil then
+                                local x, y, z = inst.Transform:GetWorldPosition()
+                                local tx, ty, tz = v.Transform:GetWorldPosition()
+
+                                local rad = math.rad(inst:GetAngleToPoint(tx, ty, tz))
+                                local velx = math.cos(rad) --* 4.5
+                                local velz = -math.sin(rad) --* 4.5
+
+                                local giantreduction = v:HasTag("epic") and 1.5 or v:HasTag("smallcreature") and 0.8 or 1
+                                local cursemultiplier = v:HasDebuff("wixiecurse_debuff") and 1.75 or 1.25
+                                local shovevalue = inst:HasTag("troublemaker") and 3 or 2
+
+                                local dx, dy, dz =
+                                tx + (((shovevalue / (i + 3)) * velx) / giantreduction) * cursemultiplier, ty,
+                                tz + (((shovevalue / (i + 3)) * velz) / giantreduction) * cursemultiplier
+                                local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
+                                local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
+                                local ocean_collision = TheWorld.Map:IsOceanAtPoint(dx, dy, dz)
+                                local on_water = nil
+
+                                if TUNING.DSTU.ISLAND_ADVENTURES then
+                                    on_water = IsOnWater(dx, dy, dz)
+                                end
+
+                                if not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) then
+                                    if v ~= nil and dx ~= nil and (ground or boat or ocean_collision and v.components.locomotor:CanPathfindOnWater() or v.components.tiletracker ~= nil and not v:HasTag("whale")) then
+                                        if not v:HasTag("aquatic") and not on_water or v:HasTag("aquatic") and on_water then
+                                            --[[if ocean_collision and v.components.amphibiouscreature and not v.components.amphibiouscreature.in_water then
 												v.components.amphibiouscreature:OnEnterOcean()
 											end]]
-											
-											v.Transform:SetPosition(dx, dy, dz)
-										end
-									end
-								end
-								
-								if i >= 50 then
-									v:RemoveTag("wixieshoved")
-								end
-							end
-						end)
-					end
-				end
-			end
-		end
+                                            v.Transform:SetPosition(dx, dy, dz)
+                                        end
+                                    end
+                                end
+
+                                if i >= 50 then
+                                    v:RemoveTag("wixieshoved")
+                                end
+                            end
+                        end)
+                    end
+                end
+            end
+        end
     end
 
     local events =
@@ -199,7 +200,7 @@ env.AddStategraphPostInit("wilson", function(inst)
                 -- end
             end
         end),
-		
+
         EventHandler("dreadeye_spooked", function(inst)
             if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead() or inst.components.rider:IsRiding()) then
                 inst.sg:GoToState("dreadeye_spooked")
@@ -209,60 +210,59 @@ env.AddStategraphPostInit("wilson", function(inst)
 
     local _OldSpellCast = inst.actionhandlers[ACTIONS.CASTSPELL].deststate
     inst.actionhandlers[ACTIONS.CASTSPELL].deststate =
-    function(inst, action, ...)
-        if action.invobject ~= nil then
-            if action.invobject:HasTag("lighter") then
-                return "castspelllighter"
-            elseif action.invobject:HasTag("charles_t_horse") then
-				if action.invobject.components.fueled:GetPercent() >= 0.2 then
-					if inst.components.rider and inst.components.rider:IsRiding() then
-						inst.components.rider:Dismount()
-					else
-						return "charles_charge"
-					end
-				else
-					return
-				end
-            elseif action.invobject:HasTag("beargerclaw") then
-                if inst.components.rider and inst.components.rider:IsRiding() then
-                    inst.components.rider:Dismount()
-                else
-                    return "bearclaw_dig_start"
+        function(inst, action, ...)
+            if action.invobject ~= nil then
+                if action.invobject:HasTag("lighter") then
+                    return "castspelllighter"
+                elseif action.invobject:HasTag("charles_t_horse") then
+                    if action.invobject.components.fueled:GetPercent() >= 0.2 then
+                        if inst.components.rider and inst.components.rider:IsRiding() then
+                            inst.components.rider:Dismount()
+                        else
+                            return "charles_charge"
+                        end
+                    else
+                        return
+                    end
+                elseif action.invobject:HasTag("beargerclaw") then
+                    if inst.components.rider and inst.components.rider:IsRiding() then
+                        inst.components.rider:Dismount()
+                    else
+                        return "bearclaw_dig_start"
+                    end
+                elseif action.invobject:HasTag("beegun") then
+                    return "collectthebees"
                 end
-            elseif action.invobject:HasTag("beegun") then
-                return "collectthebees"
             end
+            return _OldSpellCast(inst, action, ...)
         end
-        return _OldSpellCast(inst, action, ...)
-    end
 
     local _OldPlay = inst.actionhandlers[ACTIONS.PLAY].deststate
     inst.actionhandlers[ACTIONS.PLAY].deststate =
-    function(inst, action, ...)
-        if action.invobject ~= nil then
-            if action.invobject:HasTag("pied_piper_flute") then
-                return "play_pied_piper_flute"
+        function(inst, action, ...)
+            if action.invobject ~= nil then
+                if action.invobject:HasTag("pied_piper_flute") then
+                    return "play_pied_piper_flute"
+                end
             end
+            return _OldPlay(inst, action, ...)
         end
-        return _OldPlay(inst, action, ...)
-    end
 
     local _OldChannel = inst.actionhandlers[ACTIONS.STARTCHANNELING].deststate
     inst.actionhandlers[ACTIONS.STARTCHANNELING].deststate =
-    function(inst, action, ...)
-        if action.target and action.target.components.channelable and
-            action.target.components.channelable.use_channel_longaction_noloop then
-            return "dostandingaction"
-        else
-            return _OldChannel(inst, action, ...)
+        function(inst, action, ...)
+            if action.target and action.target.components.channelable and
+                action.target.components.channelable.use_channel_longaction_noloop then
+                return "dostandingaction"
+            else
+                return _OldChannel(inst, action, ...)
+            end
         end
-    end
 
     local _OldAttackState = inst.actionhandlers[ACTIONS.ATTACK].deststate
     inst.actionhandlers[ACTIONS.ATTACK].deststate = function(inst, action, ...)
         local weapon = inst.components.combat and inst.components.combat:GetWeapon()
         if weapon and weapon:HasTag("beegun") then
-
             if inst.sg.laststate.name == "beegun" or inst.sg.laststate.name == "beegun_short" then
                 return "beegun_short"
             else
@@ -275,13 +275,13 @@ env.AddStategraphPostInit("wilson", function(inst)
 
     local _OldCast_Net = inst.actionhandlers[ACTIONS.CAST_NET].deststate
     inst.actionhandlers[ACTIONS.CAST_NET].deststate =
-    function(inst, action, ...)
-        if inst ~= nil then
-            return "cast_net_fixed"
-        else
-            return _OldCast_Net(inst, action, ...)
+        function(inst, action, ...)
+            if inst ~= nil then
+                return "cast_net_fixed"
+            else
+                return _OldCast_Net(inst, action, ...)
+            end
         end
-    end
 
     local _OldDeathEvent = inst.events["death"].fn
     inst.events["death"].fn = function(inst, data)
@@ -321,7 +321,8 @@ env.AddStategraphPostInit("wilson", function(inst)
         ActionHandler(ACTIONS.CHARGE_POWERCELL,
             function(inst, action)
                 return action.invobject ~= nil and action.invobject:HasTag("powercell") and "doshortaction"
-            end)
+            end),
+        ActionHandler(ACTIONS.NAME_FOCUS, "doshortaction"),
     }
 
     local _OldIdleState = inst.states["idle"].onenter
@@ -397,7 +398,7 @@ env.AddStategraphPostInit("wilson", function(inst)
                         end
                         inst.sg.statemem.targetfx = nil
                     end
-                    inst.sg.statemem.stafffx = nil --Can't be cancelled anymore
+                    inst.sg.statemem.stafffx = nil    --Can't be cancelled anymore
                     inst.sg.statemem.stafflight = nil --Can't be cancelled anymore
                     --V2C: NOTE! if we're teleporting ourself, we may be forced to exit state here!
                     inst:PerformBufferedAction()
@@ -639,7 +640,7 @@ env.AddStategraphPostInit("wilson", function(inst)
                             inst.sg.statemem.projectiledelay = 8 * FRAMES - equip.projectiledelay
                             if inst.sg.statemem.projectiledelay > FRAMES then
                                 inst.sg.statemem.projectilesound =
-                                (equip:HasTag("icestaff") and "dontstarve/wilson/attack_icestaff") or
+                                    (equip:HasTag("icestaff") and "dontstarve/wilson/attack_icestaff") or
                                     (equip:HasTag("firestaff") and "dontstarve/wilson/attack_firestaff") or
                                     "dontstarve/wilson/attack_weapon"
                             elseif inst.sg.statemem.projectiledelay <= 0 then
@@ -662,7 +663,6 @@ env.AddStategraphPostInit("wilson", function(inst)
                         cooldown = math.max(cooldown, 16 * FRAMES)
                     end
                 elseif equip ~= nil and equip:HasTag("toolpunch") then
-
                     -- **** ANIMATION WARNING ****
                     -- **** ANIMATION WARNING ****
                     -- **** ANIMATION WARNING ****
@@ -715,7 +715,7 @@ env.AddStategraphPostInit("wilson", function(inst)
                         inst.sg.statemem.projectiledelay = 8 * FRAMES - equip.projectiledelay
                         if inst.sg.statemem.projectiledelay > FRAMES then
                             inst.sg.statemem.projectilesound =
-                            (equip:HasTag("icestaff") and "dontstarve/wilson/attack_icestaff") or
+                                (equip:HasTag("icestaff") and "dontstarve/wilson/attack_icestaff") or
                                 (equip:HasTag("firestaff") and "dontstarve/wilson/attack_firestaff") or
                                 "dontstarve/wilson/attack_weapon"
                         elseif inst.sg.statemem.projectiledelay <= 0 then
@@ -748,7 +748,7 @@ env.AddStategraphPostInit("wilson", function(inst)
                     inst.AnimState:PlayAnimation(
                         (
                         (inst.AnimState:IsCurrentAnimation("punch_a") or inst.AnimState:IsCurrentAnimation("punch_c"))
-                            and "punch_b") or
+                        and "punch_b") or
                         (inst.AnimState:IsCurrentAnimation("punch_b") and "punch_c") or
                         "punch_a"
                     )
@@ -1147,11 +1147,11 @@ env.AddStategraphPostInit("wilson", function(inst)
                     end
                     if DoTalkSound(inst) then
                         inst.sg.statemem.talktask =
-                        inst:DoTaskInTime(1.5 + math.random() * .5,
-                            function()
-                                inst.sg.statemem.talktask = nil
-                                StopTalkSound(inst)
-                            end)
+                            inst:DoTaskInTime(1.5 + math.random() * .5,
+                                function()
+                                    inst.sg.statemem.talktask = nil
+                                    StopTalkSound(inst)
+                                end)
                     end
                 end),
                 EventHandler("donetalking", function(inst)
@@ -1215,7 +1215,7 @@ env.AddStategraphPostInit("wilson", function(inst)
             --pickup_pst should still be playing
             inst.sg:GoToState("idle", true)
         end,
-        ]]   --
+        ]] --
 
             --[[
         onexit = function(inst)
@@ -1224,7 +1224,7 @@ env.AddStategraphPostInit("wilson", function(inst)
                 inst:ClearBufferedAction()
             end
         end,
-        ]]   --
+        ]] --
         },
 
         State {
@@ -1439,150 +1439,150 @@ env.AddStategraphPostInit("wilson", function(inst)
                 end
             end,
         },
-		
-		State{
-			name = "dreadeye_spooked",
-			tags = { "busy", "pausepredict" },
 
-			onenter = function(inst)
-				ForceStopHeavyLifting(inst)
-				inst.components.locomotor:Stop()
-				inst:ClearBufferedAction()
+        State {
+            name = "dreadeye_spooked",
+            tags = { "busy", "pausepredict" },
 
-				inst.AnimState:PlayAnimation("spooked")
+            onenter = function(inst)
+                ForceStopHeavyLifting(inst)
+                inst.components.locomotor:Stop()
+                inst:ClearBufferedAction()
 
-				if inst.components.playercontroller ~= nil then
-					inst.components.playercontroller:RemotePausePrediction()
-				end
-			end,
+                inst.AnimState:PlayAnimation("spooked")
 
-			timeline =
-			{
-				TimeEvent(20 * FRAMES, function(inst)
-					if inst.components.talker ~= nil then
-						inst.components.talker:Say(GetString(inst, "ANNOUNCE_DREADEYE_SPOOKED"))
-					end
-				end),
-				TimeEvent(49 * FRAMES, function(inst)
-					inst.sg:GoToState("idle", true)
-				end),
-			},
+                if inst.components.playercontroller ~= nil then
+                    inst.components.playercontroller:RemotePausePrediction()
+                end
+            end,
 
-			events =
-			{
-				EventHandler("ontalk", function(inst)
-					if inst.sg.statemem.talktask ~= nil then
-						inst.sg.statemem.talktask:Cancel()
-						inst.sg.statemem.talktask = nil
-						StopTalkSound(inst, true)
-					end
-					if DoTalkSound(inst) then
-						inst.sg.statemem.talktask =
-							inst:DoTaskInTime(1.5 + math.random() * .5,
-								function()
-									inst.sg.statemem.talktask = nil
-									StopTalkSound(inst)
-								end)
-					end
-				end),
-				EventHandler("donetalking", function(inst)
-					if inst.sg.statemem.talktalk ~= nil then
-						inst.sg.statemem.talktask:Cancel()
-						inst.sg.statemem.talktask = nil
-						StopTalkSound(inst)
-					end
-				end),
-				EventHandler("animover", function(inst)
-					if inst.AnimState:AnimDone() then
-						inst.sg:GoToState("idle")
-					end
-				end),
-			},
+            timeline =
+            {
+                TimeEvent(20 * FRAMES, function(inst)
+                    if inst.components.talker ~= nil then
+                        inst.components.talker:Say(GetString(inst, "ANNOUNCE_DREADEYE_SPOOKED"))
+                    end
+                end),
+                TimeEvent(49 * FRAMES, function(inst)
+                    inst.sg:GoToState("idle", true)
+                end),
+            },
 
-			onexit = function(inst)
-				if inst.sg.statemem.talktask ~= nil then
-					inst.sg.statemem.talktask:Cancel()
-					inst.sg.statemem.talktask = nil
-					StopTalkSound(inst)
-				end
-			end,
-		},
-		
-		State{
-			name = "charles_charge",
-			tags = { "canrotate", "busy" },
+            events =
+            {
+                EventHandler("ontalk", function(inst)
+                    if inst.sg.statemem.talktask ~= nil then
+                        inst.sg.statemem.talktask:Cancel()
+                        inst.sg.statemem.talktask = nil
+                        StopTalkSound(inst, true)
+                    end
+                    if DoTalkSound(inst) then
+                        inst.sg.statemem.talktask =
+                            inst:DoTaskInTime(1.5 + math.random() * .5,
+                                function()
+                                    inst.sg.statemem.talktask = nil
+                                    StopTalkSound(inst)
+                                end)
+                    end
+                end),
+                EventHandler("donetalking", function(inst)
+                    if inst.sg.statemem.talktalk ~= nil then
+                        inst.sg.statemem.talktask:Cancel()
+                        inst.sg.statemem.talktask = nil
+                        StopTalkSound(inst)
+                    end
+                end),
+                EventHandler("animover", function(inst)
+                    if inst.AnimState:AnimDone() then
+                        inst.sg:GoToState("idle")
+                    end
+                end),
+            },
 
-			onenter = function(inst)
-				inst.components.locomotor:Stop()
-				inst.components.locomotor:EnableGroundSpeedMultiplier(false)
-			
-				local buffaction = inst:GetBufferedAction()
-				if buffaction ~= nil and buffaction.pos ~= nil then
-					inst:ForceFacePoint(buffaction:GetActionPoint():Get())
-				elseif buffaction ~= nil and buffaction.target ~= nil then
-					inst:ForceFacePoint(buffaction.target:GetPosition())
-				end
-			
-				inst:PerformBufferedAction()
-				--inst.AnimState:PlayAnimation("spearjab_pre")
-				--inst.AnimState:PushAnimation("spearjab", false)
-				
-				inst.AnimState:PlayAnimation("spearjab")
-				
-				local fxcircle = SpawnPrefab("dreadeye_sanityburstring")
-				fxcircle:AddTag("ignore_transparency")
-				fxcircle.Transform:SetScale(1.3, 1.3, 1.3)
-				fxcircle.entity:SetParent(inst.entity)
-			end,
+            onexit = function(inst)
+                if inst.sg.statemem.talktask ~= nil then
+                    inst.sg.statemem.talktask:Cancel()
+                    inst.sg.statemem.talktask = nil
+                    StopTalkSound(inst)
+                end
+            end,
+        },
 
-			timeline =
-			{
-				TimeEvent(0 * FRAMES, function(inst)
-					inst.SoundEmitter:PlaySound("dontstarve/creatures/knight/attack")
-					
-					inst.Physics:SetMotorVelOverride(20,0,0)
-					
-					Check_Bowling(inst)
-				end),
-				
-				TimeEvent(5 * FRAMES, function(inst)
-					inst.Physics:ClearMotorVelOverride()
-					inst.Physics:SetMotorVelOverride(15,0,0)
-					Check_Bowling(inst)
-				end),
-				
-				TimeEvent(10 * FRAMES, function(inst)
-					inst.Physics:ClearMotorVelOverride()
-					inst.Physics:SetMotorVelOverride(10,0,0)
-					Check_Bowling(inst)
-				end),
-				
-				TimeEvent(15 * FRAMES, function(inst)
-					inst.Physics:ClearMotorVelOverride()
-					inst.Physics:SetMotorVelOverride(5,0,0)
-					Check_Bowling(inst)
-				end),
-				
-				TimeEvent(18 * FRAMES, function(inst)
-					inst.Physics:ClearMotorVelOverride()
-					inst.components.locomotor:EnableGroundSpeedMultiplier(true)
-					
-					inst.sg:RemoveStateTag("busy")
-				end),
-			},
+        State {
+            name = "charles_charge",
+            tags = { "canrotate", "busy" },
 
-			events =
-			{
-				EventHandler("animqueueover", function(inst)
-					inst.sg:GoToState("idle")
-				end),
-			},
+            onenter = function(inst)
+                inst.components.locomotor:Stop()
+                inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 
-			onexit = function(inst)
-				inst.components.locomotor:EnableGroundSpeedMultiplier(true)
-				inst.Physics:ClearMotorVelOverride()
-			end,
-		},
+                local buffaction = inst:GetBufferedAction()
+                if buffaction ~= nil and buffaction.pos ~= nil then
+                    inst:ForceFacePoint(buffaction:GetActionPoint():Get())
+                elseif buffaction ~= nil and buffaction.target ~= nil then
+                    inst:ForceFacePoint(buffaction.target:GetPosition())
+                end
+
+                inst:PerformBufferedAction()
+                --inst.AnimState:PlayAnimation("spearjab_pre")
+                --inst.AnimState:PushAnimation("spearjab", false)
+
+                inst.AnimState:PlayAnimation("spearjab")
+
+                local fxcircle = SpawnPrefab("dreadeye_sanityburstring")
+                fxcircle:AddTag("ignore_transparency")
+                fxcircle.Transform:SetScale(1.3, 1.3, 1.3)
+                fxcircle.entity:SetParent(inst.entity)
+            end,
+
+            timeline =
+            {
+                TimeEvent(0 * FRAMES, function(inst)
+                    inst.SoundEmitter:PlaySound("dontstarve/creatures/knight/attack")
+
+                    inst.Physics:SetMotorVelOverride(20, 0, 0)
+
+                    Check_Bowling(inst)
+                end),
+
+                TimeEvent(5 * FRAMES, function(inst)
+                    inst.Physics:ClearMotorVelOverride()
+                    inst.Physics:SetMotorVelOverride(15, 0, 0)
+                    Check_Bowling(inst)
+                end),
+
+                TimeEvent(10 * FRAMES, function(inst)
+                    inst.Physics:ClearMotorVelOverride()
+                    inst.Physics:SetMotorVelOverride(10, 0, 0)
+                    Check_Bowling(inst)
+                end),
+
+                TimeEvent(15 * FRAMES, function(inst)
+                    inst.Physics:ClearMotorVelOverride()
+                    inst.Physics:SetMotorVelOverride(5, 0, 0)
+                    Check_Bowling(inst)
+                end),
+
+                TimeEvent(18 * FRAMES, function(inst)
+                    inst.Physics:ClearMotorVelOverride()
+                    inst.components.locomotor:EnableGroundSpeedMultiplier(true)
+
+                    inst.sg:RemoveStateTag("busy")
+                end),
+            },
+
+            events =
+            {
+                EventHandler("animqueueover", function(inst)
+                    inst.sg:GoToState("idle")
+                end),
+            },
+
+            onexit = function(inst)
+                inst.components.locomotor:EnableGroundSpeedMultiplier(true)
+                inst.Physics:ClearMotorVelOverride()
+            end,
+        },
     }
 
     for k, v in pairs(events) do
@@ -1599,5 +1599,4 @@ env.AddStategraphPostInit("wilson", function(inst)
         assert(v:is_a(ActionHandler), "Non-action added in mod state table!")
         inst.actionhandlers[v.action] = v
     end
-
 end)

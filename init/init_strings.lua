@@ -310,8 +310,6 @@ STRINGS.TIDDLESTRANGER_RNE_ADVICE = {
 	},
 }
 
-
-
 STRINGS.STALKER_ATRIUM_WATHOM_BATTLECRY = {
 	"Don't repeat our history, fool.",
 	"You will doom yourself as we did.",
@@ -321,3 +319,4 @@ STRINGS.STALKER_ATRIUM_WATHOM_BATTLECRY = {
 	"I pity you, mimic.",
 }
 
+STRINGS.ACTIONS.NAME_FOCUS = "Set Custom Location Name"
