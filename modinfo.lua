@@ -1,7 +1,7 @@
 name = "󰀕 Uncompromising Mode"
 description =
 [[
-󰀔 [ Version 1.0.3: "Face Your Fears" ]
+󰀔 [ Version 1.0.4: "Face Your Fears" ]
 test3
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -15,7 +15,7 @@ Latest update features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Face Your Fears v1.0.3"
+version = "Face Your Fears v1.0.4"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
