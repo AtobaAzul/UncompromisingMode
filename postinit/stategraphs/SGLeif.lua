@@ -70,6 +70,8 @@ local states = {
             --V2C: don't trigger attack cooldown
             --inst.components.combat:StartAttack()
 			inst.sg.statemem.target = inst.components.combat.target
+			
+			inst.components.timer:StartTimer("snare_cd", 15)
         end,
 
         timeline =

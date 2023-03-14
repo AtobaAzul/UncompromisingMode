@@ -31,50 +31,56 @@ end
 
 local function DealDamage(inst, attacker, target, salty)
     if target ~= nil and target:IsValid() and target.components.combat ~= nil then
-        inst.finaldamage = (inst.damage * (1 + (inst.powerlevel / 2))) *
-        (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)
-
-        if salty ~= nil and salty and target.components.health ~= nil then
-            inst.finaldamage = inst.finaldamage / target.components.health:GetPercent()
-            print("salty damage = " .. inst.finaldamage)
-
-            if target:HasTag("snowish") then
-                inst.finaldamage = inst.finaldamage * 2
-            end
-        end
-
-        if no_aggro(attacker, target) then
-            target.components.combat:SetShouldAvoidAggro(attacker)
-        end
-
-        if target:HasTag("shadowcreature") or
-            target.sg == nil or
-            target.wixieammo_hitstuncd == nil and not
-            (target.sg:HasStateTag("busy") or
-            target.sg:HasStateTag("caninterrupt")) or
-            target.sg:HasStateTag("frozen") then
-            target.wixieammo_hitstuncd = target:DoTaskInTime(8, function()
-                if target.wixieammo_hitstuncd ~= nil then
-                    target.wixieammo_hitstuncd:Cancel()
-                end
-
-                target.wixieammo_hitstuncd = nil
-            end)
-
-            target.components.combat:GetAttacked(attacker, inst.finaldamage, inst)
-        else
-            target.components.combat:GetAttacked(attacker, 0, inst)
-            target.components.combat:SetTarget(attacker)
-            target.components.health:DoDelta(-inst.finaldamage, false, inst, false, attacker, false)
-        end
-
-        if target.components.combat ~= nil then
-            target.components.combat.temp_disable_aggro = false
-        end
-        if target.components.combat ~= nil then
-            target.components.combat:RemoveShouldAvoidAggro(attacker)
-        end
-        attacker.components.combat:SetTarget(target)
+	
+		inst.finaldamage = (inst.damage * (1 + (inst.powerlevel / 2))) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)
+		
+		if salty ~= nil and salty and target.components.health ~= nil then
+			inst.finaldamage = inst.finaldamage / target.components.health:GetPercent()
+			print("salty damage = "..inst.finaldamage)
+			
+			if target:HasTag("snowish") then
+				inst.finaldamage = inst.finaldamage * 2
+			end
+		end
+		
+		if no_aggro(attacker, target) then
+			target.components.combat:SetShouldAvoidAggro(attacker)
+		end
+		
+		if target:HasTag("shadowcreature") or 
+			target.sg == nil or 
+			target.wixieammo_hitstuncd == nil and not 
+			(target.sg:HasStateTag("busy") or 
+			target.sg:HasStateTag("caninterrupt")) or
+			target.sg:HasStateTag("frozen")	then
+			
+			target.wixieammo_hitstuncd = target:DoTaskInTime(8, function()
+				if target.wixieammo_hitstuncd ~= nil then
+					target.wixieammo_hitstuncd:Cancel()
+				end
+							
+				target.wixieammo_hitstuncd = nil
+			end)
+			
+			target.components.combat:GetAttacked(attacker, inst.finaldamage, inst)
+		else
+			target.components.combat:GetAttacked(attacker, 0, inst)
+			
+			if target.components.combat ~= nil then
+				target.components.combat:SetTarget(attacker)
+			end
+			
+			target.components.health:DoDelta(-inst.finaldamage, false, inst, false, attacker, false)
+		end
+		
+		if target.components.combat ~= nil then
+			target.components.combat.temp_disable_aggro = false
+			target.components.combat:RemoveShouldAvoidAggro(attacker)
+		end
+		
+		if attacker.components.combat ~= nil then
+			attacker.components.combat:SetTarget(target)
+		end
     end
 end
 

@@ -209,6 +209,8 @@ local function fn()
         return inst
     end
 
+	inst.should_go_tired = false
+			
     inst:SetStateGraph("SGhoodedwidow")
 
     inst:AddComponent("lootdropper")
@@ -226,7 +228,7 @@ local function fn()
     inst.components.health:SetMaxHealth(TUNING.DSTU.WIDOW_HEALTH)
     inst:AddComponent("healthtrigger")
     inst.components.healthtrigger:AddTrigger(0.5, function(inst)
-		inst.sg:GoToState("tired")
+		inst.should_go_tired = true
 	end)
     ------------------
     inst:AddComponent("knownlocations")

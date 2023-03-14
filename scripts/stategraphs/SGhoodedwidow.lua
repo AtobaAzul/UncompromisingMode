@@ -103,6 +103,11 @@ local states=
         name = "idle",
         tags = {"idle", "canrotate"},
         onenter = function(inst, playanim)
+			if inst.should_go_tired then
+				inst.sg:GoToState("tired")
+				inst.should_go_tired = false
+			end
+		
             inst.Physics:Stop()
 			inst.AnimState:PlayAnimation("idle", true)
 			if math.random() < .2 then

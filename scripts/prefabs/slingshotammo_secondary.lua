@@ -60,16 +60,24 @@ local function OnAttack(inst, attacker, target)
 				target.components.combat:GetAttacked(attacker, inst.finaldamage, inst)
 			else
 				target.components.combat:GetAttacked(attacker, 0, inst)
-				target.components.combat:SetTarget(attacker)
+				
+				if target.components.combat ~= nil then
+					target.components.combat:SetTarget(attacker)
+				end
+				
 				target.components.health:DoDelta(-inst.finaldamage, false, inst, false, attacker, false)
 			end
 		end
 		
 		ImpactFx(inst, attacker, target)
+		
 		if target.components.combat ~= nil then
 			target.components.combat:RemoveShouldAvoidAggro(attacker)
 		end
-		attacker.components.combat:SetTarget(target)
+		
+		if attacker.components.combat ~= nil then
+			attacker.components.combat:SetTarget(target)
+		end
 	end
 end
 
@@ -420,7 +428,9 @@ local function OnHit_Gold(inst, attacker, target)
 						
 						v.components.combat:GetAttacked(attacker, damage, inst)
 						
-						v.components.combat:RemoveShouldAvoidAggro(attacker)
+						if v.components.combat ~= nil then
+							v.components.combat:RemoveShouldAvoidAggro(attacker)
+						end
 					end
 				end
 			end

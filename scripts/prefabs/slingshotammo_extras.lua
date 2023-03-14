@@ -64,14 +64,21 @@ local function DealDamage(inst, attacker, target, salty)
 			target.components.combat:GetAttacked(attacker, inst.finaldamage, inst)
 		else
 			target.components.combat:GetAttacked(attacker, 0, inst)
-			target.components.combat:SetTarget(attacker)
+			
+			if target.components.combat ~= nil then
+				target.components.combat:SetTarget(attacker)
+			end
+			
 			target.components.health:DoDelta(-inst.finaldamage, false, inst, false, attacker, false)
 		end
-
+		
 		if target.components.combat ~= nil then
 			target.components.combat:RemoveShouldAvoidAggro(attacker)
 		end
-		attacker.components.combat:SetTarget(target)
+		
+		if attacker.components.combat ~= nil then
+			attacker.components.combat:SetTarget(target)
+		end
     end
 end
 
@@ -181,9 +188,11 @@ local function DoPop(inst, remaining, total, level, hissvol)
 						end
 					
 						v.components.combat:GetAttacked(inst, 10, inst)
-						v.components.combat:SetTarget(inst.attacker or nil)
 						
-						v.components.combat:RemoveShouldAvoidAggro(inst.attacker)
+						if v.components.combat ~= nil then
+							v.components.combat:SetTarget(inst.attacker or nil)
+							v.components.combat:RemoveShouldAvoidAggro(inst.attacker)
+						end
 					end
 				end
 			end
@@ -761,8 +770,10 @@ local function OnHit_Slime(inst, attacker, target)
 							end
 						
 							target.components.combat:GetAttacked(attacker, hitfx.damage, attacker)
-					
-							target.components.combat:RemoveShouldAvoidAggro(attacker)
+							
+							if target.components.combat ~= nil then
+								target.components.combat:RemoveShouldAvoidAggro(attacker)
+							end
 						end
 							
 						local debuffkey = hitfx.prefab
@@ -787,7 +798,9 @@ local function OnHit_Slime(inst, attacker, target)
 						
 							target.components.combat:GetAttacked(attacker, 50, attacker)
 							
-							target.components.combat:RemoveShouldAvoidAggro(attacker)
+							if target.components.combat ~= nil then
+								target.components.combat:RemoveShouldAvoidAggro(attacker)
+							end
 						end
 						
 						local debuffkey = hitfx.prefab
@@ -1091,11 +1104,17 @@ local function GlassCut(inst)
 						v.components.combat:GetAttacked(attacker, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), inst)
 					else
 						v.components.combat:GetAttacked(attacker, 0, inst)
-						v.components.combat:SetTarget(attacker)
+						
+						if v.components.combat ~= nil then
+							v.components.combat:SetTarget(attacker)
+						end
+						
 						v.components.health:DoDelta(-((7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)), false, inst, false, attacker, false)
 					end
 					
-					v.components.combat:RemoveShouldAvoidAggro(attacker)
+					if v.components.combat ~= nil then
+						v.components.combat:RemoveShouldAvoidAggro(attacker)
+					end
 				end
 			end
 		end
@@ -1138,11 +1157,16 @@ local function GlassCut(inst)
 						v.components.combat:GetAttacked(attacker, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), inst)
 					else
 						v.components.combat:GetAttacked(attacker, 0, inst)
-						v.components.combat:SetTarget(attacker)
+						
+						if v.components.combat ~= nil then
+							v.components.combat:SetTarget(attacker)
+						end
+						
 						v.components.health:DoDelta(-((7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)), false, inst, false, attacker, false)
 					end
+					
 					if v.components.combat ~= nil then
-					v.components.combat:RemoveShouldAvoidAggro(attacker)
+						v.components.combat:RemoveShouldAvoidAggro(attacker)
 					end
 				end
 			end
@@ -1623,8 +1647,10 @@ local function Rebound(inst, attacker, target)
 			end
 		
 			target.components.combat:GetAttacked(inst, 10, inst)
-
-			target.components.combat:RemoveShouldAvoidAggro(attacker)
+			
+			if target.components.combat ~= nil then
+				target.components.combat:RemoveShouldAvoidAggro(attacker)
+			end
 		end
 		
 		if inst.bouncecount <= inst.maxbounces then
@@ -1972,7 +1998,9 @@ local function Tremor(inst)
 					
 					v.components.combat:GetAttacked(inst.attacker, inst.finaldamage, inst)
 					
-					v.components.combat:RemoveShouldAvoidAggro(inst.attacker)
+					if v.components.combat ~= nil then
+						v.components.combat:RemoveShouldAvoidAggro(inst.attacker)
+					end
 				end
 			end
 		end

@@ -124,7 +124,8 @@ end
 
 local function Mounted(inst)
 	if (inst.replica.rider ~= nil and inst.replica.rider:IsRiding()) and not inst:HasTag("dismounting") 
-	and inst.replica.rider:GetMount() ~= nil and inst.replica.rider:GetMount():HasTag("woby") then
+	and inst.replica.rider:GetMount() ~= nil and inst.replica.rider:GetMount():HasTag("woby") and not
+	TheWorld.state.isnight then
 		inst:PushEvent("playwobymusic")
 	end
 end
