@@ -249,12 +249,7 @@ if GetModConfigData("worldgenmastertoggle") then
         if tasksetdata.location ~= "forest" then
             return
         end
-
-        table.insert(tasksetdata.required_prefabs, "wixie_wardrobe") --Make sure wixie appears.
-        table.insert(tasksetdata.required_prefabs, "wixie_clock")
-        table.insert(tasksetdata.required_prefabs, "wixie_piano")
-        table.insert(tasksetdata.required_prefabs, "charles_t_horse")
-
+        
 
         if (tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED) then
             if GetModConfigData("hoodedforest") then
@@ -271,6 +266,11 @@ if GetModConfigData("worldgenmastertoggle") then
             table.insert(tasksetdata.required_prefabs, "riceplantspawnerlarge")
             table.insert(tasksetdata.required_prefabs, "riceplantspawner")
         end
+
+        table.insert(tasksetdata.required_prefabs, "wixie_wardrobe") --Make sure wixie appears.
+        table.insert(tasksetdata.required_prefabs, "wixie_clock")
+        table.insert(tasksetdata.required_prefabs, "wixie_piano")
+        table.insert(tasksetdata.required_prefabs, "charles_t_horse")
     end)
 
     if GetModConfigData("caved") == false then
