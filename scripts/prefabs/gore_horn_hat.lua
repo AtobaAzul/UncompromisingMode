@@ -349,7 +349,7 @@ local function onothercollide(inst, other, owner)
 
 		if other.components.combat ~= nil then
 			other.components.combat:GetAttacked(owner, 150, nil)
-		elseif other.components.health ~= nil then
+		elseif other.components.health ~= nil and not other:HasTag("boat") then
 			other.components.health:DoDelta( -150)
 		end
 
