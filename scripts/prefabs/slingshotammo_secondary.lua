@@ -39,7 +39,7 @@ local function OnAttack(inst, attacker, target)
 		if inst.ammo_def ~= nil and inst.ammo_def.damage ~= nil then
 			inst.finaldamage = (inst.ammo_def.damage * (1 + (inst.powerlevel / 2))) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)
 		
-			if no_aggro(attacker, target) then
+			if no_aggro(attacker, target) and target.components.combat ~= nil then
 				target.components.combat:SetShouldAvoidAggro(attacker)
 			end
 			
@@ -293,7 +293,7 @@ local function OnHit_Distraction(inst, attacker, target)
 			target:PushEvent("attacked", { attacker = attacker, damage = 0, weapon = inst })
             attacker._doesnotdrawaggro = nil
 
-			if not target:HasTag("epic") then
+			if not target:HasTag("epic") and target.components.combat ~= nil then
 				target.components.combat:DropTarget()
 			end
 			

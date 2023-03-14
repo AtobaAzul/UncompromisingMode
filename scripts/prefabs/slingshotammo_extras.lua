@@ -67,8 +67,10 @@ local function DealDamage(inst, attacker, target, salty)
 			target.components.combat:SetTarget(attacker)
 			target.components.health:DoDelta(-inst.finaldamage, false, inst, false, attacker, false)
 		end
-		
-		target.components.combat:RemoveShouldAvoidAggro(attacker)
+
+		if target.components.combat ~= nil then
+			target.components.combat:RemoveShouldAvoidAggro(attacker)
+		end
 		attacker.components.combat:SetTarget(target)
     end
 end
@@ -1139,8 +1141,9 @@ local function GlassCut(inst)
 						v.components.combat:SetTarget(attacker)
 						v.components.health:DoDelta(-((7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)), false, inst, false, attacker, false)
 					end
-					
+					if v.components.combat ~= nil then
 					v.components.combat:RemoveShouldAvoidAggro(attacker)
+					end
 				end
 			end
 		end
