@@ -118,7 +118,7 @@ local function fn()
     inst.components.edible.oneaten = OnEaten
 
     inst:AddComponent("fuel")
-    inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL * 1.5
+    inst.components.fuel.fuelvalue = TUNING.LARGE_FUEL
     inst.components.fuel.fueltype = FUELTYPE.BATTERYPOWER
 
     return inst
