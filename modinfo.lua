@@ -6,7 +6,7 @@ description =
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
 Latest update features:
-- Wixie, the Delinquent & Walter Rework 
+- Wixie, the Delinquent & Walter Rework
 - Reworks to Crab King and Dread Eye and Trepidation.
 - New Winona perks
 - A ton of misc. changes, ranging from Wickerbottom's books to hounds.
