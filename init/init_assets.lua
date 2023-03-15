@@ -434,7 +434,6 @@ Assets = {
 	Asset("ANIM", "anim/meatrack_hat_swap_froglegs_poison.zip"),
 	
 	Asset("ANIM", "anim/status_meter_woby_small.zip"),
-	Asset("ANIM", "anim/status_meter_woby_big.zip"),
 	Asset("ANIM", "anim/woby_big_command.zip"),
 	Asset("ANIM", "anim/woby_does_a_flip.zip"),
 	
