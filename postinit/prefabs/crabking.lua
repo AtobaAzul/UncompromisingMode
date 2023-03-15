@@ -250,6 +250,8 @@ if env.GetModConfigData("ck_loot") then
 end
 
 env.AddPrefabPostInit("crabking", function(inst)
+	inst:AddTag("crab")
+
 	if not TheWorld.ismastersim then
 		return
 	end
@@ -300,7 +302,6 @@ env.AddPrefabPostInit("crabking", function(inst)
 		inst.attack_count = math.clamp(inst.attack_count + 1, 0, 10)
 
 		if inst.attack_count > math.random(5, 8) then
-			print("long attack cd time", 30 - inst.countgems(inst).yellow)
 
 			inst.components.timer:StartTimer("spell_cooldown", 30 - inst.countgems(inst).yellow)
 
@@ -320,7 +321,6 @@ env.AddPrefabPostInit("crabking", function(inst)
 				spawnwave(inst)
 			end)
 		else
-			print("attack cd time", atk_cd)
 			inst.components.timer:StartTimer("spell_cooldown", atk_cd)
 			inst:DoTaskInTime(atk_cd, function()
 				inst.wantstocast = true
@@ -442,7 +442,7 @@ env.AddPrefabPostInit("crabking", function(inst)
 
 		if boat_physics ~= nil then
 			if inst.components.health ~= nil then
-				inst.components.health:DoDelta(-1500 * math.abs(boat_physics:GetVelocity() * data.hit_dot_velocity))
+				inst.components.health:DoDelta(-300 * math.abs(boat_physics:GetVelocity() * data.hit_dot_velocity))
 			end
 		end
 

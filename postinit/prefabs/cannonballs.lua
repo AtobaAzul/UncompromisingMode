@@ -14,6 +14,7 @@ env.AddPrefabPostInit("cannonball_rock", function(inst)
     end
     if inst.components.complexprojectile ~= nil then --you never know...
         local _OnUpdate = inst.components.complexprojectile.onupdatefn
+
         inst.components.complexprojectile.onupdatefn = function(inst)
             local x, y, z = inst.Transform:GetWorldPosition()
 
