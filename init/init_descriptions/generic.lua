@@ -578,3 +578,5 @@ RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 	DESCRIBE.SMALLFISHMEAT_DRIED = "A little fishy."
 		
 	DESCRIBE.WIXIEGUN = "Science has gone too far."
+
+	ANNOUNCE.ATTACKED_CRABKING = "That shell is too tough! Maybe I should use the boat instead..."

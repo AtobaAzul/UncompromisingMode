@@ -249,12 +249,27 @@ if env.GetModConfigData("ck_loot") then
 		})
 end
 
+local function OnAttacked(inst, data)
+	if data.attacker.ck_attack_quote_cd ~= nil then
+		data.attacker.ck_attack_quote_cd:Cancel()
+		data.attacker.ck_attack_quote_cd = nil
+		data.attacker.ck_attack_quote_cd = data.attacker:DoTaskInTime(10, function () end)
+	end
+	
+	if data.attacker:HasTag("player") and data.attacker.components.talker ~= nil and data.attacker.ck_attack_quote_cd == nil then
+		data.attacker.components.talker:Say(GetString(inst, "ATTACKED_CRABKING"))
+		data.attacker.ck_attack_quote_cd = data.attacker:DoTaskInTime(10, function () end)
+	end
+end
+
 env.AddPrefabPostInit("crabking", function(inst)
 	inst:AddTag("crab")
 
 	if not TheWorld.ismastersim then
 		return
 	end
+
+	inst:ListenForEvent("attacked", OnAttacked)
 
 	inst:RemoveComponent("burnable")
 	inst:RemoveComponent("propagator")
@@ -302,7 +317,6 @@ env.AddPrefabPostInit("crabking", function(inst)
 		inst.attack_count = math.clamp(inst.attack_count + 1, 0, 10)
 
 		if inst.attack_count > math.random(5, 8) then
-
 			inst.components.timer:StartTimer("spell_cooldown", 30 - inst.countgems(inst).yellow)
 
 			inst.vulnerable_shine_task = inst:DoPeriodicTask(2, function()
@@ -349,7 +363,7 @@ env.AddPrefabPostInit("crabking", function(inst)
 
 	inst.components.lootdropper:AddChanceLoot("dormant_rain_horn", 1.00)
 
-	local types = 
+	local types =
 	{
 		"red",
 		"blue",
@@ -367,7 +381,7 @@ env.AddPrefabPostInit("crabking", function(inst)
 			local pos = inst:GetPosition()
 			local messagebottletreasures = require("messagebottletreasures_um")
 			local pearl = inst.countgems(inst).pearl * 1.5
-			local red = inst.countgems(inst).red - pearl 
+			local red = inst.countgems(inst).red - pearl
 			local blue = inst.countgems(inst).blue - pearl
 			local purple = inst.countgems(inst).purple - pearl
 			local yellow = inst.countgems(inst).yellow - pearl
@@ -426,7 +440,8 @@ env.AddPrefabPostInit("crabking", function(inst)
 			end
 
 			if count == 0 then
-				messagebottletreasures.GenerateTreasure(pos, "sunkenchest_royal_"..types[math.random(#types)]).Transform:SetPosition(
+				messagebottletreasures.GenerateTreasure(pos, "sunkenchest_royal_" .. types[math.random(#types)])
+					.Transform:SetPosition(
 					pos.x + math.random(-4, 4), pos.y, pos.z + math.random(-4, 4))
 				count = count + 1
 			end
