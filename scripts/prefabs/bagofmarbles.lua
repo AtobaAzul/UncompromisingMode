@@ -403,7 +403,10 @@ local function slipperymarblesfn()
 							
 							local giantreduction = v:HasTag("epic") and 2 or v:HasTag("smallcreature") and 0.8 or 1
 									
-							
+							if px == nil or py == nil or pz == nil then--just to be sure...
+								return
+							end
+
 							local dx, dy, dz = px + (((3 / (i + 3)) * velx) / giantreduction), py, pz + (((3 / (i + 3)) * velz) / giantreduction)
 													
 							--local dx, dy, dz = px - (((FRAMES * 4) * velx) / multiplierplayer) * inst.Transform:GetScale(), py, pz - (((FRAMES * 4) * velz) / multiplierplayer) * inst.Transform:GetScale()
