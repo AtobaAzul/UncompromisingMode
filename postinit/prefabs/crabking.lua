@@ -1,28 +1,3 @@
---[[
-	LOOT
-
-	Opal: Crab Bumper
-		Crab bumper allows socketing a gem to give it different effects
-		blue - bounce back
-		red - increased boat and bumper health
-		purple - prevent sanity monsters from aggro'ing on the boat
-		green - bumper doesn't fully break, ramming things gives extra resources
-		orange - teleports you to land/a boat if you were to drown nearby
-		yellow - increased speed multiplier + glow
-		opal - boat gains a sanity aura, glows and has additional 50% genering health in the form of growing glass.
-
-	Blue: Rain Horn DONE
-
-	Red: Armor that increases max health DONE
-
-	Purple: Trident NEED TO REWORK
-
-	Orange: Headwear that makes repairing/healing/sewing whatever 2x more effective DONE
-
-	Yellow: Extremely rapid-fire "starfall" staff DONE
-
-	Green: Self-healing armor DONE
-]]
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 
@@ -38,7 +13,7 @@ local CRABKING_SPELLGENERATOR_TAGS = { "crabking_spellgenerator" }
 
 local function DoLineAttack(inst, rand_start)
 	local ck_x, ck_y, ck_z = inst.Transform:GetWorldPosition()
-	local target = inst.components.combat ~= nil and inst.components.combat.target
+	local target = inst.all_targets[math.random(#inst.all_targets)]
 
 	if target == nil then
 		local boats = TheSim:FindEntities(ck_x, ck_y, ck_z, 25, { "boat" })
@@ -105,7 +80,7 @@ end
 
 local function DoSeekingAttack(inst)
 	local ck_x, ck_y, ck_z = inst.Transform:GetWorldPosition()
-	local target = inst.components.combat ~= nil and inst.components.combat.target
+	local target = inst.all_targets[math.random(#inst.all_targets)]
 
 	if target == nil then
 		local boats = TheSim:FindEntities(ck_x, ck_y, ck_z, 25, { "boat" })
@@ -190,10 +165,13 @@ local TARGET_DIST = 48
 
 local function RetargetFn(inst)
 	local range = inst:GetPhysicsRadius(0) + 8
+	local x,y,z = inst.Transform:GetWorldPosition()
+	inst.all_targets = TheSim:FindEntities(x,y,z, TARGET_DIST, RETARGET_MUST_TAGS, RETARGET_CANT_TAGS)
 	return FindEntity(
 		inst,
 		TARGET_DIST,
 		function(guy)
+			
 			return inst.components.combat:CanTarget(guy)
 				and (guy.components.combat:TargetIs(inst) or
 				guy:IsNear(inst, range)
@@ -343,7 +321,7 @@ env.AddPrefabPostInit("crabking", function(inst)
 	end
 
 	inst.startcastspell = function(inst, freeze)
-		for i = 1, 3 do
+		for i = 1, 3+(#inst.all_targets-1) do
 			if math.random() >= 0.25 then
 				if math.random() >= 0.66 then
 					inst:DoTaskInTime(i * GetRandomWithVariance(0.5, 0.75), function()
