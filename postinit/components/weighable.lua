@@ -10,7 +10,7 @@ local fishdata = {
     --{meatprefab, meatvalue, extraitems, israre }
     oceanfish_medium_1 = {"fishmeat", 1}, --mudfish
     oceanfish_medium_2 = {"fishmeat", 1}, --deep bass
-    oceanfish_medium_3 = {"fishmeat", 2, {"fishmeat_small"}, true}, --dandy lionfish
+    oceanfish_medium_3 = {"fishmeat", 3, {"fishmeat_small"}, true}, --dandy lionfish
     oceanfish_medium_4 = {"fishmeat", 2, {"fishmeat_small"}}, --black catfish
     oceanfish_medium_5 = {"corn", 2, {"corn_seeds"}}, --corn cod
     oceanfish_medium_6 = {"fishmeat", 2, nil, true}, --dappled koi
