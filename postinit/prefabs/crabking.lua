@@ -13,7 +13,7 @@ local CRABKING_SPELLGENERATOR_TAGS = { "crabking_spellgenerator" }
 
 local function DoLineAttack(inst, rand_start)
 	local ck_x, ck_y, ck_z = inst.Transform:GetWorldPosition()
-	local target = inst.all_targets[math.random(#inst.all_targets)]
+	local target = #inst.all_targets > 1 and inst.all_targets[math.random(#inst.all_targets)] or inst.components.combat ~= nil and inst.components.combat.target
 
 	if target == nil then
 		local boats = TheSim:FindEntities(ck_x, ck_y, ck_z, 25, { "boat" })
@@ -80,7 +80,7 @@ end
 
 local function DoSeekingAttack(inst)
 	local ck_x, ck_y, ck_z = inst.Transform:GetWorldPosition()
-	local target = inst.all_targets[math.random(#inst.all_targets)]
+	local target = #inst.all_targets > 1 and inst.all_targets[math.random(#inst.all_targets)] or inst.components.combat ~= nil and inst.components.combat.target
 
 	if target == nil then
 		local boats = TheSim:FindEntities(ck_x, ck_y, ck_z, 25, { "boat" })
@@ -94,7 +94,6 @@ local function DoSeekingAttack(inst)
 		local targetfocus = target
 
 		local px, py, pz = targetfocus.Transform:GetWorldPosition()
-
 
 		local dist = math.sqrt(distsq(ix, iz, px, pz)) + 24
 
@@ -165,13 +164,21 @@ local TARGET_DIST = 48
 
 local function RetargetFn(inst)
 	local range = inst:GetPhysicsRadius(0) + 8
-	local x,y,z = inst.Transform:GetWorldPosition()
-	inst.all_targets = TheSim:FindEntities(x,y,z, TARGET_DIST, RETARGET_MUST_TAGS, RETARGET_CANT_TAGS)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	local ents = TheSim:FindEntities(x, y, z, TARGET_DIST, RETARGET_MUST_TAGS, RETARGET_CANT_TAGS)
+	inst.all_targets = {}
+
+	for k, v in ipairs(ents) do
+		if inst.components.combat:CanTarget(v)
+			and (v.components.combat:TargetIs(inst) or v:IsNear(inst, range)) then
+			table.insert(inst.all_targets, v)
+		end
+	end
+
 	return FindEntity(
 		inst,
 		TARGET_DIST,
 		function(guy)
-			
 			return inst.components.combat:CanTarget(guy)
 				and (guy.components.combat:TargetIs(inst) or
 				guy:IsNear(inst, range)
@@ -231,12 +238,14 @@ local function OnAttacked(inst, data)
 	if data.attacker.ck_attack_quote_cd ~= nil then
 		data.attacker.ck_attack_quote_cd:Cancel()
 		data.attacker.ck_attack_quote_cd = nil
-		data.attacker.ck_attack_quote_cd = data.attacker:DoTaskInTime(10, function () end)
+		data.attacker.ck_attack_quote_cd = data.attacker:DoTaskInTime(10, function()
+		end)
 	end
-	
+
 	if data.attacker:HasTag("player") and data.attacker.components.talker ~= nil and data.attacker.ck_attack_quote_cd == nil then
 		data.attacker.components.talker:Say(GetString(inst, "ATTACKED_CRABKING"))
-		data.attacker.ck_attack_quote_cd = data.attacker:DoTaskInTime(10, function () end)
+		data.attacker.ck_attack_quote_cd = data.attacker:DoTaskInTime(10, function()
+		end)
 	end
 end
 
@@ -321,7 +330,7 @@ env.AddPrefabPostInit("crabking", function(inst)
 	end
 
 	inst.startcastspell = function(inst, freeze)
-		for i = 1, 3+(#inst.all_targets-1) do
+		for i = 1, math.clamp(3 + (#inst.all_targets - 1), 1, 10) do
 			if math.random() >= 0.25 then
 				if math.random() >= 0.66 then
 					inst:DoTaskInTime(i * GetRandomWithVariance(0.5, 0.75), function()
