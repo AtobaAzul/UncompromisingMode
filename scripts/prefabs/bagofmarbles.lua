@@ -37,7 +37,7 @@ local function OnHit_Marbles(inst, attacker, target)
 		local maxrange = TUNING.FIRE_DETECTOR_RANGE
 		local speed = easing.linear(rangesq, maxrange, 5, maxrange * maxrange)
 		marble.components.complexprojectile:SetHorizontalSpeed(25)
-		marble.components.complexprojectile:SetGravity(-30)
+		marble.components.complexprojectile:SetGravity(-50)
 		marble.components.complexprojectile:SetLaunchOffset(Vector3(0, .25, 0))
 		marble.components.complexprojectile.usehigharc = true
 		marble.components.complexprojectile:Launch(targetpos, inst, inst)
