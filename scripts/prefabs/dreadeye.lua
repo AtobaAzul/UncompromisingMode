@@ -393,6 +393,7 @@ local function fn()
     inst:AddTag("monster")
     inst:AddTag("hostile")
     inst:AddTag("shadow")
+	inst:AddTag("shadow_aligned")
     inst:AddTag("notraptrigger")
 	inst:AddTag("ignorewalkableplatforms")
 
@@ -689,6 +690,12 @@ local situational_disguises =
 		build = "evergreen_new_2",
 		anim = "idle_normal",
 	},
+	{
+		name = "trapdoorgrass",
+		bank = "trapdoorgrass",
+		build = "trapdoorgrass",
+		anim = "idle",
+	},
 }
 
 local cave_disguises =
@@ -819,6 +826,8 @@ local function shadowdisguise_fn(bank, build, anim, icon, tag, multcolour)
 
     inst:AddComponent("transparentonsanity_dreadeye_objects")
 
+	MakeSnowCoveredPristine(inst)
+	
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -944,6 +953,8 @@ local function shadowdisguise_fn(bank, build, anim, icon, tag, multcolour)
 			end
 		end
 	end)
+	
+	MakeSnowCovered(inst)
 	
     return inst
 end

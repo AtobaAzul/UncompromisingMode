@@ -29,7 +29,6 @@ local function fn()
 
     inst:AddComponent("inspectable")
 	
-
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/blueberrypancakes.xml"
     inst:AddComponent("edible")
@@ -39,7 +38,7 @@ local function fn()
     inst.components.edible.foodtype = FOODTYPE.VEGGIE
 	inst:AddComponent("tradable")
     inst:AddComponent("perishable")
-    inst.components.perishable:SetPerishTime((5*TUNING.PERISH_TWO_DAY))
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_SLOW) -- 15 days
     inst.components.perishable:StartPerishing()
     inst.components.perishable.onperishreplacement = "spoiled_food"
 

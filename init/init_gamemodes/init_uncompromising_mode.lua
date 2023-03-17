@@ -97,7 +97,6 @@ modimport("init/init_creatures/init_knockback")
 
 if GetModConfigData("harder_shadows") then
 	modimport("init/init_creatures/init_harder_shadows")
-	--modimport("init/init_creatures/init_shadowspawner")
 	modimport("postinit/prefabs/shadowcreature")
 	modimport("postinit/stategraphs/SGshadowcreature")
 end

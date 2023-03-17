@@ -540,15 +540,15 @@ return{
 
 
 	ANNOUNCE_DAMP = "I hate the rain.",
-	ANNOUNCE_WET = "Ugh, it's like wearing an extra layer.",
+	ANNOUNCE_WET = "Rain, rain, go away. Please.",
 	ANNOUNCE_WETTER = "I don't like being drenched by all this water...",
-	ANNOUNCE_SOAKED = "I feel crowded! Get this water off me!",
+	ANNOUNCE_SOAKED = "Am I melting?! I feel like I'm melting!",
 
 	ANNOUNCE_WASHED_ASHORE = "I hate swimming, I prefer open air...",
 
     ANNOUNCE_DESPAWN = "Oh, my head...",
 	ANNOUNCE_BECOMEGHOST = "Boo!",
-	ANNOUNCE_GHOSTDRAIN = "How come everyones dying but me?",
+	ANNOUNCE_GHOSTDRAIN = "How come everyone is dying but me?",
 	ANNOUNCE_PETRIFED_TREES = "Did they turn to rock? Or are they... encased by it?",
 	ANNOUNCE_KLAUS_ENRAGE = "Now he's even scarier!",
 	ANNOUNCE_KLAUS_UNCHAINED = "He's unleashed, and after me!",
@@ -676,7 +676,7 @@ return{
     ANNOUNCE_ATTACH_BUFF_ATTACK            = "Hot head? HOT HEAD?! I'LL SHOW YOU A HOT HEAD!!",
     ANNOUNCE_ATTACH_BUFF_PLAYERABSORPTION  = "What can I say? I've got thick skin!",
     ANNOUNCE_ATTACH_BUFF_WORKEFFECTIVENESS = "I could get my chores done in half the time!",
-    ANNOUNCE_ATTACH_BUFF_MOISTUREIMMUNITY  = "Now I can rough house in the rain without getting wet!",
+    ANNOUNCE_ATTACH_BUFF_MOISTUREIMMUNITY  = "Now I can roughhouse in the rain without getting wet!",
     ANNOUNCE_ATTACH_BUFF_SLEEPRESISTANCE   = "I wasn't planning on sleeping anyways.",
 
     ANNOUNCE_DETACH_BUFF_ELECTRICATTACK    = "I've lost my glow.",
@@ -1578,7 +1578,7 @@ return{
 		BEEFALO =
 		{
 			FOLLOWER = "Oh no, it's following me.",
-			GENERIC = "Take a bath!",
+			GENERIC = "It's like a horse, but more fat and smelly.",
 			NAKED = "Look how sad it looks! Ha-ha!",
 			SLEEPING = "Now is the perfect time for a prank!",
             --Domesticated states:
@@ -1769,7 +1769,7 @@ return{
         CHESSPIECE_BEEFALO = "What a dope.",
 		CHESSPIECE_KITCOON = "I'm going to knock it over!",
 		CHESSPIECE_CATCOON = "Caught red handed!",
-        CHESSPIECE_MANRABBIT = "Their smugness irritates me.", -- spelling
+        CHESSPIECE_MANRABBIT = "Their smugness irritates me.",
         CHESSPIECE_GUARDIANPHASE3 = "A reminder of the time we killed an alien. That was fun.",
         CHESSPIECE_EYEOFTERROR = "It looks shocked. How can an EYEBALL look shocked?",
         CHESSPIECE_TWINSOFTERROR = "Boy, am I sure glad I don't have a whiney sibling!",
@@ -1917,7 +1917,7 @@ return{
 		DURIAN_COOKED = "Yum, roasted gym socks.",
 		DURIAN_SEEDS = "I hate gardening!",
 		EARMUFFSHAT = "Atleast it doesn't mess up my bow!",
-		EGGPLANT = "I could go for a good eggplant parmesan right about now.", -- check spelling
+		EGGPLANT = "I could go for a good eggplant parmesan right about now.",
 		EGGPLANT_COOKED = "It's definitely my favorite vegetable!",
 		EGGPLANT_SEEDS = "I hate gardening!",
 
@@ -2140,7 +2140,7 @@ return{
 		},
 		JAMMYPRESERVES = "It's just mashed berries, nothing to it.",
 
-		KABOBS = "The food has been impaled!", -- spelling
+		KABOBS = "The food has been impaled!",
 		KILLERBEE =
 		{
 			GENERIC = "How can something so small be a killer?",
@@ -2234,7 +2234,7 @@ return{
         },
         MERMHOUSE =
         {
-            GENERIC = "I hate communal homes...", -- spelling
+            GENERIC = "I hate communal homes...",
             BURNT = "Well, it's not much of a home anymore.",
         },
         MINERHAT = "I'm a bright minded individual!",
@@ -2312,7 +2312,7 @@ return{
             WEREPIG = "Furry fury!",
         },
         PIGSKIN = "Who wants to play football? Full contact!",
-        PIGTENT = "Tentative, at best.", -- spelling
+        PIGTENT = "Tentative, at best.",
         PIGTORCH = "Look at their dumb little faces.",
         PINECONE = "Maybe I could chuck it at someone.",
         PINECONE_SAPLING = "This should only take... what, thirty years?",
@@ -2355,7 +2355,7 @@ return{
             GENERIC = "What a waste of supplies.",
             BURNT = "Couldn't see that coming, could you?",
         },
-        RAINCOAT = "Now I can roughhouse in the rain!", -- spelling
+        RAINCOAT = "Now I can roughhouse in the rain!",
         RAINHAT = "I hate it when my hair gets wet.",
         RATATOUILLE = "It looks like someone beat up a salad.",
         RAZOR = "Sleep with an eye open, unless you don't mind losing your eyebrows!",
@@ -2399,7 +2399,7 @@ return{
         },
         RESURRECTIONSTATUE =
         {
-            GENERIC = "I tried sculpting my likeness, and this is what came out...",
+            GENERIC = "I sculpted the dumbest thing I can think of.",
             BURNT = "I wasn't proud of that piece anyways.",
         },
         RESURRECTIONSTONE = "I do like touching stuff...",
@@ -2620,7 +2620,7 @@ return{
 		TORCH = "Ah yes, fire on a stick.",
 		TRANSISTOR = "I think I saw these in that radio I brok- I mean, uh...",
 		TRAP = "I don't know how I made it, to be honest.",
-		TRAP_TEETH = "I'm particularly proud of this one.", -- spelling
+		TRAP_TEETH = "I'm particularly proud of this one.",
 		TRAP_TEETH_MAXWELL = "I'd like to meet whoever made these!", --single player
 		TREASURECHEST =
 		{
@@ -3224,7 +3224,7 @@ return{
 
 		QUAGMIRE_KEY = "What could it unlock?",
 		QUAGMIRE_KEY_PARK = "No private property is safe from me!",
-        QUAGMIRE_PORTAL_KEY = "I'm sick of this sickly place, lets get out of here!", -- spelling (lets?)
+        QUAGMIRE_PORTAL_KEY = "I'm sick of this sickly place, let's get out of here!",
 
 
 		QUAGMIRE_MUSHROOMSTUMP =
@@ -3240,7 +3240,7 @@ return{
 		QUAGMIRE_RUBBLE_CARRIAGE = "Is this what old people traveled in?",
         QUAGMIRE_RUBBLE_CLOCK = "Someone smashed their alarm clock.",
         QUAGMIRE_RUBBLE_CATHEDRAL = "No more church. No more free snacks...",
-        QUAGMIRE_RUBBLE_PUBDOOR = "Now I'll never see what's inside!", -- spelling (what's)
+        QUAGMIRE_RUBBLE_PUBDOOR = "Now I'll never see what's inside!",
         QUAGMIRE_RUBBLE_ROOF = "Atleast the roof is intact. Mostly.",
         QUAGMIRE_RUBBLE_CLOCKTOWER = "Is that why time has stopped here?",
         QUAGMIRE_RUBBLE_BIKE = "I miss my bike.", -- lore :)
@@ -3424,7 +3424,7 @@ return{
         {
         	BARREN = "Aw, this doesn't rock.",
 			WITHERED = "I guess rocks don't like the heat.",
-			GENERIC = "And thats how rocks are made!", -- spelling that's or thats
+			GENERIC = "And that's how rocks are made!",
 			PICKED = "All the ripe rocks have been picked.",
 			DISEASED = "I can't tell if this is normal or not.", --unimplemented
             DISEASING = "These rocks are attracting flies.", --unimplemented

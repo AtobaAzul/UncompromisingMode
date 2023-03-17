@@ -21,6 +21,7 @@ end)
 env.AddComponentPostInit("fishingnetvisualizer", function(self)
 	local _OldBeginOpening = self.BeginOpening
 	local _OldDropItem = self.DropItem
+	local SHOAL_MUST_TAGS = { "oceanshoalspawner" }
 	
 	function self:BeginOpening()
 		_OldBeginOpening(self)
@@ -68,8 +69,17 @@ env.AddComponentPostInit("fishingnetvisualizer", function(self)
 					
 					table.insert(self.captured_entities, fish)
 					self.captured_entities_collect_distance[fish] = 0
+					
+					-- An ocean shoal nearby? Send an event to notify listners
+                    local shoals = TheSim:FindEntities(my_x, my_y, my_z, 16, SHOAL_MUST_TAGS)
+                    if shoals ~= nil then
+                        local shoal = shoals[1]
+                        TheWorld:PushEvent("ms_shoalfishhooked", shoal)
+                    end
 				end
 			end
+			
+			
 		end
 		
 		--return _OldBeginOpening(self)

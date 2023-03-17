@@ -175,7 +175,7 @@ local states =
 
     State{
         name = "disguise_pre",
-        tags = { "disguise", "busy", "disguised" }, -- , "busy" 
+        tags = { "disguise", "busy", "disguised", "noattack" }, -- , "busy" 
 
         onenter = function(inst)
             PlayExtendedSound(inst, "death")
@@ -239,6 +239,7 @@ local states =
         },
 
         onexit = function(inst)
+			inst.isdisguised = false
 			inst.components.health:SetInvincible(false)
         end,
     },
@@ -363,7 +364,8 @@ local states =
         {
             EventHandler("animqueueover", function(inst)
                 if math.random() < 0.333 then
-                    inst.components.combat:SetTarget(nil)
+                    --inst.components.combat:SetTarget(nil)
+                    inst.components.combat:DropTarget()
                     inst.sg:GoToState("taunt")
                 else
                     inst.sg:GoToState("idle_busy")
