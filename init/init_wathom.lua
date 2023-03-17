@@ -417,7 +417,6 @@ AddStategraphPostInit("wilson", function(inst)
 			tags = { "attack", "backstab", "busy", "notalking", "abouttoattack", "pausepredict", "nointerrupt" },
 
 			onenter = function(inst, data)
-				--SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "ToggleLagCompOff"), nil)
 				Effect(inst)
 				local buffaction = inst:GetBufferedAction()
 				local target = buffaction ~= nil and buffaction.target or nil
@@ -438,7 +437,6 @@ AddStategraphPostInit("wilson", function(inst)
 			end,
 
 			onexit = function(inst)
-				--SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "ToggleLagCompOn"), nil)
 				--            inst.components.health:SetInvincible(false)
 				inst.components.combat:SetTarget(nil)
 				if inst.sg:HasStateTag("abouttoattack") then
@@ -494,12 +492,16 @@ AddStategraphPostInit("wilson", function(inst)
 				end),
 
 				TimeEvent(14 * FRAMES, function(inst) -- this is when the target gets hit
-					if inst:HasTag("amped") then
+					if inst:HasTag("amped") and not inst:HasTag("wearingheavyarmor") then
 						inst.leapvelocity = 15
-					elseif inst.components.adrenaline:GetPercent() > 0.24 and inst.components.adrenaline:GetPercent() < 0.51 then
-						inst.leapvelocity = 10
+					elseif inst.components.adrenaline:GetPercent() > 0.24 and inst.components.adrenaline:GetPercent() < 0.51 and not inst:HasTag("wearingheavyarmor") then
+						inst.leapvelocity = 5 -- originally 10, lets see how this goes.
+					elseif inst.components.adrenaline:GetPercent() > 0.50 and inst.components.adrenaline:GetPercent() < 0.75 and not inst:HasTag("wearingheavyarmor") then
+						inst.leapvelocity = 7.5 -- * (inst.components.adrenaline:GetPercent() + .5)
+					elseif inst.components.adrenaline:GetPercent() > 0.74 and inst.components.adrenaline:GetPercent() < 1 and not inst:HasTag("wearingheavyarmor") then
+						inst.leapvelocity = 12.5 -- this is used in between 75 and 100 (Amped).
 					else
-						inst.leapvelocity = 10 * (inst.components.adrenaline:GetPercent() + .5)
+						inst.leapvelocity = 0 --Either Wathom has the "wearingheavyarmor" tag, is under 25 adrenaline (ie fatigued) or the game is somehow not reading the Adrenaline meter.
 					end
 					SpawnPrefab("dirt_puff").Transform:SetPosition(inst.Transform:GetWorldPosition())
 				end),
@@ -850,7 +852,6 @@ end
 
 AddPlayerPostInit(function(inst)
 	if inst:HasTag("wathom") then
-
 		inst.counter_max = GLOBAL.net_shortint(inst.GUID, "counter_max", "counter_maxdirty")
 		inst.counter_current = GLOBAL.net_shortint(inst.GUID, "counter_current", "counter_currentdirty")
 
@@ -929,7 +930,7 @@ AddClassPostConstruct("widgets/statusdisplays", AmpbadgeDisplays)
 STRINGS.CHARACTER_TITLES.wathom = "The Forgotten Parody"
 STRINGS.CHARACTER_NAMES.wathom = "Wathom"
 STRINGS.CHARACTER_DESCRIPTIONS.wathom = "*Apex Predator\n*Gets amped up with adrenaline\n*Causes animals to panic\n*The faster he goes, the harder he falls"
-STRINGS.CHARACTER_QUOTES.wathom = "\"Cruel, the abyss. Either do, or die.\""
+STRINGS.CHARACTER_QUOTES.wathom = "\"Cruel, the abyss.\""
 STRINGS.CHARACTER_SURVIVABILITY.wathom = "Slim"
 
 -- Custom speech strings
