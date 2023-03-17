@@ -407,7 +407,6 @@ local common_postinit = function(inst)
 	inst:AddTag("wathom") -- Tells the game to switch the character's attacks to leaping, as well as switch some insanity sources around to give sanity instead.
 	inst:AddTag("monster")
 	inst:AddTag("playermonster")
-	inst:AddTag("shadowdominance") -- Taken from Bone Helm, making shadow creatures neutral. 
 	inst:AddTag("nightvision")
 	
 	inst.OnLoad = onload
