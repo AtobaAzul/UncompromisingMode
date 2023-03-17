@@ -86,7 +86,7 @@ if TUNING.DSTU.WICKERNERF_MOONBOOK then
 				fx.Transform:SetPosition(x, y, z)
 			end --should this be an elseif?
 
-			if v.components.werebeast ~= nil then
+			if v.components.werebeast ~= nil and not v.components.werebeast:IsInWereState() then
 				v.components.werebeast:SetWere(1)
 				local fx = SpawnPrefab("halloween_moonpuff")
 				fx.Transform:SetPosition(x, y, z)
