@@ -301,35 +301,31 @@ local function UpdateAdrenaline(inst, data)
 
 	--seperate 'if's so all sounds can play at once,in theory. (And I don't have to worry about elseif order...)
 	if data.oldpercent < 0.75 and data.newpercent >= 0.75 then
-		print("when wathom passes 75")
 		SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomAdrenalineStinger"), inst.userid,
 			"wathom_ampstage_04")
 	end
 	if data.oldpercent < 0.5 and data.newpercent >= 0.5 then
-		print("when wathom passes 50")
 		SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomAdrenalineStinger"), inst.userid,
 			"wathom_ampstage_02")
 	end
 
 	if data.oldpercent >= 0.5 and data.newpercent < 0.5 then
-		print("when wathom lowers to 50")
 		SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomAdrenalineStinger"), inst.userid, "wathom_breathe")
 	end
 	if data.oldpercent >= 0.25 and data.newpercent < 0.25 and not inst:HasTag("amped") then
-		print("when wathom lowers to 25")
 		SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomAdrenalineStinger"), inst.userid, "wathom_breathe")
 	end
 	if data.oldpercent >= 0 and data.newpercent == 0 and inst:HasTag("amped") then
-		print("when wathom amp ends")
 		SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomAdrenalineStinger"), inst.userid, "wathom_breathe")
 	end
 
 	if (AmpLevel > 0.75 or inst:HasTag("amped")) and not inst:HasTag("wathomrun") and
 		(inst.components.rider ~= nil and not inst.components.rider:IsRiding() or inst.components.rider == nil) then --Handle VVathom Running
 		inst:AddTag("wathomrun")
-	elseif inst:HasTag("wathomrun") and not (AmpLevel > 0.5 or inst:HasTag("amped")) then
+	elseif inst:HasTag("wathomrun") and not (AmpLevel > 0.5 or inst:HasTag("amped")) or inst.components.rider ~= nil and not inst.components.rider:IsRiding() then
 		inst:RemoveTag("wathomrun")
 	end
+
 	if AmpLevel == 0 and inst:HasTag("amped") then
 		UnAmp(inst)
 	elseif AmpLevel < 0.25 and not inst:HasTag("amped") then
