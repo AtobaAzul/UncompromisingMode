@@ -123,7 +123,7 @@ env.AddStategraphPostInit("wilson", function(inst)
 
     local SLEEPREPEL_MUST_TAGS = { "_combat" }
     local SLEEPREPEL_CANT_TAGS = { "player", "companion", "shadow", "playerghost", "INLIMBO", "wixieshoved", "invisible",
-        "hiding", "NOTARGET", "flight" }
+        "hiding", "NOTARGET", "flight", "toadstool" }
 
     local function Check_Bowling(inst)
         if inst ~= nil then

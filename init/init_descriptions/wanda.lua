@@ -59,7 +59,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WANDA.ACTIONFAIL
         }
 	DESCRIBE.WIXIE =
         {
-            GENERIC = "% makes me want to jump from this timeline.",
+            GENERIC = "%s makes me want to jump from this timeline.",
             ATTACKER = "Respect your elders, %s!",
             MURDERER = "Violent youth are an issue around here!",
             REVIVER = "Whats your angle, %s?",

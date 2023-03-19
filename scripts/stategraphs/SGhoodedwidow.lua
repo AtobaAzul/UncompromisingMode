@@ -123,7 +123,7 @@ local states=
 
     State{
         name = "attack",
-        tags = {"attack"},
+        tags = {"attack", "busy"},
 
         onenter = function(inst, target)
             inst.Physics:Stop()

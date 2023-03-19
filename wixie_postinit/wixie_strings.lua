@@ -6,6 +6,9 @@ ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.WIXIE
 DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WIXIE.DESCRIBE
 ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WIXIE.ACTIONFAIL
 
+GLOBAL.STRINGS.NAMES.WIXIE = "Wixie"
+STRINGS.CHARACTER_NAMES.wixie = "Wixie"
+
 --	[ 		Wixie Descriptions		]	--
 
 	ANNOUNCE.EQUIP_CHARLES = {
@@ -16,6 +19,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WIXIE.ACTIONFAIL
 		"Me and you versus the world, Charles!",
 		"Yee-haw!",
 	} -- Despite how cruel she can be, shes still a kid at the end of the day :)
+	
+	ANNOUNCE.SHOVE_TARGET_TOO_FAT = "This guy is too fat to be pushed around!"
 	
 	ANNOUNCE.DREADEYE_SPOOKED = "Hey! Get back here and let me hit you!"
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Are you reading this? Then let us know! Because it NO?"
