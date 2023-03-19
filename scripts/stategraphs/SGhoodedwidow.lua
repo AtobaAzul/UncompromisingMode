@@ -162,6 +162,7 @@ local states=
 					inst.docombo = false
 					--TheNet:SystemMessage(inst.combo)
 					inst.combo = inst.combo+2
+					inst.sg:RemoveStateTag("busy")
 					inst.sg:GoToState("attack")
 				else
 					if inst.combosucceed == false and inst.combo > 1 then

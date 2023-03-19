@@ -329,7 +329,7 @@ end
 local function OnHit_Marble(inst, attacker, target)
 	--ImpactFx(inst, attacker, target)
 
-	if target ~= nil and target:IsValid() and target.components and target.components.locomotor and not target:HasTag("toadstool") then
+	if target ~= nil and target:IsValid() and target.components and target.components.locomotor and target.components.combat ~= nil and not target:HasTag("toadstool") then
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local tx, ty, tz = target.Transform:GetWorldPosition()
 										

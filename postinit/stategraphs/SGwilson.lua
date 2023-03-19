@@ -139,7 +139,7 @@ env.AddStategraphPostInit("wilson", function(inst)
                     v.components.combat:GetAttacked(inst, 0)
                 end
 
-                if v.components.locomotor ~= nil then
+                if v.components.locomotor ~= nil and target.components.combat ~= nil then
                     for i = 1, 50 do
                         v:DoTaskInTime((i - 1) / 50, function(v)
                             if v ~= nil and inst ~= nil then
