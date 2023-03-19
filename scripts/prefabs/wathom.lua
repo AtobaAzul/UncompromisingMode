@@ -153,6 +153,7 @@ local function AmpTimer(inst)
 		(inst.components.adrenaline:GetPercent() < 0.24 and not inst:HasTag("amped") and not inst:HasTag("deathamp")) then
 		inst.components.grogginess.grog_amount = 0.5
 	end
+
 	-- Draining adrenaline when not in combat.
 	if (inst:HasTag("amped") or inst:HasTag("deathamp")) then
 		if inst.adrenalpause then
@@ -160,8 +161,10 @@ local function AmpTimer(inst)
 		else
 			inst.components.adrenaline:DoDelta(-4)
 		end
-	elseif (inst.components.adrenaline:GetPercent() > 0.25 and not inst.adrenalpause) then
-		inst.components.adrenaline:DoDelta(-1)
+	elseif inst.components.adrenaline:GetPercent() > 0.25 then
+		if not inst.adrenalpause then
+			inst.components.adrenaline:DoDelta(-1)
+		end
 	end
 
 	if inst.components.adrenaline:GetPercent() < 0.25 and not (inst:HasTag("amped") or inst:HasTag("deathamped")) then
@@ -319,10 +322,10 @@ local function UpdateAdrenaline(inst, data)
 		SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomAdrenalineStinger"), inst.userid, "wathom_breathe")
 	end
 
-	if (AmpLevel > 0.75 or inst:HasTag("amped")) and not inst:HasTag("wathomrun") and
+	if (AmpLevel > 0.75 or inst:HasTag("amped")) and
 		(inst.components.rider ~= nil and not inst.components.rider:IsRiding() or inst.components.rider == nil) then --Handle VVathom Running
 		inst:AddTag("wathomrun")
-	elseif inst:HasTag("wathomrun") and not (AmpLevel > 0.5 or inst:HasTag("amped")) or inst.components.rider ~= nil and not inst.components.rider:IsRiding() then
+	elseif inst:HasTag("wathomrun") and not (AmpLevel > 0.75 or inst:HasTag("amped")) or inst.components.rider ~= nil and not inst.components.rider:IsRiding() then
 		inst:RemoveTag("wathomrun")
 	end
 
