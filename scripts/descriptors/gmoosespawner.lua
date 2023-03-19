@@ -22,7 +22,7 @@ local function GetMooseData(self)
 	if CurrentRelease.GreaterOrEqualTo("R15_QOL_WORLDSETTINGS") then
 		if MOTHERGOOSE_TIMERNAME == nil then
 			--DEERCLOPS_TIMERNAME = assert(Insight.env.util.recursiveGLOBALetupvalue(TheWorld.components[filename].GetDebugString, "DEERCLOPS_TIMERNAME"), "Unable to find \"DEERCLOPS_TIMERNAME\"") --"moose_timetoattack"
-			MOTHERGOOSE_TIMERNAME = Insight.env.util.recursive_getupvalue(TheWorld.components[filename].GetDebugString, "DEERCLOPS_TIMERNAME") or false
+			MOTHERGOOSE_TIMERNAME = Insight.env.util.recursive_getupvalue(TheWorld.components[filename].GetDebugString, "MOTHERGOOSE_TIMERNAME") or false
 		end
 		time_to_attack = TheWorld.components.worldsettingstimer:GetTimeLeft(MOTHERGOOSE_TIMERNAME)
 	else
@@ -135,10 +135,10 @@ local function DangerAnnouncementDescribe(special_data, context)
 	local time_string = context.time:SimpleProcess(special_data.time_to_attack, "realtime")
 	
 	if not client_table then
-		description = string.format(context.lstr[filename].moose_attack, time_string)
+		description = string.format("<prefab=moose> will attack in %s.", time_string)
 	else
 		description = string.format(
-			context.lstr[filename].announce_moose_target,
+			"<prefab=moose> will spawn on %s (<prefab=%s>) in %s.",
 			client_table.name, 
 			client_table.prefab, 
 			time_string
