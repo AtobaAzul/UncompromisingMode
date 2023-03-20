@@ -13,8 +13,12 @@ local function StartRepel(inst)
 		local ents = TheSim:FindEntities(x, y, z, 4, SLEEPREPEL_MUST_TAGS, SLEEPREPEL_CANT_TAGS)
 		
 		for i, v in ipairs(ents) do
-			if v.components.combat ~= nil and v.components.locomotor ~= nil then
+			if v.components.combat ~= nil then
+				--v.components.combat:GetAttacked(inst.host, 0, nil)
 				v:PushEvent("attacked", {attacker = inst.host, damage = 0, weapon = nil})
+			end
+			
+			if v.components.locomotor ~= nil then
 				for i = 1, 50 do
 					v:DoTaskInTime((i - 1) / 50, function(v)
 						if v ~= nil and inst.host ~= nil then 
