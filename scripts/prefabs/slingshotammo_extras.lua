@@ -1937,7 +1937,7 @@ local function Tremor(inst)
 	local ents = TheSim:FindEntities(x, y, z, 5, { "_combat" }, AURA_EXCLUDE_TAGS)
 	
 	for i, v in ipairs(ents) do
-		if (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
+		if (v:HasTag("bird_mutant") or not v:HasTag("bird")) and not v:HasTag("stageusher") then
 			if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
 		
 				local distsq = v ~= nil and x ~= nil and v:GetDistanceSqToPoint(x, y, z) or 1

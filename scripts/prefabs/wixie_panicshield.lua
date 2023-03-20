@@ -18,7 +18,7 @@ local function StartRepel(inst)
 				v:PushEvent("attacked", {attacker = inst.host, damage = 0, weapon = nil})
 			end
 			
-			if v.components.locomotor ~= nil then
+			if v.components.locomotor ~= nil and not v:HasTag("stageusher") then
 				for i = 1, 50 do
 					v:DoTaskInTime((i - 1) / 50, function(v)
 						if v ~= nil and inst.host ~= nil then 

@@ -21,6 +21,8 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	} -- Despite how cruel she can be, shes still a kid at the end of the day :)
 	
 	ANNOUNCE.SHOVE_TARGET_TOO_FAT = "This guy is too fat to be pushed around!"
+	ANNOUNCE.UNCOMFORTABLE_HAT = "This hat is making me uncomfortable..."
+	ANNOUNCE.UNCOMFORTABLE_ARMOR = "This armor is making me uncomfortable..."
 	
 	ANNOUNCE.DREADEYE_SPOOKED = "Hey! Get back here and let me hit you!"
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Are you reading this? Then let us know! Because it NO?"
@@ -464,7 +466,7 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 		cast = { "wixie" },
 		lines = {
 			{roles = {"wixie"},     duration = 3.0, line = STRINGS.STAGEACTOR.WIXIE1[1]},
-			{roles = {"wixie"},     duration = 3.5, line = STRINGS.STAGEACTOR.WIXIE1[2], anim = "emote_impatient"},
+			{roles = {"wixie"},     duration = 3.5, line = STRINGS.STAGEACTOR.WIXIE1[2], anim = "idle_wilson"},
 			{roles = {"wixie"},     duration = 2.5, line = STRINGS.STAGEACTOR.WIXIE1[3]},
 			{roles = {"wixie"},     duration = 4, line = STRINGS.STAGEACTOR.WIXIE1[4], anim = "idle_wendy"},
 			{roles = {"wixie"},     duration = 3.0, line = STRINGS.STAGEACTOR.WIXIE1[5]},

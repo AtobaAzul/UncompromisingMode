@@ -90,7 +90,6 @@ local function WebMortar(inst,angle)
 	if speed < 5 then
 	speed = 14*math.random(100,200)*0.01
 	end
-	print("speed = "..speed)
     projectile.components.complexprojectile:SetHorizontalSpeed(speed)
     projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 	end
@@ -151,6 +150,7 @@ local states=
             TimeEvent(28*FRAMES, function(inst) 
 			inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
 			inst.components.combat:DoAttack()
+			inst.sg:RemoveStateTag("busy")
 			end),
         },
 
@@ -175,6 +175,10 @@ local states=
 				end 
 			end),
         },
+		
+		onexit = function(inst)
+			inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
+		end,
     },
 
   	State{

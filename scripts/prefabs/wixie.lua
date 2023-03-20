@@ -179,7 +179,15 @@ local function EquipedCount(inst, data)
 	inst.bodymodifier = bodyequipped ~= nil and bodyequipped.components.armor ~= nil and not bodyequipped:HasTag("grass") and not bodyequipped:HasTag("shadow_item") and 0.2 or 0
 
 	inst.claustrophobiamodifier = inst.headmodifier + inst.bodymodifier
-
+	
+	if inst.headmodifier > 0 then
+		inst.components.talker:Say(GetString(inst, "UNCOMFORTABLE_HAT"))
+	end
+	
+	if inst.bodymodifier > 0 then
+		inst.components.talker:Say(GetString(inst, "UNCOMFORTABLE_ARMOR"))
+	end
+	
 	SendModRPCToClient(GetClientModRPC("WixieTheDelinquent", "ClaustrophobiaEquipMult"), inst.userid, inst.claustrophobiamodifier)
 end
 
