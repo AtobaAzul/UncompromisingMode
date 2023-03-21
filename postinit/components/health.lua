@@ -40,6 +40,15 @@ local function FindSleepoPeepo(inst)
 end
 
 local function TriggerLLA(self)
+	if self.inst.components.timer ~= nil then
+		if self.inst.components.timer:TimerExists("shadowwathomcooldown") then
+			self.inst.components.timer:StopTimer("shadowwathomcooldown")
+			self.inst.components.timer:StartTimer("shadowwathomcooldown", TUNING.TOTAL_DAY_TIME)
+		else
+			self.inst.components.timer:StartTimer("shadowwathomcooldown", TUNING.TOTAL_DAY_TIME)
+		end
+	end
+
 	local item = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
 	local item2
 	FindSleepoPeepo(self.inst)
@@ -67,7 +76,7 @@ end
 local function HasLLA(self)
 	if self.inst.components.inventory then
 		local item = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
-		if item and item.prefab == "amulet" then
+		if item and item.prefab == "amulet" and self.inst.components.timer ~= nil and not self.inst.components.timer:TimerExists("shadowwathomcooldown")  then
 			return true
 		end
 	end
@@ -85,14 +94,14 @@ env.AddComponentPostInit("health", function(self)
 				self.inst.sg:GoToState("blackpuddle_death")
 			elseif MayKill(self, amount) and HasLLA(self) and not self.inst:HasTag("deathamp") then --and not (self.inst:HasTag("deathamp")) then
 				TriggerLLA(self)
-			elseif MayKill(self, amount) and HasLLA(self) and self.inst:HasTag("deathamp") and cause == "deathamp" then
+			elseif MayKill(self, amount) and HasLLA(self) and self.inst:HasTag("deathamp") and cause == "deathamp" and self.inst.components.timer ~= nil and not self.inst.components.timer:TimerExists("shadowwathomcooldown") then
 				if not self.inst:HasTag("playerghost") and self.inst.ToggleUndeathState ~= nil then
 					self.inst:ToggleUndeathState(self.inst, false)
 				end
 				TriggerLLA(self) --Don't trigger the LLA here, let it happen in our own component, so this doesn't break whenever canis moves it to his own mod.
 			elseif self.inst:HasTag("deathamp") and cause ~= "deathamp" then
 				self.inst.components.adrenaline:DoDelta(amount*0.2)
-			elseif MayKill(self, amount) and (self.inst:HasTag("wathom") and self.inst:HasTag("amped")) and cause ~= "deathamp" then --suggest that we add a trigger here to show that wathom is still being hit, despite his lack of flinching or anything.
+			elseif MayKill(self, amount) and (self.inst:HasTag("wathom") and self.inst:HasTag("amped")) and cause ~= "deathamp" and self.inst.components.timer ~= nil and not self.inst.components.timer:TimerExists("shadowwathomcooldown") then --suggest that we add a trigger here to show that wathom is still being hit, despite his lack of flinching or anything.
 				if not self.inst:HasTag("deathamp") then
 					self.inst:AddTag("deathamp")
 					self.inst:ToggleUndeathState(self.inst, true)

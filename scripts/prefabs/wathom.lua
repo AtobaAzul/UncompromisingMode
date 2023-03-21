@@ -29,6 +29,10 @@ local function TurnOffShadowForm(inst)
 end
 
 local function ToggleUndeathState(inst, toggle)
+	if inst.components.timer ~= nil and inst.components.timer:TimerExists("shadowwathomcooldown") then
+		return
+	end
+
 	if toggle then
 		if not inst:HasTag("playerghost") then
 			if inst.AnimState:GetBuild() == "wathom" then
@@ -86,7 +90,7 @@ local function UnAmp(inst)
 	end
 	if inst:HasTag("deathamp") then
 		inst:RemoveTag("deathamp")
-		
+
 		local bed = inst.components.sleepingbaguser ~= nil and inst.components.sleepingbaguser.bed or nil
 
 		if bed ~= nil and bed.components.sleepingbag ~= nil then
@@ -210,9 +214,9 @@ end
 local function OnAttackOther(inst, data)
 	if data and data.target and not data.projectile and inst.components.adrenaline:GetPercent() > 0.24 and
 		((data.target.components.combat and data.target.components.combat.defaultdamage > 0) or
-			(
-			data.target.prefab == "dummytarget" or data.target.prefab == "antlion" or data.target.prefab == "stalker_atrium" or
-				data.target.prefab == "stalker")) then
+		(
+		data.target.prefab == "dummytarget" or data.target.prefab == "antlion" or data.target.prefab == "stalker_atrium" or
+		data.target.prefab == "stalker")) then
 		inst.adrenalpause = true
 		if inst.adrenalresume then
 			inst.adrenalresume:Cancel()
@@ -220,7 +224,13 @@ local function OnAttackOther(inst, data)
 		end
 		inst.adrenalresume = inst:DoTaskInTime(10, function(inst) inst.adrenalpause = false end)
 		if not (inst:HasTag("amped") or inst:HasTag("deathamp")) then
-			inst.components.adrenaline:DoDelta(3)
+			if inst.components.adrenaline:GetPercent() > 0.24 and inst.components.adrenaline:GetPercent() < 0.51 then
+				inst.components.adrenaline:DoDelta(4)
+			elseif inst.components.adrenaline:GetPercent() > 0.50 and inst.components.adrenaline:GetPercent() < 0.75 then
+				inst.components.adrenaline:DoDelta(3)
+			else
+				inst.components.adrenaline:DoDelta(3)
+			end
 		end
 	end
 end
@@ -287,14 +297,15 @@ local function onload(inst, data)
 	if data then
 		if data.amped then
 			inst:AddTag("amped")
-			SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomMusicToggle"), inst.userid, GetMusicValues(inst))
+			SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomMusicToggle"), inst.userid,
+				GetMusicValues(inst))
 		end
 		if data.deathamped then
 			inst:AddTag("deathamp")
-			SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomMusicToggle"), inst.userid, GetMusicValues(inst))
+			SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomMusicToggle"), inst.userid,
+				GetMusicValues(inst))
 		end
 	end
-
 end
 
 local function UpdateAdrenaline(inst, data)
@@ -313,19 +324,22 @@ local function UpdateAdrenaline(inst, data)
 	end
 
 	if data.oldpercent >= 0.5 and data.newpercent < 0.5 then
-		SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomAdrenalineStinger"), inst.userid, "wathom_breathe")
+		SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomAdrenalineStinger"), inst.userid,
+			"wathom_breathe")
 	end
 	if data.oldpercent >= 0.25 and data.newpercent < 0.25 and not inst:HasTag("amped") then
-		SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomAdrenalineStinger"), inst.userid, "wathom_breathe")
+		SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomAdrenalineStinger"), inst.userid,
+			"wathom_breathe")
 	end
 	if data.oldpercent >= 0 and data.newpercent == 0 and inst:HasTag("amped") then
-		SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomAdrenalineStinger"), inst.userid, "wathom_breathe")
+		SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "WathomAdrenalineStinger"), inst.userid,
+			"wathom_breathe")
 	end
 
 	if (AmpLevel > 0.75 or inst:HasTag("amped")) and
 		(inst.components.rider ~= nil and not inst.components.rider:IsRiding() or inst.components.rider == nil) then --Handle VVathom Running
 		inst:AddTag("wathomrun")
-	elseif inst:HasTag("wathomrun") and not (AmpLevel > 0.75 or inst:HasTag("amped")) or inst.components.rider ~= nil and not inst.components.rider:IsRiding() then
+	elseif inst:HasTag("wathomrun") and not (AmpLevel > 0.75 or inst:HasTag("amped")) or inst.components.rider ~= nil and inst.components.rider:IsRiding() then
 		inst:RemoveTag("wathomrun")
 	end
 
@@ -364,13 +378,18 @@ local function UpdateAdrenaline(inst, data)
 		end
 		inst.AmpDamageTakenModifier = 1.5
 	end
+
+	if inst.components.rider ~= nil and inst.components.rider:IsRiding() then
+		inst.components.combat.attackrange = 2
+	end
 end
 
 local function CustomCombatDamage(inst, target, weapon, multiplier, mount)
 	--sometimes I hate short-circuit evals...
 	if mount == nil then
 		return (target.components.hauntable and target.components.hauntable.panic and inst:HasTag("amped")) and (1.5 * 4) or
-			(target.components.hauntable and target.components.hauntable.panic) and (1.5 * 2) or inst:HasTag("amped") and 4 or 2
+			(target.components.hauntable and target.components.hauntable.panic) and (1.5 * 2) or
+			inst:HasTag("amped") and 4 or 2
 			or 1
 	end
 end
@@ -384,14 +403,15 @@ local function OnAttacked(inst, data)
 	inst.adrenalresume = inst:DoTaskInTime(10, function(inst) inst.adrenalpause = false end)
 	if not TUNING.DSTU.WATHOM_ARMOR_DAMAGE then
 		if data.damageresolved ~= nil then
-			inst.components.health:DoDelta(-((data.damageresolved * inst.AmpDamageTakenModifier) - data.damageresolved), nil,
+			inst.components.health:DoDelta(-((data.damageresolved * inst.AmpDamageTakenModifier) - data.damageresolved),
+				nil,
 				data.attacker)
 		end
 	end
---	if data.attacker:HasTag("brightmare") then
---		inst.components.adrenaline:DoDelta(-10)
---		inst.components.health:DoDelta(-10, nil, data.attacker)		
---	end	
+	--	if data.attacker:HasTag("brightmare") then
+	--		inst.components.adrenaline:DoDelta(-10)
+	--		inst.components.health:DoDelta(-10, nil, data.attacker)		
+	--	end	
 end
 
 local function UpdateMusic(inst)
@@ -407,19 +427,19 @@ local common_postinit = function(inst)
 	inst:AddTag("monster")
 	inst:AddTag("playermonster")
 	inst:AddTag("nightvision")
-	
+
 	inst.OnLoad = onload
 	inst.OnNewSpawn = onload
 
 	-- Wathom's Nightvision aboveground
 	if TheWorld:HasTag("cave") or TheWorld.state.isnight then
 		inst.components.playervision:ForceNightVision(true)
-		inst.components.playervision:SetCustomCCTable(WATHOM_COLOURCUBES)	
+		inst.components.playervision:SetCustomCCTable(WATHOM_COLOURCUBES)
 		inst:AddTag("WathomInDark")
 	else
 		inst.components.playervision:ForceNightVision(false)
-		inst.components.playervision:SetCustomCCTable(nil)	
-		inst:RemoveTag("WathomInDark")		
+		inst.components.playervision:SetCustomCCTable(nil)
+		inst:RemoveTag("WathomInDark")
 	end
 
 	inst:WatchWorldState("isnight", function()
@@ -427,12 +447,12 @@ local common_postinit = function(inst)
 			if not TheWorld:HasTag("cave") then
 				if TheWorld.state.isnight then
 					inst.components.playervision:ForceNightVision(true)
-					inst.components.playervision:SetCustomCCTable(WATHOM_COLOURCUBES)	
+					inst.components.playervision:SetCustomCCTable(WATHOM_COLOURCUBES)
 					inst:AddTag("WathomInDark")
 				else
 					inst.components.playervision:ForceNightVision(false)
 					inst.components.playervision:SetCustomCCTable(nil)
-					inst:RemoveTag("WathomInDark")	
+					inst:RemoveTag("WathomInDark")
 				end
 			end
 		end)
@@ -447,34 +467,32 @@ local common_postinit = function(inst)
 		if inst:HasTag("amped") then
 			inst:RemoveTag("amped")
 		end
-		
+
 		UpdateMusic(inst)
 	end)
 
 	-- Wathom's Nightvision aboveground
 	if TheWorld:HasTag("cave") or TheWorld.state.isnight then
 		inst.components.playervision:ForceNightVision(true)
-		inst.components.playervision:SetCustomCCTable(WATHOM_COLOURCUBES)		
+		inst.components.playervision:SetCustomCCTable(WATHOM_COLOURCUBES)
 		inst:AddTag("WathomInDark")
 	else
 		inst.components.playervision:ForceNightVision(false)
 		inst.components.playervision:SetCustomCCTable(nil)
 		inst:RemoveTag("WathomInDark")
 	end
-	
 end
 
 -- This initializes for the server only. Components are added here.
 local master_postinit = function(inst)
+	--	inst.components.sanity:EnableLunacy(true, "wathomlunacy")
 
---	inst.components.sanity:EnableLunacy(true, "wathomlunacy")
-
--- -- 	If at high lunacy, become a target for Gestalts and Greater Gestalts.
---	if inst.components.sanity:GetPercent() > 0.84 then
---		inst:AddTag("gestalt_possessable")
---	else
---		inst:RemoveTag("gestalt_possessable")
---end	
+	-- -- 	If at high lunacy, become a target for Gestalts and Greater Gestalts.
+	--	if inst.components.sanity:GetPercent() > 0.84 then
+	--		inst:AddTag("gestalt_possessable")
+	--	else
+	--		inst:RemoveTag("gestalt_possessable")
+	--end	
 
 	inst.adrenalinecheck = 0 -- I have no idea what this does. It's left over from SCP-049.
 
@@ -502,7 +520,7 @@ local master_postinit = function(inst)
 	inst.components.hunger:SetMax(TUNING.WATHOM_HUNGER)
 	inst.components.sanity:SetMax(TUNING.WATHOM_SANITY)
 
---	inst.components.sanity.neg_aura_absorb = TUNING.ARMOR_HIVEHAT_SANITY_ABSORPTION -- Reverses insanity auras and reduces by 50%
+	--	inst.components.sanity.neg_aura_absorb = TUNING.ARMOR_HIVEHAT_SANITY_ABSORPTION -- Reverses insanity auras and reduces by 50%
 
 	-- Damage multiplier (In reality, Wathom won't deal double damage. The time it takes for him to attack is about twice as long as other characters.
 	--inst.components.combat.damagemultiplier = 2
@@ -547,7 +565,7 @@ local master_postinit = function(inst)
 			if not TheWorld:HasTag("cave") then
 				if TheWorld.state.isnight then
 					inst.components.playervision:ForceNightVision(true)
-					inst.components.playervision:SetCustomCCTable(WATHOM_COLOURCUBES)	
+					inst.components.playervision:SetCustomCCTable(WATHOM_COLOURCUBES)
 					inst:AddTag("WathomInDark")
 				else
 					inst.components.playervision:ForceNightVision(false)
@@ -577,22 +595,22 @@ local master_postinit = function(inst)
 		end
 	end)
 	-- Wathom's immunity to night drain during the night and sanity (lunacy) gain during the day.
---	inst.components.sanity.night_drain_mult = 0
+	--	inst.components.sanity.night_drain_mult = 0
 	inst.components.sanity.light_drain_immune = true
 
---	inst:WatchWorldState("isday", function()
---		inst:DoTaskInTime(TheWorld.state.isday and 0 or 1, function(inst)
---			if not TheWorld:HasTag("cave") then
---				if TheWorld.state.isnight or TheWorld.state.isdusk then
---					inst.components.sanity.dapperness = 0
---				elseif TheWorld.state.isday then
---					inst.components.sanity.dapperness = 10 / 60
---				end
---			end
---		end)
---	end)
-	
-				
+	--	inst:WatchWorldState("isday", function()
+	--		inst:DoTaskInTime(TheWorld.state.isday and 0 or 1, function(inst)
+	--			if not TheWorld:HasTag("cave") then
+	--				if TheWorld.state.isnight or TheWorld.state.isdusk then
+	--					inst.components.sanity.dapperness = 0
+	--				elseif TheWorld.state.isday then
+	--					inst.components.sanity.dapperness = 10 / 60
+	--				end
+	--			end
+	--		end)
+	--	end)
+
+
 	-- Night Vision enabler
 	--	inst.components.playervision:ForceNightVision(true) -- Should only force this if it's night or in caves.
 

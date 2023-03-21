@@ -495,9 +495,9 @@ AddStategraphPostInit("wilson", function(inst)
 					if inst:HasTag("amped") and not inst:HasTag("wearingheavyarmor") then
 						inst.leapvelocity = 15
 					elseif inst.components.adrenaline:GetPercent() > 0.24 and inst.components.adrenaline:GetPercent() < 0.51 and not inst:HasTag("wearingheavyarmor") then
-						inst.leapvelocity = 5 -- originally 10, lets see how this goes.
+						inst.leapvelocity = 7.5 -- originally 10, lets see how this goes.
 					elseif inst.components.adrenaline:GetPercent() > 0.50 and inst.components.adrenaline:GetPercent() < 0.75 and not inst:HasTag("wearingheavyarmor") then
-						inst.leapvelocity = 7.5 -- * (inst.components.adrenaline:GetPercent() + .5)
+						inst.leapvelocity = 10 -- * (inst.components.adrenaline:GetPercent() + .5)
 					elseif inst.components.adrenaline:GetPercent() > 0.74 and inst.components.adrenaline:GetPercent() < 1 and not inst:HasTag("wearingheavyarmor") then
 						inst.leapvelocity = 12.5 -- this is used in between 75 and 100 (Amped).
 					else
