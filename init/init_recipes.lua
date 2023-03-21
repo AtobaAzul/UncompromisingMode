@@ -68,7 +68,7 @@ if GetModConfigData("wanda_nerf") then
     AllRecipes["pocketwatch_revive"].ingredients = {
         Ingredient("pocketwatch_parts", 3),
         Ingredient("livinglog", 2),
-        Ingredient("reviver", 1)
+        Ingredient("boneshard", 4)
     }
 end
 

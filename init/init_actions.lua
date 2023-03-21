@@ -270,7 +270,7 @@ AddAction(NAME_FOCUS)
 
 NAME_FOCUS.fn = function(act)
     local focus = nil
-    if act.target and act.target:HasTag("telebase") then
+    if act.target and act.target:HasTag("telebase") or act.target.prefab == "pocketwatch_recall" or act.target.prefab == "pocketwatch_warp" then
         focus = act.target
     end
 
@@ -293,7 +293,7 @@ NAME_FOCUS.fn = function(act)
 end
 
 AddComponentAction("USEITEM", "drawingtool", function(inst, doer, target, actions, right)
-    if target:HasTag("telebase") then
+    if target:HasTag("telebase") or target.prefab == "pocketwatch_recall" or target.prefab == "pocketwatch_portal"then
         table.insert(actions, GLOBAL.ACTIONS.NAME_FOCUS)
     end
 end)
