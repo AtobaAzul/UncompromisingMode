@@ -2,6 +2,17 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 if TUNING.DSTU.WANDA_NERF then
+    local function DelayedMarkTalker(player)
+        -- if the player starts moving right away then we can skip this
+        if player.sg == nil or player.sg:HasStateTag("idle") then
+            player.components.talker:Say(GetString(player, "ANNOUNCE_POCKETWATCH_MARK"))
+        end
+    end
+
+    local function noentcheckfn(pt)
+        return not TheWorld.Map:IsPointNearHole(pt) and #TheSim:FindEntities(pt.x, pt.y, pt.z, 1, nil, NOTENTCHECK_CANT_TAGS) == 0
+    end
+
     env.AddPrefabPostInit("wanda", function(inst)
         if inst.components.combat ~= nil then
             local _CustomCombatDamage = inst.components.combat
@@ -129,6 +140,32 @@ if TUNING.DSTU.WANDA_NERF then
             local text = self.text
             inst.dest_name:set(text and text ~= "" and text or "")
         end
+
+        -- local _onaccept = inst.components.trader.onaccept
+
+        inst.components.trader.onaccept =
+            function(inst, giver, item)
+                local portal_watch = SpawnPrefab("pocketwatch_portal")
+                portal_watch:onPreBuilt(giver,
+                    { pocketwatch_recall = { [inst] = 1 } })
+
+                if inst.dest_name ~= nil then
+                    portal_watch.dest_name:set(inst.dest_name:value())
+                end
+
+                local container = inst.components.inventoryitem:GetContainer()
+                if container ~= nil then
+                    local slot = inst.components.inventoryitem:GetSlotNum()
+                    inst:Remove()
+                    container:GiveItem(portal_watch, slot)
+                else
+                    local x, y, z = inst.Transform:GetWorldPosition()
+                    inst:Remove()
+                    portal_watch.Transform:SetPosition(x, y, z)
+                end
+                portal_watch.SoundEmitter:PlaySound(
+                    "dontstarve/common/telebase_gemplace")
+            end
     end)
 
     env.AddPrefabPostInit("pocketwatch_portal", function(inst)
@@ -161,6 +198,61 @@ if TUNING.DSTU.WANDA_NERF then
                 inst.dest_name:set(text and text ~= "" and text or "")
                 _Write(self, doer, text, ...)
             end
+
+        inst.components.pocketwatch.DoCastSpell = function(inst, doer, target, pos)
+            local recallmark = inst.components.recallmark
+
+            if recallmark:IsMarked() then
+                local pt = doer:GetPosition()
+                local offset = FindWalkableOffset(pt, math.random() * 2 * PI, 3 + math.random(), 16, false, true,
+                    noentcheckfn, true, true)
+                    or FindWalkableOffset(pt, math.random() * 2 * PI, 5 + math.random(), 16, false, true, noentcheckfn,
+                    true, true)
+                    or FindWalkableOffset(pt, math.random() * 2 * PI, 7 + math.random(), 16, false, true, noentcheckfn,
+                    true, true)
+                if offset ~= nil then
+                    pt = pt + offset
+                end
+
+                if not Shard_IsWorldAvailable(recallmark.recall_worldid) then
+                    return false, "SHARD_UNAVAILABLE"
+                end
+
+                local portal = SpawnPrefab("pocketwatch_portal_entrance")
+                portal.Transform:SetPosition(pt:Get())
+                portal:SpawnExit(recallmark.recall_worldid, recallmark.recall_x, recallmark.recall_y, recallmark
+                .recall_z)
+                inst.SoundEmitter:PlaySound("wanda1/wanda/portal_entrance_pre")
+
+                local new_watch = SpawnPrefab("pocketwatch_recall")
+                new_watch.components.recallmark:Copy(inst)
+                new_watch.dest_name:set(inst.dest_name:value())
+
+                local x, y, z = inst.Transform:GetWorldPosition()
+                new_watch.Transform:SetPosition(x, y, z)
+                new_watch.components.rechargeable:Discharge(TUNING.POCKETWATCH_RECALL_COOLDOWN)
+
+                local owner = inst.components.inventoryitem ~= nil and inst.components.inventoryitem.owner or nil
+                local holder = owner ~= nil and (owner.components.inventory or owner.components.container) or nil
+                if holder ~= nil then
+                    local slot = holder:GetItemSlot(inst)
+                    inst:Remove()
+                    holder:GiveItem(new_watch, slot, Vector3(x, y, z))
+                else
+                    inst:Remove()
+                end
+
+                return true
+            else
+                local x, y, z = doer.Transform:GetWorldPosition()
+                recallmark:MarkPosition(x, y, z)
+                inst.SoundEmitter:PlaySound("wanda2/characters/wanda/watch/MarkPosition")
+
+                doer:DoTaskInTime(12 * FRAMES, DelayedMarkTalker)
+
+                return true
+            end
+        end
 
         local _OnLoad = inst.components.writeable.OnLoad
         inst.components.writeable.OnLoad = function(self, ...)
