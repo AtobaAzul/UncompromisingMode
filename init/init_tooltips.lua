@@ -39,6 +39,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	SUCCULENT_POTTED = "- Masks foul smells.",
 	ENDTABLE = "- Masks foul smells when decorated.",
 	MULTITOOL_AXE_PICKAXE = "- Creates shockwaves when chopping/mining.",
+	FEATHERPENCIL = "- Can rename Telelocator Focus' location name.\n- Can add nicknames to equipments, and Wanda's watches.",
 
 	--uncomp content
 	RAT_WHIP = "- Stronger when well fed.",
