@@ -86,7 +86,7 @@ local function endgeyser(inst)
                     local position = Vector3(x + offset.x, y + offset.y, z + offset.z)
                     if projectile.components.complexprojectile then
                         projectile.components.complexprojectile:SetHorizontalSpeed(16)
-                        projectile.components.complexprojectile:SetGravity( -30)
+                        projectile.components.complexprojectile:SetGravity(-30)
                         projectile.components.complexprojectile:SetLaunchOffset(Vector3(0, 0.5, 0))
                         projectile.components.complexprojectile:SetTargetOffset(Vector3(0, 0.5, 0))
 
@@ -105,9 +105,24 @@ local function endgeyser(inst)
             local boat = TheWorld.Map:GetPlatformAtPoint(x + offset.x, z + offset.z)
             if boat then
                 local pt = Vector3(x + offset.x, 0, z + offset.z)
-                boat.components.health:DoDelta( -2 - math.floor(inst.crab.countgems(inst.crab).purple*0.5))
+
+                local x, y, z = inst.Transform:GetWorldPosition()
+                local ents = TheSim:FindEntities(x, y, z, 4)
+                local mult = 1
+                -- look for the pirate hat
+                if ents and #ents > 0 then
+                    for i, ent in ipairs(ents) do
+                        if ent:GetCurrentPlatform() and ent:GetCurrentPlatform() == inst then
+                            if ent:HasTag("boat_health_buffer") then
+                                mult = 0.33
+                            end
+                        end
+                    end
+                end
+
+                boat.components.health:DoDelta((-2 - math.floor(inst.crab.countgems(inst.crab).purple * 0.5)) * mult)
                 boat.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",
-                { intensity = .6 })
+                    { intensity = .6 })
 
                 -- look for patches
                 --[[local nearpatch = TheSim:FindEntities(pt.x, 0, pt.z, 2, REPAIRED_PATCH_TAGS)
