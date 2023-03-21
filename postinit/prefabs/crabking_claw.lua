@@ -19,10 +19,25 @@ local CLAMPDAMAGE_CANT_TAGS = { "flying", "shadow", "ghost", "playerghost", "FX"
 local function clamp(inst)
 	if inst.boat and not inst.boat.components.health:IsDead() then
 		local bumper = FindEntity(inst, 2, nil, { "boatbumper" })
+
+		local x, y, z = inst.boat.Transform:GetWorldPosition()
+		local _ents = TheSim:FindEntities(x, y, z, 4)
+		local mult = 1
+		-- look for the pirate hat
+		if _ents and #_ents > 0 then
+			for i, ent in ipairs(_ents) do
+				if ent:GetCurrentPlatform() and ent:GetCurrentPlatform() == inst then
+					if ent:HasTag("boat_health_buffer") then
+						mult = 0.33
+					end
+				end
+			end
+		end
+
 		if bumper then
-			bumper.components.health:DoDelta( -TUNING.CRABKING_CLAW_BOATDAMAGE)
+			bumper.components.health:DoDelta((-TUNING.CRABKING_CLAW_BOATDAMAGE) * mult)
 		else
-			inst.boat.components.health:DoDelta( -TUNING.CRABKING_CLAW_BOATDAMAGE)
+			inst.boat.components.health:DoDelta((-TUNING.CRABKING_CLAW_BOATDAMAGE) * mult)
 		end
 
 		ShakeAllCameras(CAMERASHAKE.VERTICAL, 0.3, 0.03, 0.5, inst.boat, inst.boat:GetPhysicsRadius(4))

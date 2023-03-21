@@ -264,15 +264,7 @@ end
 
 local SET_CUSTOM_NAME = GLOBAL.Action({ distance = 2, mount_valid = true })
 SET_CUSTOM_NAME.id = "SET_CUSTOM_NAME"
-SET_CUSTOM_NAME.strfn = function(act)
-	if (act.target:HasTag("telebase") or act.target.prefab == "pocketwatch_recall" or act.target.prefab == "pocketwatch_portal") then
-		return "LOCATION"
-    elseif act.target:HasTag("_equippable") then
-		return "NAME"
-	end
-	return nil
-end
-
+SET_CUSTOM_NAME.str = STRINGS.ACTIONS.SET_CUSTOM_NAME
 AddAction(SET_CUSTOM_NAME)
 
 SET_CUSTOM_NAME.fn = function(act)

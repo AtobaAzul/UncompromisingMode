@@ -28,12 +28,28 @@ env.AddStategraphPostInit("crabkingclaw", function(inst)
                     local boat = inst.sg.statemem.boat
                     if boat and boat:IsValid() then
                         local bumper = FindEntity(inst, 2, nil, { "boatbumper" })
+
+                        local x, y, z = boat.Transform:GetWorldPosition()
+                        local ents = TheSim:FindEntities(x, y, z, 4)
+                        local mult = 1
+                        -- look for the pirate hat
+                        if ents and #ents > 0 then
+                            for i, ent in ipairs(ents) do
+                                if ent:GetCurrentPlatform() and ent:GetCurrentPlatform() == inst then
+                                    if ent:HasTag("boat_health_buffer") then
+                                        mult = 0.33
+                                    end
+                                end
+                            end
+                        end
+
+
                         if bumper then
-                            bumper.components.health:DoDelta( -TUNING.CRABKING_CLAW_BOATDAMAGE / 4)
+                            bumper.components.health:DoDelta( (-TUNING.CRABKING_CLAW_BOATDAMAGE / 4)*mult)
                         else
                             inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",
                                 { intensity = .3 })
-                            boat.components.health:DoDelta( -TUNING.CRABKING_CLAW_BOATDAMAGE / 4)
+                            boat.components.health:DoDelta(( -TUNING.CRABKING_CLAW_BOATDAMAGE / 4)*mult)
                         end
                         ShakeAllCameras(CAMERASHAKE.VERTICAL, 0.3, 0.03, 0.25, boat, boat:GetPhysicsRadius(4))
                     end
@@ -42,15 +58,27 @@ env.AddStategraphPostInit("crabkingclaw", function(inst)
                     local boat = inst.sg.statemem.boat
                     if boat and boat:IsValid() then
                         local bumper = FindEntity(inst, 2, nil, { "boatbumper" })
-                        print("bumper:", bumper)
+
+                        local x, y, z = inst.Transform:GetWorldPosition()
+                        local ents = TheSim:FindEntities(x, y, z, 4)
+                        local mult = 1
+                        -- look for the pirate hat
+                        if ents and #ents > 0 then
+                            for i, ent in ipairs(ents) do
+                                if ent:GetCurrentPlatform() and ent:GetCurrentPlatform() == inst then
+                                    if ent:HasTag("boat_health_buffer") then
+                                        mult = 0.33
+                                    end
+                                end
+                            end
+                        end
+
                         if bumper then
-                            print("yes bumper")
-                            bumper.components.health:DoDelta( -TUNING.CRABKING_CLAW_BOATDAMAGE / 4)
+                            bumper.components.health:DoDelta( (-TUNING.CRABKING_CLAW_BOATDAMAGE / 4)*mult)
                         else
-                            print("no number")
                             inst.SoundEmitter:PlaySoundWithParams("turnoftides/common/together/boat/damage",
                                 { intensity = .3 })
-                            boat.components.health:DoDelta( -TUNING.CRABKING_CLAW_BOATDAMAGE / 4)
+                            boat.components.health:DoDelta( (-TUNING.CRABKING_CLAW_BOATDAMAGE / 4)*mult)
                         end
                         ShakeAllCameras(CAMERASHAKE.VERTICAL, 0.3, 0.03, 0.25, boat, boat:GetPhysicsRadius(4))
                     end
