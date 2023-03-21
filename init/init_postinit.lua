@@ -175,7 +175,8 @@ local prefab_post = {
 	"mermhat",
 	"wptags",
 	"inventoryitem_classified",
-	"cannonballs",
+    "cannonballs",
+	"renameable_items",
 }
 
 local stategraph_post = {

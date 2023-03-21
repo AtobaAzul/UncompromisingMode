@@ -319,4 +319,7 @@ STRINGS.STALKER_ATRIUM_WATHOM_BATTLECRY = {
 	"I pity you, mimic.",
 }
 
-STRINGS.ACTIONS.NAME_FOCUS = "Set Custom Location Name"
+STRINGS.ACTIONS.SET_CUSTOM_NAME = {
+    LOCATION = "Set Custom Location Name",
+	NAME = "Set Custom Name",
+}

@@ -322,7 +322,7 @@ env.AddStategraphPostInit("wilson", function(inst)
             function(inst, action)
                 return action.invobject ~= nil and action.invobject:HasTag("powercell") and "doshortaction"
             end),
-        ActionHandler(ACTIONS.NAME_FOCUS, "doshortaction"),
+        ActionHandler(ACTIONS.SET_CUSTOM_NAME, "doshortaction"),
     }
 
     local _OldIdleState = inst.states["idle"].onenter

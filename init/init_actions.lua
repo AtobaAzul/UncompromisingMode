@@ -9,7 +9,7 @@ AddAction(
 			local offsetangle = math.atan2(downvec.z, downvec.x) * (180 / math.pi)
 			if act.doer.AnimState:GetCurrentFacing() == 0 then --Facing right
 				offsetangle = offsetangle + 70
-			else                                           --Facing left
+			else                                      --Facing left
 				offsetangle = offsetangle - 70
 			end
 			while offsetangle > 180 do offsetangle = offsetangle - 360 end
@@ -262,38 +262,45 @@ GLOBAL.ACTIONS.REPAIR.fn = function(act)
 	end
 end
 
-local NAME_FOCUS = GLOBAL.Action({distance = 2, mount_valid = true})
-NAME_FOCUS.id = "NAME_FOCUS"
-NAME_FOCUS.str = STRINGS.ACTIONS.NAME_FOCUS
+local SET_CUSTOM_NAME = GLOBAL.Action({ distance = 2, mount_valid = true })
+SET_CUSTOM_NAME.id = "SET_CUSTOM_NAME"
+SET_CUSTOM_NAME.strfn = function(act)
+	if (act.target:HasTag("telebase") or act.target.prefab == "pocketwatch_recall" or act.target.prefab == "pocketwatch_portal") then
+		return "LOCATION"
+    elseif act.target:HasTag("_equippable") then
+		return "NAME"
+	end
+	return nil
+end
 
-AddAction(NAME_FOCUS)
+AddAction(SET_CUSTOM_NAME)
 
-NAME_FOCUS.fn = function(act)
+SET_CUSTOM_NAME.fn = function(act)
     local focus = nil
-    if act.target and act.target:HasTag("telebase") or act.target.prefab == "pocketwatch_recall" or act.target.prefab == "pocketwatch_warp" then
-        focus = act.target
-    end
+	if act.target and act.target:HasTag("telebase") or act.target.prefab == "pocketwatch_recall" or act.target.prefab == "pocketwatch_warp" or act.target:HasTag("_equippable") then
+		focus = act.target
+	end
 
-    if focus and focus.components.writeable then
-        if focus.components.writeable:IsBeingWritten() then
-            return false, "INUSE"
-        end
+	if focus and focus.components.writeable then
+		if focus.components.writeable:IsBeingWritten() then
+			return false, "INUSE"
+		end
 
-        act.doer.tool_prefab = act.invobject.prefab
-        if act.invobject.components.stackable then
-            act.invobject.components.stackable:Get():Remove()
-        else
-            act.invobject:Remove()
-        end
+		act.doer.tool_prefab = act.invobject.prefab
+		if act.invobject.components.stackable then
+			act.invobject.components.stackable:Get():Remove()
+		else
+			act.invobject:Remove()
+		end
 
-        focus.components.writeable:BeginWriting(act.doer)
+		focus.components.writeable:BeginWriting(act.doer)
 
-        return true
-    end
+		return true
+	end
 end
 
 AddComponentAction("USEITEM", "drawingtool", function(inst, doer, target, actions, right)
-    if target:HasTag("telebase") or target.prefab == "pocketwatch_recall" or target.prefab == "pocketwatch_portal"then
-        table.insert(actions, GLOBAL.ACTIONS.NAME_FOCUS)
-    end
+	if target:HasTag("telebase") or target.prefab == "pocketwatch_recall" or target.prefab == "pocketwatch_portal" or target:HasTag("_equippable") then
+		table.insert(actions, GLOBAL.ACTIONS.SET_CUSTOM_NAME)
+	end
 end)
