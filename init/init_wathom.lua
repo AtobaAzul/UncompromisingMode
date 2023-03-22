@@ -4,19 +4,11 @@ require "class"
 local require = GLOBAL.require
 local STRINGS = GLOBAL.STRINGS
 local FRAMES = GLOBAL.FRAMES
-FRAMES = GLOBAL.FRAMES
 local TimeEvent = GLOBAL.TimeEvent
-TimeEvent = GLOBAL.TimeEvent
 local EventHandler = GLOBAL.EventHandler
-EventHandler = GLOBAL.EventHandler
-localEQUIPSLOTS = GLOBAL.EQUIPSLOTS
-EQUIPSLOTS = GLOBAL.EQUIPSLOTS
+local EQUIPSLOTS = GLOBAL.EQUIPSLOTS
 local SpawnPrefab = GLOBAL.SpawnPrefab
-local Action = GLOBAL.Action
 local ActionHandler = GLOBAL.ActionHandler
-Action = GLOBAL.Action
-Vector3 = GLOBAL.Vector3
-local Vector3 = GLOBAL.Vector3
 
 
 -- It's 1 AM and I don't want to pick apart which local is needed so I'll just grab all of it.
@@ -996,7 +988,7 @@ local PREFAB_SKINS = GLOBAL.PREFAB_SKINS
 local PREFAB_SKINS_IDS = GLOBAL.PREFAB_SKINS_IDS
 local SKIN_AFFINITY_INFO = GLOBAL.require("skin_affinity_info")
 
--- Modded Skin API 
+-- Modded Skin API
 --[[
 modimport("skins_api")
 

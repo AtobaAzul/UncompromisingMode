@@ -177,7 +177,13 @@ local function AmpTimer(inst)
 
 	local AmpLevel = inst.components.adrenaline:GetPercent()
 	local item = inst.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
-	--range updates
+    --range updates
+
+	if inst.components.rider ~= nil and inst.components.rider:IsRiding() then
+		inst.components.combat.attackrange = 2
+		return
+	end
+
 	if (inst:HasTag("amped") or inst:HasTag("deathamp")) then
 		if item ~= nil then
 			inst.components.combat.attackrange = 7
@@ -410,8 +416,8 @@ local function OnAttacked(inst, data)
 	end
 	--	if data.attacker:HasTag("brightmare") then
 	--		inst.components.adrenaline:DoDelta(-10)
-	--		inst.components.health:DoDelta(-10, nil, data.attacker)		
-	--	end	
+	--		inst.components.health:DoDelta(-10, nil, data.attacker)
+	--	end
 end
 
 local function UpdateMusic(inst)
@@ -492,7 +498,7 @@ local master_postinit = function(inst)
 	--		inst:AddTag("gestalt_possessable")
 	--	else
 	--		inst:RemoveTag("gestalt_possessable")
-	--end	
+	--end
 
 	inst.adrenalinecheck = 0 -- I have no idea what this does. It's left over from SCP-049.
 
