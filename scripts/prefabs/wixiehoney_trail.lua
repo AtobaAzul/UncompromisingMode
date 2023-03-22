@@ -51,11 +51,11 @@ end
 
 local function TrySlowdown(inst, target)
 	local debuffkey = inst.prefab
-	if target._lavavomit_speedmulttask ~= nil then
-		target._lavavomit_speedmulttask:Cancel()
+	if target._honeyammo_speedmulttask ~= nil then
+		target._honeyammo_speedmulttask:Cancel()
 	end
 	
-	target._lavavomit_speedmulttask = target:DoTaskInTime(0.25, function(i) i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) i._lavavomit_speedmulttask = nil end)
+	target._honeyammo_speedmulttask = target:DoTaskInTime(0.25, function(i) i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) i._honeyammo_speedmulttask = nil end)
 
 	target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.66)
 end

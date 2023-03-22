@@ -557,6 +557,11 @@ local function OnHit_Honey(inst, attacker, target)
 		target.honeyslowtask = nil
 	end
 	
+	if target.tarslowtask ~= nil then
+		target.tarslowtask:Cancel()
+		target.tarslowtask = nil
+	end
+	
 	if target.sg ~= nil or target.components.locomotor ~= nil then
 		target.honeyslowtask = target:DoPeriodicTask(HONEY_PERIOD, DoHoneyTrail)
 	end
@@ -1270,7 +1275,7 @@ local function shadowproj_fn()
     inst.Physics:SetCollisionCallback(nil)
     inst.components.projectile:SetOnHitFn(OnHit_Shadow)
 	
-	inst.impactfx = "shadowstrike_slash_fx"
+	inst.impactfx = "wanda_attack_pocketwatch_normal_fx"
 	
 	inst.damage = TUNING.SLINGSHOT_AMMO_DAMAGE_ROCKS
 			

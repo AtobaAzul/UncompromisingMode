@@ -209,10 +209,10 @@ local HONEY_LEVELS =
 }
 
 local function PickHoney(inst)
-    local rand = table.remove(inst.availablehoneyslow, math.random(#inst.availablehoneyslow))
-    table.insert(inst.usedhoneyslow, rand)
-    if #inst.usedhoneyslow > MAX_RECENT_HONEY then
-        table.insert(inst.availablehoneyslow, table.remove(inst.usedhoneyslow, 1))
+    local rand = table.remove(inst.availabletarslow, math.random(#inst.availabletarslow))
+    table.insert(inst.usedtarslow, rand)
+    if #inst.usedtarslow > MAX_RECENT_HONEY then
+        table.insert(inst.availabletarslow, table.remove(inst.usedtarslow, 1))
     end
     return rand
 end
@@ -224,17 +224,17 @@ local function DoHoneyTrail(inst)
     3
     ]
 
-    inst.honeyslowcount = inst.honeyslowcount + 1
+    inst.tarslowcount = inst.tarslowcount + 1
 
-    if inst.honeyslowthreshold > level.threshold then
-        inst.honeyslowthreshold = level.threshold
+    if inst.tarslowthreshold > level.threshold then
+        inst.tarslowthreshold = level.threshold
     end
 
-    if inst.honeyslowcount >= inst.honeyslowthreshold then
+    if inst.tarslowcount >= inst.tarslowthreshold then
         local hx, hy, hz = inst.Transform:GetWorldPosition()
-        inst.honeyslowcount = 0
-        if inst.honeyslowthreshold < level.threshold then
-            inst.honeyslowthreshold = math.ceil((inst.honeyslowthreshold + level.threshold) * .5)
+        inst.tarslowcount = 0
+        if inst.tarslowthreshold < level.threshold then
+            inst.tarslowthreshold = math.ceil((inst.tarslowthreshold + level.threshold) * .5)
         end
 
         local fx = nil
@@ -248,7 +248,7 @@ local function DoHoneyTrail(inst)
         fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
     end
 
-    inst.honeyslowcancelcount = inst.honeyslowcancelcount + 1
+    inst.tarslowcancelcount = inst.tarslowcancelcount + 1
 
     local x, y, z = inst.Transform:GetWorldPosition()
 
@@ -261,10 +261,10 @@ local function DoHoneyTrail(inst)
         end
     end
 
-    if inst.honeyslowcancelcount >= inst.honeyslowmax then
-        if inst.honeyslowtask ~= nil then
-            inst.honeyslowtask:Cancel()
-            inst.honeyslowtask = nil
+    if inst.tarslowcancelcount >= inst.tarslowmax then
+        if inst.tarslowtask ~= nil then
+            inst.tarslowtask:Cancel()
+            inst.tarslowtask = nil
         end
     end
 end
@@ -278,23 +278,28 @@ local function OnHit_Tar(inst, attacker, target)
     DealDamage(inst, attacker, target)
     ImpactFx(inst, attacker, target)
 
-    target.honeyslowcancelcount = 0
-    target.honeyslowmax = 50 * inst.powerlevel
-    target.honeyslowthreshold = HONEY_LEVELS[1].threshold
-    target.availablehoneyslow = {}
-    target.usedhoneyslow = {}
+    target.tarslowcancelcount = 0
+    target.tarslowmax = 50 * inst.powerlevel
+    target.tarslowthreshold = HONEY_LEVELS[1].threshold
+    target.availabletarslow = {}
+    target.usedtarslow = {}
     for i = 1, MAX_HONEY_VARIATIONS do
-        table.insert(target.availablehoneyslow, i)
+        table.insert(target.availabletarslow, i)
     end
-    target.honeyslowcount = math.ceil(target.honeyslowthreshold * .5)
+    target.tarslowcount = math.ceil(target.tarslowthreshold * .5)
 
-    if target.honeyslowtask ~= nil then
-        target.honeyslowtask:Cancel()
-        target.honeyslowtask = nil
+    if target.tarslowtask ~= nil then
+        target.tarslowtask:Cancel()
+        target.tarslowtask = nil
     end
+	
+	if target.honeyslowtask ~= nil then
+		target.honeyslowtask:Cancel()
+		target.honeyslowtask = nil
+	end
 
     if target.sg ~= nil or target.components.locomotor ~= nil then
-        target.honeyslowtask = target:DoPeriodicTask(HONEY_PERIOD, DoHoneyTrail)
+        target.tarslowtask = target:DoPeriodicTask(HONEY_PERIOD, DoHoneyTrail)
     end
 
     inst:Remove()

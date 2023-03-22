@@ -648,7 +648,7 @@ return{
 	},
 	ANNOUNCE_STORYTELLING_ABORT_FIREWENTOUT =
 	{
-        "And thats why Wacky stinks! The end.",
+        "And that's why Wacky stinks! The end.",
 	},
 	ANNOUNCE_STORYTELLING_ABORT_NOT_NIGHT =
 	{
@@ -1330,7 +1330,7 @@ return{
         BATBAT = "One step closer to flight!",
         BATWING = "It's too small to lift me off the ground.",
         BATWING_COOKED = "It's definitely not going to help me fly.",
-        BATCAVE = "I'm not about to check whats hiding in there.",
+        BATCAVE = "I'm not about to check what's hiding in there.",
         BEDROLL_FURRY = "It's almost like having a real bed again!",
         BUNNYMAN = "I'm gonna call you \"Bucky\".",
         FLOWER_CAVE = "Light my way, jerks!",
@@ -1807,7 +1807,7 @@ return{
 
 		CRITTERLAB = "More critters? In a cramped space? No thank you.",
         CRITTER_GLOMLING = "Why is this creep following me?",
-        CRITTER_DRAGONLING = "Stop spitting on everything, thats my job!",
+        CRITTER_DRAGONLING = "Stop spitting on everything, that's my job!",
 		CRITTER_LAMB = "Your coat is itchy, I hate it.",
         CRITTER_PUPPY = "Quit slobbering on me!",
         CRITTER_KITTEN = "Another straw, there's a lot of you back home.",
@@ -2003,7 +2003,7 @@ return{
 		{
 			EMBERS = "It's gonna go out!",
 			GENERIC = "Light of my life!",
-			HIGH = "Now THATS a good fire!",
+			HIGH = "Now THAT'S a good fire!",
 			LOW = "It's a wimpy little fire.",
 			NORMAL = "It's a perfectly normal... cold... fire...",
 			OUT = "Let's get a bonfire going!",
@@ -2739,7 +2739,7 @@ return{
         LUCKY_GOLDNUGGET = "I can't even make anything useful with it!",
         FIRECRACKERS = "Boom boom boom!",
         PERDFAN = "Now I just need some sucker to fan me.",
-        REDPOUCH = "Let's see whats inside already!",
+        REDPOUCH = "Let's see what's inside already!",
         WARGSHRINE =
         {
             GENERIC = "You'd better have something good...",
@@ -3405,7 +3405,7 @@ return{
             BURNING = "Moon magic won't save you now!",
             BURNT = "Mutated or not, it burns like the rest!",
             CHOPPED = "Doesn't seem too different from a regular tree.",
-            GENERIC = "Let's chop it down and see whats inside!",
+            GENERIC = "Let's chop it down and see what's inside!",
         },
 		MOON_TREE_BLOSSOM = "I dare you to eat it!",
 
@@ -3793,7 +3793,7 @@ return{
 		SISTURN =
 		{
 			GENERIC = "Whose wasting their time with pottery?",
-			SOME_FLOWERS = "Whats with the flowers?",
+			SOME_FLOWERS = "What's with the flowers?",
 			LOTS_OF_FLOWERS = "Boring!",
 		},
 
@@ -4038,7 +4038,7 @@ return{
         },
 
         ARCHIVE_PORTAL = {
-            POWEROFF = "Can't wait to see whats through it!",
+            POWEROFF = "Can't wait to see what's through it!",
             GENERIC = "Stupid portal! Wake up!",
         },
 
@@ -4639,7 +4639,7 @@ return{
         MONKEYHUT = 
         {
             GENERIC = "I'd prefer something more open concept.",
-            BURNT = "Thats what you get for living in a tree!",
+            BURNT = "That's what you get for living in a tree!",
         },
         POWDER_MONKEY = "Quit monkeying around!",
         PRIME_MATE = "If I take you down, does that mean I'm in charge?",
@@ -4661,10 +4661,10 @@ return{
         POLLY_ROGERSHAT = "I don't need no stinking bird following me around!",
         POLLY_ROGERS = "Shoo! Get out of here you pest!",
 
-        MONKEYISLAND_PORTAL = "Oh, another portal? Thats neat.",
+        MONKEYISLAND_PORTAL = "Oh, another portal? That's neat.",
         MONKEYISLAND_PORTAL_DEBRIS = "Looks like somethings been smashed without me...",
         MONKEYQUEEN = "I'd make more jokes, but I feel like you wouldn't understand them.",
-        MONKEYPILLAR = "Thats a lot of effort just to hang one hammock.",
+        MONKEYPILLAR = "That's a lot of effort just to hang one hammock.",
         PIRATE_FLAG_POLE = "Atleast they are getting their vitamin C.",
 
         BLACKFLAG = "I should make my own pirate logo!",
