@@ -233,3 +233,11 @@ if TUNING.DSTU.WINONA_GEN then
 	TOOLTIP.WINONA_BATTERY_HIGH = TOOLTIP.WINONA_BATTERY_HIGH .. "\n- Access limited to Winona."
 	TOOLTIP.WINONA_BATTERY_LOW = TOOLTIP.WINONA_BATTERY_LOW .. "\n- Access limited to Winona."
 end
+
+if GetModConfigData("lunar grimoire") then
+	TOOLTIP.BOOK_MOON = "- Now mutates everything around on use."
+end
+
+if GetModConfigData("apicultural notes") then
+	TOOLTIP.BOOK_BEES = "- Now fills up to 10 nearby Bee Boxes."
+end
