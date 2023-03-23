@@ -612,6 +612,23 @@ AddRecipe2(
 ChangeSortKey("sludge_cork", "oceanfishingrod", "TOOLS", true)
 ChangeSortKey("sludge_cork", "boat_magnet_beacon", "SEAFARING", true)
 
+AddRecipe2(
+    "transmute_monstermeat",
+    { Ingredient("monstersmallmeat", 3) },
+    TECH.NONE,
+    {product = "monstermeat", builder_tag = "ick_alchemistI", description="transmute_monstermeat"}
+)
+
+AddRecipe2(
+    "transmute_monstersmallmeat",
+    { Ingredient("monstermeat") },
+    TECH.NONE,
+    {product = "monstersmallmeat", builder_tag = "ick_alchemistI", description="transmute_monstersmallmeat", numtogive = 2}
+)
+
+ChangeSortKey("transmute_monstermeat", "transmute_meat", "CHARACTER", true)
+ChangeSortKey("transmute_monstersmallmeat", "transmute_smallmeat", "CHARACTER", true)
+
 --deconstruct recipes
 AddDeconstructRecipe("cursed_antler", { Ingredient("boneshard", 8), Ingredient("nightmarefuel", 2) })
 AddDeconstructRecipe("beargerclaw", { Ingredient("boneshard", 4), Ingredient("furtuft", 8) })
@@ -1042,6 +1059,11 @@ AddRecipePostInitAny(
         end
     end
 )
+
+STRINGS.RECIPE_DESC.TRANSMUTE_MONSTERMEAT = "Transmute Monster Morsels into Monster Meat"
+STRINGS.RECIPE_DESC.TRANSMUTE_MONSTERSMALLMEAT = "Transmute Monster Morsels into Monster Meat"
+
+STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC = STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC.."\nTransform 3 Monster Morsels into a Monster Meat.\nTransform a Monster Meat into 2 Monster Morsels."
 
 STRINGS.RECIPE_DESC.WATERMELON_LANTERN = "Juicy illumination."
 STRINGS.RECIPE_DESC.CRITTERLAB_REAL = "Cute pals to ruin the mood."
