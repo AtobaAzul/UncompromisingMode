@@ -675,7 +675,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
         },
         State {
             name = "aurafreeze_pre",
-            tags = { "busy", "nosleep" },
+            tags = { "busy", "nosleep", "noshove" },
 
             onenter = function(inst)
                 --inst.components.sleeper:SetResistance(400)
@@ -708,7 +708,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
         },
         State {
             name = "aurafreeze_pst",
-            tags = { "busy", "nosleep" },
+            tags = { "busy", "nosleep", "noshove" },
 
             onenter = function(inst)
                 inst.Physics:Stop()
@@ -739,7 +739,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
         },
         State {
             name = "aurafreeze",
-            tags = { "busy", "aurafreeze", "nosleep" },
+            tags = { "busy", "aurafreeze", "nosleep", "noshove"},
 
             onenter = function(inst)
                 inst.Physics:Stop()

@@ -75,9 +75,7 @@ local events =
     end),
     EventHandler("doattack", function(inst, data)
         if not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") and data and data.target then
-
             inst.sg:GoToState("attack", data.target)
-
         end
     end),
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
@@ -112,7 +110,6 @@ local states =
             RemovePhysicsColliders(inst)
             inst.AnimState:PlayAnimation("death")
             inst:AddTag("NOCLICK")
-
         end,
         timeline =
         { TimeEvent(10 * FRAMES,
@@ -138,47 +135,46 @@ local states =
         },
 
     },
-	
+
     State {
         name = "despawn",
         tags = { "busy" },
 
         onenter = function(inst)
-			inst.components.health:SetInvincible(true)
-			
+            inst.components.health:SetInvincible(true)
+
             inst.Physics:Stop()
-			
+
             PlayExtendedSound(inst, "death")
             PlayExtendedSound(inst, "death")
             PlayExtendedSound(inst, "death")
-			
+
             RemovePhysicsColliders(inst)
             inst.AnimState:PlayAnimation("death")
             inst:AddTag("NOCLICK")
-			
         end,
-		
+
         events =
         {
             EventHandler("animover", function(inst)
-				inst:Remove()
+                inst:Remove()
             end),
         },
 
     },
-	
+
     State {
         name = "idle",
         tags = { "idle", "canrotate" },
 
         onenter = function(inst, start_anim)
             inst.AnimState:PushAnimation("idle", true)
-			
+
             PlayExtendedSound(inst, "idle")
-			
-			if inst.wantstodespawn then
-				inst.sg:GoToState("despawn")
-			end
+
+            if inst.wantstodespawn then
+                inst.sg:GoToState("despawn")
+            end
         end,
     },
 
@@ -289,7 +285,7 @@ local states =
     },
     State {
         name = "summon_channelers_pre",
-        tags = { "busy", "summoning" },
+        tags = { "busy", "summoning", "noshove" },
 
         onenter = function(inst)
             inst.components.locomotor:StopMoving()
@@ -314,7 +310,7 @@ local states =
     },
     State {
         name = "summon_channelers_loop",
-        tags = { "busy", "summoning" },
+        tags = { "busy", "summoning", "noshove" },
 
         onenter = function(inst, count)
             inst.components.locomotor:StopMoving()
@@ -354,7 +350,7 @@ local states =
     },
     State {
         name = "summon_channelers_pst",
-        tags = { "busy" },
+        tags = { "busy", "noshove" },
 
         onenter = function(inst)
             inst.Physics:Stop()
