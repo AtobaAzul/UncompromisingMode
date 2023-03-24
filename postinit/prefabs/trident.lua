@@ -13,7 +13,6 @@ local FX_RADIUS = TUNING.TRIDENT.SPELL.RADIUS * 0.65
 local COST_PER_EXPLOSION = TUNING.TRIDENT.USES / TUNING.TRIDENT.SPELL.USE_COUNT
 
 local function DoLineAttack(inst, target, position)
-
     local owner = inst.components.inventoryitem:GetGrandOwner()
     if owner == nil then
         return
@@ -107,10 +106,10 @@ local function OnAttack(inst, attacker, target)
         local x, y, z = target.Transform:GetWorldPosition()
 
         local fx = TheWorld.Map:IsOceanTileAtPoint(x, y, z) and not TheWorld.Map:IsVisualGroundAtPoint(x, y, z) and
-        TheWorld.Map:GetPlatformAtPoint(x, z) == nil and SpawnPrefab("crab_king_waterspout") or
-        SpawnPrefab("trident_ground_fx")
+            TheWorld.Map:GetPlatformAtPoint(x, z) == nil and SpawnPrefab("crab_king_waterspout") or
+            SpawnPrefab("trident_ground_fx")
         local y_offset = fx.prefab == "trident_ground_fx" and 8 or 0
-        local x_offset, z_offset = math.random(-2,2), math.random(-2,2)
+        local x_offset, z_offset = math.random(-2, 2), math.random(-2, 2)
         fx.Transform:SetPosition(x + x_offset, y + y_offset, z + z_offset)
 
         local ring = SpawnPrefab("groundpoundring_fx")
@@ -134,4 +133,14 @@ env.AddPrefabPostInit("trident", function(inst)
     end
 
     inst.components.weapon:SetOnAttack(OnAttack)
+
+    local _DoWaterExplosionEffect = inst.DoWaterExplosionEffect
+
+    inst.DoWaterExplosionEffect = function(inst, affected_entity, owner, position)
+        if affected_entity.components.complexprojectile ~= nil then
+            return
+        else
+            _DoWaterExplosionEffect(inst, affected_entity, owner, position)
+        end
+    end
 end)
