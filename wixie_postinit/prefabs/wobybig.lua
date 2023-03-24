@@ -153,6 +153,7 @@ env.AddPrefabPostInit("wobybig", function(inst)
 
 	inst:AddTag("customwobytag")
 	inst:AddTag("noauradamage")
+	inst:AddTag("tiddlevirusimmune")
 	
 	if not TheWorld.ismastersim then
 		return

@@ -53,7 +53,7 @@ AddTile(
     },
     {
       --turf_def 6
-        name = "hfturf",
+        name = "hoodedmoss",
         anim = "hoodedmoss",
         bank_build = "hfturf"
     }
@@ -82,7 +82,7 @@ AddTile(
         noise_texture = "mini_noise_jungle.tex"
     },
     {
-        name = "hfturf",
+        name = "ancienthoodedturf",
         anim = "ancienthoodedturf",
         bank_build = "hfturf"
     }

@@ -59,7 +59,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
         }
 	DESCRIBE.WIXIE =
         {
-            GENERIC = "Un petit diable!",
+            GENERIC = "Une petite diablesse!",
             ATTACKER = "Trouble is brewing within %s's head!",
             MURDERER = "I cannot handle all her violence!",
             REVIVER = "Thank you %s, but please stay out of my kitchen!",
@@ -172,6 +172,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 	DESCRIBE.HOODED_FERN = "Well, it's there."
 	DESCRIBE.HOODEDWIDOW = "I don't think I'm getting any monster meat from it."
 	DESCRIBE.GIANT_TREE = "What a marvel."
+	DESCRIBE.ANCIENTHOODEDTURF = DESCRIBE.TURF_FOREST
+	DESCRIBE.HOODEDMOSS = DESCRIBE.TURF_FOREST
 	DESCRIBE.WIDOWSGRASP = "I could fry it?"
 	DESCRIBE.WEBBEDCREATURE = "Do I really want to get my ingredients from that?"
 	ANNOUNCE.WEBBEDCREATURE = "I can't pierce it. My hands are different than a spider's."
