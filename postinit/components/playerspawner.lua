@@ -28,7 +28,7 @@ env.AddComponentPostInit("playerspawner", function(self)
 			
             return _SpawnAtLocation(self, inst, player, x, y, z, true)
         else
-            return _SpawnAtLocation(self, inst, player, x, y, z, true, platform_uid, rx, ry, rz)
+            return _SpawnAtLocation(self, inst, player, x, y, z, isloading, platform_uid, rx, ry, rz)
 		end
     end
 end)

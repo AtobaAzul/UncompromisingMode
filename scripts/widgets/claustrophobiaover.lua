@@ -38,7 +38,7 @@ function ClaustrophobiaOver:OnUpdate(dt)
 			local claustrophobia = self.owner.claustrophobia
 			self.bg2:SetTint(1,1,1, claustrophobia)
 			
-			if claustrophobia >= 0.15 then
+			if claustrophobia >= 0.25 then
 				TheFocalPoint.SoundEmitter:PlaySound("wixie/characters/wixie/claustrophobia", "claustrophobicdrone")
 			else
 				TheFocalPoint.SoundEmitter:KillSound("claustrophobicdrone")
