@@ -239,5 +239,9 @@ if GetModConfigData("lunar grimoire") then
 end
 
 if GetModConfigData("apicultural notes") then
-	TOOLTIP.BOOK_BEES = "- Now fills up to 10 nearby Bee Boxes."
+    TOOLTIP.BOOK_BEES = "- Now fills up to 10 nearby Bee Boxes."
+end
+
+if GetModConfigData("disable_megaflare") then
+	TOOLTIP.MEGAFLARE = "- No longer summons Deerclops."
 end
