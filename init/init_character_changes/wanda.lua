@@ -1,9 +1,6 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
-
-local NOTENTCHECK_CANT_TAGS = { "FX", "INLIMBO" }
-
 if TUNING.DSTU.WANDA_NERF then
     local function DelayedMarkTalker(player)
         -- if the player starts moving right away then we can skip this
@@ -13,8 +10,7 @@ if TUNING.DSTU.WANDA_NERF then
     end
 
     local function noentcheckfn(pt)
-        return not TheWorld.Map:IsPointNearHole(pt) and
-        #TheSim:FindEntities(pt.x, pt.y, pt.z, 1, nil, NOTENTCHECK_CANT_TAGS) == 0
+        return not TheWorld.Map:IsPointNearHole(pt) and #TheSim:FindEntities(pt.x, pt.y, pt.z, 1, nil, NOTENTCHECK_CANT_TAGS) == 0
     end
 
     env.AddPrefabPostInit("wanda", function(inst)
@@ -200,16 +196,8 @@ if TUNING.DSTU.WANDA_NERF then
                 end
 
                 inst.dest_name:set(text and text ~= "" and text or "")
-
                 _Write(self, doer, text, ...)
             end
-
-        local _OnLoad = inst.components.writeable.OnLoad
-        inst.components.writeable.OnLoad = function(self, ...)
-            _OnLoad(self, ...)
-            local text = self.text
-            inst.dest_name:set(text and text ~= "" and text or "")
-        end
 
         inst.components.pocketwatch.DoCastSpell = function(inst, doer, target, pos)
             local recallmark = inst.components.recallmark
@@ -217,11 +205,11 @@ if TUNING.DSTU.WANDA_NERF then
             if recallmark:IsMarked() then
                 local pt = doer:GetPosition()
                 local offset = FindWalkableOffset(pt, math.random() * 2 * PI, 3 + math.random(), 16, false, true,
-                        noentcheckfn, true, true)
+                    noentcheckfn, true, true)
                     or FindWalkableOffset(pt, math.random() * 2 * PI, 5 + math.random(), 16, false, true, noentcheckfn,
-                        true, true)
+                    true, true)
                     or FindWalkableOffset(pt, math.random() * 2 * PI, 7 + math.random(), 16, false, true, noentcheckfn,
-                        true, true)
+                    true, true)
                 if offset ~= nil then
                     pt = pt + offset
                 end
@@ -233,7 +221,7 @@ if TUNING.DSTU.WANDA_NERF then
                 local portal = SpawnPrefab("pocketwatch_portal_entrance")
                 portal.Transform:SetPosition(pt:Get())
                 portal:SpawnExit(recallmark.recall_worldid, recallmark.recall_x, recallmark.recall_y, recallmark
-                    .recall_z)
+                .recall_z)
                 inst.SoundEmitter:PlaySound("wanda1/wanda/portal_entrance_pre")
 
                 local new_watch = SpawnPrefab("pocketwatch_recall")
@@ -264,6 +252,13 @@ if TUNING.DSTU.WANDA_NERF then
 
                 return true
             end
+        end
+
+        local _OnLoad = inst.components.writeable.OnLoad
+        inst.components.writeable.OnLoad = function(self, ...)
+            _OnLoad(self, ...)
+            local text = self.text
+            inst.dest_name:set(text and text ~= "" and text or "")
         end
     end)
 end

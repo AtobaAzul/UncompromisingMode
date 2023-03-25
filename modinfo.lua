@@ -1,7 +1,7 @@
 name = "󰀕 Uncompromising Mode"
 description =
 [[
-󰀔 [ Version 1.1.3: "Face Your Fears" ]
+󰀔 [ Version 1.1.2: "Face Your Fears" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -15,7 +15,7 @@ Latest update features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Face Your Fears v1.1.3"
+version = "Face Your Fears v1.1.2"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
@@ -297,7 +297,7 @@ configuration_options =
 		name = "ghostwalrus",
 		label = "Rusty Traps",
 		hover = "MacTusk forgot to pick up some traps and left them to rust.",
-		options =
+		options = 
 		{
 			{description = "Enabled", data = "enabled"},
 			{description = "Enabled (No Respawn)", data = "norespawn", hover = "Traps don't respawn over time."},
@@ -603,7 +603,7 @@ configuration_options =
 		name = "mother_goose_spawn",
 		label = "Mother Goose Spawn Date",
 		hover = "The year that Mother Goose can spawn.",
-		options =
+		options = 
 		{
 			{description = "Year 1 (Default)", data = 26},
 			{description = "Year 2", data = 26*1.5},--maybe???
@@ -616,7 +616,7 @@ configuration_options =
 		name = "wiltfly_spawn",
 		label = "Wilting Dragonfly Spawn Date",
 		hover = "The year that Wilting Dragonfly can spawn.",
-		options =
+		options = 
 		{
 			{description = "Year 1 (Default)", data = 26},
 			{description = "Year 2", data = 26*2},--maybe???
@@ -720,7 +720,7 @@ configuration_options =
 	},
 	--BinaryConfig("crabking_claws", "Crabking Fight Adjustment", "The Crabkings imposing claws now deal 500 damage to the king when killed.", false),
 	SkipSpace(),
-
+	
 	Header("Experimental"),
 	BinaryConfig("beefalo_nerf", "Beefalo Nerf", "Beefalo take half of the damage taken, instead of all.", false),
 	BinaryConfig("announce_basestatus", "[DEV] Announce Ratsniffer","[Developer Tool] Prints the exact rat sniff values to chat to be viewed in real time.",false),
