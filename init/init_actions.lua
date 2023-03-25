@@ -74,7 +74,7 @@ AddAction(
 	"CASTLIGHTER",
 	"CASTLIGHTER",
 	function(act)
-		local staff = act.invobject or act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+		local staff = act.invobject or act.doer.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.HANDS)
 		local act_pos = act:GetActionPoint()
 		if staff and staff:HasTag("lighter") and staff.components.spellcaster and staff.components.spellcaster:CanCast(act.doer, act.target, act_pos) then
 			staff.components.spellcaster:CastSpell(act.target, act_pos)
@@ -87,7 +87,7 @@ AddAction(
 	"WINGSUIT",
 	"WINGSUIT",
 	function(act)
-		local staff = act.invobject or act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+		local staff = act.invobject or act.doer.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BODY)
 		local act_pos = act:GetActionPoint()
 		if staff and staff.components.spellcaster and staff.components.spellcaster:CanCast(act.doer, act.target, act_pos) then
 			staff.components.spellcaster:CastSpell(act.target, act_pos)
@@ -249,7 +249,7 @@ GLOBAL.ACTIONS.REPAIR.fn = function(act)
 			act.doer.components.inventory:IsHeavyLifting() and
 			not (act.doer.components.rider ~= nil and
 			act.doer.components.rider:IsRiding()) then
-			material = act.doer.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+			material = act.doer.components.inventory:GetEquippedItem(GLOBAL.EQUIPSLOTS.BODY)
 		else
 			material = act.invobject
 		end
