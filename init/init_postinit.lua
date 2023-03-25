@@ -176,7 +176,7 @@ local prefab_post = {
 	"wptags",
 	"inventoryitem_classified",
     "cannonballs",
-	--"renameable_items",
+	"renameable_items",
 }
 
 local stategraph_post = {
