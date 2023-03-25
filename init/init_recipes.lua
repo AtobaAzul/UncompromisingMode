@@ -621,7 +621,7 @@ AddRecipe2(
 
 AddRecipe2(
     "transmute_monstersmallmeat",
-    { Ingredient("monstermeat") },
+    { Ingredient("monstermeat", 1) },
     TECH.NONE,
     {product = "monstersmallmeat", builder_tag = "ick_alchemistI", description="transmute_monstersmallmeat", numtogive = 2}
 )

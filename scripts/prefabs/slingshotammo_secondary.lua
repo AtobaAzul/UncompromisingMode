@@ -195,7 +195,7 @@ local function DoFreeze(inst, target)
 		
     local ents = TheSim:FindEntities(pos.x, pos.y, pos.z, power, nil, FREEZE_CANT_TAGS)
     for i, v in pairs(ents) do
-        if v ~= target and v.components.freezable then
+        if v ~= target and v.components.freezable ~= nil then
 			v.components.freezable:AddColdness((TUNING.SLINGSHOT_AMMO_FREEZE_COLDNESS / 2) + inst.powerlevel / 2)
 			target.components.freezable:SpawnShatterFX()
 		end
