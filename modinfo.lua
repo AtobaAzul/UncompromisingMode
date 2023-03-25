@@ -11,7 +11,7 @@ Latest update features:
 - New Winona perks
 - A ton of misc. changes, ranging from Wickerbottom's books to hounds.
 
-󰀏 NEXT UPDATE: Under the Weather, part 1]]
+󰀏 NEXT UPDATE: Under the Weather, part 1 ]]
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
