@@ -1,4 +1,10 @@
 name = "󰀕 Uncompromising Mode"
+--borrowed from IA
+folder_name = folder_name or "workshop-"
+if not folder_name:find("workshop-") then
+	name = "[LOCAL] - "..name
+end
+
 description =
 [[
 󰀔 [ Version 1.1.4: "Face Your Fears" ]
