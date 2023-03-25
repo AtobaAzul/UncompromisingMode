@@ -11,13 +11,13 @@ local assets =
 local prefabs =
 {
     "fruitbat",
-	"honey",
+    "honey",
 }
 
-SetSharedLootTable( 'pitcherplant',
-{
-    {'honey',1},
-})
+SetSharedLootTable('pitcherplant',
+    {
+        { 'honey', 1 },
+    })
 
 local function OnEnterLight(inst)
     if not (TheWorld.state.iswinter or inst:HasTag("burnt"))
@@ -33,10 +33,10 @@ end
 
 
 local function onchildgoinghome(inst, data)
-        if data.child ~= nil and
+    if data.child ~= nil and
         data.child.bugcount ~= nil then
-		inst.count = data.child.bugcount
-        end
+        inst.count = data.child.bugcount
+    end
 end
 
 local function SeasonalSpawnChanges(inst, season)
@@ -54,13 +54,13 @@ local function SeasonalSpawnChanges(inst, season)
 end
 
 local function onsave(inst, data)
-data.count = inst.count
+    data.count = inst.count
 end
 
 local function onload(inst, data)
-if data ~= nil and data.count ~= nil then
-inst.count = data.count
-end
+    if data ~= nil and data.count ~= nil then
+        inst.count = data.count
+    end
 end
 local function StartSpawning(inst)
     if inst.components.childspawner ~= nil
@@ -85,8 +85,8 @@ end
 local function OnInit(inst)
     inst:WatchWorldState("isday", OnIsDay)
     OnIsDay(inst, TheWorld.state.isday)
-	local x, y ,z = inst.Transform:GetWorldPosition()
-	--inst.Transform:SetPosition(x,9,z)
+    local x, y, z = inst.Transform:GetWorldPosition()
+    --inst.Transform:SetPosition(x,9,z)
 end
 
 local function onspawnbat(inst, bat)
@@ -94,7 +94,6 @@ local function onspawnbat(inst, bat)
 end
 
 local function MakeBeebox(name, common_postinit)
-
     local function fn()
         local inst = CreateEntity()
 
@@ -108,13 +107,13 @@ local function MakeBeebox(name, common_postinit)
 
         inst.MiniMapEntity:SetIcon("pitcher.tex")
 
-		inst.AnimState:SetBank("pitcher")
-		inst.AnimState:SetBuild("pitcher")
-		inst.AnimState:PushAnimation("swinglong")
-		--inst:AddTag("CLASSIFIED")
-		inst:AddTag("pitcherplant")
-      
-  
+        inst.AnimState:SetBank("pitcher")
+        inst.AnimState:SetBuild("pitcher")
+        inst.AnimState:PushAnimation("swinglong")
+        --inst:AddTag("CLASSIFIED")
+        inst:AddTag("pitcherplant")
+        inst:AddTag("NOBLOCK")
+
         if common_postinit ~= nil then
             common_postinit(inst)
         end
@@ -125,7 +124,7 @@ local function MakeBeebox(name, common_postinit)
             return inst
         end
 
-        ---------------------  
+        ---------------------
 
         inst:ListenForEvent("childgoinghome", onchildgoinghome)
         -------------------
@@ -140,17 +139,17 @@ local function MakeBeebox(name, common_postinit)
             inst.components.childspawner:StartSpawning()
         end
 
-		inst:DoTaskInTime(0, OnInit)
+        inst:DoTaskInTime(0, OnInit)
 
         inst:AddComponent("inspectable")
-		inst.components.childspawner:SetSpawnedFn(onspawnbat)
-		inst:AddComponent("lootdropper")
-		inst.components.lootdropper:SetChanceLootTable("pitcherplant")
-		MakeLargePropagator(inst)
-		inst.count = 0
-		inst.OnSave = onsave
-		inst.OnLoad = onload  
-		--inst:DoTaskInTime(0,function(inst) inst:Remove() end)
+        inst.components.childspawner:SetSpawnedFn(onspawnbat)
+        inst:AddComponent("lootdropper")
+        inst.components.lootdropper:SetChanceLootTable("pitcherplant")
+        MakeLargePropagator(inst)
+        inst.count = 0
+        inst.OnSave = onsave
+        inst.OnLoad = onload
+        --inst:DoTaskInTime(0,function(inst) inst:Remove() end)
         return inst
     end
 
@@ -159,5 +158,3 @@ end
 
 
 return MakeBeebox("pitcherplant")
-
-    
