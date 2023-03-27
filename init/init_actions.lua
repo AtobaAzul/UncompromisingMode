@@ -269,7 +269,7 @@ AddAction(SET_CUSTOM_NAME)
 
 SET_CUSTOM_NAME.fn = function(act)
     local focus = nil
-	if act.target and act.target:HasTag("telebase") or act.target.prefab == "pocketwatch_portal" or act.target.prefab == "pocketwatch_warp" --[[or act.target:HasTag("_equippable")]] then
+	if act.target and act.target:HasTag("telebase") or act.target.prefab == "pocketwatch_portal" or act.target.prefab == "pocketwatch_recall" --[[or act.target:HasTag("_equippable")]] then
 		focus = act.target
 	end
 

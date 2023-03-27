@@ -47,10 +47,7 @@ local function OnDismantle_high(inst)
     local fx = SpawnPrefab("collapse_small")
 
     item.Transform:SetPosition(inst.Transform:GetWorldPosition())
-    if #inst._gems > 0 then
-        item.generator = inst:GetSaveRecord()
-    end
-
+    item._gems = inst._gems
     item.components.finiteuses:SetPercent(inst.components.fueled:GetPercent())
 
     fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
