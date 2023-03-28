@@ -197,7 +197,7 @@ local function DoFreeze(inst, target)
     for i, v in pairs(ents) do
         if v ~= target and v.components.freezable ~= nil then
 			v.components.freezable:AddColdness((TUNING.SLINGSHOT_AMMO_FREEZE_COLDNESS / 2) + inst.powerlevel / 2)
-			target.components.freezable:SpawnShatterFX()
+			v.components.freezable:SpawnShatterFX()
 		end
     end
 end
