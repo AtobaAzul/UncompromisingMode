@@ -221,13 +221,13 @@ local function HasWobyTarget(inst)
             inst:IsNear(inst.components.follower.leader, 25)) and
 			(
 			-- Check for Picking (plants)
-			(inst.wobytarget.components.pickable ~= nil and inst.wobytarget.components.pickable.canbepicked) or
+			(inst.wobytarget.components.pickable ~= nil and inst.wobytarget.components.pickable.canbepicked and not inst.wobytarget:HasTag("snowpile_basic")) or
 			-- Check for item to pick up		
 			(inst.wobytarget.components.inventoryitem ~= nil and inst.wobytarget.components.inventoryitem.canbepickedup and not inst.wobytarget.components.combat) or
 			-- Check for harvestable target	
 			(inst.wobytarget.components.harvestable ~= nil and inst.wobytarget.components.harvestable:CanBeHarvested()) or 
 			-- I'm big AF and I can dig things
-			(inst.wobytarget.components.workable ~= nil and inst.wobytarget.components.workable:GetWorkAction() == ACTIONS.DIG and not (inst.wobytarget.components.pickable ~= nil and inst.wobytarget.components.pickable.canbepicked)) or 
+			(inst.wobytarget.components.workable ~= nil and inst.wobytarget.components.workable:GetWorkAction() == ACTIONS.DIG and (inst.wobytarget:HasTag("snowpile_basic") or inst.wobytarget.components.pickable ~= nil and not inst.wobytarget.components.pickable.canbepicked)) or 
 			-- Bark Bark! Attack me you dink!
 			(inst.wobytarget.components.combat ~= nil and 
 			inst.wobytarget.components.combat:CanTarget(inst) and not
@@ -248,7 +248,7 @@ local function DoTargetAction(inst)
             inst:IsNear(inst.components.follower.leader, 25)) and
 			(
 			-- Check for Picking (plants)
-			(inst.wobytarget.components.pickable ~= nil and inst.wobytarget.components.pickable.canbepicked and
+			(inst.wobytarget.components.pickable ~= nil and inst.wobytarget.components.pickable.canbepicked and not inst.wobytarget:HasTag("snowpile_basic") and
 			BufferedAction(inst, inst.wobytarget, ACTIONS.PICK)) or
 			-- Check for item to pick up		
 			(inst.wobytarget.components.inventoryitem ~= nil and inst.wobytarget.components.inventoryitem.canbepickedup and not inst.wobytarget.components.combat and
@@ -257,7 +257,7 @@ local function DoTargetAction(inst)
 			(inst.wobytarget.components.harvestable ~= nil and inst.wobytarget.components.harvestable:CanBeHarvested() and
 			BufferedAction(inst, inst.wobytarget, ACTIONS.HARVEST)) or 
 			-- I'm big AF and I can dig things
-			((inst.wobytarget.components.workable ~= nil and inst.wobytarget.components.workable:GetWorkAction() == ACTIONS.DIG and not (inst.wobytarget.components.pickable ~= nil and inst.wobytarget.components.pickable.canbepicked)) and 
+			((inst.wobytarget.components.workable ~= nil and inst.wobytarget.components.workable:GetWorkAction() == ACTIONS.DIG and (inst.wobytarget:HasTag("snowpile_basic") or inst.wobytarget.components.pickable ~= nil and not inst.wobytarget.components.pickable.canbepicked)) and 
 			BufferedAction(inst, inst.wobytarget, ACTIONS.DIG)) or 
 			-- Bark Bark! Attack me you dink!
 			(inst.wobytarget.components.combat ~= nil and 
