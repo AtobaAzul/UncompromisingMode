@@ -149,7 +149,7 @@ modimport("init/init_character_changes/wormwood")
 --end
 
 if GetModConfigData("lifeamulet") then
-	--modimport("init/init_lifeamulet") nuh uh
+	modimport("init/init_lifeamulet")
 end
 
 if GetModConfigData("caved") == false and GetModConfigData("acidrain") then
