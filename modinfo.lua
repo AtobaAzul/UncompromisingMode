@@ -7,7 +7,7 @@ end
 
 description =
 [[
-󰀔 [ Version 1.1.4: "Face Your Fears" ]
+󰀔 [ Version 1.1.5: "Face Your Fears" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -21,7 +21,7 @@ Latest update features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Face Your Fears v1.1.4"
+version = "Face Your Fears v1.1.5"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
@@ -737,7 +737,7 @@ configuration_options =
 	SkipSpace(),
 	BinaryConfig("honeybandbuff", "Honey Poultice Buff", "[Experimental] Crafting Honey Poultice gives 2, healing with it gives 10 health overtime as well as 30 health.", false),
 	BinaryConfig("woodie", "Weregoose Wetness", "Weregoose gains wetness when over water.", false),
-	BinaryConfig("wormwood_fire", "Extra Flamable Wormwood", "Wormwood is highly flameable, like in Hamlet.", false),
+	BinaryConfig("wormwood_fire", "Extra Flamable Wormwood", "[BROKEN] Wormwood is highly flameable, like in Hamlet.", false),
 	BinaryConfig("hangyperds", "Starving Gobblers", "Gobblers are now more agressive and will attempt to take berries out of the player's inventory.", false),
     BinaryConfig("bernie", "Big Bernie", "Enable Big BERNIE!!", true),
 
