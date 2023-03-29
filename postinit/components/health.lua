@@ -110,6 +110,8 @@ env.AddComponentPostInit("health", function(self)
 			elseif not self.inst:HasTag("deathamp") then -- No positive healing if you're on your last breath
 				_DoDelta(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
 			end
+        elseif MayKill(self, amount) and HasLLA(self) then
+			TriggerLLA(self)
 		else
 			_DoDelta(self, amount, overtime, cause, ignore_invincible, afflicter, ignore_absorb, ...)
 		end
