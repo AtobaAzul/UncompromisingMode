@@ -303,7 +303,7 @@ env.AddPrefabPostInit("crabking", function(inst)
 
 		inst.attack_count = math.clamp(inst.attack_count + 1, 0, 10)
 
-		if inst.attack_count > math.random(5, 8) then
+		if inst.attack_count > math.random(2, 4) then
 			inst.components.timer:StartTimer("spell_cooldown", 30 - inst.countgems(inst).yellow)
 
 			inst.vulnerable_shine_task = inst:DoPeriodicTask(2, function()

@@ -425,7 +425,6 @@ configuration_options =
 		default = 1,
 	},
 	BinaryConfig("hambatnerf", "Ham Bat Nerf", "Spoils faster and minimum damage is lower.", true),
-	BinaryConfig("lazydeserter", "Lazy Deserter Buff", "The Lazy Deserter picks and harvests things nearby it when being used.", true),
 -----------------------------
 -- Food --
 -----------------------------
