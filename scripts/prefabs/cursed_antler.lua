@@ -128,7 +128,7 @@ local function onattack(inst, attacker, target)
 				if v.components.combat ~= nil and not (v.components.health ~= nil and v.components.health:IsDead()) then
 					v.components.combat:GetAttacked(attacker, 34, nil)
 
-					if v.components.freezable ~= nil and target.components.health ~= nil and not v.components.health:IsDead() and
+					if v.components.freezable ~= nil and v.components.health ~= nil and not v.components.health:IsDead() and
 						not v.components.freezable:IsFrozen() then
 						v.components.freezable:AddColdness(0.5)
 						v.components.freezable:SpawnShatterFX()

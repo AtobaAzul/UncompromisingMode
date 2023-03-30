@@ -231,7 +231,7 @@ local function HasWobyTarget(inst)
 			-- Bark Bark! Attack me you dink!
 			(inst.wobytarget.components.combat ~= nil and 
 			inst.wobytarget.components.combat:CanTarget(inst) and not
-			(inst.wobytarget.components.combat:TargetIs(inst) or inst.wobytarget.components.grouptargeter ~= nil and inst.wobytarget.components.grouptargeter:IsTargeting(self.inst)) and not
+			(inst.wobytarget.components.combat:TargetIs(inst) or inst.wobytarget.components.grouptargeter ~= nil and inst.wobytarget.components.grouptargeter:IsTargeting(inst)) and not
 			(inst.wobytarget.sg ~= nil and inst.wobytarget.sg:HasStateTag("attack")))
 			
 			) or false
