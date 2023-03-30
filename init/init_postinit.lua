@@ -109,7 +109,6 @@ local prefab_post = {
 	"glasscutter",
 	"critterlab",
 	"wobster",
-	"townportal",
 	"trinkets", --This is for the grave mound cc trinkets
 	"trap",  -- prevents traps and rabbits from 'sleeping' off screen
 	"moonbase",
@@ -434,6 +433,10 @@ end
 
 if GetModConfigData("hambatnerf") then
 	table.insert(prefab_post, "hambat")
+end
+
+if GetModConfigData("townportal_rework") then
+	table.insert(prefab_post, "townportal")
 end
 
 modimport("postinit/sim")

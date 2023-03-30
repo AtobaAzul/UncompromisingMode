@@ -366,6 +366,7 @@ configuration_options =
 -----------------------------
 	SkipSpace(),
 	Header("Items and Structures"),
+	BinaryConfig("townportal_rework", "Lazy Deserter Rework", "Makes the Lazy Deserter useful in singleplayer, by automatically harvesting nearby plants and objects.", true),
 	BinaryConfig("telestaff_rework", "Telelocator Rework", "You can now select Focus you want to teleport to. Focuses now cost 3 Purple gems instead of gold.\nStaff's uses doubled.", true),
 	BinaryConfig("no4crafts", "No 4-Ingredient Recipes", "Changes all 4-ingredient recipes to use 3 instead.", false),
 	BinaryConfig("scaledchestbuff", "Scaled Chest Buff", "Enabling this buffs Scaled Chest to 25 slots. Toggling with Scaled Chests in existing world may cause crash.", true),
@@ -424,7 +425,6 @@ configuration_options =
 		default = 1,
 	},
 	BinaryConfig("hambatnerf", "Ham Bat Nerf", "Spoils faster and minimum damage is lower.", true),
-	BinaryConfig("lazydeserter", "Lazy Deserter Buff", "The Lazy Deserter picks and harvests things nearby it when being used.", true),
 -----------------------------
 -- Food --
 -----------------------------
