@@ -13,7 +13,8 @@ local CRABKING_SPELLGENERATOR_TAGS = { "crabking_spellgenerator" }
 
 local function DoLineAttack(inst, rand_start)
 	local ck_x, ck_y, ck_z = inst.Transform:GetWorldPosition()
-	local target = #inst.all_targets > 1 and inst.all_targets[math.random(#inst.all_targets)] or inst.components.combat ~= nil and inst.components.combat.target
+	local target = #inst.all_targets > 1 and inst.all_targets[math.random(#inst.all_targets)] or
+		inst.components.combat ~= nil and inst.components.combat.target
 
 	if target == nil then
 		local boats = TheSim:FindEntities(ck_x, ck_y, ck_z, 25, { "boat" })
@@ -80,7 +81,8 @@ end
 
 local function DoSeekingAttack(inst)
 	local ck_x, ck_y, ck_z = inst.Transform:GetWorldPosition()
-	local target = #inst.all_targets > 1 and inst.all_targets[math.random(#inst.all_targets)] or inst.components.combat ~= nil and inst.components.combat.target
+	local target = #inst.all_targets > 1 and inst.all_targets[math.random(#inst.all_targets)] or
+		inst.components.combat ~= nil and inst.components.combat.target
 
 	if target == nil then
 		local boats = TheSim:FindEntities(ck_x, ck_y, ck_z, 25, { "boat" })
@@ -312,6 +314,7 @@ env.AddPrefabPostInit("crabking", function(inst)
 				end
 				inst.wantstocast = false --keep it that way!!!
 			end)
+
 			inst.long_cd = inst:DoTaskInTime(30 - inst.countgems(inst).yellow, function()
 				inst.wantstocast = true
 				inst.attack_count = 0
@@ -444,7 +447,8 @@ env.AddPrefabPostInit("crabking", function(inst)
 
 		if boat_physics ~= nil then
 			if inst.components.health ~= nil then
-				inst.components.health:DoDelta(-300 * math.abs(boat_physics:GetVelocity() * data.hit_dot_velocity))
+				inst.components.health:DoDelta((-300 * math.abs(boat_physics:GetVelocity() * data.hit_dot_velocity)) *
+				0.33)
 			end
 		end
 
@@ -489,5 +493,17 @@ env.AddPrefabPostInit("crabking", function(inst)
 	inst:ListenForEvent("entitysleep", function(inst)
 		inst:RemoveEventCallback("on_collide", OnCollide)
 		TheWorld.crabking_active = false
+	end)
+
+    inst:ListenForEvent("unfreeze", function()
+		inst.attack_count = math.clamp(inst.attack_count + -2, 0, 10)
+		inst.gemshine(inst, "blue")
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local fx = SpawnPrefab("crabking_feeze")
+		fx.crab = inst
+		fx:ListenForEvent("onremove", function() removecrab(fx) end, inst)
+		fx.Transform:SetPosition(x, y, z)
+		local scale = 0.75 + Remap(inst.countgems(inst).blue, 0, 9, 0, 1.55)
+		fx.Transform:SetScale(scale, scale, scale)
 	end)
 end)
