@@ -431,7 +431,6 @@ configuration_options =
 	SkipSpace(),
 	Header("Food"),
 	Header("Crockpot Recipes"),
-	BinaryConfig("nowintergrowing", "No Winter Growing", "Makes a few food sources such as Kelp and Stone Fruit not grow in Winter", true),
 	BinaryConfig("newrecipes", "New Recipes", "UM adds a few new recipes\nTurn this off if you're using mods that can cause overlap, such as HoF.", true),
 	BinaryConfig("crockpotmonstmeat", "Harder Monster Meat", "Enables the new Monster Lagsana recipe, where you can only make recipes if the meat value is greater than monster value.", true),
 	BinaryConfig("generalcrockblocker", "Trash Filler Blocker", "Heavy use of certain low quality Crock Pot ingredients, such as Twigs, Ice, Buttefly Wings, and other inedibles results in Wet Goop.", true),
@@ -457,8 +456,11 @@ configuration_options =
 	BinaryConfig("icecreambuff", "Ice Cream Buff", "Ice Cream now restores 100 sanity, but does it slowly.", true),
 	BinaryConfig("farmfoodredux", "Farmplot Food Redux", "Reallocates most dishes that involve Crock Pot foods. Typically a buff, but may exchange some stats.", true),
 	BinaryConfig("sr_foodrebalance", "Fish foods rebalance", "Several fish based foods have their stats tweaked.", true),
+
 	SkipSpace(),
-	Header("General Food Tweaks"),
+    Header("General Food Tweaks"),
+	BinaryConfig("monstersmallmeat", "Monster Morsel", "Small creatures like Spiders drop monster morsels instead of Monster Meat", true),
+	BinaryConfig("nowintergrowing", "No Winter Growing", "Makes a few food sources such as Kelp and Stone Fruit not grow in Winter", true),
 	BinaryConfig("beebox_nerf", "Bee Box Nerf", "Bee Boxes only release 2 Bees max.", true),
 	{
 		name = "more perishing",
@@ -558,7 +560,7 @@ configuration_options =
 
 	SkipSpace(),
 	Header("Bats"),
-	BinaryConfig("hardbatilisks", "Harder Batilisks", "Batilisk's health is increased from 50 to 75, drops Wings less often than vanilla, drops Monster Morsels.", true),
+	--BinaryConfig("hardbatilisks", "Harder Batilisks", "Batilisk's health is increased from 50 to 75, drops Wings less often than vanilla, drops Monster Morsels.", true),
 	BinaryConfig("adultbatilisks", "Adult Batilisks", "Adult Batilisks spawn under certain conditions instead of regular ones. They are harder, but have better loot on average.", true),
 	BinaryConfig("batspooking", "Bat Sinkhole Evacuation", "Sinkholes will spawn all of their Bats as soon as they are regenerated, instead of slowly trickling out.", true),
 	SkipSpace(),

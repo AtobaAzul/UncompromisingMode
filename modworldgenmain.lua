@@ -19,7 +19,7 @@ local function TestForIA()
 end
 
 local GROUND_OCEAN_COLOR = {
-                             -- Color for the main island ground tiles
+    -- Color for the main island ground tiles
     primary_color = { 0, 0, 0, 25 },
     secondary_color = { 0, 20, 33, 0 },
     secondary_color_dusk = { 0, 20, 33, 80 },
@@ -30,12 +30,12 @@ AddTile(
     "HOODEDFOREST", --tile_name 1
     "LAND",         --tile_range 2
     {
-                    --tile_data 3
+        --tile_data 3
         ground_name = "hoodedmoss",
         old_static_id = 102,
     },
     {
-      --ground_tile_def 4
+        --ground_tile_def 4
         name = "hoodedmoss.tex",
         atlas = "hoodedmoss.xml",
         noise_texture = "noise_hoodedmoss.tex",
@@ -46,13 +46,13 @@ AddTile(
         colors = GROUND_OCEAN_COLOR
     },
     {
-      --minimap_tile_def 5
+        --minimap_tile_def 5
         name = "hoodedmoss.tex",
         atlas = "hoodedmoss.xml",
         noise_texture = "mini_noise_hoodedmoss.tex"
     },
     {
-      --turf_def 6
+        --turf_def 6
         name = "hoodedmoss",
         anim = "hoodedmoss",
         bank_build = "hfturf"
@@ -173,17 +173,17 @@ for i,v in ipairs(batplaces) do
 			room.contents.distributepercent = .13
 		end
 		room.contents.distributeprefabs.umss_general = 0.3
-		
-		
+
+
 		if not room.contents.prefabdata then
 			room.contents.prefabdata = {}
 		end
 		room.contents.prefabdata.umss_general = function() return {table = "MAGMASPLOTCH"..math.random(1,4)} end
-	end)	
+	end)
 end]]
 --[[
 GLOBAL.require("map/rooms/caves/moltenregions")
-		
+
 AddTaskPreInit("BigBatCave",
 	function(task) --Leave Forest Hunters in incase someone adds something to its setpieces.
     task.room_choices={
@@ -249,7 +249,7 @@ if GetModConfigData("worldgenmastertoggle") then
         if tasksetdata.location ~= "forest" then
             return
         end
-        
+
 
         if (tasksetdata.name == STRINGS.UI.CUSTOMIZATIONSCREEN.TASKSETNAMES.SHIPWRECKED) then
             if GetModConfigData("hoodedforest") then
@@ -267,10 +267,12 @@ if GetModConfigData("worldgenmastertoggle") then
             table.insert(tasksetdata.required_prefabs, "riceplantspawner")
         end
 
-        table.insert(tasksetdata.required_prefabs, "wixie_wardrobe") --Make sure wixie appears.
-        table.insert(tasksetdata.required_prefabs, "wixie_clock")
-        table.insert(tasksetdata.required_prefabs, "wixie_piano")
-        table.insert(tasksetdata.required_prefabs, "charles_t_horse")
+        if GetModConfigData("wixie_walter") then
+            table.insert(tasksetdata.required_prefabs, "wixie_wardrobe") --Make sure wixie appears.
+            table.insert(tasksetdata.required_prefabs, "wixie_clock")
+            table.insert(tasksetdata.required_prefabs, "wixie_piano")
+            table.insert(tasksetdata.required_prefabs, "charles_t_horse")
+        end
     end)
 
     if GetModConfigData("caved") == false then
@@ -797,7 +799,7 @@ if GetModConfigData("worldgenmastertoggle") then
     -- WIXIE PUZZLE SETS
 
     --[[Layouts["wixie_puzzle"] = StaticLayout.Get("map/static_layouts/wixie_puzzle")
-	
+
 	AddRoomPreInit("DeepDeciduous", function(room)
         room.contents.countstaticlayouts =
         {
@@ -805,8 +807,13 @@ if GetModConfigData("worldgenmastertoggle") then
         }
     end)]]
     AddTaskPreInit("Make a pick", function(task)
-        GLOBAL.require("map/rooms/forest/challengespawner")
-        task.room_choices["wixie_puzzlearea"] = 1
+        if GetModConfigData("vetcurse") then
+            GLOBAL.require("map/rooms/forest/challengespawner")
+        end
+
+        if GetModConfigData("wixie_walter") then
+            task.room_choices["wixie_puzzlearea"] = 1
+        end
     end)
 
     local IA_SPAWN_TASKS =
@@ -823,8 +830,12 @@ if GetModConfigData("worldgenmastertoggle") then
     for k, v in ipairs(IA_SPAWN_TASKS) do
         AddTaskPreInit(v, function(task)
             GLOBAL.require("map/rooms/forest/challengespawner")
-            task.room_choices["wixie_puzzlearea_ia"] = 1
-            task.room_choices["veteranshrine_ia"] = 1
+            if GetModConfigData("wixie_walter") then
+                task.room_choices["wixie_puzzlearea_ia"] = 1
+            end
+            if GetModConfigData("vetcurse") then
+                task.room_choices["veteranshrine_ia"] = 1
+            end
         end)
     end
 

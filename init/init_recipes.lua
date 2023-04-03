@@ -208,25 +208,28 @@ if GetModConfigData("winona_portables") then
     end
 end
 --new recipes
+if GetModConfigData("snowstorms") then
+    AddRecipe2(
+        "snowgoggles",
+        { Ingredient("catcoonhat", 1), Ingredient("goggleshat", 1), Ingredient("beefalowool", 2) },
+        TECH.SCIENCE_TWO,
+        nil,
+        { "WINTER", "CLOTHING" }
+    )
+    ChangeSortKey("snowgoggles", "catcoonhat", "WINTER", true)
+    ChangeSortKey("snowgoggles", "catcoonhat", "CLOTHING", true)
+end
 
-AddRecipe2(
-    "snowgoggles",
-    { Ingredient("catcoonhat", 1), Ingredient("goggleshat", 1), Ingredient("beefalowool", 2) },
-    TECH.SCIENCE_TWO,
-    nil,
-    { "WINTER", "CLOTHING" }
-)
-ChangeSortKey("snowgoggles", "catcoonhat", "WINTER", true)
-ChangeSortKey("snowgoggles", "catcoonhat", "CLOTHING", true)
-
-AddRecipe2(
-    "ratpoisonbottle",
-    { Ingredient("red_cap", 2), Ingredient("jammypreserves", 1), Ingredient("rocks", 1) },
-    TECH.SCIENCE_ONE,
-    nil,
-    { "TOOLS" }
-)
-ChangeSortKey("ratpoisonbottle", "trap", "TOOLS", true)
+if GetModConfigData("rat_raids") then
+    AddRecipe2(
+        "ratpoisonbottle",
+        { Ingredient("red_cap", 2), Ingredient("jammypreserves", 1), Ingredient("rocks", 1) },
+        TECH.SCIENCE_ONE,
+        nil,
+        { "TOOLS" }
+    )
+    ChangeSortKey("ratpoisonbottle", "trap", "TOOLS", true)
+end
 
 AddRecipe2(
     "diseasecurebomb",
@@ -239,8 +242,11 @@ ChangeSortKey("diseasecurebomb", "compostwrap", "GARDENING", true)
 ChangeSortKey("diseasecurebomb", "premiumwateringcan", "TOOLS", true)
 ChangeSortKey("diseasecurebomb", "lifeinjector", "RESTORATION", true)
 
-AddRecipe2("ice_snowball", { Ingredient("snowball_throwable", 4) }, TECH.SCIENCE_ONE, { product = "ice" }, { "REFINE" })
-ChangeSortKey("ice_snowball", "beeswax", "REFINE", true)
+if GetModConfigData("snowstorms") then
+    AddRecipe2("ice_snowball", { Ingredient("snowball_throwable", 4) }, TECH.SCIENCE_ONE, { product = "ice" },
+        { "REFINE" })
+    ChangeSortKey("ice_snowball", "beeswax", "REFINE", true)
+end
 
 AddRecipe2(
     "gasmask",
@@ -262,14 +268,16 @@ AddRecipe2(
 ChangeSortKey("plaguemask", "gasmask", "CLOTHING", true)
 ChangeSortKey("plaguemask", "gasmask", "RAIN", true)
 
-AddRecipe2(
-    "shroom_skin",
-    { Ingredient("shroom_skin_fragment", 4), Ingredient("froglegs", 2) },
-    TECH.SCIENCE_TWO,
-    nil,
-    { "REFINE" }
-)
-ChangeSortKey("shroom_skin", "bearger_fur", "REFINE", true)
+if GetModConfigData("sporehounds") then
+    AddRecipe2(
+        "shroom_skin",
+        { Ingredient("shroom_skin_fragment", 4), Ingredient("froglegs", 2) },
+        TECH.SCIENCE_TWO,
+        nil,
+        { "REFINE" }
+    )
+    ChangeSortKey("shroom_skin", "bearger_fur", "REFINE", true)
+end
 
 AddRecipe2(
     "sporepack",
@@ -280,16 +288,17 @@ AddRecipe2(
 )
 ChangeSortKey("sporepack", "icepack", "CLOTHING", true)
 ChangeSortKey("sporepack", "icepack", "CONTAINERS", true)
-
-AddRecipe2(
-    "saltpack",
-    { Ingredient("gears", 1), Ingredient("boards", 2), Ingredient("saltrock", 8) },
-    TECH.SCIENCE_TWO,
-    nil,
-    { "TOOLS", "WINTER" }
-)
-ChangeSortKey("saltpack", "brush", "TOOLS", true)
-ChangeSortKey("saltpack", "beargervest", "WINTER", true)
+if GetModConfigData("snowstorms") then
+    AddRecipe2(
+        "saltpack",
+        { Ingredient("gears", 1), Ingredient("boards", 2), Ingredient("saltrock", 8) },
+        TECH.SCIENCE_TWO,
+        nil,
+        { "TOOLS", "WINTER" }
+    )
+    ChangeSortKey("saltpack", "brush", "TOOLS", true)
+    ChangeSortKey("saltpack", "beargervest", "WINTER", true)
+end
 
 AddRecipe2(
     "air_conditioner",
@@ -311,14 +320,16 @@ ChangeSortKey("skullchest_child", "magician_chest", "STRUCTURES", true)
 ChangeSortKey("skullchest_child", "magician_chest", "CONTAINERS", true)
 ChangeSortKey("skullchest_child", "magician_chest", "MAGIC", true)
 
-AddRecipe2(
-    "honey_log",
-    { Ingredient("livinglog", 1), Ingredient("honey", 2) },
-    TECH.NONE,
-    { builder_tag = "plantkin" },
-    { "CHARACTER" }
-)
-ChangeSortKey("honey_log", "livinglog", "CHARACTER", true)
+if GetModConfigData("hayfever_disable") then --not in dev build since the config is commented off, but live does have it.
+    AddRecipe2(
+        "honey_log",
+        { Ingredient("livinglog", 1), Ingredient("honey", 2) },
+        TECH.NONE,
+        { builder_tag = "plantkin" },
+        { "CHARACTER" }
+    )
+    ChangeSortKey("honey_log", "livinglog", "CHARACTER", true)
+end
 
 AddRecipe2(
     "bugzapper",
@@ -337,15 +348,16 @@ AddRecipe2(
     { "LIGHT" }
 )
 ChangeSortKey("watermelon_lantern", "pumpkin_lantern", "LIGHT", true)
-
-AddRecipe2(
-    "rat_whip",
-    { Ingredient("twigs", 3), Ingredient("rope", 1), Ingredient("rat_tail", 3) },
-    TECH.SCIENCE_TWO,
-    nil,
-    { "WEAPONS" }
-)
-ChangeSortKey("rat_whip", "whip", "WEAPONS", true)
+if GetModConfigData("rat_raids") or GetModConfigData("funny rat") then
+    AddRecipe2(
+        "rat_whip",
+        { Ingredient("twigs", 3), Ingredient("rope", 1), Ingredient("rat_tail", 3) },
+        TECH.SCIENCE_TWO,
+        nil,
+        { "WEAPONS" }
+    )
+    ChangeSortKey("rat_whip", "whip", "WEAPONS", true)
+end
 
 AddRecipe2(
     "ancient_amulet_red",
@@ -356,23 +368,25 @@ AddRecipe2(
 )
 ChangeSortKey("ancient_amulet_red", "orangeamulet", "CRAFTING_STATION", true)
 
-AddRecipe2(
-    "turf_hoodedmoss",
-    { Ingredient("twigs", 1), Ingredient("greenfoliage", 4) },
-    TECH.TURFCRAFTING_TWO,
-    { numtogive = 4 },
-    { "DECOR" }
-)
-ChangeSortKey("turf_hoodedmoss", "turf_deciduous", "DECOR", true)
+if GetModConfigData("hoodedforest") then
+    AddRecipe2(
+        "turf_hoodedmoss",
+        { Ingredient("twigs", 1), Ingredient("greenfoliage", 4) },
+        TECH.TURFCRAFTING_TWO,
+        { numtogive = 4 },
+        { "DECOR" }
+    )
+    ChangeSortKey("turf_hoodedmoss", "turf_deciduous", "DECOR", true)
 
-AddRecipe2(
-    "turf_ancienthoodedturf",
-    { Ingredient("turf_hoodedmoss", 2), Ingredient("moonrocknugget", 1) },
-    TECH.TURFCRAFTING_TWO,
-    { numtogive = 4 },
-    { "DECOR" }
-)
-ChangeSortKey("turf_ancienthoodedturf", "turf_hoodedmoss", "DECOR", true)
+    AddRecipe2(
+        "turf_ancienthoodedturf",
+        { Ingredient("turf_hoodedmoss", 2), Ingredient("moonrocknugget", 1) },
+        TECH.TURFCRAFTING_TWO,
+        { numtogive = 4 },
+        { "DECOR" }
+    )
+    ChangeSortKey("turf_ancienthoodedturf", "turf_hoodedmoss", "DECOR", true)
+end
 
 AddRecipe2(
     "um_bear_trap_equippable_tooth",
@@ -392,23 +406,27 @@ AddRecipe2(
 )
 ChangeSortKey("um_bear_trap_equippable_gold", "um_bear_trap_equippable_tooth", "WEAPONS", true)
 
-AddRecipe2(
-    "armor_glassmail",
-    { Ingredient("glass_scales", 1), Ingredient("moonglass_charged", 10) },
-    TECH.CELESTIAL_THREE,
-    { nounlock = true },
-    { "CRAFTING_STATION" }
-)
-ChangeSortKey("armor_glassmail", "glasscutter", "CRAFTING_STATION", true)
+if GetModConfigData("wiltfly") then
+    AddRecipe2(
+        "armor_glassmail",
+        { Ingredient("glass_scales", 1), Ingredient("moonglass_charged", 10) },
+        TECH.CELESTIAL_THREE,
+        { nounlock = true },
+        { "CRAFTING_STATION" }
+    )
+    ChangeSortKey("armor_glassmail", "glasscutter", "CRAFTING_STATION", true)
+end
 
-AddRecipe2(
-    "mutator_trapdoor",
-    { Ingredient("monstermeat", 2), Ingredient("spidergland", 3), Ingredient("cutgrass", 5) },
-    TECH.SPIDERCRAFT_ONE,
-    { builder_tag = "spiderwhisperer" },
-    { "CHARACTER" }
-)
-ChangeSortKey("mutator_trapdoor", "mutator_warrior", "CHARACTER", true)
+if GetModConfigData("trapdoorspiders") then
+    AddRecipe2(
+        "mutator_trapdoor",
+        { Ingredient("monstermeat", 2), Ingredient("spidergland", 3), Ingredient("cutgrass", 5) },
+        TECH.SPIDERCRAFT_ONE,
+        { builder_tag = "spiderwhisperer" },
+        { "CHARACTER" }
+    )
+    ChangeSortKey("mutator_trapdoor", "mutator_warrior", "CHARACTER", true)
+end
 
 AddRecipe2(
     "driftwoodfishingrod",
@@ -466,14 +484,16 @@ AddRecipe2(
 )
 ChangeSortKey("hermitshop_rain_horn", "hermitshop_oceanfishingbobber_malbatross", "CRAFTING_STATION", true)
 
-AddRecipe2(
-    "hat_ratmask",
-    { Ingredient("rope", 2), Ingredient("beardhair", 3), Ingredient("sewing_kit", 1) },
-    TECH.SCIENCE_TWO,
-    nil,
-    { "CLOTHING" }
-)
-ChangeSortKey("hat_ratmask", "plaguemask", "CLOTHING", true)
+if GetModConfigData("rat_raids") then
+    AddRecipe2(
+        "hat_ratmask",
+        { Ingredient("rope", 2), Ingredient("beardhair", 3), Ingredient("sewing_kit", 1) },
+        TECH.SCIENCE_TWO,
+        nil,
+        { "CLOTHING" }
+    )
+    ChangeSortKey("hat_ratmask", "plaguemask", "CLOTHING", true)
+end
 
 AddRecipe2(
     "floral_bandage",
@@ -517,15 +537,16 @@ ChangeSortKey("wardrobe", "icebox", "CONTAINERS", false)
 
 AddRecipeToFilter("tophat", "MAGIC")
 ChangeSortKey("tophat", "armorslurper", "MAGIC", true)
-
-AddRecipeToFilter("wall_hay_item", "WINTER")
-ChangeSortKey("wall_hay_item", "dragonflyfurnace", "WINTER", true)
-AddRecipeToFilter("wall_wood_item", "WINTER")
-ChangeSortKey("wall_wood_item", "wall_hay_item", "WINTER", true)
-AddRecipeToFilter("wall_stone_item", "WINTER")
-ChangeSortKey("wall_stone_item", "wall_wood_item", "WINTER", true)
-AddRecipeToFilter("wall_moonrock_item", "WINTER")
-ChangeSortKey("wall_moonrock_item", "wall_stone_item", "WINTER", true)
+if GetModConfigData("snowstorms") then
+    AddRecipeToFilter("wall_hay_item", "WINTER")
+    ChangeSortKey("wall_hay_item", "dragonflyfurnace", "WINTER", true)
+    AddRecipeToFilter("wall_wood_item", "WINTER")
+    ChangeSortKey("wall_wood_item", "wall_hay_item", "WINTER", true)
+    AddRecipeToFilter("wall_stone_item", "WINTER")
+    ChangeSortKey("wall_stone_item", "wall_wood_item", "WINTER", true)
+    AddRecipeToFilter("wall_moonrock_item", "WINTER")
+    ChangeSortKey("wall_moonrock_item", "wall_stone_item", "WINTER", true)
+end
 
 AddRecipe2(
     "boatpatch_sludge",
@@ -612,6 +633,7 @@ AddRecipe2(
 ChangeSortKey("sludge_cork", "oceanfishingrod", "TOOLS", true)
 ChangeSortKey("sludge_cork", "boat_magnet_beacon", "SEAFARING", true)
 
+if GetModConfigData("monstersmallmeat") then
 AddRecipe2(
     "transmute_monstermeat",
     { Ingredient("monstersmallmeat", 3) },
@@ -619,15 +641,22 @@ AddRecipe2(
     {product = "monstermeat", builder_tag = "ick_alchemistI", description="transmute_monstermeat"}
 )
 
-AddRecipe2(
-    "transmute_monstersmallmeat",
-    { Ingredient("monstermeat", 1) },
-    TECH.NONE,
-    {product = "monstersmallmeat", builder_tag = "ick_alchemistI", description="transmute_monstersmallmeat", numtogive = 2}
-)
+    AddRecipe2(
+        "transmute_monstersmallmeat",
+        { Ingredient("monstermeat", 1) },
+        TECH.NONE,
+        {
+            product = "monstersmallmeat",
+            builder_tag = "ick_alchemistI",
+            description = "transmute_monstersmallmeat",
+            numtogive = 2
+        },
+        { "CHARACTER" }
+    )
 
-ChangeSortKey("transmute_monstermeat", "transmute_meat", "CHARACTER", true)
-ChangeSortKey("transmute_monstersmallmeat", "transmute_smallmeat", "CHARACTER", true)
+    ChangeSortKey("transmute_monstermeat", "transmute_meat", "CHARACTER", true)
+    ChangeSortKey("transmute_monstersmallmeat", "transmute_smallmeat", "CHARACTER", true)
+end
 
 --deconstruct recipes
 AddDeconstructRecipe("cursed_antler", { Ingredient("boneshard", 8), Ingredient("nightmarefuel", 2) })
@@ -843,23 +872,24 @@ if GetModConfigData("ck_loot") then
     ChangeSortKey("staff_starfall", "firestaff", "MAGIC", true)
 end
 
-AddRecipe2(
-    "the_real_charles_t_horse",
-    { Ingredient("nightmarefuel", 2), Ingredient("cane", 1), Ingredient("gears", 1) },
-    GLOBAL.TECH.LOST,
-    nil,
-    { "TOOLS", "CLOTHING" }
-)
-
-GLOBAL.STRINGS.RECIPE_DESC.THE_REAL_CHARLES_T_HORSE = "Giddy-up, Charles!"
-AddRecipeToFilter("the_real_charles_t_horse", "TOOLS")
-AddRecipeToFilter("the_real_charles_t_horse", "CLOTHING")
-ChangeSortKey("the_real_charles_t_horse", "cane", "TOOLS", true)
-ChangeSortKey("the_real_charles_t_horse", "cane", "CLOTHING", true)
-
 -- WIXIE RELATED CRAFTS
 
 if GetModConfigData("wixie_walter") then
+    AddRecipe2(
+        "the_real_charles_t_horse",
+        { Ingredient("nightmarefuel", 2), Ingredient("cane", 1), Ingredient("gears", 1) },
+        GLOBAL.TECH.LOST,
+        nil,
+        { "TOOLS", "CLOTHING" }
+    )
+
+    GLOBAL.STRINGS.RECIPE_DESC.THE_REAL_CHARLES_T_HORSE = "Giddy-up, Charles!"
+    AddRecipeToFilter("the_real_charles_t_horse", "TOOLS")
+    AddRecipeToFilter("the_real_charles_t_horse", "CLOTHING")
+    ChangeSortKey("the_real_charles_t_horse", "cane", "TOOLS", true)
+    ChangeSortKey("the_real_charles_t_horse", "cane", "CLOTHING", true)
+
+
     AddRecipe2("slingshot_gnasher",
         { Ingredient("livinglog", 1), Ingredient("nightmarefuel", 2), Ingredient("mosquitosack", 2) },
         GLOBAL.TECH.MAGIC_THREE, { builder_tag = "pebblemaker" }, { "CHARACTER", "WEAPONS" })
@@ -1063,7 +1093,8 @@ AddRecipePostInitAny(
 STRINGS.RECIPE_DESC.TRANSMUTE_MONSTERMEAT = "Transmute Monster Morsels into Monster Meat"
 STRINGS.RECIPE_DESC.TRANSMUTE_MONSTERSMALLMEAT = "Transmute Monster Morsels into Monster Meat"
 
-STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC = STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC.."\nTransform 3 Monster Morsels into a Monster Meat.\nTransform a Monster Meat into 2 Monster Morsels."
+STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC = STRINGS.SKILLTREE.WILSON.WILSON_ALCHEMY_4_DESC ..
+    "\nTransform 3 Monster Morsels into a Monster Meat.\nTransform a Monster Meat into 2 Monster Morsels."
 
 STRINGS.RECIPE_DESC.WATERMELON_LANTERN = "Juicy illumination."
 STRINGS.RECIPE_DESC.CRITTERLAB_REAL = "Cute pals to ruin the mood."

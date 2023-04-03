@@ -58,26 +58,27 @@ local function onworked_pighouse(inst, worker)
     end
 end
 
-AddPrefabPostInit("pighouse", function(inst)
-    if inst ~= nil and inst.components ~= nil and inst.components.workable ~= nil then
-        inst.components.workable:SetOnWorkCallback(onworked_pighouse)
-    end
-end)
+if GetModConfigData("harder_pigs") then
+    AddPrefabPostInit("pighouse", function(inst)
+        if inst ~= nil and inst.components ~= nil and inst.components.workable ~= nil then
+            inst.components.workable:SetOnWorkCallback(onworked_pighouse)
+        end
+    end)
 
---Get the bunnyman to attack the perpetrator of the crime against bunny-kind
-local function onworked_rabbithouse(inst, worker)
-    if inst.components.spawner ~= nil and inst.components.spawner.child then
-        RetaliateAttacker(inst.components.spawner.child, worker, bunnytaunts)
-        inst.components.spawner:ReleaseChild()
+    --Get the bunnyman to attack the perpetrator of the crime against bunny-kind
+    local function onworked_rabbithouse(inst, worker)
+        if inst.components.spawner ~= nil and inst.components.spawner.child then
+            RetaliateAttacker(inst.components.spawner.child, worker, bunnytaunts)
+            inst.components.spawner:ReleaseChild()
+        end
     end
+
+    AddPrefabPostInit("rabbithouse", function(inst)
+        if inst ~= nil and inst.components ~= nil and inst.components.workable ~= nil then
+            inst.components.workable:SetOnWorkCallback(onworked_rabbithouse)
+        end
+    end)
 end
-
-AddPrefabPostInit("rabbithouse", function(inst)
-    if inst ~= nil and inst.components ~= nil and inst.components.workable ~= nil then
-        inst.components.workable:SetOnWorkCallback(onworked_rabbithouse)
-    end
-end)
-
 -----------------------------------------------------------------
 --Pengulls are now aggressive
 -----------------------------------------------------------------
@@ -130,7 +131,7 @@ local function PenguinKeepTarget(inst, target)
         return true
     else
         return true
-    end 
+    end
 end
 
 AddPrefabPostInit("penguin", PenguinRetarget, MakeTeam)
@@ -138,7 +139,7 @@ AddPrefabPostInit("penguin", function (inst)
     if inst ~= nil and inst.components ~= nil and inst.components.combat ~= nil then
         inst.components.combat:SetRetargetFunction(2, PenguinRetarget) --penguins are aggressive
     end
-	
+
 	if inst ~= nil and inst.components ~= nil and inst.components.combat ~= nil then
 		inst.components.combat:SetKeepTargetFunction(PenguinPenguinKeepTarget)
 	end
@@ -182,7 +183,7 @@ local function GuardRetargetFn(inst)
     local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
     local defendDist = GLOBAL.SpringCombatMod(TUNING.PIG_GUARD_DEFEND_DIST)
     local defenseTarget =
-    GLOBAL.FindEntity(inst, defendDist, nil, { "king" }) or
+        GLOBAL.FindEntity(inst, defendDist, nil, { "king" }) or
         (home ~= nil and inst:IsNear(home, defendDist) and home) or
         inst
 
@@ -216,7 +217,7 @@ local function GuardRetargetFn(inst)
                             not
                             (
                             defenseTarget.components.trader ~= nil and
-                                defenseTarget.components.trader:IsTryingToTradeWithMe(guy))
+                            defenseTarget.components.trader:IsTryingToTradeWithMe(guy))
                             and not (inst.components.trader ~= nil and inst.components.trader:IsTryingToTradeWithMe(guy)
                             )
                     end,
@@ -235,7 +236,7 @@ end
 
 --[[
 local function GuardKeepTargetFn(inst, target)
-    
+
     if not inst.components.combat:CanTarget(target) or
         (target.sg ~= nil and target.sg:HasStateTag("transform")) or
         (target:HasTag("guard") and target:HasTag("pig")) then
@@ -255,7 +256,6 @@ local function GuardKeepTargetFn(inst, target)
     return target:IsNear(home, defendDist) and inst:IsNear(home, defendDist)
 end
 ]]
-
 AddPrefabPostInit("pigguard", GuardRetargetFn)
 AddPrefabPostInit("pigguard", function(inst)
     if inst ~= nil and inst.components.combat ~= nil then
@@ -281,8 +281,8 @@ AddPrefabPostInit("pigking", function (inst)
     function makeUnhappy(inst)
         inst.happy = false
     end
-    
-    
+
+
     function ontradeforgold(inst, item, giver)
         print("ongold")
         print(inst)
@@ -294,10 +294,10 @@ AddPrefabPostInit("pigking", function (inst)
         --launchitem = inst.launchitem
 
         GLOBAL.AwardPlayerAchievement("pigking_trader", giver)
-    
+
         local x, y, z = inst.Transform:GetWorldPosition()
         y = 4.5
-    
+
         local angle
         if giver ~= nil and giver:IsValid() then
             angle = 180 - giver:GetAngleToPoint(x, 0, z)
@@ -306,13 +306,13 @@ AddPrefabPostInit("pigking", function (inst)
             angle = GLOBAL.math.atan2(down.z, down.x) / DEGREES
             giver = nil
         end
-    
+
         for k = 1, item.components.tradable.goldvalue do
             local nug = GLOBAL.SpawnPrefab("goldnugget")
             nug.Transform:SetPosition(x, y, z)
             --launchitem(nug, angle)
         end
-    
+
         if item.components.tradable.tradefor ~= nil then
             for _, v in pairs(item.components.tradable.tradefor) do
                 local item = GLOBAL.SpawnPrefab(v)
@@ -322,12 +322,12 @@ AddPrefabPostInit("pigking", function (inst)
                 end
             end
         end
-    
+
         if IsSpecialEventActive(SPECIAL_EVENTS.HALLOWED_NIGHTS) then
             -- pick out up to 3 types of candies to throw out
             local candytypes = { GLOBAL.math.random(NUM_HALLOWEENCANDY), GLOBAL.math.random(NUM_HALLOWEENCANDY), GLOBAL.math.random(NUM_HALLOWEENCANDY) }
             local numcandies = (item.components.tradable.halloweencandyvalue or 1) + GLOBAL.math.random(2) + 2
-    
+
             -- only people in costumes get a good amount of candy!
             if giver ~= nil and giver.components.skinner ~= nil then
                 for _, item in pairs(giver.components.skinner:GetClothing()) do
@@ -337,7 +337,7 @@ AddPrefabPostInit("pigking", function (inst)
                     end
                 end
             end
-    
+
             for k = 1, numcandies do
                 local candy = GLOBAL.SpawnPrefab("halloweencandy_"..GetRandomItem(candytypes))
                 candy.Transform:SetPosition(x, y, z)
@@ -345,10 +345,10 @@ AddPrefabPostInit("pigking", function (inst)
             end
         end
     end
-    
+
     function OnGetItemFromPlayer(inst, giver, item)
         local is_event_item = GLOBAL.IsSpecialEventActive(GLOBAL.SPECIAL_EVENTS.HALLOWED_NIGHTS) and item.components.tradable.halloweencandyvalue and item.components.tradable.halloweencandyvalue > 0
-    
+
         print(ok)
         print(item.goldvalue)
 
@@ -359,7 +359,7 @@ AddPrefabPostInit("pigking", function (inst)
         elseif item.prefab == "pig_token" then
             StartMinigame(inst)
         end
-    
+
         --inst.happy = true --make pig king happy
         --inst.last_gift_time = GLOBAL.GetTime()
     end

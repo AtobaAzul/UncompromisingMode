@@ -42,7 +42,7 @@ end)
 -----------------------------------------------------------------
 -- Butterflies appearance rate depends on nr of players
 -----------------------------------------------------------------
---TODO complicated 
+--TODO complicated
 --[[local UpvalueHacker = GLOBAL.require("tools/upvaluehacker")
 AddClassPostConstruct("components/butterflyspawner", function(self)
     local _activeplayers = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "_activeplayers")
@@ -50,7 +50,7 @@ AddClassPostConstruct("components/butterflyspawner", function(self)
     --Get the old functions using upvalue hacker
     local SpawnButterflyForPlayer = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "SpawnButterflyForPlayer")
     local ScheduleSpawn = UpvalueHacker.GetUpvalue(self, "ScheduleSpawn", "ScheduleSpawn")
-    
+
 
     local function ScheduleSpawn(player, initialspawn)
         if _scheduledtasks[player] == nil then
@@ -63,7 +63,7 @@ AddClassPostConstruct("components/butterflyspawner", function(self)
     UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.butterflyspawner.fn, ScheduleSpawn, "ScheduleSpawn")
 end
 AddPrefabPostInit("world", function(inst)
-    
+
 end)]]
 GLOBAL.TUNING.BUTTERFLY_SPAWN_TIME = GLOBAL.TUNING.DSTU.FOOD_BUTTERFLY_SPAWN_TIME_INCREASE
 --TODO: Fix, this doesn't work
@@ -98,12 +98,12 @@ if GetModConfigData("nowintergrowing") then
         if inst~= nil and inst.components.pickable ~= nil then
             GLOBAL.MakeNoGrowInWinter(inst)
         end
-        
+
         if inst.components.growable ~= nil then
             inst:WatchWorldState("iswinter", ToggleGrowable)
             ToggleGrowable(inst, GLOBAL.TheWorld.state.iswinter)
         end
-        
+
     end)
 
     -- Cactus
@@ -139,9 +139,9 @@ local function IsCrazyGuy(guy)
 end
 --[[
 local function LootSetupFunction(lootdropper)
-    if lootdropper.inst ~= nil then 
+    if lootdropper.inst ~= nil then
         local guy = lootdropper.inst.causeofdeath
-    
+
         if IsCrazyGuy(guy ~= nil and guy.components.follower ~= nil and guy.components.follower.leader or guy) then
             -- beard lord
             lootdropper:SetLoot(beardlordloot)
@@ -156,7 +156,7 @@ end
 
 AddPrefabPostInit("bunnyman", LootSetupFunction, IsCrazyGuy, SetBeardLord)
 AddPrefabPostInit("bunnyman", function (inst)
-    if inst ~= nil and inst.components.lootdropper ~= nil then 
+    if inst ~= nil and inst.components.lootdropper ~= nil then
         inst.components.lootdropper:SetLootSetupFn(LootSetupFunction)
         LootSetupFunction(inst.components.lootdropper)
     end
@@ -206,22 +206,23 @@ local function LootSetupFunction_jack(lootdropper)
         SetRabbitLoot(lootdropper)
     end
 end
-
+if GetModConfigData("monstersmallmeat") then
 AddPrefabPostInit("rabbit", function (inst)
     if not GLOBAL.TheWorld.ismastersim then
         return
     end
-    if inst ~= nil and inst.components.lootdropper ~= nil then 
+    if inst ~= nil and inst.components.lootdropper ~= nil then
         inst.components.lootdropper:SetLootSetupFn(LootSetupFunction_jack)
         LootSetupFunction_jack(inst.components.lootdropper)
     end
 end)
+end
 -----------------------------------------------------------------
 -- Bunny huts respawn bunnies not as often
 -----------------------------------------------------------------
 --[[
 AddPrefabPostInit("rabbithouse", function (inst)
-    if inst ~= nil and inst.components.spawner ~= nil then 
+    if inst ~= nil and inst.components.spawner ~= nil then
         inst.components.spawner:Configure("bunnyman", GLOBAL.TUNING.TOTAL_DAY_TIME*GLOBAL.TUNING.DSTU.BUNNYMAN_RESPAWN_TIME_DAYS)
     end
 end)]]
@@ -294,11 +295,11 @@ if GetModConfigData("beebox_nerf") then
         if not GLOBAL.TheWorld.ismastersim then
             return
         end
-        
-        if inst.components.harvestable ~= nil then 
+
+        if inst.components.harvestable ~= nil then
             inst.components.harvestable:SetUp("honey", HONEY_PER_STAGE[4], nil, onharvest, updatelevel)
         end
-        
+
         updatelevel(inst)
     end)
 end

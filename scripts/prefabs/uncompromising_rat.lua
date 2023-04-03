@@ -29,39 +29,38 @@ local carratsounds =
 SetSharedLootTable("raidrat",
 {
 })]]
-
 SetSharedLootTable("ratburrow",
 	{
-		{ "redgem", 0.10 },
-		{ "bluegem", 0.10 },
+		{ "redgem",     0.10 },
+		{ "bluegem",    0.10 },
 		{ "goldnugget", 1.00 },
 		{ "goldnugget", 0.25 },
 		{ "goldnugget", 0.10 },
-		{ "boneshard", 1.00 },
-		{ "boneshard", 0.25 },
-		{ "boneshard", 0.10 },
+		{ "boneshard",  1.00 },
+		{ "boneshard",  0.25 },
+		{ "boneshard",  0.10 },
 	})
 
 SetSharedLootTable("ratburrow_small",
 	{
-		{ "redgem", 0.10 },
-		{ "bluegem", 0.10 },
+		{ "redgem",     0.10 },
+		{ "bluegem",    0.10 },
 		{ "goldnugget", 1.00 },
 		{ "goldnugget", 0.25 },
-		{ "boneshard", 1.00 },
-		{ "boneshard", 0.25 },
+		{ "boneshard",  1.00 },
+		{ "boneshard",  0.25 },
 	})
 
 SetSharedLootTable("packrat",
 	{
-		{ "redgem", 0.10 },
-		{ "bluegem", 0.10 },
+		{ "redgem",     0.10 },
+		{ "bluegem",    0.10 },
 		{ "goldnugget", 1.00 },
 		{ "goldnugget", 0.25 },
 		{ "goldnugget", 0.10 },
-		{ "boneshard", 1.00 },
-		{ "boneshard", 0.25 },
-		{ "boneshard", 0.10 },
+		{ "boneshard",  1.00 },
+		{ "boneshard",  0.25 },
+		{ "boneshard",  0.10 },
 	})
 
 local brain = require "brains/uncompromising_ratbrain"
@@ -243,20 +242,20 @@ end
 local RETARGET_CANT_TAGS = { "wall", "raidrat", "ratfriend" }
 local function rattargetfn(inst)
 	return FindEntity(
-		inst, 3,
-		function(guy)
-			local validitem = guy.components.inventory ~= nil and
-				guy.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
-			return inst:GetTimeAlive() > 5 and not
-				inst:HasTag("carrying") and
-				guy:HasTag("player") and
-				validitem ~= nil and
-				inst.components.combat:CanTarget(guy) and not
-				(inst.components.follower ~= nil and inst.components.follower.leader == guy)
-		end,
-		nil,
-		RETARGET_CANT_TAGS
-	)
+			inst, 3,
+			function(guy)
+				local validitem = guy.components.inventory ~= nil and
+					guy.components.inventory:FindItem(function(item) return not item:HasTag("nosteal") end)
+				return inst:GetTimeAlive() > 5 and not
+					inst:HasTag("carrying") and
+					guy:HasTag("player") and
+					validitem ~= nil and
+					inst.components.combat:CanTarget(guy) and not
+					(inst.components.follower ~= nil and inst.components.follower.leader == guy)
+			end,
+			nil,
+			RETARGET_CANT_TAGS
+		)
 		or nil
 end
 
@@ -335,7 +334,6 @@ local function OnGetItemFromPlayer_Winky(inst, giver, item)
 			inst.components.combat:SetTarget(nil)
 		elseif giver.components.leader ~= nil and
 			inst.components.follower ~= nil then
-
 			if giver.components.minigame_participator == nil then
 				giver:PushEvent("makefriend")
 				giver.components.leader:AddFollower(inst)
@@ -425,7 +423,6 @@ local function fn()
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
     inst.Physics:CollidesWith(COLLISION.GIANTS)
     inst.Physics:Teleport(inst.Transform:GetWorldPosition())]]
-
 	inst.sounds = carratsounds
 
 	inst:AddComponent("locomotor")
@@ -517,7 +514,11 @@ local function fn()
 	inst:AddComponent("knownlocations")
 
 	inst:AddComponent("cookable")
-	inst.components.cookable.product = "cookedmonstersmallmeat"
+	if TUNING.DSTU.MONSTERSMALLMEAT then
+		inst.components.cookable.product = "cookedmonstersmallmeat"
+	else
+		inst.components.cookable.product = "cookedmonstermeat"
+	end
 	inst.components.cookable:SetOnCookedFn(on_cooked_fn)
 
 	inst:AddComponent("inventory")
@@ -602,7 +603,6 @@ local function junkretargetfn(inst)
 		else
 			return nil
 		end
-
 	end
 end
 
@@ -753,8 +753,12 @@ local function junkfn()
 	inst:AddComponent("health")
 	inst.components.health:SetMaxHealth(1.5 * TUNING.DSTU.RAIDRAT_HEALTH)
 
-	inst:AddComponent("lootdropper")
+    inst:AddComponent("lootdropper")
+	if TUNING.DSTU.MONSTERSMALLMEAT then
 	inst.components.lootdropper:AddRandomLoot("monstersmallmeat", 0.34)
+	else
+		inst.components.lootdropper:AddRandomLoot("monstermeat", 0.34)
+	end
 	inst.components.lootdropper:AddRandomLoot("disease_puff", 0.34)
 	inst.components.lootdropper:AddRandomLoot("rat_tail", 0.34)
 	inst.components.lootdropper.numrandomloot = 1
@@ -851,7 +855,6 @@ local function packfn()
     inst.Physics:CollidesWith(COLLISION.CHARACTERS)
     inst.Physics:CollidesWith(COLLISION.GIANTS)
     inst.Physics:Teleport(inst.Transform:GetWorldPosition())]]
-
 	inst.sounds = carratsounds
 
 	inst:AddComponent("locomotor")
@@ -1002,9 +1005,9 @@ local function OnSpawned(inst, newent)
 
 	--[[if TheWorld.state.cycles > 50 then
 		local x, y, z = inst.Transform:GetWorldPosition()
-		
+
 		local ents = #TheSim:FindEntities(x, y, z, 40, {"player"})
-		
+
 		if ents ~= nil and ents == 0 then
 			if inst.ratguard then
 				inst.ratguard = false
@@ -1018,7 +1021,7 @@ local function BurrowKilled(inst)
 	--[[if inst.components.periodicspawner ~= nil then
 		inst.components.periodicspawner:Stop()
 	end
-	
+
 	inst:Remove()]]
 end
 
@@ -1255,7 +1258,6 @@ local function OnInitHerd(inst)
 					packrat.Transform:SetPosition(x + math.cos(angle), 0, z + math.sin(angle))
 					inst.components.herd:AddMember(packrat)
 				end
-
 			end)
 		end
 		inst.components.herd:SetUpdateRange(20)
@@ -1827,11 +1829,12 @@ local function SmellProtection(v, container)
 	local x, y, z = v.Transform:GetWorldPosition()
 	local flowers = #TheSim:FindEntities(x, y, z, 5, { "flower" })
 	local decoratedSisturn = FindEntity(v, 10,
-		function(inst) return (inst.prefab == "sisturn" and (inst.components.container and inst.components.container:IsFull())
-				)
+		function(inst)
+			return (inst.prefab == "sisturn" and (inst.components.container and inst.components.container:IsFull())
+			)
 		end)
 	local potted_ = TheSim:FindEntities(x, y, z, 6, { "cavedweller" })
-	local potted = 0 -- both potted plants have the cavedweller tag for some reason I have no idea
+	local potted = 0      -- both potted plants have the cavedweller tag for some reason I have no idea
 	local forget_me_lots = 0 -- The end-all-beat-all, forget-me-lots's ability to make those who smell or eat them forgetful is the perfect insulator for rats
 	local item_forget_me_lots = TheSim:FindEntities(x, y, z, 3, { "vasedecoration" })
 	local mod = 1
@@ -1868,8 +1871,8 @@ local function SmellProtection(v, container)
 	--- Potted
 
 	if FindEntity(v, 8,
-		function(guy) if guy.components.bloomness and guy.components.bloomness.level and guy.components.bloomness.level > 2 then return true end end
-		, { "plantkin" }) ~= nil then
+			function(guy) if guy.components.bloomness and guy.components.bloomness.level and guy.components.bloomness.level > 2 then return true end end
+			, { "plantkin" }) ~= nil then
 		flowers = flowers + 10
 	end
 	if decoratedSisturn ~= nil then
@@ -1995,7 +1998,6 @@ local function TimeForACheckUp(inst, dev)
 	print("---========vv")
 	print("   ========")
 	print("    V V    V V")]]
-
 	inst.ratscore = -60
 	inst.itemscore = 0
 	inst.foodscore = 0
@@ -2008,7 +2010,7 @@ local function TimeForACheckUp(inst, dev)
 				if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and
 					(
 					v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" or
-						v.components.inventoryitem:GetGrandOwner().prefab == "catcoon") then
+					v.components.inventoryitem:GetGrandOwner().prefab == "catcoon") then
 					--print("lureplant is holding!")
 				else
 					if not (v:HasTag("frozen") or v:HasTag("NORATCHECK")) then
@@ -2027,7 +2029,7 @@ local function TimeForACheckUp(inst, dev)
 						if not v:HasTag("frozen") then
 							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
 							inst.preparedmultiplier = v:HasTag("preparedfood") and 2 or 1
-							
+
 							if v:HasTag("stale") then
 								inst.foodscore = inst.foodscore + ((2.5 * inst.preparedmultiplier) * inst.multiplier)
 							elseif v:HasTag("spoiled") then
@@ -2042,7 +2044,7 @@ local function TimeForACheckUp(inst, dev)
 					if not v:HasTag("frozen") then
 						inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
 						inst.preparedmultiplier = v:HasTag("preparedfood") and 2 or 1
-							
+
 						if v:HasTag("fresh") then
 							inst.foodscore = inst.foodscore + ((5 * inst.preparedmultiplier) * inst.multiplier)
 						elseif v:HasTag("stale") then
@@ -2093,7 +2095,7 @@ local function TimeForACheckUp(inst, dev)
 		TheNet:SystemMessage("Timer = " ..
 			(
 			TheWorld.components.ratcheck:GetRatTimer() ~= nil and TheWorld.components.ratcheck:GetRatTimer() or
-				"... not available? timer is 0 second") .. "s")
+			"... not available? timer is 0 second") .. "s")
 		TheNet:SystemMessage("-------------------------")
 	end
 	TheWorld:PushEvent("reducerattimer", { value = inst.ratscore })
@@ -2131,7 +2133,6 @@ local function TimeForACheckUp(inst, dev)
 
 			local players = TheSim:FindEntities(x, y, z, 40, { "player" }, { "playerghost" })
 			for a, b in ipairs(players) do
-
 				if math.random() > 0.5 then
 					if inst.burrowbonus > inst.itemscore and inst.burrowbonus > inst.foodscore then
 						b:DoTaskInTime(2 + math.random(), function(b)
@@ -2217,7 +2218,6 @@ local function fn_droppings()
 end
 
 local function PlayWarningSound(inst)
-
 	--inst.entity:SetParent(TheFocalPoint.entity)
 	--print(TheFocalPoint.entity)
 	local theta = math.random() * 2 * PI

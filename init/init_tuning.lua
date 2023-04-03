@@ -363,7 +363,9 @@ TUNING.DSTU =
     TWIN1_HEALTH                     = GetModConfigData("twins health"),
     TWIN2_HEALTH                     = GetModConfigData("twins health"),
     ISLAND_ADVENTURES                = ia_check,
+    MONSTERSMALLMEAT                 = GetModConfigData("monstersmallmeat"),
 }
+
 -- [              DST Related Overrides                  ]
 
 if GetModConfigData("beebox_nerf") then
