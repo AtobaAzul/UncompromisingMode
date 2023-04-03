@@ -17,65 +17,65 @@ local prefabs_firecrackers =
 local AURA_EXCLUDE_TAGS = { "noclaustrophobia", "rabbit", "playerghost", "abigail", "companion", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "invisible" }
 local GOOP_EXCLUDE_TAGS = { "noclaustrophobia", "rabbit", "playerghost", "shadow", "shadowminion", "INLIMBO", "notarget", "noattack", "invisible" }
 
-if not TheNet:GetPVPEnabled() then 
+if not TheNet:GetPVPEnabled() then
 	table.insert(AURA_EXCLUDE_TAGS, "player")
 end
 
 -- temp aggro system for the slingshots
 local function no_aggro(attacker, target)
-	local targets_target = target.components.combat.target
-	return targets_target ~= nil and targets_target:IsValid() and targets_target ~= attacker 
+	local targets_target = target.components.combart ~= nil and target.components.combat.target or nil
+	return targets_target ~= nil and targets_target:IsValid() and targets_target ~= attacker
 			and (GetTime() - target.components.combat.lastwasattackedbytargettime) < 4
-			and (targets_target.components.health ~= nil and not targets_target.components.health:IsDead())
+			and (targets_target.components.health ~= nil and not targets_target.components.health:IsDead())--this can return nil, right?
 end
 
 local function DealDamage(inst, attacker, target, salty)
     if target ~= nil and target:IsValid() and target.components.combat ~= nil then
 		inst.finaldamage = (inst.damage * (1 + (inst.powerlevel / 2))) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)
-		
+
 		if salty ~= nil and salty and target.components.health ~= nil then
 			local scalingdamage = ((2 - target.components.health:GetPercent()) + (2 - target.components.health:GetPercent())) - 1
 			inst.finaldamage = inst.finaldamage * scalingdamage
 			print("salty damage = "..inst.finaldamage)
-			
+
 			if target:HasTag("snowish") or target.prefab == "snurtle" or target.prefab == "slurtle" then
 				inst.finaldamage = inst.finaldamage * 2
 			end
 		end
-		
+
 		if no_aggro(attacker, target) then
 			target.components.combat:SetShouldAvoidAggro(attacker)
 		end
-		
-		if target:HasTag("shadowcreature") or 
-			target.sg == nil or 
-			target.wixieammo_hitstuncd == nil and not 
-			(target.sg:HasStateTag("busy") or 
+
+		if target:HasTag("shadowcreature") or
+			target.sg == nil or
+			target.wixieammo_hitstuncd == nil and not
+			(target.sg:HasStateTag("busy") or
 			target.sg:HasStateTag("caninterrupt")) or
 			target.sg:HasStateTag("frozen")	then
 			target.wixieammo_hitstuncd = target:DoTaskInTime(8, function()
 				if target.wixieammo_hitstuncd ~= nil then
 					target.wixieammo_hitstuncd:Cancel()
 				end
-						
+
 				target.wixieammo_hitstuncd = nil
 			end)
-		
+
 			target.components.combat:GetAttacked(attacker, inst.finaldamage, inst)
 		else
 			target.components.combat:GetAttacked(attacker, 0, inst)
-			
+
 			if target.components.combat ~= nil then
 				target.components.combat:SetTarget(attacker)
 			end
-			
+
 			target.components.health:DoDelta(-inst.finaldamage, false, inst, false, attacker, false)
 		end
-		
+
 		if target.components.combat ~= nil then
 			target.components.combat:RemoveShouldAvoidAggro(attacker)
 		end
-		
+
 		if attacker.components.combat ~= nil then
 			attacker.components.combat:SetTarget(target)
 		end
@@ -86,13 +86,13 @@ local function ImpactFx(inst, attacker, target, salty)
     if target ~= nil and target:IsValid() and target.components.combat ~= nil and target.components.combat.hiteffectsymbol ~= nil and inst.impactfx ~= nil then
 		local impactfx = SpawnPrefab(inst.impactfx)
 		impactfx.Transform:SetPosition(target.Transform:GetWorldPosition())
-		
+
 		if salty ~= nil and salty then
 			local saltyfx = SpawnPrefab("impact")
-		
+
 			if target.components.health ~= nil then
 				local percent = 1.5 - target.components.health:GetPercent()
-				
+
 				saltyfx.Transform:SetPosition(target.Transform:GetWorldPosition())
 				saltyfx.Transform:SetScale(percent, percent, percent)
 			else
@@ -141,11 +141,11 @@ local function OnHit_Firecrackers(inst, attacker, target)
 	local theta = math.random() * 2 * PI
 	SpawnFirecrackers(target, pt, theta, attacker, inst.powerlevel)
 
-    inst:Remove() 
+    inst:Remove()
 end
 
 local function OnMiss(inst, owner, target)
---	if TheWorld.Map:IsVisualGroundAtPoint(x, y, z) then 
+--	if TheWorld.Map:IsVisualGroundAtPoint(x, y, z) then
 --		splash
 --	else
 --		ground impact
@@ -162,14 +162,14 @@ end
 
 local function DoPop(inst, remaining, total, level, hissvol)
     local x, y, z = inst.Transform:GetWorldPosition()
-	
+
 	local crackerfx = SpawnPrefab("slingshot_explode_firecrackers")
     crackerfx.Transform:SetPosition(x, y, z)
 	crackerfx.Transform:SetScale((inst.powerlevel / 2), (inst.powerlevel / 2), (inst.powerlevel / 2))
 	--crackerfx.scale = 10
 	--crackerfx.Transform:SetScale(10, 10, 10)
 	print("pop")
-	
+
 	for i, v in ipairs(TheSim:FindEntities(x, y, z, 1.2 + inst.powerlevel, { "_combat" }, AURA_EXCLUDE_TAGS)) do
 		if v.components.health ~= nil and not (v.components.health:IsDead() or v == inst.attacker or v:HasTag("playerghost") or (v:HasTag("player") and TheNet:GetPVPEnabled())) and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
 			if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
@@ -178,7 +178,7 @@ local function DoPop(inst, remaining, total, level, hissvol)
 					--v:PushEvent("attacked", {attacker = inst.attacker or nil, damage = 5, weapon = nil})
 					if v:HasTag("epic") then
 						v.components.health:DoDelta(-10)
-						
+
 						if v.components.combat:GetImpactSound(v) ~= nil then
 							v.SoundEmitter:PlaySound(v.components.combat:GetImpactSound(v))
 						end
@@ -186,9 +186,9 @@ local function DoPop(inst, remaining, total, level, hissvol)
 						if no_aggro(inst.attacker, v) then
 							v.components.combat:SetShouldAvoidAggro(inst.attacker)
 						end
-					
+
 						v.components.combat:GetAttacked(inst, 10, inst)
-						
+
 						if v.components.combat ~= nil then
 							v.components.combat:SetTarget(inst.attacker or nil)
 							v.components.combat:RemoveShouldAvoidAggro(inst.attacker)
@@ -233,9 +233,9 @@ local function StartExploding(inst)
     inst:AddTag("NOCLICK")
     inst:AddTag("scarytoprey")
     inst.Physics:SetFriction(.2)
-	
+
 	local bouncecount = 8
-	
+
     DoPop(inst, bouncecount, bouncecount, 0, 1)
     inst:RemoveComponent("stackable")
     inst.persists = false
@@ -294,7 +294,7 @@ local function fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
 	if inst.powerlevel == nil then
 		inst.powerlevel = 1
 	end
@@ -315,7 +315,7 @@ local function fn()
 	--inst:ListenForEvent("findattacker", data)
 
     MakeHauntableLaunchAndIgnite(inst)
-	
+
     inst.persists = false
 
     return inst
@@ -333,44 +333,44 @@ end
 local function Vac(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local ents = TheSim:FindEntities(x, y, z, 10 * inst.Transform:GetScale(), { "_combat" }, AURA_EXCLUDE_TAGS)
-	
+
 	for i, v in ipairs(ents) do
 		if (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
 			if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
 				local px, py, pz = v.Transform:GetWorldPosition()
-					
+
 				local rad = math.rad(v:GetAngleToPoint(x, y, z))
 				local velx = math.cos(rad) --* 4.5
 				local velz = -math.sin(rad) --* 4.5
-				
+
 				local multiplierplayer = inst:GetDistanceSqToPoint(px, py, pz)
-				
+
 				multiplierplayer = (multiplierplayer * inst.Transform:GetScale()) / 50
-				
+
 				if multiplierplayer > 15 then
 					multiplierplayer = 15
 				elseif multiplierplayer < 1.5 then
 					multiplierplayer = 1.5
 				end
-				
+
 				local dx, dy, dz = px + (((FRAMES * 4) * velx) / multiplierplayer) * inst.Transform:GetScale(), py, pz + (((FRAMES * 4) * velz) / multiplierplayer) * inst.Transform:GetScale()
-					
+
 				local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
 				local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
 				local ocean = TheWorld.Map:IsOceanAtPoint(dx, dy, dz)
 				local on_water = nil
-																				
+
 				if TUNING.DSTU.ISLAND_ADVENTURES then
 					on_water = IsOnWater(dx, dy, dz)
 				end
-													
-				if not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) then	
+
+				if not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) then
 					if v ~= nil and v.components.locomotor ~= nil and dx ~= nil and (ground or boat or ocean and v.components.locomotor:CanPathfindOnWater() or v.components.tiletracker ~= nil and not v:HasTag("whale")) then
 						if not v:HasTag("aquatic") and not on_water or v:HasTag("aquatic") and on_water then
 							--[[if ocean and v.components.amphibiouscreature and not v.components.amphibiouscreature.in_water then
 								v.components.amphibiouscreature:OnEnterOcean()
 							end]]
-							
+
 							v.Transform:SetPosition(dx, dy, dz)
 						end
 					end
@@ -383,7 +383,7 @@ end
 local function Damage(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local damageents = TheSim:FindEntities(x, y, z, 1 * inst.Transform:GetScale(), { "_combat" }, AURA_EXCLUDE_TAGS)
-	
+
 	for i, v in ipairs(damageents) do
 		if v.components.combat ~= nil and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
 			if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
@@ -405,7 +405,7 @@ end
 local function shrinktask_mini(inst)
 	inst:DoTaskInTime(inst.powerlevel * 2, shrink_mini)
 end
-		
+
 local function grow_mini(inst, time, startsize, endsize)
 	inst.Transform:SetScale(0.1, 0.1, 0.1)
 	inst.components.sizetweener:StartTween(inst.powerlevel * 1.2, 1, shrinktask_mini)
@@ -420,12 +420,12 @@ local function vortexfn()
 	inst:AddTag("scarytoprey")
     --[[Non-networked entity]]
     inst.entity:SetCanSleep(false)
-	
+
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-	
+
     inst.AnimState:SetBank("shadowvortex")
     inst.AnimState:SetBuild("shadowvortex")
     inst.AnimState:PlayAnimation("idle", true)
@@ -433,29 +433,29 @@ local function vortexfn()
     inst.AnimState:SetLayer(LAYER_WORLD_BACKGROUND)
 
 	inst.AnimState:SetMultColour(1, 1, 1, .8)
-	
+
     inst.entity:SetPristine()
-	
+
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
 	if inst.powerlevel == nil then
 		inst.powerlevel = 1
 	end
 
 	inst:AddComponent("sizetweener")
-	
+
 	inst.grow_mini = grow_mini
 	inst:grow_mini()
-	
+
 	inst:DoPeriodicTask(FRAMES, Vac)
 	inst:DoPeriodicTask(2, Damage)
-	
+
 	inst:DoTaskInTime(0, Init)
-	
+
     inst.persists = false
-	
+
     return inst
 end
 
@@ -522,9 +522,9 @@ local function DoHoneyTrail(inst)
         end
         fx.Transform:SetPosition(inst.Transform:GetWorldPosition())
     end
-	
+
 	inst.honeyslowcancelcount = inst.honeyslowcancelcount + 1
-	
+
 	if inst.honeyslowcancelcount >= inst.honeyslowmax then
 		if inst.honeyslowtask ~= nil then
 			inst.honeyslowtask:Cancel()
@@ -541,7 +541,7 @@ local function OnHit_Honey(inst, attacker, target)
 
     DealDamage(inst, attacker, target)
     ImpactFx(inst, attacker, target)
-	
+
 	target.honeyslowcancelcount = 0
 	target.honeyslowmax = 75 * inst.powerlevel
 	target.honeyslowthreshold = HONEY_LEVELS[1].threshold
@@ -551,21 +551,21 @@ local function OnHit_Honey(inst, attacker, target)
         table.insert(target.availablehoneyslow, i)
     end
 	target.honeyslowcount = math.ceil(target.honeyslowthreshold * .5)
-	
+
 	if target.honeyslowtask ~= nil then
 		target.honeyslowtask:Cancel()
 		target.honeyslowtask = nil
 	end
-	
+
 	if target.tarslowtask ~= nil then
 		target.tarslowtask:Cancel()
 		target.tarslowtask = nil
 	end
-	
+
 	if target.sg ~= nil or target.components.locomotor ~= nil then
 		target.honeyslowtask = target:DoPeriodicTask(HONEY_PERIOD, DoHoneyTrail)
 	end
-	
+
     inst:Remove()
 end
 
@@ -575,36 +575,36 @@ local function OnHit_Rubber(inst, attacker, target)
 			inst.powerlevel = inst.powerlevel + 1
 			target:PushEvent("wixiebite")
 		end
-		
+
 		DealDamage(inst, attacker, target)
 		ImpactFx(inst, attacker, target)
-		
+
 		if target.SoundEmitter ~= nil then
 			target.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/shoot")
 		else
 			inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/shoot")
 		end
-			
+
 		local x, y, z = target.Transform:GetWorldPosition()
-		
+
 		local ents = TheSim:FindEntities(x, y, z, 10, { "_combat" }, AURA_EXCLUDE_TAGS)
-			
-		for i, v in ipairs(ents) do 
+
+		for i, v in ipairs(ents) do
 			if v ~= target and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
 				if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
 					local rubberband = SpawnPrefab("slingshotammo_rubber_rebound")
 					rubberband.Transform:SetPosition(target.Transform:GetWorldPosition())
 					rubberband.components.projectile:Throw(inst, v, attacker)
 					rubberband.components.projectile:SetHoming(true)
-					
+
 					rubberband.maxbounces = 30 * inst.powerlevel
-					
+
 					break
 				end
 			end
 		end
 	end
-	
+
     inst:Remove()
 end
 
@@ -614,16 +614,16 @@ local function OnHit_Tremor(inst, attacker, target)
 			inst.powerlevel = inst.powerlevel + 1
 			target:PushEvent("wixiebite")
 		end
-	
+
 		DealDamage(inst, attacker, target)
 		ImpactFx(inst, attacker, target)
-		
+
 		local tremors = SpawnPrefab("slingshot_tremors")
 		tremors.Transform:SetPosition(target.Transform:GetWorldPosition())
 		tremors.powerlevel = inst.powerlevel
 		tremors.attacker = attacker
 	end
-	
+
     inst:Remove()
 end
 
@@ -633,15 +633,15 @@ local function OnHit_MoonRock(inst, attacker, target)
 			inst.powerlevel = inst.powerlevel + 1
 			target:PushEvent("wixiebite")
 		end
-	
+
 		if target:HasTag("shadow") or target:HasTag("shadowcreature") or target:HasTag("stalker") or target:HasTag("shadowchesspiece") then
 			inst.powerlevel = inst.powerlevel + 2
 		end
-	
+
 		DealDamage(inst, attacker, target)
 		ImpactFx(inst, attacker, target)
 	end
-	
+
     inst:Remove()
 end
 
@@ -651,11 +651,11 @@ local function OnHit_Salt(inst, attacker, target)
 			inst.powerlevel = inst.powerlevel + 1
 			target:PushEvent("wixiebite")
 		end
-		
+
 		DealDamage(inst, attacker, target, true)
 		ImpactFx(inst, attacker, target, true)
 	end
-	
+
     inst:Remove()
 end
 
@@ -671,66 +671,66 @@ local function OnHit_Goop(inst, attacker, target)
 			inst.powerlevel = inst.powerlevel + 1
 			target:PushEvent("wixiebite")
 		end
-		
+
 		DealHealing(inst, attacker, target)
 		ImpactFx(inst, attacker, target)
-		
+
 		if target.SoundEmitter ~= nil then
 			target.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/shoot")
 		else
 			inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/shoot")
 		end
-			
+
 		local x, y, z = target.Transform:GetWorldPosition()
 		local playerdetected = false
 		local goop = SpawnPrefab("slingshotammo_goop_proj_secondary")
-		
+
 		local players = TheSim:FindEntities(x, y, z, 10, { "_combat" }, {"noclaustrophobia", "playerghost"}, { "companion", "player" })
 		local ents = TheSim:FindEntities(x, y, z, 10, { "_combat" }, GOOP_EXCLUDE_TAGS)
-		
-		for i, v in pairs(players) do 
+
+		for i, v in pairs(players) do
 			if v ~= target then
 				goop.Transform:SetPosition(target.Transform:GetWorldPosition())
 				goop.components.projectile:Throw(inst, v, attacker)
 				goop.components.projectile:SetHoming(true)
 				goop.oldtarget = v
-				
+
 				if inst.maxbounces == nil then
 					goop.maxbounces = 20 * inst.powerlevel
 				else
 					goop.maxbounces = inst.maxbounces
 					goop.bouncecount = inst.bouncecount + 1
 				end
-					
+
 				playerdetected = true
-				
+
 				break
 			end
 		end
-		
+
 		if not playerdetected then
-			for i, v in pairs(ents) do 
+			for i, v in pairs(ents) do
 				if v ~= target and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
 					goop.Transform:SetPosition(target.Transform:GetWorldPosition())
 					goop.components.projectile:Throw(inst, v, attacker)
 					goop.components.projectile:SetHoming(true)
 					goop.oldtarget = v
-				
+
 					if inst.maxbounces == nil then
 						goop.maxbounces = 20 * inst.powerlevel
 					else
 						goop.maxbounces = inst.maxbounces
 						goop.bouncecount = inst.bouncecount + 1
 					end
-					
+
 					goop.rebound = true
-					
+
 					break
 				end
 			end
 		end
 	end
-	
+
     inst:Remove()
 end
 
@@ -740,20 +740,20 @@ local function OnHit_Slime(inst, attacker, target)
 			inst.powerlevel = inst.powerlevel + 1
 			target:PushEvent("wixiebite")
 		end
-		
+
 		DealDamage(inst, attacker, target)
 		ImpactFx(inst, attacker, target)
-		
+
 		local x, y, z = target.Transform:GetWorldPosition()
 		local hitfx = SpawnPrefab("slingshotammo_slime_impact")
-		
+
 		if target.slingshot_slime ~= nil then
 			target.slingshot_slime:Advance()
 		elseif target.components.combat then
 			hitfx.entity:SetParent(target.entity)
 			hitfx.Transform:SetPosition(0, 0, 0)
-			
-			if target.components.combat ~= nil and 
+
+			if target.components.combat ~= nil and
 			target.components.combat.hiteffectsymbol ~= nil and
 			target.components.combat.hiteffectsymbol ~= "marker" then
 				hitfx.entity:AddFollower():FollowSymbol(target.GUID, target.components.combat.hiteffectsymbol, 0, 0, 0)
@@ -762,34 +762,34 @@ local function OnHit_Slime(inst, attacker, target)
 			else
 				hitfx.Transform:SetPosition(0, 2, 0)
 			end
-			
+
 			hitfx.target = target
 			target.slingshot_slime = hitfx
 			target.slingshot_slime:Advance()
-		
+
 			hitfx:ListenForEvent("onignite", function(inst)
 					if target ~= nil then
 						if target.components.combat ~= nil then
 							if no_aggro(attacker, target) then
 								target.components.combat:SetShouldAvoidAggro(attacker)
 							end
-						
+
 							target.components.combat:GetAttacked(attacker, hitfx.damage, attacker)
-							
+
 							if target.components.combat ~= nil then
 								target.components.combat:RemoveShouldAvoidAggro(attacker)
 							end
 						end
-							
+
 						local debuffkey = hitfx.prefab
-						target.components.locomotor:RemoveExternalSpeedMultiplier(target, debuffkey) 
+						target.components.locomotor:RemoveExternalSpeedMultiplier(target, debuffkey)
 						target._slingslime_speedmulttask = nil
 						target.slingshot_slime = nil
-							
+
 						SpawnPrefab("explode_small").Transform:SetPosition(target.Transform:GetWorldPosition())
 					end
-				
-				
+
+
 					hitfx:Remove()
 				end, target)
 
@@ -800,28 +800,28 @@ local function OnHit_Slime(inst, attacker, target)
 							if no_aggro(attacker, target) then
 								target.components.combat:SetShouldAvoidAggro(attacker)
 							end
-						
+
 							target.components.combat:GetAttacked(attacker, 50, attacker)
-							
+
 							if target.components.combat ~= nil then
 								target.components.combat:RemoveShouldAvoidAggro(attacker)
 							end
 						end
-						
+
 						local debuffkey = hitfx.prefab
-						target.components.locomotor:RemoveExternalSpeedMultiplier(target, debuffkey) 
+						target.components.locomotor:RemoveExternalSpeedMultiplier(target, debuffkey)
 						target._slingslime_speedmulttask = nil
 						target.slingshot_slime = nil
-								
+
 						SpawnPrefab("explode_small").Transform:SetPosition(target.Transform:GetWorldPosition())
 					end
-					
+
 					hitfx:Remove()
 				end
 			end)
 		end
 	end
-	
+
     inst:Remove()
 end
 
@@ -833,18 +833,18 @@ local function OnHit_Shadow(inst, attacker, target)
 		else
 			inst.powerlevel = 1
 		end
-		
+
 		DealDamage(inst, attacker, target)
 		ImpactFx(inst, attacker, target)
 	end
-	
+
     inst:Remove()
 end
 
 local function oncollide(inst, other)
     local attacker = inst.components.projectile.owner
-    if other ~= nil and attacker ~= nil and 
-		other:IsValid() and 
+    if other ~= nil and attacker ~= nil and
+		other:IsValid() and
 		other.components.combat ~= nil and not
 		other:HasTag("projectile") and not
 		other:HasTag("playerghost") and not
@@ -860,7 +860,7 @@ local function CollisionCheck(inst)
 	if inst.OnHit ~= nil then
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local attacker = inst.components.projectile.owner or nil
-		
+
 		for i, v in ipairs(TheSim:FindEntities(x, y, z, 3, { "_combat" }, inst.healinggoop and GOOP_EXCLUDE_TAGS or AURA_EXCLUDE_TAGS)) do
 			print(v.prefab.."for loop")
 			if inst.healinggoop or v:GetPhysicsRadius(0) > 1.5 and v:IsValid() and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
@@ -879,7 +879,7 @@ local function CollisionCheck(inst)
 				end
 			end
 		end
-		
+
 		for i, v in ipairs(TheSim:FindEntities(x, y, z, 2, { "_combat" }, AURA_EXCLUDE_TAGS)) do
 			if v:IsValid() and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
 				if inst.oldtarget == nil or inst.oldtarget ~= nil and not v == inst.oldtarget then
@@ -931,18 +931,18 @@ local function secondaryproj_fn(symbol, overridebuild)
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst.persists = false
-	
+
 	if inst.powerlevel == nil then
 		inst.powerlevel = 1
 	end
-	
+
     inst:AddComponent("locomotor")
-	
+
     inst:AddComponent("weapon")
     inst:AddComponent("projectile")
-	
+
     inst:AddComponent("projectile")
     inst.components.projectile:SetSpeed(20)
     inst.components.projectile:SetHoming(false)
@@ -950,9 +950,9 @@ local function secondaryproj_fn(symbol, overridebuild)
     inst.components.projectile:SetOnHitFn(nil)
     inst.components.projectile:SetOnMissFn(nil)
 	inst.components.projectile:SetLaunchOffset(Vector3(1, 0.5, 0))
-	
+
 	inst:DoPeriodicTask(FRAMES, CollisionCheck)
-	
+
 	inst:DoTaskInTime(2 - (inst.powerlevel * inst.powerlevel), inst.Remove)
 
     return inst
@@ -964,16 +964,16 @@ local function crackerproj_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst.Physics:SetCollisionCallback(nil)
     inst.components.projectile:SetOnHitFn(OnHit_Firecrackers)
-	
+
 	inst.impactfx = "explode_firecrackers"
-	
+
 	inst.damage = TUNING.SLINGSHOT_AMMO_DAMAGE_ROCKS
-			
+
 	inst.OnHit = OnHit_Firecrackers
-	
+
     return inst
 end
 
@@ -983,16 +983,16 @@ local function honeyproj_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst.Physics:SetCollisionCallback(nil)
     inst.components.projectile:SetOnHitFn(OnHit_Honey)
-	
+
 	inst.impactfx = "slingshotammo_honey_impact"
-	
+
 	inst.damage = TUNING.SLINGSHOT_AMMO_DAMAGE_SLOW
-	
+
 	inst.OnHit = OnHit_Honey
-	
+
     return inst
 end
 
@@ -1002,16 +1002,16 @@ local function rubberproj_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst.Physics:SetCollisionCallback(nil)
     inst.components.projectile:SetOnHitFn(OnHit_Rubber)
-	
+
 	inst.impactfx = "slingshotammo_rubber_impact"
-	
+
 	inst.damage = TUNING.SLINGSHOT_AMMO_DAMAGE_SLOW
-	
+
 	inst.OnHit = OnHit_Rubber
-	
+
     return inst
 end
 
@@ -1021,23 +1021,23 @@ local function tremorproj_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst.Physics:SetCollisionCallback(nil)
     inst.components.projectile:SetOnHitFn(OnHit_Tremor)
-	
+
 	inst.impactfx = "sand_puff"
-	
+
 	inst.damage = TUNING.SLINGSHOT_AMMO_DAMAGE_SLOW
-	
+
 	inst.OnHit = OnHit_Tremor
-	
+
     return inst
 end
 
 local function ShadowCheck(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local attacker = inst.components.projectile.owner or nil
-	
+
 	for i, v in ipairs(TheSim:FindEntities(x, y, z, 2, { "_combat" }, { "noclaustrophobia", "bird", "rabbit", "playerghost", "abigail", "companion", "ghost", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "invisible" }, { "shadow", "shadowcreature" })) do
 		if v:IsValid() and v.components.combat ~= nil and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
 			if not (v.components.health:IsDead() or v == attacker or v:HasTag("playerghost") or (v:HasTag("player") and not TheNet:GetPVPEnabled())) then
@@ -1053,70 +1053,70 @@ local function moonrockproj_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst.Physics:SetCollisionCallback(nil)
     inst.components.projectile:SetOnHitFn(OnHit_MoonRock)
-	
+
 	inst.impactfx = "slingshotammo_moonrock_impact"
-	
+
 	inst.damage = TUNING.SLINGSHOT_AMMO_DAMAGE_MARBLE
-	
+
 	inst.OnHit = OnHit_MoonRock
-	
+
 	inst:DoPeriodicTask(FRAMES, ShadowCheck)
-	
+
     return inst
 end
 
 local function GlassCut(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local attacker = inst.components.projectile.owner or nil
-	
+
 	for i, v in ipairs(TheSim:FindEntities(x, y, z, 3, "_combat", { "noclaustrophobia", "bird", "rabbit", "wall", "invisible", "player", "companion", "INLIMBO" })) do
 		if v:GetPhysicsRadius(0) > 1.5 and v:IsValid() and v.components.combat ~= nil and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
 			if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
 				if not (v.components.health:IsDead() or v == attacker or v:HasTag("playerghost") or (v:HasTag("player") and not TheNet:GetPVPEnabled())) then
-				
+
 					inst.finallevel = inst.powerlevel
-					
+
 					if no_aggro(attacker, v) then
 						v.components.combat:SetShouldAvoidAggro(attacker)
 					end
-					
+
 					if v:HasTag("shadow_aligned") then
 						inst.finallevel = inst.powerlevel + .5
 					end
-					
+
 					if v:HasDebuff("wixiecurse_debuff") then
 						inst.finallevel = inst.finallevel + 1
 						v:PushEvent("wixiebite")
 					end
-					
-					if v:HasTag("shadowcreature") or 
-					v.sg == nil or 
+
+					if v:HasTag("shadowcreature") or
+					v.sg == nil or
 					v.wixieammo_hitstuncd == nil and not
-					(v.sg:HasStateTag("busy") or 
+					(v.sg:HasStateTag("busy") or
 					v.sg:HasStateTag("caninterrupt")) or
 					v.sg:HasStateTag("frozen") then
 						v.wixieammo_hitstuncd = v:DoTaskInTime(8, function()
 							if v.wixieammo_hitstuncd ~= nil then
 								v.wixieammo_hitstuncd:Cancel()
 							end
-							
+
 							v.wixieammo_hitstuncd = nil
 						end)
-					
+
 						v.components.combat:GetAttacked(attacker, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), inst)
 					else
 						v.components.combat:GetAttacked(attacker, 0, inst)
-						
+
 						if v.components.combat ~= nil then
 							v.components.combat:SetTarget(attacker)
 						end
-						
+
 						v.components.health:DoDelta(-((7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)), false, inst, false, attacker, false)
 					end
-					
+
 					if v.components.combat ~= nil then
 						v.components.combat:RemoveShouldAvoidAggro(attacker)
 					end
@@ -1129,47 +1129,47 @@ local function GlassCut(inst)
 		if v:GetPhysicsRadius(0) <= 1.5 and v:IsValid() and v.components.combat ~= nil and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
 			if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
 				if not (v.components.health:IsDead() or v == attacker or v:HasTag("playerghost") or (v:HasTag("player") and not TheNet:GetPVPEnabled())) then
-				
+
 					inst.finallevel = inst.powerlevel
-					
+
 					if no_aggro(attacker, v) then
 						v.components.combat:SetShouldAvoidAggro(attacker)
 					end
-					
+
 					if v:HasTag("shadow_aligned") then
 						inst.finallevel = inst.powerlevel + .5
 					end
-					
+
 					if v:HasDebuff("wixiecurse_debuff") then
 						inst.finallevel = inst.finallevel + 1
 						v:PushEvent("wixiebite")
 					end
-					
-					if v:HasTag("shadowcreature") or 
-					v.sg == nil or 
-					v.wixieammo_hitstuncd == nil and not 
-					(v.sg:HasStateTag("busy") or 
+
+					if v:HasTag("shadowcreature") or
+					v.sg == nil or
+					v.wixieammo_hitstuncd == nil and not
+					(v.sg:HasStateTag("busy") or
 					v.sg:HasStateTag("caninterrupt")) or
 					v.sg:HasStateTag("frozen") then
 						v.wixieammo_hitstuncd = v:DoTaskInTime(8, function()
 							if v.wixieammo_hitstuncd ~= nil then
 								v.wixieammo_hitstuncd:Cancel()
 							end
-							
+
 							v.wixieammo_hitstuncd = nil
 						end)
-					
+
 						v.components.combat:GetAttacked(attacker, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), inst)
 					else
 						v.components.combat:GetAttacked(attacker, 0, inst)
-						
+
 						if v.components.combat ~= nil then
 							v.components.combat:SetTarget(attacker)
 						end
-						
+
 						v.components.health:DoDelta(-((7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)), false, inst, false, attacker, false)
 					end
-					
+
 					if v.components.combat ~= nil then
 						v.components.combat:RemoveShouldAvoidAggro(attacker)
 					end
@@ -1185,20 +1185,20 @@ local function moonglassproj_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     --inst.Physics:ClearCollisionMask()
-	
+
     inst.Physics:SetCollisionCallback(nil)
     inst.components.projectile:SetOnHitFn(nil)
-	
+
 	inst.impactfx = "sand_puff"
-	
+
 	inst.damage = TUNING.SLINGSHOT_AMMO_DAMAGE_GOLD
-	
+
 	inst:DoPeriodicTask(FRAMES, GlassCut)
-	
+
 	inst.OnHit = nil
-	
+
     return inst
 end
 
@@ -1208,16 +1208,16 @@ local function saltproj_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst.Physics:SetCollisionCallback(nil)
     inst.components.projectile:SetOnHitFn(OnHit_Salt)
-	
+
 	inst.impactfx = "slingshotammo_salt_impact"
-	
+
 	inst.damage = TUNING.SLINGSHOT_AMMO_DAMAGE_ROCKS
-	
+
 	inst.OnHit = OnHit_Salt
-	
+
     return inst
 end
 
@@ -1227,22 +1227,22 @@ local function goopproj_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst.Physics:SetCollisionCallback(nil)
     inst.components.projectile:SetOnHitFn(OnHit_Goop)
-	
+
 	inst.maxbounces = nil
 	inst.bouncecount = 0
-	
+
 	inst.healinggoop = true
-	
+
 	inst.impactfx = "slingshotammo_goop_impact"
-	
+
 	inst.damage = 0
 	inst.rebound = false
-	
+
 	inst.OnHit = OnHit_Goop
-	
+
     return inst
 end
 
@@ -1252,16 +1252,16 @@ local function slimeproj_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst.Physics:SetCollisionCallback(nil)
     inst.components.projectile:SetOnHitFn(OnHit_Slime)
-	
+
 	--inst.impactfx = "slingshotammo_goop_impact"
-	
+
 	inst.damage = 5
-	
+
 	inst.OnHit = OnHit_Slime
-	
+
     return inst
 end
 
@@ -1271,33 +1271,33 @@ local function shadowproj_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst.Physics:SetCollisionCallback(nil)
     inst.components.projectile:SetOnHitFn(OnHit_Shadow)
-	
+
 	inst.impactfx = "wanda_attack_pocketwatch_normal_fx"
-	
+
 	inst.damage = TUNING.SLINGSHOT_AMMO_DAMAGE_ROCKS
-			
+
 	inst.OnHit = OnHit_Shadow
-	
+
     return inst
 end
 
 local function OnHitLazy(inst, attacker, target)
-	
+
 	if inst.caster ~= nil then
-	
+
 		local xc, yc, zc = inst.caster.Transform:GetWorldPosition()
-			
+
 		local sandclone = SpawnPrefab("wixie_shadowclone")
-			
+
 		SpawnPrefab("shadow_puff_large_back").Transform:SetPosition(xc, yc - .1, zc)
 		sandclone.Transform:SetPosition(xc, yc - .05, zc)
 		SpawnPrefab("shadow_puff_large_front").Transform:SetPosition(xc, yc, zc)
-		
+
 		local targetingents = TheSim:FindEntities(xc, yc, zc, 15, { "_combat" }, { "noclaustrophobia", "INLIMBO" })
-		
+
 		for i, v in pairs(targetingents) do
 			if v:IsValid() and v.components ~= nil and v.components.combat ~= nil and v.components.combat.target ~= nil and v.components.combat.target == inst.caster then
 				--v.components.combat:SuggestTarget(inst)
@@ -1305,20 +1305,20 @@ local function OnHitLazy(inst, attacker, target)
 				print("change formation!")
 			end
 		end
-		
+
 		local pt = inst:GetPosition()
 		if TheWorld.Map:IsPassableAtPoint(pt.x, 0, pt.z) then
 			inst.caster.Physics:Teleport(pt:Get())
 			inst.caster.SoundEmitter:PlaySound("dontstarve/common/staff_blink")
 		end
 	end
-		
+
 	local x, y, z = inst.Transform:GetWorldPosition()
-		
+
 	SpawnPrefab("sand_puff_large_back").Transform:SetPosition(x, y - .1, z)
 	SpawnPrefab("slingshotammo_lazy_impact").Transform:SetPosition(x, y - .05, z)
 	SpawnPrefab("sand_puff_large_front").Transform:SetPosition(x, y, z)
-	
+
     inst:Remove()
 end
 
@@ -1329,7 +1329,7 @@ local function lazyproj_fn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-	
+
 	inst.entity:AddPhysics()
 	inst.Physics:SetMass(1)
 	inst.Physics:SetFriction(0)
@@ -1339,7 +1339,7 @@ local function lazyproj_fn()
 	inst.Physics:CollidesWith(COLLISION.GROUND)
 	inst.Physics:SetCapsule(0.1, 0.1)
 	inst.Physics:SetDontRemoveOnSleep(true)
-	
+
 	inst:AddTag("NOCLICK")
     inst:AddTag("projectile")
 
@@ -1355,30 +1355,30 @@ local function lazyproj_fn()
     end
 
     inst:AddComponent("locomotor")
-	
+
 	inst.caster = nil
-	
+
     inst:AddComponent("complexprojectile")
     inst.components.complexprojectile:SetHorizontalSpeed(15)
     inst.components.complexprojectile:SetGravity(-25)
     inst.components.complexprojectile:SetLaunchOffset(Vector3(1, 0.5, 0))
     inst.components.complexprojectile:SetOnHit(OnHitLazy)
-	
+
     return inst
 end
 
 local function Advance(inst)
 	if inst.level < 5 then
 		inst.level = inst.level + 1
-		
+
 		inst.damage = 50 * inst.level
-		
+
 		inst.AnimState:PlayAnimation("lvl"..inst.level, false)
 	end
 
 	local debuffkey = inst.prefab
 	local size = inst.level / 7.5
-	
+
 	if inst.target ~= nil and inst.target:IsValid() and inst.target.components.locomotor ~= nil then
 		if inst.target._slingslime_speedmulttask ~= nil then
 			inst.target._slingslime_speedmulttask:Cancel()
@@ -1398,7 +1398,7 @@ local function impactslimefn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-	
+
     inst.AnimState:SetBank("wixie_slimeball")
     inst.AnimState:SetBuild("wixie_slimeball")
     inst.AnimState:PlayAnimation("lvl1", false)
@@ -1412,13 +1412,13 @@ local function impactslimefn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
 	inst.damage = 50
 	inst.level = 0
 	inst.Advance = Advance
-	
+
 	inst.SoundEmitter:PlaySound("dontstarve/creatures/together/bee_queen/honey_drip")
-	
+
 	inst.persists = false
 
     return inst
@@ -1448,21 +1448,21 @@ local function shadowclone_fn()
 
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(500)
-	
-	inst:DoTaskInTime(30, function(inst) 
-		inst.components.health:Kill() 
+
+	inst:DoTaskInTime(30, function(inst)
+		inst.components.health:Kill()
 	end)
-	
+
     inst:ListenForEvent("attacked", function(inst)
 		inst.SoundEmitter:PlaySound("dontstarve/impacts/impact_sanity_armour_dull")
 	end)
-	
+
     inst:ListenForEvent("death", function(inst)
 		SpawnPrefab("shadow_despawn").Transform:SetPosition(inst.Transform:GetWorldPosition())
-		
+
 		inst:Remove()
 	end)
-	
+
 	inst.persists = false
 
     return inst
@@ -1501,7 +1501,7 @@ local function fncommon(symbol, inv, overridebuild)
 	inst:AddComponent("reloaditem")
 
     inst:AddComponent("tradable")
-	
+
     inst:AddComponent("edible")
     inst.components.edible.foodtype = FOODTYPE.ELEMENTAL
     inst.components.edible.hungervalue = 0
@@ -1527,7 +1527,7 @@ local function cracker_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     return inst
 end
 
@@ -1537,13 +1537,13 @@ local function honey_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst:AddComponent("edible")
     inst.components.edible.foodtype = FOODTYPE.GOODIES
     inst.components.edible.hungervalue = 0
     inst.components.edible.sanityvalue = 1
     inst.components.edible.healthvalue = 1
-	
+
     return inst
 end
 
@@ -1553,7 +1553,7 @@ local function rubber_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     return inst
 end
 
@@ -1563,7 +1563,7 @@ local function tremor_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     return inst
 end
 
@@ -1573,7 +1573,7 @@ local function moonrock_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     return inst
 end
 
@@ -1583,7 +1583,7 @@ local function moonglass_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     return inst
 end
 
@@ -1593,7 +1593,7 @@ local function salt_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     return inst
 end
 
@@ -1603,7 +1603,7 @@ local function goop_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     return inst
 end
 
@@ -1613,7 +1613,7 @@ local function slime_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     return inst
 end
 
@@ -1623,7 +1623,7 @@ local function lazy_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     return inst
 end
 
@@ -1633,36 +1633,36 @@ local function shadow_fn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     return inst
 end
 
 local function Rebound(inst, attacker, target)
 	if target ~= nil then
 		ImpactFx(inst, attacker, target)
-		
+
 		if target.SoundEmitter ~= nil then
 			target.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/shoot")
 		end
-		
-		
+
+
 		if not target:HasTag("wall") and not target:HasTag("structure") then
 			if no_aggro(attacker, target) then
 				target.components.combat:SetShouldAvoidAggro(attacker)
 			end
-		
+
 			target.components.combat:GetAttacked(inst, 10, inst)
-			
+
 			if target.components.combat ~= nil then
 				target.components.combat:RemoveShouldAvoidAggro(attacker)
 			end
 		end
-		
+
 		if inst.bouncecount <= inst.maxbounces then
 			local x, y, z = target.Transform:GetWorldPosition()
-			
+
 			local ents = TheSim:FindEntities(x, y, z, 10, { "_combat" }, AURA_EXCLUDE_TAGS)
-			
+
 			for i, v in pairs(ents) do
 				--if v ~= target and v.components and v.components.health ~= nil and not (v.components.health:IsDead() or v == attacker or v:HasTag("playerghost") or (v:HasTag("player") and not TheNet:GetPVPEnabled())) then
 				if v ~= target and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
@@ -1670,41 +1670,41 @@ local function Rebound(inst, attacker, target)
 						if target ~= nil and target:IsValid() and target.components and target.components.locomotor then
 							local x, y, z = inst.Transform:GetWorldPosition()
 							local tx, ty, tz = target.Transform:GetWorldPosition()
-															
+
 							local rad = math.rad(inst:GetAngleToPoint(tx, ty, tz))
-							
-							
+
+
 							--for i = 1, 50 do
 								target:DoTaskInTime(0.1, function(target)
-									if target ~= nil then 
+									if target ~= nil then
 										--local x, y, z = inst.Transform:GetWorldPosition()
 										--local tx, ty, tz = target.Transform:GetWorldPosition()
 										local tx2, ty2, tz2 = target.Transform:GetWorldPosition()
-															
+
 										--local rad = math.rad(inst:GetAngleToPoint(tx, ty, tz))
 										local velx = math.cos(rad) --* 4.5
 										local velz = -math.sin(rad) --* 4.5
-															
+
 										local giantreduction = target:HasTag("epic") and 4 or target:HasTag("smallcreature") and 1.5 or 2
-											
+
 										--local dx, dy, dz = tx2 + (((inst.powerlevel) / (i + 1)) * velx) / giantreduction, ty2, tz2 + (((inst.powerlevel) / (i + 1)) * velz) / giantreduction
 										local dx, dy, dz = tx2 + (1 * velx) / giantreduction, ty2, tz2 + (1 * velz) / giantreduction
 										local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
 										local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
 										local ocean = TheWorld.Map:IsOceanAtPoint(dx, dy, dz)
 										local on_water = nil
-																							
+
 										if TUNING.DSTU.ISLAND_ADVENTURES then
 											on_water = IsOnWater(dx, dy, dz)
 										end
-												
-										if not (target.sg ~= nil and (target.sg:HasStateTag("swimming") or target.sg:HasStateTag("invisible"))) then	
+
+										if not (target.sg ~= nil and (target.sg:HasStateTag("swimming") or target.sg:HasStateTag("invisible"))) then
 											if target ~= nil and target.components.locomotor ~= nil and dx ~= nil and (ground or boat or ocean and target.components.locomotor:CanPathfindOnWater() or target.components.tiletracker ~= nil and not target:HasTag("whale")) then
 												if not target:HasTag("aquatic") and not on_water or target:HasTag("aquatic") and on_water then
 													--[[if ocean and target.components.amphibiouscreature and not target.components.amphibiouscreature.in_water then
 														target.components.amphibiouscreature:OnEnterOcean()
 													end]]
-													
+
 													target.Transform:SetPosition(dx, dy, dz)
 												end
 											end
@@ -1713,22 +1713,22 @@ local function Rebound(inst, attacker, target)
 								end)
 							--end
 						end
-					
+
 						local rubberband = SpawnPrefab("slingshotammo_rubber_rebound")
 						rubberband.Transform:SetPosition(target.Transform:GetWorldPosition())
-						
+
 						rubberband.components.projectile:Throw(inst, v, attacker)
 						rubberband.components.projectile:SetHoming(true)
 						rubberband.maxbounces = inst.maxbounces
 						rubberband.bouncecount = inst.bouncecount + 1
-						
+
 						break
 					end
 				end
 			end
 		end
 	end
-	
+
 	inst:Remove()
 end
 
@@ -1762,20 +1762,20 @@ local function rebound()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst:AddComponent("weapon")
 
     inst:AddComponent("projectile")
     inst.components.projectile:SetSpeed(13)
     inst.components.projectile:SetOnHitFn(Rebound)
-	
+
 	inst.maxbounces = 30
 	inst.bouncecount = 0
 	inst.impactfx = "slingshotammo_rubber_impact"
-	
+
 	inst.persists = false
 	inst:DoTaskInTime(2, inst.Remove)
-	
+
     MakeHauntableLaunch(inst)
 
     return inst
@@ -1788,22 +1788,22 @@ local function commonimpact_fn(bank, build, anim, override, iaammo)
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-	
+
     inst.AnimState:SetBank(bank)
     inst.AnimState:SetBuild(build)
-	
+
 	if anim ~= nil then
 		inst.AnimState:PlayAnimation(anim)
 	end
-	
+
     inst.AnimState:SetRayTestOnBB(true)
-	
+
 	inst.AnimState:SetFinalOffset(FINALOFFSET_MAX)
 
 	if override ~= nil then
 		inst.AnimState:OverrideSymbol("rock", iaammo ~= nil and iaammo and "wixieammo_IA" or "wixieammo", override)
 	end
-	
+
     inst:AddTag("FX")
 
     inst.entity:SetPristine()
@@ -1811,9 +1811,9 @@ local function commonimpact_fn(bank, build, anim, override, iaammo)
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
 	inst:ListenForEvent("animover", inst.Remove)
-	
+
 	inst.persists = false
 
     return inst
@@ -1825,7 +1825,7 @@ local function impacthoneyfn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
 	inst.SoundEmitter:PlaySound("dontstarve/creatures/together/bee_queen/honey_drip")
 
     return inst
@@ -1837,7 +1837,7 @@ local function impactmoonrockfn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
 	inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/rock")
 
     return inst
@@ -1850,7 +1850,7 @@ local function impactgoldfn()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-	
+
     inst.AnimState:SetBank("goldshattered")
     inst.AnimState:SetBuild("goldshattered")
     inst.AnimState:SetRayTestOnBB(true)
@@ -1864,11 +1864,11 @@ local function impactgoldfn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
 	inst.SoundEmitter:PlaySound("turnoftides/common/together/moon_glass/mine")
-	
+
 	inst:ListenForEvent("animover", inst.Remove)
-	
+
 	inst.persists = false
 
     return inst
@@ -1880,7 +1880,7 @@ local function impactrubberfn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
     return inst
 end
 
@@ -1890,7 +1890,7 @@ local function impactsaltfn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
 	inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/rock")
 
     return inst
@@ -1906,7 +1906,7 @@ local function impactgoopfn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
 	inst.SoundEmitter:PlaySound("dontstarve/creatures/together/bee_queen/honey_drip")
 
     return inst
@@ -1918,9 +1918,9 @@ local function impactlazyfn()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
 	inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/gold")
-	
+
     return inst
 end
 
@@ -1935,16 +1935,16 @@ local function Tremor(inst)
 	local tremorring = SpawnPrefab("groundpoundring_fx")
 	tremorring.Transform:SetPosition(x, y, z)
 	tremorring.Transform:SetScale(0.66, 0.66, 0.66)
-	
+
 	local puffx = SpawnPrefab("sand_puff")
 	puffx.Transform:SetPosition(x, y, z)
-	
+
 	local ents = TheSim:FindEntities(x, y, z, 5, { "_combat" }, AURA_EXCLUDE_TAGS)
-	
+
 	for i, v in ipairs(ents) do
 		if (v:HasTag("bird_mutant") or not v:HasTag("bird")) and not v:HasTag("stageusher") then
 			if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
-		
+
 				local distsq = v ~= nil and x ~= nil and v:GetDistanceSqToPoint(x, y, z) or 1
 				for i = 1, 50 do
 					inst:DoTaskInTime((i - 1) / 50, function(inst)
@@ -1954,31 +1954,31 @@ local function Tremor(inst)
 							local rad = math.rad(v:GetAngleToPoint(px, py, pz))
 							local velx = math.cos(rad) --* 4.5
 							local velz = -math.sin(rad) --* 4.5
-							
-							
+
+
 							local giantreduction = v:HasTag("epic") and 3 or v:HasTag("smallcreature") and 0.8 or 1
-									
-							
+
+
 							local dx, dy, dz = px + (((2 / (i + 1)) * velx) / giantreduction) / distancemultiplier, py, pz + (((2 / (i + 1)) * velz) / giantreduction) / distancemultiplier
-													
+
 							--local dx, dy, dz = px - (((FRAMES * 4) * velx) / multiplierplayer) * inst.Transform:GetScale(), py, pz - (((FRAMES * 4) * velz) / multiplierplayer) * inst.Transform:GetScale()
-								
+
 							local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
 							local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
 							local ocean = TheWorld.Map:IsOceanAtPoint(dx, dy, dz)
 							local on_water = nil
-																				
+
 							if TUNING.DSTU.ISLAND_ADVENTURES then
 								on_water = IsOnWater(dx, dy, dz)
 							end
-							
-							if not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) then	
+
+							if not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) then
 								if v ~= nil and v.components.locomotor ~= nil and dx ~= nil and (ground or boat or ocean and v.components.locomotor:CanPathfindOnWater() or v.components.tiletracker ~= nil and not v:HasTag("whale")) then
 									if not v:HasTag("aquatic") and not on_water or v:HasTag("aquatic") and on_water then
 										--[[if ocean and v.components.amphibiouscreature and not v.components.amphibiouscreature.in_water then
 											v.components.amphibiouscreature:OnEnterOcean()
 										end]]
-										
+
 										v.Transform:SetPosition(dx, dy, dz)
 									end
 								end
@@ -1986,23 +1986,23 @@ local function Tremor(inst)
 						end
 					end)
 				end
-				
+
 				if v:IsValid() and v.components.combat ~= nil and v.components.combat ~= nil and v.components.health ~= nil then
 					inst.finaldamage = TUNING.SLINGSHOT_AMMO_DAMAGE_GOLD * (1 + inst.powerlevel) / 2
-					
-					if inst.attacker ~= nil and 
-						inst.attacker.components ~= nil and 
+
+					if inst.attacker ~= nil and
+						inst.attacker.components ~= nil and
 						inst.attacker.components.combat then
-						
+
 						inst.finaldamage = inst.finaldamage * (inst.attacker.components.combat ~= nil and inst.attacker.components.combat.externaldamagemultipliers:Get() or 1)
 					end
-					
+
 					if no_aggro(inst.attacker, v) then
 						v.components.combat:SetShouldAvoidAggro(inst.attacker)
 					end
-					
+
 					v.components.combat:GetAttacked(inst.attacker, inst.finaldamage, inst)
-					
+
 					if v.components.combat ~= nil then
 						v.components.combat:RemoveShouldAvoidAggro(inst.attacker)
 					end
@@ -2010,10 +2010,10 @@ local function Tremor(inst)
 			end
 		end
 	end
-	
-	
+
+
 	inst.tremorcount = inst.tremorcount + 1
-	
+
 	if inst.tremorcount >= (3 * inst.powerlevel) then
 		inst:Remove()
 	end
@@ -2026,39 +2026,39 @@ local function tremmorfn()
     inst:AddTag("FX")
     inst:AddTag("shadowtalker")
     inst.entity:SetCanSleep(false)
-	
+
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
     inst.entity:AddNetwork()
-	
+
     inst.entity:SetPristine()
-	
+
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
 	if inst.powerlevel == nil then
 		inst.powerlevel = 1
 	end
-	
+
 	inst.tremorcount = 0
 	inst.attacker = nil
 
 	inst:DoTaskInTime(0, Tremor)
 	inst:DoPeriodicTask(1, Tremor)
-	
+
 	inst:DoPeriodicTask(0.4, function(inst)
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local x1 = x + math.random(-0.3, 0.3)
 		local z1 = z + math.random(-0.3, 0.3)
-		
+
 		local fx = SpawnPrefab("sinkhole_warn_fx_"..math.random(3))
 		fx.Transform:SetPosition(x1, 0, z1)
 	end)
-	
+
 	inst.persists = false
-		
+
     return inst
 end
 
@@ -2069,19 +2069,19 @@ local function crackerexplosion_fn()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
 	inst.entity:AddNetwork()
-		
+
 	--inst.Transform:SetFromProxy(proxy.GUID)
-		
+
 	inst.AnimState:SetBank("explode")
 	inst.AnimState:SetBuild("explode")
 	inst.AnimState:PlayAnimation("small_firecrackers")
 	inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
 	inst.AnimState:SetLightOverride(1)
-		
+
 	inst.Transform:SetFourFaced()
 
 	inst:AddTag("FX")
-		
+
 	inst.entity:SetCanSleep(false)
 
 	inst.entity:SetPristine()
@@ -2089,7 +2089,7 @@ local function crackerexplosion_fn()
 	if not TheWorld.ismastersim then
 		return inst
 	end
-		
+
 	inst.SoundEmitter:PlaySoundWithParams("dontstarve/common/together/fire_cracker", { start = math.random() })
 
 	inst.persists = false
