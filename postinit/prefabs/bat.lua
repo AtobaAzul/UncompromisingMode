@@ -12,13 +12,8 @@ env.AddPrefabPostInit("bat", function(inst)
 	if not TheWorld.ismastersim then
 		return
 	end
-	
+
 	if inst.components.lootdropper ~= nil then
 		inst.components.lootdropper:SetChanceLootTable('batty')
 	end
-	
-	if inst.components.health ~= nil then
-		inst.components.health:SetMaxHealth(TUNING.BAT_HEALTH)
-	end
-	
 end)

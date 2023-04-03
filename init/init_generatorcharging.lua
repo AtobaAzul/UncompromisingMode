@@ -2,6 +2,31 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 
+local BATTERY_COST = TUNING.WINONA_BATTERY_LOW_MAX_FUEL_TIME * 0.25
+local function CanBeUsedAsBattery(inst, user)
+    if inst.components.fueled ~= nil and inst.components.fueled.currentfuel >= BATTERY_COST then
+        return true
+    else
+        return false, "NOT_ENOUGH_CHARGE"
+    end
+end
+
+local function UseAsBattery(inst, user)
+    inst.components.fueled:DoDelta(-BATTERY_COST, user)
+end
+
+env.AddPrefabPostInit("winona_battery_low", function(inst)
+    if not TheWorld.ismastersim then
+        return
+    end
+
+    if inst.components.battery ~= nil then
+        inst.components.battery.canbeused = CanBeUsedAsBattery
+        inst.components.battery.onused = UseAsBattery
+    end
+end)
+
+
 env.AddPlayerPostInit(function(inst)
     local _onbatteryused = inst.components.batteryuser ~= nil and inst.components.batteryuser.onbatteryused or nil
 

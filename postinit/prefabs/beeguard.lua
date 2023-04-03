@@ -3,16 +3,16 @@ GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 local normalsounds =
 {
-    attack = "dontstarve/bee/killerbee_attack",
-    --attack = "dontstarve/creatures/together/bee_queen/beeguard/attack",
-    buzz = "dontstarve/bee/bee_fly_LP",
-    hit = "dontstarve/creatures/together/bee_queen/beeguard/hurt",
-    death = "dontstarve/creatures/together/bee_queen/beeguard/death",
+	attack = "dontstarve/bee/killerbee_attack",
+	--attack = "dontstarve/creatures/together/bee_queen/beeguard/attack",
+	buzz = "dontstarve/bee/bee_fly_LP",
+	hit = "dontstarve/creatures/together/bee_queen/beeguard/hurt",
+	death = "dontstarve/creatures/together/bee_queen/beeguard/death",
 }
 
-local function MortarAttack(inst,again)
+local function MortarAttack(inst, again)
 	if not inst.sg:HasStateTag("mortar") then
-		local target = FindEntity(inst,40^2,nil,{"_combat"},{"playerghost","bee","smallcreature","structure"})
+		local target = FindEntity(inst, 40 ^ 2, nil, { "_combat" }, { "playerghost", "bee", "smallcreature", "structure" })
 		if target then
 			inst.stabtarget = target
 			inst.sg:GoToState("flyup")
@@ -24,16 +24,16 @@ local function MortarAttack(inst,again)
 					inst.sg:GoToState("idle")
 				else
 					inst:Remove()
-				end				
+				end
 			else
-				inst:DoTaskInTime(math.random(1,3),function(inst) MortarAttack(inst,1) end)
+				inst:DoTaskInTime(math.random(1, 3), function(inst) MortarAttack(inst, 1) end)
 			end
 		end
 	end
 end
 
 
-local function OnHitOther(inst,data)
+local function OnHitOther(inst, data)
 	inst.stuckcount = 100
 	local other = data.target
 	if other ~= nil and other.components.inventory ~= nil and inst.armorcrunch and not (data.target.sg and data.target.sg:HasStateTag("shell")) then
@@ -49,15 +49,16 @@ local function OnHitOther(inst,data)
 		if hand ~= nil and hand.components.armor ~= nil then
 			hand.components.armor:TakeDamage(200)
 		end
-	end	
+	end
 end
 
 local function DefensiveTask(inst)
-	if inst.beeHolder ~= nil and inst.beeHolder:IsValid() and inst:GetDistanceSqToInst(inst.beeHolder) > 3 and not (inst.sg:HasStateTag("frozen") or inst.sg:HasStateTag("sleeping") or inst.sg:HasStateTag("attack")) and inst.components.health and not inst.components.health:IsDead()  then
+	if inst.beeHolder ~= nil and inst.beeHolder:IsValid() and inst:GetDistanceSqToInst(inst.beeHolder) > 3 and not (inst.sg:HasStateTag("frozen") or inst.sg:HasStateTag("sleeping") or inst.sg:HasStateTag("attack")) and inst.components.health and not inst.components.health:IsDead() then
 		inst.sg:GoToState("rally_at_point")
 	end
 	if inst.beeHolder ~= nil and inst.beeHolder:IsValid() and inst:GetDistanceSqToInst(inst.beeHolder) < 3 and not (inst.sg:HasStateTag("frozen") or inst.sg:HasStateTag("sleeping") or inst.sg:HasStateTag("attack")) then
-		local target = FindEntity(inst,TUNING.BEEGUARD_ATTACK_RANGE^2,nil,{"_combat"},{"playerghost","bee","beehive","wall"})
+		local target = FindEntity(inst, TUNING.BEEGUARD_ATTACK_RANGE ^ 2, nil, { "_combat" },
+		{ "playerghost", "bee", "beehive", "wall" })
 		if inst.components.combat and inst.components.health and not inst.components.health:IsDead() then
 			if target then
 				inst.components.combat:SuggestTarget(target)
@@ -80,31 +81,31 @@ local function BeeFree(inst)
 	inst.chargePoint = nil
 	inst.brain:Start()
 	if inst.components.health and not inst.components.health:IsDead() then
-		inst:DoTaskInTime(0,function(inst) inst.sg:GoToState("idle") end)
+		inst:DoTaskInTime(0, function(inst) inst.sg:GoToState("idle") end)
 	end
-	local x,y,z = inst.Transform:GetWorldPosition()
+	local x, y, z = inst.Transform:GetWorldPosition()
 	inst.entity:SetParent(nil)
-	inst.Transform:SetPosition(x,y,z)
+	inst.Transform:SetPosition(x, y, z)
 end
 
 local function BeeHold(inst)
 	if inst.components.locomotor.walkspeed ~= TUNING.BEEGUARD_SPEED then
-        inst.AnimState:SetBuild("bee_guard_build")
+		inst.AnimState:SetBuild("bee_guard_build")
 		if inst.queen ~= nil and inst.queen.prefab == "cherry_beequeen" then
 			inst.AnimState:SetBuild("cherry_bee_guard_build")
 		end
-        inst.components.locomotor.walkspeed = TUNING.BEEGUARD_SPEED
-        inst.components.combat:SetDefaultDamage(TUNING.BEEGUARD_PUFFY_DAMAGE)
-        inst.components.combat:SetAttackPeriod(TUNING.BEEGUARD_PUFFY_ATTACK_PERIOD)
-        inst.sounds = normalsounds
-        if inst.SoundEmitter:PlayingSound("buzz") then
-            inst.SoundEmitter:KillSound("buzz")
-            inst.SoundEmitter:PlaySound(inst.sounds.buzz, "buzz")
-        end
-        SpawnPrefab("bee_poof_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		inst.components.locomotor.walkspeed = TUNING.BEEGUARD_SPEED
+		inst.components.combat:SetDefaultDamage(TUNING.BEEGUARD_PUFFY_DAMAGE)
+		inst.components.combat:SetAttackPeriod(TUNING.BEEGUARD_PUFFY_ATTACK_PERIOD)
+		inst.sounds = normalsounds
+		if inst.SoundEmitter:PlayingSound("buzz") then
+			inst.SoundEmitter:KillSound("buzz")
+			inst.SoundEmitter:PlaySound(inst.sounds.buzz, "buzz")
+		end
+		SpawnPrefab("bee_poof_small").Transform:SetPosition(inst.Transform:GetWorldPosition())
 	end
 	if inst.beeHolder then
-		inst.defensiveTask = inst:DoPeriodicTask(FRAMES,DefensiveTask)
+		inst.defensiveTask = inst:DoPeriodicTask(FRAMES, DefensiveTask)
 	end
 end
 
@@ -135,7 +136,7 @@ end
 env.AddPrefabPostInit("beeguard", function(inst)
 	if not TheWorld.ismastersim then
 		return
-	end	
+	end
 	inst.chargeSpeed = 15 --This is just the default value.
 	inst.holding = false
 	inst.MortarAttack = MortarAttack
@@ -143,18 +144,17 @@ env.AddPrefabPostInit("beeguard", function(inst)
 	inst.BeeFree = BeeFree
 	inst.armorcrunch = false
 	inst:ListenForEvent("onhitother", OnHitOther)
-	inst:ListenForEvent("death",IHaveDied)
-	
+	inst:ListenForEvent("death", IHaveDied)
+
 	local _FocusTarget = inst.FocusTarget
-	
-	local function FocusTarget(inst,target)
+
+	local function FocusTarget(inst, target)
 		if inst.sg:HasStateTag("stuck") then
 			inst.stuckcount = 1000
-			inst.AnimState:PlayAnimation("stuck_pst",false)
+			inst.AnimState:PlayAnimation("stuck_pst", false)
 		end
-		_FocusTarget(inst,target)
+		_FocusTarget(inst, target)
 	end
-	
+
 	inst.FocusTarget = FocusTarget
-	
 end)

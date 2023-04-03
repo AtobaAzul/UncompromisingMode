@@ -12,8 +12,8 @@ local ChesterStateNames =
 	"SHADOW",
 	"LAZY",
 }
-local ChesterState = table.invert(ChesterStateNames)
 
+local ChesterState = table.invert(ChesterStateNames)
 
 local DOWN_FACING_ANIMS =
 {
@@ -215,27 +215,31 @@ end
 
 
 local function SetBuild(inst)
-    local skin_build = inst:GetSkinBuild()
+	local skin_build = inst:GetSkinBuild()
 	local chester_state = inst._chesterstate:value()
-    if skin_build ~= nil then
+	if skin_build ~= nil then
 		local state =
 			(chester_state == ChesterState.SHADOW and "_shadow") or
 			(chester_state == ChesterState.SNOW and "_snow") or
 			""
 
-        inst.AnimState:OverrideItemSkinSymbol("chester_body", skin_build, "chester_body" .. state, inst.GUID, "chester_build")
-        inst.AnimState:OverrideItemSkinSymbol("chester_foot", skin_build, "chester_foot" .. state, inst.GUID, "chester_build")
-        inst.AnimState:OverrideItemSkinSymbol("chester_lid", skin_build, "chester_lid" .. state, inst.GUID, "chester_build")
-        inst.AnimState:OverrideItemSkinSymbol("chester_tongue", skin_build, "chester_tongue" .. state, inst.GUID, "chester_build")
-    else
-        inst.AnimState:ClearAllOverrideSymbols()
+		inst.AnimState:OverrideItemSkinSymbol("chester_body", skin_build, "chester_body" .. state, inst.GUID,
+		"chester_build")
+		inst.AnimState:OverrideItemSkinSymbol("chester_foot", skin_build, "chester_foot" .. state, inst.GUID,
+		"chester_build")
+		inst.AnimState:OverrideItemSkinSymbol("chester_lid", skin_build, "chester_lid" .. state, inst.GUID,
+		"chester_build")
+		inst.AnimState:OverrideItemSkinSymbol("chester_tongue", skin_build, "chester_tongue" .. state, inst.GUID,
+		"chester_build")
+	else
+		inst.AnimState:ClearAllOverrideSymbols()
 
 		inst.AnimState:SetBuild(
 			(chester_state == ChesterState.SHADOW and "chester_shadow_build") or
 			(chester_state == ChesterState.SNOW and "chester_snow_build") or
 			"chester_build"
 		)
-    end
+	end
 	if chester_state == ChesterState.SHADOW then
 		inst.AnimState:AddOverrideBuild("tophat_fx")
 		inst.AnimState:SetSymbolMultColour("fx_float", 1, 1, 1, .5)
@@ -250,16 +254,16 @@ local function AttachShadowContainer(inst)
 end
 
 local function OnOpen(inst)
-    if not inst.components.health:IsDead() then
-        inst.sg:GoToState("open")
-    end
+	if not inst.components.health:IsDead() then
+		inst.sg:GoToState("open")
+	end
 end
 
 local function OnClose(inst)
-    if not inst.components.health:IsDead() and inst.sg.currentstate.name ~= "transition" then
+	if not inst.components.health:IsDead() and inst.sg.currentstate.name ~= "transition" then
 		inst.sg.statemem.closing = true
-        inst.sg:GoToState("close")
-    end
+		inst.sg:GoToState("close")
+	end
 end
 
 
@@ -367,7 +371,6 @@ local function pickup_UM(inst)
 			v.components.inventoryitem.canbepickedup and
 			v.components.inventoryitem.cangoincontainer and
 			not v.components.inventoryitem:IsHeld() then
-
 			if inst.components.minigame_participator ~= nil then
 				local minigame = inst.components.minigame_participator:GetMinigame()
 				if minigame ~= nil then
@@ -434,64 +437,64 @@ local function MorphLazyChester(inst)
 end
 
 local function CanMorph(inst)
-    if inst._chesterstate:value() ~= ChesterState.NORMAL or not TheWorld.state.isfullmoon then
-        return false, false, false
-    end
+	if inst._chesterstate:value() ~= ChesterState.NORMAL or not TheWorld.state.isfullmoon then
+		return false, false, false
+	end
 
-    local container = inst.components.container
-    if container == nil or container:IsOpen() then
-        return false, false, false
-    end
+	local container = inst.components.container
+	if container == nil or container:IsOpen() then
+		return false, false, false
+	end
 
-    local canShadow = true
-    local canSnow = true
+	local canShadow = true
+	local canSnow = true
 	local canLazy = true
 
-    for i = 1, container:GetNumSlots() do
-        local item = container:GetItemInSlot(i)
-        if item == nil then
-            return false, false, false
-        end
+	for i = 1, container:GetNumSlots() do
+		local item = container:GetItemInSlot(i)
+		if item == nil then
+			return false, false, false
+		end
 
-        canShadow = canShadow and item.prefab == "nightmarefuel"
-        canSnow = canSnow and item.prefab == "bluegem"
+		canShadow = canShadow and item.prefab == "nightmarefuel"
+		canSnow = canSnow and item.prefab == "bluegem"
 		canLazy = canLazy and item.prefab == "townportaltalisman"
 
-        if not (canShadow or canSnow or canLazy) then
-            return false, false, false
-        end
-    end
+		if not (canShadow or canSnow or canLazy) then
+			return false, false, false
+		end
+	end
 
-    return canShadow, canSnow, canLazy
+	return canShadow, canSnow, canLazy
 end
 
 
 local function CheckForMorph(inst)
-    local canShadow, canSnow, canLazy = CanMorph(inst)
-    if canShadow or canSnow or canLazy then
-        inst.sg:GoToState("transition")
-    end
+	local canShadow, canSnow, canLazy = CanMorph(inst)
+	if canShadow or canSnow or canLazy then
+		inst.sg:GoToState("transition")
+	end
 end
 
 local function DoMorph(inst, fn)
-    inst.MorphChester = nil
-    inst:StopWatchingWorldState("isfullmoon", CheckForMorph)
-    inst:RemoveEventCallback("onclose", CheckForMorph)
-    fn(inst)
+	inst.MorphChester = nil
+	inst:StopWatchingWorldState("isfullmoon", CheckForMorph)
+	inst:RemoveEventCallback("onclose", CheckForMorph)
+	fn(inst)
 end
 
 local function MorphChester(inst)
-    local canShadow, canSnow, canLazy = CanMorph(inst)
-    if not (canShadow or canSnow) then
-        return
-    end
+	local canShadow, canSnow, canLazy = CanMorph(inst)
+	if not (canShadow or canSnow) then
+		return
+	end
 
-    local container = inst.components.container
-    for i = 1, container:GetNumSlots() do
-        container:RemoveItem(container:GetItemInSlot(i)):Remove()
-    end
+	local container = inst.components.container
+	for i = 1, container:GetNumSlots() do
+		container:RemoveItem(container:GetItemInSlot(i)):Remove()
+	end
 
-    DoMorph(inst, canShadow and MorphShadowChester or canSnow and MorphSnowChester or canLazy and MorphLazyChester)
+	DoMorph(inst, canShadow and MorphShadowChester or canSnow and MorphSnowChester or canLazy and MorphLazyChester)
 end
 
 env.AddPrefabPostInit("chester", function(inst)

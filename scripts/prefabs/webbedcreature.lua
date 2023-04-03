@@ -1,7 +1,5 @@
 local function SetStage(inst, stage)
 	if stage <= 3 then
-
-
 		inst.AnimState:PlayAnimation(inst.anims.init)
 		inst.AnimState:PushAnimation(inst.anims.idle, true)
 		inst:DoTaskInTime(3, function(inst) inst.AnimState:SetTime(math.random() * 2) end)
@@ -157,7 +155,11 @@ local function OnKilled(inst)
 		if inst.size == 10 then
 			creature = "warg"
 			inst.components.lootdropper:AddChanceLoot("monstermeat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("monstersmallmeat", 0.5)
+			if TUNING.DSTU.MONSTERSMALLMEAT then
+				inst.components.lootdropper:AddChanceLoot("monstersmallmeat", 0.5)
+			else
+				inst.components.lootdropper:AddChanceLoot("monstermeat", 0.5)
+			end
 			inst.components.lootdropper:AddChanceLoot("houndstooth", 1.00)
 			inst.components.lootdropper:AddChanceLoot("houndstooth", 0.5)
 			inst.components.lootdropper:AddChanceLoot("boneshard", 1.00)
@@ -168,7 +170,11 @@ local function OnKilled(inst)
 		if inst.size == 11 then
 			creature = "krampus"
 			inst.components.lootdropper:AddChanceLoot("monstermeat", 1.00)
-			inst.components.lootdropper:AddChanceLoot("monstersmallmeat", 0.5)
+			if TUNING.DSTU.MONSTERSMALLMEAT then
+				inst.components.lootdropper:AddChanceLoot("monstersmallmeat", 0.5)
+			else
+				inst.components.lootdropper:AddChanceLoot("monstermeat", 0.5)
+			end
 			inst.components.lootdropper:AddChanceLoot("charcoal", 1.00)
 			inst.components.lootdropper:AddChanceLoot("charcoal", 0.5)
 			inst.components.lootdropper:AddChanceLoot("boneshard", 1.00)
@@ -236,7 +242,6 @@ local function OnKilled(inst)
 		--[[if creature ~= nil and not creature == "spiderqueen" then
 		inst.components.lootdropper:SetChanceLootTable('webbedcreature_'..creature)
 	end]]
-
 		local deadcreature = SpawnPrefab(creature)
 		deadcreature.Transform:SetPosition(x, y, z)
 		if creature == "spiderqueen" then
@@ -472,16 +477,12 @@ local function on_anim_over(inst)
 			inst.AnimState:PushAnimation("idle_2")
 			-- inst.SoundEmitter:PlaySound("turnoftides/creatures/together/starfishtrap/idle")
 			inst.AnimState:PushAnimation("idle", true)
-
-
 		elseif random_value < 0.8 then
 			inst.AnimState:PushAnimation("idle_3")
 			-- inst.SoundEmitter:PlaySound("turnoftides/creatures/together/starfishtrap/idle")
 			inst.AnimState:PushAnimation("idle", true)
 		end
 	end
-
-
 end
 
 local function on_anim_over(inst)

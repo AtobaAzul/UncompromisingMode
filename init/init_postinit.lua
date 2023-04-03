@@ -314,10 +314,6 @@ if GetModConfigData("harder_lavae") then
 	table.insert(prefab_post, "lavae")
 end
 
-if GetModConfigData("hardbatilisks") then
-	table.insert(prefab_post, "bat")
-end
-
 if GetModConfigData("pinelings") then
 	table.insert(prefab_post, "evergreen_stump")
 end
@@ -437,6 +433,10 @@ end
 
 if GetModConfigData("townportal_rework") then
 	table.insert(prefab_post, "townportal")
+end
+
+if GetModConfigData("monstersmallmeat") then
+    table.insert(prefab_post, "bat")
 end
 
 modimport("postinit/sim")

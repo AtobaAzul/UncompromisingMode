@@ -220,7 +220,7 @@ local function OnLoad_low(inst, data, ents)
                 inst.AnimState:GetCurrentAnimationNumFrames() ~= 0 and
                 math.random(inst.AnimState:GetCurrentAnimationNumFrames()) - 1 or 1
 
-			inst.AnimState:SetFrame(frame)
+            inst.AnimState:SetFrame(frame)
         end
     end
 end
