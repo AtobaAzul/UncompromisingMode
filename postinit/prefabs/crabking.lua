@@ -448,7 +448,7 @@ env.AddPrefabPostInit("crabking", function(inst)
 		if boat_physics ~= nil then
 			if inst.components.health ~= nil then
 				inst.components.health:DoDelta((-300 * math.abs(boat_physics:GetVelocity() * data.hit_dot_velocity)) *
-				0.33)
+					0.33)
 			end
 		end
 
@@ -495,7 +495,7 @@ env.AddPrefabPostInit("crabking", function(inst)
 		TheWorld.crabking_active = false
 	end)
 
-    inst:ListenForEvent("unfreeze", function()
+	inst:ListenForEvent("unfreeze", function()
 		inst.attack_count = math.clamp(inst.attack_count + -2, 0, 10)
 		inst.gemshine(inst, "blue")
 		local x, y, z = inst.Transform:GetWorldPosition()
