@@ -69,7 +69,7 @@ local function pickup(inst, channeler)
             inst.channeler.components.sanity:DoDelta(-0.25)  --Can't take too much sanity if the purpose is to use in large farms
             return
         end
-        if v.components.pickable ~= nil and v.components.pickable:CanBePicked() then --Pickable stuff
+        if v.components.pickable ~= nil and v.components.pickable:CanBePicked() and v.prefab ~= "flower" then --Pickable stuff
             channeler:AddTag("channelingpicker")
             v.components.pickable:Pick(channeler)
             channeler:RemoveTag("channelingpicker")
