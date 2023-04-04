@@ -2,7 +2,7 @@ local prefs = {}
 
 --require("uncompprefabskin")
 
-table.insert(prefs, CreatePrefabSkin("hat_plaguemask_formal",
+table.insert(prefs, CreatePrefabSkin("ms_hat_plaguemask_formal",
 {
 	assets = {
 		Asset("ANIM", "anim/hat_plaguemask_formal.zip"),
@@ -11,11 +11,10 @@ table.insert(prefs, CreatePrefabSkin("hat_plaguemask_formal",
 	build_name_override = "hat_plaguemask_formal",
 	type = "item",
 	rarity = "ModMade",
-	condition = {no_gift = true},
 	skin_tags = {"CRAFTABLE"},
 }))
 
-table.insert(prefs, CreatePrefabSkin("feather_frock_fancy",
+table.insert(prefs, CreatePrefabSkin("ms_feather_frock_fancy",
 {
 	assets = {
 		Asset("ANIM", "anim/featherfrock_fancy_ground.zip"),
@@ -24,11 +23,10 @@ table.insert(prefs, CreatePrefabSkin("feather_frock_fancy",
 	build_name_override = "featherfrock_fancy_ground",
 	type = "item",
 	rarity = "ModMade",
-	condition = {no_gift = true},
 	skin_tags = {},
 }))
 
-table.insert(prefs, CreatePrefabSkin("twisted_antler",
+table.insert(prefs, CreatePrefabSkin("ms_twisted_antler",
 {
 	assets = {
 		Asset("ANIM", "anim/twisted_antler.zip"),
@@ -37,11 +35,10 @@ table.insert(prefs, CreatePrefabSkin("twisted_antler",
 	build_name_override = "twisted_antler",
 	type = "item",
 	rarity = "ModMade",
-	condition = {no_gift = true},
 	skin_tags = {},
 }))
 
-table.insert(prefs, CreatePrefabSkin("ancient_amulet_red_demoneye",
+table.insert(prefs, CreatePrefabSkin("ms_ancient_amulet_red_demoneye",
 {
 	assets = {
 		Asset("ANIM", "anim/ancient_amulet_red_demoneye.zip"),
@@ -50,7 +47,6 @@ table.insert(prefs, CreatePrefabSkin("ancient_amulet_red_demoneye",
 	build_name_override = "ancient_amulet_red_demoneye",
 	type = "item",
 	rarity = "ModMade",
-	condition = {no_gift = true},
 	skin_tags = {"CRAFTABLE"},
 }))
 

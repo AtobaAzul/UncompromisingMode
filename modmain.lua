@@ -19,7 +19,6 @@ AddPrefabPostInit("world", function(inst)
 
     local count_skull, count_winky, items_skull, items_winky = 0, 0
     inst:DoTaskInTime(0, function()
-
         --count all skullchests and winky burrows
         for k, v in pairs(GLOBAL.Ents) do
             if v.prefab == "skullchest" then
@@ -176,7 +175,7 @@ local function GetAllActiveTelebases()
 end
 
 local function UpdateAllFocuses(player)
-    for k,v in ipairs(GetAllActiveTelebases()) do
+    for k, v in ipairs(GetAllActiveTelebases()) do
         v.update_location(v)
     end
 end
@@ -184,24 +183,24 @@ end
 AddClientModRPCHandler("UncompromisingSurvival", "UpdateAllFocuses", UpdateAllFocuses)
 
 local function PianoPuzzleComplete1()
-	print("PianoPuzzleComplete")
-	
-	local piano = TheSim:FindFirstEntityWithTag("wixie_piano")
-	piano:PushEvent("pianopuzzlecomplete_1")
+    print("PianoPuzzleComplete")
+
+    local piano = TheSim:FindFirstEntityWithTag("wixie_piano")
+    piano:PushEvent("pianopuzzlecomplete_1")
 end
 
 local function PianoPuzzleComplete2()
-	print("PianoPuzzleComplete")
-	
-	local piano = TheSim:FindFirstEntityWithTag("wixie_piano")
-	piano:PushEvent("pianopuzzlecomplete_2")
+    print("PianoPuzzleComplete")
+
+    local piano = TheSim:FindFirstEntityWithTag("wixie_piano")
+    piano:PushEvent("pianopuzzlecomplete_2")
 end
 
 local function PianoPuzzleComplete3()
-	print("PianoPuzzleComplete")
-	
-	local piano = TheSim:FindFirstEntityWithTag("wixie_piano")
-	piano:PushEvent("pianopuzzlecomplete_3")
+    print("PianoPuzzleComplete")
+
+    local piano = TheSim:FindFirstEntityWithTag("wixie_piano")
+    piano:PushEvent("pianopuzzlecomplete_3")
 end
 
 AddModRPCHandler("UncompromisingSurvival", "PianoPuzzleComplete1", PianoPuzzleComplete1)
@@ -307,68 +306,68 @@ end)
 -- WIXIE RELATED RPC'S
 
 local function HandlerFunction(player, mouseposx, mouseposy, mouseposz)
-	if GLOBAL.TheWorld.ismastersim then
-		if mouseposx ~= nil then
-			player.wixiepointx = mouseposx
-		end
-		
-		if mouseposy ~= nil then
-			player.wixiepointy = mouseposy
-		end
-		
-		if mouseposz ~= nil then
-			player.wixiepointz = mouseposz
-		end
-	else
-		local wixieposition = GLOBAL.TheInput:GetWorldPosition()
-		print("caved!")
-		
-		player.wixiepointx = wixieposition.x
-		player.wixiepointy = wixieposition.y
-		player.wixiepointz = wixieposition.z
-	end
+    if GLOBAL.TheWorld.ismastersim then
+        if mouseposx ~= nil then
+            player.wixiepointx = mouseposx
+        end
+
+        if mouseposy ~= nil then
+            player.wixiepointy = mouseposy
+        end
+
+        if mouseposz ~= nil then
+            player.wixiepointz = mouseposz
+        end
+    else
+        local wixieposition = GLOBAL.TheInput:GetWorldPosition()
+        print("caved!")
+
+        player.wixiepointx = wixieposition.x
+        player.wixiepointy = wixieposition.y
+        player.wixiepointz = wixieposition.z
+    end
 end
 
 AddModRPCHandler("WixieTheDelinquent", "GetTheInput", HandlerFunction)
 
 local function ClaustrophobiaPanic(player, inst)
-	if inst.components.health ~= nil and not inst.components.health:IsDead() 
-	and not inst.sg:HasStateTag("wixiepanic") then
-		inst.sg:GoToState("claustrophobic")
-	end
+    if inst.components.health ~= nil and not inst.components.health:IsDead()
+        and not inst.sg:HasStateTag("wixiepanic") then
+        inst.sg:GoToState("claustrophobic")
+    end
 end
 
 AddModRPCHandler("WixieTheDelinquent", "ClaustrophobiaPanic", ClaustrophobiaPanic)
 
 local function ClaustrophobiaEquipMult(claustrophobiamodifier)
-	if GLOBAL.ThePlayer ~= nil then
-		GLOBAL.ThePlayer.claustrophobiamodifier = claustrophobiamodifier
-	end
+    if GLOBAL.ThePlayer ~= nil then
+        GLOBAL.ThePlayer.claustrophobiamodifier = claustrophobiamodifier
+    end
 end
 
 AddClientModRPCHandler("WixieTheDelinquent", "ClaustrophobiaEquipMult", ClaustrophobiaEquipMult)
 
 local function ClaustrophobiaHidden(claustrophobiahidden)
-	if GLOBAL.ThePlayer ~= nil then
-		GLOBAL.ThePlayer.claustrophobiahidden = claustrophobiahidden
-	end
+    if GLOBAL.ThePlayer ~= nil then
+        GLOBAL.ThePlayer.claustrophobiahidden = claustrophobiahidden
+    end
 end
 
 AddClientModRPCHandler("WixieTheDelinquent", "ClaustrophobiaHidden", ClaustrophobiaHidden)
 
 if GetModConfigData("wixie_walter") then
-	AddModCharacter("wixie", "FEMALE")
-	
-	GLOBAL.TUNING.WIXIE_HEALTH = 130
-	GLOBAL.TUNING.WIXIE_HUNGER = 150
-	GLOBAL.TUNING.WIXIE_SANITY = 200
-	GLOBAL.STRINGS.CHARACTER_SURVIVABILITY.wixie = "Grim"
+    AddModCharacter("wixie", "FEMALE")
 
-	for k, v in pairs(GLOBAL.CLOTHING) do
-		if v and v.symbol_overrides_by_character and v.symbol_overrides_by_character.walter then
-			GLOBAL.CLOTHING[k].symbol_overrides_by_character.wixie = v.symbol_overrides_by_character.walter
-		end
-	end
+    GLOBAL.TUNING.WIXIE_HEALTH = 130
+    GLOBAL.TUNING.WIXIE_HUNGER = 150
+    GLOBAL.TUNING.WIXIE_SANITY = 200
+    GLOBAL.STRINGS.CHARACTER_SURVIVABILITY.wixie = "Grim"
+
+    for k, v in pairs(GLOBAL.CLOTHING) do
+        if v and v.symbol_overrides_by_character and v.symbol_overrides_by_character.walter then
+            GLOBAL.CLOTHING[k].symbol_overrides_by_character.wixie = v.symbol_overrides_by_character.walter
+        end
+    end
 end
 
 --[[
@@ -379,20 +378,31 @@ end)
 AddShardModRPCHandler("UncompromisingSurvival", "AcidMushroomsTargetFinished", function(shard_id, data)
     GLOBAL.TheWorld:PushEvent("master_acidmushroomsfinished", data)
 end)]]
+--since ChangeImageName just does that, we need to assign the new atlas as well. I don't want to pack 2 images in the same atlas (mostly because idk how)
 
-GLOBAL.plaguemask_init_fn = function(inst, build_name) GLOBAL.basic_init_fn(inst, build_name, "plaguemask") end
-GLOBAL.plaguemask_clear_fn = function(inst) GLOBAL.basic_clear_fn(inst, "plaguemask") end
+GLOBAL.plaguemask_init_fn = function(inst, build_name)
+    GLOBAL.basic_init_fn(inst, build_name, "hat_plaguemask")
+end
 
-GLOBAL.feather_frock_init_fn = function(inst, build_name) GLOBAL.basic_init_fn(inst, build_name, "feather_frock") end
-GLOBAL.feather_frock_clear_fn = function(inst) GLOBAL.basic_clear_fn(inst, "feather_frock") end
+GLOBAL.plaguemask_clear_fn = function(inst) GLOBAL.basic_clear_fn(inst, "hat_plaguemask") end
 
-GLOBAL.cursed_antler_init_fn = function(inst, build_name) GLOBAL.basic_init_fn(inst, build_name, "cursed_antler") end
+GLOBAL.feather_frock_init_fn = function(inst, build_name)
+    GLOBAL.basic_init_fn(inst, build_name, "featherfrock_ground")
+end
+
+GLOBAL.feather_frock_clear_fn = function(inst) GLOBAL.basic_clear_fn(inst, "featherfrock_ground") end
+
+GLOBAL.cursed_antler_init_fn = function(inst, build_name)
+    GLOBAL.basic_init_fn(inst, build_name, "cursed_antler")
+end
+
 GLOBAL.cursed_antler_clear_fn = function(inst) GLOBAL.basic_clear_fn(inst, "cursed_antler") end
 
-GLOBAL.ancient_amulet_red_init_fn = function(inst, build_name) GLOBAL.basic_init_fn(inst, build_name,
-        "ancient_amulet_red")
+GLOBAL.ancient_amulet_red_init_fn = function(inst, build_name)
+    GLOBAL.basic_init_fn(inst, build_name, "amulet_red_ground")
 end
-GLOBAL.ancient_amulet_red_clear_fn = function(inst) GLOBAL.basic_clear_fn(inst, "ancient_amulet_red") end
+
+GLOBAL.ancient_amulet_red_clear_fn = function(inst) GLOBAL.basic_clear_fn(inst, "amulet_red_ground") end
 
 GLOBAL.TUNING.DSTU.MODROOT = MODROOT
 modimport("init/init_insightcompat")

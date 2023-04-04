@@ -45,7 +45,7 @@ local function onunequip(inst, owner)
 	if skin_build ~= nil then
 		owner:PushEvent("unequipskinneditem", inst:GetSkinName())
 	end
-	
+
 	owner.AnimState:Hide("ARM_carry")
 	owner.AnimState:Show("ARM_normal")
 end
@@ -71,7 +71,7 @@ local function onequip(inst, owner)
 		local skin_build = inst:GetSkinBuild()
 		if skin_build ~= nil then
 			owner:PushEvent("equipskinneditem", inst:GetSkinName())
-			owner.AnimState:OverrideSymbol("swap_object", skin_build or "swap_twisted_antler", skin_build or "swap_twisted_antler")	
+			owner.AnimState:OverrideSymbol("swap_object", skin_build or "swap_twisted_antler", skin_build or "swap_twisted_antler")
 		else
 			owner.AnimState:OverrideSymbol("swap_object", "swap_cursed_antler", "swap_cursed_antler")
 		end
