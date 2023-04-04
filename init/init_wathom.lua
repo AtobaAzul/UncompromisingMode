@@ -274,7 +274,6 @@ AddStategraphPostInit("wilson", function(inst)
 				local target = buffaction ~= nil and buffaction.target or nil
 				inst.AnimState:PlayAnimation("emote_angry", false)
 				inst.components.locomotor:Stop()
-				inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 				if inst.components.playercontroller ~= nil then
 					inst.components.playercontroller:RemotePausePrediction()
 				end
@@ -328,7 +327,6 @@ AddStategraphPostInit("wilson", function(inst)
 				local target = buffaction ~= nil and buffaction.target or nil
 				inst.AnimState:PlayAnimation("emote_angry", false)
 				inst.components.locomotor:Stop()
-				inst.components.locomotor:EnableGroundSpeedMultiplier(false)
 				if inst.components.playercontroller ~= nil then
 					inst.components.playercontroller:RemotePausePrediction()
 				end

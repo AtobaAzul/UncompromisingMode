@@ -313,7 +313,6 @@ TUNING.DSTU =
     PALE_VOMIT_NUTRIENTS             = { 8, 8, 8 },
     --Experimental and DEV
 
-    --HONEYBANDBUFF = GetModConfigData("honeybandbuff"),
     ELECTRICALMISHAP                 = GetModConfigData("electricalmishap"),
     ANNOUNCE_BASESTATUS              = GetModConfigData("announce_basestatus"),
     EYEBRELLAREWORK                  = GetModConfigData("eyebrellarework"),

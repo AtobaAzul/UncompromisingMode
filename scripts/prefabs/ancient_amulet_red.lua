@@ -28,26 +28,25 @@ local function OnCooldown(inst)
 end
 
 local function onequip_blue(inst, owner)
-	
-	local skin_build = inst:GetSkinBuild()
-	if skin_build ~= nil then
-		owner:PushEvent("equipskinneditem", inst:GetSkinName())
-		owner.AnimState:OverrideSymbol("swap_object", skin_build or "torso_ancient_amulet_red_demoneye", "redamulet")	
-	else
-		owner.AnimState:OverrideSymbol("swap_body", "torso_amulets_ancient", "redamulet")
-	end
+    local skin_build = inst:GetSkinBuild()
+    if skin_build ~= nil then
+        owner:PushEvent("equipskinneditem", inst:GetSkinName())
+        owner.AnimState:OverrideItemSkinSymbol("swap_body", skin_build, "swap_body", inst.GUID, "torso_amulets")
+    else
+        owner.AnimState:OverrideSymbol("swap_body", "torso_amulets_ancient", "redamulet")
+    end
 
     inst.orbfn = function(attacked, data)
         if data and data.attacker and data.damage then
 			if inst._cdtask == nil and data ~= nil then
 				inst._cdtask = inst:DoTaskInTime(1, OnCooldown)
-				
+
 				inst.healthvalue = data.damage
 				inst.components.finiteuses:Use(inst.healthvalue < 50 and inst.healthvalue or 50)
-				
+
 				LaunchProjectile(owner, data.damage)
 			end
-        end 
+        end
     end
 
     inst:ListenForEvent("attacked", inst.orbfn, owner)
@@ -68,22 +67,22 @@ local function aac_fxanim(haunter)
 	haunter._AARfx.AnimState:PlayAnimation("hit")
 	haunter._AARfx.AnimState:PushAnimation("idle_loop")
 end
-	
+
 local function aac_unproc(haunter)
 	if haunter._AARfx ~= nil then
 		haunter._AARfx:kill_fx()
 		haunter._AARfx = nil
 	end
-    
+
 	haunter:RemoveEventCallback("attacked", aac_fxanim)
-	
+
 	haunter._aactask = nil
 end
-	
+
 local function aac_proc(haunter)
 	haunter.components.debuffable:AddDebuff("buff_ancient_amulet_red", "buff_ancient_amulet_red")
 	SpawnPrefab("lightning").Transform:SetPosition(haunter.Transform:GetWorldPosition())
-	
+
 	if haunter._AARfx ~= nil then
 		haunter._AARfx:kill_fx()
 	end
@@ -102,16 +101,16 @@ local function OnHaunt(inst, haunter)
 	haunter:PushEvent("respawnfromghost", { source = inst })
     haunter.Physics:Teleport(inst.Transform:GetWorldPosition())
 	haunter:DoTaskInTime(3, aac_proc)
-	
+
 	inst:DoTaskInTime(1, function(inst)
 		local colour = { 1, 0, 0 }
-			
+
 		inst.revivefx = SpawnPrefab("staff_castinglight")
 		inst.revivefx.entity:SetParent(inst.entity)
 		inst.revivefx.Transform:SetRotation(inst.Transform:GetWorldPosition())
 		inst.revivefx:SetUp(colour, 1.9, .33)
 	end)
-	
+
 	inst:DoTaskInTime(3, function(inst) inst:Remove() end)
 end
 
@@ -151,9 +150,9 @@ local function fn()
     inst.AnimState:SetBank("amulet_red_ground")
     inst.AnimState:SetBuild("amulet_red_ground")
     inst.AnimState:PlayAnimation("Idle")
-	
+
 	inst.Transform:SetScale(1.1, 1.1, 1.1)
-	
+
 	inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
 
     inst:AddTag("resurrector")
@@ -181,7 +180,7 @@ local function fn()
 
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/ancient_amulet_red.xml"
-	
+
     inst.components.equippable:SetOnEquip(onequip_blue)
     inst.components.equippable:SetOnUnequip(onunequip_blue)
 
@@ -189,7 +188,7 @@ local function fn()
     inst.components.finiteuses:SetOnFinished(inst.Remove)
     inst.components.finiteuses:SetMaxUses(1000)
     inst.components.finiteuses:SetUses(1000)
-	
+
 	inst:AddComponent("shadowlevel")
 	inst.components.shadowlevel:SetDefaultLevel(TUNING.AMULET_SHADOW_LEVEL)
 

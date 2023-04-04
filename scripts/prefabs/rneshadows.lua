@@ -72,7 +72,7 @@ local function retargetfn(inst)
 end
 
 local function KeepTarget(inst, target)
-	local hat = target ~= nil and target.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD)
+	local hat = target ~= nil and target.components.inventory ~= nil and target.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) or nil
 
     return target ~= nil and (target.LightWatcher:IsInLight() or hat ~= nil and hat:HasTag("nightvision"))
 end
@@ -131,7 +131,8 @@ local function grabfn()
 	
     inst:AddTag("NOCLICK")
     inst:AddTag("shadow")
-	
+	inst:AddTag("shadow_aligned")
+
 	inst.AnimState:SetBank("shadow_wavey_jones_hand")
 	inst.AnimState:SetBuild("shadow_wavey_jones_hand")
 	inst.AnimState:PlayAnimation("hand_in")

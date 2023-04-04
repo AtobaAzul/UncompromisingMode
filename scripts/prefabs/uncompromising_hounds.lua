@@ -9,7 +9,7 @@ local assets =
     Asset("ANIM", "anim/hound_ice.zip"),
     Asset("ANIM", "anim/hound_ice_ocean.zip"),
     Asset("ANIM", "anim/hound_mutated.zip"),
-    Asset("ANIM", "anim/rnehound.zip"),
+	Asset("ANIM", "anim/rnehound.zip"),
     Asset("SOUND", "sound/hound.fsb"),
 }
 
@@ -25,7 +25,7 @@ local prefabs =
     "redgem",
     "bluegem",
     "splash_green",
-    "houndcorpse",
+	"houndcorpse",
 }
 
 local prefabs_clay =
@@ -35,7 +35,7 @@ local prefabs_clay =
     "eyeflame",
 }
 
-local gargoyles =
+local gargoyles = 
 {
     "gargoyle_houndatk",
     "gargoyle_hounddeath",
@@ -67,51 +67,51 @@ local sounds =
 }
 
 SetSharedLootTable('hound_lightning',
-    {
-        { 'monstermeat', 1.0 },
-        { 'houndstooth', 1.0 },
-        { 'goldnugget',  1 },
-        { 'goldnugget',  1 },
-        { 'yellowgem',   0.05 },
-    })
+{
+    {'monstermeat', 1.0},
+    {'houndstooth', 1.0},
+	{'goldnugget',      1},
+	{'goldnugget',      1},
+    {'yellowgem',      0.05},
+})
 
 SetSharedLootTable('hound_magma',
-    {
-        { 'monstermeat', 1.0 },
-        { 'monstermeat', 1.0 },
-        { 'rocks',       1.0 },
-        { 'rocks',       1.0 },
-        { 'rocks',       1.0 },
-        --{'deer_fire_circle',   1.0},
-        { 'redgem',      1.0 },
-        { 'redgem',      0.5 },
-    })
+{
+    {'monstermeat', 1.0},
+    {'monstermeat', 1.0},
+    {'rocks', 1.0},
+	{'rocks', 1.0},
+	{'rocks', 1.0},
+    --{'deer_fire_circle',   1.0},
+    {'redgem',      1.0},
+    {'redgem',      0.5},
+})
 
 SetSharedLootTable('hound_rne',
-    {
-        { 'monstermeat',   1.0 },
-        { 'nightmarefuel', 1.0 },
-        { 'nightmarefuel', 0.5 },
-        { 'purplegem',     0.25 },
-    })
+{	
+	{'monstermeat', 1.0},
+    {'nightmarefuel', 1.0},
+	{'nightmarefuel', 0.5},
+    {'purplegem',     0.25},
+})
 
 SetSharedLootTable('hound_glacial',
-    {
-        { 'monstermeat', 1.0 },
-        { 'houndstooth', 1.0 },
-        { 'ice',         1.0 },
-        { 'ice',         0.5 },
-        --{'deer_ice_circle', 1.0},
-        { 'bluegem',     0.3 },
-    })
+{
+    {'monstermeat', 1.0},
+    {'houndstooth', 1.0},
+    {'ice', 1.0},
+    {'ice', 0.5},
+    --{'deer_ice_circle', 1.0},
+    {'bluegem',     0.3},
+})
 
 SetSharedLootTable('hound_spore',
-    {
-        { 'monstermeat',          1.0 },
-        { 'houndstooth',          1.0 },
-        { 'sporecloud_toad',      1.0 },
-        { 'shroom_skin_fragment', 0.25 },
-    })
+{
+    {'monstermeat', 1.0},
+    {'houndstooth', 1.0},
+    {'sporecloud_toad', 1.0},
+    {'shroom_skin_fragment',      0.25},
+})
 
 local WAKE_TO_FOLLOW_DISTANCE = 8
 local SLEEP_NEAR_HOME_DISTANCE = 10
@@ -125,8 +125,8 @@ local SINKHOLD_BLOCKER_TAGS = { "hound_lightning" }
 local function Zap(posx, posz)
     --local projectile = SpawnPrefab("hound_lightning")
     --projectile.Transform:SetPosition(posx, 0, posz)
-
-    local x = GetRandomWithVariance(posx, TUNING.ANTLION_SINKHOLE.RADIUS)
+	
+	local x = GetRandomWithVariance(posx, TUNING.ANTLION_SINKHOLE.RADIUS)
     local z = GetRandomWithVariance(posz, TUNING.ANTLION_SINKHOLE.RADIUS)
 
     local function IsValidSinkholePosition(offset)
@@ -140,12 +140,9 @@ local function Zap(posx, posz)
     local offset = Vector3(0, 0, 0)
     offset =
         IsValidSinkholePosition(offset) and offset or
-        FindValidPositionByFan(math.random() * 2 * PI, TUNING.ANTLION_SINKHOLE.RADIUS * 1.8 + math.random(), 9,
-            IsValidSinkholePosition) or
-        FindValidPositionByFan(math.random() * 2 * PI, TUNING.ANTLION_SINKHOLE.RADIUS * 2.9 + math.random(), 17,
-            IsValidSinkholePosition) or
-        FindValidPositionByFan(math.random() * 2 * PI, TUNING.ANTLION_SINKHOLE.RADIUS * 3.9 + math.random(), 17,
-            IsValidSinkholePosition) or
+        FindValidPositionByFan(math.random() * 2 * PI, TUNING.ANTLION_SINKHOLE.RADIUS * 1.8 + math.random(), 9, IsValidSinkholePosition) or
+        FindValidPositionByFan(math.random() * 2 * PI, TUNING.ANTLION_SINKHOLE.RADIUS * 2.9 + math.random(), 17, IsValidSinkholePosition) or
+        FindValidPositionByFan(math.random() * 2 * PI, TUNING.ANTLION_SINKHOLE.RADIUS * 3.9 + math.random(), 17, IsValidSinkholePosition) or
         nil
 
     if offset ~= nil then
@@ -153,33 +150,34 @@ local function Zap(posx, posz)
         sinkhole.NoTags = { "INLIMBO", "shadow", "hound", "houndfriend" }
         sinkhole.Transform:SetPosition(x + offset.x, 0, z + offset.z)
     end
+	
 end
 
 local function LaunchProjectile(inst, targetpos)
     local x, y, z = targetpos.Transform:GetWorldPosition()
-    inst:DoTaskInTime(0, function(inst) Zap(x, z) end)
-    inst:DoTaskInTime(0.4, function(inst) Zap(x, z) end)
-    inst:DoTaskInTime(0.8, function(inst) Zap(x, z) end)
+	inst:DoTaskInTime(0, function(inst) Zap(x, z) end)
+	inst:DoTaskInTime(0.4, function(inst) Zap(x, z) end)    
+	inst:DoTaskInTime(0.8, function(inst) Zap(x, z) end)
 end
 
 local function Charging(inst)
-    local x, y, z = inst.Transform:GetWorldPosition()
-
-    local x1 = x + math.random( -0.5, 0.5)
-    local z1 = z + math.random( -0.5, 0.5)
-
-    if math.random() >= 0.8 then
-        SpawnPrefab("electricchargedfx").Transform:SetPosition(x1, 0, z1)
-    end
-
+	local x, y, z = inst.Transform:GetWorldPosition()
+	
+	local x1 = x + math.random(-0.5, 0.5)
+	local z1 = z + math.random(-0.5, 0.5)
+	
+	if math.random() >= 0.8 then
+		SpawnPrefab("electricchargedfx").Transform:SetPosition(x1, 0, z1)
+	end
+	
     SpawnPrefab("sparks").Transform:SetPosition(x1, 0 + 0.25 * math.random(), z1)
 end
 
 local function CancelCharge(inst)
-    if inst.task ~= nil then
-        inst.task:Cancel()
-        inst.task = nil
-    end
+	if inst.task ~= nil then
+		inst.task:Cancel()
+		inst.task = nil
+	end
 end
 
 local function Charge(inst)
@@ -188,8 +186,7 @@ end
 
 
 local function ShouldWakeUp(inst)
-    return DefaultWakeTest(inst) or
-        (inst.components.follower and inst.components.follower.leader and not inst.components.follower:IsNearLeader(WAKE_TO_FOLLOW_DISTANCE))
+    return DefaultWakeTest(inst) or (inst.components.follower and inst.components.follower.leader and not inst.components.follower:IsNearLeader(WAKE_TO_FOLLOW_DISTANCE))
 end
 
 local function ShouldSleep(inst)
@@ -218,17 +215,17 @@ local function retargetfn(inst)
     local playerleader = leader ~= nil and leader:HasTag("player")
     local ispet = inst:HasTag("pet_hound")
     return (leader == nil or
-        (ispet and not playerleader) or
-        inst:IsNear(leader, TUNING.HOUND_FOLLOWER_AGGRO_DIST))
+            (ispet and not playerleader) or
+            inst:IsNear(leader, TUNING.HOUND_FOLLOWER_AGGRO_DIST))
         and FindEntity(
-            inst,
-            (ispet or leader ~= nil) and TUNING.HOUND_FOLLOWER_TARGET_DIST or TUNING.HOUND_TARGET_DIST,
-            function(guy)
-                return guy ~= leader and inst.components.combat:CanTarget(guy)
-            end,
-            nil,
-            RETARGET_CANT_TAGS
-        )
+                inst,
+                (ispet or leader ~= nil) and TUNING.HOUND_FOLLOWER_TARGET_DIST or TUNING.HOUND_TARGET_DIST,
+                function(guy)
+                    return guy ~= leader and inst.components.combat:CanTarget(guy)
+                end,
+                nil,
+                RETARGET_CANT_TAGS
+            )
         or nil
 end
 
@@ -240,11 +237,11 @@ local function KeepTarget(inst, target)
     local playerleader = leader ~= nil and leader:HasTag("player")
     local ispet = inst:HasTag("pet_hound")
     return (leader == nil or
-        (ispet and not playerleader) or
-        inst:IsNear(leader, TUNING.HOUND_FOLLOWER_RETURN_DIST))
+            (ispet and not playerleader) or
+            inst:IsNear(leader, TUNING.HOUND_FOLLOWER_RETURN_DIST))
         and inst.components.combat:CanTarget(target)
         and (not (ispet or leader ~= nil) or
-        inst:IsNear(target, TUNING.HOUND_FOLLOWER_TARGET_KEEP))
+            inst:IsNear(target, TUNING.HOUND_FOLLOWER_TARGET_KEEP))
 end
 
 local function IsNearMoonBase(inst, dist)
@@ -256,14 +253,14 @@ local MOON_RETARGET_CANT_TAGS = { "wall", "houndmound", "hound", "houndfriend", 
 local function moon_retargetfn(inst)
     return IsNearMoonBase(inst, TUNING.MOONHOUND_AGGRO_DIST)
         and FindEntity(
-            inst,
-            TUNING.HOUND_FOLLOWER_TARGET_DIST,
-            function(guy)
-                return inst.components.combat:CanTarget(guy)
-            end,
-            nil,
-            MOON_RETARGET_CANT_TAGS
-        )
+                inst,
+                TUNING.HOUND_FOLLOWER_TARGET_DIST,
+                function(guy)
+                    return inst.components.combat:CanTarget(guy)
+                end,
+                nil,
+                MOON_RETARGET_CANT_TAGS
+            )
         or nil
 end
 
@@ -274,40 +271,44 @@ local function moon_keeptargetfn(inst, target)
 end
 
 local function OnAttacked(inst, data)
-    if inst.sg ~= nil and inst.sg:HasStateTag("charging") and data ~= nil and data.attacker ~= nil then
-        if data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead() and
-            (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil and data.weapon.components.complexprojectile == nil and data.weapon.components.linearprojectile == nil)) then
-            if data.attacker.sg ~= nil and data.attacker:HasTag("player") and not (data.attacker.components.inventory ~= nil and data.attacker.components.inventory:IsInsulated()) then
-                data.attacker.components.health:DoDelta( -5, nil, inst.prefab, nil, inst)
-                data.attacker.sg:GoToState("electrocute")
-            elseif not data.attacker:HasTag("player") then
-                data.attacker.components.health:DoDelta( -5, nil, inst.prefab, nil, inst)
-            end
-        end
-    end
-
-    inst.components.combat:SetTarget(data.attacker)
-    inst.components.combat:ShareTarget(data.attacker, SHARE_TARGET_DIST,
-        function(dude)
-            return not (dude.components.health ~= nil and dude.components.health:IsDead())
-                and (dude:HasTag("hound") or dude:HasTag("houndfriend"))
-                and data.attacker ~= (dude.components.follower ~= nil and dude.components.follower.leader or nil)
-        end, 5)
+	if not inst.components.health:IsDead() then
+		if inst.sg ~= nil and inst.sg:HasStateTag("charging") and data ~= nil and data.attacker ~= nil then
+			if data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead() and
+				(data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil and data.weapon.components.complexprojectile == nil and data.weapon.components.linearprojectile == nil)) then
+			
+				if data.attacker.sg ~= nil and data.attacker:HasTag("player") and not (data.attacker.components.inventory ~= nil and data.attacker.components.inventory:IsInsulated()) then
+					data.attacker.components.health:DoDelta(-5, nil, inst.prefab, nil, inst)
+					data.attacker.sg:GoToState("electrocute")
+				elseif not data.attacker:HasTag("player") then
+					data.attacker.components.health:DoDelta(-5, nil, inst.prefab, nil, inst)
+				end
+			end
+		end
+		
+		inst.components.combat:SetTarget(data.attacker)
+		inst.components.combat:ShareTarget(data.attacker, SHARE_TARGET_DIST,
+			function(dude)
+				return not (dude.components.health ~= nil and dude.components.health:IsDead())
+					and (dude:HasTag("hound") or dude:HasTag("houndfriend"))
+					and data.attacker ~= (dude.components.follower ~= nil and dude.components.follower.leader or nil)
+			end, 5)
+	end
 end
 
 local function OnAttackOther(inst, data)
-    if data ~= nil and data.target ~= nil then
-        if data.target.components.health ~= nil and not data.target.components.health:IsDead() and
-            (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) and
-            not (data.target.components.inventory ~= nil and data.target.components.inventory:IsInsulated()) then
-            data.target.components.health:DoDelta( -5, nil, inst.prefab, nil, inst)
-            if data.target:HasTag("player") and not data.target.components.health:IsDead() then
-                local shockvictim = data.target.sg ~= nil and data.target.sg:GoToState("electrocute")
-                inst:DoTaskInTime(2, shockvictim)
+		if data ~= nil and data.target ~= nil then
+            if data.target.components.health ~= nil and not data.target.components.health:IsDead() and
+                (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) and
+                not (data.target.components.inventory ~= nil and data.target.components.inventory:IsInsulated()) then
+
+                data.target.components.health:DoDelta(-5, nil, inst.prefab, nil, inst)
+                if data.target:HasTag("player") and not data.target.components.health:IsDead() then
+					local shockvictim = data.target.sg ~= nil and data.target.sg:GoToState("electrocute")
+					inst:DoTaskInTime(2, shockvictim)
+                end
             end
         end
-    end
-
+		
     inst.components.combat:ShareTarget(data.target, SHARE_TARGET_DIST,
         function(dude)
             return not (dude.components.health ~= nil and dude.components.health:IsDead())
@@ -455,17 +456,18 @@ local function OnStopFollowing(inst)
 end
 
 local function CanMutateFromCorpse(inst)
-    if (inst.components.amphibiouscreature == nil or not inst.components.amphibiouscreature.in_water)
-        and math.random() <= TUNING.MUTATEDHOUND_SPAWN_CHANCE
-        and TheWorld.Map:IsVisualGroundAtPoint(inst.Transform:GetWorldPosition()) then
-        local node = TheWorld.Map:FindNodeAtPoint(inst.Transform:GetWorldPosition())
-        return node ~= nil and node.tags ~= nil and table.contains(node.tags, "lunacyarea")
-    end
-    return false
+	if (inst.components.amphibiouscreature == nil or not inst.components.amphibiouscreature.in_water)
+		and math.random() <= TUNING.MUTATEDHOUND_SPAWN_CHANCE 
+		and TheWorld.Map:IsVisualGroundAtPoint(inst.Transform:GetWorldPosition()) then
+
+		local node = TheWorld.Map:FindNodeAtPoint(inst.Transform:GetWorldPosition())
+		return node ~= nil and node.tags ~= nil and table.contains(node.tags, "lunacyarea")
+	end
+	return false
 end
 
 local function fncommon(bank, build, morphlist, custombrain, tag, data)
-    data = data or {}
+	data = data or {}
 
     local inst = CreateEntity()
 
@@ -485,13 +487,13 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
     inst:AddTag("monster")
     inst:AddTag("hostile")
     inst:AddTag("hound")
-    inst:AddTag("canbestartled")
+	inst:AddTag("canbestartled")
 
     if tag ~= nil then
         inst:AddTag(tag)
 
         if tag == "clay" then
-            inst:RemoveTag("canbestartled")
+			inst:RemoveTag("canbestartled")
             --inst._eyeflames = net_bool(inst.GUID, "magmahound._eyeflames", "eyeflamesdirty")   Eye flame no work :(
             --inst:ListenForEvent("eyeflamesdirty", OnEyeFlamesDirty)
         end
@@ -509,43 +511,43 @@ local function fncommon(bank, build, morphlist, custombrain, tag, data)
         return inst
     end
 
-    inst._CanMutateFromCorpse = data.canmutatefn
+	inst._CanMutateFromCorpse = data.canmutatefn
 
     inst.sounds = sounds
 
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
     inst.components.locomotor.runspeed = tag == "clay" and TUNING.CLAYHOUND_SPEED or TUNING.HOUND_SPEED
-
+	
     if data.amphibious then
-        inst:AddComponent("embarker")
-        inst.components.embarker.embark_speed = inst.components.locomotor.runspeed
+		inst:AddComponent("embarker")
+		inst.components.embarker.embark_speed = inst.components.locomotor.runspeed
         inst.components.embarker.antic = true
 
-        inst.components.locomotor:SetAllowPlatformHopping(true)
+	    inst.components.locomotor:SetAllowPlatformHopping(true)
 
-        inst:AddComponent("amphibiouscreature")
-        inst.components.amphibiouscreature:SetBanks(bank, bank .. "_water")
+		inst:AddComponent("amphibiouscreature")
+		inst.components.amphibiouscreature:SetBanks(bank, bank.."_water")
         inst.components.amphibiouscreature:SetEnterWaterFn(
             function(inst)
                 inst.landspeed = inst.components.locomotor.runspeed
                 inst.components.locomotor.runspeed = TUNING.HOUND_SWIM_SPEED
                 inst.hop_distance = inst.components.locomotor.hop_distance
                 inst.components.locomotor.hop_distance = 4
-            end)
+            end)            
         inst.components.amphibiouscreature:SetExitWaterFn(
             function(inst)
                 if inst.landspeed then
-                    inst.components.locomotor.runspeed = inst.landspeed
+                    inst.components.locomotor.runspeed = inst.landspeed 
                 end
                 if inst.hop_distance then
                     inst.components.locomotor.hop_distance = inst.hop_distance
                 end
             end)
 
-        inst.components.locomotor.pathcaps = { allowocean = true }
-    end
+		inst.components.locomotor.pathcaps = { allowocean = true }
+	end
 
-
+    
 
     inst:SetBrain(custombrain or brain)
 
@@ -611,50 +613,50 @@ end
 
 local function ontimerdone(inst, data)
     if data.name == "lightningshot_cooldown" then
-        inst.lightningshot = true
+		inst.lightningshot = true
     end
 end
 
 local function DoLightningExplosion(inst)
-    SpawnPrefab("hound_lightning").Transform:SetPosition(inst.Transform:GetWorldPosition())
+	SpawnPrefab("hound_lightning").Transform:SetPosition(inst.Transform:GetWorldPosition())
 end
 
 local function fnlightning()
-    local inst = fncommon("hound", "hound_lightning_ocean", { "firehound", "icehound" }, nil, nil, { amphibious = true })
+    local inst = fncommon("hound", "hound_lightning_ocean", { "firehound", "icehound" }, nil, nil, {amphibious = true})
 
     if not TheWorld.ismastersim then
         return inst
     end
 
     MakeMediumFreezableCharacter(inst, "hound_body")
-
-    inst:SetStateGraph("SGlightninghound")
-
+	
+	inst:SetStateGraph("SGlightninghound")
+		
     inst.components.lootdropper:SetChanceLootTable('hound_lightning')
-
+	
     inst.components.combat:SetRange(10, 3)
-
+	
     inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", ontimerdone)
 
-    inst.task = nil
-
+	inst.task = nil
+	
     inst.LaunchProjectile = LaunchProjectile
     inst.CancelCharge = CancelCharge
     inst.Charge = Charge
-    inst:AddTag("electricdamageimmune")
-
-    inst:ListenForEvent("attacked", OnAttacked)
-    inst:ListenForEvent("onattackother", OnAttackOther)
+	inst:AddTag("electricdamageimmune")
+	
+	inst:ListenForEvent("attacked", OnAttacked)
+	inst:ListenForEvent("onattackother", OnAttackOther)
     inst:ListenForEvent("death", DoLightningExplosion)
-
-    inst.lightningshot = true
+	
+	inst.lightningshot = true
 
     return inst
 end
 
 local function DoGlacialExplosion(inst)
-    local x, y, z = inst.Transform:GetWorldPosition()
+	local x, y, z = inst.Transform:GetWorldPosition()
 
     local spell = SpawnPrefab("deer_ice_circle")
     spell.Transform:SetPosition(x, 0, z)
@@ -662,29 +664,29 @@ local function DoGlacialExplosion(inst)
 end
 
 local function GlacialProjectile(inst, target)
-    local proj = SpawnPrefab("glacialhound_projectile")
-    local x, y, z = inst.Transform:GetWorldPosition()
-    proj.Transform:SetPosition(x, y, z)
-    proj.components.projectile:Throw(inst, target, inst)
+	local proj = SpawnPrefab("glacialhound_projectile")
+	local x, y, z = inst.Transform:GetWorldPosition()
+	proj.Transform:SetPosition(x, y, z)
+	proj.components.projectile:Throw(inst, target, inst)
 end
 
 local function CancelGlacialCharge(inst)
-    if inst.task ~= nil then
-        inst.task:Cancel()
-        inst.task = nil
-    end
+	if inst.task ~= nil then
+		inst.task:Cancel()
+		inst.task = nil
+	end
 end
 
 local function GlacialCharging(inst)
-    local x, y, z = inst.Transform:GetWorldPosition()
-
-    local x1 = x + math.random( -2, 2)
-    local z1 = z + math.random( -2, 2)
-    local y1 = 0 + 0.25 * math.random()
-
-    local flakes = SpawnPrefab("deer_ice_flakes")
-    flakes.Transform:SetPosition(x1, y1, z1)
-    flakes:DoTaskInTime(1, flakes.Remove)
+	local x, y, z = inst.Transform:GetWorldPosition()
+	
+	local x1 = x + math.random(-2, 2)
+	local z1 = z + math.random(-2, 2)
+	local y1 = 0 + 0.25 * math.random()
+	
+	local flakes = SpawnPrefab("deer_ice_flakes")
+	flakes.Transform:SetPosition(x1, y1, z1)
+	flakes:DoTaskInTime(1, flakes.Remove)
 end
 
 local function GlacialCharge(inst)
@@ -692,64 +694,67 @@ local function GlacialCharge(inst)
 end
 
 local function OnGlacialAttacked(inst, data)
-    if inst.sg ~= nil and inst.sg:HasStateTag("charging") and data ~= nil and data.attacker ~= nil then
-        if data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead() and
-            (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) then
-            if data.attacker.components.freezable ~= nil then
-                data.attacker.components.freezable:AddColdness(2)
-            end
-
-            if data.attacker.components.temperature ~= nil then
-                local mintemp = math.max(data.attacker.components.temperature.mintemp, 0)
-                local curtemp = data.attacker.components.temperature:GetCurrent()
-                if mintemp < curtemp then
-                    data.attacker.components.temperature:DoDelta(math.max( -5, mintemp - curtemp))
-                end
-            end
-
-            if data.attacker.components.freezable ~= nil then
-                data.attacker.components.freezable:SpawnShatterFX()
-            end
-        end
-    end
-
-    inst.components.combat:SetTarget(data.attacker)
-    inst.components.combat:ShareTarget(data.attacker, SHARE_TARGET_DIST,
-        function(dude)
-            return not (dude.components.health ~= nil and dude.components.health:IsDead())
-                and (dude:HasTag("hound") or dude:HasTag("houndfriend"))
-                and data.attacker ~= (dude.components.follower ~= nil and dude.components.follower.leader or nil)
-        end, 5)
+	if not inst.components.health:IsDead() then
+		if inst.sg ~= nil and inst.sg:HasStateTag("charging") and data ~= nil and data.attacker ~= nil then
+			if data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead() and
+				(data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) then
+			
+				if data.attacker.components.freezable ~= nil then
+					data.attacker.components.freezable:AddColdness(2)
+				end
+				
+				if data.attacker.components.temperature ~= nil then
+					local mintemp = math.max(data.attacker.components.temperature.mintemp, 0)
+					local curtemp = data.attacker.components.temperature:GetCurrent()
+					if mintemp < curtemp then
+						data.attacker.components.temperature:DoDelta(math.max(-5, mintemp - curtemp))
+					end
+				end
+				
+				if data.attacker.components.freezable ~= nil then
+					data.attacker.components.freezable:SpawnShatterFX()
+				end
+			end
+		end
+		
+		inst.components.combat:SetTarget(data.attacker)
+		inst.components.combat:ShareTarget(data.attacker, SHARE_TARGET_DIST,
+			function(dude)
+				return not (dude.components.health ~= nil and dude.components.health:IsDead())
+					and (dude:HasTag("hound") or dude:HasTag("houndfriend"))
+					and data.attacker ~= (dude.components.follower ~= nil and dude.components.follower.leader or nil)
+			end, 5)
+	end
 end
 
 local function fnglacial()
-    local inst = fncommon("hound", "glacial_hound_ocean", nil, nil, nil, { amphibious = true })
+    local inst = fncommon("hound", "glacial_hound_ocean", nil, nil, nil, {amphibious = true})
 
     if not TheWorld.ismastersim then
         return inst
     end
-
+	
     inst:SetStateGraph("SGglacialhound")
 
     MakeMediumBurnableCharacter(inst, "hound_body")
-
+	
     inst.components.lootdropper:SetChanceLootTable('hound_glacial')
-
+	
     inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", ontimerdone)
-    inst.Transform:SetScale(1.3, 1.3, 1.3)
+	inst.Transform:SetScale(1.3, 1.3, 1.3)
 
-    inst.task = nil
-
-    inst:ListenForEvent("attacked", OnGlacialAttacked)
+	inst.task = nil
+	
+	inst:ListenForEvent("attacked", OnGlacialAttacked)
     inst:ListenForEvent("death", DoGlacialExplosion)
-
+	
     inst.LaunchProjectile = GlacialProjectile
     inst.CancelCharge = CancelGlacialCharge
     inst.Charge = GlacialCharge
-
-    inst.lightningshot = true
-
+	
+	inst.lightningshot = true
+	
     return inst
 end
 
@@ -763,6 +768,7 @@ local function pipethrown(inst)
 end
 
 local function onhit(inst, attacker, target)
+
     if not target:IsValid() or target:HasTag("hound") or target:HasTag("warg") then
         --target killed or removed in combat damage phase
         return
@@ -792,12 +798,12 @@ local function onhit(inst, attacker, target)
         target.components.freezable:AddColdness(1)
         target.components.freezable:SpawnShatterFX()
     end
-
-    inst:Remove()
+	
+	inst:Remove()
 end
 
 local function fnglacial_proj()
-    local inst = CreateEntity()
+	local inst = CreateEntity()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -809,23 +815,23 @@ local function fnglacial_proj()
     inst.AnimState:SetBank("glacial_hound_projectile")
     inst.AnimState:SetBuild("glacial_hound_projectile")
     inst.AnimState:PlayAnimation("shoot_side")
-
+	
     inst:AddTag("NOCLICK")
     inst:AddTag("sharp")
     inst:AddTag("weapon")
     inst:AddTag("projectile")
-
+	
     RemovePhysicsColliders(inst)
-
+	
     inst.entity:SetPristine()
-
+	
     if not TheWorld.ismastersim then
         return inst
     end
 
     inst:AddComponent("weapon")
     inst.components.weapon:SetDamage(0)
-
+	
     inst:AddComponent("projectile")
     inst.components.projectile:SetSpeed(25)
     inst.components.projectile:SetOnThrownFn(pipethrown)
@@ -834,16 +840,16 @@ local function fnglacial_proj()
     inst.components.projectile:SetOnHitFn(onhit)
     inst.components.projectile:SetOnMissFn(inst.Remove)
     inst.components.projectile:SetLaunchOffset(Vector3(0, 2, 0))
-
-    inst:DoTaskInTime(5, inst.Remove)
-
+	
+	inst:DoTaskInTime(5, inst.Remove)
+	
     inst.persists = false
 
     return inst
 end
 
 local function DoMagmaExplosion(inst)
-    local x, y, z = inst.Transform:GetWorldPosition()
+	local x, y, z = inst.Transform:GetWorldPosition()
 
     local spell = SpawnPrefab("deer_fire_circle")
     spell.Transform:SetPosition(x, 0, z)
@@ -853,55 +859,55 @@ end
 local easing = require("easing")
 
 local function ShootProjectile(inst, target)
-    local target = inst.components.combat.target
-    if target ~= nil then
-        local x, y, z = inst.Transform:GetWorldPosition()
-        local projectile = SpawnPrefab("fireball_throwable")
-        projectile.Transform:SetPosition(x, y, z)
-        local a, b, c = target.Transform:GetWorldPosition()
-        local targetpos = target:GetPosition()
-        targetpos.x = targetpos.x + math.random( -1, 1)
-        targetpos.z = targetpos.z + math.random( -1, 1)
-        local dx = a - x
-        local dz = c - z
-        local rangesq = dx * dx + dz * dz
-        local maxrange = 20
-        local bigNum = 15
-        local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange * 2)
-        projectile:AddTag("canthit")
-        --projectile.components.wateryprotection.addwetness = TUNING.WATERBALLOON_ADD_WETNESS/2
-        projectile.components.complexprojectile:SetHorizontalSpeed(speed + math.random(4, 9))
-        --projectile.components.complexprojectile:SetGravity(-25)
-        projectile.components.complexprojectile:Launch(targetpos, inst, inst)
-    end
+   local target = inst.components.combat.target
+	if target ~= nil then
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local projectile = SpawnPrefab("fireball_throwable")
+    projectile.Transform:SetPosition(x, y, z)
+    local a, b, c = target.Transform:GetWorldPosition()
+	local targetpos = target:GetPosition()
+	targetpos.x = targetpos.x + math.random(-1,1)
+	targetpos.z = targetpos.z + math.random(-1,1)
+    local dx = a - x
+    local dz = c - z
+    local rangesq = dx * dx + dz * dz
+    local maxrange = 20
+    local bigNum = 15
+    local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange * 2)
+	projectile:AddTag("canthit")
+	--projectile.components.wateryprotection.addwetness = TUNING.WATERBALLOON_ADD_WETNESS/2
+    projectile.components.complexprojectile:SetHorizontalSpeed(speed+math.random(4,9))
+    --projectile.components.complexprojectile:SetGravity(-25)
+    projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+	end
 end
 
 local function MagmaCharging(inst)
-    local x, y, z = inst.Transform:GetWorldPosition()
-
-    local x1 = x + math.random( -2, 2)
-    local z1 = z + math.random( -2, 2)
-    local y1 = 0 + 0.25 * math.random()
-
-    local chance = math.random()
-
-    if chance >= 0.66 then
-        SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x1, y1, z1)
-        SpawnPrefab("magmafire").Transform:SetPosition(x1, 0, z1)
-    elseif chance >= 0.33 and chance < 0.66 then
-        SpawnPrefab("halloween_firepuff_2").Transform:SetPosition(x1, y1, z1)
-        SpawnPrefab("magmafire").Transform:SetPosition(x1, 0, z1)
-    else
-        SpawnPrefab("halloween_firepuff_3").Transform:SetPosition(x1, y1, z1)
-        SpawnPrefab("magmafire").Transform:SetPosition(x1, 0, z1)
-    end
+	local x, y, z = inst.Transform:GetWorldPosition()
+	
+	local x1 = x + math.random(-2, 2)
+	local z1 = z + math.random(-2, 2)
+	local y1 = 0 + 0.25 * math.random()
+	
+	local chance = math.random()
+	
+	if chance >= 0.66 then
+		SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x1, y1, z1)
+		SpawnPrefab("magmafire").Transform:SetPosition(x1, 0, z1)
+	elseif chance >= 0.33 and chance < 0.66 then
+		SpawnPrefab("halloween_firepuff_2").Transform:SetPosition(x1, y1, z1)
+		SpawnPrefab("magmafire").Transform:SetPosition(x1, 0, z1)
+	else
+		SpawnPrefab("halloween_firepuff_3").Transform:SetPosition(x1, y1, z1)
+		SpawnPrefab("magmafire").Transform:SetPosition(x1, 0, z1)
+	end
 end
 
 local function CancelMagmaCharge(inst)
-    if inst.task ~= nil then
-        inst.task:Cancel()
-        inst.task = nil
-    end
+	if inst.task ~= nil then
+		inst.task:Cancel()
+		inst.task = nil
+	end
 end
 
 local function MagmaCharge(inst)
@@ -909,144 +915,147 @@ local function MagmaCharge(inst)
 end
 
 local function OnMagmaAttacked(inst, data)
-    if inst.sg ~= nil and inst.sg:HasStateTag("charging") and data ~= nil and data.attacker ~= nil then
-        if data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead() and
-            (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) then
-            data.attacker.components.health:DoFireDamage(5, inst.prefab, true)
-            if data.attacker:HasTag("player") and not data.attacker.components.burnable ~= nil then
-                data.attacker.components.burnable:Ignite()
-            end
-        end
-    end
-
-    inst.components.combat:SetTarget(data.attacker)
-    inst.components.combat:ShareTarget(data.attacker, SHARE_TARGET_DIST,
-        function(dude)
-            return not (dude.components.health ~= nil and dude.components.health:IsDead())
-                and (dude:HasTag("hound") or dude:HasTag("houndfriend"))
-                and data.attacker ~= (dude.components.follower ~= nil and dude.components.follower.leader or nil)
-        end, 5)
+	if not inst.components.health:IsDead() then
+		if inst.sg ~= nil and inst.sg:HasStateTag("charging") and data ~= nil and data.attacker ~= nil then
+			if data.attacker.components.health ~= nil and not data.attacker.components.health:IsDead() and
+				(data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) then
+			
+				data.attacker.components.health:DoFireDamage(5, inst.prefab, true)
+				if data.attacker:HasTag("player") and not data.attacker.components.burnable ~= nil then
+					data.attacker.components.burnable:Ignite()
+				end
+			end
+		end
+		
+		inst.components.combat:SetTarget(data.attacker)
+		inst.components.combat:ShareTarget(data.attacker, SHARE_TARGET_DIST,
+			function(dude)
+				return not (dude.components.health ~= nil and dude.components.health:IsDead())
+					and (dude:HasTag("hound") or dude:HasTag("houndfriend"))
+					and data.attacker ~= (dude.components.follower ~= nil and dude.components.follower.leader or nil)
+			end, 5)
+	end
 end
 
 local function fnmagma()
-    local inst = fncommon("clayhound", "magmahound", nil, nil, "clay", { amphibious = false })
+    local inst = fncommon("clayhound", "magmahound", nil, nil, "clay", {amphibious = false})
 
     if not TheWorld.ismastersim then
         return inst
     end
-
+	
     inst:SetStateGraph("SGmagmahound")
-    if inst.sg ~= nil then
-        inst.sg:GoToState("taunt")
-    end
+	if inst.sg ~= nil then
+		inst.sg:GoToState("taunt")
+	end
     --MakeMediumFreezableCharacter(inst, "hound_body") No freeze bc haha FIRE
-    inst.Transform:SetScale(1.2, 1.2, 1.2)
+	inst.Transform:SetScale(1.2,1.2,1.2)
     inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", ontimerdone)
 
-    inst.task = nil
-
+	inst.task = nil
+	
     inst.components.combat:SetRange(10, 3)
-
+	
     --inst.components.freezable:SetResistance(4)
-
+	
     inst.components.lootdropper:SetChanceLootTable('hound_magma')
-
+	
     inst.LaunchProjectile = ShootProjectile
     inst.CancelCharge = CancelMagmaCharge
     inst.Charge = MagmaCharge
-
-    inst:ListenForEvent("attacked", OnMagmaAttacked)
+	
+	inst:ListenForEvent("attacked", OnMagmaAttacked)
     inst:ListenForEvent("death", DoMagmaExplosion)
-
-    inst.foogley = 0
-
-    inst.lightningshot = true
+	
+	inst.foogley = 0
+	
+	inst.lightningshot = true
 
     return inst
 end
 
 local function OnAttackOther_Spore(inst, data)
-    if data.target ~= nil and data.target:HasTag("player") and not data.target:HasTag("hasplaguemask") and not data.target:HasTag("automaton") and TUNING.DSTU.MAXHPHITTERS then
-        data.target.components.health:DeltaPenalty(0.05)
-    end
+	if data.target ~= nil and data.target:HasTag("player") and not data.target:HasTag("hasplaguemask") and not data.target:HasTag("automaton") and TUNING.DSTU.MAXHPHITTERS then
+		data.target.components.health:DeltaPenalty(0.05)
+	end
 end
 
 local function fnspore()
-    local inst = fncommon("hound", "hound_spore_ocean", nil, nil, nil, { amphibious = true })
+    local inst = fncommon("hound", "hound_spore_ocean", nil, nil, nil, {amphibious = true})
 
     if not TheWorld.ismastersim then
         return inst
     end
-
-
+	
+	
     inst:SetStateGraph("SGsporehound")
     inst:SetBrain(sporebrain)
 
-    inst.lightningshot = true
-
+	inst.lightningshot = true
+		
     inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", ontimerdone)
 
     inst.components.lootdropper:SetChanceLootTable('hound_spore')
-
+	
     MakeMediumFreezableCharacter(inst, "hound_body")
     MakeMediumBurnableCharacter(inst, "hound_body")
-
-    inst:ListenForEvent("onattackother", OnAttackOther_Spore)
+	
+	inst:ListenForEvent("onattackother", OnAttackOther_Spore)
 
     return inst
 end
 
 local function AdjustVisibility(inst)
-    local player = FindEntity(inst, 20 ^ 2, nil, { "player" })
-    if player and player:IsValid() and inst:IsValid() then
-        local dist = inst:GetDistanceSqToInst(player) / 50
-        if dist < 1 then
-            inst.AnimState:SetMultColour(1, 1, 1, 1 - dist)
-            if inst:HasTag("notarget") then
-                inst:RemoveTag("notarget")
-            end
-        else
-            if not inst:HasTag("notarget") then
-                inst:AddTag("notarget")
-            end
-            inst.AnimState:SetMultColour(1, 1, 1, 0)
-        end
-    else
-        if not inst:HasTag("notarget") then
-            inst:AddTag("notarget")
-        end
-        inst.AnimState:SetMultColour(1, 1, 1, 0)
-    end
+	local player = FindEntity(inst,20^2,nil,{"player"})
+	if player and player:IsValid() and inst:IsValid() then
+		local dist = inst:GetDistanceSqToInst(player)/50
+		if dist < 1 then
+			inst.AnimState:SetMultColour(1,1,1,1-dist)
+			if inst:HasTag("notarget") then
+				inst:RemoveTag("notarget")
+			end
+		else
+			if not inst:HasTag("notarget") then
+				inst:AddTag("notarget")
+			end
+			inst.AnimState:SetMultColour(1,1,1,0)
+		end
+	else
+		if not inst:HasTag("notarget") then
+			inst:AddTag("notarget")
+		end
+		inst.AnimState:SetMultColour(1,1,1,0)
+	end
 end
 
 local function fnrne()
     local inst = fncommon("hound", "rnehound", nil, nil, "unfathomable")
-
-    inst.Physics:SetCollisionGroup(COLLISION.SANITY)
-    inst.Physics:CollidesWith(COLLISION.SANITY)
-
+	
+	inst.Physics:SetCollisionGroup(COLLISION.SANITY)
+	inst.Physics:CollidesWith(COLLISION.SANITY)
+	
     if not TheWorld.ismastersim then
         return inst
     end
-
-    inst.components.locomotor:SetTriggersCreep(false)
+	
+	inst.components.locomotor:SetTriggersCreep(false)
     inst:SetStateGraph("SGhound")
     inst:SetBrain(rnebrain)
 
-    inst:DoPeriodicTask(FRAMES, AdjustVisibility)
-
-    inst:AddTag("shadow")
+	inst:DoPeriodicTask(FRAMES,AdjustVisibility)
+		
+	inst:AddTag("shadow")
     inst.components.lootdropper:SetChanceLootTable('hound_rne')
-    inst.DynamicShadow:Enable(false)
+	inst.DynamicShadow:Enable(false)
 
     return inst
 end
 
 return Prefab("lightninghound", fnlightning, assets, prefabs),
-    Prefab("glacialhound", fnglacial, assets, prefabs),
-    Prefab("glacialhound_projectile", fnglacial_proj, assets, prefabs),
-    Prefab("magmahound", fnmagma, assets, prefabs),
-    Prefab("sporehound", fnspore, assets, prefabs),
-    Prefab("rnehound", fnrne)
+	Prefab("glacialhound", fnglacial, assets, prefabs),
+	Prefab("glacialhound_projectile", fnglacial_proj, assets, prefabs),
+	Prefab("magmahound", fnmagma, assets, prefabs),
+	Prefab("sporehound", fnspore, assets, prefabs),
+	Prefab("rnehound",fnrne)

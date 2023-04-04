@@ -68,7 +68,8 @@ STRINGS.VETERANSHRINE = "Melancholic Skull"
 STRINGS.RATSKIN = "Diseased Fur"
 
 STRINGS.PLAGUEMASK = "Plague Mask"
-SKINS.hat_plaguemask_formal = "Faux Plague Masque"
+SKINS.ms_hat_plaguemask_formal = "Faux Plague Masque"
+SKINSDESC.ms_hat_plaguemask_formal = "A fancy mask to stand out in a rotting world."
 
 SKINS.wormwood_shadow = "The Corrupted" -- personal vendetta, bruh that shit aint 'triumphant'
 
@@ -129,7 +130,8 @@ STRINGS.SNAPPERTURTLEBABY = "Whippersnapper Turtle"
 STRINGS.SNAPPERTURTLENEST = "Nest"
 
 STRINGS.CURSED_ANTLER = "Cursed Antler"
-SKINS.twisted_antler = "Twisted Antler"
+SKINS.ms_twisted_antler = "Twisted Antler"
+SKINSDESC.ms_twisted_antler = "A twisted antler for a twisted person."
 
 STRINGS.MARSH_GRASS = "Marsh Bush"
 STRINGS.GIANT_TREE = "Giant Redwood"
@@ -194,7 +196,8 @@ STRINGS.STEEL_SWEATER = "Steel Sweater"
 STRINGS.RNESKELETON = "Skeleton"
 
 STRINGS.ANCIENT_AMULET_RED = "Ancient Soul Amulet"
-SKINS.ancient_amulet_red_demoneye = "Demon-eyed Amulet"
+SKINS.ms_ancient_amulet_red_demoneye = "Demon-eyed Amulet"
+SKINSDESC.ms_ancient_amulet_red = "" --TODO
 
 STRINGS.RAT_WHIP = "Tail o' Twined Rats"
 STRINGS.KLAUS_AMULET = "Naught Lock"
@@ -235,7 +238,8 @@ STRINGS.SKULLCHEST = "Skull Chest"
 STRINGS.GREENFOLIAGE = "Hooded Foliage" --Well, I guess I did this then...
 
 STRINGS.FEATHER_FROCK = "Feather Frock"
-SKINS.feather_frock_fancy = "Raven Cloak"
+SKINS.ms_feather_frock_fancy = "Raven Cloak"
+SKINSDESC.ms_feather_frock_fancy = "A fancy cloak made out of the finest feathers."
 
 STRINGS.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "Snap-Teeth"
 STRINGS.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Shiny Snap-Teeth"

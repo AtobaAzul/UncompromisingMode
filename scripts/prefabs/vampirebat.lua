@@ -17,7 +17,7 @@ local prefabs =
     "pigskin",
     "monstersmallmeat",
 }
-if GetModConfigData("monstersmallmeat") then
+if TUNING.DSTU.MONSTERSMALLMEAT then
     SetSharedLootTable('vampirebat',
         {
             { 'monstersmallmeat', 0.25 },
