@@ -28,7 +28,7 @@ end)
 
 function TransparentOnSanity:OnUpdate(dt)
     local player = ThePlayer
-    if player == nil then
+    if player == nil or player ~= nil and not player.replica.sanity then
         self.target_alpha = 0
     elseif self.inst.replica.combat ~= nil and self.inst.replica.combat:GetTarget() == player then
         self.target_alpha = self.most_alpha

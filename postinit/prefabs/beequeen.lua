@@ -756,7 +756,7 @@ local function BeeQueenPost(inst)
 
 	inst:DoPeriodicTask(10, function(inst)
 		local x, y, z = inst.Transform:GetWorldPosition()
-		local ents = TheSim:FindEntities(x, y, z, 20, { "epic" }, { "beequeen" } )
+		local ents = TheSim:FindEntities(x, y, z, 20, { "epic" }, { "beequeen", "cherrybeequeen" } )
 		
 		if #ents > 0 then
 			inst:PushEvent("flee")

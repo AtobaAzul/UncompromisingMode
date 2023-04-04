@@ -23,7 +23,7 @@ end
 
 -- temp aggro system for the slingshots
 local function no_aggro(attacker, target)
-    local targets_target = target.components.combat.target
+	local targets_target = target.components.combat ~= nil and target.components.combat.target or nil
     return targets_target ~= nil and targets_target:IsValid() and targets_target ~= attacker
         and (GetTime() - target.components.combat.lastwasattackedbytargettime) < 4
         and (targets_target.components.health ~= nil and not targets_target.components.health:IsDead())
