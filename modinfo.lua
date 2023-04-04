@@ -209,6 +209,7 @@ configuration_options =
 		{
 			{description = "SHOT", data = "SHOT", hover = "Souls heal over time."},
 			{description = "Classic", data = "UMNERF", hover = "Less soul sources, less max health."},
+			{description = "Apollo\'s", data = "APOLLO", hover = "Souls heal less and overtime. Sanity loss from eating souls increased.\nIncreased map hop range. Food penalty increased to 75%."},
 			{description = "Vanilla", data = "off"},
 		},
 		default = "UMNERF",

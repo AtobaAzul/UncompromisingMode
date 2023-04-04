@@ -27,6 +27,11 @@ if GetModConfigData("wortox") == "UMNERF" then
     TUNING.WORTOX_HEALTH = 150
 end
 
+if GetModConfigData("wortox") == "APOLLO" then
+    TUNING.WORTOX_SOULHEAL_MINIMUM_HEAL = 5
+    TUNING.WORTOX_FOOD_MULT = .25
+    TUNING.WORTOX_MAPHOP_DISTANCE_SCALER = TUNING.WORTOX_MAPHOP_DISTANCE_SCALER*1.2 --20%
+end
 
 local ia_check = GLOBAL.KnownModIndex:IsModEnabled("workshop-1467214795")
 
