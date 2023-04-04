@@ -769,11 +769,11 @@ RegisterInventoryItemAtlas("images/inventoryimages/californiaking.xml", "califor
 local purplesteamedhams =
 {
     name = "purplesteamedhams",
-    test = function(cooker, names, tags)
-        return (names.foliage or names.forgetmelots) and tags.veggie and
-            tags.veggie >= 1 and (names.meat or names.cookedmeat) and
-            not (tags.monster or tags.inedible or names.smallmeat or names.cookedsmallmeat)
-    end,
+    test = function(cooker, names, tags) 
+		return (names.foliage or names.forgetmelots) and tags.veggie and
+			tags.veggie >= 1.5 and (names.meat or names.cookedmeat) and
+			not (tags.monster or tags.inedible or names.smallmeat or names.cookedsmallmeat) 
+	end,
     priority = 30,
     weight = 30,
     foodtype = "MEAT",
@@ -794,11 +794,11 @@ RegisterInventoryItemAtlas("images/inventoryimages/purplesteamedhams.xml", "purp
 local greensteamedhams =
 {
     name = "greensteamedhams",
-    test = function(cooker, names, tags)
-        return names.greenfoliage and tags.veggie and tags.veggie >= 1 and
-            (names.meat or names.cookedmeat) and
-            not (tags.monster or tags.inedible or names.smallmeat or names.cookedsmallmeat)
-    end,
+    test = function(cooker, names, tags) 
+		return names.greenfoliage and tags.veggie and tags.veggie >= 1.5 and
+			(names.meat or names.cookedmeat) and
+			not (tags.monster or tags.inedible or names.smallmeat or names.cookedsmallmeat) 
+	end,
     priority = 30,
     weight = 30,
     foodtype = "MEAT",

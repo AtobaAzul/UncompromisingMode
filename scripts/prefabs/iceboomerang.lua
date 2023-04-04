@@ -66,7 +66,11 @@ local function OnHit(inst, owner, target)
         local impactfx = SpawnPrefab("impact")
         if impactfx ~= nil then
             local follower = impactfx.entity:AddFollower()
-            follower:FollowSymbol(target.GUID, target.components.combat.hiteffectsymbol, 0, 0, 0)
+			
+			if target.components.combat ~= nil then
+				follower:FollowSymbol(target.GUID, target.components.combat.hiteffectsymbol, 0, 0, 0)
+			end
+			
             impactfx:FacePoint(inst.Transform:GetWorldPosition())
 			if target.components.freezable ~= nil then
 				if target.components.freezable ~= nil and not target:HasTag("player") then
@@ -76,7 +80,7 @@ local function OnHit(inst, owner, target)
 					target.components.freezable:AddColdness(4)
 					target.components.freezable:SpawnShatterFX()
 				end
-		end
+			end
         end
     end
 	if inst.components.perishable then
