@@ -7,7 +7,7 @@ end
 
 description =
 [[
-󰀔 [ Version 1.1.8: "Face Your Fears" ]
+󰀔 [ Version 1.1.9: "Face Your Fears" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -21,7 +21,7 @@ Latest update features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Face Your Fears v1.1.8"
+version = "Face Your Fears v1.1.9"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
@@ -453,7 +453,6 @@ configuration_options =
 		},
 		default = 1.5,
 	},
-	BinaryConfig("buttmuffin", "Butter Muffin Buff", "Butter Muffin restores 30 health 10 sanity instead of 20 health 5 sanity.", true),
 	BinaryConfig("icecreambuff", "Ice Cream Buff", "Ice Cream now restores 100 sanity, but does it slowly.", true),
 	BinaryConfig("farmfoodredux", "Farmplot Food Redux", "Reallocates most dishes that involve Crock Pot foods. Typically a buff, but may exchange some stats.", true),
 	BinaryConfig("sr_foodrebalance", "Fish foods rebalance", "Several fish based foods have their stats tweaked.", true),

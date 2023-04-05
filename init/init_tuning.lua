@@ -113,7 +113,6 @@ TUNING.DSTU =
     --RECIPE_CHANGE_PEROGI_PERISH = TUNING.PERISH_MED, --in days (from 20 to 10)
     RECIPE_CHANGE_BACONEGG_PERISH = TUNING.PERISH_MED,
     RECIPE_CHANGE_MEATBALL_HUNGER = TUNING.CALORIES_SMALL * 4, -- (12.5 * 4) = 50, from 62.5
-    RECIPE_CHANGE_BUTTERMUFFIN_HEALTH = TUNING.HEALING_MED * 1.5,
     --Limits to fillers
     CROCKPOT_RECIPE_TWIG_LIMIT = 1,
     CROCKPOT_RECIPE_ICE_LIMIT = 1,
@@ -143,7 +142,6 @@ TUNING.DSTU =
     PIEROGI = GetModConfigData("perogi"),
     FARMFOODREDUX = GetModConfigData("farmfoodredux"),
     ICECREAMBUFF = GetModConfigData("icecreambuff"),
-    BUTTMUFFIN = GetModConfigData("buttmuffin"),
     ----------------------------------------------------------------------------
     --Mob changes
     ----------------------------------------------------------------------------
@@ -306,7 +304,7 @@ TUNING.DSTU =
     TOADLING_TARGET_DIST             = 12,
     BAT_HEALTH                       = 75,
     TOAD_RAIN_DELAY                  = { min = 5, max = 10 },
-    SUMMER_CAVES_TEMP_MULT           = 0.75,
+    SUMMER_CAVES_TEMP_MULT           = 0.85,
     WINTER_CAVES_TEMP_MULT           = 1.25,
     --SNAPDRAGON FERTILIZER VALUES
     PURPLE_VOMIT_NUTRIENTS           = { 16, 16, 0 },
@@ -379,10 +377,10 @@ end
 
 if GetModConfigData("wixie_walter") then
     TUNING.WOBY_BIG_HUNGER = GLOBAL.TUNING.WALTER_HUNGER
-    TUNING.WOBY_BIG_HUNGER_RATE = GLOBAL.TUNING.WILSON_HUNGER_RATE / 1.5
+    TUNING.WOBY_BIG_HUNGER_RATE = GLOBAL.TUNING.WILSON_HUNGER_RATE / 1.65
 
     TUNING.WOBY_SMALL_HUNGER = GLOBAL.TUNING.WALTER_HUNGER
-    TUNING.WOBY_SMALL_HUNGER_RATE = GLOBAL.TUNING.WILSON_HUNGER_RATE / 1.5
+    TUNING.WOBY_SMALL_HUNGER_RATE = GLOBAL.TUNING.WILSON_HUNGER_RATE / 1.65
 
     TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WALTER = { "walterhat", "meatrack_hat", "meat", "monstermeat" }
     TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WIXIE = { "slingshot", "slingshotammo_rock", "slingshotammo_rock",
