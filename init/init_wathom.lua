@@ -858,7 +858,8 @@ local function AmpbadgeDisplays(self)
 
 		self.combinedmod = GetModName("Combined Status")
 
-		self.adrenaline = self:AddChild(ampbadge(self.owner))
+        self.adrenaline = self:AddChild(ampbadge(self.owner))
+
 		if self.combinedmod ~= nil then
 			self.brain:SetPosition(0, 35, 0)
 			self.stomach:SetPosition(-62, 35, 0)
@@ -890,9 +891,10 @@ local function AmpbadgeDisplays(self)
 			self.adrenaline.maxnum:MoveToFront()
 			self.adrenaline.maxnum:Hide()
 		else
-			self.adrenaline:SetPosition(-40, -50, 0)
-			self.brain:SetPosition(40, -50, 0)
-			self.stomach:SetPosition(-40, 17, 0)
+			self.adrenaline:SetPosition(self.column3, -130, 0)
+			self.moisturemeter:SetPosition(self.column1, -130, 0)
+			--self.brain:SetPosition(40, -50, 0)
+			--self.stomach:SetPosition(-40, 17, 0)
 		end
 
 		--self.inst:ListenForEvent("adrenalinedelta", function(inst, data) self.adrenaline:SetPercent(data.newpercent, self.owner.components.pestilencecounter:Max()) end, self.owner)
