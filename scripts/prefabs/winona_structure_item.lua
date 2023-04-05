@@ -89,14 +89,16 @@ local function ondeploy_high(inst, pt, deployer)
 
         gen:RemoveTag("NOCLICK") --manually do it since the animation gets a buit interrupted.
         gen.components.trader:Enable()
-        gen.components.fueled:SetPercent(inst.components.finiteuses:GetPercent())
+
+        gen:DoTaskInTime(FRAMES*2, function() gen.components.fueled:SetPercent(inst.components.finiteuses:GetPercent()) end)
 
         if inst.components.finiteuses:GetPercent() == 0 then
             gen:DoTaskInTime(FRAMES * 2, gen.components.fueled.depleted)
             gen.AnimState:PushAnimation("idle_empty")
             gen:RemoveTag("NOCLICK") --GOD DAMNIT REMOVE IT!!!
-            inst:DoTaskInTime(FRAMES * 2.5, inst.Remove)
         end
+
+        inst:DoTaskInTime(FRAMES * 2.5, inst.Remove)
     end)
 end
 
