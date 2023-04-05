@@ -254,29 +254,6 @@ if TUNING.DSTU.FARMFOODREDUX then
 		end)
 	end
 
-	local BUTTERFLYMUFFIN =
-	{
-		"butterflymuffin",
-		"butterflymuffin_spice_chili",
-		"butterflymuffin_spice_garlic",
-		"butterflymuffin_spice_salt",
-		"butterflymuffin_spice_sugar",
-	}
-
-	for k, v in pairs(BUTTERFLYMUFFIN) do
-		AddPrefabPostInit(v, function(inst)
-			if inst ~= nil and inst.components.edible ~= nil then
-				inst.components.edible.hungervalue = 30
-
-				if TUNING.DSTU.BUTTMUFFIN then
-					inst.components.edible.healthvalue = GLOBAL.TUNING.DSTU.RECIPE_CHANGE_BUTTERMUFFIN_HEALTH -- Changed to 50, down from 62.5
-				end
-
-				inst.components.edible.sanityvalue = 10
-			end
-		end)
-	end
-
 	local FISHTACOS =
 	{
 		"fishtacos",

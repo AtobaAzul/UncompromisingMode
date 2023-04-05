@@ -28,6 +28,9 @@ local events=
 							end
 						end
 					end
+				else
+					inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
+					inst.sg:GoToState("attack", data.target)
 				end
 			end
 		end
@@ -150,7 +153,6 @@ local states=
             TimeEvent(28*FRAMES, function(inst) 
 			inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
 			inst.components.combat:DoAttack()
-			inst.sg:RemoveStateTag("busy")
 			end),
         },
 
@@ -162,6 +164,7 @@ local states=
 					inst.docombo = false
 					--TheNet:SystemMessage(inst.combo)
 					inst.combo = inst.combo+2
+					inst.sg:RemoveStateTag("busy")
 					inst.sg:GoToState("attack")
 				else
 					if inst.combosucceed == false and inst.combo > 1 then
@@ -417,14 +420,17 @@ local states=
 			inst.SoundEmitter:PlaySound("dontstarve/creatures/spiderqueen/scream_short")
 			inst.components.timer:StartTimer("pounce",10+math.random(-3,5))
 			
-			if inst.brain then
-				inst.brain:Start()
-			end
 			if inst.oldtarget ~= nil and inst.components.combat ~= nil and inst.oldtarget:IsValid() then
 				inst.components.combat:SuggestTarget(inst.oldtarget)
 			end
 			inst.sg:GoToState("idle") end),
         },       
+		
+		onexit = function(inst)
+			if inst.brain then
+				inst.brain:Start()
+			end
+		end,
 
     },
     State{
