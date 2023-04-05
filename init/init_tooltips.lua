@@ -205,7 +205,8 @@ end
 if TUNING.DSTU.POCKET_POWERTRIP ~= 0 then
 	TOOLTIP.TRUNKVEST_SUMMER = "- Now has pockets!\n- Slightly increased rain protection."
 	TOOLTIP.TRUNKVEST_WINTER = "- Now has pockets!"
-	TOOLTIP.REFLECTIVEVEST = "- Now has pockets!"
+    TOOLTIP.REFLECTIVEVEST = "- Now has pockets!"
+	TOOLTIP.RAINCOAT = "- Now has pockets!"
 end
 
 if GetModConfigData("canedurability") then
