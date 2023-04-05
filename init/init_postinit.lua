@@ -417,7 +417,7 @@ end
 --	table.insert(prefab_post, "boat")
 --end
 
-if GetModConfigData("winona_portables") then
+if GetModConfigData("winona_portables_") then
 	table.insert(prefab_post, "winona_portables")
 end
 

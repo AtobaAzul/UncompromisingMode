@@ -89,7 +89,7 @@ STRINGS.ENGINEERING_TOOLTIP = {
 	BUGZAPPER = "- Can be overcharged."
 }
 
-if GetModConfigData("winona_portables") then
+if GetModConfigData("winona_portables_") then
 	STRINGS.ENGINEERING_TOOLTIP.WINONA_CATAPULT = "- Now portable."
 	STRINGS.ENGINEERING_TOOLTIP.WINONA_SPOTLIGHT = "- Now portable."
 	STRINGS.ENGINEERING_TOOLTIP.WINONA_BATTERY_LOW = "- Now portable."
