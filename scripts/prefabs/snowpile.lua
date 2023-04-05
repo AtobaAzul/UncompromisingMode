@@ -175,7 +175,6 @@ startregen = function(inst, regentime)
 end
 
 local function workcallback(inst, worker, workleft)
-
     inst.components.lootdropper:SpawnLootPrefab("snowball_throwable")
 
     if worker ~= nil and worker:HasTag("wereplayer") and worker.components.moisture then
@@ -286,7 +285,6 @@ local function DoAreaColdness(inst)
 end
 
 local function onpickedfn(inst, picker)
-
     if picker.components.moisture then
         if picker.components.talker and picker == ThePlayer then
             ThePlayer.components.talker:Say(GetString(ThePlayer.prefab, "ANNOUNCE_COLD"))
@@ -301,7 +299,11 @@ local function onpickedfn(inst, picker)
             picker.components.temperature:SetTemperature(-3)
         end
     end
-    TryColdMenace(inst)
+
+    if TheWorld.state.iswinter then
+        TryColdMenace(inst)
+    end
+
     local x, y, z = inst.Transform:GetWorldPosition()
     if inst.components.workable.workleft > 0 then
         if inst.Transform:GetWorldPosition() ~= nil then
@@ -317,7 +319,6 @@ local function onpickedfn(inst, picker)
 
 
     startregen(inst)
-
 end
 
 local function makefullfn(inst)
@@ -375,11 +376,10 @@ local function Init(inst)
 end
 
 local function OnSeasonChange(inst)
-    print("OnSeasonChange")
-	if not TheWorld.state.iswinter then
-		inst.persists = false
+    if not TheWorld.state.iswinter then
+        inst.persists = false
         inst:Remove()
-	end
+    end
 end
 
 local function snowpilefn(Sim)
@@ -463,11 +463,17 @@ local function snowpilefn(Sim)
         for i, v in ipairs(inlimbostructures) do v:RemoveTag("INLIMBO") end
     end)
 
-	inst:WatchWorldState("season", OnSeasonChange)
+    inst:WatchWorldState("season", OnSeasonChange)
 
     startregen(inst)
     inst:DoTaskInTime(0, Init)
     inst.DoColdMenace = DoColdMenace
+
+    inst:DoPeriodicTask(10, function(inst)
+        if TheWorld.state.israining then
+            inst.components.pickable:Pick()
+        end
+    end)
 
     return inst
 end

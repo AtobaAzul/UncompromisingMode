@@ -88,6 +88,7 @@ local function commonfn(build, tags)
     inst:AddTag("monster")
     inst:AddTag("smallcreature")
     inst:AddTag("companion")
+    inst:AddTag("NOBLOCK")
 
     inst.AnimState:SetBank("eyeofterror_mini")
     inst.AnimState:SetBuild("eyeofterror_mini_mob_build")
