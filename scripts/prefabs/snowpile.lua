@@ -299,7 +299,11 @@ local function onpickedfn(inst, picker)
             picker.components.temperature:SetTemperature(-3)
         end
     end
-    TryColdMenace(inst)
+
+    if TheWorld.state.iswinter then
+        TryColdMenace(inst)
+    end
+
     local x, y, z = inst.Transform:GetWorldPosition()
     if inst.components.workable.workleft > 0 then
         if inst.Transform:GetWorldPosition() ~= nil then
@@ -467,11 +471,7 @@ local function snowpilefn(Sim)
 
     inst:DoPeriodicTask(10, function(inst)
         if TheWorld.state.israining then
-            if inst.components.workable.workleft == 1 or inst.components.pickable.cycles_left == 1 then
-                inst:Remove()
-            else
-                inst.components.pickable:Pick()
-            end
+            inst.components.pickable:Pick()
         end
     end)
 
