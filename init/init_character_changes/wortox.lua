@@ -89,11 +89,13 @@ local function UncompromisingSoulHeal(inst)
             end
         end
 
-        if sanitytargetscount > 0 then
-            local amt = TUNING.SANITY_TINY * 0.5
-            for i = 1, sanitytargetscount do
-                local v = sanitytargets[i]
-                v.components.sanity:DoDelta(amt)
+        if TUNING.DSTU.WORTOX ~= "APOLLO" then
+            if sanitytargetscount > 0 then
+                local amt = TUNING.SANITY_TINY * 0.5
+                for i = 1, sanitytargetscount do
+                    local v = sanitytargets[i]
+                    v.components.sanity:DoDelta(amt)
+                end
             end
         end
     else
@@ -145,5 +147,22 @@ end
 if GLOBAL.TUNING.DSTU.WORTOX == "SHOT" or GLOBAL.TUNING.DSTU.WORTOX == "APOLLO" then
     AddPrefabPostInit("wortox_soul", function(inst)
         UpvalueHacker.SetUpvalue(GLOBAL.Prefabs.wortox_soul.fn, toground, "toground")
+    end)
+end
+
+if GLOBAL.TUNING.DSTU.WORTOX == "APOLLO" then
+    AddPrefabPostInit("wortox", function(inst)
+        if not GLOBAL.TheWorld.ismastersim then
+            return
+        end
+
+        if inst.components.souleater ~= nil then
+            local oneatsoulfn_ = inst.components.souleater.oneatsoulfn
+
+            inst.components.souleater.oneatsoulfn = function(inst, soul)
+                oneatsoulfn_(inst, soul)
+                inst.components.sanity:DoDelta(-TUNING.SANITY_TINY)
+            end
+        end
     end)
 end
