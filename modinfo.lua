@@ -163,8 +163,8 @@ configuration_options =
     Header("Characters"),
 ------------------------------
 	BinaryConfig("funny rat", "Winky", "Enable Uncompromising Mode's Winky, the Vile Vermin.", true),
-	BinaryConfig("wixie_walter", "Wixie", "Enable Uncompromising Mode's Wixie, the Delinquent.", true),
-	BinaryConfig("holy fucking shit it's wathom", "Wathom", "Enable Uncompromising Mode's Wathom, the Abomination.", true),
+	BinaryConfig("wixie_walter", "Wixie & Walter Rework", "Enable Uncompromising Mode's Wixie, the Delinquent, who expands on Walters slingshot, Walter gets new interactions and mechanics with Woby!", true),
+	BinaryConfig("holy fucking shit it's wathom", "Wathom", "Enable Uncompromising Mode's Wathom, the Forgotten Parody.", true),
 	BinaryConfig("wathom_maxdmg", "Wathom: Damage Cap", "Wathom's damage is capped at 600 to limit his absurd burst damage potential.", true),
 	{
 		name = "wathom_ampvulnerability",
