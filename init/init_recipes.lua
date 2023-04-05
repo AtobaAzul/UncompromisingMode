@@ -207,6 +207,7 @@ if GetModConfigData("winona_portables_") then
         AllRecipes["winona_" .. v].placer = nil
     end
 end
+
 --new recipes
 if GetModConfigData("snowstorms") then
     AddRecipe2(
@@ -288,6 +289,24 @@ AddRecipe2(
 )
 ChangeSortKey("sporepack", "icepack", "CLOTHING", true)
 ChangeSortKey("sporepack", "icepack", "CONTAINERS", true)
+
+if GetModConfigData("pocket_powertrip") ~= 0 then
+    AddRecipeToFilter("raincoat", "CONTAINERS")
+    ChangeSortKey("raincoat", "sporepack", "CONTAINERS", true)
+
+    AddRecipeToFilter("reflectivevest", "CONTAINERS")
+    ChangeSortKey("reflectivevest", "sporepack", "CONTAINERS", true)
+
+    AddRecipeToFilter("hawaiianshirt", "CONTAINERS")
+    ChangeSortKey("hawaiianshirt", "sporepack", "CONTAINERS", true)
+
+    AddRecipeToFilter("trunkvest_winter", "CONTAINERS")
+    ChangeSortKey("trunkvest_winter", "sporepack", "CONTAINERS", true)
+
+    AddRecipeToFilter("trunkvest_summer", "CONTAINERS")
+    ChangeSortKey("trunkvest_summer", "sporepack", "CONTAINERS", true)
+end
+
 if GetModConfigData("snowstorms") then
     AddRecipe2(
         "saltpack",
