@@ -84,7 +84,6 @@ configuration_options =
 	SkipSpace(),
 
 	Header("In Development"),
-	BinaryConfig("winona_portables", "Winona: Portable Structures", "Makes Winona's structures portable, and reworks the toolbox into the Contraption Container\nMissing art assets.", false),
 	BinaryConfig("ck_loot", "Additional Crab King Loot", "Crab King now drops unique loot based on the gems used.\nMissing art assets.", false),
 	SkipSpace(),
 
@@ -201,9 +200,10 @@ configuration_options =
 	BinaryConfig("winonaworker", "Winona: Faster Working", "Winona now scales her work/picking efficiency, and tool/weapon durability, off of her hunger level. Drains hunger when taking actions.", true),
 	BinaryConfig("winonawackycats", "Experimental Winona Catapults", "Catapults no longer regenerate, have reduced health, and 34 AOE damage.", false),
 	BinaryConfig("winona_gen_", "Winona: Generators", "Limits access to Winona's Generators to only allow her to use them", false),
-		{
+	BinaryConfig("winona_portables_", "Winona: Portable Structures", "Makes Winona's structures portable, and reworks the toolbox into the Contraption Container", true),
+	{
 		name = "wortox",
-		label = "UM Wortox",
+		label = "Wortox",
 		hover = "Wortox has different settings that change his characteristics.",
 		options =
 		{

@@ -201,7 +201,7 @@ local winona_portables = {
     "spotlight",
     "catapult",
 }
-if GetModConfigData("winona_portables") then
+if GetModConfigData("winona_portables_") then
     for k, v in ipairs(winona_portables) do
         AllRecipes["winona_" .. v].product = "winona_" .. v .. "_item"
         AllRecipes["winona_" .. v].placer = nil

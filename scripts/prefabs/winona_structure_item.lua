@@ -100,7 +100,7 @@ local function ondeploy_high(inst, pt, deployer)
     end)
 end
 
-local function fn(ondeploy, finiteuses)
+local function fn(ondeploy, atlas, anim, uses)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -110,9 +110,9 @@ local function fn(ondeploy, finiteuses)
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("portable_blender")
-    inst.AnimState:SetBuild("portable_blender")
-    inst.AnimState:PlayAnimation("idle_ground")
+    inst.AnimState:SetBank("winona_portables")
+    inst.AnimState:SetBuild("winona_portables")
+    inst.AnimState:PlayAnimation(anim, true)
 
     inst:AddTag("portableitem")
 
@@ -129,6 +129,7 @@ local function fn(ondeploy, finiteuses)
     inst:AddComponent("inspectable")
 
     inst:AddComponent("inventoryitem")
+    inst.components.inventoryitem.atlasname = "images/inventoryimages/"..atlas..".xml"
 
     inst:AddComponent("deployable")
     inst.components.deployable.restrictedtag = "handyperson"
@@ -137,7 +138,7 @@ local function fn(ondeploy, finiteuses)
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
 
-    if finiteuses == nil then
+    if uses == nil then
         inst:AddComponent("finiteuses")
         inst.components.finiteuses:SetMaxUses(100)
         inst.components.finiteuses:SetUses(100)
@@ -150,19 +151,19 @@ local function fn(ondeploy, finiteuses)
 end
 
 local function fn_catapult()
-    return fn(ondeploy_catapult)
+    return fn(ondeploy_catapult, "winona_catapult_item", "catapult")
 end
 
 local function fn_spotlight()
-    return fn(ondeploy_spotlight, false)
+    return fn(ondeploy_spotlight, "winona_spotlight_item", "spotlight", false)
 end
 
 local function fn_low()
-    return fn(ondeploy_low)
+    return fn(ondeploy_low, "winona_battery_low_item", "battery_low")
 end
 
 local function fn_high()
-    local inst = fn(ondeploy_high)
+    local inst = fn(ondeploy_high, "winona_battery_high_item", "battery_high")
 
     inst.OnSave = function(inst, data)
         if inst._gems ~= nil then

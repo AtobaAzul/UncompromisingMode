@@ -271,6 +271,12 @@ local inventoryitems =
 	"ms_plaguemask_formal",--dunno??
 	"ms_feather_frock_fancy",
 	"ms_twisted_antler",
+
+    --winona stuff
+    "winona_battery_low_item",
+    "winona_battery_high_item",
+    "winona_spotlight_item",
+	"winona_catapult_item",
 }
 
 for k, v in ipairs(inventoryitems) do
@@ -1186,6 +1192,8 @@ Assets = {
 
 	Asset("ANIM", "anim/trinket_wathom1.zip"),
 
+	Asset("ANIM", "anim/winona_portables.zip"),
+
 	--INVENTORY ITEMS [IMAGES & ATLAS]
 	Asset("IMAGE", "images/inventoryimages/grassgekko.tex"),
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/grassgekko.xml"),
@@ -1852,6 +1860,22 @@ Assets = {
 	Asset("IMAGE", "images/inventoryimages/wixie_piano_card.tex"),
 	--ASSET("ATLAS_BUILD", "images/inventoryimages/wixie_piano_card.xml"),
 	Asset("ATLAS", "images/inventoryimages/wixie_piano_card.xml"),
+
+	Asset("IMAGE", "images/inventoryimages/winona_battery_low_item.tex"),
+	--ASSET("ATLAS_BUILD", "images/inventoryimages/winona_battery_low_item.xml"),
+	Asset("ATLAS", "images/inventoryimages/winona_battery_low_item.xml"),
+
+	Asset("IMAGE", "images/inventoryimages/winona_battery_high_item.tex"),
+	--ASSET("ATLAS_BUILD", "images/inventoryimages/winona_battery_high_item.xml"),
+	Asset("ATLAS", "images/inventoryimages/winona_battery_high_item.xml"),
+
+	Asset("IMAGE", "images/inventoryimages/winona_spotlight_item.tex"),
+	--ASSET("ATLAS_BUILD", "images/inventoryimages/winona_spotlight_item.xml"),
+	Asset("ATLAS", "images/inventoryimages/winona_spotlight_item.xml"),
+
+	Asset("IMAGE", "images/inventoryimages/winona_catapult_item.tex"),
+	--ASSET("ATLAS_BUILD", "images/inventoryimages/winona_catapult_item.xml"),
+	Asset("ATLAS", "images/inventoryimages/winona_catapult_item.xml"),
 
 	--SWAPS
 	Asset("ANIM", "anim/swap_driftwood_fishingrod.zip"),

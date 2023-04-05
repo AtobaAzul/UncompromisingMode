@@ -20,16 +20,15 @@ AddPlayerPostInit(function(inst)
 	if not GLOBAL.TheWorld.ismastersim then
         return inst
     end
-		
+
 	if GLOBAL.TheWorld.ismastersim then
 		inst:AddComponent("moreshadows")
 	end
-	
-end)--]]
 
+end)--]]
 -------------------------------------------------- Prefabs
 --[[
-PrefabFiles = { 
+PrefabFiles = {
     "creepingfear",
     "dreadeye",
     "uncompromising_shadow_projectile_fx",
@@ -37,10 +36,10 @@ PrefabFiles = {
 --]]
 -------------------------------------------------- Strings
 
-STRINGS = GLOBAL.STRINGS
+STRINGS                    = GLOBAL.STRINGS
 
-STRINGS.NAMES.CREEPINGFEAR  = "Creeping Fear"
-STRINGS.NAMES.DREADEYE  = "Dread Eye"
+STRINGS.NAMES.CREEPINGFEAR = "Creeping Fear"
+STRINGS.NAMES.DREADEYE     = "Dread Eye"
 
 -------------------------------------------------- Turnings
 --[[
@@ -70,7 +69,6 @@ TUNING.DSTU = {
 
 TUNING.SANITY_BECOME_INSANE_THRESH = 40/200 -- 20%
 TUNING.SANITY_BECOME_SANE_THRESH  = 45/200 -- 22.5%--]]
-
 -------------------------------------------------- Components
 
 local function replace_shadowcreaturespawner(inst)
@@ -116,11 +114,11 @@ end
 
 local function daytime(inst)
     if GLOBAL.TheWorld:HasTag("forest") then
-		inst:DoTaskInTime(math.random(), function()
-			inst.components.lootdropper:SetLoot({})
-			inst.components.lootdropper:SetChanceLootTable(nil)
-			inst.components.health:Kill()
-		end)
+        inst:DoTaskInTime(math.random(), function()
+            inst.components.lootdropper:SetLoot({})
+            inst.components.lootdropper:SetChanceLootTable(nil)
+            inst.components.health:Kill()
+        end)
     end
 end
 
@@ -130,8 +128,8 @@ local function crawlingnightmare_postinit(inst)
     end
     inst.components.lootdropper:SetLoot({ "nightmarefuel" })
     inst.components.lootdropper:SetChanceLootTable(nil)
-	
-	inst:WatchWorldState("isday", daytime)
+
+    inst:WatchWorldState("isday", daytime)
 end
 
 local function nightmarebeak_postinit(inst)
@@ -140,8 +138,8 @@ local function nightmarebeak_postinit(inst)
     end
     inst.components.lootdropper:SetLoot({ "nightmarefuel" })
     inst.components.lootdropper:SetChanceLootTable(nil)
-	
-	inst:WatchWorldState("isday", daytime)
+
+    inst:WatchWorldState("isday", daytime)
 end
 AddPrefabPostInit("crawlinghorror", crawlinghorror_postinit)
 AddPrefabPostInit("terrorbeak", terrorbeak_postinit)
@@ -149,23 +147,23 @@ AddPrefabPostInit("crawlingnightmare", crawlingnightmare_postinit)
 AddPrefabPostInit("nightmarebeak", nightmarebeak_postinit)
 
 local function inducedcheck(inst)
-local x,y,z = inst.Transform:GetWorldPosition()
-local inducedplayers = GLOBAL.TheSim:FindEntities(x,y,z,60,{"fuelfarming"},{"ghost"})
-for i,v in ipairs(inducedplayers) do
-	if inst.components.lootdropper ~= nil then
-		inst.components.lootdropper:AddChanceLoot("nightmarefuel",    1.00)
-		if math.random() > 0.5 then
-			inst.components.lootdropper:AddChanceLoot("nightmarefuel",    1.00)
-		end
-	end
-end
+    local x, y, z = inst.Transform:GetWorldPosition()
+    local inducedplayers = GLOBAL.TheSim:FindEntities(x, y, z, 60, { "fuelfarming" }, { "ghost" })
+    for i, v in ipairs(inducedplayers) do
+        if inst.components.lootdropper ~= nil then
+            inst.components.lootdropper:AddChanceLoot("nightmarefuel", 1.00)
+            if math.random() > 0.5 then
+                inst.components.lootdropper:AddChanceLoot("nightmarefuel", 1.00)
+            end
+        end
+    end
 end
 
 local function purplepostinit(inst)
-	if not GLOBAL.TheWorld.ismastersim then
-		return
-	end
-inst:DoTaskInTime(0.1,inducedcheck) --0.1... sometimes it seems certain nm creatures don't actualy see the fuel farmer upon spawn if we use 0 instead.
+    if not GLOBAL.TheWorld.ismastersim then
+        return
+    end
+    inst:DoTaskInTime(0.1, inducedcheck) --0.1... sometimes it seems certain nm creatures don't actualy see the fuel farmer upon spawn if we use 0 instead.
 end
 AddPrefabPostInit("crawlinghorror", purplepostinit)
 AddPrefabPostInit("terrorbeak", purplepostinit)
@@ -175,19 +173,19 @@ AddPrefabPostInit("dreadeye", purplepostinit)
 
 -------------------------------------------------- StategraphState
 
-local state_teleport_disapper = GLOBAL.State{ name = "teleport_disapper",
-    tags = { "busy", "noattack" },
+local state_teleport_disapper = GLOBAL.State { name = "teleport_disapper",
+        tags = { "busy", "noattack" },
 
-    onenter = function(inst)
-        inst.Physics:Stop()
-        inst.AnimState:PlayAnimation("disappear")
-    end,
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("disappear")
+        end,
 
-    events =
-    {
-        GLOBAL.EventHandler("animover", function(inst) inst.sg:GoToState("appear") end),
+        events =
+        {
+            GLOBAL.EventHandler("animover", function(inst) inst.sg:GoToState("appear") end),
+        },
     },
-},
 
-AddStategraphState("SGshadowcreature", state_teleport_disapper)
+    AddStategraphState("SGshadowcreature", state_teleport_disapper)
 AddStategraphState("shadowcreature", state_teleport_disapper)

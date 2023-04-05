@@ -9,7 +9,7 @@ GLOBAL.TUNING.WX78_CHARGING_FOODS.powercell = 1
 
 local ModuleDefs = require("wx78_moduledefs")
 
-ModuleDefs.AddCreatureScanDataDefinition("dreadeye", "maxsanity", 3)
+--ModuleDefs.AddCreatureScanDataDefinition("dreadeye", "maxsanity", 3)
 ModuleDefs.AddCreatureScanDataDefinition("creepingfear", "maxsanity", 6)
 ModuleDefs.AddCreatureScanDataDefinition("trepidation", "maxsanity", 6)
 ModuleDefs.AddCreatureScanDataDefinition("mock_dragonfly", "heat", 10)
@@ -21,7 +21,7 @@ ModuleDefs.AddCreatureScanDataDefinition("lightninghound", "taser", 5)
 
 --TODO, reimplement dorainsparks to do based on wetness from min to max damage
     --add rate too
-	
+
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
