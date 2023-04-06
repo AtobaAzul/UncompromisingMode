@@ -51,6 +51,7 @@ env.AddPrefabPostInit("lantern", function(inst)
             inst.components.upgradeable.upgradetype = nil
             inst.components.fueled.fueltype = FUELTYPE.BATTERYPOWER
             inst.components.fueled.maxfuel = TUNING.LANTERN_LIGHTTIME * 2
+            inst.components.fueled:DoDelta(0)--do a 0delta to update the %, maybe?
             inst:AddTag("electricaltool")
             inst.components.named:SetName(STRINGS.NAMES.LANTERN_ELECTRICAL)
             local owner = inst.components.inventoryitem:GetGrandOwner()
