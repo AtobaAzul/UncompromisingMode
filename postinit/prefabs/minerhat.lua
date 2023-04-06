@@ -54,7 +54,8 @@ env.AddPrefabPostInit("minerhat", function(inst)
             inst:SetPrefabNameOverride("MINERHAT_ELECTRICAL")--this is mainly for quotes, though I could use getstatus instead now...
             inst.components.upgradeable.upgradetype = nil
             inst.components.fueled.fueltype = FUELTYPE.BATTERYPOWER
-            inst.components.fueled.maxfuel = TUNING.MINERHAT_LIGHTTIME*2
+            inst.components.fueled.maxfuel = TUNING.MINERHAT_LIGHTTIME * 2
+            inst.components.fueled:DoDelta(0)--do a 0delta to update the %, maybe?
             inst:AddTag("electricaltool")
             inst.components.named:SetName(STRINGS.NAMES.MINERHAT_ELECTRICAL)--this seems to actually set the name, since it has a replica for clients
 

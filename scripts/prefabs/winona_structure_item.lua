@@ -48,6 +48,12 @@ local function ondeploy_spotlight(inst, pt, deployer)
     end
 end
 
+local function AnimOver(inst)
+    inst.AnimState:PushAnimation("idle_empty")
+    inst:DoTaskInTime(FRAMES * 2, inst.components.fueled.depleted(inst))
+    inst:RemoveEventCallback("animover", AnimOver)
+end
+
 local function ondeploy_low(inst, pt, deployer)
     local gen = SpawnPrefab("winona_battery_low")
     if gen ~= nil then
@@ -58,8 +64,7 @@ local function ondeploy_low(inst, pt, deployer)
         gen.components.fueled:SetPercent(inst.components.finiteuses:GetPercent())
 
         if inst.components.finiteuses:GetPercent() == 0 then
-            gen.AnimState:PushAnimation("idle_empty")
-            gen:DoTaskInTime(FRAMES * 2, gen.components.fueled.depleted)
+            gen:ListenForEvent("animover", AnimOver)
         end
 
         inst:Remove()

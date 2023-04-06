@@ -653,12 +653,13 @@ ChangeSortKey("sludge_cork", "oceanfishingrod", "TOOLS", true)
 ChangeSortKey("sludge_cork", "boat_magnet_beacon", "SEAFARING", true)
 
 if GetModConfigData("monstersmallmeat") then
-AddRecipe2(
-    "transmute_monstermeat",
-    { Ingredient("monstersmallmeat", 3) },
-    TECH.NONE,
-    {product = "monstermeat", builder_tag = "ick_alchemistI", description="transmute_monstermeat"}
-)
+    AddRecipe2(
+        "transmute_monstermeat",
+        { Ingredient("monstersmallmeat", 3) },
+        TECH.NONE,
+        { product = "monstermeat", builder_tag = "ick_alchemistI", description = "transmute_monstermeat" },
+        { "CHARACTER" }
+    )
 
     AddRecipe2(
         "transmute_monstersmallmeat",
