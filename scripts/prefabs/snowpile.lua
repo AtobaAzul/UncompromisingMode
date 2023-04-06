@@ -472,7 +472,7 @@ local function snowpilefn(Sim)
     inst.DoColdMenace = DoColdMenace
 
     inst:DoPeriodicTask(10, function(inst)
-        if TheWorld.state.israining then
+        if TheWorld.state.israining and not TheWorld.state.iswinter then
             inst.components.pickable:Pick()
         end
     end)
