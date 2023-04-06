@@ -285,20 +285,22 @@ local function DoAreaColdness(inst)
 end
 
 local function onpickedfn(inst, picker)
-    if picker.components.moisture then
-        if picker.components.talker and picker == ThePlayer then
-            ThePlayer.components.talker:Say(GetString(ThePlayer.prefab, "ANNOUNCE_COLD"))
-        end
+	if picker ~= nil and picker:IsValid() then
+		if picker.components.moisture then
+			if picker.components.talker and picker == ThePlayer then
+				ThePlayer.components.talker:Say(GetString(ThePlayer.prefab, "ANNOUNCE_COLD"))
+			end
 
-        picker.components.moisture:DoDelta(15)
-    end
+			picker.components.moisture:DoDelta(15)
+		end
 
-    if picker.components.temperature ~= nil then
-        picker.components.temperature:DoDelta(-20)
-        if picker.components.temperature.current > -3 then
-            picker.components.temperature:SetTemperature(-3)
-        end
-    end
+		if picker.components.temperature ~= nil then
+			picker.components.temperature:DoDelta(-20)
+			if picker.components.temperature.current > -3 then
+				picker.components.temperature:SetTemperature(-3)
+			end
+		end
+	end
 
     if TheWorld.state.iswinter then
         TryColdMenace(inst)
