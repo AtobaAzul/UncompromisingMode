@@ -103,7 +103,6 @@ local prefab_post = {
 	"klaus",
 	"mosquito",
 	"armor_bramble",
-	"cookiecutterhat",
 	--"woby",
 	"cave_network",
 	"glasscutter",
@@ -437,6 +436,10 @@ end
 
 if GetModConfigData("monstersmallmeat") then
     table.insert(prefab_post, "bat")
+end
+
+if GetModConfigData("cookiecutterhat") then
+	table.insert(prefab_post, "cookiecutterhat")
 end
 
 modimport("postinit/sim")
