@@ -78,7 +78,7 @@ configuration_options =
 	--BinaryConfig("beta_compatibility", "March QoL Beta", "This will enable proper compatibility for the beta Crafting, Ancient Guardian, and Varg Waves features.", false),|
 
 	Header("Mod Compatibility"),
-	BinaryConfig("worldgenmastertoggle", "Master Toggle", "Toggles ALL worldgen. MUST DISABLE IN ISLAND ADVENTURE WORLDS!", true),
+	BinaryConfig("worldgenmastertoggle", "Worldgen Master Toggle", "Toggles ALL worldgen.", true),
 	BinaryConfig("um_music", "Official Soundtrack", "Disable this if you are crashing when using client music mods.", true),
 	BinaryConfig("hungry_void", "Anti-Voidwalk", "Disable this if you are using any mods that allow flight or traversal over the cave void.", true),
 	SkipSpace(),
