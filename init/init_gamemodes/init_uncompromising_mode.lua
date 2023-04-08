@@ -103,8 +103,8 @@ end
 
 --if  GetModConfigData("harder_weather") then <-- This isn't even a config change, yet.
 --modimport("init/init_weather/init_acidmushroom_networking")
-modimport("init/init_weather/init_acid_rain_effects")
-modimport("init/init_weather/init_acid_rain_disease")
+--modimport("init/init_weather/init_acid_rain_effects")
+--modimport("init/init_weather/init_acid_rain_disease")
 modimport("init/init_weather/init_harder_weather")
 --modimport("init/init_weather/init_snowstorm")
 modimport("init/init_weather/init_snowstorm_structures")

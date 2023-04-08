@@ -73,7 +73,7 @@ local IMPASSABLES_STATUES = {
 	["eggplant_oversized"] = true,
 	["asparagus_oversized"] = true,
 	["dragonfruit_oversized"] = true,
-	
+
 	["carrot_oversized_rotten"] = true,
 	["onion_oversized_rotten"] = true,
 	["garlic_oversized_rotten"] = true,
@@ -88,7 +88,7 @@ local IMPASSABLES_STATUES = {
 	["eggplant_oversized_rotten"] = true,
 	["asparagus_oversized_rotten"] = true,
 	["dragonfruit_oversized_rotten"] = true,
-	
+
 	["carrot_oversized_waxed"] = true,
 	["onion_oversized_waxed"] = true,
 	["garlic_oversized_waxed"] = true,
@@ -103,7 +103,7 @@ local IMPASSABLES_STATUES = {
 	["eggplant_oversized_waxed"] = true,
 	["asparagus_oversized_waxed"] = true,
 	["dragonfruit_oversized_waxed"] = true,
-	
+
 	["chesspiece_hornucopia"] = true,
 	["chesspiece_pipe"] = true,
     ["chesspiece_pawn"] = true,
@@ -159,7 +159,7 @@ end
 
 env.AddPrefabPostInitAny(function(inst)
 	if TheWorld and TheWorld.shard == inst then
-		inst:AddComponent("shard_acidmushrooms")
+		--inst:AddComponent("shard_acidmushrooms")
 	end
 end)
 
@@ -201,6 +201,5 @@ env.AddPrefabPostInitAny(function(inst)
 		end
 	end
 end)
-
 
 

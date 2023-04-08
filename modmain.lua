@@ -94,7 +94,7 @@ AddPrefabPostInit("world", function(inst)
     end)
 
     if inst:HasTag("forest") then
-        inst:AddComponent("acidmushrooms")
+        --inst:AddComponent("acidmushrooms")
     end
 end)
 
