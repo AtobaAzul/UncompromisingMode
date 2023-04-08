@@ -425,7 +425,8 @@ configuration_options =
 		},
 		default = 1,
 	},
-	BinaryConfig("hambatnerf", "Ham Bat Nerf", "Spoils faster and minimum damage is lower.", true),
+    BinaryConfig("hambatnerf", "Ham Bat Nerf", "Spoils faster and minimum damage is lower.", true),
+	BinaryConfig("cookiecutterhat", "Cookie Cutter Hat", "Cookie Cutter Caps now reflects some damage back at the attacker", true),
 -----------------------------
 -- Food --
 -----------------------------

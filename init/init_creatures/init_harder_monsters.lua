@@ -44,7 +44,25 @@ end
 
 --Get the pig to attack the perpetrator of the crime against pig-kind
 --TODO: Make pigs trashtalk in house too, now only bunnymen do that
+---Should probably make this a hook -a
 local function onworked_pighouse(inst, worker)
+    if not inst:HasTag("burnt") then
+        inst.AnimState:PlayAnimation("hit")
+        if inst.lightson then
+            inst.AnimState:PushAnimation("lit")
+            if inst._window ~= nil then
+                inst._window.AnimState:PlayAnimation("windowlight_hit")
+                inst._window.AnimState:PushAnimation("windowlight_idle")
+            end
+            if inst._windowsnow ~= nil then
+                inst._windowsnow.AnimState:PlayAnimation("windowsnow_hit")
+                inst._windowsnow.AnimState:PushAnimation("windowsnow_idle")
+            end
+        else
+            inst.AnimState:PushAnimation("idle")
+        end
+    end
+
     if inst.components.spawner ~= nil and inst.components.spawner.child then
         RetaliateAttacker(inst.components.spawner.child, worker, pigtaunts)
         local x, y, z = inst.Transform:GetWorldPosition()
@@ -67,6 +85,16 @@ if GetModConfigData("harder_pigs") then
 
     --Get the bunnyman to attack the perpetrator of the crime against bunny-kind
     local function onworked_rabbithouse(inst, worker)
+        if not inst:HasTag("burnt") then
+            inst.AnimState:PlayAnimation("hit")
+            inst.AnimState:PushAnimation("idle")
+
+            if inst.glow_fx ~= nil then
+                inst.glow_fx.AnimState:PlayAnimation("hit")
+                inst.glow_fx.AnimState:PushAnimation("idle")
+            end
+        end
+
         if inst.components.spawner ~= nil and inst.components.spawner.child then
             RetaliateAttacker(inst.components.spawner.child, worker, bunnytaunts)
             inst.components.spawner:ReleaseChild()
