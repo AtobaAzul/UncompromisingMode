@@ -208,6 +208,12 @@ if GetModConfigData("winona_portables_") then
     end
 end
 
+AllRecipes["mast_item"].ingredients = {Ingredient("log", 3), Ingredient("rope", 2), Ingredient("silk", 3)}
+AllRecipes["mast"].ingredients = {Ingredient("log", 3), Ingredient("rope", 2), Ingredient("silk", 3)}
+
+AllRecipes["mast_malbatross_item"].ingredients = {Ingredient("driftwood_log", 3), Ingredient("rope", 2), Ingredient("malbatross_feathered_weave", 3)}
+AllRecipes["mast_malbatross"].ingredients = {Ingredient("driftwood_log", 3), Ingredient("rope", 2), Ingredient("malbatross_feathered_weave", 3)}
+
 --new recipes
 if GetModConfigData("snowstorms") then
     AddRecipe2(
@@ -848,6 +854,7 @@ AddRecipe2(
     { "SEAFARING" }
 )
 ChangeSortKey("mastupgrade_windturbine_item", "mastupgrade_lightningrod_item", "SEAFARING", true)
+
 if GetModConfigData("ck_loot") then
     AddRecipe2(
         "crab_hat",
