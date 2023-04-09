@@ -107,7 +107,7 @@ local function ondeploy_high(inst, pt, deployer)
     end)
 end
 
-local function fn(ondeploy, atlas, anim, uses)
+local function fn(ondeploy, atlas, anim, uses_startingfuel)
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
@@ -145,10 +145,10 @@ local function fn(ondeploy, atlas, anim, uses)
     inst:AddComponent("hauntable")
     inst.components.hauntable:SetHauntValue(TUNING.HAUNT_TINY)
 
-    if uses == nil then
+    if uses_startingfuel == nil or uses_startingfuel == true or type(uses_startingfuel) == "number" then
         inst:AddComponent("finiteuses")
         inst.components.finiteuses:SetMaxUses(100)
-        inst.components.finiteuses:SetUses(100)
+        inst.components.finiteuses:SetUses(type(uses_startingfuel) == "number" and uses_startingfuel or 100)
     end
 
     MakeMediumBurnable(inst)
@@ -170,7 +170,7 @@ local function fn_low()
 end
 
 local function fn_high()
-    local inst = fn(ondeploy_high, "winona_battery_high_item", "battery_high")
+    local inst = fn(ondeploy_high, "winona_battery_high_item", "battery_high", 0)
 
     inst.OnSave = function(inst, data)
         if inst._gems ~= nil then
