@@ -11,8 +11,10 @@ local assets =
 
 --DSV uses 4 but ignores physics radius
 local MAXRANGE = 3
-local NO_TAGS_NO_PLAYERS = { "bramble_resistant", "INLIMBO", "notarget", "noattack", "flight", "invisible", "player" }
-local NO_TAGS = { "bramble_resistant", "INLIMBO", "notarget", "noattack", "flight", "invisible", "playerghost" }
+local NO_TAGS_NO_PLAYERS = { "bramble_resistant", "INLIMBO", "notarget", "noattack", "flight", "invisible", "player",
+    "companion", "abigail" }
+local NO_TAGS = { "bramble_resistant", "INLIMBO", "notarget", "noattack", "flight", "invisible", "playerghost",
+    "companion", "abigail" }
 
 local function OnUpdateThorns(inst)
     inst.range = inst.range + .75
@@ -24,7 +26,7 @@ local function OnUpdateThorns(inst)
             v.entity:IsVisible() and
             v.components.combat ~= nil and
             not (v.components.inventory ~= nil and
-                v.components.inventory:EquipHasTag("bramble_resistant")) then
+            v.components.inventory:EquipHasTag("bramble_resistant")) then
             local range = inst.range + v:GetPhysicsRadius(0)
             if v:GetDistanceSqToPoint(x, y, z) < range * range then
                 if inst.owner ~= nil and not inst.owner:IsValid() then
@@ -33,7 +35,9 @@ local function OnUpdateThorns(inst)
                 if inst.owner ~= nil then
                     if inst.owner.components.combat ~= nil and inst.owner.components.combat:CanTarget(v) then
                         inst.ignore[v] = true
-                        v.components.combat:GetAttacked(v.components.follower ~= nil and v.components.follower:GetLeader() == inst.owner and inst or inst.owner, inst.damage)
+                        v.components.combat:GetAttacked(
+                        v.components.follower ~= nil and v.components.follower:GetLeader() == inst.owner and inst or
+                        inst.owner, inst.damage)
                         --V2C: wisecracks make more sense for being pricked by picking
                         --v:PushEvent("thorns")
                     end
@@ -59,69 +63,69 @@ local function SetFXOwner(inst, owner)
 end
 
 local function fn()
-        local inst = CreateEntity()
+    local inst = CreateEntity()
 
-        inst.entity:AddTransform()
-        inst.entity:AddAnimState()
-        inst.entity:AddNetwork()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
 
-        inst:AddTag("FX")
-        inst:AddTag("thorny")
+    inst:AddTag("FX")
+    inst:AddTag("thorny")
 
-        inst.Transform:SetFourFaced()
-		inst.Transform:SetScale(1.2, 1.2, 1.2)
+    inst.Transform:SetFourFaced()
+    inst.Transform:SetScale(1.2, 1.2, 1.2)
 
-        inst.AnimState:SetBank("um_spikes")
-        inst.AnimState:SetBuild("spikes_cookie")
-        inst.AnimState:PlayAnimation("attack")
+    inst.AnimState:SetBank("um_spikes")
+    inst.AnimState:SetBuild("spikes_cookie")
+    inst.AnimState:PlayAnimation("attack")
 
-        inst.entity:SetPristine()
-        if not TheWorld.ismastersim then
-            return inst
-        end
-
-        inst:AddComponent("updatelooper")
-        inst.components.updatelooper:AddOnUpdateFn(OnUpdateThorns)
-
-        inst:ListenForEvent("animover", inst.Remove)
-        inst.persists = false
-        inst.damage = 5
-        inst.range = .75
-        inst.ignore = {}
-        inst.canhitplayers = true
-        --inst.owner = nil
-
-        inst.SetFXOwner = SetFXOwner
-
+    inst.entity:SetPristine()
+    if not TheWorld.ismastersim then
         return inst
+    end
+
+    inst:AddComponent("updatelooper")
+    inst.components.updatelooper:AddOnUpdateFn(OnUpdateThorns)
+
+    inst:ListenForEvent("animover", inst.Remove)
+    inst.persists = false
+    inst.damage = 5
+    inst.range = .75
+    inst.ignore = {}
+    inst.canhitplayers = true
+    --inst.owner = nil
+
+    inst.SetFXOwner = SetFXOwner
+
+    return inst
 end
 
 local function feather(feathertype)
-        local inst = CreateEntity()
+    local inst = CreateEntity()
 
-        inst.entity:AddTransform()
-        inst.entity:AddAnimState()
-        inst.entity:AddNetwork()
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    inst.entity:AddNetwork()
 
-        inst:AddTag("FX")
-        inst:AddTag("vetcurse_item")
+    inst:AddTag("FX")
+    inst:AddTag("vetcurse_item")
 
-        inst.Transform:SetFourFaced()
-		inst.Transform:SetScale(0.8, 0.8, 0.8)
+    inst.Transform:SetFourFaced()
+    inst.Transform:SetScale(0.8, 0.8, 0.8)
 
-        inst.AnimState:SetBank("um_spikes")
-        inst.AnimState:SetBuild(feathertype)
-        inst.AnimState:PlayAnimation("attack")
+    inst.AnimState:SetBank("um_spikes")
+    inst.AnimState:SetBuild(feathertype)
+    inst.AnimState:PlayAnimation("attack")
 
-        inst.entity:SetPristine()
-		
-        if not TheWorld.ismastersim then
-            return inst
-        end
+    inst.entity:SetPristine()
 
-        inst:ListenForEvent("animover", inst.Remove)
-
+    if not TheWorld.ismastersim then
         return inst
+    end
+
+    inst:ListenForEvent("animover", inst.Remove)
+
+    return inst
 end
 
 
@@ -186,9 +190,9 @@ local function malbatrossfn()
 end
 
 return Prefab("cookiespikes", fn, assets),
-		Prefab("spikes_robin", robinfn, assets),
-		Prefab("spikes_robinwinter", robinwinterfn, assets),
-		Prefab("spikes_crow", crowfn, assets),
-		Prefab("spikes_canary", canaryfn, assets),
-		Prefab("spikes_goose", goosefn, assets),
-		Prefab("spikes_malbatross", malbatrossfn, assets)
+    Prefab("spikes_robin", robinfn, assets),
+    Prefab("spikes_robinwinter", robinwinterfn, assets),
+    Prefab("spikes_crow", crowfn, assets),
+    Prefab("spikes_canary", canaryfn, assets),
+    Prefab("spikes_goose", goosefn, assets),
+    Prefab("spikes_malbatross", malbatrossfn, assets)

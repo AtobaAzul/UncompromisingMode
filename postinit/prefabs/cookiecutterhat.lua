@@ -22,9 +22,13 @@ local function OnBlocked(owner, data, inst)
 		not (data.attacker.components.health ~= nil and data.attacker.components.health:IsDead()) and
 		(data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) and
 		not data.redirected and
-		not data.attacker:HasTag("thorny") and data.attacker.components.combat:CanBeAttacked() and not data.attacker:HasTag("companion") and not data.attacker:HasTag("abigail") then
+		not data.attacker:HasTag("thorny") and
+		data.attacker.components.combat:CanBeAttacked() and
+		not data.attacker:HasTag("companion") and
+		not data.attacker:HasTag("abigail") then
 		local damage = data.attacker.components.combat.defaultdamage *
-		(data.attacker.components.combat.playerdamagepercent or 1) * 0.75
+			(data.attacker.components.combat.playerdamagepercent or 1) * 0.75
+
 		data.attacker.components.combat:GetAttacked(inst, damage)
 	end
 end
