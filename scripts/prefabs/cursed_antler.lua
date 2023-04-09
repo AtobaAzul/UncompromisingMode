@@ -69,9 +69,10 @@ local function onequip(inst, owner)
 		end)
 	else
 		local skin_build = inst:GetSkinBuild()
-		if skin_build ~= nil then
+        if skin_build ~= nil then
+			print(skin_build)
 			owner:PushEvent("equipskinneditem", inst:GetSkinName())
-			owner.AnimState:OverrideSymbol("swap_object", skin_build or "swap_twisted_antler", skin_build or "swap_twisted_antler")
+			owner.AnimState:OverrideItemSkinSymbol("swap_object", "swap_"..skin_build, "swap_twisted_antler", inst.GUID, "swap_cursed_antler")
 		else
 			owner.AnimState:OverrideSymbol("swap_object", "swap_cursed_antler", "swap_cursed_antler")
 		end

@@ -34,14 +34,14 @@ local actionhandlers =
 local events =
 {
 	EventHandler("attacked", function(inst)
-        if not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") then
+        if inst.components.health ~= nil and not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") then
             inst.sg:GoToState("hit") -- can still attack
         end
     end)
 }
 
 local states = {
-	
+
 	State{
         name = "hit",
         tags = { "hit", "busy" },
@@ -50,7 +50,7 @@ local states = {
             if inst.components.locomotor ~= nil then
                 inst.components.locomotor:StopMoving()
             end
-			
+
             inst.AnimState:PlayAnimation("hit")
 			inst.SoundEmitter:PlaySound("dontstarve/characters/walter/woby/small/bark")
         end,
@@ -67,7 +67,7 @@ local states = {
 
 		onenter = function(inst)
 			inst.Physics:Stop()
-			
+
             inst.AnimState:PlayAnimation("emote_nuzzle")
 		end,
 
@@ -77,26 +77,26 @@ local states = {
 			TimeEvent(13*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/pupington/pant") end),
 			TimeEvent(35*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/pupington/emote_scratch") end),
 			TimeEvent(36*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/pupington/pant") end),
-			
+
 			TimeEvent(9*FRAMES, function(inst)
 				inst.SoundEmitter:PlaySound("dontstarve/creatures/together/pupington/pant")
 				inst:PerformBufferedAction()
-				
+
 				local x, y, z = inst.Transform:GetWorldPosition()
 				local ents = TheSim:FindEntities(x, y, z, 15, nil, { "INLIMBO", "NOCLICK", "knockbackdelayinteraction", "catchable", "fire", "minesprung", "mineactive" })
-				
+
 				inst.sg:RemoveStateTag("busy")
-				
+
 				if inst.wobytarget ~= nil then
 					inst.oldwobytarget = inst.wobytarget
 					inst.wobytarget = nil
 				end
-				
+
 				for i, v in ipairs(ents) do
 					if inst.wobytarget ~= nil or inst.components.hunger:GetPercent() == 0 then
 						break
 					end
-				
+
 					if v ~= nil and not v:HasTag("INLIMBO") and inst.oldwobytarget ~= nil and v ~= inst.oldwobytarget and v.prefab == inst.oldwobytarget.prefab and v:IsValid() then
 						if v.components.pickable == nil and v.components.harvestable == nil or v.components.pickable ~= nil and v.components.pickable.canbepicked or v.components.harvestable ~= nil and v.components.harvestable:CanBeHarvested() and v.components.combat == nil then
 							if v.components.inventoryitem then
@@ -116,7 +116,7 @@ local states = {
 						end
 					end
 				end
-				
+
                 if inst.brain ~= nil then
                     inst.brain:ForceUpdate()
                 end
@@ -128,7 +128,7 @@ local states = {
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end)
 		}
 	},
-	
+
 	State{
         name = "woby_does_a_flip",
 		tags = {"busy"},
@@ -140,20 +140,20 @@ local states = {
 
 		timeline =
 		{
-			TimeEvent(9*FRAMES, function(inst) 
+			TimeEvent(9*FRAMES, function(inst)
 				inst.SoundEmitter:PlaySound("dontstarve/characters/walter/woby/small/bark")
 				inst:ClearBufferedAction()
 				--inst.wobytarget = nil
 				--inst.oldwobytarget = nil
 			end),
 		},
-		
+
         events=
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("idle") end ),
         },
     },
-	
+
 	State{
         name = "bark_at",
 		tags = {"busy"},
@@ -165,20 +165,20 @@ local states = {
 
 		timeline =
 		{
-			TimeEvent(9*FRAMES, function(inst) 
+			TimeEvent(9*FRAMES, function(inst)
 				inst.SoundEmitter:PlaySound("dontstarve/characters/walter/woby/small/bark")
 				inst:PerformBufferedAction()
 				--inst.wobytarget = nil
 				--inst.oldwobytarget = nil
 			end),
 		},
-		
+
         events=
         {
             EventHandler("animover", function(inst) inst.sg:GoToState("bark_at_pst") end ),
         },
     },
-	
+
 	State{
         name = "bark_clearaction",
         tags = { "busy" },
@@ -189,7 +189,7 @@ local states = {
 
         timeline =
 		{
-			TimeEvent(9*FRAMES, function(inst) 
+			TimeEvent(9*FRAMES, function(inst)
 				inst.SoundEmitter:PlaySound("dontstarve/characters/walter/woby/small/bark")
 				inst:ClearBufferedAction()
 				--inst.wobytarget = nil
@@ -202,7 +202,7 @@ local states = {
             EventHandler("animover", function(inst) inst.sg:GoToState("bark_at_pst") end ),
         },
     },
-	
+
 	State{
         name = "bark_at_pst",
 		tags = {"busy"},
@@ -210,7 +210,7 @@ local states = {
         onenter = function(inst)
             inst.AnimState:PlayAnimation("emote_combat_pst")
         end,
-		
+
         events =
 		{
 			EventHandler("animover", function(inst)
@@ -283,7 +283,7 @@ local actionhandlers =
 local events =
 {
     EventHandler("death", function(inst) inst.sg:GoToState("death") end),
-	
+
 	EventHandler("attacked", function(inst)
         if not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") then
             inst.sg:GoToState("hit") -- can still attack
@@ -292,7 +292,7 @@ local events =
 }
 
 local states = {
-	
+
 	State{
         name = "hit",
         tags = { "hit", "busy" },
@@ -301,7 +301,7 @@ local states = {
             if inst.components.locomotor ~= nil then
                 inst.components.locomotor:StopMoving()
             end
-			
+
             inst.AnimState:PlayAnimation("hit_woby")
 			inst.SoundEmitter:PlaySound("dontstarve/characters/walter/woby/big/wimper")
         end,
@@ -318,7 +318,7 @@ local states = {
 
 		onenter = function(inst)
 			inst.Physics:Stop()
-			
+
             inst.AnimState:PlayAnimation("command")
 		end,
 
@@ -328,26 +328,26 @@ local states = {
 			TimeEvent(35*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/pupington/emote_scratch") end),
 			TimeEvent(9*FRAMES, function(inst)
 				inst:PerformBufferedAction()
-				
+
 				local x, y, z = inst.Transform:GetWorldPosition()
 				local ents = TheSim:FindEntities(x, y, z, 17, nil, { "INLIMBO", "NOCLICK", "knockbackdelayinteraction", "catchable", "fire", "minesprung", "mineactive" })
-				
+
 				inst.sg:RemoveStateTag("busy")
-				
+
 				if inst.wobytarget ~= nil then
 					if inst.wobytarget:HasTag("snowpile") then
 						inst.components.hunger:DoDelta(-3)
 					end
-				
+
 					inst.oldwobytarget = inst.wobytarget
 					inst.wobytarget = nil
 				end
-				
+
 				for i, v in ipairs(ents) do
 					if inst.wobytarget ~= nil or inst.components.hunger:GetPercent() == 0 then
 						break
 					end
-					
+
 					if v ~= nil and not v:HasTag("INLIMBO") and inst.oldwobytarget ~= nil and v ~= inst.oldwobytarget and v.prefab == inst.oldwobytarget.prefab and v:IsValid() then
 						if v.components.pickable == nil and v.components.harvestable == nil or v.components.pickable ~= nil and v.components.pickable.canbepicked or v.components.harvestable ~= nil and v.components.harvestable:CanBeHarvested() and v.components.combat == nil then
 							if v.components.inventoryitem then
@@ -367,7 +367,7 @@ local states = {
 						end
 					end
 				end
-				
+
                 if inst.brain ~= nil then
                     inst.brain:ForceUpdate()
                 end
@@ -379,14 +379,14 @@ local states = {
 			EventHandler("animover", function(inst) inst.sg:GoToState("idle") end)
 		}
 	},
-	
+
 	State{
 		name = "woby_dig",
 		tags = {"busy"},
 
 		onenter = function(inst)
 			inst.Physics:Stop()
-			
+
             inst.AnimState:PlayAnimation("command")
 		end,
 
@@ -395,23 +395,23 @@ local states = {
 			TimeEvent(13*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/pupington/emote_scratch") end),
 			TimeEvent(35*FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/together/pupington/emote_scratch") end),
 			TimeEvent(9*FRAMES, function(inst)
-			
+
 				inst:PerformBufferedAction()
 				inst.sg:RemoveStateTag("busy")
-				
+
 				if inst.wobytarget ~= nil then
 					if inst.wobytarget:HasTag("stump") then
 						inst.components.hunger:DoDelta(-1)
 						inst.oldwobytarget = inst.wobytarget
 						inst.wobytarget = nil
-						
+
 						local x, y, z = inst.Transform:GetWorldPosition()
 						local ents = TheSim:FindEntities(x, y, z, 17, nil, { "INLIMBO", "NOCLICK" }, { "stump" })
 						for i, v in ipairs(ents) do
 							if inst.wobytarget ~= nil or inst.components.hunger:GetPercent() == 0 then
 								break
 							end
-							
+
 							if v ~= nil and v:IsValid() and not v:HasTag("INLIMBO") and inst.oldwobytarget ~= nil and inst.oldwobytarget:HasTag("stump") and v ~= inst.oldwobytarget then
 								inst.wobytarget = v
 								break
@@ -421,11 +421,11 @@ local states = {
 						inst.components.hunger:DoDelta(-1)
 						inst.oldwobytarget = nil
 						inst.wobytarget = nil
-						
+
 					end
-					
+
 				end
-				
+
                 if inst.brain ~= nil then
                     inst.brain:ForceUpdate()
                 end
@@ -439,7 +439,7 @@ local states = {
 			end)
 		}
 	},
-	
+
 	State{
         name = "bark_at",
         tags = { "busy", "canrotate" },
@@ -450,7 +450,7 @@ local states = {
 
         timeline=
         {
-            TimeEvent(6*FRAMES, function(inst) 
+            TimeEvent(6*FRAMES, function(inst)
 				inst.SoundEmitter:PlaySound("dontstarve/characters/walter/woby/big/bark")
 				inst:PerformBufferedAction()
 			end),
@@ -458,12 +458,12 @@ local states = {
 
         events=
         {
-            EventHandler("animover", function(inst) 
+            EventHandler("animover", function(inst)
 				inst.sg:GoToState("idle")
 			end),
         },
     },
-	
+
 	State{
         name = "bark_clearaction",
         tags = { "busy" },
@@ -474,7 +474,7 @@ local states = {
 
         timeline=
         {
-            TimeEvent(6*FRAMES, function(inst) 
+            TimeEvent(6*FRAMES, function(inst)
 				inst.SoundEmitter:PlaySound("dontstarve/characters/walter/woby/big/bark")
 				inst:ClearBufferedAction()
 				--inst.wobytarget = nil
