@@ -364,7 +364,12 @@ env.AddPrefabPostInit("crabking", function(inst)
 		"green",
 	}
 
-	inst:ListenForEvent("death", function(inst)
+    inst:ListenForEvent("death", function(inst)
+		if inst.long_cd ~= nil then
+            inst.long_cd:Cancel()
+			inst.long_cd = nil
+		end
+
 		if env.GetModConfigData("ck_loot") then
 			TheWorld.crabking_active = false
 
