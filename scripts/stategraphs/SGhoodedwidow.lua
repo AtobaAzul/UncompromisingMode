@@ -106,8 +106,8 @@ local states=
         tags = {"idle", "canrotate"},
         onenter = function(inst, playanim)
 			if inst.should_go_tired then
-				inst.sg:GoToState("tired")
 				inst.should_go_tired = false
+				inst.sg:GoToState("tired")
 			end
 		
             inst.Physics:Stop()

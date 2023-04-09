@@ -85,6 +85,4 @@ AddPlayerPostInit(function(inst)
         inst:WatchWorldState("israining", onisraining)
         onisraining(inst, GLOBAL.TheWorld.state.israining)
     end
-
-	inst:AddComponent("firerain")
 end)
