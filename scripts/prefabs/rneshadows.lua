@@ -74,7 +74,7 @@ end
 local function KeepTarget(inst, target)
 	local hat = target ~= nil and target.components.inventory ~= nil and target.components.inventory:GetEquippedItem(EQUIPSLOTS.HEAD) or nil
 
-    return target ~= nil and (target.LightWatcher:IsInLight() or hat ~= nil and hat:HasTag("nightvision"))
+    return target ~= nil and (target.LightWatcher ~= nil and target.LightWatcher:IsInLight() or hat ~= nil and hat:HasTag("nightvision"))
 end
   
 local function StopGrabbing(inst)
