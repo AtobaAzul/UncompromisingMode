@@ -150,7 +150,7 @@ local UMSS_TABLES =
 	},
 	badfarmerTable = {
 		name = "badfarmerTable",
-		content ={ 	{x = 0.88059997558594, z = -1.2109985351563, prefab = "farm_hoe", ocean = false},	{x = -1.4819946289063, z = -1.0400085449219, prefab = "skeleton", ocean = false},	{x = -0.072906494140625, z = -1.9795532226563, prefab = "devtestratwarning", ocean = false},	{x = -0.14500427246094, z = -5.302001953125, prefab = "slow_farmplot", ocean = false},	{x = -0.070999145507813, z = -5.6112670898438, prefab = "seeds_cooked", ocean = false},},
+		content ={ 	{x = 0.88059997558594, z = -1.2109985351563, prefab = "farm_hoe", ocean = false},	{x = -1.4819946289063, z = -1.0400085449219, prefab = "skeleton", ocean = false},	{x = -0.14500427246094, z = -5.302001953125, prefab = "slow_farmplot", ocean = false},	{x = -0.070999145507813, z = -5.6112670898438, prefab = "seeds_cooked", ocean = false},},
 	},
 	shyTable={
 		name="shyTable",rotate=true,tile_centered=true, spawninwater_prefabs = true, spawninwater_tiles = true,
