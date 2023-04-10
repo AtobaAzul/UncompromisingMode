@@ -1822,139 +1822,15 @@ local NOTAGS =
 	"smallcreature",
 	"_container",
 	"spore",
-	"NORATCHECK"
+	"NORATCHECK",
+	"_combat",
+	"_health",
+	"balloon",
+	"heavy",
+	"projectile",
+	"NORATCHECK",
+	"frozen"
 }
-
-local function SmellProtection(v, container)
-	local x, y, z = v.Transform:GetWorldPosition()
-	local flowers = #TheSim:FindEntities(x, y, z, 5, { "flower" })
-	local decoratedSisturn = FindEntity(v, 10,
-		function(inst)
-			return (inst.prefab == "sisturn" and (inst.components.container and inst.components.container:IsFull())
-			)
-		end)
-	local potted_ = TheSim:FindEntities(x, y, z, 6, { "cavedweller" })
-	local potted = 0      -- both potted plants have the cavedweller tag for some reason I have no idea
-	local forget_me_lots = 0 -- The end-all-beat-all, forget-me-lots's ability to make those who smell or eat them forgetful is the perfect insulator for rats
-	local item_forget_me_lots = TheSim:FindEntities(x, y, z, 3, { "vasedecoration" })
-	local mod = 1
-	local vases = TheSim:FindEntities(x, y, z, 10, { "vase" }) -- Best Range!
-
-	--- Forget-me-lots (and flowers)
-	for i, j in ipairs(vases) do
-		if j.prefab == "endtable" then
-			if j.flowerid == 1 or j.flowerid == 2 or j.flowerid == 3 or j.flowerid == 4 or j.flowerid == 6 or j.flowerid == 10 or
-				j.flowerid == 11 or j.flowerid == 12 or j.flowerid == 15 then --Moon tree blossoms might as well count towards flowers
-				flowers = flowers + 1
-			end
-			if j.flowerid == 13 or j.flowerid == 14 then
-				forget_me_lots = forget_me_lots + 1
-			end
-		end
-	end
-	for i, j in ipairs(item_forget_me_lots) do
-		if j.prefab == "forgetmelots" then
-			forget_me_lots = forget_me_lots + 1
-		end
-	end
-	--- Forget-me-lots
-
-	--- Potted
-	for i, j in ipairs(potted_) do
-		if j.prefab == "pottedfern" then
-			potted = potted + 1
-		end
-		if j.prefab == "succulent_potted" then
-			potted = potted + 1
-		end
-	end
-	--- Potted
-
-	if FindEntity(v, 8,
-			function(guy) if guy.components.bloomness and guy.components.bloomness.level and guy.components.bloomness.level > 2 then return true end end
-			, { "plantkin" }) ~= nil then
-		flowers = flowers + 10
-	end
-	if decoratedSisturn ~= nil then
-		flowers = 25
-	end
-	flowers = flowers / 50
-	--print(flowers)
-	potted = potted / 20
-	--print(potted)
-	forget_me_lots = forget_me_lots / 10
-	--print(forget_me_lots)
-
-	mod = 1 - flowers - potted - forget_me_lots
-
-	if mod < 0.5 then
-		mod = 0.5
-	end
-	--[[
-	local total_weighted_score = flowers + potted + 2 * forget_me_lots
-	if container ~= true then
-		-- There's not much we can do for things on the ground, not even forget-me-lots
-		if total_weighted_score > 0 then
-			mod = 0.8
-		end
-		if total_weighted_score > 3 then
-			mod = 0.7
-		end
-	else
-		if v:HasTag("stale") then
-			if total_weighted_score > 0 then
-				mod = 0.6
-			end
-			if total_weighted_score > 2 then
-				mod = 0.3
-			end
-			if total_weighted_score > 4 then
-				mod = 0 --Stale foods can actually reduce the mod to zero with just flowers and potted plants
-			end
-			if forget_me_lots > 0 then
-				mod = 0 -- But Forget-me-lots are better
-			end
-		end
-		if v:HasTag("spoiled") then
-			if total_weighted_score > 0 then
-				mod = 0.8
-			end
-			if total_weighted_score > 2 then
-				mod = 0.6
-			end
-			if total_weighted_score > 4 then
-				mod = 0.3 --Spoiled foods have been left for too long to fully negate without forget-me-lots
-			end
-			if forget_me_lots > 3 then --Forget-me-lots are capable of fully negating spoiled food issue if enough are used
-				mod = 0
-			end
-		end
-		if IsAVersionOfRot(v) then
-			if total_weighted_score > 0 then
-				mod = 0.9
-			end
-			if total_weighted_score > 2 then
-				mod = 0.8
-			end
-			if total_weighted_score > 4 then
-				mod = 0.7 --Rot is nearly hopeless to reduce all the way, not without strong forget-me-lots
-			end
-			if forget_me_lots > 3 then
-				mod = 0.7
-			end
-			if forget_me_lots > 5 then
-				mod = 0.5
-			end
-			if forget_me_lots > 10 then
-				mod = 0.3 -- This is as much as we can do... enough rot will eventually break through the guise of the forget-me-lots, with just 40 you'll end up with a decently large foodscore
-			end
-		end
-	end]]
-	if v.prefab == "forgetmelots" then --Forget-me-lots conceal themselves as long has they have not fully rotted!
-		mod = 0
-	end
-	return mod
-end
 
 local function FoodScoreCalculations(inst, container, v)
 	local delta = 0
@@ -1963,26 +1839,26 @@ local function FoodScoreCalculations(inst, container, v)
 
 	if container then
 		if v:HasTag("stale") and v.components.farmplantable == nil then
-			delta = ((2.5 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v, container)
+			delta = ((2.5 * inst.preparedmultiplier) * inst.multiplier)
 		end
 		if v:HasTag("spoiled") and v.components.farmplantable == nil then
-			delta = ((5 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v, container)
+			delta = ((5 * inst.preparedmultiplier) * inst.multiplier)
 		end
 		if IsAVersionOfRot(v) then
-			delta = ((5 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v, container)
+			delta = ((5 * inst.preparedmultiplier) * inst.multiplier)
 		end
 	else
 		if v:HasTag("fresh") and v.components.farmplantable == nil then
-			delta = ((5 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v, container)
+			delta = ((5 * inst.preparedmultiplier) * inst.multiplier)
 		end
 		if v:HasTag("stale") and v.components.farmplantable == nil then
-			delta = ((10 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v, container)
+			delta = ((10 * inst.preparedmultiplier) * inst.multiplier)
 		end
 		if v:HasTag("spoiled") and v.components.farmplantable == nil then
-			delta = ((15 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v, container)
+			delta = ((15 * inst.preparedmultiplier) * inst.multiplier)
 		end
 		if IsAVersionOfRot(v) then
-			delta = ((15 * inst.preparedmultiplier) * inst.multiplier) * SmellProtection(v, container)
+			delta = ((15 * inst.preparedmultiplier) * inst.multiplier)
 		end
 	end
 	inst.foodscore = inst.foodscore + delta
@@ -2003,73 +1879,40 @@ local function TimeForACheckUp(inst, dev)
 	inst.foodscore = 0
 	--print(#ents)
 
+	inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck:GetBurrows() or 0
+	inst.burrowbonus = 15 * inst.ratburrows
+	
 	if ents ~= nil then
 		for i, v in ipairs(ents) do
-			--if ShouldCountTowardsCheck(v) then
-			if v.components.inventoryitem:IsHeld() then
-				if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and
-					(
-					v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" or
-					v.components.inventoryitem:GetGrandOwner().prefab == "catcoon") then
-					--print("lureplant is holding!")
+			if (inst.ratscore + inst.itemscore + inst.foodscore + inst.burrowbonus) >= 240 then
+				if v.components.inventoryitem:IsHeld() then
+					if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and
+						(
+						v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" or
+						v.components.inventoryitem:GetGrandOwner().prefab == "catcoon") then
+						--print("lureplant is holding!")
+					else
+						if not (v:HasTag("frozen") or v:HasTag("NORATCHECK")) then
+							FoodScoreCalculations(inst, true, v)
+						end
+					end
 				else
 					if not (v:HasTag("frozen") or v:HasTag("NORATCHECK")) then
-						FoodScoreCalculations(inst, true, v)
+						FoodScoreCalculations(inst, false, v)
 					end
-				end
-			else
-				if not (v:HasTag("frozen") or v:HasTag("NORATCHECK")) then
-					FoodScoreCalculations(inst, false, v)
-				end
-
-				--[[
-					if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and (v.components.inventoryitem:GetGrandOwner():HasTag("_container") or v.components.inventoryitem:GetGrandOwner():HasTag("player")) then
-						print("uncheckable entity is holding!")
-					else
-						if not v:HasTag("frozen") then
-							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
-							inst.preparedmultiplier = v:HasTag("preparedfood") and 2 or 1
-
-							if v:HasTag("stale") then
-								inst.foodscore = inst.foodscore + ((2.5 * inst.preparedmultiplier) * inst.multiplier)
-							elseif v:HasTag("spoiled") then
-								inst.foodscore = inst.foodscore + ((5 * inst.preparedmultiplier) * inst.multiplier)
-							elseif IsAVersionOfRot(v) then
-								inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
-								inst.foodscore = inst.foodscore + ((5 * inst.preparedmultiplier) * inst.multiplier)
-							end
+					
+					if TUNING.DSTU.ITEMCHECK then
+						if (v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool")) then
+							inst.itemscore = inst.itemscore + 30 -- Oooh, wants wants! We steal!
+						elseif v:HasTag("molebait") then
+							inst.itemscore = inst.itemscore + 2 -- Oooh, wants wants! We steal!
 						end
-					end
-				else
-					if not v:HasTag("frozen") then
-						inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
-						inst.preparedmultiplier = v:HasTag("preparedfood") and 2 or 1
-
-						if v:HasTag("fresh") then
-							inst.foodscore = inst.foodscore + ((5 * inst.preparedmultiplier) * inst.multiplier)
-						elseif v:HasTag("stale") then
-							inst.foodscore = inst.foodscore + ((10 * inst.preparedmultiplier) * inst.multiplier)
-						elseif v:HasTag("spoiled") then
-							inst.foodscore = inst.foodscore + ((15 * inst.preparedmultiplier) * inst.multiplier)
-						elseif IsAVersionOfRot(v) then
-							inst.multiplier = v.components.stackable and v.components.stackable:StackSize() or 1
-							inst.foodscore = inst.foodscore + ((15 * inst.preparedmultiplier) * inst.multiplier)
-						end
-					end
-	]]
-				if not (v:HasTag("balloon") or v:HasTag("heavy") or v:HasTag("projectile") or v:HasTag("NORATCHECK")) and TUNING.DSTU.ITEMCHECK then
-					if (v:HasTag("_equippable") or v:HasTag("gem") or v:HasTag("tool")) then
-						inst.itemscore = inst.itemscore + 30 -- Oooh, wants wants! We steal!
-					elseif v:HasTag("molebait") then
-						inst.itemscore = inst.itemscore + 2 -- Oooh, wants wants! We steal!
 					end
 				end
 			end
 		end
 	end
 
-	inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck:GetBurrows() or 0
-	inst.burrowbonus = 15 * inst.ratburrows
 
 
 	inst.ratscore = inst.ratscore + inst.itemscore + inst.foodscore + inst.burrowbonus
@@ -2098,31 +1941,17 @@ local function TimeForACheckUp(inst, dev)
 			"... not available? timer is 0 second") .. "s")
 		TheNet:SystemMessage("-------------------------")
 	end
-	TheWorld:PushEvent("reducerattimer", { value = inst.ratscore })
+	
+	if not dev then
+		TheWorld:PushEvent("reducerattimer", { value = inst.ratscore })
 
 
-	inst.ratwarning = inst.ratscore / 48
+		inst.ratwarning = inst.ratscore / 48
 
 
-	--[[
-		for c = 1, (inst.ratwarning) do
-			inst:DoTaskInTime((c/4), function(inst)
-				local warning = SpawnPrefab("uncompromising_ratwarning")
-				warning.Transform:SetPosition(inst.Transform:GetWorldPosition())
-				--warning.entity:SetParent(b)
-				--b.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
-				--warning.entity:SetParent(TheFocalPoint.b.entity)
-			end)
-		end
-	end]]
-	if inst.ratscore >= 60 then
-		if math.random() > 0.85 then
-			if inst.ratwarning > 5 then
-				inst.ratwarning = 5
-			end
-
+		--[[
 			for c = 1, (inst.ratwarning) do
-				inst:DoTaskInTime((c / 5), function(inst)
+				inst:DoTaskInTime((c/4), function(inst)
 					local warning = SpawnPrefab("uncompromising_ratwarning")
 					warning.Transform:SetPosition(inst.Transform:GetWorldPosition())
 					--warning.entity:SetParent(b)
@@ -2130,22 +1959,39 @@ local function TimeForACheckUp(inst, dev)
 					--warning.entity:SetParent(TheFocalPoint.b.entity)
 				end)
 			end
+		end]]
+		if inst.ratscore >= 60 then
+			if math.random() > 0.85 then
+				if inst.ratwarning > 5 then
+					inst.ratwarning = 5
+				end
 
-			local players = TheSim:FindEntities(x, y, z, 40, { "player" }, { "playerghost" })
-			for a, b in ipairs(players) do
-				if math.random() > 0.5 then
-					if inst.burrowbonus > inst.itemscore and inst.burrowbonus > inst.foodscore then
-						b:DoTaskInTime(2 + math.random(), function(b)
-							b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_BURROWS", "LEVEL_1"))
-						end)
-					elseif inst.itemscore > inst.burrowbonus and inst.itemscore > inst.foodscore then
-						b:DoTaskInTime(2 + math.random(), function(b)
-							b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_ITEMS", "LEVEL_1"))
-						end)
-					elseif inst.foodscore > inst.burrowbonus and inst.foodscore > inst.itemscore then
-						b:DoTaskInTime(2 + math.random(), function(b)
-							b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_FOOD", "LEVEL_1"))
-						end)
+				for c = 1, (inst.ratwarning) do
+					inst:DoTaskInTime((c / 5), function(inst)
+						local warning = SpawnPrefab("uncompromising_ratwarning")
+						warning.Transform:SetPosition(inst.Transform:GetWorldPosition())
+						--warning.entity:SetParent(b)
+						--b.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
+						--warning.entity:SetParent(TheFocalPoint.b.entity)
+					end)
+				end
+
+				local players = TheSim:FindEntities(x, y, z, 40, { "player" }, { "playerghost" })
+				for a, b in ipairs(players) do
+					if math.random() > 0.5 then
+						if inst.burrowbonus > inst.itemscore and inst.burrowbonus > inst.foodscore then
+							b:DoTaskInTime(2 + math.random(), function(b)
+								b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_BURROWS", "LEVEL_1"))
+							end)
+						elseif inst.itemscore > inst.burrowbonus and inst.itemscore > inst.foodscore then
+							b:DoTaskInTime(2 + math.random(), function(b)
+								b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_ITEMS", "LEVEL_1"))
+							end)
+						elseif inst.foodscore > inst.burrowbonus and inst.foodscore > inst.itemscore then
+							b:DoTaskInTime(2 + math.random(), function(b)
+								b.components.talker:Say(GetString(b, "ANNOUNCE_RATSNIFFER_FOOD", "LEVEL_1"))
+							end)
+						end
 					end
 				end
 			end
@@ -2257,28 +2103,6 @@ local function fn_warning()
 	return inst
 end
 
-local function fn_devwarning()
-	local inst = CreateEntity()
-
-	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
-	inst.entity:AddNetwork()
-
-	inst:AddTag("rat_sniffer")
-	inst:AddTag("NOBLOCK")
-
-	inst.entity:SetPristine()
-
-	if not TheWorld.ismastersim then
-		return inst
-	end
-
-	inst:DoTaskInTime(5, function(inst) TimeForACheckUp(inst, true) end)
-
-	return inst
-end
-
 return Prefab("uncompromising_rat", fn, assets, prefabs),
 	Prefab("uncompromising_junkrat", junkfn),
 	Prefab("uncompromising_packrat", packfn, assets, prefabs),
@@ -2289,5 +2113,4 @@ return Prefab("uncompromising_rat", fn, assets, prefabs),
 	Prefab("uncompromising_scoutburrow", fn_scoutburrow, assets, prefabs),
 	Prefab("uncompromising_ratsniffer", fn_sniffer, assets, prefabs),
 	Prefab("ratdroppings", fn_droppings, assets),
-	Prefab("uncompromising_ratwarning", fn_warning),
-	Prefab("devtestratwarning", fn_devwarning)
+	Prefab("uncompromising_ratwarning", fn_warning)
