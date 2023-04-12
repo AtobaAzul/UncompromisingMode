@@ -1884,7 +1884,7 @@ local function TimeForACheckUp(inst, dev)
 	
 	if ents ~= nil then
 		for i, v in ipairs(ents) do
-			if (inst.ratscore + inst.itemscore + inst.foodscore + inst.burrowbonus) >= 240 then
+			if (inst.ratscore + inst.itemscore + inst.foodscore + inst.burrowbonus) < 240 then
 				if v.components.inventoryitem:IsHeld() then
 					if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and
 						(
