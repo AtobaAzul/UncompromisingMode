@@ -371,7 +371,7 @@ return {
 	"um_halloween_ornaments",
 	"trinket_wathom1",
 
-	"uncompromising_skins",
+	--"uncompromising_skins",
 
 	"codex_mantra",
 
