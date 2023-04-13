@@ -366,6 +366,15 @@ local function onnear(inst, target)
 	end
 end
 
+local function OnEntitySleep(inst)
+	local herdmemb = inst.components.herdmember
+	if herdmemb ~= nil and herdmemb.herd ~= nil and herdmemb.herd:IsValid() and not (inst.components.follower ~= nil and inst.components.follower.leader ~= nil) then
+		local x, y, z = herdmemb.herd.Transform:GetWorldPosition()
+		inst.Physics:Teleport(x, 0, z)
+	end
+end
+
+
 local function fn()
 	local inst = CreateEntity()
 
@@ -397,7 +406,7 @@ local function fn()
 	inst:AddTag("NOBLOCK")
 	--mainly for winky, too lazy to make it for only allied rats.
 
-	inst.entity:SetCanSleep(false)
+	--inst.entity:SetCanSleep(false)
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
@@ -558,6 +567,8 @@ local function fn()
 
 	inst.OnSave = onsave_rat
 	inst.OnLoad = onload_rat
+	
+	inst.OnEntitySleep = OnEntitySleep
 
 	return inst
 end
@@ -834,7 +845,7 @@ local function packfn()
 	inst:AddTag("catfood")
 	inst:AddTag("cookable")
 
-	inst.entity:SetCanSleep(false)
+	--inst.entity:SetCanSleep(false)
 	inst.entity:SetPristine()
 
 	if not TheWorld.ismastersim then
@@ -972,6 +983,8 @@ local function packfn()
 
 	inst.OnSave = onsave_rat
 	inst.OnLoad = onload_rat
+	
+	inst.OnEntitySleep = OnEntitySleep
 
 	return inst
 end
@@ -1226,7 +1239,7 @@ local function EndRaid(inst)
 	inst.components.trader.onaccept = OnGetItemFromPlayer
 	inst.components.trader.onrefuse = OnRefuseItem
 
-	inst.entity:SetCanSleep(false)
+	--inst.entity:SetCanSleep(false)
 
 	inst.raiding = false
 
@@ -2003,8 +2016,6 @@ local function fn_sniffer()
 	local inst = CreateEntity()
 
 	inst.entity:AddTransform()
-	inst.entity:AddAnimState()
-	inst.entity:AddSoundEmitter()
 	inst.entity:AddNetwork()
 
 	inst:AddTag("rat_sniffer")

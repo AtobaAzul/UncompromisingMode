@@ -377,11 +377,11 @@ end
 if GetModConfigData("amalgams") then
 	table.insert(prefab_post, "chessjunk")
 end
-
+--[[
 if GetModConfigData("moon_transformations") then
 	table.insert(prefab_post, "flower")
 end
-
+]]
 if GetModConfigData("electricalmishap_") ~= 0 then
 	table.insert(prefab_post, "nightstick")
 end
