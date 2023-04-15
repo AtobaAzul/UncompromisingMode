@@ -226,11 +226,25 @@ local function OnLoad_low(inst, data, ents)
 end
 
 
+local function SetupOnBurnt(inst)
+    if inst.components.burnable ~= nil then
+        local _OnBurnt = inst.components.burnable.onburnt
+
+        inst.components.burnable.onburnt = function(inst)
+            inst:RemoveComponent("portablestructure")
+            if _OnBurnt ~= nil then
+                _OnBurnt(inst)
+            end
+        end
+    end
+end
+
 env.AddPrefabPostInit("winona_catapult", function(inst)
     if not TheWorld.ismastersim then
         return
     end
 
+    SetupOnBurnt(inst)
     inst:AddComponent("portablestructure")
     inst.components.portablestructure:SetOnDismantleFn(OnDismantle_catapult)
 end)
@@ -240,6 +254,7 @@ env.AddPrefabPostInit("winona_spotlight", function(inst)
         return
     end
 
+    SetupOnBurnt(inst)
     inst:AddComponent("portablestructure")
     inst.components.portablestructure:SetOnDismantleFn(OnDismantle_spotlight)
 end)
@@ -251,6 +266,7 @@ env.AddPrefabPostInit("winona_battery_low", function(inst)
 
     inst.OnLoad = OnLoad_low
 
+    SetupOnBurnt(inst)
     inst:AddComponent("portablestructure")
     inst.components.portablestructure:SetOnDismantleFn(OnDismantle_low)
 end)
@@ -263,6 +279,7 @@ env.AddPrefabPostInit("winona_battery_high", function(inst)
 
     inst.OnLoad = OnLoad_high
 
+    SetupOnBurnt(inst)
     inst:AddComponent("portablestructure")
     inst.components.portablestructure:SetOnDismantleFn(OnDismantle_high)
 end)
