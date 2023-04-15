@@ -102,6 +102,7 @@ local function grass(name, stage)
         inst.AnimState:PlayAnimation("idle", true)
 
         inst:AddTag("plant")
+        inst:AddTag("lunarplant_target")
         inst:AddTag("renewable")
         inst:AddTag("trapdoorgrass")
 

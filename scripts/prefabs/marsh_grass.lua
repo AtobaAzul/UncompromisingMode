@@ -16,6 +16,9 @@ local function fn(Sim)
     inst.entity:AddDynamicShadow()
     inst.entity:AddNetwork()
 	
+	inst:AddTag("plant")
+	inst:AddTag("lunarplant_target")
+		
     inst.AnimState:SetBuild("bush_marsh")    
     inst.AnimState:SetBank("bank_a26ad8bb")
     inst.AnimState:PlayAnimation("idle_loop", true)

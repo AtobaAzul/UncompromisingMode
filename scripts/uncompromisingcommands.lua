@@ -157,3 +157,32 @@ function c_setadrenaline(p)
         player.components.adrenaline:SetPercent(p)
     end
 end
+
+
+local function CountLocalPrefabs(prefab, pos)
+	local ents = TheSim:FindEntities(pos.x, 0, pos.z, 50)
+    local count = 0
+	
+    for k,v in pairs(ents) do
+        if v ~= nil and v.prefab ~= nil and v.prefab == prefab then
+            count = count + 1
+        end
+    end
+	
+	print("There are ", count, prefab.."s in this vicinity.")
+end
+
+function c_um_findents()
+    local pos = ConsoleWorldPosition()
+	local ents = TheSim:FindEntities(pos.x, 0, pos.z, 50)
+	local alreadycounted_ents = {}
+	
+	for i, v in ipairs(ents) do
+		local count = 0
+	
+		if v ~= nil and v.prefab ~= nil and not table.contains(alreadycounted_ents, v.prefab) then
+			table.insert(alreadycounted_ents, v.prefab)
+			CountLocalPrefabs(v.prefab, pos)
+		end
+	end
+end
