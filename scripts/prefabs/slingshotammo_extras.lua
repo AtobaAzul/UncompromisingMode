@@ -72,6 +72,10 @@ local function DealDamage(inst, attacker, target, salty)
 			target.components.health:DoDelta(-inst.finaldamage, false, inst, false, attacker, false)
 		end
 
+		if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
+			target.components.sleeper:WakeUp()
+		end
+		
 		if target.components.combat ~= nil then
 			target.components.combat:RemoveShouldAvoidAggro(attacker)
 		end
@@ -193,6 +197,10 @@ local function DoPop(inst, remaining, total, level, hissvol)
 							v.components.combat:SetTarget(inst.attacker or nil)
 							v.components.combat:RemoveShouldAvoidAggro(inst.attacker)
 						end
+					end
+					
+					if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
+						v.components.sleeper:WakeUp()
 					end
 				end
 			end
@@ -1117,6 +1125,10 @@ local function GlassCut(inst)
 						v.components.health:DoDelta(-((7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)), false, inst, false, attacker, false)
 					end
 
+					if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
+						v.components.sleeper:WakeUp()
+					end
+
 					if v.components.combat ~= nil then
 						v.components.combat:RemoveShouldAvoidAggro(attacker)
 					end
@@ -1168,6 +1180,10 @@ local function GlassCut(inst)
 						end
 
 						v.components.health:DoDelta(-((7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)), false, inst, false, attacker, false)
+					end
+
+					if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
+						v.components.sleeper:WakeUp()
 					end
 
 					if v.components.combat ~= nil then
@@ -1653,6 +1669,10 @@ local function Rebound(inst, attacker, target)
 
 			target.components.combat:GetAttacked(inst, 10, inst)
 
+			if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
+				target.components.sleeper:WakeUp()
+			end
+					
 			if target.components.combat ~= nil then
 				target.components.combat:RemoveShouldAvoidAggro(attacker)
 			end
@@ -2002,6 +2022,10 @@ local function Tremor(inst)
 					end
 
 					v.components.combat:GetAttacked(inst.attacker, inst.finaldamage, inst)
+
+					if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
+						target.components.sleeper:WakeUp()
+					end
 
 					if v.components.combat ~= nil then
 						v.components.combat:RemoveShouldAvoidAggro(inst.attacker)

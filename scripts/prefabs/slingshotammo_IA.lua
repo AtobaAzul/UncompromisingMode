@@ -72,6 +72,10 @@ local function DealDamage(inst, attacker, target, salty)
 			
 			target.components.health:DoDelta(-inst.finaldamage, false, inst, false, attacker, false)
 		end
+
+		if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
+			target.components.sleeper:WakeUp()
+		end
 		
 		if target.components.combat ~= nil then
 			target.components.combat.temp_disable_aggro = false
@@ -315,7 +319,11 @@ local function DoAreaBurn(inst)
     for i, v in ipairs(ents) do
         if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
             if inst.components.propagator ~= nil and v.components.combat ~= nil and v.components.health ~= nil and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
-                v.components.health:DoDelta(-8)
+				if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
+					v.components.sleeper:WakeUp()
+				end
+
+				v.components.health:DoDelta(-8)
                 SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(v.Transform:GetWorldPosition())
 
                 --v:PushEvent("onignite")

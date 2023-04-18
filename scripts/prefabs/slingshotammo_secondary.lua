@@ -71,6 +71,10 @@ local function OnAttack(inst, attacker, target)
 		
 		ImpactFx(inst, attacker, target)
 		
+		if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
+			target.components.sleeper:WakeUp()
+		end
+
 		if target.components.combat ~= nil then
 			target.components.combat:RemoveShouldAvoidAggro(attacker)
 		end
@@ -430,6 +434,10 @@ local function OnHit_Gold(inst, attacker, target)
 						end
 						
 						v.components.combat:GetAttacked(attacker, damage, inst)
+		
+						if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
+							v.components.sleeper:WakeUp()
+						end
 						
 						if v.components.combat ~= nil then
 							v.components.combat:RemoveShouldAvoidAggro(attacker)

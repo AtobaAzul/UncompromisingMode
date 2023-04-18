@@ -123,13 +123,15 @@ if not GLOBAL:TestForIA() then
                 return _SummonSpawn(pt)
             else
                 local spawn = GLOBAL.SpawnPrefab(prefab)
-                if spawn then
+                if spawn and spawn_pt ~= nil then
                     spawn.Physics:Teleport(spawn_pt:Get())
                     spawn:FacePoint(pt)
                     if spawn.components.spawnfader then
                         spawn.components.spawnfader:FadeIn()
                     end
                     return spawn
+				else
+					return _SummonSpawn(pt)
                 end
             end
         end
@@ -165,6 +167,11 @@ if not GLOBAL:TestForIA() then
                 print("cd boss")
 
             end
+
+            print(GLOBAL.TheWorld.state.cycles)
+            print(self.varggraceperiod)
+            print(TUNING.DSTU.VARGWAVES_DELAY_PERIOD)
+            print(self.varggraceperiod ~= nil and self.varggraceperiod + TUNING.DSTU.VARGWAVES_DELAY_PERIOD or "nil")
 
             --replaces the first hound in a wave with a random boss hound
             if pt and self.spawn_boss and magmaspawn_pt ~= nil and TUNING.DSTU.VARGWAVES then

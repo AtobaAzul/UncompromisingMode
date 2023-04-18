@@ -11,7 +11,7 @@ GLOBAL.GetDescription = function(inst, item, ...)
 
 	local ret = _GetDescription(inst, item, ...)
 
-	if inst ~= nil and inst:IsValid() and not inst:HasTag("playerghost") then
+	if inst ~= nil and inst.entity ~= nil and not inst:HasTag("playerghost") then
 
 		local prefab = item and item.prefab
 		if prefab and item and item:HasTag("antihistamine") and character ~= nil and character ~= "WES" then

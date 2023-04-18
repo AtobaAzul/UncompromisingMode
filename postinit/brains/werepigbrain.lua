@@ -7,7 +7,7 @@ local MAX_CHASE_DIST = 30
 local function WerepigIgnoreFood(self)
     local attack_instead_eat = ChaseAndAttack(self.inst, SpringCombatMod(MAX_CHASE_TIME),SpringCombatMod(MAX_CHASE_DIST))
 
-    table.insert(self.bt.root.children, 3, attack_instead_eat)
+    table.insert(self.bt.root.children, 2, attack_instead_eat)
 end
 
 env.AddBrainPostInit("werepigbrain", WerepigIgnoreFood)

@@ -1080,16 +1080,15 @@ if GetModConfigData("wixie_walter") then
     AddPrefabPostInit("forest", function(inst)
         print("doing IA recipes")
         inst:DoTaskInTime(0, function(inst)
-            if Prefabs["tar"] then
+			if GLOBAL.TheWorld:HasTag("island") then
                 print("using tar")
                 AllRecipes["slingshotammo_tar"].ingredients = { Ingredient("tar", 1) }
-            elseif Prefabs["sludge"] then
+                AllRecipes["slingshotammo_obsidian"].ingredients = { Ingredient("obsidian", 1) }
+            elseif Prefabs["obsidian"] then
+                AllRecipes["slingshotammo_obsidian"].ingredients = { Ingredient("obsidian", 1) }
+            else
                 print("using sludge")
                 AllRecipes["slingshotammo_tar"].ingredients = { Ingredient("sludge", 1) }
-            end
-
-            if Prefabs["obsidian"] then
-                AllRecipes["slingshotammo_obsidian"].ingredients = { Ingredient("obsidian", 1) }
             end
         end)
     end)
