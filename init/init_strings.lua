@@ -20,18 +20,14 @@ STRINGS.SPELLS.SHADOW_MIMIC = "Shadow Mimic"
 
 STRINGS.NAMES.WINKY = "Winky"
 STRINGS.CHARACTER_TITLES.winky = "The Vile Vermin"
-STRINGS.CHARACTER_NAMES.winky = "winky"
+STRINGS.CHARACTER_NAMES.winky = "Winky"
 STRINGS.CHARACTER_DESCRIPTIONS.winky = "*Is a Rat\n*Can dig interconnected burrows\n*'Is weak, but fast'\n*Can eat horrible foods\n*Hates to lose hold of things"
 STRINGS.CHARACTER_QUOTES.winky = "\"Squeak!\""
 
-STRINGS.CHARACTER_NAMES.wixie = "Wixie"
-STRINGS.CHARACTER_TITLES.wixie = "The Delinquent"
-STRINGS.CHARACTER_DESCRIPTIONS.wixie = "*Good with a slingshot\n*Has a mighty shove\n*Is Claustrophobic"
-STRINGS.CHARACTER_QUOTES.wixie = "\"It wasn't me!\""
+STRINGS.SKIN_NAMES.winky_none = "Winky"
 
-if GetModConfigData("wixie_walter") then
-	STRINGS.CHARACTER_DESCRIPTIONS.walter = "*Not afraid of anything, except getting hurt \n*Is a master of survival tactics \n*Has a four-legged friend \n*Is an expert dog trainer \n*Hates to see innocent animals get hurt"
-end
+STRINGS.SKIN_QUOTES.winky_none = "\"Squeak!\""
+STRINGS.SKIN_DESCRIPTIONS.winky_none = "She's a fan of shiny things."
 
 STRINGS.ACTIONS.CREATE_BURROW = "Make Burrow"
 STRINGS.ACTIONS.ACTIVATE.RECRUITRAT = "Recruit A Rat"
@@ -51,7 +47,7 @@ STRINGS.ACTIONS.CASTSPELL.CHARLES_CHARGE = "Charge!"
 STRINGS.ACTIONS.CASTSPELL.SLINGSHOT = "Shoot"
 
 
-
+STRINGS.PIG_REMEMBER_THREAT = { "REMEMBER YOU!", "YOU HURT US!", "YOU MEAN!" }
 STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON = { "NO SMASH HOUSES", "US WATCHING YOU", "BE GOOD HERE", "WATCHING YOU" }
 STRINGS.PIG_GUARD_PIGKING_TALK_LOOKATWILSON_NIGHT = { "KING SLEEPING, YOU GO NOW", "YOU LEAVE NOW",
 	"STAY AND WE GET MEAN", "KING NEED SLEEP, GO AWAY" }

@@ -1,13 +1,26 @@
 local require = GLOBAL.require
 
-GLOBAL.STRINGS.CHARACTERS.WIXIE = require "speech_wixie"
+STRINGS = GLOBAL.STRINGS
+STRINGS.CHARACTERS.WIXIE = require "speech_wixie"
+ANNOUNCE = STRINGS.CHARACTERS.WIXIE
+DESCRIBE = STRINGS.CHARACTERS.WIXIE.DESCRIBE
+ACTIONFAIL = STRINGS.CHARACTERS.WIXIE.ACTIONFAIL
 
-ANNOUNCE = GLOBAL.STRINGS.CHARACTERS.WIXIE
-DESCRIBE = GLOBAL.STRINGS.CHARACTERS.WIXIE.DESCRIBE
-ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WIXIE.ACTIONFAIL
-
-GLOBAL.STRINGS.NAMES.WIXIE = "Wixie"
+STRINGS.NAMES.WIXIE = "Wixie"
+STRINGS.CHARACTER_TITLES.wixie = "The Delinquent"
 STRINGS.CHARACTER_NAMES.wixie = "Wixie"
+STRINGS.CHARACTER_DESCRIPTIONS.wixie = "*Good with a slingshot\n*Has a mighty shove\n*Is Claustrophobic"
+STRINGS.CHARACTER_QUOTES.wixie = "\"It wasn't me!\""
+
+STRINGS.SKIN_NAMES.wixie_none = "Wixie"
+
+STRINGS.SKIN_QUOTES.wixie_none = "\"It wasn't me!\""
+STRINGS.SKIN_DESCRIPTIONS.wixie_none = "A troubled youth that gets up to trouble."
+
+
+if GetModConfigData("wixie_walter") then
+	STRINGS.CHARACTER_DESCRIPTIONS.walter = "*Not afraid of anything, except getting hurt \n*Is a master of survival tactics \n*Has a four-legged friend \n*Is an expert dog trainer \n*Hates to see innocent animals get hurt"
+end
 
 --	[ 		Wixie Descriptions		]	--
 
@@ -19,11 +32,11 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 		"Me and you versus the world, Charles!",
 		"Yee-haw!",
 	} -- Despite how cruel she can be, shes still a kid at the end of the day :)
-	
+
 	ANNOUNCE.SHOVE_TARGET_TOO_FAT = "This guy is too fat to be pushed around!"
 	ANNOUNCE.UNCOMFORTABLE_HAT = "This hat is making me uncomfortable..."
 	ANNOUNCE.UNCOMFORTABLE_ARMOR = "This armor is making me uncomfortable..."
-	
+
 	ANNOUNCE.DREADEYE_SPOOKED = "Hey! Get back here and let me hit you!"
     ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Are you reading this? Then let us know! Because it NO?"
     ANNOUNCE.ANNOUNCE_WINONAGEN = "Mom told me never to play with electricity!"
@@ -51,14 +64,14 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "Now I just have a headache..."
 	DESCRIBE.CALIFORNIAKING = "I don't think I'm old enough to drink this."
 	--CaliforniaKing
-	
+
 	ANNOUNCE.ANNOUNCE_RNEFOG = "Whose out there? Show yourself!"
     DESCRIBE.UNCOMPROMISING_RAT = "Begone, you mangey thing!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "Even if we fill it in, they will find another way."
     DESCRIBE.UNCOMPROMISING_RATBURROW = "Even if we fill it in, they will find another way."
     DESCRIBE.UNCOMPROMISING_WINKYBURROW = "What treasures lie within? We may never know..."
     DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Not sure I want anything from a hole like that."
-	
+
 	DESCRIBE.WINKY =
         {
             GENERIC = "Go bother someone else, pea brain!",
@@ -68,7 +81,7 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
             GHOST = "I wonder if any rats are haunting my house?",
             FIRESTARTER = "Fire?! Couldn't you just chew on some furniture or something, %s?",
         }
-		
+
 	DESCRIBE.WATHOM =
         {
             GENERIC = "Should I speak slowly, %s?",
@@ -78,7 +91,7 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
             GHOST = "What a weird... ghost? How can there be a WEIRD ghost?!",
             FIRESTARTER = "Most beasts don't resort to burning stuff.",
         }
-		
+
     DESCRIBE.RATPOISONBOTTLE = "Troubles a' brewing!"
     DESCRIBE.RATPOISON = "It seems a cruel, but those jerks need to be taken care of!"
 
@@ -91,7 +104,7 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "You can smell it from a mile away!"
     DESCRIBE.TOADLING = "I can see the slime dripping off of it. Gross!"
-	
+
     DESCRIBE.GASMASK = "It smells in here! I don't wanna wear it!"
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
 	DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
@@ -111,7 +124,7 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
         "DADS GONE AWAY, SO WE ALL PRAY",
         "WIXIES ALL ALONE, SULKING IN HER HOME",
     }
-	
+
 	DESCRIBE.UM_BEAR_TRAP = "Just like grans dentures!"
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Old and flakey, just like gran."
 	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "Get em, sharky!"
@@ -125,7 +138,7 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	DESCRIBE.SANDHILL = "It gets everywhere."
 	DESCRIBE.SNOWPILE = "Schools out forever!"
 	DESCRIBE.SNOWGOGGLES = "Snow in my eyes? Snow-way!"
-	
+
 	DESCRIBE.SNOWMONG = "Hurry up and melt, 'Frosty'!"
 	DESCRIBE.SHOCKWORM = "I wish 'I' had scary looking frills..."
 	DESCRIBE.ZASPBERRY = "People hate it when I make that noise!"
@@ -139,7 +152,7 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	DESCRIBE.PLAGUEMASK = "Now I can look like a dumb bird. Yay."
 	DESCRIBE.SPIDER_TRAPDOOR = "You MUST be living under a rock if you're facing ME!"
 	DESCRIBE.TRAPDOOR = "I bet I could skip this rock if I tried hard enough."
-	DESCRIBE.HOODEDTRAPDOOR = DESCRIBE.TRAPDOOR 
+	DESCRIBE.HOODEDTRAPDOOR = DESCRIBE.TRAPDOOR
 	DESCRIBE.WICKER_TENTACLE = "It's some kind of gross severed limb!"
 	DESCRIBE.HONEY_LOG = "You... TWIG HEAD! THAT WAS MY HONEY!!"
 
@@ -150,18 +163,18 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	DESCRIBE.AIR_CONDITIONER = "It doesn't cool me off... and it smells!"
 	DESCRIBE.SPOREPACK = "It better not give me a rash."
 	DESCRIBE.SALTPACK = "Salt your sidewalks, or else!"
-	
+
 	DESCRIBE.UM_SCORPION = "What are YOU smiling at?!"
 	DESCRIBE.SCORPIONCARAPACE = "Is it... edible?"
 	DESCRIBE.SCORPIONCARAPACECOOKED = "Did that improve it? Only one way to find out..."
 	DESCRIBE.HARDSHELLTACOS = "Ah, street food! How I missed you..."
-	
+
 	DESCRIBE.SKELETONMEAT = "I've read enough horror stories to know this is a BAD idea."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = ""
 	DESCRIBE.VAMPIREBAT = "I vaaant you to gooo avaaay!"
 	DESCRIBE.LUREPLAGUE_RAT = "Gah! What the heck is that?!"
-				
+
 	--Swampyness
 	DESCRIBE.RICEPLANT = "That's boring food!"
 	DESCRIBE.RICE = "It's... moving?"
@@ -169,7 +182,7 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	DESCRIBE.SEAFOODPAELLA = "The fish has made the rice less boring!"
 	DESCRIBE.LICELOAF = "I could build a little house with a couple of these!"
 	DESCRIBE.SUNGLASSES = "They make me look cool!"
-	
+
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "It's better off broken, but I COULD repair it with some moon rocks."
 	DESCRIBE.SLINGSHOTAMMO_FIRECRACKERS = DESCRIBE.FIRECRACKERS
@@ -185,7 +198,7 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
     DESCRIBE.SHADOW_CROWN = "Fit for a queen, or even better, me!"
     DESCRIBE.RNEGHOST = DESCRIBE.GHOST
 	DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
-	DESCRIBE.MARSH_GRASS = "You're useless!"	
+	DESCRIBE.MARSH_GRASS = "You're useless!"
 	DESCRIBE.CURSED_ANTLER = "A trophy of my conquest!"
 	DESCRIBE.BERNIEBOX = "The writing is all gibberish!"
 	DESCRIBE.HOODED_FERN = "That's horse food, not people food!"
@@ -221,20 +234,20 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.WATERMELON_LANTERN = "I've learned to be resourceful."
-	
+
 		--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "Quit lurking, creep!"
 	DESCRIBE.VIPERFRUIT = "It's probably poisonous."
 	DESCRIBE.VIPERJAM = "But no bread to spread on..."
-	
-	
-	DESCRIBE.BLUEBERRYPLANT =         
+
+
+	DESCRIBE.BLUEBERRYPLANT =
 		{
             READY = "Mmmm! Don't mind if I do!",
 			FROZE = "Aw man! It's stuck in there!",
 			REGROWING = "That was fun!",
 		}
-		
+
 	DESCRIBE.ANTIHISTAMINE = "\"Snot nosed\"?! I'll show them!"
     ANNOUNCE.CURSED_ITEM_EQUIP = "ACK! My hand! Who dares?"
 	DESCRIBE.VETSITEM = "I don't let peer pressure get to me!"
@@ -248,8 +261,8 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	DESCRIBE.RNESKELETON = "I'm about to rattle your bones!"
 	DESCRIBE.RAT_WHIP = "This is gonna sting!"
 	DESCRIBE.KLAUS_AMULET = "I think... this is useless to me."
-	DESCRIBE.CRABCLAW = "The more gems you put, the heavier the 'clonk'!" 
-	DESCRIBE.HAT_RATMASK = "Think like a rat, smell like a rat, BE the rat!" 
+	DESCRIBE.CRABCLAW = "The more gems you put, the heavier the 'clonk'!"
+	DESCRIBE.HAT_RATMASK = "Think like a rat, smell like a rat, BE the rat!"
 
 	DESCRIBE.ORANGE_VOMIT = "Don't make me touch it!"
 	DESCRIBE.GREEN_VOMIT = "Don't make me touch it!"
@@ -258,26 +271,26 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	DESCRIBE.YELLOW_VOMIT = "Don't make me touch it!"
 	DESCRIBE.PURPLE_VOMIT = "Don't make me touch it!"
 	DESCRIBE.PALE_VOMIT = "Don't make me touch it!"
-	
+
 	DESCRIBE.WALRUS_CAMP_EMPTY = DESCRIBE.WALRUS_CAMP.EMPTY
-	DESCRIBE.PIGKING_PIGGUARD = 
+	DESCRIBE.PIGKING_PIGGUARD =
 	{
 	GUARD = DESCRIBE.PIGMAN.GUARD,
 	WEREPIG = DESCRIBE.PIGMAN.WEREPIG,
 	}
-	
+
 	DESCRIBE.BIGHT = "Gross! It's some weird horse hybrid..."
 	DESCRIBE.KNOOK = "Hey! Leave that horse alone!"
 	DESCRIBE.ROSHIP = "Tangled and mangled."
-	
+
 	DESCRIBE.UM_PAWN = "I want to knock it over!"
 	DESCRIBE.UM_PAWN_NIGHTMARE = "It looks... unstable."
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
 	DESCRIBE.CAVE_EXIT_SUNKDECID= DESCRIBE.CAVE_EXIT
-	
-	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH		
+
+	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH
 	-- Blowgun stuff
 	DESCRIBE.UNCOMPROMISING_BLOWGUN = DESCRIBE.BLOWDART_PIPE
 	DESCRIBE.BLOWGUNAMMO_TOOTH = DESCRIBE.BLOWDART_PIPE
@@ -286,13 +299,13 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
 	DESCRIBE.CORNCAN = "Kick the can!"
 	DESCRIBE.SKULLCHEST_CHILD = "I think there is supposed to be another one."
-	
+
 	DESCRIBE.ANCIENT_AMULET_RED = "I'd like to keep my soul to myself."
 	DESCRIBE.SLOBBERLOBBER = "Hahaha! I love this thing!"
 	DESCRIBE.GORE_HORN_HAT = "Steer clear, jerk-wads!"
 	DESCRIBE.BEARGERCLAW = "I'm diggin this!"
 	DESCRIBE.FEATHER_FROCK = "No way I'm flying in this thing."
-	
+
 	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nI didn't mean to- I mean, I didn't break it!"
 	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nI didn't mean to- I mean, I didn't break it!"
 	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\nI didn't mean to- I mean, I didn't break it!"
@@ -300,11 +313,11 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\nI didn't mean to- I mean, I didn't break it!"
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nI didn't mean to- I mean, I didn't break it!"
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nI didn't mean to- I mean, I didn't break it!"
-	
+
 	DESCRIBE.RED_MUSHED_ROOM = "I crushed it!"
 	DESCRIBE.GREEN_MUSHED_ROOM = "I crushed it!"
 	DESCRIBE.BLUE_MUSHED_ROOM = "I crushed it!"
-	
+
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "It's not adult drink, right?"
 	DESCRIBE.SKULLFLASK_EMPTY = "Blech, how can they drink that stuff?"
@@ -314,15 +327,15 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "Now I'm extra unafraid!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Back to normal levels of toughness."
 	--StantonStuff
-	
+
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
-	
+
 	DESCRIBE.THEATERCORN = "The butter really drowns out the corn flavor."
-	DESCRIBE.DEERCLOPS_BARRIER = "Let me out! LET ME OUT!!" 
-	
+	DESCRIBE.DEERCLOPS_BARRIER = "Let me out! LET ME OUT!!"
+
 	--Stuff for Canis to check
 
-	DESCRIBE.MOONMAW_DRAGONFLY = "It's made of glass, how tough can it possibly be?" 
+	DESCRIBE.MOONMAW_DRAGONFLY = "It's made of glass, how tough can it possibly be?"
 	DESCRIBE.MOONMAW_LAVAE = "You're getting shattered for sure!"
 	DESCRIBE.SNAPPERTURTLE = "You should know; I bite back!"
 	DESCRIBE.SNAPPERTURTLEBABY = "Cute, but don't try to snap me!"
@@ -337,7 +350,7 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	DESCRIBE.MOONMAW_LAVAE_RING = DESCRIBE.MOONMAW_LAVAE
 
 	DESCRIBE.MUTATOR_TRAPDOOR = DESCRIBE.MUTATOR_WARRIOR
-	
+
 	DESCRIBE.WOODPECKER = "How much could he possibly peck?"
 	DESCRIBE.SNOTROAST = "I think I've seen this at the church potluck before..."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "No seconds for me, please..."
@@ -361,7 +374,7 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	DESCRIBE.PIED_RAT = "Take a bath, greasy!"
 	DESCRIBE.PIED_PIPER_FLUTE = "Make sure to wash it first..."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Hey! Give me your stuff!"
-	
+
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "I knew this wasn't going to hold!"
 
 	ACTIONFAIL.CHARGE_FROM =
@@ -371,9 +384,9 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "I'm shock proof!"
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "OW! Stupid electricity..."
-	
+
 	----UNDER THE WEATHER----
-	
+
 	DESCRIBE.WINONA_TOOLBOX = "It belongs to the lug-head."
 	ACTIONFAIL.WINONATOOLBOX = "What is she hiding?!"
 	DESCRIBE.POWERCELL = "It's big, heavy, and dangerous. I like it!"
@@ -381,16 +394,16 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	DESCRIBE.MINERHAT_ELECTRICAL = "Electricity makes everything better!"
 	DESCRIBE.OCEAN_SPEAKER = "Is it... making noise? I can't tell... my head hurts..."
 	--DESCRIBE.UM_SIREN = "Oh yeah!? I can blow bubbles twice as big! Watch!"
-	
+
 	--DESCRIBE.OCUPUS_BEAK = ""
 	DESCRIBE.OCUPUS_TENTACLE = "Go back to the depths!"
 	DESCRIBE.OCUPUS_TENTACLE_EYE = "Take a picture, it'll last longer!"
 	DESCRIBE.OCUPUS_TENTACLE_COOKED = "I hate seafood."
-	
+
 	DESCRIBE.ARMOR_REED_UM = "Flimsy, but lightweight!"
 	DESCRIBE.ARMOR_SHARKSUIT_UM = "It's heavy and it makes me look stupid."
 	DESCRIBE.ROCKJAWLEATHER = "How does it stay afloat?"
-	
+
 	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
 	DESCRIBE.STUFFED_PEEPER_POPPERS = "That's sick!"
 	DESCRIBE.UM_DEVILED_EGGS = "The power of me compells you!"
@@ -398,7 +411,7 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	DESCRIBE.CRITTER_FIGGY = "Stop biting me! Go away!"
 	DESCRIBE.GIANT_TREE_BIRDNEST = "Oops, oh well."
 	ACTIONFAIL.UPGRADE.NOT_HARVESTED = "Someone should clean this up!"
-	
+
     DESCRIBE.SLUDGE = "It's sticky, and smells like... gross stuff."
 	DESCRIBE.SLUDGE_OIL = "It's definetly not a drink."
     DESCRIBE.SLUDGE_SACK = "It's going to stain my clothes..."
@@ -413,7 +426,15 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	DESCRIBE.UM_BEEGUN = "Bee gone!"
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
-	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "Treasure, fit for a queen!"
+DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "Treasure, fit for a queen!"
+DESCRIBE.SUNKENCHEST_ROYAL_RED = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_BLUE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_PURPLE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_GREEN = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_ORANGE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_YELLOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_RAINBOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+
 	DESCRIBE.STEERINGWHEEL_COPPER = "Catch me now, coppers!"
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "Now where to put it..."
 	DESCRIBE.BOAT_BUMPER_COPPER = "I hope it doesn't sink the boat."
@@ -423,8 +444,8 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	DESCRIBE.UM_COALESCED_NIGHTMARE = "Is that what my nightmares look like?"
 	DESCRIBE.SLUDGE_CORK = "Put a cork in it!"
 	DESCRIBE.SLUDGESTACK = "What is that stuff? I don't recognize it..."
-	DESCRIBE.SPECTER_SHIPWRECK = "I hope it's haunted!" 
-	
+	DESCRIBE.SPECTER_SHIPWRECK = "I hope it's haunted!"
+
 	DESCRIBE.UNCOMPROMISING_HARPOON = "no."
 	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "no no it no false."
 	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "nahhhh."
@@ -432,26 +453,26 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 	DESCRIBE.UM_MAGNERANGREEL = "I'd hate to be tied down to one spot."
 	DESCRIBE.SIREN_THRONE = "It's where miss priss likes to sit." --Dumb kid.
 	DESCRIBE.LAVASPIT_SLUDGE = "Whole lotta hot goop."
-		
+
 	DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
 	DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
 	DESCRIBE.UM_BEEGUARD_BLOCKER = "That's fine, I wasn't planning on getting too close anyway!"
-	
+
 	DESCRIBE.WIXIE_PIANO = "I miss my piano lessons..."
 	DESCRIBE.WIXIE_CLOCK = "Atleast it's ticking won't keep me up at night."
 	DESCRIBE.WIXIE_WARDROBE = "Well now I know what was making all that noise..."
 	DESCRIBE.CHARLES_T_HORSE = "Charles...?"
 	DESCRIBE.THE_REAL_CHARLES_T_HORSE = "Charles!! I thought I'd never find you!"
-	
+
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "I think we have a lot in common!"
 	DESCRIBE.UM_ORNAMENT_RAT = "Pretty cute, for a pest."
-	
+
 	DESCRIBE.TRINKET_WATHOM1 = "Haha, what a dork!"
-	
+
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
-	
+
 	local general_scripts = require("play_generalscripts")
-	
+
 	STRINGS.STAGEACTOR.WIXIE1 =
 		{
 			"So how about that so called 'scientist'?",
@@ -463,7 +484,7 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 			"Thank you, thank you, I'll be here all eternity.",
 			"Tip your beefalo!",
 		}
-		
+
 	general_scripts.WIXIE1 = {
 		cast = { "wixie" },
 		lines = {
@@ -488,7 +509,7 @@ STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 			"...",
 			"Hello? Is this thing on?",
 		}
-	
+
 	general_scripts.WIXIE2 = {
 		cast = { "wixie" },
 		lines = {

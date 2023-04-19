@@ -99,7 +99,7 @@ TUNING.WATHOM_SANITY = 120
 
 STRINGS.NAMES.WIXIE = "Wixie"
 STRINGS.SKIN_NAMES.wixie_none = "Wixie"
-STRINGS.SKIN_DESCRIPTIONS.wixie_none = "The perfect clothing for roughhousing."
+STRINGS.SKIN_DESCRIPTIONS.wixie_none = "A troubled youth that gets up to trouble."
 
 STRINGS.CHARACTER_TITLES.wixie = "The Delinquent"
 STRINGS.CHARACTER_NAMES.wixie = "Wixie"

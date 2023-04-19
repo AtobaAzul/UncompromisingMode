@@ -1666,8 +1666,10 @@ local function Rebound(inst, attacker, target)
 			if no_aggro(attacker, target) then
 				target.components.combat:SetShouldAvoidAggro(attacker)
 			end
-
-			target.components.combat:GetAttacked(inst, 10, inst)
+			
+			if target.components.combat ~= nil then
+				target.components.combat:GetAttacked(inst, 10, inst)
+			end
 
 			if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
 				target.components.sleeper:WakeUp()
@@ -2023,8 +2025,8 @@ local function Tremor(inst)
 
 					v.components.combat:GetAttacked(inst.attacker, inst.finaldamage, inst)
 
-					if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
-						target.components.sleeper:WakeUp()
+					if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
+						v.components.sleeper:WakeUp()
 					end
 
 					if v.components.combat ~= nil then
