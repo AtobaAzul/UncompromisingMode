@@ -44,12 +44,12 @@ local function onhit(inst, attacker, target)
             impactfx:FacePoint(attacker.Transform:GetWorldPosition())
         end
     end
-	
-	
+
+
 	if inst.x ~= nil then
 		local ground = TheWorld.Map:IsPassableAtPoint(inst.x, inst.y, inst.z)
 		local boat = TheWorld.Map:GetPlatformAtPoint(inst.x, inst.z)
-		
+
 		if ground or boat then
 			local reel = SpawnPrefab("um_magnerangreel")
 			if inst.uses then
@@ -57,7 +57,7 @@ local function onhit(inst, attacker, target)
 			end
 			reel.Transform:SetPosition(inst.x, inst.y, inst.z)
 			reel.target = target
-			
+
 			if boat then
 				reel.AnimState:PlayAnimation("place_boat")
 			else
@@ -65,7 +65,7 @@ local function onhit(inst, attacker, target)
 			end
 		end
 	end
-	
+
     inst:Remove()
 end
 
@@ -76,7 +76,7 @@ local function pipethrown(inst, owner, target)
 		inst.y = y
 		inst.z = z
 	end
-	
+
 	inst.SoundEmitter:PlaySound("dontstarve/wilson/boomerang_throw")
     inst.AnimState:PlayAnimation("spin_loop", true)
     inst:AddTag("NOCLICK")
@@ -85,25 +85,25 @@ end
 
 local function spawntornado(inst, target)
 	local owner = inst.components.inventoryitem.owner
-	
+
 	if owner == nil then
 		return
 	end
-	
+
 	local x, y, z = owner.Transform:GetWorldPosition()
 	local boat = TheWorld.Map:GetPlatformAtPoint(x, z)
-	
+
 	if target.components ~= nil and target.components.workable and not owner:GetCurrentPlatform() then
 		return
 	end
-	
+
 	local proj = SpawnPrefab("um_magnerang_projectile")
 	if inst.components.finiteuses and inst.components.finiteuses.current then
 		proj.uses = inst.components.finiteuses.current
-	end	
+	end
 	proj.Transform:SetPosition(x, y, z)
 	proj.components.projectile:Throw(owner, target)
-	
+
 	inst:Remove()
 end
 
@@ -150,7 +150,7 @@ local function fncommon()
 
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/um_magnerang.xml"
-	
+
     inst:AddComponent("spellcaster")
     inst.components.spellcaster.canuseontargets = true
     inst.components.spellcaster.canonlyuseonworkable = true
@@ -164,12 +164,12 @@ local function fncommon()
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip(onequip)
     inst.components.equippable:SetOnUnequip(onunequip)
-	
+
 	inst:AddComponent("finiteuses")
-    inst.components.finiteuses:SetMaxUses(TUNING.BOOMERANG_USES/2)
-    inst.components.finiteuses:SetUses(TUNING.BOOMERANG_USES/2)
+    inst.components.finiteuses:SetMaxUses(TUNING.BOOMERANG_USES*1.5)
+    inst.components.finiteuses:SetUses(TUNING.BOOMERANG_USES*1.5)
     inst.components.finiteuses:SetOnFinished(OnFinished)
-	
+
     MakeHauntableLaunch(inst)
 
     return inst
@@ -199,12 +199,12 @@ local function onhit_return(inst, attacker, target)
 		magnerang.Transform:SetPosition(x, 1.5, z)
 		magnerang.target = target
 	end
-	
+
 	if inst.reel ~= nil then
 		inst.reel.AnimState:PlayAnimation("break")
 		inst.reel:ListenForEvent("animover", inst.Remove)
 	end
-	
+
     inst:Remove()
 end
 
@@ -213,7 +213,7 @@ local function onmiss_return(inst, attacker, target)
 		inst.reel.AnimState:PlayAnimation("break")
 		inst.reel:ListenForEvent("animover", inst.Remove)
 	end
-	
+
 	if target ~= nil then
 		local x, y, z = target.Transform:GetWorldPosition()
 		local magnerang = SpawnPrefab("um_magnerang")
@@ -244,9 +244,9 @@ end
 local function ReturnToTarget(inst, attacker, target)
 	if attacker ~= nil then
 		local x, y, z = inst.Transform:GetWorldPosition()
-		
+
 		local proj = SpawnPrefab("um_magnerang_projectile")
-	
+
 		proj.Transform:SetPosition(x, 1.5, z)
 		proj.components.projectile:Throw(attacker, inst)
 		if inst.uses then --Pass the uses from the magnerang
@@ -266,7 +266,7 @@ local function ReturnToTarget(inst, attacker, target)
 		magnerang.Transform:SetPosition(x, 1.5, z)
 		magnerang.target = target
 	end
-	
+
     inst.AnimState:PlayAnimation("break")
 	inst:ListenForEvent("animover", inst.Remove)
 end
@@ -312,9 +312,9 @@ local function harpoon()
     inst.components.projectile:SetLaunchOffset(Vector3(3, 2, 0))
     inst.components.projectile:SetSpeed(10)
     inst.components.projectile:SetOnHitFn(onhit)
-	
 
-	
+
+
     inst.persists = false
 
     return inst
@@ -332,11 +332,11 @@ local function Vac(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	if inst.magnet_damage < 200 and inst ~= nil and inst:IsValid() and inst.target ~= nil and inst.target:IsValid() and not inst.target:HasTag("INLIMBO") then
 		local px, py, pz = inst.target.Transform:GetWorldPosition()
-		
+
 		local distmult = (inst:GetDistanceSqToInst(inst.target) / 200)
 		local tuningmultiplier = inst.target:HasTag("epic") and 1.5 or 1.25
 		--TheNet:Announce(inst.magnet_damage)
-		
+
 		if inst.hitfx ~= nil then
 			if inst.magnet_damage <= 50 and inst.soundlevel == nil then
 				inst.soundlevel = 50
@@ -358,30 +358,30 @@ local function Vac(inst)
 
 		if distmult >= 0.15 then
 			local platform = inst:GetCurrentPlatform()
-				
+
 			if platform ~= nil and platform:IsValid() then
 				tuningmultiplier = 0.5
 				if inst._cdtask == nil then
-					
+
 					inst._cdtask = inst:DoTaskInTime(.5, OnCooldown)
-						
+
 					local row_dir_x, row_dir_z = VecUtil_Normalize(px - x, pz - z)
-						
+
 					local boat_physics = platform.components.boatphysics
-					
+
 					boat_physics:ApplyForce(row_dir_x, row_dir_z, .35 * distmult)
 				end
 			end
-				
+
 			if inst.target.components.locomotor ~= nil then
 				local rad = math.rad(inst.target:GetAngleToPoint(x, y, z))
 				local velx = math.cos(rad) --* 4.5
 				local velz = -math.sin(rad) --* 4.5
-					
+
 				local locationmodifier = platform ~= nil and 0.5 or 1.5
-					
+
 				local dx, dy, dz = px + (((FRAMES * 4) * velx) * locationmodifier) * distmult, 0, pz + (((FRAMES * 4) * velz) * locationmodifier) * distmult
-						
+
 				local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
 				local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
 				if dx ~= nil and (ground or boat or inst.target.components.locomotor:CanPathfindOnWater()) then
@@ -389,13 +389,13 @@ local function Vac(inst)
 				end
 			end
 		end
-		
+
 		inst.magnet_damage = inst.magnet_damage + (distmult * tuningmultiplier)
 	else
 		if inst.hitfx ~= nil then
 			inst.hitfx.SoundEmitter:KillSound("twirl")
 		end
-		
+
 		inst:KillRopes()
 	end
 end
@@ -418,16 +418,16 @@ local function KillRopes(inst)
 	inst.SoundEmitter:PlaySound("UCSounds/harpoon/break")
 
 	inst:AddTag("NOCLICK")
-	
+
 	inst.components.updatelooper:RemoveOnUpdateFn(Vac)
-	
+
 	if inst.hitfx then
 		inst.hitfx:Remove()
 	end
-	
+
 	if inst.target ~= nil and inst.target:IsValid() and not inst.target:HasTag("INLIMBO") then
 		local x, y, z = inst.target.Transform:GetWorldPosition()
-	
+
 		local proj = SpawnPrefab("um_magnerang_projectile")
 		if x ~= nil then
 			proj.Transform:SetPosition(x, 1.5, z)
@@ -445,7 +445,7 @@ local function KillRopes(inst)
 			proj.components.projectile:SetOnMissFn(onmiss_return)
 			proj.reel = inst
 		end
-		
+
 		Link(inst,"remove")
 	else
 		local x, y, z = inst.Transform:GetWorldPosition()
@@ -457,7 +457,7 @@ local function KillRopes(inst)
 			end
 		end
 		magnerang.Transform:SetPosition(x, 0, z)
-			
+
 		inst.AnimState:PlayAnimation("break")
 		inst:ListenForEvent("animover", inst.Remove)
 	end
@@ -466,14 +466,14 @@ end
 local function InitializeRope(inst)
 	if inst.target and inst.target:IsValid() then
 		Link(inst,"link")
-		
+
 		local x, y, z = inst.target.Transform:GetWorldPosition()
-		
+
 		local hitfx = SpawnPrefab("um_magneranghitfx")
 		hitfx.Transform:SetPosition(x, y, z)
-		
+
 		inst.hitfx = hitfx
-		
+
 		if hitfx ~= nil  then
 			if inst.target.components.combat ~= nil then
 				local follower = hitfx.entity:AddFollower()
@@ -491,7 +491,7 @@ local function DoPuff(inst, channeler)
 	inst.AnimState:PlayAnimation("reel")
 
     inst.components.activatable.inactive = true
-	
+
 	if inst.power > 15 then
 		inst.power = inst.power - 15
 	end
@@ -513,7 +513,7 @@ local function reel()
     inst.entity:AddSoundEmitter()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
-	
+
 	inst:AddTag("harpoonreel")
 
     inst.AnimState:SetBank("um_magnerang_reel")
@@ -521,7 +521,7 @@ local function reel()
     inst.AnimState:PlayAnimation("place", false)
 
     MakeSnowCoveredPristine(inst)
-	
+
 	inst.GetActivateVerb = GetVerb
 
     inst.entity:SetPristine()
@@ -529,35 +529,35 @@ local function reel()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
 	inst.magnet_damage = 0
-	
+
 	inst.target = nil
 
     inst:AddComponent("inspectable")
-	
+
 	--[[inst:AddComponent("activatable")
     inst.components.activatable.OnActivate = DoPuff
     inst.components.activatable.inactive = true
 	inst.components.activatable.quickaction = true]]
-	
+
     inst:AddComponent("machine")
     inst.components.machine.turnonfn = KillRopes
     inst.components.machine.turnofffn = KillRopes
     inst.components.machine.cooldowntime = 0.5
 	inst.components.machine.ison = true
-	
+
 	inst:DoTaskInTime(0, InitializeRope)
-	
+
 	inst.KillRopes = KillRopes
-	
+
     inst:AddComponent("updatelooper")
     inst.components.updatelooper:AddOnUpdateFn(Vac)
-	
+
 	inst:DoTaskInTime(60, KillRopes)
-	
+
 	inst.persists = false
-	
+
     return inst
 end
 
@@ -573,7 +573,7 @@ local function fnhit()
     inst.AnimState:SetBuild("um_magneranghitfx")
     inst.AnimState:PlayAnimation("idle")
 	inst.Transform:SetEightFaced()
-	
+
 	inst:AddTag("NOCLICK")
 	inst:AddTag("NOBLOCK")
 	inst:AddTag("fx")
@@ -583,11 +583,11 @@ local function fnhit()
     if not TheWorld.ismastersim then
         return inst
     end
-	
+
 	inst.SoundEmitter:PlaySound("monkeyisland/autopilot/magnet_lp_start")
-	
+
 	inst.persists = false
-	
+
     return inst
 end
 -------------------------------------------------------------------------------
