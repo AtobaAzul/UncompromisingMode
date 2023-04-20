@@ -23,9 +23,9 @@ end
 
 local function OnPicked(inst) inst:Remove() end
 
-local function OnSpring(inst) 
+local function OnSpring(inst)
 	if not TheWorld.state.iswinter then
-		inst:Remove() 
+		inst:Remove()
 	end
 end
 
@@ -91,9 +91,9 @@ local function fn()
 
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
-    inst:WatchWorldState("isspring", OnSpring)
-    inst:WatchWorldState("isautumn", OnSpring) -- Include other seasons incase someone is weird and disables spring for reasons unknown?
-    inst:WatchWorldState("issummer", OnSpring)
+    --inst:WatchWorldState("isspring", OnSpring)
+    --inst:WatchWorldState("isautumn", OnSpring) -- Include other seasons incase someone is weird and disables spring for reasons unknown?
+    --inst:WatchWorldState("issummer", OnSpring)
 
     return inst
 end
