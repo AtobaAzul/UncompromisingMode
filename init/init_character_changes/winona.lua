@@ -56,6 +56,10 @@ local function OnCooldown(inst)
 end
 
 local function ActionHungerDrain(inst, data)
+	if inst.components.rider ~= nil and inst.components.rider:IsRiding() then
+		return
+	end
+
 	local fast = inst.components.hunger:GetPercent() >= HUNGRY_THRESH_HIGH
 	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
 	local t = GetTime()
