@@ -330,8 +330,8 @@ local function OnKill(inst, data)
 	end --]]
 end
 
-local loot = { "meat", "meat", "meat", "meat", "meat", "meat", "meat", "meat", "glass_scales", "glass_scales",
-	"glass_scales", "moonglass_geode", "moonglass_geode", "moonglass_geode" }
+local loot = { "meat", "meat", "meat", "meat", "meat", "meat", "meat", "meat", "glass_scales",
+	"moonglass_geode", "moonglass_geode", "moonglass_geode" }
 
 local function OnDead(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
