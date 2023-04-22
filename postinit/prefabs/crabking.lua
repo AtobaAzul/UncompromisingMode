@@ -452,7 +452,7 @@ env.AddPrefabPostInit("crabking", function(inst)
 
 		if boat_physics ~= nil then
 			if inst.components.health ~= nil then
-				inst.components.health:DoDelta((-300 * math.abs(boat_physics:GetVelocity() * data.hit_dot_velocity)) *
+				inst.components.health:DoDelta((-1500 * math.abs(boat_physics:GetVelocity() * data.hit_dot_velocity)) *
 					0.33)
 			end
 		end
