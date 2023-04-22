@@ -10,3 +10,4 @@
 
 
 --	DESCRIBE.TRINKET_WATHOM1 = "Excellent..."
+--	DESCRIBE.MARA_BOSS1 = "Ahhh, mine old nemesis... This conflict shall be LEGEND."

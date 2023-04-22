@@ -26,20 +26,20 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICRETALIATION = ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now"
 	--FoodBuffs
-	
+
 	--CaliforniaKing
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING = "It's getting hard to concentrate."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "Were the benefits worth the visual impairment?"
 	DESCRIBE.CALIFORNIAKING = "Would be useful if I were suffering from allergies."
 	--CaliforniaKing
-	
+
 	ANNOUNCE.ANNOUNCE_RNEFOG = "This fog makes it hard to view my surroundings."
     DESCRIBE.UNCOMPROMISING_RAT = "Rodentia kleptomanis, and quite the large specimen!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "One entrance to a no doubt vast tunnel system!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "One entrance to a no doubt vast tunnel system!"
     DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Another entrance, albeit temporary."
     DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Well, at least this one appears to be providing us instead."
-	
+
 	DESCRIBE.WINKY =
         {
             GENERIC = "You defy classification, %s.",
@@ -67,7 +67,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
             GHOST = "%s could use a second chance.",
             FIRESTARTER = "Another firebug? Tsk tsk, I had such high hopes...",
         }
-		
+
     DESCRIBE.RATPOISONBOTTLE = "The toxic elements of the fungus have been fully activated."
     DESCRIBE.RATPOISON = "A minor chemical odor emanating from the mixture attracts rodents."
 
@@ -80,7 +80,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Might that strange vegitation be the cause of the polluted rain?"
     DESCRIBE.TOADLING = "They appear subservient to the nearby fungi."
-	
+
     DESCRIBE.GASMASK = "I can alleviate these dreadful allergies now."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
 	DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
@@ -109,7 +109,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.UM_SANDHILL = "The dune's iconic shape is formed by the winds."
 	DESCRIBE.SNOWPILE = "Makes one think of stories by the fire during a stormy night."
 	DESCRIBE.SNOWGOGGLES = "For winter reading? ...Perhaps not."
-	
+
 	DESCRIBE.SNOWMONG = "I have no idea."
 	DESCRIBE.SHOCKWORM = "A highly conductive Annelida!"
 	DESCRIBE.ZASPBERRY = "Nonsense, there's no such thing as a blue Rubus."
@@ -134,12 +134,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.AIR_CONDITIONER = "It filters out the nearby air's pollutants."
 	DESCRIBE.SPOREPACK = "A large sack made from toad skin. It's scent is far from lovely."
 	DESCRIBE.SALTPACK = "The device releases sodium chloride into the atmosphere."
-	
+
 	DESCRIBE.UM_SCORPION = "Scorpiones. It's a desert species of some sort."
 	DESCRIBE.SCORPIONCARAPACE = "While it should not be poisonous, it is unfit to eat in this condition."
 	DESCRIBE.SCORPIONCARAPACECOOKED = "I believe it requires more than just an open flame."
 	DESCRIBE.HARDSHELLTACOS = "The scorpion tastes well like this."
-	
+
 	DESCRIBE.SKELETONMEAT = "Oh my goodness!"
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "One of the shadows taking the form of Wilson. It's armed."
@@ -155,7 +155,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.RICE_COOKED = "I could eat it, but it would be better with something else."
 	DESCRIBE.SEAFOODPAELLA = "This should clear my nasal cavity so I can get back to reading."
 	DESCRIBE.LICELOAF = "Simple, but effective rations."
-	
+
 	DESCRIBE.STUMPLING = "The flora continues to grow more violent."
 	DESCRIBE.BIRCHLING = DESCRIBE.STUMPLING
 	DESCRIBE.MOON_TEAR = "Could hold some arcane purpose, in the future."
@@ -203,14 +203,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.WATERMELON_LANTERN = "I don't believe a Citrullus lanatus is usually carved like this, but we make do."
-	
+
 		--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "It appears to have hallucinogenic bile."
 	DESCRIBE.VIPERFRUIT = "Consumption provides access to the snake's abilites."
 	DESCRIBE.VIPERJAM = "It seems to have amplified the berry's properties."
-	
-	
-	DESCRIBE.BLUEBERRYPLANT =         
+
+
+	DESCRIBE.BLUEBERRYPLANT =
 		{
             READY = "Normal Cyanococcus berries don't pulsate.",
 			FROZE = "Normal Cyanococcus berries don't freeze solid either.",
@@ -223,7 +223,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
             ASHLEY_BROKEN = "That kitten is in need of repair.",
             ASHLEY = "It's a plush cat.",
         }
-	
+
 	DESCRIBE.BERNIE_ACTIVE =
         {
             GENERIC = "That teddy bear seems to be animated somehow.",
@@ -234,7 +234,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
             GENERIC = "As whimsical as it is befuddling.",
             ASHLEY = "As whimsical as it is befuddling.",
         }
-	
+
 	ACTIONFAIL.READ =
         {
             GENERIC = "I cannot concentrate under these conditions!",
@@ -252,8 +252,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.RNESKELETON = "A living human skeleton."
 	DESCRIBE.RAT_WHIP = "A makeshift whip fashioned from rat appendages. Lovely."
 	DESCRIBE.KLAUS_AMULET = "My old bones are invigorated!"
-	DESCRIBE.CRABCLAW = "The appendage has distinct engravings. For gemstones, I presume." 
-	DESCRIBE.HAT_RATMASK = "Amplifies the abilities of our noses." 
+	DESCRIBE.CRABCLAW = "The appendage has distinct engravings. For gemstones, I presume."
+	DESCRIBE.HAT_RATMASK = "Amplifies the abilities of our noses."
 
 	DESCRIBE.ORANGE_VOMIT = "Delightful."
 	DESCRIBE.GREEN_VOMIT = "Delightful."
@@ -262,46 +262,46 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.YELLOW_VOMIT = "Delightful."
 	DESCRIBE.PURPLE_VOMIT = "Delightful."
 	DESCRIBE.PALE_VOMIT = "Delightful."
-	
+
 	DESCRIBE.WALRUS_CAMP_EMPTY = DESCRIBE.WALRUS_CAMP.EMPTY
-	DESCRIBE.PIGKING_PIGGUARD = 
+	DESCRIBE.PIGKING_PIGGUARD =
 	{
 	GUARD = DESCRIBE.PIGMAN.GUARD,
 	WEREPIG = DESCRIBE.PIGMAN.WEREPIG,
 	}
-	
+
 	DESCRIBE.BIGHT = "It's a wonder that it still functions."
 	DESCRIBE.KNOOK = "They work in conjunction surprisingly well."
 	DESCRIBE.ROSHIP = "It lacks the amount of firepower the Bishop has."
-	
+
 	DESCRIBE.UM_PAWN = "It's based on proximity, so let's steer clear."
 	DESCRIBE.UM_PAWN_NIGHTMARE = "Another proximity drone, best keep away."
-	
+
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
 	DESCRIBE.CAVE_EXIT_SUNKDECID= DESCRIBE.CAVE_EXIT
-	
-	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH		
+
+	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH
 	-- Blowgun stuff
 	DESCRIBE.UNCOMPROMISING_BLOWGUN = DESCRIBE.BLOWDART_PIPE
 	DESCRIBE.BLOWGUNAMMO_TOOTH = DESCRIBE.BLOWDART_PIPE
 	DESCRIBE.BLOWGUNAMMO_FIRE = DESCRIBE.BLOWDART_FIRE
 	DESCRIBE.BLOWGUNAMMO_SLEEP = DESCRIBE.BLOWDART_SLEEP
 	DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
-	
+
 	DESCRIBE.UM_BEAR_TRAP = "A mundane trap, I best stay clear of it."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "A mundane trap, I best stay clear of it."
 	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "Quite ingeneous, yet cruel."
 	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Quite ingeneous, yet cruel."
 	DESCRIBE.CORNCAN = "Preserved corn."
 	DESCRIBE.SKULLCHEST_CHILD = "The items inside fade into blackness."
-	
+
 	DESCRIBE.ANCIENT_AMULET_RED = "Souls? I used to not believe in such nonsense..."
 	DESCRIBE.SLOBBERLOBBER = " Everything salivates, dear."
 	DESCRIBE.GORE_HORN_HAT = "Natures knife."
 	DESCRIBE.BEARGERCLAW = "The hand of the Meles meles, designed for digging."
 	DESCRIBE.FEATHER_FROCK = "It's not an effective piece of clothing."
-	
+
 	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nIt's conductive pathways have been irreparably changed."
 	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nIt's conductive pathways have been irreparably changed."
 	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\nIt's conductive pathways have been irreparably changed."
@@ -309,11 +309,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\nIt's conductive pathways have been irreparably changed."
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nIt's conductive pathways have been irreparably changed."
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nIt's conductive pathways have been irreparably changed."
-	
+
 	DESCRIBE.RED_MUSHED_ROOM = "Perhaps the paste like consistency will help serve a purpose."
 	DESCRIBE.GREEN_MUSHED_ROOM = "Perhaps the paste like consistency will help serve a purpose."
 	DESCRIBE.BLUE_MUSHED_ROOM = "Perhaps the paste like consistency will help serve a purpose."
-	
+
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "It keeps me alert, but without care."
 	DESCRIBE.SKULLFLASK_EMPTY = "I can see the liquid slowly returning."
@@ -323,9 +323,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "I can study, unwavered."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Science no longer comforts me."
 	--StantonStuff
-	
+
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
-	
+
 	DESCRIBE.THEATERCORN = "I wonder where the bag came from."
 	DESCRIBE.DEERCLOPS_BARRIER = "The monster's proficiency in ice magic seems to have improved."
 
@@ -344,7 +344,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.MOONMAW_LAVAE_RING = DESCRIBE.MOONMAW_LAVAE
 
 	DESCRIBE.MUTATOR_TRAPDOOR = DESCRIBE.MUTATOR_WARRIOR
-	
+
 	DESCRIBE.WOODPECKER = "Some species of picidae."
 	DESCRIBE.SNOTROAST = "It must be full of diseases."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "I've never tasted something so disgusting."
@@ -368,7 +368,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "Drenched in filth."
 	DESCRIBE.PIED_PIPER_FLUTE = "Filled with horrid diseases, I'm sure."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Have they gained intelligence, or did they steal it?"
-	
+
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "We can retrieve this raft, if we can get to shore!"
 
 	ACTIONFAIL.CHARGE_FROM =
@@ -378,9 +378,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "A succesful conversion of energy!"
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "I did not expect to become the conduit!"
-	
+
 	----UNDER THE WEATHER----
-	
+
 	DESCRIBE.WINONA_TOOLBOX = "An organized work place is an efficient work place."
 	ACTIONFAIL.WINONATOOLBOX = "I'm no handywoman myself, I do know a thing or two however."
 	DESCRIBE.WINONA_CATAPULT_ITEM = "I can't tell what it is, it needs to be put together."
@@ -392,23 +392,23 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.MINERHAT_ELECTRICAL = "Now that it's electric it will be quite beneficial."
 	DESCRIBE.OCEAN_SPEAKER = "My, not something you'd expect to see all the way out here."
 	--DESCRIBE.UM_SIREN = "My, she appears to carry a very maniuplative frequency."
-	
+
 	DESCRIBE.OCUPUS_BEAK = "The beak of a large unidentified cephalopod."
 	DESCRIBE.OCUPUS_TENTACLE = "It's rather inedible in this state."
 	DESCRIBE.OCUPUS_TENTACLE_EYE = "."
 	DESCRIBE.OCUPUS_TENTACLE_COOKED = "Chewing is very important, now."
-	
+
 	DESCRIBE.ARMOR_REED_UM = "Surprisngly effective when bundled close enough."
 	DESCRIBE.ARMOR_SHARKSUIT_UM = "I'm not sure what classification of rock this falls under."
 	DESCRIBE.ROCKJAWLEATHER = "Unfortunatly it's easier to examine it dead."
-	
+
 	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
 	DESCRIBE.STUFFED_PEEPER_POPPERS = "I believe I might have misread the recipe book."
 	DESCRIBE.UM_DEVILED_EGGS = "Aptly named."
 	DESCRIBE.LUSH_ENTRANCE = "Curious. It smells strongly of bryophyta."
 	DESCRIBE.CRITTER_FIGGY = "An Eriosomatinae out here? And a... particularly round one."
 	DESCRIBE.GIANT_TREE_BIRDNEST = "Oh dear. I don't except its mother to come back for it."
-	
+
     DESCRIBE.SLUDGE = "Potentially dangerous, albiet quite useful."
 	DESCRIBE.SLUDGE_OIL = "The impurities have been removed."
     DESCRIBE.SLUDGE_SACK = "It will provide ample storage."
@@ -424,6 +424,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "Must be full of riches."
+	DESCRIBE.SUNKENCHEST_ROYAL_RED = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_BLUE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_PURPLE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_GREEN = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_ORANGE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_YELLOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_RAINBOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
 	DESCRIBE.STEERINGWHEEL_COPPER = "I should be able to turn the entire barge now."
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "The mechinism allows it to work with a rudder."
 	DESCRIBE.BOAT_BUMPER_COPPER = "It should last a millenium."
@@ -433,8 +440,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.UM_COALESCED_NIGHTMARE = "The esscence of someones negative thoughts."
 	DESCRIBE.SLUDGE_CORK = "Not suitable for a boat, it's for a much bigger hole."
 	DESCRIBE.SLUDGESTACK = "It's reminiscient of a hydrothermal vent."
-	DESCRIBE.SPECTER_SHIPWRECK = "an Abandoned wreck." 
-	
+	DESCRIBE.SPECTER_SHIPWRECK = "an Abandoned wreck."
+
 	DESCRIBE.UNCOMPROMISING_HARPOON = "Stabbing things from a distance has never been easier."
 	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
 	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
@@ -442,7 +449,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.UM_MAGNERANGREEL = "I don't believe that's how magnets work."
 	DESCRIBE.SIREN_THRONE = "Curious. It seems something has made a home out of this formation."
 	DESCRIBE.LAVASPIT_SLUDGE = "It'd be smart to keep my distance."
-	
+
 	DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
 	DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
 	DESCRIBE.UM_BEEGUARD_BLOCKER = "The Osmia bicornis are insistent we do not reach the monarch."
@@ -452,13 +459,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "An excellent model of a Didelphis Virginiana."
 	DESCRIBE.UM_ORNAMENT_RAT = "The kittens would love it!"
-	
+
 	DESCRIBE.TRINKET_WATHOM1 = "Oh, this must be a subspecies of that sentient creature!"
-	
+
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
-	
+
 	-- WIXIE RELATED STRINGS
-	
+
 	DESCRIBE.WIXIE_PIANO = "I haven't played one of these in a long time."
 	DESCRIBE.WIXIE_CLOCK = "I miss the ticking of my old grandfather clock."
 	DESCRIBE.WIXIE_WARDROBE = "An ordinary wardrobe, from a glance."
@@ -478,7 +485,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
-		
+
 	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_THULECITE
@@ -487,14 +494,17 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WICKERBOTTOM.ACTIONFAIL
 
 	DESCRIBE.MEATRACK_HAT = {
             GENERIC = DESCRIBE.MEATRACK.GENERIC,
-			
+
             DRYING = DESCRIBE.MEATRACK.DRYING,
             DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
-			
+
             DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
             DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
 	}
 	DESCRIBE.FISHMEAT_DRIED = "Rich in sodium and oils."
 	DESCRIBE.SMALLFISHMEAT_DRIED = "Just make sure to wash your hands after eating."
-		
+
 	DESCRIBE.WIXIEGUN = "This doesn't belong in the hands of a child."
+	
+	DESCRIBE.MARA_BOSS1 = "WHAT in the..."
+	

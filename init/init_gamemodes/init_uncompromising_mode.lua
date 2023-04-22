@@ -180,5 +180,3 @@ end
 if GetModConfigData("hardcore") then
 	modimport("init/init_gamemodes/init_hardcore")
 end
-
-modimport("init/init_loadingtips")

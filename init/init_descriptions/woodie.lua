@@ -25,20 +25,20 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICRETALIATION = ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now"
 	--FoodBuffs
-	
+
 	--CaliforniaKing
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING = "Here we go again..."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "Lu- Lucy is that you?"
 	DESCRIBE.CALIFORNIAKING = "That better not be what I think it is."
 	--CaliforniaKing
-	
+
 	ANNOUNCE.ANNOUNCE_RNEFOG = "I'm not sure aboot this..."
     DESCRIBE.UNCOMPROMISING_RAT = "More vermin come to steal my kit!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "That's where the varments are shackin' up!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "That's where the varments are shackin' up!"
     DESCRIBE.UNCOMPROMISING_WINKYBURROW = "This one looks like it's gonna collaspe."
     DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "It's the big rats home, nice of them to help out, eh?"
-	
+
 	DESCRIBE.WINKY =
         {
             GENERIC = "Are you cursed like me, %s?",
@@ -66,7 +66,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
             GHOST = "%s still has a soul, eh?",
             FIRESTARTER = "I don't mind the insults, but lighting fires crosses the line!",
         }
-		
+
     DESCRIBE.RATPOISONBOTTLE = "Feast your eyes on the deep woods gut bomb!"
     DESCRIBE.RATPOISON = "A little somethin' for the moochers' next visit..."
 
@@ -79,7 +79,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "That cap is killing my trees!"
     DESCRIBE.TOADLING = "Hop off, ya hoser."
-	
+
     DESCRIBE.GASMASK = "Keeps my lungs clear."
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
 	DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
@@ -108,7 +108,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.UM_SANDHILL = "It's a big pile of sand."
 	DESCRIBE.SNOWPILE = "You call that being snowed in?"
 	DESCRIBE.SNOWGOGGLES = "Now I feel at home."
-	
+
 	DESCRIBE.SNOWMONG = "The bumble sinks!"
 	DESCRIBE.SHOCKWORM = "That worm's lit up like the Northern lights!"
 	DESCRIBE.ZASPBERRY = "Blue raspberry is not a real berry."
@@ -133,17 +133,17 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.AIR_CONDITIONER = "This is a nice change of scent, eh?"
 	DESCRIBE.SPOREPACK = "That offends the nostrils."
 	DESCRIBE.SALTPACK = "This pack would've been useful back in Canada, eh?"
-	
+
 	DESCRIBE.UM_SCORPION = "Keep out of my boots."
 	DESCRIBE.SCORPIONCARAPACE = "Never tried this one before..."
 	DESCRIBE.SCORPIONCARAPACECOOKED = "Well, if there's nothing else."
 	DESCRIBE.HARDSHELLTACOS = "That'll do nicely."
-	
+
 	DESCRIBE.SKELETONMEAT = "Don't hurl, don't hurl, don't hurl..."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "An axe fight, eh?"
 	DESCRIBE.VAMPIREBAT = "You're a bit batty, eh?"
-							
+
 	--Swampyness
 	DESCRIBE.RICEPLANT = "Looks like some grub."
 	DESCRIBE.RICE = "I would prefer it not so tough."
@@ -151,7 +151,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.SEAFOODPAELLA = "Time to eat up!"
 	DESCRIBE.LICELOAF = "Well, this was the best I could do."
 	DESCRIBE.SUNGLASSES = "What do you think Lucy? Do I look good in these?"
-	
+
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "Some moon rocks would make a great little den."
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
@@ -203,14 +203,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.WATERMELON_LANTERN = DESCRIBE.PUMPKIN_LANTERN
-	
+
 		--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "I think I'm seeing things, eh?"
 	DESCRIBE.VIPERFRUIT = "It's got a hearty chew to it."
 	DESCRIBE.VIPERJAM = "Perfect for a piece of toast."
-	
-	
-	DESCRIBE.BLUEBERRYPLANT =         
+
+
+	DESCRIBE.BLUEBERRYPLANT =
 		{
             READY = "It's shaking around, eh?",
 			FROZE = "Well, it's not moving anymore.",
@@ -223,7 +223,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
             ASHLEY_BROKEN = "Poor lil thing.",
             ASHLEY = "Cute, isn't it 'Luce?",
         }
-	
+
 	DESCRIBE.BERNIE_ACTIVE =
         {
             GENERIC = "I guess I should be used to weird stuff by now.",
@@ -247,7 +247,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.RNESKELETON = "He's seen better days."
 	DESCRIBE.RAT_WHIP = "That's not something I want to keep on me."
 	DESCRIBE.KLAUS_AMULET = "The chains are comin' off now!"
-	DESCRIBE.CRABCLAW = "Use every part of the animal, I suppose." 
+	DESCRIBE.CRABCLAW = "Use every part of the animal, I suppose."
 	DESCRIBE.HAT_RATMASK = "Did a real fine job, eh Lucy?"
 
 	DESCRIBE.ORANGE_VOMIT = "Hoo-wee..."
@@ -257,33 +257,33 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.YELLOW_VOMIT = "Hoo-wee..."
 	DESCRIBE.PURPLE_VOMIT = "Hoo-wee..."
 	DESCRIBE.PALE_VOMIT = "Hoo-wee..."
-	
+
 	DESCRIBE.WALRUS_CAMP_EMPTY = DESCRIBE.WALRUS_CAMP.EMPTY
-	DESCRIBE.PIGKING_PIGGUARD = 
+	DESCRIBE.PIGKING_PIGGUARD =
 	{
 	GUARD = DESCRIBE.PIGMAN.GUARD,
 	WEREPIG = DESCRIBE.PIGMAN.WEREPIG,
 	}
-	
+
 	DESCRIBE.BIGHT = "This metal ain't so dead, eh?"
 	DESCRIBE.KNOOK = "The fact they stick together is a tad admirable."
 	DESCRIBE.ROSHIP = "He can hock a loogie real far."
-	
+
 	DESCRIBE.UM_PAWN = "I think his message is pretty clear, eh?"
 	DESCRIBE.UM_PAWN_NIGHTMARE = "I think his message is pretty clear, eh?"
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
 	DESCRIBE.CAVE_EXIT_SUNKDECID= DESCRIBE.CAVE_EXIT
-	
-	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH	
+
+	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH
 	-- Blowgun stuff
 	DESCRIBE.UNCOMPROMISING_BLOWGUN = DESCRIBE.BLOWDART_PIPE
 	DESCRIBE.BLOWGUNAMMO_TOOTH = DESCRIBE.BLOWDART_PIPE
 	DESCRIBE.BLOWGUNAMMO_FIRE = DESCRIBE.BLOWDART_FIRE
 	DESCRIBE.BLOWGUNAMMO_SLEEP = DESCRIBE.BLOWDART_SLEEP
 	DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
-	
+
 	DESCRIBE.ANCIENT_AMULET_RED = "I can keep myself together if I get chopped to bits."
 	DESCRIBE.UM_BEAR_TRAP = "Surprised they can lay em that fast."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Someone left their kit out."
@@ -291,12 +291,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Dangerous game."
 	DESCRIBE.CORNCAN = "I'll get at 'cha with lucy."
 	DESCRIBE.SKULLCHEST_CHILD = "Who knew wood and magic made such a great pair!"
-	
+
 	DESCRIBE.SLOBBERLOBBER = "I'll never lose another spitting contest!"
 	DESCRIBE.GORE_HORN_HAT = "Ain't got nothing on a rampaging moose."
 	DESCRIBE.BEARGERCLAW = "Makes a nice trophy, eh?"
 	DESCRIBE.FEATHER_FROCK = "Disgusting."
-	
+
 	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nI don't think it will work outside of the claw."
 	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nI don't think it will work outside of the claw."
 	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\nI don't think it will work outside of the claw."
@@ -304,11 +304,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\nI don't think it will work outside of the claw."
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nI don't think it will work outside of the claw."
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nI don't think it will work outside of the claw."
-	
+
 	DESCRIBE.RED_MUSHED_ROOM = "Poor things all mushed now."
 	DESCRIBE.GREEN_MUSHED_ROOM = "Poor things all mushed now."
 	DESCRIBE.BLUE_MUSHED_ROOM = "Poor things all mushed now."
-	
+
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "Keeps your mind at ease."
 	DESCRIBE.SKULLFLASK_EMPTY = "Well, it's gone now."
@@ -318,9 +318,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "Get those fears out of my head!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "This place is really getting to me..."
 	--StantonStuff
-	
+
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
-	
+
 	DESCRIBE.THEATERCORN = "Would be nice to eat it with some entertainment."
 	DESCRIBE.DEERCLOPS_BARRIER = "It's tryin' to box us in."
 
@@ -362,7 +362,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "He's leading all those dang varmints!"
 	DESCRIBE.PIED_PIPER_FLUTE = "Those varmints will have to listen to me!"
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Darn varmints!"
-	
+
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "I'm going to lose my gear if I don't get to shore!"
 
 	ACTIONFAIL.CHARGE_FROM =
@@ -372,9 +372,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "It's working now!"
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "Working, But I fried my hand!"
-	
+
 	----UNDER THE WEATHER----
-	
+
 	DESCRIBE.WINONA_TOOLBOX = "Sorry, but I have all the tools I need."
 	ACTIONFAIL.WINONATOOLBOX = "I am not putting Lucy in there."
 	DESCRIBE.WINONA_CATAPULT_ITEM = "Is it broken?"
@@ -386,23 +386,23 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.MINERHAT_ELECTRICAL = "Eh, Why didn't I think of that."
 	DESCRIBE.OCEAN_SPEAKER = "Ya think what it's saying is important, Lucy?"
 	--DESCRIBE.UM_SIREN = "Not half bad lookin' for an ocean critter, eh?"
-	
+
 	--DESCRIBE.OCUPUS_BEAK = ""
 	DESCRIBE.OCUPUS_TENTACLE = ""
 	DESCRIBE.OCUPUS_TENTACLE_EYE = "I can't eat it while it's staring right at me."
 	DESCRIBE.OCUPUS_TENTACLE_COOKED = "it's not that bad once peel back the skin."
-	
+
 	DESCRIBE.ARMOR_REED_UM = "At least it's something."
 	DESCRIBE.ARMOR_SHARKSUIT_UM = "That seems a little exotic dont'cha think?"
 	DESCRIBE.ROCKJAWLEATHER = "It's skin, we all have it."
-	
+
 	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
 	DESCRIBE.STUFFED_PEEPER_POPPERS = "This definitely won't go down right."
 	DESCRIBE.UM_DEVILED_EGGS = "The birds true nature is revealed."
 	DESCRIBE.LUSH_ENTRANCE = "Ya think there's something worth explorin' for, Lucy?"
 	DESCRIBE.CRITTER_FIGGY = "I ain't go no beef with ya' so long as you keep away from the trees, ya' hear?"
 	DESCRIBE.GIANT_TREE_BIRDNEST = "I've got the perfect opportunity to snuff it out is sitting right there."
-	
+
     DESCRIBE.SLUDGE = "It's sludge, sure, but what kind of sludge?"
 	DESCRIBE.SLUDGE_OIL = "I don't think that there is safe to breath in."
     DESCRIBE.SLUDGE_SACK = "I prefer something less soggy."
@@ -417,7 +417,15 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
     DESCRIBE.UM_BEEGUN = "I wouldn't be too happy about this if it were me."
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
-	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "No wonder he was a king."
+DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "No wonder he was a king."
+DESCRIBE.SUNKENCHEST_ROYAL_RED = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_BLUE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_PURPLE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_GREEN = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_ORANGE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_YELLOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_RAINBOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+
 	DESCRIBE.STEERINGWHEEL_COPPER = "Touching it makes my hands smell like pennies."
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "I think I like the wood one better."
 	DESCRIBE.BOAT_BUMPER_COPPER = "The boat will be safe now."
@@ -427,8 +435,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.UM_COALESCED_NIGHTMARE = "Someone must have had a bad dream."
 	DESCRIBE.SLUDGE_CORK = "Carved for a big hole, eh."
 	DESCRIBE.SLUDGESTACK = "That ought to have some sort of use?"
-	DESCRIBE.SPECTER_SHIPWRECK = "Wood gone down the drain." 
-	
+	DESCRIBE.SPECTER_SHIPWRECK = "Wood gone down the drain."
+
 	DESCRIBE.UNCOMPROMISING_HARPOON = "Stabbing things from a distance has never been easier."
 	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
 	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
@@ -446,13 +454,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "We don't get many of these up north."
 	DESCRIBE.UM_ORNAMENT_RAT = "Oh good, it's just a toy."
-	
-	DESCRIBE.TRINKET_WATHOM1 = "Well that a right load'a malarky."
-	
+
+	DESCRIBE.TRINKET_WATHOM1 = "Well that's a right load'a malarky."
+
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
-	
+
 	-- WIXIE RELATED STRINGS
-	
+
 	DESCRIBE.WIXIE_PIANO = "She's a beaut'! Shame it's been smashed up..."
 	DESCRIBE.WIXIE_CLOCK = "Excellent craftmanship!"
 	DESCRIBE.WIXIE_WARDROBE = "It's got a nice oak smell, with a hint of nightmares."
@@ -472,7 +480,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
-		
+
 	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_ROCK
@@ -481,14 +489,17 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WOODIE.ACTIONFAIL
 
 	DESCRIBE.MEATRACK_HAT = {
             GENERIC = DESCRIBE.MEATRACK.GENERIC,
-			
+
             DRYING = DESCRIBE.MEATRACK.DRYING,
             DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
-			
+
             DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
             DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
 	}
 	DESCRIBE.FISHMEAT_DRIED = "A Canadian classic."
 	DESCRIBE.SMALLFISHMEAT_DRIED = "A small bite."
-		
+
 	DESCRIBE.WIXIEGUN = "That just ain't right."
+	
+	DESCRIBE.MARA_BOSS1 = "Huh. Ya don't see that every day."
+	

@@ -486,3 +486,5 @@ STRINGS.ARMOR_CRAB_MAXHP = "Gem Encrusted Shell Armor"
 STRINGS.ARMOR_CRAB_REGEN = "Healing Rock Armor"
 STRINGS.MOON_BEACON_KIT = "Inactive Moon Beacon"
 STRINGS.MOON_BEACON = "Moon Beacon"
+
+STRINGS.MARA_BOSS1 = "Sans Undertale From The Hit Series Super Smash Brothers (Featuring Minecraft Steve) [& Knuckles]"

@@ -21,6 +21,7 @@ local MarshTable = {
 local HoodedTable = {
 
 	ancientwalrusTable = 1,
+	--Guardian_Of_Nothing = 0.5, -- Lacking the skins used to make it, looks kinda bad as a result. Might remake it?
 
 }
 local DarkForestTable = {
@@ -45,7 +46,7 @@ local SavannaTable = {
 local MosaicTable = { --need more mosaic setpieces
 
 	impactfulDiscovery = 1,
-
+	dudu_DUN_DUN = 0.01,
 
 }
 
@@ -55,6 +56,7 @@ local GeneralTable = {
 	baseFrag_rattyStorage = 0.5,
 	moonOil = 0.75,
 	moonFrag = 0.25,
+	
 }
 
 local function AddToTheWorld(inst,umss)

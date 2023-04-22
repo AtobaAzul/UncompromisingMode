@@ -25,20 +25,20 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICRETALIATION = ANNOUNCE.ANNOUNCE_DETACH_BUFF_ELECTRICATTACK
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now"
 	--FoodBuffs
-	
+
 	--CaliforniaKing
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING = "I've been pranked!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "That was terrific!"
 	DESCRIBE.CALIFORNIAKING = "I'll slip some in the others' drinks!"
 	--CaliforniaKing
-	
+
 	ANNOUNCE.ANNOUNCE_RNEFOG = "I love tempting fate! Hyuyu!"
     DESCRIBE.UNCOMPROMISING_RAT = "You won't run off with my flute again, hm?"
     DESCRIBE.UNCOMPROMISING_RATHERD = "A portal to the little pranksters' den."
     DESCRIBE.UNCOMPROMISING_RATBURROW = "A portal to the little pranksters' den."
     DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Rather hastily made, it'll fall apart."
     DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Home is where the heart is, or the fart in this case, because /Pee-yew!/"
-	
+
 	DESCRIBE.WINKY =
         {
             GENERIC = "Come here to cause trouble, %s?",
@@ -66,7 +66,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
             GHOST = "Karma bites, doesn't it %s?",
             FIRESTARTER = "Another firebug is among us!",
         }
-		
+
     DESCRIBE.RATPOISONBOTTLE = "My oh my, what a way to die!"
     DESCRIBE.RATPOISON = "A deadly slick! That should do the trick!"
 
@@ -79,7 +79,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "It seems the source of that malicious mycelium!"
     DESCRIBE.TOADLING = "Come to hop away...or perhaps to play?"
-	
+
     DESCRIBE.GASMASK = "Freezes sneezes!"
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
 	DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
@@ -108,7 +108,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.UM_SANDHILL = "Great grains of gravel!"
 	DESCRIBE.SNOWPILE = "Ooh what mischief we could cause with this! Hyuyu!"
 	DESCRIBE.SNOWGOGGLES = "Cats Eyes!"
-	
+
 	DESCRIBE.SNOWMONG = "What large teeth you have!"
 	DESCRIBE.SHOCKWORM = "This one is sparking!"
 	DESCRIBE.ZASPBERRY = "This will give someone quite a shock!"
@@ -122,7 +122,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.PLAGUEMASK = "It forbids bad scent, and lets good ones ferment!"
 	DESCRIBE.SPIDER_TRAPDOOR = "Hyuyu! What a surprise!"
 	DESCRIBE.TRAPDOOR = "Hyuyu! I see you!"
-	DESCRIBE.HOODEDTRAPDOOR = DESCRIBE.TRAPDOOR 
+	DESCRIBE.HOODEDTRAPDOOR = DESCRIBE.TRAPDOOR
 	DESCRIBE.WICKER_TENTACLE = "It won't live long outside of the book plane."
 	DESCRIBE.HONEY_LOG = "What a sickly sweet treat!"
 
@@ -133,17 +133,17 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.AIR_CONDITIONER = "I could fill it with pepper! Hyuyu!"
 	DESCRIBE.SPOREPACK = "It is very rude, and rots your food!"
 	DESCRIBE.SALTPACK = "I can now frolic through the snow in peace!"
-	
+
 	DESCRIBE.UM_SCORPION = "It crawls, creeps, and makes you sleep!"
 	DESCRIBE.SCORPIONCARAPACE = "This food is below even mortal tastes!"
 	DESCRIBE.SCORPIONCARAPACECOOKED = "Willow was wrong this time, fire did not improve it."
 	DESCRIBE.HARDSHELLTACOS = "It may be acceptible to mortals now, but not me!"
-	
+
 	DESCRIBE.SKELETONMEAT = "I don't care how sweet the meat tastes, I don't like mortal food!"
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "You can't hit me if you can't catch me! Hyuyu!"
 	DESCRIBE.VAMPIREBAT = "Huh, you lived longer than expected."
-								
+
 	--Swampyness
 	DESCRIBE.RICEPLANT = "It's just a plant, no strings attached!"
 	DESCRIBE.RICE = "Unappetizing mortal food."
@@ -151,7 +151,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.SEAFOODPAELLA = "It may not sate my hunger, but it does sooth my nose."
 	DESCRIBE.LICELOAF = "I feel bad for mortals who have to eat this."
 	DESCRIBE.SUNGLASSES = "Time for some fun in the sun!"
-	
+
 	DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "Moon rocks would make a great little shelter!"
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
@@ -203,14 +203,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.WATERMELON_LANTERN = "We made a jack-o-lantern with a watermelon! HAH!"
-	
+
 		--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "A snake who's quite good at making fakes!"
 	DESCRIBE.VIPERFRUIT = "It reeks, but it's unique!"
 	DESCRIBE.VIPERJAM = "I'm sure the mortals would enjoy the taste."
-	
-	
-	DESCRIBE.BLUEBERRYPLANT =         
+
+
+	DESCRIBE.BLUEBERRYPLANT =
 		{
             READY = "If you don't give it room, It'll give a big boom!",
 			FROZE = "It finally chilled out!",
@@ -223,7 +223,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
             ASHLEY_BROKEN = "She seemed a fine gal.",
             ASHLEY = "What a pity.",
         }
-	
+
 	DESCRIBE.BERNIE_ACTIVE =
         {
             GENERIC = "Good sir, are you aware you've no soul?",
@@ -247,8 +247,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.RNESKELETON = "Your soul came back!? That's not how it works!"
 	DESCRIBE.RAT_WHIP = "Equally as cruel as it's kitty-cousin!"
 	DESCRIBE.KLAUS_AMULET = "Do you have the key to my heart?"
-	DESCRIBE.CRABCLAW = "Magic is fun! Hyuyu!" 
-	DESCRIBE.HAT_RATMASK = "Let us hope for a fruitful search, hyuyu!" 
+	DESCRIBE.CRABCLAW = "Magic is fun! Hyuyu!"
+	DESCRIBE.HAT_RATMASK = "Let us hope for a fruitful search, hyuyu!"
 
 	DESCRIBE.ORANGE_VOMIT = "Hyuyu! Gross!"
 	DESCRIBE.GREEN_VOMIT = "Hyuyu! Gross!"
@@ -257,26 +257,26 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.YELLOW_VOMIT = "Hyuyu! Gross!"
 	DESCRIBE.PURPLE_VOMIT = "Hyuyu! Gross!"
 	DESCRIBE.PALE_VOMIT = "Hyuyu! Gross!"
-	
+
 	DESCRIBE.WALRUS_CAMP_EMPTY = DESCRIBE.WALRUS_CAMP.EMPTY
-	DESCRIBE.PIGKING_PIGGUARD = 
+	DESCRIBE.PIGKING_PIGGUARD =
 	{
 	GUARD = DESCRIBE.PIGMAN.GUARD,
 	WEREPIG = DESCRIBE.PIGMAN.WEREPIG,
 	}
-	
+
 	DESCRIBE.BIGHT = "It would be cruel to keep it living."
 	DESCRIBE.KNOOK = "With his hops, he could make me drop!"
 	DESCRIBE.ROSHIP = "That toss is making me feel crossed."
-	
+
 	DESCRIBE.UM_PAWN = "Don't get too close, you'll regret it the most!"
 	DESCRIBE.UM_PAWN_NIGHTMARE = "Don't get too close, you'll regret it the most!"
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
 	DESCRIBE.CAVE_EXIT_SUNKDECID= DESCRIBE.CAVE_EXIT
-	
-	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH	
+
+	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH
 	-- Blowgun stuff
 	DESCRIBE.UNCOMPROMISING_BLOWGUN = DESCRIBE.BLOWDART_PIPE
 	DESCRIBE.BLOWGUNAMMO_TOOTH = DESCRIBE.BLOWDART_PIPE
@@ -291,12 +291,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "My, what large teeth you have!"
 	DESCRIBE.CORNCAN = "Go to corny jail."
 	DESCRIBE.SKULLCHEST_CHILD = "Now this is an item that I find amusing."
-	
+
 	DESCRIBE.SLOBBERLOBBER = "Now I can spit REAL fire!"
 	DESCRIBE.GORE_HORN_HAT = "The more horns the better, I say!"
 	DESCRIBE.BEARGERCLAW = "Is it good luck, or bad luck? I just don't remember!"
 	DESCRIBE.FEATHER_FROCK = "Feathered foolishness!"
-	
+
 	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nIt's changed shape, it will only flow through the crabs claw now!"
 	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nIt's changed shape, it will only flow through the crabs claw now!"
 	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\nIt's changed shape, it will only flow through the crabs claw now!"
@@ -304,11 +304,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\nIt's changed shape, it will only flow through the crabs claw now!"
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nIt's changed shape, it will only flow through the crabs claw now!"
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nIt's changed shape, it will only flow through the crabs claw now!"
-	
+
 	DESCRIBE.RED_MUSHED_ROOM = "Weird and gooey, mushed and chewy!"
 	DESCRIBE.GREEN_MUSHED_ROOM = "Weird and gooey, mushed and chewy!"
 	DESCRIBE.BLUE_MUSHED_ROOM = "Weird and gooey, mushed and chewy!"
-	
+
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "I'm still not sure if this is mortal food."
 	DESCRIBE.SKULLFLASK_EMPTY = "I gobbled it up!"
@@ -318,12 +318,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "The scaree becomes the scarer!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "And now the scarer is the scaree."
 	--StantonStuff
-	
+
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
-	
+
 	DESCRIBE.THEATERCORN = "Food designed for a show!"
 	DESCRIBE.DEERCLOPS_BARRIER = "A foolish attempt to contain this imp!"
-	
+
 
 	DESCRIBE.MOONMAW_DRAGONFLY = "Looks like you flew too close to the moon!"
 	DESCRIBE.MOONMAW_LAVAE = "Hyuyu! How lethal!"
@@ -338,7 +338,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.MOONMAW_GLASSSHARDS = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
 	DESCRIBE.MOONMAW_LAVAE_RING = DESCRIBE.MOONMAW_LAVAE
 	DESCRIBE.MUTATOR_TRAPDOOR = DESCRIBE.MUTATOR_WARRIOR
-	
+
 	DESCRIBE.WOODPECKER = "I wouldn't find a life of drilling all that thrilling."
 	DESCRIBE.SNOTROAST = "This is just gross."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "Perhaps I've gone mad, to eat something that bad."
@@ -362,9 +362,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "His song shall make them strong!"
 	DESCRIBE.PIED_PIPER_FLUTE = "Let us sing, and they'll come under our wing!"
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "He'll take all our stuff with that pack, get it back!"
-	
+
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "Pop goes the weasel!"
-	
+
 	ACTIONFAIL.CHARGE_FROM =
 	{
 		NOT_ENOUGH_CHARGE = "There's no spark!",
@@ -372,9 +372,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "That's the ticket!"
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "Zipped and zapped!"
-	
+
 	----UNDER THE WEATHER----
-	
+
 	DESCRIBE.WINONA_TOOLBOX = "A place to put the tools of trade."
 	ACTIONFAIL.WINONATOOLBOX = "My tools of trade are in another type of box."
 	DESCRIBE.WINONA_CATAPULT_ITEM = "It's a bit too complex for me."
@@ -391,18 +391,18 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.OCUPUS_TENTACLE = "You'd have to be a real sucker to eat this."
 	DESCRIBE.OCUPUS_TENTACLE_EYE = "I'm glad we're seeing eye to eye now."
 	DESCRIBE.OCUPUS_TENTACLE_COOKED = ""
-	
+
 	DESCRIBE.ARMOR_REED_UM = "It'll fall apart in a small breeze!"
 	DESCRIBE.ARMOR_SHARKSUIT_UM = "It makes me as sleek as some ocean freak."
 	DESCRIBE.ROCKJAWLEATHER = "Just a flesh wound."
-	
+
 	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
 	DESCRIBE.STUFFED_PEEPER_POPPERS = "The mortals surely can't like this."
 	DESCRIBE.UM_DEVILED_EGGS = "You're yolking me!"
 	DESCRIBE.LUSH_ENTRANCE = "Oh my, hoho! What an ominous hole!"
 	DESCRIBE.CRITTER_FIGGY = "We could be companions, I feel that'd be ideal!"
 	DESCRIBE.GIANT_TREE_BIRDNEST = "The nest of a bird, or so I've been told."
-	
+
     DESCRIBE.SLUDGE = "A slick of slime."
 	DESCRIBE.SLUDGE_OIL = "A putrid smell to wrinkle my nose."
     DESCRIBE.SLUDGE_SACK = "Icky, sticky and somewhat fishy."
@@ -417,7 +417,15 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
     DESCRIBE.UM_BEEGUN = "You better bee quick on the draw."
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
-	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "A king's ransom."
+DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "A king's ransom."
+DESCRIBE.SUNKENCHEST_ROYAL_RED = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_BLUE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_PURPLE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_GREEN = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_ORANGE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_YELLOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+DESCRIBE.SUNKENCHEST_ROYAL_RAINBOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+
 	DESCRIBE.STEERINGWHEEL_COPPER = "Take the wheel!"
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "I could steer the world if I desired!"
 	DESCRIBE.BOAT_BUMPER_COPPER = "Huff and puff, you won't blow this down!"
@@ -427,8 +435,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.UM_COALESCED_NIGHTMARE = "What is it that lurks in the minds of men?"
 	DESCRIBE.SLUDGE_CORK = "A boat leak it won't plug, it's much too snug!" --is this a stretch? yes. yes it is.
 	DESCRIBE.SLUDGESTACK = "Hyuyu, watch it spew sludge out the wazoo!" --yea
-	DESCRIBE.SPECTER_SHIPWRECK = "A place of ruin, much too soon." 
-	
+	DESCRIBE.SPECTER_SHIPWRECK = "A place of ruin, much too soon."
+
 	DESCRIBE.UNCOMPROMISING_HARPOON = "Stabbing things from a distance has never been easier."
 	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
 	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
@@ -436,7 +444,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.UM_MAGNERANGREEL = "Keep your enemies close!"
 	DESCRIBE.SIREN_THRONE = "What a shock, it's a rock!"
 	DESCRIBE.LAVASPIT_SLUDGE = "A fire from Hell to quell!"
-	
+
 	DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
 	DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
 	DESCRIBE.UM_BEEGUARD_BLOCKER = "We must find a breach in their bee fences!"
@@ -446,13 +454,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Do you like tricks too?"
 	DESCRIBE.UM_ORNAMENT_RAT = "Catch him by the tail!"
-	
+
 	DESCRIBE.TRINKET_WATHOM1 = "You've met with a terrible fate, haven't you?"
-	
+
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
-	
+
 	-- WIXIE RELATED STRINGS
-	
+
 	DESCRIBE.WIXIE_PIANO = "How about a jaunty tune?"
 	DESCRIBE.WIXIE_CLOCK = "Cuckoo! Cuckoo!"
 	DESCRIBE.WIXIE_WARDROBE = "Hmm? A portal of some kind?"
@@ -472,7 +480,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
-		
+
 	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_ROCK
@@ -481,14 +489,17 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 
 	DESCRIBE.MEATRACK_HAT = {
             GENERIC = DESCRIBE.MEATRACK.GENERIC,
-			
+
             DRYING = DESCRIBE.MEATRACK.DRYING,
             DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
-			
+
             DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
             DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
 	}
 	DESCRIBE.FISHMEAT_DRIED = "Drying makes it better, according to the mortals."
 	DESCRIBE.SMALLFISHMEAT_DRIED = "It just don't get it."
-		
+
 	DESCRIBE.WIXIEGUN = "Too much mischief!"
+	
+	DESCRIBE.MARA_BOSS1 = "Hoh? Where ever is your soul, funny bones?"
+	

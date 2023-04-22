@@ -968,6 +968,9 @@ Assets = {
 	Asset("ANIM", "anim/spikes_robin.zip"),
 	Asset("ANIM", "anim/spikes_robinwinter.zip"),
 	Asset("ANIM", "anim/spikes_canary.zip"),
+	
+	Asset("ANIM", "anim/mara_boss1.zip"),
+	Asset("ANIM", "anim/mara_boss1_bullets.zip"),
 
 
 

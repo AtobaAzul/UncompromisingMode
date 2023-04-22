@@ -32,14 +32,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.CALIFORNIAKING = "A challenge in a glass?"
 	--CaliforniaKing
 	DESCRIBE.FLORAL_BANDAGE = "The flowers and honey bring vitality to the broken!"
-	
+
 	ANNOUNCE.ANNOUNCE_RNEFOG = "A warrior needs to stay alert!"
     DESCRIBE.UNCOMPROMISING_RAT = "And thus cometh a plague upon both our houses!"
     DESCRIBE.UNCOMPROMISING_RATHERD = "Den of the little beasts!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "Den of the little beasts!"
     DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Goods travel with the speed of Ratatoskr."
     DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "Lair of the beast, and the treasure that lie within."
-	
+
 	DESCRIBE.WINKY =
         {
             GENERIC = "A man sized rat! Surely this is an omen!",
@@ -67,7 +67,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
             GHOST = "The little devil has been slain!",
             FIRESTARTER = "Up to your tricks, Loki?",
         }
-		
+
     DESCRIBE.RATPOISONBOTTLE = "My treasures, the bait. Mine fury, the trap."
     DESCRIBE.RATPOISON = "Emerge little plunderers, and face the end of days!"
 
@@ -80,7 +80,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "Let us rip out this affliction by the root!"
     DESCRIBE.TOADLING = "Fel guardians of corruption!"
-	
+
 	DESCRIBE.GASMASK = "Poisonous air will not consume me!!"
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
 	DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
@@ -109,7 +109,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.UM_SANDHILL = "I will not make a mountain out of a sandhill."
 	DESCRIBE.SNOWPILE = "Skaði would not be impressed."
 	DESCRIBE.SNOWGOGGLES = "We shall fight the storm itself!"
-	
+
 	DESCRIBE.SNOWMONG = "Begone, vile snowmonger!"
 	DESCRIBE.SHOCKWORM = "A vicious counter attack!"
 	DESCRIBE.ZASPBERRY = "Could Thor's power truly be contained in a wild fruit?"
@@ -125,7 +125,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.HOODEDTRAPDOOR = "Nothing there."
 	DESCRIBE.WICKER_TENTACLE = "A poisoned foe is no challenge!"
 	DESCRIBE.HONEY_LOG = "Flesh of the woods... what trickster is responsible for this?"
-	
+
 	DESCRIBE.BUSHCRAB = "A wild encounter!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "A weapon for fighting back the plagues!"
@@ -134,12 +134,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.AIR_CONDITIONER = "It fends off the airborne threats!"
 	DESCRIBE.SPOREPACK = "It masks my scent!"
 	DESCRIBE.SALTPACK = "It clears the battlefield!"
-	
+
 	DESCRIBE.UM_SCORPION = "Your pointy tail is no match for me!"
 	DESCRIBE.SCORPIONCARAPACE = "Meat! Trapped within a black shell!"
 	DESCRIBE.SCORPIONCARAPACECOOKED = "The fire slightly freed the reward inside."
 	DESCRIBE.HARDSHELLTACOS = "The scorpion's reward!"
-	
+
 	DESCRIBE.SKELETONMEAT = "A... spoil of... war..."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "A challenger!"
@@ -148,13 +148,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.CRITTERLAB_REAL_BROKEN = "With some moon rocks we could create the perfect battlements for tiny creatures!"
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
-	DESCRIBE.BUGZAPPER = "This is not a weapon worthy of a Valkyrie!"	
+	DESCRIBE.BUGZAPPER = "This is not a weapon worthy of a Valkyrie!"
 	--Swampyness
 	DESCRIBE.RICEPLANT = "A simple plant, but in water."
 	DESCRIBE.RICE = "I wouldn't eat it, even if I could!"
 	DESCRIBE.RICE_COOKED = "I refuse!"
 	DESCRIBE.SEAFOODPAELLA = "A mire-warrior's reward!"
-	
+
 	DESCRIBE.STUMPLING = "A small, angry woodland sprite!"
 	DESCRIBE.BIRCHLING = DESCRIBE.STUMPLING
 	DESCRIBE.MOON_TEAR = "Theres great power here! Of a mysterious kind..."
@@ -203,14 +203,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.WATERMELON_LANTERN = "Do you wish to fight, melon head?"
-	
+
 		--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "A serpent who fights a coward's way!"
 	DESCRIBE.VIPERFRUIT = "A fruit from Loki himself!"
 	DESCRIBE.VIPERJAM = "Still sticky and gross, but contained."
-	
-	
-	DESCRIBE.BLUEBERRYPLANT =         
+
+
+	DESCRIBE.BLUEBERRYPLANT =
 		{
             READY = "Fruit that fights back? Respectable.",
 			FROZE = "It can't fight back anymore.",
@@ -223,7 +223,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
             ASHLEY_BROKEN = "It has gone to Valhalla.",
             ASHLEY = "It's a stuffed beast.",
         }
-	
+
 	DESCRIBE.BERNIE_ACTIVE =
         {
             GENERIC = "What a brave beast!",
@@ -243,12 +243,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.MAGMAHOUND = "It battles from afar, thy coward!"
 	DESCRIBE.LIGHTNINGHOUND = "Thor's minion? What hath I done to gain his ire?"
 	DESCRIBE.SPOREHOUND = "Fenrir's spawn, twisted beyond recognition."
-	DESCRIBE.GLACIALHOUND = "A frozen hide!"	
+	DESCRIBE.GLACIALHOUND = "A frozen hide!"
 	DESCRIBE.RNESKELETON = "A fallen warrior! Raise your weapon if you wish to fall again!"
 	DESCRIBE.RAT_WHIP = "Thy lashes sting, a feared weapon!"
 	DESCRIBE.KLAUS_AMULET = "The lock of a warrior!"
-	DESCRIBE.CRABCLAW = "A magnificent weapon to be adorned with jewels!" 
-	DESCRIBE.HAT_RATMASK = "Reminds me of the masks back in the theatre." 
+	DESCRIBE.CRABCLAW = "A magnificent weapon to be adorned with jewels!"
+	DESCRIBE.HAT_RATMASK = "Reminds me of the masks back in the theatre."
 
 	DESCRIBE.ORANGE_VOMIT = "... No."
 	DESCRIBE.GREEN_VOMIT = "... No."
@@ -257,26 +257,26 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.YELLOW_VOMIT = "... No."
 	DESCRIBE.PURPLE_VOMIT = "... No."
 	DESCRIBE.PALE_VOMIT = "... No."
-	
+
 	DESCRIBE.WALRUS_CAMP_EMPTY = DESCRIBE.WALRUS_CAMP.EMPTY
-	DESCRIBE.PIGKING_PIGGUARD = 
+	DESCRIBE.PIGKING_PIGGUARD =
 	{
 	GUARD = DESCRIBE.PIGMAN.GUARD,
 	WEREPIG = DESCRIBE.PIGMAN.WEREPIG,
 	}
-	
+
 	DESCRIBE.BIGHT = "These warriors shall not accept defeat!"
 	DESCRIBE.KNOOK = "Two warriors mashed together!"
 	DESCRIBE.ROSHIP = "They fight a coward's way."
-	
+
 	DESCRIBE.UM_PAWN = "A coward who hides behind their comrades."
 	DESCRIBE.UM_PAWN_NIGHTMARE = "A corward who hides behind their comrades."
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
 	DESCRIBE.CAVE_EXIT_SUNKDECID= DESCRIBE.CAVE_EXIT
-	
-	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH	
+
+	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH
 	-- Blowgun stuff
 	DESCRIBE.UNCOMPROMISING_BLOWGUN = DESCRIBE.BLOWDART_PIPE
 	DESCRIBE.BLOWGUNAMMO_TOOTH = DESCRIBE.BLOWDART_PIPE
@@ -291,12 +291,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "A devious weapon!"
 	DESCRIBE.CORNCAN = "Food that can survive a voyage!"
 	DESCRIBE.SKULLCHEST_CHILD = "The gods keep my spoils safe."
-	
+
 	DESCRIBE.SLOBBERLOBBER = "I spite on mine enemies."
 	DESCRIBE.GORE_HORN_HAT = "Brute force beats all!"
 	DESCRIBE.BEARGERCLAW = "The mighty beasts power is now mine."
 	DESCRIBE.FEATHER_FROCK = "A foul feathered frock!"
-	
+
 	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nShaped only for battle!"
 	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nShaped only for battle!"
 	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\nShaped only for battle!"
@@ -304,11 +304,11 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\nShaped only for battle!"
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nShaped only for battle!"
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nShaped only for battle!"
-	
+
 	DESCRIBE.RED_MUSHED_ROOM = "Mushed and crushed!"
 	DESCRIBE.GREEN_MUSHED_ROOM = "Mushed and crushed!"
 	DESCRIBE.BLUE_MUSHED_ROOM = "Mushed and crushed!"
-	
+
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "An honorary mead before battle! To great strength!"
 	DESCRIBE.SKULLFLASK_EMPTY = "An empty flask, it will be refilled!"
@@ -318,9 +318,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "I fear NOTHING!"
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "A valkyrie never backs down."
 	--StantonStuff
-	
+
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
-	
+
 	DESCRIBE.THEATERCORN = "Food for the observers, not for the warriors."
 	DESCRIBE.DEERCLOPS_BARRIER = "Strike the weak barracades!"
 
@@ -339,7 +339,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.MOONMAW_LAVAE_RING = DESCRIBE.MOONMAW_LAVAE
 
 	DESCRIBE.MUTATOR_TRAPDOOR = DESCRIBE.MUTATOR_WARRIOR
-	
+
 	DESCRIBE.WOODPECKER = "Your beak is no match for my spear!"
 	DESCRIBE.SNOTROAST = "A waste of the spoils of war."
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "I feel unwell..."
@@ -362,7 +362,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "I will fell you, commander!"
 	DESCRIBE.PIED_PIPER_FLUTE = "The songs I could play!"
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Coward, stop running off!"
-	
+
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "We live together or drown together, my faithful vessel!"
 
 	ACTIONFAIL.CHARGE_FROM =
@@ -372,9 +372,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "I hath received Thors blessing!"
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "Thor punishes my ineptitude!"
-	
+
 	----UNDER THE WEATHER----
-	
+
 	DESCRIBE.WINONA_TOOLBOX = "Not needed, I have every tool for battle I require."
 	ACTIONFAIL.WINONATOOLBOX = "Encore! It hath no tools of war!"
 	DESCRIBE.WINONA_CATAPULT_ITEM = "An evil contraption!"
@@ -386,23 +386,23 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.MINERHAT_ELECTRICAL = "Thors boons are without doubt."
 	DESCRIBE.OCEAN_SPEAKER = "It echoes songs unfit for battle!"
 	--DESCRIBE.UM_SIREN = "Finally a worthy opponent, our battle shall be legendary!"
-	
+
 	--DESCRIBE.OCUPUS_BEAK = ""
 	DESCRIBE.OCUPUS_TENTACLE = "I will not be brought down into the depths today."
 	DESCRIBE.OCUPUS_TENTACLE_EYE = "Eye for an eye!"
 	DESCRIBE.OCUPUS_TENTACLE_COOKED = "I see food, I eat it!"
-	
+
 	DESCRIBE.ARMOR_REED_UM = "Rush protection. It won't last long."
 	DESCRIBE.ARMOR_SHARKSUIT_UM = "The armor of a vicious ocean warrior."
 	DESCRIBE.ROCKJAWLEATHER = "Spoils from the deep."
-	
+
 	DESCRIBE.EYEOFTERROR_MINI_ALLY = DESCRIBE.EYEOFTERROR_MINI
 	DESCRIBE.STUFFED_PEEPER_POPPERS = "The remains of a valiant foe, watch with disgust!"
 	DESCRIBE.UM_DEVILED_EGGS = "I hath hatched pure evil!"
 	DESCRIBE.LUSH_ENTRANCE = "I've no time to dig when there's hunts to be had!"
 	DESCRIBE.CRITTER_FIGGY = "A blight spawned warrior!"
 	DESCRIBE.GIANT_TREE_BIRDNEST = "The start of many mighty warriors!"
-	
+
     DESCRIBE.SLUDGE = "Vile ichor from Hel!"
 	DESCRIBE.SLUDGE_OIL = "It is been condensed into a pure essence."
     DESCRIBE.SLUDGE_SACK = "Discomfort is a small price to pay."
@@ -418,6 +418,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "Treasures for our hall!"
+	DESCRIBE.SUNKENCHEST_ROYAL_RED = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_BLUE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_PURPLE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_GREEN = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_ORANGE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_YELLOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_RAINBOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
 	DESCRIBE.STEERINGWHEEL_COPPER = "My vessel will be covered from all angles of attack."
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "Sturdy, but a it requires a vessel to steer."
 	DESCRIBE.BOAT_BUMPER_COPPER = "Plate armor to keep the waves at bay."
@@ -427,8 +434,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.UM_COALESCED_NIGHTMARE = "Fear manifest!"
 	DESCRIBE.SLUDGE_CORK = "This will keep the ichor at bay."
 	DESCRIBE.SLUDGESTACK = "Ichor spews from Hel's veins!"
-	DESCRIBE.SPECTER_SHIPWRECK = "Swept away by the ocean, and left to decay." 
-	
+	DESCRIBE.SPECTER_SHIPWRECK = "Swept away by the ocean, and left to decay."
+
 	DESCRIBE.UNCOMPROMISING_HARPOON = "Stabbing things from a distance has never been easier."
 	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
 	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
@@ -446,13 +453,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "Awaken, foul beast!"
 	DESCRIBE.UM_ORNAMENT_RAT = "You are beneath me, little one!"
-	
+
 	DESCRIBE.TRINKET_WATHOM1 = "What sort of instrument is this?"
-	
+
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
-	
+
 	-- WIXIE RELATED STRINGS
-	
+
 	DESCRIBE.WIXIE_PIANO = "I shall write a symphony worthy of my greatness!"
 	DESCRIBE.WIXIE_CLOCK = "Time stops for no one! Oh, wait..."
 	DESCRIBE.WIXIE_WARDROBE = "What lies inside? A beast of burden?"
@@ -472,7 +479,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
-		
+
 	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_ROCK
@@ -481,14 +488,17 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WATHGRITHR.ACTIONFAIL
 
 	DESCRIBE.MEATRACK_HAT = {
             GENERIC = DESCRIBE.MEATRACK.GENERIC,
-			
+
             DRYING = DESCRIBE.MEATRACK.DRYING,
             DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
-			
+
             DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
             DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
 	}
 	DESCRIBE.FISHMEAT_DRIED = "I feast for a day!"
 	DESCRIBE.SMALLFISHMEAT_DRIED = "Barely a snack!"
-		
+
 	DESCRIBE.WIXIEGUN = "This modern warfare frightens me."
+	
+	DESCRIBE.MARA_BOSS1 = "YES!! FIGHT ME, DEMON!!"
+	

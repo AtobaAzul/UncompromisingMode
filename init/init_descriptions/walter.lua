@@ -32,14 +32,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.CALIFORNIAKING = "I'd dare Wortox to finish the whole thing!"
 	--CaliforniaKing
 	DESCRIBE.FLORAL_BANDAGE = "This stuff's potent!"
-	
+
 	ANNOUNCE.ANNOUNCE_RNEFOG = "ooOOOOoo, it's getting VERY spooky now!"
     DESCRIBE.UNCOMPROMISING_RAT = "I'd share, but they seem more interested in just TAKING our stuff."
     DESCRIBE.UNCOMPROMISING_RATHERD = "A Pine Tree Pioneer never enters a rat den head first!"
     DESCRIBE.UNCOMPROMISING_RATBURROW = "A Pine Tree Pioneer never enters a rat den head first!"
     DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Wow! She can dig holes just as good as Woby!"
     DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "She puts everything in there, I hope she doesn't mind sharing."
-	
+
 	DESCRIBE.WINKY =
         {
             GENERIC = "Woah! Are you a were-rat, %s?",
@@ -67,7 +67,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
             GHOST = "A pinetree pioneer always helps those in need! Even if they are mean.",
             FIRESTARTER = "Fire is no joke, %s! Please stop laughing.",
         }
-	
+
     DESCRIBE.RATPOISONBOTTLE = "If there's no other option..."
     DESCRIBE.RATPOISON = "I hope nothing friendly gets into it..."
 
@@ -80,7 +80,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 
     DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "I've never seen caps like those before!"
     DESCRIBE.TOADLING = "He could swallow me whole... I think I'll keep my distance."
-	
+
 	DESCRIBE.GASMASK = "Smelly saftey first!"
 	DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
 	DESCRIBE.MOTHERGOOSE = DESCRIBE.MOOSE
@@ -110,7 +110,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.UM_SANDHILL = "I will not make a mountain out of a sandhill."
 	DESCRIBE.SNOWPILE = "A shovel would help against frostbite when clearing these!"
 	DESCRIBE.SNOWGOGGLES = "They're a bit big, but they're warm!"
-	
+
 	DESCRIBE.SNOWMONG = "Big burrowing bugs and beetles bite back big burrowing bugs and beagles-- aww..."
 	DESCRIBE.SHOCKWORM = "Don't touch it! It's a living electrical hazard!"
 	DESCRIBE.ZASPBERRY = "A whats berry?"
@@ -126,7 +126,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.HOODEDTRAPDOOR = "Remember the spiders!"
 	DESCRIBE.WICKER_TENTACLE = "I think it's poisoned, wish I could help..."
 	DESCRIBE.HONEY_LOG = "A Pine Tree Pioneer knows better than to try and eat yourself."
-	
+
 	DESCRIBE.BUSHCRAB = "A perfect disguise! You sure fooled me!"
 	DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
 	DESCRIBE.DISEASECUREBOMB = "A little home made recipe, courtesy of nature!"
@@ -135,12 +135,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.AIR_CONDITIONER = "Are we sure inhaling mushrooms is a good idea?"
 	DESCRIBE.SPOREPACK = "Anything can be useful if you have the know how!"
 	DESCRIBE.SALTPACK = "This will take care of the snow piles, though I prefer to do things myself!"
-	
+
 	DESCRIBE.UM_SCORPION = "Fun fact: You can suck the venom out of a bite wound! Not sure about scorpion stings though..."
 	DESCRIBE.SCORPIONCARAPACE = "Uhh, Woby, you can have this one."
 	DESCRIBE.SCORPIONCARAPACECOOKED = "It's slightly better, but I would rather Woby have it."
 	DESCRIBE.HARDSHELLTACOS = "Huh, isn't half bad."
-	
+
 	DESCRIBE.SKELETONMEAT = "I... I don't like stories about people at their most desperate..."
 	DESCRIBE.CHIMP = DESCRIBE.MONKEY
 	DESCRIBE.SWILSON = "Woah! Wilson, what happened to you?!"
@@ -150,7 +150,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 	DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 	DESCRIBE.BUGZAPPER = "I was the best flyswatter back at camp."
-		
+
 	--Swampyness
 	DESCRIBE.RICEPLANT = "Another swamp monster, for sure!"
 	DESCRIBE.RICE = "Found this in the swamp monster's hair!"
@@ -158,7 +158,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.SEAFOODPAELLA = "I made it with all sorts of swampy stuff!"
 	DESCRIBE.LICELOAF = "Looks like rations to me!"
 	DESCRIBE.SUNGLASSES = "Nice!"
-	
+
 	DESCRIBE.STUMPLING = "Woah! Do you see that, Woby?"
 	DESCRIBE.BIRCHLING = DESCRIBE.STUMPLING
 	DESCRIBE.MOON_TEAR = "Far away from home, huh? Woby and I will keep you company!"
@@ -204,12 +204,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
 	DESCRIBE.HOODED_MUSHTREE_SMALL = DESCRIBE.MUSHTREE_SMALL
 	DESCRIBE.WATERMELON_LANTERN = "I've heard of pumpkin heads before, but never melon heads!"
-	
+
 		--Viperstuff Quotes
 	DESCRIBE.VIPERWORM = "I wonder how it's making those!"
 	DESCRIBE.VIPERFRUIT = "I always wanted a pet snake!"
 	DESCRIBE.VIPERJAM = "I wish I could have some PB n' J."
-	
+
 	DESCRIBE.BLUEBERRYPLANT =
 		{
             READY = "Wow! Everything is huge around here!",
@@ -223,7 +223,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
             ASHLEY_BROKEN = "I-I'm sure we can fix her.",
             ASHLEY = "She burnt herself out.",
         }
-	
+
 	DESCRIBE.BERNIE_ACTIVE =
         {
             GENERIC = "Woah! Is your bear haunted? Cursed?",
@@ -247,8 +247,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.RNESKELETON = "Hello! What story led you to be like that?"
 	DESCRIBE.RAT_WHIP = "Resourceful!... Bleh."
 	DESCRIBE.KLAUS_AMULET = "Goat power!"
-	DESCRIBE.CRABCLAW = "He left his claw behind!" 
-	DESCRIBE.HAT_RATMASK = "Look out, here comes the Rat Man!" 
+	DESCRIBE.CRABCLAW = "He left his claw behind!"
+	DESCRIBE.HAT_RATMASK = "Look out, here comes the Rat Man!"
 
 	DESCRIBE.ORANGE_VOMIT = "Thanks for sharing your digestive juices?"
 	DESCRIBE.GREEN_VOMIT = "Thanks for sharing your digestive juices?"
@@ -257,33 +257,33 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.YELLOW_VOMIT = "Thanks for sharing your digestive juices?"
 	DESCRIBE.PURPLE_VOMIT = "Thanks for sharing your digestive juices?"
 	DESCRIBE.PALE_VOMIT = "Thanks for sharing your digestive juices?"
-	
+
 	DESCRIBE.WALRUS_CAMP_EMPTY = DESCRIBE.WALRUS_CAMP.EMPTY
-	DESCRIBE.PIGKING_PIGGUARD = 
+	DESCRIBE.PIGKING_PIGGUARD =
 	{
 	GUARD = DESCRIBE.PIGMAN.GUARD,
 	WEREPIG = DESCRIBE.PIGMAN.WEREPIG,
 	}
-	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH	
+	DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH
 
 	DESCRIBE.BIGHT = "I misjudged their wake-up time!"
 	DESCRIBE.KNOOK = "It's got a fear factor, I guess."
 	DESCRIBE.ROSHIP = "What a hotshot you are."
-	
+
 	DESCRIBE.UM_PAWN = "Don't get too close now, Woby."
 	DESCRIBE.UM_PAWN_NIGHTMARE = "Don't get too close now, Woby."
 
 	DESCRIBE.CAVE_ENTRANCE_SUNKDECID = DESCRIBE.CAVE_ENTRANCE
 	DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
 	DESCRIBE.CAVE_EXIT_SUNKDECID= DESCRIBE.CAVE_EXIT
-	
+
 	-- Blowgun stuff
 	DESCRIBE.UNCOMPROMISING_BLOWGUN = DESCRIBE.BLOWDART_PIPE
 	DESCRIBE.BLOWGUNAMMO_TOOTH = DESCRIBE.BLOWDART_PIPE
 	DESCRIBE.BLOWGUNAMMO_FIRE = DESCRIBE.BLOWDART_FIRE
 	DESCRIBE.BLOWGUNAMMO_SLEEP = DESCRIBE.BLOWDART_SLEEP
 	DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
-	
+
 	DESCRIBE.ANCIENT_AMULET_RED = "I would still like to avoid being hurt."
 	DESCRIBE.UM_BEAR_TRAP = "Normally these are meant for, uh, bears."
 	DESCRIBE.UM_BEAR_TRAP_OLD = "Who left their gear out like this?"
@@ -291,12 +291,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Normally these are meant for, uh, bears."
 	DESCRIBE.CORNCAN = "Oh boy! Corn!"
 	DESCRIBE.SKULLCHEST_CHILD = "Wortox popped out of it once!"
-	
+
 	DESCRIBE.SLOBBERLOBBER = "No spitting in camp!"
 	DESCRIBE.GORE_HORN_HAT = "Think like a rhino, smash into things like a rhino!"
 	DESCRIBE.BEARGERCLAW = "Nature's design."
 	DESCRIBE.FEATHER_FROCK = "I've always wondered how it would feel to be a bird!"
-	
+
 	DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM.."\nIt's all carved up!"
 	DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM.."\nIt's all carved up!"
 	DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM.."\nIt's all carved up!"
@@ -304,13 +304,13 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM.."\nIt's all carved up!"
 	DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM.."\nIt's all carved up!"
 	DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM.."\nIt's all carved up!"
-	
+
 	DESCRIBE.RED_MUSHED_ROOM = "I'm not sure it's any better mushed."
 	DESCRIBE.GREEN_MUSHED_ROOM = "I'm not sure it's any better mushed."
 	DESCRIBE.BLUE_MUSHED_ROOM = "I'm not sure it's any better mushed."
-	
+
 	DESCRIBE.SHADOW_TELEPORTER = "Curious!"
-	
+
 	--StantonStuff
 	DESCRIBE.SKULLFLASK = "Cool!"
 	DESCRIBE.SKULLFLASK_EMPTY = "No more!"
@@ -320,12 +320,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE = "Huh, it didn't do anything."
 	ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = ""
 	--StantonStuff
-	
+
 	DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
-	
+
 	DESCRIBE.THEATERCORN = "This would be good with some amusement."
 	DESCRIBE.DEERCLOPS_BARRIER = "Some of the ice looks weaker."
-	
+
 
 	DESCRIBE.MOONMAW_DRAGONFLY = "Look at all of those sharp edges!"
 	DESCRIBE.MOONMAW_LAVAE = "Very sharp, and very fast!"
@@ -342,7 +342,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.MUTATOR_TRAPDOOR = DESCRIBE.MUTATOR_WARRIOR
 
 	DESCRIBE.MUTATOR_TRAPDOOR = DESCRIBE.MUTATOR_WARRIOR
-	
+
 	DESCRIBE.WOODPECKER = "I used to see them everywhere out hiking!"
 	DESCRIBE.SNOTROAST = "Do you want this one, Woby?"
 	ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "I think I'm gonna be sick..."
@@ -350,8 +350,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.BOOK_RAIN_UM = "Reminds me of a past camping trip."
 	DESCRIBE.DORMANT_RAIN_HORN = "You can hear the ocean if you put it to your ear!"
 	DESCRIBE.RAIN_HORN = "This might be useful for when it gets hot."
-    DESCRIBE.DRIFTWOODFISHINGROD = "The fish seem to like it."	
-	
+    DESCRIBE.DRIFTWOODFISHINGROD = "The fish seem to like it."
+
     ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
         LEVEL_1 = "All our items might get stolen if they're left on the ground!",
     }
@@ -365,9 +365,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.PIED_RAT = "Keep it down, you might hurt Woby's ears!"
 	DESCRIBE.PIED_PIPER_FLUTE = "Woby doesn't want me to play it."
 	DESCRIBE.UNCOMPROMISING_PACKRAT = "Whoa, he could be a great Pinetree Pioneer!"
-	
+
 	ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "I'd better find some solid ground before this thing pops!"
-	
+
 	ACTIONFAIL.CHARGE_FROM =
 	{
 		NOT_ENOUGH_CHARGE = "Does it need a new pair of batteries?",
@@ -375,9 +375,9 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	}
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "Woah! I think I almost got electrocuted."
 	ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "Woah! I think I almost got electrocuted."
-	
+
 	----UNDER THE WEATHER----
-	
+
 	DESCRIBE.WINONA_TOOLBOX = "I wonder what kind of gadgets and do-hickeys are inside."
 	ACTIONFAIL.WINONATOOLBOX = "I don't have a badge for this yet."
 	DESCRIBE.WINONA_CATAPULT_ITEM = "Machines aren't covered in the Pinetree Pioneers."
@@ -389,12 +389,12 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.MINERHAT_ELECTRICAL = "This makes refueling a lot easier."
 	DESCRIBE.OCEAN_SPEAKER = "I wonder if Woby can hear its frequency?"
 	--DESCRIBE.UM_SIREN = "Woah!! A REAL sea monster!!"
-	
+
 	DESCRIBE.OCUPUS_BEAK = "The mouth of the Kraken!"
 	DESCRIBE.OCUPUS_TENTACLE = ""
 	DESCRIBE.OCUPUS_TENTACLE_EYE = ""
 	DESCRIBE.OCUPUS_TENTACLE_COOKED = ""
-	
+
 	DESCRIBE.ARMOR_REED_UM = "It just might help me blend in."
 	DESCRIBE.ARMOR_SHARKSUIT_UM = "I don't need help swimming!"
 	DESCRIBE.ROCKJAWLEATHER = "Woah, geniune shark skin."
@@ -422,6 +422,14 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
 	DESCRIBE.SUNKENCHEST_ROYAL_RANDOM = "It was a royal pain just to get this."
+	DESCRIBE.SUNKENCHEST_ROYAL_RED = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_BLUE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_PURPLE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_GREEN = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_ORANGE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_YELLOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+	DESCRIBE.SUNKENCHEST_ROYAL_RAINBOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
+
 	DESCRIBE.STEERINGWHEEL_COPPER = "The future is now!"
 	DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "I prefer a nice wooden wheel."
 	DESCRIBE.BOAT_BUMPER_COPPER = "This will keep us safe!"
@@ -431,8 +439,8 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.UM_COALESCED_NIGHTMARE = "Is that what my nightmares look like? It's really not that scary."
 	DESCRIBE.SLUDGE_CORK = "A plug for an oversized bathtub!"
 	DESCRIBE.SLUDGESTACK = "What is that stuff? I don't recognize it..."
-	DESCRIBE.SPECTER_SHIPWRECK = "I hope it's haunted!" 
-	
+	DESCRIBE.SPECTER_SHIPWRECK = "I hope it's haunted!"
+
 	DESCRIBE.UNCOMPROMISING_HARPOON = "Stabbing things from a distance has never been easier."
 	DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
 	DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
@@ -440,20 +448,20 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.UM_MAGNERANGREEL = "Are we sure it's not going to start a forest fire?"
 	DESCRIBE.SIREN_THRONE = "Look Woby! A rock!" --Dumb kid.
 	DESCRIBE.LAVASPIT_SLUDGE = "Careful around that Woby!"
-		
+
 	DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
 	DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
 	DESCRIBE.UM_BEEGUARD_BLOCKER = "That's fine, I wasn't planning on getting too close anyway!"
 
 	DESCRIBE.UM_ORNAMENT_OPOSSUM = "I love these little guys! I wish we had more up north..."
 	DESCRIBE.UM_ORNAMENT_RAT = "All alone, little guy?"
-	
+
 	DESCRIBE.TRINKET_WATHOM1 = "It's... Treasure? I think? Is it??"
-	
+
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
-	
+
 	-- WIXIE RELATED STRINGS
-	
+
 	DESCRIBE.WIXIE_PIANO = "Piano lessons weren't a part of my training!"
 	DESCRIBE.WIXIE_CLOCK = "Shame it's broken, a ticking clock adds tension to horror stories!"
 	DESCRIBE.WIXIE_WARDROBE = "Reminds me of this one radio play I heard, the \"Haunted Wardrobe at the End of the Hall\" it's about-"
@@ -473,7 +481,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 	DESCRIBE.SLINGSHOTAMMO_SALT = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_SLIME = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_GOOP = DESCRIBE.SLINGSHOTAMMO_ROCK
-		
+
 	DESCRIBE.SLINGSHOTAMMO_LIMESTONE = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_TAR = DESCRIBE.SLINGSHOTAMMO_ROCK
 	DESCRIBE.SLINGSHOTAMMO_OBSIDIAN = DESCRIBE.SLINGSHOTAMMO_ROCK
@@ -482,14 +490,17 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WALTER.ACTIONFAIL
 
 	DESCRIBE.MEATRACK_HAT = {
             GENERIC = DESCRIBE.MEATRACK.GENERIC,
-			
+
             DRYING = DESCRIBE.MEATRACK.DRYING,
             DRYINGINRAIN = DESCRIBE.MEATRACK.DRYINGINRAIN,
-			
+
             DRYING_NOTMEAT = DESCRIBE.MEATRACK.DRYING_NOTMEAT,
             DRYINGINRAIN_NOTMEAT = DESCRIBE.MEATRACK.DRYINGINRAIN_NOTMEAT,
 	}
 	DESCRIBE.FISHMEAT_DRIED = "It's a great snack, if you don't mind the taste!"
 	DESCRIBE.SMALLFISHMEAT_DRIED = "A bite sized nutritional snack!"
-		
+
 	DESCRIBE.WIXIEGUN = "This is NOT Pinetree Pioneer approved!"
+	
+	DESCRIBE.MARA_BOSS1 = "It's ALIIIVE!!"
+	

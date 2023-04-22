@@ -1,7 +1,7 @@
 local function RGB(r, g, b)
     return { r / 255, g / 255, b / 255, 1 }
 end
-
+-- this file has so maNY SPACEBAR PRESSES HOLY
 
 local seg_time = 30
 
@@ -194,7 +194,6 @@ TUNING.DSTU =
     --Player changes
     ----------------------------------------------------------------------------
 
-
     --Tripover chance on walking with 100 wetness (depricated)
     TRIPOVER_HEALTH_DAMAGE           = 10,
     TRIPOVER_ONMAXWET_CHANCE_PER_SEC = 0.10,
@@ -303,7 +302,9 @@ TUNING.DSTU =
     GREEN_VOMIT_NUTRIENTS            = { 0, 0, 24 },
     PINK_VOMIT_NUTRIENTS             = { 24, 0, 0 },
     PALE_VOMIT_NUTRIENTS             = { 8, 8, 8 },
+    ----------------------------------------------------------------------------
     --Experimental and DEV
+    ----------------------------------------------------------------------------
 
     ELECTRICALMISHAP                 = GetModConfigData("electricalmishap"),
     ANNOUNCE_BASESTATUS              = GetModConfigData("announce_basestatus"),
@@ -475,6 +476,7 @@ TUNING.CRABKING_HEALTH_BONUS = TUNING.CRABKING_HEALTH_BONUS * 0.66
 TUNING.CRABKING_REGEN = TUNING.CRABKING_REGEN * 0.33
 TUNING.CRABKING_REGEN_BUFF = TUNING.CRABKING_REGEN * 0.33
 
+-- Wortox
 if GetModConfigData("wortox") == "UMNERF" then
     TUNING.WORTOX_HEALTH = 150
 end

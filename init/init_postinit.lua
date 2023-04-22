@@ -1,23 +1,22 @@
 --Update this list when adding files
 local component_post = {
-	--example:
 	"groundpounder",
 	"propagator",
 	"moisture",
 	"weapon",
-	--"hunter",
+--	"hunter",
 	"kramped",
 	"explosiveresist",
 	"crop",
 	"wildfires",
-	--"beargerspawner",
+--	"beargerspawner",
 	"workable",
 	"sleepingbaguser",
 	"hounded",
 	"sleeper",
 	"fueled",
 	"perishable",
-	--"carnivalevent",
+--	"carnivalevent",
 	"lootdropper",
 	"ambientsound",
 	"foodaffinity",
@@ -32,12 +31,12 @@ local component_post = {
 	"boatphysics",
 	"map",
 	"playerspawner",
-	--"drownable",
+--	"drownable",
 	"combat",
 	"combat_replica",
 	"hullhealth",
 	"health",
-	--"spellbook"
+--	"spellbook"
 	"finiteuses",
 	"piratespawner",
 	"repairable",
@@ -50,9 +49,9 @@ local prefab_post = {
 	"shieldofcthulu",
 	"clockworks",
 	"flingobalance",
-	--"chester",
+--	"chester",
 	"mushlight",
-	--"toadstool_cap", Moved to init_uncompromising_mod.lua
+--	"toadstool_cap", Moved to init_uncompromising_mod.lua
 	"amulet",
 	"cave_entrance_open",
 	"catcoon",
@@ -73,17 +72,17 @@ local prefab_post = {
 	"foodbuffs",
 	"mutatedhound",
 	"skeleton",
-	--"shadowcreature",
+--	"shadowcreature",
 	"berrybush",
-	--"papyrus",
+--	"papyrus",
 	"sporecloud",
 	"featherhat",
-	--"malbatross",
+--	"malbatross",
 	"mushrooms",
 	"rock_ice",
 	"toadstool",
 	"oasislake",
-	--"shadowcreature",
+--	"shadowcreature",
 	"lureplant",
 	"spiderden",
 	"stafflights",
@@ -91,7 +90,7 @@ local prefab_post = {
 	"sweatervest",
 	"fans",
 	"skeletonhat",
-	--"rock_avocado_fruit_sprout_sapling",
+--	"rock_avocado_fruit_sprout_sapling",
 	"icepack",
 	"heatrock",
 	"dragonfly_spawner",
@@ -103,7 +102,7 @@ local prefab_post = {
 	"klaus",
 	"mosquito",
 	"armor_bramble",
-	--"woby",
+--	"woby",
 	"cave_network",
 	"glasscutter",
 	"critterlab",
@@ -120,18 +119,18 @@ local prefab_post = {
 	"tophatreduction",
 	"ruinsstatues",
 	"moondial",
-	--"deciduoustrees",
+--	"deciduoustrees",
 	"pktrades",
 	"pigking",
 	"marblebean",
 	"reviver",
 	"krampus_sack",
-	--"bundle",
+--	"bundle",
 	"eyebrella",
 	"birds",
 	"tonichandlers",
 	"houndwarning",
-	--"carnival_host",
+--	"carnival_host",
 	"spider_whistle",
 	"spider_healer",
 	"siestahut",
@@ -145,14 +144,14 @@ local prefab_post = {
 	"minotaur_drops",
 	"frog",
 	"waterplant",
-	--"grassgator",
+--	"grassgator",
 	"alterguardian",
 	"seasonal_shoals",
 	"petals",
 	"lantern",
 	"minerhat",
 	"shark",
-	--"shadowchesspieces", Only bring this back when we make the fight cool
+--	"shadowchesspieces", Only bring this back when we make the fight cool
 	"fertilizer",
 	"stinger",
 	"boat_pirate",
@@ -178,26 +177,23 @@ local prefab_post = {
 }
 
 local stategraph_post = {
-	--example:
-	--"wilson",
 	"wilson",
 	"wilson_client",
 	"spider",
 	"frog",
-	--"wobysmall",
-	--"shadowcreature",
+--	"wobysmall",
+--	"shadowcreature",
 	"stalker_minion",
-	--"merm",
+--	"merm",
 	"carnival_host",
 	"catcoon",
 }
 
 local class_post = {
-	--example:
-	--"components/inventoryitem_replica",
-	--"screens/playerhud",
+--	"components/inventoryitem_replica",
+--	"screens/playerhud",
 	"widgets/itemtile",
-	--"widgets/hoverer",
+--	"widgets/hoverer",
 	"widgets/moisturemeter",
 	"widgets/controls",
 	"widgets/craftslot",
@@ -205,8 +201,7 @@ local class_post = {
 }
 
 local brain_post = {
-	--example:
-	--"hound",
+--	"hound",
 	"frog",
 	"nofirepanic",
 	"chester",
@@ -221,8 +216,8 @@ if GetModConfigData("wixie_walter") then
 	local wixie_prefabs =
 	{
 		"extra_claustrophobia_checks", -- extra tag that wixie checks when registering claustrophobia, for stuff like jackolanterns and ruins relics
-		"slingshot",             -- stuff for new slingshot aiming and wixie exclusivity
-		"walter",                -- all of walters things, including woby action
+		"slingshot",			 -- stuff for new slingshot aiming and wixie exclusivity
+		"walter",				-- all of walters things, including woby action
 		"wobysmall",
 		"wobybig",
 		"wormhole", -- wixie loses more sanity from wormholes
@@ -234,7 +229,7 @@ if GetModConfigData("wixie_walter") then
 		"healer",   -- Walter gets a 50% bonus from healing items, over time. works on companions too.
 		"bufferedaction", -- This handles wixie sending an rpc with the mouse pointer click location
 		"wobypicking", -- This reroutes the pickup action and pickable component to add items to wobys container instead of a nil inventory
-		"dryer",    -- This reroutes the dryer harvest action to add items to a container instead of a nil inventory
+		"dryer",	-- This reroutes the dryer harvest action to add items to a container instead of a nil inventory
 
 	}
 
@@ -435,7 +430,7 @@ if GetModConfigData("townportal_rework") then
 end
 
 if GetModConfigData("monstersmallmeat") then
-    table.insert(prefab_post, "bat")
+	table.insert(prefab_post, "bat")
 end
 
 if GetModConfigData("cookiecutterhat") then

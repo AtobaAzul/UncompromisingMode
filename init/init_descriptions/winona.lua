@@ -505,3 +505,6 @@ DESCRIBE.SUNKENCHEST_ROYAL_RAINBOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
 	DESCRIBE.SMALLFISHMEAT_DRIED = "Could use a few more of these..."
 
 	DESCRIBE.WIXIEGUN = "Is this the future of manufacturing? For shame."
+	
+	DESCRIBE.MARA_BOSS1 = "Ho GOLLY what is that."
+	

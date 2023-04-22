@@ -413,4 +413,11 @@ return {
 	"crab_hat",
 	"trident_ground_fx",
 	"moon_beacon",
+	"um_bombmixer1",
+    "moon_beacon",
+	"um_bombmixer_bombs2",
+	"um_bombmixer",
+	
+	"mara_boss1",
+	"mara_boss1_bullets",
 }

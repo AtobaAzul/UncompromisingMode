@@ -470,6 +470,8 @@ DESCRIBE.SUNKENCHEST_ROYAL_RAINBOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
 	DESCRIBE.TRINKET_WATHOM1 = "Haha, what a dork!"
 
 	DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
+	
+	DESCRIBE.MARA_BOSS1 = "It doesn't look so tough!"
 
 	local general_scripts = require("play_generalscripts")
 
