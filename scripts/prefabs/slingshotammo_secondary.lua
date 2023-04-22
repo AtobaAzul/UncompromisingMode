@@ -57,17 +57,21 @@ local function OnAttack(inst, attacker, target)
 					target.wixieammo_hitstuncd = nil
 				end)
 			
-				target.components.combat:GetAttacked(attacker, inst.finaldamage, inst)
+				target.components.combat:GetAttacked(attacker, inst.finaldamage, attacker)
 			else
-				target.components.combat:GetAttacked(attacker, 0, inst)
+				target.components.combat:GetAttacked(attacker, 0, attacker)
 				
 				if target.components.combat ~= nil then
 					target.components.combat:SetTarget(attacker)
 				end
 				
-				target.components.health:DoDelta(-inst.finaldamage, false, inst, false, attacker, false)
+				target.components.health:DoDelta(-inst.finaldamage, false, attacker, false, attacker, false)
 			end
 		end
+		
+		print(inst)
+		print(attacker)
+		print(target)
 		
 		ImpactFx(inst, attacker, target)
 		
@@ -433,7 +437,7 @@ local function OnHit_Gold(inst, attacker, target)
 							v.components.combat:SetShouldAvoidAggro(attacker)
 						end
 						
-						v.components.combat:GetAttacked(attacker, damage, inst)
+						v.components.combat:GetAttacked(attacker, damage, attacker)
 		
 						if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
 							v.components.sleeper:WakeUp()

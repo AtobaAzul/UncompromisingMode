@@ -170,7 +170,9 @@ local function ReleaseHassler(targetPlayer)
     assert(targetPlayer)
 
     local hassler = TheSim:FindFirstEntityWithTag("mothergoose")
-    if hassler ~= nil or not AllowedToAttack() then
+    local hassler_egg = TheSim:FindFirstEntityWithTag("gmooseegg")
+	
+    if hassler ~= nil or hassler_egg ~= nil or not AllowedToAttack() then
         return hassler -- There's already a hassler in the world, we're done here.
     end
 

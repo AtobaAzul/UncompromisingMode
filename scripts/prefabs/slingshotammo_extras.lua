@@ -61,15 +61,15 @@ local function DealDamage(inst, attacker, target, salty)
 				target.wixieammo_hitstuncd = nil
 			end)
 
-			target.components.combat:GetAttacked(attacker, inst.finaldamage, inst)
+			target.components.combat:GetAttacked(attacker, inst.finaldamage, attacker)
 		else
-			target.components.combat:GetAttacked(attacker, 0, inst)
+			target.components.combat:GetAttacked(attacker, 0, attacker)
 
 			if target.components.combat ~= nil then
 				target.components.combat:SetTarget(attacker)
 			end
 
-			target.components.health:DoDelta(-inst.finaldamage, false, inst, false, attacker, false)
+			target.components.health:DoDelta(-inst.finaldamage, false, attacker, false, attacker, false)
 		end
 
 		if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
@@ -181,7 +181,7 @@ local function DoPop(inst, remaining, total, level, hissvol)
 					--
 					--v:PushEvent("attacked", {attacker = inst.attacker or nil, damage = 5, weapon = nil})
 					if v:HasTag("epic") then
-						v.components.health:DoDelta(-10)
+						v.components.health:DoDelta(-10, inst.attacker)
 
 						if v.components.combat:GetImpactSound(v) ~= nil then
 							v.SoundEmitter:PlaySound(v.components.combat:GetImpactSound(v))
@@ -191,7 +191,7 @@ local function DoPop(inst, remaining, total, level, hissvol)
 							v.components.combat:SetShouldAvoidAggro(inst.attacker)
 						end
 
-						v.components.combat:GetAttacked(inst, 10, inst)
+						v.components.combat:GetAttacked(inst.attacker, 10, inst.attacker)
 
 						if v.components.combat ~= nil then
 							v.components.combat:SetTarget(inst.attacker or nil)
@@ -306,6 +306,8 @@ local function fn()
 	if inst.powerlevel == nil then
 		inst.powerlevel = 1
 	end
+	
+	inst.attacker = nil
 
     inst:AddComponent("stackable")
     inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
@@ -388,14 +390,14 @@ local function Vac(inst)
 	end
 end
 
-local function Damage(inst)
+local function Damage(inst, attacker, target)
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local damageents = TheSim:FindEntities(x, y, z, 1 * inst.Transform:GetScale(), { "_combat" }, AURA_EXCLUDE_TAGS)
 
 	for i, v in ipairs(damageents) do
 		if v.components.combat ~= nil and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
 			if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
-				v.components.combat:GetAttacked(inst, 2 * inst.Transform:GetScale(), inst)
+				v.components.combat:GetAttacked(attacker, 2 * inst.Transform:GetScale(), attacker)
 			end
 		end
 	end
@@ -669,7 +671,7 @@ end
 
 local function DealHealing(inst, attacker, target, salty)
     if target ~= nil and target:IsValid() and target:HasTag("player") and target.components.health ~= nil and not target.components.health:IsDead() then
-        target.components.health:DoDelta(1)
+        target.components.health:DoDelta(1, attacker)
     end
 end
 
@@ -1114,17 +1116,17 @@ local function GlassCut(inst)
 							v.wixieammo_hitstuncd = nil
 						end)
 
-						v.components.combat:GetAttacked(attacker, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), inst)
+						v.components.combat:GetAttacked(attacker, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), attacker)
 					else
-						v.components.combat:GetAttacked(attacker, 0, inst)
+						v.components.combat:GetAttacked(attacker, 0, attacker)
 
 						if v.components.combat ~= nil then
 							v.components.combat:SetTarget(attacker)
 						end
 
-						v.components.health:DoDelta(-((7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)), false, inst, false, attacker, false)
+						v.components.health:DoDelta(-((7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)), false, attacker, false, attacker, false)
 					end
-
+ 
 					if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
 						v.components.sleeper:WakeUp()
 					end
@@ -1171,15 +1173,15 @@ local function GlassCut(inst)
 							v.wixieammo_hitstuncd = nil
 						end)
 
-						v.components.combat:GetAttacked(attacker, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), inst)
+						v.components.combat:GetAttacked(attacker, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), attacker)
 					else
-						v.components.combat:GetAttacked(attacker, 0, inst)
+						v.components.combat:GetAttacked(attacker, 0, attacker)
 
 						if v.components.combat ~= nil then
 							v.components.combat:SetTarget(attacker)
 						end
 
-						v.components.health:DoDelta(-((7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)), false, inst, false, attacker, false)
+						v.components.health:DoDelta(-((7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)), false, attacker, false, attacker, false)
 					end
 
 					if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
@@ -1668,7 +1670,7 @@ local function Rebound(inst, attacker, target)
 			end
 			
 			if target.components.combat ~= nil then
-				target.components.combat:GetAttacked(inst, 10, inst)
+				target.components.combat:GetAttacked(attacker, 10, attacker)
 			end
 
 			if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
@@ -2023,7 +2025,7 @@ local function Tremor(inst)
 						v.components.combat:SetShouldAvoidAggro(inst.attacker)
 					end
 
-					v.components.combat:GetAttacked(inst.attacker, inst.finaldamage, inst)
+					v.components.combat:GetAttacked(inst.attacker, inst.finaldamage, inst.attacker)
 
 					if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
 						v.components.sleeper:WakeUp()

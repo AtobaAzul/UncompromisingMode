@@ -34,10 +34,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	LIGHTNING_ROD = "- Can charge electrical equipment.",
 	LIGHTER = "- Lasts forever in the hands of a pyromaniac.",
 	BANDAGE = "- Restores a bit of extra health over time.",
-	SISTURN = "- Petals inside decay into Mourning Glory.\n- Masks foul smells.",
-	POTTEDFERN = "- Masks foul smells.",
-	SUCCULENT_POTTED = "- Masks foul smells.",
-	ENDTABLE = "- Masks foul smells when decorated.",
+	SISTURN = "- Petals inside decay into Mourning Glory.",
 	MULTITOOL_AXE_PICKAXE = "- Creates shockwaves when chopping/mining.",
 	FEATHERPENCIL = "- Can rename Telelocator Focus' location name and Backtrek Watches.",
 

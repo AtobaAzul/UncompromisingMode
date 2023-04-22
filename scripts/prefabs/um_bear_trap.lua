@@ -528,20 +528,17 @@ local function VacantSpotNearby(x, y, z)
 end
 
 local function DoSpawnTrap(x, y, z)
-    local spawned = false
     if VacantSpotNearby(x, y, z) then --For spawning behind certain prefabs
         print("boutaruncode")
         SpawnNearVacantSpot(x, y, z)
     end
     local xi = x + math.random(-7, 7)
     local zi = z + math.random(-7, 7) --Prevent traps from being placed inside things. Add more things to list as you please
-    if spawned == false and TheWorld.Map:IsAboveGroundAtPoint(xi, 0, zi) and
+    if TheWorld.Map:IsAboveGroundAtPoint(xi, 0, zi) and
         #TheSim:FindEntities(xi, y, zi, 1.5, { "giant_tree" }) and #TheSim:FindEntities(xi, y, zi, 1.5, { "bear_trap" })
         == 0 and #TheSim:FindEntities(xi, y, zi, 5, { "bear_trap" }) < 2 then
         local trap = SpawnPrefab("um_bear_trap_old")
         trap.Transform:SetPosition(xi, y, zi)
-    else
-        DoSpawnTrap(x, y, z)
     end
 end
 

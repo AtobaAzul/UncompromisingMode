@@ -57,7 +57,9 @@ local function TrySlowdown(inst, target)
 	
 	target._honeyammo_speedmulttask = target:DoTaskInTime(0.25, function(i) i.components.locomotor:RemoveExternalSpeedMultiplier(i, debuffkey) i._honeyammo_speedmulttask = nil end)
 
-	target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.66)
+	if not target._slingslime_speedmulttask then
+		target.components.locomotor:SetExternalSpeedMultiplier(target, debuffkey, 0.66)
+	end
 end
 
 local function DoAreaSlow(inst)

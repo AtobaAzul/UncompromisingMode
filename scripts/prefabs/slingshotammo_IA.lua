@@ -62,15 +62,15 @@ local function DealDamage(inst, attacker, target, salty)
 				target.wixieammo_hitstuncd = nil
 			end)
 			
-			target.components.combat:GetAttacked(attacker, inst.finaldamage, inst)
+			target.components.combat:GetAttacked(attacker, inst.finaldamage, attacker)
 		else
-			target.components.combat:GetAttacked(attacker, 0, inst)
+			target.components.combat:GetAttacked(attacker, 0, attacker)
 			
 			if target.components.combat ~= nil then
 				target.components.combat:SetTarget(attacker)
 			end
 			
-			target.components.health:DoDelta(-inst.finaldamage, false, inst, false, attacker, false)
+			target.components.health:DoDelta(-inst.finaldamage, false, attacker, false, attacker, false)
 		end
 
 		if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
@@ -323,7 +323,7 @@ local function DoAreaBurn(inst)
 					v.components.sleeper:WakeUp()
 				end
 
-				v.components.health:DoDelta(-8)
+				v.components.health:DoDelta(-8, inst.attacker)
                 SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(v.Transform:GetWorldPosition())
 
                 --v:PushEvent("onignite")
@@ -357,6 +357,8 @@ local function OnHit_Obsidian(inst, attacker, target)
         inst.powerlevel = inst.powerlevel + 1
         target:PushEvent("wixiebite")
     end
+	
+	inst.attacker = attacker
 
     DealDamage(inst, attacker, target)
     ImpactFx(inst, attacker, target)
