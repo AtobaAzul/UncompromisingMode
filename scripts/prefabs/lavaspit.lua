@@ -242,23 +242,27 @@ local function LaunchMore(inst, xpos, zpos, sound)
 end
 
 local function OnHitInk(inst, attacker, target)
-    local x, y, z = inst.Transform:GetWorldPosition()
-    local lavaspit = SpawnPrefab("lavaspit_slobber")
+	if inst.nomorespawns == nil then
+		local x, y, z = inst.Transform:GetWorldPosition()
+		local lavaspit = SpawnPrefab("lavaspit_slobber")
 
-    lavaspit.Transform:SetPosition(x, 0, z)
-    lavaspit.lobber = inst.lobber
+		lavaspit.Transform:SetPosition(x, 0, z)
+		lavaspit.lobber = inst.lobber
 
 
-    if inst.LaunchMoreSpit then
-        LaunchMore(inst, -2.5, 0, true)
-        LaunchMore(inst, 2.5, -2.5)
-        LaunchMore(inst, 2.5, 2.5)
-    else
-        inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
+		if inst.LaunchMoreSpit then
+			LaunchMore(inst, -2.5, 0, true)
+			LaunchMore(inst, 2.5, -2.5)
+			LaunchMore(inst, 2.5, 2.5)
+		else
+			inst.SoundEmitter:PlaySound("dontstarve/common/fireAddFuel")
 
-    end
+		end
 
-    inst:DoTaskInTime(0, inst.Remove)
+		inst.nomorespawns = true
+
+		inst:DoTaskInTime(0, inst.Remove)
+	end
 end
 
 local function oncollide(inst, other)
@@ -324,6 +328,7 @@ local function projectilefn()
     inst.lobber = nil
     inst.LaunchMoreSpit = false
     inst.LaunchMorePhys = false
+	inst.nomorespawns = nil
 
     inst:AddComponent("complexprojectile")
     inst.components.complexprojectile:SetHorizontalSpeed(15)

@@ -178,10 +178,6 @@ local states=
 				end 
 			end),
         },
-		
-		onexit = function(inst)
-			inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
-		end,
     },
 
   	State{

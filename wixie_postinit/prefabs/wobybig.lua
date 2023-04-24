@@ -120,23 +120,31 @@ local function CheckForMoreTargets(inst)
 				
 	for i, v in ipairs(ents) do
 		if inst.wobytarget ~= nil and inst.wobytarget:IsValid() and not inst.wobytarget:HasTag("outofreach") and not inst.wobytarget:HasTag("INLIMBO") or inst.components.hunger:GetPercent() == 0 then
+			if inst._playerlink ~= nil and inst._playerlink:IsValid() and not inst._playerlink:IsNear(inst.wobytarget, 25) then
+				inst.oldwobytarget = inst.wobytarget
+				inst.wobytarget = nil
+			end
+			
 			break
 		end
-				
+
 		if v ~= nil and not v:HasTag("INLIMBO") and inst.oldwobytarget ~= nil and v ~= inst.oldwobytarget and v.prefab == inst.oldwobytarget.prefab and v:IsValid() then
 			if v.components.pickable == nil and v.components.harvestable == nil or v.components.pickable ~= nil and v.components.pickable.canbepicked or v.components.harvestable ~= nil and v.components.harvestable:CanBeHarvested() and v.components.combat == nil then
 				if v.components.inventoryitem then
 					for k = 1, inst.components.container.numslots do
 						if inst.components.container:GetItemInSlot(k) ~= nil and inst.components.container:GetItemInSlot(k).prefab == v.prefab and inst.components.container:GetItemInSlot(k).components.stackable ~= nil and not inst.components.container:GetItemInSlot(k).components.stackable:IsFull() then
 							inst.wobytarget = v
+
 							break
 						elseif not inst.components.container:IsFull() then
 							inst.wobytarget = v
+
 							break
 						end
 					end
 				else
 					inst.wobytarget = v
+					
 					break
 				end
 			end
