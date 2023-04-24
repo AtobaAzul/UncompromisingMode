@@ -285,6 +285,16 @@ for k, v in ipairs(inventoryitems) do
 end
 
 Assets = {
+    --crafting menu avatars
+	Asset("IMAGE", "images/crafting_menu_avatars/avatar_wixie.tex"),
+    Asset("ATLAS", "images/crafting_menu_avatars/avatar_wixie.xml"),
+
+	Asset("IMAGE", "images/crafting_menu_avatars/avatar_winky.tex"),
+	Asset("ATLAS", "images/crafting_menu_avatars/avatar_winky.xml"),
+
+	Asset("IMAGE", "images/crafting_menu_avatars/avatar_wathom.tex"),
+	Asset("ATLAS", "images/crafting_menu_avatars/avatar_wathom.xml"),
+
 	----TURF
 	Asset("IMAGE", "levels/textures/noise_hoodedmoss.tex"),
 	Asset("IMAGE", "levels/textures/mini_noise_jungle.tex"),
@@ -968,7 +978,7 @@ Assets = {
 	Asset("ANIM", "anim/spikes_robin.zip"),
 	Asset("ANIM", "anim/spikes_robinwinter.zip"),
 	Asset("ANIM", "anim/spikes_canary.zip"),
-	
+
 	Asset("ANIM", "anim/mara_boss1.zip"),
 	Asset("ANIM", "anim/mara_boss1_bullets.zip"),
 

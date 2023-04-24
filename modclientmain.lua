@@ -9,7 +9,7 @@ Assets = {
 	Asset("ANIM", "anim/ghost_winky_build.zip"),
 --	Asset("ANIM", "anim/wathom.zip"),
 --	Asset("ANIM", "anim/ghost_wathom_build.zip"),    -- Commented out because the standalone mod doesn't load these and works fine.
-	
+
 	Asset( "IMAGE", "bigportraits/winky.tex" ),
     Asset( "ATLAS", "bigportraits/winky.xml" ),
     Asset( "IMAGE", "bigportraits/wathom.tex" ),
@@ -18,7 +18,7 @@ Assets = {
     Asset( "IMAGE", "bigportraits/winky_none_oval.tex" ),
     Asset( "ATLAS", "bigportraits/winky_none.xml" ),
     Asset( "IMAGE", "bigportraits/wathom_none.tex" ),
-    Asset( "ATLAS", "bigportraits/wathom_none.xml" ),    
+    Asset( "ATLAS", "bigportraits/wathom_none.xml" ),
 
     Asset( "IMAGE", "images/saveslot_portraits/winky.tex" ),
     Asset( "ATLAS", "images/saveslot_portraits/winky.xml" ),
@@ -28,12 +28,12 @@ Assets = {
     Asset( "IMAGE", "images/names_gold_winky.tex" ),
     Asset( "ATLAS", "images/names_gold_winky.xml" ),
 	Asset( "IMAGE", "images/names_wathom.tex" ),
-    Asset( "ATLAS", "images/names_wathom.xml" ),    
-	
-	
+    Asset( "ATLAS", "images/names_wathom.xml" ),
+
+
 	Asset("ANIM", "anim/wixie.zip"),
 	Asset("ANIM", "anim/ghost_wixie_build.zip"),
-	
+
 	Asset( "IMAGE", "bigportraits/wixie.tex" ),
     Asset( "ATLAS", "bigportraits/wixie.xml" ),
 
@@ -45,9 +45,9 @@ Assets = {
 
     Asset( "IMAGE", "images/names_gold_wixie.tex" ),
     Asset( "ATLAS", "images/names_gold_wixie.xml" ),
-	
+
     Asset("IMAGE", "images/inventoryimages/meatrack_hat.tex" ),
-    Asset("ATLAS", "images/inventoryimages/meatrack_hat.xml"), 
+    Asset("ATLAS", "images/inventoryimages/meatrack_hat.xml"),
 }
 
 local STRINGS = GLOBAL.STRINGS
@@ -125,7 +125,7 @@ TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WIXIE = {"slingshot", "slingshotammo_rock
 STRINGS.CHARACTER_DESCRIPTIONS.walter = "*Not afraid of anything, except getting hurt \n*Is a master of survival tactics \n*Has a four-legged friend \n*Is an expert dog trainer \n*Hates to see innocent animals get hurt"
 
 TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WALTER = {"walterhat", "meatrack_hat", "meat", "monstermeat"}
-                
+
 TUNING.STARTING_ITEM_IMAGE_OVERRIDE["meatrack_hat"] = {
     atlas = "images/inventoryimages/meatrack_hat.xml",
     image = "meatrack_hat.tex",
