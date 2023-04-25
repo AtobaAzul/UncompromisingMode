@@ -115,7 +115,9 @@ env.AddStategraphPostInit("wilson", function(inst)
                     equip.components.weapon:OnAttack_NoDurabilityLoss(inst, target)
                 end
 
-                target.components.combat:GetAttacked(inst, damagecalc, equip)
+                if target.components.combat ~= nil then
+                    target.components.combat:GetAttacked(inst, damagecalc, equip)
+                end
             end
         end
     end
@@ -147,7 +149,7 @@ env.AddStategraphPostInit("wilson", function(inst)
                                 local tx, ty, tz = v.Transform:GetWorldPosition()
 
                                 local rad = math.rad(inst:GetAngleToPoint(tx, ty, tz))
-                                local velx = math.cos(rad) --* 4.5
+                                local velx = math.cos(rad)  --* 4.5
                                 local velz = -math.sin(rad) --* 4.5
 
                                 local giantreduction = v:HasTag("epic") and 1.5 or v:HasTag("smallcreature") and 0.8 or 1
@@ -155,8 +157,8 @@ env.AddStategraphPostInit("wilson", function(inst)
                                 local shovevalue = inst:HasTag("troublemaker") and 3 or 2
 
                                 local dx, dy, dz =
-                                tx + (((shovevalue / (i + 3)) * velx) / giantreduction) * cursemultiplier, ty,
-                                tz + (((shovevalue / (i + 3)) * velz) / giantreduction) * cursemultiplier
+                                    tx + (((shovevalue / (i + 3)) * velx) / giantreduction) * cursemultiplier, ty,
+                                    tz + (((shovevalue / (i + 3)) * velz) / giantreduction) * cursemultiplier
                                 local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
                                 local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
                                 local ocean_collision = TheWorld.Map:IsOceanAtPoint(dx, dy, dz)
