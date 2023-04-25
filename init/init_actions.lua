@@ -254,7 +254,7 @@ GLOBAL.ACTIONS.REPAIR.fn = function(act)
 			material = act.invobject
 		end
 
-		if material.prefab == "boatpatch_sludge" then
+		if material ~= nil and material.prefab == "boatpatch_sludge" then
 			return
 		else
 			return _RepairFn(act)
