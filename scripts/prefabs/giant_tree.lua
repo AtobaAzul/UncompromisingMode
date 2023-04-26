@@ -210,7 +210,7 @@ local function _GroundDetectionUpdate(debris, override_density)
                     #TheSim:FindEntities(x, 0, y, density, nil, QUAKEDEBRIS_CANT_TAGS, QUAKEDEBRIS_ONEOF_TAGS) > 1
                 ) then
                 --keep it
-                debris.persists = true
+                
                 debris.entity:SetCanSleep(true)
 				if debris.components.inventoryitem then
 					debris.components.inventoryitem.canbepickedup = true
@@ -231,7 +231,7 @@ local function _GroundDetectionUpdate(debris, override_density)
 		end
     elseif debris:IsInLimbo() then
         --failsafe, but maybe we got trapped or picked up somehow, so keep it
-        debris.persists = true
+        
         debris.entity:SetCanSleep(true)
         debris.shadow:Remove()
         debris.shadow = nil
@@ -287,7 +287,7 @@ local function SpawnDebris(inst,chopper,loottable)
         local debris = SpawnPrefab(prefab)
         if debris ~= nil then
             debris.entity:SetCanSleep(false)
-            debris.persists = false
+            
 			debris:AddTag("quakedebris")
             if debris.components.inventoryitem ~= nil and debris.components.inventoryitem.canbepickedup then
                 debris.components.inventoryitem.canbepickedup = false
