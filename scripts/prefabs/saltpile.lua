@@ -23,9 +23,9 @@ end
 
 local function OnPicked(inst) inst:Remove() end
 
-local function OnSpring(inst)
+local function OnIsRaining(inst)
 	if not TheWorld.state.iswinter then
-		inst:Remove()
+		inst:DoTaskInTime(math.random(), inst.Remove)
 	end
 end
 
@@ -76,7 +76,7 @@ local function fn()
     if not TheWorld.ismastersim then return inst end
 
     inst:AddComponent("perishable")
-    inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW)
+    inst.components.perishable:SetPerishTime(TUNING.PERISH_SUPERSLOW/2)
 
     inst.type = 1
 
@@ -91,9 +91,8 @@ local function fn()
 
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
-    --inst:WatchWorldState("isspring", OnSpring)
-    --inst:WatchWorldState("isautumn", OnSpring) -- Include other seasons incase someone is weird and disables spring for reasons unknown?
-    --inst:WatchWorldState("issummer", OnSpring)
+
+    inst:WatchWorldState("israining", OnIsRaining)
 
     return inst
 end
