@@ -25,7 +25,7 @@ env.AddComponentPostInit("combat", function(self)
 
     function self:GetAttacked(attacker, damage, weapon, stimuli, ...)
 		local weapon_check = weapon ~= nil and weapon:IsValid() and weapon or nil
-	
+
         local damageredirecttarget = self.redirectdamagefn ~= nil and
             self.redirectdamagefn(self.inst, attacker, damage, weapon_check, stimuli) or nil
 
@@ -41,7 +41,7 @@ env.AddComponentPostInit("combat", function(self)
 
         if (self.inst ~= nil and (self.inst.prefab == "crabking" or self.inst.prefab == "crabking_claw") and attacker ~= nil and (attacker.prefab == "cannonball_rock" or attacker.prefab == "cannonball_sludge")) and env.GetModConfigData("reworked_ck") then
             damage = damage *
-                (attacker.prefab == "cannonball_rock" and 2 or attacker.prefab == "cannonball_sludge" and 1.5)
+                (attacker.prefab == "cannonball_rock" and 4 or attacker.prefab == "cannonball_sludge" and 3)
             if self.inst.attack_count ~= nil then
                 self.inst.attack_count = math.clamp(self.inst.attack_count - 1, 0, 10)
             end
