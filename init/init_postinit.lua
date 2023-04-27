@@ -186,7 +186,7 @@ local stategraph_post = {
 	"stalker_minion",
 --	"merm",
 	"carnival_host",
-	"catcoon",
+    "catcoon",
 }
 
 local class_post = {
@@ -418,7 +418,8 @@ end
 if GetModConfigData("reworked_ck") then
 	table.insert(prefab_post, "crabking")
 	table.insert(prefab_post, "crabking_claw")
-	table.insert(stategraph_post, "crabkingclaw")
+    table.insert(stategraph_post, "crabkingclaw")
+    table.insert(stategraph_post, "crabking")
 end
 
 if GetModConfigData("hambatnerf") then

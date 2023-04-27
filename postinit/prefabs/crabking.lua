@@ -65,7 +65,7 @@ local function DoLineAttack(inst, rand_start)
 
 		for i = 1, math.clamp(dist, 0, 24) do
 			inst:DoTaskInTime(FRAMES * i, function()
-				local dx, dy, dz = start_x + (i * velx), 0, start_z + (i * velz)
+				local dx, dy, dz = (start_x + (i * velx))+math.random(-1,1), 0, (start_z + (i * velz))+math.random(-1,1)
 
 				local fx = SpawnPrefab("crabking_geyser_single")
 				fx.Transform:SetPosition(dx, dy, dz)
@@ -183,7 +183,7 @@ local function RetargetFn(inst)
 		function(guy)
 			return inst.components.combat:CanTarget(guy)
 				and (guy.components.combat:TargetIs(inst) or
-				guy:IsNear(inst, range)
+					guy:IsNear(inst, range)
 				)
 		end,
 		RETARGET_MUST_TAGS,
@@ -364,9 +364,9 @@ env.AddPrefabPostInit("crabking", function(inst)
 		"green",
 	}
 
-    inst:ListenForEvent("death", function(inst)
+	inst:ListenForEvent("death", function(inst)
 		if inst.long_cd ~= nil then
-            inst.long_cd:Cancel()
+			inst.long_cd:Cancel()
 			inst.long_cd = nil
 		end
 
@@ -375,63 +375,63 @@ env.AddPrefabPostInit("crabking", function(inst)
 
 			local pos = inst:GetPosition()
 			local messagebottletreasures = require("messagebottletreasures_um")
-			local pearl = inst.countgems(inst).pearl * 1.5
-			local red = inst.countgems(inst).red - pearl
-			local blue = inst.countgems(inst).blue - pearl
-			local purple = inst.countgems(inst).purple - pearl
-			local yellow = inst.countgems(inst).yellow - pearl
-			local orange = inst.countgems(inst).orange - pearl
-			local green = inst.countgems(inst).green - pearl
+			local pearl = inst.countgems(inst).pearl
+			local red = inst.countgems(inst).red
+			local blue = inst.countgems(inst).blue
+			local purple = inst.countgems(inst).purple
+			local yellow = inst.countgems(inst).yellow
+			local orange = inst.countgems(inst).orange
+			local green = inst.countgems(inst).green
 			local opal = inst.countgems(inst).opal
 			local count = 0
 
-			if math.random(6) < opal then
+			if math.random(6) < opal or pearl > 0 then
 				messagebottletreasures.GenerateTreasure(pos, "sunkenchest_royal_rainbow").Transform:SetPosition(
 					pos.x + math.random(-4, 4), pos.y, pos.z + math.random(-4, 4))
 				count = count + 1
-				if count > 3 then return end
+				if count > 3 and pearl <= 0 then return end
 			end
 
-			if math.random(6) < red then
+			if math.random(6) < red or pearl > 0 then
 				messagebottletreasures.GenerateTreasure(pos, "sunkenchest_royal_red").Transform:SetPosition(
 					pos.x + math.random(-4, 4), pos.y, pos.z + math.random(-4, 4))
 				count = count + 1
-				if count > 3 then return end
+				if count > 3 and pearl <= 0 then return end
 			end
 
-			if math.random(6) < blue then
+			if math.random(6) < blue or pearl > 0 then
 				messagebottletreasures.GenerateTreasure(pos, "sunkenchest_royal_blue").Transform:SetPosition(
 					pos.x + math.random(-4, 4), pos.y, pos.z + math.random(-4, 4))
 				count = count + 1
-				if count > 3 then return end
+				if count > 3 and pearl <= 0 then return end
 			end
 
-			if math.random(6) < purple then
+			if math.random(6) < purple or pearl > 0 then
 				messagebottletreasures.GenerateTreasure(pos, "sunkenchest_royal_purple").Transform:SetPosition(
 					pos.x + math.random(-4, 4), pos.y, pos.z + math.random(-4, 4))
 				count = count + 1
-				if count > 3 then return end
+				if count > 3 and pearl <= 0 then return end
 			end
 
-			if math.random(6) < yellow then
+			if math.random(6) < yellow or pearl > 0 then
 				messagebottletreasures.GenerateTreasure(pos, "sunkenchest_royal_yellow").Transform:SetPosition(
 					pos.x + math.random(-4, 4), pos.y, pos.z + math.random(-4, 4))
 				count = count + 1
-				if count > 3 then return end
+				if count > 3 and pearl <= 0 then return end
 			end
 
-			if math.random(6) < orange then
+			if math.random(6) < orange or pearl > 0 then
 				messagebottletreasures.GenerateTreasure(pos, "sunkenchest_royal_orange").Transform:SetPosition(
 					pos.x + math.random(-4, 4), pos.y, pos.z + math.random(-4, 4))
 				count = count + 1
-				if count > 3 then return end
+				if count > 3 and pearl <= 0 then return end
 			end
 
-			if math.random(6) < green then
+			if math.random(6) < green or pearl > 0 then
 				messagebottletreasures.GenerateTreasure(pos, "sunkenchest_royal_green").Transform:SetPosition(
 					pos.x + math.random(-4, 4), pos.y, pos.z + math.random(-4, 4))
 				count = count + 1
-				if count > 3 then return end
+				if count > 3 and pearl <= 0 then return end
 			end
 
 			if count == 0 then

@@ -9,7 +9,7 @@ local function play_shadow_animation(inst, anim, loop)
     end
 end
 
-env.AddStategraphPostInit("crabkingclaw", function(inst)
+env.AddStategraphPostInit("crabkingclaw", function(sg)
     local states = {
         State {
             name = "clamp_attack",
@@ -101,6 +101,6 @@ env.AddStategraphPostInit("crabkingclaw", function(inst)
 
     for k, v in pairs(states) do
         assert(v:is_a(State), "Non-state added in mod state table!")
-        inst.states[v.name] = v
+        sg.states[v.name] = v
     end
 end)

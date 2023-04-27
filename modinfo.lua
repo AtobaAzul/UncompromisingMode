@@ -163,7 +163,7 @@ configuration_options =
 	},
 	BinaryConfig("moon_transformations", "Moon Transformations", "Certain things transform under the dim light of the full \"Moon\".", false),
 	SkipSpace(),
-	
+
 ------------------------------
 -- Character Reworks --
 ------------------------------
@@ -233,7 +233,7 @@ configuration_options =
 	BinaryConfig("wendy", "Wendy", "Abigail is nerfed to not increase Wendy's maximum damage above average.", true),
 	BinaryConfig("wx78", "WX-78", "No longer heals from lightning.", true),
 	SkipSpace(),
-	
+
 ------------------------------
 -- Weather --
 ------------------------------
@@ -294,7 +294,7 @@ configuration_options =
 
 	BinaryConfig("hotcaves", "Hotter Caves", "During Summer, caves are just hot enough to overheat you without any gear.", true),
 	SkipSpace(),
-	
+
 --[[ This section disabled until we actually use it.
 ------------------------------
 -- Gamemode --
@@ -336,7 +336,7 @@ configuration_options =
 	BinaryConfig("rice", "Rice", "Rice spawns in swamp ponds.", true),
 	BinaryConfig("trapdoorspiders", "Trapdoor Spiders", "Enables the spawning of Trapdoor Spider mounds on worldgen. Their dens are usually covered in a resource rich grass.", true),
 	SkipSpace(),
-	
+
 ------------------------------
 -- Rats --
 ------------------------------
@@ -385,7 +385,7 @@ configuration_options =
 	},
 	BinaryConfig("itemcheck", "Item Score", "Equippable items and mole bait items increase the \'rat score\' value.", true),
 	SkipSpace(),
-	
+
 -----------------------------
 -- Items and Structures --
 -----------------------------
@@ -451,8 +451,9 @@ configuration_options =
 	},
 	BinaryConfig("hambatnerf", "Ham Bat Nerf", "Spoils faster and minimum damage is lower.", true),
 	BinaryConfig("cookiecutterhat", "Cookie Cutter Hat", "Cookie Cutter Caps now reflects some damage back at the attacker.", true),
+	BinaryConfig("beefalo_nerf", "Beefalo Nerf", "Beefalo take half of the damage taken, instead of all.", false),
 	SkipSpace(),
-	
+
 -----------------------------
 -- Food --
 -----------------------------
@@ -464,7 +465,7 @@ configuration_options =
 	BinaryConfig("generalcrockblocker", "Trash Filler Blocker", "Heavy use of certain low quality Crockpot ingredients, such as Twigs, Ice, Buttefly Wings, and other inedibles  will result in Wet Goop.", true),
 	BinaryConfig("icecrockblocker", "Snowcones", "Snowcones prevent heavy use of Ice specifically in Crockpot dishes that don't call for it.", true),
 	SkipSpace(),
-	
+
 	Header("Crockpot Food Tweaks"),
 	BinaryConfig("meatball", "Meatball Nerf", "Meatballs restore 50 hunger instead of 62.5.", true),
 	{
@@ -484,7 +485,7 @@ configuration_options =
 	BinaryConfig("farmfoodredux", "Farmplot Food Redux", "Reallocates most dishes that involve Crock Pot foods. Typically a buff, but may exchange some stats.", true),
 	BinaryConfig("sr_foodrebalance", "Fish foods rebalance", "Several fish based foods have their stats tweaked.", true),
 	SkipSpace(),
-	
+
 	Header("General Food Tweaks"),
 	BinaryConfig("monstersmallmeat", "Monster Morsel", "Small creatures like Spiders drop monster morsels instead of Monster Meat.", true),
 	BinaryConfig("nowintergrowing", "No Winter Growing", "Makes a few food sources such as Kelp and Stone Fruit not grow in Winter.", true),
@@ -521,7 +522,7 @@ configuration_options =
 		default = 1,
 	},
 	SkipSpace(),
-	
+
 -----------------------------
 -- Monsters --
 -----------------------------
@@ -763,19 +764,18 @@ configuration_options =
 
 	SkipSpace(),
 	SkipSpace(),
-	
+
 -----------------------------
 -- Experimental --
 -----------------------------
 	Header("> Experimental <"),
 -----------------------------
-	BinaryConfig("beefalo_nerf", "Beefalo Nerf", "Beefalo take half of the damage taken, instead of all.", false),
 	BinaryConfig("eyebrellarework", "Eyebrella Rework","Eyebrella stats restored to Vanilla value, must be repaired with Milky Whites, 12 day durability. Isn't affected by clothing degradation.",false),
 	BinaryConfig("cooldown_orangestaff", "Cooldown Based Lazy Explorer", "Lazy Explorer no longer has durabilty, but instead has cooldown, like Wanda's watches.\nSuggested by Lux.", false),
 --	BinaryConfig("the_cooler_sacred_chest", "Ancient Chest Crafting Recipes", "Disable this if the Metheus puzzle in-game portion breaks. \nIt shouldn't, so please also file a bug report!", false),
 --	BinaryConfig("shiversprites_enabled", "Shiversprites", "Something new waits out in the frozen tundra.", false),
 	SkipSpace(),
-	
+
 -----------------------------
 -- Legacy Options --
 -----------------------------
@@ -786,7 +786,7 @@ configuration_options =
 	BinaryConfig("hangyperds", "Starving Gobblers", "Gobblers are now more agressive and will attempt to take berries out of the player's inventory.", false),
 	BinaryConfig("bernie", "Big Bernie", "Enable Big BERNIE!!", true),
 	SkipSpace(),
-	
+
 -----------------------------
 -- Dev Tools --
 -----------------------------
@@ -795,7 +795,7 @@ configuration_options =
 	BinaryConfig("announce_basestatus", "[DEV] Announce Ratsniffer","[Developer Tool] Prints the exact rat sniff values to chat to be viewed in real time.",false),
 --	BinaryConfig("chartest_tools", "[DEV] Character Tools","[Developer Tool] Certain characters spawn with items that help test their mechanics.",false),
 	SkipSpace(),
-	
+
 -----------------------------
 -- Super Sekrit Settings --
 -----------------------------
@@ -803,11 +803,11 @@ configuration_options =
 -----------------------------
 	Header("PROCEED WITH CARE"),
 	Header("󰀊 ROLLBACK CITY 󰀊"),
-	
+
 -- Hi data miners!
 -- I will not explain what's going on below!
 -- Mara =)
-	
+
 --	Header("General"),
 	BinaryConfig("maraboss_bottomtext", "JUDGEMENT", "Enables a particular lunar mutation. Yup!", false),
 --	BinaryConfig("boat_go_vroom", "Boat Tweak", "Allows greater player agency in directing boats.", false),
@@ -825,7 +825,7 @@ configuration_options =
 --	BinaryConfig("wolfgang_commits_golf_emoji", "Golfwang", "SWOOSH", false),
 --	BinaryConfig("addedsupremecalamitas", "Added Supreme Calamitas", "Added Supreme Calamitas.", false),
 --	SkipSpace(),
-	
+
 -----------------------------
 -- Secret Secret --
 -----------------------------
