@@ -899,8 +899,12 @@ if GetModConfigData("ck_loot") then
     ChangeSortKey("staff_starfall", "firestaff", "MAGIC", true)
 end
 
--- WIXIE RELATED CRAFTS
+-- Wormwood Crafts
+if GetModConfigData("wormwood_trapbuffs") then
+	GLOBAL.GetValidRecipe("trap_bramble").numtogive = 2
+end
 
+-- WIXIE RELATED CRAFTS
 if GetModConfigData("wixie_walter") then
     AddRecipe2(
         "the_real_charles_t_horse",

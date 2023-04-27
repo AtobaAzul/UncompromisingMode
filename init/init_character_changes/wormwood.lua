@@ -140,3 +140,48 @@ if TUNING.DSTU.WORMWOOD_CONFIG_FIRE then
 
 	end)
 end
+
+local function TrapsAOE(inst)
+	local x, y, z = inst.Transform:GetWorldPosition()
+    for _, v in pairs(TheSim:FindEntities(x, y, z, TUNING.WORMWOOD_BLOOM_FARM_PLANT_INTERACT_RANGE, {"trap"})) do
+		if v.prefab == "trap_bramble" and v.components.mine.issprung then
+			v.components.mine:Reset()
+		end
+	end
+end
+
+local function UpdateBloomStageUM(inst, stage) --Checks the bloom stage in a friendly way, no overriding
+    --The setters will all check for dirty values, since refreshing bloom
+    --stage can potentially get triggered quite often with state changes.
+	inst:DoTaskInTime(0,function(inst) --Checking for blooming is hard, so we'll just check for pollentask instead XD
+		if inst.pollentask then
+			inst.traptask = inst:DoPeriodicTask(.5, TrapsAOE)
+		elseif inst.traptask then
+			inst.traptask:Cancel()
+			inst.traptask = nil
+		end
+	end)
+end
+
+if TUNING.DSTU.WORMWOOD_CONFIG_TRAPS then
+
+	env.AddPrefabPostInit("bramblefx_trap", function(inst)
+		inst.canhitplayers = false
+	end)
+	
+	env.AddPrefabPostInit("bramblefx_armor", function(inst)
+		inst.canhitplayers = false
+	end)
+		
+	env.AddPrefabPostInit("wormwood", function(inst)
+		if not TheWorld.ismastersim then
+			return
+		end
+		local _UpdateBloomStage = inst.components.bloomness.onlevelchangedfn
+		local function NewUpdateBloomStage(inst,stage)
+			_UpdateBloomStage(inst,stage)
+			UpdateBloomStageUM(inst, stage)
+		end
+		inst.components.bloomness.onlevelchangedfn = NewUpdateBloomStage
+	end)
+end

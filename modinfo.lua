@@ -229,6 +229,7 @@ configuration_options =
 	BinaryConfig("book_recipes", "Wickerbottom: Recipe Tweaks", "Changes some book recipes to be slightly more balanced.", true),
 	BinaryConfig("wanda_nerf", "Wanda", "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", true),
 	BinaryConfig("wormwood_extrafiredmg", "Wormwood: Extra Fire Damage", "Increases Wormwood's fire damage multiplier to 1.75x, from 1.25x.", true),
+	BinaryConfig("wormwood_trapbuffs", "Wormwood: Trap Buffs", "Bramble traps do no player damage, reset when you are bloomed near them, and create multiple when crafted.", true),
 	BinaryConfig("wormwood_plants", "Wormwood: Planting Sanity", "Increases the sanity loss from digging plants by 5.", true),
 	BinaryConfig("wendy", "Wendy", "Abigail is nerfed to not increase Wendy's maximum damage above average.", true),
 	BinaryConfig("wx78", "WX-78", "No longer heals from lightning.", true),

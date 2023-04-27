@@ -220,6 +220,7 @@ TUNING.DSTU =
     WORMWOOD_FIRE_DAMAGE             = 1.75, -- orig 1.25
     WORMWOOD_CONFIG_FIRE             = GetModConfigData("wormwood_fire"),
     WORMWOOD_CONFIG_PLANTS           = GetModConfigData("wormwood_plants"),
+	WORMWOOD_CONFIG_TRAPS			 = GetModConfigData("wormwood_trapbuffs"),
     --Warly
     WARLY_SAME_OLD_COOLDOWN          = total_day_time * 3,
     WARLY_SAME_OLD_MULTIPLIERS       = { .6, .5, .35, .2, .1 },
