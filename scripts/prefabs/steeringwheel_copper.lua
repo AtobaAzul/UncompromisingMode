@@ -46,7 +46,7 @@ local function on_stop_steering(inst, sailor)
 
     if boat ~= nil then
         local x, y, z = boat.Transform:GetWorldPosition()
-        local rudder = TheSim:FindEntities(x, y, z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS, {"boatrotator"}, {"burnt", "INLIMBO", "_inventoryitem"})    
+        local rudder = TheSim:FindEntities(x, y, z, TUNING.MAX_WALKABLE_PLATFORM_RADIUS, {"boatrotator"}, {"burnt", "INLIMBO", "_inventoryitem"})
         boat.components.boatphysics:SetCanSteeringRotate(false)
         if rudder ~= nil then
             for k, v in ipairs(rudder) do
@@ -126,6 +126,8 @@ local function fn()
     inst:SetPhysicsRadiusOverride(0.25)
 
     inst.entity:SetPristine()
+
+    inst:AddTag("steeringwheel_copper")
 
     if not TheWorld.ismastersim then return inst end
 
