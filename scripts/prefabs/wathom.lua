@@ -231,9 +231,9 @@ local function OnAttackOther(inst, data)
 		inst.adrenalresume = inst:DoTaskInTime(10, function(inst) inst.adrenalpause = false end)
 		if not (inst:HasTag("amped") or inst:HasTag("deathamp")) then
 			if inst.components.adrenaline:GetPercent() > 0.24 and inst.components.adrenaline:GetPercent() < 0.51 then
-				inst.components.adrenaline:DoDelta(4)
+				inst.components.adrenaline:DoDelta(5)
 			elseif inst.components.adrenaline:GetPercent() > 0.50 and inst.components.adrenaline:GetPercent() < 0.75 then
-				inst.components.adrenaline:DoDelta(3)
+				inst.components.adrenaline:DoDelta(4)
 			else
 				inst.components.adrenaline:DoDelta(3)
 			end
