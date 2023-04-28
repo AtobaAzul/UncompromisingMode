@@ -772,7 +772,7 @@ configuration_options =
 -----------------------------
 	BinaryConfig("eyebrellarework", "Eyebrella Rework","Eyebrella stats restored to Vanilla value, must be repaired with Milky Whites, 12 day durability. Isn't affected by clothing degradation.",false),
 	BinaryConfig("cooldown_orangestaff", "Cooldown Based Lazy Explorer", "Lazy Explorer no longer has durabilty, but instead has cooldown, like Wanda's watches.\nSuggested by Lux.", false),
---	BinaryConfig("the_cooler_sacred_chest", "Ancient Chest Crafting Recipes", "Disable this if the Metheus puzzle in-game portion breaks. \nIt shouldn't, so please also file a bug report!", false),
+	BinaryConfig("the_cooler_sacred_chest", "Ancient Chest Crafting Recipes", "Disable this if the Metheus puzzle in-game portion breaks. \nIt shouldn't, so please also file a bug report!", false),
 --	BinaryConfig("shiversprites_enabled", "Shiversprites", "Something new waits out in the frozen tundra.", false),
 	SkipSpace(),
 

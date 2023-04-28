@@ -419,4 +419,5 @@ return {
 	
 	"mara_boss1",
 	"mara_boss1_bullets",
+	"um_sacred_chest",
 }

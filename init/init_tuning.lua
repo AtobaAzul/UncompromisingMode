@@ -356,7 +356,9 @@ TUNING.DSTU =
     TWIN2_HEALTH                     = GetModConfigData("twins health"),
     ISLAND_ADVENTURES                = ia_check,
     MONSTERSMALLMEAT                 = GetModConfigData("monstersmallmeat"),
+	THE_COOLER_SACRED_CHEST			 = GetModConfigData("the_cooler_sacred_chest"),
 }
+
 
 -- [              DST Related Overrides                  ]
 
