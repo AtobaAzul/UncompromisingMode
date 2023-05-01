@@ -42,7 +42,7 @@ local function reducespeed(inst)
 	end
 	inst.SoundEmitter:KillSound("gorehorn")
 
-	inst.gorehorn.components.fueled:DoDelta( -50)
+	inst.gorehorn.components.fueled:DoDelta(-50)
 end
 
 local function unpausefueled(inst)
@@ -110,16 +110,16 @@ local function speedcheck(inst)
 
 			if inst.task == nil then
 				inst.task = inst:DoPeriodicTask(0.27, function(inst)
-						inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/steam", nil, inst.runspeed / 1.8)
-						if inst.runspeed > 1.6 then
-							SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
-						end
-					end)
+					inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/steam", nil, inst.runspeed / 1.8)
+					if inst.runspeed > 1.6 then
+						SpawnPrefab("ground_chunks_breaking").Transform:SetPosition(inst.Transform:GetWorldPosition())
+					end
+				end)
 			end
 
 			inst.components.locomotor:SetExternalSpeedMultiplier(inst, "gore_horn", inst.runspeed)
 			if inst.runspeed >= 1.8 then
-				inst.gorehorn.components.fueled:DoDelta( -1)
+				inst.gorehorn.components.fueled:DoDelta(-1)
 				inst.gorehorn.pausedfuel = false
 				if inst.gorehorn.unpausefueledtask ~= nil then
 					inst.gorehorn.unpausefueledtask:Cancel()
@@ -221,13 +221,15 @@ local function onunequip(inst, owner)
 		owner.SoundEmitter:KillSound("gorehorn")
 	end
 
-	if owner.task ~= nil then
-		owner.task:Cancel()
-		owner.task = nil
-		owner.SoundEmitter:KillSound("gorehorncharge")
-	end
+    if owner.task ~= nil then
+        owner.task:Cancel()
+        owner.task = nil
+        owner.SoundEmitter:KillSound("gorehorncharge")
+    end
 
-	owner.components.locomotor:RemoveExternalSpeedMultiplier(owner, "gore_horn")
+    if owner.components.locomotor ~= nil then
+        owner.components.locomotor:RemoveExternalSpeedMultiplier(owner, "gore_horn")
+    end
 
 	if inst.fuelmetask == nil then
 		inst.fuelmetask = inst:DoPeriodicTask(0.5, fuelme)
@@ -350,7 +352,7 @@ local function onothercollide(inst, other, owner)
 		if other.components.combat ~= nil then
 			other.components.combat:GetAttacked(owner, 150, nil)
 		elseif other.components.health ~= nil and not other:HasTag("boat") then
-			other.components.health:DoDelta( -150)
+			other.components.health:DoDelta(-150)
 		end
 
 		ShakeAllCameras(CAMERASHAKE.SIDE, .5, .05, .1, inst, 40)
