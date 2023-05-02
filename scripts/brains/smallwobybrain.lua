@@ -58,7 +58,7 @@ end
 local function TargetCanPlay(self, target, owner, max_dist_from_owner, is_flier)
 	return (target.IsPlayful == nil or target:IsPlayful()) 
 			and target:IsNear(owner, max_dist_from_owner) 
-			and (is_flier or target:IsOnPassablePoint())
+			and (is_flier or target:IsOnPassablePoint()--[[ or TestForIA()]])
 			and (target.components.sleeper == nil or not target.components.sleeper:IsAsleep())
 end
 
@@ -194,7 +194,7 @@ local function HasWobyTarget(inst)
 			inst.wobytarget:IsValid() and not
 			inst.wobytarget:HasTag("outofreach") and not
 			inst.wobytarget:HasTag("INLIMBO") and
-			inst.wobytarget:IsOnPassablePoint() ~= nil and inst.wobytarget:IsOnPassablePoint() and
+			(inst.wobytarget:IsOnPassablePoint() ~= nil and inst.wobytarget:IsOnPassablePoint() or TestForIA()) and
 			-- is my pal walter near?
 			(inst.components.follower.leader ~= nil and
             inst:IsNear(inst.components.follower.leader, 25)) and
@@ -219,7 +219,7 @@ local function DoTargetAction(inst)
 			inst.wobytarget:IsValid() and not
 			inst.wobytarget:HasTag("outofreach") and not
 			inst.wobytarget:HasTag("INLIMBO") and
-			inst.wobytarget:IsOnPassablePoint() ~= nil and inst.wobytarget:IsOnPassablePoint() and
+			(inst.wobytarget:IsOnPassablePoint() ~= nil and inst.wobytarget:IsOnPassablePoint() or TestForIA()) and
 			-- is my pal walter near?
 			(inst.components.follower.leader ~= nil and
             inst:IsNear(inst.components.follower.leader, 25)) and
@@ -244,7 +244,7 @@ local function DoTargetAction(inst)
 end
 
 local function HasSitTarget(inst)
-    return inst.wobytarget ~= nil and inst.wobytarget:HasTag("wobysittarget") and inst.wobytarget:IsOnPassablePoint() or nil
+    return inst.wobytarget ~= nil and inst.wobytarget:HasTag("wobysittarget") and (inst.wobytarget:IsOnPassablePoint() or TestForIA()) or nil
 end
 
 local function GoSitAction(inst)
@@ -292,7 +292,7 @@ function SmallWobyBrain:OnStart()
 				
                 -- Combat Avoidance
 				PriorityNode{
-					JukeAndJive(self.inst, {tags={"_combat", "_health"}, notags={"player", "wall", "INLIMBO"}, fn=CombatAvoidanceFindEntityCheck(self)}, COMBAT_TOO_CLOSE_DIST, COMBAT_SAFE_TO_WATCH_FROM_DIST),
+					JukeAndJive(self.inst, {tags={"_combat", "_health"}, notags={"player", "wall", "INLIMBO", "prey"}, fn=CombatAvoidanceFindEntityCheck(self)}, COMBAT_TOO_CLOSE_DIST, COMBAT_SAFE_TO_WATCH_FROM_DIST),
 					WhileNode( function() return ValidateCombatAvoidance(self) end, "Is Near Combat",
 						FaceEntity(self.inst, GetOwner, KeepFaceTargetFn)),
 				},

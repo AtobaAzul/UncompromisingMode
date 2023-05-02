@@ -144,7 +144,7 @@ end
 local function TrapsAOE(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
     for _, v in pairs(TheSim:FindEntities(x, y, z, TUNING.WORMWOOD_BLOOM_FARM_PLANT_INTERACT_RANGE, {"trap"})) do
-		if v.prefab == "trap_bramble" and v.components.mine.issprung then
+		if v ~= nil and v.prefab == "trap_bramble" and v.components.mine ~= nil and v.components.mine.issprung then
 			v.components.mine:Reset()
 		end
 	end
@@ -168,11 +168,11 @@ if TUNING.DSTU.WORMWOOD_CONFIG_TRAPS then
 	env.AddPrefabPostInit("bramblefx_trap", function(inst)
 		inst.canhitplayers = false
 	end)
-	
+
 	env.AddPrefabPostInit("bramblefx_armor", function(inst)
 		inst.canhitplayers = false
 	end)
-		
+
 	env.AddPrefabPostInit("wormwood", function(inst)
 		if not TheWorld.ismastersim then
 			return
