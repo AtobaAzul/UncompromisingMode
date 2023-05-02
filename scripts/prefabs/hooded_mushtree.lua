@@ -461,6 +461,7 @@ local function maketree(name, data, state)
         end
 
         inst:SetPrefabName(name)
+        inst:SetPrefabNameOverride(name)
 
         inst.entity:SetPristine()
 

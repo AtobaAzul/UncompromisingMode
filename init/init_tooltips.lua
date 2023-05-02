@@ -147,7 +147,8 @@ if TUNING.DSTU.SNOWSTORMS then
 	TOOLTIP.WALL_MOONROCK_ITEM = "- Provides protection from Snow Storms."
 	TOOLTIP.YELLOWSTAFF = "- Dwarf Stars provide protection from Snow Storms."
 	TOOLTIP.MOLEHAT = "- Grants protection against Snow Storms / Sand Storms when worn."
-	TOOLTIP.DESERTHAT = "- Also works as protection against Snow Storms."
+    TOOLTIP.DESERTHAT = "- Also works as protection against Snow Storms."
+	TOOLTIP.BEARGERVEST = "- Provides protection from Snow Storms' slowdown."
 else
 	TOOLTIP.MOLEHAT = "- Grants protection against Sand Storms when worn."
 end
@@ -203,7 +204,8 @@ if TUNING.DSTU.POCKET_POWERTRIP ~= 0 then
 	TOOLTIP.TRUNKVEST_SUMMER = "- Now has pockets!\n- Slightly increased rain protection."
 	TOOLTIP.TRUNKVEST_WINTER = "- Now has pockets!"
     TOOLTIP.REFLECTIVEVEST = "- Now has pockets!"
-	TOOLTIP.RAINCOAT = "- Now has pockets!"
+    TOOLTIP.RAINCOAT = "- Now has pockets!"
+	TOOLTIP.HAWAIIANSHIRT = "- Increased durability.\n- Now has pockets!"
 end
 
 if GetModConfigData("canedurability") then

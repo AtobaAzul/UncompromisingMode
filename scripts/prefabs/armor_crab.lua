@@ -32,7 +32,7 @@ end
 local function onunequip(inst, owner)
     owner.AnimState:ClearOverrideSymbol("swap_body")
     inst:RemoveEventCallback("blocked", OnBlocked, owner)
-    if inst.prefab == "armor_crab_maxhp" then
+    if inst.prefab == "armor_crab_maxhp" and owner.components.health ~= nil and owner:HasTag("player") then
         owner:DoTaskInTime(0, function()
             local current_health_percent = owner.components.health:GetPercent()
 
@@ -41,7 +41,7 @@ local function onunequip(inst, owner)
             owner.components.health:SetPercent(current_health_percent)
 
             -- We want to force a badge pulse, but also maintain the health percent as much as we can.
-            local badgedelta = -0.01
+            local badgedelta     = -0.01
             owner.components.health:DoDelta(badgedelta, false, nil, true)
         end)
     end
