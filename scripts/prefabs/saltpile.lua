@@ -24,8 +24,12 @@ end
 local function OnPicked(inst) inst:Remove() end
 
 local function OnIsRaining(inst)
-	if not TheWorld.state.iswinter then
-		inst:DoTaskInTime(math.random(), inst.Remove)
+    if not TheWorld.state.iswinter then
+        if inst:IsAsleep() then
+		    inst:DoTaskInTime(math.random(), inst.Remove)
+        else
+			inst.components.despawnfader:FadeOut()
+        end
 	end
 end
 
@@ -71,6 +75,9 @@ local function fn()
     inst:AddTag("snowpileblocker")
     inst:AddTag("NOBLOCK")
     inst:AddTag("NOCLICK")
+
+    inst:AddComponent("despawnfader")
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then return inst end
