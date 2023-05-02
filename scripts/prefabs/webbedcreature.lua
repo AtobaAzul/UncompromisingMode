@@ -386,7 +386,7 @@ local function Regen(inst, attacker)
 	if not inst.components.health:IsDead() and not attacker:HasTag("hoodedwidow") then
 		--TheNet:Announce("advancing")
 		local widowweb = FindEntity(inst, 50, function(guy) return guy:HasTag("widowweb") end)
-		if widowweb then
+		if widowweb and not (attacker.prefab == "moonstorm_spark" or attacker.prefab == "moonstorm_glass") then
 			--TheNet:Announce("tellingwidow")
 			widowweb.SpawnInvestigators(widowweb, attacker)
 		end

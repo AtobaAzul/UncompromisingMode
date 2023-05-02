@@ -508,7 +508,7 @@ local function CheckTimer(inst, data)
 end
 
 local function RedoLavae(inst)
-	if inst.lavae ~= nil then
+	if inst.lavae ~= nil then	
 		for i = 1, 8 do
 			if inst.lavae[i].hidden ~= true then
 				EjectLavae(inst, i, true)
@@ -518,6 +518,7 @@ local function RedoLavae(inst)
 	inst.components.timer:StopTimer("summoncrystals")
 	inst.components.timer:StartTimer("summoncrystals", 30 + math.random(0, 15))
 	inst.redolavae = true
+	inst.SpawnedLavae = false
 	inst.sg:GoToState("summoncrystals")
 end
 

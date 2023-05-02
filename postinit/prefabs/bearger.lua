@@ -164,6 +164,7 @@ local function Sinkholes(inst)
 						local fx1 = SpawnPrefab("bearger_sinkhole")
 						fx1.Transform:SetPosition(dx, dy, dz)
 						fx1:PushEvent("startcollapse")
+						fx1.bearger = inst
 					else
 						local fx1 = SpawnPrefab("splash_green")
 						fx1.Transform:SetPosition(dx, dy, dz)

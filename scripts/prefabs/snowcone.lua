@@ -6,6 +6,15 @@ local assets =
 local function oneatenfn(inst, eater)
 
 end
+
+local function onuseaswatersource(inst)
+    if inst.components.stackable:IsStack() then
+        inst.components.stackable:Get():Remove()
+    else
+        inst:Remove()
+    end
+end
+
 local function fn()
     local inst = CreateEntity()
 
@@ -44,7 +53,15 @@ local function fn()
     inst.components.perishable:SetPerishTime((2*TUNING.PERISH_TWO_DAY))
     inst.components.perishable:StartPerishing()
 	inst.components.perishable:SetOnPerishFn(function(inst) inst:Remove() end)
+	
+    inst:AddComponent("repairer")
+    inst.components.repairer.repairmaterial = MATERIALS.ICE
+    inst.components.repairer.perishrepairpercent = .2
 
+    inst:AddComponent("watersource")
+    inst.components.watersource.onusefn = onuseaswatersource
+    inst.components.watersource.override_fill_uses = 6
+	
     MakeHauntableLaunchAndPerish(inst)
 	inst.components.edible:SetOnEatenFn(oneatenfn)
 	inst:AddTag("preparedfood")
