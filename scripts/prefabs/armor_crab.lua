@@ -14,15 +14,17 @@ local function onequip(inst, owner)
 
     if inst.prefab == "armor_crab_maxhp" then
         owner:DoTaskInTime(0, function()
-            local current_health_percent = owner.components.health:GetPercent()
+            if owner.components.health ~= nil then
+                local current_health_percent = owner.components.health:GetPercent()
 
-            owner.components.health.maxhealth = owner.components.health.maxhealth + 150
+                owner.components.health.maxhealth = owner.components.health.maxhealth + 150
 
-            owner.components.health:SetPercent(current_health_percent)
+                owner.components.health:SetPercent(current_health_percent)
 
-            -- We want to force a badge pulse, but also maintain the health percent as much as we can.
-            local badgedelta = 0.01
-            owner.components.health:DoDelta(badgedelta, false, nil, true)
+                -- We want to force a badge pulse, but also maintain the health percent as much as we can.
+                local badgedelta = 0.01
+                owner.components.health:DoDelta(badgedelta, false, nil, true)
+            end
         end)
     end
 end

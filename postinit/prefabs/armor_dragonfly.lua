@@ -2,8 +2,6 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 
-
-
 local function OnSave(inst, data)
     data.lavaecond1 = inst.lavaecond1
     data.lavaecond2 = inst.lavaecond2
@@ -12,31 +10,17 @@ end
 
 local function OnLoad(inst, data)
     if data ~= nil then
-        if data.lavaecond1 ~= nil then
-            inst.lavaecond1 = data.lavaecond1
-        end
-        if data.lavaecond2 ~= nil then
-            inst.lavaecond2 = data.lavaecond2
-        end
-        if data.lavaecond3 ~= nil then
-            inst.lavaecond3 = data.lavaecond3
-        end
-        if data.owner ~= nil then
-            inst.owner = data.owner
-        end
+        if data.lavaecond1 ~= nil then inst.lavaecond1 = data.lavaecond1 end
+        if data.lavaecond2 ~= nil then inst.lavaecond2 = data.lavaecond2 end
+        if data.lavaecond3 ~= nil then inst.lavaecond3 = data.lavaecond3 end
+        if data.owner ~= nil then inst.owner = data.owner end
     end
 end
 
 local function InitializeLavae(inst, owner)
-    if inst.lavaecond1 == nil then
-        inst.lavaecond1 = "alive"
-    end
-    if inst.lavaecond2 == nil then
-        inst.lavaecond2 = "alive"
-    end
-    if inst.lavaecond3 == nil then
-        inst.lavaecond3 = "alive"
-    end
+    if inst.lavaecond1 == nil then inst.lavaecond1 = "alive" end
+    if inst.lavaecond2 == nil then inst.lavaecond2 = "alive" end
+    if inst.lavaecond3 == nil then inst.lavaecond3 = "alive" end
 end
 
 local function OneDead(inst)
@@ -61,11 +45,13 @@ local function OnTimerDone(inst, data)
     if data ~= nil then
         if data.name == "1revive" then
             inst.lavaecond1 = "alive"
-            if inst.components.inventoryitem.owner ~= nil and inst.components.equippable.isequipped then
+            if inst.components.inventoryitem.owner ~= nil and
+                inst.components.equippable.isequipped then
                 local owner = inst.components.inventoryitem.owner
                 local x, y, z = owner.Transform:GetWorldPosition()
                 local lavae1 = SpawnPrefab("armorlavae")
-                SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
+                SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y,
+                                                                          z)
                 lavae1.number = 1
                 lavae1.Transform:SetPosition(x, y, z)
                 inst.lavae1 = lavae1
@@ -73,9 +59,11 @@ local function OnTimerDone(inst, data)
                 lavae1.components.follower.leader = owner
             end
         end
+
         if data.name == "2revive" then
             inst.lavaecond2 = "alive"
-            if inst.components.inventoryitem.owner ~= nil and inst.components.equippable.isequipped then
+            if inst.components.inventoryitem.owner ~= nil and
+                inst.components.equippable.isequipped then
                 local owner = inst.components.inventoryitem.owner
                 local x, y, z = owner.Transform:GetWorldPosition()
                 local lavae2 = SpawnPrefab("armorlavae")
@@ -87,9 +75,11 @@ local function OnTimerDone(inst, data)
                 lavae2.components.follower.leader = owner
             end
         end
+
         if data.name == "3revive" then
             inst.lavaecond3 = "alive"
-            if inst.components.inventoryitem.owner ~= nil and inst.components.equippable.isequipped then
+            if inst.components.inventoryitem.owner ~= nil and
+                inst.components.equippable.isequipped then
                 local owner = inst.components.inventoryitem.owner
                 local x, y, z = owner.Transform:GetWorldPosition()
                 local lavae3 = SpawnPrefab("armorlavae")
@@ -105,9 +95,7 @@ local function OnTimerDone(inst, data)
 end
 
 env.AddPrefabPostInit("armordragonfly", function(inst)
-    if not TheWorld.ismastersim then
-        return
-    end
+    if not TheWorld.ismastersim then return end
 
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
@@ -115,66 +103,96 @@ env.AddPrefabPostInit("armordragonfly", function(inst)
     local _onequip = inst.components.equippable.onequipfn
     local _onunequip = inst.components.equippable.onunequipfn
 
-
     local function newonequip(inst, owner)
-        InitializeLavae(inst, owner)
-        local x, y, z = owner.Transform:GetWorldPosition()
-        local boat = TheWorld.Map:GetPlatformAtPoint(x,z)
-        if inst.lavaecond1 == "alive" then
-            local lavae1 = SpawnPrefab("armorlavae")
-            lavae1.number = 1
-            lavae1.Transform:SetPosition(x + (not boat and GetRandomWithVariance(-3, 3) or 0), y, z + (not boat and GetRandomWithVariance(-3, 3) or 0))
-            inst.lavae1 = lavae1
-            owner.components.leader:AddFollower(lavae1)
-            lavae1.components.follower.leader = owner
-            SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(lavae1.Transform:GetWorldPosition())
+        if owner:HasTag("player") then
+            InitializeLavae(inst, owner)
+            local x, y, z = owner.Transform:GetWorldPosition()
+            local boat = TheWorld.Map:GetPlatformAtPoint(x, z)
+            if inst.lavaecond1 == "alive" then
+                local lavae1 = SpawnPrefab("armorlavae")
+                lavae1.number = 1
+                lavae1.Transform:SetPosition(x +
+                                                 (not boat and
+                                                     GetRandomWithVariance(-3, 3) or
+                                                     0), y, z +
+                                                 (not boat and
+                                                     GetRandomWithVariance(-3, 3) or
+                                                     0))
+                inst.lavae1 = lavae1
+                owner.components.leader:AddFollower(lavae1)
+                lavae1.components.follower.leader = owner
+                SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(
+                    lavae1.Transform:GetWorldPosition())
 
-        end
-        if inst.lavaecond2 == "alive" then
-            local lavae2 = SpawnPrefab("armorlavae")
-            lavae2.number = 2
-            lavae2.Transform:SetPosition(x + (not boat and GetRandomWithVariance(-3, 3) or 0), y, z + (not boat and GetRandomWithVariance(-3, 3) or 0))
-            inst.lavae2 = lavae2
-            owner.components.leader:AddFollower(lavae2)
-            lavae2.components.follower.leader = owner
-            SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(lavae2.Transform:GetWorldPosition())
-        end
-        if inst.lavaecond3 == "alive" then
-            local lavae3 = SpawnPrefab("armorlavae")
-            lavae3.number = 3
-            lavae3.Transform:SetPosition(x + (not boat and GetRandomWithVariance(-3, 3) or 0), y, z + (not boat and GetRandomWithVariance(-3, 3) or 0))
-            inst.lavae3 = lavae3
-            owner.components.leader:AddFollower(lavae3)
-            lavae3.components.follower.leader = owner
-            SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(lavae3.Transform:GetWorldPosition())
+            end
+            if inst.lavaecond2 == "alive" then
+                local lavae2 = SpawnPrefab("armorlavae")
+                lavae2.number = 2
+                lavae2.Transform:SetPosition(x +
+                                                 (not boat and
+                                                     GetRandomWithVariance(-3, 3) or
+                                                     0), y, z +
+                                                 (not boat and
+                                                     GetRandomWithVariance(-3, 3) or
+                                                     0))
+                inst.lavae2 = lavae2
+                owner.components.leader:AddFollower(lavae2)
+                lavae2.components.follower.leader = owner
+                SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(
+                    lavae2.Transform:GetWorldPosition())
+            end
+            if inst.lavaecond3 == "alive" then
+                local lavae3 = SpawnPrefab("armorlavae")
+                lavae3.number = 3
+                lavae3.Transform:SetPosition(x +
+                                                 (not boat and
+                                                     GetRandomWithVariance(-3, 3) or
+                                                     0), y, z +
+                                                 (not boat and
+                                                     GetRandomWithVariance(-3, 3) or
+                                                     0))
+                inst.lavae3 = lavae3
+                owner.components.leader:AddFollower(lavae3)
+                lavae3.components.follower.leader = owner
+                SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(
+                    lavae3.Transform:GetWorldPosition())
+            end
         end
         _onequip(inst, owner)
     end
 
     local function newonunequip(inst, owner)
-        if inst.lavae1 ~= nil then
-            local x, y, z = inst.lavae1.Transform:GetWorldPosition()
-            if x ~= nil and y ~= nil and z ~= nil then
-                SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
+        if owner:HasTag("player") then
+            if inst.lavae1 ~= nil then
+                local x, y, z = inst.lavae1.Transform:GetWorldPosition()
+                if x ~= nil and y ~= nil and z ~= nil then
+                    SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x,
+                                                                              y,
+                                                                              z)
+                end
+                inst.lavae1:Remove()
+                inst.lavae1 = nil
             end
-            inst.lavae1:Remove()
-            inst.lavae1 = nil
-        end
-        if inst.lavae2 ~= nil then
-            local x, y, z = inst.lavae2.Transform:GetWorldPosition()
-            if x ~= nil and y ~= nil and z ~= nil then
-                SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z)
+            if inst.lavae2 ~= nil then
+                local x, y, z = inst.lavae2.Transform:GetWorldPosition()
+                if x ~= nil and y ~= nil and z ~= nil then
+                    SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x,
+                                                                              y,
+                                                                              z)
+                end
+                inst.lavae2:Remove()
+                inst.lavae2 = nil
             end
-            inst.lavae2:Remove()
-            inst.lavae2 = nil
-        end
-        if inst.lavae3 ~= nil then
-            local x, y, z = inst.lavae3.Transform:GetWorldPosition()
-            if x ~= nil and y ~= nil and z ~= nil then
-                SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x, y, z) --if y is crashing, and y usually
-            end --never changes, can't I solve this crash by just forcing Y as 1(or 0, I don't remember)?
-            inst.lavae3:Remove() --regardless, it probably is fixed now.
-            inst.lavae3 = nil
+            if inst.lavae3 ~= nil then
+                local x, y, z = inst.lavae3.Transform:GetWorldPosition()
+                if x ~= nil and y ~= nil and z ~= nil then
+                    SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(x,
+                                                                              y,
+                                                                              z) -- if y is crashing, and y usually
+                end -- never changes, can't I solve this crash by just forcing Y as 1(or 0, I don't remember)?
+                inst.lavae3:Remove() -- regardless, it probably is fixed now.
+                inst.lavae3 = nil
+            end
         end
         _onunequip(inst, owner)
     end
@@ -190,6 +208,6 @@ env.AddPrefabPostInit("armordragonfly", function(inst)
 
     inst:AddComponent("timer")
     inst:ListenForEvent("timerdone", OnTimerDone)
-    inst.components.equippable.dapperness = 0 --No more dapperness
+    inst.components.equippable.dapperness = 0 -- No more dapperness
 
 end)

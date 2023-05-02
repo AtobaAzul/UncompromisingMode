@@ -98,7 +98,7 @@ local function onequip_ice(inst, owner)
         if owner.components.moisture ~= nil then
             inst.components.armor.absorb_percent = Lerp(0.6, 0.95, owner.components.moisture:GetMoisturePercent())
         else
-            inst.components.armor.absorb_percent = owner:HasTag("wet") and 0.95 or 0.6
+            inst.components.armor.absorb_percent = (owner:HasTag("wet") or TheWorld.state.iswet) and 0.95 or 0.6
         end
     end, 0)
 end

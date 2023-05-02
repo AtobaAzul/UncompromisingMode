@@ -227,7 +227,7 @@ local function onunequip(inst, owner)
         owner.SoundEmitter:KillSound("gorehorncharge")
     end
 
-    if owner.components.locomotor ~= nil then
+    if owner.components.locomotor ~= nil then--huh? https://user-images.githubusercontent.com/131507193/235321281-70b21c16-2138-499f-879a-d0beb96858c8.png
         owner.components.locomotor:RemoveExternalSpeedMultiplier(owner, "gore_horn")
     end
 

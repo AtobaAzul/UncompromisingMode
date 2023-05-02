@@ -305,8 +305,11 @@ local function onunequip(inst, owner)
 	if inst.components.container ~= nil then
 		inst.components.container:Close()
 	end
-	owner.AnimState:ClearOverrideSymbol("swap_body")
-	owner.components.locomotor:RemoveExternalSpeedMultiplier(inst, "wingsuit")
+    owner.AnimState:ClearOverrideSymbol("swap_body")
+
+    if owner.components.locomotor ~= nil then
+        owner.components.locomotor:RemoveExternalSpeedMultiplier(inst, "wingsuit")
+    end
 
 	inst:RemoveEventCallback("blocked", inst._onblocked, owner)
 	inst:RemoveEventCallback("attacked", inst._onblocked, owner)
