@@ -7,8 +7,10 @@ env.AddPlayerPostInit(function(inst)
         if inst ~= nil and inst.components.health ~= nil and
             not inst:HasTag("playerghost") then
             if not inst:HasTag("vetcurse") then
-                inst.components.debuffable:AddDebuff("buff_vetcurse", "buff_vetcurse")
-                inst:PushEvent("foodbuffattached", { buff = "ANNOUNCE_ATTACH_BUFF_VETCURSE", 1 })
+                inst.components.debuffable:AddDebuff("buff_vetcurse",
+                                                     "buff_vetcurse")
+                inst:PushEvent("foodbuffattached",
+                               {buff = "ANNOUNCE_ATTACH_BUFF_VETCURSE", 1})
             end
         end
     elseif TUNING.DSTU.VETCURSE == "off" and inst:HasTag("vetcurse") then
@@ -26,9 +28,11 @@ env.AddPlayerPostInit(function(inst)
 
     inst.OnDespawn = function(inst, migrationdata, ...)
         for k, v in pairs(inst.components.leader.followers) do
-            if (
-                k:HasTag("spider") or k:HasTag("pig") or k:HasTag("merm") or k:HasTag("raidrat") or k:HasTag("winky_rat")
-                or k.prefab == "eyeofterror_mini_ally") or k.prefab == "smallbird" or k.prefab == "teenbird" or k.prefab == "lightflier" then --exluding things that can't/shouldn't/already do
+            if ((k:HasTag("spider") and not TUNING.DSTU.TREATS_FOR_WEBBER) or
+                k:HasTag("pig") or k:HasTag("merm") or k:HasTag("raidrat") or
+                k:HasTag("winky_rat") or k.prefab == "eyeofterror_mini_ally") or
+                k.prefab == "smallbird" or k.prefab == "teenbird" or k.prefab ==
+                "lightflier" then -- exluding things that can't/shouldn't/already do
                 local savedata = k:GetSaveRecord()
                 table.insert(inst.um_all_followers, savedata)
                 -- remove followers
@@ -52,9 +56,7 @@ env.AddPlayerPostInit(function(inst)
 
     inst.OnSave = function(inst, data)
         data.um_all_followers = inst.um_all_followers
-        if _OnSave ~= nil then
-            _OnSave(inst, data)
-        end
+        if _OnSave ~= nil then _OnSave(inst, data) end
     end
 
     local _OnLoad = inst.OnLoad
@@ -73,13 +75,12 @@ env.AddPlayerPostInit(function(inst)
                         end
                     end)
                     local fx = SpawnPrefab("spawn_fx_small")
-                    fx.Transform:SetPosition(follower.Transform:GetWorldPosition())
+                    fx.Transform:SetPosition(
+                        follower.Transform:GetWorldPosition())
                 end)
-                data.um_all_followers = {} --empty the table to prevent duping.
+                data.um_all_followers = {} -- empty the table to prevent duping.
             end
         end
-        if _OnLoad ~= nil then
-            _OnLoad(inst, data)
-        end
+        if _OnLoad ~= nil then _OnLoad(inst, data) end
     end
 end)
