@@ -5,4 +5,3 @@ break_after_table_lb: true
 break_before_table_rb: true
 chop_down_table: true
 chop_down_kv_table: true
-column_table_limit: 0
