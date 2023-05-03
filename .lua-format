@@ -1,7 +1,7 @@
+chop_down_table: true
+chop_down_kv_table: true
 chop_down_parameter: false
 column_limit: 9999999
 break_after_functiondef_lp: false
 break_after_table_lb: true
 break_before_table_rb: true
-chop_down_table: true
-chop_down_kv_table: true
