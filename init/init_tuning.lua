@@ -131,7 +131,7 @@ TUNING.DSTU = {
     -- ratraid
     RATRAID_TIMERSTART = GetModConfigData("rattimer"),
     RATRAID_GRACE = GetModConfigData("ratgrace"),
-    RATSNIFFER_TIMER = GetModConfigData("ratsnifftimer_"),
+    RATSNIFFER_TIMER = GetModConfigData("ratsnifftimer"),
     -- Generics
     MONSTER_BAT_CAVE_NR_INCREASE = 3,
     CAVE_ENTRANCE_BATS_SPAWN_PERIOD_UM = 0.8,
@@ -474,5 +474,3 @@ if GetModConfigData("wortox") == "APOLLO" then
     TUNING.WORTOX_SOULHEAL_MINIMUM_HEAL = 5
     TUNING.WORTOX_MAPHOP_DISTANCE_SCALER = TUNING.WORTOX_MAPHOP_DISTANCE_SCALER * 1.5 -- 50%
 end
-
-TUNING.ARMORDREADSTONE = wilson_health * 12 * multiplayer_armor_durability_modifier
