@@ -203,7 +203,7 @@ configuration_options = {
     ------------------------------
     {name = "ratgrace", label = "Rat Raid Grace Period", hover = "Minimum grace period, during which Rats are unable to invade!", options = {{description = "As soon as possible.", data = 1}, {description = "Low[15 days]", data = 15}, {description = "Default[30 days]", data = 30}, {description = "Medium[45 days]", data = 45}, {description = "High[60 days]", data = 60}}, default = 30},
     {name = "rattimer", label = "Rat Raid Cooldown", hover = "The cooldown between Rat Raids!", options = {{description = "As soon as possible.", data = 10}, {description = "Half", data = 4800}, {description = "Default", data = 9600}, {description = "Double", data = 14400}}, default = 9600},
-    {name = "ratsnifftimer_", label = "Rat Sniff Timer", hover = "The rate at which your base is checked for messiness.", options = {{description = "Lowest[1 Minute]", data = 60}, {description = "Lowered[2 Minutes]", data = 120}, {description = "Default[3 Minutes]", data = 180}, {description = "Raised[4 Minutes]", data = 240}, {description = "Extended[8 Minutes]", data = 480}}, default = 180},
+    {name = "ratsnifftimer", label = "Rat Sniff Timer", hover = "The rate at which your base is checked for messiness.", options = {{description = "Lowest[1 Minute]", data = 60}, {description = "Lowered[2 Minutes]", data = 120}, {description = "Default[3 Minutes]", data = 180}, {description = "Raised[4 Minutes]", data = 240}, {description = "Extended[8 Minutes]", data = 480}}, default = 120},
     BinaryConfig("itemcheck", "Item Score", "Equippable items and mole bait items increase the \'rat score\' value.", true),
     SkipSpace(),
 
