@@ -4,13 +4,17 @@ local function RGB(r, g, b) return {r / 255, g / 255, b / 255, 1} end
 local seg_time = 30
 
 local day_segs = 10
+local dusk_segs = 4
+local night_segs = 2
 
 local day_time = seg_time * day_segs
 local total_day_time = seg_time * 16
-local multiplayer_armor_durability_modifier = 0.7
-
 local wilson_attack = 34
-local wilson_health = 150
+local day_time = seg_time * day_segs
+local dusk_time = seg_time * dusk_segs
+local night_time = seg_time * night_segs
+local multiplayer_armor_durability_modifier = 0.7
+local multiplayer_armor_absorption_modifier = 1
 
 TUNING = GLOBAL.TUNING
 
@@ -23,7 +27,8 @@ TUNING.DSTU = {
     ----------------------------------------------------------------------------
     -- Armor
     ----------------------------------------------------------------------------
-    ARMORREED_UM = TUNING.WILSON_HEALTH * 2.1 * multiplayer_armor_durability_modifier,
+    ARMORREED_UM = TUNING.WILSON_HEALTH * 2.1 *
+        multiplayer_armor_durability_modifier,
     ----------------------------------------------------------------------------
     -- Acid colour
     ----------------------------------------------------------------------------
@@ -131,7 +136,7 @@ TUNING.DSTU = {
     -- ratraid
     RATRAID_TIMERSTART = GetModConfigData("rattimer"),
     RATRAID_GRACE = GetModConfigData("ratgrace"),
-    RATSNIFFER_TIMER = GetModConfigData("ratsnifftimer"),
+    RATSNIFFER_TIMER = GetModConfigData("ratsnifftimer_"),
     -- Generics
     MONSTER_BAT_CAVE_NR_INCREASE = 3,
     CAVE_ENTRANCE_BATS_SPAWN_PERIOD_UM = 0.8,
@@ -369,8 +374,15 @@ if GetModConfigData("wixie_walter") then
     TUNING.WOBY_SMALL_HUNGER = GLOBAL.TUNING.WALTER_HUNGER
     TUNING.WOBY_SMALL_HUNGER_RATE = GLOBAL.TUNING.WILSON_HUNGER_RATE / 2
 
-    TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WALTER = {"walterhat", "meatrack_hat", "meat", "monstermeat"}
-    TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WIXIE = {"slingshot", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock"}
+    TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WALTER = {
+        "walterhat", "meatrack_hat", "meat", "monstermeat"
+    }
+    TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WIXIE = {
+        "slingshot", "slingshotammo_rock", "slingshotammo_rock",
+        "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock",
+        "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock",
+        "slingshotammo_rock", "slingshotammo_rock"
+    }
 end
 
 TUNING.NONLETHAL_TEMPERATURE = false
@@ -392,7 +404,9 @@ TUNING.SANITY_BECOME_SANE_THRESH = 45 / 200 -- 22.5%
 
 TUNING.WORMWOOD_BURN_TIME = TUNING.DSTU.WORMWOOD_BURN_TIME
 
-if GetModConfigData("wormwood_extrafiredmg") then TUNING.WORMWOOD_FIRE_DAMAGE = TUNING.DSTU.WORMWOOD_FIRE_DAMAGE end
+if GetModConfigData("wormwood_extrafiredmg") then
+    TUNING.WORMWOOD_FIRE_DAMAGE = TUNING.DSTU.WORMWOOD_FIRE_DAMAGE
+end
 
 TUNING.AFFINITY_15_CALORIES_TINY = 1.6
 TUNING.AFFINITY_15_CALORIES_SMALL = 1.4
@@ -412,19 +426,22 @@ if GetModConfigData("wanda_nerf") then
 end
 
 if GetModConfigData("sleepingbuff") then
-    TUNING.SLEEP_TICK_PERIOD = TUNING.SLEEP_TICK_PERIOD / GetModConfigData("sleepingbuff")
+    TUNING.SLEEP_TICK_PERIOD = TUNING.SLEEP_TICK_PERIOD /
+                                   GetModConfigData("sleepingbuff")
     -- TUNING.SLEEP_TICK_PERIOD = TUNING.SLEEP_TICK_PERIOD / TUNING.DSTU.SLEEPINGBUFF
 end
 
 TUNING.BATTLESONG_FIRE_RESIST_MOD = 0
 
-TUNING.SPAWNPROTECTIONBUFF_IDLE_DURATION = TUNING.SPAWNPROTECTIONBUFF_IDLE_DURATION * 4
+TUNING.SPAWNPROTECTIONBUFF_IDLE_DURATION =
+    TUNING.SPAWNPROTECTIONBUFF_IDLE_DURATION * 4
 TUNING.SPAWNPROTECTIONBUFF_DURATION = 5
 TUNING.SPAWNPROTECTIONBUFF_SPAWN_DIST_SQ = 3 * 3
 
 TUNING.MULTITOOL_DAMAGE = TUNING.AXE_DAMAGE
 
-TUNING.HAWAIIANSHIRT_PERISHTIME = TUNING.HAWAIIANSHIRT_PERISHTIME + total_day_time * 5
+TUNING.HAWAIIANSHIRT_PERISHTIME = TUNING.HAWAIIANSHIRT_PERISHTIME +
+                                      total_day_time * 5
 
 -- Sailing Rebalance related tuning changes
 -- trident buff
@@ -459,7 +476,8 @@ TUNING.MESSAGEBOTTLE_NOTE_CHANCE = 0.66
 -- nautopilot buff
 TUNING.BOAT.BOAT_MAGNET.MAX_DISTANCE = TUNING.BOAT.BOAT_MAGNET.MAX_DISTANCE * 2
 TUNING.BOAT.BOAT_MAGNET.MAX_VELOCITY = TUNING.BOAT.BOAT_MAGNET.MAX_VELOCITY * 10 -- No matter the boatspeed, nautopilots should be able to keep up.
-TUNING.BOAT.BOAT_MAGNET.CATCH_UP_SPEED = TUNING.BOAT.BOAT_MAGNET.CATCH_UP_SPEED * 100
+TUNING.BOAT.BOAT_MAGNET.CATCH_UP_SPEED =
+    TUNING.BOAT.BOAT_MAGNET.CATCH_UP_SPEED * 100
 
 -- lowered CK health
 -- TUNING.CRABKING_HEALTH = TUNING.CRABKING_HEALTH * 0.66
@@ -472,5 +490,6 @@ if GetModConfigData("wortox") == "UMNERF" then TUNING.WORTOX_HEALTH = 150 end
 
 if GetModConfigData("wortox") == "APOLLO" then
     TUNING.WORTOX_SOULHEAL_MINIMUM_HEAL = 5
-    TUNING.WORTOX_MAPHOP_DISTANCE_SCALER = TUNING.WORTOX_MAPHOP_DISTANCE_SCALER * 1.5 -- 50%
+    TUNING.WORTOX_MAPHOP_DISTANCE_SCALER =
+        TUNING.WORTOX_MAPHOP_DISTANCE_SCALER * 1.5 -- 50%
 end
