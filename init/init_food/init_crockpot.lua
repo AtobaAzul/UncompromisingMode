@@ -260,6 +260,11 @@ recipes.perogies.test = function(cooker, names, tags)
 end
 -- Original:     test = function(cooker, names, tags) return tags.egg and tags.meat and tags.veggie and not tags.inedible end,
 
+recipes.talleggs.test = function(cooker, names, tags)
+    return tags.egg and tags.egg >= 4 and tags.veggie and tags.veggie >= 3 and
+        not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT)
+end
+
 recipes.turkeydinner.test = function(cooker, names, tags)
     return names.drumstick and names.drumstick > 1 and tags.meat
         and tags.meat > 1 and (tags.veggie or tags.fruit) and
