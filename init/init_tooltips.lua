@@ -165,15 +165,13 @@ end
 if TUNING.DSTU.GOTOBED ~= false then
 	TOOLTIP.BEDROLL_STRAW = "- May restore maximum health."
 
-	TOOLTIP.BEDROLL_FURRY = "- May restore maximum health."
+	TOOLTIP.BEDROLL_FURRY = "- A bit more efficient.\n- May restore maximum health."
 
 	TOOLTIP.TENT = "- May restore maximum health."
 
 	TOOLTIP.PORTABLETENT_ITEM = "- May restore maximum health."
 
 	TOOLTIP.SIESTAHUT = "- A bit less efficient.\n- May restore maximum health."
-else
-	TOOLTIP.SIESTAHUT = "- A bit less efficient."
 end
 
 if TUNING.DSTU.SLEEPINGBUFF > 1 then
