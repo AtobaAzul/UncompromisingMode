@@ -1657,7 +1657,9 @@ end
 
 local function Rebound(inst, attacker, target)
 	if target ~= nil then
-		ImpactFx(inst, attacker, target)
+		local set_attacker = attacker ~= nil and attacker or inst
+	
+		ImpactFx(inst, set_attacker, target)
 
 		if target.SoundEmitter ~= nil then
 			target.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/shoot")
@@ -1665,12 +1667,12 @@ local function Rebound(inst, attacker, target)
 
 
 		if not target:HasTag("wall") and not target:HasTag("structure") then
-			if no_aggro(attacker, target) then
+			if no_aggro(set_attacker, target) then
 				target.components.combat:SetShouldAvoidAggro(attacker)
 			end
 			
 			if target.components.combat ~= nil then
-				target.components.combat:GetAttacked(attacker, 10, attacker)
+				target.components.combat:GetAttacked(set_attacker, 10, attacker)
 			end
 
 			if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
@@ -2021,11 +2023,11 @@ local function Tremor(inst)
 						inst.finaldamage = inst.finaldamage * (inst.attacker.components.combat ~= nil and inst.attacker.components.combat.externaldamagemultipliers:Get() or 1)
 					end
 
-					if no_aggro(inst.attacker, v) then
+					if no_aggro(inst.set_attacker, v) then
 						v.components.combat:SetShouldAvoidAggro(inst.attacker)
 					end
 
-					v.components.combat:GetAttacked(inst.attacker, inst.finaldamage, inst.attacker)
+					v.components.combat:GetAttacked(inst.set_attacker, inst.finaldamage, inst.attacker)
 
 					if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
 						v.components.sleeper:WakeUp()
