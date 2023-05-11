@@ -418,7 +418,7 @@ configuration_options = {
     BinaryConfig("harder_beequeen", "Harder Bee Queen", "Bee Queen now has a variety of attacks utilizing new types of Bees.", true), -- lame! help!
     BinaryConfig("rework_minotaur", "Ancient Guardian Rework", "The Ancient Guardian's fight is expanded, including more attacks.", true),
     BinaryConfig("reworked_eyes", "Reworked Eyes of Terror", "Eye of Terror and the Twins have new attacks, inspired by their Terraria counterparts.", true),
-    BinaryConfig("reworked_ck", "Reworked Crab King", "Crab King has his main attack altered, freeze removed, and some mechanics.", true),
+    BinaryConfig("reworked_ck", "Reworked Crab King", "Crab King has his main attack altered, freeze removed, and some new mechanics.", true),
     SkipSpace(),
 
     Header("Boss Quality of Life"),
