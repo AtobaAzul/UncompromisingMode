@@ -212,6 +212,7 @@ configuration_options = {
     -----------------------------
     Header("Items and Structures"),
     -----------------------------
+        BinaryConfig("cooldown_orangestaff_", "Cooldown Based Lazy Explorer", "Lazy Explorer no longer has durabilty, but instead has cooldown, like Wanda's watches.\nSuggested by Lux.", true),
     BinaryConfig("townportal_rework", "Lazy Deserter Rework", "Makes the Lazy Deserter useful in singleplayer, by automatically harvesting nearby plants and objects.", true),
     BinaryConfig("telestaff_rework", "Telelocator Rework", "You can now select the Focus you wish to teleport to. Foci now cost 3 Purple gems instead of gold.\nThe Staff's uses are doubled.", true),
     BinaryConfig("no4crafts", "No 4-Ingredient Recipes", "Changes all 4-ingredient recipes to use 3 instead.", false),
@@ -451,7 +452,6 @@ configuration_options = {
     Header("> Experimental <"),
     -----------------------------
     BinaryConfig("eyebrellarework", "Eyebrella Rework", "Eyebrella stats restored to Vanilla value, must be repaired with Milky Whites, 12 day durability. Isn't affected by clothing degradation.", false),
-    BinaryConfig("cooldown_orangestaff", "Cooldown Based Lazy Explorer", "Lazy Explorer no longer has durabilty, but instead has cooldown, like Wanda's watches.\nSuggested by Lux.", false),
     BinaryConfig("the_cooler_sacred_chest", "Ancient Chest Crafting Recipes", "Disable this if the Metheus puzzle in-game portion breaks. \nIt shouldn't, so please also file a bug report!", false),
     --	BinaryConfig("shiversprites_enabled", "Shiversprites", "Something new waits out in the frozen tundra.", false),
     SkipSpace(),
