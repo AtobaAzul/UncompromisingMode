@@ -123,6 +123,7 @@ local prefab_post = {
     "spider_whistle",
     "spider_healer",
     "siestahut",
+	"bedroll_furry",
     "bees",
     "farmplants",
     "rainhat",
