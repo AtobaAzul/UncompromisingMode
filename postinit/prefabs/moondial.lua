@@ -38,7 +38,7 @@ env.AddPrefabPostInit("moondial", function(inst)
 			data.hastear = inst.hastear
 		end
 		
-		_OnSave(inst, data)
+		return _OnSave(inst, data)
 	end
 
 	local function OnLoad(inst, data)
@@ -56,7 +56,7 @@ env.AddPrefabPostInit("moondial", function(inst)
 			end
 		end
 
-		_OnLoad(inst, data)
+		return _OnLoad(inst, data)
 	end
 	
 	inst:AddComponent("trader")

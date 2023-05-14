@@ -265,7 +265,7 @@ env.AddPrefabPostInit("deerclops", function(inst)
 			data.healthUM = inst.components.health.currenthealth
 		end
 		
-		_OnSave(inst, data)
+		return _OnSave(inst, data)
 	end
 	
 	local function OnLoad(inst, data)
@@ -293,8 +293,8 @@ env.AddPrefabPostInit("deerclops", function(inst)
 				inst.components.health.currenthealth = data.healthUM
 			end
 		end
-		print("My upgrade is: "..inst.upgrade)
-		_OnLoad(inst, data)
+		
+		return _OnLoad(inst, data)
 	end
 	
 	inst.OnSave = OnSave
@@ -315,6 +315,11 @@ env.AddPrefabPostInit("deerclops", function(inst)
     inst.MakeEnrageable = MakeEnrageable
     inst.MakeIcey = MakeIcey
     inst.MakeStrong = MakeStrong
+	
+	inst:ListenForEvent("death", function(inst)
+		inst:AddComponent("colourtweener")
+		inst.components.colourtweener:StartTween({50/255,255/255,50/255,0}, 1.5)
+	end)
 
     inst:DoTaskInTime(0.1, ChooseUpgrades(inst)) --Incase we need to specify an upgrade because this deerclops despawned.
 end)

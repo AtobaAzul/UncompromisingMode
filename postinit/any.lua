@@ -91,16 +91,27 @@ end)
 -- for the super spawner tags
 env.AddPrefabPostInitAny(function(inst)
     local old_OnSave = inst.OnSave
+	
     inst.OnSave = function(inst, data, ...)
-        if inst.umss_tags then data.umss_tags = inst.umss_tags end
+        if inst.umss_tags then 
+			data.umss_tags = inst.umss_tags
+		end
 
-        if old_OnSave ~= nil then return old_OnSave(inst, data, ...) end
+        if old_OnSave ~= nil then 
+			return old_OnSave(inst, data, ...) 
+		end
     end
 
     local old_OnLoad = inst.OnLoad
     inst.OnLoad = function(inst, data, ...)
-        if data ~= nil and data.umss_tags ~= nil then for k, v in ipairs(data.umss_tags) do inst:AddTag("umss_" .. v) end end
+        if data ~= nil and data.umss_tags ~= nil then 
+			for k, v in ipairs(data.umss_tags) do 
+				inst:AddTag("umss_" .. v) 
+			end 
+		end
 
-        if old_OnLoad ~= nil then old_OnLoad(inst, data, ...) end
+        if old_OnLoad ~= nil then 
+			return old_OnLoad(inst, data, ...) 
+		end
     end
 end)

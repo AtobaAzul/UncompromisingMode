@@ -96,7 +96,6 @@ local function hungycounter(inst)
 end
 
 local function OnAttacked(inst, data)
-    --print("ON ATTACKED")
     local attacker = data.attacker
     inst:ClearBufferedAction()
     inst.attacked = true
@@ -126,8 +125,12 @@ env.AddPrefabPostInit("perd", function(inst)
 			data.mehungy = inst.mehungy
 		end
 		
-		_OnSave(inst, data)
+		if _OnSave ~= nil then
+			return _OnSave(inst, data)
+		end
 	end
+	
+	local _OnLoad = inst.OnLoad
 
 	local function OnLoad(inst, data)
 		if data then
@@ -137,6 +140,10 @@ env.AddPrefabPostInit("perd", function(inst)
 					inst.components.named:SetName("Gobbler")
 				end
 			end
+		end
+		
+		if _OnLoad ~= nil then
+			return _OnLoad(inst, data)
 		end
 	end
 

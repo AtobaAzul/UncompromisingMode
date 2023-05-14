@@ -39,27 +39,34 @@ env.AddPrefabPostInit("archive_moon_statue", function(inst)
 		if inst.charge and inst.charge == 1 then
 			SpawnPrefab("archive_security_pulse").Transform:SetPosition(inst.Transform:GetWorldPosition())
 		end
+		
 		_OldFinish(inst)
 	end
+	
 	inst.components.workable:SetOnFinishCallback(OnFinish)
+	
 	if inst.OnSave then
 		local _OnSave = inst.OnSave
 		inst.OnSave = function(inst,data)
 			data.charge = inst.charge
-			_OnSave(inst,data)
+			
+			return _OnSave(inst,data)
 		end
 	else
 		inst.OnSave = function(inst,data)
 			data.charge = inst.charge
 		end
 	end
+	
 	if inst.OnLoad then
 		local _OnLoad = inst.OnLoad
 		inst.OnLoad = function(inst,data)
 			if data and data.charge then
 				inst.charge = data.charge
+				inst.charge = data.charge
 			end
-			_OnSave(inst,data)
+			
+			return _OnLoad(inst,data)
 		end
 	else
 		inst.OnLoad = function(inst,data)
@@ -76,9 +83,11 @@ env.AddPrefabPostInit("archive_moon_statue", function(inst)
 			inst.shocking = inst:DoTaskInTime(math.random(3,10),Shocking)
 		end
 	end
+	
 	inst:ListenForEvent("entitywake", function(inst)
 		inst.shocking = inst:DoTaskInTime(math.random(3,10),Shocking) 
 	end)
+	
 	inst:ListenForEvent("entitysleep", function(inst)
 		if inst.shocking then
 			inst.shocking:Cancel()

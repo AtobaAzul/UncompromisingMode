@@ -118,7 +118,7 @@ env.AddPrefabPostInit("evergreen", function(inst)
 			data.stumplingambush = inst.stumplingambush
 		end
 		
-		_OnSave(inst, data)
+		return _OnSave(inst, data)
 	end
 
 	local function OnLoad(inst, data)
@@ -126,7 +126,7 @@ env.AddPrefabPostInit("evergreen", function(inst)
 			inst.stumplingambush = data.stumplingambush
 		end
 
-		_OnLoad(inst, data)
+		return _OnLoad(inst, data)
 	end
 	
 	inst.stumpling = "stumpling"

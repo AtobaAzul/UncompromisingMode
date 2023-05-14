@@ -125,6 +125,7 @@ env.AddPrefabPostInit("catcoonden", function(inst)
 				inst.hitlist = child.hitlist
 			end
 		end
+		
 		_onchildkilledfn(inst, child)
 	end
 
@@ -132,14 +133,16 @@ env.AddPrefabPostInit("catcoonden", function(inst)
 		if data ~= nil and data.hitlist ~= nil then
 			inst.hitlist = data.hitlist
 		end
-		_onload(inst, data)
+		
+		return _onload(inst, data)
 	end
 
 	local function OnSave(inst, data)
 		if inst.hitlist ~= nil then
 			data.hitlist = inst.hitlist
 		end
-		_onsave(inst, data)
+		
+		return _onsave(inst, data)
 	end
 
 	inst.components.childspawner:SetRegenPeriod(2.5 * TUNING.CATCOONDEN_REGEN_TIME) --Catcoons are now reasonably common, they don't need a super fast regen time

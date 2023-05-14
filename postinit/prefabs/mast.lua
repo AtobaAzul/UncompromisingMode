@@ -54,24 +54,24 @@ for i, v in pairs(masts) do
 		local _OnSave = inst.OnSave
 		
 		inst.OnSave = function(inst, data)
-			if _OnSave ~= nil then
-				_OnSave(inst, data)
-			end
-			
 			if inst._turbine ~= nil then
 				data.turbine = true
+			end
+			
+			if _OnSave ~= nil then
+				return _OnSave(inst, data)
 			end
 		end
 		
 		local _OnLoad = inst.OnLoad
 		
 		inst.OnLoad = function(inst, data)
-			if _OnLoad ~= nil then
-				_OnLoad(inst, data)
-			end
-			
 			if data ~= nil and data.turbine then
 				upgrade_windturbine(inst)
+			end
+			
+			if _OnLoad ~= nil then
+				return _OnLoad(inst, data)
 			end
 		end
 	end)

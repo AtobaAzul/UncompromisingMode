@@ -63,19 +63,23 @@ env.AddPrefabPostInit("lantern", function(inst)
     end --maybe I could alter in onequip instead too.
 
     local _OnSave = inst.OnSave
+	
     local function OnSave(inst, data)
         if inst.upgraded then
             data.upgraded = inst.upgraded
         end
+		
         if inst.components.fueled ~= nil then
             data.saved_fuel_value = inst.components.fueled:GetPercent()
         end
+		
         if _OnSave ~= nil then
-            _OnSave(inst, data)
+            return _OnSave(inst, data)
         end
     end
 
     local _OnLoad = inst.OnLoad
+	
     local function OnLoad(inst, data)
         if data ~= nil and data.upgraded then
             inst.upgraded = true
@@ -84,8 +88,9 @@ env.AddPrefabPostInit("lantern", function(inst)
                 inst:DoTaskInTime(0, function() inst.components.fueled:SetPercent(data.saved_fuel_value) end)
             end
         end
+		
         if _OnLoad ~= nil then
-            _OnLoad(inst, data)
+            return _OnLoad(inst, data)
         end
     end
 

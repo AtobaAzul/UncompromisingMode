@@ -279,8 +279,9 @@ env.AddPrefabPostInit("nightstick", function(inst)
 		if data ~= nil then
 			data.actual_fuel = inst.components.fueled:GetPercent()
 		end
+		
 		if _OnSave ~= nil then
-			_OnSave(inst, data)
+			return _OnSave(inst, data)
 		end
 	end
 
@@ -288,8 +289,9 @@ env.AddPrefabPostInit("nightstick", function(inst)
 		if data ~= nil and data.actual_fuel ~= nil then
 			inst:DoTaskInTime(0, function() inst.components.fueled:SetPercent(data.actual_fuel) end)
 		end
+		
 		if _OnLoad ~= nil then
-			_OnLoad(inst, data)
+			return _OnLoad(inst, data)
 		end
 	end
 end)

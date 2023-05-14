@@ -1,6 +1,6 @@
 -- Update this list when adding files
 local component_post = {
-    "groundpounder",
+	"groundpounder",
     "propagator",
     "moisture",
     "weapon", --	"hunter",
@@ -41,6 +41,7 @@ local component_post = {
 }
 
 local prefab_post = {
+	"atrium_gate",
     "wardrobe",
     "shieldofcthulu",
     "clockworks",
