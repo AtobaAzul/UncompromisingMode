@@ -49,8 +49,9 @@ local function common_meat(anim)
     inst:AddComponent("inventoryitem")
     
     inst:AddComponent("stackable")
-
+	
     inst:AddComponent("tradable")
+    inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
 
     inst:AddComponent("perishable")
     inst.components.perishable:StartPerishing()

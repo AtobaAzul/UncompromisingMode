@@ -23,7 +23,7 @@ env.AddComponentPostInit("boatphysics", function(self)
 				end
 			end
 		end
-		print(has_rotator)
+		
         if has_rotator then
             local vel_x, vel_z = VecUtil_NormalizeNoNaN(self.velocity_x, self.velocity_z)
             local tar_x, tar_z = VecUtil_NormalizeNoNaN(self.target_rudder_direction_x, self.target_rudder_direction_z)
@@ -47,9 +47,6 @@ env.AddComponentPostInit("boatphysics", function(self)
 	local _GetBoatDrag = self.GetBoatDrag
 
     function self:GetBoatDrag(velocity, total_anchor_drag, ...)
-        print(_GetBoatDrag(self, velocity, total_anchor_drag, ...))
-        print(_GetBoatDrag(self, velocity, total_anchor_drag, ...) * self:GetBoatRotatorDrag())
-
 		return _GetBoatDrag(self,velocity, total_anchor_drag, ...) * self:GetBoatRotatorDrag()
 	end
 

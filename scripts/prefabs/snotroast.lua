@@ -31,6 +31,9 @@ local function fn()
 
     inst:AddComponent("inspectable")
 
+    inst:AddComponent("tradable")
+    inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.RAREMEAT
+	
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/snotroast.xml"
     inst:AddComponent("edible")

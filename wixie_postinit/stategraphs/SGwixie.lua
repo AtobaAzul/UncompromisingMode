@@ -47,10 +47,6 @@ env.AddStategraphPostInit("wilson", function(inst)
 		function(inst, action, ...)
 			local rec = GetValidRecipe(action.recipe)
 
-			if rec.filters ~= nil then
-				print(rec.filters)
-			end
-
 			return (inst:HasTag("troublemaker") and rec ~= nil and rec.builder_tag == "pebblemaker" and "domediumaction")
 				--or (inst:HasTag("pinetreepioneer") and rec ~= nil and rec.tab.str == "SURVIVAL" and "domediumaction")
 				or _OldBuild(inst, action, ...)
@@ -266,7 +262,6 @@ env.AddStategraphPostInit("wilson", function(inst)
 																			--v.components.locomotor:RemoveExternalSpeedMultiplier(v, "wixieshoved")
 																		end
 
-																		print("v knocked")
 																		local px, py, pz = v.Transform:GetWorldPosition()
 																		local rad_collision = -math.rad(v
 																		:GetAngleToPoint(tx, ty, tz))
@@ -309,12 +304,7 @@ env.AddStategraphPostInit("wilson", function(inst)
 																			if not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) then
 																				if v ~= nil and v.components.locomotor ~= nil and vx ~= nil and (ground_collision or boat_collision or ocean_collision and v.components.locomotor:CanPathfindOnWater() or v.components.tiletracker ~= nil and not v:HasTag("whale")) then
 																					if not v:HasTag("aquatic") and not on_water or v:HasTag("aquatic") and on_water then
-																						print("v should be moving")
-																						--[[if ocean_collision and v.components.amphibiouscreature and not v.components.amphibiouscreature.in_water then
-																							v.components.amphibiouscreature:OnEnterOcean()
-																						end]]
-																						v.Transform:SetPosition(vx, vy,
-																						vz)
+																						v.Transform:SetPosition(vx, vy, vz)
 																					end
 																				end
 																			end
@@ -374,7 +364,6 @@ env.AddStategraphPostInit("wilson", function(inst)
 
 												if not (target.sg ~= nil and (target.sg:HasStateTag("swimming") or target.sg:HasStateTag("invisible"))) then
 													if target ~= nil and target.components.locomotor ~= nil and dx ~= nil and (ground_target or boat_target or ocean_target and target.components.locomotor:CanPathfindOnWater() or target.components.tiletracker ~= nil and not target:HasTag("whale")) then
-														print(on_water_target)
 														if not target:HasTag("aquatic") and not on_water_target or target:HasTag("aquatic") and on_water_target then
 															--[[if ocean_target and target.components.amphibiouscreature and not target.components.amphibiouscreature.in_water then
 																target.components.amphibiouscreature:OnEnterOcean()
@@ -486,10 +475,8 @@ env.AddStategraphPostInit("wilson", function(inst)
 
 			onupdate = function(inst, dt)
 				--[[if inst.framecount < 0.35 and not inst.reverseanim then
-				print("charge")
 				inst.framecount = inst.framecount + (FRAMES * 1.5)
 			else
-				print("uncharge")
 				inst.reverseanim = true
 				inst.framecount = inst.framecount - (FRAMES)
 
@@ -532,129 +519,141 @@ env.AddStategraphPostInit("wilson", function(inst)
 
 				TimeEvent(19 * FRAMES, function(inst)
 					local weapon = inst.components.combat ~= nil and inst.components.combat:GetWeapon() or nil
-
-					if weapon:HasTag("matilda") then
-						--[[local fx = SpawnPrefab("dr_warm_loop_1")
-					fx.entity:SetParent(inst.entity)
-					fx.Transform:SetPosition(0, 2.35, 0)
-
-					inst.slingshot_power = 1
-					inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")]]
-					else
-						local fx = SpawnPrefab("dr_warm_loop_1")
+					
+					if weapon ~= nil then
+						if weapon:HasTag("matilda") then
+							--[[local fx = SpawnPrefab("dr_warm_loop_1")
 						fx.entity:SetParent(inst.entity)
 						fx.Transform:SetPosition(0, 2.35, 0)
 
-						inst.slingshot_power = 1.25
-						inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+						inst.slingshot_power = 1
+						inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")]]
+						else
+							local fx = SpawnPrefab("dr_warm_loop_1")
+							fx.entity:SetParent(inst.entity)
+							fx.Transform:SetPosition(0, 2.35, 0)
+
+							inst.slingshot_power = 1.25
+							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+						end
 					end
 				end),
 
 				TimeEvent(21 * FRAMES, function(inst)
 					local weapon = inst.components.combat ~= nil and inst.components.combat:GetWeapon() or nil
 
-					if weapon:HasTag("matilda") then
-						local fx = SpawnPrefab("dr_warmer_loop")
-						fx.entity:SetParent(inst.entity)
-						fx.Transform:SetPosition(0, 2.35, 0)
+					if weapon ~= nil then
+						if weapon:HasTag("matilda") then
+							local fx = SpawnPrefab("dr_warmer_loop")
+							fx.entity:SetParent(inst.entity)
+							fx.Transform:SetPosition(0, 2.35, 0)
 
-						inst.slingshot_power = 1.25
-						inst.slingshot_amount = 2
-						inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+							inst.slingshot_power = 1.25
+							inst.slingshot_amount = 2
+							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+						end
 					end
 				end),
 
 				TimeEvent(24 * FRAMES, function(inst)
 					local weapon = inst.components.combat ~= nil and inst.components.combat:GetWeapon() or nil
 
-					if weapon:HasTag("matilda") then
-						--[[local fx = SpawnPrefab("dr_warmer_loop")
-					fx.entity:SetParent(inst.entity)
-					fx.Transform:SetPosition(0, 2.35, 0)
-
-					inst.slingshot_power = 2
-					inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")]]
-					elseif weapon:HasTag("gnasher") then
-						local fx = SpawnPrefab("dr_hot_loop")
+					if weapon ~= nil then
+						if weapon:HasTag("matilda") then
+							--[[local fx = SpawnPrefab("dr_warmer_loop")
 						fx.entity:SetParent(inst.entity)
 						fx.Transform:SetPosition(0, 2.35, 0)
 
 						inst.slingshot_power = 2
-						inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
-					else
-						local fx = SpawnPrefab("dr_warm_loop_2")
-						fx.entity:SetParent(inst.entity)
-						fx.Transform:SetPosition(0, 2.35, 0)
+						inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")]]
+						elseif weapon:HasTag("gnasher") then
+							local fx = SpawnPrefab("dr_hot_loop")
+							fx.entity:SetParent(inst.entity)
+							fx.Transform:SetPosition(0, 2.35, 0)
 
-						inst.slingshot_power = 1.5
-						inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+							inst.slingshot_power = 2
+							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+						else
+							local fx = SpawnPrefab("dr_warm_loop_2")
+							fx.entity:SetParent(inst.entity)
+							fx.Transform:SetPosition(0, 2.35, 0)
+
+							inst.slingshot_power = 1.5
+							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+						end
 					end
 				end),
 
 				TimeEvent(28 * FRAMES, function(inst)
 					local weapon = inst.components.combat ~= nil and inst.components.combat:GetWeapon() or nil
 
-					if weapon:HasTag("matilda") then
-						local fx = SpawnPrefab("dr_hot_loop")
-						fx.entity:SetParent(inst.entity)
-						fx.Transform:SetPosition(0, 2.35, 0)
+					if weapon ~= nil then
+						if weapon:HasTag("matilda") then
+							local fx = SpawnPrefab("dr_hot_loop")
+							fx.entity:SetParent(inst.entity)
+							fx.Transform:SetPosition(0, 2.35, 0)
 
-						inst.slingshot_power = 1.5
-						inst.slingshot_amount = 3
-						inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+							inst.slingshot_power = 1.5
+							inst.slingshot_amount = 3
+							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+						end
 					end
 				end),
 
 				TimeEvent(29 * FRAMES, function(inst)
 					local weapon = inst.components.combat ~= nil and inst.components.combat:GetWeapon() or nil
 
-					if weapon:HasTag("matilda") then
-						--[[local fx = SpawnPrefab("dr_warmer_loop")
-					fx.entity:SetParent(inst.entity)
-					fx.Transform:SetPosition(0, 2.35, 0)
-
-					inst.slingshot_power = 2
-					inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")]]
-					elseif weapon:HasTag("gnasher") then
-						local fx = SpawnPrefab("dr_warm_loop_2")
+					if weapon ~= nil then
+						if weapon:HasTag("matilda") then
+							--[[local fx = SpawnPrefab("dr_warmer_loop")
 						fx.entity:SetParent(inst.entity)
 						fx.Transform:SetPosition(0, 2.35, 0)
 
-						inst.slingshot_power = 1.25
-						inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
-					else
-						local fx = SpawnPrefab("dr_warmer_loop")
-						fx.entity:SetParent(inst.entity)
-						fx.Transform:SetPosition(0, 2.35, 0)
+						inst.slingshot_power = 2
+						inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")]]
+						elseif weapon:HasTag("gnasher") then
+							local fx = SpawnPrefab("dr_warm_loop_2")
+							fx.entity:SetParent(inst.entity)
+							fx.Transform:SetPosition(0, 2.35, 0)
 
-						inst.slingshot_power = 1.75
-						inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+							inst.slingshot_power = 1.25
+							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+						else
+							local fx = SpawnPrefab("dr_warmer_loop")
+							fx.entity:SetParent(inst.entity)
+							fx.Transform:SetPosition(0, 2.35, 0)
+
+							inst.slingshot_power = 1.75
+							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+						end
 					end
 				end),
 
 				TimeEvent(34 * FRAMES, function(inst)
 					local weapon = inst.components.combat ~= nil and inst.components.combat:GetWeapon() or nil
 
-					if weapon:HasTag("matilda") then
-						--[[local fx = SpawnPrefab("dr_hot_loop")
-					fx.entity:SetParent(inst.entity)
-					fx.Transform:SetPosition(0, 2.35, 0)
-
-					inst.slingshot_power = 3
-					inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")]]
-					elseif weapon:HasTag("gnasher") then
-						local fx = SpawnPrefab("dr_warm_loop_1")
-						fx.entity:SetParent(inst.entity)
-						fx.Transform:SetPosition(0, 2.35, 0)
-						fx.Transform:SetScale(0.8, 0.8, 0.8)
-						inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
-					else
-						local fx = SpawnPrefab("dr_hot_loop")
+					if weapon ~= nil then
+						if weapon:HasTag("matilda") then
+							--[[local fx = SpawnPrefab("dr_hot_loop")
 						fx.entity:SetParent(inst.entity)
 						fx.Transform:SetPosition(0, 2.35, 0)
 
-						inst.slingshot_power = 2
-						inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+						inst.slingshot_power = 3
+						inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")]]
+						elseif weapon:HasTag("gnasher") then
+							local fx = SpawnPrefab("dr_warm_loop_1")
+							fx.entity:SetParent(inst.entity)
+							fx.Transform:SetPosition(0, 2.35, 0)
+							fx.Transform:SetScale(0.8, 0.8, 0.8)
+							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+						else
+							local fx = SpawnPrefab("dr_hot_loop")
+							fx.entity:SetParent(inst.entity)
+							fx.Transform:SetPosition(0, 2.35, 0)
+
+							inst.slingshot_power = 2
+							inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
+						end
 					end
 				end),
 			},
@@ -957,7 +956,7 @@ env.AddStategraphPostInit("wilson", function(inst)
 					end
 
 					inst:PerformBufferedAction()
-					inst.SoundEmitter:PlaySound("wixie/characters/wixie/walterwhistle")
+					inst.SoundEmitter:PlaySound("wixie/characters/wixie/walterwhistle", nil, nil, false)
 				end),
 				TimeEvent(24 * FRAMES, function(inst)
 					inst.sg:RemoveStateTag("busy")

@@ -32,6 +32,10 @@ end
 local function on_blueberry_dug_up(inst, digger)
 	if digger:HasTag("player") then
 		if inst.Harvestable == "full" then
+			if not inst.components.mine.issprung then
+				inst.components.mine:Explode()
+			end
+			
 			on_deactivate(inst)
 			inst.AnimState:PlayAnimation("dig")
 			inst.AnimState:PushAnimation("spawn")

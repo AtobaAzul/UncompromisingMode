@@ -29,6 +29,8 @@ local function fn()
 
     inst:AddComponent("inspectable")
 	
+    inst:AddComponent("tradable")
+    inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
 
     inst:AddComponent("inventoryitem")
 	inst.components.inventoryitem.atlasname = "images/inventoryimages/hardshelltacos.xml"
