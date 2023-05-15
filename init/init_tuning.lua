@@ -344,6 +344,7 @@ TUNING.DSTU = {
     COMPROMISING_SHADOWVORTEX = GetModConfigData("compromising_vortex"),
     DISABLE_MEGAFLARE = GetModConfigData("disable_megaflare"),
     WIXIE = GetModConfigData("wixie_walter"),
+    WIXIE_BIRDS = GetModConfigData("wixie_birds"),
     -- boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
     TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),
@@ -392,7 +393,9 @@ TUNING.SANITY_BECOME_SANE_THRESH = 45 / 200 -- 22.5%
 
 TUNING.WORMWOOD_BURN_TIME = TUNING.DSTU.WORMWOOD_BURN_TIME
 
-if GetModConfigData("wormwood_extrafiredmg") then TUNING.WORMWOOD_FIRE_DAMAGE = TUNING.DSTU.WORMWOOD_FIRE_DAMAGE end
+if GetModConfigData("wormwood_extrafiredmg") then
+    TUNING.WORMWOOD_FIRE_DAMAGE = TUNING.DSTU.WORMWOOD_FIRE_DAMAGE
+end
 
 TUNING.AFFINITY_15_CALORIES_TINY = 1.6
 TUNING.AFFINITY_15_CALORIES_SMALL = 1.4
@@ -468,7 +471,9 @@ TUNING.CRABKING_REGEN = 400
 -- TUNING.CRABKING_REGEN_BUFF = TUNING.CRABKING_REGEN * 0.33
 
 -- Wortox
-if GetModConfigData("wortox") == "UMNERF" then TUNING.WORTOX_HEALTH = 150 end
+if GetModConfigData("wortox") == "UMNERF" then
+    TUNING.WORTOX_HEALTH = 150
+end
 
 if GetModConfigData("wortox") == "APOLLO" then
     TUNING.WORTOX_SOULHEAL_MINIMUM_HEAL = 5

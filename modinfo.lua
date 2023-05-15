@@ -97,6 +97,7 @@ configuration_options = {
     ------------------------------
     BinaryConfig("funny rat", "Winky", "Enable Uncompromising Mode's Winky, the Vile Vermin.", true),
     BinaryConfig("wixie_walter", "Wixie & Walter Rework", "Enable Uncompromising Mode's Wixie, the Delinquent, who expands on Walter's slingshot, while Walter gets new interactions and mechanics with Woby!", true),
+    BinaryConfig("wixie_birds", "Wixie: Slingshot Nerfs", "Slingshots can't hit birds & rabbits.", true) ,
     BinaryConfig("holy fucking shit it's wathom", "Wathom", "Enable Uncompromising Mode's Wathom, the Forgotten Parody.", true),
     BinaryConfig("wathom_maxdmg", "Wathom: Damage Cap", "Wathom's damage is capped at 600 to limit his absurd burst damage potential.", true),
     {name = "wathom_ampvulnerability", label = "Wathom: Amped Vulnerability", hover = "Wathom takes more damage when amped.", options = {{description = "5x (Default)", data = 5}, {description = "4x", data = 4}, {description = "3x", data = 3}, {description = "2x", data = 2}}, default = 5},

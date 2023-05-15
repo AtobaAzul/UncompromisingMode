@@ -1,90 +1,74 @@
-local assets =
-{
-    Asset("ANIM", "anim/wixieammo.zip"),
-}
+local assets = {Asset("ANIM", "anim/wixieammo.zip")}
 
+local assets_firecrackers = {Asset("ANIM", "anim/firecrackers.zip")}
 
-local assets_firecrackers =
-{
-    Asset("ANIM", "anim/firecrackers.zip"),
-}
+local prefabs_firecrackers = {"explode_firecrackers"}
 
-local prefabs_firecrackers =
-{
-    "explode_firecrackers",
-}
+local AURA_EXCLUDE_TAGS = {"noclaustrophobia", "playerghost", "abigail", "companion", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "invisible"}
 
-local AURA_EXCLUDE_TAGS = { "noclaustrophobia", "rabbit", "playerghost", "abigail", "companion", "ghost", "shadow",
-    "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "invisible" }
-
+if TUNING.DSTU.WIXIE_BIRDS then
+    table.insert(AURA_EXCLUDE_TAGS, "rabbit")
+end
 if not TheNet:GetPVPEnabled() then
     table.insert(AURA_EXCLUDE_TAGS, "player")
 end
 
 -- temp aggro system for the slingshots
 local function no_aggro(attacker, target)
-	local targets_target = target.components.combat ~= nil and target.components.combat.target or nil
-    return targets_target ~= nil and targets_target:IsValid() and targets_target ~= attacker
-        and (GetTime() - target.components.combat.lastwasattackedbytargettime) < 4
-        and (targets_target.components.health ~= nil and not targets_target.components.health:IsDead())
+    local targets_target = target.components.combat ~= nil and target.components.combat.target or nil
+    return targets_target ~= nil and targets_target:IsValid() and targets_target ~= attacker and (GetTime() - target.components.combat.lastwasattackedbytargettime) < 4 and (targets_target.components.health ~= nil and not targets_target.components.health:IsDead())
 end
 
 local function DealDamage(inst, attacker, target, salty)
     if target ~= nil and target:IsValid() and target.components.combat ~= nil then
-	
-		inst.finaldamage = (inst.damage * (1 + (inst.powerlevel / 2))) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)
-		
-		if salty ~= nil and salty and target.components.health ~= nil then
-			inst.finaldamage = inst.finaldamage / target.components.health:GetPercent()
-			print("salty damage = "..inst.finaldamage)
-			
-			if target:HasTag("snowish") then
-				inst.finaldamage = inst.finaldamage * 2
-			end
-		end
-		
-		if no_aggro(attacker, target) then
-			target.components.combat:SetShouldAvoidAggro(attacker)
-		end
-		
-		if target:HasTag("shadowcreature") or 
-			target.sg == nil or 
-			target.wixieammo_hitstuncd == nil and not 
-			(target.sg:HasStateTag("busy") or 
-			target.sg:HasStateTag("caninterrupt")) or
-			target.sg:HasStateTag("frozen")	then
-			
-			target.wixieammo_hitstuncd = target:DoTaskInTime(8, function()
-				if target.wixieammo_hitstuncd ~= nil then
-					target.wixieammo_hitstuncd:Cancel()
-				end
-							
-				target.wixieammo_hitstuncd = nil
-			end)
-			
-			target.components.combat:GetAttacked(attacker, inst.finaldamage, attacker)
-		else
-			target.components.combat:GetAttacked(attacker, 0, attacker)
-			
-			if target.components.combat ~= nil then
-				target.components.combat:SetTarget(attacker)
-			end
-			
-			target.components.health:DoDelta(-inst.finaldamage, false, attacker, false, attacker, false)
-		end
 
-		if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
-			target.components.sleeper:WakeUp()
-		end
-		
-		if target.components.combat ~= nil then
-			target.components.combat.temp_disable_aggro = false
-			target.components.combat:RemoveShouldAvoidAggro(attacker)
-		end
-		
-		if attacker.components.combat ~= nil then
-			attacker.components.combat:SetTarget(target)
-		end
+        inst.finaldamage = (inst.damage * (1 + (inst.powerlevel / 2))) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)
+
+        if salty ~= nil and salty and target.components.health ~= nil then
+            inst.finaldamage = inst.finaldamage / target.components.health:GetPercent()
+
+            if target:HasTag("snowish") then
+                inst.finaldamage = inst.finaldamage * 2
+            end
+        end
+
+        if no_aggro(attacker, target) then
+            target.components.combat:SetShouldAvoidAggro(attacker)
+        end
+
+        if target:HasTag("shadowcreature") or target.sg == nil or target.wixieammo_hitstuncd == nil and not (target.sg:HasStateTag("busy") or target.sg:HasStateTag("caninterrupt")) or target.sg:HasStateTag("frozen") then
+
+            target.wixieammo_hitstuncd = target:DoTaskInTime(8, function()
+                if target.wixieammo_hitstuncd ~= nil then
+                    target.wixieammo_hitstuncd:Cancel()
+                end
+
+                target.wixieammo_hitstuncd = nil
+            end)
+
+            target.components.combat:GetAttacked(attacker, inst.finaldamage, attacker)
+        else
+            target.components.combat:GetAttacked(attacker, 0, attacker)
+
+            if target.components.combat ~= nil then
+                target.components.combat:SetTarget(attacker)
+            end
+
+            target.components.health:DoDelta(-inst.finaldamage, false, attacker, false, attacker, false)
+        end
+
+        if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
+            target.components.sleeper:WakeUp()
+        end
+
+        if target.components.combat ~= nil then
+            target.components.combat.temp_disable_aggro = false
+            target.components.combat:RemoveShouldAvoidAggro(attacker)
+        end
+
+        if attacker.components.combat ~= nil then
+            attacker.components.combat:SetTarget(target)
+        end
     end
 end
 
@@ -127,7 +111,7 @@ local function SpawnFirecrackers(inst, pt, starting_angle, attacker, powerlevel)
         fireworks.components.burnable:Ignite()
         fireworks.attacker = attacker
         fireworks.powerlevel = powerlevel
-        --fireworks:TheAttacker(attacker)
+        -- fireworks:TheAttacker(attacker)
     end
 end
 
@@ -145,22 +129,20 @@ local function OnHit_Limestone(inst, attacker, target)
 
     local rad = math.rad(inst:GetAngleToPoint(tx, ty, tz))
 
-
     for i = 1, 50 do
         target:DoTaskInTime((i - 1) / 50, function(target)
             if target ~= nil and inst ~= nil then
-                --local x, y, z = inst.Transform:GetWorldPosition()
-                --local tx, ty, tz = target.Transform:GetWorldPosition()
+                -- local x, y, z = inst.Transform:GetWorldPosition()
+                -- local tx, ty, tz = target.Transform:GetWorldPosition()
                 local tx2, ty2, tz2 = target.Transform:GetWorldPosition()
 
-                --local rad = math.rad(inst:GetAngleToPoint(tx, ty, tz))
-                local velx = math.cos(rad) --* 4.5
-                local velz = -math.sin(rad) --* 4.5
+                -- local rad = math.rad(inst:GetAngleToPoint(tx, ty, tz))
+                local velx = math.cos(rad) -- * 4.5
+                local velz = -math.sin(rad) -- * 4.5
 
                 local giantreduction = target:HasTag("epic") and 6 or target:HasTag("smallcreature") and 2 or 3
 
-                local dx, dy, dz = tx2 + (((inst.powerlevel) / (i + 1.5)) * velx) / giantreduction, ty2,
-                tz2 + (((inst.powerlevel) / (i + 1.5)) * velz) / giantreduction
+                local dx, dy, dz = tx2 + (((inst.powerlevel) / (i + 1.5)) * velx) / giantreduction, ty2, tz2 + (((inst.powerlevel) / (i + 1.5)) * velz) / giantreduction
                 local ground = TheWorld.Map:IsPassableAtPoint(dx, dy, dz)
                 local boat = TheWorld.Map:GetPlatformAtPoint(dx, dz)
                 local ocean = TheWorld.Map:IsOceanAtPoint(dx, dy, dz)
@@ -190,27 +172,7 @@ end
 local MAX_HONEY_VARIATIONS = 7
 local MAX_RECENT_HONEY = 4
 local HONEY_PERIOD = .2
-local HONEY_LEVELS =
-{
-    {
-        min_scale = .5,
-        max_scale = .8,
-        threshold = 8,
-        duration = 1.2,
-    },
-    {
-        min_scale = .5,
-        max_scale = 1.1,
-        threshold = 2,
-        duration = 2,
-    },
-    {
-        min_scale = 1,
-        max_scale = 1.3,
-        threshold = 1,
-        duration = 4,
-    },
-}
+local HONEY_LEVELS = {{min_scale = .5, max_scale = .8, threshold = 8, duration = 1.2}, {min_scale = .5, max_scale = 1.1, threshold = 2, duration = 2}, {min_scale = 1, max_scale = 1.3, threshold = 1, duration = 4}}
 
 local function PickHoney(inst)
     local rand = table.remove(inst.availabletarslow, math.random(#inst.availabletarslow))
@@ -222,11 +184,7 @@ local function PickHoney(inst)
 end
 
 local function DoHoneyTrail(inst)
-    local level = HONEY_LEVELS[
-    (inst.sg ~= nil and not inst.sg:HasStateTag("moving") and 1) or
-    (inst.components.locomotor ~= nil and inst.components.locomotor.walkspeed <= TUNING.BEEQUEEN_SPEED and 2) or
-    3
-    ]
+    local level = HONEY_LEVELS[(inst.sg ~= nil and not inst.sg:HasStateTag("moving") and 1) or (inst.components.locomotor ~= nil and inst.components.locomotor.walkspeed <= TUNING.BEEQUEEN_SPEED and 2) or 3]
 
     inst.tarslowcount = inst.tarslowcount + 1
 
@@ -244,8 +202,7 @@ local function DoHoneyTrail(inst)
         local fx = nil
         if TheWorld.Map:IsPassableAtPoint(hx, hy, hz) then
             fx = SpawnPrefab("wixietar_trail")
-            fx:SetVariation(PickHoney(inst), GetRandomMinMax(level.min_scale, level.max_scale),
-            level.duration + math.random() * .5)
+            fx:SetVariation(PickHoney(inst), GetRandomMinMax(level.min_scale, level.max_scale), level.duration + math.random() * .5)
         else
             fx = SpawnPrefab("splash_sink")
         end
@@ -257,7 +214,7 @@ local function DoHoneyTrail(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
 
     if x ~= nil and (inst:HasTag("obsidianburning") or (inst.components.burnable ~= nil and inst.components.burnable:IsBurning())) then
-        for k, v in ipairs(TheSim:FindEntities(x, y, z, 10, { "tartrail" })) do
+        for k, v in ipairs(TheSim:FindEntities(x, y, z, 10, {"tartrail"})) do
             if v.components.burnable ~= nil then
                 v.components.burnable:Ignite()
                 print("burn damnit!")
@@ -296,11 +253,11 @@ local function OnHit_Tar(inst, attacker, target)
         target.tarslowtask:Cancel()
         target.tarslowtask = nil
     end
-	
-	if target.honeyslowtask ~= nil then
-		target.honeyslowtask:Cancel()
-		target.honeyslowtask = nil
-	end
+
+    if target.honeyslowtask ~= nil then
+        target.honeyslowtask:Cancel()
+        target.honeyslowtask = nil
+    end
 
     if target.sg ~= nil or target.components.locomotor ~= nil then
         target.tarslowtask = target:DoPeriodicTask(HONEY_PERIOD, DoHoneyTrail)
@@ -309,24 +266,22 @@ local function OnHit_Tar(inst, attacker, target)
     inst:Remove()
 end
 
-local OBSIDIAN_AURA_EXCLUDE_TAGS = { "noclaustrophobia", "player", "playerghost", "companion", "ghost", "shadow",
-    "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "flying", "dragonfly", "lavae",
-    "invisible" }
+local OBSIDIAN_AURA_EXCLUDE_TAGS = {"noclaustrophobia", "player", "playerghost", "companion", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "flight", "flying", "dragonfly", "lavae", "invisible"}
 
 local function DoAreaBurn(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local ents = TheSim:FindEntities(x, y, z, 5, nil, OBSIDIAN_AURA_EXCLUDE_TAGS)
     for i, v in ipairs(ents) do
         if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
-            if inst.components.propagator ~= nil and v.components.combat ~= nil and v.components.health ~= nil and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
-				if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
-					v.components.sleeper:WakeUp()
-				end
+            if inst.components.propagator ~= nil and v.components.combat ~= nil and v.components.health ~= nil and (v:HasTag("bird_mutant") or TUNING.DSTU.WIXIE_BIRDS and not v:HasTag("bird") or not TUNING.DSTU.WIXIE_BIRDS and v:HasTag("bird") or not v:HasTag("bird")) then
+                if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
+                    v.components.sleeper:WakeUp()
+                end
 
-				v.components.health:DoDelta(-8, inst.attacker)
+                v.components.health:DoDelta(-8, inst.attacker)
                 SpawnPrefab("halloween_firepuff_1").Transform:SetPosition(v.Transform:GetWorldPosition())
 
-                --v:PushEvent("onignite")
+                -- v:PushEvent("onignite")
             end
 
             v:PushEvent("onignite")
@@ -357,8 +312,8 @@ local function OnHit_Obsidian(inst, attacker, target)
         inst.powerlevel = inst.powerlevel + 1
         target:PushEvent("wixiebite")
     end
-	
-	inst.attacker = attacker
+
+    inst.attacker = attacker
 
     DealDamage(inst, attacker, target)
     ImpactFx(inst, attacker, target)
@@ -398,12 +353,7 @@ end
 
 local function oncollide(inst, other)
     local attacker = inst.components.projectile.owner
-    if other ~= nil and attacker ~= nil and
-        other:IsValid() and
-        other.components.combat ~= nil and not
-        other:HasTag("projectile") and not
-        other:HasTag("playerghost") and not
-        other:HasTag("player") then
+    if other ~= nil and attacker ~= nil and other:IsValid() and other.components.combat ~= nil and not other:HasTag("projectile") and not other:HasTag("playerghost") and not other:HasTag("player") then
         if attacker ~= nil and attacker:IsValid() and other ~= attacker then
             inst.OnHit(inst, attacker, other)
             inst:Remove()
@@ -416,8 +366,8 @@ local function CollisionCheck(inst)
         local x, y, z = inst.Transform:GetWorldPosition()
         local attacker = inst.components.projectile.owner or nil
 
-        for i, v in ipairs(TheSim:FindEntities(x, y, z, 3, { "_combat" }, AURA_EXCLUDE_TAGS)) do
-            if v:GetPhysicsRadius(0) > 1.5 and v:IsValid() and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
+        for i, v in ipairs(TheSim:FindEntities(x, y, z, 3, {"_combat"}, AURA_EXCLUDE_TAGS)) do
+            if v:GetPhysicsRadius(0) > 1.5 and v:IsValid() and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or TUNING.DSTU.WIXIE_BIRDS and not v:HasTag("bird") or not TUNING.DSTU.WIXIE_BIRDS and v:HasTag("bird") or not v:HasTag("bird")) then
                 if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
                     if not (v.components.health:IsDead() or v == attacker or v:HasTag("playerghost") or (v:HasTag("player") and not TheNet:GetPVPEnabled())) then
                         inst.OnHit(inst, attacker, v)
@@ -428,8 +378,8 @@ local function CollisionCheck(inst)
             end
         end
 
-        for i, v in ipairs(TheSim:FindEntities(x, y, z, 2, { "_combat" }, AURA_EXCLUDE_TAGS)) do
-            if v:IsValid() and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
+        for i, v in ipairs(TheSim:FindEntities(x, y, z, 2, {"_combat"}, AURA_EXCLUDE_TAGS)) do
+            if v:IsValid() and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or TUNING.DSTU.WIXIE_BIRDS and not v:HasTag("bird") or not TUNING.DSTU.WIXIE_BIRDS and v:HasTag("bird") or not v:HasTag("bird")) then
                 if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
                     if not (v.components.health:IsDead() or v == attacker or v:HasTag("playerghost") or (v:HasTag("player") and not TheNet:GetPVPEnabled())) then
                         inst.OnHit(inst, attacker, v)
@@ -456,9 +406,9 @@ local function secondaryproj_fn(symbol)
     inst.Physics:SetDamping(5)
     inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
     inst.Physics:ClearCollisionMask()
-    --inst.Physics:CollidesWith(COLLISION.CHARACTERS)
-    --inst.Physics:CollidesWith(COLLISION.GIANTS)
-    --inst.Physics:CollidesWith(COLLISION.FLYERS)
+    -- inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+    -- inst.Physics:CollidesWith(COLLISION.GIANTS)
+    -- inst.Physics:CollidesWith(COLLISION.FLYERS)
     inst.Physics:SetCapsule(0.85, 0.85)
 
     inst.Transform:SetFourFaced()
@@ -468,7 +418,7 @@ local function secondaryproj_fn(symbol)
     inst.AnimState:PlayAnimation("spin_loop", true)
     inst.AnimState:OverrideSymbol("rock", "wixieammo_IA", symbol)
 
-    --projectile (from projectile component) added to pristine state for optimization
+    -- projectile (from projectile component) added to pristine state for optimization
     inst:AddTag("projectile")
     inst:AddTag("scarytoprey")
 
@@ -761,13 +711,4 @@ local function impactobsidianfn()
     return inst
 end
 
-return Prefab("slingshotammo_limestone", limestone_fn, assets, prefabs),
-    Prefab("slingshotammo_limestone_proj_secondary", limestoneproj_fn, assets, prefabs),
-    Prefab("slingshotammo_limestone_impact", impactlimestonefn, assets, prefabs),
-    Prefab("slingshotammo_tar", tar_fn, assets, prefabs),
-    Prefab("slingshotammo_tar_proj_secondary", tarproj_fn, assets, prefabs),
-    Prefab("slingshotammo_tar_impact", impacttarfn, assets, prefabs),
-    Prefab("slingshotammo_obsidian", obsidian_fn, assets, prefabs),
-    Prefab("slingshotammo_obsidian_proj_secondary", obsidianproj_fn, assets, prefabs),
-    Prefab("slingshotammo_obsidian_impact", impactobsidianfn, assets, prefabs),
-    Prefab("coconut_proj_secondary", coconutproj_fn, assets, prefabs)
+return Prefab("slingshotammo_limestone", limestone_fn, assets, prefabs), Prefab("slingshotammo_limestone_proj_secondary", limestoneproj_fn, assets, prefabs), Prefab("slingshotammo_limestone_impact", impactlimestonefn, assets, prefabs), Prefab("slingshotammo_tar", tar_fn, assets, prefabs), Prefab("slingshotammo_tar_proj_secondary", tarproj_fn, assets, prefabs), Prefab("slingshotammo_tar_impact", impacttarfn, assets, prefabs), Prefab("slingshotammo_obsidian", obsidian_fn, assets, prefabs), Prefab("slingshotammo_obsidian_proj_secondary", obsidianproj_fn, assets, prefabs), Prefab("slingshotammo_obsidian_impact", impactobsidianfn, assets, prefabs), Prefab("coconut_proj_secondary", coconutproj_fn, assets, prefabs)

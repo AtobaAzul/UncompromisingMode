@@ -240,6 +240,8 @@ local function fn_proj()
     inst.sound = inst.SoundEmitter ~= nil
     inst.task = inst:DoPeriodicTask(dt, onupdate_reverse, nil, dt)
 
+    inst.SoundEmitter:PlaySound("rifts/lunarthrall_bomb/throw", "toss")
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
