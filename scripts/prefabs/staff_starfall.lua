@@ -1,17 +1,8 @@
---TODO: Damage and uses tuning
-
-local assets =
-{
-    Asset("ANIM", "anim/staffs.zip"),
-    Asset("ANIM", "anim/swap_staffs.zip"),
-    Asset("ANIM", "anim/lavaarena_hit_sparks_fx.zip"),
-    Asset("ANIM", "anim/crab_king_shine.zip"),
-    Asset("ANIM", "anim/explode.zip"),
-
-}
+-- TODO: Damage and uses tuning
+local assets = {Asset("ANIM", "anim/staffs.zip"), Asset("ANIM", "anim/swap_staffs.zip"), Asset("ANIM", "anim/lavaarena_hit_sparks_fx.zip"), Asset("ANIM", "anim/crab_king_shine.zip"), Asset("ANIM", "anim/explode.zip")}
 local function OnAttack(inst, attacker, target, skipsanity)
     if not target:IsValid() then
-        --target killed or removed in combat damage phase
+        -- target killed or removed in combat damage phase
         return
     end
 
@@ -19,9 +10,9 @@ local function OnAttack(inst, attacker, target, skipsanity)
 
     if not skipsanity and attacker ~= nil then
         if attacker.components.staffsanity then
-            attacker.components.staffsanity:DoCastingDelta(-TUNING.SANITY_SUPERTINY*drain)
+            attacker.components.staffsanity:DoCastingDelta(-TUNING.SANITY_SUPERTINY * drain)
         elseif attacker.components.sanity ~= nil then
-            attacker.components.sanity:DoDelta(-TUNING.SANITY_SUPERTINY*drain)
+            attacker.components.sanity:DoDelta(-TUNING.SANITY_SUPERTINY * drain)
         end
     end
 
@@ -32,12 +23,12 @@ local function OnAttack(inst, attacker, target, skipsanity)
     for i = 1, math.random(3, 5) do
         inst:DoTaskInTime(i == 1 and 0 or math.random() * 0.5, function()
             if target == nil or not target:IsValid() then
-                return --target removed/died.
+                return -- target removed/died.
             end
             local proj = SpawnPrefab("staff_starfall_projectile")
             local x, y, z = target.Transform:GetWorldPosition()
             if x == nil or y == nil or z == nil then
-                proj:Remove() --wierd edge case with things that immediatly remove themselves on death.
+                proj:Remove() -- wierd edge case with things that immediatly remove themselves on death.
                 return
             end
             proj.Transform:SetPosition(x + math.random(-4, 4), y + math.random(10, 15), z + math.random(-4, 4))
@@ -78,15 +69,9 @@ local function fn()
     inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
     inst.AnimState:SetFinalOffset(1)
 
-    local floater_swap_data =
-    {
-        sym_build = "swap_staffs",
-        sym_name = "swap_yellowstaff",
-        bank = "staffs",
-        anim = "yellowstaff"
-    }
+    local floater_swap_data = {sym_build = "swap_staffs", sym_name = "swap_yellowstaff", bank = "staffs", anim = "yellowstaff"}
 
-    MakeInventoryFloatable(inst, "med", 0.1, { 0.9, 0.4, 0.9 }, true, -13, floater_swap_data)
+    MakeInventoryFloatable(inst, "med", 0.1, {0.9, 0.4, 0.9}, true, -13, floater_swap_data)
 
     inst.entity:SetPristine()
 
@@ -103,8 +88,8 @@ local function fn()
     inst.components.weapon:SetDamage(0)
     inst.components.weapon:SetRange(8, 10)
     inst.components.weapon:SetOnAttack(OnAttack)
-    --inst.components.weapon:SetProjectile("staff_starfall_projectile")
-    inst.components.floater:SetScale({ 0.8, 0.4, 0.8 })
+    -- inst.components.weapon:SetProjectile("staff_starfall_projectile")
+    inst.components.floater:SetScale({0.8, 0.4, 0.8})
 
     MakeHauntableLaunch(inst)
 
@@ -128,32 +113,58 @@ end
 
 local function OnCollide(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 4, { "_combat" },
-        { "dead", "INLIMBO", "companion", "abigail", "player", "playerghost" })
+    local targets = TheSim:FindEntities(x, y, z, 4, {"_combat"}, {"dead", "INLIMBO", "companion", "abigail", "player", "playerghost"})
 
-    for k, v in ipairs(ents) do
-        if v.components.combat ~= nil then
-            if v.components.combat.target ~= nil then
-                v.components.combat:SetShouldAvoidAggro(inst.attacker)
+    for k, target in ipairs(targets) do
+        if target:HasTag("shadowcreature") or target.sg == nil or target.wixieammo_hitstuncd == nil and not (target.sg:HasStateTag("busy") or target.sg:HasStateTag("caninterrupt")) or target.sg:HasStateTag("frozen") then
+
+            target.wixieammo_hitstuncd = target:DoTaskInTime(8, function()
+                if target.wixieammo_hitstuncd ~= nil then
+                    target.wixieammo_hitstuncd:Cancel()
+                end
+
+                target.wixieammo_hitstuncd = nil
+            end)
+            target.components.combat:GetAttacked(inst.attacker, 27.21, inst.attacker)
+        else
+            if target.components.combat ~= nil then
+                target.components.combat:GetAttacked(inst.attacker, 0, inst.attacker)
+                target.components.combat:SetTarget(inst.attacker)
             end
-            v.components.combat:GetAttacked(inst.attacker, 27.21)
-            if v.components.combat ~= nil then--something may lose their combat component after the GetAttacked, like sentrypede corpses
-                v.components.combat:RemoveShouldAvoidAggro(inst.attacker)
+
+            if target.components.health ~= nil then
+                target.components.health:DoDelta(-27.21, false, inst.attacker, false, inst.attacker, false)
             end
+        end
+
+        if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
+            target.components.sleeper:WakeUp()
+        end
+
+        if target.components.combat ~= nil then
+            target.components.combat.temp_disable_aggro = false
+            target.components.combat:RemoveShouldAvoidAggro(inst.attacker)
+        end
+
+        if inst.attacker.components.combat ~= nil then
+            inst.attacker.components.combat:SetTarget(target)
         end
     end
 
-    if not TheWorld.Map:IsOceanAtPoint(x, 0, z) then
+    if not TheWorld.Map:IsOceanAtPoint(x, 0, z) then -- man I really overdid this didn't I
         local fx = SpawnPrefab("staff_starfall_explode")
         fx.Transform:SetPosition(x, y, z)
         fx.SoundEmitter:PlaySound("dontstarve/common/lava_arena/spell/elemental/attack")
+
         local fx2 = SpawnPrefab("staff_starfall_scorch")
         fx2.Transform:SetPosition(x, y, z)
-        local fx3 = SpawnPrefab("slow_steam_fx"..math.random(5))
+
+        local fx3 = SpawnPrefab("slow_steam_fx" .. math.random(5))
         fx3.Transform:SetPosition(x, y, z)
     else
         local fx = SpawnPrefab("crab_king_waterspout")
         fx.Transform:SetPosition(x, y, z)
+
         local fx2 = SpawnPrefab("crab_king_bubble" .. math.random(3))
         fx2.Transform:SetPosition(x, y, z)
         local fx3 = SpawnPrefab("slow_steam_fx"..math.random(5))
@@ -161,6 +172,20 @@ local function OnCollide(inst)
     end
 
     inst:Remove()
+end
+
+local function onupdate_reverse(inst, dt)
+    inst.Light:SetIntensity(inst.i)
+    inst.i = inst.i + dt * 2
+
+    if inst.i <= 0 then
+        if inst.killfx then
+            inst:Remove()
+        else
+            inst.task:Cancel()
+            inst.task = nil
+        end
+    end
 end
 
 local function fn_proj()
@@ -175,8 +200,14 @@ local function fn_proj()
     inst.AnimState:SetBank("crab_king_shine")
     inst.AnimState:SetBuild("crab_king_shine")
     inst.AnimState:PlayAnimation("shine", true)
-    --inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+    -- inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
     inst.AnimState:SetLightOverride(1)
+
+    inst.entity:AddLight()
+    inst.Light:SetIntensity(.2)
+    inst.Light:SetRadius(4)
+    inst.Light:SetFalloff(2)
+    inst.Light:SetColour(1, 1, 0)
 
     inst.Transform:SetScale(0.75, 0.75, 0.75)
 
@@ -204,6 +235,11 @@ local function fn_proj()
     inst.Physics:SetSphere(2)
     inst.Physics:SetMotorVel(math.random(-50, 50) / 10, -50, math.random(-50, 50) / 10)
 
+    local dt = 1 / 20
+    inst.i = .1
+    inst.sound = inst.SoundEmitter ~= nil
+    inst.task = inst:DoPeriodicTask(dt, onupdate_reverse, nil, dt)
+
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then
@@ -222,6 +258,19 @@ local function fn_proj()
     return inst
 end
 
+local function onupdate(inst, dt)
+    inst.Light:SetIntensity(inst.i)
+    inst.i = inst.i - dt * 2
+    if inst.i <= 0 then
+        if inst.killfx then
+            inst:Remove()
+        else
+            inst.task:Cancel()
+            inst.task = nil
+        end
+    end
+end
+
 local function fn_fx1()
     local inst = CreateEntity()
 
@@ -233,11 +282,17 @@ local function fn_fx1()
     inst.AnimState:SetBank("explode")
     inst.AnimState:SetBuild("explode")
     inst.AnimState:PlayAnimation("small_firecrackers")
-    --inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
+    -- inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
     inst.AnimState:SetLightOverride(1)
     inst.AnimState:SetFinalOffset(1)
 
-    --inst.Transform:SetScale(0.5, 0.5, 0.5)
+    -- inst.Transform:SetScale(0.5, 0.5, 0.5)
+
+    inst.entity:AddLight()
+    inst.Light:SetIntensity(.6)
+    inst.Light:SetRadius(6)
+    inst.Light:SetFalloff(2)
+    inst.Light:SetColour(1, 1, 0)
 
     inst.hue = 0
 
@@ -253,6 +308,10 @@ local function fn_fx1()
         inst.AnimState:SetAddColour(0.5, 0, 0, 0)
     end
 
+    local dt = 1 / 20
+    inst.i = .9
+    inst.sound = inst.SoundEmitter ~= nil
+    inst.task = inst:DoPeriodicTask(dt, onupdate, nil, dt)
 
     inst.entity:SetPristine()
 
@@ -308,16 +367,15 @@ local function fn_fx2()
     return inst
 end
 
-
-local SCORCH_RED_FRAMES = 20
+local SCORCH_YELLOW_FRAMES = 20
 local SCORCH_DELAY_FRAMES = 40
 local SCORCH_FADE_FRAMES = 15
 
 local function Scorch_OnFadeDirty(inst)
-    --V2C: hack alert: using SetHightlightColour to achieve something like OverrideAddColour
+    -- V2C: hack alert: using SetHightlightColour to achieve something like OverrideAddColour
     --     (that function does not exist), because we know this FX can never be highlighted!
     if inst._fade:value() > SCORCH_FADE_FRAMES + SCORCH_DELAY_FRAMES then
-        local k = (inst._fade:value() - SCORCH_FADE_FRAMES - SCORCH_DELAY_FRAMES) / SCORCH_RED_FRAMES
+        local k = (inst._fade:value() - SCORCH_FADE_FRAMES - SCORCH_DELAY_FRAMES) / SCORCH_YELLOW_FRAMES
         inst.AnimState:OverrideMultColour(1, 1, 1, 1)
         inst.AnimState:SetHighlightColour(k, k, 0, 0)
         inst.AnimState:SetLightOverride(k)
@@ -363,7 +421,7 @@ local function fn_fx3()
     inst:AddTag("FX")
 
     inst._fade = net_byte(inst.GUID, "deerclops_laserscorch._fade", "fadedirty")
-    inst._fade:set(SCORCH_RED_FRAMES + SCORCH_DELAY_FRAMES + SCORCH_FADE_FRAMES)
+    inst._fade:set(SCORCH_YELLOW_FRAMES + SCORCH_DELAY_FRAMES + SCORCH_FADE_FRAMES)
 
     inst:DoPeriodicTask(0, Scorch_OnUpdateFade)
     Scorch_OnFadeDirty(inst)
@@ -382,8 +440,4 @@ local function fn_fx3()
     return inst
 end
 
-return Prefab("staff_starfall", fn, assets),
-    Prefab("staff_starfall_projectile", fn_proj),
-    Prefab("staff_starfall_explode", fn_fx1),
-    Prefab("staff_starfall_trail", fn_fx2),
-    Prefab("staff_starfall_scorch", fn_fx3)
+return Prefab("staff_starfall", fn, assets), Prefab("staff_starfall_projectile", fn_proj), Prefab("staff_starfall_explode", fn_fx1), Prefab("staff_starfall_trail", fn_fx2), Prefab("staff_starfall_scorch", fn_fx3)

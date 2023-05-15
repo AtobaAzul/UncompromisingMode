@@ -5,3 +5,4 @@ column_limit: 9999999
 break_after_functiondef_lp: false
 break_after_table_lb: true
 break_before_table_rb: true
+keep_simple_control_block_one_line: false
