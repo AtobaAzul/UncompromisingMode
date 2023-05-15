@@ -261,8 +261,12 @@ end
 -- Original:     test = function(cooker, names, tags) return tags.egg and tags.meat and tags.veggie and not tags.inedible end,
 
 recipes.talleggs.test = function(cooker, names, tags)
-    return tags.egg and tags.egg >= 4 and tags.veggie and tags.veggie >= 3 and
-        not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT)
+    return tags.egg and tags.egg == 4 and tags.veggie and tags.veggie == 3
+end
+
+recipes.bananajuice.test = function(cooker, names, tags)
+	return (names.cave_banana or names.cave_banana_cooked) and (names.cave_banana or names.cave_banana_cooked) and
+		not tags.meat and not tags.fish and not tags.monster and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 
 recipes.turkeydinner.test = function(cooker, names, tags)

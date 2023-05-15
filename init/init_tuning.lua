@@ -23,7 +23,7 @@ TUNING.DSTU = {
     ----------------------------------------------------------------------------
     -- Armor
     ----------------------------------------------------------------------------
-    ARMORREED_UM = TUNING.WILSON_HEALTH * 2.1 * multiplayer_armor_durability_modifier,
+    ARMORREED_UM = TUNING.WILSON_HEALTH * 2 * multiplayer_armor_durability_modifier,
     ----------------------------------------------------------------------------
     -- Acid colour
     ----------------------------------------------------------------------------

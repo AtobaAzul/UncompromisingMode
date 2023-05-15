@@ -55,7 +55,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	GASMASK = "- Provides protection against spore clouds.",
 	PLAGUEMASK = "- Provides protection against spore clouds.",
 	FLORAL_BANDAGE = "- Restores extra health over time.",
-	DISEASECUREBOMB = "- Restores sickly plants.",
+	DISEASECUREBOMB = "- Restores health and sickly plants.",
 	SLUDGE_OIL = "- Multi-use fuel for fires and lanterns alike.",
 
 	CRAB_HAT = "- Repairs & sewing are twice as effective when worn.",
@@ -146,11 +146,11 @@ if TUNING.DSTU.SNOWSTORMS then
 	TOOLTIP.WALL_RUINS_ITEM = "- Provides protection from Snow Storms."
 	TOOLTIP.WALL_MOONROCK_ITEM = "- Provides protection from Snow Storms."
 	TOOLTIP.YELLOWSTAFF = "- Dwarf Stars provide protection from Snow Storms."
-	TOOLTIP.MOLEHAT = "- Grants protection against Snow Storms / Sand Storms when worn."
+	TOOLTIP.MOLEHAT = "- Grants protection against Snow Storms / Sand Storms and Moon Storms when worn."
     TOOLTIP.DESERTHAT = "- Also works as protection against Snow Storms."
 	TOOLTIP.BEARGERVEST = "- Provides protection from Snow Storms' slowdown."
 else
-	TOOLTIP.MOLEHAT = "- Grants protection against Sand Storms when worn."
+	TOOLTIP.MOLEHAT = "- Grants protection against Sand Storms and Moon Storms when worn."
 end
 
 if TUNING.DSTU.HAYFEVER then
