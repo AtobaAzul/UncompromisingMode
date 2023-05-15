@@ -96,7 +96,6 @@ local function fn()
     inst.AnimState:SetBank("tentacle")
     inst.AnimState:SetBuild("tentacle")
     inst.AnimState:PlayAnimation("idle")
-    inst.AnimState:SetMultColour(0.5, 1, 0.5, 1)
 
     --inst:AddTag("monster")    
     inst:AddTag("hostile")
@@ -134,7 +133,7 @@ local function fn()
 
     inst:ListenForEvent("attacked", OnAttacked)
 	
-	inst.task = inst:DoPeriodicTask(1, degenerate)
+	inst.task = inst:DoPeriodicTask(2.4, degenerate)
 	
     inst.persists = false
 
