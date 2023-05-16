@@ -218,8 +218,9 @@ end
 
 recipes.dragonpie.test = function(cooker, names, tags)
     return (names.dragonfruit or names.dragonfruit_cooked) and
-        not tags.meat and UncompromisingFillers(tags)
+        not tags.meat and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
+
 -- Original:      test = function(cooker, names, tags) return (names.dragonfruit or names.dragonfruit_cooked) and not tags.meat end,
 
 recipes.kabobs.test = function(cooker, names, tags)
@@ -261,13 +262,54 @@ end
 -- Original:     test = function(cooker, names, tags) return tags.egg and tags.meat and tags.veggie and not tags.inedible end,
 
 recipes.talleggs.test = function(cooker, names, tags)
-    return tags.egg and tags.egg == 4 and tags.veggie and tags.veggie == 3
+    return names.tallbirdegg and tags.veggie and tags.veggie >= 3
+		and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
 
 recipes.bananajuice.test = function(cooker, names, tags)
-	return (names.cave_banana or names.cave_banana_cooked) and (names.cave_banana or names.cave_banana_cooked) and
+	return ((names.cave_banana or 0) + (names.cave_banana_cooked or 0) >= 2) and
 		not tags.meat and not tags.fish and not tags.monster and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
 end
+
+recipes.watermelonicle.test = function(cooker, names, tags)
+	return names.watermelon and tags.frozen and names.twigs and
+		not tags.meat and not tags.veggie and not tags.egg and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) and LimitTwigTestFn(tags, RECIPE_TWIG_LIMIT)
+end
+
+recipes.bananapop.test = function(cooker, names, tags)
+	return (names.cave_banana or names.cave_banana_cooked) and tags.frozen and names.twigs and
+		not tags.meat and not tags.fish and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) and LimitTwigTestFn(tags, RECIPE_TWIG_LIMIT)
+end
+
+recipes.potatotornado.test = function(cooker, names, tags)
+	return (names.potato or names.potato_cooked) and names.twigs and 
+		(not tags.monster or tags.monster <= 1) and not tags.meat and (tags.inedible and tags.inedible <= 2) and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+end
+-- Original:		test = function(cooker, names, tags) return (names.potato or names.potato_cooked) and names.twigs and (not tags.monster or tags.monster <= 1) and not tags.meat and (tags.inedible and tags.inedible <= 2) end,
+
+recipes.figkabab.test = function(cooker, names, tags)
+	return (names.fig or names.fig_cooked) and names.twigs and tags.meat and tags.meat >= 1 and
+		(not tags.monster or tags.monster <= 1) and UncompromisingFillers(tags)
+end
+-- Original:		test = function(cooker, names, tags) return (names.fig or names.fig_cooked) and names.twigs and tags.meat and tags.meat >= 1 and (not tags.monster or tags.monster <= 1) end,
+
+recipes.ceviche.test = function(cooker, names, tags)
+	return tags.fish and tags.fish >= 2 and tags.frozen and
+		not tags.inedible and not tags.egg and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+end
+-- Original:		test = function(cooker, names, tags) return tags.fish and tags.fish >= 2 and tags.frozen and not tags.inedible and not tags.egg end,
+
+recipes.sweettea.test = function(cooker, names, tags)
+	return names.forgetmelots and tags.sweetener and tags.frozen and
+		not tags.monster and not tags.veggie and not tags.meat and not tags.fish and not tags.egg and not tags.fat and not tags.dairy and not tags.inedible and LimitIceTestFn(tags, RECIPE_ICE_LIMIT)
+end
+-- Original:		test = function(cooker, names, tags) return names.forgetmelots and tags.sweetener and tags.frozen and not tags.monster and not tags.veggie and not tags.meat and not tags.fish and not tags.egg and not tags.fat and not tags.dairy and not tags.inedible end,
+
+recipes.frozenbananadaiquiri.test = function(cooker, names, tags)
+	return (names.cave_banana or names.cave_banana_cooked) and (tags.frozen and tags.frozen >= 1) and
+		not tags.meat and not tags.fish and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+end		
+-- Original: 		test = function(cooker, names, tags) return (names.cave_banana or names.cave_banana_cooked) and (tags.frozen and tags.frozen >= 1) and not tags.meat and not tags.fish end,
 
 recipes.turkeydinner.test = function(cooker, names, tags)
     return names.drumstick and names.drumstick > 1 and tags.meat
@@ -311,6 +353,7 @@ recipes.powcake.test = function(cooker, names, tags)
     return names.twigs and names.honey and
         (names.corn or names.corn_cooked) and UncompromisingFillers(tags) --[[and MonsterMeatSupport(tags)]]
 end
+
 -- Original:    test = function(cooker, names, tags) return names.twigs and names.honey and (names.corn or names.corn_cooked) end,
 
 --recipes.unagi.test = function(cooker, names, tags) return names.cutlichen and (names.eel or names.eel_cooked) and UncompromisingFillers(tags and MonsterMeatSupport(tags)) end
@@ -327,11 +370,11 @@ recipes.flowersalad.test = function(cooker, names, tags)
 end
 -- Original:        test = function(cooker, names, tags) return names.cactus_flower and tags.veggie and tags.veggie >= 2 and not tags.meat and not tags.inedible and not tags.egg and not tags.sweetener and not tags.fruit end,
 
---recipes.icecream.test = function(cooker, names, tags) return tags.frozen and tags.dairy and tags.sweetener and not tags.meat and not tags.veggie and not tags.inedible and not tags.egg and UncompromisingFillers(tags) end
+recipes.icecream.test = function(cooker, names, tags)
+	return tags.frozen and tags.dairy and tags.sweetener and
+		not tags.meat and not tags.veggie and not tags.inedible and not tags.egg and UncompromisingFillers(tags) 
+end
 -- Original:     test = function(cooker, names, tags) return tags.frozen and tags.dairy and tags.sweetener and not tags.meat and not tags.veggie and not tags.inedible and not tags.egg end,
-
---recipes.watermelonicle.test = function(cooker, names, tags) return names.watermelon and tags.frozen and names.twigs and not tags.meat and not tags.veggie and not tags.egg and UncompromisingFillers(tags) end
--- Original:           test = function(cooker, names, tags) return names.watermelon and tags.frozen and names.twigs and not tags.meat and not tags.veggie and not tags.egg end,
 
 recipes.trailmix.test = function(cooker, names, tags)
     return (names.acorn or names.acorn_cooked) and tags.seed and
@@ -360,13 +403,6 @@ recipes.jellybean.test = function(cooker, names, tags)
 end
 -- Original:      test = function(cooker, names, tags) return names.royal_jelly and not tags.inedible and not tags.monster end,
 
-recipes.potatotornado.test = function(cooker, names, tags)
-    return (names.potato or names.potato_cooked) and names.twigs
-        and (not tags.monster or tags.monster <= 1) and not tags.meat and (tags.inedible and tags.inedible <= 2) and
-        LimitIceTestFn(tags, RECIPE_ICE_LIMIT)
-end
--- Original:          test = function(cooker, names, tags) return (names.potato or names.potato_cooked) and names.twigs and (not tags.monster or tags.monster <= 1) and not tags.meat and (tags.inedible and tags.inedible <= 2) end,
-
 recipes.mashedpotatoes.test = function(cooker, names, tags)
     return (
         (names.potato and names.potato > 1) or (names.potato_cooked and names.potato_cooked > 1) or
@@ -390,16 +426,6 @@ recipes.vegstinger.test = function(cooker, names, tags)
         not tags.egg and LimitIceTestFn(tags, RECIPE_ICE_LIMIT)
 end
 -- Original:       test = function(cooker, names, tags) return (names.asparagus or names.asparagus_cooked or names.tomato or names.tomato_cooked) and tags.veggie and tags.veggie > 2 and tags.frozen and not tags.meat and not tags.inedible and not tags.egg end,
-
---recipes.bananapop.test = function(cooker, names, tags) return (names.cave_banana or names.cave_banana_cooked) and tags.frozen and names.twigs and not tags.meat and not tags.fish and (tags.inedible and tags.inedible <= 2) and UncompromisingFillers(tags) end
--- Original:      test = function(cooker, names, tags) return (names.cave_banana or names.cave_banana_cooked) and tags.frozen and names.twigs and not tags.meat and not tags.fish and (tags.inedible and tags.inedible <= 2) end,
-
-recipes.ceviche.test = function(cooker, names, tags)
-    return tags.fish and tags.fish >= 2 and tags.frozen and
-        not tags.inedible and not (tags.insectoid and tags.insectoid >= 1) and
-        not tags.egg --[[and MonsterMeatSupport(tags)]]
-end
--- Original:    test = function(cooker, names, tags) return tags.fish and tags.fish >= 2 and tags.frozen and not tags.inedible and not tags.egg end,
 
 recipes.salsa.test = function(cooker, names, tags)
     return (names.tomato or names.tomato_cooked) and
@@ -472,7 +498,7 @@ end
 recipes.frognewton.priority = 20
 
 recipes.bunnystew.test = function(cooker, names, tags)
-    return (names.rabbit) and (tags.frozen and tags.frozen >= 2) and
+    return (names.rabbit) and (tags.frozen and tags.frozen == 2) and
         (not tags.inedible)
 end
 -- Original: test = function(cooker, names, tags) return (tags.meat and tags.meat < 1) and (tags.frozen and tags.frozen >= 2) and (not tags.inedible) end
