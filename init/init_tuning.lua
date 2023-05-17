@@ -353,7 +353,8 @@ TUNING.DSTU = {
     ISLAND_ADVENTURES = ia_check,
     TREATS_FOR_WEBBER = tfw_check,
     MONSTERSMALLMEAT = GetModConfigData("monstersmallmeat"),
-    THE_COOLER_SACRED_CHEST = GetModConfigData("the_cooler_sacred_chest")
+    THE_COOLER_SACRED_CHEST = GetModConfigData("the_cooler_sacred_chest"),
+    BOSS_RESISTANCE = GetModConfigData("bossresistance")
 }
 
 -- [              DST Related Overrides                  ]

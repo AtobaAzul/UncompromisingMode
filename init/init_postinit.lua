@@ -1,6 +1,6 @@
 -- Update this list when adding files
 local component_post = {
-	"groundpounder",
+    "groundpounder",
     "propagator",
     "moisture",
     "weapon", --	"hunter",
@@ -41,7 +41,7 @@ local component_post = {
 }
 
 local prefab_post = {
-	"atrium_gate",
+    "atrium_gate",
     "wardrobe",
     "shieldofcthulu",
     "clockworks",
@@ -124,7 +124,7 @@ local prefab_post = {
     "spider_whistle",
     "spider_healer",
     "siestahut",
-	"bedroll_furry",
+    "bedroll_furry",
     "bees",
     "farmplants",
     "rainhat",
@@ -149,7 +149,7 @@ local prefab_post = {
     "boat_bumpers",
     "slurtle_shellpieces",
     "sludge_fueled",
-    --"nightsword",
+    -- "nightsword",
     "bigshadowtentacle",
     "mast",
     "multitool_axe_pickaxe",
@@ -220,9 +220,13 @@ if GetModConfigData("wixie_walter") then
 
     }
 
-    for k, v in ipairs(wixie_prefabs) do modimport("wixie_postinit/prefabs/" .. v) end
+    for k, v in ipairs(wixie_prefabs) do
+        modimport("wixie_postinit/prefabs/" .. v)
+    end
 
-    for k, v in ipairs(wixie_components) do modimport("wixie_postinit/components/" .. v) end
+    for k, v in ipairs(wixie_components) do
+        modimport("wixie_postinit/components/" .. v)
+    end
 
     modimport("wixie_postinit/walter_actions")
     modimport("wixie_postinit/widgets/controls") -- Claustrophobia overlay init
@@ -284,12 +288,20 @@ if GetModConfigData("rework_minotaur") then
     table.insert(prefab_post, "pillar_ruins")
 end
 
-if GetModConfigData("harder_dragonfly") then table.insert(prefab_post, "dragonfly") end
-if GetModConfigData("harder_lavae") then table.insert(prefab_post, "lavae") end
+if GetModConfigData("harder_dragonfly") then
+    table.insert(prefab_post, "dragonfly")
+end
+if GetModConfigData("harder_lavae") then
+    table.insert(prefab_post, "lavae")
+end
 
-if GetModConfigData("pinelings") then table.insert(prefab_post, "evergreen_stump") end
+if GetModConfigData("pinelings") then
+    table.insert(prefab_post, "evergreen_stump")
+end
 
-if GetModConfigData("canedurability") then table.insert(prefab_post, "cane") end
+if GetModConfigData("canedurability") then
+    table.insert(prefab_post, "cane")
+end
 
 if GetModConfigData("angrypenguins") then
     table.insert(prefab_post, "penguin")
@@ -302,49 +314,75 @@ if GetModConfigData("harder_pigs") then
     table.insert(stategraph_post, "pigbunny")
 end
 
-if GetModConfigData("angry_werepigs") then table.insert(brain_post, "werepig") end
+if GetModConfigData("angry_werepigs") then
+    table.insert(brain_post, "werepig")
+end
 
 if GetModConfigData("harder_walrus") then
     table.insert(prefab_post, "walrus")
     table.insert(stategraph_post, "walrus")
 end
-if GetModConfigData("harder_beefalo") then table.insert(stategraph_post, "Beefalo") end
+if GetModConfigData("harder_beefalo") then
+    table.insert(stategraph_post, "Beefalo")
+end
 
 if GetModConfigData("harder_spiderqueen") then
     table.insert(prefab_post, "spiderqueen")
     table.insert(stategraph_post, "spiderqueen")
 end
 
-if GetModConfigData("pocket_powertrip") ~= 0 then table.insert(prefab_post, "pocket_powertrip") end
+if GetModConfigData("pocket_powertrip") ~= 0 then
+    table.insert(prefab_post, "pocket_powertrip")
+end
 
-if GetModConfigData("harder_koalefants") then table.insert(stategraph_post, "koalefant") end
+if GetModConfigData("harder_koalefants") then
+    table.insert(stategraph_post, "koalefant")
+end
 
 if GetModConfigData("reworked_eyes") then
     table.insert(prefab_post, "eyeofterror")
     table.insert(stategraph_post, "eyeofterror")
 end
 
-if GetModConfigData("scalemailbuff") then table.insert(prefab_post, "armor_dragonfly") end
+if GetModConfigData("scalemailbuff") then
+    table.insert(prefab_post, "armor_dragonfly")
+end
 
-if (not GLOBAL:TestForIA() or GetModConfigData("um_music")) then table.insert(component_post, "dynamicmusic") end
+if (not GLOBAL:TestForIA() or GetModConfigData("um_music")) then
+    table.insert(component_post, "dynamicmusic")
+end
 
-if GetModConfigData("winter_burning") and not TUNING.DSTU.ISLAND_ADVENTURES then table.insert(component_post, "burnable") end
+if GetModConfigData("winter_burning") and not TUNING.DSTU.ISLAND_ADVENTURES then
+    table.insert(component_post, "burnable")
+end
 
-if GetModConfigData("amalgams") then table.insert(prefab_post, "chessjunk") end
+if GetModConfigData("amalgams") then
+    table.insert(prefab_post, "chessjunk")
+end
 --[[
 if GetModConfigData("moon_transformations") then
 	table.insert(prefab_post, "flower")
 end
 ]]
-if GetModConfigData("electricalmishap_") ~= 0 then table.insert(prefab_post, "nightstick") end
+if GetModConfigData("electricalmishap_") ~= 0 then
+    table.insert(prefab_post, "nightstick")
+end
 
-if GetModConfigData("fiendforcedmetodothis") then table.insert(prefab_post, "snurtle") end
+if GetModConfigData("fiendforcedmetodothis") then
+    table.insert(prefab_post, "snurtle")
+end
 
-if GetModConfigData("harder_krampus") then table.insert(stategraph_post, "krampus") end
+if GetModConfigData("harder_krampus") then
+    table.insert(stategraph_post, "krampus")
+end
 
-if GetModConfigData("noauradamage_butterfly") then table.insert(prefab_post, "butterfly") end
+if GetModConfigData("noauradamage_butterfly") then
+    table.insert(prefab_post, "butterfly")
+end
 
-if GetModConfigData("beefalo_nerf") then table.insert(component_post, "rider") end
+if GetModConfigData("beefalo_nerf") then
+    table.insert(component_post, "rider")
+end
 
 if GetModConfigData("harder_beequeen") then
     table.insert(prefab_post, "beequeen")
@@ -360,7 +398,9 @@ end
 --	table.insert(prefab_post, "boat")
 -- end
 
-if GetModConfigData("winona_portables_") then table.insert(prefab_post, "winona_portables") end
+if GetModConfigData("winona_portables_") then
+    table.insert(prefab_post, "winona_portables")
+end
 
 if GetModConfigData("reworked_ck") then
     table.insert(prefab_post, "crabking")
@@ -369,25 +409,45 @@ if GetModConfigData("reworked_ck") then
     table.insert(stategraph_post, "crabking")
 end
 
-if GetModConfigData("hambatnerf") then table.insert(prefab_post, "hambat") end
+if GetModConfigData("hambatnerf") then
+    table.insert(prefab_post, "hambat")
+end
 
-if GetModConfigData("townportal_rework") then table.insert(prefab_post, "townportal") end
+if GetModConfigData("townportal_rework") then
+    table.insert(prefab_post, "townportal")
+end
 
-if GetModConfigData("monstersmallmeat") then table.insert(prefab_post, "bat") end
+if GetModConfigData("monstersmallmeat") then
+    table.insert(prefab_post, "bat")
+end
 
-if GetModConfigData("cookiecutterhat") then table.insert(prefab_post, "cookiecutterhat") end
+if GetModConfigData("cookiecutterhat") then
+    table.insert(prefab_post, "cookiecutterhat")
+end
+
+if GetModConfigData("bossresistance") ~= false then
+    modimport("postinit/boss_resistance")
+end
 
 modimport("postinit/sim")
 modimport("postinit/any")
 modimport("postinit/player")
 
-for _, v in pairs(component_post) do modimport("postinit/components/" .. v) end
+for _, v in pairs(component_post) do
+    modimport("postinit/components/" .. v)
+end
 
-for _, v in pairs(prefab_post) do modimport("postinit/prefabs/" .. v) end
+for _, v in pairs(prefab_post) do
+    modimport("postinit/prefabs/" .. v)
+end
 
-for _, v in pairs(stategraph_post) do modimport("postinit/stategraphs/SG" .. v) end
+for _, v in pairs(stategraph_post) do
+    modimport("postinit/stategraphs/SG" .. v)
+end
 
-for _, v in pairs(brain_post) do modimport("postinit/brains/" .. v .. "brain") end
+for _, v in pairs(brain_post) do
+    modimport("postinit/brains/" .. v .. "brain")
+end
 
 for _, v in pairs(class_post) do
     -- These contain a path already, e.g. v= "widgets/inventorybar"

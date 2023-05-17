@@ -83,11 +83,42 @@ configuration_options = {
     BinaryConfig("sewingkit", "Sewing Kit Tweaks", "Sewing Kit has DOUBLE uses, but repairs HALF value. Pairs very well with Clothing Degredation, lets you keep clothing in top shape more easily.", true),
     BinaryConfig("lifeamulet", "Life Giving Amulet Changes", "The Amulet won't revive ghosts, but it now interrupts death upon taking a fatal hit while wearing it.\nIts hunger > health conversion ticks much faster.", true),
     BinaryConfig("longpig", "Long Pig", "Skeletons drop Long Pig to prevent Telltale Heart spam.", true),
-    {name = "flingo_setting", label = "Flingomatic Nerf", hover = "Pick the Flingomatic nerf you would like to play around.", options = {{description = "Fuel loss in use", data = "Fuelmuncher"}, {description = "No longer freezes", data = "Waterballs"}, {description = "None", data = "Newb"}}, default = "Waterballs"},
+    {
+        name = "flingo_setting",
+        label = "Flingomatic Nerf",
+        hover = "Pick the Flingomatic nerf you would like to play around.",
+        options = {
+            {description = "Fuel loss in use", data = "Fuelmuncher" },
+            { description = "No longer freezes", data = "Waterballs" },
+            { description = "None",              data = "Newb" },
+        },
+        default = "Waterballs",
+    },
+    {
+        name = "fireloot", label = "Burning Loot Drop Rework",
+        hover =
+        "Loot no longer gets destroyed when a mob is burnt to death. Mobs will explode on death, dealing damage and lighting things on fire, based on loot dropped.",
+        options = {
+            { description = "Off", data = 1 },
+            { description = "Explosion Off", data = 2 },
+            { description = "Explosion On", data = 3 },
+        },
+        default = 3,
+    },
+    {
+        name = "bossresistance",
+        hover = "Bosses have increasing resistance against multiple players",
+        options = {
+            { description = "Dynamic", hover = "Bosses change their resistance based on hits taken.", data = "dynamic" },
+            { description = "Static",  hover = "Bosses change their resistance based on nearby players.", data = "static" },
+            { description = "Disabled",  data = false },
 
-    {name = "fireloot", label = "Burning Loot Drop Rework", hover = "Loot no longer gets destroyed when a mob is burnt to death. Mobs will explode on death, dealing damage and lighting things on fire, based on loot dropped.", options = {{description = "Off", data = 1}, {description = "Explosion Off", data = 2}, {description = "Explosion On", data = 3}}, default = 3},
+        },
+        default = "dynamic",
+    },
     {name = "vetcurse", label = "Veteran's Curse", hover = "Veteran's curse is an optional difficulty mode, which increases risk & reward.", options = {{description = "Default", data = "default"}, {description = "Always On", data = "always"}, {description = "Off", data = "off"}}, default = "default"},
     BinaryConfig("moon_transformations", "Moon Transformations", "Certain things transform under the dim light of the full \"Moon\".", false),
+
     SkipSpace(),
 
     ------------------------------
