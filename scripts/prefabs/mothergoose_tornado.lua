@@ -20,8 +20,8 @@ local function destroystuff(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
 	
 	local sizecheck = 1 + (inst.Transform:GetScale() * 1.7) or 0
-	--print(sizecheck)
     local ents = TheSim:FindEntities(x, y, z, sizecheck, nil, TARGET_IGNORE_TAGS, TARGET_TAGS)
+	
     for i, v in ipairs(ents) do
         --stuff might become invalid as we work or damage during iteration
         if v ~= inst.WINDSTAFF_CASTER and v:IsValid() then
@@ -58,8 +58,8 @@ local function destroystuff_mini(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
 	
 	local sizecheck = 1 + (inst.Transform:GetScale() * 1.9) or 0
-	--print(sizecheck)
     local ents = TheSim:FindEntities(x, y, z, sizecheck, nil, TARGET_IGNORE_TAGS_MINI, TARGET_TAGS)
+	
     for i, v in ipairs(ents) do
         --stuff might become invalid as we work or damage during iteration
         if v ~= inst.WINDSTAFF_CASTER and v:IsValid() then
@@ -103,27 +103,31 @@ local function SetDuration(inst, duration)
 end
 
 local function Disappear(inst)
+	if inst.WINDSTAFF_CASTER ~= nil then
+		inst.WINDSTAFF_CASTER.tornado_tracking = nil
+	end
+	
 	inst.components.sizetweener:StartTween(0.05, 0.8, inst.Remove)
 end
 
 local function shrink(inst)
 	--inst.sg:GoToState("run")
-	inst.components.sizetweener:StartTween(0.4, 2.8, Disappear)
+	inst.components.sizetweener:StartTween(0.4, 1, Disappear)
 end
 
 local function shrinktask(inst)
 	--inst:DoPeriodicTask(0.5, function(inst) inst.components.circler.distance = inst.components.circler.distance + 0.1 end)
 	
     if inst.components.linearcircler.clockwise then
-		inst:DoTaskInTime(2.5, shrink)
+		inst:DoTaskInTime(5, shrink)
 	else
-		inst:DoTaskInTime(6, shrink)
+		inst:DoTaskInTime(12, shrink)
 	end
 end
 		
 local function grow(inst, time, startsize, endsize)
 	inst.Transform:SetScale(0.1, 0.1, 0.1)
-	inst.components.sizetweener:StartTween(2, 1.35, shrinktask)
+	inst.components.sizetweener:StartTween(2, 1, shrinktask)
 end
 
 local function tornado_fn()
@@ -160,6 +164,8 @@ local function tornado_fn()
 	inst.components.linearcircler.distance_max = 18
 	inst.components.linearcircler.distance_max_clockwise = 20
 	inst.components.linearcircler.distance_limit = 21
+	inst.components.linearcircler.speed = .3
+	inst.components.linearcircler.setspeed = .3
 	--[[inst.components.circler.scale = 1
 	inst.components.circler.speed = 6
 	inst.components.circler.minSpeed = 6

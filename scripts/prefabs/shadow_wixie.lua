@@ -337,7 +337,7 @@ local function helperfn()
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(1)
     inst.components.health:SetMaxDamageTakenPerHit(1)
-    inst.components.health.destroytime = 3
+    inst.components.health.destroytime = 1
     inst.components.health.fire_damage_scale = TUNING.WILLOW_FIRE_DAMAGE
 	
     inst:AddComponent("colourtweener")
@@ -373,10 +373,10 @@ local function helperfn()
 	inst:DoTaskInTime(0, function()
 		if not inst:HasTag("puzzlespawn") then
 			if inst.physbox ~= nil then
-				--inst.physbox:Remove()
+				inst.physbox:Remove()
 			end
 			
-			--inst:Remove()
+			inst:Remove()
 		end
 	end)
 	
@@ -440,7 +440,6 @@ local function OnHitLazy(inst, attacker, target)
 			if v:IsValid() and v.components ~= nil and v.components.combat ~= nil and v.components.combat.target ~= nil and v.components.combat.target == inst.caster then
 				--v.components.combat:SuggestTarget(inst)
 				v.components.combat.target = sandclone
-				print("change formation!")
 			end
 		end
 	end
@@ -593,6 +592,7 @@ local function shadowclone_fn()
 
     inst:AddComponent("health")
     inst.components.health:SetMaxHealth(10)
+    inst.components.health.destroytime = 1
 	
 	inst:DoTaskInTime(15, function(inst) 
 
@@ -615,25 +615,26 @@ local function shadowclone_fn()
 	
     inst:ListenForEvent("attacked", function(inst)
 		inst.SoundEmitter:PlaySound("dontstarve/impacts/impact_sanity_armour_dull")
+		
+		SpawnPrefab("wixie_shadow_ring").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		SpawnPrefab("shadow_despawn").Transform:SetPosition(inst.Transform:GetWorldPosition())
+		
+		if not inst.components.health:IsDead() then
+			inst.components.health:Kill()
+		end
 	end)
 	
 	inst:WatchWorldState("cycles", function() 
 		if not inst.components.health:IsDead() then
-			
-			local x, y, z = inst.Transform:GetWorldPosition()
-			
-			SpawnPrefab("statue_transition").Transform:SetPosition(x, y, z)
-			SpawnPrefab("statue_transition_2").Transform:SetPosition(x, y, z)
-			
-			inst:Remove()
+			inst.components.health:Kill()
 		end
 	end)
 	
     inst:ListenForEvent("death", function(inst)
-		SpawnPrefab("wixie_shadow_ring").Transform:SetPosition(inst.Transform:GetWorldPosition())
-		SpawnPrefab("shadow_despawn").Transform:SetPosition(inst.Transform:GetWorldPosition())
-		
-		inst:Remove()
+		local x, y, z = inst.Transform:GetWorldPosition()
+			
+		SpawnPrefab("statue_transition").Transform:SetPosition(x, y, z)
+		SpawnPrefab("statue_transition_2").Transform:SetPosition(x, y, z)
 	end)
 	
 	inst.persists = false

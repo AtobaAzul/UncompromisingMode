@@ -225,7 +225,7 @@ env.AddStategraphPostInit("mothermoose", function(inst)
 				else
 					local target = inst.components.combat ~= nil and inst.components.combat.target or nil
 
-					if not inst.sg:HasStateTag("hopping") and inst.superhop and target ~= nil and math.random() < 0.5 then
+					if not inst.sg:HasStateTag("hopping") and inst.superhop and target ~= nil and math.random() < 0.5 and inst.tornado_tracking == nil then
 						inst.sg:GoToState("hopatk")
 					elseif not inst.sg:HasStateTag("hopping") then
 						inst.sg:GoToState("hop")
