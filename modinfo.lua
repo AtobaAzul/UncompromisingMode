@@ -4,7 +4,7 @@ folder_name = folder_name or "workshop-"
 if not folder_name:find("workshop-") then name = "[LOCAL] - " .. name end
 
 description = [[
-󰀔 [ Version 1.2.3: "Face Your Fears" ]
+󰀔 [ Version 1.2.3.1: "Face Your Fears" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -18,7 +18,7 @@ Latest update features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Face Your Fears v1.2.3"
+version = "Face Your Fears v1.2.3.1"
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
