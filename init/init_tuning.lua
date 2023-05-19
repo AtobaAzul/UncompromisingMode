@@ -1,4 +1,4 @@
-local function RGB(r, g, b) return {r / 255, g / 255, b / 255, 1} end
+local function RGB(r, g, b) return { r / 255, g / 255, b / 255, 1 } end
 -- this file has so maNY SPACEBAR PRESSES HOLY
 
 local seg_time = 30
@@ -50,7 +50,7 @@ TUNING.DSTU = {
     FOOD_SPOILED_FOOD_SANITY = -5,
     FOOD_SEEDS_HUNGER = 1.5,
     -- Food production
-    FOOD_HONEY_PRODUCTION_PER_STAGE = {0, 1, 2, 4},
+    FOOD_HONEY_PRODUCTION_PER_STAGE = { 0, 1, 2, 4 },
     -- Respawn time increases
     BUNNYMAN_RESPAWN_TIME_DAYS = 3,
     ----------------------------------------------------------------------------
@@ -101,9 +101,9 @@ TUNING.DSTU = {
     CROCKPOT_RECIPE_ICE_LIMIT = 1,
     CROCKPOT_RECIPE_ICE_PLUS_TWIG_LIMIT = 1,
     -- Monster meat meat dilution
-    MONSTER_MEAT_RAW_MONSTER_VALUE = 2.5, -- 3
+    MONSTER_MEAT_RAW_MONSTER_VALUE = 2.5,    -- 3
     MONSTER_MEAT_COOKED_MONSTER_VALUE = 2.0, -- 2.5
-    MONSTER_MEAT_DRIED_MONSTER_VALUE = 1.5, -- 2
+    MONSTER_MEAT_DRIED_MONSTER_VALUE = 1.5,  -- 2
     MONSTER_MEAT_MEAT_REDUCTION_PER_MEAT = 1.0,
     ----------------------------------------------------------------------------
     -- Recipe changes
@@ -157,8 +157,8 @@ TUNING.DSTU = {
     MAGMAHOUNDS = GetModConfigData("magmahounds"),
     FIREBITEHOUNDS = GetModConfigData("firebitehounds"),
     FROSTBITEHOUNDS = GetModConfigData("frostbitehounds"),
-    VARGWAVES = false, -- GetModConfigData("vargwaves"),
-    VARGWAVES_BOSS_GRACE = 15, -- GetModConfigData("vargwaves grace"),
+    VARGWAVES = false,           -- GetModConfigData("vargwaves"),
+    VARGWAVES_BOSS_GRACE = 15,   -- GetModConfigData("vargwaves grace"),
     VARGWAVES_DELAY_PERIOD = 15, -- GetModConfigData("vargwaves delay"),
     LATEGAMEHOUNDSPREAD = GetModConfigData("lategamehoundspread"),
     -- Worm inclusion
@@ -210,14 +210,14 @@ TUNING.DSTU = {
     WX78_MOISTURE_DAMAGE_INCREASE = 3,
     WX78_CONFIG = GetModConfigData("wx78"),
     -- Wormwood
-    WORMWOOD_BURN_TIME = 6.66, -- orig 4.3
+    WORMWOOD_BURN_TIME = 6.66,   -- orig 4.3
     WORMWOOD_FIRE_DAMAGE = 1.75, -- orig 1.25
     WORMWOOD_CONFIG_FIRE = GetModConfigData("wormwood_fire"),
     WORMWOOD_CONFIG_PLANTS = GetModConfigData("wormwood_plants"),
     WORMWOOD_CONFIG_TRAPS = GetModConfigData("wormwood_trapbuffs"),
     -- Warly
     WARLY_SAME_OLD_COOLDOWN = total_day_time * 3,
-    WARLY_SAME_OLD_MULTIPLIERS = {.6, .5, .35, .2, .1},
+    WARLY_SAME_OLD_MULTIPLIERS = { .6, .5, .35, .2, .1 },
     -- Wigfrid
     BATTLESONG_FIRE_RESIST_MOD = 0, -- orig 33% fire resis
     -- Maxwell
@@ -266,7 +266,7 @@ TUNING.DSTU = {
     CREEPINGFEAR_DAMAGE = 60,
     CREEPINGFEAR_ATTACK_PERIOD = 2.3,
     CREEPINGFEAR_RANGE_1 = 3.0,
-    CREEPINGFEAR_RANGE_2 = 4.0, -- 4.2,
+    CREEPINGFEAR_RANGE_2 = 4.0,    -- 4.2,
     CREEPINGFEAR_SPAWN_THRESH = 0, -- 10%
     CREEPINGFEAR_WALK_SPEED = 5,
     CREEPINGFEAR_RUN_SPEED = 6,
@@ -286,17 +286,36 @@ TUNING.DSTU = {
     TOADLING_RUN_SPEED = 6,
     TOADLING_TARGET_DIST = 12,
     BAT_HEALTH = 75,
-    TOAD_RAIN_DELAY = {min = 5, max = 10},
+    TOAD_RAIN_DELAY = { min = 5, max = 10 },
     SUMMER_CAVES_TEMP_MULT = 0.85,
     WINTER_CAVES_TEMP_MULT = 1.25,
     -- SNAPDRAGON FERTILIZER VALUES
-    PURPLE_VOMIT_NUTRIENTS = {16, 16, 0},
-    ORANGE_VOMIT_NUTRIENTS = {0, 16, 16},
-    YELLOW_VOMIT_NUTRIENTS = {16, 0, 16},
-    RED_VOMIT_NUTRIENTS = {0, 24, 0},
-    GREEN_VOMIT_NUTRIENTS = {0, 0, 24},
-    PINK_VOMIT_NUTRIENTS = {24, 0, 0},
-    PALE_VOMIT_NUTRIENTS = {8, 8, 8},
+    PURPLE_VOMIT_NUTRIENTS = { 16, 16, 0 },
+    ORANGE_VOMIT_NUTRIENTS = { 0, 16, 16 },
+    YELLOW_VOMIT_NUTRIENTS = { 16, 0, 16 },
+    RED_VOMIT_NUTRIENTS = { 0, 24, 0 },
+    GREEN_VOMIT_NUTRIENTS = { 0, 0, 24 },
+    PINK_VOMIT_NUTRIENTS = { 24, 0, 0 },
+    PALE_VOMIT_NUTRIENTS = { 8, 8, 8 },
+
+    ----------------------------------------------------------------------------
+    -- Dynamic Boss Resistance
+    ----------------------------------------------------------------------------
+
+    DYNRES_BOSSES = {
+        "antlion",
+        "deerclops",
+        "eyeofterror",
+        "twinofterror1",
+        "twinofterror2",
+        "minotaur",
+        "hoodedwidow",
+        "stalker_atrium",
+        "alterguardian_phase1",
+        "alterguardian_phase2",
+        "alterguardian_phase3"
+    },
+
     ----------------------------------------------------------------------------
     -- Experimental and DEV
     ----------------------------------------------------------------------------
@@ -371,8 +390,10 @@ if GetModConfigData("wixie_walter") then
     TUNING.WOBY_SMALL_HUNGER = GLOBAL.TUNING.WALTER_HUNGER
     TUNING.WOBY_SMALL_HUNGER_RATE = GLOBAL.TUNING.WILSON_HUNGER_RATE / 2
 
-    TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WALTER = {"walterhat", "meatrack_hat", "meat", "monstermeat"}
-    TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WIXIE = {"slingshot", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock"}
+    TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WALTER = { "walterhat", "meatrack_hat", "meat", "monstermeat" }
+    TUNING.GAMEMODE_STARTING_ITEMS.DEFAULT.WIXIE = { "slingshot", "slingshotammo_rock", "slingshotammo_rock",
+        "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock",
+        "slingshotammo_rock", "slingshotammo_rock", "slingshotammo_rock" }
 end
 
 TUNING.NONLETHAL_TEMPERATURE = false
@@ -390,7 +411,7 @@ TUNING.NO_BOSS_TIME = 24
 -- TUNING.DISEASE_DELAY_TIME_VARIANCE = total_day_time * 20
 TUNING.DISEASE_WARNING_TIME = total_day_time * 5
 TUNING.SANITY_BECOME_INSANE_THRESH = 40 / 200 -- 20%
-TUNING.SANITY_BECOME_SANE_THRESH = 45 / 200 -- 22.5%
+TUNING.SANITY_BECOME_SANE_THRESH = 45 / 200   -- 22.5%
 
 TUNING.WORMWOOD_BURN_TIME = TUNING.DSTU.WORMWOOD_BURN_TIME
 
@@ -462,7 +483,8 @@ TUNING.MESSAGEBOTTLE_NOTE_CHANCE = 0.66
 
 -- nautopilot buff
 TUNING.BOAT.BOAT_MAGNET.MAX_DISTANCE = TUNING.BOAT.BOAT_MAGNET.MAX_DISTANCE * 2
-TUNING.BOAT.BOAT_MAGNET.MAX_VELOCITY = TUNING.BOAT.BOAT_MAGNET.MAX_VELOCITY * 10 -- No matter the boatspeed, nautopilots should be able to keep up.
+TUNING.BOAT.BOAT_MAGNET.MAX_VELOCITY = TUNING.BOAT.BOAT_MAGNET.MAX_VELOCITY *
+10                                                                               -- No matter the boatspeed, nautopilots should be able to keep up.
 TUNING.BOAT.BOAT_MAGNET.CATCH_UP_SPEED = TUNING.BOAT.BOAT_MAGNET.CATCH_UP_SPEED * 100
 
 -- lowered CK health
