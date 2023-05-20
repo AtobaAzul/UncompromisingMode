@@ -3,7 +3,7 @@ GLOBAL.setfenv(1, GLOBAL)
 
 local function BossPlayerScan(bossmonster)
     local x, y, z = bossmonster.Transform:GetWorldPosition()
-    local ents = TheSim:FindEntities(x, y, z, 32, {"player"}, {"playerghost"})
+    local ents = TheSim:FindEntities(x, y, z, 32, { "player" }, { "playerghost" })
 
     return #ents
 end
@@ -18,7 +18,7 @@ env.AddComponentPostInit("combat", function(self)
     function self:GetAttacked(attacker, damage, weapon, stimuli, ...)
         local bossmonster = self.inst
         local NearbyPlayers = BossPlayerScan(bossmonster)
-		if table.contains(TUNING.DSTU.DYNRES_BOSSES, bossmonster.prefab) then
+        if table.contains(TUNING.DSTU.DYNRES_BOSSES, bossmonster.prefab) then
             if NearbyPlayers <= 1 then
                 return vanillaGetAttacked(self, attacker, damage, weapon, stimuli, ...)
             else
@@ -31,11 +31,14 @@ env.AddComponentPostInit("combat", function(self)
                     damage = damage * math.pow(0.95, NearbyPlayers)
                 elseif TUNING.DSTU.BOSS_RESISTANCE == "dynamic" then
                     -- TODO: config options for numbers...
+                    if self.inst.damage_res == nil then
+                        self.inst.damage_res = 1
+                    end
                     self.inst.damage_res = self.inst.damage_res - 0.005
                     local old_damage = damage
                     damage = damage * self.inst.damage_res
 
-                    local min_dmg = 1 - ((NearbyPlayers/10)-0.1)
+                    local min_dmg = 1 - ((NearbyPlayers / 10) - 0.1)
                     if min_dmg <= 0.25 then
                         min_dmg = 0.25
                     end
