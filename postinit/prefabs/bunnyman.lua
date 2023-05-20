@@ -12,7 +12,7 @@ env.AddPrefabPostInit("bunnyman", function(inst)
 	inst:RemoveComponent("lootdropper")
 	
 	inst:AddComponent("lootdropper")
-    inst.components.lootdropper:AddChanceLoot("manrabbit_tail",    .5)
+    inst.components.lootdropper:AddChanceLoot("manrabbit_tail", .25)
 	inst.components.lootdropper:AddRandomLoot("carrot", 1)
     inst.components.lootdropper:AddRandomLoot("meat", 1)
     inst.components.lootdropper.numrandomloot = 1
