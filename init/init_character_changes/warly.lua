@@ -1,8 +1,6 @@
 local env = env
 GLOBAL.setfenv(1, GLOBAL)
------------------------------------------------------------------
-
-if TUNING.DSTU.WARLY_BUTCHER then
+-----------------------------------------------------------------	
 	local function onbutchered(target, data)
 		local target = data.target
 		if target ~= nil and not target:HasTag("butchermark") then
@@ -32,20 +30,9 @@ if TUNING.DSTU.WARLY_BUTCHER then
 			item:RemoveTag("butchermark")
 		end
 	end
-	
-	env.AddPrefabPostInit("warly", function(inst) 
-		if inst.components.combat ~= nil then
-			inst:ListenForEvent("onattackother", onbutchered)
-			inst:ListenForEvent("itemget", inventorystuff)
-			inst:ListenForEvent("dropitem", ondropitem)
-		end
-	end)
-end
 
-if TUNING.DSTU.WARLY_FOOD then
-	local function oneat(inst, data)
+local function oneat(inst, data)
 		local food = data.food
-
 		if food and food.components.edible then
 			local hungerbonus = food.components.edible:GetHunger() * 0.2
 			local sanitybonus = food.components.edible:GetSanity() * 0.2
@@ -65,23 +52,27 @@ if TUNING.DSTU.WARLY_FOOD then
 		end
 	end
 
-	env.AddPrefabPostInit("warly", function(inst) 
-		if not TheWorld.ismastersim then
-			return
-		end
+env.AddPrefabPostInit("warly", function(inst) 
+	if not TheWorld.ismastersim then
+		return
+	end
 	
-		inst:AddTag("warlybuffed")
+	inst:AddTag("warlybuffed")
 	
-		if inst.components.eater ~= nil then
-			inst:ListenForEvent("oneat", oneat)
-			--inst.components.eater:SetOnEatFn(oneat)
-			--inst.components.eater:SetAbsorptionModifiers(1.2, 1.2, 1.2)
-		end
+	if inst.components.eater ~= nil then
+		inst:ListenForEvent("oneat", oneat)
+		--inst.components.eater:SetOnEatFn(oneat)
+		--inst.components.eater:SetAbsorptionModifiers(1.2, 1.2, 1.2)
+	end
 	
-		if inst.components.foodmemory ~= nil then
-			inst.components.foodmemory:SetDuration(TUNING.DSTU.WARLY_SAME_OLD_COOLDOWN)
-			inst.components.foodmemory:SetMultipliers(TUNING.DSTU.WARLY_SAME_OLD_MULTIPLIERS)
-		end
-	end)
-end
-
+	if inst.components.foodmemory ~= nil then
+		inst.components.foodmemory:SetDuration(TUNING.DSTU.WARLY_SAME_OLD_COOLDOWN)
+		inst.components.foodmemory:SetMultipliers(TUNING.DSTU.WARLY_SAME_OLD_MULTIPLIERS)
+	end
+		
+	if inst.components.combat ~= nil then
+		inst:ListenForEvent("onattackother", onbutchered)
+		inst:ListenForEvent("itemget", inventorystuff)
+		inst:ListenForEvent("dropitem", ondropitem)
+	end
+end)
