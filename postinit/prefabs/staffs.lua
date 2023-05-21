@@ -68,8 +68,14 @@ if env.GetModConfigData("cooldown_orangestaff_") then
         else
             staff.components.blinkstaff.blinktask:Cancel()
         end
+		staff:RemoveComponent("blinkstaff")
+			staff:DoTaskInTime(5, function(inst)
+			staff:AddComponent("blinkstaff")
+			staff.components.blinkstaff:SetFX("sand_puff_large_front", "sand_puff_large_back")
+			staff.components.blinkstaff.onblinkfn = onblink
+        end)
     end
-
+	
     env.AddPrefabPostInit("orangestaff", function(inst)
         if not TheWorld.ismastersim then return end
         inst:AddComponent("rechargeable")
@@ -77,6 +83,7 @@ if env.GetModConfigData("cooldown_orangestaff_") then
         inst:RemoveComponent("finiteuses")
         if inst ~= nil and inst.components.blinkstaff ~= nil then inst.components.blinkstaff.onblinkfn = onblink end
     end)
+	
 end
 
 -- TELELOCATOR STAFF STUFF

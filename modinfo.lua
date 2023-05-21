@@ -244,7 +244,7 @@ configuration_options = {
     -----------------------------
     Header("Items and Structures"),
     -----------------------------
-        BinaryConfig("cooldown_orangestaff_", "Cooldown Based Lazy Explorer", "Lazy Explorer no longer has durabilty, but instead has cooldown, like Wanda's watches.\nSuggested by Lux.", true),
+    BinaryConfig("cooldown_orangestaff_", "Cooldown Based Lazy Explorer", "Lazy Explorer no longer has durabilty, but instead has cooldown, like Wanda's watches.\nSuggested by Lux.", false),
     BinaryConfig("townportal_rework", "Lazy Deserter Rework", "Makes the Lazy Deserter useful in singleplayer, by automatically harvesting nearby plants and objects.", true),
     BinaryConfig("telestaff_rework", "Telelocator Rework", "You can now select the Focus you wish to teleport to. Foci now cost 3 Purple gems instead of gold.\nThe Staff's uses are doubled.", true),
     BinaryConfig("no4crafts", "No 4-Ingredient Recipes", "Changes all 4-ingredient recipes to use 3 instead.", false),
