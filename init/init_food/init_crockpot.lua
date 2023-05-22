@@ -136,7 +136,7 @@ end
 
 recipes.figkabab.test = function(cooker, names, tags)
 	return (names.fig or names.fig_cooked or names.aphid) and names.twigs and tags.meat and tags.meat >= 1 and
-		(not tags.monster or tags.monster <= 1) and UncompromisingFillers(tags)
+		(not tags.monster or tags.monster <= 1) and not tags.frozen and not tags.foliage
 end
 -- Original:	test = function(cooker, names, tags) return (names.fig or names.fig_cooked) and names.twigs and tags.meat and tags.meat >= 1 and (not tags.monster or tags.monster <= 1) end,
 
@@ -295,7 +295,7 @@ end
 
 recipes.watermelonicle.test = function(cooker, names, tags)
 	return names.watermelon and tags.frozen and names.twigs and
-		not tags.meat and not tags.veggie and not tags.egg and LimitIceTestFn(tags, RECIPE_ICE_LIMIT) and LimitTwigTestFn(tags, RECIPE_TWIG_LIMIT)
+		not tags.meat and not tags.veggie and not tags.egg and not tags.foliage
 end
 -- Original:	test = function(cooker, names, tags) return names.watermelon and tags.frozen and names.twigs and not tags.meat and not tags.veggie and not tags.egg end,
 
@@ -306,13 +306,14 @@ end
 -- Original:	test = function(cooker, names, tags) return tags.frozen and tags.dairy and tags.sweetener and not tags.meat and not tags.veggie and not tags.inedible and not tags.egg end,
 
 recipes.potatotornado.test = function(cooker, names, tags)
-	return (names.potato or names.potato_cooked) and names.twigs and 
-		(not tags.monster or tags.monster <= 1) and not tags.meat and UncompromisingFillers(tags) and not (tags.insectoid and tags.insectoid >= 1)
+	return (names.potato or names.potato_cooked) and names.twigs and names.twigs <=2 and
+		(not tags.monster or tags.monster <= 1) and not tags.meat and not (tags.insectoid and tags.insectoid >= 1) and not tags.frozen and not tags.foliage
 end
 -- Original:	test = function(cooker, names, tags) return (names.potato or names.potato_cooked) and names.twigs and (not tags.monster or tags.monster <= 1) and not tags.meat and (tags.inedible and tags.inedible <= 2) end,
 
 recipes.powcake.test = function(cooker, names, tags)
-    return names.twigs and names.honey and (names.corn or names.corn_cooked) and UncompromisingFillers(tags)
+    return names.twigs and names.honey and (names.corn or names.corn_cooked) and
+		not tags.frozen and not tags.foliage
 end
 -- Original:	test = function(cooker, names, tags) return names.twigs and names.honey and (names.corn or names.corn_cooked) end,
 
@@ -379,8 +380,8 @@ end
 -- Original:	test = function(cooker, names, tags) return tags.sweetener and tags.sweetener >= 3 and not tags.meat end,
 
 recipes.sweettea.test = function(cooker, names, tags)
-	return names.forgetmelots and tags.sweetener and tags.frozen and
-		not tags.monster and not tags.veggie and not tags.meat and not tags.fish and not tags.egg and not tags.fat and not tags.dairy and not tags.inedible and UncompromisingFillers(tags)
+	return names.forgetmelots and tags.foliage and tags.foliage <= 1 and tags.sweetener and tags.frozen and tags.frozen <= 1 and
+		not tags.monster and not tags.veggie and not tags.meat and not tags.fish and not tags.egg and not tags.fat and not tags.dairy and not tags.inedible
 end
 -- Original:		test = function(cooker, names, tags) return names.forgetmelots and tags.sweetener and tags.frozen and not tags.monster and not tags.veggie and not tags.meat and not tags.fish and not tags.egg and not tags.fat and not tags.dairy and not tags.inedible end,
 
