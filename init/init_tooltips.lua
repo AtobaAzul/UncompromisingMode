@@ -2,7 +2,8 @@ local STRINGS = GLOBAL.STRINGS
 --moved into seperate file, was getting a bit too big.
 
 STRINGS.UNCOMP_TOOLTIP = {
-	AMULET = "- Only revives the player upon death while worn.\n- Increased heal rate at lower health.\n- Never breaks, can be refueled with Nightmare Fuel.",
+	AMULET =
+	"- Only revives the player upon death while worn.\n- Increased heal rate at lower health.\n- Never breaks, can be refueled with Nightmare Fuel.",
 	ARMORRUINS = "- Prevents knockback effects.\n- Reduces insanity aura effects by 40%.",
 	SWEATERVEST = "- Reduces insanity aura effects by 70%.",
 	SKELETONHAT = "- Will not spawn the Creeping Fear when worn.",
@@ -37,11 +38,12 @@ STRINGS.UNCOMP_TOOLTIP = {
 	SISTURN = "- Petals inside decay into Mourning Glory.",
 	MULTITOOL_AXE_PICKAXE = "- Creates shockwaves when chopping/mining.",
 	FEATHERPENCIL = "- Can rename Telelocator Focus' location name and Backtrek Watches.",
-
+	BOAT_ROTATOR_KIT = "- Increases boat steering speed.\n- Helps doing sharp turns.",
 	--uncomp content
 	RAT_WHIP = "- Stronger when well fed.",
 	AIR_CONDITIONER = "- Can crush up Mushrooms for helpful stat clouds.",
-	ANCIENT_AMULET_RED = "- Drops soul orbs when attacked, which will replenish lost health when picked up.\n- Revives players when haunted.",
+	ANCIENT_AMULET_RED =
+	"- Drops soul orbs when attacked, which will replenish lost health when picked up.\n- Revives players when haunted.",
 	ARMOR_GLASSMAIL = "- Summons spinning Glass Shards when attacking enemies.\n- Loses shards when damage is taken.",
 	HONEY_LOG = "- Provides protection from Hayfever. Mostly useful for other allies.",
 	SALTPACK = "- Drops piles of salt, preventing buildup of Snow Piles.",
@@ -147,7 +149,7 @@ if TUNING.DSTU.SNOWSTORMS then
 	TOOLTIP.WALL_MOONROCK_ITEM = "- Provides protection from Snow Storms."
 	TOOLTIP.YELLOWSTAFF = "- Dwarf Stars provide protection from Snow Storms."
 	TOOLTIP.MOLEHAT = "- Grants protection against Snow Storms / Sand Storms and Moon Storms when worn."
-    TOOLTIP.DESERTHAT = "- Also works as protection against Snow Storms."
+	TOOLTIP.DESERTHAT = "- Also works as protection against Snow Storms."
 	TOOLTIP.BEARGERVEST = "- Provides protection from Snow Storms' slowdown."
 else
 	TOOLTIP.MOLEHAT = "- Grants protection against Sand Storms and Moon Storms when worn."
@@ -201,8 +203,8 @@ end
 if TUNING.DSTU.POCKET_POWERTRIP ~= 0 then
 	TOOLTIP.TRUNKVEST_SUMMER = "- Now has pockets!\n- Slightly increased rain protection."
 	TOOLTIP.TRUNKVEST_WINTER = "- Now has pockets!"
-    TOOLTIP.REFLECTIVEVEST = "- Now has pockets!"
-    TOOLTIP.RAINCOAT = "- Now has pockets!"
+	TOOLTIP.REFLECTIVEVEST = "- Now has pockets!"
+	TOOLTIP.RAINCOAT = "- Now has pockets!"
 	TOOLTIP.HAWAIIANSHIRT = "- Increased durability.\n- Now has pockets!"
 end
 
@@ -237,7 +239,7 @@ if GetModConfigData("lunar grimoire") then
 end
 
 if GetModConfigData("apicultural notes") then
-    TOOLTIP.BOOK_BEES = "- Now fills up to 10 nearby Bee Boxes."
+	TOOLTIP.BOOK_BEES = "- Now fills up to 10 nearby Bee Boxes."
 end
 
 if GetModConfigData("disable_megaflare") then
