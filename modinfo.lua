@@ -446,7 +446,6 @@ configuration_options = {
     SkipSpace(),
 
     Header("Raid Bosses"),
-    BinaryConfig("harder_dragonfly", "Harder Dragonfly", "Dragonfly now leaves if there is another boss nearby. Scales don't drop from damaging her when stunned anymore, instead she drops 3 Scales when killed.", true),
     BinaryConfig("harder_lavae", "Exploding Lavae", "Lavae will now leave exploding paste upon death, capable of destroying walls.", true),
     BinaryConfig("harder_beequeen", "Harder Bee Queen", "Bee Queen now has a variety of attacks utilizing new types of Bees.", true), -- lame! help!
     BinaryConfig("rework_minotaur", "Ancient Guardian Rework", "The Ancient Guardian's fight is expanded, including more attacks.", true),

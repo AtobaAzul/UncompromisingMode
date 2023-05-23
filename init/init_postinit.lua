@@ -42,6 +42,7 @@ local component_post = {
 
 local prefab_post = {
     "atrium_gate",
+	"dragonfly",
     "wardrobe",
     "shieldofcthulu",
     "clockworks",
@@ -288,9 +289,6 @@ if GetModConfigData("rework_minotaur") then
     table.insert(prefab_post, "pillar_ruins")
 end
 
-if GetModConfigData("harder_dragonfly") then
-    table.insert(prefab_post, "dragonfly")
-end
 if GetModConfigData("harder_lavae") then
     table.insert(prefab_post, "lavae")
 end
