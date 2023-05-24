@@ -217,7 +217,6 @@ local function DoHoneyTrail(inst)
         for k, v in ipairs(TheSim:FindEntities(x, y, z, 10, {"tartrail"})) do
             if v.components.burnable ~= nil then
                 v.components.burnable:Ignite()
-                print("burn damnit!")
             end
         end
     end
@@ -711,4 +710,13 @@ local function impactobsidianfn()
     return inst
 end
 
-return Prefab("slingshotammo_limestone", limestone_fn, assets, prefabs), Prefab("slingshotammo_limestone_proj_secondary", limestoneproj_fn, assets, prefabs), Prefab("slingshotammo_limestone_impact", impactlimestonefn, assets, prefabs), Prefab("slingshotammo_tar", tar_fn, assets, prefabs), Prefab("slingshotammo_tar_proj_secondary", tarproj_fn, assets, prefabs), Prefab("slingshotammo_tar_impact", impacttarfn, assets, prefabs), Prefab("slingshotammo_obsidian", obsidian_fn, assets, prefabs), Prefab("slingshotammo_obsidian_proj_secondary", obsidianproj_fn, assets, prefabs), Prefab("slingshotammo_obsidian_impact", impactobsidianfn, assets, prefabs), Prefab("coconut_proj_secondary", coconutproj_fn, assets, prefabs)
+return Prefab("slingshotammo_limestone", limestone_fn, assets, prefabs), 
+	Prefab("slingshotammo_limestone_proj_secondary", limestoneproj_fn, assets, prefabs), 
+	Prefab("slingshotammo_limestone_impact", impactlimestonefn, assets, prefabs), 
+	Prefab("slingshotammo_tar", tar_fn, assets, prefabs), 
+	Prefab("slingshotammo_tar_proj_secondary", tarproj_fn, assets, prefabs), 
+	Prefab("slingshotammo_tar_impact", impacttarfn, assets, prefabs), 
+	Prefab("slingshotammo_obsidian", obsidian_fn, assets, prefabs), 
+	Prefab("slingshotammo_obsidian_proj_secondary", obsidianproj_fn, assets, prefabs), 
+	Prefab("slingshotammo_obsidian_impact", impactobsidianfn, assets, prefabs), 
+	Prefab("coconut_proj_secondary", coconutproj_fn, assets, prefabs)

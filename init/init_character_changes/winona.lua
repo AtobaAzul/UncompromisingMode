@@ -59,7 +59,8 @@ local function ActionHungerDrain(inst, data)
 	if inst.components.rider ~= nil and inst.components.rider:IsRiding() then
 		return
 	end
-
+	
+	local burnrate = inst.components.hunger.burnratemodifiers:Get()
 	local fast = inst.components.hunger:GetPercent() >= HUNGRY_THRESH_HIGH
 	local slow = inst.components.hunger:GetPercent() < TUNING.HUNGRY_THRESH
 	local t = GetTime()
@@ -85,7 +86,7 @@ local function ActionHungerDrain(inst, data)
 				end
 				if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL or
 					data.action.action == ACTIONS.PICK and not (inst.components.rider ~= nil and inst.components.rider:IsRiding()) then
-					inst.components.hunger:DoDelta(-0.1, true) --.2
+					inst.components.hunger:DoDelta(-0.1 * burnrate, true) --.2
 				elseif data.action.action == ACTIONS.CHOP then
 					if data.action.target ~= nil then
 						local snap = SpawnPrefab("impact")
@@ -97,7 +98,7 @@ local function ActionHungerDrain(inst, data)
 						snap.Transform:SetScale(0.8, 0.8, 0.8)
 					end
 
-					inst.components.hunger:DoDelta(-0.2, true) --.333
+					inst.components.hunger:DoDelta(-0.2 * burnrate, true) --.333
 				elseif data.action.action == ACTIONS.MINE or
 					data.action.action == ACTIONS.HAMMER then
 					if data.action.target ~= nil then
@@ -110,27 +111,27 @@ local function ActionHungerDrain(inst, data)
 						snap.Transform:SetScale(0.8, 0.8, 0.8)
 					end
 
-					inst.components.hunger:DoDelta(-0.333, true) --.5
+					inst.components.hunger:DoDelta(-0.333 * burnrate, true) --.5
 				elseif data.action.action == ACTIONS.DIG then
-					inst.components.hunger:DoDelta(-0.5, true)
+					inst.components.hunger:DoDelta(-0.5 * burnrate, true)
 				else
-					inst.components.hunger:DoDelta(-0.15, true) --.25
+					inst.components.hunger:DoDelta(-0.15 * burnrate, true) --.25
 				end
 			end
 		elseif not fast and not slow then
 			if inst._cdtask == nil then
 				inst._cdtask = inst:DoTaskInTime(.3, OnCooldown)
 				if data.action.action == ACTIONS.ROW or data.action.action == ACTIONS.TILL or data.action.action == ACTIONS.PICK then
-					inst.components.hunger:DoDelta(-0.05, true)
+					inst.components.hunger:DoDelta(-0.05 * burnrate, true)
 				elseif data.action.action == ACTIONS.CHOP then
-					inst.components.hunger:DoDelta(-0.1, true)
+					inst.components.hunger:DoDelta(-0.1 * burnrate, true)
 				elseif data.action.action == ACTIONS.MINE or
 					data.action.action == ACTIONS.HAMMER then
-					inst.components.hunger:DoDelta(-0.166, true)
+					inst.components.hunger:DoDelta(-0.166 * burnrate, true)
 				elseif data.action.action == ACTIONS.DIG then
-					inst.components.hunger:DoDelta(-0.25, true)
+					inst.components.hunger:DoDelta(-0.25 * burnrate, true)
 				else
-					inst.components.hunger:DoDelta(-0.1, true)
+					inst.components.hunger:DoDelta(-0.1 * burnrate, true)
 				end
 			end
 		end

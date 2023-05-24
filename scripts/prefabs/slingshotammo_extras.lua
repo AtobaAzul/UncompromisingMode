@@ -1888,7 +1888,7 @@ local TREMOR_EXCLUDE_TAGS = {"noclaustrophobia", "wall", "player", "playerghost"
 
 local function Tremor(inst)
     if inst.attacker == nil then
-        inst.attacker = inst
+		inst.attacker = inst
     end
 
     local x, y, z = inst.Transform:GetWorldPosition()
@@ -1953,11 +1953,11 @@ local function Tremor(inst)
                         inst.finaldamage = inst.finaldamage * (inst.attacker.components.combat ~= nil and inst.attacker.components.combat.externaldamagemultipliers:Get() or 1)
                     end
 
-                    if no_aggro(inst.set_attacker, v) then
+                    if no_aggro(inst.attacker, v) then
                         v.components.combat:SetShouldAvoidAggro(inst.attacker)
                     end
 
-                    v.components.combat:GetAttacked(inst.set_attacker, inst.finaldamage, inst.attacker)
+                    v.components.combat:GetAttacked(inst.attacker, inst.finaldamage, inst.attacker)
 
                     if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
                         v.components.sleeper:WakeUp()
@@ -1974,7 +1974,7 @@ local function Tremor(inst)
     inst.tremorcount = inst.tremorcount + 1
 
     if inst.tremorcount >= (3 * inst.powerlevel) then
-        inst:Remove()
+        inst:DoTaskInTime(.1, inst.Remove)
     end
 end
 
@@ -2058,4 +2058,39 @@ local function crackerexplosion_fn()
     return inst
 end
 
-return Prefab("slingshotammo_firecrackers", cracker_fn, assets, prefabs), Prefab("slingshotammo_firecrackers_proj_secondary", crackerproj_fn, assets, prefabs), Prefab("firecrackers_slingshot", fn, assets_firecrackers, prefabs_firecrackers), Prefab("slingshot_explode_firecrackers", crackerexplosion_fn, assets, prefabs), Prefab("slingshotammo_honey", honey_fn, assets, prefabs), Prefab("slingshotammo_honey_proj_secondary", honeyproj_fn, assets, prefabs), Prefab("slingshotammo_honey_impact", impacthoneyfn, assets, prefabs), Prefab("slingshotammo_goldshatter", impactgoldfn, assets, prefabs), Prefab("slingshotammo_rubber", rubber_fn, assets, prefabs), Prefab("slingshotammo_rubber_proj_secondary", rubberproj_fn, assets, prefabs), Prefab("slingshotammo_rubber_impact", impactrubberfn, assets, prefabs), Prefab("slingshotammo_rubber_rebound", rebound, assets, prefabs), Prefab("slingshot_vortex", vortexfn, assets, prefabs), Prefab("slingshotammo_tremor", tremor_fn, assets, prefabs), Prefab("slingshotammo_tremor_proj_secondary", tremorproj_fn, assets, prefabs), Prefab("slingshot_tremors", tremmorfn, assets, prefabs), Prefab("slingshotammo_moonrock", moonrock_fn, assets, prefabs), Prefab("slingshotammo_moonrock_proj_secondary", moonrockproj_fn, assets, prefabs), Prefab("slingshotammo_moonrock_impact", impactmoonrockfn, assets, prefabs), Prefab("slingshotammo_moonglass", moonglass_fn, assets, prefabs), Prefab("slingshotammo_moonglass_proj_secondary", moonglassproj_fn, assets, prefabs), Prefab("slingshotammo_salt", salt_fn, assets, prefabs), Prefab("slingshotammo_salt_proj_secondary", saltproj_fn, assets, prefabs), Prefab("slingshotammo_salt_impact", impactsaltfn, assets, prefabs), Prefab("slingshotammo_goop", goop_fn, assets, prefabs), Prefab("slingshotammo_goop_proj_secondary", goopproj_fn, assets, prefabs), Prefab("slingshotammo_goop_impact", impactgoopfn, assets, prefabs), Prefab("slingshotammo_slime", slime_fn, assets, prefabs), Prefab("slingshotammo_slime_impact", impactslimefn, assets, prefabs), Prefab("slingshotammo_slime_proj_secondary", slimeproj_fn, assets, prefabs), Prefab("slingshotammo_lazy", lazy_fn, assets, prefabs), Prefab("slingshotammo_lazy_proj_secondary", lazyproj_fn, assets, prefabs), Prefab("slingshotammo_lazy_impact", impactlazyfn, assets, prefabs), Prefab("slingshotammo_shadow", shadow_fn, assets, prefabs), Prefab("slingshotammo_shadow_proj_secondary", shadowproj_fn, assets, prefabs), Prefab("wixie_shadowclone", shadowclone_fn, assets, prefabs)
+return Prefab("slingshotammo_firecrackers", cracker_fn, assets, prefabs), 
+	Prefab("slingshotammo_firecrackers_proj_secondary", crackerproj_fn, assets, prefabs), 
+	Prefab("firecrackers_slingshot", fn, assets_firecrackers, prefabs_firecrackers), 
+	Prefab("slingshot_explode_firecrackers", crackerexplosion_fn, assets, prefabs), 
+	Prefab("slingshotammo_honey", honey_fn, assets, prefabs), 
+	Prefab("slingshotammo_honey_proj_secondary", honeyproj_fn, assets, prefabs), 
+	Prefab("slingshotammo_honey_impact", impacthoneyfn, assets, prefabs), 
+	Prefab("slingshotammo_goldshatter", impactgoldfn, assets, prefabs), 
+	Prefab("slingshotammo_rubber", rubber_fn, assets, prefabs), 
+	Prefab("slingshotammo_rubber_proj_secondary", rubberproj_fn, assets, prefabs), 
+	Prefab("slingshotammo_rubber_impact", impactrubberfn, assets, prefabs), 
+	Prefab("slingshotammo_rubber_rebound", rebound, assets, prefabs), 
+	Prefab("slingshot_vortex", vortexfn, assets, prefabs), 
+	Prefab("slingshotammo_tremor", tremor_fn, assets, prefabs), 
+	Prefab("slingshotammo_tremor_proj_secondary", tremorproj_fn, assets, prefabs), 
+	Prefab("slingshot_tremors", tremmorfn, assets, prefabs), 
+	Prefab("slingshotammo_moonrock", moonrock_fn, assets, prefabs), 
+	Prefab("slingshotammo_moonrock_proj_secondary", moonrockproj_fn, assets, prefabs), 
+	Prefab("slingshotammo_moonrock_impact", impactmoonrockfn, assets, prefabs), 
+	Prefab("slingshotammo_moonglass", moonglass_fn, assets, prefabs), 
+	Prefab("slingshotammo_moonglass_proj_secondary", moonglassproj_fn, assets, prefabs), 
+	Prefab("slingshotammo_salt", salt_fn, assets, prefabs), 
+	Prefab("slingshotammo_salt_proj_secondary", saltproj_fn, assets, prefabs), 
+	Prefab("slingshotammo_salt_impact", impactsaltfn, assets, prefabs), 
+	Prefab("slingshotammo_goop", goop_fn, assets, prefabs), 
+	Prefab("slingshotammo_goop_proj_secondary", goopproj_fn, assets, prefabs), 
+	Prefab("slingshotammo_goop_impact", impactgoopfn, assets, prefabs), 
+	Prefab("slingshotammo_slime", slime_fn, assets, prefabs), 
+	Prefab("slingshotammo_slime_impact", impactslimefn, assets, prefabs), 
+	Prefab("slingshotammo_slime_proj_secondary", slimeproj_fn, assets, prefabs), 
+	Prefab("slingshotammo_lazy", lazy_fn, assets, prefabs), 
+	Prefab("slingshotammo_lazy_proj_secondary", lazyproj_fn, assets, prefabs), 
+	Prefab("slingshotammo_lazy_impact", impactlazyfn, assets, prefabs), 
+	Prefab("slingshotammo_shadow", shadow_fn, assets, prefabs), 
+	Prefab("slingshotammo_shadow_proj_secondary", shadowproj_fn, assets, prefabs), 
+	Prefab("wixie_shadowclone", shadowclone_fn, assets, prefabs)
