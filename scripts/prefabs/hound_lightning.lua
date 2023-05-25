@@ -39,10 +39,17 @@ local function Zap(inst)
 			if v:HasTag("player") and (v.components.inventory ~= nil and not v.components.inventory:IsInsulated()) then
 				if not v:HasTag("electricdamageimmune") then
 					v.components.health:DoDelta(-25, nil, inst.prefab, nil, inst)
-					v.sg:GoToState("electrocute")
+					
+					if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") then
+						v.sg:GoToState("electrocute")
+					end
 				else
 					if not v:HasTag("automaton") then
-						v.components.combat:GetAttacked(inst, 10)
+						v.components.health:DoDelta(-10, nil, inst.prefab, nil, inst)
+							
+						if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") then
+							v.sg:GoToState("hit")
+						end
 					else
 						if v.components.playerlightningtarget ~= nil then
 							v.components.playerlightningtarget:DoStrike()
@@ -50,7 +57,15 @@ local function Zap(inst)
 					end
 				end
 			elseif v.components.combat ~= nil then
-				v.components.combat:GetAttacked(inst, 25)
+				if not v:HasTag("electricdamageimmune") then
+					v.components.health:DoDelta(-10, nil, inst.prefab, nil, inst)
+				else 
+					v.components.health:DoDelta(-5, nil, inst.prefab, nil, inst)
+				end
+				
+				if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") then
+					v.sg:GoToState("hit")
+				end
 			end
 		end
 	end
