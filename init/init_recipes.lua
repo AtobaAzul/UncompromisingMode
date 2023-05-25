@@ -90,20 +90,47 @@ AllRecipes["battlesong_fireresistance"].ingredients = { Ingredient("papyrus", 1)
 AllRecipes["walterhat"].ingredients = { Ingredient("silk", 4), Ingredient("pinecone", 1) } -- ????
 
 if GetModConfigData("book_recipes") then
-    AllRecipes["book_rain"].ingredients = { Ingredient("papyrus", 2), Ingredient("moon_tear", 1),
-        Ingredient("waterballoon", 4) }
-    AllRecipes["book_rain"].level = TechTree.Create(TECH.MAGIC_THREE)
-    AllRecipes["book_fish"].ingredients = { Ingredient("papyrus", 2), Ingredient("oceanfishingbobber_oval", 2) } -- ???????????????
-    AllRecipes["book_light"].ingredients = { Ingredient("papyrus", 2), Ingredient("wormlight", 1) }
-    AllRecipes["book_light_upgraded"].level = TechTree.Create(TECH.LOST)                                         -- ??????????????????????????????????????????????
-    AllRecipes["bookstation"].ingredients = { Ingredient("livinglog", 4), Ingredient("papyrus", 4),
-        Ingredient("featherpencil", 1) }
-    AllRecipes["book_moon"].ingredients = { Ingredient("papyrus", 2), Ingredient("moonrocknugget", 2),
-        Ingredient("moonbutterflywings", 1) }
-    AllRecipes["book_bees"].ingredients = { Ingredient("papyrus", 2), Ingredient("honeycomb", 1),
-        Ingredient("stinger", 8) }
-    AllRecipes["book_horticulture"].ingredients = { Ingredient("papyrus", 2), Ingredient("plantmeat", 1),
-        Ingredient("poop", 5) }
+    -- AllRecipes["book_rain"].ingredients = {
+    -- Ingredient("papyrus", 2),
+    -- Ingredient("moon_tear", 1),
+    -- Ingredient("waterballoon", 4)
+    -- }
+    -- AllRecipes["book_rain"].level = TechTree.Create(TECH.MAGIC_THREE)
+    AllRecipes["book_fish"].ingredients = {
+        Ingredient("papyrus", 2),
+        Ingredient("oceanfishingbobber_oval", 2)
+    }
+    AllRecipes["book_light_upgraded"].ingredients = {
+		Ingredient("book_light", 1),
+        Ingredient("wormlight", 1),
+		Ingredient("papyrus", 2)
+    }
+    -- AllRecipes["book_light_upgraded"].level = TechTree.Create(TECH.LOST)
+    AllRecipes["bookstation"].ingredients = {
+        Ingredient("livinglog", 4),
+        Ingredient("papyrus", 4),
+        Ingredient("featherpencil", 1)
+    }
+    AllRecipes["book_moon"].ingredients = {
+        Ingredient("papyrus", 2),
+        Ingredient("moonrocknugget", 2),
+        Ingredient("moonbutterflywings", 1)
+    }
+    AllRecipes["book_bees"].ingredients = {
+        Ingredient("papyrus", 2),
+        Ingredient("honeycomb", 1),
+        Ingredient("stinger", 8)
+    }
+    AllRecipes["book_horticulture"].ingredients = {
+        Ingredient("papyrus", 2),
+        Ingredient("plantmeat", 1),
+        Ingredient("poop", 5)
+    }
+	AllRecipes["book_horticulture_upgraded"].ingredients = {
+		Ingredient("book_horticulture", 1),
+        Ingredient("treegrowthsolution", 1),
+		Ingredient("papyrus", 2)
+	}
 end
 
 -- magnets and dock
