@@ -313,7 +313,8 @@ TUNING.DSTU = {
         "stalker_atrium",
         "alterguardian_phase1",
         "alterguardian_phase2",
-        "alterguardian_phase3"
+        "alterguardian_phase3",
+		"crabking"
     },
 
     ----------------------------------------------------------------------------
