@@ -18,7 +18,21 @@ env.AddComponentPostInit("lootdropper", function(self)
 			end
 	
 			local function butcherloot(prefab)
-				if self.inst:HasTag("butchermark") and not (self.inst:HasTag("epic") or self.inst:HasTag("shadowcreature") or self.inst:HasTag("structure")) and math.random() <= .25 and (previous_prefab == nil or previous_prefab ~= prefab) then
+				if self.inst:HasTag("butchermark") and not
+				(self.inst:HasTag("epic") or
+				self.inst:HasTag("veggie") or
+                self.inst:HasTag("structure") or
+                self.inst:HasTag("wall") or
+                self.inst:HasTag("balloon") or
+                self.inst:HasTag("soulless") or
+                self.inst:HasTag("chess") or
+                self.inst:HasTag("shadow") or
+                self.inst:HasTag("shadowcreature") or
+                self.inst:HasTag("shadowminion") or
+                self.inst:HasTag("shadowchesspiece") or
+                self.inst:HasTag("groundspike") or
+                self.inst:HasTag("smashable"))
+				and math.random() <= .25 and (previous_prefab == nil or previous_prefab ~= prefab) then
 					table.insert(loots, prefab)
 				end
 				previous_prefab = prefab
