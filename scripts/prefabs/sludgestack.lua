@@ -45,6 +45,7 @@ local function OnUpgraded(inst)
     if not inst.components.timer:TimerExists("pop_cork") then
         inst.components.timer:StartTimer("pop_cork", TUNING.GRASS_REGROW_TIME)
     end
+
     inst.components.pickable.canbepicked = false
 end
 
@@ -58,9 +59,9 @@ end
 
 local function DoLootExplosion(inst)
     local MAX_LOOTFLING_DELAY = 0.8
-	
-	SpawnPrefab("honey_splash").Transform:SetPosition(inst.Transform:GetWorldPosition())
-	inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
+
+    SpawnPrefab("honey_splash").Transform:SetPosition(inst.Transform:GetWorldPosition())
+    inst.SoundEmitter:PlaySound("dontstarve/common/blackpowder_explo")
 
     local cork_pop_loot = {
         "sludge", "sludge", "sludge", "sludge" --, "sludge_cork"
@@ -118,20 +119,25 @@ local function OnSave(inst, data)
     if data ~= nil then
         data.upgraded = inst.upgraded
         data.explode_when_loaded = inst.explode_when_loaded
+        data.picked = not inst.components.pickable:CanBePicked()
     end
+end
+
+local function OnPicked(inst)
+    inst.AnimState:PushAnimation("idle", true)
 end
 
 local function OnLoad(inst, data)
     if data ~= nil then
         if data.upgraded ~= nil then OnUpgraded(inst) end
         inst.explode_when_loaded = data.explode_when_loaded
+        if data.picked then
+            OnPicked(inst)
+        end
     end
     inst:AddTag("SLUDGE_CORK_upgradeable") -- GOD DAMNIT KEEP THE DAMN TAG!!!
 end
 
-local function OnPicked(inst)
-    inst.AnimState:PushAnimation("idle", true)
-end
 
 local function OnRegen(inst)
     inst.AnimState:PushAnimation("grow")
@@ -195,6 +201,7 @@ local function fn_stack()
     inst:AddComponent("workable")
     inst.components.workable:SetWorkAction(ACTIONS.MINE)
     inst.components.workable:SetWorkLeft(TUNING.SEASTACK_MINE)
+    inst.components.workable:SetWorkLeft(TUNING.SEASTACK_MINE * 2)
     inst.components.workable:SetOnWorkCallback(OnWork)
     inst.components.workable.savestate = true
 
