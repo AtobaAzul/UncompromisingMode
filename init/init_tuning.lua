@@ -183,7 +183,7 @@ TUNING.DSTU = {
     PERISHABLETIME = GetModConfigData("more perishing"),
     -- Fire Loot Rework
     FIRELOOT = GetModConfigData("fireloot"),
-    POLLENMITES = GetModConfigData("pollenmites"),
+    POLLENMITES = false,
     ----------------------------------------------------------------------------
     -- Player changes
     ----------------------------------------------------------------------------
@@ -484,7 +484,7 @@ TUNING.MESSAGEBOTTLE_NOTE_CHANCE = 0.66
 -- nautopilot buff
 TUNING.BOAT.BOAT_MAGNET.MAX_DISTANCE = TUNING.BOAT.BOAT_MAGNET.MAX_DISTANCE * 2
 TUNING.BOAT.BOAT_MAGNET.MAX_VELOCITY = TUNING.BOAT.BOAT_MAGNET.MAX_VELOCITY *
-10                                                                               -- No matter the boatspeed, nautopilots should be able to keep up.
+    10 -- No matter the boatspeed, nautopilots should be able to keep up.
 TUNING.BOAT.BOAT_MAGNET.CATCH_UP_SPEED = TUNING.BOAT.BOAT_MAGNET.CATCH_UP_SPEED * 100
 
 -- lowered CK health
