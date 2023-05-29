@@ -245,11 +245,11 @@ local function OnAttacked(inst, data)
 		end)
 	end
 
-	if data.attacker:HasTag("player") and data.attacker.components.talker ~= nil and data.attacker.ck_attack_quote_cd == nil then
+	--[[if data.attacker:HasTag("player") and data.attacker.components.talker ~= nil and data.attacker.ck_attack_quote_cd == nil then
 		data.attacker.components.talker:Say(GetString(inst, "ATTACKED_CRABKING"))
 		data.attacker.ck_attack_quote_cd = data.attacker:DoTaskInTime(10, function()
 		end)
-	end
+	end]]
 end
 
 env.AddPrefabPostInit("crabking", function(inst)
@@ -453,7 +453,7 @@ env.AddPrefabPostInit("crabking", function(inst)
 
 		if boat_physics ~= nil then
 			if inst.components.health ~= nil then
-				inst.components.health:DoDelta((-1500 * math.abs(boat_physics:GetVelocity() * data.hit_dot_velocity)) *
+				inst.components.health:DoDelta((-2000 * math.abs(boat_physics:GetVelocity() * data.hit_dot_velocity)) *
 					0.33)
 			end
 		end
