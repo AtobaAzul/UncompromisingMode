@@ -16,7 +16,6 @@ env.AddClassPostConstruct("widgets/craftslot", function(self)
 		end
 
 		self.uncomptip = self:AddChild(UncompTooltip())
-		print("gathertip")
 
 		if self.uncomptip ~= nil and self.recipe ~= nil and self.recipepopup ~= nil and self.recipe.name and (STRINGS.UNCOMP_TOOLTIP[string.upper(self.recipe.name)] ~= nil or STRINGS.ENGINEERING_TOOLTIP[string.upper(self.recipe.name)] ~= nil or STRINGS.PINETREE_TOOLTIP[string.upper(self.recipe.name)] ~= nil) then
 			self.uncomptip.item_tip = self.recipe.name

@@ -265,6 +265,8 @@ local function fnviperling()
     inst:AddTag("cavedweller")
     inst:AddTag("shadowcreature")
     inst:AddTag("shadow")
+    inst:AddTag("shadow_aligned")
+
     inst.AnimState:SetMultColour(0, 0, 0, 0.5)
 
     inst._lightframe = net_smallbyte(inst.GUID, "worm._lightframe", "lightdirty")
@@ -370,6 +372,8 @@ local function fnviperlingfriend()
     inst:AddTag("viperlingfriend")
     --inst:AddTag("shadowcreature")
     inst:AddTag("shadow")
+    inst:AddTag("shadow_aligned")
+    
     inst.AnimState:SetMultColour(0, 0, 0, 0.5)
 
     inst.AnimState:UsePointFiltering(true)

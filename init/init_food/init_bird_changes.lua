@@ -194,11 +194,8 @@ env.AddPrefabPostInit("birdcage", ThankYouToshInit)
 
 	inst.components.trader.test = function(inst, item)
 		if _ShouldAcceptItem ~= nil then
-		print("fuck")
 			_ShouldAcceptItem(inst, item)
 		end
-
-		print(_ShouldAcceptItem)
 
 		if item.prefab == "rice" or item.prefab == "rice_cooked" then
 			local can_accept = true

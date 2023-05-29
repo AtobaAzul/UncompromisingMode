@@ -53,11 +53,9 @@ local function DoDespawn(inst)
     if home ~= nil then
         home.components.childspawner:GoHome(inst)
         --home.components.childspawner:StartSpawning()
-		--print("despawn")
 		inst:AddTag("home")
     else
         inst:Remove() --Hooded Widow was probably debug spawned in?
-		print("removed, OH NO!")
     end
 	
 end

@@ -17,13 +17,14 @@ local snails =
 }
 for k, v in ipairs(snails) do
     env.AddPrefabPostInit(v, function(inst)
-        --print("adding snurtle postinit "..k,v)
 		if inst.components.health then
 			inst.components.health:SetMaxHealth(TUNING.SLURTLE_HEALTH*0.5)
 		end
+		
         if inst.components.combat then
 			inst.components.combat:SetAttackPeriod(TUNING.SLURTLE_ATTACK_PERIOD*0.4)
 		end
+		
         if v == "slurtle" and inst.components.lootdropper then
             inst.components.lootdropper:SetChanceLootTable('slurtly')
         end

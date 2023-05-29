@@ -73,16 +73,6 @@ local function onattack(inst, attacker, target, naughtlock)
 			
 			local uses = uses1 + uses2
 			
-			print("=======================")
-			print("Value = "..value)
-			print("Hunger = "..hunger)
-			print("Scalingvalue = "..scalingvalue)
-			print("Damage = "..damage)
-			print("Base Damage Uses = "..uses1)
-			print("Bonus Damage Uses = "..uses2)
-			print("Final Uses = "..uses)
-			print("=======================")
-			
 			if naughtlock == nil then 
 				inst.components.fueled:DoDelta(-uses)
 			end

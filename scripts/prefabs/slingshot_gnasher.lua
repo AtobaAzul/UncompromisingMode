@@ -174,7 +174,6 @@ local function createlight(inst, target, pos)
 		local owner = inst.components.inventoryitem.owner
 
 		if owner ~= nil and owner.wixiepointx ~= nil then
-			print("owner and wix point ~= nil")
 			if ammo ~= nil then
 				if ammo == "slingshotammo_shadow_proj_secondary" then
 					local xmod = owner.wixiepointx
@@ -188,7 +187,6 @@ local function createlight(inst, target, pos)
 					
 					for i = 1, 2 * inst.powerlevel + 1 do
 						inst:DoTaskInTime(0.03 * i, function()
-							print("d36 ammo")
 							local caster = inst.components.inventoryitem.owner
 							local spittarget = SpawnPrefab("slingshot_target")
 							
@@ -211,7 +209,6 @@ local function createlight(inst, target, pos)
 						end)
 					end
 				else
-					print("ammo ~= nil")
 					local caster = inst.components.inventoryitem.owner
 					local spittarget = SpawnPrefab("slingshot_target")
 

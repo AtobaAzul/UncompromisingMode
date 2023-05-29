@@ -263,7 +263,6 @@ local function speed(inst)
         inst.speedtask = inst:DoPeriodicTask(FRAMES, function()
             local pt = Vector3(inst.Transform:GetWorldPosition())
             local dif = distsq(pt.x,pt.z,inst.startpos.x,inst.startpos.z)
-            --print("DIST",dif,GetTime() - inst.starttime)
         end)
     else
         inst.startpos = nil

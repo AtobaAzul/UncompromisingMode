@@ -28,8 +28,6 @@ local function AuraTest(inst, target)
 end
 
 local function OnAttacked(inst, data)
---    print("onattack", data.attacker, data.damage, data.damageresolved)
-
     if data.attacker == nil then
         inst.components.combat:SetTarget(nil)
     elseif not data.attacker:HasTag("noauradamage") then
@@ -125,16 +123,18 @@ local mlight2 = TheSim:FindEntities(m,n,o, 100, {"mlight2"})
 	end
 local scalelight = TheSim:FindEntities(m,n,o, 100, {"dlight"})
 	for i, v in ipairs(scalelight) do
-	--print("foundscaled")
 		v.Light:Enable(false)
+		
 		v:DoTaskInTime("120",function(v)
-		v.Light:Enable(true)
+			v.Light:Enable(true)
 		end)
+		
 		if v.components.heater ~= nil then
 			v:RemoveComponent("heater")
+			
 			v:DoTaskInTime("120",function(v)
-			v:AddComponent("heater")
-			v.components.heater.heat = 115
+				v:AddComponent("heater")
+				v.components.heater.heat = 115
 			end)
 		end
 	end

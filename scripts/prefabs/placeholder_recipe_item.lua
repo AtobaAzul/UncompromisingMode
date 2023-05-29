@@ -44,13 +44,10 @@ local function fn_ia_um()
     return inst
 end
 
-print("doing IA recipes")
 if GetValidRecipe("slingshotammo_tar") then
 	if Prefabs["tar"] then
-		print("using tar")
 		AllRecipes["slingshotammo_tar"].ingredients = { Ingredient("tar", 1) }
 	elseif Prefabs["sludge"] then
-		print("using sludge")
 		AllRecipes["slingshotammo_tar"].ingredients = { Ingredient("sludge", 1) }
 	end
 end

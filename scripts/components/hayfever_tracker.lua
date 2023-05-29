@@ -26,7 +26,6 @@ local function OnPlayerJoined(src,player)
 end
 
 local function OnPlayerLeft(src,player)
-	--print("Player ", player, "left, targetplayer is ", _targetplayer or "nil")
     for i, v in ipairs(_activeplayers) do
         if v == player then
             table.remove(_activeplayers, i)
@@ -51,7 +50,6 @@ end
 local function QueenFalse()
 	_queenkilled = false
 	OnSeasonTick()
-	--print(_queenkilled)
 end
 
 local function QueenTrue()
@@ -62,8 +60,6 @@ local function QueenTrue()
 			v.components.talker:Say(GetString(v, "ANNOUNCE_HAYFEVER_OFF"))   
 		end
 	end
-
-	--print(_queenkilled)
 end
 
 function self:CheckQueen()

@@ -32,21 +32,19 @@ local function OnNonFullMoon(inst, isfullmoon)
 end
 
 local function MakeTeam(inst, attacker)
-        local leader = SpawnPrefab("teamleader")
---print("<<<<<<<<================>>>>> Making TEAM:",attacker)
-        leader:AddTag("penguin")
-        leader.components.teamleader.threat = attacker
-        leader.components.teamleader.radius = 10
-        leader.components.teamleader:SetAttackGrpSize(5+math.random(1,3))
-        leader.components.teamleader.timebetweenattacks = 0  -- first attack happens immediately
-        leader.components.teamleader.attackinterval = 2  -- first attack happens immediately
-        leader.components.teamleader.maxchasetime = 10
-        leader.components.teamleader.min_team_size = 0
-        leader.components.teamleader.max_team_size = 8
-        leader.components.teamleader.team_type = inst.components.teamattacker.team_type
-        leader.components.teamleader:NewTeammate(inst)
-        leader.components.teamleader:BroadcastDistress(inst)
---print("<<<<<<<>>>>>")
+	local leader = SpawnPrefab("teamleader")
+	leader:AddTag("penguin")
+	leader.components.teamleader.threat = attacker
+	leader.components.teamleader.radius = 10
+	leader.components.teamleader:SetAttackGrpSize(5+math.random(1,3))
+	leader.components.teamleader.timebetweenattacks = 0  -- first attack happens immediately
+	leader.components.teamleader.attackinterval = 2  -- first attack happens immediately
+	leader.components.teamleader.maxchasetime = 10
+	leader.components.teamleader.min_team_size = 0
+	leader.components.teamleader.max_team_size = 8
+	leader.components.teamleader.team_type = inst.components.teamattacker.team_type
+	leader.components.teamleader:NewTeammate(inst)
+	leader.components.teamleader:BroadcastDistress(inst)
 end
 
 local function NewRetarget(inst)
@@ -64,17 +62,15 @@ local icepuddle = FindEntity(inst, 15, nil, { "penguin_ice_puddle" })
 				)
 
 		local ta = inst.components.teamattacker
+		
 		if newtarget and ta and not ta.inteam and not ta:SearchForTeam() then
-			--print("===============================MakeTeam on Retarget")
 			MakeTeam(inst, newtarget)
 		end
 
 		if ta.inteam and not ta.teamleader:CanAttack() then
 			return newtarget
 		end
-		
 	else
-	
 		local ta = inst.components.teamattacker
 
 		if inst.components.hunger and not inst.components.hunger:IsStarving() then
@@ -90,7 +86,6 @@ local icepuddle = FindEntity(inst, 15, nil, { "penguin_ice_puddle" })
 				)
 
 		if newtarget and ta and not ta.inteam and not ta:SearchForTeam() then
-			--print("===============================MakeTeam on Retarget")
 			MakeTeam(inst, newtarget)
 		end
 

@@ -80,7 +80,6 @@ local function SetPhaseLevel(inst, phase)
 end
 
 local function DropShroomSkin(inst)
-	print("sorry, nothing")
     --local player--[[, rangesq]] = inst:GetNearestPlayer()
     --LaunchAt(SpawnPrefab("shroom_skin"), inst, player, 1, 4, 2)
 end

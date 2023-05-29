@@ -45,16 +45,11 @@ local function CheckAngle(inst)
         local dir, closest_diff = nil, nil
 
         for k, v in pairs(dirs) do
-            print(anglediff(heading, v))
             local diff = math.abs(anglediff(heading, v))
-            print(diff)
+			
             if not dir or diff < closest_diff then
                 dir, closest_diff = k, diff
             end
-        end
-        if dir ~= nil then
-            print(dir)
-            print(closest_diff)
         end
 
         return dir
@@ -183,8 +178,6 @@ local function fn()
                     inst.widowspawner = CheckKeyObjectAngle(inst, widowspawner)
                     inst.oasis = CheckKeyObjectAngle(inst, oasis)
 
-                    print(point)
-
                     local owner = inst.components.inventoryitem.owner
                     local distsq = 4000
 
@@ -202,7 +195,6 @@ local function fn()
                             inst.code = inst.code + 1
                         elseif inst.widowspawner ~= nil and point ==
                             inst.widowspawner and inst.code == 13 then
-                            print("ringaling u win")
                             inst.SoundEmitter:PlaySound("dontstarve/creatures/knight_nightmare/voice")
                             inst.code = 0
 
@@ -221,7 +213,6 @@ local function fn()
                         else
                             inst.code = 0
                         end
-                        -- print(inst.code)
                     else
                         inst.code = 0
                     end
@@ -246,7 +237,6 @@ local function fn()
                         elseif point == "W" and inst.code2 == 5 then
                             inst.code2 = inst.code2 + 1
                         elseif point == "W" and inst.code2 == 9 then
-                            print("ringaling u win")
                             wixie_clock.final_code_ready = true
                             inst.SoundEmitter:PlaySound(
                                 "dontstarve/creatures/knight_nightmare/death")
@@ -260,9 +250,6 @@ local function fn()
                         else
                             inst.code2 = 0
                         end
-
-                        -- N E S S N W S E N W
-                        print(inst.code2)
                     else
                         inst.code2 = 0
                     end

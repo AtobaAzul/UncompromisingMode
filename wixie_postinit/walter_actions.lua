@@ -182,7 +182,6 @@ local wobystay = AddAction(
 	"WOBY_STAY",
 	"WOBY_STAY",
 	function(act)
-	print("cancel")
 	local act_pos = act:GetActionPoint()
 	local hasfollowers = false
 	

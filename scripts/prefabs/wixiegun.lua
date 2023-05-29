@@ -71,7 +71,6 @@ local function LaunchSpit(inst, caster, target)
 	projectile.components.projectile:SetLaunchOffset(Vector3(1.5, 0.5, 0))
 	projectile.components.projectile:Throw(caster, target, caster)
 	projectile:DoTaskInTime(1, projectile.Remove)
-			print("shoot ammo")
 end
 
 local function getspawnlocation(inst, target)
@@ -87,7 +86,6 @@ local function createlight(inst, target, pos)
 		if owner ~= nil and owner.wixiepointx ~= nil then
 			owner.SoundEmitter:PlaySound("wixie/characters/wixie/glock")
 		
-			print("point")
 			local caster = inst.components.inventoryitem.owner
 			local spittarget = SpawnPrefab("slingshot_target")
 			--local pos = TheInput:GetWorldPosition()

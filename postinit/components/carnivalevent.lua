@@ -40,8 +40,6 @@ GLOBAL.setfenv(1, GLOBAL)
 			--return
 		--end
 		
-		print("spawn")
-		
 		_OldSpawnCarnivalHost(carnival_host, loading)
 	end
 end)]]

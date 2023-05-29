@@ -82,17 +82,16 @@ local function WebMortar(inst,angle)
 	targetpos.z = targetpos.z - 15*math.sin(theta)
 
 	local rangesq = ((a-x)^2) + ((c-z)^2)
-	--print("rangsq "..rangesq)
     local maxrange = 15
     local bigNum = 10
     local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange)
 	projectile:AddTag("canthit")
-	--print("speed "..speed)
 	speed = speed*2*math.random(0.5,1)
-	--print("speedrand ".. speed)
+	
 	if speed < 5 then
-	speed = 14*math.random(100,200)*0.01
+		speed = 14*math.random(100,200)*0.01
 	end
+	
     projectile.components.complexprojectile:SetHorizontalSpeed(speed)
     projectile.components.complexprojectile:Launch(targetpos, inst, inst)
 	end

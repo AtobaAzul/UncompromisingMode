@@ -36,7 +36,7 @@ local function GetChestLootTable(loottable)
 	for i = 1, math.random(5,8) do
 		table.insert(chestloottable, weighted_random_choice(chestloots))
 	end
-	--print(chestloottable)
+	
 	return chestloottable
 end
 
@@ -69,7 +69,6 @@ local function TryLoot(inst,picker)
 end
 
 local function BecomeSpawner(inst)
---print("becamespawner")
     inst:AddComponent("childspawner")
     inst.components.childspawner.childname = "uncompromsing_junkrat"
     inst.components.childspawner:SetRareChild("uncompromsing_junkrat", TUNING.SLURTLEHOLE_RARECHILD_CHANCE)
@@ -80,7 +79,6 @@ local function BecomeSpawner(inst)
 	inst.components.childspawner:StartRegen()
 	inst.components.childspawner:StartSpawning()
 	inst.components.childspawner:SpawnChild()
-	
 end
 
 local function onsave(inst, data)

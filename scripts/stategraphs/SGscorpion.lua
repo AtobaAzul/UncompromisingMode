@@ -330,7 +330,6 @@ local states=
             TimeEvent(9*FRAMES, function(inst) inst.SoundEmitter:PlaySound("UCSounds/Scorpion/snap") end),
             TimeEvent(19*FRAMES, function(inst) inst.components.combat:SetRange(3, 3)
 			inst.components.combat:DoAttack(inst.sg.statemem.target) 
-            print("getting attacked!")
         end),
             TimeEvent(20*FRAMES,
                 function(inst)
@@ -457,11 +456,10 @@ local states=
 
                     local distance = inst:GetDistanceSqToInst(inst.components.combat.target )
 					inst.components.combat:SetRange(3, 3)
-                    --print(distance)
+					
                     if distance > JUMP_DISTANCE*JUMP_DISTANCE then
                         inst.sg:GoToState("leap_attack",inst.components.combat.target) 
                     else
-
                         if math.random() < 0.3 then
                             inst.sg:GoToState("tail_attack",inst.components.combat.target) 
                         else

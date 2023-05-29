@@ -34,22 +34,20 @@ SetSharedLootTable( 'snowmong_melting',
 local SEE_VICTIM_DIST = 25
 
 local function SetUnder(inst)
-	print("under")
-		inst.State = true
-		inst:AddTag("notdrawable")
-		inst:AddTag("INLIMBO")
-        inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
-        inst.Physics:ClearCollisionMask()
-        inst.Physics:CollidesWith(COLLISION.WORLD)
-        inst.Physics:CollidesWith(COLLISION.OBSTACLES)
+	inst.State = true
+	inst:AddTag("notdrawable")
+	inst:AddTag("INLIMBO")
+	inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
+	inst.Physics:ClearCollisionMask()
+	inst.Physics:CollidesWith(COLLISION.WORLD)
+	inst.Physics:CollidesWith(COLLISION.OBSTACLES)
 end
 
 local function SetAbove(inst)
-	print("above")
-		inst.State = false
-		inst:RemoveTag("INLIMBO")
-		inst:RemoveTag("notdrawable")
-        ChangeToCharacterPhysics(inst)
+	inst.State = false
+	inst:RemoveTag("INLIMBO")
+	inst:RemoveTag("notdrawable")
+	ChangeToCharacterPhysics(inst)
 end
 
 local function CanBeAttacked(inst, attacker)

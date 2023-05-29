@@ -29,7 +29,7 @@ local function destroystuff(inst)
                 not v.components.health:IsDead() and
                 v.components.combat ~= nil and
                 v.components.combat:CanBeAttacked() then
-                local damage = TUNING.TORNADO_DAMAGE
+                local damage = TUNING.TORNADO_DAMAGE * sizecheck
                 v.components.combat:GetAttacked(inst, damage, nil, "wind")
                 if v:IsValid() and
                     inst.WINDSTAFF_CASTER ~= nil and inst.WINDSTAFF_CASTER:IsValid() and
@@ -67,7 +67,7 @@ local function destroystuff_mini(inst)
                 not v.components.health:IsDead() and
                 v.components.combat ~= nil and
                 v.components.combat:CanBeAttacked() then
-                local damage = TUNING.TORNADO_DAMAGE * sizecheck
+                local damage = TUNING.TORNADO_DAMAGE
                 v.components.combat:GetAttacked(inst, damage, nil, "wind")
                 if v:IsValid() and
                     inst.WINDSTAFF_CASTER ~= nil and inst.WINDSTAFF_CASTER:IsValid() and

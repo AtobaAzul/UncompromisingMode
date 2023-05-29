@@ -50,7 +50,7 @@ local function onattackedfn(inst, data)
         if inst.components.combat and data and data.attacker and not data.attacker:HasTag("moonglasscreature") then
             inst.components.combat:SuggestTarget(data.target)
         end
-        --print("Distance"..inst:GetDistanceSqToInst(data.attacker))
+		
         if data.attacker ~= nil and data.attacker:IsValid() and inst:GetDistanceSqToInst(data.attacker) < 15 then
             inst.sg:GoToState("hit")
         end
@@ -774,9 +774,8 @@ local states =
                 inst.components.groundpounder:GroundPound()
                 inst.components.groundpounder.numRings = 2
                 inst.SoundEmitter:PlaySound("UCSounds/moonmaw/land")
-                --print("preran")
+				
                 if inst.redolavae then
-                    --print("2")
                     inst.SpawnLavae(inst)
                     inst.redolavae = nil
                 end

@@ -56,9 +56,10 @@ local function FindObjectToWorkAction(inst, action)
     if inst.sg:HasStateTag("working") then
         return 
     end
+	
     local target = FindEntity(inst.components.follower.leader, SEE_WORK_DIST, function(item) return item.components.workable and item.components.workable.action == action end)
-    if target then
-        --print(GetTime(), target)
+    
+	if target then
         return BufferedAction(inst, target, action)
     end
 end

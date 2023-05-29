@@ -180,7 +180,6 @@ local function ontimerdone(inst, data)
 end
 
 local function spawnmoose(inst)
-    --print(string.format("mooseIncoming = %s", tostring(inst.mooseIncoming)))
     if inst.mooseIncoming then
         TheWorld.components.moosespawner:DoSoftSpawn(inst)
     end

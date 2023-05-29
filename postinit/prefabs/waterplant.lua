@@ -45,14 +45,16 @@ local function do_bomb(inst, thrower, target, no_hit_tags, damage, break_boats)
         if platform ~= nil then
             local dsq_to_boat = platform:GetDistanceSqToPoint(bx, by, bz)
             if dsq_to_boat < TUNING.GOOD_LEAKSPAWN_PLATFORM_RADIUS then
-                platform:PushEvent("spawnnewboatleak", {pt = Vector3(bx, by, bz), leak_size = "small_leak", playsoundfx = true, cause = "waterplant_bomb"})
+                platform:PushEvent("spawnnewboatleak",
+                { pt = Vector3(bx, by, bz), leak_size = "small_leak", playsoundfx = true, cause = "waterplant_bomb" })
             end
         end
     end
 end
 
-	
-local NO_TAGS_WATERPLANT = { "waterplant", "INLIMBO", "ghost", "playerghost", "FX", "NOCLICK", "DECOR", "notarget", "companion", "shadowminion" }
+
+local NO_TAGS_WATERPLANT = { "waterplant", "INLIMBO", "ghost", "playerghost", "FX", "NOCLICK", "DECOR", "notarget",
+    "companion", "shadowminion" }
 local function onhit(inst, attacker, target)
     local x, y, z = inst.Transform:GetWorldPosition()
 
@@ -70,13 +72,15 @@ end
 
 
 env.AddPrefabPostInit("waterplant_projectile", function(inst)
-	if inst.components.complexprojectile ~= nil then
-		inst.components.complexprojectile:SetOnHit(onhit)
+    if inst.components.complexprojectile ~= nil then
+        inst.components.complexprojectile:SetOnHit(onhit)
     end
 end)
 
-local NO_TAGS_PLAYER =  { "INLIMBO", "ghost", "playerghost", "FX", "NOCLICK", "DECOR", "notarget", "companion", "shadowminion", "player" }
-local NO_TAGS_PVP =     { "INLIMBO", "ghost", "playerghost", "FX", "NOCLICK", "DECOR", "notarget", "companion", "shadowminion" }
+local NO_TAGS_PLAYER = { "INLIMBO", "ghost", "playerghost", "FX", "NOCLICK", "DECOR", "notarget", "companion",
+    "shadowminion", "player" }
+local NO_TAGS_PVP = { "INLIMBO", "ghost", "playerghost", "FX", "NOCLICK", "DECOR", "notarget", "companion",
+    "shadowminion" }
 local function on_inventory_hit(inst, attacker, target)
     local x, y, z = inst.Transform:GetWorldPosition()
 
@@ -87,7 +91,7 @@ local function on_inventory_hit(inst, attacker, target)
     SpawnPrefab("waterplant_burr_burst").Transform:SetPosition(x, y, z)
 
     if TheNet:GetPVPEnabled() then
-        do_bomb(inst, attacker, target, NO_TAGS_PVP, TUNING.WATERPLANT.ITEM_DAMAGE, true)--leaks regardless of PvP.
+        do_bomb(inst, attacker, target, NO_TAGS_PVP, TUNING.WATERPLANT.ITEM_DAMAGE, true) --leaks regardless of PvP.
     else
         do_bomb(inst, attacker, target, NO_TAGS_PLAYER, TUNING.WATERPLANT.ITEM_DAMAGE, true)
     end
@@ -96,20 +100,20 @@ local function on_inventory_hit(inst, attacker, target)
 end
 
 env.AddPrefabPostInit("waterplant_bomb", function(inst)
-    if not TheWorld.ismastersim then 
+    if not TheWorld.ismastersim then
         return
     end
-if inst.components.complexprojectile ~= nil then
-    inst.components.complexprojectile:SetOnHit(on_inventory_hit)
+    if inst.components.complexprojectile ~= nil then
+        inst.components.complexprojectile:SetOnHit(on_inventory_hit)
 
-    inst.components.complexprojectile:SetHorizontalSpeed(20)--just makes it simpler when interacting with cannons.
+        inst.components.complexprojectile:SetHorizontalSpeed(20) --just makes it simpler when interacting with cannons.
 
-    inst.components.complexprojectile:SetGravity(-40)
+        inst.components.complexprojectile:SetGravity(-40)
     end
     inst.entity:AddTag("boatcannon_ammo")
-	--what the hell is the inst.entity anyways?!
+    --what the hell is the inst.entity anyways?!
 
-	inst.projectileprefab = "waterplant_bomb"
+    inst.projectileprefab = "waterplant_bomb"
 end)
 
 --SPAWNER-------------------
@@ -126,6 +130,7 @@ env.AddPrefabPostInit("waterplant_spawner_rough", function(inst)
             if inst.spawned_sludge then
                 data.spawned_sludge = inst.spawned_sludge
             end
+			
             if _OnSave ~= nil then
                 return _OnSave(inst, data)
             end
@@ -137,6 +142,7 @@ env.AddPrefabPostInit("waterplant_spawner_rough", function(inst)
             if data.spawned_sludge then
                 inst.spawned_sludge = data.spawned_sludge
             end
+			
             if _OnLoad ~= nil then
                 return _OnLoad(inst, data)
             end
@@ -160,5 +166,3 @@ env.AddPrefabPostInit("waterplant_spawner_rough", function(inst)
         end
     end)
 end)
-
-

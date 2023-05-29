@@ -129,16 +129,12 @@ end
 local function DoRipple(inst) if inst.components.drownable ~= nil and inst.components.drownable:IsOverWater() then SpawnPrefab("weregoose_ripple" .. tostring(math.random(2))).entity:SetParent(inst.entity) end end
 
 local function Trapped(inst)
-    -- print("bumpk")
-
     local x, y, z = inst.Transform:GetWorldPosition()
 
     local ents = TheSim:FindEntities(x, y, z, 2, {"trap"})
 
     for i, v in ipairs(ents) do
-        -- print("bumpkin")
         v:DoTaskInTime(5, function(v)
-            -- print("frumpkin")
             v:PushEvent("harvesttrap") -- .components.trap:Disarm()
         end)
     end
@@ -179,8 +175,6 @@ end
 
 local function PiedPiperBuff(inst, duration)
     if inst.bufftask == nil then
-        -- print("note")
-
         local fx = SpawnPrefab("rat_note")
         fx.entity:SetParent(inst.entity)
         fx.entity:AddFollower()
@@ -1030,7 +1024,6 @@ local function OnInitHerd(inst)
     if inst.raiding then
         for i = 1, 3 do
             inst:DoTaskInTime((i - 1) * 15, function(inst)
-                -- print("i = "..i)
                 for n = 1, (i + 1) do
                     local x, y, z = inst.Transform:GetWorldPosition()
                     local angle = math.random() * 8 * PI
@@ -1115,29 +1108,25 @@ local function MakeScoutBurrow(inst)
             burrow.components.herd:AddMember(ratcrew)
             burrow.components.herd:AddMember(ratcrew2)
             burrow.components.herd:AddMember(ratcrew3)
-            -- print("make a den!")
+			
             break
         end
 
         if i >= 8 then
-            -- print("NO FUCKING SPACE SHITBOI")
             inst.components.timer:StartTimer("scoutingparty", 1920 + math.random(480))
         end
     end
 end
 
 local function OnTimerDone(inst, data)
-    -- print("timer")
     if data.name == "scoutingparty" then
         local x, y, z = inst.Transform:GetWorldPosition()
 
         if #TheSim:FindEntities(x, 0, z, 1000, {"ratburrow"}) >= 10 then
-            -- print("Reduce Timer Too Many Burrows")
             inst.components.timer:StartTimer("scoutingparty", 1920 + math.random(480))
             return
         end
 
-        -- print("scouts go!")
         MakeScoutBurrow(inst)
     end
 end
@@ -1468,7 +1457,6 @@ local function SlumberParty(inst)
 
         local ents = #TheSim:FindEntities(x, y, z, 8, {"ratscout"})
         if ents ~= nil and ents > 0 then
-            -- print("The girls are here, commencing pillowfort construction...")
             local burrow = SpawnPrefab("uncompromising_ratburrow")
             burrow.Transform:SetPosition(x, 0, z)
             burrow.AnimState:PlayAnimation("spawn")
@@ -1535,20 +1523,7 @@ end
 
 local function IsAVersionOfRot(v) if v.prefab == "spoiled_food" or v.prefab == "rottenegg" or v.prefab == "spoiled_fish" or v.prefab == "spoiled_fish_small" then return true end end
 
-local NOTAGS =
-{
-	"smallcreature",
-	"_container",
-	"spore",
-	"NORATCHECK",
-	"_combat",
-	"_health",
-	"balloon",
-	"heavy",
-	"projectile",
-	"NORATCHECK",
-	"frozen"
-}
+local NOTAGS = {"smallcreature", "_container", "spore", "NORATCHECK", "_combat", "_health", "balloon", "heavy", "projectile", "NORATCHECK", "frozen", "moonstorm_spark"}
 
 local function FoodScoreCalculations(inst, container, v)
     local delta = 0
@@ -1581,8 +1556,7 @@ local function TimeForACheckUp(inst, dev)
     inst.ratscore = -60
     inst.itemscore = 0
     inst.foodscore = 0
-    -- print(#ents)
-
+	
     inst.ratburrows = TheWorld.components.ratcheck ~= nil and TheWorld.components.ratcheck:GetBurrows() or 0
     inst.burrowbonus = 15 * inst.ratburrows
 
@@ -1590,10 +1564,10 @@ local function TimeForACheckUp(inst, dev)
         for i, v in ipairs(ents) do
             if (inst.ratscore + inst.itemscore + inst.foodscore + inst.burrowbonus) < 240 then
                 if v.components.inventoryitem:IsHeld() then
-                    if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and (v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" or v.components.inventoryitem:GetGrandOwner().prefab == "catcoon") then
-                        -- print("lureplant is holding!")
-                    else
-                        if not (v:HasTag("frozen") or v:HasTag("NORATCHECK")) then FoodScoreCalculations(inst, true, v) end
+                    if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and not (v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" or v.components.inventoryitem:GetGrandOwner().prefab == "catcoon") then
+                        if not (v:HasTag("frozen") or v:HasTag("NORATCHECK")) then 
+							FoodScoreCalculations(inst, true, v) 
+						end
                     end
                 else
                     if not (v:HasTag("frozen") or v:HasTag("NORATCHECK")) then FoodScoreCalculations(inst, false, v) end
@@ -1734,16 +1708,13 @@ local function fn_droppings()
 end
 
 local function PlayWarningSound(inst)
-    -- inst.entity:SetParent(TheFocalPoint.entity)
-    -- print(TheFocalPoint.entity)
     local theta = math.random() * 2 * PI
 
     local x, y, z = inst.Transform:GetWorldPosition()
     inst.Transform:SetPosition(x + (15 * math.cos(theta)), 0, z + 15 * (math.sin(theta)))
 
     local x, y, z = inst.Transform:GetWorldPosition()
-    -- print(x, y, z)
-    -- TheFocalPoint.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
+	
     inst.SoundEmitter:PlaySound("UCSounds/ratsniffer/warning")
 
     inst:DoTaskInTime(3, inst.Remove)

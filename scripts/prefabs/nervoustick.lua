@@ -179,6 +179,7 @@ local function fn()
     inst:AddTag("swilson") 
 	inst:AddTag("nightmarecreature")
 	inst:AddTag("shadow")
+    inst:AddTag("shadow_aligned")
     inst:AddTag("nervoustick")
     inst:AddTag("notraptrigger")
     inst:AddTag("nosteal")
@@ -273,6 +274,7 @@ local function denfn()
     inst:AddTag("swilson") 
 	inst:AddTag("nightmarecreature")
 	inst:AddTag("shadow")
+    inst:AddTag("shadow_aligned")
 
     if not TheWorld.ismastersim then
         return inst

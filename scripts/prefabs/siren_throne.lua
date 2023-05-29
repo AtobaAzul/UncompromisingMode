@@ -28,6 +28,7 @@ local function fn()
 
     inst:AddTag("ignorewalkableplatforms")
     inst:AddTag("seastack")
+    inst:AddTag("siren_fish_spawner")
 
     inst.AnimState:SetBank("siren_throne")
     inst.AnimState:SetBuild("siren_throne")
@@ -50,7 +51,6 @@ local function fn()
     end
 
     inst:AddTag("sirenpoint")
-    inst:AddTag("sirenpoint_throne")
 
     inst:AddComponent("inspectable")
 

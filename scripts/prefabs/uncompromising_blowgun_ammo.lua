@@ -74,14 +74,12 @@ local function OnHit_Thulecite(inst, attacker, target)
 end
 
 local function onloadammo_ice(inst, data)
-print("onloadammo_ice", inst, data ~= nil and data.slingshot)
 	if data ~= nil and data.slingshot then
 		data.slingshot:AddTag("extinguisher")
 	end
 end
 
 local function onunloadammo_ice(inst, data)
-print("onunloadammo_ice", inst, data ~= nil and data.slingshot)
 	if data ~= nil and data.slingshot then
 		data.slingshot:RemoveTag("extinguisher")
 	end

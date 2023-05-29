@@ -261,7 +261,6 @@ local function OnIgnite(inst)
 end
 
 local function OnFreeze(inst)
-    --print(inst, "OnFreeze")
     inst.SoundEmitter:PlaySound("dontstarve/common/freezecreature")
     inst.AnimState:PlayAnimation(inst.anims.freeze, true)
     inst.AnimState:OverrideSymbol("swap_frozen", "frozen", "frozen")
@@ -272,14 +271,12 @@ local function OnFreeze(inst)
 end
 
 local function OnThaw(inst)
-    --print(inst, "OnThaw")
     inst.AnimState:PlayAnimation(inst.anims.thaw, true)
     inst.SoundEmitter:PlaySound("dontstarve/common/freezethaw", "thawing")
     inst.AnimState:OverrideSymbol("swap_frozen", "frozen", "frozen")
 end
 
 local function OnUnFreeze(inst)
-    --print(inst, "OnUnFreeze")
     inst.AnimState:PlayAnimation(inst.anims.idle, true)
     inst.SoundEmitter:KillSound("thawing")
     inst.AnimState:ClearOverrideSymbol("swap_frozen")

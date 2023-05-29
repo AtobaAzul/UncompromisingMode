@@ -102,8 +102,7 @@ function LinearProjectile:Launch(targetPos, attacker, owningweapon)
         pos.x = pos.x + offset.x * math.cos(facing_angle)
         pos.y = pos.y + offset.y
         pos.z = pos.z - offset.x * math.sin(facing_angle)
-        -- print("facing", facing_angle)
-        -- print("offset", offset)
+		
         if self.inst.Physics ~= nil then
             self.inst.Physics:Teleport(pos:Get())
         else

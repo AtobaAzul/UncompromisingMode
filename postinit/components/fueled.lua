@@ -40,9 +40,6 @@ env.AddComponentPostInit("fueled", function(self)
 				doer.components.fuelmaster:GetBonusMult(fuel_obj, self.inst) or 1
 			local fuelvalue = fuel.fuelvalue * self.bonusmult * wetmult * masterymult
 
-			print(_currentfuel < self.maxfuel and self.currentfuel > self.maxfuel)
-			print(self.currentfuel > self.maxfuel)
-
 			if _currentfuel < self.maxfuel and self.currentfuel > self.maxfuel and doer ~= nil and not doer:HasTag("handyperson") then
 				self:SetPercent(1)
 			end

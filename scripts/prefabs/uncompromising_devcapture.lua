@@ -104,52 +104,65 @@ local function Capture(inst)
 			local rgb = v.previous_rgba
 			v.AnimState:SetMultColour(rgb.r,rgb.g,rgb.b,rgb.a)
 		end
+		
 		local px,py,pz = v.Transform:GetWorldPosition()
 		local vx = px-x
 		local vy = py-y
 		local vz = pz-z
 		totaltable = totaltable.."	{x = "..vx..", z = "..vz..", prefab = \""..v.prefab.."\""
+		
 		if v.components.pickable and v.components.pickable:IsBarren() then
 			totaltable = totaltable..", barren = true"
 		end
+		
 		if v.components.witherable and v.components.witherable:IsWithered() then
 			totaltable = totaltable..", withered = true"
 		end
+		
 		if TheWorld.Map:IsOceanAtPoint(px,py,pz) then --Not in use currently
 			totaltable = totaltable..", ocean = true"
 		else
 			totaltable = totaltable..", ocean = false"
 		end
+		
 		if (v.prefab == "umdc_tileflag" and TheWorld.Map:GetTileAtPoint(px,py,pz)) then
 			totaltable = totaltable..", tile = "..tostring(TheWorld.Map:GetTileAtPoint(px,py,pz))	--flags always get tiles, regardless of tile setting.
 		end
+		
 		if v.components.health ~= nil and not v.components.health:IsDead() then
 			totaltable = totaltable..", health = "..tostring(v.components.health:GetPercent())
 		end
+		
 		if v:HasTag("burnt") then
 			totaltable = totaltable..", burnt = true"
 		end
+		
 		if v.components.container ~= nil and not v.components.container:IsEmpty() then
 			--totaltable = totaltable..", contents = "..tostring(v.components.container:GetAllItems())
 			--this results in a table.
 			--not sure how I'd do this. I know scenarios can insert loot into chests, so that might work instead. But does limit what loot we have inside.
 		end
+		
 		if v.components.finiteuses ~= nil then
 			totaltable = totaltable..", uses = "..tostring(v.components.finiteuses:GetUses())
 		end
+		
 		if v.components.fueled ~= nil then
 			totaltable = totaltable..", fuel = "..tostring(v.components.fueled:GetPercent())
 		end
+		
 		if v.components.scenariorunner ~= nil and v.components.scenariorunner.scriptname ~= nil then
 			totaltable = totaltable..", scenario = "..tostring(v.components.scenariorunner.scriptname)
 		end
+		
 		if v:HasTag("fence") or v.prefab == "fast_farmplot" or v.prefab == "slow_farmplot" then
 			totaltable = totaltable..", rotation = "..tostring(v.Transform:GetRotation())
 		end
+		
 		totaltable = totaltable.."},"
 	end
+	
 	totaltable = totaltable.."},\n	},\n"
-	--print("captured prefabs:", totaltable)
 
 	local file_name = TUNING.DSTU.MODROOT.."scripts/umss_tables.lua"
 

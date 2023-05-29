@@ -48,10 +48,6 @@ inst.actionhandlers[ACTIONS.BUILD].deststate =
         function(inst, action, ...)
 			local rec = GetValidRecipe(action.recipe)
 
-			if rec.filters ~= nil then 
-				print(rec.filters)
-			end
-
 			return (inst:HasTag("troublemaker") and rec ~= nil and rec.builder_tag == "pebblemaker" and "domediumaction")
 				--or (inst:HasTag("pinetreepioneer") and rec ~= nil and rec.tab.str == "SURVIVAL" and "domediumaction")
 				or _OldBuild(inst, action, ...)
@@ -211,7 +207,6 @@ local states = {
 		timeline =
         {
             TimeEvent(13 * FRAMES, function(inst)
-				print("time event")
 				inst.SoundEmitter:PlaySound("dontstarve/characters/walter/slingshot/stretch")
             end),
 			

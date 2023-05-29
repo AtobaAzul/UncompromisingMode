@@ -88,7 +88,6 @@ local states =
 			
 			if inst.item ~= nil then
 				local uses = inst.item.netweight ~= nil and inst.item.netweight or 1
-				print(uses)
 			
 				inst.item.components.finiteuses:Use(uses)
 			end

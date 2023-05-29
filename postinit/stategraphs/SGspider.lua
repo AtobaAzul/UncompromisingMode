@@ -276,7 +276,7 @@ env.AddStategraphPostInit("spider", function(inst)
                         local JUMP_DISTANCE = 3
 
                         local distance = inst:GetDistanceSqToInst(inst.components.combat.target)
-                        --print(distance)
+						
                         if distance > JUMP_DISTANCE * JUMP_DISTANCE then
                             inst.sg:GoToState("warrior_attack", inst.components.combat.target)
                         else

@@ -52,7 +52,6 @@ local function create_common(pawntype)
         inst.components.childspawner.childname = "um_pawn"..pawntype
     else
         inst.components.childspawner.childname = "um_pawn_nightmare"
-        print("Amalgams disabled, overriding spawn types.")
     end
 
     inst.components.childspawner:SetRegenPeriod(TUNING.TOTAL_DAY_TIME * 3)

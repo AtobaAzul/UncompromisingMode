@@ -35,7 +35,6 @@ local function OnPlayerJoined(src,player)
 end
 
 local function OnPlayerLeft(src,player)
-	--print("Player ", player, "left, targetplayer is ", _targetplayer or "nil")
     for i, v in ipairs(_activeplayers) do
         if v == player then
             table.remove(_activeplayers, i)

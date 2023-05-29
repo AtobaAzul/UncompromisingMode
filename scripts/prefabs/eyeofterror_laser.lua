@@ -127,8 +127,6 @@ local function DoDamage(inst, targets, skiptoss)
 							end
 							
 							local dmg = 100 / v.terrorlasercount
-							print("Damage = ")
-							print(dmg)
 							
 							v.components.combat:GetAttacked(inst, dmg, nil)
 						end
@@ -147,8 +145,6 @@ local function DoDamage(inst, targets, skiptoss)
 							end
 							
 							local dmg = 150 / v.terrorlasercount
-							print("Damage = ")
-							print(dmg)
 							
 							v.components.combat:GetAttacked(inst, dmg, nil)
 						end

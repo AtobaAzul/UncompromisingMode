@@ -25,7 +25,6 @@ end
 for i,v in ipairs(earpainers) do
 	if v.name then
 		AddStategraphPostInit(v.name, function(inst)
-			print("Initialized Earbleeder: "..v.name)
 			if inst.states[v.state] then
 				local noisestate = inst.states[v.state]
 				local _onenter

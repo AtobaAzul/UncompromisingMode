@@ -111,10 +111,11 @@ end
 
 local function SpawnSmallBird(inst)
     local tallbird = nil
+	
     for k,v in pairs(inst.components.childspawner.childrenoutside) do
         if v.prefab == "tallbird" then tallbird = v break end
     end
-    --print("spawning smallbird for tallbird", tallbird)
+	
     if tallbird and tallbird:IsValid() then
         --inst.canspawnsmallbird = false  
         inst.spawnedsmallbirdthisseason = true

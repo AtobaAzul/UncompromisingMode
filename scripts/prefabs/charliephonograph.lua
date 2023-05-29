@@ -5,26 +5,24 @@ local assets =
 }
 
 local function GetSpawnPoint(pt, radius, hunt)
-    --print("Hunter:GetSpawnPoint", tostring(pt), radius)
-
     local angle = hunt.direction
+	
     if angle then
         local offset = Vector3(radius * math.cos( angle ), 0, -radius * math.sin( angle ))
         local spawn_point = pt + offset
-        --print(string.format("Hunter:GetSpawnPoint RESULT %s, %2.2f", tostring(spawn_point), angle/DEGREES))
-        return spawn_point
+        
+		return spawn_point
     end
 end
 
 local function GetSpawnPointSuprise(pt, radius, hunt)
-    --print("Hunter:GetSpawnPoint", tostring(pt), radius)
-
     local angle = hunt.direction
+	
     if angle then
         local offset = Vector3(radius * math.cos( angle ) + math.random(1, 3), 0, -radius * math.sin( angle ) - math.random(1, 3))
         local spawn_point = pt + offset
-        --print(string.format("Hunter:GetSpawnPoint RESULT %s, %2.2f", tostring(spawn_point), angle/DEGREES))
-        return spawn_point
+        
+		return spawn_point
     end
 end
 
@@ -61,17 +59,11 @@ local function GetRunAngle(pt, angle, radius)
 end
 
 local function GetNextSpawnAngle(pt, direction, radius)
-    --print("Hunter:GetNextSpawnAngle", tostring(pt), radius)
-
     local base_angle = direction or math.random() * 2 * PI
     local deviation = math.random(-TUNING.TRACK_ANGLE_DEVIATION, TUNING.TRACK_ANGLE_DEVIATION)*DEGREES
 
     local start_angle = base_angle + deviation
-    --print(string.format("   original: %2.2f, deviation: %2.2f, starting angle: %2.2f", base_angle/DEGREES, deviation/DEGREES, start_angle/DEGREES))
-
-    --[[local angle =]] return GetRunAngle(pt, start_angle, radius)
-    --print(string.format("Hunter:GetSpawnPoint RESULT %s", tostring(angle and angle/DEGREES)))
-    --return angle
+	return GetRunAngle(pt, start_angle, radius)
 end
 
 local function removephonograph(inst)
@@ -88,16 +80,12 @@ local function StartDirt(hunt,position)
 
     hunt.direction = GetNextSpawnAngle(pt, nil, TUNING.HUNT_SPAWN_DIST * 2)
     if hunt.direction ~= nil then
-        --print(string.format("   first angle: %2.2f", hunt.direction/DEGREES))
-
-        --print("    numtrackstospawn", hunt.numtrackstospawn)
 
         -- it's ok if this spawn fails, because we'll keep trying every HUNT_UPDATE
         local spawnRelativeTo =  pt
         if SpawnDirt(spawnRelativeTo, hunt) then
+		
         end
-    --else
-        --print("Failed to find suitable dirt placement point")
     end
 end
 

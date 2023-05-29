@@ -63,6 +63,8 @@ return{
 			KITCOON_HIDEANDSEEK_NOT_ENOUGH_HIDERS = "Want me, do this alone?",
 			KITCOON_HIDEANDSEEK_NOT_ENOUGH_HIDING_SPOTS = "Searching, hiding spot.",
 			KITCOON_HIDEANDSEEK_ONE_GAME_PER_DAY = "Later. Not exciting, over, over.",
+			MANNEQUIN_EQUIPSWAPFAILED = "Clothing, undesired.",
+            PILLOWFIGHT_NO_HANDPILLOW = "Softer weapon, required.",
 		},
 		OPEN_CRAFTING =
 		{
@@ -843,6 +845,13 @@ return{
 
 --fallback to speech_wilson.lua     ANNOUNCE_BOOK_MOON_DAYTIME = "only_used_by_waxwell_and_wicker",
 
+    ANNOUNCE_OFF_SCRIPT = "Speech, off script.",
+
+    ANNOUNCE_COZY_SLEEP = "Energy renewed, hungry..",
+
+	--
+	ANNOUNCE_TOOL_TOOWEAK = "Chains... pillars... stronger implement.",
+	
 	BATTLECRY =
 	{
 		GENERIC = "Rrah!",
@@ -1433,6 +1442,13 @@ return{
 
         TURF_MONKEY_GROUND = "Floor.",
 
+        TURF_CARPETFLOOR2 = "Floor.",
+        TURF_MOSAIC_GREY = "Floor.",
+        TURF_MOSAIC_RED = "Floor.",
+        TURF_MOSAIC_BLUE = "Floor.",
+
+        TURF_BEARD_RUG = "Floor.",
+
 		POWCAKE = "Some things, forever.",
         CAVE_ENTRANCE = "Maker, sealed exits, kept me in.",
         CAVE_ENTRANCE_RUINS = "Calling, heard.",
@@ -1732,6 +1748,7 @@ return{
         CHESSPIECE_BEEFALO = "Hungry.",
 		CHESSPIECE_KITCOON = "Misunderstanding. \"cute\", meaning?",
 		CHESSPIECE_CATCOON = "Hungry.",
+        CHESSPIECE_MANRABBIT = "Lifeless, brainless.",
         CHESSPIECE_GUARDIANPHASE3 = "Elder man, knowledge stolen!",
         CHESSPIECE_EYEOFTERROR = "Reality perversion, gone.",
         CHESSPIECE_TWINSOFTERROR = "Piles, scrap.",
@@ -2833,6 +2850,35 @@ return{
         },
         BEEFALO_GROOMER_ITEM = "Myself, not artistic.",
 
+        YOTR_RABBITSHRINE =
+        {
+            GENERIC = "What should we make, Woby?",
+            EMPTY = "That's a hungry-looking rabbit statue.",
+            BURNT = "What a waste of good supplies...",
+        },
+
+        NIGHTCAPHAT = "It's a little sleeping bag for your head.",
+
+        YOTR_FOOD1 = "Time for a dessert break!",
+        YOTR_FOOD2 = "Is that what the moon tastes like?",
+        YOTR_FOOD3 = "It's so jiggly!",
+        YOTR_FOOD4 = "They're not marshmallows, but they're still pretty good!",
+
+        YOTR_TOKEN = "It's rude to hit people with gloves. You might start a fight!",
+
+        COZY_BUNNYMAN = "They seem friendly!",
+
+        HANDPILLOW_BEEFALOWOOL = "It's almost as good of a pillow as Woby!",
+        HANDPILLOW_KELP = "Well, um... I guess there are worse things to use for a pillow?",
+        HANDPILLOW_PETALS = "Don't worry, I already checked it for bees.",
+        HANDPILLOW_STEELWOOL = "It's not so bad, I once made a bed out of pine needles.",
+
+        BODYPILLOW_BEEFALOWOOL = "It's almost as good of a pillow as Woby!",
+        BODYPILLOW_KELP = "Well, um... I guess there are worse things to use for a pillow?",
+        BODYPILLOW_PETALS = "Don't worry, I already checked it for bees.",
+        BODYPILLOW_STEELWOOL = "It's not so bad, I once made a bed out of pine needles.",
+
+
 		BISHOP_CHARGE_HIT = "Rrahg!",
 		TRUNKVEST_SUMMER = "Clothing, comfort.",
 		TRUNKVEST_WINTER = "Clothing, frost protection.",
@@ -3030,8 +3076,8 @@ return{
         BLUEMOONEYE = "Color, difficult to recognize.",
 
         --Arena Event
-        LAVAARENA_BOARLORD = "I have no real quest, I'm just here to jest!",
-        BOARRIOR = "Catch me if you can!",
+        LAVAARENA_BOARLORD = "Another king, familiar.",
+        BOARRIOR = "Loud, clumsy.",
         BOARON = "Who invited a pig to this shindig?",
         PEGHOOK = "This will be a cinch if I don't get pinched!",
         TRAILS = "You wouldn't pummel a tiny imp, would you?!",
@@ -3286,77 +3332,77 @@ return{
         --v2 Winona
         WINONA_CATAPULT =
         {
-        	GENERIC = "She's made a sort of automatic defense system.",
-        	OFF = "It needs some electricity.",
-        	BURNING = "It's on fire!",
-        	BURNT = "Science couldn't save it.",
+        	GENERIC = "Simple atomaton, flings rocks.",
+        	OFF = "Drained, lifeless.",
+        	BURNING = "Unfortunate.",
+        	BURNT = "Unfortunate.",
         },
         WINONA_SPOTLIGHT =
         {
-        	GENERIC = "What an ingenious idea!",
-        	OFF = "It needs some electricity.",
-        	BURNING = "It's on fire!",
-        	BURNT = "Science couldn't save it.",
+        	GENERIC = "Focused light, tracking.",
+        	OFF = "Lights off.",
+        	BURNING = "Unfortunate.",
+        	BURNT = "Unfortunate.",
         },
         WINONA_BATTERY_LOW =
         {
-        	GENERIC = "Looks science-y. How does it work?",
-        	LOWPOWER = "It's getting low on power.",
-        	OFF = "I could get it working, if Winona's busy.",
-        	BURNING = "It's on fire!",
-        	BURNT = "Science couldn't save it.",
+        	GENERIC = "Machine, lifeblood.",
+        	LOWPOWER = "Power, leeched.",
+        	OFF = "Drained, lifeless.",
+        	BURNING = "Unfortunate.",
+        	BURNT = "Unfortunate.",
         },
         WINONA_BATTERY_HIGH =
         {
-        	GENERIC = "Hey! That's not science!",
-        	LOWPOWER = "It'll turn off soon.",
-        	OFF = "Science beats magic, every time.",
-        	BURNING = "It's on fire!",
-        	BURNT = "Science couldn't save it.",
+        	GENERIC = "Experiments, how it starts...",
+        	LOWPOWER = "Magic waning, need gems.",
+        	OFF = "Drained, lifeless.",
+        	BURNING = "Unfortunate.",
+        	BURNT = "Unfortunate.",
         },
 
         --Wormwood
-        COMPOSTWRAP = "Wormwood offered me a bite, but I respectfully declined.",
-        ARMOR_BRAMBLE = "The best offense is a good defense.",
-        TRAP_BRAMBLE = "It'd really poke whoever stepped on it.",
+        COMPOSTWRAP = "Perplexing, use unknown.",
+        ARMOR_BRAMBLE = "Defenses, evolution..",
+        TRAP_BRAMBLE = "Trap, limited intelligence.",
 
-        BOATFRAGMENT03 = "Not much left of it.",
-        BOATFRAGMENT04 = "Not much left of it.",
-        BOATFRAGMENT05 = "Not much left of it.",
-		BOAT_LEAK = "I should patch that up before we sink.",
-        MAST = "Avast! A mast!",
-        SEASTACK = "It's a rock.",
-        FISHINGNET = "Nothing but net.", --unimplemented
-        ANTCHOVIES = "Yeesh. Can I toss it back?", --unimplemented
-        STEERINGWHEEL = "I could have been a sailor in another life.",
-        ANCHOR = "I wouldn't want my boat to float away.",
-        BOATPATCH = "Just in case of disaster.",
+        BOATFRAGMENT03 = "Fragments.",
+        BOATFRAGMENT04 = "Fragments.",
+        BOATFRAGMENT05 = "Fragments.",
+		BOAT_LEAK = "Water damage, growing.",
+        MAST = "Wind power. Simple, clever.",
+        SEASTACK = "Sediment, rising from seafloor.",
+        FISHINGNET = "Simple tool, effective.", --unimplemented
+        ANTCHOVIES = "Little meat. Pitiful.", --unimplemented
+        STEERINGWHEEL = "Destination, in control.",
+        ANCHOR = "Heavy weight. Static position.",
+        BOATPATCH = "Wooden, suture.",
         DRIFTWOOD_TREE =
         {
-            BURNING = "That driftwood's burning!",
-            BURNT = "Doesn't look very useful anymore.",
-            CHOPPED = "There might still be something worth digging up.",
-            GENERIC = "A dead tree that washed up on shore.",
+            BURNING = "Smoke generation, rampant.",
+            BURNT = "Resources, converted.",
+            CHOPPED = "Done here.",
+            GENERIC = "Another tree, cycle ended.",
         },
 
-        DRIFTWOOD_LOG = "It floats on water.",
+        DRIFTWOOD_LOG = "Flimsy, limited use.",
 
         MOON_TREE =
         {
-            BURNING = "The tree is burning!",
-            BURNT = "The tree burned down.",
-            CHOPPED = "That was a pretty thick tree.",
-            GENERIC = "I didn't know trees grew on the moon.",
+            BURNING = "Smoke generation, rampant.",
+            BURNT = "Resources, converted.",
+            CHOPPED = "Done here.",
+            GENERIC = "Magic here, threat unknown.",
         },
-		MOON_TREE_BLOSSOM = "It fell from the moon tree.",
+		MOON_TREE_BLOSSOM = "Fallen blossom.",
 
         MOONBUTTERFLY =
         {
-        	GENERIC = "My vast scientific knowledge tells me it's... a moon butterfly.",
-        	HELD = "I've got you now.",
+        	GENERIC = "No threat, seemingly.",
+        	HELD = "Curiosity, fragile.",
         },
-		MOONBUTTERFLYWINGS = "We're really winging it now.",
-        MOONBUTTERFLY_SAPLING = "A moth turned into a tree? Lunacy!",
+		MOONBUTTERFLYWINGS = "Traces here, familiar magic.",
+        MOONBUTTERFLY_SAPLING = "Life renewed, curious.",
         ROCK_AVOCADO_FRUIT = "I'd shatter my teeth on that.",
         ROCK_AVOCADO_FRUIT_RIPE = "Uncooked stone fruit is the pits.",
         ROCK_AVOCADO_FRUIT_RIPE_COOKED = "It's actually soft enough to eat now.",
@@ -4635,6 +4681,47 @@ return{
             GENERIC = "All dressed up and nowhere to go.",
             BURNT = "All burnt up and nowhere to go.",
         },
+
+		-- Waxwell
+		MAGICIAN_CHEST = "C'mon Woby, just a little peek inside?",
+		TOPHAT_MAGICIAN = "Do you think he can teach me how to pull rabbits out of it?",
+
+        -- Year of the Rabbit
+        YOTR_FIGHTRING_KIT = "I'll have it set up in a jiffy!",
+        YOTR_FIGHTRING_BELL =
+        {
+            GENERIC = "All fighting should be done with pillows.",
+            PLAYING = "It's okay, everyone is wearing their safety gear!",
+        },
+
+        YOTR_DECOR_1 = {
+            GENERAL = "It's nice to have a little extra firelight!",
+            OUT = "Don't worry, Woby and I will find some kindling for it.",
+        },
+        YOTR_DECOR_2 = {
+            GENERAL = "It's nice to have a little extra firelight!",
+            OUT = "Don't worry, Woby and I will find some kindling for it.",
+        },
+
+        HAREBALL = "That looks like something Woby spit up.",
+        YOTR_DECOR_1_ITEM = "I'll have it set up in a jiffy!",
+        YOTR_DECOR_2_ITEM = "I'll have it set up in a jiffy!",
+
+		--
+		DREADSTONE = "It's just a rock, what's so scary about a rock?",
+		HORRORFUEL = "It can't be THAT bad... can it?",
+		DAYWALKER =
+		{
+			GENERIC = "I thought he'd be a bit happier to be free...",
+			IMPRISONED = "We can't just leave him like that, Woby! We've gotta help him!",
+		},
+		DAYWALKER_PILLAR =
+		{
+			GENERIC = "Hey, what's that stuff inside?",
+			EXPOSED = "Oh, it's just a different kind of rock.",
+		},
+		ARMORDREADSTONE = "It looks like an evil knight's armor. Neat!",
+		DREADSTONEHAT = "Never forget to wear your dark helmet.",
     },
 
     DESCRIBE_GENERIC = "It's a... thing.",

@@ -52,7 +52,6 @@ return Class(function(self, inst)
     --------------------------------------------------------------------------
 
     local function AllowedToAttack(data)
-        --print("Deerclopsspawner allowed to attack?", #_activeplayers, TheWorld.state.cycles, _attackoffseason, TheWorld.state.season)
         return #_activeplayers > 0 and
             ((data and data.skipcycles) or TheWorld.state.cycles > TUNING.NO_BOSS_TIME) and
             (_attackoffseason or
@@ -93,11 +92,10 @@ return Class(function(self, inst)
             local x, y, z = player.Transform:GetWorldPosition()
             local ents = TheSim:FindEntities(x, y, z, STRUCTURE_DIST, ATTACK_MUST_TAGS)
 
-            --print("Deerclopsspawner loop", #ents, loopCount, player)
             numStructures = #ents
             loopCount = loopCount + 1
         end
-        --print("Deerclops picked target", player)
+		
         _targetplayer = player
     end
 

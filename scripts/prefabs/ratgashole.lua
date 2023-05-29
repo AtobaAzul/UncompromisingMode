@@ -4,7 +4,6 @@ local assets =
 }
 
 local function fartover(inst)
-	-- print('fartover')
 	--if not inst.SoundEmitter:PlayingSound("poisonswamp_lp") then
 	--	inst.SoundEmitter:PlaySound("dontstarve_DLC002/common/poisonswamp_lp", "poisonswamp_lp")
 	--end

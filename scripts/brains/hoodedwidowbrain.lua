@@ -20,21 +20,18 @@ local function EquipMeleeAndResetCooldown(inst)
     if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
         inst.components.combat:ResetCooldown()
         inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
-        -- print("melee equipped and cooldown reset")
     end
 end
 
 local function EquipMelee(inst)
     if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
         inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
-        -- print("melee equipped")
     end
 end
 local function EquipLeapAndResetCooldown(inst)
     if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
         inst.components.combat:ResetCooldown()
         inst.components.inventory:Equip(inst.weaponitems.leapweapon)
-        -- print("melee equipped and cooldown reset")
     end
 end
 
@@ -59,7 +56,6 @@ end
 local function EquipLeap(inst)
     if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
         inst.components.inventory:Equip(inst.weaponitems.leapweapon)
-        -- print("melee equipped")
     end
 end
 local function CanLeapNow(inst)
@@ -74,7 +70,6 @@ end
 local function EquipRange(inst)
     if not inst.weaponitems.snotbomb.components.equippable:IsEquipped() then
         inst.components.inventory:Equip(inst.weaponitems.snotbomb)
-        -- print("phlegm equipped")
     end
 end
 local function BossCheck(inst)
@@ -98,31 +93,31 @@ local function EquipMeleeAndResetCooldown(inst)
     if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
         inst.components.combat:ResetCooldown()
         inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
-        -- print("melee equipped and cooldown reset")
     end
 end
 
 local function EquipMelee(inst)
     if not inst.weaponitems.meleeweapon.components.equippable:IsEquipped() then
         inst.components.inventory:Equip(inst.weaponitems.meleeweapon)
-        -- print("melee equipped")
     end
 end
 
 local function TargetLeavingArena(inst)
-if inst.components.combat~= nil and inst.components.combat.target ~= nil then
-    local target = inst.components.combat.target
-	local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
-	if (target ~= nil and home ~= nil) then
-	local dx, dy, dz = target.Transform:GetWorldPosition()
-    local spx, spy, spz = home.Transform:GetWorldPosition()
-    return target ~= nil and home ~= nil and distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*10)
+	if inst.components.combat~= nil and inst.components.combat.target ~= nil then
+		local target = inst.components.combat.target
+		local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
+		
+		if (target ~= nil and home ~= nil) then
+			local dx, dy, dz = target.Transform:GetWorldPosition()
+			local spx, spy, spz = home.Transform:GetWorldPosition()
+			
+			return target ~= nil and home ~= nil and distsq(spx, spz, dx, dz) >= (TUNING.DRAGONFLY_RESET_DIST*10)
+		else
+			return false
+		end
 	else
-	return false
+		return false
 	end
-else
-return false
-end
 end
 
 

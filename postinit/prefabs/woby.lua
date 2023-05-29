@@ -60,7 +60,6 @@ env.AddPrefabPostInit("wobybig", function(inst)
 end)
 
 local function SpawnWoby(inst)
-	--print(inst.respawntime)
     local player_check_distance = 40
     local attempts = 0
     
@@ -154,7 +153,6 @@ local function OnLoad(inst, data)
 end
 
 local function printout(inst)
-	--print(inst.respawntime)
 	inst:DoTaskInTime(5, printout)
 end
 
@@ -170,7 +168,6 @@ env.AddPrefabPostInit("walter", function(inst)
 	
 	inst._woby_onremove = function(woby) OnWobyRemoved(inst, 240) end
 	
-	--print(inst.respawntime)
 	--local spawntime = inst.respawntime
 	--inst:DoTaskInTime(0, printout)
 	--if inst.respawntime ~= nil then

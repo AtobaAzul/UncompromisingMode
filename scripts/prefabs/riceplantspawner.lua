@@ -23,7 +23,6 @@ end
 
 local LAND_CHECK_RADIUS = 6
 local function FindLandNextToWater(playerpos, waterpos)
-    --print("FindWalkableOffset:")
     local radius = 12
     local ground = TheWorld
 
@@ -38,7 +37,6 @@ local function FindLandNextToWater(playerpos, waterpos)
     -- returns offset, check_angle, deflected
     local loc, landAngle, deflected = FindValidPositionByFan(0, radius, 8, test)
     if loc then
-        --print("Fan angle=",landAngle)
         return waterpos + loc, landAngle, deflected
     end
 end
@@ -58,15 +56,15 @@ local function IsNotNextToLand(pt)
         if loc ~= nil then
             landPos = loc
             tmpAng = ang
-            --print("true angle",ang,ang/DEGREES)
+			
             return true
         end
         return false
     end
 
     local cang = (math.random() * 360) * DEGREES
-    --print("cang:",cang)
     local loc, landAngle, deflected = FindValidPositionByFan(cang, radius, 7, test)
+	
     if loc ~= nil then
         return landPos, tmpAng, deflected
     end

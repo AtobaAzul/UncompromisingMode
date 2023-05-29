@@ -54,7 +54,6 @@ local lightningprods =
 }
 
 local function removecanopy(inst)
-    --print("REMOVING CANOPU")
     if inst.roots then
         inst.roots:Remove()
     end

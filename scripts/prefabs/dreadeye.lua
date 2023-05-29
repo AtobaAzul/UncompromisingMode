@@ -265,7 +265,6 @@ local function onnear(inst, target)
 	if inst.oncooldown == nil then
 		if inst.isdisguised and not inst.components.health:IsDead() then
 			if target ~= nil and target.components.sanity ~= nil and target.components.sanity:GetPercent() <= .7 then
-				print("disguse attack")
 				inst.sg:GoToState("disguise_attack")
 				inst.isdisguised = false
 				
@@ -348,7 +347,7 @@ local function AllRadiusPlayers(inst, self)
 		local radius = 4
 		
 		if TheWorld.Map:IsOceanAtPoint(x, y, z, false) then
-			radius = 8
+			radius = 6
 		end
 		
 		local players = FindPlayersInRange(x, y, z, radius, { "player" }, { "playerghost" })
@@ -503,8 +502,8 @@ local function SanityBurst(inst)
 	burstring.Transform:SetPosition(x, 0, z)
 	burstring.Transform:SetScale(1.8, 1.8, 1.8)
 	if TheWorld.Map:IsOceanAtPoint(x, y, z, false) then
-		radius = 10
-		burstring.Transform:SetScale(2.3, 2.3, 2.3)
+		radius = 8
+		burstring.Transform:SetScale(2.1, 2.1, 2.1)
 	end
 		
 	local players = FindPlayersInRange(x, y, z, radius, { "player" }, { "playerghost" })
@@ -673,12 +672,6 @@ local situational_disguises =
 		anim = "full",
 	},
 	{
-		name = "deciduoustree",
-		bank = "tree_leaf",
-		build = "tree_leaf_trunk_build",
-		anim = "idle_tall",
-	},
-	{
 		name = "hooded_fern",
 		bank = "largefern",
 		build = "largefern",
@@ -694,6 +687,18 @@ local situational_disguises =
 		name = "trapdoorgrass",
 		bank = "trapdoorgrass",
 		build = "trapdoorgrass",
+		anim = "idle",
+	},
+	{
+		name = "deciduoustree",
+		bank = "tree_leaf",
+		build = "tree_leaf_trunk_build",
+		anim = "idle_tall",
+	},
+	{
+		name = "grass",
+		bank = "grass",
+		build = "grass1",
 		anim = "idle",
 	},
 }

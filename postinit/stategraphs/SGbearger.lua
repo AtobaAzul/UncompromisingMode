@@ -27,7 +27,6 @@ local function onattackfn(inst)
         end
 
         if not (inst.canyawn or inst.components.timer:TimerExists("Yawn")) and inst:HasTag("hibernation") then 
-            --print("Starting yawn timer ", TUNING.BEARGER_YAWN_COOLDOWN)
             inst.components.timer:StartTimer("Yawn", TUNING.BEARGER_YAWN_COOLDOWN)
         end
 

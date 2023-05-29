@@ -429,9 +429,7 @@ local function Sniffertime(owner)
 	if ents ~= nil then
 		for i, v in ipairs(ents) do
 			if v.components.inventoryitem:IsHeld() then
-				if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and (v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" or v.components.inventoryitem:GetGrandOwner().prefab == "catcoon") then
-					--print("lureplant is holding!")
-				else
+				if v.components.inventoryitem and v.components.inventoryitem:GetGrandOwner() ~= nil and not (v.components.inventoryitem:GetGrandOwner().prefab == "lureplant" or v.components.inventoryitem:GetGrandOwner().prefab == "catcoon") then
 					if not (v:HasTag("frozen") or v:HasTag("NORATCHECK")) and v.components.farmplantable == nil then
 						FoodScoreCalculations(true,v)
 					end
@@ -454,8 +452,6 @@ end
 
 local function CheckTargetPiece(inst)
 	local owner = inst.components.inventoryitem.owner
-	--print("owner")
-	--print(owner)
 		
     if owner ~= nil then
 		FindClosestPart(owner)
@@ -494,8 +490,6 @@ local function rat_disable(inst)
 end
 
 local function Hack(inst, data)
-	--print("hack")
-	--print("hack owner")
 	local snap = SpawnPrefab("impact")
 	local x, y, z = inst.Transform:GetWorldPosition()
 	local x1, y1, z1 = data.target.Transform:GetWorldPosition()

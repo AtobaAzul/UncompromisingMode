@@ -131,8 +131,6 @@ local states=
             local xdiff = inst.sg.statemem.targetpos.x - inst.sg.statemem.startpos.x
             local zdiff = inst.sg.statemem.targetpos.z - inst.sg.statemem.startpos.z
 
-            --print(inst.sg.statemem.targetpos.x,inst.sg.statemem.targetpos.z, inst.sg.statemem.startpos.x,inst.sg.statemem.startpos.z)
-
             inst.Transform:SetPosition(inst.sg.statemem.startpos.x+(xdiff*percent),0,inst.sg.statemem.startpos.z+(zdiff*percent))
         end,
 

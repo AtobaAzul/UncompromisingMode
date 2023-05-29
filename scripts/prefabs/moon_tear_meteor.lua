@@ -86,8 +86,6 @@ local function onexplode(inst)
 		
 		local gemcheck = math.random()
 		
-		
-		print("The Moon Is Crying")
 		local moontear = SpawnPrefab("moon_tear")
         moontear.Transform:SetPosition(x, y, z)
 		

@@ -334,8 +334,6 @@ local wetpouch =
         for _,v in pairs(inst.setupdata.loottable) do
             total = total + v
         end
-        --print ("TOTOAL:", total)
-        --for k,v in pairs(inst.setupdata.loottable) do print(" - ", tostring(v/total), k) end
 
         local item = weighted_random_choice(inst.setupdata.loottable)
 

@@ -53,7 +53,6 @@ return Class(function(self, inst)
         --------------------------------------------------------------------------
 
         local function AllowedToAttack()
-            --print("Deerclopsspawner allowed to attack?", TheWorld.state.cycles, _attackduringoffseason, TheWorld.state.season)
             return (#_activeplayers > 0 and
                 TheWorld.state.cycles > TUNING.DSTU.NO_MOCK_DRAGONFLY_BOSS_TIME and
                 (_attackduringoffseason or
@@ -93,11 +92,10 @@ return Class(function(self, inst)
                 local x, y, z = player.Transform:GetWorldPosition()
                 local ents = TheSim:FindEntities(x, y, z, STRUCTURE_DIST, { "structure" })
 
-                --print("Deerclopsspawner loop", #ents, loopCount, player)
                 numStructures = #ents
                 loopCount = loopCount + 1
             end
-            --print("Deerclops picked target", player)
+			
             _targetplayer = player
         end
 
@@ -167,12 +165,9 @@ return Class(function(self, inst)
         end
 
         local function GetSpawnPoint(pt)
-            print("get spawn point")
             local x,y,z = pt:Get() --need *just* x and z for GPAP
-            print(TheWorld.Map:GetPlatformAtPoint(x, z) ~= nil)
             local boat = TheWorld.Map:GetPlatformAtPoint(x, z)
-            print(TheWorld.Map:IsOceanTileAtPoint(pt:Get()))
-            print(TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake)
+			
             if boat ~= nil or not TheWorld.Map:IsOceanTileAtPoint(pt:Get()) then
                 if TheWorld.state.cycles > 50 and TheWorld.state.isfullmoon or TheWorld.state.isalterawake then
                     pt = FindNearbyLandFullMoon(pt, 1) or pt
@@ -182,7 +177,7 @@ return Class(function(self, inst)
             end
 
             local offset = boat == nil and FindWalkableOffset(pt, math.random() * 2 * PI, HASSLER_SPAWN_DIST, 12, true) or FindSwimmableOffset(pt, math.random() * 2 * PI, HASSLER_SPAWN_DIST, 12, true)
-            print(offset)
+
             if offset ~= nil then
                 offset.x = offset.x + pt.x
                 offset.z = offset.z + pt.z
@@ -192,9 +187,6 @@ return Class(function(self, inst)
 
         local STRUCTURE_TAGS = { "structure" }
         local function ReleaseHassler(targetPlayer)
-            print("release hassler")
-            assert(targetPlayer)
-
             local hassler = TheSim:FindFirstEntityWithTag("mock_dragonfly")
             if hassler ~= nil or not AllowedToAttack() then
                 return hassler -- There's already a hassler in the world, we're done here.
@@ -231,7 +223,6 @@ return Class(function(self, inst)
         local function OnSeasonChange(self, season)
             if TheWorld.state.season ~= SEASONS.SUMMER then
                 _spawmmoonmaw = true
-                print("moonmaw available")
             end
 
             TryStartAttacks()

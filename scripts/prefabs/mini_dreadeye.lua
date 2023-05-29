@@ -164,6 +164,7 @@ local function fn()
     inst:AddTag("monster")
     inst:AddTag("hostile")
     inst:AddTag("shadow")
+	inst:AddTag("shadow_aligned")
     inst:AddTag("notraptrigger")
 
 	--shadowsubmissive (from shadowsubmissive component) added to pristine state for optimization

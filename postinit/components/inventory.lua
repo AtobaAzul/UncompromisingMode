@@ -6,7 +6,7 @@ GLOBAL.setfenv(1, GLOBAL)
 
 env.AddComponentPostInit("inventory", function(self)
 	local _OldIsInsulated = self.IsInsulated
-	
+
 	function self:IsInsulated()
 		if self.isexternallyinsulated == nil or self.isexternallyinsulated:Get() == nil then
 			for k,v in pairs(self.equipslots) do

@@ -55,7 +55,6 @@ if owner ~= nil then
 	
 	--self:SnowOn()
 end
---print("SNOW OVER CREATE")
 end)
 
 --[[
@@ -104,7 +103,6 @@ function SnowOver:OnUpdate(dt)
 				self.changed = 0.01
 			elseif self.changed <= 0.8 then
 				self.changed = self.changed + 0.001 
-				--print("plus 0.1")
 				self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed - 0.2)
 			
 				if self.owner.components.playervision ~= nil and self.owner.components.playervision:HasGoggleVision() then
@@ -124,7 +122,6 @@ function SnowOver:OnUpdate(dt)
 			self.changed = 0
 		elseif self.changed >= 0 then
 			self.changed = self.changed - 0.001
-			--print("plus 0.1")
 			self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed - 0.2)
 			if self.owner.components.playervision ~= nil and self.owner.components.playervision:HasGoggleVision() then
 				self.bg:GetAnimState():SetMultColour(1, 1, 1, 0)

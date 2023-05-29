@@ -69,7 +69,7 @@ end
 local function RetargetFn(inst)
   if inst:GetTimeAlive() < 5 then return end
     if inst.components.sleeper and inst.components.sleeper:IsAsleep() then return end
-    if inst.spit_interval and inst.last_target_spit_time and (GetTime() - inst.last_target_spit_time) > (inst.spit_interval * 1.5) 
+    if inst.spit_interval and inst.last_target_spit_time and (GetTime() - inst.last_target_spit_time) > (inst.spit_interval * 1.5)
     and inst.last_spit_time and (GetTime() - inst.last_spit_time) > (inst.spit_interval * 1.5) then
     local range = inst:GetPhysicsRadius(0) + 8
     return FindEntity(
@@ -96,6 +96,7 @@ local function SetFlameOn(inst, flameon, newtarget, freeze)
         end
         if math.random(100) == 50 then
             inst.rainbowtime = inst:DoPeriodicTask(0.25, function(inst)
+
                 inst.hue = inst.hue - 0.01
                 if inst.hue == 0 then
                     inst.hue = 1
@@ -150,7 +151,7 @@ end
 local function OnEntitySleep(inst)
     --[[if ((not inst:NearPlayerBase() and inst.SeenBase and not inst.components.combat:TargetIs(ThePlayer))
 	--if ((not inst:NearPlayerBase() and inst.SeenBase and not inst.components.combat:TargetIs(GetPlayer()))
-        or inst.components.sleeper:IsAsleep() 
+        or inst.components.sleeper:IsAsleep()
         or inst.KilledPlayer)
         and not NearPlayerBase(inst) then
         --Dragonfly has seen your base and been lured off! Despawn.
@@ -162,12 +163,11 @@ local function OnEntitySleep(inst)
     if inst.shouldGoAway then
         LeaveWorld(inst)
     else
-        --[[ elseif (not inst:NearPlayerBase() and not inst.SeenBase) and ThePlayer ~= nil 
+        --[[ elseif (not inst:NearPlayerBase() and not inst.SeenBase) and ThePlayer ~= nil
         or (inst.components.combat:TargetIs(ThePlayer) and not inst.KilledPlayer) then
         --Get back in there Dragonfly! You still have work to do.--]]
 
         if PlayerPosition ~= nil and not inst:NearPlayerBase() and not inst.SeenBase then
-            --print("Porting Dragonfly to Player!")
             local init_pos = inst:GetPosition()
             local player_pos = PlayerPosition:GetPosition()
             if player_pos then

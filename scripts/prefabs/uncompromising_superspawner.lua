@@ -109,38 +109,44 @@ local function UncompromisingSpawnGOOOOO(inst, data)
 				if v.diseased then
 					-- If we ever add back acid rain I guess we could have this, whatever
 				end
+				
 				if v.barren and prefab.components.pickable then
 					prefab.components.pickable:MakeBarren()
 				end
+				
 				if v.withered and prefab.components.witherable then
 					prefab.components.witherable:ForceWither()
 				end
+				
 				if v.ocean then
 					if not TheWorld.Map:IsOceanTileAtPoint(x + v.x * rotx, (v.y and v.y + y) or 0, z + v.z * rotz) then
 						prefab:Remove()
 					end
 				end
+				
 				if v.health and prefab.components.health then
 					prefab.components.health:SetPercent(v.health)
 				end
-				if v.contents and prefab.components.container then
-					print(v.contents) -- just testing!
-				end
+				
 				if v.burnt and prefab.components.burnable then
 					prefab.components.burnable.onburnt(prefab)
 				end
+				
 				if v.uses and prefab.components.finiteuses then
 					prefab.components.finiteuses:SetUses(v.uses)
 				end
+				
 				if v.fuel and prefab.components.fueled then
 					prefab.components.fueled:SetPercent(v.fuel)
 				end
+				
 				if v.scenario then
 					if prefab.components.scenariorunner == nil then
 						prefab:AddComponent("scenariorunner")
 					end
 					prefab.components.scenariorunner:SetScript(v.scenario)
 				end
+				
 				if v.rotation and (prefab.prefab == "fence" or prefab.prefab == "fence_gate") then
 					SetOrientation(prefab, (v.rotation*rotx)*rotz)
 				elseif v.rotation and v.rotation ~= 0 then
@@ -153,7 +159,6 @@ local function UncompromisingSpawnGOOOOO(inst, data)
                 -- TheNet:Announce(tostring(inst.spawninwater_tile))
                 if inst.spawninwater_tile then
                     -- TheNet:Announce("spawninwater true!")
-                    -- print(v.tile)
                     -- TheWorld.Map:SetTile(tile_x, tile_z, v.tile)
                 else
                     if TheWorld.Map:IsOceanTileAtPoint(x + v.x * rotx, (v.y and v.y + y) or 0, z + v.z * rotz) then

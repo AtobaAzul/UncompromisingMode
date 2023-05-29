@@ -65,13 +65,10 @@ local function LightStealTarget(inst)
 
 	for i, v in ipairs(ents) do
 		if v.components.burnable ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
-			--print("firefound")
 			return true
 		elseif v._light ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
-			--print("lightfound")
 			return true
 		elseif v._lastpulsesync ~= nil and v.components.timer and v.components.timer:GetTimeLeft("extinguish") then
-			--print("starfound")
 			return true
 		end
 	end
@@ -86,7 +83,6 @@ local function ConsumeLight(inst)
 	for i, v in ipairs(ents) do
 		if v.components.burnable ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
 			v.components.fueled:DoDelta(-12)
-			--print("fire")
 			
 			SpawnPrefab("fuelseeker_circle").Transform:SetPosition(v.Transform:GetWorldPosition())
 			
@@ -95,7 +91,6 @@ local function ConsumeLight(inst)
 			end
 		elseif v._light ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
 			v.components.fueled:DoDelta(-8)
-			--print("light")
 			
 			SpawnPrefab("fuelseeker_circle").Transform:SetPosition(v.Transform:GetWorldPosition())
 			
@@ -105,7 +100,6 @@ local function ConsumeLight(inst)
 		elseif v._lastpulsesync ~= nil and v.components.timer then
 			if v.components.timer:GetTimeLeft("extinguish") ~= nil then
 				v.components.timer:SetTimeLeft("extinguish", v.components.timer:GetTimeLeft("extinguish") - 25)
-				--print("star")
 				
 				SpawnPrefab("fuelseeker_circle").Transform:SetPosition(v.Transform:GetWorldPosition())
 				

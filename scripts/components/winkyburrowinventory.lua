@@ -1,6 +1,5 @@
 local WinkyBurrowInventory = Class(function(self, inst)
 	self.inst = inst
-	--print("skullchestcomponentadded")
 	self.inst:DoTaskInTime(0,function() self:SpawnTrunk() end)
 end)
 
@@ -41,7 +40,6 @@ function WinkyBurrowInventory:empty( target )
 	if t_cont and cont then		
 		for i,slot in pairs(cont.slots) do
 			local item = cont:RemoveItemBySlot(i)
-			--print(item.prefab)
 			t_cont:GiveItem(item, i, nil, nil, true)
 		end
 	end	
@@ -53,7 +51,6 @@ function WinkyBurrowInventory:fill( source )
 	if s_cont and cont then		
 		for i,slot in pairs(s_cont.slots) do
 			local item = s_cont:RemoveItemBySlot(i)
-			--print(item.prefab)
 			cont:GiveItem(item, i, nil, nil, true)
 		end
 	end	
@@ -61,7 +58,6 @@ end
 
 function WinkyBurrowInventory:SpawnTrunk()
 	if not self.trunk then
-		--print("SPAWN TRUNK!!!!!!!!!!!!!!!!!!!!!!!!")
 		self.trunk = SpawnPrefab("uncompromising_winkyburrow_master")
 	end
 	

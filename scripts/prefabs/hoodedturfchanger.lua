@@ -1,8 +1,7 @@
 local function TryTileChange(x,z)
-if TheWorld.Map:IsAboveGroundAtPoint(x, 0, z) then
-print("donee")
-TheWorld.Map:SetTile(x, z, GROUND.FOREST)
-end
+	if TheWorld.Map:IsAboveGroundAtPoint(x, 0, z) then
+		TheWorld.Map:SetTile(x, z, GROUND.FOREST)
+	end
 end
 
 local function Initialize(inst)

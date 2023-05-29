@@ -27,7 +27,6 @@ env.AddComponentPostInit("fishingnetvisualizer", function(self)
 		_OldBeginOpening(self)
 	
 		if self.inst:HasTag("uncompromising_fishingnetvisualizer") then
-			print("extra netty")
 			if self.inst.item ~= nil then
 				self.inst.item.netweight = 1
 			end
@@ -87,7 +86,6 @@ env.AddComponentPostInit("fishingnetvisualizer", function(self)
 	
 	function self:DropItem(item, last_dir_x, last_dir_z, idx)
 		if self.inst:HasTag("uncompromising_fishingnetvisualizer") then
-			print("droppy drop")
 			local thrower_x, thrower_y, thrower_z = self.thrower.Transform:GetWorldPosition()
 
 			local time_between_drops = 0.25

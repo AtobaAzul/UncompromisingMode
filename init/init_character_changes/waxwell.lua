@@ -59,10 +59,10 @@ local SHADOW_MIMIC_SPELL =
 	end,
 	execute = function(inst)
 		local inventory = ThePlayer.replica.inventory
+		
 		if inventory ~= nil then
 			inventory:CastSpellBookFromInv(inst)
 		end
-		--print("here?")
 	end,
 	label = STRINGS.SPELLS.SHADOW_MIMIC,
 	atlas = "images/the_men.xml", --didn't rename because I thought it was funny.

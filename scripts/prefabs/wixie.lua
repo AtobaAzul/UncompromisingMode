@@ -206,7 +206,6 @@ end
 local function OnInit(inst)
 	if inst.wixietask == nil then
 		inst.wixietask = inst:DoPeriodicTask(FRAMES, updateclaustrophobia)
-		print("register claustrophobia 'meter'")
 	end
 end
 

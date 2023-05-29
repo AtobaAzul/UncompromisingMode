@@ -60,7 +60,6 @@ local treasure_templates =
 				},
 				randomly_selected_loot =
 				{
-
 					{ yellowstaff = 0.33,  greenstaff = 0.33,  orangestaff = 0.33, }, --staffs and amulets instead of raw gems, lowered chance.
 					{ yellowamulet = 0.33, greenamulet = 0.33, orangeamulet = 0.33, },
 					{ ruinshat = 0.33,     armorruins = 0.33,  ruins_bat = 0.33 }, --chance for both thule suit and crown.
@@ -330,12 +329,32 @@ local treasure_templates =
 					{ plaguemask = 0.33,     widowshead = 0.33,       sunglasses = 0.33 },
 					{ viperjam = 0.33,       beefalowings = 0.33,     zaspberryparfait = 0.33 },
 					{ glass_scales = 0.33,   pied_piper_flute = 0.33, widowsgrasp = 0.33 },
-					{ hat_bagmask = 0.41, hat_blackcatmask = 0.41, hat_clownmask = 0.41, hat_orangecatmask = 0.41,
-						hat_devilmask = 0.41, hat_fiendmask = 0.41, hat_ghostmask = 0.41, hat_oozemask = 0.41,
-						hat_globmask = 0.41, hat_hockeymask = 0.41, hat_joyousmask = 0.41, hat_mermmask = 0.41,
-						hat_phantommask = 0.41, hat_pigmask = 0.41, hat_pumpgoremask = 0.41, hat_wathommask = 0.41,
-						hat_redskullmask = 0.41, hat_skullmask = 0.41, hat_spectremask = 0.41, hat_ratmask = 0.41,
-						hat_whitecatmask = 0.41, hat_technomask = 0.41, hat_mandrakemask = 0.41, hat_opossummask = 0.41 },
+					{
+						hat_bagmask = 0.41,
+						hat_blackcatmask = 0.41,
+						hat_clownmask = 0.41,
+						hat_orangecatmask = 0.41,
+						hat_devilmask = 0.41,
+						hat_fiendmask = 0.41,
+						hat_ghostmask = 0.41,
+						hat_oozemask = 0.41,
+						hat_globmask = 0.41,
+						hat_hockeymask = 0.41,
+						hat_joyousmask = 0.41,
+						hat_mermmask = 0.41,
+						hat_phantommask = 0.41,
+						hat_pigmask = 0.41,
+						hat_pumpgoremask = 0.41,
+						hat_wathommask = 0.41,
+						hat_redskullmask = 0.41,
+						hat_skullmask = 0.41,
+						hat_spectremask = 0.41,
+						hat_ratmask = 0.41,
+						hat_whitecatmask = 0.41,
+						hat_technomask = 0.41,
+						hat_mandrakemask = 0.41,
+						hat_opossummask = 0.41
+					},
 				},
 			}
 		}
@@ -357,7 +376,7 @@ local treasure_templates =
 					ancient_amulet_red = 1,
 					sludge = { 4, 8 },
 					redgem = { 1, 2 },
-					nitre = {1,2,3,4},
+					nitre = { 1, 2, 3, 4 },
 				},
 			},
 		}
@@ -374,10 +393,10 @@ local treasure_templates =
 
 				guaranteed_loot =
 				{
-					crab_hat_ice_blueprint = 1,
+					hat_crab_ice_blueprint = 1,
 					blueamulet = 1,
 					ice = { 4, 8 },
-					bluegem = {1, 2 },
+					bluegem = { 1, 2 },
 				},
 			},
 		}
@@ -397,7 +416,7 @@ local treasure_templates =
 					trident_blueprint = 1,
 					kelp = 2,
 					gnarwail_horn = { 1, 2 },
-					purplegem = {1, 2 },
+					purplegem = { 1, 2 },
 				},
 			},
 		}
@@ -414,10 +433,10 @@ local treasure_templates =
 
 				guaranteed_loot =
 				{
-					crab_hat_blueprint = 1,
+					hat_crab_blueprint = 1,
 					rocks = 4,
 					cutstone = { 1, 2 },
-					orangegem = {1, 2 },
+					orangegem = { 1, 2 },
 				},
 			},
 		}
@@ -437,7 +456,7 @@ local treasure_templates =
 					staff_starfall_blueprint = 1,
 					goldnugget = 4,
 					feather_canary = { 1, 2 },
-					yellowgem = {1, 2 },
+					yellowgem = { 1, 2 },
 				},
 			},
 		}
@@ -457,7 +476,7 @@ local treasure_templates =
 					armor_crab_regen_blueprint = 1,
 					cutreeds = 4,
 					rocks = { 1, 2, 3 },
-					greengem = {1, 2 },
+					greengem = { 1, 2 },
 				},
 			},
 		}
@@ -475,10 +494,10 @@ local treasure_templates =
 				guaranteed_loot =
 				{
 					moon_beacon_kit = 1,
-					moonrocknugget = { 1, 2,3,4},
+					moonrocknugget = { 1, 2, 3, 4 },
 					moonglass = { 0, 1, 2, 3, 4, 5 },
-					moonstorm_spark = {1,2,3}, -- Teehee :)
-					moonglass_charged = {1,2,3,4,5},
+					moonstorm_spark = { 1, 2, 3 }, -- Teehee :)
+					moonglass_charged = { 1, 2, 3, 4, 5 },
 				},
 			},
 		}
@@ -517,7 +536,6 @@ for prefabname, data in pairs(treasure_templates) do
 end
 
 local function GenerateTreasure(pt, overrideprefab, spawn_as_empty, postfn)
-
 	local prefab = overrideprefab or weighted_random_choice(weighted_treasure_prefabs)
 
 	local treasure = SpawnPrefab(prefab)

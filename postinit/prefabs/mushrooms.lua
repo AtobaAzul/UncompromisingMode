@@ -139,7 +139,7 @@ env.AddPrefabPostInit("spore_tall", function(inst)
 	end
 
 end)
-
+--[[
 local function testfortransformonload(inst)
 	return TheWorld.state.isfullmoon
 end
@@ -202,4 +202,4 @@ if TUNING.DSTU.MOON_TRANSFORMATIONS then
 		
 		inst:AddComponent("uncompromising_transformer")
 	end)
-end
+end]]

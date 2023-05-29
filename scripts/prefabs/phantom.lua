@@ -32,8 +32,6 @@ local function AuraTest(inst, target)
 end
 
 local function OnAttacked(inst, data)
---    print("onattack", data.attacker, data.damage, data.damageresolved)
-
     if data.attacker == nil then
         inst.components.combat:SetTarget(nil)
     elseif not data.attacker:HasTag("noauradamage") then

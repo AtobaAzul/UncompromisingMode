@@ -113,6 +113,7 @@ local shadow = inst.entity:AddDynamicShadow()
     inst:AddTag("swilson") 
 	inst:AddTag("nightmarecreature")
 	inst:AddTag("shadow")
+    inst:AddTag("shadow_aligned")
 	inst:AddTag("notraptrigger")
 
     ------------------

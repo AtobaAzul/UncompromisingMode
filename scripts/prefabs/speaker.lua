@@ -43,6 +43,7 @@ local function fn()
 
     inst:AddTag("ignorewalkableplatforms")
     inst:AddTag("seastack")
+    inst:AddTag("siren_speaker_spawner")
 
     inst.AnimState:SetBank("speaker_test")
     inst.AnimState:SetBuild("speaker_test")

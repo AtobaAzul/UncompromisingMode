@@ -16,7 +16,6 @@ local function findinfesttarget(inst,brain)
 	--if 	inst.IsNear(target,AGRO_DIST) and 
 	if not inst.infesting then
         inst.chasingtargettask = inst:DoPeriodicTask(0.2,function()
-                --print(inst:GetDistanceSqToInst(target) , AGRO_STOP_DIST*AGRO_STOP_DIST, inst.components.infester.infesting)
                 --if not target ~= nil then          
 
                    -- dumptable(brain.pendingtasks,1,1,1)

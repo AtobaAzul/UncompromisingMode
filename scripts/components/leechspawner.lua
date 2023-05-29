@@ -45,7 +45,6 @@ local _activeplayers = {}
 --[[ Private member functions ]]
 --------------------------------------------------------------------------
 local function FindLandNextToWater( playerpos, waterpos )
-    --print("FindWalkableOffset:")
     local ignore_walls = true 
     local radius = WATER_CHECK_RADIUS
     local ground = TheWorld
@@ -65,7 +64,6 @@ local function FindLandNextToWater( playerpos, waterpos )
     -- returns offset, check_angle, deflected
     local loc,landAngle,deflected = FindValidPositionByFan(0, radius, 8, test)
     if loc then
-        --print("Fan angle=",landAngle)
         return waterpos+loc,landAngle,deflected
     end
 end
@@ -87,7 +85,7 @@ local function FindSpawnLocationForPlayer(player)
             if loc ~= nil then
                 landPos = loc
                 tmpAng = ang
-                --print("true angle",ang,ang/DEGREES)
+				
                 return true
             end
         end
@@ -95,8 +93,8 @@ local function FindSpawnLocationForPlayer(player)
     end
 
     local cang = (math.random() * 360) * DEGREES
-    --print("cang:",cang)
     local loc, landAngle, deflected = FindValidPositionByFan(cang, radius, 7, test)
+	
     if loc ~= nil then
         return landPos, tmpAng, deflected
     end
@@ -108,8 +106,6 @@ local function SpawnLeech(inst,spawner,colonyNum,pos,angle)
 
     local leechswarm = SpawnPrefab(leechprefab)
     if leechswarm then
-        --print(TheCamera:GetHeading()," spawnPenguin at",pos,"angle:",angle)
-
         leechswarm.Transform:SetPosition(pos.x,pos.y,pos.z)
         leechswarm.Transform:SetRotation(angle)
         leechswarm.sg:GoToState("locomote")
@@ -128,8 +124,6 @@ local function SpawnSwarm(colonyNum,loc,check_angle)
         i = i + 1
         if map:IsAboveGroundAtPoint(spawnPos:Get()) then
             spawned = spawned + 1
-            --print(TheCamera:GetHeading()%360,"Spawn flock at:",spawnPos,(check_angle/DEGREES),"degrees"," c_off=",c_off)
-            --print(TheCamera:GetHeading()," spawnPenguin at",pos,"angle:",angle)
             self.inst:DoTaskInTime(GetRandomWithVariance(1,1), SpawnLeech, self, colonyNum, spawnPos,(check_angle/DEGREES))
         end
     end
@@ -138,7 +132,6 @@ end
 
 local function TryToSpawnSwarmForPlayer(playerdata)
     if _active then
-        --print("---------:", TheWorld.state.season, TheWorld.state.remainingdaysinseason)
 	    if not TheWorld.state.issummer then
             return
         end
@@ -152,24 +145,18 @@ local function TryToSpawnSwarmForPlayer(playerdata)
 		local playerPos = player:GetPosition()
 		for i,v in ipairs(_activeplayers) do
 			if v.lastSpawnLoc and distsq(v.lastSpawnLoc,playerPos) < MIN_SPAWN_DIST*MIN_SPAWN_DIST then
-				--print("too close to prev spawn")
 				return
 			end
 		end
 
         if (_lastSpawnTime and (GetTime() - _lastSpawnTime) < _spawnInterval) then
-            --print("too soon to spawn")
             return
         end
 
         -- Go find a spot on land close to water
         -- returns offset, check_angle, deflected
         local loc,check_angle,deflected = FindSpawnLocationForPlayer(player)
-        if loc then 
-            --print("trying to spawn: Angle is",check_angle/DEGREES)
-
-            
-
+        if loc then
             _lastSpawnTime = GetTime()
 			playerdata.lastSpawnLoc = loc
 			local colony = nil

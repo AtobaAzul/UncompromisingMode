@@ -326,7 +326,6 @@ local function GetReturnPos(inst)
 end
 
 local function DoReturn(inst)
-    --print("DoReturn", inst)
     if inst.components.homeseeker ~= nil and inst.components.homeseeker:HasHome() then
         if inst:HasTag("pet_hound") then
             if inst.components.homeseeker.home:IsAsleep() and not inst:IsNear(inst.components.homeseeker.home, HOME_TELEPORT_DIST) then
@@ -339,14 +338,12 @@ local function DoReturn(inst)
 end
 
 local function OnEntitySleep(inst)
-    --print("OnEntitySleep", inst)
     if not TheWorld.state.isday then
         DoReturn(inst)
     end
 end
 
 local function OnStopDay(inst)
-    --print("OnStopDay", inst)
     if inst:IsAsleep() then
         DoReturn(inst)
     end
@@ -360,11 +357,9 @@ end
 
 local function OnSave(inst, data)
     data.ispet = inst:HasTag("pet_hound") or nil
-    --print("OnSave", inst, data.ispet)
 end
 
 local function OnLoad(inst, data)
-    --print("OnLoad", inst, data.ispet)
     if data ~= nil and data.ispet then
         inst:AddTag("pet_hound")
         if inst.sg ~= nil then

@@ -127,7 +127,6 @@ AddComponentPostInit("dynamicmusic", function(self)
     end
 
     local function StartWobyMusic(player)
-		print("startwobymusic")
         _StartBusyTheme(player, BUSYTHEMES.PINETREE_PIONEER, "UMMusic/music/follow_me_woby", 2)
     end
 

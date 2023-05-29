@@ -123,7 +123,6 @@ local function shouldjumpattack(inst)
                     return true
                 end
             else
-                print("JUMP TARGET WASN'T THERE ANYMORE?",target.prefab)
                 inst.components.combat.target = nil
             end
         end

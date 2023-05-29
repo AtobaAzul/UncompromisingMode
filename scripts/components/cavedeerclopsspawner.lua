@@ -48,8 +48,7 @@ local _activeplayers = {}
 --------------------------------------------------------------------------
 
 local function AllowedToAttack()
-	--print("Deerclopsspawner allowed to attack?", TheWorld.state.cycles, _attackduringoffseason, TheWorld.state.season)
-    return  #_activeplayers > 0 and
+	return  #_activeplayers > 0 and
             TheWorld.state.cycles > TUNING.NO_BOSS_TIME + 1 and  
                 (_attackduringoffseason or
                 TheWorld.state.season == "winter")
@@ -89,11 +88,10 @@ local function PickAttackTarget()
 		local x,y,z = player.Transform:GetWorldPosition()
 		local ents = TheSim:FindEntities(x,y,z, STRUCTURE_DIST, {"structure"}) 
 
-		--print("Deerclopsspawner loop", #ents, loopCount, player)
 		numStructures = #ents
 		loopCount = loopCount + 1
 	end
-	--print("Deerclops picked target", player)
+	
 	_targetplayer = player
 end
 
@@ -129,7 +127,6 @@ local function TryStartAttacks(killed)
             -- Remove randomization in case that shifts it too far
             --local attackrandom = 0.1*attackdelay
             _timetoattack = GetRandomWithVariance(attackdelay, 0)
-            --print("got time to attack", _timetoattack, attackdelay, attackrandom)
         end
 
         self.inst:StartUpdatingComponent(self)
@@ -260,7 +257,6 @@ local function OnStoreHassler(src, hassler)
 end
 
 local function OnHasslerKilled(src, hassler)
-	--rint("he die")
 	_activehassler = nil
 	TryStartAttacks(true)
 end
@@ -310,7 +306,6 @@ function self:DoWarningSound(_targetplayer)
 end
 
 function self:OnUpdate(dt)
-	--print("in OnUpdate", _timetoattack, _targetplayer, _activehassler)
     if not _timetoattack or _activehassler ~= nil then
         ResetAttacks()
         return

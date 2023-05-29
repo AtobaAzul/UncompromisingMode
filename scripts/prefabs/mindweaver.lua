@@ -134,6 +134,7 @@ local function fn(Sim)
     inst:AddTag("swilson") 
 	inst:AddTag("nightmarecreature")
 	inst:AddTag("shadow")
+	inst:AddTag("shadow_aligned")
 	inst:AddTag("notraptrigger")
 
     inst.AnimState:SetBank("mindweaver")

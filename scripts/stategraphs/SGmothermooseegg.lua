@@ -62,7 +62,6 @@ local states =
 
 		onenter = function(inst)
 			local function doeffect(inst)
-				--print("spawning effect")
 				local fx = SpawnPrefab("moose_nest_fx_idle")
 				local pos = inst:GetPosition()
 				fx.Transform:SetPosition(pos.x, 0.1, pos.z)

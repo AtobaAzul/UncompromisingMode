@@ -77,11 +77,9 @@ end
 
 
 local function OnIsFullmoon(inst, isfullmoon)
-	if not isfullmoon then
-        	--print("no")
-    	else
-        	inst.components.timer:StartTimer("revive", TUNING.MUTATEDHOUND_SPAWN_DELAY + math.random())
-    	end
+	if isfullmoon then
+        inst.components.timer:StartTimer("revive", TUNING.MUTATEDHOUND_SPAWN_DELAY + math.random())
+    end
 end  
 
 local function OnInit(inst)     

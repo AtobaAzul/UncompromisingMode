@@ -103,6 +103,7 @@ local function organfn()
 	
 	inst:AddTag("nightmarecreature")
 	inst:AddTag("shadow")
+	inst:AddTag("shadow_aligned")
 	inst:AddTag("minotaur_organ")
 	inst:AddTag("monster") --We want it to be easy to hit this thing.
 	

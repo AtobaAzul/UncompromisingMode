@@ -2037,7 +2037,7 @@ return{
         {
 			GENERIC = "Hm, something just isn't right. What's missing?",
 			FUNNY = "That looks too ridiculous to have existed!",
-			COMPLETE = "That look good. Silly, but good.",
+			COMPLETE = "That's what it's supposed to look like? How dumb!",
         },
         STALKER = "You're nothing, you ol' bag of bones!",
         STALKER_ATRIUM = "No one tells ME what to do! Let's take this guy down!",
@@ -4602,7 +4602,7 @@ return{
         BOAT_ROTATOR_KIT = "Rudder. Rud. Er. Ruddddderrrr.",
         BOAT_BUMPER_KELP = "Bumper boats! Whoo!",
         BOAT_BUMPER_KELP_KIT = "Let's get this set up so we can smash into people!",
-        BOAT_BUMPER_SHELL = "Bumper boats! Whoo!",
+        BOAT_BUMPER_SHELL = "Bumper boats! Whoo!", -- :)
         BOAT_BUMPER_SHELL_KIT = "Let's get this set up so we can smash into people!",
         BOAT_CANNON = {
             GENERIC = "I wish I could carry this everywhere I go!",
@@ -4754,6 +4754,31 @@ return{
 		},
 		ARMORDREADSTONE = "It's just a bunch of rocks.",
 		DREADSTONEHAT = "I feel like I'm in the stone age...",
+
+        -- Rifts 1
+        LUNARRIFT_PORTAL = "Don't tell me more losers are going to arrive...",
+        LUNARRIFT_CRYSTAL = "It may look like candy, but...",
+
+        LUNARTHRALL_PLANT = "You're not... STARING at me, are you?",
+        LUNARTHRALL_PLANT_VINE_END = "Hit me, and you'll regret it!",
+
+		LUNAR_GRAZER = "You're so boring, it's putting me to sleep!",
+
+        PUREBRILLIANCE = "Turn that light off! You're going to blind me!",
+        LUNARPLANT_HUSK = "Can I eat it? No? Oh well.",
+
+		LUNAR_FORGE = "Let's make something, Woby!",
+		LUNAR_FORGE_KIT = "Woby and I can have that set up in a jiffy!",
+
+		ARMOR_LUNARPLANT = "It's not my style.",
+		LUNARPLANTHAT = "A knight, with no steed in sight...",
+		BOMB_LUNARPLANT = "Bombs? You want em'?", -- :)
+		STAFF_LUNARPLANT = "Hey, that's my idea!",
+		SWORD_LUNARPLANT = "I'm not really a *sword* person.",
+		PICKAXE_LUNARPLANT = "For percise work, or messy destruction!",
+		SHOVEL_LUNARPLANT = "Your power over dirt is mine to command!",
+
+        PUNCHINGBAG = "I love a target that can't fight back!",
     },
 
     DESCRIBE_GENERIC = "That sure is... something!",

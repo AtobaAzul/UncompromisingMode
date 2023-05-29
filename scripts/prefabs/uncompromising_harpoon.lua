@@ -340,25 +340,20 @@ local function Vac(inst)
 			end
 			
 			if inst.tension >= inst.tensionmax then
-						print("damage")
 				inst.damage = inst.damage + (1 * tensionmult)
 				
 				if inst._soundcd == nil then
 					if inst.damage < (inst.damagemax / 4) then
 						inst._soundcd = inst:DoTaskInTime(.8 + math.random(), CooldownSound)
-						print("low")
 						inst.SoundEmitter:PlaySound("UCSounds/harpoon/"..inst.ropetype.."stretch_low")
 					elseif inst.damage < (inst.damagemax / 3) then
 						inst._soundcd = inst:DoTaskInTime(.6 + math.random(), CooldownSound)
-						print("mid")
 						inst.SoundEmitter:PlaySound("UCSounds/harpoon/"..inst.ropetype.."stretch_mid")
 					elseif inst.damage < (inst.damagemax / 2) then
 						inst._soundcd = inst:DoTaskInTime(.4 + math.random(), CooldownSound)
-						print("high")
 						inst.SoundEmitter:PlaySound("UCSounds/harpoon/"..inst.ropetype.."stretch_high")
 					elseif inst.damage < inst.damagemax then
 						inst._soundcd = inst:DoTaskInTime(.2 + math.random(), CooldownSound)
-						print("veryhigh")
 						inst.SoundEmitter:PlaySound("UCSounds/harpoon/"..inst.ropetype.."stretch_veryhigh")
 					end
 				
@@ -389,8 +384,7 @@ local function Vac(inst)
 	
 	if inst ~= nil and inst:IsValid() and inst.target ~= nil and inst.target:IsValid() and inst.ropes ~= nil and inst:GetDistanceSqToInst(inst.target) ~= nil then
 		local scale = (inst:GetDistanceSqToInst(inst.target) / 3)
-		print(scale)
-		print(inst:GetDistanceSqToInst(inst.target))
+		
 		for i2, ropes in ipairs(inst.ropes) do
 			local p2x, p2y, p2z = inst.target.Transform:GetWorldPosition()
 			local rad2 = math.rad(inst:GetAngleToPoint(p2x, p2y, p2z))

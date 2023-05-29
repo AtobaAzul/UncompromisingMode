@@ -16,8 +16,8 @@ STRINGS.CHARACTER_QUOTES.wixie = "\"It wasn't me!\""
 STRINGS.SKIN_NAMES.wixie_none = "Wixie"
 
 STRINGS.SKIN_QUOTES.wixie_none = "\"It wasn't me!\""
-STRINGS.SKIN_DESCRIPTIONS.wixie_none = "A troubled youth that gets up to trouble."
-
+STRINGS.SKIN_DESCRIPTIONS.wixie_none =
+    "A troubled youth that gets up to trouble."
 
 if GetModConfigData("wixie_walter") then
     STRINGS.CHARACTER_DESCRIPTIONS.walter =

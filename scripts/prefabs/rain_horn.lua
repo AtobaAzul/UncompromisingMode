@@ -42,7 +42,12 @@ local function forcerain(inst, target, position)
     if owner == nil then
         return
     end
-	TheWorld:PushEvent("ms_forceprecipitation", true)
+	-- TheWorld:PushEvent("ms_forceprecipitation", true)
+	if TheWorld.state.precipitation ~= "none" then
+        TheWorld:PushEvent("ms_forceprecipitation", false)
+        else
+		TheWorld:PushEvent("ms_forceprecipitation", true)
+    end
     inst.components.finiteuses:Use(1)
     local x, y, z = owner.Transform:GetWorldPosition()
     for _, v in pairs(TheSim:FindEntities(x, y, z, TUNING.GNARWAIL_HORN_FARM_PLANT_INTERACT_RANGE, PLANT_TAGS)) do

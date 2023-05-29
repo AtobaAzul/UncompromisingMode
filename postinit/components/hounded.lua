@@ -164,14 +164,8 @@ if not GLOBAL:TestForIA() then
             if self.varggraceperiod ~= nil and
                 GLOBAL.TheWorld.state.cycles > (self.varggraceperiod + TUNING.DSTU.VARGWAVES_DELAY_PERIOD) then
                 self.spawn_boss = true
-                print("cd boss")
 
             end
-
-            print(GLOBAL.TheWorld.state.cycles)
-            print(self.varggraceperiod)
-            print(TUNING.DSTU.VARGWAVES_DELAY_PERIOD)
-            print(self.varggraceperiod ~= nil and self.varggraceperiod + TUNING.DSTU.VARGWAVES_DELAY_PERIOD or "nil")
 
             --replaces the first hound in a wave with a random boss hound
             if pt and self.spawn_boss and magmaspawn_pt ~= nil and TUNING.DSTU.VARGWAVES then
@@ -187,9 +181,7 @@ if not GLOBAL:TestForIA() then
             --spawn a random seasonal hound
             if pt and chance < self.seasonal_chance and self.spawnamount <= SpawnLimit and
                 GLOBAL.TheWorld.state.cycles >= 22 then
-                --print(CalcSpawnLimit)
                 self.spawnamount = self.spawnamount + 1
-                --print(self.spawnamount)
 
                 prefab_list = self.seasonal_prefabs[season]
                 prefab = #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or nil
@@ -435,9 +427,7 @@ if not GLOBAL:TestForIA() then
             end
             --spawn a random seasonal hound
             if pt and chance < self.seasonal_chance and self.spawnamount <= SpawnLimit and GLOBAL.TheWorld.state.cycles >= 22 then
-                --print(CalcSpawnLimit)
                 self.spawnamount = self.spawnamount + 1
-                --print(self.spawnamount)
                 
                 prefab_list = self.seasonal_prefabs[season]
                 prefab = #prefab_list > 0 and prefab_list[math.random(#prefab_list)] or nil

@@ -36,7 +36,6 @@ end
 local function PhysTest(inst)
     local ent = FindEntity(inst, inst.hitdist, nil, { "_combat" }, { "INLIMBO", "dead", "playerghost" })
     if ent and not ent:HasTag("bee") and ent:IsValid() then
-        print(ent)
         onhit(inst, inst, ent)
     end
 end

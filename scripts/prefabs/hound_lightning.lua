@@ -1,21 +1,19 @@
 local assets =
 {
-    Asset("ANIM", "anim/antlion_sinkhole.zip")
+	Asset("ANIM", "anim/antlion_sinkhole.zip")
 }
 
 local function Sparks(inst)
-
 	local x, y, z = inst.Transform:GetWorldPosition()
-	
+
 	local x1 = x + math.random(-2, 2)
 	local z1 = z + math.random(-2, 2)
-	
+
 	if math.random() >= 0.6 then
 		SpawnPrefab("electricchargedfx").Transform:SetPosition(x1, 0, z1)
 	end
-	
-    SpawnPrefab("sparks").Transform:SetPosition(x1, 0 + 0.25 * math.random(), z1)
 
+	SpawnPrefab("sparks").Transform:SetPosition(x1, 0 + 0.25 * math.random(), z1)
 end
 
 local function Zap(inst)
@@ -24,16 +22,16 @@ local function Zap(inst)
 	end
 
 	local x, y, z = inst.Transform:GetWorldPosition()
-    local projectile = SpawnPrefab("lightning")
-    projectile.Transform:SetPosition(x, y + 2, z)
-	
+	local projectile = SpawnPrefab("lightning")
+	projectile.Transform:SetPosition(x, y + 2, z)
+
 	SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
 	SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
 	SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
 	SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
 	SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
-    local ents = TheSim:FindEntities(x, y, z, 3.5, { "_health" }, inst.NoTags)
-	
+	local ents = TheSim:FindEntities(x, y, z, 3.5, { "_health" }, inst.NoTags)
+
 	for i, v in ipairs(ents) do
 		if v ~= nil and v.components.health ~= nil and not v.components.health:IsDead() and v.components.combat ~= nil then
 			if v:HasTag("player") and (v.components.inventory ~= nil and not v.components.inventory:IsInsulated()) then
@@ -46,7 +44,7 @@ local function Zap(inst)
 				else
 					if not v:HasTag("automaton") then
 						v.components.health:DoDelta(-10, nil, inst.prefab, nil, inst)
-							
+
 						if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") then
 							v.sg:GoToState("hit")
 						end
@@ -59,7 +57,7 @@ local function Zap(inst)
 			elseif v.components.combat ~= nil then
 				if not v:HasTag("electricdamageimmune") then
 					v.components.health:DoDelta(-10, nil, inst.prefab, nil, inst)
-				else 
+				else
 					v.components.health:DoDelta(-5, nil, inst.prefab, nil, inst)
 				end
 				
@@ -69,39 +67,39 @@ local function Zap(inst)
 			end
 		end
 	end
-	
+
 	inst:DoTaskInTime(0, function(inst) inst:Remove() end)
 end
 
 -------------------------------------------------------------------------------
 
 local function fn()
-    local inst = CreateEntity()
+	local inst = CreateEntity()
 
-    inst.entity:AddTransform()
-    inst.entity:AddSoundEmitter()
-    inst.entity:AddNetwork()
-	
+	inst.entity:AddTransform()
+	inst.entity:AddSoundEmitter()
+	inst.entity:AddNetwork()
+
 	inst:AddTag("hound_lightning")
 	inst:AddTag("sharp")
 
-    inst.entity:SetPristine()
+	inst.entity:SetPristine()
 
-    if not TheWorld.ismastersim then
-        return inst
-    end
-	
+	if not TheWorld.ismastersim then
+		return inst
+	end
+
 	inst.NoTags = { "INLIMBO", "shadow", "structure", "wall" }
-	
+
 	Sparks(inst)
-	
+
 	inst.task = inst:DoPeriodicTask(0.05, Sparks)
-	
-    inst.SoundEmitter:PlaySound("dontstarve/rain/thunder_far")
-	
+
+	inst.SoundEmitter:PlaySound("dontstarve/rain/thunder_far")
+
 	inst:DoTaskInTime(1, Zap)
 
-    return inst
+	return inst
 end
 
 return Prefab("hound_lightning", fn, assets)

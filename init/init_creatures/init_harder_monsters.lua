@@ -312,13 +312,6 @@ AddPrefabPostInit("pigking", function (inst)
 
 
     function ontradeforgold(inst, item, giver)
-        print("ongold")
-        print(inst)
-        if inst.launchitem ~= nil then
-            print(inst.launchitem)
-        else
-            print("else")
-        end
         --launchitem = inst.launchitem
 
         GLOBAL.AwardPlayerAchievement("pigking_trader", giver)
@@ -377,12 +370,8 @@ AddPrefabPostInit("pigking", function (inst)
     function OnGetItemFromPlayer(inst, giver, item)
         local is_event_item = GLOBAL.IsSpecialEventActive(GLOBAL.SPECIAL_EVENTS.HALLOWED_NIGHTS) and item.components.tradable.halloweencandyvalue and item.components.tradable.halloweencandyvalue > 0
 
-        print(ok)
-        print(item.goldvalue)
-
         if item.components.tradable.goldvalue > 0 or is_event_item then
             inst.sg:GoToState("cointoss")
-            print(item.goldvalue)
             inst:DoTaskInTime(2 / 3, ontradeforgold, item, giver)
         elseif item.prefab == "pig_token" then
             StartMinigame(inst)

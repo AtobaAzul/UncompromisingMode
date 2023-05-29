@@ -121,16 +121,12 @@ local function DoRipple(inst)
 end
 
 local function Trapped(inst)
-	--print("bumpk")
-
 	local x, y, z = inst.Transform:GetWorldPosition()
 
 	local ents = TheSim:FindEntities(x, y, z, 2, { "trap" })
 
 	for i, v in ipairs(ents) do
-		--print("bumpkin")
 		v:DoTaskInTime(5, function(v)
-			--print("frumpkin")
 			v:PushEvent("harvesttrap") --.components.trap:Disarm()
 		end)
 	end

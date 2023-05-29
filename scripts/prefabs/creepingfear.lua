@@ -236,9 +236,7 @@ local function OnPreLoad(inst, data)
 end
 
 local function ConsumeShadow(inst, other, damage)
-	print("eaty")
 	if other:HasTag("shadowcreature") then
-		print("shadow")
 		local x, y, z = other.Transform:GetWorldPosition()
 		local shadowdespawnfx = SpawnPrefab("shadow_despawn")
 		shadowdespawnfx.Transform:SetPosition(x, y, z)
@@ -274,6 +272,7 @@ local function fn()
     inst:AddTag("hostile")
     inst:AddTag("shadow")
 	inst:AddTag("creepingfear")
+    inst:AddTag("shadow_aligned")
     --inst:AddTag("epic")
     inst:AddTag("notraptrigger")
 

@@ -78,10 +78,7 @@ local function UpdateLight(inst)
 				TheWorld.Map:FindVisualNodeAtPoint(x, y, z, "sandstorm") and 2 or 0
 		end
 
-		local snowstorm = (
-			(TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")) and 2 or 0
-
-		print(velocity)
+		local snowstorm = ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")) and 2 or 0
 
 		local finalnums = velocity + sandstorm + snowstorm
 
@@ -135,7 +132,7 @@ local function UpdateLight(inst)
 		end
 
 		local lerpval = Lerp(.6, .9, inst.lightlevel)
-		print(lerpval)
+		
 		if lerpval > .7 then
 			lerpval = .7
 		end
@@ -168,8 +165,6 @@ local function UpdateLight(inst)
 				inst._light = nil
 			end
 		end
-
-		print(inst.powerlevel)
 
 		if inst.animqueueclear == nil then
 			inst.AnimState:SetDeltaTimeMultiplier(finalnums)

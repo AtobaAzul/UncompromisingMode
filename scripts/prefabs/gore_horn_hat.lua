@@ -59,7 +59,6 @@ local function speedcheck(inst)
 
 	if inst.binarytoggle ~= nil and inst.binarytoggle then
 		inst.binarytoggle = false
-		print("speedcheck")
 
 		if inst.facing_angle ~= nil then
 			inst.facing_angle_old = inst.facing_angle

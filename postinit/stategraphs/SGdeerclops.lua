@@ -379,7 +379,6 @@ env.AddStategraphPostInit("deerclops", function(inst)
     {
         EventHandler("doattack", function(inst, data)
             if inst.upgrade == "enrage_mutation" then
-                print("enragebank")
                 EnrageAttackBank(inst, data)
             end
             if inst.upgrade == "strength_mutation" then
@@ -1102,13 +1101,13 @@ env.AddStategraphPostInit("deerclops", function(inst)
                 TimeEvent(29 * FRAMES, function(inst) SpawnIceFx(inst, inst.components.combat.target) end),
                 TimeEvent(35 * FRAMES, function(inst)
                     inst.SoundEmitter:PlaySound("dontstarve/creatures/deerclops/swipe")
-                    print("thiscoderan")
-                    print(inst.upgrade)
+					
                     if inst.upgrade == "ice_mutation" then
-                        print("triedtoattack")
                         SpawnAttackAuras(inst)
                     end
+					
                     inst.components.combat:DoAttack(inst.sg.statemem.target)
+					
                     if inst.bufferedaction ~= nil and inst.bufferedaction.action == ACTIONS.HAMMER then
                         local target = inst.bufferedaction.target
                         inst:ClearBufferedAction()
@@ -1120,6 +1119,7 @@ env.AddStategraphPostInit("deerclops", function(inst)
                             target.components.workable:Destroy(inst)
                         end
                     end
+					
                     ShakeAllCameras(CAMERASHAKE.FULL, .5, .025, 1.25, inst, SHAKE_DIST)
                 end),
                 TimeEvent(36 * FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),

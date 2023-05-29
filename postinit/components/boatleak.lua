@@ -17,7 +17,6 @@ env.AddComponentPostInit("boatleak", function(self)
 
     local _Repair = self.Repair
     function self:Repair(doer, patch_item)
-        --print(doer, patch_item)
         if patch_item.components.finiteuses ~= nil then
             patch_item.components.finiteuses:Use()
 

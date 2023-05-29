@@ -142,7 +142,6 @@ local states =
 					LaunchAt(boatspawn, inst, inst.boatreciever, 5, 1, .5)
 					
 					if inst.rechargerate ~= nil then
-						print("charge time")
 						local rechargerate = 116 - (100 * inst.rechargerate)
 						boatspawn.components.rechargeable:Discharge(rechargerate)
 						boatspawn.components.deployable.restrictedtag = "literallynoone"
@@ -157,7 +156,6 @@ local states =
 					boatspawn.Transform:SetPosition(inst.Transform:GetWorldPosition())
 					
 					if inst.rechargerate ~= nil then
-						print("charge time")
 						local rechargerate = 116 - (100 * inst.rechargerate)
 						boatspawn.components.rechargeable:Discharge(rechargerate)
 						boatspawn.components.deployable.restrictedtag = "literallynoone"

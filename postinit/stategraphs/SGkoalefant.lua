@@ -181,8 +181,8 @@ local states = {
                     local MAXDIST = 5 
 
                     local distance = inst:GetDistanceSqToInst(inst ~= nil and inst.components.combat.target ~= nil and inst.components.combat.target )
-                    --print(distance)
-                    if distance ~= nil and distance > MAXDIST or distance == nil then
+                    
+					if distance ~= nil and distance > MAXDIST or distance == nil then
                         inst.sg:GoToState("idle") 
 						if inst:HasTag("chargespeed") then
 						inst.components.locomotor.runspeed = 7
@@ -229,12 +229,12 @@ local states = {
             tags = {"busy", "runningattack","charging", "nointerrupt"},
             
             onenter = function(inst)
-				--print("chargeattack")
                 --inst.SoundEmitter:KillSound("charge")
                 inst.components.combat:StartAttack()
                 inst.components.locomotor:StopMoving()
 		        --inst.SoundEmitter:PlaySound(inst.effortsound)
                 inst.AnimState:PlayAnimation("atk")
+				
 				if inst:HasTag("chargespeed") then
 					inst.components.locomotor.runspeed = 7
 					inst:RemoveTag("chargespeed")

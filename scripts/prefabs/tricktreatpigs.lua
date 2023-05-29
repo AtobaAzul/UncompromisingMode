@@ -46,7 +46,6 @@ local function IsNonWerePig(dude)
 end
 
 local function OnAttacked(inst, data)
-    --print(inst, "OnAttacked")
     local attacker = data.attacker
     inst:ClearBufferedAction()
 

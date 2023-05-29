@@ -57,12 +57,9 @@ startregen = function(inst, regentime)
 	else
 		inst.AnimState:PlayAnimation(anims[inst.components.workable.workleft+1])
 	end
-
-	-- print('startregen', inst.components.workable.workleft, regentime, anims[inst.components.workable.workleft])
 end
 
 local function workcallback(inst, worker, workleft)
-	-- print('trying to spawn sand', inst, worker, workleft)
 
 	if workleft < 0 then
 		-- the devtool probably did this, spit out 2
@@ -113,7 +110,6 @@ local function onsave(inst, data)
 			data.time = math.floor(inst.targettime - time)
 		end
 		data.workleft = inst.components.workable.workleft
-		-- print('sandhill onsave', data.workleft)
 	end
 end
 local function onload(inst, data)
@@ -126,7 +122,7 @@ local function onload(inst, data)
 		end
 
 	end
-	-- print('sandhill onload', inst.components.workable.workleft)
+	
 	if data and data.time then
 		startregen(inst, data.time)
 	end

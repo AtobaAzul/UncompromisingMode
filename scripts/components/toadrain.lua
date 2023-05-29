@@ -68,7 +68,6 @@ local function SpawnFrogForPlayer(player, reschedule)
 		if GetTableSize(_frogs) < TUNING.FROG_RAIN_MAX and #ents < _frogcap then
 			local spawn_point = GetSpawnPoint(pt)
 			if spawn_point ~= nil then
-				-- print("Spawning a frog for player ",player)
 				local toad = SpawnToad(spawn_point)
 				self:StartTracking(toad)
 			end

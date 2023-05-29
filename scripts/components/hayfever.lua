@@ -58,13 +58,10 @@ function Hayfever:CanSneezeQueen()
 		cancan = false
 	end
 	
-	--print(queenkilled)
-	
     return cancan
 end
 
 function Hayfever:OnUpdate(dt)
-	--print(self.nextsneeze)
     if self:CanSneeze() and self:CanSneezeQueen() then
         if self.nextsneeze <= 0 then
             if not self.inst.wantstosneeze then
@@ -149,7 +146,6 @@ function Hayfever:Enable()
         --end
 
         if not self.enabled and not self.inst.components.health:IsDead() and self.inst.prefab ~= "wes" then --and (TheWorld:HasTag("hayfever") or TheWorld.net:HasTag("hayfever"))then
-            --print("HAYVEVER STARTED")    
             self.inst.components.talker:Say(GetString(self.inst.prefab, "ANNOUNCE_HAYFEVER"))
         end
         self.enabled = true
@@ -179,40 +175,6 @@ function Hayfever:DoSneezeEffects()
 	if not TheWorld.state.isspring and self.inst.components.hayfever ~= nil then
 		self.inst.components.hayfever:Disable()
 	end
---[[
-    -- cause player to drop stuff here.
-    local itemstodrop = 0 
-    if math.random() < 0.6 then
-        itemstodrop = itemstodrop +1
-    end
-    if math.random() < 0.1 then
-        itemstodrop = itemstodrop +1
-    end    
-
-    if itemstodrop > 0 then
-        local findItems = self.inst.components.inventory:FindItems(
-                        function(item)
-                            return not item:HasTag("nosteal")
-                        end) 
-
-        for i=1,itemstodrop do            
-            for i=1, itemstodrop do
-                if #findItems > 0 then
-                    local itemnum = math.random(1,#findItems)
-                    local item = findItems[itemnum]
-
-                    table.remove(findItems,itemnum)
-
-                    if item then
-                        local direction = Vector3(math.random(1)-2,0,math.random(1)-2)        
-                        --print("DROPPING",item.prefab)                
-                        self.inst.components.inventory:DropItem(item, false, direction:GetNormalized())
-                    end                   
-
-                end                      
-            end
-        end
-    end]]
 end 
 
 return Hayfever

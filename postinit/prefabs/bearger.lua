@@ -22,8 +22,6 @@ local function EquipWeapon(inst)
 end
 
 local function TeleportToFood(inst)
-	print("find food")
-
     local flower = GetClosestInstWithTag(inst.components.eater:GetEdibleTags(), inst, 600)
     if flower and flower:IsValid() --[[and inst.findnewfood]] then
 		local init_pos = inst:GetPosition()
@@ -147,7 +145,6 @@ local function Sinkholes(inst)
 				if targetfocus ~= nil then
 					--local px, py, pz = targetfocus.Transform:GetWorldPosition()
 					local rad = math.rad(inst:GetAngleToPoint(px, py, pz))
-					print(rad)
 					local velx = math.cos(rad) * 4.5
 					local velz = -math.sin(rad) * 4.5
 				

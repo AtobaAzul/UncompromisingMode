@@ -22,10 +22,8 @@ local function GetNearestLightPos(inst)
 
 	for i, v in ipairs(ents) do
 		if v.components.burnable ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
-			--print("firefound")
 			return Vector3(v.Transform:GetWorldPosition())
 		elseif v._light ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
-			--print("lightfound")
 			return Vector3(v.Transform:GetWorldPosition())
 		end
 	end
@@ -39,10 +37,8 @@ local function GetNearestLightPos_Stop(inst)
 
 	for i, v in ipairs(ents) do
 		if v.components.burnable ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
-			--print("firefound")
 			return Vector3(v.Transform:GetWorldPosition())
 		elseif v._light ~= nil and v.components.fueled ~= nil and v.components.fueled.consuming then
-			--print("lightfound")
 			return Vector3(v.Transform:GetWorldPosition())
 		end
 	end

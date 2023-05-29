@@ -96,7 +96,6 @@ local function OnHitOther(inst, data)
 					end)
 					
                     if grogginess.knockoutduration == 0 then
-                        print("getting attacked!")
                         --inst.sg.statemem.target.components.combat:GetAttacked(inst, 0)
                     else
                         -- TODO: turn on special hud overlay while asleep in enlightened dream land
@@ -110,7 +109,6 @@ local function OnHitOther(inst, data)
 						i._scorpion_debuff_immunitytask = nil 
 					end)
 
-                    print("getting attacked!")
                     --inst.sg.statemem.target.components.combat:GetAttacked(inst, 20)
                 end
             end

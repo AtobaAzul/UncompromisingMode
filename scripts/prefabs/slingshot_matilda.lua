@@ -194,7 +194,6 @@ local function Proxy_Shoot(inst, owner, fixedpowerlevel)
 					
 					for i = 1, 3 do
 						inst:DoTaskInTime(0.03 * i, function()
-							print("d36 ammo")
 							local caster = inst.components.inventoryitem.owner
 							local spittarget = SpawnPrefab("slingshot_target")
 							

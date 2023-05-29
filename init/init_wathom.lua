@@ -150,7 +150,6 @@ AddStategraphPostInit("wilson", function(inst)
 	local _RunOnEnter = inst.states["run_start"].onenter
 
 	local function NewOnEnter(inst)
-		--print(inst.components.adrenaline:GetPercent())
 		if inst:HasTag("wathom") and inst:HasTag("wathomrun") and inst.components.rider ~= nil and not inst.components.rider:IsRiding() or inst:HasTag("wathom") and inst:HasTag("wathomrun")then
 			inst.sg.mem.footsteps = 0
 			inst.sg:GoToState("run_wathom")

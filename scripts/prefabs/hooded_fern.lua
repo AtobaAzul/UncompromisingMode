@@ -80,6 +80,7 @@ local function grass(name, stage)
         inst.AnimState:PlayAnimation("idle", true)
 
         inst:AddTag("plant")
+        inst:AddTag("lunarplant_target")
         inst:AddTag("renewable")
 		inst:AddTag("walrus_trap_spot")
         --witherable (from witherable component) added to pristine state for optimization

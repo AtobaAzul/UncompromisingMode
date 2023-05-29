@@ -25,7 +25,6 @@ local function OnAttached(inst, target, followsymbol, followoffset, data)
 	end
 	
 	inst:ListenForEvent("wixiebite", function(target, data)
-		print("chomp")
 		if not inst.spawnfactor then
 			inst.AnimState:PlayAnimation("bite")
 			inst.AnimState:PushAnimation("idle", true)

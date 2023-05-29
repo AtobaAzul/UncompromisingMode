@@ -531,7 +531,6 @@ local function OnAttackedByDecidRoot(inst, attacker)
 end
 
 local function OnAttacked(inst, data)
-    --print(inst, "OnAttacked")
     local attacker = data.attacker
     inst:ClearBufferedAction()
 

@@ -70,20 +70,25 @@ local function UpdateLavaeDamageTick(inst)
 			count = count + 1
 		end
 	end
+	
 	local damagetime = 0.5
+	
 	if count < 5 then
 		damagetime = 0.05
 	end
+	
 	if count < 3 then
 		damagetime = 0.01
 	end
+	
 	if count < 2 then
 		damagetime = 0.005
 	end
+	
 	if count < 1 then
 		damagetime = 0.001
 	end
-	print(count)
+	
 	for i = 1, 8 do
 		if inst.lavae[i].hidden ~= true then
 			inst.lavae[i].damagetime = damagetime
@@ -139,7 +144,6 @@ local function OnEntitySleep(inst)
         --Get back in there Dragonfly! You still have work to do.--]]
 
 		if PlayerPosition ~= nil and not inst:NearPlayerBase() and not inst.SeenBase then
-			--print("Porting Dragonfly to Player!")
 			local init_pos = inst:GetPosition()
 			local player_pos = PlayerPosition:GetPosition()
 			if player_pos then
@@ -330,8 +334,8 @@ local function OnKill(inst, data)
 	end --]]
 end
 
-local loot = { "meat", "meat", "meat", "meat", "meat", "meat", "meat", "meat", "glass_scales",
-	"moonglass_geode", "moonglass_geode", "moonglass_geode" }
+local loot = { "meat", "meat", "meat", "meat", "meat", "meat", "meat", "meat", "glass_scales", "glass_scales",
+	"glass_scales", "moonglass_geode", "moonglass_geode", "moonglass_geode" }
 
 local function OnDead(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
@@ -524,13 +528,11 @@ end
 
 local function MoonMawCheck(player)
 	local moonmaw = FindEntity(player, 40, function(guy) return guy:HasTag("moonmaw") end)
-	--print("checking")
+	
 	if moonmaw == nil then
 		player.components.sanity:EnableLunacy(false, "moonmaw")
 		player.moonmaw = nil
 		player.moonmawcheck = nil
-	else
-		--print("moonmawisalive")
 	end
 end
 

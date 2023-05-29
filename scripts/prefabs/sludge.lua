@@ -7,7 +7,6 @@ local assets =
 }
 
 local function ontaken(inst, taker)
-    print("ontaken")--THIS ISNT EVEN PRINTING, WHAT.
     local bottle = SpawnPrefab("messagebottleempty")
 
     local owner = taker ~= nil and 
@@ -132,10 +131,6 @@ local function oil_fn()
     inst.components.finiteuses:SetMaxUses(10)
     inst.components.finiteuses:SetUses(10)
     inst.components.finiteuses:SetOnFinished(onfinished)
-
-    --inst:ListenForEvent("percentusedchange", function(inst)
-        --print("percentusedchange")
-    --end)
 
     MakeSmallBurnable(inst, TUNING.LARGE_BURNTIME)
     MakeSmallPropagator(inst)
