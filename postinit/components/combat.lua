@@ -21,6 +21,107 @@ end
 env.AddComponentPostInit("combat", function(self)
     if not TheWorld.ismastersim then return end
 
+	function self:DoNaughtAttack(targ, weapon, projectile, stimuli, instancemult, instrangeoverride, instpos)
+		if instrangeoverride then
+			self.temprange = instrangeoverride
+		end
+		if instpos then
+			self.temppos = instpos
+		end
+		if targ == nil then
+			targ = self.target
+		end
+		if weapon == nil then
+			weapon = self:GetWeapon()
+		end
+		if stimuli == nil then
+			if weapon ~= nil and weapon.components.weapon ~= nil and weapon.components.weapon.overridestimulifn ~= nil then
+				stimuli = weapon.components.weapon.overridestimulifn(weapon, self.inst, targ)
+			end
+			if stimuli == nil and self.inst.components.electricattacks ~= nil then
+				stimuli = "electric"
+			end
+		end
+
+		if not self:CanHitTarget(targ, weapon) or self.AOEarc then
+			self.inst:PushEvent("onmissother", { target = targ, weapon = weapon })
+			if self.areahitrange ~= nil and not self.areahitdisabled then
+				self:DoAreaAttack(projectile or self.inst, self.areahitrange, weapon, self.areahitcheck, stimuli, AREA_EXCLUDE_TAGS)
+			end
+			self:ClearAttackTemps()
+			return
+		end
+
+		self.inst:PushEvent("onattackother", { target = targ, weapon = weapon, projectile = projectile, stimuli = stimuli })
+
+		if weapon ~= nil and projectile == nil then
+			if weapon.components.projectile ~= nil then
+				local projectile = self.inst.components.inventory:DropItem(weapon, false)
+				if projectile ~= nil then
+					projectile.components.projectile:Throw(self.inst, targ)
+				end
+				self:ClearAttackTemps()
+				return
+
+			elseif weapon.components.complexprojectile ~= nil and not weapon.components.complexprojectile.ismeleeweapon then
+				local projectile = self.inst.components.inventory:DropItem(weapon, false)
+				if projectile ~= nil then
+					projectile.components.complexprojectile:Launch(targ:GetPosition(), self.inst)
+				end
+				self:ClearAttackTemps()
+				return
+
+			elseif weapon.components.weapon:CanRangedAttack() then
+				weapon.components.weapon:LaunchProjectile(self.inst, targ)
+				self:ClearAttackTemps()
+				return
+			end
+		end
+
+		local reflected_dmg = 0
+		local reflected_spdmg
+		local reflect_list = {}
+		if targ.components.combat ~= nil then
+			local mult =
+				(   stimuli == "electric" or
+					(weapon ~= nil and weapon.components.weapon ~= nil and weapon.components.weapon.stimuli == "electric")
+				)
+				and not (targ:HasTag("electricdamageimmune") or
+						(targ.components.inventory ~= nil and targ.components.inventory:IsInsulated()))
+				and TUNING.ELECTRIC_DAMAGE_MULT + TUNING.ELECTRIC_WET_DAMAGE_MULT * (targ.components.moisture ~= nil and targ.components.moisture:GetMoisturePercent() or (targ:GetIsWet() and 1 or 0))
+				or 1
+			local dmg, spdmg = self:CalcDamage(targ, weapon, mult)
+			dmg = (dmg * (instancemult or 1)) / 2
+			--Calculate reflect first, before GetAttacked destroys armor etc.
+			if projectile == nil then
+				reflected_dmg, reflected_spdmg = self:CalcReflectedDamage(targ, dmg, weapon, stimuli, reflect_list, spdmg)
+			end
+			targ.components.combat:GetAttacked(self.inst, dmg, weapon, stimuli, spdmg)
+		elseif projectile == nil then
+			reflected_dmg, reflected_spdmg = self:CalcReflectedDamage(targ, 0, weapon, stimuli, reflect_list)
+		end
+
+		if weapon ~= nil then
+			weapon.components.weapon:OnAttack_NoDurabilityLoss(self.inst, targ, projectile)
+		end
+
+		if self.areahitrange ~= nil and not self.areahitdisabled then
+			self:DoAreaAttack(targ, self.areahitrange, weapon, self.areahitcheck, stimuli, AREA_EXCLUDE_TAGS)
+		end
+		self:ClearAttackTemps()
+		self.lastdoattacktime = GetTime()
+
+		--Apply reflected damage to self after our attack damage is completed
+		if (reflected_dmg > 0 or reflected_spdmg ~= nil) and self.inst.components.health ~= nil and not self.inst.components.health:IsDead() then
+			self:GetAttacked(targ, reflected_dmg, nil, nil, reflected_spdmg)
+			for i, v in ipairs(reflect_list) do
+				if v.inst:IsValid() then
+					v.inst:PushEvent("onreflectdamage", v)
+				end
+			end
+		end
+	end
+
     local _GetAttacked = self.GetAttacked
 
     function self:GetAttacked(attacker, damage, weapon, stimuli, ...)
