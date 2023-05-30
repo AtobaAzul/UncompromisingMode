@@ -2527,7 +2527,7 @@ return{
 			GENERIC = "Colony defender. Agile.",
 			SLEEPING = "Good.",
 		},
-		SPOILED_FOOD = "foodstuff, decomposed.",
+		SPOILED_FOOD = "Foodstuff, decomposed.",
         STAGEHAND =
         {
 			AWAKE = "Curious, not Maker's work.",
