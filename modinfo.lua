@@ -127,16 +127,56 @@ configuration_options = {
     Header("Characters"),
     ------------------------------
     BinaryConfig("funny rat", "Winky", "Enable Uncompromising Mode's Winky, the Vile Vermin.", true),
-    BinaryConfig("wixie_walter", "Wixie & Walter Rework", "Enable Uncompromising Mode's Wixie, the Delinquent, who expands on Walter's slingshot, while Walter gets new interactions and mechanics with Woby!", true),
-    BinaryConfig("wixie_birds", "Wixie: Slingshot Nerfs", "Slingshots can't hit birds & rabbits.", true) ,
-    BinaryConfig("holy fucking shit it's wathom", "Wathom", "Enable Uncompromising Mode's Wathom, the Forgotten Parody.", true),
-    BinaryConfig("wathom_maxdmg", "Wathom: Damage Cap", "Wathom's damage is capped at 600 to limit his absurd burst damage potential.", true),
-    {name = "wathom_ampvulnerability", label = "Wathom: Amped Vulnerability", hover = "Wathom takes more damage when amped.", options = {{description = "5x (Default)", data = 5}, {description = "4x", data = 4}, {description = "3x", data = 3}, {description = "2x", data = 2}}, default = 5},
-    {name = "wathom_armordamage", label = "Wathom: Armor Damage Priority", hover = "Wathom can take increased damage, choose if armor damage is ignored.", options = {{description = "Include Armor", data = true, hover = "Wathom multiplies incoming damage by the current damage multiplier"}, {description = "Don't include armor", data = false, hover = "Wathom multiplies resulting damage by the current damage multiplier."}}, default = true},
-    BinaryConfig("willow", "Willow", "Willow's Lighter now lasts forever when she holds it, and she will retaliate when attacked by shadows.", true),
-    BinaryConfig("bernie_buffs", "Willow: Bernie Buffs", "Bernie has 80% resistance against shadows\nHolding Bernie prevents shadows from aggro'ing.", true),
-    BinaryConfig("warly", "Warly", "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.", true),
-    BinaryConfig("waxwell", "Maxwell", "Maxwell gets buffed versions of his classic shadows by reading the Codex Umbra. Disable for Maxwell mod compatibility!", true),
+    BinaryConfig("wixie_walter", "Wixie & Walter Rework",
+        "Enable Uncompromising Mode's Wixie, the Delinquent, who expands on Walter's slingshot, while Walter gets new interactions and mechanics with Woby!",
+        true),
+    BinaryConfig("wixie_birds", "Wixie: Slingshot Nerfs", "Slingshots can't hit birds & rabbits.", true),
+    BinaryConfig("holy fucking shit it's wathom", "Wathom", "Enable Uncompromising Mode's Wathom, the Forgotten Parody.",
+        true),
+    BinaryConfig("wathom_maxdmg", "Wathom: Damage Cap",
+        "Wathom's damage is capped at 600 to limit his absurd burst damage potential.", true),
+    {
+        name = "wathom_ampvulnerability",
+        label = "Wathom: Amped Vulnerability",
+        hover =
+        "Wathom takes more damage when amped.",
+        options = {
+            { description = "5x (Default)", data = 5 }, { description = "4x", data = 4 },
+            { description = "3x", data = 3 },
+            { description = "2x",           data = 2 } },
+        default = 5
+    },
+    {
+        name = "wathom_armordamage",
+        label = "Wathom: Armor Damage Priority",
+        hover =
+        "Wathom can take increased damage, choose if armor damage is ignored.",
+        options = {
+            {
+                description = "Include Armor",
+                data = true,
+                hover = "Wathom multiplies incoming damage by the current damage multiplier"
+            },
+            {
+                description = "Don't include armor",
+                data = false,
+                hover = "Wathom multiplies resulting damage by the current damage multiplier."
+            } },
+        default = true
+    },
+    BinaryConfig("willow", "Willow",
+        "Willow's Lighter now lasts forever when she holds it, and she will retaliate when attacked by shadows.", true),
+    BinaryConfig("bernie_buffs", "Willow: Bernie Buffs",
+        "Bernie has 80% resistance against shadows\nHolding Bernie prevents shadows from aggro'ing.", true),
+    BinaryConfig("warly", "Warly",
+        "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.",
+        true),
+    BinaryConfig("warly_butcher", "Experimental Warly's Butchering",
+		"Warly is a certified butcher, he can sometimes get more resources from his kills.",
+		false),
+    BinaryConfig("waxwell", "Maxwell",
+        "Maxwell gets buffed versions of his classic shadows by reading the Codex Umbra. Disable for Maxwell mod compatibility!",
+        true),
     --	BinaryConfig("wolfgang", "Improved/Balanced Wolfgang", "Wolfgang gains new perks and downsides. Read the patch notes included in the mod folder or workshop for details.", false),
     BinaryConfig("wigfrid", "Wigfrid", "Reduced Wigfrids combat leeching effect to more balanced levels.", true),
     BinaryConfig("wolfgang", "Experimental Wolfgang",
