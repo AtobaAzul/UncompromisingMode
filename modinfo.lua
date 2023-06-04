@@ -115,7 +115,7 @@ configuration_options = {
         "Night Terrors have a default 40% chance to occur each night. Night Terrors are disabled before Day 5.",
         options = {
             { description = "None", data = 100 }, { description = "10%", data = 0.9 },
-            { description = "20%", data = 0.8 },
+            { description = "20%",  data = 0.8 },
             { description = "30%",  data = 0.7 }, { description = "40%", data = 0.6 },
             { description = "50%", data = 0.5 },
             { description = "60%", data = 0.4 }, { description = "70%", data = 0.3 },
