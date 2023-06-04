@@ -44,15 +44,36 @@ priority = -10
 ------------------------------
 -- local functions to makes things prettier
 
-local function Header(title) return { name = "", label = title, hover = "", options = { { description = "", data = false } },
-        default = false } end
+local function Header(title)
+    return {
+        name = "",
+        label = title,
+        hover = "",
+        options = { { description = "", data = false } },
+        default = false
+    }
+end
 
-local function SkipSpace() return { name = "", label = "", hover = "", options = { { description = "", data = false } },
-        default = false } end
+local function SkipSpace()
+    return {
+        name = "",
+        label = "",
+        hover = "",
+        options = { { description = "", data = false } },
+        default = false
+    }
+end
 
-local function BinaryConfig(name, label, hover, default) return { name = name, label = label, hover = hover,
+local function BinaryConfig(name, label, hover, default)
+    return {
+        name = name,
+        label = label,
+        hover = hover,
         options = { { description = "Enabled", data = true, hover = "Enabled." },
-            { description = "Disabled", data = false, hover = "Disabled." } }, default = default } end
+            { description = "Disabled", data = false, hover = "Disabled." } },
+        default = default
+    }
+end
 ------------------------------
 
 configuration_options = {
@@ -87,14 +108,21 @@ configuration_options = {
     BinaryConfig("caved", "[IMPORTANT] Cave Config",
         "Switches some things around so players who can't run Caves can still enjoy the game. ENABLE IF CAVES ARE ENABLED!",
         true),
-    { name = "rne chance", label = "Night Terrors Chance",
-                                                               hover =
+    {
+        name = "rne chance",
+        label = "Night Terrors Chance",
+        hover =
         "Night Terrors have a default 40% chance to occur each night. Night Terrors are disabled before Day 5.",
-                                                                                                                                                                                options = {
-            { description = "None", data = 100 }, { description = "10%", data = 0.9 }, { description = "20%", data = 0.8 },
-            { description = "30%", data = 0.7 }, { description = "40%", data = 0.6 }, { description = "50%", data = 0.5 },
-            { description = "60%", data = 0.4 }, { description = "70%", data = 0.3 }, { description = "80%", data = 0.2 },
-            { description = "90%", data = 0.1 }, { description = "INSANITY", data = 0 } },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   default = 0.8 },
+        options = {
+            { description = "None", data = 100 }, { description = "10%", data = 0.9 },
+            { description = "20%", data = 0.8 },
+            { description = "30%",  data = 0.7 }, { description = "40%", data = 0.6 },
+            { description = "50%", data = 0.5 },
+            { description = "60%", data = 0.4 }, { description = "70%", data = 0.3 },
+            { description = "80%", data = 0.2 },
+            { description = "90%", data = 0.1 }, { description = "INSANITY", data = 0 } },
+        default = 0.8
+    },
     BinaryConfig("compromising_vortex", "Non-lethal Shadow Vortex",
         "Shadow Vortex now teleports you to some random place.", false),
     BinaryConfig("harder_shadows", "Harder Nightmare Creatures",
@@ -137,23 +165,34 @@ configuration_options = {
         label = "Dynamic Boss Resistance",
         hover = "Bosses have increasing resistance against multiple players",
         options = {
-            { description = "Dynamic",  hover = "Bosses change their resistance based on hits taken.",     data =
-            "dynamic" },
-            { description = "Static",   hover = "Bosses change their resistance based on nearby players.",
-                                                                                                               data =
-                "static" },
+            {
+                description = "Dynamic",
+                hover = "Bosses change their resistance based on hits taken.",
+                data =
+                "dynamic"
+            },
+            {
+                description = "Static",
+                hover = "Bosses change their resistance based on nearby players.",
+                data =
+                "static"
+            },
             { description = "Disabled", data = false },
 
         },
         default = "dynamic",
     },
-    { name = "vetcurse",   label = "Veteran's Curse",
-                                                               hover =
+    {
+        name = "vetcurse",
+        label = "Veteran's Curse",
+        hover =
         "Veteran's curse is an optional difficulty mode, which increases risk & reward.",
-                                                                                                                                                                                options = {
+        options = {
             { description = "Default", data = "default" }, { description = "Always On", data = "always" },
-            { description = "Off", data = "off" } },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         default =
-    "default" },
+            { description = "Off",     data = "off" } },
+        default =
+        "default"
+    },
     BinaryConfig("moon_transformations", "Moon Transformations",
         "Certain things transform under the dim light of the full \"Moon\".", false),
 
@@ -286,24 +325,32 @@ configuration_options = {
         label = "Start Date for Autumn weather",
         hover = "New Autumn weather occurs in the second year by default.\nThis currently only includes poisonous frogs.",
         options = {
-            { description = "First Year",  data = 5 }, -- lowered in case someone has a diff starting season, or wants to suffer.
+            { description = "First Year",  data = 5 },  -- lowered in case someone has a diff starting season, or wants to suffer.
             { description = "Second Year", data = 70 },
             { description = "Third Year",  data = 120 } -- idk math yell at me if wrong
         },
         default = 70
     },
-    { name = "weatherhazard_winter", label = "Start Date for Winter weather",
-                                                                                  hover =
+    {
+        name = "weatherhazard_winter",
+        label = "Start Date for Winter weather",
+        hover =
         "New Winter weather occurs in the first year by default.",
-                                                                                                                                                     options = {
+        options = {
             { description = "First Year", data = 5 }, { description = "Second Year", data = 70 },
-            { description = "Third Year", data = 120 } },                                                                                                                                                                                                                                default = 5 },
-    { name = "weatherhazard_spring", label = "Start Date for Spring weather",
-                                                                                  hover =
+            { description = "Third Year", data = 120 } },
+        default = 5
+    },
+    {
+        name = "weatherhazard_spring",
+        label = "Start Date for Spring weather",
+        hover =
         "New Spring weather occurs in the first year by default.",
-                                                                                                                                                     options = {
+        options = {
             { description = "First Year", data = 5 }, { description = "Second Year", data = 70 },
-            { description = "Third Year", data = 120 } },                                                                                                                                                                                                                                default = 5 },
+            { description = "Third Year", data = 120 } },
+        default = 5
+    },
     --[[{
 	name = "weatherhazard_summer",
 	label = "Start Date for new Summer weather",
@@ -357,14 +404,18 @@ configuration_options = {
     ------------------------------
     BinaryConfig("hoodedforest", "Hooded Forest",
         "Hooded Forest replaces the Moon Base forest, with brand new things to explore, including a new boss!", true),
-    { name = "ghostwalrus",   label = "Rusty Traps",
-                                                                   hover =
+    {
+        name = "ghostwalrus",
+        label = "Rusty Traps",
+        hover =
         "The MacTusks forgot to pick up their traps and left them to rust.",
-                                                                                                                                                options = {
-            { description = "Enabled", data = "enabled" },
+        options = {
+            { description = "Enabled",              data = "enabled" },
             { description = "Enabled (No Respawn)", data = "norespawn", hover = "Traps don't respawn over time." },
-            { description = "Disabled", data = "disabled" } },                                                                                                                                                                                                                                                                                                                                                 default =
-    "enabled" },
+            { description = "Disabled",             data = "disabled" } },
+        default =
+        "enabled"
+    },
     BinaryConfig("rice", "Rice", "Rice spawns in swamp ponds.", true),
     BinaryConfig("trapdoorspiders", "Trapdoor Spiders",
         "Enables the spawning of Trapdoor Spider mounds on worldgen. Their dens are usually covered in a resource rich grass.",
@@ -376,23 +427,37 @@ configuration_options = {
     ------------------------------
     Header("Rats"),
     ------------------------------
-    { name = "ratgrace",      label = "Rat Raid Grace Period",
-                                                                   hover =
+    {
+        name = "ratgrace",
+        label = "Rat Raid Grace Period",
+        hover =
         "Minimum grace period, during which Rats are unable to invade!",
-                                                                                                                                                options = {
+        options = {
             { description = "As soon as possible.", data = 1 }, { description = "Low[15 days]", data = 15 },
-            { description = "Default[30 days]", data = 30 }, { description = "Medium[45 days]", data = 45 },
-            { description = "High[60 days]", data = 60 } },                                                                                                                                                                                                                                                                                                                                                    default = 30 },
-    { name = "rattimer",      label = "Rat Raid Cooldown",     hover = "The cooldown between Rat Raids!",
-                                                                                                                                                options = {
+            { description = "Default[30 days]",     data = 30 }, { description = "Medium[45 days]", data = 45 },
+            { description = "High[60 days]", data = 60 } },
+        default = 30
+    },
+    {
+        name = "rattimer",
+        label = "Rat Raid Cooldown",
+        hover = "The cooldown between Rat Raids!",
+        options = {
             { description = "As soon as possible.", data = 10 }, { description = "Half", data = 4800 },
-            { description = "Default", data = 9600 }, { description = "Double", data = 14400 } },                                                                                                                                                                                                                                                                                                              default = 9600 },
-    { name = "ratsnifftimer", label = "Rat Sniff Timer",       hover =
-    "The rate at which your base is checked for messiness.",
-                                                                                                                                                options = {
-            { description = "Lowest[1 Minute]", data = 60 }, { description = "Lowered[2 Minutes]", data = 120 },
+            { description = "Default",              data = 9600 }, { description = "Double", data = 14400 } },
+        default = 9600
+    },
+    {
+        name = "ratsnifftimer",
+        label = "Rat Sniff Timer",
+        hover =
+        "The rate at which your base is checked for messiness.",
+        options = {
+            { description = "Lowest[1 Minute]",   data = 60 }, { description = "Lowered[2 Minutes]", data = 120 },
             { description = "Default[3 Minutes]", data = 180 }, { description = "Raised[4 Minutes]", data = 240 },
-            { description = "Extended[8 Minutes]", data = 480 } },                                                                                                                                                                                                                                                                                                                                             default = 120 },
+            { description = "Extended[8 Minutes]", data = 480 } },
+        default = 120
+    },
     BinaryConfig("itemcheck", "Item Score", "Equippable items and mole bait items increase the \'rat score\' value.",
         true),
     SkipSpace(),
@@ -418,41 +483,67 @@ configuration_options = {
     BinaryConfig("canedurability", "Cane Durability (Off by default)",
         "Cane loses durability similarly to a Whirly Fan. Note that MacTusks will drop Tusks 100% of the time with this on.",
         false),
-    { name = "gotobed",          label = "Sleeping Buff",
-                                                                    hover =
+    {
+        name = "gotobed",
+        label = "Sleeping Buff",
+        hover =
         "Sleeping can heal max health loss. Siesta Lean-to hunger drain is now 50% of a Tent, instead of 33%.",
-                                                                                                                                                                                    options = {
-            { description = "Default", data = "default", hover = "Only heal max health loss if BELOW 25%." },
-            { description = "Legacy", data = "legacy", hover = "Heal max health lost regardless of %." },
-            { description = "Disabled", data = false } },                                                                                                                                                                                                                                                                                                                                                                         default =
-    "default" },
+        options = {
+            { description = "Default",  data = "default", hover = "Only heal max health loss if BELOW 25%." },
+            { description = "Legacy",   data = "legacy",  hover = "Heal max health lost regardless of %." },
+            { description = "Disabled", data = false } },
+        default =
+        "default"
+    },
     BinaryConfig("passibleimpassibles", "Remove Cheese-able Collisions",
         "Removes collision from objects like statues to prevent cheesing mobs and bosses.", true),
-    { name = "sleepingbuff",     label = "Sleeping Stat Speed",
-                                                                    hover =
+    {
+        name = "sleepingbuff",
+        label = "Sleeping Stat Speed",
+        hover =
         "Increases the speed at which sleeping gives stats/drains hunger. Default 1.5x.",
-                                                                                                                                                                                    options = {
+        options = {
             { description = "2x Faster", data = 2 }, { description = "1.5x Faster", data = 1.5 },
-            { description = "Vanilla", data = 1 } },                                                                                                                                                                                                                                                                                                                                                                              default = 1.5 },
-    { name = "pocket_powertrip", label = "Clothing Pockets",    hover = "Gives some underused dress items pockets.",
-                                                                                                                                                                                    options = {
-            { description = "On", data = 1 },
-            { description = "On (Backpack-like)", data = 2,
-                hover = "Items with pockets act like backpacks. However, they can't be stored in the inventory." },
-            { description = "Off", data = 0 } },                                                                                                                                                                                                                                                                                                                                                                                  default = 1 },
+            { description = "Vanilla",   data = 1 } },
+        default = 1.5
+    },
+    {
+        name = "pocket_powertrip",
+        label = "Clothing Pockets",
+        hover = "Gives some underused dress items pockets.",
+        options = {
+            { description = "On",  data = 1 },
+            {
+                description = "On (Backpack-like)",
+                data = 2,
+                hover = "Items with pockets act like backpacks. However, they can't be stored in the inventory."
+            },
+            { description = "Off", data = 0 } },
+        default = 1
+    },
     BinaryConfig("insul_thermalstone", "Tweaked Thermal Stone",
         "Thermal Stones now have less insulation, but inherit some insulation from clothing.", true),
     BinaryConfig("uncool_chester", "Thermal Stone Snow Chester Nerf",
         "Snow Chester will no longer freeze Thermal Stones.", true),
-    { name = "electricalmishap", label = "Electrical Weapon Retune",
-                                                                         hover =
+    {
+        name = "electricalmishap",
+        label = "Electrical Weapon Retune",
+        hover =
         "Controls how electrical weapons (Bug Zapper and Morning Star) behave.",
-                                                                                                                                                          options = {
-            { description = "Electrical Mishap", data = 1,
-                hover = "Weapons can be charged with Lightning and Generators." },
-            { description = "Classic", data = 2,
-                hover = "Weapons can be refueled with certain electricity-related items." },
-            { description = "Off", data = 0 } },                                                                                                                                                                                                                                                                                                                                                                                   default = 1 },
+        options = {
+            {
+                description = "Electrical Mishap",
+                data = 1,
+                hover = "Weapons can be charged with Lightning and Generators."
+            },
+            {
+                description = "Classic",
+                data = 2,
+                hover = "Weapons can be refueled with certain electricity-related items."
+            },
+            { description = "Off", data = 0 } },
+        default = 1
+    },
     BinaryConfig("hambatnerf", "Ham Bat Nerf", "Spoils faster and minimum damage is lower.", true),
     BinaryConfig("cookiecutterhat", "Cookie Cutter Hat",
         "Cookie Cutter Caps now reflects some damage back at the attacker.", true),
@@ -480,10 +571,15 @@ configuration_options = {
 
     Header("Crockpot Food Tweaks"),
     BinaryConfig("meatball", "Meatball Nerf", "Meatballs restore 50 hunger instead of 62.5.", true),
-    { name = "perogi",           label = "Pierogi Recipe Nerf",      hover = "Pierogis require more veggies to cook.",
-                                                                                                                                                          options = {
+    {
+        name = "perogi",
+        label = "Pierogi Recipe Nerf",
+        hover = "Pierogis require more veggies to cook.",
+        options = {
             { description = "1.5 Veggie Value", data = 1.5 }, { description = "2 Veggie Value", data = 2 },
-            { description = "1 Veggie Value", data = 1 }, { description = "Vanilla Value", data = 0.5 } },                                                                                                                                                                                                                                                                                                                         default = 1.5 },
+            { description = "1 Veggie Value",   data = 1 }, { description = "Vanilla Value", data = 0.5 } },
+        default = 1.5
+    },
     BinaryConfig("icecreambuff", "Ice Cream Buff", "Ice Cream now restores 100 sanity, but does it slowly.", true),
     BinaryConfig("farmfoodredux", "Farmplot Food Redux",
         "Reallocates most dishes that involve Crock Pot foods. Typically a buff, but may exchange some stats.", true),
@@ -496,23 +592,32 @@ configuration_options = {
     BinaryConfig("nowintergrowing", "No Winter Growing",
         "Makes a few food sources such as Kelp and Stone Fruit not grow in Winter.", true),
     BinaryConfig("beebox_nerf", "Bee Box Nerf", "Bee Boxes only release 2 Bees max.", true),
-    { name = "more perishing", label = "Increased Food Spoilage", hover = "Food spoils faster. It's as simple as that.",
-                                                                                                                                                                                                      options = {
+    {
+        name = "more perishing",
+        label = "Increased Food Spoilage",
+        hover = "Food spoils faster. It's as simple as that.",
+        options = {
             { description = "Disabled(1x)", data = 1 }, { description = "1.5x", data = 1.5 },
-            { description = "2x", data = 2 }, { description = "2.5x", data = 2.5 }, { description = "3x", data = 3 } },
-                                                                                                                                                                                                                                                                                                                                                                                                                             default = 1.5 },
+            { description = "2x",           data = 2 }, { description = "2.5x", data = 2.5 },
+            { description = "3x", data = 3 } },
+        default = 1.5
+    },
     BinaryConfig("butterflywings_nerf", "Weaker Butterfly Wings",
         "Butterfly Wings have been nerfed to not be cheap healing.", true),
     BinaryConfig("rawcropsnerf", "Raw Crops Nerf",
         "Farm crops are nerfed in their base value when raw/cooked to incentivize using Crockpot recipes.", true),
     BinaryConfig("seeds", "Lowered Seeds Hunger", "Seeds have had their hunger lowered.", true),
-    { name = "monstereggs",    label = "Monster Eggs",
-                                                                      hover =
+    {
+        name = "monstereggs",
+        label = "Monster Eggs",
+        hover =
         "Birds now give Monster Eggs when fed Monster Meat.\nMonster Eggs are like Eggs, but have configurable monster value.",
-                                                                                                                                                                                                      options = {
-            { description = "Off", data = 0 }, { description = "0.25 Monster", data = 0.25 },
+        options = {
+            { description = "Off",         data = 0 }, { description = "0.25 Monster", data = 0.25 },
             { description = "0.5 Monster", data = 0.5 }, { description = "1 Monster", data = 1 },
-            { description = "1.5 Monster", data = 1.5 } },                                                                                                                                                                                                                                                                                                                                                               default = 1 },
+            { description = "1.5 Monster", data = 1.5 } },
+        default = 1
+    },
     SkipSpace(),
 
     -----------------------------
@@ -658,7 +763,7 @@ configuration_options = {
         options = {
             { description = "Year 1 (Default)", data = 26 },
             { description = "Year 2",           data = 26 * 1.5 }, -- maybe???
-            { description = "Year 3",           data = 26 * 2.5 } -- ???
+            { description = "Year 3",           data = 26 * 2.5 }  -- ???
         },
         default = 26
     },
@@ -672,7 +777,7 @@ configuration_options = {
         options = {
             { description = "Year 1 (Default)", data = 26 },
             { description = "Year 2",           data = 26 * 2 }, -- maybe???
-            { description = "Year 3",           data = 26 * 3 } -- ???
+            { description = "Year 3",           data = 26 * 3 }  -- ???
         },
         default = 26
     },
@@ -699,7 +804,7 @@ configuration_options = {
     BinaryConfig("harder_lavae", "Exploding Lavae",
         "Lavae will now leave exploding paste upon death, capable of destroying walls.", true),
     BinaryConfig("harder_beequeen", "Harder Bee Queen",
-        "Bee Queen now has a variety of attacks utilizing new types of Bees.", true),                                                 -- lame! help!
+        "Bee Queen now has a variety of attacks utilizing new types of Bees.", true), -- lame! help!
     BinaryConfig("rework_minotaur", "Ancient Guardian Rework",
         "The Ancient Guardian's fight is expanded, including more attacks.", true),
     BinaryConfig("reworked_eyes", "Reworked Eyes of Terror",
@@ -709,24 +814,36 @@ configuration_options = {
     SkipSpace(),
 
     Header("Boss Quality of Life"),
-    { name = "toadstool health", label = "Toadstool Health",
-                                                                    hover =
+    {
+        name = "toadstool health",
+        label = "Toadstool Health",
+        hover =
         "Killing Toadstool stops acid rain from occuring. His health can be lowered to make a solo player's life easier.",
-                                                                                                                                                                                               options = {
+        options = {
             { description = "Default[52500]", data = 52500 }, { description = "Lowered[25000]", data = 25000 },
-            { description = "Lowest [17500]", data = 17500 } },                                                                                                                                                                                                                                                                                        default = 52500 },
-    { name = "bee queen health", label = "Bee Queen Health",
-                                                                    hover =
+            { description = "Lowest [17500]", data = 17500 } },
+        default = 52500
+    },
+    {
+        name = "bee queen health",
+        label = "Bee Queen Health",
+        hover =
         "Killing Bee Queen stops Hay Fever from occuring. Her health can be lowered to make a solo player's life easier.",
-                                                                                                                                                                                               options = {
+        options = {
             { description = "Default[22500]", data = 22500 }, { description = "Lowered[15000]", data = 15000 },
-            { description = "Lowest[10000]", data = 10000 } },                                                                                                                                                                                                                                                                                         default = 22500 },
-    { name = "widow health",     label = "Hooded Widow Health",
-                                                                    hover =
+            { description = "Lowest[10000]",  data = 10000 } },
+        default = 22500
+    },
+    {
+        name = "widow health",
+        label = "Hooded Widow Health",
+        hover =
         "Hooded Widow's health can be lowered to better match a singleplayer experience.",
-                                                                                                                                                                                               options = {
+        options = {
             { description = "Default[8000]", data = 8000 }, { description = "Lowered[6000]", data = 6000 },
-            { description = "Lowest[4000]", data = 4000 } },                                                                                                                                                                                                                                                                                           default = 8000 },
+            { description = "Lowest[4000]",  data = 4000 } },
+        default = 8000
+    },
     {
         name = "mother goose health",
         label = "Mother Goose Health",
@@ -739,18 +856,25 @@ configuration_options = {
         },
         default = 7000
     },
-    { name = "wiltfly health", label = "Wilting Dragonfly Health",
-                                                                       hover =
+    {
+        name = "wiltfly health",
+        label = "Wilting Dragonfly Health",
+        hover =
         "Wilting Dragonfly's health can be lowered to better match a singleplayer experience.",
-                                                                                                                                                                       options = {
+        options = {
             { description = "Default[4000]", data = 4000 }, { description = "Lowered[3000]", data = 3000 } },
-                                                                                                                                                                                                                                                                                                                              default = 4000 },
-    { name = "twins health",   label = "Twins of Terror Health",
-                                                                       hover =
+        default = 4000
+    },
+    {
+        name = "twins health",
+        label = "Twins of Terror Health",
+        hover =
         "Twins of Terror's health can be lowered to better match a singleplayer experience.",
-                                                                                                                                                                       options = {
+        options = {
             { description = "Default[10000]", data = 10000 }, { description = "Lowered[7500]", data = 7500 },
-            { description = "Lowest[5000]", data = 5000 } },                                                                                                                                                                                                                                                              default = 10000 },
+            { description = "Lowest[5000]",   data = 5000 } },
+        default = 10000
+    },
     --	BinaryConfig("crabking_claws", "Crabking Fight Adjustment", "The Crabkings imposing claws now deal 500 damage to the king when killed.", false),
     SkipSpace(),
 
