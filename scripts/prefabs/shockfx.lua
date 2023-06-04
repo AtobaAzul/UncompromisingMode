@@ -1,5 +1,3 @@
-
-
 local assets =
 {
     Asset("ANIM", "anim/bramblefx.zip"),
@@ -7,22 +5,24 @@ local assets =
 
 --DSV uses 4 but ignores physics radius
 local MAXRANGE = 3
-local NO_TAGS_NO_PLAYERS = { "bramble_resistant", "INLIMBO", "notarget", "noattack", "flight", "invisible", "player" }
-local NO_TAGS = { "bramble_resistant", "INLIMBO", "notarget", "noattack", "flight", "invisible", "playerghost" }
+local NO_TAGS_NO_PLAYERS = { "bramble_resistant", "INLIMBO", "notarget", "noattack", "flight", "invisible", "player",
+    "companion", "abigail" }
+local NO_TAGS = { "bramble_resistant", "INLIMBO", "notarget", "noattack", "flight", "invisible", "playerghost",
+    "companion", "abigail" }
 
 local function OnUpdateThorns(inst)
     inst.range = inst.range + .75
     local x, y, z = inst.Transform:GetWorldPosition()
-	SpawnPrefab("sparks").Transform:SetPosition(x-1+math.random() * 2, y + .25 + math.random() * 2, z) --how does one make a "do 15" times in lua?
-	SpawnPrefab("sparks").Transform:SetPosition(x-1+math.random() * 2, y + .25 + math.random() * 2, z)
-	SpawnPrefab("sparks").Transform:SetPosition(x-1+math.random() * 2, y + .25 + math.random() * 2, z)
-	SpawnPrefab("sparks").Transform:SetPosition(x-1+math.random() * 2, y + .25 + math.random() * 2, z)
-	SpawnPrefab("sparks").Transform:SetPosition(x-1+math.random() * 2, y + .25 + math.random() * 2, z)
-	SpawnPrefab("sparks").Transform:SetPosition(x-1+math.random() * 2, y + .25 + math.random() * 2, z)
-	SpawnPrefab("sparks").Transform:SetPosition(x-1+math.random() * 2, y + .25 + math.random() * 2, z)
-	SpawnPrefab("sparks").Transform:SetPosition(x-1+math.random() * 2, y + .25 + math.random() * 2, z)
-	SpawnPrefab("sparks").Transform:SetPosition(x-1+math.random() * 2, y + .25 + math.random() * 2, z)
-	SpawnPrefab("sparks").Transform:SetPosition(x-1+math.random() * 2, y + .25 + math.random() * 2, z)
+    SpawnPrefab("sparks").Transform:SetPosition(x - 1 + math.random() * 2, y + .25 + math.random() * 2, z) --how does one make a "do 15" times in lua?
+    SpawnPrefab("sparks").Transform:SetPosition(x - 1 + math.random() * 2, y + .25 + math.random() * 2, z)
+    SpawnPrefab("sparks").Transform:SetPosition(x - 1 + math.random() * 2, y + .25 + math.random() * 2, z)
+    SpawnPrefab("sparks").Transform:SetPosition(x - 1 + math.random() * 2, y + .25 + math.random() * 2, z)
+    SpawnPrefab("sparks").Transform:SetPosition(x - 1 + math.random() * 2, y + .25 + math.random() * 2, z)
+    SpawnPrefab("sparks").Transform:SetPosition(x - 1 + math.random() * 2, y + .25 + math.random() * 2, z)
+    SpawnPrefab("sparks").Transform:SetPosition(x - 1 + math.random() * 2, y + .25 + math.random() * 2, z)
+    SpawnPrefab("sparks").Transform:SetPosition(x - 1 + math.random() * 2, y + .25 + math.random() * 2, z)
+    SpawnPrefab("sparks").Transform:SetPosition(x - 1 + math.random() * 2, y + .25 + math.random() * 2, z)
+    SpawnPrefab("sparks").Transform:SetPosition(x - 1 + math.random() * 2, y + .25 + math.random() * 2, z)
     for i, v in ipairs(TheSim:FindEntities(x, y, z, inst.range + 3, { "_combat" }, inst.canhitplayers and NO_TAGS or NO_TAGS_NO_PLAYERS)) do
         if not inst.ignore[v] and
             v:IsValid() and
@@ -38,20 +38,20 @@ local function OnUpdateThorns(inst)
                 if inst.owner ~= nil then
                     if inst.owner.components.combat ~= nil and inst.owner.components.combat:CanTarget(v) then
                         inst.ignore[v] = true
-						if not v.components.debuffable then
-						v:AddComponent("debuffable")
-						end
-						v.components.debuffable:AddDebuff("shockstundebuff", "shockstundebuff")
+                        if not v.components.debuffable then
+                            v:AddComponent("debuffable")
+                        end
+                        v.components.debuffable:AddDebuff("shockstundebuff", "shockstundebuff")
                         --v.components.combat:GetAttacked(v.components.follower ~= nil and v.components.follower:GetLeader() == inst.owner and inst or inst.owner, inst.damage)
                         --V2C: wisecracks make more sense for being pricked by picking
                         --v:PushEvent("thorns")
                     end
                 elseif v.components.combat:CanBeAttacked() then
                     inst.ignore[v] = true
-						if not v.components.debuffable then
-						v:AddComponent("debuffable")
-						end		
-						v.components.debuffable:AddDebuff("shockstundebuff", "shockstundebuff")						
+                    if not v.components.debuffable then
+                        v:AddComponent("debuffable")
+                    end
+                    v.components.debuffable:AddDebuff("shockstundebuff", "shockstundebuff")
                     --v.components.combat:GetAttacked(inst, inst.damage)
                     --v:PushEvent("thorns")
                 end
@@ -118,4 +118,4 @@ local function MakeFX(name, anim, damage)
     return Prefab(name, fn, assets)
 end
 
-return MakeFX("shockotherfx", "idle", "ARMORBRAMBLE_DMG"--[[TUNING.ARMORBRAMBLE_DMG]])
+return MakeFX("shockotherfx", "idle", "ARMORBRAMBLE_DMG" --[[TUNING.ARMORBRAMBLE_DMG]])
