@@ -94,10 +94,10 @@ local function UncompromisingSpawnGOOOOO(inst, data)
                     prefab.Transform:SetPosition(x + v.x * rotx, (v.y and v.y + y) or 0, z + v.z * rotz)
                 else
                     if not TheWorld.Map:IsOceanTileAtPoint(x + v.x * rotx, (v.y and v.y + y) or 0, z + v.z * rotz) then
-                        TheNet:Announce("not ocean tile, setting pos!")
+                        -- TheNet:Announce("not ocean tile, setting pos!")
                         prefab.Transform:SetPosition(x + v.x * rotx, (v.y and v.y + y) or 0, z + v.z * rotz)
                     else
-                        TheNet:Announce("ocean tile! removing!")
+                        -- TheNet:Announce("ocean tile! removing!")
                         prefab:Remove()
                     end
                 end
