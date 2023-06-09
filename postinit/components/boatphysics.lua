@@ -3,7 +3,7 @@ GLOBAL.setfenv(1, GLOBAL)
 local easing = require("easing")
 
 env.AddPrefabPostInit("boat_rotator", function(inst)
-    inst:AddTag("boatrotator") -- They removed this during the beta, guh
+	inst:AddTag("boatrotator") -- They removed this during the beta, guh
 end)
 
 --This will apply 50% more rowing force when the boat is a portable raft
@@ -12,7 +12,16 @@ env.AddComponentPostInit("boatphysics", function(self)
 	function self:GetBoatRotatorDrag()
 		local x, y, z = self.inst.Transform:GetWorldPosition()
 		local ents = TheSim:FindEntities(x, y, z, TUNING.BOAT.RADIUS)
+		local masts = TheSim:FindEntities(x, y, z, TUNING.BOAT.RADIUS, { "mast" })
 		local has_rotator = false
+		local has_active_mast = false
+
+		for k, v in ipairs(masts) do
+			if v.prefab == "mast_malbatross" and v:HasTag("saillowered") or v.prefab == "mast" and v:HasTag("sailraised") then --kgjrnsgndf I hate that the malb mast ends up with diff tags.
+				has_active_mast = true
+			end
+		end
+
 		-- look for the rotator
 		if ents and #ents > 0 then --a little worried about this since it runs on update.
 			for i, ent in ipairs(ents) do
@@ -23,17 +32,17 @@ env.AddComponentPostInit("boatphysics", function(self)
 				end
 			end
 		end
-		
-        if has_rotator then
-            local vel_x, vel_z = VecUtil_NormalizeNoNaN(self.velocity_x, self.velocity_z)
-            local tar_x, tar_z = VecUtil_NormalizeNoNaN(self.target_rudder_direction_x, self.target_rudder_direction_z)
 
-            local diff_x, diff_z = VecUtil_Sub(vel_x, vel_z, tar_x, tar_z)
+		if has_rotator and has_active_mast then
+			local vel_x, vel_z = VecUtil_NormalizeNoNaN(self.velocity_x, self.velocity_z)
+			local tar_x, tar_z = VecUtil_NormalizeNoNaN(self.target_rudder_direction_x, self.target_rudder_direction_z)
 
-            local diff_mean = (math.abs(diff_x) + math.abs(diff_z))
+			local diff_x, diff_z = VecUtil_Sub(vel_x, vel_z, tar_x, tar_z)
 
-            return (diff_mean+1)*2 --+1 since it's a multiplier
-        end
+			local diff_mean = (math.abs(diff_x) + math.abs(diff_z))
+
+			return (diff_mean + 1) * 2 --+1 since it's a multiplier
+		end
 
 		return 1
 	end
@@ -46,8 +55,8 @@ env.AddComponentPostInit("boatphysics", function(self)
 
 	local _GetBoatDrag = self.GetBoatDrag
 
-    function self:GetBoatDrag(velocity, total_anchor_drag, ...)
-		return _GetBoatDrag(self,velocity, total_anchor_drag, ...) * self:GetBoatRotatorDrag()
+	function self:GetBoatDrag(velocity, total_anchor_drag, ...)
+		return _GetBoatDrag(self, velocity, total_anchor_drag, ...) * self:GetBoatRotatorDrag()
 	end
 
 	local _OldApplyRowForce = self.ApplyRowForce
