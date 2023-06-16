@@ -783,13 +783,14 @@ local function onhit(inst, attacker, target)
         target.components.combat:SuggestTarget(attacker)
     end
 
-    if target.sg ~= nil and not target.sg:HasStateTag("frozen") then
-        target:PushEvent("attacked", { attacker = attacker, damage = 25, weapon = inst })
-    end
-
     if target.components.freezable ~= nil and target.sg ~= nil and not target.sg:HasStateTag("frozen") then
         target.components.freezable:AddColdness(1)
         target.components.freezable:SpawnShatterFX()
+    end
+
+    if target.sg ~= nil and not target.sg:HasStateTag("frozen") then
+		target.components.combat:GetAttacked(attacker, 25, inst)
+        --target:PushEvent("attacked", { attacker = attacker, damage = 25, weapon = inst })
     end
 
     inst:Remove()

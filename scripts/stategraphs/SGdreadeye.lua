@@ -575,6 +575,15 @@ local states =
             inst.persists = false
 			
 			inst:AddTag("dreadeyefading")
+			
+			if inst.disguiseprefab ~= nil then
+				local px, py, pz = inst.disguiseprefab.Transform:GetWorldPosition()
+				SpawnPrefab("mini_dreadeye_fx").Transform:SetPosition(px, py, pz)
+				--inst.SoundEmitter:PlaySound("dontstarve/maxwell/disappear")
+				inst.disguiseprefab:Remove()
+				inst.disguiseprefab = nil
+			end
+		
 			--inst.components.transparentonsanity_dreadeye.forcedtarget_alpha = 0
         end,
 
@@ -597,6 +606,14 @@ local states =
 			
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("disappear")
+			
+			if inst.disguiseprefab ~= nil then
+				local px, py, pz = inst.disguiseprefab.Transform:GetWorldPosition()
+				SpawnPrefab("mini_dreadeye_fx").Transform:SetPosition(px, py, pz)
+				--inst.SoundEmitter:PlaySound("dontstarve/maxwell/disappear")
+				inst.disguiseprefab:Remove()
+				inst.disguiseprefab = nil
+			end
 			
 			inst:AddTag("dreadeyefading")
 			--inst.components.transparentonsanity_dreadeye.forcedtarget_alpha = 0

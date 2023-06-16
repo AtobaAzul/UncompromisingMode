@@ -36,31 +36,25 @@ local function Zap(inst)
 		if v ~= nil and v.components.health ~= nil and not v.components.health:IsDead() and v.components.combat ~= nil then
 			if v:HasTag("player") and (v.components.inventory ~= nil and not v.components.inventory:IsInsulated()) then
 				if not v:HasTag("electricdamageimmune") then
-					v.components.health:DoDelta(-25, nil, inst.prefab, nil, inst)
+					v.components.combat:GetAttacked(inst, 20, nil, "electric")
 					
 					if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") then
 						v.sg:GoToState("electrocute")
 					end
 				else
-					if not v:HasTag("automaton") then
-						v.components.health:DoDelta(-10, nil, inst.prefab, nil, inst)
+					if v.components.playerlightningtarget ~= nil then
+						v.components.playerlightningtarget:DoStrike()
+					end
 
-						if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") then
-							v.sg:GoToState("hit")
-						end
-					else
-						if v.components.playerlightningtarget ~= nil then
-							v.components.playerlightningtarget:DoStrike()
-						end
+					if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") then
+						v.sg:GoToState("hit")
 					end
 				end
 			elseif v.components.combat ~= nil then
 				if not v:HasTag("electricdamageimmune") then
-					v.components.health:DoDelta(-10, nil, inst.prefab, nil, inst)
-				else
-					v.components.health:DoDelta(-5, nil, inst.prefab, nil, inst)
+					v.components.combat:GetAttacked(inst, 10, nil, "electric")
 				end
-				
+
 				if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") then
 					v.sg:GoToState("hit")
 				end
@@ -96,9 +90,10 @@ local function fn()
 	inst.task = inst:DoPeriodicTask(0.05, Sparks)
 
 	inst.SoundEmitter:PlaySound("dontstarve/rain/thunder_far")
-
-	inst:DoTaskInTime(1, Zap)
-
+	inst:DoTaskInTime(0, function() --modern problems require modern solutions
+		-- need this or else when something sets inst.Delay the task will already have started with 1.
+		inst:DoTaskInTime(inst.Delay ~= nil and inst.Delay or 1, Zap)
+	end)
 	return inst
 end
 

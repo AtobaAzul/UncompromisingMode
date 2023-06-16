@@ -80,7 +80,9 @@ local function UpdateLight(inst)
 
 		local snowstorm = ((TheWorld.net ~= nil and TheWorld.net:HasTag("snowstormstartnet")) or TheWorld:HasTag("snowstormstart")) and 2 or 0
 
-		local finalnums = velocity + sandstorm + snowstorm
+		local tornado = inst:HasTag("under_the_weather") and 2 or 0
+
+		local finalnums = velocity + sandstorm + snowstorm + tornado
 
 		if finalnums >= 1.5 then
 			if inst.powerlevel > 1000 then
@@ -186,6 +188,7 @@ local function fn()
 
 	inst:AddTag("NOCLICK")
 	inst:AddTag("DECOR")
+	inst:AddTag("um_windturbine")
 
 	inst.entity:SetPristine()
 

@@ -19,7 +19,7 @@ local EFFECTS =
 local function fuelme(inst)
 	if inst.components.fueled:GetPercent() < 1 then
 		if inst.pausedfuel then
-			inst.components.fueled:DoDelta(10)
+			inst.components.fueled:DoDelta(20)
 		end
 		if inst.components.fueled:GetPercent() >= 1 then
 			if inst.fuelmetask ~= nil then
@@ -124,7 +124,7 @@ local function speedcheck(inst)
 					inst.gorehorn.unpausefueledtask:Cancel()
 					inst.gorehorn.unpausefueledtask = nil
 				end
-				inst.gorehorn.unpausefueledtask = inst.gorehorn:DoTaskInTime(3, unpausefueled)
+				inst.gorehorn.unpausefueledtask = inst.gorehorn:DoTaskInTime(2, unpausefueled)
 				inst.AnimState:OverrideSymbol("swap_hat", "hat_gore_horn_swap_on", "swap_hat")
 			else
 				inst.AnimState:OverrideSymbol("swap_hat", "hat_gore_horn_swap_off", "swap_hat")
@@ -280,7 +280,7 @@ local function fn()
 	inst:AddComponent("inspectable")
 
 	inst:AddComponent("fueled")
-	inst.components.fueled:InitializeFuelLevel(100)
+	inst.components.fueled:InitializeFuelLevel(200)
 	inst.components.fueled.accepting = false
 	inst.components.fueled:SetDepletedFn(stoprunning)
 	inst:ListenForEvent("percentusedchange", checkiffull)
@@ -328,8 +328,7 @@ local function onothercollide(inst, other, owner)
 	elseif other.components.workable ~= nil
 		and other.components.workable:CanBeWorked()
 		and other.components.workable.action ~= ACTIONS.NET then
-		SpawnPrefab("collapse_small").Transform:SetPosition(other.Transform:GetWorldPosition())
-		other.components.workable:Destroy(owner)
+		other.components.workable:WorkedBy(owner, 0)
 		if other:IsValid() and other.components.workable ~= nil and other.components.workable:CanBeWorked() then
 			inst.recentlycharged[other] = true
 			inst:DoTaskInTime(3, ClearRecentlyCharged, other)
@@ -343,7 +342,7 @@ local function onothercollide(inst, other, owner)
 		if inst.owner ~= nil then
 			inst.owner:PushEvent("gore_horn_collision")
 		end
-	elseif other.components.health ~= nil and not other.components.health:IsDead() then
+	elseif other.components.health ~= nil and not other.components.health:IsDead() and not (other:HasTag("prey") and not other:HasTag("frog")) then
 		inst.recentlycharged[other] = true
 		inst:DoTaskInTime(3, ClearRecentlyCharged, other)
 		inst.SoundEmitter:PlaySound("dontstarve/creatures/rook/explo")
@@ -365,7 +364,7 @@ local function onothercollide(inst, other, owner)
 	end
 end
 
-local NOTAGS = { "fx", "INLIMBO", "shadow", "player", "DIG_workable" }
+local NOTAGS = { "fx", "INLIMBO", "shadow", "player", "DIG_workable", "prey", "bird" }
 local function oncollide(inst)
 	if inst.owner ~= nil then
 		local x, y, z = inst.owner.Transform:GetWorldPosition()

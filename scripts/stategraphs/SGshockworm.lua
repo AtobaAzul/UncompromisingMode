@@ -260,7 +260,7 @@ local states =
             end),
             TimeEvent(25 * FRAMES, function(inst)
                 inst.SoundEmitter:PlaySound("dontstarve/creatures/worm/bite")
-                inst.components.combat:DoAttack()
+                inst.components.combat:DoAttack(inst.sg.statemem.target, nil, nil, "electric")
 				local x, y, z = inst.Transform:GetWorldPosition()
 				SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)
 				SpawnPrefab("sparks").Transform:SetPosition(x, y + .25 + math.random() * 2, z)

@@ -39,8 +39,8 @@ local function OnAttacked(inst, data)
                 (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) and
                 not (data.attacker.components.inventory ~= nil and data.attacker.components.inventory:IsInsulated()) then
 
-                data.attacker.components.health:DoDelta(-15, nil, inst.prefab, nil, inst)
-                if data.attacker:HasTag("player") then
+                data.attacker.components.health:DoDelta(-TUNING.LIGHTNING_GOAT_DAMAGE, nil, inst.prefab, nil, inst)
+                if data.attacker:HasTag("player") and not data.attacker.sg:HasStateTag("dead") then
                     data.attacker.sg:GoToState("electrocute")
                 end
 				local x, y, z = data.attacker.Transform:GetWorldPosition()
@@ -61,7 +61,7 @@ local function OnAttackOther(inst, data)
                 (data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) and
                 not (data.target.components.inventory ~= nil and data.target.components.inventory:IsInsulated()) then
 
-                data.target.components.health:DoDelta(-25, nil, inst.prefab, nil, inst)
+                --data.target.components.health:DoDelta(-25, nil, inst.prefab, nil, inst)
                 if data.target:HasTag("player") then
 					local shockvictim = data.target.sg:GoToState("electrocute")
 					inst:DoTaskInTime(2, shockvictim)
@@ -359,7 +359,6 @@ local function fn()
     --Disable this task for worm attacks
     inst.HomeTask = inst:DoPeriodicTask(3, LookForHome)
     inst.lastluretime = 0
-    inst:ListenForEvent("attacked", onattacked)
 
     AddHauntableCustomReaction(inst, CustomOnHaunt)
 

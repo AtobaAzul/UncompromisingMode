@@ -30,6 +30,19 @@ local events =
 	end),
 }
 
+local function LaunchItem(inst, target, item)
+    if item.Physics ~= nil and item.Physics:IsActive() then
+        local x, y, z = item.Transform:GetWorldPosition()
+        item.Physics:Teleport(x, .1, z)
+
+        x, y, z = inst.Transform:GetWorldPosition()
+        local x1, y1, z1 = target.Transform:GetWorldPosition()
+        local angle = math.atan2(z1 - z, x1 - x) + (math.random() * 20 - 10) * DEGREES
+        local speed = 5 + math.random() * 2
+        item.Physics:SetVel(math.cos(angle) * speed, 10, math.sin(angle) * speed)
+    end
+end
+
 local states = {
 	State{
         name = "feint_attack",
@@ -88,6 +101,7 @@ local states = {
 
         timeline =
         {
+			TimeEvent(5 * FRAMES, function(inst) inst.SoundEmitter:PlaySound("dontstarve/creatures/krampus/bag_swing") end),
             TimeEvent(8 * FRAMES, function(inst)
                 
 				local x, y, z = inst:GetPosition():Get()
@@ -102,10 +116,24 @@ local states = {
 					--inst.SoundEmitter:PlaySound("dontstarve/creatures/krampus/bag_foley")
 					inst.SoundEmitter:PlaySound("dontstarve/creatures/krampus/bag_swing")
 					
-					if v ~= nil and v.components.inventory ~= nil and not v:HasTag("fat_gang") and not v:HasTag("foodknockbackimmune") and not (v.components.rider ~= nil and v.components.rider:IsRiding()) and 
-					--Don't knockback if you wear marble
-					(v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ==nil or not v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
-						v:PushEvent("knockback", {knocker = inst, radius = 150, strengthmult = 1})
+					if v ~= nil and v.components.inventory ~= nil then 
+						if not v:HasTag("stronggrip") then
+							local item = v.components.inventory:GetEquippedItem(EQUIPSLOTS.HANDS)
+							if item ~= nil then
+								v.components.inventory:DropItem(item)
+								LaunchItem(inst, v, item)
+							end
+						end
+						
+						for i = 1, 3 do
+							inst.components.thief:StealItem(v)
+						end
+					
+						if not v:HasTag("fat_gang") and not v:HasTag("foodknockbackimmune") and not (v.components.rider ~= nil and v.components.rider:IsRiding()) and 
+							--Don't knockback if you wear marble
+							(v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ==nil or not v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("marble") and not v.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY):HasTag("knockback_protection")) then
+								v:PushEvent("knockback", {knocker = inst, radius = 150, strengthmult = 1.5})
+						end
 					end
 				end
             end),

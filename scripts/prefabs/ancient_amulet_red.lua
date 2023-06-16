@@ -156,6 +156,7 @@ local function fn()
 	inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
 
     inst:AddTag("resurrector")
+    inst:AddTag("NORATCHECK")
 
     inst.foleysound = "dontstarve/movement/foley/jewlery"
 

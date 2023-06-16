@@ -33,22 +33,29 @@ local MAX_FX_SCALE = 1.3
 local FX_RAND_SCALE = math.sqrt(MAX_FX_SCALE - MIN_FX_SCALE)
 
 local function TellBossImDead(inst)
-if inst.components.follower.leader ~= nil then
-local leader = inst.components.follower.leader
-	if leader.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ~= nil and inst.number ~= nil then
-	local mother = leader.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
-		if inst.number == 1 then
-		mother.OneDead(mother)
-		end
-		if inst.number == 2 then
-		mother.TwoDead(mother)
-		end
-		if inst.number == 3 then
-		mother.ThreeDead(mother)
+	if inst.components.follower.leader ~= nil then
+		local leader = inst.components.follower.leader
+		
+		if leader.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY) ~= nil and inst.number ~= nil then
+			local mother = leader.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+			
+			if mother ~= nil then
+				if inst.number == 1 and mother.OneDead ~= nil then
+					mother.OneDead(mother)
+				end
+				
+				if inst.number == 2 and mother.TwoDead ~= nil then
+					mother.TwoDead(mother)
+				end
+				
+				if inst.number == 3 and mother.ThreeDead ~= nil then
+					mother.ThreeDead(mother)
+				end
+			end
 		end
 	end
 end
-end
+
 local function SpawnMoveFx(inst)
     if math.random() < .4 then
         local fx = SpawnPrefab("lavae_move_fx")

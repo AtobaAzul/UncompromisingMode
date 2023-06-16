@@ -95,8 +95,8 @@ end
 local function SummerDigging(inst)
 	if TheWorld.state.issummer then
 		local x,y,z = inst.Transform:GetWorldPosition()
-		local scorpionHoles = #TheSim:FindEntities(x,y,z,30,{"scorpionhole"})
-		if scorpionHoles < 3 then
+		local scorpionHoles = TheSim:FindEntities(x,y,z,30,{"scorpionhole"})
+		if scorpionHoles ~= nil and #scorpionHoles < 3 then
 			for i = 1,(3-scorpionHoles) do
 				DigHole(inst)
 			end
