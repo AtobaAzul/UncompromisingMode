@@ -2333,7 +2333,7 @@ return{
         },
         RABBITHOLE =
         {
-            GENERIC = "Underground sytem, rabbit burrows. Caution, ankle injuries.",
+            GENERIC = "Underground system, rabbit burrows. Caution, ankle injuries.",
             SPRING = "Easy fix, dig again. Rabbits preoccupied, mating season.",
         },
         RAINOMETER =
