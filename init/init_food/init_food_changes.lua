@@ -107,10 +107,9 @@ if TUNING.DSTU.ICECREAMBUFF then
 			end
 		end)
 	end
-
 end
 
---[[local BACONEGGS = 
+--[[local BACONEGGS =
 {
 	"baconeggs",
 	"baconeggs_spice_chili",
@@ -554,8 +553,27 @@ for k, v in ipairs(froglegs) do
 		if not GLOBAL.TheWorld.ismastersim then
 			return
 		end
-
-		inst:AddComponent("tradable")
+		if inst.components.tradable == nil then
+			inst:AddComponent("tradable")
+		end
 		inst.components.tradable.goldvalue = TUNING.GOLD_VALUES.MEAT
+	end)
+end
+
+
+local POWCAKE =
+{
+	"icecream",
+	"icecream_spice_chili",
+	"icecream_spice_garlic",
+	"icecream_spice_salt",
+	"icecream_spice_sugar",
+}
+
+for k, v in pairs(POWCAKE) do
+	AddPrefabPostInit(v, function(inst)
+		if inst ~= nil then
+			inst:AddTag("NORATCHECK")
+		end
 	end)
 end
