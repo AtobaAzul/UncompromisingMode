@@ -26,7 +26,7 @@ local events =
 								inst.disguisetarget ~= nil and inst.disguisetarget or
 								inst.spawnedforplayer ~= nil and inst.spawnedforplayer or
 								nil
-		if target and not inst:IsNear(target, inst.components.combat.attackrange - 1) then
+		if target and target:IsValid() and inst:IsValid() and not inst:IsNear(target, inst.components.combat.attackrange - 1) then
 			if not (inst.sg:HasStateTag("busy") or inst.components.health:IsDead()) then
 				inst.sg:GoToState("teleport_to", target)
 			end
