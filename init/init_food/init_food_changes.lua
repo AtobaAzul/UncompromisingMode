@@ -88,6 +88,8 @@ end
 
 
 if TUNING.DSTU.ICECREAMBUFF then
+	recipes.icecream.OldOnEat = recipes.icecream.oneatenfn
+
 	local ICECREAM =
 	{
 		"icecream",
@@ -101,12 +103,11 @@ if TUNING.DSTU.ICECREAMBUFF then
 		AddPrefabPostInit(v, function(inst)
 			if inst ~= nil and inst.components.edible ~= nil then
 				inst.components.edible.sanityvalue = 0
+				inst.components.edible:SetOnEatenFn(ApplyIcecreamBuff)
 			end
 		end)
 	end
 
-	recipes.icecream.OldOnEat = recipes.icecream.oneatenfn
-	recipes.icecream.oneatenfn = ApplyIcecreamBuff
 end
 
 --[[local BACONEGGS = 
