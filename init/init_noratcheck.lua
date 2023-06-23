@@ -17,7 +17,7 @@ TUNING.DSTU.NORATCHECK =--defining it here for simplicity's sake.
 }
 
 for k, v in ipairs(TUNING.DSTU.NORATCHECK) do
-    env.AddPrefabPost(v, function(inst)
+    env.AddPrefabPostInit(v, function(inst)
 		if inst ~= nil then
 			inst:AddTag("NORATCHECK")
 		end
