@@ -102,6 +102,4 @@ env.AddPrefabPostInit("lantern", function(inst)
     inst.components.upgradeable.onupgradefn = OnUpgrade
 
     inst:AddComponent("named")
-
-    inst:AddTag("NORATCHECK")
 end)
