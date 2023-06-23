@@ -32,6 +32,7 @@ env.AddPrefabPostInit("wardrobe", function(inst)
     if not TheWorld.ismastersim then
         return
     end
+
     inst:AddComponent("container")
     inst.components.container:WidgetSetup("wardrobe")
     inst.components.container.skipclosesnd = true
@@ -68,6 +69,11 @@ env.AddPrefabPostInit("wardrobe", function(inst)
 
     inst.components.workable:SetOnWorkCallback(onhit)
     inst.components.workable:SetOnFinishCallback(onhammered)
+    inst:ListenForEvent("onburnt", function()
+        if inst.components.channelable ~= nil then
+            inst.components.channelable.enabled = false
+        end
+    end)
 
     inst:SetPhysicsRadiusOverride(0)
     MakeObstaclePhysics(inst, 0)
@@ -76,10 +82,11 @@ end)
 STRINGS.ACTIONS.STARTCHANNELING.WARDROBE = "Use"
 
 ACTIONS.STARTCHANNELING.strfn = function(act)
-    if act.target and act.target:HasTag("pump")
-    then return "PUMP"
-    elseif act.target and act.target:HasTag("wardrobe")
-    then return "WARDROBE"
-    else return nil
+    if act.target and act.target:HasTag("pump") then
+        return "PUMP"
+    elseif act.target and act.target:HasTag("wardrobe") then
+        return "WARDROBE"
+    else
+        return nil
     end
 end
