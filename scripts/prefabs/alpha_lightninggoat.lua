@@ -95,7 +95,7 @@ local function setcharged(inst, instant)
 end
 
 local function IsChargedGoat(dude)
-    return dude:HasTag("lightninggoat") and dude:HasTag("charged")
+    return dude:HasTag("lightninggoat") and (dude:HasTag("charged") or dude:HasTag("alpha_goat"))
 end
 
 local function OnAttacked(inst, data)
@@ -217,6 +217,17 @@ local function fn()
     inst.components.combat:SetRetargetFunction(1, RetargetFn)
     inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
     inst.components.combat:SetHurtSound("dontstarve_DLC001/creatures/lightninggoat/hurt")
+	
+    inst:AddComponent("groundpounder")
+    inst.components.groundpounder.destroyer = false
+    inst.components.groundpounder.damageRings = 0
+    inst.components.groundpounder.destructionRings = 1
+    inst.components.groundpounder.platformPushingRings = 1
+    inst.components.groundpounder.numRings = 1
+    inst.components.groundpounder.groundpoundfx = "sparks"
+    inst.components.groundpounder.groundpoundringfx = "sparks"
+    --inst.components.groundpounder.groundpoundringfx = "firering_fx"
+	
     ------------------------------------------
 
     inst:AddComponent("sleeper")

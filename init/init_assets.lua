@@ -806,6 +806,7 @@ Assets = {
 	Asset("ANIM", "anim/um_waterfall_pool.zip"),
 
 	Asset("ANIM", "anim/alpha_lightning_goat_build.zip"),
+	Asset("ANIM", "anim/alpha_lightning_goat_stomp.zip"),
 
 	Asset("ANIM", "anim/marshmist.zip"),
 

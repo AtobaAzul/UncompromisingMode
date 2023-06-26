@@ -30,19 +30,41 @@ local function ElectricalAttack(inst)
 	end
 end
 
+local function SparkingFX(inst)
+    local x, y, z = inst.Transform:GetWorldPosition()
+
+    local x1 = x + math.random(-3, 3)
+    local z1 = z + math.random(-3, 3)
+
+    SpawnPrefab("sparks").Transform:SetPosition(x1, 0 + 0.25 * math.random(), z1)
+end
+
+local function update_hit_recovery_delay(inst)
+	inst._last_hitreact_time = GetTime()
+end
+
+local function onattackedfn(inst, data)
+    if inst.components.health and not inst.components.health:IsDead()
+    and (not inst.sg:HasStateTag("busy") or inst.sg:HasStateTag("frozen")) then
+        if inst.components.combat and data and data.attacker then 
+			inst.components.combat:SuggestTarget(data.target) 
+			
+		end
+		
+		if data and not (data.weapon ~= nil and (data.weapon.components.projectile or data.weapon.components.complexprojectile)) or data == nil then
+			inst.sg:GoToState("hit")
+		end
+    end
+end
+
 local events =
 {
     CommonHandlers.OnLocomote(false,true),
     CommonHandlers.OnSleep(),
     CommonHandlers.OnFreeze(),
     CommonHandlers.OnAttack(),
-    CommonHandlers.OnAttacked(),
     CommonHandlers.OnDeath(),
-    -- EventHandler("attacked", function(inst)
-    --     if inst.components.health and not inst.components.health:IsDead() and not inst.sg:HasStateTag("busy") then
-    --         inst.sg:GoToState("hit")
-    --     end
-    -- end),
+    EventHandler("attacked", onattackedfn),
 }
 
 local states=
@@ -90,7 +112,116 @@ local states=
             end),
         },
     },
+	
+	State{
+        name = "hit",
+        tags = { "hit", "busy" },
 
+        onenter = function(inst)
+            if inst.components.locomotor ~= nil then
+                inst.components.locomotor:StopMoving()
+            end
+
+            inst.AnimState:PlayAnimation("hit")
+
+            if inst.SoundEmitter ~= nil and inst.sounds ~= nil and inst.sounds.hit ~= nil then
+                inst.SoundEmitter:PlaySound(inst.sounds.hit)
+            end
+        end,
+
+        events =
+        {
+            EventHandler("animover", function(inst) 
+				if inst.AnimState:AnimDone() then
+					--if math.random() > 0.5 then
+						inst.sg:GoToState("stomp_attack_start")
+					--else
+					--	inst.sg:GoToState("idle")
+					--end
+				end			
+			end),
+        },
+    },
+	
+	State{
+        name = "attack",
+        tags = { "attack", "busy" },
+
+        onenter = function(inst, target)
+            if inst.components.locomotor ~= nil then
+                inst.components.locomotor:StopMoving()
+            end
+            inst.AnimState:PlayAnimation("atk")
+            inst.components.combat:StartAttack()
+
+            inst.sg.statemem.target = target
+        end,
+
+        timeline = {
+			TimeEvent(1*FRAMES, function(inst)
+				inst.count = math.random(4,6)
+				--TheNet:Announce("Enteringgoatmove")
+				--inst.AnimState:Show("fx")
+				--inst.sg:GoToState("electricalattack")
+				if inst.charged then
+					inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/lightninggoat/jacobshorn")
+				end
+			end),
+			
+			TimeEvent(9*FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/lightninggoat/headbutt")
+			end),
+			
+			TimeEvent(12*FRAMES, function(inst)
+				if inst.charged then
+					inst.components.combat:DoAttack(inst.sg.statemem.target, nil, nil, "electric")
+				else
+					inst.components.combat:DoAttack(inst.sg.statemem.target)
+				end			
+			end),
+			
+			TimeEvent(15*FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
+		},
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+				if inst.AnimState:AnimDone() then
+					inst.sg:GoToState("idle")
+				end
+			end),
+        },
+    },
+	
+	State{
+        name = "death",
+        tags = { "busy" },
+
+        onenter = function(inst)
+            if inst.components.locomotor ~= nil then
+                inst.components.locomotor:StopMoving()
+            end
+            inst.AnimState:PlayAnimation("death")
+            RemovePhysicsColliders(inst)
+            inst.components.lootdropper:DropLoot(inst:GetPosition())
+        end,
+
+        timeline = {
+			TimeEvent(0*FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/lightninggoat/death")
+			end),
+			TimeEvent(3*FRAMES, function(inst)
+				if inst.charged then
+					inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/lightninggoat/jacobshorn")
+				end
+			end),
+			TimeEvent(34*FRAMES, function(inst)
+				inst.Light:Enable(false)
+				inst.AnimState:ClearBloomEffectHandle()
+			end),
+		},
+    },
+	
     State{
         name = "walk_start",
         tags = { "moving", "canrotate" },
@@ -303,6 +434,7 @@ local states=
             EventHandler("animqueueover", function(inst) inst.sg:GoToState("idle") end),
         },
     },
+	
     State{
         name = "electricalattack",
         tags = { "busy","attack" },
@@ -330,49 +462,116 @@ local states=
 			end),
         },
     },
-}
+	
+    State{
+        name = "stomp_attack_start",
+        tags = { "busy", "attack" },
 
-CommonStates.AddCombatStates(states,
-{
-    attacktimeline =
-    {
-        TimeEvent(1*FRAMES, function(inst)
-			inst.count = math.random(4,6)
-			--TheNet:Announce("Enteringgoatmove")
-			--inst.AnimState:Show("fx")
-			--inst.sg:GoToState("electricalattack")
-            if inst.charged then
-                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/lightninggoat/jacobshorn")
-            end
-        end),
-        TimeEvent(9*FRAMES, function(inst)
-            inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/lightninggoat/headbutt")
-        end),
-        TimeEvent(12*FRAMES, function(inst)
-            if inst.charged then
-                inst.components.combat:DoAttack(inst.sg.statemem.target, nil, nil, "electric")
-            else
-                inst.components.combat:DoAttack(inst.sg.statemem.target)
-            end			
-        end),
-        TimeEvent(15*FRAMES, function(inst) inst.sg:RemoveStateTag("attack") end),
+        onenter = function(inst)
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("stompy")
+			inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/lightninggoat/taunt")
+			
+			for i = 1, 10 do
+				inst:DoTaskInTime(i / 8, SparkingFX)
+			end
+        end,
+
+        timeline =
+        {
+            TimeEvent(12*FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/lightninggoat/headbutt")
+			end),
+			
+            TimeEvent(16*FRAMES, function(inst)
+				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/land")
+			end),
+			
+            TimeEvent(16*FRAMES, function(inst)
+				local dodamageRadius = 6
+				inst.components.groundpounder.destructionRings = 1
+				inst.components.groundpounder.platformPushingRings = 1
+				inst.components.groundpounder.numRings = 1
+				
+				local ringfx = SpawnPrefab("firering_fx")
+				ringfx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+				ringfx.Transform:SetScale(0.8, 0.8, 0.8)
+				
+				inst.components.groundpounder.destructionRings = 1
+				inst.components.groundpounder.platformPushingRings = 1
+				inst.components.groundpounder.numRings = 1
+				inst.components.groundpounder:GroundPound()
+				inst.components.combat:DoAreaAttack(inst, dodamageRadius, nil, nil, "electric", { "lightninggoat", "ghost" })
+				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/lightninggoat/shocked_electric")
+			end)
+        },
+		
+        events =
+        {
+            EventHandler("animover", function(inst)
+				inst.sg:GoToState("stomp_attack_loop")
+			end),
+        },
     },
-    deathtimeline =
-    {
-        TimeEvent(0*FRAMES, function(inst)
-            inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/lightninggoat/death")
-        end),
-        TimeEvent(3*FRAMES, function(inst)
-            if inst.charged then
-                inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/lightninggoat/jacobshorn")
-            end
-        end),
-        TimeEvent(34*FRAMES, function(inst)
-            inst.Light:Enable(false)
-            inst.AnimState:ClearBloomEffectHandle()
-        end),
+	
+    State{
+        name = "stomp_attack_loop",
+        tags = { "busy", "attack" },
+
+        onenter = function(inst)
+			if inst.stomp_count == nil then
+				inst.stomp_count = 1
+			else
+				inst.stomp_count = inst.stomp_count + 1
+			end
+			
+			local dodamageRadius = 6 + inst.stomp_count
+			
+			local ringfx = SpawnPrefab("firering_fx")
+			ringfx.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			ringfx.Transform:SetScale(0.8 + (inst.stomp_count / 9), 0.8 + (inst.stomp_count / 9), 0.8 + (inst.stomp_count / 9))
+				
+			inst.components.groundpounder.destructionRings = 1 + inst.stomp_count
+			inst.components.groundpounder.platformPushingRings = 1 + inst.stomp_count
+			inst.components.groundpounder.numRings = 1 + inst.stomp_count
+			inst.components.groundpounder:GroundPound()
+			inst.components.combat:DoAreaAttack(inst, dodamageRadius, nil, nil, "electric", { "lightninggoat", "ghost" })
+		
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("stompy_loop")
+            inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/lightninggoat/shocked_electric")
+        end,
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+				if inst.stomp_count == 2 then
+					inst.sg:GoToState("stomp_attack_stop")
+				else
+					inst.sg:GoToState("stomp_attack_loop")
+				end
+			end),
+        },
     },
-})
+	
+    State{
+        name = "stomp_attack_stop",
+        tags = { "busy", "attack" },
+
+        onenter = function(inst)
+			inst.stomp_count = 0
+            inst.Physics:Stop()
+            inst.AnimState:PlayAnimation("stompy_pst")
+        end,
+
+        events =
+        {
+            EventHandler("animover", function(inst)
+				inst.sg:GoToState("idle")
+			end),
+        },
+    },
+}
 CommonStates.AddFrozenStates(states)
 CommonStates.AddSleepStates(states,
 {
