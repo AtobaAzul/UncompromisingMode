@@ -487,7 +487,7 @@ local states=
 				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/land")
 			end),
 			
-            TimeEvent(16*FRAMES, function(inst)
+            TimeEvent(22*FRAMES, function(inst)
 				local dodamageRadius = 6
 				inst.components.groundpounder.destructionRings = 1
 				inst.components.groundpounder.platformPushingRings = 1
