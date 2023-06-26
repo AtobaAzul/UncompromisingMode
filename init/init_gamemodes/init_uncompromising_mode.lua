@@ -57,6 +57,7 @@ modimport("init/init_generatorcharging")
 --	[ 	Console Commands for tests !	]	--
 
 require("uncompromisingcommands")
+modimport("scripts/uncompromisingcommands_autocomplete")
 
 --	[ 				Gamemodes			]	--
 
@@ -80,6 +81,7 @@ modimport("init/init_creatures/init_harder_monsters")
 modimport("init/init_food/init_food_changes")
 modimport("init/init_food/init_bird_changes")
 modimport("init/init_food/init_rare_foods")
+modimport("init/init_vetcurse")
 
 --if  GetModConfigData("harder_recipes") then <-- This isn't even a config change, yet.
 modimport("init/init_recipes")
@@ -107,6 +109,9 @@ end
 modimport("init/init_weather/init_harder_weather")
 --modimport("init/init_weather/init_snowstorm")
 modimport("init/init_weather/init_snowstorm_structures")
+if GetModConfigData("smog") then
+	modimport("init/init_weather/init_smog")
+end
 --end
 
 if GetModConfigData("acidrain") then

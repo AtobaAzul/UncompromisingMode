@@ -32,7 +32,7 @@ end
 
 local function ShootProjectile(inst)
 	local target = inst.belchtarget
-	if target ~= nil then
+	if target ~= nil and target:IsValid() then
 		local x, y, z = inst.Transform:GetWorldPosition()
 		local projectile = SpawnPrefab("guardian_goo")
 		if inst.tentbelch then
@@ -49,18 +49,21 @@ local function ShootProjectile(inst)
 		local targetpos = target:GetPosition()
 		projectile.Transform:SetPosition(x, y, z)
 		local a, b, c = target.Transform:GetWorldPosition()
-		local targetpos = target:GetPosition()
-		targetpos.x = targetpos.x + math.random(-4,4)
-		targetpos.z = targetpos.z + math.random(-4,4)
-		local dx = a - x
-		local dz = c - z
-		local rangesq = dx * dx + dz * dz
-		local maxrange = 20
-		local bigNum = 15
-		local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange * 2)
-		projectile:AddTag("canthit")
-		projectile.components.complexprojectile:SetHorizontalSpeed(speed+math.random(4,9))
-		projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+		
+		if a ~= nil then
+			local targetpos = target:GetPosition()
+			targetpos.x = targetpos.x + math.random(-4,4)
+			targetpos.z = targetpos.z + math.random(-4,4)
+			local dx = a - x
+			local dz = c - z
+			local rangesq = dx * dx + dz * dz
+			local maxrange = 20
+			local bigNum = 15
+			local speed = easing.linear(rangesq, bigNum, 3, maxrange * maxrange * 2)
+			projectile:AddTag("canthit")
+			projectile.components.complexprojectile:SetHorizontalSpeed(speed+math.random(4,9))
+			projectile.components.complexprojectile:Launch(targetpos, inst, inst)
+		end
 	end
 end
 	

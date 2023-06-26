@@ -27,8 +27,8 @@ Assets = {
 
     Asset( "IMAGE", "images/names_gold_winky.tex" ),
     Asset( "ATLAS", "images/names_gold_winky.xml" ),
-	Asset( "IMAGE", "images/names_wathom.tex" ),
-    Asset( "ATLAS", "images/names_wathom.xml" ),
+	Asset( "IMAGE", "images/names_gold_wathom.tex" ),
+    Asset( "ATLAS", "images/names_gold_wathom.xml" ),
 
 
 	Asset("ANIM", "anim/wixie.zip"),

@@ -3,8 +3,7 @@
 -- If you want to start from the beginning, check the sacred_chest.lua postinit first!
 
 -- First: This is a copy of the vanilla sacred chest. We can add recipes.
--- Ideally, it would be able to accept any order/number of items, rather than exactly ordered reicpes of 6...
--- But that's beyond me at the moment. Feel free to try if you're bored, but it's not really essential.
+-- We can add recipes to it.
 
 -- Second: This will also be 'scannable' for a Logbook entry for itself in the future.
 -- MAKE THAT A SCRAPBOOK ENTRY LMAO this is fine this is fine this is fine
@@ -27,13 +26,24 @@ local prefabs =
 
 local offering_recipe =
 {
+	-- VANILLA RECIPES
+	-- When the ruins furniture objects are able to be studied/scanned for their permenant recipe unlock, comment these out.
+	
 	ruinsrelic_plate_blueprint		= { "nightmare_timepiece", "cutstone", "nightmarefuel", "petals", "berries", "carrot" },
 	ruinsrelic_chipbowl_blueprint	= { "nightmare_timepiece", "cutstone", "nightmarefuel", "carrot", "berries", "petals" },
 	ruinsrelic_bowl_blueprint		= { "nightmare_timepiece", "cutstone", "nightmarefuel", "rabbit", "carrot", "petals" },
 	ruinsrelic_vase_blueprint		= { "nightmare_timepiece", "cutstone", "nightmarefuel", "redgem", "butterfly", "petals" },
-	ruinsrelic_chair_blueprint		= { "nightmare_timepiece", "cutstone", "nightmarefuel", "purplegem", "rabbit", "petals"},
+	ruinsrelic_chair_blueprint		= { "nightmare_timepiece", "cutstone", "nightmarefuel", "purplegem", "rabbit", "petals" },
 	ruinsrelic_table_blueprint		= { "nightmare_timepiece", "cutstone", "nightmarefuel", "purplegem", "crow", "rabbit" },
-	-- When the ruins furniture objects are able to be studied/scanned for their permenant recipe unlock, comment out the above.
+	
+	
+	-- UNCOMP RECIPES
+	-- Don't add any recipe that matches a possible Metheus puzzle solution.
+	-- For reference: A Walking Cane and Thulecite are present in every solution.
+	
+	-- Currently, recipe items must be put in the specified order, starting from the first chest slot.
+	-- They must also have 6 ingredients; if you want less, the related functions must be rewritten in a way compatible with vanilla recipes.
+	
 	trinket_wathom1					= { "plaguemask", "nightmarefuel", "rat_tail", "red_cap", "red_cap", "red_cap" },
 }
 
@@ -41,6 +51,9 @@ for k, _ in pairs(offering_recipe) do
 	table.insert(prefabs, k)
 end
 
+
+-- If you want to make the recipes not dependant on order/6 ingredients, I suggest dumpstering this block of code and starting over.
+-- And editing what calls it to check the slots while deciding the recipe to attempt.
 local function CheckOffering(items)
 	for k, recipe in pairs(offering_recipe) do
 		local valid = true
@@ -54,7 +67,7 @@ local function CheckOffering(items)
 			return k
 		end
 	end
-
+	
 	return nil -- If no valid recipe, this happens, spitting the items back out.
 end
 
@@ -232,11 +245,11 @@ local function fn()
 	inst.entity:AddSoundEmitter()
 	inst.entity:AddMiniMapEntity()
 	inst.entity:AddNetwork()
+	
+	inst:SetPrefabNameOverride("sacred_chest")
 
 	inst.MiniMapEntity:SetIcon("sacred_chest.png")
-
-	inst:AddTag("chest")
-	inst:AddTag("um_sacred_chest")
+	
 	inst.AnimState:SetBank("sacred_chest")
 	inst.AnimState:SetBuild("sacred_chest")
 	inst.AnimState:PlayAnimation("closed")

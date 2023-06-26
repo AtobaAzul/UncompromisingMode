@@ -219,7 +219,7 @@ TUNING.DSTU = {
     WARLY_SAME_OLD_COOLDOWN = total_day_time * 3,
     WARLY_SAME_OLD_MULTIPLIERS = { .6, .5, .35, .2, .1 },
     WARLY_BUTCHER = GetModConfigData("warly_butcher"),
-	--WARLY_FOOD = GetModConfigData("warly_food"),
+    --WARLY_FOOD = GetModConfigData("warly_food"),
     -- Wigfrid
     BATTLESONG_FIRE_RESIST_MOD = 0, -- orig 33% fire resis
     -- Maxwell
@@ -237,8 +237,8 @@ TUNING.DSTU = {
     -- WICKERNERF_HORTICULTURE = GetModConfigData("applied horticulture"),
     WICKERNERF_BEEBOOK = GetModConfigData("apicultural notes"),
     WICKERNERF_MOONBOOK = GetModConfigData("lunar grimoire"),
-	WICKERBUFF_HORTICULTURE = GetModConfigData("lux aeterna"),
-	WICKERBUFF_LIGHT = GetModConfigData("horticulture, expanded"),
+    WICKERBUFF_HORTICULTURE = GetModConfigData("lux aeterna"),
+    WICKERBUFF_LIGHT = GetModConfigData("horticulture, expanded"),
     -- Wanda
     WANDA_NERF = GetModConfigData("wanda_nerf"),
     -- Wortox
@@ -260,7 +260,7 @@ TUNING.DSTU = {
     WEATHERHAZARD_START_DATE_AUTUMN = GetModConfigData("weatherhazard_autumn"),
     WEATHERHAZARD_START_DATE_WINTER = GetModConfigData("weatherhazard_winter"),
     WEATHERHAZARD_START_DATE_SPRING = GetModConfigData("weatherhazard_spring"),
-    -- WEATHERHAZARD_START_DATE_SUMMER = GetModConfigData("weatherhazard_summer"),
+    WEATHERHAZARD_START_DATE_SUMMER = GetModConfigData("weatherhazard_summer"),
     RNE_CHANCE = GetModConfigData("rne chance"),
     SNOWSTORMS = GetModConfigData("snowstorms"),
     HARDER_SHADOWS = GetModConfigData("harder_shadows"),
@@ -318,7 +318,7 @@ TUNING.DSTU = {
         "alterguardian_phase1",
         "alterguardian_phase2",
         "alterguardian_phase3",
-		"crabking"
+        "crabking"
     },
 
     ----------------------------------------------------------------------------
@@ -369,23 +369,30 @@ TUNING.DSTU = {
     DISABLE_MEGAFLARE = GetModConfigData("disable_megaflare"),
     WIXIE = GetModConfigData("wixie_walter"),
     WIXIE_BIRDS = GetModConfigData("wixie_birds"),
+    MONSTERSMALLMEAT = GetModConfigData("monstersmallmeat"),
+    THE_COOLER_SACRED_CHEST = GetModConfigData("the_cooler_sacred_chest"),
+    BOSS_RESISTANCE = GetModConfigData("bossresistance"),
+    STORMS = GetModConfigData("um_storms"),
+    STORMS_PERFORMANCE = GetModConfigData("um_storms_performance"),
+    PYRENETTLES = GetModConfigData("pyrenettles"),
+    HEATWAVES = GetModConfigData("heatwaves"),
+    SMOG = GetModConfigData("smog"),
     -- boss hp qol
     BEEQUEEN_HEALTH = GetModConfigData("bee queen health"),
     TOADSTOOL_HEALTH = GetModConfigData("toadstool health"),
     TWIN1_HEALTH = GetModConfigData("twins health"),
     TWIN2_HEALTH = GetModConfigData("twins health"),
+
+    --mod chekcs
     ISLAND_ADVENTURES = ia_check,
     TREATS_FOR_WEBBER = tfw_check,
-    MONSTERSMALLMEAT = GetModConfigData("monstersmallmeat"),
-    THE_COOLER_SACRED_CHEST = GetModConfigData("the_cooler_sacred_chest"),
-    BOSS_RESISTANCE = GetModConfigData("bossresistance")
 }
 
 -- [              DST Related Overrides                  ]
 
 if GetModConfigData("beebox_nerf") then
-    TUNING.BEEBOX_BEES = 2
-    TUNING.BEEBOX_RELEASE_TIME = (0.5 * day_time) / 2
+    TUNING.BEEBOX_BEES = 1
+    TUNING.BEEBOX_RELEASE_TIME = day_time * 1.5
 end
 
 if GetModConfigData("wixie_walter") then
@@ -509,4 +516,9 @@ end
 if GetModConfigData("wortox") == "APOLLO" then
     TUNING.WORTOX_SOULHEAL_MINIMUM_HEAL = 5
     TUNING.WORTOX_MAPHOP_DISTANCE_SCALER = TUNING.WORTOX_MAPHOP_DISTANCE_SCALER * 1.5 -- 50%
+end
+
+if GetModConfigData("heatwaves") then
+    TUNING.WILDFIRE_CHANCE = TUNING.WILDFIRE_CHANCE * 10 --testing, fuck it why not?!
+    TUNING.WILDFIRE_RETRY_TIME = TUNING.WILDFIRE_RETRY_TIME * 0.5
 end

@@ -19,7 +19,7 @@ ANNOUNCE.ANNOUNCE_TOADSTOOLED = "A blight springs up from the depths of Hel!"
 -- FoodBuffs
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LESSERELECTRICATTACK = "Fear my electric might!"
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_ELECTRICRETALIATION =
-    "The gods of thunder have blessed me!"
+"The gods of thunder have blessed me!"
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_FROZENFURY = "ssSsooo cCccold"
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_VETCURSE = "What god hath frowned upon me?"
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_LESSERELECTRICATTACK =
@@ -41,9 +41,9 @@ DESCRIBE.UNCOMPROMISING_RAT = "And thus cometh a plague upon both our houses!"
 DESCRIBE.UNCOMPROMISING_RATHERD = "Den of the little beasts!"
 DESCRIBE.UNCOMPROMISING_RATBURROW = "Den of the little beasts!"
 DESCRIBE.UNCOMPROMISING_WINKYBURROW =
-    "Goods travel with the speed of Ratatoskr."
+"Goods travel with the speed of Ratatoskr."
 DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW =
-    "Lair of the beast, and the treasure that lie within."
+"Lair of the beast, and the treasure that lie within."
 
 DESCRIBE.WINKY = {
     GENERIC = "A man sized rat! Surely this is an omen!",
@@ -81,7 +81,7 @@ DESCRIBE.UM_MONSTEREGG = "An egg of evil intent!"
 DESCRIBE.UM_MONSTEREGG_COOKED = "I hath slain the beast."
 
 DESCRIBE.MUSHROOMSPROUT_OVERWORLD =
-    "Let us rip out this affliction by the root!"
+"Let us rip out this affliction by the root!"
 DESCRIBE.TOADLING = "Fel guardians of corruption!"
 
 DESCRIBE.GASMASK = "Poisonous air will not consume me!!"
@@ -123,7 +123,7 @@ DESCRIBE.TRAPDOOR = "Nothing here."
 DESCRIBE.HOODEDTRAPDOOR = "Nothing there."
 DESCRIBE.WICKER_TENTACLE = "A poisoned foe is no challenge!"
 DESCRIBE.HONEY_LOG =
-    "Flesh of the woods... what trickster is responsible for this?"
+"Flesh of the woods... what trickster is responsible for this?"
 
 DESCRIBE.BUSHCRAB = "A wild encounter!"
 DESCRIBE.LAVAE2 = DESCRIBE.LAVAE
@@ -145,7 +145,7 @@ DESCRIBE.SWILSON = "A challenger!"
 DESCRIBE.VAMPIREBAT = "The bigger they are, the harder they fall!"
 DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 DESCRIBE.CRITTERLAB_REAL_BROKEN =
-    "With some moon rocks we could create the perfect battlements for tiny creatures!"
+"With some moon rocks we could create the perfect battlements for tiny creatures!"
 DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 DESCRIBE.BUGZAPPER = "This is not a weapon worthy of a Valkyrie!"
@@ -189,6 +189,7 @@ DESCRIBE.WHISPERPOD_NORMAL_GROUND = {
 DESCRIBE.FRUITBAT = "Tis not meat!"
 DESCRIBE.PITCHERPLANT = "A plant!"
 DESCRIBE.APHID = "Have at thee, bug!"
+DESCRIBE.NYMPH = "More bugs!"
 DESCRIBE.GIANT_TREE_INFESTED = "A plague is wrought upon it."
 DESCRIBE.GIANT_BLUEBERRY = "I shalln't be tempted!"
 DESCRIBE.STEAMEDHAMS = "'Tis obviously grilled!"
@@ -197,7 +198,7 @@ DESCRIBE.SIMPSALAD = "This is why I eat meat!"
 DESCRIBE.BEEFALOWINGS = "We sing to the honor of this beefalo!"
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE = "I will not be moved!"
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE =
-    "I've lost connection with the beefalo."
+"I've lost connection with the beefalo."
 DESCRIBE.WIDOWSHEAD = "The head of mine enemy is before me!"
 DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
@@ -233,14 +234,14 @@ DESCRIBE.ANTIHISTAMINE = "It shall keep mine nose safe!"
 ANNOUNCE.CURSED_ITEM_EQUIP = "This tool fights back!"
 DESCRIBE.VETSITEM = "I must challenge myself further in order to use this!"
 DESCRIBE.SCREECHER_TRINKET = "A cursed symbol, no doubt!"
-ACTIONFAIL.GIVE = {NOTNIGHT = "The great moon in the sky will give it power."}
+ACTIONFAIL.GIVE = { NOTNIGHT = "The great moon in the sky will give it power." }
 
 DESCRIBE.MAGMAHOUND = "It battles from afar, thy coward!"
 DESCRIBE.LIGHTNINGHOUND = "Thor's minion? What hath I done to gain his ire?"
 DESCRIBE.SPOREHOUND = "Fenrir's spawn, twisted beyond recognition."
 DESCRIBE.GLACIALHOUND = "A frozen hide!"
 DESCRIBE.RNESKELETON =
-    "A fallen warrior! Raise your weapon if you wish to fall again!"
+"A fallen warrior! Raise your weapon if you wish to fall again!"
 DESCRIBE.RAT_WHIP = "Thy lashes sting, a feared weapon!"
 DESCRIBE.KLAUS_AMULET = "The lock of a warrior!"
 DESCRIBE.CRABCLAW = "A magnificent weapon to be adorned with jewels!"
@@ -299,7 +300,7 @@ DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM .. "\nShaped only for battle!"
 DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM .. "\nShaped only for battle!"
 DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM .. "\nShaped only for battle!"
 DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM ..
-                                       "\nShaped only for battle!"
+    "\nShaped only for battle!"
 
 DESCRIBE.RED_MUSHED_ROOM = "Mushed and crushed!"
 DESCRIBE.GREEN_MUSHED_ROOM = "Mushed and crushed!"
@@ -359,7 +360,7 @@ DESCRIBE.PIED_PIPER_FLUTE = "The songs I could play!"
 DESCRIBE.UNCOMPROMISING_PACKRAT = "Coward, stop running off!"
 
 ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK =
-    "We live together or drown together, my faithful vessel!"
+"We live together or drown together, my faithful vessel!"
 
 ACTIONFAIL.CHARGE_FROM = {
     NOT_ENOUGH_CHARGE = "It lies dormant.",
@@ -378,7 +379,7 @@ DESCRIBE.WINONA_BATTERY_LOW_ITEM = "An evil contraption!"
 DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "An evil contraption!"
 DESCRIBE.POWERCELL = "She has harenessed thors might into a box."
 DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL =
-    "She has harenessed thors might into a box."
+"She has harenessed thors might into a box."
 DESCRIBE.MINERHAT_ELECTRICAL = "Thors boons are without doubt."
 DESCRIBE.OCEAN_SPEAKER = "It echoes songs unfit for battle!"
 -- DESCRIBE.UM_SIREN = "Finally a worthy opponent, our battle shall be legendary!"
@@ -396,7 +397,7 @@ DESCRIBE.EYEOFTERROR_MINI_ALLY = "You fight with the might of Odin's eye!"
 DESCRIBE.EYEOFTERROR_MINI_GROUNDED_ALLY = DESCRIBE.EYEOFTERROR_MINI_GROUNDED
 
 DESCRIBE.STUFFED_PEEPER_POPPERS =
-    "The remains of a valiant foe, watch with disgust!"
+"The remains of a valiant foe, watch with disgust!"
 DESCRIBE.UM_DEVILED_EGGS = "I hath hatched pure evil!"
 DESCRIBE.LUSH_ENTRANCE = "I've no time to dig when there's hunts to be had!"
 DESCRIBE.CRITTER_FIGGY = "A blight spawned warrior!"
@@ -425,9 +426,9 @@ DESCRIBE.SUNKENCHEST_ROYAL_ORANGE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
 DESCRIBE.SUNKENCHEST_ROYAL_YELLOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
 DESCRIBE.SUNKENCHEST_ROYAL_RAINBOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
 DESCRIBE.STEERINGWHEEL_COPPER =
-    "My vessel will be covered from all angles of attack."
+"My vessel will be covered from all angles of attack."
 DESCRIBE.STEERINGWHEEL_COPPER_ITEM =
-    "Sturdy, but a it requires a vessel to steer."
+"Sturdy, but a it requires a vessel to steer."
 DESCRIBE.BOAT_BUMPER_COPPER = "Plate armor to keep the waves at bay."
 DESCRIBE.BOAT_BUMPER_COPPER_KIT = "Plate mail for thine vessel."
 DESCRIBE.UM_DREAMCATCHER = "I only dream of glorius death in battle!"
@@ -438,11 +439,11 @@ DESCRIBE.SLUDGESTACK = "Ichor spews from Hel's veins!"
 DESCRIBE.SPECTER_SHIPWRECK = "Swept away by the ocean, and left to decay."
 
 DESCRIBE.UNCOMPROMISING_HARPOON =
-    "Stabbing things from a distance has never been easier."
+"Stabbing things from a distance has never been easier."
 DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
 DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
 DESCRIBE.UM_MAGNERANG =
-    "A weapon that will attatch to my enemies armor, and weigh them down."
+"A weapon that will attatch to my enemies armor, and weigh them down."
 DESCRIBE.UM_MAGNERANGREEL = "It keeps my enemies at bay."
 DESCRIBE.SIREN_THRONE = "An amateurs throne."
 DESCRIBE.LAVASPIT_SLUDGE = "Fire of Hel!"
@@ -504,4 +505,17 @@ DESCRIBE.SMALLFISHMEAT_DRIED = "Barely a snack!"
 DESCRIBE.WIXIEGUN = "This modern warfare frightens me."
 
 DESCRIBE.MARA_BOSS1 = "YES!! FIGHT ME, DEMON!!"
-DESCRIBE.UM_SACRED_CHEST = DESCRIBE.SACRED_CHEST
+ANNOUNCE.GAS_DAMAGE = "Ack! Kaff! Can't... Breathe!"
+
+-- Pyre Nettle stuff
+DESCRIBE.UM_PYRE_NETTLES = "A brave facade, for such a cowardly form!"
+DESCRIBE.UM_SMOLDER_SPORE = "It shakes with power."
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_EATEN = "Fires of Hel!!"
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP = "Fires of Hel!!"
+DESCRIBE.UM_ARMOR_PYRE_NETTLES = "It shall keep the worst of the firey plants' wrath at bay."
+DESCRIBE.UM_BLOWDART_PYRE = "I'd rather be in the MIDST of the fire and brimstone!"
+
+-- Under the Weather Part 1
+DESCRIBE.ALPHA_LIGHTNINGGOAT = "You wish to challenge me, hel-beast?"
+DESCRIBE.UM_TORNADO = "Fight me, wind!"
+DESCRIBE.UM_WATERFALL = "You shall not drown me!"

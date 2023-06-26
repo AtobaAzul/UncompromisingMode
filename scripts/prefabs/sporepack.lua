@@ -5,21 +5,19 @@ local assets =
     Asset("ANIM", "anim/ui_krampusbag_2x5.zip"),
 }
 
-local function TryPerish(item)
+local function TryPerish(item, inst)
     if item:IsInLimbo() then
         local owner = item.components.inventoryitem ~= nil and item.components.inventoryitem.owner or nil
-        if owner == nil or
-            (owner.components.container ~= nil and
-                (owner:HasTag("chest") or owner:HasTag("structure"))) then
-            --in limbo but not inventory or container?
-            --or in a closed chest
-            return
+        local pack = inst.components.inventory ~= nil and
+            inst.components.inventory:GetEquippedItem(EQUIPSLOTS["BACK"] ~= nil and EQUIPSLOTS.BACK or EQUIPSLOTS.BODY)
+
+        if owner == inst or owner == pack then
+            item.components.perishable:ReducePercent(0.005)
         end
     end
-    item.components.perishable:ReducePercent(0.005)
 end
 
-local function TryRefresh(item)
+local function TryRefresh(item, inst)
     if item:IsInLimbo() then
         local owner = item.components.inventoryitem ~= nil and item.components.inventoryitem.owner or nil
         if owner == nil or
@@ -39,15 +37,16 @@ local function DoAreaSpoil(inst)
     local ents = TheSim:FindEntities(x, y, z, 3, nil, { "small_livestock" }, { "fresh", "stale", "spoiled", "spore" })
     for i, v in ipairs(ents) do
         if v:HasTag("spore") then
-            TryRefresh(v)
+            TryRefresh(v, inst)
         else
-            TryPerish(v)
+            TryPerish(v, inst)
         end
     end
 end
 
 local function CreateBase()
     local inst = CreateEntity()
+
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()

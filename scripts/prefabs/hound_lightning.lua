@@ -34,25 +34,24 @@ local function Zap(inst)
 
 	for i, v in ipairs(ents) do
 		if v ~= nil and v.components.health ~= nil and not v.components.health:IsDead() and v.components.combat ~= nil then
-			if v:HasTag("player") and (v.components.inventory ~= nil and not v.components.inventory:IsInsulated()) then
-				if not v:HasTag("electricdamageimmune") then
-					v.components.combat:GetAttacked(inst, 20, nil, "electric")
-					
-					if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") then
-						v.sg:GoToState("electrocute")
-					end
-				else
-					if v.components.playerlightningtarget ~= nil then
-						v.components.playerlightningtarget:DoStrike()
-					end
+			if not v:HasTag("electricdamageimmune") then
+				--v.components.combat:GetAttacked(inst, 20, nil, "electric")
 
-					if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") then
-						v.sg:GoToState("hit")
-					end
+				local mult = not (v:HasTag("electricdamageimmune") or
+					(v.components.inventory ~= nil and v.components.inventory:IsInsulated()))
+					and TUNING.ELECTRIC_DAMAGE_MULT + TUNING.ELECTRIC_WET_DAMAGE_MULT * (v.components.moisture ~= nil and v.components.moisture:GetMoisturePercent() or (v:GetIsWet() and 1 or 0))
+					or 1
+					
+				local damage = -20 * mult
+						
+				v.components.health:DoDelta(damage, nil, inst.prefab, nil, inst)
+					
+				if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") then
+					v.sg:GoToState("electrocute")
 				end
-			elseif v.components.combat ~= nil then
-				if not v:HasTag("electricdamageimmune") then
-					v.components.combat:GetAttacked(inst, 10, nil, "electric")
+			else
+				if v.components.playerlightningtarget ~= nil then
+					v.components.playerlightningtarget:DoStrike()
 				end
 
 				if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") then

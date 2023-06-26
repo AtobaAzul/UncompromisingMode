@@ -31,9 +31,9 @@ ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now."
 
 -- CaliforniaKing
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING =
-    "Glargh!! Tasted terrible! Knew me wasn't supposed to eat this but did it anyways!!"
+"Glargh!! Tasted terrible! Knew me wasn't supposed to eat this but did it anyways!!"
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING =
-    "Never gonna do that impossible thing ever again! Gotta tell someone how that happen!"
+"Never gonna do that impossible thing ever again! Gotta tell someone how that happen!"
 DESCRIBE.CALIFORNIAKING = "Glurgh... this is bad drink!"
 -- CaliforniaKing
 
@@ -43,7 +43,7 @@ DESCRIBE.UNCOMPROMISING_RATHERD = "Little eyes in hole! Hello!"
 DESCRIBE.UNCOMPROMISING_RATBURROW = "Little eyes in hole! Hello!"
 DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Why you burying things in here..?"
 DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW =
-    "Oh. This where stuff ends up? How it get here?"
+"Oh. This where stuff ends up? How it get here?"
 
 DESCRIBE.WINKY = {
     GENERIC = "Hi squeaky!",
@@ -156,7 +156,7 @@ DESCRIBE.SUNGLASSES = "It make everything a bit dark."
 
 DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 DESCRIBE.CRITTERLAB_REAL_BROKEN =
-    "Maybe moon rock make new home for tiny things."
+"Maybe moon rock make new home for tiny things."
 DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 DESCRIBE.BUGZAPPER = "Hit bugs with zappy stick!"
@@ -167,7 +167,7 @@ DESCRIBE.SHADOW_TELEPORTER = "Treasure in its claws!"
 DESCRIBE.POLLENMITEDEN = "It home for nasty itchy bugs!"
 DESCRIBE.POLLENMITES = "Glorp! Go away itchy bugs!"
 DESCRIBE.SHADOW_CROWN =
-    "Queen Wur-..? ...Erm.... Maybe someone else can have this crown..."
+"Queen Wur-..? ...Erm.... Maybe someone else can have this crown..."
 DESCRIBE.RNEGHOST = "Glorp! Ghost might be cold, but can't have fire!"
 DESCRIBE.TRAPDOORGRASS = "Big grass."
 DESCRIBE.LUREPLAGUE_RAT = "Glorp! Something wrong with this squeaker!"
@@ -193,6 +193,7 @@ DESCRIBE.WHISPERPOD_NORMAL_GROUND = {
 DESCRIBE.FRUITBAT = "Glorp! Fruit alive?!"
 DESCRIBE.PITCHERPLANT = "Gluuurgh... can't reach."
 DESCRIBE.APHID = "It a bug, florp."
+DESCRIBE.NYMPH = "Where it going?"
 DESCRIBE.GIANT_TREE_INFESTED = "Bugs eating big tree."
 DESCRIBE.GIANT_BLUEBERRY = "Yum!"
 DESCRIBE.STEAMEDHAMS = "Glurgh... how you even \"steam\" ham?"
@@ -200,9 +201,9 @@ DESCRIBE.BLUEBERRYPANCAKES = "Fluffy and juicy!"
 DESCRIBE.SIMPSALAD = "Very purple and tasty!"
 DESCRIBE.BEEFALOWINGS = "Glurgh, who hid meat in horn?"
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE =
-    "Oh no... that was bad idea! Glurgh... me gonna be sick..."
+"Oh no... that was bad idea! Glurgh... me gonna be sick..."
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE =
-    "Never gonna do impossible things again... was terrible!"
+"Never gonna do impossible things again... was terrible!"
 DESCRIBE.WIDOWSHEAD = "Glurp... it still look kinda scary..."
 DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
@@ -230,13 +231,13 @@ DESCRIBE.BERNIE_ACTIVE = {
     GENERIC = "Wanna play with it!",
     ASHLEY = "Wanna play with it!"
 }
-DESCRIBE.BERNIE_BIG = {GENERIC = "Fun toy, flurp!", ASHLEY = "Fun toy, flurp!"}
+DESCRIBE.BERNIE_BIG = { GENERIC = "Fun toy, flurp!", ASHLEY = "Fun toy, flurp!" }
 DESCRIBE.ANTIHISTAMINE = "Keep nose strong!"
 ANNOUNCE.CURSED_ITEM_EQUIP = "GLORP! HURTS!"
 DESCRIBE.VETSITEM =
-    "Wants me to curse? ...Maybe will when not in front of Wicker-lady..."
+"Wants me to curse? ...Maybe will when not in front of Wicker-lady..."
 DESCRIBE.SCREECHER_TRINKET = "Glurp, not wanna touch that one!"
-ACTIONFAIL.GIVE = {NOTNIGHT = "It sleepy? Wake up at night maybe."}
+ACTIONFAIL.GIVE = { NOTNIGHT = "It sleepy? Wake up at night maybe." }
 
 DESCRIBE.MAGMAHOUND = "GLORP! It shooting fire! Run!!"
 DESCRIBE.LIGHTNINGHOUND = "Lightning doggy! LIGHTNING DOGGY!!"
@@ -274,7 +275,7 @@ DESCRIBE.CAVE_ENTRANCE_OPEN_SUNKDECID = DESCRIBE.CAVE_ENTRANCE_OPEN
 DESCRIBE.CAVE_EXIT_SUNKDECID = DESCRIBE.CAVE_EXIT
 
 DESCRIBE.PIGKING_PIGTORCH =
-    "Flurmph, gonna make better fire sticks around better king!"
+"Flurmph, gonna make better fire sticks around better king!"
 -- Blowgun stuff
 DESCRIBE.UNCOMPROMISING_BLOWGUN = DESCRIBE.BLOWDART_PIPE
 DESCRIBE.BLOWGUNAMMO_TOOTH = DESCRIBE.BLOWDART_PIPE
@@ -285,7 +286,7 @@ DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
 DESCRIBE.ANCIENT_AMULET_RED = "Impy say it help my soul..?"
 DESCRIBE.UM_BEAR_TRAP = "\"Keep looking down\"? ...Glorp! Almost stepped on it!"
 DESCRIBE.UM_BEAR_TRAP_OLD =
-    "\"Keep looking down\"? ...Glorp! Almost stepped on it!"
+"\"Keep looking down\"? ...Glorp! Almost stepped on it!"
 DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "Gonna use forest trap for myself!"
 DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Shiny trap extra dangerous!"
 DESCRIBE.CORNCAN = "Crunchy corn inside?! Will smash it open!"
@@ -294,7 +295,7 @@ DESCRIBE.SKULLCHEST_CHILD = "Something weird about this box..."
 DESCRIBE.SLOBBERLOBBER = "Glurph, hot and yucky."
 DESCRIBE.GORE_HORN_HAT = "Only one horn? Flurmph, at least it big..."
 DESCRIBE.BEARGERCLAW =
-    "Gonna throw rocks like that rock thrower Weenowna-lady made!"
+"Gonna throw rocks like that rock thrower Weenowna-lady made!"
 DESCRIBE.FEATHER_FROCK = "This how birdies feel all the time?"
 
 DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM .. "\nGem different?"
@@ -304,7 +305,7 @@ DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM .. "\nGem different?"
 DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM .. "\nGem different?"
 DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM .. "\nGem different?"
 DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM ..
-                                       "\nGem different?"
+    "\nGem different?"
 
 DESCRIBE.RED_MUSHED_ROOM = "Squished it!"
 DESCRIBE.GREEN_MUSHED_ROOM = "Squished it!"
@@ -317,7 +318,7 @@ DESCRIBE.STANTON_SHADOW_TONIC = "Something wrong with this drink..."
 DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 DESCRIBE.STANTON = "You not dead?"
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE =
-    "Glorp! Feel like could fight anything!"
+"Glorp! Feel like could fight anything!"
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE = "Wanna drink more!"
 -- StantonStuff
 
@@ -343,18 +344,18 @@ DESCRIBE.MUTATOR_TRAPDOOR = DESCRIBE.MUTATOR_WARRIOR
 DESCRIBE.WOODPECKER = "Colorful birdy."
 DESCRIBE.SNOTROAST = "Glurgh... Who tried to cook nose?!"
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW =
-    "Glurp! That not supposed to happen! Wicker-lady, HELP!!"
+"Glurp! That not supposed to happen! Wicker-lady, HELP!!"
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW =
-    "Hate doing impossible things... Not fun at all!"
+"Hate doing impossible things... Not fun at all!"
 DESCRIBE.BOOK_RAIN = "Why Wicker-lady only okay with this book getting wet?"
 DESCRIBE.FLORAL_BANDAGE = "This really make the hurts go away!"
 DESCRIBE.DORMANT_RAIN_HORN =
-    "This shell not look right... Maybe Crabby lady know what to do!"
+"This shell not look right... Maybe Crabby lady know what to do!"
 DESCRIBE.RAIN_HORN = "Ooooh... It so pretty!"
 DESCRIBE.DRIFTWOODFISHINGROD = "Fishies seem to like this more!"
 
-ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {LEVEL_1 = "Squeakers want our stuff!"}
-ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {LEVEL_1 = "Squeakers want our food!"}
+ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = { LEVEL_1 = "Squeakers want our stuff!" }
+ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = { LEVEL_1 = "Squeakers want our food!" }
 ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
     LEVEL_1 = "Squeakers coming together out there!"
 }
@@ -375,7 +376,7 @@ ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "Gurgle!"
 ----UNDER THE WEATHER----
 
 DESCRIBE.WINONA_TOOLBOX =
-    "Weenowna-lady not like me playing with things inside..."
+"Weenowna-lady not like me playing with things inside..."
 ACTIONFAIL.WINONATOOLBOX = "Can't open lock!"
 DESCRIBE.WINONA_CATAPULT_ITEM = "One of tough ladies things."
 DESCRIBE.WINONA_SPOTLIGHT_ITEM = "One of tough ladies things."
@@ -439,9 +440,9 @@ DESCRIBE.SLUDGE_CORK = "Big plug thingy."
 DESCRIBE.SLUDGESTACK = "Ooey Gooey."
 DESCRIBE.SPECTER_SHIPWRECK = "Boat not round?"
 
-DESCRIBE.UNCOMPROMISING_HARPOON = "." -- unimplemented
+DESCRIBE.UNCOMPROMISING_HARPOON = "."       -- unimplemented
 DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "." -- unimplemented
-DESCRIBE.UNCOMPROMISING_HARPOONREEL = "." -- unimplemented
+DESCRIBE.UNCOMPROMISING_HARPOONREEL = "."   -- unimplemented
 DESCRIBE.UM_MAGNERANG = "Magnet? How that work?"
 DESCRIBE.UM_MAGNERANGREEL = "Tiny horsey shoe!"
 DESCRIBE.SIREN_THRONE = "Pretty lady's rock?"
@@ -504,4 +505,20 @@ DESCRIBE.SMALLFISHMEAT_DRIED = "Me feel sick..."
 DESCRIBE.WIXIEGUN = "Heavy..."
 
 DESCRIBE.MARA_BOSS1 = "FloRPT!"
-DESCRIBE.UM_SACRED_CHEST = DESCRIBE.SACRED_CHEST
+ANNOUNCE.GAS_DAMAGE = "GLOURPG! GLOPRK!"
+
+-- Pyre Nettle stuff
+DESCRIBE.UM_PYRE_NETTLES = "Still taste like burning!"
+DESCRIBE.UM_SMOLDER_SPORE = "F-flurpt..."
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_EATEN = {
+	"KNEW IT WOULD HAPPEN, BUT IT LOOK SO GOOD!!",
+	"REGRET EVERYTHING!!"
+}
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP = "FLURPT!! FORGOT HAD THAT!!"
+DESCRIBE.UM_ARMOR_PYRE_NETTLES = "Make scales hurty. Still bad plant, florp!"
+DESCRIBE.UM_BLOWDART_PYRE = "Go big pop! Make things run away!"
+
+-- Under the Weather Part 1
+DESCRIBE.ALPHA_LIGHTNINGGOAT = "You a king too?"
+DESCRIBE.UM_TORNADO = "Glurp, that look bad..."
+DESCRIBE.UM_WATERFALL = "Yay! Splashy comes to us!"

@@ -78,9 +78,11 @@ local function UncompromisingSpawnGOOOOO(inst, data)
         end
         -- TheNet:Announce(i) --For Troubleshooting
         -- TheNet:Announce("Prefab: "..v.prefab) --For Troubleshooting
-        if v.prefab ~= "umdc_tileflag" and v.prefab ~= "seeds" --[[hecking birds man]] then
+        if v.prefab ~= "umdc_tileflag" and v.prefab ~= "seeds" then
             local prefab = SpawnPrefab(v.prefab)
-
+            if prefab:HasTag("walkingplank") then
+                prefab:Remove()
+            end
             if prefab then
                 -- for area handlers, so they can find all things created by a especific SS.
                 if inst.umss_tags then
@@ -99,6 +101,16 @@ local function UncompromisingSpawnGOOOOO(inst, data)
                     else
                         -- TheNet:Announce("ocean tile! removing!")
                         prefab:Remove()
+                    end
+                end
+
+                if v.prefab == "boat_cannon" then
+                    -- local tx, tz = TheWorld.Map:GetTileCoordsAtPoint(x, y, z)
+                    -- local angle_awayfrom_aop = prefab:GetAngleToPoint(tx, y, tz) + 180
+                    local angle_awayfrom_aop = prefab:GetAngleToPoint(x, 0, z) + 180
+
+                    if prefab.Transform ~= nil then
+                        prefab.Transform:SetRotation(angle_awayfrom_aop)
                     end
                 end
 
@@ -151,14 +163,20 @@ local function UncompromisingSpawnGOOOOO(inst, data)
                 if inst.spawninwater_tiles then
                     -- TheNet:Announce("spawninwater true!")
                     -- print(v.tile)
-                    TheWorld.Map:SetTile(tile_x, tile_z, v.tile)
+                    if v.tile == WORLD_TILES.MONKEY_DOCK then
+                        TheWorld.components.dockmanager:CreateDockAtPoint(x + v.x * rotx, (v.y and v.y + y) or 0, z + v.z * rotz, WORLD_TILES.MONKEY_DOCK)
+                        -- TheWorld.components.dockmanager:ResolveDockSafetyAtPoint(x + v.x * rotx, (v.y and v.y + y) or 0, z + v.z * rotz)
+                    else
+                        TheWorld.Map:SetTile(tile_x, tile_z, v.tile)
+                    end
                 else
                     if TheWorld.Map:IsOceanTileAtPoint(x + v.x * rotx, (v.y and v.y + y) or 0, z + v.z * rotz) then
                         -- TheNet:Announce("water at point!")
                     else
                         -- TheNet:Announce("not water!")
-                        if v.tile == 257 then
-                            TheWorld.components.dockmanager:CreateDockAtPoint(tile_x, (v.y and v.y + y) or 0, tile_z, v.tile)
+                        if v.tile == WORLD_TILES.MONKEY_DOCK then
+                            TheWorld.components.dockmanager:CreateDockAtPoint(x + v.x * rotx, (v.y and v.y + y) or 0, z + v.z * rotz, WORLD_TILES.MONKEY_DOCK)
+                            -- TheWorld.components.dockmanager:ResolveDockSafetyAtPoint(x + v.x * rotx, (v.y and v.y + y) or 0, z + v.z * rotz)
                         else
                             TheWorld.Map:SetTile(tile_x, tile_z, v.tile)
                         end
@@ -167,7 +185,7 @@ local function UncompromisingSpawnGOOOOO(inst, data)
             end
         end
     end
-    inst:Remove()
+    inst:DoTaskInTime(FRAMES, inst.Remove)
 end
 
 local function findTable(stringTable) -- We randomly weighted a table string name, now find it in umss_tables
@@ -238,7 +256,7 @@ local function makefn()
     inst.AnimState:SetBuild("sign_home")
     inst.AnimState:PlayAnimation("idle")
     inst:AddTag("_writeable")
-
+    inst:AddTag("umss_general")
     inst.entity:SetPristine()
 
     if not TheWorld.ismastersim then

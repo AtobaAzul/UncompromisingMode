@@ -6,7 +6,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WEBBER.ACTIONFAIL
 
 ANNOUNCE.DREADEYE_SPOOKED = "Eek! That scared us..."
 ANNOUNCE.ANNOUNCE_HARDCORE_RES =
-    "Mister Wilson says that isn't how ghosts work."
+"Mister Wilson says that isn't how ghosts work."
 ANNOUNCE.ANNOUNCE_WINONAGEN = "Father told me not to play with machinery."
 ANNOUNCE.ANNOUNCE_RATRAID = "What's that sound? Friends?"
 ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Aww, it came out to play!"
@@ -31,7 +31,7 @@ ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now"
 
 -- CaliforniaKing
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING =
-    "We did it! We finished the.... the.."
+"We did it! We finished the.... the.."
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "What happened?"
 DESCRIBE.CALIFORNIAKING = "Surely we've eaten worse."
 -- CaliforniaKing
@@ -41,9 +41,9 @@ DESCRIBE.UNCOMPROMISING_RAT = "Nice fur!"
 DESCRIBE.UNCOMPROMISING_RATHERD = "It's looking at us! Hey there little guy!"
 DESCRIBE.UNCOMPROMISING_RATBURROW = "It's looking at us! Hey there little guy!"
 DESCRIBE.UNCOMPROMISING_WINKYBURROW =
-    "It's one of her treasure troves, she's a helpful rat."
+"It's one of her treasure troves, she's a helpful rat."
 DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW =
-    "She puts so many things in there! I hope she doesn't mind if we peek."
+"She puts so many things in there! I hope she doesn't mind if we peek."
 
 DESCRIBE.WINKY = {
     GENERIC = "%s is kind of like us!",
@@ -71,7 +71,7 @@ DESCRIBE.WIXIE = {
 }
 
 DESCRIBE.RATPOISONBOTTLE =
-    "Wendy really likes this stuff! Wonder what it tastes like..."
+"Wendy really likes this stuff! Wonder what it tastes like..."
 DESCRIBE.RATPOISON = "Whoops! It's all spilled!"
 
 DESCRIBE.MONSTERSMALLMEAT = "We'd rather not think about that too much."
@@ -97,7 +97,7 @@ ANNOUNCE.ANNOUNCE_FIREFALL = {
 }
 ANNOUNCE.ANNOUNCE_ROOTING = "We're stuck! Help!"
 ANNOUNCE.ANNOUNCE_SNOWSTORM =
-    "Sounds like a storm! Lets get ready for a snow day."
+"Sounds like a storm! Lets get ready for a snow day."
 ANNOUNCE.SHADOWTALKER = {
     "I AM A MONSTER", "I CAN NEVER GO HOME", "I WANT TO GO HOME"
 }
@@ -122,7 +122,7 @@ DESCRIBE.VETERANSHRINE = "It's looking at us!!"
 DESCRIBE.RAT_TAIL = "It looks like our fur! But more smelly."
 DESCRIBE.PLAGUEMASK = "It looks like a chicken!"
 DESCRIBE.SPIDER_TRAPDOOR =
-    "We don't care that you are shy, you're still our friend!"
+"We don't care that you are shy, you're still our friend!"
 DESCRIBE.TRAPDOOR = "Our smart friends made those!"
 DESCRIBE.HOODEDTRAPDOOR = "Our smart friends must be nearby!"
 DESCRIBE.WICKER_TENTACLE = "I think it's sea sick, or land sick."
@@ -147,7 +147,7 @@ DESCRIBE.SWILSON = "No, stop! It's us, Wilson!"
 DESCRIBE.VAMPIREBAT = "Nice monster!"
 DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 DESCRIBE.CRITTERLAB_REAL_BROKEN =
-    "Moon rocks would make a great new home for some little critters!"
+"Moon rocks would make a great new home for some little critters!"
 DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 DESCRIBE.BUGZAPPER = "What does this do? OUCH!"
@@ -190,8 +190,9 @@ DESCRIBE.WHISPERPOD_NORMAL_GROUND = {
 }
 DESCRIBE.FRUITBAT = "It's our favorite color!"
 DESCRIBE.PITCHERPLANT =
-    "If we could climb like the other spiders we could reach it."
+"If we could climb like the other spiders we could reach it."
 DESCRIBE.APHID = "Not a spider!"
+DESCRIBE.NYMPH = "These guys fly too?"
 DESCRIBE.GIANT_TREE_INFESTED = "It looks pretty sick."
 DESCRIBE.GIANT_BLUEBERRY = "The juice gets everywhere!"
 DESCRIBE.STEAMEDHAMS = "This is just a hamburger."
@@ -232,11 +233,11 @@ DESCRIBE.BERNIE_BIG = {
     ASHLEY = "It's creepy and cute at the same time!!"
 }
 DESCRIBE.ANTIHISTAMINE =
-    "It stops us from sneezing! We're not sure how, but it does!"
+"It stops us from sneezing! We're not sure how, but it does!"
 ANNOUNCE.CURSED_ITEM_EQUIP = "Ouchies!"
 DESCRIBE.VETSITEM = "Our hands aren't cursed enough for this!"
 DESCRIBE.SCREECHER_TRINKET = "I don't like it."
-ACTIONFAIL.GIVE = {NOTNIGHT = "I think its sleeping? But, in the day time?"}
+ACTIONFAIL.GIVE = { NOTNIGHT = "I think its sleeping? But, in the day time?" }
 
 DESCRIBE.MAGMAHOUND = "Eep, he spits!"
 DESCRIBE.LIGHTNINGHOUND = "Ouch ouch ouch! Our feetsies!"
@@ -287,9 +288,9 @@ DESCRIBE.UM_BEAR_TRAP_OLD = "Eep!"
 DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "Ouch. We prefer webbing."
 DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "Ouch. We prefer webbing. "
 DESCRIBE.CORNCAN =
-    "I was never allowed to touch a can opener. Mom said I'd cut my finger open."
+"I was never allowed to touch a can opener. Mom said I'd cut my finger open."
 DESCRIBE.SKULLCHEST_CHILD =
-    "Can we reach our arms in there and hug someone on the other side?"
+"Can we reach our arms in there and hug someone on the other side?"
 
 DESCRIBE.SLOBBERLOBBER = "Spitting is rude!"
 DESCRIBE.GORE_HORN_HAT = "Ow! Don't touch the pointy end! Ow..."
@@ -303,7 +304,7 @@ DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM .. "\nI think I broke it."
 DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM .. "\nI think I broke it."
 DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM .. "\nI think I broke it."
 DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM ..
-                                       "\nI think I broke it."
+    "\nI think I broke it."
 
 DESCRIBE.RED_MUSHED_ROOM = "Squish!"
 DESCRIBE.GREEN_MUSHED_ROOM = "Squish!"
@@ -316,9 +317,9 @@ DESCRIBE.STANTON_SHADOW_TONIC = "Mom would kill me if she saw me doing this..."
 DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 DESCRIBE.STANTON = "You're a bit... creepy..."
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_HYPERCOURAGE =
-    "We're feeling more comfortable in our skin and fur!"
+"We're feeling more comfortable in our skin and fur!"
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_HYPERCOURAGE =
-    "Everything's getting scary again!!"
+"Everything's getting scary again!!"
 -- StantonStuff
 
 DESCRIBE.ARMORLAVAE = DESCRIBE.LAVAE
@@ -344,13 +345,13 @@ DESCRIBE.MUTATOR_TRAPDOOR = "I tried something different this time!"
 DESCRIBE.WOODPECKER = "We like your beak!"
 DESCRIBE.SNOTROAST = "Whoa! So many boogies!"
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW =
-    "Boogies aren't good for eating.."
+"Boogies aren't good for eating.."
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
 DESCRIBE.BOOK_RAIN_UM = "We would like to play in the rain, not read about it."
 DESCRIBE.FLORAL_BANDAGE = "We like to lick it sometimes."
 DESCRIBE.DORMANT_RAIN_HORN = "This is familiar to us."
 DESCRIBE.RAIN_HORN =
-    "Our memory must be mixed up, we thought this did something different."
+"Our memory must be mixed up, we thought this did something different."
 DESCRIBE.DRIFTWOODFISHINGROD = "We can catch so many fish with this."
 
 ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
@@ -375,7 +376,7 @@ ACTIONFAIL.CHARGE_FROM = {
 }
 ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "I think we did it right!"
 ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED =
-    "Agh! We don't think that's right."
+"Agh! We don't think that's right."
 
 ----UNDER THE WEATHER----
 
@@ -387,7 +388,7 @@ DESCRIBE.WINONA_BATTERY_LOW_ITEM = "I don't want to lose an arm!"
 DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "I don't want to lose an arm!"
 DESCRIBE.POWERCELL = "That's a big battery."
 DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL =
-    "Makes everything we put in on a battery!"
+"Makes everything we put in on a battery!"
 DESCRIBE.MINERHAT_ELECTRICAL = "Now We can charge it too."
 DESCRIBE.OCEAN_SPEAKER = "I want to get closer but he seems weary."
 -- DESCRIBE.UM_SIREN = "Her songs make our head all fuzzy..."
@@ -402,13 +403,13 @@ DESCRIBE.ARMOR_SHARKSUIT_UM = "We feel more monstrous with it on."
 DESCRIBE.ROCKJAWLEATHER = "What a nice fin."
 
 DESCRIBE.EYEOFTERROR_MINI_ALLY =
-    "Just like us, they aren't as scary as they look!"
+"Just like us, they aren't as scary as they look!"
 DESCRIBE.EYEOFTERROR_MINI_GROUNDED_ALLY = DESCRIBE.EYEOFTERROR_MINI_GROUNDED
 
 DESCRIBE.STUFFED_PEEPER_POPPERS = "I think we might have gone too far."
 DESCRIBE.UM_DEVILED_EGGS = "We love these!"
 DESCRIBE.LUSH_ENTRANCE =
-    "I'm not sure I want to go down there... but he wants to!"
+"I'm not sure I want to go down there... but he wants to!"
 DESCRIBE.CRITTER_FIGGY = "Yay!! A new bug friend!"
 DESCRIBE.GIANT_TREE_BIRDNEST = "He says he thinks our nest is safer."
 
@@ -447,7 +448,7 @@ DESCRIBE.SLUDGESTACK = "We don't think that'll be good for our fur."
 DESCRIBE.SPECTER_SHIPWRECK = "Is anyone in there?"
 
 DESCRIBE.UNCOMPROMISING_HARPOON =
-    "Stabbing things from a distance has never been easier."
+"Stabbing things from a distance has never been easier."
 DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
 DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
 DESCRIBE.UM_MAGNERANG = "Didn't dad have some in his drawer."
@@ -478,7 +479,7 @@ DESCRIBE.CHARLES_T_HORSE = "Aw, poor toy!"
 DESCRIBE.THE_REAL_CHARLES_T_HORSE = "Giddy up, horsey!"
 DESCRIBE.SLINGSHOT_MATILDA = "I don't think she wants us to play with this."
 DESCRIBE.SLINGSHOT_GNASHER =
-    "It's telling me to commit crimes! No thanks, slingshot!"
+"It's telling me to commit crimes! No thanks, slingshot!"
 
 DESCRIBE.SLINGSHOTAMMO_LAZY = DESCRIBE.SLINGSHOTAMMO_THULECITE
 DESCRIBE.SLINGSHOTAMMO_SHADOW = DESCRIBE.SLINGSHOTAMMO_THULECITE
@@ -513,4 +514,17 @@ DESCRIBE.SMALLFISHMEAT_DRIED = "Itty bitty fishy bites!"
 DESCRIBE.WIXIEGUN = "We shouldn't play with this!"
 
 DESCRIBE.MARA_BOSS1 = "Ooh, pretty!"
-DESCRIBE.UM_SACRED_CHEST = DESCRIBE.SACRED_CHEST
+ANNOUNCE.GAS_DAMAGE = "Khoff. Khak. Khak."
+
+-- Pyre Nettle stuff
+DESCRIBE.UM_PYRE_NETTLES = "That one doesn't look nice!"
+DESCRIBE.UM_SMOLDER_SPORE = "It's different from the others..."
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_EATEN = "Ack! Our fur's on fire!!"
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP = "Ack! Our fur's on fire!!"
+DESCRIBE.UM_ARMOR_PYRE_NETTLES = "It pokes through our fur. Itchy."
+DESCRIBE.UM_BLOWDART_PYRE = "It might hurt our friends..."
+
+-- Under the Weather Part 1
+DESCRIBE.ALPHA_LIGHTNINGGOAT = "None of the goats back home were this ornery..."
+DESCRIBE.UM_TORNADO = "I hate tornadoes..."
+DESCRIBE.UM_WATERFALL = "Splishy splash!"

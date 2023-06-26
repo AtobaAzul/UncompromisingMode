@@ -3,11 +3,12 @@ local component_post = {
     "groundpounder",
     "propagator",
     "moisture",
-    "weapon", --	"hunter",
+    "weapon",
+    --	"hunter",
     "kramped",
     "explosiveresist",
     "crop",
-    "wildfires", --	"beargerspawner",
+    --	"beargerspawner",
     "workable",
     "sleepingbaguser",
     "hounded",
@@ -28,26 +29,33 @@ local component_post = {
     "wisecracker",
     "boatphysics",
     "map",
-    "playerspawner", --	"drownable",
+    "playerspawner",
+    --	"drownable",
     "combat",
     "combat_replica",
     "hullhealth",
-    "health", --	"spellbook"
+    "health",
+    --	"spellbook"
     "finiteuses",
     "piratespawner",
     "repairable",
     "sewing",
-    "container"
+    "container",
+    "weather",
+    "worldtemperature",
+    "worldwind"
 }
 
 local prefab_post = {
     "atrium_gate",
-	"dragonfly",
+    "dragonfly",
     "wardrobe",
     "shieldofcthulu",
     "clockworks",
-    "flingobalance", --	"chester",
-    "mushlight", --	"toadstool_cap", Moved to init_uncompromising_mod.lua
+    "flingobalance",
+    --	"chester",
+    "mushlight",
+    --	"toadstool_cap", Moved to init_uncompromising_mod.lua
     "amulet",
     "cave_entrance_open",
     "catcoon",
@@ -69,20 +77,24 @@ local prefab_post = {
     "mutatedhound",
     "skeleton",
     --	"shadowcreature",
-    "berrybush", --	"papyrus",
+    "berrybush",
+    --	"papyrus",
     "sporecloud",
-    "featherhat", --	"malbatross",
+    "featherhat",
+    --	"malbatross",
     "mushrooms",
     "rock_ice",
     "toadstool",
-    "oasislake", --	"shadowcreature",
+    "oasislake",
+    --	"shadowcreature",
     "lureplant",
     "spiderden",
     "stafflights",
     "armor_ruins",
     "sweatervest",
     "fans",
-    "skeletonhat", --	"rock_avocado_fruit_sprout_sapling",
+    "skeletonhat",
+    --	"rock_avocado_fruit_sprout_sapling",
     "icepack",
     "heatrock",
     "dragonfly_spawner",
@@ -91,7 +103,6 @@ local prefab_post = {
     "batcave",
     "rain",
     "molehat",
-    "klaus",
     "mosquito",
     "armor_bramble",
     --	"woby",
@@ -100,7 +111,7 @@ local prefab_post = {
     "critterlab",
     "wobster",
     "trinkets", -- This is for the grave mound cc trinkets
-    "trap", -- prevents traps and rabbits from 'sleeping' off screen
+    "trap",     -- prevents traps and rabbits from 'sleeping' off screen
     "moonbase",
     "koalas",
     "pumpkin_lantern",
@@ -116,12 +127,12 @@ local prefab_post = {
     "pigking",
     "marblebean",
     "reviver",
-    "krampus_sack",
     --	"bundle",
     "eyebrella",
     "birds",
     "tonichandlers",
-    "houndwarning", --	"carnival_host",
+    "houndwarning",
+    --	"carnival_host",
     "spider_whistle",
     "spider_healer",
     "siestahut",
@@ -135,7 +146,12 @@ local prefab_post = {
     "grassgekko",
     "minotaur_drops",
     "frog",
-    "waterplant", --	"grassgator",
+    "klaus",
+    "klaus_sack",
+    "krampus",
+    "krampus_sack",
+    "waterplant",
+    --	"grassgator",
     "alterguardian",
     "seasonal_shoals",
     "petals",
@@ -162,26 +178,33 @@ local prefab_post = {
     "wptags",
     "inventoryitem_classified",
     "cannonballs",
-    -- "renameable_items",
-    "archive_centipede"
-
+    --	"renameable_items",
+    "lightninggoatherd",
+    "archive_centipede",
+    "firenettles",
+	"staff_tornado",
+	"rainometer",
+    "winterometer",
 }
 
 local stategraph_post = {
     "wilson",
     "wilson_client",
     "spider",
-    "frog", --	"wobysmall",
+    "frog",
+    --	"wobysmall",
     --	"shadowcreature",
-    "stalker_minion", --	"merm",
+    "stalker_minion",
+    --	"merm",
     "carnival_host",
     "catcoon"
 }
 
 local class_post = {
-    --	"components/inventoryitem_replica",
+    "components/inventoryitem_replica",
     --	"screens/playerhud",
-    "widgets/itemtile", --	"widgets/hoverer",
+    "widgets/itemtile",
+    --	"widgets/hoverer",
     "widgets/moisturemeter",
     "widgets/controls",
     "widgets/craftslot",
@@ -191,31 +214,34 @@ local class_post = {
 local brain_post = {
     --	"hound",
     "frog",
+    "krampus",
     "nofirepanic",
     "chester",
     "mossling",
     "perd",
     "catcoon",
     "deer",
-    "shadowwaxwell"
+    "shadowwaxwell",
+    "terrorguisestuff",
+    "powdermonkey",
 }
 
 if GetModConfigData("wixie_walter") then
     local wixie_prefabs = {
         "extra_claustrophobia_checks", -- extra tag that wixie checks when registering claustrophobia, for stuff like jackolanterns and ruins relics
-        "slingshot", -- stuff for new slingshot aiming and wixie exclusivity
-        "walter", -- all of walters things, including woby action
+        "slingshot",                   -- stuff for new slingshot aiming and wixie exclusivity
+        "walter",                      -- all of walters things, including woby action
         "wobysmall",
         "wobybig",
-        "wormhole", -- wixie loses more sanity from wormholes
+        "wormhole",      -- wixie loses more sanity from wormholes
         "slingshotammo", -- removes hunger value from slingshot ammo, preventing slurtle feeding strats
-        "coconut" -- shoot a coconut
+        "coconut"        -- shoot a coconut
     }
     local wixie_components = {
-        "healer", -- Walter gets a 50% bonus from healing items, over time. works on companions too.
+        "healer",         -- Walter gets a 50% bonus from healing items, over time. works on companions too.
         "bufferedaction", -- This handles wixie sending an rpc with the mouse pointer click location
-        "wobypicking", -- This reroutes the pickup action and pickable component to add items to wobys container instead of a nil inventory
-        "dryer" -- This reroutes the dryer harvest action to add items to a container instead of a nil inventory
+        "wobypicking",    -- This reroutes the pickup action and pickable component to add items to wobys container instead of a nil inventory
+        "dryer"           -- This reroutes the dryer harvest action to add items to a container instead of a nil inventory
 
     }
 
@@ -236,6 +262,7 @@ if GetModConfigData("wixie_walter") then
 
     modimport("wixie_postinit/walter_strings")
     modimport("wixie_postinit/wixie_strings")
+    modimport("wixie_postinit/wixie_shipwrecked")
 
     RemapSoundEvent("dontstarve/characters/wixie/death_voice", "wixie/characters/wixie/death_voice")
     RemapSoundEvent("dontstarve/characters/wixie/hurt", "wixie/characters/wixie/hurt")
@@ -423,6 +450,10 @@ end
 
 if GetModConfigData("bossresistance") ~= false then
     modimport("postinit/boss_resistance")
+end
+
+if GetModConfigData("heatwaves") then
+    table.insert(component_post, "wildfires")
 end
 
 modimport("postinit/sim")

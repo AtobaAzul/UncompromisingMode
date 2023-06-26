@@ -1,10 +1,10 @@
 require "brains/fruitbatbrain"
 require "stategraphs/SGfruitbat"
 
-SetSharedLootTable( 'fruitbat',
-{
-    {'giant_blueberry',1},
-})
+SetSharedLootTable('fruitbat',
+    {
+        { 'giant_blueberry', 1 },
+    })
 
 
 
@@ -73,60 +73,48 @@ end
 
 -- TEAM ATTACKER STUFF
 
-
-
 local function OnAttacked(inst, data)
     local attacker = data and data.attacker
-	if attacker and (attacker:HasTag("insect") or attacker:HasTag("spider")) and not attacker:HasTag("player") then
-		inst.components.combat:SetTarget(attacker)
-		inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("fruitbat") end, MAX_TARGET_SHARES)
-	end
-end
-
-
-
-local function OnWaterChange(inst, onwater)
-    if onwater then
-        inst.onwater = true
-    else
-        inst.onwater = false        
+    if attacker and (attacker:HasTag("insect") or attacker:HasTag("spider")) and not attacker:HasTag("player") then
+        inst.components.combat:SetTarget(attacker)
+        inst.components.combat:ShareTarget(attacker, SHARE_TARGET_DIST, function(dude) return dude:HasTag("fruitbat") end,
+            MAX_TARGET_SHARES)
     end
 end
 
-local function onsave(inst, data)    
+local function onsave(inst, data)
     if inst:HasTag("batfrenzy") then
         data.batfrenzy = true
     end
     if inst.sg:HasStateTag("sleeping") then
         data.forcesleep = true
     end
-
 end
 
 local function onload(inst, data)
-  if data then
-    if data.batfrenzy then
-        inst:AddTag("batfrenzy")
+    if data then
+        if data.batfrenzy then
+            inst:AddTag("batfrenzy")
+        end
+        if data.forcesleep then
+            inst.sg:GoToState("forcesleep")
+            inst.components.sleeper.hibernate = true
+            inst.components.sleeper:GoToSleep()
+        end
     end
-    if data.forcesleep then
-        inst.sg:GoToState("forcesleep")
-        inst.components.sleeper.hibernate = true
-        inst.components.sleeper:GoToSleep()
-    end
-  end
 end
 
 local function OnPreLoad(inst, data)
-	local x, y, z = inst.Transform:GetWorldPosition()
-	if y > 0 then
-		inst.Transform:SetPosition(x, 0, z)
-	end
+    local x, y, z = inst.Transform:GetWorldPosition()
+    if y > 0 then
+        inst.Transform:SetPosition(x, 0, z)
+    end
 end
 
-local RETARGET_CANT_TAGS = {"bat","EPIC","player","fruitbat_eating"}
-local RETARGET_ONEOF_TAGS = {"insect","spider"}
+local RETARGET_CANT_TAGS = { "bat", "EPIC", "player", "fruitbat_eating" }
+local RETARGET_ONEOF_TAGS = { "insect", "spider" }
 local function Retarget(inst)
-    local newtarget = FindEntity(inst, 2*TUNING.BAT_TARGET_DIST, function(guy)
+    local newtarget = FindEntity(inst, 4 * TUNING.BAT_TARGET_DIST, function(guy)
             return inst.components.combat:CanTarget(guy)
         end,
         nil,
@@ -141,53 +129,53 @@ local function KeepTarget(inst, target)
 end
 
 local function OnAttackOther(inst, data)
-	if data.target and not data.target:HasTag("fruitbat_eating") and data.target.components.health and not data.target.components.health:IsDead() and data.target:HasTag("aphid") then
-		inst.food_baby = data.target
-		if inst.food_baby.brain then
-			inst.food_baby.brain:Stop()
-			inst.food_baby.sg:Stop()
-		end
-		
-		inst.food_baby:AddTag("fruitbat_eating")
-		inst.sg:GoToState("eat_loop")
-	end
+    if data.target and not data.target:HasTag("fruitbat_eating") and data.target.components.health and not data.target.components.health:IsDead() and data.target:HasTag("aphid") then
+        inst.food_baby = data.target
+        if inst.food_baby.brain then
+            inst.food_baby.brain:Stop()
+            inst.food_baby.sg:Stop()
+        end
+
+        inst.food_baby:AddTag("fruitbat_eating")
+        inst.sg:GoToState("eat_loop")
+    end
 end
 
 local function fn()
-	local inst = CreateEntity()
+    local inst = CreateEntity()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
-    
-	local shadow = inst.entity:AddDynamicShadow()
-    shadow:SetSize(1.5,.75)
+
+    local shadow = inst.entity:AddDynamicShadow()
+    shadow:SetSize(1.5, .75)
     inst.entity:AddNetwork()
     inst.entity:AddLightWatcher()
     inst.Transform:SetFourFaced()
 
-	inst.Transform:SetFourFaced()
-	inst.Transform:SetScale(0.9, 0.9, 0.9)
-	MakeFlyingCharacterPhysics(inst, 1, .5)
+    inst.Transform:SetFourFaced()
+    inst.Transform:SetScale(0.9, 0.9, 0.9)
+    MakeFlyingCharacterPhysics(inst, 1, .5)
 
-   
+
     inst:AddTag("animal")
-	inst:AddTag("fruitbat")
-	inst:AddTag("animal")
+    inst:AddTag("fruitbat")
+    inst:AddTag("animal")
     inst:AddTag("scarytoprey")
     inst:AddTag("flying")
     inst:AddTag("veggie")
 
-	inst.entity:SetPristine()
-	
-	if not TheWorld.ismastersim then
+    inst.entity:SetPristine()
+
+    if not TheWorld.ismastersim then
         return inst
     end
-	
+
     inst.AnimState:SetBank("fruitbat")
     inst.AnimState:SetBuild("fruitbat")
     inst:AddComponent("locomotor")
-    inst.components.locomotor:SetSlowMultiplier( 1 )
+    inst.components.locomotor:SetSlowMultiplier(1)
     inst.components.locomotor:SetTriggersCreep(false)
     inst.components.locomotor.pathcaps = { ignorecreep = true }
     inst.components.locomotor.walkspeed = 10
@@ -200,48 +188,51 @@ local function fn()
 
     inst:AddComponent("sleeper")
     inst.components.sleeper:SetResistance(3)
-    
+
     inst:SetStateGraph("SGfruitbat")
- 
+
     local brain = require "brains/fruitbatbrain"
     inst:SetBrain(brain)
 
     inst:AddComponent("lootdropper")
 
     inst:AddComponent("inventory")
-    
+
     inst:AddComponent("inspectable")
     inst:AddComponent("knownlocations")
-    
-    inst:DoTaskInTime(1*FRAMES, function() inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()), true) end)
-    
+
+    inst:DoTaskInTime(1 * FRAMES,
+        function()
+            inst.components.knownlocations:RememberLocation("home", Vector3(inst.Transform:GetWorldPosition()),
+                true)
+        end)
+
     inst:ListenForEvent("wingdown", OnWingDown)
-    inst:ListenForEvent("attacked", OnAttacked)  
-	
+    inst:ListenForEvent("attacked", OnAttacked)
+
     inst:AddComponent("combat")
     inst.components.combat.hiteffectsymbol = "fruitbat_body"
     inst.components.combat:SetAttackPeriod(TUNING.BAT_ATTACK_PERIOD)
-    inst.components.combat:SetDefaultDamage(20)--give it damage, since it can target spiders now.
+    inst.components.combat:SetDefaultDamage(20) --give it damage, since it can target spiders now.
     inst.components.combat:SetRange(TUNING.BAT_ATTACK_DIST)
     inst.components.combat:SetRetargetFunction(3, Retarget)
     inst.components.combat:SetKeepTargetFunction(KeepTarget)
-	inst:ListenForEvent("onattackother", OnAttackOther)
+    inst:ListenForEvent("onattackother", OnAttackOther)
 
-	MakeHauntablePanic(inst)
+    MakeHauntablePanic(inst)
     MakeMediumBurnableCharacter(inst, "fruitbat_body")
     MakeMediumFreezableCharacter(inst, "fruitbat_body")
-	
-	inst.OnEntitySleep = OnEntitySleep
+
+    inst.OnEntitySleep = OnEntitySleep
     inst.OnEntityWake = OnEntityWake
     inst.OnPreLoad = OnPreLoad
 
-    inst.OnSave = onsave 
-    inst.OnLoad = onload 
+    inst.OnSave = onsave
+    inst.OnLoad = onload
 
     inst.cavebat = false
-    
+
     return inst
 end
 
 return Prefab("fruitbat", fn)
-

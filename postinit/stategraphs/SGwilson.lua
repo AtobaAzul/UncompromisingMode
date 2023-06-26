@@ -1125,6 +1125,47 @@ env.AddStategraphPostInit("wilson", function(inst)
         },
 
         State {
+            name = "soundstun",
+            tags = { "busy", "pausepredict" },
+
+            onenter = function(inst, attacker)
+                ForceStopHeavyLifting(inst)
+                inst.components.locomotor:Stop()
+                inst:ClearBufferedAction()
+
+
+
+                inst.AnimState:PlayAnimation("idle_sanity_pre", false)
+                inst.AnimState:PushAnimation("idle_sanity_loop", true)
+
+                inst.SoundEmitter:PlaySound("dontstarve/wilson/hit")
+                DoHurtSound(inst)
+
+                --V2C: some of the woodie's were-transforms have shorter hit anims
+                local stun_frames = 160
+                if inst.components.playercontroller ~= nil then
+                    --Specify min frames of pause since "busy" tag may be
+                    --removed too fast for our network update interval.
+                    inst.components.playercontroller:RemotePausePrediction(stun_frames)
+                end
+                inst.sg:SetTimeout(stun_frames * FRAMES)
+            end,
+
+            ontimeout = function(inst)
+                inst.sg:GoToState("idle", true)
+            end,
+
+            events =
+            {
+                EventHandler("animover", function(inst)
+                    if inst.AnimState:AnimDone() then
+                        inst.sg:GoToState("idle")
+                    end
+                end),
+            },
+        },
+
+        State {
             name = "opossum_death",
             tags = { "hiding", "notalking", "nomorph", "busy", "nopredict", "nodangle" },
 
@@ -1613,6 +1654,101 @@ env.AddStategraphPostInit("wilson", function(inst)
                 inst.Physics:ClearMotorVelOverride()
             end,
         },
+		
+		State{
+			name = "um_tornado_teleport",
+			tags = { "busy", "nopredict", "nomorph", "nointerrupt" },
+
+			onenter = function(inst, shore_pt)
+				ForceStopHeavyLifting(inst)
+				inst:ClearBufferedAction()
+
+				inst.components.locomotor:Stop()
+				inst.components.locomotor:Clear()
+				
+				inst.components.health:SetInvincible(true)
+				inst.DynamicShadow:Enable(false)
+
+				inst.AnimState:PlayAnimation("grabbedbytheghoulie")
+				
+				if inst.deathsoundoverride ~= nil then
+					inst.SoundEmitter:PlaySound(inst.deathsoundoverride)
+				elseif not inst:HasTag("mime") then
+					inst.SoundEmitter:PlaySound((inst.talker_path_override or "dontstarve/characters/") ..
+						(inst.soundsname or inst.prefab) .. "/death_voice")
+				end
+
+				inst.components.rider:ActualDismount()
+
+				inst:ShowHUD(false)
+
+				if inst.components.playercontroller ~= nil then
+					inst.components.playercontroller:Enable(false)
+				end
+			end,
+
+			events =
+			{
+				EventHandler("animover", function(inst)
+					inst:ScreenFade(false, 1)
+				end),
+			},
+
+			onexit = function(inst)
+				inst.components.health:SetInvincible(false)
+				inst.DynamicShadow:Enable(true)
+				inst:Show()
+
+				if inst.sg.statemem.teleport_task ~= nil then
+					-- Still have a running teleport_task
+					-- Interrupt!
+					inst.sg.statemem.teleport_task:Cancel()
+					inst.sg.statemem.teleport_task = nil
+					inst:ScreenFade(true, .5)
+				end
+
+				if inst.components.playercontroller ~= nil then
+					inst.components.playercontroller:Enable(true)
+				end
+			end,
+		},
+		
+		State{
+			name = "um_tornado_wakeup",
+			tags = { "busy", "canrotate", "nopredict", "nomorph", "nointerrupt" },
+			
+			onenter = function(inst)
+				inst.components.locomotor:Stop()
+				
+				if inst.components.playercontroller ~= nil then
+					inst.components.playercontroller:Enable(true)
+				end
+			
+				inst.AnimState:PlayAnimation("enter")
+				if inst.components.drownable ~= nil then
+					inst.components.drownable:TakeDrowningDamage()
+				end
+			end,
+			
+			timeline=
+			{
+				TimeEvent(11*FRAMES, function(inst) 
+					inst.SoundEmitter:PlaySound("dontstarve/movement/bodyfall_dirt")
+					
+					if inst.components.health ~= nil then
+						inst.components.health:DoDelta(-50, false, "Tornado")
+					end
+				end),
+			},        
+			
+			
+			events=
+			{
+				EventHandler("animover", function(inst) inst.sg:GoToState("idle") end),
+			},
+
+		},   
+	
     }
 
     for k, v in pairs(events) do

@@ -2,6 +2,24 @@ local env = env
 GLOBAL.setfenv(1, GLOBAL)
 -----------------------------------------------------------------
 
+local function ReticuleUpdatePositionFn(inst, pos, reticule, ease, smoothing, dt)
+	inst.um_mouseposition_x = pos.x
+	inst.um_mouseposition_z = pos.z
+	--inst.berry.Transform:SetPosition(pos.x,0,pos.x)
+end
+
+local function CreateMousePositioning(inst)
+	inst:DoTaskInTime(0,function(inst) inst:AddComponent("reticule")
+		inst.components.reticule.updatepositionfn = ReticuleUpdatePositionFn
+		inst.components.reticule.ease = true
+		inst.components.reticule.mouseenabled = true
+		inst.components.reticule:CreateReticule()
+	end)
+end
+
+
+
+
 env.AddPlayerPostInit(function(inst)
     if TUNING.DSTU.VETCURSE == "always" then
         if inst ~= nil and inst.components.health ~= nil and
@@ -56,7 +74,10 @@ env.AddPlayerPostInit(function(inst)
 
     inst.OnSave = function(inst, data)
         data.um_all_followers = inst.um_all_followers
-        if _OnSave ~= nil then _OnSave(inst, data) end
+		
+        if _OnSave ~= nil then 
+			return _OnSave(inst, data)
+		end
     end
 
     local _OnLoad = inst.OnLoad
@@ -81,6 +102,15 @@ env.AddPlayerPostInit(function(inst)
                 data.um_all_followers = {} -- empty the table to prevent duping.
             end
         end
-        if _OnLoad ~= nil then _OnLoad(inst, data) end
+		
+        if _OnLoad ~= nil then 
+			return _OnLoad(inst, data) 
+		end
     end
+	
+	--Client after this
+	if TheWorld.ismastersim then
+        return inst
+    end
+	CreateMousePositioning(inst)
 end)

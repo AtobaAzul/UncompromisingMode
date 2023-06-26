@@ -136,13 +136,14 @@ end
 
 recipes.figkabab.test = function(cooker, names, tags)
 	return (names.fig or names.fig_cooked or names.aphid) and names.twigs and tags.meat and tags.meat >= 1 and
-		(not tags.monster or tags.monster <= 1) and not tags.frozen and not tags.foliage
+		(not tags.monster or tags.monster <= 1) and not tags.frozen and not tags.foliage and not (tags.insectoid and tags.insectoid >= 1)
 end
 -- Original:	test = function(cooker, names, tags) return (names.fig or names.fig_cooked) and names.twigs and tags.meat and tags.meat >= 1 and (not tags.monster or tags.monster <= 1) end,
 
 recipes.figatoni.test = function(cooker, names, tags)
-    return (names.fig or names.fig_cooked or names.aphid) and
-        tags.veggie and tags.veggie >= 2 and not tags.meat
+    return ((names.fig or names.fig_cooked) and
+        tags.veggie and tags.veggie >= 2 and not tags.meat)
+        or ((names.aphid) and tags.veggie and tags.veggie >= 2 and tags.meat and tags.meat <= 0.5 and not (tags.insectoid and tags.insectoid >= 1))
 end
 -- Original:	test = function(cooker, names, tags) return (names.fig or names.fig_cooked) and tags.veggie and tags.veggie >= 2  and not tags.meat end,
 
@@ -514,6 +515,7 @@ RegisterInventoryItemAtlas("images/inventoryimages/rice.xml", "rice.tex")
 InsertIngredientValues({ "rice_cooked" }, { veggie = 1 }, true, false, false)
 RegisterInventoryItemAtlas("images/inventoryimages/rice_cooked.xml", "rice_cooked.tex")
 if TUNING.DSTU.NEWRECIPES then
+	InsertIngredientValues({ "firenettles" }, { foliage = 1 }, true, false, false)
     InsertIngredientValues({ "foliage" }, { foliage = 1 }, true, false, false)
     InsertIngredientValues({ "greenfoliage" }, { foliage = 1 }, true, false, false)
 end

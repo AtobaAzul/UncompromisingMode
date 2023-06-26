@@ -12,30 +12,51 @@ local prefabs =
 
 local brain = require("brains/um_shamblerbrain")
 
-local function LinkToPlayer(inst, player)
-    inst._playerlink = player
-    inst.components.follower:SetLeader(player)
+SetSharedLootTable('stagehand_creature',
+{
+    {'endtable_blueprint', 1.0},
+})
 
-    inst:ListenForEvent("onremove", inst._onlostplayerlink, player)
+local function onworked(inst, worker)
+    -- make sure it never runs out of work to do
+    inst.components.workable:SetWorkLeft(TUNING.STAGEHAND_HITS_TO_GIVEUP)
 end
 
-local function OnPlayerLinkDespawn(inst, forcedrop)
-	inst.sg:GoToState("dissipate")
+local function getstatus(inst)
+    return inst.sg:HasStateTag("hiding") and "HIDING" or "AWAKE"
 end
 
-local function KeepTargetFn(inst, target)
-    if target ~= nil and target:IsValid()
-	and target.maxwell_vetcurse and not target.components.health:IsDead() then
-        return true
+local function CanStandUp(inst)
+    -- if not in light or off screen (off screen is so it doesnt get stuck forever on things like firefly/pighouse light), then it can stand up and walk around
+    return (not inst.LightWatcher:IsInLight()) or (TheWorld.state.isnight and (not TheWorld.state.isfullmoon) and not inst:IsNearPlayer(30))
+end
+
+local sounds =
+{
+    hit         = "dontstarve/creatures/together/stagehand/hit",
+    awake_pre   = "dontstarve/creatures/together/stagehand/awake_pre",
+    footstep    = "dontstarve/creatures/together/stagehand/footstep",
+}
+
+local function ChangePhysics(inst, is_standing)
+    if is_standing then
+        if inst:HasTag("blocker") then
+            inst:RemoveTag("blocker")
+            inst.Physics:SetMass(100)
+            inst.Physics:SetCollisionGroup(COLLISION.CHARACTERS)
+            inst.Physics:CollidesWith(COLLISION.WORLD)
+        end
+    elseif not inst:HasTag("blocker") then
+        inst:AddTag("blocker")
+        inst.Physics:SetMass(0)
+        inst.Physics:SetCollisionGroup(COLLISION.OBSTACLES)
+        inst.Physics:ClearCollisionMask()
+        inst.Physics:CollidesWith(COLLISION.ITEMS)
+        inst.Physics:CollidesWith(COLLISION.OBSTACLES)
+        inst.Physics:CollidesWith(COLLISION.SMALLOBSTACLES)
+        inst.Physics:CollidesWith(COLLISION.CHARACTERS)
+        inst.Physics:CollidesWith(COLLISION.GIANTS)
     end
-
-	inst.sg:GoToState("dissipate")
-
-    return false
-end
-
-local function AuraTest(inst, target)
-    return target.maxwell_vetcurse and inst.components.follower.leader == target or false
 end
 
 local function fn()
@@ -44,26 +65,25 @@ local function fn()
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
     inst.entity:AddSoundEmitter()
+    inst.entity:AddLightWatcher()
+    inst.entity:AddPhysics()
     inst.entity:AddNetwork()
 
-    MakeGhostPhysics(inst, .5, .5)
+    inst.Transform:SetFourFaced()
 
-    inst.AnimState:SetBank("ghost")
-    inst.AnimState:SetBuild("ghost_build")
-    inst.AnimState:PlayAnimation("idle", true)
+    inst.Physics:SetFriction(0)
+    inst.Physics:SetDamping(5)
+    ChangePhysics(inst, false)
+    inst.Physics:SetCapsule(.5, 1)
+
+    inst.AnimState:SetBank("shambler")
+    inst.AnimState:SetBuild("shambler")
+    inst.AnimState:PlayAnimation("groanidle")
 
     inst:AddTag("notraptrigger")
-    inst:AddTag("fx")
-    inst:AddTag("noauradamage")
+    inst:AddTag("antlion_sinkhole_blocker")
 
-    inst.SoundEmitter:PlaySound("dontstarve/ghost/ghost_howl_LP", "howl")
-	
-    if not TheNet:IsDedicated() then
-		-- this is purely view related
-		inst:AddComponent("um_shambler_transparency")
-		inst.components.um_shambler_transparency.tag = "shambler_target"
-		inst.components.um_shambler_transparency:ForceUpdate()
-	end
+    MakeSnowCoveredPristine(inst)
 
     inst.entity:SetPristine()
 
@@ -71,33 +91,36 @@ local function fn()
         return inst
     end
 
-    inst:AddComponent("follower")
-    inst.components.follower:KeepLeaderOnAttacked()
-    inst.components.follower.keepdeadleader = true
-    inst.components.follower.keepleaderduringminigame = true
-	
-    inst:AddComponent("combat")
-    inst.components.combat.defaultdamage = 9999999
-    inst.components.combat.playerdamagepercent = TUNING.GHOST_DMG_PLAYER_PERCENT
-    inst.components.combat:SetKeepTargetFunction(KeepTargetFn)
+    MakeSmallPropagator(inst)
+    MakeHauntableWork(inst)
+    MakeSnowCovered(inst)
+
+    inst:AddComponent("burnable")
+    inst.components.burnable:SetFXLevel(2)
+    inst.components.burnable:SetBurnTime(10)
+    inst.components.burnable:AddBurnFX("campfirefire", Vector3(0, 0, 0), "swap_fire")
+
+    inst:AddComponent("workable")
+    inst.components.workable:SetWorkAction(ACTIONS.HAMMER)
+    inst.components.workable:SetWorkLeft(TUNING.STAGEHAND_HITS_TO_GIVEUP)
+    --inst.components.workable:SetOnFinishCallback(onhammered)
+    inst.components.workable:SetOnWorkCallback(onworked)
 
     inst:AddComponent("locomotor") -- locomotor must be constructed before the stategraph
-    inst.components.locomotor.walkspeed = 2
-	inst.components.locomotor.walkspeed = 15
+    inst.components.locomotor.walkspeed = 8
+    inst.sounds = sounds
 
-    inst:AddComponent("aura")
-    inst.components.aura.radius = 3
-    inst.components.aura.tickperiod = 0.5
-    inst.components.aura.auratestfn = AuraTest
-	
-    inst.LinkToPlayer = LinkToPlayer
-	inst.OnPlayerLinkDespawn = OnPlayerLinkDespawn
-	inst._onlostplayerlink = function(player) inst._playerlink = nil end
-	
+    inst.CanStandUp = CanStandUp
+    inst.ChangePhysics = ChangePhysics
+
     inst:SetStateGraph("SGum_shambler")
     inst:SetBrain(brain)
-	
-    inst.persists = false
+
+    inst:AddComponent("inspectable")
+    inst.components.inspectable.getstatus = getstatus
+
+    inst:AddComponent("lootdropper")
+    inst.components.lootdropper:SetChanceLootTable('stagehand_creature')
 
     return inst
 end

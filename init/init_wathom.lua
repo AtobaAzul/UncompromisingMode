@@ -688,7 +688,8 @@ AddStategraphPostInit("wilson_client", function(inst)
 					end
 				end
 
-				inst.sg:SetTimeout(2)
+				inst.sg:SetTimeout(0)
+				inst.AnimState:PushAnimation("idle", true)
 			end,
 
 			onupdate = function(inst)

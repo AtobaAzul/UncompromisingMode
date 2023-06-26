@@ -1,55 +1,34 @@
 local env = env
-local getupvalue = GLOBAL.debug.getupvalue
 GLOBAL.setfenv(1, GLOBAL)
-local easing = require("easing")
-local UpvalueHacker = require("tools/upvaluehacker") 
+local UpvalueHacker = require("tools/upvaluehacker")
 
 
-
-
-
-env.AddClassPostConstruct("components/wildfires", function(self)
---[[	--local OLD = UpvalueHacker.GetUpvalue(LightFireForPlayer)
-	local function _Old(player, rescheduleFn) --TODO: Grab the original value from wildfires to prevent any issues with using another mod that modifies wildfires.
-    _scheduledtasks[player] = nil
-
-    if math.random() <= _chance and
-        not (_world.components.sandstorms ~= nil and
-            _world.components.sandstorms:IsInSandstorm(player)) then
-        local x, y, z = player.Transform:GetWorldPosition()
-        local firestarters = TheSim:FindEntities(x, y, z, _radius, nil, _excludetags)
-        if #firestarters > 0 then
-            local highprio = {}
-            local lowprio = {}
-            for i, v in ipairs(firestarters) do
-                if v.components.burnable ~= nil then
-                    table.insert(v:HasTag("wildfirepriority") and highprio or lowprio, v)
-                end
-            end
-            firestarters = #highprio > 0 and highprio or lowprio
-            while #firestarters > 0 do
-                local i = math.random(#firestarters)
-                if CheckValidWildfireStarter(firestarters[i]) then
-                    firestarters[i].components.burnable:StartWildfire()
-                    break
-                else
-                    table.remove(firestarters, i)
-                end
-            end
+--thanks korean!
+env.AddComponentPostInit("wildfires", function(self)
+    local _ShouldActivateWildfires
+    local _CheckValidWildfireStarter
+    local _ms_startwildfireforplayerfn
+    local inst = self.inst
+    -- simplify the for loop by adding [inst] to the end
+    for k, func in pairs(inst.event_listening["ms_lightwildfireforplayer"][inst]) do
+        -- check that the upvalue we want to grab is the correct one (i.e the function ShouldActivateWildfires)
+        if UpvalueHacker.GetUpvalue(func, "ShouldActivateWildfires") then
+            _ms_startwildfireforplayerfn = func
+            _ShouldActivateWildfires = UpvalueHacker.GetUpvalue(func, "ShouldActivateWildfires")
+            _CheckValidWildfireStarter = UpvalueHacker.GetUpvalue(func, "LightFireForPlayer", "CheckValidWildfireStarter")
+            -- we can break out of the loop now since we found the upvalue we wanted
+            break
         end
     end
+    local ShouldActivateWildfires = function()
+        return _ShouldActivateWildfires() and TheWorld:HasTag("heatwavestart")
+    end
 
-    rescheduleFn(player)
-	end
-	
-	local function LightFireForPlayer(player, rescheduleFn)
-	if player.components.areaaware ~= nil then
-	if not player.components.areaaware:CurrentlyInTag("hoodedcanopy") then
-		--OLD(player, rescheduleFn)
-		else
-	    rescheduleFn(player)
-	end
-	end
-	UpvalueHacker.SetUpvalue(GLOBAL.Components.wildfires.class, LightFireForPlayer)
-end]]
+    local CheckValidWildfireStarter = function(obj)
+        return _CheckValidWildfireStarter(obj) and obj:HasTag("plant")
+    end
+
+    UpvalueHacker.SetUpvalue(_ms_startwildfireforplayerfn, ShouldActivateWildfires, "ShouldActivateWildfires")
+    UpvalueHacker.SetUpvalue(_ms_startwildfireforplayerfn, CheckValidWildfireStarter, "LightFireForPlayer",
+        "CheckValidWildfireStarter")
 end)

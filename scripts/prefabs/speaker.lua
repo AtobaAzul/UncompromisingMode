@@ -120,11 +120,10 @@ local function fn1()
 
     --hopefully impossibly hard to get things to spawn at the same time.
     inst:DoTaskInTime(math.random(), function(inst)
-
         if TheWorld.siren_count == nil then
             TheWorld.siren_count = 0
         end
-        print(PickSiren())
+
         local x, y, z = inst.Transform:GetWorldPosition()
         local siren = SpawnPrefab(PickSiren() .. "_teaser")
         siren.Transform:SetPosition(x, y, z)

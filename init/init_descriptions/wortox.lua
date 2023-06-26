@@ -7,7 +7,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WORTOX.ACTIONFAIL
 ANNOUNCE.DREADEYE_SPOOKED = "Someone is playing tricks. H-Hyuyu... "
 ANNOUNCE.ANNOUNCE_HARDCORE_RES = "Just kidding! Hyuyu."
 ANNOUNCE.ANNOUNCE_WINONAGEN =
-    "Let the mortal have her fun. I've elsewhere to run!"
+"Let the mortal have her fun. I've elsewhere to run!"
 ANNOUNCE.ANNOUNCE_RATRAID = "The piper calls! Best hide it all!"
 ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Hyuyu, what a jest! Come at me, pests!"
 ANNOUNCE.ANNOUNCE_RATRAID_OVER = "Easy, too easy! Your pranks are cheesy!"
@@ -42,7 +42,7 @@ DESCRIBE.UNCOMPROMISING_RATHERD = "A portal to the little pranksters' den."
 DESCRIBE.UNCOMPROMISING_RATBURROW = "A portal to the little pranksters' den."
 DESCRIBE.UNCOMPROMISING_WINKYBURROW = "Rather hastily made, it'll fall apart."
 DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW =
-    "Home is where the heart is, or the fart in this case, because /Pee-yew!/"
+"Home is where the heart is, or the fart in this case, because /Pee-yew!/"
 
 DESCRIBE.WINKY = {
     GENERIC = "Come here to cause trouble, %s?",
@@ -74,14 +74,14 @@ DESCRIBE.RATPOISON = "A deadly slick! That should do the trick!"
 
 DESCRIBE.MONSTERSMALLMEAT = "What a monstrous little fiend you were!"
 DESCRIBE.COOKEDMONSTERSMALLMEAT =
-    "No matter how prepared, it's just not my fare."
+"No matter how prepared, it's just not my fare."
 DESCRIBE.MONSTERSMALLMEAT_DRIED = "Ho, most grim."
 
 DESCRIBE.UM_MONSTEREGG = "I do not like purple eggs and spam."
 DESCRIBE.UM_MONSTEREGG_COOKED = "I do not like them cooked and mushed."
 
 DESCRIBE.MUSHROOMSPROUT_OVERWORLD =
-    "It seems the source of that malicious mycelium!"
+"It seems the source of that malicious mycelium!"
 DESCRIBE.TOADLING = "Come to hop away...or perhaps to play?"
 
 DESCRIBE.GASMASK = "Freezes sneezes!"
@@ -91,8 +91,8 @@ DESCRIBE.SPIDERQUEENCORPSE = "There is no bliss for this carcass!"
 ANNOUNCE.ANNOUNCE_SNEEZE = "Achooo! Hyuyu!"
 ANNOUNCE.ANNOUNCE_HAYFEVER = "Dust itself is pranking my snout!"
 ANNOUNCE.ANNOUNCE_HAYFEVER_OFF =
-    "It is relieving, for there is no more sneezing!"
-ANNOUNCE.ANNOUNCE_FIREFALL = {"Frightening!", "Fiery!", "Fury!"}
+"It is relieving, for there is no more sneezing!"
+ANNOUNCE.ANNOUNCE_FIREFALL = { "Frightening!", "Fiery!", "Fury!" }
 ANNOUNCE.ANNOUNCE_ROOTING = "You can't hold me down!"
 ANNOUNCE.ANNOUNCE_SNOWSTORM = "This bitter wind feels terrible against my fur!"
 ANNOUNCE.SHADOWTALKER = {
@@ -113,7 +113,7 @@ DESCRIBE.SHOCKWORM = "This one is sparking!"
 DESCRIBE.ZASPBERRY = "This will give someone quite a shock!"
 DESCRIBE.ZASPBERRYPARFAIT = "Hyuyu, my enemy won't know what hit 'em!"
 DESCRIBE.ICEBOOMERANG =
-    "They cease their attacks, by being stopped in their tracks!"
+"They cease their attacks, by being stopped in their tracks!"
 DESCRIBE.MINOTAUR_BOULDER = "It's learned a new trick!"
 DESCRIBE.MINOTAUR_BOULDER_BIG = "Come and hit me! I promise it's not a trick!"
 DESCRIBE.VETERANSHRINE = "It's not a prank if it's on yourself!"
@@ -137,11 +137,11 @@ DESCRIBE.SALTPACK = "I can now frolic through the snow in peace!"
 DESCRIBE.UM_SCORPION = "It crawls, creeps, and makes you sleep!"
 DESCRIBE.SCORPIONCARAPACE = "This food is below even mortal tastes!"
 DESCRIBE.SCORPIONCARAPACECOOKED =
-    "Willow was wrong this time, fire did not improve it."
+"Willow was wrong this time, fire did not improve it."
 DESCRIBE.HARDSHELLTACOS = "It may be acceptible to mortals now, but not me!"
 
 DESCRIBE.SKELETONMEAT =
-    "I don't care how sweet the meat tastes, I don't like mortal food!"
+"I don't care how sweet the meat tastes, I don't like mortal food!"
 DESCRIBE.CHIMP = DESCRIBE.MONKEY
 DESCRIBE.SWILSON = "You can't hit me if you can't catch me! Hyuyu!"
 DESCRIBE.VAMPIREBAT = "Huh, you lived longer than expected."
@@ -156,7 +156,7 @@ DESCRIBE.SUNGLASSES = "Time for some fun in the sun!"
 
 DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 DESCRIBE.CRITTERLAB_REAL_BROKEN =
-    "Moon rocks would make a great little shelter!"
+"Moon rocks would make a great little shelter!"
 DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 DESCRIBE.BUGZAPPER = "Cmon, it's just a little sting!"
@@ -164,7 +164,7 @@ DESCRIBE.STUMPLING = "Cmon! Chopping all those trees was just a joke!"
 DESCRIBE.BIRCHLING = DESCRIBE.STUMPLING
 DESCRIBE.MOON_TEAR = "No use crying over missing chunks!"
 DESCRIBE.SHADOW_TELEPORTER =
-    "I think it's playing a trick, let's pretend to fall for it!"
+"I think it's playing a trick, let's pretend to fall for it!"
 DESCRIBE.POLLENMITEDEN = "Anybody home?"
 DESCRIBE.POLLENMITES = "Pesky things!"
 DESCRIBE.SHADOW_CROWN = "Let's get risky!"
@@ -174,7 +174,7 @@ DESCRIBE.LUREPLAGUE_RAT = "Take the dead."
 DESCRIBE.MARSH_GRASS = "A bush."
 DESCRIBE.CURSED_ANTLER = "Hard to miss with something this large!"
 DESCRIBE.BERNIEBOX =
-    "I'm curious to see whats inside, I hope she opens it soon."
+"I'm curious to see whats inside, I hope she opens it soon."
 DESCRIBE.HOODED_FERN = "They didn't always grow that big."
 DESCRIBE.HOODEDWIDOW = "The soul guardian!"
 DESCRIBE.GIANT_TREE = "The bigger they are... Hyuyu!"
@@ -194,6 +194,7 @@ DESCRIBE.WHISPERPOD_NORMAL_GROUND = {
 DESCRIBE.FRUITBAT = "A flying fruit! I've seen it all!"
 DESCRIBE.PITCHERPLANT = "Behold, it's a plant, but this time it's high up!"
 DESCRIBE.APHID = "The trees had it coming to them!"
+DESCRIBE.NYMPH = "It's off to take more trees."
 DESCRIBE.GIANT_TREE_INFESTED = "What's bugging you?"
 DESCRIBE.GIANT_BLUEBERRY = "Could I use this like a waterballoon? Hyuyu!"
 DESCRIBE.STEAMEDHAMS = "This dish has got to be joking."
@@ -201,7 +202,7 @@ DESCRIBE.BLUEBERRYPANCAKES = "These pancakes have been defused!"
 DESCRIBE.SIMPSALAD = "I don't think the mortals like this one too much."
 DESCRIBE.BEEFALOWINGS = "It's not bad, for mortal food."
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE =
-    "I was light on my feet, now I'm heavy as well!"
+"I was light on my feet, now I'm heavy as well!"
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "Still can't catch me!"
 DESCRIBE.WIDOWSHEAD = " \"Apex predator\", pshh!"
 DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
@@ -236,11 +237,11 @@ DESCRIBE.BERNIE_BIG = {
 }
 DESCRIBE.ANTIHISTAMINE = "Keeps my snout clean!"
 ANNOUNCE.CURSED_ITEM_EQUIP =
-    "It scorched my paw! Is this some kind of practical joke?"
+"It scorched my paw! Is this some kind of practical joke?"
 DESCRIBE.VETSITEM =
-    "Ohoho! It's trying to trick me into cursing myself! Maybe I will..."
+"Ohoho! It's trying to trick me into cursing myself! Maybe I will..."
 DESCRIBE.SCREECHER_TRINKET = "And just what dimension are you from, friend?"
-ACTIONFAIL.GIVE = {NOTNIGHT = "Lets play when the moon comes out!"}
+ACTIONFAIL.GIVE = { NOTNIGHT = "Lets play when the moon comes out!" }
 
 DESCRIBE.MAGMAHOUND = "It breathes fire onto our desires!"
 DESCRIBE.LIGHTNINGHOUND = "A caster of elemental energy!"
@@ -286,7 +287,7 @@ DESCRIBE.BLOWGUNAMMO_SLEEP = DESCRIBE.BLOWDART_SLEEP
 DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
 
 DESCRIBE.ANCIENT_AMULET_RED =
-    "Ohoho, how many souls are in here? Quite a few, I think!"
+"Ohoho, how many souls are in here? Quite a few, I think!"
 DESCRIBE.UM_BEAR_TRAP = "You gotta be a dope to fall for this joke!"
 DESCRIBE.UM_BEAR_TRAP_OLD = "You gotta be a dope to fall for this joke!"
 DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "My, what large teeth you have!"
@@ -300,19 +301,19 @@ DESCRIBE.BEARGERCLAW = "Is it good luck, or bad luck? I just don't remember!"
 DESCRIBE.FEATHER_FROCK = "Feathered foolishness!"
 
 DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM ..
-                              "\nIt's changed shape, it will only flow through the crabs claw now!"
+    "\nIt's changed shape, it will only flow through the crabs claw now!"
 DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM ..
-                               "\nIt's changed shape, it will only flow through the crabs claw now!"
+    "\nIt's changed shape, it will only flow through the crabs claw now!"
 DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM ..
-                                 "\nIt's changed shape, it will only flow through the crabs claw now!"
+    "\nIt's changed shape, it will only flow through the crabs claw now!"
 DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM ..
-                                "\nIt's changed shape, it will only flow through the crabs claw now!"
+    "\nIt's changed shape, it will only flow through the crabs claw now!"
 DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM ..
-                                 "\nIt's changed shape, it will only flow through the crabs claw now!"
+    "\nIt's changed shape, it will only flow through the crabs claw now!"
 DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM ..
-                                 "\nIt's changed shape, it will only flow through the crabs claw now!"
+    "\nIt's changed shape, it will only flow through the crabs claw now!"
 DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM ..
-                                       "\nIt's changed shape, it will only flow through the crabs claw now!"
+    "\nIt's changed shape, it will only flow through the crabs claw now!"
 
 DESCRIBE.RED_MUSHED_ROOM = "Weird and gooey, mushed and chewy!"
 DESCRIBE.GREEN_MUSHED_ROOM = "Weird and gooey, mushed and chewy!"
@@ -350,7 +351,7 @@ DESCRIBE.MUTATOR_TRAPDOOR = DESCRIBE.MUTATOR_WARRIOR
 DESCRIBE.WOODPECKER = "I wouldn't find a life of drilling all that thrilling."
 DESCRIBE.SNOTROAST = "This is just gross."
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW =
-    "Perhaps I've gone mad, to eat something that bad."
+"Perhaps I've gone mad, to eat something that bad."
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
 DESCRIBE.BOOK_RAIN_UM = "Hue, hue, it's boring too!"
 DESCRIBE.FLORAL_BANDAGE = "I should fill it with redcaps for a good laugh."
@@ -371,7 +372,7 @@ ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
 DESCRIBE.PIED_RAT = "His song shall make them strong!"
 DESCRIBE.PIED_PIPER_FLUTE = "Let us sing, and they'll come under our wing!"
 DESCRIBE.UNCOMPROMISING_PACKRAT =
-    "He'll take all our stuff with that pack, get it back!"
+"He'll take all our stuff with that pack, get it back!"
 
 ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "Pop goes the weasel!"
 
@@ -406,7 +407,7 @@ DESCRIBE.ARMOR_SHARKSUIT_UM = "It makes me as sleek as some ocean freak."
 DESCRIBE.ROCKJAWLEATHER = "Just a flesh wound."
 
 DESCRIBE.EYEOFTERROR_MINI_ALLY =
-    "Hyuyu, it seems we're starting to see eye to eye!"
+"Hyuyu, it seems we're starting to see eye to eye!"
 DESCRIBE.EYEOFTERROR_MINI_GROUNDED_ALLY = DESCRIBE.EYEOFTERROR_MINI_GROUNDED
 
 DESCRIBE.STUFFED_PEEPER_POPPERS = "The mortals surely can't like this."
@@ -424,7 +425,7 @@ DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "With this sludge, our boat won't budge!"
 DESCRIBE.BOATPATCH_SLUDGE = "When we're struck, plug it up with muck!"
 DESCRIBE.UM_COPPER_PIPE = "Who knew metal grew, hyuyuyu."
 DESCRIBE.BRINE_BALM =
-    "Must I rub this ooey, gooey, salty sea slime into my nice soft fur?"
+"Must I rub this ooey, gooey, salty sea slime into my nice soft fur?"
 DESCRIBE.UNCOMPROMISING_FISHINGNET = DESCRIBE.FISHINGNET
 DESCRIBE.UM_AMBER = "A prison for plants, and bugs alike."
 DESCRIBE.UM_BEEGUN = "You better bee quick on the draw."
@@ -447,11 +448,11 @@ DESCRIBE.UM_DREAMCATCHER = "Oh me, Oh my, a door into your mind!"
 DESCRIBE.UM_BRINEISHMOSS = "I'm the boss of this moss, see?"
 DESCRIBE.UM_COALESCED_NIGHTMARE = "What is it that lurks in the minds of men?"
 DESCRIBE.SLUDGE_CORK = "A boat leak it won't plug, it's much too snug!" -- is this a stretch? yes. yes it is.
-DESCRIBE.SLUDGESTACK = "Hyuyu, watch it spew sludge out the wazoo!" -- yea
+DESCRIBE.SLUDGESTACK = "Hyuyu, watch it spew sludge out the wazoo!"     -- yea
 DESCRIBE.SPECTER_SHIPWRECK = "A place of ruin, much too soon."
 
 DESCRIBE.UNCOMPROMISING_HARPOON =
-    "Stabbing things from a distance has never been easier."
+"Stabbing things from a distance has never been easier."
 DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
 DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
 DESCRIBE.UM_MAGNERANG = "Round and round it goes!"
@@ -516,4 +517,25 @@ DESCRIBE.SMALLFISHMEAT_DRIED = "It just don't get it."
 DESCRIBE.WIXIEGUN = "Too much mischief!"
 
 DESCRIBE.MARA_BOSS1 = "Hoh? Where ever is your soul, funny bones?"
-DESCRIBE.UM_SACRED_CHEST = DESCRIBE.SACRED_CHEST
+ANNOUNCE.GAS_DAMAGE = {
+	"Khu! Ukhu! Hyu...",
+	"U-kuh! Hyu!",
+	"T-through the-kh... Foul and-akhu... Filthy air!",
+	"Kh-hak! Hyuyu...",
+	"Hyu-yhu huhu... Hyuyu!",
+	"Hyu-hyu hu-hyuhuuu!",
+	"Cough."
+}
+
+-- Pyre Nettle stuff
+DESCRIBE.UM_PYRE_NETTLES = "Ho, quite the fiery one!"
+DESCRIBE.UM_SMOLDER_SPORE = "Aren't you a patient little terror?"
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_EATEN = "This is fine, hyuyu."
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP = "Hyu!!"
+DESCRIBE.UM_ARMOR_PYRE_NETTLES = "It doesn't quite match my fur, but I could get up to mischief..."
+DESCRIBE.UM_BLOWDART_PYRE = "These could ruin someone's whole LIFE in a heartbeat. How silly!"
+
+-- Under the Weather Part 1
+DESCRIBE.ALPHA_LIGHTNINGGOAT = "We're much alike, me and you! Minus the bleeting."
+DESCRIBE.UM_TORNADO = "Hyu-hyu, this looks like fun!"
+DESCRIBE.UM_WATERFALL = "The water has come to us!"

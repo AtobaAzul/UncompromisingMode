@@ -125,10 +125,20 @@ local function EatFoodAction(inst)
         return BufferedAction(inst, target, ACTIONS.EAT)
     end]]
 end
+local function GetLeader(inst)
+    return inst.components.follower.leader
+end
 
+
+local MIN_FOLLOW_DIST = 2
+local TARGET_FOLLOW_DIST = 3
+local MAX_FOLLOW_DIST = 7
 local AphidBrain = Class(Brain, function(self, inst)
     Brain._ctor(self, inst)
 end)
+
+
+
 
 function AphidBrain:OnStart()
     local root = PriorityNode(
@@ -136,7 +146,7 @@ function AphidBrain:OnStart()
             WhileNode(function() return not self.inst.sg:HasStateTag("jumping") end, "AttackAndWander",
                 PriorityNode(
                     {
-                        UseShield(self.inst, DAMAGE_UNTIL_SHIELD, SHIELD_TIME, AVOID_PROJECTILE_ATTACKS),
+                        Follow(self.inst, GetLeader, MIN_FOLLOW_DIST, TARGET_FOLLOW_DIST, MAX_FOLLOW_DIST),						
                         WhileNode(function() return self.inst.components.combat.target == nil or
                                 not self.inst.components.combat:InCooldown() end, "AttackMomentarily", ChaseAndAttack(self.inst, MAX_CHASE_TIME, MAX_CHASE_DIST)),
                         WhileNode(function() return self.inst.components.combat.target and
