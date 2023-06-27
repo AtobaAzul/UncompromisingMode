@@ -108,7 +108,33 @@ env.AddPrefabPostInit("lightninggoatherd", function(inst)
 			if _OldRemoveMember ~= nil then
 				_OldRemoveMember(inst)
 			end
-			print(inst.components.herd:IsFull())
+			
+			if inst.components.herd:IsFull() then
+				local has_alpha = false
+			
+				for i, v in pairs(inst.components.herd.members) do
+					if i:HasTag("alpha_goat") then
+						has_alpha = true
+					end
+				end
+			
+				if not has_alpha then
+					inst.components.timer:StartTimer("spawn_alpha", 240 + math.random(240))
+				end
+			end
+		end)
+		
+		local _OldAddMember = nil
+	
+		if inst.components.herd.addmember ~= nil then
+			_OldAddMember = inst.components.herd.addmember
+		end
+		
+		inst.components.herd:SetAddMemberFn(function(inst)
+			if _OldAddMember ~= nil then
+				_OldAddMember(inst)
+			end
+			
 			if inst.components.herd:IsFull() then
 				local has_alpha = false
 			

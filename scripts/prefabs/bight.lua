@@ -57,18 +57,18 @@ local function OnAttacked(inst, data)
 			(data.weapon == nil or ((data.weapon.components.weapon == nil or data.weapon.components.weapon.projectile == nil) and data.weapon.components.projectile == nil)) then
 		
 			if not (data.attacker.components.inventory ~= nil and data.attacker.components.inventory:IsInsulated()) then
-				if data.attacker.sg ~= nil and not data.attacker.sg:HasStateTag("nointerrupt") then
-					data.attacker.sg:GoToState("electrocute")
-				end
-					
-				local mult = not (data.attacker:HasTag("electricdamageimmune") or
+				local insulated = (data.attacker:HasTag("electricdamageimmune") or
 					(data.attacker.components.inventory ~= nil and data.attacker.components.inventory:IsInsulated()))
+
+				local mult = not insulated
 					and TUNING.ELECTRIC_DAMAGE_MULT + TUNING.ELECTRIC_WET_DAMAGE_MULT * (data.attacker.components.moisture ~= nil and data.attacker.components.moisture:GetMoisturePercent() or (data.attacker:GetIsWet() and 1 or 0))
 					or 1
 					
 				local damage = -6.7 * mult
 					
-				print(damage)
+				if data.attacker.sg ~= nil and not data.attacker.sg:HasStateTag("nointerrupt") and not insulated then
+					data.attacker.sg:GoToState("electrocute")
+				end
 					
 				data.attacker.components.health:DoDelta(damage, nil, inst.prefab, nil, inst) --From the onhit stuff...
 			end
@@ -90,18 +90,18 @@ local function Shockness(inst,x,y,z)
 	for k,v in pairs(targets) do
 		if not (v.components.inventory ~= nil and v.components.inventory:IsInsulated()) then
 			if not v:HasTag("electricdamageimmune") then
-				if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") then
-					v.sg:GoToState("electrocute")
-				end
-						
-				local mult = not (v:HasTag("electricdamageimmune") or
+				local insulated = (v:HasTag("electricdamageimmune") or
 					(v.components.inventory ~= nil and v.components.inventory:IsInsulated()))
+
+				local mult = not insulated
 					and TUNING.ELECTRIC_DAMAGE_MULT + TUNING.ELECTRIC_WET_DAMAGE_MULT * (v.components.moisture ~= nil and v.components.moisture:GetMoisturePercent() or (v:GetIsWet() and 1 or 0))
 					or 1
 						
 				local damage = -6.7 * mult
-						
-				print(damage)
+
+				if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") and not insulated then
+					v.sg:GoToState("electrocute")
+				end
 					
 				v.components.health:DoDelta(damage, nil, inst.prefab, nil, inst) --From the onhit stuff...
 			end

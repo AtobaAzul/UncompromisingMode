@@ -79,17 +79,14 @@ local function setcharged(inst, instant)
     inst:AddTag("charged")
 	local shocktime = 1
 	
-    if not instant then
-        inst.sg:GoToState("shocked")
-	else
-		shocktime = .2
-    end
+	inst.sg:GoToState("shocked")
+	shocktime = .2
 	
 	inst:DoTaskInTime(shocktime, function(inst)
-		local lightning = SpawnPrefab("hound_lightning")
-		for i = 1, 5 do 
+		for i = 1, 8 do 
+			local lightning = SpawnPrefab("hound_lightning")
 			lightning.Transform:SetPosition(x + math.random(-6, 6), 0, z + math.random(-6, 6))
-			lightning.NoTags = { "INLIMBO", "shadow", "structure", "wall", "lightninggoat" }
+			lightning.NoTags = { "INLIMBO", "shadow", "structure", "wall", "lightninggoat", "prey", "bird" }
 		end
 	end)
 end
@@ -281,9 +278,9 @@ local function fn()
 	end)
 	
 	inst.Recharge = function(inst)
-		--TheNet:Announce("StartRecharge")
+		TheNet:Announce("StartRecharge")
 		inst.Recharging = inst:DoTaskInTime(10,function(inst)
-			--TheNet:Announce("FinishRecharge")
+			TheNet:Announce("FinishRecharge")
 			if inst.recharging_electric then
 				inst.recharging_electric = nil
 			end

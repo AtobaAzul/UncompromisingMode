@@ -47,13 +47,9 @@ local function DealDamage(inst, attacker, target, salty)
                 target.wixieammo_hitstuncd = nil
             end)
 
-            target.components.combat:GetAttacked(attacker, inst.finaldamage, attacker)
+            target.components.combat:GetAttacked(inst, inst.finaldamage, inst)
         else
-            target.components.combat:GetAttacked(attacker, 0, attacker)
-
-            if target.components.combat ~= nil then
-                target.components.combat:SetTarget(attacker)
-            end
+            target.components.combat:GetAttacked(inst, 0, inst)
 
             target.components.health:DoDelta(-inst.finaldamage, false, attacker, false, attacker, false)
         end
@@ -63,6 +59,7 @@ local function DealDamage(inst, attacker, target, salty)
         end
 
         if target.components.combat ~= nil then
+			target.components.combat:SetTarget(attacker)
             target.components.combat:RemoveShouldAvoidAggro(attacker)
         end
 
@@ -174,7 +171,7 @@ local function DoPop(inst, remaining, total, level, hissvol)
                             v.components.combat:SetShouldAvoidAggro(inst.attacker)
                         end
 
-                        v.components.combat:GetAttacked(inst.attacker, 10, inst.attacker)
+                        v.components.combat:GetAttacked(inst, 10, inst)
 
                         if v.components.combat ~= nil then
                             v.components.combat:SetTarget(inst.attacker or nil)
@@ -275,6 +272,7 @@ local function fn()
     inst.AnimState:PlayAnimation("idle")
     inst.Transform:SetScale(0.9, 0.9, 0.9)
 
+    inst:AddTag("projectile")
     inst:AddTag("explosive")
     inst:AddTag("scarytoprey")
 
@@ -378,7 +376,11 @@ local function Damage(inst, attacker, target)
     for i, v in ipairs(damageents) do
         if v.components.combat ~= nil and (v:HasTag("bird_mutant") or TUNING.DSTU.WIXIE_BIRDS and not v:HasTag("bird") or not TUNING.DSTU.WIXIE_BIRDS and v:HasTag("bird")) then
             if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
-                v.components.combat:GetAttacked(attacker, 2 * inst.Transform:GetScale(), attacker)
+                v.components.combat:GetAttacked(inst, 2 * inst.Transform:GetScale(), inst)
+				
+                if v.components.combat ~= nil then
+                    v.components.combat:SetTarget(attacker)
+                end
             end
         end
     end
@@ -735,9 +737,10 @@ local function OnHit_Slime(inst, attacker, target)
                             target.components.combat:SetShouldAvoidAggro(attacker)
                         end
 
-                        target.components.combat:GetAttacked(attacker, hitfx.damage, attacker)
+                        target.components.combat:GetAttacked(inst, hitfx.damage, inst)
 
                         if target.components.combat ~= nil then
+							target.components.combat:SetTarget(attacker)
                             target.components.combat:RemoveShouldAvoidAggro(attacker)
                         end
                     end
@@ -761,9 +764,10 @@ local function OnHit_Slime(inst, attacker, target)
                                 target.components.combat:SetShouldAvoidAggro(attacker)
                             end
 
-                            target.components.combat:GetAttacked(attacker, 50, attacker)
+                            target.components.combat:GetAttacked(inst, 50, inst)
 
                             if target.components.combat ~= nil then
+								target.components.combat:SetTarget(attacker)
                                 target.components.combat:RemoveShouldAvoidAggro(attacker)
                             end
                         end
@@ -1057,13 +1061,9 @@ local function GlassCut(inst)
                             v.wixieammo_hitstuncd = nil
                         end)
 
-                        v.components.combat:GetAttacked(attacker, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), attacker)
-                    else
-                        v.components.combat:GetAttacked(attacker, 0, attacker)
-
-                        if v.components.combat ~= nil then
-                            v.components.combat:SetTarget(attacker)
-                        end
+                        v.components.combat:GetAttacked(inst, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), inst)
+				   else
+                        v.components.combat:GetAttacked(inst, 0, inst)
 
                         v.components.health:DoDelta(-((7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)), false, attacker, false, attacker, false)
                     end
@@ -1073,6 +1073,7 @@ local function GlassCut(inst)
                     end
 
                     if v.components.combat ~= nil then
+						v.components.combat:SetTarget(attacker)
                         v.components.combat:RemoveShouldAvoidAggro(attacker)
                     end
                 end
@@ -1109,14 +1110,10 @@ local function GlassCut(inst)
                             v.wixieammo_hitstuncd = nil
                         end)
 
-                        v.components.combat:GetAttacked(attacker, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), attacker)
-                    else
-                        v.components.combat:GetAttacked(attacker, 0, attacker)
-
-                        if v.components.combat ~= nil then
-                            v.components.combat:SetTarget(attacker)
-                        end
-
+                        v.components.combat:GetAttacked(inst, (7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1), inst)
+				  else
+                        v.components.combat:GetAttacked(inst, 0, inst)
+						
                         v.components.health:DoDelta(-((7 * inst.finallevel) * (attacker.components.combat ~= nil and attacker.components.combat.externaldamagemultipliers:Get() or 1)), false, attacker, false, attacker, false)
                     end
 
@@ -1125,6 +1122,7 @@ local function GlassCut(inst)
                     end
 
                     if v.components.combat ~= nil then
+						v.components.combat:SetTarget(attacker)
                         v.components.combat:RemoveShouldAvoidAggro(attacker)
                     end
                 end
@@ -1607,7 +1605,7 @@ local function Rebound(inst, attacker, target)
             end
 
             if target.components.combat ~= nil then
-                target.components.combat:GetAttacked(set_attacker, 10, attacker)
+                target.components.combat:GetAttacked(inst, 10, inst)
             end
 
             if target.components.sleeper ~= nil and target.components.sleeper:IsAsleep() then
@@ -1615,6 +1613,7 @@ local function Rebound(inst, attacker, target)
             end
 
             if target.components.combat ~= nil then
+				target.components.combat:SetTarget(set_attacker)
                 target.components.combat:RemoveShouldAvoidAggro(attacker)
             end
         end
@@ -1957,13 +1956,14 @@ local function Tremor(inst)
                         v.components.combat:SetShouldAvoidAggro(inst.attacker)
                     end
 
-                    v.components.combat:GetAttacked(inst.attacker, inst.finaldamage, inst.attacker)
+                    v.components.combat:GetAttacked(inst, inst.finaldamage, inst)
 
                     if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
                         v.components.sleeper:WakeUp()
                     end
 
                     if v.components.combat ~= nil then
+						v.components.combat:SetTarget(inst.attacker)
                         v.components.combat:RemoveShouldAvoidAggro(inst.attacker)
                     end
                 end

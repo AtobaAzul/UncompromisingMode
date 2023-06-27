@@ -483,12 +483,12 @@ local states=
 				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/lightninggoat/headbutt")
 			end),
 			
-            TimeEvent(16*FRAMES, function(inst)
+            TimeEvent(18*FRAMES, function(inst)
 				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/dragonfly/land")
 			end),
 			
-            TimeEvent(22*FRAMES, function(inst)
-				local dodamageRadius = 6
+            TimeEvent(19*FRAMES, function(inst)
+				local dodamageRadius = 5.5
 				inst.components.groundpounder.destructionRings = 1
 				inst.components.groundpounder.platformPushingRings = 1
 				inst.components.groundpounder.numRings = 1
@@ -501,7 +501,24 @@ local states=
 				inst.components.groundpounder.platformPushingRings = 1
 				inst.components.groundpounder.numRings = 1
 				inst.components.groundpounder:GroundPound()
-				inst.components.combat:DoAreaAttack(inst, dodamageRadius, nil, nil, "electric", { "lightninggoat", "ghost" })
+				
+				inst.components.combat:DoAreaAttack(inst, dodamageRadius, nil, nil, "electric", { "lightninggoat", "ghost", "prey", "bird", "shadowcreature" })
+				
+				local x, y, z = inst.Transform:GetWorldPosition()
+				local ents = TheSim:FindEntities(x, y, z, dodamageRadius, { "_combat", "player" }, { "playerghost" })
+				
+				for i, ent in ipairs(ents) do
+					if ent.components.health ~= nil and not ent.components.health:IsDead() then
+						if ent ~= nil and not (ent:HasTag("electricdamageimmune") or ent.components.inventory ~= nil and ent.components.inventory:IsInsulated()) then
+							if ent.sg ~= nil and not ent.sg:HasStateTag("nointerrupt") then
+								ent.sg:GoToState("electrocute")
+							end
+							
+							ent.components.health:DoDelta(12.5, nil, inst, nil, inst) --From the onhit stuff...
+						end
+					end
+				end
+				
 				inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/lightninggoat/shocked_electric")
 			end)
         },
@@ -525,7 +542,7 @@ local states=
 				inst.stomp_count = inst.stomp_count + 1
 			end
 			
-			local dodamageRadius = 6 + inst.stomp_count
+			local dodamageRadius = 5.5 + inst.stomp_count
 			
 			local ringfx = SpawnPrefab("firering_fx")
 			ringfx.Transform:SetPosition(inst.Transform:GetWorldPosition())
@@ -535,8 +552,24 @@ local states=
 			inst.components.groundpounder.platformPushingRings = 1 + inst.stomp_count
 			inst.components.groundpounder.numRings = 1 + inst.stomp_count
 			inst.components.groundpounder:GroundPound()
-			inst.components.combat:DoAreaAttack(inst, dodamageRadius, nil, nil, "electric", { "lightninggoat", "ghost" })
+			inst.components.combat:DoAreaAttack(inst, dodamageRadius, nil, nil, "electric", { "lightninggoat", "ghost", "prey", "bird", "shadowcreature" })
 		
+			local x, y, z = inst.Transform:GetWorldPosition()
+			local ents = TheSim:FindEntities(x, y, z, dodamageRadius, { "_combat" }, { "lightninggoat", "ghost", "prey", "bird", "shadowcreature" })
+			
+			for i, ent in ipairs(ents) do
+				if ent.components.health ~= nil and not ent.components.health:IsDead() then
+					if ent ~= nil and not (ent:HasTag("electricdamageimmune") or ent.components.inventory ~= nil and ent.components.inventory:IsInsulated()) then
+							
+						ent.components.health:DoDelta(12.5, nil, inst, nil, inst) --From the onhit stuff...
+							
+						if ent.sg ~= nil and not ent.sg:HasStateTag("nointerrupt") then
+							ent.sg:GoToState("electrocute")
+						end
+					end
+				end
+			end
+				
             inst.Physics:Stop()
             inst.AnimState:PlayAnimation("stompy_loop")
             inst.SoundEmitter:PlaySound("dontstarve_DLC001/creatures/lightninggoat/shocked_electric")

@@ -39,7 +39,7 @@ STRINGS.UNCOMP_TOOLTIP = {
 	MULTITOOL_AXE_PICKAXE = "- Creates shockwaves when chopping/mining.",
 	FEATHERPENCIL = "- Can rename Telelocator Focus' location name and Backtrek Watches.",
 	BOAT_ROTATOR_KIT = "- Increases boat steering speed.\n- Helps doing sharp turns.",
-	STAFF_TORNADO = "- Can redirect tornadoes.",
+	STAFF_TORNADO = "- Can redirect Giant Tornadoes.",
 
 	--uncomp content
 	RAT_WHIP = "- Stronger when well fed.",
@@ -176,7 +176,7 @@ if TUNING.DSTU.HEATWAVES then
 end
 
 if TUNING.DSTU.STORMS then
-	TOOLTIPS.RAINOMETER = "- Can be interacted with to reveal a Tornado's position."
+	TOOLTIPS.RAINOMETER = "- Can track a Tornadoes location."
 end
 
 if TUNING.DSTU.GOTOBED ~= false then

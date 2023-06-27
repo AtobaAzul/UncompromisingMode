@@ -228,12 +228,12 @@ local function PickItem(item, inst)
 end
 
 local function TornadoEnviromentTask(inst)
-    local x, y, z = inst.Transform:GetWorldPosition()
+	local x, y, z = inst.Transform:GetWorldPosition()
 
     if config ~= "minimal" then
         -- if GetClosestInstWithTag("player", inst, PLAYER_CAMERA_SEE_DISTANCE * 1.125) ~= nil then -- tornado doesn't sleep. Using alt distance-based check.
         -- PICKABLES
-        local pickables = TheSim:FindEntities(x, y, z, 12, { "pickable" }, { "INLIMBO" })
+        local pickables = TheSim:FindEntities(x, y, z, 12, { "pickable" }, { "INLIMBO", "trap" })
         for k, v in ipairs(pickables) do
             if v.components.pickable:CanBePicked() then
                 if not v:IsAsleep() and not config == "reduced" then
@@ -248,7 +248,7 @@ local function TornadoEnviromentTask(inst)
         end
 
         -- WORKING
-        local workables = TheSim:FindEntities(x, y, z, 6, nil, { "irreplaceable", "INLIMBO" },
+        local workables = TheSim:FindEntities(x, y, z, 6, nil, { "irreplaceable", "INLIMBO", "trap" },
             { "DIG_workable", "CHOP_workable" })
 
         for k, v in ipairs(workables) do
@@ -314,7 +314,7 @@ local function TornadoEnviromentTask(inst)
 
     -- DAMAGING
     local AURA_EXCLUDE_TAGS = { "noclaustrophobia", "rabbit", "playerghost", "player", "ghost", "shadow",
-        "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "invisible" }
+        "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "invisible", "trap" }
 
     local targets = TheSim:FindEntities(x, y, z, 4, nil, AURA_EXCLUDE_TAGS, { "_combat", "um_tornado_redirector" })
 
@@ -547,84 +547,84 @@ local function TornadoTask(inst)
                     end
                 end
             end
-        end
+		end
 
-        if destination ~= nil then
-            local x_dest, y_dest, z_dest = destination.Transform:GetWorldPosition()
-            local dest_rad = math.rad(inst:GetAngleToPoint(x_dest, y_dest, z_dest) + inst.danumber)
-            local dest_velx = math.cos(dest_rad)
-            local dest_velz = -math.sin(dest_rad)
+		if destination ~= nil then
+			local x_dest, y_dest, z_dest = destination.Transform:GetWorldPosition()
+			local dest_rad = math.rad(inst:GetAngleToPoint(x_dest, y_dest, z_dest) + inst.danumber)
+			local dest_velx = math.cos(dest_rad)
+			local dest_velz = -math.sin(dest_rad)
 
-            local x_dest2, y_dest2, z_dest2 = x + ((FRAMES * 3) * dest_velx), 0, z + ((FRAMES * 3) * dest_velz)
+			local x_dest2, y_dest2, z_dest2 = x + ((FRAMES * 3) * dest_velx), 0, z + ((FRAMES * 3) * dest_velz)
 
-            if x_dest2 ~= nil then
-                inst.Transform:SetPosition(x_dest2, y_dest2, z_dest2)
-            end
+			if x_dest2 ~= nil then
+				inst.Transform:SetPosition(x_dest2, y_dest2, z_dest2)
+			end
 
-            local ocean_anim = TheWorld.Map:IsOceanTileAtPoint(x_dest2, 0, z_dest2)
-            local ground_anim = TheWorld.Map:IsPassableAtPoint(x_dest2, 0, z_dest2)
+			local ocean_anim = TheWorld.Map:IsOceanTileAtPoint(x_dest2, 0, z_dest2)
+			local ground_anim = TheWorld.Map:IsPassableAtPoint(x_dest2, 0, z_dest2)
 
-            if ground_anim then
-                --inst.AnimState:OverrideSymbol("wormmovefx", "um_tornado", "wormmovefx")
-            elseif ocean_anim then
-                --inst.AnimState:OverrideSymbol("wormmovefx", "um_tornado", "wormmovefx_water")
-            else
-                --inst.AnimState:OverrideSymbol("wormmovefx", "um_tornado", "wormmovefx_void")
-            end
+			if ground_anim then
+				--inst.AnimState:OverrideSymbol("wormmovefx", "um_tornado", "wormmovefx")
+			elseif ocean_anim then
+				--inst.AnimState:OverrideSymbol("wormmovefx", "um_tornado", "wormmovefx_water")
+			else
+				--inst.AnimState:OverrideSymbol("wormmovefx", "um_tornado", "wormmovefx_void")
+			end
 
-            if inst.persists and (destination:IsValid() and inst:GetDistanceSqToInst(destination) < 50) --[[or (not TheWorld.Map:IsPassableAtPoint(x, 0, z) and not TheWorld.Map:IsOceanAtPoint(x, 0, z)))]] then
-                inst.AnimState:PlayAnimation("tornado_pst", false)
+			if inst.persists and (destination:IsValid() and inst:GetDistanceSqToInst(destination) < 50) --[[or (not TheWorld.Map:IsPassableAtPoint(x, 0, z) and not TheWorld.Map:IsOceanAtPoint(x, 0, z)))]] then
+				inst.AnimState:PlayAnimation("tornado_pst", false)
 
-                inst:ListenForEvent("animover", function()
-                    inst.startmoving = false
+				inst:ListenForEvent("animover", function()
+					inst.startmoving = false
 
-                    for k, v in ipairs(inst.components.inventory.itemslots) do
-                        local item = inst.components.inventory:RemoveItem(v)
-                        Launch2(item, inst, 2, 2, 5, 0, 10, math.random(360))
-                    end
+					for k, v in ipairs(inst.components.inventory.itemslots) do
+						local item = inst.components.inventory:RemoveItem(v)
+						Launch2(item, inst, 2, 2, 5, 0, 10, math.random(360))
+					end
 
-                    if destination ~= nil then
-                        destination:Remove()
-                    end
+					if destination ~= nil then
+						destination:Remove()
+					end
+					
+					inst:Remove()
+				end)
 
-                    inst:Remove()
-                end)
+				inst.persists = false
 
-                inst.persists = false
+				if destination ~= nil then
+					destination.persists = false
+				end
+			end
+		else
+			if inst.persists then
+				inst.AnimState:PlayAnimation("tornado_pst", false)
 
-                if destination ~= nil then
-                    destination.persists = false
-                end
-            end
-        else
-            if inst.persists then
-                inst.AnimState:PlayAnimation("tornado_pst", false)
+				inst:ListenForEvent("animover", function()
+					for k, v in ipairs(inst.components.inventory.itemslots) do
+						local item = inst.components.inventory:RemoveItem(v)
+						Launch2(item, inst, 2, 2, 5, 0, 10)
+					end
 
-                inst:ListenForEvent("animover", function()
-                    for k, v in ipairs(inst.components.inventory.itemslots) do
-                        local item = inst.components.inventory:RemoveItem(v)
-                        Launch2(item, inst, 2, 2, 5, 0, 10)
-                    end
+					inst.startmoving = false
 
-                    inst.startmoving = false
+					inst:Remove()
+				end)
 
-                    inst:Remove()
-                end)
+				inst.persists = false
+			end
+		end
 
-                inst.persists = false
-            end
-        end
-
-        if inst.whirlpool == nil and TheWorld.Map:IsOceanAtPoint(inst.Transform:GetWorldPosition()) then
-            inst.whirlpool = SpawnPrefab("um_whirlpool")
-            inst.whirlpool.entity:SetParent(inst.entity)
-            inst.whirlpool.Transform:SetPosition(0, 0, 0)
-            inst.whirlpool.Transform:SetScale(2, 2, 2)
-        elseif inst.whirlpool ~= nil and not TheWorld.Map:IsOceanAtPoint(inst.Transform:GetWorldPosition()) then
-            inst.whirlpool.components.timer:StartTimer("kill_whirlpool", 1)
-            inst.whirlpool = nil
-        end
-    end
+		if inst.whirlpool == nil and TheWorld.Map:IsOceanAtPoint(inst.Transform:GetWorldPosition()) then
+			inst.whirlpool = SpawnPrefab("um_whirlpool")
+			inst.whirlpool.entity:SetParent(inst.entity)
+			inst.whirlpool.Transform:SetPosition(0, 0, 0)
+			inst.whirlpool.Transform:SetScale(2, 2, 2)
+		elseif inst.whirlpool ~= nil and not TheWorld.Map:IsOceanAtPoint(inst.Transform:GetWorldPosition()) then
+			inst.whirlpool.components.timer:StartTimer("kill_whirlpool", 1)
+			inst.whirlpool = nil
+		end
+	end
 end
 
 local function OnSave(inst, data) data.is_full = inst.is_full end
@@ -674,7 +674,7 @@ local function fn()
 
     inst.icon = SpawnPrefab("um_tornado_icon")
     inst.icon.entity:SetParent(inst.entity)
-
+	
     inst:AddComponent("updatelooper")
     inst.components.updatelooper:AddOnUpdateFn(TornadoTask)
 
@@ -696,8 +696,8 @@ local function fn()
     inst.OnSave = OnSave
     inst.OnLoad = OnLoad
 
-    inst.OnRemoveEntity = OnRemoveEntity
-
+	inst.OnRemoveEntity = OnRemoveEntity
+	
     return inst
 end
 
@@ -705,7 +705,7 @@ local function iconfn()
     local inst = CreateEntity()
 
     inst.entity:SetCanSleep(false)
-
+	
     inst.entity:AddTransform()
     inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
@@ -727,7 +727,7 @@ local function iconfn()
     inst:AddComponent("maprevealable")
     inst.components.maprevealable:AddRevealSource(inst, "um_tornadotracker")
     inst.components.maprevealable:SetIconPriority(15)
-    --inst.MiniMapEntity:SetRestriction("")
+	--inst.MiniMapEntity:SetRestriction("")
     inst.components.maprevealable:Start()
 
     inst.persists = false
@@ -1016,9 +1016,9 @@ local function marker3()
     return inst
 end
 
-return Prefab("um_tornado", fn, assets, prefabs),
-    Prefab("um_tornado_icon", iconfn, assets, prefabs),
-    Prefab("um_cavetornado", cavefn, assets, prefabs),
+return Prefab("um_tornado", fn, assets, prefabs), 
+	Prefab("um_tornado_icon", iconfn, assets, prefabs),
+	Prefab("um_cavetornado", cavefn, assets, prefabs),
     Prefab("um_tornado_destination", destfn, assets, prefabs),
     Prefab("um_tornado_destination_marker", marker, assets, prefabs),
     Prefab("um_tornado_destination_marker2", marker2, assets, prefabs),

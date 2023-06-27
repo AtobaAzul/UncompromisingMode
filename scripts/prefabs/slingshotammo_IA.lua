@@ -46,13 +46,9 @@ local function DealDamage(inst, attacker, target, salty)
                 target.wixieammo_hitstuncd = nil
             end)
 
-            target.components.combat:GetAttacked(attacker, inst.finaldamage, attacker)
+            target.components.combat:GetAttacked(inst, inst.finaldamage, inst)
         else
-            target.components.combat:GetAttacked(attacker, 0, attacker)
-
-            if target.components.combat ~= nil then
-                target.components.combat:SetTarget(attacker)
-            end
+            target.components.combat:GetAttacked(inst, 0, inst)
 
             target.components.health:DoDelta(-inst.finaldamage, false, attacker, false, attacker, false)
         end
@@ -62,6 +58,7 @@ local function DealDamage(inst, attacker, target, salty)
         end
 
         if target.components.combat ~= nil then
+			target.components.combat:SetTarget(attacker)
             target.components.combat.temp_disable_aggro = false
             target.components.combat:RemoveShouldAvoidAggro(attacker)
         end
