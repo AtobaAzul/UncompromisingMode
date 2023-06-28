@@ -4,6 +4,22 @@ local UpvalueHacker = require("tools/upvaluehacker")
 
 
 --thanks korean!
+
+
+local YES_TAGS_SHADECANOPY = {"shadecanopy"}
+local YES_TAGS_SHADECANOPY_SMALL = {"shadecanopysmall"}
+local function checkforcanopyshade(obj)
+    local x,y,z = obj.Transform:GetWorldPosition()
+    local ents = TheSim:FindEntities(x,y,z, TUNING.SHADE_CANOPY_RANGE, YES_TAGS_SHADECANOPY)
+    if #ents > 0 then
+        return true
+    end
+    ents = TheSim:FindEntities(x,y,z, TUNING.SHADE_CANOPY_RANGE_SMALL, YES_TAGS_SHADECANOPY_SMALL)
+    if #ents > 0 then
+        return true
+    end    
+end
+
 env.AddComponentPostInit("wildfires", function(self)
     local _ShouldActivateWildfires
     local _CheckValidWildfireStarter
@@ -25,7 +41,7 @@ env.AddComponentPostInit("wildfires", function(self)
     end
 
     local CheckValidWildfireStarter = function(obj)
-        return _CheckValidWildfireStarter(obj) and obj:HasTag("plant")
+        return not checkforcanopyshade(obj) and obj:HasTag("plant")
     end
 
     UpvalueHacker.SetUpvalue(_ms_startwildfireforplayerfn, ShouldActivateWildfires, "ShouldActivateWildfires")
