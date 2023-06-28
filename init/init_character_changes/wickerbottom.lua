@@ -370,3 +370,34 @@ if TUNING.DSTU.WICKERNERF_BEEBOOK then
         end
     end)
 end
+
+local function WickerCaresForHerBooks(inst)
+    for k,v in pairs(inst.components.inventory.itemslots) do
+        if v:HasTag("book") and v.components.finiteuses then
+            local percent = v.components.finiteuses:GetPercent()
+            if percent < 1 then
+                v.components.finiteuses:SetPercent(math.min(1, percent + TUNING.BOOKSTATION_RESTORE_AMOUNT))
+            end
+        end
+    end
+end
+
+env.AddPrefabPostInit("wickerbottom", function(inst) 
+    if not TheWorld.ismastersim then
+        return
+    end
+    inst:DoPeriodicTask(TUNING.BOOKSTATION_RESTORE_TIME, WickerCaresForHerBooks)
+end)
+
+env.AddPrefabPostInit("bookstation", function(inst)
+    if not TheWorld.ismastersim then return end
+
+    inst:ListenForEvent("itemget", function(inst)
+        inst:DoTaskInTime(0, function()
+            if inst.RestoreTask ~= nil then
+                inst.RestoreTask:Cancel()
+            end
+            inst.RestoreTask = nil
+        end)
+    end)
+end)
