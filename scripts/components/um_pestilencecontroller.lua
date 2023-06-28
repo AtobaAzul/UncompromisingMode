@@ -66,9 +66,11 @@ return Class(function(self, inst)
 
 	function self:GetInfestedTreePercent()
 		local infested = 0
-		for i, v in ipairs(self.redwoods) do
-			if v:HasTag("infestedtree") then
-				infested = infested + 1
+		if self.redwoods ~= nil then
+			for i, v in ipairs(self.redwoods) do
+				if v:HasTag("infestedtree") then
+					infested = infested + 1
+				end
 			end
 		end
 		return infested / #self.redwoods
