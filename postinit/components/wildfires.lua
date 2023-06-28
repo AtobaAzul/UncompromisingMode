@@ -41,7 +41,7 @@ env.AddComponentPostInit("wildfires", function(self)
     end
 
     local CheckValidWildfireStarter = function(obj)
-        return not checkforcanopyshade(obj) and obj:HasTag("plant")
+        return not checkforcanopyshade(obj) and (obj:HasTag("plant") or obj:HasTag("wildfirepriority"))
     end
 
     UpvalueHacker.SetUpvalue(_ms_startwildfireforplayerfn, ShouldActivateWildfires, "ShouldActivateWildfires")
