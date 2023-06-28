@@ -164,9 +164,8 @@ recipes.frognewton.priority = 20
 
 if TUNING.DSTU.CROCKPOTMONSTMEAT then
     recipes.monsterlasagna.test = function(cooker, names, tags)
-        return tags.monster and
-            (tags.meat and tags.monster > tags.meat or tags.monster >= 3) and not tags.inedible and
-            not (tags.insectoid and tags.insectoid >= 1) and LimitIceTestFn(tags, RECIPE_ICE_LIMIT)
+        return tags.monster and (tags.meat and tags.monster > tags.meat or tags.monster >= 3) and 
+				not tags.inedible and LimitIceTestFn(tags, RECIPE_ICE_LIMIT)
     end
 	-- Original:           test = function(cooker, names, tags) return tags.monster and tags.monster >= 2 and not tags.inedible end,
 	recipes.monsterlasagna.priority = 51
