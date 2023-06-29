@@ -553,3 +553,4 @@ DESCRIBE.UM_BLOWDART_PYRE = "I kind of feel bad for whatever's on the other end.
 DESCRIBE.ALPHA_LIGHTNINGGOAT = "This ones a fighter!"
 DESCRIBE.UM_TORNADO = "My buildings aren't high wind certified!"
 DESCRIBE.UM_WATERFALL = "Where's some sandbags when you need them?"
+ANNOUNCE.ANNOUNCE_UM_NO_TORNADO = "Seems like we're clear from any tornadoes."

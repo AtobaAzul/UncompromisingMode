@@ -586,3 +586,4 @@ DESCRIBE.UM_BLOWDART_PYRE = "Equal parts conventional and psychological warfare!
 DESCRIBE.ALPHA_LIGHTNINGGOAT = "It's the protector of the herd."
 DESCRIBE.UM_TORNADO = "A natural phenomenon, or supernatural?"
 DESCRIBE.UM_WATERFALL = "The tornado appears to have punctured some resivoirs."
+ANNOUNCE.ANNOUNCE_UM_NO_TORNADO = "No tornadoes are being picked up by the machine."

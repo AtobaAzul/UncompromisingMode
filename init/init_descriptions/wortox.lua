@@ -539,3 +539,4 @@ DESCRIBE.UM_BLOWDART_PYRE = "These could ruin someone's whole LIFE in a heartbea
 DESCRIBE.ALPHA_LIGHTNINGGOAT = "We're much alike, me and you! Minus the bleeting."
 DESCRIBE.UM_TORNADO = "Hyu-hyu, this looks like fun!"
 DESCRIBE.UM_WATERFALL = "The water has come to us!"
+ANNOUNCE.ANNOUNCE_UM_NO_TORNADO = "There's no surprises to ruin!"

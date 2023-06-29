@@ -11,18 +11,12 @@ local function OnHitZap(inst)
 			if v:HasTag("player") and v.components.health ~= nil and not v.components.health:IsDead() then
 				local insulated = (v:HasTag("electricdamageimmune") or
 					(v.components.inventory ~= nil and v.components.inventory:IsInsulated()))
-
-				local mult = not insulated
-					and TUNING.ELECTRIC_DAMAGE_MULT + TUNING.ELECTRIC_WET_DAMAGE_MULT * (v.components.moisture ~= nil and v.components.moisture:GetMoisturePercent() or (v:GetIsWet() and 1 or 0))
-					or 1
-					
-				local damage = -20 * mult
+				
+				v.components.combat:GetAttacked(inst, 20, nil, "electric")
 					
 				if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") and not insulated then
 					v.sg:GoToState("electrocute")
 				end
-					
-				v.components.health:DoDelta(damage, nil, inst.prefab, nil, inst) --From the onhit stuff...
 			else
 				if not v:HasTag("electricdamageimmune") and v.components.health ~= nil then
 					--v.components.health:DoDelta(-30, nil, inst.prefab, nil, inst) --From the onhit stuff...

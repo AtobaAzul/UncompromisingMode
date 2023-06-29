@@ -555,3 +555,4 @@ DESCRIBE.UM_BLOWDART_PYRE = "These should thoroughly inconvenience whatever I po
 DESCRIBE.ALPHA_LIGHTNINGGOAT = "You'd do well not to threaten me."
 DESCRIBE.UM_TORNADO = "The seal was an accident, I swear!"
 DESCRIBE.UM_WATERFALL = "No reprieve from the downpour."
+ANNOUNCE.ANNOUNCE_UM_NO_TORNADO = "We're free from any tornadoes, for now."

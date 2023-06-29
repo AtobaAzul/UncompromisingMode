@@ -516,6 +516,7 @@ DESCRIBE.UM_BLOWDART_PYRE = "It's not as good as my slingshot, but it'll do the 
 DESCRIBE.ALPHA_LIGHTNINGGOAT = "Baa!!! BAAAA!"
 DESCRIBE.UM_TORNADO = "Quit yankin' my ribbon!"
 DESCRIBE.UM_WATERFALL = "Wish I had my splashin' clothes!"
+ANNOUNCE.ANNOUNCE_UM_NO_TORNADO = "Ain't any stupid tornadoes to get in my way!"
 
 local general_scripts = require("play_generalscripts")
 

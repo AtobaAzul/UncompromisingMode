@@ -509,12 +509,19 @@ local states=
 				
 				for i, ent in ipairs(ents) do
 					if ent.components.health ~= nil and not ent.components.health:IsDead() then
-						if ent ~= nil and not (ent:HasTag("electricdamageimmune") or ent.components.inventory ~= nil and ent.components.inventory:IsInsulated()) then
-							if ent.sg ~= nil and not ent.sg:HasStateTag("nointerrupt") then
+						if ent ~= nil and not ent:HasTag("electricdamageimmune") then
+							local insulated = (ent:HasTag("electricdamageimmune") or
+								(ent.components.inventory ~= nil and ent.components.inventory:IsInsulated()))
+							
+							local mult = not insulated
+								and TUNING.ELECTRIC_DAMAGE_MULT + TUNING.ELECTRIC_WET_DAMAGE_MULT * (ent.components.moisture ~= nil and ent.components.moisture:GetMoisturePercent() or (ent:GetIsWet() and 1 or 0))
+								or 1
+							
+							if ent.sg ~= nil and not ent.sg:HasStateTag("nointerrupt") and not insulated then
 								ent.sg:GoToState("electrocute")
 							end
 							
-							ent.components.health:DoDelta(12.5, nil, inst, nil, inst) --From the onhit stuff...
+							ent.components.health:DoDelta(10 * mult, nil, inst, nil, inst) --From the onhit stuff...
 						end
 					end
 				end
@@ -559,13 +566,19 @@ local states=
 			
 			for i, ent in ipairs(ents) do
 				if ent.components.health ~= nil and not ent.components.health:IsDead() then
-					if ent ~= nil and not (ent:HasTag("electricdamageimmune") or ent.components.inventory ~= nil and ent.components.inventory:IsInsulated()) then
+					if ent ~= nil and not ent:HasTag("electricdamageimmune") then
+						local insulated = (ent:HasTag("electricdamageimmune") or
+							(ent.components.inventory ~= nil and ent.components.inventory:IsInsulated()))
+						
+						local mult = not insulated
+							and TUNING.ELECTRIC_DAMAGE_MULT + TUNING.ELECTRIC_WET_DAMAGE_MULT * (ent.components.moisture ~= nil and ent.components.moisture:GetMoisturePercent() or (ent:GetIsWet() and 1 or 0))
+							or 1
 							
-						ent.components.health:DoDelta(12.5, nil, inst, nil, inst) --From the onhit stuff...
-							
-						if ent.sg ~= nil and not ent.sg:HasStateTag("nointerrupt") then
+						if ent.sg ~= nil and not ent.sg:HasStateTag("nointerrupt") and not insulated then
 							ent.sg:GoToState("electrocute")
 						end
+							
+						ent.components.health:DoDelta(10 * mult, nil, inst, nil, inst) --From the onhit stuff...
 					end
 				end
 			end

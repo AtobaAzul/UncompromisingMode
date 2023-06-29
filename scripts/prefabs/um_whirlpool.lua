@@ -28,7 +28,7 @@ end
 
 local function Vac(inst)
 	local x, y, z = inst.Transform:GetWorldPosition()
-	local boats = TheSim:FindEntities(x, y, z, 40, {"boat"})
+	local boats = TheSim:FindEntities(x, y, z, 25, {"boat"})
 	
 	for i, v in ipairs(boats) do
 		local px, py, pz = v.Transform:GetWorldPosition()
@@ -39,9 +39,15 @@ local function Vac(inst)
 		
 		local row_dir_x, row_dir_z = VecUtil_Normalize(x - px, z - pz)
 		local boat_physics = v.components.boatphysics
+		
+		if boat_physics ~= nil then
+			if boat_physics:GetTotalAnchorDrag() < 2 then
+				print(boat_physics:GetTotalAnchorDrag())
 
-		--boat_physics:ApplyForce(px, pz, .01)
-		boat_physics:ApplyForce(row_dir_x, row_dir_z, .2)
+				--boat_physics:ApplyForce(px, pz, .01)
+				boat_physics:ApplyForce(row_dir_x, row_dir_z, .2)
+			end
+		end
 		
 		--SpawnPrefab("halloween_firepuff_cold_1").Transform:SetPosition(px, 0, pz)
 	end

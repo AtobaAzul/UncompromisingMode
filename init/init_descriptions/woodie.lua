@@ -538,3 +538,4 @@ DESCRIBE.UM_BLOWDART_PYRE = "Feels real likely to spark up somethin' I care aboo
 DESCRIBE.ALPHA_LIGHTNINGGOAT = "Steer clear of this bleeter."
 DESCRIBE.UM_TORNADO = "Mother nature is a cruel mistress."
 DESCRIBE.UM_WATERFALL = "What a disaster."
+ANNOUNCE.ANNOUNCE_UM_NO_TORNADO = "No tornadoes around, but I coulda told you that."

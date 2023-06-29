@@ -57,12 +57,22 @@ local function OnActivate(inst, doer)
 		if player ~= nil and player.HUD ~= nil then
 			player.HUD.controls:ShowMap(Vector3(x, y, z))
 		end]]
+	else
+		if doer ~= nil and doer.components.talker ~= nil then
+			doer.components.talker:Say(GetString(doer, "ANNOUNCE_UM_NO_TORNADO"))
+		end
 	end
 
     inst.components.activatable.inactive = true
 end
 
+local function GetVerb(inst)
+	return "UM_TORNADOTRACKER"
+end
+
 env.AddPrefabPostInit("rainometer", function(inst)
+	inst.GetActivateVerb = GetVerb
+	
 	if not TheWorld.ismastersim then
 		return
 	end

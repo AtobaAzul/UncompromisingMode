@@ -43,7 +43,8 @@ local component_post = {
     "container",
     "weather",
     "worldtemperature",
-    "worldwind"
+    "worldwind",
+	"planarentity"
 }
 
 local prefab_post = {

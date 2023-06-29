@@ -519,3 +519,4 @@ DESCRIBE.UM_BLOWDART_PYRE = "I'd rather be in the MIDST of the fire and brimston
 DESCRIBE.ALPHA_LIGHTNINGGOAT = "You wish to challenge me, hel-beast?"
 DESCRIBE.UM_TORNADO = "Fight me, wind!"
 DESCRIBE.UM_WATERFALL = "You shall not drown me!"
+ANNOUNCE.ANNOUNCE_UM_NO_TORNADO = "We are free from Aeolus' winds."
