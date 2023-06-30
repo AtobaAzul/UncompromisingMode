@@ -713,7 +713,7 @@ AddRecipe2(
 ChangeSortKey("sludge_cork", "oceanfishingrod", "TOOLS", true)
 ChangeSortKey("sludge_cork", "boat_magnet_beacon", "SEAFARING", true)
 
-AddRecipe2(
+--[[AddRecipe2(
     "boat_bumper_copper_kit",
     { Ingredient("um_copper_pipe", 14) },
     TECH.SEAFARING_ONE,
@@ -729,7 +729,7 @@ AddRecipe2(
     nil,
     { "SEAFARING" }
 )
-ChangeSortKey("steeringwheel_copper_item", "steeringwheel_item", "SEAFARING", true)
+ChangeSortKey("steeringwheel_copper_item", "steeringwheel_item", "SEAFARING", true)]]
 
 if GetModConfigData("monstersmallmeat") then
     AddRecipe2(
@@ -775,7 +775,7 @@ AddDeconstructRecipe(
 AddDeconstructRecipe("dormant_rain_horn", { Ingredient("cookiecuttershell", 4), Ingredient("rocks", 2) })
 
 ----deconstruct recipes for craftable items
-AddDeconstructRecipe("steeringwheel_copper", { Ingredient("um_copper_pipe", 3), Ingredient("gears", 1) })
+--AddDeconstructRecipe("steeringwheel_copper", { Ingredient("um_copper_pipe", 3), Ingredient("gears", 1) })
 
 -- Sailing Rebalance related recipes.
 
