@@ -72,8 +72,11 @@ return Class(function(self, inst)
 					infested = infested + 1
 				end
 			end
+			
+			return infested / #self.redwoods
 		end
-		return infested / #self.redwoods
+		
+		return 1
 	end
 
 	function self:InitializeTimer()

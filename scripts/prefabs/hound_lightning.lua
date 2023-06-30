@@ -43,7 +43,7 @@ local function Zap(inst)
 					and TUNING.ELECTRIC_DAMAGE_MULT + TUNING.ELECTRIC_WET_DAMAGE_MULT * (v.components.moisture ~= nil and v.components.moisture:GetMoisturePercent() or (v:GetIsWet() and 1 or 0))
 					or 1
 					
-				local damage = -20 * mult
+				local damage = -10 * mult
 				
 				if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") and not insulated then
 					v.sg:GoToState("electrocute")
