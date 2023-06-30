@@ -204,7 +204,7 @@ local states =
         events =
         {
             EventHandler("animover", function(inst)
-				inst:PerformBufferedAction()
+				inst:Remove()
             end),
         },
 

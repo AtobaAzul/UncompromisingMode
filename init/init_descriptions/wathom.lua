@@ -201,6 +201,7 @@ DESCRIBE.WHISPERPOD_NORMAL_GROUND = {
 DESCRIBE.FRUITBAT = "Temperament, calm. Assumption, hunter, small game."
 DESCRIBE.PITCHERPLANT = "Functionality, uncertain."
 DESCRIBE.APHID = "Fauna, unfamiliar."
+DESCRIBE.NYMPH = "Reminds of... bee? Curious."
 DESCRIBE.GIANT_TREE_INFESTED = "Inner tree, infestation. Craving sap, perhaps."
 DESCRIBE.GIANT_BLUEBERRY = "Root severed. Safety assured."
 DESCRIBE.STEAMEDHAMS = "\"Steamed hams\", never heard of."
@@ -530,4 +531,20 @@ DESCRIBE.SMALLFISHMEAT_DRIED = ""
 DESCRIBE.WIXIEGUN = ""
 
 DESCRIBE.MARA_BOSS1 = "RUN."
-DESCRIBE.UM_SACRED_CHEST = DESCRIBE.SACRED_CHEST
+ANNOUNCE.GAS_DAMAGE = "CAN'T... BREATHE...!"
+
+-- Pyre Nettle stuff
+DESCRIBE.UM_PYRE_NETTLES = "Origin, upper depths... Expanding?"
+DESCRIBE.UM_SMOLDER_SPORE = "Seeking. Careful."
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_EATEN = "Decision, BRILLIANT."
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP = "DANGER, FORGOTTEN."
+DESCRIBE.UM_ARMOR_PYRE_NETTLES = "Weakens prey. Weakens predator. Benefit, rapid strikes. Useful..."
+DESCRIBE.UM_BLOWDART_PYRE = "Ruthless. Effective. Impressed..."
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_EATEN = "Decision, brilliant..."
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP = "DANGER, FORGOTTEN"
+
+-- Under the Weather Part 1
+DESCRIBE.ALPHA_LIGHTNINGGOAT = "Familiar aura, guardian."
+DESCRIBE.UM_TORNADO = "High winds, senses... confused."
+DESCRIBE.UM_WATERFALL = "Above, damage. Cracks in shell."
+ANNOUNCE.ANNOUNCE_UM_NO_TORNADO = "High winds, nowhere near."

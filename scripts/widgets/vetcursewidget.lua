@@ -23,18 +23,73 @@ local Vetcursewidget = Class(Widget, function(self, owner)
     self:RefreshTooltips()
 end)
 
+local skulls =
+{
+	{
+		name = "walter_vetcurse",
+		text = "\n - I'm bleeding! Does anyone know first aid?!",
+	},
+	{
+		name = "wortox_vetcurse",
+		text = "\n - Souls of the fallen are back for revenge!",
+	},
+	{
+		name = "shambler_target",
+		text = "\n - You are being hunted.",
+	},
+	{
+		name = "willow_vetcurse",
+		text = "\n - 'Creates fires when stressed'.",
+	},
+	{
+		name = "warly_vetcurse",
+		text = "\n - Don't be a glutton!",
+	},
+	{
+		name = "winky_vetcurse",
+		text = "\n - Littering can be hazardous to your health.",
+	},
+	{
+		name = "winky_vetcurse",
+		text = "\n - Littering can be hazardous to your health.",
+	},
+	{
+		name = "wickerbottom_vetcurse",
+		text = "\n - Catch some zeds, or end up dead!",
+	},
+	{
+		name = "wixie_vetcurse",
+		text = "\n - Krampus may take notice of haenous deeds...",
+	},
+	{
+		name = "woodie_vetcurse",
+		text = "\n - The birds! The birds I tell you!",
+	},
+}
+
 function Vetcursewidget:RefreshTooltips()
     local controller_id = TheInput:GetControllerID()
+	
+	local vet_text = ""
 
     if self.owner:HasTag("clockmaker") then
-        self.bg2:SetTooltip("Veteran's Curse:\n - Age faster when damaged.\n - Hunger drains faster.\n - Sanity from foods is applied over time.\n - Gain the ability to wield cursed items, dropped by certain bosses.")
+        vet_text = "Veteran's Curse:\n - Age faster when damaged.\n - Hunger drains faster.\n - Sanity from foods is applied over time.\n - Gain the ability to wield cursed items, dropped by certain bosses."
     else
-        self.bg2:SetTooltip("Veteran's Curse:\n - Receive more damage when attacked.\n - Hunger drains faster.\n - Health and Sanity from foods is applied over time.\n - Gain the ability to wield cursed items, dropped by certain bosses.")
+        vet_text = "Veteran's Curse:\n - Receive more damage when attacked.\n - Hunger drains faster.\n - Health and Sanity from foods is applied over time.\n - Gain the ability to wield cursed items, dropped by certain bosses."
     end
+	
+	for i, v in pairs(skulls) do
+		if self.owner:HasTag(v.name) then
+			vet_text = vet_text .. v.text
+		end
+	end
+	
+	self.bg2:SetTooltip(vet_text)
 end
 
 function Vetcursewidget:OnUpdate(dt)
     if self.owner:HasTag("vetcurse") then
+		self:RefreshTooltips()
         self:Show()
     else
         self:Hide()

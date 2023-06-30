@@ -37,15 +37,15 @@ ANNOUNCE.ANNOUNCE_RNEFOG = "Who is out there!"
 
 -- CaliforniaKing
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING =
-    "Feeling Ahahah ha ha ahh. Buzzy."
+"Feeling Ahahah ha ha ahh. Buzzy."
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING =
-    "Ah, I am not feeling buzzy anymore."
+"Ah, I am not feeling buzzy anymore."
 DESCRIBE.CALIFORNIAKING = "Ooooo, this is nice drink."
 -- CaliforniaKing
 
 -- Content Creators
 DESCRIBE.CCTRINKET_DON =
-    "I can only make out the words \"Squeek\" and uhhh \"Squeek\"."
+"I can only make out the words \"Squeek\" and uhhh \"Squeek\"."
 DESCRIBE.CCTRINKET_JAZZY = "Looks pretty jazzy."
 DESCRIBE.CCTRINKET_FREDDO = "There are stupid scratches etched into it."
 -- Content Creators
@@ -54,7 +54,7 @@ DESCRIBE.UNCOMPROMISING_RAT = "Hello, family."
 DESCRIBE.UNCOMPROMISING_RATHERD = "We're all connected."
 DESCRIBE.UNCOMPROMISING_RATBURROW = "We're all connected."
 DESCRIBE.UNCOMPROMISING_WINKYBURROW =
-    "There are many tunnels that lead to home."
+"There are many tunnels that lead to home."
 DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW = "My beautiful home!"
 
 DESCRIBE.WINKY = {
@@ -93,7 +93,7 @@ DESCRIBE.UM_MONSTEREGG = ""
 DESCRIBE.UM_MONSTEREGG_COOKED = ""
 
 DESCRIBE.MUSHROOMSPROUT_OVERWORLD =
-    "That! That is where the melting rain is from!"
+"That! That is where the melting rain is from!"
 DESCRIBE.TOADLING = "Stop getting in my way."
 DESCRIBE.UNCOMPROMISING_TOAD = "Smells interesting, now."
 
@@ -104,14 +104,14 @@ DESCRIBE.SPIDERQUEENCORPSE = "She is sitting there. Waiting..."
 ANNOUNCE.ANNOUNCE_SNEEZE = "AHHH SQUEE-CHUU!!!!"
 ANNOUNCE.ANNOUNCE_HAYFEVER = "My nose feels.. itchy."
 ANNOUNCE.ANNOUNCE_HAYFEVER_OFF =
-    "Finally, I don't want to claw my nose off anymore."
+"Finally, I don't want to claw my nose off anymore."
 ANNOUNCE.ANNOUNCE_FIREFALL = {
     "Is my fur on fire? Or is it me?", "Does something smell like burning rat!",
     "I am greasy from this hotness."
 }
 ANNOUNCE.ANNOUNCE_ROOTING = "I'm stuck!"
 ANNOUNCE.ANNOUNCE_SNOWSTORM = "I hear the howling of the wind."
-ANNOUNCE.SHADOWTALKER = {"YOU WILL NEVER GET REVENGE.", "YOU OWN NOTHING.", ""}
+ANNOUNCE.SHADOWTALKER = { "YOU WILL NEVER GET REVENGE.", "YOU OWN NOTHING.", "" }
 
 ANNOUNCE.ANNOUNCE_OVER_EAT = {
     STUFFED = "my belly is so big! Squeek!",
@@ -146,7 +146,7 @@ DESCRIBE.RAT_TAIL = "What's the problem? We all die from time to time."
 DESCRIBE.PLAGUEMASK = "Why would I want to smell nice things."
 DESCRIBE.SALTPACK = "AAH, I think It got my EYE!"
 DESCRIBE.SPOREPACK =
-    "We do a little bit of farding, we do a little Farding, yes."
+"We do a little bit of farding, we do a little Farding, yes."
 DESCRIBE.SNOWBALL_THROWABLE = "Haha, I wish I had thumbs sooner."
 DESCRIBE.SPIDER_TRAPDOOR = "Go back in your ugly hole."
 DESCRIBE.TRAPDOOR = "Flatter, worse looking rock."
@@ -209,10 +209,11 @@ DESCRIBE.WHISPERPOD_NORMAL_GROUND = {
 DESCRIBE.FRUITBAT = "I hope you do not explode like the ground ones."
 DESCRIBE.PITCHERPLANT = "Must climb to it I can smell the sweetness."
 DESCRIBE.APHID = "Get out of here, this is Rat-land now."
+DESCRIBE.NYMPH = "You're playing a losing game trying to outcompete me!"
 DESCRIBE.GIANT_TREE_INFESTED = "Must be full of worms."
 DESCRIBE.GIANT_BLUEBERRY = "I will pop it now into my mouth."
 DESCRIBE.STEAMEDHAMS =
-    "These steamed hams are very similar to the ones they have at PorkShire."
+"These steamed hams are very similar to the ones they have at PorkShire."
 DESCRIBE.BLUEBERRYPANCAKES = "This home-made blue slime is very satisfying."
 DESCRIBE.SIMPSALAD = "It is leafs."
 DESCRIBE.BEEFALOWINGS = "I am not sure if I eat the horn as well."
@@ -267,8 +268,8 @@ DESCRIBE.DURABILITY_LEVEL = {
     FULL = "This is nice."
 }
 
-ACTIONFAIL.READ = {GENERIC = "Of course I know what I'm doing."}
-ACTIONFAIL.GIVE = {NOTNIGHT = "Maybe if I hit it hard, it will work?"}
+ACTIONFAIL.READ = { GENERIC = "Of course I know what I'm doing." }
+ACTIONFAIL.GIVE = { NOTNIGHT = "Maybe if I hit it hard, it will work?" }
 
 RECIPE_DESC = GLOBAL.STRINGS.RECIPE_DESC
 
@@ -338,7 +339,7 @@ DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM .. "\nDeformed Jewel."
 DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM .. "\nDeformed Jewel."
 DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM .. "\nDeformed Jewel."
 DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM ..
-                                       "\nDeformed Jewel."
+    "\nDeformed Jewel."
 
 DESCRIBE.RED_MUSHED_ROOM = "Yes, some goop"
 DESCRIBE.GREEN_MUSHED_ROOM = "Yes, some goop"
@@ -392,7 +393,7 @@ DESCRIBE.MOONMAW_LAVAE = "Spinning, spinning. Spinning..."
 DESCRIBE.SNAPPERTURTLE = "ummm, I am not here, do not pay attention to me."
 DESCRIBE.SNAPPERTURTLEBABY = "I'll pick it up and throw it!"
 DESCRIBE.SNAPPERTURTLENEST =
-    "I do not like my nest near water, so that is not mine."
+"I do not like my nest near water, so that is not mine."
 DESCRIBE.GLASS_SCALES = "I like how it lights up like that!"
 DESCRIBE.MOONGLASS_GEODE = "Full of Light."
 DESCRIBE.ARMOR_GLASSMAIL = "I am the glass killer!"
@@ -448,21 +449,21 @@ DESCRIBE.WINONA_BATTERY_LOW_ITEM = "Funny little machine!"
 DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "Funny little machine!"
 DESCRIBE.POWERCELL = "I feel I should chew on this."
 DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL =
-    "Thing with wires to put on other things."
+"Thing with wires to put on other things."
 DESCRIBE.MINERHAT_ELECTRICAL = "It is all wired up now."
 DESCRIBE.OCEAN_SPEAKER = "loud terrible thing."
 -- DESCRIBE.UM_SIREN = "You are smelling fishy to me."
 
 DESCRIBE.OCUPUS_BEAK =
-    "Some clacky piece, I think it is a mouth. But it is mine now."
+"Some clacky piece, I think it is a mouth. But it is mine now."
 DESCRIBE.OCUPUS_TENTACLE = "It is stretchy and delicious!"
 DESCRIBE.OCUPUS_TENTACLE_EYE =
-    "Huh, the eye is chewy I thought it would be gooey."
+"Huh, the eye is chewy I thought it would be gooey."
 DESCRIBE.OCUPUS_TENTACLE_COOKED = "I like to chew on it."
 
 DESCRIBE.ARMOR_REED_UM = "It is tied up together."
 DESCRIBE.ARMOR_SHARKSUIT_UM =
-    "Wearing it does not make me feel safer, just cold and weird."
+"Wearing it does not make me feel safer, just cold and weird."
 DESCRIBE.ROCKJAWLEATHER = "Cold and bumpy to touch."
 
 DESCRIBE.EYEOFTERROR_MINI_ALLY = "I am gonna call you... Blinky!"
@@ -471,13 +472,13 @@ DESCRIBE.EYEOFTERROR_MINI_GROUNDED_ALLY = DESCRIBE.EYEOFTERROR_MINI_GROUNDED
 DESCRIBE.STUFFED_PEEPER_POPPERS = "Little gooey bits I love these!"
 DESCRIBE.UM_DEVILED_EGGS = "Yummy eggs, they smell good!"
 DESCRIBE.LUSH_ENTRANCE =
-    "Just another hole. Actually I have not seen this one before."
+"Just another hole. Actually I have not seen this one before."
 DESCRIBE.CRITTER_FIGGY = "I do not like little beetles following me around."
 DESCRIBE.GIANT_TREE_BIRDNEST = "It seems they came to me!"
 
 DESCRIBE.SLUDGE = "This has an interesting fragance to it, I like."
 DESCRIBE.SLUDGE_OIL =
-    "The scent is most powerful. Too powerful, I do not like it!"
+"The scent is most powerful. Too powerful, I do not like it!"
 DESCRIBE.SLUDGE_SACK = "Slimey gooey carrier, It is my style."
 DESCRIBE.CANNONBALL_SLUDGE_ITEM = "The sludge, It is a rock now."
 DESCRIBE.BOAT_BUMPER_SLUDGE = "Yes, very nice."
@@ -486,13 +487,13 @@ DESCRIBE.BOATPATCH_SLUDGE = "I want it, But I do not want boat holes."
 DESCRIBE.UM_COPPER_PIPE = "Licking this is very tasty."
 DESCRIBE.BRINE_BALM = "I am not hurting myself to help myself."
 DESCRIBE.UNCOMPROMISING_FISHINGNET =
-    "I will steal everything I want now with this."
+"I will steal everything I want now with this."
 DESCRIBE.UM_AMBER = "Is it a jewel?"
 DESCRIBE.UM_BEEGUN = "They are my bees now! I do not want to shoot them!"
 DESCRIBE.BULLETBEE = DESCRIBE.KILLERBEE
 DESCRIBE.CHERRYBULLETBEE = DESCRIBE.KILLERBEE
 DESCRIBE.SUNKENCHEST_ROYAL_RANDOM =
-    "I need more rats to bring this back to my hole."
+"I need more rats to bring this back to my hole."
 DESCRIBE.SUNKENCHEST_ROYAL_RED = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
 DESCRIBE.SUNKENCHEST_ROYAL_BLUE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
 DESCRIBE.SUNKENCHEST_ROYAL_PURPLE = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
@@ -513,14 +514,14 @@ DESCRIBE.SLUDGESTACK = "Oooh new smells!"
 DESCRIBE.SPECTER_SHIPWRECK = "Ha ha! Someone crashed their boat!"
 
 DESCRIBE.UNCOMPROMISING_HARPOON =
-    "Why would I want to throw it? This is mine now."
+"Why would I want to throw it? This is mine now."
 DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY =
-    "Why would I want to throw it? This is mine now."
+"Why would I want to throw it? This is mine now."
 DESCRIBE.UNCOMPROMISING_HARPOONREEL = ""
 DESCRIBE.UM_MAGNERANG = "Why would I want to throw it? This is mine now."
 DESCRIBE.UM_MAGNERANGREEL = "It is trying to take things?"
 DESCRIBE.SIREN_THRONE =
-    "I think it is a seat? What are those things on it, I want them."
+"I think it is a seat? What are those things on it, I want them."
 DESCRIBE.LAVASPIT_SLUDGE = "Too hot!"
 
 DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
@@ -531,7 +532,7 @@ DESCRIBE.PORTABLEBOAT_ITEM = "I want to chew hole in it."
 DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "Yes, I like the spinning."
 
 DESCRIBE.WIXIE_PIANO =
-    "I like tipping and tapping the keys So it makes the noises."
+"I like tipping and tapping the keys So it makes the noises."
 DESCRIBE.WIXIE_CLOCK = "I did not break it!"
 DESCRIBE.WIXIE_WARDROBE = "What's inside? Show me!"
 DESCRIBE.CHARLES_T_HORSE = "Greasy and chewy."
@@ -545,4 +546,19 @@ DESCRIBE.TRINKET_WATHOM1 = "Oh! That is where I put it!"
 DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
 
 DESCRIBE.MARA_BOSS1 = "RUNNING TIME!!"
-DESCRIBE.UM_SACRED_CHEST = DESCRIBE.SACRED_CHEST
+ANNOUNCE.GAS_DAMAGE = "COUGH! COUGH! *WHEEZE*"
+
+-- Pyre Nettle stuff
+DESCRIBE.UM_PYRE_NETTLES = "Tastes like blood. Stupid plant."
+DESCRIBE.UM_SMOLDER_SPORE = "Akh! Keep away..."
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_EATEN = "HELP ME YOU FOOLS!! IT HAS ATTACKED ME!!"
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP = "AHH!! MY HOLDING CLUMPS ARE BURNING!!"
+DESCRIBE.UM_ARMOR_PYRE_NETTLES = "Stupid pointy trash."
+DESCRIBE.UM_BLOWDART_PYRE = "Oh no. Not thinking about it. Not again. Please no."
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP = "AHH!! MY HOLDING CLUMPS!!"
+
+-- Under the Weather Part 1
+DESCRIBE.ALPHA_LIGHTNINGGOAT = "There is not enough room for the both of us!"
+DESCRIBE.UM_TORNADO = "Stupid wind has come back for revenge!"
+DESCRIBE.UM_WATERFALL = "I shower regularly."
+ANNOUNCE.ANNOUNCE_UM_NO_TORNADO = "No dumb tornadoes to steal my things."

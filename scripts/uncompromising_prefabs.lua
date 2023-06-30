@@ -193,6 +193,7 @@ return {
 	"buff_ancient_amulet_red",
 	"amulet_health_orb",
 	"nightcrawler",
+	--"um_nightcrawler",
 	"ancient_trepidation_arm",
 	--"steel_sweater",
 	"rat_whip",
@@ -365,6 +366,15 @@ return {
 	"ums_biometable",
 	"umss_general",
 
+	"um_tornado",
+	"um_whirlpool",
+
+	"um_waterfall",
+	"um_waterfall_terraformer",
+
+	"krampus_middleman_inventory",
+	"alpha_lightninggoat",
+
 	"wathom",
 	"wathom_none",
 
@@ -405,19 +415,30 @@ return {
 	"wixie_stinkcloud",
 	"wixiegun",
 	"placeholder_recipe_item",
+	
 	"winona_structure_item",
 	"boiling_water",
 	"crabking_geyser_single",
 	"staff_starfall",
 	"armor_crab",
-	"crab_hat",
+	"hat_crab",
 	"trident_ground_fx",
 	"moon_beacon",
---	"um_bombmixer1",
---	"um_bombmixer_bombs2",
---	"um_bombmixer",
-	
+	"goat_lightning",
+
+	--	"um_bombmixer1",
+	--	"um_bombmixer_bombs2",
+	--	"um_bombmixer",
+
 	"mara_boss1",
 	"mara_boss1_bullets",
 	"um_sacred_chest",
+	"smog",
+	
+	-- Pyre Nettle stuff
+	"um_pyre_nettles",
+	"um_smolder_spore",
+	"umdebuff_pyre_toxin",
+	"um_armor_pyre_nettles",
+	"um_blowdart_pyre",
 }

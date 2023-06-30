@@ -393,7 +393,7 @@ local treasure_templates =
 
 				guaranteed_loot =
 				{
-					crab_hat_ice_blueprint = 1,
+					hat_crab_ice_blueprint = 1,
 					blueamulet = 1,
 					ice = { 4, 8 },
 					bluegem = { 1, 2 },
@@ -433,7 +433,7 @@ local treasure_templates =
 
 				guaranteed_loot =
 				{
-					crab_hat_blueprint = 1,
+					hat_crab_blueprint = 1,
 					rocks = 4,
 					cutstone = { 1, 2 },
 					orangegem = { 1, 2 },

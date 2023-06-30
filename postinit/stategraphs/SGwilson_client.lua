@@ -777,7 +777,49 @@ local _OldEatState = inst.states["eat"].onenter
                 end),
             },
         },
+        State {
+            name = "soundstun",
+            tags = { "busy", "pausepredict" },
 
+            onenter = function(inst, attacker)
+                ForceStopHeavyLifting(inst)
+                inst.components.locomotor:Stop()
+                inst:ClearBufferedAction()
+
+                if attacker ~= nil then
+                    inst:ForceFacePoint(attacker.Transform:GetWorldPosition())
+                end
+
+				inst.AnimState:PlayAnimation("idle_sanity_pre", false)
+				inst.AnimState:PushAnimation("idle_sanity_loop", true)
+
+                inst.SoundEmitter:PlaySound("dontstarve/wilson/hit")
+                DoHurtSound(inst)
+
+                --V2C: some of the woodie's were-transforms have shorter hit anims
+                local stun_frames = math.min(math.floor(inst.AnimState:GetCurrentAnimationLength() / FRAMES + .5),
+                    attacker and 10 or 6)
+                if inst.components.playercontroller ~= nil then
+                    --Specify min frames of pause since "busy" tag may be
+                    --removed too fast for our network update interval.
+                    inst.components.playercontroller:RemotePausePrediction(stun_frames <= 7 and stun_frames or nil)
+                end
+                inst.sg:SetTimeout(stun_frames * FRAMES)
+            end,
+
+            ontimeout = function(inst)
+                inst.sg:GoToState("idle", true)
+            end,
+
+            events =
+            {
+                EventHandler("animover", function(inst)
+                    if inst.AnimState:AnimDone() then
+                        inst.sg:GoToState("idle")
+                    end
+                end),
+            },
+        },
         State {
             name = "opossum_death",
             tags = { "hiding", "notalking", "nomorph", "busy", "nopredict", "nodangle" },

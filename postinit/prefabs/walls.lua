@@ -16,8 +16,9 @@ local all_walls =
     "wall_wood",
     "wall_moonrock",
     "wall_ruins",
+    "wall_dreadstone",
     "fence",
-    "fence_gate"
+    "fence_gate",
 }
 local function makeobstacle(inst)
     inst.Physics:SetActive(true)

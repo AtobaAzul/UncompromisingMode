@@ -36,7 +36,7 @@ local function TalkShit(inst, taunts)
 end
 
 local function RetaliateAttacker(inst, attacker, taunts)
-    if inst and attacker and inst.components.combat then
+    if inst and attacker and inst.components.combat and not inst:HasTag("merm") then
         inst.components.combat:SuggestTarget(attacker)
     end
     if taunts ~= nil then TalkShit(inst, taunts) end
@@ -66,7 +66,7 @@ local function onworked_pighouse(inst, worker)
     if inst.components.spawner ~= nil and inst.components.spawner.child then
         RetaliateAttacker(inst.components.spawner.child, worker, pigtaunts)
         local x, y, z = inst.Transform:GetWorldPosition()
-        local guards = TheSim:FindEntities(x, y, z, 40, { "guard" })
+        local guards = TheSim:FindEntities(x, y, z, 40, { "guard" }, {"merm"})
         for i, v in ipairs(guards) do
             if v.components.health ~= nil and v.components.combat ~= nil and not v.components.health:IsDead() then
                 v.components.combat:SuggestTarget(worker)
@@ -244,8 +244,8 @@ local function GuardRetargetFn(inst)
                             and
                             not
                             (
-                            defenseTarget.components.trader ~= nil and
-                            defenseTarget.components.trader:IsTryingToTradeWithMe(guy))
+                                defenseTarget.components.trader ~= nil and
+                                defenseTarget.components.trader:IsTryingToTradeWithMe(guy))
                             and not (inst.components.trader ~= nil and inst.components.trader:IsTryingToTradeWithMe(guy)
                             )
                     end,

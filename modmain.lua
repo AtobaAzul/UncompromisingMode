@@ -3,15 +3,12 @@ local require = GLOBAL.require
 require "um_pocketdimensioncontainers"
 
 PrefabFiles = require("uncompromising_prefabs")
-PreloadAssets = {
-    Asset("IMAGE", "images/UM_tip_icon.tex"),
-    Asset("ATLAS", "images/UM_tip_icon.xml"),
-}
+PreloadAssets = {Asset("IMAGE", "images/UM_tip_icon.tex"), Asset("ATLAS", "images/UM_tip_icon.xml")}
 ReloadPreloadAssets()
---Start the game mode
+-- Start the game mode
 SignFiles = require("uncompromising_writeables")
 
---PUTTING THIS HERE SO IT LOADS BEFORE ALL POSTINITS, INITS, ETC
+-- PUTTING THIS HERE SO IT LOADS BEFORE ALL POSTINITS, INITS, ETC
 AddPrefabPostInit("world", function(inst)
     if not inst.ismastersim then
         return
@@ -19,7 +16,7 @@ AddPrefabPostInit("world", function(inst)
 
     local count_skull, count_winky, items_skull, items_winky = 0, 0
     inst:DoTaskInTime(0, function()
-        --count all skullchests and winky burrows
+        -- count all skullchests and winky burrows
         for k, v in pairs(GLOBAL.Ents) do
             if v.prefab == "skullchest" then
                 count_skull = count_skull + 1
@@ -28,7 +25,7 @@ AddPrefabPostInit("world", function(inst)
             end
         end
 
-        --resolve any excess skullchests
+        -- resolve any excess skullchests
         if count_skull > 1 then
             for k, v in pairs(GLOBAL.Ents) do
                 if count_skull == 1 then
@@ -76,28 +73,27 @@ AddPrefabPostInit("world", function(inst)
         end
 
         if count_skull == 0 then
-            GLOBAL.SpawnPrefab("skullchest") --Add a skullchest entity if there's none
+            GLOBAL.SpawnPrefab("skullchest") -- Add a skullchest entity if there's none
             for k, v in pairs(GLOBAL.Ents) do
                 if v.prefab == "skullchest_child" then
-                    v:OnLoadPostPass(v) --reattach for any pre-existing ones
+                    v:OnLoadPostPass(v) -- reattach for any pre-existing ones
                 end
             end
         end
         if count_winky == 0 then
-            GLOBAL.SpawnPrefab("uncompromising_winkyburrow_master") --Add a uncompromising_winkyburrow_master entity if there's none
+            GLOBAL.SpawnPrefab("uncompromising_winkyburrow_master") -- Add a uncompromising_winkyburrow_master entity if there's none
             for k, v in pairs(GLOBAL.Ents) do
                 if v.prefab == "uncompromising_winkyburrow" or v.prefab == "uncompromising_winkyhomeburrow" then
-                    v:OnLoadPostPass(v) --reattach for any pre-existing ones
+                    v:OnLoadPostPass(v) -- reattach for any pre-existing ones
                 end
             end
         end
     end)
 
     if inst:HasTag("forest") then
-        --inst:AddComponent("acidmushrooms")
+        -- inst:AddComponent("acidmushrooms")
     end
 end)
-
 
 modimport("init/init_gamemodes/init_uncompromising_mode")
 modimport("init/init_wathom")
@@ -123,13 +119,9 @@ GLOBAL.MATERIALS.COPPER = "copper"
 RemapSoundEvent("dontstarve/together_FE/DST_theme_portaled", "UMMusic/music/uncomp_char_select")
 RemapSoundEvent("dontstarve/music/music_FE", "UMMusic/music/uncomp_main_menu")
 
-AddShardModRPCHandler("UncompromisingSurvival", "Hayfever_Stop", function()
-    GLOBAL.TheWorld:PushEvent("beequeenkilled")
-end)
+AddShardModRPCHandler("UncompromisingSurvival", "Hayfever_Stop", function() GLOBAL.TheWorld:PushEvent("beequeenkilled") end)
 
-AddShardModRPCHandler("UncompromisingSurvival", "Hayfever_Start", function(...)
-    GLOBAL.TheWorld:PushEvent("beequeenrespawned")
-end)
+AddShardModRPCHandler("UncompromisingSurvival", "Hayfever_Start", function(...) GLOBAL.TheWorld:PushEvent("beequeenrespawned") end)
 
 local function WathomMusicToggle(level)
     if level ~= nil then
@@ -139,7 +131,7 @@ local function WathomMusicToggle(level)
             GLOBAL.TheFocalPoint.SoundEmitter:PlaySound("UMMusic/music/" .. level, "wathommusic")
         end
     else
-        if not GLOBAL.TheWorld.wathom_enabledynamicmusic then --just so other things that killed the music don't get messed up.
+        if not GLOBAL.TheWorld.wathom_enabledynamicmusic then -- just so other things that killed the music don't get messed up.
             GLOBAL.TheWorld:PushEvent("enabledynamicmusic", true)
             GLOBAL.TheWorld.wathom_enabledynamicmusic = true
         end
@@ -147,7 +139,7 @@ local function WathomMusicToggle(level)
     end
 end
 
---wathomcustomvoice/wathomvoiceevent
+-- wathomcustomvoice/wathomvoiceevent
 local function DoAdrenalineUpStinger(sound)
     if type(sound) == "string" then
         GLOBAL.TheFrontEnd:GetSound():PlaySound("wathomcustomvoice/wathomvoiceevent/" .. sound)
@@ -156,9 +148,7 @@ local function DoAdrenalineUpStinger(sound)
     end
 end
 
-local function GetTargetFocus(player, telebase, telestaff)
-    telestaff.target_focus = telebase
-end
+local function GetTargetFocus(player, telebase, telestaff) telestaff.target_focus = telebase end
 
 AddModRPCHandler("UncompromisingSurvival", "GetTargetFocus", GetTargetFocus)
 
@@ -183,22 +173,16 @@ end
 AddClientModRPCHandler("UncompromisingSurvival", "UpdateAllFocuses", UpdateAllFocuses)
 
 local function PianoPuzzleComplete1()
-    print("PianoPuzzleComplete")
-
     local piano = TheSim:FindFirstEntityWithTag("wixie_piano")
     piano:PushEvent("pianopuzzlecomplete_1")
 end
 
 local function PianoPuzzleComplete2()
-    print("PianoPuzzleComplete")
-
     local piano = TheSim:FindFirstEntityWithTag("wixie_piano")
     piano:PushEvent("pianopuzzlecomplete_2")
 end
 
 local function PianoPuzzleComplete3()
-    print("PianoPuzzleComplete")
-
     local piano = TheSim:FindFirstEntityWithTag("wixie_piano")
     piano:PushEvent("pianopuzzlecomplete_3")
 end
@@ -219,8 +203,8 @@ local function ToggleLagCompOn(self)
         GLOBAL.ThePlayer:EnableMovementPrediction(false)
         GLOBAL.Profile:SetMovementPredictionEnabled(false)
 
-        --GLOBAL.ThePlayer.HUD.controls.networkchatqueue:DisplaySystemMessage("The shadows have turned lag compensation off, it will be restored on nights end.")
-        --GLOBAL.TheNet:Announce("The shadows have turned lag compensation off, it will be restored on nights end.")
+        -- GLOBAL.ThePlayer.HUD.controls.networkchatqueue:DisplaySystemMessage("The shadows have turned lag compensation off, it will be restored on nights end.")
+        -- GLOBAL.TheNet:Announce("The shadows have turned lag compensation off, it will be restored on nights end.")
 
         if GLOBAL.ThePlayer.components.playercontroller:CanLocomote() then
             GLOBAL.ThePlayer.components.playercontroller.locomotor:Stop()
@@ -244,8 +228,8 @@ local function ToggleLagCompOff(self)
             GLOBAL.ThePlayer:EnableMovementPrediction(true)
             GLOBAL.Profile:SetMovementPredictionEnabled(true)
 
-            --GLOBAL.ThePlayer.HUD.controls.networkchatqueue:DisplaySystemMessage("The shadows are gone, and lag compensation returns.")
-            --GLOBAL.TheNet:Announce("The shadows are gone, and lag compensation returns.")
+            -- GLOBAL.ThePlayer.HUD.controls.networkchatqueue:DisplaySystemMessage("The shadows are gone, and lag compensation returns.")
+            -- GLOBAL.TheNet:Announce("The shadows are gone, and lag compensation returns.")
 
             if GLOBAL.ThePlayer.components.playercontroller:CanLocomote() then
                 GLOBAL.ThePlayer.components.playercontroller.locomotor:Stop()
@@ -262,46 +246,65 @@ AddClientModRPCHandler("UncompromisingSurvival", "ToggleLagCompOff", ToggleLagCo
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsDeath", function(...)
     if not GLOBAL.TheWorld.ismastershard then
-        print("RPC DeerclopsDeath")
         GLOBAL.TheWorld:PushEvent("hasslerkilled")
     end
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsRemoved", function(...)
     if not GLOBAL.TheWorld.ismastershard then
-        print("RPC DeerclopsRemoved")
         GLOBAL.TheWorld:PushEvent("hasslerremoved")
     end
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsStored", function(...)
     if not GLOBAL.TheWorld.ismastershard then
-        print("RPC DeerclopsStored")
         GLOBAL.TheWorld:PushEvent("storehassler")
     end
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsDeath_caves", function(...)
     if GLOBAL.TheWorld.ismastershard then
-        print("RPC DeerclopsDeath")
         GLOBAL.TheWorld:PushEvent("hasslerkilled_secondary")
     end
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsRemoved_caves", function(...)
     if GLOBAL.TheWorld.ismastershard then
-        print("RPC DeerclopsRemoved")
         GLOBAL.TheWorld:PushEvent("hasslerremoved")
     end
 end)
 
 AddShardModRPCHandler("UncompromisingSurvival", "DeerclopsStored_caves", function(...)
     if GLOBAL.TheWorld.ismastershard then
-        print("RPC DeerclopsStored")
         GLOBAL.TheWorld:PushEvent("storehassler")
     end
 end)
 
+AddShardModRPCHandler("UncompromisingSurvival", "CaveTornado", function(def, x, z, wise, dest_can_move)
+    print("====")
+    print(def)
+    print(x)
+    print(z)
+    print("====")
+    if not GLOBAL.TheWorld.ismastershard then
+        GLOBAL.TheWorld:PushEvent("spawncavetornado", {xdata = x, zdata = z, wisedata = wise, dest_can_movedata = dest_can_move})
+    end
+end)
+
+AddShardModRPCHandler("UncompromisingSurvival", "ToggleCaveHeatWave", function(sender_list, toggle)
+    print("sender_list", sender_list)
+    print("toggle", toggle)
+    print("TheWorld.prefab", GLOBAL.TheWorld.prefab)
+    if toggle then
+        GLOBAL.TheWorld:AddTag("heatwavestart")
+        GLOBAL.TheWorld.net:AddTag("heatwavestartnet")
+		GLOBAL.TheWorld:PushEvent("heatwavestart")
+    else
+        GLOBAL.TheWorld:RemoveTag("heatwavestart")
+        GLOBAL.TheWorld.net:RemoveTag("heatwavestartnet")
+		GLOBAL.TheWorld:PushEvent("heatwaveend")
+    end
+end)
 
 -- WIXIE RELATED RPC'S
 
@@ -320,7 +323,6 @@ local function HandlerFunction(player, mouseposx, mouseposy, mouseposz)
         end
     else
         local wixieposition = GLOBAL.TheInput:GetWorldPosition()
-        print("caved!")
 
         player.wixiepointx = wixieposition.x
         player.wixiepointy = wixieposition.y
@@ -331,8 +333,7 @@ end
 AddModRPCHandler("WixieTheDelinquent", "GetTheInput", HandlerFunction)
 
 local function ClaustrophobiaPanic(player, inst)
-    if inst.components.health ~= nil and not inst.components.health:IsDead()
-        and not inst.sg:HasStateTag("wixiepanic") then
+    if inst.components.health ~= nil and not inst.components.health:IsDead() and not inst.sg:HasStateTag("wixiepanic") then
         inst.sg:GoToState("claustrophobic")
     end
 end
@@ -378,29 +379,21 @@ end)
 AddShardModRPCHandler("UncompromisingSurvival", "AcidMushroomsTargetFinished", function(shard_id, data)
     GLOBAL.TheWorld:PushEvent("master_acidmushroomsfinished", data)
 end)]]
---since ChangeImageName just does that, we need to assign the new atlas as well. I don't want to pack 2 images in the same atlas (mostly because idk how)
+-- since ChangeImageName just does that, we need to assign the new atlas as well. I don't want to pack 2 images in the same atlas (mostly because idk how)
 
-GLOBAL.plaguemask_init_fn = function(inst, build_name)
-    GLOBAL.basic_init_fn(inst, build_name, "hat_plaguemask")
-end
+GLOBAL.plaguemask_init_fn = function(inst, build_name) GLOBAL.basic_init_fn(inst, build_name, "hat_plaguemask") end
 
 GLOBAL.plaguemask_clear_fn = function(inst) GLOBAL.basic_clear_fn(inst, "hat_plaguemask") end
 
-GLOBAL.feather_frock_init_fn = function(inst, build_name)
-    GLOBAL.basic_init_fn(inst, build_name, "featherfrock_ground")
-end
+GLOBAL.feather_frock_init_fn = function(inst, build_name) GLOBAL.basic_init_fn(inst, build_name, "featherfrock_ground") end
 
 GLOBAL.feather_frock_clear_fn = function(inst) GLOBAL.basic_clear_fn(inst, "featherfrock_ground") end
 
-GLOBAL.cursed_antler_init_fn = function(inst, build_name)
-    GLOBAL.basic_init_fn(inst, build_name, "cursed_antler")
-end
+GLOBAL.cursed_antler_init_fn = function(inst, build_name) GLOBAL.basic_init_fn(inst, build_name, "cursed_antler") end
 
 GLOBAL.cursed_antler_clear_fn = function(inst) GLOBAL.basic_clear_fn(inst, "cursed_antler") end
 
-GLOBAL.ancient_amulet_red_init_fn = function(inst, build_name)
-    GLOBAL.basic_init_fn(inst, build_name, "amulet_red_ground")
-end
+GLOBAL.ancient_amulet_red_init_fn = function(inst, build_name) GLOBAL.basic_init_fn(inst, build_name, "amulet_red_ground") end
 
 GLOBAL.ancient_amulet_red_clear_fn = function(inst) GLOBAL.basic_clear_fn(inst, "amulet_red_ground") end
 

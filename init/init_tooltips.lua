@@ -39,6 +39,8 @@ STRINGS.UNCOMP_TOOLTIP = {
 	MULTITOOL_AXE_PICKAXE = "- Creates shockwaves when chopping/mining.",
 	FEATHERPENCIL = "- Can rename Telelocator Focus' location name and Backtrek Watches.",
 	BOAT_ROTATOR_KIT = "- Increases boat steering speed.\n- Helps doing sharp turns.",
+	STAFF_TORNADO = "- Can redirect Giant Tornadoes.",
+
 	--uncomp content
 	RAT_WHIP = "- Stronger when well fed.",
 	AIR_CONDITIONER = "- Can crush up Mushrooms for helpful stat clouds.",
@@ -60,8 +62,8 @@ STRINGS.UNCOMP_TOOLTIP = {
 	DISEASECUREBOMB = "- Restores health and sickly plants.",
 	SLUDGE_OIL = "- Multi-use fuel for fires and lanterns alike.",
 
-	CRAB_HAT = "- Repairs & sewing are twice as effective when worn.",
-	CRAB_HAT_ICE = "- Resistance scales with wetness.\n- Prevents the wearer from drying up.",
+	HAT_CRAB = "- Repairs & sewing are twice as effective when worn.",
+	HAT_CRAB_ICE = "- Resistance scales with wetness.\n- Prevents the wearer from drying up.",
 	ARMOR_CRAB_MAXHP = "- Increases maximum health when worn.",
 	ARMOR_CRAB_REGEN = "- Self-healing."
 }
@@ -95,153 +97,166 @@ if GetModConfigData("winona_portables_") then
 	STRINGS.ENGINEERING_TOOLTIP.WINONA_BATTERY_HIGH = "- Now portable."
 end
 
-local TOOLTIP = STRINGS.UNCOMP_TOOLTIP
+local TOOLTIPS = STRINGS.UNCOMP_TOOLTIP
 
 if GetModConfigData("telestaff_rework") then
-	TOOLTIP.TELESTAFF = "- Can select its destination.\n- Increased uses."
-	TOOLTIP.TELEBASE = "- No longer requires gems per teleport."
+	TOOLTIPS.TELESTAFF = "- Can select its destination.\n- Increased uses."
+	TOOLTIPS.TELEBASE = "- No longer requires gems per teleport."
 end
 
 if GetModConfigData("beebox_nerf") then
-	TOOLTIP.BEEBOX = "- Reduced yield per stage.\n- Reduced maximum active bees."
+	TOOLTIPS.BEEBOX = "- Reduced maximum active Bees."
 end
 
 if not TUNING.DSTU.ELECTRICALMISHAP then
-	TOOLTIP.NIGHTSTICK =
+	TOOLTIPS.NIGHTSTICK =
 	"- No longer breaks when empty.\n- Can be fueled by various electrical items, generators, and potatoes."
-	TOOLTIP.BUGZAPPER =
+	TOOLTIPS.BUGZAPPER =
 	"- Deals bonus damage, and area damage to Insects.\n- Deals electrical damage.\n- Can be fueled by various electrical items, generators, and potatoes."
 else
-	TOOLTIP.NIGHTSTICK =
+	TOOLTIPS.NIGHTSTICK =
 	"- No longer breaks when empty.\n- Functions as a portable lightning rod.\n- Regains fuel when struck by lightning or when charged at generators."
-	TOOLTIP.BUGZAPPER =
+	TOOLTIPS.BUGZAPPER =
 	"- Deals bonus damage, and area damage to Insects.\n- Deals electrical damage.\n - Can be charged at generators."
 end
 
 if TUNING.DSTU.SEWING_KIT then
-	TOOLTIP.SEWING_KIT = "- Doubled uses, but repairs less per use."
+	TOOLTIPS.SEWING_KIT = "- Doubled uses, but repairs less per use."
 end
 
 if TUNING.DSTU.FLINGO_SETTING == "Fuelmuncher" then
-	TOOLTIP.FIRESUPPRESSOR = "- Drains fuel on each throw.\n- Increased maximum fuel."
+	TOOLTIPS.FIRESUPPRESSOR = "- Drains fuel on each throw.\n- Increased maximum fuel."
 elseif TUNING.DSTU.FLINGO_SETTING == "Waterballs" then
-	TOOLTIP.FIRESUPPRESSOR = "- No longer freezes on hit."
+	TOOLTIPS.FIRESUPPRESSOR = "- No longer freezes on hit."
 end
 
 if TUNING.DSTU.LONGPIG then
-	TOOLTIP.REVIVER = "- Requires flesh from a dead survivor."
+	TOOLTIPS.REVIVER = "- Requires flesh from a dead survivor."
 end
 
 if TUNING.DSTU.EYEBRELLAREWORK == false then
-	TOOLTIP.EYEBRELLAHAT = "- Reduced heat protection."
+	TOOLTIPS.EYEBRELLAHAT = "- Reduced heat protection."
 else
-	TOOLTIP.EYEBRELLAHAT = "- Reduced heat protection.\n- Can't be sewn, but may be repaired."
+	TOOLTIPS.EYEBRELLAHAT = "- Reduced heat protection.\n- Can't be sewn, but may be repaired."
 end
 
 if TUNING.DSTU.SNOWSTORMS then
-	TOOLTIP.CAMPFIRE = "- Provides protection from Snow Storms."
-	TOOLTIP.TORCH = "- Provides protection from Snow Storms."
-	TOOLTIP.FIREPIT = "- Provides protection from Snow Storms."
-	TOOLTIP.WALL_HAY_ITEM = "- Provides protection from Snow Storms."
-	TOOLTIP.WALL_WOOD_ITEM = "- Provides protection from Snow Storms."
-	TOOLTIP.WALL_STONE_ITEM = "- Provides protection from Snow Storms."
-	TOOLTIP.WALL_RUINS_ITEM = "- Provides protection from Snow Storms."
-	TOOLTIP.WALL_MOONROCK_ITEM = "- Provides protection from Snow Storms."
-	TOOLTIP.YELLOWSTAFF = "- Dwarf Stars provide protection from Snow Storms."
-	TOOLTIP.MOLEHAT = "- Grants protection against Snow Storms / Sand Storms and Moon Storms when worn."
-	TOOLTIP.DESERTHAT = "- Also works as protection against Snow Storms."
-	TOOLTIP.BEARGERVEST = "- Provides protection from Snow Storms' slowdown."
+	TOOLTIPS.CAMPFIRE = "- Provides protection from Snow Storms."
+	TOOLTIPS.TORCH = "- Provides protection from Snow Storms."
+	TOOLTIPS.FIREPIT = "- Provides protection from Snow Storms."
+	TOOLTIPS.WALL_HAY_ITEM = "- Provides protection from Snow Storms."
+	TOOLTIPS.WALL_WOOD_ITEM = "- Provides protection from Snow Storms."
+	TOOLTIPS.WALL_STONE_ITEM = "- Provides protection from Snow Storms."
+	TOOLTIPS.WALL_RUINS_ITEM = "- Provides protection from Snow Storms."
+	TOOLTIPS.WALL_MOONROCK_ITEM = "- Provides protection from Snow Storms."
+	TOOLTIPS.YELLOWSTAFF = "- Dwarf Stars provide protection from Snow Storms."
+	TOOLTIPS.MOLEHAT = "- Grants protection against Snow Storms / Sand Storms and Moon Storms when worn."
+	TOOLTIPS.DESERTHAT = "- Also works as protection against Snow Storms."
+	TOOLTIPS.BEARGERVEST = "- Provides protection from Snow Storms' slowdown."
 else
-	TOOLTIP.MOLEHAT = "- Grants protection against Sand Storms and Moon Storms when worn."
+	TOOLTIPS.MOLEHAT = "- Grants protection against Sand Storms and Moon Storms when worn."
 end
 
 if TUNING.DSTU.HAYFEVER then
-	TOOLTIP.GASMASK = TOOLTIP.GASMASK .. "\n- Prevents Hayfever while worn."
-	TOOLTIP.PLAGUEMASK = TOOLTIP.PLAGUEMASK .. "\n- Prevents Hayfever while worn."
-	TOOLTIP.BEEHAT = "- Stings won't cause allergic reactions."
-	TOOLTIP.MINIFAN = "- Staves off hayfever."
-	TOOLTIP.FEATHERFAN = "- Grants large amounts of Hayfever protection when blown."
-	TOOLTIP.PERDFAN = "- Grants large amounts of Hayfever protection when blown."
+	TOOLTIPS.GASMASK = TOOLTIPS.GASMASK .. "\n- Prevents Hayfever while worn."
+	TOOLTIPS.PLAGUEMASK = TOOLTIPS.PLAGUEMASK .. "\n- Prevents Hayfever while worn."
+	TOOLTIPS.BEEHAT = "- Stings won't cause allergic reactions."
+	TOOLTIPS.MINIFAN = "- Staves off hayfever."
+	TOOLTIPS.FEATHERFAN = "- Grants large amounts of Hayfever protection when blown."
+	TOOLTIPS.PERDFAN = "- Grants large amounts of Hayfever protection when blown."
+end
+
+if TUNING.DSTU.SMOG then
+	TOOLTIPS.GASMASK = TOOLTIPS.GASMASK .. "\n- Protects against smog while worn."
+	TOOLTIPS.PLAGUEMASK = TOOLTIPS.PLAGUEMASK .. "\n- Protects against smog while worn"
+end
+
+if TUNING.DSTU.HEATWAVES then
+	TOOLTIPS.WINTEROMETER = "- Can predict heatwaves before they occur."
+end
+
+if TUNING.DSTU.STORMS then
+	TOOLTIPS.RAINOMETER = "- Can track a Tornadoes location."
 end
 
 if TUNING.DSTU.GOTOBED ~= false then
-	TOOLTIP.BEDROLL_STRAW = "- May restore maximum health."
+	TOOLTIPS.BEDROLL_STRAW = "- May restore maximum health."
 
-	TOOLTIP.BEDROLL_FURRY = "- A bit more efficient.\n- May restore maximum health."
+	TOOLTIPS.BEDROLL_FURRY = "- A bit more efficient.\n- May restore maximum health."
 
-	TOOLTIP.TENT = "- May restore maximum health."
+	TOOLTIPS.TENT = "- May restore maximum health."
 
-	TOOLTIP.PORTABLETENT_ITEM = "- May restore maximum health."
+	TOOLTIPS.PORTABLETENT_ITEM = "- May restore maximum health."
 
-	TOOLTIP.SIESTAHUT = "- A bit less efficient.\n- May restore maximum health."
+	TOOLTIPS.SIESTAHUT = "- A bit less efficient.\n- May restore maximum health."
 end
 
 if TUNING.DSTU.SLEEPINGBUFF > 1 then
 	if TUNING.DSTU.GOTOBED then
-		TOOLTIP.BEDROLL_STRAW = TOOLTIP.BEDROLL_STRAW .. "\n- Faster healing rate."
+		TOOLTIPS.BEDROLL_STRAW = TOOLTIPS.BEDROLL_STRAW .. "\n- Faster healing rate."
 
-		TOOLTIP.BEDROLL_FURRY = TOOLTIP.BEDROLL_FURRY .. "\n- Faster healing rate."
+		TOOLTIPS.BEDROLL_FURRY = TOOLTIPS.BEDROLL_FURRY .. "\n- Faster healing rate."
 
-		TOOLTIP.TENT = TOOLTIP.TENT .. "\n- Faster healing rate."
+		TOOLTIPS.TENT = TOOLTIPS.TENT .. "\n- Faster healing rate."
 
-		TOOLTIP.SIESTAHUT = TOOLTIP.SIESTAHUT .. "\n- Faster healing rate."
+		TOOLTIPS.SIESTAHUT = TOOLTIPS.SIESTAHUT .. "\n- Faster healing rate."
 
-		TOOLTIP.PORTABLETENT_ITEM = TOOLTIP.PORTABLETENT_ITEM .. "\n- Faster healing rate."
+		TOOLTIPS.PORTABLETENT_ITEM = TOOLTIPS.PORTABLETENT_ITEM .. "\n- Faster healing rate."
 	else
-		TOOLTIP.BEDROLL_STRAW = "- Faster healing rate."
+		TOOLTIPS.BEDROLL_STRAW = "- Faster healing rate."
 
-		TOOLTIP.BEDROLL_FURRY = "- Faster healing rate."
+		TOOLTIPS.BEDROLL_FURRY = "- Faster healing rate."
 
-		TOOLTIP.TENT = "- Faster healing rate."
+		TOOLTIPS.TENT = "- Faster healing rate."
 
-		TOOLTIP.SIESTAHUT = "- Faster healing rate."
+		TOOLTIPS.SIESTAHUT = "- Faster healing rate."
 
-		TOOLTIP.PORTABLETENT_ITEM = "- Faster healing rate."
+		TOOLTIPS.PORTABLETENT_ITEM = "- Faster healing rate."
 	end
 end
 
 if TUNING.DSTU.POCKET_POWERTRIP ~= 0 then
-	TOOLTIP.TRUNKVEST_SUMMER = "- Now has pockets!\n- Slightly increased rain protection."
-	TOOLTIP.TRUNKVEST_WINTER = "- Now has pockets!"
-	TOOLTIP.REFLECTIVEVEST = "- Now has pockets!"
-	TOOLTIP.RAINCOAT = "- Now has pockets!"
-	TOOLTIP.HAWAIIANSHIRT = "- Increased durability.\n- Now has pockets!"
+	TOOLTIPS.TRUNKVEST_SUMMER = "- Now has pockets!\n- Slightly increased rain protection."
+	TOOLTIPS.TRUNKVEST_WINTER = "- Now has pockets!"
+	TOOLTIPS.REFLECTIVEVEST = "- Now has pockets!"
+	TOOLTIPS.RAINCOAT = "- Now has pockets!"
+	TOOLTIPS.HAWAIIANSHIRT = "- Increased durability.\n- Now has pockets!"
 end
 
 if GetModConfigData("canedurability") then
-	TOOLTIP.CANE = "- Has durability, only drains when walking."
+	TOOLTIPS.CANE = "- Has durability, only drains when walking."
 end
 
 if TUNING.DSTU.WANDA_NERF then
-	TOOLTIP.POCKETWATCH_REVIVE = "- Increased cooldown.\n- Gives health penalty."
+	TOOLTIPS.POCKETWATCH_REVIVE = "- Increased cooldown.\n- Gives health penalty."
 end
 
 if TUNING.DSTU.INSUL_THERMALSTONE then
-	TOOLTIP.HEATROCK = "- Reduced inherent insulation.\n- Inherits part of players insulation."
+	TOOLTIPS.HEATROCK = "- Reduced inherent insulation.\n- Inherits part of players insulation."
 end
 
 if TUNING.DSTU.WICKERNERF_TENTACLES then
-	TOOLTIP.BOOK_TENTACLES =
+	TOOLTIPS.BOOK_TENTACLES =
 	"- Summons Sickly Tentacles\n- Sickly Tentacles die over time, drop no loot but don't attack players."
 end
 
 if GetModConfigData("woodie") then
-	TOOLTIP.WEREITEM_GOOSE = "- Walking on water makes you wet."
+	TOOLTIPS.WEREITEM_GOOSE = "- Walking on water makes you wet."
 end
 
 if TUNING.DSTU.WINONA_GEN then
-	TOOLTIP.WINONA_BATTERY_HIGH = TOOLTIP.WINONA_BATTERY_HIGH .. "\n- Access limited to Winona."
-	TOOLTIP.WINONA_BATTERY_LOW = TOOLTIP.WINONA_BATTERY_LOW .. "\n- Access limited to Winona."
+	TOOLTIPS.WINONA_BATTERY_HIGH = TOOLTIPS.WINONA_BATTERY_HIGH .. "\n- Access limited to Winona."
+	TOOLTIPS.WINONA_BATTERY_LOW = TOOLTIPS.WINONA_BATTERY_LOW .. "\n- Access limited to Winona."
 end
 
 if GetModConfigData("lunar grimoire") then
-	TOOLTIP.BOOK_MOON = "- Now mutates everything around on use."
+	TOOLTIPS.BOOK_MOON = "- Now mutates everything around on use."
 end
 
 if GetModConfigData("apicultural notes") then
-	TOOLTIP.BOOK_BEES = "- Now fills up to 10 nearby Bee Boxes."
+	TOOLTIPS.BOOK_BEES = "- Now adds Honey to 20 nearby Bee Boxes."
 end
 
 if GetModConfigData("disable_megaflare") then
-	TOOLTIP.MEGAFLARE = "- No longer summons Deerclops."
+	TOOLTIPS.MEGAFLARE = "- No longer summons Deerclops."
 end

@@ -501,7 +501,22 @@ DESCRIBE.TRINKET_WATHOM1 = "Haha, what a dork!"
 
 DESCRIBE.CODEX_MANTRA = DESCRIBE.WAXWELLJOURNAL
 
-DESCRIBE.MARA_BOSS1 = "It doesn't look so tough!"
+DESCRIBE.MARA_BOSS1 = "I'm about to rattle your bones!"
+
+-- Pyre Nettle stuff
+DESCRIBE.UM_PYRE_NETTLES = "Arms to yourself, pokey!"
+DESCRIBE.UM_SMOLDER_SPORE = "Hey, just the right size!"
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_EATEN = "Ack! I HATE spicy foods!."
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP = "Yeah, I'm on fire!! HELP!"
+DESCRIBE.UM_ARMOR_PYRE_NETTLES = "I guess it would keep OTHER stuff off me..."
+DESCRIBE.UM_BLOWDART_PYRE = "It's not as good as my slingshot, but it'll do the trick."
+
+
+-- Under the Weather Part 1
+DESCRIBE.ALPHA_LIGHTNINGGOAT = "Baa!!! BAAAA!"
+DESCRIBE.UM_TORNADO = "Quit yankin' my ribbon!"
+DESCRIBE.UM_WATERFALL = "Wish I had my splashin' clothes!"
+ANNOUNCE.ANNOUNCE_UM_NO_TORNADO = "Ain't any stupid tornadoes to get in my way!"
 
 local general_scripts = require("play_generalscripts")
 

@@ -1,8 +1,5 @@
-local assets = {
-	Asset("ANIM", "anim/mara_boss1.zip"),
-	
-	Asset("SOUNDPACKAGE", "sound/stmpwyfs.fev"),
-	Asset("SOUND", "sound/stmpwyfs.fsb")
+local prefabs = {
+	"mara_boss1_bullets"
 }
 
 
@@ -10,9 +7,9 @@ local assets = {
 
 -- Movement here.
 local function SansDans(inst)
-	local nextvictim = FindClosestEntity(inst, 85, true, {"_health"}, { "INLIMBO", "invisible", "notarget", "noattack", "playerghost" })
+	local nextvictim = FindClosestEntity(inst, 85, true, nil, { "plant", "blocker", "FX", "INLIMBO", "invisible", "notarget", "noattack", "playerghost" })
 	
-	if nextvictim ~= nil and math.random() > 0.35 then
+	if nextvictim ~= nil and nextvictim.components.health ~= nil and math.random() > 0.35 then
 		--print ("SSSAAAAAN: I am rapidly approaching your location.")
 		inst.components.locomotor:GoToPoint(Vector3(nextvictim.Transform:GetWorldPosition()), nil, true)
 		inst.components.locomotor:RunForward()
@@ -24,25 +21,17 @@ local function SansDans(inst)
 		--print ("SSSAAAAAN: Obama OUT")
 		inst.components.locomotor:RunInDirection(math.random() * 359)
 		inst.components.locomotor:RunForward()
-		inst:DoTaskInTime(math.random() * 0.1 + 0.2, SansDans)
+		inst:DoTaskInTime((math.random(1, 2) * 0.1) + 0.2, SansDans)
 	end
 end
 
 -- 'Attack' spawning happens here.
 local function BoneZone(inst)	
-	local function BoneProjectile(inst)
+	local function Projectile(inst)
 		local bulletspawn = SpawnPrefab("mara_boss1_bullets")
-		if bulletspawn ~= nil then
+		
+		--if math.random() > 0.05 then
 			bulletspawn.Transform:SetPosition(inst.Transform:GetWorldPosition())
-		end
-	end
-
-	local x, y, z = inst.Transform:GetWorldPosition()
-	local anythingwithafuckinghealthbar = TheSim:FindEntities(x, y, z, 50, {"_health"}, { "INLIMBO", "invisible", "notarget", "noattack", "playerghost" })
-	
-	if #anythingwithafuckinghealthbar ~= nil and #anythingwithafuckinghealthbar > 0 then
-		--if math.random() > 0.01 then
-			inst:DoPeriodicTask(2, BoneProjectile, nil, #anythingwithafuckinghealthbar)
 		--else
 			-- print ("SSSAAAAAN: IMA FIRIN MAH")
 			-- codegoesherelol codegoesherelol codegoesherelol
@@ -52,8 +41,18 @@ local function BoneZone(inst)
 			-- make the blaster a crappy moonseer phase 1 head
 		--end
 	end
+
+	local x, y, z = inst.Transform:GetWorldPosition()
+	-- NEXT LINE DETERMINES HOW MANY BONES ARE SPAWNED
+	local anythingwithafuckinghealthbar = TheSim:FindEntities(x, y, z, 50, nil, { "plant", "blocker", "FX", "INLIMBO", "invisible", "notarget", "noattack", "playerghost" })
 	
-	inst:DoTaskInTime(math.random() * 0.6 + 0.6, BoneZone)
+	if #anythingwithafuckinghealthbar ~= nil then
+		for i = 1, #anythingwithafuckinghealthbar do
+			inst:DoTaskInTime(0.2, Projectile)
+		end
+	end
+	
+	inst:DoTaskInTime(math.random() * 0.6 + 1, BoneZone)
 end
 
 local function SoundsThatMightPlayWhenYouFightSans(inst)
@@ -87,6 +86,7 @@ local function fn()
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
 	inst.entity:AddSoundEmitter()
+	inst.entity:AddLight()
 	inst.entity:AddNetwork()
 	
 	MakeCharacterPhysics(inst, 50, .5)
@@ -97,6 +97,15 @@ local function fn()
 	inst.AnimState:SetBuild("mara_boss1")
 	inst.AnimState:PlayAnimation("idle")
 	inst.Transform:SetScale(1.5, 1.5, 1.5)
+	
+	inst:AddTag("scarytoprey")
+	
+	inst.Light:Enable(true)
+	inst.Light:SetRadius(4)
+	inst.Light:SetFalloff(0.75)
+	inst.Light:SetIntensity(0.75)
+	inst.Light:SetColour(0, 0.5, 0.9)
+	
 	
 	inst.entity:SetPristine()
 	
@@ -112,9 +121,13 @@ local function fn()
 	
 	inst:AddComponent("inspectable")
 	
+	inst:AddComponent("health")
+	inst.components.health:SetMaxHealth(1)
+	inst.components.health:SetInvincible(true)
+	
 	inst:DoTaskInTime(0, Arise)
 	
 	return inst
 end
 
-return Prefab("mara_boss1", fn, assets, prefabs)
+return Prefab("mara_boss1", fn, nil, prefabs)

@@ -14,7 +14,7 @@ if TUNING.DSTU.WANDA_NERF then
 
     local function noentcheckfn(pt)
         return not TheWorld.Map:IsPointNearHole(pt) and
-        #TheSim:FindEntities(pt.x, pt.y, pt.z, 1, nil, NOTENTCHECK_CANT_TAGS) == 0
+            #TheSim:FindEntities(pt.x, pt.y, pt.z, 1, nil, NOTENTCHECK_CANT_TAGS) == 0
     end
 
     env.AddPrefabPostInit("wanda", function(inst)
@@ -72,13 +72,19 @@ if TUNING.DSTU.WANDA_NERF then
         inst.components.hauntable.hauntvalue = TUNING.HAUNT_SMALL
         if haunter:HasTag("pocketwatchcaster") and
             inst.components.pocketwatch:CastSpell(haunter, haunter) then
-            -- NOTHING! Enjoy the cooldown...
+                inst.components.lootdropper:DropLoot()
+                SpawnPrefab("brokentool").Transform:SetPosition(inst.Transform:GetWorldPosition())
+                inst:Remove()
         else
             Launch(inst, haunter, TUNING.LAUNCH_SPEED_SMALL)
         end
     end
 
     env.AddPrefabPostInit("pocketwatch_revive", function(inst)
+        if not TheWorld.ismastersim then
+            return
+        end
+
         if inst.components.pocketwatch ~= nil then
             inst.components.pocketwatch.DoCastSpell = Revive_DoCastSpell
         end

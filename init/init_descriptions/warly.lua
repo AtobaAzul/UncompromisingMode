@@ -6,7 +6,7 @@ ACTIONFAIL = GLOBAL.STRINGS.CHARACTERS.WARLY.ACTIONFAIL
 
 ANNOUNCE.DREADEYE_SPOOKED = "Mon ami!."
 ANNOUNCE.ANNOUNCE_HARDCORE_RES =
-    "It would be best served to the patron themself."
+"It would be best served to the patron themself."
 ANNOUNCE.ANNOUNCE_WINONAGEN = "Engineering isn't part of my palate."
 ANNOUNCE.ANNOUNCE_RATRAID = "Oh non..."
 ANNOUNCE.ANNOUNCE_RATRAID_SPAWN = "Get the mort aux rats!"
@@ -34,17 +34,17 @@ ANNOUNCE.ANNOUNCE_RNEFOG = "Is someone there?"
 -- CaliforniaKing
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING = "Oh no! Here it comes!"
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING =
-    "I would rather not do that again."
+"I would rather not do that again."
 DESCRIBE.CALIFORNIAKING = "I don't want to touch this thing again...."
 -- CaliforniaKing
 
 DESCRIBE.UNCOMPROMISING_RAT =
-    "Don't let the filthy little pestes near my kitchen!"
+"Don't let the filthy little pestes near my kitchen!"
 DESCRIBE.UNCOMPROMISING_RATHERD = "A trouble trou!"
 DESCRIBE.UNCOMPROMISING_RATBURROW = "A trouble trou!"
 DESCRIBE.UNCOMPROMISING_WINKYBURROW = "That better not cause any trouble."
 DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW =
-    "I'm not trusting any ingredients that come from there!"
+"I'm not trusting any ingredients that come from there!"
 
 DESCRIBE.WINKY = {
     GENERIC = "Make sure to wear a hair net around the food, %s!",
@@ -77,14 +77,14 @@ DESCRIBE.RATPOISON = "Dinner is served..."
 DESCRIBE.MONSTERSMALLMEAT = "A delicacy in the works?"
 DESCRIBE.COOKEDMONSTERSMALLMEAT = "Mm, how to save this dish...?"
 DESCRIBE.MONSTERSMALLMEAT_DRIED =
-    "I hate to throw away good food, but...this isn't."
+"I hate to throw away good food, but...this isn't."
 
 DESCRIBE.UM_MONSTEREGG = "A mockery of perfection!"
 DESCRIBE.UM_MONSTEREGG_COOKED = "No herbs or spices would save it."
 
 DESCRIBE.MUSHROOMSPROUT_OVERWORLD = "What an unsavory sprout."
 DESCRIBE.TOADLING =
-    "Seems they don't stray far from that fungi's strange aroma."
+"Seems they don't stray far from that fungi's strange aroma."
 
 DESCRIBE.GASMASK = "I could use this in the smoke house."
 DESCRIBE.MOCK_DRAGONFLY = DESCRIBE.DRAGONFLY
@@ -115,13 +115,13 @@ DESCRIBE.SNOWMONG = "This is no frozen treat!"
 DESCRIBE.SHOCKWORM = "Touching it could cook me to perfection!"
 DESCRIBE.ZASPBERRY = "Perhaps a nice raspberry parfait?"
 DESCRIBE.ZASPBERRYPARFAIT =
-    "I can only imagine how it tastes! I hope it doesn't electrocute anybody..."
+"I can only imagine how it tastes! I hope it doesn't electrocute anybody..."
 DESCRIBE.ICEBOOMERANG = "Maybe if I dip it in flavor, and save it for Summer?"
 DESCRIBE.MINOTAUR_BOULDER = "Watch your heads!"
 DESCRIBE.MINOTAUR_BOULDER_BIG =
-    "Let's give that thing a taste of its own medicine!"
+"Let's give that thing a taste of its own medicine!"
 DESCRIBE.SNOWBALL_THROWABLE =
-    "I wasn't ever able to play with snow; I never saw any where I'm from."
+"I wasn't ever able to play with snow; I never saw any where I'm from."
 DESCRIBE.VETERANSHRINE = "The lengths I go for ingredients..."
 DESCRIBE.RAT_TAIL = "I don't want that near my hands! Or my food! Or anywhere!"
 DESCRIBE.PLAGUEMASK = "Maybe I should count my blessings."
@@ -141,7 +141,7 @@ DESCRIBE.SALTPACK = "Would anyone mind if I use this salt?"
 
 DESCRIBE.UM_SCORPION = "Fried scorpion? Too dangerous."
 DESCRIBE.SCORPIONCARAPACE =
-    "I wouldn't dare eat this without a gallon of fry oil."
+"I wouldn't dare eat this without a gallon of fry oil."
 DESCRIBE.SCORPIONCARAPACECOOKED = "It's still not good."
 DESCRIBE.HARDSHELLTACOS = "The shell is actually surprisingly pallatable."
 
@@ -151,7 +151,7 @@ DESCRIBE.SWILSON = "He's looking to make chopped liver!"
 DESCRIBE.VAMPIREBAT = "I assure you, I taste horrible!"
 DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 DESCRIBE.CRITTERLAB_REAL_BROKEN =
-    "Some moon rocks would be the perfect ingredient for a new little home."
+"Some moon rocks would be the perfect ingredient for a new little home."
 DESCRIBE.CHARLIEPHONOGRAPH_100 = "I wonder what is in her record collection?"
 DESCRIBE.BUGZAPPER = "I had to use one of these often back at..."
 
@@ -167,7 +167,7 @@ DESCRIBE.STUMPLING = "I wish I were back at my kitchen!"
 DESCRIBE.BIRCHLING = DESCRIBE.STUMPLING
 DESCRIBE.MOON_TEAR = "I doubt its sanitary, but I should keep it around."
 DESCRIBE.SHADOW_TELEPORTER =
-    "Call me superstitious, but something dangerous is at play here..."
+"Call me superstitious, but something dangerous is at play here..."
 DESCRIBE.POLLENMITEDEN = "I'd rather have a mound of chocolate."
 DESCRIBE.POLLENMITES = "The bugs are really bad around here."
 DESCRIBE.SHADOW_CROWN = "This thing is hexed, I'm sure of it!"
@@ -185,7 +185,7 @@ DESCRIBE.HOODEDMOSS = DESCRIBE.TURF_FOREST
 DESCRIBE.WIDOWSGRASP = "I could fry it?"
 DESCRIBE.WEBBEDCREATURE = "Do I really want to get my ingredients from that?"
 ANNOUNCE.WEBBEDCREATURE =
-    "I can't pierce it. My hands are different than a spider's."
+"I can't pierce it. My hands are different than a spider's."
 DESCRIBE.SNAPDRAGON_BUDDY = "Its hunger calls for me!"
 DESCRIBE.SNAPDRAGON = "Goodness, you're large."
 DESCRIBE.SNAPPLANT = "A lively plant!"
@@ -197,15 +197,16 @@ DESCRIBE.WHISPERPOD_NORMAL_GROUND = {
 DESCRIBE.FRUITBAT = "I actually don't mind this one."
 DESCRIBE.PITCHERPLANT = "I wonder if it has any dew inside?"
 DESCRIBE.APHID = "A horrible pest."
+DESCRIBE.NYMPH = "Pests and pestilence."
 DESCRIBE.GIANT_TREE_INFESTED = "It seems rather sick."
 DESCRIBE.GIANT_BLUEBERRY = "Ohoho, I have plenty of ideas for you!"
 DESCRIBE.STEAMEDHAMS = "Tastes like fast food."
 DESCRIBE.BLUEBERRYPANCAKES = "Didn't even have to add any sugar to the berries."
 DESCRIBE.SIMPSALAD =
-    "The simplicity is ammendable, but I'll need more than just this."
+"The simplicity is ammendable, but I'll need more than just this."
 DESCRIBE.BEEFALOWINGS = "The horn really brings out the heat in the peppers."
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE =
-    "I've got the sturdyness of a beefalo!"
+"I've got the sturdyness of a beefalo!"
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE = "Back to being knocked around."
 DESCRIBE.WIDOWSHEAD = "Another head? I wonder what this one will do."
 DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
@@ -234,12 +235,12 @@ DESCRIBE.BERNIE_ACTIVE = {
     GENERIC = "What a silly fellow.",
     ASHLEY = "What a silly fellow."
 }
-DESCRIBE.BERNIE_BIG = {GENERIC = "Tres géant!", ASHLEY = "Tres géant!"}
+DESCRIBE.BERNIE_BIG = { GENERIC = "Tres géant!", ASHLEY = "Tres géant!" }
 DESCRIBE.ANTIHISTAMINE = "I hate sneezing near food, this will help."
 ANNOUNCE.CURSED_ITEM_EQUIP = "My hands been sizzled!"
 DESCRIBE.VETSITEM = "I seem to be missing some dark ingredient."
 DESCRIBE.SCREECHER_TRINKET = "Something dark stirs."
-ACTIONFAIL.GIVE = {NOTNIGHT = "Some dishes are best served in the evening."}
+ACTIONFAIL.GIVE = { NOTNIGHT = "Some dishes are best served in the evening." }
 
 DESCRIBE.MAGMAHOUND = "A walking furnace. If only they could be domesticated..."
 DESCRIBE.LIGHTNINGHOUND = "Definitely from the tropics."
@@ -292,26 +293,26 @@ DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "What works, works."
 DESCRIBE.SKULLCHEST_CHILD = "Now I can get fresh produce from far away!"
 
 DESCRIBE.SLOBBERLOBBER =
-    "No! Not in the food! Or anywhere near the food! \nOn second thought, get it out of here!"
+"No! Not in the food! Or anywhere near the food! \nOn second thought, get it out of here!"
 DESCRIBE.GORE_HORN_HAT = "Shiskabob time!"
 DESCRIBE.BEARGERCLAW = "Atleast MY hands will be clean."
 DESCRIBE.FEATHER_FROCK =
-    "De-feathering birds isn't really necissary when preparing poultry."
+"De-feathering birds isn't really necissary when preparing poultry."
 
 DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM ..
-                              "\n...It's useless outside of the crabs claw!"
+    "\n...It's useless outside of the crabs claw!"
 DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM ..
-                               "\n...It's useless outside of the crabs claw!"
+    "\n...It's useless outside of the crabs claw!"
 DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM ..
-                                 "\n...It's useless outside of the crabs claw!"
+    "\n...It's useless outside of the crabs claw!"
 DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM ..
-                                "\n...It's useless outside of the crabs claw!"
+    "\n...It's useless outside of the crabs claw!"
 DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM ..
-                                 "\n...It's useless outside of the crabs claw!"
+    "\n...It's useless outside of the crabs claw!"
 DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM ..
-                                 "\n...It's useless outside of the crabs claw!"
+    "\n...It's useless outside of the crabs claw!"
 DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM ..
-                                       "\n...It's useless outside of the crabs claw!"
+    "\n...It's useless outside of the crabs claw!"
 
 DESCRIBE.RED_MUSHED_ROOM = "Too thick for a glaze."
 DESCRIBE.GREEN_MUSHED_ROOM = "Too thick for a glaze."
@@ -319,10 +320,10 @@ DESCRIBE.BLUE_MUSHED_ROOM = "Too thick for a glaze."
 
 -- StantonStuff
 DESCRIBE.SKULLFLASK =
-    "He wagered his recipe. I'm still not sure if this is wine."
+"He wagered his recipe. I'm still not sure if this is wine."
 DESCRIBE.SKULLFLASK_EMPTY = "That's all she wrote."
 DESCRIBE.STANTON_SHADOW_TONIC =
-    "Hm, what kind of liquor is this? Tastes... Off."
+"Hm, what kind of liquor is this? Tastes... Off."
 DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
 DESCRIBE.STANTON = "A drink? I haven't had wine for a long time!"
 DESCRIBE.STANTON_SHADOW_TONIC_FANCY = DESCRIBE.STANTON_SHADOW_TONIC
@@ -338,7 +339,7 @@ DESCRIBE.DEERCLOPS_BARRIER = "We need to break through the barrier!"
 DESCRIBE.MOONMAW_DRAGONFLY = "I won't be able to use ANY part of THAT animal!"
 DESCRIBE.MOONMAW_LAVAE = "Sharper than knives, flying straight at my face!"
 DESCRIBE.SNAPPERTURTLE =
-    "I've seen plenty of you before! I'm not forgiving you for my toe!"
+"I've seen plenty of you before! I'm not forgiving you for my toe!"
 DESCRIBE.SNAPPERTURTLEBABY = "Near helpless as a baby."
 DESCRIBE.SNAPPERTURTLENEST = "They nest here, it seems."
 DESCRIBE.GLASS_SCALES = "Oh, beau!"
@@ -357,11 +358,11 @@ ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW = "I'll never eat again."
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
 DESCRIBE.BOOK_RAIN_UM = "I have plenty of experience with rain."
 DESCRIBE.FLORAL_BANDAGE =
-    "I'm not sure if this is first aid or a new kind of dish."
+"I'm not sure if this is first aid or a new kind of dish."
 DESCRIBE.DORMANT_RAIN_HORN =
-    "Strange, I remember seeing this just before I arrived."
+"Strange, I remember seeing this just before I arrived."
 DESCRIBE.RAIN_HORN =
-    "My memory must be fuzzy. I thought this did something else."
+"My memory must be fuzzy. I thought this did something else."
 DESCRIBE.DRIFTWOODFISHINGROD = "I suppose some quick fishing couldn't hurt."
 
 ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
@@ -385,9 +386,9 @@ ACTIONFAIL.CHARGE_FROM = {
     CHARGE_FULL = "It's already juiced up!"
 }
 ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED =
-    "That was still a little dangerous."
+"That was still a little dangerous."
 ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED =
-    "OW! I can't cook with singed fingers!"
+"OW! I can't cook with singed fingers!"
 
 ----UNDER THE WEATHER----
 
@@ -399,7 +400,7 @@ DESCRIBE.WINONA_BATTERY_LOW_ITEM = "I'll stick to my kitchenware."
 DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "I'll stick to my kitchenware."
 DESCRIBE.POWERCELL = "Food for the batteries, I suppose."
 DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL =
-    "I could use a battery charged... well, everything."
+"I could use a battery charged... well, everything."
 DESCRIBE.MINERHAT_ELECTRICAL = "Would make cooking in the dark easier."
 DESCRIBE.OCEAN_SPEAKER = "I never was one for machines."
 -- DESCRIBE.UM_SIREN = "Apologies Mademoiselle Wigfrid, but it she the supperior singer!"
@@ -412,24 +413,24 @@ DESCRIBE.OCUPUS_TENTACLE_COOKED = "I need some soy, or wasabi."
 DESCRIBE.ARMOR_REED_UM = "I can still feel the breeze going through it..."
 DESCRIBE.ARMOR_SHARKSUIT_UM = "Shark fin soup is OFF the menu!"
 DESCRIBE.ROCKJAWLEATHER =
-    "I uhh... Don't think I have any recipes on shark skin."
+"I uhh... Don't think I have any recipes on shark skin."
 
 DESCRIBE.EYEOFTERROR_MINI_ALLY =
-    "I dont mind having a couple more... uh... eyes to feed?"
+"I dont mind having a couple more... uh... eyes to feed?"
 DESCRIBE.EYEOFTERROR_MINI_GROUNDED_ALLY = DESCRIBE.EYEOFTERROR_MINI_GROUNDED
 
 DESCRIBE.STUFFED_PEEPER_POPPERS = "I... think I misheard the order."
 DESCRIBE.UM_DEVILED_EGGS = "Hors d'evil."
 DESCRIBE.LUSH_ENTRANCE = "There's a very strong aroma coming from down there."
 DESCRIBE.CRITTER_FIGGY =
-    "What was your name again? Figgy, like the fruit, right?"
+"What was your name again? Figgy, like the fruit, right?"
 DESCRIBE.GIANT_TREE_BIRDNEST = "The food's delivering itself now!"
 
 DESCRIBE.SLUDGE = "Repugnant!"
 DESCRIBE.SLUDGE_OIL = "It's been boiled down to a base."
 DESCRIBE.SLUDGE_SACK = "Not fit for storing ingredients."
 DESCRIBE.CANNONBALL_SLUDGE_ITEM =
-    "This will blast anything I aim at into kingdom come!"
+"This will blast anything I aim at into kingdom come!"
 DESCRIBE.BOAT_BUMPER_SLUDGE = "It's gross, and that's why it keeps things away."
 DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "Should I even stick this to my boat?"
 DESCRIBE.BOATPATCH_SLUDGE = "A plug that stays put."
@@ -451,7 +452,7 @@ DESCRIBE.SUNKENCHEST_ROYAL_RAINBOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
 DESCRIBE.STEERINGWHEEL_COPPER = "I've heard copper is quite sanitary."
 DESCRIBE.STEERINGWHEEL_COPPER_ITEM = "I've heard copper is quite sanitary."
 DESCRIBE.BOAT_BUMPER_COPPER =
-    "It's strong, but it doesn't stop the boat rocking."
+"It's strong, but it doesn't stop the boat rocking."
 DESCRIBE.BOAT_BUMPER_COPPER_KIT = "Dense Defense."
 DESCRIBE.UM_DREAMCATCHER = "A net for nightmares."
 DESCRIBE.UM_BRINEISHMOSS = "Salted moss."
@@ -461,7 +462,7 @@ DESCRIBE.SLUDGESTACK = "It reeks of rotten eggs!"
 DESCRIBE.SPECTER_SHIPWRECK = "I hope my boat doesn't end up like that."
 
 DESCRIBE.UNCOMPROMISING_HARPOON =
-    "Stabbing things from a distance has never been easier."
+"Stabbing things from a distance has never been easier."
 DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
 DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
 DESCRIBE.UM_MAGNERANG = "Magnets have no place in a kitchen!"
@@ -472,7 +473,7 @@ DESCRIBE.LAVASPIT_SLUDGE = "I prefer my fires in the pan!"
 DESCRIBE.UM_BEEGUARD_SHOOTER = DESCRIBE.BEEGUARD
 DESCRIBE.UM_BEEGUARD_SEEKER = DESCRIBE.BEEGUARD
 DESCRIBE.UM_BEEGUARD_BLOCKER =
-    "This makes getting honey a bit more complicated."
+"This makes getting honey a bit more complicated."
 
 DESCRIBE.PORTABLEBOAT_ITEM = "Reminds me of the first steak I'd ever cooked."
 DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "Let there be light!"
@@ -526,4 +527,18 @@ DESCRIBE.SMALLFISHMEAT_DRIED = "A low grade appetizer."
 
 DESCRIBE.WIXIEGUN = "Protect my casserole!"
 DESCRIBE.MARA_BOSS1 = "Ah."
-DESCRIBE.UM_SACRED_CHEST = DESCRIBE.SACRED_CHEST
+ANNOUNCE.GAS_DAMAGE = "Hack! Cough!"
+
+-- Pyre Nettle stuff
+DESCRIBE.UM_PYRE_NETTLES = "Mm... Perhaps it could spice up my palette?" -- STAY TUNED FOR UNDER THE WEATHER PART 69 WHEN MARA GETS TO THE CROCKPOT STUFF LMAO
+DESCRIBE.UM_SMOLDER_SPORE = "They pack quite a kick!"
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_EATEN = "That's-a spicy-a meat-a boll!"
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP = "AAH!! I'm getting broiled!!"
+DESCRIBE.UM_ARMOR_PYRE_NETTLES = "A little something to keep the heat on..."
+DESCRIBE.UM_BLOWDART_PYRE = "Aren't you a spicy one?"
+
+-- Under the Weather Part 1
+DESCRIBE.ALPHA_LIGHTNINGGOAT = "A cut of tough meat."
+DESCRIBE.UM_TORNADO = "The storm has been brewed!"
+DESCRIBE.UM_WATERFALL = "A salty brine has entered the cavern!"
+ANNOUNCE.ANNOUNCE_UM_NO_TORNADO = "No tornadoes are brewing."

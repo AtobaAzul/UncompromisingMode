@@ -107,6 +107,23 @@ local function TryToInfestTree(inst)
     end
 end
 
+local function FindNymph(inst)
+	if not inst.nymph then
+		local nymph = FindEntity(inst,20^2,nil,{"nymph"})
+		if nymph then
+			inst.components.follower:SetLeader(nymph)
+			inst.Transform:SetPosition(inst.Transform:GetWorldPosition())
+			if not nymph.posse then
+				nymph.posse = {}
+			end
+			table.insert(nymph.posse,inst)
+		else
+			inst:Remove()
+		end
+	end
+end
+
+
 local function fn()
     local inst = CreateEntity()
 
@@ -182,7 +199,7 @@ local function fn()
     inst.components.combat:SetDefaultDamage(20)
     inst.components.combat:SetAttackPeriod(GetRandomMinMax(1, 3))
     inst.components.combat:SetRange(5, 2)
-
+	inst:AddComponent("follower")
     inst:AddComponent("knownlocations")
     inst:AddComponent("inspectable")
 
@@ -192,7 +209,7 @@ local function fn()
     --inst.components.eater:SetDiet({ FOODGROUP.OMNI }, { FOODGROUP.OMNI })
     inst.components.eater:SetDiet({ FOODGROUP.OMNI, FOODTYPE.WOOD, FOODTYPE.SEEDS, FOODTYPE.ROUGHAGE },
     { FOODGROUP.OMNI, FOODTYPE.WOOD, FOODTYPE.SEEDS, FOODTYPE.ROUGHAGE })
-    inst:DoPeriodicTask(4 + 4 * math.random(), TryToInfestTree)
+    --inst:DoPeriodicTask(4 + 4 * math.random(), TryToInfestTree) --Deprecated, poor performance
     --inst.OnEntitySleep = OnEntitySleep
     --inst.OnEntityWake = OnEntityWake
 
@@ -208,6 +225,18 @@ local function fn()
 
     inst:ListenForEvent("fly_in", OnFlyIn) -- matches enter_loop logic so it does not happen a frame late
 
+	inst.OnSave = function(inst,data)
+		if data and inst.posse then
+			data.posse = inst.posse
+		end
+	end
+	inst.OnLoad = function(inst,data)
+		if data and data.posse then
+			inst.posse = true
+			FindNymph(inst)
+		end
+	end
+	
     return inst
 end
 

@@ -1,24 +1,31 @@
 name = "󰀕 Uncompromising Mode"
 -- borrowed from IA
 folder_name = folder_name or "workshop-"
-if not folder_name:find("workshop-") then name = "[LOCAL] - " .. name end
+if not folder_name:find("workshop-") then
+    name = "[LOCAL] - " .. name
+end
 
 description = [[
-󰀔 [ Version 1.2.4.2: "Face Your Fears" ]
+󰀔 [ Version 2.0.0.0: "Under the Weather Pt.1" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
 Latest update features:
-- Wixie, the Delinquent & Walter Rework
-- Reworks to Crab King and Dread Eye and Trepidation.
-- New Winona perks
+- New spring weather, uncluding storms, tornados, and cave flooding.
+- Alpha Goats will appear in goat herds, to protect their own, and have consistant loot.
+- Krampii will more effectively steal things and do their job.
 - A ton of misc. changes, ranging from Wickerbottom's books to hounds.
 
-󰀏 NEXT UPDATE: Under the Weather, part 1 ]]
+󰀏 NEXT UPDATE: Under the Weather, Part 2 "Singing in the Rain" ]]
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Face Your Fears v1.2.4.2"
+version = "Under the Weather Pt.1 v2.0.0.0"
+-- VERSION SCHEME
+-- first num is major release (e.g. "Under the weather", so, 2, UTW2 will be 3, and so on.) DO NOT BRING THIS NUMBER *DOWN* AGAIN PLEASE
+-- second is new content (something like a new large addition)
+-- third is minor (minor things like tweaks and some fixes)
+-- fourth is hotfix (bug fixes, very tiny misc changes)
 
 forumthread = "/topic/111892-announcement-uncompromising-mode/"
 
@@ -140,13 +147,13 @@ configuration_options = {
     {
         name = "flingo_setting",
         label = "Flingomatic Nerf",
-        hover = "Pick the Flingomatic nerf you would like to play around.",
+        hover =
+        "Pick the Flingomatic nerf you would like to play around.",
         options = {
             { description = "Fuel loss in use",  data = "Fuelmuncher" },
-            { description = "No longer freezes", data = "Waterballs" },
-            { description = "None",              data = "Newb" },
-        },
-        default = "Waterballs",
+            { description = "No longer freezes", data = "Waterballs" }, { description = "None", data = "Newb" } },
+        default =
+        "Waterballs"
     },
     {
         name = "fireloot",
@@ -154,33 +161,31 @@ configuration_options = {
         hover =
         "Loot no longer gets destroyed when a mob is burnt to death. Mobs will explode on death, dealing damage and lighting things on fire, based on loot dropped.",
         options = {
-            { description = "Off",           data = 1 },
-            { description = "Explosion Off", data = 2 },
-            { description = "Explosion On",  data = 3 },
-        },
-        default = 3,
+            { description = "Off",          data = 1 }, { description = "Explosion Off", data = 2 },
+            { description = "Explosion On", data = 3 } },
+        default = 3
     },
     {
         name = "bossresistance",
         label = "Dynamic Boss Resistance",
-        hover = "Bosses have increasing resistance against multiple players",
+        hover =
+        "Some bosses have increasing resistance against multiple players",
         options = {
             {
                 description = "Dynamic",
                 hover = "Bosses change their resistance based on hits taken.",
                 data =
-                "dynamic"
+                "Dynamic"
             },
             {
                 description = "Static",
                 hover = "Bosses change their resistance based on nearby players.",
                 data =
-                "static"
+                "Static"
             },
-            { description = "Disabled", data = false },
-
-        },
-        default = "dynamic",
+            { description = "Disabled", data = false } },
+        default =
+        "dynamic"
     },
     {
         name = "vetcurse",
@@ -248,9 +253,8 @@ configuration_options = {
     BinaryConfig("warly", "Warly",
         "Warly gets increased stats from food, like Singleplayer. However, he remembers foods for 3 days instead of 2.",
         true),
-    BinaryConfig("warly_butcher", "Experimental Warly's Butchering",
-        "Warly is a certified butcher, he can sometimes get more resources from his kills.",
-        false),
+    BinaryConfig("warly_butcher_", "Experimental Warly's Butchering",
+        "Warly is a certified butcher, he can sometimes get more resources from his kills.", true),
     BinaryConfig("waxwell", "Maxwell",
         "Maxwell gets buffed versions of his classic shadows by reading the Codex Umbra. Disable for Maxwell mod compatibility!",
         true),
@@ -318,7 +322,7 @@ configuration_options = {
     ------------------------------
     -- Weather --
     ------------------------------
-    Header("Weather"),
+    Header("Weather & Seasons"),
     ------------------------------
     {
         name = "weatherhazard_autumn",
@@ -331,50 +335,79 @@ configuration_options = {
         },
         default = 70
     },
+    BinaryConfig("toads", "Toads",
+        "Sickly Toads replace Frogs in the second Autumn and occasionally release Spore Clouds on death.", true),
+    -- BinaryConfig("acidrain", "Acid Rain", "After the First Year, Toadstool will grow poisionous mushtrees aboveground and pollute the world, making the rain acidic.", true),
+    SkipSpace(),
+
     {
         name = "weatherhazard_winter",
         label = "Start Date for Winter weather",
         hover =
-        "New Winter weather occurs in the first year by default.",
+        "New Winter weather occurs in the first year, by default.",
         options = {
             { description = "First Year", data = 5 }, { description = "Second Year", data = 70 },
             { description = "Third Year", data = 120 } },
         default = 5
     },
+    BinaryConfig("snowstorms", "Snowstorms",
+        "Snowtorms impede on players' speed and vision if they are not wearing eye protection. Snowstorms also causes snow to build up on structures.",
+        true),
+    BinaryConfig("winter_burning", "Harder Burning",
+        "Winter makes it so setting stuff alight takes more time, and also finish burning faster.", true),
+    SkipSpace(),
+
     {
         name = "weatherhazard_spring",
         label = "Start Date for Spring weather",
         hover =
-        "New Spring weather occurs in the first year by default.",
+        "New Spring weather occurs in the first year, by default.",
         options = {
             { description = "First Year", data = 5 }, { description = "Second Year", data = 70 },
             { description = "Third Year", data = 120 } },
         default = 5
     },
-    --[[{
-	name = "weatherhazard_summer",
-	label = "Start Date for new Summer weather",
-	hover = "New Summer weather occurs in the billionth year, by default.",
-	options =
-	{
-		{description = "First Year", data = 22},
-		{description = "Second Year", data = 70},
-		{description = "Third Year", data = 120},
-	},
-	default = 22,
-	},]]
-    BinaryConfig("snowstorms", "Snowstorms",
-        "Snowtorms impede on players' speed and vision if they are not wearing eye protection. Snowstorms also causes snow to build up on structures.",
-        true),
     BinaryConfig("hayfever_disable", "Hayfever",
         "Hayfever makes a return from Hamlet, but tweaked so it doesn't make you want to die. Prevent sneezing with antihistamines and certain hats.",
         false),
-    BinaryConfig("winter_burning", "Harder Burning",
-        "Winter makes it so setting stuff alight takes more time, and also finish burning faster.", true),
-    -- BinaryConfig("acidrain", "Acid Rain", "After the First Year, Toadstool will grow poisionous mushtrees aboveground and pollute the world, making the rain acidic.", true),
+    BinaryConfig("um_storms", "Tornadoes", "Tornadoes sweep across the land and kidnap your cows.", true),
+    {
+        name = "um_storms_performance",
+        label = "Tornadoes: Less Lag",
+        hover =
+        "Simplifies some of tornadoes' interactions with the world to help with performance for lower-end systems.",
+        options = {
+            { description = "Disabled",        data = "off",     hover = "Tornado does everything." },
+            { description = "Reduced Effects", data = "reduced",
+                                                                     hover =
+                "Simplified interactions, doesn't work off-screen." },
+            { description = "Minimal Effects", data = "minimal", hover = "Removes all direct non-player interactions." },
+            default = "off"
+        },
 
+    },
+    SkipSpace(),
+
+    {
+        name = "weatherhazard_summer",
+        label = "Start Date for Summer weather",
+        hover = "New Summer weather occurs in the first year, by default.",
+        options =
+        {
+            { description = "First Year",  data = 22 },
+            { description = "Second Year", data = 70 },
+            { description = "Third Year",  data = 120 },
+        },
+        default = 22,
+    },
     BinaryConfig("hotcaves", "Hotter Caves", "During Summer, caves are just hot enough to overheat you without any gear.",
         true),
+    BinaryConfig("heatwaves", "Heat Waves",
+        "Heat waves at as a summer counterpart to snowstorms.\nWhile they don't do much on their own, aside from the temperature increase, they interact with Smog and Pyre Nettles.",
+        true),
+    BinaryConfig("pyrenettles", "Pyre Nettles", "Pyre Nettles are a new invasive plant that grows with heat.", true),
+    BinaryConfig("smog", "Smog",
+        "Burning plants in summer releases large quantities of smoke. Meant to interact with heatwaves.", true),
     SkipSpace(),
 
     --[[ This section disabled until we actually use it.
@@ -724,7 +757,7 @@ configuration_options = {
         true),
     BinaryConfig("pinelings", "Pinelings",
         "Stumps will become pinelings if awoken by a treeguard, or if stumps are left for long enough.", true),
-    --BinaryConfig("pollenmites", "Pollen Mites", "Pollen mites spawn in spring and quickly infest the nearby area.", false),
+    -- BinaryConfig("pollenmites", "Pollen Mites", "Pollen mites spawn in spring and quickly infest the nearby area.", false),
     BinaryConfig("maxhphitters", "Max HP Damage",
         "Some monsters deal Max HP damage.\nTurn this off if you're having problems with mods which also interact Max HP.",
         true),
@@ -742,8 +775,6 @@ configuration_options = {
     BinaryConfig("harder_koalefants", "Harder Koalefants", "Koalefants have brand new attacks and doubled health.", true),
     BinaryConfig("hungryfrogs", "Hungry Frogs", "Frogs eat anything left on the floor.", true),
     BinaryConfig("cowardfrogs", "Frog Anti-cheese", "Frogs flee from bosses to prevent cheesing.", true),
-    BinaryConfig("toads", "Toads",
-        "Sickly Toads replace Frogs in the second Autumn and occasionally release Spore Clouds on death.", true),
     BinaryConfig("fiendforcedmetodothis", "Slurtle Tweaks",
         "Slurtles attack faster, have less health and drop Shellmets more often.", true),
     SkipSpace(),

@@ -126,7 +126,11 @@ env.AddComponentPostInit("combat", function(self)
 
     function self:GetAttacked(attacker, damage, weapon, stimuli, ...)
         local weapon_check = weapon ~= nil and weapon:IsValid() and weapon or nil
-
+		
+		if stimuli ~= nil and stimuli == "fire" and self.inst.components.health ~= nil and self.inst.components.health:GetFireDamageScale() ~= nil then
+			damage = damage * self.inst.components.health:GetFireDamageScale()
+		end
+		
         local damageredirecttarget = self.redirectdamagefn ~= nil and self.redirectdamagefn(self.inst, attacker, damage, weapon_check, stimuli) or nil
 
         local redirect_combat = damageredirecttarget ~= nil and damageredirecttarget.components.combat or nil

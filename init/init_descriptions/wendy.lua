@@ -31,14 +31,14 @@ ANNOUNCE.ANNOUNCE_DETACH_BUFF_FROZENFURY = "Feeling better now"
 
 -- CaliforniaKing
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_CALIFORNIAKING =
-    "I have a feeling I will regret that."
+"I have a feeling I will regret that."
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_CALIFORNIAKING = "That honestly wasn't that bad."
 DESCRIBE.CALIFORNIAKING = "What do I have left to lose?"
 -- CaliforniaKing
 
 ANNOUNCE.ANNOUNCE_RNEFOG = "Death peers at me from the darkness."
 DESCRIBE.UNCOMPROMISING_RAT =
-    "Wreched daemons wrought to topple the pillars of vanity."
+"Wreched daemons wrought to topple the pillars of vanity."
 DESCRIBE.UNCOMPROMISING_RATHERD = "But one mouth of a den of thieves."
 DESCRIBE.UNCOMPROMISING_RATBURROW = "But one mouth of a den of thieves."
 DESCRIBE.UNCOMPROMISING_WINKYBURROW = "It leads everywhere, and nowhere."
@@ -71,19 +71,19 @@ DESCRIBE.WIXIE = {
 
 DESCRIBE.RATPOISONBOTTLE = "There's a thought..."
 DESCRIBE.RATPOISON =
-    "Even if I were to partake, this world would drag me back..."
+"Even if I were to partake, this world would drag me back..."
 
 DESCRIBE.MONSTERSMALLMEAT = "A small, dark well of condensed agony..."
 DESCRIBE.COOKEDMONSTERSMALLMEAT =
-    "Small, filled with pain, and ready to be consumed by this world..."
+"Small, filled with pain, and ready to be consumed by this world..."
 DESCRIBE.MONSTERSMALLMEAT_DRIED =
-    "Some weight has lifted from it, but it will never truly escape its nature..."
+"Some weight has lifted from it, but it will never truly escape its nature..."
 
 DESCRIBE.UM_MONSTEREGG = "I sense evil within it."
 DESCRIBE.UM_MONSTEREGG_COOKED = "I have destroyed the evil."
 
 DESCRIBE.MUSHROOMSPROUT_OVERWORLD =
-    "A parasitic existence feeding upon the very earth."
+"A parasitic existence feeding upon the very earth."
 DESCRIBE.TOADLING = "They're very loyal to their kind..."
 
 DESCRIBE.GASMASK = "It filters air but not despair."
@@ -93,7 +93,7 @@ DESCRIBE.SPIDERQUEENCORPSE = "An inevitable end."
 ANNOUNCE.ANNOUNCE_SNEEZE = "Achoo! Achoo! Sniff."
 ANNOUNCE.ANNOUNCE_HAYFEVER = "Ugh. Even my sinuses are suffering."
 ANNOUNCE.ANNOUNCE_HAYFEVER_OFF =
-    "My sinuses are clear, but suffering continues."
+"My sinuses are clear, but suffering continues."
 ANNOUNCE.ANNOUNCE_FIREFALL = {
     "Those cries are familiar.", "I hope it will be a swift end.",
     "Some just want to watch the world burn."
@@ -115,7 +115,7 @@ DESCRIBE.SNOWGOGGLES = "Like tears, in the snow."
 DESCRIBE.SNOWMONG = "Just another cruel joke."
 DESCRIBE.SHOCKWORM = "A light in the darkness."
 DESCRIBE.ZASPBERRY =
-    "Perhaps it will bring some light to my life. Probably not."
+"Perhaps it will bring some light to my life. Probably not."
 DESCRIBE.ZASPBERRYPARFAIT = "Numbing."
 DESCRIBE.ICEBOOMERANG = "Ripped off the tail of a maggot."
 DESCRIBE.MINOTAUR_BOULDER = "Once again we have barely avoided death."
@@ -137,7 +137,7 @@ DESCRIBE.SHROOM_SKIN_FRAGMENT = "A handful of flesh, ripped from the bone."
 DESCRIBE.AIR_CONDITIONER = "The pleasant scent gives false hope."
 DESCRIBE.SPOREPACK = "It reeks, just like everything else."
 DESCRIBE.SALTPACK =
-    "It deals with menial chores. My other problems remain unsolved."
+"It deals with menial chores. My other problems remain unsolved."
 
 DESCRIBE.UM_SCORPION = "One sting and it could be over."
 DESCRIBE.SCORPIONCARAPACE = "Another piece of vile meat."
@@ -150,7 +150,7 @@ DESCRIBE.SWILSON = "An executioner steps out from the dark."
 DESCRIBE.VAMPIREBAT = "It has managed to scape death for longer than its peers."
 DESCRIBE.CRITTERLAB_REAL = DESCRIBE.CRITTERLAB
 DESCRIBE.CRITTERLAB_REAL_BROKEN =
-    "I could use some moon rocks to make some new friends."
+"I could use some moon rocks to make some new friends."
 DESCRIBE.WALRUS_CAMP_SUMMER = DESCRIBE.WALRUS_CAMP
 DESCRIBE.CHARLIEPHONOGRAPH_100 = DESCRIBE.MAXWELLPHONOGRAPH
 DESCRIBE.BUGZAPPER = "Another simple tool."
@@ -168,7 +168,7 @@ DESCRIBE.SHADOW_TELEPORTER = "You can't hold onto that thing forever."
 DESCRIBE.POLLENMITEDEN = "They're building their own doom."
 DESCRIBE.POLLENMITES = "Like life, they wear you down little by little."
 DESCRIBE.SHADOW_CROWN =
-    "Is this what youth feels like for older people? Energetic, yet fragile?"
+"Is this what youth feels like for older people? Energetic, yet fragile?"
 DESCRIBE.RNEGHOST = DESCRIBE.GHOST
 DESCRIBE.SUNGLASSES = "Wonderful, now the world is another shade darker."
 DESCRIBE.TRAPDOORGRASS = DESCRIBE.GRASS
@@ -195,6 +195,7 @@ DESCRIBE.WHISPERPOD_NORMAL_GROUND = {
 DESCRIBE.FRUITBAT = "What?!"
 DESCRIBE.PITCHERPLANT = "Out of reach..."
 DESCRIBE.APHID = "They plague the trees."
+DESCRIBE.NYMPH = "The plague is spreading."
 DESCRIBE.GIANT_TREE_INFESTED = "It battles against death."
 DESCRIBE.GIANT_BLUEBERRY = "Will it explode in my mouth?"
 DESCRIBE.STEAMEDHAMS = "Old family recipe."
@@ -238,7 +239,7 @@ DESCRIBE.ANTIHISTAMINE = "I suppose this would clear blocked sinuses."
 ANNOUNCE.CURSED_ITEM_EQUIP = "It burns at the touch."
 DESCRIBE.VETSITEM = "It believes my hands are pure, and untainted."
 DESCRIBE.SCREECHER_TRINKET = "The stench of death lingers here."
-ACTIONFAIL.GIVE = {NOTNIGHT = "It's waiting for nightfall."}
+ACTIONFAIL.GIVE = { NOTNIGHT = "It's waiting for nightfall." }
 
 DESCRIBE.MAGMAHOUND = "It rains hell upon the damned."
 DESCRIBE.LIGHTNINGHOUND = "Death from above!"
@@ -286,12 +287,12 @@ DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
 DESCRIBE.ANCIENT_AMULET_RED = "It will keep whatevers left of my soul together."
 DESCRIBE.UM_BEAR_TRAP = "The jaws of a beast wait to strike at every corner."
 DESCRIBE.UM_BEAR_TRAP_OLD =
-    "The jaws of a beast wait to strike at every corner."
+"The jaws of a beast wait to strike at every corner."
 DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH = "A cruel, inhumane tool."
 DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD = "A cruel, inhumane tool."
 DESCRIBE.CORNCAN = "It seems like it's corn."
 DESCRIBE.SKULLCHEST_CHILD =
-    "I'm able to reach another plane, but I still cannot reach Abigail..."
+"I'm able to reach another plane, but I still cannot reach Abigail..."
 
 DESCRIBE.SLOBBERLOBBER = "Nature is disgusting."
 DESCRIBE.GORE_HORN_HAT = "Nature's dagger."
@@ -305,7 +306,7 @@ DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM .. "\nI've ruined the magic."
 DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM .. "\nI've ruined the magic."
 DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM .. "\nI've ruined the magic."
 DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM ..
-                                       "\nI've ruined the magic."
+    "\nI've ruined the magic."
 
 DESCRIBE.RED_MUSHED_ROOM = "It's hopes and dreams have been crushed."
 DESCRIBE.GREEN_MUSHED_ROOM = "It's hopes and dreams have been crushed."
@@ -327,14 +328,14 @@ DESCRIBE.THEATERCORN = "I wish I could share it with Abigail."
 DESCRIBE.DEERCLOPS_BARRIER = "A few of these have cracks."
 
 DESCRIBE.MOONMAW_DRAGONFLY =
-    "I see myself in it.. The reflection, I can see my reflection."
+"I see myself in it.. The reflection, I can see my reflection."
 DESCRIBE.MOONMAW_LAVAE = "Daggers trained at my heart!"
 DESCRIBE.SNAPPERTURTLE = "I wish I could hide in a shell, sometimes."
 DESCRIBE.SNAPPERTURTLEBABY = "I could set you on your back and you'd die."
 DESCRIBE.SNAPPERTURTLENEST = "Oh, joy."
 DESCRIBE.GLASS_SCALES = "Scales of corruption."
 DESCRIBE.MOONGLASS_GEODE =
-    "What can corrupt a foul beast, can surely corrupt a human being?"
+"What can corrupt a foul beast, can surely corrupt a human being?"
 DESCRIBE.ARMOR_GLASSMAIL = "Everything around me dies."
 DESCRIBE.ARMOR_GLASSMAIL_SHARDS = "One mishap and I can lose a limb of my own."
 DESCRIBE.MOONMAW_GLASSSHARDS_RING = DESCRIBE.ARMOR_GLASSMAIL_SHARDS
@@ -352,7 +353,7 @@ DESCRIBE.FLORAL_BANDAGE = "Can heal a broken heart, but not a broken mind."
 DESCRIBE.DORMANT_RAIN_HORN = "I remember this."
 DESCRIBE.RAIN_HORN = "It makes the world around me reflect my perspective."
 DESCRIBE.DRIFTWOODFISHINGROD =
-    "The sea only made it better, it want's the fish gone."
+"The sea only made it better, it want's the fish gone."
 
 ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {
     LEVEL_1 = "If we don't care for our possessions, they will slip away."
@@ -367,7 +368,7 @@ ANNOUNCE.ANNOUNCE_RATSNIFFER_BURROWS = {
 DESCRIBE.PIED_RAT = "What a horrible sound."
 DESCRIBE.PIED_PIPER_FLUTE = "Filled with the spit of that beast."
 DESCRIBE.UNCOMPROMISING_PACKRAT =
-    "Your pack will not help you carry the burden of the world."
+"Your pack will not help you carry the burden of the world."
 
 ANNOUNCE.ANNOUNCE_PORTABLEBOAT_SINK = "This raft is about to leave me to drown."
 
@@ -377,7 +378,7 @@ ACTIONFAIL.CHARGE_FROM = {
 }
 ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED = "It could've electrocuted me."
 ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED =
-    "It could've electrocuted me. I wish it did."
+"It could've electrocuted me. I wish it did."
 
 ----UNDER THE WEATHER----
 
@@ -389,10 +390,10 @@ DESCRIBE.WINONA_BATTERY_LOW_ITEM = "I'm not interested in lifeless machines."
 DESCRIBE.WINONA_BATTERY_HIGH_ITEM = "I'm not interested in lifeless machines."
 DESCRIBE.POWERCELL = "It sustains the electronics."
 DESCRIBE.WINONA_UPGRADEKIT_ELECTRICAL =
-    "Perhaps this is the future of humanity?"
+"Perhaps this is the future of humanity?"
 DESCRIBE.MINERHAT_ELECTRICAL = "Light is light, who am I to complain?"
 DESCRIBE.OCEAN_SPEAKER =
-    "It's busted and hollow inside. Only playing dreary tunes."
+"It's busted and hollow inside. Only playing dreary tunes."
 -- DESCRIBE.UM_SIREN = "She manipulates her pawns through song. A very potentent ability..."
 
 -- DESCRIBE.OCUPUS_BEAK = ""
@@ -402,25 +403,26 @@ DESCRIBE.OCUPUS_TENTACLE_COOKED = "A delicately cooked tendril."
 
 DESCRIBE.ARMOR_REED_UM = DESCRIBE.ARMORGRASS
 DESCRIBE.ARMOR_SHARKSUIT_UM =
-    "There is always someone higher on the food chain."
+"There is always someone higher on the food chain."
 DESCRIBE.ROCKJAWLEATHER = "Even their skin bites back."
 
 DESCRIBE.EYEOFTERROR_MINI_ALLY = "And so, death brings forth new life."
 DESCRIBE.EYEOFTERROR_MINI_GROUNDED_ALLY = DESCRIBE.EYEOFTERROR_MINI_GROUNDED
 
 DESCRIBE.STUFFED_PEEPER_POPPERS =
-    "They peer into the everlasting darkness of my mouth."
+"They peer into the everlasting darkness of my mouth."
 DESCRIBE.UM_DEVILED_EGGS = "Sins of the father."
 DESCRIBE.LUSH_ENTRANCE = "I can only imagine what horrors lurk below."
 DESCRIBE.CRITTER_FIGGY = "Its hollow eyes stare right through me..."
 DESCRIBE.GIANT_TREE_BIRDNEST =
-    "They haven't even hatched, yet the world is cruel enough to throw them to the predators."
+"They haven't even hatched, yet the world is cruel enough to throw them to the predators."
 
 DESCRIBE.SLUDGE = "A vile concoction of the ocean."
 DESCRIBE.SLUDGE_OIL = "A drink of death."
 DESCRIBE.SLUDGE_SACK = "A soggy sack."
 DESCRIBE.CANNONBALL_SLUDGE_ITEM = "May those on the other end face a quick end."
-DESCRIBE.BOAT_BUMPER_SLUDGE = "It will only prolong the inevitable." -- listen if klei can be lazy with her quotes i can too
+DESCRIBE.BOAT_BUMPER_SLUDGE =
+"It will only prolong the inevitable."                               -- listen if klei can be lazy with her quotes i can too
 DESCRIBE.BOAT_BUMBER_SLUDGE_KIT = "It will only prolong the inevitable."
 DESCRIBE.BOATPATCH_SLUDGE = "Temporary protection from the cruelty of the sea."
 DESCRIBE.UM_COPPER_PIPE = "Hollow."
@@ -440,7 +442,7 @@ DESCRIBE.SUNKENCHEST_ROYAL_YELLOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
 DESCRIBE.SUNKENCHEST_ROYAL_RAINBOW = DESCRIBE.SUNKENCHEST_ROYAL_RANDOM
 DESCRIBE.STEERINGWHEEL_COPPER = "Now I can rotate this boat."
 DESCRIBE.STEERINGWHEEL_COPPER_ITEM =
-    "It can turn an entire boat, if only I had one."
+"It can turn an entire boat, if only I had one."
 DESCRIBE.BOAT_BUMPER_COPPER = "This will last longer, but not forever."
 DESCRIBE.BOAT_BUMPER_COPPER_KIT = "This will last longer, but not forever."
 DESCRIBE.UM_DREAMCATCHER = "Oh, to catch a dream."
@@ -451,7 +453,7 @@ DESCRIBE.SLUDGESTACK = "Tears rising from below the salty depths."
 DESCRIBE.SPECTER_SHIPWRECK = "Left to rot in the ocean."
 
 DESCRIBE.UNCOMPROMISING_HARPOON =
-    "Stabbing things from a distance has never been easier."
+"Stabbing things from a distance has never been easier."
 DESCRIBE.UNCOMPROMISING_HARPOON_HEAVY = "It's not as heavy as it looks."
 DESCRIBE.UNCOMPROMISING_HARPOONREEL = "It's the reel deal."
 DESCRIBE.UM_MAGNERANG = "I'm not good at keeping things close."
@@ -467,7 +469,7 @@ DESCRIBE.PORTABLEBOAT_ITEM = "It won't be joining us in the murky depths."
 DESCRIBE.MASTUPGRADE_WINDTURBINE_ITEM = "An endless cycle."
 
 DESCRIBE.UM_ORNAMENT_OPOSSUM =
-    "Is it truly dead, or merely playing? What do you think, Abigail?"
+"Is it truly dead, or merely playing? What do you think, Abigail?"
 DESCRIBE.UM_ORNAMENT_RAT = "Rats have short lifespans."
 
 DESCRIBE.TRINKET_WATHOM1 = "Broken and worthless. Like... Nevermind."
@@ -517,4 +519,18 @@ DESCRIBE.SMALLFISHMEAT_DRIED = "You can hardly tell it was once a fish."
 DESCRIBE.WIXIEGUN = "Cold steel."
 
 DESCRIBE.MARA_BOSS1 = "Finally."
-DESCRIBE.UM_SACRED_CHEST = DESCRIBE.SACRED_CHEST
+ANNOUNCE.GAS_DAMAGE = "Cough. I'm done for!"
+
+-- Pyre Nettle stuff
+DESCRIBE.UM_PYRE_NETTLES = "The toxins aren't so bad, once you get used to them."
+DESCRIBE.UM_SMOLDER_SPORE = "Just a little closer..."
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_EATEN = "Let's just get this over with."
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP = "Maybe if I'd paid attention, it wouldn't have ended this way..."
+DESCRIBE.UM_ARMOR_PYRE_NETTLES = "A reminder of the constant pain that is life."
+DESCRIBE.UM_BLOWDART_PYRE = "Death delivered from afar."
+
+-- Under the Weather Part 1
+DESCRIBE.ALPHA_LIGHTNINGGOAT = "Protector your own, lest you lose them..."
+DESCRIBE.UM_TORNADO = "There's no place like home..."
+DESCRIBE.UM_WATERFALL = "Wash our tears away."
+ANNOUNCE.ANNOUNCE_UM_NO_TORNADO = "No tornadoes to cause us misery."

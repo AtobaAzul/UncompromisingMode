@@ -1,5 +1,7 @@
 -- TODO: Damage and uses tuning
-local assets = {Asset("ANIM", "anim/staffs.zip"), Asset("ANIM", "anim/swap_staffs.zip"), Asset("ANIM", "anim/lavaarena_hit_sparks_fx.zip"), Asset("ANIM", "anim/crab_king_shine.zip"), Asset("ANIM", "anim/explode.zip")}
+local assets = { Asset("ANIM", "anim/staffs.zip"), Asset("ANIM", "anim/swap_staffs.zip"),
+    Asset("ANIM", "anim/lavaarena_hit_sparks_fx.zip"), Asset("ANIM", "anim/crab_king_shine.zip"),
+    Asset("ANIM", "anim/explode.zip") }
 local function OnAttack(inst, attacker, target, skipsanity)
     if not target:IsValid() then
         -- target killed or removed in combat damage phase
@@ -42,7 +44,7 @@ local function OnAttack(inst, attacker, target, skipsanity)
 end
 
 local function OnEquip(inst, owner)
-    owner.AnimState:OverrideSymbol("swap_object", "swap_staffs", "swap_yellowstaff")
+    owner.AnimState:OverrideSymbol("swap_object", "swap_staff_starfall", "staff_starfall")
     owner.AnimState:Show("ARM_carry")
     owner.AnimState:Hide("ARM_normal")
 end
@@ -62,16 +64,18 @@ local function fn()
 
     MakeInventoryPhysics(inst)
 
-    inst.AnimState:SetBank("hits_sparks")
-    inst.AnimState:SetBuild("lavaarena_hit_sparks_fx")
-    inst.AnimState:PlayAnimation("hit_3")
-    inst.AnimState:SetBloomEffectHandle("shaders/anim.ksh")
-    inst.AnimState:SetOrientation(ANIM_ORIENTATION.OnGround)
-    inst.AnimState:SetFinalOffset(1)
+    inst.AnimState:SetBank("staff_starfall")
+    inst.AnimState:SetBuild("staff_starfall")
+    inst.AnimState:PlayAnimation("idle")
 
-    local floater_swap_data = {sym_build = "swap_staffs", sym_name = "swap_yellowstaff", bank = "staffs", anim = "yellowstaff"}
+    local floater_swap_data = {
+        sym_build = "staff_starfall",
+        sym_name = "staff_starfall",
+        bank = "staff_starfall",
+        anim = "idle"
+    }
 
-    MakeInventoryFloatable(inst, "med", 0.1, {0.9, 0.4, 0.9}, true, -13, floater_swap_data)
+    MakeInventoryFloatable(inst, "med", 0.1, { 0.9, 0.4, 0.9 }, true, -13, floater_swap_data)
 
     inst.entity:SetPristine()
 
@@ -89,7 +93,7 @@ local function fn()
     inst.components.weapon:SetRange(8, 10)
     inst.components.weapon:SetOnAttack(OnAttack)
     -- inst.components.weapon:SetProjectile("staff_starfall_projectile")
-    inst.components.floater:SetScale({0.8, 0.4, 0.8})
+    inst.components.floater:SetScale({ 0.8, 0.4, 0.8 })
 
     MakeHauntableLaunch(inst)
 
@@ -104,8 +108,8 @@ local function fn()
     inst.components.equippable:SetOnUnequip(OnUnequip)
 
     inst:AddComponent("finiteuses")
-    inst.components.finiteuses:SetMaxUses(300)
-    inst.components.finiteuses:SetUses(300)
+    inst.components.finiteuses:SetMaxUses(250)
+    inst.components.finiteuses:SetUses(250)
     inst.components.finiteuses:SetOnFinished(inst.Remove)
 
     return inst
@@ -113,11 +117,11 @@ end
 
 local function OnCollide(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
-    local targets = TheSim:FindEntities(x, y, z, 4, {"_combat"}, {"dead", "INLIMBO", "companion", "abigail", "player", "playerghost"})
+    local targets = TheSim:FindEntities(x, y, z, 4, { "_combat" },
+        { "dead", "INLIMBO", "companion", "abigail", "player", "playerghost" })
 
     for k, target in ipairs(targets) do
         if target:HasTag("shadowcreature") or target.sg == nil or target.wixieammo_hitstuncd == nil and not (target.sg:HasStateTag("busy") or target.sg:HasStateTag("caninterrupt")) or target.sg:HasStateTag("frozen") then
-
             target.wixieammo_hitstuncd = target:DoTaskInTime(8, function()
                 if target.wixieammo_hitstuncd ~= nil then
                     target.wixieammo_hitstuncd:Cancel()
@@ -167,8 +171,6 @@ local function OnCollide(inst)
 
         local fx2 = SpawnPrefab("crab_king_bubble" .. math.random(3))
         fx2.Transform:SetPosition(x, y, z)
-        local fx3 = SpawnPrefab("slow_steam_fx"..math.random(5))
-        fx3.Transform:SetPosition(x, y, z)
     end
 
     inst:Remove()
@@ -233,7 +235,7 @@ local function fn_proj()
     inst.Physics:ClearCollisionMask()
     inst.Physics:CollidesWith(COLLISION.GROUND)
     inst.Physics:SetSphere(2)
-    inst.Physics:SetMotorVel(math.random(-50, 50) / 10, -50, math.random(-50, 50) / 10)
+    inst.Physics:SetMotorVel(math.random(-50, 50) / 10, math.random(-100, -50), math.random(-50, 50) / 10)
 
     local dt = 1 / 20
     inst.i = .1
@@ -381,7 +383,6 @@ local function Scorch_OnFadeDirty(inst)
         inst.AnimState:OverrideMultColour(1, 1, 1, 1)
         inst.AnimState:SetHighlightColour(k, k, 0, 0)
         inst.AnimState:SetLightOverride(k)
-
     elseif inst._fade:value() >= SCORCH_FADE_FRAMES then
         inst.AnimState:OverrideMultColour(1, 1, 1, 1)
         inst.AnimState:SetHighlightColour()
@@ -442,4 +443,6 @@ local function fn_fx3()
     return inst
 end
 
-return Prefab("staff_starfall", fn, assets), Prefab("staff_starfall_projectile", fn_proj), Prefab("staff_starfall_explode", fn_fx1), Prefab("staff_starfall_trail", fn_fx2), Prefab("staff_starfall_scorch", fn_fx3)
+return Prefab("staff_starfall", fn, assets), Prefab("staff_starfall_projectile", fn_proj),
+    Prefab("staff_starfall_explode", fn_fx1), Prefab("staff_starfall_trail", fn_fx2),
+    Prefab("staff_starfall_scorch", fn_fx3)

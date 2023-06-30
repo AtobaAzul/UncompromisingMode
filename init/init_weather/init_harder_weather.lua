@@ -6,7 +6,7 @@
 local function DoSewing(self, target, doer)
     if self ~= nil and self.inst ~= nil then
         local _OldDoSewing = self.DoSewing
-        
+
         self.DoSewing = function(self, target, doer)
             if target ~= nil and not target:HasTag("heatrock") then --<< Check for thermal
                 _OldDoSewing(self, target, doer)
@@ -63,6 +63,12 @@ env.AddPrefabPostInit("cave", function(inst)
 	inst:AddComponent("randomnighteventscaves")
 	inst:AddComponent("ratacombs_junk_manager")
 
+	inst:AddComponent("um_stormspawner")
+	
+	if TUNING.DSTU.PYRENETTLES then
+		inst:AddComponent("um_pyre_nettles_summer_spawner")
+	end
+
 	inst:DoTaskInTime(0, function(inst)
 		if TestForIA() then
 			inst:RemoveComponent("cavedeerclopsspawner")
@@ -85,7 +91,10 @@ env.AddPrefabPostInit("forest", function(inst)
 	inst:AddComponent("pollenmitedenspawner")
 	inst:AddComponent("randomnightevents")
 	inst:AddComponent("um_areahandler")
-
+	--inst:AddComponent("horriblenightmanager")
+	--inst:AddComponent("um_oceantilelogger")
+	--inst:AddComponent("um_ocupusappearinator")
+	inst:AddComponent("um_pestilencecontroller")
 	if TUNING.DSTU.SPAWNMOTHERGOOSE then
 		inst:AddComponent("gmoosespawner")
 	end
@@ -101,12 +110,18 @@ env.AddPrefabPostInit("forest", function(inst)
 	--inst:DoTaskInTime(TUNING.TOTAL_DAY_TIME/2, GenerateInactiveBiomes)
 
 	if TUNING.DSTU.SNOWSTORMS then
-		inst:AddComponent("snowstorminitiator")
+		--inst:AddComponent("snowstorminitiator")
+		inst:AddComponent("um_snow_stormspawner")
 	end
 
+	if TUNING.DSTU.HEATWAVES then
+		inst:AddComponent("um_heatwaves")
+	end
+	if TUNING.DSTU.STORMS then
+		inst:AddComponent("um_stormspawner")
+	end
 	inst:DoTaskInTime(0, function(inst)
 		if TestForIA() then --remove components if the world is IA island/volcano, instead of checking for the mod or delaying adding components.
-			print("IA CHECK PASSED, REMOVING UM WORLD COMPONENTS.")
 			inst:RemoveComponent("uncompromising_deerclopsspawner")
 			inst:RemoveComponent("toadrain")
 			--inst:RemoveComponent("hayfever_tracker")
@@ -116,7 +131,8 @@ env.AddPrefabPostInit("forest", function(inst)
 			inst:RemoveComponent("um_areahandler")
 			inst:RemoveComponent("gmoosespawner")
 			inst:RemoveComponent("mock_dragonflyspawner")
-			inst:RemoveComponent("snowstorminitiator")
+			inst:RemoveComponent("um_snow_stormspawner")
+			inst:RemoveComponent("um_stormspawner")
 		end
 	end)
 end)

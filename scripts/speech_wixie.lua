@@ -4671,7 +4671,6 @@ return{
         PIRATE_STASH = "I knew there was treasure!",
         STASH_MAP = "Take me to the goods!",
 
-
         BANANAJUICE = "My dad always got this at the malt shop... I prefer chocolate.",
 
         FENCE_ROTATOR = "Duel to the death!",
@@ -4715,6 +4714,7 @@ return{
             BURNT = "That's what happens when you look at me funny!",
         },
 		
+		-- Waxwell
 		MAGICIAN_CHEST = "What's behind the curtain? A better act, hopefully!",
 		TOPHAT_MAGICIAN = "Neat trick, how about I you stuff you inside as an encore?",
 
@@ -4779,6 +4779,34 @@ return{
 		SHOVEL_LUNARPLANT = "Your power over dirt is mine to command!",
 
         PUNCHINGBAG = "I love a target that can't fight back!",
+
+        -- Rifts 2
+        SHADOWRIFT_PORTAL = "It's a whole lotta darkness down there.",
+
+		SHADOW_FORGE = "Hands up or I'll shoot!",
+		SHADOW_FORGE_KIT = "This is the beggining of a dark future!",
+
+        FUSED_SHADELING = "Ooh, can I keep it?",
+        FUSED_SHADELING_BOMB = "Get away from me you creep!",
+
+		VOIDCLOTH = "Tattered tatters.",
+		VOIDCLOTHHAT = "Seems dark and stuffy in there.",
+		ARMOR_VOIDCLOTH = "The chains rattle around all creepy like!",
+
+        VOIDCLOTH_UMBRELLA = "Might be good for some kind of rain-o-phobe.",
+        VOIDCLOTH_SCYTHE = "I don't like it when my tools try to talk to me.",
+
+		SHADOWTHRALL_HANDS = "Ha-ha! You're a better circus act than that strongman!",
+		SHADOWTHRALL_HORNS = "Get that maw away from me!",
+		SHADOWTHRALL_WINGS = "Come down where I can punch you!",
+
+        CHARLIE_NPC = "Hey you old bag! I've got some questions for you!",
+        CHARLIE_HAND = "Quit looking for hand-outs, handy!",
+
+        NITRE_FORMATION = "Paydirt! We're lighting fireworks tonight!",
+        DREADSTONE_STACK = "A whole lotta rock.",
+        
+        SCRAPBOOK_PAGE = "Another page in my book of victories!",
     },
 
     DESCRIBE_GENERIC = "That sure is... something!",

@@ -4,9 +4,10 @@ GLOBAL.setfenv(1, GLOBAL)
 env.AddComponentPostInit("burnable", function(self)
 	local _OldExtendBurning = self.ExtendBurning
 	local _OldStartWildfire = self.StartWildfire
-	
+
 	local function DoneBurning(inst, self)
-		local isplant = inst:HasTag("plant") and not (inst.components.diseaseable ~= nil and inst.components.diseaseable:IsDiseased())
+		local isplant = inst:HasTag("plant") and
+			not (inst.components.diseaseable ~= nil and inst.components.diseaseable:IsDiseased())
 		local pos = isplant and inst:GetPosition() or nil
 
 		inst:PushEvent("onburnt")
@@ -27,7 +28,7 @@ env.AddComponentPostInit("burnable", function(self)
 			TheWorld:PushEvent("plantkilled", { pos = pos })
 		end
 	end
-	
+
 	function self:ExtendBurning()
 		if TheWorld.state.season == "winter" then
 			if self.task ~= nil then
@@ -38,12 +39,11 @@ env.AddComponentPostInit("burnable", function(self)
 			return _OldExtendBurning(self)
 		end
 	end
+
 	function self:StartWildfire()
-	local x,y,z = self.inst.Transform:GetWorldPosition()
-		if #TheSim:FindEntities(x,y,z,12,{"canopy"}) > 0 then
-		
-		else
-		return _OldStartWildfire(self)
+		local x, y, z = self.inst.Transform:GetWorldPosition()
+		if #TheSim:FindEntities(x, y, z, 12, { "canopy" }) <= 0 or TheWorld:HasTag("heatwavestart") then
+			return _OldStartWildfire(self)
 		end
 	end
 end)

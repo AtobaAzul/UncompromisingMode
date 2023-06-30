@@ -606,7 +606,7 @@ CommonStates.AddCombatStates(states,
 				inst.components.timer:StartTimer("DisarmCooldown", 10)
 			end
 			
-			if inst.components.health:GetPercent() <= 0.33 and not inst.components.timer:TimerExists("TornadoAttack") then
+			if inst.components.health:GetPercent() <= 0.66 and not inst.components.timer:TimerExists("TornadoAttack") then
 				inst.components.timer:StartTimer("TornadoAttack", 20)
 			end
 			

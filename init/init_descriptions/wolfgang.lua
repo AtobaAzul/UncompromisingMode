@@ -39,11 +39,11 @@ ANNOUNCE.ANNOUNCE_RNEFOG = "S-STOP STARING AT WOLFGANG!!"
 DESCRIBE.UNCOMPROMISING_RAT = "Is greedy little hair puff!"
 DESCRIBE.UNCOMPROMISING_RATHERD = "Beady eye hole make Wolfgang uncomfortable."
 DESCRIBE.UNCOMPROMISING_RATBURROW =
-    "Beady eye hole make Wolfgang uncomfortable."
+"Beady eye hole make Wolfgang uncomfortable."
 DESCRIBE.UNCOMPROMISING_WINKYBURROW =
-    "Wolfgang is not sure if he can trust this rat..."
+"Wolfgang is not sure if he can trust this rat..."
 DESCRIBE.UNCOMPROMISING_WINKYHOMEBURROW =
-    "Very, smelly rat hole. But there are goodies inside?"
+"Very, smelly rat hole. But there are goodies inside?"
 
 DESCRIBE.WINKY = {
     GENERIC = "Ah! %s is bigger and scarier!",
@@ -75,7 +75,7 @@ DESCRIBE.RATPOISON = "Wolfgang not have to catch rat if rat dead! Hah hah!"
 
 DESCRIBE.MONSTERSMALLMEAT = "Look bad. Smell bad. Is bad?"
 DESCRIBE.COOKEDMONSTERSMALLMEAT =
-    "Still look not good. Wolfgang go find better meat?"
+"Still look not good. Wolfgang go find better meat?"
 DESCRIBE.MONSTERSMALLMEAT_DRIED = "Small bad meat is rock now."
 
 DESCRIBE.UM_MONSTEREGG = "Scary egg."
@@ -96,13 +96,13 @@ ANNOUNCE.ANNOUNCE_FIREFALL = {
 }
 ANNOUNCE.ANNOUNCE_ROOTING = "Too tough, Wolfgang cannot break!"
 ANNOUNCE.ANNOUNCE_SNOWSTORM = "Wolfgang fight wind, and storm too!"
-ANNOUNCE.SHADOWTALKER = {"I AM WEAK.", "I AM AFRAID.", "NOT STRONG ENOUGH."}
+ANNOUNCE.SHADOWTALKER = { "I AM WEAK.", "I AM AFRAID.", "NOT STRONG ENOUGH." }
 ANNOUNCE.ANNOUNCE_OVER_EAT = {
     STUFFED = "Wolfgang full, ready to fight!",
     OVERSTUFFED = "Too much food bad for workout."
 }
 DESCRIBE.UM_SAND =
-    "When Wolfgang holds it it slips through his large, strong hands."
+"When Wolfgang holds it it slips through his large, strong hands."
 DESCRIBE.UM_SANDHILL = "Tiny, crushable hill."
 DESCRIBE.SNOWPILE = "Cold is no good for the muscles!."
 DESCRIBE.SNOWGOGGLES = "Is... little tight... for head."
@@ -188,6 +188,7 @@ DESCRIBE.WHISPERPOD_NORMAL_GROUND = {
 DESCRIBE.FRUITBAT = "Flying fruity!"
 DESCRIBE.PITCHERPLANT = "If not skip leg day, Wolfgang could reach!"
 DESCRIBE.APHID = "Is tiny bug!"
+DESCRIBE.NYMPH = "Where is flying tiny bug going?"
 DESCRIBE.GIANT_TREE_INFESTED = "Tree is sick!"
 DESCRIBE.GIANT_BLUEBERRY = "Mighty berry, for mighty Wolfgang!"
 DESCRIBE.STEAMEDHAMS = "Is mouthwatering hamburgers."
@@ -195,9 +196,9 @@ DESCRIBE.BLUEBERRYPANCAKES = "Mighty pancakes!"
 DESCRIBE.SIMPSALAD = "Puny salad!"
 DESCRIBE.BEEFALOWINGS = "Is tasty AND big!"
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_KNOCKBACKIMMUNE =
-    "Wolfgang is too mighty for push!"
+"Wolfgang is too mighty for push!"
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_KNOCKBACKIMMUNE =
-    "Mighty Wolfgang will not be moved!"
+"Mighty Wolfgang will not be moved!"
 DESCRIBE.WIDOWSHEAD = "Bug smooch will help see."
 DESCRIBE.HOODED_MUSHTREE_TALL = DESCRIBE.MUSHTREE_TALL
 DESCRIBE.HOODED_MUSHTREE_MEDIUM = DESCRIBE.MUSHTREE_MEDIUM
@@ -221,7 +222,7 @@ DESCRIBE.BERNIE_INACTIVE = {
     ASHLEY = "Is so cuddly!"
 }
 
-DESCRIBE.BERNIE_ACTIVE = {GENERIC = "Is so brave!", ASHLEY = "Is so brave!"}
+DESCRIBE.BERNIE_ACTIVE = { GENERIC = "Is so brave!", ASHLEY = "Is so brave!" }
 DESCRIBE.BERNIE_BIG = {
     GENERIC = "Oh no! Wolfgang has shrunken!",
     ASHLEY = "Oh no! Wolfgang has shrunken!"
@@ -230,7 +231,7 @@ DESCRIBE.ANTIHISTAMINE = "Good for sneeze time."
 ANNOUNCE.CURSED_ITEM_EQUIP = "The harder Wolfgang squeeze, the more it hurts!"
 DESCRIBE.VETSITEM = "What you say? Need more curses?"
 DESCRIBE.SCREECHER_TRINKET = "Ah! Looks scary!"
-ACTIONFAIL.GIVE = {NOTNIGHT = "Needs big moon?"}
+ACTIONFAIL.GIVE = { NOTNIGHT = "Needs big moon?" }
 
 DESCRIBE.MAGMAHOUND = "Arf, arf!"
 DESCRIBE.LIGHTNINGHOUND = "Yip yip!"
@@ -276,13 +277,13 @@ DESCRIBE.BLOWGUNAMMO_SLEEP = DESCRIBE.BLOWDART_SLEEP
 DESCRIBE.BLOWGUNAMMO_ELECTRIC = DESCRIBE.BLOWDART_YELLOW
 
 DESCRIBE.ANCIENT_AMULET_RED =
-    "Wolfgang without soul is Wolfgang without strength."
+"Wolfgang without soul is Wolfgang without strength."
 DESCRIBE.UM_BEAR_TRAP = "Wolfgang too smart to step on trap!"
 DESCRIBE.UM_BEAR_TRAP_OLD = "Wolfgang too smart to step on trap!"
 DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_TOOTH =
-    "Large metal teeth, with very strong grip."
+"Large metal teeth, with very strong grip."
 DESCRIBE.UM_BEAR_TRAP_EQUIPPABLE_GOLD =
-    "Large metal teeth, with very strong grip."
+"Large metal teeth, with very strong grip."
 DESCRIBE.CORNCAN = "Corn is trapped inside. Will save with bare hands!"
 DESCRIBE.SKULLCHEST_CHILD = "Wolfgang don't like chest that look like skull."
 
@@ -292,19 +293,19 @@ DESCRIBE.BEARGERCLAW = "Now Wolfgang like mighty bear!"
 DESCRIBE.FEATHER_FROCK = "Weigh nothing at all."
 
 DESCRIBE.REDGEM_CRACKED = DESCRIBE.REDGEM ..
-                              "\nWolfgang push too hard, gem broke."
+    "\nWolfgang push too hard, gem broke."
 DESCRIBE.BLUEGEM_CRACKED = DESCRIBE.BLUEGEM ..
-                               "\nWolfgang push too hard, gem broke."
+    "\nWolfgang push too hard, gem broke."
 DESCRIBE.ORANGEGEM_CRACKED = DESCRIBE.ORANGEGEM ..
-                                 "\nWolfgang push too hard, gem broke."
+    "\nWolfgang push too hard, gem broke."
 DESCRIBE.GREENGEM_CRACKED = DESCRIBE.GREENGEM ..
-                                "\nWolfgang push too hard, gem broke."
+    "\nWolfgang push too hard, gem broke."
 DESCRIBE.YELLOWGEM_CRACKED = DESCRIBE.YELLOWGEM ..
-                                 "\nWolfgang push too hard, gem broke."
+    "\nWolfgang push too hard, gem broke."
 DESCRIBE.PURPLEGEM_CRACKED = DESCRIBE.PURPLEGEM ..
-                                 "\nWolfgang push too hard, gem broke."
+    "\nWolfgang push too hard, gem broke."
 DESCRIBE.OPALPRECIOUSGEM_CRACKED = DESCRIBE.OPALPRECIOUSGEM ..
-                                       "\nWolfgang push too hard, gem broke."
+    "\nWolfgang push too hard, gem broke."
 
 DESCRIBE.RED_MUSHED_ROOM = "Mushroom was no challenge."
 DESCRIBE.GREEN_MUSHED_ROOM = "Mushroom was no challenge."
@@ -344,17 +345,17 @@ DESCRIBE.MUTATOR_TRAPDOOR = DESCRIBE.MUTATOR_WARRIOR
 DESCRIBE.WOODPECKER = "Bird has nice hair."
 DESCRIBE.SNOTROAST = "So many boogers! Ha ha ha!"
 ANNOUNCE.ANNOUNCE_ATTACH_BUFF_LARGEHUNGERSLOW =
-    "Now boogers in Wolfgang! Oh ho ho!"
+"Now boogers in Wolfgang! Oh ho ho!"
 ANNOUNCE.ANNOUNCE_DETACH_BUFF_LARGEHUNGERSLOW = ""
 DESCRIBE.BOOK_RAIN_UM =
-    "Doesn't Wolfgang have better things to do that read book about rain?"
+"Doesn't Wolfgang have better things to do that read book about rain?"
 DESCRIBE.FLORAL_BANDAGE = "Very good for boo boos."
 DESCRIBE.DORMANT_RAIN_HORN = "Is nice shell."
 DESCRIBE.RAIN_HORN = "Blow shell and make water fall from sky!"
 DESCRIBE.DRIFTWOODFISHINGROD =
-    "Is still for little pond place, just look different now."
+"Is still for little pond place, just look different now."
 
-ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = {LEVEL_1 = "Ground is full of things!"}
+ANNOUNCE.ANNOUNCE_RATSNIFFER_ITEMS = { LEVEL_1 = "Ground is full of things!" }
 ANNOUNCE.ANNOUNCE_RATSNIFFER_FOOD = {
     LEVEL_1 = "Food must be put away, don't want to see rats!"
 }
@@ -373,7 +374,7 @@ ACTIONFAIL.CHARGE_FROM = {
     CHARGE_FULL = "It is not working, because it is good already."
 }
 ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_INSULATED =
-    "Did not shock Wolfgang this time. Very good."
+"Did not shock Wolfgang this time. Very good."
 ANNOUNCE.ANNOUNCE_CHARGE_SUCCESS_ELECTROCUTED = "Ow! Thingabob zapped fingers!"
 
 ----UNDER THE WEATHER----
@@ -403,7 +404,7 @@ DESCRIBE.EYEOFTERROR_MINI_ALLY = "Will watch after scary little eye friends!"
 DESCRIBE.EYEOFTERROR_MINI_GROUNDED_ALLY = DESCRIBE.EYEOFTERROR_MINI_GROUNDED
 
 DESCRIBE.STUFFED_PEEPER_POPPERS =
-    "Ha! Small eyeball think it can scare Wolfgang still!"
+"Ha! Small eyeball think it can scare Wolfgang still!"
 DESCRIBE.UM_DEVILED_EGGS = "Hairy and evil."
 DESCRIBE.LUSH_ENTRANCE = "Is scary hole!"
 DESCRIBE.CRITTER_FIGGY = "Is Figgy! Mightiest bug!"
@@ -508,4 +509,18 @@ DESCRIBE.SMALLFISHMEAT_DRIED = "Look like leather, taste like fish."
 DESCRIBE.WIXIEGUN = "Wolfgang not like this..."
 
 DESCRIBE.MARA_BOSS1 = "No no no NO NO!!"
-DESCRIBE.UM_SACRED_CHEST = DESCRIBE.SACRED_CHEST
+ANNOUNCE.GAS_DAMAGE = "Hack! Cough! Ack!"
+
+-- Pyre Nettle stuff
+DESCRIBE.UM_PYRE_NETTLES = "Scary child say they make nice pillow!"
+DESCRIBE.UM_SMOLDER_SPORE = "Look shakey. Maybe should be careful..."
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_EATEN = "Mouth not feeling mighty!!"
+ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP = "Pockets not feeling mighty!!"
+DESCRIBE.UM_ARMOR_PYRE_NETTLES = "Poke sometimes, but keep badies away."
+DESCRIBE.UM_BLOWDART_PYRE = "Not like. Give flashbacks of fire girl."
+
+-- Under the Weather Part 1
+DESCRIBE.ALPHA_LIGHTNINGGOAT = "Come! Wolfgang flip you!"
+DESCRIBE.UM_TORNADO = "Wolfgang would punch wind away! If Wolfgang wasn't scared..."
+DESCRIBE.UM_WATERFALL = "Wolfgang prefer bathes over showers."
+ANNOUNCE.ANNOUNCE_UM_NO_TORNADO = "No scary tornadoes."
