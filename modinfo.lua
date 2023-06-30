@@ -6,7 +6,7 @@ if not folder_name:find("workshop-") then
 end
 
 description = [[
-󰀔 [ Version 1.0.0.0: "Under the Weather Pt.1" ]
+󰀔 [ Version 1.0.0.1: "Under the Weather Pt.1" ]
 
 Uncompromising Mode increases the risk and reward for those who have mastered Don't Starve Together.
 
@@ -20,7 +20,7 @@ Latest update features:
 
 author = "󰀈 The Uncomp Dev Team 󰀈"
 
-version = "Under the Weather Pt.1 v1.0.0.0"
+version = "Under the Weather Pt.1 v1.0.0.1"
 -- VERSION SCHEME
 -- first num is major release (e.g. "Under the weather", so, 2, UTW2 will be 3, and so on.) DO NOT BRING THIS NUMBER *DOWN* AGAIN PLEASE
 -- second is new content (something like a new large addition)
@@ -403,7 +403,7 @@ configuration_options = {
     BinaryConfig("hotcaves", "Hotter Caves", "During Summer, caves are just hot enough to overheat you without any gear.",
         true),
     BinaryConfig("heatwaves", "Heat Waves",
-        "Heat waves at as a summer counterpart to snowstorms.\nWhile they don't do much on their own, aside from the temperature increase, they interact with Smog and Pyre Nettles.",
+        "Heat waves act as a summer counterpart to snowstorms.\nWhile they don't do much on their own, aside from the temperature increase, they interact with Smog and Pyre Nettles.",
         true),
     BinaryConfig("pyrenettles", "Pyre Nettles", "Pyre Nettles are a new invasive plant that grows with heat.", true),
     BinaryConfig("smog", "Smog",
