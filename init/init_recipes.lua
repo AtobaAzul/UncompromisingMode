@@ -129,12 +129,6 @@ AllRecipes["walterhat"].ingredients = {
     Ingredient("pinecone", 1)
 }
 
-AllRecipes["bookstation"].ingredients = {
-    Ingredient("boards", 4),
-    Ingredient("papyrus", 4),
-    Ingredient("featherpencil", 1)
-}
-
 if GetModConfigData("book_recipes") then
     -- AllRecipes["book_rain"].ingredients = {
     -- Ingredient("papyrus", 2),
@@ -153,10 +147,10 @@ if GetModConfigData("book_recipes") then
     }
     -- AllRecipes["book_light_upgraded"].level = TechTree.Create(TECH.LOST)
     AllRecipes["bookstation"].ingredients = {
-        Ingredient("livinglog", 4),
-        Ingredient("papyrus", 4),
-        Ingredient("featherpencil", 1)
-    }
+		Ingredient("boards", 4),
+		Ingredient("papyrus", 4),
+		Ingredient("featherpencil", 1)
+	}
     AllRecipes["book_moon"].ingredients = {
         Ingredient("papyrus", 2),
         Ingredient("moonrocknugget", 2),
