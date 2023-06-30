@@ -129,6 +129,12 @@ AllRecipes["walterhat"].ingredients = {
     Ingredient("pinecone", 1)
 }
 
+AllRecipes["bookstation"].ingredients = {
+    Ingredient("boards", 4),
+    Ingredient("papyrus", 4),
+    Ingredient("featherpencil", 1)
+}
+
 if GetModConfigData("book_recipes") then
     -- AllRecipes["book_rain"].ingredients = {
     -- Ingredient("papyrus", 2),
@@ -136,7 +142,6 @@ if GetModConfigData("book_recipes") then
     -- Ingredient("waterballoon", 4)
     -- }
     -- AllRecipes["book_rain"].level = TechTree.Create(TECH.MAGIC_THREE)
-
     AllRecipes["book_fish"].ingredients = {
         Ingredient("papyrus", 2),
         Ingredient("oceanfishingbobber_oval", 2)
