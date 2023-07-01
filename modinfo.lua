@@ -378,13 +378,10 @@ configuration_options = {
         "Simplifies some of tornadoes' interactions with the world to help with performance for lower-end systems.",
         options = {
             { description = "Disabled",        data = "off",     hover = "Tornado does everything." },
-            { description = "Reduced Effects", data = "reduced",
-                                                                     hover =
-                "Simplified interactions, doesn't work off-screen." },
+            { description = "Reduced Effects", data = "reduced", hover = "Simplified interactions, doesn't work off-screen." },
             { description = "Minimal Effects", data = "minimal", hover = "Removes all direct non-player interactions." },
-            default = "off"
         },
-
+        default = "off"
     },
     SkipSpace(),
 
