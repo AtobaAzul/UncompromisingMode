@@ -63,7 +63,7 @@ local function PlantSelf(inst)
 	if not inst:HasTag("BUSYSMOLDERSPORE")
 		and blockers == nil
 		and nettlescrowding == nil
-		and #findnettles < 32
+		and #findnettles < 16
 	then
 		inst:AddTag("BUSYSMOLDERSPORE")
 

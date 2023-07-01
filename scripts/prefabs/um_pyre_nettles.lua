@@ -3,7 +3,6 @@
 -- I hope there's some useful stuff!
 -- Mara :D
 
-
 local prefabs = {
 	"firenettles",
 	"um_smolder_spore",
@@ -11,10 +10,8 @@ local prefabs = {
 	"character_fire"
 }
 
-
 local plant_maxhealth = 300
-local spore_cooldown_max = 8
-
+local spore_cooldown_max = 60
 
 --local onsurface = false
 --local oncave = false
@@ -27,7 +24,6 @@ local spore_cooldown_max = 8
 --	end
 --end
 
-
 -- These tiles are where Smolder Spores can survive, when it isn't Summer.
 -- ALL NON-MAGMA MAGMA CAVES TURFS SHOULD GO HERE.
 local HOME_TILES =
@@ -37,7 +33,6 @@ local HOME_TILES =
 	--	[WORLD_TILES.MAGMA_ROCK] = true,
 	--	[WORLD_TILES.MAGMAFIELD] = true,
 }
-
 
 SetSharedLootTable('um_pyre_nettles_1',
 	{
@@ -74,7 +69,7 @@ local function pyrenettle_bumped(inst)
 	if inst.stage > 3 then
 		bumpradius = inst.stage * 0.75
 	end
-	
+
 	local nextvictim = FindClosestEntity(inst, bumpradius, true, nil,
 		{ "PyreToxinImmune", "plantkin", "flying", "FX", "INLIMBO", "invisible", "notarget", "noattack", "playerghost", "smog", "wall" }
 	)
@@ -135,7 +130,7 @@ end
 -- Also does the actual spore spawn.
 local function NaturalSporeSpawnTimerReset(inst)
 	local time_remaining = inst.components.timer:GetTimeLeft("NaturalSporeSpawnTimer")
-	local timer_duration = (math.random(1, 30) + 30)
+	local timer_duration = (math.random(1, 30) + 60)
 
 	local spore_cooldown_running = inst.components.timer:GetTimeLeft("SporeCooldownTimer")
 	if spore_cooldown_running == nil and inst.stage == 5 and math.random() > 0.5 then
@@ -250,7 +245,7 @@ local function OnGrow(inst)
 	elseif targetstage == 6 then
 		growsuccess = true
 	end
-	print("heatwave check", TheWorld:HasTag("heatwavestart"))
+
 	-- Outside Magma Caves, Pyre Nettles can't grow past stage 2.
 	if growsuccess == true
 		and not HOME_TILES[tile_at_position]
