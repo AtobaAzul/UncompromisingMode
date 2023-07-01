@@ -517,7 +517,8 @@ local states=
 								and TUNING.ELECTRIC_DAMAGE_MULT + TUNING.ELECTRIC_WET_DAMAGE_MULT * (ent.components.moisture ~= nil and ent.components.moisture:GetMoisturePercent() or (ent:GetIsWet() and 1 or 0))
 								or 1
 							
-							if ent.sg ~= nil and not ent.sg:HasStateTag("nointerrupt") and not insulated then
+							if ent.sg ~= nil and not ent.sg:HasStateTag("nointerrupt") and not insulated and not
+								(ent.components.health ~= nil and not ent.components.health:IsDead()) then
 								ent.sg:GoToState("electrocute")
 							end
 							
