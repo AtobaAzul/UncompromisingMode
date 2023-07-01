@@ -123,6 +123,18 @@ local function FindNymph(inst)
 	end
 end
 
+local function HomeCheck(inst) -- Backup, though would not advice using it, since if you spawn via console, they'll get removed, ones spawned from giant trees will also be removed.
+	local excuse_to_live = false -- Why should I let you live, aphid?
+	if inst.components.homeseeker and inst.components.homeseeker.home then
+		excuse_to_live = true
+	end
+	if inst.components.follower and inst.components.follower.leader then
+		excuse_to_live = true
+	end
+	if excuse_to_live == false then
+		inst:Remove()
+	end
+end
 
 local function fn()
     local inst = CreateEntity()
@@ -224,7 +236,7 @@ local function fn()
     MakeSmallFreezableCharacter(inst, "body")
 
     inst:ListenForEvent("fly_in", OnFlyIn) -- matches enter_loop logic so it does not happen a frame late
-
+	--inst:DoTaskInTime(0,HomeCheck) --Backup Aphid Extermination....
 	inst.OnSave = function(inst,data)
 		if data and inst.posse then
 			data.posse = inst.posse

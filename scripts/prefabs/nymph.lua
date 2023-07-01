@@ -103,13 +103,21 @@ end
 
 local function FadeOut(inst,fade)
 	local tree = FindEntity(inst,6,nil,{"giant_tree"},{"infestedtree"})
+	--TheNet:Announce("Fadout")
 	if tree then
 		tree.InfestMe(tree)
 	end
-	if inst.posse then
-		for i,v in ipairs(inst.posse) do
+	if inst.aphidposse then
+		for i,v in ipairs(inst.aphidposse) do
+			--TheNet:Announce("here's an aphid")
 			if v and v:IsValid() and v.components.health and not v.components.health:IsDead() then
-				v.sg:GoToState("burrow")
+				if v:IsAsleep() then
+					--TheNet:Announce("Told To remove...")
+					v:Remove()
+				else
+					--TheNet:Announce("Told to burrow")
+					v.sg:GoToState("burrow")
+				end
 			end
 		end
 	end
@@ -220,7 +228,12 @@ local function minifn()
 				FadeOut(inst,1)
 			end
 			if inst:IsAsleep() then
-				FindSpotToMoveTowardsTree(inst)
+				if inst:GetDistanceSqToPoint(inst.treetarget) < 12^2 then -- When not loaded, it can't get close enough to trigger, so we're helping fix that by allowing a wider check....
+					inst.Transform:SetPosition(inst.treetarget.x,inst.treetarget.y,inst.treetarget.z)
+					FadeOut(inst,1)
+				else
+					FindSpotToMoveTowardsTree(inst)
+				end
 			end
 		else
 			inst:Remove()
