@@ -374,7 +374,8 @@ local function TornadoItemTossTask(inst)
             x = x + math.random(-10, 10)
             z = z + math.random(-10, 10)
         end
-        if #inst.components.inventory.itemslots ~= 0 and x ~= nil then
+
+        if #inst.components.inventory.itemslots ~= 0 and x ~= nil and TheWorld.Map:IsPassableAtPoint(x, 0, z) then
             local item =
                 inst.components.inventory.itemslots
                 [math.random(#inst.components.inventory.itemslots)]
@@ -579,7 +580,8 @@ local function TornadoTask(inst)
 
                     for k, v in ipairs(inst.components.inventory.itemslots) do
                         local item = inst.components.inventory:RemoveItem(v)
-                        Launch2(item, inst, 2, 2, 5, 0, 10, math.random(360))
+                        local pos = getrandomposition(inst)
+                        item.Transform:SetPosition(pos.x+math.random(-8,8), pos.y, pos.z+math.random(-8,8))
                     end
 
                     if destination ~= nil then
@@ -602,7 +604,8 @@ local function TornadoTask(inst)
                 inst:ListenForEvent("animover", function()
                     for k, v in ipairs(inst.components.inventory.itemslots) do
                         local item = inst.components.inventory:RemoveItem(v)
-                        Launch2(item, inst, 2, 2, 5, 0, 10)
+                        local pos = getrandomposition(inst)
+                        item.Transform:SetPosition(pos.x+math.random(-8,8), pos.y, pos.z+math.random(-8,8))
                     end
 
                     inst.startmoving = false
@@ -957,9 +960,9 @@ local function marker2()
     --inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-   -- inst.MiniMapEntity:SetIcon("yellowmooneye.png")
-   -- inst.MiniMapEntity:SetCanUseCache(false)
-   -- inst.MiniMapEntity:SetDrawOverFogOfWar(true)
+    -- inst.MiniMapEntity:SetIcon("yellowmooneye.png")
+    -- inst.MiniMapEntity:SetCanUseCache(false)
+    -- inst.MiniMapEntity:SetDrawOverFogOfWar(true)
 
     inst.entity:SetPristine()
 
