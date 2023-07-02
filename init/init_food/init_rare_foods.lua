@@ -184,11 +184,9 @@ if GetModConfigData("nowintergrowing") then
         local _OldStartGrowing = self.StartGrowing
 
         function self:StartGrowing(time)
-            --[[if (self.inst:HasTag("farm_plant") or self.inst:HasTag("bananabush") or self.inst.prefab == "rock_avocado_bush") and GLOBAL.TheWorld.state.iswinter then
-                print("growable StartGrowing return false")
+            if (--[[self.inst:HasTag("farm_plant") or ]]self.inst:HasTag("bananabush") or self.inst.prefab == "rock_avocado_bush") and GLOBAL.TheWorld.state.iswinter then
 				return false
-            else]]
-			--	print("growable _OldStartGrowing")
+            else
                 return _OldStartGrowing(self, time)
            -- end
         end

@@ -17,7 +17,7 @@ local function OnHitZap(inst)
 				if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") and not insulated then
 					v.sg:GoToState("electrocute")
 				end
-			else
+			elseif v.components.combat ~= nil then
 				if not v:HasTag("electricdamageimmune") and v.components.health ~= nil then
 					--v.components.health:DoDelta(-30, nil, inst.prefab, nil, inst) --From the onhit stuff...
 					v.components.combat:GetAttacked(inst, 30, nil, "electric")
