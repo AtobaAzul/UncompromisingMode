@@ -212,7 +212,7 @@ configuration_options = {
     BinaryConfig("wixie_walter", "Wixie & Walter Rework",
         "Enable Uncompromising Mode's Wixie, the Delinquent, who expands on Walter's slingshot, while Walter gets new interactions and mechanics with Woby!",
         true),
-    BinaryConfig("wixie_birds", "Wixie: Slingshot Nerfs", "Slingshots can't hit birds & rabbits.", true),
+    --BinaryConfig("wixie_birds", "Wixie: Slingshot Nerfs", "Slingshots can't hit birds & rabbits.", true),
     BinaryConfig("holy fucking shit it's wathom", "Wathom", "Enable Uncompromising Mode's Wathom, the Forgotten Parody.",
         true),
     BinaryConfig("wathom_maxdmg", "Wathom: Damage Cap",
