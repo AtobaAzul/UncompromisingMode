@@ -46,20 +46,20 @@ local function Salted(inst)
 
     inst.SoundEmitter:PlaySound("dontstarve/creatures/together/antlion/sfx/ground_break")
 
-    local ents = TheSim:FindEntities(x, y, z, 5, {"salt_workable"})
+    local ents = TheSim:FindEntities(x, y, z, 6, {"salt_workable"})
     if #ents > 0 then
         for i, v in ipairs(ents) do
             if v:IsValid() then
                 -- Don't net any insects when we do work
                 -- if self.destroyer and
                 if v.components.workable ~= nil and v.components.workable:CanBeWorked() and v.components.workable.action ~= ACTIONS.NET then
-                    v.components.workable:WorkedBy(inst, 1)
+                    v.components.workable:WorkedBy(inst, 3)
                 end
             end
         end
     end
 
-    local ents2 = TheSim:FindEntities(x, y, z, 5, {"snowish"})
+    local ents2 = TheSim:FindEntities(x, y, z, 6, {"snowish"})
     if #ents2 > 0 then
         for i, v2 in ipairs(ents2) do
             if v2:IsValid() and v2.components.health ~= nil and not v2.components.health:IsDead() and inst.components.combat:CanTarget(v2) then
