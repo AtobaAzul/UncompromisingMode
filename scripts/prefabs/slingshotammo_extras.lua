@@ -7,10 +7,6 @@ local prefabs_firecrackers = {"explode_firecrackers"}
 local AURA_EXCLUDE_TAGS = {"noclaustrophobia", "rabbit", "playerghost", "abigail", "companion", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "invisible"}
 local GOOP_EXCLUDE_TAGS = {"noclaustrophobia", "rabbit", "playerghost", "shadow", "shadowminion", "INLIMBO", "notarget", "noattack", "invisible"}
 
-if TUNING.DSTU.WIXIE_BIRDS then
-    table.insert(AURA_EXCLUDE_TAGS, "rabbit")
-end
-
 if not TheNet:GetPVPEnabled() then
     table.insert(AURA_EXCLUDE_TAGS, "player")
 end
@@ -324,7 +320,7 @@ local function Vac(inst)
     local ents = TheSim:FindEntities(x, y, z, 10 * inst.Transform:GetScale(), {"_combat"}, AURA_EXCLUDE_TAGS)
 
     for i, v in ipairs(ents) do
-        if (v:HasTag("bird_mutant") or TUNING.DSTU.WIXIE_BIRDS and not v:HasTag("bird") or not TUNING.DSTU.WIXIE_BIRDS and v:HasTag("bird")) then
+        if (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
             if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
                 local px, py, pz = v.Transform:GetWorldPosition()
 
@@ -374,7 +370,7 @@ local function Damage(inst, attacker, target)
     local damageents = TheSim:FindEntities(x, y, z, 1 * inst.Transform:GetScale(), {"_combat"}, AURA_EXCLUDE_TAGS)
 
     for i, v in ipairs(damageents) do
-        if v.components.combat ~= nil and (v:HasTag("bird_mutant") or TUNING.DSTU.WIXIE_BIRDS and not v:HasTag("bird") or not TUNING.DSTU.WIXIE_BIRDS and v:HasTag("bird")) then
+        if v.components.combat ~= nil and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
             if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
                 v.components.combat:GetAttacked(inst, 2 * inst.Transform:GetScale(), inst)
 				
@@ -555,7 +551,7 @@ local function OnHit_Rubber(inst, attacker, target)
         local ents = TheSim:FindEntities(x, y, z, 10, {"_combat"}, AURA_EXCLUDE_TAGS)
 
         for i, v in ipairs(ents) do
-            if v ~= target and (v:HasTag("bird_mutant") or TUNING.DSTU.WIXIE_BIRDS and not v:HasTag("bird") or not TUNING.DSTU.WIXIE_BIRDS and v:HasTag("bird")) then
+            if v ~= target and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
                 if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
                     local rubberband = SpawnPrefab("slingshotammo_rubber_rebound")
                     rubberband.Transform:SetPosition(target.Transform:GetWorldPosition())
@@ -675,7 +671,7 @@ local function OnHit_Goop(inst, attacker, target)
 
         if not playerdetected then
             for i, v in pairs(ents) do
-                if v ~= target and (v:HasTag("bird_mutant") or TUNING.DSTU.WIXIE_BIRDS and not v:HasTag("bird") or not TUNING.DSTU.WIXIE_BIRDS and v:HasTag("bird")) then
+                if v ~= target and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
                     goop.Transform:SetPosition(target.Transform:GetWorldPosition())
                     goop.components.projectile:Throw(inst, v, attacker)
                     goop.components.projectile:SetHoming(true)
@@ -821,7 +817,7 @@ local function CollisionCheck(inst)
         local attacker = inst.components.projectile.owner or nil
 
         for i, v in ipairs(TheSim:FindEntities(x, y, z, 3, {"_combat"}, inst.healinggoop and GOOP_EXCLUDE_TAGS or AURA_EXCLUDE_TAGS)) do
-            if inst.healinggoop or v:GetPhysicsRadius(0) > 1.5 and v:IsValid() and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or TUNING.DSTU.WIXIE_BIRDS and not v:HasTag("bird") or not TUNING.DSTU.WIXIE_BIRDS and v:HasTag("bird")) then
+            if inst.healinggoop or v:GetPhysicsRadius(0) > 1.5 and v:IsValid() and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
                 if inst.oldtarget == nil or inst.oldtarget ~= nil and not v == inst.oldtarget then
                     if inst.healinggoop or not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
                         if inst.healinggoop and v ~= attacker or not (v.components.health:IsDead() or v == attacker or v:HasTag("playerghost") or (v:HasTag("player") and not TheNet:GetPVPEnabled())) then
@@ -835,7 +831,7 @@ local function CollisionCheck(inst)
         end
 
         for i, v in ipairs(TheSim:FindEntities(x, y, z, 2, {"_combat"}, AURA_EXCLUDE_TAGS)) do
-            if v:IsValid() and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or TUNING.DSTU.WIXIE_BIRDS and not v:HasTag("bird") or not TUNING.DSTU.WIXIE_BIRDS and v:HasTag("bird")) then
+            if v:IsValid() and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
                 if inst.oldtarget == nil or inst.oldtarget ~= nil and not v == inst.oldtarget then
                     if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
                         if not (v.components.health:IsDead() or v == attacker or v:HasTag("playerghost") or (v:HasTag("player") and not TheNet:GetPVPEnabled())) then
@@ -993,7 +989,7 @@ local function ShadowCheck(inst)
     local attacker = inst.components.projectile.owner or nil
 
     for i, v in ipairs(TheSim:FindEntities(x, y, z, 2, {"_combat"}, {"noclaustrophobia", "bird", "rabbit", "playerghost", "abigail", "companion", "ghost", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "invisible"}, {"shadow", "shadowcreature"})) do
-        if v:IsValid() and v.components.combat ~= nil and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or TUNING.DSTU.WIXIE_BIRDS and not v:HasTag("bird") or not TUNING.DSTU.WIXIE_BIRDS and v:HasTag("bird")) then
+        if v:IsValid() and v.components.combat ~= nil and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
             if not (v.components.health:IsDead() or v == attacker or v:HasTag("playerghost") or (v:HasTag("player") and not TheNet:GetPVPEnabled())) then
                 OnHit_MoonRock(inst, attacker, v)
             end
@@ -1026,11 +1022,6 @@ local function GlassCut(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
     local attacker = inst.components.projectile.owner or nil
     local cant_tags = { "noclaustrophobia", "wall", "invisible", "player", "companion", "INLIMBO" }
-
-    if TUNING.DSTU.WIXIE_BIRDS then
-        table.insert(cant_tags, "bird")
-        table.insert(cant_tags, "rabbit")
-    end
 
     for i, v in ipairs(TheSim:FindEntities(x, y, z, 3, "_combat", cant_tags)) do
         if v:GetPhysicsRadius(0) > 1.5 and v:IsValid() and v.components.combat ~= nil and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then

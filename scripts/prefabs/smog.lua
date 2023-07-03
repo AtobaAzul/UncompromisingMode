@@ -77,11 +77,11 @@ local function fn()
             if v.components.health ~= nil and v.prefab ~= "willow" and not v:HasTag("has_gasmask") and inst.mult >= 0.4 and math.random() > 0.5 then
                 if v.components.oldager ~= nil then
                     v.components.health:DoDelta(-1)
-                else
+                elseif v:HasTag("player") then
                     v.components.health:DeltaPenalty(0.0125)
                 end
 
-                if v.components.talker ~= nil then
+                if v.components.talker ~= nil and v:HasTag("player") then
                     v.components.talker:Say(GetString(v, "GAS_DAMAGE"))
                 end
 

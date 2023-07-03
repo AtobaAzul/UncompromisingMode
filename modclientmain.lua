@@ -89,7 +89,7 @@ STRINGS.CHARACTER_ABOUTME.wathom = "A hunter with an uncontrollable surplus of e
 STRINGS.CHARACTER_BIOS.wathom = {
  { title = "Birthday", desc = "January 20" },
  { title = "Favorite Food", desc = "Hardshell Tacos" },
- { title = "From the Abyss", desc = "The civilization that once occupied the ruins always piqued Maxwell's curiosity. Even he on the throne didnt know all the secrets buried within the Constant. Using dusted bones and nightmare fuel, the Shadow King breathed life into a mimic of the ancient race, with the purpose to understand those who came before them. \n \nWathom never knew anything other than dank caverns and pulsating ruins - and when he didn't provide the secrets that he was born to uncover, the only thing he knew from then on was the indefinite darkness of the Abyss, banished and forgotten. At least, until the fallen moon provided climbable cracks in the walls."},
+ { title = "From the Abyss", desc = "The civilization that once occupied the ruins always piqued Maxwell's curiosity. Even he on the throne didn't know all the secrets buried within the Constant. Using dusted bones and nightmare fuel, the Shadow King breathed life into a mimic of the ancient race, with the purpose to understand those who came before them. \n \nWathom never knew anything other than dank caverns and pulsating ruins - and when he didn't provide the secrets that he was born to uncover, the only thing he knew from then on was the indefinite darkness of the Abyss, banished and forgotten. At least, until the fallen moon provided climbable cracks in the walls."},
 }
 STRINGS.CHARACTER_SURVIVABILITY.wathom = "Slim"
 
@@ -105,11 +105,11 @@ STRINGS.CHARACTER_TITLES.wixie = "The Delinquent"
 STRINGS.CHARACTER_NAMES.wixie = "Wixie"
 STRINGS.CHARACTER_DESCRIPTIONS.wixie = "*Good with a slingshot\n*Has a mighty shove\n*Is Claustrophobic"
 STRINGS.CHARACTER_QUOTES.wixie = "\"It wasn't me!\""
-STRINGS.CHARACTER_ABOUTME.wixie = "Some say Wixies abrasive attitude is a cover for her insecurities. These people tend to be on the recieving end of her slingshot."
+STRINGS.CHARACTER_ABOUTME.wixie = "Some say Wixies abrasive attitude is a cover for her insecurities. These people tend to be on the receiving end of her slingshot."
 STRINGS.CHARACTER_BIOS.wixie = {
  { title = "Birthday", desc = "March 23" },
  { title = "Favorite Food", desc = "Boomberry Pancakes" },
- { title = "All Good Things...", desc = "Growing up can hurt, and few know it better than Wixie. As long as she could remember she would see shadows in the corner of her eye, and hear whispers in the dark when she felt surrounded. After tragedy struck her family, her fears, and her abrasive attitude grew, as she further pushed people away. This cycled continued, gaining the attention of a dark force from beyond. Now, she finds her self in the constant, free from the confines of her old life, but more trapped than ever before."},
+ { title = "All Good Things...", desc = "Growing up can hurt, and few know it better than Wixie. As long as she could remember she would see shadows in the corner of her eye, and hear whispers in the dark when she felt surrounded. After tragedy struck her family, her fears, and her abrasive attitude grew, as she further pushed people away. This cycle continued, gaining the attention of a dark force from beyond. Now, she finds herself in the Constant, free from the confines of her old life, but more trapped than ever before."},
 }
 
 STRINGS.CHARACTER_SURVIVABILITY.wixie= "Grim"

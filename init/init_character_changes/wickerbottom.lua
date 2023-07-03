@@ -136,7 +136,6 @@ if TUNING.DSTU.WICKERBUFF_HORTICULTURE then
 
     local function trygrowth(inst, maximize)
         if not inst:IsValid() or inst:IsInLimbo() or (inst.components.witherable ~= nil and inst.components.witherable:IsWithered()) then
-
             return false
         end
 
@@ -192,7 +191,6 @@ if TUNING.DSTU.WICKERBUFF_HORTICULTURE then
                     return true
                 end
             end
-
         end
 
         return false
@@ -332,12 +330,17 @@ if TUNING.DSTU.WICKERNERF_MOONBOOK then
             inst.components.book:SetOnRead(OnRead_moon)
             inst.components.book:SetOnPeruse(OnPerUse_moon)
         end
+
+        if inst.components.finiteuses ~= nil then
+            inst.components.finiteuses:SetMaxUses(5)
+            inst.components.finiteuses:SetUses(5)
+        end
     end)
 end
 
 local function OnRead_bees(inst, reader)
     local x, y, z = reader.Transform:GetWorldPosition()
-    local beeboxes = TheSim:FindEntities(x, y, z, 16, nil, nil, {"beebox", "beebox_hermit"}, {"burnt", "INLIMBO"})
+    local beeboxes = TheSim:FindEntities(x, y, z, 16, nil, nil, { "beebox", "beebox_hermit" }, { "burnt", "INLIMBO" })
     local found = false
 
     for k, v in ipairs(beeboxes) do
@@ -345,7 +348,7 @@ local function OnRead_bees(inst, reader)
             break
         end
         local x, y, z = v.Transform:GetWorldPosition()
-			
+
         if (v.components.harvestable.maxproduce - v.components.harvestable.produce) ~= 0 and not TheWorld.state.iswinter then
             v.components.harvestable:Grow(1)
             local fx = SpawnPrefab("fx_book_bees")
@@ -368,21 +371,26 @@ if TUNING.DSTU.WICKERNERF_BEEBOOK then
         if inst.components.book ~= nil then
             inst.components.book:SetOnRead(OnRead_bees)
         end
+
+        if inst.components.finiteuses ~= nil then
+            inst.components.finiteuses:SetMaxUses(5)
+            inst.components.finiteuses:SetUses(5)
+        end
     end)
 end
 
 local function WickerCaresForHerBooks(inst)
-    for k,v in pairs(inst.components.inventory.itemslots) do
+    for k, v in pairs(inst.components.inventory.itemslots) do
         if v:HasTag("book") and v.components.finiteuses then
             local percent = v.components.finiteuses:GetPercent()
             if percent < 1 then
-                v.components.finiteuses:SetPercent(math.min(1, percent + TUNING.BOOKSTATION_RESTORE_AMOUNT))
+                v.components.finiteuses:SetPercent(math.min(1, percent + 0.015))
             end
         end
     end
 end
 
-env.AddPrefabPostInit("wickerbottom", function(inst) 
+env.AddPrefabPostInit("wickerbottom", function(inst)
     if not TheWorld.ismastersim then
         return
     end

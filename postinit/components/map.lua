@@ -6,8 +6,9 @@ env.AddPrefabPostInit("world", function(inst)
 	local _IsDeployPointClear = Map.IsDeployPointClear
 	Map.IsDeployPointClear = function(Map, pt, inst, min_spacing, min_spacing_sq_fn, near_other_fn, check_player, custom_ignore_tags)
 		
-		if pt ~= nil and pt:Get() ~= nil then
-			local x,y,z = pt:Get()
+		if pt ~= nil and pt.x ~= nil then
+			local x = pt.x
+			local z = pt.z
 			
 			local portaboat = TheSim:FindEntities(x, 0, z, 4, {"portableraft"})
 			if portaboat ~= nil and #portaboat > 0 then

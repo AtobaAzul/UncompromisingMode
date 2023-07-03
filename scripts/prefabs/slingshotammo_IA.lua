@@ -6,9 +6,6 @@ local prefabs_firecrackers = {"explode_firecrackers"}
 
 local AURA_EXCLUDE_TAGS = {"noclaustrophobia", "playerghost", "abigail", "companion", "ghost", "shadow", "shadowminion", "noauradamage", "INLIMBO", "notarget", "noattack", "invisible"}
 
-if TUNING.DSTU.WIXIE_BIRDS then
-    table.insert(AURA_EXCLUDE_TAGS, "rabbit")
-end
 if not TheNet:GetPVPEnabled() then
     table.insert(AURA_EXCLUDE_TAGS, "player")
 end
@@ -269,7 +266,7 @@ local function DoAreaBurn(inst)
     local ents = TheSim:FindEntities(x, y, z, 5, nil, OBSIDIAN_AURA_EXCLUDE_TAGS)
     for i, v in ipairs(ents) do
         if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
-            if inst.components.propagator ~= nil and v.components.combat ~= nil and v.components.health ~= nil and (v:HasTag("bird_mutant") or TUNING.DSTU.WIXIE_BIRDS and not v:HasTag("bird") or not TUNING.DSTU.WIXIE_BIRDS and v:HasTag("bird") or not v:HasTag("bird")) then
+            if inst.components.propagator ~= nil and v.components.combat ~= nil and v.components.health ~= nil and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
                 if v.components.sleeper ~= nil and v.components.sleeper:IsAsleep() then
                     v.components.sleeper:WakeUp()
                 end
@@ -363,7 +360,7 @@ local function CollisionCheck(inst)
         local attacker = inst.components.projectile.owner or nil
 
         for i, v in ipairs(TheSim:FindEntities(x, y, z, 3, {"_combat"}, AURA_EXCLUDE_TAGS)) do
-            if v:GetPhysicsRadius(0) > 1.5 and v:IsValid() and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or TUNING.DSTU.WIXIE_BIRDS and not v:HasTag("bird") or not TUNING.DSTU.WIXIE_BIRDS and v:HasTag("bird") or not v:HasTag("bird")) then
+            if v:GetPhysicsRadius(0) > 1.5 and v:IsValid() and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
                 if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
                     if not (v.components.health:IsDead() or v == attacker or v:HasTag("playerghost") or (v:HasTag("player") and not TheNet:GetPVPEnabled())) then
                         inst.OnHit(inst, attacker, v)
@@ -375,7 +372,7 @@ local function CollisionCheck(inst)
         end
 
         for i, v in ipairs(TheSim:FindEntities(x, y, z, 2, {"_combat"}, AURA_EXCLUDE_TAGS)) do
-            if v:IsValid() and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or TUNING.DSTU.WIXIE_BIRDS and not v:HasTag("bird") or not TUNING.DSTU.WIXIE_BIRDS and v:HasTag("bird") or not v:HasTag("bird")) then
+            if v:IsValid() and v.components.combat ~= nil and v.components.health ~= nil and not (v.sg ~= nil and (v.sg:HasStateTag("swimming") or v.sg:HasStateTag("invisible"))) and (v:HasTag("bird_mutant") or not v:HasTag("bird")) then
                 if not (v.components.follower ~= nil and v.components.follower:GetLeader() ~= nil and v.components.follower:GetLeader():HasTag("player")) then
                     if not (v.components.health:IsDead() or v == attacker or v:HasTag("playerghost") or (v:HasTag("player") and not TheNet:GetPVPEnabled())) then
                         inst.OnHit(inst, attacker, v)

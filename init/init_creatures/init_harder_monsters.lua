@@ -206,60 +206,58 @@ local function AliveWall(wall, targetter)
     return nil
 end
 
+local KING_TAGS = { "king" }
+local RETARGET_GUARD_MUST_TAGS = { "character" }
+local RETARGET_GUARD_CANT_TAGS = { "guard", "INLIMBO" }
+local RETARGET_GUARD_PLAYER_MUST_TAGS = { "player" }
+local RETARGET_GUARD_LIMBO_CANT_TAGS = { "INLIMBO" }
+
 local function GuardRetargetFn(inst)
     --defend the king, then the torch, then myself
     local home = inst.components.homeseeker ~= nil and inst.components.homeseeker.home or nil
     local defendDist = GLOBAL.SpringCombatMod(TUNING.PIG_GUARD_DEFEND_DIST)
     local defenseTarget =
-        GLOBAL.FindEntity(inst, defendDist, nil, { "king" }) or
+        GLOBAL.FindEntity(inst, defendDist, nil, KING_TAGS) or
         (home ~= nil and inst:IsNear(home, defendDist) and home) or
         inst
 
-    local wall = GLOBAL.FindEntity(defenseTarget, defendDist, AliveWall, { "wall" }, { "INLIMBO" })
-    local monster = GLOBAL.FindEntity(defenseTarget, defendDist, nil, { "monster" }, { "INLIMBO" })
-    if monster ~= nil then
-        target = monster
-    else
-        if wall ~= nil then
-            target = wall
-        end
-    end
-
     if not defenseTarget.happy then
-        local invader = GLOBAL.FindEntity(defenseTarget, defendDist, nil, { "character" }, { "guard", "INLIMBO", "pig" })
+        local invader = GLOBAL.FindEntity(defenseTarget, GLOBAL.SpringCombatMod(TUNING.PIG_GUARD_TARGET_DIST), nil, RETARGET_GUARD_MUST_TAGS, RETARGET_GUARD_CANT_TAGS)
         if invader ~= nil and
-            not
-            (defenseTarget.components.trader ~= nil and defenseTarget.components.trader:IsTryingToTradeWithMe(invader))
-            and
+            not (defenseTarget.components.trader ~= nil and defenseTarget.components.trader:IsTryingToTradeWithMe(invader)) and
             not (inst.components.trader ~= nil and inst.components.trader:IsTryingToTradeWithMe(invader)) then
-            target = invader
-        else
-            if not GLOBAL.TheWorld.state.isday and home ~= nil and home.components.burnable ~= nil and
-                home.components.burnable:IsBurning() then
-                local lightThief = GLOBAL.FindEntity(
-                    home,
-                    home.components.burnable:GetLargestLightRadius(),
-                    function(guy)
-                        return guy.LightWatcher:IsInLight()
-                            and
-                            not
-                            (
-                                defenseTarget.components.trader ~= nil and
-                                defenseTarget.components.trader:IsTryingToTradeWithMe(guy))
-                            and not (inst.components.trader ~= nil and inst.components.trader:IsTryingToTradeWithMe(guy)
-                            )
-                    end,
-                    { "player" },
-                    { "pig" }
-                )
-                if lightThief ~= nil then
-                    target = lightThief
-                end
+            return invader
+        end
+
+        if not GLOBAL.TheWorld.state.isday and home ~= nil and home.components.burnable ~= nil and home.components.burnable:IsBurning() then
+            local lightThief = GLOBAL.FindEntity(
+                home,
+                home.components.burnable:GetLargestLightRadius() or 4,
+                function(guy)
+                    return guy:IsInLight()
+                        and not (defenseTarget.components.trader ~= nil and defenseTarget.components.trader:IsTryingToTradeWithMe(guy))
+                        and not (inst.components.trader ~= nil and inst.components.trader:IsTryingToTradeWithMe(guy))
+                end,
+                RETARGET_GUARD_PLAYER_MUST_TAGS
+            )
+            if lightThief ~= nil then
+                return lightThief
             end
         end
     end
+	
+    local wall = GLOBAL.FindEntity(defenseTarget, defendDist, AliveWall, { "wall" }, { "INLIMBO" })
 
-    return target
+	if wall ~= nil then
+		return wall
+	end
+			
+    local oneof_tags = {"monster"}
+    if not inst:HasTag("merm") then
+        table.insert(oneof_tags, "merm")
+    end
+
+    return GLOBAL.FindEntity(defenseTarget, defendDist, nil, {}, RETARGET_GUARD_LIMBO_CANT_TAGS, oneof_tags)
 end
 
 --[[
@@ -276,11 +274,11 @@ local function GuardKeepTargetFn(inst, target)
         return true
     end
 
-    local defendDist = not GLOBAL.TheWorld.state.isday
+    local defendDist = not GLOBAL.GLOBAL.TheWorld.state.isday
                     and home.components.burnable ~= nil
                     and home.components.burnable:IsBurning()
                     and home.components.burnable:GetLargestLightRadius()
-                    or GLOBAL.SpringCombatMod(TUNING.PIG_GUARD_DEFEND_DIST)
+                    or GLOBAL.GLOBAL.SpringCombatMod(TUNING.PIG_GUARD_DEFEND_DIST)
     return target:IsNear(home, defendDist) and inst:IsNear(home, defendDist)
 end
 ]]
