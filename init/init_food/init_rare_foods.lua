@@ -172,11 +172,10 @@ if GetModConfigData("nowintergrowing") then
         local _OldResume = self.Resume
 
         function self:Resume()
-            if (self.inst:HasTag("farm_plant") or self.inst:HasTag("bananabush") or self.inst.prefab == "rock_avocado_bush") and GLOBAL.TheWorld.state.iswinter then
-				print("growable Resume return false")
+            if (self.inst:HasTag("bananabush") or self.inst.prefab == "rock_avocado_bush") and GLOBAL.TheWorld.state.iswinter then
 				return false
             else
-				print("growable _OldResume")
+                print("growable _OldResume")
                 return _OldResume(self)
             end
         end
@@ -184,13 +183,11 @@ if GetModConfigData("nowintergrowing") then
         local _OldStartGrowing = self.StartGrowing
 
         function self:StartGrowing(time)
-            --[[if (self.inst:HasTag("farm_plant") or self.inst:HasTag("bananabush") or self.inst.prefab == "rock_avocado_bush") and GLOBAL.TheWorld.state.iswinter then
-                print("growable StartGrowing return false")
+            if (self.inst:HasTag("bananabush") or self.inst.prefab == "rock_avocado_bush") and GLOBAL.TheWorld.state.iswinter then
 				return false
-            else]]
-			--	print("growable _OldStartGrowing")
+            else
                 return _OldStartGrowing(self, time)
-           -- end
+            end
         end
     end)
 
@@ -198,13 +195,11 @@ if GetModConfigData("nowintergrowing") then
         local _OldResume = self.Resume
 
         function self:Resume()
-            if (self.inst:HasTag("bananabush") or self.inst.prefab == "rock_avocado_bush") and GLOBAL.TheWorld.state.iswinter then
-                print("pickable Resume return false")
+			if (self.inst:HasTag("bananabush") or self.inst.prefab == "rock_avocado_bush") and GLOBAL.TheWorld.state.iswinter then
 				return false
-            else
-				print("pickable _OldResume")
-                return _OldResume(self)
-            end
+			else
+				return _OldResume(self)
+			end
         end
     end)
 
