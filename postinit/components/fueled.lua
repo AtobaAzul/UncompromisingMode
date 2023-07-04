@@ -5,7 +5,7 @@ env.AddComponentPostInit("fueled", function(self)
 	local _TakeFuelItem = self.TakeFuelItem
 
 	function self:TakeFuelItem(item, doer)
-		if item:HasTag("sludge_oil") and item.components.finiteuses ~= nil and self:CanAcceptFuelItem(item) then
+		if item ~= nil and item:HasTag("sludge_oil") and item.components.finiteuses ~= nil and self:CanAcceptFuelItem(item) then
 			local fuel_obj = item or doer
 
 			local masterymult = doer ~= nil and doer.components.fuelmaster ~= nil and
