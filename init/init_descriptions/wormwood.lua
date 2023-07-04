@@ -482,7 +482,15 @@ DESCRIBE.MARA_BOSS1 = "Not go right! Run!!"
 ANNOUNCE.GAS_DAMAGE = "kack! kack!"
 
 -- Pyre Nettle stuff
-DESCRIBE.UM_PYRE_NETTLES = "Big hot guys!"
+DESCRIBE.UM_PYRE_NETTLES = {
+	"Fire friend, scary",
+	"Fire friend, scary",
+	"Fire friend, scary",
+	"Fire friend, scary",
+	"Fire friend, scary",
+	"Fire friend, scary",
+	"Big hot guys!"
+}
 DESCRIBE.UM_SMOLDER_SPORE = "Shy, should leave alone"
 ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_EATEN = "NO NO WHY YOU DO THAT"
 ANNOUNCE.ANNOUNCE_SMOLDER_SPORE_INVENTORY_POP = "AAH!! BAD!! NOOOOOOO!!"

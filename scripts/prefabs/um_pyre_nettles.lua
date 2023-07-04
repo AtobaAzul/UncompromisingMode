@@ -443,6 +443,7 @@ local function StageSpawner(name, SpawnAtStage)
 		inst:AddTag("PyreNettle")
 		inst:AddTag("PyreToxinImmune")
 		inst:AddTag("SmolderSporeAvoid")
+		inst:AddTag("snowpileblocker") -- SNOOOOOWWWW BLOCKERRRRRR
 		-- Vanilla tags
 		inst:AddTag("plant")
 		inst:AddTag("scarytoprey")
