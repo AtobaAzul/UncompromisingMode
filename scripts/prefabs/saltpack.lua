@@ -96,7 +96,7 @@ end
 
 local function OnUse(inst)
     if inst.components.rechargeable:IsCharged() and not inst.components.fueled:IsEmpty() then
-        inst.components.fueled:SetPercent(inst.components.fueled:GetPercent() - 0.025) -- test num, feel free to tune
+        inst.components.fueled:SetPercent(inst.components.fueled:GetPercent() - 0.0125) -- test num, feel free to tune
         Salted(inst)
         inst.components.rechargeable:Discharge(1)
     else
@@ -167,7 +167,7 @@ local function fn()
 
     inst:AddComponent("fueled")
     inst.components.fueled.fueltype = FUELTYPE.SALT
-    inst.components.fueled:InitializeFuelLevel(TUNING.TORCH_FUEL * 4)
+    inst.components.fueled:InitializeFuelLevel(TUNING.TORCH_FUEL * 2)
     inst.components.fueled:SetTakeFuelFn(ontakefuel)
     inst.components.fueled:SetDepletedFn(Depleted)
     inst.components.fueled:SetFirstPeriod(TUNING.TURNON_FUELED_CONSUMPTION * 2, TUNING.TURNON_FULL_FUELED_CONSUMPTION * 2)

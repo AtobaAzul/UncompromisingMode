@@ -369,7 +369,7 @@ end
 if GetModConfigData("snowstorms") then
     AddRecipe2(
         "saltpack",
-        { Ingredient("gears", 1), Ingredient("boards", 2), Ingredient("saltrock", 8) },
+        { Ingredient("gears", 1), Ingredient("boards", 2), Ingredient("saltrock", 4) },
         TECH.SCIENCE_TWO,
         nil,
         { "TOOLS", "WINTER" }
