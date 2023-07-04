@@ -34,9 +34,9 @@ end
 local function DoAreaSpoil(inst)
     local x, y, z = inst.Transform:GetWorldPosition()
 
-    local ents = TheSim:FindEntities(x, y, z, 3, nil, { "small_livestock" }, { "fresh", "stale", "spoiled", "spore" })
+    local ents = TheSim:FindEntities(x, y, z, 3, nil, { "small_livestock" }, { "fresh", "stale", "spoiled", "spore", "spore_special" })
     for i, v in ipairs(ents) do
-        if v:HasTag("spore") then
+        if v:HasTag("spore") or v:HasTag("spore_special") then
             TryRefresh(v, inst)
         else
             TryPerish(v, inst)
