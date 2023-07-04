@@ -357,6 +357,9 @@ local function fn()
 
 	inst:AddTag("show_spoilage")
 	
+	-- Sporepack tag
+	inst:AddTag("spore_special")
+	
 	-- Slingshot tags
 	inst:AddTag("slingshotammo")
 	inst:AddTag("reloaditem_ammo")
