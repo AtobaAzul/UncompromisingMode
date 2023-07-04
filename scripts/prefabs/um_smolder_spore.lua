@@ -125,10 +125,15 @@ local function PopSpore(inst)
 		if inst.components.locomotor ~= nil then
 			inst.components.locomotor:Stop()
 		end
-
+		
+		inst:Show()
 		inst.AnimState:PlayAnimation("explode", false)
-
 		FireSpread(inst)
+		
+		inst:ListenForEvent("animover", function()
+			inst:Hide()
+		end)
+		
 		inst:DoTaskInTime(2, function()
 			inst:Remove()
 		end)
@@ -480,6 +485,7 @@ local function pop_fn()
 	inst.Light:SetIntensity(0.75)
 	inst.Light:SetColour(235 / 255, 121 / 255, 12 / 255)
 
+	inst:Hide()
 
 	inst.entity:SetPristine()
 
@@ -544,7 +550,7 @@ local function DealDamage(inst, attacker, target, salty)
 		
 		target.components.combat:GetAttacked(inst, inst.finaldamage, inst, "fire")
 	else
-		v.components.combat:GetAttacked(inst, 0, inst, "fire")
+		target.components.combat:GetAttacked(inst, 0, inst, "fire")
 		
 		target.components.health:DoDelta(-inst.finaldamage, false, inst, false, inst, false)
 	end
@@ -566,6 +572,8 @@ end
 
 
 local function SS_OnHit(inst, attacker, target)
+	inst:Hide()
+
 	SpawnPrefab("um_smolder_spore_pop").Transform:SetPosition(inst.Transform:GetWorldPosition()) -- Big badda boom.
 	
 	-- Damage anything within a radius.	

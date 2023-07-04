@@ -52,19 +52,35 @@ env.AddPrefabPostInit("blowdart_fire", function(inst)
 			if #ents > 0 then
 				for i, v in pairs(ents) do
 					if v.components.burnable ~= nil then
-						v.components.burnable:Ignite()
+						v.components.burnable:Ignite(true)
 					end
 					if v.components.combat ~= nil then
-						v.components.combat:GetAttacked(attacker, 50, nil, "fire")
+						v.components.combat:GetAttacked(inst, 50, inst, "fire")
 						if attacker:HasTag("pyromaniac") then
-							v.components.combat:GetAttacked(attacker, 25, nil, "fire")
+							v.components.combat:GetAttacked(inst, 25, inst, "fire")
 						end
+						
+						v.components.combat:SetTarget(attacker)
 					end
 				end
 			end
 		end
 		
-		_attackfn(inst, attacker, target) -- Run the old function.
+	--	_attackfn(inst, attacker, target) -- Run the old function.
+		-- ACTUALLY DON'T BECAUSE VANILLA IS BROKEN (counts as a melee attack, triggers effects like Volt Goat counter-shock)
+		-- Until that's fixed, use the below instead.
+		if target.SoundEmitter ~= nil then
+			target.SoundEmitter:PlaySound("dontstarve/wilson/blowdart_impact_fire")
+		end
+		if target.components.burnable ~= nil then
+			target.components.burnable:Ignite(true)
+		end
+		if target.components.freezable then
+			target.components.freezable:Unfreeze()
+		end
+		if target.components.combat ~= nil then
+			target.components.combat:SetTarget(attacker)
+		end
 	end
 	
 	inst.entity:AddSoundEmitter()

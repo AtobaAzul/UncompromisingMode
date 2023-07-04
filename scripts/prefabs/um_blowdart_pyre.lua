@@ -67,10 +67,12 @@ local function OnHit(inst, attacker, target)
 		if #ents > 0 then
 			for i, v in pairs(ents) do
 				if v.components.combat ~= nil then
-					v.components.combat:GetAttacked(attacker, 50, nil, "fire")
+					v.components.combat:GetAttacked(inst, 50, inst, "fire")
 					if attacker:HasTag("pyromaniac") then
-						v.components.combat:GetAttacked(attacker, 25, nil, "fire")
+						v.components.combat:GetAttacked(inst, 25, inst, "fire")
 					end
+					
+					v.components.combat:SetTarget(attacker)
 				end
 			end
 		end
