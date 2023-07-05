@@ -154,7 +154,7 @@ if GetModConfigData("book_recipes") then
     AllRecipes["book_moon"].ingredients = {
         Ingredient("papyrus", 2),
         Ingredient("moonrocknugget", 2),
-        Ingredient("moonbutterflywings", 1)
+        Ingredient("moon_cap", 2)
     }
     AllRecipes["book_bees"].ingredients = {
         Ingredient("papyrus", 2),

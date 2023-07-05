@@ -269,8 +269,8 @@ if TUNING.DSTU.WICKERNERF_MOONBOOK then
 
     local function OnRead_moon(inst, reader)
         local x, y, z = reader.Transform:GetWorldPosition()
-        local ents = TheSim:FindEntities(x, y, z, 16, nil, {"player", "playerghost", "INLIMBO", "dead"}, {"halloweenmoonmutable", "werebeast"})
-        local woodies = TheSim:FindEntities(x, y, z, 16, {"wereness"}, {"playerghost", "INLIMBO", "dead"})
+        local ents = TheSim:FindEntities(x, y, z, 8, nil, {"player", "playerghost", "INLIMBO", "dead"}, {"halloweenmoonmutable", "werebeast"})
+        local woodies = TheSim:FindEntities(x, y, z, 8, {"wereness"}, {"playerghost", "INLIMBO", "dead"})
         local found = false
 
         for k, v in ipairs(ents) do
@@ -332,8 +332,8 @@ if TUNING.DSTU.WICKERNERF_MOONBOOK then
         end
 
         if inst.components.finiteuses ~= nil then
-            inst.components.finiteuses:SetMaxUses(5)
-            inst.components.finiteuses:SetUses(5)
+            inst.components.finiteuses:SetMaxUses(4)
+            inst.components.finiteuses:SetUses(4)
         end
     end)
 end
@@ -349,8 +349,11 @@ local function OnRead_bees(inst, reader)
         end
         local x, y, z = v.Transform:GetWorldPosition()
 
-        if (v.components.harvestable.maxproduce - v.components.harvestable.produce) ~= 0 and not TheWorld.state.iswinter then
+        if (v.components.harvestable.maxproduce - v.components.harvestable.produce) ~= 0 and not TheWorld.state.iswinter and not TheWorld.state.isdusk and not TheWorld.state.isnight then
             v.components.harvestable:Grow(1)
+				if (v.components.harvestable.maxproduce - v.components.harvestable.produce) ~= 0 and TheWorld.state.isspring then
+					v.components.harvestable:Grow(1)
+				end
             local fx = SpawnPrefab("fx_book_bees")
             fx.Transform:SetPosition(x, y, z)
             found = true
@@ -373,8 +376,8 @@ if TUNING.DSTU.WICKERNERF_BEEBOOK then
         end
 
         if inst.components.finiteuses ~= nil then
-            inst.components.finiteuses:SetMaxUses(5)
-            inst.components.finiteuses:SetUses(5)
+            inst.components.finiteuses:SetMaxUses(4)
+            inst.components.finiteuses:SetUses(4)
         end
     end)
 end
