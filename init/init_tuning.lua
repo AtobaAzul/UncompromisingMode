@@ -239,6 +239,7 @@ TUNING.DSTU = {
     WICKERNERF_MOONBOOK = GetModConfigData("lunar grimoire"),
     WICKERBUFF_HORTICULTURE = GetModConfigData("lux aeterna"),
     WICKERBUFF_LIGHT = GetModConfigData("horticulture, expanded"),
+    WICKER_INV_REGEN = GetModConfigData("wicker_inv_regen"),
     -- Wanda
     WANDA_NERF = GetModConfigData("wanda_nerf"),
     -- Wortox

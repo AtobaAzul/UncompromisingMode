@@ -26,7 +26,8 @@ if TUNING.DSTU.WICKERNERF_TENTACLES then
                     local result_offset = FindValidPositionByFan(theta, radius, 12, function(offset)
                         local pos = pt + offset
                         -- NOTE: The first search includes invisible entities
-                        return #TheSim:FindEntities(pos.x, 0, pos.z, 1, nil, {"INLIMBO", "FX"}) <= 0 and TheWorld.Map:IsPassableAtPoint(pos:Get()) and TheWorld.Map:IsDeployPointClear(pos, nil, 1)
+                        return #TheSim:FindEntities(pos.x, 0, pos.z, 1, nil, { "INLIMBO", "FX" }) <= 0 and
+                        TheWorld.Map:IsPassableAtPoint(pos:Get()) and TheWorld.Map:IsDeployPointClear(pos, nil, 1)
                     end)
 
                     if result_offset ~= nil then
@@ -116,8 +117,9 @@ if TUNING.DSTU.WICKERBUFF_LIGHT then
 end
 
 if TUNING.DSTU.WICKERBUFF_HORTICULTURE then
-    local HORTICULTURE_ONEOF_TAGS = {"plant", "lichen", "oceanvine", "mushroom_farm", "kelp"}
-    local HORTICULTURE_CANT_TAGS = {"magicgrowth", "player", "FX", "leif", "pickable", "stump", "withered", "barren", "INLIMBO", "silviculture", "tree", "winter_tree"}
+    local HORTICULTURE_ONEOF_TAGS = { "plant", "lichen", "oceanvine", "mushroom_farm", "kelp" }
+    local HORTICULTURE_CANT_TAGS = { "magicgrowth", "player", "FX", "leif", "pickable", "stump", "withered", "barren",
+        "INLIMBO", "silviculture", "tree", "winter_tree" }
 
     local function MaximizePlant(inst)
         if inst.components.farmplantstress ~= nil then
@@ -130,7 +132,8 @@ if TUNING.DSTU.WICKERBUFF_HORTICULTURE then
             local x, y = TheWorld.Map:GetTileCoordsAtPoint(_x, _y, _z)
 
             local nutrient_consumption = inst.plant_def.nutrient_consumption
-            TheWorld.components.farming_manager:AddTileNutrients(x, y, nutrient_consumption[1] * 6, nutrient_consumption[2] * 6, nutrient_consumption[3] * 6)
+            TheWorld.components.farming_manager:AddTileNutrients(x, y, nutrient_consumption[1] * 6,
+                nutrient_consumption[2] * 6, nutrient_consumption[3] * 6)
         end
     end
 
@@ -269,8 +272,9 @@ if TUNING.DSTU.WICKERNERF_MOONBOOK then
 
     local function OnRead_moon(inst, reader)
         local x, y, z = reader.Transform:GetWorldPosition()
-        local ents = TheSim:FindEntities(x, y, z, 8, nil, {"player", "playerghost", "INLIMBO", "dead"}, {"halloweenmoonmutable", "werebeast"})
-        local woodies = TheSim:FindEntities(x, y, z, 8, {"wereness"}, {"playerghost", "INLIMBO", "dead"})
+        local ents = TheSim:FindEntities(x, y, z, 8, nil, { "player", "playerghost", "INLIMBO", "dead" },
+            { "halloweenmoonmutable", "werebeast" })
+        local woodies = TheSim:FindEntities(x, y, z, 8, { "wereness" }, { "playerghost", "INLIMBO", "dead" })
         local found = false
 
         for k, v in ipairs(ents) do
@@ -351,9 +355,9 @@ local function OnRead_bees(inst, reader)
 
         if (v.components.harvestable.maxproduce - v.components.harvestable.produce) ~= 0 and not TheWorld.state.iswinter and not TheWorld.state.isdusk and not TheWorld.state.isnight then
             v.components.harvestable:Grow(1)
-				if (v.components.harvestable.maxproduce - v.components.harvestable.produce) ~= 0 and TheWorld.state.isspring then
-					v.components.harvestable:Grow(1)
-				end
+            if (v.components.harvestable.maxproduce - v.components.harvestable.produce) ~= 0 and TheWorld.state.isspring then
+                v.components.harvestable:Grow(1)
+            end
             local fx = SpawnPrefab("fx_book_bees")
             fx.Transform:SetPosition(x, y, z)
             found = true
@@ -393,22 +397,25 @@ local function WickerCaresForHerBooks(inst)
     end
 end
 
-env.AddPrefabPostInit("wickerbottom", function(inst)
-    if not TheWorld.ismastersim then
-        return
-    end
-    inst:DoPeriodicTask(TUNING.BOOKSTATION_RESTORE_TIME, WickerCaresForHerBooks)
-end)
 
-env.AddPrefabPostInit("bookstation", function(inst)
-    if not TheWorld.ismastersim then return end
+if TUNING.DSTU.WICKER_INV_REGEN then
+    env.AddPrefabPostInit("wickerbottom", function(inst)
+        if not TheWorld.ismastersim then
+            return
+        end
+        inst:DoPeriodicTask(TUNING.BOOKSTATION_RESTORE_TIME, WickerCaresForHerBooks)
+    end)
 
-    inst:ListenForEvent("itemget", function(inst)
-        inst:DoTaskInTime(0, function()
-            if inst.RestoreTask ~= nil then
-                inst.RestoreTask:Cancel()
-            end
-            inst.RestoreTask = nil
+    env.AddPrefabPostInit("bookstation", function(inst)
+        if not TheWorld.ismastersim then return end
+
+        inst:ListenForEvent("itemget", function(inst)
+            inst:DoTaskInTime(0, function()
+                if inst.RestoreTask ~= nil then
+                    inst.RestoreTask:Cancel()
+                end
+                inst.RestoreTask = nil
+            end)
         end)
     end)
-end)
+end

@@ -310,6 +310,7 @@ configuration_options = {
         "\"Apicultural Notes\" now fills Bee Boxes around you to max.", true),
     BinaryConfig("book_recipes", "Wickerbottom: Recipe Tweaks", "Changes some book recipes to be slightly more balanced.",
         true),
+        BinaryConfig("wicker_inv_regen", "Wickerbottom: Inventory Book Regen.", "Wicker's books now regenerate in her inventory, instead of the bookcase.", true),
     BinaryConfig("wanda_nerf", "Wanda",
         "A bunch of changes to some of Wanda's more overpowered items to make them more balanced.", true),
     BinaryConfig("wormwood_extrafiredmg", "Wormwood: Extra Fire Damage",
