@@ -11,6 +11,7 @@ local assets =
     Asset("ANIM", "anim/winona_battery_high.zip"),
     Asset("ANIM", "anim/winona_battery_placement.zip"),
     Asset("ANIM", "anim/gems.zip"),
+    Asset("ANIM", "anim/winona_catapult_projectile.zip"),
 }
 
 local prefabs =

@@ -53,7 +53,7 @@ return Class(function(self, inst)
 		_worldsettingstimer:ResumeTimer(UM_STORM_TIMERNAME)
 	end
 
-	local function StartStorming()
+	local function StartStorming(immediately)
 		print("StartStorming")
 		_storming = true
 
@@ -65,7 +65,7 @@ return Class(function(self, inst)
 
 		TheWorld:PushEvent("ms_forceprecipitation", true)
 
-		TheWorld:DoTaskInTime(60, function()
+		TheWorld:DoTaskInTime((immediately and 0) or 60, function()
 			print("TASK IN TIME STORM START!")
 			TheWorld:AddTag("snowstormstart")
 			if TheWorld.net ~= nil then
@@ -103,12 +103,10 @@ return Class(function(self, inst)
 		if TheWorld.state.season == "winter" then
 			if TheWorld.state.cycles >= TUNING.DSTU.WEATHERHAZARD_START_DATE_WINTER then
 				if not _storming then
-					print("season change _storming")
 					StartStorms()
 				end
 			end
 		else
-			print("season change not winter")
 			StopStorms()
 		end
 	end
@@ -123,20 +121,10 @@ return Class(function(self, inst)
 	end
 
 	function self:OnLoad(data)
-		_storming = data.storming or false
+		_storming = data.storming
 
 		if _storming then
-			print("load _storming start storm")
-			TheWorld:AddTag("snowstormstart")
-			if TheWorld.net ~= nil then
-				TheWorld.net:AddTag("snowstormstartnet")
-			end
-
-			if _worldsettingstimer:GetTimeLeft(UM_STOPSTORM_TIMERNAME) == nil then
-				_worldsettingstimer:StartTimer(UM_STOPSTORM_TIMERNAME, _despawninterval + math.random(80, 120))
-			end
-
-			_worldsettingstimer:ResumeTimer(UM_STOPSTORM_TIMERNAME)
+			StartStorming(true)
 		end
 	end
 
