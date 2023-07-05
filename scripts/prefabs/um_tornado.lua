@@ -617,7 +617,7 @@ local function TornadoTask(inst)
             end
         end
 
-        if inst.whirlpool == nil and TheWorld.Map:IsOceanAtPoint(inst.Transform:GetWorldPosition()) then
+        if inst.whirlpool == nil and TheWorld.Map:IsOceanAtPoint(inst.Transform:GetWorldPosition()) and not TestForIA() then
             inst.whirlpool = SpawnPrefab("um_whirlpool")
             inst.whirlpool.entity:SetParent(inst.entity)
             inst.whirlpool.Transform:SetPosition(0, 0, 0)

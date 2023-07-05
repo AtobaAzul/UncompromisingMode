@@ -45,7 +45,7 @@ local function Zap(inst)
 					
 				local damage = -10 * mult
 				
-				if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") and not insulated then
+				if v.sg ~= nil and not v.sg:HasStateTag("nointerrupt") and not insulated and v:HasTag("player") and not v:HasTag("playerghost") then
 					v.sg:GoToState("electrocute")
 				end
 						

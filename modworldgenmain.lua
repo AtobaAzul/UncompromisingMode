@@ -7,14 +7,6 @@ local StaticLayout = GLOBAL.require("map/static_layout")
 local STRINGS = GLOBAL.STRINGS
 
 ------
-local function TestForIA()
-    if (TheWorld ~= nil and not (TheWorld:HasTag("forest") or TheWorld:HasTag("cave")) and (TheWorld:HasTag("island") or TheWorld:HasTag("volcano"))) or GLOBAL.KnownModIndex:IsModEnabled("workshop-1467214795") then
-        return true
-    else
-        return false
-    end
-end
-
 local GROUND_OCEAN_COLOR = {
     -- Color for the main island ground tiles
     primary_color = {0, 0, 0, 25},
@@ -22,6 +14,49 @@ local GROUND_OCEAN_COLOR = {
     secondary_color_dusk = {0, 20, 33, 80},
     minimap_color = {46, 32, 18, 64}
 }
+
+local WAVETINTS =
+{
+    shallow =   {0.8,   0.9,    1},
+    rough =     {0.65,  0.84,   0.94},
+    swell =     {0.65,  0.84,   0.94},
+    brinepool = {0.65,  0.92,   0.94},
+    hazardous = {0.40,  0.50,   0.62},
+    waterlog =  {1,     1,      1},
+}
+
+local OCEAN_SLUDGE_COLOR =
+{
+    primary_color =        {25, 125, 100, 200},
+    secondary_color =      {25, 125, 100, 255/2},
+    secondary_color_dusk = {25, 125, 100, 125},
+    minimap_color =        {0, 0, 0, 255},
+}
+
+
+AddTile(--RANDOM TEST TILE
+    "OCEAN_SLUDGE",
+    "OCEAN",
+    {ground_name = "Sludge Water"},
+    {
+        name = "cave",
+        noise_texture = "ocean_noise",
+        runsound="dontstarve/movement/run_marsh",
+        walksound="dontstarve/movement/walk_marsh",
+        snowsound="dontstarve/movement/run_ice",
+        mudsound = "dontstarve/movement/run_mud",
+        ocean_depth = "SHALLOW",
+        colors = OCEAN_SLUDGE_COLOR,
+        wavetint = {249, 180, 45}
+    },
+    {
+        name = "map_edge",
+        noise_texture = "ocean_noise",
+    }
+)
+
+
+ChangeTileRenderOrder(WORLD_TILES.OCEAN_SLUDGE, WORLD_TILES.OCEAN_BRINEPOOL, false)
 
 AddTile("HOODEDFOREST", -- tile_name 1
 "LAND", -- tile_range 2
@@ -653,4 +688,7 @@ if GetModConfigData("worldgenmastertoggle") then
 
     AddRoomPreInit("OceanSwell", function(room) room.contents.countprefabs = {siren_teaser_picker = 1, ums_biometable = 1} end)
     AddRoomPreInit("OceanRough", function(room) room.contents.countprefabs = {siren_teaser_picker = 2} end)
+
+    --IA compat for tornadoes.
+    AddRoomPreInit("OceanMedium", function(room) room.contents.countprefabs = {siren_teaser_picker = 3} end)
 end

@@ -23,18 +23,18 @@ env.AddComponentPostInit("weather", function(self)
     end
 
     function self:OnUpdate(dt)
-        _OnUpdate(self, dt)
-        local preciprate = _CalculatePrecipitationRate()
+        _OnUpdate(self, dt) --fucking IA breaks this upvalue somehow.
+        local preciprate = _CalculatePrecipitationRate ~= nil and _CalculatePrecipitationRate() or 1
 
         if TheWorld.state.issummer and TheWorld.net:HasTag("heatwavestartnet") then
-            if _hasfx then
+            if _hasfx and _pollenfx ~= nil then
                 _pollenfx.particles_per_tick = _pollenfx.particles_per_tick * 20 + 1 -- MOREEEEEEEEEEEEEEEE
             end
         end
 
         if ThePlayer ~= nil and ThePlayer:HasTag("under_the_weather") then
 			local tornado = TheSim:FindFirstEntityWithTag("um_tornado")
-            if _hasfx and tornado ~= nil and tornado:IsValid() then
+            if _hasfx and tornado ~= nil and tornado:IsValid() and _rainfx ~= nil then
                 local tornado_dist = math.sqrt(ThePlayer:GetDistanceSqToInst(tornado))
                 local max_intensity = TUNING.DSTU.REDUCED_TORNADO_VFX and 5 or 10
                 local intensity = Lerp(max_intensity, 1, tornado_dist / 300)
