@@ -299,12 +299,21 @@ if env.GetModConfigData("telestaff_rework") then
             spell.execute = function(inst)
                 inst.target_focus = spell.target_focus
                 inst.components.spellbook.items = GetAllValidSpells(inst)
+                inst:DoTaskInTime(0, function(inst)
+                    inst.target_focus = spell.target_focus
+                    inst.components.spellbook.items = GetAllValidSpells(inst)
+                    end)
             end
 
             spell.onselect = function(inst)
                 inst.target_focus = spell.target_focus
                 SendModRPCToServer(GetModRPC("UncompromisingSurvival", "GetTargetFocus"), inst.target_focus, inst)
                 inst.components.spellbook.items = GetAllValidSpells(inst)
+                inst:DoTaskInTime(0, function(inst)
+                    inst.target_focus = spell.target_focus
+                    SendModRPCToServer(GetModRPC("UncompromisingSurvival", "GetTargetFocus"), inst.target_focus, inst)
+                    inst.components.spellbook.items = GetAllValidSpells(inst)    
+                end)
             end
 
             table.insert(spells, spell)
