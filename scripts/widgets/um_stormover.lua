@@ -2,7 +2,7 @@ local Widget = require "widgets/widget"
 local Image = require "widgets/image"
 local UIAnim = require "widgets/uianim"
 
-local BGCOLOR = {0 / 255, 132 / 255, 0 / 255, 255 / 255}
+local BGCOLOR = { 0 / 255, 132 / 255, 0 / 255, 255 / 255 }
 
 local Um_StormOver = Class(Widget, function(self, owner, storm_overlays)
     self.owner = owner
@@ -16,34 +16,37 @@ local Um_StormOver = Class(Widget, function(self, owner, storm_overlays)
     self.storm_overlays = storm_overlays
     self.storm_root = storm_overlays:GetParent()
 --]]
-    self.bg = self:AddChild(Widget("zap_root"))
-    self.bg:SetHAnchor(ANCHOR_MIDDLE)
-    self.bg:SetVAnchor(ANCHOR_MIDDLE)
-    self.bg:SetScaleMode(SCALEMODE_PROPORTIONAL)
-    self.bg = self.bg:AddChild(UIAnim())
-    self.bg:GetAnimState():SetBank("moonstorm_over_static")
-    self.bg:GetAnimState():SetBuild("moonstorm_over_static")
-    self.bg:GetAnimState():PlayAnimation("static_loop", true)
-    -- self.bg:SetTint(1,1,1,.8)
 
-    self.bg2 = self:AddChild(Widget("rain_root"))
-    self.bg2:SetHAnchor(ANCHOR_MIDDLE)
-    self.bg2:SetVAnchor(ANCHOR_MIDDLE)
-    self.bg2:SetScaleMode(SCALEMODE_FIXEDSCREEN_NONDYNAMIC)
-    self.bg2 = self.bg2:AddChild(UIAnim())
-    self.bg2:GetAnimState():SetBank("um_storm_over")
-    self.bg2:GetAnimState():SetBuild("um_storm_over")
-    self.bg2:GetAnimState():PlayAnimation("rain_loop", true)
+    if not TUNING.DSTU.REDUCED_TORNADO_VFX then
+        self.bg = self:AddChild(Widget("zap_root"))
+        self.bg:SetHAnchor(ANCHOR_MIDDLE)
+        self.bg:SetVAnchor(ANCHOR_MIDDLE)
+        self.bg:SetScaleMode(SCALEMODE_PROPORTIONAL)
+        self.bg = self.bg:AddChild(UIAnim())
+        self.bg:GetAnimState():SetBank("moonstorm_over_static")
+        self.bg:GetAnimState():SetBuild("moonstorm_over_static")
+        self.bg:GetAnimState():PlayAnimation("static_loop", true)
+        -- self.bg:SetTint(1,1,1,.8)
 
-    self.bg4 = self:AddChild(Widget("rain_root"))
-    self.bg4:SetHAnchor(ANCHOR_MIDDLE)
-    self.bg4:SetVAnchor(ANCHOR_MIDDLE)
-    self.bg4:SetScaleMode(SCALEMODE_FIXEDSCREEN_NONDYNAMIC)
-    self.bg4 = self.bg4:AddChild(UIAnim())
-    self.bg4:GetAnimState():SetBank("um_storm_over")
-    self.bg4:GetAnimState():SetBuild("um_storm_over")
-    self.bg4:GetAnimState():PlayAnimation("rain_loop", true)
-    self.bg4:SetScale(1.5)
+        self.bg2 = self:AddChild(Widget("rain_root"))
+        self.bg2:SetHAnchor(ANCHOR_MIDDLE)
+        self.bg2:SetVAnchor(ANCHOR_MIDDLE)
+        self.bg2:SetScaleMode(SCALEMODE_FIXEDSCREEN_NONDYNAMIC)
+        self.bg2 = self.bg2:AddChild(UIAnim())
+        self.bg2:GetAnimState():SetBank("um_storm_over")
+        self.bg2:GetAnimState():SetBuild("um_storm_over")
+        self.bg2:GetAnimState():PlayAnimation("rain_loop", true)
+
+        self.bg4 = self:AddChild(Widget("rain_root"))
+        self.bg4:SetHAnchor(ANCHOR_MIDDLE)
+        self.bg4:SetVAnchor(ANCHOR_MIDDLE)
+        self.bg4:SetScaleMode(SCALEMODE_FIXEDSCREEN_NONDYNAMIC)
+        self.bg4 = self.bg4:AddChild(UIAnim())
+        self.bg4:GetAnimState():SetBank("um_storm_over")
+        self.bg4:GetAnimState():SetBuild("um_storm_over")
+        self.bg4:GetAnimState():PlayAnimation("rain_loop", true)
+        self.bg4:SetScale(1.5)
+    end
 
     self.bg3 = self:AddChild(Widget("cloud_root"))
     self.bg3:SetHAnchor(ANCHOR_MIDDLE)
@@ -66,29 +69,51 @@ local Um_StormOver = Class(Widget, function(self, owner, storm_overlays)
 end)
 
 function Um_StormOver:OnUpdate(dt)
-    local tornado = FindClosestEntity(self.owner, 300, true, {"um_tornado"})
+    local tornado = FindClosestEntity(self.owner, 300, true, { "um_tornado" })
 
     if --[[TheWorld.state.isspring and]] tornado ~= nil and tornado:IsValid() then
         if self.changed < 1 then
             self:Show()
             self.changed = self.changed + 0.002
-            self.bg:GetAnimState():SetMultColour(1, 1, 1, self.changed / 2)
-            self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed / 2)
-            self.bg3:GetAnimState():SetMultColour(1, 1, 1, self.changed / 2)
-            self.bg4:GetAnimState():SetMultColour(1, 1, 1, self.changed / 2)
+            if self.bg ~= nil then
+                self.bg:GetAnimState():SetMultColour(1, 1, 1, self.changed / 2)
+            end
+
+            if self.bg2 ~= nil then
+                self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed / 2)
+            end
+
+            if self.bg3 ~= nil then
+                self.bg3:GetAnimState():SetMultColour(1, 1, 1, self.changed / 2)
+            end
+
+            if self.bg4 ~= nil then
+                self.bg4:GetAnimState():SetMultColour(1, 1, 1, self.changed / 2)
+            end
 
             TheFocalPoint.SoundEmitter:PlaySound("UCSounds/um_tornado/um_heavy_rain_layer", "um_storm_rain")
-			TheFocalPoint.SoundEmitter:SetParameter("um_storm_rain", "volume", self.changed)
+            TheFocalPoint.SoundEmitter:SetParameter("um_storm_rain", "volume", self.changed)
         end
     else
         if self.changed > 0 then
             self.changed = self.changed - 0.002
-            self.bg:GetAnimState():SetMultColour(1, 1, 1, self.changed / 2)
-            self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed / 2)
-            self.bg3:GetAnimState():SetMultColour(1, 1, 1, self.changed / 2)
-            self.bg4:GetAnimState():SetMultColour(1, 1, 1, self.changed / 2)
+            if self.bg ~= nil then
+                self.bg:GetAnimState():SetMultColour(1, 1, 1, self.changed / 2)
+            end
 
-			TheFocalPoint.SoundEmitter:SetParameter("um_storm_rain", "volume", self.changed)
+            if self.bg2 ~= nil then
+                self.bg2:GetAnimState():SetMultColour(1, 1, 1, self.changed / 2)
+            end
+
+            if self.bg3 ~= nil then
+                self.bg3:GetAnimState():SetMultColour(1, 1, 1, self.changed / 2)
+            end
+
+            if self.bg4 ~= nil then
+                self.bg4:GetAnimState():SetMultColour(1, 1, 1, self.changed / 2)
+            end
+
+            TheFocalPoint.SoundEmitter:SetParameter("um_storm_rain", "volume", self.changed)
         else
             self:Hide()
             TheFocalPoint.SoundEmitter:KillSound("um_storm_rain")

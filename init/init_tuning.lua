@@ -386,6 +386,10 @@ TUNING.DSTU = {
     --mod chekcs
     ISLAND_ADVENTURES = ia_check,
     TREATS_FOR_WEBBER = tfw_check,
+
+    --CLIENT CONFIGS
+
+    REDUCED_TORNADO_VFX = GetModConfigData("um_storms_over", true),
 }
 
 -- [              DST Related Overrides                  ]

@@ -95,6 +95,10 @@ configuration_options = {
     ------------------------------
     -- Core Gameplay --
     ------------------------------
+
+    Header("Client-Side"),
+    BinaryConfig("um_storms_over", "Tornadoes: Reduced VFX", "Reduces the overall intensity of the visual effects on both the overlay and rain near tornadoes.", false),
+
     Header("Mod Compatibility"),
     BinaryConfig("worldgenmastertoggle", "Worldgen Master Toggle", "Toggles ALL worldgen.", true),
     BinaryConfig("um_music", "Official Soundtrack", "Disable this if you are crashing when using client music mods.",
