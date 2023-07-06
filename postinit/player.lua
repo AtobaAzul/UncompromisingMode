@@ -112,5 +112,6 @@ env.AddPlayerPostInit(function(inst)
 	if TheWorld.ismastersim then
         return inst
     end
-	CreateMousePositioning(inst)
+	
+	--CreateMousePositioning(inst)
 end)

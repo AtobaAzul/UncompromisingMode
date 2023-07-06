@@ -67,6 +67,8 @@ local function fn()
     inst:AddTag("goggles")
 	
 	inst.Transform:SetScale(1.25, 1.25, 1.25)
+	
+	MakeInventoryFloatable(inst, "small")
 		
     inst.entity:SetPristine()
 	

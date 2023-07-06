@@ -11,10 +11,6 @@ local prefabs =
     "nightlight_flame",
 }
 
-local function Init(inst)
-	inst.SoundEmitter:PlaySound("UCSounds/um_whirlpool/um_whirlpool_loop", "whirlpool")
-end
-
 local function RemoveWhirlpool(inst)
 	inst.components.colourtweener:StartTween({1,1,1,0}, 3, inst.Remove)
 	inst.SoundEmitter:KillSound("whirlpool")
@@ -42,21 +38,38 @@ local function Vac(inst)
 		
 		if boat_physics ~= nil then
 			if boat_physics:GetTotalAnchorDrag() < 2 then
-				print(boat_physics:GetTotalAnchorDrag())
 
-				--boat_physics:ApplyForce(px, pz, .01)
 				boat_physics:ApplyForce(row_dir_x, row_dir_z, .2)
 			end
 		end
-		
-		--SpawnPrefab("halloween_firepuff_cold_1").Transform:SetPosition(px, 0, pz)
+	end
+end
+
+local function Init(inst)
+	inst.SoundEmitter:PlaySound("UCSounds/um_whirlpool/um_whirlpool_loop", "whirlpool")
+	
+	if inst.vactask == nil then
+		inst.vactask = inst:DoPeriodicTask(.25, Vac)
+	end
+end
+
+local function OnWake(inst)
+	if inst.vactask == nil then
+		inst.vactask = inst:DoPeriodicTask(.25, Vac)
+	end
+end
+
+local function OnSleep(inst)
+	if inst.vactask ~= nil then
+		inst.vactask:Cancel()
+		inst.vactask = nil
 	end
 end
 
 local function fn()
     local inst = CreateEntity()
     --[[Non-networked entity]]
-    inst.entity:SetCanSleep(false)
+    inst.entity:SetCanSleep(true)
 	
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
@@ -83,8 +96,6 @@ local function fn()
         return inst
     end
 	
-	inst:DoPeriodicTask(.25, Vac)
-	
 	inst:AddComponent("colourtweener")
 	inst.components.colourtweener:StartTween({1,1,1,1}, 3)
 	
@@ -92,6 +103,9 @@ local function fn()
 	inst:ListenForEvent("timerdone", RemoveWhirlpool)
 	
 	inst:DoTaskInTime(0, Init)
+
+    inst.OnEntityWake = OnWake
+    inst.OnEntitySleep = OnSleep
 	
     return inst
 end

@@ -186,6 +186,7 @@ local prefab_post = {
 	"staff_tornado",
 	"rainometer",
     "winterometer",
+	"moonlense"
 }
 
 local stategraph_post = {

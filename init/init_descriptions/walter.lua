@@ -80,7 +80,7 @@ DESCRIBE.RATPOISONBOTTLE = "If there's no other option..."
 DESCRIBE.RATPOISON = "I hope nothing friendly gets into it..."
 
 DESCRIBE.MONSTERSMALLMEAT = "Sorry Woby, looks like scraps for dinner..."
-DESCRIBE.COOKEDMONSTERSMALLMEAT = "I'm doing the best with what I've got."
+DESCRIBE.COOKEDMONSTERSMALLMEAT = "I'm doing my best with what I've got."
 DESCRIBE.MONSTERSMALLMEAT_DRIED =
     "Woby's favorite, just in smaller bite size chunks."
 
@@ -131,7 +131,7 @@ DESCRIBE.MINOTAUR_BOULDER_BIG = "That one could hurt it!"
 DESCRIBE.VETERANSHRINE =
     "I know it's a bad idea, but I want to investigate further!"
 DESCRIBE.SNOWBALL_THROWABLE =
-    "I think it would just crumble away if I tried to use my slingshot."
+    "Careful not to pack them with ice!"
 DESCRIBE.PLAGUEMASK = "Now I can be one with the birds!"
 DESCRIBE.SPIDER_TRAPDOOR = "I told you!"
 DESCRIBE.TRAPDOOR = "Careful, some spiders use these as hiding places!"
@@ -209,12 +209,12 @@ DESCRIBE.WHISPERPOD_NORMAL_GROUND = {
     GROWING = "I wish plants could grow as fast as you do Woby."
 }
 DESCRIBE.FRUITBAT = "Maybe if we're lucky it'll turn me into a fruit!"
-DESCRIBE.PITCHERPLANT = "I could hit it with my sling for practice!"
+DESCRIBE.PITCHERPLANT = "Is something moving in there?"
 DESCRIBE.APHID = "It's fuzzy!"
 DESCRIBE.NYMPH = "I wonder what they're doing?"
 DESCRIBE.GIANT_TREE_INFESTED = "Get out'a there!"
 DESCRIBE.GIANT_BLUEBERRY =
-    "Good thing a Pinetree Pioneer's outfit is resistant to water!"
+    "Good thing a Pinetree Pioneer's outfit is resistant to stains!"
 DESCRIBE.STEAMEDHAMS = "I'm ready for an unforgettable luncheon!"
 DESCRIBE.BLUEBERRYPANCAKES = "Ah, sweet eats!"
 DESCRIBE.SIMPSALAD = "A Pinetree Pioneer always eats his greens! Er purples...."
@@ -230,7 +230,7 @@ DESCRIBE.WATERMELON_LANTERN =
 
 -- Viperstuff Quotes
 DESCRIBE.VIPERWORM = "I wonder how it's making those!"
-DESCRIBE.VIPERFRUIT = "I always wanted a pet snake!"
+DESCRIBE.VIPERFRUIT = "I've always wanted a pet snake!"
 DESCRIBE.VIPERJAM = "I wish I could have some PB n' J."
 
 DESCRIBE.BLUEBERRYPLANT = {
@@ -288,9 +288,9 @@ DESCRIBE.PIGKING_PIGGUARD = {
 }
 DESCRIBE.PIGKING_PIGTORCH = DESCRIBE.PIGTORCH
 
-DESCRIBE.BIGHT = "I misjudged their wake-up time!"
-DESCRIBE.KNOOK = "It's got a fear factor, I guess."
-DESCRIBE.ROSHIP = "What a hotshot you are."
+DESCRIBE.BIGHT = "You're leaking! You should really get that fixed."
+DESCRIBE.KNOOK = "It's got a real fear factor!"
+DESCRIBE.ROSHIP = "Wow, you're spooky! Can you stop shooting me now?"
 
 DESCRIBE.UM_PAWN = "Don't get too close now, Woby."
 DESCRIBE.UM_PAWN_NIGHTMARE = "Don't get too close now, Woby."
@@ -510,7 +510,7 @@ DESCRIBE.WIXIE_WARDROBE =
     "Reminds me of this one radio play I heard, the \"Haunted Wardrobe at the End of the Hall\" it's about-"
 DESCRIBE.CHARLES_T_HORSE = "Think it's cursed, Woby?"
 DESCRIBE.THE_REAL_CHARLES_T_HORSE = "I can't be seen playing with kids toys!"
-DESCRIBE.SLINGSHOT_MATILDA = "Three shots? Thats three eyes out!"
+DESCRIBE.SLINGSHOT_MATILDA = "Three shots? That's three eyes out!"
 DESCRIBE.SLINGSHOT_GNASHER = "Somebody could shoot their eye out with this!"
 
 DESCRIBE.SLINGSHOTAMMO_LAZY = DESCRIBE.SLINGSHOTAMMO_ROCK

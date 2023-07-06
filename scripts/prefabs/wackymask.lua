@@ -594,6 +594,8 @@ local function fncommon(bank, build)
 
 	inst:AddTag("hats")
 	
+	MakeInventoryFloatable(inst, "small")
+	
     inst.entity:SetPristine()
 	
     if not TheWorld.ismastersim then

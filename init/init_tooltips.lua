@@ -176,7 +176,7 @@ if TUNING.DSTU.HEATWAVES then
 end
 
 if TUNING.DSTU.STORMS then
-	TOOLTIPS.RAINOMETER = "- Can track a Tornadoes location."
+	TOOLTIPS.RAINOMETER = "- Can track a Tornado's location."
 end
 
 if TUNING.DSTU.GOTOBED ~= false then

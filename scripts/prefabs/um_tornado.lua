@@ -28,7 +28,7 @@ local function Init(inst)
 
         inst.Advance_Task = inst:ListenForEvent("animover", Advance_Full)
 
-        SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "ToggleLagCompOn"), nil)
+		--SendModRPCToClient(GetClientModRPC("UncompromisingSurvival", "ToggleLagCompOn"), nil)
         inst.is_full = true
     else
         Advance_Full(inst)
@@ -460,6 +460,7 @@ local function TornadoTask(inst)
         if math.random() > 0.9 then
             local lightning = SpawnPrefab("hound_lightning")
             lightning.Transform:SetPosition(x + math.random(-300, 300), 0, z + math.random(-300, 300))
+			lightning.NoTags = { "INLIMBO", "shadow", "structure", "wall", "companion", "abigail", "bird", "prey" }
             lightning.Delay = 1.5
         end
 
@@ -486,6 +487,7 @@ local function TornadoTask(inst)
                     if math.random() > 0.99 then
                         local lightning = SpawnPrefab("hound_lightning")
                         lightning.Transform:SetPosition(px + math.random(-5, 5), 0, pz + math.random(-5, 5))
+						lightning.NoTags = { "INLIMBO", "shadow", "structure", "wall", "companion", "abigail", "bird", "prey" }
                         lightning.Delay = 1.5
                     end
 
@@ -685,10 +687,10 @@ local function fn()
     inst.components.inventory.maxslots = 100
     inst:DoTaskInTime(0, Init)
 
-    --[[inst:DoPeriodicTask(30, function(inst)
+    inst:DoPeriodicTask(30, function(inst)
         local x, y, z = inst.Transform:GetWorldPosition()
         SpawnPrefab("um_tornado_destination_marker2").Transform:SetPosition(x, 0, z)
-    end)]]
+    end)
 
     if config ~= "minimal" then
         inst:DoPeriodicTask(5, TornadoItemTossTask)
@@ -832,10 +834,10 @@ local function cavefn()
 
     inst:DoPeriodicTask(5, TrySpawnWaterfall)
 
-    --[[inst:DoPeriodicTask(30, function(inst)
+    inst:DoPeriodicTask(30, function(inst)
         local x, y, z = inst.Transform:GetWorldPosition()
         SpawnPrefab("um_tornado_destination_marker2").Transform:SetPosition(x, 0, z)
-    end)]]
+    end)
 
     return inst
 end
@@ -883,13 +885,13 @@ local function destfn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
-    --inst.entity:AddMiniMapEntity()
+    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
     inst:AddTag("NOCLICK")
     inst:AddTag("NOBLOCK")
     inst:AddTag("um_tornado_destination")
-    --inst.MiniMapEntity:SetIcon("redmooneye.png")
+    inst.MiniMapEntity:SetIcon("redmooneye.png")
 
     inst.entity:SetCanSleep(false)
 
@@ -908,10 +910,10 @@ local function destfn()
 
     inst:DoPeriodicTask(1, MoveDestination)
 
-    --[[inst:DoPeriodicTask(30, function(inst)
+    inst:DoPeriodicTask(30, function(inst)
         local x, y, z = inst.Transform:GetWorldPosition()
         SpawnPrefab(inst.marker).Transform:SetPosition(x, 0, z)
-    end)]]
+    end)
 
     inst.OnSave = OnSave_Dest
     inst.OnLoad = OnLoad_Dest
@@ -924,12 +926,12 @@ local function marker()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    --inst.entity:AddMiniMapEntity()
+    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    --inst.MiniMapEntity:SetIcon("greenmooneye.png")
-    --inst.MiniMapEntity:SetCanUseCache(false)
-    --inst.MiniMapEntity:SetDrawOverFogOfWar(true)
+    inst.MiniMapEntity:SetIcon("greenmooneye.png")
+    inst.MiniMapEntity:SetCanUseCache(false)
+    inst.MiniMapEntity:SetDrawOverFogOfWar(true)
 
     inst.entity:SetPristine()
 
@@ -939,13 +941,13 @@ local function marker()
 
     inst.persists = false
 
-    --[[inst:DoTaskInTime(0, function(inst)
+    inst:DoTaskInTime(0, function(inst)
         inst.icon = SpawnPrefab("globalmapicon")
         inst.icon:TrackEntity(inst)
         inst.icon.persists = false
 
         inst.icon:DoTaskInTime(1920, inst.icon.Remove)
-    end)]]
+    end)
 
     inst:DoTaskInTime(1920, inst.Remove)
 
@@ -957,12 +959,12 @@ local function marker2()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    --inst.entity:AddMiniMapEntity()
+    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    -- inst.MiniMapEntity:SetIcon("yellowmooneye.png")
-    -- inst.MiniMapEntity:SetCanUseCache(false)
-    -- inst.MiniMapEntity:SetDrawOverFogOfWar(true)
+    inst.MiniMapEntity:SetIcon("yellowmooneye.png")
+    inst.MiniMapEntity:SetCanUseCache(false)
+    inst.MiniMapEntity:SetDrawOverFogOfWar(true)
 
     inst.entity:SetPristine()
 
@@ -972,13 +974,13 @@ local function marker2()
 
     inst.persists = false
 
-    --[[inst:DoTaskInTime(0, function(inst)
+    inst:DoTaskInTime(0, function(inst)
         inst.icon = SpawnPrefab("globalmapicon")
         inst.icon:TrackEntity(inst)
         inst.icon.persists = false
 
         inst.icon:DoTaskInTime(1920, inst.icon.Remove)
-    end)]]
+    end)
 
     inst:DoTaskInTime(1920, inst.Remove)
 
@@ -990,12 +992,12 @@ local function marker3()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    --inst.entity:AddMiniMapEntity()
+    inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    --inst.MiniMapEntity:SetIcon("redmooneye.png")
-    --inst.MiniMapEntity:SetCanUseCache(false)
-    --inst.MiniMapEntity:SetDrawOverFogOfWar(true)
+    inst.MiniMapEntity:SetIcon("redmooneye.png")
+    inst.MiniMapEntity:SetCanUseCache(false)
+    inst.MiniMapEntity:SetDrawOverFogOfWar(true)
 
     inst.entity:SetPristine()
 
@@ -1005,13 +1007,13 @@ local function marker3()
 
     inst.persists = false
 
-    --[[inst:DoTaskInTime(0, function(inst)
+    inst:DoTaskInTime(0, function(inst)
         inst.icon = SpawnPrefab("globalmapicon")
         inst.icon:TrackEntity(inst)
         inst.icon.persists = false
 
         inst.icon:DoTaskInTime(1920, inst.icon.Remove)
-    end)]]
+    end)
 
     inst:DoTaskInTime(1920, inst.Remove)
 

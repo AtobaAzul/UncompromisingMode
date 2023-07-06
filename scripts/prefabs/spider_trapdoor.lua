@@ -143,6 +143,8 @@ local function FindTarget(inst, radius)
                     and inst.components.combat:CanTarget(guy)
                     and not (inst.components.follower ~= nil and inst.components.follower.leader == guy)
                     and not HasFriendlyLeader(inst, guy)
+                    and not (inst.components.follower.leader ~= nil and inst.components.follower.leader:HasTag("player") 
+                        and guy:HasTag("player") and not TheNet:GetPVPEnabled())
             end,
             TARGET_MUST_TAGS,
             TARGET_CANT_TAGS
