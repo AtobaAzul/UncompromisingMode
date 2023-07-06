@@ -69,18 +69,22 @@ end
 
 function Uncompromising_PawnBrain:OnStart()
 
-    local root = PriorityNode(
-    {
+	local nodes = {
         WhileNode( function() return self.inst.components.health.takingfiredamage end, "OnFire", Panic(self.inst)),
         --RunAway(self.inst, "scarytopr1ey", AVOID_PLAYER_DIST, AVOID_PLAYER_STOP),
         
-		IfNode(function() return IsDangerClose(self.inst) and not self.inst.components.freezable:IsFrozen() end, "DangerClose", DoAction(self.inst, TryHide, "Hide")),
-
         ChaseAndAttack(self.inst, 10),
 		
 		--FaceEntity(self.inst, GetFaceTargetFn, KeepFaceTargetFn),
         Wander(self.inst, function() return self.inst.components.knownlocations:GetLocation("home") end, MAX_WANDER_DIST)
-    }, .25)
+	}
+
+
+	if not self.inst:HasTag("landmine") then
+		table.insert(nodes, IfNode(function() return IsDangerClose(self.inst) and not self.inst.components.freezable:IsFrozen() end, "DangerClose", DoAction(self.inst, TryHide, "Hide")), 2)
+	end
+    local root = PriorityNode(
+    nodes, .25)
     self.bt = BT(self.inst, root)
 end
 

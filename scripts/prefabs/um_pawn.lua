@@ -259,7 +259,7 @@ local function ExplodePing(inst)
 			inst.task = nil
 		end
 		
-		if inst.explode_timer_count == 0.1 then
+		if inst.explode_timer_count < 0.1 then
 			if not inst.components.health:IsDead() then
 				inst.components.explosive:OnBurnt()
 			end
