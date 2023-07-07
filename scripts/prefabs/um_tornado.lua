@@ -885,13 +885,13 @@ local function destfn()
     local inst = CreateEntity()
 
     inst.entity:AddTransform()
-    inst.entity:AddMiniMapEntity()
+    --inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
     inst:AddTag("NOCLICK")
     inst:AddTag("NOBLOCK")
     inst:AddTag("um_tornado_destination")
-    inst.MiniMapEntity:SetIcon("redmooneye.png")
+    --inst.MiniMapEntity:SetIcon("redmooneye.png")
 
     inst.entity:SetCanSleep(false)
 
@@ -926,10 +926,10 @@ local function marker()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    inst.entity:AddMiniMapEntity()
+    --inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    inst.MiniMapEntity:SetIcon("greenmooneye.png")
+    --inst.MiniMapEntity:SetIcon("greenmooneye.png")
     inst.MiniMapEntity:SetCanUseCache(false)
     inst.MiniMapEntity:SetDrawOverFogOfWar(true)
 
@@ -959,10 +959,10 @@ local function marker2()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    inst.entity:AddMiniMapEntity()
+    --inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    inst.MiniMapEntity:SetIcon("yellowmooneye.png")
+    --inst.MiniMapEntity:SetIcon("yellowmooneye.png")
     inst.MiniMapEntity:SetCanUseCache(false)
     inst.MiniMapEntity:SetDrawOverFogOfWar(true)
 
@@ -992,10 +992,10 @@ local function marker3()
 
     inst.entity:AddTransform()
     inst.entity:AddAnimState()
-    inst.entity:AddMiniMapEntity()
+    --inst.entity:AddMiniMapEntity()
     inst.entity:AddNetwork()
 
-    inst.MiniMapEntity:SetIcon("redmooneye.png")
+    --inst.MiniMapEntity:SetIcon("redmooneye.png")
     inst.MiniMapEntity:SetCanUseCache(false)
     inst.MiniMapEntity:SetDrawOverFogOfWar(true)
 
