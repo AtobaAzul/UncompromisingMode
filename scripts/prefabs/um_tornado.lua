@@ -930,8 +930,8 @@ local function marker()
     inst.entity:AddNetwork()
 
     --inst.MiniMapEntity:SetIcon("greenmooneye.png")
-    inst.MiniMapEntity:SetCanUseCache(false)
-    inst.MiniMapEntity:SetDrawOverFogOfWar(true)
+    --inst.MiniMapEntity:SetCanUseCache(false)
+    --inst.MiniMapEntity:SetDrawOverFogOfWar(true)
 
     inst.entity:SetPristine()
 
@@ -963,8 +963,8 @@ local function marker2()
     inst.entity:AddNetwork()
 
     --inst.MiniMapEntity:SetIcon("yellowmooneye.png")
-    inst.MiniMapEntity:SetCanUseCache(false)
-    inst.MiniMapEntity:SetDrawOverFogOfWar(true)
+    --inst.MiniMapEntity:SetCanUseCache(false)
+    --inst.MiniMapEntity:SetDrawOverFogOfWar(true)
 
     inst.entity:SetPristine()
 
@@ -996,8 +996,8 @@ local function marker3()
     inst.entity:AddNetwork()
 
     --inst.MiniMapEntity:SetIcon("redmooneye.png")
-    inst.MiniMapEntity:SetCanUseCache(false)
-    inst.MiniMapEntity:SetDrawOverFogOfWar(true)
+    --inst.MiniMapEntity:SetCanUseCache(false)
+    --inst.MiniMapEntity:SetDrawOverFogOfWar(true)
 
     inst.entity:SetPristine()
 
