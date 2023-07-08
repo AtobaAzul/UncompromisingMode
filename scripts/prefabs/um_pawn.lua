@@ -252,71 +252,6 @@ local function FindTarget(inst, radius) return FindEntity(inst, radius, function
 
 local function NormalRetarget(inst) return FindTarget(inst, 8) end
 
-local function ExplodePing(inst)
-	--if inst.components.combat.target ~= nil then
-		if inst.task ~= nil then
-			inst.task:Cancel()
-			inst.task = nil
-		end
-		
-		if inst.explode_timer_count < 0.1 then
-			if not inst.components.health:IsDead() then
-				inst.components.explosive:OnBurnt()
-			end
-		else
-			inst.explode_timer_count = inst.explode_timer_count - .1
-			inst:DoTaskInTime(inst.explode_timer_count / 1.2, ExplodePing)
-			
-			local fxname = "dr_warm_loop_1"
-			
-			if inst.explode_timer_count < 0.8 and inst.explode_timer_count >= 0.6 then
-				fxname = "dr_warm_loop_2"
-			elseif inst.explode_timer_count < 0.6 and inst.explode_timer_count >= 0.3 then
-				fxname = "dr_warmer_loop"
-			elseif inst.explode_timer_count < 0.3 then
-				fxname = "dr_hot_loop"
-			end
-			
-			inst.fx = SpawnPrefab(fxname)
-            inst.fx.entity:AddFollower()
-            inst.fx.Follower:FollowSymbol(inst.GUID, "body", 0, -40, 0)
-
-            inst.fxlight = SpawnPrefab(fxname .. "_light" .. inst.pawntype)
-            inst.fxlight.entity:AddFollower()
-            inst.fxlight.Follower:FollowSymbol(inst.GUID, "body", 0, -40, 0)
-			
-			inst.sparks = SpawnPrefab("sparks")
-            inst.sparks.entity:AddFollower()
-            inst.sparks.Follower:FollowSymbol(inst.GUID, "body", 0 + math.random(-0.2, .2), -40, 0 + math.random(-0.2, .2))
-
-		end
-	--else
-		--if inst.task == nil then
-			--inst.task = inst:DoTaskInTime(PAWN_DIVINING_DEFAULTPING, CheckTargetPiece)
-		--end
-		
-		--inst.explode_timer_count = 1
-	--end
-end
-
-local function OnNewTarget(inst)
-	if inst.components.combat.target ~= nil and inst.force_explode == nil then
-		if inst.task ~= nil then
-			inst.task:Cancel()
-			inst.task = nil
-		end
-
-		inst.force_explode = true
-			
-		inst.sparks = SpawnPrefab("sparks")
-		inst.sparks.entity:AddFollower()
-		inst.sparks.Follower:FollowSymbol(inst.GUID, "body", 0 + math.random(-0.2, .2), -40, 0 + math.random(-0.2, .2))
-		
-		inst.explode_timer_count = 1
-		inst:DoTaskInTime(0, ExplodePing)
-	end
-end
-
 local function pawn_common(pawntype)
     local inst = CreateEntity()
     local shadow = inst.entity:AddDynamicShadow()
@@ -372,10 +307,6 @@ local function pawn_common(pawntype)
     inst.components.inspectable.getstatus = getstatus
 
     if inst.pawntype == "_nightmare" then
-		inst.explode_timer_count = 1
-	
-		inst:ListenForEvent("newcombattarget", OnNewTarget)
-	
         inst:AddTag("uncompromising_nightmarepawn")
         inst.components.combat:SetRetargetFunction(1, NormalRetarget)
         inst:AddComponent("explosive")
