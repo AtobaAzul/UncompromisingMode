@@ -75,9 +75,9 @@ end
 
 local function HasLLA(self)
 	if self.inst.components.inventory then
-		local item = picker.components.inventory:GetEquippedItem(EQUIPSLOTS.NECK)
+		local item = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.NECK)
 		if item == nil then
-			item = picker.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
+			item = self.inst.components.inventory:GetEquippedItem(EQUIPSLOTS.BODY)
 		end
 		if item and item.prefab == "amulet" and self.inst.components.timer ~= nil and not self.inst.components.timer:TimerExists("shadowwathomcooldown") then
 			return true
